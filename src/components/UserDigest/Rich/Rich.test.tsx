@@ -20,7 +20,7 @@ describe('<UserDigest.Rich>', () => {
     const $displayName = screen.getByTestId(
       TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME
     )
-    expect($displayName.textContent).toContain(MOCK_USER.displayName)
+    expect($displayName).toHaveTextContent(MOCK_USER.displayName)
 
     // avatar
     const $avatar = screen.getByTestId(TEST_ID.AVATAR)
@@ -60,7 +60,7 @@ describe('<UserDigest.Rich>', () => {
     const $displayName = screen.getByTestId(
       TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME
     )
-    expect($displayName.textContent).toContain('Account Archived')
+    expect($displayName).toHaveTextContent('Account Archived')
 
     // avatar
     const $avatar = screen.getByTestId(TEST_ID.AVATAR)

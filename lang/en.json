@@ -1965,6 +1965,9 @@
     "defaultMessage": "Pay",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "y1AhBH": {
+    "defaultMessage": "Enter a custom amount"
+  },
   "y4Lyf1": {
     "defaultMessage": "This name is already taken.",
     "description": "NAME_EXISTS"

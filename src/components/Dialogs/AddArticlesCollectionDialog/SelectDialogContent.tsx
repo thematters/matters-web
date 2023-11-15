@@ -1,8 +1,9 @@
-import { FormikProvider } from 'formik'
+import { FieldInputProps, FormikProvider, useField } from 'formik'
 import { memo } from 'react'
 import { areEqual, FixedSizeList } from 'react-window'
 
-import { Form } from '~/components'
+import { DateTime, Form } from '~/components'
+import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import {
   CollectionArticlesCollectionFragment,
   UserArticlesUserFragment,
@@ -16,6 +17,11 @@ interface SelectDialogContentProps {
   collection: CollectionArticlesCollectionFragment
   checkingIds: string[]
   formId: string
+}
+
+const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
+  const [field] = useField({ name: props.name, type: 'checkbox' })
+  return <Form.SquareCheckBox {...field} {...props} />
 }
 
 const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
@@ -51,25 +57,31 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
               return null
             }
             const node = data[index].node
+            const checked =
+              hasChecked.includes(node.id) || checkingIds.includes(node.id)
+            const checkedIndex = checkingIds.includes(node.id)
+              ? checkingIds.indexOf(node.id) + 1
+              : undefined
+            const disabled = hasChecked.includes(node.id)
+
             return (
               <section style={style}>
                 <section key={node.id} className={styles.item}>
-                  <Form.IndexSquareCheckBox
-                    key={node.id}
-                    hasTooltip={true}
-                    checked={
-                      hasChecked.includes(node.id) ||
-                      checkingIds.includes(node.id)
+                  <SquareCheckBoxField
+                    hasTooltip
+                    checked={checked}
+                    icon={
+                      checked && !disabled && checkedIndex !== undefined ? (
+                        <span className={styles.indexIcon}>{checkedIndex}</span>
+                      ) : undefined
                     }
-                    index={
-                      checkingIds.includes(node.id)
-                        ? checkingIds.indexOf(node.id) + 1
-                        : undefined
-                    }
-                    createAt={node.createdAt}
+                    sup={<DateTime date={node.createdAt} color="grey" />}
+                    supHeight={18}
                     hint={node.title}
-                    disabled={hasChecked.includes(node.id)}
-                    {...formik.getFieldProps('checked')}
+                    disabled={disabled}
+                    {...(formik.getFieldProps(
+                      'checked'
+                    ) as FieldInputProps<any>)}
                     value={node.id}
                   />
                 </section>

@@ -1,7 +1,8 @@
-import { FormikProvider } from 'formik'
+import { FieldInputProps, FormikProvider, useField } from 'formik'
 import { FormattedMessage } from 'react-intl'
 
-import { Form } from '~/components'
+import { DateTime, Form } from '~/components'
+import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import {
   CollectionArticlesCollectionFragment,
   UserArticlesUserFragment,
@@ -16,6 +17,11 @@ interface SearchingDialogContentProps {
   checkingIds: string[]
   searchValue: string
   formId: string
+}
+
+const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
+  const [field] = useField({ name: props.name, type: 'checkbox' })
+  return <Form.SquareCheckBox {...field} {...props} />
 }
 
 const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
@@ -56,38 +62,45 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
   return (
     <FormikProvider value={formik}>
       <Form id={formId} onSubmit={formik.handleSubmit} className={styles.form}>
-        {searchingEdges.map(({ node }) => (
-          <section key={node.id} className={styles.item}>
-            <Form.IndexSquareCheckBox
-              key={node.id}
-              hasTooltip={true}
-              checked={
-                hasChecked.includes(node.id) || checkingIds.includes(node.id)
-              }
-              index={
-                checkingIds.includes(node.id)
-                  ? checkingIds.indexOf(node.id) + 1
-                  : undefined
-              }
-              createAt={node.createdAt}
-              hint={node.title}
-              disabled={hasChecked.includes(node.id)}
-              {...formik.getFieldProps('checked')}
-              value={node.id}
-              content={(() => {
-                const index = node.title.indexOf(searchValue)
-                const content = (
-                  <>
-                    {node.title.slice(0, index)}
-                    <span className="u-highlight">{searchValue}</span>
-                    {node.title.slice(index + searchValue.length)}
-                  </>
-                )
-                return content
-              })()}
-            />
-          </section>
-        ))}
+        {searchingEdges.map(({ node }) => {
+          const checked =
+            hasChecked.includes(node.id) || checkingIds.includes(node.id)
+          const checkedIndex = checkingIds.includes(node.id)
+            ? checkingIds.indexOf(node.id) + 1
+            : undefined
+          const disabled = hasChecked.includes(node.id)
+
+          return (
+            <section key={node.id} className={styles.item}>
+              <SquareCheckBoxField
+                hasTooltip={true}
+                checked={checked}
+                icon={
+                  checked && !disabled && checkedIndex !== undefined ? (
+                    <span className={styles.indexIcon}>{checkedIndex}</span>
+                  ) : undefined
+                }
+                sup={<DateTime date={node.createdAt} color="grey" />}
+                supHeight={18}
+                hint={node.title}
+                disabled={disabled}
+                {...(formik.getFieldProps('checked') as FieldInputProps<any>)}
+                value={node.id}
+                content={(() => {
+                  const index = node.title.indexOf(searchValue)
+                  const content = (
+                    <>
+                      {node.title.slice(0, index)}
+                      <span className="u-highlight">{searchValue}</span>
+                      {node.title.slice(index + searchValue.length)}
+                    </>
+                  )
+                  return content
+                })()}
+              />
+            </section>
+          )
+        })}
       </Form>
     </FormikProvider>
   )

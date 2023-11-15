@@ -1965,6 +1965,9 @@
     "defaultMessage": "付费",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "y1AhBH": {
+    "defaultMessage": "输入金额"
+  },
   "y4Lyf1": {
     "defaultMessage": "该名称已被其他用户使用",
     "description": "NAME_EXISTS"
