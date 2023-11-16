@@ -28,6 +28,7 @@ export type ArticleDigestFeedControls = {
   hasHeader?: boolean
   hasCircle?: boolean
   hasAuthor?: boolean
+  isFirstFold?: boolean
 }
 
 export type ArticleDigestFeedProps = {
@@ -47,6 +48,8 @@ const BaseArticleDigestFeed = ({
   hasAuthor = true,
   onClick,
   onClickAuthor,
+
+  isFirstFold = false,
 
   utm_source,
   utm_medium,
@@ -158,6 +161,8 @@ const BaseArticleDigestFeed = ({
                 smUpWidth={212}
                 smUpHeight={212}
                 disableAnimation={true}
+                loading={isFirstFold ? undefined : 'lazy'}
+                fetchPriority={isFirstFold ? 'high' : 'low'}
               />
             </div>
           </LinkWrapper>

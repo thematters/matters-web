@@ -17,6 +17,7 @@ interface ResponsiveImageProps {
   loading?: 'eager' | 'lazy'
   anonymous?: boolean
   disableAnimation?: boolean
+  fetchPriority?: 'high' | 'low' | 'auto'
 }
 
 const BaseResponsiveImage = ({
@@ -29,14 +30,24 @@ const BaseResponsiveImage = ({
   loading,
   anonymous,
   disableAnimation,
+  fetchPriority,
 }: ResponsiveImageProps) => {
   const [error, setError] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
-  // const isGIF = /gif/i.test(url)
+  // eg: https://.../images/prod/avatar/b1bea2ab-112a-4cb9-8fa1-2703113751cc.gif/public
+  const isGIF = /gif(\/|$)/i.test(url)
+  if (isGIF && !disableAnimation) {
+    // override some fetch policy for animated GIF, work around some cloudflare images GIF re-sizing problems
+    loading = 'lazy'
+    fetchPriority = 'low'
+  }
 
   // Fallback to the raw `url` if manually disable or responsive image is failed to load
   if (disabled || error) {
-    return <img src={url} loading={loading} alt="" />
+    return (
+      <img src={url} loading={loading} fetchPriority={fetchPriority} alt="" />
+    )
   }
 
   return (
@@ -45,17 +56,15 @@ const BaseResponsiveImage = ({
       data-test-id={TEST_ID.RESPONSIVE_IMG}
     >
       {smUpWidth && (
-        <>
-          <source
-            media="(min-width: 475px)"
-            srcSet={toSizedImageURL({
-              url,
-              width: smUpWidth,
-              height: smUpHeight,
-              disableAnimation,
-            })}
-          />
-        </>
+        <source
+          media="(min-width: 475px)"
+          srcSet={toSizedImageURL({
+            url,
+            width: smUpWidth,
+            height: smUpHeight,
+            disableAnimation,
+          })}
+        />
       )}
 
       <source
@@ -69,10 +78,21 @@ const BaseResponsiveImage = ({
 
       <img
         src={url}
-        srcSet={toSizedImageURL({ url, width, height, disableAnimation })}
+        srcSet={toSizedImageURL({
+          url,
+          width,
+          height,
+          disableAnimation: !loaded || disableAnimation, // use true until loaded
+        })}
         loading={loading}
         alt=""
         crossOrigin={anonymous ? 'anonymous' : undefined}
+        fetchPriority={fetchPriority}
+        onLoad={() => {
+          // console.log(`img onload:`)
+          // this.srcSet = toSizedImageURL({ url, width, height, disableAnimation })
+          setLoaded(true)
+        }}
       />
     </picture>
   )
@@ -95,7 +115,8 @@ export const ResponsiveImage = React.memo(
       prevProps.smUpWidth === props.smUpWidth &&
       prevProps.smUpHeight === props.smUpHeight &&
       prevProps.disabled === props.disabled &&
-      prevProps.disableAnimation === props.disableAnimation
+      prevProps.disableAnimation === props.disableAnimation &&
+      prevProps.fetchPriority === props.fetchPriority
     )
   }
 ) as MemoizedResponsiveImage
