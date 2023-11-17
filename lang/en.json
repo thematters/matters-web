@@ -170,9 +170,6 @@
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
-  "2atspc": {
-    "defaultMessage": "Drafts"
-  },
   "2ef/Xl": {
     "defaultMessage": "Block",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"

@@ -170,9 +170,6 @@
   "2W0f9h": {
     "defaultMessage": "個人簡介"
   },
-  "2atspc": {
-    "defaultMessage": "我的草稿"
-  },
   "2ef/Xl": {
     "defaultMessage": "封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
