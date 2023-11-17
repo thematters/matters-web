@@ -170,9 +170,6 @@
   "2W0f9h": {
     "defaultMessage": "個人簡介"
   },
-  "2atspc": {
-    "defaultMessage": "我的草稿"
-  },
   "2ef/Xl": {
     "defaultMessage": "封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
@@ -325,6 +322,10 @@
   },
   "7JlauX": {
     "defaultMessage": "指南"
+  },
+  "7WXDhH": {
+    "defaultMessage": "確認要刪除草稿嗎？",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "7cwoRo": {
     "defaultMessage": "因爲作者設置，你無法參與討論。"
