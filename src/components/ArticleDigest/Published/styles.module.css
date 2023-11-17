@@ -1,5 +1,5 @@
 .wrapper {
-  padding: var(--spacing-base-loose) 0;
+  padding: var(--spacing-base) 0;
 
   & header {
     margin-bottom: var(--spacing-x-tight);

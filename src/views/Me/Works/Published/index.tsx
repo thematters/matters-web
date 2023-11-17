@@ -66,7 +66,7 @@ export const BaseMeWorksPublished = () => {
   return (
     <>
       <SortTabs sort={sort} setSort={setSort} />
-      <Layout.Main.Spacing>
+      <Layout.Main.Spacing hasVertical={false}>
         <InfiniteScroll
           hasNextPage={pageInfo.hasNextPage}
           loadMore={loadMore}
