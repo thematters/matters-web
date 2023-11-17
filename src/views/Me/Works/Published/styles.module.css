@@ -5,7 +5,10 @@
   padding: var(--spacing-tight);
   margin-top: var(--spacing-base);
   background: var(--color-grey-lighter);
-  border-radius: 0.5rem;
+
+  @media (--sm-up) {
+    border-radius: 0.5rem;
+  }
 
   & .left {
     position: relative;
