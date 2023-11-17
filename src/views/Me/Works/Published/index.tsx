@@ -44,13 +44,19 @@ export const BaseMeWorksPublished = () => {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle isMe />
-  }
-
-  const articleEdges = edges.filter(
+  const articleEdges = edges?.filter(
     ({ node }) => node.articleState === 'active'
   )
+
+  if (
+    !edges ||
+    edges.length <= 0 ||
+    !pageInfo ||
+    !articleEdges ||
+    articleEdges.length <= 0
+  ) {
+    return <EmptyArticle isMe />
+  }
 
   const loadMore = () =>
     fetchMore({
