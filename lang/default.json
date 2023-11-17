@@ -323,6 +323,10 @@
   "7JlauX": {
     "defaultMessage": "Explore"
   },
+  "7WXDhH": {
+    "defaultMessage": "Are you sure you want to delete draft?",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
+  },
   "7cwoRo": {
     "defaultMessage": "The author has disabled comments for this article"
   },

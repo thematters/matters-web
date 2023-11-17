@@ -323,6 +323,10 @@
   "7JlauX": {
     "defaultMessage": "指南"
   },
+  "7WXDhH": {
+    "defaultMessage": "确认要删除草稿吗？",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
+  },
   "7cwoRo": {
     "defaultMessage": "因为作者设置，你无法参与讨论。"
   },
