@@ -5,7 +5,10 @@
   padding: var(--spacing-tight);
   margin-top: var(--spacing-base);
   background: var(--color-grey-lighter);
-  border-radius: 0.5rem;
+
+  @media (--sm-up) {
+    border-radius: 0.5rem;
+  }
 
   & .left {
     position: relative;
@@ -30,7 +33,6 @@
   gap: var(--spacing-base);
   padding: var(--spacing-base) var(--spacing-base) 0;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 
   @media (--sm-up) {
     padding: var(--spacing-base) 0 0;

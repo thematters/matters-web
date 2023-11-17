@@ -84,14 +84,23 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
 
         <Dialog.Message>
           <p>
-            <FormattedMessage
-              defaultMessage="Are you sure you want to delete draft ‘{title}’?"
-              id="hpIFGj"
-              description="src/components/DraftDigest/Feed/DeleteButton.tsx"
-              values={{
-                title: <span className="u-highlight">{draft.title}</span>,
-              }}
-            />
+            {!!draft.title && (
+              <FormattedMessage
+                defaultMessage="Are you sure you want to delete draft ‘{title}’?"
+                id="hpIFGj"
+                description="src/components/DraftDigest/Feed/DeleteButton.tsx"
+                values={{
+                  title: <span className="u-highlight">{draft.title}</span>,
+                }}
+              />
+            )}
+            {!draft.title && (
+              <FormattedMessage
+                defaultMessage="Are you sure you want to delete draft?"
+                id="7WXDhH"
+                description="src/components/DraftDigest/Feed/DeleteButton.tsx"
+              />
+            )}
             <br />
             <FormattedMessage
               defaultMessage="(This action cannot be undone)"
