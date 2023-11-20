@@ -5,13 +5,15 @@
 .right {
   @mixin flex-start-space-between;
 
-  margin-top: var(--spacing-base);
-
   & > * {
     &:nth-child(2) {
       margin-left: var(--spacing-base);
     }
   }
+}
+
+.spaceTop {
+  margin-top: var(--spacing-base);
 }
 
 .header {
