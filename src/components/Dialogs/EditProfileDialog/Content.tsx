@@ -245,7 +245,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         hasSmUpTitle={false}
       />
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content noMaxHeight>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={
