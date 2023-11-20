@@ -131,6 +131,11 @@ export const UserProfile = () => {
     [styles.headerWithoutCover]: !profileCover,
   })
 
+  const rightClasses = classNames({
+    [styles.right]: true,
+    [styles.spaceTop]: !!profileCover,
+  })
+
   return (
     <>
       <section
@@ -157,7 +162,7 @@ export const UserProfile = () => {
 
             {!isMe && avatar}
 
-            <section className={styles.right}>
+            <section className={rightClasses}>
               {isMe && (
                 <EditProfileDialog user={user}>
                   {({ openDialog: openEditProfileDialog }) => (

@@ -75,6 +75,7 @@ const BaseAddArticlesCollectionDialog = ({
       ADD_ARTICLES_COLLECTION_USER,
       {
         variables: { userName },
+        fetchPolicy: 'network-only',
       }
     )
 
