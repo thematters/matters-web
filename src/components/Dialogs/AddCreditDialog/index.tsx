@@ -18,12 +18,12 @@ interface AddCreditDialogProps {
 
 const DynamicPaymentSetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {

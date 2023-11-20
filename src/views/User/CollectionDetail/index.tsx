@@ -1,3 +1,5 @@
+import { useIntl } from 'react-intl'
+
 import { toPath } from '~/common/utils'
 import { Head, Layout } from '~/components'
 import { QueryError, Throw404, usePublicQuery, useRoute } from '~/components'
@@ -13,6 +15,12 @@ import { COLLECTION_DETAIL } from './gql'
 const BaseCollectionDetail = () => {
   const { getQuery } = useRoute()
   const collectionId = getQuery('collectionId')
+
+  const intl = useIntl()
+  const prefix = intl.formatMessage({
+    defaultMessage: 'Collection',
+    id: 'phAZoj',
+  })
 
   /**
    * Data Fetching
@@ -48,7 +56,7 @@ const BaseCollectionDetail = () => {
   return (
     <>
       <Head
-        title={`${collection.title} - ${collection.author.displayName} (@${collection.author.userName})`}
+        title={`${prefix} - ${collection.title} - ${collection.author.displayName} (@${collection.author.userName})`}
         path={
           toPath({
             page: 'collectionDetail',

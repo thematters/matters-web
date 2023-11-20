@@ -1,6 +1,8 @@
-import { FormikProvider } from 'formik'
+import { FieldInputProps, FormikProvider, useField } from 'formik'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import {
   Dialog,
   Form,
@@ -9,7 +11,9 @@ import {
   TextIcon,
   usePublicQuery,
   useRoute,
+  ViewerContext,
 } from '~/components'
+import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import { AddCollectionsArticleUserPublicQuery } from '~/gql/graphql'
 
 import { ADD_COLLECTIONS_ARTICLE_USER_PUBLIC } from './gql'
@@ -23,6 +27,11 @@ interface SelectDialogContentProps {
   switchToCreating: () => void
 }
 
+const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
+  const [field] = useField({ name: props.name, type: 'checkbox' })
+  return <Form.SquareCheckBox {...field} {...props} />
+}
+
 const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   formik,
   articleId,
@@ -30,9 +39,11 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   closeDialog,
   switchToCreating,
 }) => {
+  const viewer = useContext(ViewerContext)
+
   const { getQuery } = useRoute()
 
-  const userName = getQuery('name')
+  const userName = viewer.userName || getQuery('name')
   const { data, loading } =
     usePublicQuery<AddCollectionsArticleUserPublicQuery>(
       ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
@@ -48,9 +59,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   )
   const hasChecked = hasCheckedEdges?.map(({ node }) => node.id) || []
 
-  const enableCollections =
-    collections?.edges?.filter(({ node }) => node.articles.totalCount < 100) ||
-    []
+  const collectionEdges = collections?.edges || []
 
   if (loading) {
     return (
@@ -61,7 +70,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   }
 
   const SubmitButton =
-    enableCollections.length > 0 ? (
+    collectionEdges.length > 0 ? (
       <>
         <Dialog.TextButton
           type="submit"
@@ -84,7 +93,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
       />
 
       <Dialog.Content fixedHeight>
-        {enableCollections.length > 0 && (
+        {collectionEdges.length > 0 && (
           <section className={styles.formContainer}>
             <FormikProvider value={formik}>
               <Form
@@ -92,19 +101,38 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
                 onSubmit={formik.handleSubmit}
                 className={styles.listForm}
               >
-                {enableCollections.map(({ node }) => (
-                  <Form.SquareCheckBox
-                    key={node.id}
-                    hasTooltip={true}
-                    checked={
-                      hasChecked.includes(node.id) ||
-                      checkingIds.includes(node.id)
-                    }
-                    hint={node.title}
-                    disabled={hasChecked.includes(node.id)}
-                    {...formik.getFieldProps('checked')}
-                    value={node.id}
-                  />
+                {collectionEdges.map(({ node }) => (
+                  <section key={node.id} className={styles.item}>
+                    <SquareCheckBoxField
+                      hasTooltip={true}
+                      checked={
+                        hasChecked.includes(node.id) ||
+                        checkingIds.includes(node.id)
+                      }
+                      left={
+                        node.articles.totalCount >=
+                        MAX_COLLECTION_ARTICLES_COUNT ? (
+                          <span className={styles.full}>
+                            <FormattedMessage
+                              defaultMessage="FULL"
+                              id="Jxr/TM"
+                              description="src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
+                            />
+                          </span>
+                        ) : undefined
+                      }
+                      hint={node.title}
+                      disabled={
+                        hasChecked.includes(node.id) ||
+                        node.articles.totalCount >=
+                          MAX_COLLECTION_ARTICLES_COUNT
+                      }
+                      {...(formik.getFieldProps(
+                        'checked'
+                      ) as FieldInputProps<any>)}
+                      value={node.id}
+                    />
+                  </section>
                 ))}
               </Form>
             </FormikProvider>
@@ -113,7 +141,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
       </Dialog.Content>
 
       <section className={styles.createCollection}>
-        {enableCollections.length > 0 && <hr className={styles.hr}></hr>}
+        {collectionEdges.length > 0 && <hr className={styles.hr}></hr>}
 
         <button className={styles.button} onClick={switchToCreating}>
           <TextIcon icon={<IconAdd20 size="mdS" />}>

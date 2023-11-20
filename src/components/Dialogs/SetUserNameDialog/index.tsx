@@ -12,7 +12,9 @@ interface SetUserNameDialogProps {
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseSetUserNameDialog = ({ children }: SetUserNameDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)

@@ -72,7 +72,7 @@ const Top: React.FC = () => {
 
       <Menu.Item
         {...menuItemProps}
-        text={<FormattedMessage defaultMessage="Drafts" id="2atspc" />}
+        text={<FormattedMessage defaultMessage="My Works" id="ai7kS4" />}
         icon={<IconDraft24 size="md" />}
         href={PATHS.ME_DRAFTS}
         is="link"

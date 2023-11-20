@@ -7,6 +7,10 @@
   }
 }
 
+.item {
+  padding: var(--spacing-x-tight) 0;
+}
+
 .createCollection {
   padding: 0 var(--spacing-base) var(--spacing-base);
   background: white;
@@ -32,4 +36,14 @@
       color: var(--color-matters-green-dark);
     }
   }
+}
+
+.full {
+  @mixin border-grey;
+
+  padding: var(--spacing-xxx-tightest) var(--spacing-base-xx-tight);
+  margin-right: var(--spacing-x-tight);
+  font-size: var(--font-size-xs);
+  color: var(--color-grey);
+  border-radius: 0.25rem;
 }

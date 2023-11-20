@@ -36,6 +36,8 @@ const Option: React.FC<OptionProps> = forwardRef(
 
       role = 'option',
 
+      onClick,
+
       ...cardProps
     },
     ref
@@ -50,11 +52,11 @@ const Option: React.FC<OptionProps> = forwardRef(
         {...(id ? { id } : {})}
         {...(role === 'option'
           ? { role: 'option', 'aria-selected': !!selected }
-          : {})}
+          : { role: 'button' })}
+        onClick={onClick}
       >
         <Card
           bgColor={expanded ? undefined : 'greyLighter'}
-          {...(role === 'option' ? {} : { role: 'button' })}
           {...cardProps}
           spacing={cardProps.spacing || [0, 0]}
           ref={ref}

@@ -11,11 +11,15 @@ describe('<CircleDigest/Counts>', () => {
     render(<CircleDigestCounts circle={{ ...MOCK_CIRCLE }} />)
 
     const $countMember = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_MEMBER_COUNT)
-    expect($countMember.textContent).toContain(MOCK_CIRCLE.members.totalCount)
+    expect($countMember).toHaveTextContent(
+      String(MOCK_CIRCLE.members.totalCount)
+    )
 
     const $countArticle = screen.getByTestId(
       TEST_ID.DIGEST_CIRCLE_ARTICLE_COUNT
     )
-    expect($countArticle.textContent).toContain(MOCK_CIRCLE.works.totalCount)
+    expect($countArticle).toHaveTextContent(
+      String(MOCK_CIRCLE.works.totalCount)
+    )
   })
 })

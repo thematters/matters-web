@@ -22,7 +22,7 @@ import styles from './styles.module.css'
  *
  */
 
-type InputProps = {
+export type PinInputProps = {
   length?: number
   onChange: (val: string) => void
   onComplete?: (val: string) => void
@@ -30,7 +30,7 @@ type InputProps = {
   value: string
 } & Omit<FieldProps, 'fieldMsgId'>
 
-const Input: React.FC<InputProps> = ({
+const PinInput: React.FC<PinInputProps> = ({
   length = PAYMENT_PASSSWORD_LENGTH,
   onChange,
   onComplete,
@@ -53,6 +53,7 @@ const Input: React.FC<InputProps> = ({
     length
   )
   const [itemRefs, setItemRefs] = useState<any>([])
+  const fieldMsgId = `field-msg-${name}`
 
   useEffect(() => {
     setItemRefs((refs: any) =>
@@ -122,7 +123,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
       <Field.Header
-        htmlFor={`field-${name}-1`}
+        htmlFor={`field-${name}-0`}
         label={label}
         extraButton={extraButton}
         hasLabel={hasLabel}
@@ -132,9 +133,10 @@ const Input: React.FC<InputProps> = ({
         <section className={styles.pinInput}>
           {values.map((val, index) => (
             <Item
+              name={`${name}-${index}`}
               key={index}
               value={val}
-              id={`field-${name}-${index + 1}`}
+              id={`field-${name}-${index}`}
               ref={itemRefs[index]}
               error={!!error}
               onChange={(v: string) => onItemChange(v, index)}
@@ -142,13 +144,14 @@ const Input: React.FC<InputProps> = ({
                 onItemPaste(event, index)
               }
               onBackspace={() => onBackspace(index)}
+              aria-describedby={fieldMsgId}
             />
           ))}
         </section>
       </Field.Content>
 
       <Field.Footer
-        fieldMsgId={`field-msg-${name}`}
+        fieldMsgId={fieldMsgId}
         hint={hint}
         error={error}
         hintAlign={hintAlign}
@@ -157,4 +160,4 @@ const Input: React.FC<InputProps> = ({
   )
 }
 
-export default Input
+export default PinInput

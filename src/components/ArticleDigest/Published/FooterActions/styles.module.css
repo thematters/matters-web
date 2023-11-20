@@ -1,0 +1,12 @@
+.footer {
+  @mixin feed-footer-actions;
+
+  margin-top: var(--spacing-x-tight);
+
+  & .left {
+    & .count {
+      width: 2.375rem;
+      word-break: keep-all;
+    }
+  }
+}

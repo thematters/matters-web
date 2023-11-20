@@ -1,8 +1,8 @@
+import classNames from 'classnames'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import {
@@ -95,7 +95,7 @@ export const UserProfile = () => {
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
   const hasTraveloggersBadge = !!user.info.cryptoWallet?.hasNFTs
 
-  const profileCover = user.info.profileCover || ''
+  const profileCover = user.info.profileCover
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
 
@@ -126,16 +126,26 @@ export const UserProfile = () => {
     </section>
   )
 
+  const headerClasses = classNames({
+    [styles.header]: true,
+    [styles.headerWithoutCover]: !profileCover,
+  })
+
+  const rightClasses = classNames({
+    [styles.right]: true,
+    [styles.spaceTop]: !!profileCover,
+  })
+
   return (
     <>
       <section
         className={styles.userProfile}
         data-test-id={TEST_ID.USER_PROFILE}
       >
-        <Cover cover={profileCover} fallbackCover={IMAGE_COVER.src} />
+        {!!profileCover && <Cover cover={profileCover} />}
 
         <Media lessThan="lg">
-          <header className={styles.header}>
+          <header className={headerClasses}>
             {isMe && (
               <EditProfileDialog user={user}>
                 {({ openDialog: openEditProfileDialog }) => (
@@ -152,7 +162,7 @@ export const UserProfile = () => {
 
             {!isMe && avatar}
 
-            <section className={styles.right}>
+            <section className={rightClasses}>
               {isMe && (
                 <EditProfileDialog user={user}>
                   {({ openDialog: openEditProfileDialog }) => (

@@ -61,7 +61,9 @@ const ArticleFingerprintGQL = gql`
   ${fragments.article}
 `
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseFingerprintDialog = ({
   article,

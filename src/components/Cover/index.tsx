@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 
 export interface CoverProps {
   cover?: string | null
-  fallbackCover: string
+  fallbackCover?: string
   inEditor?: boolean
 }
 
@@ -19,12 +19,13 @@ export const Cover: React.FC<React.PropsWithChildren<CoverProps>> = ({
 
   return (
     <div className={styles.cover}>
-      <ResponsiveImage
-        url={url}
-        width={1376}
-        disabled={isFallback || inEditor}
-        disableAnimation={true}
-      />
+      {url && (
+        <ResponsiveImage
+          url={url}
+          width={1376}
+          disabled={isFallback || inEditor}
+        />
+      )}
 
       {children}
     </div>
