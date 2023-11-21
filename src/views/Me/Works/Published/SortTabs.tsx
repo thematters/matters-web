@@ -56,9 +56,9 @@ export const SortTabs = ({
           <p className={styles.left}>
             <IconUser2V16 color="grey" />
             <FormattedMessage
-              defaultMessage="Number of readers: unique registered users plus number of anonymous IP addresses visited the article"
-              description="src/views/Me/Works/Published/index.tsx"
-              id="jaTUgx"
+              defaultMessage="Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)"
+              description="src/views/Me/Works/Published/SortTabs.tsx"
+              id="a1+ca6"
             />
           </p>
           <section className={styles.right}>

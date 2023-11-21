@@ -1267,6 +1267,10 @@
   "a/xacb": {
     "defaultMessage": "（不会删除选集内文章）"
   },
+  "a1+ca6": {
+    "defaultMessage": "读者数量：访问过作品页的不重复的登录用户数加匿名 IP 数（数据周期更新，可能存在延迟）",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "aOFCqL": {
     "defaultMessage": "最多评论",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
@@ -1503,10 +1507,6 @@
   "jJ1Brc": {
     "defaultMessage": "喜欢回应",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
-  },
-  "jaTUgx": {
-    "defaultMessage": "读者数量：访问过作品页的不重复的登录用户数加匿名 IP 数",
-    "description": "src/views/Me/Works/Published/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "打开 IPNS 页面",
