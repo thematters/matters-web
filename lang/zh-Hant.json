@@ -1267,6 +1267,10 @@
   "a/xacb": {
     "defaultMessage": "（不會刪除選集內文章）"
   },
+  "a1+ca6": {
+    "defaultMessage": "讀者數量：訪問過作品頁的不重複的登入用戶數加匿名 IP 數（數據週期更新，可能存在延遲）",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "aOFCqL": {
     "defaultMessage": "最多評論",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
@@ -1503,10 +1507,6 @@
   "jJ1Brc": {
     "defaultMessage": "喜歡回應",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
-  },
-  "jaTUgx": {
-    "defaultMessage": "讀者數量：訪問過作品頁的不重複的登入用戶數加匿名 IP 數",
-    "description": "src/views/Me/Works/Published/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "打開 IPNS 頁面",
