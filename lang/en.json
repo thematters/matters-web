@@ -1267,6 +1267,10 @@
   "a/xacb": {
     "defaultMessage": "(Articles in this collection will not be deleted)"
   },
+  "a1+ca6": {
+    "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "aOFCqL": {
     "defaultMessage": "Most comments",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
@@ -1503,10 +1507,6 @@
   "jJ1Brc": {
     "defaultMessage": "Pin Comment",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
-  },
-  "jaTUgx": {
-    "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article",
-    "description": "src/views/Me/Works/Published/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
