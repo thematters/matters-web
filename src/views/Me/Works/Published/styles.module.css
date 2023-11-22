@@ -37,7 +37,6 @@
   position: relative;
   display: flex;
   padding: var(--spacing-base) var(--spacing-base) 0;
-  margin-right: var(--spacing-base);
 
   @media (--sm-up) {
     padding: var(--spacing-base) 0 0;
@@ -83,5 +82,13 @@
       color: var(--color-white);
       background: var(--color-black);
     }
+  }
+
+  & .rightSpace {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    width: 4rem;
+    height: 2rem;
   }
 }
