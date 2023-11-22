@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 export const QUERY_USER_NAME = gql`
   query QueryUserName($userName: String!) {
-    user(input: { userName: $userName }) {
+    user(input: { userName: $userName, userNameCaseIgnore: true }) {
       id
       userName
     }
