@@ -45,7 +45,7 @@ export const SortTabs = ({
   const [emblaRef] = useEmblaCarousel({
     dragFree: true,
     draggable: true,
-    align: 'start',
+    containScroll: 'trimSnaps',
   })
 
   const Hint = () => (

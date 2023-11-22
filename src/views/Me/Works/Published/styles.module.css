@@ -37,6 +37,7 @@
   position: relative;
   display: flex;
   padding: var(--spacing-base) var(--spacing-base) 0;
+  margin-right: var(--spacing-base);
 
   @media (--sm-up) {
     padding: var(--spacing-base) 0 0;
