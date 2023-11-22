@@ -7,7 +7,7 @@ import { TagDigest } from '~/components'
 import { MOCK_TAG } from '~/stories/mocks'
 
 describe('<TagDigest.Concise>', () => {
-  it('should render an TagDigest.Concise', () => {
+  it('should render a TagDigest.Concise', () => {
     render(<TagDigest.Concise tag={MOCK_TAG} showArticlesNum />)
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_TAG_CONCISE)
@@ -23,7 +23,7 @@ describe('<TagDigest.Concise>', () => {
     expect(mockRouter.asPath).toContain(MOCK_TAG.slug)
   })
 
-  it('should render an TagDigest.Concise without article count', () => {
+  it('should render a TagDigest.Concise without article count', () => {
     render(<TagDigest.Concise tag={MOCK_TAG} />)
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_TAG_CONCISE)

@@ -5,7 +5,7 @@ import { render, screen } from '~/common/utils/test'
 import { SignUpButton } from '~/components'
 
 describe('<SignUpButton>', () => {
-  it('should render an SignUpButton', () => {
+  it('should render a SignUpButton', () => {
     render(<SignUpButton />)
 
     const button = screen.getByText('Register')
@@ -16,7 +16,7 @@ describe('<SignUpButton>', () => {
     expect($authDialog).toBeDefined()
   })
 
-  it('should render an SignUpButton with custom children', () => {
+  it('should render a SignUpButton with custom children', () => {
     render(<SignUpButton isPlain>Click Me to Register</SignUpButton>)
 
     const $button = screen.getByText('Click Me to Register')

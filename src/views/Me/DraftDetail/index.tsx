@@ -52,7 +52,7 @@ const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
   {
     ssr: false,
-    loading: Spinner,
+    loading: () => <Spinner />,
   }
 )
 
@@ -167,20 +167,28 @@ const DraftDetail = () => {
     [key: string]: any
   }): Promise<{ id: string; path: string }> => {
     const isImage = input.type !== ASSET_TYPE.embedaudio
+
+    // create draft first if not exist
+    let draftId = draft?.id
+    if (!draftId) {
+      await createDraft({
+        onCreate: (newDraftId) => {
+          draftId = newDraftId
+        },
+      })
+    }
+
     const variables = {
       input: {
         type: ASSET_TYPE.embed,
         entityType: ENTITY_TYPE.draft,
-        entityId: draft && draft.id,
+        entityId: draftId,
         ...input,
       },
     }
 
-    // feature flag
-    const isForceSingleFileUpload = !!getQuery('single-file-upload')
-
     // upload via directImageUpload
-    if (isImage && !isForceSingleFileUpload) {
+    if (isImage) {
       const result = await directImageUpload({
         variables: _omit(variables, ['input.file']),
       })

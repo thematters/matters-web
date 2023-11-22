@@ -170,9 +170,6 @@
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
-  "2atspc": {
-    "defaultMessage": "Drafts"
-  },
   "2ef/Xl": {
     "defaultMessage": "Block",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
@@ -224,10 +221,6 @@
   "4l6vz1": {
     "defaultMessage": "Copy"
   },
-  "4sl6yu": {
-    "defaultMessage": "Start writing",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "50cquj": {
     "defaultMessage": "No discussion yet",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
@@ -257,6 +250,10 @@
   },
   "5sg7KC": {
     "defaultMessage": "Password"
+  },
+  "6+eeJ4": {
+    "defaultMessage": "Lowercase letters, numbers and underscores",
+    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "63HuBz": {
     "defaultMessage": "This tag has no manager currently",
@@ -325,6 +322,10 @@
   },
   "7JlauX": {
     "defaultMessage": "Explore"
+  },
+  "7WXDhH": {
+    "defaultMessage": "Are you sure you want to delete draft?",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "7cwoRo": {
     "defaultMessage": "The author has disabled comments for this article"
@@ -415,6 +416,10 @@
   "A7ugfn": {
     "defaultMessage": "More Actions"
   },
+  "AA5PkU": {
+    "defaultMessage": "Most claps",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "AB5rDl": {
     "defaultMessage": "Payment suspended or returned by card issuer when there are doubts about the transaction",
     "description": "src/components/Transaction/index.tsx"
@@ -497,6 +502,10 @@
     "defaultMessage": "Upadted {date}",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
+  "C9jbHn": {
+    "defaultMessage": "Number of claps",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "CBDDR5": {
     "defaultMessage": "Must be between 2-20 characters long. Only lowercase letters, numbers and underline are allowed."
   },
@@ -573,6 +582,10 @@
   "EoeUjA": {
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
+  },
+  "F3zk7E": {
+    "defaultMessage": "(This action cannot be undone)",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "FEI5Fv": {
     "defaultMessage": "Email address",
@@ -705,6 +718,10 @@
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "J6f6iN": {
+    "defaultMessage": "Number of comments",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "JRkgKV": {
     "defaultMessage": "Failed to copy, please try again."
   },
@@ -730,6 +747,10 @@
   "Js/Fij": {
     "defaultMessage": "This article has been removed from Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
+  },
+  "Jxr/TM": {
+    "defaultMessage": "FULL",
+    "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
   },
   "K2/mHF": {
     "defaultMessage": "Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account).",
@@ -779,6 +800,10 @@
   "L7Si5/": {
     "defaultMessage": "Manage Community",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "LETb4b": {
+    "defaultMessage": "Collections allow up to {count} articles currently",
+    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
   "LGox1K": {
     "defaultMessage": "Followed"
@@ -871,6 +896,10 @@
     "defaultMessage": "The email verification link has been sent to {email}",
     "description": "src/components/GlobalToast/index.tsx"
   },
+  "NfCbnZ": {
+    "defaultMessage": "Number of supporters",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
   "NzfL1d": {
     "defaultMessage": "Enter password again",
     "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
@@ -910,6 +939,10 @@
     "defaultMessage": "Please go to the relevant page to resend the link. You can also ",
     "description": "src/views/Callback/UI.tsx"
   },
+  "PmLGMc": {
+    "defaultMessage": "No drafts yet",
+    "description": "src/components/Empty/EmptyDraft.tsx"
+  },
   "Pp/0po": {
     "defaultMessage": "Shuffle"
   },
@@ -944,10 +977,6 @@
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
-  "RNKSCj": {
-    "defaultMessage": "Archived",
-    "description": "src/components/ArticleDigest/Archive/index.tsx"
-  },
   "ROPCC0": {
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
@@ -971,6 +1000,10 @@
   "SNh1n0": {
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "SPTRiT": {
+    "defaultMessage": "Latest",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "SYyBFF": {
     "defaultMessage": "Copied successful"
@@ -1058,8 +1091,9 @@
   "VZsE96": {
     "defaultMessage": "Collection Name"
   },
-  "VbxMwX": {
-    "defaultMessage": "Are you sure you want to delete draft?"
+  "VeEfHm": {
+    "defaultMessage": "Drafts",
+    "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
   "VefaFQ": {
     "defaultMessage": "Content length exceeds limit ({length}/{limit})"
@@ -1192,9 +1226,17 @@
     "defaultMessage": "View article",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
+  "YgZOAm": {
+    "defaultMessage": "My Works - Archived",
+    "description": "src/views/Me/Works/Archived/index.tsx"
+  },
   "YlPCRU": {
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+  },
+  "Z2iL9Z": {
+    "defaultMessage": "Start writing",
+    "description": "src/components/Buttons/StartWriting/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "Profile",
@@ -1225,6 +1267,14 @@
   "a/xacb": {
     "defaultMessage": "(Articles in this collection will not be deleted)"
   },
+  "a1+ca6": {
+    "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "aOFCqL": {
+    "defaultMessage": "Most comments",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "aa0nss": {
     "defaultMessage": "Unpin from Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
@@ -1239,6 +1289,9 @@
   },
   "adThp5": {
     "defaultMessage": "Latest"
+  },
+  "ai7kS4": {
+    "defaultMessage": "My Works"
   },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
@@ -1419,8 +1472,16 @@
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
+  "hpIFGj": {
+    "defaultMessage": "Are you sure you want to delete draft ‘{title}’?",
+    "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
+  },
   "hrgo+E": {
     "defaultMessage": "Archive"
+  },
+  "hv1iYZ": {
+    "defaultMessage": "Number of readers",
+    "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
   "icdrwy": {
     "defaultMessage": "Followed You",
@@ -1462,6 +1523,9 @@
     "defaultMessage": "Uncollapse",
     "description": "src/components/Comment/DropdownActions/UncollapseButton.tsx"
   },
+  "k2veDA": {
+    "defaultMessage": "Write"
+  },
   "k5NnNF": {
     "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
@@ -1487,10 +1551,6 @@
   },
   "kc79d3": {
     "defaultMessage": "Topics"
-  },
-  "kf5NAv": {
-    "defaultMessage": "English letters, numbers, and underscores",
-    "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
   "kkZioy": {
     "defaultMessage": "Remove",
@@ -1581,6 +1641,10 @@
     "defaultMessage": "Verification code is no longer valid. Please use the latest code we sent, or try resend",
     "description": "CODE_INACTIVE"
   },
+  "n/w6lW": {
+    "defaultMessage": "Most Supporters",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
   "n2Sc6g": {
     "defaultMessage": "My profile",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
@@ -1626,6 +1690,10 @@
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
+  "pAQR0S": {
+    "defaultMessage": "Published",
+    "description": "src/views/Me/Works/WorksTabs/index.tsx"
+  },
   "pHg5Ju": {
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
@@ -1633,6 +1701,9 @@
   "pRV+UD": {
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
+  },
+  "phAZoj": {
+    "defaultMessage": "Collection"
   },
   "pjunBi": {
     "defaultMessage": "1MB maximum",
@@ -1655,6 +1726,10 @@
   "qNuRmA": {
     "defaultMessage": "Send login code",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "qPqap+": {
+    "defaultMessage": "Archived",
+    "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
   "qVhxp5": {
     "defaultMessage": "Enter",
@@ -1686,6 +1761,10 @@
   "rBjwQy": {
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rHi+cL": {
+    "defaultMessage": "Most readers",
+    "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "rJSVni": {
     "defaultMessage": "Follow",
@@ -1744,6 +1823,10 @@
   "tBt9u0": {
     "defaultMessage": "Sign in",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
+  "tDqnVf": {
+    "defaultMessage": "My Works - Drafts",
+    "description": "src/views/Me/Works/Drafts/index.tsx"
   },
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
@@ -1894,6 +1977,9 @@
     "defaultMessage": "Pay",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "y1AhBH": {
+    "defaultMessage": "Enter a custom amount"
+  },
   "y4Lyf1": {
     "defaultMessage": "This name is already taken.",
     "description": "NAME_EXISTS"
@@ -1901,16 +1987,16 @@
   "yAflVX": {
     "defaultMessage": "Draft has been deleted"
   },
+  "yBCdku": {
+    "defaultMessage": "My Works - Published",
+    "description": "src/views/Me/Works/Published/index.tsx"
+  },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
   },
   "yIlC0R": {
     "defaultMessage": "No published articles yet",
     "description": "src/components/Empty/EmptyArticle.tsx"
-  },
-  "yJsERg": {
-    "defaultMessage": "Collections allow up to 100 articles currently",
-    "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
   "yOKEVx": {
     "defaultMessage": "Top Up",

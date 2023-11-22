@@ -10,7 +10,8 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { PublishArticleMutation } from '~/gql/graphql'
+import { PublishArticleMutation, UserArticlesSort } from '~/gql/graphql'
+import { ME_WORKS_PUBLISHED_FEED } from '~/views/Me/Works/Published/gql'
 import { VIEWER_ARTICLES } from '~/views/User/Articles/gql'
 import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
 
@@ -45,6 +46,10 @@ const ConfirmPublishDialogContent: React.FC<
       {
         query: VIEWER_ARTICLES,
         variables: { userName: viewer.userName },
+      },
+      {
+        query: ME_WORKS_PUBLISHED_FEED,
+        variables: { sort: UserArticlesSort.Newest },
       },
     ],
   })

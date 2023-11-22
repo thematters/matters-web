@@ -8,7 +8,7 @@ export type EditTagDialogProps = EditTagDialogContentProps
 
 const DynamicContent = dynamic(() => import('./Content'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 type BaseEditTagDialogProps = {

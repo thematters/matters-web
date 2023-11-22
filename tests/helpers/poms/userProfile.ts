@@ -78,7 +78,9 @@ export class UserProfilePage {
     await this.page.getByRole('link', { name: 'Profile' }).click()
 
     // confirm User Profile Page
-    await expect(this.page.getByTestId(TEST_ID.USER_PROFILE)).toBeVisible()
+    await expect(
+      this.page.getByTestId(TEST_ID.ASIDE_USER_PROFILE)
+    ).toBeVisible()
     await expect(this.feedArticles.first()).toBeVisible()
   }
 

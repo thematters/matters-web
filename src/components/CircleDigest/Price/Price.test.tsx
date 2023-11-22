@@ -11,7 +11,7 @@ describe('<CircleDigest/Price>', () => {
     render(<CircleDigestPrice circle={{ ...MOCK_CIRCLE, isMember: false }} />)
 
     const $cta = screen.getByTestId(TEST_ID.DIGEST_CIRCLE_PRICE)
-    expect($cta.textContent).toContain(MOCK_CIRCLE.prices[0].amount)
+    expect($cta).toHaveTextContent(String(MOCK_CIRCLE.prices[0].amount))
   })
 
   it('should not render a CircleDigest/Price ', () => {

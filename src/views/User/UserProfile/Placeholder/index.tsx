@@ -1,3 +1,5 @@
+import classNames from 'classnames'
+
 import IMG_PLACEHOLDER from '@/public/static/images/placeholder.svg'
 import { Avatar, Cover, Media, useRoute } from '~/components'
 
@@ -7,6 +9,11 @@ import placeholderStyles from './styles.module.css'
 const Placeholder = () => {
   const { getQuery } = useRoute()
   const userName = getQuery('name')
+
+  const rightClasses = classNames({
+    [styles.right]: true,
+    [styles.spaceTop]: true,
+  })
 
   return (
     <section className={styles.userProfile} aria-busy="true" aria-live="polite">
@@ -18,7 +25,7 @@ const Placeholder = () => {
             <Avatar size="xxxlm" src={IMG_PLACEHOLDER} />
           </section>
 
-          <section className={styles.right}>
+          <section className={rightClasses}>
             <div className={placeholderStyles.followButton} />
             <div className={placeholderStyles.moreButton} />
           </section>

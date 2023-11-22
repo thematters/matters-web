@@ -50,16 +50,16 @@ export type EditorSettingsDialogProps = {
 
 const DynamicEditorSearchSelectForm = dynamic(
   () => import('~/components/Forms/EditorSearchSelectForm'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const DynamicSetCover = dynamic(() => import('../SetCover'), {
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const DynamicSetSupportFeedback = dynamic(
   () => import('~/components/Editor/ToggleAccess/SupportSettingDialog/Content'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const BaseEditorSettingsDialog = ({

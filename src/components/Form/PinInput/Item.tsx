@@ -6,6 +6,7 @@ import { KEYVALUE } from '~/common/enums'
 import styles from './styles.module.css'
 
 type ItemProps = {
+  name: string
   error: boolean
   onChange: (value: string) => void
   onBackspace: () => void
@@ -59,6 +60,7 @@ const Item = forwardRef(
           onKeyDown={handleKeydown}
           onPaste={onPaste}
           ref={ref}
+          required
           {...inputProps}
           value={value}
         />

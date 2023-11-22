@@ -8,7 +8,7 @@ interface LikeCoinDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const BaseLikeCoinDialog: React.FC<LikeCoinDialogProps> = ({ children }) => {

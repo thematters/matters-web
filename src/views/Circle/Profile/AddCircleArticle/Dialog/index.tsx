@@ -31,11 +31,11 @@ interface AddCircleArticleDialogProps {
 
 const DynamicSearchSelectForm = dynamic(
   () => import('~/components/Forms/SearchSelectForm'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const DynamicConfirmContent = dynamic(() => import('./ConfirmContent'), {
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const AddCircleArticleDialog = ({

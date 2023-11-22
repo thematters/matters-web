@@ -70,6 +70,10 @@ export const toastMutationErrors = (
   const customErrorMessage = customErrors ? customErrors[errorCode] : ''
   const errorMessage = ERROR_MESSAGES[errorCode]
 
+  if (!customErrorMessage || !errorMessage) {
+    throw error
+  }
+
   /**
    * Catch auth errors
    */

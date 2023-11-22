@@ -5,7 +5,7 @@ import { render, screen } from '~/common/utils/test'
 import { LoginButton } from '~/components'
 
 describe('<LoginButton>', () => {
-  it('should render an LoginButton', () => {
+  it('should render a LoginButton', () => {
     const handleClick = vi.fn()
 
     render(<LoginButton onClick={handleClick} />)

@@ -13,7 +13,7 @@ type EditorSearchSelectDialogProps = Omit<
 
 const DynamicEditorSearchSelectForm = dynamic(
   () => import('~/components/Forms/EditorSearchSelectForm'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const BaseSearchSelectDialog = ({

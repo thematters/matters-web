@@ -24,7 +24,9 @@ const fragments = {
   `,
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseSupportersDialog = ({ article, children }: SupportersDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)

@@ -5,7 +5,7 @@ import { Dialog, Spinner, useDialogSwitch } from '~/components'
 import { SetCoverProps } from '../SetCover'
 
 const DynamicSetCover = dynamic(() => import('../SetCover'), {
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 type SetCoverDialogProps = SetCoverProps & {

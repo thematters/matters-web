@@ -4,6 +4,10 @@
   line-height: 1.5rem;
   color: var(--color-grey-light);
   text-align: center;
+
+  & footer {
+    margin-top: var(--spacing-loose);
+  }
 }
 
 .description {

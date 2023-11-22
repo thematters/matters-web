@@ -39,7 +39,7 @@ type StagingAreaProps = BaseStagingAreaProps & {
 }
 
 const DynamicDraggableNodes = dynamic(() => import('./DraggableNodes'), {
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const StagingArea: React.FC<StagingAreaProps> = ({

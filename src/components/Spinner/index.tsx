@@ -5,7 +5,11 @@ import { IconSpinner16, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
-export const Spinner = () => {
+export const Spinner = ({
+  color = 'greyLight',
+}: {
+  color?: 'greyLight' | 'white'
+}) => {
   return (
     <div
       className={styles.spinner}
@@ -18,7 +22,7 @@ export const Spinner = () => {
           <Translate zh_hant="載入中…" zh_hans="加载中…" en="Loading..." />
         </span>
       </VisuallyHidden>
-      <IconSpinner16 color="greyLight" size="lg" />
+      <IconSpinner16 color={color} size="lg" />
     </div>
   )
 }
