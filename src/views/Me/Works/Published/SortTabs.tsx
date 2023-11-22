@@ -46,7 +46,6 @@ export const SortTabs = ({
     dragFree: true,
     draggable: true,
     align: 'start',
-    containScroll: 'keepSnaps',
   })
 
   const Hint = () => (
