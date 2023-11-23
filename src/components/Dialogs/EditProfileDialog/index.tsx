@@ -10,7 +10,9 @@ interface EditProfileDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseEditProfileDialog = ({ user, children }: EditProfileDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)

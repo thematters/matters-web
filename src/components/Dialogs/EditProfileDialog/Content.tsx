@@ -172,6 +172,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
           cover={user.info.profileCover}
           fallbackCover={IMAGE_COVER.src}
           entityType={ENTITY_TYPE.user}
+          type="userProfile"
           inEditor
           onUploaded={(assetId) => setFieldValue('profileCover', assetId)}
           onUploadStart={() => setCoverLoading(true)}
@@ -244,7 +245,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         hasSmUpTitle={false}
       />
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content noMaxHeight>{InnerForm}</Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

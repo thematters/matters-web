@@ -12,17 +12,17 @@ interface Props {
 
 const DynamicInviteeSearch = dynamic(() => import('./Search'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const DynamicInviteePreSend = dynamic(() => import('./PreSend'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const DynamicInvitationSent = dynamic(() => import('./Sent'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 /**

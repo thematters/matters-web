@@ -11,10 +11,19 @@
   background: rgb(0 0 0 / 50%);
 }
 
+.emptyMask {
+  background: var(--color-grey-light);
+}
+
 .delete {
   position: absolute;
   right: var(--spacing-base);
   bottom: var(--spacing-base);
+}
+
+.userProfileCover {
+  display: flex;
+  gap: var(--spacing-xx-loose);
 }
 
 .collection {

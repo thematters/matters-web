@@ -7,7 +7,9 @@ interface AddCollectionDialogProps {
   gotoDetailPage?: boolean
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseAddCollectionDialog = ({
   children,

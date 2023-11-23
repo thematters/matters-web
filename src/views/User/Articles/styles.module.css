@@ -11,9 +11,3 @@
     color: var(--color-black);
   }
 }
-
-.startWriting {
-  display: flex;
-  justify-content: center;
-  font-weight: var(--font-weight-medium);
-}
