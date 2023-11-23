@@ -45,7 +45,7 @@ export const SortTabs = ({
   const [emblaRef] = useEmblaCarousel({
     dragFree: true,
     draggable: true,
-    loop: false,
+    align: 'start',
     containScroll: 'trimSnaps',
   })
 
@@ -132,6 +132,7 @@ export const SortTabs = ({
           {/* FIXED: The ul element needs to be wrapped directly in the emblaRef  */}
           <ul className={styles.tabList}>
             <Content />
+            <span className={styles.rightSpace} />
           </ul>
           <Hint />
         </section>
