@@ -27,7 +27,9 @@ export const useCreateDraft = () => {
 
     await onCreate(id)
 
-    await router.push({ query: { draftId: id } }, undefined, { shallow: true })
+    await router.replace({ query: { draftId: id } }, undefined, {
+      shallow: true,
+    })
   }
 
   return { createDraft }
