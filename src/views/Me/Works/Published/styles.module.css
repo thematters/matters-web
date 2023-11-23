@@ -83,4 +83,12 @@
       background: var(--color-black);
     }
   }
+
+  & .rightSpace {
+    position: relative;
+    display: inline-block;
+    flex-shrink: 0;
+    width: 4rem;
+    height: 2rem;
+  }
 }
