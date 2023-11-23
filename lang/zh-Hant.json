@@ -584,7 +584,7 @@
     "description": "FORBIDDEN_BY_STATE"
   },
   "F3zk7E": {
-    "defaultMessage": "(草稿刪除後無法恢復)",
+    "defaultMessage": " （草稿刪除後無法恢復）",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "FEI5Fv": {
@@ -1473,7 +1473,7 @@
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hpIFGj": {
-    "defaultMessage": "確認要刪除草稿「{title}」嗎？",
+    "defaultMessage": "確認要刪除草稿（{title}）嗎？",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
   "hrgo+E": {
