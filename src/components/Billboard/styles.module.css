@@ -1,6 +1,8 @@
 .billboard {
   position: relative;
   display: block;
+  width: 100%;
+  max-width: 343px;
   overflow: hidden;
   border-radius: 1.25rem;
 

@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef } from 'react'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
+  Billboard,
   CardExposureTracker,
   EmptyArticle,
   InfiniteScroll,
@@ -24,6 +25,7 @@ import Authors from '../Authors'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
+import styles from './styles.module.css'
 
 type FeedArticlesPublic =
   | HottestFeedPublicQuery
@@ -67,6 +69,13 @@ const horizontalFeeds: FeedLocation = {
   2: () => (
     <Media lessThan="lg">
       <Tags />
+    </Media>
+  ),
+  3: () => (
+    <Media lessThan="lg">
+      <section className={styles.billboardContainer}>
+        <Billboard tokenId={1} />
+      </section>
     </Media>
   ),
   5: () => (
