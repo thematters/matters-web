@@ -45,6 +45,7 @@ export * from './Toast'
  */
 export * from './Analytics'
 export * from './ArticleDigest'
+export * from './Billboard'
 export * from './Buttons'
 export * from './Charts'
 export * from './CircleDigest'

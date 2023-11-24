@@ -1,4 +1,4 @@
-import { Layout, Spacer } from '~/components'
+import { Billboard, Layout, Spacer } from '~/components'
 
 import Announcements from './Announcements'
 import Feed from './Feed'
@@ -9,6 +9,7 @@ const Home = () => {
     <Layout.Main
       aside={
         <>
+          <Billboard />
           <Sidebar.Tags />
           <Sidebar.Authors />
         </>

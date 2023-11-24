@@ -1,5 +1,5 @@
+import { goerli, mainnet, polygon, polygonMumbai } from 'viem/chains'
 import { Chain, configureChains, createConfig, createStorage } from 'wagmi'
-import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
@@ -11,6 +11,7 @@ const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
 export const featureSupportedChains = {
   curation: isProd ? [polygon] : [polygonMumbai],
   ens: isProd ? [mainnet] : [goerli],
+  billboard: isProd ? [polygon] : [polygonMumbai],
 }
 
 const defaultChains: Chain[] = isProd
