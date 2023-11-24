@@ -4,7 +4,11 @@ import { BillboardABI, featureSupportedChains } from '~/common/utils'
 
 import styles from './styles.module.css'
 
-export const Billboard = () => {
+type BillboardProps = {
+  tokenId: number
+}
+
+export const Billboard: React.FC<BillboardProps> = ({ tokenId }) => {
   const targetNetork = featureSupportedChains.billboard[0]
   const { data, isError, isLoading } = useContractRead({
     address: process.env
@@ -12,7 +16,7 @@ export const Billboard = () => {
     abi: BillboardABI,
     functionName: 'getBoard',
     chainId: targetNetork.id,
-    args: [BigInt(1)],
+    args: [BigInt(tokenId)],
     cacheTime: 60_000,
   })
 

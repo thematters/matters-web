@@ -9,7 +9,7 @@ const Home = () => {
     <Layout.Main
       aside={
         <>
-          <Billboard />
+          <Billboard tokenId={1} />
           <Sidebar.Tags />
           <Sidebar.Authors />
         </>
