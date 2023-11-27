@@ -1903,6 +1903,10 @@
     "defaultMessage": "重置你的登录密码",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "w7W92K": {
+    "defaultMessage": "我为什么会看到这个？",
+    "description": "src/components/Billboard/index.tsx"
+  },
   "wCgTu5": {
     "defaultMessage": "评论"
   },

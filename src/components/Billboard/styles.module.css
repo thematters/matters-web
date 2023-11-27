@@ -17,4 +17,14 @@
     padding-bottom: 56.06%;
     content: '';
   }
+
+  & .mark {
+    position: absolute;
+    top: var(--spacing-x-base);
+    right: var(--spacing-x-base);
+    padding: var(--spacing-base-xx-tight);
+    background: var(--color-white);
+    border: 1px solid var(--color-grey-light);
+    border-radius: 1.25rem;
+  }
 }

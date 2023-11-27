@@ -1903,6 +1903,10 @@
     "defaultMessage": "reset your login password",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "w7W92K": {
+    "defaultMessage": "Why am I seeing this ad?",
+    "description": "src/components/Billboard/index.tsx"
+  },
   "wCgTu5": {
     "defaultMessage": "Comments"
   },
