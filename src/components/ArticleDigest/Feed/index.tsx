@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
@@ -9,6 +9,7 @@ import {
   LinkWrapper,
   Media,
   ResponsiveImage,
+  useIsomorphicLayoutEffect,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
@@ -60,20 +61,15 @@ const BaseArticleDigestFeed = ({
 }: ArticleDigestFeedProps) => {
   const titleRef: React.RefObject<any> = useRef(null)
 
-  const [height, setHeight] = useState(0)
   const [titleLine, setTitleLine] = useState(2)
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (titleRef && titleRef.current) {
-      setHeight(titleRef.current.clientHeight)
+      if (titleRef.current.clientHeight === 24) {
+        setTitleLine(1)
+      }
     }
   }, [])
-
-  useEffect(() => {
-    if (height === 24) {
-      setTitleLine(1)
-    }
-  }, [height])
 
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
