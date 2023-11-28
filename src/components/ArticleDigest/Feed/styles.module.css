@@ -43,7 +43,7 @@
     -webkit-line-clamp: 2;
   }
 
-  &.hasCover {
+  &.minHeight {
     min-height: 2.75rem;
   }
 }
