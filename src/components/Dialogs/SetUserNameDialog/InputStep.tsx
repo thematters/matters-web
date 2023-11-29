@@ -10,7 +10,7 @@ import {
   MIN_USER_NAME_LENGTH,
 } from '~/common/enums'
 import { normalizeUserName, validateUserName } from '~/common/utils'
-import { DialogBeta, Form, LanguageContext, ViewerContext } from '~/components'
+import { Dialog, Form, LanguageContext, ViewerContext } from '~/components'
 
 import Field from '../../Form/Field'
 import { QUERY_USER_NAME } from './gql'
@@ -154,7 +154,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   )
 
   const SubmitButton = (
-    <DialogBeta.TextButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={
@@ -170,7 +170,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
 
   return (
     <>
-      <DialogBeta.Header
+      <Dialog.Header
         title={
           isLegacyUserConfirm ? (
             <FormattedMessage
@@ -187,8 +187,8 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           )
         }
       />
-      <DialogBeta.Content>
-        <DialogBeta.Content.Message spacingBottom>
+      <Dialog.Content>
+        <Dialog.Content.Message spacingBottom>
           <p>
             {isLegacyUserConfirm ? (
               <FormattedMessage
@@ -204,14 +204,14 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
               />
             )}
           </p>
-        </DialogBeta.Content.Message>
+        </Dialog.Content.Message>
         {InnerForm}
-      </DialogBeta.Content>
+      </Dialog.Content>
 
-      <DialogBeta.Footer
+      <Dialog.Footer
         btns={
           <>
-            <DialogBeta.RoundedButton
+            <Dialog.RoundedButton
               type="submit"
               color="green"
               form={formId}
