@@ -2,6 +2,7 @@ html {
   @mixin font-sans;
 
   height: 100%;
+  overflow-y: scroll;
   font-size: var(--sizing-root);
   font-weight: var(--font-weight-base);
   line-height: var(--line-height-base);
