@@ -9,8 +9,8 @@
   }
 
   & p {
-    font-size: var(--font-size-md-s);
-    line-height: 1.5rem;
+    font-size: var(--font-size-sm);
+    line-height: 1.375rem;
     color: var(--color-grey-dark);
   }
 
@@ -68,4 +68,8 @@
   @media (--sm-up) {
     text-align: left;
   }
+}
+
+.spacingBottom {
+  padding-bottom: var(--spacing-base);
 }

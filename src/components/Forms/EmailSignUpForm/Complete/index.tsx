@@ -62,7 +62,7 @@ const Complete = ({
       )}
 
       <section className={containerClasses}>
-        <Dialog.Message noSpacing={isInPage}>
+        <Dialog.Message>
           <h2>
             <FormattedMessage
               defaultMessage="Welcome to Matters!"

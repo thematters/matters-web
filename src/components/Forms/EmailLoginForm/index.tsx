@@ -28,7 +28,7 @@ import {
   AuthNormalFeed,
   AuthTabs,
   AuthWalletFeed,
-  DialogBeta,
+  Dialog,
   Form,
   IconLeft20,
   LanguageContext,
@@ -362,7 +362,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <DialogBeta.TextButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={!values.email || !values.password || isSubmitting}
@@ -383,11 +383,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   return (
     <>
       {!isSelectMethod && (
-        <DialogBeta.Header
+        <Dialog.Header
           title={<FormattedMessage defaultMessage="Sign In" id="Ub+AGc" />}
           hasSmUpTitle={false}
           leftBtn={
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               color="greyDarker"
               onClick={() => {
@@ -400,7 +400,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
       )}
 
-      <DialogBeta.Content noMaxHeight={isInPage}>
+      <Dialog.Content noMaxHeight={isInPage}>
         <Media at="sm">
           {isSelectMethod && (
             <AuthTabs
@@ -425,13 +425,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           />
         )}
         {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
-      </DialogBeta.Content>
+      </Dialog.Content>
 
       {isNormal && !isSelectMethod && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
             <section className={styles.footerBtns}>
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={
                   <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
                     <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
@@ -448,9 +448,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
       )}
       {((isNormal && isSelectMethod) || isWallet) && !isInPage && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               color="greyDarker"
               text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               onClick={closeDialog}

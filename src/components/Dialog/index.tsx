@@ -17,7 +17,6 @@ import Handle from './Handle'
 import Header from './Header'
 import Lazy from './Lazy'
 import Message from './Message'
-import Overlay from './Overlay'
 import styles from './styles.module.css'
 
 export interface DialogOverlayProps {
@@ -34,6 +33,7 @@ export type DialogProps = {
   hidePaddingBottom?: boolean
 
   testId?: string
+  scrollable?: boolean
 } & DialogOverlayProps
 
 const Container: React.FC<
@@ -121,11 +121,11 @@ const Container: React.FC<
         <button type="button" ref={initialFocusRef} aria-hidden="true" />
       </VisuallyHidden>
 
-      {children}
-
       <Media at="sm">
         {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}
       </Media>
+
+      {children}
     </div>
   )
 }
@@ -136,12 +136,12 @@ export const Dialog: React.ComponentType<
   Header: typeof Header
   Content: typeof Content
   Footer: typeof Footer
-  Message: typeof Message
   TextButton: typeof TextButton
+  Message: typeof Message
   RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
-  const { isOpen, onRest } = props
+  const { isOpen, onRest, scrollable } = props
   const [mounted, setMounted] = useState(isOpen)
   const initialFocusRef = useRef<any>(null)
 
@@ -177,9 +177,14 @@ export const Dialog: React.ComponentType<
     }
   })
 
+  const dialogOverlayClasses = classNames({
+    dialog: true,
+    [styles.scrollable]: !!scrollable,
+    [styles.overlay]: !!mounted,
+  })
+
   const AnimatedDialogOverlay = animated(DialogOverlay)
   const AnimatedContainer = animated(Container)
-  const AnimatedOverlay = animated(Overlay)
 
   if (!mounted) {
     return null
@@ -188,11 +193,10 @@ export const Dialog: React.ComponentType<
   return (
     <>
       <AnimatedDialogOverlay
-        className="dialog"
+        className={dialogOverlayClasses}
         initialFocusRef={initialFocusRef}
+        style={{ opacity: opacity as any }}
       >
-        <AnimatedOverlay style={{ opacity: opacity as any }} />
-
         <DialogContent aria-labelledby="dialog-title">
           <AnimatedContainer
             style={{ opacity: opacity as any, top }}
@@ -208,8 +212,8 @@ export const Dialog: React.ComponentType<
 
 Dialog.Header = Header
 Dialog.Content = Content
-Dialog.Footer = Footer
 Dialog.Message = Message
+Dialog.Footer = Footer
 Dialog.TextButton = TextButton
 Dialog.RoundedButton = RoundedButton
 Dialog.Lazy = Lazy
