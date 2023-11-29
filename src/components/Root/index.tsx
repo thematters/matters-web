@@ -72,13 +72,6 @@ const Root = ({
 }) => {
   const { getQuery, isInPath } = useRoute()
 
-  const isInFeed =
-    isInPath('HOME') ||
-    isInPath('FOLLOW') ||
-    isInPath('ME_NOTIFICATIONS') ||
-    isInPath('USER_ARTICLES') ||
-    isInPath('USER_COLLECTIONS') ||
-    isInPath('USER_COLLECTION_DETAIL')
   const isInAbout = isInPath('ABOUT')
   const isInMigration = isInPath('MIGRATION')
   const isInAuthCallback = isInPath('CALLBACK_PROVIDER')
@@ -129,7 +122,6 @@ const Root = ({
                 <DynamicGlobalToasts />
                 <DynamicProgressBar />
                 <DynamicFingerprint />
-                {isInFeed && <style>{'html { overflow: scroll; }'}</style>}
               </TranslationsProvider>
             </MediaContextProvider>
           </FeaturesProvider>
