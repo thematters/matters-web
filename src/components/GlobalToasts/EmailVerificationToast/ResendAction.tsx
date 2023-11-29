@@ -26,10 +26,7 @@ const ResendAction = ({ initCountdown }: Props) => {
 
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
-    undefined,
-    {
-      showToast: false,
-    }
+    undefined
   )
 
   useEffect(() => {
