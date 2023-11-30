@@ -13,12 +13,22 @@ const PageViewTracker = () => {
   const router = useRouter()
   const referrer = useRef('')
 
+  // identify views from browser or pwa
+  const detectMode = () => {
+    const navigator = window?.navigator as any
+    const media = '(display-mode: standalone)'
+    return navigator?.standalone || window?.matchMedia(media).matches
+      ? 'standalone'
+      : 'browser'
+  }
+
   // first load
   useEffect(() => {
     // add time out to wait for analytic listener to be ready
     setTimeout(() => {
+      const mode = detectMode()
       analytics.identifyUser()
-      analytics.trackPage()
+      analytics.trackPage('page_view', { mode })
     }, 1000)
 
     referrer.current = getPageReferrer() // window.location.origin + window.location.pathname
@@ -27,7 +37,11 @@ const PageViewTracker = () => {
   // subsequent changes
   useEffect(() => {
     const trackPage = () => {
-      analytics.trackPage('page_view', { page_referrer: referrer.current })
+      const mode = detectMode()
+      analytics.trackPage('page_view', {
+        page_referrer: referrer.current,
+        mode,
+      })
       referrer.current = getPageReferrer() // window.location.origin + window.location.pathname
     }
 
