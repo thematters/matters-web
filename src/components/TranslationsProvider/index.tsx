@@ -49,6 +49,10 @@ export const TranslationsProvider = ({
         <IntlProvider
           locale={toLocale(ssrLang)}
           messages={ssrLang != lang ? messages : ssrMessages}
+          defaultRichTextElements={{
+            b: (chunks) => <b>{chunks}</b>,
+            br: () => <br />,
+          }}
         >
           {children}
         </IntlProvider>

@@ -1,4 +1,5 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
+import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
 import { TextId } from '~/common/enums'
@@ -9,6 +10,7 @@ import styles from './styles.module.css'
 
 export interface HeaderProps {
   title: TextId | React.ReactNode
+  titleLeft?: boolean
   hasSmUpTitle?: boolean
 
   leftBtn?: React.ReactNode
@@ -18,14 +20,24 @@ export interface HeaderProps {
   closeDialog?: () => any
 }
 
-const Title = ({ title }: Pick<HeaderProps, 'title'>) => (
-  <h1 id="dialog-title" className={styles.title}>
+const Title = ({
+  title,
+  titleLeft,
+}: Pick<HeaderProps, 'title' | 'titleLeft'>) => (
+  <h1
+    id="dialog-title"
+    className={classNames({
+      [styles.titleCenter]: !titleLeft,
+      [styles.title]: true,
+    })}
+  >
     {typeof title === 'string' ? <Translate id={title as TextId} /> : title}
   </h1>
 )
 
 const Header: React.FC<HeaderProps> = ({
   title,
+  titleLeft,
   hasSmUpTitle = true,
   leftBtn,
   rightBtn,
@@ -40,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({
     <>
       <Media at="sm">
         <header className={styles.header}>
-          <Title title={title} />
+          <Title title={title} titleLeft={titleLeft} />
           {leftBtn && <section className={styles.left}>{leftBtn}</section>}
           {!leftBtn && closeDialog && (
             <section className={styles.left}>
