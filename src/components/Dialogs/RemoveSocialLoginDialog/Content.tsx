@@ -2,7 +2,7 @@ import _pickBy from 'lodash/pickBy'
 import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { DialogBeta, toast, useMutation } from '~/components'
+import { Dialog, toast, useMutation } from '~/components'
 import { RemoveSocialLoginMutation, SocialAccountType } from '~/gql/graphql'
 
 import { REMOVE_SOCIAL_LOGIN } from './gql'
@@ -60,7 +60,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
 
   return (
     <>
-      <DialogBeta.Header
+      <Dialog.Header
         title={
           <FormattedMessage
             defaultMessage="Disconnect from {type}"
@@ -72,8 +72,8 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           />
         }
       />
-      <DialogBeta.Content>
-        <DialogBeta.Content.Message>
+      <Dialog.Content>
+        <Dialog.Content.Message>
           <p>
             {isConfirm && (
               <FormattedMessage
@@ -96,14 +96,14 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
               />
             )}
           </p>
-        </DialogBeta.Content.Message>
-      </DialogBeta.Content>
+        </Dialog.Content.Message>
+      </Dialog.Content>
 
       {isConfirm && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           btns={
             <>
-              <DialogBeta.RoundedButton
+              <Dialog.RoundedButton
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
@@ -114,7 +114,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
                 loading={loading}
                 onClick={remove}
               />
-              <DialogBeta.RoundedButton
+              <Dialog.RoundedButton
                 text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
@@ -123,12 +123,12 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           }
           smUpBtns={
             <>
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
@@ -145,10 +145,10 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
       )}
 
       {isFailure && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           btns={
             <>
-              <DialogBeta.RoundedButton
+              <Dialog.RoundedButton
                 text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
@@ -157,7 +157,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           }
           smUpBtns={
             <>
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
