@@ -65,11 +65,17 @@
   }
 
   & .description {
-    /* @mixin line-clamp; */
-
     flex-grow: 1;
+    overflow: hidden;
     font-size: var(--font-size-xs);
     line-height: 1.125rem;
     color: var(--color-grey);
+
+    &.lineClamp {
+      @mixin line-clamp;
+
+      max-height: calc(1.125rem * var(--desc-lines));
+      -webkit-line-clamp: var(--desc-lines);
+    }
   }
 }
