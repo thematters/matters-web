@@ -3,6 +3,9 @@
     "defaultMessage": "Please verify email first",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
+  "+56XIp": {
+    "defaultMessage": "LV1 Moonlight Dream"
+  },
   "+63O1f": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_PASSWORD_INVALID"
@@ -52,6 +55,9 @@
   "/TXBJR": {
     "defaultMessage": "Unknown error. Please try again later.",
     "description": "UNKNOWN_ERROR"
+  },
+  "/faseS": {
+    "defaultMessage": "Share link copied"
   },
   "/jJLYy": {
     "defaultMessage": "Transactions"
@@ -323,6 +329,9 @@
     "defaultMessage": "Are you sure you want to delete draft?",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
+  "7ZXP9S": {
+    "defaultMessage": "LV2 Meteor Canoe"
+  },
   "7cwoRo": {
     "defaultMessage": "The author has disabled comments for this article"
   },
@@ -541,6 +550,10 @@
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "DdVBFV": {
+    "defaultMessage": "Wings have sprouted on the badge, and the halo of dreams is beginning to spin. You have gathered 10 companions on the Nomad's path. Invite another 10 fellow travelers to move towards the final destination together, where the highest level of honor awaits you.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "Dq29Hb": {
     "defaultMessage": "You have not connected your email yet. For security, email is required for top-up.",
     "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
@@ -608,6 +621,9 @@
   "Ft76YC": {
     "defaultMessage": "Collection is deleted",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
+  "FuU2MU": {
+    "defaultMessage": "LV4 Firebolt"
   },
   "FxrSCh": {
     "defaultMessage": "This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?",
@@ -1215,6 +1231,10 @@
     "defaultMessage": "Start writing",
     "description": "src/components/Buttons/StartWriting/index.tsx"
   },
+  "Z31Fz+": {
+    "defaultMessage": "Under the moonlight, your dreams are about to come true. The Moonlight Dream badge glorifies your initial participation in the Nomad Matters. To reach the next level, invite 5 friends to join the journey with you. <a>Click here in the last paragraph to find out how to invite new companions</a>",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "ZAs170": {
     "defaultMessage": "Profile",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -1309,6 +1329,10 @@
   "cO0im6": {
     "defaultMessage": "Featured",
     "description": "src/components/Comment/PinnedLabel/index.tsx"
+  },
+  "cQ+Lyq": {
+    "defaultMessage": "Nomad Matters Badge",
+    "description": "src/views/User/UserProfile/Badges/index.tsx"
   },
   "cQYXjl": {
     "defaultMessage": "Currency",
@@ -1459,6 +1483,10 @@
   "hv1iYZ": {
     "defaultMessage": "Number of readers",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
+  "iIa+u8": {
+    "defaultMessage": "Badge Name",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "icdrwy": {
     "defaultMessage": "Followed You",
@@ -1660,6 +1688,10 @@
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "p0oPHP": {
+    "defaultMessage": "Breaking through history! The torch you've ignited will be the most dazzling support on the Nomad's journey. Congratulations on reaching the final destination of the Nomad Matters with 20 friends and earning the highest-level Firebolt badge.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "p5qZnJ": {
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
@@ -1704,6 +1736,10 @@
   "qPqap+": {
     "defaultMessage": "Archived",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
+  },
+  "qTjjF0": {
+    "defaultMessage": "The dazzling light of a meteor shower is there to illuminate the night sky. Congratulations on having invited 5 companions to participate in Nomad Matters. Invite 5 more to level up, the more the merrier!",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "qVhxp5": {
     "defaultMessage": "Enter",
@@ -1770,6 +1806,9 @@
   "s5JCCO": {
     "defaultMessage": "This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
+  "sLiIAz": {
+    "defaultMessage": "LV3 Nimbus Ferry"
   },
   "sPgUkN": {
     "defaultMessage": "This Month",
