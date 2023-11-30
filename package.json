@@ -2,12 +2,12 @@
   "name": "matters-web",
   "version": "4.28.0",
   "description": "codebase of Matters' website",
-  "sideEffects": false,
   "author": "Matters <hi@matters.town>",
   "engines": {
     "node": ">=16.14 <17.0"
   },
   "license": "Apache-2.0",
+  "sideEffects": false,
   "scripts": {
     "dev": "PORT=\"${PORT:-3000}\"; next -p $PORT",
     "test": "npm run test:unit && npm run test:e2e",
@@ -51,6 +51,7 @@
     "@reach/dialog": "^0.18.0",
     "@reach/visually-hidden": "^0.18.0",
     "@sentry/browser": "^7.57.0",
+    "@storybook/addon-styling-webpack": "^0.0.5",
     "@stripe/react-stripe-js": "^2.1.1",
     "@stripe/stripe-js": "^1.54.1",
     "@tippyjs/react": "^4.2.6",
