@@ -24,7 +24,7 @@ describe('<CollectionDigestFeed>', () => {
     expect(mockRouter.asPath).toContain(MOCK_COLLECTON.id)
     expect(handleClick).toBeCalledTimes(1)
 
-    const $heading = screen.getByRole('link', { name: MOCK_COLLECTON.title })
+    const $heading = screen.getByTestId(TEST_ID.BOOK_TITLE)
     expect($heading).toBeInTheDocument()
     mockRouter.push('/')
     $heading.click()
