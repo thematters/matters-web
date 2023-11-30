@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useDisconnect } from 'wagmi'
 
-import { DialogBeta, toast, useMutation } from '~/components'
+import { Dialog, toast, useMutation } from '~/components'
 import { RemoveWalletLoginMutation } from '~/gql/graphql'
 
 import { REMOVE_WALLET_LOGIN } from './gql'
@@ -50,7 +50,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
 
   return (
     <>
-      <DialogBeta.Header
+      <Dialog.Header
         title={
           <FormattedMessage
             defaultMessage="Disconnect wallet"
@@ -60,8 +60,8 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
         }
       />
 
-      <DialogBeta.Content>
-        <DialogBeta.Content.Message>
+      <Dialog.Content>
+        <Dialog.Content.Message>
           <p>
             {isConfirm && (
               <FormattedMessage
@@ -78,14 +78,14 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
               />
             )}
           </p>
-        </DialogBeta.Content.Message>
-      </DialogBeta.Content>
+        </Dialog.Content.Message>
+      </Dialog.Content>
 
       {isConfirm && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           btns={
             <>
-              <DialogBeta.RoundedButton
+              <Dialog.RoundedButton
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
@@ -96,7 +96,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
                 loading={loading}
                 onClick={remove}
               />
-              <DialogBeta.RoundedButton
+              <Dialog.RoundedButton
                 text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
@@ -105,12 +105,12 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           }
           smUpBtns={
             <>
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
                 color="greyDarker"
                 onClick={closeDialog}
               />
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={
                   <FormattedMessage
                     defaultMessage="Disconnect"
@@ -127,10 +127,10 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
       )}
 
       {isFailure && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           btns={
             <>
-              <DialogBeta.RoundedButton
+              <Dialog.RoundedButton
                 text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
@@ -139,7 +139,7 @@ const RemoveWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           }
           smUpBtns={
             <>
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}

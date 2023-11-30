@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { Dialog, DialogBeta, Layout, Translate, useRoute } from '~/components'
+import { Dialog, Layout, Translate, useRoute } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -23,7 +23,7 @@ export const VerificationLinkSent = ({
   if (isRegister) {
     return (
       <>
-        <DialogBeta.Header
+        <Dialog.Header
           title={
             <FormattedMessage
               defaultMessage="Check your inbox"
@@ -35,8 +35,8 @@ export const VerificationLinkSent = ({
           closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         />
 
-        <DialogBeta.Content>
-          <DialogBeta.Content.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message>
             <p>
               <FormattedMessage
                 defaultMessage="The login link has been sent to {email}"
@@ -47,13 +47,13 @@ export const VerificationLinkSent = ({
                 }}
               />
             </p>
-          </DialogBeta.Content.Message>
-        </DialogBeta.Content>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         {closeDialog && (
-          <DialogBeta.Footer
+          <Dialog.Footer
             smUpBtns={
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={closeDialog}
@@ -63,9 +63,9 @@ export const VerificationLinkSent = ({
         )}
 
         {isInPage && (
-          <DialogBeta.Footer
+          <Dialog.Footer
             btns={
-              <DialogBeta.RoundedButton
+              <Dialog.RoundedButton
                 text={
                   <FormattedMessage
                     defaultMessage="Enter Matters"
@@ -76,7 +76,7 @@ export const VerificationLinkSent = ({
               />
             }
             smUpBtns={
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={
                   <FormattedMessage
                     defaultMessage="Enter Matters"
