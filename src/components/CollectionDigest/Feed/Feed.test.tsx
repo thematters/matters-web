@@ -17,7 +17,7 @@ describe('<CollectionDigestFeed>', () => {
     const $digest = screen.getByTestId(TEST_ID.DIGEST_COLLECTION_FEED)
     expect($digest).toBeInTheDocument()
 
-    const $book = screen.getByTestId(TEST_ID.BOOK)
+    const $book = screen.getByTestId(TEST_ID.BOOK_COLLECTION)
     expect($book).toBeInTheDocument()
     mockRouter.push('/')
     $book.click()
