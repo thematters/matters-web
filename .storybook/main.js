@@ -1,8 +1,11 @@
-const tsconfig = require('../tsconfig.json')
 const path = require('path')
-const { mergeWithCustomize } = require('webpack-merge')
+const postcssOptions = require('../postcss.config.json')
 
 module.exports = {
+  framework: {
+    name: '@storybook/nextjs',
+    options: {},
+  },
   stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-links',
@@ -10,17 +13,31 @@ module.exports = {
     '@storybook/addon-a11y',
     '@storybook/addon-mdx-gfm',
     {
-      name: '@storybook/addon-styling',
+      name: '@storybook/addon-styling-webpack',
       options: {
-        postCss: true,
-        cssModules: true,
+        rules: [
+          {
+            test: /\.css$/,
+            sideEffects: true,
+            use: [
+              require.resolve('style-loader'),
+              {
+                loader: require.resolve('css-loader'),
+                options: { importLoaders: 1 },
+              },
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  implementation: require.resolve('postcss'),
+                  postcssOptions,
+                },
+              },
+            ],
+          },
+        ],
       },
     },
   ],
-  framework: {
-    name: '@storybook/nextjs',
-    options: {},
-  },
 
   webpackFinal: async (config) => {
     // this modifies the existing image rule to exclude .svg files
