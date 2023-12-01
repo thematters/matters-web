@@ -119,15 +119,17 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Message>
-        <p>
-          <FormattedMessage
-            defaultMessage="Friends will receive free trial invitations to Circle. Set up your invitations now!"
-            id="O0QB1v"
-            description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
-          />
-        </p>
-      </Dialog.Message>
+      <Dialog.Content>
+        <Dialog.Content.Message>
+          <p>
+            <FormattedMessage
+              defaultMessage="Friends will receive free trial invitations to Circle. Set up your invitations now!"
+              id="O0QB1v"
+              description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
+            />
+          </p>
+        </Dialog.Content.Message>
+      </Dialog.Content>
 
       <Dialog.Content>
         <List hasBorder={false}>

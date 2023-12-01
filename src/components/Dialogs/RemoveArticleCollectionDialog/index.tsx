@@ -79,18 +79,20 @@ const BaseRemoveArticleCollectionDialog = ({
           }
         />
 
-        <Dialog.Message>
-          <p>
-            <FormattedMessage
-              defaultMessage="Are you sure you want to remove ‘{article}’ from this collection?"
-              id="+cS08C"
-              values={{
-                article: <span className="u-highlight">{articleTitle}</span>,
-              }}
-              description="src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
-            />
-          </p>
-        </Dialog.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message>
+            <p>
+              <FormattedMessage
+                defaultMessage="Are you sure you want to remove ‘{article}’ from this collection?"
+                id="+cS08C"
+                values={{
+                  article: <span className="u-highlight">{articleTitle}</span>,
+                }}
+                description="src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+              />
+            </p>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer
           closeDialog={closeDialog}

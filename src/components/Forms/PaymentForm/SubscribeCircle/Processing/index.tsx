@@ -40,19 +40,21 @@ const Processing: React.FC<Props> = ({ circleName, nextStep }) => {
   }, [isMember])
 
   return (
-    <Dialog.Message
-      align="center"
-      smUpAlign="center"
-      type={error ? 'error' : undefined}
-    >
-      {error ? (
-        <h3>
-          <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.NETWORK_ERROR]} />
-        </h3>
-      ) : (
-        <Spinner />
-      )}
-    </Dialog.Message>
+    <Dialog.Content>
+      <Dialog.Content.Message
+        align="center"
+        smUpAlign="center"
+        type={error ? 'error' : undefined}
+      >
+        {error ? (
+          <h3>
+            <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.NETWORK_ERROR]} />
+          </h3>
+        ) : (
+          <Spinner />
+        )}
+      </Dialog.Content.Message>
+    </Dialog.Content>
   )
 }
 

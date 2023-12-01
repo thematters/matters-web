@@ -106,21 +106,23 @@ export const VerificationLinkSent = ({
         />
       )}
 
-      <Dialog.Message>
-        <p>
-          <Translate
-            zh_hant="我們已將驗證連結寄出 📩"
-            zh_hans="我们已将验证链接寄出 📩"
-            en="We have sent verification link to you 📩"
-          />
-          <br />
-          <Translate
-            zh_hant="連結有效期 20 分鐘，快去電子信箱看看吧！"
-            zh_hans="连结有效期 20 分钟，快去邮箱看看吧！"
-            en="Link is valid for 20 minutes. Let's check your inbox!"
-          />
-        </p>
-      </Dialog.Message>
+      <Dialog.Content>
+        <Dialog.Content.Message>
+          <p>
+            <Translate
+              zh_hant="我們已將驗證連結寄出 📩"
+              zh_hans="我们已将验证链接寄出 📩"
+              en="We have sent verification link to you 📩"
+            />
+            <br />
+            <Translate
+              zh_hant="連結有效期 20 分鐘，快去電子信箱看看吧！"
+              zh_hans="连结有效期 20 分钟，快去邮箱看看吧！"
+              en="Link is valid for 20 minutes. Let's check your inbox!"
+            />
+          </p>
+        </Dialog.Content.Message>
+      </Dialog.Content>
 
       {closeDialog && (
         <Dialog.Footer

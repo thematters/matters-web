@@ -107,29 +107,31 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
     setIsValid(isValid && values.paymentPointer !== defaultPaymentPointer)
 
   return (
-    <Dialog.Message align="left" smUpAlign="left">
-      <Explainer />
+    <Dialog.Content>
+      <Dialog.Content.Message align="left" smUpAlign="left">
+        <Explainer />
 
-      <Form id={formId} onSubmit={handleSubmit}>
-        <Form.Input
-          type="text"
-          name="paymentPointer"
-          required
-          placeholder={translate({
-            id: 'enterPaymentPointer',
-            lang,
-          })}
-          value={values.paymentPointer}
-          error={touched.paymentPointer && errors.paymentPointer}
-          onBlur={handleBlur}
-          onChange={(e) => {
-            handleChange(e)
-            updateValidity()
-          }}
-          spacingTop="base"
-        />
-      </Form>
-    </Dialog.Message>
+        <Form id={formId} onSubmit={handleSubmit}>
+          <Form.Input
+            type="text"
+            name="paymentPointer"
+            required
+            placeholder={translate({
+              id: 'enterPaymentPointer',
+              lang,
+            })}
+            value={values.paymentPointer}
+            error={touched.paymentPointer && errors.paymentPointer}
+            onBlur={handleBlur}
+            onChange={(e) => {
+              handleChange(e)
+              updateValidity()
+            }}
+            spacingTop="base"
+          />
+        </Form>
+      </Dialog.Content.Message>
+    </Dialog.Content>
   )
 }
 

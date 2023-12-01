@@ -30,15 +30,19 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
           />
         }
       />
-      <Dialog.Message>
-        <p>
-          <FormattedMessage
-            defaultMessage="You have not connected your email yet. For security, email is required for top-up."
-            id="Dq29Hb"
-            description="src/components/Dialogs/BindEmailHintDialog/index.tsx"
-          />
-        </p>
-      </Dialog.Message>
+
+      <Dialog.Content>
+        <Dialog.Content.Message>
+          <p>
+            <FormattedMessage
+              defaultMessage="You have not connected your email yet. For security, email is required for top-up."
+              id="Dq29Hb"
+              description="src/components/Dialogs/BindEmailHintDialog/index.tsx"
+            />
+          </p>
+        </Dialog.Content.Message>
+      </Dialog.Content>
+
       <Dialog.Footer
         btns={
           <>

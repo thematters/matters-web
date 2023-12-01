@@ -187,6 +187,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           )
         }
       />
+
       <Dialog.Content>
         <Dialog.Content.Message spacingBottom>
           <p>

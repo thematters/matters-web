@@ -91,18 +91,20 @@ const DeleteCommentDialog = ({
           }
         />
 
-        <Dialog.Message>
-          <p>
-            <FormattedMessage
-              defaultMessage="After deletion, the {commentType} will be removed immediately"
-              id="77tYPg"
-              description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
-              values={{
-                commentType: COMMENT_TYPE_TEXT[lang][type],
-              }}
-            />
-          </p>
-        </Dialog.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message>
+            <p>
+              <FormattedMessage
+                defaultMessage="After deletion, the {commentType} will be removed immediately"
+                id="77tYPg"
+                description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+                values={{
+                  commentType: COMMENT_TYPE_TEXT[lang][type],
+                }}
+              />
+            </p>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer
           closeDialog={closeDialog}
