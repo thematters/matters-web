@@ -30,15 +30,17 @@ const MigrationDialogSuccess = () => {
 
   return (
     <>
-      <Dialog.Message>
-        <p>
-          <Translate
-            zh_hant={zh_hant.content}
-            zh_hans={zh_hans.content}
-            en={en.content}
-          />
-        </p>
-      </Dialog.Message>
+      <Dialog.Content>
+        <Dialog.Content.Message>
+          <p>
+            <Translate
+              zh_hant={zh_hant.content}
+              zh_hans={zh_hans.content}
+              en={en.content}
+            />
+          </p>
+        </Dialog.Content.Message>
+      </Dialog.Content>
 
       <Dialog.Footer
         btns={

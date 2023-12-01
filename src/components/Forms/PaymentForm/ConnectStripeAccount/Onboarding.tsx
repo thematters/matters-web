@@ -53,33 +53,35 @@ const Onboarding: React.FC<Props> = ({ nextStep }) => {
   }
 
   return (
-    <Dialog.Message
-      align="center"
-      smUpAlign="center"
-      type={error ? 'error' : undefined}
-    >
-      {error ? (
-        <h3>
-          <Translate
-            zh_hant="哎呀，創建失敗了。"
-            zh_hans="哎呀，创建失败了。"
-            en="Oops, failed to create account."
-          />
-        </h3>
-      ) : (
-        <>
-          <Spinner />
-
-          <p>
+    <Dialog.Content>
+      <Dialog.Content.Message
+        align="center"
+        smUpAlign="center"
+        type={error ? 'error' : undefined}
+      >
+        {error ? (
+          <h3>
             <Translate
-              zh_hant="請在新頁面完成 Stripe 帳戶創建，不要關閉本窗口"
-              zh_hans="请在新页面完成 Stripe 帐户创建，不要关闭本窗口"
-              en="Please create Stripe account on a new page. Do not close this page."
+              zh_hant="哎呀，創建失敗了。"
+              zh_hans="哎呀，创建失败了。"
+              en="Oops, failed to create account."
             />
-          </p>
-        </>
-      )}
-    </Dialog.Message>
+          </h3>
+        ) : (
+          <>
+            <Spinner />
+
+            <p>
+              <Translate
+                zh_hant="請在新頁面完成 Stripe 帳戶創建，不要關閉本窗口"
+                zh_hans="请在新页面完成 Stripe 帐户创建，不要关闭本窗口"
+                en="Please create Stripe account on a new page. Do not close this page."
+              />
+            </p>
+          </>
+        )}
+      </Dialog.Content.Message>
+    </Dialog.Content>
   )
 }
 

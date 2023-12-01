@@ -124,11 +124,13 @@ const MigrationDialogUpload = ({
 
   return (
     <>
-      <Dialog.Message>
-        <p>
-          <Translate zh_hant={zh_hant.content} zh_hans={zh_hans.content} />
-        </p>
-      </Dialog.Message>
+      <Dialog.Content>
+        <Dialog.Content.Message>
+          <p>
+            <Translate zh_hant={zh_hant.content} zh_hans={zh_hans.content} />
+          </p>
+        </Dialog.Content.Message>
+      </Dialog.Content>
 
       <label>
         <Dialog.Footer
