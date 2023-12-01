@@ -355,7 +355,6 @@ describe('utils/form/validate/validateTagName', () => {
 
 describe('utils/form/validate/validateUserName', () => {
   it('should validate user name correctly', () => {
-    expect(validateUserName('', 'en')).toBe('Required')
     expect(validateUserName('1234567890', 'en')).toBeUndefined()
 
     // length

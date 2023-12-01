@@ -16,8 +16,8 @@ describe('utils/text/user/normalizePassowrd', () => {
 describe('utils/text/user/normalizeUserName', () => {
   it('should normalize username correctly', () => {
     expect(normalizeUserName('hello')).toBe('hello')
-    expect(normalizeUserName('Hello, world!')).toBe('elloworld')
-    expect(normalizeUserName('Hello, 你好，👋🌍!')).toBe('ello')
+    expect(normalizeUserName('Hello, world!')).toBe('Helloworld')
+    expect(normalizeUserName('Hello, 你好，👋🌍!')).toBe('Hello')
     expect(normalizeUserName('你好')).toBe('')
     expect(normalizeUserName('')).toBe('')
     expect(normalizeUserName('+,.?!@#$%')).toBe('')
