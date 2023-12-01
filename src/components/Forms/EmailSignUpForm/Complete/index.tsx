@@ -62,39 +62,41 @@ const Complete = ({
       )}
 
       <section className={containerClasses}>
-        <Dialog.Message>
-          <h2>
-            <FormattedMessage
-              defaultMessage="Welcome to Matters!"
-              id="XH0Lb6"
-              description="src/components/Forms/EmailSignUpForm/Complete.tsx"
-            />
-          </h2>
+        <Dialog.Content>
+          <Dialog.Content.Message>
+            <h2>
+              <FormattedMessage
+                defaultMessage="Welcome to Matters!"
+                id="XH0Lb6"
+                description="src/components/Forms/EmailSignUpForm/Complete.tsx"
+              />
+            </h2>
 
-          <p>
-            <FormattedMessage
-              defaultMessage="Now, go like the authors you support! Your Likes will become their income"
-              id="stjoBH"
-              description="src/components/Forms/EmailSignUpForm/Complete.tsx"
-            />
-          </p>
+            <p>
+              <FormattedMessage
+                defaultMessage="Now, go like the authors you support! Your Likes will become their income"
+                id="stjoBH"
+                description="src/components/Forms/EmailSignUpForm/Complete.tsx"
+              />
+            </p>
 
-          <p>
-            <FormattedMessage
-              defaultMessage="You have created your personal creative space. Publish your first work!"
-              id="reOeq5"
-              description="src/components/Forms/EmailSignUpForm/Complete.tsx"
-            />
-          </p>
+            <p>
+              <FormattedMessage
+                defaultMessage="You have created your personal creative space. Publish your first work!"
+                id="reOeq5"
+                description="src/components/Forms/EmailSignUpForm/Complete.tsx"
+              />
+            </p>
 
-          <p>
-            <FormattedMessage
-              defaultMessage="Start creating now!"
-              id="ANhCde"
-              description="src/components/Forms/EmailSignUpForm/Complete.tsx"
-            />
-          </p>
-        </Dialog.Message>
+            <p>
+              <FormattedMessage
+                defaultMessage="Start creating now!"
+                id="ANhCde"
+                description="src/components/Forms/EmailSignUpForm/Complete.tsx"
+              />
+            </p>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer smUpBtns={<EnterButton />} />
       </section>

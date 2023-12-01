@@ -72,6 +72,7 @@ const RemoveSocailLoginDialogContent: React.FC<Props> = ({
           />
         }
       />
+
       <Dialog.Content>
         <Dialog.Content.Message>
           <p>

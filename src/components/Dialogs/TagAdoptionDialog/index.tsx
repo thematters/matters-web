@@ -59,11 +59,17 @@ const BaseDialog = ({ id, children }: Props) => {
           }
         />
 
-        <Dialog.Message>
-          <p>
-            <Translate zh_hant={textZhHant} zh_hans={textZhHans} en={textEn} />
-          </p>
-        </Dialog.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message>
+            <p>
+              <Translate
+                zh_hant={textZhHant}
+                zh_hans={textZhHans}
+                en={textEn}
+              />
+            </p>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer
           closeDialog={closeDialog}

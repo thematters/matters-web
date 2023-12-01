@@ -16,13 +16,13 @@ interface DialogMessageProps {
  * Usage:
  *
  * ```jsx
- *   <Dialog.Message>
+ *   <Dialog.Content.Message>
  *     <p>grey text</p>
- *   </Dialog.Message>
+ *   </Dialog.Content.Message>
  *
- *   <Dialog.Message>
+ *   <Dialog.Content.Message>
  *     <h3>bold text</h3>
- *   </Dialog.Message>
+ *   </Dialog.Content.Message>
  * ```
  *
  */

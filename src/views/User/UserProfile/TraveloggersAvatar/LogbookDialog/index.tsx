@@ -44,21 +44,23 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
           closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         />
 
-        <Dialog.Message>
-          <p>
-            <Translate id="logbook2LaunchText" />
-            &nbsp;
-            <a
-              className="u-link-green"
-              href={process.env.NEXT_PUBLIC_LOGBOOKS_URL}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Translate en="link" zh_hant="鏈接" zh_hans="链接" />
-            </a>
-            .
-          </p>
-        </Dialog.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message>
+            <p>
+              <Translate id="logbook2LaunchText" />
+              &nbsp;
+              <a
+                className="u-link-green"
+                href={process.env.NEXT_PUBLIC_LOGBOOKS_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Translate en="link" zh_hant="鏈接" zh_hans="链接" />
+              </a>
+              .
+            </p>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <section className={styles.options}>
           <TableView>
