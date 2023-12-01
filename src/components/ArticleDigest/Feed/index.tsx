@@ -78,10 +78,12 @@ const BaseArticleDigestFeed = ({
 
   const summaryClasses = classNames({
     [styles.description]: true,
-    [styles.lineClamp2]: titleLine === 1,
     [styles.minHeight]: !!cover && titleLine === 1,
   })
 
+  const summaryClassesLineClamp2 = classNames(summaryClasses, {
+    [styles.lineClamp2]: true,
+  })
   const path = toPath({
     page: 'articleDetail',
     article,
@@ -139,7 +141,12 @@ const BaseArticleDigestFeed = ({
           </section>
 
           <LinkWrapper {...path} onClick={onClick}>
-            <p className={summaryClasses}>{cleanedSummary}</p>
+            {titleLine === 1 && (
+              <p className={summaryClassesLineClamp2}>{cleanedSummary}</p>
+            )}
+            {titleLine === 2 && (
+              <p className={summaryClasses}>{cleanedSummary}</p>
+            )}
           </LinkWrapper>
 
           <Media greaterThan="sm">{footerActions}</Media>
