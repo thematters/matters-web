@@ -71,31 +71,31 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
               />
             </p>
           </Dialog.Content.Message>
-
-          <Dialog.Footer
-            closeDialog={closeDialog}
-            btns={
-              <Dialog.RoundedButton
-                text={<Translate id="block" />}
-                color="red"
-                onClick={() => {
-                  onBlock()
-                  closeDialog()
-                }}
-              />
-            }
-            smUpBtns={
-              <Dialog.TextButton
-                text={<Translate id="block" />}
-                color="red"
-                onClick={() => {
-                  onBlock()
-                  closeDialog()
-                }}
-              />
-            }
-          />
         </Dialog.Content>
+
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={<Translate id="block" />}
+              color="red"
+              onClick={() => {
+                onBlock()
+                closeDialog()
+              }}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={<Translate id="block" />}
+              color="red"
+              onClick={() => {
+                onBlock()
+                closeDialog()
+              }}
+            />
+          }
+        />
       </Dialog>
     </>
   )
