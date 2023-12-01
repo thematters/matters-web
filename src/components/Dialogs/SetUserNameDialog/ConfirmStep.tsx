@@ -79,6 +79,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
           />
         }
       />
+
       <Dialog.Content>
         <Dialog.Content.Message>
           <p>

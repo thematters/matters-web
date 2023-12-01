@@ -125,42 +125,44 @@ const Select: React.FC<FormProps> = ({
   const Intro = () => {
     return (
       <section className={styles.intro}>
-        <Dialog.Message align="left" smUpAlign="left">
-          <ul>
-            <li>
-              <FormattedMessage
-                defaultMessage="Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet."
-                id="HxcjQl"
-                description="src/components/Forms/WalletAuthForm/Select.tsx"
-              />
-            </li>
-            <li>
-              <strong>
+        <Dialog.Content>
+          <Dialog.Content.Message align="left" smUpAlign="left">
+            <ul>
+              <li>
                 <FormattedMessage
-                  defaultMessage="Wallet address will be part of your digital identity and shown in your profile page."
-                  id="LqxIEU"
+                  defaultMessage="Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet."
+                  id="HxcjQl"
                   description="src/components/Forms/WalletAuthForm/Select.tsx"
                 />
-              </strong>
-            </li>
-            <li>
-              <FormattedMessage
-                defaultMessage="The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security."
-                id="UOdEqi"
-                description="src/components/Forms/WalletAuthForm/Select.tsx"
-              />
-            </li>
-            <li>
-              <strong>
+              </li>
+              <li>
+                <strong>
+                  <FormattedMessage
+                    defaultMessage="Wallet address will be part of your digital identity and shown in your profile page."
+                    id="LqxIEU"
+                    description="src/components/Forms/WalletAuthForm/Select.tsx"
+                  />
+                </strong>
+              </li>
+              <li>
                 <FormattedMessage
-                  defaultMessage="Matters will never ask your wallet key through any channel."
-                  id="VrOoVf"
+                  defaultMessage="The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security."
+                  id="UOdEqi"
                   description="src/components/Forms/WalletAuthForm/Select.tsx"
                 />
-              </strong>
-            </li>
-          </ul>
-        </Dialog.Message>
+              </li>
+              <li>
+                <strong>
+                  <FormattedMessage
+                    defaultMessage="Matters will never ask your wallet key through any channel."
+                    id="VrOoVf"
+                    description="src/components/Forms/WalletAuthForm/Select.tsx"
+                  />
+                </strong>
+              </li>
+            </ul>
+          </Dialog.Content.Message>
+        </Dialog.Content>
       </section>
     )
   }

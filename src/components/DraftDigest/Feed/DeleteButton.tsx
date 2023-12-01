@@ -82,33 +82,35 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
       >
         <Dialog.Header title="deleteDraft" />
 
-        <Dialog.Message>
-          <p>
-            {!!draft.title && (
+        <Dialog.Content>
+          <Dialog.Content.Message>
+            <p>
+              {!!draft.title && (
+                <FormattedMessage
+                  defaultMessage="Are you sure you want to delete draft ‘{title}’?"
+                  id="hpIFGj"
+                  description="src/components/DraftDigest/Feed/DeleteButton.tsx"
+                  values={{
+                    title: <span className="u-highlight">{draft.title}</span>,
+                  }}
+                />
+              )}
+              {!draft.title && (
+                <FormattedMessage
+                  defaultMessage="Are you sure you want to delete draft?"
+                  id="7WXDhH"
+                  description="src/components/DraftDigest/Feed/DeleteButton.tsx"
+                />
+              )}
+              <br />
               <FormattedMessage
-                defaultMessage="Are you sure you want to delete draft ‘{title}’?"
-                id="hpIFGj"
-                description="src/components/DraftDigest/Feed/DeleteButton.tsx"
-                values={{
-                  title: <span className="u-highlight">{draft.title}</span>,
-                }}
-              />
-            )}
-            {!draft.title && (
-              <FormattedMessage
-                defaultMessage="Are you sure you want to delete draft?"
-                id="7WXDhH"
+                defaultMessage="(This action cannot be undone)"
+                id="F3zk7E"
                 description="src/components/DraftDigest/Feed/DeleteButton.tsx"
               />
-            )}
-            <br />
-            <FormattedMessage
-              defaultMessage="(This action cannot be undone)"
-              id="F3zk7E"
-              description="src/components/DraftDigest/Feed/DeleteButton.tsx"
-            />
-          </p>
-        </Dialog.Message>
+            </p>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer
           closeDialog={closeDialog}
