@@ -42,7 +42,7 @@ TitleAndCover.args = {
 
 export const TitleMdAndCover = Template.bind({})
 TitleMdAndCover.args = {
-  title: 'Qui amet',
+  title: 'Qui amet anima',
   cover: MOCK_ARTILCE.cover,
 }
 
@@ -60,7 +60,7 @@ TitleAndDescription.args = {
 
 export const TitleMdAndDescription = Template.bind({})
 TitleMdAndDescription.args = {
-  title: 'Qui amet',
+  title: 'Qui amet anima',
   description: MOCK_ARTILCE.summary,
 }
 
