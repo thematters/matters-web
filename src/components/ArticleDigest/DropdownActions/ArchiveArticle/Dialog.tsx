@@ -118,31 +118,35 @@ const ArchiveArticleDialog = ({
           }
         />
 
-        <Dialog.Message>
-          {isPreConfirm ? (
-            <p>
-              <FormattedMessage
-                defaultMessage="Are you sure you want to archive ‘{article}’?"
-                id="mWcca9"
-                values={{
-                  article: <span className="u-highlight">{article.title}</span>,
-                }}
-              />
-              <br />
-              <FormattedMessage
-                defaultMessage="Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
-                id="A3g33H"
-              />
-            </p>
-          ) : (
-            <p>
-              <FormattedMessage
-                defaultMessage="This operation cannot be undone, confirm archiving?"
-                id="yBUiiy"
-              />
-            </p>
-          )}
-        </Dialog.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message>
+            {isPreConfirm ? (
+              <p>
+                <FormattedMessage
+                  defaultMessage="Are you sure you want to archive ‘{article}’?"
+                  id="mWcca9"
+                  values={{
+                    article: (
+                      <span className="u-highlight">{article.title}</span>
+                    ),
+                  }}
+                />
+                <br />
+                <FormattedMessage
+                  defaultMessage="Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
+                  id="A3g33H"
+                />
+              </p>
+            ) : (
+              <p>
+                <FormattedMessage
+                  defaultMessage="This operation cannot be undone, confirm archiving?"
+                  id="yBUiiy"
+                />
+              </p>
+            )}
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer
           closeDialog={closeDialog}

@@ -15,7 +15,7 @@ import {
   AuthFeedType,
   AuthTabs,
   AuthWalletFeed,
-  DialogBeta,
+  Dialog,
   Form,
   IconLeft20,
   LanguageContext,
@@ -192,7 +192,7 @@ const Init: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <DialogBeta.TextButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={
@@ -211,11 +211,11 @@ const Init: React.FC<FormProps> = ({
 
   return (
     <>
-      <DialogBeta.Header
+      <Dialog.Header
         title={<FormattedMessage defaultMessage="Sign Up" id="39AHJm" />}
         hasSmUpTitle={false}
         leftBtn={
-          <DialogBeta.TextButton
+          <Dialog.TextButton
             text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
             color="greyDarker"
             onClick={back}
@@ -225,7 +225,7 @@ const Init: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <DialogBeta.Content>
+      <Dialog.Content>
         <Media at="sm">{InnerForm}</Media>
         <Media greaterThan="sm">
           <AuthTabs
@@ -239,13 +239,13 @@ const Init: React.FC<FormProps> = ({
           {isNormal && <>{InnerForm}</>}
           {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
         </Media>
-      </DialogBeta.Content>
+      </Dialog.Content>
 
       {isNormal && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
             <section className={styles.footerBtns}>
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={
                   <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
                     <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
@@ -261,9 +261,9 @@ const Init: React.FC<FormProps> = ({
         />
       )}
       {isWallet && !isInPage && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               color="greyDarker"
               text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               onClick={closeDialog}

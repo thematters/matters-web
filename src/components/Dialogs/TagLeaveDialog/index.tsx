@@ -59,23 +59,25 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
           }
         />
 
-        <Dialog.Message>
-          <h3>
-            <Translate
-              zh_hant="確定要這麼做嗎"
-              zh_hans="确定要这么做吗"
-              en="are you sure"
-            />{' '}
-            😭
-          </h3>
-          <p>
-            <Translate
-              zh_hant="如果辭去權限，你將無法繼續管理標籤。"
-              zh_hans="如果辞去权限，你将无法继续管理标签。"
-              en="After resignation, you will not be able to manage tags."
-            />
-          </p>
-        </Dialog.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message>
+            <h3>
+              <Translate
+                zh_hant="確定要這麼做嗎"
+                zh_hans="确定要这么做吗"
+                en="are you sure"
+              />{' '}
+              😭
+            </h3>
+            <p>
+              <Translate
+                zh_hant="如果辭去權限，你將無法繼續管理標籤。"
+                zh_hans="如果辞去权限，你将无法继续管理标签。"
+                en="After resignation, you will not be able to manage tags."
+              />
+            </p>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer
           closeDialog={closeDialog}

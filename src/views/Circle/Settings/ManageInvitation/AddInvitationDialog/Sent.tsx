@@ -27,16 +27,18 @@ const InvitationSent = ({ closeDialog }: Props) => (
   <>
     <Dialog.Header title={InvitationSentTitle} />
 
-    <Dialog.Message>
-      <h3>{InvitationSentTitle}</h3>
-      <p>
-        <FormattedMessage
-          defaultMessage="Invitations have been sent. You can check invitation status on the invitation management page."
-          id="SdXoXI"
-          description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
-        />
-      </p>
-    </Dialog.Message>
+    <Dialog.Content>
+      <Dialog.Content.Message>
+        <h3>{InvitationSentTitle}</h3>
+        <p>
+          <FormattedMessage
+            defaultMessage="Invitations have been sent. You can check invitation status on the invitation management page."
+            id="SdXoXI"
+            description="src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
+          />
+        </p>
+      </Dialog.Content.Message>
+    </Dialog.Content>
 
     <Dialog.Footer
       btns={
