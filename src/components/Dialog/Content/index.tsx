@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 
+import Message from '../Message'
 import styles from './styles.module.css'
 
 interface DialogContentProps {
@@ -10,7 +11,9 @@ interface DialogContentProps {
   noMaxHeight?: boolean
 }
 
-const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
+const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> & {
+  Message: typeof Message
+} = ({
   noSpacing,
   smExtraSpacing = true,
   noSpacingBottom,
@@ -27,7 +30,13 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> = ({
     [styles.noMaxHeight]: !!noMaxHeight,
   })
 
-  return <section className={contentClasses}>{children}</section>
+  return (
+    <section className={contentClasses} data-dialog-entity>
+      {children}
+    </section>
+  )
 }
+
+DialogContent.Message = Message
 
 export default DialogContent

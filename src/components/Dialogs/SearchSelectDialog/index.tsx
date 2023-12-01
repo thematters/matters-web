@@ -10,7 +10,7 @@ type SearchSelectDialogProps = Omit<SearchSelectFormProps, 'closeDialog'> & {
 
 const DynamicSearchSelectForm = dynamic(
   () => import('~/components/Forms/SearchSelectForm'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const BaseSearchSelectDialog = ({

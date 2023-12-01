@@ -1,12 +1,14 @@
 import dynamic from 'next/dynamic'
 
-import { DialogBeta, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
 interface RemoveWalletLoginDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicContent = dynamic(() => import('./Content'), { loading: Spinner })
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <Spinner />,
+})
 
 const BaseRemoveWalletLoginDialog = ({
   children,
@@ -17,9 +19,9 @@ const BaseRemoveWalletLoginDialog = ({
     <>
       {children({ openDialog })}
 
-      <DialogBeta isOpen={show} onDismiss={closeDialog}>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent closeDialog={closeDialog} />
-      </DialogBeta>
+      </Dialog>
     </>
   )
 }
@@ -27,7 +29,7 @@ const BaseRemoveWalletLoginDialog = ({
 export const RemoveWalletLoginDialog = (
   props: RemoveWalletLoginDialogProps
 ) => (
-  <DialogBeta.Lazy mounted={<BaseRemoveWalletLoginDialog {...props} />}>
+  <Dialog.Lazy mounted={<BaseRemoveWalletLoginDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
-  </DialogBeta.Lazy>
+  </Dialog.Lazy>
 )

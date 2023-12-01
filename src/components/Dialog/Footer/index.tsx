@@ -3,15 +3,13 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Media } from '~/components'
+import { RoundedButton, TextButton } from '~/components/Dialog/Buttons'
 
-import { RoundedButton, TextButton } from '../Buttons'
 import styles from './styles.module.css'
 
 type FooterProps = {
   btns?: React.ReactNode
   smUpBtns?: React.ReactNode
-  smUpContentNoSpacingBottom?: boolean
-  smUpSpaceBetween?: boolean
   closeText?: React.ReactNode
   closeDialog?: () => any
 }
@@ -19,8 +17,6 @@ type FooterProps = {
 const Footer: React.FC<FooterProps> = ({
   btns,
   smUpBtns,
-  smUpContentNoSpacingBottom = false,
-  smUpSpaceBetween = false,
   closeText,
   closeDialog,
 }) => {
@@ -40,12 +36,10 @@ const Footer: React.FC<FooterProps> = ({
 
   const smUpContentClasses = classNames({
     [styles.smUpContent]: true,
-    [styles.smUpSpaceBetween]: !!smUpSpaceBetween,
-    [styles.smUpContentNoSpacingBottom]: !!smUpContentNoSpacingBottom,
   })
 
   return (
-    <footer className={footerClasses}>
+    <footer className={footerClasses} data-dialog-entity={!!hasBtns}>
       <Media at="sm">
         {hasBtns && (
           <section className={styles.content}>
@@ -59,13 +53,7 @@ const Footer: React.FC<FooterProps> = ({
             )}
           </section>
         )}
-
-        {/* show bottom spacing for dialog if there is no buttons,
-         * otherwise, the footer will be too close to the content
-         */}
-        {/* {!hasBtns && <Spacer size="xxloose" />} */}
       </Media>
-
       {hasSmUpBtns && (
         <Media greaterThan="sm">
           <section className={smUpContentClasses}>

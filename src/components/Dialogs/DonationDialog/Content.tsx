@@ -26,39 +26,39 @@ export type DonationDialogContentProps = BaseDonationDialogProps & {
 
 const DynamicPayToFormComplete = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Complete'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicPayToFormConfirm = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Confirm'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicPayToFormCurrencyChoice = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/CurrencyChoice'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicWalletAuthFormSelect = dynamic(
   () => import('~/components/Forms/WalletAuthForm/Select'),
-  { ssr: false, loading: Spinner }
+  { ssr: false, loading: () => <Spinner /> }
 )
 const DynamicPayToFormSetAmount = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/SetAmount'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicPaymentProcessingForm = dynamic(
   () => import('~/components/Forms/PaymentForm/Processing'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicPaymentSetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const DonationDialogContent = ({

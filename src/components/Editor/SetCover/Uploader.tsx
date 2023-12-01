@@ -96,8 +96,8 @@ const Uploader: React.FC<UploaderProps> = ({
     const file = event.target.files[0]
     event.target.value = ''
 
-    const isValidImage = await validateImage(file)
-    if (!isValidImage) {
+    const mime = await validateImage(file)
+    if (!mime) {
       return
     }
 
@@ -118,9 +118,12 @@ const Uploader: React.FC<UploaderProps> = ({
           type: ASSET_TYPE.cover,
           entityId,
           entityType,
+          mime,
         },
       }
-      const { data } = await upload({ variables })
+      const { data } = await upload({
+        variables: _omit(variables, ['input.file']),
+      })
 
       const { id: assetId, path, uploadURL } = data?.directImageUpload || {}
 

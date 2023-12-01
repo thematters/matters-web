@@ -1,8 +1,7 @@
-import { FormikProvider } from 'formik'
-import { memo } from 'react'
-import { areEqual, FixedSizeList } from 'react-window'
+import { FieldInputProps, FormikProvider, useField } from 'formik'
 
-import { Form } from '~/components'
+import { DateTime, Form, InfiniteScroll } from '~/components'
+import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
 import {
   CollectionArticlesCollectionFragment,
   UserArticlesUserFragment,
@@ -16,6 +15,13 @@ interface SelectDialogContentProps {
   collection: CollectionArticlesCollectionFragment
   checkingIds: string[]
   formId: string
+  loadMore: () => Promise<void>
+  pageInfo: any
+}
+
+const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
+  const [field] = useField({ name: props.name, type: 'checkbox' })
+  return <Form.SquareCheckBox {...field} {...props} />
 }
 
 const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
@@ -24,6 +30,8 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   collection,
   checkingIds,
   formId,
+  loadMore,
+  pageInfo,
 }) => {
   const articles = user.articles
 
@@ -38,45 +46,40 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   return (
     <FormikProvider value={formik}>
       <Form id={formId} onSubmit={formik.handleSubmit} className={styles.form}>
-        <FixedSizeList
-          height={52 * 7.5}
-          itemCount={articles.edges?.length || 0}
-          itemData={articles.edges}
-          itemSize={52}
-          width="100%"
-          className={styles.fixedSizeList}
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          eof
         >
-          {memo(function Item({ index, style, data }) {
-            if (!data) {
-              return null
-            }
-            const node = data[index].node
+          {articles.edges?.map(({ node }) => {
+            const checked =
+              hasChecked.includes(node.id) || checkingIds.includes(node.id)
+            const checkedIndex = checkingIds.includes(node.id)
+              ? checkingIds.indexOf(node.id) + 1
+              : undefined
+            const disabled = hasChecked.includes(node.id)
+
             return (
-              <section style={style}>
-                <section key={node.id} className={styles.item}>
-                  <Form.IndexSquareCheckBox
-                    key={node.id}
-                    hasTooltip={true}
-                    checked={
-                      hasChecked.includes(node.id) ||
-                      checkingIds.includes(node.id)
-                    }
-                    index={
-                      checkingIds.includes(node.id)
-                        ? checkingIds.indexOf(node.id) + 1
-                        : undefined
-                    }
-                    createAt={node.createdAt}
-                    hint={node.title}
-                    disabled={hasChecked.includes(node.id)}
-                    {...formik.getFieldProps('checked')}
-                    value={node.id}
-                  />
-                </section>
+              <section key={node.id} className={styles.item}>
+                <SquareCheckBoxField
+                  hasTooltip
+                  checked={checked}
+                  icon={
+                    checked && !disabled && checkedIndex !== undefined ? (
+                      <span className={styles.indexIcon}>{checkedIndex}</span>
+                    ) : undefined
+                  }
+                  sup={<DateTime date={node.createdAt} color="grey" />}
+                  supHeight={18}
+                  hint={node.title}
+                  disabled={disabled}
+                  {...(formik.getFieldProps('checked') as FieldInputProps<any>)}
+                  value={node.id}
+                />
               </section>
             )
-          }, areEqual)}
-        </FixedSizeList>
+          })}
+        </InfiniteScroll>
       </Form>
     </FormikProvider>
   )

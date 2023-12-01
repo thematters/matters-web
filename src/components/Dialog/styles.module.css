@@ -1,7 +1,4 @@
 .overlay {
-  @mixin expand-to-container;
-
-  content: '';
   background: rgb(0 0 0 / 40%);
   will-change: opacity;
 }
@@ -23,6 +20,12 @@
     height: 300vh;
     content: '';
     background: var(--color-white);
+  }
+
+  & :nth-last-child(1 of [data-dialog-entity='true']) {
+    @media (--sm-down) {
+      padding-bottom: var(--spacing-xx-loose);
+    }
   }
 
   &.bgGreyLighter {
@@ -49,10 +52,15 @@
   }
 }
 
+.scrollable {
+  overflow: auto !important;
+}
+
 .handle {
   position: absolute;
   top: 0;
   left: 50%;
+  z-index: calc(var(--z-index-dialog) + 1);
   padding: var(--spacing-x-tight);
   transform: translateX(-50%);
 

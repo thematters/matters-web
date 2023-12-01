@@ -58,15 +58,15 @@ import TranslationToast from './TranslationToast'
 
 const DynamicSupportWidget = dynamic(() => import('./SupportWidget'), {
   ssr: true, // enable for first screen
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 const DynamicCollection = dynamic(() => import('./Collection'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ssr: false,
@@ -81,12 +81,12 @@ const DynamicVisitorWall = dynamic(() => import('./Wall/Visitor'), {
 })
 const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
   ssr: true, // enable for first screen
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const DynamicSubscribeCircleDialog = dynamic(

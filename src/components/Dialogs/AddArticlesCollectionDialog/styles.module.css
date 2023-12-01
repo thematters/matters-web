@@ -14,7 +14,6 @@
 .form {
   /* FIXME: rendering issue when checkbox is checked */
   position: relative;
-  height: 100%;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
@@ -34,4 +33,19 @@
 
 .fixedSizeList {
   @mixin scrollbar-thin;
+}
+
+.indexIcon {
+  @mixin inline-flex-center-all;
+
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.375rem;
+  color: var(--color-white);
+  word-break: keep-all;
+  background: var(--color-matters-green);
+  border-radius: 0.25rem;
 }

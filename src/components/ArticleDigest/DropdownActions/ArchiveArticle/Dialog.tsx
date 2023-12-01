@@ -13,6 +13,8 @@ import {
   ArchiveArticleArticleFragment,
   ArchiveArticleMutation,
 } from '~/gql/graphql'
+import { ME_WORKS_ARCHIVED_FEED } from '~/views/Me/Works/Archived/gql'
+import { ME_WORKS_TABS } from '~/views/Me/Works/WorksTabs/gql'
 import { USER_PINNED_WORKS } from '~/views/User/Articles/PinBoard/gql'
 
 const ARCHIVE_ARTICLE = gql`
@@ -71,6 +73,12 @@ const ArchiveArticleDialog = ({
         {
           query: USER_PINNED_WORKS,
           variables: { userName: article.author.userName! },
+        },
+        {
+          query: ME_WORKS_TABS,
+        },
+        {
+          query: ME_WORKS_ARCHIVED_FEED,
         },
       ],
     }

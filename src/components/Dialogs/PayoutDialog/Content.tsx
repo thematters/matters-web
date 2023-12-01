@@ -16,19 +16,19 @@ interface PayoutDialogContentProps {
 
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicPayoutFormComplete = dynamic(
   () => import('~/components/Forms/PaymentForm/Payout/Complete'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicPayoutFormConfirm = dynamic(
   () => import('~/components/Forms/PaymentForm/Payout/Confirm'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 const DynamicConnectStripeAccountForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ConnectStripeAccount'),
-  { loading: Spinner }
+  { loading: () => <Spinner /> }
 )
 
 const PayoutDialogContent = ({

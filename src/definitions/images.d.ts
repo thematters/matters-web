@@ -6,3 +6,9 @@ declare module '*.svg' {
   export const ReactComponent: FunctionComponent<SVGProps<HTMLOrSVGElement>>
   export default url
 }
+
+declare namespace React {
+  interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
+    fetchPriority?: 'high' | 'low' | 'auto'
+  }
+}

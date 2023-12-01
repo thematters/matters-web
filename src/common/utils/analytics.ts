@@ -42,7 +42,8 @@ type EventArgs =
  * Event: Page View
  */
 interface PageViewProp {
-  page_referrer: string
+  page_referrer?: string
+  mode: string
 }
 
 /**
@@ -249,7 +250,11 @@ type ArticleFeedType =
   | 'related_donations'
   | 'circle_detail'
 
-type CollectionFeedType = 'user_collection' | 'collection_article'
+type CollectionFeedType =
+  | 'user_collection'
+  | 'collection_article'
+  | 'user-collection-articles'
+  | 'user-collection-articles-search'
 
 type CommentFeedType =
   //  'follow-comment' |

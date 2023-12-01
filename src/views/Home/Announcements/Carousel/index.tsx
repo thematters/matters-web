@@ -130,11 +130,18 @@ const Carousel = ({ items }: CarouselProps) => {
             const title = (translatedItem?.title ?? item.title) || ''
             const itemLink = (translatedItem?.link ?? item.link) || ''
             const itemContent = translatedItem?.content ?? item.content
+            const isFirstFold = i === 0
+
             return (
               <div key={item.id} className={styles.slide}>
                 <Card htmlHref={itemLink} spacing={[0, 0]} bgActiveColor="none">
                   <div className={styles.content}>
-                    <ResponsiveImage url={item.cover} width={1376} />
+                    <ResponsiveImage
+                      url={item.cover}
+                      width={1376}
+                      loading={isFirstFold ? undefined : 'lazy'}
+                      fetchPriority={isFirstFold ? 'high' : 'low'}
+                    />
                     <h3>{title}</h3>
                     <p>{itemContent}</p>
                   </div>

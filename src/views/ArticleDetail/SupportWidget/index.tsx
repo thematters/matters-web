@@ -41,7 +41,7 @@ type HasDonatedArticle = NonNullable<
 
 const DynamicAnimation = dynamic(() => import('./Animation'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const SupportWidget = ({ article }: DonationProps) => {

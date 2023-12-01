@@ -4,7 +4,6 @@ import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
-  ArticleDigestArchived,
   ArticleDigestFeed,
   Empty,
   EmptyArticle,
@@ -20,14 +19,9 @@ import {
 } from '~/components'
 import { UserArticlesPublicQuery } from '~/gql/graphql'
 
-import {
-  USER_ARTICLES_PRIVATE,
-  USER_ARTICLES_PUBLIC,
-  VIEWER_ARTICLES,
-} from './gql'
+import { USER_ARTICLES_PRIVATE, USER_ARTICLES_PUBLIC } from './gql'
 import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
-import StartWriting from './StartWirting'
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
@@ -35,23 +29,14 @@ const UserArticles = () => {
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
 
-  let query = USER_ARTICLES_PUBLIC
-  let publicQuery = true
-  if (isViewer) {
-    query = VIEWER_ARTICLES
-    publicQuery = false
-  }
-
   /**
    * Data Fetching
    */
   // public data
   const { data, loading, error, fetchMore, client } =
-    usePublicQuery<UserArticlesPublicQuery>(
-      query,
-      { variables: { userName } },
-      { publicQuery }
-    )
+    usePublicQuery<UserArticlesPublicQuery>(USER_ARTICLES_PUBLIC, {
+      variables: { userName },
+    })
 
   // pagination
   const connectionPath = 'user.articles'
@@ -168,14 +153,13 @@ const UserArticles = () => {
     return (
       <>
         <CustomHead />
-        <EmptyArticle />
-        {isViewer && <StartWriting />}
+        <EmptyArticle isMe={isViewer} />
       </>
     )
   }
 
   const articleEdges = edges.filter(
-    ({ node }) => node.articleState === 'active' || viewer.id === node.author.id
+    ({ node }) => node.articleState === 'active'
   )
 
   return (
@@ -194,26 +178,22 @@ const UserArticles = () => {
           <List>
             {articleEdges.map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
-                {node.articleState !== 'active' ? (
-                  <ArticleDigestArchived article={node} />
-                ) : (
-                  <ArticleDigestFeed
-                    article={node}
-                    inUserArticles
-                    hasAuthor={false}
-                    hasEdit={true}
-                    hasAddCollection={true}
-                    hasArchive={true}
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'user_article',
-                        contentType: 'article',
-                        location: i,
-                        id: node.id,
-                      })
-                    }
-                  />
-                )}
+                <ArticleDigestFeed
+                  article={node}
+                  inUserArticles
+                  hasAuthor={false}
+                  hasEdit={true}
+                  hasAddCollection={true}
+                  hasArchive={true}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'user_article',
+                      contentType: 'article',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
               </List.Item>
             ))}
           </List>

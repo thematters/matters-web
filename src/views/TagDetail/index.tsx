@@ -49,7 +49,7 @@ import styles from './styles.module.css'
 
 const DynamicCommunity = dynamic(() => import('./Community'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const

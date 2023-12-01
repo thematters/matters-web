@@ -9,7 +9,7 @@ interface MembersDialogProps {
 
 const DynamicContent = dynamic(() => import('./Content'), {
   ssr: false,
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 const BaseMembersDialog = ({ children }: MembersDialogProps) => {

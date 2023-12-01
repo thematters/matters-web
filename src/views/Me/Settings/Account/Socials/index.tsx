@@ -9,15 +9,16 @@ import {
   OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
 } from '~/common/enums'
 import {
-  facebookOauthUrl,
+  // facebookOauthUrl,
   googleOauthUrl,
+  isSafari,
   sleep,
   storage,
   twitterOauthUrl,
 } from '~/common/utils'
 import {
   IconClose20,
-  IconFacebook22,
+  // IconFacebook22,
   IconGoogle22,
   IconSpinner16,
   IconX22,
@@ -40,9 +41,9 @@ const Socials = () => {
   const googleId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Google
   )?.email
-  const facebookId = viewer.info.socialAccounts.find(
-    (s) => s.type === SocialAccountType.Facebook
-  )?.userName
+  // const facebookId = viewer.info.socialAccounts.find(
+  // (s) => s.type === SocialAccountType.Facebook
+  // )?.userName
   const twitterId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Twitter
   )?.userName
@@ -51,7 +52,7 @@ const Socials = () => {
   const [loadingState, setLoadingState] = useState('')
   const isGoogleLoading = loadingState === 'Google'
   const isTwitterLoading = loadingState === 'Twitter'
-  const isFacebookLoading = loadingState === 'Facebook'
+  // const isFacebookLoading = loadingState === 'Facebook'
 
   const oauthType = 'bind'
 
@@ -80,11 +81,11 @@ const Socials = () => {
     }
   }
 
-  const gotoFacebook = async () => {
-    setLoadingState('Facebook')
-    const url = await facebookOauthUrl(oauthType)
-    router.push(url)
-  }
+  // const gotoFacebook = async () => {
+  //   setLoadingState('Facebook')
+  //   const url = await facebookOauthUrl(oauthType)
+  //   router.push(url)
+  // }
 
   useEffect(() => {
     const bindResult = storage.remove(OAUTH_STORAGE_BIND_STATE)
@@ -92,6 +93,7 @@ const Socials = () => {
       return
     }
     const state = bindResult.state
+    const delay = isSafari() ? 2 * 1000 : 0
     if (state === OAUTH_STORAGE_BIND_STATE_SUCCESS) {
       setTimeout(() => {
         toast.success({
@@ -106,7 +108,7 @@ const Socials = () => {
             />
           ),
         })
-      })
+      }, delay)
       return
     }
 
@@ -124,7 +126,7 @@ const Socials = () => {
             />
           ),
         })
-      })
+      }, delay)
       return
     }
 
@@ -139,7 +141,7 @@ const Socials = () => {
             />
           ),
         })
-      })
+      }, delay)
       return
     }
   }, [])
@@ -225,7 +227,7 @@ const Socials = () => {
       </RemoveSocialLoginDialog>
 
       {/* Facebook */}
-      <RemoveSocialLoginDialog type={SocialAccountType.Facebook}>
+      {/* <RemoveSocialLoginDialog type={SocialAccountType.Facebook}>
         {({ openDialog }) => {
           return (
             <TableView.Cell
@@ -261,7 +263,7 @@ const Socials = () => {
             />
           )
         }}
-      </RemoveSocialLoginDialog>
+      </RemoveSocialLoginDialog> */}
     </>
   )
 }

@@ -1,10 +1,21 @@
-import { Empty, IconDraft24, Translate } from '~/components'
+import { useIntl } from 'react-intl'
 
-export const EmptyDraft = () => (
-  <Empty
-    icon={<IconDraft24 size="xxl" />}
-    description={
-      <Translate zh_hant="還沒有草稿" zh_hans="还没有草稿" en="No drafts." />
-    }
-  />
-)
+import { ReactComponent as IconFile88 } from '@/public/static/icons/88px/file.svg'
+import { Empty, StartWriting, withIcon } from '~/components'
+
+export const EmptyDraft = () => {
+  const intl = useIntl()
+
+  return (
+    <Empty
+      spacingY="xxloose"
+      icon={withIcon(IconFile88)({ size: 'xxxlM' })}
+      description={intl.formatMessage({
+        defaultMessage: 'No drafts yet',
+        id: 'PmLGMc',
+        description: 'src/components/Empty/EmptyDraft.tsx',
+      })}
+      footer={<StartWriting />}
+    />
+  )
+}

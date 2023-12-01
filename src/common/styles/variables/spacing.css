@@ -1,6 +1,8 @@
 :root {
+  --spacing-xxx-tightest: 0.0625rem; /* 1px */
   --spacing-xxx-tight: 0.125rem; /* 2px */
   --spacing-xx-tight: 0.25rem; /* 4px */
+  --spacing-base-xxx-tight: 0.3125rem; /* 5px */
   --spacing-base-xx-tight: 0.375rem; /* 6px */
   --spacing-x-tight: 0.5rem; /* 8px */
   --spacing-base-tight: 0.625rem; /* 10px */

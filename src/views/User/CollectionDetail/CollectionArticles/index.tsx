@@ -26,7 +26,7 @@ import { fragments } from './gql'
 import styles from './styles.module.css'
 
 const DynamicViewerArticles = dynamic(() => import('./ViewerArticles'), {
-  loading: Spinner,
+  loading: () => <Spinner />,
 })
 
 interface CollectionArticlesProps {
