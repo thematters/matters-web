@@ -146,45 +146,45 @@ const ArchiveArticleDialog = ({
               </p>
             )}
           </Dialog.Content.Message>
-
-          <Dialog.Footer
-            closeDialog={closeDialog}
-            btns={
-              <Dialog.RoundedButton
-                text={
-                  isPreConfirm ? (
-                    <FormattedMessage defaultMessage="Archive" id="hrgo+E" />
-                  ) : (
-                    <FormattedMessage
-                      defaultMessage="Confirm Archiving"
-                      id="HJ0iZJ"
-                    />
-                  )
-                }
-                color={loading ? 'green' : 'red'}
-                onClick={onClickArchive}
-                loading={loading}
-              />
-            }
-            smUpBtns={
-              <Dialog.TextButton
-                text={
-                  isPreConfirm ? (
-                    <FormattedMessage defaultMessage="Archive" id="hrgo+E" />
-                  ) : (
-                    <FormattedMessage
-                      defaultMessage="Confirm Archiving"
-                      id="HJ0iZJ"
-                    />
-                  )
-                }
-                color={loading ? 'green' : 'red'}
-                onClick={onClickArchive}
-                loading={loading}
-              />
-            }
-          />
         </Dialog.Content>
+
+        <Dialog.Footer
+          closeDialog={closeDialog}
+          btns={
+            <Dialog.RoundedButton
+              text={
+                isPreConfirm ? (
+                  <FormattedMessage defaultMessage="Archive" id="hrgo+E" />
+                ) : (
+                  <FormattedMessage
+                    defaultMessage="Confirm Archiving"
+                    id="HJ0iZJ"
+                  />
+                )
+              }
+              color={loading ? 'green' : 'red'}
+              onClick={onClickArchive}
+              loading={loading}
+            />
+          }
+          smUpBtns={
+            <Dialog.TextButton
+              text={
+                isPreConfirm ? (
+                  <FormattedMessage defaultMessage="Archive" id="hrgo+E" />
+                ) : (
+                  <FormattedMessage
+                    defaultMessage="Confirm Archiving"
+                    id="HJ0iZJ"
+                  />
+                )
+              }
+              color={loading ? 'green' : 'red'}
+              onClick={onClickArchive}
+              loading={loading}
+            />
+          }
+        />
       </Dialog>
     </>
   )
