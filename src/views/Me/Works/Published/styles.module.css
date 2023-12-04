@@ -41,6 +41,7 @@
 
   & .tabItem {
     @mixin transition;
+    @mixin disable-user-select;
 
     flex-shrink: 0;
     padding: var(--spacing-base-xxx-tight) var(--spacing-base-tight);

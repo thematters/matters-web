@@ -338,3 +338,8 @@
   background-position: -2px -1px;
   background-size: 3px 3px;
 }
+
+@define-mixin disable-user-select {
+  -webkit-touch-callout: none;
+  user-select: none;
+}
