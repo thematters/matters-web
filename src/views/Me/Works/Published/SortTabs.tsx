@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { useState } from 'react'
+import { useScrollContainer } from 'react-indiana-drag-scroll'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { Button, IconClose20, IconUser2V16 } from '~/components'
@@ -41,9 +42,11 @@ export const SortTabs = ({
 }) => {
   const intl = useIntl()
   const [showHint, setShowHint] = useState(true)
+  const scrollContainer = useScrollContainer({})
+
   return (
     <>
-      <ul className={styles.tabList}>
+      <ul className={styles.tabList} ref={scrollContainer.ref}>
         <TabItem
           active={sort === UserArticlesSort.Newest}
           onClick={() => setSort(UserArticlesSort.Newest)}
