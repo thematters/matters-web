@@ -132,12 +132,12 @@ export const SortTabs = ({
           {/* FIXED: The ul element needs to be wrapped directly in the emblaRef  */}
           <ul className={styles.tabList}>
             <Content />
-            <span className={styles.rightSpace} />
+            <li className={styles.rightSpace}></li>
           </ul>
           <Hint />
         </section>
       </Media>
-      <Media at="xl">
+      <Media greaterThanOrEqual="xl">
         <ul className={styles.tabList}>
           <Content />
         </ul>
