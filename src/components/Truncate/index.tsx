@@ -1,3 +1,5 @@
+// Modified base on https://github.com/pablosichert/react-truncate
+
 import {
   DetailedHTMLProps,
   HTMLAttributes,
