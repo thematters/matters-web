@@ -16,7 +16,6 @@ import Footer from './Footer'
 import Handle from './Handle'
 import Header from './Header'
 import Lazy from './Lazy'
-import Message from './Message'
 import styles from './styles.module.css'
 
 export interface DialogOverlayProps {
@@ -137,7 +136,6 @@ export const Dialog: React.ComponentType<
   Content: typeof Content
   Footer: typeof Footer
   TextButton: typeof TextButton
-  Message: typeof Message
   RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
@@ -212,7 +210,6 @@ export const Dialog: React.ComponentType<
 
 Dialog.Header = Header
 Dialog.Content = Content
-Dialog.Message = Message
 Dialog.Footer = Footer
 Dialog.TextButton = TextButton
 Dialog.RoundedButton = RoundedButton

@@ -244,17 +244,19 @@ const BaseAddCredit: React.FC<FormProps> = ({
       <>
         <Dialog.Header title={<Translate id="successTopUp" />} />
 
-        <Dialog.Message align="center" smUpAlign="center">
-          <p>
-            <Translate
-              zh_hant="創作者們望眼欲穿，快去送上支持吧"
-              zh_hans="创作者们望眼欲穿，快去送上支持吧"
-              en="Creators need your support! Go support creators you like"
-            />
-          </p>
-          <br />
-          <CurrencyAmount amount={values.amount} currency={currency} />
-        </Dialog.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message align="center" smUpAlign="center">
+            <p>
+              <Translate
+                zh_hant="創作者們望眼欲穿，快去送上支持吧"
+                zh_hans="创作者们望眼欲穿，快去送上支持吧"
+                en="Creators need your support! Go support creators you like"
+              />
+            </p>
+            <br />
+            <CurrencyAmount amount={values.amount} currency={currency} />
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer
           btns={
