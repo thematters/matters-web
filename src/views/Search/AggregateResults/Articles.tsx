@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -24,6 +25,11 @@ import {
 } from '~/gql/graphql'
 
 import { SEARCH_AGGREGATE_ARTICLES_PUBLIC } from './gql'
+
+const DynamicArticleDigestFeed = dynamic(
+  () => import('~/components/ArticleDigest/Feed'),
+  { ssr: false, loading: ArticleDigestFeed.Placeholder }
+)
 
 const AggregateArticleResults = () => {
   const { getQuery } = useRoute()
@@ -130,7 +136,7 @@ const AggregateArticleResults = () => {
             ({ node, cursor }, i) =>
               node.__typename === 'Article' && (
                 <List.Item key={cursor + node.id}>
-                  <ArticleDigestFeed
+                  <DynamicArticleDigestFeed
                     article={
                       node as ArticleDigestFeedArticlePublicFragment &
                         Partial<ArticleDigestFeedArticlePrivateFragment>

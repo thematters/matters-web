@@ -1,8 +1,15 @@
+import dynamic from 'next/dynamic'
+
 import { analytics } from '~/common/utils'
 import { ArticleDigestFeed, CardExposureTracker } from '~/components'
 import { UserPublishArticleActivityFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
+
+const DynamicArticleDigestFeed = dynamic(
+  () => import('~/components/ArticleDigest/Feed'),
+  { ssr: false, loading: ArticleDigestFeed.Placeholder }
+)
 
 const UserPublishArticleActivity = ({
   actor,
@@ -12,7 +19,7 @@ const UserPublishArticleActivity = ({
   __typename,
 }: UserPublishArticleActivityFragment & { location: number }) => (
   <>
-    <ArticleDigestFeed
+    <DynamicArticleDigestFeed
       onClick={() => {
         analytics.trackEvent('click_feed', {
           type: 'following',

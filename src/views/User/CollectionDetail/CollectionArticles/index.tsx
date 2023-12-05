@@ -29,6 +29,11 @@ const DynamicViewerArticles = dynamic(() => import('./ViewerArticles'), {
   loading: () => <Spinner />,
 })
 
+const DynamicArticleDigestFeed = dynamic(
+  () => import('~/components/ArticleDigest/Feed'),
+  { ssr: false, loading: ArticleDigestFeed.Placeholder }
+)
+
 interface CollectionArticlesProps {
   collection: CollectionArticlesCollectionFragment
 }
@@ -140,7 +145,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
           {articleEdges &&
             articleEdges.map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
-                <ArticleDigestFeed
+                <DynamicArticleDigestFeed
                   article={node}
                   hasHeader={false}
                   hasEdit={true}

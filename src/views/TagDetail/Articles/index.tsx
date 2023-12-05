@@ -1,5 +1,6 @@
 import { NetworkStatus } from 'apollo-client'
 import _some from 'lodash/some'
+import dynamic from 'next/dynamic'
 import React, { useContext, useEffect, useRef } from 'react'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
@@ -24,6 +25,11 @@ import {
 import { TagArticlesPublicQuery, TagFragmentFragment } from '~/gql/graphql'
 
 import RelatedTags from '../RelatedTags'
+
+const DynamicArticleDigestFeed = dynamic(
+  () => import('~/components/ArticleDigest/Feed'),
+  { ssr: false, loading: ArticleDigestFeed.Placeholder }
+)
 
 interface TagArticlesProps {
   tag: TagFragmentFragment
@@ -184,7 +190,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
           {(edges || []).map(({ node, cursor }, i) => (
             <React.Fragment key={`${feedType}:${cursor}`}>
               <List.Item>
-                <ArticleDigestFeed
+                <DynamicArticleDigestFeed
                   article={node}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {

@@ -195,3 +195,7 @@ export const ArticleDigestFeed = React.memo(
 
 ArticleDigestFeed.Placeholder = Placeholder
 ArticleDigestFeed.fragments = fragments
+
+// Note: Must be imported dynamically, otherwise there will be a flickering problem with the first rendering
+// ref: https://gist.github.com/gaearon/e7d97cdf38a2907924ea12e4ebdf3c85?permalink_comment_id=4248531#gistcomment-4248531
+export default ArticleDigestFeed

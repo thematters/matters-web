@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
@@ -22,6 +23,11 @@ import { UserArticlesPublicQuery } from '~/gql/graphql'
 import { USER_ARTICLES_PRIVATE, USER_ARTICLES_PUBLIC } from './gql'
 import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
+
+const DynamicArticleDigestFeed = dynamic(
+  () => import('~/components/ArticleDigest/Feed'),
+  { ssr: false, loading: ArticleDigestFeed.Placeholder }
+)
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
@@ -178,7 +184,7 @@ const UserArticles = () => {
           <List>
             {articleEdges.map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
-                <ArticleDigestFeed
+                <DynamicArticleDigestFeed
                   article={node}
                   inUserArticles
                   hasAuthor={false}
