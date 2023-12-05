@@ -34,6 +34,7 @@
   background: var(--color-grey-lighter);
 
   & + & {
-    margin-top: var(--spacing-x-tight);
+    /* fix space to avoid shaking */
+    margin-top: 0.41666rem;
   }
 }
