@@ -78,11 +78,4 @@
       background: var(--color-black);
     }
   }
-
-  & .rightSpace {
-    position: relative;
-    flex-shrink: 0;
-    width: 6rem;
-    height: 2rem;
-  }
 }
