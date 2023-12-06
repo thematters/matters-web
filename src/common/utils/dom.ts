@@ -1,26 +1,5 @@
-// Select
 export const $ = (selector: string) => document.querySelector(selector)
 export const $$ = (selector: string) => document.querySelectorAll(selector)
-
-// Size
-const getWindowHeight = () =>
-  window.innerHeight ||
-  document.documentElement.clientHeight ||
-  document.body.clientHeight
-const getWindowWidth = () =>
-  window.innerWidth ||
-  document.documentElement.clientWidth ||
-  document.body.clientWidth
-
-// Position
-const offset = (el: HTMLElement) => {
-  const rect = el.getBoundingClientRect()
-
-  return {
-    top: rect.top + document.body.scrollTop,
-    left: rect.left + document.body.scrollLeft,
-  }
-}
 
 const getAttributes = (name: string, str: string): string[] | [] => {
   const re = new RegExp(`${name}="(.*?)"`, 'g')
@@ -36,8 +15,5 @@ const getAttributes = (name: string, str: string): string[] | [] => {
 export const dom = {
   $,
   $$,
-  getWindowHeight,
-  getWindowWidth,
-  offset,
   getAttributes,
 }

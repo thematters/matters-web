@@ -53,10 +53,6 @@
     "defaultMessage": "不知道哪裏出錯了，過幾分鐘看看",
     "description": "UNKNOWN_ERROR"
   },
-  "/asuIY": {
-    "defaultMessage": "進入社區",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
   "/jJLYy": {
     "defaultMessage": "交易記錄"
   },
@@ -404,9 +400,6 @@
   "A3g33H": {
     "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
   },
-  "A41QIy": {
-    "defaultMessage": "輸入密碼"
-  },
   "A6ozr9": {
     "defaultMessage": "選集名稱"
   },
@@ -435,10 +428,6 @@
   "ANA7sk": {
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
-  },
-  "ANhCde": {
-    "defaultMessage": "馬上開始你的創作吧！",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "AVpR3Q": {
     "defaultMessage": "已綁定錢包",
@@ -900,10 +889,6 @@
     "defaultMessage": "支持者數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
-  "NzfL1d": {
-    "defaultMessage": "再次輸入密碼",
-    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
-  },
   "O0MQs/": {
     "defaultMessage": "請先綁定郵箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1150,10 +1135,6 @@
   "X+Xvgq": {
     "defaultMessage": "取消精選",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
-  },
-  "XH0Lb6": {
-    "defaultMessage": "歡迎加入 Matters！",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "XHMco9": {
     "defaultMessage": "人",
@@ -1630,9 +1611,6 @@
     "defaultMessage": "編輯",
     "description": "src/components/Comment/DropdownActions/EditButton.tsx"
   },
-  "ml3SZN": {
-    "defaultMessage": "至少 8 個字元，支持英文大小寫字母、數字和特殊符號"
-  },
   "mp9SBo": {
     "defaultMessage": "圍爐通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -1786,10 +1764,6 @@
   "rdZi0V": {
     "defaultMessage": "你似乎遨遊到了一個未知空間，請返回重試"
   },
-  "reOeq5": {
-    "defaultMessage": "你已擁有個人創作空間站，期待你的第一篇作品。",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
   },
@@ -1812,10 +1786,6 @@
   "skbUBl": {
     "defaultMessage": "登入",
     "description": "src/components/Buttons/Login/index.tsx"
-  },
-  "stjoBH": {
-    "defaultMessage": "現在，去為你喜歡的作者打賞吧！你的每一次打賞都將為作者帶來收入。",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "sy+pv5": {
     "defaultMessage": "電子郵件"

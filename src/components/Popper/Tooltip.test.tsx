@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { act, fireEvent, render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { Tooltip } from '~/components'
 
 describe('<Tooltip>', () => {
@@ -57,16 +57,11 @@ describe('<Tooltip>', () => {
     expect(screen.queryByText(content)).not.toBeInTheDocument()
 
     // content should be shown after delay
-    act(() => {
-      vi.advanceTimersByTime(delay)
-    })
+    vi.advanceTimersByTime(delay)
     const $tooltip = screen.getByText(content)
     expect($tooltip).toBeInTheDocument()
 
-    act(() => {
-      vi.runAllTimers()
-      vi.useRealTimers()
-      // done();
-    })
+    vi.runAllTimers()
+    vi.useRealTimers()
   })
 })

@@ -9,11 +9,10 @@ beforeEach(() => {
   vi.useFakeTimers()
 })
 
-afterEach((done) => {
+afterEach(() => {
   act(() => {
     vi.runAllTimers()
     vi.useRealTimers()
-    // done();
   })
 })
 

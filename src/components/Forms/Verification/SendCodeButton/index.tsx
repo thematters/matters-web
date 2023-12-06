@@ -1,12 +1,13 @@
 import { useContext, useState } from 'react'
 
 import { SEND_CODE_COUNTDOWN, VERIFICATION_CODE_TYPES } from '~/common/enums'
+import { leftPad } from '~/common/utils'
 import {
   Button,
   ReCaptchaContext,
   TextIcon,
   Translate,
-  useLegacyCountdown,
+  useCountdown,
   useMutation,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -41,9 +42,7 @@ export const VerificationSendCodeButton: React.FC<
   const [send] = useMutation<SendVerificationCodeMutation>(SEND_CODE)
   const [sent, setSent] = useState(false)
 
-  const { countdown, setCountdown, formattedTimeLeft } = useLegacyCountdown({
-    timeLeft: 0,
-  })
+  const { countdown, setCountdown } = useCountdown(0)
 
   const sendCode = async () => {
     // reCaptcha check is disabled for now
@@ -51,7 +50,7 @@ export const VerificationSendCodeButton: React.FC<
       variables: { input: { email, type, token } },
     })
 
-    setCountdown({ timeLeft: SEND_CODE_COUNTDOWN })
+    setCountdown(SEND_CODE_COUNTDOWN)
     setSent(true)
 
     if (refreshToken) {
@@ -62,7 +61,7 @@ export const VerificationSendCodeButton: React.FC<
   return (
     <Button
       spacing={['xxtight', 'xtight']}
-      disabled={disabled || !send || !email || countdown.timeLeft !== 0}
+      disabled={disabled || !send || !email || countdown !== 0}
       onClick={sendCode}
     >
       <TextIcon color="green" weight="md" size="sm">
@@ -72,8 +71,8 @@ export const VerificationSendCodeButton: React.FC<
           <Translate id="sendVerificationCode" />
         )}
 
-        {sent && countdown.timeLeft !== 0 && (
-          <span className={styles.timer}>{formattedTimeLeft.ss}</span>
+        {sent && countdown !== 0 && (
+          <span className={styles.timer}>{leftPad(countdown, 2, 0)}</span>
         )}
       </TextIcon>
     </Button>
