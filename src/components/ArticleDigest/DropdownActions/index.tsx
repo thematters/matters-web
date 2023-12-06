@@ -351,86 +351,50 @@ const DropdownActions = (props: DropdownActionsProps) => {
   >(
     BaseDropdownActions,
     ShareDialog,
-    {
-      path: props.sharePath,
-    },
-    ({ openDialog }) => {
-      return {
-        ...props,
-        ...controls,
-        openShareDialog: openDialog,
-      }
-    }
+    { path: props.sharePath },
+    ({ openDialog }) => ({ ...props, ...controls, openShareDialog: openDialog })
   )
   const DropdownActionsWithFingerprint = withDialog<
     Omit<FingerprintDialogProps, 'children'>
   >(
     DropdownActionsWithShareDialog,
     FingerprintDialog,
-    {
-      article,
-    },
-    ({ openDialog }) => {
-      return {
-        openFingerprintDialog: openDialog,
-      }
-    }
+    { article },
+    ({ openDialog }) => ({ openFingerprintDialog: openDialog })
   )
   const DropdownActionsWithAppreciators = withDialog<
     Omit<AppreciatorsDialogProps, 'children'>
   >(
     DropdownActionsWithFingerprint,
     AppreciatorsDialog,
-    {
-      article,
-    },
-    ({ openDialog }) => {
-      return {
-        openAppreciatorsDialog: openDialog,
-      }
-    }
+    { article },
+    ({ openDialog }) => ({ openAppreciatorsDialog: openDialog })
   )
   const DropdownActionsWithSupporters = withDialog<
     Omit<SupportersDialogProps, 'children'>
   >(
     DropdownActionsWithAppreciators,
     SupportersDialog,
-    {
-      article,
-    },
-    ({ openDialog }) => {
-      return {
-        openSupportersDialog: openDialog,
-      }
-    }
+    { article },
+    ({ openDialog }) => ({ openSupportersDialog: openDialog })
   )
   const DropdownActionsWithArchiveArticle = withDialog<
     Omit<ArchiveArticleDialogProps, 'children'>
   >(
     DropdownActionsWithSupporters,
     ArchiveArticle.Dialog,
-    {
-      article,
-    },
-    ({ openDialog }) => {
-      return {
-        openArchiveDialog: viewer.isFrozen ? forbid : openDialog,
-      }
-    }
+    { article },
+    ({ openDialog }) => ({
+      openArchiveDialog: viewer.isFrozen ? forbid : openDialog,
+    })
   )
   const DropdownActionsWithAddCollectionsArticle = withDialog<
     Omit<AddCollectionsArticleDialogProps, 'children'>
   >(
     DropdownActionsWithArchiveArticle,
     AddCollectionsArticleDialog,
-    {
-      articleId: article.id,
-    },
-    ({ openDialog }) => {
-      return {
-        openAddCollectionsArticleDialog: openDialog,
-      }
-    }
+    { articleId: article.id },
+    ({ openDialog }) => ({ openAddCollectionsArticleDialog: openDialog })
   )
   const DropdownActionsWithRemoveArticleCollection = withDialog<
     Omit<RemoveArticleCollectionDialogProps, 'children'>
@@ -442,11 +406,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       articleTitle: article.title,
       collectionId: collectionId || '',
     },
-    ({ openDialog }) => {
-      return {
-        openRemoveArticleCollectionDialog: openDialog,
-      }
-    }
+    ({ openDialog }) => ({ openRemoveArticleCollectionDialog: openDialog })
   )
 
   return <DropdownActionsWithRemoveArticleCollection />

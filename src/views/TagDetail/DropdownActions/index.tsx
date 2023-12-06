@@ -241,38 +241,32 @@ const DropdownActions = (props: DropdownActionsProps) => {
       onSave: addArticlesToTag(true),
       saving: loading,
     },
-    ({ openDialog }) => {
-      return {
-        openTagAddSelectedArticlesDialog: viewer.isFrozen ? forbid : openDialog,
-      }
-    }
+    ({ openDialog }) => ({
+      openTagAddSelectedArticlesDialog: viewer.isFrozen ? forbid : openDialog,
+    })
   )
-  const DropdownActionsWithTagLeaveDialog = withDialog<
+  const DropdownActionsWithTagLeave = withDialog<
     Omit<TagLeaveDialogProps, 'children'>
   >(
     DropdownActionsWithSearchSelect,
     TagLeaveDialog,
     { ...props, id: tag.id },
-    ({ openDialog }) => {
-      return {
-        openTagLeaveDialog: viewer.isFrozen ? forbid : openDialog,
-      }
-    }
+    ({ openDialog }) => ({
+      openTagLeaveDialog: viewer.isFrozen ? forbid : openDialog,
+    })
   )
-  const DropdownActionsWithTagEditorDialog = withDialog<
+  const DropdownActionsWithTagEditor = withDialog<
     Omit<TagEditorDialogProps, 'children'>
   >(
-    DropdownActionsWithTagLeaveDialog,
+    DropdownActionsWithTagLeave,
     TagEditorDialog,
     { ...props, id: tag.id },
-    ({ openDialog }) => {
-      return {
-        openTagEditorDialog: viewer.isFrozen ? forbid : openDialog,
-      }
-    }
+    ({ openDialog }) => ({
+      openTagEditorDialog: viewer.isFrozen ? forbid : openDialog,
+    })
   )
 
-  return <DropdownActionsWithTagEditorDialog />
+  return <DropdownActionsWithTagEditor />
 }
 
 export default DropdownActions

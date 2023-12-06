@@ -14,11 +14,15 @@ import {
   IconShare20,
   Menu,
   RssFeedDialog,
+  RssFeedDialogProps,
   ShareDialog,
+  ShareDialogProps,
   Translate,
   ViewerContext,
+  withDialog,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
+import { BlockUserDialogProps } from '~/components/BlockUser/Dialog'
 import {
   AuthorRssFeedFragment,
   DropdownActionsUserPrivateFragment,
@@ -185,31 +189,35 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
     return null
   }
 
-  return (
-    <ShareDialog
-      tags={[user.displayName, user.userName].filter(Boolean) as string[]}
-    >
-      {({ openDialog: openShareDialog }) => (
-        <RssFeedDialog user={user}>
-          {({ openDialog: openRssFeedDialog }) => (
-            <BlockUser.Dialog user={user}>
-              {({ openDialog: openBlockUserDialog }) => (
-                <BaseDropdownActions
-                  user={user}
-                  isMe={isMe}
-                  isInAside={isInAside}
-                  {...controls}
-                  openBlockUserDialog={openBlockUserDialog}
-                  openRssFeedDialog={openRssFeedDialog}
-                  openShareDialog={openShareDialog}
-                />
-              )}
-            </BlockUser.Dialog>
-          )}
-        </RssFeedDialog>
-      )}
-    </ShareDialog>
+  const DropdownActionsWithShare = withDialog<
+    Omit<ShareDialogProps, 'children'>
+  >(
+    BaseDropdownActions,
+    ShareDialog,
+    { tags: [user.displayName, user.userName].filter(Boolean) as string[] },
+    ({ openDialog }) => ({
+      user,
+      isMe,
+      isInAside,
+      ...controls,
+      openShareDialog: openDialog,
+    })
   )
+  const DropdownActionsWithRssFeed = withDialog<
+    Omit<RssFeedDialogProps, 'children'>
+  >(DropdownActionsWithShare, RssFeedDialog, { user }, ({ openDialog }) => ({
+    openRssFeedDialog: openDialog,
+  }))
+  const DropdownActionsWithBlockUser = withDialog<
+    Omit<BlockUserDialogProps, 'children'>
+  >(
+    DropdownActionsWithRssFeed,
+    BlockUser.Dialog,
+    { user },
+    ({ openDialog }) => ({ openBlockUserDialog: openDialog })
+  )
+
+  return <DropdownActionsWithBlockUser />
 }
 
 DropdownActions.fragments = fragments
