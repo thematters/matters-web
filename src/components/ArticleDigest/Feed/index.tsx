@@ -1,5 +1,4 @@
-import classNames from 'classnames'
-import React, { useRef, useState } from 'react'
+import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
@@ -9,7 +8,6 @@ import {
   LinkWrapper,
   Media,
   ResponsiveImage,
-  useIsomorphicLayoutEffect,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
@@ -59,31 +57,11 @@ const BaseArticleDigestFeed = ({
   hasDonationCount,
   ...controls
 }: ArticleDigestFeedProps) => {
-  const titleRef: React.RefObject<any> = useRef(null)
-
-  const [titleLine, setTitleLine] = useState(2)
-
-  useIsomorphicLayoutEffect(() => {
-    if (titleRef && titleRef.current) {
-      if (titleRef.current.clientHeight === 24) {
-        setTitleLine(1)
-      }
-    }
-  }, [])
-
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
   const cleanedSummary = isBanned ? '' : stripHtml(summary)
 
-  const summaryClasses = classNames({
-    [styles.description]: true,
-    [styles.minHeight]: !!cover && titleLine === 1,
-  })
-
-  const summaryClassesLineClamp2 = classNames(summaryClasses, {
-    [styles.lineClamp2]: true,
-  })
   const path = toPath({
     page: 'articleDetail',
     article,
@@ -107,30 +85,30 @@ const BaseArticleDigestFeed = ({
       className={styles.wrapper}
       data-test-id={TEST_ID.DIGEST_ARTICLE_FEED}
     >
-      {hasHeader && (
-        <header className={styles.header}>
-          {hasAuthor && (
-            <>
-              <section className={styles.author}>
-                <UserDigest.Mini
-                  user={author}
-                  avatarSize="sm"
-                  textSize="xs"
-                  hasAvatar
-                  hasDisplayName
-                  onClick={onClickAuthor}
-                />
-                <IconDotDivider color="greyLight" size="mdS" />
-              </section>
-            </>
-          )}
-          <DateTime date={article.createdAt} color="grey" />
-        </header>
-      )}
       <section className={styles.container}>
         <section className={styles.content}>
+          {hasHeader && (
+            <header className={styles.header}>
+              {hasAuthor && (
+                <>
+                  <section className={styles.author}>
+                    <UserDigest.Mini
+                      user={author}
+                      avatarSize="sm"
+                      textSize="xs"
+                      hasAvatar
+                      hasDisplayName
+                      onClick={onClickAuthor}
+                    />
+                    <IconDotDivider color="greyLight" size="mdS" />
+                  </section>
+                </>
+              )}
+              <DateTime date={article.createdAt} color="grey" />
+            </header>
+          )}
           <section className={styles.head}>
-            <section className={styles.title} ref={titleRef}>
+            <section className={styles.title}>
               <ArticleDigestTitle
                 article={article}
                 textSize="md"
@@ -141,12 +119,7 @@ const BaseArticleDigestFeed = ({
           </section>
 
           <LinkWrapper {...path} onClick={onClick}>
-            {titleLine === 1 && (
-              <p className={summaryClassesLineClamp2}>{cleanedSummary}</p>
-            )}
-            {titleLine === 2 && (
-              <p className={summaryClasses}>{cleanedSummary}</p>
-            )}
+            <p className={styles.description}>{cleanedSummary}</p>
           </LinkWrapper>
 
           <Media greaterThan="sm">{footerActions}</Media>

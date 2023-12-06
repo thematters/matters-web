@@ -26,17 +26,14 @@
   }
 }
 
-.emblaViewport {
-  position: relative;
-  overflow: hidden;
-}
-
 .tabList {
   @mixin hide-scrollbar;
 
-  position: relative;
   display: flex;
+  gap: var(--spacing-base);
   padding: var(--spacing-base) var(--spacing-base) 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 
   @media (--sm-up) {
     padding: var(--spacing-base) 0 0;
@@ -45,10 +42,8 @@
   & .tabItem {
     @mixin transition;
 
-    position: relative;
     flex-shrink: 0;
     padding: var(--spacing-base-xxx-tight) var(--spacing-base-tight);
-    margin-right: var(--spacing-base);
     font-size: var(--font-size-sm);
     font-feature-settings:
       'clig' off,
@@ -82,13 +77,5 @@
       color: var(--color-white);
       background: var(--color-black);
     }
-  }
-
-  & .rightSpace {
-    position: relative;
-    display: inline-block;
-    flex-shrink: 0;
-    width: 4rem;
-    height: 2rem;
   }
 }
