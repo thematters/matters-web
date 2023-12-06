@@ -14,15 +14,20 @@ import {
   Menu,
   toast,
   ViewerContext,
+  withDialog,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
+import { BlockUserDialogProps } from '~/components/BlockUser/Dialog'
+import type { CommentFormDialogProps } from '~/components/Dialogs/CommentFormDialog'
 import {
   DropdownActionsCommentPrivateFragment,
   DropdownActionsCommentPublicFragment,
 } from '~/gql/graphql'
 
 import CollapseComment from './CollapseComment'
+import { CollapseCommentDialogProps } from './CollapseComment/Dialog'
 import DeleteComment from './DeleteComment'
+import type { DeleteCommentDialogProps } from './DeleteComment/Dialog'
 import EditButton from './EditButton'
 import PinButton from './PinButton'
 import UncollapseButton from './UncollapseButton'
@@ -226,43 +231,73 @@ const DropdownActions = (props: DropdownActionsProps) => {
     return null
   }
 
-  return (
-    <CommentFormDialog
-      articleId={article?.id}
-      circleId={circle?.id}
-      type={type}
-      commentId={comment.id}
-      defaultContent={comment.content}
-      title={article ? 'editComment' : 'edit'}
-    >
-      {({ openDialog: openEditCommentDialog }) => (
-        <DeleteComment.Dialog comment={comment} type={type}>
-          {({ openDialog: openDeleteCommentDialog }) => (
-            <BlockUser.Dialog user={comment.author}>
-              {({ openDialog: openBlockUserDialog }) => (
-                <CollapseComment.Dialog comment={comment} type={type}>
-                  {({ openDialog: openCollapseCommentDialog }) => (
-                    <BaseDropdownActions
-                      {...props}
-                      {...controls}
-                      openEditCommentDialog={
-                        isBanned || isFrozen ? forbid : openEditCommentDialog
-                      }
-                      openDeleteCommentDialog={
-                        isFrozen ? forbid : openDeleteCommentDialog
-                      }
-                      openBlockUserDialog={openBlockUserDialog}
-                      openCollapseCommentDialog={openCollapseCommentDialog}
-                    />
-                  )}
-                </CollapseComment.Dialog>
-              )}
-            </BlockUser.Dialog>
-          )}
-        </DeleteComment.Dialog>
-      )}
-    </CommentFormDialog>
+  const DropdownActionsWithEditComment = withDialog<
+    Omit<CommentFormDialogProps, 'children'>
+  >(
+    BaseDropdownActions,
+    CommentFormDialog,
+    {
+      articleId: article?.id,
+      circleId: circle?.id,
+      type,
+      commentId: comment.id,
+      defaultContent: comment.content,
+      title: article ? 'editComment' : 'edit',
+    },
+    ({ openDialog }) => {
+      return {
+        ...props,
+        ...controls,
+        openEditCommentDialog: isBanned || isFrozen ? forbid : openDialog,
+      }
+    }
   )
+  const DropdownActionsWithDeleteComment = withDialog<
+    Omit<DeleteCommentDialogProps, 'children'>
+  >(
+    DropdownActionsWithEditComment,
+    DeleteComment.Dialog,
+    {
+      comment,
+      type,
+    },
+    ({ openDialog }) => {
+      return {
+        openDeleteCommentDialog: isFrozen ? forbid : openDialog,
+      }
+    }
+  )
+  const DropdownActionsWithBlockUser = withDialog<
+    Omit<BlockUserDialogProps, 'children'>
+  >(
+    DropdownActionsWithDeleteComment,
+    BlockUser.Dialog,
+    {
+      user: comment.author,
+    },
+    ({ openDialog }) => {
+      return {
+        openBlockUserDialog: openDialog,
+      }
+    }
+  )
+  const DropdownActionsWithCollapseComment = withDialog<
+    Omit<CollapseCommentDialogProps, 'children'>
+  >(
+    DropdownActionsWithBlockUser,
+    CollapseComment.Dialog,
+    {
+      comment,
+      type,
+    },
+    ({ openDialog }) => {
+      return {
+        openCollapseCommentDialog: openDialog,
+      }
+    }
+  )
+
+  return <DropdownActionsWithCollapseComment />
 }
 
 DropdownActions.fragments = fragments

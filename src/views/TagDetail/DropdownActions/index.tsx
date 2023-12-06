@@ -8,6 +8,7 @@ import {
   Button,
   Dropdown,
   EditTagDialog,
+  EditTagDialogProps,
   IconAdd24,
   IconEdit16,
   IconProfile24,
@@ -15,12 +16,18 @@ import {
   IconSettings32,
   Menu,
   TagEditorDialog,
+  TagEditorDialogProps,
   TagLeaveDialog,
+  TagLeaveDialogProps,
   toast,
   useMutation,
   ViewerContext,
+  withDialog,
 } from '~/components'
-import { SearchSelectDialog } from '~/components/Dialogs/SearchSelectDialog'
+import {
+  SearchSelectDialog,
+  SearchSelectDialogProps,
+} from '~/components/Dialogs/SearchSelectDialog'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import { updateTagArticlesCount } from '~/components/GQL'
 import ADD_ARTICLES_TAGS from '~/components/GQL/mutations/addArticlesTags'
@@ -207,54 +214,65 @@ const DropdownActions = (props: DropdownActionsProps) => {
     return null
   }
 
-  return (
-    <EditTagDialog {...props.tag}>
-      {({ openDialog: openEditTagDialog }) => (
-        <SearchSelectDialog
-          title={
-            <FormattedMessage
-              defaultMessage="Add Articles into Featured"
-              id="ySGgTo"
-              description="src/views/TagDetail/DropdownActions/index.tsx"
-            />
-          }
-          hint="hintEditCollection"
-          searchType="Article"
-          onSave={addArticlesToTag(true)}
-          saving={loading}
-        >
-          {({ openDialog: openTagAddSelectedArticlesDialog }) => (
-            <TagLeaveDialog {...props} id={tag.id}>
-              {({ openDialog: openTagLeaveDialog }) => (
-                <TagEditorDialog {...props} id={tag.id}>
-                  {({ openDialog: openTagEditorDialog }) => (
-                    <BaseDropdownActions
-                      {...props}
-                      {...controls}
-                      openTagAddSelectedArticlesDialog={
-                        viewer.isFrozen
-                          ? forbid
-                          : openTagAddSelectedArticlesDialog
-                      }
-                      openEditTagDialog={
-                        viewer.isFrozen ? forbid : openEditTagDialog
-                      }
-                      openTagLeaveDialog={
-                        viewer.isFrozen ? forbid : openTagLeaveDialog
-                      }
-                      openTagEditorDialog={
-                        viewer.isFrozen ? forbid : openTagEditorDialog
-                      }
-                    />
-                  )}
-                </TagEditorDialog>
-              )}
-            </TagLeaveDialog>
-          )}
-        </SearchSelectDialog>
-      )}
-    </EditTagDialog>
+  const DropdownActionsWithEditTag = withDialog<
+    Omit<EditTagDialogProps, 'children'>
+  >(BaseDropdownActions, EditTagDialog, { ...props.tag }, ({ openDialog }) => {
+    return {
+      ...props,
+      ...controls,
+      openEditTagDialog: viewer.isFrozen ? forbid : openDialog,
+    }
+  })
+  const DropdownActionsWithSearchSelect = withDialog<
+    Omit<SearchSelectDialogProps, 'children'>
+  >(
+    DropdownActionsWithEditTag,
+    SearchSelectDialog,
+    {
+      title: (
+        <FormattedMessage
+          defaultMessage="Add Articles into Featured"
+          id="ySGgTo"
+          description="src/views/TagDetail/DropdownActions/index.tsx"
+        />
+      ),
+      hint: 'hintEditCollection',
+      searchType: 'Article',
+      onSave: addArticlesToTag(true),
+      saving: loading,
+    },
+    ({ openDialog }) => {
+      return {
+        openTagAddSelectedArticlesDialog: viewer.isFrozen ? forbid : openDialog,
+      }
+    }
   )
+  const DropdownActionsWithTagLeaveDialog = withDialog<
+    Omit<TagLeaveDialogProps, 'children'>
+  >(
+    DropdownActionsWithSearchSelect,
+    TagLeaveDialog,
+    { ...props, id: tag.id },
+    ({ openDialog }) => {
+      return {
+        openTagLeaveDialog: viewer.isFrozen ? forbid : openDialog,
+      }
+    }
+  )
+  const DropdownActionsWithTagEditorDialog = withDialog<
+    Omit<TagEditorDialogProps, 'children'>
+  >(
+    DropdownActionsWithTagLeaveDialog,
+    TagEditorDialog,
+    { ...props, id: tag.id },
+    ({ openDialog }) => {
+      return {
+        openTagEditorDialog: viewer.isFrozen ? forbid : openDialog,
+      }
+    }
+  )
+
+  return <DropdownActionsWithTagEditorDialog />
 }
 
 export default DropdownActions

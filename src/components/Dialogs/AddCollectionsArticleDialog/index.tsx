@@ -26,7 +26,7 @@ interface FormValues {
   checked: string[]
 }
 
-interface AddCollectionsArticleDialogProps {
+export interface AddCollectionsArticleDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   articleId: string
 }

@@ -6,25 +6,33 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
   AddCollectionsArticleDialog,
+  AddCollectionsArticleDialogProps,
   AppreciatorsDialog,
+  AppreciatorsDialogProps,
   BookmarkButton,
   Button,
   Dropdown,
   FingerprintDialog,
+  FingerprintDialogProps,
   IconMore16,
   IconSize,
   Menu,
   RemoveArticleCollectionDialog,
+  RemoveArticleCollectionDialogProps,
   ShareDialog,
+  ShareDialogProps,
   SupportersDialog,
+  SupportersDialogProps,
   toast,
   ViewerContext,
+  withDialog,
 } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
 import AddCollectionButton from './AddCollectionButton'
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
+import { ArchiveArticleDialogProps } from './ArchiveArticle/Dialog'
 import DonatorsButton from './DonatorsButton'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
@@ -338,63 +346,110 @@ const DropdownActions = (props: DropdownActionsProps) => {
     return null
   }
 
-  return (
-    <ShareDialog path={props.sharePath}>
-      {({ openDialog: openShareDialog }) => (
-        <FingerprintDialog article={article}>
-          {({ openDialog: openFingerprintDialog }) => (
-            <AppreciatorsDialog article={article}>
-              {({ openDialog: openAppreciatorsDialog }) => (
-                <SupportersDialog article={article}>
-                  {({ openDialog: openSupportersDialog }) => (
-                    <ArchiveArticle.Dialog article={article}>
-                      {({ openDialog: openArchiveDialog }) => (
-                        <AddCollectionsArticleDialog articleId={article.id}>
-                          {({
-                            openDialog: openAddCollectionsArticleDialog,
-                          }) => (
-                            <RemoveArticleCollectionDialog
-                              articleId={article.id}
-                              articleTitle={article.title}
-                              collectionId={collectionId || ''}
-                            >
-                              {({
-                                openDialog: openRemoveArticleCollectionDialog,
-                              }) => (
-                                <BaseDropdownActions
-                                  {...props}
-                                  {...controls}
-                                  openShareDialog={openShareDialog}
-                                  openFingerprintDialog={openFingerprintDialog}
-                                  openAppreciatorsDialog={
-                                    openAppreciatorsDialog
-                                  }
-                                  openSupportersDialog={openSupportersDialog}
-                                  openArchiveDialog={
-                                    viewer.isFrozen ? forbid : openArchiveDialog
-                                  }
-                                  openAddCollectionsArticleDialog={
-                                    openAddCollectionsArticleDialog
-                                  }
-                                  openRemoveArticleCollectionDialog={
-                                    openRemoveArticleCollectionDialog
-                                  }
-                                />
-                              )}
-                            </RemoveArticleCollectionDialog>
-                          )}
-                        </AddCollectionsArticleDialog>
-                      )}
-                    </ArchiveArticle.Dialog>
-                  )}
-                </SupportersDialog>
-              )}
-            </AppreciatorsDialog>
-          )}
-        </FingerprintDialog>
-      )}
-    </ShareDialog>
+  const DropdownActionsWithShareDialog = withDialog<
+    Omit<ShareDialogProps, 'children'>
+  >(
+    BaseDropdownActions,
+    ShareDialog,
+    {
+      path: props.sharePath,
+    },
+    ({ openDialog }) => {
+      return {
+        ...props,
+        ...controls,
+        openShareDialog: openDialog,
+      }
+    }
   )
+  const DropdownActionsWithFingerprint = withDialog<
+    Omit<FingerprintDialogProps, 'children'>
+  >(
+    DropdownActionsWithShareDialog,
+    FingerprintDialog,
+    {
+      article,
+    },
+    ({ openDialog }) => {
+      return {
+        openFingerprintDialog: openDialog,
+      }
+    }
+  )
+  const DropdownActionsWithAppreciators = withDialog<
+    Omit<AppreciatorsDialogProps, 'children'>
+  >(
+    DropdownActionsWithFingerprint,
+    AppreciatorsDialog,
+    {
+      article,
+    },
+    ({ openDialog }) => {
+      return {
+        openAppreciatorsDialog: openDialog,
+      }
+    }
+  )
+  const DropdownActionsWithSupporters = withDialog<
+    Omit<SupportersDialogProps, 'children'>
+  >(
+    DropdownActionsWithAppreciators,
+    SupportersDialog,
+    {
+      article,
+    },
+    ({ openDialog }) => {
+      return {
+        openSupportersDialog: openDialog,
+      }
+    }
+  )
+  const DropdownActionsWithArchiveArticle = withDialog<
+    Omit<ArchiveArticleDialogProps, 'children'>
+  >(
+    DropdownActionsWithSupporters,
+    ArchiveArticle.Dialog,
+    {
+      article,
+    },
+    ({ openDialog }) => {
+      return {
+        openArchiveDialog: viewer.isFrozen ? forbid : openDialog,
+      }
+    }
+  )
+  const DropdownActionsWithAddCollectionsArticle = withDialog<
+    Omit<AddCollectionsArticleDialogProps, 'children'>
+  >(
+    DropdownActionsWithArchiveArticle,
+    AddCollectionsArticleDialog,
+    {
+      articleId: article.id,
+    },
+    ({ openDialog }) => {
+      return {
+        openAddCollectionsArticleDialog: openDialog,
+      }
+    }
+  )
+  const DropdownActionsWithRemoveArticleCollection = withDialog<
+    Omit<RemoveArticleCollectionDialogProps, 'children'>
+  >(
+    DropdownActionsWithAddCollectionsArticle,
+    RemoveArticleCollectionDialog,
+    {
+      articleId: article.id,
+      articleTitle: article.title,
+      collectionId: collectionId || '',
+    },
+    ({ openDialog }) => {
+      return {
+        openRemoveArticleCollectionDialog: openDialog,
+      }
+    }
+  )
+
+  return <DropdownActionsWithRemoveArticleCollection />
 }
 
 DropdownActions.fragments = fragments
