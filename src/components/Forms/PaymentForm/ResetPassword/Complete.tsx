@@ -15,11 +15,13 @@ const Complete: React.FC<CompleteProps> = ({
     <>
       <Dialog.Header title="resetPaymentPassword" />
 
-      <Dialog.Message>
-        <p>
-          <Translate id="successResetPaymentPassword" />
-        </p>
-      </Dialog.Message>
+      <Dialog.Content>
+        <Dialog.Content.Message>
+          <p>
+            <Translate id="successResetPaymentPassword" />
+          </p>
+        </Dialog.Content.Message>
+      </Dialog.Content>
 
       <Dialog.Footer
         closeDialog={callback ? undefined : closeDialog}

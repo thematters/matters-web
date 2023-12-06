@@ -85,14 +85,16 @@ const CollapseCommentDialog = ({
           }
         />
 
-        <Dialog.Message>
-          <p>
-            <Translate
-              zh_hant={`闔上${COMMENT_TYPE_TEXT.zh_hant[type]}後，其他用戶需展開才可查看`}
-              zh_hans={`折叠${COMMENT_TYPE_TEXT.zh_hans[type]}后，其他用户需展开才可查看`}
-            />
-          </p>
-        </Dialog.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message>
+            <p>
+              <Translate
+                zh_hant={`闔上${COMMENT_TYPE_TEXT.zh_hant[type]}後，其他用戶需展開才可查看`}
+                zh_hans={`折叠${COMMENT_TYPE_TEXT.zh_hans[type]}后，其他用户需展开才可查看`}
+              />
+            </p>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer
           closeDialog={closeDialog}

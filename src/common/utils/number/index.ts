@@ -6,7 +6,7 @@ NP.enableBoundaryChecking(false)
 
 export const numPrefix = (num: number | string) => {
   const parsedNum = parseFloat(num + '')
-  return parsedNum > 0 ? `+${num}` : num
+  return parsedNum > 0 ? `+${num}` : `${num}`
 }
 
 export const numAbbr = (num: number, decPlaces: number = 1) =>

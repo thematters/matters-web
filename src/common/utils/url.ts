@@ -1,11 +1,6 @@
+export { default as isUrl } from 'validator/lib/isURL'
+
 import { URL_COLLECTION_DETAIL } from '../enums'
-
-const pattern = /^(:?\/\/|https?:\/\/)?([^/]*@)?(.+?)(:\d{2,5})?([/?].*)?$/
-
-export const extractDomain = (url: string) => {
-  const parts = url.match(pattern) || []
-  return parts[3]
-}
 
 export const parseURL = (url: string) => {
   const parser = document.createElement('a')
@@ -36,7 +31,7 @@ interface ToSizedImageURLProps {
   disableAnimation?: boolean
 }
 
-export const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
+const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
   const list = key.split('.')
   const hasExt = list.length > 1
   const newExt = ext || list.slice(-1)[0] || ''
@@ -89,41 +84,19 @@ export const toSizedImageURL = ({
   return assetDomain + extedUrl + '/' + postfix
 }
 
-export const isUrl = (key: string) => {
-  let valid = false
-
-  try {
-    valid = Boolean(new URL(key))
-  } catch (e) {
-    // do nothing
-  }
-
-  if (valid) {
-    return valid
-  }
-
-  // fallback to match url w/o protocol
-  const pattern = new RegExp(
-    '^([a-zA-Z]+:\\/\\/)?' + // protocol
-      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|' + // domain name
-      '((\\d{1,3}\\.){3}\\d{1,3}))' + // OR IP (v4) address
-      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*' + // port and path
-      '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
-      '(\\#[-a-z\\d_]*)?$', // fragment locator
-    'i'
-  )
-  return pattern.test(key)
-}
-
 export const parseSorter = (sorterStr: string) => {
-  const sorter: any = {}
+  const sorter: { [key: string]: string } = {}
   if (sorterStr === '') {
     return sorter
   }
   const sorters = sorterStr.split(URL_COLLECTION_DETAIL.SORTER_SEPARATOR)
   sorters.map((s) => {
-    const [key, value] = s.split(URL_COLLECTION_DETAIL.SORTER_TYPE_SEPARATOR)
-    sorter[key] = value
+    let [key, value] = s.split(URL_COLLECTION_DETAIL.SORTER_TYPE_SEPARATOR)
+    key = (key || '').trim()
+    value = (value || '').trim()
+    if (key) {
+      sorter[key] = value
+    }
   })
   return sorter
 }

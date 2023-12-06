@@ -42,7 +42,8 @@ type EventArgs =
  * Event: Page View
  */
 interface PageViewProp {
-  page_referrer: string
+  page_referrer?: string
+  mode: string
 }
 
 /**

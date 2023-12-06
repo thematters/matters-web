@@ -47,15 +47,6 @@ export const makeSummary = (html: string, length = 140, buffer = 20) => {
 }
 
 /**
- * Removes leading and trailing line breaks from (Quill's) HTML string.
- */
-export const trimLineBreaks = (html: string) => {
-  const LINE_BREAK = '<p><br></p>'
-  const re = new RegExp(`(^(${LINE_BREAK})*)|((${LINE_BREAK})*$)`, 'g')
-  return html.replace(re, '')
-}
-
-/**
  * Simple words' length counting.
  */
 export const countChars = (text: string) => {
@@ -102,7 +93,7 @@ export const normalizeArticleTitle = (text: string, limit: number) => {
  */
 export const optimizeEmbed = (content: string) => {
   return content
-    .replace(/\<iframe /g, '<iframe loading="lazy"')
+    .replace(/\<iframe /g, '<iframe loading="lazy" ')
     .replace(
       /<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/g,
       (match, src, offset) => {

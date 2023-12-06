@@ -2,8 +2,8 @@ import { expect, test } from '@playwright/test'
 import _random from 'lodash/random'
 
 import { TEST_ID } from '~/common/enums'
+import { sleep } from '~/common/utils'
 import { stripSpaces } from '~/common/utils/text'
-import { sleep } from '~/common/utils/time'
 
 import { publishDraft } from './common'
 import {

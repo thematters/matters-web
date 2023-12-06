@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import Message from '../Message'
+import Message from './Message'
 import styles from './styles.module.css'
 
 interface DialogContentProps {
