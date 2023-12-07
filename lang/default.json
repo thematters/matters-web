@@ -912,10 +912,6 @@
     "defaultMessage": "New likes",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
-  "OwKIEe": {
-    "defaultMessage": "{count, plural, =1 {1 article} other {{count} articles}}",
-    "description": "src/components/Book/index.tsx"
-  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
