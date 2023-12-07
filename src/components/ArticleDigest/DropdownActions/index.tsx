@@ -131,7 +131,7 @@ interface DialogProps {
 }
 
 interface AdminProps {
-  openToggleRecommend: (
+  openToggleRecommendDialog: (
     props: OpenToggleRecommendArticleDialogWithProps
   ) => void
 }
@@ -181,7 +181,7 @@ const BaseDropdownActions = ({
   onRemoveCollection,
 
   // admin
-  openToggleRecommend,
+  openToggleRecommendDialog,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
   const hasPublic =
@@ -266,18 +266,18 @@ const BaseDropdownActions = ({
       )}
 
       {/* admin */}
-      {isAdminView && viewer.isAdmin && openToggleRecommend && (
+      {isAdminView && viewer.isAdmin && (
         <>
           <Menu.Divider />
           <ToggleRecommendArticle.Button
             id={article.id}
             type="icymi"
-            openDialog={openToggleRecommend}
+            openDialog={openToggleRecommendDialog}
           />
           <ToggleRecommendArticle.Button
             id={article.id}
             type="hottestAndNewest"
-            openDialog={openToggleRecommend}
+            openDialog={openToggleRecommendDialog}
           />
         </>
       )}
@@ -470,7 +470,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     DynamicToggleRecommendArticleDialog,
     { article },
     ({ openDialog }) => ({
-      openToggleRecommend: openDialog,
+      openToggleRecommendDialog: openDialog,
     })
   )
 

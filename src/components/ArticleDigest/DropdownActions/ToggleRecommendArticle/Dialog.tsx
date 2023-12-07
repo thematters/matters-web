@@ -71,7 +71,6 @@ const ToggleRecommendArticleDialog = ({
     type,
     enabled,
   }: OpenToggleRecommendArticleDialogWithProps) => {
-    console.log({ type, enabled })
     setType(type)
     setEnabled(enabled)
     openDialog()
@@ -100,7 +99,7 @@ const ToggleRecommendArticleDialog = ({
       {children({ openDialog: openDialogWithProps })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <Dialog.Header title={title[type][+enabled]} />
+        <Dialog.Header title={<span>{title[type][+enabled]}</span>} />
 
         <Dialog.Content>
           <Dialog.Content.Message>

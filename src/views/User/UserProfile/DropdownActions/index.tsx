@@ -29,6 +29,16 @@ import {
   DropdownActionsUserPublicFragment,
 } from '~/gql/graphql'
 
+import ArchiveUser from './ArchiveUser'
+import { ArchiveUserDialogProps } from './ArchiveUser/Dialog'
+import ToggleRestrictUser from './ToggleRestrictUser'
+import {
+  OpenToggleRestrictUserDialogWithProps,
+  ToggleRestrictUserDialogProps,
+} from './ToggleRestrictUser/Dialog'
+
+const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
+
 interface DropdownActionsProps {
   user: DropdownActionsUserPublicFragment &
     AuthorRssFeedFragment &
@@ -49,7 +59,17 @@ interface Controls {
   hasRssFeed: boolean
 }
 
-type BaseDropdownActionsProps = DropdownActionsProps & DialogProps & Controls
+interface AdminProps {
+  openToggleRestrictDialog: (
+    props: OpenToggleRestrictUserDialogWithProps
+  ) => void
+  openArchiveDialog: () => void
+}
+
+type BaseDropdownActionsProps = DropdownActionsProps &
+  DialogProps &
+  Controls &
+  AdminProps
 
 const fragments = {
   user: {
@@ -83,8 +103,14 @@ const BaseDropdownActions = ({
   openBlockUserDialog,
   openRssFeedDialog,
   openShareDialog,
+
+  // admin
+  openToggleRestrictDialog,
+  openArchiveDialog,
 }: BaseDropdownActionsProps) => {
+  const viewer = useContext(ViewerContext)
   const intl = useIntl()
+
   const Content = () => (
     <Menu>
       <Menu.Item
@@ -110,6 +136,18 @@ const BaseDropdownActions = ({
 
       {hasBlockUser && (
         <BlockUser.Button user={user} openDialog={openBlockUserDialog} />
+      )}
+
+      {/* admin */}
+      {isAdminView && viewer.isAdmin && (
+        <>
+          <Menu.Divider />
+          <ToggleRestrictUser.Button
+            id={user.id}
+            openDialog={openToggleRestrictDialog}
+          />
+          <ArchiveUser.Button openDialog={openArchiveDialog} />
+        </>
       )}
     </Menu>
   )
@@ -217,7 +255,32 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
     ({ openDialog }) => ({ openBlockUserDialog: openDialog })
   )
 
-  return <DropdownActionsWithBlockUser />
+  // exclude admin code on build
+  if (!isAdminView || !viewer.isAdmin) {
+    return <DropdownActionsWithBlockUser />
+  }
+
+  /**
+   * ADMIN ONLY
+   */
+  const DropdownActionsWithToggleRestrict = withDialog<
+    Omit<ToggleRestrictUserDialogProps, 'children'>
+  >(
+    DropdownActionsWithBlockUser,
+    ToggleRestrictUser.Dialog,
+    { id: user.id, userName: user.userName! },
+    ({ openDialog }) => ({ openToggleRestrictDialog: openDialog })
+  )
+  const DropdownActionsWithArchiveUser = withDialog<
+    Omit<ArchiveUserDialogProps, 'children'>
+  >(
+    DropdownActionsWithToggleRestrict,
+    ArchiveUser.Dialog,
+    { id: user.id, userName: user.userName! },
+    ({ openDialog }) => ({ openArchiveDialog: openDialog })
+  )
+
+  return <DropdownActionsWithArchiveUser />
 }
 
 DropdownActions.fragments = fragments
