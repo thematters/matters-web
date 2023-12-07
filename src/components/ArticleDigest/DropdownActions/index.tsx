@@ -47,6 +47,11 @@ import SetTagUnselectedButton from './SetTagUnselectedButton'
 import SetTopCollectionButton from './SetTopCollectionButton'
 import ShareButton from './ShareButton'
 import styles from './styles.module.css'
+import ToggleRecommendArticle from './ToggleRecommendArticle'
+import ToggleRecommendArticleDialog, {
+  OpenToggleRecommendArticleDialogWithProps,
+  ToggleRecommendArticleDialogProps,
+} from './ToggleRecommendArticle/Dialog'
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode
@@ -114,7 +119,16 @@ interface DialogProps {
   openRemoveArticleCollectionDialog: () => void
 }
 
-type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
+interface AdminProps {
+  openToggleRecommend: (
+    props: OpenToggleRecommendArticleDialogWithProps
+  ) => void
+}
+
+type BaseDropdownActionsProps = DropdownActionsProps &
+  Controls &
+  DialogProps &
+  AdminProps
 
 const BaseDropdownActions = ({
   article,
@@ -154,7 +168,11 @@ const BaseDropdownActions = ({
   onSetBottomCollection,
   onSetTopCollection,
   onRemoveCollection,
+
+  // admin
+  openToggleRecommend,
 }: BaseDropdownActionsProps) => {
+  const viewer = useContext(ViewerContext)
   const hasPublic =
     hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
   const hasPrivate =
@@ -232,6 +250,23 @@ const BaseDropdownActions = ({
           <RemoveArticleCollectionButton
             onClick={onRemoveCollection}
             openDialog={openRemoveArticleCollectionDialog}
+          />
+        </>
+      )}
+
+      {/* admin */}
+      {viewer.isAdmin && openToggleRecommend && (
+        <>
+          <Menu.Divider />
+          <ToggleRecommendArticle.Button
+            id={article.id}
+            type="icymi"
+            openDialog={openToggleRecommend}
+          />
+          <ToggleRecommendArticle.Button
+            id={article.id}
+            type="hottestAndNewest"
+            openDialog={openToggleRecommend}
           />
         </>
       )}
@@ -409,7 +444,23 @@ const DropdownActions = (props: DropdownActionsProps) => {
     ({ openDialog }) => ({ openRemoveArticleCollectionDialog: openDialog })
   )
 
-  return <DropdownActionsWithRemoveArticleCollection />
+  // admin
+  const DropdownActionsWithToggleRecommend = withDialog<
+    Omit<ToggleRecommendArticleDialogProps, 'children'>
+  >(
+    DropdownActionsWithRemoveArticleCollection,
+    ToggleRecommendArticleDialog,
+    { article },
+    ({ openDialog }) => ({
+      openToggleRecommend: openDialog,
+    })
+  )
+
+  return viewer.isAdmin ? (
+    <DropdownActionsWithToggleRecommend />
+  ) : (
+    <DropdownActionsWithRemoveArticleCollection />
+  )
 }
 
 DropdownActions.fragments = fragments
