@@ -30,9 +30,9 @@ export const useColorThief = () => {
         const colors = colorThief.getColor($img)
         const hsl = rgbToHsl(...colors)
         setDominantColor(
-          `hsl(${parseInt(hsl[0] + '')} ${parseFloat(hsl[1] * 100 + '').toFixed(
-            2
-          )}% 30%)`
+          `hsla(${parseInt(hsl[0] + '')}, ${parseFloat(
+            hsl[1] * 100 + ''
+          ).toFixed(2)}%, 30%, 1)`
         )
       } catch (error: any) {
         if (error.name === 'SecurityError') {

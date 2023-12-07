@@ -17,14 +17,14 @@ describe('<CollectionDigestFeed>', () => {
     const $digest = screen.getByTestId(TEST_ID.DIGEST_COLLECTION_FEED)
     expect($digest).toBeInTheDocument()
 
-    const $book = screen.getByTestId(TEST_ID.BOOK)
+    const $book = screen.getByTestId(TEST_ID.BOOK_COLLECTION)
     expect($book).toBeInTheDocument()
     mockRouter.push('/')
     $book.click()
     expect(mockRouter.asPath).toContain(MOCK_COLLECTON.id)
     expect(handleClick).toBeCalledTimes(1)
 
-    const $heading = screen.getByRole('link', { name: MOCK_COLLECTON.title })
+    const $heading = screen.getByTestId(TEST_ID.BOOK_TITLE)
     expect($heading).toBeInTheDocument()
     mockRouter.push('/')
     $heading.click()

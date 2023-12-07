@@ -36,10 +36,12 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
           <Media lessThan="lg">
             <section>
               <section className={styles.header}>
-                {(!!cover || !isViewer) && <Book title={title} cover={cover} />}
+                {(!!cover || !isViewer) && (
+                  <Book.Collection title={title} cover={cover} />
+                )}
                 {!cover && isViewer && (
                   <button onClick={openEditeCollection}>
-                    <Book title={title} hasMask />
+                    <Book.Collection title={title} hasMask />
                   </button>
                 )}
                 <section className={styles.info}>
@@ -100,19 +102,11 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
           <Media greaterThanOrEqual="lg">
             <section className={styles.header}>
               {(!!cover || !isViewer) && (
-                <Book
-                  title={title}
-                  cover={cover}
-                  articleCount={articles.totalCount}
-                />
+                <Book.Collection title={title} cover={cover} />
               )}
               {!cover && isViewer && (
                 <button onClick={openEditeCollection}>
-                  <Book
-                    title={title}
-                    articleCount={articles.totalCount}
-                    hasMask
-                  />
+                  <Book.Collection title={title} hasMask />
                 </button>
               )}
               <section className={styles.info}>
