@@ -912,10 +912,6 @@
     "defaultMessage": "作品被赞赏",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
-  "OwKIEe": {
-    "defaultMessage": "{count, plural, =1 {1 篇文章} other {{count} 篇文章}}",
-    "description": "src/components/Book/index.tsx"
-  },
   "PLBmDT": {
     "defaultMessage": "登录密码",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
