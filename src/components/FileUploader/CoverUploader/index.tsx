@@ -218,10 +218,9 @@ export const CoverUploader = ({
         <section className={styles.collection}>
           <section className={styles.collectionContent}>
             {
-              <Book
+              <Book.Collection
                 title={bookTitle || ''}
                 cover={cover}
-                articleCount={bookArticleCount}
                 hasMask
                 loading={loading}
               />

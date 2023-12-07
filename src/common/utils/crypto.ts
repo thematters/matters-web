@@ -11,3 +11,6 @@ export const generateChallenge = async (code_verifier: string) => {
     .replace(/\+/g, '-')
     .replace(/=/g, '')
 }
+
+export const randomString = (length = 9) =>
+  Math.random().toString(36).substr(2, length)

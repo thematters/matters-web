@@ -21,7 +21,6 @@ import {
   storage,
   validateEmail,
   WalletType,
-  // validatePassword,
 } from '~/common/utils'
 import {
   AuthFeedType,
@@ -129,7 +128,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     validate: ({ email, password }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
-        // password: validatePassword(password, lang),
       }),
     onSubmit: async ({ email, password }, { setFieldError }) => {
       try {
@@ -157,10 +155,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         if (submitCallback) {
           submitCallback()
         }
-
-        // toast.success({
-        //   message: <FormattedMessage defaultMessage="Logged in successfully" />,
-        // })
 
         analytics.identifyUser()
 

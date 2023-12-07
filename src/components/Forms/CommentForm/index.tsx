@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
-import { dom, stripHtml, translate, trimLineBreaks } from '~/common/utils'
+import { dom, stripHtml, translate } from '~/common/utils'
 import {
   Button,
   IconSpinner16,
@@ -76,7 +76,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
     const input = {
       id: commentId,
       comment: {
-        content: trimLineBreaks(content),
+        content,
         replyTo: replyToId,
         articleId,
         circleId,

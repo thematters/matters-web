@@ -56,25 +56,19 @@ const PinBoard = ({ user }: PinBoardProps) => {
             >
               <a>
                 <Media lessThan="lg">
-                  <Book
+                  <Book.Flat
                     {...work}
-                    articleCount={
-                      work.__typename === 'Collection'
-                        ? work.articles.totalCount || 0
-                        : undefined
+                    type={
+                      work.__typename === 'Article' ? 'article' : 'collection'
                     }
-                    variant="flat"
                   />
                 </Media>
                 <Media greaterThanOrEqual="lg">
-                  <Book
-                    {...work}
-                    articleCount={
-                      work.__typename === 'Collection'
-                        ? work.articles.totalCount || 0
-                        : undefined
-                    }
-                  />
+                  {work.__typename === 'Article' ? (
+                    <Book.Article {...work} description={work.summary} />
+                  ) : (
+                    <Book.Collection {...work} />
+                  )}
                 </Media>
               </a>
             </Link>
