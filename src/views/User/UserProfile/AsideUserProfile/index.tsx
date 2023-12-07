@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
+
 import {
   OPEN_SHOW_NOMAD_BADGE_DIALOG,
   TEST_ID,
@@ -44,7 +45,10 @@ const DynamicWalletLabel = dynamic(() => import('../WalletLabel'), {
 })
 
 export const AsideUserProfile = () => {
-  const { isInPath, getQuery, deleteQuery } = useRoute()
+  const {
+    isInPath,
+    getQuery, // deleteQuery
+  } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public user data
@@ -254,7 +258,7 @@ export const AsideUserProfile = () => {
                 {({ openDialog }) => {
                   if (showBadges) {
                     setTimeout(() => {
-                      deleteQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key)
+                      // deleteQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key)
                       openDialog()
                     })
                   }

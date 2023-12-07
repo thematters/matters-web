@@ -3,7 +3,11 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID, URL_USER_PROFILE } from '~/common/enums'
+import {
+  OPEN_SHOW_NOMAD_BADGE_DIALOG,
+  TEST_ID,
+  URL_USER_PROFILE,
+} from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 import {
   Avatar,
@@ -39,7 +43,9 @@ const DynamicWalletLabel = dynamic(() => import('./WalletLabel'), {
 })
 
 export const UserProfile = () => {
-  const { getQuery, deleteQuery } = useRoute()
+  const {
+    getQuery, // deleteQuery
+  } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public user data
@@ -219,7 +225,7 @@ export const UserProfile = () => {
                 {({ openDialog }) => {
                   if (showBadges && hasNomadBadge) {
                     setTimeout(() => {
-                      deleteQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key)
+                      // deleteQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key)
                       openDialog('nomad')
                     })
                   }

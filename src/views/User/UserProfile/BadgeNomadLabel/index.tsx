@@ -50,4 +50,3 @@ export const BadgeNomadLabel: React.FC<BadgeNomadLabelProps> = ({
     </>
   )
 }
-
