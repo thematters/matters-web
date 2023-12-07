@@ -214,19 +214,22 @@ const DropdownActions = (props: DropdownActionsProps) => {
     return null
   }
 
-  const DropdownActionsWithEditTag = withDialog<
-    Omit<EditTagDialogProps, 'children'>
-  >(BaseDropdownActions, EditTagDialog, { ...props.tag }, ({ openDialog }) => {
-    return {
-      ...props,
-      ...controls,
-      openEditTagDialog: viewer.isFrozen ? forbid : openDialog,
+  const WithEditTag = withDialog<Omit<EditTagDialogProps, 'children'>>(
+    BaseDropdownActions,
+    EditTagDialog,
+    { ...props.tag },
+    ({ openDialog }) => {
+      return {
+        ...props,
+        ...controls,
+        openEditTagDialog: viewer.isFrozen ? forbid : openDialog,
+      }
     }
-  })
-  const DropdownActionsWithSearchSelect = withDialog<
+  )
+  const WithSearchSelect = withDialog<
     Omit<SearchSelectDialogProps, 'children'>
   >(
-    DropdownActionsWithEditTag,
+    WithEditTag,
     SearchSelectDialog,
     {
       title: (
@@ -245,20 +248,16 @@ const DropdownActions = (props: DropdownActionsProps) => {
       openTagAddSelectedArticlesDialog: viewer.isFrozen ? forbid : openDialog,
     })
   )
-  const DropdownActionsWithTagLeave = withDialog<
-    Omit<TagLeaveDialogProps, 'children'>
-  >(
-    DropdownActionsWithSearchSelect,
+  const WithTagLeave = withDialog<Omit<TagLeaveDialogProps, 'children'>>(
+    WithSearchSelect,
     TagLeaveDialog,
     { ...props, id: tag.id },
     ({ openDialog }) => ({
       openTagLeaveDialog: viewer.isFrozen ? forbid : openDialog,
     })
   )
-  const DropdownActionsWithTagEditor = withDialog<
-    Omit<TagEditorDialogProps, 'children'>
-  >(
-    DropdownActionsWithTagLeave,
+  const WithTagEditor = withDialog<Omit<TagEditorDialogProps, 'children'>>(
+    WithTagLeave,
     TagEditorDialog,
     { ...props, id: tag.id },
     ({ openDialog }) => ({
@@ -266,7 +265,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     })
   )
 
-  return <DropdownActionsWithTagEditor />
+  return <WithTagEditor />
 }
 
 export default DropdownActions

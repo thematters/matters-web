@@ -134,13 +134,3 @@ const ToggleRecommendArticleDialog = ({
 }
 
 export default ToggleRecommendArticleDialog
-
-// const LazyToggleRecommendArticleDialog = (
-//   props: ToggleRecommendArticleDialogProps
-// ) => (
-//   <Dialog.Lazy mounted={<ToggleRecommendArticleDialog {...props} />}>
-//     {({ openDialog }) => <>{props.children({ openDialog })}</>}
-//   </Dialog.Lazy>
-// )
-
-// export default LazyToggleRecommendArticleDialog

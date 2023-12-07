@@ -231,9 +231,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     return null
   }
 
-  const DropdownActionsWithEditComment = withDialog<
-    Omit<CommentFormDialogProps, 'children'>
-  >(
+  const WithEditComment = withDialog<Omit<CommentFormDialogProps, 'children'>>(
     BaseDropdownActions,
     CommentFormDialog,
     {
@@ -252,10 +250,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
       }
     }
   )
-  const DropdownActionsWithDeleteComment = withDialog<
+  const WithDeleteComment = withDialog<
     Omit<DeleteCommentDialogProps, 'children'>
   >(
-    DropdownActionsWithEditComment,
+    WithEditComment,
     DeleteComment.Dialog,
     {
       comment,
@@ -267,10 +265,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
       }
     }
   )
-  const DropdownActionsWithBlockUser = withDialog<
-    Omit<BlockUserDialogProps, 'children'>
-  >(
-    DropdownActionsWithDeleteComment,
+  const WithBlockUser = withDialog<Omit<BlockUserDialogProps, 'children'>>(
+    WithDeleteComment,
     BlockUser.Dialog,
     {
       user: comment.author,
@@ -281,10 +277,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
       }
     }
   )
-  const DropdownActionsWithCollapseComment = withDialog<
+  const WithCollapseComment = withDialog<
     Omit<CollapseCommentDialogProps, 'children'>
   >(
-    DropdownActionsWithBlockUser,
+    WithBlockUser,
     CollapseComment.Dialog,
     {
       comment,
@@ -297,7 +293,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     }
   )
 
-  return <DropdownActionsWithCollapseComment />
+  return <WithCollapseComment />
 }
 
 DropdownActions.fragments = fragments
