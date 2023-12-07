@@ -24,6 +24,7 @@ import styles from './styles.module.css'
 const AggregateUserResults = () => {
   const { getQuery } = useRoute()
   const q = getQuery('q')
+  const version = getQuery('version')
 
   /**
    * Data Fetching
@@ -32,7 +33,7 @@ const AggregateUserResults = () => {
   const { data, loading, fetchMore } =
     usePublicQuery<SearchAggregateUsersPublicQuery>(
       SEARCH_AGGREGATE_USERS_PUBLIC,
-      { variables: { key: q } }
+      { variables: { key: q, version: version === '' ? undefined : version } }
     )
 
   useEffect(() => {

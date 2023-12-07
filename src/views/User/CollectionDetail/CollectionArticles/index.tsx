@@ -43,7 +43,9 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
 
   let sorter = parseSorter(getQuery(URL_COLLECTION_DETAIL.SORTER_KEY))
 
-  let sorterSequence = sorter[URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key]
+  let sorterSequence = sorter[
+    URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key
+  ] as SorterSequenceType
 
   if (
     sorterSequence !== URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.DSC &&

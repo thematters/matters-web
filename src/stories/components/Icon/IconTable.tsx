@@ -4,7 +4,11 @@ import { IconLogo, IconProps, Tooltip } from '~/components'
 
 import styles from './styles.module.css'
 
-const icons = require.context('~/components/Icon', false, /\/Icon.+\.tsx$/)
+const icons = require.context(
+  '~/components/Icon',
+  false,
+  /\/Icon(?!.*\.test\.tsx$).+\.tsx$/
+)
 
 // Metters' Logo is not a square
 const LOGO_REQUEST = /IconLogo/

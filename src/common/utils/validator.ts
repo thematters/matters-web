@@ -1,6 +1,6 @@
 import isEmail from 'validator/lib/isEmail'
 
-import { PAYMENT_PASSSWORD_LENGTH } from '../enums'
+import { MIN_PASSWORD_LENGTH, PAYMENT_PASSSWORD_LENGTH } from '../enums'
 
 /**
  * Validate email address.
@@ -29,7 +29,7 @@ export const isValidEmail = (str: string, options: ValidEmailOptions) => {
  * Validate user raw pass word. It only accepts any ASCII character.
  */
 export const isValidPassword = (password: string): boolean => {
-  if (!password || password.length < 8) {
+  if (!password || password.length < MIN_PASSWORD_LENGTH) {
     return false
   }
   return /^[\x00-\x7F]*$/.test(password)

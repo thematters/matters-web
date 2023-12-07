@@ -2,6 +2,10 @@
   position: relative;
   white-space: pre-wrap;
 
+  & .lineClamp {
+    @mixin line-clamp;
+  }
+
   & .expandButton {
     color: var(--color-grey);
     cursor: pointer;

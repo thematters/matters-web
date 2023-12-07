@@ -66,6 +66,7 @@ const handleAnalytics = async ({
     if (type === ANALYTIC_TYPES.PAGE) {
       // const path = window.location.pathname
       const referrer = _get(args[1], 'page_referrer')
+      const mode = _get(args[1], 'mode')
 
       /* window.gtag('config', GA_TRACKING_ID, {
         page_location: path,
@@ -75,6 +76,7 @@ const handleAnalytics = async ({
       const eventData = {
         page_referrer: referrer,
         user_id: id,
+        mode: mode,
       }
       if (analytics) {
         logEvent(analytics, 'page_view', eventData)
