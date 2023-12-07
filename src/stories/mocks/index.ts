@@ -1,13 +1,13 @@
 // User
 export const MOCK_USER = {
   __typename: 'User' as any,
-  id: 'user-0000',
+  id: 'VXNlcjox', // User:1
   userName: 'matty',
   displayName: 'Matty',
   avatar: 'https://source.unsplash.com/256x256?user',
   liker: {
     __typename: 'Liker' as any,
-    likerId: 'user-0000',
+    likerId: 'liker-id-0000',
     civicLiker: false,
   },
   status: {
@@ -72,7 +72,7 @@ export const MOCK_USER = {
 // Circle
 export const MOCK_CIRCLE = {
   __typename: 'Circle' as any,
-  id: 'circle-0000',
+  id: 'Q2lyY2xlOjE', // Cirlce:1
   state: 'active',
   name: 'matters_class',
   displayName: 'Matters 自由課（第一季第二期）',
@@ -115,7 +115,7 @@ export const MOCK_CIRCLE = {
 // Article
 export const MOCK_ARTILCE = {
   __typename: 'Article' as any,
-  id: 'article-0000',
+  id: 'QXJ0aWNsZTox', // Article:1
   title: '中國四川：挑戰世界最危險的公路之一 川藏公路絕美風光',
   slug: 'slug',
   mediaHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
@@ -124,7 +124,7 @@ export const MOCK_ARTILCE = {
   state: 'active' as any,
   cover: 'https://source.unsplash.com/256x256?article',
   summary:
-    '其實已經開始兩週了XD,不過最近才想說應該來記錄一下我在火箭隊的日常,順便練一下文筆,也可以讓大家了解一下火箭隊軟體培訓營裡面大概是在做些什麼事情,上課的模式及氣氛是怎樣等等...畢竟我當時得知有這個免費培訓營時,也是網路上各種爬文類似這種免費培訓工程師半年的心得及成',
+    '其實已經開始兩週了XD,不過最近才想說應該來記錄一下我在火箭隊的日常,順便練一下文筆,也可以讓大家了解一下火箭隊軟體培訓營裡面大概是在做些什麼事情,上課的模式及氣氛是怎樣等等...畢竟我當時得知有這個免費培訓營時,也是網路上各種爬文類似這種免費培訓工程師半年的心得及成',
   author: MOCK_USER,
   createdAt: '2020-12-24T07:29:17.682Z',
   revisedAt: null,
@@ -172,7 +172,7 @@ export const MOCK_CIRCLE_ARTICLE = {
 // Comment
 export const MOCK_PARENT_COMMENT = {
   __typename: 'Comment' as any,
-  id: 'comment-0000',
+  id: 'Q29tbWVudDox', // Comment:1
   state: 'active' as any,
   node: MOCK_ARTILCE,
   parentComment: null,
@@ -183,7 +183,7 @@ export const MOCK_PARENT_COMMENT = {
 
 export const MOCK_COMMENT = {
   __typename: 'Comment' as any,
-  id: 'comment-0000',
+  id: 'Q29tbWVudDoy', // Comment:2
   state: 'active' as any,
   node: MOCK_ARTILCE,
   type: 'article' as any,
@@ -199,14 +199,14 @@ export const MOCK_COMMENT = {
 }
 
 export const MOCK_DRAFT = {
-  id: 'draft-0000',
+  id: 'RHJhZnQ6MQ', // Draft:1
   title: 'draft-title',
   slug: 'draft-slug',
   updatedAt: '2020-12-24T07:29:17.682Z',
 }
 
 export const MOCK_COLLECTON = {
-  id: 'collection-0000',
+  id: 'Q29sbGVjdGlvbjox', // Collection:1
   title: 'collection-title',
   cover: 'https://source.unsplash.com/256x256?collection',
   description: 'collection-description',
@@ -228,7 +228,7 @@ export const MOCK_CIRCLE_COMMENT = {
 // Tag
 export const MOCK_TAG = {
   __typename: 'Tag' as any,
-  id: 'tag-0000',
+  id: 'VGFnOjE', // Tag:1
   slug: 'tag-slug',
   editors: [MOCK_USER],
   owner: MOCK_USER,

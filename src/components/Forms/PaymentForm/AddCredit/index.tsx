@@ -239,10 +239,6 @@ const BaseAddCredit: React.FC<FormProps> = ({
     </Form>
   )
 
-  // const fee = calcStripeFee(values.amount)
-  // const total = numRound(fee + values.amount)
-  // const total = numRound(values.amount)
-
   if (completed) {
     return (
       <>

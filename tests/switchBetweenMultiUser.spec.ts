@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
-import { sleep } from '~/common/utils/time'
+import { sleep } from '~/common/utils'
 
 import {
   ArticleDetailPage,
