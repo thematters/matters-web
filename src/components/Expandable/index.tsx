@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { ReactElement, useRef, useState } from 'react'
+import React, { ReactElement, useEffect, useRef, useState } from 'react'
 
 import { capitalizeFirstLetter, collapseContent } from '~/common/utils'
 import {
@@ -51,6 +51,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
 }) => {
   const [expandable, setExpandable] = useState(false)
   const [lineHeight, setLineHeight] = useState(24)
+  const [firstRender, setFirstRender] = useState(true)
   const [expand, setExpand] = useState(true)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
   const collapsedContent = collapseContent(content)
@@ -93,12 +94,18 @@ export const Expandable: React.FC<ExpandableProps> = ({
     }
   }, [content])
 
+  useEffect(() => {
+    if (firstRender) {
+      setFirstRender(false)
+    }
+  }, [firstRender])
+
   return (
     <section className={contentClasses}>
       <div ref={node}>
         {(!expandable || (expandable && expand)) && (
           <div
-            className={styles.children}
+            className={firstRender ? styles.lineClamp : ''}
             style={{ WebkitLineClamp: limit + 2 }}
           >
             {children}
