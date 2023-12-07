@@ -1,5 +1,6 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
+import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -21,6 +22,7 @@ import {
   RemoveArticleCollectionDialogProps,
   ShareDialog,
   ShareDialogProps,
+  Spinner,
   SupportersDialog,
   SupportersDialogProps,
   toast,
@@ -48,10 +50,19 @@ import SetTopCollectionButton from './SetTopCollectionButton'
 import ShareButton from './ShareButton'
 import styles from './styles.module.css'
 import ToggleRecommendArticle from './ToggleRecommendArticle'
-import ToggleRecommendArticleDialog, {
+import type {
   OpenToggleRecommendArticleDialogWithProps,
   ToggleRecommendArticleDialogProps,
 } from './ToggleRecommendArticle/Dialog'
+
+const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
+
+const DynamicToggleRecommendArticleDialog = dynamic(
+  () => import('./ToggleRecommendArticle/Dialog'),
+  {
+    loading: () => <Spinner />,
+  }
+)
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode
@@ -255,7 +266,7 @@ const BaseDropdownActions = ({
       )}
 
       {/* admin */}
-      {viewer.isAdmin && openToggleRecommend && (
+      {isAdminView && viewer.isAdmin && openToggleRecommend && (
         <>
           <Menu.Divider />
           <ToggleRecommendArticle.Button
@@ -444,23 +455,26 @@ const DropdownActions = (props: DropdownActionsProps) => {
     ({ openDialog }) => ({ openRemoveArticleCollectionDialog: openDialog })
   )
 
-  // admin
+  // exclude admin code on build
+  if (!isAdminView || !viewer.isAdmin) {
+    return <DropdownActionsWithRemoveArticleCollection />
+  }
+
+  /**
+   * ADMIN ONLY
+   */
   const DropdownActionsWithToggleRecommend = withDialog<
     Omit<ToggleRecommendArticleDialogProps, 'children'>
   >(
     DropdownActionsWithRemoveArticleCollection,
-    ToggleRecommendArticleDialog,
+    DynamicToggleRecommendArticleDialog,
     { article },
     ({ openDialog }) => ({
       openToggleRecommend: openDialog,
     })
   )
 
-  return viewer.isAdmin ? (
-    <DropdownActionsWithToggleRecommend />
-  ) : (
-    <DropdownActionsWithRemoveArticleCollection />
-  )
+  return <DropdownActionsWithToggleRecommend />
 }
 
 DropdownActions.fragments = fragments
