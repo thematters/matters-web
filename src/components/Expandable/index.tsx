@@ -96,7 +96,14 @@ export const Expandable: React.FC<ExpandableProps> = ({
   return (
     <section className={contentClasses}>
       <div ref={node}>
-        {(!expandable || (expandable && expand)) && <div>{children}</div>}
+        {(!expandable || (expandable && expand)) && (
+          <div
+            className={styles.children}
+            style={{ WebkitLineClamp: limit + 2 }}
+          >
+            {children}
+          </div>
+        )}
       </div>
       {expandable && collapseable && expand && !isRichShow && (
         <section className={styles.collapseWrapper}>

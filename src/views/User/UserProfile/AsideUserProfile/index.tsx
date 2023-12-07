@@ -269,7 +269,7 @@ export const AsideUserProfile = () => {
             size="sm"
             spacingTop="base"
             collapseable={false}
-            limit={4}
+            limit={8}
           >
             <p data-test-id={TEST_ID.USER_PROFILE_BIO}>
               {user.info.description}
