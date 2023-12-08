@@ -71,9 +71,15 @@
   @mixin flex-center-all;
 
   flex-direction: column;
-  padding-top: var(--spacing-x-loose);
-  padding-bottom: var(--spacing-xx-loose);
-  margin-top: var(--spacing-base-loose);
+
+  @media (--sm-up) {
+    padding-top: var(--spacing-base);
+    padding-bottom: var(--spacing-xx-loose);
+  }
+
+  @media (--md-up) {
+    padding-top: calc(var(--spacing-base-loose) + var(--spacing-x-loose));
+  }
 
   & svg {
     height: 215px;
