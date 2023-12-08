@@ -1,8 +1,11 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
-
-import { OPEN_SHOW_NOMAD_BADGE_DIALOG, TEST_ID } from '~/common/enums'
+import {
+  OPEN_SHOW_NOMAD_BADGE_DIALOG,
+  TEST_ID,
+  URL_USER_PROFILE,
+} from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 import {
   Avatar,
@@ -18,7 +21,7 @@ import {
 } from '~/components'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
-// import { BadgeNomadDialog } from '../BadgeNomadDialog'
+import { BadgeNomadDialog } from '../BadgeNomadDialog'
 import { BadgeNomadLabel } from '../BadgeNomadLabel'
 import {
   ArchitectBadge,
@@ -41,12 +44,14 @@ const DynamicWalletLabel = dynamic(() => import('../WalletLabel'), {
 })
 
 export const AsideUserProfile = () => {
-  const { isInPath, getQuery, router } = useRoute()
+  const { isInPath, getQuery, deleteQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public user data
   const userName = getQuery('name')
-  const showBadges = 'showBadges' in router.query
+  const showBadges =
+    getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
+    URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
   const isInUserPage = isInPath('USER_ARTICLES') || isInPath('USER_COLLECTIONS')
   const isMe = !userName || viewer.userName === userName
 
@@ -56,7 +61,7 @@ export const AsideUserProfile = () => {
   })
   const shareLink =
     typeof window !== 'undefined'
-      ? `${window.location.origin}${userProfilePath.href}?showBadges`
+      ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key}=${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value}`
       : ''
 
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
@@ -241,12 +246,27 @@ export const AsideUserProfile = () => {
           user?.info.ethAddress) && (
           <section className={styles.badges}>
             {hasNomadBadge && (
-              <BadgeNomadLabel
-                hasTooltip
+              <BadgeNomadDialog
                 nomadBadgeLevel={nomadBadgeLevel}
                 totalReferredCount={user.status?.totalReferredCount || 0}
                 shareLink={shareLink}
-              />
+              >
+                {({ openDialog }) => {
+                  if (showBadges) {
+                    setTimeout(() => {
+                      deleteQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key)
+                      openDialog()
+                    })
+                  }
+                  return (
+                    <BadgeNomadLabel
+                      hasTooltip
+                      nomadBadgeLevel={nomadBadgeLevel}
+                      onClick={openDialog}
+                    />
+                  )
+                }}
+              </BadgeNomadDialog>
             )}
             {hasTraveloggersBadge && <TraveloggersBadge hasTooltip />}
             {hasSeedBadge && <SeedBadge hasTooltip />}

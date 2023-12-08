@@ -68,7 +68,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     urlParams.set(URL_COLLECTION_DETAIL.SORTER_KEY, stringifySorter(sorter))
-    router.push(
+    router.replace(
       `${window.location.pathname}?${decodeURIComponent(urlParams.toString())}`
     )
   }

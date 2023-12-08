@@ -10,6 +10,19 @@ import { ReactComponent as IconNomad3Badge } from '@/public/static/icons/48px/ba
 import { ReactComponent as IconNomad4Badge } from '@/public/static/icons/48px/badge-nomad4-fire.svg'
 import { ReactComponent as IconSeedBadge } from '@/public/static/icons/48px/badge-seed.svg'
 import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/48px/badge-traveloggers.svg'
+import { Tooltip, Translate, withIcon } from '~/components'
+import { IconArrowAction24 } from '~/components/Icon/IconArrowAction24'
+import { UserStatus } from '~/gql/graphql'
+
+import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/48px/badge-architect.svg'
+import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/48px/badge-civic-liker.svg'
+import { ReactComponent as IconGoldenMotorBadge } from '@/public/static/icons/48px/badge-golden-motor.svg'
+import { ReactComponent as IconNomad1Badge } from '@/public/static/icons/48px/badge-nomad1-moon.svg'
+import { ReactComponent as IconNomad2Badge } from '@/public/static/icons/48px/badge-nomad2-star.svg'
+import { ReactComponent as IconNomad3Badge } from '@/public/static/icons/48px/badge-nomad3-light.svg'
+import { ReactComponent as IconNomad4Badge } from '@/public/static/icons/48px/badge-nomad4-fire.svg'
+import { ReactComponent as IconSeedBadge } from '@/public/static/icons/48px/badge-seed.svg'
+import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/48px/badge-traveloggers.svg'
 import { IconArrowAction, Tooltip, Translate, withIcon } from '~/components'
 import { UserStatus } from '~/gql/graphql'
 
@@ -188,10 +201,12 @@ export const NomadBadge = ({
   level,
   totalReferredCount,
   shareLink,
+  gotoNomadBadge,
 }: badgePros & {
   level: 1 | 2 | 3 | 4
   totalReferredCount?: UserStatus['totalReferredCount']
   shareLink?: string
+  gotoNomadBadge?: () => void
 }) => {
   const copy = (
     <Translate zh_hant="數字游民" zh_hans="数字游民" en="Nomad Matters" />
@@ -212,51 +227,36 @@ export const NomadBadge = ({
 
   if (isInDialog) {
     return (
-      <BadgeNomadDialog
-        isNested
-        nomadBadgeLevel={level}
-        totalReferredCount={totalReferredCount}
-        shareLink={shareLink}
+      <section
+        className={classNames([styles.item, styles.itemNomad])}
+        onClick={gotoNomadBadge}
       >
-        {({ openDialog }) => (
-          <section
-            className={classNames([styles.item, styles.itemNomad])}
-            onClick={openDialog}
-          >
-            <>{withIconComp({ size: 'xl' })}</>
-            <section className={styles.info}>
-              <section>
-                {level === 4 ? (
-                  <FormattedMessage defaultMessage="LV4 Firebolt" id="FuU2MU" />
-                ) : level === 3 ? (
-                  <FormattedMessage
-                    defaultMessage="LV3 Nimbus Ferry"
-                    id="sLiIAz"
-                  />
-                ) : level === 2 ? (
-                  <FormattedMessage
-                    defaultMessage="LV2 Meteor Canoe"
-                    id="7ZXP9S"
-                  />
-                ) : (
-                  <FormattedMessage
-                    defaultMessage="LV1 Moonlight Dream"
-                    id="+56XIp"
-                  />
-                )}
-              </section>
-              <section className={styles.subtitle}>
-                <FormattedMessage
-                  defaultMessage="Nomad Matters Badge"
-                  id="cQ+Lyq"
-                  description="src/views/User/UserProfile/Badges/index.tsx"
-                />
-              </section>
-            </section>
-            <IconArrowAction size="md" />
+        <>{withIconComp({ size: 'xl' })}</>
+        <section className={styles.info}>
+          <section>
+            {level === 4 ? (
+              <FormattedMessage defaultMessage="LV4 Firebolt" id="FuU2MU" />
+            ) : level === 3 ? (
+              <FormattedMessage defaultMessage="LV3 Nimbus Ferry" id="sLiIAz" />
+            ) : level === 2 ? (
+              <FormattedMessage defaultMessage="LV2 Meteor Canoe" id="7ZXP9S" />
+            ) : (
+              <FormattedMessage
+                defaultMessage="LV1 Moonlight Dream"
+                id="+56XIp"
+              />
+            )}
           </section>
-        )}
-      </BadgeNomadDialog>
+          <section className={styles.subtitle}>
+            <FormattedMessage
+              defaultMessage="Nomad Matters Badge"
+              id="cQ+Lyq"
+              description="src/views/User/UserProfile/Badges/index.tsx"
+            />
+          </section>
+        </section>
+        <IconArrowAction24 size="md" color="greyDarker" />
+      </section>
     )
   }
   if (hasTooltip) {
@@ -279,6 +279,10 @@ export interface BadgesOptions {
   hasGoldenMotorBadge?: boolean
   hasArchitectBadge?: boolean
   isCivicLiker?: boolean
+  gotoNomadBadge?: () => void
+
+  isInDialog?: boolean
+  shareLink?: string
 }
 
 export const Badges = ({
@@ -292,19 +296,18 @@ export const Badges = ({
   hasArchitectBadge,
   isCivicLiker,
   shareLink,
-}: BadgesOptions & {
-  isInDialog?: boolean
-  shareLink?: string
-}) =>
+  gotoNomadBadge,
+}: BadgesOptions) =>
   isInDialog ? (
     <span className={styles.badgesInDialog}>
-      {hasNomadBadge && (
+      {hasNomadBadge && gotoNomadBadge && (
         <section className={styles.badgesGroup}>
           <NomadBadge
             isInDialog
             level={nomadBadgeLevel!}
             totalReferredCount={totalReferredCount}
             shareLink={shareLink}
+            gotoNomadBadge={gotoNomadBadge}
           />
         </section>
       )}
