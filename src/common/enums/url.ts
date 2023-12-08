@@ -6,6 +6,10 @@ export const URL_QS = {
   MODE_EDIT: { key: 'mode', value: 'edit' },
 }
 
+export const URL_USER_PROFILE = {
+  OPEN_NOMAD_BADGE_DIALOG: { key: 'dialog', value: 'nomad-badge' },
+}
+
 export const URL_ME_SETTINGS = {
   OPEN_SET_EMAIL_DIALOG: { key: 'dialog', value: 'set-email' },
 }

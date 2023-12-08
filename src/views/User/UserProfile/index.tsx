@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { OPEN_SHOW_NOMAD_BADGE_DIALOG, TEST_ID } from '~/common/enums'
+import { TEST_ID, URL_USER_PROFILE } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 import {
   Avatar,
@@ -39,16 +39,14 @@ const DynamicWalletLabel = dynamic(() => import('./WalletLabel'), {
 })
 
 export const UserProfile = () => {
-  const {
-    getQuery, // replaceQuery,
-    router,
-  } = useRoute()
+  const { getQuery, deleteQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public user data
   const userName = getQuery('name')
-  // const searchParams = useSearchParams() // next v13; call searchParams.has('...')
-  const showBadges = 'showBadges' in router.query
+  const showBadges =
+    getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
+    URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
@@ -70,12 +68,6 @@ export const UserProfile = () => {
       variables: { userName },
     })
   }, [user?.id, viewer.id])
-
-  useEffect(() => {
-    if (showBadges) {
-      window.dispatchEvent(new CustomEvent(OPEN_SHOW_NOMAD_BADGE_DIALOG))
-    }
-  }, [showBadges])
 
   /**
    * Render
@@ -99,7 +91,7 @@ export const UserProfile = () => {
   })
   const shareLink =
     typeof window !== 'undefined'
-      ? `${window.location.origin}${userProfilePath.href}?showBadges`
+      ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key}=${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value}`
       : ''
 
   const badges = user.info.badges || []
@@ -207,25 +199,29 @@ export const UserProfile = () => {
                 {user.displayName}
               </h1>
               <BadgesDialog
-                defaultShow={showBadges}
-                content={
-                  <Badges
-                    isInDialog
-                    hasNomadBadge={hasNomadBadge}
-                    nomadBadgeLevel={nomadBadgeLevel}
-                    totalReferredCount={user.status?.totalReferredCount || 0}
-                    hasTraveloggersBadge={hasTraveloggersBadge}
-                    hasSeedBadge={hasSeedBadge}
-                    hasGoldenMotorBadge={hasGoldenMotorBadge}
-                    hasArchitectBadge={hasArchitectBadge}
-                    isCivicLiker={isCivicLiker}
-                    shareLink={shareLink}
-                  />
-                }
+                isInDialog
+                hasNomadBadge={hasNomadBadge}
+                nomadBadgeLevel={nomadBadgeLevel}
+                totalReferredCount={user.status?.totalReferredCount || 0}
+                hasTraveloggersBadge={hasTraveloggersBadge}
+                hasSeedBadge={hasSeedBadge}
+                hasGoldenMotorBadge={hasGoldenMotorBadge}
+                hasArchitectBadge={hasArchitectBadge}
+                isCivicLiker={isCivicLiker}
+                shareLink={shareLink}
               >
                 {({ openDialog }) => {
+                  if (showBadges && hasNomadBadge) {
+                    setTimeout(() => {
+                      deleteQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key)
+                      openDialog('nomad')
+                    })
+                  }
                   return (
-                    <span className={styles.badges} onClick={openDialog}>
+                    <span
+                      className={styles.badges}
+                      onClick={() => openDialog()}
+                    >
                       <Badges
                         hasNomadBadge={hasNomadBadge}
                         nomadBadgeLevel={nomadBadgeLevel}

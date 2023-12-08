@@ -1,70 +1,115 @@
+import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { OPEN_SHOW_NOMAD_BADGE_DIALOG } from '~/common/enums'
-import {
-  Button,
-  Dialog,
-  IconClose20,
-  useDialogSwitch,
-  useEventListener,
-} from '~/components'
+import { Button, Dialog, IconClose20, useDialogSwitch } from '~/components'
 
-import { BadgesOptions } from '../Badges'
+import BadgeNomadDialogContent from '../BadgeNomadDialog/Content'
+import { Badges, BadgesOptions } from '../Badges'
 
+type Step = 'badges' | 'nomad'
 interface BadgesDialogProps extends BadgesOptions {
-  content: React.ReactNode
-  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-  defaultShow: boolean
+  children: ({
+    openDialog,
+  }: {
+    openDialog: (step?: Step) => void
+  }) => React.ReactNode
+  step?: Step
 }
 
 export const BaseBadgesDialog = ({
-  content,
   children,
-  defaultShow,
+  hasNomadBadge,
+  nomadBadgeLevel,
+  totalReferredCount,
+  hasTraveloggersBadge,
+  hasSeedBadge,
+  hasGoldenMotorBadge,
+  hasArchitectBadge,
+  isCivicLiker,
+  shareLink,
+  step: initStep = 'badges',
 }: BadgesDialogProps) => {
-  const { show, openDialog, closeDialog } = useDialogSwitch(defaultShow)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const [step, setStep] = useState<Step>(initStep)
+  const isInBadgesStep = step === 'badges'
+  const isInNomadStep = step === 'nomad'
+
+  const openStepDialog = (step?: Step) => {
+    if (step) {
+      setStep(step)
+    }
+    openDialog()
+  }
 
   return (
     <>
-      {children({ openDialog })}
+      {children({ openDialog: openStepDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog} dismissOnClickOutside>
-        <Dialog.Header
-          title={
-            <FormattedMessage
-              defaultMessage="Badges"
-              id="DYrDcG"
-              description="src/components/UserProfile/index.tsx"
+        {isInBadgesStep && (
+          <>
+            <Dialog.Header
+              title={
+                <FormattedMessage
+                  defaultMessage="Badges"
+                  id="DYrDcG"
+                  description="src/components/UserProfile/index.tsx"
+                />
+              }
+              titleLeft
+              rightBtn={
+                <Button
+                  onClick={closeDialog}
+                  textColor="greyDarker"
+                  textActiveColor="black"
+                >
+                  <IconClose20 size="mdS" />
+                </Button>
+              }
             />
-          }
-          titleLeft
-          rightBtn={
-            <Button onClick={closeDialog}>
-              <IconClose20 size="mdS" color="greyDarker" />{' '}
-            </Button>
-          }
-        />
+            <Dialog.Content>
+              <Badges
+                isInDialog
+                hasNomadBadge={hasNomadBadge}
+                nomadBadgeLevel={nomadBadgeLevel}
+                totalReferredCount={totalReferredCount}
+                hasTraveloggersBadge={hasTraveloggersBadge}
+                hasSeedBadge={hasSeedBadge}
+                hasGoldenMotorBadge={hasGoldenMotorBadge}
+                hasArchitectBadge={hasArchitectBadge}
+                isCivicLiker={isCivicLiker}
+                shareLink={shareLink}
+                gotoNomadBadge={() => setStep('nomad')}
+              />
+            </Dialog.Content>
 
-        <Dialog.Content>{content}</Dialog.Content>
-
-        <Dialog.Footer
-          smUpBtns={
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
-              color="greyDarker"
-              onClick={closeDialog}
+            <Dialog.Footer
+              smUpBtns={
+                <Dialog.TextButton
+                  text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+                  color="greyDarker"
+                  onClick={closeDialog}
+                />
+              }
             />
-          }
-        />
+          </>
+        )}
+        {isInNomadStep && !!nomadBadgeLevel && (
+          <BadgeNomadDialogContent
+            closeDialog={closeDialog}
+            isNested
+            nomadBadgeLevel={nomadBadgeLevel}
+            shareLink={shareLink}
+            goBack={() => setStep('badges')}
+          />
+        )}
       </Dialog>
     </>
   )
 }
 
 export const BadgesDialog = (props: BadgesDialogProps) => {
-  const Children = ({ openDialog }: { openDialog: () => void }) => {
-    // useEventListener(OPEN_SET_USER_NAME_DIALOG, openDialog)
-    useEventListener(OPEN_SHOW_NOMAD_BADGE_DIALOG, openDialog)
+  const Children = ({ openDialog }: { openDialog: (step?: Step) => void }) => {
     return <>{props?.children({ openDialog })}</>
   }
 

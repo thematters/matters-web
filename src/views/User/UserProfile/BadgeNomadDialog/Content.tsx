@@ -7,7 +7,7 @@ import { ReactComponent as Nomad1Background } from '@/public/static/images/badge
 import { ReactComponent as Nomad2Background } from '@/public/static/images/badge-nomad2-background.svg'
 import { ReactComponent as Nomad3Background } from '@/public/static/images/badge-nomad3-background.svg'
 import { ReactComponent as Nomad4Background } from '@/public/static/images/badge-nomad4-background.svg'
-import { CopyToClipboard, Dialog } from '~/components'
+import { Button, CopyToClipboard, Dialog, IconArrowLeft16 } from '~/components'
 import { UserStatus } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -18,6 +18,7 @@ type BadgeNomadDialogContentProps = {
   totalReferredCount?: UserStatus['totalReferredCount']
   shareLink?: string
   isNested?: boolean
+  goBack?: () => void
 }
 
 const BadgeNomadDialogContent = ({
@@ -26,9 +27,24 @@ const BadgeNomadDialogContent = ({
   totalReferredCount,
   shareLink,
   isNested,
+  goBack,
 }: BadgeNomadDialogContentProps) => {
   return (
     <>
+      {isNested && goBack && (
+        <Dialog.Header
+          title={<span />}
+          leftBtn={
+            <Button
+              onClick={goBack}
+              textColor="greyDarker"
+              textActiveColor="black"
+            >
+              <IconArrowLeft16 size="mdS" />
+            </Button>
+          }
+        />
+      )}
       <Dialog.Content>
         <section
           className={classNames({
@@ -152,7 +168,7 @@ const BadgeNomadDialogContent = ({
                 )
               }
               color="greyDarker"
-              onClick={closeDialog}
+              onClick={isNested ? goBack : closeDialog}
             />
             <CopyToClipboard
               text={shareLink!}

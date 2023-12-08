@@ -1,12 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import {
-  Button,
-  Dialog,
-  IconArrowLeft16,
-  Spinner,
-  useDialogSwitch,
-} from '~/components'
+import { Dialog, Spinner, useDialogSwitch } from '~/components'
 import { UserStatus } from '~/gql/graphql'
 
 type BadgeNomadLabelProps = {
@@ -19,8 +13,6 @@ type BadgeNomadLabelProps = {
 
 type BadgeNomadDialogProps = BadgeNomadLabelProps & {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-
-  isNested?: boolean // if nested by another dialog
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
@@ -28,33 +20,18 @@ const DynamicContent = dynamic(() => import('./Content'), {
 })
 
 export const BaseBadgeNomadDialog: React.FC<BadgeNomadDialogProps> = ({
-  // content,
   children,
   nomadBadgeLevel,
   totalReferredCount,
   shareLink,
-  isNested,
 }) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
-
-  // useEventListener(OPEN_SHOW_NOMAD_BADGE_DIALOG, openDialog)
 
   return (
     <>
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        {isNested && (
-          <Dialog.Header
-            title={<span />}
-            leftBtn={
-              <Button onClick={closeDialog}>
-                <IconArrowLeft16 size="mdS" color="greyDarker" />
-              </Button>
-            }
-          />
-        )}
-
         <DynamicContent
           nomadBadgeLevel={nomadBadgeLevel}
           closeDialog={closeDialog}
