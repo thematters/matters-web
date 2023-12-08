@@ -44,11 +44,24 @@ export const BadgeNomadLabel: React.FC<BadgeNomadLabelProps> = ({
           {hasTooltip && (
             <Tooltip
               content={
-                <FormattedMessage
-                  defaultMessage="Badge Name"
-                  id="iIa+u8"
-                  description="src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-                />
+                nomadBadgeLevel === 4 ? (
+                  <FormattedMessage defaultMessage="LV4 Firebolt" id="FuU2MU" />
+                ) : nomadBadgeLevel === 3 ? (
+                  <FormattedMessage
+                    defaultMessage="LV3 Nimbus Ferry"
+                    id="sLiIAz"
+                  />
+                ) : nomadBadgeLevel === 2 ? (
+                  <FormattedMessage
+                    defaultMessage="LV2 Meteor Canoe"
+                    id="7ZXP9S"
+                  />
+                ) : (
+                  <FormattedMessage
+                    defaultMessage="LV1 Moonlight Dream"
+                    id="+56XIp"
+                  />
+                )
               }
               placement="top"
             >
