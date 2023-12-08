@@ -69,6 +69,12 @@ export const UserProfile = () => {
     })
   }, [user?.id, viewer.id])
 
+  useEffect(() => {
+    if (showBadges) {
+      window.dispatchEvent(new CustomEvent(OPEN_SHOW_NOMAD_BADGE_DIALOG))
+    }
+  }, [showBadges])
+
   /**
    * Render
    */

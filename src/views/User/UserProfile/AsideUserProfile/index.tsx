@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
-
 import {
   OPEN_SHOW_NOMAD_BADGE_DIALOG,
   TEST_ID,
@@ -28,6 +27,7 @@ import {
   ArchitectBadge,
   CivicLikerBadge,
   GoldenMotorBadge,
+  // NomadBadge,
   SeedBadge,
   TraveloggersBadge,
 } from '../Badges'

@@ -1484,6 +1484,10 @@
     "defaultMessage": "讀者數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
+  "iIa+u8": {
+    "defaultMessage": "徽章名稱",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "icdrwy": {
     "defaultMessage": "追蹤了你",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"

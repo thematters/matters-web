@@ -14,6 +14,19 @@ import { Tooltip, Translate, withIcon } from '~/components'
 import { IconArrowAction24 } from '~/components/Icon/IconArrowAction24'
 import { UserStatus } from '~/gql/graphql'
 
+import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/48px/badge-architect.svg'
+import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/48px/badge-civic-liker.svg'
+import { ReactComponent as IconGoldenMotorBadge } from '@/public/static/icons/48px/badge-golden-motor.svg'
+import { ReactComponent as IconNomad1Badge } from '@/public/static/icons/48px/badge-nomad1-moon.svg'
+import { ReactComponent as IconNomad2Badge } from '@/public/static/icons/48px/badge-nomad2-star.svg'
+import { ReactComponent as IconNomad3Badge } from '@/public/static/icons/48px/badge-nomad3-light.svg'
+import { ReactComponent as IconNomad4Badge } from '@/public/static/icons/48px/badge-nomad4-fire.svg'
+import { ReactComponent as IconSeedBadge } from '@/public/static/icons/48px/badge-seed.svg'
+import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/48px/badge-traveloggers.svg'
+import { IconArrowAction, Tooltip, Translate, withIcon } from '~/components'
+import { UserStatus } from '~/gql/graphql'
+
+import { BadgeNomadDialog } from '../BadgeNomadLabel'
 import styles from './styles.module.css'
 
 type badgePros = {
