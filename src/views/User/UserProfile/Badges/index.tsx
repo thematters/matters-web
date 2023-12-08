@@ -13,7 +13,7 @@ import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/4
 import { IconArrowAction, Tooltip, Translate, withIcon } from '~/components'
 import { UserStatus } from '~/gql/graphql'
 
-import { BadgeNomadDialog } from '../BadgeNomadLabel'
+import { BadgeNomadDialog } from '../BadgeNomadDialog'
 import styles from './styles.module.css'
 
 type badgePros = {

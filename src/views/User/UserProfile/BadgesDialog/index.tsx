@@ -45,7 +45,7 @@ export const BaseBadgesDialog = ({
           }
         />
 
-        <Dialog.Content fixedHeight>{content}</Dialog.Content>
+        <Dialog.Content>{content}</Dialog.Content>
 
         <Dialog.Footer
           smUpBtns={

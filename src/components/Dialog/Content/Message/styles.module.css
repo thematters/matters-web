@@ -1,4 +1,9 @@
 .content {
+  & h1 {
+    font-size: var(--font-size-lg);
+    line-height: 1.875rem;
+  }
+
   & h2 {
     font-size: var(--font-size-xm);
   }
