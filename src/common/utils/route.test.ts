@@ -271,10 +271,10 @@ describe('utils/route/toPath', () => {
     it('should return the correct path with type', () => {
       const { href } = toPath({
         page: 'search',
-        q: 'test',
+        q: 'test 測試',
         type: 'article',
       })
-      expect(href).toBe(`/search?q=test&type=article`)
+      expect(href).toBe(`/search?q=test+%E6%B8%AC%E8%A9%A6&type=article`)
     })
 
     it('should return the correct path w/o type', () => {
