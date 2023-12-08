@@ -10,7 +10,8 @@ import { ReactComponent as IconNomad3Badge } from '@/public/static/icons/48px/ba
 import { ReactComponent as IconNomad4Badge } from '@/public/static/icons/48px/badge-nomad4-fire.svg'
 import { ReactComponent as IconSeedBadge } from '@/public/static/icons/48px/badge-seed.svg'
 import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/48px/badge-traveloggers.svg'
-import { IconArrowAction, Tooltip, Translate, withIcon } from '~/components'
+import { Tooltip, Translate, withIcon } from '~/components'
+import { IconArrowAction24 } from '~/components/Icon/IconArrowAction24'
 import { UserStatus } from '~/gql/graphql'
 
 import { BadgeNomadDialog } from '../BadgeNomadDialog'
@@ -253,7 +254,7 @@ export const NomadBadge = ({
                 />
               </section>
             </section>
-            <IconArrowAction size="md" />
+            <IconArrowAction24 size="md" color="greyDarker" />
           </section>
         )}
       </BadgeNomadDialog>

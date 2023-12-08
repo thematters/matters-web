@@ -2,4 +2,4 @@ import { ReactComponent as Icon } from '@/public/static/icons/24px/arrow-action.
 
 import { withIcon } from './withIcon'
 
-export const IconArrowAction = withIcon(Icon)
+export const IconArrowAction24 = withIcon(Icon)
