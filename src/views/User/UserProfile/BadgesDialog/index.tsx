@@ -1,7 +1,14 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, Dialog, IconClose20, useDialogSwitch } from '~/components'
+import { BREAKPOINTS } from '~/common/enums'
+import {
+  Button,
+  Dialog,
+  IconClose20,
+  useDialogSwitch,
+  useMediaQuery,
+} from '~/components'
 
 import BadgeNomadDialogContent from '../BadgeNomadDialog/Content'
 import { Badges, BadgesOptions } from '../Badges'
@@ -33,6 +40,7 @@ export const BaseBadgesDialog = ({
   const [step, setStep] = useState<Step>(initStep)
   const isInBadgesStep = step === 'badges'
   const isInNomadStep = step === 'nomad'
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   const openStepDialog = (step?: Step) => {
     if (step) {
@@ -67,7 +75,7 @@ export const BaseBadgesDialog = ({
                 </Button>
               }
             />
-            <Dialog.Content>
+            <Dialog.Content fixedHeight={!isSmUp}>
               <Badges
                 isInDialog
                 hasNomadBadge={hasNomadBadge}
