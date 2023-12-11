@@ -27,3 +27,14 @@
     margin-top: var(--spacing-x-tight);
   }
 }
+
+.text {
+  width: 100%;
+  height: 1rem;
+  background: var(--color-grey-lighter);
+
+  & + & {
+    /* fix space to avoid shaking */
+    margin-top: 0.41666rem;
+  }
+}

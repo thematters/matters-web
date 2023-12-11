@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import dynamic from 'next/dynamic'
 
 import { mergeConnections } from '~/common/utils'
 import {
@@ -13,6 +14,11 @@ import {
   Spinner,
 } from '~/components'
 import { MeBookmarkFeedQuery } from '~/gql/graphql'
+
+const DynamicArticleDigestFeed = dynamic(
+  () => import('~/components/ArticleDigest/Feed'),
+  { ssr: false, loading: ArticleDigestFeed.Placeholder }
+)
 
 const ME_BOOKMARK_FEED = gql`
   query MeBookmarkFeed($after: String) {
@@ -73,7 +79,7 @@ const BaseMeBookmarks = () => {
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={cursor}>
-            <ArticleDigestFeed article={node} />
+            <DynamicArticleDigestFeed article={node} />
           </List.Item>
         ))}
       </List>

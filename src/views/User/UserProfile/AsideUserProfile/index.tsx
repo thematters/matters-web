@@ -8,7 +8,6 @@ import {
   Avatar,
   Button,
   EditProfileDialog,
-  Expandable,
   FollowUserButton,
   IconCamera24,
   LinkWrapper,
@@ -30,11 +29,18 @@ import DropdownActions from '../DropdownActions'
 import { FollowersDialog } from '../FollowersDialog'
 import { FollowingDialog } from '../FollowingDialog'
 import { USER_PROFILE_PRIVATE, USER_PROFILE_PUBLIC } from '../gql'
+import DescriptionPlaceholder from '../Placeholder/DescriptionPlaceholder'
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const DynamicWalletLabel = dynamic(() => import('../WalletLabel'), {
   ssr: false,
+})
+
+// FIX: fix first render flicker issue
+const DynamicExpandable = dynamic(() => import('~/components/Expandable'), {
+  ssr: false,
+  loading: () => <DescriptionPlaceholder />,
 })
 
 export const AsideUserProfile = () => {
@@ -263,7 +269,7 @@ export const AsideUserProfile = () => {
         </section>
 
         {user.info.description !== '' && (
-          <Expandable
+          <DynamicExpandable
             content={user.info.description}
             color="grey"
             size="sm"
@@ -274,7 +280,7 @@ export const AsideUserProfile = () => {
             <p data-test-id={TEST_ID.USER_PROFILE_BIO}>
               {user.info.description}
             </p>
-          </Expandable>
+          </DynamicExpandable>
         )}
 
         {isInUserPage && isMe && (

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { arrayMove, List as DnDList } from 'react-movable'
@@ -24,6 +25,11 @@ import {
 } from '~/gql/graphql'
 
 import styles from './styles.module.css'
+
+const DynamicArticleDigestFeed = dynamic(
+  () => import('~/components/ArticleDigest/Feed'),
+  { ssr: false, loading: ArticleDigestFeed.Placeholder }
+)
 
 const REORDER_COLLECTION_ARTICLES = gql`
   mutation ReorderCollectionArticles(
@@ -136,7 +142,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
       <section className={styles.feed}>
         {items && items.length === 1 && (
           <section className={styles.digestFeed}>
-            <ArticleDigestFeed
+            <DynamicArticleDigestFeed
               article={items[0].node}
               hasHeader={false}
               hasEdit={true}
@@ -187,7 +193,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
                     <IconHandle24 size="md" color="greyDark" />
                   </button>
                   <section className={styles.digestFeed}>
-                    <ArticleDigestFeed
+                    <DynamicArticleDigestFeed
                       article={node}
                       hasHeader={false}
                       hasEdit={true}

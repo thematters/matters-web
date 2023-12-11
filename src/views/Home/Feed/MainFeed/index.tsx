@@ -1,4 +1,5 @@
 import { NetworkStatus } from 'apollo-client'
+import dynamic from 'next/dynamic'
 import { useContext, useEffect, useRef } from 'react'
 
 import { analytics, mergeConnections } from '~/common/utils'
@@ -24,6 +25,11 @@ import Authors from '../Authors'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
+
+const DynamicArticleDigestFeed = dynamic(
+  () => import('~/components/ArticleDigest/Feed'),
+  { ssr: false, loading: ArticleDigestFeed.Placeholder }
+)
 
 type FeedArticlesPublic =
   | HottestFeedPublicQuery
@@ -204,7 +210,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
 
           return (
             <List.Item key={`${sortBy}:${edge.node.id}`}>
-              <ArticleDigestFeed
+              <DynamicArticleDigestFeed
                 article={edge.node}
                 hasReadTime={true}
                 hasDonationCount={true}

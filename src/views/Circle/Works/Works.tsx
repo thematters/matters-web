@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic'
 import { useContext, useEffect } from 'react'
 
 import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
@@ -20,6 +21,11 @@ import { CircleWorksPublicQuery } from '~/gql/graphql'
 
 import CircleDetailTabs from '../CircleDetailTabs'
 import { CIRCLE_WORKS_PRIVATE, CIRCLE_WORKS_PUBLIC } from './gql'
+
+const DynamicArticleDigestFeed = dynamic(
+  () => import('~/components/ArticleDigest/Feed'),
+  { ssr: false, loading: ArticleDigestFeed.Placeholder }
+)
 
 const CircleDetailWorks = () => {
   const { getQuery } = useRoute()
@@ -152,7 +158,7 @@ const CircleDetailWorks = () => {
           <List>
             {(edges || []).map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
-                <ArticleDigestFeed
+                <DynamicArticleDigestFeed
                   article={node}
                   hasCircle={false}
                   hasAuthor={false}

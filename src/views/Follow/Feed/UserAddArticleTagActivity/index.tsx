@@ -1,8 +1,15 @@
+import dynamic from 'next/dynamic'
+
 import { analytics } from '~/common/utils'
 import { ArticleDigestFeed, CardExposureTracker, Tag } from '~/components'
 import { UserAddArticleTagActivityFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
+
+const DynamicArticleDigestFeed = dynamic(
+  () => import('~/components/ArticleDigest/Feed'),
+  { ssr: false, loading: ArticleDigestFeed.Placeholder }
+)
 
 const UserAddArticleTagActivity = ({
   nodeArticle: node,
@@ -11,7 +18,7 @@ const UserAddArticleTagActivity = ({
   __typename,
 }: UserAddArticleTagActivityFragment & { location: number }) => (
   <>
-    <ArticleDigestFeed
+    <DynamicArticleDigestFeed
       article={node}
       tag={<Tag tag={target} type="plain" iconProps={{ size: 'sm' }} />}
       onClick={() => {

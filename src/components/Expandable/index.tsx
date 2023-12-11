@@ -175,3 +175,5 @@ export const Expandable: React.FC<ExpandableProps> = ({
     </section>
   )
 }
+
+export default Expandable
