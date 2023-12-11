@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -56,6 +56,7 @@ export const AsideUserProfile = () => {
   const showBadges =
     getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
     URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
+  const [hasShowBadges, setHasShowBadges] = useState(false)
   const isInUserPage = isInPath('USER_ARTICLES') || isInPath('USER_COLLECTIONS')
   const isMe = !userName || viewer.userName === userName
 
@@ -256,10 +257,11 @@ export const AsideUserProfile = () => {
                 shareLink={shareLink}
               >
                 {({ openDialog }) => {
-                  if (showBadges) {
+                  if (showBadges && !hasShowBadges) {
                     setTimeout(() => {
-                      // deleteQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key)
                       openDialog()
+                      // FIXED: infinite loop render of BadgeNomadDialog
+                      setHasShowBadges(true)
                     })
                   }
                   return (

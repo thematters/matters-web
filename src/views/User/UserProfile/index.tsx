@@ -1,13 +1,9 @@
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import {
-  OPEN_SHOW_NOMAD_BADGE_DIALOG,
-  TEST_ID,
-  URL_USER_PROFILE,
-} from '~/common/enums'
+import { TEST_ID, URL_USER_PROFILE } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 import {
   Avatar,
@@ -53,6 +49,7 @@ export const UserProfile = () => {
   const showBadges =
     getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
     URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
+  const [hasShowBadges, setHasShowBadges] = useState(false)
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
@@ -74,12 +71,6 @@ export const UserProfile = () => {
       variables: { userName },
     })
   }, [user?.id, viewer.id])
-
-  useEffect(() => {
-    if (showBadges) {
-      window.dispatchEvent(new CustomEvent(OPEN_SHOW_NOMAD_BADGE_DIALOG))
-    }
-  }, [showBadges])
 
   /**
    * Render
@@ -223,10 +214,11 @@ export const UserProfile = () => {
                 shareLink={shareLink}
               >
                 {({ openDialog }) => {
-                  if (showBadges && hasNomadBadge) {
+                  if (showBadges && hasNomadBadge && !hasShowBadges) {
                     setTimeout(() => {
-                      // deleteQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key)
                       openDialog('nomad')
+                      // FIXED: infinite loop render of BadgesDialog
+                      setHasShowBadges(true)
                     })
                   }
                   return (

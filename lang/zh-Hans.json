@@ -1484,10 +1484,6 @@
     "defaultMessage": "读者数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
-  "iIa+u8": {
-    "defaultMessage": "徽章名称",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "icdrwy": {
     "defaultMessage": "追踪了你",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"

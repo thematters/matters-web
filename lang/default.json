@@ -1484,10 +1484,6 @@
     "defaultMessage": "Number of readers",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
-  "iIa+u8": {
-    "defaultMessage": "Badge Name",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "icdrwy": {
     "defaultMessage": "Followed You",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
