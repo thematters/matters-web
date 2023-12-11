@@ -44,4 +44,8 @@
   & .title {
     padding: var(--spacing-base) 0;
   }
+
+  & a {
+    text-decoration-line: underline;
+  }
 }

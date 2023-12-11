@@ -1,10 +1,11 @@
 {
+  "+08Cci": {
+    "defaultMessage": "月色之下夢想即將實現，月之夢徽章代表你參與了遊牧者計畫（參賽或支持了優質計畫）。接下來邀請 5 位夥伴一同踏上旅程，將獲得更高等級的徽章。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "+51DoZ": {
     "defaultMessage": "請先驗證郵箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
-  },
-  "+56XIp": {
-    "defaultMessage": "LV1 月之夢"
   },
   "+63O1f": {
     "defaultMessage": "郵件地址或密碼錯誤",
@@ -314,6 +315,9 @@
     "defaultMessage": "出錯了，請檢查你輸入的內容",
     "description": "BAD_USER_INPUT"
   },
+  "76yoL6": {
+    "defaultMessage": "月之夢"
+  },
   "77tYPg": {
     "defaultMessage": "確認刪除後，{commentType}會立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -328,9 +332,6 @@
   "7WXDhH": {
     "defaultMessage": "確認要刪除草稿嗎？",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
-  },
-  "7ZXP9S": {
-    "defaultMessage": "LV2 流星號"
   },
   "7cwoRo": {
     "defaultMessage": "因爲作者設置，你無法參與討論。"
@@ -349,6 +350,9 @@
   },
   "8KFsZN": {
     "defaultMessage": "閱讀次數"
+  },
+  "8MeJ4b": {
+    "defaultMessage": "光輪號"
   },
   "8UWUW8": {
     "defaultMessage": "關聯作品",
@@ -621,9 +625,6 @@
   "Ft76YC": {
     "defaultMessage": "選集已刪除",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
-  "FuU2MU": {
-    "defaultMessage": "LV4 火閃電"
   },
   "FxrSCh": {
     "defaultMessage": "ID 設置後無法修改，確認使用 {id} 作為 Matters ID 嗎？",
@@ -978,6 +979,9 @@
     "defaultMessage": "請先綁定郵箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
+  "Rc4Oij": {
+    "defaultMessage": "火閃電"
+  },
   "Ro0CuW": {
     "defaultMessage": "你尚無權限進行該操作",
     "description": "FORBIDDEN"
@@ -1040,6 +1044,9 @@
   },
   "TF1OhT": {
     "defaultMessage": "臨時密碼已過期，請嘗試重新發送"
+  },
+  "TKsfIS": {
+    "defaultMessage": "流星號"
   },
   "TSDiqB": {
     "defaultMessage": "付費人數",
@@ -1177,6 +1184,10 @@
     "defaultMessage": "去綁定",
     "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
+  "XfkltT": {
+    "defaultMessage": "流星雨的絢爛光芒足以點亮夜空，你已經邀請了 5 位夥伴關注遊牧者計畫，再邀請 5 位就能繼續升級！",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "XgdZSb": {
     "defaultMessage": "值得關注"
   },
@@ -1230,10 +1241,6 @@
   "Z2iL9Z": {
     "defaultMessage": "開始創作",
     "description": "src/components/Buttons/StartWriting/index.tsx"
-  },
-  "Z31Fz+": {
-    "defaultMessage": "月色之下夢想即將實現，月之夢徽章代表你參與了遊牧者計畫（參賽或支持了優質計畫）。接下來邀請 5 位夥伴一同踏上旅程，將獲得更高等級的徽章。<a>如何邀請夥伴？點此看最後一段</a>",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "基本資料",
@@ -1733,10 +1740,6 @@
     "defaultMessage": "已封存",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
-  "qTjjF0": {
-    "defaultMessage": "流星雨的絢爛光芒足以點亮夜空，你已經邀請了 5 位夥伴關注遊牧者計畫，再邀請 5 位就能繼續升級！",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "qVhxp5": {
     "defaultMessage": "進入",
     "description": "src/components/Buttons/UniversalAuth/index.tsx"
@@ -1802,9 +1805,6 @@
   "s5JCCO": {
     "defaultMessage": "此文已被{actor}標示為限制級內容，是否確定展開全文？",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
-  },
-  "sLiIAz": {
-    "defaultMessage": "LV3 光輪號"
   },
   "sPgUkN": {
     "defaultMessage": "本月營收",
@@ -2059,6 +2059,9 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "znJ06J": {
+    "defaultMessage": "<a>關於遊牧者計畫</a>"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",

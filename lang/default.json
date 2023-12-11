@@ -1,10 +1,11 @@
 {
+  "+08Cci": {
+    "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters, whether as a contestant or a supporter of exceptional projects. Next, invite 5 companions to join the journey with you, and you'll earn an even higher-level badge.?",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "+51DoZ": {
     "defaultMessage": "Please verify email first",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
-  },
-  "+56XIp": {
-    "defaultMessage": "LV1 Moonlight Dream"
   },
   "+63O1f": {
     "defaultMessage": "Incorrect email or password",
@@ -314,6 +315,9 @@
     "defaultMessage": "Oops. Something went wrong. Please try again later.",
     "description": "BAD_USER_INPUT"
   },
+  "76yoL6": {
+    "defaultMessage": "Moonlight Dream"
+  },
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -328,9 +332,6 @@
   "7WXDhH": {
     "defaultMessage": "Are you sure you want to delete draft?",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
-  },
-  "7ZXP9S": {
-    "defaultMessage": "LV2 Meteor Canoe"
   },
   "7cwoRo": {
     "defaultMessage": "The author has disabled comments for this article"
@@ -349,6 +350,9 @@
   },
   "8KFsZN": {
     "defaultMessage": "Read Counts"
+  },
+  "8MeJ4b": {
+    "defaultMessage": "Nimbus Ferry"
   },
   "8UWUW8": {
     "defaultMessage": "Collect Article",
@@ -621,9 +625,6 @@
   "Ft76YC": {
     "defaultMessage": "Collection is deleted",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
-  },
-  "FuU2MU": {
-    "defaultMessage": "LV4 Firebolt"
   },
   "FxrSCh": {
     "defaultMessage": "This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?",
@@ -978,6 +979,9 @@
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
+  "Rc4Oij": {
+    "defaultMessage": "Firebolt"
+  },
   "Ro0CuW": {
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN"
@@ -1040,6 +1044,9 @@
   },
   "TF1OhT": {
     "defaultMessage": "This login code has expired, please try to resend"
+  },
+  "TKsfIS": {
+    "defaultMessage": "Meteor Canoe"
   },
   "TSDiqB": {
     "defaultMessage": "Subscribers",
@@ -1177,6 +1184,10 @@
     "defaultMessage": "Go to Settings",
     "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
+  "XfkltT": {
+    "defaultMessage": "The dazzling light of a meteor shower is enough to illuminate the night sky. You have already invited 5 companions to participate in the Nomad Matters. Invite 5 more, and you can continue to level up!",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "XgdZSb": {
     "defaultMessage": "Authors"
   },
@@ -1230,10 +1241,6 @@
   "Z2iL9Z": {
     "defaultMessage": "Start writing",
     "description": "src/components/Buttons/StartWriting/index.tsx"
-  },
-  "Z31Fz+": {
-    "defaultMessage": "Under the moonlight, your dreams are about to come true. The Moonlight Dream badge glorifies your initial participation in the Nomad Matters. To reach the next level, invite 5 friends to join the journey with you. <a>Click here in the last paragraph to find out how to invite new companions</a>",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "Profile",
@@ -1733,10 +1740,6 @@
     "defaultMessage": "Archived",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
-  "qTjjF0": {
-    "defaultMessage": "The dazzling light of a meteor shower is there to illuminate the night sky. Congratulations on having invited 5 companions to participate in Nomad Matters. Invite 5 more to level up, the more the merrier!",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "qVhxp5": {
     "defaultMessage": "Enter",
     "description": "src/components/Buttons/UniversalAuth/index.tsx"
@@ -1802,9 +1805,6 @@
   "s5JCCO": {
     "defaultMessage": "This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
-  },
-  "sLiIAz": {
-    "defaultMessage": "LV3 Nimbus Ferry"
   },
   "sPgUkN": {
     "defaultMessage": "This Month",
@@ -2059,6 +2059,9 @@
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "znJ06J": {
+    "defaultMessage": "<a>About Nomad Matters</a>"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",
