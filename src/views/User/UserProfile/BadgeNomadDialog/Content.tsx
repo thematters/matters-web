@@ -108,8 +108,8 @@ const BadgeNomadDialogContent = ({
                   />
                 ) : (
                   <FormattedMessage
-                    defaultMessage="Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters, whether as a contestant or a supporter of exceptional projects. Next, invite 5 companions to join the journey with you, and you'll earn an even higher-level badge.?"
-                    id="+08Cci"
+                    defaultMessage="Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters, whether as a contestant or a supporter of exceptional projects. Next, invite 5 companions to join the journey with you, and you'll earn an even higher-level badge?"
+                    id="GxTjwK"
                     description="src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
                   />
                 )}

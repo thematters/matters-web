@@ -31,7 +31,7 @@ export const BaseBadgeNomadDialog: React.FC<BadgeNomadDialogProps> = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog scrollable isOpen={show} onDismiss={closeDialog}>
         <DynamicContent
           nomadBadgeLevel={nomadBadgeLevel}
           closeDialog={closeDialog}

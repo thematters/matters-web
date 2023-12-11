@@ -1,8 +1,4 @@
 {
-  "+08Cci": {
-    "defaultMessage": "月色之下夢想即將實現，月之夢徽章代表你參與了遊牧者計畫（參賽或支持了優質計畫）。接下來邀請 5 位夥伴一同踏上旅程，將獲得更高等級的徽章。",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "+51DoZ": {
     "defaultMessage": "請先驗證郵箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -663,6 +659,10 @@
   "GugBCe": {
     "defaultMessage": "本月新增追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "GxTjwK": {
+    "defaultMessage": "月色之下夢想即將實現，月之夢徽章代表你參與了遊牧者計畫（參賽或支持了優質計畫）。接下來邀請 5 位夥伴一同踏上旅程，將獲得更高等級的徽章。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "H0JBH6": {
     "defaultMessage": "登出"
