@@ -3,9 +3,6 @@
     "defaultMessage": "Please verify email first",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
-  "+56XIp": {
-    "defaultMessage": "LV1 Moonlight Dream"
-  },
   "+63O1f": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_PASSWORD_INVALID"
@@ -314,6 +311,9 @@
     "defaultMessage": "Oops. Something went wrong. Please try again later.",
     "description": "BAD_USER_INPUT"
   },
+  "76yoL6": {
+    "defaultMessage": "Moonlight Dream"
+  },
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -328,9 +328,6 @@
   "7WXDhH": {
     "defaultMessage": "Are you sure you want to delete draft?",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
-  },
-  "7ZXP9S": {
-    "defaultMessage": "LV2 Meteor Canoe"
   },
   "7cwoRo": {
     "defaultMessage": "The author has disabled comments for this article"
@@ -349,6 +346,9 @@
   },
   "8KFsZN": {
     "defaultMessage": "Read Counts"
+  },
+  "8MeJ4b": {
+    "defaultMessage": "Nimbus Ferry"
   },
   "8UWUW8": {
     "defaultMessage": "Collect Article",
@@ -622,9 +622,6 @@
     "defaultMessage": "Collection is deleted",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
   },
-  "FuU2MU": {
-    "defaultMessage": "LV4 Firebolt"
-  },
   "FxrSCh": {
     "defaultMessage": "This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
@@ -778,6 +775,9 @@
   },
   "KQi/UZ": {
     "defaultMessage": "Archive works"
+  },
+  "KXOkR3": {
+    "defaultMessage": "<a>Click here for the Nomad Matters and Badge Introduction.</a>"
   },
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
@@ -978,6 +978,9 @@
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
+  "Rc4Oij": {
+    "defaultMessage": "Firebolt"
+  },
   "Ro0CuW": {
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN"
@@ -1040,6 +1043,9 @@
   },
   "TF1OhT": {
     "defaultMessage": "This login code has expired, please try to resend"
+  },
+  "TKsfIS": {
+    "defaultMessage": "Meteor Canoe"
   },
   "TSDiqB": {
     "defaultMessage": "Subscribers",
@@ -1230,10 +1236,6 @@
   "Z2iL9Z": {
     "defaultMessage": "Start writing",
     "description": "src/components/Buttons/StartWriting/index.tsx"
-  },
-  "Z31Fz+": {
-    "defaultMessage": "Under the moonlight, your dreams are about to come true. The Moonlight Dream badge glorifies your initial participation in the Nomad Matters. To reach the next level, invite 5 friends to join the journey with you. <a>Click here in the last paragraph to find out how to invite new companions</a>",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "Profile",
@@ -1557,6 +1559,10 @@
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "l+lNX/": {
+    "defaultMessage": "Under the moonlight, your dreams are about to come true. The Moonlight Dream badge glorifies your initial participation in the Nomad Matters. To reach the next level, invite 5 friends to join the journey with you.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "l/f7bu": {
     "defaultMessage": "Want to know more? Check the",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
@@ -1802,9 +1808,6 @@
   "s5JCCO": {
     "defaultMessage": "This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?",
     "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
-  },
-  "sLiIAz": {
-    "defaultMessage": "LV3 Nimbus Ferry"
   },
   "sPgUkN": {
     "defaultMessage": "This Month",
