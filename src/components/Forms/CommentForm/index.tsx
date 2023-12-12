@@ -1,15 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { dom, stripHtml, translate } from '~/common/utils'
+import { dom, stripHtml } from '~/common/utils'
 import {
   Button,
   IconSpinner16,
-  LanguageContext,
   Spinner,
   TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
 import PUT_COMMENT from '~/components/GQL/mutations/putComment'
@@ -52,7 +51,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
 
   placeholder,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   // retrieve comment draft
   const commentDraftId = `${articleId || circleId}-${type}-${commentId || 0}-${
@@ -132,7 +131,11 @@ export const CommentForm: React.FC<CommentFormProps> = ({
       className={styles.form}
       id={formId}
       onSubmit={handleSubmit}
-      aria-label={translate({ id: 'putComment', lang })}
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Comment',
+        id: 'Ix3e3Q',
+        description: 'src/components/Forms/CommentForm/index.tsx',
+      })}
     >
       <section className={styles.content}>
         <CommentEditor
@@ -158,7 +161,11 @@ export const CommentForm: React.FC<CommentFormProps> = ({
             icon={isSubmitting && <IconSpinner16 size="sm" />}
           >
             {isSubmitting ? null : (
-              <Translate zh_hant="送出" zh_hans="送出" en="Send" />
+              <FormattedMessage
+                defaultMessage="Send"
+                id="aZ6EYx"
+                description="src/components/Forms/CommentForm/index.tsx"
+              />
             )}
           </TextIcon>
         </Button>
