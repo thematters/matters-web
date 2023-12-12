@@ -12,7 +12,7 @@ import {
 } from '~/components'
 import { AuthorRssFeedFragment, AuthorRssFeedPublicQuery } from '~/gql/graphql'
 
-interface RssFeedDialogProps {
+export interface RssFeedDialogProps {
   user: AuthorRssFeedFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }

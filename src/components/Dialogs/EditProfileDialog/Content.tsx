@@ -74,7 +74,6 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   )
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
-  const isAdmin = viewer.status?.role === 'admin'
 
   const formId = 'edit-profile-form'
 
@@ -115,7 +114,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ displayName, description }) =>
       _pickBy({
-        displayName: validateDisplayName(displayName, lang, isAdmin),
+        displayName: validateDisplayName(displayName, lang, viewer.isAdmin),
         description: validateDescription(description, lang),
       }),
     onSubmit: async (

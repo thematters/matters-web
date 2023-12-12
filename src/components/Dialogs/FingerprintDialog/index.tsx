@@ -18,7 +18,7 @@ import {
   FingerprintArticleFragment,
 } from '~/gql/graphql'
 
-interface FingerprintDialogProps {
+export interface FingerprintDialogProps {
   article: FingerprintArticleFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
