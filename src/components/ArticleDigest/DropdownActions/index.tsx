@@ -1,30 +1,40 @@
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
+import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
   AddCollectionsArticleDialog,
+  AddCollectionsArticleDialogProps,
   AppreciatorsDialog,
+  AppreciatorsDialogProps,
   BookmarkButton,
   Button,
   Dropdown,
   FingerprintDialog,
+  FingerprintDialogProps,
   IconMore16,
   IconSize,
   Menu,
   RemoveArticleCollectionDialog,
+  RemoveArticleCollectionDialogProps,
   ShareDialog,
+  ShareDialogProps,
+  Spinner,
   SupportersDialog,
+  SupportersDialogProps,
   toast,
   ViewerContext,
+  withDialog,
 } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
 import AddCollectionButton from './AddCollectionButton'
 import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
+import { ArchiveArticleDialogProps } from './ArchiveArticle/Dialog'
 import DonatorsButton from './DonatorsButton'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
@@ -39,6 +49,22 @@ import SetTagUnselectedButton from './SetTagUnselectedButton'
 import SetTopCollectionButton from './SetTopCollectionButton'
 import ShareButton from './ShareButton'
 import styles from './styles.module.css'
+import type {
+  OpenToggleRecommendArticleDialogWithProps,
+  ToggleRecommendArticleDialogProps,
+} from './ToggleRecommendArticle/Dialog'
+
+const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
+
+const DynamicToggleRecommendArticleButton = dynamic(
+  () => import('./ToggleRecommendArticle/Button'),
+  { loading: () => <Spinner /> }
+)
+
+const DynamicToggleRecommendArticleDialog = dynamic(
+  () => import('./ToggleRecommendArticle/Dialog'),
+  { loading: () => <Spinner /> }
+)
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode
@@ -106,7 +132,16 @@ interface DialogProps {
   openRemoveArticleCollectionDialog: () => void
 }
 
-type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
+interface AdminProps {
+  openToggleRecommendDialog: (
+    props: OpenToggleRecommendArticleDialogWithProps
+  ) => void
+}
+
+type BaseDropdownActionsProps = DropdownActionsProps &
+  Controls &
+  DialogProps &
+  AdminProps
 
 const BaseDropdownActions = ({
   article,
@@ -146,7 +181,11 @@ const BaseDropdownActions = ({
   onSetBottomCollection,
   onSetTopCollection,
   onRemoveCollection,
+
+  // admin
+  openToggleRecommendDialog,
 }: BaseDropdownActionsProps) => {
+  const viewer = useContext(ViewerContext)
   const hasPublic =
     hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
   const hasPrivate =
@@ -224,6 +263,23 @@ const BaseDropdownActions = ({
           <RemoveArticleCollectionButton
             onClick={onRemoveCollection}
             openDialog={openRemoveArticleCollectionDialog}
+          />
+        </>
+      )}
+
+      {/* admin */}
+      {isAdminView && viewer.isAdmin && (
+        <>
+          <Menu.Divider />
+          <DynamicToggleRecommendArticleButton
+            id={article.id}
+            type="icymi"
+            openDialog={openToggleRecommendDialog}
+          />
+          <DynamicToggleRecommendArticleButton
+            id={article.id}
+            type="hottestAndNewest"
+            openDialog={openToggleRecommendDialog}
           />
         </>
       )}
@@ -338,63 +394,75 @@ const DropdownActions = (props: DropdownActionsProps) => {
     return null
   }
 
-  return (
-    <ShareDialog path={props.sharePath}>
-      {({ openDialog: openShareDialog }) => (
-        <FingerprintDialog article={article}>
-          {({ openDialog: openFingerprintDialog }) => (
-            <AppreciatorsDialog article={article}>
-              {({ openDialog: openAppreciatorsDialog }) => (
-                <SupportersDialog article={article}>
-                  {({ openDialog: openSupportersDialog }) => (
-                    <ArchiveArticle.Dialog article={article}>
-                      {({ openDialog: openArchiveDialog }) => (
-                        <AddCollectionsArticleDialog articleId={article.id}>
-                          {({
-                            openDialog: openAddCollectionsArticleDialog,
-                          }) => (
-                            <RemoveArticleCollectionDialog
-                              articleId={article.id}
-                              articleTitle={article.title}
-                              collectionId={collectionId || ''}
-                            >
-                              {({
-                                openDialog: openRemoveArticleCollectionDialog,
-                              }) => (
-                                <BaseDropdownActions
-                                  {...props}
-                                  {...controls}
-                                  openShareDialog={openShareDialog}
-                                  openFingerprintDialog={openFingerprintDialog}
-                                  openAppreciatorsDialog={
-                                    openAppreciatorsDialog
-                                  }
-                                  openSupportersDialog={openSupportersDialog}
-                                  openArchiveDialog={
-                                    viewer.isFrozen ? forbid : openArchiveDialog
-                                  }
-                                  openAddCollectionsArticleDialog={
-                                    openAddCollectionsArticleDialog
-                                  }
-                                  openRemoveArticleCollectionDialog={
-                                    openRemoveArticleCollectionDialog
-                                  }
-                                />
-                              )}
-                            </RemoveArticleCollectionDialog>
-                          )}
-                        </AddCollectionsArticleDialog>
-                      )}
-                    </ArchiveArticle.Dialog>
-                  )}
-                </SupportersDialog>
-              )}
-            </AppreciatorsDialog>
-          )}
-        </FingerprintDialog>
-      )}
-    </ShareDialog>
+  const WithShareDialog = withDialog<Omit<ShareDialogProps, 'children'>>(
+    BaseDropdownActions,
+    ShareDialog,
+    { path: props.sharePath },
+    ({ openDialog }) => ({ ...props, ...controls, openShareDialog: openDialog })
   )
+  const WithFingerprint = withDialog<Omit<FingerprintDialogProps, 'children'>>(
+    WithShareDialog,
+    FingerprintDialog,
+    { article },
+    ({ openDialog }) => ({ openFingerprintDialog: openDialog })
+  )
+  const WithAppreciators = withDialog<
+    Omit<AppreciatorsDialogProps, 'children'>
+  >(WithFingerprint, AppreciatorsDialog, { article }, ({ openDialog }) => ({
+    openAppreciatorsDialog: openDialog,
+  }))
+  const WithSupporters = withDialog<Omit<SupportersDialogProps, 'children'>>(
+    WithAppreciators,
+    SupportersDialog,
+    { article },
+    ({ openDialog }) => ({ openSupportersDialog: openDialog })
+  )
+  const WithArchiveArticle = withDialog<
+    Omit<ArchiveArticleDialogProps, 'children'>
+  >(WithSupporters, ArchiveArticle.Dialog, { article }, ({ openDialog }) => ({
+    openArchiveDialog: viewer.isFrozen ? forbid : openDialog,
+  }))
+  const WithAddCollectionsArticle = withDialog<
+    Omit<AddCollectionsArticleDialogProps, 'children'>
+  >(
+    WithArchiveArticle,
+    AddCollectionsArticleDialog,
+    { articleId: article.id },
+    ({ openDialog }) => ({ openAddCollectionsArticleDialog: openDialog })
+  )
+  const WithRemoveArticleCollection = withDialog<
+    Omit<RemoveArticleCollectionDialogProps, 'children'>
+  >(
+    WithAddCollectionsArticle,
+    RemoveArticleCollectionDialog,
+    {
+      articleId: article.id,
+      articleTitle: article.title,
+      collectionId: collectionId || '',
+    },
+    ({ openDialog }) => ({ openRemoveArticleCollectionDialog: openDialog })
+  )
+
+  // exclude admin code on build
+  if (!isAdminView || !viewer.isAdmin) {
+    return <WithRemoveArticleCollection />
+  }
+
+  /**
+   * ADMIN ONLY
+   */
+  const WithToggleRecommend = withDialog<
+    Omit<ToggleRecommendArticleDialogProps, 'children'>
+  >(
+    WithRemoveArticleCollection,
+    DynamicToggleRecommendArticleDialog,
+    { article },
+    ({ openDialog }) => ({
+      openToggleRecommendDialog: openDialog,
+    })
+  )
+
+  return <WithToggleRecommend />
 }
 
 DropdownActions.fragments = fragments

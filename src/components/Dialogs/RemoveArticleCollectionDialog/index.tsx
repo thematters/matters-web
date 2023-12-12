@@ -15,7 +15,7 @@ const REMOVE_ARTICLE_COLLECTION = gql`
   }
 `
 
-interface RemoveArticleCollectionDialogProps {
+export interface RemoveArticleCollectionDialogProps {
   collectionId: string
   articleId: string
   articleTitle: string

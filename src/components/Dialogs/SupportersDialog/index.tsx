@@ -5,7 +5,7 @@ import { TEST_ID } from '~/common/enums'
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
 import { SupportsDialogArticleFragment } from '~/gql/graphql'
 
-interface SupportersDialogProps {
+export interface SupportersDialogProps {
   article: SupportsDialogArticleFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }

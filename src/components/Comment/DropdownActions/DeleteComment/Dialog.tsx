@@ -25,7 +25,7 @@ const DELETE_COMMENT = gql`
   }
 `
 
-interface DeleteCommentDialogProps {
+export interface DeleteCommentDialogProps {
   comment: DropdownActionsCommentPublicFragment
   type: CommentFormType
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode

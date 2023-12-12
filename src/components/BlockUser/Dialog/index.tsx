@@ -15,7 +15,7 @@ import {
   ToggleBlockUserMutation,
 } from '~/gql/graphql'
 
-interface BlockUserDialogProps {
+export interface BlockUserDialogProps {
   user: BlockUserPublicFragment & Partial<BlockUserPrivateFragment>
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }

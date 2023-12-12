@@ -24,7 +24,7 @@ const COLLAPSE_COMMENT = gql`
   }
 `
 
-interface CollapseCommentDialogProps {
+export interface CollapseCommentDialogProps {
   comment: DropdownActionsCommentPublicFragment
   type: CommentFormType
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode

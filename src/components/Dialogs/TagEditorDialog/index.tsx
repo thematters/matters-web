@@ -28,12 +28,12 @@ type TagMaintainersNodeTagEditor = NonNullable<
   NonNullable<TagMaintainersQuery['node'] & { __typename: 'Tag' }>['editors']
 >[0]
 
-interface Props {
+export interface TagEditorDialogProps {
   id: string
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const BaseDialog = ({ id, children }: Props) => {
+const BaseDialog = ({ id, children }: TagEditorDialogProps) => {
   const defaultStep = 'list'
 
   const {
@@ -94,7 +94,7 @@ const BaseDialog = ({ id, children }: Props) => {
   )
 }
 
-export const TagEditorDialog = (props: Props) => (
+export const TagEditorDialog = (props: TagEditorDialogProps) => (
   <Dialog.Lazy mounted={<BaseDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
