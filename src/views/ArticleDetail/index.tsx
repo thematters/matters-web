@@ -52,7 +52,6 @@ import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.module.css'
-import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationToast from './TranslationToast'
 
@@ -278,7 +277,6 @@ const BaseArticleDetail = ({
       <State article={article} />
 
       <section className={styles.content}>
-        <TagList article={article} />
         <section className={styles.title}>
           <Title type="article">{title}</Title>
 
