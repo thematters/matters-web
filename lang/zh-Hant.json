@@ -707,6 +707,10 @@
     "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "Ix3e3Q": {
+    "defaultMessage": "發布評論",
+    "description": "src/components/Forms/CommentForm/index.tsx"
+  },
   "J6f6iN": {
     "defaultMessage": "評論數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
@@ -1251,6 +1255,10 @@
   "aOFCqL": {
     "defaultMessage": "最多評論",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "aZ6EYx": {
+    "defaultMessage": "送出",
+    "description": "src/components/Forms/CommentForm/index.tsx"
   },
   "aa0nss": {
     "defaultMessage": "取消精選",

@@ -38,6 +38,32 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 })
 
+document.createRange = () => {
+  const range = new Range()
+
+  range.getBoundingClientRect = vi.fn(() => ({
+    x: 851.671875,
+    y: 200.046875,
+    width: 8.34375,
+    height: 17,
+    top: 967.046875,
+    right: 860.015625,
+    bottom: 984.046875,
+    left: 851.671875,
+    toJSON: vi.fn(),
+  }))
+
+  // @ts-ignore
+  range.getClientRects = vi.fn(() => ({
+    item: () => null,
+    length: 0,
+  }))
+
+  return range
+}
+
+document.elementFromPoint = vi.fn(() => null)
+
 vi.mock('next/router', () => require('next-router-mock'))
 
 vi.mock('next/dynamic', async () => {

@@ -83,11 +83,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const intl = useIntl()
 
-  const textAriaLabel = intl.formatMessage({
-    defaultMessage: 'Search',
-    id: 'xmcVZ0',
-  })
-  const textPlaceholder = intl.formatMessage({
+  const searchText = intl.formatMessage({
     defaultMessage: 'Search',
     id: 'xmcVZ0',
   })
@@ -121,9 +117,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }
 
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
-    if (event.code.toLowerCase() === KEYVALUE.arrowUp) {
-      if (!showDropdown) return
+    if (!showDropdown) return
 
+    const code = event.code.toLowerCase()
+    if (code === KEYVALUE.arrowUp) {
       event.preventDefault()
       const activeIndex = items.indexOf(activeItem)
       if (activeIndex === 0) return
@@ -131,9 +128,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setActiveItem(items[activeIndex - 1])
     }
 
-    if (event.code.toLowerCase() === KEYVALUE.arrowDown) {
-      if (!showDropdown) return
-
+    if (code === KEYVALUE.arrowDown) {
       event.preventDefault()
       const activeIndex = items.indexOf(activeItem)
       if (activeIndex === items.length - 1) return
@@ -141,9 +136,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setActiveItem(items[activeIndex + 1])
     }
 
-    if (event.code.toLowerCase() === KEYVALUE.escape) {
-      if (!showDropdown) return
-
+    if (code === KEYVALUE.escape) {
       setShowDropdown(false)
     }
   })
@@ -199,19 +192,19 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             <form
               className={styles.form}
               onSubmit={handleSubmit}
-              aria-label={textPlaceholder}
+              aria-label={searchText}
               role="search"
               autoComplete="off"
               action=""
             >
               <input
-                // FIMXME: FOUC on re-render
+                // FIXME: FOUC on re-render
                 style={{ borderColor: 'var(--color-line-grey-light)' }}
                 type="search"
                 name="q"
                 ref={searchTextInput}
-                aria-label={textAriaLabel}
-                placeholder={textPlaceholder}
+                aria-label={searchText}
+                placeholder={searchText}
                 autoCorrect="off"
                 onChange={(e) => {
                   handleChange(e)
@@ -272,13 +265,13 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 ref={ref}
               >
                 <input
-                  // FIMXME: FOUC on re-render
+                  // FIXME: FOUC on re-render
                   style={{ borderColor: 'var(--color-line-grey-light)' }}
                   type="search"
                   name="q"
                   ref={searchTextInput}
-                  aria-label={textAriaLabel}
-                  placeholder={textPlaceholder}
+                  aria-label={searchText}
+                  placeholder={searchText}
                   value={values.q}
                   onChange={(e) => {
                     handleChange(e)
