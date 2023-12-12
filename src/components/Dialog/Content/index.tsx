@@ -7,6 +7,7 @@ interface DialogContentProps {
   noSpacing?: boolean
   smExtraSpacing?: boolean
   fixedHeight?: boolean
+  fixedHeightNoFooter?: boolean
   noSpacingBottom?: boolean
   noMaxHeight?: boolean
 }
@@ -19,6 +20,7 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> & {
   noSpacingBottom,
   noMaxHeight,
   fixedHeight,
+  fixedHeightNoFooter,
   children,
 }) => {
   const contentClasses = classNames({
@@ -26,6 +28,7 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> & {
     [styles.spacing]: !noSpacing,
     [styles.smExtraSpacing]: smExtraSpacing,
     [styles.fixedHeight]: !!fixedHeight,
+    [styles.fixedHeightNoFooter]: !!fixedHeightNoFooter,
     [styles.noSpacingBottom]: !!noSpacingBottom,
     [styles.noMaxHeight]: !!noMaxHeight,
   })

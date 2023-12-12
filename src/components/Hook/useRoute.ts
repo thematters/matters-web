@@ -62,6 +62,18 @@ export const useRoute = () => {
     router.replace({ query })
   }
 
+  const deleteQuery = (key: QueryKey) => {
+    // Using replaceQuery will encode the URL, it was error and ugly.
+    // eg: /@Matty?dialog=nomad-badge --> /%40Matty
+    // replaceQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key, '')
+    const queryString = window.location.search
+    const urlParams = new URLSearchParams(queryString)
+    urlParams.delete(key)
+    router.replace(
+      `${window.location.pathname}?${decodeURIComponent(urlParams.toString())}`
+    )
+  }
+
   // i18n
   const locale = getQuery('locale')
   const routerLang = toUserLanguage(locale) as UserLanguage
@@ -71,6 +83,7 @@ export const useRoute = () => {
     isPathStartWith,
     getQuery,
     setQuery,
+    deleteQuery,
     replaceQuery,
     router,
     routerLang,

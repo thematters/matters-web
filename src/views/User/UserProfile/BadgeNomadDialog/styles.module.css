@@ -1,0 +1,51 @@
+.badge {
+  @mixin transition;
+
+  font-size: 0;
+  color: var(--color-grey-darker);
+  cursor: pointer;
+  transition-property: color;
+
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
+}
+
+.helpIcon {
+  font-size: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.dialogContent {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+
+  @media (--sm-up) {
+    padding-top: var(--spacing-base);
+    padding-bottom: var(--spacing-xx-loose);
+  }
+
+  @media (--md-up) {
+    padding-top: calc(var(--spacing-base-loose) + var(--spacing-x-loose));
+  }
+
+  & svg {
+    height: 215px;
+  }
+
+  & .title {
+    padding: var(--spacing-base) 0;
+  }
+
+  & a {
+    text-decoration-line: underline;
+  }
+}

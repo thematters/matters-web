@@ -1,4 +1,8 @@
 {
+  "+08Cci": {
+    "defaultMessage": "月色之下梦想即将实现，月之梦徽章代表你参与了游牧者计划（参赛或支持了优质计划）。接下来邀请 5 位伙伴一同踏上旅程，将获得更高等级的徽章。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "+51DoZ": {
     "defaultMessage": "请先验证邮箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -52,6 +56,9 @@
   "/TXBJR": {
     "defaultMessage": "不知道哪里出错了，过几分钟看看",
     "description": "UNKNOWN_ERROR"
+  },
+  "/faseS": {
+    "defaultMessage": "已复制分享连结"
   },
   "/jJLYy": {
     "defaultMessage": "交易记录"
@@ -308,6 +315,9 @@
     "defaultMessage": "出错了，请检查你输入的内容",
     "description": "BAD_USER_INPUT"
   },
+  "76yoL6": {
+    "defaultMessage": "月之梦"
+  },
   "77tYPg": {
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -340,6 +350,9 @@
   },
   "8KFsZN": {
     "defaultMessage": "阅读次数"
+  },
+  "8MeJ4b": {
+    "defaultMessage": "光轮号"
   },
   "8UWUW8": {
     "defaultMessage": "关联作品",
@@ -540,6 +553,10 @@
   "DYrDcG": {
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "DdVBFV": {
+    "defaultMessage": "徽章长出了羽翼，梦想的光轮正开始转动，你已在游牧者之路聚集了 10 位伙伴。再邀请 10 位同行者，一起迈向终点站，最高等级的荣誉正在等着你。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "Dq29Hb": {
     "defaultMessage": "你尚未绑定邮箱。基于资金安全考虑，储值需绑定邮箱。",
@@ -962,6 +979,9 @@
     "defaultMessage": "请先绑定邮箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
+  "Rc4Oij": {
+    "defaultMessage": "火闪电"
+  },
   "Ro0CuW": {
     "defaultMessage": "你尚无权限进行该操作",
     "description": "FORBIDDEN"
@@ -1024,6 +1044,9 @@
   },
   "TF1OhT": {
     "defaultMessage": "临时密码已过期，请尝试重新发送"
+  },
+  "TKsfIS": {
+    "defaultMessage": "流星号"
   },
   "TSDiqB": {
     "defaultMessage": "付费人数",
@@ -1160,6 +1183,10 @@
   "XfRKZY": {
     "defaultMessage": "去绑定",
     "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
+  },
+  "XfkltT": {
+    "defaultMessage": "流星雨的绚烂光芒足以点亮夜空，你已经邀请了 5 位伙伴关注游牧者计划，再邀请 5 位就能继续升级！",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "XgdZSb": {
     "defaultMessage": "值得关注"
@@ -1309,6 +1336,10 @@
   "cO0im6": {
     "defaultMessage": "作者精选",
     "description": "src/components/Comment/PinnedLabel/index.tsx"
+  },
+  "cQ+Lyq": {
+    "defaultMessage": "游牧者计画纪念徽章",
+    "description": "src/views/User/UserProfile/Badges/index.tsx"
   },
   "cQYXjl": {
     "defaultMessage": "汇率币别",
@@ -1659,6 +1690,10 @@
   "ohgTH4": {
     "defaultMessage": "追踪中",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "p0oPHP": {
+    "defaultMessage": "突破历史！你点燃的火炬将是游牧者路途上最耀眼的支持。恭喜你与 20 位好友一同抵达游牧者计画的终点，并获得最高等级火闪电徽章。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
@@ -2024,6 +2059,9 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "znJ06J": {
+    "defaultMessage": "<a>关于游牧者计划</a>"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",

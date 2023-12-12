@@ -1,10 +1,10 @@
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID } from '~/common/enums'
-import { numAbbr } from '~/common/utils'
+import { TEST_ID, URL_USER_PROFILE } from '~/common/enums'
+import { numAbbr, toPath } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -23,13 +23,7 @@ import {
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 import UserTabs from '../UserTabs'
-import {
-  ArchitectBadge,
-  CivicLikerBadge,
-  GoldenMotorBadge,
-  SeedBadge,
-  TraveloggersBadge,
-} from './Badges'
+import { Badges } from './Badges'
 import { BadgesDialog } from './BadgesDialog'
 import CircleWidget from './CircleWidget'
 import DropdownActions from './DropdownActions'
@@ -45,11 +39,17 @@ const DynamicWalletLabel = dynamic(() => import('./WalletLabel'), {
 })
 
 export const UserProfile = () => {
-  const { getQuery } = useRoute()
+  const {
+    getQuery, // deleteQuery
+  } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public user data
   const userName = getQuery('name')
+  const showBadges =
+    getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
+    URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
+  const [hasShowBadges, setHasShowBadges] = useState(false)
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
@@ -88,26 +88,32 @@ export const UserProfile = () => {
     return <Throw404 />
   }
 
+  const userProfilePath = toPath({
+    page: 'userProfile',
+    userName,
+  })
+  const shareLink =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key}=${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value}`
+      : ''
+
   const badges = user.info.badges || []
   const circles = user.ownCircles || []
   const hasSeedBadge = badges.some((b) => b.type === 'seed')
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
   const hasGoldenMotorBadge = badges.some((b) => b.type === 'golden_motor')
   const hasTraveloggersBadge = !!user.info.cryptoWallet?.hasNFTs
+  const nomadBadgeType = badges.filter((b) =>
+    ['nomad1', 'nomad2', 'nomad3', 'nomad4'].includes(b.type)
+  ) // nomad1 nomad2 nomad3 nomad4
+  const hasNomadBadge = nomadBadgeType?.length >= 1
+  const nomadBadgeLevel = (
+    hasNomadBadge ? Number.parseInt(nomadBadgeType[0].type.charAt(5)) : 1
+  ) as 1 | 2 | 3 | 4
 
   const profileCover = user.info.profileCover
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
-
-  const Badges = ({ isInDialog }: { isInDialog?: boolean }) => (
-    <span className={isInDialog ? styles.badgesInDialog : styles.badgesInPage}>
-      {hasTraveloggersBadge && <TraveloggersBadge isInDialog={isInDialog} />}
-      {hasSeedBadge && <SeedBadge isInDialog={isInDialog} />}
-      {hasGoldenMotorBadge && <GoldenMotorBadge isInDialog={isInDialog} />}
-      {hasArchitectBadge && <ArchitectBadge isInDialog={isInDialog} />}
-      {isCivicLiker && <CivicLikerBadge isInDialog={isInDialog} />}
-    </span>
-  )
 
   /**
    * Inactive User
@@ -195,11 +201,40 @@ export const UserProfile = () => {
               >
                 {user.displayName}
               </h1>
-              <BadgesDialog content={<Badges isInDialog />}>
+              <BadgesDialog
+                isInDialog
+                hasNomadBadge={hasNomadBadge}
+                nomadBadgeLevel={nomadBadgeLevel}
+                totalReferredCount={user.status?.totalReferredCount || 0}
+                hasTraveloggersBadge={hasTraveloggersBadge}
+                hasSeedBadge={hasSeedBadge}
+                hasGoldenMotorBadge={hasGoldenMotorBadge}
+                hasArchitectBadge={hasArchitectBadge}
+                isCivicLiker={isCivicLiker}
+                shareLink={shareLink}
+              >
                 {({ openDialog }) => {
+                  if (showBadges && hasNomadBadge && !hasShowBadges) {
+                    setTimeout(() => {
+                      openDialog('nomad')
+                      // FIXED: infinite loop render of BadgesDialog
+                      setHasShowBadges(true)
+                    })
+                  }
                   return (
-                    <span className={styles.badges} onClick={openDialog}>
-                      <Badges />
+                    <span
+                      className={styles.badges}
+                      onClick={() => openDialog()}
+                    >
+                      <Badges
+                        hasNomadBadge={hasNomadBadge}
+                        nomadBadgeLevel={nomadBadgeLevel}
+                        hasTraveloggersBadge={hasTraveloggersBadge}
+                        hasSeedBadge={hasSeedBadge}
+                        hasGoldenMotorBadge={hasGoldenMotorBadge}
+                        hasArchitectBadge={hasArchitectBadge}
+                        isCivicLiker={isCivicLiker}
+                      />
                     </span>
                   )
                 }}

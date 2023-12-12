@@ -99,18 +99,6 @@
   }
 }
 
-.badgesInDialog {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  grid-row-gap: var(--spacing-loose);
-  margin-bottom: var(--spacing-loose);
-}
-
-.badgesInPage {
-  display: flex;
-  align-items: center;
-}
-
 .follow {
   padding: 0 var(--spacing-base);
   margin-top: var(--spacing-base);
