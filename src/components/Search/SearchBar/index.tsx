@@ -83,11 +83,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const [debouncedSearch] = useDebounce(search, INPUT_DEBOUNCE)
   const intl = useIntl()
 
-  const textAriaLabel = intl.formatMessage({
-    defaultMessage: 'Search',
-    id: 'xmcVZ0',
-  })
-  const textPlaceholder = intl.formatMessage({
+  const searchText = intl.formatMessage({
     defaultMessage: 'Search',
     id: 'xmcVZ0',
   })
@@ -196,7 +192,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             <form
               className={styles.form}
               onSubmit={handleSubmit}
-              aria-label={textPlaceholder}
+              aria-label={searchText}
               role="search"
               autoComplete="off"
               action=""
@@ -207,8 +203,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 type="search"
                 name="q"
                 ref={searchTextInput}
-                aria-label={textAriaLabel}
-                placeholder={textPlaceholder}
+                aria-label={searchText}
+                placeholder={searchText}
                 autoCorrect="off"
                 onChange={(e) => {
                   handleChange(e)
@@ -274,8 +270,8 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                   type="search"
                   name="q"
                   ref={searchTextInput}
-                  aria-label={textAriaLabel}
-                  placeholder={textPlaceholder}
+                  aria-label={searchText}
+                  placeholder={searchText}
                   value={values.q}
                   onChange={(e) => {
                     handleChange(e)
