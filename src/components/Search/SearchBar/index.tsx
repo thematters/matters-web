@@ -121,9 +121,10 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }
 
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
-    if (event.code.toLowerCase() === KEYVALUE.arrowUp) {
-      if (!showDropdown) return
+    if (!showDropdown) return
 
+    const code = event.code.toLowerCase()
+    if (code === KEYVALUE.arrowUp) {
       event.preventDefault()
       const activeIndex = items.indexOf(activeItem)
       if (activeIndex === 0) return
@@ -131,9 +132,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setActiveItem(items[activeIndex - 1])
     }
 
-    if (event.code.toLowerCase() === KEYVALUE.arrowDown) {
-      if (!showDropdown) return
-
+    if (code === KEYVALUE.arrowDown) {
       event.preventDefault()
       const activeIndex = items.indexOf(activeItem)
       if (activeIndex === items.length - 1) return
@@ -141,9 +140,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setActiveItem(items[activeIndex + 1])
     }
 
-    if (event.code.toLowerCase() === KEYVALUE.escape) {
-      if (!showDropdown) return
-
+    if (code === KEYVALUE.escape) {
       setShowDropdown(false)
     }
   })
@@ -205,7 +202,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               action=""
             >
               <input
-                // FIMXME: FOUC on re-render
+                // FIXME: FOUC on re-render
                 style={{ borderColor: 'var(--color-line-grey-light)' }}
                 type="search"
                 name="q"
@@ -272,7 +269,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 ref={ref}
               >
                 <input
-                  // FIMXME: FOUC on re-render
+                  // FIXME: FOUC on re-render
                   style={{ borderColor: 'var(--color-line-grey-light)' }}
                   type="search"
                   name="q"
