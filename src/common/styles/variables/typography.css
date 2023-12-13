@@ -29,6 +29,7 @@
   --font-size-lg: 1.25rem; /* 20px */
   --font-size-xl: 1.5rem; /* 24px */
   --font-size-xxl: 2rem; /* 32px */
+  --font-size-xxxl-s: 2.25rem; /* 36px */
   --font-weight-light: 300;
   --font-weight-normal: 400;
   --font-weight-medium: 500;
@@ -58,8 +59,8 @@
   --font-weight-subtext: var(--font-weight-normal);
 
   /* Article Title */
-  --font-size-article-title: var(--font-size-xl);
-  --line-height-article-title: 1.5; /* 36/24 */
+  --font-size-article-title: var(--font-size-xxxl-s);
+  --line-height-article-title: 1.5555; /* 56/35 */
   --font-weight-article-title: var(--font-weight-semibold);
 
   /* Article Body */

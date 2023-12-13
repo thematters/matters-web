@@ -27,7 +27,6 @@ import {
   ViewerContext,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleAccessType,
   ArticleAvailableTranslationsQuery,
@@ -53,7 +52,6 @@ import Placeholder from './Placeholder'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.module.css'
-import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationToast from './TranslationToast'
 
@@ -234,18 +232,6 @@ const BaseArticleDetail = ({
 
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
-      <Layout.Header
-        mode="compact"
-        right={
-          <UserDigest.Rich
-            user={article.author}
-            size="sm"
-            spacing={[0, 0]}
-            bgColor="none"
-          />
-        }
-      />
-
       <Head
         title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
         path={toPath({ page: 'articleDetail', article }).href}
@@ -279,7 +265,6 @@ const BaseArticleDetail = ({
       <State article={article} />
 
       <section className={styles.content}>
-        <TagList article={article} />
         <section className={styles.title}>
           <Title type="article">{title}</Title>
 
