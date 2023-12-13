@@ -1,17 +1,16 @@
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/48px/badge-architect.svg'
-import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/48px/badge-civic-liker.svg'
-import { ReactComponent as IconGoldenMotorBadge } from '@/public/static/icons/48px/badge-golden-motor.svg'
-import { ReactComponent as IconNomad1Badge } from '@/public/static/icons/48px/badge-nomad1-moon.svg'
-import { ReactComponent as IconNomad2Badge } from '@/public/static/icons/48px/badge-nomad2-star.svg'
-import { ReactComponent as IconNomad3Badge } from '@/public/static/icons/48px/badge-nomad3-light.svg'
-import { ReactComponent as IconNomad4Badge } from '@/public/static/icons/48px/badge-nomad4-fire.svg'
-import { ReactComponent as IconSeedBadge } from '@/public/static/icons/48px/badge-seed.svg'
-import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/48px/badge-traveloggers.svg'
+import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/20px/badge-architect.svg'
+import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/20px/badge-civic-liker.svg'
+import { ReactComponent as IconGoldenMotorBadge } from '@/public/static/icons/20px/badge-golden-motor.svg'
+import { ReactComponent as IconNomad1Badge } from '@/public/static/icons/20px/badge-nomad1-moon.svg'
+import { ReactComponent as IconNomad2Badge } from '@/public/static/icons/20px/badge-nomad2-star.svg'
+import { ReactComponent as IconNomad3Badge } from '@/public/static/icons/20px/badge-nomad3-light.svg'
+import { ReactComponent as IconNomad4Badge } from '@/public/static/icons/20px/badge-nomad4-fire.svg'
+import { ReactComponent as IconSeedBadge } from '@/public/static/icons/20px/badge-seed.svg'
+import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/20px/badge-traveloggers.svg'
 import { IconArrowAction24, Tooltip, Translate, withIcon } from '~/components'
-import { UserStatus } from '~/gql/graphql'
 
 // import { BadgeNomadDialog } from '../BadgeNomadLabel'
 import styles from './styles.module.css'
@@ -186,13 +185,9 @@ export const NomadBadge = ({
   isInDialog,
   hasTooltip,
   level,
-  totalReferredCount,
-  shareLink,
   gotoNomadBadge,
 }: badgePros & {
   level: 1 | 2 | 3 | 4
-  totalReferredCount?: UserStatus['totalReferredCount']
-  shareLink?: string
   gotoNomadBadge?: () => void
 }) => {
   const copy = (
@@ -243,21 +238,27 @@ export const NomadBadge = ({
       </section>
     )
   }
+
   if (hasTooltip) {
     return (
       <Tooltip content={copy} placement="top">
-        <span className={styles.badge}>{withIconComp({ size: 'mdS' })}</span>
+        <span className={[styles.badge, styles.nomad].join(' ')}>
+          {withIconComp({ size: 'mdS' })}
+        </span>
       </Tooltip>
     )
   }
 
-  return <span className={styles.badge}>{withIconComp({ size: 'mdS' })}</span>
+  return (
+    <span className={[styles.badge, styles.nomad].join(' ')}>
+      {withIconComp({ size: 'mdS' })}
+    </span>
+  )
 }
 
 export interface BadgesOptions {
   hasNomadBadge?: boolean
   nomadBadgeLevel?: 1 | 2 | 3 | 4
-  totalReferredCount?: UserStatus['totalReferredCount']
   hasTraveloggersBadge?: boolean
   hasSeedBadge?: boolean
   hasGoldenMotorBadge?: boolean
@@ -266,20 +267,18 @@ export interface BadgesOptions {
   gotoNomadBadge?: () => void
 
   isInDialog?: boolean
-  shareLink?: string
+  shareLink: string
 }
 
 export const Badges = ({
   isInDialog,
   hasNomadBadge,
   nomadBadgeLevel,
-  totalReferredCount,
   hasTraveloggersBadge,
   hasSeedBadge,
   hasGoldenMotorBadge,
   hasArchitectBadge,
   isCivicLiker,
-  shareLink,
   gotoNomadBadge,
 }: BadgesOptions) =>
   isInDialog ? (
@@ -289,8 +288,6 @@ export const Badges = ({
           <NomadBadge
             isInDialog
             level={nomadBadgeLevel!}
-            totalReferredCount={totalReferredCount}
-            shareLink={shareLink}
             gotoNomadBadge={gotoNomadBadge}
           />
         </section>

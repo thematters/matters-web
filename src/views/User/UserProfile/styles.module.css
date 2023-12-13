@@ -73,7 +73,7 @@
       position: relative;
       display: inline-block;
       margin-left: -4.5px;
-      border: 2px solid var(--color-white);
+      border: 1px solid var(--color-white);
       border-radius: 50%;
 
       &:nth-child(1) {

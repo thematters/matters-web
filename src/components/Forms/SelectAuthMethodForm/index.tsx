@@ -74,7 +74,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Content noMaxHeight={true}>{InnerForm}</Dialog.Content>
+      <Dialog.Content noMaxHeight>{InnerForm}</Dialog.Content>
 
       {isInDialog && (
         <Dialog.Footer

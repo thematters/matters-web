@@ -39,9 +39,7 @@ const DynamicWalletLabel = dynamic(() => import('./WalletLabel'), {
 })
 
 export const UserProfile = () => {
-  const {
-    getQuery, // deleteQuery
-  } = useRoute()
+  const { getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public user data
@@ -205,7 +203,6 @@ export const UserProfile = () => {
                 isInDialog
                 hasNomadBadge={hasNomadBadge}
                 nomadBadgeLevel={nomadBadgeLevel}
-                totalReferredCount={user.status?.totalReferredCount || 0}
                 hasTraveloggersBadge={hasTraveloggersBadge}
                 hasSeedBadge={hasSeedBadge}
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
@@ -222,7 +219,8 @@ export const UserProfile = () => {
                     })
                   }
                   return (
-                    <span
+                    <section
+                      role="button"
                       className={styles.badges}
                       onClick={() => openDialog()}
                     >
@@ -234,8 +232,9 @@ export const UserProfile = () => {
                         hasGoldenMotorBadge={hasGoldenMotorBadge}
                         hasArchitectBadge={hasArchitectBadge}
                         isCivicLiker={isCivicLiker}
+                        shareLink={shareLink}
                       />
-                    </span>
+                    </section>
                   )
                 }}
               </BadgesDialog>

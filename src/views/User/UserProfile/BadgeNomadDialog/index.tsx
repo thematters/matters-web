@@ -1,14 +1,10 @@
 import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
-import { UserStatus } from '~/gql/graphql'
 
 type BadgeNomadLabelProps = {
-  hasTooltip?: boolean
   nomadBadgeLevel: 1 | 2 | 3 | 4
-  totalReferredCount?: UserStatus['totalReferredCount']
-  shareLink?: string
-  // defaultShowDialog: boolean
+  shareLink: string
 }
 
 type BadgeNomadDialogProps = BadgeNomadLabelProps & {
@@ -22,7 +18,6 @@ const DynamicContent = dynamic(() => import('./Content'), {
 export const BaseBadgeNomadDialog: React.FC<BadgeNomadDialogProps> = ({
   children,
   nomadBadgeLevel,
-  totalReferredCount,
   shareLink,
 }) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
@@ -35,7 +30,6 @@ export const BaseBadgeNomadDialog: React.FC<BadgeNomadDialogProps> = ({
         <DynamicContent
           nomadBadgeLevel={nomadBadgeLevel}
           closeDialog={closeDialog}
-          totalReferredCount={totalReferredCount}
           shareLink={shareLink}
         />
       </Dialog>
