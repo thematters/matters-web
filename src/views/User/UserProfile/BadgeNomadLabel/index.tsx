@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl'
 import { Tooltip } from '~/components'
 
 import { NomadBadge } from '../Badges'
-import styles from './styles.module.css'
 
 type BadgeNomadLabelProps = {
   hasTooltip?: boolean
@@ -17,9 +16,9 @@ export const BadgeNomadLabel: React.FC<BadgeNomadLabelProps> = ({
   onClick,
 }) => {
   const Content = (
-    <span className={styles.badge} onClick={onClick}>
+    <button onClick={onClick}>
       <NomadBadge level={nomadBadgeLevel!} />
-    </span>
+    </button>
   )
 
   return (
