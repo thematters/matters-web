@@ -30,14 +30,12 @@ const TranslationButton: FC<{
         toggleTranslate()
         analytics.trackEvent('click_button', { type: 'translation' })
       }}
-      spacing={['xxtight', 'xtight']}
-      bgColor="greenLighter"
     >
       <TextIcon
-        icon={<IconTranslate16 color="green" />}
+        icon={<IconTranslate16 color="black" />}
         size="xs"
-        spacing="xxtight"
-        color="green"
+        spacing="xxxtight"
+        color="black"
       >
         {translated ? (
           <Translate

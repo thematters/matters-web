@@ -72,6 +72,13 @@ span.container {
   }
 }
 
+.textActiveGreyDarker {
+  &:hover,
+  &:focus {
+    color: var(--color-matters-grey-darker);
+  }
+}
+
 .textActiveRedDark {
   &:hover,
   &:focus {

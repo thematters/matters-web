@@ -169,6 +169,10 @@
   "2W0f9h": {
     "defaultMessage": "個人簡介"
   },
+  "2bG/gP": {
+    "defaultMessage": "編輯",
+    "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
+  },
   "2ef/Xl": {
     "defaultMessage": "封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
