@@ -49,6 +49,7 @@ import {
 } from './gql'
 import License from './License'
 import MetaInfo from './MetaInfo'
+import Placeholder from './Placeholder'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.module.css'
@@ -537,11 +538,7 @@ const ArticleDetail = ({
    * Render:Loading
    */
   if (loading) {
-    return (
-      <EmptyLayout>
-        <Spinner />
-      </EmptyLayout>
-    )
+    return <Placeholder />
   }
 
   /**
@@ -647,11 +644,7 @@ const ArticleDetailOuter = () => {
    * Rendering
    */
   if (loading) {
-    return (
-      <EmptyLayout>
-        <Spinner />
-      </EmptyLayout>
-    )
+    return <Placeholder />
   }
 
   return <ArticleDetail includeTranslation={includeTranslation} />
