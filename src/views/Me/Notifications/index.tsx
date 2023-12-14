@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
@@ -103,13 +104,19 @@ const BaseNotifications = () => {
 }
 
 const Notifications = () => {
+  const intl = useIntl()
+
   return (
     <Layout.Main>
       <Media at="sm">
         <Layout.Header
           // left={<Layout.Header.MeButton />}
           // right={<Layout.Header.Title id="notifications" />}
-          left={<Layout.Header.Title id="notifications" />}
+          left={
+            <Layout.Header.Title>
+              <FormattedMessage defaultMessage="Notifications" id="NAidKb" />
+            </Layout.Header.Title>
+          }
         />
         <Spacer size="base" />
       </Media>
@@ -117,7 +124,12 @@ const Notifications = () => {
         <Spacer size="xloose" />
       </Media>
 
-      <Head title={{ id: 'notifications' }} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Notifications',
+          id: 'NAidKb',
+        })}
+      />
 
       <Layout.Main.Spacing hasVertical={false}>
         <BaseNotifications />

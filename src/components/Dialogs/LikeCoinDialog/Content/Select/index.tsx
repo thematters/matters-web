@@ -13,7 +13,7 @@ const Select: React.FC<SelectProps> = ({ startBind, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title="setupLikeCoin"
+        title={<FormattedMessage defaultMessage="Liker ID" id="iEJeQH" />}
         closeDialog={closeDialog}
         closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
       />

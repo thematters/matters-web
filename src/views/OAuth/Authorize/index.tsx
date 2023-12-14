@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { appendTarget, toReadableScope } from '~/common/utils'
@@ -205,7 +206,13 @@ const BaseOAuthAuthorize = () => {
 
 const OAuthAuthorize = () => (
   <Layout.Main>
-    <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
+    <Layout.Header
+      left={
+        <Layout.Header.Title>
+          <FormattedMessage defaultMessage="OAuth authorize" id="Mgl1bT" />
+        </Layout.Header.Title>
+      }
+    />
 
     <Layout.Main.Spacing>
       <BaseOAuthAuthorize />

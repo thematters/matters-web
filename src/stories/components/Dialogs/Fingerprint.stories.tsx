@@ -1,14 +1,9 @@
 import { MockedProvider } from '@apollo/react-testing'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import {
-  Button,
-  FingerprintDialog,
-  IconIPFS24,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { Button, FingerprintDialog, IconIPFS24, TextIcon } from '~/components'
 
 import { MOCK_ARTILCE } from '../../mocks'
 
@@ -34,7 +29,7 @@ const Template: ComponentStory<typeof FingerprintDialog> = (args) => (
             spacing="xxtight"
             color="green"
           >
-            <Translate id="IPFSEntrance" />
+            <FormattedMessage defaultMessage="IPFS" id="tio9Gt" />{' '}
           </TextIcon>
         </Button>
       )}

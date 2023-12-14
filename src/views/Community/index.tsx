@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { captureClicks, translate } from '~/common/utils'
 import { Head, LanguageContext, Layout } from '~/components'
@@ -6,13 +7,25 @@ import { Head, LanguageContext, Layout } from '~/components'
 import content from './content'
 
 const Community = () => {
+  const intl = useIntl()
   const { lang } = useContext(LanguageContext)
 
   return (
     <Layout.Main>
-      <Layout.Header left={<Layout.Header.Title id="community" />} />
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="Matters Community" id="FhWC22" />
+          </Layout.Header.Title>
+        }
+      />
 
-      <Head title={{ id: 'community' }} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Matters Community',
+          id: 'FhWC22',
+        })}
+      />
 
       <Layout.Main.Spacing>
         <section

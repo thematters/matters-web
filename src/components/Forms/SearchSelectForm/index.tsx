@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { TextId } from '~/common/enums'
 import { Dialog } from '~/components'
 import SearchingArea, {
   SearchType,
@@ -33,8 +32,8 @@ type Area = 'staging' | 'searching'
 export type SearchSelectNode = SelectNode
 
 export type SearchSelectFormProps = {
-  title: TextId | React.ReactNode
-  hint: TextId
+  title: React.ReactNode
+  hint: React.ReactNode
   headerLeftButton?: React.ReactNode
   headerRightButtonText?: string | React.ReactNode
   closeDialog: () => void

@@ -282,9 +282,13 @@ const Select: React.FC<FormProps> = ({
       <>
         <Layout.Header
           left={
-            <Layout.Header.Title
-              id={isConnect ? 'loginWithWallet' : 'authEntries'}
-            />
+            <Layout.Header.Title>
+              {isConnect ? (
+                <FormattedMessage defaultMessage="Connect Wallet" id="cg1VJ2" />
+              ) : (
+                <FormattedMessage defaultMessage="Enter" id="H8KGyc" />
+              )}
+            </Layout.Header.Title>
           }
         />
 

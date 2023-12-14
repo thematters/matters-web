@@ -76,11 +76,19 @@ const SettingsList = ({
       <Dialog.Content noSpacing>
         <ul className={styles.container} role="list">
           <ListItem
-            title={<Translate id="addTags" />}
+            title={<FormattedMessage defaultMessage="Add Tags" id="WNxQX0" />}
             subTitle={
-              <Translate
-                id={tagsCount <= 0 ? 'hintAddTagNoTag' : 'hintAddTagShort'}
-              />
+              tagsCount <= 0 ? (
+                <FormattedMessage
+                  defaultMessage="Not using tags yet, add tags now to improve discoverability!"
+                  id="5IGdjy"
+                />
+              ) : (
+                <FormattedMessage
+                  defaultMessage="Adding tags helps readers find your articles."
+                  id="fPcF7H"
+                />
+              )
             }
             hint={tagsCount > 0}
             onClick={() => forward('tag')}

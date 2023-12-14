@@ -105,7 +105,9 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
   return (
     <>
       <Dialog.Header
-        title="tagManageEditor"
+        title={
+          <FormattedMessage defaultMessage="Manage Communities" id="0/iEw/" />
+        }
         closeDialog={closeDialog}
         rightBtn={<AddEditorButton />}
       />

@@ -1,4 +1,6 @@
-import { Dialog, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Dialog } from '~/components'
 
 interface CompleteProps {
   closeDialog: () => void
@@ -13,12 +15,22 @@ const Complete: React.FC<CompleteProps> = ({
 }) => {
   return (
     <>
-      <Dialog.Header title="resetPaymentPassword" />
+      <Dialog.Header
+        title={
+          <FormattedMessage
+            defaultMessage="Reset Payment Password"
+            id="+OStJM"
+          />
+        }
+      />
 
       <Dialog.Content>
         <Dialog.Content.Message>
           <p>
-            <Translate id="successResetPaymentPassword" />
+            <FormattedMessage
+              defaultMessage="Transaction Password successfully changed."
+              id="l2eEyp"
+            />
           </p>
         </Dialog.Content.Message>
       </Dialog.Content>

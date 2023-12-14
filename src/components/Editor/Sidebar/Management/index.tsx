@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { IconSettings24 } from '~/components'
 
 import { SetPublishISCNProps } from '../..'
@@ -9,7 +11,12 @@ export type SidebarManagementProps = ToggleAccessProps & SetPublishISCNProps
 
 const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
   return (
-    <Box icon={<IconSettings24 size="md" />} title="articleManagement">
+    <Box
+      icon={<IconSettings24 size="md" />}
+      title={
+        <FormattedMessage defaultMessage="Article Management" id="ZEMcZ6" />
+      }
+    >
       <section className={styles.container}>
         <ToggleAccess {...props} inSidebar />
       </section>
