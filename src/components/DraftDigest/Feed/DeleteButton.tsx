@@ -80,7 +80,9 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         onDismiss={closeDialog}
         testId={TEST_ID.DIALOG_DELETE_DRAFT}
       >
-        <Dialog.Header title="deleteDraft" />
+        <Dialog.Header
+          title={<FormattedMessage defaultMessage="Delete Draft" id="4RpVDe" />}
+        />
 
         <Dialog.Content>
           <Dialog.Content.Message>

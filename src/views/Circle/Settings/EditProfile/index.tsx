@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
 import {
   CreateCircleForm,
@@ -16,6 +17,7 @@ import { CircleBasicProfileQuery } from '~/gql/graphql'
 import { CIRCLE_BASIC_PROFILE } from './gql'
 
 const EditProfile = () => {
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const name = getQuery('name')
@@ -47,7 +49,9 @@ const EditProfile = () => {
 
   return (
     <Layout.Main>
-      <Head title={{ id: 'basicProfile' }} />
+      <Head
+        title={intl.formatMessage({ defaultMessage: 'Profile', id: 'itPgxd' })}
+      />
 
       <CreateCircleForm.Profile circle={circle} type="edit" purpose="page" />
     </Layout.Main>

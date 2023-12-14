@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import _find from 'lodash/find'
 import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   PATHS,
@@ -15,7 +16,6 @@ import {
   Spinner,
   TableView,
   TextIcon,
-  Translate,
   ViewerContext,
 } from '~/components'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
@@ -30,6 +30,7 @@ import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 
 const Wallet = () => {
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
 
   const currency = viewer.settings.currency
@@ -69,7 +70,13 @@ const Wallet = () => {
   if (exchangeRateLoading || loading) {
     return (
       <Layout.Main>
-        <Layout.Header left={<Layout.Header.Title id="myWallet" />} />
+        <Layout.Header
+          left={
+            <Layout.Header.Title>
+              <FormattedMessage defaultMessage="Wallet" id="3yk8fB" />
+            </Layout.Header.Title>
+          }
+        />
         <Spinner />
       </Layout.Main>
     )
@@ -78,7 +85,11 @@ const Wallet = () => {
   return (
     <Layout.Main>
       <Layout.Header
-        left={<Layout.Header.Title id="myWallet" />}
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="Wallet" id="3yk8fB" />
+          </Layout.Header.Title>
+        }
         right={
           <>
             <span />
@@ -89,14 +100,16 @@ const Wallet = () => {
               href={PATHS.ME_WALLET_TRANSACTIONS}
             >
               <TextIcon color="white" weight="md">
-                <Translate id="paymentTransactions" />
+                <FormattedMessage defaultMessage="Transactions" id="/jJLYy" />
               </TextIcon>
             </Button>
           </>
         }
       />
 
-      <Head title={{ id: 'myWallet' }} />
+      <Head
+        title={intl.formatMessage({ defaultMessage: 'Wallet', id: '3yk8fB' })}
+      />
 
       <section className={styles.assetsContainer}>
         <FiatCurrencyBalance

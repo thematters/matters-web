@@ -1,23 +1,39 @@
+import { FormattedMessage, useIntl } from 'react-intl'
+
 import { Head, Layout } from '~/components'
 
 import CircleInvitationAddButton from './AddButton'
 import InvitesFeed from './Invites'
 
-const ManageInvitation = () => (
-  <Layout.Main>
-    <Layout.Header
-      right={
-        <>
-          <Layout.Header.Title id="manageCircleInvitation" />
-          <CircleInvitationAddButton />
-        </>
-      }
-    />
+const ManageInvitation = () => {
+  const intl = useIntl()
 
-    <Head title={{ id: 'manageCircleInvitation' }} />
+  return (
+    <Layout.Main>
+      <Layout.Header
+        right={
+          <>
+            <Layout.Header.Title>
+              <FormattedMessage
+                defaultMessage="Manage Invitation"
+                id="5jlQTx"
+              />
+            </Layout.Header.Title>
+            <CircleInvitationAddButton />
+          </>
+        }
+      />
 
-    <InvitesFeed />
-  </Layout.Main>
-)
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Manage Invitation',
+          id: '5jlQTx',
+        })}
+      />
+
+      <InvitesFeed />
+    </Layout.Main>
+  )
+}
 
 export default ManageInvitation

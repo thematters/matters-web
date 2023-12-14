@@ -163,7 +163,12 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
                 <ENSDialog user={user}>
                   {({ openDialog }) => (
                     <Dialog.RoundedButton
-                      text={<Translate id="bindIPNStoENS" />}
+                      text={
+                        <FormattedMessage
+                          defaultMessage="Link ENS"
+                          id="3w3CC8"
+                        />
+                      }
                       color="green"
                       onClick={() => {
                         openDialog()
@@ -230,7 +235,12 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
                 <ENSDialog user={user}>
                   {({ openDialog }) => (
                     <Dialog.TextButton
-                      text={<Translate id="bindIPNStoENS" />}
+                      text={
+                        <FormattedMessage
+                          defaultMessage="Link ENS"
+                          id="3w3CC8"
+                        />
+                      }
                       color="green"
                       onClick={() => {
                         openDialog()

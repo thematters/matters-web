@@ -66,7 +66,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
   return (
     <>
       <Dialog.Header
-        title="setCover"
+        title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
         closeDialog={closeDialog}
         leftBtn={
           back ? (

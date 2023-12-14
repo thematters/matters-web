@@ -11,12 +11,12 @@
     height: calc(70vh - 4.25rem); /* 4.25rem is the height of header */
 
     @media (--sm-up) {
-      height: min(30rem, 64vh);
+      height: min(34rem, 64vh);
     }
   }
 
   @media (--sm-up) {
-    max-height: min(30rem, 64vh);
+    max-height: min(34rem, 64vh);
   }
 }
 

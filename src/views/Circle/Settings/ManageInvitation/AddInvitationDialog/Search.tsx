@@ -56,7 +56,7 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
   return (
     <>
       <Dialog.Header
-        title="addCircleInvitation"
+        title={<FormattedMessage defaultMessage="Add Invitation" id="w+6UiO" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
@@ -73,7 +73,12 @@ const InviteeSearchEditor = ({ closeDialog, save }: Props) => {
         <StagingArea
           nodes={stagingNodes}
           setNodes={setStagingNodes}
-          hint="hintAddCircleInvitee"
+          hint={
+            <FormattedMessage
+              defaultMessage="Invite friends to join your circle"
+              id="az8n8W"
+            />
+          }
           inStagingArea={inStagingArea}
           draggable={false}
         />

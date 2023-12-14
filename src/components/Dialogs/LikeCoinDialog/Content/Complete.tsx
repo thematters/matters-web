@@ -6,7 +6,9 @@ import { Dialog, Translate } from '~/components'
 const Complete: React.FC = () => {
   return (
     <>
-      <Dialog.Header title="setupLikeCoin" />
+      <Dialog.Header
+        title={<FormattedMessage defaultMessage="Liker ID" id="iEJeQH" />}
+      />
 
       <Dialog.Content>
         <Dialog.Content.Message>

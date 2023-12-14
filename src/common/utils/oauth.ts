@@ -7,6 +7,7 @@ import {
   OAUTH_SESSSION_STORAGE_OAUTH_TYPE,
   OAUTH_TYPE,
   PATHS,
+  REFERRAL_QUERY_REFERRAL_KEY,
 } from '~/common/enums'
 
 export const toReadableScope = ({
@@ -96,10 +97,12 @@ export const facebookOauthUrl = async (type: OauthType) => {
   return url
 }
 
-export const signupCallbackUrl = (email: string) => {
+export const signupCallbackUrl = (email: string, referralCode: string) => {
   return `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${
     CALLBACK_PROVIDERS.EmailSignup
-  }?email=${encodeURIComponent(email)}`
+  }?email=${encodeURIComponent(
+    email
+  )}&${REFERRAL_QUERY_REFERRAL_KEY}=${encodeURIComponent(referralCode)}`
 }
 
 export const signinCallbackUrl = (email: string) => {

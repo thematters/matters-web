@@ -27,7 +27,7 @@ const ARCHIVE_ARTICLE = gql`
   }
 `
 
-interface ArchiveArticleDialogProps {
+export interface ArchiveArticleDialogProps {
   article: ArchiveArticleArticleFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }

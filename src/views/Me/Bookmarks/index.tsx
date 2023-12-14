@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
@@ -81,16 +82,31 @@ const BaseMeBookmarks = () => {
   )
 }
 
-const MeBookmarks = () => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.Title id="myBookmarks" />} />
+const MeBookmarks = () => {
+  const intl = useIntl()
 
-    <Head title={{ id: 'myBookmarks' }} />
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="Bookmarks" id="nGBrvw" />
+          </Layout.Header.Title>
+        }
+      />
 
-    <Layout.Main.Spacing hasVertical={false}>
-      <BaseMeBookmarks />
-    </Layout.Main.Spacing>
-  </Layout.Main>
-)
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Bookmarks',
+          id: 'nGBrvw',
+        })}
+      />
+
+      <Layout.Main.Spacing hasVertical={false}>
+        <BaseMeBookmarks />
+      </Layout.Main.Spacing>
+    </Layout.Main>
+  )
+}
 
 export default MeBookmarks

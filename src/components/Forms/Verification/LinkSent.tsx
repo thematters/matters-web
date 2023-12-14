@@ -94,11 +94,19 @@ export const VerificationLinkSent = ({
 
   return (
     <>
-      {isInPage && <Layout.Header left={<Layout.Header.Title id={type} />} />}
+      {isInPage && (
+        <Layout.Header
+          left={
+            <Layout.Header.Title>
+              <FormattedMessage defaultMessage="Register" id="deEeEI" />
+            </Layout.Header.Title>
+          }
+        />
+      )}
 
       {closeDialog && (
         <Dialog.Header
-          title="register"
+          title={<FormattedMessage defaultMessage="Register" id="deEeEI" />}
           closeDialog={closeDialog}
           closeText={
             <FormattedMessage defaultMessage="Understood" id="GcvLBC" />

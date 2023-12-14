@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { toSizedImageURL } from '~/common/utils'
 import { IconImage24 } from '~/components'
 
@@ -15,7 +17,7 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
       {({ openDialog: openSetCoverDialog }) => (
         <Box
           icon={<IconImage24 size="md" />}
-          title="setCover"
+          title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
           onClick={openSetCoverDialog}
           disabled={disabled}
         >

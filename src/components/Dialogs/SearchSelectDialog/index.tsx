@@ -4,7 +4,10 @@ import { Dialog, Spinner, useDialogSwitch } from '~/components'
 import { SearchSelectFormProps } from '~/components/Forms/SearchSelectForm'
 import { SelectNode } from '~/components/SearchSelect/SearchingArea'
 
-type SearchSelectDialogProps = Omit<SearchSelectFormProps, 'closeDialog'> & {
+export type SearchSelectDialogProps = Omit<
+  SearchSelectFormProps,
+  'closeDialog'
+> & {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

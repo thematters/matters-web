@@ -8,13 +8,13 @@ import {
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import { UpdateTagSettingMutation } from '~/gql/graphql'
 
-interface Props {
+export interface TagLeaveDialogProps {
   id: string
   isOwner?: boolean
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const BaseDialog = ({ id, isOwner, children }: Props) => {
+const BaseDialog = ({ id, isOwner, children }: TagLeaveDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const [update, { loading }] =
@@ -115,7 +115,7 @@ const BaseDialog = ({ id, isOwner, children }: Props) => {
   )
 }
 
-export const TagLeaveDialog = (props: Props) => (
+export const TagLeaveDialog = (props: TagLeaveDialogProps) => (
   <Dialog.Lazy mounted={<BaseDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>

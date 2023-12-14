@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, formatAmount } from '~/common/utils'
 import {
@@ -63,7 +64,7 @@ const PayoutItem = ({
   if (canPayout) {
     return (
       <Menu.Item
-        text={<Translate id="paymentPayout" />}
+        text={<FormattedMessage defaultMessage="Withdraw" id="PXAur5" />}
         icon={<IconPayout24 size="mdS" />}
         onClick={openDialog}
       />
@@ -79,7 +80,7 @@ const PayoutItem = ({
           spacing="tight"
           color="grey"
         >
-          <Translate id="paymentPayout" />
+          <FormattedMessage defaultMessage="Withdraw" id="PXAur5" />
         </TextIcon>
 
         <section className={styles.subtitle}>

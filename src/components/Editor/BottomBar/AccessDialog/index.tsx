@@ -39,7 +39,9 @@ const BaseAccessDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog} hidePaddingBottom>
         <Dialog.Header
-          title="articleManagement"
+          title={
+            <FormattedMessage defaultMessage="Article Management" id="ZEMcZ6" />
+          }
           leftBtn={<span />}
           rightBtn={<CloseButton />}
         />
