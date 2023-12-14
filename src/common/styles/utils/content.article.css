@@ -12,7 +12,7 @@
   }
 
   & > *:first-child {
-    margin-top: 0;
+    margin: var(--spacing-loose) 0 0;
   }
 
   & > *:last-child {
@@ -20,6 +20,10 @@
   }
 
   & p {
+    font-size: var(--font-size-xm);
+    line-height: 2rem;
+    color: var(--color-black);
+
     /* FIXME: Firefox eats trailing spaces
      *
      * @see {@url https://github.com/quilljs/quill/issues/1760}
@@ -49,7 +53,7 @@
    ========================================================================== */
   & figure {
     position: relative;
-    margin: var(--spacing-x-loose) 0;
+    padding: var(--spacing-base) 0;
     text-align: center;
 
     /* ad-hoc fix for nested figure */
@@ -59,10 +63,9 @@
     }
 
     & figcaption {
-      padding: 0 var(--spacing-base);
-      margin-top: var(--spacing-x-tight);
-      font-size: var(--font-size-sm-s);
-      line-height: 1.5;
+      margin-top: var(--spacing-tight);
+      font-size: var(--font-size-xs);
+      line-height: 1rem;
       color: var(--color-grey);
       white-space: pre-wrap;
     }
@@ -198,7 +201,7 @@
    ========================================================================== */
   & blockquote {
     position: relative;
-    padding-left: var(--spacing-loose);
+    padding-left: var(--spacing-x-loose);
 
     &::before {
       position: absolute;
@@ -215,12 +218,12 @@
    ========================================================================== */
   & ul,
   & ol {
-    padding-left: var(--spacing-x-loose);
+    padding-left: calc(var(--spacing-x-loose) + 9px);
   }
 
   & li {
-    padding-left: var(--spacing-x-tight);
-    margin: var(--spacing-base) 0;
+    padding-left: calc(var(--spacing-x-tight) + 1px);
+    margin: var(--spacing-x-tight) 0;
   }
 
   & ul {
@@ -301,7 +304,7 @@
       position: absolute;
       inset: 0;
       display: block;
-      width: 4.5rem;
+      width: 3.5rem;
       height: 2rem;
       margin: 0 auto;
       content: '';
@@ -322,7 +325,7 @@
 .u-summary,
 .editor-summary {
   position: relative;
-  margin: var(--spacing-base) 0;
+  margin: var(--spacing-base) 0 var(--spacing-xx-loose);
 
   & .counter {
     font-size: var(--font-size-xs);
