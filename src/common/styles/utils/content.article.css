@@ -322,7 +322,7 @@
 .u-summary,
 .editor-summary {
   position: relative;
-  margin: var(--spacing-loose) 0;
+  margin: var(--spacing-base) 0;
 
   & .counter {
     font-size: var(--font-size-xs);
@@ -339,15 +339,27 @@
 .editor-summary textarea {
   @mixin border-left-grey;
 
-  padding-left: var(--spacing-loose);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-article-base);
-  color: var(--color-grey-darker);
+  padding: var(--spacing-xx-tight) 0 var(--spacing-xx-tight)
+    var(--spacing-loose);
+  font-size: var(--font-size-xm);
+  font-weight: var(--font-weight-normal);
+  line-height: 2.25rem;
+  color: var(--color-black);
   resize: none;
   background: transparent;
 
   &::placeholder {
     color: var(--color-grey);
     opacity: 1; /* Firefox */
+  }
+
+  @media (--md-up) {
+    padding-left: calc(var(--spacing-x-loose) + var(--spacing-xx-tight));
+    font-size: var(--font-size-xl-s);
+    line-height: 2.5rem;
+  }
+
+  @media (--lg-up) {
+    width: 71%; /* 5/7 */
   }
 }

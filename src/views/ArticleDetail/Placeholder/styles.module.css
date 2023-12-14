@@ -58,6 +58,10 @@
         margin-top: 1.6875rem; /* 27px */
       }
     }
+
+    @media (--lg-up) {
+      width: 71%;
+    }
   }
 
   & .image {
