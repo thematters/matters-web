@@ -13,7 +13,13 @@ const SidebarArticleResponse: React.FC<SidebarManagementProps> = (props) => {
   return (
     <Box
       icon={<IconComment16 size="md" />}
-      title={<FormattedMessage defaultMessage="Response" id="MgdnPi" />}
+      title={
+        <FormattedMessage
+          defaultMessage="Response"
+          id="20yT4t"
+          description="src/components/Editor/Sidebar/Response/index.tsx"
+        />
+      }
       footerSpacing={false}
     >
       <section className={styles.container}>

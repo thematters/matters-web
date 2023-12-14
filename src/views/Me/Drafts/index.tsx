@@ -67,13 +67,21 @@ const MeDrafts = () => {
       <Layout.Header
         left={
           <Layout.Header.Title>
-            <FormattedMessage defaultMessage="Drafts" id="2atspc" />
+            <FormattedMessage
+              defaultMessage="Drafts"
+              id="GYAos5"
+              description="src/views/Me/Drafts/index.tsx"
+            />
           </Layout.Header.Title>
         }
       />
 
       <Head
-        title={intl.formatMessage({ defaultMessage: 'Drafts', id: '2atspc' })}
+        title={intl.formatMessage({
+          defaultMessage: 'Drafts',
+          id: 'GYAos5',
+          description: 'src/views/Me/Drafts/index.tsx',
+        })}
       />
 
       <Layout.Main.Spacing hasVertical={false}>

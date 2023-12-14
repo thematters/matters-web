@@ -25,13 +25,21 @@ const Tags = () => {
   return (
     <Layout.Main>
       <Head
-        title={intl.formatMessage({ defaultMessage: 'Tags', id: '1EYCdR' })}
+        title={intl.formatMessage({
+          defaultMessage: 'Tags',
+          id: 'mzCz0Z',
+          description: 'src/views/Tags/index.tsx',
+        })}
       />
 
       <Layout.Header
         right={
           <Layout.Header.Title>
-            <FormattedMessage defaultMessage="Tags" id="1EYCdR" />
+            <FormattedMessage
+              defaultMessage="Tags"
+              id="mzCz0Z"
+              description="src/views/Tags/index.tsx"
+            />
           </Layout.Header.Title>
         }
       />
