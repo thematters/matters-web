@@ -2,7 +2,7 @@ import _uniqBy from 'lodash/uniqBy'
 import { useContext } from 'react'
 
 import { MAX_ARTICLE_TAG_LENGTH } from '~/common/enums'
-import { Spinner, Translate, usePublicQuery, ViewerContext } from '~/components'
+import { Spinner, usePublicQuery, ViewerContext } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
 import { EditorRecommendedTagsQuery } from '~/gql/graphql'
@@ -72,9 +72,7 @@ const TagCustomStagingArea = ({
   if (!hasTag && !hasRecommendedTags) {
     return (
       <section className={styles.customTagArea}>
-        <section className={styles.hint}>
-          <Translate id={hint} />
-        </section>
+        <section className={styles.hint}>{hint}</section>
       </section>
     )
   }

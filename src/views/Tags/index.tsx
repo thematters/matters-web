@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { Head, Layout, useRoute } from '~/components'
 
@@ -18,14 +19,26 @@ const BaseTags = () => {
   )
 }
 
-const Tags = () => (
-  <Layout.Main>
-    <Head title={{ id: 'allTags' }} />
+const Tags = () => {
+  const intl = useIntl()
 
-    <Layout.Header right={<Layout.Header.Title id="allTags" />} />
+  return (
+    <Layout.Main>
+      <Head
+        title={intl.formatMessage({ defaultMessage: 'Tags', id: '1EYCdR' })}
+      />
 
-    <BaseTags />
-  </Layout.Main>
-)
+      <Layout.Header
+        right={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="Tags" id="1EYCdR" />
+          </Layout.Header.Title>
+        }
+      />
+
+      <BaseTags />
+    </Layout.Main>
+  )
+}
 
 export default Tags

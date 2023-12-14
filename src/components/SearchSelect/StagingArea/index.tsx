@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { TextId } from '~/common/enums'
-import { Spinner, Translate } from '~/components'
+import { Spinner } from '~/components'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'
@@ -22,7 +21,7 @@ interface BaseStagingAreaProps {
   nodes: StagingNode[]
   setNodes: (nodes: StagingNode[]) => void
 
-  hint: TextId
+  hint: React.ReactNode
   inStagingArea: boolean
   draggable?: boolean
 }
@@ -30,7 +29,7 @@ interface BaseStagingAreaProps {
 export interface CustomStagingAreaProps {
   nodes: StagingNode[]
   setNodes: (nodes: StagingNode[]) => void
-  hint: TextId
+  hint: React.ReactNode
   toStagingArea?: () => void
 }
 
@@ -78,9 +77,7 @@ const StagingArea: React.FC<StagingAreaProps> = ({
     <section className={areaStyles.area}>
       {/* empty hint */}
       {nodes.length <= 0 && hint && (
-        <section className={styles.hint}>
-          <Translate id={hint} />
-        </section>
+        <section className={styles.hint}>{hint}</section>
       )}
 
       {/* draggable */}

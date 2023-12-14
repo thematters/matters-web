@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { analytics } from '~/common/utils'
 import {
   EditorSearchSelectDialog,
@@ -27,8 +29,13 @@ const SidebarTags = ({
 }: SidebarTagsProps) => {
   return (
     <EditorSearchSelectDialog
-      title="addTag"
-      hint="hintAddTag"
+      title={<FormattedMessage defaultMessage="Add Tag" id="GUW//c" />}
+      hint={
+        <FormattedMessage
+          defaultMessage="Adding tags helps readers find your articles. Add or create new tags."
+          id="NmhF45"
+        />
+      }
       searchType="Tag"
       onSave={(nodes: SearchSelectNode[]) =>
         editTags(nodes as DigestTagFragment[])
@@ -41,8 +48,13 @@ const SidebarTags = ({
       {({ openDialog }) => (
         <Box
           icon={<IconHashTag24 size="md" />}
-          title="addTag"
-          subtitle="hintAddTagShort"
+          title={<FormattedMessage defaultMessage="Add Tag" id="GUW//c" />}
+          subtitle={
+            <FormattedMessage
+              defaultMessage="Adding tags helps readers find your articles."
+              id="fPcF7H"
+            />
+          }
           onClick={openDialog}
           disabled={disabled}
         >

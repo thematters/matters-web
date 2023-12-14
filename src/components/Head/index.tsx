@@ -6,12 +6,7 @@ import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
 import IMAGE_FAVICON_128 from '@/public/static/favicon-128x128.png'
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
-import {
-  toLocale,
-  toOGLanguage,
-  translate,
-  TranslateArgs,
-} from '~/common/utils'
+import { toLocale, toOGLanguage } from '~/common/utils'
 import { LanguageContext, useRoute } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
@@ -26,7 +21,7 @@ const isProdServingCanonical =
   process.env.NEXT_PUBLIC_SITE_DOMAIN === siteDomainCanonical // is serving domain same as canonical domain?
 
 interface HeadProps {
-  title?: string | TranslateArgs
+  title?: string
   description?: string | null
   keywords?: string[]
   path?: string
@@ -40,10 +35,7 @@ interface HeadProps {
 export const Head: React.FC<HeadProps> = (props) => {
   const { router } = useRoute()
   const { lang } = useContext(LanguageContext)
-  const title =
-    typeof props.title === 'object'
-      ? translate({ ...props.title, lang })
-      : props.title
+  const title = props.title
 
   const head = {
     title: title ? (props.noSuffix ? title : `${title} - Matters`) : 'Matters',

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useNetwork } from 'wagmi'
 
 import {
@@ -193,7 +193,7 @@ const Confirm: React.FC<FormProps> = ({
 
   const submitText = isHKD ? (
     <>
-      <Translate id="forgetPaymentPassword" />？
+      <FormattedMessage defaultMessage="Forget Payment Password" id="6yZXYK" />
     </>
   ) : isUSDT ? (
     <Translate zh_hant="確認送出" zh_hans="确认送出" en="Confirm" />
@@ -213,7 +213,9 @@ const Confirm: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header title="donation" />
+      <Dialog.Header
+        title={<FormattedMessage defaultMessage="Support Author" id="ezYuE2" />}
+      />
 
       <Dialog.Content>
         <PaymentInfo

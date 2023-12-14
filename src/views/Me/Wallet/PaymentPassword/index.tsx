@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import {
   Dropdown,
   IconUnlock24,
@@ -17,7 +19,12 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
   const Content = () => (
     <Menu>
       <Menu.Item
-        text={<Translate id="resetPaymentPassword" />}
+        text={
+          <FormattedMessage
+            defaultMessage="Reset Payment Password"
+            id="+OStJM"
+          />
+        }
         icon={<IconUnlock24 size="mdS" />}
         onClick={openResetPaymentPasswordDialog}
         ariaHasPopup="dialog"

@@ -1,7 +1,6 @@
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
-import { TextId } from '~/common/enums'
 import { Dialog, Translate } from '~/components'
 
 import { ShareButtons } from './Buttons'
@@ -15,7 +14,7 @@ export interface ShareDialogContentProps {
   shareLink: string
   shareTags?: string[]
 
-  headerTitle?: TextId | React.ReactNode
+  headerTitle?: React.ReactNode
   description?: React.ReactNode
   btns?: React.ReactNode
   smUpBtns?: React.ReactNode
@@ -51,7 +50,9 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
       {headerTitle ? (
         <Dialog.Header title={headerTitle} />
       ) : (
-        <Dialog.Header title="share" />
+        <Dialog.Header
+          title={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
+        />
       )}
 
       <Dialog.Content noSpacing smExtraSpacing={false}>

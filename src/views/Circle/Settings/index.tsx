@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { toPath } from '~/common/utils'
 import { Head, Layout, TableView, useRoute } from '~/components'
@@ -37,11 +37,24 @@ const BaseSettings = () => {
 }
 
 const Settings = () => {
+  const intl = useIntl()
+
   return (
     <Layout.Main>
-      <Layout.Header left={<Layout.Header.Title id="manageCircle" />} />
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="Manage Circle" id="5XFd/5" />
+          </Layout.Header.Title>
+        }
+      />
 
-      <Head title={{ id: 'manageCircle' }} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Manage Circle',
+          id: '5XFd/5',
+        })}
+      />
 
       <Layout.Main.Spacing hasVertical={false}>
         <BaseSettings />

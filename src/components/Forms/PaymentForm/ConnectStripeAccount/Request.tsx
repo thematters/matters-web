@@ -48,7 +48,12 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title="connectStripeAccount"
+        title={
+          <FormattedMessage
+            defaultMessage="Create Stripe Account"
+            id="lIPOh3"
+          />
+        }
         closeDialog={closeDialog}
         leftBtn={
           <Dialog.TextButton

@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { IconComment16 } from '~/components'
 
 import { SetResponseProps } from '../..'
@@ -11,7 +13,7 @@ const SidebarArticleResponse: React.FC<SidebarManagementProps> = (props) => {
   return (
     <Box
       icon={<IconComment16 size="md" />}
-      title="articleResponse"
+      title={<FormattedMessage defaultMessage="Response" id="MgdnPi" />}
       footerSpacing={false}
     >
       <section className={styles.container}>
