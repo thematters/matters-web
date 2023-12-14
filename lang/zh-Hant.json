@@ -59,6 +59,10 @@
     "defaultMessage": "不知道哪裏出錯了，過幾分鐘看看",
     "description": "UNKNOWN_ERROR"
   },
+  "/agKbX": {
+    "defaultMessage": "回覆評論",
+    "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
+  },
   "/faseS": {
     "defaultMessage": "已複製分享連結"
   },
@@ -1169,6 +1173,10 @@
   "Udp4Bm": {
     "defaultMessage": "移至底部",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
+  },
+  "UgpqlF": {
+    "defaultMessage": "回覆",
+    "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
   "UjKkhq": {
     "defaultMessage": "作品已添加標籤",
