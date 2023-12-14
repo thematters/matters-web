@@ -33,7 +33,9 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title="paymentPointer"
+          title={
+            <FormattedMessage defaultMessage="Payment Pointer" id="LklXfd" />
+          }
           closeDialog={closeDialog}
           rightBtn={SubmitButton}
         />

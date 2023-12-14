@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
 import ICON_STRIPE from '@/public/static/icons/stripe.svg'
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
@@ -83,7 +85,13 @@ const OAuthCallbackFailure = () => {
 
   return (
     <Layout.Main>
-      <Layout.Header left={<Layout.Header.Title id="oauthAuthorize" />} />
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="OAuth authorize" id="Mgl1bT" />
+          </Layout.Header.Title>
+        }
+      />
 
       <Layout.Main.Spacing>
         <Box avatar={avatar[provider]} title={title[provider]}>

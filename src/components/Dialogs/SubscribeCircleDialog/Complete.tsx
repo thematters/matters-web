@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { toPath } from '~/common/utils'
 import { Dialog, Translate } from '~/components'
 import { DigestRichCirclePublicFragment } from '~/gql/graphql'
@@ -9,7 +11,14 @@ interface CompleteProps {
 const Complete: React.FC<CompleteProps> = ({ circle }) => {
   return (
     <>
-      <Dialog.Header title="successSubscribeCircle" />
+      <Dialog.Header
+        title={
+          <FormattedMessage
+            defaultMessage="Circle successfully subscribed."
+            id="/5jk3i"
+          />
+        }
+      />
 
       <Dialog.Content>
         <Dialog.Content.Message align="left" smUpAlign="left">

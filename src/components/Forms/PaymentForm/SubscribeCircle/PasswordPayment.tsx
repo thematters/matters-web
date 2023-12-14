@@ -100,7 +100,12 @@ const Confirm: React.FC<FormProps> = ({
         name="password"
         value={values.password}
         error={touched.password && errors.password}
-        hint={<Translate id="hintPaymentPassword" />}
+        hint={
+          <FormattedMessage
+            defaultMessage="Enter a 6-digit payment password."
+            id="OpeFTV"
+          />
+        }
         onChange={(value) => {
           const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
           setTouched({ password: true }, shouldValidate)
@@ -126,7 +131,12 @@ const Confirm: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header closeDialog={closeDialog} title="subscribeCircle" />
+      <Dialog.Header
+        closeDialog={closeDialog}
+        title={
+          <FormattedMessage defaultMessage="Subscribe Circle" id="hG2cBH" />
+        }
+      />
 
       <Dialog.Content fixedHeight>
         <Head circle={circle} />

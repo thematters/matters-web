@@ -29,7 +29,13 @@ const BaseUnsubscribeCircleDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={isUnsubscribed ? 'unsubscribed' : 'unsubscribeCircle'}
+          title={
+            isUnsubscribed ? (
+              <FormattedMessage defaultMessage="Unsubscribed" id="6/kgzs" />
+            ) : (
+              <FormattedMessage defaultMessage="Subscribe Circle" id="hG2cBH" />
+            )
+          }
         />
 
         <Dialog.Content>

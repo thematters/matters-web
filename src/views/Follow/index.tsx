@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   Layout,
@@ -65,7 +66,13 @@ const Follow = () => {
   return (
     <Layout.Main>
       <Media at="sm">
-        <Layout.Header left={<Layout.Header.Title id="following" />} />
+        <Layout.Header
+          left={
+            <Layout.Header.Title>
+              <FormattedMessage defaultMessage="Following" id="cPIKU2" />
+            </Layout.Header.Title>
+          }
+        />
       </Media>
       <Media greaterThan="sm">
         <Spacer size="base" />

@@ -4,11 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import {
-  parseFormSubmitErrors,
-  translate,
-  validatePaymentPointer,
-} from '~/common/utils'
+import { parseFormSubmitErrors, validatePaymentPointer } from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -116,9 +112,9 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
             type="text"
             name="paymentPointer"
             required
-            placeholder={translate({
-              id: 'enterPaymentPointer',
-              lang,
+            placeholder={intl.formatMessage({
+              defaultMessage: 'Enter Payment Pointer',
+              id: 'p6D+Uc',
             })}
             value={values.paymentPointer}
             error={touched.paymentPointer && errors.paymentPointer}

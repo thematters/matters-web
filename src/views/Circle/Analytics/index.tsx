@@ -1,3 +1,5 @@
+import { FormattedMessage, useIntl } from 'react-intl'
+
 import { Head, Layout } from '~/components'
 
 import ContentAnalytics from './ContentAnalytics'
@@ -6,11 +8,24 @@ import IncomeAnalytics from './IncomeAnalytics'
 import SubscriberAnalytics from './SubscriberAnalytics'
 
 const CircleAnalytics = () => {
+  const intl = useIntl()
+
   return (
     <Layout.Main>
-      <Layout.Header left={<Layout.Header.Title id="circleAnalytics" />} />
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="Analytics" id="GZJpDf" />
+          </Layout.Header.Title>
+        }
+      />
 
-      <Head title={{ id: 'circleAnalytics' }} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Analytics',
+          id: 'GZJpDf',
+        })}
+      />
 
       <IncomeAnalytics />
       <SubscriberAnalytics />
