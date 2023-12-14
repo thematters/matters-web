@@ -4,7 +4,7 @@
   line-height: 1.5;
   letter-spacing: 1.2px;
 
-  @media (--sm-up) {
+  @media (--md-up) {
     font-size: var(--font-size-article-title);
     line-height: var(--line-height-article-title);
   }
