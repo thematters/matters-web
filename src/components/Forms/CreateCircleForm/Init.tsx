@@ -245,6 +245,7 @@ const Init: React.FC<FormProps> = ({
               <Layout.Header.Title>
                 <FormattedMessage defaultMessage="Create Circle" id="ESn43O" />
               </Layout.Header.Title>
+
               <Layout.Header.RightButton
                 type="submit"
                 form={formId}

@@ -121,7 +121,6 @@ export const TEXT = {
     hintCircleName: '2-20 個字元，僅支持英文小寫字母、數字或下劃線',
     hintDescription: '建議 50 字以內，最長 200 字',
     hintDisplayName: '2-20 個字元',
-    hintEditCollection: '精挑細選作品，幫助讀者更容易發現優質內容',
     hintPassword: '至少 8 個字元，支持英文大小寫字母、數字和特殊符號',
     hintPaymentPassword: '輸入六位數字交易密碼',
     hintPaymentPointer: '錢包地址以“$”開頭',
@@ -421,7 +420,6 @@ export const TEXT = {
     hintCircleName: '2-20 个字符，仅支持英文小写字母、数字或下划线',
     hintDescription: '建议 50 字以内，最长 200 字',
     hintDisplayName: '2-20 个字符',
-    hintEditCollection: '精挑细选作品，帮助读者更容易发现优质内容',
     hintPassword: '至少 8 个字符，支持英文大小写字母、数字和特殊符号',
     hintPaymentPassword: '输入六位数字交易密码',
     hintPaymentPointer: '钱包地址以“$”开头',
@@ -730,8 +728,6 @@ export const TEXT = {
       'Must be between 2-20 characters long. Only letters letters, numbers and underline are allowed.',
     hintDescription: 'Maximum 200 characters.',
     hintDisplayName: 'Must be between 2-20 characters long.',
-    hintEditCollection:
-      'Adding articles to a collection helps readers find your articles.',
     hintPassword:
       'Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed',
     hintPaymentPassword: 'Enter a 6-digit payment password.',

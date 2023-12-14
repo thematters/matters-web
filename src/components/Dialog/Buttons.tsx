@@ -1,16 +1,9 @@
 import { forwardRef } from 'react'
 
-import { TextId } from '~/common/enums'
-import {
-  Button,
-  ButtonProps,
-  IconSpinner16,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { Button, ButtonProps, IconSpinner16, TextIcon } from '~/components'
 
 export type DialogTextButtonProps = {
-  text: TextId | React.ReactNode
+  text: React.ReactNode
   color?: 'greyDarker' | 'green' | 'red'
   loading?: boolean
 } & ButtonProps
@@ -54,20 +47,14 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
         weight="md"
         icon={loading && <IconSpinner16 size="sm" />}
       >
-        {!loading ? (
-          typeof text === 'string' ? (
-            <Translate id={text as TextId} />
-          ) : (
-            text
-          )
-        ) : null}
+        {!loading ? text : null}
       </TextIcon>
     </Button>
   )
 }
 
 export type DialogRoundedButtonProps = {
-  text: TextId | React.ReactNode
+  text: React.ReactNode
   color?: 'greyDarker' | 'green' | 'red'
   icon?: React.ReactNode
   loading?: boolean
@@ -112,13 +99,7 @@ export const RoundedButton: React.FC<
           weight="md"
           textPlacement="left"
         >
-          {!loading ? (
-            typeof text === 'string' ? (
-              <Translate id={text as TextId} />
-            ) : (
-              text
-            )
-          ) : null}
+          {!loading ? text : null}
         </TextIcon>
       </Button>
     )

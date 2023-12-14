@@ -1,11 +1,9 @@
-import { TextId } from '~/common/enums'
 import {
   Button,
   ButtonProps,
   IconSpinner16,
   Media,
   TextIcon,
-  Translate,
 } from '~/components'
 
 type RightButtonProps = {
@@ -28,13 +26,7 @@ export const RightButton: React.FC<RightButtonProps> = ({
             weight="md"
             icon={loading && <IconSpinner16 size="sm" />}
           >
-            {!loading ? (
-              typeof text === 'string' ? (
-                <Translate id={text as TextId} />
-              ) : (
-                text
-              )
-            ) : null}
+            {!loading ? text : null}
           </TextIcon>
         </Button>
       </Media>
@@ -51,13 +43,7 @@ export const RightButton: React.FC<RightButtonProps> = ({
             weight="md"
             icon={loading && <IconSpinner16 size="sm" />}
           >
-            {!loading ? (
-              typeof text === 'string' ? (
-                <Translate id={text as TextId} />
-              ) : (
-                text
-              )
-            ) : null}
+            {!loading ? text : null}
           </TextIcon>
         </Button>
       </Media>
