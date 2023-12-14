@@ -50,7 +50,13 @@ const CommentForm: React.FC<CommentFormProps> = ({
   defaultContent,
   submitCallback,
   closeDialog,
-  title = 'putComment',
+  title = (
+    <FormattedMessage
+      defaultMessage="Comment"
+      id="Ix3e3Q"
+      description="src/components/Forms/CommentForm/index.tsx"
+    />
+  ),
   context,
 
   ...props
