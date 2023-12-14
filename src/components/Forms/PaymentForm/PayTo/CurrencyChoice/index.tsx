@@ -160,7 +160,10 @@ const CurrencyChoice: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header closeDialog={closeDialog} title="donation" />
+      <Dialog.Header
+        closeDialog={closeDialog}
+        title={<FormattedMessage defaultMessage="Support Author" id="ezYuE2" />}
+      />
 
       <Dialog.Content>{InnerForm}</Dialog.Content>
 

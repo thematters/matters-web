@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   ERROR_CODES,
@@ -9,7 +9,7 @@ import {
   REFETCH_RESPONSES,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { numAbbr, translate } from '~/common/utils'
+import { numAbbr } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -17,7 +17,6 @@ import {
   CardProps,
   CommentFormDialog,
   IconComment16,
-  LanguageContext,
   Media,
   TextIcon,
   toast,
@@ -66,7 +65,7 @@ const Content = ({
 }: (CardProps | ButtonProps) & {
   article: CommentBarArticle
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   return (
     <>
@@ -74,7 +73,11 @@ const Content = ({
         <Button
           spacing={['xtight', 'xtight']}
           bgActiveColor="greyLighter"
-          aria-label={`${translate({ id: 'putComment', lang })}…`}
+          aria-label={`${intl.formatMessage({
+            defaultMessage: 'Comment',
+            id: 'Ix3e3Q',
+            description: 'src/components/Forms/CommentForm/index.tsx',
+          })}…`}
           aria-haspopup="dialog"
           {...(props as ButtonProps)}
         >
@@ -100,7 +103,11 @@ const Content = ({
           {...(props as CardProps)}
         >
           <p className={styles.content}>
-            <Translate id="putComment" />
+            <FormattedMessage
+              defaultMessage="Comment"
+              id="Ix3e3Q"
+              description="src/components/Forms/CommentForm/index.tsx"
+            />
             <Translate zh_hant="…" zh_hans="…" en="…" />
           </p>
         </Card>

@@ -109,7 +109,7 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
   return (
     <>
       <Dialog.Header
-        title="tagAddEditor"
+        title={<FormattedMessage defaultMessage="Add tag editor" id="3fqQHv" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />
@@ -125,7 +125,9 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
         <StagingArea
           nodes={stagingNodes}
           setNodes={setStagingNodes}
-          hint="tagAddEditor"
+          hint={
+            <FormattedMessage defaultMessage="Add tag editor" id="3fqQHv" />
+          }
           inStagingArea={inStagingArea}
           draggable={false}
         />

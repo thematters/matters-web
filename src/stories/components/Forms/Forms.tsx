@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { translate } from '~/common/utils'
 import { Form, Translate } from '~/components'
@@ -36,7 +37,12 @@ const Forms = () => (
             length={6}
             value=""
             name="password"
-            hint={<Translate id="hintPaymentPassword" />}
+            hint={
+              <FormattedMessage
+                defaultMessage="Enter a 6-digit payment password."
+                id="OpeFTV"
+              />
+            }
             onChange={() => null}
           />
         </Form>

@@ -1,4 +1,6 @@
-import { ButtonProps, Dialog, PayoutDialog, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { ButtonProps, Dialog, PayoutDialog } from '~/components'
 
 type PayoutButtonProps = {
   hasStripeAccount: boolean
@@ -13,7 +15,7 @@ const PayoutButton: React.FC<PayoutButtonProps> = ({
       {({ openDialog: openPayoutDialog }) => (
         <Dialog.RoundedButton
           {...buttonProps}
-          text={<Translate id="paymentPayout" />}
+          text={<FormattedMessage defaultMessage="Withdraw" id="PXAur5" />}
           color="greyDarker"
           aria-haspopup="dialog"
           onClick={openPayoutDialog}

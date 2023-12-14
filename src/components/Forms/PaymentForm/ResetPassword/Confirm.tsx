@@ -15,7 +15,6 @@ import {
   Form,
   LanguageContext,
   Spinner,
-  Translate,
   useMutation,
   useStep,
 } from '~/components'
@@ -117,7 +116,12 @@ const Confirm: React.FC<FormProps> = ({
     <Form onSubmit={handleSubmit}>
       {isInPassword && (
         <Form.PinInput
-          label={<Translate id="hintPaymentPassword" />}
+          label={
+            <FormattedMessage
+              defaultMessage="Enter a 6-digit payment password."
+              id="OpeFTV"
+            />
+          }
           hasLabel
           name="password"
           value={values.password}
@@ -132,7 +136,12 @@ const Confirm: React.FC<FormProps> = ({
       )}
       {isInComparedPassword && (
         <Form.PinInput
-          label={<Translate id="enterPaymentPasswordAgain" />}
+          label={
+            <FormattedMessage
+              defaultMessage="Enter transaction password again"
+              id="H9FKs4"
+            />
+          }
           hasLabel
           name="compared-password"
           value={values.comparedPassword}
@@ -169,7 +178,12 @@ const Confirm: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title="resetPaymentPassword"
+        title={
+          <FormattedMessage
+            defaultMessage="Reset Payment Password"
+            id="+OStJM"
+          />
+        }
         closeDialog={closeDialog}
         leftBtn={
           back ? (

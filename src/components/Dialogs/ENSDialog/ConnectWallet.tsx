@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 import { useAccount, useEnsName } from 'wagmi'
 
 import { featureSupportedChains } from '~/common/utils'
@@ -40,7 +41,10 @@ const ConnectWallet = ({
 
   return (
     <>
-      <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
+      <Dialog.Header
+        closeDialog={closeDialog}
+        title={<FormattedMessage defaultMessage="Link ENS" id="3w3CC8" />}
+      />
 
       <Dialog.Content>
         <section className={styles.content}>

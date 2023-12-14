@@ -239,7 +239,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
           description="src/views/TagDetail/DropdownActions/index.tsx"
         />
       ),
-      hint: 'hintEditCollection',
+      hint: (
+        <FormattedMessage
+          defaultMessage="Adding articles to a collection helps readers find your articles."
+          id="XTyKFR"
+        />
+      ),
       searchType: 'Article',
       onSave: addArticlesToTag(true),
       saving: loading,

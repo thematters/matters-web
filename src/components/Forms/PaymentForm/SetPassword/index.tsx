@@ -124,7 +124,12 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
           name="password"
           value={values.password}
           error={touched.password && errors.password}
-          hint={<Translate id="hintPaymentPassword" />}
+          hint={
+            <FormattedMessage
+              defaultMessage="Enter a 6-digit payment password."
+              id="OpeFTV"
+            />
+          }
           onChange={(value) => {
             const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
             setTouched({ password: true }, shouldValidate)
@@ -138,7 +143,12 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
           name="compared-password"
           value={values.comparedPassword}
           error={touched.comparedPassword && errors.comparedPassword}
-          hint={<Translate id="hintPaymentPassword" />}
+          hint={
+            <FormattedMessage
+              defaultMessage="Enter a 6-digit payment password."
+              id="OpeFTV"
+            />
+          }
           onChange={(value) => {
             const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
             setTouched({ comparedPassword: true }, shouldValidate)
@@ -169,29 +179,35 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header title="paymentPassword" closeDialog={closeDialog} />
+      <Dialog.Header
+        title={
+          <FormattedMessage defaultMessage="Transaction Password" id="9UNFGm" />
+        }
+        closeDialog={closeDialog}
+      />
 
       <Dialog.Content>
         <section className={styles.reason}>
           {isInPassword && (
             <p>
-              <Translate
-                zh_hant="爲了保護你的資產安全"
-                zh_hans="为了保护你的资产安全"
-                en="To protect your assets,"
+              <FormattedMessage
+                defaultMessage="To protect your assets,"
+                id="bhehIF"
               />
               <br />
-              <Translate
-                zh_hant="在储值前請先設置交易密碼"
-                zh_hans="在储值前请先设置交易密码"
-                en="please set transaction password before top-up"
+              <FormattedMessage
+                defaultMessage="please set transaction password before top-up"
+                id="yBkdMI"
               />
             </p>
           )}
 
           {isInComparedPassword && (
             <p>
-              <Translate id="enterPaymentPasswordAgain" />
+              <FormattedMessage
+                defaultMessage="Enter a 6-digit payment password."
+                id="OpeFTV"
+              />
             </p>
           )}
 

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   ASSET_TYPE,
@@ -86,6 +86,7 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
 }
 
 const DraftDetail = () => {
+  const intl = useIntl()
   const { getQuery } = useRoute()
   const id = getQuery('draftId')
   const isInNew = id === 'new'
@@ -319,11 +320,13 @@ const DraftDetail = () => {
       />
 
       <Head
-        title={{
-          zh_hant: `[草稿] ${draft.title}`,
-          zh_hans: `[草稿] ${draft.title}`,
-          en: `[Draft] ${draft.title}`,
-        }}
+        title={intl.formatMessage(
+          {
+            defaultMessage: '[Draft] {draftTitle}',
+            id: '33oNeg',
+          },
+          { draftTitle: draft.title }
+        )}
       />
 
       <PublishState draft={draft} />

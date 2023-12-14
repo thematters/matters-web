@@ -2,6 +2,7 @@ import { NetworkStatus } from 'apollo-client'
 import _random from 'lodash/random'
 import _range from 'lodash/range'
 import { useContext, useEffect, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics } from '~/common/utils'
 import {
@@ -94,7 +95,11 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
 
   return (
     <>
-      <Dialog.Header title="successDonation" />
+      <Dialog.Header
+        title={
+          <FormattedMessage defaultMessage="Donated successfully" id="tGn21M" />
+        }
+      />
 
       <Dialog.Content>
         <section className={styles.container}>

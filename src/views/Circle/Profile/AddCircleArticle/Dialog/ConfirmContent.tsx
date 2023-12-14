@@ -31,7 +31,7 @@ const ConfirmContent: React.FC<ContentProps> = ({
   return (
     <>
       <Dialog.Header
-        title="addArticles"
+        title={<FormattedMessage defaultMessage="Add Articles" id="k97/u7" />}
         leftBtn={
           <Dialog.TextButton
             text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}

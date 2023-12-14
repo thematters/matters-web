@@ -298,7 +298,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title="topUp"
+        title={<FormattedMessage defaultMessage="Top Up" id="dTOtPO" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />

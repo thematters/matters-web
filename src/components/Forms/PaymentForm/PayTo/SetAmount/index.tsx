@@ -392,7 +392,9 @@ const SetAmount: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header title="donation" />
+      <Dialog.Header
+        title={<FormattedMessage defaultMessage="Support Author" id="ezYuE2" />}
+      />
 
       <Dialog.Content>
         {InnerForm}

@@ -1,14 +1,12 @@
 import classNames from 'classnames'
-import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
 import {
   EditorSearchSelectDialog,
   IconCollection24,
   IconHashTag24,
   IconImage24,
   IconSettings24,
-  LanguageContext,
   Layout,
   TextIcon,
   Translate,
@@ -91,7 +89,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
   saving,
   disabled,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const bottomBarClasses = classNames({
     [styles.bottomBar]: true,
@@ -161,8 +159,13 @@ const BottomBar: React.FC<BottomBarProps> = ({
 
             {/* Tags */}
             <EditorSearchSelectDialog
-              title="addTag"
-              hint="hintAddTag"
+              title={<FormattedMessage defaultMessage="Add Tag" id="GUW//c" />}
+              hint={
+                <FormattedMessage
+                  defaultMessage="Adding tags helps readers find your articles. Add or create new tags."
+                  id="NmhF45"
+                />
+              }
               searchType="Tag"
               onSave={(nodes: SearchSelectNode[]) =>
                 editTags(nodes as DigestTagFragment[])
@@ -192,8 +195,18 @@ const BottomBar: React.FC<BottomBarProps> = ({
 
             {/* Collection */}
             <EditorSearchSelectDialog
-              title="collectArticle"
-              hint="hintEditCollection"
+              title={
+                <FormattedMessage
+                  defaultMessage="Collect Article"
+                  id="vX2bDy"
+                />
+              }
+              hint={
+                <FormattedMessage
+                  defaultMessage="Adding articles to a collection helps readers find your articles."
+                  id="XTyKFR"
+                />
+              }
               searchType="Article"
               searchExclude={SearchExclude.Blocked}
               onSave={(nodes: SearchSelectNode[]) =>
@@ -225,7 +238,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
             <AccessDialog {...accessProps}>
               {({ openDialog }) => (
                 <button
-                  aria-label={translate({ id: 'articleManagement', lang })}
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Article Management',
+                    id: 'ZEMcZ6',
+                  })}
                   aria-haspopup="dialog"
                   onClick={openDialog}
                 >
