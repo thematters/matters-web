@@ -83,7 +83,9 @@ const FollowingFeed = () => {
 
   return (
     <>
-      title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
+      <Head
+        title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
+      />
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
