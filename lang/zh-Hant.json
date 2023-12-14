@@ -792,6 +792,10 @@
     "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "Ix3e3Q": {
+    "defaultMessage": "發布評論",
+    "description": "src/components/Forms/CommentForm/index.tsx"
+  },
   "J6f6iN": {
     "defaultMessage": "評論數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
