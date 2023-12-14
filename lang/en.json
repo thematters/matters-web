@@ -59,6 +59,10 @@
     "defaultMessage": "Unknown error. Please try again later.",
     "description": "UNKNOWN_ERROR"
   },
+  "/agKbX": {
+    "defaultMessage": "Write a comment",
+    "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
+  },
   "/faseS": {
     "defaultMessage": "Share link copied"
   },
@@ -1169,6 +1173,10 @@
   "Udp4Bm": {
     "defaultMessage": "Move to bottom",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
+  },
+  "UgpqlF": {
+    "defaultMessage": "Reply",
+    "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
   "UjKkhq": {
     "defaultMessage": "Tags added",
