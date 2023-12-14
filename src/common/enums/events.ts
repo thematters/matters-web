@@ -20,6 +20,7 @@ export const OPEN_UNIVERSAL_AUTH_DIALOG = 'openUniversalAuthDialog'
 export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 export const OPEN_SET_USER_NAME_DIALOG = 'openSetUserNameDialog'
+export const OPEN_SHOW_NOMAD_BADGE_DIALOG = 'openShowNomadBadgeDialog'
 
 // Toast
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'

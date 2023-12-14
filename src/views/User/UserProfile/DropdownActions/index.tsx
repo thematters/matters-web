@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
+import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -14,16 +15,44 @@ import {
   IconShare20,
   Menu,
   RssFeedDialog,
+  RssFeedDialogProps,
   ShareDialog,
+  ShareDialogProps,
+  Spinner,
   Translate,
   ViewerContext,
+  withDialog,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
+import { BlockUserDialogProps } from '~/components/BlockUser/Dialog'
 import {
   AuthorRssFeedFragment,
   DropdownActionsUserPrivateFragment,
   DropdownActionsUserPublicFragment,
 } from '~/gql/graphql'
+
+import type { ArchiveUserDialogProps } from './ArchiveUser/Dialog'
+import type {
+  OpenToggleRestrictUserDialogWithProps,
+  ToggleRestrictUserDialogProps,
+} from './ToggleRestrictUser/Dialog'
+
+const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
+
+const DynamicToggleRestrictUserButton = dynamic(
+  () => import('./ToggleRestrictUser/Button'),
+  { loading: () => <Spinner /> }
+)
+const DynamicToggleRestrictUserDialog = dynamic(
+  () => import('./ToggleRestrictUser/Dialog'),
+  { loading: () => <Spinner /> }
+)
+const DynamicArchiveUserButton = dynamic(() => import('./ArchiveUser/Button'), {
+  loading: () => <Spinner />,
+})
+const DynamicArchiveUserDialog = dynamic(() => import('./ArchiveUser/Dialog'), {
+  loading: () => <Spinner />,
+})
 
 interface DropdownActionsProps {
   user: DropdownActionsUserPublicFragment &
@@ -45,7 +74,17 @@ interface Controls {
   hasRssFeed: boolean
 }
 
-type BaseDropdownActionsProps = DropdownActionsProps & DialogProps & Controls
+interface AdminProps {
+  openToggleRestrictDialog: (
+    props: OpenToggleRestrictUserDialogWithProps
+  ) => void
+  openArchiveDialog: () => void
+}
+
+type BaseDropdownActionsProps = DropdownActionsProps &
+  DialogProps &
+  Controls &
+  AdminProps
 
 const fragments = {
   user: {
@@ -79,8 +118,14 @@ const BaseDropdownActions = ({
   openBlockUserDialog,
   openRssFeedDialog,
   openShareDialog,
+
+  // admin
+  openToggleRestrictDialog,
+  openArchiveDialog,
 }: BaseDropdownActionsProps) => {
+  const viewer = useContext(ViewerContext)
   const intl = useIntl()
+
   const Content = () => (
     <Menu>
       <Menu.Item
@@ -106,6 +151,18 @@ const BaseDropdownActions = ({
 
       {hasBlockUser && (
         <BlockUser.Button user={user} openDialog={openBlockUserDialog} />
+      )}
+
+      {/* admin */}
+      {isAdminView && viewer.isAdmin && (
+        <>
+          <Menu.Divider />
+          <DynamicToggleRestrictUserButton
+            id={user.id}
+            openDialog={openToggleRestrictDialog}
+          />
+          <DynamicArchiveUserButton openDialog={openArchiveDialog} />
+        </>
       )}
     </Menu>
   )
@@ -185,31 +242,57 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
     return null
   }
 
-  return (
-    <ShareDialog
-      tags={[user.displayName, user.userName].filter(Boolean) as string[]}
-    >
-      {({ openDialog: openShareDialog }) => (
-        <RssFeedDialog user={user}>
-          {({ openDialog: openRssFeedDialog }) => (
-            <BlockUser.Dialog user={user}>
-              {({ openDialog: openBlockUserDialog }) => (
-                <BaseDropdownActions
-                  user={user}
-                  isMe={isMe}
-                  isInAside={isInAside}
-                  {...controls}
-                  openBlockUserDialog={openBlockUserDialog}
-                  openRssFeedDialog={openRssFeedDialog}
-                  openShareDialog={openShareDialog}
-                />
-              )}
-            </BlockUser.Dialog>
-          )}
-        </RssFeedDialog>
-      )}
-    </ShareDialog>
+  const WithShare = withDialog<Omit<ShareDialogProps, 'children'>>(
+    BaseDropdownActions,
+    ShareDialog,
+    { tags: [user.displayName, user.userName].filter(Boolean) as string[] },
+    ({ openDialog }) => ({
+      user,
+      isMe,
+      isInAside,
+      ...controls,
+      openShareDialog: openDialog,
+    })
   )
+  const WithRssFeed = withDialog<Omit<RssFeedDialogProps, 'children'>>(
+    WithShare,
+    RssFeedDialog,
+    { user },
+    ({ openDialog }) => ({
+      openRssFeedDialog: openDialog,
+    })
+  )
+  const WithBlockUser = withDialog<Omit<BlockUserDialogProps, 'children'>>(
+    WithRssFeed,
+    BlockUser.Dialog,
+    { user },
+    ({ openDialog }) => ({ openBlockUserDialog: openDialog })
+  )
+
+  // exclude admin code on build
+  if (!isAdminView || !viewer.isAdmin) {
+    return <WithBlockUser />
+  }
+
+  /**
+   * ADMIN ONLY
+   */
+  const WithToggleRestrict = withDialog<
+    Omit<ToggleRestrictUserDialogProps, 'children'>
+  >(
+    WithBlockUser,
+    DynamicToggleRestrictUserDialog,
+    { id: user.id, userName: user.userName! },
+    ({ openDialog }) => ({ openToggleRestrictDialog: openDialog })
+  )
+  const WithArchiveUser = withDialog<Omit<ArchiveUserDialogProps, 'children'>>(
+    WithToggleRestrict,
+    DynamicArchiveUserDialog,
+    { id: user.id, userName: user.userName! },
+    ({ openDialog }) => ({ openArchiveDialog: openDialog })
+  )
+
+  return <WithArchiveUser />
 }
 
 DropdownActions.fragments = fragments

@@ -101,7 +101,7 @@ const BaseUniversalAuthDialog = () => {
       isOpen={show}
       onDismiss={closeDialog}
       testId={TEST_ID.DIALOG_AUTH}
-      scrollable={true}
+      scrollable
     >
       {currStep === 'select-login-method' && (
         <SelectAuthMethodForm

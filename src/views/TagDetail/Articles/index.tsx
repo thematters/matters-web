@@ -171,7 +171,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
     (editor) => editor.id === viewer.id
   )
   const isCreator = tag?.creator?.id === viewer.id
-  const canEditTag = isEditor || isCreator || viewer.status?.role === 'admin'
+  const canEditTag = isEditor || isCreator || viewer.isAdmin
 
   return (
     <Layout.Main.Spacing hasVertical={false}>
