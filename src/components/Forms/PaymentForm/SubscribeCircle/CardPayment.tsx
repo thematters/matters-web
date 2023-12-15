@@ -157,7 +157,12 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
 
   return (
     <>
-      <Dialog.Header closeDialog={closeDialog} title="subscribeCircle" />
+      <Dialog.Header
+        closeDialog={closeDialog}
+        title={
+          <FormattedMessage defaultMessage="Subscribe Circle" id="hG2cBH" />
+        }
+      />
 
       <Dialog.Content fixedHeight>
         <Head circle={circle} />

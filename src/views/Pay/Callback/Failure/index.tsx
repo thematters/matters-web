@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
 import { PATHS, PAYMENT_PROVIDER } from '~/common/enums'
 import { Layout, Translate, useRoute } from '~/components'
@@ -22,7 +24,13 @@ const OAuthCallbackFailure = () => {
 
   return (
     <Layout.Main>
-      <Layout.Header left={<Layout.Header.Title id="donation" />} />
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="Support Author" id="ezYuE2" />
+          </Layout.Header.Title>
+        }
+      />
 
       <Layout.Main.Spacing>
         <Box avatar={avatar[provider]} title={title[provider]}>

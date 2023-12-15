@@ -84,7 +84,7 @@ const BaseRssFeedDialog = ({ user, children }: RssFeedDialogProps) => {
         smUpBgColor="greyLighter"
       >
         <Dialog.Header
-          title="contentFeedEntrance"
+          title={<FormattedMessage defaultMessage="Content Feed" id="Z+nZlT" />}
           closeDialog={closeDialog}
           closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         />

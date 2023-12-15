@@ -1,22 +1,13 @@
 import classNames from 'classnames'
-import { useContext } from 'react'
 
-import { TextId } from '~/common/enums'
-import { translate } from '~/common/utils'
-import {
-  Button,
-  IconEdit16,
-  LanguageContext,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { Button, IconEdit16, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
 interface BoxProps {
   icon: React.ReactNode
-  title: TextId
-  subtitle?: TextId
+  title: React.ReactNode
+  subtitle?: React.ReactNode
   onClick?: () => any
   disabled?: boolean
   footerSpacing?: boolean
@@ -31,8 +22,6 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
   footerSpacing = true,
   children,
 }) => {
-  const { lang } = useContext(LanguageContext)
-
   const boxClasses = classNames({
     [styles.box]: true,
     [styles.footerSpacing]: !!footerSpacing,
@@ -43,7 +32,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
     <section className={boxClasses}>
       <header className={styles.header}>
         <TextIcon icon={icon} size="md" weight="md" spacing="xtight">
-          <Translate id={title} />
+          {title}
         </TextIcon>
 
         {onClick && (
@@ -52,18 +41,14 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
             bgActiveColor="greyLighter"
             spacing={['xtight', 'xtight']}
             aria-haspopup="dialog"
-            aria-label={translate({ id: title, lang })}
+            aria-label={title}
           >
             <IconEdit16 color="grey" />
           </Button>
         )}
       </header>
 
-      {subtitle && (
-        <p className={styles.subtitle}>
-          <Translate id={subtitle} />
-        </p>
-      )}
+      {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
 
       {children}
     </section>

@@ -4,10 +4,15 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ERROR_CODES } from '~/common/enums'
+import {
+  ERROR_CODES,
+  REFERRAL_QUERY_REFERRAL_KEY,
+  REFERRAL_STORAGE_REFERRAL_CODE,
+} from '~/common/enums'
 import {
   parseFormSubmitErrors,
   signupCallbackUrl,
+  storage,
   validateEmail,
 } from '~/common/utils'
 import { WalletType } from '~/common/utils'
@@ -26,6 +31,7 @@ import {
   // TURNSTILE_DEFAULT_SCRIPT_ID,
   TurnstileInstance,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -79,6 +85,12 @@ const Init: React.FC<FormProps> = ({
     }
   )
   const intl = useIntl()
+  const { getQuery } = useRoute()
+  const referralCode =
+    getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
+    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+    undefined
+
   const {
     values,
     errors,
@@ -99,7 +111,7 @@ const Init: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
       try {
-        const redirectUrl = signupCallbackUrl(email)
+        const redirectUrl = signupCallbackUrl(email, referralCode)
         await sendCode({
           variables: {
             input: {

@@ -27,7 +27,6 @@ export const BaseBadgesDialog = ({
   children,
   hasNomadBadge,
   nomadBadgeLevel,
-  totalReferredCount,
   hasTraveloggersBadge,
   hasSeedBadge,
   hasGoldenMotorBadge,
@@ -80,7 +79,6 @@ export const BaseBadgesDialog = ({
                 isInDialog
                 hasNomadBadge={hasNomadBadge}
                 nomadBadgeLevel={nomadBadgeLevel}
-                totalReferredCount={totalReferredCount}
                 hasTraveloggersBadge={hasTraveloggersBadge}
                 hasSeedBadge={hasSeedBadge}
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
@@ -92,6 +90,11 @@ export const BaseBadgesDialog = ({
             </Dialog.Content>
 
             <Dialog.Footer
+              btns={
+                <div aria-hidden style={{ opacity: 0 }}>
+                  <Dialog.RoundedButton text="" />
+                </div>
+              }
               smUpBtns={
                 <Dialog.TextButton
                   text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}

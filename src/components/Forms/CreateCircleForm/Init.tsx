@@ -242,7 +242,10 @@ const Init: React.FC<FormProps> = ({
         <Layout.Header
           right={
             <>
-              <Layout.Header.Title id="circleCreation" />
+              <Layout.Header.Title>
+                <FormattedMessage defaultMessage="Create Circle" id="ESn43O" />
+              </Layout.Header.Title>
+
               <Layout.Header.RightButton
                 type="submit"
                 form={formId}
@@ -264,7 +267,7 @@ const Init: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title="circleCreation"
+        title={<FormattedMessage defaultMessage="Create Circle" id="ESn43O" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />

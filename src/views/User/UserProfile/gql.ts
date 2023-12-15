@@ -39,7 +39,6 @@ const fragments = {
         }
         status {
           state
-          totalReferredCount
         }
         ownCircles {
           ...DigestRichCirclePublic

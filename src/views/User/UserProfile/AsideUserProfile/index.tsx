@@ -45,10 +45,7 @@ const DynamicWalletLabel = dynamic(() => import('../WalletLabel'), {
 })
 
 export const AsideUserProfile = () => {
-  const {
-    isInPath,
-    getQuery, // deleteQuery
-  } = useRoute()
+  const { isInPath, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
 
   // public user data
@@ -253,7 +250,6 @@ export const AsideUserProfile = () => {
             {hasNomadBadge && (
               <BadgeNomadDialog
                 nomadBadgeLevel={nomadBadgeLevel}
-                totalReferredCount={user.status?.totalReferredCount || 0}
                 shareLink={shareLink}
               >
                 {({ openDialog }) => {

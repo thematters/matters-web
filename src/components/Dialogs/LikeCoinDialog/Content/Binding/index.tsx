@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { Dialog, Spinner, Translate } from '~/components'
 import { ViewerLikerIdQuery } from '~/gql/graphql'
@@ -57,7 +58,9 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
 
   return (
     <>
-      <Dialog.Header title="setupLikeCoin" />
+      <Dialog.Header
+        title={<FormattedMessage defaultMessage="Liker ID" id="iEJeQH" />}
+      />
 
       <Dialog.Content>
         <Dialog.Content.Message

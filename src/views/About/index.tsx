@@ -1,3 +1,5 @@
+import { useIntl } from 'react-intl'
+
 import { Head } from '~/components'
 
 import Footer from './Footer'
@@ -9,9 +11,12 @@ import Stats from './Stats'
 import Timeline from './Timeline'
 
 const About = () => {
+  const intl = useIntl()
   return (
     <main>
-      <Head title={{ id: 'about' }} />
+      <Head
+        title={intl.formatMessage({ defaultMessage: 'About Us', id: 'ZjDH42' })}
+      />
 
       <Hero />
       <Intro />

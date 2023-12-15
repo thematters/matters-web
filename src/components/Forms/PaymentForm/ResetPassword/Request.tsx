@@ -151,7 +151,12 @@ const Request: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title="resetPaymentPassword"
+        title={
+          <FormattedMessage
+            defaultMessage="Reset Payment Password"
+            id="+OStJM"
+          />
+        }
         closeDialog={closeDialog}
         leftBtn={
           back ? (

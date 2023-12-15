@@ -1,5 +1,5 @@
 import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { Head, Layout, TableView } from '~/components'
 
@@ -13,11 +13,21 @@ import Socials from './Socials'
 import Wallet from './Wallet'
 
 const Settings = () => {
+  const intl = useIntl()
+
   return (
     <Layout.Main>
-      <Layout.Header left={<Layout.Header.Title id="settings" />} />
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="Settings" id="D3idYv" />
+          </Layout.Header.Title>
+        }
+      />
 
-      <Head title={{ id: 'settings' }} />
+      <Head
+        title={intl.formatMessage({ defaultMessage: 'Settings', id: 'D3idYv' })}
+      />
 
       <SettingsTabs />
 

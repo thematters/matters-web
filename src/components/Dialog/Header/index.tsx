@@ -2,14 +2,13 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
-import { TextId } from '~/common/enums'
-import { Media, Translate } from '~/components'
+import { Media } from '~/components'
 
 import { TextButton } from '../Buttons'
 import styles from './styles.module.css'
 
 export interface HeaderProps {
-  title: TextId | React.ReactNode
+  title: React.ReactNode
   titleLeft?: boolean
   hasSmUpTitle?: boolean
 
@@ -31,7 +30,7 @@ const Title = ({
       [styles.title]: true,
     })}
   >
-    {typeof title === 'string' ? <Translate id={title as TextId} /> : title}
+    {title}
   </h1>
 )
 

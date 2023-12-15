@@ -1,4 +1,6 @@
-import { Button, FingerprintDialog, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Button, FingerprintDialog } from '~/components'
 import { FingerprintArticleFragment } from '~/gql/graphql'
 
 interface FingerprintButtonProps {
@@ -8,7 +10,7 @@ interface FingerprintButtonProps {
 const FingerprintButton = ({ article }: FingerprintButtonProps) => {
   return (
     <Button textColor="black" textActiveColor="greyDarker">
-      <Translate id="IPFSEntrance" />
+      <FormattedMessage defaultMessage="IPFS" id="tio9Gt" />
     </Button>
   )
 }

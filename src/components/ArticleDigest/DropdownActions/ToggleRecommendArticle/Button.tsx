@@ -56,7 +56,7 @@ const RecommendArticleButton: React.FC<RecommendArticleButtonProps> = ({
   )
 
   if (loading) {
-    return <Menu.Item icon={<IconSpinner22 size="mdS" />} />
+    return <Menu.Item icon={<IconSpinner22 size="mdS" />} text="正在加載中…" />
   }
 
   if (data?.article?.__typename !== 'Article') return null
@@ -68,11 +68,11 @@ const RecommendArticleButton: React.FC<RecommendArticleButtonProps> = ({
       : article.oss.inRecommendHottest && article.oss.inRecommendNewest
 
   const texts = {
-    icymi: ['撤銷精華', '選為精華'],
+    icymi: ['選為精華', '撤銷精華'],
     hottestAndNewest: ['撤銷移出', '移出熱門與最新'],
   }
   const icons = {
-    icymi: [IconCircleMinus20, IconNavCreate32],
+    icymi: [IconNavCreate32, IconCircleMinus20],
     hottestAndNewest: [IconReset20, IconUnPin24],
   }
   const IconComp = icons[type][+enabled]

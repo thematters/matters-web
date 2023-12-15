@@ -1,12 +1,12 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { useIntl } from 'react-intl'
 
-import { dom, stripHtml, translate } from '~/common/utils'
+import { dom, stripHtml } from '~/common/utils'
 import {
   Button,
   IconSpinner16,
-  LanguageContext,
   Spinner,
   TextIcon,
   Translate,
@@ -52,7 +52,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
 
   placeholder,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   // retrieve comment draft
   const commentDraftId = `${articleId || circleId}-${type}-${commentId || 0}-${
@@ -132,7 +132,11 @@ export const CommentForm: React.FC<CommentFormProps> = ({
       className={styles.form}
       id={formId}
       onSubmit={handleSubmit}
-      aria-label={translate({ id: 'putComment', lang })}
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Comment',
+        id: 'Ix3e3Q',
+        description: 'src/components/Forms/CommentForm/index.tsx',
+      })}
     >
       <section className={styles.content}>
         <CommentEditor

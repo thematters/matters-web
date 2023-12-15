@@ -64,7 +64,6 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
 
   const isCreate = type === 'create'
   const formId = 'edit-circle-profile-form'
-  const titleId = isCreate ? 'circleCreation' : 'basicProfile'
 
   const intl = useIntl()
   const {
@@ -242,7 +241,15 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     return (
       <>
         <Layout.Header
-          left={<Layout.Header.Title id={titleId} />}
+          left={
+            <Layout.Header.Title>
+              {isCreate ? (
+                <FormattedMessage defaultMessage="Create Circle" id="ESn43O" />
+              ) : (
+                <FormattedMessage defaultMessage="Profile" id="itPgxd" />
+              )}
+            </Layout.Header.Title>
+          }
           right={
             <>
               <span />
@@ -265,7 +272,13 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   return (
     <>
       <Dialog.Header
-        title={titleId}
+        title={
+          isCreate ? (
+            <FormattedMessage defaultMessage="Create Circle" id="ESn43O" />
+          ) : (
+            <FormattedMessage defaultMessage="Profile" id="itPgxd" />
+          )
+        }
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />

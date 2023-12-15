@@ -1,17 +1,37 @@
+import { FormattedMessage, useIntl } from 'react-intl'
+
 import { Head, Layout } from '~/components'
 
 import { Term } from './Term'
 
-const ToS = () => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.Title id="termAndPrivacy" />} />
+const ToS = () => {
+  const intl = useIntl()
 
-    <Head title={{ id: 'termAndPrivacy' }} />
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage
+              defaultMessage="Terms and Privacy Policy"
+              id="LphWYP"
+            />
+          </Layout.Header.Title>
+        }
+      />
 
-    <Layout.Main.Spacing>
-      <Term />
-    </Layout.Main.Spacing>
-  </Layout.Main>
-)
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Terms and Privacy Policy',
+          id: 'LphWYP',
+        })}
+      />
+
+      <Layout.Main.Spacing>
+        <Term />
+      </Layout.Main.Spacing>
+    </Layout.Main>
+  )
+}
 
 export default ToS

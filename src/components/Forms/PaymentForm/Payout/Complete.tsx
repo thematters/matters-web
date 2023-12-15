@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { PATHS } from '~/common/enums'
 import { Dialog, Translate } from '~/components'
 
@@ -8,7 +10,14 @@ interface Props {
 const Complete: React.FC<Props> = ({ closeDialog }) => {
   return (
     <>
-      <Dialog.Header title="paymentPayoutComplete" />
+      <Dialog.Header
+        title={
+          <FormattedMessage
+            defaultMessage="The withdrawal process has started."
+            id="ucxFlV"
+          />
+        }
+      />
 
       <Dialog.Content>
         <Dialog.Content.Message>

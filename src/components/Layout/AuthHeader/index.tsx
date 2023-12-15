@@ -1,10 +1,9 @@
 import { useContext } from 'react'
 
-import { TextId } from '~/common/enums'
 import { Layout, Media, ViewerContext } from '~/components'
 
 type HeaderProps = {
-  title: TextId
+  title: React.ReactNode
 }
 
 const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
@@ -13,7 +12,9 @@ const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
   if (!viewer.isAuthed) {
     return (
       <Media at="sm">
-        <Layout.Header left={<Layout.Header.Title id={title} />} />
+        <Layout.Header
+          left={<Layout.Header.Title>{title}</Layout.Header.Title>}
+        />
       </Media>
     )
   }
@@ -22,11 +23,7 @@ const AuthedHeader: React.FC<HeaderProps> = ({ title }) => {
     <Media at="sm">
       <Layout.Header
         left={<Layout.Header.MeButton />}
-        right={
-          <>
-            <Layout.Header.Title id={title} />
-          </>
-        }
+        right={<Layout.Header.Title>{title}</Layout.Header.Title>}
       />
     </Media>
   )

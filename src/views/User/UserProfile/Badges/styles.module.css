@@ -1,5 +1,9 @@
 .badge {
   font-size: 0;
+
+  &.nomad {
+    border: none !important;
+  }
 }
 
 .item {

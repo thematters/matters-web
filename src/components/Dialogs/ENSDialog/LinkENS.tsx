@@ -120,7 +120,10 @@ const LinkENS = ({
   if (isUnsupportedNetwork || isSwitchingNetwork) {
     return (
       <Fragment key="network">
-        <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
+        <Dialog.Header
+          closeDialog={closeDialog}
+          title={<FormattedMessage defaultMessage="Link ENS" id="3w3CC8" />}
+        />
 
         <Dialog.Content>
           <section className={styles.content}>
@@ -185,7 +188,10 @@ const LinkENS = ({
   if (!isConnectedAddress) {
     return (
       <Fragment key="reconnect">
-        <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
+        <Dialog.Header
+          closeDialog={closeDialog}
+          title={<FormattedMessage defaultMessage="Link ENS" id="3w3CC8" />}
+        />
 
         <Dialog.Content>
           <section className={styles.content}>
@@ -263,7 +269,10 @@ const LinkENS = ({
    */
   return (
     <Fragment key="link">
-      <Dialog.Header closeDialog={closeDialog} title="bindIPNStoENS" />
+      <Dialog.Header
+        closeDialog={closeDialog}
+        title={<FormattedMessage defaultMessage="Link ENS" id="3w3CC8" />}
+      />
 
       <Dialog.Content>
         <section className={styles.content}>
@@ -286,7 +295,7 @@ const LinkENS = ({
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<Translate id="bindIPNStoENS" />}
+            text={<FormattedMessage defaultMessage="Link ENS" id="3w3CC8" />}
             onClick={linkIPNStoENS}
           />
         }
@@ -295,7 +304,7 @@ const LinkENS = ({
             <CancelButton />
 
             <Dialog.TextButton
-              text={<Translate id="bindIPNStoENS" />}
+              text={<FormattedMessage defaultMessage="Link ENS" id="3w3CC8" />}
               loading={isLoading || txConfirming}
             />
           </>

@@ -106,8 +106,15 @@ const AddCircleArticleDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         {isSelect && (
           <DynamicSearchSelectForm
-            title="addArticles"
-            hint="hintCircleAddArticles"
+            title={
+              <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
+            }
+            hint={
+              <FormattedMessage
+                defaultMessage="Add articles to your circle"
+                id="D9R/ol"
+              />
+            }
             searchType="Article"
             searchFilter={{ authorId: viewer.id }}
             onSave={onSaveArticles}

@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import {
   ArticleDigestDropdown,
   EditorSearchSelectDialog,
@@ -26,8 +28,13 @@ const SidebarCollection = ({
 }: SidebarCollectionProps) => {
   return (
     <EditorSearchSelectDialog
-      title="collectArticle"
-      hint="hintEditCollection"
+      title={<FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />}
+      hint={
+        <FormattedMessage
+          defaultMessage="Adding articles to a collection helps readers find your articles."
+          id="XTyKFR"
+        />
+      }
       searchType="Article"
       searchExclude={SearchExclude.Blocked}
       onSave={(nodes: SearchSelectNode[]) =>
@@ -40,7 +47,9 @@ const SidebarCollection = ({
       {({ openDialog }) => (
         <Box
           icon={<IconCollection24 size="md" />}
-          title="collectArticle"
+          title={
+            <FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />
+          }
           onClick={openDialog}
           disabled={disabled}
         >

@@ -130,7 +130,11 @@ const OthersProcessingForm: React.FC<Props> = ({
         <PayToFallback closeDialog={closeDialog} />
       ) : (
         <>
-          <Dialog.Header title="donation" />
+          <Dialog.Header
+            title={
+              <FormattedMessage defaultMessage="Support Author" id="ezYuE2" />
+            }
+          />
           <Dialog.Content>
             <section>
               <PaymentInfo
@@ -288,7 +292,7 @@ const USDTProcessingForm: React.FC<Props> = ({
       <Dialog.Header
         closeDialog={closeDialog}
         closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
-        title="donation"
+        title={<FormattedMessage defaultMessage="Support Author" id="ezYuE2" />}
       />
 
       <Dialog.Content>
