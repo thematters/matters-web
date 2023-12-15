@@ -52,6 +52,7 @@ import Placeholder from './Placeholder'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.module.css'
+import TagList from './TagList'
 import Toolbar from './Toolbar'
 import TranslationToast from './TranslationToast'
 
@@ -302,17 +303,18 @@ const BaseArticleDetail = ({
               content={content}
               translating={translating}
             />
-            <License license={article.license} />
 
             {circle && !canReadFullContent && (
               <DynamicCircleWall circle={circle} />
             )}
-
-            {features.payment && canReadFullContent && (
-              <DynamicSupportWidget article={article} />
-            )}
           </>
         )}
+
+        <TagList article={article} />
+
+        <License license={article.license} />
+
+        {features.payment && <DynamicSupportWidget article={article} />}
 
         {collectionCount > 0 && (
           <section className={styles.block}>

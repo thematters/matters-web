@@ -860,6 +860,10 @@
   "KQi/UZ": {
     "defaultMessage": "归档作品"
   },
+  "KgVypx": {
+    "defaultMessage": "标签",
+    "description": "src/components/Dialogs/TagListDialog/index.tsx"
+  },
   "KlJEP9": {
     "defaultMessage": "钱包已绑定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"

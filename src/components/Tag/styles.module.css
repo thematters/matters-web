@@ -92,3 +92,17 @@
     opacity: 0.5;
   }
 }
+
+.article {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--spacing-base-xxx-tight) var(--spacing-base-tight)
+    var(--spacing-base-xxx-tight) var(--spacing-x-tight);
+  background: var(--color-grey-lighter);
+  border-radius: 0.5rem;
+
+  & .name {
+    font-size: var(--font-size-sm);
+    line-height: 1.375rem; /* 22px */
+  }
+}

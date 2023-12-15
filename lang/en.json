@@ -860,6 +860,10 @@
   "KQi/UZ": {
     "defaultMessage": "Archive works"
   },
+  "KgVypx": {
+    "defaultMessage": "Topics",
+    "description": "src/components/Dialogs/TagListDialog/index.tsx"
+  },
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"

@@ -1,17 +1,25 @@
 .tagList {
-  margin-right: calc(var(--spacing-base) * -1);
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
 
   & .list {
-    @mixin hide-scrollbar;
-
     display: flex;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    flex-wrap: wrap;
 
     & .listItem {
       flex-shrink: 0;
+      max-width: 100%;
       padding-right: var(--spacing-base);
+    }
+
+    & .moreTag {
+      @mixin flex-center-all;
+
+      height: 2rem;
+      padding: var(--spacing-x-tight) var(--spacing-base-tight)
+        var(--spacing-x-tight) var(--spacing-x-tight);
+      cursor: pointer;
+      background: var(--color-grey-lighter);
+      border-radius: 0.5rem;
     }
   }
 }

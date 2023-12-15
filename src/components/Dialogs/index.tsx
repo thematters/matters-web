@@ -21,6 +21,7 @@ export * from './MigrationDialog'
 export * from './ReviseArticleDialog'
 export * from './ShareDialog'
 export * from './SupportersDialog'
+export * from './TagListDialog'
 
 // Collection
 export * from './AddArticlesCollectionDialog'
