@@ -2,6 +2,7 @@
   @mixin flex-center-start;
 
   flex-wrap: wrap;
+  row-gap: var(--spacing-x-tight);
   padding: var(--spacing-loose) 0;
   font-size: var(--font-size-xs);
   line-height: 1.125rem;
