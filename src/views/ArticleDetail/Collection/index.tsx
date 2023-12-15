@@ -1,13 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
-import { useContext } from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { analytics, mergeConnections, translate } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
-  ArticleDigestSidebar,
-  LanguageContext,
+  ArticleDigestTitle,
   List,
   QueryError,
   Spinner,
@@ -40,8 +38,6 @@ const Collection: React.FC<{
   article: NonNullable<ArticleDetailPublicQuery['article']>
   collectionCount?: number
 }> = ({ article, collectionCount }) => {
-  const { lang } = useContext(LanguageContext)
-
   const { data, loading, error, fetchMore } = useQuery<CollectionListQuery>(
     COLLECTION_LIST,
     { variables: { id: article.id, first: 3 } }
@@ -84,27 +80,16 @@ const Collection: React.FC<{
       <header className={styles.header}>
         <Title type="nav" is="h2">
           <Translate id="collectArticle" />
-
-          <span
-            className={styles.count}
-            aria-label={translate({
-              zh_hant: `${collectionCount} 篇關聯作品`,
-              zh_hans: `${collectionCount} 篇关联作品`,
-              en: `${collectionCount} collected articles`,
-              lang,
-            })}
-          >
-            {collectionCount}
-          </span>
         </Title>
       </header>
 
-      <List spacing={['base', 0]} hasBorder={false}>
+      <List spacing={['loose', 0]}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
-            <ArticleDigestSidebar
+            <ArticleDigestTitle
               article={node}
-              hasBackground
+              textSize="md"
+              textWeight="normal"
               onClick={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'collection',
@@ -113,14 +98,6 @@ const Collection: React.FC<{
                   id: node.id,
                 })
               }
-              onClickAuthor={() => {
-                analytics.trackEvent('click_feed', {
-                  type: 'collection',
-                  contentType: 'user',
-                  location: i,
-                  id: node.author.id,
-                })
-              }}
             />
           </List.Item>
         ))}

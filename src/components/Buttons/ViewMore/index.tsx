@@ -1,11 +1,6 @@
-import {
-  Button,
-  ButtonProps,
-  IconArrowDown16,
-  Spinner,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Button, ButtonProps, Spinner } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -22,20 +17,13 @@ export const ViewMoreButton: React.FC<ViewMoreButtonProps> = ({
       <Spinner />
     ) : (
       <Button
-        size={[null, '1.25rem']}
-        spacing={[0, 'xtight']}
-        bgColor="green"
+        spacing={['xtight', 'base']}
+        borderColor="greyLighter"
+        borderRadius="5rem"
+        textColor="black"
         {...props}
       >
-        <TextIcon
-          icon={<IconArrowDown16 size="xs" />}
-          size="xs"
-          color="white"
-          weight="md"
-          textPlacement="left"
-        >
-          <Translate zh_hans="查看更多" zh_hant="查看更多" en="View More" />
-        </TextIcon>
+        <FormattedMessage defaultMessage="View All" id="wbcwKd" />
       </Button>
     )}
   </div>
