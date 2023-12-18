@@ -27,6 +27,7 @@ import {
 import { ArticleDetailPublicQuery, HasDonatedQuery } from '~/gql/graphql'
 
 import Donators from './Donators'
+import EditCopyButton from './EditCopyButton'
 import { fragments, HAS_DONATED } from './gql'
 import styles from './styles.module.css'
 import SupportButton from './SupportButton'
@@ -54,6 +55,8 @@ const SupportWidget = ({ article }: DonationProps) => {
     [styles.supportWidget]: true,
     [styles.hasCircle]: article?.access.circle,
   })
+  const isReader = viewer.id !== article.author.id
+  const isAuthor = viewer.id === article.author.id
 
   const {
     data: hasDonatedData,
@@ -115,7 +118,7 @@ const SupportWidget = ({ article }: DonationProps) => {
         <section className={`${styles.donation} ${styles.note}`}>
           {loading && <IconSpinner16 color="greyLight" size="lg" />}
 
-          {!loading && (
+          {!loading && isReader && (
             <>
               {isViewerDonated && (
                 <>
@@ -227,6 +230,44 @@ const SupportWidget = ({ article }: DonationProps) => {
                       </TextIcon>
                     </span>
                   </Button>
+                </section>
+              )}
+            </>
+          )}
+
+          {!loading && isAuthor && (
+            <>
+              {requestForDonation && (
+                <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
+                  {requestForDonation}
+                </p>
+              )}
+              {!requestForDonation && (
+                <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
+                  <Translate
+                    zh_hant="喜歡我的文章嗎？"
+                    zh_hans="喜欢我的文章吗？"
+                    en="Like my work?"
+                  />
+                  <br />
+                  <Translate
+                    zh_hant="別忘了給點支持與讚賞，讓我知道創作的路上有你陪伴。"
+                    zh_hans="别忘了给点支持与赞赏，让我知道创作的路上有你陪伴。"
+                    en="Don't forget to support or like, so I know you are with me.."
+                  />
+                </p>
+              )}
+
+              <section className={styles.donationButton}>
+                <EditCopyButton article={article} />
+              </section>
+
+              {article.donations.totalCount > 0 && (
+                <section className={styles.donators}>
+                  <Donators
+                    article={article}
+                    showAvatarAnimation={showAvatarAnimation}
+                  />
                 </section>
               )}
             </>

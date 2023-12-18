@@ -1077,6 +1077,10 @@
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "RGEpvx": {
+    "defaultMessage": "Support setting",
+    "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
+  },
   "ROPCC0": {
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"

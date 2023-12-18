@@ -5,13 +5,16 @@
 
 .donation {
   @mixin flex-center-all;
+  @mixin polka-dot-background;
 
   position: relative;
   flex-direction: column;
-  padding: var(--spacing-base);
+  padding: var(--spacing-xx-loose) var(--spacing-base);
   text-align: center;
-  background: var(--color-yellow-lighter);
-  border-radius: 1.25rem;
+
+  @media (--sm-up) {
+    padding: var(--spacing-base-xx-loose) var(--spacing-base);
+  }
 
   & p {
     font-size: var(--font-size-sm);
@@ -19,11 +22,11 @@
   }
 
   &.note p {
-    max-width: 25rem;
+    max-width: 29rem;
   }
 
   & .donationButton {
-    margin-top: var(--spacing-base);
+    margin-top: var(--spacing-loose);
   }
 
   & .donators {

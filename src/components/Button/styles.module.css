@@ -493,6 +493,13 @@ span.container {
   }
 }
 
+.borderMdS {
+  & .hotarea {
+    border-style: solid;
+    border-width: 1.25px;
+  }
+}
+
 .borderSm {
   & .hotarea {
     border-style: solid;

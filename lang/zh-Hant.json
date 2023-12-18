@@ -1077,6 +1077,10 @@
     "defaultMessage": "取消置頂",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "RGEpvx": {
+    "defaultMessage": "編輯文案",
+    "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
+  },
   "ROPCC0": {
     "defaultMessage": "請先綁定郵箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
