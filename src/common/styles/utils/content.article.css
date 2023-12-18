@@ -218,11 +218,11 @@
    ========================================================================== */
   & ul,
   & ol {
-    padding-left: calc(var(--spacing-x-loose) + 9px);
+    padding-left: var(--spacing-xx-loose);
   }
 
   & li {
-    padding-left: calc(var(--spacing-x-tight) + 1px);
+    padding-left: var(--spacing-x-tight);
     margin: var(--spacing-x-tight) 0;
   }
 
