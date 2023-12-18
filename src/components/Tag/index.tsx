@@ -109,7 +109,6 @@ export const Tag = ({
       textIconProps = {
         size: 'sm',
         weight: 'normal',
-        color: 'greyDarker',
       }
       break
     case 'inline':

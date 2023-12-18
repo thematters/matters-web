@@ -94,15 +94,29 @@
 }
 
 .article {
+  @mixin transition;
+
   display: inline-flex;
   align-items: center;
   padding: var(--spacing-base-xxx-tight) var(--spacing-base-tight)
     var(--spacing-base-xxx-tight) var(--spacing-x-tight);
+  color: var(--color-grey-darker);
   background: var(--color-grey-lighter);
   border-radius: 0.5rem;
+  transition-property: color, background;
 
   & .name {
     font-size: var(--font-size-sm);
     line-height: 1.375rem; /* 22px */
+  }
+
+  &.active {
+    &:not(.disabled) {
+      &:hover,
+      &:focus {
+        color: var(--color-black);
+        background: var(--color-grey-lighter-active);
+      }
+    }
   }
 }

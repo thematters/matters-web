@@ -43,6 +43,7 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
                 })
               }}
               canClamp
+              active
             />
             <TagExposureTracker location={i} id={tag.id} horizontal />
           </li>
@@ -56,7 +57,7 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
                 role="button"
                 onClick={openDialog}
               >
-                <IconMore16 color="greyDarker" />
+                <IconMore16 />
               </li>
             )}
           </TagListDialog>
