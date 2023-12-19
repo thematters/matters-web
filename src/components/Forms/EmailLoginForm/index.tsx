@@ -138,7 +138,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
               email,
               passwordOrCode: password,
               language: lang,
-              referralCode,
+              // referralCode,
+              ...(referralCode ? { referralCode } : null),
             },
           },
         })

@@ -7,7 +7,6 @@ import { TEST_ID } from '~/common/enums'
 import {
   Dialog,
   Spinner,
-  Translate,
   useDialogSwitch,
   usePublicQuery,
   ViewerContext,
@@ -104,7 +103,7 @@ const BaseFingerprintDialog = ({
           title={<FormattedMessage defaultMessage="IPFS" id="tio9Gt" />}
           leftBtn={
             <Dialog.TextButton
-              text={<Translate id="cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               onClick={closeDialog}
             />
           }

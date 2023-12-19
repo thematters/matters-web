@@ -7,7 +7,6 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
     $key: String!
     $first: first_Int_min_0 = 30
     $after: String
-    $version: SearchAPIVersion = v20230601
   ) {
     search(
       input: {
@@ -16,7 +15,6 @@ export const SEARCH_AGGREGATE_ARTICLES_PUBLIC = gql`
         first: $first
         key: $key
         after: $after
-        version: $version
       }
     ) {
       totalCount
@@ -43,7 +41,6 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
     $key: String!
     $first: first_Int_min_0 = 30
     $after: String
-    $version: SearchAPIVersion = v20230601
   ) {
     search(
       input: {
@@ -52,7 +49,6 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
         first: $first
         key: $key
         after: $after
-        version: $version
       }
     ) {
       pageInfo {
@@ -78,7 +74,6 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
     $key: String!
     $first: first_Int_min_0 = 30
     $after: String
-    $version: SearchAPIVersion = v20230601
   ) {
     search(
       input: {
@@ -87,7 +82,6 @@ export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
         first: $first
         key: $key
         after: $after
-        version: $version
       }
     ) {
       pageInfo {

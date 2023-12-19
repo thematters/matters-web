@@ -1,10 +1,8 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { Formik } from 'formik'
-import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
-import { IconClose20, IconSearch20, LanguageContext } from '~/components'
+import { IconClose20, IconSearch20 } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -29,7 +27,6 @@ const SearchInput: React.FC<SearchInputProps> = ({
     defaultMessage: 'Search',
     id: 'xmcVZ0',
   })
-  const { lang } = useContext(LanguageContext)
 
   return (
     <Formik initialValues={{ q: '' }} enableReinitialize onSubmit={() => {}}>
@@ -75,7 +72,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
               <button
                 className={styles.clear}
                 type="button"
-                aria-label={translate({ id: 'clear', lang })}
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Clear',
+                  id: '/GCoTA',
+                })}
                 onClick={() => {
                   onChange('')
                   setValues({ q: '' })

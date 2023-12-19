@@ -214,7 +214,9 @@ const EditModeHeader = ({
             />
           )
         }
-        cancelButtonText={<Translate id="cancel" />}
+        cancelButtonText={
+          <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+        }
         onConfirm={isContentRevised ? undefined : onSave}
         ConfirmStepContent={ConfirmStepContent}
       >

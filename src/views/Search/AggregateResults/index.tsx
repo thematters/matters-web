@@ -27,7 +27,6 @@ const AggregateResults = () => {
     getSearchType(getQuery('type')) || Type.ARTICLE
   )
   const q = getQuery('q')
-  const version = getQuery('version')
 
   const isArticle = type === Type.ARTICLE
   const isUser = type === Type.USER
@@ -42,17 +41,17 @@ const AggregateResults = () => {
   useEffect(() => {
     client.query({
       query: SEARCH_AGGREGATE_ARTICLES_PUBLIC,
-      variables: { key: q, version: version === '' ? undefined : version },
+      variables: { key: q },
       fetchPolicy: 'network-only',
     })
     client.query({
       query: SEARCH_AGGREGATE_USERS_PUBLIC,
-      variables: { key: q, version: version === '' ? undefined : version },
+      variables: { key: q },
       fetchPolicy: 'network-only',
     })
     client.query({
       query: SEARCH_AGGREGATE_TAGS_PUBLIC,
-      variables: { key: q, version: version === '' ? undefined : version },
+      variables: { key: q },
       fetchPolicy: 'network-only',
     })
   }, [q])
