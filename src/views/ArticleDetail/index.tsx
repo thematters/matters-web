@@ -27,7 +27,6 @@ import {
   ViewerContext,
 } from '~/components'
 import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
-import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleAccessType,
   ArticleAvailableTranslationsQuery,
@@ -49,6 +48,7 @@ import {
 } from './gql'
 import License from './License'
 import MetaInfo from './MetaInfo'
+import Placeholder from './Placeholder'
 import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.module.css'
@@ -233,18 +233,6 @@ const BaseArticleDetail = ({
 
   return (
     <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
-      <Layout.Header
-        mode="compact"
-        right={
-          <UserDigest.Rich
-            user={article.author}
-            size="sm"
-            spacing={[0, 0]}
-            bgColor="none"
-          />
-        }
-      />
-
       <Head
         title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
         path={toPath({ page: 'articleDetail', article }).href}
@@ -278,7 +266,6 @@ const BaseArticleDetail = ({
       <State article={article} />
 
       <section className={styles.content}>
-        <TagList article={article} />
         <section className={styles.title}>
           <Title type="article">{title}</Title>
 
@@ -316,17 +303,18 @@ const BaseArticleDetail = ({
               content={content}
               translating={translating}
             />
-            <License license={article.license} />
 
             {circle && !canReadFullContent && (
               <DynamicCircleWall circle={circle} />
             )}
-
-            {features.payment && canReadFullContent && (
-              <DynamicSupportWidget article={article} />
-            )}
           </>
         )}
+
+        <TagList article={article} />
+
+        <License license={article.license} />
+
+        {features.payment && <DynamicSupportWidget article={article} />}
 
         {collectionCount > 0 && (
           <section className={styles.block}>
@@ -537,11 +525,7 @@ const ArticleDetail = ({
    * Render:Loading
    */
   if (loading) {
-    return (
-      <EmptyLayout>
-        <Spinner />
-      </EmptyLayout>
-    )
+    return <Placeholder />
   }
 
   /**
@@ -647,11 +631,7 @@ const ArticleDetailOuter = () => {
    * Rendering
    */
   if (loading) {
-    return (
-      <EmptyLayout>
-        <Spinner />
-      </EmptyLayout>
-    )
+    return <Placeholder />
   }
 
   return <ArticleDetail includeTranslation={includeTranslation} />

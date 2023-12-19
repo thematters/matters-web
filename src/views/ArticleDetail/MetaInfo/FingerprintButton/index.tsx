@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Button, FingerprintDialog, IconIPFS24, TextIcon } from '~/components'
+import { Button, FingerprintDialog } from '~/components'
 import { FingerprintArticleFragment } from '~/gql/graphql'
 
 interface FingerprintButtonProps {
@@ -9,25 +9,9 @@ interface FingerprintButtonProps {
 
 const FingerprintButton = ({ article }: FingerprintButtonProps) => {
   return (
-    <FingerprintDialog article={article}>
-      {({ openDialog }) => (
-        <Button
-          onClick={openDialog}
-          spacing={['xxtight', 'xtight']}
-          bgColor="greenLighter"
-          aria-haspopup="dialog"
-        >
-          <TextIcon
-            icon={<IconIPFS24 color="green" />}
-            size="xs"
-            spacing="xxtight"
-            color="green"
-          >
-            <FormattedMessage defaultMessage="IPFS" id="tio9Gt" />{' '}
-          </TextIcon>
-        </Button>
-      )}
-    </FingerprintDialog>
+    <Button textColor="black" textActiveColor="greyDarker">
+      <FormattedMessage defaultMessage="IPFS" id="tio9Gt" />
+    </Button>
   )
 }
 

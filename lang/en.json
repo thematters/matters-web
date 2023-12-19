@@ -189,6 +189,10 @@
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
+  "2bG/gP": {
+    "defaultMessage": "Edit",
+    "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
+  },
   "2ef/Xl": {
     "defaultMessage": "Block",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
@@ -855,6 +859,10 @@
   },
   "KQi/UZ": {
     "defaultMessage": "Archive works"
+  },
+  "KgVypx": {
+    "defaultMessage": "Topics",
+    "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
