@@ -38,21 +38,18 @@
   & .transaction {
     @mixin flex-center-all;
 
-    margin-top: var(--spacing-loose);
+    margin-top: var(--spacing-base);
     font-size: var(--font-size-xs);
-    line-height: 1;
 
     & .transactionLeft {
       display: inline-flex;
-      line-height: 1.25rem;
+      line-height: 1.125rem;
+      color: var(--color-grey-darker);
     }
 
     & .transactionButton {
       display: inline-flex;
-      padding-top: 2px;
-      padding-bottom: 1px;
       margin-left: var(--spacing-xx-tight);
-      border-bottom: 1px solid var(--color-matters-gold);
     }
   }
 }

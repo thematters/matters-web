@@ -209,9 +209,10 @@ const SupportWidget = ({ article }: DonationProps) => {
                   <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
                     <span className={styles.transactionButton}>
                       <TextIcon
-                        icon={<IconDollarCircle16 />}
-                        color="gold"
+                        icon={<IconDollarCircle16 color="black" />}
+                        color="black"
                         size="xs"
+                        spacing="xxxtight"
                       >
                         <Translate
                           zh_hant="交易記錄"
