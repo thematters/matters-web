@@ -124,7 +124,8 @@ const SocialCallback = ({ type }: Props) => {
                 type,
                 language: lang,
                 ...input,
-                referralCode,
+                // referralCode,
+                ...(referralCode ? { referralCode } : null),
               },
             },
           })

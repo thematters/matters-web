@@ -49,6 +49,9 @@
     "defaultMessage": "最近 1 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "/GCoTA": {
+    "defaultMessage": "清空"
+  },
   "/GyMKa": {
     "defaultMessage": "分享作品"
   },
@@ -1181,6 +1184,9 @@
   "UjKkhq": {
     "defaultMessage": "作品已添加標籤",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "Up5U7K": {
+    "defaultMessage": "封鎖"
   },
   "V5OMr4": {
     "defaultMessage": "什麼是數字錢包？",

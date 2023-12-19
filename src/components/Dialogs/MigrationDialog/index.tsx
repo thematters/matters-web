@@ -30,7 +30,13 @@ const BaseMigrationDialog = ({
           title={
             <FormattedMessage defaultMessage="Settled in Matters" id="VBve8d" />
           }
-          closeText={currStep === 'success' ? 'close' : 'cancel'}
+          closeText={
+            currStep === 'success' ? (
+              <FormattedMessage defaultMessage="Close" id="rbrahO" />
+            ) : (
+              <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+            )
+          }
         />
         {currStep === 'upload' && (
           <Upload nextStep={nextStep} closeDialog={closeDialog} />

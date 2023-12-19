@@ -99,7 +99,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
             <Dialog.TextButton
               text={
                 back ? (
-                  'back'
+                  <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                 ) : (
                   <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
                 )

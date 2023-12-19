@@ -49,6 +49,9 @@
     "defaultMessage": "Last 1 month",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "/GCoTA": {
+    "defaultMessage": "Clear"
+  },
   "/GyMKa": {
     "defaultMessage": "Share Article"
   },
@@ -1181,6 +1184,9 @@
   "UjKkhq": {
     "defaultMessage": "Tags added",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "Up5U7K": {
+    "defaultMessage": "Block"
   },
   "V5OMr4": {
     "defaultMessage": "What is a digital wallet?",
