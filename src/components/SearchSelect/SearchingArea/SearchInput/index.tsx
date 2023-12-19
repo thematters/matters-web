@@ -1,6 +1,7 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { Formik } from 'formik'
 import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
 import { translate } from '~/common/utils'
 import { IconClear16, IconSearch16, LanguageContext } from '~/components'
@@ -30,6 +31,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 }) => {
   const fieldId = `search-input-${type}`.toLocaleLowerCase()
   const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const textAriaLabel = translate({ id: 'search', lang })
   const textPlaceholder = {
     Article: translate({
@@ -112,7 +114,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
               <button
                 className={styles.clear}
                 type="button"
-                aria-label={translate({ id: 'clear', lang })}
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Clear',
+                  id: '/GCoTA',
+                })}
                 onClick={() => {
                   onChange('')
                   setValues({ q: '' })
