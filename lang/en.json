@@ -994,6 +994,10 @@
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
   },
+  "NbdvAd": {
+    "defaultMessage": "Supporter",
+    "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
+  },
   "NdtzIs": {
     "defaultMessage": "The email verification link has been sent to {email}",
     "description": "src/components/GlobalToast/index.tsx"

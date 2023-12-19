@@ -994,6 +994,10 @@
     "defaultMessage": "豆瓣",
     "description": "src/components/Share/Buttons/Douban.tsx"
   },
+  "NbdvAd": {
+    "defaultMessage": "支持者名单",
+    "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
+  },
   "NdtzIs": {
     "defaultMessage": "邮箱地址验证链接已发送至 {email}",
     "description": "src/components/GlobalToast/index.tsx"

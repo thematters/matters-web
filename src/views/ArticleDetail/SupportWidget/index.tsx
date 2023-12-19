@@ -267,6 +267,7 @@ const SupportWidget = ({ article }: DonationProps) => {
                   <Donators
                     article={article}
                     showAvatarAnimation={showAvatarAnimation}
+                    isAuthor={isAuthor}
                   />
                 </section>
               )}
