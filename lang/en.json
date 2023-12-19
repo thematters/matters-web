@@ -227,6 +227,9 @@
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3Y6k4g": {
+    "defaultMessage": "Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
+  },
   "3fqQHv": {
     "defaultMessage": "Add tag editor"
   },
@@ -632,6 +635,9 @@
     "defaultMessage": "Unpin from profile",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
+  "E+dEI9": {
+    "defaultMessage": "With your support, I will be able to accumulate more energy to create."
+  },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
   },
@@ -949,6 +955,9 @@
     "defaultMessage": "Matters ID is your unique identifier, and cannot be modified once set.",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "M05PcB": {
+    "defaultMessage": "says:"
+  },
   "MDNaxs": {
     "defaultMessage": "followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -975,6 +984,9 @@
   "MoyOR+": {
     "defaultMessage": "Settings - Circle notifications",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "Myrqtn": {
+    "defaultMessage": "🎉 Thank you for support!"
   },
   "N2IrpM": {
     "defaultMessage": "Confirm"

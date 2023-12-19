@@ -227,6 +227,9 @@
     "defaultMessage": "登录",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3Y6k4g": {
+    "defaultMessage": "喜欢我的作品吗？别忘了给予支持与赞赏，让我知道在创作的路上有你陪伴，一起延续这份热忱！"
+  },
   "3fqQHv": {
     "defaultMessage": "添加协作者"
   },
@@ -632,6 +635,9 @@
     "defaultMessage": "取消代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
+  "E+dEI9": {
+    "defaultMessage": "有了你的支持，我将能够蓄积更多能量创作"
+  },
   "E8W3qa": {
     "defaultMessage": "2-20 个字符"
   },
@@ -949,6 +955,9 @@
     "defaultMessage": "Matters ID 为用户唯一标识，设置后无法修改。",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "M05PcB": {
+    "defaultMessage": "想对你说："
+  },
   "MDNaxs": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -975,6 +984,9 @@
   "MoyOR+": {
     "defaultMessage": "设置 - 围炉通知",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "Myrqtn": {
+    "defaultMessage": "🎉 感谢支持！"
   },
   "N2IrpM": {
     "defaultMessage": "确认"

@@ -1,4 +1,4 @@
-import { SegmentedTabs, Translate } from '~/components'
+import { Tabs, Translate } from '~/components'
 
 export type TabType = 'request' | 'reply'
 
@@ -12,18 +12,15 @@ const SortBy: React.FC<SortByProps> = ({ tabType, setTabType }) => {
   const isReply = tabType === 'reply'
 
   return (
-    <SegmentedTabs>
-      <SegmentedTabs.Tab
-        onClick={() => setTabType('request')}
-        selected={isRequest}
-      >
+    <Tabs>
+      <Tabs.Tab onClick={() => setTabType('request')} selected={isRequest}>
         <Translate id="requestForDonation" />
-      </SegmentedTabs.Tab>
+      </Tabs.Tab>
 
-      <SegmentedTabs.Tab onClick={() => setTabType('reply')} selected={isReply}>
+      <Tabs.Tab onClick={() => setTabType('reply')} selected={isReply}>
         <Translate id="replyToDonator" />
-      </SegmentedTabs.Tab>
-    </SegmentedTabs>
+      </Tabs.Tab>
+    </Tabs>
   )
 }
 
