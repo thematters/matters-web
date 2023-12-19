@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -16,7 +16,6 @@ import {
   QueryError,
   Spinner,
   TextIcon,
-  Translate,
   useMutation,
 } from '~/components'
 import { ClearReadHistoryMutation, MeHistoryFeedQuery } from '~/gql/graphql'
@@ -133,7 +132,7 @@ const BaseMeHistory = () => {
           onClick={handlerClear}
         >
           <TextIcon size="sm">
-            <Translate id="clear" />
+            <FormattedMessage defaultMessage="Clear" id="/GCoTA" />
           </TextIcon>
         </Button>
       </section>
