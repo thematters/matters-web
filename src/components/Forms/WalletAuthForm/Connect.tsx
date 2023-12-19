@@ -202,7 +202,12 @@ const Connect: React.FC<FormProps> = ({
           // confirm auth
           const { data: loginData } = await walletLogin({
             variables: {
-              input: { ...variables.input, language: lang, referralCode },
+              input: {
+                ...variables.input,
+                language: lang,
+                // referralCode,
+                ...(referralCode ? { referralCode } : null),
+              },
             },
           })
 

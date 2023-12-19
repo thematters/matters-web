@@ -40,7 +40,7 @@ const LoginCallback = () => {
               email,
               passwordOrCode: code,
               language: lang,
-              referralCode,
+              ...(referralCode ? { referralCode } : null),
             },
           },
         })
