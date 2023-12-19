@@ -1,0 +1,5 @@
+.count {
+  padding-left: var(--spacing-xx-tight);
+  font-weight: 590;
+  color: var(--color-grey);
+}

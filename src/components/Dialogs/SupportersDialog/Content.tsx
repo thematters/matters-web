@@ -1,13 +1,15 @@
 import { useQuery } from '@apollo/react-hooks'
 import { FormattedMessage } from 'react-intl'
 
+import { BREAKPOINTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   InfiniteScroll,
+  List,
   QueryError,
   Spinner,
-  Translate,
+  useMediaQuery,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
@@ -16,6 +18,7 @@ import {
 } from '~/gql/graphql'
 
 import { ARTICLE_DONATORS } from './gql'
+import styles from './styles.module.css'
 
 interface SupportersDialogContentProps {
   article: SupportsDialogArticleFragment
@@ -30,6 +33,8 @@ const SupportersDialogContent = ({
     ARTICLE_DONATORS,
     { variables: { id: article.id } }
   )
+
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   const connectionPath = 'article.donations'
   const { edges, pageInfo } =
@@ -73,12 +78,22 @@ const SupportersDialogContent = ({
       <Dialog.Header
         title={
           <>
-            {totalCount}&nbsp;
-            <Translate id="hasSupportedArticle" />
+            <FormattedMessage
+              defaultMessage="Supporter"
+              id="Hyr5ET"
+              description="src/components/Dialogs/SupportersDialog/Content.tsx"
+            />
+            <sup className={styles.count}>{totalCount}</sup>
           </>
         }
-        closeDialog={closeDialog}
-        closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+        titleLeft
+        rightBtn={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
       />
 
       <Dialog.Content noSpacing>
@@ -87,21 +102,29 @@ const SupportersDialogContent = ({
           loadMore={loadMore}
           hasNextPage={pageInfo.hasNextPage}
         >
-          {edges.map(({ node, cursor }, i) => (
-            <UserDigest.Rich
-              user={node}
-              key={cursor}
-              onClick={() => {
-                analytics.trackEvent('click_feed', {
-                  type: 'donators',
-                  contentType: 'user',
-                  location: i,
-                  id: node.id,
-                })
-              }}
-              hasFollow={false}
-            />
-          ))}
+          <List
+            hasBorder={false}
+            spacing={isSmUp ? ['base', 'baseLoose'] : ['base', 'base']}
+          >
+            {edges.map(({ node, cursor }, i) => (
+              <List.Item key={cursor}>
+                <UserDigest.Rich
+                  user={node}
+                  key={cursor}
+                  onClick={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: 'donators',
+                      contentType: 'user',
+                      location: i,
+                      id: node.id,
+                    })
+                  }}
+                  hasFollow={false}
+                  spacing={[0, 0]}
+                />
+              </List.Item>
+            ))}
+          </List>
         </InfiniteScroll>
       </Dialog.Content>
 

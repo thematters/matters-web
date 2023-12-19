@@ -785,6 +785,10 @@
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "Hyr5ET": {
+    "defaultMessage": "Supporter",
+    "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
+  },
   "IKPYe9": {
     "defaultMessage": "View",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"

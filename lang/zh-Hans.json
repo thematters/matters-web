@@ -785,6 +785,10 @@
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "Hyr5ET": {
+    "defaultMessage": "支持者",
+    "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
+  },
   "IKPYe9": {
     "defaultMessage": "查看",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
