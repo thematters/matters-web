@@ -21,7 +21,6 @@ import {
   Spacer,
   Spinner,
   TextIcon,
-  Translate,
   useEventListener,
   ViewerContext,
 } from '~/components'
@@ -204,7 +203,7 @@ const SupportWidget = ({ article }: DonationProps) => {
               {isViewerDonated && (
                 <section className={styles.transaction}>
                   <span className={styles.transactionLeft}>
-                    <Translate zh_hant="查看" zh_hans="查看" en="View" />
+                    <FormattedMessage defaultMessage="View" id="FgydNe" />
                   </span>
                   <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
                     <span className={styles.transactionButton}>
@@ -214,10 +213,9 @@ const SupportWidget = ({ article }: DonationProps) => {
                         size="xs"
                         spacing="xxxtight"
                       >
-                        <Translate
-                          zh_hant="交易記錄"
-                          zh_hans="交易记录"
-                          en="Transaction History"
+                        <FormattedMessage
+                          defaultMessage="Transaction History"
+                          id="z4Dl+l"
                         />
                       </TextIcon>
                     </span>

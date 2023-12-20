@@ -11,7 +11,6 @@ import {
   LanguageContext,
   TextIcon,
   toast,
-  Translate,
   useRoute,
 } from '~/components'
 import { ArticleDetailPublicQuery, EditMetaDraftFragment } from '~/gql/graphql'
@@ -83,7 +82,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       editSupportSetting(values.requestForDonation, values.replyToDonator)
 
       toast.success({
-        message: <Translate id="successSetSupportSetting" />,
+        message: (
+          <FormattedMessage
+            defaultMessage="Support setting updated"
+            id="wNJjR5"
+          />
+        ),
       })
 
       setSubmitting(false)
@@ -105,7 +109,9 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       <Form id={formId} onSubmit={handleSubmit}>
         {tab === 'request' && (
           <Form.Textarea
-            label={<Translate id="requestForDonation" />}
+            label={
+              <FormattedMessage defaultMessage="Call-to-Support" id="ptTHBL" />
+            }
             name="requestForDonation"
             placeholder={intl.formatMessage({
               defaultMessage:
@@ -126,13 +132,16 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         )}
         {tab === 'reply' && (
           <Form.Textarea
-            label={<Translate id="replyToDonator" />}
+            label={
+              <FormattedMessage defaultMessage="Thank-you card" id="xQNq3I" />
+            }
             name="replyToDonator"
             placeholder={intl.formatMessage({
               defaultMessage:
                 'With your support, I will be able to accumulate more energy to create.',
               id: 'E+dEI9',
             })}
+            value={values.replyToDonator! || ''}
             hint={`${
               values.replyToDonator?.length || 0
             }/${MAX_ARTICLE_SUPPORT_LENGTH}`}
@@ -185,10 +194,10 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
 
         <h3 className={styles.previewTitle}>
           <TextIcon size="md" weight="md">
-            <Translate
-              zh_hans="效果预览"
-              zh_hant="效果預覽"
-              en="Support Setting Preview"
+            <FormattedMessage
+              defaultMessage="Preview"
+              id="zn83cE"
+              description="src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
             />
           </TextIcon>
         </h3>

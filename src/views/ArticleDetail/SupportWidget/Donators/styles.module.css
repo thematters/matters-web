@@ -5,7 +5,7 @@
   gap: var(--spacing-base) var(--spacing-x-tight);
   max-width: 312px;
 
-  @media (--sm-up) {
+  @media (--lg-up) {
     gap: var(--spacing-base) var(--spacing-tight);
     max-width: 428px;
   }

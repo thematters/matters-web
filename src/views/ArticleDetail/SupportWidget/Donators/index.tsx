@@ -18,14 +18,14 @@ const AvatarItem = ({ user }: AvatarItemPros) => {
   return (
     <Tooltip content={user?.displayName || ''} placement="top">
       <div className={styles.avatarItem}>
-        <Media at="sm">
+        <Media lessThan="xl">
           <Avatar
             user={user || undefined}
             src={user ? undefined : IMAGE_PIXEL}
             size="md"
           />
         </Media>
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="xl">
           <Avatar
             user={user || undefined}
             src={user ? undefined : IMAGE_PIXEL}
@@ -55,7 +55,7 @@ const Donators = ({
   const donators = (
     edges?.map(({ node }) => node).filter((user) => !!user) || []
   ).slice(0, maxAvatarNum)
-  const frontDonators = donators.slice(0, maxAvatarNum - 1)
+  let frontDonators = donators.slice(0, maxAvatarNum - 1)
 
   const containerClasses = classNames({
     [styles.clickable]: isAuthor,

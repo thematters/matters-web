@@ -1,4 +1,6 @@
-import { Tabs, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Tabs } from '~/components'
 
 export type TabType = 'request' | 'reply'
 
@@ -14,11 +16,11 @@ const SortBy: React.FC<SortByProps> = ({ tabType, setTabType }) => {
   return (
     <Tabs>
       <Tabs.Tab onClick={() => setTabType('request')} selected={isRequest}>
-        <Translate id="requestForDonation" />
+        <FormattedMessage defaultMessage="Call-to-Support" id="ptTHBL" />
       </Tabs.Tab>
 
       <Tabs.Tab onClick={() => setTabType('reply')} selected={isReply}>
-        <Translate id="replyToDonator" />
+        <FormattedMessage defaultMessage="Thank-you card" id="xQNq3I" />
       </Tabs.Tab>
     </Tabs>
   )

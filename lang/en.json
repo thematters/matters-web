@@ -1912,6 +1912,9 @@
     "defaultMessage": "1MB maximum",
     "description": "MIGRATION_REACH_LIMIT"
   },
+  "ptTHBL": {
+    "defaultMessage": "Call-to-Support"
+  },
   "pzTOmv": {
     "defaultMessage": "Followers"
   },
@@ -2138,6 +2141,9 @@
     "defaultMessage": "Notification not found",
     "description": "NOTICE_NOT_FOUND"
   },
+  "wNJjR5": {
+    "defaultMessage": "Support setting updated"
+  },
   "wXzTZ0": {
     "defaultMessage": "Enter the name of your Circle"
   },
@@ -2163,6 +2169,9 @@
   "xOUZu2": {
     "defaultMessage": "Pin to profile",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
+  },
+  "xQNq3I": {
+    "defaultMessage": "Thank-you card"
   },
   "xWZr13": {
     "defaultMessage": "{follower, plural, =1 {follower} other {followers}}",
@@ -2249,6 +2258,9 @@
   "z3uIHQ": {
     "defaultMessage": "Undo upvote"
   },
+  "z4Dl+l": {
+    "defaultMessage": "Transaction History"
+  },
   "zAK5G+": {
     "defaultMessage": "The login link has been sent to {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
@@ -2274,6 +2286,10 @@
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zn83cE": {
+    "defaultMessage": "Preview",
+    "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
   },
   "znJ06J": {
     "defaultMessage": "<a>About Nomad Matters</a>"

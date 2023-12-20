@@ -277,7 +277,7 @@
     "defaultMessage": "目前尚无标签，立即添加提高作品曝光度！"
   },
   "5IS+ui": {
-    "defaultMessage": "设定支持"
+    "defaultMessage": "支持设置"
   },
   "5JN+nl": {
     "defaultMessage": "请检查邮件",
@@ -1912,6 +1912,9 @@
     "defaultMessage": "导入作品累計超过 1MB",
     "description": "MIGRATION_REACH_LIMIT"
   },
+  "ptTHBL": {
+    "defaultMessage": "支持号召"
+  },
   "pzTOmv": {
     "defaultMessage": "追踪者"
   },
@@ -2138,6 +2141,9 @@
     "defaultMessage": "通知不存在",
     "description": "NOTICE_NOT_FOUND"
   },
+  "wNJjR5": {
+    "defaultMessage": "支持反馈设置成功"
+  },
   "wXzTZ0": {
     "defaultMessage": "給圍爐取一個吸引人的名字吧"
   },
@@ -2163,6 +2169,9 @@
   "xOUZu2": {
     "defaultMessage": "设为代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
+  },
+  "xQNq3I": {
+    "defaultMessage": "支持后回复"
   },
   "xWZr13": {
     "defaultMessage": "{follower, plural, =1 {人} other {人}}",
@@ -2249,6 +2258,9 @@
   "z3uIHQ": {
     "defaultMessage": "取消点赞"
   },
+  "z4Dl+l": {
+    "defaultMessage": "交易记录"
+  },
   "zAK5G+": {
     "defaultMessage": "登录链接已发送至 {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
@@ -2274,6 +2286,10 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zn83cE": {
+    "defaultMessage": "效果预览",
+    "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
   },
   "znJ06J": {
     "defaultMessage": "<a>关于游牧者计划</a>"
