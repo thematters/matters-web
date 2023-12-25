@@ -13,42 +13,38 @@ import { numAbbr } from '~/common/utils'
 import {
   Button,
   ButtonProps,
-  Card,
   CardProps,
   CommentFormDialog,
-  IconComment16,
-  Media,
+  IconComment24,
   TextIcon,
   toast,
-  Translate,
   ViewerContext,
 } from '~/components'
 import {
-  CommentBarArticlePrivateFragment,
-  CommentBarArticlePublicFragment,
+  CommentButtonArticlePrivateFragment,
+  CommentButtonArticlePublicFragment,
 } from '~/gql/graphql'
 
-import styles from './styles.module.css'
+type CommentButtonArticle = CommentButtonArticlePublicFragment &
+  Partial<CommentButtonArticlePrivateFragment>
 
-type CommentBarArticle = CommentBarArticlePublicFragment &
-  Partial<CommentBarArticlePrivateFragment>
-
-interface CommentBarProps {
-  article: CommentBarArticle
+interface CommentButtonProps {
+  article: CommentButtonArticle
   disabled?: boolean
+  hasBorder?: boolean
 }
 
 const fragments = {
   article: {
     public: gql`
-      fragment CommentBarArticlePublic on Article {
+      fragment CommentButtonArticlePublic on Article {
         id
         responseCount
         canComment
       }
     `,
     private: gql`
-      fragment CommentBarArticlePrivate on Article {
+      fragment CommentButtonArticlePrivate on Article {
         id
         author {
           id
@@ -61,62 +57,50 @@ const fragments = {
 
 const Content = ({
   article,
+  hasBorder,
   ...props
 }: (CardProps | ButtonProps) & {
-  article: CommentBarArticle
+  article: CommentButtonArticle
+  hasBorder?: boolean
 }) => {
   const intl = useIntl()
 
   return (
     <>
-      <Media at="sm">
-        <Button
-          spacing={['xtight', 'xtight']}
-          bgActiveColor="greyLighter"
-          aria-label={`${intl.formatMessage({
-            defaultMessage: 'Comment',
-            id: 'Ix3e3Q',
-            description: 'src/components/Forms/CommentForm/index.tsx',
-          })}…`}
-          aria-haspopup="dialog"
-          {...(props as ButtonProps)}
+      <Button
+        spacing={['xtight', 'tight']}
+        borderWidth={hasBorder ? 'sm' : undefined}
+        borderColor={hasBorder ? 'greyLighterActive' : undefined}
+        borderActiveColor={hasBorder ? 'greyLight' : undefined}
+        borderRadius={hasBorder ? '0.75rem' : undefined}
+        aria-label={`${intl.formatMessage({
+          defaultMessage: 'Comment',
+          id: 'Ix3e3Q',
+          description: 'src/components/Forms/CommentForm/index.tsx',
+        })}…`}
+        aria-haspopup="dialog"
+        {...(props as ButtonProps)}
+      >
+        <TextIcon
+          icon={<IconComment24 size="md" />}
+          weight="md"
+          spacing="xtight"
+          size="sm"
         >
-          <TextIcon
-            icon={<IconComment16 size="mdS" />}
-            weight="md"
-            spacing="xtight"
-            size="sm"
-          >
-            {article.responseCount > 0
-              ? numAbbr(article.responseCount)
-              : undefined}
-          </TextIcon>
-        </Button>
-      </Media>
-      <Media greaterThan="sm">
-        <Card
-          bgColor="greyLighter"
-          spacing={[0, 0]}
-          borderRadius="base"
-          role="button"
-          ariaHasPopup="dialog"
-          {...(props as CardProps)}
-        >
-          <p className={styles.content}>
-            <FormattedMessage
-              defaultMessage="Comment"
-              id="Ix3e3Q"
-              description="src/components/Forms/CommentForm/index.tsx"
-            />
-            <Translate zh_hant="…" zh_hans="…" en="…" />
-          </p>
-        </Card>
-      </Media>
+          {article.responseCount > 0
+            ? numAbbr(article.responseCount)
+            : undefined}
+        </TextIcon>
+      </Button>
     </>
   )
 }
 
-const CommentBar = ({ article, disabled }: CommentBarProps) => {
+const CommentButton = ({
+  article,
+  disabled,
+  hasBorder,
+}: CommentButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   const refetchResponses = () => {
@@ -131,6 +115,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
     return (
       <Content
         article={article}
+        hasBorder={hasBorder}
         onClick={() => {
           toast.error({
             message: (
@@ -148,6 +133,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
     return (
       <Content
         article={article}
+        hasBorder={hasBorder}
         onClick={() => {
           toast.error({
             message: (
@@ -175,7 +161,14 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       },
     }
 
-    return <Content aria-haspopup="dialog" article={article} {...props} />
+    return (
+      <Content
+        aria-haspopup="dialog"
+        article={article}
+        hasBorder={hasBorder}
+        {...props}
+      />
+    )
   }
 
   return (
@@ -187,6 +180,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       {({ openDialog }) => (
         <Content
           article={article}
+          hasBorder={hasBorder}
           aria-haspopup="dialog"
           onClick={openDialog}
         />
@@ -195,6 +189,6 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
   )
 }
 
-CommentBar.fragments = fragments
+CommentButton.fragments = fragments
 
-export default CommentBar
+export default CommentButton

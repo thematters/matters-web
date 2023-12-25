@@ -34,19 +34,19 @@ interface AppreciationButtonProps {
     Partial<AppreciationButtonArticlePrivateFragment>
   privateFetched: boolean
   disabled?: boolean
+  hasBorder?: boolean
 }
 
 const AppreciationButton = ({
   article,
   privateFetched,
   disabled,
+  hasBorder,
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   const turnstileRef = useRef<TurnstileInstance>(null)
   const { token, refreshToken } = useContext(ReCaptchaContext)
-
-  const isArticleAuthor = article.author.id === viewer.id
 
   /**
    * Normal Appreciation
@@ -61,7 +61,7 @@ const AppreciationButton = ({
       : limit) - amount
   const total = article.likesReceivedTotal + amount
   const appreciatedCount = limit - left
-  const isReachLimit = left <= 0 || isArticleAuthor
+  const isReachLimit = left <= 0
   const debouncedSendAppreciation = useDebouncedCallback(async () => {
     try {
       await sendAppreciation({
@@ -187,29 +187,9 @@ const AppreciationButton = ({
     return <ForbiddenButton total={total} />
   }
 
-  // Article Author
-  if (isArticleAuthor && !isSuperLike) {
-    return (
-      <Tooltip
-        content={
-          <Translate
-            zh_hant="去讚賞其他用戶吧"
-            zh_hans="去赞赏其他用户吧"
-            en="send Likes to others"
-          />
-        }
-        zIndex={Z_INDEX.OVER_BOTTOM_BAR}
-      >
-        <span>
-          <AppreciateButton disabled total={total} />
-        </span>
-      </Tooltip>
-    )
-  }
-
   // Blocked by private query
   if (!privateFetched) {
-    return <AppreciateButton total={total} disabled />
+    return <AppreciateButton total={total} disabled hasBorder={hasBorder} />
   }
 
   const siteKey = process.env
@@ -240,6 +220,7 @@ const AppreciationButton = ({
           total={total}
           isSuperLike={isSuperLike}
           superLiked={superLiked}
+          hasBorder={hasBorder}
         />
       </section>
     )
@@ -273,13 +254,14 @@ const AppreciationButton = ({
         }}
         isSuperLike={isSuperLike}
         superLiked={superLiked}
+        hasBorder={hasBorder}
       />
     )
   }
 
   // MAX
   if (isReachLimit && !isSuperLike) {
-    return <AppreciateButton count="MAX" total={total} />
+    return <AppreciateButton count="MAX" total={total} hasBorder={hasBorder} />
   }
 
   // Disabled
@@ -299,6 +281,7 @@ const AppreciationButton = ({
           disabled
           count={appreciatedCount > 0 ? appreciatedCount : undefined}
           total={total}
+          hasBorder={hasBorder}
         />
       </span>
     </Tooltip>

@@ -438,6 +438,12 @@ span.container {
   }
 }
 
+.borderGreyLighterActive {
+  & .hotarea {
+    border-color: var(--color-grey-lighter-active);
+  }
+}
+
 .borderGreenLighter {
   & .hotarea {
     border-color: var(--color-green-lighter);
@@ -465,6 +471,15 @@ span.container {
 .borderLikecoinGreen {
   & .hotarea {
     border-color: var(--color-likecoin-green);
+  }
+}
+
+.borderActiveGreyLight {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-grey-light);
+    }
   }
 }
 

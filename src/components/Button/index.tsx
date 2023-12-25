@@ -112,7 +112,10 @@ type ButtonBgActiveColor = Extract<
   | 'red'
 >
 
-type ButtonBorderActiveColor = Extract<ButtonColor, 'greenDark' | 'black'>
+type ButtonBorderActiveColor = Extract<
+  ButtonColor,
+  'greenDark' | 'black' | 'greyLight'
+>
 
 export type ButtonProps = {
   size?: [ButtonWidth, ButtonHeight]
@@ -127,7 +130,7 @@ export type ButtonProps = {
   borderColor?: ButtonColor
   borderActiveColor?: ButtonBorderActiveColor
   borderWidth?: 'sm' | 'mdS' | 'md'
-  borderRadius?: 0 | '5rem'
+  borderRadius?: 0 | '0.75rem' | '5rem'
 
   href?: string
   replace?: boolean

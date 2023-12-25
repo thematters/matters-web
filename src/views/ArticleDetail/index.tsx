@@ -53,7 +53,7 @@ import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.module.css'
 import TagList from './TagList'
-import Toolbar from './Toolbar'
+import DesktopToolbar from './Toolbar/DesktopToolbar'
 import TranslationToast from './TranslationToast'
 
 const DynamicSupportWidget = dynamic(() => import('./SupportWidget'), {
@@ -316,6 +316,16 @@ const BaseArticleDetail = ({
 
         {features.payment && <DynamicSupportWidget article={article} />}
 
+        <DesktopToolbar
+          article={article}
+          articleDetails={article}
+          translated={translated}
+          translatedLanguage={translatedLanguage}
+          privateFetched={privateFetched}
+          hasFingerprint={canReadFullContent}
+          lock={!canReadFullContent}
+        />
+
         {collectionCount > 0 && (
           <section className={styles.block}>
             <DynamicCollection
@@ -333,17 +343,6 @@ const BaseArticleDetail = ({
           <RelatedArticles article={article} />
         </Media>
       </section>
-
-      <Toolbar
-        article={article}
-        articleDetails={article}
-        translated={translated}
-        translatedLanguage={translatedLanguage}
-        privateFetched={privateFetched}
-        hasFingerprint={canReadFullContent}
-        hasExtend={!article.author?.isBlocking}
-        lock={!canReadFullContent}
-      />
 
       {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}
 

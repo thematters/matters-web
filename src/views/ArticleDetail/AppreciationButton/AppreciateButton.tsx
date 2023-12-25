@@ -5,7 +5,7 @@ import { TEST_ID } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
 import {
   Button,
-  IconClap16,
+  IconClap24,
   IconSuperLike,
   LanguageContext,
   TextIcon,
@@ -22,6 +22,7 @@ interface AppreciateButtonProps {
   total: number
   isSuperLike?: boolean
   superLiked?: boolean
+  hasBorder?: boolean
 }
 
 const AppreciateButton: React.FC<AppreciateButtonProps> = ({
@@ -31,6 +32,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   total,
   isSuperLike,
   superLiked,
+  hasBorder,
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -44,8 +46,11 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   return (
     <span className={buttonClasses}>
       <Button
-        spacing={['xtight', 'xtight']}
-        bgActiveColor="greyLighter"
+        spacing={['xtight', 'tight']}
+        borderWidth={hasBorder ? 'sm' : undefined}
+        borderColor={hasBorder ? 'greyLighterActive' : undefined}
+        borderActiveColor={hasBorder ? 'greyLight' : undefined}
+        borderRadius={hasBorder ? '0.75rem' : undefined}
         aria-label={translate({
           zh_hant: `讚賞作品（當前 ${total} 次讚賞）`,
           zh_hans: `赞赏作品（当前 ${total} 次赞赏）`,
@@ -77,23 +82,25 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
                 }
               }}
             >
-              <IconClap16
+              <IconClap24
                 className={[styles.iconLike, clapStyles.iconLike].join(' ')}
-                size="mdS"
+                size="md"
               />
               <IconSuperLike
                 className={[
                   styles.iconSuperlike,
                   clapStyles.iconSuperlike,
                 ].join(' ')}
-                size="mdS"
+                size="md"
               />
             </span>
           }
         >
-          <span data-test-id={TEST_ID.ARTICLE_APPRECIATION_TOTAL}>
-            {total > 0 ? numAbbr(total) : undefined}
-          </span>
+          {total > 0 && (
+            <span data-test-id={TEST_ID.ARTICLE_APPRECIATION_TOTAL}>
+              {numAbbr(total)}
+            </span>
+          )}
         </TextIcon>
       </Button>
     </span>

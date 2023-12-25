@@ -92,6 +92,8 @@ export interface DropdownActionsControls {
   hasArchive?: boolean
   hasEdit?: boolean
   hasBookmark?: boolean
+  hasAppreciators?: boolean
+  hasDonators?: boolean
 
   collectionId?: string
   collectionArticleCount?: number
@@ -342,6 +344,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
     hasEdit,
     hasArchive,
+    hasDonators,
+    hasAppreciators,
     hasBookmark = true,
     hasAddCollection,
     hasRemoveCollection,
@@ -364,8 +368,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const controls = {
     // public
     hasShare: !!hasShare,
-    hasAppreciators: article.likesReceived.totalCount > 0 && !inCard,
-    hasDonators: article.donationsDialog.totalCount > 0 && !inCard,
+    hasAppreciators:
+      hasAppreciators && article.likesReceived.totalCount > 0 && !inCard,
+    hasDonators:
+      hasDonators && article.donationsDialog.totalCount > 0 && !inCard,
     hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
 
