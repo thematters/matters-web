@@ -64,6 +64,8 @@
 
     & img {
       @mixin object-fit-cover;
+
+      object-position: right bottom;
     }
 
     & picture,
