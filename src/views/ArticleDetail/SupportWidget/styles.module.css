@@ -1,17 +1,19 @@
 .supportWidget {
-  margin: calc(var(--spacing-base) + 2.5rem / 2) 0
-    calc(var(--spacing-loose) + 1.25rem / 2);
+  margin: var(--spacing-x-loose) 0;
 }
 
 .donation {
   @mixin flex-center-all;
+  @mixin polka-dot-background;
 
   position: relative;
   flex-direction: column;
-  padding: var(--spacing-base);
+  padding: var(--spacing-xx-loose) var(--spacing-base);
   text-align: center;
-  background: var(--color-yellow-lighter);
-  border-radius: 1.25rem;
+
+  @media (--sm-up) {
+    padding: var(--spacing-base-xx-loose) var(--spacing-base);
+  }
 
   & p {
     font-size: var(--font-size-sm);
@@ -19,11 +21,11 @@
   }
 
   &.note p {
-    max-width: 25rem;
+    max-width: 29rem;
   }
 
   & .donationButton {
-    margin-top: var(--spacing-base);
+    margin-top: var(--spacing-loose);
   }
 
   & .donators {
@@ -35,21 +37,18 @@
   & .transaction {
     @mixin flex-center-all;
 
-    margin-top: var(--spacing-loose);
+    margin-top: var(--spacing-base);
     font-size: var(--font-size-xs);
-    line-height: 1;
 
     & .transactionLeft {
       display: inline-flex;
-      line-height: 1.25rem;
+      line-height: 1.125rem;
+      color: var(--color-grey-darker);
     }
 
     & .transactionButton {
       display: inline-flex;
-      padding-top: 2px;
-      padding-bottom: 1px;
       margin-left: var(--spacing-xx-tight);
-      border-bottom: 1px solid var(--color-matters-gold);
     }
   }
 }

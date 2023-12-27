@@ -227,6 +227,9 @@
     "defaultMessage": "登入",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3Y6k4g": {
+    "defaultMessage": "喜歡我的作品嗎？別忘了給予支持與讚賞，讓我知道在創作的路上有你陪伴，一起延續這份熱忱！"
+  },
   "3fqQHv": {
     "defaultMessage": "添加協作者"
   },
@@ -274,7 +277,7 @@
     "defaultMessage": "目前尚無標籤，立即添加提高作品曝光度！"
   },
   "5IS+ui": {
-    "defaultMessage": "設定支持"
+    "defaultMessage": "支持設置"
   },
   "5JN+nl": {
     "defaultMessage": "請檢查郵件",
@@ -632,6 +635,9 @@
     "defaultMessage": "取消代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
   },
+  "E+dEI9": {
+    "defaultMessage": "有了你的支持，我將能夠蓄積更多能量創作"
+  },
   "E8W3qa": {
     "defaultMessage": "2-20 個字元"
   },
@@ -784,6 +790,10 @@
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "Hyr5ET": {
+    "defaultMessage": "支持者",
+    "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
   },
   "IKPYe9": {
     "defaultMessage": "查看",
@@ -945,6 +955,9 @@
     "defaultMessage": "Matters ID 為用戶唯一標識，設置後無法修改。",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "M05PcB": {
+    "defaultMessage": "想對你說："
+  },
   "MDNaxs": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -972,6 +985,9 @@
     "defaultMessage": "設定 - 圍爐通知",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "Myrqtn": {
+    "defaultMessage": "🎉 感謝支持！"
+  },
   "N2IrpM": {
     "defaultMessage": "確認"
   },
@@ -993,6 +1009,10 @@
   "NONfAh": {
     "defaultMessage": "豆瓣",
     "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "NbdvAd": {
+    "defaultMessage": "支持者名單",
+    "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
   },
   "NdtzIs": {
     "defaultMessage": "郵件地址驗證連結已發送至 {email}",
@@ -1079,6 +1099,10 @@
   "RFzVUD": {
     "defaultMessage": "取消置頂",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "RGEpvx": {
+    "defaultMessage": "編輯文案",
+    "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
   },
   "ROPCC0": {
     "defaultMessage": "請先綁定郵箱",
@@ -1888,6 +1912,9 @@
     "defaultMessage": "導入作品累計超過 1MB",
     "description": "MIGRATION_REACH_LIMIT"
   },
+  "ptTHBL": {
+    "defaultMessage": "支持號召"
+  },
   "pzTOmv": {
     "defaultMessage": "追蹤者"
   },
@@ -2114,6 +2141,9 @@
     "defaultMessage": "通知不存在",
     "description": "NOTICE_NOT_FOUND"
   },
+  "wNJjR5": {
+    "defaultMessage": "支持反饋設置成功"
+  },
   "wXzTZ0": {
     "defaultMessage": "给围炉取一个吸引人的名字吧"
   },
@@ -2139,6 +2169,9 @@
   "xOUZu2": {
     "defaultMessage": "設為代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
+  },
+  "xQNq3I": {
+    "defaultMessage": "支持後回覆"
   },
   "xWZr13": {
     "defaultMessage": "{follower, plural, =1 {人} other {人}}",
@@ -2225,6 +2258,9 @@
   "z3uIHQ": {
     "defaultMessage": "取消點讚"
   },
+  "z4Dl+l": {
+    "defaultMessage": "交易記錄"
+  },
   "zAK5G+": {
     "defaultMessage": "登入連結已發送至 {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
@@ -2250,6 +2286,10 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zn83cE": {
+    "defaultMessage": "效果預覽",
+    "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
   },
   "znJ06J": {
     "defaultMessage": "<a>關於遊牧者計畫</a>"

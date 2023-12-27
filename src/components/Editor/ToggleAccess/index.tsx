@@ -152,10 +152,9 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           <section className={styles.support}>
             <section className={styles.left}>
               <h3 className={styles.title}>
-                <Translate
-                  zh_hans="设定支持"
-                  zh_hant="設定支持"
-                  en="Support Setting"
+                <FormattedMessage
+                  defaultMessage="Support Setting"
+                  id="5IS+ui"
                 />
               </h3>
 

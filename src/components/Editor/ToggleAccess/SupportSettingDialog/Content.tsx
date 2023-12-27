@@ -1,17 +1,16 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { MAX_ARTICLE_SUPPORT_LENGTH } from '~/common/enums'
-import { translate, validateSupportWords } from '~/common/utils'
+import { validateSupportWords } from '~/common/utils'
 import {
   Dialog,
   Form,
   LanguageContext,
   TextIcon,
   toast,
-  Translate,
   useRoute,
 } from '~/components'
 import { ArticleDetailPublicQuery, EditMetaDraftFragment } from '~/gql/graphql'
@@ -51,6 +50,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
   const formId = 'support-setting-form'
+  const intl = useIntl()
 
   const { getQuery } = useRoute()
   const qsType = getQuery('type') as TabType
@@ -82,7 +82,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       editSupportSetting(values.requestForDonation, values.replyToDonator)
 
       toast.success({
-        message: <Translate id="successSetSupportSetting" />,
+        message: (
+          <FormattedMessage
+            defaultMessage="Support setting updated"
+            id="wNJjR5"
+          />
+        ),
       })
 
       setSubmitting(false)
@@ -104,11 +109,14 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
       <Form id={formId} onSubmit={handleSubmit}>
         {tab === 'request' && (
           <Form.Textarea
-            label={<Translate id="requestForDonation" />}
+            label={
+              <FormattedMessage defaultMessage="Call-to-Support" id="ptTHBL" />
+            }
             name="requestForDonation"
-            placeholder={translate({
-              id: 'supportRequestDescription',
-              lang,
+            placeholder={intl.formatMessage({
+              defaultMessage:
+                'Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!',
+              id: '3Y6k4g',
             })}
             value={values.requestForDonation! || ''}
             hint={`${
@@ -124,12 +132,16 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         )}
         {tab === 'reply' && (
           <Form.Textarea
-            label={<Translate id="replyToDonator" />}
+            label={
+              <FormattedMessage defaultMessage="Thank-you card" id="xQNq3I" />
+            }
             name="replyToDonator"
-            placeholder={translate({
-              id: 'supportResponseDescription',
-              lang,
+            placeholder={intl.formatMessage({
+              defaultMessage:
+                'With your support, I will be able to accumulate more energy to create.',
+              id: 'E+dEI9',
             })}
+            value={values.replyToDonator! || ''}
             hint={`${
               values.replyToDonator?.length || 0
             }/${MAX_ARTICLE_SUPPORT_LENGTH}`}
@@ -180,12 +192,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
 
         {InnerForm(tabType)}
 
-        <h3>
+        <h3 className={styles.previewTitle}>
           <TextIcon size="md" weight="md">
-            <Translate
-              zh_hans="效果预览"
-              zh_hant="效果預覽"
-              en="Support Setting Preview"
+            <FormattedMessage
+              defaultMessage="Preview"
+              id="zn83cE"
+              description="src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
             />
           </TextIcon>
         </h3>

@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import jump from 'jump.js'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   PATHS,
@@ -20,13 +21,13 @@ import {
   Spacer,
   Spinner,
   TextIcon,
-  Translate,
   useEventListener,
   ViewerContext,
 } from '~/components'
 import { ArticleDetailPublicQuery, HasDonatedQuery } from '~/gql/graphql'
 
 import Donators from './Donators'
+import EditCopyButton from './EditCopyButton'
 import { fragments, HAS_DONATED } from './gql'
 import styles from './styles.module.css'
 import SupportButton from './SupportButton'
@@ -54,6 +55,8 @@ const SupportWidget = ({ article }: DonationProps) => {
     [styles.supportWidget]: true,
     [styles.hasCircle]: article?.access.circle,
   })
+  const isReader = viewer.id !== article.author.id
+  const isAuthor = viewer.id === article.author.id
 
   const {
     data: hasDonatedData,
@@ -115,7 +118,7 @@ const SupportWidget = ({ article }: DonationProps) => {
         <section className={`${styles.donation} ${styles.note}`}>
           {loading && <IconSpinner16 color="greyLight" size="lg" />}
 
-          {!loading && (
+          {!loading && isReader && (
             <>
               {isViewerDonated && (
                 <>
@@ -124,13 +127,12 @@ const SupportWidget = ({ article }: DonationProps) => {
                       <Avatar user={article?.author} size="xl" />
                       <p>
                         <TextIcon weight="md">
-                          {article?.author.displayName}
+                          {article?.author.displayName}&nbsp;
                         </TextIcon>
                         <TextIcon color="greyDarker">
-                          <Translate
-                            zh_hant="&nbsp;想對你說："
-                            zh_hans="&nbsp;想對你說："
-                            en="&nbsp;says: "
+                          <FormattedMessage
+                            defaultMessage="says: "
+                            id="M05PcB"
                           />
                         </TextIcon>
                       </p>
@@ -144,19 +146,17 @@ const SupportWidget = ({ article }: DonationProps) => {
                     <section>
                       <p>
                         <TextIcon weight="bold" size="md">
-                          <Translate
-                            zh_hant="🎉 感謝支持！"
-                            zh_hans="🎉 感谢支持！"
-                            en="🎉 Thank you for support!"
+                          <FormattedMessage
+                            defaultMessage="🎉 Thank you for support!"
+                            id="Myrqtn"
                           />
                         </TextIcon>
                       </p>
                       <Spacer size="xtight" />
                       <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REPLY}>
-                        <Translate
-                          zh_hant="感謝支持，創作這條路不容易，有你的支持我將能夠蓄積更多能量創作。"
-                          zh_hans="感谢支持，创作这条路不容易，有你的支持我将能够蓄积更多能量创作。"
-                          en="Thank for your support. The way isn’t always easy being a creator. With your generous support, I can accumulate more energy to go on."
+                        <FormattedMessage
+                          defaultMessage="With your support, I will be able to accumulate more energy to create."
+                          id="E+dEI9"
                         />
                       </p>
                     </section>
@@ -173,16 +173,9 @@ const SupportWidget = ({ article }: DonationProps) => {
                   )}
                   {!requestForDonation && (
                     <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
-                      <Translate
-                        zh_hant="喜歡我的文章嗎？"
-                        zh_hans="喜欢我的文章吗？"
-                        en="Like my work?"
-                      />
-                      <br />
-                      <Translate
-                        zh_hant="別忘了給點支持與讚賞，讓我知道創作的路上有你陪伴。"
-                        zh_hans="别忘了给点支持与赞赏，让我知道创作的路上有你陪伴。"
-                        en="Don't forget to support or like, so I know you are with me.."
+                      <FormattedMessage
+                        defaultMessage="Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
+                        id="3Y6k4g"
                       />
                     </p>
                   )}
@@ -210,23 +203,55 @@ const SupportWidget = ({ article }: DonationProps) => {
               {isViewerDonated && (
                 <section className={styles.transaction}>
                   <span className={styles.transactionLeft}>
-                    <Translate zh_hant="查看" zh_hans="查看" en="View" />
+                    <FormattedMessage defaultMessage="View" id="FgydNe" />
                   </span>
                   <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
                     <span className={styles.transactionButton}>
                       <TextIcon
-                        icon={<IconDollarCircle16 />}
-                        color="gold"
+                        icon={<IconDollarCircle16 color="black" />}
+                        color="black"
                         size="xs"
+                        spacing="xxxtight"
                       >
-                        <Translate
-                          zh_hant="交易記錄"
-                          zh_hans="交易记录"
-                          en="Transaction History"
+                        <FormattedMessage
+                          defaultMessage="Transaction History"
+                          id="z4Dl+l"
                         />
                       </TextIcon>
                     </span>
                   </Button>
+                </section>
+              )}
+            </>
+          )}
+
+          {!loading && isAuthor && (
+            <>
+              {requestForDonation && (
+                <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
+                  {requestForDonation}
+                </p>
+              )}
+              {!requestForDonation && (
+                <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
+                  <FormattedMessage
+                    defaultMessage="Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
+                    id="3Y6k4g"
+                  />
+                </p>
+              )}
+
+              <section className={styles.donationButton}>
+                <EditCopyButton article={article} />
+              </section>
+
+              {article.donations.totalCount > 0 && (
+                <section className={styles.donators}>
+                  <Donators
+                    article={article}
+                    showAvatarAnimation={showAvatarAnimation}
+                    isAuthor={isAuthor}
+                  />
                 </section>
               )}
             </>

@@ -22,7 +22,7 @@ import {
 import BottomBar from '~/components/Editor/BottomBar'
 import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
-import { QueryError, useImperativeQuery, useMutation } from '~/components/GQL'
+import { QueryError, useImperativeQuery } from '~/components/GQL'
 import {
   ArticleAccessType,
   ArticleDetailPublicQuery,
@@ -31,16 +31,12 @@ import {
   AssetFragment,
   DigestRichCirclePublicFragment,
   DigestTagFragment,
-  EditArticleSupportSettingMutation,
   EditModeArticleAssetsQuery,
   EditModeArticleQuery,
 } from '~/gql/graphql'
 
-import {
-  EDIT_ARTICLE_SUPPORT_SETTING,
-  EDIT_MODE_ARTICLE,
-  EDIT_MODE_ARTICLE_ASSETS,
-} from './gql'
+import { useEditArticleDetailSupportSetting } from '../Hook'
+import { EDIT_MODE_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
 import EditModeHeader from './Header'
 import PublishState from './PublishState'
 import styles from './styles.module.css'
@@ -49,27 +45,6 @@ interface EditModeProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>
   onCancel: () => void
   onSaved: () => void
-}
-
-export const useEditArticleDetailSupportSetting = (
-  article?: ArticleDetailPublicQuery['article']
-) => {
-  const articleId = article?.id
-  const [update, { loading: saving }] =
-    useMutation<EditArticleSupportSettingMutation>(EDIT_ARTICLE_SUPPORT_SETTING)
-
-  const edit = (
-    requestForDonation: string | null,
-    replyToDonator: string | null
-  ) =>
-    update({
-      variables: {
-        id: articleId,
-        requestForDonation,
-        replyToDonator,
-      },
-    })
-  return { edit, saving }
 }
 
 const Editor = dynamic(

@@ -14,6 +14,13 @@
     }
   }
 
+  &.spacingYBaseLoose {
+    & > :global(.list-item) {
+      padding-bottom: calc(var(--spacing-base-loose) / 2);
+      margin-bottom: calc(var(--spacing-base-loose) / 2);
+    }
+  }
+
   &.spacingYLoose {
     & > :global(.list-item) {
       padding-bottom: calc(var(--spacing-loose) / 2);
@@ -32,6 +39,13 @@
     & > :global(.list-item) {
       padding-right: var(--spacing-base);
       padding-left: var(--spacing-base);
+    }
+  }
+
+  &.spacingXBaseLoose {
+    & > :global(.list-item) {
+      padding-right: var(--spacing-base-loose);
+      padding-left: var(--spacing-base-loose);
     }
   }
 

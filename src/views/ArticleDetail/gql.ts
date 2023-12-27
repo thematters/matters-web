@@ -177,3 +177,23 @@ export const ARTICLE_TRANSLATION = gql`
     }
   }
 `
+
+export const EDIT_ARTICLE_SUPPORT_SETTING = gql`
+  mutation EditArticleSupportSetting(
+    $id: ID!
+    $requestForDonation: requestForDonation_String_maxLength_140
+    $replyToDonator: replyToDonator_String_maxLength_140
+  ) {
+    editArticle(
+      input: {
+        id: $id
+        requestForDonation: $requestForDonation
+        replyToDonator: $replyToDonator
+      }
+    ) {
+      id
+      requestForDonation
+      replyToDonator
+    }
+  }
+`
