@@ -110,7 +110,6 @@ const SupportersDialogContent = ({
               <List.Item key={cursor}>
                 <UserDigest.Rich
                   user={node}
-                  key={cursor}
                   onClick={() => {
                     analytics.trackEvent('click_feed', {
                       type: 'donators',
