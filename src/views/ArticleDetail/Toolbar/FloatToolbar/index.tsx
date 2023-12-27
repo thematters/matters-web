@@ -92,6 +92,7 @@ const FloatToolbar = ({
               article={article}
               privateFetched={privateFetched}
               disabled={lock}
+              textIconSpace="basexxtight"
             />
           </ReCaptchaProvider>
 
@@ -107,6 +108,7 @@ const FloatToolbar = ({
           <CommentButton
             article={article}
             disabled={lock || !article.canComment}
+            textIconSpace="basexxtight"
           />
         </section>
       </section>

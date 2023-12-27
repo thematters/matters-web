@@ -9,10 +9,12 @@ const AnonymousButton = ({
   count,
   total,
   iconSize = 'mdS',
+  textIconSpace = 'xtight',
 }: {
   count?: number
   total: number
   iconSize?: 'mdS' | 'md'
+  textIconSpace?: 'xtight' | 'basexxtight'
 }) => (
   <AppreciateButton
     count={count}
@@ -25,6 +27,7 @@ const AnonymousButton = ({
       )
     }}
     iconSize={iconSize}
+    textIconSpace={textIconSpace}
   />
 )
 

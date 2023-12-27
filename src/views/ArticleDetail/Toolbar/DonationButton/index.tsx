@@ -13,7 +13,7 @@ import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
   DonationDialog,
-  IconDonate24,
+  IconMoney20,
   LanguageContext,
   TextIcon,
   toast,
@@ -77,7 +77,6 @@ const DonationButton = ({
       {({ openDialog }) => (
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="greyLighter"
           aria-label={translate({
             zh_hant: `${TEXT.zh_hant.donation}（當前 ${donationCount} 次支持）`,
             zh_hans: `${TEXT.zh_hans.donation}（当前 ${donationCount} 次支持）`,
@@ -104,9 +103,9 @@ const DonationButton = ({
           }}
         >
           <TextIcon
-            icon={<IconDonate24 size="mdS" />}
+            icon={<IconMoney20 size="mdS" />}
             weight="md"
-            spacing="xtight"
+            spacing="basexxtight"
             size="sm"
           >
             {article.donationsToolbar.totalCount > 0

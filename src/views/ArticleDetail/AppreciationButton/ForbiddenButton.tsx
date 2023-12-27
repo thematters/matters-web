@@ -9,10 +9,12 @@ const ForbiddenButton = ({
   count,
   total,
   iconSize = 'mdS',
+  textIconSpace = 'xtight',
 }: {
   count?: number
   total: number
   iconSize?: 'mdS' | 'md'
+  textIconSpace?: 'xtight' | 'basexxtight'
 }) => (
   <AppreciateButton
     count={count}
@@ -27,6 +29,7 @@ const ForbiddenButton = ({
       })
     }}
     iconSize={iconSize}
+    textIconSpace={textIconSpace}
   />
 )
 

@@ -36,6 +36,7 @@ interface AppreciationButtonProps {
   disabled?: boolean
   hasBorder?: boolean
   iconSize?: 'mdS' | 'md'
+  textIconSpace?: 'xtight' | 'basexxtight'
 }
 
 const AppreciationButton = ({
@@ -44,6 +45,7 @@ const AppreciationButton = ({
   disabled,
   hasBorder,
   iconSize = 'mdS',
+  textIconSpace = 'xtight',
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -176,17 +178,35 @@ const AppreciationButton = ({
 
   // Anonymous
   if (!viewer.isAuthed) {
-    return <AnonymousButton total={total} iconSize={iconSize} />
+    return (
+      <AnonymousButton
+        total={total}
+        iconSize={iconSize}
+        textIconSpace={textIconSpace}
+      />
+    )
   }
 
   // Blocked
   if (article.author.isBlocking) {
-    return <BlockedButton total={total} iconSize={iconSize} />
+    return (
+      <BlockedButton
+        total={total}
+        iconSize={iconSize}
+        textIconSpace={textIconSpace}
+      />
+    )
   }
 
   // Frobidden
   if (viewer.isFrozen) {
-    return <ForbiddenButton total={total} iconSize={iconSize} />
+    return (
+      <ForbiddenButton
+        total={total}
+        iconSize={iconSize}
+        textIconSpace={textIconSpace}
+      />
+    )
   }
 
   // Blocked by private query
@@ -197,6 +217,7 @@ const AppreciationButton = ({
         disabled
         hasBorder={hasBorder}
         iconSize={iconSize}
+        textIconSpace={textIconSpace}
       />
     )
   }
@@ -231,6 +252,7 @@ const AppreciationButton = ({
           superLiked={superLiked}
           hasBorder={hasBorder}
           iconSize={iconSize}
+          textIconSpace={textIconSpace}
         />
       </section>
     )
@@ -266,6 +288,7 @@ const AppreciationButton = ({
         superLiked={superLiked}
         hasBorder={hasBorder}
         iconSize={iconSize}
+        textIconSpace={textIconSpace}
       />
     )
   }
@@ -278,6 +301,7 @@ const AppreciationButton = ({
         total={total}
         hasBorder={hasBorder}
         iconSize={iconSize}
+        textIconSpace={textIconSpace}
       />
     )
   }
@@ -301,6 +325,7 @@ const AppreciationButton = ({
           total={total}
           hasBorder={hasBorder}
           iconSize={iconSize}
+          textIconSpace={textIconSpace}
         />
       </span>
     </Tooltip>

@@ -109,6 +109,7 @@ const DesktopToolbar = ({
             article={article}
             hasBorder
             disabled={lock || !article.canComment}
+            iconSize="md"
           />
         </section>
 
