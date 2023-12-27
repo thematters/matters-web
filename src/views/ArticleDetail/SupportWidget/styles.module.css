@@ -1,6 +1,5 @@
 .supportWidget {
-  margin: calc(var(--spacing-base) + 2.5rem / 2) 0
-    calc(var(--spacing-loose) + 1.25rem / 2);
+  margin: var(--spacing-x-loose) 0;
 }
 
 .donation {
