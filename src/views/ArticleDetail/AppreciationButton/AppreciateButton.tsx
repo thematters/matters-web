@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { useContext, useRef } from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { numAbbr, translate } from '~/common/utils'
+import { capitalizeFirstLetter, numAbbr, translate } from '~/common/utils'
 import {
   Button,
   IconClap24,
@@ -23,6 +23,7 @@ interface AppreciateButtonProps {
   isSuperLike?: boolean
   superLiked?: boolean
   hasBorder?: boolean
+  iconSize?: 'mdS' | 'md'
 }
 
 const AppreciateButton: React.FC<AppreciateButtonProps> = ({
@@ -33,6 +34,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   isSuperLike,
   superLiked,
   hasBorder,
+  iconSize = 'mdS',
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -41,6 +43,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
     [styles.appreciateButton]: true,
     [styles.isSuperLike]: isSuperLike,
     [styles.superLiked]: superLiked,
+    [styles[`icon${capitalizeFirstLetter(iconSize)}`]]: true,
   })
 
   return (
@@ -84,14 +87,14 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
             >
               <IconClap24
                 className={[styles.iconLike, clapStyles.iconLike].join(' ')}
-                size="md"
+                size={iconSize}
               />
               <IconSuperLike
                 className={[
                   styles.iconSuperlike,
                   clapStyles.iconSuperlike,
                 ].join(' ')}
-                size="md"
+                size={iconSize}
               />
             </span>
           }

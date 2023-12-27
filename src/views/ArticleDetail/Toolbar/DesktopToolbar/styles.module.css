@@ -1,5 +1,5 @@
 .toolbar {
-  padding: var(--spacing-base);
+  margin: var(--spacing-base);
   background: var(--color-white);
 
   & .buttons {
@@ -28,7 +28,7 @@
   }
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0;
+    margin: var(--spacing-base) 0;
 
     & .commentBar {
       display: block;

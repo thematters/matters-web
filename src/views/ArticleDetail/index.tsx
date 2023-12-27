@@ -54,6 +54,7 @@ import State from './State'
 import styles from './styles.module.css'
 import TagList from './TagList'
 import DesktopToolbar from './Toolbar/DesktopToolbar'
+import FloatToolbar from './Toolbar/FloatToolbar'
 import TranslationToast from './TranslationToast'
 
 const DynamicSupportWidget = dynamic(() => import('./SupportWidget'), {
@@ -122,6 +123,7 @@ const BaseArticleDetail = ({
   const viewer = useContext(ViewerContext)
 
   const features = useFeatures()
+  const [showFloatToolbar, setShowFloatToolbar] = useState(true)
   const [fixedWall, setFixedWall] = useState(false)
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
@@ -316,15 +318,26 @@ const BaseArticleDetail = ({
 
         {features.payment && <DynamicSupportWidget article={article} />}
 
-        <DesktopToolbar
-          article={article}
-          articleDetails={article}
-          translated={translated}
-          translatedLanguage={translatedLanguage}
-          privateFetched={privateFetched}
-          hasFingerprint={canReadFullContent}
-          lock={!canReadFullContent}
-        />
+        <Waypoint
+          onEnter={() => {
+            setShowFloatToolbar(false)
+          }}
+          onLeave={() => {
+            setShowFloatToolbar(true)
+          }}
+        >
+          <div>
+            <DesktopToolbar
+              article={article}
+              articleDetails={article}
+              translated={translated}
+              translatedLanguage={translatedLanguage}
+              privateFetched={privateFetched}
+              hasFingerprint={canReadFullContent}
+              lock={!canReadFullContent}
+            />
+          </div>
+        </Waypoint>
 
         {collectionCount > 0 && (
           <section className={styles.block}>
@@ -343,6 +356,14 @@ const BaseArticleDetail = ({
           <RelatedArticles article={article} />
         </Media>
       </section>
+
+      <FloatToolbar
+        show={showFloatToolbar}
+        article={article}
+        articleDetails={article}
+        privateFetched={privateFetched}
+        lock={!canReadFullContent}
+      />
 
       {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}
 

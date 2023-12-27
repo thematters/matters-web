@@ -8,9 +8,11 @@ import AppreciateButton from './AppreciateButton'
 const ForbiddenButton = ({
   count,
   total,
+  iconSize = 'mdS',
 }: {
   count?: number
   total: number
+  iconSize?: 'mdS' | 'md'
 }) => (
   <AppreciateButton
     count={count}
@@ -24,6 +26,7 @@ const ForbiddenButton = ({
         ),
       })
     }}
+    iconSize={iconSize}
   />
 )
 

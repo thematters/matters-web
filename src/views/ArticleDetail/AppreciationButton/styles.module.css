@@ -4,10 +4,20 @@
   position: relative;
   display: inline-flex;
 
-  & .icon {
-    position: relative;
-    width: 1.5rem;
-    height: 1.5rem;
+  &.iconMdS {
+    & .icon {
+      position: relative;
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  }
+
+  &.iconMd {
+    & .icon {
+      position: relative;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
   }
 
   & .iconLike {

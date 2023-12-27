@@ -100,6 +100,7 @@ const DesktopToolbar = ({
             privateFetched={privateFetched}
             disabled={lock}
             hasBorder
+            iconSize="md"
           />
         </ReCaptchaProvider>
 

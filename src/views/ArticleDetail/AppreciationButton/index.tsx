@@ -35,6 +35,7 @@ interface AppreciationButtonProps {
   privateFetched: boolean
   disabled?: boolean
   hasBorder?: boolean
+  iconSize?: 'mdS' | 'md'
 }
 
 const AppreciationButton = ({
@@ -42,6 +43,7 @@ const AppreciationButton = ({
   privateFetched,
   disabled,
   hasBorder,
+  iconSize = 'mdS',
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -174,22 +176,29 @@ const AppreciationButton = ({
 
   // Anonymous
   if (!viewer.isAuthed) {
-    return <AnonymousButton total={total} />
+    return <AnonymousButton total={total} iconSize={iconSize} />
   }
 
   // Blocked
   if (article.author.isBlocking) {
-    return <BlockedButton total={total} />
+    return <BlockedButton total={total} iconSize={iconSize} />
   }
 
   // Frobidden
   if (viewer.isFrozen) {
-    return <ForbiddenButton total={total} />
+    return <ForbiddenButton total={total} iconSize={iconSize} />
   }
 
   // Blocked by private query
   if (!privateFetched) {
-    return <AppreciateButton total={total} disabled hasBorder={hasBorder} />
+    return (
+      <AppreciateButton
+        total={total}
+        disabled
+        hasBorder={hasBorder}
+        iconSize={iconSize}
+      />
+    )
   }
 
   const siteKey = process.env
@@ -221,6 +230,7 @@ const AppreciationButton = ({
           isSuperLike={isSuperLike}
           superLiked={superLiked}
           hasBorder={hasBorder}
+          iconSize={iconSize}
         />
       </section>
     )
@@ -255,13 +265,21 @@ const AppreciationButton = ({
         isSuperLike={isSuperLike}
         superLiked={superLiked}
         hasBorder={hasBorder}
+        iconSize={iconSize}
       />
     )
   }
 
   // MAX
   if (isReachLimit && !isSuperLike) {
-    return <AppreciateButton count="MAX" total={total} hasBorder={hasBorder} />
+    return (
+      <AppreciateButton
+        count="MAX"
+        total={total}
+        hasBorder={hasBorder}
+        iconSize={iconSize}
+      />
+    )
   }
 
   // Disabled
@@ -282,6 +300,7 @@ const AppreciationButton = ({
           count={appreciatedCount > 0 ? appreciatedCount : undefined}
           total={total}
           hasBorder={hasBorder}
+          iconSize={iconSize}
         />
       </span>
     </Tooltip>

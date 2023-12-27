@@ -8,9 +8,11 @@ import AppreciateButton from './AppreciateButton'
 const AnonymousButton = ({
   count,
   total,
+  iconSize = 'mdS',
 }: {
   count?: number
   total: number
+  iconSize?: 'mdS' | 'md'
 }) => (
   <AppreciateButton
     count={count}
@@ -22,6 +24,7 @@ const AnonymousButton = ({
         })
       )
     }}
+    iconSize={iconSize}
   />
 )
 

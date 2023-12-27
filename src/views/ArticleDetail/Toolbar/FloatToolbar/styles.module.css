@@ -1,0 +1,46 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.container {
+  @mixin flex-center-all;
+  @mixin transition;
+
+  position: fixed;
+  bottom: var(--spacing-base-loose);
+  z-index: var(--z-index-bottom-bar);
+  opacity: 0;
+  transition-property: transform, opacity;
+  transform: translateY(130%);
+}
+
+.showContainer {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toolbar {
+  @mixin inline-flex-center-all;
+
+  gap: var(--spacing-base);
+  padding: var(--spacing-base-tight) var(--spacing-base);
+  background: var(--color-white);
+  border-radius: 99px;
+  box-shadow:
+    0 2px 4px 0 rgb(0 0 0 / 14%),
+    0 1px 0 0 rgb(0 0 0 / 0%);
+  backdrop-filter: blur(12px);
+
+  & .divider {
+    width: 1px;
+    height: 13px;
+    background: var(--color-grey-light);
+  }
+
+  & section {
+    display: flex;
+  }
+}
