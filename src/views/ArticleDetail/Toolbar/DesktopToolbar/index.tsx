@@ -127,7 +127,6 @@ const DesktopToolbar = ({
           />
         </Media>
 
-        {/* TODO: update bookmarked icon */}
         <BookmarkButton article={article} size="md" inCard={false} />
 
         <Media at="sm">
