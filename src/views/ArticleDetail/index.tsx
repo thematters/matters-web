@@ -16,6 +16,7 @@ import {
   Layout,
   Media,
   QueryError,
+  Spacer,
   Spinner,
   Throw404,
   Title,
@@ -357,6 +358,22 @@ const BaseArticleDetail = ({
         </Media>
       </section>
 
+      {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}
+
+      {article.access.circle && (
+        <DynamicSubscribeCircleDialog circle={article.access.circle} />
+      )}
+
+      <Media at="md">
+        <Spacer size="xloose" />
+        <FloatToolbar
+          show={true}
+          article={article}
+          articleDetails={article}
+          privateFetched={privateFetched}
+        />
+      </Media>
+
       <Media greaterThanOrEqual="lg">
         <FloatToolbar
           show={showFloatToolbar}
@@ -365,11 +382,6 @@ const BaseArticleDetail = ({
           privateFetched={privateFetched}
         />
       </Media>
-      {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}
-
-      {article.access.circle && (
-        <DynamicSubscribeCircleDialog circle={article.access.circle} />
-      )}
     </Layout.Main>
   )
 }
