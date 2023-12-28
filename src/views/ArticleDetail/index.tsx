@@ -317,27 +317,28 @@ const BaseArticleDetail = ({
         <License license={article.license} />
 
         {features.payment && <DynamicSupportWidget article={article} />}
-
-        <Waypoint
-          onEnter={() => {
-            setShowFloatToolbar(false)
-          }}
-          onLeave={() => {
-            setShowFloatToolbar(true)
-          }}
-        >
-          <div>
-            <DesktopToolbar
-              article={article}
-              articleDetails={article}
-              translated={translated}
-              translatedLanguage={translatedLanguage}
-              privateFetched={privateFetched}
-              hasFingerprint={canReadFullContent}
-              lock={!canReadFullContent}
-            />
-          </div>
-        </Waypoint>
+        <Media greaterThanOrEqual="lg">
+          <Waypoint
+            onEnter={() => {
+              setShowFloatToolbar(false)
+            }}
+            onLeave={() => {
+              setShowFloatToolbar(true)
+            }}
+          >
+            <div>
+              <DesktopToolbar
+                article={article}
+                articleDetails={article}
+                translated={translated}
+                translatedLanguage={translatedLanguage}
+                privateFetched={privateFetched}
+                hasFingerprint={canReadFullContent}
+                lock={!canReadFullContent}
+              />
+            </div>
+          </Waypoint>
+        </Media>
 
         {collectionCount > 0 && (
           <section className={styles.block}>
@@ -357,14 +358,15 @@ const BaseArticleDetail = ({
         </Media>
       </section>
 
-      <FloatToolbar
-        show={showFloatToolbar}
-        article={article}
-        articleDetails={article}
-        privateFetched={privateFetched}
-        lock={!canReadFullContent}
-      />
-
+      <Media greaterThanOrEqual="lg">
+        <FloatToolbar
+          show={showFloatToolbar}
+          article={article}
+          articleDetails={article}
+          privateFetched={privateFetched}
+          lock={!canReadFullContent}
+        />
+      </Media>
       {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}
 
       {article.access.circle && (
