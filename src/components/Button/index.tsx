@@ -129,7 +129,7 @@ export type ButtonProps = {
 
   borderColor?: ButtonColor
   borderActiveColor?: ButtonBorderActiveColor
-  borderWidth?: 'sm' | 'mdS' | 'md'
+  borderWidth?: 'sm' | 'md'
   borderRadius?: 0 | '0.75rem' | '5rem'
 
   href?: string

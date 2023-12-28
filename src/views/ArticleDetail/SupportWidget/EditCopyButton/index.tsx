@@ -26,7 +26,7 @@ const EditCopyButton = ({ article }: EditCopyButtonProps) => {
             size={['19.5rem', '2.5rem']}
             bgColor="white"
             borderColor="gold"
-            borderWidth="mdS"
+            borderWidth="sm"
             aria-haspopup="dialog"
             aria-label={
               <FormattedMessage
