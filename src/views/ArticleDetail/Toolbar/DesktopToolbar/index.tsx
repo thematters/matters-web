@@ -2,12 +2,7 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { normalizeTag, toLocale, toPath } from '~/common/utils'
-import {
-  BookmarkButton,
-  Media,
-  ReCaptchaProvider,
-  ShareButton,
-} from '~/components'
+import { BookmarkButton, ReCaptchaProvider, ShareButton } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
@@ -28,7 +23,6 @@ export type DesktopToolbarProps = {
   translated: boolean
   translatedLanguage?: string | null
   privateFetched: boolean
-  lock: boolean
 } & DropdownActionsControls
 
 const fragments = {
@@ -70,7 +64,6 @@ const DesktopToolbar = ({
   translated,
   translatedLanguage,
   privateFetched,
-  lock,
   ...props
 }: DesktopToolbarProps) => {
   const path = toPath({ page: 'articleDetail', article })
@@ -98,7 +91,6 @@ const DesktopToolbar = ({
           <AppreciationButton
             article={article}
             privateFetched={privateFetched}
-            disabled={lock}
             hasBorder
             iconSize="md"
           />
@@ -108,44 +100,31 @@ const DesktopToolbar = ({
           <CommentButton
             article={article}
             hasBorder
-            disabled={lock || !article.canComment}
+            disabled={!article.canComment}
             iconSize="md"
           />
         </section>
 
-        <Media greaterThan="sm">
-          <ShareButton
-            iconSize="md"
-            inCard={false}
-            // title={makeTitle(article.title)}
-            path={sharePath}
-            tags={article.tags
-              ?.map(({ content }) => content)
-              .join(' ')
-              .split(/\s+/)
-              .map(normalizeTag)}
-          />
-        </Media>
+        <ShareButton
+          iconSize="md"
+          inCard={false}
+          // title={makeTitle(article.title)}
+          path={sharePath}
+          tags={article.tags
+            ?.map(({ content }) => content)
+            .join(' ')
+            .split(/\s+/)
+            .map(normalizeTag)}
+        />
 
         <BookmarkButton article={article} size="md" inCard={false} />
 
-        <Media at="sm">
-          <DropdownActions
-            article={article}
-            size="mdS"
-            {...dropdonwActionsProps}
-            hasShare
-            hasBookmark={false}
-          />
-        </Media>
-        <Media greaterThan="sm">
-          <DropdownActions
-            article={article}
-            size="md"
-            {...dropdonwActionsProps}
-            hasBookmark={false}
-          />
-        </Media>
+        <DropdownActions
+          article={article}
+          size="md"
+          {...dropdonwActionsProps}
+          hasBookmark={false}
+        />
       </section>
     </section>
   )

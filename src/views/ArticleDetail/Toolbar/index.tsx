@@ -101,11 +101,7 @@ const Toolbar = ({
           />
         </ReCaptchaProvider>
 
-        <DonationButton
-          article={article}
-          disabled={lock}
-          articleDetail={articleDetails}
-        />
+        <DonationButton article={article} articleDetail={articleDetails} />
 
         <section className={styles.CommentButton}>
           <CommentButton

@@ -334,7 +334,6 @@ const BaseArticleDetail = ({
                 translatedLanguage={translatedLanguage}
                 privateFetched={privateFetched}
                 hasFingerprint={canReadFullContent}
-                lock={!canReadFullContent}
               />
             </div>
           </Waypoint>
@@ -364,7 +363,6 @@ const BaseArticleDetail = ({
           article={article}
           articleDetails={article}
           privateFetched={privateFetched}
-          lock={!canReadFullContent}
         />
       </Media>
       {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}

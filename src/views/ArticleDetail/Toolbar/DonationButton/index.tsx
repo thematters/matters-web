@@ -26,7 +26,6 @@ import {
 
 interface DonationButtonProps {
   article: DonationButtonArticleFragment
-  disabled: boolean
   articleDetail: NonNullable<ArticleDetailPublicQuery['article']>
 }
 
@@ -47,11 +46,7 @@ const fragments = {
   `,
 }
 
-const DonationButton = ({
-  article,
-  disabled,
-  articleDetail,
-}: DonationButtonProps) => {
+const DonationButton = ({ article, articleDetail }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
@@ -84,7 +79,7 @@ const DonationButton = ({
             lang,
           })}
           aria-haspopup="dialog"
-          disabled={disabled || article.author.id === viewer.id}
+          disabled={article.author.id === viewer.id}
           onClick={() => {
             analytics.trackEvent('click_button', { type: 'donate' })
             if (!viewer.isAuthed) {

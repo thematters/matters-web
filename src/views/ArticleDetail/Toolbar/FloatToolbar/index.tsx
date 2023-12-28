@@ -18,7 +18,6 @@ export type FloatToolbarProps = {
   article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
-  lock: boolean
   show: boolean
 }
 
@@ -53,7 +52,6 @@ const FloatToolbar = ({
   article,
   articleDetails,
   privateFetched,
-  lock,
 }: FloatToolbarProps) => {
   const [mounted, setMounted] = useState(false)
   const [displayContainer, setDisplayContainer] = useState(false)
@@ -91,23 +89,18 @@ const FloatToolbar = ({
             <AppreciationButton
               article={article}
               privateFetched={privateFetched}
-              disabled={lock}
               textIconSpace="basexxtight"
             />
           </ReCaptchaProvider>
 
           <span className={styles.divider} />
-          <DonationButton
-            article={article}
-            disabled={lock}
-            articleDetail={articleDetails}
-          />
+          <DonationButton article={article} articleDetail={articleDetails} />
 
           <span className={styles.divider} />
 
           <CommentButton
             article={article}
-            disabled={lock || !article.canComment}
+            disabled={!article.canComment}
             textIconSpace="basexxtight"
           />
         </section>
