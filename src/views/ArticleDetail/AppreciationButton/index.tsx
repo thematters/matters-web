@@ -1,8 +1,13 @@
 // import Script from 'next/script'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { APPRECIATE_DEBOUNCE, EXTERNAL_LINKS, Z_INDEX } from '~/common/enums'
+import {
+  APPRECIATE_DEBOUNCE,
+  EXTERNAL_LINKS,
+  SYNC_APPRECIATE_BUTTON_COUNT,
+  Z_INDEX,
+} from '~/common/enums'
 import {
   ButtonProps,
   ReCaptchaContext,
@@ -13,6 +18,7 @@ import {
   // TURNSTILE_DEFAULT_SCRIPT_ID,
   // TURNSTILE_SCRIPT_URL,
   TurnstileInstance,
+  useEventListener,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -51,11 +57,25 @@ const AppreciationButton = ({
 
   const turnstileRef = useRef<TurnstileInstance>(null)
   const { token, refreshToken } = useContext(ReCaptchaContext)
+  const [uuid, setUuid] = useState('')
+
+  useEffect(() => {
+    setUuid(crypto.randomUUID())
+  }, [])
 
   /**
    * Normal Appreciation
    */
   const [amount, setAmount] = useState(0)
+
+  useEventListener(
+    SYNC_APPRECIATE_BUTTON_COUNT,
+    (detail: CustomEvent['detail']) => {
+      if (detail.uuid !== uuid) {
+        setAmount(detail.amount)
+      }
+    }
+  )
   const [sendAppreciation] =
     useMutation<AppreciateArticleMutation>(APPRECIATE_ARTICLE)
   const limit = article.appreciateLimit
@@ -68,10 +88,18 @@ const AppreciationButton = ({
   const isReachLimit = left <= 0
   const debouncedSendAppreciation = useDebouncedCallback(async () => {
     try {
+      window.dispatchEvent(
+        new CustomEvent(SYNC_APPRECIATE_BUTTON_COUNT, {
+          detail: {
+            uuid,
+            amount,
+          },
+        })
+      )
       await sendAppreciation({
         variables: {
           id: article.id,
-          amount,
+          amount: amount,
           token:
             // (viewer.info.group === UserGroup.A &&
             // turnstileRef.current?.getResponse()) || // fallback to ReCaptchaContext token
