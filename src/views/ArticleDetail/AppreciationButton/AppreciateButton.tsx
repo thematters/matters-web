@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import { useContext, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, numAbbr, translate } from '~/common/utils'
@@ -23,7 +24,9 @@ export type AppreciateButtonProps = {
   total: number
   isSuperLike?: boolean
   superLiked?: boolean
+  showText?: boolean
   iconSize?: 'mdS' | 'md'
+  textWeight?: 'md' | 'normal'
   textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 } & ButtonProps
 
@@ -34,7 +37,9 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   total,
   isSuperLike,
   superLiked,
+  showText,
   iconSize = 'mdS',
+  textWeight = 'md',
   textIconSpacing = 'xtight',
   ...buttonProps
 }) => {
@@ -70,7 +75,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         {...buttonProps}
       >
         <TextIcon
-          weight="md"
+          weight={textWeight}
           spacing={textIconSpacing}
           size="sm"
           icon={
@@ -97,10 +102,17 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
             </span>
           }
         >
-          {total > 0 && (
+          {!showText && total > 0 && (
             <span data-test-id={TEST_ID.ARTICLE_APPRECIATION_TOTAL}>
               {numAbbr(total)}
             </span>
+          )}
+          {showText && (
+            <FormattedMessage
+              defaultMessage="Like"
+              description="src/views/ArticleDetail/AppreciationButton/AppreciateButton.tsx"
+              id="8rnUQH"
+            ></FormattedMessage>
           )}
         </TextIcon>
       </Button>

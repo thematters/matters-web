@@ -1,8 +1,15 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toLocale, toPath } from '~/common/utils'
-import { BookmarkButton, ButtonProps, ReCaptchaProvider } from '~/components'
+import {
+  BookmarkButton,
+  Button,
+  ButtonProps,
+  ReCaptchaProvider,
+  TextIcon,
+} from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
@@ -24,6 +31,7 @@ export type FixedToolbarProps = {
   translatedLanguage?: string | null
   privateFetched: boolean
   lock: boolean
+  showCommentToolbar: boolean
 } & DropdownActionsControls
 
 const fragments = {
@@ -66,6 +74,7 @@ const FixedToolbar = ({
   translatedLanguage,
   privateFetched,
   lock,
+  showCommentToolbar,
   ...props
 }: FixedToolbarProps) => {
   const path = toPath({ page: 'articleDetail', article })
@@ -95,11 +104,34 @@ const FixedToolbar = ({
   return (
     <section className={styles.toolbar} data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
       <section className={styles.buttons}>
+        {showCommentToolbar && (
+          <Button
+            bgColor="greyLighter"
+            borderRadius="0.5rem"
+            textColor="greyDarker"
+            spacing={['tighter', 'tighter']}
+            onClick={() => {
+              // TODO: open comment drawer
+              console.log('comment...')
+            }}
+          >
+            <TextIcon size="sm">
+              <FormattedMessage
+                defaultMessage="Comment..."
+                id="YOMY1y"
+                description="src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+              />
+            </TextIcon>
+          </Button>
+        )}
+
         <ReCaptchaProvider action="appreciateArticle">
           <AppreciationButton
             article={article}
+            showText={showCommentToolbar}
             privateFetched={privateFetched}
             iconSize="md"
+            textWeight="normal"
             textIconSpacing="xxtight"
             {...buttonProps}
           />
@@ -108,32 +140,40 @@ const FixedToolbar = ({
         <DonationButton
           article={article}
           articleDetail={articleDetails}
+          showText={showCommentToolbar}
           iconSize="md"
+          textWeight="normal"
           textIconSpacing="xxtight"
           {...buttonProps}
         />
 
-        <CommentButton
-          article={article}
-          disabled={!article.canComment}
-          iconSize="md"
-          textIconSpacing="xxtight"
-          {...buttonProps}
-        />
+        {!showCommentToolbar && (
+          <CommentButton
+            article={article}
+            disabled={!article.canComment}
+            iconSize="md"
+            textWeight="normal"
+            textIconSpacing="xxtight"
+            {...buttonProps}
+          />
+        )}
 
         <BookmarkButton
           article={article}
           iconSize="md"
           inCard={false}
+          showText={showCommentToolbar}
           {...buttonProps}
         />
 
-        <DropdownActions
-          article={article}
-          {...dropdonwActionsProps}
-          hasShare
-          hasBookmark={false}
-        />
+        {!showCommentToolbar && (
+          <DropdownActions
+            article={article}
+            {...dropdonwActionsProps}
+            hasShare
+            hasBookmark={false}
+          />
+        )}
       </section>
     </section>
   )

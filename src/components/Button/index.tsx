@@ -42,6 +42,7 @@ export type ButtonSpacingY =
   | 'xxtight'
   | 'xtight'
   | 'baseTight'
+  | 'tighter'
   | 'tight'
   | 'base'
 
@@ -50,6 +51,7 @@ export type ButtonSpacingX =
   | 'xxtight'
   | 'xtight'
   | 'baseTight'
+  | 'tighter'
   | 'tight'
   | 'base'
   | 'loose'
@@ -137,7 +139,7 @@ export type ButtonProps = {
   borderColor?: ButtonColor
   borderActiveColor?: ButtonBorderActiveColor
   borderWidth?: 'sm' | 'md'
-  borderRadius?: 0 | '0.75rem' | '5rem'
+  borderRadius?: 0 | '0.5rem' | '0.75rem' | '5rem'
 
   href?: string
   replace?: boolean

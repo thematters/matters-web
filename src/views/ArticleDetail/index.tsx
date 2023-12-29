@@ -126,6 +126,7 @@ const BaseArticleDetail = ({
 
   const features = useFeatures()
   const [showFloatToolbar, setShowFloatToolbar] = useState(true)
+  const [showCommentToolbar, setShowCommentToolbar] = useState(false)
   const [fixedWall, setFixedWall] = useState(false)
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
@@ -350,9 +351,16 @@ const BaseArticleDetail = ({
           </section>
         )}
 
-        <section className={styles.block}>
-          <DynamicResponse id={article.id} lock={!canReadFullContent} />
-        </section>
+        <Waypoint
+          onEnter={() => {
+            setShowCommentToolbar(true)
+          }}
+          onLeave={() => setShowCommentToolbar(false)}
+        >
+          <section className={styles.block}>
+            <DynamicResponse id={article.id} lock={!canReadFullContent} />
+          </section>
+        </Waypoint>
 
         <Media lessThan="lg">
           <RelatedArticles article={article} />
@@ -375,6 +383,7 @@ const BaseArticleDetail = ({
           privateFetched={privateFetched}
           hasFingerprint={canReadFullContent}
           lock={!canReadFullContent}
+          showCommentToolbar={showCommentToolbar}
         />
       </Media>
 

@@ -429,6 +429,10 @@
     "defaultMessage": "回覆了你在圍爐 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "8rnUQH": {
+    "defaultMessage": "喜欢",
+    "description": "src/views/ArticleDetail/AppreciationButton/AppreciateButton.tsx"
+  },
   "8t6Cs8": {
     "defaultMessage": "Matters 日報",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
@@ -782,6 +786,9 @@
   },
   "HnxG15": {
     "defaultMessage": "設定"
+  },
+  "HqRNN8": {
+    "defaultMessage": "讚賞"
   },
   "HqnUd1": {
     "defaultMessage": "添加 IPFS 生成的 IPNS 指紋到閱讀器，如：",
@@ -1360,6 +1367,10 @@
   "Y8zV4A": {
     "defaultMessage": "回覆評論"
   },
+  "YOMY1y": {
+    "defaultMessage": "發布評論...",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "YPMn9n": {
     "defaultMessage": "請先登入再進行操作",
     "description": "UNAUTHENTICATED"
@@ -1623,6 +1634,10 @@
   "ggS9L7": {
     "defaultMessage": "支付金額無效，請重新輸入",
     "description": "PAYMENT_AMOUNT_INVALID"
+  },
+  "gmdv1Q": {
+    "defaultMessage": "收藏",
+    "description": "src/components/Buttons/Bookmark"
   },
   "h+punE": {
     "defaultMessage": "{date}更新",

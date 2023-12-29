@@ -32,6 +32,7 @@ type CommentButtonProps = {
   article: CommentButtonArticle
   disabled?: boolean
   iconSize?: 'mdS' | 'md'
+  textWeight?: 'md' | 'normal'
   textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 } & ButtonProps
 
@@ -59,11 +60,13 @@ const fragments = {
 const Content = ({
   article,
   iconSize = 'mdS',
+  textWeight = 'md',
   textIconSpacing = 'xtight',
   ...props
 }: (CardProps | ButtonProps) & {
   article: CommentButtonArticle
   iconSize?: 'mdS' | 'md'
+  textWeight?: 'md' | 'normal'
   textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 }) => {
   const intl = useIntl()
@@ -82,7 +85,7 @@ const Content = ({
       >
         <TextIcon
           icon={<IconComment24 size={iconSize} />}
-          weight="md"
+          weight={textWeight}
           spacing={textIconSpacing}
           size="sm"
         >
@@ -99,6 +102,7 @@ const CommentButton = ({
   article,
   disabled,
   iconSize = 'mdS',
+  textWeight = 'md',
   textIconSpacing = 'xtight',
   ...buttonProps
 }: CommentButtonProps) => {
@@ -114,6 +118,7 @@ const CommentButton = ({
         article={article}
         disabled
         iconSize={iconSize}
+        textWeight={textWeight}
         textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
@@ -125,6 +130,7 @@ const CommentButton = ({
       <Content
         article={article}
         iconSize={iconSize}
+        textWeight={textWeight}
         textIconSpacing={textIconSpacing}
         onClick={() => {
           toast.error({
@@ -145,6 +151,7 @@ const CommentButton = ({
       <Content
         article={article}
         iconSize={iconSize}
+        textWeight={textWeight}
         textIconSpacing={textIconSpacing}
         onClick={() => {
           toast.error({
@@ -179,6 +186,7 @@ const CommentButton = ({
         aria-haspopup="dialog"
         article={article}
         iconSize={iconSize}
+        textWeight={textWeight}
         textIconSpacing={textIconSpacing}
         {...props}
         {...buttonProps}
@@ -198,6 +206,7 @@ const CommentButton = ({
           aria-haspopup="dialog"
           onClick={openDialog}
           iconSize={iconSize}
+          textWeight={textWeight}
           textIconSpacing={textIconSpacing}
           {...buttonProps}
         />
