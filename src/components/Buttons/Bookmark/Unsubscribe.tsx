@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { ERROR_CODES, ERROR_MESSAGES, TEST_ID } from '~/common/enums'
 import {
   Button,
+  ButtonProps,
   IconBookmarked20,
   IconBookmarked24,
   IconSize,
@@ -16,18 +17,19 @@ import { ToggleSubscribeArticleMutation } from '~/gql/graphql'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
 
-interface UnsubscribeProps {
+export type UnsubscribeProps = {
   articleId?: string
-  size?: Extract<IconSize, 'mdS' | 'md'>
+  iconSize?: Extract<IconSize, 'mdS' | 'md'>
   disabled?: boolean
   inCard?: boolean
-}
+} & ButtonProps
 
 const Unsubscribe = ({
   articleId,
-  size,
+  iconSize,
   disabled,
   inCard,
+  ...buttonProps
 }: UnsubscribeProps) => {
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
@@ -74,7 +76,7 @@ const Unsubscribe = ({
             description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
           />
         }
-        icon={<IconBookmarked20 size={size} />}
+        icon={<IconBookmarked20 size={iconSize} />}
         onClick={onClick}
         testId={TEST_ID.ARTICLE_BOOKMARK}
       />
@@ -93,8 +95,9 @@ const Unsubscribe = ({
       onClick={onClick}
       disabled={disabled}
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}
+      {...buttonProps}
     >
-      <IconBookmarked24 size={size} />
+      <IconBookmarked24 size={iconSize} />
     </Button>
   )
 }

@@ -1,13 +1,8 @@
 import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
-import { normalizeTag, toLocale, toPath } from '~/common/utils'
-import {
-  BookmarkButton,
-  Media,
-  ReCaptchaProvider,
-  ShareButton,
-} from '~/components'
+import { toLocale, toPath } from '~/common/utils'
+import { BookmarkButton, ButtonProps, ReCaptchaProvider } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
@@ -17,12 +12,12 @@ import {
   ToolbarArticlePublicFragment,
 } from '~/gql/graphql'
 
-import AppreciationButton from '../AppreciationButton'
-import CommentButton from './CommentButton'
-import DonationButton from './DonationButton'
+import AppreciationButton from '../../AppreciationButton'
+import CommentButton from '../CommentButton'
+import DonationButton from '../DonationButton'
 import styles from './styles.module.css'
 
-export type ToolbarProps = {
+export type FixedToolbarProps = {
   article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
@@ -34,7 +29,7 @@ export type ToolbarProps = {
 const fragments = {
   article: {
     public: gql`
-      fragment ToolbarArticlePublic on Article {
+      fragment FixedToolbarArticlePublic on Article {
         id
         title
         tags {
@@ -51,7 +46,7 @@ const fragments = {
       ${CommentButton.fragments.article.public}
     `,
     private: gql`
-      fragment ToolbarArticlePrivate on Article {
+      fragment FixedToolbarArticlePrivate on Article {
         id
         ...BookmarkArticlePrivate
         ...AppreciationButtonArticlePrivate
@@ -64,7 +59,7 @@ const fragments = {
   },
 }
 
-const Toolbar = ({
+const FixedToolbar = ({
   article,
   articleDetails,
   translated,
@@ -72,7 +67,7 @@ const Toolbar = ({
   privateFetched,
   lock,
   ...props
-}: ToolbarProps) => {
+}: FixedToolbarProps) => {
   const path = toPath({ page: 'articleDetail', article })
   const sharePath =
     translated && translatedLanguage
@@ -80,14 +75,21 @@ const Toolbar = ({
       : path.href
 
   const dropdonwActionsProps: DropdownActionsControls = {
-    size: 'mdS',
+    size: 'md',
     inCard: false,
+    inFixedToolbar: true,
     sharePath,
-    hasExtend: !lock,
+    hasExtend: false,
     hasEdit: true,
     hasArchive: true,
     hasAddCollection: true,
     ...props,
+  }
+
+  const buttonProps: ButtonProps = {
+    spacing: ['baseTight', 'baseTight'],
+    bgColor: 'white',
+    borderRadius: 0,
   }
 
   return (
@@ -97,55 +99,46 @@ const Toolbar = ({
           <AppreciationButton
             article={article}
             privateFetched={privateFetched}
-            disabled={lock}
+            iconSize="md"
+            textIconSpacing="xxtight"
+            {...buttonProps}
           />
         </ReCaptchaProvider>
 
-        <DonationButton article={article} articleDetail={articleDetails} />
+        <DonationButton
+          article={article}
+          articleDetail={articleDetails}
+          iconSize="md"
+          textIconSpacing="xxtight"
+          {...buttonProps}
+        />
 
-        <section className={styles.CommentButton}>
-          <CommentButton
-            article={article}
-            disabled={lock || !article.canComment}
-          />
-        </section>
+        <CommentButton
+          article={article}
+          disabled={!article.canComment}
+          iconSize="md"
+          textIconSpacing="xxtight"
+          {...buttonProps}
+        />
 
-        <BookmarkButton article={article} iconSize="mdS" inCard={false} />
+        <BookmarkButton
+          article={article}
+          iconSize="md"
+          inCard={false}
+          {...buttonProps}
+        />
 
-        <Media greaterThan="sm">
-          <ShareButton
-            iconSize="mdS"
-            inCard={false}
-            // title={makeTitle(article.title)}
-            path={sharePath}
-            tags={article.tags
-              ?.map(({ content }) => content)
-              .join(' ')
-              .split(/\s+/)
-              .map(normalizeTag)}
-          />
-        </Media>
-
-        <Media at="sm">
-          <DropdownActions
-            article={article}
-            {...dropdonwActionsProps}
-            hasShare
-            hasBookmark={false}
-          />
-        </Media>
-        <Media greaterThan="sm">
-          <DropdownActions
-            article={article}
-            {...dropdonwActionsProps}
-            hasBookmark={false}
-          />
-        </Media>
+        <DropdownActions
+          article={article}
+          {...dropdonwActionsProps}
+          hasShare
+          hasBookmark={false}
+        />
       </section>
     </section>
   )
 }
 
-Toolbar.fragments = fragments
+FixedToolbar.fragments = fragments
 
-export default Toolbar
+export default FixedToolbar

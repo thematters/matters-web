@@ -130,7 +130,7 @@ const DesktopToolbar = ({
             .map(normalizeTag)}
         />
 
-        <BookmarkButton article={article} size="md" inCard={false} />
+        <BookmarkButton article={article} iconSize="md" inCard={false} />
 
         <DropdownActions
           article={article}

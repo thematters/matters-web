@@ -42,7 +42,7 @@ export type AppreciationButtonProps = {
   privateFetched: boolean
   disabled?: boolean
   iconSize?: 'mdS' | 'md'
-  textIconSpacing?: 'xtight' | 'basexxtight'
+  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 } & ButtonProps
 
 const AppreciationButton = ({

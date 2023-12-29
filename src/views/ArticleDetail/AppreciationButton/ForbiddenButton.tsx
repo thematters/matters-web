@@ -15,7 +15,7 @@ const ForbiddenButton = ({
   count?: number
   total: number
   iconSize?: 'mdS' | 'md'
-  textIconSpacing?: 'xtight' | 'basexxtight'
+  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 } & ButtonProps) => (
   <AppreciateButton
     count={count}

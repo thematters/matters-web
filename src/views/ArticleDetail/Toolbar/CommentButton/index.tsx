@@ -32,7 +32,7 @@ type CommentButtonProps = {
   article: CommentButtonArticle
   disabled?: boolean
   iconSize?: 'mdS' | 'md'
-  textIconSpacing?: 'xtight' | 'basexxtight'
+  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 } & ButtonProps
 
 const fragments = {
@@ -64,7 +64,7 @@ const Content = ({
 }: (CardProps | ButtonProps) & {
   article: CommentButtonArticle
   iconSize?: 'mdS' | 'md'
-  textIconSpacing?: 'xtight' | 'basexxtight'
+  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 }) => {
   const intl = useIntl()
 

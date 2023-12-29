@@ -1,0 +1,15 @@
+.toolbar {
+  @mixin shadow-border-top-grey;
+  @mixin safe-area-botttom;
+
+  position: fixed;
+  bottom: 0;
+  z-index: var(--z-index-bottom-bar);
+  width: 100%;
+  padding: var(--spacing-x-tight) var(--spacing-base);
+  background: var(--color-white);
+
+  & .buttons {
+    @mixin flex-center-space-between;
+  }
+}

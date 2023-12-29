@@ -28,6 +28,8 @@ import {
 export type DonationButtonProps = {
   article: DonationButtonArticleFragment
   articleDetail: NonNullable<ArticleDetailPublicQuery['article']>
+  iconSize?: 'mdS' | 'md'
+  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 } & ButtonProps
 
 const fragments = {
@@ -50,6 +52,8 @@ const fragments = {
 const DonationButton = ({
   article,
   articleDetail,
+  iconSize = 'mdS',
+  textIconSpacing = 'basexxtight',
   ...buttonProps
 }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
@@ -104,9 +108,9 @@ const DonationButton = ({
           {...buttonProps}
         >
           <TextIcon
-            icon={<IconMoney20 size="mdS" />}
+            icon={<IconMoney20 size={iconSize} />}
             weight="md"
-            spacing="basexxtight"
+            spacing={textIconSpacing}
             size="sm"
           >
             {article.donationsToolbar.totalCount > 0

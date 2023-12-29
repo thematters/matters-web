@@ -24,7 +24,7 @@ export type AppreciateButtonProps = {
   isSuperLike?: boolean
   superLiked?: boolean
   iconSize?: 'mdS' | 'md'
-  textIconSpacing?: 'xtight' | 'basexxtight'
+  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 } & ButtonProps
 
 const AppreciateButton: React.FC<AppreciateButtonProps> = ({
