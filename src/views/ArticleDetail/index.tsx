@@ -16,6 +16,7 @@ import {
   Layout,
   Media,
   QueryError,
+  Spacer,
   Spinner,
   Throw404,
   Title,
@@ -53,7 +54,8 @@ import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.module.css'
 import TagList from './TagList'
-import Toolbar from './Toolbar'
+import DesktopToolbar from './Toolbar/DesktopToolbar'
+import FloatToolbar from './Toolbar/FloatToolbar'
 import TranslationToast from './TranslationToast'
 
 const DynamicSupportWidget = dynamic(() => import('./SupportWidget'), {
@@ -122,6 +124,7 @@ const BaseArticleDetail = ({
   const viewer = useContext(ViewerContext)
 
   const features = useFeatures()
+  const [showFloatToolbar, setShowFloatToolbar] = useState(true)
   const [fixedWall, setFixedWall] = useState(false)
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
@@ -315,6 +318,27 @@ const BaseArticleDetail = ({
         <License license={article.license} />
 
         {features.payment && <DynamicSupportWidget article={article} />}
+        <Media greaterThanOrEqual="lg">
+          <Waypoint
+            onEnter={() => {
+              setShowFloatToolbar(false)
+            }}
+            onLeave={() => {
+              setShowFloatToolbar(true)
+            }}
+          >
+            <div>
+              <DesktopToolbar
+                article={article}
+                articleDetails={article}
+                translated={translated}
+                translatedLanguage={translatedLanguage}
+                privateFetched={privateFetched}
+                hasFingerprint={canReadFullContent}
+              />
+            </div>
+          </Waypoint>
+        </Media>
 
         {collectionCount > 0 && (
           <section className={styles.block}>
@@ -334,22 +358,30 @@ const BaseArticleDetail = ({
         </Media>
       </section>
 
-      <Toolbar
-        article={article}
-        articleDetails={article}
-        translated={translated}
-        translatedLanguage={translatedLanguage}
-        privateFetched={privateFetched}
-        hasFingerprint={canReadFullContent}
-        hasExtend={!article.author?.isBlocking}
-        lock={!canReadFullContent}
-      />
-
       {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}
 
       {article.access.circle && (
         <DynamicSubscribeCircleDialog circle={article.access.circle} />
       )}
+
+      <Media at="md">
+        <Spacer size="xloose" />
+        <FloatToolbar
+          show={true}
+          article={article}
+          articleDetails={article}
+          privateFetched={privateFetched}
+        />
+      </Media>
+
+      <Media greaterThanOrEqual="lg">
+        <FloatToolbar
+          show={showFloatToolbar}
+          article={article}
+          articleDetails={article}
+          privateFetched={privateFetched}
+        />
+      </Media>
     </Layout.Main>
   )
 }

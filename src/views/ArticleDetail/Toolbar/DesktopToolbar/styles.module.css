@@ -1,0 +1,40 @@
+.toolbar {
+  margin: var(--spacing-base);
+  background: var(--color-white);
+
+  & .buttons {
+    @mixin flex-center-space-between;
+
+    & > * {
+      @mixin inline-flex-center-all;
+
+      flex-shrink: 0;
+      height: 2rem;
+    }
+
+    @media (--sm-up) {
+      & > * {
+        height: auto;
+      }
+
+      & > * + * {
+        margin-left: var(--spacing-loose);
+      }
+    }
+  }
+
+  & .commentBar {
+    font-size: 0;
+  }
+
+  @media (--sm-up) {
+    margin: var(--spacing-base) 0;
+
+    & .commentBar {
+      display: block;
+      flex-grow: 1;
+      flex-shrink: 1;
+      margin-left: var(--spacing-base);
+    }
+  }
+}

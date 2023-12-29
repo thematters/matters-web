@@ -13,42 +13,39 @@ import { numAbbr } from '~/common/utils'
 import {
   Button,
   ButtonProps,
-  Card,
   CardProps,
   CommentFormDialog,
-  IconComment16,
-  Media,
+  IconComment24,
   TextIcon,
   toast,
-  Translate,
   ViewerContext,
 } from '~/components'
 import {
-  CommentBarArticlePrivateFragment,
-  CommentBarArticlePublicFragment,
+  CommentButtonArticlePrivateFragment,
+  CommentButtonArticlePublicFragment,
 } from '~/gql/graphql'
 
-import styles from './styles.module.css'
+type CommentButtonArticle = CommentButtonArticlePublicFragment &
+  Partial<CommentButtonArticlePrivateFragment>
 
-type CommentBarArticle = CommentBarArticlePublicFragment &
-  Partial<CommentBarArticlePrivateFragment>
-
-interface CommentBarProps {
-  article: CommentBarArticle
+type CommentButtonProps = {
+  article: CommentButtonArticle
   disabled?: boolean
-}
+  iconSize?: 'mdS' | 'md'
+  textIconSpacing?: 'xtight' | 'basexxtight'
+} & ButtonProps
 
 const fragments = {
   article: {
     public: gql`
-      fragment CommentBarArticlePublic on Article {
+      fragment CommentButtonArticlePublic on Article {
         id
         responseCount
         canComment
       }
     `,
     private: gql`
-      fragment CommentBarArticlePrivate on Article {
+      fragment CommentButtonArticlePrivate on Article {
         id
         author {
           id
@@ -61,62 +58,50 @@ const fragments = {
 
 const Content = ({
   article,
+  iconSize = 'mdS',
+  textIconSpacing = 'xtight',
   ...props
 }: (CardProps | ButtonProps) & {
-  article: CommentBarArticle
+  article: CommentButtonArticle
+  iconSize?: 'mdS' | 'md'
+  textIconSpacing?: 'xtight' | 'basexxtight'
 }) => {
   const intl = useIntl()
 
   return (
     <>
-      <Media at="sm">
-        <Button
-          spacing={['xtight', 'xtight']}
-          bgActiveColor="greyLighter"
-          aria-label={`${intl.formatMessage({
-            defaultMessage: 'Comment',
-            id: 'Ix3e3Q',
-            description: 'src/components/Forms/CommentForm/index.tsx',
-          })}…`}
-          aria-haspopup="dialog"
-          {...(props as ButtonProps)}
+      <Button
+        spacing={['xtight', 'tight']}
+        aria-label={`${intl.formatMessage({
+          defaultMessage: 'Comment',
+          id: 'Ix3e3Q',
+          description: 'src/components/Forms/CommentForm/index.tsx',
+        })}…`}
+        aria-haspopup="dialog"
+        {...(props as ButtonProps)}
+      >
+        <TextIcon
+          icon={<IconComment24 size={iconSize} />}
+          weight="md"
+          spacing={textIconSpacing}
+          size="sm"
         >
-          <TextIcon
-            icon={<IconComment16 size="mdS" />}
-            weight="md"
-            spacing="xtight"
-            size="sm"
-          >
-            {article.responseCount > 0
-              ? numAbbr(article.responseCount)
-              : undefined}
-          </TextIcon>
-        </Button>
-      </Media>
-      <Media greaterThan="sm">
-        <Card
-          bgColor="greyLighter"
-          spacing={[0, 0]}
-          borderRadius="base"
-          role="button"
-          ariaHasPopup="dialog"
-          {...(props as CardProps)}
-        >
-          <p className={styles.content}>
-            <FormattedMessage
-              defaultMessage="Comment"
-              id="Ix3e3Q"
-              description="src/components/Forms/CommentForm/index.tsx"
-            />
-            <Translate zh_hant="…" zh_hans="…" en="…" />
-          </p>
-        </Card>
-      </Media>
+          {article.responseCount > 0
+            ? numAbbr(article.responseCount)
+            : undefined}
+        </TextIcon>
+      </Button>
     </>
   )
 }
 
-const CommentBar = ({ article, disabled }: CommentBarProps) => {
+const CommentButton = ({
+  article,
+  disabled,
+  iconSize = 'mdS',
+  textIconSpacing = 'xtight',
+  ...buttonProps
+}: CommentButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   const refetchResponses = () => {
@@ -124,13 +109,23 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
   }
 
   if (disabled) {
-    return <Content article={article} disabled />
+    return (
+      <Content
+        article={article}
+        disabled
+        iconSize={iconSize}
+        textIconSpacing={textIconSpacing}
+        {...buttonProps}
+      />
+    )
   }
 
   if (viewer.isInactive) {
     return (
       <Content
         article={article}
+        iconSize={iconSize}
+        textIconSpacing={textIconSpacing}
         onClick={() => {
           toast.error({
             message: (
@@ -140,6 +135,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
             ),
           })
         }}
+        {...buttonProps}
       />
     )
   }
@@ -148,6 +144,8 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
     return (
       <Content
         article={article}
+        iconSize={iconSize}
+        textIconSpacing={textIconSpacing}
         onClick={() => {
           toast.error({
             message: (
@@ -158,6 +156,7 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
             ),
           })
         }}
+        {...buttonProps}
       />
     )
   }
@@ -175,7 +174,16 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
       },
     }
 
-    return <Content aria-haspopup="dialog" article={article} {...props} />
+    return (
+      <Content
+        aria-haspopup="dialog"
+        article={article}
+        iconSize={iconSize}
+        textIconSpacing={textIconSpacing}
+        {...props}
+        {...buttonProps}
+      />
+    )
   }
 
   return (
@@ -189,12 +197,15 @@ const CommentBar = ({ article, disabled }: CommentBarProps) => {
           article={article}
           aria-haspopup="dialog"
           onClick={openDialog}
+          iconSize={iconSize}
+          textIconSpacing={textIconSpacing}
+          {...buttonProps}
         />
       )}
     </CommentFormDialog>
   )
 }
 
-CommentBar.fragments = fragments
+CommentButton.fragments = fragments
 
-export default CommentBar
+export default CommentButton

@@ -4,8 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { ERROR_CODES, ERROR_MESSAGES, TEST_ID } from '~/common/enums'
 import {
   Button,
-  IconBookmarked16,
   IconBookmarked20,
+  IconBookmarked24,
   IconSize,
   Menu,
   toast,
@@ -94,7 +94,7 @@ const Unsubscribe = ({
       disabled={disabled}
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}
     >
-      <IconBookmarked16 color="black" size={size} />
+      <IconBookmarked24 size={size} />
     </Button>
   )
 }

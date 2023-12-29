@@ -12,8 +12,9 @@ import {
 import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
+  ButtonProps,
   DonationDialog,
-  IconDonate24,
+  IconMoney20,
   LanguageContext,
   TextIcon,
   toast,
@@ -24,11 +25,10 @@ import {
   DonationButtonArticleFragment,
 } from '~/gql/graphql'
 
-interface DonationButtonProps {
+export type DonationButtonProps = {
   article: DonationButtonArticleFragment
-  disabled: boolean
   articleDetail: NonNullable<ArticleDetailPublicQuery['article']>
-}
+} & ButtonProps
 
 const fragments = {
   article: gql`
@@ -49,8 +49,8 @@ const fragments = {
 
 const DonationButton = ({
   article,
-  disabled,
   articleDetail,
+  ...buttonProps
 }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
@@ -77,7 +77,6 @@ const DonationButton = ({
       {({ openDialog }) => (
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="greyLighter"
           aria-label={translate({
             zh_hant: `${TEXT.zh_hant.donation}（當前 ${donationCount} 次支持）`,
             zh_hans: `${TEXT.zh_hans.donation}（当前 ${donationCount} 次支持）`,
@@ -85,7 +84,7 @@ const DonationButton = ({
             lang,
           })}
           aria-haspopup="dialog"
-          disabled={disabled || article.author.id === viewer.id}
+          disabled={article.author.id === viewer.id}
           onClick={() => {
             analytics.trackEvent('click_button', { type: 'donate' })
             if (!viewer.isAuthed) {
@@ -102,11 +101,12 @@ const DonationButton = ({
             }
             openDialog()
           }}
+          {...buttonProps}
         >
           <TextIcon
-            icon={<IconDonate24 size="mdS" />}
+            icon={<IconMoney20 size="mdS" />}
             weight="md"
-            spacing="xtight"
+            spacing="basexxtight"
             size="sm"
           >
             {article.donationsToolbar.totalCount > 0

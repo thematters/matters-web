@@ -75,7 +75,7 @@ span.container {
 .textActiveGreyDarker {
   &:hover,
   &:focus {
-    color: var(--color-matters-grey-darker);
+    color: var(--color-grey-darker);
   }
 }
 
@@ -155,6 +155,18 @@ span.container {
   & .hotarea {
     margin-top: calc(var(--spacing-x-tight) * -1);
     margin-bottom: calc(var(--spacing-x-tight) * -1);
+  }
+}
+
+.spacingYBaseTight {
+  &:not(.isTransparent) {
+    padding-top: var(--spacing-base-tight);
+    padding-bottom: var(--spacing-base-tight);
+  }
+
+  & .hotarea {
+    margin-top: calc(var(--spacing-base-tight) * -1);
+    margin-bottom: calc(var(--spacing-base-tight) * -1);
   }
 }
 
@@ -438,6 +450,12 @@ span.container {
   }
 }
 
+.borderGreyLighterActive {
+  & .hotarea {
+    border-color: var(--color-grey-lighter-active);
+  }
+}
+
 .borderGreenLighter {
   & .hotarea {
     border-color: var(--color-green-lighter);
@@ -465,6 +483,15 @@ span.container {
 .borderLikecoinGreen {
   & .hotarea {
     border-color: var(--color-likecoin-green);
+  }
+}
+
+.borderActiveGreyLight {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-grey-light);
+    }
   }
 }
 

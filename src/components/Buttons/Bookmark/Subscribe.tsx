@@ -10,8 +10,8 @@ import {
 } from '~/common/enums'
 import {
   Button,
-  IconBookmark16,
   IconBookmark20,
+  IconBookmark24,
   IconSize,
   Menu,
   toast,
@@ -104,7 +104,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
       disabled={disabled}
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}
     >
-      <IconBookmark16 size={size} />
+      <IconBookmark24 size={size} />
     </Button>
   )
 }

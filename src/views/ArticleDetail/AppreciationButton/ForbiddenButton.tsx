@@ -1,17 +1,22 @@
 import { FormattedMessage } from 'react-intl'
 
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
-import { toast } from '~/components'
+import { ButtonProps, toast } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 
 const ForbiddenButton = ({
   count,
   total,
+  iconSize = 'mdS',
+  textIconSpacing = 'xtight',
+  ...buttonProps
 }: {
   count?: number
   total: number
-}) => (
+  iconSize?: 'mdS' | 'md'
+  textIconSpacing?: 'xtight' | 'basexxtight'
+} & ButtonProps) => (
   <AppreciateButton
     count={count}
     total={total}
@@ -24,6 +29,9 @@ const ForbiddenButton = ({
         ),
       })
     }}
+    iconSize={iconSize}
+    textIconSpacing={textIconSpacing}
+    {...buttonProps}
   />
 )
 
