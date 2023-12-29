@@ -2,6 +2,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
+import { ButtonProps } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 
@@ -10,12 +11,13 @@ const AnonymousButton = ({
   total,
   iconSize = 'mdS',
   textIconSpace = 'xtight',
+  ...buttonProps
 }: {
   count?: number
   total: number
   iconSize?: 'mdS' | 'md'
   textIconSpace?: 'xtight' | 'basexxtight'
-}) => (
+} & ButtonProps) => (
   <AppreciateButton
     count={count}
     total={total}
@@ -28,6 +30,7 @@ const AnonymousButton = ({
     }}
     iconSize={iconSize}
     textIconSpace={textIconSpace}
+    {...buttonProps}
   />
 )
 

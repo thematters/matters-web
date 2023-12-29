@@ -28,13 +28,12 @@ import {
 type CommentButtonArticle = CommentButtonArticlePublicFragment &
   Partial<CommentButtonArticlePrivateFragment>
 
-interface CommentButtonProps {
+type CommentButtonProps = {
   article: CommentButtonArticle
   disabled?: boolean
-  hasBorder?: boolean
   iconSize?: 'mdS' | 'md'
   textIconSpace?: 'xtight' | 'basexxtight'
-}
+} & ButtonProps
 
 const fragments = {
   article: {
@@ -59,13 +58,11 @@ const fragments = {
 
 const Content = ({
   article,
-  hasBorder,
   iconSize = 'mdS',
   textIconSpace = 'xtight',
   ...props
 }: (CardProps | ButtonProps) & {
   article: CommentButtonArticle
-  hasBorder?: boolean
   iconSize?: 'mdS' | 'md'
   textIconSpace?: 'xtight' | 'basexxtight'
 }) => {
@@ -75,10 +72,6 @@ const Content = ({
     <>
       <Button
         spacing={['xtight', 'tight']}
-        borderWidth={hasBorder ? 'sm' : undefined}
-        borderColor={hasBorder ? 'greyLighterActive' : undefined}
-        borderActiveColor={hasBorder ? 'greyLight' : undefined}
-        borderRadius={hasBorder ? '0.75rem' : undefined}
         aria-label={`${intl.formatMessage({
           defaultMessage: 'Comment',
           id: 'Ix3e3Q',
@@ -105,9 +98,9 @@ const Content = ({
 const CommentButton = ({
   article,
   disabled,
-  hasBorder,
   iconSize = 'mdS',
   textIconSpace = 'xtight',
+  ...buttonProps
 }: CommentButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -122,6 +115,7 @@ const CommentButton = ({
         disabled
         iconSize={iconSize}
         textIconSpace={textIconSpace}
+        {...buttonProps}
       />
     )
   }
@@ -130,7 +124,6 @@ const CommentButton = ({
     return (
       <Content
         article={article}
-        hasBorder={hasBorder}
         iconSize={iconSize}
         textIconSpace={textIconSpace}
         onClick={() => {
@@ -142,6 +135,7 @@ const CommentButton = ({
             ),
           })
         }}
+        {...buttonProps}
       />
     )
   }
@@ -150,7 +144,6 @@ const CommentButton = ({
     return (
       <Content
         article={article}
-        hasBorder={hasBorder}
         iconSize={iconSize}
         textIconSpace={textIconSpace}
         onClick={() => {
@@ -163,6 +156,7 @@ const CommentButton = ({
             ),
           })
         }}
+        {...buttonProps}
       />
     )
   }
@@ -184,10 +178,10 @@ const CommentButton = ({
       <Content
         aria-haspopup="dialog"
         article={article}
-        hasBorder={hasBorder}
         iconSize={iconSize}
         textIconSpace={textIconSpace}
         {...props}
+        {...buttonProps}
       />
     )
   }
@@ -201,11 +195,11 @@ const CommentButton = ({
       {({ openDialog }) => (
         <Content
           article={article}
-          hasBorder={hasBorder}
           aria-haspopup="dialog"
           onClick={openDialog}
           iconSize={iconSize}
           textIconSpace={textIconSpace}
+          {...buttonProps}
         />
       )}
     </CommentFormDialog>

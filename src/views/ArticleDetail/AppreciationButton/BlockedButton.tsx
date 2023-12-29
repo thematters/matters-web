@@ -1,4 +1,4 @@
-import { toast, Translate } from '~/components'
+import { ButtonProps, toast, Translate } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 
@@ -7,12 +7,13 @@ const BlockedButton = ({
   total,
   iconSize = 'mdS',
   textIconSpace = 'xtight',
+  ...buttonProps
 }: {
   count?: number
   total: number
   iconSize?: 'mdS' | 'md'
   textIconSpace?: 'xtight' | 'basexxtight'
-}) => (
+} & ButtonProps) => (
   <AppreciateButton
     count={count}
     total={total}
@@ -29,6 +30,7 @@ const BlockedButton = ({
     }}
     iconSize={iconSize}
     textIconSpace={textIconSpace}
+    {...buttonProps}
   />
 )
 

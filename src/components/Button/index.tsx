@@ -37,7 +37,13 @@ export type ButtonHeight =
   | undefined
   | null
 
-export type ButtonSpacingY = 0 | 'xxtight' | 'xtight' | 'tight' | 'base'
+export type ButtonSpacingY =
+  | 0
+  | 'xxtight'
+  | 'xtight'
+  | 'baseTight'
+  | 'tight'
+  | 'base'
 
 export type ButtonSpacingX =
   | 0

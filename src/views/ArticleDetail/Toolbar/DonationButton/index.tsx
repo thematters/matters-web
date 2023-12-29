@@ -12,6 +12,7 @@ import {
 import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
+  ButtonProps,
   DonationDialog,
   IconMoney20,
   LanguageContext,
@@ -24,10 +25,10 @@ import {
   DonationButtonArticleFragment,
 } from '~/gql/graphql'
 
-interface DonationButtonProps {
+export type DonationButtonProps = {
   article: DonationButtonArticleFragment
   articleDetail: NonNullable<ArticleDetailPublicQuery['article']>
-}
+} & ButtonProps
 
 const fragments = {
   article: gql`
@@ -46,7 +47,11 @@ const fragments = {
   `,
 }
 
-const DonationButton = ({ article, articleDetail }: DonationButtonProps) => {
+const DonationButton = ({
+  article,
+  articleDetail,
+  ...buttonProps
+}: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
 
@@ -96,6 +101,7 @@ const DonationButton = ({ article, articleDetail }: DonationButtonProps) => {
             }
             openDialog()
           }}
+          {...buttonProps}
         >
           <TextIcon
             icon={<IconMoney20 size="mdS" />}

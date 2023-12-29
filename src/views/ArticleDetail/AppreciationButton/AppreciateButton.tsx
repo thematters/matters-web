@@ -5,6 +5,7 @@ import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, numAbbr, translate } from '~/common/utils'
 import {
   Button,
+  ButtonProps,
   IconClap24,
   IconSuperLike,
   LanguageContext,
@@ -15,17 +16,16 @@ import * as clap from './clap'
 import clapStyles from './clap.module.css'
 import styles from './styles.module.css'
 
-interface AppreciateButtonProps {
+export type AppreciateButtonProps = {
   disabled?: boolean
   onClick?: () => void
   count?: number | 'MAX'
   total: number
   isSuperLike?: boolean
   superLiked?: boolean
-  hasBorder?: boolean
   iconSize?: 'mdS' | 'md'
   textIconSpace?: 'xtight' | 'basexxtight'
-}
+} & ButtonProps
 
 const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   disabled,
@@ -34,9 +34,9 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   total,
   isSuperLike,
   superLiked,
-  hasBorder,
   iconSize = 'mdS',
   textIconSpace = 'xtight',
+  ...buttonProps
 }) => {
   const { lang } = useContext(LanguageContext)
 
@@ -51,11 +51,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   return (
     <span className={buttonClasses}>
       <Button
-        spacing={['xtight', 'tight']}
-        borderWidth={hasBorder ? 'sm' : undefined}
-        borderColor={hasBorder ? 'greyLighterActive' : undefined}
-        borderActiveColor={hasBorder ? 'greyLight' : undefined}
-        borderRadius={hasBorder ? '0.75rem' : undefined}
         aria-label={translate({
           zh_hant: `讚賞作品（當前 ${total} 次讚賞）`,
           zh_hans: `赞赏作品（当前 ${total} 次赞赏）`,
@@ -72,6 +67,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
             onClick()
           }
         }}
+        {...buttonProps}
       >
         <TextIcon
           weight="md"

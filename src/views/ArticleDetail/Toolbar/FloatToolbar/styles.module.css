@@ -25,8 +25,6 @@
 .toolbar {
   @mixin inline-flex-center-all;
 
-  gap: var(--spacing-base);
-  padding: var(--spacing-base-tight) var(--spacing-base);
   background: var(--color-white);
   border-radius: 99px;
   box-shadow:

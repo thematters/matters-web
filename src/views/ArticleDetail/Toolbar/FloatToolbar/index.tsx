@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useEffect, useState } from 'react'
 
-import { ReCaptchaProvider } from '~/components'
+import { ButtonProps, ReCaptchaProvider } from '~/components'
 import {
   ArticleDetailPublicQuery,
   ToolbarArticlePrivateFragment,
@@ -70,6 +70,13 @@ const FloatToolbar = ({
     [styles.showContainer]: show && mounted,
   })
 
+  const buttonProps: ButtonProps = {
+    spacing: ['baseTight', 'base'],
+    bgColor: 'white',
+    textColor: 'black',
+    textActiveColor: 'greyDarker',
+  }
+
   return (
     <section className={styles.wrapper}>
       <section
@@ -90,11 +97,16 @@ const FloatToolbar = ({
               article={article}
               privateFetched={privateFetched}
               textIconSpace="basexxtight"
+              {...buttonProps}
             />
           </ReCaptchaProvider>
 
           <span className={styles.divider} />
-          <DonationButton article={article} articleDetail={articleDetails} />
+          <DonationButton
+            article={article}
+            articleDetail={articleDetails}
+            {...buttonProps}
+          />
 
           <span className={styles.divider} />
 
@@ -102,6 +114,7 @@ const FloatToolbar = ({
             article={article}
             disabled={!article.canComment}
             textIconSpace="basexxtight"
+            {...buttonProps}
           />
         </section>
       </section>

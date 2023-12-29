@@ -4,6 +4,7 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import { APPRECIATE_DEBOUNCE, EXTERNAL_LINKS, Z_INDEX } from '~/common/enums'
 import {
+  ButtonProps,
   ReCaptchaContext,
   toast,
   Tooltip,
@@ -29,23 +30,22 @@ import BlockedButton from './BlockedButton'
 import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
 
-interface AppreciationButtonProps {
+export type AppreciationButtonProps = {
   article: AppreciationButtonArticlePublicFragment &
     Partial<AppreciationButtonArticlePrivateFragment>
   privateFetched: boolean
   disabled?: boolean
-  hasBorder?: boolean
   iconSize?: 'mdS' | 'md'
   textIconSpace?: 'xtight' | 'basexxtight'
-}
+} & ButtonProps
 
 const AppreciationButton = ({
   article,
   privateFetched,
   disabled,
-  hasBorder,
   iconSize = 'mdS',
   textIconSpace = 'xtight',
+  ...buttonProps
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -183,6 +183,7 @@ const AppreciationButton = ({
         total={total}
         iconSize={iconSize}
         textIconSpace={textIconSpace}
+        {...buttonProps}
       />
     )
   }
@@ -194,6 +195,7 @@ const AppreciationButton = ({
         total={total}
         iconSize={iconSize}
         textIconSpace={textIconSpace}
+        {...buttonProps}
       />
     )
   }
@@ -205,6 +207,7 @@ const AppreciationButton = ({
         total={total}
         iconSize={iconSize}
         textIconSpace={textIconSpace}
+        {...buttonProps}
       />
     )
   }
@@ -215,9 +218,9 @@ const AppreciationButton = ({
       <AppreciateButton
         total={total}
         disabled
-        hasBorder={hasBorder}
         iconSize={iconSize}
         textIconSpace={textIconSpace}
+        {...buttonProps}
       />
     )
   }
@@ -250,9 +253,9 @@ const AppreciationButton = ({
           total={total}
           isSuperLike={isSuperLike}
           superLiked={superLiked}
-          hasBorder={hasBorder}
           iconSize={iconSize}
           textIconSpace={textIconSpace}
+          {...buttonProps}
         />
       </section>
     )
@@ -286,9 +289,9 @@ const AppreciationButton = ({
         }}
         isSuperLike={isSuperLike}
         superLiked={superLiked}
-        hasBorder={hasBorder}
         iconSize={iconSize}
         textIconSpace={textIconSpace}
+        {...buttonProps}
       />
     )
   }
@@ -299,9 +302,9 @@ const AppreciationButton = ({
       <AppreciateButton
         count="MAX"
         total={total}
-        hasBorder={hasBorder}
         iconSize={iconSize}
         textIconSpace={textIconSpace}
+        {...buttonProps}
       />
     )
   }
@@ -323,9 +326,9 @@ const AppreciationButton = ({
           disabled
           count={appreciatedCount > 0 ? appreciatedCount : undefined}
           total={total}
-          hasBorder={hasBorder}
           iconSize={iconSize}
           textIconSpace={textIconSpace}
+          {...buttonProps}
         />
       </span>
     </Tooltip>
