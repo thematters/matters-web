@@ -96,7 +96,7 @@ const FloatToolbar = ({
             <AppreciationButton
               article={article}
               privateFetched={privateFetched}
-              textIconSpace="basexxtight"
+              textIconSpacing="basexxtight"
               {...buttonProps}
             />
           </ReCaptchaProvider>
@@ -113,7 +113,7 @@ const FloatToolbar = ({
           <CommentButton
             article={article}
             disabled={!article.canComment}
-            textIconSpace="basexxtight"
+            textIconSpacing="basexxtight"
             {...buttonProps}
           />
         </section>

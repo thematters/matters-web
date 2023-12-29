@@ -6,13 +6,13 @@ const BlockedButton = ({
   count,
   total,
   iconSize = 'mdS',
-  textIconSpace = 'xtight',
+  textIconSpacing = 'xtight',
   ...buttonProps
 }: {
   count?: number
   total: number
   iconSize?: 'mdS' | 'md'
-  textIconSpace?: 'xtight' | 'basexxtight'
+  textIconSpacing?: 'xtight' | 'basexxtight'
 } & ButtonProps) => (
   <AppreciateButton
     count={count}
@@ -29,7 +29,7 @@ const BlockedButton = ({
       })
     }}
     iconSize={iconSize}
-    textIconSpace={textIconSpace}
+    textIconSpacing={textIconSpacing}
     {...buttonProps}
   />
 )

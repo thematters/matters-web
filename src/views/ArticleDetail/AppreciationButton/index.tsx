@@ -36,7 +36,7 @@ export type AppreciationButtonProps = {
   privateFetched: boolean
   disabled?: boolean
   iconSize?: 'mdS' | 'md'
-  textIconSpace?: 'xtight' | 'basexxtight'
+  textIconSpacing?: 'xtight' | 'basexxtight'
 } & ButtonProps
 
 const AppreciationButton = ({
@@ -44,7 +44,7 @@ const AppreciationButton = ({
   privateFetched,
   disabled,
   iconSize = 'mdS',
-  textIconSpace = 'xtight',
+  textIconSpacing = 'xtight',
   ...buttonProps
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
@@ -182,7 +182,7 @@ const AppreciationButton = ({
       <AnonymousButton
         total={total}
         iconSize={iconSize}
-        textIconSpace={textIconSpace}
+        textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
     )
@@ -194,7 +194,7 @@ const AppreciationButton = ({
       <BlockedButton
         total={total}
         iconSize={iconSize}
-        textIconSpace={textIconSpace}
+        textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
     )
@@ -206,7 +206,7 @@ const AppreciationButton = ({
       <ForbiddenButton
         total={total}
         iconSize={iconSize}
-        textIconSpace={textIconSpace}
+        textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
     )
@@ -219,7 +219,7 @@ const AppreciationButton = ({
         total={total}
         disabled
         iconSize={iconSize}
-        textIconSpace={textIconSpace}
+        textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
     )
@@ -254,7 +254,7 @@ const AppreciationButton = ({
           isSuperLike={isSuperLike}
           superLiked={superLiked}
           iconSize={iconSize}
-          textIconSpace={textIconSpace}
+          textIconSpacing={textIconSpacing}
           {...buttonProps}
         />
       </section>
@@ -290,7 +290,7 @@ const AppreciationButton = ({
         isSuperLike={isSuperLike}
         superLiked={superLiked}
         iconSize={iconSize}
-        textIconSpace={textIconSpace}
+        textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
     )
@@ -303,7 +303,7 @@ const AppreciationButton = ({
         count="MAX"
         total={total}
         iconSize={iconSize}
-        textIconSpace={textIconSpace}
+        textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
     )
@@ -327,7 +327,7 @@ const AppreciationButton = ({
           count={appreciatedCount > 0 ? appreciatedCount : undefined}
           total={total}
           iconSize={iconSize}
-          textIconSpace={textIconSpace}
+          textIconSpacing={textIconSpacing}
           {...buttonProps}
         />
       </span>

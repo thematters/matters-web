@@ -32,7 +32,7 @@ type CommentButtonProps = {
   article: CommentButtonArticle
   disabled?: boolean
   iconSize?: 'mdS' | 'md'
-  textIconSpace?: 'xtight' | 'basexxtight'
+  textIconSpacing?: 'xtight' | 'basexxtight'
 } & ButtonProps
 
 const fragments = {
@@ -59,12 +59,12 @@ const fragments = {
 const Content = ({
   article,
   iconSize = 'mdS',
-  textIconSpace = 'xtight',
+  textIconSpacing = 'xtight',
   ...props
 }: (CardProps | ButtonProps) & {
   article: CommentButtonArticle
   iconSize?: 'mdS' | 'md'
-  textIconSpace?: 'xtight' | 'basexxtight'
+  textIconSpacing?: 'xtight' | 'basexxtight'
 }) => {
   const intl = useIntl()
 
@@ -83,7 +83,7 @@ const Content = ({
         <TextIcon
           icon={<IconComment24 size={iconSize} />}
           weight="md"
-          spacing={textIconSpace}
+          spacing={textIconSpacing}
           size="sm"
         >
           {article.responseCount > 0
@@ -99,7 +99,7 @@ const CommentButton = ({
   article,
   disabled,
   iconSize = 'mdS',
-  textIconSpace = 'xtight',
+  textIconSpacing = 'xtight',
   ...buttonProps
 }: CommentButtonProps) => {
   const viewer = useContext(ViewerContext)
@@ -114,7 +114,7 @@ const CommentButton = ({
         article={article}
         disabled
         iconSize={iconSize}
-        textIconSpace={textIconSpace}
+        textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
     )
@@ -125,7 +125,7 @@ const CommentButton = ({
       <Content
         article={article}
         iconSize={iconSize}
-        textIconSpace={textIconSpace}
+        textIconSpacing={textIconSpacing}
         onClick={() => {
           toast.error({
             message: (
@@ -145,7 +145,7 @@ const CommentButton = ({
       <Content
         article={article}
         iconSize={iconSize}
-        textIconSpace={textIconSpace}
+        textIconSpacing={textIconSpacing}
         onClick={() => {
           toast.error({
             message: (
@@ -179,7 +179,7 @@ const CommentButton = ({
         aria-haspopup="dialog"
         article={article}
         iconSize={iconSize}
-        textIconSpace={textIconSpace}
+        textIconSpacing={textIconSpacing}
         {...props}
         {...buttonProps}
       />
@@ -198,7 +198,7 @@ const CommentButton = ({
           aria-haspopup="dialog"
           onClick={openDialog}
           iconSize={iconSize}
-          textIconSpace={textIconSpace}
+          textIconSpacing={textIconSpacing}
           {...buttonProps}
         />
       )}

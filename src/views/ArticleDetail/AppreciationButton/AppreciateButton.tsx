@@ -24,7 +24,7 @@ export type AppreciateButtonProps = {
   isSuperLike?: boolean
   superLiked?: boolean
   iconSize?: 'mdS' | 'md'
-  textIconSpace?: 'xtight' | 'basexxtight'
+  textIconSpacing?: 'xtight' | 'basexxtight'
 } & ButtonProps
 
 const AppreciateButton: React.FC<AppreciateButtonProps> = ({
@@ -35,7 +35,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   isSuperLike,
   superLiked,
   iconSize = 'mdS',
-  textIconSpace = 'xtight',
+  textIconSpacing = 'xtight',
   ...buttonProps
 }) => {
   const { lang } = useContext(LanguageContext)
@@ -71,7 +71,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
       >
         <TextIcon
           weight="md"
-          spacing={textIconSpace}
+          spacing={textIconSpacing}
           size="sm"
           icon={
             <span
