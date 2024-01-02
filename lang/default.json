@@ -3,6 +3,10 @@
     "defaultMessage": "Please verify email first",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
+  "+5O5ev": {
+    "defaultMessage": "{circleName}",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
   "+63O1f": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_PASSWORD_INVALID"
@@ -2176,6 +2180,10 @@
   "x7O1/5": {
     "defaultMessage": "This ID has been taken, please try another one",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "x7kxvC": {
+    "defaultMessage": "Subscribe to unlock all articles of",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
   "xMaFCO": {
     "defaultMessage": "Articles",

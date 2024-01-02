@@ -92,14 +92,6 @@ const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
   loading: () => <Spinner />,
 })
 
-const DynamicSubscribeCircleDialog = dynamic(
-  () =>
-    import('~/components/Dialogs/SubscribeCircleDialog').then(
-      (mod) => mod.SubscribeCircleDialog
-    ),
-  { ssr: false }
-)
-
 const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
   // is there a better way to detect valid?
   // a valid mediaHash, should have length 49 or 59 chars
@@ -368,10 +360,6 @@ const BaseArticleDetail = ({
       </section>
 
       {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}
-
-      {article.access.circle && (
-        <DynamicSubscribeCircleDialog circle={article.access.circle} />
-      )}
 
       <Media at="sm">
         <Spacer size="xxxloose" />
