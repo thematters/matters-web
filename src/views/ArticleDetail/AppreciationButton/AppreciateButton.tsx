@@ -76,7 +76,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
       >
         <TextIcon
           weight={textWeight}
-          spacing={textIconSpacing}
+          spacing={total > 0 || showText ? textIconSpacing : 0}
           size="sm"
           icon={
             <span
