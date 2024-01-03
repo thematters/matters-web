@@ -227,6 +227,7 @@ const BaseArticleDetail = ({
   const content =
     translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
+  const lock = article.state !== 'active'
 
   return (
     <Layout.Main
@@ -314,7 +315,9 @@ const BaseArticleDetail = ({
 
         <License license={article.license} />
 
-        {features.payment && <DynamicSupportWidget article={article} />}
+        {features.payment && (
+          <DynamicSupportWidget article={article} disable={lock} />
+        )}
         <Media greaterThanOrEqual="lg">
           <Waypoint
             onEnter={() => {
@@ -332,6 +335,7 @@ const BaseArticleDetail = ({
                 translatedLanguage={translatedLanguage}
                 privateFetched={privateFetched}
                 hasFingerprint={canReadFullContent}
+                lock={lock}
               />
             </div>
           </Waypoint>
@@ -373,7 +377,7 @@ const BaseArticleDetail = ({
           translatedLanguage={translatedLanguage}
           privateFetched={privateFetched}
           hasFingerprint={canReadFullContent}
-          lock={!canReadFullContent}
+          lock={lock}
           showCommentToolbar={showCommentToolbar}
         />
       </Media>
@@ -385,6 +389,7 @@ const BaseArticleDetail = ({
           article={article}
           articleDetails={article}
           privateFetched={privateFetched}
+          lock={lock}
         />
       </Media>
 
@@ -394,6 +399,7 @@ const BaseArticleDetail = ({
           article={article}
           articleDetails={article}
           privateFetched={privateFetched}
+          lock={lock}
         />
       </Media>
     </Layout.Main>

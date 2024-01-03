@@ -114,6 +114,7 @@ const FixedToolbar = ({
               // TODO: open comment drawer
               console.log('comment...')
             }}
+            disabled={lock}
           >
             <TextIcon size="sm">
               <FormattedMessage
@@ -133,6 +134,7 @@ const FixedToolbar = ({
             iconSize="md"
             textWeight="normal"
             textIconSpacing="xxtight"
+            disabled={lock}
             {...buttonProps}
           />
         </ReCaptchaProvider>
@@ -141,6 +143,7 @@ const FixedToolbar = ({
           article={article}
           articleDetail={articleDetails}
           showText={showCommentToolbar}
+          disabled={lock}
           iconSize="md"
           textWeight="normal"
           textIconSpacing="xxtight"
@@ -162,6 +165,7 @@ const FixedToolbar = ({
           article={article}
           iconSize="md"
           inCard={false}
+          disabled={lock}
           showText={showCommentToolbar}
           {...buttonProps}
         />
@@ -169,6 +173,7 @@ const FixedToolbar = ({
         {!showCommentToolbar && (
           <DropdownActions
             article={article}
+            disabled={lock}
             {...dropdonwActionsProps}
             hasShare
             hasBookmark={false}

@@ -28,6 +28,7 @@ export type DesktopToolbarProps = {
   translated: boolean
   translatedLanguage?: string | null
   privateFetched: boolean
+  lock: boolean
 } & DropdownActionsControls
 
 const fragments = {
@@ -69,6 +70,7 @@ const DesktopToolbar = ({
   translated,
   translatedLanguage,
   privateFetched,
+  lock,
   ...props
 }: DesktopToolbarProps) => {
   const path = toPath({ page: 'articleDetail', article })
@@ -105,6 +107,7 @@ const DesktopToolbar = ({
             article={article}
             privateFetched={privateFetched}
             iconSize="md"
+            disabled={lock}
             {...buttonProps}
           />
         </ReCaptchaProvider>
@@ -123,6 +126,7 @@ const DesktopToolbar = ({
           inCard={false}
           // title={makeTitle(article.title)}
           path={sharePath}
+          disabled={lock}
           tags={article.tags
             ?.map(({ content }) => content)
             .join(' ')
@@ -130,10 +134,16 @@ const DesktopToolbar = ({
             .map(normalizeTag)}
         />
 
-        <BookmarkButton article={article} iconSize="md" inCard={false} />
+        <BookmarkButton
+          article={article}
+          iconSize="md"
+          inCard={false}
+          disabled={lock}
+        />
 
         <DropdownActions
           article={article}
+          disabled={lock}
           size="md"
           {...dropdonwActionsProps}
           hasBookmark={false}

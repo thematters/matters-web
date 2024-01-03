@@ -8,9 +8,10 @@ import { useEditArticleDetailSupportSetting } from '../../Hook'
 
 interface EditCopyButtonProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>
+  disabled?: boolean
 }
 
-const EditCopyButton = ({ article }: EditCopyButtonProps) => {
+const EditCopyButton = ({ article, disabled }: EditCopyButtonProps) => {
   const { edit: editSupport, saving: supportSaving } =
     useEditArticleDetailSupportSetting(article)
 
@@ -35,6 +36,7 @@ const EditCopyButton = ({ article }: EditCopyButtonProps) => {
                 description="src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
               />
             }
+            disabled={disabled}
             onClick={openDialog}
           >
             <TextIcon icon={<IconEdit20 size="mdS" />} size="md" color="gold">
