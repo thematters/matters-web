@@ -229,7 +229,10 @@ const BaseArticleDetail = ({
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
 
   return (
-    <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
+    <Layout.Main
+      aside={<RelatedArticles article={article} inSidebar />}
+      showAside={article.state === 'active'}
+    >
       <Head
         title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
         path={toPath({ page: 'articleDetail', article }).href}

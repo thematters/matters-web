@@ -453,6 +453,10 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
+  "9FQN4+": {
+    "defaultMessage": "Archived article (Author),",
+    "description": "src/views/ArticleDetail/State/index.tsx"
+  },
   "9Fpc9S": {
     "defaultMessage": "Bug Report"
   },
@@ -784,6 +788,10 @@
     "defaultMessage": "Wallet",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
+  "HaSYl4": {
+    "defaultMessage": "Archived article (violations),&nbsp;",
+    "description": "src/views/ArticleDetail/State/index.tsx"
+  },
   "HkozYU": {
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -827,6 +835,10 @@
   "Ix3e3Q": {
     "defaultMessage": "Comment",
     "description": "src/components/Forms/CommentForm/index.tsx"
+  },
+  "J12iSN": {
+    "defaultMessage": "Back to my works",
+    "description": "src/views/ArticleDetail/State/index.tsx"
   },
   "J6f6iN": {
     "defaultMessage": "Number of comments",
