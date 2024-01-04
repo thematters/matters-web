@@ -37,6 +37,7 @@ import {
   UserLanguage,
 } from '~/gql/graphql'
 
+import { AuthorSidebar } from './AuthorSidebar'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
 import {
@@ -231,7 +232,8 @@ const BaseArticleDetail = ({
 
   return (
     <Layout.Main
-      aside={<RelatedArticles article={article} inSidebar />}
+      // aside={<RelatedArticles article={article} inSidebar />}
+      aside={<AuthorSidebar />}
       showAside={article.state === 'active'}
     >
       <Head
