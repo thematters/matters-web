@@ -285,6 +285,7 @@ const BaseArticleDetail = ({
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
             canReadFullContent={canReadFullContent}
+            disabled={lock}
           />
         </section>
 

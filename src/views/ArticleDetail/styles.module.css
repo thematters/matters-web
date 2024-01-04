@@ -1,8 +1,9 @@
 .content {
   min-height: 100vh;
-  padding: var(--spacing-x-loose);
+  padding: var(--spacing-base-loose) var(--spacing-base);
 
   @media (--sm-up) {
+    padding: var(--spacing-x-loose);
     padding-right: 0;
     padding-left: 0;
   }
