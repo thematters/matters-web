@@ -44,6 +44,7 @@ type ToPathArgs =
   | {
       page: 'articleDetail'
       article: ArticleArgs
+      collectionId?: string
     }
   | {
       page:
@@ -114,6 +115,9 @@ export const toPath = (
           href = `/@${userName}/${articleId}-${slug}${
             mediaHash ? '-' + mediaHash : ''
           }`
+        }
+        if (!!args.collectionId) {
+          href = `${href}?cid=${args.collectionId}`
         }
       } catch (err) {
         // do nothing
