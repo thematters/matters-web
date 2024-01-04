@@ -38,6 +38,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
           likesReceived: { ...MOCK_ARTILCE.likesReceived, totalCount: 1 },
         }}
         inCard={false}
+        hasAppreciators
       />
     )
 
@@ -76,7 +77,7 @@ describe('<ArticleDigest/DropdownActions>', () => {
 
   // hasDonators
   it('should render donators button', async () => {
-    render(<DropdownActions article={MOCK_ARTILCE} />)
+    render(<DropdownActions article={MOCK_ARTILCE} hasDonators />)
 
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
