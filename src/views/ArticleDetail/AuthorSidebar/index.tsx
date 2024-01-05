@@ -4,6 +4,7 @@ import { useRoute } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import Author from './Author'
+import { Collection } from './Collection'
 import { fragments } from './gql'
 import { Placeholder } from './Placeholder'
 import { TABS, Tabs } from './Tabs'
@@ -21,6 +22,9 @@ export const AuthorSidebar = ({ article }: AuthorSidebarProps) => {
     <>
       <Author article={article} />
       <Tabs article={article} tab={tab} setTab={setTab} />
+      {!!cid && tab === 'Collection' && (
+        <Collection article={article} collectionId={cid} />
+      )}
     </>
   )
 }

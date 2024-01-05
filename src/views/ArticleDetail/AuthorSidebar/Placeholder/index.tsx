@@ -13,6 +13,16 @@ const ItemPlaceholder = () => {
   )
 }
 
+export const FeedPlaceholder = () => {
+  return (
+    <section className={styles.feed}>
+      <ItemPlaceholder />
+      <ItemPlaceholder />
+      <ItemPlaceholder />
+    </section>
+  )
+}
+
 export const Placeholder = () => {
   return (
     <section className={styles.container}>
@@ -21,11 +31,7 @@ export const Placeholder = () => {
         <section className={styles.tabItem}></section>
         <section className={styles.tabItem}></section>
       </section>
-      <section className={styles.feed}>
-        <ItemPlaceholder />
-        <ItemPlaceholder />
-        <ItemPlaceholder />
-      </section>
+      <FeedPlaceholder />
     </section>
   )
 }

@@ -1,0 +1,26 @@
+.container {
+  @mixin border-grey;
+
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-tight) var(--spacing-base);
+  border-color: var(--color-grey-lighter-active);
+  border-radius: 0.5rem;
+
+  & title {
+    @mixin line-clamp;
+
+    -webkit-line-clamp: 2;
+    margin-bottom: var(--spacing-x-tight);
+    font-weight: var(--font-weight-medium);
+  }
+
+  & .description {
+    @mixin line-clamp;
+
+    -webkit-line-clamp: 4;
+    margin-bottom: var(--spacing-tight);
+    font-size: var(--font-size-xs);
+    color: var(--color-grey-darker);
+  }
+}
