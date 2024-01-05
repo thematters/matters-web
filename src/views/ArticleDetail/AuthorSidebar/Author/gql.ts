@@ -10,6 +10,9 @@ export const fragments = {
         id
         userName
         displayName
+        info {
+          description
+        }
         ...AvatarUser
       }
     }

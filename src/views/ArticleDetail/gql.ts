@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components/UserDigest'
 
+import { AuthorSidebar } from './AuthorSidebar'
 import Content from './Content'
 import MetaInfo from './MetaInfo'
 import RelatedArticles from './RelatedArticles'
@@ -61,6 +62,7 @@ const articlePublicFragment = gql`
       language
     }
     availableTranslations
+    ...AuthorSidebarArticle
     ...MetaInfoArticle
     ...ContentArticle
     ...TagListArticle
@@ -71,6 +73,7 @@ const articlePublicFragment = gql`
     ...SupportWidgetArticlePublic
     ...SupportWidgetArticlePrivate
   }
+  ${AuthorSidebar.fragments.article}
   ${MetaInfo.fragments.article}
   ${Content.fragments.article}
   ${TagList.fragments.article}

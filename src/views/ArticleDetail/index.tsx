@@ -233,7 +233,7 @@ const BaseArticleDetail = ({
   return (
     <Layout.Main
       // aside={<RelatedArticles article={article} inSidebar />}
-      aside={<AuthorSidebar />}
+      aside={<AuthorSidebar article={article} />}
       showAside={article.state === 'active'}
     >
       <Head
@@ -580,7 +580,11 @@ const ArticleDetail = ({
    * Render:Loading
    */
   if (loading) {
-    return <Placeholder />
+    return (
+      <Layout.Main aside={<AuthorSidebar.Placeholder />}>
+        <Placeholder />
+      </Layout.Main>
+    )
   }
 
   /**
@@ -686,7 +690,11 @@ const ArticleDetailOuter = () => {
    * Rendering
    */
   if (loading) {
-    return <Placeholder />
+    return (
+      <Layout.Main aside={<AuthorSidebar.Placeholder />}>
+        <Placeholder />
+      </Layout.Main>
+    )
   }
 
   return <ArticleDetail includeTranslation={includeTranslation} />
