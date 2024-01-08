@@ -276,7 +276,7 @@ const Footer = () => {
               </Media>
             </section>
             <section className={styles.copyright}>
-              © {year} Zaihu Technology Limited all rights reserved.
+              © {year} Matters, Inc. All rights reserved.
             </section>
           </div>
         </div>
