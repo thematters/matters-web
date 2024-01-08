@@ -114,7 +114,11 @@ const DonationButton = ({
           <TextIcon
             icon={<IconMoney20 size={iconSize} />}
             weight={textWeight}
-            spacing={textIconSpacing}
+            spacing={
+              showText || article.donationsToolbar.totalCount > 0
+                ? textIconSpacing
+                : 0
+            }
             size="sm"
           >
             {!showText && article.donationsToolbar.totalCount > 0
