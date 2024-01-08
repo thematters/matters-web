@@ -51,7 +51,6 @@ export type ButtonSpacingX =
   | 'xxtight'
   | 'xtight'
   | 'baseTight'
-  | 'tighter'
   | 'tight'
   | 'base'
   | 'loose'
