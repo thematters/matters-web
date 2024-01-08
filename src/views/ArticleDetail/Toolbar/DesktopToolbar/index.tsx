@@ -113,6 +113,7 @@ const DesktopToolbar = ({
         </ReCaptchaProvider>
 
         <section className={styles.commentBar}>
+          {/* TODO: open comment drawer */}
           <CommentButton
             article={article}
             disabled={!article.canComment}
