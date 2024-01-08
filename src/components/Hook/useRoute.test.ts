@@ -7,7 +7,7 @@ import { PATHS } from '~/common/enums'
 import { useRoute } from './useRoute'
 
 beforeEach(() => {
-  mockRouter.push(PATHS.ABOUT + '?name=foo')
+  mockRouter.push(PATHS.ABOUT + '?name=foo&email=test%2Babc%40matters.news')
 })
 
 describe('components/Hook/useRoute', () => {
@@ -26,6 +26,7 @@ describe('components/Hook/useRoute', () => {
   it('should return query value by key', () => {
     const { result } = renderHook(() => useRoute())
     expect(result.current.getQuery('name')).toBe('foo')
+    expect(result.current.getQuery('email')).toBe('test+abc@matters.news')
     expect(result.current.getQuery('mediaHash')).toBe('')
   })
 
