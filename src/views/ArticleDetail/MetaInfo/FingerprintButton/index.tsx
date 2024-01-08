@@ -9,7 +9,13 @@ interface FingerprintButtonProps {
 
 const FingerprintButton = ({ article }: FingerprintButtonProps) => {
   return (
-    <Button textColor="black" textActiveColor="greyDarker">
+    <Button
+      textColor="black"
+      textActiveColor="greyDarker"
+      onClick={() => {
+        // TODO: redirect to IPFS page
+      }}
+    >
       <FormattedMessage defaultMessage="IPFS" id="tio9Gt" />
     </Button>
   )

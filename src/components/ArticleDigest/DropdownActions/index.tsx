@@ -70,6 +70,7 @@ export interface DropdownActionsControls {
   icon?: React.ReactNode
   size?: IconSize
   sharePath?: string
+  disabled?: boolean
 
   /**
    * options to control visibility
@@ -157,6 +158,7 @@ const BaseDropdownActions = ({
   size,
   inCard,
   inFixedToolbar,
+  disabled,
 
   hasShare,
   hasAppreciators,
@@ -322,6 +324,7 @@ const BaseDropdownActions = ({
             bgActiveColor={inFixedToolbar ? undefined : 'greyLighter'}
             aria-label={moreActionText}
             ref={ref}
+            disabled={disabled}
           >
             {icon ? icon : <IconMore16 size={size} />}
           </Button>

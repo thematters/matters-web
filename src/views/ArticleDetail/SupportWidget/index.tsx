@@ -11,11 +11,10 @@ import {
   SUPPORT_SUCCESS_ANIMATION,
   TEST_ID,
 } from '~/common/enums'
-import { analytics, sleep } from '~/common/utils'
+import { sleep } from '~/common/utils'
 import {
   Avatar,
   Button,
-  CircleDigest,
   IconDollarCircle16,
   IconSpinner16,
   Spacer,
@@ -34,6 +33,7 @@ import SupportButton from './SupportButton'
 
 interface DonationProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>
+  disable?: boolean
 }
 
 type HasDonatedArticle = NonNullable<
@@ -45,7 +45,7 @@ const DynamicAnimation = dynamic(() => import('./Animation'), {
   loading: () => <Spinner />,
 })
 
-const SupportWidget = ({ article }: DonationProps) => {
+const SupportWidget = ({ article, disable }: DonationProps) => {
   const viewer = useContext(ViewerContext)
   const [playShipWaiting, setPlayShipWaiting] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
@@ -242,7 +242,7 @@ const SupportWidget = ({ article }: DonationProps) => {
               )}
 
               <section className={styles.donationButton}>
-                <EditCopyButton article={article} />
+                <EditCopyButton article={article} disabled={disable} />
               </section>
 
               {article.donations.totalCount > 0 && (
@@ -256,23 +256,6 @@ const SupportWidget = ({ article }: DonationProps) => {
               )}
             </>
           )}
-        </section>
-      )}
-
-      {article.access.circle && (
-        <section className={styles.circle}>
-          <CircleDigest.Rich
-            circle={article.access.circle}
-            bgColor="greyLighter"
-            hasFooter
-            hasPrice
-            onClickPrice={() => {
-              analytics.trackEvent('click_button', {
-                type: 'subscribe_circle_price',
-                pageType: 'article_detail',
-              })
-            }}
-          />
         </section>
       )}
     </section>

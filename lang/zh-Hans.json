@@ -3,6 +3,10 @@
     "defaultMessage": "请先验证邮箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
+  "+5O5ev": {
+    "defaultMessage": "「{circleName}」所有作品",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
   "+63O1f": {
     "defaultMessage": "邮箱或密码错误",
     "description": "USER_PASSWORD_INVALID"
@@ -449,6 +453,10 @@
     "defaultMessage": "已追踪",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
+  "9FQN4+": {
+    "defaultMessage": "仅作者本人可见封存作品，",
+    "description": "src/views/ArticleDetail/State/index.tsx"
+  },
   "9Fpc9S": {
     "defaultMessage": "漏洞报告"
   },
@@ -780,6 +788,10 @@
     "defaultMessage": "数字钱包",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
+  "HaSYl4": {
+    "defaultMessage": "仅作者本人可见封存作品，",
+    "description": "src/views/ArticleDetail/State/index.tsx"
+  },
   "HkozYU": {
     "defaultMessage": "更换钱包",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -823,6 +835,10 @@
   "Ix3e3Q": {
     "defaultMessage": "发布评论",
     "description": "src/components/Forms/CommentForm/index.tsx"
+  },
+  "J12iSN": {
+    "defaultMessage": "回到我的创作",
+    "description": "src/views/ArticleDetail/State/index.tsx"
   },
   "J6f6iN": {
     "defaultMessage": "评论数量",
@@ -2176,6 +2192,10 @@
   "x7O1/5": {
     "defaultMessage": "ID 已被使用，请修改后再试",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "x7kxvC": {
+    "defaultMessage": "订阅解锁",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
   "xMaFCO": {
     "defaultMessage": "阅读",

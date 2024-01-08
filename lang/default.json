@@ -3,6 +3,10 @@
     "defaultMessage": "Please verify email first",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
+  "+5O5ev": {
+    "defaultMessage": "{circleName}",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
   "+63O1f": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_PASSWORD_INVALID"
@@ -449,6 +453,10 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
+  "9FQN4+": {
+    "defaultMessage": "Archived article (Author),",
+    "description": "src/views/ArticleDetail/State/index.tsx"
+  },
   "9Fpc9S": {
     "defaultMessage": "Bug Report"
   },
@@ -780,6 +788,10 @@
     "defaultMessage": "Wallet",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
+  "HaSYl4": {
+    "defaultMessage": "Archived article (violations),",
+    "description": "src/views/ArticleDetail/State/index.tsx"
+  },
   "HkozYU": {
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -823,6 +835,10 @@
   "Ix3e3Q": {
     "defaultMessage": "Comment",
     "description": "src/components/Forms/CommentForm/index.tsx"
+  },
+  "J12iSN": {
+    "defaultMessage": "Back to my works",
+    "description": "src/views/ArticleDetail/State/index.tsx"
   },
   "J6f6iN": {
     "defaultMessage": "Number of comments",
@@ -2176,6 +2192,10 @@
   "x7O1/5": {
     "defaultMessage": "This ID has been taken, please try another one",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "x7kxvC": {
+    "defaultMessage": "Subscribe to unlock all articles of",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
   "xMaFCO": {
     "defaultMessage": "Articles",

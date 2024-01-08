@@ -28,6 +28,7 @@ type MetaInfoProps = {
   canTranslate: boolean
   toggleTranslate: () => any
   canReadFullContent: boolean
+  disabled: boolean
 }
 
 const MetaInfo = ({
@@ -36,6 +37,7 @@ const MetaInfo = ({
   canTranslate,
   toggleTranslate,
   canReadFullContent,
+  disabled,
 }: MetaInfoProps) => {
   const viewer = useContext(ViewerContext)
   const authorId = article.author.id
@@ -94,7 +96,12 @@ const MetaInfo = ({
               <Button
                 textColor="black"
                 textActiveColor="greyDarker"
-                href={`${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`}
+                href={
+                  !disabled
+                    ? `${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`
+                    : undefined
+                }
+                disabled={disabled}
               >
                 <TextIcon icon={<IconEdit16 />}>
                   <FormattedMessage

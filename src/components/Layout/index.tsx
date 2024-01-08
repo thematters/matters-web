@@ -62,12 +62,13 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
 interface MainProps {
   aside?: React.ReactNode
+  showAside?: boolean
   inEditor?: boolean
 }
 
 const Main: React.FC<React.PropsWithChildren<MainProps>> & {
   Spacing: typeof Spacing
-} = ({ aside, inEditor, children }) => {
+} = ({ aside, showAside = true, inEditor, children }) => {
   const { isInPath } = useRoute()
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
@@ -87,21 +88,23 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
         <PullToRefresh>{children}</PullToRefresh>
       </article>
 
-      <aside className={styles.aside}>
-        <Media greaterThanOrEqual="lg">
-          <Sticky enabled top={0}>
-            <section className={styles.content}>
-              <section className={styles.top}>
-                {!inEditor && <SearchBar />}
+      {showAside && (
+        <aside className={styles.aside}>
+          <Media greaterThanOrEqual="lg">
+            <Sticky enabled top={0}>
+              <section className={styles.content}>
+                <section className={styles.top}>
+                  {!inEditor && <SearchBar />}
 
-                {aside}
+                  {aside}
+                </section>
+
+                {!inEditor && !isInSettings && <SideFooter />}
               </section>
-
-              {!inEditor && !isInSettings && <SideFooter />}
-            </section>
-          </Sticky>
-        </Media>
-      </aside>
+            </Sticky>
+          </Media>
+        </aside>
+      )}
     </>
   )
 }

@@ -92,14 +92,6 @@ const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
   loading: () => <Spinner />,
 })
 
-const DynamicSubscribeCircleDialog = dynamic(
-  () =>
-    import('~/components/Dialogs/SubscribeCircleDialog').then(
-      (mod) => mod.SubscribeCircleDialog
-    ),
-  { ssr: false }
-)
-
 const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
   // is there a better way to detect valid?
   // a valid mediaHash, should have length 49 or 59 chars
@@ -235,9 +227,13 @@ const BaseArticleDetail = ({
   const content =
     translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
+  const lock = article.state !== 'active'
 
   return (
-    <Layout.Main aside={<RelatedArticles article={article} inSidebar />}>
+    <Layout.Main
+      aside={<RelatedArticles article={article} inSidebar />}
+      showAside={article.state === 'active'}
+    >
       <Head
         title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
         path={toPath({ page: 'articleDetail', article }).href}
@@ -289,6 +285,7 @@ const BaseArticleDetail = ({
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
             canReadFullContent={canReadFullContent}
+            disabled={lock}
           />
         </section>
 
@@ -319,7 +316,9 @@ const BaseArticleDetail = ({
 
         <License license={article.license} />
 
-        {features.payment && <DynamicSupportWidget article={article} />}
+        {features.payment && (
+          <DynamicSupportWidget article={article} disable={lock} />
+        )}
         <Media greaterThanOrEqual="lg">
           <Waypoint
             onEnter={() => {
@@ -337,6 +336,7 @@ const BaseArticleDetail = ({
                 translatedLanguage={translatedLanguage}
                 privateFetched={privateFetched}
                 hasFingerprint={canReadFullContent}
+                lock={lock}
               />
             </div>
           </Waypoint>
@@ -369,10 +369,6 @@ const BaseArticleDetail = ({
 
       {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}
 
-      {article.access.circle && (
-        <DynamicSubscribeCircleDialog circle={article.access.circle} />
-      )}
-
       <Media at="sm">
         <Spacer size="xxxloose" />
         <FixedToolbar
@@ -382,7 +378,7 @@ const BaseArticleDetail = ({
           translatedLanguage={translatedLanguage}
           privateFetched={privateFetched}
           hasFingerprint={canReadFullContent}
-          lock={!canReadFullContent}
+          lock={lock}
           showCommentToolbar={showCommentToolbar}
         />
       </Media>
@@ -394,6 +390,7 @@ const BaseArticleDetail = ({
           article={article}
           articleDetails={article}
           privateFetched={privateFetched}
+          lock={lock}
         />
       </Media>
 
@@ -403,6 +400,7 @@ const BaseArticleDetail = ({
           article={article}
           articleDetails={article}
           privateFetched={privateFetched}
+          lock={lock}
         />
       </Media>
     </Layout.Main>

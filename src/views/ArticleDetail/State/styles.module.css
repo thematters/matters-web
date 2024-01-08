@@ -1,11 +1,13 @@
 .container {
-  position: sticky;
-  top: calc(var(--global-header-height-mobile) + var(--spacing-base));
-  z-index: 10;
-  margin-top: calc(var(--spacing-xx-loose) * -1);
-  margin-bottom: var(--spacing-loose);
+  @mixin flex-center-all;
 
-  @media (--sm-up) {
-    top: calc(var(--global-header-height) + var(--spacing-base));
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  padding: calc(var(--spacing-base-tight) - 1px) 0;
+  color: black;
+  text-align: center;
+  background: var(--color-grey-lighter-active);
 }

@@ -267,6 +267,12 @@ span.container {
 }
 
 /* Background */
+.bgWhite {
+  & .hotarea {
+    background: var(--color-white);
+  }
+}
+
 .bgGreyDarkest {
   & .hotarea {
     background: var(--color-grey-darkest);

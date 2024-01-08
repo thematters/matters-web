@@ -26,6 +26,8 @@
 
   & .donationButton {
     margin-top: var(--spacing-loose);
+    background: var(--color-white);
+    border-radius: 5rem;
   }
 
   & .donators {
