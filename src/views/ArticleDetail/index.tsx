@@ -55,6 +55,7 @@ import State from './State'
 import styles from './styles.module.css'
 import TagList from './TagList'
 import DesktopToolbar from './Toolbar/DesktopToolbar'
+import FixedToolbar from './Toolbar/FixedToolbar'
 import FloatToolbar from './Toolbar/FloatToolbar'
 import TranslationToast from './TranslationToast'
 
@@ -125,6 +126,7 @@ const BaseArticleDetail = ({
 
   const features = useFeatures()
   const [showFloatToolbar, setShowFloatToolbar] = useState(true)
+  const [showCommentToolbar, setShowCommentToolbar] = useState(false)
   const [fixedWall, setFixedWall] = useState(false)
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
@@ -349,9 +351,16 @@ const BaseArticleDetail = ({
           </section>
         )}
 
-        <section className={styles.block}>
-          <DynamicResponse id={article.id} lock={!canReadFullContent} />
-        </section>
+        <Waypoint
+          onEnter={() => {
+            setShowCommentToolbar(true)
+          }}
+          onLeave={() => setShowCommentToolbar(false)}
+        >
+          <section className={styles.block}>
+            <DynamicResponse id={article.id} lock={!canReadFullContent} />
+          </section>
+        </Waypoint>
 
         <Media lessThan="lg">
           <RelatedArticles article={article} />
@@ -363,6 +372,20 @@ const BaseArticleDetail = ({
       {article.access.circle && (
         <DynamicSubscribeCircleDialog circle={article.access.circle} />
       )}
+
+      <Media at="sm">
+        <Spacer size="xxxloose" />
+        <FixedToolbar
+          article={article}
+          articleDetails={article}
+          translated={translated}
+          translatedLanguage={translatedLanguage}
+          privateFetched={privateFetched}
+          hasFingerprint={canReadFullContent}
+          lock={!canReadFullContent}
+          showCommentToolbar={showCommentToolbar}
+        />
+      </Media>
 
       <Media at="md">
         <Spacer size="xloose" />

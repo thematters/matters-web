@@ -41,15 +41,19 @@ export type AppreciationButtonProps = {
     Partial<AppreciationButtonArticlePrivateFragment>
   privateFetched: boolean
   disabled?: boolean
+  showText?: boolean
   iconSize?: 'mdS' | 'md'
-  textIconSpacing?: 'xtight' | 'basexxtight'
+  textWeight?: 'md' | 'normal'
+  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 } & ButtonProps
 
 const AppreciationButton = ({
   article,
   privateFetched,
   disabled,
+  showText,
   iconSize = 'mdS',
+  textWeight = 'md',
   textIconSpacing = 'xtight',
   ...buttonProps
 }: AppreciationButtonProps) => {
@@ -209,6 +213,7 @@ const AppreciationButton = ({
     return (
       <AnonymousButton
         total={total}
+        showText={showText}
         iconSize={iconSize}
         textIconSpacing={textIconSpacing}
         {...buttonProps}
@@ -221,7 +226,9 @@ const AppreciationButton = ({
     return (
       <BlockedButton
         total={total}
+        showText={showText}
         iconSize={iconSize}
+        textWeight={textWeight}
         textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
@@ -233,7 +240,9 @@ const AppreciationButton = ({
     return (
       <ForbiddenButton
         total={total}
+        showText={showText}
         iconSize={iconSize}
+        textWeight={textWeight}
         textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
@@ -246,7 +255,9 @@ const AppreciationButton = ({
       <AppreciateButton
         total={total}
         disabled
+        showText={showText}
         iconSize={iconSize}
+        textWeight={textWeight}
         textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
@@ -279,9 +290,11 @@ const AppreciationButton = ({
           onClick={appreciate}
           count={appreciatedCount > 0 ? appreciatedCount : undefined}
           total={total}
+          showText={showText}
           isSuperLike={isSuperLike}
           superLiked={superLiked}
           iconSize={iconSize}
+          textWeight={textWeight}
           textIconSpacing={textIconSpacing}
           {...buttonProps}
         />
@@ -295,6 +308,7 @@ const AppreciationButton = ({
       <AppreciateButton
         count="MAX"
         total={total}
+        showText={showText}
         onClick={() => {
           toast.success({
             message: (
@@ -318,6 +332,7 @@ const AppreciationButton = ({
         isSuperLike={isSuperLike}
         superLiked={superLiked}
         iconSize={iconSize}
+        textWeight={textWeight}
         textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
@@ -330,7 +345,9 @@ const AppreciationButton = ({
       <AppreciateButton
         count="MAX"
         total={total}
+        showText={showText}
         iconSize={iconSize}
+        textWeight={textWeight}
         textIconSpacing={textIconSpacing}
         {...buttonProps}
       />
@@ -353,8 +370,10 @@ const AppreciationButton = ({
         <AppreciateButton
           disabled
           count={appreciatedCount > 0 ? appreciatedCount : undefined}
+          showText={showText}
           total={total}
           iconSize={iconSize}
+          textWeight={textWeight}
           textIconSpacing={textIconSpacing}
           {...buttonProps}
         />

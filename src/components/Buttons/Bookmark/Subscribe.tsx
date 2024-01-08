@@ -10,10 +10,12 @@ import {
 } from '~/common/enums'
 import {
   Button,
+  ButtonProps,
   IconBookmark20,
   IconBookmark24,
   IconSize,
   Menu,
+  TextIcon,
   toast,
   useMutation,
   ViewerContext,
@@ -22,14 +24,22 @@ import { ToggleSubscribeArticleMutation } from '~/gql/graphql'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
 
-interface SubscribeProps {
+export type SubscribeProps = {
   articleId?: string
-  size?: Extract<IconSize, 'mdS' | 'md'>
+  iconSize?: Extract<IconSize, 'mdS' | 'md'>
   disabled?: boolean
   inCard?: boolean
-}
+  showText?: boolean
+} & ButtonProps
 
-const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
+const Subscribe = ({
+  articleId,
+  iconSize,
+  disabled,
+  inCard,
+  showText,
+  ...buttonProps
+}: SubscribeProps) => {
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
 
@@ -103,8 +113,17 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
       onClick={onClick}
       disabled={disabled}
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}
+      {...buttonProps}
     >
-      <IconBookmark24 size={size} />
+      <TextIcon icon={<IconBookmark24 size={iconSize} />} size="sm">
+        {showText && (
+          <FormattedMessage
+            defaultMessage="Save"
+            id="gmdv1Q"
+            description="src/components/Buttons/Bookmark"
+          />
+        )}
+      </TextIcon>
     </Button>
   )
 }

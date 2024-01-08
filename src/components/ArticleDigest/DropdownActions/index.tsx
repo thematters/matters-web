@@ -81,6 +81,7 @@ export interface DropdownActionsControls {
 
   // based on type
   inCard?: boolean
+  inFixedToolbar?: boolean
   inUserArticles?: boolean
 
   // tag
@@ -155,6 +156,7 @@ const BaseDropdownActions = ({
   icon,
   size,
   inCard,
+  inFixedToolbar,
 
   hasShare,
   hasAppreciators,
@@ -220,7 +222,7 @@ const BaseDropdownActions = ({
       {hasSticky && <PinButton article={article} />}
 
       {hasBookmark && (
-        <BookmarkButton article={article} inCard={inCard} size="mdS" />
+        <BookmarkButton article={article} inCard={inCard} iconSize="mdS" />
       )}
 
       {hasSetTagSelected && tagDetailId && (
@@ -313,8 +315,11 @@ const BaseDropdownActions = ({
         ) : (
           <Button
             onClick={openDropdown}
-            spacing={['xtight', 'xtight']}
-            bgActiveColor="greyLighter"
+            spacing={
+              inFixedToolbar ? ['baseTight', 'baseTight'] : ['xtight', 'xtight']
+            }
+            borderRadius={inFixedToolbar ? 0 : '5rem'}
+            bgActiveColor={inFixedToolbar ? undefined : 'greyLighter'}
             aria-label={moreActionText}
             ref={ref}
           >

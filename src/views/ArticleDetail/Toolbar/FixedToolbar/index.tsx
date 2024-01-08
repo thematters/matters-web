@@ -1,12 +1,14 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { normalizeTag, toLocale, toPath } from '~/common/utils'
+import { toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
-  Media,
+  Button,
+  ButtonProps,
   ReCaptchaProvider,
-  ShareButton,
+  TextIcon,
 } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -17,24 +19,25 @@ import {
   ToolbarArticlePublicFragment,
 } from '~/gql/graphql'
 
-import AppreciationButton from '../AppreciationButton'
-import CommentButton from './CommentButton'
-import DonationButton from './DonationButton'
+import AppreciationButton from '../../AppreciationButton'
+import CommentButton from '../CommentButton'
+import DonationButton from '../DonationButton'
 import styles from './styles.module.css'
 
-export type ToolbarProps = {
+export type FixedToolbarProps = {
   article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null
   privateFetched: boolean
   lock: boolean
+  showCommentToolbar: boolean
 } & DropdownActionsControls
 
 const fragments = {
   article: {
     public: gql`
-      fragment ToolbarArticlePublic on Article {
+      fragment FixedToolbarArticlePublic on Article {
         id
         title
         tags {
@@ -51,7 +54,7 @@ const fragments = {
       ${CommentButton.fragments.article.public}
     `,
     private: gql`
-      fragment ToolbarArticlePrivate on Article {
+      fragment FixedToolbarArticlePrivate on Article {
         id
         ...BookmarkArticlePrivate
         ...AppreciationButtonArticlePrivate
@@ -64,15 +67,16 @@ const fragments = {
   },
 }
 
-const Toolbar = ({
+const FixedToolbar = ({
   article,
   articleDetails,
   translated,
   translatedLanguage,
   privateFetched,
   lock,
+  showCommentToolbar,
   ...props
-}: ToolbarProps) => {
+}: FixedToolbarProps) => {
   const path = toPath({ page: 'articleDetail', article })
   const sharePath =
     translated && translatedLanguage
@@ -80,72 +84,101 @@ const Toolbar = ({
       : path.href
 
   const dropdonwActionsProps: DropdownActionsControls = {
-    size: 'mdS',
+    size: 'md',
     inCard: false,
+    inFixedToolbar: true,
     sharePath,
-    hasExtend: !lock,
+    hasExtend: false,
     hasEdit: true,
     hasArchive: true,
     hasAddCollection: true,
     ...props,
   }
 
+  const buttonProps: ButtonProps = {
+    spacing: ['baseTight', 'baseTight'],
+    bgColor: 'white',
+    borderRadius: 0,
+  }
+
   return (
     <section className={styles.toolbar} data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
       <section className={styles.buttons}>
+        {showCommentToolbar && (
+          <Button
+            bgColor="greyLighter"
+            borderRadius="0.5rem"
+            textColor="greyDarker"
+            spacing={['baseTight', 'baseTight']}
+            onClick={() => {
+              // TODO: open comment drawer
+              console.log('comment...')
+            }}
+          >
+            <TextIcon size="sm">
+              <FormattedMessage
+                defaultMessage="Comment..."
+                id="YOMY1y"
+                description="src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+              />
+            </TextIcon>
+          </Button>
+        )}
+
         <ReCaptchaProvider action="appreciateArticle">
           <AppreciationButton
             article={article}
+            showText={showCommentToolbar}
             privateFetched={privateFetched}
-            disabled={lock}
+            iconSize="md"
+            textWeight="normal"
+            textIconSpacing="xxtight"
+            {...buttonProps}
           />
         </ReCaptchaProvider>
 
-        <DonationButton article={article} articleDetail={articleDetails} />
+        <DonationButton
+          article={article}
+          articleDetail={articleDetails}
+          showText={showCommentToolbar}
+          iconSize="md"
+          textWeight="normal"
+          textIconSpacing="xxtight"
+          {...buttonProps}
+        />
 
-        <section className={styles.CommentButton}>
+        {!showCommentToolbar && (
           <CommentButton
             article={article}
-            disabled={lock || !article.canComment}
+            disabled={!article.canComment}
+            iconSize="md"
+            textWeight="normal"
+            textIconSpacing="xxtight"
+            {...buttonProps}
           />
-        </section>
+        )}
 
-        <BookmarkButton article={article} iconSize="mdS" inCard={false} />
+        <BookmarkButton
+          article={article}
+          iconSize="md"
+          inCard={false}
+          showText={showCommentToolbar}
+          {...buttonProps}
+        />
 
-        <Media greaterThan="sm">
-          <ShareButton
-            iconSize="mdS"
-            inCard={false}
-            // title={makeTitle(article.title)}
-            path={sharePath}
-            tags={article.tags
-              ?.map(({ content }) => content)
-              .join(' ')
-              .split(/\s+/)
-              .map(normalizeTag)}
-          />
-        </Media>
-
-        <Media at="sm">
+        {!showCommentToolbar && (
           <DropdownActions
             article={article}
             {...dropdonwActionsProps}
             hasShare
             hasBookmark={false}
           />
-        </Media>
-        <Media greaterThan="sm">
-          <DropdownActions
-            article={article}
-            {...dropdonwActionsProps}
-            hasBookmark={false}
-          />
-        </Media>
+        )}
       </section>
     </section>
   )
 }
 
-Toolbar.fragments = fragments
+FixedToolbar.fragments = fragments
 
-export default Toolbar
+export default FixedToolbar

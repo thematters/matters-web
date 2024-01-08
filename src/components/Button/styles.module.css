@@ -230,6 +230,18 @@ span.container {
   }
 }
 
+.spacingXBaseTight {
+  &:not(.isTransparent) {
+    padding-right: var(--spacing-base-tight);
+    padding-left: var(--spacing-base-tight);
+  }
+
+  & .hotarea {
+    margin-right: calc(var(--spacing-base-tight) * -1);
+    margin-left: calc(var(--spacing-base-tight) * -1);
+  }
+}
+
 .spacingXBase {
   &:not(.isTransparent) {
     padding-right: var(--spacing-base);

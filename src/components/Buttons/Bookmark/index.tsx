@@ -1,17 +1,18 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { IconSize, ViewerContext } from '~/components'
+import { ButtonProps, IconSize, ViewerContext } from '~/components'
 import { BookmarkArticlePrivateFragment } from '~/gql/graphql'
 
 import Subscribe from './Subscribe'
 import Unsubscribe from './Unsubscribe'
 
-interface BookmarkButtonProps {
+export type BookmarkButtonProps = {
   article: Partial<BookmarkArticlePrivateFragment>
-  size?: Extract<IconSize, 'mdS' | 'md'>
+  iconSize?: Extract<IconSize, 'mdS' | 'md'>
   inCard?: boolean
-}
+  showText?: boolean
+} & ButtonProps
 
 const fragments = {
   article: {
@@ -26,8 +27,10 @@ const fragments = {
 
 export const BookmarkButton = ({
   article,
-  size,
+  iconSize,
+  showText,
   inCard,
+  ...buttonProps
 }: BookmarkButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -35,18 +38,22 @@ export const BookmarkButton = ({
     return (
       <Unsubscribe
         articleId={article.id}
-        size={size}
+        iconSize={iconSize}
         disabled={viewer.isArchived}
         inCard={inCard}
+        showText={showText}
+        {...buttonProps}
       />
     )
   } else {
     return (
       <Subscribe
         articleId={article.id}
-        size={size}
+        iconSize={iconSize}
         disabled={viewer.isArchived}
         inCard={inCard}
+        showText={showText}
+        {...buttonProps}
       />
     )
   }

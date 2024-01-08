@@ -5,18 +5,23 @@ import AppreciateButton from './AppreciateButton'
 const BlockedButton = ({
   count,
   total,
+  showText,
   iconSize = 'mdS',
+  textWeight = 'md',
   textIconSpacing = 'xtight',
   ...buttonProps
 }: {
   count?: number
   total: number
+  showText?: boolean
   iconSize?: 'mdS' | 'md'
-  textIconSpacing?: 'xtight' | 'basexxtight'
+  textWeight?: 'md' | 'normal'
+  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
 } & ButtonProps) => (
   <AppreciateButton
     count={count}
     total={total}
+    showText={showText}
     onClick={() => {
       toast.error({
         message: (
@@ -29,6 +34,7 @@ const BlockedButton = ({
       })
     }}
     iconSize={iconSize}
+    textWeight={textWeight}
     textIconSpacing={textIconSpacing}
     {...buttonProps}
   />

@@ -429,6 +429,10 @@
     "defaultMessage": "replied to your discussion on",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "8rnUQH": {
+    "defaultMessage": "Like",
+    "description": "src/views/ArticleDetail/AppreciationButton/AppreciateButton.tsx"
+  },
   "8t6Cs8": {
     "defaultMessage": "Matters Daily Report",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
@@ -782,6 +786,9 @@
   },
   "HnxG15": {
     "defaultMessage": "Set"
+  },
+  "HqRNN8": {
+    "defaultMessage": "Support"
   },
   "HqnUd1": {
     "defaultMessage": "Add hash from IPFS into compatible reader such as",
@@ -1360,6 +1367,10 @@
   "Y8zV4A": {
     "defaultMessage": "Write a comment"
   },
+  "YOMY1y": {
+    "defaultMessage": "Comment...",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
     "description": "UNAUTHENTICATED"
@@ -1623,6 +1634,10 @@
   "ggS9L7": {
     "defaultMessage": "The payment amount is invalid, please re-enter.",
     "description": "PAYMENT_AMOUNT_INVALID"
+  },
+  "gmdv1Q": {
+    "defaultMessage": "Save",
+    "description": "src/components/Buttons/Bookmark"
   },
   "h+punE": {
     "defaultMessage": "Updated {date}",
