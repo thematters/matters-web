@@ -109,7 +109,7 @@ const FixedToolbar = ({
             bgColor="greyLighter"
             borderRadius="0.5rem"
             textColor="greyDarker"
-            spacing={['tighter', 'tighter']}
+            spacing={['baseTight', 'baseTight']}
             onClick={() => {
               // TODO: open comment drawer
               console.log('comment...')

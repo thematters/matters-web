@@ -14,7 +14,7 @@ import {
   toast,
   Tooltip,
   Translate,
-  // Turnstile,
+  Turnstile,
   // TURNSTILE_DEFAULT_SCRIPT_ID,
   // TURNSTILE_SCRIPT_URL,
   TurnstileInstance,
@@ -264,14 +264,14 @@ const AppreciationButton = ({
     )
   }
 
-  // const siteKey = process.env
-  //   .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
+  const siteKey = process.env
+    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
 
   // Appreciable
   if (canAppreciate && !disabled) {
     return (
       <section>
-        {/* <Turnstile
+        <Turnstile
           ref={turnstileRef}
           options={{
             action: 'appreciate',
@@ -285,7 +285,7 @@ const AppreciationButton = ({
             compat: 'recaptcha',
             appendTo: 'body',
           }}
-        /> */}
+        />
         <AppreciateButton
           onClick={appreciate}
           count={appreciatedCount > 0 ? appreciatedCount : undefined}
