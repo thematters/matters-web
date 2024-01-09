@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import { ArticleDigestSidebar } from '~/components'
+
 export const AUTHOR_SIDEBAR_COLLECTION = gql`
   query AuthorSidebarCollection($id: ID!, $after: String) {
     node(input: { id: $id }) {
@@ -17,13 +19,12 @@ export const AUTHOR_SIDEBAR_COLLECTION = gql`
           edges {
             cursor
             node {
-              id
-              title
-              cover
+              ...ArticleDigestSidebarArticle
             }
           }
         }
       }
     }
   }
+  ${ArticleDigestSidebar.fragments.article}
 `

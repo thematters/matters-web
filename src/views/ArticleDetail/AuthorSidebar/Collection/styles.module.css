@@ -23,4 +23,14 @@
     font-size: var(--font-size-xs);
     color: var(--color-grey-darker);
   }
+
+  & .feed {
+    @mixin border-top-grey;
+
+    max-height: 18.5rem;
+    padding-top: var(--spacing-tight);
+    padding-bottom: var(--spacing-x-loose);
+    overflow-y: auto;
+    border-top-style: dashed;
+  }
 }

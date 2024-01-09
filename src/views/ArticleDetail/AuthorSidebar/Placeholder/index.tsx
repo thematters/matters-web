@@ -1,3 +1,5 @@
+import { ArticleDigestAuthorSidebar } from '~/components'
+
 import { Placeholder as AuthorPlaceholder } from '../Author/Placeholder'
 import styles from './styles.module.css'
 
@@ -19,6 +21,16 @@ export const FeedPlaceholder = () => {
       <ItemPlaceholder />
       <ItemPlaceholder />
       <ItemPlaceholder />
+    </section>
+  )
+}
+
+export const ArticleDigestAuthorSidebarFeedPlaceholder = () => {
+  return (
+    <section className={styles.feed}>
+      <ArticleDigestAuthorSidebar.Placeholder />
+      <ArticleDigestAuthorSidebar.Placeholder />
+      <ArticleDigestAuthorSidebar.Placeholder />
     </section>
   )
 }

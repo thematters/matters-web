@@ -1,11 +1,22 @@
-import { toPath } from '~/common/utils'
-import { LinkWrapper, QueryError, Throw404, usePublicQuery } from '~/components'
+import { analytics, mergeConnections, toPath } from '~/common/utils'
+import {
+  ArticleDigestAuthorSidebar,
+  InfiniteScroll,
+  LinkWrapper,
+  List,
+  QueryError,
+  Throw404,
+  usePublicQuery,
+} from '~/components'
 import {
   ArticleDetailPublicQuery,
   AuthorSidebarCollectionQuery,
 } from '~/gql/graphql'
 
-import { FeedPlaceholder } from '../Placeholder'
+import {
+  ArticleDigestAuthorSidebarFeedPlaceholder,
+  FeedPlaceholder,
+} from '../Placeholder'
 import { AUTHOR_SIDEBAR_COLLECTION } from './gql'
 import styles from './styles.module.css'
 
@@ -18,12 +29,10 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
   /**
    * Data Fetching
    */
-  const { data, loading, error } = usePublicQuery<AuthorSidebarCollectionQuery>(
-    AUTHOR_SIDEBAR_COLLECTION,
-    {
+  const { data, loading, error, fetchMore } =
+    usePublicQuery<AuthorSidebarCollectionQuery>(AUTHOR_SIDEBAR_COLLECTION, {
       variables: { id: collectionId },
-    }
-  )
+    })
   const collection = data?.node!
 
   /**
@@ -39,6 +48,28 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
 
   if (!collection || collection.__typename !== 'Collection') {
     return <Throw404 />
+  }
+
+  // pagination
+  const connectionPath = 'node.articles'
+  const { edges, pageInfo } = collection?.articles || {}
+
+  // load next page
+  const loadMore = async () => {
+    analytics.trackEvent('load_more', {
+      type: 'article_detail_author-sidebar-collection',
+      location: edges?.length || 0,
+    })
+
+    await fetchMore({
+      variables: { after: pageInfo?.endCursor },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
   }
 
   const collectionDetailPath = toPath({
@@ -61,6 +92,26 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
           </section>
         </LinkWrapper>
       )}
+      <section className={styles.feed}>
+        <InfiniteScroll
+          hasNextPage={pageInfo?.hasNextPage}
+          loadMore={loadMore}
+          loader={<ArticleDigestAuthorSidebarFeedPlaceholder />}
+        >
+          <List>
+            {edges?.map(({ node, cursor }, i) => (
+              <List.Item key={cursor}>
+                <ArticleDigestAuthorSidebar
+                  article={node}
+                  titleTextSize="sm"
+                  collectionId={collectionId}
+                  titleColor={node.id === article?.id ? 'black' : 'greyDarker'}
+                />
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      </section>
     </section>
   )
 }

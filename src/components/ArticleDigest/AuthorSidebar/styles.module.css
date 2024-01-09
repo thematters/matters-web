@@ -1,0 +1,47 @@
+.container {
+  margin-top: var(--spacing-tight);
+  margin-bottom: var(--spacing-tight);
+
+  @mixin flex-start-space-between;
+
+  & header {
+    flex-grow: 1;
+
+    & h3 {
+      line-height: 1.375rem;
+    }
+
+    &.textColorBlack {
+      & a {
+        color: var(--color-black);
+      }
+    }
+
+    &.textColorGreyDarker {
+      & a {
+        color: var(--color-grey-darker);
+      }
+    }
+  }
+
+  &.hasCover {
+    position: relative;
+    min-height: 2.75rem;
+    padding-right: calc(2.75rem + var(--spacing-loose));
+
+    & .cover {
+      position: absolute;
+      top: 0;
+      right: 0;
+      display: initial;
+      width: 2.75rem;
+      height: 2.75rem;
+
+      & img {
+        @mixin object-fit-cover;
+
+        border-radius: var(--spacing-xx-tight);
+      }
+    }
+  }
+}
