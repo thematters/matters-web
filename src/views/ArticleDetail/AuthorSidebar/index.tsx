@@ -7,6 +7,7 @@ import Author from './Author'
 import { Collection } from './Collection'
 import { fragments } from './gql'
 import { Placeholder } from './Placeholder'
+import { RelatedArticles } from './RelatedArticles'
 import { TABS, Tabs } from './Tabs'
 
 type AuthorSidebarProps = {
@@ -25,6 +26,7 @@ export const AuthorSidebar = ({ article }: AuthorSidebarProps) => {
       {!!cid && tab === 'Collection' && (
         <Collection article={article} collectionId={cid} />
       )}
+      {tab === 'Recommendation' && <RelatedArticles article={article} />}
     </>
   )
 }

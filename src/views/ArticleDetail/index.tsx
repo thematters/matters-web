@@ -51,7 +51,6 @@ import {
 import License from './License'
 import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
-import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.module.css'
 import TagList from './TagList'
@@ -363,10 +362,6 @@ const BaseArticleDetail = ({
             <DynamicResponse id={article.id} lock={!canReadFullContent} />
           </section>
         </Waypoint>
-
-        <Media lessThan="lg">
-          <RelatedArticles article={article} />
-        </Media>
       </section>
 
       {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}

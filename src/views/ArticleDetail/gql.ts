@@ -3,9 +3,9 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import { RelatedArticles } from './AuthorSidebar/RelatedArticles'
 import Content from './Content'
 import MetaInfo from './MetaInfo'
-import RelatedArticles from './RelatedArticles'
 import State from './State'
 import { fragments as supportWidgetFragments } from './SupportWidget/gql'
 import TagList from './TagList'
@@ -66,7 +66,7 @@ const articlePublicFragment = gql`
     ...MetaInfoArticle
     ...ContentArticle
     ...TagListArticle
-    ...RelatedArticles
+    ...AuthorSidebarRelatedArticles
     ...StateArticle
     ...ToolbarArticlePublic
     ...ToolbarArticlePrivate

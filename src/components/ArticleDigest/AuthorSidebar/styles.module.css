@@ -7,8 +7,16 @@
   & header {
     flex-grow: 1;
 
-    & h3 {
-      line-height: 1.375rem;
+    &.lineHeightMdS {
+      & h3 {
+        line-height: 1.375rem;
+      }
+    }
+
+    &.lineHeightMd {
+      & h3 {
+        line-height: 1.5rem;
+      }
     }
 
     &.textColorBlack {
@@ -26,16 +34,32 @@
 
   &.hasCover {
     position: relative;
-    min-height: 2.75rem;
-    padding-right: calc(2.75rem + var(--spacing-loose));
+
+    &.imageSize44 {
+      min-height: 2.75rem;
+      padding-right: calc(2.75rem + var(--spacing-loose));
+
+      & .cover {
+        width: 2.75rem;
+        height: 2.75rem;
+      }
+    }
+
+    &.imageSize64 {
+      min-height: 4rem;
+      padding-right: calc(4rem + var(--spacing-loose));
+
+      & .cover {
+        width: 4rem;
+        height: 4rem;
+      }
+    }
 
     & .cover {
       position: absolute;
       top: 0;
       right: 0;
       display: initial;
-      width: 2.75rem;
-      height: 2.75rem;
 
       & img {
         @mixin object-fit-cover;

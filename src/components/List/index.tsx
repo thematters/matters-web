@@ -13,6 +13,7 @@ interface ListItemProps {
 interface ListProps {
   spacing?: [ListSpacing, ListSpacing]
   hasBorder?: boolean
+  borderPosition?: 'top' | 'bottom'
   [key: string]: any
 }
 
@@ -57,6 +58,7 @@ export const List: React.FC<ListProps> & {
 } = ({
   spacing = [0, 0],
   hasBorder = true,
+  borderPosition = 'bottom',
 
   children,
 
@@ -68,6 +70,8 @@ export const List: React.FC<ListProps> & {
     [styles[`spacingY${capitalizeFirstLetter(spacing[0] + '')}`]]: !!spacing[0],
     [styles[`spacingX${capitalizeFirstLetter(spacing[1] + '')}`]]: !!spacing[1],
     [styles.hasBorder]: !!hasBorder,
+    [styles.borderPositionTop]: borderPosition === 'top',
+    [styles.borderPositionBottom]: borderPosition === 'bottom',
     [className]: !!className,
   })
 

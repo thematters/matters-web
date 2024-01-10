@@ -15,6 +15,7 @@ export type ArticleDigestAuthorSidebarProps = {
   collectionId?: string
   titleTextSize?: ArticleDigestTitleTextSize
   titleColor?: 'greyDarker' | 'black'
+  imageSize?: 44 | 64
 }
 
 const fragments = {
@@ -38,6 +39,7 @@ export const ArticleDigestAuthorSidebar = ({
 
   titleTextSize = 'mdS',
   titleColor = 'greyDarker',
+  imageSize = 44,
 }: ArticleDigestAuthorSidebarProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
@@ -45,6 +47,7 @@ export const ArticleDigestAuthorSidebar = ({
   const containerClasses = classNames({
     [styles.container]: true,
     [styles.hasCover]: !!cover,
+    [styles[`imageSize${imageSize}`]]: !!cover,
   })
   const path = toPath({
     page: 'articleDetail',
@@ -54,6 +57,8 @@ export const ArticleDigestAuthorSidebar = ({
 
   const headerClasses = classNames({
     [styles[`textColor${capitalizeFirstLetter(titleColor)}`]]: !!titleColor,
+    [styles[`lineHeight${capitalizeFirstLetter(titleTextSize)}`]]:
+      !!titleTextSize,
   })
 
   return (
@@ -76,8 +81,8 @@ export const ArticleDigestAuthorSidebar = ({
           <aside className={styles.cover}>
             <ResponsiveImage
               url={cover}
-              width={44}
-              height={44}
+              width={imageSize}
+              height={imageSize}
               disableAnimation={true}
             />
           </aside>
