@@ -5,6 +5,7 @@ import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import Author from './Author'
 import { Collection } from './Collection'
+import { FromAuthor } from './FromAuthor'
 import { fragments } from './gql'
 import { Placeholder } from './Placeholder'
 import { RelatedArticles } from './RelatedArticles'
@@ -26,6 +27,7 @@ export const AuthorSidebar = ({ article }: AuthorSidebarProps) => {
       {!!cid && tab === 'Collection' && (
         <Collection article={article} collectionId={cid} />
       )}
+      {tab === 'Author' && <FromAuthor article={article} />}
       {tab === 'Recommendation' && <RelatedArticles article={article} />}
     </>
   )

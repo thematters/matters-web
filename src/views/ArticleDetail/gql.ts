@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import { FromAuthor } from './AuthorSidebar/FromAuthor'
 import { RelatedArticles } from './AuthorSidebar/RelatedArticles'
 import Content from './Content'
 import MetaInfo from './MetaInfo'
@@ -67,6 +68,7 @@ const articlePublicFragment = gql`
     ...ContentArticle
     ...TagListArticle
     ...AuthorSidebarRelatedArticles
+    ...AuthorSidebarFromAuthor
     ...StateArticle
     ...ToolbarArticlePublic
     ...ToolbarArticlePrivate
@@ -78,6 +80,7 @@ const articlePublicFragment = gql`
   ${Content.fragments.article}
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
+  ${FromAuthor.fragments.article}
   ${State.fragments.article}
   ${UserDigest.Rich.fragments.user.public}
   ${UserDigest.Rich.fragments.user.private}
