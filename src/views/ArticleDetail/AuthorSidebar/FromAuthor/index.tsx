@@ -52,7 +52,7 @@ export const FromAuthor = ({ article }: FromAuthorProps) => {
                 article={work}
                 titleColor="black"
                 titleTextSize="md"
-                imageSize={64}
+                imageSize="md"
               />
             )}
             {work.__typename === 'Collection' && (

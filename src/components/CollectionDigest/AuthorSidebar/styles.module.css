@@ -12,7 +12,7 @@
   &.hasCover {
     position: relative;
 
-    &.imageSize64 {
+    &.imageSizeMd {
       min-height: 4rem;
       padding-right: calc(4rem + var(--spacing-loose));
 

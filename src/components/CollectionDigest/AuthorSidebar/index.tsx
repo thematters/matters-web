@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { toPath } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import {
   IconDraft24,
   LinkWrapper,
@@ -14,7 +14,7 @@ import styles from './styles.module.css'
 
 export type CollectionDigestAuthorSidebarProps = {
   collection: CollectionDigestAuthorSidebarCollectionFragment
-  imageSize?: 64
+  imageSize?: 'md'
 }
 
 const fragments = {
@@ -36,7 +36,7 @@ const fragments = {
 
 export const CollectionDigestAuthorSidebar = ({
   collection,
-  imageSize = 64,
+  imageSize = 'md',
 }: CollectionDigestAuthorSidebarProps) => {
   const {
     title,
@@ -48,7 +48,7 @@ export const CollectionDigestAuthorSidebar = ({
   const containerClasses = classNames({
     [styles.container]: true,
     [styles.hasCover]: !!cover,
-    [styles[`imageSize${imageSize}`]]: !!cover,
+    [styles[`imageSize${capitalizeFirstLetter(imageSize)}`]]: !!cover,
   })
 
   const path = toPath({
@@ -56,6 +56,8 @@ export const CollectionDigestAuthorSidebar = ({
     collection,
     userName: userName || '',
   })
+
+  const imgSize = 64
 
   return (
     <section className={containerClasses}>
@@ -67,8 +69,8 @@ export const CollectionDigestAuthorSidebar = ({
           <aside className={styles.cover}>
             <ResponsiveImage
               url={cover}
-              width={64}
-              height={64}
+              width={imgSize}
+              height={imgSize}
               disableAnimation={true}
             />
             <div className={styles.count}>

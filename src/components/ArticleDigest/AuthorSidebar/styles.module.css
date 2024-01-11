@@ -35,7 +35,7 @@
   &.hasCover {
     position: relative;
 
-    &.imageSize44 {
+    &.imageSizeSm {
       min-height: 2.75rem;
       padding-right: calc(2.75rem + var(--spacing-loose));
 
@@ -45,7 +45,7 @@
       }
     }
 
-    &.imageSize64 {
+    &.imageSizeMd {
       min-height: 4rem;
       padding-right: calc(4rem + var(--spacing-loose));
 
