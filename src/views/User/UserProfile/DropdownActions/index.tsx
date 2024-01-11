@@ -238,10 +238,6 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
     hasRssFeed: user?.articles.totalCount > 0 && !!user?.info.ipnsKey,
   }
 
-  if (_isEmpty(_pickBy(controls))) {
-    return null
-  }
-
   const WithShare = withDialog<Omit<ShareDialogProps, 'children'>>(
     BaseDropdownActions,
     ShareDialog,
