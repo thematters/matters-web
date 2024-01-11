@@ -217,8 +217,11 @@ const BaseArticleDetail = ({
 
   return (
     <Layout.Main
-      // aside={<RelatedArticles article={article} inSidebar />}
-      aside={<AuthorSidebar article={article} />}
+      aside={
+        <section className={styles.authorSidebar}>
+          <AuthorSidebar article={article} />
+        </section>
+      }
       showAside={article.state === 'active'}
     >
       <Head
@@ -328,6 +331,10 @@ const BaseArticleDetail = ({
             />
           </section>
         )}
+
+        <Media at="sm">
+          <AuthorSidebar article={article} />
+        </Media>
 
         <Waypoint
           onEnter={() => {

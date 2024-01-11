@@ -16,6 +16,7 @@ const fragments = {
     fragment AuthorSidebarRelatedArticles on Article {
       id
       relatedArticles(input: { first: 3 }) {
+        totalCount
         edges {
           cursor
           node {

@@ -43,6 +43,8 @@ export const Tabs = ({ article, tab, setTab }: TabsProps) => {
   const intl = useIntl()
   const { getQuery } = useRoute()
   const cid = getQuery('cid')
+  const hasFromAuthor = article.author.latestWorks.length > 0
+  const hasRecommendation = article.relatedArticles?.totalCount > 0
 
   return (
     <ul className={styles.tabList}>
@@ -57,24 +59,28 @@ export const Tabs = ({ article, tab, setTab }: TabsProps) => {
           })}
         />
       )}
-      <TabItem
-        active={tab === 'Author'}
-        onClick={() => setTab('Author')}
-        title={intl.formatMessage({
-          defaultMessage: 'Author',
-          id: 'RM17b4',
-          description: 'src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx',
-        })}
-      />
-      <TabItem
-        active={tab === 'Recommendation'}
-        onClick={() => setTab('Recommendation')}
-        title={intl.formatMessage({
-          defaultMessage: 'More',
-          id: 'VqdOGQ',
-          description: 'src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx',
-        })}
-      />
+      {hasFromAuthor && (
+        <TabItem
+          active={tab === 'Author'}
+          onClick={() => setTab('Author')}
+          title={intl.formatMessage({
+            defaultMessage: 'Author',
+            id: 'RM17b4',
+            description: 'src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx',
+          })}
+        />
+      )}
+      {hasRecommendation && (
+        <TabItem
+          active={tab === 'Recommendation'}
+          onClick={() => setTab('Recommendation')}
+          title={intl.formatMessage({
+            defaultMessage: 'More',
+            id: 'VqdOGQ',
+            description: 'src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx',
+          })}
+        />
+      )}
     </ul>
   )
 }

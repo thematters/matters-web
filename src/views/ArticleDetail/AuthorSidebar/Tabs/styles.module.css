@@ -3,7 +3,7 @@
 
   display: flex;
   gap: var(--spacing-base);
-  padding: var(--spacing-base) var(--spacing-base) 0;
+  padding: var(--spacing-base) 0 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 

@@ -9,6 +9,7 @@ import { FromAuthor } from './FromAuthor'
 import { fragments } from './gql'
 import { Placeholder } from './Placeholder'
 import { RelatedArticles } from './RelatedArticles'
+import styles from './styles.module.css'
 import { TABS, Tabs } from './Tabs'
 
 type AuthorSidebarProps = {
@@ -24,11 +25,13 @@ export const AuthorSidebar = ({ article }: AuthorSidebarProps) => {
     <>
       <Author article={article} />
       <Tabs article={article} tab={tab} setTab={setTab} />
-      {!!cid && tab === 'Collection' && (
-        <Collection article={article} collectionId={cid} />
-      )}
-      {tab === 'Author' && <FromAuthor article={article} />}
-      {tab === 'Recommendation' && <RelatedArticles article={article} />}
+      <section className={styles.list}>
+        {!!cid && tab === 'Collection' && (
+          <Collection article={article} collectionId={cid} />
+        )}
+        {tab === 'Author' && <FromAuthor article={article} />}
+        {tab === 'Recommendation' && <RelatedArticles article={article} />}
+      </section>
     </>
   )
 }
