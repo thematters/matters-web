@@ -33,11 +33,15 @@ import {
   LanguageContext,
   LanguageSwitch,
   Media,
+  ReCaptchaContext,
   TextIcon,
+  Turnstile,
+  TurnstileInstance,
   useCountdown,
   // toast,
   useMutation,
   useRoute,
+  ViewerContext,
 } from '~/components'
 import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -77,6 +81,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   setAuthFeedType,
   back,
 }) => {
+  const viewer = useContext(ViewerContext)
   const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
     showToast: false,
   })
@@ -93,6 +98,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
+  const { token: reCaptchaToken, refreshToken } = useContext(ReCaptchaContext)
+  const turnstileRef = useRef<TurnstileInstance>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string>()
 
   const [isSelectMethod, setIsSelectMethod] = useState(false)
   const [errorCode, setErrorCode] = useState<ERROR_CODES | null>(null)
@@ -225,6 +233,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           input: {
             email: values.email,
             type: 'email_otp',
+            token: turnstileToken
+              ? `${reCaptchaToken} ${turnstileToken}`
+              : reCaptchaToken,
             redirectUrl,
             language: lang,
           },
@@ -255,13 +266,33 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           )
         }
       })
+      refreshToken?.()
+      turnstileRef.current?.reset()
     }
   }
 
   const fieldMsgId = `field-msg-sign-in`
 
+  const siteKey = process.env
+    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
   const InnerForm = (
     <>
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={siteKey}
+        options={{
+          action: 'email_login',
+          cData: `user-group-${viewer.info.group}`,
+          size: 'invisible',
+        }}
+        scriptOptions={{
+          compat: 'recaptcha',
+          appendTo: 'body',
+        }}
+        onSuccess={(token) => {
+          setTurnstileToken(token)
+        }}
+      />
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}

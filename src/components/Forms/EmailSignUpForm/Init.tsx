@@ -117,12 +117,9 @@ const Init: React.FC<FormProps> = ({
             input: {
               email,
               type: 'register',
-              token:
-                // (viewer.info.group === UserGroup.A && turnstileToken) ||
-                // turnstileRef.current?.getResponse() || // fallback to ReCaptchaContext token
-                turnstileToken
-                  ? `${reCaptchaToken} ${turnstileToken}`
-                  : reCaptchaToken,
+              token: turnstileToken
+                ? `${reCaptchaToken} ${turnstileToken}`
+                : reCaptchaToken,
               redirectUrl,
               language: lang,
             },
