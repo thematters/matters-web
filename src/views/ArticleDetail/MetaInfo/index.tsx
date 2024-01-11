@@ -8,7 +8,6 @@ import {
   DateTime,
   DotDivider,
   IconEdit16,
-  IconPaywall24,
   Media,
   TextIcon,
   Translate,
@@ -115,8 +114,6 @@ const MetaInfo = ({
           )}
         </>
       )}
-
-      {article.access.type === 'paywall' && <IconPaywall24 color="grey" />}
     </section>
   )
 }

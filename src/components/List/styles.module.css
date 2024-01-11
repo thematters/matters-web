@@ -1,9 +1,19 @@
 .list {
   &.hasBorder {
-    & > :global(.list-item) {
-      @mixin border-bottom-grey-light;
+    &.borderPositionBottom {
+      & > :global(.list-item) {
+        @mixin border-bottom-grey-light;
 
-      border-bottom-style: dashed;
+        border-bottom-style: dashed;
+      }
+    }
+
+    &.borderPositionTop {
+      & > :global(.list-item) {
+        @mixin border-top-grey-light;
+
+        border-top-style: dashed;
+      }
     }
   }
 

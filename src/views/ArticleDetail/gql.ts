@@ -2,9 +2,11 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components/UserDigest'
 
+import { AuthorSidebar } from './AuthorSidebar'
+import { FromAuthor } from './AuthorSidebar/FromAuthor'
+import { RelatedArticles } from './AuthorSidebar/RelatedArticles'
 import Content from './Content'
 import MetaInfo from './MetaInfo'
-import RelatedArticles from './RelatedArticles'
 import State from './State'
 import { fragments as supportWidgetFragments } from './SupportWidget/gql'
 import TagList from './TagList'
@@ -61,20 +63,24 @@ const articlePublicFragment = gql`
       language
     }
     availableTranslations
+    ...AuthorSidebarArticle
     ...MetaInfoArticle
     ...ContentArticle
     ...TagListArticle
-    ...RelatedArticles
+    ...AuthorSidebarRelatedArticles
+    ...AuthorSidebarFromAuthor
     ...StateArticle
     ...ToolbarArticlePublic
     ...ToolbarArticlePrivate
     ...SupportWidgetArticlePublic
     ...SupportWidgetArticlePrivate
   }
+  ${AuthorSidebar.fragments.article}
   ${MetaInfo.fragments.article}
   ${Content.fragments.article}
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
+  ${FromAuthor.fragments.article}
   ${State.fragments.article}
   ${UserDigest.Rich.fragments.user.public}
   ${UserDigest.Rich.fragments.user.private}

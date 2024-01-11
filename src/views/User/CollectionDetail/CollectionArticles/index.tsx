@@ -144,6 +144,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
               <List.Item key={cursor}>
                 <ArticleDigestFeed
                   article={node}
+                  collectionId={collection.id}
                   hasHeader={false}
                   hasEdit={true}
                   hasCircle={false}

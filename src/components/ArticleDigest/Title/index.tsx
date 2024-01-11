@@ -21,6 +21,7 @@ export type ArticleDigestTitleIs = 'h2' | 'h3'
 
 type ArticleDigestTitleProps = {
   article: ArticleDigestTitleArticleFragment
+  collectionId?: string
 
   textSize?: ArticleDigestTitleTextSize
   textWeight?: ArticleDigestTitleTextWeight
@@ -50,6 +51,7 @@ const fragments = {
 
 export const ArticleDigestTitle = ({
   article,
+  collectionId,
 
   textSize = 'md',
   textWeight = 'md',
@@ -68,6 +70,7 @@ export const ArticleDigestTitle = ({
   const path = toPath({
     page: 'articleDetail',
     article,
+    collectionId,
     utm_source,
     utm_medium,
   })

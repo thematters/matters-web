@@ -799,6 +799,10 @@
   "HnxG15": {
     "defaultMessage": "Set"
   },
+  "Hpmiif": {
+    "defaultMessage": "Collection",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
+  },
   "HqRNN8": {
     "defaultMessage": "Support"
   },
@@ -1127,6 +1131,10 @@
     "defaultMessage": "Support setting",
     "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
   },
+  "RM17b4": {
+    "defaultMessage": "Author",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
+  },
   "ROPCC0": {
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
@@ -1267,6 +1275,10 @@
   "Vn5KLr": {
     "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)",
     "description": "src/components/Editor/ToggleAccess/index.tsx"
+  },
+  "VqdOGQ": {
+    "defaultMessage": "More",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
   "VrOoVf": {
     "defaultMessage": "Matters will never ask your wallet key through any channel.",

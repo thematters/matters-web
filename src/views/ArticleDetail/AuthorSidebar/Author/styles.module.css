@@ -1,0 +1,32 @@
+.container {
+  display: flex;
+  gap: var(--spacing-loose);
+  align-items: start;
+  margin-top: var(--spacing-x-loose);
+
+  & > a {
+    align-self: center;
+  }
+
+  & .info {
+    @mixin flex-start-center;
+
+    flex-direction: column;
+    gap: var(--spacing-xx-tight);
+    color: var(--color-black);
+
+    & .displayName {
+      font-size: var(--font-size-sm);
+      font-weight: var(--font-weight-medium);
+      line-height: 1.375rem;
+    }
+
+    & .bio {
+      @mixin line-clamp;
+
+      -webkit-line-clamp: 4;
+      font-size: var(--font-size-xs);
+      line-height: 1.125rem;
+    }
+  }
+}

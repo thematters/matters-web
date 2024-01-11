@@ -799,6 +799,10 @@
   "HnxG15": {
     "defaultMessage": "设定"
   },
+  "Hpmiif": {
+    "defaultMessage": "选集",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
+  },
   "HqRNN8": {
     "defaultMessage": "赞赏"
   },
@@ -1127,6 +1131,10 @@
     "defaultMessage": "编辑文案",
     "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
   },
+  "RM17b4": {
+    "defaultMessage": "来自作者",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
+  },
   "ROPCC0": {
     "defaultMessage": "请先绑定邮箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
@@ -1267,6 +1275,10 @@
   "Vn5KLr": {
     "defaultMessage": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）",
     "description": "src/components/Editor/ToggleAccess/index.tsx"
+  },
+  "VqdOGQ": {
+    "defaultMessage": "相关推荐",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
   "VrOoVf": {
     "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",

@@ -1,4 +1,4 @@
-import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import { md2html } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
@@ -27,16 +27,15 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import CLIENT_PREFERENCE from '~/components/GQL/queries/clientPreference'
 import {
   ArticleAccessType,
   ArticleAvailableTranslationsQuery,
   ArticleDetailPublicQuery,
   ArticleTranslationQuery,
-  ClientPreferenceQuery,
   UserLanguage,
 } from '~/gql/graphql'
 
+import { AuthorSidebar } from './AuthorSidebar'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
 import {
@@ -50,7 +49,6 @@ import {
 import License from './License'
 import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
-import RelatedArticles from './RelatedArticles'
 import State from './State'
 import styles from './styles.module.css'
 import TagList from './TagList'
@@ -78,9 +76,6 @@ const DynamicEditMode = dynamic(() => import('./EditMode'), {
       <Spinner />
     </EmptyLayout>
   ),
-})
-const DynamicVisitorWall = dynamic(() => import('./Wall/Visitor'), {
-  ssr: false,
 })
 const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
@@ -119,7 +114,6 @@ const BaseArticleDetail = ({
   const features = useFeatures()
   const [showFloatToolbar, setShowFloatToolbar] = useState(true)
   const [showCommentToolbar, setShowCommentToolbar] = useState(false)
-  const [fixedWall, setFixedWall] = useState(false)
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
@@ -135,14 +129,6 @@ const BaseArticleDetail = ({
     circle.isMember ||
     article.access.type === ArticleAccessType.Public
   )
-
-  // wall
-  const { data: clientPreferenceData } = useQuery<ClientPreferenceQuery>(
-    CLIENT_PREFERENCE,
-    { variables: { id: 'local' } }
-  )
-  const { wall } = clientPreferenceData?.clientPreference || { wall: true }
-  const shouldShowWall = !viewer.isAuthed && wall
 
   // translation
   const [autoTranslation] = useState(article.translation) // cache initial article data since it will be overwrote by newly's if URL is shadow replaced
@@ -231,7 +217,11 @@ const BaseArticleDetail = ({
 
   return (
     <Layout.Main
-      aside={<RelatedArticles article={article} inSidebar />}
+      aside={
+        <section className={styles.authorSidebar}>
+          <AuthorSidebar article={article} />
+        </section>
+      }
       showAside={article.state === 'active'}
     >
       <Head
@@ -269,15 +259,6 @@ const BaseArticleDetail = ({
       <section className={styles.content}>
         <section className={styles.title}>
           <Title type="article">{title}</Title>
-
-          <Waypoint
-            topOffset={-400}
-            onLeave={() => {
-              if (shouldShowWall) {
-                setFixedWall(true)
-              }
-            }}
-          />
 
           <MetaInfo
             article={article}
@@ -351,6 +332,10 @@ const BaseArticleDetail = ({
           </section>
         )}
 
+        <Media at="sm">
+          <AuthorSidebar article={article} />
+        </Media>
+
         <Waypoint
           onEnter={() => {
             setShowCommentToolbar(true)
@@ -361,13 +346,7 @@ const BaseArticleDetail = ({
             <DynamicResponse id={article.id} lock={!canReadFullContent} />
           </section>
         </Waypoint>
-
-        <Media lessThan="lg">
-          <RelatedArticles article={article} />
-        </Media>
       </section>
-
-      {shouldShowWall && <DynamicVisitorWall show={fixedWall} />}
 
       <Media at="sm">
         <Spacer size="xxxloose" />
@@ -578,7 +557,11 @@ const ArticleDetail = ({
    * Render:Loading
    */
   if (loading) {
-    return <Placeholder />
+    return (
+      <Layout.Main aside={<AuthorSidebar.Placeholder />}>
+        <Placeholder />
+      </Layout.Main>
+    )
   }
 
   /**
@@ -684,7 +667,11 @@ const ArticleDetailOuter = () => {
    * Rendering
    */
   if (loading) {
-    return <Placeholder />
+    return (
+      <Layout.Main aside={<AuthorSidebar.Placeholder />}>
+        <Placeholder />
+      </Layout.Main>
+    )
   }
 
   return <ArticleDetail includeTranslation={includeTranslation} />
