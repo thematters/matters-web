@@ -117,7 +117,7 @@ export const toPath = (
           }`
         }
         if (!!args.collectionId) {
-          href = `${href}?cid=${args.collectionId}`
+          href = `${href}?collection=${args.collectionId}`
         }
       } catch (err) {
         // do nothing

@@ -18,7 +18,7 @@ type AuthorSidebarProps = {
 
 export const AuthorSidebar = ({ article }: AuthorSidebarProps) => {
   const { getQuery } = useRoute()
-  const cid = getQuery('cid')
+  const cid = getQuery('collection')
   const [tab, setTab] = useState<TABS>(!!cid ? 'Collection' : 'Author')
 
   return (
