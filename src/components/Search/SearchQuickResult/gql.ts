@@ -4,7 +4,7 @@ import { TagDigest } from '~/components/TagDigest'
 import { UserDigest } from '~/components/UserDigest'
 
 export const QUICK_RESULT = gql`
-  query QuickResult($key: String!, $version: SearchAPIVersion = v20230601) {
+  query QuickResult($key: String!) {
     user: search(
       input: {
         type: User
@@ -12,7 +12,6 @@ export const QUICK_RESULT = gql`
         record: true
         first: 5
         key: $key
-        version: $version
       }
     ) {
       edges {
@@ -25,14 +24,7 @@ export const QUICK_RESULT = gql`
       }
     }
     tag: search(
-      input: {
-        type: Tag
-        quicksearch: true
-        record: true
-        first: 5
-        key: $key
-        version: $version
-      }
+      input: { type: Tag, quicksearch: true, record: true, first: 5, key: $key }
     ) {
       edges {
         cursor

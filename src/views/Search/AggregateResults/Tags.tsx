@@ -24,7 +24,6 @@ import styles from './styles.module.css'
 const AggregateTagResults = () => {
   const { getQuery } = useRoute()
   const q = getQuery('q')
-  const version = getQuery('version')
 
   /**
    * Data Fetching
@@ -33,7 +32,7 @@ const AggregateTagResults = () => {
   const { data, loading, fetchMore } =
     usePublicQuery<SearchAggregateTagsPublicQuery>(
       SEARCH_AGGREGATE_TAGS_PUBLIC,
-      { variables: { key: q, version: version === '' ? undefined : version } }
+      { variables: { key: q } }
     )
 
   useEffect(() => {

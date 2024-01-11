@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -138,7 +138,21 @@ const ReplyButton = ({
       replyToId={id}
       parentId={parentComment?.id || id}
       submitCallback={submitCallback}
-      title={article ? 'replyComment' : 'reply'}
+      title={
+        article ? (
+          <FormattedMessage
+            defaultMessage="Write a comment"
+            id="/agKbX"
+            description="src/components/Comment/FooterActions/ReplyButton/index.tsx"
+          />
+        ) : (
+          <FormattedMessage
+            defaultMessage="Reply"
+            id="UgpqlF"
+            description="src/components/Comment/FooterActions/ReplyButton/index.tsx"
+          />
+        )
+      }
       context={<ReplyTo user={author} />}
     >
       {({ openDialog: openCommentFormDialog }) => (

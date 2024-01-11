@@ -77,7 +77,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<Translate id="block" />}
+              text={<FormattedMessage defaultMessage="Block" id="Up5U7K" />}
               color="red"
               onClick={() => {
                 onBlock()
@@ -87,7 +87,7 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<Translate id="block" />}
+              text={<FormattedMessage defaultMessage="Block" id="Up5U7K" />}
               color="red"
               onClick={() => {
                 onBlock()

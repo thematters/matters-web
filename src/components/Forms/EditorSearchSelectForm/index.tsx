@@ -136,7 +136,11 @@ const EditorSearchSelectForm = ({
     <Dialog.TextButton
       onClick={submitCallback || closeDialog}
       // disabled={stagingNodes.length <= 0}
-      text={headerRightButtonText || 'done'}
+      text={
+        headerRightButtonText || (
+          <FormattedMessage defaultMessage="Done" id="JXdbo8" />
+        )
+      }
       loading={saving}
     />
   )
@@ -218,7 +222,7 @@ const EditorSearchSelectForm = ({
             <Dialog.TextButton
               text={
                 back ? (
-                  'back'
+                  <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                 ) : (
                   <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
                 )

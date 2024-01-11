@@ -97,12 +97,13 @@ export const facebookOauthUrl = async (type: OauthType) => {
   return url
 }
 
-export const signupCallbackUrl = (email: string, referralCode: string) => {
+export const signupCallbackUrl = (email: string, referralCode?: string) => {
   return `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${
     CALLBACK_PROVIDERS.EmailSignup
-  }?email=${encodeURIComponent(
-    email
-  )}&${REFERRAL_QUERY_REFERRAL_KEY}=${encodeURIComponent(referralCode)}`
+  }?${new URLSearchParams({
+    email,
+    ...(referralCode ? { [REFERRAL_QUERY_REFERRAL_KEY]: referralCode } : null),
+  }).toString()}`
 }
 
 export const signinCallbackUrl = (email: string) => {

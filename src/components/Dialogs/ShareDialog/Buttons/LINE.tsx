@@ -1,7 +1,10 @@
+import { useContext } from 'react'
+
 import { ReactComponent as IconShareLINE } from '@/public/static/icons/16px/share-line.svg'
 import { ReactComponent as IconShareLINECircle } from '@/public/static/icons/40px/share-line-circle.svg'
+import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { TextIcon, withIcon } from '~/components'
+import { TextIcon, ViewerContext, withIcon } from '~/components'
 
 const LINE = ({
   title,
@@ -12,10 +15,15 @@ const LINE = ({
   link: string
   circle?: boolean
 }) => {
+  const viewer = useContext(ViewerContext)
+
   // append utm_source to link
   const utm_source = 'share_line'
   const url = new URL(link)
   url.searchParams.append('utm_source', utm_source)
+  if (viewer.userName) {
+    url.searchParams.append(REFERRAL_QUERY_REFERRAL_KEY, viewer.userName)
+  }
   link = url.toString()
 
   return (

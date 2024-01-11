@@ -49,6 +49,9 @@
     "defaultMessage": "最近 1 个月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "/GCoTA": {
+    "defaultMessage": "清空"
+  },
   "/GyMKa": {
     "defaultMessage": "分享作品"
   },
@@ -58,6 +61,10 @@
   "/TXBJR": {
     "defaultMessage": "不知道哪里出错了，过几分钟看看",
     "description": "UNKNOWN_ERROR"
+  },
+  "/agKbX": {
+    "defaultMessage": "回复评论",
+    "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
   "/faseS": {
     "defaultMessage": "已复制分享连结"
@@ -1170,9 +1177,16 @@
     "defaultMessage": "移至底部",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
+  "UgpqlF": {
+    "defaultMessage": "回复",
+    "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
+  },
   "UjKkhq": {
     "defaultMessage": "作品已添加标签",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "Up5U7K": {
+    "defaultMessage": "屏蔽"
   },
   "V5OMr4": {
     "defaultMessage": "什么是数字钱包？",
@@ -1455,7 +1469,7 @@
     "defaultMessage": "追踪中"
   },
   "cQ+Lyq": {
-    "defaultMessage": "游牧者计画纪念徽章",
+    "defaultMessage": "游牧者计划纪念徽章",
     "description": "src/views/User/UserProfile/Badges/index.tsx"
   },
   "cQYXjl": {
