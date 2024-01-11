@@ -29,5 +29,25 @@ ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME} 的经济系统支援法币（港币�
 好文章不遗漏，我们也支援 RSS 、JSON 阅读器或 IPNS 兼容的 Planet 阅读器来订阅作者。
 
 *   [Matters 内容订阅使用指南](https://matters.town/@hi176/387116?locale=zh-Hans)
+
+## 如何从 Matters 帐号绑定或解绑你的社交帐号？
+
+Matters 用户可以透过社交帐号注册，或者在注册完成后绑定社交帐号，目前支援 Google、X（前称 Twitter）、及 Facebook。当然，绑定之后也可以解除绑定。
+
+以 Facebook 为例，绑定步骤：
+
+从「我的」进入「设定」，找到 Facebook 选项，按下绑定即可
+
+![](/static/images/unlink-facebook-1.png)
+
+解除绑定方式：按下帐号旁边的「X」按钮即可
+
+![](/static/images/unlink-facebook-2.png)
+
+此外，你也可以进入脸书的设定页 [https://www.facebook.com/settings/](https://www.facebook.com/settings/) ，从「应用程式与网站」找到 Matters 并选择「移除」即可。
+
+![](/static/images/unlink-facebook-3.png)
+
+请注意，如果你一开始使用社交帐号注册，注册之后想解除绑定，为了帐号不遗失，你需要先采取其他绑定措施（例如邮箱、以太坊钱包地址或其他社交帐号），就可以解除当前的绑定。
 `
 export default zh_hans

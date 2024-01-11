@@ -27,6 +27,36 @@ If you want to log in, bind wallets, or process USDT-Polygon payments on phone, 
 
 ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME} is a writing community based on decentralized technologies with open-sourced codebase. We encourage you to subscribe to your favorite creators with RSS, JSON reader or IPNS compatible Planet reader.
 
-*   [Features Guidance for Content Feed Subscription](https://matters.town/@hi176/387116?locale=en)`
+*   [Features Guidance for Content Feed Subscription](https://matters.town/@hi176/387116?locale=en)
+
+## How to Bind or Unbind Your Social Login Accounts on Matters
+
+Matters users have the option to register using their social media accounts or bind them after registration. Currently, Matters supports Google, X (formerly Twitter), and Facebook for this purpose. Of course, you can also unbind these accounts after binding them.
+
+Let's take Facebook as an example:
+
+To bind your Facebook account:
+
+* Go to "My" and select "Settings."
+* Find the Facebook option and click on "Bind."
+
+![](/static/images/unlink-facebook-1.png)
+
+To unbind your Facebook account:
+
+* Click on the "X" button next to your account.
+
+![](/static/images/unlink-facebook-2.png)
+
+Additionally, you can go to Facebook's settings page at [https://www.facebook.com/settings/](https://www.facebook.com/settings/):
+
+* Navigate to "Apps and Websites."
+* Find Matters and select "Remove."
+
+![](/static/images/unlink-facebook-3.png)
+
+Please note that if you initially registered using a social media account and later wish to unbind it to prevent account loss, you should first take alternative binding measures (such as using an email address, Ethereum wallet address, or another social media account) before unbinding the current one.
+
+`
 
 export default en
