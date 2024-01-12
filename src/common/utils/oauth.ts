@@ -101,10 +101,8 @@ export const signupCallbackUrl = (email: string, referralCode?: string) => {
   return `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${
     CALLBACK_PROVIDERS.EmailSignup
   }?${new URLSearchParams({
-    email: encodeURIComponent(email),
-    ...(referralCode
-      ? { [REFERRAL_QUERY_REFERRAL_KEY]: encodeURIComponent(referralCode) }
-      : null),
+    email,
+    ...(referralCode ? { [REFERRAL_QUERY_REFERRAL_KEY]: referralCode } : null),
   }).toString()}`
 }
 
