@@ -1,8 +1,13 @@
+//import styles 👇
+import 'react-modern-drawer/dist/index.css'
+
 import { useLazyQuery } from '@apollo/react-hooks'
 import { md2html } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+// import component 👇
+import Drawer from 'react-modern-drawer'
 import { Waypoint } from 'react-waypoint'
 
 import { URL_QS } from '~/common/enums'
@@ -117,6 +122,11 @@ const BaseArticleDetail = ({
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
+
+  const [isOpen, setIsOpen] = useState(false)
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState)
+  }
 
   const authorId = article.author?.id
   const paymentPointer = article.author?.paymentPointer
@@ -255,6 +265,162 @@ const BaseArticleDetail = ({
       />
 
       <State article={article} />
+
+      <button onClick={toggleDrawer} className={styles.closeButton}>
+        Show Drawer
+      </button>
+      <Drawer
+        open={isOpen}
+        onClose={toggleDrawer}
+        direction="right"
+        className={styles.drawer}
+        enableOverlay={false}
+        size="424px"
+      >
+        <button onClick={toggleDrawer} className={styles.closeButton}>
+          Close Drawer
+        </button>
+        <br />
+        <br />
+        <div>Hello World</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>Hello World</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>Hello World</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>Hello World</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>Hello World</div>
+        <div>Hello World</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>Hello World</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>Hello World</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>Hello World</div>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <div>Hello World</div>
+      </Drawer>
 
       <section className={styles.content}>
         <section className={styles.title}>
