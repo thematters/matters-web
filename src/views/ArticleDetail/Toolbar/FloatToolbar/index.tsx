@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useEffect, useState } from 'react'
 
-import { ButtonProps, ReCaptchaProvider } from '~/components'
+import { ButtonProps, ReCaptchaProvider, toast } from '~/components'
 import {
   ArticleDetailPublicQuery,
   ToolbarArticlePrivateFragment,
@@ -118,6 +118,11 @@ const FloatToolbar = ({
             article={article}
             disabled={!article.canComment}
             textIconSpacing="basexxtight"
+            onClick={() => {
+              toast.success({
+                message: '功能即將開放，敬請期待！',
+              })
+            }}
             {...buttonProps}
           />
         </section>
