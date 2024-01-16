@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
-import { URL_QS } from '~/common/enums'
+import { REFERRAL_QUERY_REFERRAL_KEY, URL_QS } from '~/common/enums'
 import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
@@ -483,6 +483,15 @@ const ArticleDetail = ({
     const n = new URL(
       `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${newPath.href}`
     )
+
+    // TODO: can remove this after 2024/2
+    const isNomadTags = article.tags?.some(
+      (tag) => tag.content === 'nomadmatters' || tag.content === '遊牧者計畫'
+    )
+    const hasReferral = u.searchParams.has(REFERRAL_QUERY_REFERRAL_KEY)
+    if (!hasReferral && isNomadTags && viewer.userName) {
+      u.searchParams.append(REFERRAL_QUERY_REFERRAL_KEY, viewer.userName)
+    }
 
     // hide all utm_ tracking code parameters
     // copy all others
