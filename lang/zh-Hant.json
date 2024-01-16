@@ -101,10 +101,6 @@
     "defaultMessage": "Matters ID 已設置，更多帳號相關設置可前往設定頁修改",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
-  "0JLcHr": {
-    "defaultMessage": "內容可能包含色情、暴力、血腥等限制級內容，部分用戶可能不適合觀看，或引起不適、心理負擔，請謹慎判斷是否閱讀。",
-    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
-  },
   "0JlaP1": {
     "defaultMessage": "Oops！連結已失效",
     "description": "src/views/Callback/UI.tsx"
@@ -300,6 +296,10 @@
   },
   "5jlQTx": {
     "defaultMessage": "邀請管理"
+  },
+  "5rxHb7": {
+    "defaultMessage": "可能包含色情、暴力、血腥等，點此展開全部",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "5sWnog": {
     "defaultMessage": "Liker ID 電子信箱已被其他人使用",
@@ -1509,6 +1509,10 @@
     "defaultMessage": "取消封鎖",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
+  "bQ5vZC": {
+    "defaultMessage": "此文已被{actor}標示為限制級內容",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
   "bSqeXm": {
     "defaultMessage": "{ext, select, gif {GIF 格式} other {} }圖片大小不得超過 {sizeInMB}MB"
   },
@@ -2041,10 +2045,6 @@
   "rqS2aA": {
     "defaultMessage": "請登入該帳戶解綁錢包後再試",
     "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
-  },
-  "s5JCCO": {
-    "defaultMessage": "此文已被{actor}標示為限制級內容，是否確定展開全文？",
-    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "sPgUkN": {
     "defaultMessage": "本月營收",

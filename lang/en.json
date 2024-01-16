@@ -101,10 +101,6 @@
     "defaultMessage": "Matters ID has been set up. More account info can be found in Settings",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
-  "0JLcHr": {
-    "defaultMessage": "Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress.",
-    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
-  },
   "0JlaP1": {
     "defaultMessage": "Oops！This link has expired",
     "description": "src/views/Callback/UI.tsx"
@@ -300,6 +296,10 @@
   },
   "5jlQTx": {
     "defaultMessage": "Manage Invitation"
+  },
+  "5rxHb7": {
+    "defaultMessage": "May contain pornography, violence, gore, etc. Click here to expand all.",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "5sWnog": {
     "defaultMessage": "Liker ID email is already taken.",
@@ -1509,6 +1509,10 @@
     "defaultMessage": "Unblock",
     "description": "src/components/BlockUser/Button/index.tsx"
   },
+  "bQ5vZC": {
+    "defaultMessage": "This article has been marked as restricted content by the {actor}.",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+  },
   "bSqeXm": {
     "defaultMessage": "{ext, select, gif {GIF format i} other {I} }mages have a {sizeInMB} megabyte (MB) size limit."
   },
@@ -2041,10 +2045,6 @@
   "rqS2aA": {
     "defaultMessage": "Sign in to that account to unlink it then try again",
     "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
-  },
-  "s5JCCO": {
-    "defaultMessage": "This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?",
-    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "sPgUkN": {
     "defaultMessage": "This Month",
