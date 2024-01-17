@@ -9,6 +9,7 @@ import {
   ButtonProps,
   ReCaptchaProvider,
   TextIcon,
+  toast,
 } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -112,7 +113,9 @@ const FixedToolbar = ({
             spacing={['baseTight', 'baseTight']}
             onClick={() => {
               // TODO: open comment drawer
-              console.log('comment...')
+              toast.success({
+                message: '功能即將開放，敬請期待！',
+              })
             }}
             disabled={lock}
           >
@@ -157,6 +160,11 @@ const FixedToolbar = ({
             iconSize="md"
             textWeight="normal"
             textIconSpacing="xxtight"
+            onClick={() => {
+              toast.success({
+                message: '功能即將開放，敬請期待！',
+              })
+            }}
             {...buttonProps}
           />
         )}

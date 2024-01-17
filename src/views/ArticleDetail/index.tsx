@@ -500,18 +500,18 @@ const BaseArticleDetail = ({
 
         <Media at="sm">
           <AuthorSidebar article={article} />
-        </Media>
 
-        <Waypoint
-          onEnter={() => {
-            setShowCommentToolbar(true)
-          }}
-          onLeave={() => setShowCommentToolbar(false)}
-        >
-          <section className={styles.block}>
-            <DynamicResponse id={article.id} lock={!canReadFullContent} />
-          </section>
-        </Waypoint>
+          <Waypoint
+            onEnter={() => {
+              setShowCommentToolbar(true)
+            }}
+            onLeave={() => setShowCommentToolbar(false)}
+          >
+            <section className={styles.block}>
+              <DynamicResponse id={article.id} lock={!canReadFullContent} />
+            </section>
+          </Waypoint>
+        </Media>
       </section>
 
       <Media at="sm">

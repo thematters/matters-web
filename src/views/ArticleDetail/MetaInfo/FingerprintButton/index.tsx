@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Button, FingerprintDialog } from '~/components'
+import { Button, FingerprintDialog, toast } from '~/components'
 import { FingerprintArticleFragment } from '~/gql/graphql'
 
 interface FingerprintButtonProps {
@@ -14,6 +14,9 @@ const FingerprintButton = ({ article }: FingerprintButtonProps) => {
       textActiveColor="greyDarker"
       onClick={() => {
         // TODO: redirect to IPFS page
+        toast.success({
+          message: '功能即將開放，敬請期待！',
+        })
       }}
     >
       <FormattedMessage defaultMessage="IPFS" id="tio9Gt" />

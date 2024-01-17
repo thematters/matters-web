@@ -7,6 +7,7 @@ import {
   ButtonProps,
   ReCaptchaProvider,
   ShareButton,
+  toast,
 } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -118,6 +119,11 @@ const DesktopToolbar = ({
             article={article}
             disabled={!article.canComment}
             iconSize="md"
+            onClick={() => {
+              toast.success({
+                message: '功能即將開放，敬請期待！',
+              })
+            }}
             {...buttonProps}
           />
         </section>
