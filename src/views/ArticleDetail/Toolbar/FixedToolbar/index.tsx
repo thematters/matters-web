@@ -5,10 +5,8 @@ import { TEST_ID } from '~/common/enums'
 import { toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
-  Button,
   ButtonProps,
   ReCaptchaProvider,
-  TextIcon,
   toast,
 } from '~/components'
 import DropdownActions, {
@@ -106,11 +104,8 @@ const FixedToolbar = ({
     <section className={styles.toolbar} data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
       <section className={styles.buttons}>
         {showCommentToolbar && (
-          <Button
-            bgColor="greyLighter"
-            borderRadius="0.5rem"
-            textColor="greyDarker"
-            spacing={['baseTight', 'baseTight']}
+          <button
+            className={styles.commentButton}
             onClick={() => {
               // TODO: open comment drawer
               toast.success({
@@ -119,14 +114,12 @@ const FixedToolbar = ({
             }}
             disabled={lock}
           >
-            <TextIcon size="sm">
-              <FormattedMessage
-                defaultMessage="Comment..."
-                id="YOMY1y"
-                description="src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
-              />
-            </TextIcon>
-          </Button>
+            <FormattedMessage
+              defaultMessage="Comment..."
+              id="YOMY1y"
+              description="src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+            />
+          </button>
         )}
 
         <ReCaptchaProvider action="appreciateArticle">
