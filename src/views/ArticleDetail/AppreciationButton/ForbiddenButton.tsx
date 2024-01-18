@@ -8,7 +8,6 @@ import AppreciateButton from './AppreciateButton'
 const ForbiddenButton = ({
   count,
   total,
-  showText,
   iconSize = 'mdS',
   textWeight = 'md',
   textIconSpacing = 'xtight',
@@ -16,7 +15,6 @@ const ForbiddenButton = ({
 }: {
   count?: number
   total: number
-  showText?: boolean
   iconSize?: 'mdS' | 'md'
   textWeight?: 'md' | 'normal'
   textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
@@ -24,7 +22,6 @@ const ForbiddenButton = ({
   <AppreciateButton
     count={count}
     total={total}
-    showText={showText}
     onClick={() => {
       toast.error({
         message: (

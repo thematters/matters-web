@@ -132,7 +132,6 @@ const FixedToolbar = ({
         <ReCaptchaProvider action="appreciateArticle">
           <AppreciationButton
             article={article}
-            showText={showCommentToolbar}
             privateFetched={privateFetched}
             iconSize="md"
             textWeight="normal"
@@ -141,17 +140,6 @@ const FixedToolbar = ({
             {...buttonProps}
           />
         </ReCaptchaProvider>
-
-        <DonationButton
-          article={article}
-          articleDetail={articleDetails}
-          showText={showCommentToolbar}
-          disabled={lock}
-          iconSize="md"
-          textWeight="normal"
-          textIconSpacing="xxtight"
-          {...buttonProps}
-        />
 
         {!showCommentToolbar && (
           <CommentButton
@@ -169,12 +157,21 @@ const FixedToolbar = ({
           />
         )}
 
+        <DonationButton
+          article={article}
+          articleDetail={articleDetails}
+          disabled={lock}
+          iconSize="md"
+          textWeight="normal"
+          textIconSpacing="xxtight"
+          {...buttonProps}
+        />
+
         <BookmarkButton
           article={article}
           iconSize="md"
           inCard={false}
           disabled={lock}
-          showText={showCommentToolbar}
           {...buttonProps}
         />
 

@@ -433,10 +433,6 @@
     "defaultMessage": "回复了你在围炉 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
-  "8rnUQH": {
-    "defaultMessage": "喜欢",
-    "description": "src/views/ArticleDetail/AppreciationButton/AppreciateButton.tsx"
-  },
   "8t6Cs8": {
     "defaultMessage": "Matters 日报",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
@@ -802,9 +798,6 @@
   "Hpmiif": {
     "defaultMessage": "选集",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
-  },
-  "HqRNN8": {
-    "defaultMessage": "赞赏"
   },
   "HqnUd1": {
     "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
@@ -1666,10 +1659,6 @@
   "ggS9L7": {
     "defaultMessage": "支付金额无效，请重新输入",
     "description": "PAYMENT_AMOUNT_INVALID"
-  },
-  "gmdv1Q": {
-    "defaultMessage": "收藏",
-    "description": "src/components/Buttons/Bookmark"
   },
   "h+punE": {
     "defaultMessage": "{date}更新",
