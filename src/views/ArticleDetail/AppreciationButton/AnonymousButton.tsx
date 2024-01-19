@@ -9,7 +9,6 @@ import AppreciateButton from './AppreciateButton'
 const AnonymousButton = ({
   count,
   total,
-  showText,
   iconSize = 'mdS',
   textWeight = 'md',
   textIconSpacing = 'xtight',
@@ -17,7 +16,6 @@ const AnonymousButton = ({
 }: {
   count?: number
   total: number
-  showText?: boolean
   iconSize?: 'mdS' | 'md'
   textWeight?: 'md' | 'normal'
   textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
@@ -25,7 +23,6 @@ const AnonymousButton = ({
   <AppreciateButton
     count={count}
     total={total}
-    showText={showText}
     onClick={() => {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {

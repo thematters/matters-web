@@ -28,7 +28,6 @@ import {
 export type DonationButtonProps = {
   article: DonationButtonArticleFragment
   articleDetail: NonNullable<ArticleDetailPublicQuery['article']>
-  showText?: boolean
   iconSize?: 'mdS' | 'md'
   textWeight?: 'md' | 'normal'
   textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
@@ -54,7 +53,6 @@ const fragments = {
 const DonationButton = ({
   article,
   articleDetail,
-  showText,
   iconSize = 'mdS',
   textWeight = 'md',
   textIconSpacing = 'basexxtight',
@@ -115,18 +113,13 @@ const DonationButton = ({
             icon={<IconMoney20 size={iconSize} />}
             weight={textWeight}
             spacing={
-              showText || article.donationsToolbar.totalCount > 0
-                ? textIconSpacing
-                : 0
+              article.donationsToolbar.totalCount > 0 ? textIconSpacing : 0
             }
             size="sm"
           >
-            {!showText && article.donationsToolbar.totalCount > 0
+            {article.donationsToolbar.totalCount > 0
               ? numAbbr(article.donationsToolbar.totalCount)
               : undefined}
-            {showText && (
-              <FormattedMessage defaultMessage="Support" id="HqRNN8" />
-            )}
           </TextIcon>
         </Button>
       )}

@@ -11,7 +11,6 @@ export type BookmarkButtonProps = {
   article: Partial<BookmarkArticlePrivateFragment>
   iconSize?: Extract<IconSize, 'mdS' | 'md'>
   inCard?: boolean
-  showText?: boolean
 } & ButtonProps
 
 const fragments = {
@@ -28,7 +27,6 @@ const fragments = {
 export const BookmarkButton = ({
   article,
   iconSize,
-  showText,
   inCard,
   ...buttonProps
 }: BookmarkButtonProps) => {
@@ -41,7 +39,6 @@ export const BookmarkButton = ({
         iconSize={iconSize}
         disabled={viewer.isArchived}
         inCard={inCard}
-        showText={showText}
         {...buttonProps}
       />
     )
@@ -52,7 +49,6 @@ export const BookmarkButton = ({
         iconSize={iconSize}
         disabled={viewer.isArchived}
         inCard={inCard}
-        showText={showText}
         {...buttonProps}
       />
     )

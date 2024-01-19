@@ -5,10 +5,8 @@ import { TEST_ID } from '~/common/enums'
 import { toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
-  Button,
   ButtonProps,
   ReCaptchaProvider,
-  TextIcon,
   toast,
 } from '~/components'
 import DropdownActions, {
@@ -106,11 +104,8 @@ const FixedToolbar = ({
     <section className={styles.toolbar} data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
       <section className={styles.buttons}>
         {showCommentToolbar && (
-          <Button
-            bgColor="greyLighter"
-            borderRadius="0.5rem"
-            textColor="greyDarker"
-            spacing={['baseTight', 'baseTight']}
+          <button
+            className={styles.commentButton}
             onClick={() => {
               // TODO: open comment drawer
               toast.success({
@@ -119,20 +114,17 @@ const FixedToolbar = ({
             }}
             disabled={lock}
           >
-            <TextIcon size="sm">
-              <FormattedMessage
-                defaultMessage="Comment..."
-                id="YOMY1y"
-                description="src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
-              />
-            </TextIcon>
-          </Button>
+            <FormattedMessage
+              defaultMessage="Comment..."
+              id="YOMY1y"
+              description="src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+            />
+          </button>
         )}
 
         <ReCaptchaProvider action="appreciateArticle">
           <AppreciationButton
             article={article}
-            showText={showCommentToolbar}
             privateFetched={privateFetched}
             iconSize="md"
             textWeight="normal"
@@ -141,17 +133,6 @@ const FixedToolbar = ({
             {...buttonProps}
           />
         </ReCaptchaProvider>
-
-        <DonationButton
-          article={article}
-          articleDetail={articleDetails}
-          showText={showCommentToolbar}
-          disabled={lock}
-          iconSize="md"
-          textWeight="normal"
-          textIconSpacing="xxtight"
-          {...buttonProps}
-        />
 
         {!showCommentToolbar && (
           <CommentButton
@@ -169,12 +150,21 @@ const FixedToolbar = ({
           />
         )}
 
+        <DonationButton
+          article={article}
+          articleDetail={articleDetails}
+          disabled={lock}
+          iconSize="md"
+          textWeight="normal"
+          textIconSpacing="xxtight"
+          {...buttonProps}
+        />
+
         <BookmarkButton
           article={article}
           iconSize="md"
           inCard={false}
           disabled={lock}
-          showText={showCommentToolbar}
           {...buttonProps}
         />
 

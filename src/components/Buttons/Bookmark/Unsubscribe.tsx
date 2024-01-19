@@ -9,7 +9,6 @@ import {
   IconBookmarked24,
   IconSize,
   Menu,
-  TextIcon,
   toast,
   useMutation,
   ViewerContext,
@@ -23,7 +22,6 @@ export type UnsubscribeProps = {
   iconSize?: Extract<IconSize, 'mdS' | 'md'>
   disabled?: boolean
   inCard?: boolean
-  showText?: boolean
 } & ButtonProps
 
 const Unsubscribe = ({
@@ -31,7 +29,6 @@ const Unsubscribe = ({
   iconSize,
   disabled,
   inCard,
-  showText,
   ...buttonProps
 }: UnsubscribeProps) => {
   const viewer = useContext(ViewerContext)
@@ -100,15 +97,7 @@ const Unsubscribe = ({
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}
       {...buttonProps}
     >
-      <TextIcon icon={<IconBookmarked24 size={iconSize} />} size="sm">
-        {showText && (
-          <FormattedMessage
-            defaultMessage="Save"
-            id="gmdv1Q"
-            description="src/components/Buttons/Bookmark"
-          />
-        )}
-      </TextIcon>
+      <IconBookmarked24 size={iconSize} />
     </Button>
   )
 }
