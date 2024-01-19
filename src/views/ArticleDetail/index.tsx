@@ -1,19 +1,15 @@
-//import styles 👇
-import 'react-modern-drawer/dist/index.css'
-
 import { useLazyQuery } from '@apollo/react-hooks'
 import { md2html } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
-// import component 👇
-import Drawer from 'react-modern-drawer'
 import { Waypoint } from 'react-waypoint'
 
 import { URL_QS } from '~/common/enums'
 import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
+  Drawer,
   EmptyLayout,
   Error,
   Head,
@@ -269,14 +265,7 @@ const BaseArticleDetail = ({
       <button onClick={toggleDrawer} className={styles.closeButton}>
         Show Drawer
       </button>
-      <Drawer
-        open={isOpen}
-        onClose={toggleDrawer}
-        direction="right"
-        className={styles.drawer}
-        enableOverlay={false}
-        size="424px"
-      >
+      <Drawer isOpen={isOpen} onClose={toggleDrawer}>
         <button onClick={toggleDrawer} className={styles.closeButton}>
           Close Drawer
         </button>
