@@ -73,7 +73,8 @@ const FloatToolbar = ({
   })
 
   const buttonProps: ButtonProps = {
-    spacing: ['baseTight', 'base'],
+    size: ['3.75rem', '2.5rem'],
+    spacing: [0, 0],
     bgColor: 'white',
     textColor: 'black',
     textActiveColor: 'greyDarker',

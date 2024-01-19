@@ -25,6 +25,7 @@
 .toolbar {
   @mixin inline-flex-center-all;
 
+  padding: 0 var(--spacing-tight);
   background: var(--color-white);
   border-radius: 99px;
   box-shadow:
@@ -35,6 +36,7 @@
   & .divider {
     width: 1px;
     height: 13px;
+    margin: 0 var(--spacing-base-xx-tight);
     background: var(--color-grey-light);
   }
 
