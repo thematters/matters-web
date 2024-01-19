@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import jump from 'jump.js'
 import { useEffect, useState } from 'react'
 
 import { ButtonProps, ReCaptchaProvider, toast } from '~/components'
@@ -73,7 +74,8 @@ const FloatToolbar = ({
   })
 
   const buttonProps: ButtonProps = {
-    spacing: ['baseTight', 'base'],
+    size: ['3.75rem', '2.5rem'],
+    spacing: [0, 0],
     bgColor: 'white',
     textColor: 'black',
     textActiveColor: 'greyDarker',
@@ -109,6 +111,12 @@ const FloatToolbar = ({
             article={article}
             articleDetail={articleDetails}
             disabled={lock}
+            onClick={() => {
+              jump('#animation', { offset: -100 })
+              toast.success({
+                message: '功能即將開放，敬請期待！',
+              })
+            }}
             {...buttonProps}
           />
 
