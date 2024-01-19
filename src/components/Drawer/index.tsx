@@ -1,25 +1,45 @@
 import 'react-modern-drawer/dist/index.css'
 
 import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import ModernDrawer from 'react-modern-drawer'
+
+import { IconClose24 } from '~/components'
+
+import styles from './styles.module.css'
 
 export type DrawerProps = {
   isOpen: boolean
+  title: string
   onClose: () => void
   children: React.ReactNode
+  size?: string
+  duration?: number
+  enableOverlay?: boolean
+  direction?: 'left' | 'right'
 }
 
-export const Drawer = ({ isOpen, onClose, children }: DrawerProps) => {
+export const Drawer = ({
+  isOpen,
+  onClose,
+  title,
+  children,
+  size,
+  duration = 300,
+  enableOverlay = false,
+  direction = 'right',
+}: DrawerProps) => {
   const [mounted, setMounted] = useState(isOpen)
-  const [openDrawer, setOpenDrawer] = useState(false)
+  const [showDrawer, setShowDrawer] = useState(false)
+  const intl = useIntl()
 
   useEffect(() => {
     if (isOpen) {
       setMounted(true)
-      setTimeout(() => setOpenDrawer(true), 0)
+      setTimeout(() => setShowDrawer(true), 0)
     } else {
-      setOpenDrawer(false)
-      setTimeout(() => setMounted(false), 300)
+      setShowDrawer(false)
+      setTimeout(() => setMounted(false), duration)
     }
   }, [isOpen])
 
@@ -29,13 +49,28 @@ export const Drawer = ({ isOpen, onClose, children }: DrawerProps) => {
 
   return (
     <ModernDrawer
-      open={openDrawer}
+      open={showDrawer}
       onClose={onClose}
-      direction="right"
-      enableOverlay={false}
-      duration={300}
-      size="424px"
+      className={styles.drawer}
+      direction={direction}
+      enableOverlay={enableOverlay}
+      duration={duration}
+      size={size}
     >
+      <section className={styles.header}>
+        <h2>{title}</h2>
+
+        <button
+          className={styles.close}
+          onClick={onClose}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Close',
+            id: 'rbrahO',
+          })}
+        >
+          <IconClose24 size="md" />
+        </button>
+      </section>
       {children}
     </ModernDrawer>
   )

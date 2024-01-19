@@ -1,0 +1,25 @@
+.drawer {
+  padding: var(--spacing-xx-loose) var(--spacing-loose) var(--spacing-xx-loose)
+    var(--spacing-xx-loose);
+
+  /* Drawer Shadow */
+  box-shadow: -8px 0 56px 0 rgb(0 0 0 / 8%) !important;
+  backdrop-filter: blur(12px);
+
+  & .header {
+    @mixin flex-center-space-between;
+
+    & h2 {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.5;
+    }
+
+    & .close {
+      &:hover,
+      &:focus {
+        color: var(--color-grey-darker);
+      }
+    }
+  }
+}
