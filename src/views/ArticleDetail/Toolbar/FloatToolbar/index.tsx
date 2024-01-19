@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import jump from 'jump.js'
 import { useEffect, useState } from 'react'
 
 import { ButtonProps, ReCaptchaProvider, toast } from '~/components'
@@ -111,6 +112,7 @@ const FloatToolbar = ({
             articleDetail={articleDetails}
             disabled={lock}
             onClick={() => {
+              jump('#animation', { offset: -100 })
               toast.success({
                 message: '功能即將開放，敬請期待！',
               })
