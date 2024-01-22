@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { analytics } from '~/common/utils'
-import { AddCreditDialog, Dialog, Translate, useFeatures } from '~/components'
+import { AddCreditDialog, Dialog, useFeatures } from '~/components'
 
 import PayoutButton from './PayoutButton'
 import styles from './styles.module.css'
@@ -17,7 +19,7 @@ const Buttons: React.FC<ButtonsProps> = ({ canPayout, hasStripeAccount }) => {
         <AddCreditDialog>
           {({ openDialog }) => (
             <Dialog.RoundedButton
-              text={<Translate id="topUp" />}
+              text={<FormattedMessage defaultMessage="Top Up" id="dTOtPO" />}
               onClick={() => {
                 openDialog()
                 analytics.trackEvent('click_button', { type: 'top_up' })
