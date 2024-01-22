@@ -174,7 +174,6 @@ export const TEXT = {
     successRegister: '註冊成功',
     successResetPassword: '密碼重置成功',
     successSetSupportSetting: '支持反饋設置成功',
-    successTopUp: '儲值成功',
     successUnblock: '已取消封鎖。該用戶現在可以評論你的作品和圍爐。',
     successUploadImage: '圖片上傳成功',
     supportRequestDescription:
@@ -198,7 +197,6 @@ export const TEXT = {
     theFirstSupporter: '第一個支持了這篇作品',
     thinkAboutIt: '考慮一下',
     topic: '話題',
-    topUp: '儲值',
     toYourIPNSPage: '指向到你的 IPNS 頁面',
     understood: '我知道了',
     unfollow: '取消追蹤',
@@ -397,7 +395,6 @@ export const TEXT = {
     successRegister: '注册成功',
     successResetPassword: '密码重置成功',
     successSetSupportSetting: '支持反馈设置成功',
-    successTopUp: '储值成功',
     successUnblock: '已取消屏蔽。该用户现在可以评论你的作品和围炉。',
     successUploadImage: '图片上传成功',
     supportRequestDescription:
@@ -421,7 +418,6 @@ export const TEXT = {
     theFirstSupporter: '第一个支持了这篇作品',
     thinkAboutIt: '考虑一下',
     topic: '话题',
-    topUp: '储值',
     toYourIPNSPage: '指向到你的 IPNS 页面',
     understood: '我知道了',
     unfollow: '取消追踪',
@@ -636,7 +632,6 @@ export const TEXT = {
     successRegister: 'Thank you for registering',
     successResetPassword: 'Password successfully changed.',
     successSetSupportSetting: 'Support setting updated',
-    successTopUp: 'Topped up successfully',
     successUnblock: 'User unblocked. User can now comment on your articles.',
     successUploadImage: 'Image uploaded',
     supportRequestDescription:
@@ -661,7 +656,6 @@ export const TEXT = {
     theFirstSupporter: 'was the first to support this article',
     thinkAboutIt: 'Maybe later',
     topic: 'Topic',
-    topUp: 'Top Up',
     toYourIPNSPage: 'to your IPNS page',
     unblockSuccess: 'User unblocked and can reply your articles now.',
     uncollapseComment: 'Unfold',
