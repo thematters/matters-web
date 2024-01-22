@@ -646,6 +646,9 @@
     "defaultMessage": "在 {circleName} 的廣播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "Eb1U+/": {
+    "defaultMessage": "儲值成功"
+  },
   "EoeUjA": {
     "defaultMessage": "你無權限進行該操作",
     "description": "FORBIDDEN_BY_STATE"
