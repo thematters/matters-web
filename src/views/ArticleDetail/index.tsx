@@ -328,9 +328,20 @@ const BaseArticleDetail = ({
                 privateFetched={privateFetched}
                 hasFingerprint={canReadFullContent}
                 lock={lock}
+                toggleDrawer={toggleDrawer}
               />
             </div>
           </Waypoint>
+        </Media>
+
+        <Media greaterThan="sm">
+          <Waypoint
+            onEnter={() => {
+              if (article.canComment) {
+                setIsOpen(true)
+              }
+            }}
+          />
         </Media>
 
         {collectionCount > 0 && (
