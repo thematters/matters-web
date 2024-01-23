@@ -133,7 +133,7 @@
   line-height: inherit;
   color: inherit;
   text-align: center;
-  background: var(--color-white);
+  background: transparent;
   border-radius: 0;
 }
 
