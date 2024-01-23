@@ -8,7 +8,7 @@ export const fragments = {
     fragment DonatorsArticle on Article {
       id
       donations: transactionsReceivedBy(
-        input: { first: 9, purpose: donation }
+        input: { first: 50, purpose: donation }
       ) {
         totalCount
         edges {
