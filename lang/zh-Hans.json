@@ -2254,9 +2254,6 @@
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "znJ06J": {
-    "defaultMessage": "<a>关于游牧者计划</a>"
-  },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",
     "description": "ACTION_LIMIT_EXCEEDED"
