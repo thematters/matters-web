@@ -52,10 +52,9 @@ const Donators = ({
 
   const edges = article.donations.edges
   const donatorsCount = article.donations.totalCount
-  const donators = (
+  const frontDonators = (
     edges?.map(({ node }) => node).filter((user) => !!user) || []
-  ).slice(0, maxAvatarNum)
-  let frontDonators = donators.slice(0, maxAvatarNum - 1)
+  ).slice(0, maxAvatarNum + 1)
 
   const containerClasses = classNames({
     [styles.clickable]: isAuthor,
