@@ -1,11 +1,9 @@
-import 'react-modern-drawer/dist/index.css'
-
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
-import ModernDrawer from 'react-modern-drawer'
 
 import { IconClose24 } from '~/components'
 
+import { BaseDrawer } from './BaseDrawer'
 import styles from './styles.module.css'
 
 export type DrawerProps = {
@@ -48,7 +46,7 @@ export const Drawer = ({
   }
 
   return (
-    <ModernDrawer
+    <BaseDrawer
       open={showDrawer}
       onClose={onClose}
       className={styles.drawer}
@@ -72,6 +70,6 @@ export const Drawer = ({
         </button>
       </section>
       {children}
-    </ModernDrawer>
+    </BaseDrawer>
   )
 }

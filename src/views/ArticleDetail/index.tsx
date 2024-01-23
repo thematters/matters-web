@@ -262,153 +262,8 @@ const BaseArticleDetail = ({
 
       <State article={article} />
 
-      <button onClick={toggleDrawer} className={styles.closeButton}>
-        Show Drawer
-      </button>
-      <Drawer isOpen={isOpen} onClose={toggleDrawer}>
-        <button onClick={toggleDrawer} className={styles.closeButton}>
-          Close Drawer
-        </button>
-        <br />
-        <br />
-        <div>Hello World</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div>Hello World</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div>Hello World</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div>Hello World</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div>Hello World</div>
-        <div>Hello World</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div>Hello World</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div>Hello World</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div>Hello World</div>
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <br />
-        <div>Hello World</div>
+      <Drawer isOpen={isOpen} onClose={toggleDrawer} title={'Comment'}>
+        <>Hello Comment Drawer</>
       </Drawer>
 
       <section className={styles.content}>
@@ -525,6 +380,7 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
+          toggleDrawer={toggleDrawer}
         />
       </Media>
 
@@ -535,6 +391,7 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
+          toggleDrawer={toggleDrawer}
         />
       </Media>
     </Layout.Main>

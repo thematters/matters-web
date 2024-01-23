@@ -1,10 +1,28 @@
+.baseDrawer {
+  & .baseDrawerCheckbox {
+    display: none;
+
+    &:checked {
+      & ~ .baseDrawerContainer {
+        visibility: visible;
+        transform: translate3d(0, 0, 0) !important;
+      }
+    }
+  }
+
+  & .baseDrawerContainer {
+    position: fixed;
+    visibility: hidden;
+    background: white;
+    box-shadow: -8px 0 56px 0 rgb(0 0 0 / 8%) !important;
+    backdrop-filter: blur(12px);
+    transition: all;
+  }
+}
+
 .drawer {
   padding: var(--spacing-xx-loose) var(--spacing-loose) var(--spacing-xx-loose)
     var(--spacing-xx-loose);
-
-  /* Drawer Shadow */
-  box-shadow: -8px 0 56px 0 rgb(0 0 0 / 8%) !important;
-  backdrop-filter: blur(12px);
 
   & .header {
     @mixin flex-center-space-between;
