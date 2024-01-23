@@ -87,26 +87,26 @@ const BadgeNomadDialogContent = ({
             <p>
               {nomadBadgeLevel === 4 ? (
                 <FormattedMessage
-                  defaultMessage="Breaking through history! The torch you've ignited will be the most dazzling support on the Nomad's journey. Congratulations on reaching the final destination of the Nomad Matters with 20 friends and earning the highest-level Firebolt badge."
-                  id="p0oPHP"
+                  defaultMessage="Breaking through history! The torch you've ignited will be the most dazzling support on the Nomad's journey. The Firebolt badge signifies your participation in the Nomad Matters and earning the highest-level Firebolt badge."
+                  id="4km7Yc"
                   description="src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
                 />
               ) : nomadBadgeLevel === 3 ? (
                 <FormattedMessage
-                  defaultMessage="Wings have sprouted on the badge, and the halo of dreams is beginning to spin. You have gathered 10 companions on the Nomad's path. Invite another 10 fellow travelers to move towards the final destination together, where the highest level of honor awaits you."
-                  id="DdVBFV"
+                  defaultMessage="Wings have sprouted on the badge, and the halo of dreams is beginning to spin. The Nimbus Ferry badge signifies your participation in the Nomad Matters."
+                  id="LUWKnn"
                   description="src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
                 />
               ) : nomadBadgeLevel === 2 ? (
                 <FormattedMessage
-                  defaultMessage="The dazzling light of a meteor shower is enough to illuminate the night sky. You have already invited 5 companions to participate in the Nomad Matters. Invite 5 more, and you can continue to level up!"
-                  id="XfkltT"
+                  defaultMessage="The dazzling light of a meteor shower is enough to illuminate the night sky. The Meteor Canoe badge signifies your participation in the Nomad Matters."
+                  id="dAPUJp"
                   description="src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
                 />
               ) : (
                 <FormattedMessage
-                  defaultMessage="Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters, whether as a contestant or a supporter of exceptional projects. Next, invite 5 companions to join the journey with you, and you'll earn an even higher-level badge?"
-                  id="GxTjwK"
+                  defaultMessage="Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters."
+                  id="iTcMqz"
                   description="src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
                 />
               )}
