@@ -448,6 +448,10 @@
   "9J0iCw": {
     "defaultMessage": "Deleted user"
   },
+  "9OIqBr": {
+    "defaultMessage": "Edit Comment",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
   "9UNFGm": {
     "defaultMessage": "Transaction Password"
   },
@@ -906,6 +910,10 @@
   },
   "LWE7oq": {
     "defaultMessage": "Saving draft, are you sure you want to leave?"
+  },
+  "LYl9+i": {
+    "defaultMessage": "Edit",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "Lb0JsC": {
     "defaultMessage": "You have blocked that user"
