@@ -11,6 +11,7 @@ type BaseDrawerProps = {
   direction: 'left' | 'right' | 'top' | 'bottom'
   children?: React.ReactNode
   duration?: number
+  zIndex?: number
   enableOverlay?: boolean
   className?: string
   size?: number | string
@@ -67,11 +68,13 @@ export const BaseDrawer = ({
   direction,
   children,
   duration,
+  zIndex = 100,
   enableOverlay,
   className,
   size,
 }: BaseDrawerProps) => {
   const drawerStyles: CSSProperties = {
+    zIndex: zIndex,
     transitionDuration: `${duration}ms`,
     ...getDirectionStyle(direction, size),
   }
