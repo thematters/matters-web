@@ -444,6 +444,10 @@
   "9J0iCw": {
     "defaultMessage": "已注销用户"
   },
+  "9OIqBr": {
+    "defaultMessage": "编辑评论",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
   "9UNFGm": {
     "defaultMessage": "交易密码"
   },
@@ -903,6 +907,10 @@
   },
   "LWE7oq": {
     "defaultMessage": "草稿保存中，确定要离开吗？"
+  },
+  "LYl9+i": {
+    "defaultMessage": "编辑",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "Lb0JsC": {
     "defaultMessage": "你屏蔽了该用户"

@@ -444,6 +444,10 @@
   "9J0iCw": {
     "defaultMessage": "已註銷用戶"
   },
+  "9OIqBr": {
+    "defaultMessage": "編輯評論",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
   "9UNFGm": {
     "defaultMessage": "交易密碼"
   },
@@ -903,6 +907,10 @@
   },
   "LWE7oq": {
     "defaultMessage": "草稿保存中，確定要離開嗎？"
+  },
+  "LYl9+i": {
+    "defaultMessage": "編輯",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "Lb0JsC": {
     "defaultMessage": "你封鎖了該用戶"
