@@ -1,4 +1,3 @@
-import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as Nomad1Background } from '@/public/static/images/badge-nomad1-background.svg'
@@ -11,10 +10,8 @@ import {
   CopyToClipboard,
   Dialog,
   IconArrowLeft16,
-  LanguageContext,
   useMediaQuery,
 } from '~/components'
-import { UserLanguage } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -33,10 +30,7 @@ const BadgeNomadDialogContent = ({
   isNested,
   goBack,
 }: BadgeNomadDialogContentProps) => {
-  const { lang } = useContext(LanguageContext)
   const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
-  const campaignLink = process.env.NEXT_PUBLIC_NOMAD_MATTERS_CAMPAIGN_LINK
-  const campaignLinkEn = process.env.NEXT_PUBLIC_NOMAD_MATTERS_CAMPAIGN_LINK_EN
 
   return (
     <>
@@ -110,28 +104,6 @@ const BadgeNomadDialogContent = ({
                   description="src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
                 />
               )}
-            </p>
-            <p className={styles.extra}>
-              <FormattedMessage
-                defaultMessage="<a>About Nomad Matters</a>"
-                id="znJ06J"
-                values={{
-                  a: (chunks) => (
-                    <a
-                      href={
-                        (lang === UserLanguage.En
-                          ? campaignLinkEn
-                          : campaignLink) ||
-                        campaignLink ||
-                        ''
-                      }
-                      target="_blank"
-                    >
-                      {chunks}
-                    </a>
-                  ),
-                }}
-              />
             </p>
           </Dialog.Content.Message>
         </section>
