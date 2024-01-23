@@ -67,7 +67,7 @@ export const BaseDrawer = ({
   onClose,
   direction,
   children,
-  duration,
+  duration = 200,
   zIndex = 100,
   enableOverlay,
   className,

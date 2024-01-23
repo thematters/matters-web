@@ -16,7 +16,7 @@
     background: white;
     box-shadow: -8px 0 56px 0 rgb(0 0 0 / 8%) !important;
     backdrop-filter: blur(12px);
-    transition: all;
+    will-change: transform, visibility;
   }
 }
 
