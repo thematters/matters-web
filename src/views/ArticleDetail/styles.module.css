@@ -22,16 +22,3 @@
   padding: var(--spacing-loose) 0 0;
   margin: var(--spacing-loose) 0 var(--spacing-base);
 }
-
-.drawer {
-  padding: var(--spacing-xx-loose) var(--spacing-loose) var(--spacing-loose)
-    var(--spacing-xx-loose);
-  overflow-y: auto;
-}
-
-.closeButton {
-  @mixin border-grey;
-
-  font-size: 24px;
-  color: var(--color-red);
-}
