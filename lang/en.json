@@ -2254,9 +2254,6 @@
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
-  "znJ06J": {
-    "defaultMessage": "<a>About Nomad Matters</a>"
-  },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",
     "description": "ACTION_LIMIT_EXCEEDED"
