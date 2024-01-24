@@ -1071,6 +1071,10 @@
   "OpeFTV": {
     "defaultMessage": "Enter a 6-digit payment password."
   },
+  "OsX3KM": {
+    "defaultMessage": "Comment",
+    "description": "src/views/ArticleDetail/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"

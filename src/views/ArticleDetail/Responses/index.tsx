@@ -1,14 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { IconDisableComment24, TextIcon, Title, Translate } from '~/components'
+import { IconDisableComment24, TextIcon, Translate } from '~/components'
 import {
   ArticleResponseQuery,
   ResponseCountArticleFragment,
 } from '~/gql/graphql'
 
-import FeatureComments from './FeaturedComments'
 import LatestResponses from './LatestResponses'
+import { Placeholder } from './Placeholder'
 import ResponseCount from './ResponseCount'
 import styles from './styles.module.css'
 
@@ -37,7 +37,7 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
   })
 
   if (loading || !data?.article) {
-    return null
+    return <Placeholder />
   }
 
   const { article } = data
@@ -64,17 +64,6 @@ const Responses = ({ id, lock }: { id: string; lock: boolean }) => {
 
   return (
     <section className={styles.responses}>
-      <header className={styles.header}>
-        <Title type="nav" is="h2">
-          <Translate id="responses" />
-          <ResponseCount article={article as ResponseCountArticleFragment} />
-        </Title>
-      </header>
-
-      <FeatureComments
-        id={(article as ResponseCountArticleFragment).id}
-        lock={lock}
-      />
       <LatestResponses
         id={(article as ResponseCountArticleFragment).id}
         lock={lock}
@@ -96,5 +85,7 @@ Responses.fragments = {
     ${ResponseCount.fragments.article}
   `,
 }
+
+Responses.Placeholder = Placeholder
 
 export default Responses

@@ -3,6 +3,7 @@ import { md2html } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { Waypoint } from 'react-waypoint'
 
 import { URL_QS } from '~/common/enums'
@@ -50,6 +51,7 @@ import {
 import License from './License'
 import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
+import { Placeholder as ResponsesPlaceholder } from './Responses/Placeholder'
 import State from './State'
 import styles from './styles.module.css'
 import TagList from './TagList'
@@ -68,7 +70,7 @@ const DynamicCollection = dynamic(() => import('./Collection'), {
 })
 const DynamicResponse = dynamic(() => import('./Responses'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <ResponsesPlaceholder />,
 })
 const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ssr: false,
@@ -111,6 +113,7 @@ const BaseArticleDetail = ({
   const { getQuery, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
+  const intl = useIntl()
 
   const features = useFeatures()
   const [showFloatToolbar, setShowFloatToolbar] = useState(true)
@@ -264,9 +267,20 @@ const BaseArticleDetail = ({
 
       <State article={article} />
 
-      <Drawer isOpen={isOpen} onClose={toggleDrawer} title={'Comment'}>
-        <>Hello Comment Drawer</>
-      </Drawer>
+      <Media greaterThan="sm">
+        <Drawer
+          isOpen={isOpen}
+          onClose={toggleDrawer}
+          title={intl.formatMessage({
+            defaultMessage: 'Comment',
+            description: 'src/views/ArticleDetail/index.tsx',
+            id: 'OsX3KM',
+          })}
+        >
+          {/* <>Hello Comment Drawer</> */}
+          <DynamicResponse id={article.id} lock={!canReadFullContent} />
+        </Drawer>
+      </Media>
 
       <section className={styles.content}>
         <section className={styles.title}>

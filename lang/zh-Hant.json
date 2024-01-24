@@ -1071,6 +1071,10 @@
   "OpeFTV": {
     "defaultMessage": "輸入六位數字交易密碼"
   },
+  "OsX3KM": {
+    "defaultMessage": "評論",
+    "description": "src/views/ArticleDetail/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"

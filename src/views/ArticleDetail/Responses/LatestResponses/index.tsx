@@ -16,7 +16,6 @@ import {
   LanguageContext,
   List,
   QueryError,
-  Spinner,
   Switch,
   ThreadComment,
   Title,
@@ -31,6 +30,7 @@ import {
   LatestResponsesPublicQuery,
 } from '~/gql/graphql'
 
+import { Placeholder } from '../Placeholder'
 import ResponseArticle from '../ResponseArticle'
 import styles from '../styles.module.css'
 import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
@@ -245,7 +245,7 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
    * Render
    */
   if (loading && !data) {
-    return <Spinner />
+    return <Placeholder />
   }
 
   if (error) {
