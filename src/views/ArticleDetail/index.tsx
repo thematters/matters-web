@@ -120,6 +120,7 @@ const BaseArticleDetail = ({
   )
 
   const [isOpen, setIsOpen] = useState(false)
+  const [autoOpen] = useState(true)
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState)
   }
@@ -220,6 +221,7 @@ const BaseArticleDetail = ({
     translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
   const lock = article.state !== 'active'
+  const isShortWork = summary.length + content.length < 200
 
   return (
     <Layout.Main
@@ -337,7 +339,7 @@ const BaseArticleDetail = ({
         <Media greaterThan="sm">
           <Waypoint
             onEnter={() => {
-              if (article.canComment) {
+              if (article.canComment && autoOpen && !isShortWork) {
                 setIsOpen(true)
               }
             }}
@@ -403,6 +405,16 @@ const BaseArticleDetail = ({
           privateFetched={privateFetched}
           lock={lock}
           toggleDrawer={toggleDrawer}
+        />
+      </Media>
+
+      <Media greaterThan="sm">
+        <Waypoint
+          onEnter={() => {
+            if (article.canComment && autoOpen && isShortWork) {
+              setTimeout(() => setIsOpen(true), 500)
+            }
+          }}
         />
       </Media>
     </Layout.Main>
