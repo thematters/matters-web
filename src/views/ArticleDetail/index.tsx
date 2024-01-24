@@ -340,7 +340,7 @@ const BaseArticleDetail = ({
           <Waypoint
             onEnter={() => {
               if (article.canComment && autoOpen && !isShortWork) {
-                setIsOpen(true)
+                setTimeout(() => setIsOpen(true), 500)
               }
             }}
           />
