@@ -38,6 +38,7 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
 import {
@@ -51,7 +52,6 @@ import {
 import License from './License'
 import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
-import { Placeholder as ResponsesPlaceholder } from './Responses/Placeholder'
 import State from './State'
 import styles from './styles.module.css'
 import TagList from './TagList'
@@ -68,9 +68,10 @@ const DynamicCollection = dynamic(() => import('./Collection'), {
   ssr: false,
   loading: () => <Spinner />,
 })
-const DynamicResponse = dynamic(() => import('./Responses'), {
+
+const DynamicComments = dynamic(() => import('./Comments'), {
   ssr: false,
-  loading: () => <ResponsesPlaceholder />,
+  loading: () => <CommentsPlaceholder />,
 })
 const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ssr: false,
@@ -278,7 +279,7 @@ const BaseArticleDetail = ({
           })}
         >
           {/* <>Hello Comment Drawer</> */}
-          <DynamicResponse id={article.id} lock={!canReadFullContent} />
+          <DynamicComments id={article.id} lock={!canReadFullContent} />
         </Drawer>
       </Media>
 
@@ -379,7 +380,7 @@ const BaseArticleDetail = ({
             onLeave={() => setShowCommentToolbar(false)}
           >
             <section className={styles.block}>
-              <DynamicResponse id={article.id} lock={!canReadFullContent} />
+              <DynamicComments id={article.id} lock={!canReadFullContent} />
             </section>
           </Waypoint>
         </Media>

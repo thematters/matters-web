@@ -1,4 +1,5 @@
 :root {
+  --color-matters-gold-lighter: #faf7f0;
   --color-matters-gold: #c0a46b;
   --color-matters-green: #0d6763;
   --color-matters-green-dark: #0a524f;
@@ -27,6 +28,8 @@
   --color-line-grey-light: rgb(0 0 0 / 8%);
   --color-line-grey: rgb(0 0 0 / 16%);
   --color-line-grey-dark: rgb(0 0 0 / 24%);
+  --color-line-matters-green-light: #0d676366;
+  --color-line-matters-gold-light: #c0a46b66;
 
   /* background */
   --color-bg-black: rgb(0 0 0 / 70%);

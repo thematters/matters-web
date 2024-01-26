@@ -1,62 +1,53 @@
 import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 
 import { REFETCH_RESPONSES, URL_FRAGMENT } from '~/common/enums'
 import {
   dom,
-  filterResponses,
+  filterComments,
   mergeConnections,
-  translate,
   unshiftConnections,
 } from '~/common/utils'
 import {
-  EmptyResponse,
-  LanguageContext,
   List,
   QueryError,
-  Switch,
-  ThreadComment,
-  Title,
-  Translate,
+  ThreadCommentBeta,
   useEventListener,
   usePublicQuery,
   ViewerContext,
   ViewMoreButton,
 } from '~/components'
 import {
-  LatestResponsesPrivateQuery,
-  LatestResponsesPublicQuery,
+  LatestCommentsPrivateQuery,
+  LatestCommentsPublicQuery,
 } from '~/gql/graphql'
 
 import { Placeholder } from '../Placeholder'
-import ResponseArticle from '../ResponseArticle'
 import styles from '../styles.module.css'
-import { LATEST_RESPONSES_PRIVATE, LATEST_RESPONSES_PUBLIC } from './gql'
+import { LATEST_COMMENTS_PRIVATE, LATEST_COMMENTS_PUBLIC } from './gql'
 
-const RESPONSES_COUNT = 15
+const COMMENTS_COUNT = 15
 
-type ResponsePublic = NonNullable<
+type CommentPublic = NonNullable<
   NonNullable<
-    LatestResponsesPublicQuery['article'] & { __typename: 'Article' }
-  >['responses']['edges']
+    LatestCommentsPublicQuery['article'] & { __typename: 'Article' }
+  >['comments']['edges']
 >[0]['node']
-type ResponsePrivate = NonNullable<
-  NonNullable<LatestResponsesPrivateQuery['nodes']>[0] & {
+type CommentPrivate = NonNullable<
+  NonNullable<LatestCommentsPrivateQuery['nodes']>[0] & {
     __typename: 'Comment'
   }
 >
-type Response = ResponsePublic & Partial<Omit<ResponsePrivate, '__typename'>>
+type Comment = CommentPublic & Partial<Omit<CommentPrivate, '__typename'>>
 
-type ResponseArticle = NonNullable<
-  LatestResponsesPublicQuery['article'] & { __typename: 'Article' }
+type CommentArticle = NonNullable<
+  LatestCommentsPublicQuery['article'] & { __typename: 'Article' }
 >
 
-const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
+const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
-  const [articleOnlyMode, setArticleOnlyMode] = useState<boolean>(false)
   const storedCursorRef = useRef<string | null>(null)
 
   /**
@@ -86,42 +77,41 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
     fetchMore,
     refetch: refetchPublic,
     client,
-  } = usePublicQuery<LatestResponsesPublicQuery>(LATEST_RESPONSES_PUBLIC, {
+  } = usePublicQuery<LatestCommentsPublicQuery>(LATEST_COMMENTS_PUBLIC, {
     variables: {
       id,
-      first: RESPONSES_COUNT,
-      articleOnly: articleOnlyMode,
+      first: COMMENTS_COUNT,
     },
     fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
   })
 
   // pagination
-  const connectionPath = 'article.responses'
-  const article = data?.article as ResponseArticle
-  const { edges, pageInfo } = article?.responses || {}
+  const connectionPath = 'article.comments'
+  const article = data?.article as CommentArticle
+  const { edges, pageInfo } = article?.comments || {}
   const articleId = article?.id
-  const responses = filterResponses<ResponsePublic>(
+  const comments = filterComments<CommentPublic>(
     (edges || []).map(({ node }) => node)
   )
 
   // private data
-  const loadPrivate = (publicData?: LatestResponsesPublicQuery) => {
+  const loadPrivate = (publicData?: LatestCommentsPublicQuery) => {
     if (!viewer.isAuthed || !publicData || !articleId) {
       return
     }
 
     const publiceEdges =
-      (publicData.article as ResponseArticle)?.responses.edges || []
-    const publicResponses = filterResponses<Response>(
+      (publicData.article as CommentArticle)?.comments.edges || []
+    const publicComments = filterComments<Comment>(
       publiceEdges.map(({ node }) => node)
     )
-    const publicIds = publicResponses
+    const publicIds = publicComments
       .filter((node) => node.__typename === 'Comment')
       .map((node) => node.id)
 
     client.query({
-      query: LATEST_RESPONSES_PRIVATE,
+      query: LATEST_COMMENTS_PRIVATE,
       fetchPolicy: 'network-only',
       variables: { ids: publicIds },
     })
@@ -141,9 +131,8 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
       variables: {
         after: pageInfo?.endCursor,
         before: loadBefore,
-        first: noLimit ? null : RESPONSES_COUNT,
+        first: noLimit ? null : COMMENTS_COUNT,
         includeBefore: !!loadBefore,
-        articleOnly: articleOnlyMode,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -161,6 +150,8 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
     const { data: newData } = await refetchPublic()
     loadPrivate(newData)
   }
+
+  // TODO: update to REFETCH_COMMENTS
   useEventListener(REFETCH_RESPONSES, refetch)
 
   useEffect(() => {
@@ -174,21 +165,20 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
       variables: {
         before: storedCursorRef.current,
         includeBefore: false,
-        articleOnly: articleOnlyMode,
       },
       updateQuery: (previousResult, { fetchMoreResult }) => {
         const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
-        const newResponseCount = _get(fetchMoreResult, 'article.responseCount')
-        const oldResponseCount = _get(previousResult, 'article.responseCount')
+        const newCommentCount = _get(fetchMoreResult, 'article.responseCount')
+        const oldCommentCount = _get(previousResult, 'article.responseCount')
 
         // update if response count has changed
         if (newEdges.length === 0) {
-          if (oldResponseCount !== newResponseCount) {
+          if (oldCommentCount !== newCommentCount) {
             return {
               ...previousResult,
               article: {
                 ...previousResult.article,
-                responseCount: newResponseCount,
+                responseCount: newCommentCount,
               },
             }
           }
@@ -253,46 +243,20 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
   }
 
   return (
-    <section className={styles.latestResponses} id="latest-responses">
-      <header className={styles.header}>
-        <Title type="feed" is="h3">
-          <Translate id="latestResponses" />
-        </Title>
-
-        <div className={styles.latestResponsesSwitch}>
-          <Switch
-            name="article-only"
-            label={translate({ id: 'collectedOnly', lang })}
-            onChange={() => setArticleOnlyMode(!articleOnlyMode)}
-            checked={articleOnlyMode}
-            loading={loading}
-          />
-          <span>
-            <Translate id="collectedOnly" />
-          </span>
-        </div>
-      </header>
-
-      {!responses ||
-        (responses.length <= 0 && (
-          <EmptyResponse articleOnlyMode={articleOnlyMode} />
-        ))}
+    <section className={styles.latestComments} id="latest-comments">
+      {/* {!comments || (comments.length <= 0 && <EmptyComment />)} */}
 
       <List spacing={['xloose', 0]}>
-        {responses.map((response) => (
-          <List.Item key={response.id}>
-            {response.__typename === 'Article' ? (
-              <ResponseArticle article={response} />
-            ) : response.__typename === 'Comment' ? (
-              <ThreadComment
-                comment={response}
-                type="article"
-                defaultExpand={response.id === parentId && !!descendantId}
-                hasLink
-                disabled={lock}
-                replySubmitCallback={replySubmitCallback}
-              />
-            ) : null}
+        {comments.map((comment) => (
+          <List.Item key={comment.id}>
+            <ThreadCommentBeta
+              comment={comment}
+              type="article"
+              defaultExpand={comment.id === parentId && !!descendantId}
+              hasLink
+              disabled={lock}
+              replySubmitCallback={replySubmitCallback}
+            />
           </List.Item>
         ))}
       </List>
@@ -304,4 +268,4 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
   )
 }
 
-export default LatestResponses
+export default LatestComments

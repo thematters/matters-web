@@ -1,18 +1,15 @@
 import gql from 'graphql-tag'
 
-import { ThreadComment } from '~/components'
+import { ThreadCommentBeta } from '~/components'
 
-import ResponseArticle from '../ResponseArticle'
-
-export const LATEST_RESPONSES_PUBLIC = gql`
-  query LatestResponsesPublic(
+export const LATEST_COMMENTS_PUBLIC = gql`
+  query LatestCommentsPublic(
     $id: ID!
     $before: String
     $after: String
     $first: first_Int_min_0 = 8
     $includeAfter: Boolean
     $includeBefore: Boolean
-    $articleOnly: Boolean
   ) {
     article: node(input: { id: $id }) {
       ... on Article {
@@ -20,14 +17,14 @@ export const LATEST_RESPONSES_PUBLIC = gql`
         mediaHash
         id
         responseCount
-        responses(
+        comments(
           input: {
             after: $after
             before: $before
             first: $first
             includeAfter: $includeAfter
             includeBefore: $includeBefore
-            articleOnly: $articleOnly
+            filter: { state: active }
           }
         ) {
           totalCount
@@ -38,12 +35,9 @@ export const LATEST_RESPONSES_PUBLIC = gql`
           }
           edges {
             node {
-              ... on Article {
-                ...ResponseArticleArticle
-              }
               ... on Comment {
-                ...ThreadCommentCommentPublic
-                ...ThreadCommentCommentPrivate
+                ...ThreadCommentCommentBetaPublic
+                ...ThreadCommentCommentBetaPrivate
               }
             }
           }
@@ -51,19 +45,18 @@ export const LATEST_RESPONSES_PUBLIC = gql`
       }
     }
   }
-  ${ResponseArticle.fragments.article}
-  ${ThreadComment.fragments.comment.public}
-  ${ThreadComment.fragments.comment.private}
+  ${ThreadCommentBeta.fragments.comment.public}
+  ${ThreadCommentBeta.fragments.comment.private}
 `
 
-export const LATEST_RESPONSES_PRIVATE = gql`
-  query LatestResponsesPrivate($ids: [ID!]!) {
+export const LATEST_COMMENTS_PRIVATE = gql`
+  query LatestCommentsPrivate($ids: [ID!]!) {
     nodes(input: { ids: $ids }) {
       id
       ... on Comment {
-        ...ThreadCommentCommentPrivate
+        ...ThreadCommentCommentBetaPrivate
       }
     }
   }
-  ${ThreadComment.fragments.comment.private}
+  ${ThreadCommentBeta.fragments.comment.private}
 `
