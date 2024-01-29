@@ -355,6 +355,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasShare,
     hasFingerprint = true,
     hasExtend = true,
+    hasReport,
 
     inCard,
     inUserArticles,
@@ -395,6 +396,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       hasDonators && article.donationsDialog.totalCount > 0 && !inCard,
     hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
+    hasReport: !!hasReport && !isArticleAuthor,
 
     // privates
     hasSticky: !!(

@@ -12,6 +12,7 @@ import {
   Dropdown,
   IconMore16,
   Menu,
+  SubmitReport,
   toast,
   ViewerContext,
   withDialog,
@@ -56,6 +57,7 @@ interface Controls {
   hasBlockUser: boolean
   hasCollapse: boolean
   hasUncollapse: boolean
+  hasReport: boolean
 }
 
 interface DialogProps {
@@ -63,6 +65,7 @@ interface DialogProps {
   openDeleteCommentDialog: () => void
   openBlockUserDialog: () => void
   openCollapseCommentDialog: () => void
+  openSubmitReportDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
@@ -142,11 +145,13 @@ const BaseDropdownActions = ({
   hasBlockUser,
   hasCollapse,
   hasUncollapse,
+  hasReport,
 
   openEditCommentDialog,
   openDeleteCommentDialog,
   openBlockUserDialog,
   openCollapseCommentDialog,
+  openSubmitReportDialog,
 }: BaseDropdownActionsProps) => {
   const Content = () => (
     <Menu>
@@ -165,6 +170,7 @@ const BaseDropdownActions = ({
         <CollapseComment.Button openDialog={openCollapseCommentDialog} />
       )}
       {hasUncollapse && <UncollapseButton commentId={comment.id} />}
+      {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
     </Menu>
   )
 
@@ -217,6 +223,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasBlockUser: !isCommentAuthor,
     hasCollapse: !!(isAbleCollapse && isActive),
     hasUncollapse: !!(isAbleCollapse && isCollapsed),
+    hasReport: !isCommentAuthor,
   }
 
   const forbid = () => {
