@@ -317,6 +317,7 @@ const BaseArticleDetail = ({
                 translatedLanguage={translatedLanguage}
                 privateFetched={privateFetched}
                 hasFingerprint={canReadFullContent}
+                hasReport={!isAuthor}
                 lock={lock}
               />
             </div>
@@ -357,6 +358,7 @@ const BaseArticleDetail = ({
           translatedLanguage={translatedLanguage}
           privateFetched={privateFetched}
           hasFingerprint={canReadFullContent}
+          hasReport={!isAuthor}
           lock={lock}
           showCommentToolbar={showCommentToolbar}
         />

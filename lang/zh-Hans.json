@@ -7,6 +7,9 @@
     "defaultMessage": "「{circleName}」所有作品",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
+  "+5sU+5": {
+    "defaultMessage": "侵权"
+  },
   "+63O1f": {
     "defaultMessage": "邮箱或密码错误",
     "description": "USER_PASSWORD_INVALID"
@@ -199,6 +202,9 @@
   "2ef/Xl": {
     "defaultMessage": "屏蔽",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "2kpUZD": {
+    "defaultMessage": "提交成功"
   },
   "2oxLHg": {
     "defaultMessage": "最多可设置 3 个代表作"
@@ -501,6 +507,9 @@
     "defaultMessage": "该 Google 账号已关联至其他 Matters 账号，请登录该账号解绑后再试",
     "description": "USER_SOCIAL_ACCOUNT_EXISTS"
   },
+  "AGDFGs": {
+    "defaultMessage": "歧视、侮辱或仇恨"
+  },
   "AGcU5J": {
     "defaultMessage": "置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -547,6 +556,9 @@
   },
   "BY343C": {
     "defaultMessage": "修改"
+  },
+  "BaQj20": {
+    "defaultMessage": "报告问题"
   },
   "Bb2R0G": {
     "defaultMessage": "创作",
@@ -1609,6 +1621,9 @@
     "defaultMessage": "重新发送",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "e3qUqn": {
+    "defaultMessage": "涉及未成年人的色情"
+  },
   "eTpiYa": {
     "defaultMessage": "尚无支持数据"
   },
@@ -2065,6 +2080,9 @@
   "tGn21M": {
     "defaultMessage": "支持送达"
   },
+  "tIDG14": {
+    "defaultMessage": "非法广告"
+  },
   "tQ3+Xo": {
     "defaultMessage": "标签添加最多至 5 个",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
@@ -2085,6 +2103,9 @@
   },
   "uJkv2X": {
     "defaultMessage": "编辑标签"
+  },
+  "uQHRvx": {
+    "defaultMessage": "请选择问题类型："
   },
   "uVCg1l": {
     "defaultMessage": "玩转 Matters 实用指南"
@@ -2176,6 +2197,9 @@
   "wNJjR5": {
     "defaultMessage": "支持反馈设置成功"
   },
+  "wSZR47": {
+    "defaultMessage": "提交"
+  },
   "wXzTZ0": {
     "defaultMessage": "給圍爐取一個吸引人的名字吧"
   },
@@ -2262,6 +2286,9 @@
   "yOKEVx": {
     "defaultMessage": "储值",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "yOhatg": {
+    "defaultMessage": "其他恶意行为"
   },
   "ySGgTo": {
     "defaultMessage": "添加精选",

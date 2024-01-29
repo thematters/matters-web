@@ -23,12 +23,14 @@ import {
   ShareDialog,
   ShareDialogProps,
   Spinner,
+  SubmitReport,
   SupportersDialog,
   SupportersDialogProps,
   toast,
   ViewerContext,
   withDialog,
 } from '~/components'
+import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog/Dialog'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
 import AddCollectionButton from './AddCollectionButton'
@@ -79,6 +81,7 @@ export interface DropdownActionsControls {
   hasShare?: boolean
   hasFingerprint?: boolean
   hasExtend?: boolean
+  hasReport?: boolean
 
   // based on type
   inCard?: boolean
@@ -120,6 +123,7 @@ interface Controls {
   hasDonators: boolean
   hasFingerprint: boolean
   hasExtend: boolean
+  hasReport: boolean
   hasSticky: boolean
   hasSetTagSelected: boolean
   hasSetTagUnselected: boolean
@@ -129,6 +133,7 @@ interface Controls {
 interface DialogProps {
   openShareDialog: () => void
   openFingerprintDialog: () => void
+  openSubmitReportDialog: () => void
   openAppreciatorsDialog: () => void
   openSupportersDialog: () => void
   openArchiveDialog: () => void
@@ -165,6 +170,7 @@ const BaseDropdownActions = ({
   hasDonators,
   hasFingerprint,
   hasExtend,
+  hasReport,
   hasSticky,
   hasArchive,
   hasSetTagSelected,
@@ -179,6 +185,7 @@ const BaseDropdownActions = ({
 
   openShareDialog,
   openFingerprintDialog,
+  openSubmitReportDialog,
   openAppreciatorsDialog,
   openSupportersDialog,
   openArchiveDialog,
@@ -193,7 +200,12 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
   const hasPublic =
-    hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
+    hasShare ||
+    hasAppreciators ||
+    hasDonators ||
+    hasFingerprint ||
+    hasExtend ||
+    hasReport
   const hasPrivate =
     hasSticky ||
     hasArchive ||
@@ -213,6 +225,7 @@ const BaseDropdownActions = ({
         <FingerprintButton openDialog={openFingerprintDialog} />
       )}
       {hasExtend && <ExtendButton article={article} />}
+      {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
 
       {/* private */}
       {hasPublic && hasPrivate && <Menu.Divider />}
@@ -420,9 +433,15 @@ const DropdownActions = (props: DropdownActionsProps) => {
     { article },
     ({ openDialog }) => ({ openFingerprintDialog: openDialog })
   )
+  const WithReport = withDialog<Omit<SubmitReportDialogProps, 'children'>>(
+    WithFingerprint,
+    SubmitReport.Dialog,
+    { id: article.id },
+    ({ openDialog }) => ({ openSubmitReportDialog: openDialog })
+  )
   const WithAppreciators = withDialog<
     Omit<AppreciatorsDialogProps, 'children'>
-  >(WithFingerprint, AppreciatorsDialog, { article }, ({ openDialog }) => ({
+  >(WithReport, AppreciatorsDialog, { article }, ({ openDialog }) => ({
     openAppreciatorsDialog: openDialog,
   }))
   const WithSupporters = withDialog<Omit<SupportersDialogProps, 'children'>>(
