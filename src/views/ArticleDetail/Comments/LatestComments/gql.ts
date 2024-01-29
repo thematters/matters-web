@@ -19,12 +19,13 @@ export const LATEST_COMMENTS_PUBLIC = gql`
         responseCount
         comments(
           input: {
+            sort: newest
             after: $after
             before: $before
             first: $first
             includeAfter: $includeAfter
             includeBefore: $includeBefore
-            filter: { state: active }
+            filter: { state: active, parentComment: null }
           }
         ) {
           totalCount

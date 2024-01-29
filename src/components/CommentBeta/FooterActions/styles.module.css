@@ -1,7 +1,7 @@
 .footer {
   @mixin flex-center-space-between;
 
-  margin-top: var(--spacing-base);
+  margin-top: var(--spacing-x-tight);
   font-size: var(--font-size-xs);
   color: var(--color-grey);
 

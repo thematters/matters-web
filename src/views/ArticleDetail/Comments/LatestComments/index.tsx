@@ -246,7 +246,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
     <section className={styles.latestComments} id="latest-comments">
       {/* {!comments || (comments.length <= 0 && <EmptyComment />)} */}
 
-      <List spacing={['xloose', 0]}>
+      <List spacing={[0, 0]} hasBorder={false}>
         {comments.map((comment) => (
           <List.Item key={comment.id}>
             <ThreadCommentBeta
