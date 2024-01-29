@@ -12,7 +12,7 @@ import ExpandButton from './ExpandButton'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 
-const COLLAPSE_COUNT = 2
+const COLLAPSE_COUNT = 3
 
 interface ThreadCommentControls {
   type: CommentFormType

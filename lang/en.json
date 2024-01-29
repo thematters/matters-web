@@ -1104,6 +1104,9 @@
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
+  "QQSdHP": {
+    "defaultMessage": "View More"
+  },
   "QUqfbW": {
     "defaultMessage": "Describe more about your Circle",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"

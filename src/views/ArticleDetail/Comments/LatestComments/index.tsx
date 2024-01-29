@@ -17,7 +17,7 @@ import {
   useEventListener,
   usePublicQuery,
   ViewerContext,
-  ViewMoreButton,
+  ViewMoreCommentButton,
 } from '~/components'
 import {
   LatestCommentsPrivateQuery,
@@ -262,7 +262,11 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
       </List>
 
       {pageInfo?.hasNextPage && (
-        <ViewMoreButton onClick={() => loadMore()} loading={loading} />
+        <ViewMoreCommentButton
+          onClick={() => loadMore()}
+          loading={loading}
+          placeholder={<Placeholder />}
+        />
       )}
     </section>
   )

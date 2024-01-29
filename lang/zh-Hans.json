@@ -1104,6 +1104,9 @@
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
+  "QQSdHP": {
+    "defaultMessage": "查看更多"
+  },
   "QUqfbW": {
     "defaultMessage": "说说围炉的有趣之处，吸引支持者加入",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
