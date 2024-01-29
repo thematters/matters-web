@@ -1,14 +1,13 @@
 import { useState } from 'react'
 
 import { filterComments } from '~/common/utils'
-import { CommentFormType } from '~/components'
+import { CommentFormType, ViewMoreCommentButton } from '~/components'
 import {
   ThreadCommentCommentBetaPrivateFragment,
   ThreadCommentCommentBetaPublicFragment,
 } from '~/gql/graphql'
 
 import Feed from '../Feed'
-import ExpandButton from './ExpandButton'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 
@@ -64,15 +63,9 @@ export const ThreadCommentBeta = ({
                 />
               </li>
             ))}
-
-          {!expand && (
-            <ExpandButton
-              onClick={() => setExpand(true)}
-              restCount={restCount}
-            />
-          )}
         </ul>
       )}
+      {!expand && <ViewMoreCommentButton onClick={() => setExpand(true)} />}
     </section>
   )
 }

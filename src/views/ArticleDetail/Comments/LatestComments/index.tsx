@@ -2,6 +2,7 @@ import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { REFETCH_RESPONSES, URL_FRAGMENT } from '~/common/enums'
 import {
@@ -11,13 +12,13 @@ import {
   unshiftConnections,
 } from '~/common/utils'
 import {
+  InfiniteScroll,
   List,
   QueryError,
   ThreadCommentBeta,
   useEventListener,
   usePublicQuery,
   ViewerContext,
-  ViewMoreCommentButton,
 } from '~/components'
 import {
   LatestCommentsPrivateQuery,
@@ -245,29 +246,33 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   return (
     <section className={styles.latestComments} id="latest-comments">
       {/* {!comments || (comments.length <= 0 && <EmptyComment />)} */}
-
-      <List spacing={[0, 0]} hasBorder={false}>
-        {comments.map((comment) => (
-          <List.Item key={comment.id}>
-            <ThreadCommentBeta
-              comment={comment}
-              type="article"
-              defaultExpand={comment.id === parentId && !!descendantId}
-              hasLink
-              disabled={lock}
-              replySubmitCallback={replySubmitCallback}
-            />
-          </List.Item>
-        ))}
-      </List>
-
-      {pageInfo?.hasNextPage && (
-        <ViewMoreCommentButton
-          onClick={() => loadMore()}
-          loading={loading}
-          placeholder={<Placeholder />}
-        />
-      )}
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        loader={<Placeholder />}
+        eof={
+          <FormattedMessage
+            defaultMessage="No more comments"
+            description="src/views/User/Articles/UserArticles.tsx"
+            id="WsefD2"
+          />
+        }
+      >
+        <List spacing={[0, 0]} hasBorder={false}>
+          {comments.map((comment) => (
+            <List.Item key={comment.id}>
+              <ThreadCommentBeta
+                comment={comment}
+                type="article"
+                defaultExpand={comment.id === parentId && !!descendantId}
+                hasLink
+                disabled={lock}
+                replySubmitCallback={replySubmitCallback}
+              />
+            </List.Item>
+          ))}
+        </List>
+      </InfiniteScroll>
     </section>
   )
 }

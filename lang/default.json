@@ -1328,6 +1328,10 @@
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "WsefD2": {
+    "defaultMessage": "No more comments",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "WuvE8X": {
     "defaultMessage": "Followers of {circleName}",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
