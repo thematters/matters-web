@@ -343,6 +343,7 @@
 
 .u-summary,
 .editor-summary textarea {
+  @mixin font-serif;
   @mixin border-left-grey;
 
   padding: var(--spacing-xx-tight) 0 var(--spacing-xx-tight)
