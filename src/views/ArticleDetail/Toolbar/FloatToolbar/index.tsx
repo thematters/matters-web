@@ -107,26 +107,24 @@ const FloatToolbar = ({
           </ReCaptchaProvider>
 
           <span className={styles.divider} />
-          <DonationButton
+          <CommentButton
             article={article}
-            articleDetail={articleDetails}
-            disabled={lock}
+            disabled={!article.canComment}
+            textIconSpacing="basexxtight"
             onClick={() => {
-              jump('#animation', { offset: -100 })
               toast.success({
                 message: '功能即將開放，敬請期待！',
               })
             }}
             {...buttonProps}
           />
-
           <span className={styles.divider} />
-
-          <CommentButton
+          <DonationButton
             article={article}
-            disabled={!article.canComment}
-            textIconSpacing="basexxtight"
+            articleDetail={articleDetails}
+            disabled={lock}
             onClick={() => {
+              jump('#animation', { offset: -100 })
               toast.success({
                 message: '功能即將開放，敬請期待！',
               })
