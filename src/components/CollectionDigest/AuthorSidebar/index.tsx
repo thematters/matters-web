@@ -62,7 +62,9 @@ export const CollectionDigestAuthorSidebar = ({
   return (
     <section className={containerClasses}>
       <header>
-        <LinkWrapper {...path}>{title}</LinkWrapper>
+        <LinkWrapper {...path} textActiveColor="green">
+          {title}
+        </LinkWrapper>
       </header>
       {cover && (
         <LinkWrapper {...path}>
