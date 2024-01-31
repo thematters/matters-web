@@ -82,7 +82,7 @@ export const CollectionDigestAuthorSidebar = ({
                 spacing="xxtight"
                 color="white"
               >
-                {totalCount}
+                {totalCount > 0 ? totalCount : '0'}
               </TextIcon>
             </div>
           </aside>
