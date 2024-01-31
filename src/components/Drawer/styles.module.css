@@ -28,6 +28,8 @@
   & .header {
     @mixin flex-center-space-between;
 
+    margin-bottom: var(--spacing-base);
+
     & h2 {
       font-size: var(--font-size-lg);
       font-weight: var(--font-weight-semibold);

@@ -12,9 +12,11 @@ import {
   unshiftConnections,
 } from '~/common/utils'
 import {
+  CommentFormBeta,
   InfiniteScroll,
   List,
   QueryError,
+  Spacer,
   ThreadCommentBeta,
   useEventListener,
   usePublicQuery,
@@ -161,7 +163,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
     }
   }, [pageInfo?.startCursor])
 
-  const replySubmitCallback = async () => {
+  const replySubmitCallback = async (isCommentArticle = false) => {
     const { data: newData } = await fetchMore({
       variables: {
         before: storedCursorRef.current,
@@ -187,9 +189,15 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
         }
 
         // update if there are new items in responses.edges
+        let oldData: any = previousResult
+        let newData: any = fetchMoreResult
+        if (isCommentArticle) {
+          oldData = fetchMoreResult
+          newData = previousResult
+        }
         const newResult = unshiftConnections({
-          oldData: previousResult,
-          newData: fetchMoreResult,
+          oldData,
+          newData,
           path: connectionPath,
         })
         const newStartCursor = _get(
@@ -245,6 +253,12 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
 
   return (
     <section className={styles.latestComments} id="latest-comments">
+      <CommentFormBeta
+        articleId={article?.id}
+        type={'article'}
+        submitCallback={() => replySubmitCallback(true)}
+      />
+      <Spacer size="base" />
       {/* {!comments || (comments.length <= 0 && <EmptyComment />)} */}
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}

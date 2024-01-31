@@ -1104,6 +1104,10 @@
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
+  "QGBMmO": {
+    "defaultMessage": "Published",
+    "description": "src/components/Forms/CommentFormBeta/index.tsx"
+  },
   "QQSdHP": {
     "defaultMessage": "View More"
   },
@@ -1701,6 +1705,10 @@
   "hYG5fb": {
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "hgjjhO": {
+    "defaultMessage": "Comment",
+    "description": "src/components/Forms/CommentFormBeta/index.tsx"
   },
   "hk2aiz": {
     "defaultMessage": "followed your circle",

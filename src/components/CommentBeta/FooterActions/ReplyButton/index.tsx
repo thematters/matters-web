@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -9,7 +9,6 @@ import {
 import {
   Button,
   ButtonProps,
-  CommentFormDialog,
   CommentFormType,
   IconComment2V16,
   ViewerContext,
@@ -89,21 +88,9 @@ const ReplyButton = ({
 }: ReplyButtonProps) => {
   const viewer = useContext(ViewerContext)
 
-  const { id, parentComment, author, node } = comment
-  const article = node.__typename === 'Article' ? node : undefined
-  const circle = node.__typename === 'Circle' ? node : undefined
-
-  const submitCallback = () => {
-    if (replySubmitCallback) {
-      replySubmitCallback()
-    }
-  }
-
   if (!viewer.isAuthed) {
     const props = {
       onClick: () => {
-        // deprecated
-        // window.dispatchEvent(new CustomEvent(CLOSE_ACTIVE_DIALOG))
         window.dispatchEvent(
           new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
             detail: { trigger: UNIVERSAL_AUTH_TRIGGER.replyComment },
@@ -131,39 +118,14 @@ const ReplyButton = ({
   }
 
   return (
-    <CommentFormDialog
-      articleId={article?.id}
-      circleId={circle?.id}
-      type={type}
-      replyToId={id}
-      parentId={parentComment?.id || id}
-      submitCallback={submitCallback}
-      title={
-        article ? (
-          <FormattedMessage
-            defaultMessage="Write a comment"
-            id="/agKbX"
-            description="src/components/Comment/FooterActions/ReplyButton/index.tsx"
-          />
-        ) : (
-          <FormattedMessage
-            defaultMessage="Reply"
-            id="UgpqlF"
-            description="src/components/Comment/FooterActions/ReplyButton/index.tsx"
-          />
-        )
-      }
-      context={<ReplyTo user={author} />}
-    >
-      {({ openDialog: openCommentFormDialog }) => (
-        <CommentButton
-          onClick={openCommentFormDialog}
-          inCard={inCard}
-          disabled={disabled}
-          aria-haspopup="dialog"
-        />
-      )}
-    </CommentFormDialog>
+    <>
+      <CommentButton
+        onClick={onClick}
+        inCard={inCard}
+        disabled={disabled}
+        aria-haspopup="dialog"
+      />
+    </>
   )
 }
 

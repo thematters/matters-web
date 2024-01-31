@@ -1104,6 +1104,10 @@
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
+  "QGBMmO": {
+    "defaultMessage": "發布",
+    "description": "src/components/Forms/CommentFormBeta/index.tsx"
+  },
   "QQSdHP": {
     "defaultMessage": "查看更多"
   },
@@ -1701,6 +1705,10 @@
   "hYG5fb": {
     "defaultMessage": "人追蹤",
     "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "hgjjhO": {
+    "defaultMessage": "Comment",
+    "description": "src/components/Forms/CommentFormBeta/index.tsx"
   },
   "hk2aiz": {
     "defaultMessage": "追蹤了你的圍爐",

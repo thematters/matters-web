@@ -1,12 +1,14 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
-import { translate } from '~/common/utils'
+import { makeMentionElement, translate } from '~/common/utils'
 import {
+  CommentFormBeta,
   CommentFormType,
   LanguageContext,
+  Spacer,
   toast,
   ViewerContext,
 } from '~/components'
@@ -78,11 +80,15 @@ const BaseFooterActions = ({
   hasUpvote = true,
   inCard = false,
   disabled,
+  replySubmitCallback,
 
   ...replyButtonProps
 }: FooterActionsProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
+
+  const [showForm, setShowForm] = useState(false)
+  const toggleShowForm = () => setShowForm(!showForm)
 
   const { state, node } = comment
   const article = node.__typename === 'Article' ? node : undefined
@@ -98,6 +104,12 @@ const BaseFooterActions = ({
         <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
       ),
     })
+
+  const submitCallback = () => {
+    if (replySubmitCallback) {
+      replySubmitCallback()
+    }
+  }
 
   let onClick
 
@@ -126,27 +138,50 @@ const BaseFooterActions = ({
   const replyCustomButtonProps = viewer.isBanned ? { onClick: forbid } : {}
 
   return (
-    <footer
-      className={styles.footer}
-      aria-label={translate({
-        zh_hant: `${comment.upvotes} 點讚`,
-        zh_hans: `${comment.upvotes} 点赞`,
-        en: `${comment.upvotes} upvotes`,
-        lang,
-      })}
-    >
-      <section className={styles.left}>
-        {hasUpvote && <UpvoteButton {...buttonProps} />}
-        {hasReply && (
-          <ReplyButton
-            type={type}
-            {...buttonProps}
-            {...replyButtonProps}
-            {...replyCustomButtonProps}
-          />
+    <>
+      <footer
+        className={styles.footer}
+        aria-label={translate({
+          zh_hant: `${comment.upvotes} 點讚`,
+          zh_hans: `${comment.upvotes} 点赞`,
+          en: `${comment.upvotes} upvotes`,
+          lang,
+        })}
+      >
+        <section className={styles.left}>
+          {hasUpvote && <UpvoteButton {...buttonProps} />}
+          {hasReply && (
+            <ReplyButton
+              type={type}
+              {...buttonProps}
+              {...replyButtonProps}
+              {...replyCustomButtonProps}
+              onClick={toggleShowForm}
+            />
+          )}
+        </section>
+      </footer>
+      <section>
+        {showForm && (
+          <>
+            <Spacer size="base" />
+            <CommentFormBeta
+              articleId={article?.id}
+              type={'article'}
+              replyToId={comment.id}
+              parentId={comment.parentComment?.id || comment.id}
+              submitCallback={submitCallback}
+              closeCallback={() => setShowForm(false)}
+              defaultContent={`${makeMentionElement(
+                comment.author.id,
+                comment.author.userName || '',
+                comment.author.displayName || ''
+              )} `}
+            />
+          </>
         )}
       </section>
-    </footer>
+    </>
   )
 }
 
