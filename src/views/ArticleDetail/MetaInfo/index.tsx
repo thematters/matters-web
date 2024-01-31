@@ -62,11 +62,9 @@ const MetaInfo = ({
           size="xs"
           color="greyDarker"
         />
-        {article.revisedAt && (
-          <span className={styles.edited}>
-            <Translate zh_hant="更新於" zh_hans="更新于" en=" published on" />
-          </span>
-        )}
+        <span className={styles.edited}>
+          <Translate zh_hant="更新於" zh_hans="更新于" en=" published on" />
+        </span>
       </section>
 
       {canReadFullContent && (
