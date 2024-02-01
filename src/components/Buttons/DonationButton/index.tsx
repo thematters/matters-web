@@ -4,7 +4,7 @@ import { TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
-  IconMoney16,
+  IconMoney24,
   LanguageContext,
   TextIcon,
   Translate,
@@ -37,12 +37,7 @@ const DonationButton = ({
         }}
         data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
       >
-        <TextIcon
-          icon={<IconMoney16 size="mdS" />}
-          weight="md"
-          color="white"
-          size="md"
-        >
+        <TextIcon icon={<IconMoney24 size="mdS" />} color="white" size="md">
           <Translate id="donationAgain" />
         </TextIcon>
       </Button>
@@ -62,12 +57,7 @@ const DonationButton = ({
       }}
       data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
     >
-      <TextIcon
-        icon={<IconMoney16 size="mdS" />}
-        weight="md"
-        color="white"
-        size="md"
-      >
+      <TextIcon icon={<IconMoney24 size="mdS" />} color="white" size="md">
         <Translate id="donation" />
       </TextIcon>
     </Button>
