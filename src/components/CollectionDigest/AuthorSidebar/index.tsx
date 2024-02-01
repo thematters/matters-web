@@ -62,7 +62,9 @@ export const CollectionDigestAuthorSidebar = ({
   return (
     <section className={containerClasses}>
       <header>
-        <LinkWrapper {...path}>{title}</LinkWrapper>
+        <LinkWrapper {...path} textActiveColor="green">
+          {title}
+        </LinkWrapper>
       </header>
       {cover && (
         <LinkWrapper {...path}>
@@ -80,7 +82,7 @@ export const CollectionDigestAuthorSidebar = ({
                 spacing="xxtight"
                 color="white"
               >
-                {totalCount}
+                {totalCount > 0 ? totalCount : '0'}
               </TextIcon>
             </div>
           </aside>

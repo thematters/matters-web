@@ -102,7 +102,7 @@ const MetaInfo = ({
                 }
                 disabled={disabled}
               >
-                <TextIcon icon={<IconEdit16 />}>
+                <TextIcon icon={<IconEdit16 />} size="xs">
                   <FormattedMessage
                     defaultMessage="Edit"
                     id="2bG/gP"
