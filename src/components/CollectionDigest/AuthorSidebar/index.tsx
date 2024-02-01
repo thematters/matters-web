@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import BOOK_COVER from '@/public/static/images/book-cover.png'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import {
   IconDraft24,
@@ -47,8 +48,8 @@ export const CollectionDigestAuthorSidebar = ({
 
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles.hasCover]: !!cover,
-    [styles[`imageSize${capitalizeFirstLetter(imageSize)}`]]: !!cover,
+    [styles.hasCover]: true,
+    [styles[`imageSize${capitalizeFirstLetter(imageSize)}`]]: true,
   })
 
   const path = toPath({
@@ -66,28 +67,26 @@ export const CollectionDigestAuthorSidebar = ({
           {title}
         </LinkWrapper>
       </header>
-      {cover && (
-        <LinkWrapper {...path}>
-          <aside className={styles.cover}>
-            <ResponsiveImage
-              url={cover}
-              width={imgSize}
-              height={imgSize}
-              disableAnimation={true}
-            />
-            <div className={styles.count}>
-              <TextIcon
-                icon={<IconDraft24 size="xs" />}
-                size="xs"
-                spacing="xxtight"
-                color="white"
-              >
-                {totalCount > 0 ? totalCount : '0'}
-              </TextIcon>
-            </div>
-          </aside>
-        </LinkWrapper>
-      )}
+      <LinkWrapper {...path}>
+        <aside className={styles.cover}>
+          <ResponsiveImage
+            url={cover || BOOK_COVER.src}
+            width={imgSize}
+            height={imgSize}
+            disableAnimation={true}
+          />
+          <div className={styles.count}>
+            <TextIcon
+              icon={<IconDraft24 size="xs" />}
+              size="xs"
+              spacing="xxtight"
+              color="white"
+            >
+              {totalCount > 0 ? totalCount : '0'}
+            </TextIcon>
+          </div>
+        </aside>
+      </LinkWrapper>
     </section>
   )
 }
