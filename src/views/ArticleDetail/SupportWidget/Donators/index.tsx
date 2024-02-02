@@ -14,21 +14,15 @@ type AvatarItemPros = Pick<AvatarProps, 'user'> & {
 }
 
 const AvatarItem = ({ user }: AvatarItemPros) => {
-  if (!user) {
-    return (
-      <div className={styles.avatarItem}>
-        <Media lessThan="xl">
-          <Avatar size="md" />
-        </Media>
-        <Media greaterThanOrEqual="xl">
-          <Avatar size="lg" />
-        </Media>
-      </div>
-    )
-  }
-
   return (
-    <Tooltip content={user.displayName} placement="top">
+    <Tooltip
+      content={
+        user?.displayName || (
+          <FormattedMessage defaultMessage="Anonymous User" id="GclYG/" />
+        )
+      }
+      placement="top"
+    >
       <div className={styles.avatarItem}>
         <Media lessThan="xl">
           <Avatar user={user} size="md" />
