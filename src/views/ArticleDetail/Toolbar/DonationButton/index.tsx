@@ -37,9 +37,7 @@ const fragments = {
   article: gql`
     fragment DonationButtonArticle on Article {
       id
-      donationsToolbar: transactionsReceivedBy(
-        input: { first: 0, purpose: donation }
-      ) {
+      donationsToolbar: donations(input: { first: 0 }) {
         totalCount
       }
       author {

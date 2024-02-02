@@ -2,7 +2,6 @@ import classNames from 'classnames'
 import { Fragment } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { IMAGE_PIXEL } from '~/common/enums'
 import { Media, SupportersDialog, Tooltip } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { DonatorsArticleFragment } from '~/gql/graphql'
@@ -11,26 +10,31 @@ import { fragments } from './gql'
 import styles from './styles.module.css'
 
 type AvatarItemPros = Pick<AvatarProps, 'user'> & {
-  user: { displayName?: string | null }
+  user?: { displayName?: string | null } | null
 }
 
 const AvatarItem = ({ user }: AvatarItemPros) => {
-  return (
-    <Tooltip content={user?.displayName || ''} placement="top">
+  if (!user) {
+    return (
       <div className={styles.avatarItem}>
         <Media lessThan="xl">
-          <Avatar
-            user={user || undefined}
-            src={user ? undefined : IMAGE_PIXEL}
-            size="md"
-          />
+          <Avatar size="md" />
         </Media>
         <Media greaterThanOrEqual="xl">
-          <Avatar
-            user={user || undefined}
-            src={user ? undefined : IMAGE_PIXEL}
-            size="lg"
-          />
+          <Avatar size="lg" />
+        </Media>
+      </div>
+    )
+  }
+
+  return (
+    <Tooltip content={user.displayName} placement="top">
+      <div className={styles.avatarItem}>
+        <Media lessThan="xl">
+          <Avatar user={user} size="md" />
+        </Media>
+        <Media greaterThanOrEqual="xl">
+          <Avatar user={user} size="lg" />
         </Media>
       </div>
     </Tooltip>
@@ -52,9 +56,10 @@ const Donators = ({
 
   const edges = article.donations.edges
   const donatorsCount = article.donations.totalCount
-  const frontDonators = (
-    edges?.map(({ node }) => node).filter((user) => !!user) || []
-  ).slice(0, maxAvatarNum + 1)
+  const frontDonators = (edges?.map(({ node }) => node.sender) || []).slice(
+    0,
+    maxAvatarNum + 1
+  )
 
   const containerClasses = classNames({
     [styles.clickable]: isAuthor,
@@ -72,7 +77,7 @@ const Donators = ({
               <>
                 {index < maxAvatarNum && (
                   <Fragment key={index}>
-                    <AvatarItem user={user} />
+                    <AvatarItem user={user || undefined} />
                   </Fragment>
                 )}
                 {index === maxAvatarNum && (

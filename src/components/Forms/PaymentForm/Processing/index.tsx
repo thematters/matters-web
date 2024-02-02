@@ -237,11 +237,12 @@ const USDTProcessingForm: React.FC<Props> = ({
         chain: CHAIN.POLYGON,
         txHash: data.hash,
       },
-      update: (cache) => {
+      update: (cache, result) => {
         updateDonation({
           cache,
           id: article.id,
-          viewer,
+          viewer: isConnectedAddress ? viewer : undefined,
+          txId: result.data?.payTo.transaction.id,
         })
       },
     })

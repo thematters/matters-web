@@ -7,14 +7,13 @@ export const fragments = {
   article: gql`
     fragment DonatorsArticle on Article {
       id
-      donations: transactionsReceivedBy(
-        input: { first: 50, purpose: donation }
-      ) {
+      donations(input: { first: 50 }) {
         totalCount
         edges {
           cursor
           node {
-            ... on User {
+            id
+            sender {
               id
               ...AvatarUser
               ...UserDigestPlainUser

@@ -109,7 +109,7 @@ const SupportersDialogContent = ({
             {edges.map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
                 <UserDigest.Rich
-                  user={node}
+                  user={node.sender || undefined}
                   onClick={() => {
                     analytics.trackEvent('click_feed', {
                       type: 'donators',

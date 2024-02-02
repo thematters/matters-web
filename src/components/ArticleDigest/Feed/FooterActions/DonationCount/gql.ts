@@ -4,7 +4,7 @@ export const fragments = {
   article: gql`
     fragment ActionsDonationCountArticle on Article {
       id
-      transactionsReceivedBy(input: { first: 0, purpose: donation }) {
+      donations(input: { first: 0 }) {
         totalCount
       }
     }
