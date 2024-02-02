@@ -5,6 +5,18 @@
         @mixin border-bottom-grey-light;
 
         border-bottom-style: dashed;
+
+        &:last-child {
+          border-bottom-width: 0;
+        }
+      }
+
+      &.hasLastBorder {
+        & > :global(.list-item) {
+          &:last-child {
+            border-bottom-width: 1px;
+          }
+        }
       }
     }
 

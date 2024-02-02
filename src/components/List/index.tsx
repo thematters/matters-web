@@ -14,6 +14,7 @@ interface ListProps {
   spacing?: [ListSpacing, ListSpacing]
   hasBorder?: boolean
   borderPosition?: 'top' | 'bottom'
+  hasLastBorder?: boolean
   [key: string]: any
 }
 
@@ -59,6 +60,7 @@ export const List: React.FC<ListProps> & {
   spacing = [0, 0],
   hasBorder = true,
   borderPosition = 'bottom',
+  hasLastBorder = true,
 
   children,
 
@@ -72,6 +74,7 @@ export const List: React.FC<ListProps> & {
     [styles.hasBorder]: !!hasBorder,
     [styles.borderPositionTop]: borderPosition === 'top',
     [styles.borderPositionBottom]: borderPosition === 'bottom',
+    [styles.hasLastBorder]: !!hasLastBorder,
     [className]: !!className,
   })
 

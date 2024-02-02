@@ -14,7 +14,7 @@ import {
   Button,
   ButtonProps,
   DonationDialog,
-  IconMoney20,
+  IconMoney24,
   LanguageContext,
   TextIcon,
   toast,
@@ -110,7 +110,7 @@ const DonationButton = ({
           {...buttonProps}
         >
           <TextIcon
-            icon={<IconMoney20 size={iconSize} />}
+            icon={<IconMoney24 size={iconSize} />}
             weight={textWeight}
             spacing={
               article.donationsToolbar.totalCount > 0 ? textIconSpacing : 0

@@ -51,7 +51,7 @@ const SupportPreview = ({
           <>
             <Avatar src={viewer?.avatar} size="xl" />
             <p className={styles.tagline}>
-              <TextIcon weight="md">{viewer?.displayName}</TextIcon>
+              <TextIcon weight="md">{viewer?.displayName}&nbsp;</TextIcon>
               <TextIcon color="greyDarker">
                 <FormattedMessage defaultMessage="says: " id="M05PcB" />
               </TextIcon>
