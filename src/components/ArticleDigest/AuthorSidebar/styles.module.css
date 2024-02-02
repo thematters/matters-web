@@ -22,12 +22,22 @@
     &.textColorBlack {
       & a {
         color: var(--color-black);
+
+        &:hover,
+        &:focus {
+          color: var(--color-matters-green);
+        }
       }
     }
 
     &.textColorGreyDarker {
       & a {
         color: var(--color-grey-darker);
+
+        &:hover,
+        &:focus {
+          color: var(--color-matters-green);
+        }
       }
     }
   }

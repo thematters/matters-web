@@ -62,11 +62,9 @@ const MetaInfo = ({
           size="xs"
           color="greyDarker"
         />
-        {article.revisedAt && (
-          <span className={styles.edited}>
-            <Translate zh_hant="更新於" zh_hans="更新于" en=" published on" />
-          </span>
-        )}
+        <span className={styles.edited}>
+          <Translate zh_hant="更新於" zh_hans="更新于" en=" published on" />
+        </span>
       </section>
 
       {canReadFullContent && (
@@ -102,7 +100,7 @@ const MetaInfo = ({
                 }
                 disabled={disabled}
               >
-                <TextIcon icon={<IconEdit16 />}>
+                <TextIcon icon={<IconEdit16 />} size="xs">
                   <FormattedMessage
                     defaultMessage="Edit"
                     id="2bG/gP"

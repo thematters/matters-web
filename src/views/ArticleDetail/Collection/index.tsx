@@ -83,7 +83,7 @@ const Collection: React.FC<{
         </Title>
       </header>
 
-      <List spacing={['loose', 0]}>
+      <List spacing={['loose', 0]} hasLastBorder={false}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             <ArticleDigestTitle

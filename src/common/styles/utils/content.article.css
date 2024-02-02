@@ -20,8 +20,8 @@
   }
 
   & p {
-    font-size: var(--font-size-xm);
-    line-height: 2rem;
+    font-size: var(--font-size-md);
+    line-height: 1.5rem;
     color: var(--color-black);
 
     /* FIXME: Firefox eats trailing spaces
@@ -29,11 +29,19 @@
      * @see {@url https://github.com/quilljs/quill/issues/1760}
      */
     white-space: pre-wrap;
+
+    @media (--sm-up) {
+      font-size: var(--font-size-xm);
+      line-height: 2rem;
+    }
   }
 
   /* FIXME: first line of code has some indent */
   & code {
     padding: 0;
+    font-size: var(--font-size-md-s);
+    line-height: 1.5rem;
+    color: var(--color-grey-darker);
   }
 
   /* Media
@@ -218,7 +226,11 @@
    ========================================================================== */
   & ul,
   & ol {
-    padding-left: var(--spacing-xx-loose);
+    padding-left: 2.375rem;
+
+    @media (--sm-up) {
+      padding-left: var(--spacing-xx-loose);
+    }
   }
 
   & li {
@@ -266,7 +278,7 @@
   & h4,
   & h5,
   & h6 {
-    margin-top: var(--spacing-x-loose);
+    margin-top: var(--spacing-xx-loose);
     line-height: var(--line-height-article-heading);
   }
 
@@ -340,6 +352,7 @@
 
 .u-summary,
 .editor-summary textarea {
+  @mixin font-serif;
   @mixin border-left-grey;
 
   padding: var(--spacing-xx-tight) 0 var(--spacing-xx-tight)
