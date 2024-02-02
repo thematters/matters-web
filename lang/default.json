@@ -408,6 +408,10 @@
     "defaultMessage": "The article has been added to the Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
+  "7ykJ+l": {
+    "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
+    "description": "src/components/Empty/EmptyComment.tsx"
+  },
   "84VOdX": {
     "defaultMessage": "Unpin from profile",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"

@@ -112,11 +112,7 @@ const FloatToolbar = ({
             article={article}
             disabled={!article.canComment}
             textIconSpacing="basexxtight"
-            onClick={() => {
-              toast.success({
-                message: '功能即將開放，敬請期待！',
-              })
-            }}
+            onClick={toggleDrawer}
             {...buttonProps}
           />
           <span className={styles.divider} />

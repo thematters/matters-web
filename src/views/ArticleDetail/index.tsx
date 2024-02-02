@@ -278,7 +278,6 @@ const BaseArticleDetail = ({
             id: 'OsX3KM',
           })}
         >
-          {/* <>Hello Comment Drawer</> */}
           <DynamicComments id={article.id} lock={!canReadFullContent} />
         </Drawer>
       </Media>

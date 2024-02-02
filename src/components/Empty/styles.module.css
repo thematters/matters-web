@@ -15,6 +15,11 @@
   color: var(--color-grey);
 }
 
+.spacingYLoose {
+  padding-top: var(--spacing-loose);
+  padding-bottom: var(--spacing-loose);
+}
+
 .spacingYXxloose {
   padding-top: var(--spacing-xx-loose);
   padding-bottom: var(--spacing-xx-loose);

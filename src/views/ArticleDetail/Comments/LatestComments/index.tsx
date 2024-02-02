@@ -13,6 +13,7 @@ import {
 } from '~/common/utils'
 import {
   CommentFormBeta,
+  EmptyComment,
   InfiniteScroll,
   List,
   QueryError,
@@ -259,34 +260,36 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
         submitCallback={() => replySubmitCallback(true)}
       />
       <Spacer size="base" />
-      {/* {!comments || (comments.length <= 0 && <EmptyComment />)} */}
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
-        loadMore={loadMore}
-        loader={<Placeholder />}
-        eof={
-          <FormattedMessage
-            defaultMessage="No more comments"
-            description="src/views/User/Articles/UserArticles.tsx"
-            id="WsefD2"
-          />
-        }
-      >
-        <List spacing={[0, 0]} hasBorder={false}>
-          {comments.map((comment) => (
-            <List.Item key={comment.id}>
-              <ThreadCommentBeta
-                comment={comment}
-                type="article"
-                defaultExpand={comment.id === parentId && !!descendantId}
-                hasLink
-                disabled={lock}
-                replySubmitCallback={replySubmitCallback}
-              />
-            </List.Item>
-          ))}
-        </List>
-      </InfiniteScroll>
+      {!comments || (comments.length <= 0 && <EmptyComment />)}
+      {!!comments && comments.length > 0 && (
+        <InfiniteScroll
+          hasNextPage={pageInfo.hasNextPage}
+          loadMore={loadMore}
+          loader={<Placeholder />}
+          eof={
+            <FormattedMessage
+              defaultMessage="No more comments"
+              description="src/views/User/Articles/UserArticles.tsx"
+              id="WsefD2"
+            />
+          }
+        >
+          <List spacing={[0, 0]} hasBorder={false}>
+            {comments.map((comment) => (
+              <List.Item key={comment.id}>
+                <ThreadCommentBeta
+                  comment={comment}
+                  type="article"
+                  defaultExpand={comment.id === parentId && !!descendantId}
+                  hasLink
+                  disabled={lock}
+                  replySubmitCallback={replySubmitCallback}
+                />
+              </List.Item>
+            ))}
+          </List>
+        </InfiniteScroll>
+      )}
     </section>
   )
 }
