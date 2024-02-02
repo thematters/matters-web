@@ -378,9 +378,11 @@ const BaseArticleDetail = ({
             }}
             onLeave={() => setShowCommentToolbar(false)}
           >
-            <section className={styles.block}>
-              <DynamicComments id={article.id} lock={!canReadFullContent} />
-            </section>
+            {article.commentCount > 0 && (
+              <section className={styles.block}>
+                <DynamicComments id={article.id} lock={!canReadFullContent} />
+              </section>
+            )}
           </Waypoint>
         </Media>
       </section>

@@ -29,8 +29,8 @@ import {
 } from '~/gql/graphql'
 
 import { Placeholder } from '../Placeholder'
-import styles from '../styles.module.css'
 import { LATEST_COMMENTS_PRIVATE, LATEST_COMMENTS_PUBLIC } from './gql'
+import styles from './styles.module.css'
 
 const COMMENTS_COUNT = 15
 
