@@ -19,7 +19,6 @@ import Content from '../Content'
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
-import ReplyTo from '../ReplyTo'
 import RoleLabel from '../RoleLabel'
 import { fragments, REFETCH_COMMENT } from './gql'
 import styles from './styles.module.css'
@@ -48,7 +47,7 @@ export const BaseCommentFeed = ({
     fetchPolicy: 'network-only',
   })
 
-  const { id, replyTo, author, parentComment } = comment
+  const { id, author, parentComment } = comment
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
 
   const submitCallback = () => {
@@ -90,12 +89,6 @@ export const BaseCommentFeed = ({
           />
         </section>
       </header>
-
-      {replyTo && (!parentComment || replyTo.id !== parentComment.id) && (
-        <section className={styles.replyToContainer}>
-          <ReplyTo user={replyTo.author} />
-        </section>
-      )}
 
       <section className={styles.contentContainer}>
         <Media at="sm">
