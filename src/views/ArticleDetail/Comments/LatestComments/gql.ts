@@ -17,6 +17,12 @@ export const LATEST_COMMENTS_PUBLIC = gql`
         mediaHash
         id
         responseCount
+        pinnedComments {
+          ... on Comment {
+            ...ThreadCommentCommentBetaPublic
+            ...ThreadCommentCommentBetaPrivate
+          }
+        }
         comments(
           input: {
             sort: newest

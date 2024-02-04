@@ -1,10 +1,7 @@
 import gql from 'graphql-tag'
-import { FormattedMessage } from 'react-intl'
 
-import { IconPin24, TextIcon } from '~/components'
+import { IconPin16 } from '~/components'
 import { PinnedLabelCommentFragment } from '~/gql/graphql'
-
-import styles from './styles.module.css'
 
 const fragments = {
   comment: gql`
@@ -13,9 +10,6 @@ const fragments = {
       pinned
       node {
         ... on Article {
-          id
-        }
-        ... on Circle {
           id
         }
       }
@@ -28,29 +22,7 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelCommentFragment }) => {
     return null
   }
 
-  const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
-
-  if (circle) {
-    return (
-      <TextIcon icon={<IconPin24 />} size="sm" color="grey" weight="md">
-        <FormattedMessage
-          defaultMessage="Pinned"
-          id="zkmfjn"
-          description="src/components/Comment/PinnedLabel/index.tsx"
-        />
-      </TextIcon>
-    )
-  }
-
-  return (
-    <span className={styles.label}>
-      <FormattedMessage
-        defaultMessage="Featured"
-        id="cO0im6"
-        description="src/components/Comment/PinnedLabel/index.tsx"
-      />
-    </span>
-  )
+  return <IconPin16 color="black" />
 }
 
 PinnedLabel.fragments = fragments

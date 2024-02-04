@@ -901,6 +901,10 @@
   "KQi/UZ": {
     "defaultMessage": "归档作品"
   },
+  "KTg17G": {
+    "defaultMessage": "取消置顶",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "KgVypx": {
     "defaultMessage": "标签",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
@@ -2022,6 +2026,10 @@
   },
   "qlxeW+": {
     "defaultMessage": "取消点踩"
+  },
+  "qxKjcm": {
+    "defaultMessage": "置顶",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "r66dXx": {
     "defaultMessage": "在 {circleName} 的广播留言中提及你",

@@ -1,4 +1,5 @@
 export * from './analytics'
+export * from './article'
 export * from './chart'
 export * from './cookie'
 export * from './csp'

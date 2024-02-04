@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl'
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import {
   CommentFormType,
-  IconPin24,
-  IconUnPin24,
+  IconPin20,
+  IconUnPin20,
   Menu,
   useMutation,
 } from '~/components'
-import { updateCircleBroadcast } from '~/components/GQL'
+import { updateArticleComments } from '~/components/GQL'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
 import {
   PinButtonCommentFragment,
@@ -44,9 +44,7 @@ const PinButton = ({
 }) => {
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined
-  const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
-  const canPin = !!circle || (article?.pinCommentLeft || 0) > 0
-  const isCircleBroadcast = type === 'circleBroadcast'
+  const canPin = (article?.pinCommentLeft || 0) > 0
 
   const [unpinComment] = useMutation<TogglePinCommentMutation>(
     TOGGLE_PIN_COMMENT,
@@ -61,14 +59,14 @@ const PinButton = ({
         },
       },
       update: (cache) => {
-        if (!circle || !isCircleBroadcast) {
+        if (!article) {
           return
         }
 
-        updateCircleBroadcast({
+        updateArticleComments({
           cache,
           commentId: comment.id,
-          name: circle.name,
+          articleId: article.id,
           type: 'unpin',
         })
       },
@@ -87,14 +85,14 @@ const PinButton = ({
         },
       },
       update: (cache) => {
-        if (!circle || !isCircleBroadcast) {
+        if (!article) {
           return
         }
 
-        updateCircleBroadcast({
+        updateArticleComments({
           cache,
           commentId: comment.id,
-          name: circle.name,
+          articleId: article.id,
           type: 'pin',
         })
       },
@@ -105,21 +103,13 @@ const PinButton = ({
     return (
       <Menu.Item
         text={
-          circle ? (
-            <FormattedMessage
-              defaultMessage="Unpin Broadcast"
-              id="RFzVUD"
-              description="src/components/Comment/DropdownActions/PinButton.tsx"
-            />
-          ) : (
-            <FormattedMessage
-              defaultMessage="Unpin Comment"
-              id="X+Xvgq"
-              description="src/components/Comment/DropdownActions/PinButton.tsx"
-            />
-          )
+          <FormattedMessage
+            defaultMessage="Unpin"
+            id="KTg17G"
+            description="src/components/Comment/DropdownActions/PinButton.tsx"
+          />
         }
-        icon={<IconUnPin24 size="mdS" />}
+        icon={<IconUnPin20 size="mdS" />}
         onClick={async () => {
           await unpinComment()
           window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
@@ -131,26 +121,23 @@ const PinButton = ({
   return (
     <Menu.Item
       text={
-        circle ? (
-          <FormattedMessage
-            defaultMessage="Pin Broadcast"
-            id="AGcU5J"
-            description="src/components/Comment/DropdownActions/PinButton.tsx"
-          />
-        ) : (
-          <FormattedMessage
-            defaultMessage="Pin Comment"
-            id="jJ1Brc"
-            description="src/components/Comment/DropdownActions/PinButton.tsx"
-          />
-        )
+        <FormattedMessage
+          defaultMessage="Pin"
+          id="qxKjcm"
+          description="src/components/Comment/DropdownActions/PinButton.tsx"
+        />
       }
-      icon={<IconPin24 size="mdS" />}
+      icon={<IconPin20 size="mdS" />}
       onClick={
         canPin
           ? async () => {
-              await pinComment()
-              window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
+              try {
+                await pinComment()
+                // TODO: REFETCH_ARTICLE_DETAIL
+                // window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
+              } catch (e) {
+                // TODO: toast can't pinned message
+              }
             }
           : undefined
       }

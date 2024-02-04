@@ -4,7 +4,7 @@ import _get from 'lodash/get'
 import { useContext, useEffect, useRef } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { REFETCH_RESPONSES, URL_FRAGMENT } from '~/common/enums'
+import { COMMENTS_COUNT, REFETCH_RESPONSES, URL_FRAGMENT } from '~/common/enums'
 import {
   dom,
   filterComments,
@@ -31,8 +31,6 @@ import {
 import { Placeholder } from '../Placeholder'
 import { LATEST_COMMENTS_PRIVATE, LATEST_COMMENTS_PUBLIC } from './gql'
 import styles from './styles.module.css'
-
-const COMMENTS_COUNT = 15
 
 type CommentPublic = NonNullable<
   NonNullable<
@@ -98,6 +96,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   const comments = filterComments<CommentPublic>(
     (edges || []).map(({ node }) => node)
   )
+  const pinnedComment = article?.pinnedComments?.[0]
 
   // private data
   const loadPrivate = (publicData?: LatestCommentsPublicQuery) => {
@@ -275,18 +274,35 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
           }
         >
           <List spacing={[0, 0]} hasBorder={false}>
-            {comments.map((comment) => (
-              <List.Item key={comment.id}>
+            {!!pinnedComment && (
+              <List.Item key={pinnedComment.id}>
                 <ThreadCommentBeta
-                  comment={comment}
+                  comment={pinnedComment}
                   type="article"
-                  defaultExpand={comment.id === parentId && !!descendantId}
+                  defaultExpand={
+                    pinnedComment.id === parentId && !!descendantId
+                  }
                   hasLink
                   disabled={lock}
                   replySubmitCallback={replySubmitCallback}
                 />
               </List.Item>
-            ))}
+            )}
+            {comments.map(
+              (comment) =>
+                !comment.pinned && (
+                  <List.Item key={comment.id}>
+                    <ThreadCommentBeta
+                      comment={comment}
+                      type="article"
+                      defaultExpand={comment.id === parentId && !!descendantId}
+                      hasLink
+                      disabled={lock}
+                      replySubmitCallback={replySubmitCallback}
+                    />
+                  </List.Item>
+                )
+            )}
           </List>
         </InfiniteScroll>
       )}

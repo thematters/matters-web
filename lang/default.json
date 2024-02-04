@@ -901,6 +901,10 @@
   "KQi/UZ": {
     "defaultMessage": "Archive works"
   },
+  "KTg17G": {
+    "defaultMessage": "Unpin",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "KgVypx": {
     "defaultMessage": "Topics",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
@@ -2022,6 +2026,10 @@
   },
   "qlxeW+": {
     "defaultMessage": "Undo downvote"
+  },
+  "qxKjcm": {
+    "defaultMessage": "Pin",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "r66dXx": {
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",

@@ -38,6 +38,7 @@
 
   & .right {
     display: inline-flex;
+    align-items: center;
     height: 1.375rem;
     margin-left: var(--spacing-base);
 
