@@ -11,6 +11,7 @@ import {
   useDialogSwitch,
   useMutation,
 } from '~/components'
+import { updateArticleComments } from '~/components/GQL'
 import {
   DeleteCommentMutation,
   DropdownActionsCommentPublicFragment,
@@ -38,6 +39,8 @@ const DeleteCommentDialog = ({
 }: DeleteCommentDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const commentId = comment.id
+  const article =
+    comment.node.__typename === 'Article' ? comment.node : undefined
 
   const { lang } = useContext(LanguageContext)
 
@@ -49,6 +52,18 @@ const DeleteCommentDialog = ({
         state: 'archived' as any,
         __typename: 'Comment',
       },
+    },
+    update: (cache) => {
+      if (!article) {
+        return
+      }
+
+      updateArticleComments({
+        cache,
+        commentId: comment.id,
+        articleId: article.id,
+        type: 'delete',
+      })
     },
   })
 
@@ -110,7 +125,7 @@ const DeleteCommentDialog = ({
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
               onClick={() => {
                 onDelete()
@@ -120,7 +135,7 @@ const DeleteCommentDialog = ({
           }
           smUpBtns={
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
+              text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
               onClick={() => {
                 onDelete()

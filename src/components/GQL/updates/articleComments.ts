@@ -12,7 +12,7 @@ export const updateArticleComments = ({
   cache: DataProxy
   commentId: string
   articleId: string
-  type: 'pin' | 'unpin'
+  type: 'pin' | 'unpin' | 'delete'
 }) => {
   // FIXME: circular dependencies
   const {
@@ -54,6 +54,16 @@ export const updateArticleComments = ({
           return edge
         })
         pinnedComments = []
+        break
+      case 'delete':
+        edges = edges.filter(({ node }) => node.id !== commentId)
+        if (
+          !!pinnedComments &&
+          pinnedComments.length > 0 &&
+          commentId === pinnedComments[0].id
+        ) {
+          pinnedComments = []
+        }
         break
     }
 

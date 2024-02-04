@@ -127,13 +127,15 @@ const BaseDropdownActions = ({
 
   openDeleteCommentDialog,
 }: BaseDropdownActionsProps) => {
+  const _hasPin =
+    hasPin &&
+    comment.node.__typename === 'Article' &&
+    comment.author.id === comment.node.author.id
+
   const Content = () => (
     <Menu>
-      {hasPin &&
-        comment.node.__typename === 'Article' &&
-        comment.author.id === comment.node.author.id && (
-          <PinButton comment={comment} type={type} />
-        )}
+      {_hasPin && <PinButton comment={comment} type={type} />}
+      {_hasPin && hasDelete && <Menu.Divider />}
       {hasDelete && (
         <DeleteComment.Button openDialog={openDeleteCommentDialog} />
       )}
