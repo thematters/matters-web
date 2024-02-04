@@ -16,6 +16,7 @@ import {
   EmptyComment,
   InfiniteScroll,
   List,
+  Media,
   QueryError,
   Spacer,
   ThreadCommentBeta,
@@ -253,12 +254,14 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
 
   return (
     <section className={styles.latestComments} id="latest-comments">
-      <CommentFormBeta
-        articleId={article?.id}
-        type={'article'}
-        submitCallback={() => replySubmitCallback(true)}
-      />
-      <Spacer size="base" />
+      <Media greaterThan="sm">
+        <CommentFormBeta
+          articleId={article?.id}
+          type={'article'}
+          submitCallback={() => replySubmitCallback(true)}
+        />
+        <Spacer size="base" />
+      </Media>
       {!comments || (comments.length <= 0 && <EmptyComment />)}
       {!!comments && comments.length > 0 && (
         <InfiniteScroll
@@ -290,7 +293,8 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
             )}
             {comments.map(
               (comment) =>
-                !comment.pinned && (
+                !comment.pinned &&
+                comment.state === 'active' && (
                   <List.Item key={comment.id}>
                     <ThreadCommentBeta
                       comment={comment}

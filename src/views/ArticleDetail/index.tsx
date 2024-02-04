@@ -379,7 +379,7 @@ const BaseArticleDetail = ({
             onLeave={() => setShowCommentToolbar(false)}
           >
             {article.commentCount > 0 && (
-              <section className={styles.block}>
+              <section className={styles.smUpCommentBlock}>
                 <DynamicComments id={article.id} lock={!canReadFullContent} />
               </section>
             )}

@@ -961,6 +961,9 @@
     "defaultMessage": "IPNS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "LgbKvU": {
+    "defaultMessage": "評論"
+  },
   "Lhhi5l": {
     "defaultMessage": "作品已發布",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"

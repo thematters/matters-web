@@ -1,6 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
+import { Media } from '~/components'
 import { ArticleCommentsQuery } from '~/gql/graphql'
 
 import LatestComments from './LatestComments'
@@ -42,6 +44,11 @@ const Comments = ({ id, lock }: { id: string; lock: boolean }) => {
 
   return (
     <section className={styles.responses}>
+      <Media at="sm">
+        <section className={styles.smUpTitle}>
+          <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
+        </section>
+      </Media>
       <LatestComments id={article.id} lock={lock} />
     </section>
   )

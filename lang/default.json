@@ -961,6 +961,9 @@
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "LgbKvU": {
+    "defaultMessage": "Comment"
+  },
   "Lhhi5l": {
     "defaultMessage": "Article published",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
