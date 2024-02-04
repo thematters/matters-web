@@ -36,3 +36,45 @@ export const fragments = {
     `,
   },
 }
+
+export const DESCENDANT_COMMENTS_COMMENT_PUBLIC = gql`
+  query DescendantCommentsCommentPublic(
+    $id: ID!
+    $after: String
+    $first: first_Int_min_0 = 3
+  ) {
+    comment: node(input: { id: $id }) {
+      ... on Comment {
+        comments(input: { sort: oldest, after: $after, first: $first }) {
+          totalCount
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            node {
+              ... on Comment {
+                ...ThreadCommentCommentBetaPublic
+                ...ThreadCommentCommentBetaPrivate
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  ${fragments.comment.public}
+  ${fragments.comment.private}
+`
+export const DESCENDANT_COMMENTS_COMMENT_PRIVATE = gql`
+  query DescendantCommentsCommentPrivate($ids: [ID!]!) {
+    nodes(input: { ids: $ids }) {
+      id
+      ... on Comment {
+        ...ThreadCommentCommentBetaPrivate
+      }
+    }
+  }
+  ${fragments.comment.private}
+`

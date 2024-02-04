@@ -1,25 +1,12 @@
-import styles from './styles.module.css'
+import { CommentBeta } from '~/components'
 
-export const CommentDigestPlaceholder = () => {
-  return (
-    <section className={styles.comment}>
-      <section>
-        <div className={styles.avatar}></div>
-      </section>
-      <section className={styles.content}>
-        <p></p>
-        <p></p>
-        <p></p>
-      </section>
-    </section>
-  )
-}
+import styles from './styles.module.css'
 
 export const Placeholder = () => {
   return (
     <section className={styles.CommentFeed}>
-      <CommentDigestPlaceholder />
-      <CommentDigestPlaceholder />
+      <CommentBeta.Placeholder />
+      <CommentBeta.Placeholder />
     </section>
   )
 }

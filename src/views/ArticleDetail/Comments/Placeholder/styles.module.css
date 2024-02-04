@@ -1,32 +1,3 @@
-.comment {
-  padding: var(--spacing-base) 0;
-
-  & .avatar {
-    width: 2.5rem;
-    height: 2.5rem;
-    background-color: var(--color-grey-lighter);
-    border-radius: 50%;
-  }
-
-  & .content {
-    margin-top: var(--spacing-tight);
-
-    & p {
-      width: 22.5rem;
-      height: 0.875rem;
-      background-color: var(--color-grey-lighter);
-    }
-
-    & p + p {
-      margin-top: var(--spacing-x-tight);
-    }
-
-    & p:last-child {
-      width: 11.25rem;
-    }
-  }
-}
-
 .CommentFeed {
   margin-top: var(--spacing-base);
 
