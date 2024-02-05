@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Button, ButtonProps, Spinner } from '~/components'
+import { Button, ButtonProps, Spinner, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -23,7 +23,9 @@ export const ViewMoreButton: React.FC<ViewMoreButtonProps> = ({
         textColor="black"
         {...props}
       >
-        <FormattedMessage defaultMessage="View All" id="wbcwKd" />
+        <TextIcon size="sm">
+          <FormattedMessage defaultMessage="View All" id="wbcwKd" />
+        </TextIcon>
       </Button>
     )}
   </div>

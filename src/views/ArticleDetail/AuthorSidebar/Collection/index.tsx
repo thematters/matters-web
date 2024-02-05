@@ -98,7 +98,7 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
           loadMore={loadMore}
           loader={<ArticleDigestAuthorSidebarFeedPlaceholder />}
         >
-          <List>
+          <List borderPosition="top">
             {edges?.map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
                 <ArticleDigestAuthorSidebar

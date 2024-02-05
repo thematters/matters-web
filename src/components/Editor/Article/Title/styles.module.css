@@ -6,6 +6,8 @@
   }
 
   & input {
+    @mixin font-serif;
+
     margin-bottom: var(--spacing-base);
     font-size: var(--font-size-article-title);
     font-weight: var(--font-weight-article-title);

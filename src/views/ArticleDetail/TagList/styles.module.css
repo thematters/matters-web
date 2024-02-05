@@ -4,6 +4,7 @@
   & .list {
     display: flex;
     flex-wrap: wrap;
+    row-gap: var(--spacing-x-tight);
 
     & .listItem {
       flex-shrink: 0;

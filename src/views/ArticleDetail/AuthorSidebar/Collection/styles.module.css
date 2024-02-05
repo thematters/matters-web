@@ -27,11 +27,10 @@
   }
 
   & .feed {
-    @mixin border-top-grey;
+    @mixin scrollbar-thin;
 
     max-height: 18.5rem;
-    padding: var(--spacing-tight) var(--spacing-base) var(--spacing-x-loose);
+    padding: 0 var(--spacing-base);
     overflow-y: auto;
-    border-top-style: dashed;
   }
 }
