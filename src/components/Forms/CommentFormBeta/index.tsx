@@ -5,9 +5,10 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { dom, stripHtml } from '~/common/utils'
 import { Button, IconSpinner16, TextIcon, useMutation } from '~/components'
 import CommentEditor from '~/components/Editor/Comment'
-import PUT_COMMENT from '~/components/GQL/mutations/putComment'
+import { updateArticleComments } from '~/components/GQL'
+import PUT_COMMENT_BETA from '~/components/GQL/mutations/putCommentBeta'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
-import { CommentDraftQuery, PutCommentMutation } from '~/gql/graphql'
+import { CommentDraftQuery, PutCommentBetaMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -52,7 +53,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
     variables: { id: commentDraftId },
   })
 
-  const [putComment] = useMutation<PutCommentMutation>(PUT_COMMENT)
+  const [putComment] = useMutation<PutCommentBetaMutation>(PUT_COMMENT_BETA)
   const [isSubmitting, setSubmitting] = useState(false)
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''
@@ -77,7 +78,27 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
     setSubmitting(true)
 
     try {
-      await putComment({ variables: { input } })
+      await putComment({
+        variables: { input },
+        update: (cache, mutationResult) => {
+          if (!!parentId) {
+            updateArticleComments({
+              cache,
+              articleId: articleId || '',
+              commentId: parentId,
+              type: 'addSecondaryComment',
+              comment: mutationResult.data?.putComment,
+            })
+          } else {
+            updateArticleComments({
+              cache,
+              articleId: articleId || '',
+              type: 'add',
+              comment: mutationResult.data?.putComment,
+            })
+          }
+        },
+      })
 
       setSubmitting(false)
 

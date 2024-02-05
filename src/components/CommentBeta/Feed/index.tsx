@@ -1,4 +1,3 @@
-import { useLazyQuery } from '@apollo/react-hooks'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
@@ -12,7 +11,6 @@ import {
 import {
   FeedCommentBetaPrivateFragment,
   FeedCommentBetaPublicFragment,
-  RefetchCommentQuery,
 } from '~/gql/graphql'
 
 import Content from '../Content'
@@ -20,7 +18,7 @@ import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
 import RoleLabel from '../RoleLabel'
-import { fragments, REFETCH_COMMENT } from './gql'
+import { fragments } from './gql'
 import styles from './styles.module.css'
 
 export type CommentControls = {
@@ -43,10 +41,6 @@ export const BaseCommentFeed = ({
   replySubmitCallback,
   ...actionControls
 }: CommentProps) => {
-  const [refetchComment] = useLazyQuery<RefetchCommentQuery>(REFETCH_COMMENT, {
-    fetchPolicy: 'network-only',
-  })
-
   const { id, author, parentComment } = comment
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
 
@@ -54,8 +48,6 @@ export const BaseCommentFeed = ({
     if (replySubmitCallback) {
       replySubmitCallback()
     }
-
-    refetchComment({ variables: { id: parentComment?.id || id } })
   }
 
   return (

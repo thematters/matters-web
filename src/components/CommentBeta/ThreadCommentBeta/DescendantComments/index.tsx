@@ -1,3 +1,4 @@
+import _uniqBy from 'lodash/uniqBy'
 import { useContext, useEffect } from 'react'
 
 import { filterComments, mergeConnections } from '~/common/utils'
@@ -18,7 +19,7 @@ import {
   DESCENDANT_COMMENTS_COMMENT_PRIVATE,
   DESCENDANT_COMMENTS_COMMENT_PUBLIC,
 } from '../gql'
-import styles from './styles.module.css'
+import { CommentType as ThreadCommentCommentBeta } from '../index'
 
 type DescendantCommentPublic = NonNullable<
   NonNullable<
@@ -41,9 +42,16 @@ type Comment = NonNullable<
 type Props = {
   id: string
   replySubmitCallback?: () => void
+  endCurosr: string
+  comments?: ThreadCommentCommentBeta[]
 }
 
-export const DescendantComments = ({ id, ...props }: Props) => {
+export const DescendantComments = ({
+  id,
+  comments,
+  endCurosr,
+  ...props
+}: Props) => {
   const viewer = useContext(ViewerContext)
 
   // public data
@@ -53,6 +61,7 @@ export const DescendantComments = ({ id, ...props }: Props) => {
       {
         variables: {
           id,
+          after: endCurosr,
         },
         fetchPolicy: 'cache-and-network',
       }
@@ -62,10 +71,6 @@ export const DescendantComments = ({ id, ...props }: Props) => {
   const connectionPath = 'comment.comments'
   const comment = data?.comment as Comment
   const { edges, pageInfo } = comment?.comments || {}
-
-  // const descendantComments = filterComments<DescendantCommentPublic>(
-  //   (edges || []).map(({ node }) => node)
-  // )
 
   // private data
   const loadPrivate = (publicData?: DescendantCommentsCommentPublicQuery) => {
@@ -99,7 +104,7 @@ export const DescendantComments = ({ id, ...props }: Props) => {
     const { data: newData } = await fetchMore({
       variables: {
         after: pageInfo?.endCursor,
-        first: 30,
+        first: 3,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -123,27 +128,39 @@ export const DescendantComments = ({ id, ...props }: Props) => {
     return <QueryError error={error} />
   }
 
-  if (edges?.length === 0) {
+  const uniqueResult = _uniqBy(
+    [
+      ...(comments || []),
+      ...(filterComments(
+        (edges || []).map(({ node }) => node)
+      ) as ThreadCommentCommentBeta[]),
+    ],
+    (comment) => comment.id
+  )
+
+  const result = uniqueResult.sort((n1, n2) => {
+    return Date.parse(n1.createdAt) - Date.parse(n2.createdAt)
+  })
+
+  if (result.length === 0) {
     return null
   }
 
   return (
     <>
-      <ul className={styles.descendants}>
-        {edges?.map(({ node: descendantComment }) => (
-          <li key={descendantComment.id}>
-            <Feed
-              comment={descendantComment}
-              type={'article'}
-              avatarSize="md"
-              hasReply
-              hasUserName
-              {...props}
-            />
-          </li>
-        ))}
-      </ul>
-      {!pageInfo.hasNextPage && <ViewMoreCommentButton onClick={loadMore} />}
+      {result.map((node) => (
+        <li key={node.id}>
+          <Feed
+            comment={node}
+            type={'article'}
+            avatarSize="md"
+            hasReply
+            hasUserName
+            {...props}
+          />
+        </li>
+      ))}
+      {pageInfo.hasNextPage && <ViewMoreCommentButton onClick={loadMore} />}
     </>
   )
 }

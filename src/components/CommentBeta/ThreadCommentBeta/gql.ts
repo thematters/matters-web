@@ -8,7 +8,12 @@ export const fragments = {
       fragment ThreadCommentCommentBetaPublic on Comment {
         id
         ...FeedCommentBetaPublic
-        comments(input: { sort: oldest, first: null }) {
+        comments(input: { sort: oldest, first: 3 }) {
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
           edges {
             cursor
             node {
@@ -23,7 +28,7 @@ export const fragments = {
       fragment ThreadCommentCommentBetaPrivate on Comment {
         id
         ...FeedCommentBetaPrivate
-        comments(input: { sort: oldest, first: null }) {
+        comments(input: { sort: oldest, first: 3 }) {
           edges {
             cursor
             node {

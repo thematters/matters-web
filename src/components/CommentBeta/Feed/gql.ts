@@ -27,7 +27,7 @@ export const fragments = {
           }
         }
         ...RoleLabelComment
-        ...PinnedLabelComment
+        ...PinnedLabelBetaComment
         ...FooterActionsCommentBetaPublic
         ...DropdownActionsCommentPublic
         ...ContentCommentPublic

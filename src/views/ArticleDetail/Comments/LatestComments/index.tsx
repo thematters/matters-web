@@ -1,16 +1,10 @@
-import jump from 'jump.js'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { COMMENTS_COUNT, REFETCH_RESPONSES, URL_FRAGMENT } from '~/common/enums'
-import {
-  dom,
-  filterComments,
-  mergeConnections,
-  unshiftConnections,
-} from '~/common/utils'
+import { COMMENTS_COUNT } from '~/common/enums'
+import { filterComments, mergeConnections } from '~/common/utils'
 import {
   CommentFormBeta,
   EmptyComment,
@@ -20,7 +14,6 @@ import {
   QueryError,
   Spacer,
   ThreadCommentBeta,
-  useEventListener,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -51,7 +44,6 @@ type CommentArticle = NonNullable<
 
 const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
-  const storedCursorRef = useRef<string | null>(null)
 
   /**
    * Fragment Patterns
@@ -73,26 +65,21 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
    * Data Fetching
    */
   // public data
-  const {
-    data,
-    loading,
-    error,
-    fetchMore,
-    refetch: refetchPublic,
-    client,
-  } = usePublicQuery<LatestCommentsPublicQuery>(LATEST_COMMENTS_PUBLIC, {
-    variables: {
-      id,
-      first: COMMENTS_COUNT,
-    },
-    fetchPolicy: 'cache-and-network',
-    notifyOnNetworkStatusChange: true,
-  })
+  const { data, loading, error, fetchMore, client } =
+    usePublicQuery<LatestCommentsPublicQuery>(LATEST_COMMENTS_PUBLIC, {
+      variables: {
+        id,
+        first: COMMENTS_COUNT,
+      },
+      fetchPolicy: 'cache-and-network',
+      notifyOnNetworkStatusChange: true,
+    })
 
   // pagination
   const connectionPath = 'article.comments'
   const article = data?.article as CommentArticle
   const { edges, pageInfo } = article?.comments || {}
+
   const articleId = article?.id
   const comments = filterComments<CommentPublic>(
     (edges || []).map(({ node }) => node)
@@ -128,15 +115,9 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
 
   // load next page
   const loadMore = async (params?: { before: string }) => {
-    const loadBefore = params?.before || null
-    const noLimit = loadBefore && pageInfo?.endCursor
-
     const { data: newData } = await fetchMore({
       variables: {
         after: pageInfo?.endCursor,
-        before: loadBefore,
-        first: noLimit ? null : COMMENTS_COUNT,
-        includeBefore: !!loadBefore,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({
@@ -148,98 +129,6 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
 
     loadPrivate(newData)
   }
-
-  // refetch & pull to refresh
-  const refetch = async () => {
-    const { data: newData } = await refetchPublic()
-    loadPrivate(newData)
-  }
-
-  // TODO: update to REFETCH_COMMENTS
-  useEventListener(REFETCH_RESPONSES, refetch)
-
-  useEffect(() => {
-    if (pageInfo?.startCursor) {
-      storedCursorRef.current = pageInfo.startCursor
-    }
-  }, [pageInfo?.startCursor])
-
-  const replySubmitCallback = async (isCommentArticle = false) => {
-    const { data: newData } = await fetchMore({
-      variables: {
-        before: storedCursorRef.current,
-        includeBefore: false,
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) => {
-        const newEdges = _get(fetchMoreResult, `${connectionPath}.edges`, [])
-        const newCommentCount = _get(fetchMoreResult, 'article.responseCount')
-        const oldCommentCount = _get(previousResult, 'article.responseCount')
-
-        // update if response count has changed
-        if (newEdges.length === 0) {
-          if (oldCommentCount !== newCommentCount) {
-            return {
-              ...previousResult,
-              article: {
-                ...previousResult.article,
-                responseCount: newCommentCount,
-              },
-            }
-          }
-          return previousResult
-        }
-
-        // update if there are new items in responses.edges
-        let oldData: any = previousResult
-        let newData: any = fetchMoreResult
-        if (isCommentArticle) {
-          oldData = fetchMoreResult
-          newData = previousResult
-        }
-        const newResult = unshiftConnections({
-          oldData,
-          newData,
-          path: connectionPath,
-        })
-        const newStartCursor = _get(
-          newResult,
-          `${connectionPath}.pageInfo.startCursor`,
-          null
-        )
-        if (newStartCursor) {
-          storedCursorRef.current = newStartCursor
-        }
-        return newResult
-      },
-    })
-
-    loadPrivate(newData)
-  }
-
-  // scroll to comment
-  useEffect(() => {
-    if (!fragment || !articleId) {
-      return
-    }
-
-    const jumpToFragment = () => {
-      jump(`#${fragment}`, {
-        offset: fragment === URL_FRAGMENT.COMMENTS ? -10 : -64,
-      })
-    }
-
-    try {
-      const element = dom.$(`#${fragment}`)
-
-      if (!element) {
-        loadMore({ before: parentId }).then(jumpToFragment)
-      } else {
-        jumpToFragment()
-      }
-    } catch (e) {
-      return
-    }
-  }, [articleId])
 
   /**
    * Render
@@ -255,11 +144,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   return (
     <section className={styles.latestComments} id="latest-comments">
       <Media greaterThan="sm">
-        <CommentFormBeta
-          articleId={article?.id}
-          type={'article'}
-          submitCallback={() => replySubmitCallback(true)}
-        />
+        <CommentFormBeta articleId={article?.id} type={'article'} />
         <Spacer size="base" />
       </Media>
       {!comments || (comments.length <= 0 && <EmptyComment />)}
@@ -287,7 +172,6 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
                   }
                   hasLink
                   disabled={lock}
-                  replySubmitCallback={replySubmitCallback}
                 />
               </List.Item>
             )}
@@ -302,7 +186,6 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
                       defaultExpand={comment.id === parentId && !!descendantId}
                       hasLink
                       disabled={lock}
-                      replySubmitCallback={replySubmitCallback}
                     />
                   </List.Item>
                 )

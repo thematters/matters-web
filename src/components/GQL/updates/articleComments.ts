@@ -1,18 +1,35 @@
 import { DataProxy } from 'apollo-cache'
 
 import { COMMENTS_COUNT } from '~/common/enums'
-import { LatestCommentsPublicQuery } from '~/gql/graphql'
+import {
+  LatestCommentsPrivateQuery,
+  LatestCommentsPublicQuery,
+} from '~/gql/graphql'
+
+type CommentPublic = NonNullable<
+  NonNullable<
+    LatestCommentsPublicQuery['article'] & { __typename: 'Article' }
+  >['comments']['edges']
+>[0]['node']
+type CommentPrivate = NonNullable<
+  NonNullable<LatestCommentsPrivateQuery['nodes']>[0] & {
+    __typename: 'Comment'
+  }
+>
+type Comment = CommentPublic & Partial<Omit<CommentPrivate, '__typename'>>
 
 export const updateArticleComments = ({
   cache,
   commentId,
   articleId,
+  comment,
   type,
 }: {
   cache: DataProxy
-  commentId: string
   articleId: string
-  type: 'pin' | 'unpin' | 'delete'
+  commentId?: string
+  comment?: Comment
+  type: 'pin' | 'unpin' | 'delete' | 'add' | 'addSecondaryComment'
 }) => {
   // FIXME: circular dependencies
   const {
@@ -38,6 +55,9 @@ export const updateArticleComments = ({
 
     switch (type) {
       case 'pin':
+        if (!commentId) {
+          return
+        }
         edges = edges.map((edge) => {
           if (edge.node.id === commentId) {
             edge.node.pinned = true
@@ -56,6 +76,9 @@ export const updateArticleComments = ({
         pinnedComments = []
         break
       case 'delete':
+        if (!commentId) {
+          return
+        }
         edges = edges.filter(({ node }) => node.id !== commentId)
         if (
           !!pinnedComments &&
@@ -65,11 +88,35 @@ export const updateArticleComments = ({
           pinnedComments = []
         }
         break
+      case 'add':
+        if (!comment) {
+          return
+        }
+        edges = [{ __typename: 'CommentEdge', node: comment }, ...edges]
+        break
+      case 'addSecondaryComment':
+        if (!comment && !commentId) {
+          return
+        }
+        if (comment?.__typename !== 'Comment') {
+          return
+        }
+        edges = edges.map((edge) => {
+          if (edge.node.id === commentId) {
+            edge.node.comments.edges?.push({
+              __typename: 'CommentEdge',
+              node: comment,
+              cursor: '',
+            })
+          }
+          return edge
+        })
+        break
     }
 
     cache.writeQuery({
       query: LATEST_COMMENTS_PUBLIC,
-      variables: { id: articleId },
+      variables: { id: articleId, first: COMMENTS_COUNT },
       data: {
         article: {
           ...data.article,
