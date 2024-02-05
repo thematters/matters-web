@@ -19,6 +19,7 @@ type ROUTE_KEY =
   | 'TAG_DETAIL'
   // Article
   | 'ARTICLE_DETAIL'
+  | 'ARTICLE_DETAIL_REVISION'
   // User
   | 'USER_ARTICLES'
   | 'USER_COLLECTIONS'
@@ -99,6 +100,7 @@ export const ROUTES: {
 
   // Article
   { key: 'ARTICLE_DETAIL', pathname: '/[name]/[mediaHash]' },
+  { key: 'ARTICLE_DETAIL_REVISION', pathname: '/[name]/[mediaHash]/revision' },
 
   // Circle
   { key: 'CIRCLE_DETAIL', pathname: '/[name]' },

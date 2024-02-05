@@ -54,7 +54,7 @@ const State = ({ article }: { article: StateArticleFragment }) => {
         </TextIcon>
       </LinkWrapper>
       <style global jsx>{`
-        div[data-reactroot] {
+        body {
           margin-top: 42px;
         }
       `}</style>
