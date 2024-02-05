@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
@@ -50,6 +51,11 @@ export const BaseCommentFeed = ({
     }
   }
 
+  const contentClasses = classNames({
+    [styles.contentContainer]: true,
+    [styles.descendant]: !!parentComment,
+  })
+
   return (
     <article
       className={styles.comment}
@@ -82,7 +88,7 @@ export const BaseCommentFeed = ({
         </section>
       </header>
 
-      <section className={styles.contentContainer}>
+      <section className={contentClasses}>
         <Media at="sm">
           <Content comment={comment} type={type} size="mdS" limit={17} />
         </Media>

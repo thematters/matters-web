@@ -56,6 +56,10 @@
 .contentContainer {
   width: 22.5rem;
   margin-top: var(--spacing-tight);
+
+  &.descendant {
+    width: 21rem;
+  }
 }
 
 @keyframes comment-background-fade-out {
