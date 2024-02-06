@@ -49,7 +49,7 @@ import {
 import License from './License'
 import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
-import State from './State'
+import StickyTopBanner from './StickyTopBanner'
 import styles from './styles.module.css'
 import TagList from './TagList'
 import DesktopToolbar from './Toolbar/DesktopToolbar'
@@ -254,7 +254,7 @@ const BaseArticleDetail = ({
         availableLanguages={article.availableTranslations || []}
       />
 
-      <State article={article} />
+      <StickyTopBanner type="inactive" article={article} />
 
       <section className={styles.content}>
         <section className={styles.title}>

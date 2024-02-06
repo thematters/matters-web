@@ -37,7 +37,7 @@ import {
 import License from '../License'
 import MetaInfo from '../MetaInfo'
 import Placeholder from '../Placeholder'
-import State from '../State'
+import StickyTopBanner from '../StickyTopBanner'
 import styles from '../styles.module.css'
 import TagList from '../TagList'
 
@@ -124,7 +124,7 @@ const BaseArticleDetailRevision = ({
         availableLanguages={article.availableTranslations || []}
       />
 
-      <State article={article} />
+      <StickyTopBanner type="revision" />
 
       <section className={styles.content}>
         <section className={styles.title}>
@@ -264,40 +264,40 @@ const ArticleDetailRevision = ({
   }, [article?.mediaHash, viewer.id])
 
   // shadow replace URL
-  const latestHash = article?.drafts?.filter(
-    (d) => d.publishState === 'published'
-  )[0]?.mediaHash
-  useEffect(() => {
-    if (!article || !latestHash) {
-      return
-    }
+  // const latestHash = article?.drafts?.filter(
+  //   (d) => d.publishState === 'published'
+  // )[0]?.mediaHash
+  // useEffect(() => {
+  //   if (!article || !latestHash) {
+  //     return
+  //   }
 
-    const newPath = toPath({
-      page: 'articleDetail',
-      article: { ...article, mediaHash: latestHash },
-    })
+  //   const newPath = toPath({
+  //     page: 'articleDetail',
+  //     article: { ...article, mediaHash: latestHash },
+  //   })
 
-    // parse current URL: router.asPath
-    const u = new URL(
-      `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
-    )
-    const n = new URL(
-      `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${newPath.href}`
-    )
+  //   // parse current URL: router.asPath
+  //   const u = new URL(
+  //     `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
+  //   )
+  //   const n = new URL(
+  //     `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${newPath.href}`
+  //   )
 
-    // hide all utm_ tracking code parameters
-    // copy all others
-    const rems = [
-      ...u.searchParams, // uses .entries()
-      ...n.searchParams,
-    ].filter(([k, v]) => !k?.startsWith('utm_'))
-    const nsearch = rems.length > 0 ? `?${new URLSearchParams(rems)}` : ''
-    const nhref = `${n.pathname}${nsearch}${n.hash || u.hash}`
+  //   // hide all utm_ tracking code parameters
+  //   // copy all others
+  //   const rems = [
+  //     ...u.searchParams, // uses .entries()
+  //     ...n.searchParams,
+  //   ].filter(([k, v]) => !k?.startsWith('utm_'))
+  //   const nsearch = rems.length > 0 ? `?${new URLSearchParams(rems)}` : ''
+  //   const nhref = `${n.pathname}${nsearch}${n.hash || u.hash}`
 
-    if (nhref !== router.asPath || routerLang) {
-      router.replace(nhref, undefined, { shallow: true, locale: false })
-    }
-  }, [latestHash])
+  //   if (nhref !== router.asPath || routerLang) {
+  //     router.replace(nhref, undefined, { shallow: true, locale: false })
+  //   }
+  // }, [latestHash])
 
   /**
    * Render:Loading

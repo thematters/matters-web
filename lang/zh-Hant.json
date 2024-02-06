@@ -14,6 +14,10 @@
   "+7SAix": {
     "defaultMessage": "2-12 個字元"
   },
+  "+GCcXH": {
+    "defaultMessage": "因違反用戶協定而被封存，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "+OStJM": {
     "defaultMessage": "重置交易密碼"
   },
@@ -449,10 +453,6 @@
     "defaultMessage": "已追蹤",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
-  "9FQN4+": {
-    "defaultMessage": "僅作者本人可見封存作品，",
-    "description": "src/views/ArticleDetail/State/index.tsx"
-  },
   "9Fpc9S": {
     "defaultMessage": "漏洞提報"
   },
@@ -613,6 +613,10 @@
   "D9R/ol": {
     "defaultMessage": "將作品加入圍爐，讓更多人一起參與討論"
   },
+  "DDQsyP": {
+    "defaultMessage": "回到我的創作",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "DP3yqI": {
     "defaultMessage": "支持人數"
   },
@@ -679,6 +683,10 @@
   "FEkOVJ": {
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
+  },
+  "FMIIAZ": {
+    "defaultMessage": "此為歷史版本和 IPFS 入口查閱區，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "FOOymB": {
     "defaultMessage": "還沒有成員",
@@ -784,10 +792,6 @@
     "defaultMessage": "數字錢包",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
-  "HaSYl4": {
-    "defaultMessage": "僅作者本人可見封存作品，",
-    "description": "src/views/ArticleDetail/State/index.tsx"
-  },
   "HkozYU": {
     "defaultMessage": "更換錢包",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -832,10 +836,6 @@
   "Ix3e3Q": {
     "defaultMessage": "發布評論",
     "description": "src/components/Forms/CommentForm/index.tsx"
-  },
-  "J12iSN": {
-    "defaultMessage": "回到我的創作",
-    "description": "src/views/ArticleDetail/State/index.tsx"
   },
   "J6f6iN": {
     "defaultMessage": "評論數量",
@@ -919,6 +919,10 @@
   "L4NXXh": {
     "defaultMessage": "目前總營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "L5guA9": {
+    "defaultMessage": "僅作者本人可見封存作品，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "L7Si5/": {
     "defaultMessage": "管理社群",
@@ -1711,6 +1715,10 @@
   },
   "ieGrWo": {
     "defaultMessage": "追蹤"
+  },
+  "imXsmo": {
+    "defaultMessage": "回到作品頁",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "itPgxd": {
     "defaultMessage": "個人主頁"

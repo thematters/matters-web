@@ -14,6 +14,10 @@
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
+  "+GCcXH": {
+    "defaultMessage": "Archived article (violations),",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "+OStJM": {
     "defaultMessage": "Reset Payment Password"
   },
@@ -449,10 +453,6 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
-  "9FQN4+": {
-    "defaultMessage": "Archived article (Author),",
-    "description": "src/views/ArticleDetail/State/index.tsx"
-  },
   "9Fpc9S": {
     "defaultMessage": "Bug Report"
   },
@@ -613,6 +613,10 @@
   "D9R/ol": {
     "defaultMessage": "Add articles to your circle"
   },
+  "DDQsyP": {
+    "defaultMessage": "back to my works",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "DP3yqI": {
     "defaultMessage": "Donation count"
   },
@@ -679,6 +683,10 @@
   "FEkOVJ": {
     "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
+  },
+  "FMIIAZ": {
+    "defaultMessage": "Revision history and IPFS entry,",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "FOOymB": {
     "defaultMessage": "No members yet",
@@ -784,10 +792,6 @@
     "defaultMessage": "Wallet",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
-  "HaSYl4": {
-    "defaultMessage": "Archived article (violations),&nbsp;",
-    "description": "src/views/ArticleDetail/State/index.tsx"
-  },
   "HkozYU": {
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -832,10 +836,6 @@
   "Ix3e3Q": {
     "defaultMessage": "Comment",
     "description": "src/components/Forms/CommentForm/index.tsx"
-  },
-  "J12iSN": {
-    "defaultMessage": "Back to my works",
-    "description": "src/views/ArticleDetail/State/index.tsx"
   },
   "J6f6iN": {
     "defaultMessage": "Number of comments",
@@ -919,6 +919,10 @@
   "L4NXXh": {
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "L5guA9": {
+    "defaultMessage": "Archived article (Author),",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "L7Si5/": {
     "defaultMessage": "Manage Community",
@@ -1711,6 +1715,10 @@
   },
   "ieGrWo": {
     "defaultMessage": "Follow"
+  },
+  "imXsmo": {
+    "defaultMessage": "back to latest",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "itPgxd": {
     "defaultMessage": "Profile"
