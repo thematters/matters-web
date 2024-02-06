@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { filterComments } from '~/common/utils'
 import { CommentFormType, ViewMoreCommentButton } from '~/components'
@@ -23,6 +23,7 @@ interface ThreadCommentControls {
   hasDownvote?: boolean
   replySubmitCallback?: () => void
   disabled?: boolean
+  firstRenderCallback?: () => void
 }
 
 export type CommentType = ThreadCommentCommentBetaPublicFragment &
@@ -36,6 +37,7 @@ export const ThreadCommentBeta = ({
   comment,
   type,
   defaultExpand,
+  firstRenderCallback,
   ...props
 }: ThreadCommentProps) => {
   const { pageInfo } = comment.comments
@@ -43,6 +45,12 @@ export const ThreadCommentBeta = ({
     (comment.comments?.edges || []).map(({ node }) => node)
   ) as CommentType[]
   const [showViewMore, setShowViewMore] = useState(true)
+
+  useEffect(() => {
+    if (firstRenderCallback) {
+      firstRenderCallback()
+    }
+  }, [])
 
   if (!pageInfo.hasNextPage) {
     return (
