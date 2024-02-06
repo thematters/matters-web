@@ -43,6 +43,7 @@ type Props = {
   id: string
   replySubmitCallback?: () => void
   endCurosr: string
+  isInCommentDetail?: boolean
   comments?: ThreadCommentCommentBeta[]
 }
 
@@ -50,6 +51,7 @@ export const DescendantComments = ({
   id,
   comments,
   endCurosr,
+  isInCommentDetail,
   ...props
 }: Props) => {
   const viewer = useContext(ViewerContext)
@@ -156,6 +158,7 @@ export const DescendantComments = ({
             avatarSize="md"
             hasReply
             hasUserName
+            isInCommentDetail={isInCommentDetail}
             {...props}
           />
         </li>

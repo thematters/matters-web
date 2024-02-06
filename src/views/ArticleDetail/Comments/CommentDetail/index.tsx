@@ -102,6 +102,7 @@ const CommentDetail = () => {
         type="article"
         hasLink
         firstRenderCallback={() => setReadyJump(true)}
+        isInCommentDetail
       />
     </section>
   )

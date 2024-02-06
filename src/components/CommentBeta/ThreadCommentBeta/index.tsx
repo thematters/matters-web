@@ -24,6 +24,7 @@ interface ThreadCommentControls {
   replySubmitCallback?: () => void
   disabled?: boolean
   firstRenderCallback?: () => void
+  isInCommentDetail?: boolean
 }
 
 export type CommentType = ThreadCommentCommentBetaPublicFragment &
@@ -38,6 +39,7 @@ export const ThreadCommentBeta = ({
   type,
   defaultExpand,
   firstRenderCallback,
+  isInCommentDetail,
   ...props
 }: ThreadCommentProps) => {
   const { pageInfo } = comment.comments
@@ -67,6 +69,7 @@ export const ThreadCommentBeta = ({
                   avatarSize="md"
                   hasReply
                   hasUserName
+                  isInCommentDetail={isInCommentDetail}
                   {...props}
                 />
               </li>
@@ -91,6 +94,7 @@ export const ThreadCommentBeta = ({
               avatarSize="md"
               hasReply
               hasUserName
+              isInCommentDetail={isInCommentDetail}
               {...props}
             />
           </li>
@@ -105,6 +109,7 @@ export const ThreadCommentBeta = ({
                   avatarSize="md"
                   hasReply
                   hasUserName
+                  isInCommentDetail={isInCommentDetail}
                   {...props}
                 />
               </li>
@@ -117,6 +122,7 @@ export const ThreadCommentBeta = ({
             id={comment.id}
             endCurosr={pageInfo.endCursor || ''}
             comments={subComments}
+            isInCommentDetail={isInCommentDetail}
             {...props}
           />
         )}
