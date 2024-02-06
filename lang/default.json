@@ -2193,6 +2193,10 @@
   "w+6UiO": {
     "defaultMessage": "Add Invitation"
   },
+  "w/Bet8": {
+    "defaultMessage": "Comment Details",
+    "description": "src/views/ArticleDetail/index.tsx"
+  },
   "wCgTu5": {
     "defaultMessage": "Comments"
   },

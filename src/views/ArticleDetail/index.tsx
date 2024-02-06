@@ -322,9 +322,9 @@ const BaseArticleDetail = ({
                   id: 'OsX3KM',
                 })
               : intl.formatMessage({
-                  defaultMessage: 'Comment Detail',
+                  defaultMessage: 'Comment Details',
                   description: 'src/views/ArticleDetail/index.tsx',
-                  id: 'RQX/UI',
+                  id: 'w/Bet8',
                 })
           }
         >

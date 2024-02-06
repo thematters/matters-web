@@ -1,6 +1,6 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag'
 
-import CommentFeed from "~/components/CommentBeta/Feed";
+import CommentFeed from '~/components/CommentBeta/Feed'
 
 export const COMMENT_DETAIL = gql`
   query CommentDetail($id: ID!) {
