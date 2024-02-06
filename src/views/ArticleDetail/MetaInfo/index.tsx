@@ -66,11 +66,9 @@ const MetaInfo = ({
           <Translate zh_hant="更新於" zh_hans="更新于" en=" published on" />
         </span>
       </section>
-
+      <FingerprintButton article={article} />
       {canReadFullContent && (
         <>
-          <FingerprintButton article={article} />
-
           {canTranslate && !isAuthor && (
             <>
               <section className={styles.dot}>

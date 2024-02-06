@@ -120,6 +120,7 @@ const FloatToolbar = ({
             article={article}
             articleDetail={articleDetails}
             disabled={lock}
+            textIconSpacing="basexxtight"
             onClick={() => {
               toast.success({
                 message: '功能即將開放，敬請期待！',
