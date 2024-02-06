@@ -8,21 +8,8 @@
     margin-top: var(--spacing-base);
   }
 
-  & .time {
-    color: var(--color-grey);
-  }
-
   &.active {
     border-left: 2px solid var(--color-matters-green);
-
-    & .date {
-      font-weight: var(--font-weight-medium);
-      color: var(--color-black);
-    }
-
-    & .time {
-      color: var(--color-grey-darker);
-    }
   }
 }
 
@@ -40,9 +27,19 @@
   & > * + * {
     margin-left: var(--spacing-x-tight);
   }
+
+  &.active {
+    font-weight: var(--font-weight-medium);
+    color: var(--color-black);
+  }
 }
 
 .time {
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
+  color: var(--color-grey);
+
+  &.active {
+    color: var(--color-grey-darker);
+  }
 }

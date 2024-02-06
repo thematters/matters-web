@@ -9,6 +9,7 @@ import {
   Error,
   Head,
   Layout,
+  Media,
   QueryError,
   Spinner,
   Throw404,
@@ -41,6 +42,7 @@ import StickyTopBanner from '../StickyTopBanner'
 import styles from '../styles.module.css'
 import TagList from '../TagList'
 import { InfoHeader } from './InfoHeader'
+import { VersionsDropdown } from './VersionsDropdown'
 import { VersionsSidebar } from './VersionsSidebar'
 
 const DynamicCircleWall = dynamic(() => import('../Wall/Circle'), {
@@ -129,6 +131,10 @@ const BaseArticleDetailRevision = ({
       <StickyTopBanner type="revision" article={article} />
 
       <section className={styles.content}>
+        <Media lessThan="lg">
+          <VersionsDropdown />
+        </Media>
+
         <InfoHeader />
 
         <section className={styles.title}>

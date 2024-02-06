@@ -13,6 +13,11 @@ const versions = [
 ]
 
 export const VersionsSidebar = () => {
+  // TODO
+  if (versions.length === 1) {
+    return null
+  }
+
   return (
     <section className={styles.versions}>
       <ul>
@@ -25,7 +30,12 @@ export const VersionsSidebar = () => {
             })}
           >
             <a href={`#${version.id}`} className={styles.link}>
-              <span className={styles.date}>
+              <span
+                className={classNames({
+                  [styles.date]: true,
+                  [styles.active]: index === 0,
+                })}
+              >
                 <span>{format(new Date(version.createdAt), 'yyyy-MM-dd')}</span>
 
                 {index === 0 && (
@@ -34,7 +44,12 @@ export const VersionsSidebar = () => {
                   </Label>
                 )}
               </span>
-              <span className={styles.time}>
+              <span
+                className={classNames({
+                  [styles.time]: true,
+                  [styles.active]: index === 0,
+                })}
+              >
                 {format(new Date(version.createdAt), 'HH:mm')}
               </span>
             </a>

@@ -57,6 +57,7 @@ export const InfoHeader = () => {
           />
 
           <section className={styles.viewIpfs}>
+            {/* TODO: toast for mobile */}
             <Tooltip
               content={
                 <FormattedMessage
