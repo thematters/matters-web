@@ -9,6 +9,7 @@ import { URL_QS } from '~/common/enums'
 import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
+  Drawer,
   EmptyLayout,
   Error,
   Head,
@@ -118,6 +119,12 @@ const BaseArticleDetail = ({
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
 
+  const [isOpen, setIsOpen] = useState(false)
+  const [autoOpen] = useState(true)
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState)
+  }
+
   const authorId = article.author?.id
   const paymentPointer = article.author?.paymentPointer
   const collectionCount = article.collection?.totalCount || 0
@@ -214,6 +221,7 @@ const BaseArticleDetail = ({
     translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
   const lock = article.state !== 'active'
+  const isShortWork = summary.length + content.length < 200
 
   return (
     <Layout.Main
@@ -255,6 +263,10 @@ const BaseArticleDetail = ({
       />
 
       <State article={article} />
+
+      <Drawer isOpen={isOpen} onClose={toggleDrawer} title={'Comment'}>
+        <>Hello Comment Drawer</>
+      </Drawer>
 
       <section className={styles.content}>
         <section className={styles.title}>
@@ -318,9 +330,20 @@ const BaseArticleDetail = ({
                 privateFetched={privateFetched}
                 hasFingerprint={canReadFullContent}
                 lock={lock}
+                toggleDrawer={toggleDrawer}
               />
             </div>
           </Waypoint>
+        </Media>
+
+        <Media greaterThan="sm">
+          <Waypoint
+            onEnter={() => {
+              if (article.canComment && autoOpen && !isShortWork) {
+                setTimeout(() => setIsOpen(true), 500)
+              }
+            }}
+          />
         </Media>
 
         {collectionCount > 0 && (
@@ -370,6 +393,7 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
+          toggleDrawer={toggleDrawer}
         />
       </Media>
 
@@ -380,6 +404,17 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
+          toggleDrawer={toggleDrawer}
+        />
+      </Media>
+
+      <Media greaterThan="sm">
+        <Waypoint
+          onEnter={() => {
+            if (article.canComment && autoOpen && isShortWork) {
+              setTimeout(() => setIsOpen(true), 500)
+            }
+          }}
         />
       </Media>
     </Layout.Main>

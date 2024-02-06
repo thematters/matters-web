@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import jump from 'jump.js'
 import { useEffect, useState } from 'react'
 
 import { ButtonProps, ReCaptchaProvider, toast } from '~/components'
@@ -21,6 +20,7 @@ export type FloatToolbarProps = {
   privateFetched: boolean
   lock: boolean
   show: boolean
+  toggleDrawer: () => void
 }
 
 const fragments = {
@@ -55,6 +55,7 @@ const FloatToolbar = ({
   articleDetails,
   privateFetched,
   lock,
+  toggleDrawer,
 }: FloatToolbarProps) => {
   const [mounted, setMounted] = useState(false)
   const [displayContainer, setDisplayContainer] = useState(false)
@@ -111,11 +112,7 @@ const FloatToolbar = ({
             article={article}
             disabled={!article.canComment}
             textIconSpacing="basexxtight"
-            onClick={() => {
-              toast.success({
-                message: '功能即將開放，敬請期待！',
-              })
-            }}
+            onClick={toggleDrawer}
             {...buttonProps}
           />
           <span className={styles.divider} />
@@ -123,8 +120,8 @@ const FloatToolbar = ({
             article={article}
             articleDetail={articleDetails}
             disabled={lock}
+            textIconSpacing="basexxtight"
             onClick={() => {
-              jump('#animation', { offset: -100 })
               toast.success({
                 message: '功能即將開放，敬請期待！',
               })

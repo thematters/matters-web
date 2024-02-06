@@ -7,7 +7,6 @@ import {
   ButtonProps,
   ReCaptchaProvider,
   ShareButton,
-  toast,
 } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -30,6 +29,7 @@ export type DesktopToolbarProps = {
   translatedLanguage?: string | null
   privateFetched: boolean
   lock: boolean
+  toggleDrawer: () => void
 } & DropdownActionsControls
 
 const fragments = {
@@ -72,6 +72,7 @@ const DesktopToolbar = ({
   translatedLanguage,
   privateFetched,
   lock,
+  toggleDrawer,
   ...props
 }: DesktopToolbarProps) => {
   const path = toPath({ page: 'articleDetail', article })
@@ -103,7 +104,6 @@ const DesktopToolbar = ({
     <section className={styles.toolbar} data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
       <section className={styles.buttons}>
         <ReCaptchaProvider action="appreciateArticle">
-          {/* TODO: confirm can appreciate your own article */}
           <AppreciationButton
             article={article}
             privateFetched={privateFetched}
@@ -114,16 +114,11 @@ const DesktopToolbar = ({
         </ReCaptchaProvider>
 
         <section className={styles.commentBar}>
-          {/* TODO: open comment drawer */}
           <CommentButton
             article={article}
             disabled={!article.canComment}
             iconSize="md"
-            onClick={() => {
-              toast.success({
-                message: '功能即將開放，敬請期待！',
-              })
-            }}
+            onClick={toggleDrawer}
             {...buttonProps}
           />
         </section>
