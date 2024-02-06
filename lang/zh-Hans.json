@@ -668,6 +668,9 @@
     "defaultMessage": "在 {circleName} 的广播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "EcglP9": {
+    "defaultMessage": "密钥"
+  },
   "EoeUjA": {
     "defaultMessage": "你无权限进行该操作",
     "description": "FORBIDDEN_BY_STATE"
@@ -1075,6 +1078,9 @@
   "OpeFTV": {
     "defaultMessage": "输入六位数字交易密码"
   },
+  "Oru6G2": {
+    "defaultMessage": "使用 IPFS 生成的作品指纹，通过它可在节点调取内容"
+  },
   "PLBmDT": {
     "defaultMessage": "登录密码",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1367,6 +1373,9 @@
   },
   "XgdZSb": {
     "defaultMessage": "值得关注"
+  },
+  "Xh/txo": {
+    "defaultMessage": "作品指纹"
   },
   "Xi40U9": {
     "defaultMessage": "操作无法撤销，确认删除选集吗？"
@@ -1744,6 +1753,9 @@
   "jkrM1r": {
     "defaultMessage": "打开 IPNS 页面",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "jtdQHR": {
+    "defaultMessage": "公共节点"
   },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 发布广播",
@@ -2322,6 +2334,9 @@
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
+  },
+  "zbaTLV": {
+    "defaultMessage": "在 IPFS 上查看"
   },
   "zkmfjn": {
     "defaultMessage": "置頂",

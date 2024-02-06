@@ -1,9 +1,11 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import { LanguageContext, TextIcon } from '~/components'
 import { StateArticleFragment } from '~/gql/graphql'
 
@@ -11,22 +13,25 @@ import styles from './styles.module.css'
 
 type StickyTopBannerProps = {
   type: 'inactive' | 'revision'
-  article?: StateArticleFragment
-}
-
-type InactiveBannerProps = {
   article: StateArticleFragment
 }
 
 const fragments = {
   article: gql`
     fragment StateArticle on Article {
+      id
       state
+      slug
+      mediaHash
+      author {
+        id
+        userName
+      }
     }
   `,
 }
 
-const InactiveBanner = ({ article }: InactiveBannerProps) => {
+const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
   const { lang } = useContext(LanguageContext)
 
   const isBanned = article.state === 'banned'
@@ -76,11 +81,15 @@ const InactiveBanner = ({ article }: InactiveBannerProps) => {
   )
 }
 
-const RevisionBanner = () => {
+const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
   const { lang } = useContext(LanguageContext)
+  const path = toPath({
+    page: 'articleDetail',
+    article,
+  })
 
   return (
-    <section className={styles.container}>
+    <section className={classNames([styles.container, styles.revision])}>
       <span>
         <FormattedMessage
           defaultMessage="Revision history and IPFS entry,"
@@ -91,7 +100,7 @@ const RevisionBanner = () => {
 
       {lang === 'en' && <span>&nbsp;</span>}
 
-      <Link href={PATHS.ME_ARCHIVED}>
+      <Link href={path.href}>
         <TextIcon textDecoration="underline" size="md" weight="semibold">
           <FormattedMessage
             defaultMessage="back to latest"
@@ -116,7 +125,7 @@ const StickyTopBanner = ({ type, article }: StickyTopBannerProps) => {
   }
 
   if (type === 'revision') {
-    return <RevisionBanner />
+    return <RevisionBanner article={article} />
   }
 
   return null

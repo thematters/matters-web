@@ -10,4 +10,8 @@
   color: black;
   text-align: center;
   background: var(--color-grey-lighter-active);
+
+  &.revision {
+    background: var(--color-green-lighter);
+  }
 }

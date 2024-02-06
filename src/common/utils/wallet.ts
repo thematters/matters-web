@@ -57,12 +57,6 @@ export const wagmiConfig = createConfig({
   }),
 })
 
-export const maskAddress = (address: string, prefixLen: number = 8) => {
-  return `${address.substring(0, prefixLen)}...${address.substring(
-    address.length - 6
-  )}`
-}
-
 export const MaxUint256 = BigInt(
   '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
 )

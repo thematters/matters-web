@@ -49,3 +49,13 @@ export const countStrWidth = (str: string) => {
   }
   return length
 }
+
+export const truncate = (
+  str: string,
+  prefixLen: number = 8,
+  suffixLen: number = 6
+) => {
+  return `${str.substring(0, prefixLen)}...${str.substring(
+    str.length - suffixLen
+  )}`
+}

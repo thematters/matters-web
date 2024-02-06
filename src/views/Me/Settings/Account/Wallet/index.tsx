@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { maskAddress } from '~/common/utils'
+import { truncate } from '~/common/utils'
 import {
   AddWalletLoginDialog,
   IconClose20,
@@ -33,7 +33,7 @@ const Wallet = () => {
                     />
                   }
                   rightText={
-                    hasETHAddress ? maskAddress(ethAddress, 6) : undefined
+                    hasETHAddress ? truncate(ethAddress, 6) : undefined
                   }
                   rightIcon={
                     hasETHAddress ? (

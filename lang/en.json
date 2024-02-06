@@ -668,6 +668,9 @@
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "EcglP9": {
+    "defaultMessage": "Key"
+  },
   "EoeUjA": {
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
@@ -1075,6 +1078,9 @@
   "OpeFTV": {
     "defaultMessage": "Enter a 6-digit payment password."
   },
+  "Oru6G2": {
+    "defaultMessage": "The Fingerprint from IPFS, you can read it via a gateway"
+  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1367,6 +1373,9 @@
   },
   "XgdZSb": {
     "defaultMessage": "Authors"
+  },
+  "Xh/txo": {
+    "defaultMessage": "Content Hash"
   },
   "Xi40U9": {
     "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
@@ -1744,6 +1753,9 @@
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "jtdQHR": {
+    "defaultMessage": "Gateways"
   },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
@@ -2322,6 +2334,9 @@
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."
+  },
+  "zbaTLV": {
+    "defaultMessage": "View on IPFS"
   },
   "zkmfjn": {
     "defaultMessage": "Pinned",

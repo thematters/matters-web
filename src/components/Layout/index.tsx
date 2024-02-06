@@ -103,7 +103,9 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
                   {aside}
                 </section>
 
-                {!inEditor && !isInSettings && <SideFooter />}
+                {!inEditor && !isInSettings && !isInArticleDetailRevision && (
+                  <SideFooter />
+                )}
               </section>
             </Sticky>
           </Media>

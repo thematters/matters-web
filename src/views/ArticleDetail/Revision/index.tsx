@@ -40,6 +40,7 @@ import Placeholder from '../Placeholder'
 import StickyTopBanner from '../StickyTopBanner'
 import styles from '../styles.module.css'
 import TagList from '../TagList'
+import { InfoHeader } from './InfoHeader'
 
 const DynamicCircleWall = dynamic(() => import('../Wall/Circle'), {
   ssr: true, // enable for first screen
@@ -93,7 +94,7 @@ const BaseArticleDetailRevision = ({
   const lock = article.state !== 'active'
 
   return (
-    <Layout.Main>
+    <Layout.Main aside={<p>TODO</p>}>
       <Head
         title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
         path={toPath({ page: 'articleDetail', article }).href}
@@ -124,9 +125,11 @@ const BaseArticleDetailRevision = ({
         availableLanguages={article.availableTranslations || []}
       />
 
-      <StickyTopBanner type="revision" />
+      <StickyTopBanner type="revision" article={article} />
 
       <section className={styles.content}>
+        <InfoHeader />
+
         <section className={styles.title}>
           <Title type="article">{title}</Title>
 
