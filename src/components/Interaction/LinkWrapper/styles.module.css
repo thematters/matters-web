@@ -1,4 +1,4 @@
-.link {
+.wrapper {
   @mixin transition;
 
   display: flex;
