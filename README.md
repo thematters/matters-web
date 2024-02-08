@@ -12,6 +12,7 @@
 - Run `npm run gen:type`
 - Run `npm run dev`, then go to `http://localhost:3000/`
 
+.
 ### Build and run production server
 
 `npm run build && npm run start`
