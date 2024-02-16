@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
 import { dom, stripHtml } from '~/common/utils'
 import { Button, IconSpinner16, TextIcon, useMutation } from '~/components'
 import CommentEditor from '~/components/Editor/Comment'
@@ -58,7 +59,10 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''
   )
-  const isValid = stripHtml(content).trim().length > 0
+
+  const contentCount = stripHtml(content).trim().length
+
+  const isValid = contentCount > 0 && contentCount <= MAX_ARTICLE_COMMENT_LENGTH
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
@@ -159,6 +163,11 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
       </section>
 
       <footer className={styles.footer}>
+        {contentCount > MAX_ARTICLE_COMMENT_LENGTH && (
+          <p className={styles.count}>
+            {contentCount}/{MAX_ARTICLE_COMMENT_LENGTH}
+          </p>
+        )}
         {!!closeCallback && (
           <Button
             size={[null, '2rem']}
