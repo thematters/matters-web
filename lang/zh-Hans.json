@@ -932,6 +932,10 @@
     "defaultMessage": "目前总营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "L79o74": {
+    "defaultMessage": "展开",
+    "description": "src/components/Expandable/index.tsx"
+  },
   "L7Si5/": {
     "defaultMessage": "管理社群",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"

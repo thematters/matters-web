@@ -932,6 +932,10 @@
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "L79o74": {
+    "defaultMessage": "Expand",
+    "description": "src/components/Expandable/index.tsx"
+  },
   "L7Si5/": {
     "defaultMessage": "Manage Community",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
