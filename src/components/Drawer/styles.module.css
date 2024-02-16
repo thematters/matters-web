@@ -12,7 +12,6 @@
 
   & .baseDrawerContainer {
     position: fixed;
-    overflow-y: auto;
     visibility: hidden;
     background: white;
     box-shadow: -8px 0 56px 0 rgb(0 0 0 / 8%) !important;
@@ -22,13 +21,16 @@
 }
 
 .drawer {
-  padding: var(--spacing-xx-loose) var(--spacing-loose) var(--spacing-xx-loose)
-    var(--spacing-xx-loose);
-
   & .header {
     @mixin flex-center-space-between;
 
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-global-header);
+    padding: var(--spacing-xx-loose) var(--spacing-loose) 0
+      var(--spacing-xx-loose);
     margin-bottom: var(--spacing-base);
+    background: var(--color-white);
 
     & h2 {
       font-size: var(--font-size-lg);
@@ -42,5 +44,11 @@
         color: var(--color-grey-darker);
       }
     }
+  }
+
+  & .content {
+    height: calc(100vh - 86px);
+    padding: 0 var(--spacing-loose) 0 var(--spacing-xx-loose);
+    overflow-y: auto;
   }
 }

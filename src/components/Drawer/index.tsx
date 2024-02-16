@@ -84,7 +84,7 @@ export const Drawer = ({
           <IconClose24 size="md" />
         </button>
       </section>
-      {children}
+      <section className={styles.content}>{children}</section>
     </BaseDrawer>
   )
 }

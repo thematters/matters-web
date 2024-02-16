@@ -51,7 +51,7 @@ const CommentDetail = () => {
       const comment = document.getElementById(selector)
 
       let targetElement = comment
-      if (!descendantId && comment) {
+      if (!!descendantId && comment) {
         targetElement = comment.parentElement
       }
 
@@ -67,12 +67,26 @@ const CommentDetail = () => {
           return
         }
         targetElement.style.backgroundColor = 'var(--color-green-lighter)'
+        if (!descendantId) {
+          // parent comment
+          targetElement.style.paddingLeft = 'var(--spacing-base)'
+          targetElement.style.paddingRight = 'var(--spacing-base)'
+          targetElement.style.marginLeft = '-1rem'
+          targetElement.style.marginRight = '-1rem'
+        }
+
         setTimeout(() => {
           if (!targetElement) {
             return
           }
-
           targetElement.style.backgroundColor = currentBgColor
+          if (!descendantId) {
+            // parent comment
+            targetElement.style.paddingLeft = '0'
+            targetElement.style.marginLeft = '0'
+            targetElement.style.paddingRight = '0'
+            targetElement.style.marginRight = '0'
+          }
         }, 1000)
       }, 500)
     }

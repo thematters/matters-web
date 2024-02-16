@@ -57,7 +57,14 @@ export const ThreadCommentBeta = ({
   if (!pageInfo.hasNextPage) {
     return (
       <section className={styles.container}>
-        <Feed comment={comment} type={type} hasReply hasUserName {...props} />
+        <Feed
+          comment={comment}
+          type={type}
+          hasReply
+          hasUserName
+          isInCommentDetail={isInCommentDetail}
+          {...props}
+        />
 
         {descendants.length > 0 && (
           <ul className={styles.descendants}>
