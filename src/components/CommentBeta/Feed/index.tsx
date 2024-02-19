@@ -2,11 +2,13 @@ import classNames from 'classnames'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import {
   Avatar,
   AvatarSize,
   CommentFormType,
   DateTime,
+  LinkWrapper,
   Media,
 } from '~/components'
 import {
@@ -56,6 +58,11 @@ export const BaseCommentFeed = ({
     [styles.descendant]: !!parentComment,
   })
 
+  const userProfilePath = toPath({
+    page: 'userProfile',
+    userName: author.userName || '',
+  })
+
   return (
     <article
       className={styles.comment}
@@ -65,12 +72,16 @@ export const BaseCommentFeed = ({
       <header className={styles.header}>
         <section className={styles.left}>
           <section className={styles.author}>
-            <Avatar user={author} />
+            <LinkWrapper {...userProfilePath}>
+              <Avatar user={author} />
+            </LinkWrapper>
             <section className={styles.info}>
               <section className={styles.top}>
-                <section className={styles.displayName}>
-                  {author.displayName}
-                </section>
+                <LinkWrapper {...userProfilePath}>
+                  <section className={styles.displayName}>
+                    {author.displayName}
+                  </section>
+                </LinkWrapper>
                 <RoleLabel comment={comment} />
               </section>
               <DateTime date={comment.createdAt} color="grey" />
