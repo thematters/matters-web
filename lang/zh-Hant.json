@@ -49,6 +49,10 @@
   "/5jk3i": {
     "defaultMessage": "訂閱成功！🎉"
   },
+  "/Aea3K": {
+    "defaultMessage": "評論被作者折疊",
+    "description": "src/components/CommentBeta/Content/index.tsx"
+  },
   "/BQWEh": {
     "defaultMessage": "最近 1 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -1663,7 +1667,7 @@
     "defaultMessage": "支持作者"
   },
   "fDdcbi": {
-    "defaultMessage": "此 {type} 被原作者刪除"
+    "defaultMessage": "{type}已被原作者刪除"
   },
   "fPcF7H": {
     "defaultMessage": "添加合適標籤，讓站內外讀者找到你的作品"

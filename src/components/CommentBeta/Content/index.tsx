@@ -68,18 +68,11 @@ const Content = ({
       <Collapsed
         content={content}
         collapsedContent={
-          isBlocked ? (
-            <FormattedMessage
-              defaultMessage="You have blocked that user"
-              id="Lb0JsC"
-            />
-          ) : (
-            <FormattedMessage
-              defaultMessage="This {type} has been collapsed by the author"
-              id="us5QHt"
-              values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
-            />
-          )
+          <FormattedMessage
+            defaultMessage="This comment has been collapsed by the author"
+            id="/Aea3K"
+            description="src/components/CommentBeta/Content/index.tsx"
+          />
         }
         className={contentClasses}
       />

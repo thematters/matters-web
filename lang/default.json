@@ -49,6 +49,10 @@
   "/5jk3i": {
     "defaultMessage": "Circle successfully subscribed."
   },
+  "/Aea3K": {
+    "defaultMessage": "This comment has been collapsed by the author",
+    "description": "src/components/CommentBeta/Content/index.tsx"
+  },
   "/BQWEh": {
     "defaultMessage": "Last 1 month",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
