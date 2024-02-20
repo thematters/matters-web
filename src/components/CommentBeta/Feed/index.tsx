@@ -2,12 +2,15 @@ import classNames from 'classnames'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import {
   Avatar,
   AvatarSize,
   CommentFormType,
   DateTime,
+  LinkWrapper,
   Media,
+  ThreadCommentType,
 } from '~/components'
 import {
   FeedCommentBetaPrivateFragment,
@@ -31,11 +34,13 @@ export type CommentControls = {
 export type CommentProps = {
   comment: FeedCommentBetaPublicFragment &
     Partial<FeedCommentBetaPrivateFragment>
+  pinnedComment?: ThreadCommentType
   type: CommentFormType
 } & CommentControls
 
 export const BaseCommentFeed = ({
   comment,
+  pinnedComment,
   type,
   avatarSize = 'lg',
   hasUserName,
@@ -56,6 +61,11 @@ export const BaseCommentFeed = ({
     [styles.descendant]: !!parentComment,
   })
 
+  const userProfilePath = toPath({
+    page: 'userProfile',
+    userName: author.userName || '',
+  })
+
   return (
     <article
       className={styles.comment}
@@ -65,12 +75,16 @@ export const BaseCommentFeed = ({
       <header className={styles.header}>
         <section className={styles.left}>
           <section className={styles.author}>
-            <Avatar user={author} />
+            <LinkWrapper {...userProfilePath}>
+              <Avatar user={author} />
+            </LinkWrapper>
             <section className={styles.info}>
               <section className={styles.top}>
-                <section className={styles.displayName}>
-                  {author.displayName}
-                </section>
+                <LinkWrapper {...userProfilePath}>
+                  <section className={styles.displayName}>
+                    {author.displayName}
+                  </section>
+                </LinkWrapper>
                 <RoleLabel comment={comment} />
               </section>
               <DateTime date={comment.createdAt} color="grey" />
@@ -81,6 +95,7 @@ export const BaseCommentFeed = ({
           <PinnedLabel comment={comment} />
           <DropdownActions
             comment={comment}
+            pinnedComment={pinnedComment}
             type={type}
             hasPin={actionControls.hasPin}
             inCard={actionControls.inCard}
@@ -90,10 +105,10 @@ export const BaseCommentFeed = ({
 
       <section className={contentClasses}>
         <Media at="sm">
-          <Content comment={comment} type={type} size="mdS" limit={17} />
+          <Content comment={comment} type={type} size="sm" limit={5} />
         </Media>
         <Media greaterThan="sm">
-          <Content comment={comment} type={type} size="mdS" limit={13} />
+          <Content comment={comment} type={type} size="sm" limit={5} />
         </Media>
 
         <FooterActions
@@ -116,7 +131,14 @@ type MemoizedCommentFeed = React.MemoExoticComponent<React.FC<CommentProps>> & {
 
 const CommentFeed = React.memo(
   BaseCommentFeed,
-  ({ comment: prevComment, disabled: prevDisabled }, { comment, disabled }) => {
+  (
+    {
+      comment: prevComment,
+      pinnedComment: prevPinnedComment,
+      disabled: prevDisabled,
+    },
+    { comment, pinnedComment, disabled }
+  ) => {
     return (
       prevComment.content === comment.content &&
       prevComment.upvotes === comment.upvotes &&
@@ -124,7 +146,8 @@ const CommentFeed = React.memo(
       prevComment.state === comment.state &&
       prevComment.pinned === comment.pinned &&
       prevComment.author.isBlocked === comment.author.isBlocked &&
-      prevDisabled === disabled
+      prevDisabled === disabled &&
+      prevPinnedComment?.id === pinnedComment?.id
     )
   }
 ) as MemoizedCommentFeed

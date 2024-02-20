@@ -1,12 +1,11 @@
 import { useLazyQuery } from '@apollo/react-hooks'
-import { md2html } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { Waypoint } from 'react-waypoint'
 
-import { URL_QS } from '~/common/enums'
+import { REFERRAL_QUERY_REFERRAL_KEY, URL_QS } from '~/common/enums'
 import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
@@ -255,11 +254,7 @@ const BaseArticleDetail = ({
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
     translated && translatedSummary ? translatedSummary : article.summary
-  const isEnableMd = !!getQuery('md') // feature flag
-  const originalContent =
-    isEnableMd && article.contents.markdown
-      ? md2html(article.contents.markdown)
-      : article.contents.html
+  const originalContent = article.contents.html
   const content =
     translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
@@ -612,6 +607,15 @@ const ArticleDetail = ({
     const n = new URL(
       `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${newPath.href}`
     )
+
+    // TODO: can remove this after 2024/2
+    const isNomadTags = article.tags?.some(
+      (tag) => tag.content === 'nomadmatters' || tag.content === '遊牧者計畫'
+    )
+    const hasReferral = u.searchParams.has(REFERRAL_QUERY_REFERRAL_KEY)
+    if (!hasReferral && isNomadTags && viewer.userName) {
+      u.searchParams.append(REFERRAL_QUERY_REFERRAL_KEY, viewer.userName)
+    }
 
     // hide all utm_ tracking code parameters
     // copy all others

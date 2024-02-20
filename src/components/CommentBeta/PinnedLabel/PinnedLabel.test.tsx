@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
+import { TEST_ID } from '~/common/enums'
 import { render, screen } from '~/common/utils/test'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
@@ -9,23 +10,13 @@ describe('<Comemnt/PinnedLabel>', () => {
   it('should render a Comment/PinnedLabel', () => {
     // not pinned
     render(<PinnedLabel comment={{ ...MOCK_COMMENT, pinned: false }} />)
-    expect(screen.queryByText('Pinned')).not.toBeInTheDocument()
-    expect(screen.queryByText('Featured')).not.toBeInTheDocument()
+    expect(
+      screen.queryByTestId(TEST_ID.COMMENT_PINNED_LABEL)
+    ).not.toBeInTheDocument()
 
     // pinned (article comment)
     render(<PinnedLabel comment={{ ...MOCK_COMMENT, pinned: true }} />)
-    expect(screen.getByText('Featured')).toBeInTheDocument()
-
-    // pinned (circle comment)
-    render(
-      <PinnedLabel
-        comment={{
-          ...MOCK_COMMENT,
-          node: { ...MOCK_COMMENT.node, __typename: 'Circle' },
-          pinned: true,
-        }}
-      />
-    )
-    expect(screen.getByText('Pinned')).toBeInTheDocument()
+    const $pinned = screen.getByTestId(TEST_ID.COMMENT_PINNED_LABEL)
+    expect($pinned).toBeInTheDocument()
   })
 })

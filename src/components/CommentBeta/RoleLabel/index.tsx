@@ -26,13 +26,13 @@ const fragments = {
 }
 
 const RoleLabel = ({ comment }: { comment: RoleLabelCommentFragment }) => {
-  if (
-    !comment.fromDonator &&
-    comment.node.__typename === 'Article' &&
-    comment.author.id !== comment.node.author.id
-  ) {
-    return null
-  }
+  // if (
+  //   !comment.fromDonator &&
+  //   comment.node.__typename === 'Article' &&
+  //   comment.author.id !== comment.node.author.id
+  // ) {
+  //   return null
+  // }
 
   if (
     comment.node.__typename === 'Article' &&
@@ -49,15 +49,19 @@ const RoleLabel = ({ comment }: { comment: RoleLabelCommentFragment }) => {
     )
   }
 
-  return (
-    <span className={`${styles.label} ${styles.supporterLabel}`}>
-      <FormattedMessage
-        defaultMessage="Supporter"
-        id="jc3mW/"
-        description="src/components/Comment/RoleLabel/index.tsx"
-      />
-    </span>
-  )
+  if (comment.fromDonator) {
+    return (
+      <span className={`${styles.label} ${styles.supporterLabel}`}>
+        <FormattedMessage
+          defaultMessage="Supporter"
+          id="jc3mW/"
+          description="src/components/Comment/RoleLabel/index.tsx"
+        />
+      </span>
+    )
+  }
+
+  return null
 }
 
 RoleLabel.fragments = fragments

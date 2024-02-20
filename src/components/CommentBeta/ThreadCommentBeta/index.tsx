@@ -27,15 +27,17 @@ interface ThreadCommentControls {
   isInCommentDetail?: boolean
 }
 
-export type CommentType = ThreadCommentCommentBetaPublicFragment &
+export type ThreadCommentType = ThreadCommentCommentBetaPublicFragment &
   Partial<ThreadCommentCommentBetaPrivateFragment>
 
 type ThreadCommentProps = {
-  comment: CommentType
+  comment: ThreadCommentType
+  pinnedComment?: ThreadCommentType
 } & ThreadCommentControls
 
 export const ThreadCommentBeta = ({
   comment,
+  pinnedComment,
   type,
   defaultExpand,
   firstRenderCallback,
@@ -45,7 +47,7 @@ export const ThreadCommentBeta = ({
   const { pageInfo } = comment.comments
   const descendants = filterComments(
     (comment.comments?.edges || []).map(({ node }) => node)
-  ) as CommentType[]
+  ) as ThreadCommentType[]
   const [showViewMore, setShowViewMore] = useState(true)
 
   useEffect(() => {
@@ -59,10 +61,11 @@ export const ThreadCommentBeta = ({
       <section className={styles.container}>
         <Feed
           comment={comment}
+          isInCommentDetail={isInCommentDetail}
+          pinnedComment={pinnedComment}
           type={type}
           hasReply
           hasUserName
-          isInCommentDetail={isInCommentDetail}
           {...props}
         />
 
@@ -72,6 +75,7 @@ export const ThreadCommentBeta = ({
               <li key={descendantComment.id}>
                 <Feed
                   comment={descendantComment}
+                  pinnedComment={pinnedComment}
                   type={type}
                   avatarSize="md"
                   hasReply
@@ -90,13 +94,21 @@ export const ThreadCommentBeta = ({
 
   return (
     <section className={styles.container}>
-      <Feed comment={comment} type={type} hasReply hasUserName {...props} />
+      <Feed
+        comment={comment}
+        pinnedComment={pinnedComment}
+        type={type}
+        hasReply
+        hasUserName
+        {...props}
+      />
 
       <ul className={styles.descendants}>
         {descendants.slice(0, COLLAPSE_COUNT).map((descendantComment) => (
           <li key={descendantComment.id}>
             <Feed
               comment={descendantComment}
+              pinnedComment={pinnedComment}
               type={type}
               avatarSize="md"
               hasReply
@@ -112,6 +124,7 @@ export const ThreadCommentBeta = ({
               <li key={descendantComment.id}>
                 <Feed
                   comment={descendantComment}
+                  pinnedComment={pinnedComment}
                   type={type}
                   avatarSize="md"
                   hasReply
@@ -130,6 +143,7 @@ export const ThreadCommentBeta = ({
             endCurosr={pageInfo.endCursor || ''}
             comments={subComments}
             isInCommentDetail={isInCommentDetail}
+            pinnedComment={pinnedComment}
             {...props}
           />
         )}

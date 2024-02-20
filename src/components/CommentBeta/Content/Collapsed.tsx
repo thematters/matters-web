@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { captureClicks } from '~/common/utils'
-import { Button, IconArrowDown16, TextIcon } from '~/components'
+import { Button, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -41,28 +41,25 @@ const Collapsed = ({
   })
 
   return (
-    <p className={inActiveClasses}>
-      <span>{collapsedContent}</span>
-
+    <>
+      <p className={inActiveClasses}>
+        <span>{collapsedContent}</span>
+      </p>
       {collapsed && (
         <Button
           spacing={['xxtight', 'xtight']}
-          bgActiveColor="greyLighter"
           onClick={() => {
             setCollapsed(false)
           }}
+          textColor="greyDarker"
+          textActiveColor="black"
         >
-          <TextIcon
-            icon={<IconArrowDown16 size="xs" />}
-            textPlacement="left"
-            weight="normal"
-            color="greyDarker"
-          >
+          <TextIcon>
             <FormattedMessage defaultMessage="Expand" id="0oLj/t" />
           </TextIcon>
         </Button>
       )}
-    </p>
+    </>
   )
 }
 

@@ -242,7 +242,14 @@ const BaseAddCredit: React.FC<FormProps> = ({
   if (completed) {
     return (
       <>
-        <Dialog.Header title={<Translate id="successTopUp" />} />
+        <Dialog.Header
+          title={
+            <FormattedMessage
+              defaultMessage="Topped up successfully"
+              id="Eb1U+/"
+            />
+          }
+        />
 
         <Dialog.Content>
           <Dialog.Content.Message align="center" smUpAlign="center">

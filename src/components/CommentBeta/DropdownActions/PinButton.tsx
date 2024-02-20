@@ -7,6 +7,8 @@ import {
   IconPin20,
   IconUnPin20,
   Menu,
+  ThreadCommentType,
+  toast,
   useMutation,
 } from '~/components'
 import { updateArticleComments } from '~/components/GQL'
@@ -38,13 +40,15 @@ const fragments = {
 const PinButton = ({
   type,
   comment,
+  pinnedComment,
 }: {
   type: CommentFormType
   comment: PinButtonCommentFragment
+  pinnedComment?: ThreadCommentType
 }) => {
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined
-  const canPin = (article?.pinCommentLeft || 0) > 0
+  const canPin = !pinnedComment
 
   const [unpinComment] = useMutation<TogglePinCommentMutation>(
     TOGGLE_PIN_COMMENT,
@@ -130,16 +134,17 @@ const PinButton = ({
       icon={<IconPin20 size="mdS" />}
       onClick={
         canPin
-          ? async () => {
-              try {
-                await pinComment()
-                // TODO: REFETCH_ARTICLE_DETAIL
-                // window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
-              } catch (e) {
-                // TODO: toast can't pinned message
-              }
-            }
-          : undefined
+          ? () => pinComment()
+          : () =>
+              toast.success({
+                message: (
+                  <FormattedMessage
+                    defaultMessage="Only one comment can be pinned to the top"
+                    id="yexhgj"
+                    description="src/components/CommentBeta/DropdownActions/PinButton.tsx"
+                  />
+                ),
+              })
       }
     />
   )

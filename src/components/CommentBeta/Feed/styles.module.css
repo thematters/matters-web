@@ -48,27 +48,11 @@
   }
 }
 
-.replyToContainer {
-  margin: var(--spacing-xx-tight) 0 var(--spacing-x-tight)
-    var(--spacing-x-loose);
-}
-
 .contentContainer {
   width: 22.5rem;
   margin-top: var(--spacing-tight);
 
   &.descendant {
-    width: 21rem;
-  }
-}
-
-@keyframes comment-background-fade-out {
-  50% {
-    background: var(--color-grey-lighter);
-  }
-
-  0,
-  100% {
-    background: none;
+    width:;
   }
 }

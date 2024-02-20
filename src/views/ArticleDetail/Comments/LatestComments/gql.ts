@@ -31,7 +31,7 @@ export const LATEST_COMMENTS_PUBLIC = gql`
             first: $first
             includeAfter: $includeAfter
             includeBefore: $includeBefore
-            filter: { state: active, parentComment: null }
+            filter: { parentComment: null }
           }
         ) {
           totalCount

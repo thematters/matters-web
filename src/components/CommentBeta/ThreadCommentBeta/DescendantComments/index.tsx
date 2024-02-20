@@ -19,7 +19,10 @@ import {
   DESCENDANT_COMMENTS_COMMENT_PRIVATE,
   DESCENDANT_COMMENTS_COMMENT_PUBLIC,
 } from '../gql'
-import { CommentType as ThreadCommentCommentBeta } from '../index'
+import {
+  ThreadCommentType as ThreadCommentCommentBeta,
+  ThreadCommentType,
+} from '../index'
 
 type DescendantCommentPublic = NonNullable<
   NonNullable<
@@ -45,11 +48,13 @@ type Props = {
   endCurosr: string
   isInCommentDetail?: boolean
   comments?: ThreadCommentCommentBeta[]
+  pinnedComment?: ThreadCommentType
 }
 
 export const DescendantComments = ({
   id,
   comments,
+  pinnedComment,
   endCurosr,
   isInCommentDetail,
   ...props
@@ -154,6 +159,7 @@ export const DescendantComments = ({
         <li key={node.id}>
           <Feed
             comment={node}
+            pinnedComment={pinnedComment}
             type={'article'}
             avatarSize="md"
             hasReply

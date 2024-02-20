@@ -178,10 +178,11 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
             {comments.map(
               (comment) =>
                 !comment.pinned &&
-                comment.state === 'active' && (
+                comment.state !== 'archived' && (
                   <List.Item key={comment.id}>
                     <ThreadCommentBeta
                       comment={comment}
+                      pinnedComment={pinnedComment}
                       type="article"
                       defaultExpand={comment.id === parentId && !!descendantId}
                       hasLink

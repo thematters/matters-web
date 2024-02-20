@@ -50,7 +50,7 @@ const Content = ({
   type,
   size,
   bgColor,
-  limit = 10,
+  limit = 5,
   textIndent = false,
   isRichShow = true,
 }: ContentProps) => {
@@ -63,23 +63,16 @@ const Content = ({
     [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
   })
 
-  if (state === 'collapsed' || isBlocked) {
+  if (state === 'collapsed' || state === 'banned' || isBlocked) {
     return (
       <Collapsed
         content={content}
         collapsedContent={
-          isBlocked ? (
-            <FormattedMessage
-              defaultMessage="You have blocked that user"
-              id="Lb0JsC"
-            />
-          ) : (
-            <FormattedMessage
-              defaultMessage="This {type} has been collapsed by the author"
-              id="us5QHt"
-              values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
-            />
-          )
+          <FormattedMessage
+            defaultMessage="Comment has been hidden"
+            id="I8+06z"
+            description="src/components/CommentBeta/Content/index.tsx"
+          />
         }
         className={contentClasses}
       />
@@ -106,21 +99,6 @@ const Content = ({
           />
         </Expandable>
       </>
-    )
-  }
-
-  if (state === 'banned') {
-    return (
-      <p
-        className={`${contentClasses} inactive`}
-        data-test-id={TEST_ID.COMMENT_CONETNT}
-      >
-        <FormattedMessage
-          defaultMessage="This {type} has been archived due to a violation of the user agreement"
-          id="cCsxxw"
-          values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
-        />
-      </p>
     )
   }
 

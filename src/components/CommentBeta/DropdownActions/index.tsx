@@ -11,6 +11,7 @@ import {
   Dropdown,
   IconMore16,
   Menu,
+  ThreadCommentType,
   toast,
   ViewerContext,
   withDialog,
@@ -39,6 +40,7 @@ export type DropdownActionsControls = {
 type DropdownActionsProps = {
   comment: DropdownActionsCommentPublicFragment &
     Partial<DropdownActionsCommentPrivateFragment>
+  pinnedComment?: ThreadCommentType
   type: CommentFormType
 } & DropdownActionsControls
 
@@ -119,6 +121,7 @@ const fragments = {
 
 const BaseDropdownActions = ({
   comment,
+  pinnedComment,
   type,
   inCard,
 
@@ -134,7 +137,13 @@ const BaseDropdownActions = ({
 
   const Content = () => (
     <Menu>
-      {_hasPin && <PinButton comment={comment} type={type} />}
+      {_hasPin && (
+        <PinButton
+          comment={comment}
+          pinnedComment={pinnedComment}
+          type={type}
+        />
+      )}
       {_hasPin && hasDelete && <Menu.Divider />}
       {hasDelete && (
         <DeleteComment.Button openDialog={openDeleteCommentDialog} />

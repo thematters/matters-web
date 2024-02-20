@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { cleanup, render, screen } from '~/common/utils/test'
 import { CommentState } from '~/gql/graphql'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
@@ -31,6 +31,7 @@ describe('<Comemnt.Content>', () => {
     ).toBeInTheDocument()
 
     // blocked by user
+    cleanup()
     render(
       <CommentContent
         comment={{
@@ -41,7 +42,9 @@ describe('<Comemnt.Content>', () => {
         type="article"
       />
     )
-    expect(screen.getByText('You have blocked that user')).toBeInTheDocument()
+    expect(
+      screen.getByText('This comment has been collapsed by the author')
+    ).toBeInTheDocument()
   })
 
   it('should render a banned Comment.Content', () => {
