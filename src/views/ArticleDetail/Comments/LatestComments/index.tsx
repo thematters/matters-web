@@ -182,6 +182,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
                   <List.Item key={comment.id}>
                     <ThreadCommentBeta
                       comment={comment}
+                      pinnedComment={pinnedComment}
                       type="article"
                       defaultExpand={comment.id === parentId && !!descendantId}
                       hasLink

@@ -2333,6 +2333,10 @@
     "defaultMessage": "進入圍爐",
     "description": "src/components/CircleDigest/Price/index.tsx"
   },
+  "yexhgj": {
+    "defaultMessage": "僅能置頂一則評論",
+    "description": "src/components/CommentBeta/DropdownActions/PinButton.tsx"
+  },
   "yoRaUc": {
     "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"

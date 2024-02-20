@@ -2333,6 +2333,10 @@
     "defaultMessage": "Enter",
     "description": "src/components/CircleDigest/Price/index.tsx"
   },
+  "yexhgj": {
+    "defaultMessage": "Only one comment can be pinned to the top",
+    "description": "src/components/CommentBeta/DropdownActions/PinButton.tsx"
+  },
   "yoRaUc": {
     "defaultMessage": "Refund",
     "description": "src/components/Transaction/index.tsx"

@@ -10,6 +10,7 @@ import {
   DateTime,
   LinkWrapper,
   Media,
+  ThreadCommentType,
 } from '~/components'
 import {
   FeedCommentBetaPrivateFragment,
@@ -33,11 +34,13 @@ export type CommentControls = {
 export type CommentProps = {
   comment: FeedCommentBetaPublicFragment &
     Partial<FeedCommentBetaPrivateFragment>
+  pinnedComment?: ThreadCommentType
   type: CommentFormType
 } & CommentControls
 
 export const BaseCommentFeed = ({
   comment,
+  pinnedComment,
   type,
   avatarSize = 'lg',
   hasUserName,
@@ -92,6 +95,7 @@ export const BaseCommentFeed = ({
           <PinnedLabel comment={comment} />
           <DropdownActions
             comment={comment}
+            pinnedComment={pinnedComment}
             type={type}
             hasPin={actionControls.hasPin}
             inCard={actionControls.inCard}
@@ -127,7 +131,14 @@ type MemoizedCommentFeed = React.MemoExoticComponent<React.FC<CommentProps>> & {
 
 const CommentFeed = React.memo(
   BaseCommentFeed,
-  ({ comment: prevComment, disabled: prevDisabled }, { comment, disabled }) => {
+  (
+    {
+      comment: prevComment,
+      pinnedComment: prevPinnedComment,
+      disabled: prevDisabled,
+    },
+    { comment, pinnedComment, disabled }
+  ) => {
     return (
       prevComment.content === comment.content &&
       prevComment.upvotes === comment.upvotes &&
@@ -135,7 +146,8 @@ const CommentFeed = React.memo(
       prevComment.state === comment.state &&
       prevComment.pinned === comment.pinned &&
       prevComment.author.isBlocked === comment.author.isBlocked &&
-      prevDisabled === disabled
+      prevDisabled === disabled &&
+      prevPinnedComment?.id === pinnedComment?.id
     )
   }
 ) as MemoizedCommentFeed
