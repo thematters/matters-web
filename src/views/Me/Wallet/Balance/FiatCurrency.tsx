@@ -43,7 +43,7 @@ const TopUpItem = ({
 
   return (
     <Menu.Item
-      text={<Translate id="topUp" />}
+      text={<FormattedMessage defaultMessage="Top Up" id="dTOtPO" />}
       icon={<IconWallet24 size="mdS" />}
       onClick={() => {
         if (hasEmail) {
