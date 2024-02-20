@@ -133,8 +133,6 @@ const PinButton = ({
           ? async () => {
               try {
                 await pinComment()
-                // TODO: REFETCH_ARTICLE_DETAIL
-                // window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
               } catch (e) {
                 // TODO: toast can't pinned message
               }
