@@ -93,7 +93,7 @@ export const facebookOauthUrl = async (type: OauthType) => {
   const { state, codeChallenge } = await generateSocialOauthParams(type)
   const clientId = process.env.NEXT_PUBLIC_FACEBOOK_CLIENT_ID
   const redirectUri = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/callback/${CALLBACK_PROVIDERS.Facebook}`
-  const url = `https://www.facebook.com/v17.0/dialog/oauth?response_type=code&scope=openid&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
+  const url = `https://www.facebook.com/v18.0/dialog/oauth?response_type=code&scope=openid&client_id=${clientId}&redirect_uri=${redirectUri}&state=${state}&code_challenge=${codeChallenge}&code_challenge_method=S256`
   return url
 }
 

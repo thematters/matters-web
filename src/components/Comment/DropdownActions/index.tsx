@@ -240,7 +240,19 @@ const DropdownActions = (props: DropdownActionsProps) => {
       type,
       commentId: comment.id,
       defaultContent: comment.content,
-      title: article ? 'editComment' : 'edit',
+      title: article ? (
+        <FormattedMessage
+          defaultMessage="Edit Comment"
+          id="9OIqBr"
+          description="src/components/Comment/DropdownActions/index.tsx"
+        />
+      ) : (
+        <FormattedMessage
+          defaultMessage="Edit"
+          id="LYl9+i"
+          description="src/components/Comment/DropdownActions/index.tsx"
+        />
+      ),
     },
     ({ openDialog }) => {
       return {
