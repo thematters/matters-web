@@ -2392,6 +2392,10 @@
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "zn83cE": {
+    "defaultMessage": "效果預覽",
+    "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
+  },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",
     "description": "ACTION_LIMIT_EXCEEDED"

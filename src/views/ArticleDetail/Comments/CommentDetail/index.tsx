@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
 import {
-  CommentType,
   QueryError,
   ThreadCommentBeta,
+  ThreadCommentType,
   usePublicQuery,
 } from '~/components'
 import { CommentDetailQuery } from '~/gql/graphql'
@@ -107,7 +107,7 @@ const CommentDetail = () => {
     return null
   }
 
-  const comment = data?.node as CommentType
+  const comment = data?.node as ThreadCommentType
 
   return (
     <section>

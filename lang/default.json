@@ -2392,6 +2392,10 @@
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "zn83cE": {
+    "defaultMessage": "Preview",
+    "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
+  },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",
     "description": "ACTION_LIMIT_EXCEEDED"
