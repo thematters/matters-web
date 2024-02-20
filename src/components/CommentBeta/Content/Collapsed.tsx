@@ -51,8 +51,10 @@ const Collapsed = ({
           onClick={() => {
             setCollapsed(false)
           }}
+          textColor="greyDarker"
+          textActiveColor="black"
         >
-          <TextIcon weight="normal" color="greyDarker">
+          <TextIcon>
             <FormattedMessage defaultMessage="Expand" id="0oLj/t" />
           </TextIcon>
         </Button>

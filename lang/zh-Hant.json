@@ -49,10 +49,6 @@
   "/5jk3i": {
     "defaultMessage": "訂閱成功！🎉"
   },
-  "/Aea3K": {
-    "defaultMessage": "評論被作者折疊",
-    "description": "src/components/CommentBeta/Content/index.tsx"
-  },
   "/BQWEh": {
     "defaultMessage": "最近 1 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -822,6 +818,10 @@
   "Hyr5ET": {
     "defaultMessage": "支持者",
     "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
+  },
+  "I8+06z": {
+    "defaultMessage": "評論已隱藏",
+    "description": "src/components/CommentBeta/Content/index.tsx"
   },
   "IKPYe9": {
     "defaultMessage": "查看",

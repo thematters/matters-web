@@ -178,8 +178,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
             {comments.map(
               (comment) =>
                 !comment.pinned &&
-                (comment.state === 'active' ||
-                  comment.state === 'collapsed') && (
+                comment.state !== 'archived' && (
                   <List.Item key={comment.id}>
                     <ThreadCommentBeta
                       comment={comment}
