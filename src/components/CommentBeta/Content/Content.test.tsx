@@ -26,9 +26,7 @@ describe('<Comemnt.Content>', () => {
         type="article"
       />
     )
-    expect(
-      screen.getByText('This comment has been collapsed by the author')
-    ).toBeInTheDocument()
+    expect(screen.getByText('Comment has been hidden')).toBeInTheDocument()
 
     // blocked by user
     cleanup()
@@ -42,12 +40,10 @@ describe('<Comemnt.Content>', () => {
         type="article"
       />
     )
-    expect(
-      screen.getByText('This comment has been collapsed by the author')
-    ).toBeInTheDocument()
-  })
+    expect(screen.getByText('Comment has been hidden')).toBeInTheDocument()
 
-  it('should render a banned Comment.Content', () => {
+    // banned by user
+    cleanup()
     render(
       <CommentContent
         comment={{
@@ -57,11 +53,7 @@ describe('<Comemnt.Content>', () => {
         type="article"
       />
     )
-    expect(
-      screen.getByText(
-        'This comment has been archived due to a violation of the user agreement'
-      )
-    ).toBeInTheDocument()
+    expect(screen.getByText('Comment has been hidden')).toBeInTheDocument()
   })
 
   it('should render an archived Comment.Content', () => {
