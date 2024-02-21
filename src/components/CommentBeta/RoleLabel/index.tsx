@@ -25,15 +25,9 @@ const fragments = {
   `,
 }
 
+// TODO: reuse <Label> component
+// https://github.com/thematters/matters-web/pull/4192#discussion_r1495549659
 const RoleLabel = ({ comment }: { comment: RoleLabelCommentFragment }) => {
-  // if (
-  //   !comment.fromDonator &&
-  //   comment.node.__typename === 'Article' &&
-  //   comment.author.id !== comment.node.author.id
-  // ) {
-  //   return null
-  // }
-
   if (
     comment.node.__typename === 'Article' &&
     comment.author.id === comment.node.author.id
