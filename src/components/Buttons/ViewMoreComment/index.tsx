@@ -22,11 +22,7 @@ export const ViewMoreCommentButton: React.FC<ViewMoreCommentButtonProps> = ({
 }) => (
   <div className={styles.container}>
     {loading ? (
-      !!placeholder ? (
-        placeholder
-      ) : (
-        <Spinner />
-      )
+      placeholder || <Spinner />
     ) : (
       <Button spacing={['xtight', 0]} textColor="greyDarker" {...props}>
         <TextIcon icon={<IconArrowDown16 />} spacing="xxtight">
