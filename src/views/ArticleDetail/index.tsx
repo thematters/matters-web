@@ -37,6 +37,7 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import { CommentsDialog } from './Comments/CommentsDialog'
 import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
@@ -437,16 +438,30 @@ const BaseArticleDetail = ({
 
       <Media at="sm">
         <Spacer size="xxxloose" />
-        <FixedToolbar
+        <CommentsDialog
+          id={article.id}
           article={article}
           articleDetails={article}
           translated={translated}
           translatedLanguage={translatedLanguage}
           privateFetched={privateFetched}
-          hasFingerprint={canReadFullContent}
           lock={lock}
           showCommentToolbar={showCommentToolbar}
-        />
+        >
+          {({ openDialog: openCommentsDialog }) => (
+            <FixedToolbar
+              article={article}
+              articleDetails={article}
+              translated={translated}
+              translatedLanguage={translatedLanguage}
+              privateFetched={privateFetched}
+              hasFingerprint={canReadFullContent}
+              lock={lock}
+              showCommentToolbar={showCommentToolbar}
+              openCommentsDialog={openCommentsDialog}
+            />
+          )}
+        </CommentsDialog>
       </Media>
 
       <Media at="md">

@@ -1,13 +1,25 @@
 import dynamic from 'next/dynamic'
-import { useEffect } from 'react'
 
-import { TOOLBAR_FIXEDTOOLBAR_ID } from '~/common/enums'
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import {
+  ArticleDetailPublicQuery,
+  ToolbarArticlePrivateFragment,
+  ToolbarArticlePublicFragment,
+} from '~/gql/graphql'
 
 interface CommentsDialogProps {
   id: string
   lock: boolean
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
+
+  // FixedToolbar
+  article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
+  articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
+  translated: boolean
+  translatedLanguage?: string | null
+  privateFetched: boolean
+  showCommentToolbar: boolean
+  openCommentsDialog?: () => void
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
@@ -18,38 +30,35 @@ const BaseCommentsDialogDialog = ({
   id,
   lock,
   children,
+
+  // from FixedToolbar
+  article,
+  articleDetails,
+  translated,
+  translatedLanguage,
+  privateFetched,
+  showCommentToolbar,
+  openCommentsDialog,
 }: CommentsDialogProps) => {
-  const { show, openDialog, closeDialog: _closeDialog } = useDialogSwitch(true)
-
-  const showDialog = () => {
-    const fixedToolbar = document.getElementById(TOOLBAR_FIXEDTOOLBAR_ID)
-    if (fixedToolbar) {
-      fixedToolbar.style.zIndex = 'var(--z-index-over-dialog)'
-    }
-  }
-
-  useEffect(() => {
-    if (show) {
-      showDialog()
-    }
-  }, [show])
-
-  const closeDialog = () => {
-    const fixedToolbar = document.getElementById(TOOLBAR_FIXEDTOOLBAR_ID)
-    if (fixedToolbar) {
-      setTimeout(() => {
-        fixedToolbar.style.zIndex = 'var(--z-index-bottom-bar)'
-      }, 300)
-    }
-    _closeDialog()
-  }
+  const { show, openDialog, closeDialog: closeDialog } = useDialogSwitch(true)
 
   return (
     <>
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <DynamicContent id={id} lock={lock} closeDialog={closeDialog} />
+        <DynamicContent
+          id={id}
+          lock={lock}
+          closeDialog={closeDialog}
+          article={article}
+          articleDetails={articleDetails}
+          translated={translated}
+          translatedLanguage={translatedLanguage}
+          privateFetched={privateFetched}
+          showCommentToolbar={showCommentToolbar}
+          openCommentsDialog={openCommentsDialog}
+        />
       </Dialog>
     </>
   )
