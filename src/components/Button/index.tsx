@@ -31,6 +31,7 @@ export type ButtonHeight =
   | '1.25rem'
   | '1.5rem'
   | '1.75rem'
+  | '1.875rem'
   | '2rem'
   | '2.25rem'
   | '2.5rem'
@@ -54,6 +55,7 @@ export type ButtonSpacingX =
   | 'baseTight'
   | 'tight'
   | 'base'
+  | 'baseLoose'
   | 'loose'
 
 type ButtonColor =

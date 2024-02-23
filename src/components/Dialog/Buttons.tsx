@@ -55,7 +55,10 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 
 export type DialogRoundedButtonProps = {
   text: React.ReactNode
-  color?: 'greyDarker' | 'green' | 'red'
+  textSize?: 'sm' | 'xm'
+  textWeight?: 'md' | 'normal'
+
+  color?: 'greyDarker' | 'green' | 'red' | 'white' | 'black'
   icon?: React.ReactNode
   loading?: boolean
 } & ButtonProps
@@ -63,7 +66,19 @@ export type DialogRoundedButtonProps = {
 export const RoundedButton: React.FC<
   React.PropsWithChildren<DialogRoundedButtonProps>
 > = forwardRef(
-  ({ text, color = 'green', loading, icon, disabled, ...restProps }, ref) => {
+  (
+    {
+      text,
+      textSize = 'xm',
+      textWeight = 'md',
+      color = 'green',
+      loading,
+      icon,
+      disabled,
+      ...restProps
+    },
+    ref
+  ) => {
     let buttonProps: ButtonProps = restProps
 
     switch (color) {
@@ -84,6 +99,19 @@ export const RoundedButton: React.FC<
       case 'red':
         buttonProps = { ...buttonProps, borderColor: 'red', textColor: 'red' }
         break
+      case 'white':
+        buttonProps = {
+          ...buttonProps,
+          textColor: 'white',
+        }
+        break
+      case 'black':
+        buttonProps = {
+          ...buttonProps,
+          borderColor: 'greyLight',
+          textColor: 'black',
+        }
+        break
     }
 
     return (
@@ -95,8 +123,8 @@ export const RoundedButton: React.FC<
       >
         <TextIcon
           icon={icon || (loading && <IconSpinner16 size="md" />)}
-          size="xm"
-          weight="md"
+          size={textSize}
+          weight={textWeight}
           textPlacement="left"
         >
           {!loading ? text : null}

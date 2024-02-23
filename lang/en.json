@@ -1134,10 +1134,6 @@
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
-  "QGBMmO": {
-    "defaultMessage": "Published",
-    "description": "src/components/Forms/CommentFormBeta/index.tsx"
-  },
   "QQSdHP": {
     "defaultMessage": "View More"
   },
@@ -1798,6 +1794,9 @@
     "defaultMessage": "Open IPNS page",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
+  "jwnump": {
+    "defaultMessage": "Comment..."
+  },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2110,6 +2109,9 @@
   },
   "sy+pv5": {
     "defaultMessage": "Email"
+  },
+  "syEQFE": {
+    "defaultMessage": "Publish"
   },
   "tBt9u0": {
     "defaultMessage": "Sign in",

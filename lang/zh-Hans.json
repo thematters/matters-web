@@ -1134,10 +1134,6 @@
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
-  "QGBMmO": {
-    "defaultMessage": "发布",
-    "description": "src/components/Forms/CommentFormBeta/index.tsx"
-  },
   "QQSdHP": {
     "defaultMessage": "查看更多"
   },
@@ -1798,6 +1794,9 @@
     "defaultMessage": "打开 IPNS 页面",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
+  "jwnump": {
+    "defaultMessage": "发布评论..."
+  },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 发布广播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2110,6 +2109,9 @@
   },
   "sy+pv5": {
     "defaultMessage": "邮箱"
+  },
+  "syEQFE": {
+    "defaultMessage": "发布"
   },
   "tBt9u0": {
     "defaultMessage": "登录",

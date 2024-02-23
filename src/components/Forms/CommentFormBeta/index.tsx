@@ -205,11 +205,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
             icon={isSubmitting && <IconSpinner16 size="sm" />}
           >
             {isSubmitting ? null : (
-              <FormattedMessage
-                defaultMessage="Published"
-                description="src/components/Forms/CommentFormBeta/index.tsx"
-                id="QGBMmO"
-              />
+              <FormattedMessage defaultMessage="Publish" id="syEQFE" />
             )}
           </TextIcon>
         </Button>

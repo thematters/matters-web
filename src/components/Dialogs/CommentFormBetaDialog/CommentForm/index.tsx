@@ -5,13 +5,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
 import { dom, stripHtml } from '~/common/utils'
-import {
-  CommentFormType,
-  Dialog,
-  Spinner,
-  Translate,
-  useMutation,
-} from '~/components'
+import { CommentFormType, Dialog, Spinner, useMutation } from '~/components'
 import PUT_COMMENT_BETA from '~/components/GQL/mutations/putCommentBeta'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import {
@@ -163,14 +157,39 @@ const CommentForm: React.FC<CommentFormProps> = ({
       <Dialog.Header
         title=""
         closeDialog={closeDialog}
-        rightBtn={
-          <Dialog.TextButton
-            type="submit"
-            form={formId}
-            disabled={isSubmitting || !isValid}
-            text={<Translate zh_hant="送出" zh_hans="送出" en="Send" />}
-            loading={isSubmitting}
+        leftBtn={
+          <Dialog.RoundedButton
+            disabled={isSubmitting}
+            text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
+            textSize="sm"
+            textWeight="normal"
+            bgColor="white"
+            color="black"
+            spacing={[0, 'baseLoose']}
+            size={[null, '1.875rem']}
+            onClick={closeDialog}
           />
+        }
+        rightBtn={
+          <>
+            {contentCount > MAX_ARTICLE_COMMENT_LENGTH && (
+              <div className={styles.count}>
+                {contentCount}/{MAX_ARTICLE_COMMENT_LENGTH}
+              </div>
+            )}
+            <Dialog.RoundedButton
+              type="submit"
+              form={formId}
+              disabled={isSubmitting || !isValid}
+              text={<FormattedMessage defaultMessage="Publish" id="syEQFE" />}
+              textSize="sm"
+              textWeight="normal"
+              bgColor="green"
+              color="white"
+              spacing={[0, 'baseLoose']}
+              size={[null, '1.875rem']}
+            />
+          </>
         }
       />
 
@@ -181,25 +200,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
           <CommentEditor content={content} update={onUpdate} />
         </form>
       </Dialog.Content>
-
-      <Dialog.Footer
-        smUpBtns={
-          <>
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
-              color="greyDarker"
-              onClick={closeDialog}
-            />
-            <Dialog.TextButton
-              type="submit"
-              form={formId}
-              disabled={isSubmitting || !isValid}
-              text={<Translate zh_hant="送出" zh_hans="送出" en="Send" />}
-              loading={isSubmitting}
-            />
-          </>
-        }
-      />
     </>
   )
 }

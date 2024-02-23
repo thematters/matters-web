@@ -1,9 +1,6 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { EditorContent, useCommentEditor } from '@matters/matters-editor'
-import { useContext } from 'react'
-
-import { translate } from '~/common/utils'
-import { LanguageContext } from '~/components'
+import { useIntl } from 'react-intl'
 
 import { BubbleMenu } from '../Article/BubbleMenu'
 import { makeMentionSuggestion } from '../Article/extensions'
@@ -16,17 +13,15 @@ interface Props {
 }
 
 const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
-  const { lang } = useContext(LanguageContext)
   const client = useApolloClient()
+  const intl = useIntl()
 
   const editor = useCommentEditor({
     placeholder:
       placeholder ||
-      translate({
-        zh_hant: '發表你的評論…',
-        zh_hans: '发表你的评论…',
-        en: 'Enter comment…',
-        lang,
+      intl.formatMessage({
+        id: 'jwnump',
+        defaultMessage: 'Comment...',
       }),
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
