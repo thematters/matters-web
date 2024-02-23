@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 interface DialogContentProps {
   noSpacing?: boolean
   smExtraSpacing?: boolean
-  fixedHeight?: boolean
+  fixedHeight?: boolean | 90
   noSpacingBottom?: boolean
   noMaxHeight?: boolean
 }
@@ -30,8 +30,13 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> & {
     [styles.noMaxHeight]: !!noMaxHeight,
   })
 
+  const contentStyle = {
+    height: fixedHeight === 90 ? `calc(90vh - 4.25rem)` : undefined,
+    maxHeight: fixedHeight === 90 ? `calc(90vh - 4.25rem)` : undefined,
+  }
+
   return (
-    <section className={contentClasses} data-dialog-entity>
+    <section className={contentClasses} style={contentStyle} data-dialog-entity>
       {children}
     </section>
   )

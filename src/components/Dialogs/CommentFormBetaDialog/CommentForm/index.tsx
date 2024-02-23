@@ -174,7 +174,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         }
       />
 
-      <Dialog.Content noMaxHeight>
+      <Dialog.Content fixedHeight={90}>
         {context && <section className={styles.context}>{context}</section>}
 
         <form className={styles.form} id={formId} onSubmit={handleSubmit}>
