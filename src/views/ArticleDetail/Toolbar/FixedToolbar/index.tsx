@@ -109,13 +109,13 @@ const FixedToolbar = ({
       id={TOOLBAR_FIXEDTOOLBAR_ID}
     >
       <CommentFormBetaDialog articleId={article.id} type="article">
-        {({ openDialog: openFormBetaDialog }) => (
+        {({ openDialog: openCommentFormBetaDialog }) => (
           <section className={styles.buttons}>
             {showCommentToolbar && (
               <button
                 className={styles.commentButton}
                 onClick={() => {
-                  openFormBetaDialog()
+                  openCommentFormBetaDialog()
                 }}
                 disabled={lock}
               >
@@ -149,6 +149,8 @@ const FixedToolbar = ({
                 onClick={() => {
                   if (openCommentsDialog) {
                     openCommentsDialog()
+                  } else {
+                    openCommentFormBetaDialog()
                   }
                 }}
                 {...buttonProps}

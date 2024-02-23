@@ -458,7 +458,9 @@ const BaseArticleDetail = ({
               hasFingerprint={canReadFullContent}
               lock={lock}
               showCommentToolbar={showCommentToolbar}
-              openCommentsDialog={openCommentsDialog}
+              openCommentsDialog={
+                article.commentCount > 0 ? openCommentsDialog : undefined
+              }
             />
           )}
         </CommentsDialog>
