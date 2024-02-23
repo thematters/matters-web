@@ -56,7 +56,7 @@ const CommentsDialogContent = ({
         }
       />
 
-      <Dialog.Content fixedHeight={90}>
+      <Dialog.Content fixedHeight>
         <LatestComments id={id} lock={lock} />
 
         <section className={styles.fixedToolbar}>
