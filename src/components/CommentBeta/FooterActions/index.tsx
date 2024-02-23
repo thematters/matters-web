@@ -6,8 +6,10 @@ import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import { makeMentionElement, translate } from '~/common/utils'
 import {
   CommentFormBeta,
+  CommentFormBetaDialog,
   CommentFormType,
   LanguageContext,
+  Media,
   Spacer,
   toast,
   ViewerContext,
@@ -152,13 +154,43 @@ const BaseFooterActions = ({
         <section className={styles.left}>
           {hasUpvote && <UpvoteButton {...buttonProps} />}
           {hasReply && (
-            <ReplyButton
-              type={type}
-              {...buttonProps}
-              {...replyButtonProps}
-              {...replyCustomButtonProps}
-              onClick={toggleShowForm}
-            />
+            <>
+              <Media at="sm">
+                <CommentFormBetaDialog
+                  articleId={article?.id}
+                  type={'article'}
+                  replyToId={comment.id}
+                  parentId={comment.parentComment?.id || comment.id}
+                  submitCallback={submitCallback}
+                  // closeCallback={() => setShowForm(false)}
+                  isInCommentDetail={isInCommentDetail}
+                  defaultContent={`${makeMentionElement(
+                    comment.author.id,
+                    comment.author.userName || '',
+                    comment.author.displayName || ''
+                  )} `}
+                >
+                  {({ openDialog }) => (
+                    <ReplyButton
+                      type={type}
+                      {...buttonProps}
+                      {...replyButtonProps}
+                      {...replyCustomButtonProps}
+                      onClick={openDialog}
+                    />
+                  )}
+                </CommentFormBetaDialog>
+              </Media>
+              <Media greaterThan="sm">
+                <ReplyButton
+                  type={type}
+                  {...buttonProps}
+                  {...replyButtonProps}
+                  {...replyCustomButtonProps}
+                  onClick={toggleShowForm}
+                />
+              </Media>
+            </>
           )}
         </section>
       </footer>

@@ -3,7 +3,12 @@ import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID, TOOLBAR_FIXEDTOOLBAR_ID } from '~/common/enums'
 import { toLocale, toPath } from '~/common/utils'
-import { BookmarkButton, ButtonProps, ReCaptchaProvider } from '~/components'
+import {
+  BookmarkButton,
+  ButtonProps,
+  CommentFormBetaDialog,
+  ReCaptchaProvider,
+} from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
@@ -14,7 +19,6 @@ import {
 } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
-import { CommentsDialog } from '../../Comments/CommentsDialog'
 import CommentButton from '../CommentButton'
 import DonationButton from '../DonationButton'
 import styles from './styles.module.css'
@@ -27,6 +31,7 @@ export type FixedToolbarProps = {
   privateFetched: boolean
   lock: boolean
   showCommentToolbar: boolean
+  openCommentsDialog?: () => void
 } & DropdownActionsControls
 
 const fragments = {
@@ -70,6 +75,7 @@ const FixedToolbar = ({
   privateFetched,
   lock,
   showCommentToolbar,
+  openCommentsDialog,
   ...props
 }: FixedToolbarProps) => {
   const path = toPath({ page: 'articleDetail', article })
@@ -97,19 +103,19 @@ const FixedToolbar = ({
   }
 
   return (
-    <CommentsDialog id={article.id} lock={lock}>
-      {({ openDialog: openCommentsDialog }) => (
-        <section
-          className={styles.toolbar}
-          data-test-id={TEST_ID.ARTICLE_TOOLBAR}
-          id={TOOLBAR_FIXEDTOOLBAR_ID}
-        >
+    <section
+      className={styles.toolbar}
+      data-test-id={TEST_ID.ARTICLE_TOOLBAR}
+      id={TOOLBAR_FIXEDTOOLBAR_ID}
+    >
+      <CommentFormBetaDialog articleId={article.id} type="article">
+        {({ openDialog: openFormBetaDialog }) => (
           <section className={styles.buttons}>
             {showCommentToolbar && (
               <button
                 className={styles.commentButton}
                 onClick={() => {
-                  openCommentsDialog()
+                  openFormBetaDialog()
                 }}
                 disabled={lock}
               >
@@ -141,7 +147,9 @@ const FixedToolbar = ({
                 textWeight="normal"
                 textIconSpacing="xxtight"
                 onClick={() => {
-                  openCommentsDialog()
+                  if (openCommentsDialog) {
+                    openCommentsDialog()
+                  }
                 }}
                 {...buttonProps}
               />
@@ -175,9 +183,9 @@ const FixedToolbar = ({
               />
             )}
           </section>
-        </section>
-      )}
-    </CommentsDialog>
+        )}
+      </CommentFormBetaDialog>
+    </section>
   )
 }
 
