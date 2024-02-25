@@ -1,5 +1,6 @@
 export * from './analytics'
 export * from './chart'
+export * from './contract'
 export * from './cookie'
 export * from './csp'
 export * from './errorCode'

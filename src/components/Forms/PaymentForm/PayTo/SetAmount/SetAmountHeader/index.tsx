@@ -5,7 +5,7 @@ import { Button, IconInfo24, TextIcon, Translate } from '~/components'
 
 import CurrencyIndicator from './CurrencyIndicator'
 import styles from './styles.module.css'
-import WhyPolygonDialog from './WhyPolygonDialog'
+import WhyOptimismDialog from './WhyOptimismDialog'
 
 type SetAmountHeaderProps = {
   currency: CURRENCY
@@ -72,13 +72,13 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
               )}
             </>
 
-            <WhyPolygonDialog>
+            <WhyOptimismDialog>
               {({ openDialog }) => (
                 <Button onClick={openDialog}>
                   <TextIcon icon={<IconInfo24 size="md" color="grey" />} />
                 </Button>
               )}
-            </WhyPolygonDialog>
+            </WhyOptimismDialog>
           </>
         )}
       </section>
