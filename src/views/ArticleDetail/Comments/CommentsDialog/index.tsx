@@ -1,8 +1,15 @@
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { OPEN_ARTICLE_DETAIL_DIALOG } from '~/common/enums'
-import { Dialog, useDialogSwitch, useEventListener } from '~/components'
+import {
+  Dialog,
+  IconArrowLeft24,
+  IconClose24,
+  useDialogSwitch,
+  useEventListener,
+} from '~/components'
 import {
   ArticleDetailPublicQuery,
   ToolbarArticlePrivateFragment,
@@ -29,11 +36,19 @@ interface CommentsDialogProps {
 }
 
 const DynamicListContent = dynamic(() => import('./ListContent'), {
-  loading: () => <Placeholder />,
+  loading: () => (
+    <Dialog.Content fixedHeight>
+      <Placeholder />
+    </Dialog.Content>
+  ),
 })
 
 const DynamicDetailContent = dynamic(() => import('./DetailContent'), {
-  loading: () => <Placeholder />,
+  loading: () => (
+    <Dialog.Content fixedHeight>
+      <Placeholder />
+    </Dialog.Content>
+  ),
 })
 
 const BaseCommentsDialogDialog = ({
@@ -69,6 +84,39 @@ const BaseCommentsDialogDialog = ({
           closeDialog()
         }}
       >
+        <Dialog.Header
+          title={
+            <>
+              {isInCommentList && (
+                <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
+              )}
+              {isInCommentDetail && (
+                <FormattedMessage
+                  defaultMessage="Comment Details"
+                  id="4OMGUj"
+                />
+              )}
+            </>
+          }
+          leftBtn={
+            isInCommentDetail && (
+              <button onClick={backToCommentList}>
+                <IconArrowLeft24 size="md" />
+              </button>
+            )
+          }
+          titleLeft={isInCommentList}
+          rightBtn={
+            <button
+              onClick={() => {
+                backToCommentList()
+                closeDialog()
+              }}
+            >
+              <IconClose24 size="md" />
+            </button>
+          }
+        />
         {isInCommentList && (
           <DynamicListContent
             id={id}

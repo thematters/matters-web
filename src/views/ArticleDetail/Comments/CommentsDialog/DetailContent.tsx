@@ -1,6 +1,4 @@
-import { FormattedMessage } from 'react-intl'
-
-import { Dialog, IconArrowLeft24, IconClose24 } from '~/components'
+import { Dialog } from '~/components'
 
 import CommentDetail from '../CommentDetail'
 
@@ -17,30 +15,7 @@ const CommentsDialogDetailContent = ({
 }: CommentsDialogDetailContentProps) => {
   return (
     <>
-      <Dialog.Header
-        title={
-          <section>
-            <FormattedMessage defaultMessage="Comment Details" id="4OMGUj" />
-          </section>
-        }
-        leftBtn={
-          <button onClick={backToCommentList}>
-            <IconArrowLeft24 size="md" />
-          </button>
-        }
-        rightBtn={
-          <button
-            onClick={() => {
-              backToCommentList()
-              closeDialog()
-            }}
-          >
-            <IconClose24 size="md" />
-          </button>
-        }
-      />
-
-      <Dialog.Content>
+      <Dialog.Content fixedHeight>
         <CommentDetail />
       </Dialog.Content>
     </>

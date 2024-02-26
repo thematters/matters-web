@@ -1,6 +1,4 @@
-import { FormattedMessage } from 'react-intl'
-
-import { Dialog, IconClose24 } from '~/components'
+import { Dialog } from '~/components'
 import {
   ArticleDetailPublicQuery,
   ToolbarArticlePrivateFragment,
@@ -42,20 +40,6 @@ const CommentsDialogListContent = ({
 }: CommentsDialogListContentProps) => {
   return (
     <>
-      <Dialog.Header
-        title={
-          <>
-            <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
-          </>
-        }
-        titleLeft
-        rightBtn={
-          <button onClick={closeDialog}>
-            <IconClose24 size="md" />
-          </button>
-        }
-      />
-
       <Dialog.Content fixedHeight>
         <LatestComments id={id} lock={lock} />
 
