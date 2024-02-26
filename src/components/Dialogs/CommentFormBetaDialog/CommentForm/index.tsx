@@ -165,6 +165,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
             textWeight="normal"
             bgColor="white"
             color="black"
+            borderWidth="sm"
             spacing={[0, 'baseLoose']}
             size={[null, '1.875rem']}
             onClick={closeDialog}
