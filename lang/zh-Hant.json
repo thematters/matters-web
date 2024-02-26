@@ -256,6 +256,9 @@
     "defaultMessage": "資源不存在",
     "description": "ASSET_NOT_FOUND"
   },
+  "4OMGUj": {
+    "defaultMessage": "評論詳情"
+  },
   "4RpVDe": {
     "defaultMessage": "刪除草稿"
   },
@@ -2213,10 +2216,6 @@
   },
   "w+6UiO": {
     "defaultMessage": "新增邀請"
-  },
-  "w/Bet8": {
-    "defaultMessage": "評論詳情",
-    "description": "src/views/ArticleDetail/index.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "評論"

@@ -1,16 +1,22 @@
 import dynamic from 'next/dynamic'
+import { useState } from 'react'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { OPEN_ARTICLE_DETAIL_DIALOG } from '~/common/enums'
+import { Dialog, useDialogSwitch, useEventListener } from '~/components'
 import {
   ArticleDetailPublicQuery,
   ToolbarArticlePrivateFragment,
   ToolbarArticlePublicFragment,
 } from '~/gql/graphql'
 
+import { Placeholder } from '../Placeholder'
+
+type Step = 'commentList' | 'commentDetail'
 interface CommentsDialogProps {
   id: string
   lock: boolean
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
+  step?: Step
 
   // FixedToolbar
   article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
@@ -22,14 +28,19 @@ interface CommentsDialogProps {
   openCommentsDialog?: () => void
 }
 
-const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+const DynamicListContent = dynamic(() => import('./ListContent'), {
+  loading: () => <Placeholder />,
+})
+
+const DynamicDetailContent = dynamic(() => import('./DetailContent'), {
+  loading: () => <Placeholder />,
 })
 
 const BaseCommentsDialogDialog = ({
   id,
   lock,
   children,
+  step: _step = 'commentList',
 
   // from FixedToolbar
   article,
@@ -40,32 +51,63 @@ const BaseCommentsDialogDialog = ({
   showCommentToolbar,
   openCommentsDialog,
 }: CommentsDialogProps) => {
-  const { show, openDialog, closeDialog: closeDialog } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const [step, setStep] = useState<Step>(_step)
+  const isInCommentDetail = step === 'commentDetail'
+  const isInCommentList = step === 'commentList'
+
+  const backToCommentList = () => setStep('commentList')
 
   return (
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
-        <DynamicContent
-          id={id}
-          lock={lock}
-          closeDialog={closeDialog}
-          article={article}
-          articleDetails={articleDetails}
-          translated={translated}
-          translatedLanguage={translatedLanguage}
-          privateFetched={privateFetched}
-          showCommentToolbar={showCommentToolbar}
-          openCommentsDialog={openCommentsDialog}
-        />
+      <Dialog
+        isOpen={show}
+        onDismiss={() => {
+          backToCommentList()
+          closeDialog()
+        }}
+      >
+        {isInCommentList && (
+          <DynamicListContent
+            id={id}
+            lock={lock}
+            closeDialog={closeDialog}
+            article={article}
+            articleDetails={articleDetails}
+            translated={translated}
+            translatedLanguage={translatedLanguage}
+            privateFetched={privateFetched}
+            showCommentToolbar={showCommentToolbar}
+            openCommentsDialog={openCommentsDialog}
+          />
+        )}
+        {isInCommentDetail && (
+          <DynamicDetailContent
+            closeDialog={closeDialog}
+            backToCommentList={backToCommentList}
+          />
+        )}
       </Dialog>
     </>
   )
 }
 
-export const CommentsDialog = (props: CommentsDialogProps) => (
-  <Dialog.Lazy mounted={<BaseCommentsDialogDialog {...props} />}>
-    {({ openDialog }) => <>{props.children({ openDialog })}</>}
-  </Dialog.Lazy>
-)
+export const CommentsDialog = (props: CommentsDialogProps) => {
+  const [step, setStep] = useState<Step>('commentList')
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_ARTICLE_DETAIL_DIALOG, () => {
+      setStep('commentDetail')
+      setTimeout(() => {
+        openDialog()
+      })
+    })
+    return <>{props.children && props.children({ openDialog })}</>
+  }
+  return (
+    <Dialog.Lazy mounted={<BaseCommentsDialogDialog {...props} step={step} />}>
+      {({ openDialog }) => <Children openDialog={openDialog} />}
+    </Dialog.Lazy>
+  )
+}

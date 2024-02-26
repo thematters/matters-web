@@ -256,6 +256,9 @@
     "defaultMessage": "Asset not found",
     "description": "ASSET_NOT_FOUND"
   },
+  "4OMGUj": {
+    "defaultMessage": "Comment Details"
+  },
   "4RpVDe": {
     "defaultMessage": "Delete Draft"
   },
@@ -2213,10 +2216,6 @@
   },
   "w+6UiO": {
     "defaultMessage": "Add Invitation"
-  },
-  "w/Bet8": {
-    "defaultMessage": "Comment Details",
-    "description": "src/views/ArticleDetail/index.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "Comments"

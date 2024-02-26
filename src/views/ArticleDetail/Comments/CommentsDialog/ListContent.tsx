@@ -11,7 +11,7 @@ import FixedToolbar from '../../Toolbar/FixedToolbar'
 import LatestComments from '../LatestComments'
 import styles from './styles.module.css'
 
-interface CommentsDialogContentProps {
+interface CommentsDialogListContentProps {
   id: string
   lock: boolean
   closeDialog: () => void
@@ -26,7 +26,7 @@ interface CommentsDialogContentProps {
   openCommentsDialog?: () => void
 }
 
-const CommentsDialogContent = ({
+const CommentsDialogListContent = ({
   id,
   lock,
   closeDialog,
@@ -39,7 +39,7 @@ const CommentsDialogContent = ({
   privateFetched,
   showCommentToolbar,
   openCommentsDialog,
-}: CommentsDialogContentProps) => {
+}: CommentsDialogListContentProps) => {
   return (
     <>
       <Dialog.Header
@@ -76,4 +76,4 @@ const CommentsDialogContent = ({
   )
 }
 
-export default CommentsDialogContent
+export default CommentsDialogListContent
