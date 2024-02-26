@@ -1,13 +1,20 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID, TOOLBAR_FIXEDTOOLBAR_ID } from '~/common/enums'
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  TEST_ID,
+  TOOLBAR_FIXEDTOOLBAR_ID,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
 import { toLocale, toPath } from '~/common/utils'
 import {
   BookmarkButton,
   ButtonProps,
   CommentFormBetaDialog,
   ReCaptchaProvider,
+  ViewerContext,
 } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -78,6 +85,7 @@ const FixedToolbar = ({
   openCommentsDialog,
   ...props
 }: FixedToolbarProps) => {
+  const viewer = useContext(ViewerContext)
   const path = toPath({ page: 'articleDetail', article })
   const sharePath =
     translated && translatedLanguage
@@ -115,6 +123,17 @@ const FixedToolbar = ({
               <button
                 className={styles.commentButton}
                 onClick={() => {
+                  if (!viewer.isAuthed) {
+                    window.dispatchEvent(
+                      new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                        detail: {
+                          trigger: UNIVERSAL_AUTH_TRIGGER.replyComment,
+                        },
+                      })
+                    )
+                    return
+                  }
+
                   openCommentFormBetaDialog()
                 }}
                 disabled={lock}
