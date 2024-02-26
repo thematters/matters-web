@@ -22,7 +22,7 @@ ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME} 的经济系统支援法币（港币�
 
 *   [Matters 支付与提现指南](https://matters.town/@hi176/387119?locale=zh-Hans)
 
-如果你想用手机进行登入、绑定钱包及进行 USDT-Polygon 支付，请参考我们的手机版专属指南，可以为你解决绝大部分的疑惑。
+如果你想用手机进行登入、绑定钱包及进行 USDT-Optimism 支付，请参考我们的手机版专属指南，可以为你解决绝大部分的疑惑。
 
 *   [Matters 钱包与支付指南（手机版）](https://matters.town/@hi176/387120)
 

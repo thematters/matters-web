@@ -40,6 +40,7 @@ export enum QUOTE_CURRENCY {
 
 export enum CHAIN {
   POLYGON = 'Polygon',
+  OPTIMISM = 'Optimism',
 }
 
 export const PLATFORM_FEE = {

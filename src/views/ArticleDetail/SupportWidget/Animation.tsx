@@ -105,9 +105,9 @@ const Animation: React.FC<Props> = ({
         )}
         {isShipWaiting && currency === CURRENCY.USDT && (
           <Translate
-            zh_hant="持續與 Polygon 網絡同步，稍後更新至 Matters"
-            zh_hans="持续与 Polygon 网络同步，稍后更新至 Matters"
-            en="Request on Polygon network will be confirmed and synced to Matters in a bit"
+            zh_hant="持續與 Optimism 網絡同步，稍後更新至 Matters"
+            zh_hans="持续与 Optimism 网络同步，稍后更新至 Matters"
+            en="Request on Optimism network will be confirmed and synced to Matters in a bit"
           />
         )}
       </p>

@@ -9,11 +9,11 @@ import {
   useDialogSwitch,
 } from '~/components'
 
-interface WhyPolygonDialogProps {
+interface WhyOptimismDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
+const WhyOptimismDialog = ({ children }: WhyOptimismDialogProps) => {
   const { lang } = useContext(LanguageContext)
 
   const {
@@ -101,10 +101,10 @@ const WhyPolygonDialog = ({ children }: WhyPolygonDialogProps) => {
   )
 }
 
-const LazyWhyPolygonDialog = (props: WhyPolygonDialogProps) => (
-  <Dialog.Lazy mounted={<WhyPolygonDialog {...props} />}>
+const LazyWhyOptimismDialog = (props: WhyOptimismDialogProps) => (
+  <Dialog.Lazy mounted={<WhyOptimismDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 
-export default LazyWhyPolygonDialog
+export default LazyWhyOptimismDialog
