@@ -12,16 +12,6 @@
   border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
   will-change: transform, top;
 
-  &::before {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    height: 300vh;
-    content: '';
-    background: var(--color-white);
-  }
-
   & :nth-last-child(1 of [data-dialog-entity='true']) {
     @media (--sm-down) {
       padding-bottom: var(--spacing-xx-loose);
@@ -45,10 +35,6 @@
   @media (--sm-up) {
     border-radius: var(--spacing-x-tight);
     will-change: opacity;
-
-    &::before {
-      display: none;
-    }
   }
 }
 

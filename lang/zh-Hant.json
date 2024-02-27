@@ -252,6 +252,10 @@
   "4RpVDe": {
     "defaultMessage": "刪除草稿"
   },
+  "4km7Yc": {
+    "defaultMessage": "突破歷史！你點燃的火炬是遊牧者路途上最耀眼的支持。火閃電徽章紀念你曾參與「遊牧者計畫」並達到最高等級。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "4l6vz1": {
     "defaultMessage": "複製"
   },
@@ -444,6 +448,10 @@
   "9J0iCw": {
     "defaultMessage": "已註銷用戶"
   },
+  "9OIqBr": {
+    "defaultMessage": "編輯評論",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
   "9UNFGm": {
     "defaultMessage": "交易密碼"
   },
@@ -609,10 +617,6 @@
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "DdVBFV": {
-    "defaultMessage": "徽章長出了羽翼，夢想的光輪正開始轉動，你已在遊牧者之路聚集了 10 位夥伴。再邀請 10 位同行者，一起邁向終點站，最高等級的榮譽正在等著你。",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "DjIpR6": {
     "defaultMessage": "設置封面"
   },
@@ -645,6 +649,9 @@
   "EZMrtJ": {
     "defaultMessage": "在 {circleName} 的廣播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Eb1U+/": {
+    "defaultMessage": "儲值成功"
   },
   "EoeUjA": {
     "defaultMessage": "你無權限進行該操作",
@@ -731,10 +738,6 @@
   "GugBCe": {
     "defaultMessage": "本月新增追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
-  },
-  "GxTjwK": {
-    "defaultMessage": "月色之下夢想即將實現，月之夢徽章代表你參與了遊牧者計畫（參賽或支持了優質計畫）。接下來邀請 5 位夥伴一同踏上旅程，將獲得更高等級的徽章。",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "H0JBH6": {
     "defaultMessage": "登出"
@@ -901,8 +904,16 @@
     "defaultMessage": "{articleCount} 篇文章",
     "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
   },
+  "LUWKnn": {
+    "defaultMessage": "徽章長出了羽翼，夢想的光輪正開始轉動。光輪號徽章紀念你曾參與「遊牧者計畫」。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "LWE7oq": {
     "defaultMessage": "草稿保存中，確定要離開嗎？"
+  },
+  "LYl9+i": {
+    "defaultMessage": "編輯",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "Lb0JsC": {
     "defaultMessage": "你封鎖了該用戶"
@@ -1297,10 +1308,6 @@
     "defaultMessage": "去綁定",
     "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
-  "XfkltT": {
-    "defaultMessage": "流星雨的絢爛光芒足以點亮夜空，你已經邀請了 5 位夥伴關注遊牧者計畫，再邀請 5 位就能繼續升級！",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "XgdZSb": {
     "defaultMessage": "值得關注"
   },
@@ -1509,6 +1516,10 @@
     "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dAPUJp": {
+    "defaultMessage": "流星雨的絢爛光芒足以點亮夜空。流星號徽章紀念你曾參與「遊牧者計畫」。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "dAvP6d": {
     "defaultMessage": "尚無封鎖紀錄",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
@@ -1636,6 +1647,10 @@
   },
   "iEJeQH": {
     "defaultMessage": "設置 Liker ID"
+  },
+  "iTcMqz": {
+    "defaultMessage": "月色之下，夢想即將實現。月之夢徽章紀念你曾參與「遊牧者計畫」。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "icdrwy": {
     "defaultMessage": "追蹤了你",
@@ -1849,10 +1864,6 @@
   "ohgTH4": {
     "defaultMessage": "追蹤中",
     "description": "src/components/UserProfile/index.tsx"
-  },
-  "p0oPHP": {
-    "defaultMessage": "突破歷史！你點燃的火炬將是遊牧者路途上最耀眼的支持。恭喜你與 20 位好友一同抵達遊牧者計畫的終點，並獲得最高等級火閃電徽章。",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "p5qZnJ": {
     "defaultMessage": "讚賞了",
@@ -2242,9 +2253,6 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "znJ06J": {
-    "defaultMessage": "<a>關於遊牧者計畫</a>"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",

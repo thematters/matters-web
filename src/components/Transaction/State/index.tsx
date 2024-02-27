@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { featureSupportedChains } from '~/common/utils'
+import { explorers } from '~/common/utils'
 import {
   Button,
   IconExternalLink16,
@@ -34,8 +34,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
   }
 
   if (state === TransactionState.Succeeded && !!blockchainTx) {
-    const targetNetwork = featureSupportedChains.curation[0]
-    const explorerUrl = targetNetwork.blockExplorers?.default.url!
+    const explorerUrl = explorers[blockchainTx.chain].url
 
     return (
       <Button

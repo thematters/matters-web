@@ -9,6 +9,7 @@ import { waitForTransaction } from 'wagmi/actions'
 
 import {
   CHAIN,
+  contract,
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
@@ -211,12 +212,12 @@ const USDTProcessingForm: React.FC<Props> = ({
     isError,
     write: curate,
   } = useContractWrite({
-    address: process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS as `0x${string}`,
+    address: contract.Optimism.curationAddress,
     abi: CurationABI,
     functionName: 'curate',
     args: [
       recipient.info.ethAddress as `0x${string}`,
-      process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
+      contract.Optimism.tokenAddress,
       parseUnits(amount.toString() as `${number}`, balanceUSDTData?.decimals!),
       `ipfs://${article?.dataHash}`,
     ],
@@ -234,7 +235,7 @@ const USDTProcessingForm: React.FC<Props> = ({
         purpose: 'donation',
         recipientId: recipient.id,
         targetId,
-        chain: CHAIN.POLYGON,
+        chain: CHAIN.OPTIMISM,
         txHash: data.hash,
       },
       update: (cache) => {
