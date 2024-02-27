@@ -2,13 +2,13 @@
   display: flex;
   flex-direction: column;
   flex-shrink: 1;
-  max-height: calc(90vh - 4.25rem); /* 4.25rem is the height of header */
+  max-height: calc(80vh - 4.25rem); /* 4.25rem is the height of header */
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
   &.fixedHeight {
-    height: calc(90vh - 4.25rem); /* 4.25rem is the height of header */
+    height: calc(80vh - 4.25rem); /* 4.25rem is the height of header */
 
     @media (--sm-up) {
       height: min(34rem, 64vh);
