@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { OPEN_ARTICLE_DETAIL_DIALOG } from '~/common/enums'
+import { OPEN_COMMENT_DETAIL_DIALOG } from '~/common/enums'
 import {
   Dialog,
   IconArrowLeft24,
@@ -145,7 +145,7 @@ const BaseCommentsDialogDialog = ({
 export const CommentsDialog = (props: CommentsDialogProps) => {
   const [step, setStep] = useState<Step>('commentList')
   const Children = ({ openDialog }: { openDialog: () => void }) => {
-    useEventListener(OPEN_ARTICLE_DETAIL_DIALOG, () => {
+    useEventListener(OPEN_COMMENT_DETAIL_DIALOG, () => {
       setStep('commentDetail')
       setTimeout(() => {
         openDialog()

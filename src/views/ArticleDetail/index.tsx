@@ -6,7 +6,7 @@ import { useIntl } from 'react-intl'
 import { Waypoint } from 'react-waypoint'
 
 import {
-  OPEN_ARTICLE_DETAIL_DIALOG,
+  OPEN_COMMENT_DETAIL_DIALOG,
   REFERRAL_QUERY_REFERRAL_KEY,
   URL_QS,
 } from '~/common/enums'
@@ -247,7 +247,7 @@ const BaseArticleDetail = ({
     }
     setTimeout(() => {
       setIsOpen(true)
-      window.dispatchEvent(new CustomEvent(OPEN_ARTICLE_DETAIL_DIALOG))
+      window.dispatchEvent(new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG))
     }, 500)
   }, [parentId])
 
