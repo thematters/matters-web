@@ -2,6 +2,7 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { Waypoint } from 'react-waypoint'
 
 import { REFERRAL_QUERY_REFERRAL_KEY, URL_QS } from '~/common/enums'
@@ -36,6 +37,7 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
 import {
@@ -65,9 +67,10 @@ const DynamicCollection = dynamic(() => import('./Collection'), {
   ssr: false,
   loading: () => <Spinner />,
 })
-const DynamicResponse = dynamic(() => import('./Responses'), {
+
+const DynamicComments = dynamic(() => import('./Comments'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <CommentsPlaceholder />,
 })
 const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ssr: false,
@@ -110,6 +113,7 @@ const BaseArticleDetail = ({
   const { getQuery, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
+  const intl = useIntl()
 
   const features = useFeatures()
   const [showFloatToolbar, setShowFloatToolbar] = useState(true)
@@ -259,9 +263,19 @@ const BaseArticleDetail = ({
 
       <State article={article} />
 
-      <Drawer isOpen={isOpen} onClose={toggleDrawer} title={'Comment'}>
-        <>Hello Comment Drawer</>
-      </Drawer>
+      <Media greaterThan="sm">
+        <Drawer
+          isOpen={isOpen}
+          onClose={toggleDrawer}
+          title={intl.formatMessage({
+            defaultMessage: 'Comment',
+            description: 'src/views/ArticleDetail/index.tsx',
+            id: 'OsX3KM',
+          })}
+        >
+          <DynamicComments id={article.id} lock={!canReadFullContent} />
+        </Drawer>
+      </Media>
 
       <section className={styles.content}>
         <section className={styles.title}>
@@ -359,9 +373,11 @@ const BaseArticleDetail = ({
             }}
             onLeave={() => setShowCommentToolbar(false)}
           >
-            <section className={styles.block}>
-              <DynamicResponse id={article.id} lock={!canReadFullContent} />
-            </section>
+            {article.commentCount > 0 && (
+              <section className={styles.smUpCommentBlock}>
+                <DynamicComments id={article.id} lock={!canReadFullContent} />
+              </section>
+            )}
           </Waypoint>
         </Media>
       </section>

@@ -1,0 +1,5 @@
+.latestComments {
+  @media (--sm-up) {
+    width: 22.5rem;
+  }
+}

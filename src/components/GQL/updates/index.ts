@@ -1,4 +1,5 @@
 export * from './appreciation'
+export * from './articleComments'
 export * from './circleBroadcast'
 export * from './circleFollowerCount'
 export * from './circleFollowers'

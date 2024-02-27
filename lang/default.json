@@ -386,6 +386,10 @@
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "78qsg6": {
+    "defaultMessage": "Author",
+    "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
   "79Ydsg": {
     "defaultMessage": "Payout Canceled",
     "description": "src/components/Transaction/index.tsx"
@@ -407,6 +411,10 @@
   "7xnrxG": {
     "defaultMessage": "The article has been added to the Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "7ykJ+l": {
+    "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
+    "description": "src/components/Empty/EmptyComment.tsx"
   },
   "84VOdX": {
     "defaultMessage": "Unpin from profile",
@@ -814,6 +822,10 @@
     "defaultMessage": "Supporter",
     "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
   },
+  "I8+06z": {
+    "defaultMessage": "Comment has been hidden",
+    "description": "src/components/CommentBeta/Content/index.tsx"
+  },
   "IKPYe9": {
     "defaultMessage": "View",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -896,6 +908,10 @@
   "KQi/UZ": {
     "defaultMessage": "Archive works"
   },
+  "KTg17G": {
+    "defaultMessage": "Unpin",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "KgVypx": {
     "defaultMessage": "Topics",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
@@ -922,6 +938,10 @@
   "L4NXXh": {
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "L79o74": {
+    "defaultMessage": "Expand",
+    "description": "src/components/Expandable/index.tsx"
   },
   "L7Si5/": {
     "defaultMessage": "Manage Community",
@@ -959,6 +979,9 @@
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "LgbKvU": {
+    "defaultMessage": "Comment"
   },
   "Lhhi5l": {
     "defaultMessage": "Article published",
@@ -1082,6 +1105,10 @@
   "OpeFTV": {
     "defaultMessage": "Enter a 6-digit payment password."
   },
+  "OsX3KM": {
+    "defaultMessage": "Comment",
+    "description": "src/views/ArticleDetail/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1106,6 +1133,13 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "Description"
+  },
+  "QGBMmO": {
+    "defaultMessage": "Published",
+    "description": "src/components/Forms/CommentFormBeta/index.tsx"
+  },
+  "QQSdHP": {
+    "defaultMessage": "View More"
   },
   "QUqfbW": {
     "defaultMessage": "Describe more about your Circle",
@@ -1327,6 +1361,10 @@
   "WpvsPu": {
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "WsefD2": {
+    "defaultMessage": "No more comments",
+    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "WuvE8X": {
     "defaultMessage": "Followers of {circleName}",
@@ -1698,6 +1736,10 @@
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hgjjhO": {
+    "defaultMessage": "Comment",
+    "description": "src/components/Forms/CommentFormBeta/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -1747,6 +1789,10 @@
   "jJ1Brc": {
     "defaultMessage": "Pin Comment",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "jc3mW/": {
+    "defaultMessage": "Supporter",
+    "description": "src/components/Comment/RoleLabel/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
@@ -2002,6 +2048,10 @@
   },
   "qlxeW+": {
     "defaultMessage": "Undo downvote"
+  },
+  "qxKjcm": {
+    "defaultMessage": "Pin",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "r66dXx": {
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",
@@ -2294,6 +2344,10 @@
     "defaultMessage": "Enter",
     "description": "src/components/CircleDigest/Price/index.tsx"
   },
+  "yexhgj": {
+    "defaultMessage": "Only one comment can be pinned to the top",
+    "description": "src/components/CommentBeta/DropdownActions/PinButton.tsx"
+  },
   "yoRaUc": {
     "defaultMessage": "Refund",
     "description": "src/components/Transaction/index.tsx"
@@ -2333,6 +2387,10 @@
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zn83cE": {
+    "defaultMessage": "Preview",
+    "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

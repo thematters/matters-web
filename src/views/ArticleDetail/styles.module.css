@@ -26,3 +26,7 @@
   padding: var(--spacing-loose) 0 0;
   margin: var(--spacing-loose) 0 var(--spacing-base);
 }
+
+.smUpCommentBlock {
+  padding-top: var(--spacing-xx-loose);
+}
