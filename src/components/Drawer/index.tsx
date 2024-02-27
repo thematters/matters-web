@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { IconClose24 } from '~/components'
+import { IconArrowLeft24, IconClose24 } from '~/components'
 
 import { BaseDrawer } from './BaseDrawer'
 import styles from './styles.module.css'
@@ -15,6 +15,7 @@ export type DrawerProps = {
   duration?: number
   enableOverlay?: boolean
   direction?: 'left' | 'right'
+  backTo?: () => void
 }
 
 export const Drawer = ({
@@ -26,6 +27,7 @@ export const Drawer = ({
   duration = 300,
   enableOverlay = false,
   direction = 'right',
+  backTo,
 }: DrawerProps) => {
   const [mounted, setMounted] = useState(isOpen)
   const [showDrawer, setShowDrawer] = useState(false)
@@ -56,6 +58,19 @@ export const Drawer = ({
       size={size}
     >
       <section className={styles.header}>
+        {backTo && (
+          <button
+            className={styles.close}
+            onClick={backTo}
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Back',
+              id: 'cyR7Kh',
+            })}
+          >
+            <IconArrowLeft24 size="md" />
+          </button>
+        )}
+
         <h2>{title}</h2>
 
         <button
@@ -69,7 +84,7 @@ export const Drawer = ({
           <IconClose24 size="md" />
         </button>
       </section>
-      {children}
+      <section className={styles.content}>{children}</section>
     </BaseDrawer>
   )
 }

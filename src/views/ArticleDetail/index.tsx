@@ -72,6 +72,14 @@ const DynamicComments = dynamic(() => import('./Comments'), {
   ssr: false,
   loading: () => <CommentsPlaceholder />,
 })
+
+const DynamicCommentsDetail = dynamic(
+  () => import('./Comments/CommentDetail'),
+  {
+    ssr: false,
+    loading: () => <CommentsPlaceholder />,
+  }
+)
 const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ssr: false,
   loading: () => (
@@ -89,6 +97,8 @@ const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
 })
+
+type DrawerStep = 'commentList' | 'commentDetail'
 
 const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
   // is there a better way to detect valid?
@@ -110,6 +120,20 @@ const BaseArticleDetail = ({
   article: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
 }) => {
+  /**
+   * Fragment Patterns
+   *
+   * 0. ``
+   * 1. `#parentCommentId`
+   * 2. `#parentComemntId-childCommentId`
+   */
+  let fragment = ''
+  let parentId = ''
+  if (typeof window !== 'undefined') {
+    fragment = window.location.hash.replace('#', '')
+    parentId = fragment.split('-')[0]
+  }
+
   const { getQuery, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
@@ -122,6 +146,11 @@ const BaseArticleDetail = ({
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
 
+  const [drawerStep, setDrawerStep] = useState<DrawerStep>(
+    parentId !== '' ? 'commentDetail' : 'commentList'
+  )
+  const isCommentDetail = drawerStep === 'commentDetail'
+  const isCommentList = drawerStep === 'commentList'
   const [isOpen, setIsOpen] = useState(false)
   const [autoOpen] = useState(true)
   const toggleDrawer = () => {
@@ -206,6 +235,16 @@ const BaseArticleDetail = ({
     setLang(routerLang)
   }, [])
 
+  // show comment detail drawer if fragment exists
+  useEffect(() => {
+    if (parentId === '') {
+      return
+    }
+    setTimeout(() => {
+      setIsOpen(true)
+    }, 500)
+  }, [parentId])
+
   const {
     title: translatedTitle,
     summary: translatedSummary,
@@ -267,13 +306,27 @@ const BaseArticleDetail = ({
         <Drawer
           isOpen={isOpen}
           onClose={toggleDrawer}
-          title={intl.formatMessage({
-            defaultMessage: 'Comment',
-            description: 'src/views/ArticleDetail/index.tsx',
-            id: 'OsX3KM',
-          })}
+          backTo={
+            isCommentDetail ? () => setDrawerStep('commentList') : undefined
+          }
+          title={
+            isCommentList
+              ? intl.formatMessage({
+                  defaultMessage: 'Comment',
+                  description: 'src/views/ArticleDetail/index.tsx',
+                  id: 'OsX3KM',
+                })
+              : intl.formatMessage({
+                  defaultMessage: 'Comment Details',
+                  description: 'src/views/ArticleDetail/index.tsx',
+                  id: 'w/Bet8',
+                })
+          }
         >
-          <DynamicComments id={article.id} lock={!canReadFullContent} />
+          {isCommentList && (
+            <DynamicComments id={article.id} lock={!canReadFullContent} />
+          )}
+          {isCommentDetail && <DynamicCommentsDetail />}
         </Drawer>
       </Media>
 

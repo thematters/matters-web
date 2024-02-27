@@ -5,13 +5,13 @@
 }
 
 .descendants {
-  @mixin border-left-grey-light;
+  & > li {
+    @mixin border-left-grey-light;
+    @mixin transition;
 
-  padding-left: var(--spacing-base);
-  margin-left: var(--spacing-x-tight);
-  border-left-style: dashed;
-
-  & .contentContainer {
-    width: 21rem;
+    padding-left: var(--spacing-base);
+    margin-left: var(--spacing-x-tight);
+    border-left-style: dashed;
+    transition-property: background-color;
   }
 }

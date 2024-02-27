@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { filterComments } from '~/common/utils'
 import { CommentFormType, ViewMoreCommentButton } from '~/components'
@@ -23,6 +23,8 @@ interface ThreadCommentControls {
   hasDownvote?: boolean
   replySubmitCallback?: () => void
   disabled?: boolean
+  firstRenderCallback?: () => void
+  isInCommentDetail?: boolean
 }
 
 export type ThreadCommentType = ThreadCommentCommentBetaPublicFragment &
@@ -38,6 +40,8 @@ export const ThreadCommentBeta = ({
   pinnedComment,
   type,
   defaultExpand,
+  firstRenderCallback,
+  isInCommentDetail,
   ...props
 }: ThreadCommentProps) => {
   const { pageInfo } = comment.comments
@@ -46,11 +50,18 @@ export const ThreadCommentBeta = ({
   ) as ThreadCommentType[]
   const [showViewMore, setShowViewMore] = useState(true)
 
+  useEffect(() => {
+    if (firstRenderCallback) {
+      firstRenderCallback()
+    }
+  }, [])
+
   if (!pageInfo.hasNextPage) {
     return (
       <section className={styles.container}>
         <Feed
           comment={comment}
+          isInCommentDetail={isInCommentDetail}
           pinnedComment={pinnedComment}
           type={type}
           hasReply
@@ -69,6 +80,7 @@ export const ThreadCommentBeta = ({
                   avatarSize="md"
                   hasReply
                   hasUserName
+                  isInCommentDetail={isInCommentDetail}
                   {...props}
                 />
               </li>
@@ -101,6 +113,7 @@ export const ThreadCommentBeta = ({
               avatarSize="md"
               hasReply
               hasUserName
+              isInCommentDetail={isInCommentDetail}
               {...props}
             />
           </li>
@@ -116,6 +129,7 @@ export const ThreadCommentBeta = ({
                   avatarSize="md"
                   hasReply
                   hasUserName
+                  isInCommentDetail={isInCommentDetail}
                   {...props}
                 />
               </li>
@@ -128,6 +142,7 @@ export const ThreadCommentBeta = ({
             id={comment.id}
             endCurosr={pageInfo.endCursor || ''}
             comments={subComments}
+            isInCommentDetail={isInCommentDetail}
             pinnedComment={pinnedComment}
             {...props}
           />

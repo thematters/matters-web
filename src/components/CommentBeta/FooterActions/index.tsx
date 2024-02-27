@@ -26,6 +26,7 @@ export type FooterActionsControls = {
   hasUpvote?: boolean
   inCard?: boolean
   disabled?: boolean
+  isInCommentDetail?: boolean
 } & Pick<ReplyButtonProps, 'replySubmitCallback'>
 
 export type FooterActionsProps = {
@@ -81,7 +82,7 @@ const BaseFooterActions = ({
   inCard = false,
   disabled,
   replySubmitCallback,
-
+  isInCommentDetail,
   ...replyButtonProps
 }: FooterActionsProps) => {
   const viewer = useContext(ViewerContext)
@@ -172,6 +173,7 @@ const BaseFooterActions = ({
               parentId={comment.parentComment?.id || comment.id}
               submitCallback={submitCallback}
               closeCallback={() => setShowForm(false)}
+              isInCommentDetail={isInCommentDetail}
               defaultContent={`${makeMentionElement(
                 comment.author.id,
                 comment.author.userName || '',

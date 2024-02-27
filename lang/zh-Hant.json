@@ -387,7 +387,7 @@
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "78qsg6": {
-    "defaultMessage": "Author",
+    "defaultMessage": "作者",
     "description": "src/components/Comment/RoleLabel/index.tsx"
   },
   "79Ydsg": {
@@ -1791,7 +1791,7 @@
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "jc3mW/": {
-    "defaultMessage": "Supporter",
+    "defaultMessage": "支持者",
     "description": "src/components/Comment/RoleLabel/index.tsx"
   },
   "jkrM1r": {
@@ -2211,6 +2211,10 @@
   },
   "w+6UiO": {
     "defaultMessage": "新增邀請"
+  },
+  "w/Bet8": {
+    "defaultMessage": "評論詳情",
+    "description": "src/views/ArticleDetail/index.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "評論"

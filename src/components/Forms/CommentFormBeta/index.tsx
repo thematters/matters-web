@@ -6,7 +6,7 @@ import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
 import { dom, stripHtml } from '~/common/utils'
 import { Button, IconSpinner16, TextIcon, useMutation } from '~/components'
 import CommentEditor from '~/components/Editor/Comment'
-import { updateArticleComments } from '~/components/GQL'
+import { updateArticleComments, updateCommentDetail } from '~/components/GQL'
 import PUT_COMMENT_BETA from '~/components/GQL/mutations/putCommentBeta'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import { CommentDraftQuery, PutCommentBetaMutation } from '~/gql/graphql'
@@ -21,6 +21,7 @@ export interface CommentFormBetaProps {
   parentId?: string
   articleId?: string
   type: CommentFormBetaType
+  isInCommentDetail?: boolean
 
   defaultContent?: string | null
   submitCallback?: () => void
@@ -35,7 +36,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   parentId,
   articleId,
   type,
-
+  isInCommentDetail,
   defaultContent,
   submitCallback,
   closeCallback,
@@ -85,12 +86,19 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
       await putComment({
         variables: { input },
         update: (cache, mutationResult) => {
-          if (!!parentId) {
+          if (!!parentId && !isInCommentDetail) {
             updateArticleComments({
               cache,
               articleId: articleId || '',
               commentId: parentId,
               type: 'addSecondaryComment',
+              comment: mutationResult.data?.putComment,
+            })
+          } else if (!!parentId && isInCommentDetail) {
+            updateCommentDetail({
+              cache,
+              commentId: parentId || '',
+              type: 'add',
               comment: mutationResult.data?.putComment,
             })
           } else {
