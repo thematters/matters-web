@@ -56,7 +56,6 @@ interface Controls {
   hasBlockUser: boolean
   hasCollapse: boolean
   hasUncollapse: boolean
-  hasReport: boolean
 }
 
 interface DialogProps {
@@ -218,7 +217,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasBlockUser: !isCommentAuthor,
     hasCollapse: !!(isAbleCollapse && isActive),
     hasUncollapse: !!(isAbleCollapse && isCollapsed),
-    hasReport: !isCommentAuthor,
   }
 
   const forbid = () => {
