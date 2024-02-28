@@ -1,15 +1,28 @@
+import * as clipboard from 'clipboard-polyfill'
 import { FormattedMessage } from 'react-intl'
 
-import { CopyToClipboard, IconCopy16, Menu } from '~/components'
+import { IconCopy16, Menu, toast } from '~/components'
 
 const CopyCommentButton = ({ content }: { content: string }) => {
+  const copyHtmlToClipboard = async function () {
+    const item = new clipboard.ClipboardItem({
+      'text/html': new Blob([content], { type: 'text/html' }),
+    })
+    await clipboard.write([item])
+
+    toast.success({
+      message: (
+        <FormattedMessage defaultMessage="Copied successful" id="SYyBFF" />
+      ),
+    })
+  }
+
   return (
-    <CopyToClipboard text={content}>
-      <Menu.Item
-        text={<FormattedMessage defaultMessage="Copy comment" id="eY3YIa" />}
-        icon={<IconCopy16 size="mdS" />}
-      />
-    </CopyToClipboard>
+    <Menu.Item
+      text={<FormattedMessage defaultMessage="Copy comment" id="eY3YIa" />}
+      icon={<IconCopy16 size="mdS" />}
+      onClick={copyHtmlToClipboard}
+    />
   )
 }
 
