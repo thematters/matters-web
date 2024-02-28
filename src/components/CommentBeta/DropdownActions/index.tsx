@@ -24,6 +24,7 @@ import {
   DropdownActionsCommentPublicFragment,
 } from '~/gql/graphql'
 
+import CopyCommentButton from './CopyCommentButton'
 import DeleteComment from './DeleteComment'
 import type { DeleteCommentDialogProps } from './DeleteComment/Dialog'
 import PinButton from './PinButton'
@@ -47,6 +48,7 @@ type DropdownActionsProps = {
 } & DropdownActionsControls
 
 interface Controls {
+  hasCopy: boolean
   hasPin: boolean
   hasDelete: boolean
   hasReport: boolean
@@ -129,6 +131,7 @@ const BaseDropdownActions = ({
   type,
   inCard,
 
+  hasCopy,
   hasPin,
   hasDelete,
   hasReport,
@@ -143,6 +146,7 @@ const BaseDropdownActions = ({
 
   const Content = () => (
     <Menu>
+      {hasCopy && <CopyCommentButton content={comment.content || ''} />}
       {_hasPin && (
         <PinButton
           comment={comment}
@@ -199,6 +203,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isDescendantComment = comment.parentComment
 
   const controls = {
+    hasCopy: isTargetAuthor,
     hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
     hasDelete: !!(isCommentAuthor && isActive),
     hasReport: !isCommentAuthor,
