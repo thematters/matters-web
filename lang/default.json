@@ -7,6 +7,9 @@
     "defaultMessage": "{circleName}",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
+  "+5sU+5": {
+    "defaultMessage": "Tort"
+  },
   "+63O1f": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_PASSWORD_INVALID"
@@ -199,6 +202,9 @@
   "2ef/Xl": {
     "defaultMessage": "Block",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "2kpUZD": {
+    "defaultMessage": "Submission successful"
   },
   "2oxLHg": {
     "defaultMessage": "Up to 3 articles/collections can be pinned"
@@ -520,6 +526,9 @@
     "defaultMessage": "This Google account is connected to a Matters account. Sign in to that account to disconnect it then try again",
     "description": "USER_SOCIAL_ACCOUNT_EXISTS"
   },
+  "AGDFGs": {
+    "defaultMessage": "Discrimination, insult, or hatred"
+  },
   "AGcU5J": {
     "defaultMessage": "Pin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -566,6 +575,9 @@
   },
   "BY343C": {
     "defaultMessage": "Change"
+  },
+  "BaQj20": {
+    "defaultMessage": "Report issues"
   },
   "Bb2R0G": {
     "defaultMessage": "Create",
@@ -1657,6 +1669,9 @@
     "defaultMessage": "Resend",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "e3qUqn": {
+    "defaultMessage": "Pornography involving minors"
+  },
   "eTpiYa": {
     "defaultMessage": "No data yet."
   },
@@ -2131,6 +2146,9 @@
   "tGn21M": {
     "defaultMessage": "Donated successfully"
   },
+  "tIDG14": {
+    "defaultMessage": "Illegal advertising"
+  },
   "tQ3+Xo": {
     "defaultMessage": "Add up to 5 tags",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
@@ -2151,6 +2169,9 @@
   },
   "uJkv2X": {
     "defaultMessage": "Edit Tag"
+  },
+  "uQHRvx": {
+    "defaultMessage": "Please select the type of issues:"
   },
   "uVCg1l": {
     "defaultMessage": "Explore Matters"
@@ -2242,6 +2263,9 @@
   "wNJjR5": {
     "defaultMessage": "Support setting updated"
   },
+  "wSZR47": {
+    "defaultMessage": "Submit"
+  },
   "wXzTZ0": {
     "defaultMessage": "Enter the name of your Circle"
   },
@@ -2328,6 +2352,9 @@
   "yOKEVx": {
     "defaultMessage": "Top Up",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "yOhatg": {
+    "defaultMessage": "Other malicious behavior"
   },
   "ySGgTo": {
     "defaultMessage": "Add Articles into Featured",

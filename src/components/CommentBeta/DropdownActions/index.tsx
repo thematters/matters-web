@@ -11,12 +11,14 @@ import {
   Dropdown,
   IconMore16,
   Menu,
+  SubmitReport,
   ThreadCommentType,
   toast,
   ViewerContext,
   withDialog,
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
+import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog/Dialog'
 import {
   DropdownActionsCommentPrivateFragment,
   DropdownActionsCommentPublicFragment,
@@ -47,10 +49,12 @@ type DropdownActionsProps = {
 interface Controls {
   hasPin: boolean
   hasDelete: boolean
+  hasReport: boolean
 }
 
 interface DialogProps {
   openDeleteCommentDialog: () => void
+  openSubmitReportDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
@@ -127,8 +131,10 @@ const BaseDropdownActions = ({
 
   hasPin,
   hasDelete,
+  hasReport,
 
   openDeleteCommentDialog,
+  openSubmitReportDialog,
 }: BaseDropdownActionsProps) => {
   const _hasPin =
     hasPin &&
@@ -144,7 +150,8 @@ const BaseDropdownActions = ({
           type={type}
         />
       )}
-      {_hasPin && hasDelete && <Menu.Divider />}
+      {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
+      {(_hasPin || hasReport) && hasDelete && <Menu.Divider />}
       {hasDelete && (
         <DeleteComment.Button openDialog={openDeleteCommentDialog} />
       )}
@@ -193,6 +200,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const controls = {
     hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
     hasDelete: !!(isCommentAuthor && isActive),
+    hasReport: !isCommentAuthor,
   }
 
   const forbid = () => {
@@ -207,10 +215,17 @@ const DropdownActions = (props: DropdownActionsProps) => {
     return null
   }
 
+  const WithReport = withDialog<Omit<SubmitReportDialogProps, 'children'>>(
+    BaseDropdownActions,
+    SubmitReport.Dialog,
+    { id: comment.id },
+    ({ openDialog }) => ({ openSubmitReportDialog: openDialog })
+  )
+
   const WithDeleteComment = withDialog<
     Omit<DeleteCommentDialogProps, 'children'>
   >(
-    BaseDropdownActions,
+    WithReport,
     DeleteComment.Dialog,
     {
       comment,

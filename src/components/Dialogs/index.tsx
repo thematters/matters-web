@@ -21,6 +21,7 @@ export * from './FingerprintDialog'
 export * from './MigrationDialog'
 export * from './ReviseArticleDialog'
 export * from './ShareDialog'
+export * from './SubmitReportDialog'
 export * from './SupportersDialog'
 export * from './TagListDialog'
 

@@ -396,6 +396,7 @@ const BaseArticleDetail = ({
                 translatedLanguage={translatedLanguage}
                 privateFetched={privateFetched}
                 hasFingerprint={canReadFullContent}
+                hasReport
                 lock={lock}
                 toggleDrawer={toggleDrawer}
               />
