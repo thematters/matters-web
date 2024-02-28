@@ -139,6 +139,9 @@
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
+  "17K30q": {
+    "defaultMessage": "Translating by Google..."
+  },
   "1COpAA": {
     "defaultMessage": "Failed",
     "description": "src/components/Transaction/State/index.tsx"
@@ -2161,6 +2164,9 @@
   "tio9Gt": {
     "defaultMessage": "IPFS"
   },
+  "twEps9": {
+    "defaultMessage": " published"
+  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -2199,6 +2205,9 @@
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
+  },
+  "ux4p3j": {
+    "defaultMessage": " published on"
   },
   "v6YjIn": {
     "defaultMessage": "Account",

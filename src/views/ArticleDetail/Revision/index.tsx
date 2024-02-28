@@ -1,5 +1,7 @@
+import { useLazyQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { toGlobalId, toPath } from '~/common/utils'
 import {
@@ -7,12 +9,14 @@ import {
   EmptyLayout,
   Error,
   Head,
+  LanguageContext,
   Layout,
   Media,
   QueryError,
   Spinner,
   Throw404,
   Title,
+  toast,
   Translate,
   usePublicQuery,
   useRoute,
@@ -23,12 +27,13 @@ import {
   ArticleLatestVersionByNodeIdQuery,
   ArticleLatestVersionQuery,
   ArticleRevisionDetailPublicQuery,
+  ArticleRevisionTranslationQuery,
 } from '~/gql/graphql'
 
 import Content from '../Content'
 import CustomizedSummary from '../CustomizedSummary'
 import License from '../License'
-// import MetaInfo from '../MetaInfo'
+import MetaInfo from '../MetaInfo'
 import Placeholder from '../Placeholder'
 import StickyTopBanner from '../StickyTopBanner'
 import styles from '../styles.module.css'
@@ -38,6 +43,7 @@ import {
   ARTICLE_REVISION_DETAIL_PRIVATE,
   ARTICLE_REVISION_DETAIL_PUBLIC,
   ARTICLE_REVISION_DETAIL_PUBLIC_BY_NODE_ID,
+  ARTICLE_REVISION_TRANSLATION,
 } from './gql'
 import InfoHeader from './InfoHeader'
 import Versions from './Versions'
@@ -87,11 +93,54 @@ const BaseArticleDetailRevision = ({
     circle.isMember ||
     article.access.type === ArticleAccessType.Public
   )
+  const currVersion = (version = (
+    version.__typename === 'ArticleVersion' ? version : undefined
+  )!)
 
-  version = (version.__typename === 'ArticleVersion' ? version : undefined)!
-  const title = article.title
-  const summary = version.summary
-  const content = version.contents.html
+  // translation
+  const [translated, setTranslate] = useState(false)
+  const originalLang = article.language
+  const { lang: preferredLang } = useContext(LanguageContext)
+  const canTranslate = !!(originalLang && originalLang !== preferredLang)
+  const [getTranslation, { data: translationData, loading: translating }] =
+    useLazyQuery<ArticleRevisionTranslationQuery>(ARTICLE_REVISION_TRANSLATION)
+
+  const translate = () => {
+    getTranslation({
+      variables: { version: currVersion.id, language: preferredLang },
+    })
+
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Translating by Google..."
+          id="17K30q"
+        />
+      ),
+    })
+  }
+
+  const toggleTranslate = () => {
+    setTranslate(!translated)
+
+    if (!translated) {
+      translate()
+    }
+  }
+
+  const {
+    title: translatedTitle,
+    summary: translatedSummary,
+    content: translatedContent,
+  } = (translationData?.version?.__typename === 'ArticleVersion' &&
+    translationData.version.translation) ||
+  {}
+  const title = translated && translatedTitle ? translatedTitle : article.title
+  const summary =
+    translated && translatedSummary ? translatedSummary : version.summary
+  const originalContent = version.contents.html
+  const content =
+    translated && translatedContent ? translatedContent : originalContent
 
   return (
     <Layout.Main aside={<Versions.Sidebar article={article} />}>
@@ -122,14 +171,14 @@ const BaseArticleDetailRevision = ({
         <section className={styles.title}>
           <Title type="article">{title}</Title>
 
-          {/* <MetaInfo
+          <MetaInfo
             article={article}
-            translated={false}
-            canTranslate={false}
-            toggleTranslate={() => {}} // TODO
+            version={version}
+            translated={translated}
+            canTranslate={canTranslate}
+            toggleTranslate={toggleTranslate}
             canReadFullContent={canReadFullContent}
-            disabled
-          /> */}
+          />
         </section>
 
         {article?.summaryCustomized && <CustomizedSummary summary={summary} />}
@@ -144,7 +193,11 @@ const BaseArticleDetailRevision = ({
 
         {!isSensitive && (
           <>
-            <Content articleId={article.id} content={content} />
+            <Content
+              articleId={article.id}
+              content={content}
+              translating={translating}
+            />
 
             {circle && !canReadFullContent && (
               <DynamicCircleWall circle={circle} />

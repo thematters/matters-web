@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components/UserDigest'
 
+import MetaInfo from '../MetaInfo'
 import { fragments as circleWallFragments } from '../Wall/Circle/gql'
 import InfoHeader from './InfoHeader'
 import Versions from './Versions'
@@ -37,6 +38,7 @@ const articleRevisionPublicFragment = gql`
     availableTranslations
     ...InfoHeaderArticle
     ...VersionsArticle
+    ...MetaInfoArticle
   }
   ${UserDigest.Rich.fragments.user.public}
   ${UserDigest.Rich.fragments.user.private}
@@ -44,6 +46,7 @@ const articleRevisionPublicFragment = gql`
   ${circleWallFragments.circle.private}
   ${InfoHeader.fragments.article}
   ${Versions.fragments.article}
+  ${MetaInfo.fragments.article}
 `
 
 const articleVersionFragment = gql`
@@ -58,8 +61,10 @@ const articleVersionFragment = gql`
       html
     }
     ...InfoHeaderArticleVersion
+    ...MetaInfoArticleVersion
   }
   ${InfoHeader.fragments.articleVersion}
+  ${MetaInfo.fragments.articleVersion}
 `
 
 export const ARTICLE_REVISION_DETAIL_PUBLIC = gql`
@@ -146,6 +151,22 @@ export const ARTICLE_LATEST_VERSION_BY_NODE_ID = gql`
               id
             }
           }
+        }
+      }
+    }
+  }
+`
+
+export const ARTICLE_REVISION_TRANSLATION = gql`
+  query ArticleRevisionTranslation($version: ID!, $language: UserLanguage!) {
+    version: node(input: { id: $version }) {
+      ... on ArticleVersion {
+        id
+        translation(input: { language: $language }) {
+          content
+          title
+          summary
+          language
         }
       }
     }

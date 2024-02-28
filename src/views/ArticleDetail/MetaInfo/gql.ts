@@ -10,10 +10,18 @@ export const fragments = {
       language
       slug
       mediaHash
+      revisedAt
+      createdAt
       author {
         id
         userName
       }
+    }
+  `,
+  articleVersion: gql`
+    fragment MetaInfoArticleVersion on ArticleVersion {
+      id
+      createdAt
     }
   `,
 }

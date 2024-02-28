@@ -2,7 +2,7 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { Waypoint } from 'react-waypoint'
 
 import {
@@ -192,10 +192,9 @@ const BaseArticleDetail = ({
 
     toast.success({
       message: (
-        <Translate
-          zh_hant="正在透過 Google 翻譯..."
-          zh_hans="正在通过 Google 翻译..."
-          en="Translating by Google..."
+        <FormattedMessage
+          defaultMessage="Translating by Google..."
+          id="17K30q"
         />
       ),
     })
@@ -345,7 +344,7 @@ const BaseArticleDetail = ({
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
             canReadFullContent={canReadFullContent}
-            disabled={lock}
+            editable={!lock}
           />
         </section>
 
