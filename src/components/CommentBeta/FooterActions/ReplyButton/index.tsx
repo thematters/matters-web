@@ -66,7 +66,8 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
+      textColor="greyDarker"
+      textActiveColor="black"
       aria-label={intl.formatMessage({
         defaultMessage: 'Write a comment',
         id: 'Y8zV4A',

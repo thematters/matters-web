@@ -170,12 +170,13 @@ const BaseDropdownActions = ({
         <Button
           onClick={openDropdown}
           spacing={['xtight', 'xtight']}
-          bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
+          textColor="black"
+          textActiveColor="greyDarker"
           aria-label={moreActionText}
           aria-haspopup="listbox"
           ref={ref}
         >
-          <IconMore16 color="black" />
+          <IconMore16 />
         </Button>
       )}
     </Dropdown>

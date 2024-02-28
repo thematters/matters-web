@@ -82,7 +82,6 @@ const UpvoteButton = ({
     return (
       <Button
         spacing={['xtight', 'xtight']}
-        bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
         onClick={() => {
           onClick ? onClick() : unvote()
         }}
@@ -92,7 +91,7 @@ const UpvoteButton = ({
           id: 'z3uIHQ',
         })}
       >
-        <TextIcon icon={<IconLikeFill16 />} color="black">
+        <TextIcon icon={<IconLikeFill16 />}>
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
         </TextIcon>
       </Button>
@@ -102,7 +101,8 @@ const UpvoteButton = ({
   return (
     <Button
       spacing={['xtight', 'xtight']}
-      bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
+      textColor="greyDarker"
+      textActiveColor="black"
       onClick={() => {
         onClick ? onClick() : upvote()
       }}
@@ -112,7 +112,7 @@ const UpvoteButton = ({
         id: 'ZD+vm/',
       })}
     >
-      <TextIcon icon={<IconLike16 color="greyDarker" />} color="greyDarker">
+      <TextIcon icon={<IconLike16 />}>
         {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
       </TextIcon>
     </Button>
