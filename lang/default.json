@@ -2227,6 +2227,9 @@
   "vX2bDy": {
     "defaultMessage": "Collect Article"
   },
+  "va8Rnw": {
+    "defaultMessage": "The author has closed the comment section"
+  },
   "viMrzF": {
     "defaultMessage": "New broadcasts",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"

@@ -2227,6 +2227,9 @@
   "vX2bDy": {
     "defaultMessage": "關聯作品"
   },
+  "va8Rnw": {
+    "defaultMessage": "作者已關閉評論區"
+  },
   "viMrzF": {
     "defaultMessage": "廣播",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"

@@ -1,40 +1,18 @@
 .toolbar {
-  margin: var(--spacing-base);
+  margin: var(--spacing-base) 0;
   background: var(--color-white);
 
   & .buttons {
     @mixin flex-center-space-between;
 
-    & > * {
-      @mixin inline-flex-center-all;
-
-      flex-shrink: 0;
-      height: 2rem;
+    & .left {
+      display: flex;
+      gap: var(--spacing-base);
     }
 
-    @media (--sm-up) {
-      & > * {
-        height: auto;
-      }
-
-      & > * + * {
-        margin-left: var(--spacing-loose);
-      }
-    }
-  }
-
-  & .commentBar {
-    font-size: 0;
-  }
-
-  @media (--sm-up) {
-    margin: var(--spacing-base) 0;
-
-    & .commentBar {
-      display: block;
-      flex-grow: 1;
-      flex-shrink: 1;
-      margin-left: var(--spacing-base);
+    & .right {
+      display: flex;
+      gap: var(--spacing-loose);
     }
   }
 }
