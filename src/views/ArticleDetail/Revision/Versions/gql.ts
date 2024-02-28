@@ -6,6 +6,12 @@ export const fragments = {
   article: gql`
     fragment VersionsArticle on Article {
       id
+      slug
+      mediaHash
+      author {
+        id
+        userName
+      }
       versions(input: { first: 5 }) {
         edges {
           node {

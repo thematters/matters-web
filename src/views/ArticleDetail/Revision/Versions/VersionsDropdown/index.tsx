@@ -3,6 +3,7 @@ import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
 
 import { Z_INDEX } from '~/common/enums'
+import { toPath } from '~/common/utils'
 import { Dropdown, IconDown20, Label, Menu } from '~/components'
 import { VersionsArticleFragment } from '~/gql/graphql'
 
@@ -62,6 +63,13 @@ const VersionsDropdown = ({
           <Menu.Item
             text={<Version version={version} active={index === 0} />}
             key={version.id}
+            href={
+              toPath({
+                page: 'articleRevision',
+                article,
+                versionId: version.id,
+              }).href
+            }
           />
         ))}
       </Menu>

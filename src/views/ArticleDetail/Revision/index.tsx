@@ -99,7 +99,7 @@ const BaseArticleDetailRevision = ({
         title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
         path={
           toPath({
-            page: 'articleDetail',
+            page: 'articleRevision',
             article,
             versionId: version.id,
           }).href
@@ -166,6 +166,7 @@ const ArticleDetailRevision = ({
   const { getQuery, router } = useRoute()
   const [needRefetchData, setNeedRefetchData] = useState(false)
   const mediaHash = getQuery('mediaHash')
+  const versionId = getQuery('version')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
@@ -188,7 +189,7 @@ const ArticleDetailRevision = ({
     {
       variables: {
         mediaHash,
-        version: latestVersion,
+        version: versionId || latestVersion,
       },
       skip: !isQueryByHash,
     }
@@ -198,7 +199,7 @@ const ArticleDetailRevision = ({
     {
       variables: {
         id: toGlobalId({ type: 'Article', id: articleId }),
-        version: latestVersion,
+        version: versionId || latestVersion,
       },
       skip: isQueryByHash,
     }

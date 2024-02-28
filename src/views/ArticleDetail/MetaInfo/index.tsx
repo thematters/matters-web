@@ -16,7 +16,6 @@ import {
 } from '~/components'
 import { MetaInfoArticleFragment } from '~/gql/graphql'
 
-import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 import TranslationButton from './TranslationButton'
@@ -66,7 +65,22 @@ const MetaInfo = ({
           <Translate zh_hant="更新於" zh_hans="更新于" en=" published on" />
         </span>
       </section>
-      <FingerprintButton article={article} />
+
+      <Button
+        textColor="black"
+        textActiveColor="greyDarker"
+        href={
+          toPath({
+            page: 'articleRevision',
+            article,
+          }).href
+        }
+      >
+        <TextIcon size="xs">
+          <FormattedMessage defaultMessage="IPFS" id="tio9Gt" />
+        </TextIcon>
+      </Button>
+
       {canReadFullContent && (
         <>
           {canTranslate && !isAuthor && (

@@ -1,7 +1,5 @@
 import gql from 'graphql-tag'
 
-import FingerprintButton from './FingerprintButton'
-
 export const fragments = {
   article: gql`
     fragment MetaInfoArticle on Article {
@@ -16,8 +14,6 @@ export const fragments = {
         id
         userName
       }
-      ...FingerprintArticle
     }
-    ${FingerprintButton.fragments.article}
   `,
 }

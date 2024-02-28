@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 import format from 'date-fns/format'
+import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
+import { toPath } from '~/common/utils'
 import { Label } from '~/components'
 import { VersionsArticleFragment } from '~/gql/graphql'
 
@@ -25,30 +27,42 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
               [styles.active]: index === 0,
             })}
           >
-            <a href={`#${version.id}`} className={styles.link}>
-              <span
-                className={classNames({
-                  [styles.date]: true,
-                  [styles.active]: index === 0,
-                })}
-              >
-                <span>{format(new Date(version.createdAt), 'yyyy-MM-dd')}</span>
+            <Link
+              href={
+                toPath({
+                  page: 'articleRevision',
+                  article,
+                  versionId: version.id,
+                }).href
+              }
+            >
+              <a className={styles.link}>
+                <span
+                  className={classNames({
+                    [styles.date]: true,
+                    [styles.active]: index === 0,
+                  })}
+                >
+                  <span>
+                    {format(new Date(version.createdAt), 'yyyy-MM-dd')}
+                  </span>
 
-                {index === 0 && (
-                  <Label color="green">
-                    <FormattedMessage defaultMessage="Latest" id="adThp5" />
-                  </Label>
-                )}
-              </span>
-              <span
-                className={classNames({
-                  [styles.time]: true,
-                  [styles.active]: index === 0,
-                })}
-              >
-                {format(new Date(version.createdAt), 'HH:mm')}
-              </span>
-            </a>
+                  {index === 0 && (
+                    <Label color="green">
+                      <FormattedMessage defaultMessage="Latest" id="adThp5" />
+                    </Label>
+                  )}
+                </span>
+                <span
+                  className={classNames({
+                    [styles.time]: true,
+                    [styles.active]: index === 0,
+                  })}
+                >
+                  {format(new Date(version.createdAt), 'HH:mm')}
+                </span>
+              </a>
+            </Link>
           </li>
         ))}
       </ul>
