@@ -83,6 +83,7 @@ export enum TEST_ID {
   // comment
   COMMENT_CONETNT = 'comment/content',
   COMMENT_REPLY_TO = 'comment/reply-to',
+  COMMENT_PINNED_LABEL = 'comment/pinned-label',
   // notification:components
   NOTICE_USER_DISPLAY_NAME = 'notice/user/display-name',
   NOTICE_ARTICLE_TITLE = 'notice/article/title',

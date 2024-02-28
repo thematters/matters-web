@@ -10,7 +10,6 @@ export const fragments = {
         id
         ...UserDigestMiniUser
       }
-      revisionDescription
       mediaHash
       dataHash
       iscnId

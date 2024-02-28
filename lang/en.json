@@ -260,8 +260,15 @@
     "defaultMessage": "Asset not found",
     "description": "ASSET_NOT_FOUND"
   },
+  "4OMGUj": {
+    "defaultMessage": "Comment Details"
+  },
   "4RpVDe": {
     "defaultMessage": "Delete Draft"
+  },
+  "4km7Yc": {
+    "defaultMessage": "Breaking through history! The torch you've ignited will be the most dazzling support on the Nomad's journey. The Firebolt badge signifies your participation in the Nomad Matters and earning the highest-level Firebolt badge.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "4l6vz1": {
     "defaultMessage": "Copy"
@@ -386,6 +393,10 @@
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "78qsg6": {
+    "defaultMessage": "Author",
+    "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
   "79Ydsg": {
     "defaultMessage": "Payout Canceled",
     "description": "src/components/Transaction/index.tsx"
@@ -407,6 +418,10 @@
   "7xnrxG": {
     "defaultMessage": "The article has been added to the Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "7ykJ+l": {
+    "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
+    "description": "src/components/Empty/EmptyComment.tsx"
   },
   "84VOdX": {
     "defaultMessage": "Unpin from profile",
@@ -458,6 +473,10 @@
   },
   "9J0iCw": {
     "defaultMessage": "Deleted user"
+  },
+  "9OIqBr": {
+    "defaultMessage": "Edit Comment",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "9UNFGm": {
     "defaultMessage": "Transaction Password"
@@ -628,10 +647,6 @@
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "DdVBFV": {
-    "defaultMessage": "Wings have sprouted on the badge, and the halo of dreams is beginning to spin. You have gathered 10 companions on the Nomad's path. Invite another 10 fellow travelers to move towards the final destination together, where the highest level of honor awaits you.",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "DjIpR6": {
     "defaultMessage": "Set Cover"
   },
@@ -667,6 +682,9 @@
   "EZMrtJ": {
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Eb1U+/": {
+    "defaultMessage": "Topped up successfully"
   },
   "EcglP9": {
     "defaultMessage": "Key"
@@ -761,10 +779,6 @@
     "defaultMessage": "New Followers This Month",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "GxTjwK": {
-    "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters, whether as a contestant or a supporter of exceptional projects. Next, invite 5 companions to join the journey with you, and you'll earn an even higher-level badge?",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "H0JBH6": {
     "defaultMessage": "Log Out"
   },
@@ -817,6 +831,10 @@
   "Hyr5ET": {
     "defaultMessage": "Supporter",
     "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
+  },
+  "I8+06z": {
+    "defaultMessage": "Comment has been hidden",
+    "description": "src/components/CommentBeta/Content/index.tsx"
   },
   "IKPYe9": {
     "defaultMessage": "View",
@@ -896,6 +914,10 @@
   "KQi/UZ": {
     "defaultMessage": "Archive works"
   },
+  "KTg17G": {
+    "defaultMessage": "Unpin",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "KgVypx": {
     "defaultMessage": "Topics",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
@@ -927,6 +949,10 @@
     "defaultMessage": "Archived article (Author),",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
+  "L79o74": {
+    "defaultMessage": "Expand",
+    "description": "src/components/Expandable/index.tsx"
+  },
   "L7Si5/": {
     "defaultMessage": "Manage Community",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -946,8 +972,16 @@
     "defaultMessage": "{articleCount} Articles",
     "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
   },
+  "LUWKnn": {
+    "defaultMessage": "Wings have sprouted on the badge, and the halo of dreams is beginning to spin. The Nimbus Ferry badge signifies your participation in the Nomad Matters.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "LWE7oq": {
     "defaultMessage": "Saving draft, are you sure you want to leave?"
+  },
+  "LYl9+i": {
+    "defaultMessage": "Edit",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "Lb0JsC": {
     "defaultMessage": "You have blocked that user"
@@ -955,6 +989,9 @@
   "Lc/azT": {
     "defaultMessage": "IPNS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "LgbKvU": {
+    "defaultMessage": "Comment"
   },
   "Lhhi5l": {
     "defaultMessage": "Article published",
@@ -1081,6 +1118,10 @@
   "Oru6G2": {
     "defaultMessage": "The Fingerprint from IPFS, you can read it via a gateway"
   },
+  "OsX3KM": {
+    "defaultMessage": "Comment",
+    "description": "src/views/ArticleDetail/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1105,6 +1146,9 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "Description"
+  },
+  "QQSdHP": {
+    "defaultMessage": "View More"
   },
   "QUqfbW": {
     "defaultMessage": "Describe more about your Circle",
@@ -1327,6 +1371,10 @@
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "WsefD2": {
+    "defaultMessage": "No more comments",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "WuvE8X": {
     "defaultMessage": "Followers of {circleName}",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
@@ -1366,10 +1414,6 @@
   "XfRKZY": {
     "defaultMessage": "Go to Settings",
     "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
-  },
-  "XfkltT": {
-    "defaultMessage": "The dazzling light of a meteor shower is enough to illuminate the night sky. You have already invited 5 companions to participate in the Nomad Matters. Invite 5 more, and you can continue to level up!",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "XgdZSb": {
     "defaultMessage": "Authors"
@@ -1590,6 +1634,10 @@
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dAPUJp": {
+    "defaultMessage": "The dazzling light of a meteor shower is enough to illuminate the night sky. The Meteor Canoe badge signifies your participation in the Nomad Matters.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "dAvP6d": {
     "defaultMessage": "No blocked users yet",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
@@ -1700,6 +1748,10 @@
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hgjjhO": {
+    "defaultMessage": "Comment",
+    "description": "src/components/Forms/CommentFormBeta/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -1717,6 +1769,10 @@
   },
   "iEJeQH": {
     "defaultMessage": "Liker ID"
+  },
+  "iTcMqz": {
+    "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "icdrwy": {
     "defaultMessage": "Followed You",
@@ -1750,12 +1806,19 @@
     "defaultMessage": "Pin Comment",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "jc3mW/": {
+    "defaultMessage": "Supporter",
+    "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "jtdQHR": {
     "defaultMessage": "Gateways"
+  },
+  "jwnump": {
+    "defaultMessage": "Comment..."
   },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
@@ -1938,10 +2001,6 @@
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "p0oPHP": {
-    "defaultMessage": "Breaking through history! The torch you've ignited will be the most dazzling support on the Nomad's journey. Congratulations on reaching the final destination of the Nomad Matters with 20 friends and earning the highest-level Firebolt badge.",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "p5qZnJ": {
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
@@ -2012,6 +2071,10 @@
   "qlxeW+": {
     "defaultMessage": "Undo downvote"
   },
+  "qxKjcm": {
+    "defaultMessage": "Pin",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "r66dXx": {
     "defaultMessage": "mentioned you in broadcast comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -2069,6 +2132,9 @@
   },
   "sy+pv5": {
     "defaultMessage": "Email"
+  },
+  "syEQFE": {
+    "defaultMessage": "Publish"
   },
   "tBt9u0": {
     "defaultMessage": "Sign in",
@@ -2303,6 +2369,10 @@
     "defaultMessage": "Enter",
     "description": "src/components/CircleDigest/Price/index.tsx"
   },
+  "yexhgj": {
+    "defaultMessage": "Only one comment can be pinned to the top",
+    "description": "src/components/CommentBeta/DropdownActions/PinButton.tsx"
+  },
   "yoRaUc": {
     "defaultMessage": "Refund",
     "description": "src/components/Transaction/index.tsx"
@@ -2349,9 +2419,6 @@
   "zn83cE": {
     "defaultMessage": "Preview",
     "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
-  },
-  "znJ06J": {
-    "defaultMessage": "<a>About Nomad Matters</a>"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

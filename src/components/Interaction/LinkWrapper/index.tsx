@@ -36,7 +36,7 @@ export const LinkWrapper: React.FC<
   }
 
   const linkClasses = classNames({
-    [styles.link]: true,
+    [styles.wrapper]: true,
     [textActiveColor
       ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
       : '']: !!textActiveColor,

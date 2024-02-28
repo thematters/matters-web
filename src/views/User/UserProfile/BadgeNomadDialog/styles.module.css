@@ -17,8 +17,3 @@
 .title {
   margin: var(--spacing-base) 0;
 }
-
-.extra {
-  margin-top: var(--spacing-base);
-  text-decoration-line: underline;
-}
