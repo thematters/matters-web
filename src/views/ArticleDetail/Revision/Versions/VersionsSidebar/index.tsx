@@ -3,18 +3,14 @@ import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
 
 import { Label } from '~/components'
+import { VersionsArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-const versions = [
-  { id: 'UmV2aXNvbjox', createdAt: '2021-01-03T00:00:00Z' },
-  { id: 'UmV2aXNvbjoy', createdAt: '2021-01-02T00:00:00Z' },
-  { id: 'UmV2aXNvbjoz', createdAt: '2021-01-01T00:00:00Z' },
-]
+const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
+  const versions = article.versions.edges.map((edge) => edge?.node!)
 
-export const VersionsSidebar = () => {
-  // TODO
-  if (versions.length === 1) {
+  if (versions.length < 1) {
     return null
   }
 
@@ -59,3 +55,5 @@ export const VersionsSidebar = () => {
     </section>
   )
 }
+
+export default VersionsSidebar

@@ -361,7 +361,7 @@ const BaseArticleDetail = ({
         {!isSensitive && (
           <>
             <Content
-              article={article}
+              articleId={article.id}
               content={content}
               translating={translating}
             />
@@ -396,6 +396,7 @@ const BaseArticleDetail = ({
                 translatedLanguage={translatedLanguage}
                 privateFetched={privateFetched}
                 hasFingerprint={canReadFullContent}
+                // hasReport // TODO:
                 lock={lock}
                 toggleDrawer={toggleDrawer}
               />

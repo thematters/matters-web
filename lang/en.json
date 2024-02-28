@@ -468,6 +468,9 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
+  "99OtWT": {
+    "defaultMessage": "Pending..."
+  },
   "9Fpc9S": {
     "defaultMessage": "Bug Report"
   },

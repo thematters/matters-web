@@ -468,6 +468,9 @@
     "defaultMessage": "已追蹤",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
+  "99OtWT": {
+    "defaultMessage": "寫入中…"
+  },
   "9Fpc9S": {
     "defaultMessage": "漏洞提報"
   },

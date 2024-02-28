@@ -13,9 +13,13 @@ import {
   Tooltip,
   UserDigest,
 } from '~/components'
-import { GatewaysQuery } from '~/gql/graphql'
-import { MOCK_ARTILCE, MOCK_USER } from '~/stories/mocks'
+import {
+  GatewaysQuery,
+  InfoHeaderArticleFragment,
+  InfoHeaderArticleVersionFragment,
+} from '~/gql/graphql'
 
+import { fragments } from './gql'
 import styles from './styles.module.css'
 
 const GATEWAYS = gql`
@@ -36,7 +40,13 @@ function iscnLinkUrl(iscnId: string) {
   return `${iscnLinkPrefix}/${encodeURIComponent(iscnId)}`
 }
 
-export const InfoHeader = () => {
+const InfoHeader = ({
+  article,
+  version,
+}: {
+  article: InfoHeaderArticleFragment
+  version: InfoHeaderArticleVersionFragment
+}) => {
   const intl = useIntl()
   const { data } = useQuery<GatewaysQuery>(GATEWAYS)
 
@@ -47,7 +57,7 @@ export const InfoHeader = () => {
       <header className={styles.header}>
         <section className={styles.author}>
           <UserDigest.Mini
-            user={MOCK_USER}
+            user={article.author}
             hasDisplayName
             hasAvatar
             avatarSize="md"
@@ -82,9 +92,9 @@ export const InfoHeader = () => {
           </section>
         </section>
 
-        <p className={styles.description}>
-          這個版本調整了引用文字、出處，以及部分連結資料也一併更新了
-        </p>
+        {version.description && (
+          <p className={styles.description}>{version.description}</p>
+        )}
       </header>
 
       <hr className={styles.divider} />
@@ -95,82 +105,8 @@ export const InfoHeader = () => {
           <section className={styles.name}>
             <FormattedMessage defaultMessage="Content Hash" id="Xh/txo" />
           </section>
-          <CopyToClipboard text={MOCK_ARTILCE.dataHash}>
-            <Button
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Copy',
-                id: '4l6vz1',
-              })}
-            >
-              <TextIcon
-                icon={<IconCopy16 size="xs" />}
-                color="greyDarker"
-                size="xs"
-                spacing="xxtight"
-                textPlacement="left"
-              >
-                {truncate(MOCK_ARTILCE.dataHash, 4, 4)}
-              </TextIcon>
-            </Button>
-          </CopyToClipboard>
-        </section>
-
-        {/* gateways */}
-        <section className={styles.item}>
-          <section className={styles.name}>
-            <FormattedMessage defaultMessage="Gateways" id="jtdQHR" />
-          </section>
-          <section className={styles.content}>
-            {gateways.slice(0, 3).map((url) => {
-              const gatewayUrl = url.replace(':hash', MOCK_ARTILCE.dataHash)
-              const hostname = url.replace(/(https:\/\/|\/ipfs\/|:hash.?)/g, '')
-
-              return (
-                <a
-                  href={gatewayUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  key={url}
-                  className={styles.gatewayUrl}
-                >
-                  {hostname}
-                </a>
-              )
-            })}
-          </section>
-        </section>
-
-        {/* ISCN */}
-        <section className={styles.item}>
-          <section className={styles.name}>ISCN</section>
-
-          <section className={styles.content}>
-            <a
-              href={iscnLinkUrl(MOCK_ARTILCE.iscnId)}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <TextIcon
-                icon={<IconExternalLink16 size="xs" />}
-                color="greyDarker"
-                size="xs"
-                spacing="xxtight"
-                textPlacement="left"
-              >
-                {truncate(MOCK_ARTILCE.iscnId, 4, 4)}
-              </TextIcon>
-            </a>
-          </section>
-        </section>
-
-        {/* Secret */}
-        <section className={styles.item}>
-          <section className={styles.name}>
-            <FormattedMessage defaultMessage="Key" id="EcglP9" />
-          </section>
-
-          <section className={styles.content}>
-            <CopyToClipboard text={MOCK_ARTILCE.access.secret}>
+          {version.dataHash && (
+            <CopyToClipboard text={version.dataHash}>
               <Button
                 aria-label={intl.formatMessage({
                   defaultMessage: 'Copy',
@@ -184,13 +120,107 @@ export const InfoHeader = () => {
                   spacing="xxtight"
                   textPlacement="left"
                 >
-                  {truncate(MOCK_ARTILCE.access.secret, 4, 4)}
+                  {truncate(version.dataHash, 4, 4)}
                 </TextIcon>
               </Button>
             </CopyToClipboard>
-          </section>
+          )}
+          {!version.dataHash && (
+            <TextIcon color="greyDarker" size="xs">
+              <FormattedMessage defaultMessage="Pending..." id="99OtWT" />
+            </TextIcon>
+          )}
         </section>
+
+        {/* gateways */}
+        {version.dataHash && (
+          <section className={styles.item}>
+            <section className={styles.name}>
+              <FormattedMessage defaultMessage="Gateways" id="jtdQHR" />
+            </section>
+            <section className={styles.content}>
+              {gateways.slice(0, 3).map((url) => {
+                const gatewayUrl = url.replace(':hash', version.dataHash!)
+                const hostname = url.replace(
+                  /(https:\/\/|\/ipfs\/|:hash.?)/g,
+                  ''
+                )
+
+                return (
+                  <a
+                    href={gatewayUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    key={url}
+                    className={styles.gatewayUrl}
+                  >
+                    {hostname}
+                  </a>
+                )
+              })}
+            </section>
+          </section>
+        )}
+
+        {/* ISCN */}
+        {article.iscnId && (
+          <section className={styles.item}>
+            <section className={styles.name}>ISCN</section>
+
+            <section className={styles.content}>
+              <a
+                href={iscnLinkUrl(article.iscnId)}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <TextIcon
+                  icon={<IconExternalLink16 size="xs" />}
+                  color="greyDarker"
+                  size="xs"
+                  spacing="xxtight"
+                  textPlacement="left"
+                >
+                  {truncate(article.iscnId, 4, 4)}
+                </TextIcon>
+              </a>
+            </section>
+          </section>
+        )}
+
+        {/* Secret */}
+        {article.access.secret && (
+          <section className={styles.item}>
+            <section className={styles.name}>
+              <FormattedMessage defaultMessage="Key" id="EcglP9" />
+            </section>
+
+            <section className={styles.content}>
+              <CopyToClipboard text={article.access.secret}>
+                <Button
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Copy',
+                    id: '4l6vz1',
+                  })}
+                >
+                  <TextIcon
+                    icon={<IconCopy16 size="xs" />}
+                    color="greyDarker"
+                    size="xs"
+                    spacing="xxtight"
+                    textPlacement="left"
+                  >
+                    {truncate(article.access.secret, 4, 4)}
+                  </TextIcon>
+                </Button>
+              </CopyToClipboard>
+            </section>
+          </section>
+        )}
       </footer>
     </section>
   )
 }
+
+InfoHeader.fragments = fragments
+
+export default InfoHeader

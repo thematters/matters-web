@@ -5,7 +5,6 @@ import { UserDigest } from '~/components/UserDigest'
 import { AuthorSidebar } from './AuthorSidebar'
 import { FromAuthor } from './AuthorSidebar/FromAuthor'
 import { RelatedArticles } from './AuthorSidebar/RelatedArticles'
-import Content from './Content'
 import MetaInfo from './MetaInfo'
 import StickyTopBanner from './StickyTopBanner'
 import { fragments as supportWidgetFragments } from './SupportWidget/gql'
@@ -64,9 +63,11 @@ const articlePublicFragment = gql`
       language
     }
     availableTranslations
+    contents {
+      html
+    }
     ...AuthorSidebarArticle
     ...MetaInfoArticle
-    ...ContentArticle
     ...TagListArticle
     ...AuthorSidebarRelatedArticles
     ...AuthorSidebarFromAuthor
@@ -78,7 +79,6 @@ const articlePublicFragment = gql`
   }
   ${AuthorSidebar.fragments.article}
   ${MetaInfo.fragments.article}
-  ${Content.fragments.article}
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
   ${FromAuthor.fragments.article}
@@ -158,13 +158,14 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
             ...CircleWallCirclePrivate
           }
         }
-        ...ContentArticle
+        contents {
+          html
+        }
         ...ToolbarArticlePrivate
         ...SupportWidgetArticlePrivate
       }
     }
   }
-  ${Content.fragments.article}
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.private}
   ${supportWidgetFragments.article.private}

@@ -45,6 +45,7 @@ type ToPathArgs =
       page: 'articleDetail'
       article: ArticleArgs
       collectionId?: string
+      versionId?: string
     }
   | {
       page:
@@ -116,7 +117,9 @@ export const toPath = (
             mediaHash ? '-' + mediaHash : ''
           }`
         }
-        if (!!args.collectionId) {
+        if (!!args.versionId) {
+          href = `${href}/revision?version=${args.versionId}`
+        } else if (!!args.collectionId) {
           href = `${href}?collection=${args.collectionId}`
         }
       } catch (err) {

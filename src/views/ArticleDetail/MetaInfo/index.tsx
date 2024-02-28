@@ -14,7 +14,7 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
-import { ArticleDetailPublicQuery } from '~/gql/graphql'
+import { MetaInfoArticleFragment } from '~/gql/graphql'
 
 import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
@@ -22,7 +22,7 @@ import styles from './styles.module.css'
 import TranslationButton from './TranslationButton'
 
 type MetaInfoProps = {
-  article: NonNullable<ArticleDetailPublicQuery['article']>
+  article: MetaInfoArticleFragment
   translated: boolean
   canTranslate: boolean
   toggleTranslate: () => any

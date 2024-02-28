@@ -9,6 +9,13 @@ export const fragments = {
       access {
         type
       }
+      language
+      slug
+      mediaHash
+      author {
+        id
+        userName
+      }
       ...FingerprintArticle
     }
     ${FingerprintButton.fragments.article}

@@ -4,15 +4,10 @@ import { FormattedMessage } from 'react-intl'
 
 import { Z_INDEX } from '~/common/enums'
 import { Dropdown, IconDown20, Label, Menu } from '~/components'
+import { VersionsArticleFragment } from '~/gql/graphql'
 
 import versionStyles from '../VersionsSidebar/styles.module.css'
 import styles from './styles.module.css'
-
-const versions = [
-  { id: 'UmV2aXNvbjox', createdAt: '2021-01-03T00:00:00Z' },
-  { id: 'UmV2aXNvbjoy', createdAt: '2021-01-02T00:00:00Z' },
-  { id: 'UmV2aXNvbjoz', createdAt: '2021-01-01T00:00:00Z' },
-]
 
 const Version = ({
   version,
@@ -49,13 +44,18 @@ const Version = ({
   )
 }
 
-export const VersionsDropdown = () => {
-  // TODO
-  if (versions.length === 1) {
+const VersionsDropdown = ({
+  article,
+}: {
+  article: VersionsArticleFragment
+}) => {
+  const versions = article.versions.edges.map((edge) => edge?.node!)
+
+  if (versions.length < 1) {
     return null
   }
 
-  const SelectContent = ({ dropdown }: { dropdown?: boolean }) => {
+  const SelectContent = () => {
     return (
       <Menu>
         {versions.map((version, index) => (
@@ -72,7 +72,7 @@ export const VersionsDropdown = () => {
     <section className={styles.versions}>
       <Dropdown
         appendTo="parent"
-        content={<SelectContent dropdown />}
+        content={<SelectContent />}
         zIndex={Z_INDEX.OVER_DIALOG}
       >
         {({ openDropdown, ref }) => (
@@ -91,3 +91,5 @@ export const VersionsDropdown = () => {
     </section>
   )
 }
+
+export default VersionsDropdown
