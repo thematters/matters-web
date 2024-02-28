@@ -1,7 +1,7 @@
 .container {
   display: flex;
   gap: var(--spacing-loose);
-  align-items: start;
+  align-items: flex-start;
   margin-top: var(--spacing-x-loose);
 
   & > a {

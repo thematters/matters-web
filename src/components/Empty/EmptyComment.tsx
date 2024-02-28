@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ReactComponent as IconComment88 } from '@/public/static/icons/88px/comment.svg'
-import { Empty, Translate, withIcon } from '~/components'
+import { Empty, withIcon } from '~/components'
 
 export const EmptyComment = ({
   description,
@@ -8,12 +10,16 @@ export const EmptyComment = ({
 }) => (
   <Empty
     icon={withIcon(IconComment88)({ size: 'xxxlM' })}
+    spacingY="loose"
     description={
       description || (
-        <Translate
-          zh_hant="尚未發表評論"
-          zh_hans="尚未发表评论"
-          en="No data yet"
+        <FormattedMessage
+          defaultMessage="Still quiet here. {br}Be the first one to say hello!"
+          id="7ykJ+l"
+          description="src/components/Empty/EmptyComment.tsx"
+          values={{
+            br: <br />,
+          }}
         />
       )
     }

@@ -262,8 +262,15 @@
     "defaultMessage": "資源不存在",
     "description": "ASSET_NOT_FOUND"
   },
+  "4OMGUj": {
+    "defaultMessage": "評論詳情"
+  },
   "4RpVDe": {
     "defaultMessage": "刪除草稿"
+  },
+  "4km7Yc": {
+    "defaultMessage": "突破歷史！你點燃的火炬是遊牧者路途上最耀眼的支持。火閃電徽章紀念你曾參與「遊牧者計畫」並達到最高等級。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "4l6vz1": {
     "defaultMessage": "複製"
@@ -388,6 +395,10 @@
     "defaultMessage": "確認刪除後，{commentType}會立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "78qsg6": {
+    "defaultMessage": "作者",
+    "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
   "79Ydsg": {
     "defaultMessage": "提現撤銷",
     "description": "src/components/Transaction/index.tsx"
@@ -409,6 +420,10 @@
   "7xnrxG": {
     "defaultMessage": "作品已添加至精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "7ykJ+l": {
+    "defaultMessage": "暫無評論，打個招呼吧",
+    "description": "src/components/Empty/EmptyComment.tsx"
   },
   "84VOdX": {
     "defaultMessage": "取消代表作",
@@ -464,6 +479,10 @@
   },
   "9J0iCw": {
     "defaultMessage": "已註銷用戶"
+  },
+  "9OIqBr": {
+    "defaultMessage": "編輯評論",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "9UNFGm": {
     "defaultMessage": "交易密碼"
@@ -636,10 +655,6 @@
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "DdVBFV": {
-    "defaultMessage": "徽章長出了羽翼，夢想的光輪正開始轉動，你已在遊牧者之路聚集了 10 位夥伴。再邀請 10 位同行者，一起邁向終點站，最高等級的榮譽正在等著你。",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "DjIpR6": {
     "defaultMessage": "設置封面"
   },
@@ -675,6 +690,9 @@
   "EZMrtJ": {
     "defaultMessage": "在 {circleName} 的廣播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Eb1U+/": {
+    "defaultMessage": "儲值成功"
   },
   "EoeUjA": {
     "defaultMessage": "你無權限進行該操作",
@@ -762,10 +780,6 @@
     "defaultMessage": "本月新增追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "GxTjwK": {
-    "defaultMessage": "月色之下夢想即將實現，月之夢徽章代表你參與了遊牧者計畫（參賽或支持了優質計畫）。接下來邀請 5 位夥伴一同踏上旅程，將獲得更高等級的徽章。",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "H0JBH6": {
     "defaultMessage": "登出"
   },
@@ -822,6 +836,10 @@
   "Hyr5ET": {
     "defaultMessage": "支持者",
     "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
+  },
+  "I8+06z": {
+    "defaultMessage": "評論已隱藏",
+    "description": "src/components/CommentBeta/Content/index.tsx"
   },
   "IKPYe9": {
     "defaultMessage": "查看",
@@ -905,6 +923,10 @@
   "KQi/UZ": {
     "defaultMessage": "封存作品"
   },
+  "KTg17G": {
+    "defaultMessage": "取消置頂",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "KgVypx": {
     "defaultMessage": "標籤",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
@@ -932,6 +954,10 @@
     "defaultMessage": "目前總營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "L79o74": {
+    "defaultMessage": "展開",
+    "description": "src/components/Expandable/index.tsx"
+  },
   "L7Si5/": {
     "defaultMessage": "管理社群",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -951,8 +977,16 @@
     "defaultMessage": "{articleCount} 篇文章",
     "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
   },
+  "LUWKnn": {
+    "defaultMessage": "徽章長出了羽翼，夢想的光輪正開始轉動。光輪號徽章紀念你曾參與「遊牧者計畫」。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "LWE7oq": {
     "defaultMessage": "草稿保存中，確定要離開嗎？"
+  },
+  "LYl9+i": {
+    "defaultMessage": "編輯",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "Lb0JsC": {
     "defaultMessage": "你封鎖了該用戶"
@@ -960,6 +994,9 @@
   "Lc/azT": {
     "defaultMessage": "IPNS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "LgbKvU": {
+    "defaultMessage": "評論"
   },
   "Lhhi5l": {
     "defaultMessage": "作品已發布",
@@ -1083,6 +1120,10 @@
   "OpeFTV": {
     "defaultMessage": "輸入六位數字交易密碼"
   },
+  "OsX3KM": {
+    "defaultMessage": "評論",
+    "description": "src/views/ArticleDetail/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1107,6 +1148,9 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "描述"
+  },
+  "QQSdHP": {
+    "defaultMessage": "查看更多"
   },
   "QUqfbW": {
     "defaultMessage": "說說圍爐的有趣之處，吸引支持者加入",
@@ -1329,6 +1373,10 @@
     "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "WsefD2": {
+    "defaultMessage": "没有更多",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "WuvE8X": {
     "defaultMessage": "{circleName} 的追蹤者",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
@@ -1368,10 +1416,6 @@
   "XfRKZY": {
     "defaultMessage": "去綁定",
     "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
-  },
-  "XfkltT": {
-    "defaultMessage": "流星雨的絢爛光芒足以點亮夜空，你已經邀請了 5 位夥伴關注遊牧者計畫，再邀請 5 位就能繼續升級！",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "XgdZSb": {
     "defaultMessage": "值得關注"
@@ -1449,7 +1493,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "修訂",
+    "defaultMessage": "編輯",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZYvVYX": {
@@ -1589,6 +1633,10 @@
     "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dAPUJp": {
+    "defaultMessage": "流星雨的絢爛光芒足以點亮夜空。流星號徽章紀念你曾參與「遊牧者計畫」。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "dAvP6d": {
     "defaultMessage": "尚無封鎖紀錄",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
@@ -1644,7 +1692,7 @@
     "defaultMessage": "支持作者"
   },
   "fDdcbi": {
-    "defaultMessage": "此 {type} 被原作者刪除"
+    "defaultMessage": "{type}已被原作者刪除"
   },
   "fPcF7H": {
     "defaultMessage": "添加合適標籤，讓站內外讀者找到你的作品"
@@ -1702,6 +1750,10 @@
     "defaultMessage": "人追蹤",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hgjjhO": {
+    "defaultMessage": "評論",
+    "description": "src/components/Forms/CommentFormBeta/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "追蹤了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -1719,6 +1771,10 @@
   },
   "iEJeQH": {
     "defaultMessage": "設置 Liker ID"
+  },
+  "iTcMqz": {
+    "defaultMessage": "月色之下，夢想即將實現。月之夢徽章紀念你曾參與「遊牧者計畫」。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "icdrwy": {
     "defaultMessage": "追蹤了你",
@@ -1748,9 +1804,16 @@
     "defaultMessage": "喜歡回應",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "jc3mW/": {
+    "defaultMessage": "支持者",
+    "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
   "jkrM1r": {
     "defaultMessage": "打開 IPNS 頁面",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "jwnump": {
+    "defaultMessage": "發布評論..."
   },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 發布廣播",
@@ -1933,10 +1996,6 @@
     "defaultMessage": "追蹤中",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "p0oPHP": {
-    "defaultMessage": "突破歷史！你點燃的火炬將是遊牧者路途上最耀眼的支持。恭喜你與 20 位好友一同抵達遊牧者計畫的終點，並獲得最高等級火閃電徽章。",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "p5qZnJ": {
     "defaultMessage": "讚賞了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
@@ -2007,6 +2066,10 @@
   "qlxeW+": {
     "defaultMessage": "取消點踩"
   },
+  "qxKjcm": {
+    "defaultMessage": "置頂",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "r66dXx": {
     "defaultMessage": "在 {circleName} 的廣播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -2064,6 +2127,9 @@
   },
   "sy+pv5": {
     "defaultMessage": "電子郵件"
+  },
+  "syEQFE": {
+    "defaultMessage": "發布"
   },
   "tBt9u0": {
     "defaultMessage": "登入",
@@ -2310,6 +2376,10 @@
     "defaultMessage": "進入圍爐",
     "description": "src/components/CircleDigest/Price/index.tsx"
   },
+  "yexhgj": {
+    "defaultMessage": "僅能置頂一則評論",
+    "description": "src/components/CommentBeta/DropdownActions/PinButton.tsx"
+  },
   "yoRaUc": {
     "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"
@@ -2353,9 +2423,6 @@
   "zn83cE": {
     "defaultMessage": "效果預覽",
     "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
-  },
-  "znJ06J": {
-    "defaultMessage": "<a>關於遊牧者計畫</a>"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",

@@ -12,7 +12,6 @@ import {
   Dropdown,
   IconMore16,
   Menu,
-  SubmitReport,
   toast,
   ViewerContext,
   withDialog,
@@ -65,7 +64,6 @@ interface DialogProps {
   openDeleteCommentDialog: () => void
   openBlockUserDialog: () => void
   openCollapseCommentDialog: () => void
-  openSubmitReportDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
@@ -145,13 +143,11 @@ const BaseDropdownActions = ({
   hasBlockUser,
   hasCollapse,
   hasUncollapse,
-  hasReport,
 
   openEditCommentDialog,
   openDeleteCommentDialog,
   openBlockUserDialog,
   openCollapseCommentDialog,
-  openSubmitReportDialog,
 }: BaseDropdownActionsProps) => {
   const Content = () => (
     <Menu>
@@ -170,7 +166,6 @@ const BaseDropdownActions = ({
         <CollapseComment.Button openDialog={openCollapseCommentDialog} />
       )}
       {hasUncollapse && <UncollapseButton commentId={comment.id} />}
-      {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
     </Menu>
   )
 
@@ -247,7 +242,19 @@ const DropdownActions = (props: DropdownActionsProps) => {
       type,
       commentId: comment.id,
       defaultContent: comment.content,
-      title: article ? 'editComment' : 'edit',
+      title: article ? (
+        <FormattedMessage
+          defaultMessage="Edit Comment"
+          id="9OIqBr"
+          description="src/components/Comment/DropdownActions/index.tsx"
+        />
+      ) : (
+        <FormattedMessage
+          defaultMessage="Edit"
+          id="LYl9+i"
+          description="src/components/Comment/DropdownActions/index.tsx"
+        />
+      ),
     },
     ({ openDialog }) => {
       return {

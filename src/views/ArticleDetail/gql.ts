@@ -44,6 +44,7 @@ const articlePublicFragment = gql`
       }
     }
     canComment
+    commentCount
     license
     sensitiveByAuthor
     sensitiveByAdmin

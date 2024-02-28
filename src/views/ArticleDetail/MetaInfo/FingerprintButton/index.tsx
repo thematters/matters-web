@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Button, FingerprintDialog, toast } from '~/components'
+import { Button, FingerprintDialog, TextIcon, toast } from '~/components'
 import { FingerprintArticleFragment } from '~/gql/graphql'
 
 interface FingerprintButtonProps {
@@ -19,7 +19,9 @@ const FingerprintButton = ({ article }: FingerprintButtonProps) => {
         })
       }}
     >
-      <FormattedMessage defaultMessage="IPFS" id="tio9Gt" />
+      <TextIcon size="xs">
+        <FormattedMessage defaultMessage="IPFS" id="tio9Gt" />
+      </TextIcon>
     </Button>
   )
 }

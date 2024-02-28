@@ -41,7 +41,7 @@ const fragments = {
     public: gql`
       fragment CommentButtonArticlePublic on Article {
         id
-        responseCount
+        commentCount
         canComment
       }
     `,
@@ -89,9 +89,7 @@ const Content = ({
           spacing={textIconSpacing}
           size="sm"
         >
-          {article.responseCount > 0
-            ? numAbbr(article.responseCount)
-            : undefined}
+          {article.commentCount > 0 ? numAbbr(article.commentCount) : undefined}
         </TextIcon>
       </Button>
     </>

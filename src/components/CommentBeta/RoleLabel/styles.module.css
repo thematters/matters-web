@@ -1,0 +1,23 @@
+.label {
+  @mixin inline-flex-center-all;
+  @mixin border-grey;
+
+  height: 1.125rem;
+  padding: 0 var(--spacing-xx-tight);
+  font-size: var(--font-size-xs);
+  color: var(--color-white);
+  user-select: none;
+  border-radius: var(--spacing-xx-tight);
+
+  &.authorLabel {
+    color: var(--color-matters-green);
+    background-color: var(--color-green-lighter);
+    border-color: var(--color-line-matters-green-light);
+  }
+
+  &.supporterLabel {
+    color: var(--color-matters-gold);
+    background-color: var(--color-matters-gold-lighter);
+    border-color: var(--color-line-matters-gold-light);
+  }
+}

@@ -262,8 +262,15 @@
     "defaultMessage": "资源不存在",
     "description": "ASSET_NOT_FOUND"
   },
+  "4OMGUj": {
+    "defaultMessage": "评论详情"
+  },
   "4RpVDe": {
     "defaultMessage": "刪除草稿"
+  },
+  "4km7Yc": {
+    "defaultMessage": "突破历史！你点燃的火炬是游牧者路途上最耀眼的支持。火闪电徽章纪念你曾参与「游牧者计划」并达到最高等级。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "4l6vz1": {
     "defaultMessage": "复制"
@@ -388,6 +395,10 @@
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "78qsg6": {
+    "defaultMessage": "作者",
+    "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
   "79Ydsg": {
     "defaultMessage": "提现撤销",
     "description": "src/components/Transaction/index.tsx"
@@ -409,6 +420,10 @@
   "7xnrxG": {
     "defaultMessage": "作品已添加至精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "7ykJ+l": {
+    "defaultMessage": "暂无评论，打个招呼吧",
+    "description": "src/components/Empty/EmptyComment.tsx"
   },
   "84VOdX": {
     "defaultMessage": "取消代表作",
@@ -464,6 +479,10 @@
   },
   "9J0iCw": {
     "defaultMessage": "已注销用户"
+  },
+  "9OIqBr": {
+    "defaultMessage": "编辑评论",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "9UNFGm": {
     "defaultMessage": "交易密码"
@@ -636,10 +655,6 @@
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "DdVBFV": {
-    "defaultMessage": "徽章长出了羽翼，梦想的光轮正开始转动，你已在游牧者之路聚集了 10 位伙伴。再邀请 10 位同行者，一起迈向终点站，最高等级的荣誉正在等着你。",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "DjIpR6": {
     "defaultMessage": "设置封面"
   },
@@ -675,6 +690,9 @@
   "EZMrtJ": {
     "defaultMessage": "在 {circleName} 的广播中留言 ",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Eb1U+/": {
+    "defaultMessage": "储值成功"
   },
   "EoeUjA": {
     "defaultMessage": "你无权限进行该操作",
@@ -762,10 +780,6 @@
     "defaultMessage": "本月新增追踪人数",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "GxTjwK": {
-    "defaultMessage": "月色之下梦想即将实现，月之梦徽章代表你参与了游牧者计划（参赛或支持了优质计划）。接下来邀请 5 位伙伴一同踏上旅程，将获得更高等级的徽章。",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "H0JBH6": {
     "defaultMessage": "登出"
   },
@@ -822,6 +836,10 @@
   "Hyr5ET": {
     "defaultMessage": "支持者",
     "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
+  },
+  "I8+06z": {
+    "defaultMessage": "评论已隐藏",
+    "description": "src/components/CommentBeta/Content/index.tsx"
   },
   "IKPYe9": {
     "defaultMessage": "查看",
@@ -905,6 +923,10 @@
   "KQi/UZ": {
     "defaultMessage": "归档作品"
   },
+  "KTg17G": {
+    "defaultMessage": "取消置顶",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "KgVypx": {
     "defaultMessage": "标签",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
@@ -932,6 +954,10 @@
     "defaultMessage": "目前总营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "L79o74": {
+    "defaultMessage": "展开",
+    "description": "src/components/Expandable/index.tsx"
+  },
   "L7Si5/": {
     "defaultMessage": "管理社群",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -951,8 +977,16 @@
     "defaultMessage": "{articleCount} 篇文章",
     "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
   },
+  "LUWKnn": {
+    "defaultMessage": "徽章长出了羽翼，梦想的光轮正开始转动。光轮号徽章纪念你曾参与「游牧者计划」。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "LWE7oq": {
     "defaultMessage": "草稿保存中，确定要离开吗？"
+  },
+  "LYl9+i": {
+    "defaultMessage": "编辑",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "Lb0JsC": {
     "defaultMessage": "你屏蔽了该用户"
@@ -960,6 +994,9 @@
   "Lc/azT": {
     "defaultMessage": "IPNS 订阅",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "LgbKvU": {
+    "defaultMessage": "评论"
   },
   "Lhhi5l": {
     "defaultMessage": "作品已发布",
@@ -1083,6 +1120,10 @@
   "OpeFTV": {
     "defaultMessage": "输入六位数字交易密码"
   },
+  "OsX3KM": {
+    "defaultMessage": "评论",
+    "description": "src/views/ArticleDetail/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "登录密码",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1107,6 +1148,9 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "描述"
+  },
+  "QQSdHP": {
+    "defaultMessage": "查看更多"
   },
   "QUqfbW": {
     "defaultMessage": "说说围炉的有趣之处，吸引支持者加入",
@@ -1329,6 +1373,10 @@
     "defaultMessage": "订阅",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "WsefD2": {
+    "defaultMessage": "没有更多",
+    "description": "src/views/User/Articles/UserArticles.tsx"
+  },
   "WuvE8X": {
     "defaultMessage": "{circleName} 的追踪者",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
@@ -1368,10 +1416,6 @@
   "XfRKZY": {
     "defaultMessage": "去绑定",
     "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
-  },
-  "XfkltT": {
-    "defaultMessage": "流星雨的绚烂光芒足以点亮夜空，你已经邀请了 5 位伙伴关注游牧者计划，再邀请 5 位就能继续升级！",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "XgdZSb": {
     "defaultMessage": "值得关注"
@@ -1449,7 +1493,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "修订",
+    "defaultMessage": "编辑",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZYvVYX": {
@@ -1589,6 +1633,10 @@
     "defaultMessage": "营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dAPUJp": {
+    "defaultMessage": "流星雨的绚烂光芒足以点亮夜空。流星号徽章纪念你曾参与「游牧者计划」。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "dAvP6d": {
     "defaultMessage": "尚无屏蔽记录",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
@@ -1644,7 +1692,7 @@
     "defaultMessage": "支持作者"
   },
   "fDdcbi": {
-    "defaultMessage": "此 {type} 被原作者删除"
+    "defaultMessage": "{type}已被原作者删除"
   },
   "fPcF7H": {
     "defaultMessage": "添加适合标签，帮助读者找到你的作品"
@@ -1702,6 +1750,10 @@
     "defaultMessage": "人追踪",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hgjjhO": {
+    "defaultMessage": "评论",
+    "description": "src/components/Forms/CommentFormBeta/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "追踪了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -1719,6 +1771,10 @@
   },
   "iEJeQH": {
     "defaultMessage": "设置 Liker ID"
+  },
+  "iTcMqz": {
+    "defaultMessage": "月色之下，梦想即将实现。月之梦徽章纪念你曾参与「游牧者计划」。",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "icdrwy": {
     "defaultMessage": "追踪了你",
@@ -1748,9 +1804,16 @@
     "defaultMessage": "喜欢回应",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "jc3mW/": {
+    "defaultMessage": "支持者",
+    "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
   "jkrM1r": {
     "defaultMessage": "打开 IPNS 页面",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "jwnump": {
+    "defaultMessage": "发布评论..."
   },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 发布广播",
@@ -1933,10 +1996,6 @@
     "defaultMessage": "追踪中",
     "description": "src/components/UserProfile/index.tsx"
   },
-  "p0oPHP": {
-    "defaultMessage": "突破历史！你点燃的火炬将是游牧者路途上最耀眼的支持。恭喜你与 20 位好友一同抵达游牧者计画的终点，并获得最高等级火闪电徽章。",
-    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
-  },
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
@@ -2007,6 +2066,10 @@
   "qlxeW+": {
     "defaultMessage": "取消点踩"
   },
+  "qxKjcm": {
+    "defaultMessage": "置顶",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "r66dXx": {
     "defaultMessage": "在 {circleName} 的广播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -2064,6 +2127,9 @@
   },
   "sy+pv5": {
     "defaultMessage": "邮箱"
+  },
+  "syEQFE": {
+    "defaultMessage": "发布"
   },
   "tBt9u0": {
     "defaultMessage": "登录",
@@ -2310,6 +2376,10 @@
     "defaultMessage": "进入围炉",
     "description": "src/components/CircleDigest/Price/index.tsx"
   },
+  "yexhgj": {
+    "defaultMessage": "仅能置顶一则评论",
+    "description": "src/components/CommentBeta/DropdownActions/PinButton.tsx"
+  },
   "yoRaUc": {
     "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"
@@ -2353,9 +2423,6 @@
   "zn83cE": {
     "defaultMessage": "效果预览",
     "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
-  },
-  "znJ06J": {
-    "defaultMessage": "<a>关于游牧者计划</a>"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",

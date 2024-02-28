@@ -1,0 +1,54 @@
+.baseDrawer {
+  & .baseDrawerCheckbox {
+    display: none;
+
+    &:checked {
+      & ~ .baseDrawerContainer {
+        visibility: visible;
+        transform: translate3d(0, 0, 0) !important;
+      }
+    }
+  }
+
+  & .baseDrawerContainer {
+    position: fixed;
+    visibility: hidden;
+    background: white;
+    box-shadow: -8px 0 56px 0 rgb(0 0 0 / 8%) !important;
+    backdrop-filter: blur(12px);
+    will-change: transform, visibility;
+  }
+}
+
+.drawer {
+  & .header {
+    @mixin flex-center-space-between;
+
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-global-header);
+    padding: var(--spacing-xx-loose) var(--spacing-loose) 0
+      var(--spacing-xx-loose);
+    margin-bottom: var(--spacing-base);
+    background: var(--color-white);
+
+    & h2 {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.5;
+    }
+
+    & .close {
+      &:hover,
+      &:focus {
+        color: var(--color-grey-darker);
+      }
+    }
+  }
+
+  & .content {
+    height: calc(100vh - 86px);
+    padding: 0 var(--spacing-loose) 0 var(--spacing-xx-loose);
+    overflow-y: auto;
+  }
+}

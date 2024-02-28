@@ -60,7 +60,7 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
   if (isBalanceInsufficient) {
     const props = {
       mode,
-      text: 'topUp',
+      text: <FormattedMessage defaultMessage="Top Up" id="dTOtPO" />,
       form: formId,
     }
     return (

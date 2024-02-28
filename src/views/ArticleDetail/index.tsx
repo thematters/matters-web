@@ -1,14 +1,19 @@
 import { useLazyQuery } from '@apollo/react-hooks'
-import { md2html } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 import { Waypoint } from 'react-waypoint'
 
-import { URL_QS } from '~/common/enums'
+import {
+  OPEN_COMMENT_DETAIL_DIALOG,
+  REFERRAL_QUERY_REFERRAL_KEY,
+  URL_QS,
+} from '~/common/enums'
 import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
+  Drawer,
   EmptyLayout,
   Error,
   Head,
@@ -36,6 +41,8 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import { CommentsDialog } from './Comments/CommentsDialog'
+import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
 import {
@@ -65,10 +72,19 @@ const DynamicCollection = dynamic(() => import('./Collection'), {
   ssr: false,
   loading: () => <Spinner />,
 })
-const DynamicResponse = dynamic(() => import('./Responses'), {
+
+const DynamicComments = dynamic(() => import('./Comments'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <CommentsPlaceholder />,
 })
+
+const DynamicCommentsDetail = dynamic(
+  () => import('./Comments/CommentDetail'),
+  {
+    ssr: false,
+    loading: () => <CommentsPlaceholder />,
+  }
+)
 const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ssr: false,
   loading: () => (
@@ -86,6 +102,8 @@ const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
 })
+
+type DrawerStep = 'commentList' | 'commentDetail'
 
 const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
   // is there a better way to detect valid?
@@ -107,9 +125,24 @@ const BaseArticleDetail = ({
   article: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
 }) => {
+  /**
+   * Fragment Patterns
+   *
+   * 0. ``
+   * 1. `#parentCommentId`
+   * 2. `#parentComemntId-childCommentId`
+   */
+  let fragment = ''
+  let parentId = ''
+  if (typeof window !== 'undefined') {
+    fragment = window.location.hash.replace('#', '')
+    parentId = fragment.split('-')[0]
+  }
+
   const { getQuery, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
+  const intl = useIntl()
 
   const features = useFeatures()
   const [showFloatToolbar, setShowFloatToolbar] = useState(true)
@@ -117,6 +150,17 @@ const BaseArticleDetail = ({
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
+
+  const [drawerStep, setDrawerStep] = useState<DrawerStep>(
+    parentId !== '' ? 'commentDetail' : 'commentList'
+  )
+  const isCommentDetail = drawerStep === 'commentDetail'
+  const isCommentList = drawerStep === 'commentList'
+  const [isOpen, setIsOpen] = useState(false)
+  const [autoOpen] = useState(true)
+  const toggleDrawer = () => {
+    setIsOpen((prevState) => !prevState)
+  }
 
   const authorId = article.author?.id
   const paymentPointer = article.author?.paymentPointer
@@ -196,6 +240,17 @@ const BaseArticleDetail = ({
     setLang(routerLang)
   }, [])
 
+  // show comment detail drawer/dialog if fragment exists
+  useEffect(() => {
+    if (parentId === '') {
+      return
+    }
+    setTimeout(() => {
+      setIsOpen(true)
+      window.dispatchEvent(new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG))
+    }, 500)
+  }, [parentId])
+
   const {
     title: translatedTitle,
     summary: translatedSummary,
@@ -205,15 +260,12 @@ const BaseArticleDetail = ({
   const title = translated && translatedTitle ? translatedTitle : article.title
   const summary =
     translated && translatedSummary ? translatedSummary : article.summary
-  const isEnableMd = !!getQuery('md') // feature flag
-  const originalContent =
-    isEnableMd && article.contents.markdown
-      ? md2html(article.contents.markdown)
-      : article.contents.html
+  const originalContent = article.contents.html
   const content =
     translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
   const lock = article.state !== 'active'
+  const isShortWork = summary.length + content.length < 200
 
   return (
     <Layout.Main
@@ -255,6 +307,33 @@ const BaseArticleDetail = ({
       />
 
       <State article={article} />
+
+      <Media greaterThan="sm">
+        <Drawer
+          isOpen={isOpen}
+          onClose={toggleDrawer}
+          backTo={
+            isCommentDetail ? () => setDrawerStep('commentList') : undefined
+          }
+          title={
+            isCommentList
+              ? intl.formatMessage({
+                  defaultMessage: 'Comment',
+                  description: 'src/views/ArticleDetail/index.tsx',
+                  id: 'OsX3KM',
+                })
+              : intl.formatMessage({
+                  defaultMessage: 'Comment Details',
+                  id: '4OMGUj',
+                })
+          }
+        >
+          {isCommentList && (
+            <DynamicComments id={article.id} lock={!canReadFullContent} />
+          )}
+          {isCommentDetail && <DynamicCommentsDetail />}
+        </Drawer>
+      </Media>
 
       <section className={styles.content}>
         <section className={styles.title}>
@@ -319,9 +398,20 @@ const BaseArticleDetail = ({
                 hasFingerprint={canReadFullContent}
                 hasReport
                 lock={lock}
+                toggleDrawer={toggleDrawer}
               />
             </div>
           </Waypoint>
+        </Media>
+
+        <Media greaterThan="sm">
+          <Waypoint
+            onEnter={() => {
+              if (article.canComment && autoOpen && !isShortWork) {
+                setTimeout(() => setIsOpen(true), 500)
+              }
+            }}
+          />
         </Media>
 
         {collectionCount > 0 && (
@@ -342,26 +432,43 @@ const BaseArticleDetail = ({
             }}
             onLeave={() => setShowCommentToolbar(false)}
           >
-            <section className={styles.block}>
-              <DynamicResponse id={article.id} lock={!canReadFullContent} />
-            </section>
+            {article.commentCount > 0 && (
+              <section className={styles.smUpCommentBlock}>
+                <DynamicComments id={article.id} lock={!canReadFullContent} />
+              </section>
+            )}
           </Waypoint>
         </Media>
       </section>
 
       <Media at="sm">
         <Spacer size="xxxloose" />
-        <FixedToolbar
+        <CommentsDialog
+          id={article.id}
           article={article}
           articleDetails={article}
           translated={translated}
           translatedLanguage={translatedLanguage}
           privateFetched={privateFetched}
-          hasFingerprint={canReadFullContent}
-          hasReport
           lock={lock}
           showCommentToolbar={showCommentToolbar}
-        />
+        >
+          {({ openDialog: openCommentsDialog }) => (
+            <FixedToolbar
+              article={article}
+              articleDetails={article}
+              translated={translated}
+              translatedLanguage={translatedLanguage}
+              privateFetched={privateFetched}
+              hasFingerprint={canReadFullContent}
+              lock={lock}
+              showCommentToolbar={showCommentToolbar}
+              openCommentsDialog={
+                article.commentCount > 0 ? openCommentsDialog : undefined
+              }
+            />
+          )}
+        </CommentsDialog>
       </Media>
 
       <Media at="md">
@@ -372,6 +479,7 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
+          toggleDrawer={toggleDrawer}
         />
       </Media>
 
@@ -382,6 +490,17 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
+          toggleDrawer={toggleDrawer}
+        />
+      </Media>
+
+      <Media greaterThan="sm">
+        <Waypoint
+          onEnter={() => {
+            if (article.canComment && autoOpen && isShortWork) {
+              setTimeout(() => setIsOpen(true), 500)
+            }
+          }}
         />
       </Media>
     </Layout.Main>
@@ -510,6 +629,15 @@ const ArticleDetail = ({
     const n = new URL(
       `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${newPath.href}`
     )
+
+    // TODO: can remove this after 2024/2
+    const isNomadTags = article.tags?.some(
+      (tag) => tag.content === 'nomadmatters' || tag.content === '遊牧者計畫'
+    )
+    const hasReferral = u.searchParams.has(REFERRAL_QUERY_REFERRAL_KEY)
+    if (!hasReferral && isNomadTags && viewer.userName) {
+      u.searchParams.append(REFERRAL_QUERY_REFERRAL_KEY, viewer.userName)
+    }
 
     // hide all utm_ tracking code parameters
     // copy all others

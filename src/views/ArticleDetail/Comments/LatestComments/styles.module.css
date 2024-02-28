@@ -1,0 +1,7 @@
+.latestComments {
+  overflow-x: hidden;
+
+  @media (--sm-up) {
+    width: 22.5rem;
+  }
+}
