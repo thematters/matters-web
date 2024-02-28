@@ -1,54 +1,64 @@
 import { useQuery } from '@apollo/react-hooks'
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
 import { dom, stripHtml } from '~/common/utils'
-import { Button, IconSpinner16, TextIcon, useMutation } from '~/components'
-import CommentEditor from '~/components/Editor/Comment'
-import { updateArticleComments, updateCommentDetail } from '~/components/GQL'
+import { CommentFormType, Dialog, Spinner, useMutation } from '~/components'
 import PUT_COMMENT_BETA from '~/components/GQL/mutations/putCommentBeta'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
+import {
+  updateArticleComments,
+  updateCommentDetail,
+} from '~/components/GQL/updates'
 import { CommentDraftQuery, PutCommentBetaMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-export type CommentFormBetaType = 'article'
+const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
+  ssr: false,
+  loading: () => <Spinner />,
+})
 
-export interface CommentFormBetaProps {
+export interface CommentFormProps {
   commentId?: string
   replyToId?: string
   parentId?: string
+  circleId?: string
   articleId?: string
-  type: CommentFormBetaType
+  type: CommentFormType
+
   isInCommentDetail?: boolean
 
   defaultContent?: string | null
   submitCallback?: () => void
-  closeCallback?: () => void
-
-  placeholder?: string
+  closeDialog: () => void
+  title?: React.ReactNode
+  context?: React.ReactNode
 }
 
-export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
+const CommentForm: React.FC<CommentFormProps> = ({
   commentId,
   replyToId,
   parentId,
   articleId,
+  circleId,
   type,
+
   isInCommentDetail,
   defaultContent,
   submitCallback,
-  closeCallback,
+  closeDialog,
+  title,
+  context,
 
-  placeholder,
+  ...props
 }) => {
-  const intl = useIntl()
-
   // retrieve comment draft
-  const commentDraftId = `${articleId}-${type}-${commentId || 0}-${
+  const commentDraftId = `${articleId || circleId}:${commentId || 0}:${
     parentId || 0
-  }-${replyToId || 0}`
+  }:${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`
 
   const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
@@ -60,7 +70,6 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''
   )
-
   const contentCount = stripHtml(content).trim().length
 
   const isValid = contentCount > 0 && contentCount <= MAX_ARTICLE_COMMENT_LENGTH
@@ -73,6 +82,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
         content,
         replyTo: replyToId,
         articleId,
+        circleId,
         parentId,
         type,
         mentions,
@@ -112,20 +122,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
         },
       })
 
-      setSubmitting(false)
-
-      if (submitCallback) {
-        submitCallback()
-      }
-
-      // clear content
-      const $editor = document.querySelector(
-        `#${formId} .ProseMirror`
-      ) as HTMLElement
-
-      if ($editor) {
-        $editor.innerHTML = ''
-      }
+      setContent('')
 
       // clear draft
       client.writeData({
@@ -133,9 +130,13 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
         data: { content: '' },
       })
 
-      if (closeCallback) {
-        closeCallback()
+      setSubmitting(false)
+
+      if (submitCallback) {
+        submitCallback()
       }
+
+      closeDialog()
     } catch (e) {
       setSubmitting(false)
       console.error(e)
@@ -152,64 +153,56 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   }
 
   return (
-    <form
-      className={styles.form}
-      id={formId}
-      onSubmit={handleSubmit}
-      aria-label={intl.formatMessage({
-        defaultMessage: 'Comment',
-        id: 'hgjjhO',
-        description: 'src/components/Forms/CommentFormBeta/index.tsx',
-      })}
-    >
-      <section className={styles.content}>
-        <CommentEditor
-          content={content}
-          update={onUpdate}
-          placeholder={placeholder}
-        />
-      </section>
-
-      <footer className={styles.footer}>
-        {contentCount > MAX_ARTICLE_COMMENT_LENGTH && (
-          <p className={styles.count}>
-            {contentCount}/{MAX_ARTICLE_COMMENT_LENGTH}
-          </p>
-        )}
-        {!!closeCallback && (
-          <Button
-            size={[null, '2rem']}
-            spacing={[0, 'base']}
-            bgColor="white"
+    <>
+      <Dialog.Header
+        title=""
+        closeDialog={closeDialog}
+        leftBtn={
+          <Dialog.RoundedButton
             disabled={isSubmitting}
-            onClick={closeCallback}
-            textColor="black"
-            textActiveColor="greyDarker"
-          >
-            <TextIcon size="sm">
-              <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
-            </TextIcon>
-          </Button>
-        )}
-        <Button
-          type="submit"
-          form={formId}
-          size={[null, '2rem']}
-          spacing={[0, 'base']}
-          bgColor="green"
-          disabled={isSubmitting || !isValid}
-        >
-          <TextIcon
-            color="white"
-            size="sm"
-            icon={isSubmitting && <IconSpinner16 size="sm" />}
-          >
-            {isSubmitting ? null : (
-              <FormattedMessage defaultMessage="Publish" id="syEQFE" />
+            text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
+            textSize="sm"
+            textWeight="normal"
+            bgColor="white"
+            color="black"
+            borderWidth="sm"
+            spacing={[0, 'baseLoose']}
+            size={[null, '1.875rem']}
+            onClick={closeDialog}
+          />
+        }
+        rightBtn={
+          <>
+            {contentCount > MAX_ARTICLE_COMMENT_LENGTH && (
+              <div className={styles.count}>
+                {contentCount}/{MAX_ARTICLE_COMMENT_LENGTH}
+              </div>
             )}
-          </TextIcon>
-        </Button>
-      </footer>
-    </form>
+            <Dialog.RoundedButton
+              type="submit"
+              form={formId}
+              disabled={isSubmitting || !isValid}
+              text={<FormattedMessage defaultMessage="Publish" id="syEQFE" />}
+              textSize="sm"
+              textWeight="normal"
+              bgColor="green"
+              color="white"
+              spacing={[0, 'baseLoose']}
+              size={[null, '1.875rem']}
+            />
+          </>
+        }
+      />
+
+      <Dialog.Content fixedHeight>
+        {context && <section className={styles.context}>{context}</section>}
+
+        <form className={styles.form} id={formId} onSubmit={handleSubmit}>
+          <CommentEditor content={content} update={onUpdate} />
+        </form>
+      </Dialog.Content>
+    </>
   )
 }
+
+export default CommentForm

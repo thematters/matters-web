@@ -5,7 +5,11 @@ import { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { Waypoint } from 'react-waypoint'
 
-import { REFERRAL_QUERY_REFERRAL_KEY, URL_QS } from '~/common/enums'
+import {
+  OPEN_COMMENT_DETAIL_DIALOG,
+  REFERRAL_QUERY_REFERRAL_KEY,
+  URL_QS,
+} from '~/common/enums'
 import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
@@ -37,6 +41,7 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import { CommentsDialog } from './Comments/CommentsDialog'
 import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
@@ -235,13 +240,14 @@ const BaseArticleDetail = ({
     setLang(routerLang)
   }, [])
 
-  // show comment detail drawer if fragment exists
+  // show comment detail drawer/dialog if fragment exists
   useEffect(() => {
     if (parentId === '') {
       return
     }
     setTimeout(() => {
       setIsOpen(true)
+      window.dispatchEvent(new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG))
     }, 500)
   }, [parentId])
 
@@ -318,8 +324,7 @@ const BaseArticleDetail = ({
                 })
               : intl.formatMessage({
                   defaultMessage: 'Comment Details',
-                  description: 'src/views/ArticleDetail/index.tsx',
-                  id: 'w/Bet8',
+                  id: '4OMGUj',
                 })
           }
         >
@@ -437,16 +442,32 @@ const BaseArticleDetail = ({
 
       <Media at="sm">
         <Spacer size="xxxloose" />
-        <FixedToolbar
+        <CommentsDialog
+          id={article.id}
           article={article}
           articleDetails={article}
           translated={translated}
           translatedLanguage={translatedLanguage}
           privateFetched={privateFetched}
-          hasFingerprint={canReadFullContent}
           lock={lock}
           showCommentToolbar={showCommentToolbar}
-        />
+        >
+          {({ openDialog: openCommentsDialog }) => (
+            <FixedToolbar
+              article={article}
+              articleDetails={article}
+              translated={translated}
+              translatedLanguage={translatedLanguage}
+              privateFetched={privateFetched}
+              hasFingerprint={canReadFullContent}
+              lock={lock}
+              showCommentToolbar={showCommentToolbar}
+              openCommentsDialog={
+                article.commentCount > 0 ? openCommentsDialog : undefined
+              }
+            />
+          )}
+        </CommentsDialog>
       </Media>
 
       <Media at="md">
