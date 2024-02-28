@@ -10,10 +10,11 @@ describe('<Comemnt/FooterActions>', () => {
     render(
       <FooterActions comment={MOCK_COMMENT} hasUpvote hasReply type="article" />
     )
-
     // reply
-    const $reply = screen.getByRole('button', { name: 'Write a comment' })
-    expect($reply).toBeInTheDocument()
+    const $reply = screen.getAllByRole('button', { name: 'Write a comment' })
+    expect($reply).toHaveLength(2)
+    expect($reply[0]).toBeInTheDocument()
+    expect($reply[1]).toBeInTheDocument()
 
     // upvote
     const $upvote = screen.getByRole('button', { name: 'Upvote' })
