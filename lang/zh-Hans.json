@@ -871,9 +871,6 @@
     "defaultMessage": "评论数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
-  "JRkgKV": {
-    "defaultMessage": "复制失败"
-  },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"

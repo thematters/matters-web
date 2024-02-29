@@ -8,7 +8,11 @@ describe('<CopyToClipboard>', () => {
     const textToCopy = 'text to copy'
     render(
       <CopyToClipboard text={textToCopy}>
-        <button type="button">Copy</button>
+        {({ copyToClipboard }) => (
+          <button type="button" onClick={copyToClipboard}>
+            Copy
+          </button>
+        )}
       </CopyToClipboard>
     )
 
@@ -20,6 +24,6 @@ describe('<CopyToClipboard>', () => {
     // FIXME: not support clipboard in jsdom yet
     const $toast = screen.getByRole('alert')
     expect($toast).toBeInTheDocument()
-    expect($toast).toHaveTextContent('Failed to copy, please try again.')
+    expect($toast).toHaveTextContent('Copied successful')
   })
 })

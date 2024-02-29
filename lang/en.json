@@ -871,9 +871,6 @@
     "defaultMessage": "Number of comments",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
-  "JRkgKV": {
-    "defaultMessage": "Failed to copy, please try again."
-  },
   "JTWayV": {
     "defaultMessage": "Add description",
     "description": "src/views/User/CollectionDetail/Content.tsx"

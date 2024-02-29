@@ -120,10 +120,13 @@ const BadgeNomadDialogContent = ({
               />
             }
           >
-            <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-              color="greyDarker"
-            />
+            {({ copyToClipboard }) => (
+              <Dialog.RoundedButton
+                text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
+                color="greyDarker"
+                onClick={copyToClipboard}
+              />
+            )}
           </CopyToClipboard>
         }
         smUpBtns={
@@ -149,10 +152,13 @@ const BadgeNomadDialogContent = ({
                 />
               }
             >
-              <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-                color="green"
-              />
+              {({ copyToClipboard }) => (
+                <Dialog.TextButton
+                  text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
+                  color="green"
+                  onClick={copyToClipboard}
+                />
+              )}
             </CopyToClipboard>
           </>
         }
