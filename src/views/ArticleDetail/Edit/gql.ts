@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
 
 import { CircleDigest, Tag } from '~/components'
-import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import articleFragments from '~/components/GQL/fragments/article'
 import assetFragment from '~/components/GQL/fragments/asset'
 
-export const EDIT_MODE_ARTICLE = gql`
-  query EditModeArticle(
+export const GET_EDIT_ARTICLE = gql`
+  query QueryEditArticle(
     $id: ID!
     $after: String
     $first: first_Int_min_0 = null
@@ -14,9 +13,15 @@ export const EDIT_MODE_ARTICLE = gql`
     article: node(input: { id: $id }) {
       ... on Article {
         id
+        title
         slug
         mediaHash
         cover
+        contents {
+          html
+        }
+        summary
+        summaryCustomized
         assets {
           ...Asset
         }
@@ -38,23 +43,18 @@ export const EDIT_MODE_ARTICLE = gql`
             ...DigestRichCirclePublic
           }
         }
+        canComment
         license
         sensitiveByAuthor
         requestForDonation
         replyToDonator
         revisionCount
-        drafts {
-          id
-          mediaHash
-          publishState
-          ...EditorDraft
-        }
-        newestPublishedDraft {
-          id
-          mediaHash
-          tags
-          publishState
-          ...EditorDraft
+        versions(input: { first: 1 }) {
+          edges {
+            node {
+              id
+            }
+          }
         }
         ...ArticleCollection
       }
@@ -63,12 +63,11 @@ export const EDIT_MODE_ARTICLE = gql`
   ${assetFragment}
   ${Tag.fragments.tag}
   ${articleFragments.articleCollection}
-  ${EditorFragments.draft}
   ${CircleDigest.Rich.fragments.circle.public}
 `
 
-export const EDIT_MODE_ARTICLE_ASSETS = gql`
-  query EditModeArticleAssets($id: ID!) {
+export const GET_EDIT_ARTICLE_ASSETS = gql`
+  query QueryEditArticleAssets($id: ID!) {
     article: node(input: { id: $id }) {
       ... on Article {
         id

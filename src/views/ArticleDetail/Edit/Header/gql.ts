@@ -1,15 +1,8 @@
 import gql from 'graphql-tag'
 
 import { Tag } from '~/components'
-import { fragments as EditorFragments } from '~/components/Editor/fragments'
 import articleFragments from '~/components/GQL/fragments/article'
 
-/**
- * Note:
- *
- * The response of this mutation is aligned with `COLLECTION_LIST` in `CollectionList.tsx`,
- * so that it will auto update the local cache and prevent refetch logics
- */
 export const EDIT_ARTICLE = gql`
   mutation EditArticle(
     $id: ID!
@@ -58,16 +51,9 @@ export const EDIT_ARTICLE = gql`
       license
       requestForDonation
       replyToDonator
-      drafts {
-        id
-        mediaHash
-        publishState
-        ...EditorDraft
-      }
       ...ArticleCollection
     }
   }
   ${Tag.fragments.tag}
   ${articleFragments.articleCollection}
-  ${EditorFragments.draft}
 `

@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { URL_QS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Button,
@@ -113,11 +112,7 @@ const MetaInfo = ({
               <Button
                 textColor="black"
                 textActiveColor="greyDarker"
-                href={
-                  editable
-                    ? `${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`
-                    : undefined
-                }
+                href={editable ? `${href}/edit` : undefined}
                 disabled={!editable}
               >
                 <TextIcon icon={<IconEdit16 />} size="xs">

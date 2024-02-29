@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useEffect, useState } from 'react'
 
 import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
+import { toGlobalId } from '~/common/utils'
 import {
   EmptyLayout,
   Layout,
@@ -11,6 +12,7 @@ import {
   ReviseArticleDialog,
   Spinner,
   Throw404,
+  useRoute,
 } from '~/components'
 import {
   SetCollectionProps,
@@ -25,58 +27,42 @@ import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettin
 import { QueryError, useImperativeQuery } from '~/components/GQL'
 import {
   ArticleAccessType,
-  ArticleDetailPublicQuery,
   ArticleDigestDropdownArticleFragment,
   ArticleLicenseType,
   AssetFragment,
   DigestRichCirclePublicFragment,
   DigestTagFragment,
-  EditModeArticleAssetsQuery,
-  EditModeArticleQuery,
+  QueryEditArticleAssetsQuery,
+  QueryEditArticleQuery,
 } from '~/gql/graphql'
 
 import { useEditArticleDetailSupportSetting } from '../Hook'
-import { EDIT_MODE_ARTICLE, EDIT_MODE_ARTICLE_ASSETS } from './gql'
-import EditModeHeader from './Header'
+import { GET_EDIT_ARTICLE, GET_EDIT_ARTICLE_ASSETS } from './gql'
+import EditHeader from './Header'
 import PublishState from './PublishState'
 import styles from './styles.module.css'
 
-interface EditModeProps {
-  article: NonNullable<ArticleDetailPublicQuery['article']>
-  onCancel: () => void
-  onSaved: () => void
-}
+type Article = NonNullable<
+  QueryEditArticleQuery['article'] & {
+    __typename: 'Article'
+  }
+>
 
 const Editor = dynamic(
   () =>
     import('~/components/Editor/Article').then((mod) => mod.EditArticleEditor),
-  {
-    ssr: false,
-    loading: () => <Spinner />,
-  }
+  { ssr: false, loading: () => <Spinner /> }
 )
 
-const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
+const BaseEdit = ({ article }: { article: Article }) => {
   const [editContent, setEditContent] = useState('')
   const [showPublishState, setShowPublishState] = useState(false)
-  const { data, loading, error } = useQuery<EditModeArticleQuery>(
-    EDIT_MODE_ARTICLE,
-    {
-      variables: { id: article.id },
-      fetchPolicy: 'network-only',
-    }
-  )
-  const editModeArticle = data?.article as NonNullable<
-    EditModeArticleQuery['article'] & {
-      __typename: 'Article'
-    }
-  >
 
   // cover
-  const assets = editModeArticle?.assets || []
+  const assets = article.assets || []
   const [cover, editCover] = useState<AssetFragment>()
-  const refetchAssets = useImperativeQuery<EditModeArticleAssetsQuery>(
-    EDIT_MODE_ARTICLE_ASSETS,
+  const refetchAssets = useImperativeQuery<QueryEditArticleAssetsQuery>(
+    GET_EDIT_ARTICLE_ASSETS,
     {
       variables: { id: article.id },
       fetchPolicy: 'network-only',
@@ -104,7 +90,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
       : article.license
   const [license, editLicense] = useState<ArticleLicenseType>(initialLicense)
 
-  const ownCircles = editModeArticle?.author.ownCircles
+  const ownCircles = article.author.ownCircles
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const editAccess = (
     addToCircle: boolean,
@@ -124,71 +110,36 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
 
   // update cover & collection from retrieved data
   useEffect(() => {
-    if (!editModeArticle) {
+    if (!article) {
       return
     }
 
     // cover, find from `article.assets` since `article.cover` isn't a `Asset`
-    const currCover = assets.find(
-      (asset) => asset.path === editModeArticle?.cover
-    )
+    const currCover = assets.find((asset) => asset.path === article.cover)
     if (currCover) {
       editCover(currCover)
     }
 
     // collection
-    editCollection(
-      editModeArticle?.collection.edges?.map(({ node }) => node) || []
-    )
-  }, [editModeArticle?.id])
+    editCollection(article.collection.edges?.map(({ node }) => node) || [])
+  }, [article.id])
 
   const { edit: editSupport, saving: supportSaving } =
-    useEditArticleDetailSupportSetting(article)
+    useEditArticleDetailSupportSetting(article.id)
 
   const [contentSensitive, setContentSensitive] = useState<boolean>(
     article.sensitiveByAuthor
   )
 
-  const [iscnPublish, setIscnPublish] = useState<boolean>(false) // always start false
+  // always start false
+  const [iscnPublish, setIscnPublish] = useState<boolean>(false)
 
   const [canComment, setCanComment] = useState<boolean>(article.canComment)
 
-  /**
-   * Render
-   */
-  if (loading) {
-    return (
-      <EmptyLayout>
-        <Spinner />
-      </EmptyLayout>
-    )
-  }
-
-  if (error) {
-    return (
-      <EmptyLayout>
-        <QueryError error={error} />
-      </EmptyLayout>
-    )
-  }
-
-  const drafts = editModeArticle?.drafts
-  const draft = drafts?.[0]
   const revisionCountLeft =
-    MAX_ARTICLE_REVISION_COUNT - (editModeArticle?.revisionCount || 0)
+    MAX_ARTICLE_REVISION_COUNT - (article?.revisionCount || 0)
   const isOverRevisionLimit = revisionCountLeft <= 0
-  const isSameHash = draft?.mediaHash === article.mediaHash
-  const isPending = draft?.publishState === 'pending'
-  const isEditDisabled = !isSameHash || isPending
-  const isReviseDisabled = isEditDisabled || isOverRevisionLimit
-
-  if (!draft || !data?.article) {
-    return (
-      <EmptyLayout>
-        <Throw404 />
-      </EmptyLayout>
-    )
-  }
+  const isReviseDisabled = isOverRevisionLimit
 
   const coverProps: SetCoverProps = {
     cover: cover?.path,
@@ -242,6 +193,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
     iscnPublishSaving: false,
   }
 
+  const onSaved = () => {} // TODO
+
   return (
     <>
       <Layout.Main
@@ -275,20 +228,19 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         <Layout.Header
           mode="compact"
           right={
-            <EditModeHeader
+            <EditHeader
               {...coverProps}
               {...tagsProps}
               {...collectionProps}
               {...accessProps}
               {...setCommentProps}
               article={article}
-              draft={draft as any}
-              editContent={editContent || draft.content || ''}
+              lastContent={article.contents.html}
+              editContent={editContent || article.contents.html || ''}
               coverId={cover?.id}
               revisionCountLeft={revisionCountLeft}
               isOverRevisionLimit={isOverRevisionLimit}
-              isSameHash={isSameHash}
-              isEditDisabled={isEditDisabled}
+              isEditDisabled={false}
               onSaved={() => {
                 onSaved()
               }}
@@ -300,12 +252,23 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
         />
 
         {showPublishState && (
-          <PublishState article={article} cancel={onCancel} />
+          <PublishState
+            articleId={article.id}
+            currVersionId={article.versions.edges[0]?.node.id!}
+          />
         )}
 
         <Layout.Main.Spacing>
           <Editor
-            draft={draft}
+            draft={{
+              __typename: 'Draft',
+              id: article.id,
+              title: article.title,
+              publishState: 'unpublished' as any,
+              content: article.contents.html,
+              summary: article.summary,
+              summaryCustomized: article.summaryCustomized,
+            }}
             update={async (update) => {
               setEditContent(update.content || '')
             }}
@@ -321,8 +284,8 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
           >
             {({ openDialog }) => (
               <BottomBar
-                saving={loading}
-                disabled={loading}
+                saving={false}
+                disabled={false}
                 {...coverProps}
                 {...tagsProps}
                 {...collectionProps}
@@ -342,4 +305,48 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   )
 }
 
-export default EditMode
+const Edit = () => {
+  const { router } = useRoute()
+  const articleId =
+    (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
+
+  const { data, loading, error } = useQuery<QueryEditArticleQuery>(
+    GET_EDIT_ARTICLE,
+    {
+      variables: { id: toGlobalId({ type: 'Article', id: articleId }) },
+      fetchPolicy: 'network-only',
+    }
+  )
+  const article = data?.article as Article
+
+  /**
+   * Render
+   */
+  if (loading) {
+    return (
+      <EmptyLayout>
+        <Spinner />
+      </EmptyLayout>
+    )
+  }
+
+  if (error) {
+    return (
+      <EmptyLayout>
+        <QueryError error={error} />
+      </EmptyLayout>
+    )
+  }
+
+  if (!article) {
+    return (
+      <EmptyLayout>
+        <Throw404 />
+      </EmptyLayout>
+    )
+  }
+
+  return <BaseEdit article={article} />
+}
+
+export default Edit

@@ -18,6 +18,7 @@ const articlePublicFragment = gql`
     title
     slug
     mediaHash
+    dataHash
     state
     cover
     summary

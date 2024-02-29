@@ -13,11 +13,9 @@ export default {
 
 const Template: ComponentStory<typeof FooterActions> = (args) => (
   <MockedProvider>
-    {/* @ts-ignore */}
     <FooterActions
       article={MOCK_ARTILCE}
       inUserArticles
-      hasFingerprint
       hasExtend
       hasEdit
       hasShare

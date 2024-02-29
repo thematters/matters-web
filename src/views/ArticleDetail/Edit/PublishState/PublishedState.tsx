@@ -1,20 +1,12 @@
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 
 import { toPath } from '~/common/utils'
 import { Dialog, ShareDialog, Translate } from '~/components'
-interface Props {
-  article: {
-    id: string
-    title: string
-    slug: string
-    author: {
-      userName?: string | null
-    }
-  }
-  newestMediaHash: string
-
-  cancel: () => void
+import { LatestVersionArticleQuery } from '~/gql/graphql'
+interface PublishedStateProps {
+  article: NonNullable<
+    LatestVersionArticleQuery['article'] & { __typename: 'Article' }
+  >
 }
 
 const BasePublishedState = ({
@@ -29,12 +21,10 @@ const BasePublishedState = ({
   return null
 }
 
-const PublishedState = ({ article, cancel, newestMediaHash }: Props) => {
-  const router = useRouter()
-
+const PublishedState = ({ article }: PublishedStateProps) => {
   const path = toPath({
     page: 'articleDetail',
-    article: { ...article, mediaHash: newestMediaHash },
+    article: { ...article },
   })
 
   return (
@@ -77,8 +67,7 @@ const PublishedState = ({ article, cancel, newestMediaHash }: Props) => {
             />
           }
           onClick={() => {
-            cancel()
-            router.push(path.href)
+            window.location.href = path.href
           }}
         />
       }
@@ -92,8 +81,7 @@ const PublishedState = ({ article, cancel, newestMediaHash }: Props) => {
             />
           }
           onClick={() => {
-            cancel()
-            router.push(path.href)
+            window.location.href = path.href
           }}
         />
       }

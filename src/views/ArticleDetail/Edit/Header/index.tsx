@@ -20,11 +20,7 @@ import {
   EditorSettingsDialog,
   EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
-import {
-  ArticleDetailPublicQuery,
-  EditArticleMutation,
-  EditorDraftFragment,
-} from '~/gql/graphql'
+import { EditArticleMutation } from '~/gql/graphql'
 import { VIEWER_ARTICLES } from '~/views/User/Articles/gql'
 
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
@@ -32,14 +28,17 @@ import { EDIT_ARTICLE } from './gql'
 import styles from './styles.module.css'
 
 type EditModeHeaderProps = {
-  article: NonNullable<ArticleDetailPublicQuery['article']>
-  draft?: EditorDraftFragment
+  article: {
+    id: string
+    replyToDonator?: string | null
+    requestForDonation?: string | null
+  }
+  lastContent: string
   editContent?: string
   coverId?: string
 
   revisionCountLeft: number
   isOverRevisionLimit: boolean
-  isSameHash: boolean
   isEditDisabled: boolean
 
   onSaved: () => any
@@ -57,13 +56,13 @@ type EditModeHeaderProps = {
 
 const EditModeHeader = ({
   article,
-  draft,
+
+  lastContent,
   editContent,
   coverId,
 
   revisionCountLeft,
   isOverRevisionLimit,
-  isSameHash,
   isEditDisabled,
 
   onSaved,
@@ -75,7 +74,7 @@ const EditModeHeader = ({
 
   const initContent = useRef<string>()
   useEffect(() => {
-    initContent.current = draft?.content || ''
+    initContent.current = lastContent || ''
   }, [])
 
   const currContent = editContent || ''
@@ -183,19 +182,17 @@ const EditModeHeader = ({
   return (
     <>
       <p className={styles.hint}>
-        {isSameHash && (
-          <>
-            {!isOverRevisionLimit ? (
-              <UnderLimitText />
-            ) : (
-              <Translate
-                zh_hant="正文及作品管理修訂次數已達上限"
-                zh_hans="正文及作品管理修订次数已达上限"
-                en="You have reached the limit of republished articles"
-              />
-            )}
-          </>
-        )}
+        <>
+          {!isOverRevisionLimit ? (
+            <UnderLimitText />
+          ) : (
+            <Translate
+              zh_hant="正文及作品管理修訂次數已達上限"
+              zh_hans="正文及作品管理修订次数已达上限"
+              en="You have reached the limit of republished articles"
+            />
+          )}
+        </>
       </p>
 
       <EditorSettingsDialog

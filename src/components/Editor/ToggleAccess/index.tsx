@@ -13,7 +13,6 @@ import {
 } from '~/components'
 import {
   ArticleAccessType,
-  ArticleDetailPublicQuery,
   ArticleLicenseType,
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
@@ -37,7 +36,11 @@ export type ToggleAccessProps = {
   canToggleCircle: boolean
 
   draft?: EditMetaDraftFragment
-  article?: ArticleDetailPublicQuery['article']
+  article?: {
+    replyToDonator?: string | null
+    requestForDonation?: string | null
+    canComment: boolean
+  }
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null

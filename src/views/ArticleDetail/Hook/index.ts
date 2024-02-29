@@ -1,15 +1,9 @@
 import { useMutation } from '~/components/GQL'
-import {
-  ArticleDetailPublicQuery,
-  EditArticleSupportSettingMutation,
-} from '~/gql/graphql'
+import { EditArticleSupportSettingMutation } from '~/gql/graphql'
 
 import { EDIT_ARTICLE_SUPPORT_SETTING } from '../gql'
 
-export const useEditArticleDetailSupportSetting = (
-  article?: ArticleDetailPublicQuery['article']
-) => {
-  const articleId = article?.id
+export const useEditArticleDetailSupportSetting = (articleId?: string) => {
   const [update, { loading: saving }] =
     useMutation<EditArticleSupportSettingMutation>(EDIT_ARTICLE_SUPPORT_SETTING)
 

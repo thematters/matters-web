@@ -20,8 +20,8 @@ import {
 } from '~/components'
 import { AuthorRssFeedFragment, RssGatewaysQuery } from '~/gql/graphql'
 
-import SectionCard from '../FingerprintDialog/SectionCard'
-import styles from '../FingerprintDialog/styles.module.css'
+import SectionCard from './SectionCard'
+import styles from './styles.module.css'
 
 type RssFeedDialogContentProps = {
   user: AuthorRssFeedFragment

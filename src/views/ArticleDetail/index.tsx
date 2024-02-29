@@ -8,7 +8,6 @@ import { Waypoint } from 'react-waypoint'
 import {
   OPEN_COMMENT_DETAIL_DIALOG,
   REFERRAL_QUERY_REFERRAL_KEY,
-  URL_QS,
 } from '~/common/enums'
 import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
@@ -85,14 +84,7 @@ const DynamicCommentsDetail = dynamic(
     loading: () => <CommentsPlaceholder />,
   }
 )
-const DynamicEditMode = dynamic(() => import('./EditMode'), {
-  ssr: false,
-  loading: () => (
-    <EmptyLayout>
-      <Spinner />
-    </EmptyLayout>
-  ),
-})
+
 const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
@@ -394,7 +386,6 @@ const BaseArticleDetail = ({
                 translated={translated}
                 translatedLanguage={translatedLanguage}
                 privateFetched={privateFetched}
-                hasFingerprint={canReadFullContent}
                 // hasReport // TODO:
                 lock={lock}
                 toggleDrawer={toggleDrawer}
@@ -459,7 +450,6 @@ const BaseArticleDetail = ({
               translated={translated}
               translatedLanguage={translatedLanguage}
               privateFetched={privateFetched}
-              hasFingerprint={canReadFullContent}
               lock={lock}
               showCommentToolbar={showCommentToolbar}
               openCommentsDialog={
@@ -512,7 +502,6 @@ const ArticleDetail = ({
   includeTranslation: boolean
 }) => {
   const { getQuery, router, routerLang } = useRoute()
-  const [needRefetchData, setNeedRefetchData] = useState(false)
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
@@ -593,12 +582,8 @@ const ArticleDetail = ({
 
     // refetch data when URL query is changed
     ;(async () => {
-      if (!needRefetchData) {
-        return
-      }
       await refetchPublic()
       await loadPrivate()
-      setNeedRefetchData(false)
     })()
   }, [mediaHash])
 
@@ -651,36 +636,6 @@ const ArticleDetail = ({
       router.replace(nhref, undefined, { shallow: true, locale: false })
     }
   }, [latestHash])
-
-  // edit mode
-  const canEdit = isAuthor && !viewer.isInactive
-  const mode = getQuery(URL_QS.MODE_EDIT.key)
-  const [editMode, setEditMode] = useState(false)
-  const exitEditMode = () => {
-    if (!article) {
-      return
-    }
-
-    setNeedRefetchData(true)
-    const path = toPath({ page: 'articleDetail', article })
-    router.replace(path.href)
-  }
-
-  const onEditSaved = async () => {
-    setEditMode(false)
-    exitEditMode()
-
-    await refetchPublic()
-    loadPrivate()
-  }
-
-  useEffect(() => {
-    if (!canEdit || !article) {
-      return
-    }
-
-    setEditMode(mode === URL_QS.MODE_EDIT.value)
-  }, [mode, article])
 
   /**
    * Render:Loading
@@ -741,19 +696,6 @@ const ArticleDetail = ({
           <BackToHomeButton />
         </Error>
       </EmptyLayout>
-    )
-  }
-
-  /**
-   * Render:Edit Mode
-   */
-  if (editMode) {
-    return (
-      <DynamicEditMode
-        article={article}
-        onCancel={exitEditMode}
-        onSaved={onEditSaved}
-      />
     )
   }
 

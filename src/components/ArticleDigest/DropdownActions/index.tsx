@@ -13,8 +13,6 @@ import {
   BookmarkButton,
   Button,
   Dropdown,
-  FingerprintDialog,
-  FingerprintDialogProps,
   IconMore16,
   IconSize,
   Menu,
@@ -38,7 +36,6 @@ import { ArchiveArticleDialogProps } from './ArchiveArticle/Dialog'
 import DonatorsButton from './DonatorsButton'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
-import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
 import PinButton from './PinButton'
 import RemoveArticleCollectionButton from './RemoveArticleCollectionButton'
@@ -77,7 +74,6 @@ export interface DropdownActionsControls {
    */
   // force to hide
   hasShare?: boolean
-  hasFingerprint?: boolean
   hasExtend?: boolean
 
   // based on type
@@ -118,7 +114,6 @@ interface Controls {
   hasShare: boolean
   hasAppreciators: boolean
   hasDonators: boolean
-  hasFingerprint: boolean
   hasExtend: boolean
   hasSticky: boolean
   hasSetTagSelected: boolean
@@ -128,7 +123,6 @@ interface Controls {
 
 interface DialogProps {
   openShareDialog: () => void
-  openFingerprintDialog: () => void
   openAppreciatorsDialog: () => void
   openSupportersDialog: () => void
   openArchiveDialog: () => void
@@ -163,7 +157,6 @@ const BaseDropdownActions = ({
   hasShare,
   hasAppreciators,
   hasDonators,
-  hasFingerprint,
   hasExtend,
   hasSticky,
   hasArchive,
@@ -178,7 +171,6 @@ const BaseDropdownActions = ({
   hasSetBottomCollection,
 
   openShareDialog,
-  openFingerprintDialog,
   openAppreciatorsDialog,
   openSupportersDialog,
   openArchiveDialog,
@@ -192,8 +184,7 @@ const BaseDropdownActions = ({
   openToggleRecommendDialog,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
-  const hasPublic =
-    hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
+  const hasPublic = hasShare || hasAppreciators || hasDonators || hasExtend
   const hasPrivate =
     hasSticky ||
     hasArchive ||
@@ -209,9 +200,6 @@ const BaseDropdownActions = ({
         <AppreciatorsButton openDialog={openAppreciatorsDialog} />
       )}
       {hasDonators && <DonatorsButton openDialog={openSupportersDialog} />}
-      {hasFingerprint && (
-        <FingerprintButton openDialog={openFingerprintDialog} />
-      )}
       {hasExtend && <ExtendButton article={article} />}
 
       {/* private */}
@@ -340,7 +328,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
     collectionId,
 
     hasShare,
-    hasFingerprint = true,
     hasExtend = true,
 
     inCard,
@@ -380,7 +367,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
       hasAppreciators && article.likesReceived.totalCount > 0 && !inCard,
     hasDonators:
       hasDonators && article.donationsDialog.totalCount > 0 && !inCard,
-    hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
 
     // privates
@@ -414,15 +400,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
     { path: props.sharePath },
     ({ openDialog }) => ({ ...props, ...controls, openShareDialog: openDialog })
   )
-  const WithFingerprint = withDialog<Omit<FingerprintDialogProps, 'children'>>(
-    WithShareDialog,
-    FingerprintDialog,
-    { article },
-    ({ openDialog }) => ({ openFingerprintDialog: openDialog })
-  )
   const WithAppreciators = withDialog<
     Omit<AppreciatorsDialogProps, 'children'>
-  >(WithFingerprint, AppreciatorsDialog, { article }, ({ openDialog }) => ({
+  >(WithShareDialog, AppreciatorsDialog, { article }, ({ openDialog }) => ({
     openAppreciatorsDialog: openDialog,
   }))
   const WithSupporters = withDialog<Omit<SupportersDialogProps, 'children'>>(

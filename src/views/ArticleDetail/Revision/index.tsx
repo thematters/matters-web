@@ -48,6 +48,13 @@ import {
 import InfoHeader from './InfoHeader'
 import Versions from './Versions'
 
+type RevisionArticle = NonNullable<ArticleRevisionDetailPublicQuery['article']>
+type RevisionVersion = NonNullable<
+  ArticleRevisionDetailPublicQuery['version'] & {
+    __typename: 'ArticleVersion'
+  }
+>
+
 const DynamicCircleWall = dynamic(() => import('../Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
@@ -75,8 +82,8 @@ const BaseArticleDetailRevision = ({
   article,
   version,
 }: {
-  article: NonNullable<ArticleRevisionDetailPublicQuery['article']>
-  version: NonNullable<ArticleRevisionDetailPublicQuery['version']>
+  article: RevisionArticle
+  version: RevisionVersion
 }) => {
   const viewer = useContext(ViewerContext)
 
@@ -93,9 +100,6 @@ const BaseArticleDetailRevision = ({
     circle.isMember ||
     article.access.type === ArticleAccessType.Public
   )
-  const currVersion = (version = (
-    version.__typename === 'ArticleVersion' ? version : undefined
-  )!)
 
   // translation
   const [translated, setTranslate] = useState(false)
@@ -107,7 +111,7 @@ const BaseArticleDetailRevision = ({
 
   const translate = () => {
     getTranslation({
-      variables: { version: currVersion.id, language: preferredLang },
+      variables: { version: version.id, language: preferredLang },
     })
 
     toast.success({
@@ -217,7 +221,6 @@ const ArticleDetailRevision = ({
   latestVersion: string
 }) => {
   const { getQuery, router } = useRoute()
-  const [needRefetchData, setNeedRefetchData] = useState(false)
   const mediaHash = getQuery('mediaHash')
   const versionId = getQuery('version')
   const articleId =
@@ -290,12 +293,8 @@ const ArticleDetailRevision = ({
   useEffect(() => {
     // refetch data when URL query is changed
     ;(async () => {
-      if (!needRefetchData) {
-        return
-      }
       await refetchPublic()
       await loadPrivate()
-      setNeedRefetchData(false)
     })()
   }, [mediaHash])
 
@@ -364,7 +363,12 @@ const ArticleDetailRevision = ({
   /**
    * Render:Article
    */
-  return <BaseArticleDetailRevision article={article} version={version} />
+  return (
+    <BaseArticleDetailRevision
+      article={article}
+      version={version as RevisionVersion}
+    />
+  )
 }
 
 const ArticleDetailRevisionOuter = () => {
