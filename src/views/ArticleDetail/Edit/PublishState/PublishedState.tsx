@@ -22,10 +22,7 @@ const BasePublishedState = ({
 }
 
 const PublishedState = ({ article }: PublishedStateProps) => {
-  const path = toPath({
-    page: 'articleDetail',
-    article: { ...article },
-  })
+  const path = toPath({ page: 'articleDetail', article })
 
   return (
     <ShareDialog

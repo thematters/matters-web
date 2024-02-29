@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 import { toGlobalId } from '~/common/utils'
@@ -49,18 +49,22 @@ type Article = NonNullable<
 >
 
 const Editor = dynamic(
-  () =>
-    import('~/components/Editor/Article').then((mod) => mod.EditArticleEditor),
+  () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
   { ssr: false, loading: () => <Spinner /> }
 )
 
 const BaseEdit = ({ article }: { article: Article }) => {
-  const [editContent, setEditContent] = useState('')
   const [showPublishState, setShowPublishState] = useState(false)
+
+  const [editTitle, setEditTitle] = useState('')
+  const [editSummary, setEditSummary] = useState('')
+  const [editContent, setEditContent] = useState('')
 
   // cover
   const assets = article.assets || []
-  const [cover, editCover] = useState<AssetFragment>()
+  const [cover, editCover] = useState<AssetFragment | undefined>(
+    assets.find((asset) => asset.path === article.cover)
+  )
   const refetchAssets = useImperativeQuery<QueryEditArticleAssetsQuery>(
     GET_EDIT_ARTICLE_ASSETS,
     {
@@ -73,7 +77,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const [tags, editTags] = useState<DigestTagFragment[]>(article.tags || [])
   const [collection, editCollection] = useState<
     ArticleDigestDropdownArticleFragment[]
-  >([])
+  >(article.collection.edges?.map(({ node }) => node) || [])
 
   // access
   const [circle, editCircle] = useState<
@@ -84,11 +88,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
   )
 
   // cc2.0 is replace by cc4.0 when editting article
-  const initialLicense =
+  const [license, editLicense] = useState<ArticleLicenseType>(
     article.license === ArticleLicenseType.CcByNcNd_2
       ? ArticleLicenseType.CcByNcNd_4
       : article.license
-  const [license, editLicense] = useState<ArticleLicenseType>(initialLicense)
+  )
 
   const ownCircles = article.author.ownCircles
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
@@ -107,22 +111,6 @@ const BaseEdit = ({ article }: { article: Article }) => {
     )
     editLicense(newLicense)
   }
-
-  // update cover & collection from retrieved data
-  useEffect(() => {
-    if (!article) {
-      return
-    }
-
-    // cover, find from `article.assets` since `article.cover` isn't a `Asset`
-    const currCover = assets.find((asset) => asset.path === article.cover)
-    if (currCover) {
-      editCover(currCover)
-    }
-
-    // collection
-    editCollection(article.collection.edges?.map(({ node }) => node) || [])
-  }, [article.id])
 
   const { edit: editSupport, saving: supportSaving } =
     useEditArticleDetailSupportSetting(article.id)
@@ -193,8 +181,6 @@ const BaseEdit = ({ article }: { article: Article }) => {
     iscnPublishSaving: false,
   }
 
-  const onSaved = () => {} // TODO
-
   return (
     <>
       <Layout.Main
@@ -235,15 +221,13 @@ const BaseEdit = ({ article }: { article: Article }) => {
               {...accessProps}
               {...setCommentProps}
               article={article}
-              lastContent={article.contents.html}
-              editContent={editContent || article.contents.html || ''}
-              coverId={cover?.id}
+              revisedTitle={editTitle || article.title}
+              revisedSummary={editSummary || article.summary}
+              revisedContent={editContent || article.contents.html || ''}
+              revisedCover={cover}
               revisionCountLeft={revisionCountLeft}
               isOverRevisionLimit={isOverRevisionLimit}
-              isEditDisabled={false}
-              onSaved={() => {
-                onSaved()
-              }}
+              isEditDisabled={showPublishState}
               onPublish={() => {
                 setShowPublishState(true)
               }}
@@ -261,16 +245,29 @@ const BaseEdit = ({ article }: { article: Article }) => {
         <Layout.Main.Spacing>
           <Editor
             draft={{
+              // mock a draft
               __typename: 'Draft',
               id: article.id,
               title: article.title,
-              publishState: 'unpublished' as any,
+              publishState: (showPublishState
+                ? 'pending'
+                : 'unpublished') as any,
               content: article.contents.html,
               summary: article.summary,
               summaryCustomized: article.summaryCustomized,
             }}
             update={async (update) => {
-              setEditContent(update.content || '')
+              if (update.title !== undefined) {
+                setEditTitle(update.title || '')
+              }
+
+              if (update.summary !== undefined) {
+                setEditSummary(update.summary || '')
+              }
+
+              if (update.content !== undefined) {
+                setEditContent(update.content || '')
+              }
             }}
             upload={async () => ({ id: '', path: '' })}
           />

@@ -35,6 +35,7 @@ export const GET_EDIT_ARTICLE = gql`
           }
           displayName
           avatar
+          userName
         }
         access {
           type

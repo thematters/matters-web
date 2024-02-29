@@ -1,47 +1,40 @@
-import { normalizeArticleHTML } from '@matters/matters-editor'
-import { useContext, useEffect, useRef } from 'react'
+import _isEqual from 'lodash/isEqual'
 import { FormattedMessage } from 'react-intl'
 
-import {
-  MAX_ARTICLE_CONTENT_LENGTH,
-  MAX_ARTICLE_REVISION_DIFF,
-} from '~/common/enums'
-import { measureDiffs, stripHtml } from '~/common/utils'
-import {
-  Button,
-  TextIcon,
-  toast,
-  Translate,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+import { MAX_ARTICLE_CONTENT_LENGTH } from '~/common/enums'
+import { toPath } from '~/common/utils'
+import { Button, TextIcon, toast, Translate, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
   EditorSettingsDialog,
   EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
-import { EditArticleMutation } from '~/gql/graphql'
-import { VIEWER_ARTICLES } from '~/views/User/Articles/gql'
+import {
+  AssetFragment,
+  EditArticleMutation,
+  QueryEditArticleQuery,
+} from '~/gql/graphql'
 
 import ConfirmRevisedPublishDialogContent from './ConfirmRevisedPublishDialogContent'
 import { EDIT_ARTICLE } from './gql'
 import styles from './styles.module.css'
 
 type EditModeHeaderProps = {
-  article: {
-    id: string
-    replyToDonator?: string | null
-    requestForDonation?: string | null
-  }
-  lastContent: string
-  editContent?: string
-  coverId?: string
+  article: NonNullable<
+    QueryEditArticleQuery['article'] & {
+      __typename: 'Article'
+    }
+  >
+
+  revisedTitle?: string
+  revisedSummary?: string
+  revisedContent?: string
+  revisedCover?: AssetFragment
 
   revisionCountLeft: number
   isOverRevisionLimit: boolean
   isEditDisabled: boolean
 
-  onSaved: () => any
   onPublish: () => any
 } & Omit<
   EditorSettingsDialogProps,
@@ -57,44 +50,50 @@ type EditModeHeaderProps = {
 const EditModeHeader = ({
   article,
 
-  lastContent,
-  editContent,
-  coverId,
+  revisedTitle,
+  revisedSummary,
+  revisedContent,
+  revisedCover,
 
   revisionCountLeft,
   isOverRevisionLimit,
   isEditDisabled,
 
-  onSaved,
   onPublish,
 
   ...restProps
 }: EditModeHeaderProps) => {
-  const viewer = useContext(ViewerContext)
-
-  const initContent = useRef<string>()
-  useEffect(() => {
-    initContent.current = lastContent || ''
-  }, [])
-
-  const currContent = editContent || ''
-  const diff =
-    measureDiffs(
-      stripHtml(normalizeArticleHTML(initContent.current || '')),
-      stripHtml(normalizeArticleHTML(currContent || ''))
-    ) || 0
-  const diffCount = `${diff}`.padStart(2, '0')
-  const isOverDiffLimit = diff > MAX_ARTICLE_REVISION_DIFF
-  const isContentRevised = diff > 0
-
-  // save or republish
   const { tags, collection, circle, accessType, license } = restProps
   const [editArticle, { loading }] =
     useMutation<EditArticleMutation>(EDIT_ARTICLE)
+
+  const isTitleRevised = revisedTitle !== article.title
+  const isSummaryRevised = revisedSummary !== article.summary
+  const isContentRevised = revisedContent !== article.contents.html
+  const isTagRevised = !_isEqual(
+    tags.map((tag) => tag.id).sort(),
+    article.tags?.map((tag) => tag.id).sort()
+  )
+  const isCollectionRevised = !_isEqual(
+    collection.map((collection) => collection.id).sort(),
+    article.collection.edges?.map(({ node }) => node.id).sort()
+  )
+  const isCoverRevised = article.cover
+    ? revisedCover?.path !== article.cover
+    : !!revisedCover?.path
+  const needRepublish =
+    isTitleRevised ||
+    isSummaryRevised ||
+    isContentRevised ||
+    isTagRevised ||
+    isCollectionRevised ||
+    isCoverRevised
+
   const onSave = async () => {
     // check content length
-    const contentCount = editContent?.length || 0
-    if (isContentRevised && contentCount > MAX_ARTICLE_CONTENT_LENGTH) {
+    const contentCount = revisedContent?.length || 0
+
+    if (needRepublish && contentCount > MAX_ARTICLE_CONTENT_LENGTH) {
       toast.error({
         message: (
           <FormattedMessage
@@ -111,35 +110,31 @@ const EditModeHeader = ({
       await editArticle({
         variables: {
           id: article.id,
-          cover: coverId || null,
-          tags: tags.map((tag) => tag.content),
-          collection: collection.map(({ id: articleId }) => articleId),
+          ...(isTitleRevised ? { title: revisedTitle } : {}),
+          ...(isSummaryRevised ? { summary: revisedSummary } : {}),
+          ...(isContentRevised ? { content: revisedContent } : {}),
+          ...(isTagRevised ? { tags: tags.map((tag) => tag.content) } : {}),
+          ...(isCollectionRevised
+            ? { collection: collection.map(({ id }) => id) }
+            : {}),
+          ...(isCoverRevised ? { cover: revisedCover?.id || null } : {}),
           circle: circle ? circle.id : null,
           accessType,
           license,
-          ...(isContentRevised ? { content: editContent } : {}),
-          first: null,
           iscnPublish: restProps.iscnPublish,
           canComment: restProps.canComment,
           sensitive: restProps.contentSensitive,
         },
-        refetchQueries: [
-          {
-            query: VIEWER_ARTICLES,
-            variables: { userName: viewer.userName },
-          },
-        ],
       })
-      if (isContentRevised) {
+      if (needRepublish) {
         onPublish()
-      }
-
-      if (!isContentRevised) {
-        onSaved()
+      } else {
+        const path = toPath({ page: 'articleDetail', article })
+        window.location.href = path.href
       }
     } catch (e) {
       toast.error({
-        message: isContentRevised ? (
+        message: needRepublish ? (
           <Translate
             zh_hant="發布失敗"
             zh_hans="發布失敗"
@@ -173,9 +168,6 @@ const EditModeHeader = ({
         zh_hans=" 次修订"
         en=" revisions remaining"
       />
-      <span className={isOverDiffLimit ? styles.red : styles.green}>
-        &nbsp;{diffCount}/50&nbsp;&nbsp;&nbsp;
-      </span>
     </>
   )
 
@@ -224,7 +216,7 @@ const EditModeHeader = ({
             bgColor="green"
             onClick={openEditorSettingsDialog}
             aria-haspopup="dialog"
-            disabled={isEditDisabled || isOverDiffLimit}
+            disabled={isEditDisabled}
           >
             <TextIcon color="white" size="md" weight="md">
               <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
