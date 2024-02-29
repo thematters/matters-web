@@ -46,7 +46,7 @@ export const DESCENDANT_COMMENTS_COMMENT_PUBLIC = gql`
   query DescendantCommentsCommentPublic(
     $id: ID!
     $after: String
-    $first: first_Int_min_0 = 3
+    $first: first_Int_min_0 = 40
   ) {
     comment: node(input: { id: $id }) {
       ... on Comment {
