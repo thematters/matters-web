@@ -103,53 +103,58 @@ const DesktopToolbar = ({
   return (
     <section className={styles.toolbar} data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
       <section className={styles.buttons}>
-        <ReCaptchaProvider action="appreciateArticle">
-          <AppreciationButton
-            article={article}
-            privateFetched={privateFetched}
-            iconSize="md"
-            disabled={lock}
-            {...buttonProps}
-          />
-        </ReCaptchaProvider>
-
-        <section className={styles.commentBar}>
-          <CommentButton
-            article={article}
-            disabled={!article.canComment}
-            iconSize="md"
-            onClick={toggleDrawer}
-            {...buttonProps}
-          />
+        <section className={styles.left}>
+          <ReCaptchaProvider action="appreciateArticle">
+            <AppreciationButton
+              article={article}
+              privateFetched={privateFetched}
+              iconSize="md"
+              disabled={lock}
+              {...buttonProps}
+            />
+          </ReCaptchaProvider>
+          <section className={styles.commentBar}>
+            <CommentButton
+              article={article}
+              disabled={!article.canComment}
+              iconSize="md"
+              onClick={toggleDrawer}
+              {...buttonProps}
+            />
+          </section>
         </section>
 
-        <ShareButton
-          iconSize="md"
-          inCard={false}
-          // title={makeTitle(article.title)}
-          path={sharePath}
-          disabled={lock}
-          tags={article.tags
-            ?.map(({ content }) => content)
-            .join(' ')
-            .split(/\s+/)
-            .map(normalizeTag)}
-        />
+        <section className={styles.right}>
+          <ShareButton
+            iconSize="md"
+            inCard={false}
+            // title={makeTitle(article.title)}
+            path={sharePath}
+            disabled={lock}
+            spacing={['baseTight', 'baseTight']}
+            tags={article.tags
+              ?.map(({ content }) => content)
+              .join(' ')
+              .split(/\s+/)
+              .map(normalizeTag)}
+          />
 
-        <BookmarkButton
-          article={article}
-          iconSize="md"
-          inCard={false}
-          disabled={lock}
-        />
+          <BookmarkButton
+            article={article}
+            iconSize="md"
+            spacing={['baseTight', 'baseTight']}
+            inCard={false}
+            disabled={lock}
+          />
 
-        <DropdownActions
-          article={article}
-          disabled={lock}
-          size="md"
-          {...dropdonwActionsProps}
-          hasBookmark={false}
-        />
+          <DropdownActions
+            article={article}
+            disabled={lock}
+            size="md"
+            {...dropdonwActionsProps}
+            hasBookmark={false}
+          />
+        </section>
       </section>
     </section>
   )

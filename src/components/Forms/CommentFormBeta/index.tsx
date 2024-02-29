@@ -1,10 +1,20 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
+import {
+  MAX_ARTICLE_COMMENT_LENGTH,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
 import { dom, stripHtml } from '~/common/utils'
-import { Button, IconSpinner16, TextIcon, useMutation } from '~/components'
+import {
+  Button,
+  IconSpinner16,
+  TextIcon,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import CommentEditor from '~/components/Editor/Comment'
 import { updateArticleComments, updateCommentDetail } from '~/components/GQL'
 import PUT_COMMENT_BETA from '~/components/GQL/mutations/putCommentBeta'
@@ -44,6 +54,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   placeholder,
 }) => {
   const intl = useIntl()
+  const viewer = useContext(ViewerContext)
 
   // retrieve comment draft
   const commentDraftId = `${articleId}-${type}-${commentId || 0}-${
@@ -191,24 +202,44 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
             </TextIcon>
           </Button>
         )}
-        <Button
-          type="submit"
-          form={formId}
-          size={[null, '2rem']}
-          spacing={[0, 'base']}
-          bgColor="green"
-          disabled={isSubmitting || !isValid}
-        >
-          <TextIcon
-            color="white"
-            size="sm"
-            icon={isSubmitting && <IconSpinner16 size="sm" />}
+        {viewer.isAuthed && (
+          <Button
+            type="submit"
+            form={formId}
+            size={[null, '2rem']}
+            spacing={[0, 'base']}
+            bgColor="green"
+            disabled={isSubmitting || !isValid}
           >
-            {isSubmitting ? null : (
-              <FormattedMessage defaultMessage="Publish" id="syEQFE" />
-            )}
-          </TextIcon>
-        </Button>
+            <TextIcon
+              color="white"
+              size="sm"
+              icon={isSubmitting && <IconSpinner16 size="sm" />}
+            >
+              {isSubmitting ? null : (
+                <FormattedMessage defaultMessage="Publish" id="syEQFE" />
+              )}
+            </TextIcon>
+          </Button>
+        )}
+        {!viewer.isAuthed && (
+          <Button
+            size={[null, '2rem']}
+            spacing={[0, 'base']}
+            bgColor="green"
+            onClick={() => {
+              window.dispatchEvent(
+                new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                  detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
+                })
+              )
+            }}
+          >
+            <TextIcon color="white" size="sm">
+              <FormattedMessage defaultMessage="Sign In" id="Ub+AGc" />
+            </TextIcon>
+          </Button>
+        )}
       </footer>
     </form>
   )

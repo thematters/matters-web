@@ -57,17 +57,20 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
         <FormattedMessage defaultMessage="Address copied" id="+aMAeT" />
       }
     >
-      <Button
-        {...buttonProps}
-        aria-label={intl.formatMessage({
-          defaultMessage: 'Copy',
-          id: '4l6vz1',
-        })}
-      >
-        <TextIcon {...textIconProps} icon={<IconCopy16 size="sm" />}>
-          {ensName || maskAddress(getAddress(address))}
-        </TextIcon>
-      </Button>
+      {({ copyToClipboard }) => (
+        <Button
+          {...buttonProps}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Copy',
+            id: '4l6vz1',
+          })}
+          onClick={copyToClipboard}
+        >
+          <TextIcon {...textIconProps} icon={<IconCopy16 size="sm" />}>
+            {ensName || maskAddress(getAddress(address))}
+          </TextIcon>
+        </Button>
+      )}
     </CopyToClipboard>
   )
 }

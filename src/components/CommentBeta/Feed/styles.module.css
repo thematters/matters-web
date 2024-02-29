@@ -49,7 +49,6 @@
 }
 
 .contentContainer {
-  width: 22.5rem;
   margin-top: var(--spacing-tight);
 
   &.descendant {

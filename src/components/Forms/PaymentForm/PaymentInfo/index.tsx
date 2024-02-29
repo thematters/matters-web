@@ -51,24 +51,27 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
               <FormattedMessage defaultMessage="Address copied" id="+aMAeT" />
             }
           >
-            <Button
-              spacing={['xxtight', 'tight']}
-              bgColor="greenLighter"
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Copy',
-                id: '4l6vz1',
-              })}
-            >
-              <TextIcon
-                icon={<IconCopy16 color="green" size="sm" />}
-                spacing="xxtight"
-                size="md"
-                color="green"
-                textPlacement="left"
+            {({ copyToClipboard }) => (
+              <Button
+                spacing={['xxtight', 'tight']}
+                bgColor="greenLighter"
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Copy',
+                  id: '4l6vz1',
+                })}
+                onClick={copyToClipboard}
               >
-                {maskAddress(address)}
-              </TextIcon>
-            </Button>
+                <TextIcon
+                  icon={<IconCopy16 color="green" size="sm" />}
+                  spacing="xxtight"
+                  size="md"
+                  color="green"
+                  textPlacement="left"
+                >
+                  {maskAddress(address)}
+                </TextIcon>
+              </Button>
+            )}
           </CopyToClipboard>
         </div>
       )}

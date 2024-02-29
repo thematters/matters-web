@@ -871,9 +871,6 @@
     "defaultMessage": "評論數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
-  "JRkgKV": {
-    "defaultMessage": "複製失敗"
-  },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -1678,6 +1675,9 @@
   "eXDZGQ": {
     "defaultMessage": "主理人"
   },
+  "eY3YIa": {
+    "defaultMessage": "複製評論"
+  },
   "enMIYK": {
     "defaultMessage": "我的"
   },
@@ -2226,6 +2226,9 @@
   },
   "vX2bDy": {
     "defaultMessage": "關聯作品"
+  },
+  "va8Rnw": {
+    "defaultMessage": "作者已關閉評論區"
   },
   "viMrzF": {
     "defaultMessage": "廣播",
