@@ -797,10 +797,6 @@
   "HAlOn1": {
     "defaultMessage": "用户名"
   },
-  "HDjV1k": {
-    "defaultMessage": "分布式入口",
-    "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
-  },
   "HEpsZ3": {
     "defaultMessage": "返回发现"
   },
@@ -1500,7 +1496,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "编辑",
+    "defaultMessage": "编辑作品",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZYvVYX": {

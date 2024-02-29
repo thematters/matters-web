@@ -16,6 +16,7 @@ interface PublishStateProps {
 type State = 'pending' | 'published'
 
 const PublishState = ({ articleId, currVersionId }: PublishStateProps) => {
+  const [initVersionId] = useState(currVersionId)
   const [publishState, setPublishState] = useState<State>('pending')
   const isPending = publishState === 'pending'
   const isPublished = publishState === 'published'
@@ -27,11 +28,10 @@ const PublishState = ({ articleId, currVersionId }: PublishStateProps) => {
       fetchPolicy: 'network-only',
       skip: typeof window === 'undefined',
     })
-  const article = (data?.article?.__typename === 'Article' &&
-    data.article) as NonNullable<
-    LatestVersionArticleQuery['article'] & { __typename: 'Article' }
-  >
-  const latestVersionId = article.versions.edges[0]?.node.id
+  const latestVersionId =
+    data?.article &&
+    data.article.__typename === 'Article' &&
+    data.article.versions?.edges[0]?.node.id
 
   useEffect(() => {
     startPolling(1000 * 2)
@@ -44,7 +44,7 @@ const PublishState = ({ articleId, currVersionId }: PublishStateProps) => {
   }, [])
 
   useEffect(() => {
-    if (latestVersionId === currVersionId) {
+    if (!latestVersionId || latestVersionId === initVersionId) {
       return
     }
 
@@ -55,7 +55,15 @@ const PublishState = ({ articleId, currVersionId }: PublishStateProps) => {
   return (
     <section className={styles.container}>
       {isPending && <PendingState />}
-      {isPublished && <PublishedState article={article} />}
+      {isPublished && data?.article && (
+        <PublishedState
+          article={
+            data.article as NonNullable<
+              LatestVersionArticleQuery['article'] & { __typename: 'Article' }
+            >
+          }
+        />
+      )}
     </section>
   )
 }

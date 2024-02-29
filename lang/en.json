@@ -797,10 +797,6 @@
   "HAlOn1": {
     "defaultMessage": "Name"
   },
-  "HDjV1k": {
-    "defaultMessage": "IPFS",
-    "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
-  },
   "HEpsZ3": {
     "defaultMessage": "Back to discovery"
   },
