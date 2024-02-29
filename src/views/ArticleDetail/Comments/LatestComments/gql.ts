@@ -16,7 +16,6 @@ export const LATEST_COMMENTS_PUBLIC = gql`
         id
         mediaHash
         id
-        responseCount
         pinnedComments {
           ... on Comment {
             ...ThreadCommentCommentBetaPublic

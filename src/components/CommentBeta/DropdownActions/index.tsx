@@ -20,8 +20,8 @@ import {
 import { BlockUser } from '~/components/BlockUser'
 import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog/Dialog'
 import {
-  DropdownActionsCommentPrivateFragment,
-  DropdownActionsCommentPublicFragment,
+  DropdownActionsCommentBetaPrivateFragment,
+  DropdownActionsCommentBetaPublicFragment,
 } from '~/gql/graphql'
 
 import CopyCommentButton from './CopyCommentButton'
@@ -41,8 +41,8 @@ export type DropdownActionsControls = {
 }
 
 type DropdownActionsProps = {
-  comment: DropdownActionsCommentPublicFragment &
-    Partial<DropdownActionsCommentPrivateFragment>
+  comment: DropdownActionsCommentBetaPublicFragment &
+    Partial<DropdownActionsCommentBetaPrivateFragment>
   pinnedComment?: ThreadCommentType
   type: CommentFormType
 } & DropdownActionsControls
@@ -64,7 +64,7 @@ type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 const fragments = {
   comment: {
     public: gql`
-      fragment DropdownActionsCommentPublic on Comment {
+      fragment DropdownActionsCommentBetaPublic on Comment {
         id
         state
         content
@@ -76,13 +76,6 @@ const fragments = {
           id
         }
         node {
-          ... on Circle {
-            id
-            name
-            owner {
-              id
-            }
-          }
           ... on Article {
             id
             mediaHash
@@ -97,20 +90,13 @@ const fragments = {
       ${BlockUser.fragments.user.public}
     `,
     private: gql`
-      fragment DropdownActionsCommentPrivate on Comment {
+      fragment DropdownActionsCommentBetaPrivate on Comment {
         id
         author {
           id
           ...BlockUserPrivate
         }
         node {
-          ... on Circle {
-            id
-            owner {
-              id
-              isBlocking
-            }
-          }
           ... on Article {
             id
             author {
@@ -194,8 +180,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined
-  const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
-  const targetAuthor = article?.author || circle?.owner
+  const targetAuthor = article?.author
 
   const isTargetAuthor = viewer.id === targetAuthor?.id
   const isCommentAuthor = viewer.id === comment.author.id
