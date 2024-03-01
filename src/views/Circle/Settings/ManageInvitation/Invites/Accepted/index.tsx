@@ -92,7 +92,7 @@ const AcceptedInvites = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List hasBorder={false}>
         {(edges || []).map(({ node, cursor }, i) => (
-          <List.Item key={cursor}>
+          <List.Item key={node.id}>
             <CircleInvitation invitation={node} />
           </List.Item>
         ))}

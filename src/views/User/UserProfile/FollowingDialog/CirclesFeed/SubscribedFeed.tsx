@@ -85,7 +85,7 @@ const SubscribedFeed = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List hasBorder={false}>
         {edges.map(({ node, cursor }, i) => (
-          <List.Item key={cursor}>
+          <List.Item key={node.id}>
             <CircleDigest.Mini
               circle={node}
               spacing={['tight', 'base']}

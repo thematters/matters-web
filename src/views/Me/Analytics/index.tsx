@@ -139,7 +139,7 @@ const MyAnalytics = () => {
 
         <List>
           {edges?.map(({ node, cursor, donationCount }, i) => (
-            <List.Item key={cursor}>
+            <List.Item key={node.id}>
               <SupporterDigestFeed
                 user={node}
                 index={i}

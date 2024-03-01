@@ -166,7 +166,7 @@ const Complete: React.FC<Props> = ({ callback, recipient, targetId }) => {
               {!isRefetching && (
                 <List spacing={['base', 0]} hasBorder={false}>
                   {edges.map(({ node, cursor }, i) => (
-                    <List.Item key={cursor}>
+                    <List.Item key={node.id}>
                       <ArticleDigestSidebar
                         article={node}
                         hasBackground
