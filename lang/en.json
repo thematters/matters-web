@@ -1607,6 +1607,9 @@
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
+  "h74kLA": {
+    "defaultMessage": "Failed to Donate"
+  },
   "h7sMQs": {
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
