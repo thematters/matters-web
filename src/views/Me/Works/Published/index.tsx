@@ -81,7 +81,7 @@ export const BaseMeWorksPublished = () => {
         >
           <List>
             {articleEdges.map(({ node, cursor }) => (
-              <List.Item key={cursor}>
+              <List.Item key={node.id}>
                 <ArticleDigestPublished article={node} />
               </List.Item>
             ))}

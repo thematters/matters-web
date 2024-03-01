@@ -122,7 +122,7 @@ const TagsFeed = () => {
               <section>
                 {chunks.map(({ node, cursor }, nodeIndex) => (
                   <TagDigest.Sidebar
-                    key={cursor}
+                    key={node.id}
                     tag={node}
                     spacing={['tight', 0]}
                     onClick={() =>
