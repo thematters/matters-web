@@ -23,6 +23,9 @@
   "+aMAeT": {
     "defaultMessage": "Address copied"
   },
+  "+bwe8v": {
+    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
+  },
   "+cS08C": {
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -229,6 +232,9 @@
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
+  "3lMsOU": {
+    "defaultMessage": "Reapprove to continue"
+  },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -318,6 +324,9 @@
   "6BXcdo": {
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6ErzDk": {
+    "defaultMessage": "Reconnect Wallet"
   },
   "6N2LKY": {
     "defaultMessage": "Please log in again.",
@@ -828,6 +837,9 @@
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "JmzmVH": {
+    "defaultMessage": "Switch to"
+  },
   "JpS59y": {
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1160,6 +1172,9 @@
     "defaultMessage": "Subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "Tgd5id": {
+    "defaultMessage": "Transfer amount exceeds allowance"
+  },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
@@ -1425,6 +1440,9 @@
   },
   "ai7kS4": {
     "defaultMessage": "My Works"
+  },
+  "aoDcrD": {
+    "defaultMessage": "Approve to continue"
   },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
@@ -1882,6 +1900,9 @@
   "pHg5Ju": {
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
+  "pKkpI9": {
+    "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
   },
   "pRV+UD": {
     "defaultMessage": "Collapse",
