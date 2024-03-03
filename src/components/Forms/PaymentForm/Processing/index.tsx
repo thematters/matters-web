@@ -83,7 +83,7 @@ const OthersProcessingForm: React.FC<Props> = ({
       variables: { id: txId },
       errorPolicy: 'none',
       fetchPolicy: 'network-only',
-      skip: typeof window === 'undefined',
+      skip: typeof window === 'undefined' || !txId,
     })
   const txState = _get(data, 'viewer.wallet.transactions.edges.0.node.state')
 
@@ -105,7 +105,7 @@ const OthersProcessingForm: React.FC<Props> = ({
   useEffect(() => {
     if (error) {
       stopPolling()
-    } else {
+    } else if (txId) {
       startPolling(1000)
     }
 

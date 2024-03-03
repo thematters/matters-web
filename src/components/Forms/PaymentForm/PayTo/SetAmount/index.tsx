@@ -222,6 +222,7 @@ const SetAmount: React.FC<FormProps> = ({
   const value = values.customAmount || values.amount
   const isBalanceInsufficient = balance < value
   const isExceededAllowance =
+    allowanceUSDT > 0n &&
     parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
   const hasUSDTNetworkError = // TODO: better error handling
     isUSDT &&
