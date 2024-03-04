@@ -29,7 +29,7 @@ export const fragments = {
         ...RoleLabelComment
         ...PinnedLabelBetaComment
         ...FooterActionsCommentBetaPublic
-        ...DropdownActionsCommentPublic
+        ...DropdownActionsCommentBetaPublic
         ...ContentCommentPublic
       }
       ${UserDigest.Mini.fragments.user}
@@ -44,7 +44,7 @@ export const fragments = {
       fragment FeedCommentBetaPrivate on Comment {
         id
         ...FooterActionsCommentBetaPrivate
-        ...DropdownActionsCommentPrivate
+        ...DropdownActionsCommentBetaPrivate
         ...ContentCommentPrivate
       }
       ${FooterActions.fragments.comment.private}

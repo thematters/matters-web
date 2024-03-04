@@ -106,11 +106,23 @@ export const updateArticleComments = ({
             edge.node.comments.edges?.push({
               __typename: 'CommentEdge',
               node: comment,
-              cursor: '',
+              cursor: crypto.randomUUID(),
             })
           }
           return edge
         })
+        // update pinned comment
+        if (
+          pinnedComments &&
+          pinnedComments.length > 0 &&
+          pinnedComments[0].id === commentId
+        ) {
+          pinnedComments[0].comments.edges?.push({
+            __typename: 'CommentEdge',
+            node: comment,
+            cursor: crypto.randomUUID(),
+          })
+        }
         break
     }
 

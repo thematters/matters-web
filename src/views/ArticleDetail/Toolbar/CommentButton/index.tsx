@@ -18,6 +18,7 @@ import {
   IconComment24,
   TextIcon,
   toast,
+  Tooltip,
   ViewerContext,
 } from '~/components'
 import {
@@ -112,14 +113,27 @@ const CommentButton = ({
 
   if (disabled) {
     return (
-      <Content
-        article={article}
-        disabled
-        iconSize={iconSize}
-        textWeight={textWeight}
-        textIconSpacing={textIconSpacing}
-        {...buttonProps}
-      />
+      <Tooltip
+        content={
+          <FormattedMessage
+            defaultMessage="The author has closed the comment section"
+            id="va8Rnw"
+          />
+        }
+        placement="top"
+      >
+        {/* FIXME: Need a wrapper(<section>) to make <Tooltip> work */}
+        <section>
+          <Content
+            article={article}
+            disabled
+            iconSize={iconSize}
+            textWeight={textWeight}
+            textIconSpacing={textIconSpacing}
+            {...buttonProps}
+          />
+        </section>
+      </Tooltip>
     )
   }
 

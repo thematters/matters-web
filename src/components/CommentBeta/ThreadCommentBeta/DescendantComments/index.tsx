@@ -111,7 +111,7 @@ export const DescendantComments = ({
     const { data: newData } = await fetchMore({
       variables: {
         after: pageInfo?.endCursor,
-        first: 3,
+        first: 30,
       },
       updateQuery: (previousResult, { fetchMoreResult }) =>
         mergeConnections({

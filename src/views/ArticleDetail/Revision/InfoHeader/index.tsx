@@ -107,22 +107,25 @@ const InfoHeader = ({
           </section>
           {version.dataHash && (
             <CopyToClipboard text={version.dataHash}>
-              <Button
-                aria-label={intl.formatMessage({
-                  defaultMessage: 'Copy',
-                  id: '4l6vz1',
-                })}
-              >
-                <TextIcon
-                  icon={<IconCopy16 size="xs" />}
-                  color="greyDarker"
-                  size="xs"
-                  spacing="xxtight"
-                  textPlacement="left"
+              {({ copyToClipboard }) => (
+                <Button
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Copy',
+                    id: '4l6vz1',
+                  })}
+                  onClick={copyToClipboard}
                 >
-                  {truncate(version.dataHash, 4, 4)}
-                </TextIcon>
-              </Button>
+                  <TextIcon
+                    icon={<IconCopy16 size="xs" />}
+                    color="greyDarker"
+                    size="xs"
+                    spacing="xxtight"
+                    textPlacement="left"
+                  >
+                    {truncate(version.dataHash!, 4, 4)}
+                  </TextIcon>
+                </Button>
+              )}
             </CopyToClipboard>
           )}
           {!version.dataHash && (
@@ -196,22 +199,25 @@ const InfoHeader = ({
 
             <section className={styles.content}>
               <CopyToClipboard text={article.access.secret}>
-                <Button
-                  aria-label={intl.formatMessage({
-                    defaultMessage: 'Copy',
-                    id: '4l6vz1',
-                  })}
-                >
-                  <TextIcon
-                    icon={<IconCopy16 size="xs" />}
-                    color="greyDarker"
-                    size="xs"
-                    spacing="xxtight"
-                    textPlacement="left"
+                {({ copyToClipboard }) => (
+                  <Button
+                    aria-label={intl.formatMessage({
+                      defaultMessage: 'Copy',
+                      id: '4l6vz1',
+                    })}
+                    onClick={copyToClipboard}
                   >
-                    {truncate(article.access.secret, 4, 4)}
-                  </TextIcon>
-                </Button>
+                    <TextIcon
+                      icon={<IconCopy16 size="xs" />}
+                      color="greyDarker"
+                      size="xs"
+                      spacing="xxtight"
+                      textPlacement="left"
+                    >
+                      {truncate(article.access.secret!, 4, 4)}
+                    </TextIcon>
+                  </Button>
+                )}
               </CopyToClipboard>
             </section>
           </section>

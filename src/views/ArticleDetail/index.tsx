@@ -383,7 +383,8 @@ const BaseArticleDetail = ({
                 translated={translated}
                 translatedLanguage={translatedLanguage}
                 privateFetched={privateFetched}
-                // hasReport // TODO:
+                hasIPFS
+                hasReport
                 lock={lock}
                 toggleDrawer={toggleDrawer}
               />

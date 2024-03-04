@@ -14,7 +14,7 @@ import {
 import { updateArticleComments } from '~/components/GQL'
 import {
   DeleteCommentMutation,
-  DropdownActionsCommentPublicFragment,
+  DropdownActionsCommentBetaPublicFragment,
 } from '~/gql/graphql'
 
 const DELETE_COMMENT = gql`
@@ -27,7 +27,7 @@ const DELETE_COMMENT = gql`
 `
 
 export interface DeleteCommentDialogProps {
-  comment: DropdownActionsCommentPublicFragment
+  comment: DropdownActionsCommentBetaPublicFragment
   type: CommentFormType
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }

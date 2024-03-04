@@ -28,25 +28,28 @@ const Copy = ({ link }: { link: string }) => {
   return (
     <section className={styles.copy}>
       <CopyToClipboard text={link}>
-        <button
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Copy Link',
-            id: 'u5aHb4',
-          })}
-          onClick={() => {
-            analytics.trackEvent('share', {
-              type: 'copy-url',
-            })
-          }}
-        >
-          <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
-            <div className={styles.text}>
-              <span>
-                <FormattedMessage defaultMessage="Copy Link" id="u5aHb4" />
-              </span>
-            </div>
-          </TextIcon>
-        </button>
+        {({ copyToClipboard }) => (
+          <button
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Copy Link',
+              id: 'u5aHb4',
+            })}
+            onClick={() => {
+              analytics.trackEvent('share', {
+                type: 'copy-url',
+              })
+              copyToClipboard()
+            }}
+          >
+            <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
+              <div className={styles.text}>
+                <span>
+                  <FormattedMessage defaultMessage="Copy Link" id="u5aHb4" />
+                </span>
+              </div>
+            </TextIcon>
+          </button>
+        )}
       </CopyToClipboard>
     </section>
   )

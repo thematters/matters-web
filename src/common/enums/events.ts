@@ -37,6 +37,7 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   circlePrice = 'circlePrice',
   circleSubscription = 'circleSubscription',
   collectArticle = 'collectArticle',
+  reportIssues = 'reportIssues',
   comment = 'comment',
   createDraft = 'createDraft',
   error = 'error',

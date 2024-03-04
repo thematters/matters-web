@@ -21,12 +21,14 @@ import {
   ShareDialog,
   ShareDialogProps,
   Spinner,
+  SubmitReport,
   SupportersDialog,
   SupportersDialogProps,
   toast,
   ViewerContext,
   withDialog,
 } from '~/components'
+import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog/Dialog'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
 import AddCollectionButton from './AddCollectionButton'
@@ -37,6 +39,7 @@ import DonatorsButton from './DonatorsButton'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
 import { fragments } from './gql'
+import IPFSButton from './IPFSButton'
 import PinButton from './PinButton'
 import RemoveArticleCollectionButton from './RemoveArticleCollectionButton'
 import RemoveTagButton from './RemoveTagButton'
@@ -74,7 +77,9 @@ export interface DropdownActionsControls {
    */
   // force to hide
   hasShare?: boolean
+  hasIPFS?: boolean
   hasExtend?: boolean
+  hasReport?: boolean
 
   // based on type
   inCard?: boolean
@@ -113,8 +118,10 @@ type DropdownActionsProps = {
 interface Controls {
   hasShare: boolean
   hasAppreciators: boolean
+  hasIPFS: boolean
   hasDonators: boolean
   hasExtend: boolean
+  hasReport: boolean
   hasSticky: boolean
   hasSetTagSelected: boolean
   hasSetTagUnselected: boolean
@@ -123,6 +130,7 @@ interface Controls {
 
 interface DialogProps {
   openShareDialog: () => void
+  openSubmitReportDialog: () => void
   openAppreciatorsDialog: () => void
   openSupportersDialog: () => void
   openArchiveDialog: () => void
@@ -156,8 +164,10 @@ const BaseDropdownActions = ({
 
   hasShare,
   hasAppreciators,
+  hasIPFS,
   hasDonators,
   hasExtend,
+  hasReport,
   hasSticky,
   hasArchive,
   hasSetTagSelected,
@@ -171,6 +181,7 @@ const BaseDropdownActions = ({
   hasSetBottomCollection,
 
   openShareDialog,
+  openSubmitReportDialog,
   openAppreciatorsDialog,
   openSupportersDialog,
   openArchiveDialog,
@@ -184,7 +195,13 @@ const BaseDropdownActions = ({
   openToggleRecommendDialog,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
-  const hasPublic = hasShare || hasAppreciators || hasDonators || hasExtend
+  const hasPublic =
+    hasShare ||
+    hasAppreciators ||
+    hasDonators ||
+    hasIPFS ||
+    hasExtend ||
+    hasReport
   const hasPrivate =
     hasSticky ||
     hasArchive ||
@@ -200,7 +217,9 @@ const BaseDropdownActions = ({
         <AppreciatorsButton openDialog={openAppreciatorsDialog} />
       )}
       {hasDonators && <DonatorsButton openDialog={openSupportersDialog} />}
+      {hasIPFS && <IPFSButton article={article} />}
       {hasExtend && <ExtendButton article={article} />}
+      {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
 
       {/* private */}
       {hasPublic && hasPrivate && <Menu.Divider />}
@@ -329,6 +348,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
     hasShare,
     hasExtend = true,
+    hasReport,
 
     inCard,
     inUserArticles,
@@ -368,6 +388,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasDonators:
       hasDonators && article.donationsDialog.totalCount > 0 && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
+    hasReport: !!hasReport && !isArticleAuthor,
 
     // privates
     hasSticky: !!(
@@ -400,9 +421,15 @@ const DropdownActions = (props: DropdownActionsProps) => {
     { path: props.sharePath },
     ({ openDialog }) => ({ ...props, ...controls, openShareDialog: openDialog })
   )
+  const WithReport = withDialog<Omit<SubmitReportDialogProps, 'children'>>(
+    WithShareDialog,
+    SubmitReport.Dialog,
+    { id: article.id },
+    ({ openDialog }) => ({ openSubmitReportDialog: openDialog })
+  )
   const WithAppreciators = withDialog<
     Omit<AppreciatorsDialogProps, 'children'>
-  >(WithShareDialog, AppreciatorsDialog, { article }, ({ openDialog }) => ({
+  >(WithReport, AppreciatorsDialog, { article }, ({ openDialog }) => ({
     openAppreciatorsDialog: openDialog,
   }))
   const WithSupporters = withDialog<Omit<SupportersDialogProps, 'children'>>(

@@ -7,6 +7,9 @@
     "defaultMessage": "「{circleName}」所有作品",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
+  "+5sU+5": {
+    "defaultMessage": "侵權"
+  },
   "+63O1f": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_PASSWORD_INVALID"
@@ -212,6 +215,9 @@
   "2ef/Xl": {
     "defaultMessage": "封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "2kpUZD": {
+    "defaultMessage": "提交成功"
   },
   "2oxLHg": {
     "defaultMessage": "最多可設置 3 個代表作"
@@ -532,6 +538,9 @@
     "defaultMessage": "該 Google 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
     "description": "USER_SOCIAL_ACCOUNT_EXISTS"
   },
+  "AGDFGs": {
+    "defaultMessage": "歧視、侮辱或仇恨"
+  },
   "AGcU5J": {
     "defaultMessage": "置頂",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -578,6 +587,9 @@
   },
   "BY343C": {
     "defaultMessage": "修改"
+  },
+  "BaQj20": {
+    "defaultMessage": "報告問題"
   },
   "Bb2R0G": {
     "defaultMessage": "創作",
@@ -869,9 +881,6 @@
   "J6f6iN": {
     "defaultMessage": "評論數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
-  },
-  "JRkgKV": {
-    "defaultMessage": "複製失敗"
   },
   "JTWayV": {
     "defaultMessage": "添加描述",
@@ -1688,11 +1697,17 @@
     "defaultMessage": "重新發送",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "e3qUqn": {
+    "defaultMessage": "涉及未成年人的色情"
+  },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
   },
   "eXDZGQ": {
     "defaultMessage": "主理人"
+  },
+  "eY3YIa": {
+    "defaultMessage": "複製評論"
   },
   "enMIYK": {
     "defaultMessage": "我的"
@@ -2172,6 +2187,9 @@
   "tGn21M": {
     "defaultMessage": "支持送達"
   },
+  "tIDG14": {
+    "defaultMessage": "非法廣告"
+  },
   "tQ3+Xo": {
     "defaultMessage": "標籤添加最多至 5 個",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
@@ -2195,6 +2213,9 @@
   },
   "uJkv2X": {
     "defaultMessage": "編輯標籤"
+  },
+  "uQHRvx": {
+    "defaultMessage": "請選擇問題類型："
   },
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"
@@ -2253,6 +2274,9 @@
   "vX2bDy": {
     "defaultMessage": "關聯作品"
   },
+  "va8Rnw": {
+    "defaultMessage": "作者已關閉評論區"
+  },
   "viMrzF": {
     "defaultMessage": "廣播",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -2288,6 +2312,9 @@
   },
   "wNJjR5": {
     "defaultMessage": "支持反饋設置成功"
+  },
+  "wSZR47": {
+    "defaultMessage": "提交"
   },
   "wXzTZ0": {
     "defaultMessage": "给围炉取一个吸引人的名字吧"
@@ -2375,6 +2402,9 @@
   "yOKEVx": {
     "defaultMessage": "儲值",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "yOhatg": {
+    "defaultMessage": "其他惡意行為"
   },
   "ySGgTo": {
     "defaultMessage": "添加精選",
