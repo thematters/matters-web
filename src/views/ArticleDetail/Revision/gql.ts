@@ -8,7 +8,6 @@ import Versions from './Versions'
 const articleRevisionPublicFragment = gql`
   fragment ArticleRevisionPublicArticle on Article {
     id
-    title
     slug
     mediaHash
     state
@@ -46,7 +45,7 @@ const articleRevisionPublicFragment = gql`
 const articleVersionFragment = gql`
   fragment ArticleVersion on ArticleVersion {
     id
-    # title
+    title
     mediaHash
     summary
     createdAt

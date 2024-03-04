@@ -139,7 +139,7 @@ const BaseArticleDetailRevision = ({
   } = (translationData?.version?.__typename === 'ArticleVersion' &&
     translationData.version.translation) ||
   {}
-  const title = translated && translatedTitle ? translatedTitle : article.title
+  const title = translated && translatedTitle ? translatedTitle : version.title
   const summary =
     translated && translatedSummary ? translatedSummary : version.summary
   const originalContent = version.contents.html
