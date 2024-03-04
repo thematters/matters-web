@@ -66,8 +66,8 @@ export const Head: React.FC<HeadProps> = (props) => {
   }
 
   const getLocalLang = (props: HeadProps): LocalAlternativeLang[] => {
-    const alternativeLanguages: LocalAlternativeLang[] = []
     if (props.availableLanguages) {
+      const alternativeLanguages: LocalAlternativeLang[] = []
       for (const lang of props.availableLanguages) {
         // we only want these 3 languages so far
         if (
@@ -97,11 +97,7 @@ export const Head: React.FC<HeadProps> = (props) => {
     themeColor: '#fff',
     // twitter uses og:* for twitter:* unless otherwise specified by next-seo docs
     openGraph: {
-      title: title
-        ? props.noSuffix
-          ? title
-          : `${title} - Matters`
-        : 'Matters',
+      title: seoTitle,
       siteName: 'Matters',
       url,
       type: 'website',
