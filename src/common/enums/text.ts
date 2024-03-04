@@ -120,8 +120,6 @@ export const TEXT = {
     readCount: '閱讀次數',
     readHistory: '瀏覽記錄',
     readTime: '累計閱讀時數',
-    reconnectHint:
-      '當前錢包地址與帳戶綁定不同，若要變更請直接操作錢包或重新連接為：',
     refund: '退款',
     refuse: '拒絕',
     register: '註冊',
@@ -339,8 +337,6 @@ export const TEXT = {
     readCount: '阅读次数',
     readHistory: '浏览记录',
     readTime: '累计阅读时数',
-    reconnectHint:
-      '当前钱包地址与帐户绑定不同，若要变更请直接操作钱包或重新连接为：',
     refund: '退款',
     refuse: '拒绝',
     register: '注册',
@@ -572,8 +568,6 @@ export const TEXT = {
     readCount: 'Read Counts',
     readHistory: 'Read History',
     readTime: 'Accumulated Read Time',
-    reconnectHint:
-      'The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: ',
     refund: 'Refund',
     refuse: 'Decline',
     register: 'Register',
