@@ -21,6 +21,9 @@
   "+OStJM": {
     "defaultMessage": "Reset Payment Password"
   },
+  "+OtV6h": {
+    "defaultMessage": "Failed to save"
+  },
   "+S8mxW": {
     "defaultMessage": "Move to top",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
@@ -94,6 +97,9 @@
   },
   "/usqHn": {
     "defaultMessage": "{displayName}'s creative space"
+  },
+  "/wKyxw": {
+    "defaultMessage": "Failed to republish"
   },
   "0/iEw/": {
     "defaultMessage": "Manage Communities"
@@ -920,6 +926,9 @@
     "defaultMessage": "Unpin",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "KWDSxB": {
+    "defaultMessage": "Save revisions"
+  },
   "KgVypx": {
     "defaultMessage": "Topics",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
@@ -1130,6 +1139,10 @@
   },
   "PXAur5": {
     "defaultMessage": "Withdraw"
+  },
+  "PkUihI": {
+    "defaultMessage": "Saved",
+    "description": "src/views/ArticleDetail/Edit/Header/index.tsx"
   },
   "PliM8z": {
     "defaultMessage": "Please go to the relevant page to resend the link. You can also ",
@@ -1368,6 +1381,9 @@
   "Wg0ZvI": {
     "defaultMessage": "Articles has been bookmarked",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "Wjmng6": {
+    "defaultMessage": "{revisionCountLeft} revisions remaining"
   },
   "WpvsPu": {
     "defaultMessage": "Subscribe",
@@ -1905,6 +1921,9 @@
   },
   "ll/ufR": {
     "defaultMessage": "Trending"
+  },
+  "lsccVJ": {
+    "defaultMessage": "You have reached the limit of republished articles"
   },
   "m/Wg7b": {
     "defaultMessage": "Circle Description",

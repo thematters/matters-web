@@ -1,7 +1,5 @@
 import gql from 'graphql-tag'
 
-import { UserDigest } from '~/components/UserDigest'
-
 import MetaInfo from '../MetaInfo'
 import { fragments as circleWallFragments } from '../Wall/Circle/gql'
 import InfoHeader from './InfoHeader'
@@ -19,8 +17,6 @@ const articleRevisionPublicFragment = gql`
     language
     author {
       id
-      ...UserDigestRichUserPublic
-      ...UserDigestRichUserPrivate
     }
     access {
       type
@@ -40,8 +36,6 @@ const articleRevisionPublicFragment = gql`
     ...VersionsArticle
     ...MetaInfoArticle
   }
-  ${UserDigest.Rich.fragments.user.public}
-  ${UserDigest.Rich.fragments.user.private}
   ${circleWallFragments.circle.public}
   ${circleWallFragments.circle.private}
   ${InfoHeader.fragments.article}
@@ -52,9 +46,9 @@ const articleRevisionPublicFragment = gql`
 const articleVersionFragment = gql`
   fragment ArticleVersion on ArticleVersion {
     id
+    # title
     mediaHash
     summary
-    # translation(input: TranslationArgs): ArticleTranslation
     createdAt
     description
     contents {
@@ -121,7 +115,6 @@ export const ARTICLE_REVISION_DETAIL_PRIVATE = gql`
       }
     }
   }
-  ${UserDigest.Rich.fragments.user.private}
   ${circleWallFragments.circle.private}
 `
 

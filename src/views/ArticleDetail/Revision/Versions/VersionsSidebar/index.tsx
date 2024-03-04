@@ -4,12 +4,15 @@ import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Label } from '~/components'
+import { Label, useRoute } from '~/components'
 import { VersionsArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
+  const { getQuery } = useRoute()
+  const currVersion = getQuery('version')
+
   const versions = article.versions.edges.map((edge) => edge?.node!)
 
   if (versions.length < 1) {
@@ -24,7 +27,7 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
             key={version.id}
             className={classNames({
               [styles.item]: true,
-              [styles.active]: index === 0,
+              [styles.active]: version.id === currVersion,
             })}
           >
             <Link
@@ -37,12 +40,7 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
               }
             >
               <a className={styles.link}>
-                <span
-                  className={classNames({
-                    [styles.date]: true,
-                    [styles.active]: index === 0,
-                  })}
-                >
+                <span className={styles.date}>
                   <span>
                     {format(new Date(version.createdAt), 'yyyy-MM-dd')}
                   </span>
@@ -53,12 +51,7 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
                     </Label>
                   )}
                 </span>
-                <span
-                  className={classNames({
-                    [styles.time]: true,
-                    [styles.active]: index === 0,
-                  })}
-                >
+                <span className={styles.time}>
                   {format(new Date(version.createdAt), 'HH:mm')}
                 </span>
               </a>

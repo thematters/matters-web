@@ -26,8 +26,8 @@ export const EDIT_ARTICLE = gql`
     editArticle(
       input: {
         id: $id
-        # title: $title
-        # summary: $summary
+        title: $title
+        summary: $summary
         content: $content
         cover: $cover
         tags: $tags

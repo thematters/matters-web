@@ -21,6 +21,9 @@
   "+OStJM": {
     "defaultMessage": "重置交易密码"
   },
+  "+OtV6h": {
+    "defaultMessage": "保存失败"
+  },
   "+S8mxW": {
     "defaultMessage": "移至顶部",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
@@ -94,6 +97,9 @@
   },
   "/usqHn": {
     "defaultMessage": "{displayName} 的创作空间站"
+  },
+  "/wKyxw": {
+    "defaultMessage": "发布失败"
   },
   "0/iEw/": {
     "defaultMessage": "管理社群"
@@ -920,6 +926,9 @@
     "defaultMessage": "取消置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "KWDSxB": {
+    "defaultMessage": "保存修订"
+  },
   "KgVypx": {
     "defaultMessage": "标签",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
@@ -1130,6 +1139,10 @@
   },
   "PXAur5": {
     "defaultMessage": "提现"
+  },
+  "PkUihI": {
+    "defaultMessage": "修订已保存",
+    "description": "src/views/ArticleDetail/Edit/Header/index.tsx"
   },
   "PliM8z": {
     "defaultMessage": "请移步相关页面重新获取链接，您也可以",
@@ -1368,6 +1381,9 @@
   "Wg0ZvI": {
     "defaultMessage": "作品被收藏",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "Wjmng6": {
+    "defaultMessage": "正文及作品管理剩 {revisionCountLeft} 次修订"
   },
   "WpvsPu": {
     "defaultMessage": "订阅",
@@ -1905,6 +1921,9 @@
   },
   "ll/ufR": {
     "defaultMessage": "热门"
+  },
+  "lsccVJ": {
+    "defaultMessage": "正文及作品管理修订次数已达上限"
   },
   "m/Wg7b": {
     "defaultMessage": "围炉描述",

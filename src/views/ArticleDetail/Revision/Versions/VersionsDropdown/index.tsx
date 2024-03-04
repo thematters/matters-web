@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { Z_INDEX } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Dropdown, IconDown20, Label, Menu } from '~/components'
+import { Dropdown, IconDown20, Label, Menu, useRoute } from '~/components'
 import { VersionsArticleFragment } from '~/gql/graphql'
 
 import versionStyles from '../VersionsSidebar/styles.module.css'
@@ -13,16 +13,22 @@ import styles from './styles.module.css'
 const Version = ({
   version,
   active,
+  latest,
 }: {
   version: { id: string; createdAt: string }
   active: boolean
+  latest: boolean
 }) => {
   return (
-    <section className={styles.version}>
+    <section
+      className={classNames({
+        [styles.version]: true,
+        [versionStyles.active]: active,
+      })}
+    >
       <span
         className={classNames({
           [versionStyles.date]: true,
-          [versionStyles.active]: active,
         })}
       >
         <span>{format(new Date(version.createdAt), 'yyyy-MM-dd')}</span>
@@ -30,13 +36,12 @@ const Version = ({
       <span
         className={classNames({
           [versionStyles.time]: true,
-          [versionStyles.active]: active,
         })}
       >
         {format(new Date(version.createdAt), 'HH:mm')}
       </span>
 
-      {active && (
+      {latest && (
         <Label color="green">
           <FormattedMessage defaultMessage="Latest" id="adThp5" />
         </Label>
@@ -50,9 +55,13 @@ const VersionsDropdown = ({
 }: {
   article: VersionsArticleFragment
 }) => {
-  const versions = article.versions.edges.map((edge) => edge?.node!)
+  const { getQuery } = useRoute()
+  const currVersion = getQuery('version')
 
-  if (versions.length < 1) {
+  const versions = article.versions.edges.map((edge) => edge?.node!)
+  const version = versions.find((v) => v.id === currVersion)
+
+  if (versions.length < 1 || !version) {
     return null
   }
 
@@ -61,7 +70,13 @@ const VersionsDropdown = ({
       <Menu>
         {versions.map((version, index) => (
           <Menu.Item
-            text={<Version version={version} active={index === 0} />}
+            text={
+              <Version
+                version={version}
+                active={version.id === currVersion}
+                latest={index === 0}
+              />
+            }
             key={version.id}
             href={
               toPath({
@@ -91,7 +106,11 @@ const VersionsDropdown = ({
             type="button"
             className={styles.dropdownButton}
           >
-            <Version version={versions[0]} active />
+            <Version
+              version={version}
+              active={version.id === currVersion}
+              latest={versions[0].id === version.id}
+            />
             <IconDown20 size="mdS" />
           </button>
         )}

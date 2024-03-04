@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_CONTENT_LENGTH } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Button, TextIcon, toast, Translate, useMutation } from '~/components'
+import { Button, TextIcon, toast, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
   EditorSettingsDialog,
@@ -111,7 +111,7 @@ const EditModeHeader = ({
         variables: {
           id: article.id,
           ...(isTitleRevised ? { title: revisedTitle } : {}),
-          ...(isSummaryRevised ? { summary: revisedSummary } : {}),
+          ...(isSummaryRevised ? { summary: revisedSummary || null } : {}),
           ...(isContentRevised ? { content: revisedContent } : {}),
           ...(isTagRevised ? { tags: tags.map((tag) => tag.content) } : {}),
           ...(isCollectionRevised
@@ -129,23 +129,24 @@ const EditModeHeader = ({
       if (needRepublish) {
         onPublish()
       } else {
+        toast.success({
+          message: (
+            <FormattedMessage
+              defaultMessage="Saved"
+              id="PkUihI"
+              description="src/views/ArticleDetail/Edit/Header/index.tsx"
+            />
+          ),
+        })
         const path = toPath({ page: 'articleDetail', article })
         window.location.href = path.href
       }
     } catch (e) {
       toast.error({
         message: needRepublish ? (
-          <Translate
-            zh_hant="發布失敗"
-            zh_hans="發布失敗"
-            en="failed to republish"
-          />
+          <FormattedMessage defaultMessage="Failed to republish" id="/wKyxw" />
         ) : (
-          <Translate
-            zh_hant="保存失敗"
-            zh_hans="保存失敗"
-            en="failed to save"
-          />
+          <FormattedMessage defaultMessage="Failed to save" id="+OtV6h" />
         ),
       })
     }
@@ -155,33 +156,22 @@ const EditModeHeader = ({
     <ConfirmRevisedPublishDialogContent onSave={onSave} {...props} />
   )
 
-  const UnderLimitText = () => (
-    <>
-      <Translate
-        zh_hant="正文及作品管理剩 "
-        zh_hans="正文及作品管理剩 "
-        en=""
-      />
-      {revisionCountLeft}
-      <Translate
-        zh_hant=" 版修訂"
-        zh_hans=" 次修订"
-        en=" revisions remaining"
-      />
-    </>
-  )
-
   return (
     <>
       <p className={styles.hint}>
         <>
           {!isOverRevisionLimit ? (
-            <UnderLimitText />
+            <FormattedMessage
+              defaultMessage="{revisionCountLeft} revisions remaining"
+              id="Wjmng6"
+              values={{
+                revisionCountLeft,
+              }}
+            />
           ) : (
-            <Translate
-              zh_hant="正文及作品管理修訂次數已達上限"
-              zh_hans="正文及作品管理修订次数已达上限"
-              en="You have reached the limit of republished articles"
+            <FormattedMessage
+              defaultMessage="You have reached the limit of republished articles"
+              id="lsccVJ"
             />
           )}
         </>
@@ -193,20 +183,16 @@ const EditModeHeader = ({
         saving={loading}
         disabled={loading}
         confirmButtonText={
-          isContentRevised ? (
-            <Translate zh_hant="立即發布" zh_hans="立即发布" en="Publish" />
+          needRepublish ? (
+            <FormattedMessage defaultMessage="Publish" id="syEQFE" />
           ) : (
-            <Translate
-              zh_hant="保存修訂"
-              zh_hans="保存修订"
-              en="Save Revisions"
-            />
+            <FormattedMessage defaultMessage="Save revisions" id="KWDSxB" />
           )
         }
         cancelButtonText={
           <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
         }
-        onConfirm={isContentRevised ? undefined : onSave}
+        onConfirm={needRepublish ? undefined : onSave}
         ConfirmStepContent={ConfirmStepContent}
       >
         {({ openDialog: openEditorSettingsDialog }) => (
