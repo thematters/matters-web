@@ -58,6 +58,7 @@ import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
 import State from './State'
 import styles from './styles.module.css'
+import { SupportAuthor } from './SupportAuthor'
 import TagList from './TagList'
 import DesktopToolbar from './Toolbar/DesktopToolbar'
 import FixedToolbar from './Toolbar/FixedToolbar'
@@ -160,6 +161,11 @@ const BaseArticleDetail = ({
   const [autoOpen] = useState(true)
   const toggleDrawer = () => {
     setIsOpen((prevState) => !prevState)
+  }
+
+  const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
+  const toggleDonationDrawer = () => {
+    setIsOpenDonationDrawer((prevState) => !prevState)
   }
 
   const authorId = article.author?.id
@@ -333,6 +339,21 @@ const BaseArticleDetail = ({
           )}
           {isCommentDetail && <DynamicCommentsDetail />}
         </Drawer>
+
+        <Drawer
+          isOpen={isOpenDonationDrawer}
+          onClose={toggleDonationDrawer}
+          title={intl.formatMessage({
+            defaultMessage: 'Support Author',
+            id: 'ezYuE2',
+          })}
+        >
+          <SupportAuthor
+            recipient={article.author}
+            targetId={article.id}
+            article={article}
+          />
+        </Drawer>
       </Media>
 
       <section className={styles.content}>
@@ -480,6 +501,7 @@ const BaseArticleDetail = ({
           privateFetched={privateFetched}
           lock={lock}
           toggleDrawer={toggleDrawer}
+          toggleDonationDrawer={toggleDonationDrawer}
         />
       </Media>
 
@@ -491,6 +513,7 @@ const BaseArticleDetail = ({
           privateFetched={privateFetched}
           lock={lock}
           toggleDrawer={toggleDrawer}
+          toggleDonationDrawer={toggleDonationDrawer}
         />
       </Media>
 

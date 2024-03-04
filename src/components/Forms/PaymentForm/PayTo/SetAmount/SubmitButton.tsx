@@ -43,7 +43,7 @@ const WrapperButton: React.FC<
   if (mode === 'text') {
     return <Dialog.TextButton {...restProps} />
   } else {
-    return <Dialog.RoundedButton {...restProps} />
+    return <Dialog.RoundedButton {...restProps} color="white" bgColor="green" />
   }
 }
 

@@ -52,7 +52,6 @@ import {
 
 // import CivicLikerButton from '../CivicLikerButton'
 import SetAmountBalance from './SetAmountBalance'
-import SetAmountHeader from './SetAmountHeader'
 import styles from './styles.module.css'
 import SubmitButton from './SubmitButton'
 
@@ -286,15 +285,6 @@ const SetAmount: React.FC<FormProps> = ({
    */
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <SetAmountHeader
-        currency={currency}
-        isConnectedAddress={isConnectedAddress}
-        isUnsupportedNetwork={isUnsupportedNetwork}
-        targetChainName={targetNetork.name}
-        switchToCurrencyChoice={switchToCurrencyChoice}
-        switchToTargetNetwork={switchToTargetNetwork}
-      />
-
       <SetAmountBalance
         currency={currency}
         balanceUSDT={balanceUSDT}
@@ -392,11 +382,7 @@ const SetAmount: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header
-        title={<FormattedMessage defaultMessage="Support Author" id="ezYuE2" />}
-      />
-
-      <Dialog.Content>
+      <Dialog.Content noSpacing>
         {InnerForm}
 
         {isUSDT && !isConnectedAddress && (
@@ -434,30 +420,10 @@ const SetAmount: React.FC<FormProps> = ({
             </p>
           </>
         )}
-      </Dialog.Content>
 
-      <Dialog.Footer
-        btns={
-          <>
-            <SubmitButton mode="rounded" {...submitButtonProps} />
-            <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
-              color="greyDarker"
-              onClick={back}
-            />
-          </>
-        }
-        smUpBtns={
-          <>
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
-              color="greyDarker"
-              onClick={back}
-            />
-            <SubmitButton mode="text" {...submitButtonProps} />
-          </>
-        }
-      />
+        <Spacer size="loose" />
+        <SubmitButton mode="rounded" {...submitButtonProps} />
+      </Dialog.Content>
     </>
   )
 }

@@ -1435,6 +1435,9 @@
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "Y47aYU": {
+    "defaultMessage": "Top up"
+  },
   "Y7N/Jg": {
     "defaultMessage": "Maximum image dimension is 12,000 pixels."
   },
@@ -1474,6 +1477,9 @@
   "Z2iL9Z": {
     "defaultMessage": "Start writing",
     "description": "src/components/Buttons/StartWriting/index.tsx"
+  },
+  "Z6Z1aN": {
+    "defaultMessage": "Select amount"
   },
   "ZAs170": {
     "defaultMessage": "Profile",
@@ -1851,6 +1857,9 @@
   "kSt4il": {
     "defaultMessage": "Bookmark removed",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
+  },
+  "kaPKOB": {
+    "defaultMessage": "Insufficient balance"
   },
   "kc79d3": {
     "defaultMessage": "Topics"
@@ -2234,6 +2243,10 @@
     "defaultMessage": "New broadcasts",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "vmx+TU": {
+    "defaultMessage": "Credit card",
+    "description": "src/views/ArticleDetail/SupportAuthor/Tabs/index.tsx"
+  },
   "vsD2wm": {
     "defaultMessage": "reset your login password",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -2330,6 +2343,9 @@
   },
   "y1AhBH": {
     "defaultMessage": "Enter a custom amount"
+  },
+  "y2IqUi": {
+    "defaultMessage": "Balance:&nbsp;"
   },
   "y4Lyf1": {
     "defaultMessage": "This name is already taken.",

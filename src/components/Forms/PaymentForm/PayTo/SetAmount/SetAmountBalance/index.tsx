@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { GUIDE_LINKS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
@@ -41,38 +42,50 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
   return (
     <section className={styles.setAmountBalance}>
       <span className={styles.left}>
-        <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
-        {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}
-        {isHKD && <span>{formatAmount(balanceHKD)} HKD</span>}
-        {isLike && <span>{formatAmount(balanceLike, 0)} LIKE</span>}
+        <FormattedMessage defaultMessage="Select amount" id="Z6Z1aN" />
       </span>
 
-      {isHKD && (
-        <BindEmailHintDialog>
-          {({ openDialog }) => {
-            return (
-              <Button onClick={hasEmail ? switchToAddCredit : openDialog}>
-                <TextIcon
-                  size="xs"
-                  textDecoration="underline"
-                  color="green"
-                  weight="md"
-                >
-                  {isBalanceInsufficient ? (
-                    <Translate
-                      zh_hant="餘額不足，請儲值"
-                      zh_hans="余额不足，请储值"
-                      en="Insufficient balance, please top up"
-                    />
-                  ) : (
-                    <Translate zh_hant="儲值" zh_hans="储值" en="Top Up" />
-                  )}
-                </TextIcon>
-              </Button>
-            )
-          }}
-        </BindEmailHintDialog>
-      )}
+      <span className={styles.right}>
+        {!isBalanceInsufficient && (
+          <>
+            <FormattedMessage defaultMessage="Balance:&nbsp;" id="y2IqUi" />
+          </>
+        )}
+        <span className={styles.balance}>
+          {isUSDT && <span>USDT {formatAmount(balanceUSDT)}</span>}
+          {isHKD && !isBalanceInsufficient && (
+            <span>HKD {formatAmount(balanceHKD)}</span>
+          )}
+          {isLike && <span>LIKE {formatAmount(balanceLike, 0)}</span>}
+          {isHKD && isBalanceInsufficient && (
+            <FormattedMessage
+              defaultMessage="Insufficient balance"
+              id="kaPKOB"
+            />
+          )}
+        </span>
+        {isHKD && (
+          <BindEmailHintDialog>
+            {({ openDialog }) => {
+              return (
+                <section className={styles.topup}>
+                  <Button onClick={hasEmail ? switchToAddCredit : openDialog}>
+                    <TextIcon
+                      size="sm"
+                      textDecoration="underline"
+                      color="gold"
+                      weight="md"
+                    >
+                      <FormattedMessage defaultMessage="Top up" id="Y47aYU" />
+                    </TextIcon>
+                  </Button>
+                </section>
+              )
+            }}
+          </BindEmailHintDialog>
+        )}
+      </span>
+
       {isUSDT && balanceUSDT <= 0 && (
         <a href={GUIDE_LINKS.payment[lang]} target="_blank" rel="noreferrer">
           <TextIcon size="xs" textDecoration="underline" color="greyDark">
