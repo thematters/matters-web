@@ -11,9 +11,9 @@ import styles from './styles.module.css'
 
 const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
   const { getQuery } = useRoute()
-  const currVersion = getQuery('version')
 
   const versions = article.versions.edges.map((edge) => edge?.node!)
+  const currVersion = getQuery('version') || versions[0]?.id
 
   if (versions.length < 1) {
     return null

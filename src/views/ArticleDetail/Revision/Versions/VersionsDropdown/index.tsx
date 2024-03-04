@@ -56,9 +56,9 @@ const VersionsDropdown = ({
   article: VersionsArticleFragment
 }) => {
   const { getQuery } = useRoute()
-  const currVersion = getQuery('version')
 
   const versions = article.versions.edges.map((edge) => edge?.node!)
+  const currVersion = getQuery('version') || versions[0]?.id
   const version = versions.find((v) => v.id === currVersion)
 
   if (versions.length < 1 || !version) {

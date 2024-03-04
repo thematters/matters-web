@@ -222,7 +222,7 @@ const ArticleDetailRevision = ({
 }) => {
   const { getQuery, router } = useRoute()
   const mediaHash = getQuery('mediaHash')
-  const currVersion = getQuery('version')
+  const currVersion = getQuery('version') || latestVersion
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
@@ -245,7 +245,7 @@ const ArticleDetailRevision = ({
     {
       variables: {
         mediaHash,
-        version: currVersion || latestVersion,
+        version: currVersion,
       },
       skip: !isQueryByHash,
     }
@@ -255,17 +255,13 @@ const ArticleDetailRevision = ({
     {
       variables: {
         id: toGlobalId({ type: 'Article', id: articleId }),
-        version: currVersion || latestVersion,
+        version: currVersion,
       },
       skip: isQueryByHash,
     }
   )
 
-  const {
-    data,
-    client,
-    refetch: refetchPublic,
-  } = resultByHash.data ? resultByHash : resultByNodeId
+  const { data, client } = resultByHash.data ? resultByHash : resultByNodeId
   const loading = resultByHash.loading || resultByNodeId.loading
   const error = resultByHash.error || resultByNodeId.error
 
@@ -289,12 +285,10 @@ const ArticleDetailRevision = ({
   }
 
   useEffect(() => {
-    // refetch data when URL query is changed
     ;(async () => {
-      await refetchPublic()
       await loadPrivate()
     })()
-  }, [mediaHash, currVersion])
+  }, [article?.id, currVersion])
 
   /**
    * Render:Loading
