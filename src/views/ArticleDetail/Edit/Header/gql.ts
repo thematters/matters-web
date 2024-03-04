@@ -6,6 +6,7 @@ import articleFragments from '~/components/GQL/fragments/article'
 export const EDIT_ARTICLE = gql`
   mutation EditArticle(
     $id: ID!
+    $description: description_String_maxLength_140
     $title: String
     $summary: String
     $content: String
@@ -26,6 +27,7 @@ export const EDIT_ARTICLE = gql`
     editArticle(
       input: {
         id: $id
+        description: $description
         title: $title
         summary: $summary
         content: $content

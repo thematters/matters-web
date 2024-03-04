@@ -113,10 +113,6 @@ export const TEXT = {
     publishAbort: '存至草稿',
     publishing: '正在發布，馬上就好',
     publishing2: '寫入中…',
-    publishToISCN: '註冊 ISCN',
-    publishToISCNHint_1: '發布時註冊 ',
-    publishToISCNHint_2:
-      ' 用以出版 Writing NFT，費用 ≈1 LIKE，推廣期由平台補助',
     readCount: '閱讀次數',
     readHistory: '瀏覽記錄',
     readTime: '累計閱讀時數',
@@ -331,10 +327,6 @@ export const TEXT = {
     publishAbort: '存至草稿',
     publishing: '正在发布，马上就好',
     publishing2: '写入中…',
-    publishToISCN: '註冊 ISCN',
-    publishToISCNHint_1: '发布时註冊 ',
-    publishToISCNHint_2:
-      ' 用以出版 Writing NFT，费用 ≈1 LIKE，推广期由平台补助',
     readCount: '阅读次数',
     readHistory: '浏览记录',
     readTime: '累计阅读时数',
@@ -562,11 +554,6 @@ export const TEXT = {
     publishAbort: 'Save as Draft',
     publishing: 'Publishing...',
     publishing2: 'Publishing...',
-    publishToISCN: 'Register for ISCN',
-    publishToISCNHint_1:
-      'Registering ISCN allows you to publish Writing NFT. The cost of ',
-    publishToISCNHint_2:
-      ' registration is about 1 LIKE. During promotion period it is sponsored by Matters.News.',
     readCount: 'Read Counts',
     readHistory: 'Read History',
     readTime: 'Accumulated Read Time',

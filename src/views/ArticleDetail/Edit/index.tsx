@@ -18,6 +18,7 @@ import {
   SetCollectionProps,
   SetCoverProps,
   SetResponseProps,
+  SetRevisionDescriptionProps,
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
@@ -36,7 +37,6 @@ import {
   QueryEditArticleQuery,
 } from '~/gql/graphql'
 
-import { useEditArticleDetailSupportSetting } from '../Hook'
 import { GET_EDIT_ARTICLE, GET_EDIT_ARTICLE_ASSETS } from './gql'
 import EditHeader from './Header'
 import PublishState from './PublishState'
@@ -56,6 +56,7 @@ const Editor = dynamic(
 const BaseEdit = ({ article }: { article: Article }) => {
   const [showPublishState, setShowPublishState] = useState(false)
 
+  const [description, setDescription] = useState('')
   const [editTitle, setEditTitle] = useState('')
   const [editSummary, setEditSummary] = useState('')
   const [editContent, setEditContent] = useState('')
@@ -112,8 +113,14 @@ const BaseEdit = ({ article }: { article: Article }) => {
     editLicense(newLicense)
   }
 
-  const { edit: editSupport, saving: supportSaving } =
-    useEditArticleDetailSupportSetting(article.id)
+  const [requestForDonation, setRequestForDonation] = useState(
+    article.requestForDonation
+  )
+  const [replyToDonator, setReplyToDonator] = useState(article.replyToDonator)
+  const editSupportSetting = (request: string | null, reply: string | null) => {
+    setRequestForDonation(request)
+    setReplyToDonator(reply)
+  }
 
   const [contentSensitive, setContentSensitive] = useState<boolean>(
     article.sensitiveByAuthor
@@ -164,8 +171,8 @@ const BaseEdit = ({ article }: { article: Article }) => {
     canToggleCircle: !!hasOwnCircle && !isReviseDisabled,
     iscnPublish,
 
-    article,
-    editSupportSetting: editSupport,
+    article: { ...article, replyToDonator, requestForDonation },
+    editSupportSetting,
     supportSettingSaving: false,
     onOpenSupportSetting: () => undefined,
 
@@ -179,6 +186,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
       setIscnPublish(!iscnPublish)
     },
     iscnPublishSaving: false,
+  }
+
+  const revisionDescriptionProps: SetRevisionDescriptionProps = {
+    revisionDescription: description,
+    editRevisionDescription: setDescription,
   }
 
   return (
@@ -196,9 +208,9 @@ const BaseEdit = ({ article }: { article: Article }) => {
             />
 
             <SupportSettingDialog
-              article={article}
-              editSupportSetting={editSupport}
-              supportSettingSaving={supportSaving}
+              article={{ ...article, replyToDonator, requestForDonation }}
+              editSupportSetting={editSupportSetting}
+              supportSettingSaving={false}
             >
               {({ openDialog }) => (
                 <Sidebar.Management
@@ -220,11 +232,17 @@ const BaseEdit = ({ article }: { article: Article }) => {
               {...collectionProps}
               {...accessProps}
               {...setCommentProps}
+              {...revisionDescriptionProps}
               article={article}
+              revisionDescription={description}
               revisedTitle={editTitle || article.title}
               revisedSummary={editSummary || article.summary}
               revisedContent={editContent || article.contents.html || ''}
               revisedCover={cover}
+              revisedRequestForDonation={
+                requestForDonation || article.requestForDonation
+              }
+              revisedReplyToDonor={replyToDonator || article.replyToDonator}
               revisionCountLeft={revisionCountLeft}
               isOverRevisionLimit={isOverRevisionLimit}
               isEditDisabled={showPublishState}
@@ -273,13 +291,14 @@ const BaseEdit = ({ article }: { article: Article }) => {
           />
         </Layout.Main.Spacing>
 
+        {/* BottomBar */}
         <Media lessThan="lg">
           <SupportSettingDialog
-            article={article}
-            editSupportSetting={editSupport}
-            supportSettingSaving={supportSaving}
+            article={{ ...article, replyToDonator, requestForDonation }}
+            editSupportSetting={editSupportSetting}
+            supportSettingSaving={false}
           >
-            {({ openDialog }) => (
+            {({ openDialog: openSupportSettingDialog }) => (
               <BottomBar
                 saving={false}
                 disabled={false}
@@ -288,7 +307,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                 {...collectionProps}
                 {...accessProps}
                 {...setCommentProps}
-                onOpenSupportSetting={openDialog}
+                onOpenSupportSetting={openSupportSettingDialog}
               />
             )}
           </SupportSettingDialog>

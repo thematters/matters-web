@@ -26,10 +26,13 @@ type EditModeHeaderProps = {
     }
   >
 
+  revisionDescription?: string
   revisedTitle?: string
   revisedSummary?: string
   revisedContent?: string
   revisedCover?: AssetFragment
+  revisedRequestForDonation?: string | null
+  revisedReplyToDonor?: string | null
 
   revisionCountLeft: number
   isOverRevisionLimit: boolean
@@ -50,10 +53,13 @@ type EditModeHeaderProps = {
 const EditModeHeader = ({
   article,
 
+  revisionDescription,
   revisedTitle,
   revisedSummary,
   revisedContent,
   revisedCover,
+  revisedReplyToDonor,
+  revisedRequestForDonation,
 
   revisionCountLeft,
   isOverRevisionLimit,
@@ -81,6 +87,10 @@ const EditModeHeader = ({
   const isCoverRevised = article.cover
     ? revisedCover?.path !== article.cover
     : !!revisedCover?.path
+  const isRequestForDonationRevised =
+    revisedRequestForDonation !== article.requestForDonation
+  const isReplyToDonorRevised = revisedReplyToDonor !== article.replyToDonator
+
   const needRepublish =
     isTitleRevised ||
     isSummaryRevised ||
@@ -110,6 +120,7 @@ const EditModeHeader = ({
       await editArticle({
         variables: {
           id: article.id,
+          ...(revisionDescription ? { description: revisionDescription } : {}),
           ...(isTitleRevised ? { title: revisedTitle } : {}),
           ...(isSummaryRevised ? { summary: revisedSummary || null } : {}),
           ...(isContentRevised ? { content: revisedContent } : {}),
@@ -118,6 +129,12 @@ const EditModeHeader = ({
             ? { collection: collection.map(({ id }) => id) }
             : {}),
           ...(isCoverRevised ? { cover: revisedCover?.id || null } : {}),
+          ...(isRequestForDonationRevised
+            ? { requestForDonation: revisedRequestForDonation }
+            : {}),
+          ...(isReplyToDonorRevised
+            ? { replyToDonor: revisedReplyToDonor }
+            : {}),
           circle: circle ? circle.id : null,
           accessType,
           license,
@@ -179,7 +196,12 @@ const EditModeHeader = ({
 
       <EditorSettingsDialog
         {...restProps}
-        article={article}
+        revisionDescription={revisionDescription}
+        article={{
+          ...article,
+          replyToDonator: revisedReplyToDonor,
+          requestForDonation: revisedRequestForDonation,
+        }}
         saving={loading}
         disabled={loading}
         confirmButtonText={

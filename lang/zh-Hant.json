@@ -107,6 +107,9 @@
   "0/iEw/": {
     "defaultMessage": "管理社群"
   },
+  "06XHBC": {
+    "defaultMessage": "加入圍爐"
+  },
   "0Azlrb": {
     "defaultMessage": "管理"
   },
@@ -221,6 +224,9 @@
   },
   "2oxLHg": {
     "defaultMessage": "最多可設置 3 個代表作"
+  },
+  "2qbSh8": {
+    "defaultMessage": "發布時註冊 "
   },
   "2slIPX": {
     "defaultMessage": "讚賞"
@@ -667,6 +673,9 @@
     "defaultMessage": "已超過 140 字，目前 {numbers} 字",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
+  "DUvMii": {
+    "defaultMessage": "可自訂號召支持的內容，以及收到支持後的感謝文字"
+  },
   "DYrDcG": {
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
@@ -815,6 +824,9 @@
   "HAlOn1": {
     "defaultMessage": "用戶名"
   },
+  "HBxXD/": {
+    "defaultMessage": "版權聲明"
+  },
   "HEpsZ3": {
     "defaultMessage": "返回發現"
   },
@@ -851,6 +863,9 @@
   "Hyr5ET": {
     "defaultMessage": "支持者",
     "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
+  },
+  "HzB4Lk": {
+    "defaultMessage": "告知讀者你此次編輯的更動有哪些⋯"
   },
   "I8+06z": {
     "defaultMessage": "評論已隱藏",
@@ -945,6 +960,9 @@
   "KlJEP9": {
     "defaultMessage": "錢包已綁定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "Kwv1n3": {
+    "defaultMessage": " 用以出版 Writing NFT，費用 ≈1 LIKE，推廣期由平台補助"
   },
   "KxVlDj": {
     "defaultMessage": "設定 - 已封鎖用戶",
@@ -1125,6 +1143,9 @@
     "defaultMessage": "成功發送邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
+  "OJmFke": {
+    "defaultMessage": "告知讀者你此次編輯的更動"
+  },
   "OKhRC6": {
     "defaultMessage": "分享"
   },
@@ -1254,6 +1275,9 @@
   "Sep44m": {
     "defaultMessage": "提現",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "SuRTsQ": {
+    "defaultMessage": "註冊 ISCN"
   },
   "Szd1tH": {
     "defaultMessage": "登出失敗，請重試"
@@ -1660,6 +1684,9 @@
   "d4waan": {
     "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "d5+b8r": {
+    "defaultMessage": "限制級內容"
   },
   "dAPUJp": {
     "defaultMessage": "流星雨的絢爛光芒足以點亮夜空。流星號徽章紀念你曾參與「遊牧者計畫」。",
@@ -2122,6 +2149,9 @@
   "rBjwQy": {
     "defaultMessage": "微博",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rDX3h6": {
+    "defaultMessage": "版本簡述"
   },
   "rHi+cL": {
     "defaultMessage": "最多讀者",

@@ -107,6 +107,9 @@
   "0/iEw/": {
     "defaultMessage": "Manage Communities"
   },
+  "06XHBC": {
+    "defaultMessage": "Add to Circle"
+  },
   "0Azlrb": {
     "defaultMessage": "Manage"
   },
@@ -221,6 +224,9 @@
   },
   "2oxLHg": {
     "defaultMessage": "Up to 3 articles/collections can be pinned"
+  },
+  "2qbSh8": {
+    "defaultMessage": "Registering ISCN allows you to publish Writing NFT. The cost of"
   },
   "2slIPX": {
     "defaultMessage": "Likes"
@@ -667,6 +673,9 @@
     "defaultMessage": "Over 140 words, current {numbers}",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
+  "DUvMii": {
+    "defaultMessage": "Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+  },
   "DYrDcG": {
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
@@ -815,6 +824,9 @@
   "HAlOn1": {
     "defaultMessage": "Name"
   },
+  "HBxXD/": {
+    "defaultMessage": "License"
+  },
   "HEpsZ3": {
     "defaultMessage": "Back to discovery"
   },
@@ -851,6 +863,9 @@
   "Hyr5ET": {
     "defaultMessage": "Supporter",
     "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
+  },
+  "HzB4Lk": {
+    "defaultMessage": "Tell readers why you edited this time..."
   },
   "I8+06z": {
     "defaultMessage": "Comment has been hidden",
@@ -945,6 +960,9 @@
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "Kwv1n3": {
+    "defaultMessage": "registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
   },
   "KxVlDj": {
     "defaultMessage": "Settings - Blocked Users",
@@ -1125,6 +1143,9 @@
     "defaultMessage": "Invitation Sent",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
+  "OJmFke": {
+    "defaultMessage": "Tell readers why you edited this time"
+  },
   "OKhRC6": {
     "defaultMessage": "Share"
   },
@@ -1254,6 +1275,9 @@
   "Sep44m": {
     "defaultMessage": "Payout",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "SuRTsQ": {
+    "defaultMessage": "Register for ISCN"
   },
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again."
@@ -1660,6 +1684,9 @@
   "d4waan": {
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "d5+b8r": {
+    "defaultMessage": "Restricted content"
   },
   "dAPUJp": {
     "defaultMessage": "The dazzling light of a meteor shower is enough to illuminate the night sky. The Meteor Canoe badge signifies your participation in the Nomad Matters.",
@@ -2122,6 +2149,9 @@
   "rBjwQy": {
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
+  },
+  "rDX3h6": {
+    "defaultMessage": "Version Description"
   },
   "rHi+cL": {
     "defaultMessage": "Most readers",

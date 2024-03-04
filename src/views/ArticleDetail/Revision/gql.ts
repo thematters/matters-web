@@ -49,7 +49,6 @@ const articleVersionFragment = gql`
     mediaHash
     summary
     createdAt
-    description
     contents {
       html
     }

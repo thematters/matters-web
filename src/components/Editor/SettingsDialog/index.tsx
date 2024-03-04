@@ -6,6 +6,7 @@ import {
   SetCollectionProps,
   SetCoverProps,
   SetPublishISCNProps,
+  SetRevisionDescriptionProps,
   SetTagsProps,
   ToggleAccessProps,
   ToggleResponseProps,
@@ -29,6 +30,7 @@ export type Step =
   | 'circle'
   | 'confirm'
   | 'support'
+  | 'revisionDescription'
 
 export type ConfirmStepContentProps = {
   onBack: () => void
@@ -47,7 +49,8 @@ export type EditorSettingsDialogProps = {
   ToggleAccessProps &
   ToggleResponseProps &
   SetPublishISCNProps &
-  SettingsListDialogButtons
+  SettingsListDialogButtons &
+  Partial<SetRevisionDescriptionProps>
 
 const DynamicEditorSearchSelectForm = dynamic(
   () => import('~/components/Forms/EditorSearchSelectForm'),
@@ -60,6 +63,11 @@ const DynamicSetCover = dynamic(() => import('../SetCover'), {
 
 const DynamicSetSupportFeedback = dynamic(
   () => import('~/components/Editor/ToggleAccess/SupportSettingDialog/Content'),
+  { loading: () => <Spinner /> }
+)
+
+const DynamicSetRevisionDescription = dynamic(
+  () => import('~/components/Editor/SetRevisionDescription/Content'),
   { loading: () => <Spinner /> }
 )
 
@@ -91,6 +99,9 @@ const BaseEditorSettingsDialog = ({
   article,
   editSupportSetting,
   supportSettingSaving,
+
+  revisionDescription,
+  editRevisionDescription,
 
   contentSensitive,
   toggleContentSensitive,
@@ -133,6 +144,7 @@ const BaseEditorSettingsDialog = ({
   // const isCircle = currStep === 'circle'
   const isConfirm = currStep === 'confirm'
   const isSupportSetting = currStep === 'support'
+  const isRevisionDescription = currStep === 'revisionDescription'
   const coverProps: SetCoverProps = {
     cover,
     editCover,
@@ -184,6 +196,8 @@ const BaseEditorSettingsDialog = ({
             confirmButtonText={confirmButtonText}
             cancelButtonText={cancelButtonText}
             onConfirm={onConfirm}
+            revisionDescription={revisionDescription}
+            hasSetRevisionDescription={!!editRevisionDescription}
             cover={cover}
             collectionCount={collection.length}
             tagsCount={tags.length}
@@ -261,6 +275,16 @@ const BaseEditorSettingsDialog = ({
             draft={draft}
             editSupportSetting={editSupportSetting}
             supportSettingSaving={supportSettingSaving}
+          />
+        )}
+
+        {isRevisionDescription && editRevisionDescription && (
+          <DynamicSetRevisionDescription
+            description={revisionDescription!}
+            editDescription={editRevisionDescription}
+            back={() => forward('list')}
+            submitCallback={() => forward('list')}
+            closeDialog={closeDialog}
           />
         )}
 
