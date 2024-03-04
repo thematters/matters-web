@@ -23,6 +23,9 @@
   "+aMAeT": {
     "defaultMessage": "地址已複製"
   },
+  "+bwe8v": {
+    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
+  },
   "+cS08C": {
     "defaultMessage": "確認要將「{article}」從選集中移出嗎？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -229,6 +232,9 @@
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
+  "3lMsOU": {
+    "defaultMessage": "重新授權後繼續"
+  },
   "3phEFL": {
     "defaultMessage": "繼續使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -318,6 +324,9 @@
   "6BXcdo": {
     "defaultMessage": "設定圍爐門檻（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6ErzDk": {
+    "defaultMessage": "重新連接錢包"
   },
   "6N2LKY": {
     "defaultMessage": "授權信息已失效，請重新登入",
@@ -828,6 +837,9 @@
     "defaultMessage": "被追蹤",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "JmzmVH": {
+    "defaultMessage": "切換到 "
+  },
   "JpS59y": {
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1160,6 +1172,9 @@
     "defaultMessage": "付費人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "Tgd5id": {
+    "defaultMessage": "支持金額超出授權額度"
+  },
   "TjWWxF": {
     "defaultMessage": "廣播已送出",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
@@ -1425,6 +1440,9 @@
   },
   "ai7kS4": {
     "defaultMessage": "我的創作"
+  },
+  "aoDcrD": {
+    "defaultMessage": "首次需確認授權後繼續"
   },
   "aqX2Bt": {
     "defaultMessage": "前往首頁",
@@ -1882,6 +1900,9 @@
   "pHg5Ju": {
     "defaultMessage": "登入密碼已設定",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
+  "pKkpI9": {
+    "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
   },
   "pRV+UD": {
     "defaultMessage": "闔上",
