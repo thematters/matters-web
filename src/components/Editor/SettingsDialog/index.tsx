@@ -6,8 +6,8 @@ import {
   SetCollectionProps,
   SetCoverProps,
   SetPublishISCNProps,
-  SetRevisionDescriptionProps,
   SetTagsProps,
+  SetVersionDescriptionProps,
   ToggleAccessProps,
   ToggleResponseProps,
 } from '~/components/Editor'
@@ -30,7 +30,7 @@ export type Step =
   | 'circle'
   | 'confirm'
   | 'support'
-  | 'revisionDescription'
+  | 'versionDescription'
 
 export type ConfirmStepContentProps = {
   onBack: () => void
@@ -50,7 +50,7 @@ export type EditorSettingsDialogProps = {
   ToggleResponseProps &
   SetPublishISCNProps &
   SettingsListDialogButtons &
-  Partial<SetRevisionDescriptionProps>
+  Partial<SetVersionDescriptionProps>
 
 const DynamicEditorSearchSelectForm = dynamic(
   () => import('~/components/Forms/EditorSearchSelectForm'),
@@ -66,8 +66,8 @@ const DynamicSetSupportFeedback = dynamic(
   { loading: () => <Spinner /> }
 )
 
-const DynamicSetRevisionDescription = dynamic(
-  () => import('~/components/Editor/SetRevisionDescription/Content'),
+const DynamicSetVersionDescription = dynamic(
+  () => import('~/components/Editor/SetVersionDescription/Content'),
   { loading: () => <Spinner /> }
 )
 
@@ -100,8 +100,8 @@ const BaseEditorSettingsDialog = ({
   editSupportSetting,
   supportSettingSaving,
 
-  revisionDescription,
-  editRevisionDescription,
+  versionDescription,
+  editVersionDescription,
 
   contentSensitive,
   toggleContentSensitive,
@@ -144,7 +144,7 @@ const BaseEditorSettingsDialog = ({
   // const isCircle = currStep === 'circle'
   const isConfirm = currStep === 'confirm'
   const isSupportSetting = currStep === 'support'
-  const isRevisionDescription = currStep === 'revisionDescription'
+  const isVersionDescription = currStep === 'versionDescription'
   const coverProps: SetCoverProps = {
     cover,
     editCover,
@@ -196,8 +196,8 @@ const BaseEditorSettingsDialog = ({
             confirmButtonText={confirmButtonText}
             cancelButtonText={cancelButtonText}
             onConfirm={onConfirm}
-            revisionDescription={revisionDescription}
-            hasSetRevisionDescription={!!editRevisionDescription}
+            versionDescription={versionDescription}
+            hasSetVersionDescription={!!editVersionDescription}
             cover={cover}
             collectionCount={collection.length}
             tagsCount={tags.length}
@@ -278,10 +278,10 @@ const BaseEditorSettingsDialog = ({
           />
         )}
 
-        {isRevisionDescription && editRevisionDescription && (
-          <DynamicSetRevisionDescription
-            description={revisionDescription!}
-            editDescription={editRevisionDescription}
+        {isVersionDescription && editVersionDescription && (
+          <DynamicSetVersionDescription
+            description={versionDescription!}
+            editDescription={editVersionDescription}
             back={() => forward('list')}
             submitCallback={() => forward('list')}
             closeDialog={closeDialog}

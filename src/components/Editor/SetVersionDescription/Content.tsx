@@ -20,7 +20,7 @@ interface FormValues {
   description: string
 }
 
-const SetRevisionDescriptionDialogContent: React.FC<FormProps> = ({
+const SetVersionDescriptionDialogContent: React.FC<FormProps> = ({
   back,
   closeDialog,
   submitCallback,
@@ -145,4 +145,4 @@ const SetRevisionDescriptionDialogContent: React.FC<FormProps> = ({
   )
 }
 
-export default SetRevisionDescriptionDialogContent
+export default SetVersionDescriptionDialogContent

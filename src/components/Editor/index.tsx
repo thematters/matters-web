@@ -32,7 +32,7 @@ export type SetResponseProps = {
   toggleComment: (canComment: boolean) => void
 }
 
-export type SetRevisionDescriptionProps = {
-  revisionDescription: string
-  editRevisionDescription: (description: string) => any
+export type SetVersionDescriptionProps = {
+  versionDescription: string
+  editVersionDescription: (description: string) => any
 }

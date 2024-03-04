@@ -55,7 +55,7 @@ export type ToggleAccessProps = {
   togglePublishISCN: (iscnPublish: boolean) => void
   iscnPublishSaving: boolean
 
-  inSidebar?: boolean
+  compact?: boolean
 }
 
 const ToggleAccess: React.FC<ToggleAccessProps> = ({
@@ -78,7 +78,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   togglePublishISCN,
   iscnPublishSaving,
 
-  inSidebar,
+  compact,
 }) => {
   const intl = useIntl()
   const content = draft ? draft : article
@@ -89,7 +89,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
     <section
       className={classNames({
         [styles.container]: true,
-        [styles.inSidebar]: inSidebar,
+        [styles.compact]: compact,
       })}
     >
       {canToggleCircle && (
@@ -158,7 +158,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
       </section>
 
       <section className={styles.supportSetting}>
-        {inSidebar ? (
+        {compact ? (
           <button type="button" onClick={onOpenSupportSetting}>
             <section className={styles.support}>
               <section className={styles.left}>

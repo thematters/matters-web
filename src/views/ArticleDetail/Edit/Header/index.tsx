@@ -26,13 +26,15 @@ type EditModeHeaderProps = {
     }
   >
 
-  revisionDescription?: string
-  revisedTitle?: string
-  revisedSummary?: string
-  revisedContent?: string
-  revisedCover?: AssetFragment
-  revisedRequestForDonation?: string | null
-  revisedReplyToDonor?: string | null
+  revision: {
+    versionDescription?: string
+    title?: string
+    summary?: string
+    content?: string
+    cover?: AssetFragment
+    requestForDonation?: string | null
+    replyToDonator?: string | null
+  }
 
   revisionCountLeft: number
   isOverRevisionLimit: boolean
@@ -52,15 +54,7 @@ type EditModeHeaderProps = {
 
 const EditModeHeader = ({
   article,
-
-  revisionDescription,
-  revisedTitle,
-  revisedSummary,
-  revisedContent,
-  revisedCover,
-  revisedReplyToDonor,
-  revisedRequestForDonation,
-
+  revision,
   revisionCountLeft,
   isOverRevisionLimit,
   isEditDisabled,
@@ -73,9 +67,9 @@ const EditModeHeader = ({
   const [editArticle, { loading }] =
     useMutation<EditArticleMutation>(EDIT_ARTICLE)
 
-  const isTitleRevised = revisedTitle !== article.title
-  const isSummaryRevised = revisedSummary !== article.summary
-  const isContentRevised = revisedContent !== article.contents.html
+  const isTitleRevised = revision.title !== article.title
+  const isSummaryRevised = revision.summary !== article.summary
+  const isContentRevised = revision.content !== article.contents.html
   const isTagRevised = !_isEqual(
     tags.map((tag) => tag.id).sort(),
     article.tags?.map((tag) => tag.id).sort()
@@ -85,12 +79,8 @@ const EditModeHeader = ({
     article.collection.edges?.map(({ node }) => node.id).sort()
   )
   const isCoverRevised = article.cover
-    ? revisedCover?.path !== article.cover
-    : !!revisedCover?.path
-  const isRequestForDonationRevised =
-    revisedRequestForDonation !== article.requestForDonation
-  const isReplyToDonorRevised = revisedReplyToDonor !== article.replyToDonator
-
+    ? revision.cover?.path !== article.cover
+    : !!revision.cover?.path
   const needRepublish =
     isTitleRevised ||
     isSummaryRevised ||
@@ -101,7 +91,7 @@ const EditModeHeader = ({
 
   const onSave = async () => {
     // check content length
-    const contentCount = revisedContent?.length || 0
+    const contentCount = revision.content?.length || 0
 
     if (needRepublish && contentCount > MAX_ARTICLE_CONTENT_LENGTH) {
       toast.error({
@@ -120,27 +110,37 @@ const EditModeHeader = ({
       await editArticle({
         variables: {
           id: article.id,
-          ...(revisionDescription ? { description: revisionDescription } : {}),
-          ...(isTitleRevised ? { title: revisedTitle } : {}),
-          ...(isSummaryRevised ? { summary: revisedSummary || null } : {}),
-          ...(isContentRevised ? { content: revisedContent } : {}),
+          ...(revision.versionDescription
+            ? { description: revision.versionDescription }
+            : {}),
+          ...(isTitleRevised ? { title: revision.title } : {}),
+          ...(isSummaryRevised ? { summary: revision.summary || null } : {}),
+          ...(isContentRevised ? { content: revision.content } : {}),
           ...(isTagRevised ? { tags: tags.map((tag) => tag.content) } : {}),
           ...(isCollectionRevised
             ? { collection: collection.map(({ id }) => id) }
             : {}),
-          ...(isCoverRevised ? { cover: revisedCover?.id || null } : {}),
-          ...(isRequestForDonationRevised
-            ? { requestForDonation: revisedRequestForDonation }
+          ...(isCoverRevised ? { cover: revision.cover?.id || null } : {}),
+          ...(revision.requestForDonation !== article.requestForDonation
+            ? { requestForDonation: revision.requestForDonation }
             : {}),
-          ...(isReplyToDonorRevised
-            ? { replyToDonor: revisedReplyToDonor }
+          ...(revision.replyToDonator !== article.replyToDonator
+            ? { replyToDonator: revision.replyToDonator }
             : {}),
-          circle: circle ? circle.id : null,
-          accessType,
-          license,
-          iscnPublish: restProps.iscnPublish,
-          canComment: restProps.canComment,
-          sensitive: restProps.contentSensitive,
+          ...(circle?.id !== article.access.circle?.id
+            ? { circle: circle?.id || null }
+            : {}),
+          ...(accessType !== article.access.type ? { accessType } : {}),
+          ...(license !== article.license ? { license } : {}),
+          ...(restProps.iscnPublish
+            ? { iscnPublish: restProps.iscnPublish }
+            : {}),
+          ...(restProps.canComment !== article.canComment
+            ? { canComment: restProps.canComment }
+            : {}),
+          ...(restProps.contentSensitive !== article.sensitiveByAuthor
+            ? { sensitive: restProps.contentSensitive }
+            : {}),
         },
       })
       if (needRepublish) {
@@ -196,11 +196,11 @@ const EditModeHeader = ({
 
       <EditorSettingsDialog
         {...restProps}
-        revisionDescription={revisionDescription}
+        versionDescription={revision.versionDescription}
         article={{
           ...article,
-          replyToDonator: revisedReplyToDonor,
-          requestForDonation: revisedRequestForDonation,
+          replyToDonator: revision.replyToDonator,
+          requestForDonation: revision.requestForDonation,
         }}
         saving={loading}
         disabled={loading}

@@ -18,8 +18,8 @@ import {
   SetCollectionProps,
   SetCoverProps,
   SetResponseProps,
-  SetRevisionDescriptionProps,
   SetTagsProps,
+  SetVersionDescriptionProps,
   ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
@@ -56,14 +56,16 @@ const Editor = dynamic(
 const BaseEdit = ({ article }: { article: Article }) => {
   const [showPublishState, setShowPublishState] = useState(false)
 
-  const [description, setDescription] = useState('')
-  const [editTitle, setEditTitle] = useState('')
-  const [editSummary, setEditSummary] = useState('')
-  const [editContent, setEditContent] = useState('')
+  const [versionDescription, setVersionDescription] = useState('')
+
+  // content-related
+  const [title, setTitle] = useState(article.title)
+  const [summary, setSummary] = useState(article.summary)
+  const [content, setContent] = useState(article.contents.html)
 
   // cover
   const assets = article.assets || []
-  const [cover, editCover] = useState<AssetFragment | undefined>(
+  const [cover, setCover] = useState<AssetFragment | undefined>(
     assets.find((asset) => asset.path === article.cover)
   )
   const refetchAssets = useImperativeQuery<QueryEditArticleAssetsQuery>(
@@ -75,21 +77,21 @@ const BaseEdit = ({ article }: { article: Article }) => {
   )
 
   // tags
-  const [tags, editTags] = useState<DigestTagFragment[]>(article.tags || [])
-  const [collection, editCollection] = useState<
+  const [tags, setTags] = useState<DigestTagFragment[]>(article.tags || [])
+  const [collection, setCollection] = useState<
     ArticleDigestDropdownArticleFragment[]
   >(article.collection.edges?.map(({ node }) => node) || [])
 
   // access
-  const [circle, editCircle] = useState<
+  const [circle, setCircle] = useState<
     DigestRichCirclePublicFragment | null | undefined
   >(article.access.circle)
-  const [accessType, editAccessType] = useState<ArticleAccessType>(
+  const [accessType, setAccessType] = useState<ArticleAccessType>(
     article.access.type
   )
 
-  // cc2.0 is replace by cc4.0 when editting article
-  const [license, editLicense] = useState<ArticleLicenseType>(
+  // cc2.0 is replace by cc4.0 when editing article
+  const [license, setLicense] = useState<ArticleLicenseType>(
     article.license === ArticleLicenseType.CcByNcNd_2
       ? ArticleLicenseType.CcByNcNd_4
       : article.license
@@ -106,11 +108,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
       return
     }
 
-    editCircle(addToCircle ? ownCircles[0] : null)
-    editAccessType(
+    setCircle(addToCircle ? ownCircles[0] : null)
+    setAccessType(
       paywalled ? ArticleAccessType.Paywall : ArticleAccessType.Public
     )
-    editLicense(newLicense)
+    setLicense(newLicense)
   }
 
   const [requestForDonation, setRequestForDonation] = useState(
@@ -140,7 +142,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
     cover: cover?.path,
     assets,
     coverSaving: false,
-    editCover: async (asset?: AssetFragment) => editCover(asset),
+    editCover: async (asset?: AssetFragment) => setCover(asset),
     refetchAssets,
     entityId: article.id,
     entityType: ENTITY_TYPE.article,
@@ -148,13 +150,13 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const tagsProps: SetTagsProps = {
     tags,
     tagsSaving: false,
-    editTags: async (t: DigestTagFragment[]) => editTags(t),
+    editTags: async (t: DigestTagFragment[]) => setTags(t),
   }
   const collectionProps: SetCollectionProps = {
     collection,
     collectionSaving: false,
     editCollection: async (c: ArticleDigestDropdownArticleFragment[]) =>
-      editCollection(c),
+      setCollection(c),
   }
 
   const setCommentProps: SetResponseProps = {
@@ -188,9 +190,9 @@ const BaseEdit = ({ article }: { article: Article }) => {
     iscnPublishSaving: false,
   }
 
-  const revisionDescriptionProps: SetRevisionDescriptionProps = {
-    revisionDescription: description,
-    editRevisionDescription: setDescription,
+  const versionDescriptionProps: SetVersionDescriptionProps = {
+    versionDescription: versionDescription,
+    editVersionDescription: setVersionDescription,
   }
 
   return (
@@ -232,17 +234,17 @@ const BaseEdit = ({ article }: { article: Article }) => {
               {...collectionProps}
               {...accessProps}
               {...setCommentProps}
-              {...revisionDescriptionProps}
+              {...versionDescriptionProps}
               article={article}
-              revisionDescription={description}
-              revisedTitle={editTitle || article.title}
-              revisedSummary={editSummary || article.summary}
-              revisedContent={editContent || article.contents.html || ''}
-              revisedCover={cover}
-              revisedRequestForDonation={
-                requestForDonation || article.requestForDonation
-              }
-              revisedReplyToDonor={replyToDonator || article.replyToDonator}
+              revision={{
+                versionDescription,
+                title,
+                summary,
+                content,
+                cover,
+                replyToDonator,
+                requestForDonation,
+              }}
               revisionCountLeft={revisionCountLeft}
               isOverRevisionLimit={isOverRevisionLimit}
               isEditDisabled={showPublishState}
@@ -276,15 +278,15 @@ const BaseEdit = ({ article }: { article: Article }) => {
             }}
             update={async (update) => {
               if (update.title !== undefined) {
-                setEditTitle(update.title || '')
+                setTitle(update.title || '')
               }
 
               if (update.summary !== undefined) {
-                setEditSummary(update.summary || '')
+                setSummary(update.summary || '')
               }
 
               if (update.content !== undefined) {
-                setEditContent(update.content || '')
+                setContent(update.content || '')
               }
             }}
             upload={async () => ({ id: '', path: '' })}

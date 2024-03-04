@@ -92,7 +92,7 @@
 .container {
   padding: var(--spacing-base);
 
-  &.inSidebar {
+  &.compact {
     padding: 0;
 
     & .title {

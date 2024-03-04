@@ -22,8 +22,8 @@ export type SettingsListDialogProps = {
   forward: (nextStep: Step) => void
   closeDialog: () => void
 
-  revisionDescription?: string
-  hasSetRevisionDescription?: boolean
+  versionDescription?: string
+  hasSetVersionDescription?: boolean
 
   cover?: string | null
   collectionCount: number
@@ -44,8 +44,8 @@ const SettingsList = ({
   cancelButtonText,
   onConfirm,
 
-  revisionDescription,
-  hasSetRevisionDescription,
+  versionDescription,
+  hasSetVersionDescription,
 
   cover,
   collectionCount,
@@ -81,7 +81,7 @@ const SettingsList = ({
 
       <Dialog.Content noSpacing>
         <ul className={styles.container} role="list">
-          {hasSetRevisionDescription && (
+          {hasSetVersionDescription && (
             <ListItem
               title={
                 <FormattedMessage
@@ -95,10 +95,10 @@ const SettingsList = ({
                   id="OJmFke"
                 />
               }
-              onClick={() => forward('revisionDescription')}
+              onClick={() => forward('versionDescription')}
               hint
             >
-              <ListItem.ArrowIndicator checked={!!revisionDescription} />
+              <ListItem.ArrowIndicator checked={!!versionDescription} />
             </ListItem>
           )}
 

@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 
 import { Dialog, Spinner, useDialogSwitch } from '~/components'
 
-export interface SetRevisionDescriptionDialogProps {
+export interface SetVersionDescriptionDialogProps {
   description: string
   editDescription: (description: string) => any
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -13,11 +13,11 @@ const DynamicContent = dynamic(() => import('./Content'), {
   loading: () => <Spinner />,
 })
 
-const BaseSetRevisionDescriptionDialog = ({
+const BaseSetVersionDescriptionDialog = ({
   children,
   description,
   editDescription,
-}: SetRevisionDescriptionDialogProps) => {
+}: SetVersionDescriptionDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
@@ -35,12 +35,12 @@ const BaseSetRevisionDescriptionDialog = ({
   )
 }
 
-const SetRevisionDescriptionDialog = (
-  props: SetRevisionDescriptionDialogProps
+const SetVersionDescriptionDialog = (
+  props: SetVersionDescriptionDialogProps
 ) => (
-  <Dialog.Lazy mounted={<BaseSetRevisionDescriptionDialog {...props} />}>
+  <Dialog.Lazy mounted={<BaseSetVersionDescriptionDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 
-export default SetRevisionDescriptionDialog
+export default SetVersionDescriptionDialog
