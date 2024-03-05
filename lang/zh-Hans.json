@@ -406,6 +406,10 @@
   "7JlauX": {
     "defaultMessage": "指南"
   },
+  "7VSfs3": {
+    "defaultMessage": "选择支持金额",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
+  },
   "7WXDhH": {
     "defaultMessage": "确认要删除草稿吗？",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
@@ -710,6 +714,10 @@
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
+  "FKHNZb": {
+    "defaultMessage": "余额：",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
+  },
   "FOOymB": {
     "defaultMessage": "还没有成员",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
@@ -870,6 +878,10 @@
   "J6f6iN": {
     "defaultMessage": "评论数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
+  "JGLi9Y": {
+    "defaultMessage": "充值",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
   "JTWayV": {
     "defaultMessage": "添加描述",
@@ -1435,9 +1447,6 @@
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "Y47aYU": {
-    "defaultMessage": "Top up"
-  },
   "Y7N/Jg": {
     "defaultMessage": "图片边长不得超过 12,000 像素"
   },
@@ -1477,9 +1486,6 @@
   "Z2iL9Z": {
     "defaultMessage": "开始创作",
     "description": "src/components/Buttons/StartWriting/index.tsx"
-  },
-  "Z6Z1aN": {
-    "defaultMessage": "Select amount"
   },
   "ZAs170": {
     "defaultMessage": "基本资料",
@@ -1857,9 +1863,6 @@
   "kSt4il": {
     "defaultMessage": "收藏已取消",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
-  },
-  "kaPKOB": {
-    "defaultMessage": "Insufficient balance"
   },
   "kc79d3": {
     "defaultMessage": "找你想看的"
@@ -2244,7 +2247,7 @@
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "vmx+TU": {
-    "defaultMessage": "Credit card",
+    "defaultMessage": "信用卡",
     "description": "src/views/ArticleDetail/SupportAuthor/Tabs/index.tsx"
   },
   "vsD2wm": {
@@ -2296,6 +2299,10 @@
     "defaultMessage": "{type} 已解绑",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "wv08Xt": {
+    "defaultMessage": "余额不足",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
+  },
   "x7O1/5": {
     "defaultMessage": "ID 已被使用，请修改后再试",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -2343,9 +2350,6 @@
   },
   "y1AhBH": {
     "defaultMessage": "输入金额"
-  },
-  "y2IqUi": {
-    "defaultMessage": "Balance:&nbsp;"
   },
   "y4Lyf1": {
     "defaultMessage": "该名称已被其他用户使用",
