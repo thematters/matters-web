@@ -61,6 +61,7 @@ const Content = ({
   const contentClasses = classNames({
     [styles.content]: true,
     [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
+    [styles.inactive]: state === 'archived',
   })
 
   if (state === 'collapsed' || state === 'banned' || isBlocked) {
@@ -104,7 +105,7 @@ const Content = ({
 
   if (state === 'archived') {
     return (
-      <p className={`${contentClasses} inactive`}>
+      <p className={contentClasses}>
         <FormattedMessage
           defaultMessage="This {type} has been deleted by the author"
           id="fDdcbi"

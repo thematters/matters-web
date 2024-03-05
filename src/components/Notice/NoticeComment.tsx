@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { LinkWrapper } from '~/components'
+import { LinkWrapper, toast } from '~/components'
 import CommentContent from '~/components/Comment/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
@@ -54,8 +55,28 @@ const NoticeComment = ({
     return null
   }
 
+  if (comment.state === 'archived') {
+    return (
+      <button
+        onClick={() => {
+          toast.success({
+            message: (
+              <FormattedMessage
+                defaultMessage="Oops! This comment has been deleted by author"
+                id="N8ISx8"
+              />
+            ),
+          })
+        }}
+      >
+        <section>
+          <NoticeContentDigest content={comment.content || ''} />
+        </section>
+      </button>
+    )
+  }
   const path =
-    comment.state === 'active'
+    comment.state === 'active' || comment.state === 'collapsed'
       ? toPath({
           page: 'commentDetail',
           comment,
@@ -63,7 +84,6 @@ const NoticeComment = ({
           circle,
         })
       : { href: '' }
-
   return (
     <LinkWrapper {...path}>
       <section>
