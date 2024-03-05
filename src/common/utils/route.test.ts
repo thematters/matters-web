@@ -53,6 +53,18 @@ describe('utils/route/toPath', () => {
       )
     })
 
+    it('should return the short hash path when the shortHash is provided', () => {
+      const { href } = toPath({
+        page: 'articleDetail',
+        article: {
+          ...MOCK_ARTILCE,
+          shortHash: 'r5ade0on7x1g',
+        },
+      })
+
+      expect(href).toBe(`/a/r5ade0on7x1g`)
+    })
+
     it('should return the correct path with utm paramaters', () => {
       const { href } = toPath({
         page: 'articleDetail',
@@ -178,8 +190,9 @@ describe('utils/route/toPath', () => {
       expect(href2).toBe(
         `/@${MOCK_ARTILCE.author.userName}/${
           fromGlobalId(MOCK_ARTILCE.id).id
-        }-${MOCK_ARTILCE.slug}-${MOCK_ARTILCE.mediaHash}#${MOCK_COMMENT
-          .parentComment?.id}-${MOCK_COMMENT.id}`
+        }-${MOCK_ARTILCE.slug}-${MOCK_ARTILCE.mediaHash}#${
+          MOCK_COMMENT.parentComment?.id
+        }-${MOCK_COMMENT.id}`
       )
     })
 

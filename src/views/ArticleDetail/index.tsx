@@ -475,6 +475,7 @@ const ArticleDetail = ({
 }) => {
   const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
+  const shortHash = getQuery('shortHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
@@ -483,11 +484,11 @@ const ArticleDetail = ({
    * fetch public data
    */
   const isQueryByHash = !!(
-    mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
+    (shortHash || (mediaHash && isMediaHashPossiblyValid(mediaHash)))
+    // && !articleId
   )
 
+  // - `/a/:shortHash`
   // backward compatible with:
   // - `/:username:/:articleId:-:slug:-:mediaHash`
   // - `/:username:/:articleId:`
@@ -497,6 +498,7 @@ const ArticleDetail = ({
     {
       variables: {
         mediaHash,
+        shortHash,
         language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
@@ -557,7 +559,7 @@ const ArticleDetail = ({
       await refetchPublic()
       await loadPrivate()
     })()
-  }, [mediaHash])
+  }, [mediaHash, shortHash])
 
   // fetch private data when mediaHash of public data is changed
   useEffect(() => {
@@ -569,13 +571,13 @@ const ArticleDetail = ({
     (d) => d.publishState === 'published'
   )[0]?.mediaHash
   useEffect(() => {
-    if (!article || !latestHash) {
-      return
+    if (shortHash || !article || !latestHash) {
+      return // don't rewrite URL for shortHash
     }
 
     const newPath = toPath({
       page: 'articleDetail',
-      article: { ...article, mediaHash: latestHash },
+      article: { ...article, mediaHash: latestHash, shortHash },
     })
 
     // parse current URL: router.asPath
@@ -675,18 +677,18 @@ const ArticleDetail = ({
 const ArticleDetailOuter = () => {
   const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
+  const shortHash = getQuery('shortHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
 
   const isQueryByHash = !!(
-    mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
+    (mediaHash && isMediaHashPossiblyValid(mediaHash))
+    // && !articleId
   )
 
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS,
-    { variables: { mediaHash }, skip: !isQueryByHash }
+    { variables: { mediaHash, shortHash }, skip: !isQueryByHash }
   )
   const resultByNodeId = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID,

@@ -12,6 +12,8 @@ interface ArticleArgs {
   id?: string
   slug: string
   mediaHash?: string | null
+  shortHash?: string | null
+  collectionId?: string | null
   author: {
     userName?: string | null
   }
@@ -109,23 +111,28 @@ export const toPath = (
         id,
         slug,
         mediaHash,
+        shortHash,
+        collectionId,
         author: { userName },
       } = args.article
 
-      href = `/@${userName}/${slug}-${mediaHash}`
+      href = shortHash
+        ? `/a/${shortHash}`
+        : `/@${userName}/${slug}-${mediaHash}`
 
       try {
         const { id: articleId } = fromGlobalId(id as string)
-        if (id && articleId) {
+        if (id && articleId && !shortHash) {
           href = `/@${userName}/${articleId}-${slug}${
             mediaHash ? '-' + mediaHash : ''
           }`
         }
-        if (!!args.collectionId) {
-          href = `${href}?collection=${args.collectionId}`
-        }
       } catch (err) {
         // do nothing
+      }
+
+      if (collectionId) {
+        href = `${href}?collection=${collectionId}`
       }
 
       break
