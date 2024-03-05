@@ -42,13 +42,22 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
   return (
     <section className={styles.setAmountBalance}>
       <span className={styles.left}>
-        <FormattedMessage defaultMessage="Select amount" id="Z6Z1aN" />
+        <FormattedMessage
+          defaultMessage="Select amount"
+          description="src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
+          id="7VSfs3"
+        />
       </span>
 
       <span className={styles.right}>
         {!isBalanceInsufficient && (
           <>
-            <FormattedMessage defaultMessage="Balance:&nbsp;" id="y2IqUi" />
+            <FormattedMessage
+              defaultMessage="Balance:"
+              description="src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
+              id="FKHNZb"
+            />
+            {lang === 'en' && <>&nbsp;</>}
           </>
         )}
         <span className={styles.balance}>
@@ -60,7 +69,8 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
           {isHKD && isBalanceInsufficient && (
             <FormattedMessage
               defaultMessage="Insufficient balance"
-              id="kaPKOB"
+              description="src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
+              id="wv08Xt"
             />
           )}
         </span>
@@ -76,7 +86,11 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
                       color="gold"
                       weight="md"
                     >
-                      <FormattedMessage defaultMessage="Top up" id="Y47aYU" />
+                      <FormattedMessage
+                        defaultMessage="Top up"
+                        description="src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
+                        id="JGLi9Y"
+                      />
                     </TextIcon>
                   </Button>
                 </section>

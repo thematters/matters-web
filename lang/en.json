@@ -1270,6 +1270,10 @@
     "defaultMessage": "Subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "TX5UzL": {
+    "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
@@ -1689,6 +1693,9 @@
   },
   "eY3YIa": {
     "defaultMessage": "Copy comment"
+  },
+  "eZ0m39": {
+    "defaultMessage": "Enter the amount"
   },
   "enMIYK": {
     "defaultMessage": "My Page"
@@ -2347,9 +2354,6 @@
   "y0b6Kp": {
     "defaultMessage": "Pay",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "y1AhBH": {
-    "defaultMessage": "Enter a custom amount"
   },
   "y4Lyf1": {
     "defaultMessage": "This name is already taken.",

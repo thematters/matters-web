@@ -235,10 +235,10 @@ const SetAmount: React.FC<FormProps> = ({
     const hkdHint = isHKD ? (
       <section>
         <Spacer size="base" />
-        <Translate
-          zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
-          zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
-          en="Stripe will process your payment, so you can support the author wherever you are."
+        <FormattedMessage
+          defaultMessage="Payment will be processed by Stripe, allowing your support to be unrestricted by region."
+          id="TX5UzL"
+          description="src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
         />
       </section>
     ) : null

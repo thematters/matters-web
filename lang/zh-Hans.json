@@ -1270,6 +1270,10 @@
     "defaultMessage": "付费人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "TX5UzL": {
+    "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
   "TjWWxF": {
     "defaultMessage": "广播已送出",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
@@ -1689,6 +1693,9 @@
   },
   "eY3YIa": {
     "defaultMessage": "复制评论"
+  },
+  "eZ0m39": {
+    "defaultMessage": "请输入金额"
   },
   "enMIYK": {
     "defaultMessage": "我的"
@@ -2347,9 +2354,6 @@
   "y0b6Kp": {
     "defaultMessage": "付费",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "y1AhBH": {
-    "defaultMessage": "输入金额"
   },
   "y4Lyf1": {
     "defaultMessage": "该名称已被其他用户使用",
