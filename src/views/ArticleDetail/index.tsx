@@ -507,14 +507,16 @@ const BaseArticleDetail = ({
   )
 }
 
-const ArticleDetail = ({
+export const ArticleDetail = ({
   includeTranslation,
 }: {
   includeTranslation: boolean
 }) => {
   const { getQuery, router, routerLang } = useRoute()
   const [needRefetchData, setNeedRefetchData] = useState(false)
-  const mediaHash = getQuery('mediaHash')
+
+  const shortHash = getQuery('shortHash')
+  const mediaHash = getQuery('mediaHash') // will delete by mediaHash & by articleId logic in later PR
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
@@ -523,9 +525,9 @@ const ArticleDetail = ({
    * fetch public data
    */
   const isQueryByHash = !!(
-    mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
+    (mediaHash && isMediaHashPossiblyValid(mediaHash))
+    || (shortHash) // && looksValid(shortHash))
+    // && !articleId
   )
 
   // backward compatible with:
@@ -537,6 +539,7 @@ const ArticleDetail = ({
     {
       variables: {
         mediaHash,
+        shortHash,
         language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
@@ -764,21 +767,23 @@ const ArticleDetail = ({
   return <BaseArticleDetail article={article} privateFetched={privateFetched} />
 }
 
-const ArticleDetailOuter = () => {
+export const ArticleDetailOuter = () => {
   const { getQuery, router, routerLang } = useRoute()
-  const mediaHash = getQuery('mediaHash')
+
+  const shortHash = getQuery('shortHash')
+  const mediaHash = getQuery('mediaHash') // will delete by mediaHash & by articleId logic in later PR
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
 
   const isQueryByHash = !!(
-    mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
+    (mediaHash && isMediaHashPossiblyValid(mediaHash))
+    || shortHash
+    // && !articleId
   )
 
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS,
-    { variables: { mediaHash }, skip: !isQueryByHash }
+    { variables: { mediaHash, shortHash }, skip: !isQueryByHash }
   )
   const resultByNodeId = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID,
