@@ -19,6 +19,7 @@ const articlePublicFragment = gql`
     title
     slug
     mediaHash
+    shortHash
     state
     cover
     summary
@@ -115,12 +116,13 @@ export const ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID = gql`
 
 export const ARTICLE_DETAIL_PUBLIC = gql`
   query ArticleDetailPublic(
-    $mediaHash: String!
+    $mediaHash: String
+    $shortHash: String
     $language: UserLanguage!
     $includeTranslation: Boolean = false
     $includeCanSuperLike: Boolean = true
   ) {
-    article(input: { mediaHash: $mediaHash }) {
+    article(input: { mediaHash: $mediaHash, shortHash: $shortHash }) {
       ...ArticlePublicArticle
     }
   }

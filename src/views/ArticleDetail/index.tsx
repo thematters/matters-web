@@ -507,14 +507,16 @@ const BaseArticleDetail = ({
   )
 }
 
-const ArticleDetail = ({
+export const ArticleDetail = ({
   includeTranslation,
 }: {
   includeTranslation: boolean
 }) => {
   const { getQuery, router, routerLang } = useRoute()
   const [needRefetchData, setNeedRefetchData] = useState(false)
-  const mediaHash = getQuery('mediaHash')
+
+  const shortHash = getQuery('shortHash')
+  const mediaHash = getQuery('mediaHash') // will delete by mediaHash & by articleId logic in later PR
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
@@ -524,8 +526,8 @@ const ArticleDetail = ({
    */
   const isQueryByHash = !!(
     mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
+    isMediaHashPossiblyValid(mediaHash)
+    // && !articleId
   )
 
   // backward compatible with:
@@ -537,6 +539,7 @@ const ArticleDetail = ({
     {
       variables: {
         mediaHash,
+        shortHash,
         language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
