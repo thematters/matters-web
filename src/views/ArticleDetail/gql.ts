@@ -17,6 +17,7 @@ const articlePublicFragment = gql`
     title
     slug
     mediaHash
+    shortHash
     state
     cover
     summary
@@ -87,8 +88,8 @@ const articlePublicFragment = gql`
 `
 
 export const ARTICLE_AVAILABLE_TRANSLATIONS = gql`
-  query ArticleAvailableTranslations($mediaHash: String!) {
-    article(input: { mediaHash: $mediaHash }) {
+  query ArticleAvailableTranslations($mediaHash: String, $shortHash: String) {
+    article(input: { mediaHash: $mediaHash, shortHash: $shortHash }) {
       id
       availableTranslations
     }
@@ -108,12 +109,13 @@ export const ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID = gql`
 
 export const ARTICLE_DETAIL_PUBLIC = gql`
   query ArticleDetailPublic(
-    $mediaHash: String!
+    $mediaHash: String
+    $shortHash: String
     $language: UserLanguage!
     $includeTranslation: Boolean = false
     $includeCanSuperLike: Boolean = true
   ) {
-    article(input: { mediaHash: $mediaHash }) {
+    article(input: { mediaHash: $mediaHash, shortHash: $shortHash }) {
       ...ArticlePublicArticle
     }
   }
@@ -165,8 +167,8 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
 `
 
 export const ARTICLE_TRANSLATION = gql`
-  query ArticleTranslation($mediaHash: String!, $language: UserLanguage!) {
-    article(input: { mediaHash: $mediaHash }) {
+  query ArticleTranslation($mediaHash: String, $shortHash: String, $language: UserLanguage!) {
+    article(input: { mediaHash: $mediaHash, shortHash: $shortHash }) {
       id
       translation(input: { language: $language }) {
         content
