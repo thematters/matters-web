@@ -114,7 +114,7 @@ const Authors = () => {
               <section>
                 {chunks.map(({ node, cursor }, nodeIndex) => (
                   <UserDigest.Rich
-                    key={cursor}
+                    key={node.id}
                     user={node}
                     spacing={['tight', 0]}
                     bgColor="none"

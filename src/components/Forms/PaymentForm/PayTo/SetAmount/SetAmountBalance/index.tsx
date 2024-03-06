@@ -77,9 +77,9 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
         <a href={GUIDE_LINKS.payment[lang]} target="_blank" rel="noreferrer">
           <TextIcon size="xs" textDecoration="underline" color="greyDark">
             <Translate
-              zh_hant="如何移轉資金到 Polygon？"
-              zh_hans="如何移转资金到 Polygon？"
-              en="How to transfer funds to Polygon?"
+              zh_hant="如何移轉資金到 Optimism？"
+              zh_hans="如何移转资金到 Optimism？"
+              en="How to transfer funds to Optimism?"
             />
           </TextIcon>
         </a>

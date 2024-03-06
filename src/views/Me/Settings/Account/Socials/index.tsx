@@ -9,7 +9,7 @@ import {
   OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
 } from '~/common/enums'
 import {
-  // facebookOauthUrl,
+  facebookOauthUrl,
   googleOauthUrl,
   isSafari,
   sleep,
@@ -18,7 +18,7 @@ import {
 } from '~/common/utils'
 import {
   IconClose20,
-  // IconFacebook22,
+  IconFacebook22,
   IconGoogle22,
   IconSpinner16,
   IconX22,
@@ -41,9 +41,9 @@ const Socials = () => {
   const googleId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Google
   )?.email
-  // const facebookId = viewer.info.socialAccounts.find(
-  // (s) => s.type === SocialAccountType.Facebook
-  // )?.userName
+  const facebookId = viewer.info.socialAccounts.find(
+    (s) => s.type === SocialAccountType.Facebook
+  )?.userName
   const twitterId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Twitter
   )?.userName
@@ -52,7 +52,7 @@ const Socials = () => {
   const [loadingState, setLoadingState] = useState('')
   const isGoogleLoading = loadingState === 'Google'
   const isTwitterLoading = loadingState === 'Twitter'
-  // const isFacebookLoading = loadingState === 'Facebook'
+  const isFacebookLoading = loadingState === 'Facebook'
 
   const oauthType = 'bind'
 
@@ -81,11 +81,11 @@ const Socials = () => {
     }
   }
 
-  // const gotoFacebook = async () => {
-  //   setLoadingState('Facebook')
-  //   const url = await facebookOauthUrl(oauthType)
-  //   router.push(url)
-  // }
+  const gotoFacebook = async () => {
+    setLoadingState('Facebook')
+    const url = await facebookOauthUrl(oauthType)
+    router.push(url)
+  }
 
   useEffect(() => {
     const bindResult = storage.remove(OAUTH_STORAGE_BIND_STATE)
@@ -146,6 +146,17 @@ const Socials = () => {
     }
   }, [])
 
+  // FIXME: For canary release purpose,
+  // we don't allow user to remove facebook login
+  // unless the user has least two login methods
+  const canEmailLogin = !!viewer.info.email
+  const canWalletLogin = !!viewer.info.ethAddress
+  const nonFacebookSocials = viewer.info.socialAccounts.filter(
+    (s) => s.type !== SocialAccountType.Facebook
+  )
+  const canRemoveNonFacebookLogins =
+    +canEmailLogin + +canWalletLogin + nonFacebookSocials.length > 1
+
   return (
     <>
       {/* Google */}
@@ -160,11 +171,15 @@ const Socials = () => {
               }
               rightText={googleId}
               rightIcon={
-                googleId ? (
+                googleId && canRemoveNonFacebookLogins ? (
                   <IconClose20 size="mdS" color="greyDarker" />
                 ) : undefined
               }
-              onClick={googleId ? () => openDialog() : undefined}
+              onClick={
+                googleId && canRemoveNonFacebookLogins
+                  ? () => openDialog()
+                  : undefined
+              }
               right={
                 googleId ? undefined : (
                   <>
@@ -199,11 +214,15 @@ const Socials = () => {
               }
               rightText={twitterId ? `@${twitterId}` : undefined}
               rightIcon={
-                twitterId ? (
+                twitterId && canRemoveNonFacebookLogins ? (
                   <IconClose20 size="mdS" color="greyDarker" />
                 ) : undefined
               }
-              onClick={twitterId ? () => openDialog() : undefined}
+              onClick={
+                twitterId && canRemoveNonFacebookLogins
+                  ? () => openDialog()
+                  : undefined
+              }
               right={
                 twitterId ? undefined : (
                   <>
@@ -227,7 +246,7 @@ const Socials = () => {
       </RemoveSocialLoginDialog>
 
       {/* Facebook */}
-      {/* <RemoveSocialLoginDialog type={SocialAccountType.Facebook}>
+      <RemoveSocialLoginDialog type={SocialAccountType.Facebook}>
         {({ openDialog }) => {
           return (
             <TableView.Cell
@@ -263,7 +282,7 @@ const Socials = () => {
             />
           )
         }}
-      </RemoveSocialLoginDialog> */}
+      </RemoveSocialLoginDialog>
     </>
   )
 }

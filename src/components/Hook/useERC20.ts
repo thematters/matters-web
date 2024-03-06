@@ -8,6 +8,7 @@ import {
   usePrepareContractWrite,
 } from 'wagmi'
 
+import { contract } from '~/common/enums'
 import { featureSupportedChains, MaxUint256 } from '~/common/utils'
 import { ViewerContext } from '~/components'
 
@@ -15,13 +16,10 @@ export const useAllowanceUSDT = () => {
   const { address } = useAccount()
 
   return useContractRead({
-    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
+    address: contract.Optimism.tokenAddress,
     abi: erc20ABI,
     functionName: 'allowance',
-    args: [
-      address as `0x${string}`,
-      process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS as `0x${string}`,
-    ],
+    args: [address as `0x${string}`, contract.Optimism.curationAddress],
   })
 }
 
@@ -36,8 +34,7 @@ export const useBalanceUSDT = ({
 
   return useBalance({
     address: (addr || viewerEthAddress) as `0x${string}`,
-    token: (process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS ||
-      '') as `0x${string}`,
+    token: (contract.Optimism.tokenAddress || '') as `0x${string}`,
     chainId: targetNetwork.id,
     cacheTime: 5_000,
   })
@@ -61,13 +58,10 @@ export const useBalanceEther = ({
 
 export const useApproveUSDT = () => {
   const { config } = usePrepareContractWrite({
-    address: process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
+    address: contract.Optimism.tokenAddress,
     abi: erc20ABI,
     functionName: 'approve',
-    args: [
-      process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS as `0x${string}`,
-      MaxUint256,
-    ],
+    args: [contract.Optimism.curationAddress, MaxUint256],
   })
 
   return useContractWrite(config)

@@ -1,21 +1,39 @@
 import { Chain, configureChains, createConfig, createStorage } from 'wagmi'
-import { goerli, mainnet, polygon, polygonMumbai } from 'wagmi/chains'
+import {
+  goerli,
+  mainnet,
+  optimism,
+  optimismSepolia,
+  polygon,
+  polygonMumbai,
+} from 'wagmi/chains'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
+
+import { Chain as GQLChain } from '~/gql/graphql'
 
 const isTest = process.env.NODE_ENV === 'test'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
 
 export const featureSupportedChains = {
-  curation: isProd ? [polygon] : [polygonMumbai],
+  curation: isProd ? [optimism] : [optimismSepolia],
   ens: isProd ? [mainnet] : [goerli],
 }
 
+export const explorers = {
+  [GQLChain.Polygon]: isProd
+    ? polygon.blockExplorers.etherscan
+    : polygonMumbai.blockExplorers.etherscan,
+  [GQLChain.Optimism]: isProd
+    ? optimism.blockExplorers.etherscan
+    : optimismSepolia.blockExplorers.default, // TODO: update to etherscan
+}
+
 const defaultChains: Chain[] = isProd
-  ? [mainnet, polygon]
-  : [goerli, polygonMumbai]
+  ? [mainnet, optimism]
+  : [goerli, optimismSepolia]
 
 export const { publicClient, chains } = configureChains(defaultChains, [
   alchemyProvider({ apiKey: alchemyId }),

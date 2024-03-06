@@ -81,7 +81,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
       <section className={relatedArticlesClasses}>
         <Slides header={Header}>
           {edges.map(({ node, cursor }, i) => (
-            <Slides.Item key={cursor}>
+            <Slides.Item key={node.id}>
               <ArticleDigestCard
                 article={node}
                 onClick={onClick(i, node.id)}
@@ -100,7 +100,7 @@ const RelatedArticles = ({ article, inSidebar }: RelatedArticlesProps) => {
 
       <ul>
         {edges.map(({ node, cursor }, i) => (
-          <li key={cursor}>
+          <li key={node.id}>
             <ArticleDigestSidebar
               article={node}
               titleTextSize="sm"

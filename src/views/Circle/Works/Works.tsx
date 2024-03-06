@@ -151,7 +151,7 @@ const CircleDetailWorks = () => {
         >
           <List>
             {(edges || []).map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
+              <List.Item key={node.id}>
                 <ArticleDigestFeed
                   article={node}
                   hasCircle={false}
