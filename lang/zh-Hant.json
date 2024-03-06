@@ -184,6 +184,9 @@
     "defaultMessage": "總數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2D/X90": {
+    "defaultMessage": "為什麼採用 Optimism？"
+  },
   "2DkkhD": {
     "defaultMessage": "設定 - 通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -244,6 +247,9 @@
   },
   "3yk8fB": {
     "defaultMessage": "我的錢包"
+  },
+  "4118K3": {
+    "defaultMessage": "Optimism 是基於以太坊的第二層（Layer2）擴容方案，能提升交易速度，並降低手續費，同時確保安全性，讓你更輕鬆地支持創作者。"
   },
   "47FYwb": {
     "defaultMessage": "取消"
@@ -1046,6 +1052,10 @@
   "OpeFTV": {
     "defaultMessage": "輸入六位數字交易密碼"
   },
+  "P+sWM0": {
+    "defaultMessage": "教學指南",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1569,6 +1579,9 @@
   "dzF4ci": {
     "defaultMessage": "重新發送",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
+  "eKVBm/": {
+    "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考{link}。"
   },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
