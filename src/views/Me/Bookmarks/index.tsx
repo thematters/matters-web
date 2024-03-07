@@ -73,7 +73,7 @@ const BaseMeBookmarks = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
         {edges.map(({ node, cursor }) => (
-          <List.Item key={cursor}>
+          <List.Item key={node.id}>
             <ArticleDigestFeed article={node} />
           </List.Item>
         ))}

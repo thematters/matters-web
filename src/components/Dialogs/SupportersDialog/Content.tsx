@@ -106,8 +106,8 @@ const SupportersDialogContent = ({
             hasBorder={false}
             spacing={isSmUp ? ['base', 'baseLoose'] : ['base', 'base']}
           >
-            {edges.map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
+            {edges.map(({ node }, i) => (
+              <List.Item key={node.id}>
                 <UserDigest.Rich
                   user={node.sender || undefined}
                   onClick={() => {

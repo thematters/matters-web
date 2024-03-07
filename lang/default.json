@@ -30,6 +30,9 @@
   "+aMAeT": {
     "defaultMessage": "Address copied"
   },
+  "+bwe8v": {
+    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
+  },
   "+cS08C": {
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -184,6 +187,9 @@
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2D/X90": {
+    "defaultMessage": "Why Optimism?"
+  },
   "2DkkhD": {
     "defaultMessage": "Settings - Notifications",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -242,6 +248,9 @@
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
+  "3lMsOU": {
+    "defaultMessage": "Reapprove to continue"
+  },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -251,6 +260,9 @@
   },
   "3yk8fB": {
     "defaultMessage": "Wallet"
+  },
+  "4118K3": {
+    "defaultMessage": "Optimism is a Layer 2 scaling solution based on Ethereum that can provide faster and cheaper transactions, while ensuring security, making it easier for you to support creators."
   },
   "47FYwb": {
     "defaultMessage": "Cancel"
@@ -338,6 +350,9 @@
   "6BXcdo": {
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6ErzDk": {
+    "defaultMessage": "Reconnect Wallet"
   },
   "6N2LKY": {
     "defaultMessage": "Please log in again.",
@@ -889,6 +904,9 @@
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "JmzmVH": {
+    "defaultMessage": "Switch to"
+  },
   "JpS59y": {
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1127,6 +1145,10 @@
     "defaultMessage": "Comment",
     "description": "src/views/ArticleDetail/index.tsx"
   },
+  "P+sWM0": {
+    "defaultMessage": "guide",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1263,6 +1285,9 @@
   "TSDiqB": {
     "defaultMessage": "Subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "Tgd5id": {
+    "defaultMessage": "Transfer amount exceeds allowance"
   },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
@@ -1542,6 +1567,9 @@
   "ai7kS4": {
     "defaultMessage": "My Works"
   },
+  "aoDcrD": {
+    "defaultMessage": "Approve to continue"
+  },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/UI.tsx"
@@ -1675,6 +1703,9 @@
   "e3qUqn": {
     "defaultMessage": "Pornography involving minors"
   },
+  "eKVBm/": {
+    "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {link}."
+  },
   "eTpiYa": {
     "defaultMessage": "No data yet."
   },
@@ -1732,6 +1763,9 @@
   "h+punE": {
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h74kLA": {
+    "defaultMessage": "Failed to Donate"
   },
   "h7sMQs": {
     "defaultMessage": "New followers",
@@ -2016,6 +2050,9 @@
   "pHg5Ju": {
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
+  "pKkpI9": {
+    "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
   },
   "pRV+UD": {
     "defaultMessage": "Collapse",

@@ -48,11 +48,11 @@ const Tips = () => {
           <Translate
             zh_hant="USDT 餘額不正確？參考 "
             zh_hans="USDT 余额不正确？参考 "
-            en="How to transfer funds to Polygon? Check the "
+            en="How to transfer funds to Optimism? Check the "
           />
           <a
             className="u-link-green"
-            href={GUIDE_LINKS.payment[lang]}
+            href={GUIDE_LINKS.usdt[lang]}
             target="_blank"
             rel="noreferrer"
           >
