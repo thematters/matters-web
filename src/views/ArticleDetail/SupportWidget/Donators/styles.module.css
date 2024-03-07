@@ -41,8 +41,6 @@
 }
 
 .avatarItem {
-  cursor: pointer;
-
   & > * {
     height: 1.5rem;
 

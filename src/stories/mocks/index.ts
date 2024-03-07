@@ -142,12 +142,12 @@ export const MOCK_ARTILCE = {
   appreciationsReceivedTotal: 1000,
   commentCount: 9999,
   donationCount: 234,
-  transactionsReceivedBy: {
-    __typename: 'AppreciationConnection' as any,
+  donations: {
+    __typename: 'ArticleDonationConnection' as any,
     totalCount: 190,
   },
   donationsDialog: {
-    __typename: 'AppreciationConnection' as any,
+    __typename: 'ArticleDonationConnection' as any,
     totalCount: 190,
   },
   subscribed: false,
