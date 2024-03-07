@@ -76,7 +76,7 @@ const MetaInfo = ({
           textActiveColor="greyDarker"
           href={
             toPath({
-              page: 'articleRevision',
+              page: 'articleHistory',
               article,
             }).href
           }

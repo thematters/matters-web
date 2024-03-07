@@ -58,7 +58,7 @@ const VersionsDropdown = ({
   const { getQuery } = useRoute()
 
   const versions = article.versions.edges.map((edge) => edge?.node!)
-  const currVersion = getQuery('version') || versions[0]?.id
+  const currVersion = getQuery('v') || versions[0]?.id
   const version = versions.find((v) => v.id === currVersion)
 
   if (versions.length < 1 || !version) {
@@ -80,7 +80,7 @@ const VersionsDropdown = ({
             key={version.id}
             href={
               toPath({
-                page: 'articleRevision',
+                page: 'articleHistory',
                 article,
                 versionId: version.id,
               }).href

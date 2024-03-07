@@ -5,8 +5,8 @@ import { fragments as circleWallFragments } from '../Wall/Circle/gql'
 import InfoHeader from './InfoHeader'
 import Versions from './Versions'
 
-const articleRevisionPublicFragment = gql`
-  fragment ArticleRevisionPublicArticle on Article {
+const articleHistoryPublicFragment = gql`
+  fragment ArticleHistoryPublicArticle on Article {
     id
     slug
     mediaHash
@@ -59,10 +59,10 @@ const articleVersionFragment = gql`
   ${MetaInfo.fragments.articleVersion}
 `
 
-export const ARTICLE_REVISION_DETAIL_PUBLIC = gql`
-  query ArticleRevisionDetailPublic($mediaHash: String!, $version: ID!) {
+export const ARTICLE_HISTORY_PUBLIC = gql`
+  query ArticleHistoryPublic($mediaHash: String!, $version: ID!) {
     article(input: { mediaHash: $mediaHash }) {
-      ...ArticleRevisionPublicArticle
+      ...ArticleHistoryPublicArticle
     }
     version: node(input: { id: $version }) {
       ... on ArticleVersion {
@@ -70,15 +70,15 @@ export const ARTICLE_REVISION_DETAIL_PUBLIC = gql`
       }
     }
   }
-  ${articleRevisionPublicFragment}
+  ${articleHistoryPublicFragment}
   ${articleVersionFragment}
 `
 
-export const ARTICLE_REVISION_DETAIL_PUBLIC_BY_NODE_ID = gql`
-  query ArticleRevisionDetailPublicByNodeId($id: ID!, $version: ID!) {
+export const ARTICLE_HISTORY_PUBLIC_BY_NODE_ID = gql`
+  query ArticleHistoryPublicByNodeId($id: ID!, $version: ID!) {
     article: node(input: { id: $id }) {
       ... on Article {
-        ...ArticleRevisionPublicArticle
+        ...ArticleHistoryPublicArticle
       }
     }
     version: node(input: { id: $version }) {
@@ -87,12 +87,12 @@ export const ARTICLE_REVISION_DETAIL_PUBLIC_BY_NODE_ID = gql`
       }
     }
   }
-  ${articleRevisionPublicFragment}
+  ${articleHistoryPublicFragment}
   ${articleVersionFragment}
 `
 
-export const ARTICLE_REVISION_DETAIL_PRIVATE = gql`
-  query ArticleRevisionDetailPrivate($id: ID!, $version: ID!) {
+export const ARTICLE_HISTORY_PRIVATE = gql`
+  query ArticleHistoryPrivate($id: ID!, $version: ID!) {
     article: node(input: { id: $id }) {
       ... on Article {
         id
@@ -148,8 +148,8 @@ export const ARTICLE_LATEST_VERSION_BY_NODE_ID = gql`
   }
 `
 
-export const ARTICLE_REVISION_TRANSLATION = gql`
-  query ArticleRevisionTranslation($version: ID!, $language: UserLanguage!) {
+export const ARTICLE_HISTORY_TRANSLATION = gql`
+  query ArticleHistoryTranslation($version: ID!, $language: UserLanguage!) {
     version: node(input: { id: $version }) {
       ... on ArticleVersion {
         id

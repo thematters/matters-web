@@ -47,7 +47,7 @@ type ToPathArgs =
       collectionId?: string
     }
   | {
-      page: 'articleRevision'
+      page: 'articleHistory'
       article: ArticleArgs
       versionId?: string
     }
@@ -130,7 +130,7 @@ export const toPath = (
 
       break
     }
-    case 'articleRevision': {
+    case 'articleHistory': {
       const {
         id,
         slug,
@@ -145,10 +145,10 @@ export const toPath = (
         if (id && articleId) {
           href = `/@${userName}/${articleId}-${slug}${
             mediaHash ? '-' + mediaHash : ''
-          }/revision`
+          }/history`
         }
         if (!!args.versionId) {
-          href = `${href}?version=${args.versionId}`
+          href = `${href}?v=${args.versionId}`
         }
       } catch (err) {
         // do nothing

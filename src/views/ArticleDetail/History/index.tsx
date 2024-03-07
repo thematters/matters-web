@@ -24,10 +24,10 @@ import {
 } from '~/components'
 import {
   ArticleAccessType,
+  ArticleHistoryPublicQuery,
+  ArticleHistoryTranslationQuery,
   ArticleLatestVersionByNodeIdQuery,
   ArticleLatestVersionQuery,
-  ArticleRevisionDetailPublicQuery,
-  ArticleRevisionTranslationQuery,
 } from '~/gql/graphql'
 
 import Content from '../Content'
@@ -38,19 +38,19 @@ import Placeholder from '../Placeholder'
 import StickyTopBanner from '../StickyTopBanner'
 import styles from '../styles.module.css'
 import {
+  ARTICLE_HISTORY_PRIVATE,
+  ARTICLE_HISTORY_PUBLIC,
+  ARTICLE_HISTORY_PUBLIC_BY_NODE_ID,
+  ARTICLE_HISTORY_TRANSLATION,
   ARTICLE_LATEST_VERSION,
   ARTICLE_LATEST_VERSION_BY_NODE_ID,
-  ARTICLE_REVISION_DETAIL_PRIVATE,
-  ARTICLE_REVISION_DETAIL_PUBLIC,
-  ARTICLE_REVISION_DETAIL_PUBLIC_BY_NODE_ID,
-  ARTICLE_REVISION_TRANSLATION,
 } from './gql'
 import InfoHeader from './InfoHeader'
 import Versions from './Versions'
 
-type RevisionArticle = NonNullable<ArticleRevisionDetailPublicQuery['article']>
+type RevisionArticle = NonNullable<ArticleHistoryPublicQuery['article']>
 type RevisionVersion = NonNullable<
-  ArticleRevisionDetailPublicQuery['version'] & {
+  ArticleHistoryPublicQuery['version'] & {
     __typename: 'ArticleVersion'
   }
 >
@@ -78,7 +78,7 @@ const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
   )
 }
 
-const BaseArticleDetailRevision = ({
+const BaseArticleDetailHistory = ({
   article,
   version,
 }: {
@@ -107,7 +107,7 @@ const BaseArticleDetailRevision = ({
   const { lang: preferredLang } = useContext(LanguageContext)
   const canTranslate = !!(originalLang && originalLang !== preferredLang)
   const [getTranslation, { data: translationData, loading: translating }] =
-    useLazyQuery<ArticleRevisionTranslationQuery>(ARTICLE_REVISION_TRANSLATION)
+    useLazyQuery<ArticleHistoryTranslationQuery>(ARTICLE_HISTORY_TRANSLATION)
 
   const translate = () => {
     getTranslation({
@@ -152,7 +152,7 @@ const BaseArticleDetailRevision = ({
         title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
         path={
           toPath({
-            page: 'articleRevision',
+            page: 'articleHistory',
             article,
             versionId: version.id,
           }).href
@@ -215,14 +215,10 @@ const BaseArticleDetailRevision = ({
   )
 }
 
-const ArticleDetailRevision = ({
-  latestVersion,
-}: {
-  latestVersion: string
-}) => {
+const ArticleDetailHistory = ({ latestVersion }: { latestVersion: string }) => {
   const { getQuery, router } = useRoute()
   const mediaHash = getQuery('mediaHash')
-  const currVersion = getQuery('version') || latestVersion
+  const currVersion = getQuery('v') || latestVersion
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
@@ -240,8 +236,8 @@ const ArticleDetailRevision = ({
   // - `/:username:/:articleId:-:slug:-:mediaHash`
   // - `/:username:/:articleId:`
   // - `/:username:/:slug:-:mediaHash:`
-  const resultByHash = usePublicQuery<ArticleRevisionDetailPublicQuery>(
-    ARTICLE_REVISION_DETAIL_PUBLIC,
+  const resultByHash = usePublicQuery<ArticleHistoryPublicQuery>(
+    ARTICLE_HISTORY_PUBLIC,
     {
       variables: {
         mediaHash,
@@ -250,8 +246,8 @@ const ArticleDetailRevision = ({
       skip: !isQueryByHash,
     }
   )
-  const resultByNodeId = usePublicQuery<ArticleRevisionDetailPublicQuery>(
-    ARTICLE_REVISION_DETAIL_PUBLIC_BY_NODE_ID,
+  const resultByNodeId = usePublicQuery<ArticleHistoryPublicQuery>(
+    ARTICLE_HISTORY_PUBLIC_BY_NODE_ID,
     {
       variables: {
         id: toGlobalId({ type: 'Article', id: articleId }),
@@ -278,7 +274,7 @@ const ArticleDetailRevision = ({
     }
 
     await client.query({
-      query: ARTICLE_REVISION_DETAIL_PRIVATE,
+      query: ARTICLE_HISTORY_PRIVATE,
       fetchPolicy: 'network-only',
       variables: { id: article?.id, version: currVersion },
     })
@@ -356,14 +352,14 @@ const ArticleDetailRevision = ({
    * Render:Article
    */
   return (
-    <BaseArticleDetailRevision
+    <BaseArticleDetailHistory
       article={article}
       version={version as RevisionVersion}
     />
   )
 }
 
-const ArticleDetailRevisionOuter = () => {
+const ArticleDetailHistoryOuter = () => {
   const { getQuery, router } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const articleId =
@@ -411,7 +407,7 @@ const ArticleDetailRevisionOuter = () => {
     )
   }
 
-  return <ArticleDetailRevision latestVersion={latestVersion} />
+  return <ArticleDetailHistory latestVersion={latestVersion} />
 }
 
-export default ArticleDetailRevisionOuter
+export default ArticleDetailHistoryOuter

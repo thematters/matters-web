@@ -21,7 +21,7 @@ const IPFSButton: React.FC<IPFSButtonProps> = ({ article }) => {
       ariaHasPopup="dialog"
       href={
         toPath({
-          page: 'articleRevision',
+          page: 'articleHistory',
           article,
         }).href
       }

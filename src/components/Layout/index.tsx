@@ -30,7 +30,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
-  const isInArticleDetailRevision = isInPath('ARTICLE_DETAIL_REVISION')
+  const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
   return (
     <>
@@ -38,7 +38,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
       <div className={styles.container}>
         <main className={styles.main}>
-          {!isInArticleDetailRevision && (
+          {!isInArticleDetailHistory && (
             <nav role="navigation" className={styles.sidenav}>
               <section className={styles.sideNavContent}>
                 <Media greaterThan="sm">
@@ -52,7 +52,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
         </main>
       </div>
 
-      {!isInDraftDetail && !isInArticleDetail && !isInArticleDetailRevision && (
+      {!isInDraftDetail && !isInArticleDetail && !isInArticleDetailHistory && (
         <Media at="sm">
           <footer>
             <NavBar />
@@ -76,7 +76,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
-  const isInArticleDetailRevision = isInPath('ARTICLE_DETAIL_REVISION')
+  const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
   const articleClasses = classNames({
     [styles.article]: true,
@@ -98,12 +98,12 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
             <Sticky enabled top={0}>
               <section className={styles.content}>
                 <section className={styles.top}>
-                  {!inEditor && !isInArticleDetailRevision && <SearchBar />}
+                  {!inEditor && !isInArticleDetailHistory && <SearchBar />}
 
                   {aside}
                 </section>
 
-                {!inEditor && !isInSettings && !isInArticleDetailRevision && (
+                {!inEditor && !isInSettings && !isInArticleDetailHistory && (
                   <SideFooter />
                 )}
               </section>
