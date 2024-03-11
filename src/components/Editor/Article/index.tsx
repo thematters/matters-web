@@ -1,9 +1,5 @@
 import { useApolloClient } from '@apollo/react-hooks'
-import {
-  EditorContent,
-  useArticleEdtor,
-  useEditArticleEdtor,
-} from '@matters/matters-editor'
+import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useContext } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
@@ -118,7 +114,7 @@ export const EditArticleEditor: React.FC<ArticleEditorProps> = ({
   const isPending = publishState === 'pending'
   const isReadOnly = isPending
 
-  const editor = useEditArticleEdtor({
+  const editor = useArticleEdtor({
     editable: !isReadOnly,
     placeholder: translate({
       zh_hant: '請輸入正文…',
