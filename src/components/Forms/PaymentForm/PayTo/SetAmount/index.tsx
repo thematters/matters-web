@@ -17,8 +17,8 @@ import {
 import {
   featureSupportedChains,
   formatAmount,
-  maskAddress,
   numRound,
+  truncate,
   validateCurrency,
   validateDonationAmount,
 } from '~/common/utils'
@@ -435,7 +435,7 @@ const SetAmount: React.FC<FormProps> = ({
                       color="black"
                       textPlacement="left"
                     >
-                      {maskAddress(viewer.info.ethAddress || '')}
+                      {truncate(viewer.info.ethAddress || '')}
                     </TextIcon>
                   </Button>
                 )}

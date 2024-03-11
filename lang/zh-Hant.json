@@ -17,8 +17,15 @@
   "+7SAix": {
     "defaultMessage": "2-12 個字元"
   },
+  "+GCcXH": {
+    "defaultMessage": "因違反用戶協定而被封存，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "+OStJM": {
     "defaultMessage": "重置交易密碼"
+  },
+  "+OtV6h": {
+    "defaultMessage": "保存失敗"
   },
   "+S8mxW": {
     "defaultMessage": "移至頂部",
@@ -97,8 +104,14 @@
   "/usqHn": {
     "defaultMessage": "{displayName} 的創作空間站"
   },
+  "/wKyxw": {
+    "defaultMessage": "發布失敗"
+  },
   "0/iEw/": {
     "defaultMessage": "管理社群"
+  },
+  "06XHBC": {
+    "defaultMessage": "加入圍爐"
   },
   "0Azlrb": {
     "defaultMessage": "管理"
@@ -140,6 +153,9 @@
   "0zZd0T": {
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+  },
+  "17K30q": {
+    "defaultMessage": "正在透過 Google 翻譯..."
   },
   "1COpAA": {
     "defaultMessage": "失敗",
@@ -214,6 +230,9 @@
   },
   "2oxLHg": {
     "defaultMessage": "最多可設置 3 個代表作"
+  },
+  "2qbSh8": {
+    "defaultMessage": "發布時註冊 "
   },
   "2slIPX": {
     "defaultMessage": "讚賞"
@@ -485,9 +504,8 @@
     "defaultMessage": "已追蹤",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
-  "9FQN4+": {
-    "defaultMessage": "僅作者本人可見封存作品，",
-    "description": "src/views/ArticleDetail/State/index.tsx"
+  "99OtWT": {
+    "defaultMessage": "寫入中…"
   },
   "9Fpc9S": {
     "defaultMessage": "漏洞提報"
@@ -659,12 +677,19 @@
   "D9R/ol": {
     "defaultMessage": "將作品加入圍爐，讓更多人一起參與討論"
   },
+  "DDQsyP": {
+    "defaultMessage": "回到我的創作",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "DP3yqI": {
     "defaultMessage": "支持人數"
   },
   "DUoV1W": {
     "defaultMessage": "已超過 140 字，目前 {numbers} 字",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
+  },
+  "DUvMii": {
+    "defaultMessage": "可自訂號召支持的內容，以及收到支持後的感謝文字"
   },
   "DYrDcG": {
     "defaultMessage": "徽章",
@@ -709,6 +734,9 @@
   "Eb1U+/": {
     "defaultMessage": "儲值成功"
   },
+  "EcglP9": {
+    "defaultMessage": "密鑰"
+  },
   "EoeUjA": {
     "defaultMessage": "你無權限進行該操作",
     "description": "FORBIDDEN_BY_STATE"
@@ -724,6 +752,10 @@
   "FEkOVJ": {
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
+  },
+  "FMIIAZ": {
+    "defaultMessage": "此為歷史版本和 IPFS 入口查閱區，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "FOOymB": {
     "defaultMessage": "還沒有成員",
@@ -810,9 +842,8 @@
   "HAlOn1": {
     "defaultMessage": "用戶名"
   },
-  "HDjV1k": {
-    "defaultMessage": "分佈式入口",
-    "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
+  "HBxXD/": {
+    "defaultMessage": "版權聲明"
   },
   "HEpsZ3": {
     "defaultMessage": "返回發現"
@@ -827,10 +858,6 @@
   "HPVOw/": {
     "defaultMessage": "數字錢包",
     "description": "src/views/Me/Settings/Settings/index.tsx"
-  },
-  "HaSYl4": {
-    "defaultMessage": "僅作者本人可見封存作品，",
-    "description": "src/views/ArticleDetail/State/index.tsx"
   },
   "HkozYU": {
     "defaultMessage": "更換錢包",
@@ -854,6 +881,9 @@
   "Hyr5ET": {
     "defaultMessage": "支持者",
     "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
+  },
+  "HzB4Lk": {
+    "defaultMessage": "告知讀者你此次編輯的更動有哪些⋯"
   },
   "I8+06z": {
     "defaultMessage": "評論已隱藏",
@@ -880,10 +910,6 @@
   "Ix3e3Q": {
     "defaultMessage": "發布評論",
     "description": "src/components/Forms/CommentForm/index.tsx"
-  },
-  "J12iSN": {
-    "defaultMessage": "回到我的創作",
-    "description": "src/views/ArticleDetail/State/index.tsx"
   },
   "J6f6iN": {
     "defaultMessage": "評論數量",
@@ -945,6 +971,9 @@
     "defaultMessage": "取消置頂",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "KWDSxB": {
+    "defaultMessage": "保存修訂"
+  },
   "KgVypx": {
     "defaultMessage": "標籤",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
@@ -952,6 +981,9 @@
   "KlJEP9": {
     "defaultMessage": "錢包已綁定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "Kwv1n3": {
+    "defaultMessage": " 用以出版 Writing NFT，費用 ≈1 LIKE，推廣期由平台補助"
   },
   "KxVlDj": {
     "defaultMessage": "設定 - 已封鎖用戶",
@@ -971,6 +1003,10 @@
   "L4NXXh": {
     "defaultMessage": "目前總營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "L5guA9": {
+    "defaultMessage": "Archived article (Author),",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "L79o74": {
     "defaultMessage": "展開",
@@ -1131,6 +1167,9 @@
     "defaultMessage": "成功發送邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
+  "OJmFke": {
+    "defaultMessage": "告知讀者你此次編輯的更動"
+  },
   "OKhRC6": {
     "defaultMessage": "分享"
   },
@@ -1140,6 +1179,9 @@
   },
   "OpeFTV": {
     "defaultMessage": "輸入六位數字交易密碼"
+  },
+  "Oru6G2": {
+    "defaultMessage": "The Fingerprint from IPFS, you can read it via a gateway"
   },
   "OsX3KM": {
     "defaultMessage": "評論",
@@ -1155,6 +1197,10 @@
   },
   "PXAur5": {
     "defaultMessage": "提現"
+  },
+  "PkUihI": {
+    "defaultMessage": "修訂已保存",
+    "description": "src/views/ArticleDetail/Edit/Header/index.tsx"
   },
   "PliM8z": {
     "defaultMessage": "請移步相關頁面重新獲取連結，您也可以",
@@ -1257,6 +1303,9 @@
   "Sep44m": {
     "defaultMessage": "提現",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "SuRTsQ": {
+    "defaultMessage": "註冊 ISCN"
   },
   "Szd1tH": {
     "defaultMessage": "登出失敗，請重試"
@@ -1397,6 +1446,9 @@
     "defaultMessage": "作品被收藏",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "Wjmng6": {
+    "defaultMessage": "正文及作品管理剩 {revisionCountLeft} 版修訂"
+  },
   "WpvsPu": {
     "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1447,6 +1499,9 @@
   },
   "XgdZSb": {
     "defaultMessage": "值得關注"
+  },
+  "Xh/txo": {
+    "defaultMessage": "作品指紋"
   },
   "Xi40U9": {
     "defaultMessage": "操作無法撤銷，確認刪除選集嗎？"
@@ -1521,7 +1576,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "編輯",
+    "defaultMessage": "編輯作品",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZYvVYX": {
@@ -1663,6 +1718,9 @@
   "d4waan": {
     "defaultMessage": "營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "d5+b8r": {
+    "defaultMessage": "限制級內容"
   },
   "dAPUJp": {
     "defaultMessage": "流星雨的絢爛光芒足以點亮夜空。流星號徽章紀念你曾參與「遊牧者計畫」。",
@@ -1823,6 +1881,10 @@
   "ieGrWo": {
     "defaultMessage": "追蹤"
   },
+  "imXsmo": {
+    "defaultMessage": "回到作品頁",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "itPgxd": {
     "defaultMessage": "個人主頁"
   },
@@ -1851,6 +1913,9 @@
   "jkrM1r": {
     "defaultMessage": "打開 IPNS 頁面",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "jtdQHR": {
+    "defaultMessage": "Gateways"
   },
   "jwnump": {
     "defaultMessage": "發布評論..."
@@ -1938,6 +2003,9 @@
   },
   "ll/ufR": {
     "defaultMessage": "熱門"
+  },
+  "lsccVJ": {
+    "defaultMessage": "正文及作品管理修訂次數已達上限"
   },
   "m/Wg7b": {
     "defaultMessage": "圍爐描述",
@@ -2125,6 +2193,9 @@
     "defaultMessage": "微博",
     "description": "src/components/Share/Buttons/Weibo.tsx"
   },
+  "rDX3h6": {
+    "defaultMessage": "版本簡述"
+  },
   "rHi+cL": {
     "defaultMessage": "最多讀者",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
@@ -2199,6 +2270,9 @@
   "tio9Gt": {
     "defaultMessage": "分佈式入口"
   },
+  "twEps9": {
+    "defaultMessage": "更新"
+  },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -2240,6 +2314,9 @@
   },
   "uw32VR": {
     "defaultMessage": "教學指南"
+  },
+  "ux4p3j": {
+    "defaultMessage": "更新於"
   },
   "v6YjIn": {
     "defaultMessage": "帳戶",
@@ -2457,6 +2534,9 @@
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
+  },
+  "zbaTLV": {
+    "defaultMessage": "在 IPFS 上查看"
   },
   "zkmfjn": {
     "defaultMessage": "置頂",

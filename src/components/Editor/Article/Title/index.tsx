@@ -9,20 +9,12 @@ import styles from './styles.module.css'
 
 interface Props {
   defaultValue?: string
-  readOnly?: boolean
   update: (params: { title: any }) => void
 }
 
-const EditorTitle: React.FC<Props> = ({
-  defaultValue = '',
-  readOnly,
-  update,
-}) => {
+const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
   const { lang } = useContext(LanguageContext)
-  const classes = classNames(
-    [styles.editorTitle],
-    readOnly ? 'u-area-disable' : ''
-  )
+  const classes = classNames([styles.editorTitle])
 
   const [value, setValue] = React.useState(defaultValue)
 

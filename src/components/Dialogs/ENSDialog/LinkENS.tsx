@@ -15,8 +15,8 @@ import { waitForTransaction } from 'wagmi/actions'
 import {
   analytics,
   featureSupportedChains,
-  maskAddress,
   PublicResolverABI,
+  truncate,
 } from '~/common/utils'
 import {
   Button,
@@ -225,7 +225,7 @@ const LinkENS = ({
                       color="grey"
                       textPlacement="left"
                     >
-                      {maskAddress(viewer.info.ethAddress || '')}
+                      {truncate(viewer.info.ethAddress || '')}
                     </TextIcon>
                   </Button>
                 )}

@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 import { getAddress } from 'viem'
 
-import { maskAddress } from '~/common/utils'
+import { truncate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -67,7 +67,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
           onClick={copyToClipboard}
         >
           <TextIcon {...textIconProps} icon={<IconCopy16 size="sm" />}>
-            {ensName || maskAddress(getAddress(address))}
+            {ensName || truncate(getAddress(address))}
           </TextIcon>
         </Button>
       )}

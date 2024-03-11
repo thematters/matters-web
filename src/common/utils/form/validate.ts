@@ -204,14 +204,20 @@ export const validateDisplayName = (
   }
 }
 
-export const validateDescription = (value: string, lang: Language) => {
+export const validateDescription = (
+  value: string,
+  lang: Language,
+  max?: number
+) => {
+  const maxLength = max || MAX_DESCRIPTION_LENGTH
+
   if (!value) {
     return translate({ id: 'required', lang })
-  } else if (value.length > MAX_DESCRIPTION_LENGTH) {
+  } else if (value.length > maxLength) {
     return translate({
-      zh_hant: `已超過 ${MAX_DESCRIPTION_LENGTH} 字，目前 ${value.length} 字`,
-      zh_hans: `已超过 ${MAX_DESCRIPTION_LENGTH} 字，目前 ${value.length} 字`,
-      en: `Maximum ${MAX_DESCRIPTION_LENGTH} characters, current ${value.length} characters.`,
+      zh_hant: `已超過 ${maxLength} 字，目前 ${value.length} 字`,
+      zh_hans: `已超过 ${maxLength} 字，目前 ${value.length} 字`,
+      en: `Maximum ${maxLength} characters, current ${value.length} characters.`,
       lang,
     })
   }

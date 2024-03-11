@@ -13,7 +13,7 @@ import {
   toast,
   useRoute,
 } from '~/components'
-import { ArticleDetailPublicQuery, EditMetaDraftFragment } from '~/gql/graphql'
+import { EditMetaDraftFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 import SupportPreview from './SupportPreview'
@@ -25,7 +25,10 @@ interface FormProps {
   submitCallback?: () => void
 
   draft?: EditMetaDraftFragment
-  article?: ArticleDetailPublicQuery['article']
+  article?: {
+    replyToDonator?: string | null
+    requestForDonation?: string | null
+  }
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null

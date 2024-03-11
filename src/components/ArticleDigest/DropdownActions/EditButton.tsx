@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { URL_QS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { IconEdit20, Menu } from '~/components'
 import { EditArticleButtonArticleFragment } from '~/gql/graphql'
@@ -37,7 +36,7 @@ const EditArticleButton = ({
         />
       }
       icon={<IconEdit20 size="mdS" />}
-      href={`${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`}
+      href={`${href}/edit`}
       is="link"
     />
   )

@@ -13,7 +13,6 @@ import { LanguageContext } from '~/components'
  *   <EditorSummary
  *      devalutValue="Default summary"
  *      enable={true}
- *      readOnly={false}
  *      texts={{}}
  *      update={() => func({ summary: '' })}
  *   />
@@ -22,14 +21,12 @@ import { LanguageContext } from '~/components'
 interface Props {
   defaultValue?: string
   enable?: boolean
-  readOnly?: boolean
   update: (params: { summary: any }) => void
 }
 
 const EditorSummary: React.FC<Props> = ({
   defaultValue = '',
   enable,
-  readOnly,
   update,
 }) => {
   const { lang } = useContext(LanguageContext)
@@ -65,7 +62,6 @@ const EditorSummary: React.FC<Props> = ({
 
   const classes = classNames({
     'editor-summary': true,
-    'u-area-disable': readOnly,
   })
   const counterClasses = classNames({
     counter: true,
@@ -94,11 +90,9 @@ const EditorSummary: React.FC<Props> = ({
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
-      {!readOnly && (
-        <section className={counterClasses}>
-          ({length}/{MAX_ARTICE_SUMMARY_LENGTH})
-        </section>
-      )}
+      <section className={counterClasses}>
+        ({length}/{MAX_ARTICE_SUMMARY_LENGTH})
+      </section>
     </section>
   )
 }

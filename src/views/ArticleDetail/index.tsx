@@ -2,14 +2,10 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { Waypoint } from 'react-waypoint'
 
-import {
-  OPEN_COMMENT_DETAIL_DIALOG,
-  REFERRAL_QUERY_REFERRAL_KEY,
-  URL_QS,
-} from '~/common/enums'
+import { OPEN_COMMENT_DETAIL_DIALOG } from '~/common/enums'
 import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
@@ -56,7 +52,7 @@ import {
 import License from './License'
 import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
-import State from './State'
+import StickyTopBanner from './StickyTopBanner'
 import styles from './styles.module.css'
 import TagList from './TagList'
 import DesktopToolbar from './Toolbar/DesktopToolbar'
@@ -85,14 +81,7 @@ const DynamicCommentsDetail = dynamic(
     loading: () => <CommentsPlaceholder />,
   }
 )
-const DynamicEditMode = dynamic(() => import('./EditMode'), {
-  ssr: false,
-  loading: () => (
-    <EmptyLayout>
-      <Spinner />
-    </EmptyLayout>
-  ),
-})
+
 const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
@@ -192,10 +181,9 @@ const BaseArticleDetail = ({
 
     toast.success({
       message: (
-        <Translate
-          zh_hant="正在透過 Google 翻譯..."
-          zh_hans="正在通过 Google 翻译..."
-          en="Translating by Google..."
+        <FormattedMessage
+          defaultMessage="Translating by Google..."
+          id="17K30q"
         />
       ),
     })
@@ -306,7 +294,7 @@ const BaseArticleDetail = ({
         availableLanguages={article.availableTranslations || []}
       />
 
-      <State article={article} />
+      <StickyTopBanner type="inactive" article={article} />
 
       <Media greaterThan="sm">
         <Drawer
@@ -345,7 +333,7 @@ const BaseArticleDetail = ({
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
             canReadFullContent={canReadFullContent}
-            disabled={lock}
+            editable={!lock}
           />
         </section>
 
@@ -361,7 +349,7 @@ const BaseArticleDetail = ({
         {!isSensitive && (
           <>
             <Content
-              article={article}
+              articleId={article.id}
               content={content}
               translating={translating}
             />
@@ -395,7 +383,7 @@ const BaseArticleDetail = ({
                 translated={translated}
                 translatedLanguage={translatedLanguage}
                 privateFetched={privateFetched}
-                hasFingerprint={canReadFullContent}
+                hasIPFS
                 hasReport
                 lock={lock}
                 toggleDrawer={toggleDrawer}
@@ -460,7 +448,6 @@ const BaseArticleDetail = ({
               translated={translated}
               translatedLanguage={translatedLanguage}
               privateFetched={privateFetched}
-              hasFingerprint={canReadFullContent}
               lock={lock}
               showCommentToolbar={showCommentToolbar}
               openCommentsDialog={
@@ -513,7 +500,6 @@ const ArticleDetail = ({
   includeTranslation: boolean
 }) => {
   const { getQuery, router, routerLang } = useRoute()
-  const [needRefetchData, setNeedRefetchData] = useState(false)
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
@@ -594,12 +580,8 @@ const ArticleDetail = ({
 
     // refetch data when URL query is changed
     ;(async () => {
-      if (!needRefetchData) {
-        return
-      }
       await refetchPublic()
       await loadPrivate()
-      setNeedRefetchData(false)
     })()
   }, [mediaHash])
 
@@ -630,15 +612,6 @@ const ArticleDetail = ({
       `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${newPath.href}`
     )
 
-    // TODO: can remove this after 2024/2
-    const isNomadTags = article.tags?.some(
-      (tag) => tag.content === 'nomadmatters' || tag.content === '遊牧者計畫'
-    )
-    const hasReferral = u.searchParams.has(REFERRAL_QUERY_REFERRAL_KEY)
-    if (!hasReferral && isNomadTags && viewer.userName) {
-      u.searchParams.append(REFERRAL_QUERY_REFERRAL_KEY, viewer.userName)
-    }
-
     // hide all utm_ tracking code parameters
     // copy all others
     const rems = [
@@ -652,36 +625,6 @@ const ArticleDetail = ({
       router.replace(nhref, undefined, { shallow: true, locale: false })
     }
   }, [latestHash])
-
-  // edit mode
-  const canEdit = isAuthor && !viewer.isInactive
-  const mode = getQuery(URL_QS.MODE_EDIT.key)
-  const [editMode, setEditMode] = useState(false)
-  const exitEditMode = () => {
-    if (!article) {
-      return
-    }
-
-    setNeedRefetchData(true)
-    const path = toPath({ page: 'articleDetail', article })
-    router.replace(path.href)
-  }
-
-  const onEditSaved = async () => {
-    setEditMode(false)
-    exitEditMode()
-
-    await refetchPublic()
-    loadPrivate()
-  }
-
-  useEffect(() => {
-    if (!canEdit || !article) {
-      return
-    }
-
-    setEditMode(mode === URL_QS.MODE_EDIT.value)
-  }, [mode, article])
 
   /**
    * Render:Loading
@@ -742,19 +685,6 @@ const ArticleDetail = ({
           <BackToHomeButton />
         </Error>
       </EmptyLayout>
-    )
-  }
-
-  /**
-   * Render:Edit Mode
-   */
-  if (editMode) {
-    return (
-      <DynamicEditMode
-        article={article}
-        onCancel={exitEditMode}
-        onSaved={onEditSaved}
-      />
     )
   }
 
