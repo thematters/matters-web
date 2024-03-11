@@ -10,8 +10,9 @@ import {
   toast,
   useDialogSwitch,
   useMutation,
+  useRoute,
 } from '~/components'
-import { updateArticleComments } from '~/components/GQL'
+import { updateArticleComments, updateArticlePublic } from '~/components/GQL'
 import {
   DeleteCommentMutation,
   DropdownActionsCommentBetaPublicFragment,
@@ -38,6 +39,7 @@ const DeleteCommentDialog = ({
   children,
 }: DeleteCommentDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { router, routerLang } = useRoute()
   const commentId = comment.id
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined
@@ -63,6 +65,17 @@ const DeleteCommentDialog = ({
         commentId: comment.id,
         articleId: article.id,
         type: 'delete',
+      })
+
+      const articleIdFromRouter =
+        (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
+
+      updateArticlePublic({
+        cache,
+        articleId: articleIdFromRouter,
+        mediaHash: article.mediaHash,
+        routerLang,
+        type: 'deleteComment',
       })
     },
   })

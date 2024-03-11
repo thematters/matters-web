@@ -13,10 +13,15 @@ import {
   IconSpinner16,
   TextIcon,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import CommentEditor from '~/components/Editor/Comment'
-import { updateArticleComments, updateCommentDetail } from '~/components/GQL'
+import {
+  updateArticleComments,
+  updateArticlePublic,
+  updateCommentDetail,
+} from '~/components/GQL'
 import PUT_COMMENT_BETA from '~/components/GQL/mutations/putCommentBeta'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import { CommentDraftQuery, PutCommentBetaMutation } from '~/gql/graphql'
@@ -55,6 +60,8 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
+  const { getQuery, router, routerLang } = useRoute()
+  const mediaHash = getQuery('mediaHash')
 
   // retrieve comment draft
   const commentDraftId = `${articleId}-${type}-${commentId || 0}-${
@@ -120,6 +127,16 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
               comment: mutationResult.data?.putComment,
             })
           }
+
+          const articleIdFromRouter =
+            (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
+          updateArticlePublic({
+            cache,
+            articleId: articleIdFromRouter,
+            mediaHash,
+            routerLang,
+            type: 'addComment',
+          })
         },
       })
 
