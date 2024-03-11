@@ -34,6 +34,7 @@ import SupportButton from './SupportButton'
 interface DonationProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>
   disable?: boolean
+  toggleDonationDrawer: () => void
 }
 
 type HasDonatedArticle = NonNullable<
@@ -45,7 +46,11 @@ const DynamicAnimation = dynamic(() => import('./Animation'), {
   loading: () => <Spinner />,
 })
 
-const SupportWidget = ({ article, disable }: DonationProps) => {
+const SupportWidget = ({
+  article,
+  disable,
+  toggleDonationDrawer,
+}: DonationProps) => {
   const viewer = useContext(ViewerContext)
   const [playShipWaiting, setPlayShipWaiting] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
@@ -188,6 +193,7 @@ const SupportWidget = ({ article, disable }: DonationProps) => {
                   targetId={article.id}
                   article={article}
                   supported={isViewerDonated}
+                  toggleDonationDrawer={toggleDonationDrawer}
                 />
               </section>
 

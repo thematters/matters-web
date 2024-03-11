@@ -20,7 +20,7 @@ export type FloatToolbarProps = {
   privateFetched: boolean
   lock: boolean
   show: boolean
-  toggleDrawer: () => void
+  toggleCommentDrawer: () => void
   toggleDonationDrawer: () => void
 }
 
@@ -56,7 +56,7 @@ const FloatToolbar = ({
   articleDetails,
   privateFetched,
   lock,
-  toggleDrawer,
+  toggleCommentDrawer,
   toggleDonationDrawer,
 }: FloatToolbarProps) => {
   const [mounted, setMounted] = useState(false)
@@ -114,7 +114,7 @@ const FloatToolbar = ({
             article={article}
             disabled={!article.canComment}
             textIconSpacing="basexxtight"
-            onClick={toggleDrawer}
+            onClick={toggleCommentDrawer}
             {...buttonProps}
           />
           <span className={styles.divider} />

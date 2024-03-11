@@ -6,10 +6,9 @@ import { Drawer, useDialogSwitch } from '~/components'
 type AnyDrawerProps = {
   children: React.ReactNode
   defaultOpen: boolean
-  title: string
 }
 
-const AnyDrawer = ({ defaultOpen, title, children }: AnyDrawerProps) => {
+const AnyDrawer = ({ defaultOpen, children }: AnyDrawerProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(defaultOpen)
 
   return (
@@ -17,7 +16,7 @@ const AnyDrawer = ({ defaultOpen, title, children }: AnyDrawerProps) => {
       <button type="button" onClick={openDialog}>
         Open
       </button>
-      <Drawer isOpen={show} onClose={closeDialog} title={title}>
+      <Drawer isOpen={show} onClose={closeDialog}>
         {children}
       </Drawer>
     </>
@@ -27,8 +26,11 @@ const AnyDrawer = ({ defaultOpen, title, children }: AnyDrawerProps) => {
 describe('<Drawer>', () => {
   it('should render, open and close a Drawer', async () => {
     render(
-      <AnyDrawer title="drawer title" defaultOpen={false}>
-        {<section>hello drawer</section>}
+      <AnyDrawer defaultOpen={false}>
+        <Drawer.Header title="drawer title" />
+        <Drawer.Content>
+          <section>hello drawer</section>
+        </Drawer.Content>
       </AnyDrawer>
     )
 

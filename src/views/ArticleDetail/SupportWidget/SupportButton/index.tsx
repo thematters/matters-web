@@ -21,6 +21,7 @@ interface SupportButtonProps {
   targetId: string
   article: NonNullable<ArticleDetailPublicQuery['article']>
   supported?: boolean
+  toggleDonationDrawer: () => void
 }
 
 const SupportButton = ({
@@ -28,6 +29,7 @@ const SupportButton = ({
   targetId,
   article,
   supported = false,
+  toggleDonationDrawer,
 }: SupportButtonProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -78,7 +80,9 @@ const SupportButton = ({
                 return
               }
 
-              openDialog()
+              // TODO: remove this after finished the new payment flow
+              // openDialog()
+              toggleDonationDrawer()
             }}
           />
         </>

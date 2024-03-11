@@ -46,6 +46,7 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import { CommentDrawer, CommentDrawerStep } from './CommentDrawer'
 import { CommentsDialog } from './Comments/CommentsDialog'
 import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
 import Content from './Content'
@@ -84,13 +85,6 @@ const DynamicComments = dynamic(() => import('./Comments'), {
   loading: () => <CommentsPlaceholder />,
 })
 
-const DynamicCommentsDetail = dynamic(
-  () => import('./Comments/CommentDetail'),
-  {
-    ssr: false,
-    loading: () => <CommentsPlaceholder />,
-  }
-)
 const DynamicEditMode = dynamic(() => import('./EditMode'), {
   ssr: false,
   loading: () => (
@@ -108,8 +102,6 @@ const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
 })
-
-type DrawerStep = 'commentList' | 'commentDetail'
 
 const BaseArticleDetail = ({
   article,
@@ -144,15 +136,13 @@ const BaseArticleDetail = ({
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
 
-  const [drawerStep, setDrawerStep] = useState<DrawerStep>(
+  const [commentDrawerStep, setCommentDrawerStep] = useState<CommentDrawerStep>(
     parentId !== '' ? 'commentDetail' : 'commentList'
   )
-  const isCommentDetail = drawerStep === 'commentDetail'
-  const isCommentList = drawerStep === 'commentList'
-  const [isOpen, setIsOpen] = useState(false)
-  const [autoOpen] = useState(true)
-  const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState)
+  const [isOpenComment, setIsOpenComment] = useState(false)
+  const [autoOpenComment] = useState(true)
+  const toggleCommentDrawer = () => {
+    setIsOpenComment((prevState) => !prevState)
   }
 
   const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
@@ -244,7 +234,7 @@ const BaseArticleDetail = ({
       return
     }
     setTimeout(() => {
-      setIsOpen(true)
+      setIsOpenComment(true)
       window.dispatchEvent(new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG))
     }, 500)
   }, [parentId])
@@ -307,44 +297,30 @@ const BaseArticleDetail = ({
       <State article={article} />
 
       <Media greaterThan="sm">
-        <Drawer
-          isOpen={isOpen}
-          onClose={toggleDrawer}
-          backTo={
-            isCommentDetail ? () => setDrawerStep('commentList') : undefined
-          }
-          title={
-            isCommentList
-              ? intl.formatMessage({
-                  defaultMessage: 'Comment',
-                  description: 'src/views/ArticleDetail/index.tsx',
-                  id: 'OsX3KM',
-                })
-              : intl.formatMessage({
-                  defaultMessage: 'Comment Details',
-                  id: '4OMGUj',
-                })
-          }
-        >
-          {isCommentList && (
-            <DynamicComments id={article.id} lock={!canReadFullContent} />
-          )}
-          {isCommentDetail && <DynamicCommentsDetail />}
-        </Drawer>
+        <CommentDrawer
+          isOpen={isOpenComment}
+          onClose={toggleCommentDrawer}
+          step={commentDrawerStep}
+          id={article.id}
+          lock={!canReadFullContent}
+          switchToCommentList={() => setCommentDrawerStep('commentList')}
+        />
 
-        <Drawer
-          isOpen={isOpenDonationDrawer}
-          onClose={toggleDonationDrawer}
-          title={intl.formatMessage({
-            defaultMessage: 'Support Author',
-            id: 'ezYuE2',
-          })}
-        >
-          <SupportAuthor
-            recipient={article.author}
-            targetId={article.id}
-            article={article}
+        <Drawer isOpen={isOpenDonationDrawer} onClose={toggleDonationDrawer}>
+          <Drawer.Header
+            title={intl.formatMessage({
+              defaultMessage: 'Support Author',
+              id: 'ezYuE2',
+            })}
+            closeDrawer={toggleDonationDrawer}
           />
+          <Drawer.Content>
+            <SupportAuthor
+              recipient={article.author}
+              targetId={article.id}
+              article={article}
+            />
+          </Drawer.Content>
         </Drawer>
       </Media>
 
@@ -390,7 +366,11 @@ const BaseArticleDetail = ({
         <License license={article.license} />
 
         {features.payment && (
-          <DynamicSupportWidget article={article} disable={lock} />
+          <DynamicSupportWidget
+            article={article}
+            disable={lock}
+            toggleDonationDrawer={toggleDonationDrawer}
+          />
         )}
         <Media greaterThanOrEqual="lg">
           <Waypoint
@@ -411,7 +391,7 @@ const BaseArticleDetail = ({
                 hasFingerprint={canReadFullContent}
                 hasReport
                 lock={lock}
-                toggleDrawer={toggleDrawer}
+                toggleDrawer={toggleCommentDrawer}
               />
             </div>
           </Waypoint>
@@ -420,8 +400,8 @@ const BaseArticleDetail = ({
         <Media greaterThan="sm">
           <Waypoint
             onEnter={() => {
-              if (article.canComment && autoOpen && !isShortWork) {
-                setTimeout(() => setIsOpen(true), 500)
+              if (article.canComment && autoOpenComment && !isShortWork) {
+                setTimeout(() => setIsOpenComment(true), 500)
               }
             }}
           />
@@ -492,7 +472,7 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
-          toggleDrawer={toggleDrawer}
+          toggleCommentDrawer={toggleCommentDrawer}
           toggleDonationDrawer={toggleDonationDrawer}
         />
       </Media>
@@ -504,7 +484,7 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
-          toggleDrawer={toggleDrawer}
+          toggleCommentDrawer={toggleCommentDrawer}
           toggleDonationDrawer={toggleDonationDrawer}
         />
       </Media>
@@ -512,8 +492,8 @@ const BaseArticleDetail = ({
       <Media greaterThan="sm">
         <Waypoint
           onEnter={() => {
-            if (article.canComment && autoOpen && isShortWork) {
-              setTimeout(() => setIsOpen(true), 500)
+            if (article.canComment && autoOpenComment && isShortWork) {
+              setTimeout(() => setIsOpenComment(true), 500)
             }
           }}
         />
