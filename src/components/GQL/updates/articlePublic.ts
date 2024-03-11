@@ -35,92 +35,48 @@ export const updateArticlePublic = ({
   )
 
   try {
-    if (isQueryByHash) {
-      const translationResultByHash =
-        cache.readQuery<ArticleAvailableTranslationsQuery>({
-          query: ARTICLE_AVAILABLE_TRANSLATIONS,
-          variables: { mediaHash },
-        })
+    const TRANSLATIONS_QUERY_GQL = isQueryByHash
+      ? ARTICLE_AVAILABLE_TRANSLATIONS
+      : ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID
+    const translationQueryVariables = isQueryByHash
+      ? { mediaHash }
+      : { id: toGlobalId({ type: 'Article', id: articleId }) }
 
-      if (!translationResultByHash) {
-        return
-      }
-
-      const includeTranslation =
-        !!routerLang &&
-        (
-          translationResultByHash?.article?.availableTranslations || []
-        ).includes(routerLang)
-
-      const resultByHash = cache.readQuery<ArticleDetailPublicQuery>({
-        query: ARTICLE_DETAIL_PUBLIC,
-        variables: {
-          mediaHash,
-          language: routerLang || UserLanguage.ZhHant,
-          includeTranslation,
-        },
-      })
-
-      const data = resultByHash
-
-      if (data?.article?.__typename !== 'Article') {
-        return
-      }
-
-      let commentCount = data.article.commentCount
-      switch (type) {
-        case 'addComment':
-          commentCount += 1
-          break
-        case 'deleteComment':
-          commentCount -= 1
-          break
-      }
-
-      cache.writeQuery({
-        query: ARTICLE_DETAIL_PUBLIC,
-        variables: {
-          mediaHash,
-          language: routerLang || UserLanguage.ZhHant,
-          includeTranslation,
-        },
-        data: {
-          article: {
-            ...data.article,
-            commentCount,
-          },
-        },
-      })
-
-      return
-    }
-
-    const translationResultByNodeId =
+    const translationResult =
       cache.readQuery<ArticleAvailableTranslationsQuery>({
-        query: ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID,
-        variables: { id: toGlobalId({ type: 'Article', id: articleId }) },
+        query: TRANSLATIONS_QUERY_GQL,
+        variables: translationQueryVariables,
       })
 
-    if (!translationResultByNodeId) {
+    if (!translationResult) {
       return
     }
 
     const includeTranslation =
       !!routerLang &&
-      (
-        translationResultByNodeId?.article?.availableTranslations || []
-      ).includes(routerLang)
+      (translationResult?.article?.availableTranslations || []).includes(
+        routerLang
+      )
 
-    const resultByNodeId = cache.readQuery<ArticleDetailPublicQuery>({
-      query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
-      variables: {
-        id: toGlobalId({ type: 'Article', id: articleId }),
-        language: routerLang,
-        includeTranslation,
-      },
+    const DETAIL_QUERY_GQL = isQueryByHash
+      ? ARTICLE_DETAIL_PUBLIC
+      : ARTICLE_DETAIL_PUBLIC_BY_NODE_ID
+    const detailQueryVariables = isQueryByHash
+      ? {
+          mediaHash,
+          language: routerLang || UserLanguage.ZhHant,
+          includeTranslation,
+        }
+      : {
+          id: toGlobalId({ type: 'Article', id: articleId }),
+          language: routerLang,
+          includeTranslation,
+        }
+
+    const data = cache.readQuery<ArticleDetailPublicQuery>({
+      query: DETAIL_QUERY_GQL,
+      variables: detailQueryVariables,
     })
-
-    const data = resultByNodeId
 
     if (data?.article?.__typename !== 'Article') {
       return
@@ -137,12 +93,8 @@ export const updateArticlePublic = ({
     }
 
     cache.writeQuery({
-      query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
-      variables: {
-        id: toGlobalId({ type: 'Article', id: articleId }),
-        language: routerLang,
-        includeTranslation,
-      },
+      query: DETAIL_QUERY_GQL,
+      variables: detailQueryVariables,
       data: {
         article: {
           ...data.article,
