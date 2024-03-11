@@ -30,9 +30,6 @@
   "+aMAeT": {
     "defaultMessage": "地址已複製"
   },
-  "+bwe8v": {
-    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
-  },
   "+cS08C": {
     "defaultMessage": "確認要將「{article}」從選集中移出嗎？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"

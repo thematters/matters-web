@@ -14,7 +14,7 @@ export const SupportAuthor = (props: SupportAuthorProps) => {
 
   return (
     <>
-      <DonationTabs step={step} setStep={setStep} />
+      <DonationTabs step={step} setStep={setStep} recipient={props.recipient} />
       <section className={styles.content}>
         {isCredit && <CreditCard {...props} />}
       </section>
