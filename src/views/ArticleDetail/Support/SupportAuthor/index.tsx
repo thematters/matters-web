@@ -5,7 +5,8 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Spinner, useStep, ViewerContext } from '~/components'
 import { PayToMutation } from '~/gql/graphql'
 
-import { BaseSupportAuthorProps } from '../types'
+import DonationTabs, { CurrencyType } from './Tabs'
+import { BaseSupportAuthorProps } from './types'
 
 interface SetAmountCallbackValues {
   amount: number
@@ -17,11 +18,13 @@ const DynamicPayToFormSetAmount = dynamic(
   { loading: () => <Spinner /> }
 )
 
-type creditDrawerProps = BaseSupportAuthorProps
+export type SupportAuthorProps = BaseSupportAuthorProps & {
+  updateSupportStep: (step: SupportStep) => void
+}
 
-type Step =
+export type SupportStep =
   | 'setAmount'
-  | 'addCredit'
+  | 'topup'
   | 'currencyChoice'
   | 'confirm'
   | 'complete'
@@ -29,16 +32,16 @@ type Step =
   | 'resetPassword'
   | 'setPaymentPassword'
 
-export const CreditCard = ({
-  completeCallback,
-  recipient,
-  targetId,
-  article,
-}: creditDrawerProps) => {
+export const SupportAuthor = (props: SupportAuthorProps) => {
+  const { recipient, targetId, article, updateSupportStep } = props
   const viewer = useContext(ViewerContext)
-  // const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
+  const [type, setType] = useState<CurrencyType>('credit')
+  const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
 
-  const { currStep, forward } = useStep<Step>('setAmount')
+  const forward = (step: SupportStep) => {
+    _forward(step)
+    updateSupportStep(step)
+  }
 
   const [, setAmount] = useState<number>(0)
   const [, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
@@ -65,24 +68,31 @@ export const CreditCard = ({
   return (
     <>
       {isSetAmount && (
-        <DynamicPayToFormSetAmount
-          currency={CURRENCY.HKD}
-          recipient={recipient}
-          article={article}
-          submitCallback={setAmountCallback}
-          switchToCurrencyChoice={() => {
-            forward('currencyChoice')
-          }}
-          switchToAddCredit={() => {
-            forward('addCredit')
-          }}
-          back={() => {
-            forward('currencyChoice')
-          }}
-          setTabUrl={setTabUrl}
-          setTx={setTx}
-          targetId={targetId}
-        />
+        <>
+          <DonationTabs
+            type={type}
+            setType={setType}
+            recipient={props.recipient}
+          />
+          <DynamicPayToFormSetAmount
+            currency={CURRENCY.HKD}
+            recipient={recipient}
+            article={article}
+            submitCallback={setAmountCallback}
+            switchToCurrencyChoice={() => {
+              forward('currencyChoice')
+            }}
+            switchToAddCredit={() => {
+              forward('topup')
+            }}
+            back={() => {
+              forward('currencyChoice')
+            }}
+            setTabUrl={setTabUrl}
+            setTx={setTx}
+            targetId={targetId}
+          />
+        </>
       )}
     </>
   )

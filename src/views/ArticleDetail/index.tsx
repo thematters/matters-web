@@ -2,7 +2,6 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
-import { useIntl } from 'react-intl'
 import { Waypoint } from 'react-waypoint'
 
 import {
@@ -18,7 +17,6 @@ import {
 } from '~/common/utils'
 import {
   BackToHomeButton,
-  Drawer,
   EmptyLayout,
   Error,
   Head,
@@ -64,14 +62,14 @@ import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
 import State from './State'
 import styles from './styles.module.css'
-import { SupportAuthor } from './SupportAuthor'
+import { SupportDrawer } from './Support/SupportDrawer'
 import TagList from './TagList'
 import DesktopToolbar from './Toolbar/DesktopToolbar'
 import FixedToolbar from './Toolbar/FixedToolbar'
 import FloatToolbar from './Toolbar/FloatToolbar'
 import TranslationToast from './TranslationToast'
 
-const DynamicSupportWidget = dynamic(() => import('./SupportWidget'), {
+const DynamicSupportWidget = dynamic(() => import('./Support/SupportWidget'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
 })
@@ -127,7 +125,6 @@ const BaseArticleDetail = ({
   const { getQuery, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
-  const intl = useIntl()
 
   const features = useFeatures()
   const [showFloatToolbar, setShowFloatToolbar] = useState(true)
@@ -306,22 +303,11 @@ const BaseArticleDetail = ({
           switchToCommentList={() => setCommentDrawerStep('commentList')}
         />
 
-        <Drawer isOpen={isOpenDonationDrawer} onClose={toggleDonationDrawer}>
-          <Drawer.Header
-            title={intl.formatMessage({
-              defaultMessage: 'Support Author',
-              id: 'ezYuE2',
-            })}
-            closeDrawer={toggleDonationDrawer}
-          />
-          <Drawer.Content>
-            <SupportAuthor
-              recipient={article.author}
-              targetId={article.id}
-              article={article}
-            />
-          </Drawer.Content>
-        </Drawer>
+        <SupportDrawer
+          isOpen={isOpenDonationDrawer}
+          onClose={toggleDonationDrawer}
+          article={article}
+        />
       </Media>
 
       <section className={styles.content}>

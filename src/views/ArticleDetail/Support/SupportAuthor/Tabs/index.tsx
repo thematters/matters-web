@@ -3,24 +3,24 @@ import { FormattedMessage } from 'react-intl'
 import { Tabs } from '~/components'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
-export type Step = 'credit' | 'usdt' | 'likecoin'
+export type CurrencyType = 'credit' | 'usdt' | 'likecoin'
 
 type Props = {
   recipient: UserDonationRecipientFragment
-  step: Step
-  setStep: React.Dispatch<React.SetStateAction<Step>>
+  type: CurrencyType
+  setType: React.Dispatch<React.SetStateAction<CurrencyType>>
 }
 
-const DonationTabs = ({ recipient, step, setStep }: Props) => {
+const DonationTabs = ({ recipient, type, setType }: Props) => {
   const creatorAddress = recipient.info.ethAddress
 
-  const isCredit = step === 'credit'
-  const isUsdt = step === 'usdt'
-  const isLikecoin = step === 'likecoin'
+  const isCredit = type === 'credit'
+  const isUsdt = type === 'usdt'
+  const isLikecoin = type === 'likecoin'
 
   return (
     <Tabs>
-      <Tabs.Tab selected={isCredit} onClick={() => setStep('credit')}>
+      <Tabs.Tab selected={isCredit} onClick={() => setType('credit')}>
         <FormattedMessage
           defaultMessage="Credit card"
           id="vmx+TU"
@@ -29,12 +29,12 @@ const DonationTabs = ({ recipient, step, setStep }: Props) => {
       </Tabs.Tab>
       <Tabs.Tab
         selected={isUsdt}
-        onClick={() => setStep('usdt')}
+        onClick={() => setType('usdt')}
         disabled={!creatorAddress}
       >
         USDT
       </Tabs.Tab>
-      <Tabs.Tab selected={isLikecoin} onClick={() => setStep('likecoin')}>
+      <Tabs.Tab selected={isLikecoin} onClick={() => setType('likecoin')}>
         LikeCoin
       </Tabs.Tab>
     </Tabs>
