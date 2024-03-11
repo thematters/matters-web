@@ -131,12 +131,7 @@ const Wallet = () => {
 
       <Layout.Main.Spacing>
         <TableView spacingX={0}>
-          {hasPaymentPassword && (
-            <>
-              <PaymentPassword />
-              <hr className={styles.dashedLine} />
-            </>
-          )}
+          {hasPaymentPassword && <PaymentPassword />}
           <ViewStripeCustomerPortal />
           {hasStripeAccount && <ViewStripeAccount />}
           <PaymentPointer />

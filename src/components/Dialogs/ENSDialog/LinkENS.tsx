@@ -198,7 +198,10 @@ const LinkENS = ({
             <LinkENSIntro ensName={ensName} />
 
             <p className={styles.error}>
-              <Translate id="reconnectHint" />
+              <FormattedMessage
+                defaultMessage="The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: "
+                id="pKkpI9"
+              />
               <CopyToClipboard
                 text={viewer.info.ethAddress || ''}
                 successMessage={

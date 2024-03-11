@@ -1,12 +1,6 @@
 .content {
   &.inactive {
-    @mixin flex-center-space-between;
-
     color: var(--color-grey);
-
-    & button {
-      margin: 0 0 0 var(--spacing-tight);
-    }
   }
 }
 

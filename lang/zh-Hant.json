@@ -30,6 +30,9 @@
   "+aMAeT": {
     "defaultMessage": "地址已複製"
   },
+  "+bwe8v": {
+    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
+  },
   "+cS08C": {
     "defaultMessage": "確認要將「{article}」從選集中移出嗎？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -184,6 +187,9 @@
     "defaultMessage": "總數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2D/X90": {
+    "defaultMessage": "為什麼採用 Optimism？"
+  },
   "2DkkhD": {
     "defaultMessage": "設定 - 通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -242,6 +248,9 @@
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
+  "3lMsOU": {
+    "defaultMessage": "重新授權後繼續"
+  },
   "3phEFL": {
     "defaultMessage": "繼續使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -251,6 +260,9 @@
   },
   "3yk8fB": {
     "defaultMessage": "我的錢包"
+  },
+  "4118K3": {
+    "defaultMessage": "Optimism 是基於以太坊的第二層（Layer2）擴容方案，能提升交易速度，並降低手續費，同時確保安全性，讓你更輕鬆地支持創作者。"
   },
   "47FYwb": {
     "defaultMessage": "取消"
@@ -338,6 +350,9 @@
   "6BXcdo": {
     "defaultMessage": "設定圍爐門檻（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6ErzDk": {
+    "defaultMessage": "重新連接錢包"
   },
   "6N2LKY": {
     "defaultMessage": "授權信息已失效，請重新登入",
@@ -773,6 +788,9 @@
   "GZJpDf": {
     "defaultMessage": "數據後台"
   },
+  "GclYG/": {
+    "defaultMessage": "匿名用戶"
+  },
   "GcvLBC": {
     "defaultMessage": "我知道了"
   },
@@ -897,6 +915,9 @@
   "JkWLg6": {
     "defaultMessage": "被追蹤",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "JmzmVH": {
+    "defaultMessage": "切換到 "
   },
   "JpS59y": {
     "defaultMessage": "已接受",
@@ -1069,6 +1090,9 @@
   "N2IrpM": {
     "defaultMessage": "確認"
   },
+  "N8ISx8": {
+    "defaultMessage": "Oops！該評論已被原作者刪除"
+  },
   "NAidKb": {
     "defaultMessage": "通知"
   },
@@ -1132,6 +1156,10 @@
   "OsX3KM": {
     "defaultMessage": "評論",
     "description": "src/views/ArticleDetail/index.tsx"
+  },
+  "P+sWM0": {
+    "defaultMessage": "教學指南",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "登入密碼",
@@ -1273,6 +1301,9 @@
   "TX5UzL": {
     "defaultMessage": "付款將由 Stripe 處理，讓你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
+  "Tgd5id": {
+    "defaultMessage": "支持金額超出授權額度"
   },
   "TjWWxF": {
     "defaultMessage": "廣播已送出",
@@ -1552,6 +1583,9 @@
   "ai7kS4": {
     "defaultMessage": "我的創作"
   },
+  "aoDcrD": {
+    "defaultMessage": "首次需確認授權後繼續"
+  },
   "aqX2Bt": {
     "defaultMessage": "前往首頁",
     "description": "src/views/Callback/UI.tsx"
@@ -1685,6 +1719,9 @@
   "e3qUqn": {
     "defaultMessage": "涉及未成年人的色情"
   },
+  "eKVBm/": {
+    "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考{link}。"
+  },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
   },
@@ -1745,6 +1782,9 @@
   "h+punE": {
     "defaultMessage": "{date}更新",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h74kLA": {
+    "defaultMessage": "支持失敗"
   },
   "h7sMQs": {
     "defaultMessage": "新追蹤者",
@@ -2029,6 +2069,9 @@
   "pHg5Ju": {
     "defaultMessage": "登入密碼已設定",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
+  "pKkpI9": {
+    "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
   },
   "pRV+UD": {
     "defaultMessage": "闔上",

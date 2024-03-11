@@ -9,6 +9,7 @@ import { waitForTransaction } from 'wagmi/actions'
 
 import {
   CHAIN,
+  contract,
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
@@ -17,7 +18,6 @@ import {
   Dialog,
   Spinner,
   Translate,
-  useBalanceUSDT,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -83,7 +83,7 @@ const OthersProcessingForm: React.FC<Props> = ({
       variables: { id: txId },
       errorPolicy: 'none',
       fetchPolicy: 'network-only',
-      skip: typeof window === 'undefined',
+      skip: typeof window === 'undefined' || !txId,
     })
   const txState = _get(data, 'viewer.wallet.transactions.edges.0.node.state')
 
@@ -105,7 +105,7 @@ const OthersProcessingForm: React.FC<Props> = ({
   useEffect(() => {
     if (error) {
       stopPolling()
-    } else {
+    } else if (txId) {
       startPolling(1000)
     }
 
@@ -193,7 +193,6 @@ const USDTProcessingForm: React.FC<Props> = ({
   const [payTo] = useMutation<PayToMutation>(PAY_TO)
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
-  const { data: balanceUSDTData } = useBalanceUSDT({})
   const { chain } = useNetwork()
   const isUnsupportedNetwork = !!chain?.unsupported
   const isConnectedAddress =
@@ -211,13 +210,16 @@ const USDTProcessingForm: React.FC<Props> = ({
     isError,
     write: curate,
   } = useContractWrite({
-    address: process.env.NEXT_PUBLIC_CURATION_CONTRACT_ADDRESS as `0x${string}`,
+    address: contract.Optimism.curationAddress,
     abi: CurationABI,
     functionName: 'curate',
     args: [
       recipient.info.ethAddress as `0x${string}`,
-      process.env.NEXT_PUBLIC_USDT_CONTRACT_ADDRESS as `0x${string}`,
-      parseUnits(amount.toString() as `${number}`, balanceUSDTData?.decimals!),
+      contract.Optimism.tokenAddress,
+      parseUnits(
+        amount.toString() as `${number}`,
+        contract.Optimism.tokenDecimals
+      ),
       `ipfs://${article?.dataHash}`,
     ],
   })
@@ -234,14 +236,15 @@ const USDTProcessingForm: React.FC<Props> = ({
         purpose: 'donation',
         recipientId: recipient.id,
         targetId,
-        chain: CHAIN.POLYGON,
+        chain: CHAIN.OPTIMISM,
         txHash: data.hash,
       },
-      update: (cache) => {
+      update: (cache, result) => {
         updateDonation({
           cache,
           id: article.id,
-          viewer,
+          viewer: isConnectedAddress ? viewer : undefined,
+          txId: result.data?.payTo.transaction.id,
         })
       },
     })

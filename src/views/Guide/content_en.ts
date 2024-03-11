@@ -21,7 +21,7 @@ Currently, ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME} support donation with fiat
 
 *   [How to Withdraw and Process Payment on ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME}](https://matters.town/@hi176/387119?locale=en)
 
-If you want to log in, bind wallets, or process USDT-Polygon payments on phone, please refer to our guide for cell phones, which will answer most of your questions.
+If you want to log in, bind wallets, or process USDT-Optimism payments on phone, please refer to our guide for cell phones, which will answer most of your questions.
 
 *   [Mobile Guide for Crypto Wallet and Payment](https://matters.town/@hi176/387120?locale=en)
 

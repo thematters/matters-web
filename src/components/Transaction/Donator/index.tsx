@@ -19,15 +19,11 @@ interface DonatorProps {
 }
 
 const Donator = ({ user }: DonatorProps) => {
-  if (!user) {
-    return null
-  }
-
   return (
     <UserDigest.Mini
       textSize="md"
       textWeight="md"
-      user={user}
+      user={user || undefined}
       hasDisplayName
       hasAvatar
       avatarSize="md"

@@ -7,9 +7,7 @@ export const ARTICLE_DONATORS = gql`
     article: node(input: { id: $id }) {
       ... on Article {
         id
-        donations: transactionsReceivedBy(
-          input: { first: 10, purpose: donation, after: $after }
-        ) {
+        donations(input: { first: 10, after: $after }) {
           totalCount
           pageInfo {
             startCursor
@@ -19,7 +17,8 @@ export const ARTICLE_DONATORS = gql`
           edges {
             cursor
             node {
-              ... on User {
+              id
+              sender {
                 id
                 ...UserDigestRichUserPublic
                 ...UserDigestRichUserPrivate
