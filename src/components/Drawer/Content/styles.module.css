@@ -2,4 +2,8 @@
   height: calc(100vh - 86px);
   padding: 0 var(--spacing-loose) 0 var(--spacing-xx-loose);
   overflow-y: auto;
+
+  &.fixedWidth {
+    width: 27.5rem;
+  }
 }

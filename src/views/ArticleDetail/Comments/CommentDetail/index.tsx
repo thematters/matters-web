@@ -10,7 +10,6 @@ import { CommentDetailQuery } from '~/gql/graphql'
 
 import { Placeholder } from '../Placeholder'
 import { COMMENT_DETAIL } from './gql'
-import styles from './styles.module.css'
 
 const CommentDetail = () => {
   /**
@@ -111,7 +110,7 @@ const CommentDetail = () => {
   const comment = data?.node as ThreadCommentType
 
   return (
-    <section className={styles.container}>
+    <section>
       <ThreadCommentBeta
         comment={comment}
         type="article"
