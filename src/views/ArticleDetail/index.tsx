@@ -369,18 +369,18 @@ const ArticleDetail = ({
   const { getQuery, router, routerLang } = useRoute()
   const [needRefetchData, setNeedRefetchData] = useState(false)
   const mediaHash = getQuery('mediaHash')
+
+  /**
+   * fetch public data, by mediaHash as first priority
+   */
+  const isQueryByHash = !!(
+    (mediaHash && isMediaHashPossiblyValid(mediaHash))
+    // && !articleId
+  )
+  // fallback to articleId only when no valid mediaHash found
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
-
-  /**
-   * fetch public data
-   */
-  const isQueryByHash = !!(
-    mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
-  )
 
   // backward compatible with:
   // - `/:username:/:articleId:-:slug:-:mediaHash`
