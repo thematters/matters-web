@@ -28,9 +28,7 @@ type SubmitButtonProps = {
 
   approveWrite?: () => void
   switchToTargetNetwork: () => void
-  switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
-  back: () => void
 }
 
 const WrapperButton: React.FC<

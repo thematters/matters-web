@@ -169,14 +169,8 @@ const DonationDialogContent = ({
           recipient={recipient}
           article={article}
           submitCallback={setAmountCallback}
-          switchToCurrencyChoice={() => {
-            forward('currencyChoice')
-          }}
           switchToAddCredit={() => {
             forward('addCredit')
-          }}
-          back={() => {
-            forward('currencyChoice')
           }}
           setTabUrl={setTabUrl}
           setTx={setTx}

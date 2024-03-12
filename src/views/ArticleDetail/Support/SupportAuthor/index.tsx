@@ -6,7 +6,7 @@ import { Spinner, useStep, ViewerContext } from '~/components'
 import { PayToMutation } from '~/gql/graphql'
 
 import DonationTabs, { CurrencyType } from './Tabs'
-import { BaseSupportAuthorProps } from './types'
+import { BaseSupportAuthorProps, Step as SupportStep } from './types'
 
 interface SetAmountCallbackValues {
   amount: number
@@ -21,16 +21,6 @@ const DynamicPayToFormSetAmount = dynamic(
 export type SupportAuthorProps = BaseSupportAuthorProps & {
   updateSupportStep: (step: SupportStep) => void
 }
-
-export type SupportStep =
-  | 'setAmount'
-  | 'topup'
-  | 'currencyChoice'
-  | 'confirm'
-  | 'complete'
-  | 'processing'
-  | 'resetPassword'
-  | 'setPaymentPassword'
 
 export const SupportAuthor = (props: SupportAuthorProps) => {
   const { recipient, targetId, article, updateSupportStep } = props
@@ -79,14 +69,8 @@ export const SupportAuthor = (props: SupportAuthorProps) => {
             recipient={recipient}
             article={article}
             submitCallback={setAmountCallback}
-            switchToCurrencyChoice={() => {
-              forward('currencyChoice')
-            }}
             switchToAddCredit={() => {
               forward('topup')
-            }}
-            back={() => {
-              forward('currencyChoice')
             }}
             setTabUrl={setTabUrl}
             setTx={setTx}

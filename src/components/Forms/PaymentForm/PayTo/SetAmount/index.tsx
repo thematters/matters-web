@@ -25,7 +25,6 @@ import {
 import {
   Button,
   CopyToClipboard,
-  Dialog,
   Form,
   IconCopy16,
   LanguageContext,
@@ -66,9 +65,7 @@ interface FormProps {
   recipient: UserDonationRecipientFragment
   article: NonNullable<ArticleDetailPublicQuery['article']>
   submitCallback: (values: SetAmountCallbackValues) => void
-  switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
-  back: () => void
   setTabUrl: (url: string) => void
   setTx: (tx: PayToMutation['payTo']['transaction']) => void
   targetId: string
@@ -96,9 +93,7 @@ const SetAmount: React.FC<FormProps> = ({
   recipient,
   article,
   submitCallback,
-  switchToCurrencyChoice,
   switchToAddCredit,
-  back,
   setTabUrl,
   setTx,
   targetId,
@@ -270,7 +265,8 @@ const SetAmount: React.FC<FormProps> = ({
   // go back to previous step if wallet is locked
   useEffect(() => {
     if (currency === CURRENCY.USDT && !address) {
-      switchToCurrencyChoice()
+      // TODO: better fallback handling
+      // switchToCurrencyChoice()
     }
   }, [address])
 
@@ -382,59 +378,53 @@ const SetAmount: React.FC<FormProps> = ({
     allowanceLoading,
     approveWrite,
     switchToTargetNetwork,
-    switchToCurrencyChoice,
     switchToAddCredit,
-    back,
   }
 
   return (
-    <>
-      <Dialog.Content noSpacing>
-        {InnerForm}
+    <section className={styles.container}>
+      {InnerForm}
 
-        {isUSDT && !isConnectedAddress && (
-          <>
-            <p className={styles.reconnectHint}>
-              <FormattedMessage
-                defaultMessage="The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: "
-                id="pKkpI9"
-              />
-              <CopyToClipboard
-                text={viewer.info.ethAddress || ''}
-                successMessage={
-                  <FormattedMessage
-                    defaultMessage="Address copied"
-                    id="+aMAeT"
-                  />
-                }
-              >
-                {({ copyToClipboard }) => (
-                  <Button
-                    spacing={['xtight', 'xtight']}
-                    aria-label={intl.formatMessage({
-                      defaultMessage: 'Copy',
-                      id: '4l6vz1',
-                    })}
-                    onClick={copyToClipboard}
+      {/* TODO: Will update in set USDT amount step */}
+      {isUSDT && !isConnectedAddress && (
+        <>
+          <p className={styles.reconnectHint}>
+            <FormattedMessage
+              defaultMessage="The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: "
+              id="pKkpI9"
+            />
+            <CopyToClipboard
+              text={viewer.info.ethAddress || ''}
+              successMessage={
+                <FormattedMessage defaultMessage="Address copied" id="+aMAeT" />
+              }
+            >
+              {({ copyToClipboard }) => (
+                <Button
+                  spacing={['xtight', 'xtight']}
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Copy',
+                    id: '4l6vz1',
+                  })}
+                  onClick={copyToClipboard}
+                >
+                  <TextIcon
+                    icon={<IconCopy16 color="black" size="xs" />}
+                    color="black"
+                    textPlacement="left"
                   >
-                    <TextIcon
-                      icon={<IconCopy16 color="black" size="xs" />}
-                      color="black"
-                      textPlacement="left"
-                    >
-                      {maskAddress(viewer.info.ethAddress || '')}
-                    </TextIcon>
-                  </Button>
-                )}
-              </CopyToClipboard>
-            </p>
-          </>
-        )}
+                    {maskAddress(viewer.info.ethAddress || '')}
+                  </TextIcon>
+                </Button>
+              )}
+            </CopyToClipboard>
+          </p>
+        </>
+      )}
 
-        <Spacer size="loose" />
-        <SubmitButton mode="rounded" {...submitButtonProps} />
-      </Dialog.Content>
-    </>
+      <Spacer size="loose" />
+      <SubmitButton mode="rounded" {...submitButtonProps} />
+    </section>
   )
 }
 

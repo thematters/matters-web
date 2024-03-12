@@ -4,7 +4,8 @@ import { useIntl } from 'react-intl'
 import { Drawer } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
-import { SupportAuthor, SupportStep } from '../SupportAuthor'
+import { SupportAuthor } from '../SupportAuthor'
+import { Step as SupportStep } from '../SupportAuthor/types'
 
 type SupportDrawerProps = {
   isOpen: boolean

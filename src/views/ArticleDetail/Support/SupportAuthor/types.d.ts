@@ -4,12 +4,10 @@ import {
 } from '~/gql/graphql'
 
 export type Step =
-  | 'currencyChoice'
-  | 'walletSelect'
   | 'setAmount'
-  | 'addCredit'
-  | 'complete'
+  | 'topup'
   | 'confirm'
+  | 'complete'
   | 'processing'
   | 'resetPassword'
   | 'setPaymentPassword'
