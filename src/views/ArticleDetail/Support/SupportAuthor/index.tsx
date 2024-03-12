@@ -22,7 +22,7 @@ export type SupportAuthorProps = BaseSupportAuthorProps & {
   updateSupportStep: (step: SupportStep) => void
 }
 
-export const SupportAuthor = (props: SupportAuthorProps) => {
+const SupportAuthor = (props: SupportAuthorProps) => {
   const { recipient, targetId, article, updateSupportStep } = props
   const viewer = useContext(ViewerContext)
   const [type, setType] = useState<CurrencyType>('credit')
@@ -81,3 +81,5 @@ export const SupportAuthor = (props: SupportAuthorProps) => {
     </>
   )
 }
+
+export default SupportAuthor
