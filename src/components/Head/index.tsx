@@ -132,14 +132,6 @@ export const Head: React.FC<HeadProps> = (props) => {
           'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover',
       },
       {
-        name: 'monetization',
-        content: props.paymentPointer || '',
-      },
-      {
-        name: 'googlebot',
-        content: !isProdServingCanonical ? 'noindex, nofollow' : '',
-      },
-      {
         name: 'application-name',
         content: 'Matters',
       },
@@ -231,6 +223,16 @@ export const Head: React.FC<HeadProps> = (props) => {
             }}
             key="ld-json-data"
           />
+        )}
+        {props.paymentPointer && (
+          <meta name="monetization" content={props.paymentPointer} />
+        )}
+        {/* noindex for non-production enviroment */}
+        {!isProdServingCanonical && (
+          <meta name="robots" content="noindex, nofollow" key="robots" />
+        )}
+        {!isProdServingCanonical && (
+          <meta name="googlebot" content="noindex, nofollow" key="googlebot" />
         )}
       </NextHead>
     </>
