@@ -74,7 +74,7 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
         </BindEmailHintDialog>
       )}
       {isUSDT && balanceUSDT <= 0 && (
-        <a href={GUIDE_LINKS.payment[lang]} target="_blank" rel="noreferrer">
+        <a href={GUIDE_LINKS.usdt[lang]} target="_blank" rel="noreferrer">
           <TextIcon size="xs" textDecoration="underline" color="greyDark">
             <Translate
               zh_hant="如何移轉資金到 Optimism？"

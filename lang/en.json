@@ -792,7 +792,7 @@
     "defaultMessage": "Set"
   },
   "HqnUd1": {
-    "defaultMessage": "Add hash from IPFS into compatible reader such as",
+    "defaultMessage": "Add hash from IPFS into compatible reader such as ",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "HxcjQl": {
