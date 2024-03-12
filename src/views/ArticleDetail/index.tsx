@@ -369,6 +369,7 @@ const ArticleDetail = ({
   const { getQuery, router, routerLang } = useRoute()
   const [needRefetchData, setNeedRefetchData] = useState(false)
   const mediaHash = getQuery('mediaHash')
+  const shortHash = getQuery('shortHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
@@ -377,11 +378,11 @@ const ArticleDetail = ({
    * fetch public data
    */
   const isQueryByHash = !!(
-    mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
+    (mediaHash && isMediaHashPossiblyValid(mediaHash))
+    // && !articleId
   )
 
+  // - `/a/:shortHash`
   // backward compatible with:
   // - `/:username:/:articleId:-:slug:-:mediaHash`
   // - `/:username:/:articleId:`
@@ -391,6 +392,7 @@ const ArticleDetail = ({
     {
       variables: {
         mediaHash,
+        shortHash,
         language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
@@ -455,7 +457,7 @@ const ArticleDetail = ({
       await loadPrivate()
       setNeedRefetchData(false)
     })()
-  }, [mediaHash])
+  }, [mediaHash, shortHash])
 
   // fetch private data when mediaHash of public data is changed
   useEffect(() => {
@@ -621,18 +623,18 @@ const ArticleDetail = ({
 const ArticleDetailOuter = () => {
   const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
+  const shortHash = getQuery('shortHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
 
   const isQueryByHash = !!(
-    mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
+    (mediaHash && isMediaHashPossiblyValid(mediaHash))
+    // && !articleId
   )
 
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS,
-    { variables: { mediaHash }, skip: !isQueryByHash }
+    { variables: { mediaHash, shortHash }, skip: !isQueryByHash }
   )
   const resultByNodeId = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID,
