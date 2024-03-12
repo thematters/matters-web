@@ -146,6 +146,10 @@
     "defaultMessage": "去看看",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
+  "1U/MPD": {
+    "defaultMessage": "余额：",
+    "description": "src/components/Balance/index.tsx"
+  },
   "1Z1M77": {
     "defaultMessage": "尚无阅读记录",
     "description": "src/views/Me/History/index.tsx"
@@ -726,10 +730,6 @@
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
-  "FKHNZb": {
-    "defaultMessage": "余额：",
-    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
-  },
   "FOOymB": {
     "defaultMessage": "还没有成员",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
@@ -893,10 +893,6 @@
   "J6f6iN": {
     "defaultMessage": "评论数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
-  },
-  "JGLi9Y": {
-    "defaultMessage": "充值",
-    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
   "JTWayV": {
     "defaultMessage": "添加描述",
@@ -1157,6 +1153,10 @@
   "P+sWM0": {
     "defaultMessage": "教学指南",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
+  },
+  "P2tEEn": {
+    "defaultMessage": "余额不足",
+    "description": "src/components/Balance/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "登录密码",
@@ -1478,6 +1478,9 @@
   "Y+spJC": {
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Y47aYU": {
+    "defaultMessage": "充值"
   },
   "Y7N/Jg": {
     "defaultMessage": "图片边长不得超过 12,000 像素"
@@ -2345,10 +2348,6 @@
   "wm9xNB": {
     "defaultMessage": "{type} 已解绑",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
-  },
-  "wv08Xt": {
-    "defaultMessage": "余额不足",
-    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
   "x7O1/5": {
     "defaultMessage": "ID 已被使用，请修改后再试",

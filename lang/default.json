@@ -146,6 +146,10 @@
     "defaultMessage": "Take a look",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
+  "1U/MPD": {
+    "defaultMessage": "Balance:",
+    "description": "src/components/Balance/index.tsx"
+  },
   "1Z1M77": {
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
@@ -726,10 +730,6 @@
     "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
-  "FKHNZb": {
-    "defaultMessage": "Balance:",
-    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
-  },
   "FOOymB": {
     "defaultMessage": "No members yet",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
@@ -893,10 +893,6 @@
   "J6f6iN": {
     "defaultMessage": "Number of comments",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
-  },
-  "JGLi9Y": {
-    "defaultMessage": "Top up",
-    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
   "JTWayV": {
     "defaultMessage": "Add description",
@@ -1157,6 +1153,10 @@
   "P+sWM0": {
     "defaultMessage": "guide",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
+  },
+  "P2tEEn": {
+    "defaultMessage": "Insufficient balance",
+    "description": "src/components/Balance/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "Password",
@@ -1478,6 +1478,9 @@
   "Y+spJC": {
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Y47aYU": {
+    "defaultMessage": "Top up"
   },
   "Y7N/Jg": {
     "defaultMessage": "Maximum image dimension is 12,000 pixels."
@@ -2345,10 +2348,6 @@
   "wm9xNB": {
     "defaultMessage": "{type} disconnected",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
-  },
-  "wv08Xt": {
-    "defaultMessage": "Insufficient balance",
-    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
   "x7O1/5": {
     "defaultMessage": "This ID has been taken, please try another one",
