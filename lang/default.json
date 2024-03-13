@@ -393,9 +393,6 @@
     "defaultMessage": "Cancelled",
     "description": "src/components/Transaction/State/index.tsx"
   },
-  "6yZXYK": {
-    "defaultMessage": "Forget Payment Password"
-  },
   "70UCEy": {
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -421,6 +418,10 @@
   },
   "7JlauX": {
     "defaultMessage": "Explore"
+  },
+  "7UqcsO": {
+    "defaultMessage": "Forgot transaction password?",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "7VSfs3": {
     "defaultMessage": "Select amount",
@@ -614,6 +615,10 @@
     "defaultMessage": "Language",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
   },
+  "BoN8lF": {
+    "defaultMessage": "Provide support funds to",
+    "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
+  },
   "C3NKBg": {
     "defaultMessage": "Connected to {type}",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
@@ -632,6 +637,9 @@
   "CD688y": {
     "defaultMessage": "bookmarked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "CPvyYN": {
+    "defaultMessage": "Incorrect password"
   },
   "Cdkhl8": {
     "defaultMessage": "Delete {commentType}",
@@ -1028,6 +1036,10 @@
   "LklXfd": {
     "defaultMessage": "Payment Pointer"
   },
+  "LlyrEA": {
+    "defaultMessage": "Transaction in progress, please wait",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "LmiUWG": {
     "defaultMessage": "You do not have permissionn to perform this operation",
     "description": "FORBIDDEN_BY_TARGET_STATE"
@@ -1201,6 +1213,10 @@
   "QZXKhG": {
     "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "QfrKA6": {
+    "defaultMessage": "Back",
+    "description": "src/components/Forms/PaymentForm"
   },
   "R7yHDl": {
     "defaultMessage": "Circle Revenue",
@@ -2474,6 +2490,10 @@
   },
   "zQvVDJ": {
     "defaultMessage": "All"
+  },
+  "zaY8Cu": {
+    "defaultMessage": "Enter transaction password",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."
