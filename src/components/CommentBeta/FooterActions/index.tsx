@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -94,6 +94,7 @@ const BaseFooterActions = ({
 }: FooterActionsProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
+  const formWrapperRef = useRef<HTMLDivElement>(null)
 
   const [showForm, setShowForm] = useState(false)
   const toggleShowForm = () => setShowForm(!showForm)
@@ -150,8 +151,28 @@ const BaseFooterActions = ({
     inCard,
   }
 
+  useEffect(() => {
+    setTimeout(() => {
+      if (showForm && formWrapperRef.current) {
+        const editor = formWrapperRef.current.querySelector(
+          '.tiptap.ProseMirror'
+        )
+        if (!editor) {
+          return
+        }
+
+        // focus on end of the comment editor
+        // ref: https://stackoverflow.com/a/69727327
+        let sel = window.getSelection()
+        sel?.selectAllChildren(editor)
+        sel?.collapseToEnd()
+      }
+    })
+  }, [showForm])
+
   // customize case for banned user
   const replyCustomButtonProps = viewer.isBanned ? { onClick: forbid } : {}
+  const isViewerOwnComment = viewer.id === comment.author.id
 
   return (
     <>
@@ -207,7 +228,7 @@ const BaseFooterActions = ({
           )}
         </section>
       </footer>
-      <section>
+      <section ref={formWrapperRef}>
         {showForm && (
           <>
             <Spacer size="base" />
@@ -219,11 +240,15 @@ const BaseFooterActions = ({
               submitCallback={submitCallback}
               closeCallback={() => setShowForm(false)}
               isInCommentDetail={isInCommentDetail}
-              defaultContent={`${makeMentionElement(
-                comment.author.id,
-                comment.author.userName || '',
-                comment.author.displayName || ''
-              )} `}
+              defaultContent={
+                !isViewerOwnComment
+                  ? `${makeMentionElement(
+                      comment.author.id,
+                      comment.author.userName || '',
+                      comment.author.displayName || ''
+                    )} `
+                  : ''
+              }
             />
           </>
         )}

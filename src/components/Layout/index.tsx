@@ -91,7 +91,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
       {showAside && (
         <aside className={styles.aside}>
           <Media greaterThanOrEqual="lg">
-            <Sticky enabled top={0}>
+            <Sticky enabled top={0} enableTransforms={false}>
               <section className={styles.content}>
                 <section className={styles.top}>
                   {!inEditor && <SearchBar />}
