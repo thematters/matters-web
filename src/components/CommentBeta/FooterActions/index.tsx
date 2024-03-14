@@ -152,6 +152,7 @@ const BaseFooterActions = ({
 
   // customize case for banned user
   const replyCustomButtonProps = viewer.isBanned ? { onClick: forbid } : {}
+  const isViewerOwnComment = viewer.id === comment.author.id
 
   return (
     <>
@@ -219,11 +220,15 @@ const BaseFooterActions = ({
               submitCallback={submitCallback}
               closeCallback={() => setShowForm(false)}
               isInCommentDetail={isInCommentDetail}
-              defaultContent={`${makeMentionElement(
-                comment.author.id,
-                comment.author.userName || '',
-                comment.author.displayName || ''
-              )} `}
+              defaultContent={
+                !isViewerOwnComment
+                  ? `${makeMentionElement(
+                      comment.author.id,
+                      comment.author.userName || '',
+                      comment.author.displayName || ''
+                    )} `
+                  : ''
+              }
             />
           </>
         )}
