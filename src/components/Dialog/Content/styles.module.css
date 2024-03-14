@@ -40,6 +40,10 @@
   padding-bottom: 0;
 }
 
+.noSpacingTop {
+  padding-top: 0;
+}
+
 .noMaxHeight {
   max-height: none;
 }

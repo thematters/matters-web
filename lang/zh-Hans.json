@@ -30,9 +30,6 @@
   "+aMAeT": {
     "defaultMessage": "地址已复制"
   },
-  "+bwe8v": {
-    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
-  },
   "+cS08C": {
     "defaultMessage": "确认要将“{article}”从选集中移出吗？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -148,6 +145,10 @@
   "1QrwIl": {
     "defaultMessage": "去看看",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
+  "1U/MPD": {
+    "defaultMessage": "余额：",
+    "description": "src/components/Balance/index.tsx"
   },
   "1Z1M77": {
     "defaultMessage": "尚无阅读记录",
@@ -420,6 +421,10 @@
   },
   "7JlauX": {
     "defaultMessage": "指南"
+  },
+  "7VSfs3": {
+    "defaultMessage": "选择支持金额",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
   "7WXDhH": {
     "defaultMessage": "确认要删除草稿吗？",
@@ -1149,6 +1154,10 @@
     "defaultMessage": "教学指南",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
+  "P2tEEn": {
+    "defaultMessage": "余额不足",
+    "description": "src/components/Balance/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "登录密码",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1285,6 +1294,10 @@
   "TSDiqB": {
     "defaultMessage": "付费人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "TX5UzL": {
+    "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
   },
   "Tgd5id": {
     "defaultMessage": "支持金额超出授权额度"
@@ -1465,6 +1478,9 @@
   "Y+spJC": {
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Y47aYU": {
+    "defaultMessage": "充值"
   },
   "Y7N/Jg": {
     "defaultMessage": "图片边长不得超过 12,000 像素"
@@ -1714,6 +1730,9 @@
   },
   "eY3YIa": {
     "defaultMessage": "复制评论"
+  },
+  "eZ0m39": {
+    "defaultMessage": "请输入金额"
   },
   "enMIYK": {
     "defaultMessage": "我的"
@@ -2277,6 +2296,10 @@
     "defaultMessage": "广播",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "vmx+TU": {
+    "defaultMessage": "信用卡",
+    "description": "src/views/ArticleDetail/SupportAuthor/Tabs/index.tsx"
+  },
   "vsD2wm": {
     "defaultMessage": "重置你的登录密码",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -2370,9 +2393,6 @@
   "y0b6Kp": {
     "defaultMessage": "付费",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "y1AhBH": {
-    "defaultMessage": "输入金额"
   },
   "y4Lyf1": {
     "defaultMessage": "该名称已被其他用户使用",

@@ -4,7 +4,7 @@ import { Button, IconEdit20, TextIcon } from '~/components'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
-import { useEditArticleDetailSupportSetting } from '../../Hook'
+import { useEditArticleDetailSupportSetting } from '../../../Hook'
 
 interface EditCopyButtonProps {
   article: NonNullable<ArticleDetailPublicQuery['article']>

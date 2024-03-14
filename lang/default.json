@@ -30,9 +30,6 @@
   "+aMAeT": {
     "defaultMessage": "Address copied"
   },
-  "+bwe8v": {
-    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
-  },
   "+cS08C": {
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -148,6 +145,10 @@
   "1QrwIl": {
     "defaultMessage": "Take a look",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
+  "1U/MPD": {
+    "defaultMessage": "Balance:",
+    "description": "src/components/Balance/index.tsx"
   },
   "1Z1M77": {
     "defaultMessage": "No data yet",
@@ -420,6 +421,10 @@
   },
   "7JlauX": {
     "defaultMessage": "Explore"
+  },
+  "7VSfs3": {
+    "defaultMessage": "Select amount",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
   "7WXDhH": {
     "defaultMessage": "Are you sure you want to delete draft?",
@@ -1149,6 +1154,10 @@
     "defaultMessage": "guide",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
+  "P2tEEn": {
+    "defaultMessage": "Insufficient balance",
+    "description": "src/components/Balance/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1285,6 +1294,10 @@
   "TSDiqB": {
     "defaultMessage": "Subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "TX5UzL": {
+    "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
   },
   "Tgd5id": {
     "defaultMessage": "Transfer amount exceeds allowance"
@@ -1465,6 +1478,9 @@
   "Y+spJC": {
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Y47aYU": {
+    "defaultMessage": "Top up"
   },
   "Y7N/Jg": {
     "defaultMessage": "Maximum image dimension is 12,000 pixels."
@@ -1714,6 +1730,9 @@
   },
   "eY3YIa": {
     "defaultMessage": "Copy comment"
+  },
+  "eZ0m39": {
+    "defaultMessage": "Enter the amount"
   },
   "enMIYK": {
     "defaultMessage": "My Page"
@@ -2277,6 +2296,10 @@
     "defaultMessage": "New broadcasts",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "vmx+TU": {
+    "defaultMessage": "Credit card",
+    "description": "src/views/ArticleDetail/SupportAuthor/Tabs/index.tsx"
+  },
   "vsD2wm": {
     "defaultMessage": "reset your login password",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
@@ -2370,9 +2393,6 @@
   "y0b6Kp": {
     "defaultMessage": "Pay",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "y1AhBH": {
-    "defaultMessage": "Enter a custom amount"
   },
   "y4Lyf1": {
     "defaultMessage": "This name is already taken.",

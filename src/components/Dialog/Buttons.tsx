@@ -4,7 +4,7 @@ import { Button, ButtonProps, IconSpinner16, TextIcon } from '~/components'
 
 export type DialogTextButtonProps = {
   text: React.ReactNode
-  color?: 'greyDarker' | 'green' | 'red'
+  color?: 'greyDarker' | 'green' | 'red' | 'black'
   loading?: boolean
 } & ButtonProps
 
@@ -36,6 +36,13 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
         ...buttonProps,
         textColor: 'red',
         textActiveColor: 'redDark',
+      }
+      break
+    case 'red':
+      buttonProps = {
+        ...buttonProps,
+        textColor: 'black',
+        textActiveColor: 'greyDarker',
       }
       break
   }

@@ -28,9 +28,7 @@ type SubmitButtonProps = {
 
   approveWrite?: () => void
   switchToTargetNetwork: () => void
-  switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
-  back: () => void
 }
 
 const WrapperButton: React.FC<
@@ -39,7 +37,7 @@ const WrapperButton: React.FC<
   if (mode === 'text') {
     return <Dialog.TextButton {...restProps} />
   } else {
-    return <Dialog.RoundedButton {...restProps} />
+    return <Dialog.RoundedButton {...restProps} color="white" bgColor="green" />
   }
 }
 

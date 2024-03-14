@@ -25,7 +25,6 @@ import {
 import {
   Button,
   CopyToClipboard,
-  Dialog,
   Form,
   IconCopy16,
   LanguageContext,
@@ -53,7 +52,6 @@ import {
 
 // import CivicLikerButton from '../CivicLikerButton'
 import SetAmountBalance from './SetAmountBalance'
-import SetAmountHeader from './SetAmountHeader'
 import styles from './styles.module.css'
 import SubmitButton from './SubmitButton'
 
@@ -67,9 +65,7 @@ interface FormProps {
   recipient: UserDonationRecipientFragment
   article: NonNullable<ArticleDetailPublicQuery['article']>
   submitCallback: (values: SetAmountCallbackValues) => void
-  switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
-  back: () => void
   setTabUrl: (url: string) => void
   setTx: (tx: PayToMutation['payTo']['transaction']) => void
   targetId: string
@@ -97,9 +93,7 @@ const SetAmount: React.FC<FormProps> = ({
   recipient,
   article,
   submitCallback,
-  switchToCurrencyChoice,
   switchToAddCredit,
-  back,
   setTabUrl,
   setTx,
   targetId,
@@ -245,8 +239,9 @@ const SetAmount: React.FC<FormProps> = ({
       <section>
         <Spacer size="base" />
         <FormattedMessage
-          defaultMessage="Stripe will process your payment, so you can support the author wherever you are."
-          id="+bwe8v"
+          defaultMessage="Payment will be processed by Stripe, allowing your support to be unrestricted by region."
+          id="TX5UzL"
+          description="src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
         />
       </section>
     ) : null
@@ -270,7 +265,8 @@ const SetAmount: React.FC<FormProps> = ({
   // go back to previous step if wallet is locked
   useEffect(() => {
     if (currency === CURRENCY.USDT && !address) {
-      switchToCurrencyChoice()
+      // TODO: better fallback handling
+      // switchToCurrencyChoice()
     }
   }, [address])
 
@@ -291,15 +287,6 @@ const SetAmount: React.FC<FormProps> = ({
    */
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <SetAmountHeader
-        currency={currency}
-        isConnectedAddress={isConnectedAddress}
-        isUnsupportedNetwork={isUnsupportedNetwork}
-        targetChainName={targetNetork.name}
-        switchToCurrencyChoice={switchToCurrencyChoice}
-        switchToTargetNetwork={switchToTargetNetwork}
-      />
-
       <SetAmountBalance
         currency={currency}
         balanceUSDT={balanceUSDT}
@@ -391,83 +378,53 @@ const SetAmount: React.FC<FormProps> = ({
     allowanceLoading,
     approveWrite,
     switchToTargetNetwork,
-    switchToCurrencyChoice,
     switchToAddCredit,
-    back,
   }
 
   return (
-    <>
-      <Dialog.Header
-        title={<FormattedMessage defaultMessage="Support Author" id="ezYuE2" />}
-      />
+    <section className={styles.container}>
+      {InnerForm}
 
-      <Dialog.Content>
-        {InnerForm}
-
-        {isUSDT && !isConnectedAddress && (
-          <>
-            <p className={styles.reconnectHint}>
-              <FormattedMessage
-                defaultMessage="The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: "
-                id="pKkpI9"
-              />
-              <CopyToClipboard
-                text={viewer.info.ethAddress || ''}
-                successMessage={
-                  <FormattedMessage
-                    defaultMessage="Address copied"
-                    id="+aMAeT"
-                  />
-                }
-              >
-                {({ copyToClipboard }) => (
-                  <Button
-                    spacing={['xtight', 'xtight']}
-                    aria-label={intl.formatMessage({
-                      defaultMessage: 'Copy',
-                      id: '4l6vz1',
-                    })}
-                    onClick={copyToClipboard}
+      {/* TODO: Will update in set USDT amount step */}
+      {isUSDT && !isConnectedAddress && (
+        <>
+          <p className={styles.reconnectHint}>
+            <FormattedMessage
+              defaultMessage="The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: "
+              id="pKkpI9"
+            />
+            <CopyToClipboard
+              text={viewer.info.ethAddress || ''}
+              successMessage={
+                <FormattedMessage defaultMessage="Address copied" id="+aMAeT" />
+              }
+            >
+              {({ copyToClipboard }) => (
+                <Button
+                  spacing={['xtight', 'xtight']}
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Copy',
+                    id: '4l6vz1',
+                  })}
+                  onClick={copyToClipboard}
+                >
+                  <TextIcon
+                    icon={<IconCopy16 color="black" size="xs" />}
+                    color="black"
+                    textPlacement="left"
                   >
-                    <TextIcon
-                      icon={<IconCopy16 color="black" size="xs" />}
-                      color="black"
-                      textPlacement="left"
-                    >
-                      {maskAddress(viewer.info.ethAddress || '')}
-                    </TextIcon>
-                  </Button>
-                )}
-              </CopyToClipboard>
-            </p>
-          </>
-        )}
-      </Dialog.Content>
+                    {maskAddress(viewer.info.ethAddress || '')}
+                  </TextIcon>
+                </Button>
+              )}
+            </CopyToClipboard>
+          </p>
+        </>
+      )}
 
-      <Dialog.Footer
-        btns={
-          <>
-            <SubmitButton mode="rounded" {...submitButtonProps} />
-            <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
-              color="greyDarker"
-              onClick={back}
-            />
-          </>
-        }
-        smUpBtns={
-          <>
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
-              color="greyDarker"
-              onClick={back}
-            />
-            <SubmitButton mode="text" {...submitButtonProps} />
-          </>
-        }
-      />
-    </>
+      <Spacer size="loose" />
+      <SubmitButton mode="rounded" {...submitButtonProps} />
+    </section>
   )
 }
 
