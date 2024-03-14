@@ -13,8 +13,18 @@ interface SetAmountCallbackValues {
   currency: CURRENCY
 }
 
+interface SetAmountOpenTabCallbackValues {
+  window: Window
+  transaction: PayToMutation['payTo']['transaction']
+}
+
 const DynamicPayToFormSetAmount = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/SetAmount'),
+  { loading: () => <Spinner /> }
+)
+
+const DynamicPayToFormConfirm = dynamic(
+  () => import('~/components/Forms/PaymentForm/PayTo/Confirm'),
   { loading: () => <Spinner /> }
 )
 
@@ -25,6 +35,7 @@ export type SupportAuthorProps = BaseSupportAuthorProps & {
 const SupportAuthor = (props: SupportAuthorProps) => {
   const { recipient, targetId, article, updateSupportStep } = props
   const viewer = useContext(ViewerContext)
+  const [, setWindowRef] = useState<Window | undefined>(undefined)
   const [type, setType] = useState<CurrencyType>('credit')
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
 
@@ -33,13 +44,13 @@ const SupportAuthor = (props: SupportAuthorProps) => {
     updateSupportStep(step)
   }
 
-  const [, setAmount] = useState<number>(0)
-  const [, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
+  const [amount, setAmount] = useState<number>(0)
+  const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
 
-  // const [payToTx, setPayToTx] =
-  //   useState<Omit<PayToMutation['payTo']['transaction'], '__typename'>>()
-  const [, setTabUrl] = useState('')
-  const [, setTx] = useState<PayToMutation['payTo']['transaction']>()
+  const [, setPayToTx] =
+    useState<Omit<PayToMutation['payTo']['transaction'], '__typename'>>()
+  const [tabUrl, setTabUrl] = useState('')
+  const [tx, setTx] = useState<PayToMutation['payTo']['transaction']>()
 
   const setAmountCallback = (values: SetAmountCallbackValues) => {
     setAmount(values.amount)
@@ -53,7 +64,14 @@ const SupportAuthor = (props: SupportAuthorProps) => {
     }
   }
 
+  const setAmountOpenTabCallback = (values: SetAmountOpenTabCallbackValues) => {
+    setWindowRef(values.window)
+    setPayToTx(values.transaction)
+    forward('processing')
+  }
+
   const isSetAmount = currStep === 'setAmount'
+  const isConfirm = currStep === 'confirm'
 
   return (
     <>
@@ -77,6 +95,21 @@ const SupportAuthor = (props: SupportAuthorProps) => {
             targetId={targetId}
           />
         </>
+      )}
+      {isConfirm && (
+        <DynamicPayToFormConfirm
+          article={article}
+          amount={amount}
+          currency={currency}
+          recipient={recipient}
+          switchToSetAmount={() => forward('setAmount')}
+          submitCallback={() => forward('processing')}
+          switchToResetPassword={() => forward('resetPassword')}
+          targetId={targetId}
+          openTabCallback={setAmountOpenTabCallback}
+          tabUrl={tabUrl}
+          tx={tx}
+        />
       )}
     </>
   )

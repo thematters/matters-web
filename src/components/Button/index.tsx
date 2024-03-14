@@ -125,7 +125,7 @@ type ButtonBgActiveColor = Extract<
 
 type ButtonBorderActiveColor = Extract<
   ButtonColor,
-  'greenDark' | 'black' | 'greyLight'
+  'greenDark' | 'black' | 'greyLight' | 'grey'
 >
 
 export type ButtonProps = {

@@ -11,14 +11,12 @@ import {
 } from '~/common/enums'
 import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
-  Button,
   Dialog,
   Form,
   // IconExternalLink16,
   LanguageContext,
+  ResetPaymentPasswordDialog,
   Spinner,
-  TextIcon,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -49,7 +47,6 @@ interface FormProps {
   submitCallback: () => void
   switchToSetAmount: () => void
   switchToResetPassword: () => void
-  switchToCurrencyChoice: () => void
   openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
   tabUrl?: string
   tx?: PayToMutation['payTo']['transaction']
@@ -68,7 +65,6 @@ const Confirm: React.FC<FormProps> = ({
   submitCallback,
   switchToSetAmount,
   switchToResetPassword,
-  switchToCurrencyChoice,
   openTabCallback,
   tabUrl,
   tx,
@@ -99,7 +95,8 @@ const Confirm: React.FC<FormProps> = ({
 
   useEffect(() => {
     if (isUSDT && (!address || isUnsupportedNetwork || !isConnectedAddress)) {
-      switchToCurrencyChoice()
+      // TODO: will update fallback steps in USDT support
+      // switchToCurrencyChoice()
     }
   }, [address, chain])
 
@@ -153,7 +150,17 @@ const Confirm: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
         const [messages, codes] = parseFormSubmitErrors(error as any)
-        setFieldError('password', intl.formatMessage(messages[codes[0]]))
+        if (codes[0] === 'USER_PASSWORD_INVALID') {
+          setFieldError(
+            'password',
+            intl.formatMessage({
+              defaultMessage: 'Incorrect password',
+              id: 'CPvyYN',
+            })
+          )
+        } else {
+          setFieldError('password', intl.formatMessage(messages[codes[0]]))
+        }
         setFieldValue('password', '', false)
       }
     },
@@ -171,6 +178,7 @@ const Confirm: React.FC<FormProps> = ({
           setTouched({ password: true }, shouldValidate)
           setFieldValue('password', value, shouldValidate)
         }}
+        hintAlign="center"
       />
     </Form>
   )
@@ -184,7 +192,7 @@ const Confirm: React.FC<FormProps> = ({
   const balance = data?.viewer?.wallet.balance.HKD || 0
   const isWalletInsufficient = balance < amount
 
-  if (isSubmitting || loading) {
+  if (loading) {
     return (
       <Dialog.Content>
         <Spinner />
@@ -192,96 +200,80 @@ const Confirm: React.FC<FormProps> = ({
     )
   }
 
-  const submitText = isHKD ? (
-    <>
-      <FormattedMessage defaultMessage="Forget Payment Password" id="6yZXYK" />
-    </>
-  ) : isUSDT ? (
-    <Translate zh_hant="確認送出" zh_hans="确认送出" en="Confirm" />
-  ) : (
-    <Translate
-      zh_hant="前往 Liker Land 支付"
-      zh_hans="前往 Liker Land 支付"
-      en="Go to Liker Land for payment"
-    />
-  )
-  const onSubmitLikeCoin = () => {
-    const payWindow = window.open(tabUrl, '_blank')
-    if (payWindow && tx) {
-      openTabCallback({ window: payWindow, transaction: tx })
-    }
-  }
+  // TODO: Will reuse in like-coin support
+  // const onSubmitLikeCoin = () => {
+  //   const payWindow = window.open(tabUrl, '_blank')
+  //   if (payWindow && tx) {
+  //     openTabCallback({ window: payWindow, transaction: tx })
+  //   }
+  // }
 
   return (
-    <>
-      <Dialog.Header
-        title={<FormattedMessage defaultMessage="Support Author" id="ezYuE2" />}
+    <section className={styles.container}>
+      <PaymentInfo
+        amount={amount}
+        currency={currency}
+        recipient={recipient}
+        showLikerID={currency === CURRENCY.LIKE}
+        showEthAddress={currency === CURRENCY.USDT}
       />
 
-      <Dialog.Content>
-        <PaymentInfo
-          amount={amount}
-          currency={currency}
-          recipient={recipient}
-          showLikerID={currency === CURRENCY.LIKE}
-          showEthAddress={currency === CURRENCY.USDT}
-        >
-          <p>
-            <Button onClick={switchToSetAmount}>
-              <TextIcon size="xs" textDecoration="underline" color="greyDark">
-                <Translate
-                  zh_hant="修改金額"
-                  zh_hans="修改金额"
-                  en="Amend amount"
-                />
-              </TextIcon>
-            </Button>
+      {isSubmitting && (
+        <>
+          <Spinner noSpacing />
+          <p className={styles.hint}>
+            <FormattedMessage
+              defaultMessage="Transaction in progress, please wait"
+              description="src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+              id="LlyrEA"
+            />
           </p>
-        </PaymentInfo>
+        </>
+      )}
 
-        {currency === CURRENCY.HKD && !isWalletInsufficient && (
-          <>
-            <p className={styles.hint}>
-              <Translate
-                zh_hant="輸入六位數字交易密碼即可完成："
-                zh_hans="输入六位数字交易密码即可完成："
-                en="Please Enter a 6-digit payment password"
-              />
-            </p>
-            {InnerForm}
-          </>
-        )}
-      </Dialog.Content>
+      {isHKD && !isWalletInsufficient && !isSubmitting && (
+        <>
+          <p className={styles.hint}>
+            <FormattedMessage
+              defaultMessage="Enter transaction password"
+              id="zaY8Cu"
+              description="src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+            />
+          </p>
+          {InnerForm}
 
-      <Dialog.Footer
-        btns={
-          <Dialog.RoundedButton
-            text={submitText}
-            color={isHKD ? 'greyDarker' : 'green'}
-            onClick={
-              isHKD
-                ? switchToResetPassword
-                : isUSDT
-                ? submitCallback
-                : onSubmitLikeCoin
-            }
-          />
-        }
-        smUpBtns={
-          <Dialog.TextButton
-            text={submitText}
-            color={isHKD ? 'greyDarker' : 'green'}
-            onClick={
-              isHKD
-                ? switchToResetPassword
-                : isUSDT
-                ? submitCallback
-                : onSubmitLikeCoin
-            }
-          />
-        }
-      />
-    </>
+          <ResetPaymentPasswordDialog>
+            {({ openDialog }) => (
+              <button className={styles.forgetPassword} onClick={openDialog}>
+                <FormattedMessage
+                  defaultMessage="Forgot transaction password?"
+                  id="7UqcsO"
+                  description="src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+                />
+              </button>
+            )}
+          </ResetPaymentPasswordDialog>
+        </>
+      )}
+
+      {!isSubmitting && (
+        <Dialog.RoundedButton
+          color="black"
+          onClick={switchToSetAmount}
+          borderColor="greyLight"
+          borderWidth="sm"
+          textWeight="normal"
+          borderActiveColor="grey"
+          text={
+            <FormattedMessage
+              defaultMessage="Back"
+              id="QfrKA6"
+              description="src/components/Forms/PaymentForm"
+            />
+          }
+        />
+      )}
+    </section>
   )
 }
 

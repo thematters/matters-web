@@ -8,7 +8,6 @@ import {
   CopyToClipboard,
   IconCopy16,
   TextIcon,
-  Translate,
 } from '~/components'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
@@ -35,13 +34,13 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
   return (
     <section className={styles.info}>
       <p className={styles.to}>
-        <Translate
-          zh_hant="你將遞出支持資金給"
-          zh_hans="你将递出支持资金给"
-          en="You will support"
+        <FormattedMessage
+          defaultMessage="Provide support funds to"
+          id="BoN8lF"
+          description="src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
         />
       </p>
-      <Avatar user={recipient} size="xxxl" />
+      <Avatar user={recipient} size="xxxlm" />
       <p className={styles.recipient}>{recipient.displayName}</p>
       {showEthAddress && (
         <div className={styles.address}>

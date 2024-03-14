@@ -393,9 +393,6 @@
     "defaultMessage": "已取消",
     "description": "src/components/Transaction/State/index.tsx"
   },
-  "6yZXYK": {
-    "defaultMessage": "忘記交易密碼"
-  },
   "70UCEy": {
     "defaultMessage": "在行動裝置上使用問題，參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -421,6 +418,10 @@
   },
   "7JlauX": {
     "defaultMessage": "指南"
+  },
+  "7UqcsO": {
+    "defaultMessage": "忘記交易密碼？",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "7VSfs3": {
     "defaultMessage": "選擇支持金額",
@@ -614,6 +615,10 @@
     "defaultMessage": "語言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
   },
+  "BoN8lF": {
+    "defaultMessage": "遞出支持資金給",
+    "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
+  },
   "C3NKBg": {
     "defaultMessage": "{type} 已綁定",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
@@ -632,6 +637,9 @@
   "CD688y": {
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "CPvyYN": {
+    "defaultMessage": "密碼錯誤"
   },
   "Cdkhl8": {
     "defaultMessage": "刪除{commentType}",
@@ -1028,6 +1036,10 @@
   "LklXfd": {
     "defaultMessage": "跨鏈收款地址"
   },
+  "LlyrEA": {
+    "defaultMessage": "交易進行中，請稍候",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "LmiUWG": {
     "defaultMessage": "你無法對此對象進行該操作",
     "description": "FORBIDDEN_BY_TARGET_STATE"
@@ -1201,6 +1213,10 @@
   "QZXKhG": {
     "defaultMessage": "設置圍爐網址（創建後不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "QfrKA6": {
+    "defaultMessage": "上一步",
+    "description": "src/components/Forms/PaymentForm"
   },
   "R7yHDl": {
     "defaultMessage": "圍爐營收",
@@ -2474,6 +2490,10 @@
   },
   "zQvVDJ": {
     "defaultMessage": "全部"
+  },
+  "zaY8Cu": {
+    "defaultMessage": "輸入交易密碼",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
