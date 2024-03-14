@@ -441,7 +441,7 @@ const BaseArticleDetail = ({
               privateFetched={privateFetched}
               hasFingerprint={canReadFullContent}
               lock={lock}
-              showCommentToolbar={showCommentToolbar}
+              showCommentToolbar={showCommentToolbar && article.canComment}
               openCommentsDialog={
                 article.commentCount > 0 ? openCommentsDialog : undefined
               }
