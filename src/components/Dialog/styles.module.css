@@ -1,7 +1,4 @@
 .overlay {
-  @mixin expand-to-container;
-
-  content: '';
   background: rgb(0 0 0 / 40%);
   will-change: opacity;
 }
@@ -15,14 +12,10 @@
   border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
   will-change: transform, top;
 
-  &::before {
-    position: absolute;
-    top: 100%;
-    right: 0;
-    left: 0;
-    height: 300vh;
-    content: '';
-    background: var(--color-white);
+  & :nth-last-child(1 of [data-dialog-entity='true']) {
+    @media (--sm-down) {
+      padding-bottom: var(--spacing-xx-loose);
+    }
   }
 
   &.bgGreyLighter {
@@ -42,17 +35,18 @@
   @media (--sm-up) {
     border-radius: var(--spacing-x-tight);
     will-change: opacity;
-
-    &::before {
-      display: none;
-    }
   }
+}
+
+.scrollable {
+  overflow: auto !important;
 }
 
 .handle {
   position: absolute;
   top: 0;
   left: 50%;
+  z-index: calc(var(--z-index-dialog) + 1);
   padding: var(--spacing-x-tight);
   transform: translateX(-50%);
 

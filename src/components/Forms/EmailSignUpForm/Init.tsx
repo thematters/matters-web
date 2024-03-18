@@ -4,10 +4,15 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ERROR_CODES } from '~/common/enums'
+import {
+  ERROR_CODES,
+  REFERRAL_QUERY_REFERRAL_KEY,
+  REFERRAL_STORAGE_REFERRAL_CODE,
+} from '~/common/enums'
 import {
   parseFormSubmitErrors,
   signupCallbackUrl,
+  storage,
   validateEmail,
 } from '~/common/utils'
 import { WalletType } from '~/common/utils'
@@ -15,7 +20,7 @@ import {
   AuthFeedType,
   AuthTabs,
   AuthWalletFeed,
-  DialogBeta,
+  Dialog,
   Form,
   IconLeft20,
   LanguageContext,
@@ -26,6 +31,7 @@ import {
   // TURNSTILE_DEFAULT_SCRIPT_ID,
   TurnstileInstance,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -79,6 +85,12 @@ const Init: React.FC<FormProps> = ({
     }
   )
   const intl = useIntl()
+  const { getQuery } = useRoute()
+  const referralCode =
+    getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
+    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+    undefined
+
   const {
     values,
     errors,
@@ -99,18 +111,15 @@ const Init: React.FC<FormProps> = ({
       }),
     onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
       try {
-        const redirectUrl = signupCallbackUrl(email)
+        const redirectUrl = signupCallbackUrl(email, referralCode)
         await sendCode({
           variables: {
             input: {
               email,
               type: 'register',
-              token:
-                // (viewer.info.group === UserGroup.A && turnstileToken) ||
-                // turnstileRef.current?.getResponse() || // fallback to ReCaptchaContext token
-                turnstileToken
-                  ? `${reCaptchaToken} ${turnstileToken}`
-                  : reCaptchaToken,
+              token: turnstileToken
+                ? `${reCaptchaToken} ${turnstileToken}`
+                : reCaptchaToken,
               redirectUrl,
               language: lang,
             },
@@ -192,7 +201,7 @@ const Init: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <DialogBeta.TextButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={
@@ -211,11 +220,11 @@ const Init: React.FC<FormProps> = ({
 
   return (
     <>
-      <DialogBeta.Header
+      <Dialog.Header
         title={<FormattedMessage defaultMessage="Sign Up" id="39AHJm" />}
         hasSmUpTitle={false}
         leftBtn={
-          <DialogBeta.TextButton
+          <Dialog.TextButton
             text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
             color="greyDarker"
             onClick={back}
@@ -225,7 +234,7 @@ const Init: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <DialogBeta.Content>
+      <Dialog.Content>
         <Media at="sm">{InnerForm}</Media>
         <Media greaterThan="sm">
           <AuthTabs
@@ -239,13 +248,13 @@ const Init: React.FC<FormProps> = ({
           {isNormal && <>{InnerForm}</>}
           {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
         </Media>
-      </DialogBeta.Content>
+      </Dialog.Content>
 
       {isNormal && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
             <section className={styles.footerBtns}>
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={
                   <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
                     <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
@@ -261,9 +270,9 @@ const Init: React.FC<FormProps> = ({
         />
       )}
       {isWallet && !isInPage && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               color="greyDarker"
               text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               onClick={closeDialog}

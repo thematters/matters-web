@@ -17,7 +17,6 @@ import {
 } from '~/common/utils'
 import {
   Dialog,
-  DialogBeta,
   Form,
   LanguageContext,
   useMutation,
@@ -160,7 +159,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   )
 
   const SubmitButton = (
-    <DialogBeta.TextButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={
@@ -173,7 +172,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
 
   return (
     <>
-      <DialogBeta.Header
+      <Dialog.Header
         title={
           <FormattedMessage
             defaultMessage="Email address"
@@ -185,9 +184,9 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         rightBtn={editable ? SubmitButton : undefined}
       />
 
-      <DialogBeta.Content>
+      <Dialog.Content>
         {editable && hasPassword && (
-          <DialogBeta.Content.Message spacingBottom>
+          <Dialog.Content.Message spacingBottom>
             <p>
               <FormattedMessage
                 defaultMessage="For security, we will {resetHint} for this. You can set your password again after verifying new email address."
@@ -206,11 +205,11 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
                 }}
               />
             </p>
-          </DialogBeta.Content.Message>
+          </Dialog.Content.Message>
         )}
 
         {!editable && (
-          <DialogBeta.Content.Message spacingBottom>
+          <Dialog.Content.Message spacingBottom>
             <p>
               <FormattedMessage
                 defaultMessage="Email can be modified up to {count} times per day."
@@ -221,14 +220,14 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
                 }}
               />
             </p>
-          </DialogBeta.Content.Message>
+          </Dialog.Content.Message>
         )}
 
         {InnerForm}
-      </DialogBeta.Content>
+      </Dialog.Content>
 
       {editable && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
             <>
               <Dialog.TextButton
@@ -242,7 +241,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         />
       )}
       {!editable && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
             <>
               <Dialog.TextButton

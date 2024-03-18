@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -103,7 +104,7 @@ const BaseAuthors = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List hasBorder={false}>
         {edges.map(({ node, cursor }, i) => (
-          <List.Item key={cursor}>
+          <List.Item key={node.id}>
             <UserDigest.Rich
               user={node}
               onClick={() =>
@@ -123,16 +124,31 @@ const BaseAuthors = () => {
   )
 }
 
-const Authors = () => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.Title id="allAuthors" />} />
+const Authors = () => {
+  const intl = useIntl()
 
-    <Head title={{ id: 'allAuthors' }} />
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="All Authors" id="ivXY6L" />
+          </Layout.Header.Title>
+        }
+      />
 
-    <Layout.Main.Spacing hasVertical={false}>
-      <BaseAuthors />
-    </Layout.Main.Spacing>
-  </Layout.Main>
-)
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'All Authors',
+          id: 'ivXY6L',
+        })}
+      />
+
+      <Layout.Main.Spacing hasVertical={false}>
+        <BaseAuthors />
+      </Layout.Main.Spacing>
+    </Layout.Main>
+  )
+}
 
 export default Authors

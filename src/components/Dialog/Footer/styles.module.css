@@ -8,7 +8,7 @@
 
   flex-direction: column;
   flex-shrink: 0;
-  padding: var(--spacing-base-loose) var(--spacing-base) var(--spacing-xx-loose);
+  padding: var(--spacing-base-loose) var(--spacing-base) 0;
 
   & > * {
     flex: 1;
@@ -30,12 +30,4 @@
   & > * + * {
     margin-left: var(--spacing-x-loose);
   }
-}
-
-.smUpContentNoSpacingBottom {
-  margin-bottom: 0;
-}
-
-.smUpSpaceBetween {
-  @mixin flex-center-space-between;
 }

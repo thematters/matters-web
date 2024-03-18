@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
@@ -9,13 +9,12 @@ import {
   MAX_SEARCH_KEY_LENGTH,
   Z_INDEX,
 } from '~/common/enums'
-import { getSearchType, toPath, translate } from '~/common/utils'
+import { getSearchType, toPath } from '~/common/utils'
 import {
   Button,
   Dropdown,
   IconClear16,
   IconSearch16,
-  LanguageContext,
   SearchQuickResult,
   useNativeEventListener,
   useRoute,
@@ -57,13 +56,13 @@ interface ClearButtonProps {
 }
 
 const ClearButton = ({ onClick }: ClearButtonProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   return (
     <Button
       size={['2rem', '2rem']}
       type="button"
-      aria-label={translate({ id: 'clear', lang })}
+      aria-label={intl.formatMessage({ defaultMessage: 'Clear', id: '/GCoTA' })}
       onClick={onClick}
     >
       <IconClear16 color="greyDark" />
@@ -176,7 +175,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       onSubmit={(values) => {
         const path = toPath({
           page: 'search',
-          q: encodeURIComponent(values.q.slice(0, MAX_SEARCH_KEY_LENGTH)),
+          q: values.q.slice(0, MAX_SEARCH_KEY_LENGTH),
           type,
         })
 

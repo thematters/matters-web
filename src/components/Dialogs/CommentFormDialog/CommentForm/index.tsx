@@ -3,8 +3,8 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { COMMENT_TYPE_TEXT, TextId } from '~/common/enums'
-import { dom, stripHtml, trimLineBreaks } from '~/common/utils'
+import { COMMENT_TYPE_TEXT } from '~/common/enums'
+import { dom, stripHtml } from '~/common/utils'
 import {
   CommentFormType,
   Dialog,
@@ -35,7 +35,7 @@ export interface CommentFormProps {
   defaultContent?: string | null
   submitCallback?: () => void
   closeDialog: () => void
-  title?: TextId
+  title?: React.ReactNode
   context?: React.ReactNode
 }
 
@@ -50,7 +50,13 @@ const CommentForm: React.FC<CommentFormProps> = ({
   defaultContent,
   submitCallback,
   closeDialog,
-  title = 'putComment',
+  title = (
+    <FormattedMessage
+      defaultMessage="Comment"
+      id="Ix3e3Q"
+      description="src/components/Forms/CommentForm/index.tsx"
+    />
+  ),
   context,
 
   ...props
@@ -77,7 +83,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
     const input = {
       id: commentId,
       comment: {
-        content: trimLineBreaks(content),
+        content,
         replyTo: replyToId,
         articleId,
         circleId,

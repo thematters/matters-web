@@ -4,10 +4,12 @@ import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { parseUnits } from 'viem'
 import { useAccount } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
 import {
+  contract,
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
   WALLET_ERROR_MESSAGES,
@@ -30,7 +32,6 @@ import {
   Spacer,
   Spinner,
   TextIcon,
-  Translate,
   useAllowanceUSDT,
   useApproveUSDT,
   useBalanceUSDT,
@@ -129,18 +130,13 @@ const SetAmount: React.FC<FormProps> = ({
 
   const { data: exchangeRateDate, loading: exchangeRateLoading } =
     useQuery<ExchangeRatesQuery>(EXCHANGE_RATES, {
-      variables: {
-        from: currency,
-        to: quoteCurrency,
-      },
+      variables: { from: currency, to: quoteCurrency },
     })
 
   // HKD balance
   const { data, loading, error } = useQuery<WalletBalanceQuery>(
     WALLET_BALANCE,
-    {
-      fetchPolicy: 'network-only',
-    }
+    { fetchPolicy: 'network-only' }
   )
 
   // USDT balance & allowance
@@ -165,13 +161,6 @@ const SetAmount: React.FC<FormProps> = ({
   const balanceLike = data?.viewer?.liker.total || 0
   const balance = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
   const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
-  const networkError =
-    error ||
-    (isUSDT && !isUnsupportedNetwork
-      ? allowanceError || balanceUSDTError || approveError
-      : undefined)
-      ? WALLET_ERROR_MESSAGES[lang].unknown
-      : ''
 
   // forms
   const {
@@ -230,21 +219,37 @@ const SetAmount: React.FC<FormProps> = ({
     },
   })
 
-  const isBalanceInsufficient = balance < (values.customAmount || values.amount)
+  const value = values.customAmount || values.amount
+  const isBalanceInsufficient = balance < value
+  const isExceededAllowance =
+    allowanceUSDT > 0n &&
+    parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
+  const hasUSDTNetworkError = // TODO: better error handling
+    isUSDT &&
+    !isUnsupportedNetwork &&
+    (allowanceError || balanceUSDTError || approveError)
+  const networkError =
+    error || hasUSDTNetworkError ? (
+      WALLET_ERROR_MESSAGES[lang].unknown
+    ) : isExceededAllowance ? (
+      <FormattedMessage
+        defaultMessage="Transfer amount exceeds allowance"
+        id="Tgd5id"
+      />
+    ) : (
+      ''
+    )
 
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (
       <section>
         <Spacer size="base" />
-        <Translate
-          zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
-          zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
-          en="Stripe will process your payment, so you can support the author wherever you are."
+        <FormattedMessage
+          defaultMessage="Stripe will process your payment, so you can support the author wherever you are."
+          id="+bwe8v"
         />
       </section>
     ) : null
-
-    const value = values.customAmount || values.amount
 
     const rate = _get(exchangeRateDate, 'exchangeRates.0.rate', 0)
     const convertedTotal = formatAmount(value * rate, 2)
@@ -374,6 +379,7 @@ const SetAmount: React.FC<FormProps> = ({
     recipient,
     isValid,
     isSubmitting,
+    isExceededAllowance,
     isBalanceInsufficient,
     isConnectedAddress,
     isUnsupportedNetwork,
@@ -392,7 +398,9 @@ const SetAmount: React.FC<FormProps> = ({
 
   return (
     <>
-      <Dialog.Header title="donation" />
+      <Dialog.Header
+        title={<FormattedMessage defaultMessage="Support Author" id="ezYuE2" />}
+      />
 
       <Dialog.Content>
         {InnerForm}
@@ -400,7 +408,10 @@ const SetAmount: React.FC<FormProps> = ({
         {isUSDT && !isConnectedAddress && (
           <>
             <p className={styles.reconnectHint}>
-              <Translate id="reconnectHint" />
+              <FormattedMessage
+                defaultMessage="The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: "
+                id="pKkpI9"
+              />
               <CopyToClipboard
                 text={viewer.info.ethAddress || ''}
                 successMessage={

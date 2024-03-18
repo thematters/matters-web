@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+import { useIntl } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
@@ -122,32 +123,38 @@ const UserArticles = () => {
 
   const description = stripSpaces(user.info.description)
 
-  const CustomHead = () => (
-    <Head
-      title={{
-        zh_hant: `${user.displayName} 的創作空間站`,
-        zh_hans: `${user.displayName} 的创作空间站`,
-        en: `${user.displayName}'s creative space`,
-      }}
-      // title={`Matters - ${user.displayName} (@${user.userName})`}
-      description={description}
-      // keywords={...} // show user's top10 most used tags?
-      image={
-        user.info.profileCover ||
-        `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${PROFILE_COVER_DEFAULT.src}`
-      }
-      jsonLdData={{
-        '@context': 'https://schema.org',
-        '@type': 'Person',
-        name: user.displayName,
-        description,
-        image:
-          user.avatar ||
-          `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${ICON_AVATAR_DEFAULT.src}`,
-        url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@${user.userName}`,
-      }}
-    />
-  )
+  const CustomHead = () => {
+    const intl = useIntl()
+
+    return (
+      <Head
+        title={intl.formatMessage(
+          {
+            defaultMessage: "{displayName}'s creative space",
+            id: '/usqHn',
+          },
+          { displayName: user.displayName }
+        )}
+        // title={`Matters - ${user.displayName} (@${user.userName})`}
+        description={description}
+        // keywords={...} // show user's top10 most used tags?
+        image={
+          user.info.profileCover ||
+          `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${PROFILE_COVER_DEFAULT.src}`
+        }
+        jsonLdData={{
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: user.displayName,
+          description,
+          image:
+            user.avatar ||
+            `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${ICON_AVATAR_DEFAULT.src}`,
+          url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@${user.userName}`,
+        }}
+      />
+    )
+  }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
@@ -176,8 +183,8 @@ const UserArticles = () => {
           eof
         >
           <List>
-            {articleEdges.map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
+            {articleEdges.map(({ node }, i) => (
+              <List.Item key={node.id}>
                 <ArticleDigestFeed
                   article={node}
                   inUserArticles

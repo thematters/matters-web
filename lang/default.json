@@ -10,6 +10,9 @@
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
+  "+OStJM": {
+    "defaultMessage": "Reset Payment Password"
+  },
   "+S8mxW": {
     "defaultMessage": "Move to top",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
@@ -19,6 +22,9 @@
   },
   "+aMAeT": {
     "defaultMessage": "Address copied"
+  },
+  "+bwe8v": {
+    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
   },
   "+cS08C": {
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
@@ -39,9 +45,15 @@
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/5jk3i": {
+    "defaultMessage": "Circle successfully subscribed."
+  },
   "/BQWEh": {
     "defaultMessage": "Last 1 month",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "/GCoTA": {
+    "defaultMessage": "Clear"
   },
   "/GyMKa": {
     "defaultMessage": "Share Article"
@@ -53,9 +65,12 @@
     "defaultMessage": "Unknown error. Please try again later.",
     "description": "UNKNOWN_ERROR"
   },
-  "/asuIY": {
-    "defaultMessage": "Enter Community",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
+  "/agKbX": {
+    "defaultMessage": "Write a comment",
+    "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
+  },
+  "/faseS": {
+    "defaultMessage": "Share link copied"
   },
   "/jJLYy": {
     "defaultMessage": "Transactions"
@@ -71,6 +86,12 @@
   "/qgntf": {
     "defaultMessage": "Supporters",
     "description": "src/components/ArticleDigest/DropdownActions/DonatorsButton/index.tsx"
+  },
+  "/usqHn": {
+    "defaultMessage": "{displayName}'s creative space"
+  },
+  "0/iEw/": {
+    "defaultMessage": "Manage Communities"
   },
   "0Azlrb": {
     "defaultMessage": "Manage"
@@ -152,12 +173,19 @@
   "20bImY": {
     "defaultMessage": "Discussion"
   },
+  "20yT4t": {
+    "defaultMessage": "Response",
+    "description": "src/components/Editor/Sidebar/Response/index.tsx"
+  },
   "25oM9Q": {
     "defaultMessage": "Sort"
   },
   "2CqWQE": {
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "2D/X90": {
+    "defaultMessage": "Why Optimism?"
   },
   "2DkkhD": {
     "defaultMessage": "Settings - Notifications",
@@ -188,6 +216,9 @@
     "defaultMessage": "Following",
     "description": "src/components/Layout/SideNav/index.tsx"
   },
+  "33oNeg": {
+    "defaultMessage": "[Draft] {draftTitle}"
+  },
   "39AHJm": {
     "defaultMessage": "Sign Up"
   },
@@ -198,15 +229,27 @@
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3fqQHv": {
+    "defaultMessage": "Add tag editor"
+  },
   "3kbIhS": {
     "defaultMessage": "Untitled"
+  },
+  "3lMsOU": {
+    "defaultMessage": "Reapprove to continue"
   },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
+  "3w3CC8": {
+    "defaultMessage": "Link ENS"
+  },
   "3yk8fB": {
     "defaultMessage": "Wallet"
+  },
+  "4118K3": {
+    "defaultMessage": "Optimism is a Layer 2 scaling solution based on Ethereum that can provide faster and cheaper transactions, while ensuring security, making it easier for you to support creators."
   },
   "47FYwb": {
     "defaultMessage": "Cancel"
@@ -217,6 +260,13 @@
   "4KuZ0o": {
     "defaultMessage": "Asset not found",
     "description": "ASSET_NOT_FOUND"
+  },
+  "4RpVDe": {
+    "defaultMessage": "Delete Draft"
+  },
+  "4km7Yc": {
+    "defaultMessage": "Breaking through history! The torch you've ignited will be the most dazzling support on the Nomad's journey. The Firebolt badge signifies your participation in the Nomad Matters and earning the highest-level Firebolt badge.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
   },
   "4l6vz1": {
     "defaultMessage": "Copy"
@@ -232,6 +282,12 @@
   "5FO4vn": {
     "defaultMessage": "You do not have permission to perform this operation"
   },
+  "5IGdjy": {
+    "defaultMessage": "Not using tags yet, add tags now to improve discoverability!"
+  },
+  "5IS+ui": {
+    "defaultMessage": "Support Setting"
+  },
   "5JN+nl": {
     "defaultMessage": "Check your inbox",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
@@ -240,9 +296,15 @@
     "defaultMessage": "This tag is already taken",
     "description": "DUPLICATE_TAG"
   },
+  "5XFd/5": {
+    "defaultMessage": "Manage Circle"
+  },
   "5iii3x": {
     "defaultMessage": "Circle：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "5jlQTx": {
+    "defaultMessage": "Manage Invitation"
   },
   "5sWnog": {
     "defaultMessage": "Liker ID email is already taken.",
@@ -255,6 +317,9 @@
     "defaultMessage": "Lowercase letters, numbers and underscores",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "6/kgzs": {
+    "defaultMessage": "Unsubscribed"
+  },
   "63HuBz": {
     "defaultMessage": "This tag has no manager currently",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -265,6 +330,9 @@
   "6BXcdo": {
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6ErzDk": {
+    "defaultMessage": "Reconnect Wallet"
   },
   "6N2LKY": {
     "defaultMessage": "Please log in again.",
@@ -304,6 +372,9 @@
     "defaultMessage": "Cancelled",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "6yZXYK": {
+    "defaultMessage": "Forget Payment Password"
+  },
   "70UCEy": {
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -311,6 +382,9 @@
   "73iajM": {
     "defaultMessage": "Oops. Something went wrong. Please try again later.",
     "description": "BAD_USER_INPUT"
+  },
+  "76yoL6": {
+    "defaultMessage": "Moonlight Dream"
   },
   "77tYPg": {
     "defaultMessage": "After deletion, the {commentType} will be removed immediately",
@@ -344,6 +418,9 @@
   },
   "8KFsZN": {
     "defaultMessage": "Read Counts"
+  },
+  "8MeJ4b": {
+    "defaultMessage": "Nimbus Ferry"
   },
   "8UWUW8": {
     "defaultMessage": "Collect Article",
@@ -386,6 +463,13 @@
   "9J0iCw": {
     "defaultMessage": "Deleted user"
   },
+  "9OIqBr": {
+    "defaultMessage": "Edit Comment",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
+  "9UNFGm": {
+    "defaultMessage": "Transaction Password"
+  },
   "9Vkz9W": {
     "defaultMessage": "Maximum image area is limited to 100 megapixels (for example, 10,000×10,000 pixels)."
   },
@@ -403,9 +487,6 @@
   },
   "A3g33H": {
     "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
-  },
-  "A41QIy": {
-    "defaultMessage": "Enter Password"
   },
   "A6ozr9": {
     "defaultMessage": "Collection name"
@@ -435,10 +516,6 @@
   "ANA7sk": {
     "defaultMessage": "Maintain",
     "description": "src/views/TagDetail/Owner/index.tsx"
-  },
-  "ANhCde": {
-    "defaultMessage": "Start creating now!",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
   },
   "AVpR3Q": {
     "defaultMessage": "Wallet linked",
@@ -541,6 +618,9 @@
   "D3idYv": {
     "defaultMessage": "Settings"
   },
+  "D9R/ol": {
+    "defaultMessage": "Add articles to your circle"
+  },
   "DP3yqI": {
     "defaultMessage": "Donation count"
   },
@@ -551,6 +631,9 @@
   "DYrDcG": {
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "DjIpR6": {
+    "defaultMessage": "Set Cover"
   },
   "Dq29Hb": {
     "defaultMessage": "You have not connected your email yet. For security, email is required for top-up.",
@@ -571,6 +654,9 @@
     "defaultMessage": "Manage Invitation",
     "description": "src/views/Circle/Settings/index.tsx"
   },
+  "ESn43O": {
+    "defaultMessage": "Create Circle"
+  },
   "EW5R4p": {
     "defaultMessage": "Request an update, ask, share and discuss",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
@@ -578,6 +664,9 @@
   "EZMrtJ": {
     "defaultMessage": "commented broadcast in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "Eb1U+/": {
+    "defaultMessage": "Topped up successfully"
   },
   "EoeUjA": {
     "defaultMessage": "You do not have permission to perform this operation",
@@ -636,9 +725,16 @@
     "defaultMessage": "No collection created yet",
     "description": "src/components/Empty/EmptyCollection.tsx"
   },
+  "GUW//c": {
+    "defaultMessage": "Add Tag"
+  },
   "GVes61": {
     "defaultMessage": "published in {circleName}",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
+  },
+  "GYAos5": {
+    "defaultMessage": "Drafts",
+    "description": "src/views/Me/Drafts/index.tsx"
   },
   "GZJpDf": {
     "defaultMessage": "Analytics"
@@ -663,6 +759,9 @@
   },
   "H8KGyc": {
     "defaultMessage": "Enter"
+  },
+  "H9FKs4": {
+    "defaultMessage": "Enter transaction password again"
   },
   "HAlOn1": {
     "defaultMessage": "Name"
@@ -718,6 +817,10 @@
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
   },
+  "Ix3e3Q": {
+    "defaultMessage": "Comment",
+    "description": "src/components/Forms/CommentForm/index.tsx"
+  },
   "J6f6iN": {
     "defaultMessage": "Number of comments",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
@@ -739,6 +842,9 @@
   "JkWLg6": {
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "JmzmVH": {
+    "defaultMessage": "Switch to"
   },
   "JpS59y": {
     "defaultMessage": "Accepted",
@@ -816,8 +922,16 @@
     "defaultMessage": "{articleCount} Articles",
     "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
   },
+  "LUWKnn": {
+    "defaultMessage": "Wings have sprouted on the badge, and the halo of dreams is beginning to spin. The Nimbus Ferry badge signifies your participation in the Nomad Matters.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "LWE7oq": {
     "defaultMessage": "Saving draft, are you sure you want to leave?"
+  },
+  "LYl9+i": {
+    "defaultMessage": "Edit",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "Lb0JsC": {
     "defaultMessage": "You have blocked that user"
@@ -830,6 +944,9 @@
     "defaultMessage": "Article published",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
+  "LklXfd": {
+    "defaultMessage": "Payment Pointer"
+  },
   "LmiUWG": {
     "defaultMessage": "You do not have permissionn to perform this operation",
     "description": "FORBIDDEN_BY_TARGET_STATE"
@@ -837,6 +954,9 @@
   "Lp6CiR": {
     "defaultMessage": "Settings - Misc",
     "description": "src/views/Me/Settings/Misc/index.tsx"
+  },
+  "LphWYP": {
+    "defaultMessage": "Terms and Privacy Policy"
   },
   "LqxIEU": {
     "defaultMessage": "Wallet address will be part of your digital identity and shown in your profile page.",
@@ -861,6 +981,9 @@
   "Me5cJu": {
     "defaultMessage": "Connect wallet",
     "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
+  },
+  "Mgl1bT": {
+    "defaultMessage": "OAuth authorize"
   },
   "Mn7GEf": {
     "defaultMessage": "Selected activities related to you in the past 24 hours",
@@ -900,9 +1023,8 @@
     "defaultMessage": "Number of supporters",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
-  "NzfL1d": {
-    "defaultMessage": "Enter password again",
-    "description": "src/components/Forms/EmailSignUpForm/Password.tsx"
+  "NmhF45": {
+    "defaultMessage": "Adding tags helps readers find your articles. Add or create new tags."
   },
   "O0MQs/": {
     "defaultMessage": "Please add email first",
@@ -927,13 +1049,19 @@
     "defaultMessage": "New likes",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
-  "OwKIEe": {
-    "defaultMessage": "{count, plural, =1 {1 article} other {{count} articles}}",
-    "description": "src/components/Book/index.tsx"
+  "OpeFTV": {
+    "defaultMessage": "Enter a 6-digit payment password."
+  },
+  "P+sWM0": {
+    "defaultMessage": "guide",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
+  },
+  "PXAur5": {
+    "defaultMessage": "Withdraw"
   },
   "PliM8z": {
     "defaultMessage": "Please go to the relevant page to resend the link. You can also",
@@ -980,6 +1108,9 @@
   "ROPCC0": {
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
+  },
+  "Rc4Oij": {
+    "defaultMessage": "Firebolt"
   },
   "Ro0CuW": {
     "defaultMessage": "You do not have permission to perform this operation",
@@ -1044,9 +1175,15 @@
   "TF1OhT": {
     "defaultMessage": "This login code has expired, please try to resend"
   },
+  "TKsfIS": {
+    "defaultMessage": "Meteor Canoe"
+  },
   "TSDiqB": {
     "defaultMessage": "Subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "Tgd5id": {
+    "defaultMessage": "Transfer amount exceeds allowance"
   },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
@@ -1076,9 +1213,16 @@
     "defaultMessage": "Move to bottom",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
+  "UgpqlF": {
+    "defaultMessage": "Reply",
+    "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
+  },
   "UjKkhq": {
     "defaultMessage": "Tags added",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
+  },
+  "Up5U7K": {
+    "defaultMessage": "Block"
   },
   "V5OMr4": {
     "defaultMessage": "What is a digital wallet?",
@@ -1087,6 +1231,9 @@
   "V8msLJ": {
     "defaultMessage": "left comments and mentioned you in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "VBve8d": {
+    "defaultMessage": "Settled in Matters"
   },
   "VZsE96": {
     "defaultMessage": "Collection Name"
@@ -1128,6 +1275,9 @@
     "defaultMessage": "Please sign message in your wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
+  "WNxQX0": {
+    "defaultMessage": "Add Tags"
+  },
   "WQT8ZA": {
     "defaultMessage": "Edit collection"
   },
@@ -1151,10 +1301,6 @@
     "defaultMessage": "Unpin Comment",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
-  "XH0Lb6": {
-    "defaultMessage": "Welcome to Matters!",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
   "XHMco9": {
     "defaultMessage": "subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1165,6 +1311,9 @@
   "XQTBu6": {
     "defaultMessage": "mentioned you in your circle broadcast comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "XTyKFR": {
+    "defaultMessage": "Adding articles to a collection helps readers find your articles."
   },
   "XVYrS/": {
     "defaultMessage": "No followers yet"
@@ -1234,6 +1383,9 @@
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
+  "Z+nZlT": {
+    "defaultMessage": "Content Feed"
+  },
   "Z2iL9Z": {
     "defaultMessage": "Start writing",
     "description": "src/components/Buttons/StartWriting/index.tsx"
@@ -1244,6 +1396,9 @@
   },
   "ZD+vm/": {
     "defaultMessage": "Upvote"
+  },
+  "ZEMcZ6": {
+    "defaultMessage": "Article Management"
   },
   "ZUPQzl": {
     "defaultMessage": "comment",
@@ -1259,6 +1414,9 @@
   },
   "ZZ9zIR": {
     "defaultMessage": "Downvote"
+  },
+  "ZjDH42": {
+    "defaultMessage": "About Us"
   },
   "a/YQ1Z": {
     "defaultMessage": "Archived",
@@ -1293,6 +1451,9 @@
   "ai7kS4": {
     "defaultMessage": "My Works"
   },
+  "aoDcrD": {
+    "defaultMessage": "Approve to continue"
+  },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/UI.tsx"
@@ -1300,6 +1461,9 @@
   "awW+lk": {
     "defaultMessage": "Processing",
     "description": "src/components/Transaction/State/index.tsx"
+  },
+  "az8n8W": {
+    "defaultMessage": "Invite friends to join your circle"
   },
   "b8ogKp": {
     "defaultMessage": "Add Invitation",
@@ -1314,6 +1478,9 @@
   },
   "beLe/F": {
     "defaultMessage": "Broadcast"
+  },
+  "bhehIF": {
+    "defaultMessage": "To protect your assets,"
   },
   "c/z318": {
     "defaultMessage": "Incorrect email or password",
@@ -1332,6 +1499,13 @@
   "cO0im6": {
     "defaultMessage": "Featured",
     "description": "src/components/Comment/PinnedLabel/index.tsx"
+  },
+  "cPIKU2": {
+    "defaultMessage": "Following"
+  },
+  "cQ+Lyq": {
+    "defaultMessage": "Nomad Matters Badge",
+    "description": "src/views/User/UserProfile/Badges/index.tsx"
   },
   "cQYXjl": {
     "defaultMessage": "Currency",
@@ -1370,6 +1544,10 @@
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "dAPUJp": {
+    "defaultMessage": "The dazzling light of a meteor shower is enough to illuminate the night sky. The Meteor Canoe badge signifies your participation in the Nomad Matters.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "dAvP6d": {
     "defaultMessage": "No blocked users yet",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
@@ -1377,6 +1555,9 @@
   "dSjI7E": {
     "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
+  "dTOtPO": {
+    "defaultMessage": "Top Up"
   },
   "dVbKzB": {
     "defaultMessage": "Comments and replies",
@@ -1399,6 +1580,9 @@
     "defaultMessage": "Resend",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "eKVBm/": {
+    "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {link}."
+  },
   "eTpiYa": {
     "defaultMessage": "No data yet."
   },
@@ -1415,8 +1599,14 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
+  "ezYuE2": {
+    "defaultMessage": "Support Author"
+  },
   "fDdcbi": {
     "defaultMessage": "This {type} has been deleted by the author"
+  },
+  "fPcF7H": {
+    "defaultMessage": "Adding tags helps readers find your articles."
   },
   "fWDtpq": {
     "defaultMessage": "Pending",
@@ -1448,6 +1638,9 @@
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
+  "h74kLA": {
+    "defaultMessage": "Failed to Donate"
+  },
   "h7sMQs": {
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -1463,6 +1656,9 @@
   "hASeng": {
     "defaultMessage": "Blocked Users",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
+  },
+  "hG2cBH": {
+    "defaultMessage": "Subscribe Circle"
   },
   "hYG5fb": {
     "defaultMessage": "are following",
@@ -1483,6 +1679,13 @@
     "defaultMessage": "Number of readers",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
+  "iEJeQH": {
+    "defaultMessage": "Liker ID"
+  },
+  "iTcMqz": {
+    "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",
+    "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
   "icdrwy": {
     "defaultMessage": "Followed You",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
@@ -1496,6 +1699,9 @@
   "iu3XKs": {
     "defaultMessage": "Wallet disconnected",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
+  },
+  "ivXY6L": {
+    "defaultMessage": "All Authors"
   },
   "izWS4J": {
     "defaultMessage": "Unfollow"
@@ -1568,6 +1774,9 @@
     "defaultMessage": "Articles has been collected",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "l2eEyp": {
+    "defaultMessage": "Transaction Password successfully changed."
+  },
   "l9LpDx": {
     "defaultMessage": "{q} - Matters Search",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
@@ -1575,6 +1784,9 @@
   "lI2l2/": {
     "defaultMessage": "Incorrect verification code. Please check your input, or try resend",
     "description": "CODE_INVALID"
+  },
+  "lIPOh3": {
+    "defaultMessage": "Create Stripe Account"
   },
   "lIir/P": {
     "defaultMessage": "I see"
@@ -1630,9 +1842,6 @@
     "defaultMessage": "Edit",
     "description": "src/components/Comment/DropdownActions/EditButton.tsx"
   },
-  "ml3SZN": {
-    "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
-  },
   "mp9SBo": {
     "defaultMessage": "Circle notifications",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -1640,6 +1849,10 @@
   "mu01Gw": {
     "defaultMessage": "Verification code is no longer valid. Please use the latest code we sent, or try resend",
     "description": "CODE_INACTIVE"
+  },
+  "mzCz0Z": {
+    "defaultMessage": "Tags",
+    "description": "src/views/Tags/index.tsx"
   },
   "n/w6lW": {
     "defaultMessage": "Most Supporters",
@@ -1690,6 +1903,9 @@
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
   },
+  "p6D+Uc": {
+    "defaultMessage": "Enter Payment Pointer"
+  },
   "pAQR0S": {
     "defaultMessage": "Published",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -1697,6 +1913,9 @@
   "pHg5Ju": {
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
+  "pKkpI9": {
+    "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
   },
   "pRV+UD": {
     "defaultMessage": "Collapse",
@@ -1786,10 +2005,6 @@
   "rdZi0V": {
     "defaultMessage": "It seems you've come to an unknown space, please go back and retry"
   },
-  "reOeq5": {
-    "defaultMessage": "You have created your personal creative space. Publish your first work!",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
   "rfz/fN": {
     "defaultMessage": "Recommended size: 1600px x 900px"
   },
@@ -1813,10 +2028,6 @@
     "defaultMessage": "Log in",
     "description": "src/components/Buttons/Login/index.tsx"
   },
-  "stjoBH": {
-    "defaultMessage": "Now, go like the authors you support! Your Likes will become their income",
-    "description": "src/components/Forms/EmailSignUpForm/Complete.tsx"
-  },
   "sy+pv5": {
     "defaultMessage": "Email"
   },
@@ -1832,9 +2043,15 @@
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
+  "tGn21M": {
+    "defaultMessage": "Donated successfully"
+  },
   "tQ3+Xo": {
     "defaultMessage": "Add up to 5 tags",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
+  },
+  "tio9Gt": {
+    "defaultMessage": "IPFS"
   },
   "tzq2+W": {
     "defaultMessage": "Send",
@@ -1850,8 +2067,14 @@
   "uJkv2X": {
     "defaultMessage": "Edit Tag"
   },
+  "uVCg1l": {
+    "defaultMessage": "Explore Matters"
+  },
   "ub1kHa": {
     "defaultMessage": "Add to collection"
+  },
+  "ucxFlV": {
+    "defaultMessage": "The withdrawal process has started."
   },
   "ui1+QC": {
     "defaultMessage": "End of the results"
@@ -1895,6 +2118,9 @@
     "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
+  "vX2bDy": {
+    "defaultMessage": "Collect Article"
+  },
   "viMrzF": {
     "defaultMessage": "New broadcasts",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -1902,6 +2128,9 @@
   "vsD2wm": {
     "defaultMessage": "reset your login password",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
+  "w+6UiO": {
+    "defaultMessage": "Add Invitation"
   },
   "w7W92K": {
     "defaultMessage": "Why am I seeing this ad?",
@@ -1997,6 +2226,9 @@
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
+  },
+  "yBkdMI": {
+    "defaultMessage": "please set transaction password before top-up"
   },
   "yIlC0R": {
     "defaultMessage": "No published articles yet",

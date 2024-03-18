@@ -78,21 +78,23 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
         }
       />
 
-      <Dialog.Message>
-        <p>
-          <Translate
-            zh_hant="移除後， "
-            zh_hans="移除后， "
-            en="After removal, "
-          />
-          <span className={styles.name}>{editor.displayName}</span>{' '}
-          <Translate
-            zh_hant="將無法繼續參與「精選」作品管理。"
-            zh_hans="将无法继续参与「精选」作品管理。"
-            en="user will not be able to manage selected feed."
-          />
-        </p>
-      </Dialog.Message>
+      <Dialog.Content>
+        <Dialog.Content.Message>
+          <p>
+            <Translate
+              zh_hant="移除後， "
+              zh_hans="移除后， "
+              en="After removal, "
+            />
+            <span className={styles.name}>{editor.displayName}</span>{' '}
+            <Translate
+              zh_hant="將無法繼續參與「精選」作品管理。"
+              zh_hans="将无法继续参与「精选」作品管理。"
+              en="user will not be able to manage selected feed."
+            />
+          </p>
+        </Dialog.Content.Message>
+      </Dialog.Content>
 
       <Dialog.Footer
         closeDialog={closeDialog}

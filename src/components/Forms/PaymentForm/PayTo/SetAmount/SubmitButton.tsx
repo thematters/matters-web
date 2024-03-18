@@ -3,12 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { useDisconnect } from 'wagmi'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import {
-  BindEmailHintDialog,
-  Dialog,
-  Translate,
-  ViewerContext,
-} from '~/components'
+import { BindEmailHintDialog, Dialog, ViewerContext } from '~/components'
 import type { DialogTextButtonProps } from '~/components/Dialog/Buttons'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
@@ -20,6 +15,7 @@ type SubmitButtonProps = {
 
   isValid: boolean
   isSubmitting: boolean
+  isExceededAllowance: boolean
   isBalanceInsufficient: boolean
   isConnectedAddress: boolean
   isUnsupportedNetwork: boolean
@@ -60,7 +56,7 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
   if (isBalanceInsufficient) {
     const props = {
       mode,
-      text: 'topUp',
+      text: <FormattedMessage defaultMessage="Top Up" id="dTOtPO" />,
       form: formId,
     }
     return (
@@ -123,6 +119,7 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
   formId,
   isValid,
   isSubmitting,
+  isExceededAllowance,
   isBalanceInsufficient,
   isConnectedAddress,
   isUnsupportedNetwork,
@@ -142,11 +139,7 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
       <WrapperButton
         mode={mode}
         text={
-          <Translate
-            zh_hant="重新連接錢包"
-            zh_hans="重新连接钱包"
-            en="Reconnect Wallet"
-          />
+          <FormattedMessage defaultMessage="Reconnect Wallet" id="6ErzDk" />
         }
         onClick={() => {
           disconnect()
@@ -161,7 +154,7 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
         mode={mode}
         text={
           <>
-            <Translate zh_hant="切換到 " zh_hans="切换到 " en="Switch to " />
+            <FormattedMessage defaultMessage="Switch to " id="JmzmVH" />
             {targetChainName}
           </>
         }
@@ -176,10 +169,26 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
       <WrapperButton
         mode={mode}
         text={
-          <Translate
-            zh_hant="首次需確認授權後繼續"
-            zh_hans="首次需确认授权后继续"
-            en="Approve to continue"
+          <FormattedMessage defaultMessage="Approve to continue" id="aoDcrD" />
+        }
+        loading={approving || approveConfirming || allowanceLoading}
+        onClick={() => {
+          if (approveWrite) {
+            approveWrite()
+          }
+        }}
+      />
+    )
+  }
+
+  if (!isUnsupportedNetwork && isExceededAllowance) {
+    return (
+      <WrapperButton
+        mode={mode}
+        text={
+          <FormattedMessage
+            defaultMessage="Reapprove to continue"
+            id="3lMsOU"
           />
         }
         loading={approving || approveConfirming || allowanceLoading}

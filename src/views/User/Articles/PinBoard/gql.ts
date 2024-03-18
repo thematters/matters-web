@@ -13,6 +13,7 @@ export const fragments = {
         ... on Article {
           slug
           mediaHash
+          summary
           author {
             id
             userName

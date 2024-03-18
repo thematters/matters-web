@@ -21,24 +21,27 @@ import {
   storage,
   validateEmail,
   WalletType,
-  // validatePassword,
 } from '~/common/utils'
 import {
   AuthFeedType,
   AuthNormalFeed,
   AuthTabs,
   AuthWalletFeed,
-  DialogBeta,
+  Dialog,
   Form,
   IconLeft20,
   LanguageContext,
   LanguageSwitch,
   Media,
+  ReCaptchaContext,
   TextIcon,
+  Turnstile,
+  TurnstileInstance,
   useCountdown,
   // toast,
   useMutation,
   useRoute,
+  ViewerContext,
 } from '~/components'
 import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -78,6 +81,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   setAuthFeedType,
   back,
 }) => {
+  const viewer = useContext(ViewerContext)
   const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
     showToast: false,
   })
@@ -94,6 +98,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
+  const { token: reCaptchaToken, refreshToken } = useContext(ReCaptchaContext)
+  const turnstileRef = useRef<TurnstileInstance>(null)
+  const [turnstileToken, setTurnstileToken] = useState<string>()
 
   const [isSelectMethod, setIsSelectMethod] = useState(false)
   const [errorCode, setErrorCode] = useState<ERROR_CODES | null>(null)
@@ -129,7 +136,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     validate: ({ email, password }) =>
       _pickBy({
         email: validateEmail(email, lang, { allowPlusSign: true }),
-        // password: validatePassword(password, lang),
       }),
     onSubmit: async ({ email, password }, { setFieldError }) => {
       try {
@@ -140,7 +146,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
               email,
               passwordOrCode: password,
               language: lang,
-              referralCode,
+              // referralCode,
+              ...(referralCode ? { referralCode } : null),
             },
           },
         })
@@ -157,10 +164,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         if (submitCallback) {
           submitCallback()
         }
-
-        // toast.success({
-        //   message: <FormattedMessage defaultMessage="Logged in successfully" />,
-        // })
 
         analytics.identifyUser()
 
@@ -230,6 +233,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           input: {
             email: values.email,
             type: 'email_otp',
+            token: turnstileToken
+              ? `${reCaptchaToken} ${turnstileToken}`
+              : reCaptchaToken,
             redirectUrl,
             language: lang,
           },
@@ -260,13 +266,33 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           )
         }
       })
+      refreshToken?.()
+      turnstileRef.current?.reset()
     }
   }
 
   const fieldMsgId = `field-msg-sign-in`
 
+  const siteKey = process.env
+    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
   const InnerForm = (
     <>
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={siteKey}
+        options={{
+          action: 'email_login',
+          cData: `user-group-${viewer.info.group}`,
+          size: 'invisible',
+        }}
+        scriptOptions={{
+          compat: 'recaptcha',
+          appendTo: 'body',
+        }}
+        onSuccess={(token) => {
+          setTurnstileToken(token)
+        }}
+      />
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
@@ -362,7 +388,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   )
 
   const SubmitButton = (
-    <DialogBeta.TextButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={!values.email || !values.password || isSubmitting}
@@ -383,11 +409,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   return (
     <>
       {!isSelectMethod && (
-        <DialogBeta.Header
+        <Dialog.Header
           title={<FormattedMessage defaultMessage="Sign In" id="Ub+AGc" />}
           hasSmUpTitle={false}
           leftBtn={
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               color="greyDarker"
               onClick={() => {
@@ -400,7 +426,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
       )}
 
-      <DialogBeta.Content noMaxHeight={isInPage}>
+      <Dialog.Content noMaxHeight={isInPage}>
         <Media at="sm">
           {isSelectMethod && (
             <AuthTabs
@@ -425,13 +451,13 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           />
         )}
         {isWallet && <AuthWalletFeed submitCallback={gotoWalletConnect} />}
-      </DialogBeta.Content>
+      </Dialog.Content>
 
       {isNormal && !isSelectMethod && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
             <section className={styles.footerBtns}>
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={
                   <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
                     <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
@@ -448,9 +474,9 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         />
       )}
       {((isNormal && isSelectMethod) || isWallet) && !isInPage && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               color="greyDarker"
               text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               onClick={closeDialog}

@@ -5,7 +5,7 @@ import { Dialog, useDialogSwitch } from '~/components'
 
 import CommentForm, { CommentFormProps } from './CommentForm'
 
-type CommentFormDialogProps = {
+export type CommentFormDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & Omit<CommentFormProps, 'closeDialog'>
 

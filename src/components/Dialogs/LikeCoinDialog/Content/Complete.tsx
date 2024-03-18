@@ -6,17 +6,21 @@ import { Dialog, Translate } from '~/components'
 const Complete: React.FC = () => {
   return (
     <>
-      <Dialog.Header title="setupLikeCoin" />
+      <Dialog.Header
+        title={<FormattedMessage defaultMessage="Liker ID" id="iEJeQH" />}
+      />
 
-      <Dialog.Message>
-        <p>
-          <Translate
-            zh_hant="你的專屬 Liker ID 已就位！"
-            zh_hans="你的专属 Liker ID 已就位！"
-            en="Your Liker ID is ready!"
-          />
-        </p>
-      </Dialog.Message>
+      <Dialog.Content>
+        <Dialog.Content.Message>
+          <p>
+            <Translate
+              zh_hant="你的專屬 Liker ID 已就位！"
+              zh_hans="你的专属 Liker ID 已就位！"
+              en="Your Liker ID is ready!"
+            />
+          </p>
+        </Dialog.Content.Message>
+      </Dialog.Content>
 
       <Dialog.Footer
         btns={

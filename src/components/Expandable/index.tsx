@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
-import TextTruncate from 'react-text-truncate'
 
 import { capitalizeFirstLetter, collapseContent } from '~/common/utils'
 import {
@@ -9,6 +8,8 @@ import {
   IconArrowUp16,
   TextIcon,
   Translate,
+  Truncate,
+  useIsomorphicLayoutEffect,
 } from '~/components'
 
 import styles from './styles.module.css'
@@ -50,8 +51,8 @@ export const Expandable: React.FC<ExpandableProps> = ({
 }) => {
   const [expandable, setExpandable] = useState(false)
   const [lineHeight, setLineHeight] = useState(24)
+  const [firstRender, setFirstRender] = useState(true)
   const [expand, setExpand] = useState(true)
-  const [truncated, setTruncated] = useState(false)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
   const collapsedContent = collapseContent(content)
 
@@ -75,31 +76,41 @@ export const Expandable: React.FC<ExpandableProps> = ({
     [styles[`${bgColor}`]]: !!bgColor,
   })
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     setExpandable(false)
     setExpand(true)
-    setTruncated(false)
-    setTimeout(() => {
-      if (node?.current) {
-        const height = node.current.firstElementChild?.clientHeight || 0
-        const lineHeight = window
-          .getComputedStyle(node.current, null)
-          .getPropertyValue('line-height')
-        setLineHeight(parseInt(lineHeight, 10))
-        const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
+    if (node?.current) {
+      const height = node.current.firstElementChild?.clientHeight || 0
+      const lineHeight = window
+        .getComputedStyle(node.current, null)
+        .getPropertyValue('line-height')
+      setLineHeight(parseInt(lineHeight, 10))
+      const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
 
-        if (lines > limit + buffer) {
-          setExpandable(true)
-          setExpand(false)
-        }
+      if (lines > limit + buffer) {
+        setExpandable(true)
+        setExpand(false)
       }
-    })
+    }
   }, [content])
+
+  useEffect(() => {
+    if (firstRender) {
+      setFirstRender(false)
+    }
+  }, [firstRender])
 
   return (
     <section className={contentClasses}>
       <div ref={node}>
-        {(!expandable || (expandable && expand)) && <div>{children}</div>}
+        {(!expandable || (expandable && expand)) && (
+          <div
+            className={firstRender ? styles.lineClamp : ''}
+            style={{ WebkitLineClamp: limit + 2 }}
+          >
+            {children}
+          </div>
+        )}
       </div>
       {expandable && collapseable && expand && !isRichShow && (
         <section className={styles.collapseWrapper}>
@@ -120,15 +131,9 @@ export const Expandable: React.FC<ExpandableProps> = ({
       {expandable && !expand && (
         <p className={styles.unexpandWrapper}>
           {!isRichShow && (
-            <TextTruncate
-              line={limit}
-              element="span"
-              truncateText=""
-              text={collapsedContent}
-              onTruncated={() => {
-                setTruncated(true)
-              }}
-              textTruncateChild={
+            <Truncate
+              lines={limit}
+              ellipsis={
                 <span
                   onClick={(e) => {
                     setExpand(!expand)
@@ -140,28 +145,19 @@ export const Expandable: React.FC<ExpandableProps> = ({
                   <Translate id="expand" />
                 </span>
               }
-            />
-          )}
-          {!isRichShow && !truncated && (
-            <span
-              onClick={(e) => {
-                setExpand(!expand)
-                e.stopPropagation()
-              }}
-              className={styles.expandButton}
+              trimWhitespace={true}
             >
-              ...
-              <Translate id="expand" />
-            </span>
+              {collapsedContent}
+            </Truncate>
           )}
           {isRichShow && (
             <>
-              <div
+              <section
                 className={richWrapperClasses}
                 style={{ maxHeight: `${limit * lineHeight}px` }}
               >
                 {children}
-              </div>
+              </section>
               <button
                 className={richShowMoreButtonClasses}
                 onClick={() => {

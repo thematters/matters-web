@@ -7,6 +7,10 @@ on:
       - develop
     types: [closed]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.base_ref }}
+  cancel-in-progress: true
+
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -22,9 +26,9 @@ jobs:
         uses: actions/checkout@master
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16.14'
+          node-version: '18'
           cache: 'npm'
 
       - name: Install Dependencies
@@ -97,7 +101,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: matters-stage
-          environment_name: matters-client-develop
+          environment_name: matters-client-develop-node-v18
           version_label: matters-web-develop-${{ hashFiles('deploy.zip') }}
           version_description: ${{ github.SHA }}
           region: ap-southeast-1
@@ -124,7 +128,7 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: matters-prod
-          environment_name: matters-client-prod
+          environment_name: matters-client-prod-node-v18
           version_label: matters-web-prod-${{ hashFiles('deploy.zip') }}
           version_description: ${{ github.SHA }}
           region: ap-southeast-1

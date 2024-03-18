@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, useDialogSwitch, useStep } from '~/components'
 
 import Success from './Success'
@@ -25,8 +27,16 @@ const BaseMigrationDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title="migration"
-          closeText={currStep === 'success' ? 'close' : 'cancel'}
+          title={
+            <FormattedMessage defaultMessage="Settled in Matters" id="VBve8d" />
+          }
+          closeText={
+            currStep === 'success' ? (
+              <FormattedMessage defaultMessage="Close" id="rbrahO" />
+            ) : (
+              <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+            )
+          }
         />
         {currStep === 'upload' && (
           <Upload nextStep={nextStep} closeDialog={closeDialog} />

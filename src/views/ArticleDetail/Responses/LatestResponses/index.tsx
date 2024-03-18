@@ -92,6 +92,7 @@ const LatestResponses = ({ id, lock }: { id: string; lock: boolean }) => {
       first: RESPONSES_COUNT,
       articleOnly: articleOnlyMode,
     },
+    fetchPolicy: 'cache-and-network',
     notifyOnNetworkStatusChange: true,
   })
 

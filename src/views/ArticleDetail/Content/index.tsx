@@ -131,7 +131,6 @@ Content.fragments = {
       id
       contents {
         html
-        markdown
       }
     }
   `,

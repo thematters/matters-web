@@ -158,7 +158,9 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title="setSupportSetting"
+        title={
+          <FormattedMessage defaultMessage="Support Setting" id="5IS+ui" />
+        }
         closeDialog={closeDialog}
         leftBtn={
           back ? (
@@ -202,7 +204,13 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={back ? 'back' : 'cancel'}
+              text={
+                back ? (
+                  <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
+                ) : (
+                  <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+                )
+              }
               color="greyDarker"
               onClick={back || closeDialog}
             />

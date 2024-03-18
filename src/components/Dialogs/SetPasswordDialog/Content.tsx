@@ -11,7 +11,7 @@ import {
   validatePassword,
 } from '~/common/utils'
 import {
-  DialogBeta,
+  Dialog,
   Form,
   LanguageContext,
   Spacer,
@@ -128,7 +128,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   )
 
   const SubmitButton = (
-    <DialogBeta.TextButton
+    <Dialog.TextButton
       type="submit"
       form={formId}
       disabled={isSubmitting || values.password.length < 8}
@@ -139,7 +139,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
 
   return (
     <>
-      <DialogBeta.Header
+      <Dialog.Header
         title={
           <FormattedMessage
             defaultMessage="Login password"
@@ -151,8 +151,8 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         rightBtn={SubmitButton}
       />
 
-      <DialogBeta.Content>
-        <DialogBeta.Content.Message>
+      <Dialog.Content>
+        <Dialog.Content.Message>
           <p>
             <FormattedMessage
               defaultMessage="Password must be at least 8 characters long, support letter, numbers and symbols."
@@ -161,14 +161,14 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
             />
           </p>
           <Spacer size="base" />
-        </DialogBeta.Content.Message>
+        </Dialog.Content.Message>
         {InnerForm}
-      </DialogBeta.Content>
+      </Dialog.Content>
 
-      <DialogBeta.Footer
+      <Dialog.Footer
         smUpBtns={
           <>
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}

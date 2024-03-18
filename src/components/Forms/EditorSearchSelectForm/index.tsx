@@ -5,7 +5,6 @@ import {
   MAX_ARTICLE_COLLECT_LENGTH,
   MAX_ARTICLE_TAG_LENGTH,
   TEST_ID,
-  TextId,
 } from '~/common/enums'
 import { Dialog, IconAdd16, TextIcon, Translate } from '~/components'
 import SearchingArea, {
@@ -40,8 +39,8 @@ type Area = 'staging' | 'searching'
 export type SearchSelectNode = SelectNode
 
 export type EditorSearchSelectFormProps = {
-  title: TextId | React.ReactNode
-  hint: TextId
+  title: React.ReactNode
+  hint: React.ReactNode
   headerRightButtonText?: string | React.ReactNode
 
   back?: () => void
@@ -137,7 +136,11 @@ const EditorSearchSelectForm = ({
     <Dialog.TextButton
       onClick={submitCallback || closeDialog}
       // disabled={stagingNodes.length <= 0}
-      text={headerRightButtonText || 'done'}
+      text={
+        headerRightButtonText || (
+          <FormattedMessage defaultMessage="Done" id="JXdbo8" />
+        )
+      }
       loading={saving}
     />
   )
@@ -219,7 +222,7 @@ const EditorSearchSelectForm = ({
             <Dialog.TextButton
               text={
                 back ? (
-                  'back'
+                  <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                 ) : (
                   <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
                 )

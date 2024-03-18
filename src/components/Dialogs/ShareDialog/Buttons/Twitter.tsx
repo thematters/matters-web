@@ -1,7 +1,10 @@
+import { useContext } from 'react'
+
 import { ReactComponent as IconShareTwitter } from '@/public/static/icons/16px/share-twitter.svg'
 import { ReactComponent as IconShareTwitterCircle } from '@/public/static/icons/40px/share-twitter-circle.svg'
+import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics, stripNonEnglishUrl } from '~/common/utils'
-import { TextIcon, withIcon } from '~/components'
+import { TextIcon, ViewerContext, withIcon } from '~/components'
 
 const Twitter = ({
   title,
@@ -14,10 +17,15 @@ const Twitter = ({
   circle?: boolean
   tags?: string[]
 }) => {
+  const viewer = useContext(ViewerContext)
+
   // append utm_source to link
   const utm_source = 'share_twitter'
   const url = new URL(link)
   url.searchParams.append('utm_source', utm_source)
+  if (viewer.userName) {
+    url.searchParams.append(REFERRAL_QUERY_REFERRAL_KEY, viewer.userName)
+  }
   link = url.toString()
 
   return (

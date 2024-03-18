@@ -43,7 +43,9 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
 
   let sorter = parseSorter(getQuery(URL_COLLECTION_DETAIL.SORTER_KEY))
 
-  let sorterSequence = sorter[URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key]
+  let sorterSequence = sorter[
+    URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key
+  ] as SorterSequenceType
 
   if (
     sorterSequence !== URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.DSC &&
@@ -66,7 +68,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
     const queryString = window.location.search
     const urlParams = new URLSearchParams(queryString)
     urlParams.set(URL_COLLECTION_DETAIL.SORTER_KEY, stringifySorter(sorter))
-    router.push(
+    router.replace(
       `${window.location.pathname}?${decodeURIComponent(urlParams.toString())}`
     )
   }
@@ -139,7 +141,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
         <List>
           {articleEdges &&
             articleEdges.map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
+              <List.Item key={node.id}>
                 <ArticleDigestFeed
                   article={node}
                   hasHeader={false}

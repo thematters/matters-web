@@ -239,26 +239,31 @@ const BaseAddCredit: React.FC<FormProps> = ({
     </Form>
   )
 
-  // const fee = calcStripeFee(values.amount)
-  // const total = numRound(fee + values.amount)
-  // const total = numRound(values.amount)
-
   if (completed) {
     return (
       <>
-        <Dialog.Header title={<Translate id="successTopUp" />} />
-
-        <Dialog.Message align="center" smUpAlign="center">
-          <p>
-            <Translate
-              zh_hant="創作者們望眼欲穿，快去送上支持吧"
-              zh_hans="创作者们望眼欲穿，快去送上支持吧"
-              en="Creators need your support! Go support creators you like"
+        <Dialog.Header
+          title={
+            <FormattedMessage
+              defaultMessage="Topped up successfully"
+              id="Eb1U+/"
             />
-          </p>
-          <br />
-          <CurrencyAmount amount={values.amount} currency={currency} />
-        </Dialog.Message>
+          }
+        />
+
+        <Dialog.Content>
+          <Dialog.Content.Message align="center" smUpAlign="center">
+            <p>
+              <Translate
+                zh_hant="創作者們望眼欲穿，快去送上支持吧"
+                zh_hans="创作者们望眼欲穿，快去送上支持吧"
+                en="Creators need your support! Go support creators you like"
+              />
+            </p>
+            <br />
+            <CurrencyAmount amount={values.amount} currency={currency} />
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer
           btns={
@@ -300,7 +305,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title="topUp"
+        title={<FormattedMessage defaultMessage="Top Up" id="dTOtPO" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
       />

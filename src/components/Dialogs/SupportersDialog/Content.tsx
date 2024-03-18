@@ -87,10 +87,10 @@ const SupportersDialogContent = ({
           loadMore={loadMore}
           hasNextPage={pageInfo.hasNextPage}
         >
-          {edges.map(({ node, cursor }, i) => (
+          {edges.map(({ node }, i) => (
             <UserDigest.Rich
               user={node}
-              key={cursor}
+              key={node.id}
               onClick={() => {
                 analytics.trackEvent('click_feed', {
                   type: 'donators',

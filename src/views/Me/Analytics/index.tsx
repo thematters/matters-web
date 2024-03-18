@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
 import { Head, Layout, List, QueryError, Spinner } from '~/components'
@@ -41,6 +41,7 @@ const ME_ANALYTICS = gql`
   ${UserDigest.Mini.fragments.user}
 `
 const MyAnalytics = () => {
+  const intl = useIntl()
   const [period, setPeriod] = useState<number>(7)
 
   const [now] = useState(Date.now())
@@ -64,7 +65,7 @@ const MyAnalytics = () => {
     <>
       <Layout.Header
         left={
-          <Layout.Header.Title id="myAnalytics">
+          <Layout.Header.Title>
             <FormattedMessage defaultMessage="Top Supporters" id="/IMR+8" />
           </Layout.Header.Title>
         }
@@ -76,7 +77,12 @@ const MyAnalytics = () => {
         }
       />
 
-      <Head title={{ id: 'myAnalytics' }} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Analytics',
+          id: 'GZJpDf',
+        })}
+      />
     </>
   )
 
@@ -133,7 +139,7 @@ const MyAnalytics = () => {
 
         <List>
           {edges?.map(({ node, cursor, donationCount }, i) => (
-            <List.Item key={cursor}>
+            <List.Item key={node.id}>
               <SupporterDigestFeed
                 user={node}
                 index={i}

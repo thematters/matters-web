@@ -8,7 +8,7 @@ import {
   AuthNormalFeed,
   AuthTabs,
   AuthWalletFeed,
-  DialogBeta,
+  Dialog,
 } from '~/components'
 
 interface FormProps {
@@ -74,12 +74,12 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
 
   return (
     <>
-      <DialogBeta.Content noMaxHeight={true}>{InnerForm}</DialogBeta.Content>
+      <Dialog.Content noMaxHeight>{InnerForm}</Dialog.Content>
 
       {isInDialog && (
-        <DialogBeta.Footer
+        <Dialog.Footer
           smUpBtns={
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               color="greyDarker"
               text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               onClick={closeDialog}

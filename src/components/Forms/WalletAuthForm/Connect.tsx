@@ -25,7 +25,7 @@ import {
 import {
   AuthFeedType,
   AuthTabs,
-  DialogBeta,
+  Dialog,
   IconLeft20,
   IconMetamask22,
   IconSpinner22,
@@ -202,7 +202,12 @@ const Connect: React.FC<FormProps> = ({
           // confirm auth
           const { data: loginData } = await walletLogin({
             variables: {
-              input: { ...variables.input, language: lang, referralCode },
+              input: {
+                ...variables.input,
+                language: lang,
+                // referralCode,
+                ...(referralCode ? { referralCode } : null),
+              },
             },
           })
 
@@ -269,12 +274,12 @@ const Connect: React.FC<FormProps> = ({
   return (
     <>
       {isLogin && (
-        <DialogBeta.Header
+        <Dialog.Header
           title={<>{isMetamask ? 'MetaMask' : 'WalletConnect'}</>}
           hasSmUpTitle={false}
           leftBtn={
             back ? (
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
                 onClick={onBack}
                 color="greyDarker"
@@ -285,7 +290,7 @@ const Connect: React.FC<FormProps> = ({
         />
       )}
 
-      <DialogBeta.Content>
+      <Dialog.Content>
         {isLogin && (
           <Media greaterThan="sm">
             <AuthTabs
@@ -321,12 +326,12 @@ const Connect: React.FC<FormProps> = ({
             />
           </span>
         </section>
-      </DialogBeta.Content>
+      </Dialog.Content>
 
-      <DialogBeta.Footer
+      <Dialog.Footer
         smUpBtns={
           <section className={styles.footerSmUpBtns}>
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               text={
                 <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
                   <FormattedMessage
@@ -341,7 +346,7 @@ const Connect: React.FC<FormProps> = ({
             />
 
             {isInDialog && (
-              <DialogBeta.TextButton
+              <Dialog.TextButton
                 text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
                 color="greyDarker"
                 onClick={onCloseDialog}

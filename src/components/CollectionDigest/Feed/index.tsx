@@ -47,7 +47,7 @@ const BaseCollectionDigestFeed = ({
       <section className={styles.container}>
         <LinkWrapper {...path} onClick={onClick}>
           <section className={styles.book}>
-            <Book cover={cover} title={title} articleCount={articleCount} />
+            <Book.Collection cover={cover} title={title} />
           </section>
         </LinkWrapper>
 

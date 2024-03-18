@@ -149,34 +149,36 @@ const DeleteCollectionDialog = ({
           }
         />
 
-        <Dialog.Message>
-          {isInDelete && (
-            <p>
-              <FormattedMessage
-                defaultMessage="Are you sure you want to delete this collection ‘{collection}’?"
-                id="T9oZC8"
-                values={{
-                  collection: (
-                    <span className="u-highlight">{collection.title}</span>
-                  ),
-                }}
-              />
-              <br />
-              <FormattedMessage
-                defaultMessage="(Articles in this collection will not be deleted)"
-                id="a/xacb"
-              />
-            </p>
-          )}
-          {isInConfirmDelete && (
-            <p>
-              <FormattedMessage
-                defaultMessage="This action cannot be undone. Are you sure you want to delete this collection?"
-                id="Xi40U9"
-              />
-            </p>
-          )}
-        </Dialog.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message>
+            {isInDelete && (
+              <p>
+                <FormattedMessage
+                  defaultMessage="Are you sure you want to delete this collection ‘{collection}’?"
+                  id="T9oZC8"
+                  values={{
+                    collection: (
+                      <span className="u-highlight">{collection.title}</span>
+                    ),
+                  }}
+                />
+                <br />
+                <FormattedMessage
+                  defaultMessage="(Articles in this collection will not be deleted)"
+                  id="a/xacb"
+                />
+              </p>
+            )}
+            {isInConfirmDelete && (
+              <p>
+                <FormattedMessage
+                  defaultMessage="This action cannot be undone. Are you sure you want to delete this collection?"
+                  id="Xi40U9"
+                />
+              </p>
+            )}
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         {isInDelete && (
           <Dialog.Footer

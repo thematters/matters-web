@@ -7,7 +7,6 @@ import { TEST_ID } from '~/common/enums'
 import {
   Dialog,
   Spinner,
-  Translate,
   useDialogSwitch,
   usePublicQuery,
   ViewerContext,
@@ -18,7 +17,7 @@ import {
   FingerprintArticleFragment,
 } from '~/gql/graphql'
 
-interface FingerprintDialogProps {
+export interface FingerprintDialogProps {
   article: FingerprintArticleFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
@@ -101,10 +100,10 @@ const BaseFingerprintDialog = ({
         testId={TEST_ID.DIALOG_FINGERPRINT}
       >
         <Dialog.Header
-          title="IPFSEntrance"
+          title={<FormattedMessage defaultMessage="IPFS" id="tio9Gt" />}
           leftBtn={
             <Dialog.TextButton
-              text={<Translate id="cancel" />}
+              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               onClick={closeDialog}
             />
           }

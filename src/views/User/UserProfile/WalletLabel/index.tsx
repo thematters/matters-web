@@ -99,25 +99,29 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
           }
         />
 
-        <Dialog.Message smUpAlign="left">
-          <section className={styles.dialogContent}>
-            {ensName && <section className={styles.ensName}>{ensName}</section>}
-            {!ensName && (
-              <section className={styles.address}>
-                {maskAddress(address)}
-              </section>
-            )}
-            {hasLinkedIPNS && !isMe && (
-              <section className={styles.linkedIPNS}>
-                <Translate
-                  zh_hans={`${user.displayName} 已将他的 ENS 指向到个人 IPNS 页面`}
-                  zh_hant={`${user.displayName} 已將他的 ENS 指向到個人 IPNS 頁面`}
-                  en={`${user.displayName} has linked primary ENS name to his IPNS page.`}
-                />
-              </section>
-            )}
-          </section>
-        </Dialog.Message>
+        <Dialog.Content>
+          <Dialog.Content.Message smUpAlign="left">
+            <section className={styles.dialogContent}>
+              {ensName && (
+                <section className={styles.ensName}>{ensName}</section>
+              )}
+              {!ensName && (
+                <section className={styles.address}>
+                  {maskAddress(address)}
+                </section>
+              )}
+              {hasLinkedIPNS && !isMe && (
+                <section className={styles.linkedIPNS}>
+                  <Translate
+                    zh_hans={`${user.displayName} 已将他的 ENS 指向到个人 IPNS 页面`}
+                    zh_hant={`${user.displayName} 已將他的 ENS 指向到個人 IPNS 頁面`}
+                    en={`${user.displayName} has linked primary ENS name to his IPNS page.`}
+                  />
+                </section>
+              )}
+            </section>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Dialog.Footer
           btns={
@@ -159,7 +163,12 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
                 <ENSDialog user={user}>
                   {({ openDialog }) => (
                     <Dialog.RoundedButton
-                      text={<Translate id="bindIPNStoENS" />}
+                      text={
+                        <FormattedMessage
+                          defaultMessage="Link ENS"
+                          id="3w3CC8"
+                        />
+                      }
                       color="green"
                       onClick={() => {
                         openDialog()
@@ -226,7 +235,12 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
                 <ENSDialog user={user}>
                   {({ openDialog }) => (
                     <Dialog.TextButton
-                      text={<Translate id="bindIPNStoENS" />}
+                      text={
+                        <FormattedMessage
+                          defaultMessage="Link ENS"
+                          id="3w3CC8"
+                        />
+                      }
                       color="green"
                       onClick={() => {
                         openDialog()

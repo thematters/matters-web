@@ -12,7 +12,7 @@ import {
 import { analytics, appendTarget, WalletType } from '~/common/utils'
 import {
   AuthFeedType,
-  DialogBeta,
+  Dialog,
   EmailLoginForm,
   EmailSignUpForm,
   ReCaptchaProvider,
@@ -97,11 +97,11 @@ const BaseUniversalAuthDialog = () => {
   )
 
   return (
-    <DialogBeta
+    <Dialog
       isOpen={show}
       onDismiss={closeDialog}
       testId={TEST_ID.DIALOG_AUTH}
-      scrollable={true}
+      scrollable
     >
       {currStep === 'select-login-method' && (
         <SelectAuthMethodForm
@@ -182,7 +182,7 @@ const BaseUniversalAuthDialog = () => {
           email={email}
         />
       )}
-    </DialogBeta>
+    </Dialog>
   )
 }
 
@@ -210,9 +210,9 @@ const UniversalAuthDialog = () => {
   }
 
   return (
-    <DialogBeta.Lazy mounted={<BaseUniversalAuthDialog />}>
+    <Dialog.Lazy mounted={<BaseUniversalAuthDialog />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}
-    </DialogBeta.Lazy>
+    </Dialog.Lazy>
   )
 }
 

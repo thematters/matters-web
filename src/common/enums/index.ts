@@ -1,5 +1,6 @@
 export * from './analytics'
 export * from './chart'
+export * from './contract'
 export * from './cookie'
 export * from './csp'
 export * from './errorCode'
@@ -63,6 +64,7 @@ export const MAX_TAG_DESCRIPTION_LENGTH = 200
 export const TAG_CONTENT_CLAMP_LENGTH = 7
 export const TAG_CONTENT_CLAMP_LATIN_LETTERS_LENGTH = 20
 
+export const MIN_COLLECTION_TITLE_LENGTH = 1
 export const MAX_COLLECTION_TITLE_LENGTH = 40
 export const MAX_COLLECTION_DESCRIPTION_LENGTH = 200
 export const MAX_COLLECTION_ARTICLES_COUNT = 200
@@ -80,5 +82,7 @@ export const MAX_USER_DISPLAY_NAME_LENGTH = 20
 export const MAX_USER_DESCRIPTION_LENGTH = 140
 export const MIN_USER_NAME_LENGTH = 4
 export const MAX_USER_NAME_LENGTH = 15
+
+export const MIN_PASSWORD_LENGTH = 8
 
 export const MAX_CHANGE_EMAIL_TIME_DAILY = 3

@@ -3,7 +3,7 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { DialogBeta, toast, useMutation, useRoute } from '~/components'
+import { Dialog, toast, useMutation, useRoute } from '~/components'
 import { SetUserNameMutation } from '~/gql/graphql'
 import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
 
@@ -70,7 +70,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
 
   return (
     <>
-      <DialogBeta.Header
+      <Dialog.Header
         title={
           <FormattedMessage
             defaultMessage="Confirm Matters ID"
@@ -79,8 +79,9 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
           />
         }
       />
-      <DialogBeta.Content>
-        <DialogBeta.Content.Message>
+
+      <Dialog.Content>
+        <Dialog.Content.Message>
           <p>
             <FormattedMessage
               defaultMessage="This ID cannot be modified. Are you sure you want to use {id} as your Matters ID?"
@@ -91,13 +92,13 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
               }}
             />
           </p>
-        </DialogBeta.Content.Message>
-      </DialogBeta.Content>
+        </Dialog.Content.Message>
+      </Dialog.Content>
 
-      <DialogBeta.Footer
+      <Dialog.Footer
         btns={
           <>
-            <DialogBeta.RoundedButton
+            <Dialog.RoundedButton
               disabled={loading}
               text={
                 <FormattedMessage
@@ -109,7 +110,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
               loading={loading}
               onClick={confirmUse}
             />
-            <DialogBeta.RoundedButton
+            <Dialog.RoundedButton
               text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               color="greyDarker"
               onClick={back}
@@ -118,12 +119,12 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
         }
         smUpBtns={
           <>
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
               color="greyDarker"
               onClick={back}
             />
-            <DialogBeta.TextButton
+            <Dialog.TextButton
               disabled={loading}
               text={
                 <FormattedMessage

@@ -105,7 +105,9 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
   return (
     <>
       <Dialog.Header
-        title="tagManageEditor"
+        title={
+          <FormattedMessage defaultMessage="Manage Communities" id="0/iEw/" />
+        }
         closeDialog={closeDialog}
         rightBtn={<AddEditorButton />}
       />
@@ -152,47 +154,49 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
 
         <Spacer size="base" />
 
-        <Dialog.Message smUpAlign="center">
-          <p className={styles.hint}>
-            <Translate
-              zh_hant="協作者可以與你共同管理精選"
-              zh_hans="协作者可以与你共同管理精选"
-              en="Collaborator can manage selected feed with you."
-            />
+        <Dialog.Content>
+          <Dialog.Content.Message smUpAlign="center">
+            <p className={styles.hint}>
+              <Translate
+                zh_hant="協作者可以與你共同管理精選"
+                zh_hans="协作者可以与你共同管理精选"
+                en="Collaborator can manage selected feed with you."
+              />
 
-            {(isHavingNoneEditors || isReachingLimit) && (
-              <p>
-                <Translate
-                  zh_hant="每個標籤最多添加"
-                  zh_hans="每个标签最多添加"
-                  en="Every tag can have maximum"
-                />
-                <span className={styles.count}> 4 </span>
-                <Translate
-                  zh_hant="名協作者"
-                  zh_hans="名协作者"
-                  en="collaborators."
-                />
-              </p>
-            )}
+              {(isHavingNoneEditors || isReachingLimit) && (
+                <p>
+                  <Translate
+                    zh_hant="每個標籤最多添加"
+                    zh_hans="每个标签最多添加"
+                    en="Every tag can have maximum"
+                  />
+                  <span className={styles.count}> 4 </span>
+                  <Translate
+                    zh_hant="名協作者"
+                    zh_hans="名协作者"
+                    en="collaborators."
+                  />
+                </p>
+              )}
 
-            {isAllowAdd && isHavingEditors && (
-              <p>
-                <Translate
-                  zh_hant="你還可以添加"
-                  zh_hans="你还可以添加"
-                  en="You can add"
-                />
-                <span className={styles.count}> {4 - count} </span>
-                <Translate
-                  zh_hant="名協作者"
-                  zh_hans="名协作者"
-                  en="more collaborators."
-                />
-              </p>
-            )}
-          </p>
-        </Dialog.Message>
+              {isAllowAdd && isHavingEditors && (
+                <p>
+                  <Translate
+                    zh_hant="你還可以添加"
+                    zh_hans="你还可以添加"
+                    en="You can add"
+                  />
+                  <span className={styles.count}> {4 - count} </span>
+                  <Translate
+                    zh_hant="名協作者"
+                    zh_hans="名协作者"
+                    en="more collaborators."
+                  />
+                </p>
+              )}
+            </p>
+          </Dialog.Content.Message>
+        </Dialog.Content>
 
         <Spacer size="base" />
       </Dialog.Content>

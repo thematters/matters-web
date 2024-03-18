@@ -100,7 +100,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
         <section className={styles.content}>
           <ul className={styles.articles}>
             {articles?.map(({ node, cursor }) => (
-              <li key={cursor}>
+              <li key={node.id}>
                 <Link
                   {...toPath({ page: 'articleDetail', article: node })}
                   legacyBehavior

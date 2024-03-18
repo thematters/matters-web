@@ -130,7 +130,7 @@ const BaseConfirm: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title="paymentPayout"
+        title={<FormattedMessage defaultMessage="Withdraw" id="PXAur5" />}
         closeDialog={closeDialog}
         leftBtn={
           back ? (
@@ -256,7 +256,12 @@ const BaseConfirm: React.FC<FormProps> = ({
             name="password"
             value={values.password}
             error={touched.password && errors.password}
-            hint={<Translate id="hintPaymentPassword" />}
+            hint={
+              <FormattedMessage
+                defaultMessage="Enter a 6-digit payment password."
+                id="OpeFTV"
+              />
+            }
             onChange={(value) => {
               const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
               setTouched({ amount: true, password: true }, shouldValidate)
@@ -277,7 +282,13 @@ const BaseConfirm: React.FC<FormProps> = ({
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={back ? 'back' : 'cancel'}
+              text={
+                back ? (
+                  <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
+                ) : (
+                  <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+                )
+              }
               color="greyDarker"
               onClick={back || closeDialog}
             />

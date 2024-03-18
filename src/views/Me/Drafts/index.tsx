@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
@@ -49,7 +50,7 @@ export const BaseMeDrafts = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
         {edges.map(({ node, cursor }) => (
-          <List.Item key={cursor}>
+          <List.Item key={node.id}>
             <DraftDigest.Feed draft={node} />
           </List.Item>
         ))}
@@ -58,16 +59,36 @@ export const BaseMeDrafts = () => {
   )
 }
 
-const MeDrafts = () => (
-  <Layout.Main>
-    <Layout.Header left={<Layout.Header.Title id="myDrafts" />} />
+const MeDrafts = () => {
+  const intl = useIntl()
 
-    <Head title={{ id: 'myDrafts' }} />
+  return (
+    <Layout.Main>
+      <Layout.Header
+        left={
+          <Layout.Header.Title>
+            <FormattedMessage
+              defaultMessage="Drafts"
+              id="GYAos5"
+              description="src/views/Me/Drafts/index.tsx"
+            />
+          </Layout.Header.Title>
+        }
+      />
 
-    <Layout.Main.Spacing hasVertical={false}>
-      <BaseMeDrafts />
-    </Layout.Main.Spacing>
-  </Layout.Main>
-)
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Drafts',
+          id: 'GYAos5',
+          description: 'src/views/Me/Drafts/index.tsx',
+        })}
+      />
+
+      <Layout.Main.Spacing hasVertical={false}>
+        <BaseMeDrafts />
+      </Layout.Main.Spacing>
+    </Layout.Main>
+  )
+}
 
 export default MeDrafts

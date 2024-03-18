@@ -27,7 +27,7 @@ import GlobalDialogs from '~/components/GlobalDialogs'
 import { UserLanguage } from '~/gql/graphql'
 import { MOCK_USER } from '~/stories/mocks'
 
-import { toLocale } from './language'
+import { toLocale } from './locale'
 
 const TranslationsProvider = ({ children }: { children: React.ReactNode }) => {
   const { lang } = useContext(LanguageContext)

@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import { FormattedMessage } from 'react-intl'
 
 import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
 import {
@@ -202,8 +203,15 @@ const BaseEditorSettingsDialog = ({
 
         {isCollection && (
           <DynamicEditorSearchSelectForm
-            title="collectArticle"
-            hint="hintEditCollection"
+            title={
+              <FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />
+            }
+            hint={
+              <FormattedMessage
+                defaultMessage="Adding articles to a collection helps readers find your articles."
+                id="XTyKFR"
+              />
+            }
             searchType="Article"
             searchExclude={SearchExclude.Blocked}
             onSave={async (nodes: SearchSelectNode[]) => {
@@ -222,8 +230,13 @@ const BaseEditorSettingsDialog = ({
 
         {isTag && (
           <DynamicEditorSearchSelectForm
-            title="addTag"
-            hint="hintAddTag"
+            title={<FormattedMessage defaultMessage="Add Tag" id="GUW//c" />}
+            hint={
+              <FormattedMessage
+                defaultMessage="Adding tags helps readers find your articles. Add or create new tags."
+                id="NmhF45"
+              />
+            }
             searchType="Tag"
             onSave={async (nodes: SearchSelectNode[]) => {
               await editTags(nodes as DigestTagFragment[])
