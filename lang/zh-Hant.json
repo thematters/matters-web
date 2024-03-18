@@ -2132,6 +2132,10 @@
   "w+6UiO": {
     "defaultMessage": "新增邀請"
   },
+  "w7W92K": {
+    "defaultMessage": "我為什麼會看到這個？",
+    "description": "src/components/Billboard/index.tsx"
+  },
   "wCgTu5": {
     "defaultMessage": "評論"
   },

@@ -2132,6 +2132,10 @@
   "w+6UiO": {
     "defaultMessage": "Add Invitation"
   },
+  "w7W92K": {
+    "defaultMessage": "Why am I seeing this ad?",
+    "description": "src/components/Billboard/index.tsx"
+  },
   "wCgTu5": {
     "defaultMessage": "Comments"
   },

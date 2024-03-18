@@ -20,6 +20,7 @@ const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
 export const featureSupportedChains = {
   curation: isProd ? [optimism] : [optimismSepolia],
   ens: isProd ? [mainnet] : [goerli],
+  billboard: isProd ? [polygon] : [polygonMumbai],
 }
 
 export const explorers = {

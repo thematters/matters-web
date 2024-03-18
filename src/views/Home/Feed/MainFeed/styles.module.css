@@ -1,0 +1,6 @@
+.billboardContainer {
+  @mixin border-bottom-grey;
+  @mixin flex-center-all;
+
+  padding: var(--spacing-base-loose) 0;
+}
