@@ -100,6 +100,7 @@ const DonationDialogContent = ({
   }
 
   const closeDialog = () => {
+    forward('currencyChoice')
     setCurrency(CURRENCY.HKD)
     baseCloseDialog()
   }
