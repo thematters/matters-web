@@ -80,11 +80,10 @@
 
   @media (--md-up) {
     & .content {
-      min-height: 100vh;
+      /* display: flex;
+      justify-content: space-between; */
 
-      & .top {
-        flex-grow: 1;
-      }
+      /* min-height: 100vh; */
     }
 
     grid-column: right;
