@@ -130,49 +130,41 @@ const OthersProcessingForm: React.FC<Props> = ({
         <PayToFallback closeDialog={closeDialog} />
       ) : (
         <>
-          <Dialog.Header
-            title={
-              <FormattedMessage defaultMessage="Support Author" id="ezYuE2" />
-            }
-          />
-          <Dialog.Content>
-            <section>
-              <PaymentInfo
-                amount={amount}
-                currency={currency}
-                recipient={recipient}
-                showLikerID={currency === CURRENCY.LIKE}
-              />
-              {currency === CURRENCY.HKD && (
-                <p className={styles.hint}>
+          <section>
+            <PaymentInfo
+              amount={amount}
+              currency={currency}
+              recipient={recipient}
+              showLikerID={currency === CURRENCY.LIKE}
+            />
+            <Spinner noSpacing />
+            {currency === CURRENCY.HKD && (
+              <p className={styles.hint}>
+                <FormattedMessage
+                  defaultMessage="Transaction in progress, please wait"
+                  id="SebPdz"
+                />
+              </p>
+            )}
+            {currency === CURRENCY.LIKE && (
+              <p className={styles.hint}>
+                <p>
                   <Translate
-                    zh_hant="交易進行中，請稍候..."
-                    zh_hans="交易进行中，请稍候..."
-                    en="Transaction in progress, please wait..."
+                    zh_hant="請在 Liker Pay 頁面繼續操作"
+                    zh_hans="请在 Liker Pay 页面继续操作"
+                    en="Please continue on the Liker Pay page"
                   />
                 </p>
-              )}
-              {currency === CURRENCY.LIKE && (
-                <p className={styles.hint}>
-                  <p>
-                    <Translate
-                      zh_hant="請在 Liker Pay 頁面繼續操作"
-                      zh_hans="请在 Liker Pay 页面继续操作"
-                      en="Please continue on the Liker Pay page"
-                    />
-                  </p>
-                  <p>
-                    <Translate
-                      zh_hant="完成前請勿關閉此畫面"
-                      zh_hans="完成前请勿关闭此画面"
-                      en="Do not close this screen until done"
-                    />
-                  </p>
+                <p>
+                  <Translate
+                    zh_hant="完成前請勿關閉此畫面"
+                    zh_hans="完成前请勿关闭此画面"
+                    en="Do not close this screen until done"
+                  />
                 </p>
-              )}
-              <Spinner />
-            </section>
-          </Dialog.Content>
+              </p>
+            )}
+          </section>
         </>
       )}
     </>

@@ -1,6 +1,6 @@
 .hint {
-  padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-base);
+  margin: var(--spacing-base) var(--spacing-base);
+  font-size: var(--font-size-sm);
   text-align: center;
 }
 

@@ -3,6 +3,7 @@ import { useContext, useState } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Spinner, useStep, ViewerContext } from '~/components'
+import PaymentProcessingForm from '~/components/Forms/PaymentForm/Processing'
 import { PayToMutation } from '~/gql/graphql'
 
 import DonationTabs, { CurrencyType } from './Tabs'
@@ -35,7 +36,7 @@ export type SupportAuthorProps = BaseSupportAuthorProps & {
 const SupportAuthor = (props: SupportAuthorProps) => {
   const { recipient, targetId, article, updateSupportStep } = props
   const viewer = useContext(ViewerContext)
-  const [, setWindowRef] = useState<Window | undefined>(undefined)
+  const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
   const [type, setType] = useState<CurrencyType>('credit')
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
 
@@ -47,7 +48,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const [amount, setAmount] = useState<number>(0)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
 
-  const [, setPayToTx] =
+  const [payToTx, setPayToTx] =
     useState<Omit<PayToMutation['payTo']['transaction'], '__typename'>>()
   const [tabUrl, setTabUrl] = useState('')
   const [tx, setTx] = useState<PayToMutation['payTo']['transaction']>()
@@ -72,6 +73,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
 
   const isSetAmount = currStep === 'setAmount'
   const isConfirm = currStep === 'confirm'
+  const isProcessing = currStep === 'processing'
 
   return (
     <>
@@ -109,6 +111,23 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           openTabCallback={setAmountOpenTabCallback}
           tabUrl={tabUrl}
           tx={tx}
+        />
+      )}
+      {isProcessing && (
+        <PaymentProcessingForm
+          amount={amount}
+          currency={currency}
+          recipient={recipient}
+          closeDialog={() => {}}
+          nextStep={() => {
+            forward('complete')
+          }}
+          txId={payToTx?.id || ''}
+          windowRef={windowRef}
+          article={article}
+          targetId={targetId}
+          switchToConfirm={() => forward('confirm')}
+          switchToCurrencyChoice={() => {}}
         />
       )}
     </>

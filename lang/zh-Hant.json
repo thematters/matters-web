@@ -1036,10 +1036,6 @@
   "LklXfd": {
     "defaultMessage": "跨鏈收款地址"
   },
-  "LlyrEA": {
-    "defaultMessage": "交易進行中，請稍候",
-    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
-  },
   "LmiUWG": {
     "defaultMessage": "你無法對此對象進行該操作",
     "description": "FORBIDDEN_BY_TARGET_STATE"
@@ -1278,6 +1274,9 @@
   },
   "Seanpx": {
     "defaultMessage": "必填栏位"
+  },
+  "SebPdz": {
+    "defaultMessage": "交易進行中，請稍候"
   },
   "Sep44m": {
     "defaultMessage": "提現",
@@ -1763,6 +1762,10 @@
   "ezYuE2": {
     "defaultMessage": "支持作者"
   },
+  "f45YWK": {
+    "defaultMessage": "Got it",
+    "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
+  },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者刪除"
   },
@@ -2220,9 +2223,6 @@
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "tGn21M": {
-    "defaultMessage": "支持送達"
   },
   "tIDG14": {
     "defaultMessage": "非法廣告"

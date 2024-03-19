@@ -224,8 +224,7 @@ const Confirm: React.FC<FormProps> = ({
           <p className={styles.hint}>
             <FormattedMessage
               defaultMessage="Transaction in progress, please wait"
-              description="src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
-              id="LlyrEA"
+              id="SebPdz"
             />
           </p>
         </>

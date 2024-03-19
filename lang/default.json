@@ -1036,10 +1036,6 @@
   "LklXfd": {
     "defaultMessage": "Payment Pointer"
   },
-  "LlyrEA": {
-    "defaultMessage": "Transaction in progress, please wait",
-    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
-  },
   "LmiUWG": {
     "defaultMessage": "You do not have permissionn to perform this operation",
     "description": "FORBIDDEN_BY_TARGET_STATE"
@@ -1278,6 +1274,9 @@
   },
   "Seanpx": {
     "defaultMessage": "Required"
+  },
+  "SebPdz": {
+    "defaultMessage": "Transaction in progress, please wait"
   },
   "Sep44m": {
     "defaultMessage": "Payout",
@@ -1763,6 +1762,10 @@
   "ezYuE2": {
     "defaultMessage": "Support Author"
   },
+  "f45YWK": {
+    "defaultMessage": "Got it",
+    "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
+  },
   "fDdcbi": {
     "defaultMessage": "This {type} has been deleted by the author"
   },
@@ -2220,9 +2223,6 @@
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "tGn21M": {
-    "defaultMessage": "Donated successfully"
   },
   "tIDG14": {
     "defaultMessage": "Illegal advertising"
