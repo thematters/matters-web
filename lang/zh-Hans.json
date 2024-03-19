@@ -889,6 +889,10 @@
   "Ihwz5K": {
     "defaultMessage": "代表作已取消"
   },
+  "ItQs15": {
+    "defaultMessage": "重试",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "ItUuuX": {
     "defaultMessage": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
@@ -1772,6 +1776,9 @@
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者删除"
   },
+  "fK6ptv": {
+    "defaultMessage": "送出失败，请稍后再试"
+  },
   "fPcF7H": {
     "defaultMessage": "添加适合标签，帮助读者找到你的作品"
   },
@@ -1913,6 +1920,9 @@
   "k5NnNF": {
     "defaultMessage": "追踪了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+  },
+  "k6pcz/": {
+    "defaultMessage": "请确认网路和钱包是否正常运行"
   },
   "k97/u7": {
     "defaultMessage": "添加作品"

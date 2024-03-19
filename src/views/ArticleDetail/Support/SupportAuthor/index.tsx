@@ -126,6 +126,9 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           currency={currency}
           recipient={recipient}
           closeDialog={() => {}}
+          prevStep={() => {
+            forward('confirm')
+          }}
           nextStep={() => {
             forward('complete')
           }}
@@ -140,7 +143,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       {isComplete && (
         <DynamicPayToFormComplete
           callback={() => {
-            // TODO: close dialog/drawer
             onClose()
           }}
           recipient={recipient}

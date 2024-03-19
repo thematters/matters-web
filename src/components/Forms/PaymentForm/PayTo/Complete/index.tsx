@@ -54,7 +54,7 @@ const Complete: React.FC<Props> = ({
         showEthAddress={currency === CURRENCY.USDT}
       >
         <>
-          <IconCircleCheck40 size="xl" color="green" />
+          <IconCircleCheck40 size="xlM" color="green" />
           <p className={styles.hint}>
             <FormattedMessage
               defaultMessage="Successfully delivered"

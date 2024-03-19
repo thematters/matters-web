@@ -16,6 +16,8 @@ import {
 import { CurationABI } from '~/common/utils'
 import {
   Dialog,
+  IconCircleTime40,
+  Spacer,
   Spinner,
   Translate,
   useMutation,
@@ -41,6 +43,7 @@ interface Props {
   article: NonNullable<ArticleDetailPublicQuery['article']>
   targetId: string
   txId: string
+  prevStep: () => void
   nextStep: () => void
   closeDialog: () => void
   windowRef?: Window
@@ -74,6 +77,7 @@ const OthersProcessingForm: React.FC<Props> = ({
   currency,
   recipient,
   txId,
+  prevStep,
   nextStep,
   closeDialog,
   windowRef,
@@ -118,18 +122,32 @@ const OthersProcessingForm: React.FC<Props> = ({
   }, [txState])
 
   return (
-    <>
-      {error ? (
-        <PayToFallback closeDialog={closeDialog} />
-      ) : (
-        <>
-          <section>
-            <PaymentInfo
-              amount={amount}
-              currency={currency}
-              recipient={recipient}
-              showLikerID={currency === CURRENCY.LIKE}
-            />
+    <section className={styles.container}>
+      <PaymentInfo
+        amount={amount}
+        currency={currency}
+        recipient={recipient}
+        showLikerID={currency === CURRENCY.LIKE}
+      >
+        {error && (
+          <>
+            <IconCircleTime40 size="xlM" color="red" />
+            <p className={styles.hint}>
+              <FormattedMessage
+                defaultMessage="Sending failed. Please retry later."
+                id="fK6ptv"
+              />
+              <br />
+              <FormattedMessage
+                defaultMessage="Check the wallet status and confirm your network."
+                id="k6pcz/"
+              />
+            </p>
+          </>
+        )}
+
+        {!error && (
+          <>
             <Spinner noSpacing />
             {currency === CURRENCY.HKD && (
               <p className={styles.hint}>
@@ -157,10 +175,31 @@ const OthersProcessingForm: React.FC<Props> = ({
                 </p>
               </p>
             )}
-          </section>
+          </>
+        )}
+      </PaymentInfo>
+
+      {error && (
+        <>
+          <Spacer size="loose" />
+          <Dialog.RoundedButton
+            color="black"
+            onClick={prevStep}
+            borderColor="greyLight"
+            borderWidth="sm"
+            textWeight="normal"
+            borderActiveColor="grey"
+            text={
+              <FormattedMessage
+                defaultMessage="Retry"
+                id="ItQs15"
+                description="src/components/Forms/PaymentForm/Processing/index.tsx"
+              />
+            }
+          />
         </>
       )}
-    </>
+    </section>
   )
 }
 
@@ -321,6 +360,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
   article,
   targetId,
   txId,
+  prevStep,
   nextStep,
   closeDialog,
   windowRef,
@@ -337,6 +377,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
           article={article}
           txId={txId}
           targetId={targetId}
+          prevStep={prevStep}
           nextStep={nextStep}
           closeDialog={closeDialog}
           windowRef={windowRef}
@@ -352,6 +393,7 @@ const PaymentProcessingForm: React.FC<Props> = ({
           article={article}
           txId={txId}
           targetId={targetId}
+          prevStep={prevStep}
           nextStep={nextStep}
           closeDialog={closeDialog}
           windowRef={windowRef}
