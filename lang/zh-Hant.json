@@ -508,6 +508,10 @@
     "defaultMessage": "編輯評論",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "9SXN7s": {
+    "defaultMessage": "沒有更多",
+    "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
+  },
   "9UNFGm": {
     "defaultMessage": "交易密碼"
   },
@@ -1435,10 +1439,6 @@
   "WpvsPu": {
     "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "WsefD2": {
-    "defaultMessage": "没有更多",
-    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "WuvE8X": {
     "defaultMessage": "{circleName} 的追蹤者",

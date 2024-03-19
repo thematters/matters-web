@@ -156,8 +156,8 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
           eof={
             <FormattedMessage
               defaultMessage="No more comments"
-              description="src/views/User/Articles/UserArticles.tsx"
-              id="WsefD2"
+              description="src/views/ArticleDetail/Comments/LatestComments/index.tsx"
+              id="9SXN7s"
             />
           }
         >
