@@ -179,13 +179,13 @@ interface TagExposureProp {
 }
 
 interface BillboardExposureProp {
-  id: string
+  id: number
   type: string
   delay_msecs?: number
 }
 
 interface ClickBillboardProp {
-  id: string
+  id: number
   type: string
   target: string
 }

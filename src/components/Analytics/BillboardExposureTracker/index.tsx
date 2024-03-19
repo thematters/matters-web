@@ -8,7 +8,7 @@ export const BillboardExposureTracker = ({
   type,
   horizontal = false,
 }: {
-  id: string
+  id: number
   type: string
   horizontal?: boolean
 }) => {

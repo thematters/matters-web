@@ -3,6 +3,7 @@
 
   padding-top: var(--spacing-loose);
   padding-bottom: var(--spacing-loose);
+  border-bottom-style: dashed;
 
   & div {
     margin-right: auto;

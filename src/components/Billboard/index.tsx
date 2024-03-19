@@ -1,4 +1,3 @@
-import _isNumber from 'lodash/isNumber'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useContractRead } from 'wagmi'
 
@@ -20,7 +19,7 @@ type BillboardProps = {
 
 export const Billboard = ({ tokenId, type }: BillboardProps) => {
   // collect vars
-  const id = _isNumber(tokenId) ? tokenId : 0
+  const id = !isNaN(Number(tokenId)) ? Number(tokenId) : 0
   const address = process.env.NEXT_PUBLIC_BILLBOARD_ADDRESS as `0x${string}`
   const network = featureSupportedChains.billboard[0]
 
