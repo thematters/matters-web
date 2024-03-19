@@ -313,6 +313,9 @@
     "defaultMessage": "This tag is already taken",
     "description": "DUPLICATE_TAG"
   },
+  "5UglrB": {
+    "defaultMessage": "Successfully delivered"
+  },
   "5XFd/5": {
     "defaultMessage": "Manage Circle"
   },
@@ -886,6 +889,10 @@
   "Ihwz5K": {
     "defaultMessage": "Unpinned from profile"
   },
+  "ItQs15": {
+    "defaultMessage": "Retry",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "ItUuuX": {
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
@@ -1035,10 +1042,6 @@
   },
   "LklXfd": {
     "defaultMessage": "Payment Pointer"
-  },
-  "LlyrEA": {
-    "defaultMessage": "Transaction in progress, please wait",
-    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "LmiUWG": {
     "defaultMessage": "You do not have permissionn to perform this operation",
@@ -1278,6 +1281,9 @@
   },
   "Seanpx": {
     "defaultMessage": "Required"
+  },
+  "SebPdz": {
+    "defaultMessage": "Transaction in progress, please wait"
   },
   "Sep44m": {
     "defaultMessage": "Payout",
@@ -1763,8 +1769,15 @@
   "ezYuE2": {
     "defaultMessage": "Support Author"
   },
+  "f45YWK": {
+    "defaultMessage": "Got it",
+    "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
+  },
   "fDdcbi": {
     "defaultMessage": "This {type} has been deleted by the author"
+  },
+  "fK6ptv": {
+    "defaultMessage": "Sending failed. Please retry later."
   },
   "fPcF7H": {
     "defaultMessage": "Adding tags helps readers find your articles."
@@ -1907,6 +1920,9 @@
   "k5NnNF": {
     "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+  },
+  "k6pcz/": {
+    "defaultMessage": "Check the wallet status and confirm your network."
   },
   "k97/u7": {
     "defaultMessage": "Add Articles"
@@ -2220,9 +2236,6 @@
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "tGn21M": {
-    "defaultMessage": "Donated successfully"
   },
   "tIDG14": {
     "defaultMessage": "Illegal advertising"

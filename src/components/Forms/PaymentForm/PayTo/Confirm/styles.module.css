@@ -28,6 +28,8 @@
 .hint {
   margin: var(--spacing-base) var(--spacing-base);
   font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-black);
   text-align: center;
 }
 

@@ -201,6 +201,7 @@ const DonationDialogContent = ({
           currency={currency}
           recipient={recipient}
           closeDialog={closeDialog}
+          prevStep={() => forward('confirm')}
           nextStep={() => {
             closeDialog()
           }}
@@ -218,6 +219,8 @@ const DonationDialogContent = ({
           callback={completeCallback}
           recipient={recipient}
           targetId={targetId}
+          amount={amount}
+          currency={currency}
         />
       )}
 

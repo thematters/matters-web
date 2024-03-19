@@ -313,6 +313,9 @@
     "defaultMessage": "標籤名稱已被使用",
     "description": "DUPLICATE_TAG"
   },
+  "5UglrB": {
+    "defaultMessage": "送出成功"
+  },
   "5XFd/5": {
     "defaultMessage": "管理圍爐"
   },
@@ -886,6 +889,10 @@
   "Ihwz5K": {
     "defaultMessage": "代表作已取消"
   },
+  "ItQs15": {
+    "defaultMessage": "重試",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "ItUuuX": {
     "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
@@ -1035,10 +1042,6 @@
   },
   "LklXfd": {
     "defaultMessage": "跨鏈收款地址"
-  },
-  "LlyrEA": {
-    "defaultMessage": "交易進行中，請稍候",
-    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "LmiUWG": {
     "defaultMessage": "你無法對此對象進行該操作",
@@ -1278,6 +1281,9 @@
   },
   "Seanpx": {
     "defaultMessage": "必填栏位"
+  },
+  "SebPdz": {
+    "defaultMessage": "交易進行中，請稍候"
   },
   "Sep44m": {
     "defaultMessage": "提現",
@@ -1763,8 +1769,15 @@
   "ezYuE2": {
     "defaultMessage": "支持作者"
   },
+  "f45YWK": {
+    "defaultMessage": "Got it",
+    "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
+  },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者刪除"
+  },
+  "fK6ptv": {
+    "defaultMessage": "送出失敗，請稍後再試"
   },
   "fPcF7H": {
     "defaultMessage": "添加合適標籤，讓站內外讀者找到你的作品"
@@ -1907,6 +1920,9 @@
   "k5NnNF": {
     "defaultMessage": "追蹤了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+  },
+  "k6pcz/": {
+    "defaultMessage": "請確認網路和錢包是否正常運行"
   },
   "k97/u7": {
     "defaultMessage": "添加作品"
@@ -2220,9 +2236,6 @@
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
-  },
-  "tGn21M": {
-    "defaultMessage": "支持送達"
   },
   "tIDG14": {
     "defaultMessage": "非法廣告"
