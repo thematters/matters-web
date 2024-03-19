@@ -21,6 +21,7 @@ import {
 } from '~/gql/graphql'
 
 import Authors from '../Authors'
+import Billboard from '../Billboard'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
@@ -72,6 +73,11 @@ const horizontalFeeds: FeedLocation = {
   5: () => (
     <Media lessThan="lg">
       <Authors />
+    </Media>
+  ),
+  9: () => (
+    <Media lessThan="lg">
+      <Billboard />
     </Media>
   ),
 }
