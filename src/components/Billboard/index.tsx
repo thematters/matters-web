@@ -39,7 +39,7 @@ export const Billboard = ({ tokenId }: BillboardProps) => {
             {!isLoading && (
               <>
                 <a href={data.redirectURI} target="_blank">
-                  <img src={data.contentURI} alt="ad"/>
+                  <img src={data.contentURI} alt="ad" />
                 </a>
                 <button
                   className={styles.button}
