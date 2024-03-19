@@ -1,5 +1,6 @@
 export * from './AnalyticsInitilizer'
 export * from './BannerExposureTracker'
+export * from './BillboardExposureTracker'
 export * from './CardExposureTracker'
 export * from './PageViewTracker'
 export * from './TagExposureTracker'

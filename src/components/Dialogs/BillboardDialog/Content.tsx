@@ -59,7 +59,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
                 />
               }
               color="greyDarker"
-              onClick={() => {}}
+              onClick={closeDialog}
             />
           </>
         }

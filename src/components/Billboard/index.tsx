@@ -1,18 +1,26 @@
+import _isNumber from 'lodash/isNumber'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useContractRead } from 'wagmi'
 
-import { BillboardABI, featureSupportedChains } from '~/common/utils'
-import { BillboardDialog, IconInfo24, Spinner, TextIcon } from '~/components'
+import { analytics, BillboardABI, featureSupportedChains } from '~/common/utils'
+import {
+  BillboardDialog,
+  BillboardExposureTracker,
+  IconInfo24,
+  Spinner,
+  TextIcon,
+} from '~/components'
 
 import styles from './styles.module.css'
 
 type BillboardProps = {
-  tokenId?: number
+  tokenId?: string
+  type: string
 }
 
-export const Billboard = ({ tokenId }: BillboardProps) => {
+export const Billboard = ({ tokenId, type }: BillboardProps) => {
   // collect vars
-  const id = tokenId || process.env.NEXT_PUBLIC_BILLBOARD_TOKEN_ID || 0
+  const id = _isNumber(tokenId) ? tokenId : 0
   const address = process.env.NEXT_PUBLIC_BILLBOARD_ADDRESS as `0x${string}`
   const network = featureSupportedChains.billboard[0]
 
@@ -26,7 +34,7 @@ export const Billboard = ({ tokenId }: BillboardProps) => {
     cacheTime: 60_000,
   })
 
-  if (isError || !data) {
+  if (!id || isError || !data) {
     return null
   }
 
@@ -38,7 +46,17 @@ export const Billboard = ({ tokenId }: BillboardProps) => {
             {isLoading && <Spinner />}
             {!isLoading && (
               <>
-                <a href={data.redirectURI} target="_blank">
+                <a
+                  href={data.redirectURI}
+                  target="_blank"
+                  onClick={() =>
+                    analytics.trackEvent('click_billboard', {
+                      id,
+                      type,
+                      target: data.redirectURI,
+                    })
+                  }
+                >
                   <img src={data.contentURI} alt="ad" />
                 </a>
                 <button
@@ -59,6 +77,7 @@ export const Billboard = ({ tokenId }: BillboardProps) => {
                     />
                   </TextIcon>
                 </button>
+                <BillboardExposureTracker id={id} type={type} />
               </>
             )}
           </div>

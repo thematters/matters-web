@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Billboard, Layout, Spacer } from '~/components'
+import { Layout, Spacer } from '~/components'
 
 import Announcements from './Announcements'
 import Feed from './Feed'
@@ -11,7 +11,7 @@ const Home = () => {
     <Layout.Main
       aside={
         <>
-          <Billboard />
+          <Sidebar.Billboard />
           <Sidebar.Tags />
           <Sidebar.Authors />
         </>
