@@ -313,6 +313,9 @@
     "defaultMessage": "This tag is already taken",
     "description": "DUPLICATE_TAG"
   },
+  "5UglrB": {
+    "defaultMessage": "Successfully delivered"
+  },
   "5XFd/5": {
     "defaultMessage": "Manage Circle"
   },

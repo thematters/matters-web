@@ -89,13 +89,6 @@ const OthersProcessingForm: React.FC<Props> = ({
 
   const succeededFn = () => {
     nextStep()
-    window.dispatchEvent(
-      new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {
-        detail: {
-          currency,
-        },
-      })
-    )
 
     if (windowRef) {
       windowRef.close()

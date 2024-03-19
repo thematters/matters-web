@@ -313,6 +313,9 @@
     "defaultMessage": "标签名称已被使用",
     "description": "DUPLICATE_TAG"
   },
+  "5UglrB": {
+    "defaultMessage": "送出成功"
+  },
   "5XFd/5": {
     "defaultMessage": "管理围炉"
   },

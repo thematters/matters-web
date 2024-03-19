@@ -29,12 +29,18 @@ const DynamicPayToFormConfirm = dynamic(
   { loading: () => <Spinner /> }
 )
 
+const DynamicPayToFormComplete = dynamic(
+  () => import('~/components/Forms/PaymentForm/PayTo/Complete'),
+  { loading: () => <Spinner /> }
+)
+
 export type SupportAuthorProps = BaseSupportAuthorProps & {
   updateSupportStep: (step: SupportStep) => void
+  onClose: () => void
 }
 
 const SupportAuthor = (props: SupportAuthorProps) => {
-  const { recipient, targetId, article, updateSupportStep } = props
+  const { recipient, targetId, article, updateSupportStep, onClose } = props
   const viewer = useContext(ViewerContext)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
   const [type, setType] = useState<CurrencyType>('credit')
@@ -74,6 +80,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const isSetAmount = currStep === 'setAmount'
   const isConfirm = currStep === 'confirm'
   const isProcessing = currStep === 'processing'
+  const isComplete = currStep === 'complete'
 
   return (
     <>
@@ -128,6 +135,18 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           targetId={targetId}
           switchToConfirm={() => forward('confirm')}
           switchToCurrencyChoice={() => {}}
+        />
+      )}
+      {isComplete && (
+        <DynamicPayToFormComplete
+          callback={() => {
+            // TODO: close dialog/drawer
+            onClose()
+          }}
+          recipient={recipient}
+          amount={amount}
+          currency={currency}
+          targetId={targetId}
         />
       )}
     </>

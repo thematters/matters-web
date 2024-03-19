@@ -74,6 +74,7 @@ const BaseDonationDialog = ({ children, article }: SupportDialogProps) => {
             targetId={article.id}
             article={article}
             updateSupportStep={setSupportStep}
+            onClose={closeDialog}
           />
         </Dialog.Content>
       </Dialog>

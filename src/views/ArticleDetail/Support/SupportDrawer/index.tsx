@@ -46,6 +46,7 @@ export const SupportDrawer: React.FC<SupportDrawerProps> = ({
           targetId={article.id}
           article={article}
           updateSupportStep={setSupportStep}
+          onClose={onClose}
         />
       </Drawer.Content>
     </Drawer>

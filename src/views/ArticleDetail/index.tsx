@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import {
+  CLOSE_AUTO_OPEN_COMMENT_DRAWER,
   OPEN_COMMENT_DETAIL_DIALOG,
   REFERRAL_QUERY_REFERRAL_KEY,
   URL_QS,
@@ -30,6 +31,7 @@ import {
   Title,
   toast,
   Translate,
+  useEventListener,
   useFeatures,
   usePublicQuery,
   useRoute,
@@ -137,7 +139,7 @@ const BaseArticleDetail = ({
     parentId !== '' ? 'commentDetail' : 'commentList'
   )
   const [isOpenComment, setIsOpenComment] = useState(false)
-  const [autoOpenComment] = useState(true)
+  const [autoOpenComment, setAutoOpenComment] = useState(true)
   const toggleCommentDrawer = () => {
     setIsOpenComment((prevState) => !prevState)
   }
@@ -235,6 +237,10 @@ const BaseArticleDetail = ({
       window.dispatchEvent(new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG))
     }, 500)
   }, [parentId])
+
+  useEventListener(CLOSE_AUTO_OPEN_COMMENT_DRAWER, () => {
+    setAutoOpenComment(false)
+  })
 
   const {
     title: translatedTitle,
