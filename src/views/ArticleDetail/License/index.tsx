@@ -18,32 +18,32 @@ const License: React.FC<LicenseProps> = ({ license }) => {
     <section className={styles.license} data-test-id={TEST_ID.ARTICLE_LICENSE}>
       {isCC0 && (
         <Translate
-          zh_hant="NO RIGHTS RESERVED 版權聲明"
-          zh_hans="NO RIGHTS RESERVED 版权声明"
+          zh_hant="NO RIGHTS RESERVED 授權聲明"
+          zh_hans="NO RIGHTS RESERVED 授权声明"
           en="NO RIGHTS RESERVED"
         />
       )}
 
       {isARR && (
         <Translate
-          zh_hant="ALL RIGHTS RESERVED 版權聲明"
-          zh_hans="ALL RIGHTS RESERVED 版权声明"
+          zh_hant="ALL RIGHTS RESERVED 授權聲明"
+          zh_hans="ALL RIGHTS RESERVED 授权声明"
           en="ALL RIGHTS RESERVED"
         />
       )}
 
       {isCCBYNCND2 && (
         <Translate
-          zh_hant="CC BY-NC-ND 2.0 版權聲明"
-          zh_hans="CC BY-NC-ND 2.0 版权声明"
+          zh_hant="CC BY-NC-ND 2.0 授權聲明"
+          zh_hans="CC BY-NC-ND 2.0 授权声明"
           en="CC BY-NC-ND 2.0"
         />
       )}
 
       {isCCBYNCND4 && (
         <Translate
-          zh_hant="CC BY-NC-ND 4.0 版權聲明"
-          zh_hans="CC BY-NC-ND 4.0 版权声明"
+          zh_hant="CC BY-NC-ND 4.0 授權聲明"
+          zh_hans="CC BY-NC-ND 4.0 授权声明"
           en="CC BY-NC-ND 4.0"
         />
       )}
