@@ -831,7 +831,7 @@
     "defaultMessage": "用戶名"
   },
   "HDjV1k": {
-    "defaultMessage": "分佈式入口",
+    "defaultMessage": "IPFS",
     "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
   },
   "HEpsZ3": {
