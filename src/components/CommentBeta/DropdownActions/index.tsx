@@ -188,7 +188,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isDescendantComment = comment.parentComment
 
   const controls = {
-    hasCopy: isTargetAuthor,
+    hasCopy: viewer.id === comment.author.id,
     hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
     hasDelete: !!(isCommentAuthor && isActive),
     hasReport: !isCommentAuthor,
