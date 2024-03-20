@@ -2247,6 +2247,10 @@
   "tio9Gt": {
     "defaultMessage": "分佈式入口"
   },
+  "tnWWrj": {
+    "defaultMessage": "評論已被強制隱藏",
+    "description": "src/components/CommentBeta/Content/index.tsx"
+  },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"

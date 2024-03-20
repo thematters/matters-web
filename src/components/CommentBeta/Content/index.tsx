@@ -61,10 +61,22 @@ const Content = ({
   const contentClasses = classNames({
     [styles.content]: true,
     [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
-    [styles.inactive]: state === 'archived',
+    [styles.inactive]: state === 'archived' || state === 'banned',
   })
 
-  if (state === 'collapsed' || state === 'banned' || isBlocked) {
+  if (state === 'banned') {
+    return (
+      <p className={contentClasses}>
+        <FormattedMessage
+          defaultMessage="The comment has been forcibly hidden"
+          description="src/components/CommentBeta/Content/index.tsx"
+          id="tnWWrj"
+        />
+      </p>
+    )
+  }
+
+  if (state === 'collapsed' || isBlocked) {
     return (
       <Collapsed
         content={content}

@@ -2247,6 +2247,10 @@
   "tio9Gt": {
     "defaultMessage": "IPFS"
   },
+  "tnWWrj": {
+    "defaultMessage": "The comment has been forcibly hidden",
+    "description": "src/components/CommentBeta/Content/index.tsx"
+  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
