@@ -10,6 +10,7 @@ import { CommentDetailQuery } from '~/gql/graphql'
 
 import { Placeholder } from '../Placeholder'
 import { COMMENT_DETAIL } from './gql'
+import styles from './styles.module.css'
 
 const CommentDetail = () => {
   /**
@@ -60,34 +61,27 @@ const CommentDetail = () => {
       }
 
       targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      const currentBgColor = targetElement.style.backgroundColor
 
       setTimeout(() => {
         if (!targetElement) {
           return
         }
-        targetElement.style.backgroundColor = 'var(--color-green-lighter)'
+        targetElement.classList.add(styles.activeBgColor)
         if (!descendantId) {
           // parent comment
-          targetElement.style.paddingLeft = 'var(--spacing-base)'
-          targetElement.style.paddingRight = 'var(--spacing-base)'
-          targetElement.style.marginLeft = '-1rem'
-          targetElement.style.marginRight = '-1rem'
+          targetElement.classList.add(styles.activeParentComment)
         }
 
         setTimeout(() => {
           if (!targetElement) {
             return
           }
-          targetElement.style.backgroundColor = currentBgColor
+          targetElement.classList.remove(styles.activeBgColor)
           if (!descendantId) {
             // parent comment
-            targetElement.style.paddingLeft = '0'
-            targetElement.style.marginLeft = '0'
-            targetElement.style.paddingRight = '0'
-            targetElement.style.marginRight = '0'
+            targetElement.classList.remove(styles.activeParentComment)
           }
-        }, 1000)
+        }, 5000)
       }, 500)
     }
   }, [readyJump])
