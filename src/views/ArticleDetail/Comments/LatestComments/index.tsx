@@ -110,7 +110,10 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
 
   // fetch private data for first page
   useEffect(() => {
-    loadPrivate(data)
+    // FIXME: Delayed loading of private data allows private data to guarantee writing to the final result
+    setTimeout(() => {
+      loadPrivate(data)
+    }, 100)
   }, [articleId, viewer.id])
 
   // load next page
