@@ -1583,6 +1583,10 @@
     "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
+  "aFJE+p": {
+    "defaultMessage": "{totalCount} articles",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
+  },
   "aOFCqL": {
     "defaultMessage": "Most comments",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"

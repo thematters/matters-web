@@ -1,7 +1,7 @@
 .container {
   display: flex;
   gap: var(--spacing-loose);
-  align-items: flex-start;
+  align-items: center;
   margin-top: var(--spacing-x-loose);
 
   & > a {
@@ -16,17 +16,18 @@
     color: var(--color-black);
 
     & .displayName {
-      font-size: var(--font-size-sm);
+      font-size: var(--font-size-md);
       font-weight: var(--font-weight-medium);
-      line-height: 1.375rem;
+      line-height: 1.5rem;
     }
 
     & .bio {
       @mixin line-clamp;
 
       -webkit-line-clamp: 4;
-      font-size: var(--font-size-xs);
-      line-height: 1.125rem;
+      font-size: var(--font-size-sm);
+      line-height: 1.375rem;
+      color: var(--color-grey);
     }
   }
 }

@@ -1583,6 +1583,10 @@
     "defaultMessage": "读者数量：访问过作品页的不重复的登录用户数加匿名 IP 数（数据周期更新，可能存在延迟）",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
+  "aFJE+p": {
+    "defaultMessage": "{totalCount} 篇作品",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
+  },
   "aOFCqL": {
     "defaultMessage": "最多评论",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"

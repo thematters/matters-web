@@ -1,51 +1,12 @@
 .container {
+  display: flex;
+  gap: var(--spacing-xx-tight);
+  align-items: flex-start;
   margin-top: var(--spacing-tight);
   margin-bottom: var(--spacing-tight);
 
-  @mixin flex-start-space-between;
-
   & header {
-    flex-grow: 1;
-    line-height: 1.5rem;
-  }
-
-  &.hasCover {
-    position: relative;
-
-    &.imageSizeMd {
-      min-height: 4rem;
-      padding-right: calc(4rem + var(--spacing-loose));
-
-      & .cover {
-        width: 4rem;
-        height: 4rem;
-      }
-    }
-
-    & .cover {
-      position: absolute;
-      top: 0;
-      right: 0;
-      display: initial;
-
-      & img {
-        @mixin object-fit-cover;
-
-        border-radius: var(--spacing-xx-tight);
-      }
-
-      & .count {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        display: flex;
-        width: 100%;
-        height: 1.375rem;
-        padding: var(--spacing-xxx-tight) var(--spacing-xx-tight);
-        background: var(--color-bg-black);
-        border-bottom-right-radius: var(--spacing-xx-tight);
-        border-bottom-left-radius: var(--spacing-xx-tight);
-      }
-    }
+    font-size: var(--font-size-sm);
+    line-height: 1.375rem;
   }
 }

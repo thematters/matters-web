@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { analytics, mergeConnections, toPath } from '~/common/utils'
 import {
   ArticleDigestAuthorSidebar,
@@ -85,10 +87,17 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
       <LinkWrapper {...collectionDetailPath}>
         <title>{collection.title}</title>
       </LinkWrapper>
-      {collection.description && (
+      {collection.articles.totalCount > 0 && (
         <LinkWrapper {...collectionDetailPath}>
-          <section className={styles.description}>
-            {collection.description}
+          <section className={styles.totalCount}>
+            <FormattedMessage
+              defaultMessage="{totalCount} articles"
+              description="src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
+              id="aFJE+p"
+              values={{
+                totalCount: collection.articles.totalCount,
+              }}
+            />
           </section>
         </LinkWrapper>
       )}
@@ -106,6 +115,7 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
                   titleTextSize="sm"
                   collectionId={collectionId}
                   titleColor={node.id === article?.id ? 'black' : 'greyDarker'}
+                  showCover={false}
                 />
               </List.Item>
             ))}

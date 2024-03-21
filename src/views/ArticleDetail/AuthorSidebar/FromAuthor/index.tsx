@@ -51,8 +51,8 @@ export const FromAuthor = ({ article }: FromAuthorProps) => {
               <ArticleDigestAuthorSidebar
                 article={work}
                 titleColor="black"
-                titleTextSize="md"
-                imageSize="md"
+                titleTextSize="sm"
+                showCover={false}
               />
             )}
             {work.__typename === 'Collection' && (

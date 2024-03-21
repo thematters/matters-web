@@ -1,6 +1,6 @@
 .container {
-  margin-top: var(--spacing-tight);
-  margin-bottom: var(--spacing-tight);
+  margin-top: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
 
   @mixin flex-start-space-between;
 
