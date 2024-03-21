@@ -420,10 +420,6 @@
     "defaultMessage": "取消代表作",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
-  "8CzY/X": {
-    "defaultMessage": "什麼是社區看板 (Billboard) ?",
-    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
-  },
   "8KFsZN": {
     "defaultMessage": "閱讀次數"
   },
@@ -597,6 +593,10 @@
   "CD688y": {
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "CNrhz9": {
+    "defaultMessage": "什麼是社區公告欄（Billboard）？",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "Cdkhl8": {
     "defaultMessage": "刪除{commentType}",
@@ -977,6 +977,10 @@
   "MDNaxs": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "MP6xe/": {
+    "defaultMessage": "Billboard 是一個公開且可付費租借的鏈上 NFT 廣告協議。租借成功後，可進行 14 天的內容投放。租借費用基於哈柏格稅概念計算，產生的租借收入將以二次方配捐方式回饋給社區創作者。更多詳情請查看{announcements}。",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "MPEeBy": {
     "defaultMessage": "操作失敗，請稍候重試",
@@ -1480,10 +1484,6 @@
   "bBYO6x": {
     "defaultMessage": "取消封鎖",
     "description": "src/components/BlockUser/Button/index.tsx"
-  },
-  "bBjRO0": {
-    "defaultMessage": "Billboard 是一個公開、任何人都可付費租借的 NFT 看板。租借成功後，可以在 14 天內進行內容投放。租借費用基於哈柏格稅概念計算，產生的租借收入將以平方配捐方式回饋給社區，查看{announcements}。",
-    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "bSqeXm": {
     "defaultMessage": "{ext, select, gif {GIF 格式} other {} }圖片大小不得超過 {sizeInMB}MB"

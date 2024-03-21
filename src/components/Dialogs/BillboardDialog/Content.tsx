@@ -17,8 +17,8 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
       <Dialog.Header
         title={
           <FormattedMessage
-            defaultMessage="What's Billboard?"
-            id="8CzY/X"
+            defaultMessage="What is Billboard?"
+            id="CNrhz9"
             description="src/components/Dialogs/BillboardDialog/Content.tsx"
           />
         }
@@ -27,8 +27,8 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
         <Dialog.Content.Message>
           <p>
             <FormattedMessage
-              defaultMessage="Billboard is a public NFT billboard for rent, where content can be displayed for 14 days. The rental fee, calculated using the Harberger Tax, is redistributed to the community through quadratic funding. See our {announcements} ."
-              id="bBjRO0"
+              defaultMessage="Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding. Please check out our {announcements}."
+              id="MP6xe/"
               description="src/components/Dialogs/BillboardDialog/Content.tsx"
               values={{
                 announcements: (
