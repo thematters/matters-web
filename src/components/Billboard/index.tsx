@@ -62,16 +62,16 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
                   className={styles.button}
                   type="button"
                   aria-label={intl.formatMessage({
-                    defaultMessage: 'Why am I seeing this?',
-                    id: 'S5LvpB',
+                    defaultMessage: "What's this?",
+                    id: '4wOWfp',
                     description: 'src/components/Billboard/index.tsx',
                   })}
                   onClick={openBillboardDialog}
                 >
                   <TextIcon icon={<IconInfo24 />} size="xs">
                     <FormattedMessage
-                      defaultMessage="Why am I seeing this?"
-                      id="S5LvpB"
+                      defaultMessage="What's this?"
+                      id="4wOWfp"
                       description="src/components/Billboard/index.tsx"
                     />
                   </TextIcon>

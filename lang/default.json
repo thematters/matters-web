@@ -271,6 +271,10 @@
   "4l6vz1": {
     "defaultMessage": "Copy"
   },
+  "4wOWfp": {
+    "defaultMessage": "What's this?",
+    "description": "src/components/Billboard/index.tsx"
+  },
   "50cquj": {
     "defaultMessage": "No discussion yet",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
@@ -1128,10 +1132,6 @@
     "defaultMessage": "User not found",
     "description": "USER_NOT_FOUND"
   },
-  "S5LvpB": {
-    "defaultMessage": "Why am I seeing this?",
-    "description": "src/components/Billboard/index.tsx"
-  },
   "S8PcQf": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
@@ -1199,10 +1199,6 @@
   },
   "TzhzIH": {
     "defaultMessage": "Creators"
-  },
-  "U7+5ED": {
-    "defaultMessage": "View Billboard NFT",
-    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "U7o9Ba": {
     "defaultMessage": "Accumulated read time"
@@ -1484,6 +1480,10 @@
   "bBYO6x": {
     "defaultMessage": "Unblock",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "bBjRO0": {
+    "defaultMessage": "Billboard is a public NFT billboard for rent, where content can be displayed for 14 days. The rental fee, calculated using the Harberger Tax, is redistributed to the community through quadratic funding. See our {announcements} .",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "bSqeXm": {
     "defaultMessage": "{ext, select, gif {GIF format i} other {I} }mages have a {sizeInMB} megabyte (MB) size limit."
@@ -2040,6 +2040,10 @@
     "defaultMessage": "Log in",
     "description": "src/components/Buttons/Login/index.tsx"
   },
+  "stTITI": {
+    "defaultMessage": "announcements",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
   "sy+pv5": {
     "defaultMessage": "Email"
   },
@@ -2129,10 +2133,6 @@
   "vLEnrs": {
     "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
-  },
-  "vMfNNF": {
-    "defaultMessage": "Billboard is a public NFT billboard for rent, where content can be displayed for 14 days. The rental fee, calculated using the Harberger Tax, is redistributed to the community through quadratic funding.",
-    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "vX2bDy": {
     "defaultMessage": "Collect Article"

@@ -1,6 +1,6 @@
 .billboard {
   display: block;
-  max-width: 343px;
+  max-width: 21.4375rem;
 
   & a {
     @mixin flex-center-all;
@@ -9,7 +9,7 @@
 
     & img {
       width: 100%;
-      max-height: 168px;
+      max-height: 10.5rem;
       border-radius: 1.25rem;
     }
   }

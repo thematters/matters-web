@@ -271,6 +271,10 @@
   "4l6vz1": {
     "defaultMessage": "複製"
   },
+  "4wOWfp": {
+    "defaultMessage": "這是什麼？",
+    "description": "src/components/Billboard/index.tsx"
+  },
   "50cquj": {
     "defaultMessage": "還沒有眾聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
@@ -1128,10 +1132,6 @@
     "defaultMessage": "用戶不存在",
     "description": "USER_NOT_FOUND"
   },
-  "S5LvpB": {
-    "defaultMessage": "我為什麼會看到這個？",
-    "description": "src/components/Billboard/index.tsx"
-  },
   "S8PcQf": {
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
@@ -1199,10 +1199,6 @@
   },
   "TzhzIH": {
     "defaultMessage": "創作者"
-  },
-  "U7+5ED": {
-    "defaultMessage": "查看 Billboard NFT",
-    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "U7o9Ba": {
     "defaultMessage": "累計閱讀時數"
@@ -1484,6 +1480,10 @@
   "bBYO6x": {
     "defaultMessage": "取消封鎖",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "bBjRO0": {
+    "defaultMessage": "Billboard 是一個公開、任何人都可付費租借的 NFT 看板。租借成功後，可以在 14 天內進行內容投放。租借費用基於哈柏格稅概念計算，產生的租借收入將以平方配捐方式回饋給社區，查看{announcements}。",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "bSqeXm": {
     "defaultMessage": "{ext, select, gif {GIF 格式} other {} }圖片大小不得超過 {sizeInMB}MB"
@@ -2040,6 +2040,10 @@
     "defaultMessage": "登入",
     "description": "src/components/Buttons/Login/index.tsx"
   },
+  "stTITI": {
+    "defaultMessage": "社區公告",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
   "sy+pv5": {
     "defaultMessage": "電子郵件"
   },
@@ -2129,10 +2133,6 @@
   "vLEnrs": {
     "defaultMessage": "支持了",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
-  },
-  "vMfNNF": {
-    "defaultMessage": "Billboard 是一個公開、任何人都可付費租借的 NFT 看板。租借成功後，可以在 14 天內進行內容投放。租借費用基於哈柏格稅概念計算，產生的租借收入將以平方配捐方式回饋給社區。",
-    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "vX2bDy": {
     "defaultMessage": "關聯作品"

@@ -27,9 +27,20 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
         <Dialog.Content.Message>
           <p>
             <FormattedMessage
-              defaultMessage="Billboard is a public NFT billboard for rent, where content can be displayed for 14 days. The rental fee, calculated using the Harberger Tax, is redistributed to the community through quadratic funding."
-              id="vMfNNF"
+              defaultMessage="Billboard is a public NFT billboard for rent, where content can be displayed for 14 days. The rental fee, calculated using the Harberger Tax, is redistributed to the community through quadratic funding. See our {announcements} ."
+              id="bBjRO0"
               description="src/components/Dialogs/BillboardDialog/Content.tsx"
+              values={{
+                announcements: (
+                  <a className="u-link-green" href="" target="_blank">
+                    <FormattedMessage
+                      defaultMessage="announcements"
+                      description="src/components/Dialogs/BillboardDialog/Content.tsx"
+                      id="stTITI"
+                    />
+                  </a>
+                ),
+              }}
             />
           </p>
         </Dialog.Content.Message>
@@ -41,8 +52,8 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
             <Dialog.RoundedButton
               text={
                 <FormattedMessage
-                  defaultMessage="View Billboard NFT"
-                  id="U7+5ED"
+                  defaultMessage="Learn more"
+                  id="wdz6Pf"
                   description="src/components/Dialogs/BillboardDialog/Content.tsx"
                 />
               }
@@ -51,13 +62,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
               onClick={closeDialog}
             />
             <Dialog.RoundedButton
-              text={
-                <FormattedMessage
-                  defaultMessage="Learn more"
-                  id="wdz6Pf"
-                  description="src/components/Dialogs/BillboardDialog/Content.tsx"
-                />
-              }
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               color="greyDarker"
               onClick={closeDialog}
             />
@@ -66,21 +71,15 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={
-                <FormattedMessage
-                  defaultMessage="Learn more"
-                  id="wdz6Pf"
-                  description="src/components/Dialogs/BillboardDialog/Content.tsx"
-                />
-              }
+              text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
               color="greyDarker"
               onClick={closeDialog}
             />
             <Dialog.TextButton
               text={
                 <FormattedMessage
-                  defaultMessage="View Billboard NFT"
-                  id="U7+5ED"
+                  defaultMessage="Learn more"
+                  id="wdz6Pf"
                   description="src/components/Dialogs/BillboardDialog/Content.tsx"
                 />
               }
