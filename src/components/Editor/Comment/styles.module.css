@@ -6,6 +6,11 @@
     margin: 0;
   }
 
+  & p {
+    font-size: var(--font-size-sm);
+    line-height: 1.375rem;
+  }
+
   /* outline */
   &:focus {
     outline: none;
