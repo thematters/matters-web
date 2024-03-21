@@ -126,9 +126,7 @@
   /* Link
    ========================================================================== */
   & a {
-    padding-bottom: 2px;
     color: var(--color-matters-green);
-    border-bottom: 1px solid currentcolor;
 
     &:hover,
     &:active,

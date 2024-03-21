@@ -24,4 +24,10 @@
   & a {
     pointer-events: none;
   }
+
+  & :global(.mention) {
+    padding-bottom: 0;
+    color: var(--color-matters-green);
+    border-bottom: 0;
+  }
 }
