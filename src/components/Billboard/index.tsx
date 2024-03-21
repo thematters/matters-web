@@ -33,7 +33,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
     cacheTime: 60_000,
   })
 
-  if (!id || isError || !data) {
+  if (!id || isError || !data || !data.contentURI) {
     return null
   }
 
