@@ -132,6 +132,7 @@ const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
               text={<FormattedMessage defaultMessage="Submit" id="wSZR47" />}
               color={!values.reason ? 'greyDarker' : 'green'}
               loading={isSubmitting}
+              disabled={isSubmitting || !values.reason}
             />
           }
           smUpBtns={
@@ -141,6 +142,7 @@ const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
               text={<FormattedMessage defaultMessage="Submit" id="wSZR47" />}
               color={!values.reason ? 'greyDarker' : 'green'}
               loading={isSubmitting}
+              disabled={isSubmitting || !values.reason}
             />
           }
         />
