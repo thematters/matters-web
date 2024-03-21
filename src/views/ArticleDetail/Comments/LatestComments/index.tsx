@@ -155,7 +155,12 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
         <InfiniteScroll
           hasNextPage={pageInfo.hasNextPage}
           loadMore={loadMore}
-          loader={<Placeholder />}
+          loader={
+            <>
+              <Placeholder />
+              <Spacer size="loose" />
+            </>
+          }
           eof={
             <FormattedMessage
               defaultMessage="No more comments"
