@@ -508,6 +508,10 @@
     "defaultMessage": "编辑评论",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "9SXN7s": {
+    "defaultMessage": "没有更多",
+    "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
+  },
   "9UNFGm": {
     "defaultMessage": "交易密码"
   },
@@ -827,7 +831,7 @@
     "defaultMessage": "用户名"
   },
   "HDjV1k": {
-    "defaultMessage": "分布式入口",
+    "defaultMessage": "IPFS",
     "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
   },
   "HEpsZ3": {
@@ -1435,10 +1439,6 @@
   "WpvsPu": {
     "defaultMessage": "订阅",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "WsefD2": {
-    "defaultMessage": "没有更多",
-    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "WuvE8X": {
     "defaultMessage": "{circleName} 的追踪者",
@@ -2246,6 +2246,10 @@
   },
   "tio9Gt": {
     "defaultMessage": "分布式入口"
+  },
+  "tnWWrj": {
+    "defaultMessage": "评论已被强制隐藏",
+    "description": "src/components/CommentBeta/Content/index.tsx"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",

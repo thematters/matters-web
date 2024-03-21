@@ -128,7 +128,7 @@
     "description": "INTERNAL_SERVER_ERROR"
   },
   "0oLj/t": {
-    "defaultMessage": "打開"
+    "defaultMessage": "展開"
   },
   "0qagOO": {
     "defaultMessage": "圍爐訂閱",
@@ -508,6 +508,10 @@
     "defaultMessage": "編輯評論",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "9SXN7s": {
+    "defaultMessage": "沒有更多",
+    "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
+  },
   "9UNFGm": {
     "defaultMessage": "交易密碼"
   },
@@ -827,7 +831,7 @@
     "defaultMessage": "用戶名"
   },
   "HDjV1k": {
-    "defaultMessage": "分佈式入口",
+    "defaultMessage": "IPFS",
     "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
   },
   "HEpsZ3": {
@@ -1435,10 +1439,6 @@
   "WpvsPu": {
     "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "WsefD2": {
-    "defaultMessage": "没有更多",
-    "description": "src/views/User/Articles/UserArticles.tsx"
   },
   "WuvE8X": {
     "defaultMessage": "{circleName} 的追蹤者",
@@ -2246,6 +2246,10 @@
   },
   "tio9Gt": {
     "defaultMessage": "分佈式入口"
+  },
+  "tnWWrj": {
+    "defaultMessage": "評論已被強制隱藏",
+    "description": "src/components/CommentBeta/Content/index.tsx"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",

@@ -76,7 +76,9 @@ const NoticeComment = ({
     )
   }
   const path =
-    comment.state === 'active' || comment.state === 'collapsed'
+    comment.state === 'active' ||
+    comment.state === 'collapsed' ||
+    comment.state === 'banned'
       ? toPath({
           page: 'commentDetail',
           comment,
