@@ -63,7 +63,7 @@
       width: 4px;
       height: 100%;
       content: '';
-      background: var(--color-matters-gold);
+      background: var(--color-grey-light);
     }
   }
 

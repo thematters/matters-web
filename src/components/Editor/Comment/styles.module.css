@@ -11,6 +11,10 @@
     line-height: 1.375rem;
   }
 
+  & blockquote {
+    padding-left: var(--spacing-base);
+  }
+
   /* outline */
   &:focus {
     outline: none;
