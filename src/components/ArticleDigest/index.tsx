@@ -1,4 +1,5 @@
 export * from './Archived'
+export * from './AuthorSidebar'
 export * from './Card'
 export * from './Dropdown'
 export * from './Feed'

@@ -2,7 +2,12 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Tag, TagExposureTracker } from '~/components'
+import {
+  IconMore16,
+  Tag,
+  TagExposureTracker,
+  TagListDialog,
+} from '~/components'
 import { TagListArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -26,12 +31,11 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
   return (
     <section className={styles.tagList} data-test-id={TEST_ID.ARTICLE_TAGS}>
       <ul className={styles.list}>
-        {article.tags.map((tag, i) => (
+        {article.tags.slice(0, 3).map((tag, i) => (
           <li key={tag.id} className={styles.listItem}>
             <Tag
               tag={tag}
-              type="inline"
-              active
+              type="article"
               onClick={() => {
                 analytics.trackEvent('click_button', {
                   type: 'click_tag',
@@ -39,10 +43,25 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
                 })
               }}
               canClamp
+              active
             />
             <TagExposureTracker location={i} id={tag.id} horizontal />
           </li>
         ))}
+        {article.tags.length > 3 && (
+          <TagListDialog tags={article.tags}>
+            {({ openDialog }) => (
+              <li
+                key="more-tag"
+                className={styles.moreTag}
+                role="button"
+                onClick={openDialog}
+              >
+                <IconMore16 />
+              </li>
+            )}
+          </TagListDialog>
+        )}
       </ul>
     </section>
   )

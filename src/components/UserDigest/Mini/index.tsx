@@ -23,7 +23,7 @@ import styles from './styles.module.css'
  */
 
 export type UserDigestMiniProps = {
-  user: UserDigestMiniUserFragment
+  user?: UserDigestMiniUserFragment
 
   avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
   textSize?: 'xs' | 'smS' | 'sm' | 'mdS' | 'md'
@@ -72,10 +72,6 @@ const Mini = ({
   onClick,
 }: UserDigestMiniProps) => {
   const isArchived = user?.status?.state === 'archived'
-  const path = toPath({
-    page: 'userProfile',
-    userName: user.userName || '',
-  })
   const containerClasses = classNames({
     [styles.container]: true,
     [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
@@ -92,7 +88,7 @@ const Mini = ({
     [styles[`direction${capitalizeFirstLetter(direction)}`]]: !!direction,
   })
 
-  if (isArchived) {
+  if (isArchived || !user) {
     return (
       <span
         className={containerClasses}
@@ -103,13 +99,25 @@ const Mini = ({
         <span className={nameClasses}>
           {hasDisplayName && (
             <span className={styles.displayname}>
-              <FormattedMessage defaultMessage="Account Archived" id="YS8YSV" />
+              {user ? (
+                <FormattedMessage
+                  defaultMessage="Account Archived"
+                  id="YS8YSV"
+                />
+              ) : (
+                <FormattedMessage defaultMessage="Anonymous User" id="GclYG/" />
+              )}
             </span>
           )}
         </span>
       </span>
     )
   }
+
+  const path = toPath({
+    page: 'userProfile',
+    userName: user.userName || '',
+  })
 
   return (
     <LinkWrapper

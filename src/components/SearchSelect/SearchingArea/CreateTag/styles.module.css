@@ -5,6 +5,8 @@
   line-height: inherit;
 
   & .content {
+    @mixin fix-cropped-letters;
+
     vertical-align: middle;
   }
 }

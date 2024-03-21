@@ -65,6 +65,11 @@
     }
   }
 
+  &.disabled {
+    color: var(--color-grey-light);
+    cursor: not-allowed;
+  }
+
   & + .item {
     margin-left: var(--spacing-x-loose);
   }

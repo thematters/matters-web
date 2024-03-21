@@ -211,21 +211,24 @@ const LinkENS = ({
                   />
                 }
               >
-                <Button
-                  spacing={['xtight', 'xtight']}
-                  aria-label={intl.formatMessage({
-                    defaultMessage: 'Copy',
-                    id: '4l6vz1',
-                  })}
-                >
-                  <TextIcon
-                    icon={<IconCopy16 color="black" size="xs" />}
-                    color="grey"
-                    textPlacement="left"
+                {({ copyToClipboard }) => (
+                  <Button
+                    spacing={['xtight', 'xtight']}
+                    aria-label={intl.formatMessage({
+                      defaultMessage: 'Copy',
+                      id: '4l6vz1',
+                    })}
+                    onClick={copyToClipboard}
                   >
-                    {maskAddress(viewer.info.ethAddress || '')}
-                  </TextIcon>
-                </Button>
+                    <TextIcon
+                      icon={<IconCopy16 color="black" size="xs" />}
+                      color="grey"
+                      textPlacement="left"
+                    >
+                      {maskAddress(viewer.info.ethAddress || '')}
+                    </TextIcon>
+                  </Button>
+                )}
               </CopyToClipboard>
             </p>
           </section>

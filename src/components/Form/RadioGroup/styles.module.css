@@ -1,0 +1,12 @@
+.radioInputOptions {
+  margin-bottom: var(--spacing-x-tight);
+}
+
+.radioInputItem {
+  padding: var(--spacing-x-tight) 0;
+
+  & label {
+    display: block;
+    font-size: 0;
+  }
+}

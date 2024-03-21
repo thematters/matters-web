@@ -5,7 +5,7 @@ import {
   Button,
   ButtonProps,
   IconColor,
-  IconShare16,
+  IconShare24,
   IconSize,
   LanguageContext,
   ShareDialog,
@@ -14,13 +14,13 @@ import {
 
 type ShareButtonBaseProps = {
   hasIcon?: boolean
-  iconSize?: Extract<IconSize, 'mdS'>
+  iconSize?: Extract<IconSize, 'mdS' | 'md'>
   iconColor?: Extract<IconColor, 'green' | 'grey' | 'black' | 'white'>
   inCard: boolean
 } & Omit<ShareDialogProps, 'children'>
 
 type ShareButtonProps = ShareButtonBaseProps &
-  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
+  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing' | 'disabled'>
 
 export const ShareButton: React.FC<
   React.PropsWithChildren<ShareButtonProps>
@@ -31,6 +31,7 @@ export const ShareButton: React.FC<
   hasIcon = true,
   iconSize,
   iconColor = 'black',
+  disabled,
   inCard,
   size,
   spacing,
@@ -59,8 +60,9 @@ export const ShareButton: React.FC<
           aria-label={translate({ id: 'share', lang })}
           aria-haspopup="dialog"
           onClick={openDialog}
+          disabled={disabled}
         >
-          {hasIcon && <IconShare16 size={iconSize} color={iconColor} />}
+          {hasIcon && <IconShare24 size={iconSize} color={iconColor} />}
           {children}
         </Button>
       )}

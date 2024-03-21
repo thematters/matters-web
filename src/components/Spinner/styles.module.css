@@ -3,3 +3,7 @@
   line-height: 1;
   text-align: center;
 }
+
+.noSpacing {
+  padding: 0;
+}

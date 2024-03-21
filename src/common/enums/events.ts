@@ -3,6 +3,8 @@ export const ANALYTICS = 'analytics'
 
 // Article
 export const REFETCH_RESPONSES = 'refetchResponses'
+export const SYNC_APPRECIATE_BUTTON_COUNT = 'syncAppreciateButtonCount'
+export const CLOSE_AUTO_OPEN_COMMENT_DRAWER = 'closeAutoOpenCommentDrawer'
 
 // Tag
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'
@@ -21,6 +23,7 @@ export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 export const OPEN_SET_USER_NAME_DIALOG = 'openSetUserNameDialog'
 export const OPEN_SHOW_NOMAD_BADGE_DIALOG = 'openShowNomadBadgeDialog'
+export const OPEN_COMMENT_DETAIL_DIALOG = 'openCommentDetailDialog'
 
 // Toast
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
@@ -35,6 +38,7 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   circlePrice = 'circlePrice',
   circleSubscription = 'circleSubscription',
   collectArticle = 'collectArticle',
+  reportIssues = 'reportIssues',
   comment = 'comment',
   createDraft = 'createDraft',
   error = 'error',

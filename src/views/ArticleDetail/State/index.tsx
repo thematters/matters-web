@@ -1,6 +1,9 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { Layout, Translate } from '~/components'
+import { PATHS } from '~/common/enums'
+import { LanguageContext, LinkWrapper, TextIcon } from '~/components'
 import { StateArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -13,24 +16,10 @@ const fragments = {
   `,
 }
 
-const BannedHeader = () => (
-  <Translate
-    zh_hant="此作品因違反用戶協定而被強制歸檔。"
-    zh_hans="此作品因违反用户协定而被强制封存。"
-    en="This work is archived due to violation of user agreement."
-  />
-)
-const ArchivedHeader = () => (
-  <Translate
-    zh_hant="此作品已在站內歸檔。"
-    zh_hans="此作品已在站內封存。"
-    en="This work is archived on Matters."
-  />
-)
-
 const State = ({ article }: { article: StateArticleFragment }) => {
   const isBanned = article.state === 'banned'
   const isArchived = article.state === 'archived'
+  const { lang } = useContext(LanguageContext)
 
   if (article.state === 'active') {
     return null
@@ -38,10 +27,37 @@ const State = ({ article }: { article: StateArticleFragment }) => {
 
   return (
     <section className={styles.container}>
-      {isBanned && <Layout.Notice color="grey" content={<BannedHeader />} />}
-      {isArchived && (
-        <Layout.Notice color="grey" content={<ArchivedHeader />} />
-      )}
+      <span>
+        {isBanned && (
+          <FormattedMessage
+            defaultMessage="Archived article (violations),"
+            id="HaSYl4"
+            description="src/views/ArticleDetail/State/index.tsx"
+          />
+        )}
+        {isArchived && (
+          <FormattedMessage
+            defaultMessage="Archived article (Author),"
+            id="9FQN4+"
+            description="src/views/ArticleDetail/State/index.tsx"
+          />
+        )}
+      </span>
+      {lang === 'en' && <span>&nbsp;</span>}
+      <LinkWrapper href={PATHS.ME_ARCHIVED}>
+        <TextIcon textDecoration="underline" size="md" weight="semibold">
+          <FormattedMessage
+            defaultMessage="Back to my works"
+            id="J12iSN"
+            description="src/views/ArticleDetail/State/index.tsx"
+          />
+        </TextIcon>
+      </LinkWrapper>
+      <style global jsx>{`
+        div[data-reactroot] {
+          margin-top: 42px;
+        }
+      `}</style>
     </section>
   )
 }

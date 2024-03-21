@@ -11,7 +11,7 @@ import styles from './styles.module.css'
 
 interface TagProps {
   tag: DigestTagFragment
-  type?: 'list' | 'title' | 'inline' | 'plain'
+  type?: 'list' | 'article' | 'title' | 'inline' | 'plain'
   iconProps?: IconProps
   textIconProps?: TextIconProps
   active?: boolean
@@ -103,6 +103,12 @@ export const Tag = ({
         weight: 'md',
         spacing: 0,
         color: 'white',
+      }
+      break
+    case 'article':
+      textIconProps = {
+        size: 'sm',
+        weight: 'normal',
       }
       break
     case 'inline':

@@ -34,6 +34,7 @@ export type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublicFragment &
     Partial<ArticleDigestFeedArticlePrivateFragment>
   header?: React.ReactNode
+  collectionId?: string
 } & ArticleDigestFeedControls &
   FooterActionsProps &
   UtmParams
@@ -41,6 +42,7 @@ export type ArticleDigestFeedProps = {
 const BaseArticleDigestFeed = ({
   article,
   header,
+  collectionId,
 
   hasHeader = true,
   hasCircle = true,
@@ -65,6 +67,7 @@ const BaseArticleDigestFeed = ({
   const path = toPath({
     page: 'articleDetail',
     article,
+    collectionId,
     utm_source,
     utm_medium,
   })
@@ -72,6 +75,7 @@ const BaseArticleDigestFeed = ({
   const footerActions = (
     <FooterActions
       article={article}
+      collectionId={collectionId}
       hasReadTime={hasReadTime}
       hasDonationCount={hasDonationCount}
       hasCircle={hasCircle}
@@ -111,6 +115,7 @@ const BaseArticleDigestFeed = ({
             <section className={styles.title}>
               <ArticleDigestTitle
                 article={article}
+                collectionId={collectionId}
                 textSize="md"
                 lineClamp={2}
                 onClick={onClick}

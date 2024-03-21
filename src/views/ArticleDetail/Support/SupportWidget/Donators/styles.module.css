@@ -1,0 +1,64 @@
+.avatarList {
+  @mixin flex-center-all;
+
+  flex-wrap: wrap;
+  gap: var(--spacing-base) var(--spacing-x-tight);
+  max-width: 312px;
+
+  @media (--lg-up) {
+    gap: var(--spacing-base) var(--spacing-tight);
+    max-width: 428px;
+  }
+
+  & .count {
+    @mixin inline-flex-center-all;
+
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: var(--font-size-xs);
+    line-height: 1.125rem;
+    color: var(--color-grey-darker);
+    background: var(--color-grey-lighter);
+    border-radius: 50%;
+
+    @media (--sm-up) {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  & .donatorName {
+    margin-left: var(--spacing-x-tight);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    line-height: 1.25rem;
+    color: var(--color-black);
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.avatarItem {
+  & > * {
+    height: 1.5rem;
+
+    @media (--sm-up) {
+      height: 2rem;
+    }
+  }
+}
+
+.viewSupport {
+  @mixin flex-center-all;
+
+  gap: var(--spacing-xx-tight);
+  margin-top: var(--spacing-x-tight);
+  font-size: var(--font-size-xs);
+  line-height: 1.125rem;
+
+  & span:first-child {
+    color: var(--color-grey-dark);
+  }
+}

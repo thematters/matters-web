@@ -170,14 +170,8 @@ const DonationDialogContent = ({
           recipient={recipient}
           article={article}
           submitCallback={setAmountCallback}
-          switchToCurrencyChoice={() => {
-            forward('currencyChoice')
-          }}
           switchToAddCredit={() => {
             forward('addCredit')
-          }}
-          back={() => {
-            forward('currencyChoice')
           }}
           setTabUrl={setTabUrl}
           setTx={setTx}
@@ -194,7 +188,6 @@ const DonationDialogContent = ({
           switchToSetAmount={() => forward('setAmount')}
           submitCallback={() => forward('processing')}
           switchToResetPassword={() => forward('resetPassword')}
-          switchToCurrencyChoice={() => forward('currencyChoice')}
           targetId={targetId}
           openTabCallback={setAmountOpenTabCallback}
           tabUrl={tabUrl}
@@ -208,6 +201,7 @@ const DonationDialogContent = ({
           currency={currency}
           recipient={recipient}
           closeDialog={closeDialog}
+          prevStep={() => forward('confirm')}
           nextStep={() => {
             closeDialog()
           }}
@@ -225,6 +219,8 @@ const DonationDialogContent = ({
           callback={completeCallback}
           recipient={recipient}
           targetId={targetId}
+          amount={amount}
+          currency={currency}
         />
       )}
 

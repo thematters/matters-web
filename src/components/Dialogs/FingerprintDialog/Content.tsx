@@ -221,14 +221,17 @@ const FingerprintDialogContent = ({
                 {dataHash || translate({ id: 'waitingForHash', lang })}
               </div>
               <CopyToClipboard text={dataHash}>
-                <Button
-                  aria-label={intl.formatMessage({
-                    defaultMessage: 'Copy',
-                    id: '4l6vz1',
-                  })}
-                >
-                  <IconCopy16 />
-                </Button>
+                {({ copyToClipboard }) => (
+                  <Button
+                    aria-label={intl.formatMessage({
+                      defaultMessage: 'Copy',
+                      id: '4l6vz1',
+                    })}
+                    onClick={copyToClipboard}
+                  >
+                    <IconCopy16 />
+                  </Button>
+                )}
               </CopyToClipboard>
             </section>
           </section>

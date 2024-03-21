@@ -101,7 +101,8 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   return (
     <li className={amountClasses}>
       <label htmlFor={fieldId}>
-        {formatAmount(amount, decimals)}
+        <span className={styles.currency}>{currency}</span>
+        <span className={styles.amount}>{formatAmount(amount, decimals)}</span>
 
         <VisuallyHidden>
           <input
@@ -169,23 +170,26 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
 
         {customAmount && (
           <section className={styles.customInput}>
-            <input
-              className={
-                customAmountError ? `error ${styles.input}` : styles.input
-              }
-              type="number"
-              name="customAmount"
-              placeholder={intl.formatMessage({
-                defaultMessage: 'Enter a custom amount',
-                id: 'y1AhBH',
-              })}
-              value={undefined}
-              autoComplete="nope"
-              autoCorrect="off"
-              autoCapitalize="off"
-              spellCheck="false"
-              {...customAmountInputProps}
-            />
+            <section className={styles.inputWrapper}>
+              <span className={styles.unit}>{currency}</span>
+              <input
+                className={
+                  customAmountError ? `error ${styles.input}` : styles.input
+                }
+                type="number"
+                name="customAmount"
+                placeholder={intl.formatMessage({
+                  defaultMessage: 'Enter the amount',
+                  id: 'eZ0m39',
+                })}
+                value={undefined}
+                autoComplete="nope"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
+                {...customAmountInputProps}
+              />
+            </section>
 
             {customAmountHint && (
               <div className={styles.hint}>{customAmountHint}</div>

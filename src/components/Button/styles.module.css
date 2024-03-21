@@ -72,6 +72,13 @@ span.container {
   }
 }
 
+.textActiveGreyDarker {
+  &:hover,
+  &:focus {
+    color: var(--color-grey-darker);
+  }
+}
+
 .textActiveRedDark {
   &:hover,
   &:focus {
@@ -151,6 +158,18 @@ span.container {
   }
 }
 
+.spacingYBaseTight {
+  &:not(.isTransparent) {
+    padding-top: var(--spacing-base-tight);
+    padding-bottom: var(--spacing-base-tight);
+  }
+
+  & .hotarea {
+    margin-top: calc(var(--spacing-base-tight) * -1);
+    margin-bottom: calc(var(--spacing-base-tight) * -1);
+  }
+}
+
 .spacingYTight {
   &:not(.isTransparent) {
     padding-top: var(--spacing-tight);
@@ -211,6 +230,18 @@ span.container {
   }
 }
 
+.spacingXBaseTight {
+  &:not(.isTransparent) {
+    padding-right: var(--spacing-base-tight);
+    padding-left: var(--spacing-base-tight);
+  }
+
+  & .hotarea {
+    margin-right: calc(var(--spacing-base-tight) * -1);
+    margin-left: calc(var(--spacing-base-tight) * -1);
+  }
+}
+
 .spacingXBase {
   &:not(.isTransparent) {
     padding-right: var(--spacing-base);
@@ -220,6 +251,18 @@ span.container {
   & .hotarea {
     margin-right: calc(var(--spacing-base) * -1);
     margin-left: calc(var(--spacing-base) * -1);
+  }
+}
+
+.spacingXBaseLoose {
+  &:not(.isTransparent) {
+    padding-right: var(--spacing-base-loose);
+    padding-left: var(--spacing-base-loose);
+  }
+
+  & .hotarea {
+    margin-right: calc(var(--spacing-base-loose) * -1);
+    margin-left: calc(var(--spacing-base-loose) * -1);
   }
 }
 
@@ -236,6 +279,12 @@ span.container {
 }
 
 /* Background */
+.bgWhite {
+  & .hotarea {
+    background: var(--color-white);
+  }
+}
+
 .bgGreyDarkest {
   & .hotarea {
     background: var(--color-grey-darkest);
@@ -431,6 +480,12 @@ span.container {
   }
 }
 
+.borderGreyLighterActive {
+  & .hotarea {
+    border-color: var(--color-grey-lighter-active);
+  }
+}
+
 .borderGreenLighter {
   & .hotarea {
     border-color: var(--color-green-lighter);
@@ -458,6 +513,24 @@ span.container {
 .borderLikecoinGreen {
   & .hotarea {
     border-color: var(--color-likecoin-green);
+  }
+}
+
+.borderActiveGreyLight {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-grey-light);
+    }
+  }
+}
+
+.borderActiveGrey {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-grey);
+    }
   }
 }
 

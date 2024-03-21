@@ -2,6 +2,10 @@
 .commentEditor :global(.tiptap) {
   min-height: 7rem;
 
+  & > *:first-child {
+    margin: 0;
+  }
+
   /* outline */
   &:focus {
     outline: none;

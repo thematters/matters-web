@@ -14,26 +14,28 @@
 }
 
 .tabs {
-  margin: calc(var(--spacing-x-tight) * -1) calc(var(--spacing-base) * -1) 0;
+  padding-bottom: var(--spacing-base);
+  margin: calc(var(--spacing-x-tight) * -1) calc(var(--spacing-base) * -1)
+    var(--spacing-x-tight);
 
   @media (--sm-up) {
-    margin: calc(var(--spacing-base) * -1) 0 0;
+    margin: calc(var(--spacing-base) * -1) 0 var(--spacing-x-tight);
   }
 }
 
 .preview {
+  @mixin polka-dot-background;
+
   position: relative;
-  padding: var(--spacing-base);
-  margin: var(--spacing-base) 0;
+  padding: var(--spacing-xx-loose) var(--spacing-base);
+  margin: var(--spacing-x-tight) 0;
   line-height: var(--line-height-base);
   text-align: center;
-  background: var(--color-yellow-lighter);
-  border-radius: 1.25rem;
 
   & .content {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-normal);
-    line-height: 1.5rem;
+    line-height: 1.375rem;
     color: var(--color-black);
 
     & .tagline {
@@ -43,10 +45,14 @@
   }
 
   & .button {
-    margin: var(--spacing-base) 0 0;
+    margin: var(--spacing-loose) 0 0;
 
     & button {
       width: 100%;
     }
   }
+}
+
+.previewTitle {
+  margin-top: var(--spacing-base);
 }

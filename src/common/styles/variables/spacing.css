@@ -13,5 +13,6 @@
   --spacing-loose: 1.5rem; /* 24px */
   --spacing-x-loose: 2rem; /* 32px */
   --spacing-xx-loose: 2.5rem; /* 40px */
+  --spacing-base-xx-loose: 3rem; /* 48px */
   --spacing-xxx-loose: 4rem; /* 64px */
 }

@@ -249,6 +249,7 @@ type ArticleFeedType =
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
+  | 'article_detail_author-sidebar-collection'
 
 type CollectionFeedType =
   | 'user_collection'

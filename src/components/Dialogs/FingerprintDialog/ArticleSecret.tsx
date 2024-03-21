@@ -49,21 +49,24 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
 
       <section className={styles.key}>
         <CopyToClipboard text={secret}>
-          <button
-            aria-label={intl.formatMessage({
-              defaultMessage: 'Copy',
-              id: '4l6vz1',
-            })}
-            className={styles.copyButton}
-          >
-            <TextIcon
-              icon={<IconCopy16 />}
-              textPlacement="left"
-              spacing="xtight"
+          {({ copyToClipboard }) => (
+            <button
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Copy',
+                id: '4l6vz1',
+              })}
+              className={styles.copyButton}
+              onClick={copyToClipboard}
             >
-              {secret.slice(0, 4)}...{secret.slice(-4)}
-            </TextIcon>
-          </button>
+              <TextIcon
+                icon={<IconCopy16 />}
+                textPlacement="left"
+                spacing="xtight"
+              >
+                {secret.slice(0, 4)}...{secret.slice(-4)}
+              </TextIcon>
+            </button>
+          )}
         </CopyToClipboard>
       </section>
     </section>

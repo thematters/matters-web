@@ -23,12 +23,14 @@ import {
   ShareDialog,
   ShareDialogProps,
   Spinner,
+  SubmitReport,
   SupportersDialog,
   SupportersDialogProps,
   toast,
   ViewerContext,
   withDialog,
 } from '~/components'
+import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog/Dialog'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
 import AddCollectionButton from './AddCollectionButton'
@@ -70,6 +72,7 @@ export interface DropdownActionsControls {
   icon?: React.ReactNode
   size?: IconSize
   sharePath?: string
+  disabled?: boolean
 
   /**
    * options to control visibility
@@ -78,9 +81,11 @@ export interface DropdownActionsControls {
   hasShare?: boolean
   hasFingerprint?: boolean
   hasExtend?: boolean
+  hasReport?: boolean
 
   // based on type
   inCard?: boolean
+  inFixedToolbar?: boolean
   inUserArticles?: boolean
 
   // tag
@@ -92,6 +97,8 @@ export interface DropdownActionsControls {
   hasArchive?: boolean
   hasEdit?: boolean
   hasBookmark?: boolean
+  hasAppreciators?: boolean
+  hasDonators?: boolean
 
   collectionId?: string
   collectionArticleCount?: number
@@ -116,6 +123,7 @@ interface Controls {
   hasDonators: boolean
   hasFingerprint: boolean
   hasExtend: boolean
+  hasReport: boolean
   hasSticky: boolean
   hasSetTagSelected: boolean
   hasSetTagUnselected: boolean
@@ -125,6 +133,7 @@ interface Controls {
 interface DialogProps {
   openShareDialog: () => void
   openFingerprintDialog: () => void
+  openSubmitReportDialog: () => void
   openAppreciatorsDialog: () => void
   openSupportersDialog: () => void
   openArchiveDialog: () => void
@@ -153,12 +162,15 @@ const BaseDropdownActions = ({
   icon,
   size,
   inCard,
+  inFixedToolbar,
+  disabled,
 
   hasShare,
   hasAppreciators,
   hasDonators,
   hasFingerprint,
   hasExtend,
+  hasReport,
   hasSticky,
   hasArchive,
   hasSetTagSelected,
@@ -173,6 +185,7 @@ const BaseDropdownActions = ({
 
   openShareDialog,
   openFingerprintDialog,
+  openSubmitReportDialog,
   openAppreciatorsDialog,
   openSupportersDialog,
   openArchiveDialog,
@@ -187,7 +200,12 @@ const BaseDropdownActions = ({
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
   const hasPublic =
-    hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
+    hasShare ||
+    hasAppreciators ||
+    hasDonators ||
+    hasFingerprint ||
+    hasExtend ||
+    hasReport
   const hasPrivate =
     hasSticky ||
     hasArchive ||
@@ -207,6 +225,7 @@ const BaseDropdownActions = ({
         <FingerprintButton openDialog={openFingerprintDialog} />
       )}
       {hasExtend && <ExtendButton article={article} />}
+      {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
 
       {/* private */}
       {hasPublic && hasPrivate && <Menu.Divider />}
@@ -218,7 +237,7 @@ const BaseDropdownActions = ({
       {hasSticky && <PinButton article={article} />}
 
       {hasBookmark && (
-        <BookmarkButton article={article} inCard={inCard} size="mdS" />
+        <BookmarkButton article={article} inCard={inCard} iconSize="mdS" />
       )}
 
       {hasSetTagSelected && tagDetailId && (
@@ -311,10 +330,14 @@ const BaseDropdownActions = ({
         ) : (
           <Button
             onClick={openDropdown}
-            spacing={['xtight', 'xtight']}
-            bgActiveColor="greyLighter"
+            spacing={
+              inFixedToolbar ? ['baseTight', 'baseTight'] : ['xtight', 'xtight']
+            }
+            borderRadius={inFixedToolbar ? 0 : '5rem'}
+            bgActiveColor={inFixedToolbar ? undefined : 'greyLighter'}
             aria-label={moreActionText}
             ref={ref}
+            disabled={disabled}
           >
             {icon ? icon : <IconMore16 size={size} />}
           </Button>
@@ -332,6 +355,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     hasShare,
     hasFingerprint = true,
     hasExtend = true,
+    hasReport,
 
     inCard,
     inUserArticles,
@@ -342,6 +366,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
     hasEdit,
     hasArchive,
+    hasDonators,
+    hasAppreciators,
     hasBookmark = true,
     hasAddCollection,
     hasRemoveCollection,
@@ -364,10 +390,13 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const controls = {
     // public
     hasShare: !!hasShare,
-    hasAppreciators: article.likesReceived.totalCount > 0 && !inCard,
-    hasDonators: article.donationsDialog.totalCount > 0 && !inCard,
+    hasAppreciators:
+      hasAppreciators && article.likesReceived.totalCount > 0 && !inCard,
+    hasDonators:
+      hasDonators && article.donationsDialog.totalCount > 0 && !inCard,
     hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
+    hasReport: !!hasReport && !isArticleAuthor,
 
     // privates
     hasSticky: !!(
@@ -406,9 +435,15 @@ const DropdownActions = (props: DropdownActionsProps) => {
     { article },
     ({ openDialog }) => ({ openFingerprintDialog: openDialog })
   )
+  const WithReport = withDialog<Omit<SubmitReportDialogProps, 'children'>>(
+    WithFingerprint,
+    SubmitReport.Dialog,
+    { id: article.id },
+    ({ openDialog }) => ({ openSubmitReportDialog: openDialog })
+  )
   const WithAppreciators = withDialog<
     Omit<AppreciatorsDialogProps, 'children'>
-  >(WithFingerprint, AppreciatorsDialog, { article }, ({ openDialog }) => ({
+  >(WithReport, AppreciatorsDialog, { article }, ({ openDialog }) => ({
     openAppreciatorsDialog: openDialog,
   }))
   const WithSupporters = withDialog<Omit<SupportersDialogProps, 'children'>>(

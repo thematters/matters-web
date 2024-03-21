@@ -12,8 +12,9 @@ interface DonationCountProps {
 
 const DonationCount = ({ article }: DonationCountProps) => {
   const intl = useIntl()
+  const count = article.donations.totalCount
 
-  if (!article.transactionsReceivedBy.totalCount) {
+  if (!count) {
     return null
   }
 
@@ -27,9 +28,7 @@ const DonationCount = ({ article }: DonationCountProps) => {
         id: 'DP3yqI',
       })}
     >
-      {article.transactionsReceivedBy.totalCount > 0
-        ? numAbbr(article.transactionsReceivedBy.totalCount)
-        : undefined}
+      {count > 0 ? numAbbr(count) : undefined}
     </TextIcon>
   )
 }

@@ -15,9 +15,7 @@ const fragments = {
     fragment SupportsDialogArticle on Article {
       id
       mediaHash
-      donationsDialog: transactionsReceivedBy(
-        input: { first: 0, purpose: donation }
-      ) {
+      donationsDialog: donations(input: { first: 0 }) {
         totalCount
       }
     }

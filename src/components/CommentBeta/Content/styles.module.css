@@ -1,0 +1,13 @@
+.content {
+  &.inactive {
+    color: var(--color-grey);
+  }
+}
+
+.sizeSm {
+  font-size: var(--font-size-sm);
+}
+
+.sizeMdS {
+  font-size: var(--font-size-md-s);
+}

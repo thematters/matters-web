@@ -15,12 +15,15 @@ export * from './SetUserNameDialog'
 // Article
 export * from './AppreciatorsDialog'
 export * from './BindEmailHintDialog'
+export * from './CommentFormBetaDialog'
 export * from './CommentFormDialog'
 export * from './FingerprintDialog'
 export * from './MigrationDialog'
 export * from './ReviseArticleDialog'
 export * from './ShareDialog'
+export * from './SubmitReportDialog'
 export * from './SupportersDialog'
+export * from './TagListDialog'
 
 // Collection
 export * from './AddArticlesCollectionDialog'

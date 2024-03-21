@@ -4,19 +4,12 @@
   & .header {
     @mixin flex-center-space-between;
 
-    padding-bottom: var(--spacing-base);
-
-    & .right :global(> * + *) {
-      margin-left: var(--spacing-x-tight);
-    }
+    padding: var(--spacing-x-tight) 0;
+    margin-bottom: var(--spacing-x-tight);
   }
-}
 
-.count {
-  position: relative;
-  top: -0.7rem;
-  right: -0.25rem;
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-bold);
-  color: var(--color-matters-green);
+  & :global(.list-item:last-child) {
+    margin-bottom: 0;
+    border: 0;
+  }
 }

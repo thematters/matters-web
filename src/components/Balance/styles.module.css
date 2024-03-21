@@ -1,0 +1,23 @@
+& .container {
+  display: flex;
+  align-items: center;
+  height: 1.875rem;
+  padding: var(--spacing-xx-tight) var(--spacing-x-tight);
+  line-height: 1.375rem;
+  background-color: var(--color-matters-gold-light);
+  border-radius: 0.5rem;
+
+  & .balance {
+    font-weight: var(--font-weight-medium);
+  }
+
+  & .topup {
+    @mixin border-left-grey;
+
+    padding-left: var(--spacing-x-tight);
+    margin-top: var(--spacing-xxx-tightest);
+    margin-bottom: var(--spacing-xxx-tightest);
+    margin-left: var(--spacing-x-tight);
+    border-left-color: var(--color-line-matters-golod-lighter);
+  }
+}

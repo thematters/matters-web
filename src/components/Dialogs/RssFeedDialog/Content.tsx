@@ -121,14 +121,17 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                   <div className={styles.hash}>{displayIPNS}</div>
 
                   <CopyToClipboard text={displayIPNS!}>
-                    <Button
-                      aria-label={intl.formatMessage({
-                        defaultMessage: 'Copy Link',
-                        id: 'u5aHb4',
-                      })}
-                    >
-                      <IconCopy16 />
-                    </Button>
+                    {({ copyToClipboard }) => (
+                      <Button
+                        aria-label={intl.formatMessage({
+                          defaultMessage: 'Copy Link',
+                          id: 'u5aHb4',
+                        })}
+                        onClick={copyToClipboard}
+                      >
+                        <IconCopy16 />
+                      </Button>
+                    )}
                   </CopyToClipboard>
                 </section>
               ) : (
@@ -197,15 +200,18 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                         {hostname}
 
                         <CopyToClipboard text={gatewayUrl}>
-                          <Button
-                            disabled={!ipnsKey}
-                            aria-label={intl.formatMessage({
-                              defaultMessage: 'Copy Link',
-                              id: 'u5aHb4',
-                            })}
-                          >
-                            <IconCopy16 />
-                          </Button>
+                          {({ copyToClipboard }) => (
+                            <Button
+                              disabled={!ipnsKey}
+                              aria-label={intl.formatMessage({
+                                defaultMessage: 'Copy Link',
+                                id: 'u5aHb4',
+                              })}
+                              onClick={copyToClipboard}
+                            >
+                              <IconCopy16 />
+                            </Button>
+                          )}
                         </CopyToClipboard>
                       </span>
                     </li>

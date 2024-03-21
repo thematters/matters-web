@@ -9,7 +9,7 @@ import styles from './styles.module.css'
 interface DateTimeProps {
   date: Date | string | number
   size?: 'xs' | 'sm'
-  color?: 'grey' | 'greyDark'
+  color?: 'grey' | 'greyDark' | 'greyDarker'
   type?: 'absolute' | 'relative'
 }
 
