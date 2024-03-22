@@ -1455,6 +1455,9 @@
   "XHcb2q": {
     "defaultMessage": "飞船正在检修中，请稍后看看"
   },
+  "XP1Vto": {
+    "defaultMessage": "Oops！该评论已被强制隐藏"
+  },
   "XQTBu6": {
     "defaultMessage": "在你的围炉广播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"

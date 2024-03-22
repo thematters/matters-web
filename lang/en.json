@@ -1455,6 +1455,9 @@
   "XHcb2q": {
     "defaultMessage": "Spaceship maintaining, please come back later"
   },
+  "XP1Vto": {
+    "defaultMessage": "Oops! This comment has been forcibly hidden"
+  },
   "XQTBu6": {
     "defaultMessage": "mentioned you in your circle broadcast comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
