@@ -67,4 +67,9 @@ export const GUIDE_LINKS = {
     zh_hans: `https://matters.town/zh_Hans/@hi176/387120?locale=zh-Hans`,
     en: `https://matters.town/@hi176/387120?locale=en`,
   },
+  billboard: {
+    zh_hant: `https://matters.town/@hi176/554162`,
+    zh_hans: `https://matters.town/@hi176/554162?locale=zh-Hans`,
+    en: `https://matters.town/@web3/554164?locale=en`,
+  },
 }

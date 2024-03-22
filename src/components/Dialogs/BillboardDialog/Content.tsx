@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog } from '~/components/Dialog'
+import { GUIDE_LINKS } from '~/common/enums'
+import { Dialog, LanguageContext } from '~/components'
 
 interface Props {
   closeDialog: () => void
@@ -9,6 +11,8 @@ interface Props {
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 const Content: React.FC<Props> = ({ closeDialog }) => {
+  const { lang } = useContext(LanguageContext)
+  const guideURL = GUIDE_LINKS.billboard[lang]
   const billboardURL = isProd
     ? 'https://billboard.matters-lab.io'
     : 'https://billboard-develop.matters-lab.io'
@@ -32,7 +36,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
               description="src/components/Dialogs/BillboardDialog/Content.tsx"
               values={{
                 announcements: (
-                  <a className="u-link-green" href="" target="_blank">
+                  <a className="u-link-green" href={guideURL} target="_blank">
                     <FormattedMessage
                       defaultMessage="announcements"
                       description="src/components/Dialogs/BillboardDialog/Content.tsx"
