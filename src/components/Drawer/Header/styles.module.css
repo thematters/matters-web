@@ -4,8 +4,7 @@
   position: sticky;
   top: 0;
   z-index: var(--z-index-global-header);
-  padding: var(--spacing-xx-loose) var(--spacing-loose) 0
-    var(--spacing-xx-loose);
+  padding: var(--spacing-xx-loose) var(--spacing-xx-loose) 0;
   margin-bottom: var(--spacing-base);
   background: var(--color-white);
 
