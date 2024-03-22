@@ -201,6 +201,7 @@ const FixedToolbar = ({
                 {...dropdonwActionsProps}
                 hasShare
                 hasBookmark={false}
+                hasReport
               />
             )}
           </section>
