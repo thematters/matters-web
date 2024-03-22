@@ -3,7 +3,6 @@ import _range from 'lodash/range'
 import { FormattedMessage } from 'react-intl'
 
 import {
-  CLOSE_AUTO_OPEN_COMMENT_DRAWER,
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
@@ -29,8 +28,6 @@ const Complete: React.FC<Props> = ({
   targetId,
 }) => {
   const gotIt = () => {
-    window.dispatchEvent(new CustomEvent(CLOSE_AUTO_OPEN_COMMENT_DRAWER, {}))
-
     window.dispatchEvent(
       new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {
         detail: {

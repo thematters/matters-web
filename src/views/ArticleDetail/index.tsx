@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from 'react'
 import { Waypoint } from 'react-waypoint'
 
 import {
-  CLOSE_AUTO_OPEN_COMMENT_DRAWER,
   OPEN_COMMENT_DETAIL_DIALOG,
   REFERRAL_QUERY_REFERRAL_KEY,
   URL_QS,
@@ -31,7 +30,6 @@ import {
   Title,
   toast,
   Translate,
-  useEventListener,
   useFeatures,
   usePublicQuery,
   useRoute,
@@ -139,7 +137,6 @@ const BaseArticleDetail = ({
     parentId !== '' ? 'commentDetail' : 'commentList'
   )
   const [isOpenComment, setIsOpenComment] = useState(false)
-  const [autoOpenComment, setAutoOpenComment] = useState(true)
   const toggleCommentDrawer = () => {
     setIsOpenComment((prevState) => !prevState)
   }
@@ -238,10 +235,6 @@ const BaseArticleDetail = ({
     }, 500)
   }, [parentId])
 
-  useEventListener(CLOSE_AUTO_OPEN_COMMENT_DRAWER, () => {
-    setAutoOpenComment(false)
-  })
-
   const {
     title: translatedTitle,
     summary: translatedSummary,
@@ -256,7 +249,6 @@ const BaseArticleDetail = ({
     translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
   const lock = article.state !== 'active'
-  const isShortWork = summary.length + content.length < 200
 
   return (
     <Layout.Main
@@ -389,16 +381,6 @@ const BaseArticleDetail = ({
           </Waypoint>
         </Media>
 
-        <Media greaterThan="sm">
-          <Waypoint
-            onEnter={() => {
-              if (article.canComment && autoOpenComment && !isShortWork) {
-                setTimeout(() => setIsOpenComment(true), 500)
-              }
-            }}
-          />
-        </Media>
-
         {collectionCount > 0 && (
           <section className={styles.block}>
             <DynamicCollection
@@ -478,16 +460,6 @@ const BaseArticleDetail = ({
           lock={lock}
           toggleCommentDrawer={toggleCommentDrawer}
           toggleDonationDrawer={toggleDonationDrawer}
-        />
-      </Media>
-
-      <Media greaterThan="sm">
-        <Waypoint
-          onEnter={() => {
-            if (article.canComment && autoOpenComment && isShortWork) {
-              setTimeout(() => setIsOpenComment(true), 500)
-            }
-          }}
         />
       </Media>
     </Layout.Main>
