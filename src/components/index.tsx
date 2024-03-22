@@ -4,6 +4,7 @@
 export * from './AuthMethodFeed'
 export * from './AuthTabs'
 export * from './Avatar'
+export * from './Billboard'
 export * from './Book'
 export * from './Button'
 export * from './CircleAvatar'

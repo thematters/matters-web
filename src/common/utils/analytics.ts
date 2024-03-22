@@ -37,6 +37,8 @@ type EventArgs =
   | ['tag_exposure', TagExposureProp]
   | ['image_upload', ImageUploadProp]
   | ['authenticate', AuthenticateProp]
+  | ['billboard_exposure', BillboardExposureProp]
+  | ['click_billboard', ClickBillboardProp]
 
 /**
  * Event: Page View
@@ -174,6 +176,18 @@ interface TagExposureProp {
   id: string
   location: number | string
   delay_msecs?: number
+}
+
+interface BillboardExposureProp {
+  id: number
+  type: string
+  delay_msecs?: number
+}
+
+interface ClickBillboardProp {
+  id: number
+  type: string
+  target: string
 }
 
 interface ImageUploadProp {

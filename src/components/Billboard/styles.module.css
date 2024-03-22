@@ -1,0 +1,20 @@
+.billboard {
+  display: block;
+  max-width: 21.4375rem;
+
+  & a {
+    @mixin flex-center-all;
+
+    line-height: 0;
+
+    & img {
+      width: 100%;
+      max-height: 10.5rem;
+      border-radius: 1.25rem;
+    }
+  }
+
+  & .button {
+    color: var(--color-grey);
+  }
+}
