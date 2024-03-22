@@ -3,3 +3,11 @@
   font-weight: var(--font-weight-semibold);
   color: var(--color-grey);
 }
+
+.smSpacing {
+  padding-bottom: var(--spacing-x-tight);
+
+  @media (--sm-up) {
+    padding-bottom: 0;
+  }
+}

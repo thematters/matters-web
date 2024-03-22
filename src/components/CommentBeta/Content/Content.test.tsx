@@ -53,7 +53,9 @@ describe('<Comemnt.Content>', () => {
         type="article"
       />
     )
-    expect(screen.getByText('Comment has been hidden')).toBeInTheDocument()
+    expect(
+      screen.getByText('The comment has been forcibly hidden')
+    ).toBeInTheDocument()
   })
 
   it('should render an archived Comment.Content', () => {

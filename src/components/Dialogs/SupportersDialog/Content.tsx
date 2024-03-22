@@ -102,6 +102,7 @@ const SupportersDialogContent = ({
           loadMore={loadMore}
           hasNextPage={pageInfo.hasNextPage}
         >
+          <div className={styles.smSpacing} />
           <List
             hasBorder={false}
             spacing={isSmUp ? ['base', 'baseLoose'] : ['base', 'base']}

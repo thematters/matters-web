@@ -33,6 +33,9 @@ const fragments = {
       parentComment {
         id
       }
+      comments(input: { first: 0 }) {
+        totalCount
+      }
       ...ContentCommentPublic
       ...ContentCommentPrivate
     }
@@ -53,6 +56,31 @@ const NoticeComment = ({
 
   if (!comment) {
     return null
+  }
+
+  if (
+    comment.state === 'banned' &&
+    ((comment.parentComment === null && comment.comments?.totalCount === 0) ||
+      comment.parentComment !== null)
+  ) {
+    return (
+      <button
+        onClick={() => {
+          toast.success({
+            message: (
+              <FormattedMessage
+                defaultMessage="Oops! This comment has been forcibly hidden"
+                id="XP1Vto"
+              />
+            ),
+          })
+        }}
+      >
+        <section>
+          <NoticeContentDigest content={comment.content || ''} />
+        </section>
+      </button>
+    )
   }
 
   if (comment.state === 'archived') {

@@ -1455,6 +1455,9 @@
   "XHcb2q": {
     "defaultMessage": "飛船正在檢修中，請稍後看看"
   },
+  "XP1Vto": {
+    "defaultMessage": "Oops！該評論已被強制隱藏"
+  },
   "XQTBu6": {
     "defaultMessage": "在你的圍爐廣播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -1582,6 +1585,10 @@
   "a1+ca6": {
     "defaultMessage": "讀者數量：訪問過作品頁的不重複的登入用戶數加匿名 IP 數（數據週期更新，可能存在延遲）",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "aFJE+p": {
+    "defaultMessage": "{totalCount} 篇作品",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
   },
   "aOFCqL": {
     "defaultMessage": "最多評論",

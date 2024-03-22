@@ -30,6 +30,7 @@ export type IconColor =
   | 'green'
   | 'gold'
   | 'red'
+  | 'redLight'
 
 export interface IconProps {
   /** Working Icon description */
