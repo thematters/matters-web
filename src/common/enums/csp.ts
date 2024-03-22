@@ -89,6 +89,9 @@ const IMG_SRC = [
 
   // WalletConnect
   '*.walletconnect.com',
+
+  // Billboard
+  process.env.NEXT_PUBLIC_BILLBOARD_IMAGE_URL,
 ]
 
 const MEDIA_SRC = IMG_SRC

@@ -18,6 +18,7 @@ const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
 
 export const featureSupportedChains = {
+  billboard: isProd ? [optimism] : [optimismSepolia],
   curation: isProd ? [optimism] : [optimismSepolia],
   ens: isProd ? [mainnet] : [goerli],
 }
