@@ -34,6 +34,11 @@ const DynamicPayToFormComplete = dynamic(
   { loading: () => <Spinner /> }
 )
 
+const DynamicPaymentSetPasswordForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/SetPassword'),
+  { loading: () => <Spinner /> }
+)
+
 export type SupportAuthorProps = BaseSupportAuthorProps & {
   updateSupportStep: (step: SupportStep) => void
   onClose: () => void
@@ -81,6 +86,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const isConfirm = currStep === 'confirm'
   const isProcessing = currStep === 'processing'
   const isComplete = currStep === 'complete'
+  const isSetPaymentPassword = currStep === 'setPaymentPassword'
 
   return (
     <>
@@ -149,6 +155,15 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           amount={amount}
           currency={currency}
           targetId={targetId}
+        />
+      )}
+      {isSetPaymentPassword && (
+        <DynamicPaymentSetPasswordForm
+          submitCallback={() => forward('confirm')}
+          recipient={recipient}
+          amount={amount}
+          currency={currency}
+          switchToSetAmount={() => forward('setAmount')}
         />
       )}
     </>

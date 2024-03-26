@@ -16,8 +16,8 @@ interface AddCreditDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicPaymentSetPasswordForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/SetPassword'),
+const DynamicSetPaymentPasswordContent = dynamic(
+  () => import('~/components/Dialogs/SetPaymentPasswordDialog/Content'),
   { loading: () => <Spinner /> }
 )
 
@@ -57,7 +57,7 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         {isSetPaymentPassword && (
-          <DynamicPaymentSetPasswordForm
+          <DynamicSetPaymentPasswordContent
             submitCallback={() => forward('addCredit')}
             closeDialog={closeDialog}
           />

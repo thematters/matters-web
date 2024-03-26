@@ -150,6 +150,10 @@
     "defaultMessage": "餘額：",
     "description": "src/components/Balance/index.tsx"
   },
+  "1WeErK": {
+    "defaultMessage": "歡迎使用錢包！請先設置交易密碼",
+    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
+  },
   "1Z1M77": {
     "defaultMessage": "尚無閱讀紀錄",
     "description": "src/views/Me/History/index.tsx"
@@ -1244,6 +1248,10 @@
   "ROPCC0": {
     "defaultMessage": "請先綁定郵箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
+  },
+  "RU5NDB": {
+    "defaultMessage": "請再次輸入交易密碼",
+    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
   },
   "Rc4Oij": {
     "defaultMessage": "火閃電"

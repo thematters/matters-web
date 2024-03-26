@@ -17,8 +17,8 @@ const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
   { loading: () => <Spinner /> }
 )
-const DynamicPaymentSetPasswordForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/SetPassword'),
+const DynamicSetPaymentPasswordContent = dynamic(
+  () => import('~/components/Dialogs/SetPaymentPasswordDialog/Content'),
   { loading: () => <Spinner /> }
 )
 const DynamicSubscribeCircleForm = dynamic(
@@ -42,7 +42,7 @@ const SubscribeCircleDialogContent = ({
   return (
     <>
       {isSetPaymentPassword && (
-        <DynamicPaymentSetPasswordForm
+        <DynamicSetPaymentPasswordContent
           submitCallback={() => forward('subscribeCircle')}
           closeDialog={closeDialog}
         />

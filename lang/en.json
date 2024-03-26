@@ -150,6 +150,10 @@
     "defaultMessage": "Balance:",
     "description": "src/components/Balance/index.tsx"
   },
+  "1WeErK": {
+    "defaultMessage": "Welcome to use your wallet! {br} Please set a transaction password first",
+    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
+  },
   "1Z1M77": {
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
@@ -1244,6 +1248,10 @@
   "ROPCC0": {
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
+  },
+  "RU5NDB": {
+    "defaultMessage": "Please confirm transaction password",
+    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
   },
   "Rc4Oij": {
     "defaultMessage": "Firebolt"
