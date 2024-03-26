@@ -227,6 +227,10 @@ const DonationDialogContent = ({
       {isSetPaymentPassword && (
         <DynamicPaymentSetPasswordForm
           submitCallback={() => forward('confirm')}
+          switchToSetAmount={() => forward('setAmount')}
+          recipient={recipient}
+          amount={amount}
+          currency={currency}
         />
       )}
 

@@ -4,7 +4,6 @@ import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
 import {
   parseFormSubmitErrors,
@@ -15,25 +14,18 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  Spacer,
+  Spinner,
+  Translate,
   useMutation,
   useStep,
 } from '~/components'
-import {
-  SetPaymentPasswordMutation,
-  UserDonationRecipientFragment,
-} from '~/gql/graphql'
+import { SetPaymentPasswordMutation } from '~/gql/graphql'
 
-import PaymentInfo from '../PaymentInfo'
 import styles from './styles.module.css'
 
 interface FormProps {
   submitCallback: () => void
   closeDialog?: () => any
-  amount: number
-  currency: CURRENCY
-  recipient: UserDonationRecipientFragment
-  switchToSetAmount: () => void
 }
 
 interface FormValues {
@@ -52,13 +44,9 @@ const SET_PAYMENT_PASSWORD = gql`
   }
 `
 
-const PaymentSetPasswordForm: React.FC<FormProps> = ({
+const SetPaymentPasswordContent: React.FC<FormProps> = ({
   submitCallback,
   closeDialog,
-  amount,
-  currency,
-  recipient,
-  switchToSetAmount,
 }) => {
   const intl = useIntl()
   const { lang } = useContext(LanguageContext)
@@ -136,7 +124,12 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
           name="password"
           value={values.password}
           error={touched.password && errors.password}
-          hintAlign="center"
+          hint={
+            <FormattedMessage
+              defaultMessage="Enter a 6-digit payment password."
+              id="OpeFTV"
+            />
+          }
           onChange={(value) => {
             const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
             setTouched({ password: true }, shouldValidate)
@@ -150,12 +143,17 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
           name="compared-password"
           value={values.comparedPassword}
           error={touched.comparedPassword && errors.comparedPassword}
+          hint={
+            <FormattedMessage
+              defaultMessage="Enter a 6-digit payment password."
+              id="OpeFTV"
+            />
+          }
           onChange={(value) => {
             const shouldValidate = value.length === PAYMENT_PASSSWORD_LENGTH
             setTouched({ comparedPassword: true }, shouldValidate)
             setFieldValue('comparedPassword', value, shouldValidate)
           }}
-          hintAlign="center"
         />
       )}
     </Form>
@@ -171,52 +169,67 @@ const PaymentSetPasswordForm: React.FC<FormProps> = ({
     }
   }, [values.password, values.comparedPassword])
 
+  if (isSubmitting) {
+    return (
+      <Dialog.Content>
+        <Spinner />
+      </Dialog.Content>
+    )
+  }
+
   return (
-    <section className={styles.container}>
-      <PaymentInfo amount={amount} currency={currency} recipient={recipient} />
+    <>
+      <Dialog.Header
+        title={
+          <FormattedMessage defaultMessage="Transaction Password" id="9UNFGm" />
+        }
+        closeDialog={closeDialog}
+      />
 
-      <p className={styles.hint}>
-        {isInPassword && (
-          <FormattedMessage
-            defaultMessage="Welcome to use your wallet! {br} Please set a transaction password first"
-            id="1WeErK"
-            values={{ br: <br /> }}
-            description="src/components/Forms/PaymentForm/SetPassword/index.tsx"
-          />
-        )}
-        {isInComparedPassword && (
-          <FormattedMessage
-            defaultMessage="Please confirm transaction password"
-            id="RU5NDB"
-            description="src/components/Forms/PaymentForm/SetPassword/index.tsx"
-          />
-        )}
-      </p>
-
-      {InnerForm}
-
-      {!isSubmitting && (
-        <>
-          <Spacer size="loose" />
-          <Dialog.RoundedButton
-            color="black"
-            onClick={switchToSetAmount}
-            borderColor="greyLight"
-            borderWidth="sm"
-            textWeight="normal"
-            borderActiveColor="grey"
-            text={
+      <Dialog.Content>
+        <section className={styles.reason}>
+          {isInPassword && (
+            <p>
               <FormattedMessage
-                defaultMessage="Back"
-                id="QfrKA6"
-                description="src/components/Forms/PaymentForm"
+                defaultMessage="To protect your assets,"
+                id="bhehIF"
               />
-            }
+              <br />
+              <FormattedMessage
+                defaultMessage="please set transaction password before top-up"
+                id="yBkdMI"
+              />
+            </p>
+          )}
+
+          {isInComparedPassword && (
+            <p>
+              <FormattedMessage
+                defaultMessage="Enter a 6-digit payment password."
+                id="OpeFTV"
+              />
+            </p>
+          )}
+
+          <p className={styles.hint}>
+            <Translate id="hintPaymentPassword" />
+          </p>
+        </section>
+
+        {InnerForm}
+      </Dialog.Content>
+
+      <Dialog.Footer
+        smUpBtns={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
+            color="greyDarker"
+            onClick={closeDialog}
           />
-        </>
-      )}
-    </section>
+        }
+      />
+    </>
   )
 }
 
-export default PaymentSetPasswordForm
+export default SetPaymentPasswordContent
