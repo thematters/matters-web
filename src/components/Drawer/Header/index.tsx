@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useIntl } from 'react-intl'
 
 import { IconClose24 } from '~/components'
@@ -10,6 +11,7 @@ export interface HeaderProps {
   leftBtn?: React.ReactNode
   rightBtn?: React.ReactNode
   closeDrawer?: () => any
+  fixedWidth?: boolean
 }
 
 const Header: React.FC<HeaderProps> = ({
@@ -17,11 +19,17 @@ const Header: React.FC<HeaderProps> = ({
   leftBtn,
   rightBtn,
   closeDrawer,
+  fixedWidth = true,
 }) => {
   const intl = useIntl()
 
+  const headerClasses = classNames({
+    [styles.header]: true,
+    [styles.fixedWidth]: !!fixedWidth,
+  })
+
   return (
-    <header className={styles.header}>
+    <header className={headerClasses}>
       {leftBtn && <section>{leftBtn}</section>}
       <h2>{title}</h2>
       {rightBtn && <section>{rightBtn}</section>}

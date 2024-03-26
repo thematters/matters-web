@@ -1,7 +1,5 @@
 .content {
-  padding: 0 var(--spacing-xx-loose);
-
   &.fixedWidth {
-    width: 27.5rem;
+    width: 22.5rem;
   }
 }
