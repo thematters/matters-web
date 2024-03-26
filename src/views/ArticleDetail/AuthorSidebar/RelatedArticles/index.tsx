@@ -38,7 +38,7 @@ export const RelatedArticles = ({ article }: RelatedArticlesProps) => {
 
   return (
     <section>
-      <List borderPosition="top">
+      <List borderPosition="bottom" hasLastBorder={false}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             <ArticleDigestAuthorSidebar
