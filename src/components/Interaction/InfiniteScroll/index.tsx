@@ -42,6 +42,7 @@ interface Props {
   loader?: React.ReactNode
 
   eof?: React.ReactNode
+  eofSpacingTop?: 'base' | 'xLoose'
 }
 
 export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
@@ -49,6 +50,7 @@ export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
   loader = <Spinner />,
   loadMore,
   eof,
+  eofSpacingTop,
   children,
 }) => {
   return (
@@ -56,7 +58,9 @@ export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
       {children}
       {hasNextPage && <Waypoint onEnter={loadMore} />}
       {hasNextPage && loader}
-      {!hasNextPage && eof && <EndOfResults message={eof} />}
+      {!hasNextPage && eof && (
+        <EndOfResults message={eof} spacingTop={eofSpacingTop} />
+      )}
     </>
   )
 }

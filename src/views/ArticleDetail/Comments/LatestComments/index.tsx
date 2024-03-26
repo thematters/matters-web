@@ -168,6 +168,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
               id="9SXN7s"
             />
           }
+          eofSpacingTop="base"
         >
           <List spacing={[0, 0]} hasBorder={false}>
             {!!pinnedComment && (
