@@ -100,7 +100,7 @@ const BaseFingerprintDialog = ({
         testId={TEST_ID.DIALOG_FINGERPRINT}
       >
         <Dialog.Header
-          title={<FormattedMessage defaultMessage="IPFS" id="tio9Gt" />}
+          title="IPFS"
           leftBtn={
             <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
