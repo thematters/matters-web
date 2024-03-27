@@ -2,7 +2,6 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
-import { Waypoint } from 'react-waypoint'
 
 import {
   OPEN_COMMENT_DETAIL_DIALOG,
@@ -31,6 +30,7 @@ import {
   toast,
   Translate,
   useFeatures,
+  useIntersectionObserver,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -132,6 +132,22 @@ const BaseArticleDetail = ({
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
+
+  const {
+    isIntersecting: isIntersectingDesktopToolbar,
+    ref: desktopToolbarRef,
+  } = useIntersectionObserver()
+
+  useEffect(() => {
+    setShowFloatToolbar(!isIntersectingDesktopToolbar)
+  }, [isIntersectingDesktopToolbar])
+
+  const { isIntersecting: isIntersectingComments, ref: commentsRef } =
+    useIntersectionObserver()
+
+  useEffect(() => {
+    setShowCommentToolbar(isIntersectingComments)
+  }, [isIntersectingComments])
 
   const [commentDrawerStep, setCommentDrawerStep] = useState<CommentDrawerStep>(
     parentId !== '' ? 'commentDetail' : 'commentList'
@@ -357,28 +373,19 @@ const BaseArticleDetail = ({
           />
         )}
         <Media greaterThanOrEqual="lg">
-          <Waypoint
-            onEnter={() => {
-              setShowFloatToolbar(false)
-            }}
-            onLeave={() => {
-              setShowFloatToolbar(true)
-            }}
-          >
-            <div>
-              <DesktopToolbar
-                article={article}
-                articleDetails={article}
-                translated={translated}
-                translatedLanguage={translatedLanguage}
-                privateFetched={privateFetched}
-                hasFingerprint={canReadFullContent}
-                hasReport
-                lock={lock}
-                toggleDrawer={toggleCommentDrawer}
-              />
-            </div>
-          </Waypoint>
+          <div ref={desktopToolbarRef}>
+            <DesktopToolbar
+              article={article}
+              articleDetails={article}
+              translated={translated}
+              translatedLanguage={translatedLanguage}
+              privateFetched={privateFetched}
+              hasFingerprint={canReadFullContent}
+              hasReport
+              lock={lock}
+              toggleDrawer={toggleCommentDrawer}
+            />
+          </div>
         </Media>
 
         {collectionCount > 0 && (
@@ -393,18 +400,11 @@ const BaseArticleDetail = ({
         <Media at="sm">
           <AuthorSidebar article={article} />
 
-          <Waypoint
-            onEnter={() => {
-              setShowCommentToolbar(true)
-            }}
-            onLeave={() => setShowCommentToolbar(false)}
-          >
-            {article.commentCount > 0 && (
-              <section className={styles.smUpCommentBlock}>
-                <DynamicComments id={article.id} lock={!canReadFullContent} />
-              </section>
-            )}
-          </Waypoint>
+          {article.commentCount > 0 && (
+            <section className={styles.smUpCommentBlock} ref={commentsRef}>
+              <DynamicComments id={article.id} lock={!canReadFullContent} />
+            </section>
+          )}
         </Media>
       </section>
 

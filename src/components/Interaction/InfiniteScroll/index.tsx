@@ -1,6 +1,6 @@
-import { Waypoint } from 'react-waypoint'
+import { useEffect } from 'react'
 
-import { Spinner } from '~/components'
+import { Spinner, useIntersectionObserver } from '~/components'
 
 import EndOfResults from './EndOfResults'
 
@@ -43,6 +43,7 @@ interface Props {
 
   eof?: React.ReactNode
   eofSpacingTop?: 'base' | 'xLoose'
+  scrollableAncestor?: any
 }
 
 export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
@@ -51,12 +52,21 @@ export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
   loadMore,
   eof,
   eofSpacingTop,
+  scrollableAncestor,
   children,
 }) => {
+  const { isIntersecting, ref } = useIntersectionObserver()
+
+  useEffect(() => {
+    if (isIntersecting) {
+      loadMore()
+    }
+  }, [isIntersecting])
+
   return (
     <>
       {children}
-      {hasNextPage && <Waypoint onEnter={loadMore} />}
+      {hasNextPage && <span ref={ref} />}
       {hasNextPage && loader}
       {!hasNextPage && eof && (
         <EndOfResults message={eof} spacingTop={eofSpacingTop} />

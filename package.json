@@ -118,11 +118,9 @@
     "react-spring": "^9.7.2",
     "react-stickynode": "^4.1.0",
     "react-use-gesture": "^9.1.3",
-    "react-waypoint": "^10.3.0",
     "url-loader": "^4.1.1",
     "use-debounce": "^9.0.4",
     "validator": "^13.11.0",
-    "cross-env": "^7.0.3",
     "viem": "^1.21.4",
     "wagmi": "^1.4.13"
   },
