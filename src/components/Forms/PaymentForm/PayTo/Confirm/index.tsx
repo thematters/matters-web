@@ -11,6 +11,7 @@ import {
 } from '~/common/enums'
 import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
+  BindEmailHintDialog,
   Dialog,
   Form,
   // IconExternalLink16,
@@ -72,6 +73,7 @@ const Confirm: React.FC<FormProps> = ({
   const intl = useIntl()
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
+  const hasEmail = !!viewer.info.email
 
   const formId = 'pay-to-confirm-form'
 
@@ -241,17 +243,28 @@ const Confirm: React.FC<FormProps> = ({
           </p>
           {InnerForm}
 
-          <ResetPaymentPasswordDialog autoCloseDialog>
-            {({ openDialog }) => (
-              <button className={styles.forgetPassword} onClick={openDialog}>
-                <FormattedMessage
-                  defaultMessage="Forgot transaction password?"
-                  id="7UqcsO"
-                  description="src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
-                />
-              </button>
+          <BindEmailHintDialog>
+            {({ openDialog: openBindEmailHintDialog }) => (
+              <ResetPaymentPasswordDialog autoCloseDialog>
+                {({ openDialog: openResetPaymentPasswordDialog }) => (
+                  <button
+                    className={styles.forgetPassword}
+                    onClick={
+                      hasEmail
+                        ? openResetPaymentPasswordDialog
+                        : openBindEmailHintDialog
+                    }
+                  >
+                    <FormattedMessage
+                      defaultMessage="Forgot transaction password?"
+                      id="7UqcsO"
+                      description="src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+                    />
+                  </button>
+                )}
+              </ResetPaymentPasswordDialog>
             )}
-          </ResetPaymentPasswordDialog>
+          </BindEmailHintDialog>
         </>
       )}
 
