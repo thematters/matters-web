@@ -362,6 +362,10 @@
   "6ErzDk": {
     "defaultMessage": "Reconnect Wallet"
   },
+  "6KmKvZ": {
+    "defaultMessage": "Please enter new transaction password again",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "6N2LKY": {
     "defaultMessage": "Please log in again.",
     "description": "OAUTH_TOKEN_INVALID"
@@ -827,9 +831,6 @@
   },
   "H8KGyc": {
     "defaultMessage": "Enter"
-  },
-  "H9FKs4": {
-    "defaultMessage": "Enter transaction password again"
   },
   "HAlOn1": {
     "defaultMessage": "Name"
@@ -1977,6 +1978,10 @@
     "defaultMessage": "Send the verification code",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
   },
+  "kvUs/6": {
+    "defaultMessage": "Please enter new transaction password",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "l/f7bu": {
     "defaultMessage": "Want to know more? Check the",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
@@ -2167,6 +2172,10 @@
   "qPqap+": {
     "defaultMessage": "Archived",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
+  },
+  "qS19ij": {
+    "defaultMessage": "Reset successful",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
   "qVhxp5": {
     "defaultMessage": "Enter",

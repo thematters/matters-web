@@ -362,6 +362,10 @@
   "6ErzDk": {
     "defaultMessage": "重新連接錢包"
   },
+  "6KmKvZ": {
+    "defaultMessage": "請再次輸入新交易密碼",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "6N2LKY": {
     "defaultMessage": "授權信息已失效，請重新登入",
     "description": "OAUTH_TOKEN_INVALID"
@@ -827,9 +831,6 @@
   },
   "H8KGyc": {
     "defaultMessage": "進入"
-  },
-  "H9FKs4": {
-    "defaultMessage": "請再次輸入交易密碼"
   },
   "HAlOn1": {
     "defaultMessage": "用戶名"
@@ -1977,6 +1978,10 @@
     "defaultMessage": "發送驗證碼",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
   },
+  "kvUs/6": {
+    "defaultMessage": "請輸入新交易密碼",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "l/f7bu": {
     "defaultMessage": "想了解更多？詳見 ",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
@@ -2167,6 +2172,10 @@
   "qPqap+": {
     "defaultMessage": "已封存",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
+  },
+  "qS19ij": {
+    "defaultMessage": "交易密碼重置成功",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
   "qVhxp5": {
     "defaultMessage": "進入",

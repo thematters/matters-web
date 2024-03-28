@@ -241,7 +241,7 @@ const Confirm: React.FC<FormProps> = ({
           </p>
           {InnerForm}
 
-          <ResetPaymentPasswordDialog>
+          <ResetPaymentPasswordDialog autoCloseDialog>
             {({ openDialog }) => (
               <button className={styles.forgetPassword} onClick={openDialog}>
                 <FormattedMessage
