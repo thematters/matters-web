@@ -1229,6 +1229,10 @@
     "defaultMessage": "上一步",
     "description": "src/components/Forms/PaymentForm"
   },
+  "R410ei": {
+    "defaultMessage": "验证码错误",
+    "description": "CODE_INVALID"
+  },
   "R7yHDl": {
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
@@ -1593,6 +1597,10 @@
   "a1+ca6": {
     "defaultMessage": "读者数量：访问过作品页的不重复的登录用户数加匿名 IP 数（数据周期更新，可能存在延迟）",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "aE5Qq+": {
+    "defaultMessage": "重新发送",
+    "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
   },
   "aFJE+p": {
     "defaultMessage": "{totalCount} 篇作品",
@@ -1965,6 +1973,10 @@
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "ksvOGO": {
+    "defaultMessage": "发送验证码",
+    "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
   "l/f7bu": {
     "defaultMessage": "想了解更多？詳見 ",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
@@ -2305,8 +2317,16 @@
   "us5QHt": {
     "defaultMessage": "{type} 被创作者折叠"
   },
+  "utMaM0": {
+    "defaultMessage": "验证码已通过邮件发送，有效期为 20 分钟",
+    "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
   "uw32VR": {
     "defaultMessage": "教学指南"
+  },
+  "v5MunN": {
+    "defaultMessage": "验证码逾期，请点击重新发送",
+    "description": "CODE_EXPIRED"
   },
   "v6YjIn": {
     "defaultMessage": "账户",

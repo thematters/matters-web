@@ -34,6 +34,7 @@ import {
   LanguageSwitch,
   Media,
   ReCaptchaContext,
+  ResendCodeButton,
   TextIcon,
   Turnstile,
   TurnstileInstance,
@@ -332,33 +333,17 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           hasFooter={false}
           rightButton={
             <>
-              {hasSendCode && countdown > 0 && (
-                <span className={styles.resendButton}>
-                  {countdown}&nbsp;
-                  <FormattedMessage
-                    defaultMessage="Resend"
-                    id="dzF4ci"
-                    description="src/components/Forms/EmailLoginForm/index.tsx"
-                  />
-                </span>
-              )}
-              {(hasSendCode || errorCode === ERROR_CODES.CODE_EXPIRED) &&
-                countdown === 0 && (
-                  <button
-                    className={styles.resendButton}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      sendLoginCode()
-                    }}
-                    disabled={sendingCode}
-                  >
-                    <FormattedMessage
-                      defaultMessage="Resend"
-                      id="dzF4ci"
-                      description="src/components/Forms/EmailLoginForm/index.tsx"
-                    />
-                  </button>
-                )}
+              {
+                <ResendCodeButton
+                  showCountDown={hasSendCode}
+                  showResendButton={
+                    hasSendCode || errorCode === ERROR_CODES.CODE_EXPIRED
+                  }
+                  countdown={countdown}
+                  sendCode={sendLoginCode}
+                  disabled={sendingCode}
+                />
+              }
             </>
           }
         />
