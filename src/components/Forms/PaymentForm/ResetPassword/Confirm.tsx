@@ -118,8 +118,9 @@ const Confirm: React.FC<FormProps> = ({
         <Form.PinInput
           label={
             <FormattedMessage
-              defaultMessage="Enter a 6-digit payment password."
-              id="OpeFTV"
+              defaultMessage="Please enter new transaction password"
+              description="src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+              id="kvUs/6"
             />
           }
           hasLabel
@@ -138,12 +139,14 @@ const Confirm: React.FC<FormProps> = ({
         <Form.PinInput
           label={
             <FormattedMessage
-              defaultMessage="Enter transaction password again"
-              id="H9FKs4"
+              defaultMessage="Please enter new transaction password again"
+              description="src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+              id="6KmKvZ"
             />
           }
           hasLabel
           name="compared-password"
+          hintAlign="center"
           value={values.comparedPassword}
           error={touched.comparedPassword && errors.comparedPassword}
           length={PAYMENT_PASSSWORD_LENGTH}

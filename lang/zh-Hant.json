@@ -362,6 +362,10 @@
   "6ErzDk": {
     "defaultMessage": "重新連接錢包"
   },
+  "6KmKvZ": {
+    "defaultMessage": "請再次輸入新交易密碼",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "6N2LKY": {
     "defaultMessage": "授權信息已失效，請重新登入",
     "description": "OAUTH_TOKEN_INVALID"
@@ -828,9 +832,6 @@
   "H8KGyc": {
     "defaultMessage": "進入"
   },
-  "H9FKs4": {
-    "defaultMessage": "請再次輸入交易密碼"
-  },
   "HAlOn1": {
     "defaultMessage": "用戶名"
   },
@@ -1229,6 +1230,10 @@
     "defaultMessage": "上一步",
     "description": "src/components/Forms/PaymentForm"
   },
+  "R410ei": {
+    "defaultMessage": "驗證碼錯誤",
+    "description": "CODE_INVALID"
+  },
   "R7yHDl": {
     "defaultMessage": "圍爐營收",
     "description": "src/components/Transaction/index.tsx"
@@ -1593,6 +1598,10 @@
   "a1+ca6": {
     "defaultMessage": "讀者數量：訪問過作品頁的不重複的登入用戶數加匿名 IP 數（數據週期更新，可能存在延遲）",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "aE5Qq+": {
+    "defaultMessage": "重新發送",
+    "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
   },
   "aFJE+p": {
     "defaultMessage": "{totalCount} 篇作品",
@@ -1965,6 +1974,14 @@
     "defaultMessage": "確認移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "ksvOGO": {
+    "defaultMessage": "發送驗證碼",
+    "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
+  "kvUs/6": {
+    "defaultMessage": "請輸入新交易密碼",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "l/f7bu": {
     "defaultMessage": "想了解更多？詳見 ",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
@@ -2156,6 +2173,10 @@
     "defaultMessage": "已封存",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
+  "qS19ij": {
+    "defaultMessage": "交易密碼重置成功",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "qVhxp5": {
     "defaultMessage": "進入",
     "description": "src/components/Buttons/UniversalAuth/index.tsx"
@@ -2305,8 +2326,16 @@
   "us5QHt": {
     "defaultMessage": "{type} 被創作者闔上"
   },
+  "utMaM0": {
+    "defaultMessage": "驗證碼已通過郵件發送，有效期為 20 分鐘",
+    "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
   "uw32VR": {
     "defaultMessage": "教學指南"
+  },
+  "v5MunN": {
+    "defaultMessage": "驗證碼逾期，請點擊重新發送",
+    "description": "CODE_EXPIRED"
   },
   "v6YjIn": {
     "defaultMessage": "帳戶",

@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { useStep, ViewerContext } from '~/components'
+import { toast, useStep, ViewerContext } from '~/components'
 
 import Complete from './Complete'
 import Confirm from './Confirm'
@@ -16,11 +17,12 @@ interface ResetPasswordData {
   email: string
 }
 
-interface DonationDialogProps {
+interface PaymentResetPasswordFormProps {
   callback?: () => any
   callbackText?: React.ReactNode
   closeDialog: () => void
   back?: () => void
+  autoCloseDialog?: boolean
 }
 
 const PaymentResetPasswordForm = ({
@@ -28,7 +30,8 @@ const PaymentResetPasswordForm = ({
   callbackText,
   closeDialog,
   back: backToPrevDialog,
-}: DonationDialogProps) => {
+  autoCloseDialog,
+}: PaymentResetPasswordFormProps) => {
   const viewer = useContext(ViewerContext)
   const { currStep, forward, back } = useStep<Step>('resetPasswordRequest')
 
@@ -60,7 +63,22 @@ const PaymentResetPasswordForm = ({
       {isResetPasswordConfirm && (
         <Confirm
           codeId={resetPasswordData.codeId}
-          submitCallback={() => forward('resetPasswordComplete')}
+          submitCallback={
+            autoCloseDialog
+              ? () => {
+                  toast.success({
+                    message: (
+                      <FormattedMessage
+                        defaultMessage="Reset successful"
+                        id="qS19ij"
+                        description="src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+                      />
+                    ),
+                  })
+                  closeDialog?.()
+                }
+              : () => forward('resetPasswordComplete')
+          }
           closeDialog={closeDialog}
           back={back}
         />
