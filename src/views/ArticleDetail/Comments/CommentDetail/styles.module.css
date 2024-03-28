@@ -1,5 +1,5 @@
 .activeBgColor {
-  animation: comment-background-fade-out 3s ease-out 0s;
+  animation: comment-background-fade-out 1.6s ease-out 0s;
 }
 
 .activeParentComment {
@@ -11,6 +11,11 @@
 
 @keyframes comment-background-fade-out {
   0% {
+    background: var(--color-green-lighter);
+  }
+
+  /* 1s later */
+  62.5% {
     background: var(--color-green-lighter);
   }
 

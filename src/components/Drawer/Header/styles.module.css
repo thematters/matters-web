@@ -4,7 +4,7 @@
   position: sticky;
   top: 0;
   z-index: var(--z-index-global-header);
-  padding: var(--spacing-xx-loose) var(--spacing-xx-loose) 0;
+  padding-top: var(--spacing-xx-loose);
   margin-bottom: var(--spacing-base);
   background: var(--color-white);
 
@@ -19,5 +19,9 @@
     &:focus {
       color: var(--color-grey-darker);
     }
+  }
+
+  &.fixedWidth {
+    width: 22.5rem;
   }
 }

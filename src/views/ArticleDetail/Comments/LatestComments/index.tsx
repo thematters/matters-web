@@ -24,7 +24,6 @@ import {
 
 import { Placeholder } from '../Placeholder'
 import { LATEST_COMMENTS_PRIVATE, LATEST_COMMENTS_PUBLIC } from './gql'
-import styles from './styles.module.css'
 
 type CommentPublic = NonNullable<
   NonNullable<
@@ -145,7 +144,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   }
 
   return (
-    <section className={styles.latestComments} id="latest-comments">
+    <section id="latest-comments">
       <Media greaterThan="sm">
         <CommentFormBeta articleId={article?.id} type={'article'} />
         <Spacer size="base" />
@@ -168,6 +167,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
               id="9SXN7s"
             />
           }
+          eofSpacingTop="base"
         >
           <List spacing={[0, 0]} hasBorder={false}>
             {!!pinnedComment && (

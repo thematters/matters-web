@@ -50,12 +50,12 @@ export const CollectionDigestAuthorSidebar = ({
   })
 
   return (
-    <LinkWrapper {...path} textActiveColor="green">
-      <section className={containerClasses}>
+    <section className={containerClasses}>
+      <LinkWrapper {...path} textActiveColor="green">
         <IconAnthology24 size="md" color="greyLight" />
         <header>{title}</header>
-      </section>
-    </LinkWrapper>
+      </LinkWrapper>
+    </section>
   )
 }
 

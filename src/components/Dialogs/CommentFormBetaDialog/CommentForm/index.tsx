@@ -167,7 +167,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         sel?.selectAllChildren(editor)
         sel?.collapseToEnd()
       }
-    })
+    }, 500)
   }, [])
 
   return (

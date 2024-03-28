@@ -44,7 +44,7 @@ export const FromAuthor = ({ article }: FromAuthorProps) => {
 
   return (
     <section>
-      <List borderPosition="top">
+      <List borderPosition="bottom" hasLastBorder={false}>
         {latestWorks.map((work, i) => (
           <List.Item key={`FromAuthor` + i}>
             {work.__typename === 'Article' && (

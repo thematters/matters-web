@@ -12,6 +12,7 @@
 
   & .baseDrawerContainer {
     position: fixed;
+    padding: 0 var(--spacing-xx-loose);
     overflow-y: auto;
     visibility: hidden;
     background: white;

@@ -1,6 +1,6 @@
 .commentEditor :global(.ProseMirror),
 .commentEditor :global(.tiptap) {
-  min-height: 7rem;
+  min-height: 4.125rem;
 
   & > *:first-child {
     margin: 0;

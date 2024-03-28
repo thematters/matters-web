@@ -38,13 +38,13 @@ export const RelatedArticles = ({ article }: RelatedArticlesProps) => {
 
   return (
     <section>
-      <List borderPosition="top">
+      <List borderPosition="bottom" hasLastBorder={false}>
         {edges.map(({ node, cursor }, i) => (
           <List.Item key={cursor}>
             <ArticleDigestAuthorSidebar
               article={node}
               titleColor="black"
-              titleTextSize="md"
+              titleTextSize="sm"
               imageSize="md"
             />
           </List.Item>
