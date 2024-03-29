@@ -21,15 +21,16 @@ import {
 } from '~/common/enums'
 import {
   analytics,
-  formatAmount,
   parseFormSubmitErrors,
   translate,
   validateAmount,
 } from '~/common/utils'
 import {
+  Balance,
   Dialog,
   Form,
   LanguageContext,
+  Spacer,
   Translate,
   useMutation,
 } from '~/components'
@@ -49,6 +50,7 @@ interface FormProps {
   callback?: () => any
   callbackText?: React.ReactNode
   closeDialog?: () => any
+  isInDialog?: boolean
 }
 
 interface FormValues {
@@ -80,6 +82,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   callback,
   callbackText,
   closeDialog,
+  isInDialog,
 }) => {
   const intl = useIntl()
   const stripe = useStripe()
@@ -234,10 +237,27 @@ const BaseAddCredit: React.FC<FormProps> = ({
           setFieldValue('amount', sanitizedAmount)
         }}
         autoFocus
-        spacingBottom="base"
+        spacingBottom="loose"
       />
     </Form>
   )
+
+  const Content = (
+    <>
+      <ConfirmTable>
+        <ConfirmTable.Row type="balance">
+          <Balance currency={currency} amount={balance} showTopUp={false} />
+        </ConfirmTable.Row>
+        <Spacer size="xtight" />
+      </ConfirmTable>
+      {InnerForm}
+      <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
+    </>
+  )
+
+  if (!isInDialog) {
+    return Content
+  }
 
   if (completed) {
     return (
@@ -310,23 +330,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>
-        <ConfirmTable>
-          <ConfirmTable.Row type="balance">
-            <ConfirmTable.Col>
-              <Translate id="walletBalance" />
-            </ConfirmTable.Col>
-
-            <ConfirmTable.Col>
-              {currency} {formatAmount(balance)}
-            </ConfirmTable.Col>
-          </ConfirmTable.Row>
-        </ConfirmTable>
-
-        {InnerForm}
-
-        <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
-      </Dialog.Content>
+      <Dialog.Content>{Content}</Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

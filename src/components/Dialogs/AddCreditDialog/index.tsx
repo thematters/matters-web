@@ -63,7 +63,9 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
           />
         )}
 
-        {isAddCredit && <DynamicAddCreditForm closeDialog={closeDialog} />}
+        {isAddCredit && (
+          <DynamicAddCreditForm closeDialog={closeDialog} isInDialog />
+        )}
       </Dialog>
     </>
   )

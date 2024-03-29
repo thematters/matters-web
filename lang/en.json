@@ -1734,6 +1734,10 @@
     "defaultMessage": "No blocked users yet",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
+  "dQhNbF": {
+    "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
+    "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
+  },
   "dSjI7E": {
     "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
@@ -2421,6 +2425,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "View All"
+  },
+  "wicnP9": {
+    "defaultMessage": "Visa / Mastercard / American Express payment",
+    "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
   "wm9xNB": {
     "defaultMessage": "{type} disconnected",

@@ -1734,6 +1734,10 @@
     "defaultMessage": "尚无屏蔽记录",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
+  "dQhNbF": {
+    "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
+    "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
+  },
   "dSjI7E": {
     "defaultMessage": "暂无法断开钱包链接，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
@@ -2421,6 +2425,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "wicnP9": {
+    "defaultMessage": "Visa / Mastercard / American Express 支付",
+    "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
   "wm9xNB": {
     "defaultMessage": "{type} 已解绑",
