@@ -11,6 +11,9 @@ export type Step =
   | 'processing'
   | 'resetPassword'
   | 'setPaymentPassword'
+  // Wallet
+  | 'walletSelect'
+  | 'networkSelect'
 
 export interface BaseSupportAuthorProps {
   completeCallback?: () => void

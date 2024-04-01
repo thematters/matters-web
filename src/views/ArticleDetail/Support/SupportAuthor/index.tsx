@@ -1,8 +1,14 @@
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Spinner, useStep, ViewerContext } from '~/components'
+import {
+  AuthWalletFeed,
+  Spacer,
+  Spinner,
+  useStep,
+  ViewerContext,
+} from '~/components'
 import PaymentProcessingForm from '~/components/Forms/PaymentForm/Processing'
 import { PayToMutation } from '~/gql/graphql'
 
@@ -87,22 +93,36 @@ const SupportAuthor = (props: SupportAuthorProps) => {
     forward('processing')
   }
 
+  useEffect(() => {
+    if (type === 'usdt') {
+      forward('walletSelect')
+    } else {
+      forward('setAmount')
+    }
+  }, [type])
+
   const isSetAmount = currStep === 'setAmount'
   const isConfirm = currStep === 'confirm'
   const isProcessing = currStep === 'processing'
   const isComplete = currStep === 'complete'
   const isSetPaymentPassword = currStep === 'setPaymentPassword'
   const isTopup = currStep === 'topup'
+  const isWalletSelect = currStep === 'walletSelect'
+  const isNetworkSelect = currStep === 'networkSelect'
+
+  const showTabs = isSetAmount || isWalletSelect || isNetworkSelect
 
   return (
     <>
+      {showTabs && (
+        <DonationTabs
+          type={type}
+          setType={setType}
+          recipient={props.recipient}
+        />
+      )}
       {isSetAmount && (
         <>
-          <DonationTabs
-            type={type}
-            setType={setType}
-            recipient={props.recipient}
-          />
           <DynamicPayToFormSetAmount
             currency={CURRENCY.HKD}
             recipient={recipient}
@@ -178,6 +198,21 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           closeDialog={onClose}
           switchToSetAmount={() => forward('setAmount')}
         />
+      )}
+      {isWalletSelect && (
+        <>
+          <Spacer size="xxloose" />
+          <AuthWalletFeed
+            submitCallback={() => forward('networkSelect')}
+            isInSupport
+          />
+        </>
+      )}
+      {isNetworkSelect && (
+        <>
+          <Spacer size="xxloose" />
+          <span>Network Select</span>
+        </>
       )}
     </>
   )
