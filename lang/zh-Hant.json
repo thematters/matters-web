@@ -1250,6 +1250,10 @@
     "defaultMessage": "來自作者",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
+  "RMV4wt": {
+    "defaultMessage": "儲值成功",
+    "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
+  },
   "ROPCC0": {
     "defaultMessage": "請先綁定郵箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
@@ -1284,6 +1288,10 @@
   "SPTRiT": {
     "defaultMessage": "最新",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "SYfw+k": {
+    "defaultMessage": "確認儲值",
+    "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
   },
   "SYyBFF": {
     "defaultMessage": "複製成功"
@@ -1733,6 +1741,10 @@
   "dAvP6d": {
     "defaultMessage": "尚無封鎖紀錄",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
+  },
+  "dQhNbF": {
+    "defaultMessage": "付款將由 Stripe 處理，讓你的支持不受地域限制",
+    "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
   "dSjI7E": {
     "defaultMessage": "暫無法斷開錢包連結，因為你沒有其他可用於登錄的身份（電子郵件/數字錢包/社交帳號）。",
@@ -2421,6 +2433,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "wicnP9": {
+    "defaultMessage": "Visa / Mastercard / American Express 支付",
+    "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
   "wm9xNB": {
     "defaultMessage": "{type} 已解綁",

@@ -16,9 +16,9 @@ import styles from './styles.module.css'
 type BalanceProps = {
   currency: CURRENCY
   amount: number
-  isBalanceInsufficient: boolean
+  isBalanceInsufficient?: boolean
   showTopUp?: boolean
-  switchToAddCredit: () => void
+  switchToAddCredit?: () => void
 }
 
 export const Balance: React.FC<BalanceProps> = ({

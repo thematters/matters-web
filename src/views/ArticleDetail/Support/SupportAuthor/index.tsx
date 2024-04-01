@@ -39,6 +39,11 @@ const DynamicPaymentSetPasswordForm = dynamic(
   { loading: () => <Spinner /> }
 )
 
+const DynamicAddCreditForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/AddCredit'),
+  { loading: () => <Spinner /> }
+)
+
 export type SupportAuthorProps = BaseSupportAuthorProps & {
   updateSupportStep: (step: SupportStep) => void
   onClose: () => void
@@ -87,6 +92,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const isProcessing = currStep === 'processing'
   const isComplete = currStep === 'complete'
   const isSetPaymentPassword = currStep === 'setPaymentPassword'
+  const isTopup = currStep === 'topup'
 
   return (
     <>
@@ -163,6 +169,13 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           recipient={recipient}
           amount={amount}
           currency={currency}
+          switchToSetAmount={() => forward('setAmount')}
+        />
+      )}
+
+      {isTopup && (
+        <DynamicAddCreditForm
+          closeDialog={onClose}
           switchToSetAmount={() => forward('setAmount')}
         />
       )}
