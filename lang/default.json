@@ -362,6 +362,10 @@
   "6ErzDk": {
     "defaultMessage": "Reconnect Wallet"
   },
+  "6KmKvZ": {
+    "defaultMessage": "Please enter new transaction password again",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "6N2LKY": {
     "defaultMessage": "Please log in again.",
     "description": "OAUTH_TOKEN_INVALID"
@@ -828,9 +832,6 @@
   "H8KGyc": {
     "defaultMessage": "Enter"
   },
-  "H9FKs4": {
-    "defaultMessage": "Enter transaction password again"
-  },
   "HAlOn1": {
     "defaultMessage": "Name"
   },
@@ -1229,6 +1230,10 @@
     "defaultMessage": "Back",
     "description": "src/components/Forms/PaymentForm"
   },
+  "R410ei": {
+    "defaultMessage": "Incorrect verification code",
+    "description": "CODE_INVALID"
+  },
   "R7yHDl": {
     "defaultMessage": "Circle Revenue",
     "description": "src/components/Transaction/index.tsx"
@@ -1593,6 +1598,10 @@
   "a1+ca6": {
     "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "aE5Qq+": {
+    "defaultMessage": "Resend",
+    "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
   },
   "aFJE+p": {
     "defaultMessage": "{totalCount} articles",
@@ -1965,6 +1974,14 @@
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "ksvOGO": {
+    "defaultMessage": "Send the verification code",
+    "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
+  "kvUs/6": {
+    "defaultMessage": "Please enter new transaction password",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "l/f7bu": {
     "defaultMessage": "Want to know more? Check the",
     "description": "src/views/Me/Analytics/EmptyAnalytics/index.tsx"
@@ -2156,6 +2173,10 @@
     "defaultMessage": "Archived",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
+  "qS19ij": {
+    "defaultMessage": "Reset successful",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "qVhxp5": {
     "defaultMessage": "Enter",
     "description": "src/components/Buttons/UniversalAuth/index.tsx"
@@ -2305,8 +2326,16 @@
   "us5QHt": {
     "defaultMessage": "This {type} has been collapsed by the author"
   },
+  "utMaM0": {
+    "defaultMessage": "Verification code has been sent via email and is valid for 20 minutes.",
+    "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
   "uw32VR": {
     "defaultMessage": "tutorial"
+  },
+  "v5MunN": {
+    "defaultMessage": "Verification code has expired, please resend.",
+    "description": "CODE_EXPIRED"
   },
   "v6YjIn": {
     "defaultMessage": "Account",
