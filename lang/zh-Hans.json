@@ -1607,6 +1607,10 @@
     "defaultMessage": "读者数量：访问过作品页的不重复的登录用户数加匿名 IP 数（数据周期更新，可能存在延迟）",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
+  "aCTmEO": {
+    "defaultMessage": "我还没有钱包",
+    "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
+  },
   "aE5Qq+": {
     "defaultMessage": "重新发送",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"

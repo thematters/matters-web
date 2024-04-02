@@ -1607,6 +1607,10 @@
     "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
+  "aCTmEO": {
+    "defaultMessage": "I don't have a wallet yet",
+    "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
+  },
   "aE5Qq+": {
     "defaultMessage": "Resend",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
