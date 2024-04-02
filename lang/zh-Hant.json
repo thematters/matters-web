@@ -757,6 +757,10 @@
     "defaultMessage": "還沒有成員",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
   },
+  "FWCa4O": {
+    "defaultMessage": "目前非 Optimism 網路，立即切換？",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "FaTb0A": {
     "defaultMessage": "安裝 MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -875,6 +879,10 @@
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "HyjQns": {
+    "defaultMessage": "教學指南",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "Hyr5ET": {
     "defaultMessage": "支持者",
@@ -1281,6 +1289,10 @@
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
+  "SHWkv8": {
+    "defaultMessage": "為什麼採用 Optimism？",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "SNh1n0": {
     "defaultMessage": "查看名單",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1346,6 +1358,10 @@
     "defaultMessage": "付款將由 Stripe 處理，讓你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
   },
+  "TgU+Mf": {
+    "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考 {tutorial}.",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "Tgd5id": {
     "defaultMessage": "支持金額超出授權額度"
   },
@@ -1355,6 +1371,10 @@
   },
   "TzhzIH": {
     "defaultMessage": "創作者"
+  },
+  "U+qEBM": {
+    "defaultMessage": "切換網路",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "U7o9Ba": {
     "defaultMessage": "累計閱讀時數"
@@ -1387,6 +1407,10 @@
   },
   "Up5U7K": {
     "defaultMessage": "封鎖"
+  },
+  "UxAA/V": {
+    "defaultMessage": "Optimism 是基於以太坊的第二層（Layer2）擴容方案，能提升交易速度，並降低手續費，同時確保安全性，讓你更輕鬆地支持創作者。",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "V5OMr4": {
     "defaultMessage": "什麼是數字錢包？",
@@ -1899,6 +1923,10 @@
   },
   "iEJeQH": {
     "defaultMessage": "設置 Liker ID"
+  },
+  "iNZdM/": {
+    "defaultMessage": "切換後即可支持創作者，採用 Optimism 網路{br}讓支持更方便且費用低廉",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "iTcMqz": {
     "defaultMessage": "月色之下，夢想即將實現。月之夢徽章紀念你曾參與「遊牧者計畫」。",

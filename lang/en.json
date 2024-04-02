@@ -757,6 +757,10 @@
     "defaultMessage": "No members yet",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
   },
+  "FWCa4O": {
+    "defaultMessage": "Switch to Optimism network now?",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -875,6 +879,10 @@
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "HyjQns": {
+    "defaultMessage": "tutorial",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "Hyr5ET": {
     "defaultMessage": "Supporter",
@@ -1281,6 +1289,10 @@
     "defaultMessage": "Unpin from profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
+  "SHWkv8": {
+    "defaultMessage": "Why use Optimism network first?",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "SNh1n0": {
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1346,6 +1358,10 @@
     "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
   },
+  "TgU+Mf": {
+    "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {tutorial}.",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "Tgd5id": {
     "defaultMessage": "Transfer amount exceeds allowance"
   },
@@ -1355,6 +1371,10 @@
   },
   "TzhzIH": {
     "defaultMessage": "Creators"
+  },
+  "U+qEBM": {
+    "defaultMessage": "Switch Network",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "U7o9Ba": {
     "defaultMessage": "Accumulated read time"
@@ -1387,6 +1407,10 @@
   },
   "Up5U7K": {
     "defaultMessage": "Block"
+  },
+  "UxAA/V": {
+    "defaultMessage": "Optimism is a Layer 2 scaling solution based on Ethereum that can provide faster and cheaper transactions, while ensuring security, making it easier for you to support creators.",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "V5OMr4": {
     "defaultMessage": "What is a digital wallet?",
@@ -1899,6 +1923,10 @@
   },
   "iEJeQH": {
     "defaultMessage": "Liker ID"
+  },
+  "iNZdM/": {
+    "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "iTcMqz": {
     "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",

@@ -50,6 +50,11 @@ const DynamicAddCreditForm = dynamic(
   { loading: () => <Spinner /> }
 )
 
+const DynamicSwitchNetworkForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/SwitchNetwork'),
+  { loading: () => <Spinner /> }
+)
+
 export type SupportAuthorProps = BaseSupportAuthorProps & {
   updateSupportStep: (step: SupportStep) => void
   onClose: () => void
@@ -109,6 +114,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const isTopup = currStep === 'topup'
   const isWalletSelect = currStep === 'walletSelect'
   const isNetworkSelect = currStep === 'networkSelect'
+  const isApproveContract = currStep === 'approveContract'
 
   const showTabs = isSetAmount || isWalletSelect || isNetworkSelect
 
@@ -211,7 +217,16 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       {isNetworkSelect && (
         <>
           <Spacer size="xxloose" />
-          <span>Network Select</span>
+          {/* <span>Network Select</span> */}
+          <DynamicSwitchNetworkForm
+            submitCallback={() => forward('approveContract')}
+          />
+        </>
+      )}
+      {isApproveContract && (
+        <>
+          <Spacer size="xxloose" />
+          <span>Approve Contract</span>
         </>
       )}
     </>

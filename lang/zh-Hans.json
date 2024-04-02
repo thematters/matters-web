@@ -757,6 +757,10 @@
     "defaultMessage": "还没有成员",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
   },
+  "FWCa4O": {
+    "defaultMessage": "目前非 Optimism 网络，立即切换？",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -875,6 +879,10 @@
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "HyjQns": {
+    "defaultMessage": "教学指南",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "Hyr5ET": {
     "defaultMessage": "支持者",
@@ -1281,6 +1289,10 @@
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
+  "SHWkv8": {
+    "defaultMessage": "为什么先采用 Optimism ?",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "SNh1n0": {
     "defaultMessage": "查看名单",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1346,6 +1358,10 @@
     "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
   },
+  "TgU+Mf": {
+    "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考 {tutorial}.",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "Tgd5id": {
     "defaultMessage": "支持金额超出授权额度"
   },
@@ -1355,6 +1371,10 @@
   },
   "TzhzIH": {
     "defaultMessage": "创作者"
+  },
+  "U+qEBM": {
+    "defaultMessage": "切换网络",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "U7o9Ba": {
     "defaultMessage": "累计阅读时長"
@@ -1387,6 +1407,10 @@
   },
   "Up5U7K": {
     "defaultMessage": "屏蔽"
+  },
+  "UxAA/V": {
+    "defaultMessage": "Optimism 是基于以太坊的第二层（Layer2）扩容方案，能提升交易速度，并降低手续费，同时确保安全性，让你更轻松地支持创作者。",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "V5OMr4": {
     "defaultMessage": "什么是数字钱包？",
@@ -1899,6 +1923,10 @@
   },
   "iEJeQH": {
     "defaultMessage": "设置 Liker ID"
+  },
+  "iNZdM/": {
+    "defaultMessage": "切换后即可支持创作者，采用 Optimism 网络{br}让支持更方便且费用低廉",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "iTcMqz": {
     "defaultMessage": "月色之下，梦想即将实现。月之梦徽章纪念你曾参与「游牧者计划」。",
