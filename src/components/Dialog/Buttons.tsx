@@ -62,7 +62,7 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 
 export type DialogRoundedButtonProps = {
   text: React.ReactNode
-  textSize?: 'sm' | 'xm'
+  textSize?: 'sm' | 'xm' | 'md'
   textWeight?: 'md' | 'normal'
 
   color?: 'greyDarker' | 'green' | 'red' | 'white' | 'black'

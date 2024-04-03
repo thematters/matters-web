@@ -63,6 +63,8 @@ const SwitchNetwork: React.FC<SwitchNetworkProps> = ({ submitCallback }) => {
           color="white"
           bgColor="green"
           onClick={switchToTargetNetwork}
+          textWeight="normal"
+          textSize="md"
           text={
             <TextIcon icon={<IconOpenWallet20 size="mdS" />}>
               <FormattedMessage

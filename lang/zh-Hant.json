@@ -1164,6 +1164,10 @@
     "defaultMessage": "忘記密碼？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
+  "OA3RuB": {
+    "defaultMessage": "尚未允許使用錢包裡的 USDT",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
+  },
   "OIj8pQ": {
     "defaultMessage": "成功發送邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -1557,6 +1561,10 @@
   },
   "Y8zV4A": {
     "defaultMessage": "回覆評論"
+  },
+  "YAIXL4": {
+    "defaultMessage": "請於錢包視窗點擊確認授權使用{br}確認完成後即可開始支持步驟",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "YOMY1y": {
     "defaultMessage": "發布評論...",
@@ -2427,6 +2435,10 @@
   },
   "w+6UiO": {
     "defaultMessage": "新增邀請"
+  },
+  "wBpJLd": {
+    "defaultMessage": "前往允許",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "評論"

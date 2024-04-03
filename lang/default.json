@@ -1164,6 +1164,10 @@
     "defaultMessage": "Forgot password?",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
+  "OA3RuB": {
+    "defaultMessage": "Allow to use USDT in the wallet",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
+  },
   "OIj8pQ": {
     "defaultMessage": "Invitation Sent",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -1557,6 +1561,10 @@
   },
   "Y8zV4A": {
     "defaultMessage": "Write a comment"
+  },
+  "YAIXL4": {
+    "defaultMessage": "Please confirm authorization in the wallet dialog.{br}Once confirmed, support steps can begin.",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "YOMY1y": {
     "defaultMessage": "Comment...",
@@ -2427,6 +2435,10 @@
   },
   "w+6UiO": {
     "defaultMessage": "Add Invitation"
+  },
+  "wBpJLd": {
+    "defaultMessage": "Go to allow",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "Comments"
