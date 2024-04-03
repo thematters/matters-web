@@ -39,7 +39,7 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
   useEffect(() => {
     const allowanceUSDT = allowanceData || 0n
     if (allowanceUSDT > 0n) {
-      // submitCallback()
+      submitCallback()
     }
   }, [allowanceData])
 
