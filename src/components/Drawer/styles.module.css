@@ -12,6 +12,8 @@
 
   & .baseDrawerContainer {
     position: fixed;
+    display: flex;
+    flex-direction: column;
     padding: 0 var(--spacing-xx-loose);
     overflow-y: auto;
     visibility: hidden;
