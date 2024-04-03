@@ -1164,6 +1164,10 @@
     "defaultMessage": "忘记密码？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
+  "OA3RuB": {
+    "defaultMessage": "尚未允许使用钱包里的 USDT",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
+  },
   "OIj8pQ": {
     "defaultMessage": "成功发送邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -1557,6 +1561,10 @@
   },
   "Y8zV4A": {
     "defaultMessage": "回复评论"
+  },
+  "YAIXL4": {
+    "defaultMessage": "请于钱包视窗点击确认授权使用{br}确认完成后即可开始支持步骤",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "YOMY1y": {
     "defaultMessage": "发布评论...",
@@ -2427,6 +2435,10 @@
   },
   "w+6UiO": {
     "defaultMessage": "新增邀请"
+  },
+  "wBpJLd": {
+    "defaultMessage": "前往允许",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "评论"
