@@ -89,7 +89,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
     'u-area-disable': disabled || isBalanceInsufficient,
   })
 
-  const decimals = currency === CURRENCY.USDT ? 2 : 0
+  const decimals = 0
 
   useEffect(() => {
     if (!isActive && inputRef.current) {

@@ -253,9 +253,6 @@
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
-  "3lMsOU": {
-    "defaultMessage": "重新授权后继续"
-  },
   "3phEFL": {
     "defaultMessage": "继续使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -358,9 +355,6 @@
   "6BXcdo": {
     "defaultMessage": "设定围炉门槛（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
-  },
-  "6ErzDk": {
-    "defaultMessage": "重新连接钱包"
   },
   "6KmKvZ": {
     "defaultMessage": "请再次输入新交易密码",
@@ -940,9 +934,6 @@
   "JkWLg6": {
     "defaultMessage": "被追踪",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JmzmVH": {
-    "defaultMessage": "切换到 "
   },
   "JpS59y": {
     "defaultMessage": "已接受",
@@ -1673,9 +1664,6 @@
   "ai7kS4": {
     "defaultMessage": "我的创作"
   },
-  "aoDcrD": {
-    "defaultMessage": "首次需确认授权后继续"
-  },
   "aqX2Bt": {
     "defaultMessage": "前往首页",
     "description": "src/views/Callback/UI.tsx"
@@ -2025,6 +2013,9 @@
   "kkZioy": {
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "ksIL/T": {
+    "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"
   },
   "ksvOGO": {
     "defaultMessage": "发送验证码",

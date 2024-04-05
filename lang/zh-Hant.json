@@ -253,9 +253,6 @@
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
-  "3lMsOU": {
-    "defaultMessage": "重新授權後繼續"
-  },
   "3phEFL": {
     "defaultMessage": "繼續使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -358,9 +355,6 @@
   "6BXcdo": {
     "defaultMessage": "設定圍爐門檻（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
-  },
-  "6ErzDk": {
-    "defaultMessage": "重新連接錢包"
   },
   "6KmKvZ": {
     "defaultMessage": "請再次輸入新交易密碼",
@@ -940,9 +934,6 @@
   "JkWLg6": {
     "defaultMessage": "被追蹤",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JmzmVH": {
-    "defaultMessage": "切換到 "
   },
   "JpS59y": {
     "defaultMessage": "已接受",
@@ -1673,9 +1664,6 @@
   "ai7kS4": {
     "defaultMessage": "我的創作"
   },
-  "aoDcrD": {
-    "defaultMessage": "首次需確認授權後繼續"
-  },
   "aqX2Bt": {
     "defaultMessage": "前往首頁",
     "description": "src/views/Callback/UI.tsx"
@@ -2025,6 +2013,9 @@
   "kkZioy": {
     "defaultMessage": "確認移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "ksIL/T": {
+    "defaultMessage": "貼心提醒：此錢包位址不同於您用於登入 Matters 的錢包位址"
   },
   "ksvOGO": {
     "defaultMessage": "發送驗證碼",

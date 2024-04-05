@@ -1,12 +1,15 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { useAccount } from 'wagmi'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { featureSupportedChains } from '~/common/utils'
 import {
   AuthWalletFeed,
   Spacer,
   Spinner,
   useStep,
+  useTargetNetwork,
   ViewerContext,
 } from '~/components'
 import PaymentProcessingForm from '~/components/Forms/PaymentForm/Processing'
@@ -72,6 +75,11 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const [type, setType] = useState<CurrencyType>('credit')
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
 
+  const { address } = useAccount()
+  // TODO: support multiple networks
+  const targetNetork = featureSupportedChains.curation[0]
+  const { isUnsupportedNetwork } = useTargetNetwork(targetNetork)
+
   const forward = (step: SupportStep) => {
     _forward(step)
     updateSupportStep(step)
@@ -111,6 +119,20 @@ const SupportAuthor = (props: SupportAuthorProps) => {
     }
   }, [type])
 
+  useEffect(() => {
+    if (currency !== CURRENCY.USDT) {
+      return
+    }
+
+    if (!address) {
+      forward('walletSelect')
+    }
+
+    if (isUnsupportedNetwork) {
+      forward('networkSelect')
+    }
+  }, [address, isUnsupportedNetwork])
+
   const isSetAmount = currStep === 'setAmount'
   const isConfirm = currStep === 'confirm'
   const isProcessing = currStep === 'processing'
@@ -136,7 +158,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       {isSetAmount && (
         <>
           <DynamicPayToFormSetAmount
-            currency={CURRENCY.HKD}
+            currency={currency}
             recipient={recipient}
             article={article}
             submitCallback={setAmountCallback}
@@ -232,7 +254,10 @@ const SupportAuthor = (props: SupportAuthorProps) => {
         <>
           <Spacer size="xxloose" />
           <DynamicApproveUsdtContractForm
-            submitCallback={() => forward('setAmount')}
+            submitCallback={() => {
+              setCurrency(CURRENCY.USDT)
+              forward('setAmount')
+            }}
           />
         </>
       )}

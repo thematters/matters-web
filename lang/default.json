@@ -253,9 +253,6 @@
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
-  "3lMsOU": {
-    "defaultMessage": "Reapprove to continue"
-  },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -358,9 +355,6 @@
   "6BXcdo": {
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
-  },
-  "6ErzDk": {
-    "defaultMessage": "Reconnect Wallet"
   },
   "6KmKvZ": {
     "defaultMessage": "Please enter new transaction password again",
@@ -940,9 +934,6 @@
   "JkWLg6": {
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JmzmVH": {
-    "defaultMessage": "Switch to"
   },
   "JpS59y": {
     "defaultMessage": "Accepted",
@@ -1673,9 +1664,6 @@
   "ai7kS4": {
     "defaultMessage": "My Works"
   },
-  "aoDcrD": {
-    "defaultMessage": "Approve to continue"
-  },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/UI.tsx"
@@ -2025,6 +2013,9 @@
   "kkZioy": {
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "ksIL/T": {
+    "defaultMessage": "Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
   },
   "ksvOGO": {
     "defaultMessage": "Send the verification code",
