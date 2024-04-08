@@ -187,7 +187,6 @@ const DonationDialogContent = ({
           recipient={recipient}
           switchToSetAmount={() => forward('setAmount')}
           submitCallback={() => forward('processing')}
-          switchToResetPassword={() => forward('resetPassword')}
           targetId={targetId}
           openTabCallback={setAmountOpenTabCallback}
           tabUrl={tabUrl}

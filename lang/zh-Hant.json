@@ -65,6 +65,10 @@
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
+  "/NX9L+": {
+    "defaultMessage": "確認授權",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "/TXBJR": {
     "defaultMessage": "不知道哪裏出錯了，過幾分鐘看看",
     "description": "UNKNOWN_ERROR"

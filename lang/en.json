@@ -65,6 +65,10 @@
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
+  "/NX9L+": {
+    "defaultMessage": "Confirm authorization",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "/TXBJR": {
     "defaultMessage": "Unknown error. Please try again later.",
     "description": "UNKNOWN_ERROR"
