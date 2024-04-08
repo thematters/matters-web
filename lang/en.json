@@ -253,6 +253,9 @@
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
+  "3lMsOU": {
+    "defaultMessage": "Reapprove to continue"
+  },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to ",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"

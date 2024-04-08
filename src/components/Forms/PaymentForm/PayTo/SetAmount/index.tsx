@@ -2,10 +2,11 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { parseUnits } from 'viem'
 import { useAccount } from 'wagmi'
+import { waitForTransaction } from 'wagmi/actions'
 
 import {
   contract,
@@ -28,6 +29,7 @@ import {
   Spacer,
   Spinner,
   useAllowanceUSDT,
+  useApproveUSDT,
   useBalanceUSDT,
   useMutation,
   ViewerContext,
@@ -125,7 +127,19 @@ const SetAmount: React.FC<FormProps> = ({
   )
 
   // USDT balance & allowance
-  const { data: allowanceData, error: allowanceError } = useAllowanceUSDT()
+  const [approveConfirming, setApproveConfirming] = useState(false)
+  const {
+    data: allowanceData,
+    refetch: refetchAllowanceData,
+    isLoading: allowanceLoading,
+    error: allowanceError,
+  } = useAllowanceUSDT()
+  const {
+    data: approveData,
+    isLoading: approving,
+    write: approveWrite,
+    error: approveError,
+  } = useApproveUSDT()
   const { data: balanceUSDTData, error: balanceUSDTError } = useBalanceUSDT({
     address,
   })
@@ -197,9 +211,11 @@ const SetAmount: React.FC<FormProps> = ({
   const value = values.customAmount || values.amount
   const isBalanceInsufficient = balance < value
   const isExceededAllowance =
+    isUSDT &&
     allowanceUSDT > 0n &&
     parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
-  const hasUSDTNetworkError = isUSDT && (allowanceError || balanceUSDTError) // TODO: better error handling
+  const hasUSDTNetworkError =
+    isUSDT && (allowanceError || balanceUSDTError || approveError) // TODO: better error handling
   const networkError =
     error || hasUSDTNetworkError ? (
       WALLET_ERROR_MESSAGES[lang].unknown
@@ -236,6 +252,18 @@ const SetAmount: React.FC<FormProps> = ({
       </section>
     )
   }
+
+  // USDT approval
+  useEffect(() => {
+    ;(async () => {
+      if (approveData) {
+        setApproveConfirming(true)
+        await waitForTransaction({ hash: approveData.hash })
+        refetchAllowanceData()
+        setApproveConfirming(false)
+      }
+    })()
+  }, [approveData])
 
   /**
    * Rendering
@@ -322,6 +350,10 @@ const SetAmount: React.FC<FormProps> = ({
     isExceededAllowance,
     isBalanceInsufficient,
     switchToAddCredit,
+    approving,
+    approveConfirming,
+    allowanceLoading,
+    approveWrite,
   }
 
   return (

@@ -17,6 +17,11 @@ type SubmitButtonProps = {
   isExceededAllowance: boolean
   isBalanceInsufficient: boolean
   switchToAddCredit: () => void
+  approving: boolean
+  approveConfirming: boolean
+  allowanceLoading: boolean
+
+  approveWrite?: () => void
 }
 
 const WrapperButton: React.FC<
@@ -105,8 +110,33 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
   formId,
   isValid,
   isSubmitting,
+  isExceededAllowance,
   isBalanceInsufficient,
+  approving,
+  approveConfirming,
+  allowanceLoading,
+  approveWrite,
 }) => {
+  if (isExceededAllowance) {
+    return (
+      <WrapperButton
+        mode={mode}
+        text={
+          <FormattedMessage
+            defaultMessage="Reapprove to continue"
+            id="3lMsOU"
+          />
+        }
+        loading={approving || approveConfirming || allowanceLoading}
+        onClick={() => {
+          if (approveWrite) {
+            approveWrite()
+          }
+        }}
+      />
+    )
+  }
+
   return (
     <WrapperButton
       mode={mode}
