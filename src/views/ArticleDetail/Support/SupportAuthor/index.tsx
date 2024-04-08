@@ -15,7 +15,7 @@ import {
 import PaymentProcessingForm from '~/components/Forms/PaymentForm/Processing'
 import { PayToMutation } from '~/gql/graphql'
 
-import DonationTabs, { CurrencyType } from './Tabs'
+import DonationTabs from './Tabs'
 import { BaseSupportAuthorProps, Step as SupportStep } from './types'
 
 interface SetAmountCallbackValues {
@@ -72,7 +72,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const { recipient, targetId, article, updateSupportStep, onClose } = props
   const viewer = useContext(ViewerContext)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
-  const [type, setType] = useState<CurrencyType>('credit')
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
 
   const { address } = useAccount()
@@ -112,12 +111,12 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   }
 
   useEffect(() => {
-    if (type === 'usdt') {
+    if (currency === CURRENCY.USDT) {
       forward('walletSelect')
     } else {
       forward('setAmount')
     }
-  }, [type])
+  }, [currency])
 
   useEffect(() => {
     if (currency !== CURRENCY.USDT) {
@@ -150,8 +149,8 @@ const SupportAuthor = (props: SupportAuthorProps) => {
     <>
       {showTabs && (
         <DonationTabs
-          type={type}
-          setType={setType}
+          currency={currency}
+          setCurrency={setCurrency}
           recipient={props.recipient}
         />
       )}
