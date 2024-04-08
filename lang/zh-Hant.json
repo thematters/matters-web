@@ -738,6 +738,10 @@
   "Eb1U+/": {
     "defaultMessage": "儲值成功"
   },
+  "EmZFry": {
+    "defaultMessage": "請在加密錢包內繼續操作",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "EoeUjA": {
     "defaultMessage": "你無權限進行該操作",
     "description": "FORBIDDEN_BY_STATE"
@@ -1837,7 +1841,7 @@
     "defaultMessage": "支持作者"
   },
   "f45YWK": {
-    "defaultMessage": "Got it",
+    "defaultMessage": "知道了",
     "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
   },
   "fDdcbi": {
@@ -2246,6 +2250,9 @@
   "qlxeW+": {
     "defaultMessage": "取消點踩"
   },
+  "quRPwZ": {
+    "defaultMessage": "支付請求已送出"
+  },
   "qxKjcm": {
     "defaultMessage": "置頂",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -2296,6 +2303,10 @@
   "sPgUkN": {
     "defaultMessage": "本月營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sfj+KG": {
+    "defaultMessage": "結果以鏈上紀錄為主，稍後同步至 Matters",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "sg3nVO": {
     "defaultMessage": "郵箱已被使用，請前往登入或嘗試另一個",

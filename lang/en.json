@@ -738,6 +738,10 @@
   "Eb1U+/": {
     "defaultMessage": "Topped up successfully"
   },
+  "EmZFry": {
+    "defaultMessage": "Please continue within your crypto wallet.",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "EoeUjA": {
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
@@ -2246,6 +2250,9 @@
   "qlxeW+": {
     "defaultMessage": "Undo downvote"
   },
+  "quRPwZ": {
+    "defaultMessage": "Payment request has been sent"
+  },
   "qxKjcm": {
     "defaultMessage": "Pin",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -2296,6 +2303,10 @@
   "sPgUkN": {
     "defaultMessage": "This Month",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sfj+KG": {
+    "defaultMessage": "The results are mainly based on the records on the chain and will be synchronized to Matters later.",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "sg3nVO": {
     "defaultMessage": "This email has been used, please go to login or try another one",

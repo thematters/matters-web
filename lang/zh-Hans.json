@@ -738,6 +738,10 @@
   "Eb1U+/": {
     "defaultMessage": "储值成功"
   },
+  "EmZFry": {
+    "defaultMessage": "请在加密钱包内继续操作",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "EoeUjA": {
     "defaultMessage": "你无权限进行该操作",
     "description": "FORBIDDEN_BY_STATE"
@@ -1837,7 +1841,7 @@
     "defaultMessage": "支持作者"
   },
   "f45YWK": {
-    "defaultMessage": "Got it",
+    "defaultMessage": "知道了",
     "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
   },
   "fDdcbi": {
@@ -2246,6 +2250,9 @@
   "qlxeW+": {
     "defaultMessage": "取消点踩"
   },
+  "quRPwZ": {
+    "defaultMessage": "支付请求已送出"
+  },
   "qxKjcm": {
     "defaultMessage": "置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -2296,6 +2303,10 @@
   "sPgUkN": {
     "defaultMessage": "本月营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sfj+KG": {
+    "defaultMessage": "结果以链上纪录为主，稍后同步至 Matters",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "sg3nVO": {
     "defaultMessage": "邮箱已被使用，请前往登录或尝试另一个",

@@ -213,6 +213,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           amount={amount}
           currency={currency}
           targetId={targetId}
+          switchToBindWallet={() => forward('bindWallet')}
         />
       )}
       {isSetPaymentPassword && (

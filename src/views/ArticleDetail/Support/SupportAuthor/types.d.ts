@@ -15,6 +15,7 @@ export type Step =
   | 'walletSelect'
   | 'networkSelect'
   | 'approveContract'
+  | 'bindWallet'
 
 export interface BaseSupportAuthorProps {
   completeCallback?: () => void
