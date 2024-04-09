@@ -1,16 +1,22 @@
+import { useQuery } from '@apollo/react-hooks'
 import _random from 'lodash/random'
 import _range from 'lodash/range'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { useAccount } from 'wagmi'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
-import { Dialog, IconCircleCheck40, ViewerContext } from '~/components'
-import { UserDonationRecipientFragment } from '~/gql/graphql'
+import { Dialog, IconCircleCheck40, Spinner, ViewerContext } from '~/components'
+import {
+  QueryUserByAddressQuery,
+  UserDonationRecipientFragment,
+} from '~/gql/graphql'
 
 import PaymentInfo from '../../PaymentInfo'
+import { QUERY_USER_BY_ADDRESS } from './gql'
 import styles from './styles.module.css'
 
 interface Props {
@@ -31,6 +37,14 @@ const Complete: React.FC<Props> = ({
   switchToBindWallet,
 }) => {
   const viewer = useContext(ViewerContext)
+  const { address } = useAccount()
+
+  const { data, loading } = useQuery<QueryUserByAddressQuery>(
+    QUERY_USER_BY_ADDRESS,
+    {
+      variables: { ethAddress: address },
+    }
+  )
 
   const gotIt = () => {
     window.dispatchEvent(
@@ -50,7 +64,11 @@ const Complete: React.FC<Props> = ({
   const isLikecoin = currency === CURRENCY.LIKE
   const isHKD = currency === CURRENCY.HKD
 
-  const shouldBindWallet = viewer.info.ethAddress === null
+  if (loading) {
+    return <Spinner />
+  }
+  const shouldBindWallet =
+    viewer.info.ethAddress === null && data?.user === null
 
   return (
     <section className={styles.container}>
