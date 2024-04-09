@@ -4,7 +4,7 @@ import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { parseUnits } from 'viem'
-import { useContractWrite } from 'wagmi'
+import { useAccount, useContractWrite } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
 import { CHAIN, contract, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
@@ -211,6 +211,11 @@ const USDTProcessingForm: React.FC<Props> = ({
   const [payTo] = useMutation<PayToMutation>(PAY_TO)
   const viewer = useContext(ViewerContext)
 
+  const { address } = useAccount()
+
+  const isConnectedAddress =
+    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
+
   const {
     data,
     error,
@@ -250,7 +255,7 @@ const USDTProcessingForm: React.FC<Props> = ({
         updateDonation({
           cache,
           id: article.id,
-          viewer: viewer,
+          viewer: isConnectedAddress ? viewer : undefined,
           txId: result.data?.payTo.transaction.id,
         })
       },
