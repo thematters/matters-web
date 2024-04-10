@@ -862,6 +862,10 @@
     "defaultMessage": "數字錢包",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
+  "HQusql": {
+    "defaultMessage": "讀者可以直接透過錢包地址轉 USDT 等幣種給你",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "HaSYl4": {
     "defaultMessage": "僅作者本人可見封存作品，",
     "description": "src/views/ArticleDetail/State/index.tsx"
@@ -1120,6 +1124,10 @@
   "N8ISx8": {
     "defaultMessage": "Oops！該評論已被原作者刪除"
   },
+  "NACY16": {
+    "defaultMessage": "為什麼需要設定錢包 ?",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "NAidKb": {
     "defaultMessage": "通知"
   },
@@ -1195,6 +1203,10 @@
   "P2tEEn": {
     "defaultMessage": "餘額不足",
     "description": "src/components/Balance/index.tsx"
+  },
+  "P3y9Bo": {
+    "defaultMessage": "前往簽署",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "登入密碼",
@@ -1805,6 +1817,10 @@
   "djJp6c": {
     "defaultMessage": "我的足跡"
   },
+  "dk+TLh": {
+    "defaultMessage": "錢包地址將公開顯示於個人頁作為個人身份識別",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "dzF4ci": {
     "defaultMessage": "重新發送",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2124,6 +2140,10 @@
     "defaultMessage": "驗證碼已失效，請使用最新驗證碼或重新發送",
     "description": "CODE_INACTIVE"
   },
+  "myB890": {
+    "defaultMessage": "先不要，下次再說",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "mzCz0Z": {
     "defaultMessage": "全部標籤",
     "description": "src/views/Tags/index.tsx"
@@ -2368,6 +2388,10 @@
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"
   },
+  "uaFED8": {
+    "defaultMessage": "綁定後除原有登入方式，增加錢包登入管道",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ub1kHa": {
     "defaultMessage": "加入選集"
   },
@@ -2393,6 +2417,10 @@
   },
   "uw32VR": {
     "defaultMessage": "教學指南"
+  },
+  "v4ddaP": {
+    "defaultMessage": "立即綁定錢包，與個人帳戶連結",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "v5MunN": {
     "defaultMessage": "驗證碼逾期，請點擊重新發送",
@@ -2423,6 +2451,10 @@
   "vLEnrs": {
     "defaultMessage": "支持了",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "vRCDr8": {
+    "defaultMessage": "綁定後可以快速登入帳戶{br}讀者也能夠透過其他管道自由轉錢支持你！",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "vX2bDy": {
     "defaultMessage": "關聯作品"

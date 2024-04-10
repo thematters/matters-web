@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  align-items: center;
+  justify-content: space-between;
+
+  & .content {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    & .title {
+      font-size: var(--font-size-lg);
+      font-weight: var(--font-weight-semibold);
+      line-height: 1.875rem;
+      color: var(--color-black);
+    }
+
+    & .info {
+      margin-top: var(--spacing-x-tight);
+      margin-bottom: var(--spacing-loose);
+      font-size: var(--font-size-sm);
+      line-height: 1.375rem;
+      color: var(--color-grey-darker);
+    }
+
+    & .passButton {
+      margin-top: var(--spacing-loose);
+      font-size: var(--font-size-xs);
+      line-height: 1.125rem;
+    }
+  }
+
+  & .footer {
+    width: 100%;
+    padding-top: var(--spacing-base);
+    padding-bottom: var(--spacing-xx-loose);
+    text-align: center;
+
+    & .buttons {
+      @mixin border-top-grey-light;
+
+      padding-top: var(--spacing-loose);
+      border-top-style: dashed;
+
+      & button {
+        @mixin transition;
+
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-medium);
+        line-height: 1.375rem;
+        transition-property: color;
+
+        &:hover {
+          color: var(--color-grey-darker);
+        }
+      }
+    }
+
+    & .note {
+      margin-top: var(--spacing-base);
+      margin-left: var(--spacing-base);
+      font-size: var(--font-size-sm);
+      line-height: 1.75;
+      color: var(--color-grey-darker);
+      text-align: left;
+      list-style-type: decimal;
+    }
+  }
+}

@@ -862,6 +862,10 @@
     "defaultMessage": "Wallet",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
+  "HQusql": {
+    "defaultMessage": "Readers can directly transfer USDT and other currencies to you through their wallet address.",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "HaSYl4": {
     "defaultMessage": "Archived article (violations),&nbsp;",
     "description": "src/views/ArticleDetail/State/index.tsx"
@@ -1120,6 +1124,10 @@
   "N8ISx8": {
     "defaultMessage": "Oops! This comment has been deleted by author"
   },
+  "NACY16": {
+    "defaultMessage": "Why need to set up a wallet?",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "NAidKb": {
     "defaultMessage": "Notifications"
   },
@@ -1195,6 +1203,10 @@
   "P2tEEn": {
     "defaultMessage": "Insufficient balance",
     "description": "src/components/Balance/index.tsx"
+  },
+  "P3y9Bo": {
+    "defaultMessage": "Go to sign",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "Password",
@@ -1805,6 +1817,10 @@
   "djJp6c": {
     "defaultMessage": "History"
   },
+  "dk+TLh": {
+    "defaultMessage": "The wallet address will be publicly displayed on the personal page as personal identification.",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "dzF4ci": {
     "defaultMessage": "Resend",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2124,6 +2140,10 @@
     "defaultMessage": "Verification code is no longer valid. Please use the latest code we sent, or try resend",
     "description": "CODE_INACTIVE"
   },
+  "myB890": {
+    "defaultMessage": "Pass and ask me next time",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "mzCz0Z": {
     "defaultMessage": "Tags",
     "description": "src/views/Tags/index.tsx"
@@ -2368,6 +2388,10 @@
   "uVCg1l": {
     "defaultMessage": "Explore Matters"
   },
+  "uaFED8": {
+    "defaultMessage": "After binding, in addition to the original login method, a wallet login channel will be added.",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ub1kHa": {
     "defaultMessage": "Add to collection"
   },
@@ -2393,6 +2417,10 @@
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
+  },
+  "v4ddaP": {
+    "defaultMessage": "Bind your wallet immediately, and link it to your personal account",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "v5MunN": {
     "defaultMessage": "Verification code has expired, please resend.",
@@ -2423,6 +2451,10 @@
   "vLEnrs": {
     "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "vRCDr8": {
+    "defaultMessage": "You can quickly log in to your account after binding.{br}Readers can also freely transfer money through other channels to support you!",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "vX2bDy": {
     "defaultMessage": "Collect Article"
