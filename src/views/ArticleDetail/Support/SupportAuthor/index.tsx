@@ -268,7 +268,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       )}
       {isBindWallet && (
         <>
-          <Spacer size="xxloose" />
           <DynamicBindWalletForm
             currency={currency}
             callback={() => {

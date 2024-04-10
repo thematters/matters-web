@@ -352,6 +352,9 @@
   "6/kgzs": {
     "defaultMessage": "退订成功"
   },
+  "62nsdy": {
+    "defaultMessage": "重试"
+  },
   "63HuBz": {
     "defaultMessage": "此标签目前无人主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -695,6 +698,10 @@
     "defaultMessage": "已超过 140 字，目前 {numbers} 字",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
+  "DX0YH3": {
+    "defaultMessage": "已成功绑定钱包",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "DYrDcG": {
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
@@ -914,10 +921,6 @@
   },
   "Ihwz5K": {
     "defaultMessage": "代表作已取消"
-  },
-  "ItQs15": {
-    "defaultMessage": "重试",
-    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "ItUuuX": {
     "defaultMessage": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
@@ -1146,6 +1149,9 @@
   "NONfAh": {
     "defaultMessage": "豆瓣",
     "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "NYTGIb": {
+    "defaultMessage": "知道了"
   },
   "NbdvAd": {
     "defaultMessage": "支持者名单",
@@ -1556,6 +1562,9 @@
     "defaultMessage": "一个标签最多仅可有 4 名协作者共同管理",
     "description": "TAG_EDITORS_REACH_LIMIT"
   },
+  "XnEruT": {
+    "defaultMessage": "绑定失败，请稍后再试"
+  },
   "XuYhBC": {
     "defaultMessage": "代表作已设置"
   },
@@ -1853,12 +1862,12 @@
     "defaultMessage": "互相追踪",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
+  "exb/12": {
+    "defaultMessage": "之后就可以透过钱包快速登入啰！",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ezYuE2": {
     "defaultMessage": "支持作者"
-  },
-  "f45YWK": {
-    "defaultMessage": "知道了",
-    "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
   },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者删除"
@@ -1986,6 +1995,10 @@
   "jc3mW/": {
     "defaultMessage": "支持者",
     "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
+  "jiB0Z2": {
+    "defaultMessage": "无法绑定钱包",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "打开 IPNS 页面",

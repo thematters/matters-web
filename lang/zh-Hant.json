@@ -352,6 +352,9 @@
   "6/kgzs": {
     "defaultMessage": "退訂成功"
   },
+  "62nsdy": {
+    "defaultMessage": "重試"
+  },
   "63HuBz": {
     "defaultMessage": "此標籤目前無人主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -695,6 +698,10 @@
     "defaultMessage": "已超過 140 字，目前 {numbers} 字",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
+  "DX0YH3": {
+    "defaultMessage": "已成功綁定錢包",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "DYrDcG": {
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
@@ -914,10 +921,6 @@
   },
   "Ihwz5K": {
     "defaultMessage": "代表作已取消"
-  },
-  "ItQs15": {
-    "defaultMessage": "重試",
-    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "ItUuuX": {
     "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
@@ -1146,6 +1149,9 @@
   "NONfAh": {
     "defaultMessage": "豆瓣",
     "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "NYTGIb": {
+    "defaultMessage": "知道了"
   },
   "NbdvAd": {
     "defaultMessage": "支持者名單",
@@ -1556,6 +1562,9 @@
     "defaultMessage": "一個標籤最多僅可有 4 名協作者共同管理",
     "description": "TAG_EDITORS_REACH_LIMIT"
   },
+  "XnEruT": {
+    "defaultMessage": "綁定失敗，請稍後再試"
+  },
   "XuYhBC": {
     "defaultMessage": "代表作已設置"
   },
@@ -1853,12 +1862,12 @@
     "defaultMessage": "互相追蹤",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
+  "exb/12": {
+    "defaultMessage": "之後就可以透過錢包快速登入囉！",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ezYuE2": {
     "defaultMessage": "支持作者"
-  },
-  "f45YWK": {
-    "defaultMessage": "知道了",
-    "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
   },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者刪除"
@@ -1986,6 +1995,10 @@
   "jc3mW/": {
     "defaultMessage": "支持者",
     "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
+  "jiB0Z2": {
+    "defaultMessage": "無法綁定錢包",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "打開 IPNS 頁面",

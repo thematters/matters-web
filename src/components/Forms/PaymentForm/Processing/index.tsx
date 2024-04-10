@@ -183,13 +183,7 @@ const OthersProcessingForm: React.FC<Props> = ({
             borderWidth="sm"
             textWeight="normal"
             borderActiveColor="grey"
-            text={
-              <FormattedMessage
-                defaultMessage="Retry"
-                id="ItQs15"
-                description="src/components/Forms/PaymentForm/Processing/index.tsx"
-              />
-            }
+            text={<FormattedMessage defaultMessage="Retry" id="62nsdy" />}
           />
         </>
       )}
@@ -343,13 +337,7 @@ const USDTProcessingForm: React.FC<Props> = ({
               borderWidth="sm"
               textWeight="normal"
               borderActiveColor="grey"
-              text={
-                <FormattedMessage
-                  defaultMessage="Retry"
-                  id="ItQs15"
-                  description="src/components/Forms/PaymentForm/Processing/index.tsx"
-                />
-              }
+              text={<FormattedMessage defaultMessage="Retry" id="62nsdy" />}
             />
           </>
         )}

@@ -352,6 +352,9 @@
   "6/kgzs": {
     "defaultMessage": "Unsubscribed"
   },
+  "62nsdy": {
+    "defaultMessage": "Retry"
+  },
   "63HuBz": {
     "defaultMessage": "This tag has no manager currently",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -695,6 +698,10 @@
     "defaultMessage": "Over 140 words, current {numbers}",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
+  "DX0YH3": {
+    "defaultMessage": "Wallet successfully bound",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "DYrDcG": {
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
@@ -914,10 +921,6 @@
   },
   "Ihwz5K": {
     "defaultMessage": "Unpinned from profile"
-  },
-  "ItQs15": {
-    "defaultMessage": "Retry",
-    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "ItUuuX": {
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
@@ -1146,6 +1149,9 @@
   "NONfAh": {
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "NYTGIb": {
+    "defaultMessage": "Got it"
   },
   "NbdvAd": {
     "defaultMessage": "Supporter",
@@ -1556,6 +1562,9 @@
     "defaultMessage": "Maximum 4 editors allowed for each tag",
     "description": "TAG_EDITORS_REACH_LIMIT"
   },
+  "XnEruT": {
+    "defaultMessage": "Binding failed. Please retry later."
+  },
   "XuYhBC": {
     "defaultMessage": "Pinned to profile"
   },
@@ -1853,12 +1862,12 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
+  "exb/12": {
+    "defaultMessage": "You can log in through your wallet next time!",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ezYuE2": {
     "defaultMessage": "Support Author"
-  },
-  "f45YWK": {
-    "defaultMessage": "Got it",
-    "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
   },
   "fDdcbi": {
     "defaultMessage": "This {type} has been deleted by the author"
@@ -1986,6 +1995,10 @@
   "jc3mW/": {
     "defaultMessage": "Supporter",
     "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
+  "jiB0Z2": {
+    "defaultMessage": "Unable to bind wallet",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
