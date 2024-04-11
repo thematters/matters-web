@@ -14,7 +14,7 @@ const DonationTabs = ({ recipient, currency, setCurrency }: Props) => {
   const creatorAddress = recipient.info.ethAddress
 
   const isHKD = currency === CURRENCY.HKD
-  const isUsdt = currency === CURRENCY.USDT
+  const isUSDT = currency === CURRENCY.USDT
   const isLikecoin = currency === CURRENCY.LIKE
 
   return (
@@ -27,7 +27,7 @@ const DonationTabs = ({ recipient, currency, setCurrency }: Props) => {
         />
       </Tabs.Tab>
       <Tabs.Tab
-        selected={isUsdt}
+        selected={isUSDT}
         onClick={() => setCurrency(CURRENCY.USDT)}
         disabled={!creatorAddress}
       >

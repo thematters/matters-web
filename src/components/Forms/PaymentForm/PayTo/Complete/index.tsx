@@ -60,7 +60,7 @@ const Complete: React.FC<Props> = ({
     }
   }
 
-  const isUsdt = currency === CURRENCY.USDT
+  const isUSDT = currency === CURRENCY.USDT
   const isLikecoin = currency === CURRENCY.LIKE
   const isHKD = currency === CURRENCY.HKD
 
@@ -77,7 +77,7 @@ const Complete: React.FC<Props> = ({
         currency={currency}
         recipient={recipient}
         showLikerID={isLikecoin}
-        showEthAddress={isUsdt}
+        showEthAddress={isUSDT}
       >
         <>
           <IconCircleCheck40 size="xlM" color="green" />
@@ -88,7 +88,7 @@ const Complete: React.FC<Props> = ({
                 id="5UglrB"
               />
             )}
-            {isUsdt && (
+            {isUSDT && (
               <FormattedMessage
                 defaultMessage="Payment request has been sent"
                 id="quRPwZ"
