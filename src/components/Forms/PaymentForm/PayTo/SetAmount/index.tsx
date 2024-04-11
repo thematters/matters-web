@@ -15,7 +15,6 @@ import {
   WALLET_ERROR_MESSAGES,
 } from '~/common/enums'
 import {
-  featureSupportedChains,
   formatAmount,
   maskAddress,
   numRound,
@@ -26,16 +25,13 @@ import {
   Button,
   CopyToClipboard,
   Form,
-  IconCopy16,
   LanguageContext,
   Spacer,
   Spinner,
-  TextIcon,
   useAllowanceUSDT,
   useApproveUSDT,
   useBalanceUSDT,
   useMutation,
-  useTargetNetwork,
   ViewerContext,
 } from '~/components'
 import { updateDonation } from '~/components/GQL'
@@ -111,13 +107,10 @@ const SetAmount: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
 
   const { address } = useAccount()
+  const ethAddress = viewer.info.ethAddress
+  const hasEthAddress = !!ethAddress
   const isConnectedAddress =
-    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
-
-  // TODO: support multiple networks
-  const targetNetork = featureSupportedChains.curation[0]
-  const { isUnsupportedNetwork, switchToTargetNetwork, isSwitchingNetwork } =
-    useTargetNetwork(targetNetork)
+    ethAddress?.toLowerCase() === address?.toLowerCase()
 
   // states
   const [payTo] = useMutation<PayToMutation>(PAY_TO)
@@ -147,7 +140,9 @@ const SetAmount: React.FC<FormProps> = ({
     write: approveWrite,
     error: approveError,
   } = useApproveUSDT()
-  const { data: balanceUSDTData, error: balanceUSDTError } = useBalanceUSDT({})
+  const { data: balanceUSDTData, error: balanceUSDTError } = useBalanceUSDT({
+    address,
+  })
 
   const allowanceUSDT = allowanceData || 0n
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
@@ -216,12 +211,11 @@ const SetAmount: React.FC<FormProps> = ({
   const value = values.customAmount || values.amount
   const isBalanceInsufficient = balance < value
   const isExceededAllowance =
+    isUSDT &&
     allowanceUSDT > 0n &&
     parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
-  const hasUSDTNetworkError = // TODO: better error handling
-    isUSDT &&
-    !isUnsupportedNetwork &&
-    (allowanceError || balanceUSDTError || approveError)
+  const hasUSDTNetworkError =
+    isUSDT && (allowanceError || balanceUSDTError || approveError) // TODO: better error handling
   const networkError =
     error || hasUSDTNetworkError ? (
       WALLET_ERROR_MESSAGES[lang].unknown
@@ -259,17 +253,6 @@ const SetAmount: React.FC<FormProps> = ({
     )
   }
 
-  /**
-   * useEffect Hooks
-   */
-  // go back to previous step if wallet is locked
-  useEffect(() => {
-    if (currency === CURRENCY.USDT && !address) {
-      // TODO: better fallback handling
-      // switchToCurrencyChoice()
-    }
-  }, [address])
-
   // USDT approval
   useEffect(() => {
     ;(async () => {
@@ -304,7 +287,6 @@ const SetAmount: React.FC<FormProps> = ({
         defaultAmount={AMOUNT_DEFAULT[currency]}
         currentAmount={values.amount}
         name="amount"
-        disabled={isUSDT && !isConnectedAddress}
         error={errors.amount || networkError}
         onBlur={handleBlur}
         onChange={async (e) => {
@@ -319,7 +301,6 @@ const SetAmount: React.FC<FormProps> = ({
         }}
         // custom input
         customAmount={{
-          disabled: isUSDT && !isConnectedAddress,
           min: 0,
           max: maxAmount,
           step: isUSDT ? '0.01' : undefined,
@@ -368,31 +349,28 @@ const SetAmount: React.FC<FormProps> = ({
     isSubmitting,
     isExceededAllowance,
     isBalanceInsufficient,
-    isConnectedAddress,
-    isUnsupportedNetwork,
-    isSwitchingNetwork,
-    targetChainName: targetNetork.name,
-    allowanceUSDT,
+    switchToAddCredit,
     approving,
     approveConfirming,
     allowanceLoading,
     approveWrite,
-    switchToTargetNetwork,
-    switchToAddCredit,
   }
 
   return (
     <section className={styles.container}>
       {InnerForm}
 
-      {/* TODO: Will update in set USDT amount step */}
-      {isUSDT && !isConnectedAddress && (
+      <Spacer size="loose" />
+      <SubmitButton mode="rounded" {...submitButtonProps} />
+
+      {isUSDT && hasEthAddress && !isConnectedAddress && (
         <>
           <p className={styles.reconnectHint}>
             <FormattedMessage
-              defaultMessage="The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as: "
-              id="pKkpI9"
+              defaultMessage="Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
+              id="ksIL/T"
             />
+            <br />
             <CopyToClipboard
               text={viewer.info.ethAddress || ''}
               successMessage={
@@ -407,23 +385,16 @@ const SetAmount: React.FC<FormProps> = ({
                     id: '4l6vz1',
                   })}
                   onClick={copyToClipboard}
+                  textColor="green"
+                  textActiveColor="greenDark"
                 >
-                  <TextIcon
-                    icon={<IconCopy16 color="black" size="xs" />}
-                    color="black"
-                    textPlacement="left"
-                  >
-                    {maskAddress(viewer.info.ethAddress || '')}
-                  </TextIcon>
+                  {maskAddress(viewer.info.ethAddress || '')}
                 </Button>
               )}
             </CopyToClipboard>
           </p>
         </>
       )}
-
-      <Spacer size="loose" />
-      <SubmitButton mode="rounded" {...submitButtonProps} />
     </section>
   )
 }

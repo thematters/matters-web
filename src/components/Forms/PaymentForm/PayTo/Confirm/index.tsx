@@ -3,7 +3,6 @@ import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { useAccount, useNetwork } from 'wagmi'
 
 import {
   PAYMENT_CURRENCY as CURRENCY,
@@ -14,10 +13,13 @@ import {
   BindEmailHintDialog,
   Dialog,
   Form,
+  IconOpenWallet20,
   // IconExternalLink16,
   LanguageContext,
   ResetPaymentPasswordDialog,
+  Spacer,
   Spinner,
+  TextIcon,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -47,7 +49,6 @@ interface FormProps {
   targetId: string
   submitCallback: () => void
   switchToSetAmount: () => void
-  switchToResetPassword: () => void
   openTabCallback: (values: SetAmountOpenTabCallbackValues) => void
   tabUrl?: string
   tx?: PayToMutation['payTo']['transaction']
@@ -65,7 +66,6 @@ const Confirm: React.FC<FormProps> = ({
   targetId,
   submitCallback,
   switchToSetAmount,
-  switchToResetPassword,
   openTabCallback,
   tabUrl,
   tx,
@@ -85,22 +85,9 @@ const Confirm: React.FC<FormProps> = ({
     fetchPolicy: 'network-only',
   })
 
-  const { address } = useAccount()
-  const { chain } = useNetwork()
-  const isUnsupportedNetwork = !!chain?.unsupported
-  const isConnectedAddress =
-    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
-
   const isHKD = currency === CURRENCY.HKD
   const isUSDT = currency === CURRENCY.USDT
   // const isLIKE = currency === CURRENCY.LIKE
-
-  useEffect(() => {
-    if (isUSDT && (!address || isUnsupportedNetwork || !isConnectedAddress)) {
-      // TODO: will update fallback steps in USDT support
-      // switchToCurrencyChoice()
-    }
-  }, [address, chain])
 
   const {
     errors,
@@ -265,6 +252,28 @@ const Confirm: React.FC<FormProps> = ({
               </ResetPaymentPasswordDialog>
             )}
           </BindEmailHintDialog>
+        </>
+      )}
+
+      {isUSDT && !isSubmitting && (
+        <>
+          <Dialog.RoundedButton
+            color="white"
+            bgColor="green"
+            onClick={submitCallback}
+            textWeight="normal"
+            textSize="md"
+            text={
+              <TextIcon icon={<IconOpenWallet20 size="mdS" />}>
+                <FormattedMessage
+                  defaultMessage="Confirm authorization"
+                  id="/NX9L+"
+                  description="src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+                />
+              </TextIcon>
+            }
+          />
+          <Spacer size="base" />
         </>
       )}
 

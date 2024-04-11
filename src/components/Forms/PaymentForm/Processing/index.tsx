@@ -4,15 +4,10 @@ import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { parseUnits } from 'viem'
-import { useAccount, useContractWrite, useNetwork } from 'wagmi'
+import { useAccount, useContractWrite } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
-import {
-  CHAIN,
-  contract,
-  PAYMENT_CURRENCY as CURRENCY,
-  SUPPORT_SUCCESS_ANIMATION,
-} from '~/common/enums'
+import { CHAIN, contract, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { CurationABI } from '~/common/utils'
 import {
   Dialog,
@@ -33,7 +28,6 @@ import {
 } from '~/gql/graphql'
 
 import PaymentInfo from '../PaymentInfo'
-import PayToFallback from './PayToFallback'
 import styles from './styles.module.css'
 
 interface Props {
@@ -216,17 +210,11 @@ const USDTProcessingForm: React.FC<Props> = ({
 }) => {
   const [payTo] = useMutation<PayToMutation>(PAY_TO)
   const viewer = useContext(ViewerContext)
+
   const { address } = useAccount()
-  const { chain } = useNetwork()
-  const isUnsupportedNetwork = !!chain?.unsupported
+
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
-
-  useEffect(() => {
-    if (!address || isUnsupportedNetwork || !isConnectedAddress) {
-      switchToCurrencyChoice()
-    }
-  }, [address, chain])
 
   const {
     data,
@@ -275,18 +263,6 @@ const USDTProcessingForm: React.FC<Props> = ({
 
     await waitForTransaction({ hash: data.hash })
 
-    window.dispatchEvent(
-      new CustomEvent(SUPPORT_SUCCESS_ANIMATION, {
-        detail: {
-          transactionResult: data,
-          amount,
-          currency,
-          recipientId: recipient.id,
-          targetId,
-        },
-      })
-    )
-
     nextStep()
   }
 
@@ -304,51 +280,80 @@ const USDTProcessingForm: React.FC<Props> = ({
 
   // error handling
   useEffect(() => {
-    const code = _get(error, 'code')
-    if (error && code === 'ACTION_REJECTED') {
+    const errorName = _get(error, 'cause.name')
+    if (error && errorName === 'UserRejectedRequestError') {
       switchToConfirm()
     }
   }, [error])
 
-  if (isError) {
-    return <PayToFallback closeDialog={closeDialog} />
-  }
-
   return (
     <>
-      <Dialog.Header
-        closeDialog={closeDialog}
-        closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
-        title={<FormattedMessage defaultMessage="Support Author" id="ezYuE2" />}
-      />
-
-      <Dialog.Content>
-        <section>
-          <PaymentInfo
-            amount={amount}
-            currency={currency}
-            recipient={recipient}
-            showEthAddress={true}
-          />
-          <section className={styles.hint}>
-            <p>
-              <Translate
-                zh_hant="請在加密錢包內繼續操作，"
-                zh_hans="请在加密钱包内继续操作，"
-                en="Continue in the wallet."
-              />
-            </p>
-            <p>
-              <Translate
-                zh_hant="結果以鏈上紀錄為主，稍後同步至 Matters"
-                zh_hans="结果以链上记录为主，稍后同步至 Matters"
-                en="Transaction will be updated to Matters shortly."
-              />
-            </p>
-          </section>
-          <Spinner />
-        </section>
-      </Dialog.Content>
+      <section className={styles.container}>
+        <PaymentInfo
+          amount={amount}
+          currency={currency}
+          recipient={recipient}
+          showEthAddress={true}
+        >
+          {!isError && (
+            <>
+              <Spinner noSpacing />
+              <section className={styles.hint}>
+                <p>
+                  <FormattedMessage
+                    defaultMessage="Please continue within your crypto wallet."
+                    description="src/components/Forms/PaymentForm/Processing/index.tsx"
+                    id="EmZFry"
+                  />
+                </p>
+                <p>
+                  <FormattedMessage
+                    defaultMessage="The results are mainly based on the records on the chain and will be synchronized to Matters later."
+                    description="src/components/Forms/PaymentForm/Processing/index.tsx"
+                    id="sfj+KG"
+                  />
+                </p>
+              </section>
+            </>
+          )}
+          {isError && (
+            <>
+              <IconCircleTime40 size="xlM" color="red" />
+              <p className={styles.hint}>
+                <FormattedMessage
+                  defaultMessage="Sending failed. Please retry later."
+                  id="fK6ptv"
+                />
+                <br />
+                <FormattedMessage
+                  defaultMessage="Check the wallet status and confirm your network."
+                  id="k6pcz/"
+                />
+              </p>
+            </>
+          )}
+        </PaymentInfo>
+        {isError && (
+          <>
+            <Spacer size="loose" />
+            <Dialog.RoundedButton
+              color="black"
+              onClick={switchToConfirm}
+              borderColor="greyLight"
+              borderWidth="sm"
+              textWeight="normal"
+              borderActiveColor="grey"
+              text={
+                <FormattedMessage
+                  defaultMessage="Retry"
+                  id="ItQs15"
+                  description="src/components/Forms/PaymentForm/Processing/index.tsx"
+                />
+              }
+            />
+          </>
+        )}
+      </section>
     </>
   )
 }

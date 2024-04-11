@@ -65,6 +65,10 @@
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
+  "/NX9L+": {
+    "defaultMessage": "Confirm authorization",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "/TXBJR": {
     "defaultMessage": "Unknown error. Please try again later.",
     "description": "UNKNOWN_ERROR"
@@ -358,9 +362,6 @@
   "6BXcdo": {
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
-  },
-  "6ErzDk": {
-    "defaultMessage": "Reconnect Wallet"
   },
   "6KmKvZ": {
     "defaultMessage": "Please enter new transaction password again",
@@ -737,6 +738,10 @@
   "Eb1U+/": {
     "defaultMessage": "Topped up successfully"
   },
+  "EmZFry": {
+    "defaultMessage": "Please continue within your crypto wallet.",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "EoeUjA": {
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
@@ -940,9 +945,6 @@
   "JkWLg6": {
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JmzmVH": {
-    "defaultMessage": "Switch to "
   },
   "JpS59y": {
     "defaultMessage": "Accepted",
@@ -1673,9 +1675,6 @@
   "ai7kS4": {
     "defaultMessage": "My Works"
   },
-  "aoDcrD": {
-    "defaultMessage": "Approve to continue"
-  },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/UI.tsx"
@@ -2026,6 +2025,9 @@
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "ksIL/T": {
+    "defaultMessage": "Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
+  },
   "ksvOGO": {
     "defaultMessage": "Send the verification code",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
@@ -2248,6 +2250,9 @@
   "qlxeW+": {
     "defaultMessage": "Undo downvote"
   },
+  "quRPwZ": {
+    "defaultMessage": "Payment request has been sent"
+  },
   "qxKjcm": {
     "defaultMessage": "Pin",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -2298,6 +2303,10 @@
   "sPgUkN": {
     "defaultMessage": "This Month",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sfj+KG": {
+    "defaultMessage": "The results are mainly based on the records on the chain and will be synchronized to Matters later.",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "sg3nVO": {
     "defaultMessage": "This email has been used, please go to login or try another one",

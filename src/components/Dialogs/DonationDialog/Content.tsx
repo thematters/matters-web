@@ -1,3 +1,5 @@
+// TODO: Will delete this file after the new article support is ready
+
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
@@ -187,7 +189,6 @@ const DonationDialogContent = ({
           recipient={recipient}
           switchToSetAmount={() => forward('setAmount')}
           submitCallback={() => forward('processing')}
-          switchToResetPassword={() => forward('resetPassword')}
           targetId={targetId}
           openTabCallback={setAmountOpenTabCallback}
           tabUrl={tabUrl}
@@ -221,6 +222,7 @@ const DonationDialogContent = ({
           targetId={targetId}
           amount={amount}
           currency={currency}
+          switchToBindWallet={() => {}}
         />
       )}
 

@@ -1,26 +1,25 @@
 import { FormattedMessage } from 'react-intl'
 
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Tabs } from '~/components'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
-export type CurrencyType = 'credit' | 'usdt' | 'likecoin'
-
 type Props = {
   recipient: UserDonationRecipientFragment
-  type: CurrencyType
-  setType: React.Dispatch<React.SetStateAction<CurrencyType>>
+  currency: CURRENCY
+  setCurrency: React.Dispatch<React.SetStateAction<CURRENCY>>
 }
 
-const DonationTabs = ({ recipient, type, setType }: Props) => {
+const DonationTabs = ({ recipient, currency, setCurrency }: Props) => {
   const creatorAddress = recipient.info.ethAddress
 
-  const isCredit = type === 'credit'
-  const isUsdt = type === 'usdt'
-  const isLikecoin = type === 'likecoin'
+  const isHKD = currency === CURRENCY.HKD
+  const isUSDT = currency === CURRENCY.USDT
+  const isLikecoin = currency === CURRENCY.LIKE
 
   return (
     <Tabs>
-      <Tabs.Tab selected={isCredit} onClick={() => setType('credit')}>
+      <Tabs.Tab selected={isHKD} onClick={() => setCurrency(CURRENCY.HKD)}>
         <FormattedMessage
           defaultMessage="Credit card"
           id="vmx+TU"
@@ -28,13 +27,16 @@ const DonationTabs = ({ recipient, type, setType }: Props) => {
         />
       </Tabs.Tab>
       <Tabs.Tab
-        selected={isUsdt}
-        onClick={() => setType('usdt')}
+        selected={isUSDT}
+        onClick={() => setCurrency(CURRENCY.USDT)}
         disabled={!creatorAddress}
       >
         USDT
       </Tabs.Tab>
-      <Tabs.Tab selected={isLikecoin} onClick={() => setType('likecoin')}>
+      <Tabs.Tab
+        selected={isLikecoin}
+        onClick={() => setCurrency(CURRENCY.LIKE)}
+      >
         LikeCoin
       </Tabs.Tab>
     </Tabs>

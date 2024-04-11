@@ -65,6 +65,10 @@
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
+  "/NX9L+": {
+    "defaultMessage": "确认授权",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "/TXBJR": {
     "defaultMessage": "不知道哪里出错了，过几分钟看看",
     "description": "UNKNOWN_ERROR"
@@ -358,9 +362,6 @@
   "6BXcdo": {
     "defaultMessage": "设定围炉门槛（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
-  },
-  "6ErzDk": {
-    "defaultMessage": "重新连接钱包"
   },
   "6KmKvZ": {
     "defaultMessage": "请再次输入新交易密码",
@@ -737,6 +738,10 @@
   "Eb1U+/": {
     "defaultMessage": "储值成功"
   },
+  "EmZFry": {
+    "defaultMessage": "请在加密钱包内继续操作",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "EoeUjA": {
     "defaultMessage": "你无权限进行该操作",
     "description": "FORBIDDEN_BY_STATE"
@@ -940,9 +945,6 @@
   "JkWLg6": {
     "defaultMessage": "被追踪",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JmzmVH": {
-    "defaultMessage": "切换到 "
   },
   "JpS59y": {
     "defaultMessage": "已接受",
@@ -1673,9 +1675,6 @@
   "ai7kS4": {
     "defaultMessage": "我的创作"
   },
-  "aoDcrD": {
-    "defaultMessage": "首次需确认授权后继续"
-  },
   "aqX2Bt": {
     "defaultMessage": "前往首页",
     "description": "src/views/Callback/UI.tsx"
@@ -1842,7 +1841,7 @@
     "defaultMessage": "支持作者"
   },
   "f45YWK": {
-    "defaultMessage": "Got it",
+    "defaultMessage": "知道了",
     "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
   },
   "fDdcbi": {
@@ -2025,6 +2024,9 @@
   "kkZioy": {
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "ksIL/T": {
+    "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"
   },
   "ksvOGO": {
     "defaultMessage": "发送验证码",
@@ -2248,6 +2250,9 @@
   "qlxeW+": {
     "defaultMessage": "取消点踩"
   },
+  "quRPwZ": {
+    "defaultMessage": "支付请求已送出"
+  },
   "qxKjcm": {
     "defaultMessage": "置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -2298,6 +2303,10 @@
   "sPgUkN": {
     "defaultMessage": "本月营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sfj+KG": {
+    "defaultMessage": "结果以链上纪录为主，稍后同步至 Matters",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "sg3nVO": {
     "defaultMessage": "邮箱已被使用，请前往登录或尝试另一个",

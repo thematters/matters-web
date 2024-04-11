@@ -1,18 +1,21 @@
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { useAccount } from 'wagmi'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { featureSupportedChains } from '~/common/utils'
 import {
   AuthWalletFeed,
   Spacer,
   Spinner,
   useStep,
+  useTargetNetwork,
   ViewerContext,
 } from '~/components'
 import PaymentProcessingForm from '~/components/Forms/PaymentForm/Processing'
 import { PayToMutation } from '~/gql/graphql'
 
-import DonationTabs, { CurrencyType } from './Tabs'
+import DonationTabs from './Tabs'
 import { BaseSupportAuthorProps, Step as SupportStep } from './types'
 
 interface SetAmountCallbackValues {
@@ -69,8 +72,12 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const { recipient, targetId, article, updateSupportStep, onClose } = props
   const viewer = useContext(ViewerContext)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
-  const [type, setType] = useState<CurrencyType>('credit')
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
+
+  const { address } = useAccount()
+  // TODO: support multiple networks
+  const targetNetork = featureSupportedChains.curation[0]
+  const { isUnsupportedNetwork } = useTargetNetwork(targetNetork)
 
   const forward = (step: SupportStep) => {
     _forward(step)
@@ -104,12 +111,26 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   }
 
   useEffect(() => {
-    if (type === 'usdt') {
+    if (currency === CURRENCY.USDT) {
       forward('walletSelect')
     } else {
       forward('setAmount')
     }
-  }, [type])
+  }, [currency])
+
+  useEffect(() => {
+    if (currency !== CURRENCY.USDT) {
+      return
+    }
+
+    if (!address) {
+      forward('walletSelect')
+    }
+
+    if (isUnsupportedNetwork) {
+      forward('networkSelect')
+    }
+  }, [address, isUnsupportedNetwork])
 
   const isSetAmount = currStep === 'setAmount'
   const isConfirm = currStep === 'confirm'
@@ -128,15 +149,15 @@ const SupportAuthor = (props: SupportAuthorProps) => {
     <>
       {showTabs && (
         <DonationTabs
-          type={type}
-          setType={setType}
+          currency={currency}
+          setCurrency={setCurrency}
           recipient={props.recipient}
         />
       )}
       {isSetAmount && (
         <>
           <DynamicPayToFormSetAmount
-            currency={CURRENCY.HKD}
+            currency={currency}
             recipient={recipient}
             article={article}
             submitCallback={setAmountCallback}
@@ -157,7 +178,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           recipient={recipient}
           switchToSetAmount={() => forward('setAmount')}
           submitCallback={() => forward('processing')}
-          switchToResetPassword={() => forward('resetPassword')}
           targetId={targetId}
           openTabCallback={setAmountOpenTabCallback}
           tabUrl={tabUrl}
@@ -193,6 +213,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           amount={amount}
           currency={currency}
           targetId={targetId}
+          switchToBindWallet={() => forward('bindWallet')}
         />
       )}
       {isSetPaymentPassword && (
@@ -232,7 +253,10 @@ const SupportAuthor = (props: SupportAuthorProps) => {
         <>
           <Spacer size="xxloose" />
           <DynamicApproveUsdtContractForm
-            submitCallback={() => forward('setAmount')}
+            submitCallback={() => {
+              setCurrency(CURRENCY.USDT)
+              forward('setAmount')
+            }}
           />
         </>
       )}
