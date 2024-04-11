@@ -20,7 +20,7 @@
   }
 
   & p {
-    font-size: var(--font-size-xm);
+    font-size: var(--font-size-md);
     line-height: 2rem;
     color: var(--color-black);
 
