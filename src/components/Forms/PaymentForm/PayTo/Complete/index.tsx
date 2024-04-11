@@ -104,13 +104,7 @@ const Complete: React.FC<Props> = ({
         borderWidth="sm"
         textWeight="normal"
         borderActiveColor="grey"
-        text={
-          <FormattedMessage
-            defaultMessage="Got it"
-            id="f45YWK"
-            description="src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
-          />
-        }
+        text={<FormattedMessage defaultMessage="Got it" id="NYTGIb" />}
       />
     </section>
   )

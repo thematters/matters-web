@@ -58,6 +58,11 @@ const DynamicSwitchNetworkForm = dynamic(
   { loading: () => <Spinner /> }
 )
 
+const DynamicBindWalletForm = dynamic(
+  () => import('~/components/Forms/PaymentForm/BindWallet'),
+  { loading: () => <Spinner /> }
+)
+
 const DynamicApproveUsdtContractForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ApproveUsdtContract'),
   { loading: () => <Spinner /> }
@@ -125,10 +130,12 @@ const SupportAuthor = (props: SupportAuthorProps) => {
 
     if (!address) {
       forward('walletSelect')
+      return
     }
 
     if (isUnsupportedNetwork) {
       forward('networkSelect')
+      return
     }
   }, [address, isUnsupportedNetwork])
 
@@ -141,6 +148,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const isWalletSelect = currStep === 'walletSelect'
   const isNetworkSelect = currStep === 'networkSelect'
   const isApproveContract = currStep === 'approveContract'
+  const isBindWallet = currStep === 'bindWallet'
 
   const showTabs =
     isSetAmount || isWalletSelect || isNetworkSelect || isApproveContract
@@ -256,6 +264,16 @@ const SupportAuthor = (props: SupportAuthorProps) => {
             submitCallback={() => {
               setCurrency(CURRENCY.USDT)
               forward('setAmount')
+            }}
+          />
+        </>
+      )}
+      {isBindWallet && (
+        <>
+          <DynamicBindWalletForm
+            currency={currency}
+            callback={() => {
+              onClose()
             }}
           />
         </>

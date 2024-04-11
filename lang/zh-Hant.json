@@ -352,6 +352,9 @@
   "6/kgzs": {
     "defaultMessage": "退訂成功"
   },
+  "62nsdy": {
+    "defaultMessage": "重試"
+  },
   "63HuBz": {
     "defaultMessage": "此標籤目前無人主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -695,6 +698,10 @@
     "defaultMessage": "已超過 140 字，目前 {numbers} 字",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
+  "DX0YH3": {
+    "defaultMessage": "已成功綁定錢包",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "DYrDcG": {
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
@@ -862,6 +869,10 @@
     "defaultMessage": "數字錢包",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
+  "HQusql": {
+    "defaultMessage": "讀者可以直接透過錢包地址轉 USDT 等幣種給你",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "HaSYl4": {
     "defaultMessage": "僅作者本人可見封存作品，",
     "description": "src/views/ArticleDetail/State/index.tsx"
@@ -910,10 +921,6 @@
   },
   "Ihwz5K": {
     "defaultMessage": "代表作已取消"
-  },
-  "ItQs15": {
-    "defaultMessage": "重試",
-    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "ItUuuX": {
     "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
@@ -1120,6 +1127,10 @@
   "N8ISx8": {
     "defaultMessage": "Oops！該評論已被原作者刪除"
   },
+  "NACY16": {
+    "defaultMessage": "為什麼需要設定錢包 ?",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "NAidKb": {
     "defaultMessage": "通知"
   },
@@ -1138,6 +1149,9 @@
   "NONfAh": {
     "defaultMessage": "豆瓣",
     "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "NYTGIb": {
+    "defaultMessage": "知道了"
   },
   "NbdvAd": {
     "defaultMessage": "支持者名單",
@@ -1195,6 +1209,10 @@
   "P2tEEn": {
     "defaultMessage": "餘額不足",
     "description": "src/components/Balance/index.tsx"
+  },
+  "P3y9Bo": {
+    "defaultMessage": "前往簽署",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "登入密碼",
@@ -1544,6 +1562,9 @@
     "defaultMessage": "一個標籤最多僅可有 4 名協作者共同管理",
     "description": "TAG_EDITORS_REACH_LIMIT"
   },
+  "XnEruT": {
+    "defaultMessage": "綁定失敗，請稍後再試"
+  },
   "XuYhBC": {
     "defaultMessage": "代表作已設置"
   },
@@ -1805,6 +1826,10 @@
   "djJp6c": {
     "defaultMessage": "我的足跡"
   },
+  "dk+TLh": {
+    "defaultMessage": "錢包地址將公開顯示於個人頁作為個人身份識別",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "dzF4ci": {
     "defaultMessage": "重新發送",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -1837,12 +1862,12 @@
     "defaultMessage": "互相追蹤",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
+  "exb/12": {
+    "defaultMessage": "之後就可以透過錢包快速登入囉！",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ezYuE2": {
     "defaultMessage": "支持作者"
-  },
-  "f45YWK": {
-    "defaultMessage": "知道了",
-    "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
   },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者刪除"
@@ -1970,6 +1995,10 @@
   "jc3mW/": {
     "defaultMessage": "支持者",
     "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
+  "jiB0Z2": {
+    "defaultMessage": "無法綁定錢包",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "打開 IPNS 頁面",
@@ -2123,6 +2152,10 @@
   "mu01Gw": {
     "defaultMessage": "驗證碼已失效，請使用最新驗證碼或重新發送",
     "description": "CODE_INACTIVE"
+  },
+  "myB890": {
+    "defaultMessage": "先不要，下次再說",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "mzCz0Z": {
     "defaultMessage": "全部標籤",
@@ -2368,6 +2401,10 @@
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"
   },
+  "uaFED8": {
+    "defaultMessage": "綁定後除原有登入方式，增加錢包登入管道",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ub1kHa": {
     "defaultMessage": "加入選集"
   },
@@ -2393,6 +2430,10 @@
   },
   "uw32VR": {
     "defaultMessage": "教學指南"
+  },
+  "v4ddaP": {
+    "defaultMessage": "立即綁定錢包，與個人帳戶連結",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "v5MunN": {
     "defaultMessage": "驗證碼逾期，請點擊重新發送",
@@ -2423,6 +2464,10 @@
   "vLEnrs": {
     "defaultMessage": "支持了",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "vRCDr8": {
+    "defaultMessage": "綁定後可以快速登入帳戶{br}讀者也能夠透過其他管道自由轉錢支持你！",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "vX2bDy": {
     "defaultMessage": "關聯作品"

@@ -23,4 +23,5 @@
 
 .address {
   margin-top: var(--spacing-x-tight);
+  margin-bottom: var(--spacing-loose);
 }

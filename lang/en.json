@@ -352,6 +352,9 @@
   "6/kgzs": {
     "defaultMessage": "Unsubscribed"
   },
+  "62nsdy": {
+    "defaultMessage": "Retry"
+  },
   "63HuBz": {
     "defaultMessage": "This tag has no manager currently",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -695,6 +698,10 @@
     "defaultMessage": "Over 140 words, current {numbers}",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
+  "DX0YH3": {
+    "defaultMessage": "Wallet successfully bound",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "DYrDcG": {
     "defaultMessage": "Badges",
     "description": "src/components/UserProfile/index.tsx"
@@ -862,6 +869,10 @@
     "defaultMessage": "Wallet",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
+  "HQusql": {
+    "defaultMessage": "Readers can directly transfer USDT and other currencies to you through their wallet address.",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "HaSYl4": {
     "defaultMessage": "Archived article (violations),&nbsp;",
     "description": "src/views/ArticleDetail/State/index.tsx"
@@ -910,10 +921,6 @@
   },
   "Ihwz5K": {
     "defaultMessage": "Unpinned from profile"
-  },
-  "ItQs15": {
-    "defaultMessage": "Retry",
-    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "ItUuuX": {
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
@@ -1120,6 +1127,10 @@
   "N8ISx8": {
     "defaultMessage": "Oops! This comment has been deleted by author"
   },
+  "NACY16": {
+    "defaultMessage": "Why need to set up a wallet?",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "NAidKb": {
     "defaultMessage": "Notifications"
   },
@@ -1138,6 +1149,9 @@
   "NONfAh": {
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "NYTGIb": {
+    "defaultMessage": "Got it"
   },
   "NbdvAd": {
     "defaultMessage": "Supporter",
@@ -1195,6 +1209,10 @@
   "P2tEEn": {
     "defaultMessage": "Insufficient balance",
     "description": "src/components/Balance/index.tsx"
+  },
+  "P3y9Bo": {
+    "defaultMessage": "Go to sign",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "Password",
@@ -1544,6 +1562,9 @@
     "defaultMessage": "Maximum 4 editors allowed for each tag",
     "description": "TAG_EDITORS_REACH_LIMIT"
   },
+  "XnEruT": {
+    "defaultMessage": "Binding failed. Please retry later."
+  },
   "XuYhBC": {
     "defaultMessage": "Pinned to profile"
   },
@@ -1805,6 +1826,10 @@
   "djJp6c": {
     "defaultMessage": "History"
   },
+  "dk+TLh": {
+    "defaultMessage": "The wallet address will be publicly displayed on the personal page as personal identification.",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "dzF4ci": {
     "defaultMessage": "Resend",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -1837,12 +1862,12 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
+  "exb/12": {
+    "defaultMessage": "You can log in through your wallet next time!",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ezYuE2": {
     "defaultMessage": "Support Author"
-  },
-  "f45YWK": {
-    "defaultMessage": "Got it",
-    "description": "src/components/Forms/PaymentForm/PayTo/Complete/index.tsx"
   },
   "fDdcbi": {
     "defaultMessage": "This {type} has been deleted by the author"
@@ -1970,6 +1995,10 @@
   "jc3mW/": {
     "defaultMessage": "Supporter",
     "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
+  "jiB0Z2": {
+    "defaultMessage": "Unable to bind wallet",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
@@ -2123,6 +2152,10 @@
   "mu01Gw": {
     "defaultMessage": "Verification code is no longer valid. Please use the latest code we sent, or try resend",
     "description": "CODE_INACTIVE"
+  },
+  "myB890": {
+    "defaultMessage": "Pass and ask me next time",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "mzCz0Z": {
     "defaultMessage": "Tags",
@@ -2368,6 +2401,10 @@
   "uVCg1l": {
     "defaultMessage": "Explore Matters"
   },
+  "uaFED8": {
+    "defaultMessage": "After binding, in addition to the original login method, a wallet login channel will be added.",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ub1kHa": {
     "defaultMessage": "Add to collection"
   },
@@ -2393,6 +2430,10 @@
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
+  },
+  "v4ddaP": {
+    "defaultMessage": "Bind your wallet immediately, and link it to your personal account",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "v5MunN": {
     "defaultMessage": "Verification code has expired, please resend.",
@@ -2423,6 +2464,10 @@
   "vLEnrs": {
     "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
+  },
+  "vRCDr8": {
+    "defaultMessage": "You can quickly log in to your account after binding.{br}Readers can also freely transfer money through other channels to support you!",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "vX2bDy": {
     "defaultMessage": "Collect Article"
