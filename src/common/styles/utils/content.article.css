@@ -20,8 +20,8 @@
   }
 
   & p {
-    font-size: var(--font-size-md);
-    line-height: 1.5rem;
+    font-size: var(--font-size-xm);
+    line-height: 2rem;
     color: var(--color-black);
 
     /* FIXME: Firefox eats trailing spaces
