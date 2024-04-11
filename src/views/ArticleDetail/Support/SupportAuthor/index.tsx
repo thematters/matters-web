@@ -130,10 +130,12 @@ const SupportAuthor = (props: SupportAuthorProps) => {
 
     if (!address) {
       forward('walletSelect')
+      return
     }
 
     if (isUnsupportedNetwork) {
       forward('networkSelect')
+      return
     }
   }, [address, isUnsupportedNetwork])
 
