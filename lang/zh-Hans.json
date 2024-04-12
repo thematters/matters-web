@@ -267,6 +267,9 @@
   "3w3CC8": {
     "defaultMessage": "关联 ENS"
   },
+  "3yVvk4": {
+    "defaultMessage": "请在 Liker Land 继续操作"
+  },
   "3yk8fB": {
     "defaultMessage": "我的钱包"
   },
@@ -1919,6 +1922,9 @@
     "defaultMessage": "为确保帐号安全，修改邮箱將{resetHint}，你可在验证邮箱后再次设置密码。",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "h9CB9m": {
+    "defaultMessage": "结果以链上纪录为主，稍后同步至 Matters"
+  },
   "h9CG9E": {
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -2547,6 +2553,10 @@
   "x7kxvC": {
     "defaultMessage": "订阅解锁",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
+  "xDhqHi": {
+    "defaultMessage": "确认送出",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "xMaFCO": {
     "defaultMessage": "阅读",

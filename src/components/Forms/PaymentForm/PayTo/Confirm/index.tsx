@@ -87,7 +87,7 @@ const Confirm: React.FC<FormProps> = ({
 
   const isHKD = currency === CURRENCY.HKD
   const isUSDT = currency === CURRENCY.USDT
-  // const isLIKE = currency === CURRENCY.LIKE
+  const isLIKE = currency === CURRENCY.LIKE
 
   const {
     errors,
@@ -190,12 +190,12 @@ const Confirm: React.FC<FormProps> = ({
   }
 
   // TODO: Will reuse in like-coin support
-  // const onSubmitLikeCoin = () => {
-  //   const payWindow = window.open(tabUrl, '_blank')
-  //   if (payWindow && tx) {
-  //     openTabCallback({ window: payWindow, transaction: tx })
-  //   }
-  // }
+  const onSubmitLikeCoin = () => {
+    const payWindow = window.open(tabUrl, '_blank')
+    if (payWindow && tx) {
+      openTabCallback({ window: payWindow, transaction: tx })
+    }
+  }
 
   return (
     <section className={styles.container}>
@@ -255,21 +255,30 @@ const Confirm: React.FC<FormProps> = ({
         </>
       )}
 
-      {isUSDT && !isSubmitting && (
+      {(isUSDT || isLIKE) && !isSubmitting && (
         <>
           <Dialog.RoundedButton
             color="white"
             bgColor="green"
-            onClick={submitCallback}
+            onClick={isUSDT ? submitCallback : onSubmitLikeCoin}
             textWeight="normal"
             textSize="md"
             text={
               <TextIcon icon={<IconOpenWallet20 size="mdS" />}>
-                <FormattedMessage
-                  defaultMessage="Confirm authorization"
-                  id="/NX9L+"
-                  description="src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
-                />
+                {isUSDT && (
+                  <FormattedMessage
+                    defaultMessage="Confirm authorization"
+                    id="/NX9L+"
+                    description="src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+                  />
+                )}
+                {isLIKE && (
+                  <FormattedMessage
+                    defaultMessage="Confirm"
+                    id="xDhqHi"
+                    description="src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+                  />
+                )}
               </TextIcon>
             }
           />
