@@ -36,12 +36,11 @@ const BookCollection: React.FC<BookCollectionProps> = ({
   }, [cover])
 
   const titleWidth = countStrWidth(title)
-  const hasNonCJK = title.length * 2 !== titleWidth
 
   const jacketClasses = classNames({
     [styles.jacket]: true,
-    [styles.titleLg]: hasNonCJK ? titleWidth <= 10 : titleWidth <= 12,
-    [styles.titleMd]: titleWidth > 12 && titleWidth <= 28 && !hasNonCJK,
+    [styles.titleLg]: titleWidth <= 12,
+    [styles.titleMd]: titleWidth > 12 && titleWidth <= 28,
   })
 
   return (
