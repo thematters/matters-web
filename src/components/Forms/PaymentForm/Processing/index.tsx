@@ -14,7 +14,6 @@ import {
   IconCircleTime40,
   Spacer,
   Spinner,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -154,17 +153,15 @@ const OthersProcessingForm: React.FC<Props> = ({
             {currency === CURRENCY.LIKE && (
               <p className={styles.hint}>
                 <p>
-                  <Translate
-                    zh_hant="請在 Liker Pay 頁面繼續操作"
-                    zh_hans="请在 Liker Pay 页面继续操作"
-                    en="Please continue on the Liker Pay page"
+                  <FormattedMessage
+                    defaultMessage="Please continue in Liker Land."
+                    id="3yVvk4"
                   />
                 </p>
                 <p>
-                  <Translate
-                    zh_hant="完成前請勿關閉此畫面"
-                    zh_hans="完成前请勿关闭此画面"
-                    en="Do not close this screen until done"
+                  <FormattedMessage
+                    defaultMessage="The result is mainly based on the records on the chain and will be synchronized to Matters later."
+                    id="h9CB9m"
                   />
                 </p>
               </p>

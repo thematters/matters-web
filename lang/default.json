@@ -267,6 +267,9 @@
   "3w3CC8": {
     "defaultMessage": "Link ENS"
   },
+  "3yVvk4": {
+    "defaultMessage": "Please continue in Liker Land."
+  },
   "3yk8fB": {
     "defaultMessage": "Wallet"
   },
@@ -1919,6 +1922,9 @@
     "defaultMessage": "For security, we will {resetHint} for this. You can set your password again after verifying new email address.",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "h9CB9m": {
+    "defaultMessage": "The result is mainly based on the records on the chain and will be synchronized to Matters later."
+  },
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -2547,6 +2553,10 @@
   "x7kxvC": {
     "defaultMessage": "Subscribe to unlock all articles of",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
+  "xDhqHi": {
+    "defaultMessage": "Confirm",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "xMaFCO": {
     "defaultMessage": "Articles",

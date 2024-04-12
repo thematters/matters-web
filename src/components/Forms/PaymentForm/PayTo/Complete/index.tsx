@@ -88,7 +88,7 @@ const Complete: React.FC<Props> = ({
                 id="5UglrB"
               />
             )}
-            {isUSDT && (
+            {(isUSDT || isLikecoin) && (
               <FormattedMessage
                 defaultMessage="Payment request has been sent"
                 id="quRPwZ"
