@@ -189,7 +189,6 @@ const Confirm: React.FC<FormProps> = ({
     )
   }
 
-  // TODO: Will reuse in like-coin support
   const onSubmitLikeCoin = () => {
     const payWindow = window.open(tabUrl, '_blank')
     if (payWindow && tx) {
