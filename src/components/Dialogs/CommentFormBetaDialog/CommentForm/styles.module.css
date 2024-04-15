@@ -10,6 +10,18 @@
   position: relative;
   flex-grow: 1;
   overflow-y: auto;
+
+  & > div {
+    height: 100%;
+
+    & > div {
+      height: 100%;
+
+      & > div {
+        height: 100%;
+      }
+    }
+  }
 }
 
 .count {
