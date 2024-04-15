@@ -82,7 +82,7 @@ export const updateArticlePublic = ({
       return
     }
 
-    let commentCount = data.article.commentCount
+    let commentCount = data.article.comments.totalCount
     switch (type) {
       case 'addComment':
         commentCount += 1
@@ -98,7 +98,10 @@ export const updateArticlePublic = ({
       data: {
         article: {
           ...data.article,
-          commentCount,
+          comments: {
+            ...data.article.comments,
+            totalCount: commentCount,
+          },
         },
       },
     })
