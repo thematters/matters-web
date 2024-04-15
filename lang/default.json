@@ -166,6 +166,10 @@
     "defaultMessage": "Confirm Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "1i2T4a": {
+    "defaultMessage": "published on",
+    "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
+  },
   "1qQzV0": {
     "defaultMessage": "Invitees",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
