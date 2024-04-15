@@ -5,9 +5,12 @@ import { useDebouncedCallback } from 'use-debounce'
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import {
   analytics,
+  isUrl,
   isValidEmail,
   mergeConnections,
-  normalizeTag, // stripTagAllPunct, // stripPunctPrefixSuffix,
+  normalizeTag,
+  parseURL,
+  toGlobalId, // stripTagAllPunct, // stripPunctPrefixSuffix,
 } from '~/common/utils'
 import {
   EmptySearch,
@@ -19,6 +22,7 @@ import {
 } from '~/components'
 import { toUserDigestMiniPlaceholder } from '~/components/UserDigest/Mini'
 import {
+  ArticleUrlQueryQuery,
   ListViewerArticlesQuery,
   SearchExclude,
   SearchFilter,
@@ -28,7 +32,7 @@ import {
 import SearchSelectNode from '../SearchSelectNode'
 import styles from '../styles.module.css'
 import CreateTag from './CreateTag'
-import { LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
+import { ARTICLE_URL_QUERY, LIST_VIEWER_ARTICLES, SELECT_SEARCH } from './gql'
 import InviteEmail from './InviteEmail'
 import SearchInput, {
   SearchInputProps,
@@ -69,7 +73,7 @@ type SearchingAreaProps = {
   inviteEmail?: boolean
 } & Pick<SearchInputProps, 'autoFocus'>
 
-type Mode = 'search' | 'list'
+type Mode = 'search' | 'list' | 'article_url'
 
 const SearchingArea: React.FC<SearchingAreaProps> = ({
   searchType,
@@ -94,6 +98,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
   const [mode, setMode] = useState<Mode>(hasListMode ? 'list' : 'search')
   const isSearchMode = mode === 'search'
   const isListMode = mode === 'list'
+  const isArticleUrlMode = mode === 'article_url'
 
   const [searching, setSearching] = useState(false)
   const [searchingNodes, setSearchingNodes] = useState<SelectNode[]>([])
@@ -117,6 +122,14 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     loadList,
     { data: listData, loading: listLoading, fetchMore: fetchMoreList },
   ] = useLazyQuery<ListViewerArticlesQuery>(LIST_VIEWER_ARTICLES)
+  const [
+    lazyArticleUrlQuery,
+    { data: articleUrlData, loading: articleUrlLoding },
+  ] = usePublicLazyQuery<ArticleUrlQueryQuery>(
+    ARTICLE_URL_QUERY,
+    {},
+    { publicQuery: !viewer.isAuthed }
+  )
 
   // pagination
   const { edges: searchEdges, pageInfo: searchPageInfo } = data?.search || {}
@@ -160,16 +173,34 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
       .filter((node) => node.articleState === 'active') || []
   const listNodeIds = listNode.map((n) => n.id).join(',')
   const search = (key: string) => {
-    const type = searchType === 'Invitee' ? 'User' : searchType
-    lazySearch({
-      variables: {
-        key,
-        type,
-        filter: searchFilter,
-        exclude: searchExclude,
-        first: 10,
-      },
-    })
+    // Used to match links of the format like👇
+    // https://matters.town/@az/12-来自matters的第一封信-致好朋友-zdpuAnuMKxNv6SUj7kTRzgrWRdp9q4aMMKHJ6TGtn8tp4FwX2
+    const regex = new RegExp(
+      `^https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@\\w+/\\d+.*$`
+    )
+    if (searchType === 'Article' && isUrl(key) && regex.test(key)) {
+      const urlObj = parseURL(key)
+      const paths = urlObj.pathname.split('-')
+      const subPaths = paths[0].split('/')
+      const articleId = subPaths?.[subPaths.length - 1]
+      setMode('article_url')
+      lazyArticleUrlQuery({
+        variables: {
+          id: toGlobalId({ type: 'Article', id: articleId }),
+        },
+      })
+    } else {
+      const type = searchType === 'Invitee' ? 'User' : searchType
+      lazySearch({
+        variables: {
+          key,
+          type,
+          filter: searchFilter,
+          exclude: searchExclude,
+          first: 10,
+        },
+      })
+    }
   }
 
   // handling changes from search input
@@ -182,11 +213,14 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
       toSearchingArea()
     }
 
-    if (hasListMode) {
-      setMode(value ? 'search' : 'list')
+    setMode('search')
+
+    if (hasListMode && !value) {
+      setMode('list')
       return
     }
   }
+
   const onSearchInputFocus = () => {
     if (hasListMode) {
       if (!searchKey) {
@@ -196,6 +230,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
       return
     }
   }
+
   const onSearchInputBlur = () => {
     if (isSearchMode) {
       return
@@ -239,8 +274,14 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
     setSearchingNodes(listNode)
   }, [listLoading, listNodeIds])
 
+  // article url
+  useEffect(() => {
+    setSearching(articleUrlLoding)
+  }, [articleUrlLoding])
+
   const hasNodes = searchNodes.length > 0
   const haslistNode = listNode.length > 0
+  const hasArticle = !!articleUrlData?.node
   const canCreateTag =
     isTag &&
     searchKey &&
@@ -335,6 +376,19 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
               </ul>
             </InfiniteScroll>
           )}
+
+          {/* URL Search */}
+          {isArticleUrlMode && !searching && !hasArticle && <EmptySearch />}
+
+          {isArticleUrlMode &&
+            !searching &&
+            hasArticle &&
+            articleUrlData?.node?.__typename === 'Article' && (
+              <SearchSelectNode
+                node={articleUrlData.node}
+                onClick={addNodeToStaging}
+              />
+            )}
         </section>
       )}
     </section>
