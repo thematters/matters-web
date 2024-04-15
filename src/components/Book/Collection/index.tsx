@@ -3,7 +3,6 @@ import { useEffect } from 'react'
 
 import BOOK_COVER from '@/public/static/images/book-cover.png'
 import { TEST_ID } from '~/common/enums'
-import { countStrWidth } from '~/common/utils'
 import {
   IconCamera24,
   ResponsiveImage,
@@ -35,12 +34,8 @@ const BookCollection: React.FC<BookCollectionProps> = ({
     getColor()
   }, [cover])
 
-  const titleWidth = countStrWidth(title)
-
   const jacketClasses = classNames({
     [styles.jacket]: true,
-    [styles.titleLg]: titleWidth <= 12,
-    [styles.titleMd]: titleWidth > 12 && titleWidth <= 28,
   })
 
   return (

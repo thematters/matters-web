@@ -7,6 +7,8 @@
   width: 7.5rem;
   height: 10rem;
   overflow: hidden;
+  text-align: left;
+  white-space: initial;
   border-radius: 0.5rem;
   box-shadow:
     0 2px 2px 0 rgb(255 255 255 / 50%) inset,
@@ -47,7 +49,7 @@
   }
 
   & .jacket {
-    @mixin flex-start-center;
+    @mixin flex-start-start;
 
     position: absolute;
     right: 0;
@@ -60,31 +62,14 @@
     & .title {
       @mixin line-clamp;
 
+      padding-top: var(--spacing-x-tight);
       padding-right: var(--spacing-x-tight);
       padding-left: var(--spacing-x-base);
-      font-size: var(--font-size-xs);
+      font-size: var(--font-size-sm);
       font-weight: var(--font-weight-normal);
-      line-height: 1.0625rem;
+      line-height: 1.25rem;
       color: var(--color-white);
-      -webkit-line-clamp: 3;
-    }
-
-    &.titleMd {
-      & .title {
-        font-size: var(--font-size-sm-s);
-        line-height: 1.125rem;
-      }
-    }
-
-    &.titleLg {
-      @mixin flex-start-start;
-
-      padding-top: var(--spacing-x-tight);
-
-      & .title {
-        font-size: var(--font-size-md);
-        line-height: 1.375rem;
-      }
+      -webkit-line-clamp: 2;
     }
   }
 
