@@ -45,10 +45,6 @@ const InnerApp = ({
 }) => {
   return (
     <ErrorBoundary>
-      <style>
-        @import
-        url(`https://fonts.googleapis.com/css2?family=Noto+Serif+TC&display=swap`)
-      </style>
       <ApolloProvider client={apollo}>
         <Root client={apollo} headers={headers}>
           <Component {...pageProps} />

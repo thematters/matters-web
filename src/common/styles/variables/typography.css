@@ -1,3 +1,15 @@
+@font-face {
+  font-family: 'Google Noto Serif TC';
+  src: url('../../../../public/static/fonts/NotoSerifTC-Regular.otf')
+    format('opentype');
+}
+
+@font-face {
+  font-family: 'Google Noto Serif SC';
+  src: url('../../../../public/static/fonts/NotoSerifSC-Regular.otf')
+    format('opentype');
+}
+
 :root {
   /* Font Stack */
   --font-sans-tc: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
@@ -12,10 +24,12 @@
     'WenQuanYi Micro Hei', sans-serif;
   --font-serif-tc: 'Noto Serif', 'Noto Serif TC', 'Noto Serif SC',
     'Noto Serif CJK TC', 'Noto Serif CJK SC', 'Source Han Serif TW',
-    'Source Han Serif CN', 'Songti TC', 'Songti SC', serif;
+    'Source Han Serif CN', 'Songti TC', 'Songti SC', 'Google Noto Serif TC',
+    'Google Noto Serif SC', serif;
   --font-serif-sc: 'Noto Serif', 'Noto Serif SC', 'Noto Serif TC',
     'Noto Serif CJK SC', 'Noto Serif CJK TC', 'Source Han Sans CN',
-    'Source Han Sans TW', 'Songti SC', 'Songti TC', serif;
+    'Source Han Sans TW', 'Songti SC', 'Songti TC', 'Google Noto Serif TC',
+    'Google Noto Serif SC', serif;
   --font-mono: menlo, 'SFMono-Regular', consolas, monaco, monospace;
 
   /* Type Scale */
