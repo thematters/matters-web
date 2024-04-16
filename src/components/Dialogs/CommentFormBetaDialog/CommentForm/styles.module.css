@@ -11,13 +11,13 @@
   flex-grow: 1;
   overflow-y: auto;
 
-  & > div {
+  & > :global(#editor) {
     height: 100%;
 
     & > div {
       height: 100%;
 
-      & > div {
+      & > :global(.tiptap.ProseMirror) {
         height: 100%;
       }
     }
