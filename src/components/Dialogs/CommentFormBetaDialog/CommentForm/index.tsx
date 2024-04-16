@@ -68,6 +68,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   }:${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`
   const formRef = useRef<HTMLFormElement>(null)
+  // TODO: beware of the breaking change by the new article URL
   const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
 
