@@ -126,17 +126,17 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
               type: 'add',
               comment: mutationResult.data?.putComment,
             })
-          }
 
-          const articleIdFromRouter =
-            (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
-          updateArticlePublic({
-            cache,
-            articleId: articleIdFromRouter,
-            mediaHash,
-            routerLang,
-            type: 'addComment',
-          })
+            const articleIdFromRouter =
+              (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
+            updateArticlePublic({
+              cache,
+              articleId: articleIdFromRouter,
+              mediaHash,
+              routerLang,
+              type: 'addComment',
+            })
+          }
         },
       })
 

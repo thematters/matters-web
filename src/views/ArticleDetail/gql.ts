@@ -44,7 +44,9 @@ const articlePublicFragment = gql`
       }
     }
     canComment
-    commentCount
+    comments(input: { filter: { state: active, parentComment: null } }) {
+      totalCount
+    }
     license
     sensitiveByAuthor
     sensitiveByAdmin

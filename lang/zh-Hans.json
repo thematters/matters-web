@@ -166,6 +166,10 @@
     "defaultMessage": "确认 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "1i2T4a": {
+    "defaultMessage": "更新于",
+    "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
+  },
   "1qQzV0": {
     "defaultMessage": "免费邀请",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"

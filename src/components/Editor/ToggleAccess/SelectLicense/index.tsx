@@ -15,8 +15,8 @@ const LICENSE_TEXT = {
   1: {
     [ArticleLicenseType.CcByNcNd_4]: {
       title: {
-        zh_hant: '不上鎖，CC BY-NC-ND 4.0 聲明',
-        zh_hans: '不上锁，CC BY-NC-ND 4.0 声明',
+        zh_hant: '不上鎖，CC BY-NC-ND 4.0',
+        zh_hans: '不上锁，CC BY-NC-ND 4.0',
         en: 'Public, CC BY-NC-ND 4.0 License',
       },
       subtitle: {
@@ -60,8 +60,8 @@ const LICENSE_TEXT = {
   0: {
     [ArticleLicenseType.CcByNcNd_4]: {
       title: {
-        zh_hant: 'CC BY-NC-ND 4.0 聲明',
-        zh_hans: 'CC BY-NC-ND 4.0 声明',
+        zh_hant: 'CC BY-NC-ND 4.0',
+        zh_hans: 'CC BY-NC-ND 4.0',
         en: 'CC BY-NC-ND 4.0 License',
       },
       subtitle: {

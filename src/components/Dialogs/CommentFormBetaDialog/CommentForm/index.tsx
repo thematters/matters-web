@@ -5,11 +5,18 @@ import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
 import { dom, stripHtml } from '~/common/utils'
-import { CommentFormType, Dialog, Spinner, useMutation } from '~/components'
+import {
+  CommentFormType,
+  Dialog,
+  Spinner,
+  useMutation,
+  useRoute,
+} from '~/components'
 import PUT_COMMENT_BETA from '~/components/GQL/mutations/putCommentBeta'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import {
   updateArticleComments,
+  updateArticlePublic,
   updateCommentDetail,
 } from '~/components/GQL/updates'
 import { CommentDraftQuery, PutCommentBetaMutation } from '~/gql/graphql'
@@ -61,6 +68,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
   }:${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`
   const formRef = useRef<HTMLFormElement>(null)
+  // TODO: beware of the breaking change by the new article URL
+  const { getQuery, router, routerLang } = useRoute()
+  const mediaHash = getQuery('mediaHash')
 
   const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
     variables: { id: commentDraftId },
@@ -118,6 +128,16 @@ const CommentForm: React.FC<CommentFormProps> = ({
               articleId: articleId || '',
               type: 'add',
               comment: mutationResult.data?.putComment,
+            })
+
+            const articleIdFromRouter =
+              (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
+            updateArticlePublic({
+              cache,
+              articleId: articleIdFromRouter,
+              mediaHash,
+              routerLang,
+              type: 'addComment',
             })
           }
         },

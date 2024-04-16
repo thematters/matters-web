@@ -10,7 +10,6 @@ import {
   IconEdit16,
   Media,
   TextIcon,
-  Translate,
   UserDigest,
   ViewerContext,
 } from '~/components'
@@ -63,7 +62,12 @@ const MetaInfo = ({
           color="greyDarker"
         />
         <span className={styles.edited}>
-          <Translate zh_hant="更新於" zh_hans="更新于" en=" published on" />
+          &nbsp;
+          <FormattedMessage
+            defaultMessage="published on"
+            id="1i2T4a"
+            description="src/views/ArticleDetail/MetaInfo/index.tsx"
+          />
         </span>
       </section>
       <FingerprintButton article={article} />

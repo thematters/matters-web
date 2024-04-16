@@ -10,6 +10,18 @@
   position: relative;
   flex-grow: 1;
   overflow-y: auto;
+
+  & > :global(#editor) {
+    height: 100%;
+
+    & > div {
+      height: 100%;
+
+      & > :global(.tiptap.ProseMirror) {
+        height: 100%;
+      }
+    }
+  }
 }
 
 .count {

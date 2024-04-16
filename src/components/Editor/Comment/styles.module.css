@@ -6,6 +6,10 @@
     margin: 0;
   }
 
+  & > * + * {
+    margin: var(--spacing-x-tight) 0;
+  }
+
   & p {
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
