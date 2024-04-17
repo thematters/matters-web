@@ -73,14 +73,14 @@ interface FormValues {
 }
 
 const AMOUNT_DEFAULT = {
-  [CURRENCY.USDT]: 3.0,
-  [CURRENCY.HKD]: 10,
-  [CURRENCY.LIKE]: 100,
+  [CURRENCY.USDT]: 0,
+  [CURRENCY.HKD]: 0,
+  [CURRENCY.LIKE]: 0,
 }
 
 const AMOUNT_OPTIONS = {
-  [CURRENCY.USDT]: [1.0, 3.0, 5.0, 10.0, 20.0, 35.0],
-  [CURRENCY.HKD]: [5, 10, 30, 50, 100, 300],
+  [CURRENCY.USDT]: [1, 2, 5, 10, 20, 40],
+  [CURRENCY.HKD]: [5, 10, 25, 50, 100, 200],
   [CURRENCY.LIKE]: [50, 100, 150, 500, 1000, 1500],
 }
 
