@@ -174,6 +174,10 @@
     "defaultMessage": "免费邀请",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "1r1iQj": {
+    "defaultMessage": "重新授权",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
+  },
   "1y1U9f": {
     "defaultMessage": "Liker ID 已被其他人使用",
     "description": "LIKER_USER_ID_EXISTS"
@@ -2602,6 +2606,9 @@
   "y4Lyf1": {
     "defaultMessage": "该名称已被其他用户使用",
     "description": "NAME_EXISTS"
+  },
+  "y9LDu9": {
+    "defaultMessage": "已取消授权，若需支持创作者请重试"
   },
   "yAflVX": {
     "defaultMessage": "草稿已刪除"

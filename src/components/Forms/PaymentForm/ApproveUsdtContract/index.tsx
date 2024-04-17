@@ -1,3 +1,4 @@
+import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { waitForTransaction } from 'wagmi/actions'
@@ -55,6 +56,9 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
     })()
   }, [approveData])
 
+  const errorName = _get(approveError, 'cause.name')
+  const isUserRejected = errorName === 'UserRejectedRequestError'
+
   return (
     <section className={styles.container}>
       <section className={styles.content}>
@@ -81,11 +85,20 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
           textSize="md"
           text={
             <TextIcon icon={<IconOpenWallet20 size="mdS" />}>
-              <FormattedMessage
-                defaultMessage="Go to allow"
-                id="wBpJLd"
-                description="src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-              />
+              {!allowanceError && !approveError && (
+                <FormattedMessage
+                  defaultMessage="Go to allow"
+                  id="wBpJLd"
+                  description="src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
+                />
+              )}
+              {(allowanceError || approveError) && (
+                <FormattedMessage
+                  defaultMessage="Reauthorize"
+                  id="1r1iQj"
+                  description="src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
+                />
+              )}
             </TextIcon>
           }
           loading={approving || approveConfirming || allowanceLoading}
@@ -93,7 +106,13 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
 
         {(allowanceError || approveError) && (
           <section className={styles.error}>
-            {WALLET_ERROR_MESSAGES[lang].unknown}
+            {isUserRejected && (
+              <FormattedMessage
+                defaultMessage="Authorization has been cancelled. If you want to support the author, please retry"
+                id="y9LDu9"
+              />
+            )}
+            {!isUserRejected && WALLET_ERROR_MESSAGES[lang].unknown}
           </section>
         )}
       </section>
