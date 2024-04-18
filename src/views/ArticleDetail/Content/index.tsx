@@ -121,9 +121,11 @@ const Content = ({
         ref={contentContainer}
         data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
-      <TextSelectionPopover
-        targetElement={contentContainer.current as HTMLElement}
-      />
+      {contentContainer.current && (
+        <TextSelectionPopover
+          targetElement={contentContainer.current as HTMLElement}
+        />
+      )}
     </>
   )
 }

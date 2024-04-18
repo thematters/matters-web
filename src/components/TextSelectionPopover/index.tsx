@@ -10,7 +10,6 @@ interface TextSelectionPopoverProps {
 }
 
 export const TextSelectionPopover = ({
-  // TODO:  Restriction to targetElement
   targetElement,
 }: TextSelectionPopoverProps) => {
   const [selection, setSelection] = useState<string>()
@@ -31,6 +30,15 @@ export const TextSelectionPopover = ({
     }
 
     if (!ref.current) {
+      return
+    }
+
+    if (
+      !targetElement ||
+      !targetElement.contains(
+        activeSelection.getRangeAt(0).commonAncestorContainer
+      )
+    ) {
       return
     }
 
