@@ -1,0 +1,48 @@
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  text-align: center;
+  border-radius: 4px;
+
+  &.triangle {
+    /* triangle dimension */
+    --b: 0.75em; /* base */
+    --h: 0.5em; /* height */
+    --p: 50%; /* triangle position (0%:left 100%:right) */
+
+    padding: var(--spacing-tight);
+    clip-path: polygon(
+      0 100%,
+      0 0,
+      100% 0,
+      100% 100%,
+      min(100%, var(--p) + var(--b) / 2) 100%,
+      var(--p) calc(100% + var(--h)),
+      max(0%, var(--p) - var(--b) / 2) 100%
+    );
+    border-image: fill 0 //var(--h)
+      conic-gradient(var(--color-black) 0 0); /* the color */
+  }
+
+  & .divider {
+    display: inline-block;
+    width: 1px;
+    height: 1.25rem;
+    margin: 0 var(--spacing-base);
+    background-color: var(--color-grey-darker);
+  }
+
+  & button {
+    @mixin transition;
+
+    color: var(--color-white);
+    opacity: 0.6;
+    transition-property: opacity;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
