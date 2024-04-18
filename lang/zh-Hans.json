@@ -23,6 +23,9 @@
   "+aMAeT": {
     "defaultMessage": "地址已复制"
   },
+  "+bwe8v": {
+    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
+  },
   "+cS08C": {
     "defaultMessage": "确认要将“{article}”从选集中移出吗？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -181,6 +184,9 @@
     "defaultMessage": "总数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2D/X90": {
+    "defaultMessage": "为什么采用 Optimism？"
+  },
   "2DkkhD": {
     "defaultMessage": "设置 - 通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -229,6 +235,9 @@
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
+  "3lMsOU": {
+    "defaultMessage": "重新授权后继续"
+  },
   "3phEFL": {
     "defaultMessage": "继续使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -238,6 +247,9 @@
   },
   "3yk8fB": {
     "defaultMessage": "我的钱包"
+  },
+  "4118K3": {
+    "defaultMessage": "Optimism 是基于以太坊的第二层（Layer2）扩容方案，能提升交易速度，并降低手续费，同时确保安全性，让你更轻松地支持创作者。"
   },
   "47FYwb": {
     "defaultMessage": "取消"
@@ -258,6 +270,10 @@
   },
   "4l6vz1": {
     "defaultMessage": "复制"
+  },
+  "4wOWfp": {
+    "defaultMessage": "这是什么？",
+    "description": "src/components/Billboard/index.tsx"
   },
   "50cquj": {
     "defaultMessage": "还没有众聊",
@@ -318,6 +334,9 @@
   "6BXcdo": {
     "defaultMessage": "设定围炉门槛（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6ErzDk": {
+    "defaultMessage": "重新连接钱包"
   },
   "6N2LKY": {
     "defaultMessage": "授权信息已失效，请重新登入",
@@ -575,6 +594,10 @@
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
+  "CNrhz9": {
+    "defaultMessage": "什么是社区公告栏（Billboard）？",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
   "Cdkhl8": {
     "defaultMessage": "刪除{commentType}",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -828,6 +851,9 @@
     "defaultMessage": "被追踪",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "JmzmVH": {
+    "defaultMessage": "切换到 "
+  },
   "JpS59y": {
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -952,6 +978,10 @@
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "MP6xe/": {
+    "defaultMessage": "Billboard 是一个公开且可付费租借的链上 NFT 广告协议。租借成功后，可以进行14天的内容投放。租借费用基于哈柏格税概念计算，产生的租借收入将以二次方配捐方式回馈给社区创作者。更多详情请查看{announcements}。",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
   "MPEeBy": {
     "defaultMessage": "操作失败，请稍候重试",
     "description": "ACTION_FAILED"
@@ -1033,6 +1063,10 @@
   },
   "OpeFTV": {
     "defaultMessage": "输入六位数字交易密码"
+  },
+  "P+sWM0": {
+    "defaultMessage": "教学指南",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "登录密码",
@@ -1159,6 +1193,9 @@
   "TSDiqB": {
     "defaultMessage": "付费人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "Tgd5id": {
+    "defaultMessage": "支持金额超出授权额度"
   },
   "TjWWxF": {
     "defaultMessage": "广播已送出",
@@ -1426,6 +1463,9 @@
   "ai7kS4": {
     "defaultMessage": "我的创作"
   },
+  "aoDcrD": {
+    "defaultMessage": "首次需确认授权后继续"
+  },
   "aqX2Bt": {
     "defaultMessage": "前往首页",
     "description": "src/views/Callback/UI.tsx"
@@ -1552,6 +1592,9 @@
     "defaultMessage": "重新发送",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "eKVBm/": {
+    "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考{link}。"
+  },
   "eTpiYa": {
     "defaultMessage": "尚无支持数据"
   },
@@ -1606,6 +1649,9 @@
   "h+punE": {
     "defaultMessage": "{date}更新",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h74kLA": {
+    "defaultMessage": "支持失败"
   },
   "h7sMQs": {
     "defaultMessage": "新追踪者",
@@ -1880,6 +1926,9 @@
     "defaultMessage": "登录密码已设置",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
+  "pKkpI9": {
+    "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
+  },
   "pRV+UD": {
     "defaultMessage": "折叠",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
@@ -1990,6 +2039,10 @@
   "skbUBl": {
     "defaultMessage": "登录",
     "description": "src/components/Buttons/Login/index.tsx"
+  },
+  "stTITI": {
+    "defaultMessage": "社区公告",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "sy+pv5": {
     "defaultMessage": "邮箱"
@@ -2126,6 +2179,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "wdz6Pf": {
+    "defaultMessage": "了解更多",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "wm9xNB": {
     "defaultMessage": "{type} 已解绑",

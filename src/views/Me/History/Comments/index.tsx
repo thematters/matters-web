@@ -116,7 +116,7 @@ const Comments = () => {
       >
         <List>
           {articleEdges.map(({ cursor, node, comments }) => (
-            <List.Item key={cursor}>
+            <List.Item key={node.id}>
               <section className={styles.item}>
                 <section className={styles.user}>
                   <UserDigest.Mini

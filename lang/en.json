@@ -23,6 +23,9 @@
   "+aMAeT": {
     "defaultMessage": "Address copied"
   },
+  "+bwe8v": {
+    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
+  },
   "+cS08C": {
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
@@ -181,6 +184,9 @@
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "2D/X90": {
+    "defaultMessage": "Why Optimism?"
+  },
   "2DkkhD": {
     "defaultMessage": "Settings - Notifications",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -229,6 +235,9 @@
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
+  "3lMsOU": {
+    "defaultMessage": "Reapprove to continue"
+  },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to ",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -238,6 +247,9 @@
   },
   "3yk8fB": {
     "defaultMessage": "Wallet"
+  },
+  "4118K3": {
+    "defaultMessage": "Optimism is a Layer 2 scaling solution based on Ethereum that can provide faster and cheaper transactions, while ensuring security, making it easier for you to support creators."
   },
   "47FYwb": {
     "defaultMessage": "Cancel"
@@ -258,6 +270,10 @@
   },
   "4l6vz1": {
     "defaultMessage": "Copy"
+  },
+  "4wOWfp": {
+    "defaultMessage": "What's this?",
+    "description": "src/components/Billboard/index.tsx"
   },
   "50cquj": {
     "defaultMessage": "No discussion yet",
@@ -318,6 +334,9 @@
   "6BXcdo": {
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6ErzDk": {
+    "defaultMessage": "Reconnect Wallet"
   },
   "6N2LKY": {
     "defaultMessage": "Please log in again.",
@@ -575,6 +594,10 @@
     "defaultMessage": "bookmarked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
+  "CNrhz9": {
+    "defaultMessage": "What is Billboard?",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
   "Cdkhl8": {
     "defaultMessage": "Delete {commentType}",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -777,7 +800,7 @@
     "defaultMessage": "Set"
   },
   "HqnUd1": {
-    "defaultMessage": "Add hash from IPFS into compatible reader such as",
+    "defaultMessage": "Add hash from IPFS into compatible reader such as ",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "HxcjQl": {
@@ -827,6 +850,9 @@
   "JkWLg6": {
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "JmzmVH": {
+    "defaultMessage": "Switch to "
   },
   "JpS59y": {
     "defaultMessage": "Accepted",
@@ -952,6 +978,10 @@
     "defaultMessage": "followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "MP6xe/": {
+    "defaultMessage": "Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding. Please check out our {announcements}.",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
   "MPEeBy": {
     "defaultMessage": "Operation failed, please try again later.",
     "description": "ACTION_FAILED"
@@ -1033,6 +1063,10 @@
   },
   "OpeFTV": {
     "defaultMessage": "Enter a 6-digit payment password."
+  },
+  "P+sWM0": {
+    "defaultMessage": "guide",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "Password",
@@ -1159,6 +1193,9 @@
   "TSDiqB": {
     "defaultMessage": "Subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "Tgd5id": {
+    "defaultMessage": "Transfer amount exceeds allowance"
   },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
@@ -1426,6 +1463,9 @@
   "ai7kS4": {
     "defaultMessage": "My Works"
   },
+  "aoDcrD": {
+    "defaultMessage": "Approve to continue"
+  },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/UI.tsx"
@@ -1552,6 +1592,9 @@
     "defaultMessage": "Resend",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "eKVBm/": {
+    "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {link}."
+  },
   "eTpiYa": {
     "defaultMessage": "No data yet."
   },
@@ -1606,6 +1649,9 @@
   "h+punE": {
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
+  },
+  "h74kLA": {
+    "defaultMessage": "Failed to Donate"
   },
   "h7sMQs": {
     "defaultMessage": "New followers",
@@ -1880,6 +1926,9 @@
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
+  "pKkpI9": {
+    "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
+  },
   "pRV+UD": {
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
@@ -1990,6 +2039,10 @@
   "skbUBl": {
     "defaultMessage": "Log in",
     "description": "src/components/Buttons/Login/index.tsx"
+  },
+  "stTITI": {
+    "defaultMessage": "announcements",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "sy+pv5": {
     "defaultMessage": "Email"
@@ -2126,6 +2179,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "View All"
+  },
+  "wdz6Pf": {
+    "defaultMessage": "Learn more",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "wm9xNB": {
     "defaultMessage": "{type} disconnected",

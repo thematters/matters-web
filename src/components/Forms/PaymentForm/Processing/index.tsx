@@ -18,7 +18,6 @@ import {
   Dialog,
   Spinner,
   Translate,
-  useBalanceUSDT,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -194,7 +193,6 @@ const USDTProcessingForm: React.FC<Props> = ({
   const [payTo] = useMutation<PayToMutation>(PAY_TO)
   const viewer = useContext(ViewerContext)
   const { address } = useAccount()
-  const { data: balanceUSDTData } = useBalanceUSDT({})
   const { chain } = useNetwork()
   const isUnsupportedNetwork = !!chain?.unsupported
   const isConnectedAddress =
@@ -218,7 +216,10 @@ const USDTProcessingForm: React.FC<Props> = ({
     args: [
       recipient.info.ethAddress as `0x${string}`,
       contract.Optimism.tokenAddress,
-      parseUnits(amount.toString() as `${number}`, balanceUSDTData?.decimals!),
+      parseUnits(
+        amount.toString() as `${number}`,
+        contract.Optimism.tokenDecimals
+      ),
       `ipfs://${article?.dataHash}`,
     ],
   })

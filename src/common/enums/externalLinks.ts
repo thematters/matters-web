@@ -47,6 +47,11 @@ export const GUIDE_LINKS = {
     zh_hans: `https://matters.town/@hi176/387119?locale=zh-Hans`,
     en: `https://matters.town/@hi176/387119?locale=en`,
   },
+  usdt: {
+    zh_hant: `https://matters.town/@hi176/537407`,
+    zh_hans: `https://matters.town/@hi176/537407?locale=zh-Hans`,
+    en: `https://matters.town/@hi176/537407?locale=en`,
+  },
   PWA: {
     zh_hant: `https://matters.town/@hi176/387115`,
     zh_hans: `https://matters.town/@hi176/387115?locale=zh-Hans`,
@@ -61,5 +66,10 @@ export const GUIDE_LINKS = {
     zh_hant: `https://matters.town/@hi176/387120`,
     zh_hans: `https://matters.town/zh_Hans/@hi176/387120?locale=zh-Hans`,
     en: `https://matters.town/@hi176/387120?locale=en`,
+  },
+  billboard: {
+    zh_hant: `https://matters.town/@hi176/554162`,
+    zh_hans: `https://matters.town/@hi176/554162?locale=zh-Hans`,
+    en: `https://matters.town/@web3/554164?locale=en`,
   },
 }

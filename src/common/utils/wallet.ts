@@ -1,4 +1,4 @@
-import { Chain, configureChains, createConfig, createStorage } from 'wagmi'
+import { Chain, configureChains, createConfig } from 'wagmi'
 import {
   goerli,
   mainnet,
@@ -18,6 +18,7 @@ const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
 
 export const featureSupportedChains = {
+  billboard: isProd ? [optimism] : [optimismSepolia],
   curation: isProd ? [optimism] : [optimismSepolia],
   ens: isProd ? [mainnet] : [goerli],
 }
@@ -63,16 +64,6 @@ export const wagmiConfig = createConfig({
         ]),
   ],
   publicClient,
-  /*
-  FIXME: need to find a way of clearing ens name cache instead of clearing the global cache
-  */
-  storage: createStorage({
-    storage: {
-      getItem: () => null,
-      setItem: () => null,
-      removeItem: () => null,
-    },
-  }),
 })
 
 export const maskAddress = (address: string, prefixLen: number = 8) => {

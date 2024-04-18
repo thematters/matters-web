@@ -33,8 +33,9 @@ export const contract = {
       },
   Optimism: isProd
     ? {
-        curationAddress: '' as `0x${string}`, // TODO
-        curationBlockNum: '' as `0x${string}`, // TODO
+        curationAddress:
+          '0x5edebbdae7B5C79a69AaCF7873796bb1Ec664DB8' as `0x${string}`,
+        curationBlockNum: '117058632' as `0x${string}`,
         tokenAddress:
           '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58' as `0x${string}`,
         tokenDecimals: 6,

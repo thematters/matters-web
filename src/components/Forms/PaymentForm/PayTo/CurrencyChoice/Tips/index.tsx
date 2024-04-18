@@ -52,7 +52,7 @@ const Tips = () => {
           />
           <a
             className="u-link-green"
-            href={GUIDE_LINKS.payment[lang]}
+            href={GUIDE_LINKS.usdt[lang]}
             target="_blank"
             rel="noreferrer"
           >

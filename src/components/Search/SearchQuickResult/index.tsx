@@ -108,7 +108,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
         userEdges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'User' && (
-              <Fragment key={cursor}>
+              <Fragment key={node.id}>
                 <Menu.Item
                   bgActiveColor="greyLighter"
                   activeOutline="auto"
@@ -147,7 +147,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
         tagEdges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'Tag' && (
-              <Fragment key={cursor}>
+              <Fragment key={node.id}>
                 <Menu.Item
                   spacing={['base', 'base']}
                   bgActiveColor="greyLighter"

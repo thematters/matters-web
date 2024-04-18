@@ -183,8 +183,8 @@ const UserArticles = () => {
           eof
         >
           <List>
-            {articleEdges.map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
+            {articleEdges.map(({ node }, i) => (
+              <List.Item key={node.id}>
                 <ArticleDigestFeed
                   article={node}
                   inUserArticles

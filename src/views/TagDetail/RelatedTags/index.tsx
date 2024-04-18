@@ -111,7 +111,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
               <section>
                 {chunks.map(({ node, cursor }, nodeIndex) => (
                   <TagDigest.Sidebar
-                    key={cursor}
+                    key={node.id}
                     tag={node}
                     onClick={() =>
                       trackRelatedTags(
@@ -146,7 +146,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
       <RelatedTagsHeader hasViewAll hasShuffle onShuffle={shuffle} />
       <List hasBorder={false}>
         {edges?.map(({ node, cursor }, i) => (
-          <List.Item key={cursor}>
+          <List.Item key={node.id}>
             <TagDigest.Sidebar
               tag={node}
               onClick={() => trackRelatedTags(i, node.id)}
