@@ -101,11 +101,11 @@ export const TextSelectionPopover = ({
             transform: `translate3d(${position.x}px, ${position.y}px, 0)`,
           }}
         >
-          <button onClick={onQuote}>
+          <button onClick={onQuote} className={styles.quoteButton}>
             <IconComment24 size="mdS" />
           </button>
           <span className={styles.divider} />
-          <button onClick={onShare}>
+          <button onClick={onShare} className={styles.shareButton}>
             <IconComment24 size="mdS" />
           </button>
         </div>

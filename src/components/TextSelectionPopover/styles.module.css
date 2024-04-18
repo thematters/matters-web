@@ -3,6 +3,7 @@
   top: 0;
   left: 0;
   display: flex;
+  align-items: center;
   text-align: center;
   border-radius: 4px;
 
@@ -12,7 +13,6 @@
     --h: 0.5em; /* height */
     --p: 50%; /* triangle position (0%:left 100%:right) */
 
-    padding: var(--spacing-tight);
     clip-path: polygon(
       0 100%,
       0 0,
@@ -30,7 +30,6 @@
     display: inline-block;
     width: 1px;
     height: 1.25rem;
-    margin: 0 var(--spacing-base);
     background-color: var(--color-grey-darker);
   }
 
@@ -43,6 +42,16 @@
 
     &:hover {
       opacity: 1;
+    }
+
+    &.quoteButton {
+      padding: var(--spacing-tight) var(--spacing-base) var(--spacing-tight)
+        var(--spacing-tight);
+    }
+
+    &.shareButton {
+      padding: var(--spacing-tight) var(--spacing-tight) var(--spacing-tight)
+        var(--spacing-base);
     }
   }
 }
