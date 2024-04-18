@@ -30,6 +30,10 @@ import {
   withDialog,
 } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
+import {
+  OpenToggleRestrictUserDialogWithProps,
+  ToggleRestrictUserDialogProps,
+} from '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
 
 import AddCollectionButton from './AddCollectionButton'
 import AppreciatorsButton from './AppreciatorsButton'
@@ -60,9 +64,22 @@ const DynamicToggleRecommendArticleButton = dynamic(
   () => import('./ToggleRecommendArticle/Button'),
   { loading: () => <Spinner /> }
 )
-
 const DynamicToggleRecommendArticleDialog = dynamic(
   () => import('./ToggleRecommendArticle/Dialog'),
+  { loading: () => <Spinner /> }
+)
+const DynamicToggleRestrictUserButton = dynamic(
+  () =>
+    import(
+      '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Button'
+    ),
+  { loading: () => <Spinner /> }
+)
+const DynamicToggleRestrictUserDialog = dynamic(
+  () =>
+    import(
+      '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
+    ),
   { loading: () => <Spinner /> }
 )
 
@@ -133,8 +150,11 @@ interface DialogProps {
 }
 
 interface AdminProps {
-  openToggleRecommendDialog: (
+  openToggleRecommendArticleDialog: (
     props: OpenToggleRecommendArticleDialogWithProps
+  ) => void
+  openToggleRestrictUserDialog: (
+    props: OpenToggleRestrictUserDialogWithProps
   ) => void
 }
 
@@ -183,7 +203,8 @@ const BaseDropdownActions = ({
   onRemoveCollection,
 
   // admin
-  openToggleRecommendDialog,
+  openToggleRecommendArticleDialog,
+  openToggleRestrictUserDialog,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
   const hasPublic =
@@ -274,12 +295,16 @@ const BaseDropdownActions = ({
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="icymi"
-            openDialog={openToggleRecommendDialog}
+            openDialog={openToggleRecommendArticleDialog}
           />
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="hottestAndNewest"
-            openDialog={openToggleRecommendDialog}
+            openDialog={openToggleRecommendArticleDialog}
+          />
+          <DynamicToggleRestrictUserButton
+            id={article.author.id}
+            openDialog={openToggleRestrictUserDialog}
           />
         </>
       )}
@@ -451,18 +476,28 @@ const DropdownActions = (props: DropdownActionsProps) => {
   /**
    * ADMIN ONLY
    */
-  const WithToggleRecommend = withDialog<
+  const WithToggleRecommendArticle = withDialog<
     Omit<ToggleRecommendArticleDialogProps, 'children'>
   >(
     WithRemoveArticleCollection,
     DynamicToggleRecommendArticleDialog,
     { article },
     ({ openDialog }) => ({
-      openToggleRecommendDialog: openDialog,
+      openToggleRecommendArticleDialog: openDialog,
+    })
+  )
+  const WithToggleRetrictUser = withDialog<
+    Omit<ToggleRestrictUserDialogProps, 'children'>
+  >(
+    WithToggleRecommendArticle,
+    DynamicToggleRestrictUserDialog,
+    { id: article.author.id, userName: article.author.userName! },
+    ({ openDialog }) => ({
+      openToggleRestrictUserDialog: openDialog,
     })
   )
 
-  return <WithToggleRecommend />
+  return <WithToggleRetrictUser />
 }
 
 DropdownActions.fragments = fragments
