@@ -30,6 +30,7 @@ import {
   withDialog,
 } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
+import { ArchiveUserDialogProps } from '~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'
 import {
   OpenToggleRestrictUserDialogWithProps,
   ToggleRestrictUserDialogProps,
@@ -81,6 +82,18 @@ const DynamicToggleRestrictUserDialog = dynamic(
       '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
     ),
   { loading: () => <Spinner /> }
+)
+const DynamicArchiveUserButton = dynamic(
+  () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Button'),
+  {
+    loading: () => <Spinner />,
+  }
+)
+const DynamicArchiveUserDialog = dynamic(
+  () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'),
+  {
+    loading: () => <Spinner />,
+  }
 )
 
 export interface DropdownActionsControls {
@@ -156,6 +169,7 @@ interface AdminProps {
   openToggleRestrictUserDialog: (
     props: OpenToggleRestrictUserDialogWithProps
   ) => void
+  openArchiveUserDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps &
@@ -205,6 +219,7 @@ const BaseDropdownActions = ({
   // admin
   openToggleRecommendArticleDialog,
   openToggleRestrictUserDialog,
+  openArchiveUserDialog,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
   const hasPublic =
@@ -306,6 +321,7 @@ const BaseDropdownActions = ({
             id={article.author.id}
             openDialog={openToggleRestrictUserDialog}
           />
+          <DynamicArchiveUserButton openDialog={openArchiveUserDialog} />
         </>
       )}
     </Menu>
@@ -496,8 +512,14 @@ const DropdownActions = (props: DropdownActionsProps) => {
       openToggleRestrictUserDialog: openDialog,
     })
   )
+  const WithArchiveUser = withDialog<Omit<ArchiveUserDialogProps, 'children'>>(
+    WithToggleRetrictUser,
+    DynamicArchiveUserDialog,
+    { id: article.author.id, userName: article.author.userName! },
+    ({ openDialog }) => ({ openArchiveUserDialog: openDialog })
+  )
 
-  return <WithToggleRetrictUser />
+  return <WithArchiveUser />
 }
 
 DropdownActions.fragments = fragments
