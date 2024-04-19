@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 
 import { OPEN_COMMENT_LIST_DIALOG } from '~/common/enums'
-import { IconComment24 } from '~/components'
+import { IconComment24, IconX20 } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -113,7 +113,7 @@ export const TextSelectionPopover = ({
           </button>
           <span className={styles.divider} />
           <button onClick={onShare} className={styles.shareButton}>
-            <IconComment24 size="mdS" />
+            <IconX20 size="mdS" />
           </button>
         </div>
       )}
