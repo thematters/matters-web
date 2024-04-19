@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 
 import {
   OPEN_COMMENT_DETAIL_DIALOG,
+  OPEN_COMMENT_LIST_DIALOG,
   REFERRAL_QUERY_REFERRAL_KEY,
   URL_QS,
 } from '~/common/enums'
@@ -29,6 +30,7 @@ import {
   Title,
   toast,
   Translate,
+  useEventListener,
   useFeatures,
   useIntersectionObserver,
   usePublicQuery,
@@ -127,28 +129,30 @@ const BaseArticleDetail = ({
   const viewer = useContext(ViewerContext)
 
   const features = useFeatures()
-  const [showFloatToolbar, setShowFloatToolbar] = useState(true)
-  const [showCommentToolbar, setShowCommentToolbar] = useState(false)
+
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
 
+  // Float toolbar
+  const [showFloatToolbar, setShowFloatToolbar] = useState(true)
   const {
     isIntersecting: isIntersectingDesktopToolbar,
     ref: desktopToolbarRef,
   } = useIntersectionObserver()
-
   useEffect(() => {
     setShowFloatToolbar(!isIntersectingDesktopToolbar)
   }, [isIntersectingDesktopToolbar])
 
+  // Comment toolbar
+  const [showCommentToolbar, setShowCommentToolbar] = useState(false)
   const { isIntersecting: isIntersectingComments, ref: commentsRef } =
     useIntersectionObserver()
-
   useEffect(() => {
     setShowCommentToolbar(isIntersectingComments)
   }, [isIntersectingComments])
 
+  // Comment
   const [commentDrawerStep, setCommentDrawerStep] = useState<CommentDrawerStep>(
     parentId !== '' ? 'commentDetail' : 'commentList'
   )
@@ -156,7 +160,18 @@ const BaseArticleDetail = ({
   const toggleCommentDrawer = () => {
     setIsOpenComment((prevState) => !prevState)
   }
+  const [defaultCommentContent, setDefaultCommentContent] = useState('')
+  useEventListener(
+    OPEN_COMMENT_LIST_DIALOG,
+    (payload: { [key: string]: any }) => {
+      console.log('OPEN_COMMENT_LIST_DIALOG', payload)
+      setCommentDrawerStep('commentList')
+      setDefaultCommentContent(payload.defaultCommentContent)
+      setIsOpenComment(true)
+    }
+  )
 
+  // Donation
   const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
   const toggleDonationDrawer = () => {
     setIsOpenDonationDrawer((prevState) => !prevState)
@@ -315,6 +330,7 @@ const BaseArticleDetail = ({
           id={article.id}
           lock={!canReadFullContent}
           switchToCommentList={() => setCommentDrawerStep('commentList')}
+          defaultCommentContent={defaultCommentContent}
         />
 
         <SupportDrawer

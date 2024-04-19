@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -169,6 +169,11 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
       console.error(e)
     }
   }
+
+  useEffect(() => {
+    console.log('CommentFormBeta: update default content', defaultContent)
+    onUpdate({ content: defaultContent || '' })
+  }, [defaultContent])
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
     setContent(newContent)

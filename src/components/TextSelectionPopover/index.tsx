@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 
+import { OPEN_COMMENT_LIST_DIALOG } from '~/common/enums'
 import { IconComment24 } from '~/components'
 
 import styles from './styles.module.css'
@@ -83,8 +84,14 @@ export const TextSelectionPopover = ({
     if (!selection) {
       return
     }
-    // TODO: open comment drawer
-    console.log('quote', selection)
+
+    window.dispatchEvent(
+      new CustomEvent(OPEN_COMMENT_LIST_DIALOG, {
+        detail: {
+          defaultCommentContent: `<blockquote>${selection}</blockquote>`,
+        },
+      })
+    )
   }
 
   const containerClasses = classNames({

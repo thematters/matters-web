@@ -27,6 +27,7 @@ type CommentDrawerProps = {
   id: string
   lock: boolean
   switchToCommentList: () => void
+  defaultCommentContent?: string
 }
 
 export const CommentDrawer: React.FC<CommentDrawerProps> = ({
@@ -36,6 +37,7 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
   id,
   lock,
   switchToCommentList,
+  defaultCommentContent,
 }) => {
   const intl = useIntl()
   const isCommentDetail = step === 'commentDetail'
@@ -54,7 +56,11 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
             closeDrawer={onClose}
           />
           <Drawer.Content>
-            <DynamicComments id={id} lock={lock} />
+            <DynamicComments
+              id={id}
+              lock={lock}
+              defaultCommentContent={defaultCommentContent}
+            />
           </Drawer.Content>
         </>
       )}

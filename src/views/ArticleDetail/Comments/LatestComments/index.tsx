@@ -41,7 +41,15 @@ type CommentArticle = NonNullable<
   LatestCommentsPublicQuery['article'] & { __typename: 'Article' }
 >
 
-const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
+const LatestComments = ({
+  id,
+  lock,
+  defaultCommentContent,
+}: {
+  id: string
+  lock: boolean
+  defaultCommentContent?: string
+}) => {
   const viewer = useContext(ViewerContext)
 
   /**
@@ -146,7 +154,11 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   return (
     <section id="latest-comments">
       <Media greaterThan="sm">
-        <CommentFormBeta articleId={article?.id} type={'article'} />
+        <CommentFormBeta
+          articleId={article?.id}
+          type={'article'}
+          defaultContent={defaultCommentContent}
+        />
         <Spacer size="base" />
       </Media>
       {!comments || (comments.length <= 0 && <EmptyComment />)}

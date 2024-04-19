@@ -26,7 +26,15 @@ const ARTICLE_COMMENTS = gql`
   }
 `
 
-const Comments = ({ id, lock }: { id: string; lock: boolean }) => {
+const Comments = ({
+  id,
+  lock,
+  defaultCommentContent,
+}: {
+  id: string
+  lock: boolean
+  defaultCommentContent?: string
+}) => {
   const { data, loading } = useQuery<ArticleCommentsQuery>(ARTICLE_COMMENTS, {
     variables: { id },
   })
@@ -49,7 +57,11 @@ const Comments = ({ id, lock }: { id: string; lock: boolean }) => {
           <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
         </section>
       </Media>
-      <LatestComments id={article.id} lock={lock} />
+      <LatestComments
+        id={article.id}
+        lock={lock}
+        defaultCommentContent={defaultCommentContent}
+      />
     </section>
   )
 }
