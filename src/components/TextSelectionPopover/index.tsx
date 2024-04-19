@@ -73,7 +73,7 @@ export const TextSelectionPopover = ({
       return
     }
     const message = [
-      `"${encodeURIComponent(selection.substring(0, 120))}"`,
+      `"${encodeURIComponent(selection.trim())}"`,
       encodeURIComponent(window.location.href),
     ].join('%0A%0A')
     const url = `https://twitter.com/intent/tweet?text=${message}`
