@@ -5,7 +5,12 @@ import { useContext, useEffect, useRef, useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { captureClicks, initAudioPlayers, optimizeEmbed } from '~/common/utils'
-import { TextSelectionPopover, useMutation, ViewerContext } from '~/components'
+import {
+  Media,
+  TextSelectionPopover,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import { ContentArticleFragment, ReadArticleMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -121,11 +126,13 @@ const Content = ({
         ref={contentContainer}
         data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
-      {contentContainer.current && (
-        <TextSelectionPopover
-          targetElement={contentContainer.current as HTMLElement}
-        />
-      )}
+      <Media greaterThan="sm">
+        {contentContainer.current && (
+          <TextSelectionPopover
+            targetElement={contentContainer.current as HTMLElement}
+          />
+        )}
+      </Media>
     </>
   )
 }
