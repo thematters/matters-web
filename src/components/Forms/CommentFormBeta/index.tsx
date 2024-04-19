@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -170,16 +170,6 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
     }
   }
 
-  useEffect(() => {
-    const $editor = document.querySelector(
-      `#${formId} .ProseMirror`
-    ) as HTMLElement
-
-    if ($editor && defaultContent) {
-      $editor.innerHTML = defaultContent
-    }
-  }, [defaultContent])
-
   const onUpdate = ({ content: newContent }: { content: string }) => {
     setContent(newContent)
 
@@ -205,6 +195,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
           content={content}
           update={onUpdate}
           placeholder={placeholder}
+          defaultContent={defaultContent}
         />
       </section>
 
