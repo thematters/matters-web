@@ -164,7 +164,6 @@ const BaseArticleDetail = ({
   useEventListener(
     OPEN_COMMENT_LIST_DIALOG,
     (payload: { [key: string]: any }) => {
-      console.log('OPEN_COMMENT_LIST_DIALOG', payload)
       setCommentDrawerStep('commentList')
       setDefaultCommentContent(payload.defaultCommentContent)
       setIsOpenComment(true)

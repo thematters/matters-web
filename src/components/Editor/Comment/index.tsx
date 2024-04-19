@@ -30,8 +30,6 @@ const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
     mentionSuggestion: makeMentionSuggestion({ client }),
   })
 
-  console.log('CommentEditor:', content, editor)
-
   return (
     <div
       className={styles.commentEditor}

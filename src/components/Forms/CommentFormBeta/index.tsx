@@ -171,8 +171,13 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   }
 
   useEffect(() => {
-    console.log('CommentFormBeta: update default content', defaultContent)
-    onUpdate({ content: defaultContent || '' })
+    const $editor = document.querySelector(
+      `#${formId} .ProseMirror`
+    ) as HTMLElement
+
+    if ($editor && defaultContent) {
+      $editor.innerHTML = defaultContent
+    }
   }, [defaultContent])
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
