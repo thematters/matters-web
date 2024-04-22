@@ -2,6 +2,24 @@
 
 } */
 
+.cover {
+  position: relative;
+  width: 100%;
+
+  &::after {
+    display: block;
+    padding-bottom: 100%;
+    content: '';
+  }
+
+  & img {
+    @mixin object-fit-cover;
+
+    overflow: hidden;
+    border-radius: 0.5rem;
+  }
+}
+
 .author {
   margin-top: var(--spacing-base);
 }
