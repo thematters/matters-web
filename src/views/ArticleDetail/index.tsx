@@ -177,6 +177,7 @@ const BaseArticleDetail = ({
     }
   )
   useEffect(() => {
+    // wait for editor to be ready
     if (!editor || !syncQuoteComment) {
       return
     }
