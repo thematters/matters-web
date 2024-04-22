@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 
 import { OPEN_COMMENT_LIST_DRAWER } from '~/common/enums'
-import { IconComment24, IconX20 } from '~/components'
+import { IconComment24 } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -74,17 +74,17 @@ export const TextSelectionPopover = ({
     }
   }, [])
 
-  const onShare = () => {
-    if (!selection) {
-      return
-    }
-    const message = [
-      `"${encodeURIComponent(selection.trim())}"`,
-      encodeURIComponent(window.location.href),
-    ].join('%0A%0A')
-    const url = `https://twitter.com/intent/tweet?text=${message}`
-    window.open(url, '_blank')
-  }
+  // const onShare = () => {
+  //   if (!selection) {
+  //     return
+  //   }
+  //   const message = [
+  //     `"${encodeURIComponent(selection.trim())}"`,
+  //     encodeURIComponent(window.location.href),
+  //   ].join('%0A%0A')
+  //   const url = `https://twitter.com/intent/tweet?text=${message}`
+  //   window.open(url, '_blank')
+  // }
 
   const onQuote = () => {
     if (!selection) {
@@ -94,7 +94,7 @@ export const TextSelectionPopover = ({
     window.dispatchEvent(
       new CustomEvent(OPEN_COMMENT_LIST_DRAWER, {
         detail: {
-          defaultCommentContent: `<blockquote>${selection}</blockquote>`,
+          quoteComment: `<blockquote>${selection}</blockquote>`,
         },
       })
     )
@@ -118,10 +118,10 @@ export const TextSelectionPopover = ({
           <button onClick={onQuote} className={styles.quoteButton}>
             <IconComment24 size="mdS" />
           </button>
-          <span className={styles.divider} />
+          {/* <span className={styles.divider} />
           <button onClick={onShare} className={styles.shareButton}>
             <IconX20 size="mdS" />
-          </button>
+          </button> */}
         </div>
       )}
     </div>

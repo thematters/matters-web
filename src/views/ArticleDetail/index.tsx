@@ -164,31 +164,32 @@ const BaseArticleDetail = ({
 
   // Quote comment from Text Selection Popover
   const [editor, setEditor] = useState<Editor | null>(null)
-  const [syncQuoteComment, setSyncQuoteComment] = useState('')
-  const clearSyncQuoteComment = () => {
-    setSyncQuoteComment('')
+  const [quoteComment, setQuoteComment] = useState('')
+  const clearQuoteComment = () => {
+    setQuoteComment('')
   }
   useEventListener(
     OPEN_COMMENT_LIST_DRAWER,
     (payload: { [key: string]: any }) => {
       setCommentDrawerStep('commentList')
-      setSyncQuoteComment(payload.defaultCommentContent)
+      setQuoteComment(payload.quoteComment)
       setIsOpenComment(true)
     }
   )
   useEffect(() => {
-    if (!editor || !syncQuoteComment) {
+    // wait for editor to be ready
+    if (!editor || !quoteComment) {
       return
     }
 
     editor.commands.focus('end')
-    editor.commands.insertContent(syncQuoteComment)
+    editor.commands.insertContent(quoteComment)
     editor.commands.focus('end')
     editor.commands.enter()
     editor.commands.enter()
 
-    clearSyncQuoteComment()
-  }, [editor, syncQuoteComment])
+    clearQuoteComment()
+  }, [editor, quoteComment])
 
   // Donation
   const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
