@@ -1,9 +1,18 @@
-import React from 'react'
+import { useApolloClient } from '@apollo/react-hooks'
+import React, { useContext, useEffect } from 'react'
 
 import { analytics } from '~/common/utils'
-import { ArticleDigestCurated, Media } from '~/components'
+import {
+  ArticleDigestCurated,
+  ArticleDigestFeed,
+  CardExposureTracker,
+  List,
+  Media,
+  ViewerContext,
+} from '~/components'
 import { IcymiCuratedFeedRecommendationFragment } from '~/gql/graphql'
 
+import { FEED_ARTICLES_PRIVATE } from '../gql'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 
@@ -12,68 +21,111 @@ type IcymiCuratedFeed = {
 }
 
 export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
+  const viewer = useContext(ViewerContext)
+  const client = useApolloClient()
+
+  const { articles, pinAmount, note } = recommendation.icymiTopic || {}
+  const cardArticles = articles?.slice(0, pinAmount) || []
+  const listArticles = articles?.slice(pinAmount) || []
+
+  const loadPrivate = () => {
+    if (!viewer.isAuthed || listArticles.length <= 0) {
+      return
+    }
+
+    const publicIds = listArticles.map((article) => article.id)
+
+    client.query({
+      query: FEED_ARTICLES_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  useEffect(() => {
+    loadPrivate()
+  }, [])
+
   if (!recommendation.icymiTopic) {
     return null
   }
 
-  const { articles, pinAmount, note } = recommendation.icymiTopic
+  const onClickArticle = (
+    contentType: 'article' | 'user',
+    location: number,
+    id: string
+  ) => {
+    analytics.trackEvent('click_feed', {
+      type: 'icymi_curated',
+      contentType,
+      location,
+      id,
+    })
+  }
 
-  const cardArticles = articles.slice(0, pinAmount)
-  // const listArticles = articles.slice(pinAmount)
+  console.log({ listArticles })
 
   return (
-    <section className={styles.container}>
-      {note && (
-        <section className={styles.description}>
-          <span aria-hidden>/</span>
-          <p>{note}</p>
-          <span aria-hidden>/</span>
-        </section>
-      )}
+    <>
+      <section className={styles.container}>
+        {note && (
+          <section className={styles.description}>
+            <span aria-hidden>/</span>
+            <p>{note}</p>
+            <span aria-hidden>/</span>
+          </section>
+        )}
 
-      <section className={styles.cards}>
-        {cardArticles.map((article, i) => {
-          const cardProps = {
-            article,
-            onClick: () => {
-              analytics.trackEvent('click_feed', {
-                type: 'icymi_curated',
-                contentType: 'article',
-                location: i,
-                id: article.id,
-              })
-            },
-            onClickAuthor: () => {
-              analytics.trackEvent('click_feed', {
-                type: 'icymi_curated',
-                contentType: 'user',
-                location: i,
-                id: article.author.id,
-              })
-            },
-          }
-
-          return (
+        <section className={styles.cards}>
+          {cardArticles.map((article, i) => (
             <React.Fragment key={article.id}>
               <Media at="sm">
-                <ArticleDigestCurated {...cardProps} titleLineClamp={3} />
+                <ArticleDigestCurated
+                  article={article}
+                  titleLineClamp={3}
+                  onClick={() => onClickArticle('article', i, article.id)}
+                  onClickAuthor={() =>
+                    onClickArticle('user', i, article.author.id)
+                  }
+                />
               </Media>
               <Media greaterThan="sm">
-                <ArticleDigestCurated {...cardProps} titleLineClamp={2} />
+                <ArticleDigestCurated
+                  article={article}
+                  titleLineClamp={2}
+                  onClick={() => onClickArticle('article', i, article.id)}
+                  onClickAuthor={() =>
+                    onClickArticle('user', i, article.author.id)
+                  }
+                />
               </Media>
             </React.Fragment>
-          )
-        })}
-      </section>
-
-      {/* {listArticles.length > 0 && (
-        <section className={styles.list}>
-          {listArticles.map((article) => (
-            <ArticleDigestFeed article={article} key={article.id} />
           ))}
         </section>
-      )} */}
-    </section>
+      </section>
+
+      {listArticles.length > 0 && (
+        <List>
+          {listArticles.map((article, i) => (
+            <List.Item key={article.id}>
+              <ArticleDigestFeed
+                article={article}
+                onClick={() => onClickArticle('article', i, article.id)}
+                onClickAuthor={() =>
+                  onClickArticle('user', i, article.author.id)
+                }
+              />
+              <CardExposureTracker
+                contentType="article"
+                feedType="icymi_curated"
+                location={i}
+                id={article.id}
+              />
+            </List.Item>
+          ))}
+        </List>
+      )}
+    </>
   )
 }
 

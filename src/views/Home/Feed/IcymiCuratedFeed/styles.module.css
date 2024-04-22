@@ -27,10 +27,13 @@
 }
 
 .cards {
+  @mixin border-bottom-grey-light;
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--spacing-x-loose) var(--spacing-base);
-  margin-bottom: var(--spacing-xx-loose);
+  padding-bottom: var(--spacing-xx-loose);
+  border-bottom-style: dashed;
 
   @media (--sm-up) {
     grid-template-columns: repeat(3, 1fr);

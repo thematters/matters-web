@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestCurated } from '~/components'
+import { ArticleDigestCurated, ArticleDigestFeed } from '~/components'
 
 export const fragments = gql`
   fragment IcymiCuratedFeedRecommendation on Recommendation {
@@ -10,8 +10,12 @@ export const fragments = gql`
       pinAmount
       articles {
         ...ArticleDigestCuratedArticle
+        ...ArticleDigestFeedArticlePublic
+        ...ArticleDigestFeedArticlePrivate
       }
     }
   }
   ${ArticleDigestCurated.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
 `
