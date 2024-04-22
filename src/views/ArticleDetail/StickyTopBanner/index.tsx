@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl'
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { LanguageContext, TextIcon } from '~/components'
-import { StateArticleFragment } from '~/gql/graphql'
+import { StateArticleFragment, UserLanguage } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -46,27 +46,27 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
       <span>
         {isBanned && (
           <FormattedMessage
-            defaultMessage="Archived article (violations),"
-            id="+GCcXH"
+            defaultMessage="Archived for violation."
+            id="Z7JXlF"
             description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
           />
         )}
         {isArchived && (
           <FormattedMessage
-            defaultMessage="Archived article (Author),"
-            id="L5guA9"
+            defaultMessage="Archived article."
+            id="1PORwh"
             description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
           />
         )}
       </span>
 
-      {lang === 'en' && <span>&nbsp;</span>}
+      {lang === UserLanguage.En && <>&nbsp;</>}
 
       <Link href={PATHS.ME_ARCHIVED}>
         <TextIcon textDecoration="underline" size="md" weight="semibold">
           <FormattedMessage
-            defaultMessage="back to my works"
-            id="DDQsyP"
+            defaultMessage="Back to my works"
+            id="HR599l"
             description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
           />
         </TextIcon>

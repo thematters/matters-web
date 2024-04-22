@@ -17,10 +17,6 @@
   "+7SAix": {
     "defaultMessage": "2-12 個字元"
   },
-  "+GCcXH": {
-    "defaultMessage": "因違反用戶協定而被封存，",
-    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
-  },
   "+OStJM": {
     "defaultMessage": "重置交易密碼"
   },
@@ -161,6 +157,10 @@
   "1COpAA": {
     "defaultMessage": "失敗",
     "description": "src/components/Transaction/State/index.tsx"
+  },
+  "1PORwh": {
+    "defaultMessage": "僅作者本人可見封存作品，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "1QrwIl": {
     "defaultMessage": "去看看",
@@ -716,10 +716,6 @@
   "D9R/ol": {
     "defaultMessage": "將作品加入圍爐，讓更多人一起參與討論"
   },
-  "DDQsyP": {
-    "defaultMessage": "回到我的創作",
-    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
-  },
   "DP3yqI": {
     "defaultMessage": "支持人數"
   },
@@ -911,6 +907,13 @@
     "defaultMessage": "讀者可以直接透過錢包地址轉 USDT 等幣種給你",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
+  "HR599l": {
+    "defaultMessage": "回到我的創作",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "HYW0fI": {
+    "defaultMessage": "上鏈後，作品不可刪除，去中心化保存"
+  },
   "HkozYU": {
     "defaultMessage": "更換錢包",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1056,10 +1059,6 @@
   "L4NXXh": {
     "defaultMessage": "目前總營收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
-  },
-  "L5guA9": {
-    "defaultMessage": "Archived article (Author),",
-    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "L79o74": {
     "defaultMessage": "展開",
@@ -1245,7 +1244,7 @@
     "defaultMessage": "輸入六位數字交易密碼"
   },
   "Oru6G2": {
-    "defaultMessage": "The Fingerprint from IPFS, you can read it via a gateway"
+    "defaultMessage": "使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
   },
   "OsX3KM": {
     "defaultMessage": "評論",
@@ -1269,6 +1268,9 @@
   },
   "PXAur5": {
     "defaultMessage": "提現"
+  },
+  "PesLat": {
+    "defaultMessage": "正在發布，馬上就好"
   },
   "PkUihI": {
     "defaultMessage": "修訂已保存",
@@ -1685,6 +1687,10 @@
     "defaultMessage": "開始創作",
     "description": "src/components/Buttons/StartWriting/index.tsx"
   },
+  "Z7JXlF": {
+    "defaultMessage": "因違反用戶協定而被封存，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "ZAs170": {
     "defaultMessage": "基本資料",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -2077,7 +2083,7 @@
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "jtdQHR": {
-    "defaultMessage": "Gateways"
+    "defaultMessage": "公共節點"
   },
   "jwnump": {
     "defaultMessage": "發布評論..."

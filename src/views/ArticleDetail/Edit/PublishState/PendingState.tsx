@@ -1,15 +1,16 @@
-import { Layout, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Layout } from '~/components'
 
 const PendingState = () => {
   return (
     <Layout.Notice
       color="green"
-      content={<Translate id="publishing" />}
+      content={<FormattedMessage defaultMessage="Publishing..." id="PesLat" />}
       subDescription={
-        <Translate
-          zh_hant="上鏈後，作品不可刪除，去中心化保存"
-          zh_hans="上链后，作品不可删除，去中心化保存"
-          en="After publication, your work cannot be deleted."
+        <FormattedMessage
+          defaultMessage="After publication, your work cannot be deleted."
+          id="HYW0fI"
         />
       }
     />

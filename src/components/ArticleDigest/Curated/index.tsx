@@ -13,6 +13,8 @@ import styles from './styles.module.css'
 export type ArticleDigestCuratedProps = {
   article: ArticleDigestCuratedArticleFragment
 
+  titleLineClamp?: 2 | 3
+
   onClick?: () => any
   onClickAuthor?: () => void
 } & CardProps
@@ -41,6 +43,8 @@ const fragments = {
 export const ArticleDigestCurated = ({
   article,
 
+  titleLineClamp,
+
   onClick,
   onClickAuthor,
 
@@ -57,7 +61,6 @@ export const ArticleDigestCurated = ({
     <Card
       {...path}
       spacing={[0, 0]}
-      borderRadius="xtight"
       bgColor="none"
       onClick={onClick}
       testId={TEST_ID.DIGEST_ARTICLE_CURATED}
@@ -90,7 +93,11 @@ export const ArticleDigestCurated = ({
         </section>
 
         <section className={styles.title}>
-          <ArticleDigestTitle article={article} textSize="md" />
+          <ArticleDigestTitle
+            article={article}
+            textSize="md"
+            lineClamp={titleLineClamp}
+          />
         </section>
       </section>
     </Card>

@@ -201,6 +201,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
         recommendation.icymiTopic && (
           <IcymiCuratedFeed recommendation={recommendation} />
         )}
+
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}

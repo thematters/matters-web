@@ -17,10 +17,6 @@
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
-  "+GCcXH": {
-    "defaultMessage": "Archived article (violations),",
-    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
-  },
   "+OStJM": {
     "defaultMessage": "Reset Payment Password"
   },
@@ -161,6 +157,10 @@
   "1COpAA": {
     "defaultMessage": "Failed",
     "description": "src/components/Transaction/State/index.tsx"
+  },
+  "1PORwh": {
+    "defaultMessage": "Archived article.",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "1QrwIl": {
     "defaultMessage": "Take a look",
@@ -716,10 +716,6 @@
   "D9R/ol": {
     "defaultMessage": "Add articles to your circle"
   },
-  "DDQsyP": {
-    "defaultMessage": "back to my works",
-    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
-  },
   "DP3yqI": {
     "defaultMessage": "Donation count"
   },
@@ -911,6 +907,13 @@
     "defaultMessage": "Readers can directly transfer USDT and other currencies to you through their wallet address.",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
+  "HR599l": {
+    "defaultMessage": "Back to my works",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "HYW0fI": {
+    "defaultMessage": "After publication, your work cannot be deleted."
+  },
   "HkozYU": {
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1056,10 +1059,6 @@
   "L4NXXh": {
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
-  },
-  "L5guA9": {
-    "defaultMessage": "Archived article (Author),",
-    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "L79o74": {
     "defaultMessage": "Expand",
@@ -1269,6 +1268,9 @@
   },
   "PXAur5": {
     "defaultMessage": "Withdraw"
+  },
+  "PesLat": {
+    "defaultMessage": "Publishing..."
   },
   "PkUihI": {
     "defaultMessage": "Saved",
@@ -1684,6 +1686,10 @@
   "Z2iL9Z": {
     "defaultMessage": "Start writing",
     "description": "src/components/Buttons/StartWriting/index.tsx"
+  },
+  "Z7JXlF": {
+    "defaultMessage": "Archived for violation.",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "Profile",

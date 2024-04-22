@@ -6,12 +6,11 @@ export const fragments = gql`
   fragment IcymiCuratedFeedRecommendation on Recommendation {
     icymiTopic {
       id
-      title
+      note
+      pinAmount
       articles {
         ...ArticleDigestCuratedArticle
       }
-      pinAmount
-      note
     }
   }
   ${ArticleDigestCurated.fragments.article}

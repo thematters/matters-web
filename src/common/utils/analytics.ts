@@ -234,6 +234,7 @@ type ArticleFeedType =
   | 'collection'
   | 'hottest'
   | 'icymi'
+  | 'icymi_curated'
   | 'newest'
   | 'read_history'
   | 'related_article'
