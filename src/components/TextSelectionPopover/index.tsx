@@ -94,7 +94,7 @@ export const TextSelectionPopover = ({
     window.dispatchEvent(
       new CustomEvent(OPEN_COMMENT_LIST_DRAWER, {
         detail: {
-          defaultCommentContent: `<blockquote>${selection}</blockquote>`,
+          quoteComment: `<blockquote>${selection}</blockquote>`,
         },
       })
     )
