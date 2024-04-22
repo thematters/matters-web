@@ -98,6 +98,7 @@ export const TextSelectionPopover = ({
         },
       })
     )
+    setSelection(undefined)
   }
 
   const containerClasses = classNames({

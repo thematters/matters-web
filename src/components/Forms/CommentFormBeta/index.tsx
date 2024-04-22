@@ -39,6 +39,7 @@ export interface CommentFormBetaProps {
   isInCommentDetail?: boolean
 
   defaultContent?: string | null
+  syncQuoteComment?: boolean
   submitCallback?: () => void
   closeCallback?: () => void
 
@@ -53,6 +54,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   type,
   isInCommentDetail,
   defaultContent,
+  syncQuoteComment,
   submitCallback,
   closeCallback,
 
@@ -195,7 +197,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
           content={content}
           update={onUpdate}
           placeholder={placeholder}
-          defaultContent={defaultContent}
+          syncQuoteComment={syncQuoteComment}
         />
       </section>
 

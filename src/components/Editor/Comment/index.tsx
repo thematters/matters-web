@@ -3,6 +3,9 @@ import { EditorContent, useCommentEditor } from '@matters/matters-editor'
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
+import { SYNC_QUOTE_COMMENT } from '~/common/enums'
+import { useEventListener } from '~/components/Hook'
+
 import { makeMentionSuggestion } from '../Article/extensions'
 import styles from './styles.module.css'
 
@@ -10,14 +13,14 @@ interface Props {
   content: string
   update: (params: { content: string }) => void
   placeholder?: string
-  defaultContent?: string | null
+  syncQuoteComment?: boolean
 }
 
 const CommentEditor: React.FC<Props> = ({
   content,
   update,
   placeholder,
-  defaultContent,
+  syncQuoteComment,
 }) => {
   const client = useApolloClient()
   const intl = useIntl()
@@ -38,8 +41,31 @@ const CommentEditor: React.FC<Props> = ({
   })
 
   useEffect(() => {
-    editor?.commands.setContent(defaultContent || '')
-  }, [defaultContent])
+    if (!content || !syncQuoteComment || !editor) {
+      return
+    }
+
+    editor.commands.focus('end')
+    editor.commands.enter()
+    editor.commands.enter()
+  }, [editor])
+
+  useEventListener(SYNC_QUOTE_COMMENT, (payload: { [key: string]: any }) => {
+    if (!syncQuoteComment) {
+      return
+    }
+
+    const { content } = payload
+    if (!editor || !content) {
+      return
+    }
+
+    editor.commands.focus('end')
+    editor.commands.insertContent(content)
+    editor.commands.focus('end')
+    editor.commands.enter()
+    editor.commands.enter()
+  })
 
   return (
     <div

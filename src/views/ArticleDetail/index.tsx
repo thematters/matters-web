@@ -7,6 +7,7 @@ import {
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DIALOG,
   REFERRAL_QUERY_REFERRAL_KEY,
+  SYNC_QUOTE_COMMENT,
   URL_QS,
 } from '~/common/enums'
 import {
@@ -167,6 +168,16 @@ const BaseArticleDetail = ({
       setCommentDrawerStep('commentList')
       setDefaultCommentContent(payload.defaultCommentContent)
       setIsOpenComment(true)
+
+      setTimeout(() => {
+        window.dispatchEvent(
+          new CustomEvent(SYNC_QUOTE_COMMENT, {
+            detail: {
+              content: payload.defaultCommentContent,
+            },
+          })
+        )
+      })
     }
   )
 

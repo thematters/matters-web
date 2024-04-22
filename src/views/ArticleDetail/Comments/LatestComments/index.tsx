@@ -158,6 +158,7 @@ const LatestComments = ({
           articleId={article?.id}
           type={'article'}
           defaultContent={defaultCommentContent}
+          syncQuoteComment
         />
         <Spacer size="base" />
       </Media>
