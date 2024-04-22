@@ -1,5 +1,10 @@
 import { useApolloClient } from '@apollo/react-hooks'
-import { EditorContent, useCommentEditor } from '@matters/matters-editor'
+import {
+  Editor,
+  EditorContent,
+  useCommentEditor,
+} from '@matters/matters-editor'
+import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { makeMentionSuggestion } from '../Article/extensions'
@@ -9,9 +14,15 @@ interface Props {
   content: string
   update: (params: { content: string }) => void
   placeholder?: string
+  setEditor?: (editor: Editor | null) => void
 }
 
-const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
+const CommentEditor: React.FC<Props> = ({
+  content,
+  update,
+  placeholder,
+  setEditor,
+}) => {
   const client = useApolloClient()
   const intl = useIntl()
 
@@ -29,6 +40,10 @@ const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
   })
+
+  useEffect(() => {
+    setEditor?.(editor)
+  }, [editor])
 
   return (
     <div

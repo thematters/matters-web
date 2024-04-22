@@ -23,6 +23,7 @@ export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 export const OPEN_SET_USER_NAME_DIALOG = 'openSetUserNameDialog'
 export const OPEN_SHOW_NOMAD_BADGE_DIALOG = 'openShowNomadBadgeDialog'
 export const OPEN_COMMENT_DETAIL_DIALOG = 'openCommentDetailDialog'
+export const OPEN_COMMENT_LIST_DRAWER = 'openCommentListDrawer'
 
 // Toast
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'

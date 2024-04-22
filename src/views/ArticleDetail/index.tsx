@@ -1,10 +1,12 @@
 import { useLazyQuery } from '@apollo/react-hooks'
+import { Editor } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 
 import {
   OPEN_COMMENT_DETAIL_DIALOG,
+  OPEN_COMMENT_LIST_DRAWER,
   REFERRAL_QUERY_REFERRAL_KEY,
   URL_QS,
 } from '~/common/enums'
@@ -29,6 +31,7 @@ import {
   Title,
   toast,
   Translate,
+  useEventListener,
   useFeatures,
   useIntersectionObserver,
   usePublicQuery,
@@ -127,28 +130,30 @@ const BaseArticleDetail = ({
   const viewer = useContext(ViewerContext)
 
   const features = useFeatures()
-  const [showFloatToolbar, setShowFloatToolbar] = useState(true)
-  const [showCommentToolbar, setShowCommentToolbar] = useState(false)
+
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
 
+  // Float toolbar
+  const [showFloatToolbar, setShowFloatToolbar] = useState(true)
   const {
     isIntersecting: isIntersectingDesktopToolbar,
     ref: desktopToolbarRef,
   } = useIntersectionObserver()
-
   useEffect(() => {
     setShowFloatToolbar(!isIntersectingDesktopToolbar)
   }, [isIntersectingDesktopToolbar])
 
+  // Comment toolbar
+  const [showCommentToolbar, setShowCommentToolbar] = useState(false)
   const { isIntersecting: isIntersectingComments, ref: commentsRef } =
     useIntersectionObserver()
-
   useEffect(() => {
     setShowCommentToolbar(isIntersectingComments)
   }, [isIntersectingComments])
 
+  // Comment
   const [commentDrawerStep, setCommentDrawerStep] = useState<CommentDrawerStep>(
     parentId !== '' ? 'commentDetail' : 'commentList'
   )
@@ -157,6 +162,35 @@ const BaseArticleDetail = ({
     setIsOpenComment((prevState) => !prevState)
   }
 
+  // Quote comment from Text Selection Popover
+  const [editor, setEditor] = useState<Editor | null>(null)
+  const [syncQuoteComment, setSyncQuoteComment] = useState('')
+  const clearSyncQuoteComment = () => {
+    setSyncQuoteComment('')
+  }
+  useEventListener(
+    OPEN_COMMENT_LIST_DRAWER,
+    (payload: { [key: string]: any }) => {
+      setCommentDrawerStep('commentList')
+      setSyncQuoteComment(payload.defaultCommentContent)
+      setIsOpenComment(true)
+    }
+  )
+  useEffect(() => {
+    if (!editor || !syncQuoteComment) {
+      return
+    }
+
+    editor.commands.focus('end')
+    editor.commands.insertContent(syncQuoteComment)
+    editor.commands.focus('end')
+    editor.commands.enter()
+    editor.commands.enter()
+
+    clearSyncQuoteComment()
+  }, [editor, syncQuoteComment])
+
+  // Donation
   const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
   const toggleDonationDrawer = () => {
     setIsOpenDonationDrawer((prevState) => !prevState)
@@ -315,6 +349,7 @@ const BaseArticleDetail = ({
           id={article.id}
           lock={!canReadFullContent}
           switchToCommentList={() => setCommentDrawerStep('commentList')}
+          setEditor={setEditor}
         />
 
         <SupportDrawer
