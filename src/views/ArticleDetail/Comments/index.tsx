@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { Editor } from '@matters/matters-editor'
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
@@ -29,11 +30,11 @@ const ARTICLE_COMMENTS = gql`
 const Comments = ({
   id,
   lock,
-  defaultCommentContent,
+  setEditor,
 }: {
   id: string
   lock: boolean
-  defaultCommentContent?: string
+  setEditor?: (editor: Editor | null) => void
 }) => {
   const { data, loading } = useQuery<ArticleCommentsQuery>(ARTICLE_COMMENTS, {
     variables: { id },
@@ -57,11 +58,7 @@ const Comments = ({
           <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
         </section>
       </Media>
-      <LatestComments
-        id={article.id}
-        lock={lock}
-        defaultCommentContent={defaultCommentContent}
-      />
+      <LatestComments id={article.id} lock={lock} setEditor={setEditor} />
     </section>
   )
 }

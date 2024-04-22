@@ -1,3 +1,4 @@
+import { Editor } from '@matters/matters-editor'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
@@ -44,11 +45,11 @@ type CommentArticle = NonNullable<
 const LatestComments = ({
   id,
   lock,
-  defaultCommentContent,
+  setEditor,
 }: {
   id: string
   lock: boolean
-  defaultCommentContent?: string
+  setEditor?: (editor: Editor | null) => void
 }) => {
   const viewer = useContext(ViewerContext)
 
@@ -157,8 +158,7 @@ const LatestComments = ({
         <CommentFormBeta
           articleId={article?.id}
           type={'article'}
-          defaultContent={defaultCommentContent}
-          syncQuoteComment
+          setEditor={setEditor}
         />
         <Spacer size="base" />
       </Media>

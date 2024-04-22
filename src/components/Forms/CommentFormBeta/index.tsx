@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { Editor } from '@matters/matters-editor'
 import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -39,11 +40,11 @@ export interface CommentFormBetaProps {
   isInCommentDetail?: boolean
 
   defaultContent?: string | null
-  syncQuoteComment?: boolean
   submitCallback?: () => void
   closeCallback?: () => void
 
   placeholder?: string
+  setEditor?: (editor: Editor | null) => void
 }
 
 export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
@@ -54,11 +55,11 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   type,
   isInCommentDetail,
   defaultContent,
-  syncQuoteComment,
   submitCallback,
   closeCallback,
 
   placeholder,
+  setEditor,
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
@@ -197,7 +198,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
           content={content}
           update={onUpdate}
           placeholder={placeholder}
-          syncQuoteComment={syncQuoteComment}
+          setEditor={setEditor}
         />
       </section>
 

@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 
-import { OPEN_COMMENT_LIST_DIALOG } from '~/common/enums'
+import { OPEN_COMMENT_LIST_DRAWER } from '~/common/enums'
 import { IconComment24, IconX20 } from '~/components'
 
 import styles from './styles.module.css'
@@ -92,7 +92,7 @@ export const TextSelectionPopover = ({
     }
 
     window.dispatchEvent(
-      new CustomEvent(OPEN_COMMENT_LIST_DIALOG, {
+      new CustomEvent(OPEN_COMMENT_LIST_DRAWER, {
         detail: {
           defaultCommentContent: `<blockquote>${selection}</blockquote>`,
         },
