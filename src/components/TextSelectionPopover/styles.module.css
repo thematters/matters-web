@@ -52,8 +52,7 @@
     }
 
     &.quoteButton {
-      padding: var(--spacing-tight) var(--spacing-base) var(--spacing-tight)
-        var(--spacing-tight);
+      padding: var(--spacing-tight);
     }
 
     &.shareButton {
