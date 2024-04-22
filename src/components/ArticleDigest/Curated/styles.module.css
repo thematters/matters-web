@@ -1,0 +1,11 @@
+/* .container {
+
+} */
+
+.author {
+  margin-top: var(--spacing-base);
+}
+
+.title {
+  margin-top: var(--spacing-x-tight);
+}
