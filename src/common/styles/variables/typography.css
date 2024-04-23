@@ -4,19 +4,22 @@
     'Segoe UI', roboto, arial, 'PingFang TC', 'PingFang SC', 'Noto Sans TC',
     'Noto Sans SC', 'Noto Sans CJK TC', 'Noto Sans CJK SC', 'Source Han Sans TW',
     'Source Han Sans CN', 'Microsoft JhengHei', 'Microsoft YaHei',
-    'WenQuanYi Micro Hei', sans-serif;
+    'WenQuanYi Micro Hei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   --font-sans-sc: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
     'Segoe UI', roboto, arial, 'PingFang SC', 'PingFang TC', 'Noto Sans SC',
     'Noto Sans TC', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Source Han Sans CN',
     'Source Han Sans TW', 'Microsoft YaHei', 'Microsoft JhengHei',
-    'WenQuanYi Micro Hei', sans-serif;
+    'WenQuanYi Micro Hei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   --font-serif-tc: 'Noto Serif', 'Noto Serif TC', 'Noto Serif SC',
     'Noto Serif CJK TC', 'Noto Serif CJK SC', 'Source Han Serif TW',
-    'Source Han Serif CN', 'Songti TC', 'Songti SC', serif;
+    'Source Han Serif CN', 'Songti TC', 'Songti SC', serif, 'Apple Color Emoji',
+    'Segoe UI Emoji';
   --font-serif-sc: 'Noto Serif', 'Noto Serif SC', 'Noto Serif TC',
     'Noto Serif CJK SC', 'Noto Serif CJK TC', 'Source Han Sans CN',
-    'Source Han Sans TW', 'Songti SC', 'Songti TC', serif;
-  --font-mono: menlo, 'SFMono-Regular', consolas, monaco, monospace;
+    'Source Han Sans TW', 'Songti SC', 'Songti TC', serif, 'Apple Color Emoji',
+    'Segoe UI Emoji';
+  --font-mono: menlo, 'SFMono-Regular', consolas, monaco, monospace,
+    'Apple Color Emoji', 'Segoe UI Emoji';
 
   /* Type Scale */
   --font-size-xs-s: 0.6875rem; /* 11px */
