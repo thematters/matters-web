@@ -59,12 +59,13 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   closeCallback,
 
   placeholder,
-  setEditor,
+  setEditor: _setEditor,
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
+  const [editor, setEditor] = useState<Editor | null>(null)
 
   // retrieve comment draft
   const commentDraftId = `${articleId}-${type}-${commentId || 0}-${
@@ -150,12 +151,8 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
       }
 
       // clear content
-      const $editor = document.querySelector(
-        `#${formId} .ProseMirror`
-      ) as HTMLElement
-
-      if ($editor) {
-        $editor.innerHTML = ''
+      if (editor) {
+        editor.commands.setContent('')
       }
 
       // clear draft
@@ -198,7 +195,10 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
           content={content}
           update={onUpdate}
           placeholder={placeholder}
-          setEditor={setEditor}
+          setEditor={(editor) => {
+            setEditor(editor)
+            _setEditor?.(editor)
+          }}
         />
       </section>
 
