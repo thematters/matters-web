@@ -182,13 +182,17 @@ const BaseArticleDetail = ({
       return
     }
 
-    editor.commands.focus('end')
-    editor.commands.insertContent(quoteComment)
-    editor.commands.focus('end')
-    editor.commands.enter()
-    editor.commands.enter()
+    setTimeout(() => {
+      editor.commands.focus('end')
+      editor.commands.insertContent(quoteComment)
+      editor.commands.focus('end')
+      editor.commands.enter()
+      editor.commands.enter()
 
-    clearQuoteComment()
+      clearQuoteComment()
+
+      //  wait for the drawer pull animation to complete
+    }, 300)
   }, [editor, quoteComment])
 
   // Donation
