@@ -70,12 +70,12 @@ const horizontalFeeds: FeedLocation = {
       <Billboard />
     </Media>
   ),
-  10: () => (
+  11: () => (
     <Media lessThan="lg">
       <Authors />
     </Media>
   ),
-  15: () => (
+  17: () => (
     <Media lessThan="lg">
       <Tags />
     </Media>
