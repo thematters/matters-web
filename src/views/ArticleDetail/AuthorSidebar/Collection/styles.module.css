@@ -16,14 +16,12 @@
     font-weight: var(--font-weight-medium);
   }
 
-  & .description {
-    @mixin line-clamp;
-
-    -webkit-line-clamp: 4;
+  & .totalCount {
     padding: 0 var(--spacing-base);
     margin-bottom: var(--spacing-tight);
-    font-size: var(--font-size-xs);
-    color: var(--color-grey-darker);
+    font-size: var(--font-size-sm);
+    line-height: 1.375rem;
+    color: var(--color-grey);
   }
 
   & .feed {

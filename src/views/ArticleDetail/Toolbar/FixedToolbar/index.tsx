@@ -166,6 +166,17 @@ const FixedToolbar = ({
                 textWeight="normal"
                 textIconSpacing="xxtight"
                 onClick={() => {
+                  if (!viewer.isAuthed) {
+                    window.dispatchEvent(
+                      new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                        detail: {
+                          trigger: UNIVERSAL_AUTH_TRIGGER.replyComment,
+                        },
+                      })
+                    )
+                    return
+                  }
+
                   if (openCommentsDialog) {
                     openCommentsDialog()
                   } else {
@@ -201,6 +212,7 @@ const FixedToolbar = ({
                 {...dropdonwActionsProps}
                 hasShare
                 hasBookmark={false}
+                hasReport
               />
             )}
           </section>

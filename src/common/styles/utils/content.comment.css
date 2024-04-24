@@ -6,7 +6,7 @@
   }
 
   & > * + * {
-    margin: var(--spacing-base) 0;
+    margin: var(--spacing-x-tight) 0;
   }
 
   & > *:last-child {
@@ -63,7 +63,7 @@
       width: 4px;
       height: 100%;
       content: '';
-      background: var(--color-matters-gold);
+      background: var(--color-grey-light);
     }
   }
 
@@ -126,9 +126,7 @@
   /* Link
    ========================================================================== */
   & a {
-    padding-bottom: 2px;
     color: var(--color-matters-green);
-    border-bottom: 1px solid currentcolor;
 
     &:hover,
     &:active,

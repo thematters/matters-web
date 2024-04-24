@@ -72,6 +72,10 @@
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
+  "/NX9L+": {
+    "defaultMessage": "Confirm authorization",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "/TXBJR": {
     "defaultMessage": "Unknown error. Please try again later.",
     "description": "UNKNOWN_ERROR"
@@ -162,6 +166,14 @@
     "defaultMessage": "Take a look",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
+  "1U/MPD": {
+    "defaultMessage": "Balance:",
+    "description": "src/components/Balance/index.tsx"
+  },
+  "1WeErK": {
+    "defaultMessage": "Welcome to use your wallet! {br} Please set a transaction password first",
+    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
+  },
   "1Z1M77": {
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
@@ -173,6 +185,10 @@
   "1qQzV0": {
     "defaultMessage": "Invitees",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "1r1iQj": {
+    "defaultMessage": "Reauthorize",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "1y1U9f": {
     "defaultMessage": "Liker ID is already taken.",
@@ -199,6 +215,9 @@
   "2CqWQE": {
     "defaultMessage": "Total",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "2D/X90": {
+    "defaultMessage": "Why Optimism?"
   },
   "2DkkhD": {
     "defaultMessage": "Settings - Notifications",
@@ -261,6 +280,9 @@
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
+  "3lMsOU": {
+    "defaultMessage": "Reapprove to continue"
+  },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -268,8 +290,14 @@
   "3w3CC8": {
     "defaultMessage": "Link ENS"
   },
+  "3yVvk4": {
+    "defaultMessage": "Please continue in Liker Land."
+  },
   "3yk8fB": {
     "defaultMessage": "Wallet"
+  },
+  "4118K3": {
+    "defaultMessage": "Optimism is a Layer 2 scaling solution based on Ethereum that can provide faster and cheaper transactions, while ensuring security, making it easier for you to support creators."
   },
   "47FYwb": {
     "defaultMessage": "Cancel"
@@ -319,6 +347,9 @@
     "defaultMessage": "This tag is already taken",
     "description": "DUPLICATE_TAG"
   },
+  "5UglrB": {
+    "defaultMessage": "Successfully delivered"
+  },
   "5XFd/5": {
     "defaultMessage": "Manage Circle"
   },
@@ -347,6 +378,9 @@
   "6/kgzs": {
     "defaultMessage": "Unsubscribed"
   },
+  "62nsdy": {
+    "defaultMessage": "Retry"
+  },
   "63HuBz": {
     "defaultMessage": "This tag has no manager currently",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -357,6 +391,10 @@
   "6BXcdo": {
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6KmKvZ": {
+    "defaultMessage": "Please enter new transaction password again",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
   "6N2LKY": {
     "defaultMessage": "Please log in again.",
@@ -396,9 +434,6 @@
     "defaultMessage": "Cancelled",
     "description": "src/components/Transaction/State/index.tsx"
   },
-  "6yZXYK": {
-    "defaultMessage": "Forget Payment Password"
-  },
   "70UCEy": {
     "defaultMessage": "Have wallet questions on mobile device ? Click the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -424,6 +459,14 @@
   },
   "7JlauX": {
     "defaultMessage": "Explore"
+  },
+  "7UqcsO": {
+    "defaultMessage": "Forgot transaction password?",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
+  "7VSfs3": {
+    "defaultMessage": "Select amount",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
   "7WXDhH": {
     "defaultMessage": "Are you sure you want to delete draft?",
@@ -501,6 +544,10 @@
   "9OIqBr": {
     "defaultMessage": "Edit Comment",
     "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
+  "9SXN7s": {
+    "defaultMessage": "No more comments",
+    "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
   },
   "9UNFGm": {
     "defaultMessage": "Transaction Password"
@@ -612,6 +659,10 @@
     "defaultMessage": "Language",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
   },
+  "BoN8lF": {
+    "defaultMessage": "Provide support funds to",
+    "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
+  },
   "C3NKBg": {
     "defaultMessage": "Connected to {type}",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
@@ -630,6 +681,9 @@
   "CD688y": {
     "defaultMessage": "bookmarked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "CPvyYN": {
+    "defaultMessage": "Incorrect password"
   },
   "Cdkhl8": {
     "defaultMessage": "Delete {commentType}",
@@ -675,6 +729,10 @@
   },
   "DUvMii": {
     "defaultMessage": "Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+  },
+  "DX0YH3": {
+    "defaultMessage": "Wallet successfully bound",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "DYrDcG": {
     "defaultMessage": "Badges",
@@ -722,6 +780,10 @@
   "EcglP9": {
     "defaultMessage": "Key"
   },
+  "EmZFry": {
+    "defaultMessage": "Please continue within your crypto wallet.",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "EoeUjA": {
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
@@ -745,6 +807,10 @@
   "FOOymB": {
     "defaultMessage": "No members yet",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
+  },
+  "FWCa4O": {
+    "defaultMessage": "Switch to Optimism network now?",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
@@ -797,6 +863,9 @@
   "GZJpDf": {
     "defaultMessage": "Analytics"
   },
+  "GclYG/": {
+    "defaultMessage": "Anonymous User"
+  },
   "GcvLBC": {
     "defaultMessage": "Understood"
   },
@@ -818,9 +887,6 @@
   "H8KGyc": {
     "defaultMessage": "Enter"
   },
-  "H9FKs4": {
-    "defaultMessage": "Enter transaction password again"
-  },
   "HAlOn1": {
     "defaultMessage": "Name"
   },
@@ -841,6 +907,10 @@
     "defaultMessage": "Wallet",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
+  "HQusql": {
+    "defaultMessage": "Readers can directly transfer USDT and other currencies to you through their wallet address.",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "HkozYU": {
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -859,6 +929,10 @@
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "HyjQns": {
+    "defaultMessage": "tutorial",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "Hyr5ET": {
     "defaultMessage": "Supporter",
@@ -1093,6 +1167,13 @@
   "N2IrpM": {
     "defaultMessage": "Confirm"
   },
+  "N8ISx8": {
+    "defaultMessage": "Oops! This comment has been deleted by author"
+  },
+  "NACY16": {
+    "defaultMessage": "Why need to set up a wallet?",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "NAidKb": {
     "defaultMessage": "Notifications"
   },
@@ -1111,6 +1192,9 @@
   "NONfAh": {
     "defaultMessage": "Douban",
     "description": "src/components/Share/Buttons/Douban.tsx"
+  },
+  "NYTGIb": {
+    "defaultMessage": "Got it"
   },
   "NbdvAd": {
     "defaultMessage": "Supporter",
@@ -1139,6 +1223,10 @@
     "defaultMessage": "Forgot password?",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
+  "OA3RuB": {
+    "defaultMessage": "Allow to use USDT in the wallet",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
+  },
   "OIj8pQ": {
     "defaultMessage": "Invitation Sent",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -1162,6 +1250,18 @@
   "OsX3KM": {
     "defaultMessage": "Comment",
     "description": "src/views/ArticleDetail/index.tsx"
+  },
+  "P+sWM0": {
+    "defaultMessage": "guide",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
+  },
+  "P2tEEn": {
+    "defaultMessage": "Insufficient balance",
+    "description": "src/components/Balance/index.tsx"
+  },
+  "P3y9Bo": {
+    "defaultMessage": "Go to sign",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "Password",
@@ -1211,6 +1311,14 @@
     "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "QfrKA6": {
+    "defaultMessage": "Back",
+    "description": "src/components/Forms/PaymentForm"
+  },
+  "R410ei": {
+    "defaultMessage": "Incorrect verification code",
+    "description": "CODE_INVALID"
+  },
   "R7yHDl": {
     "defaultMessage": "Circle Revenue",
     "description": "src/components/Transaction/index.tsx"
@@ -1227,9 +1335,17 @@
     "defaultMessage": "Author",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
+  "RMV4wt": {
+    "defaultMessage": "Top-up successful",
+    "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
+  },
   "ROPCC0": {
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
+  },
+  "RU5NDB": {
+    "defaultMessage": "Please confirm transaction password",
+    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
   },
   "Rc4Oij": {
     "defaultMessage": "Firebolt"
@@ -1250,6 +1366,10 @@
     "defaultMessage": "Unpin from profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
+  "SHWkv8": {
+    "defaultMessage": "Why use Optimism network first?",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "SNh1n0": {
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1257,6 +1377,10 @@
   "SPTRiT": {
     "defaultMessage": "Latest",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "SYfw+k": {
+    "defaultMessage": "Confirm",
+    "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
   },
   "SYyBFF": {
     "defaultMessage": "Copied successful"
@@ -1271,6 +1395,9 @@
   },
   "Seanpx": {
     "defaultMessage": "Required"
+  },
+  "SebPdz": {
+    "defaultMessage": "Transaction in progress, please wait"
   },
   "Sep44m": {
     "defaultMessage": "Payout",
@@ -1307,12 +1434,27 @@
     "defaultMessage": "Subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "TX5UzL": {
+    "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
+  "TgU+Mf": {
+    "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {tutorial}.",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "Tgd5id": {
+    "defaultMessage": "Transfer amount exceeds allowance"
+  },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
   "TzhzIH": {
     "defaultMessage": "Creators"
+  },
+  "U+qEBM": {
+    "defaultMessage": "Switch Network",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "U7o9Ba": {
     "defaultMessage": "Accumulated read time"
@@ -1345,6 +1487,10 @@
   },
   "Up5U7K": {
     "defaultMessage": "Block"
+  },
+  "UxAA/V": {
+    "defaultMessage": "Optimism is a Layer 2 scaling solution based on Ethereum that can provide faster and cheaper transactions, while ensuring security, making it easier for you to support creators.",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "V5OMr4": {
     "defaultMessage": "What is a digital wallet?",
@@ -1422,10 +1568,6 @@
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
-  "WsefD2": {
-    "defaultMessage": "No more comments",
-    "description": "src/views/User/Articles/UserArticles.tsx"
-  },
   "WuvE8X": {
     "defaultMessage": "Followers of {circleName}",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
@@ -1440,6 +1582,9 @@
   },
   "XHcb2q": {
     "defaultMessage": "Spaceship maintaining, please come back later"
+  },
+  "XP1Vto": {
+    "defaultMessage": "Oops! This comment has been forcibly hidden"
   },
   "XQTBu6": {
     "defaultMessage": "mentioned you in your circle broadcast comment",
@@ -1479,6 +1624,9 @@
     "defaultMessage": "Maximum 4 editors allowed for each tag",
     "description": "TAG_EDITORS_REACH_LIMIT"
   },
+  "XnEruT": {
+    "defaultMessage": "Binding failed. Please retry later."
+  },
   "XuYhBC": {
     "defaultMessage": "Pinned to profile"
   },
@@ -1490,11 +1638,18 @@
     "defaultMessage": "commented in your circle broadcast",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "Y47aYU": {
+    "defaultMessage": "Top up"
+  },
   "Y7N/Jg": {
     "defaultMessage": "Maximum image dimension is 12,000 pixels."
   },
   "Y8zV4A": {
     "defaultMessage": "Write a comment"
+  },
+  "YAIXL4": {
+    "defaultMessage": "Please confirm authorization in the wallet dialog.{br}Once confirmed, support steps can begin.",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "YOMY1y": {
     "defaultMessage": "Comment...",
@@ -1568,6 +1723,18 @@
   "a1+ca6": {
     "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "aCTmEO": {
+    "defaultMessage": "I don't have a wallet yet",
+    "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
+  },
+  "aE5Qq+": {
+    "defaultMessage": "Resend",
+    "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
+  },
+  "aFJE+p": {
+    "defaultMessage": "{totalCount} articles",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
   },
   "aOFCqL": {
     "defaultMessage": "Most comments",
@@ -1696,6 +1863,10 @@
     "defaultMessage": "No blocked users yet",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
+  "dQhNbF": {
+    "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
+    "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
+  },
   "dSjI7E": {
     "defaultMessage": "Unable to disconnect the wallet because you have not added or associated another login (Email/Wallet/Social account).",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
@@ -1720,12 +1891,19 @@
   "djJp6c": {
     "defaultMessage": "History"
   },
+  "dk+TLh": {
+    "defaultMessage": "The wallet address will be publicly displayed on the personal page as personal identification.",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "dzF4ci": {
     "defaultMessage": "Resend",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
   "e3qUqn": {
     "defaultMessage": "Pornography involving minors"
+  },
+  "eKVBm/": {
+    "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {link}."
   },
   "eTpiYa": {
     "defaultMessage": "No data yet."
@@ -1735,6 +1913,9 @@
   },
   "eY3YIa": {
     "defaultMessage": "Copy comment"
+  },
+  "eZ0m39": {
+    "defaultMessage": "Enter the amount"
   },
   "enMIYK": {
     "defaultMessage": "My Page"
@@ -1746,11 +1927,18 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
+  "exb/12": {
+    "defaultMessage": "You can log in through your wallet next time!",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ezYuE2": {
     "defaultMessage": "Support Author"
   },
   "fDdcbi": {
     "defaultMessage": "This {type} has been deleted by the author"
+  },
+  "fK6ptv": {
+    "defaultMessage": "Sending failed. Please retry later."
   },
   "fPcF7H": {
     "defaultMessage": "Adding tags helps readers find your articles."
@@ -1785,6 +1973,9 @@
     "defaultMessage": "Updated {date}",
     "description": "src/views/User/CollectionDetail/Content.tsx"
   },
+  "h74kLA": {
+    "defaultMessage": "Failed to Donate"
+  },
   "h7sMQs": {
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -1792,6 +1983,9 @@
   "h9A6AT": {
     "defaultMessage": "For security, we will {resetHint} for this. You can set your password again after verifying new email address.",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
+  },
+  "h9CB9m": {
+    "defaultMessage": "The result is mainly based on the records on the chain and will be synchronized to Matters later."
   },
   "h9CG9E": {
     "defaultMessage": "{commentType} has been deleted",
@@ -1829,6 +2023,10 @@
   },
   "iEJeQH": {
     "defaultMessage": "Liker ID"
+  },
+  "iNZdM/": {
+    "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "iTcMqz": {
     "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",
@@ -1870,6 +2068,10 @@
     "defaultMessage": "Supporter",
     "description": "src/components/Comment/RoleLabel/index.tsx"
   },
+  "jiB0Z2": {
+    "defaultMessage": "Unable to bind wallet",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
@@ -1898,6 +2100,9 @@
     "defaultMessage": "followed you",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
+  "k6pcz/": {
+    "defaultMessage": "Check the wallet status and confirm your network."
+  },
   "k97/u7": {
     "defaultMessage": "Add Articles"
   },
@@ -1923,6 +2128,17 @@
   "kkZioy": {
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "ksIL/T": {
+    "defaultMessage": "Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
+  },
+  "ksvOGO": {
+    "defaultMessage": "Send the verification code",
+    "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
+  "kvUs/6": {
+    "defaultMessage": "Please enter new transaction password",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
   "l/f7bu": {
     "defaultMessage": "Want to know more? Check the",
@@ -2015,6 +2231,10 @@
     "defaultMessage": "Verification code is no longer valid. Please use the latest code we sent, or try resend",
     "description": "CODE_INACTIVE"
   },
+  "myB890": {
+    "defaultMessage": "Pass and ask me next time",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "mzCz0Z": {
     "defaultMessage": "Tags",
     "description": "src/views/Tags/index.tsx"
@@ -2079,6 +2299,9 @@
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
+  "pKkpI9": {
+    "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
+  },
   "pRV+UD": {
     "defaultMessage": "Collapse",
     "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
@@ -2115,6 +2338,10 @@
     "defaultMessage": "Archived",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
+  "qS19ij": {
+    "defaultMessage": "Reset successful",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "qVhxp5": {
     "defaultMessage": "Enter",
     "description": "src/components/Buttons/UniversalAuth/index.tsx"
@@ -2133,6 +2360,9 @@
   },
   "qlxeW+": {
     "defaultMessage": "Undo downvote"
+  },
+  "quRPwZ": {
+    "defaultMessage": "Payment request has been sent"
   },
   "qxKjcm": {
     "defaultMessage": "Pin",
@@ -2188,6 +2418,10 @@
     "defaultMessage": "This Month",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "sfj+KG": {
+    "defaultMessage": "The results are mainly based on the records on the chain and will be synchronized to Matters later.",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "sg3nVO": {
     "defaultMessage": "This email has been used, please go to login or try another one",
     "description": "USER_EMAIL_EXISTS"
@@ -2214,9 +2448,6 @@
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
-  "tGn21M": {
-    "defaultMessage": "Donated successfully"
-  },
   "tIDG14": {
     "defaultMessage": "Illegal advertising"
   },
@@ -2226,6 +2457,10 @@
   },
   "tio9Gt": {
     "defaultMessage": "IPFS"
+  },
+  "tnWWrj": {
+    "defaultMessage": "The comment has been forcibly hidden",
+    "description": "src/components/CommentBeta/Content/index.tsx"
   },
   "twEps9": {
     "defaultMessage": "published"
@@ -2250,6 +2485,10 @@
   "uVCg1l": {
     "defaultMessage": "Explore Matters"
   },
+  "uaFED8": {
+    "defaultMessage": "After binding, in addition to the original login method, a wallet login channel will be added.",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ub1kHa": {
     "defaultMessage": "Add to collection"
   },
@@ -2269,11 +2508,23 @@
   "us5QHt": {
     "defaultMessage": "This {type} has been collapsed by the author"
   },
+  "utMaM0": {
+    "defaultMessage": "Verification code has been sent via email and is valid for 20 minutes.",
+    "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
   "uw32VR": {
     "defaultMessage": "tutorial"
   },
   "ux4p3j": {
     "defaultMessage": "published on"
+  },
+  "v4ddaP": {
+    "defaultMessage": "Bind your wallet immediately, and link it to your personal account",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
+  "v5MunN": {
+    "defaultMessage": "Verification code has expired, please resend.",
+    "description": "CODE_EXPIRED"
   },
   "v6YjIn": {
     "defaultMessage": "Account",
@@ -2301,6 +2552,10 @@
     "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
+  "vRCDr8": {
+    "defaultMessage": "You can quickly log in to your account after binding.{br}Readers can also freely transfer money through other channels to support you!",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "vX2bDy": {
     "defaultMessage": "Collect Article"
   },
@@ -2311,12 +2566,20 @@
     "defaultMessage": "New broadcasts",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "vmx+TU": {
+    "defaultMessage": "Credit card",
+    "description": "src/views/ArticleDetail/SupportAuthor/Tabs/index.tsx"
+  },
   "vsD2wm": {
     "defaultMessage": "reset your login password",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "w+6UiO": {
     "defaultMessage": "Add Invitation"
+  },
+  "wBpJLd": {
+    "defaultMessage": "Go to allow",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "Comments"
@@ -2356,6 +2619,10 @@
   "wbcwKd": {
     "defaultMessage": "View All"
   },
+  "wicnP9": {
+    "defaultMessage": "Visa / Mastercard / American Express payment",
+    "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
+  },
   "wm9xNB": {
     "defaultMessage": "{type} disconnected",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -2367,6 +2634,10 @@
   "x7kxvC": {
     "defaultMessage": "Subscribe to unlock all articles of",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
+  "xDhqHi": {
+    "defaultMessage": "Confirm",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "xMaFCO": {
     "defaultMessage": "Articles",
@@ -2405,12 +2676,12 @@
     "defaultMessage": "Pay",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
-  "y1AhBH": {
-    "defaultMessage": "Enter a custom amount"
-  },
   "y4Lyf1": {
     "defaultMessage": "This name is already taken.",
     "description": "NAME_EXISTS"
+  },
+  "y9LDu9": {
+    "defaultMessage": "Authorization has been cancelled. If you want to support the author, please retry"
   },
   "yAflVX": {
     "defaultMessage": "Draft has been deleted"
@@ -2488,6 +2759,10 @@
   },
   "zQvVDJ": {
     "defaultMessage": "All"
+  },
+  "zaY8Cu": {
+    "defaultMessage": "Enter transaction password",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."

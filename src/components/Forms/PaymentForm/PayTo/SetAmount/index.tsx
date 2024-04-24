@@ -4,16 +4,17 @@ import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { parseUnits } from 'viem'
 import { useAccount } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
 import {
+  contract,
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MAXIMUM_PAYTO_AMOUNT,
   WALLET_ERROR_MESSAGES,
 } from '~/common/enums'
 import {
-  featureSupportedChains,
   formatAmount,
   numRound,
   truncate,
@@ -23,19 +24,14 @@ import {
 import {
   Button,
   CopyToClipboard,
-  Dialog,
   Form,
-  IconCopy16,
   LanguageContext,
   Spacer,
   Spinner,
-  TextIcon,
-  Translate,
   useAllowanceUSDT,
   useApproveUSDT,
   useBalanceUSDT,
   useMutation,
-  useTargetNetwork,
   ViewerContext,
 } from '~/components'
 import { updateDonation } from '~/components/GQL'
@@ -52,7 +48,6 @@ import {
 
 // import CivicLikerButton from '../CivicLikerButton'
 import SetAmountBalance from './SetAmountBalance'
-import SetAmountHeader from './SetAmountHeader'
 import styles from './styles.module.css'
 import SubmitButton from './SubmitButton'
 
@@ -66,9 +61,7 @@ interface FormProps {
   recipient: UserDonationRecipientFragment
   article: NonNullable<ArticleDetailPublicQuery['article']>
   submitCallback: (values: SetAmountCallbackValues) => void
-  switchToCurrencyChoice: () => void
   switchToAddCredit: () => void
-  back: () => void
   setTabUrl: (url: string) => void
   setTx: (tx: PayToMutation['payTo']['transaction']) => void
   targetId: string
@@ -80,14 +73,14 @@ interface FormValues {
 }
 
 const AMOUNT_DEFAULT = {
-  [CURRENCY.USDT]: 3.0,
-  [CURRENCY.HKD]: 10,
-  [CURRENCY.LIKE]: 100,
+  [CURRENCY.USDT]: 0,
+  [CURRENCY.HKD]: 0,
+  [CURRENCY.LIKE]: 0,
 }
 
 const AMOUNT_OPTIONS = {
-  [CURRENCY.USDT]: [1.0, 3.0, 5.0, 10.0, 20.0, 35.0],
-  [CURRENCY.HKD]: [5, 10, 30, 50, 100, 300],
+  [CURRENCY.USDT]: [1, 2, 5, 10, 20, 40],
+  [CURRENCY.HKD]: [5, 10, 25, 50, 100, 200],
   [CURRENCY.LIKE]: [50, 100, 150, 500, 1000, 1500],
 }
 
@@ -96,9 +89,7 @@ const SetAmount: React.FC<FormProps> = ({
   recipient,
   article,
   submitCallback,
-  switchToCurrencyChoice,
   switchToAddCredit,
-  back,
   setTabUrl,
   setTx,
   targetId,
@@ -116,31 +107,23 @@ const SetAmount: React.FC<FormProps> = ({
   const { lang } = useContext(LanguageContext)
 
   const { address } = useAccount()
+  const ethAddress = viewer.info.ethAddress
+  const hasEthAddress = !!ethAddress
   const isConnectedAddress =
-    viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
-
-  // TODO: support multiple networks
-  const targetNetork = featureSupportedChains.curation[0]
-  const { isUnsupportedNetwork, switchToTargetNetwork, isSwitchingNetwork } =
-    useTargetNetwork(targetNetork)
+    ethAddress?.toLowerCase() === address?.toLowerCase()
 
   // states
   const [payTo] = useMutation<PayToMutation>(PAY_TO)
 
   const { data: exchangeRateDate, loading: exchangeRateLoading } =
     useQuery<ExchangeRatesQuery>(EXCHANGE_RATES, {
-      variables: {
-        from: currency,
-        to: quoteCurrency,
-      },
+      variables: { from: currency, to: quoteCurrency },
     })
 
   // HKD balance
   const { data, loading, error } = useQuery<WalletBalanceQuery>(
     WALLET_BALANCE,
-    {
-      fetchPolicy: 'network-only',
-    }
+    { fetchPolicy: 'network-only' }
   )
 
   // USDT balance & allowance
@@ -157,7 +140,9 @@ const SetAmount: React.FC<FormProps> = ({
     write: approveWrite,
     error: approveError,
   } = useApproveUSDT()
-  const { data: balanceUSDTData, error: balanceUSDTError } = useBalanceUSDT({})
+  const { data: balanceUSDTData, error: balanceUSDTError } = useBalanceUSDT({
+    address,
+  })
 
   const allowanceUSDT = allowanceData || 0n
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
@@ -165,13 +150,6 @@ const SetAmount: React.FC<FormProps> = ({
   const balanceLike = data?.viewer?.liker.total || 0
   const balance = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
   const maxAmount = isHKD ? PAYMENT_MAXIMUM_PAYTO_AMOUNT.HKD : Infinity
-  const networkError =
-    error ||
-    (isUSDT && !isUnsupportedNetwork
-      ? allowanceError || balanceUSDTError || approveError
-      : undefined)
-      ? WALLET_ERROR_MESSAGES[lang].unknown
-      : ''
 
   // forms
   const {
@@ -230,21 +208,37 @@ const SetAmount: React.FC<FormProps> = ({
     },
   })
 
-  const isBalanceInsufficient = balance < (values.customAmount || values.amount)
+  const value = values.customAmount || values.amount
+  const isBalanceInsufficient = balance < value
+  const isExceededAllowance =
+    isUSDT &&
+    allowanceUSDT > 0n &&
+    parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
+  const hasUSDTNetworkError =
+    isUSDT && (allowanceError || balanceUSDTError || approveError) // TODO: better error handling
+  const networkError =
+    error || hasUSDTNetworkError ? (
+      WALLET_ERROR_MESSAGES[lang].unknown
+    ) : isExceededAllowance ? (
+      <FormattedMessage
+        defaultMessage="Transfer amount exceeds allowance"
+        id="Tgd5id"
+      />
+    ) : (
+      ''
+    )
 
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (
       <section>
         <Spacer size="base" />
-        <Translate
-          zh_hant="付款將由 Stripe 處理，讓你的支持不受地域限制"
-          zh_hans="付款将由 Stripe 处理，让你的支持不受地域限制"
-          en="Stripe will process your payment, so you can support the author wherever you are."
+        <FormattedMessage
+          defaultMessage="Payment will be processed by Stripe, allowing your support to be unrestricted by region."
+          id="TX5UzL"
+          description="src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
         />
       </section>
     ) : null
-
-    const value = values.customAmount || values.amount
 
     const rate = _get(exchangeRateDate, 'exchangeRates.0.rate', 0)
     const convertedTotal = formatAmount(value * rate, 2)
@@ -258,16 +252,6 @@ const SetAmount: React.FC<FormProps> = ({
       </section>
     )
   }
-
-  /**
-   * useEffect Hooks
-   */
-  // go back to previous step if wallet is locked
-  useEffect(() => {
-    if (currency === CURRENCY.USDT && !address) {
-      switchToCurrencyChoice()
-    }
-  }, [address])
 
   // USDT approval
   useEffect(() => {
@@ -286,15 +270,6 @@ const SetAmount: React.FC<FormProps> = ({
    */
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <SetAmountHeader
-        currency={currency}
-        isConnectedAddress={isConnectedAddress}
-        isUnsupportedNetwork={isUnsupportedNetwork}
-        targetChainName={targetNetork.name}
-        switchToCurrencyChoice={switchToCurrencyChoice}
-        switchToTargetNetwork={switchToTargetNetwork}
-      />
-
       <SetAmountBalance
         currency={currency}
         balanceUSDT={balanceUSDT}
@@ -312,7 +287,6 @@ const SetAmount: React.FC<FormProps> = ({
         defaultAmount={AMOUNT_DEFAULT[currency]}
         currentAmount={values.amount}
         name="amount"
-        disabled={isUSDT && !isConnectedAddress}
         error={errors.amount || networkError}
         onBlur={handleBlur}
         onChange={async (e) => {
@@ -327,7 +301,6 @@ const SetAmount: React.FC<FormProps> = ({
         }}
         // custom input
         customAmount={{
-          disabled: isUSDT && !isConnectedAddress,
           min: 0,
           max: maxAmount,
           step: isUSDT ? '0.01' : undefined,
@@ -374,91 +347,55 @@ const SetAmount: React.FC<FormProps> = ({
     recipient,
     isValid,
     isSubmitting,
+    isExceededAllowance,
     isBalanceInsufficient,
-    isConnectedAddress,
-    isUnsupportedNetwork,
-    isSwitchingNetwork,
-    targetChainName: targetNetork.name,
-    allowanceUSDT,
+    switchToAddCredit,
     approving,
     approveConfirming,
     allowanceLoading,
     approveWrite,
-    switchToTargetNetwork,
-    switchToCurrencyChoice,
-    switchToAddCredit,
-    back,
   }
 
   return (
-    <>
-      <Dialog.Header
-        title={<FormattedMessage defaultMessage="Support Author" id="ezYuE2" />}
-      />
+    <section className={styles.container}>
+      {InnerForm}
 
-      <Dialog.Content>
-        {InnerForm}
+      <Spacer size="loose" />
+      <SubmitButton mode="rounded" {...submitButtonProps} />
 
-        {isUSDT && !isConnectedAddress && (
-          <>
-            <p className={styles.reconnectHint}>
-              <Translate id="reconnectHint" />
-              <CopyToClipboard
-                text={viewer.info.ethAddress || ''}
-                successMessage={
-                  <FormattedMessage
-                    defaultMessage="Address copied"
-                    id="+aMAeT"
-                  />
-                }
-              >
-                {({ copyToClipboard }) => (
-                  <Button
-                    spacing={['xtight', 'xtight']}
-                    aria-label={intl.formatMessage({
-                      defaultMessage: 'Copy',
-                      id: '4l6vz1',
-                    })}
-                    onClick={copyToClipboard}
-                  >
-                    <TextIcon
-                      icon={<IconCopy16 color="black" size="xs" />}
-                      color="black"
-                      textPlacement="left"
-                    >
-                      {truncate(viewer.info.ethAddress || '')}
-                    </TextIcon>
-                  </Button>
-                )}
-              </CopyToClipboard>
-            </p>
-          </>
-        )}
-      </Dialog.Content>
-
-      <Dialog.Footer
-        btns={
-          <>
-            <SubmitButton mode="rounded" {...submitButtonProps} />
-            <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
-              color="greyDarker"
-              onClick={back}
+      {isUSDT && hasEthAddress && !isConnectedAddress && (
+        <>
+          <p className={styles.reconnectHint}>
+            <FormattedMessage
+              defaultMessage="Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
+              id="ksIL/T"
             />
-          </>
-        }
-        smUpBtns={
-          <>
-            <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Back" id="cyR7Kh" />}
-              color="greyDarker"
-              onClick={back}
-            />
-            <SubmitButton mode="text" {...submitButtonProps} />
-          </>
-        }
-      />
-    </>
+            <br />
+            <CopyToClipboard
+              text={viewer.info.ethAddress || ''}
+              successMessage={
+                <FormattedMessage defaultMessage="Address copied" id="+aMAeT" />
+              }
+            >
+              {({ copyToClipboard }) => (
+                <Button
+                  spacing={['xtight', 'xtight']}
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Copy',
+                    id: '4l6vz1',
+                  })}
+                  onClick={copyToClipboard}
+                  textColor="green"
+                  textActiveColor="greenDark"
+                >
+                  {truncate(viewer.info.ethAddress || '')}
+                </Button>
+              )}
+            </CopyToClipboard>
+          </p>
+        </>
+      )}
+    </section>
   )
 }
 

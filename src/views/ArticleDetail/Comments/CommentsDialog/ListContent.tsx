@@ -1,4 +1,4 @@
-import { Dialog } from '~/components'
+import { Dialog, Spacer } from '~/components'
 import {
   ArticleDetailPublicQuery,
   ToolbarArticlePrivateFragment,
@@ -42,7 +42,7 @@ const CommentsDialogListContent = ({
     <>
       <Dialog.Content fixedHeight>
         <LatestComments id={id} lock={lock} />
-
+        <Spacer size="baseLoose" />
         <section className={styles.fixedToolbar}>
           <FixedToolbar
             article={article}

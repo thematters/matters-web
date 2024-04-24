@@ -525,6 +525,15 @@ span.container {
   }
 }
 
+.borderActiveGrey {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-grey);
+    }
+  }
+}
+
 .borderActiveGreenDark {
   &:hover,
   &:focus {

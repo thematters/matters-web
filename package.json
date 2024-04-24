@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "4.28.7",
+  "version": "4.29.1",
   "description": "codebase of Matters' website",
   "author": "Matters <hi@matters.town>",
   "engines": {
@@ -45,7 +45,7 @@
     "@artsy/fresnel": "^6.1.0",
     "@ensdomains/content-hash": "^2.5.7",
     "@matters/apollo-upload-client": "^11.1.0",
-    "@matters/matters-editor": "^0.2.2",
+    "@matters/matters-editor": "^0.2.3-alpha.4",
     "@next/bundle-analyzer": "^13.4.9",
     "@reach/alert": "^0.18.0",
     "@reach/dialog": "^0.18.0",
@@ -71,7 +71,6 @@
     "classnames": "^2.3.2",
     "clipboard-polyfill": "^4.0.2",
     "colorthief": "^2.4.0",
-    "cross-env": "^7.0.3",
     "d3-array": "^2.12.1",
     "d3-axis": "^2.1.0",
     "d3-ease": "^2.0.0",
@@ -118,12 +117,11 @@
     "react-spring": "^9.7.2",
     "react-stickynode": "^4.1.0",
     "react-use-gesture": "^9.1.3",
-    "react-waypoint": "^10.3.0",
     "url-loader": "^4.1.1",
     "use-debounce": "^9.0.4",
     "validator": "^13.11.0",
-    "viem": "^1.2.12",
-    "wagmi": "^1.3.8"
+    "viem": "^1.21.4",
+    "wagmi": "^1.4.13"
   },
   "devDependencies": {
     "@apollo/react-testing": "^3.1.3",

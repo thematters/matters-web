@@ -10,6 +10,7 @@ export * from './RemoveSocialLoginDialog'
 export * from './RemoveWalletLoginDialog'
 export * from './SetEmailDialog'
 export * from './SetPasswordDialog'
+export * from './SetPaymentPasswordDialog'
 export * from './SetUserNameDialog'
 
 // Article

@@ -13,7 +13,6 @@ import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
-  DonationDialog,
   IconMoney24,
   LanguageContext,
   TextIcon,
@@ -24,6 +23,8 @@ import {
   ArticleDetailPublicQuery,
   DonationButtonArticleFragment,
 } from '~/gql/graphql'
+
+import { SupportDialog } from '../../Support/SupportDialog'
 
 export type DonationButtonProps = {
   article: DonationButtonArticleFragment
@@ -37,16 +38,14 @@ const fragments = {
   article: gql`
     fragment DonationButtonArticle on Article {
       id
-      donationsToolbar: transactionsReceivedBy(
-        input: { first: 0, purpose: donation }
-      ) {
+      donationsToolbar: donations(input: { first: 0 }) {
         totalCount
       }
       author {
         ...UserDonationRecipient
       }
     }
-    ${DonationDialog.fragments.recipient}
+    ${SupportDialog.fragments.recipient}
   `,
 }
 
@@ -75,11 +74,7 @@ const DonationButton = ({
       : 0
 
   return (
-    <DonationDialog
-      recipient={article.author}
-      targetId={article.id}
-      article={articleDetail}
-    >
+    <SupportDialog article={articleDetail}>
       {({ openDialog }) => (
         <Button
           spacing={['xtight', 'xtight']}
@@ -123,7 +118,7 @@ const DonationButton = ({
           </TextIcon>
         </Button>
       )}
-    </DonationDialog>
+    </SupportDialog>
   )
 }
 

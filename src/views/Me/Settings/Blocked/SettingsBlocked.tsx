@@ -85,7 +85,7 @@ const SettingsBlocked = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List hasBorder>
         {edges.map(({ node, cursor }) => (
-          <List.Item key={cursor}>
+          <List.Item key={node.id}>
             <UserDigest.Rich
               user={node}
               spacing={['base', 0]}

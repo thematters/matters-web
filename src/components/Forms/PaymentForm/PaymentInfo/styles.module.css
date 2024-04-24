@@ -1,24 +1,27 @@
 .info {
-  margin-bottom: var(--spacing-base);
   text-align: center;
 }
 
 .to {
   margin-bottom: var(--spacing-base);
-  font-size: var(--font-size-md-s);
+  font-size: var(--font-size-sm);
 }
 
 .recipient {
   margin-top: var(--spacing-x-tight);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
   color: var(--color-black);
 }
 
 .amount {
-  margin-top: var(--spacing-loose);
-  font-size: var(--font-size-xl);
-  line-height: 1;
+  margin: var(--spacing-loose) 0;
+  font-size: var(--font-size-xxxl-s);
+  font-weight: var(--font-weight-semibold);
+  line-height: 3rem;
 }
 
 .address {
   margin-top: var(--spacing-x-tight);
+  margin-bottom: var(--spacing-loose);
 }

@@ -1,5 +1,6 @@
 :root {
   --color-matters-gold-lighter: #faf7f0;
+  --color-matters-gold-light: #fff4dc;
   --color-matters-gold: #c0a46b;
   --color-matters-green: #0d6763;
   --color-matters-green-dark: #0a524f;
@@ -14,6 +15,7 @@
   --color-white-light: #fff9;
   --color-red-dark: #a04a34;
   --color-red: #c85c41;
+  --color-red-light: #e95656;
   --color-red-lighter: #fae7e3;
   --color-green-lighter: #f2faf7;
   --color-yellow-lighter: #faf7f0;
@@ -29,7 +31,8 @@
   --color-line-grey: rgb(0 0 0 / 16%);
   --color-line-grey-dark: rgb(0 0 0 / 24%);
   --color-line-matters-green-light: #0d676366;
-  --color-line-matters-gold-light: #c0a46b66;
+  --color-line-matters-gold-light: rgb(192 164 107 / 40%);
+  --color-line-matters-golod-lighter: rgb(192 164 107 / 20%);
 
   /* background */
   --color-bg-black: rgb(0 0 0 / 70%);

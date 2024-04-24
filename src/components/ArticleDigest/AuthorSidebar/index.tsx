@@ -15,6 +15,7 @@ export type ArticleDigestAuthorSidebarProps = {
   collectionId?: string
   titleTextSize?: ArticleDigestTitleTextSize
   titleColor?: 'greyDarker' | 'black'
+  showCover?: boolean
   imageSize?: 'sm' | 'md'
 }
 
@@ -40,13 +41,14 @@ export const ArticleDigestAuthorSidebar = ({
   titleTextSize = 'mdS',
   titleColor = 'greyDarker',
   imageSize = 'sm',
+  showCover = true,
 }: ArticleDigestAuthorSidebarProps) => {
   const { articleState: state } = article
   const isBanned = state === 'banned'
   const cover = !isBanned ? article.cover : null
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles.hasCover]: !!cover,
+    [styles.hasCover]: showCover && !!cover,
     [styles[`imageSize${capitalizeFirstLetter(imageSize)}`]]: !!cover,
   })
   const path = toPath({
@@ -77,7 +79,7 @@ export const ArticleDigestAuthorSidebar = ({
         />
       </header>
 
-      {cover && (
+      {showCover && cover && (
         <LinkWrapper {...path} disabled={isBanned}>
           <aside className={styles.cover}>
             <ResponsiveImage

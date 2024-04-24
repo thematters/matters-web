@@ -118,4 +118,8 @@
   &.red {
     color: var(--color-red);
   }
+
+  &.redLight {
+    color: var(--color-red-light);
+  }
 }

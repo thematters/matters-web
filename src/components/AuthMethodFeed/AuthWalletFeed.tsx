@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import classNames from 'classnames'
+import React, { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount, useConnect } from 'wagmi'
 
-import { EXTERNAL_LINKS } from '~/common/enums'
+import { EXTERNAL_LINKS, GUIDE_LINKS } from '~/common/enums'
 import { PATHS } from '~/common/enums'
 import { analytics, WalletType } from '~/common/utils'
 import {
   IconMetamask22,
   IconSpinner22,
   IconWalletConnect22,
+  LanguageContext,
 } from '~/components'
 
 import styles from './styles.module.css'
@@ -19,6 +21,7 @@ export interface Props {
   back?: () => void
   hasWalletExist?: boolean
   hasUnavailable?: boolean
+  isInSupport?: boolean
 }
 
 export const AuthWalletFeed: React.FC<Props> = ({
@@ -26,8 +29,10 @@ export const AuthWalletFeed: React.FC<Props> = ({
   hasWalletExist,
   hasUnavailable,
   closeDialog,
+  isInSupport,
   back,
 }) => {
+  const { lang } = useContext(LanguageContext)
   const { connectors, connect, pendingConnector } = useConnect()
   const { address: account, isConnecting } = useAccount()
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
@@ -48,12 +53,17 @@ export const AuthWalletFeed: React.FC<Props> = ({
     submitCallback(walletType)
   }, [account])
 
+  const itemClasses = classNames({
+    [styles.item]: true,
+    [styles.supportItem]: isInSupport,
+  })
+
   return (
     <>
       <ul className={styles.feed}>
         {injectedConnector?.ready ? (
           <li
-            className={styles.item}
+            className={itemClasses}
             onClick={() => {
               analytics.trackEvent('click_button', {
                 type: 'connectorMetaMask',
@@ -75,7 +85,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
           </li>
         ) : (
           <a href={EXTERNAL_LINKS.METAMASK} target="_blank">
-            <li className={styles.item} role="button">
+            <li className={itemClasses} role="button">
               <span className={styles.icon}>
                 <IconMetamask22 size="mdM" />
               </span>
@@ -84,7 +94,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
           </a>
         )}
         <li
-          className={styles.item}
+          className={itemClasses}
           onClick={() => {
             analytics.trackEvent('click_button', {
               type: 'connectorWalletConnect',
@@ -136,13 +146,24 @@ export const AuthWalletFeed: React.FC<Props> = ({
           </section>
         )}
         <section className={styles.title}>
-          <a href={PATHS.GUIDE} target="_blank">
-            <FormattedMessage
-              defaultMessage="What is a digital wallet?"
-              id="V5OMr4"
-              description="src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
-            />
-          </a>
+          {!isInSupport && (
+            <a href={PATHS.GUIDE} target="_blank">
+              <FormattedMessage
+                defaultMessage="What is a digital wallet?"
+                id="V5OMr4"
+                description="src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
+              />
+            </a>
+          )}
+          {isInSupport && (
+            <a href={GUIDE_LINKS.payment[lang]} target="_blank">
+              <FormattedMessage
+                defaultMessage="I don't have a wallet yet"
+                id="aCTmEO"
+                description="src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
+              />
+            </a>
+          )}
         </section>
       </section>
     </>

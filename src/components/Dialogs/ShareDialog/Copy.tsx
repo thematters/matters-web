@@ -1,13 +1,14 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconLiknk } from '@/public/static/icons/24px/link.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   CopyToClipboard,
-  IconLink16,
   TextIcon,
   ViewerContext,
+  withIcon,
 } from '~/components'
 
 import styles from './styles.module.css'
@@ -41,7 +42,12 @@ const Copy = ({ link }: { link: string }) => {
               copyToClipboard()
             }}
           >
-            <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
+            <TextIcon
+              icon={withIcon(IconLiknk)({ size: 'md' })}
+              spacing="base"
+              size="md"
+              color="black"
+            >
               <div className={styles.text}>
                 <span>
                   <FormattedMessage defaultMessage="Copy Link" id="u5aHb4" />

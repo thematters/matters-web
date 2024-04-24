@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import IMAGE_PAYMENT_FAILURE from '@/public/static/images/payment-failure.png'
 import { Dialog, Translate } from '~/components'
 
@@ -10,7 +12,11 @@ interface Props {
 const PayToFallback: React.FC<Props> = ({ closeDialog }) => {
   return (
     <>
-      <Dialog.Header title={'failureDonation'} />
+      <Dialog.Header
+        title={
+          <FormattedMessage defaultMessage="Failed to Donate" id="h74kLA" />
+        }
+      />
       <Dialog.Content>
         <section className={styles.fallbackContent}>
           <p>

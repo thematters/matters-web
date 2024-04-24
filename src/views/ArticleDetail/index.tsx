@@ -2,14 +2,17 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
-import { Waypoint } from 'react-waypoint'
+import { FormattedMessage } from 'react-intl'
 
 import { OPEN_COMMENT_DETAIL_DIALOG } from '~/common/enums'
-import { normalizeTag, toGlobalId, toPath } from '~/common/utils'
+import {
+  isMediaHashPossiblyValid,
+  normalizeTag,
+  toGlobalId,
+  toPath,
+} from '~/common/utils'
 import {
   BackToHomeButton,
-  Drawer,
   EmptyLayout,
   Error,
   Head,
@@ -24,6 +27,7 @@ import {
   toast,
   Translate,
   useFeatures,
+  useIntersectionObserver,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -37,6 +41,7 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import { CommentDrawer, CommentDrawerStep } from './CommentDrawer'
 import { CommentsDialog } from './Comments/CommentsDialog'
 import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
 import Content from './Content'
@@ -54,13 +59,14 @@ import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
 import StickyTopBanner from './StickyTopBanner'
 import styles from './styles.module.css'
+import { SupportDrawer } from './Support/SupportDrawer'
 import TagList from './TagList'
 import DesktopToolbar from './Toolbar/DesktopToolbar'
 import FixedToolbar from './Toolbar/FixedToolbar'
 import FloatToolbar from './Toolbar/FloatToolbar'
 import TranslationToast from './TranslationToast'
 
-const DynamicSupportWidget = dynamic(() => import('./SupportWidget'), {
+const DynamicSupportWidget = dynamic(() => import('./Support/SupportWidget'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
 })
@@ -74,14 +80,6 @@ const DynamicComments = dynamic(() => import('./Comments'), {
   loading: () => <CommentsPlaceholder />,
 })
 
-const DynamicCommentsDetail = dynamic(
-  () => import('./Comments/CommentDetail'),
-  {
-    ssr: false,
-    loading: () => <CommentsPlaceholder />,
-  }
-)
-
 const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
@@ -91,21 +89,6 @@ const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
 })
-
-type DrawerStep = 'commentList' | 'commentDetail'
-
-const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
-  // is there a better way to detect valid?
-  // a valid mediaHash, should have length 49 or 59 chars
-  // 'zdpuAsCXC87Tm1fFvAbysV7HVt7J8aV6chaTKeJZ5ryLALK3Z'
-  // 'bafyreief6bryqsa4byabnmx222jvo4khlodvpypw27af43frecbumn6ocq'
-
-  return (
-    mediaHash &&
-    ((mediaHash?.length === 49 && mediaHash.startsWith('zdpu')) ||
-      (mediaHash?.length === 59 && mediaHash.startsWith('bafy')))
-  )
-}
 
 const BaseArticleDetail = ({
   article,
@@ -131,7 +114,6 @@ const BaseArticleDetail = ({
   const { getQuery, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const viewer = useContext(ViewerContext)
-  const intl = useIntl()
 
   const features = useFeatures()
   const [showFloatToolbar, setShowFloatToolbar] = useState(true)
@@ -140,15 +122,33 @@ const BaseArticleDetail = ({
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
 
-  const [drawerStep, setDrawerStep] = useState<DrawerStep>(
+  const {
+    isIntersecting: isIntersectingDesktopToolbar,
+    ref: desktopToolbarRef,
+  } = useIntersectionObserver()
+
+  useEffect(() => {
+    setShowFloatToolbar(!isIntersectingDesktopToolbar)
+  }, [isIntersectingDesktopToolbar])
+
+  const { isIntersecting: isIntersectingComments, ref: commentsRef } =
+    useIntersectionObserver()
+
+  useEffect(() => {
+    setShowCommentToolbar(isIntersectingComments)
+  }, [isIntersectingComments])
+
+  const [commentDrawerStep, setCommentDrawerStep] = useState<CommentDrawerStep>(
     parentId !== '' ? 'commentDetail' : 'commentList'
   )
-  const isCommentDetail = drawerStep === 'commentDetail'
-  const isCommentList = drawerStep === 'commentList'
-  const [isOpen, setIsOpen] = useState(false)
-  const [autoOpen] = useState(true)
-  const toggleDrawer = () => {
-    setIsOpen((prevState) => !prevState)
+  const [isOpenComment, setIsOpenComment] = useState(false)
+  const toggleCommentDrawer = () => {
+    setIsOpenComment((prevState) => !prevState)
+  }
+
+  const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
+  const toggleDonationDrawer = () => {
+    setIsOpenDonationDrawer((prevState) => !prevState)
   }
 
   const authorId = article.author?.id
@@ -234,7 +234,7 @@ const BaseArticleDetail = ({
       return
     }
     setTimeout(() => {
-      setIsOpen(true)
+      setIsOpenComment(true)
       window.dispatchEvent(new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG))
     }, 500)
   }, [parentId])
@@ -253,7 +253,6 @@ const BaseArticleDetail = ({
     translated && translatedContent ? translatedContent : originalContent
   const keywords = (article.tags || []).map(({ content: c }) => normalizeTag(c))
   const lock = article.state !== 'active'
-  const isShortWork = summary.length + content.length < 200
 
   return (
     <Layout.Main
@@ -297,30 +296,20 @@ const BaseArticleDetail = ({
       <StickyTopBanner type="inactive" article={article} />
 
       <Media greaterThan="sm">
-        <Drawer
-          isOpen={isOpen}
-          onClose={toggleDrawer}
-          backTo={
-            isCommentDetail ? () => setDrawerStep('commentList') : undefined
-          }
-          title={
-            isCommentList
-              ? intl.formatMessage({
-                  defaultMessage: 'Comment',
-                  description: 'src/views/ArticleDetail/index.tsx',
-                  id: 'OsX3KM',
-                })
-              : intl.formatMessage({
-                  defaultMessage: 'Comment Details',
-                  id: '4OMGUj',
-                })
-          }
-        >
-          {isCommentList && (
-            <DynamicComments id={article.id} lock={!canReadFullContent} />
-          )}
-          {isCommentDetail && <DynamicCommentsDetail />}
-        </Drawer>
+        <CommentDrawer
+          isOpen={isOpenComment}
+          onClose={toggleCommentDrawer}
+          step={commentDrawerStep}
+          id={article.id}
+          lock={!canReadFullContent}
+          switchToCommentList={() => setCommentDrawerStep('commentList')}
+        />
+
+        <SupportDrawer
+          isOpen={isOpenDonationDrawer}
+          onClose={toggleDonationDrawer}
+          article={article}
+        />
       </Media>
 
       <section className={styles.content}>
@@ -365,41 +354,25 @@ const BaseArticleDetail = ({
         <License license={article.license} />
 
         {features.payment && (
-          <DynamicSupportWidget article={article} disable={lock} />
+          <DynamicSupportWidget
+            article={article}
+            disable={lock}
+            toggleDonationDrawer={toggleDonationDrawer}
+          />
         )}
         <Media greaterThanOrEqual="lg">
-          <Waypoint
-            onEnter={() => {
-              setShowFloatToolbar(false)
-            }}
-            onLeave={() => {
-              setShowFloatToolbar(true)
-            }}
-          >
-            <div>
-              <DesktopToolbar
-                article={article}
-                articleDetails={article}
-                translated={translated}
-                translatedLanguage={translatedLanguage}
-                privateFetched={privateFetched}
-                hasIPFS
-                hasReport
-                lock={lock}
-                toggleDrawer={toggleDrawer}
-              />
-            </div>
-          </Waypoint>
-        </Media>
-
-        <Media greaterThan="sm">
-          <Waypoint
-            onEnter={() => {
-              if (article.canComment && autoOpen && !isShortWork) {
-                setTimeout(() => setIsOpen(true), 500)
-              }
-            }}
-          />
+          <div ref={desktopToolbarRef}>
+            <DesktopToolbar
+              article={article}
+              articleDetails={article}
+              translated={translated}
+              translatedLanguage={translatedLanguage}
+              privateFetched={privateFetched}
+              hasReport
+              lock={lock}
+              toggleDrawer={toggleCommentDrawer}
+            />
+          </div>
         </Media>
 
         {collectionCount > 0 && (
@@ -414,18 +387,11 @@ const BaseArticleDetail = ({
         <Media at="sm">
           <AuthorSidebar article={article} />
 
-          <Waypoint
-            onEnter={() => {
-              setShowCommentToolbar(true)
-            }}
-            onLeave={() => setShowCommentToolbar(false)}
-          >
-            {article.commentCount > 0 && (
-              <section className={styles.smUpCommentBlock}>
-                <DynamicComments id={article.id} lock={!canReadFullContent} />
-              </section>
-            )}
-          </Waypoint>
+          {article.comments.totalCount > 0 && (
+            <section className={styles.smUpCommentBlock} ref={commentsRef}>
+              <DynamicComments id={article.id} lock={!canReadFullContent} />
+            </section>
+          )}
         </Media>
       </section>
 
@@ -449,7 +415,7 @@ const BaseArticleDetail = ({
               translatedLanguage={translatedLanguage}
               privateFetched={privateFetched}
               lock={lock}
-              showCommentToolbar={showCommentToolbar}
+              showCommentToolbar={showCommentToolbar && article.canComment}
               openCommentsDialog={
                 article.commentCount > 0 ? openCommentsDialog : undefined
               }
@@ -466,7 +432,8 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
-          toggleDrawer={toggleDrawer}
+          toggleCommentDrawer={toggleCommentDrawer}
+          toggleDonationDrawer={toggleDonationDrawer}
         />
       </Media>
 
@@ -477,17 +444,8 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
-          toggleDrawer={toggleDrawer}
-        />
-      </Media>
-
-      <Media greaterThan="sm">
-        <Waypoint
-          onEnter={() => {
-            if (article.canComment && autoOpen && isShortWork) {
-              setTimeout(() => setIsOpen(true), 500)
-            }
-          }}
+          toggleCommentDrawer={toggleCommentDrawer}
+          toggleDonationDrawer={toggleDonationDrawer}
         />
       </Media>
     </Layout.Main>

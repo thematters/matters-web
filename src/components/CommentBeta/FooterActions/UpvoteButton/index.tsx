@@ -91,7 +91,7 @@ const UpvoteButton = ({
           id: 'z3uIHQ',
         })}
       >
-        <TextIcon icon={<IconLikeFill16 />}>
+        <TextIcon icon={<IconLikeFill16 color="redLight" />} color="black">
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
         </TextIcon>
       </Button>

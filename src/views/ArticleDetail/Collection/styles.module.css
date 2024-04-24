@@ -5,7 +5,7 @@
     @mixin flex-center-space-between;
 
     padding: var(--spacing-x-tight) 0;
-    margin-bottom: var(--spacing-x-tight);
+    margin-bottom: var(--spacing-base-loose);
   }
 
   & :global(.list-item:last-child) {

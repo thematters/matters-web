@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useEffect, useState } from 'react'
 
-import { ButtonProps, ReCaptchaProvider, toast } from '~/components'
+import { ButtonProps, ReCaptchaProvider } from '~/components'
 import {
   ArticleDetailPublicQuery,
   ToolbarArticlePrivateFragment,
@@ -20,7 +20,8 @@ export type FloatToolbarProps = {
   privateFetched: boolean
   lock: boolean
   show: boolean
-  toggleDrawer: () => void
+  toggleCommentDrawer: () => void
+  toggleDonationDrawer: () => void
 }
 
 const fragments = {
@@ -55,7 +56,8 @@ const FloatToolbar = ({
   articleDetails,
   privateFetched,
   lock,
-  toggleDrawer,
+  toggleCommentDrawer,
+  toggleDonationDrawer,
 }: FloatToolbarProps) => {
   const [mounted, setMounted] = useState(false)
   const [displayContainer, setDisplayContainer] = useState(false)
@@ -112,7 +114,7 @@ const FloatToolbar = ({
             article={article}
             disabled={!article.canComment}
             textIconSpacing="basexxtight"
-            onClick={toggleDrawer}
+            onClick={toggleCommentDrawer}
             {...buttonProps}
           />
           <span className={styles.divider} />
@@ -121,11 +123,7 @@ const FloatToolbar = ({
             articleDetail={articleDetails}
             disabled={lock}
             textIconSpacing="basexxtight"
-            onClick={() => {
-              toast.success({
-                message: '功能即將開放，敬請期待！',
-              })
-            }}
+            onClick={toggleDonationDrawer}
             {...buttonProps}
           />
         </section>

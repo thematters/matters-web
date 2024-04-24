@@ -2,7 +2,6 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { EditorContent, useCommentEditor } from '@matters/matters-editor'
 import { useIntl } from 'react-intl'
 
-import { BubbleMenu } from '../Article/BubbleMenu'
 import { makeMentionSuggestion } from '../Article/extensions'
 import styles from './styles.module.css'
 
@@ -36,8 +35,6 @@ const CommentEditor: React.FC<Props> = ({ content, update, placeholder }) => {
       className={styles.commentEditor}
       id="editor" // anchor for mention plugin
     >
-      {editor && <BubbleMenu editor={editor} isCommentEditor />}
-
       <EditorContent editor={editor} />
     </div>
   )

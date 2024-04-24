@@ -141,7 +141,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
         <List>
           {articleEdges &&
             articleEdges.map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
+              <List.Item key={node.id}>
                 <ArticleDigestFeed
                   article={node}
                   collectionId={collection.id}

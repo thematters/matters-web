@@ -1,3 +1,5 @@
+// TODO: Will delete this file after the new article support is ready
+
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
@@ -100,6 +102,7 @@ const DonationDialogContent = ({
   }
 
   const closeDialog = () => {
+    forward('currencyChoice')
     setCurrency(CURRENCY.HKD)
     baseCloseDialog()
   }
@@ -169,14 +172,8 @@ const DonationDialogContent = ({
           recipient={recipient}
           article={article}
           submitCallback={setAmountCallback}
-          switchToCurrencyChoice={() => {
-            forward('currencyChoice')
-          }}
           switchToAddCredit={() => {
             forward('addCredit')
-          }}
-          back={() => {
-            forward('currencyChoice')
           }}
           setTabUrl={setTabUrl}
           setTx={setTx}
@@ -192,8 +189,6 @@ const DonationDialogContent = ({
           recipient={recipient}
           switchToSetAmount={() => forward('setAmount')}
           submitCallback={() => forward('processing')}
-          switchToResetPassword={() => forward('resetPassword')}
-          switchToCurrencyChoice={() => forward('currencyChoice')}
           targetId={targetId}
           openTabCallback={setAmountOpenTabCallback}
           tabUrl={tabUrl}
@@ -207,6 +202,7 @@ const DonationDialogContent = ({
           currency={currency}
           recipient={recipient}
           closeDialog={closeDialog}
+          prevStep={() => forward('confirm')}
           nextStep={() => {
             closeDialog()
           }}
@@ -224,12 +220,19 @@ const DonationDialogContent = ({
           callback={completeCallback}
           recipient={recipient}
           targetId={targetId}
+          amount={amount}
+          currency={currency}
+          switchToBindWallet={() => {}}
         />
       )}
 
       {isSetPaymentPassword && (
         <DynamicPaymentSetPasswordForm
           submitCallback={() => forward('confirm')}
+          switchToSetAmount={() => forward('setAmount')}
+          recipient={recipient}
+          amount={amount}
+          currency={currency}
         />
       )}
 

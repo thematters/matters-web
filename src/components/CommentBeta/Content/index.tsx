@@ -61,9 +61,22 @@ const Content = ({
   const contentClasses = classNames({
     [styles.content]: true,
     [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
+    [styles.inactive]: state === 'archived' || state === 'banned',
   })
 
-  if (state === 'collapsed' || state === 'banned' || isBlocked) {
+  if (state === 'banned') {
+    return (
+      <p className={contentClasses}>
+        <FormattedMessage
+          defaultMessage="The comment has been forcibly hidden"
+          description="src/components/CommentBeta/Content/index.tsx"
+          id="tnWWrj"
+        />
+      </p>
+    )
+  }
+
+  if (state === 'collapsed' || isBlocked) {
     return (
       <Collapsed
         content={content}
@@ -104,7 +117,7 @@ const Content = ({
 
   if (state === 'archived') {
     return (
-      <p className={`${contentClasses} inactive`}>
+      <p className={contentClasses}>
         <FormattedMessage
           defaultMessage="This {type} has been deleted by the author"
           id="fDdcbi"

@@ -14,6 +14,17 @@
     border-radius: 0.5rem;
     transition-property: border-color;
 
+    &.supportItem {
+      background-color: var(--color-grey-lighter);
+      border-color: var(--color-grey-lighter);
+      border-radius: 6.1875rem;
+
+      &:hover,
+      &:focus {
+        border-color: var(--color-grey-light);
+      }
+    }
+
     &:hover,
     &:focus {
       border-color: var(--color-grey);

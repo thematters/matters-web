@@ -1,14 +1,8 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { useDisconnect } from 'wagmi'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import {
-  BindEmailHintDialog,
-  Dialog,
-  Translate,
-  ViewerContext,
-} from '~/components'
+import { BindEmailHintDialog, Dialog, ViewerContext } from '~/components'
 import type { DialogTextButtonProps } from '~/components/Dialog/Buttons'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
@@ -20,21 +14,14 @@ type SubmitButtonProps = {
 
   isValid: boolean
   isSubmitting: boolean
+  isExceededAllowance: boolean
   isBalanceInsufficient: boolean
-  isConnectedAddress: boolean
-  isUnsupportedNetwork: boolean
-  isSwitchingNetwork: boolean
-  targetChainName: string
-  allowanceUSDT: bigint
+  switchToAddCredit: () => void
   approving: boolean
   approveConfirming: boolean
   allowanceLoading: boolean
 
   approveWrite?: () => void
-  switchToTargetNetwork: () => void
-  switchToCurrencyChoice: () => void
-  switchToAddCredit: () => void
-  back: () => void
 }
 
 const WrapperButton: React.FC<
@@ -43,7 +30,7 @@ const WrapperButton: React.FC<
   if (mode === 'text') {
     return <Dialog.TextButton {...restProps} />
   } else {
-    return <Dialog.RoundedButton {...restProps} />
+    return <Dialog.RoundedButton {...restProps} color="white" bgColor="green" />
   }
 }
 
@@ -123,63 +110,21 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
   formId,
   isValid,
   isSubmitting,
+  isExceededAllowance,
   isBalanceInsufficient,
-  isConnectedAddress,
-  isUnsupportedNetwork,
-  isSwitchingNetwork,
-  targetChainName,
-  allowanceUSDT,
   approving,
   approveConfirming,
   allowanceLoading,
   approveWrite,
-  switchToTargetNetwork,
 }) => {
-  const { disconnect } = useDisconnect()
-
-  if (!isConnectedAddress) {
+  if (isExceededAllowance) {
     return (
       <WrapperButton
         mode={mode}
         text={
-          <Translate
-            zh_hant="重新連接錢包"
-            zh_hans="重新连接钱包"
-            en="Reconnect Wallet"
-          />
-        }
-        onClick={() => {
-          disconnect()
-        }}
-      />
-    )
-  }
-
-  if (isUnsupportedNetwork) {
-    return (
-      <WrapperButton
-        mode={mode}
-        text={
-          <>
-            <Translate zh_hant="切換到 " zh_hans="切换到 " en="Switch to " />
-            {targetChainName}
-          </>
-        }
-        onClick={switchToTargetNetwork}
-        loading={isSwitchingNetwork}
-      />
-    )
-  }
-
-  if (!isUnsupportedNetwork && allowanceUSDT <= 0n) {
-    return (
-      <WrapperButton
-        mode={mode}
-        text={
-          <Translate
-            zh_hant="首次需確認授權後繼續"
-            zh_hans="首次需确认授权后继续"
-            en="Approve to continue"
+          <FormattedMessage
+            defaultMessage="Reapprove to continue"
+            id="3lMsOU"
           />
         }
         loading={approving || approveConfirming || allowanceLoading}
@@ -192,20 +137,16 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
     )
   }
 
-  if (!isUnsupportedNetwork && allowanceUSDT > 0n) {
-    return (
-      <WrapperButton
-        mode={mode}
-        text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
-        type="submit"
-        form={formId}
-        disabled={!isValid || isSubmitting || isBalanceInsufficient}
-        loading={isSubmitting}
-      />
-    )
-  }
-
-  return null
+  return (
+    <WrapperButton
+      mode={mode}
+      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
+      type="submit"
+      form={formId}
+      disabled={!isValid || isSubmitting || isBalanceInsufficient}
+      loading={isSubmitting}
+    />
+  )
 }
 
 const SubmitButton: React.FC<SubmitButtonProps> = (props) => {

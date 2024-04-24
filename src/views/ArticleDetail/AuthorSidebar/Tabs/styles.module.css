@@ -3,12 +3,12 @@
 
   display: flex;
   gap: var(--spacing-base);
-  padding: var(--spacing-base) 0 0;
+  padding: var(--spacing-x-loose) 0 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0 0;
+    padding: var(--spacing-x-loose) 0 0;
   }
 
   & .tabItem {

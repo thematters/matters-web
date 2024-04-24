@@ -37,6 +37,11 @@ import {
   useMutation,
   useRoute,
 } from '~/components'
+import { GENERATE_SIGNING_MESSAGE } from '~/components/GQL/mutations/generateSigningMessage'
+import {
+  ADD_WALLET_LOGIN,
+  WALLET_LOGIN,
+} from '~/components/GQL/mutations/walletLogin'
 import {
   AddWalletLoginMutation,
   AuthResultType,
@@ -44,7 +49,6 @@ import {
   WalletLoginMutation,
 } from '~/gql/graphql'
 
-import { ADD_WALLET_LOGIN, GENERATE_SIGNING_MESSAGE, WALLET_LOGIN } from './gql'
 import styles from './styles.module.css'
 
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'

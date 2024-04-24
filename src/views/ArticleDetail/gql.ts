@@ -7,7 +7,7 @@ import { FromAuthor } from './AuthorSidebar/FromAuthor'
 import { RelatedArticles } from './AuthorSidebar/RelatedArticles'
 import MetaInfo from './MetaInfo'
 import StickyTopBanner from './StickyTopBanner'
-import { fragments as supportWidgetFragments } from './SupportWidget/gql'
+import { fragments as supportWidgetFragments } from './Support/SupportWidget/gql'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import { fragments as circleWallFragments } from './Wall/Circle/gql'
@@ -44,7 +44,9 @@ const articlePublicFragment = gql`
       }
     }
     canComment
-    commentCount
+    comments(input: { filter: { state: active, parentComment: null } }) {
+      totalCount
+    }
     license
     sensitiveByAuthor
     sensitiveByAdmin

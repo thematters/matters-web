@@ -146,6 +146,17 @@ const Socials = () => {
     }
   }, [])
 
+  // FIXME: For canary release purpose,
+  // we don't allow user to remove facebook login
+  // unless the user has least two login methods
+  const canEmailLogin = !!viewer.info.email
+  const canWalletLogin = !!viewer.info.ethAddress
+  const nonFacebookSocials = viewer.info.socialAccounts.filter(
+    (s) => s.type !== SocialAccountType.Facebook
+  )
+  const canRemoveNonFacebookLogins =
+    +canEmailLogin + +canWalletLogin + nonFacebookSocials.length > 1
+
   return (
     <>
       {/* Google */}
@@ -160,11 +171,15 @@ const Socials = () => {
               }
               rightText={googleId}
               rightIcon={
-                googleId ? (
+                googleId && canRemoveNonFacebookLogins ? (
                   <IconClose20 size="mdS" color="greyDarker" />
                 ) : undefined
               }
-              onClick={googleId ? () => openDialog() : undefined}
+              onClick={
+                googleId && canRemoveNonFacebookLogins
+                  ? () => openDialog()
+                  : undefined
+              }
               right={
                 googleId ? undefined : (
                   <>
@@ -199,11 +214,15 @@ const Socials = () => {
               }
               rightText={twitterId ? `@${twitterId}` : undefined}
               rightIcon={
-                twitterId ? (
+                twitterId && canRemoveNonFacebookLogins ? (
                   <IconClose20 size="mdS" color="greyDarker" />
                 ) : undefined
               }
-              onClick={twitterId ? () => openDialog() : undefined}
+              onClick={
+                twitterId && canRemoveNonFacebookLogins
+                  ? () => openDialog()
+                  : undefined
+              }
               right={
                 twitterId ? undefined : (
                   <>

@@ -44,15 +44,15 @@ export const FromAuthor = ({ article }: FromAuthorProps) => {
 
   return (
     <section>
-      <List borderPosition="top">
+      <List borderPosition="bottom" hasLastBorder={false}>
         {latestWorks.map((work, i) => (
           <List.Item key={`FromAuthor` + i}>
             {work.__typename === 'Article' && (
               <ArticleDigestAuthorSidebar
                 article={work}
                 titleColor="black"
-                titleTextSize="md"
-                imageSize="md"
+                titleTextSize="sm"
+                showCover={false}
               />
             )}
             {work.__typename === 'Collection' && (
