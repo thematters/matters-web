@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react'
 
+import { CLOSE_OTHER_DRAWERS } from '~/common/enums'
+
+import { useEventListener } from '../Hook'
 import { BaseDrawer } from './BaseDrawer'
 import { TextButton } from './Buttons'
 import Content from './Content'
@@ -33,6 +36,19 @@ export const Drawer: React.ComponentType<
 }) => {
   const [mounted, setMounted] = useState(isOpen)
   const [showDrawer, setShowDrawer] = useState(false)
+  const id = Math.random().toString(36)
+
+  useEventListener(CLOSE_OTHER_DRAWERS, (detail: { [key: string]: any }) => {
+    if (!isOpen) {
+      return
+    }
+
+    if (detail.id === id) {
+      return
+    }
+
+    onClose()
+  })
 
   useEffect(() => {
     if (isOpen) {
@@ -44,6 +60,17 @@ export const Drawer: React.ComponentType<
       // setTimeout(() => setMounted(false), duration)
     }
   }, [isOpen])
+
+  useEffect(() => {
+    if (showDrawer) {
+      // close other drawers when open new drawer
+      window.dispatchEvent(
+        new CustomEvent(CLOSE_OTHER_DRAWERS, {
+          detail: { id },
+        })
+      )
+    }
+  }, [showDrawer])
 
   if (!mounted) {
     return null

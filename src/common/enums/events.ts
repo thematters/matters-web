@@ -24,6 +24,7 @@ export const OPEN_SET_USER_NAME_DIALOG = 'openSetUserNameDialog'
 export const OPEN_SHOW_NOMAD_BADGE_DIALOG = 'openShowNomadBadgeDialog'
 export const OPEN_COMMENT_DETAIL_DIALOG = 'openCommentDetailDialog'
 export const OPEN_COMMENT_LIST_DRAWER = 'openCommentListDrawer'
+export const CLOSE_OTHER_DRAWERS = 'closeOtherDrawers'
 
 // Toast
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
