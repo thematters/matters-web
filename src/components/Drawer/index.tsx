@@ -28,7 +28,7 @@ export const Drawer: React.ComponentType<
   children,
   size,
   duration = 300,
-  enableOverlay = false,
+  enableOverlay = true,
   direction = 'right',
 }) => {
   const [mounted, setMounted] = useState(isOpen)
@@ -40,7 +40,8 @@ export const Drawer: React.ComponentType<
       setTimeout(() => setShowDrawer(true), 0)
     } else {
       setShowDrawer(false)
-      setTimeout(() => setMounted(false), duration)
+      // Unmount BaseDrawer Component after close
+      // setTimeout(() => setMounted(false), duration)
     }
   }, [isOpen])
 

@@ -3,11 +3,26 @@
     display: none;
 
     &:checked {
+      & ~ .overlay {
+        z-index: var(--z-index-drawer-overlay);
+        display: block;
+        opacity: 1;
+      }
+
       & ~ .baseDrawerContainer {
         visibility: visible;
         transform: translate3d(0, 0, 0) !important;
       }
     }
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100vh;
   }
 
   & .baseDrawerContainer {

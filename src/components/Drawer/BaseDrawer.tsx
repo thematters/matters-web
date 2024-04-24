@@ -69,7 +69,7 @@ export const BaseDrawer = ({
   children,
   duration = 200,
   zIndex = 100,
-  enableOverlay,
+  enableOverlay = true,
   className,
   size,
 }: BaseDrawerProps) => {
@@ -83,10 +83,13 @@ export const BaseDrawer = ({
     [styles.baseDrawerContainer]: true,
   })
 
+  const idSuffix = Math.random().toString(36).substring(7)
+
   return (
     <div className={styles.baseDrawer}>
       <input
         type="checkbox"
+        id={'Drawer__checkbox' + idSuffix}
         className={styles.baseDrawerCheckbox}
         onChange={onClose}
         checked={open}
@@ -94,10 +97,18 @@ export const BaseDrawer = ({
       <nav
         role="navigation"
         style={drawerStyles}
+        id={'Drawer__container' + idSuffix}
         className={`${containerClasses} ${className}`}
       >
         {children}
       </nav>
+      {enableOverlay && (
+        <label
+          htmlFor={'Drawer__checkbox' + idSuffix}
+          id={'Drawer__overlay' + idSuffix}
+          className={styles.overlay}
+        />
+      )}
     </div>
   )
 }
