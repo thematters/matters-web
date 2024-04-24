@@ -24,7 +24,7 @@
     transition-property: background-color;
 
     &:hover {
-      background-color: var(--color-grey-lighter-active);
+      background-color: var(--color-grey-hover);
     }
   }
 }

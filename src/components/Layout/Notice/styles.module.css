@@ -45,5 +45,5 @@
 
 .red {
   color: var(--color-white);
-  background: var(--color-red);
+  background: var(--color-negative-red);
 }

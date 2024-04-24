@@ -33,7 +33,7 @@ span.container {
 }
 
 .textRed {
-  color: var(--color-red);
+  color: var(--color-negative-red);
 }
 
 .textGrey {
@@ -68,7 +68,7 @@ span.container {
 .textActiveGreenDark {
   &:hover,
   &:focus {
-    color: var(--color-matters-green-dark);
+    color: var(--color-matters-green-hover);
   }
 }
 
@@ -82,7 +82,7 @@ span.container {
 .textActiveRedDark {
   &:hover,
   &:focus {
-    color: var(--color-red-dark);
+    color: var(--color-negative-red-2);
   }
 }
 
@@ -305,7 +305,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-grey-lighter-active);
+      background: var(--color-grey-hover);
     }
   }
 }
@@ -318,7 +318,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-matters-green-dark);
+      background: var(--color-matters-green-hover);
     }
   }
 }
@@ -331,7 +331,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-grey-lighter-active);
+      background: var(--color-grey-hover);
     }
   }
 }
@@ -344,14 +344,14 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-matters-gold-active);
+      background: var(--color-matters-gold-hover);
     }
   }
 }
 
 .bgRed {
   & .hotarea {
-    background: var(--color-red);
+    background: var(--color-negative-red);
   }
 }
 
@@ -400,7 +400,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-grey-lighter-active);
+      background: var(--color-grey-hover);
     }
   }
 }
@@ -438,7 +438,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-red);
+      background: var(--color-negative-red);
     }
   }
 }
@@ -482,7 +482,7 @@ span.container {
 
 .borderGreyLighterActive {
   & .hotarea {
-    border-color: var(--color-grey-lighter-active);
+    border-color: var(--color-grey-hover);
   }
 }
 
@@ -506,13 +506,13 @@ span.container {
 
 .borderRed {
   & .hotarea {
-    border-color: var(--color-red);
+    border-color: var(--color-negative-red);
   }
 }
 
 .borderLikecoinGreen {
   & .hotarea {
-    border-color: var(--color-likecoin-green);
+    border-color: var(--color-likecoin);
   }
 }
 
@@ -538,7 +538,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      border-color: var(--color-matters-green-dark);
+      border-color: var(--color-matters-green-hover);
     }
   }
 }

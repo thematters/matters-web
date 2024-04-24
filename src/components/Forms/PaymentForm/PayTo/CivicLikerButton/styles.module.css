@@ -12,7 +12,7 @@
     left: var(--spacing-xx-tight);
 
     & path {
-      fill: var(--color-likecoin-green);
+      fill: var(--color-likecoin);
     }
   }
 }

@@ -292,7 +292,7 @@
     &:hover,
     &:active,
     &:focus {
-      color: var(--color-matters-green-dark);
+      color: var(--color-matters-green-hover);
     }
   }
 
@@ -346,7 +346,7 @@
   }
 
   & .error {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 }
 

@@ -17,5 +17,5 @@
 .error {
   margin-top: var(--spacing-loose);
   font-size: var(--font-size-xs);
-  color: var(--color-red);
+  color: var(--color-negative-red);
 }
