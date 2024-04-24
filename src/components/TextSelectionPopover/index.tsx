@@ -25,7 +25,7 @@ export const TextSelectionPopover = ({
     const activeSelection = document.getSelection()
 
     // Check if it's the same paragraph
-    if (activeSelection?.focusNode !== activeSelection?.anchorNode) {
+    if (/\n/.test(activeSelection?.toString() || '')) {
       return
     }
 
