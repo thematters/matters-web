@@ -4,7 +4,7 @@
 
     &:checked {
       & ~ .overlay {
-        z-index: var(--z-index-drawer-overlay);
+        z-index: var(--z-index-over-bottom-bar);
         display: block;
         opacity: 1;
       }
