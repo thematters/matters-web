@@ -191,8 +191,8 @@ const BaseArticleDetail = ({
 
       clearQuoteComment()
 
-      //  wait for the drawer pull animation to complete
-    }, 300)
+      //  wait for the drawer animation to complete
+    }, 100)
   }, [editor, quoteComment])
 
   // Donation
