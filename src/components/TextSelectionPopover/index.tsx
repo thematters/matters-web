@@ -55,7 +55,7 @@ export const TextSelectionPopover = ({
     const targetRect = ref.current.getBoundingClientRect()
 
     const tooltipHeight = 44 + 16
-    const tooltipWidth = 97
+    const tooltipWidth = 44
 
     setPosition({
       x: rect.left - targetRect.left + rect.width / 2 - tooltipWidth / 2,
