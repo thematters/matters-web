@@ -7,12 +7,11 @@
   line-height: var(--line-height-article-base);
   outline: none;
 
-  & > * + * {
-    margin: var(--spacing-loose) 0;
-  }
-
-  & > *:first-child {
-    margin: var(--spacing-loose) 0 0;
+  & > p,
+  & > ul,
+  & > ol,
+  & > figure {
+    padding: var(--ar17-100) 0;
   }
 
   & > *:last-child {
@@ -20,8 +19,8 @@
   }
 
   & p {
-    font-size: var(--font-size-md);
-    line-height: 1.5rem;
+    font-size: var(--font-size-article-base);
+    line-height: var(--line-height-article-base);
     color: var(--color-black);
 
     /* FIXME: Firefox eats trailing spaces
@@ -29,18 +28,17 @@
      * @see {@url https://github.com/quilljs/quill/issues/1760}
      */
     white-space: pre-wrap;
+  }
 
-    @media (--sm-up) {
-      font-size: var(--font-size-xm);
-      line-height: 2rem;
-    }
+  & strong {
+    font-weight: var(--font-weight-semibold);
   }
 
   /* FIXME: first line of code has some indent */
   & code {
     padding: 0;
     font-size: var(--font-size-md-s);
-    line-height: 1.5rem;
+    line-height: 1.7;
     color: var(--color-grey-darker);
   }
 
@@ -61,7 +59,8 @@
    ========================================================================== */
   & figure {
     position: relative;
-    padding: var(--spacing-base) 0;
+    padding: var(--ar17-200) 0;
+    margin: 0;
     text-align: center;
 
     /* ad-hoc fix for nested figure */
@@ -210,6 +209,17 @@
   & blockquote {
     position: relative;
     padding-left: var(--spacing-x-loose);
+    margin: var(--ar17-100) 0;
+    color: var(--color-grey-darker);
+
+    & p {
+      padding: 0;
+      color: var(--color-grey-darker);
+    }
+
+    & p + p {
+      margin-top: calc(var(--ar17-100) * 2);
+    }
 
     &::before {
       position: absolute;
@@ -226,16 +236,11 @@
    ========================================================================== */
   & ul,
   & ol {
-    padding-left: 2.375rem;
-
-    @media (--sm-up) {
-      padding-left: var(--spacing-xx-loose);
-    }
+    padding-left: 2.125rem;
   }
 
-  & li {
-    padding-left: var(--spacing-x-tight);
-    margin: var(--spacing-x-tight) 0;
+  & li + li {
+    margin-top: var(--spacing-x-tight);
   }
 
   & ul {
@@ -248,16 +253,31 @@
 
   /* Heading
    ========================================================================== */
+
   & h1 {
-    font-size: var(--font-size-article-h1);
+    font-size: var(--font-size-sm-article-h1);
   }
 
   & h2 {
-    font-size: var(--font-size-article-h2);
+    font-size: var(--font-size-sm-article-h2);
   }
 
   & h3 {
-    font-size: var(--font-size-article-h3);
+    font-size: var(--font-size-sm-article-h3);
+  }
+
+  @media (--sm-up) {
+    & h1 {
+      font-size: var(--font-size-article-h1);
+    }
+
+    & h2 {
+      font-size: var(--font-size-article-h2);
+    }
+
+    & h3 {
+      font-size: var(--font-size-article-h3);
+    }
   }
 
   & h4 {
@@ -278,7 +298,8 @@
   & h4,
   & h5,
   & h6 {
-    margin-top: var(--spacing-xx-loose);
+    padding-top: var(--ar17-100);
+    font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-article-heading);
   }
 
@@ -293,6 +314,12 @@
     &:active,
     &:focus {
       color: var(--color-matters-green-dark);
+    }
+
+    &.mention {
+      color: var(--color-grey-darker);
+      text-decoration: none;
+      border-bottom: 0;
     }
   }
 
@@ -309,7 +336,7 @@
     position: relative;
     display: block;
     width: 100%;
-    height: 2rem;
+    height: calc(var(--ar17-150) * 2 + var(--spacing-x-tight));
     border: none;
 
     &::before {
@@ -317,7 +344,8 @@
       inset: 0;
       display: block;
       width: 3.5rem;
-      height: 2rem;
+      height: var(--spacing-x-tight);
+      padding: var(--ar17-150) 0;
       margin: 0 auto;
       content: '';
       background-image: radial-gradient(
@@ -329,6 +357,10 @@
       background-repeat-x: repeat;
     }
   }
+
+  & pre {
+    margin: var(--ar17-100) 0;
+  }
 }
 
 /****
@@ -337,7 +369,7 @@
 .u-summary,
 .editor-summary {
   position: relative;
-  margin: var(--spacing-base) 0 var(--spacing-xx-loose);
+  margin: var(--ar17-100) 0;
 
   & .counter {
     font-size: var(--font-size-xs);
@@ -359,7 +391,7 @@
     var(--spacing-loose);
   font-size: var(--font-size-xm);
   font-weight: var(--font-weight-normal);
-  line-height: 2.25rem;
+  line-height: 1.875rem;
   color: var(--color-black);
   resize: none;
   background: transparent;
@@ -371,8 +403,8 @@
 
   @media (--md-up) {
     padding-left: calc(var(--spacing-x-loose) + var(--spacing-xx-tight));
-    font-size: var(--font-size-xl-s);
-    line-height: 2.5rem;
+    font-size: var(--font-size-lg);
+    line-height: 1.75;
   }
 
   @media (--lg-up) {
