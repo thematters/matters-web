@@ -17,10 +17,6 @@
   "+7SAix": {
     "defaultMessage": "2-12 个字符"
   },
-  "+GCcXH": {
-    "defaultMessage": "因违反用户协定而被封存，",
-    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
-  },
   "+OStJM": {
     "defaultMessage": "重置交易密码"
   },
@@ -161,6 +157,10 @@
   "1COpAA": {
     "defaultMessage": "失败",
     "description": "src/components/Transaction/State/index.tsx"
+  },
+  "1PORwh": {
+    "defaultMessage": "仅作者本人可见封存作品，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "1QrwIl": {
     "defaultMessage": "去看看",
@@ -716,10 +716,6 @@
   "D9R/ol": {
     "defaultMessage": "将作品加入围炉，让更多人一起参与讨论"
   },
-  "DDQsyP": {
-    "defaultMessage": "回到我的创作",
-    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
-  },
   "DP3yqI": {
     "defaultMessage": "支持人数"
   },
@@ -778,7 +774,7 @@
     "defaultMessage": "储值成功"
   },
   "EcglP9": {
-    "defaultMessage": "Key"
+    "defaultMessage": "密钥"
   },
   "EmZFry": {
     "defaultMessage": "请在加密钱包内继续操作",
@@ -910,6 +906,13 @@
   "HQusql": {
     "defaultMessage": "读者可以直接透过钱包地址转 USDT 等币种给你",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
+  "HR599l": {
+    "defaultMessage": "回到我的创作",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "HYW0fI": {
+    "defaultMessage": "上链后，作品不可删除，去中心化保存"
   },
   "HkozYU": {
     "defaultMessage": "更换钱包",
@@ -1056,10 +1059,6 @@
   "L4NXXh": {
     "defaultMessage": "目前总营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
-  },
-  "L5guA9": {
-    "defaultMessage": "Archived article (Author),",
-    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "L79o74": {
     "defaultMessage": "展开",
@@ -1245,7 +1244,7 @@
     "defaultMessage": "输入六位数字交易密码"
   },
   "Oru6G2": {
-    "defaultMessage": "The Fingerprint from IPFS, you can read it via a gateway"
+    "defaultMessage": "使用 IPFS 生成的作品指纹，通过它可在节点调取内容"
   },
   "OsX3KM": {
     "defaultMessage": "评论",
@@ -1269,6 +1268,9 @@
   },
   "PXAur5": {
     "defaultMessage": "提现"
+  },
+  "PesLat": {
+    "defaultMessage": "正在发布，马上就好"
   },
   "PkUihI": {
     "defaultMessage": "修订已保存",
@@ -1685,6 +1687,10 @@
     "defaultMessage": "开始创作",
     "description": "src/components/Buttons/StartWriting/index.tsx"
   },
+  "Z7JXlF": {
+    "defaultMessage": "因违反用户协定而被封存，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "ZAs170": {
     "defaultMessage": "基本资料",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -2077,7 +2083,7 @@
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "jtdQHR": {
-    "defaultMessage": "Gateways"
+    "defaultMessage": "公共节点"
   },
   "jwnump": {
     "defaultMessage": "发布评论..."

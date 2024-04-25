@@ -9,7 +9,9 @@ import {
   IconCopy16,
   IconExternalLink16,
   IconHelp24,
+  Media,
   TextIcon,
+  toast,
   Tooltip,
   UserDigest,
 } from '~/components'
@@ -40,6 +42,18 @@ function iscnLinkUrl(iscnId: string) {
   return `${iscnLinkPrefix}/${encodeURIComponent(iscnId)}`
 }
 
+const IPFSTextIcon = () => (
+  <TextIcon
+    icon={<IconHelp24 size="mdXS" />}
+    color="greyDark"
+    textPlacement="left"
+    size="xs"
+    spacing="xxtight"
+  >
+    <FormattedMessage defaultMessage="View on IPFS" id="zbaTLV" />
+  </TextIcon>
+)
+
 const InfoHeader = ({
   article,
   version,
@@ -67,28 +81,38 @@ const InfoHeader = ({
           />
 
           <section className={styles.viewIpfs}>
-            {/* TODO: toast for mobile */}
-            <Tooltip
-              content={
-                <FormattedMessage
-                  defaultMessage="The Fingerprint from IPFS, you can read it via a gateway"
-                  id="Oru6G2"
-                />
-              }
-              placement="top"
-            >
-              <span>
-                <TextIcon
-                  icon={<IconHelp24 size="mdXS" />}
-                  color="greyDark"
-                  textPlacement="left"
-                  size="xs"
-                  spacing="xxtight"
-                >
-                  <FormattedMessage defaultMessage="View on IPFS" id="zbaTLV" />
-                </TextIcon>
-              </span>
-            </Tooltip>
+            <Media at="sm">
+              <button
+                type="button"
+                onClick={() =>
+                  toast.success({
+                    message: (
+                      <FormattedMessage
+                        defaultMessage="The Fingerprint from IPFS, you can read it via a gateway"
+                        id="Oru6G2"
+                      />
+                    ),
+                  })
+                }
+              >
+                <IPFSTextIcon />
+              </button>
+            </Media>
+            <Media greaterThan="sm">
+              <Tooltip
+                content={
+                  <FormattedMessage
+                    defaultMessage="The Fingerprint from IPFS, you can read it via a gateway"
+                    id="Oru6G2"
+                  />
+                }
+                placement="top"
+              >
+                <span>
+                  <IPFSTextIcon />
+                </span>
+              </Tooltip>
+            </Media>
           </section>
         </section>
 
