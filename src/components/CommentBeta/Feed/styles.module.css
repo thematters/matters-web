@@ -18,9 +18,9 @@
         }
 
         & .displayName {
-          font-size: var(--font-size-sm);
+          font-size: var(--font-size-md-s);
           font-weight: var(--font-weight-medium);
-          line-height: 1.375rem;
+          line-height: 1.75;
         }
 
         & time {

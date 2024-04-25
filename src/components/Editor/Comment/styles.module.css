@@ -3,6 +3,7 @@
   min-height: 4.125rem;
 
   & > *:first-child {
+    padding: 0;
     margin: 0;
   }
 
@@ -11,12 +12,17 @@
   }
 
   & p {
-    font-size: var(--font-size-sm);
-    line-height: 1.375rem;
+    padding: 0;
+    font-size: var(--font-size-md-s);
+    line-height: 1.75;
   }
 
   & blockquote {
     padding-left: var(--spacing-base);
+
+    & p + p {
+      margin-top: var(--spacing-x-tight);
+    }
   }
 
   /* outline */

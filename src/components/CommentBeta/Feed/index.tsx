@@ -9,7 +9,6 @@ import {
   CommentFormType,
   DateTime,
   LinkWrapper,
-  Media,
   ThreadCommentType,
 } from '~/components'
 import {
@@ -104,12 +103,7 @@ export const BaseCommentFeed = ({
       </header>
 
       <section className={contentClasses}>
-        <Media at="sm">
-          <Content comment={comment} type={type} size="sm" limit={5} />
-        </Media>
-        <Media greaterThan="sm">
-          <Content comment={comment} type={type} size="sm" limit={5} />
-        </Media>
+        <Content comment={comment} type={type} size="mdS" limit={5} />
 
         <FooterActions
           comment={comment}

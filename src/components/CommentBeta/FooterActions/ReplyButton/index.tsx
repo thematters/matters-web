@@ -74,7 +74,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
       })}
       {...props}
     >
-      <IconComment2V16 />
+      <IconComment2V16 size="mdXS" />
     </Button>
   )
 }
