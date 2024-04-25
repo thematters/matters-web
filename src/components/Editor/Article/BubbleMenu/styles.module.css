@@ -3,14 +3,14 @@
   @mixin border-grey;
 
   position: relative;
-  width: 21.5rem;
+  width: 21.5rem; /* 9 * 24 + 8 * 12 + 16 * 2 */
   padding: var(--spacing-x-tight) var(--spacing-base);
   background: var(--color-white);
   border-radius: var(--spacing-xx-tight);
   box-shadow: var(--shadow-dark);
 
   &.comment {
-    width: 16.5rem;
+    width: 5.75rem; /* 2 * 24 + 1 * 12 + 16 * 2 */
   }
 
   & * + * {

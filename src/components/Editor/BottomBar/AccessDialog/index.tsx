@@ -52,7 +52,7 @@ const BaseAccessDialog = ({
           </section>
 
           <section className={styles.access}>
-            <ToggleAccess {...props} />
+            <ToggleAccess {...props} compact />
           </section>
         </Dialog.Content>
 

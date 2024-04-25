@@ -22,6 +22,7 @@ import {
 
 import Authors from '../Authors'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
+import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
 
@@ -92,7 +93,8 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
 
   // pagination
   const connectionPath = 'viewer.recommendation.feed'
-  const result = data?.viewer?.recommendation.feed
+  const recommendation = data?.viewer?.recommendation
+  const result = recommendation?.feed
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
 
@@ -193,51 +195,63 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   }
 
   return (
-    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
-      <List>
-        {mixFeed.map((edge, i) => {
-          if (edge?.__typename === 'HorizontalFeed') {
-            const { Feed } = edge
-            return <Feed key={edge.__typename + i} />
-          }
-          const isFirstFold = i <= 3 // TODO: better guess'ing of first fold on different screens
+    <>
+      {recommendation &&
+        'icymiTopic' in recommendation &&
+        recommendation.icymiTopic && (
+          <IcymiCuratedFeed recommendation={recommendation} />
+        )}
 
-          return (
-            <List.Item key={`${sortBy}:${edge.node.id}`}>
-              <ArticleDigestFeed
-                article={edge.node}
-                hasReadTime={true}
-                hasDonationCount={true}
-                utm_source={`homepage_${sortBy}`}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: sortBy,
-                    contentType: 'article',
-                    location: i,
-                    id: edge.node.id,
-                  })
-                }
-                onClickAuthor={() => {
-                  analytics.trackEvent('click_feed', {
-                    type: sortBy,
-                    contentType: 'user',
-                    location: i,
-                    id: edge.node.author.id,
-                  })
-                }}
-                isFirstFold={isFirstFold}
-              />
-              <CardExposureTracker
-                contentType="article"
-                feedType={sortBy}
-                location={i}
-                id={edge.node.id}
-              />
-            </List.Item>
-          )
-        })}
-      </List>
-    </InfiniteScroll>
+      <InfiniteScroll
+        hasNextPage={pageInfo.hasNextPage}
+        loadMore={loadMore}
+        eof
+      >
+        <List>
+          {mixFeed.map((edge, i) => {
+            if (edge?.__typename === 'HorizontalFeed') {
+              const { Feed } = edge
+              return <Feed key={edge.__typename + i} />
+            }
+            const isFirstFold = i <= 3 // TODO: better guess'ing of first fold on different screens
+
+            return (
+              <List.Item key={`${sortBy}:${edge.node.id}`}>
+                <ArticleDigestFeed
+                  article={edge.node}
+                  hasReadTime={true}
+                  hasDonationCount={true}
+                  utm_source={`homepage_${sortBy}`}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: sortBy,
+                      contentType: 'article',
+                      location: i,
+                      id: edge.node.id,
+                    })
+                  }
+                  onClickAuthor={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: sortBy,
+                      contentType: 'user',
+                      location: i,
+                      id: edge.node.author.id,
+                    })
+                  }}
+                  isFirstFold={isFirstFold}
+                />
+                <CardExposureTracker
+                  contentType="article"
+                  feedType={sortBy}
+                  location={i}
+                  id={edge.node.id}
+                />
+              </List.Item>
+            )
+          })}
+        </List>
+      </InfiniteScroll>
+    </>
   )
 }
 

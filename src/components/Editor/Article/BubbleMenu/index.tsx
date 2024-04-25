@@ -172,74 +172,80 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             )}
 
             {/* Bold */}
-            <button
-              type="button"
-              onClick={() => editor.chain().focus().toggleBold().run()}
-              disabled={!editor.can().chain().focus().toggleBold().run()}
-              className={editor.isActive('bold') ? styles.active : ''}
-              title={translate({
-                zh_hant: '粗體',
-                zh_hans: '粗体',
-                en: 'Bold',
-                lang,
-              })}
-              aria-label={translate({
-                zh_hant: '粗體',
-                zh_hans: '粗体',
-                en: 'Bold',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuBold)({ size: 'md' })}
-            </button>
+            {!isCommentEditor && (
+              <button
+                type="button"
+                onClick={() => editor.chain().focus().toggleBold().run()}
+                disabled={!editor.can().chain().focus().toggleBold().run()}
+                className={editor.isActive('bold') ? styles.active : ''}
+                title={translate({
+                  zh_hant: '粗體',
+                  zh_hans: '粗体',
+                  en: 'Bold',
+                  lang,
+                })}
+                aria-label={translate({
+                  zh_hant: '粗體',
+                  zh_hans: '粗体',
+                  en: 'Bold',
+                  lang,
+                })}
+              >
+                {withIcon(IconEditorMenuBold)({ size: 'md' })}
+              </button>
+            )}
 
             {/* Strikethrough */}
-            <button
-              type="button"
-              // @ts-ignore
-              onClick={() => editor.chain().focus().toggleStrike().run()}
-              // @ts-ignore
-              disabled={!editor.can().chain().focus().toggleStrike().run()}
-              className={editor.isActive('strike') ? styles.active : ''}
-              title={translate({
-                zh_hant: '刪除線',
-                zh_hans: '删除线',
-                en: 'Strikethrough',
-                lang,
-              })}
-              aria-label={translate({
-                zh_hant: '刪除線',
-                zh_hans: '删除线',
-                en: 'Strikethrough',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuStrike)({ size: 'md' })}
-            </button>
+            {!isCommentEditor && (
+              <button
+                type="button"
+                // @ts-ignore
+                onClick={() => editor.chain().focus().toggleStrike().run()}
+                // @ts-ignore
+                disabled={!editor.can().chain().focus().toggleStrike().run()}
+                className={editor.isActive('strike') ? styles.active : ''}
+                title={translate({
+                  zh_hant: '刪除線',
+                  zh_hans: '删除线',
+                  en: 'Strikethrough',
+                  lang,
+                })}
+                aria-label={translate({
+                  zh_hant: '刪除線',
+                  zh_hans: '删除线',
+                  en: 'Strikethrough',
+                  lang,
+                })}
+              >
+                {withIcon(IconEditorMenuStrike)({ size: 'md' })}
+              </button>
+            )}
 
             {/* Code */}
-            <button
-              type="button"
-              // @ts-ignore
-              onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-              // @ts-ignore
-              disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
-              className={editor.isActive('codeBlock') ? styles.active : ''}
-              title={translate({
-                zh_hant: '程式碼',
-                zh_hans: '代码',
-                en: 'Code Block',
-                lang,
-              })}
-              aria-label={translate({
-                zh_hant: '程式碼',
-                zh_hans: '代码',
-                en: 'Code Block',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuCode)({ size: 'md' })}
-            </button>
+            {!isCommentEditor && (
+              <button
+                type="button"
+                // @ts-ignore
+                onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+                // @ts-ignore
+                disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
+                className={editor.isActive('codeBlock') ? styles.active : ''}
+                title={translate({
+                  zh_hant: '程式碼',
+                  zh_hans: '代码',
+                  en: 'Code Block',
+                  lang,
+                })}
+                aria-label={translate({
+                  zh_hant: '程式碼',
+                  zh_hans: '代码',
+                  en: 'Code Block',
+                  lang,
+                })}
+              >
+                {withIcon(IconEditorMenuCode)({ size: 'md' })}
+              </button>
+            )}
 
             {/* Quote */}
             <button
@@ -258,48 +264,52 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             </button>
 
             {/* Unordered list */}
-            <button
-              type="button"
-              // @ts-ignore
-              onClick={() => editor.chain().focus().toggleBulletList().run()}
-              className={editor.isActive('bulletList') ? styles.active : ''}
-              title={translate({
-                zh_hant: '無序清單',
-                zh_hans: '无序列表',
-                en: 'Unordered list',
-                lang,
-              })}
-              aria-label={translate({
-                zh_hant: '無序清單',
-                zh_hans: '无序列表',
-                en: 'Unordered list',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuUl)({ size: 'md' })}
-            </button>
+            {!isCommentEditor && (
+              <button
+                type="button"
+                // @ts-ignore
+                onClick={() => editor.chain().focus().toggleBulletList().run()}
+                className={editor.isActive('bulletList') ? styles.active : ''}
+                title={translate({
+                  zh_hant: '無序清單',
+                  zh_hans: '无序列表',
+                  en: 'Unordered list',
+                  lang,
+                })}
+                aria-label={translate({
+                  zh_hant: '無序清單',
+                  zh_hans: '无序列表',
+                  en: 'Unordered list',
+                  lang,
+                })}
+              >
+                {withIcon(IconEditorMenuUl)({ size: 'md' })}
+              </button>
+            )}
 
             {/* Ordered list */}
-            <button
-              type="button"
-              // @ts-ignore
-              onClick={() => editor.chain().focus().toggleOrderedList().run()}
-              className={editor.isActive('orderedList') ? styles.active : ''}
-              title={translate({
-                zh_hant: '有序清單',
-                zh_hans: '有序列表',
-                en: 'Ordered list',
-                lang,
-              })}
-              aria-label={translate({
-                zh_hant: '有序清單',
-                zh_hans: '有序列表',
-                en: 'Ordered list',
-                lang,
-              })}
-            >
-              {withIcon(IconEditorMenuOl)({ size: 'md' })}
-            </button>
+            {!isCommentEditor && (
+              <button
+                type="button"
+                // @ts-ignore
+                onClick={() => editor.chain().focus().toggleOrderedList().run()}
+                className={editor.isActive('orderedList') ? styles.active : ''}
+                title={translate({
+                  zh_hant: '有序清單',
+                  zh_hans: '有序列表',
+                  en: 'Ordered list',
+                  lang,
+                })}
+                aria-label={translate({
+                  zh_hant: '有序清單',
+                  zh_hans: '有序列表',
+                  en: 'Ordered list',
+                  lang,
+                })}
+              >
+                {withIcon(IconEditorMenuOl)({ size: 'md' })}
+              </button>
+            )}
 
             {/* Link */}
             <button

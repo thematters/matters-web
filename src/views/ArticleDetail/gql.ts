@@ -5,9 +5,8 @@ import { UserDigest } from '~/components/UserDigest'
 import { AuthorSidebar } from './AuthorSidebar'
 import { FromAuthor } from './AuthorSidebar/FromAuthor'
 import { RelatedArticles } from './AuthorSidebar/RelatedArticles'
-import Content from './Content'
 import MetaInfo from './MetaInfo'
-import State from './State'
+import StickyTopBanner from './StickyTopBanner'
 import { fragments as supportWidgetFragments } from './Support/SupportWidget/gql'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
@@ -19,6 +18,7 @@ const articlePublicFragment = gql`
     title
     slug
     mediaHash
+    dataHash
     state
     cover
     summary
@@ -66,9 +66,11 @@ const articlePublicFragment = gql`
       language
     }
     availableTranslations
+    contents {
+      html
+    }
     ...AuthorSidebarArticle
     ...MetaInfoArticle
-    ...ContentArticle
     ...TagListArticle
     ...AuthorSidebarRelatedArticles
     ...AuthorSidebarFromAuthor
@@ -80,11 +82,10 @@ const articlePublicFragment = gql`
   }
   ${AuthorSidebar.fragments.article}
   ${MetaInfo.fragments.article}
-  ${Content.fragments.article}
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
   ${FromAuthor.fragments.article}
-  ${State.fragments.article}
+  ${StickyTopBanner.fragments.article}
   ${UserDigest.Rich.fragments.user.public}
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
@@ -160,13 +161,14 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
             ...CircleWallCirclePrivate
           }
         }
-        ...ContentArticle
+        contents {
+          html
+        }
         ...ToolbarArticlePrivate
         ...SupportWidgetArticlePrivate
       }
     }
   }
-  ${Content.fragments.article}
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.private}
   ${supportWidgetFragments.article.private}
@@ -183,26 +185,6 @@ export const ARTICLE_TRANSLATION = gql`
         summary
         language
       }
-    }
-  }
-`
-
-export const EDIT_ARTICLE_SUPPORT_SETTING = gql`
-  mutation EditArticleSupportSetting(
-    $id: ID!
-    $requestForDonation: requestForDonation_String_maxLength_140
-    $replyToDonator: replyToDonator_String_maxLength_140
-  ) {
-    editArticle(
-      input: {
-        id: $id
-        requestForDonation: $requestForDonation
-        replyToDonator: $replyToDonator
-      }
-    ) {
-      id
-      requestForDonation
-      replyToDonator
     }
   }
 `

@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount, maskAddress } from '~/common/utils'
+import { formatAmount, truncate } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -74,7 +74,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
                   color="green"
                   textPlacement="left"
                 >
-                  {maskAddress(address)}
+                  {truncate(address)}
                 </TextIcon>
               </Button>
             )}
