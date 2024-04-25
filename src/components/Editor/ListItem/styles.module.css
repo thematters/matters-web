@@ -33,6 +33,7 @@
   @mixin inline-flex-center-all;
 
   position: relative;
+  flex-shrink: 0;
   width: 2rem;
   height: 2rem;
   font-size: var(--font-size-sm);
@@ -50,8 +51,11 @@
   }
 }
 
-.hintOverlay {
-  position: absolute;
-  top: -3px;
-  right: -3px;
+.arrowIndicator {
+  @mixin inline-flex-center-all;
+
+  position: relative;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
 }

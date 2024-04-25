@@ -98,29 +98,6 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($donatorsDialog).toBeInTheDocument()
   })
 
-  // hasFingerprint
-  it('should render fingerprint button', async () => {
-    render(<DropdownActions article={MOCK_ARTILCE} hasFingerprint />)
-
-    const $button = screen.getByLabelText('More Actions')
-    expect($button).toBeInTheDocument()
-
-    // open menu
-    $button.click()
-    const $menu = screen.getByRole('menu')
-    expect($menu).toBeInTheDocument()
-
-    const $fingerprintButton = screen.getByRole('menuitem', {
-      name: 'IPFS',
-    })
-    expect($fingerprintButton).toBeInTheDocument()
-
-    // open dialog
-    $fingerprintButton.click()
-    const $fingerprintDialog = screen.getByTestId(TEST_ID.DIALOG_FINGERPRINT)
-    expect($fingerprintDialog).toBeInTheDocument()
-  })
-
   // hasExtend
   it('should render extend button', async () => {
     render(<DropdownActions article={MOCK_ARTILCE} hasExtend />)

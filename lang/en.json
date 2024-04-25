@@ -20,6 +20,9 @@
   "+OStJM": {
     "defaultMessage": "Reset Payment Password"
   },
+  "+OtV6h": {
+    "defaultMessage": "Failed to save"
+  },
   "+S8mxW": {
     "defaultMessage": "Move to top",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
@@ -98,8 +101,14 @@
   "/usqHn": {
     "defaultMessage": "{displayName}'s creative space"
   },
+  "/wKyxw": {
+    "defaultMessage": "Failed to republish"
+  },
   "0/iEw/": {
     "defaultMessage": "Manage Communities"
+  },
+  "06XHBC": {
+    "defaultMessage": "Add to Circle"
   },
   "0Azlrb": {
     "defaultMessage": "Manage"
@@ -142,9 +151,16 @@
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
+  "17K30q": {
+    "defaultMessage": "Translating by Google..."
+  },
   "1COpAA": {
     "defaultMessage": "Failed",
     "description": "src/components/Transaction/State/index.tsx"
+  },
+  "1PORwh": {
+    "defaultMessage": "Archived article.",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "1QrwIl": {
     "defaultMessage": "Take a look",
@@ -165,10 +181,6 @@
   "1hyiZ8": {
     "defaultMessage": "Confirm Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "1i2T4a": {
-    "defaultMessage": "published on",
-    "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
   },
   "1qQzV0": {
     "defaultMessage": "Invitees",
@@ -231,6 +243,9 @@
   },
   "2oxLHg": {
     "defaultMessage": "Up to 3 articles/collections can be pinned"
+  },
+  "2qbSh8": {
+    "defaultMessage": "Registering ISCN allows you to publish Writing NFT. The cost of"
   },
   "2slIPX": {
     "defaultMessage": "Likes"
@@ -517,9 +532,8 @@
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
-  "9FQN4+": {
-    "defaultMessage": "Archived article (Author),",
-    "description": "src/views/ArticleDetail/State/index.tsx"
+  "99OtWT": {
+    "defaultMessage": "Pending..."
   },
   "9Fpc9S": {
     "defaultMessage": "Bug Report"
@@ -709,6 +723,9 @@
     "defaultMessage": "Over 140 words, current {numbers}",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
+  "DUvMii": {
+    "defaultMessage": "Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+  },
   "DX0YH3": {
     "defaultMessage": "Wallet successfully bound",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -756,6 +773,9 @@
   "Eb1U+/": {
     "defaultMessage": "Topped up successfully"
   },
+  "EcglP9": {
+    "defaultMessage": "Key"
+  },
   "EmZFry": {
     "defaultMessage": "Please continue within your crypto wallet.",
     "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
@@ -775,6 +795,10 @@
   "FEkOVJ": {
     "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
+  },
+  "FMIIAZ": {
+    "defaultMessage": "Revision history and IPFS entry,",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "FOOymB": {
     "defaultMessage": "No members yet",
@@ -862,9 +886,8 @@
   "HAlOn1": {
     "defaultMessage": "Name"
   },
-  "HDjV1k": {
-    "defaultMessage": "IPFS",
-    "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
+  "HBxXD/": {
+    "defaultMessage": "License"
   },
   "HEpsZ3": {
     "defaultMessage": "Back to discovery"
@@ -884,9 +907,12 @@
     "defaultMessage": "Readers can directly transfer USDT and other currencies to you through their wallet address.",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
-  "HaSYl4": {
-    "defaultMessage": "Archived article (violations),&nbsp;",
-    "description": "src/views/ArticleDetail/State/index.tsx"
+  "HR599l": {
+    "defaultMessage": "Back to my works",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "HYW0fI": {
+    "defaultMessage": "After publication, your work cannot be deleted."
   },
   "HkozYU": {
     "defaultMessage": "Switch wallet",
@@ -915,6 +941,9 @@
     "defaultMessage": "Supporter",
     "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
   },
+  "HzB4Lk": {
+    "defaultMessage": "Tell readers why you edited this time..."
+  },
   "I8+06z": {
     "defaultMessage": "Comment has been hidden",
     "description": "src/components/CommentBeta/Content/index.tsx"
@@ -940,10 +969,6 @@
   "Ix3e3Q": {
     "defaultMessage": "Comment",
     "description": "src/components/Forms/CommentForm/index.tsx"
-  },
-  "J12iSN": {
-    "defaultMessage": "Back to my works",
-    "description": "src/views/ArticleDetail/State/index.tsx"
   },
   "J6f6iN": {
     "defaultMessage": "Number of comments",
@@ -1002,6 +1027,9 @@
     "defaultMessage": "Unpin",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "KWDSxB": {
+    "defaultMessage": "Save revisions"
+  },
   "KgVypx": {
     "defaultMessage": "Topics",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
@@ -1009,6 +1037,9 @@
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "Kwv1n3": {
+    "defaultMessage": " registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
   },
   "KxVlDj": {
     "defaultMessage": "Settings - Blocked Users",
@@ -1199,6 +1230,9 @@
     "defaultMessage": "Invitation Sent",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
+  "OJmFke": {
+    "defaultMessage": "Tell readers why you edited this time"
+  },
   "OKhRC6": {
     "defaultMessage": "Share"
   },
@@ -1208,6 +1242,9 @@
   },
   "OpeFTV": {
     "defaultMessage": "Enter a 6-digit payment password."
+  },
+  "Oru6G2": {
+    "defaultMessage": "The Fingerprint from IPFS, you can read it via a gateway"
   },
   "OsX3KM": {
     "defaultMessage": "Comment",
@@ -1231,6 +1268,13 @@
   },
   "PXAur5": {
     "defaultMessage": "Withdraw"
+  },
+  "PesLat": {
+    "defaultMessage": "Publishing..."
+  },
+  "PkUihI": {
+    "defaultMessage": "Saved",
+    "description": "src/views/ArticleDetail/Edit/Header/index.tsx"
   },
   "PliM8z": {
     "defaultMessage": "Please go to the relevant page to resend the link. You can also ",
@@ -1360,6 +1404,9 @@
   "Sep44m": {
     "defaultMessage": "Payout",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "SuRTsQ": {
+    "defaultMessage": "Register for ISCN"
   },
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again."
@@ -1516,6 +1563,9 @@
     "defaultMessage": "Articles has been bookmarked",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "Wjmng6": {
+    "defaultMessage": "{revisionCountLeft} revisions remaining"
+  },
   "WpvsPu": {
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1565,6 +1615,9 @@
   },
   "XgdZSb": {
     "defaultMessage": "Authors"
+  },
+  "Xh/txo": {
+    "defaultMessage": "Content Hash"
   },
   "Xi40U9": {
     "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
@@ -1633,6 +1686,10 @@
   "Z2iL9Z": {
     "defaultMessage": "Start writing",
     "description": "src/components/Buttons/StartWriting/index.tsx"
+  },
+  "Z7JXlF": {
+    "defaultMessage": "Archived for violation.",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "ZAs170": {
     "defaultMessage": "Profile",
@@ -1800,6 +1857,9 @@
   "d4waan": {
     "defaultMessage": "Income",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "d5+b8r": {
+    "defaultMessage": "Restricted content"
   },
   "dAPUJp": {
     "defaultMessage": "The dazzling light of a meteor shower is enough to illuminate the night sky. The Meteor Canoe badge signifies your participation in the Nomad Matters.",
@@ -1985,6 +2045,10 @@
   "ieGrWo": {
     "defaultMessage": "Follow"
   },
+  "imXsmo": {
+    "defaultMessage": "back to latest",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "itPgxd": {
     "defaultMessage": "Profile"
   },
@@ -2017,6 +2081,9 @@
   "jkrM1r": {
     "defaultMessage": "Open IPNS page",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "jtdQHR": {
+    "defaultMessage": "Gateways"
   },
   "jwnump": {
     "defaultMessage": "Comment..."
@@ -2118,6 +2185,9 @@
   },
   "ll/ufR": {
     "defaultMessage": "Trending"
+  },
+  "lsccVJ": {
+    "defaultMessage": "You have reached the limit of republished articles"
   },
   "m/Wg7b": {
     "defaultMessage": "Circle Description",
@@ -2316,6 +2386,9 @@
     "defaultMessage": "Weibo",
     "description": "src/components/Share/Buttons/Weibo.tsx"
   },
+  "rDX3h6": {
+    "defaultMessage": "Version Description"
+  },
   "rHi+cL": {
     "defaultMessage": "Most readers",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
@@ -2395,6 +2468,9 @@
     "defaultMessage": "The comment has been forcibly hidden",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
+  "twEps9": {
+    "defaultMessage": " published"
+  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -2444,6 +2520,9 @@
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
+  },
+  "ux4p3j": {
+    "defaultMessage": " published on"
   },
   "v4ddaP": {
     "defaultMessage": "Bind your wallet immediately, and link it to your personal account",
@@ -2693,6 +2772,9 @@
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."
+  },
+  "zbaTLV": {
+    "defaultMessage": "View on IPFS"
   },
   "zkmfjn": {
     "defaultMessage": "Pinned",
