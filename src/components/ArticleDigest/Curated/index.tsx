@@ -66,39 +66,37 @@ export const ArticleDigestCurated = ({
       testId={TEST_ID.DIGEST_ARTICLE_CURATED}
       {...cardProps}
     >
-      <section className={styles.container}>
-        <section
-          className={styles.cover}
-          data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
-        >
-          <ResponsiveImage
-            url={cover || IMAGE_DEFAULT_CURATED}
-            width={404}
-            height={404}
-            disableAnimation={true}
-          />
-        </section>
+      <section
+        className={styles.cover}
+        data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
+      >
+        <ResponsiveImage
+          url={cover || IMAGE_DEFAULT_CURATED}
+          width={404}
+          height={404}
+          disableAnimation={true}
+        />
+      </section>
 
-        <section className={styles.author}>
-          <UserDigest.Mini
-            user={article.author}
-            avatarSize="sm"
-            textSize="smS"
-            nameColor="black"
-            spacing="xxtight"
-            hasAvatar
-            hasDisplayName
-            onClick={onClickAuthor}
-          />
-        </section>
+      <section className={styles.author}>
+        <UserDigest.Mini
+          user={article.author}
+          avatarSize="sm"
+          textSize="smS"
+          nameColor="black"
+          spacing="xxtight"
+          hasAvatar
+          hasDisplayName
+          onClick={onClickAuthor}
+        />
+      </section>
 
-        <section className={styles.title}>
-          <ArticleDigestTitle
-            article={article}
-            textSize="md"
-            lineClamp={titleLineClamp}
-          />
-        </section>
+      <section className={styles.title}>
+        <ArticleDigestTitle
+          article={article}
+          textSize="md"
+          lineClamp={titleLineClamp}
+        />
       </section>
     </Card>
   )

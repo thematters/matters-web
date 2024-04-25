@@ -63,8 +63,6 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
     })
   }
 
-  console.log({ listArticles })
-
   return (
     <>
       <section className={styles.container}>
