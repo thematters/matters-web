@@ -1,15 +1,29 @@
+import gql from 'graphql-tag'
+
 import { useMutation } from '~/components/GQL'
-import {
-  ArticleDetailPublicQuery,
-  EditArticleSupportSettingMutation,
-} from '~/gql/graphql'
+import { EditArticleSupportSettingMutation } from '~/gql/graphql'
 
-import { EDIT_ARTICLE_SUPPORT_SETTING } from '../gql'
+const EDIT_ARTICLE_SUPPORT_SETTING = gql`
+  mutation EditArticleSupportSetting(
+    $id: ID!
+    $requestForDonation: requestForDonation_String_maxLength_140
+    $replyToDonator: replyToDonator_String_maxLength_140
+  ) {
+    editArticle(
+      input: {
+        id: $id
+        requestForDonation: $requestForDonation
+        replyToDonator: $replyToDonator
+      }
+    ) {
+      id
+      requestForDonation
+      replyToDonator
+    }
+  }
+`
 
-export const useEditArticleDetailSupportSetting = (
-  article?: ArticleDetailPublicQuery['article']
-) => {
-  const articleId = article?.id
+export const useEditArticleDetailSupportSetting = (articleId?: string) => {
   const [update, { loading: saving }] =
     useMutation<EditArticleSupportSettingMutation>(EDIT_ARTICLE_SUPPORT_SETTING)
 
