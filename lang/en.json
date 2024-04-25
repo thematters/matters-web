@@ -2461,9 +2461,6 @@
     "defaultMessage": "Add up to 5 tags",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
-  "tio9Gt": {
-    "defaultMessage": "IPFS"
-  },
   "tnWWrj": {
     "defaultMessage": "The comment has been forcibly hidden",
     "description": "src/components/CommentBeta/Content/index.tsx"

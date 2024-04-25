@@ -2461,9 +2461,6 @@
     "defaultMessage": "標籤添加最多至 5 個",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
-  "tio9Gt": {
-    "defaultMessage": "分佈式入口"
-  },
   "tnWWrj": {
     "defaultMessage": "評論已被強制隱藏",
     "description": "src/components/CommentBeta/Content/index.tsx"
