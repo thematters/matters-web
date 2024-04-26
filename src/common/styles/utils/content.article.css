@@ -30,7 +30,8 @@
     white-space: pre-wrap;
   }
 
-  & strong {
+  & strong,
+  & b {
     font-weight: var(--font-weight-semibold);
   }
 
