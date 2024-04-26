@@ -4,8 +4,10 @@ import {
   EditorContent,
   useCommentEditor,
 } from '@matters/matters-editor'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
+
+import { ActiveCommentEditorContext } from '~/components/Context'
 
 import { makeMentionSuggestion } from '../Article/extensions'
 import styles from './styles.module.css'
@@ -15,6 +17,7 @@ interface Props {
   update: (params: { content: string }) => void
   placeholder?: string
   setEditor?: (editor: Editor | null) => void
+  syncQuote?: boolean
 }
 
 const CommentEditor: React.FC<Props> = ({
@@ -22,9 +25,11 @@ const CommentEditor: React.FC<Props> = ({
   update,
   placeholder,
   setEditor,
+  syncQuote,
 }) => {
   const client = useApolloClient()
   const intl = useIntl()
+  const { setEditor: setActiveEditor } = useContext(ActiveCommentEditorContext)
 
   const editor = useCommentEditor({
     placeholder:
@@ -43,6 +48,9 @@ const CommentEditor: React.FC<Props> = ({
 
   useEffect(() => {
     setEditor?.(editor)
+    if (syncQuote) {
+      setActiveEditor(editor)
+    }
   }, [editor])
 
   return (

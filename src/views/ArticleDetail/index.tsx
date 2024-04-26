@@ -1,5 +1,4 @@
 import { useLazyQuery } from '@apollo/react-hooks'
-import { Editor } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
@@ -16,6 +15,7 @@ import {
   toPath,
 } from '~/common/utils'
 import {
+  ActiveCommentEditorProvider,
   BackToHomeButton,
   EmptyLayout,
   Error,
@@ -154,38 +154,13 @@ const BaseArticleDetail = ({
   }
 
   // Quote comment from Text Selection Popover
-  const [editor, setEditor] = useState<Editor | null>(null)
-  const [quoteComment, setQuoteComment] = useState('')
-  const clearQuoteComment = () => {
-    setQuoteComment('')
-  }
   useEventListener(
     OPEN_COMMENT_LIST_DRAWER,
     (payload: { [key: string]: any }) => {
       setCommentDrawerStep('commentList')
-      setQuoteComment(payload.quoteComment)
       setIsOpenComment(true)
     }
   )
-  useEffect(() => {
-    // wait for editor to be ready
-    if (!editor || !quoteComment) {
-      return
-    }
-
-    setTimeout(() => {
-      editor.commands.focus('end')
-      editor.commands.insertContent(quoteComment)
-      editor.commands.focus('end')
-      editor.commands.enter()
-      editor.commands.enter()
-
-      clearQuoteComment()
-
-      //  wait for the drawer animation to complete
-    }, 100)
-  }, [editor, quoteComment])
-
   // Donation
   const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
   const toggleDonationDrawer = () => {
@@ -344,7 +319,6 @@ const BaseArticleDetail = ({
           id={article.id}
           lock={!canReadFullContent}
           switchToCommentList={() => setCommentDrawerStep('commentList')}
-          setEditor={setEditor}
         />
 
         <SupportDrawer
@@ -691,7 +665,11 @@ const ArticleDetail = ({
   /**
    * Render:Article
    */
-  return <BaseArticleDetail article={article} privateFetched={privateFetched} />
+  return (
+    <ActiveCommentEditorProvider>
+      <BaseArticleDetail article={article} privateFetched={privateFetched} />
+    </ActiveCommentEditorProvider>
+  )
 }
 
 const ArticleDetailOuter = () => {

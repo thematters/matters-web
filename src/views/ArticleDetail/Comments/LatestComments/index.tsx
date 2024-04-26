@@ -1,4 +1,3 @@
-import { Editor } from '@matters/matters-editor'
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
@@ -42,15 +41,7 @@ type CommentArticle = NonNullable<
   LatestCommentsPublicQuery['article'] & { __typename: 'Article' }
 >
 
-const LatestComments = ({
-  id,
-  lock,
-  setEditor,
-}: {
-  id: string
-  lock: boolean
-  setEditor?: (editor: Editor | null) => void
-}) => {
+const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
 
   /**
@@ -155,11 +146,7 @@ const LatestComments = ({
   return (
     <section id="latest-comments">
       <Media greaterThan="sm">
-        <CommentFormBeta
-          articleId={article?.id}
-          type={'article'}
-          setEditor={setEditor}
-        />
+        <CommentFormBeta articleId={article?.id} type={'article'} syncQuote />
         <Spacer size="base" />
       </Media>
       {!comments || (comments.length <= 0 && <EmptyComment />)}

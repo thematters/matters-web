@@ -44,7 +44,7 @@ export interface CommentFormBetaProps {
   closeCallback?: () => void
 
   placeholder?: string
-  setEditor?: (editor: Editor | null) => void
+  syncQuote?: boolean
 }
 
 export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
@@ -59,7 +59,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   closeCallback,
 
   placeholder,
-  setEditor: _setEditor,
+  syncQuote,
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
@@ -195,9 +195,9 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
           content={content}
           update={onUpdate}
           placeholder={placeholder}
+          syncQuote={syncQuote}
           setEditor={(editor) => {
             setEditor(editor)
-            _setEditor?.(editor)
           }}
         />
       </section>
