@@ -38,17 +38,23 @@ export const CommentDraftsProvider = ({
   const client = useApolloClient()
 
   useEffect(() => {
-    const confirmLeave = () => {
-      if (window.confirm('Confirm to leave?')) {
+    const confirm = (url: string) => {
+      router.events.off('beforeHistoryChange', handleRouteChange)
+      router.push(url)
+    }
+
+    const confirmLeave = (url: string) => {
+      if (window.confirm('評論尚未發布，確定放棄內容離開此頁嗎？')) {
+        confirm(url)
         return true
       }
       router.events.emit('routeChangeError')
-      throw 'cancel route change'
     }
 
-    const handleRouteChange = () => {
+    const handleRouteChange = (url: string) => {
       const fn = async (index: number) => {
         if (index >= drafts.length) {
+          confirm(url)
           return
         }
 
@@ -62,11 +68,12 @@ export const CommentDraftsProvider = ({
           data?.commentDraft.content !== '' &&
           data?.commentDraft.content !== '<p></p>'
         ) {
-          confirmLeave()
+          return confirmLeave(url)
         }
         fn(index + 1)
       }
-      return fn(0)
+      fn(0)
+      throw 'Abort route change. Please ignore this error.'
     }
 
     router.events.on('beforeHistoryChange', handleRouteChange)
