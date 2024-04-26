@@ -55,6 +55,7 @@
   & blockquote {
     position: relative;
     padding: 0 var(--spacing-base);
+    color: var(--color-grey-darker);
 
     &::before {
       position: absolute;

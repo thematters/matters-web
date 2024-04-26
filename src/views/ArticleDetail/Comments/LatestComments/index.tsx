@@ -146,7 +146,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   return (
     <section id="latest-comments">
       <Media greaterThan="sm">
-        <CommentFormBeta articleId={article?.id} type={'article'} />
+        <CommentFormBeta articleId={article?.id} type={'article'} syncQuote />
         <Spacer size="base" />
       </Media>
       {!comments || (comments.length <= 0 && <EmptyComment />)}

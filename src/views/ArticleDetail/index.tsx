@@ -4,7 +4,10 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { OPEN_COMMENT_DETAIL_DIALOG } from '~/common/enums'
+import {
+  OPEN_COMMENT_DETAIL_DIALOG,
+  OPEN_COMMENT_LIST_DRAWER,
+} from '~/common/enums'
 import {
   isMediaHashPossiblyValid,
   normalizeTag,
@@ -12,6 +15,7 @@ import {
   toPath,
 } from '~/common/utils'
 import {
+  ActiveCommentEditorProvider,
   BackToHomeButton,
   EmptyLayout,
   Error,
@@ -26,6 +30,7 @@ import {
   Title,
   toast,
   Translate,
+  useEventListener,
   useFeatures,
   useIntersectionObserver,
   usePublicQuery,
@@ -116,28 +121,30 @@ const BaseArticleDetail = ({
   const viewer = useContext(ViewerContext)
 
   const features = useFeatures()
-  const [showFloatToolbar, setShowFloatToolbar] = useState(true)
-  const [showCommentToolbar, setShowCommentToolbar] = useState(false)
+
   const [isSensitive, setIsSensitive] = useState<boolean>(
     article.sensitiveByAuthor || article.sensitiveByAdmin
   )
 
+  // Float toolbar
+  const [showFloatToolbar, setShowFloatToolbar] = useState(true)
   const {
     isIntersecting: isIntersectingDesktopToolbar,
     ref: desktopToolbarRef,
   } = useIntersectionObserver()
-
   useEffect(() => {
     setShowFloatToolbar(!isIntersectingDesktopToolbar)
   }, [isIntersectingDesktopToolbar])
 
+  // Comment toolbar
+  const [showCommentToolbar, setShowCommentToolbar] = useState(false)
   const { isIntersecting: isIntersectingComments, ref: commentsRef } =
     useIntersectionObserver()
-
   useEffect(() => {
     setShowCommentToolbar(isIntersectingComments)
   }, [isIntersectingComments])
 
+  // Comment
   const [commentDrawerStep, setCommentDrawerStep] = useState<CommentDrawerStep>(
     parentId !== '' ? 'commentDetail' : 'commentList'
   )
@@ -146,6 +153,15 @@ const BaseArticleDetail = ({
     setIsOpenComment((prevState) => !prevState)
   }
 
+  // Quote comment from Text Selection Popover
+  useEventListener(
+    OPEN_COMMENT_LIST_DRAWER,
+    (payload: { [key: string]: any }) => {
+      setCommentDrawerStep('commentList')
+      setIsOpenComment(true)
+    }
+  )
+  // Donation
   const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
   const toggleDonationDrawer = () => {
     setIsOpenDonationDrawer((prevState) => !prevState)
@@ -649,7 +665,11 @@ const ArticleDetail = ({
   /**
    * Render:Article
    */
-  return <BaseArticleDetail article={article} privateFetched={privateFetched} />
+  return (
+    <ActiveCommentEditorProvider>
+      <BaseArticleDetail article={article} privateFetched={privateFetched} />
+    </ActiveCommentEditorProvider>
+  )
 }
 
 const ArticleDetailOuter = () => {
