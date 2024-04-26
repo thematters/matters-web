@@ -91,7 +91,11 @@ const UpvoteButton = ({
           id: 'z3uIHQ',
         })}
       >
-        <TextIcon icon={<IconLikeFill16 color="redLight" />} color="black">
+        <TextIcon
+          icon={<IconLikeFill16 color="redLight" size="mdXS" />}
+          color="black"
+          size="mdS"
+        >
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
         </TextIcon>
       </Button>
@@ -112,7 +116,7 @@ const UpvoteButton = ({
         id: 'ZD+vm/',
       })}
     >
-      <TextIcon icon={<IconLike16 />}>
+      <TextIcon icon={<IconLike16 size="mdXS" />} size="mdS">
         {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
       </TextIcon>
     </Button>

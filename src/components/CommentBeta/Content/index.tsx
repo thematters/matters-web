@@ -101,6 +101,7 @@ const Content = ({
           isRichShow={isRichShow}
           bgColor={bgColor}
           textIndent={textIndent}
+          size={size}
         >
           <section
             className={`${contentClasses} u-content-comment`}

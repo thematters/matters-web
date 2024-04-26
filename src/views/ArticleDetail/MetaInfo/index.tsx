@@ -81,9 +81,7 @@ const MetaInfo = ({
             }).href
           }
         >
-          <TextIcon size="xs">
-            <FormattedMessage defaultMessage="IPFS" id="tio9Gt" />
-          </TextIcon>
+          <TextIcon size="xs">IPFS</TextIcon>
         </Button>
       )}
 
