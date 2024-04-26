@@ -27,6 +27,7 @@
 
   & .baseDrawerContainer {
     position: fixed;
+    z-index: calc(var(--z-index-over-bottom-bar) + 1);
     display: flex;
     flex-direction: column;
     padding: 0 var(--spacing-xx-loose);

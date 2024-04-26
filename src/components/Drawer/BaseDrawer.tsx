@@ -68,13 +68,11 @@ export const BaseDrawer = ({
   direction,
   children,
   duration = 200,
-  zIndex = 100,
   enableOverlay = true,
   className,
   size,
 }: BaseDrawerProps) => {
   const drawerStyles: CSSProperties = {
-    zIndex: zIndex,
     transitionDuration: `${duration}ms`,
     ...getDirectionStyle(direction, size),
   }
