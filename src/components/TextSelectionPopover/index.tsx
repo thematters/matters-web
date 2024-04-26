@@ -1,8 +1,8 @@
 import classNames from 'classnames'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 
 import { OPEN_COMMENT_LIST_DRAWER } from '~/common/enums'
-import { IconComment24 } from '~/components'
+import { ActiveCommentEditorContext, IconComment24 } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -16,6 +16,26 @@ export const TextSelectionPopover = ({
   const [selection, setSelection] = useState<string>()
   const [position, setPosition] = useState<Record<string, number>>() // { x, y, width, height }
   const ref = useRef<HTMLDivElement>(null)
+  const { editor } = useContext(ActiveCommentEditorContext)
+  const [quote, setQuote] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (!editor || !quote) {
+      return
+    }
+
+    setTimeout(() => {
+      editor.commands.focus('end')
+      editor.commands.insertContent(quote)
+      editor.commands.focus('end')
+      editor.commands.enter()
+      editor.commands.enter()
+
+      setQuote(null)
+
+      //  wait for the drawer animation to complete
+    }, 100)
+  }, [editor, quote])
 
   const onSelectStart = () => {
     setSelection(undefined)
@@ -91,13 +111,8 @@ export const TextSelectionPopover = ({
       return
     }
 
-    window.dispatchEvent(
-      new CustomEvent(OPEN_COMMENT_LIST_DRAWER, {
-        detail: {
-          quoteComment: `<blockquote>${selection}</blockquote>`,
-        },
-      })
-    )
+    window.dispatchEvent(new CustomEvent(OPEN_COMMENT_LIST_DRAWER))
+    setQuote(`<blockquote>${selection}</blockquote>`)
     setSelection(undefined)
   }
 

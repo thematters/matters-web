@@ -1,4 +1,3 @@
-import { Editor } from '@matters/matters-editor'
 import dynamic from 'next/dynamic'
 import { useIntl } from 'react-intl'
 
@@ -28,7 +27,6 @@ type CommentDrawerProps = {
   id: string
   lock: boolean
   switchToCommentList: () => void
-  setEditor?: (editor: Editor | null) => void
 }
 
 export const CommentDrawer: React.FC<CommentDrawerProps> = ({
@@ -38,7 +36,6 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
   id,
   lock,
   switchToCommentList,
-  setEditor,
 }) => {
   const intl = useIntl()
   const isCommentDetail = step === 'commentDetail'
@@ -57,7 +54,7 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
             closeDrawer={onClose}
           />
           <Drawer.Content>
-            <DynamicComments id={id} lock={lock} setEditor={setEditor} />
+            <DynamicComments id={id} lock={lock} />
           </Drawer.Content>
         </>
       )}

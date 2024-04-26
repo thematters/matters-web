@@ -1,41 +1,43 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { URL_QS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Button,
   DateTime,
   DotDivider,
   IconEdit16,
-  Media,
   TextIcon,
   UserDigest,
   ViewerContext,
 } from '~/components'
-import { ArticleDetailPublicQuery } from '~/gql/graphql'
+import {
+  MetaInfoArticleFragment,
+  MetaInfoArticleVersionFragment,
+} from '~/gql/graphql'
 
-import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 import TranslationButton from './TranslationButton'
 
 type MetaInfoProps = {
-  article: NonNullable<ArticleDetailPublicQuery['article']>
+  article: MetaInfoArticleFragment
+  version?: MetaInfoArticleVersionFragment
   translated: boolean
   canTranslate: boolean
   toggleTranslate: () => any
   canReadFullContent: boolean
-  disabled: boolean
+  editable?: boolean
 }
 
 const MetaInfo = ({
   article,
+  version,
   translated,
   canTranslate,
   toggleTranslate,
   canReadFullContent,
-  disabled,
+  editable,
 }: MetaInfoProps) => {
   const viewer = useContext(ViewerContext)
   const authorId = article.author.id
@@ -45,32 +47,44 @@ const MetaInfo = ({
 
   return (
     <section className={styles.info}>
-      <Media at="sm">
-        {/* TODO: Confirm display word length with product */}
-        <section className={styles.author}>
-          <UserDigest.Plain user={article.author} />
-          <section className={styles.dot}>
-            <DotDivider />
-          </section>
+      {/* TODO: Confirm display word length with product */}
+      <section className={styles.author}>
+        <UserDigest.Plain user={article.author} />
+        <section className={styles.dot}>
+          <DotDivider />
         </section>
-      </Media>
+      </section>
 
       <section className={styles.time}>
         <DateTime
-          date={article.revisedAt ? article.revisedAt : article.createdAt}
+          date={version?.createdAt || article.revisedAt || article.createdAt}
           size="xs"
           color="greyDarker"
         />
-        <span className={styles.edited}>
-          &nbsp;
-          <FormattedMessage
-            defaultMessage="published on"
-            id="1i2T4a"
-            description="src/views/ArticleDetail/MetaInfo/index.tsx"
-          />
+        <span>
+          {version?.createdAt ? (
+            <FormattedMessage defaultMessage=" published" id="twEps9" />
+          ) : (
+            <FormattedMessage defaultMessage=" published on" id="ux4p3j" />
+          )}
         </span>
       </section>
-      <FingerprintButton article={article} />
+
+      {!version && (
+        <Button
+          textColor="black"
+          textActiveColor="greyDarker"
+          href={
+            toPath({
+              page: 'articleHistory',
+              article,
+            }).href
+          }
+        >
+          <TextIcon size="xs">IPFS</TextIcon>
+        </Button>
+      )}
+
       {canReadFullContent && (
         <>
           {canTranslate && !isAuthor && (
@@ -86,7 +100,8 @@ const MetaInfo = ({
               />
             </>
           )}
-          {isAuthor && (
+
+          {isAuthor && !version && (
             <>
               <section className={styles.dot}>
                 <DotDivider />
@@ -95,12 +110,8 @@ const MetaInfo = ({
               <Button
                 textColor="black"
                 textActiveColor="greyDarker"
-                href={
-                  !disabled
-                    ? `${href}?${URL_QS.MODE_EDIT.key}=${URL_QS.MODE_EDIT.value}`
-                    : undefined
-                }
-                disabled={disabled}
+                href={editable ? `${href}/edit` : undefined}
+                disabled={!editable}
               >
                 <TextIcon icon={<IconEdit16 />} size="xs">
                   <FormattedMessage

@@ -1,24 +1,22 @@
+import classNames from 'classnames'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
 import {
   CircleDigest,
   IconArrowRight16,
   IconChecked32,
-  LanguageContext,
   Switch,
-  Translate,
   ViewerContext,
 } from '~/components'
 import {
   ArticleAccessType,
-  ArticleDetailPublicQuery,
   ArticleLicenseType,
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
 } from '~/gql/graphql'
 
+import ListItem from '../ListItem'
 import SelectLicense from './SelectLicense'
 import styles from './styles.module.css'
 
@@ -37,7 +35,11 @@ export type ToggleAccessProps = {
   canToggleCircle: boolean
 
   draft?: EditMetaDraftFragment
-  article?: ArticleDetailPublicQuery['article']
+  article?: {
+    replyToDonator?: string | null
+    requestForDonation?: string | null
+    canComment: boolean
+  }
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null
@@ -53,7 +55,7 @@ export type ToggleAccessProps = {
   togglePublishISCN: (iscnPublish: boolean) => void
   iscnPublishSaving: boolean
 
-  inSidebar?: boolean
+  compact?: boolean
 }
 
 const ToggleAccess: React.FC<ToggleAccessProps> = ({
@@ -76,26 +78,34 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   togglePublishISCN,
   iscnPublishSaving,
 
-  inSidebar,
+  compact,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const content = draft ? draft : article
   const viewer = useContext(ViewerContext)
   const likerId = viewer.liker.likerId
 
   return (
-    <section className={inSidebar ? styles.inSidebar : ''}>
+    <section
+      className={classNames({
+        [styles.container]: true,
+        [styles.compact]: compact,
+      })}
+    >
       {canToggleCircle && (
         <section className={styles.circle}>
           <section className={styles.switch}>
             <header className={styles.header}>
               <h3 className={styles.title}>
-                <Translate id="addToCircle" />
+                <FormattedMessage defaultMessage="Add to Circle" id="06XHBC" />
               </h3>
 
               <Switch
                 name="circle"
-                label={translate({ id: 'addToCircle', lang })}
+                label={intl.formatMessage({
+                  defaultMessage: 'Add to Circle',
+                  id: '06XHBC',
+                })}
                 checked={!!circle}
                 onChange={() =>
                   editAccess(
@@ -129,7 +139,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
       <section className={styles.license}>
         <h3 className={styles.title}>
-          <Translate id="license" />
+          <FormattedMessage defaultMessage="License" id="HBxXD/" />
         </h3>
 
         <section className={styles.select}>
@@ -148,44 +158,71 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
       </section>
 
       <section className={styles.supportSetting}>
-        <button type="button" onClick={onOpenSupportSetting}>
-          <section className={styles.support}>
-            <section className={styles.left}>
-              <h3 className={styles.title}>
+        {compact ? (
+          <button type="button" onClick={onOpenSupportSetting}>
+            <section className={styles.support}>
+              <section className={styles.left}>
+                <h3 className={styles.title}>
+                  <FormattedMessage
+                    defaultMessage="Support Setting"
+                    id="5IS+ui"
+                  />
+                </h3>
+
+                {content &&
+                (content.replyToDonator || content.requestForDonation) ? (
+                  <IconChecked32 size="md" />
+                ) : (
+                  <IconArrowRight16 color="grey" />
+                )}
+              </section>
+
+              <p className={styles.hint}>
                 <FormattedMessage
-                  defaultMessage="Support Setting"
-                  id="5IS+ui"
+                  defaultMessage="Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+                  id="DUvMii"
                 />
-              </h3>
-
-              {content &&
-              (content.replyToDonator || content.requestForDonation) ? (
-                <IconChecked32 size="md" />
-              ) : (
-                <IconArrowRight16 />
-              )}
+              </p>
             </section>
-
-            <p className={styles.hint}>
-              <Translate
-                zh_hans="可自订号召支持的内容，以及收到支持后的感谢文字"
-                zh_hant="可自訂號召支持的內容，以及收到支持後的感謝文字"
-                en="Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+          </button>
+        ) : (
+          <ListItem
+            title={
+              <FormattedMessage defaultMessage="Support Setting" id="5IS+ui" />
+            }
+            subTitle={
+              <FormattedMessage
+                defaultMessage="Customize your call-to-support prompt to audience, or thank-you card for those who supported you."
+                id="DUvMii"
               />
-            </p>
-          </section>
-        </button>
+            }
+            hint
+            onClick={onOpenSupportSetting}
+          >
+            <ListItem.ArrowIndicator
+              checked={
+                !!(
+                  content &&
+                  (content.replyToDonator || content.requestForDonation)
+                )
+              }
+            />
+          </ListItem>
+        )}
       </section>
 
       <section className={styles.sensitive}>
         <header className={styles.header}>
           <h3 className={styles.title}>
-            <Translate id="restrictedContent" />
+            <FormattedMessage defaultMessage="Restricted content" id="d5+b8r" />
           </h3>
 
           <Switch
             name="sensitive"
-            label={translate({ id: 'restrictedContent', lang })}
+            label={intl.formatMessage({
+              defaultMessage: 'Restricted content',
+              id: 'd5+b8r',
+            })}
             checked={!!contentSensitive}
             onChange={() => {
               toggleContentSensitive(!contentSensitive)
@@ -207,12 +244,18 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         <section className={styles.iscn}>
           <header className={styles.header}>
             <h3 className={styles.title}>
-              <Translate id="publishToISCN" />
+              <FormattedMessage
+                defaultMessage="Register for ISCN"
+                id="SuRTsQ"
+              />
             </h3>
 
             <Switch
               name="iscn"
-              label={translate({ id: 'publishToISCN', lang })}
+              label={intl.formatMessage({
+                defaultMessage: 'Register for ISCN',
+                id: 'SuRTsQ',
+              })}
               checked={!!iscnPublish}
               onChange={() => {
                 togglePublishISCN(!iscnPublish)
@@ -222,7 +265,10 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
           </header>
 
           <p className={styles.hint}>
-            <Translate id="publishToISCNHint_1" />
+            <FormattedMessage
+              defaultMessage="Registering ISCN allows you to publish Writing NFT. The cost of "
+              id="2qbSh8"
+            />
             <a
               href="https://docs.like.co/v/zh/general-guides/writing-nft/nft-portal#publish-writing-nft-with-iscn-id"
               target="_blank"
@@ -230,7 +276,10 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
             >
               ISCN
             </a>
-            <Translate id="publishToISCNHint_2" />
+            <FormattedMessage
+              defaultMessage=" registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
+              id="Kwv1n3"
+            />
           </p>
         </section>
       )}

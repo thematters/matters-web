@@ -4,6 +4,7 @@ export const ANALYTICS = 'analytics'
 // Article
 export const REFETCH_RESPONSES = 'refetchResponses'
 export const SYNC_APPRECIATE_BUTTON_COUNT = 'syncAppreciateButtonCount'
+export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
 
 // Tag
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'

@@ -1,14 +1,12 @@
 import { useLazyQuery } from '@apollo/react-hooks'
-import { Editor } from '@matters/matters-editor'
 import formatISO from 'date-fns/formatISO'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
-  REFERRAL_QUERY_REFERRAL_KEY,
-  URL_QS,
 } from '~/common/enums'
 import {
   isMediaHashPossiblyValid,
@@ -17,6 +15,7 @@ import {
   toPath,
 } from '~/common/utils'
 import {
+  ActiveCommentEditorProvider,
   BackToHomeButton,
   EmptyLayout,
   Error,
@@ -63,7 +62,7 @@ import {
 import License from './License'
 import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
-import State from './State'
+import StickyTopBanner from './StickyTopBanner'
 import styles from './styles.module.css'
 import { SupportDrawer } from './Support/SupportDrawer'
 import TagList from './TagList'
@@ -86,14 +85,6 @@ const DynamicComments = dynamic(() => import('./Comments'), {
   loading: () => <CommentsPlaceholder />,
 })
 
-const DynamicEditMode = dynamic(() => import('./EditMode'), {
-  ssr: false,
-  loading: () => (
-    <EmptyLayout>
-      <Spinner />
-    </EmptyLayout>
-  ),
-})
 const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: () => <Spinner />,
@@ -163,38 +154,13 @@ const BaseArticleDetail = ({
   }
 
   // Quote comment from Text Selection Popover
-  const [editor, setEditor] = useState<Editor | null>(null)
-  const [quoteComment, setQuoteComment] = useState('')
-  const clearQuoteComment = () => {
-    setQuoteComment('')
-  }
   useEventListener(
     OPEN_COMMENT_LIST_DRAWER,
     (payload: { [key: string]: any }) => {
       setCommentDrawerStep('commentList')
-      setQuoteComment(payload.quoteComment)
       setIsOpenComment(true)
     }
   )
-  useEffect(() => {
-    // wait for editor to be ready
-    if (!editor || !quoteComment) {
-      return
-    }
-
-    setTimeout(() => {
-      editor.commands.focus('end')
-      editor.commands.insertContent(quoteComment)
-      editor.commands.focus('end')
-      editor.commands.enter()
-      editor.commands.enter()
-
-      clearQuoteComment()
-
-      //  wait for the drawer animation to complete
-    }, 100)
-  }, [editor, quoteComment])
-
   // Donation
   const [isOpenDonationDrawer, setIsOpenDonationDrawer] = useState(false)
   const toggleDonationDrawer = () => {
@@ -231,10 +197,9 @@ const BaseArticleDetail = ({
 
     toast.success({
       message: (
-        <Translate
-          zh_hant="正在透過 Google 翻譯..."
-          zh_hans="正在通过 Google 翻译..."
-          en="Translating by Google..."
+        <FormattedMessage
+          defaultMessage="Translating by Google..."
+          id="17K30q"
         />
       ),
     })
@@ -344,7 +309,7 @@ const BaseArticleDetail = ({
         availableLanguages={article.availableTranslations || []}
       />
 
-      <State article={article} />
+      <StickyTopBanner type="inactive" article={article} />
 
       <Media greaterThan="sm">
         <CommentDrawer
@@ -354,7 +319,6 @@ const BaseArticleDetail = ({
           id={article.id}
           lock={!canReadFullContent}
           switchToCommentList={() => setCommentDrawerStep('commentList')}
-          setEditor={setEditor}
         />
 
         <SupportDrawer
@@ -374,7 +338,7 @@ const BaseArticleDetail = ({
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
             canReadFullContent={canReadFullContent}
-            disabled={lock}
+            editable={!lock}
           />
         </section>
 
@@ -390,7 +354,7 @@ const BaseArticleDetail = ({
         {!isSensitive && (
           <>
             <Content
-              article={article}
+              articleId={article.id}
               content={content}
               translating={translating}
             />
@@ -420,7 +384,6 @@ const BaseArticleDetail = ({
               translated={translated}
               translatedLanguage={translatedLanguage}
               privateFetched={privateFetched}
-              hasFingerprint={canReadFullContent}
               hasReport
               lock={lock}
               toggleDrawer={toggleCommentDrawer}
@@ -467,7 +430,6 @@ const BaseArticleDetail = ({
               translated={translated}
               translatedLanguage={translatedLanguage}
               privateFetched={privateFetched}
-              hasFingerprint={canReadFullContent}
               lock={lock}
               showCommentToolbar={showCommentToolbar && article.canComment}
               openCommentsDialog={
@@ -512,7 +474,6 @@ const ArticleDetail = ({
   includeTranslation: boolean
 }) => {
   const { getQuery, router, routerLang } = useRoute()
-  const [needRefetchData, setNeedRefetchData] = useState(false)
   const mediaHash = getQuery('mediaHash')
   const articleId =
     (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
@@ -593,12 +554,8 @@ const ArticleDetail = ({
 
     // refetch data when URL query is changed
     ;(async () => {
-      if (!needRefetchData) {
-        return
-      }
       await refetchPublic()
       await loadPrivate()
-      setNeedRefetchData(false)
     })()
   }, [mediaHash])
 
@@ -629,15 +586,6 @@ const ArticleDetail = ({
       `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${newPath.href}`
     )
 
-    // TODO: can remove this after 2024/2
-    const isNomadTags = article.tags?.some(
-      (tag) => tag.content === 'nomadmatters' || tag.content === '遊牧者計畫'
-    )
-    const hasReferral = u.searchParams.has(REFERRAL_QUERY_REFERRAL_KEY)
-    if (!hasReferral && isNomadTags && viewer.userName) {
-      u.searchParams.append(REFERRAL_QUERY_REFERRAL_KEY, viewer.userName)
-    }
-
     // hide all utm_ tracking code parameters
     // copy all others
     const rems = [
@@ -651,36 +599,6 @@ const ArticleDetail = ({
       router.replace(nhref, undefined, { shallow: true, locale: false })
     }
   }, [latestHash])
-
-  // edit mode
-  const canEdit = isAuthor && !viewer.isInactive
-  const mode = getQuery(URL_QS.MODE_EDIT.key)
-  const [editMode, setEditMode] = useState(false)
-  const exitEditMode = () => {
-    if (!article) {
-      return
-    }
-
-    setNeedRefetchData(true)
-    const path = toPath({ page: 'articleDetail', article })
-    router.replace(path.href)
-  }
-
-  const onEditSaved = async () => {
-    setEditMode(false)
-    exitEditMode()
-
-    await refetchPublic()
-    loadPrivate()
-  }
-
-  useEffect(() => {
-    if (!canEdit || !article) {
-      return
-    }
-
-    setEditMode(mode === URL_QS.MODE_EDIT.value)
-  }, [mode, article])
 
   /**
    * Render:Loading
@@ -745,22 +663,13 @@ const ArticleDetail = ({
   }
 
   /**
-   * Render:Edit Mode
-   */
-  if (editMode) {
-    return (
-      <DynamicEditMode
-        article={article}
-        onCancel={exitEditMode}
-        onSaved={onEditSaved}
-      />
-    )
-  }
-
-  /**
    * Render:Article
    */
-  return <BaseArticleDetail article={article} privateFetched={privateFetched} />
+  return (
+    <ActiveCommentEditorProvider>
+      <BaseArticleDetail article={article} privateFetched={privateFetched} />
+    </ActiveCommentEditorProvider>
+  )
 }
 
 const ArticleDetailOuter = () => {

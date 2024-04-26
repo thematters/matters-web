@@ -1,5 +1,5 @@
 .u-content-comment {
-  line-height: 1.6;
+  line-height: 1.75;
 
   & > * {
     margin: 0;
@@ -55,6 +55,7 @@
   & blockquote {
     position: relative;
     padding: 0 var(--spacing-base);
+    color: var(--color-grey-darker);
 
     &::before {
       position: absolute;

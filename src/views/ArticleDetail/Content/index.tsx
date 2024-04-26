@@ -11,7 +11,7 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { ContentArticleFragment, ReadArticleMutation } from '~/gql/graphql'
+import { ReadArticleMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -24,11 +24,11 @@ const READ_ARTICLE = gql`
 `
 
 const Content = ({
-  article,
+  articleId,
   content,
   translating,
 }: {
-  article: ContentArticleFragment
+  articleId: string
   content: string
   translating?: boolean
 }) => {
@@ -93,12 +93,12 @@ const Content = ({
 
         // if user is logged in, ReadArticle mutation will be invoked multiple times
         if (viewer.isAuthed && isReading()) {
-          read({ variables: { id: article.id } })
+          read({ variables: { id: articleId } })
         }
 
         // if visitor, invoke ReadArticle mutation only once
         if (!viewer.isAuthed && !visitorReadRef.current) {
-          read({ variables: { id: article.id } })
+          read({ variables: { id: articleId } })
           visitorReadRef.current = true
         }
         return heartbeat
@@ -135,17 +135,6 @@ const Content = ({
       </Media>
     </>
   )
-}
-
-Content.fragments = {
-  article: gql`
-    fragment ContentArticle on Article {
-      id
-      contents {
-        html
-      }
-    }
-  `,
 }
 
 export default Content
