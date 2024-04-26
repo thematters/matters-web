@@ -166,7 +166,7 @@ const BaseDropdownActions = ({
           aria-haspopup="listbox"
           ref={ref}
         >
-          <IconMore16 />
+          <IconMore16 size="mdXS" />
         </Button>
       )}
     </Dropdown>
