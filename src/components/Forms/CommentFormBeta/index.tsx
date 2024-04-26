@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import { Editor } from '@matters/matters-editor'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -11,6 +11,7 @@ import {
 import { dom, stripHtml } from '~/common/utils'
 import {
   Button,
+  CommentDraftsContext,
   IconSpinner16,
   TextIcon,
   useMutation,
@@ -63,6 +64,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
+  const { addDraft, removeDraft } = useContext(CommentDraftsContext)
   const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const [editor, setEditor] = useState<Editor | null>(null)
@@ -76,6 +78,10 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
     variables: { id: commentDraftId },
   })
+
+  useEffect(() => {
+    addDraft(commentDraftId)
+  }, [commentDraftId])
 
   const [putComment] = useMutation<PutCommentBetaMutation>(PUT_COMMENT_BETA)
   const [isSubmitting, setSubmitting] = useState(false)
@@ -160,6 +166,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
         id: `CommentDraft:${commentDraftId}`,
         data: { content: '' },
       })
+      removeDraft(commentDraftId)
 
       if (closeCallback) {
         closeCallback()
