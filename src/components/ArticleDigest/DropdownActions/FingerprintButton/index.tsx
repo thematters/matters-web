@@ -1,6 +1,7 @@
 import { useIntl } from 'react-intl'
 
-import { IconIPFS24, Menu } from '~/components'
+import { ReactComponent as IconIPFS } from '@/public/static/icons/24px/ipfs.svg'
+import { Icon, Menu } from '~/components'
 
 interface FingerprintButtonProps {
   openDialog: () => void
@@ -17,7 +18,7 @@ const FingerprintButton = ({ openDialog }: FingerprintButtonProps) => {
         description:
           'src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx',
       })}
-      icon={<IconIPFS24 size="mdS" />}
+      icon={<Icon icon={IconIPFS} size="mdS" />}
       onClick={openDialog}
       ariaHasPopup="dialog"
     />

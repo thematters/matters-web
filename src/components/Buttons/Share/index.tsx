@@ -1,11 +1,12 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
 import { translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
+  Icon,
   IconColor,
-  IconShare24,
   IconSize,
   LanguageContext,
   ShareDialog,
@@ -62,7 +63,9 @@ export const ShareButton: React.FC<
           onClick={openDialog}
           disabled={disabled}
         >
-          {hasIcon && <IconShare24 size={iconSize} color={iconColor} />}
+          {hasIcon && (
+            <Icon icon={IconShare} size={iconSize} color={iconColor} />
+          )}
           {children}
         </Button>
       )}

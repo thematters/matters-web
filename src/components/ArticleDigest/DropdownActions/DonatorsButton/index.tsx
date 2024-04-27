@@ -1,6 +1,7 @@
 import { useIntl } from 'react-intl'
 
-import { IconDonate24, Menu } from '~/components'
+import { ReactComponent as IconDonate } from '@/public/static/icons/24px/donate.svg'
+import { Icon, Menu } from '~/components'
 
 interface DonatorsButtonProps {
   openDialog: () => void
@@ -17,7 +18,7 @@ const DonatorsButton = ({ openDialog }: DonatorsButtonProps) => {
         description:
           'src/components/ArticleDigest/DropdownActions/DonatorsButton/index.tsx',
       })}
-      icon={<IconDonate24 size="mdS" />}
+      icon={<Icon icon={IconDonate} size="mdS" />}
       onClick={openDialog}
       ariaHasPopup="dialog"
     />

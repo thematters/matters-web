@@ -4,6 +4,7 @@ import _omit from 'lodash/omit'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import {
   ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
@@ -11,9 +12,9 @@ import {
 } from '~/common/enums'
 import { sleep, translate, validateImage } from '~/common/utils'
 import {
-  IconCamera16,
-  IconSpinner16,
+  Icon,
   LanguageContext,
+  Spinner,
   TextIcon,
   toast,
   Translate,
@@ -163,7 +164,7 @@ const Uploader: React.FC<UploaderProps> = ({
     <label className={labelClasses} htmlFor={fieldId}>
       <h3>
         <TextIcon
-          icon={<IconCamera16 />}
+          icon={<Icon icon={IconCamera} />}
           color="green"
           size="sm"
           weight="md"
@@ -172,7 +173,7 @@ const Uploader: React.FC<UploaderProps> = ({
           <Translate id="uploadCover" />
         </TextIcon>
 
-        {(loading || uploading) && <IconSpinner16 color="greyLight" />}
+        {(loading || uploading) && <Spinner color="greyLight" />}
       </h3>
 
       <p>

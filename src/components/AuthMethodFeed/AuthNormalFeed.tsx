@@ -2,6 +2,9 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconGoogle } from '@/public/static/icons/24px/google.svg'
+import { ReactComponent as IconMail } from '@/public/static/icons/24px/mail.svg'
+import { ReactComponent as IconX } from '@/public/static/icons/24px/x.svg'
 import { PATHS } from '~/common/enums'
 import {
   // facebookOauthUrl,
@@ -9,14 +12,7 @@ import {
   sleep,
   twitterOauthUrl,
 } from '~/common/utils'
-import {
-  // IconFacebook22,
-  IconGoogle22,
-  IconMail22,
-  IconSpinner22,
-  IconX22,
-  useRoute,
-} from '~/components'
+import { Icon, Spinner, useRoute } from '~/components'
 
 import { OAUTH_REQUEST_TOKEN } from '../GQL/queries/oauthRequestToken'
 import styles from './styles.module.css'
@@ -75,7 +71,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
       <ul className={styles.feed}>
         <li className={styles.item} role="button" onClick={gotoEmailLogin}>
           <span className={styles.icon}>
-            <IconMail22 size="mdM" />
+            <Icon icon={IconMail} size="mdM" />
           </span>
           <span className={styles.name}>
             <FormattedMessage defaultMessage="Email" id="sy+pv5" />
@@ -83,34 +79,34 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
         </li>
         <li className={styles.item} role="button" onClick={gotoGoogle}>
           <span className={styles.icon}>
-            <IconGoogle22 size="mdM" />
+            <Icon icon={IconGoogle} size="mdM" />
           </span>
           <span className={styles.name}>Google</span>
           {isGoogleLoading && (
             <span className={styles.right}>
-              <IconSpinner22 color="grey" size="mdM" />
+              <Spinner color="grey" size="mdM" />
             </span>
           )}
         </li>
         <li className={styles.item} role="button" onClick={gotoTwitter}>
           <span className={styles.icon}>
-            <IconX22 size="mdM" />
+            <Icon icon={IconX} size="mdM" />
           </span>
           <span className={styles.name}>Twitter</span>
           {isTwitterLoading && (
             <span className={styles.right}>
-              <IconSpinner22 color="grey" size="mdM" />
+              <Spinner color="grey" size="mdM" />
             </span>
           )}
         </li>
         {/* <li className={styles.item} role="button" onClick={gotoFacebook}>
           <span className={styles.icon}>
-            <IconFacebook22 size="mdM" />
+            <Icon icon={IconFacebook} size="mdM" />
           </span>
           <span className={styles.name}>Facebook</span>
           {isFacebookLoading && (
             <span className={styles.right}>
-              <IconSpinner22 color="grey" size="mdM" />
+              <Spinner color="grey" size="mdM" />
             </span>
           )}
         </li> */}

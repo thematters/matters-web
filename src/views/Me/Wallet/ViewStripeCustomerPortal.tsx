@@ -1,12 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import {
-  IconExternalLink16,
-  TableView,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
+import { Icon, TableView, TextIcon, Translate } from '~/components'
 import { GetCustomerPortalQuery } from '~/gql/graphql'
 
 const GET_CUSTOMER_PORTAL = gql`
@@ -39,7 +35,9 @@ const ViewStripeCustomerPortal = () => {
       }
       htmlHref={url}
       htmlTarget="_blank"
-      right={<TextIcon icon={<IconExternalLink16 color="grey" size="sm" />} />}
+      right={
+        <TextIcon icon={<Icon icon={IconExternal} color="grey" size="sm" />} />
+      }
       role="link"
     />
   )

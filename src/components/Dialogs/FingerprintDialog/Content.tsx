@@ -3,15 +3,16 @@ import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/donate.svg'
+import { ReactComponent as IconExternal } from '@/public/static/icons/24px/donate.svg'
+import { ReactComponent as IconIPFS } from '@/public/static/icons/24px/ipfs-2.svg'
+import { ReactComponent as IconISCN } from '@/public/static/icons/24px/iscn.svg'
 import { translate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
   Dialog,
-  IconCopy16,
-  IconExternalLink16,
-  IconIPFSGreen24,
-  IconISCN24,
+  Icon,
   LanguageContext,
   Spacer,
   Spinner,
@@ -130,7 +131,7 @@ const FingerprintDialogContent = ({
         <SectionCard
           title={
             <TextIcon
-              icon={<IconIPFSGreen24 size="mdXS" />}
+              icon={<Icon icon={IconIPFS} size="mdXS" />}
               spacing="xtight"
               size="xm"
               weight="md"
@@ -187,7 +188,7 @@ const FingerprintDialogContent = ({
                       className={styles.gatewayUrl}
                     >
                       {hostname}
-                      <IconExternalLink16 />
+                      <Icon icon={IconExternal} />
                     </a>
                   </li>
                 )
@@ -229,7 +230,7 @@ const FingerprintDialogContent = ({
                     })}
                     onClick={copyToClipboard}
                   >
-                    <IconCopy16 />
+                    <Icon icon={IconCopy} />
                   </Button>
                 )}
               </CopyToClipboard>
@@ -244,7 +245,7 @@ const FingerprintDialogContent = ({
             <SectionCard
               title={
                 <TextIcon
-                  icon={<IconISCN24 size="mdXS" />}
+                  icon={<Icon icon={IconISCN} size="mdXS" />}
                   spacing="xtight"
                   size="xm"
                   weight="md"
@@ -275,7 +276,7 @@ const FingerprintDialogContent = ({
                     target="_blank"
                     rel="noreferrer"
                   >
-                    <IconExternalLink16 color="greyDarker" />
+                    <Icon icon={IconExternal} color="greyDarker" />
                   </a>
                 ) : isAuthor ? (
                   <Button

@@ -3,7 +3,8 @@ import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, FingerprintDialog, IconIPFS24, TextIcon } from '~/components'
+import { ReactComponent as IconIPFS } from '@/public/static/icons/24px/ipfs.svg'
+import { Button, FingerprintDialog, Icon, TextIcon } from '~/components'
 
 import { MOCK_ARTILCE } from '../../mocks'
 
@@ -24,7 +25,7 @@ const Template: ComponentStory<typeof FingerprintDialog> = (args) => (
           aria-haspopup="dialog"
         >
           <TextIcon
-            icon={<IconIPFS24 color="green" />}
+            icon={<Icon icon={IconIPFS} color="green" />}
             size="xs"
             spacing="xxtight"
             color="green"

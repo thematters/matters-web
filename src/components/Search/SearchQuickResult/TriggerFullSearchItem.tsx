@@ -1,5 +1,6 @@
+import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
 import { toPath } from '~/common/utils'
-import { IconArrowRight16, Menu, TextIcon, Translate } from '~/components'
+import { Icon, Menu, TextIcon, Translate } from '~/components'
 
 interface TriggerFullSearchItemProps {
   searchKey: string
@@ -14,7 +15,7 @@ const TriggerFullSearchItem = ({ searchKey }: TriggerFullSearchItemProps) => {
       })}
     >
       <TextIcon
-        icon={<IconArrowRight16 color="green" />}
+        icon={<Icon icon={IconRight} color="green" />}
         color="green"
         weight="md"
         textPlacement="left"

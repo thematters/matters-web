@@ -4,6 +4,9 @@ import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
+import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
+import { ReactComponent as IconMetaMask } from '@/public/static/icons/24px/metamask.svg'
+import { ReactComponent as IconWalletConnect } from '@/public/static/icons/24px/walletconnect.svg'
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
@@ -26,12 +29,10 @@ import {
   AuthFeedType,
   AuthTabs,
   Dialog,
-  IconLeft20,
-  IconMetamask22,
-  IconSpinner22,
-  IconWalletConnect22,
+  Icon,
   LanguageContext,
   Media,
+  Spinner,
   TextIcon,
   toast,
   useMutation,
@@ -313,14 +314,14 @@ const Connect: React.FC<FormProps> = ({
         )}
         <section className={styles.walletInfo}>
           <span className={styles.icon}>
-            {isMetamask && <IconMetamask22 size="mdM" />}
-            {isWalletConnect && <IconWalletConnect22 size="mdM" />}
+            {isMetamask && <Icon icon={IconMetaMask} size="mdM" />}
+            {isWalletConnect && <Icon icon={IconWalletConnect} size="mdM" />}
           </span>
           <span className={styles.address}>{maskAddress(values.address)}</span>
         </section>
         <section className={styles.loadingInfo}>
           <span>
-            <IconSpinner22 color="grey" size="mdM" />
+            <Spinner color="grey" size="mdM" />
           </span>
           <span>
             <FormattedMessage
@@ -337,7 +338,10 @@ const Connect: React.FC<FormProps> = ({
           <section className={styles.footerSmUpBtns}>
             <Dialog.TextButton
               text={
-                <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                <TextIcon
+                  icon={<Icon icon={IconLeft} size="mdS" />}
+                  spacing="xxxtight"
+                >
                   <FormattedMessage
                     defaultMessage="Switch wallet"
                     id="HkozYU"

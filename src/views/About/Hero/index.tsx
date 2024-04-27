@@ -3,6 +3,7 @@ import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
 import { useCallback, useContext, useEffect, useState } from 'react'
 
+import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
 import { ReactComponent as IconButtonLeft } from '@/public/static/images/about/button-left.svg'
 import { ReactComponent as IconButtonRight } from '@/public/static/images/about/button-right.svg'
 import SLIDE_CURSOR from '@/public/static/images/about/cursor.svg'
@@ -14,7 +15,7 @@ import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
-  IconLogo,
+  Icon,
   LanguageContext,
   Media,
   TextIcon,
@@ -73,7 +74,7 @@ const Hero = () => {
                 <VisuallyHidden>
                   <span>{translate({ id: 'discover', lang })}</span>
                 </VisuallyHidden>
-                <IconLogo />
+                <Icon icon={IconLogo} />
               </a>
             </Link>
           </div>

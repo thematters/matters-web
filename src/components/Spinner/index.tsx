@@ -1,19 +1,23 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 
+import { ReactComponent as IconSpinner } from '@/public/static/icons/24px/spinner.svg'
 import { TEST_ID } from '~/common/enums'
-import { IconSpinner16, Translate } from '~/components'
+import { Icon, IconColor, IconSize, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
 export const Spinner = ({
   color = 'greyLight',
+  size = 'lg',
   noSpacing,
 }: {
-  color?: 'greyLight' | 'white'
+  color?: IconColor
+  size?: IconSize
   noSpacing?: boolean
 }) => {
   const spinnerClasses = classNames({
+    'u-motion-spinner': true,
     [styles.spinner]: true,
     [styles.noSpacing]: noSpacing,
   })
@@ -30,7 +34,7 @@ export const Spinner = ({
           <Translate zh_hant="載入中…" zh_hans="加载中…" en="Loading..." />
         </span>
       </VisuallyHidden>
-      <IconSpinner16 color={color} size="lg" />
+      <Icon icon={IconSpinner} color={color} size={size} />
     </div>
   )
 }

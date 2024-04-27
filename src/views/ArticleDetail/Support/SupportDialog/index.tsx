@@ -2,7 +2,8 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { Dialog, IconClose24, Spinner, useDialogSwitch } from '~/components'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { Dialog, Icon, Spinner, useDialogSwitch } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import { Step as SupportStep } from '../SupportAuthor/types'
@@ -63,7 +64,7 @@ const BaseDonationDialog = ({ children, article }: SupportDialogProps) => {
                 defaultMessage: 'Close',
                 id: 'rbrahO',
               })}
-              text={<IconClose24 size="md" />}
+              text={<Icon icon={IconTimes} size="md" />}
               color="black"
             />
           }

@@ -7,11 +7,12 @@ import { parseUnits } from 'viem'
 import { useAccount, useContractWrite } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
+import { ReactComponent as IconCircleTimes } from '@/public/static/icons/24px/circle-times.svg'
 import { CHAIN, contract, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { CurationABI } from '~/common/utils'
 import {
   Dialog,
-  IconCircleTime40,
+  Icon,
   Spacer,
   Spinner,
   useMutation,
@@ -124,7 +125,7 @@ const OthersProcessingForm: React.FC<Props> = ({
       >
         {error && (
           <>
-            <IconCircleTime40 size="xlM" color="red" />
+            <Icon icon={IconCircleTimes} size="xlM" color="red" />
             <p className={styles.hint}>
               <FormattedMessage
                 defaultMessage="Sending failed. Please retry later."
@@ -309,7 +310,7 @@ const USDTProcessingForm: React.FC<Props> = ({
           )}
           {isError && (
             <>
-              <IconCircleTime40 size="xlM" color="red" />
+              <Icon icon={IconCircleTimes} size="xlM" color="red" />
               <p className={styles.hint}>
                 <FormattedMessage
                   defaultMessage="Sending failed. Please retry later."

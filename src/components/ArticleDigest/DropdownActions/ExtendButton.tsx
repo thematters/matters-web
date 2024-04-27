@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconCollection } from '@/public/static/icons/24px/collection.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,
@@ -10,13 +11,7 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import {
-  IconCollection24,
-  Menu,
-  toast,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+import { Icon, Menu, toast, useMutation, ViewerContext } from '~/components'
 import {
   ExtendArticleMutation,
   ExtendButtonArticleFragment,
@@ -90,7 +85,7 @@ const ExtendButton = ({
         description:
           'src/components/ArticleDigest/DropdownActions/ExtendButton.tsx',
       })}
-      icon={<IconCollection24 size="mdS" />}
+      icon={<Icon icon={IconCollection} size="mdS" />}
       onClick={onClick}
     />
   )

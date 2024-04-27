@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
   AddCollectionsArticleDialog,
@@ -15,7 +16,7 @@ import {
   Dropdown,
   FingerprintDialog,
   FingerprintDialogProps,
-  IconMore16,
+  Icon,
   IconSize,
   Menu,
   RemoveArticleCollectionDialog,
@@ -325,7 +326,7 @@ const BaseDropdownActions = ({
             ref={ref}
             className={styles.moreButton}
           >
-            {icon ? icon : <IconMore16 size={size} />}
+            {icon ? icon : <Icon icon={IconMore} size={size} />}
           </button>
         ) : (
           <Button
@@ -339,7 +340,7 @@ const BaseDropdownActions = ({
             ref={ref}
             disabled={disabled}
           >
-            {icon ? icon : <IconMore16 size={size} />}
+            {icon ? icon : <Icon icon={IconMore} size={size} />}
           </Button>
         )
       }

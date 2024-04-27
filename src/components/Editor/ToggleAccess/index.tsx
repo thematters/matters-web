@@ -1,11 +1,12 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import { ReactComponent as IconSquareChecked } from '@/public/static/icons/square-checked.svg'
 import { translate } from '~/common/utils'
 import {
   CircleDigest,
-  IconArrowRight16,
-  IconChecked32,
+  Icon,
   LanguageContext,
   Switch,
   Translate,
@@ -160,9 +161,9 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
               {content &&
               (content.replyToDonator || content.requestForDonation) ? (
-                <IconChecked32 size="md" />
+                <Icon icon={IconSquareChecked} size="md" />
               ) : (
-                <IconArrowRight16 />
+                <Icon icon={IconRight} />
               )}
             </section>
 

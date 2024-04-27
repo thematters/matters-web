@@ -1,7 +1,8 @@
 import { useDisconnect } from 'wagmi'
 
+import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Button, IconInfo24, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 
 import CurrencyIndicator from './CurrencyIndicator'
 import styles from './styles.module.css'
@@ -75,7 +76,9 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
             <WhyOptimismDialog>
               {({ openDialog }) => (
                 <Button onClick={openDialog}>
-                  <TextIcon icon={<IconInfo24 size="md" color="grey" />} />
+                  <TextIcon
+                    icon={<Icon icon={IconInfo} size="md" color="grey" />}
+                  />
                 </Button>
               )}
             </WhyOptimismDialog>

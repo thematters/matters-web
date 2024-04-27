@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic'
 import { useIntl } from 'react-intl'
 
-import { Drawer, IconArrowLeft24 } from '~/components'
+import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
+import { Drawer, Icon } from '~/components'
 
 import { Placeholder as CommentsPlaceholder } from '../Comments/Placeholder'
 
@@ -72,7 +73,7 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
                   defaultMessage: 'Back',
                   id: 'cyR7Kh',
                 })}
-                text={<IconArrowLeft24 size="md" />}
+                text={<Icon icon={IconLeft} size="md" />}
               />
             }
             closeDrawer={onClose}

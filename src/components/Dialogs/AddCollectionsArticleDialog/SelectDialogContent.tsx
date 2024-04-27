@@ -2,11 +2,12 @@ import { FieldInputProps, FormikProvider, useField } from 'formik'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import {
   Dialog,
   Form,
-  IconAdd20,
+  Icon,
   Spinner,
   TextIcon,
   usePublicQuery,
@@ -144,7 +145,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
         {collectionEdges.length > 0 && <hr className={styles.hr}></hr>}
 
         <button className={styles.button} onClick={switchToCreating}>
-          <TextIcon icon={<IconAdd20 size="mdS" />}>
+          <TextIcon icon={<Icon icon={IconPlus} size="mdS" />}>
             <FormattedMessage defaultMessage="New Collection" id="L4Fcr8" />
           </TextIcon>
         </button>

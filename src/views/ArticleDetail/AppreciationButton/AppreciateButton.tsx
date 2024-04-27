@@ -1,13 +1,14 @@
 import classNames from 'classnames'
 import { useContext, useRef } from 'react'
 
+import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
+import { ReactComponent as IconSuperLike } from '@/public/static/icons/superlike.svg'
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, numAbbr, translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
-  IconClap24,
-  IconSuperLike,
+  Icon,
   LanguageContext,
   TextIcon,
 } from '~/components'
@@ -85,11 +86,13 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
                 }
               }}
             >
-              <IconClap24
+              <Icon
+                icon={IconClap}
                 className={[styles.iconLike, clapStyles.iconLike].join(' ')}
                 size={iconSize}
               />
-              <IconSuperLike
+              <Icon
+                icon={IconSuperLike}
                 className={[
                   styles.iconSuperlike,
                   clapStyles.iconSuperlike,

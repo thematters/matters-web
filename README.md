@@ -82,7 +82,6 @@ We use [SVGR](https://react-svgr.com/) to transform SVGs into React components. 
 - If the icon color isn't static:
   - Replace the values of `fill` and `stroke` attributes with `currentColor`, and
   - Add `fill="none"` to `<svg>`.
-- If the icon is resuable, create a component file under `components/Icon` and export it from `components/Icon/index.tsx`.
 
 ## Tools
 

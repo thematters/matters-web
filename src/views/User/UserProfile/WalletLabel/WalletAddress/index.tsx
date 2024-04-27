@@ -1,13 +1,14 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 import { getAddress } from 'viem'
 
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
+import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
 import { maskAddress } from '~/common/utils'
 import {
   Button,
   ButtonProps,
   CopyToClipboard,
-  IconCopy16,
-  IconExternalLink16,
+  Icon,
   TextIcon,
   TextIconProps,
 } from '~/components'
@@ -43,7 +44,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
         htmlHref={`https://${ensName}.limo`}
         htmlTarget="_blank"
       >
-        <TextIcon {...textIconProps} icon={<IconExternalLink16 />}>
+        <TextIcon {...textIconProps} icon={<Icon icon={IconExternal} />}>
           {ensName}
         </TextIcon>
       </Button>
@@ -66,7 +67,10 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
           })}
           onClick={copyToClipboard}
         >
-          <TextIcon {...textIconProps} icon={<IconCopy16 size="sm" />}>
+          <TextIcon
+            {...textIconProps}
+            icon={<Icon icon={IconCopy} size="sm" />}
+          >
             {ensName || maskAddress(getAddress(address))}
           </TextIcon>
         </Button>

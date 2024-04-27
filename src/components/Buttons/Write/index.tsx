@@ -1,5 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,
@@ -11,7 +12,7 @@ import { analytics } from '~/common/utils'
 import {
   Button,
   ButtonProps,
-  IconNavCreate32,
+  Icon,
   toast,
   Tooltip,
   useRoute,
@@ -45,7 +46,7 @@ const BaseWriteButton = (props: ButtonProps) => {
         })}
         {...props}
       >
-        <IconNavCreate32 size="lg" color="black" />
+        <Icon icon={IconNavCreate} size="lg" color="black" />
       </Button>
     </Tooltip>
   )

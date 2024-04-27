@@ -5,14 +5,14 @@ import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import { ReactComponent as IconRss } from '@/public/static/icons/24px/rss.svg'
+import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
 import {
   Button,
   Dropdown,
   EditProfileDialog,
-  IconMore16,
-  IconMore22,
-  IconRss20,
-  IconShare20,
+  Icon,
   Menu,
   RssFeedDialog,
   RssFeedDialogProps,
@@ -135,7 +135,7 @@ const BaseDropdownActions = ({
         textActiveColor="black"
         spacing={['xtight', 'base']}
         text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-        icon={<IconShare20 size="mdS" />}
+        icon={<Icon icon={IconShare} size="mdS" />}
       />
       {hasRssFeed && (
         <Menu.Item
@@ -145,7 +145,7 @@ const BaseDropdownActions = ({
           textActiveColor="black"
           spacing={['xtight', 'base']}
           text={<Translate id="subscriptions" />}
-          icon={<IconRss20 size="mdS" />}
+          icon={<Icon icon={IconRss} size="mdS" />}
         />
       )}
 
@@ -183,7 +183,7 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore22 size="mdM" />
+                <Icon icon={IconMore} size="mdM" />
               </Button>
             )}
             {isInAside && !isMe && (
@@ -201,7 +201,7 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore22 size="mdM" />
+                <Icon icon={IconMore} size="mdM" />
               </Button>
             )}
             {!isInAside && (
@@ -219,7 +219,7 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore16 />
+                <Icon icon={IconMore} />
               </Button>
             )}
           </>

@@ -1157,10 +1157,6 @@
     "defaultMessage": "标签不存在",
     "description": "TAG_NOT_FOUND"
   },
-  "NONfAh": {
-    "defaultMessage": "豆瓣",
-    "description": "src/components/Share/Buttons/Douban.tsx"
-  },
   "NYTGIb": {
     "defaultMessage": "知道了"
   },
@@ -2311,10 +2307,6 @@
   "rADhX5": {
     "defaultMessage": "不可用",
     "description": "FORBIDDEN_BY_STATE"
-  },
-  "rBjwQy": {
-    "defaultMessage": "微博",
-    "description": "src/components/Share/Buttons/Weibo.tsx"
   },
   "rHi+cL": {
     "defaultMessage": "最多读者",

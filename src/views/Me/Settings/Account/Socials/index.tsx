@@ -2,6 +2,10 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconFacebook } from '@/public/static/icons/24px/facebook.svg'
+import { ReactComponent as IconGoogle } from '@/public/static/icons/24px/google.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { ReactComponent as IconX } from '@/public/static/icons/24px/x.svg'
 import {
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
@@ -17,12 +21,9 @@ import {
   twitterOauthUrl,
 } from '~/common/utils'
 import {
-  IconClose20,
-  IconFacebook22,
-  IconGoogle22,
-  IconSpinner16,
-  IconX22,
+  Icon,
   RemoveSocialLoginDialog,
+  Spinner,
   TableView,
   TextIcon,
   toast,
@@ -165,14 +166,17 @@ const Socials = () => {
           return (
             <TableView.Cell
               title={
-                <TextIcon icon={<IconGoogle22 size="mdM" />} spacing="tight">
+                <TextIcon
+                  icon={<Icon icon={IconGoogle} size="mdM" />}
+                  spacing="tight"
+                >
                   Google
                 </TextIcon>
               }
               rightText={googleId}
               rightIcon={
                 googleId && canRemoveNonFacebookLogins ? (
-                  <IconClose20 size="mdS" color="greyDarker" />
+                  <Icon icon={IconTimes} size="mdS" color="greyDarker" />
                 ) : undefined
               }
               onClick={
@@ -192,7 +196,7 @@ const Socials = () => {
                       </SettingsButton>
                     )}
                     {isGoogleLoading && (
-                      <IconSpinner16 color="greyLight" size="mdS" />
+                      <Spinner color="greyLight" size="mdS" />
                     )}
                   </>
                 )
@@ -208,14 +212,17 @@ const Socials = () => {
           return (
             <TableView.Cell
               title={
-                <TextIcon icon={<IconX22 size="mdM" />} spacing="tight">
+                <TextIcon
+                  icon={<Icon icon={IconX} size="mdM" />}
+                  spacing="tight"
+                >
                   Twitter
                 </TextIcon>
               }
               rightText={twitterId ? `@${twitterId}` : undefined}
               rightIcon={
                 twitterId && canRemoveNonFacebookLogins ? (
-                  <IconClose20 size="mdS" color="greyDarker" />
+                  <Icon icon={IconTimes} size="mdS" color="greyDarker" />
                 ) : undefined
               }
               onClick={
@@ -235,7 +242,7 @@ const Socials = () => {
                       </SettingsButton>
                     )}
                     {isTwitterLoading && (
-                      <IconSpinner16 color="greyLight" size="mdS" />
+                      <Spinner color="greyLight" size="mdS" />
                     )}
                   </>
                 )
@@ -251,14 +258,17 @@ const Socials = () => {
           return (
             <TableView.Cell
               title={
-                <TextIcon icon={<IconFacebook22 size="mdM" />} spacing="tight">
+                <TextIcon
+                  icon={<Icon icon={IconFacebook} size="mdM" />}
+                  spacing="tight"
+                >
                   Facebook
                 </TextIcon>
               }
               rightText={facebookId ? `@${facebookId}` : undefined}
               rightIcon={
                 facebookId ? (
-                  <IconClose20 size="mdS" color="greyDarker" />
+                  <Icon icon={IconTimes} size="mdS" color="greyDarker" />
                 ) : undefined
               }
               onClick={facebookId ? () => openDialog() : undefined}
@@ -274,7 +284,7 @@ const Socials = () => {
                       </SettingsButton>
                     )}
                     {isFacebookLoading && (
-                      <IconSpinner16 color="greyLight" size="mdS" />
+                      <Spinner color="greyLight" size="mdS" />
                     )}
                   </>
                 )

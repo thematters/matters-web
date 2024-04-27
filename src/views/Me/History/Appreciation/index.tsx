@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
+import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
 import { translate } from '~/common/utils'
 import {
   ArticleDigestList,
-  IconClap24,
+  Icon,
   LanguageContext,
   TextIcon,
 } from '~/components'
@@ -62,7 +63,7 @@ export const Appreciation = ({ type, appreciation }: AppreciationProps) => {
           })}
         >
           <TextIcon
-            icon={<IconClap24 size="mdM" />}
+            icon={<Icon icon={IconClap} size="mdM" />}
             size="sm"
             spacing="xxtight"
             weight="md"

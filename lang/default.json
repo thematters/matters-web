@@ -1157,10 +1157,6 @@
     "defaultMessage": "Tag not found",
     "description": "TAG_NOT_FOUND"
   },
-  "NONfAh": {
-    "defaultMessage": "Douban",
-    "description": "src/components/Share/Buttons/Douban.tsx"
-  },
   "NYTGIb": {
     "defaultMessage": "Got it"
   },
@@ -2311,10 +2307,6 @@
   "rADhX5": {
     "defaultMessage": "Unavailable",
     "description": "FORBIDDEN_BY_STATE"
-  },
-  "rBjwQy": {
-    "defaultMessage": "Weibo",
-    "description": "src/components/Share/Buttons/Weibo.tsx"
   },
   "rHi+cL": {
     "defaultMessage": "Most readers",

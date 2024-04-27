@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,
@@ -15,7 +16,7 @@ import {
   ButtonProps,
   CardProps,
   CommentFormDialog,
-  IconComment24,
+  Icon,
   TextIcon,
   toast,
   Tooltip,
@@ -85,7 +86,7 @@ const Content = ({
         {...(props as ButtonProps)}
       >
         <TextIcon
-          icon={<IconComment24 size={iconSize} />}
+          icon={<Icon icon={IconComment} size={iconSize} />}
           weight={textWeight}
           spacing={textIconSpacing}
           size="sm"

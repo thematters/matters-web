@@ -2,7 +2,9 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { Formik } from 'formik'
 import { useIntl } from 'react-intl'
 
-import { IconClose20, IconSearch20 } from '~/components'
+import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -65,7 +67,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
             />
 
             <button className={styles.search} aria-label={searchCopy}>
-              <IconSearch20 color="greyDark" />
+              <Icon icon={IconNavSearch} color="greyDark" />
             </button>
 
             {values.q !== '' && (
@@ -81,7 +83,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
                   setValues({ q: '' })
                 }}
               >
-                <IconClose20 color="greyDark" />
+                <Icon icon={IconTimes} color="greyDark" />
               </button>
             )}
           </form>

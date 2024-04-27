@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 
-import { IconRemove24, Menu, toast, Translate, useMutation } from '~/components'
+import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
+import { Icon, Menu, toast, Translate, useMutation } from '~/components'
 import {
   updateUserFollowerCount,
   updateViewerFolloweeCount,
@@ -60,7 +61,7 @@ const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
           zh_hans={`取消追踪 ${user.displayName}`}
         />
       }
-      icon={<IconRemove24 size="mdS" />}
+      icon={<Icon icon={IconCircleMinus} size="mdS" />}
       onClick={async () => {
         await unfollow()
 

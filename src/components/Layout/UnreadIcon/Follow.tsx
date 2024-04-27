@@ -2,11 +2,9 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
-import {
-  IconNavFollowing32,
-  IconNavFollowingActive32,
-  ViewerContext,
-} from '~/components'
+import { ReactComponent as IconNavFollowing } from '@/public/static/icons/24px/nav-following.svg'
+import { ReactComponent as IconNavFollowingActive } from '@/public/static/icons/24px/nav-following-active.svg'
+import { Icon, ViewerContext } from '~/components'
 import UNREAD_FOLLOWING from '~/components/GQL/queries/unreadFollowing'
 import { UnreadFollowingQuery } from '~/gql/graphql'
 
@@ -43,9 +41,9 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   return (
     <span className={iconClasses}>
       {active ? (
-        <IconNavFollowingActive32 size="lg" />
+        <Icon icon={IconNavFollowingActive} size="lg" />
       ) : (
-        <IconNavFollowing32 size="lg" />
+        <Icon icon={IconNavFollowing} size="lg" />
       )}
     </span>
   )

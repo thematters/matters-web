@@ -1,11 +1,12 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
+import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import {
   CommentFormType,
-  IconPin20,
-  IconUnPin20,
+  Icon,
   Menu,
   ThreadCommentType,
   toast,
@@ -113,7 +114,7 @@ const PinButton = ({
             description="src/components/Comment/DropdownActions/PinButton.tsx"
           />
         }
-        icon={<IconUnPin20 size="mdS" />}
+        icon={<Icon icon={IconUnpin} size="mdS" />}
         onClick={async () => {
           await unpinComment()
           window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
@@ -131,7 +132,7 @@ const PinButton = ({
           description="src/components/Comment/DropdownActions/PinButton.tsx"
         />
       }
-      icon={<IconPin20 size="mdS" />}
+      icon={<Icon icon={IconPin} size="mdS" />}
       onClick={
         canPin
           ? () => pinComment()

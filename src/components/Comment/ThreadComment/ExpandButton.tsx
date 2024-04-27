@@ -1,4 +1,5 @@
-import { Button, IconArrowDown16, TextIcon, Translate } from '~/components'
+import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 
 const ExpandButton = ({
   onClick,
@@ -17,7 +18,7 @@ const ExpandButton = ({
       size="xs"
       color="green"
       textPlacement="left"
-      icon={<IconArrowDown16 size="xs" />}
+      icon={<Icon icon={IconDown} size="xs" />}
     >
       <Translate
         zh_hant={`查看 ${restCount} 條回應`}

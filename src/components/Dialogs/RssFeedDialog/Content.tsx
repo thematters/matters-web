@@ -6,14 +6,15 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { namehash } from 'viem/ens'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
+import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { featureSupportedChains, PublicResolverABI } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
   Dialog,
-  IconCopy16,
-  IconInfo24,
+  Icon,
   Spacer,
   Spinner,
   TextIcon,
@@ -77,7 +78,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
             {!ipnsKey ? (
               <>
                 <section className={styles.warningCard}>
-                  <IconInfo24 size="md" />
+                  <Icon icon={IconInfo} size="md" />
 
                   <p>
                     <FormattedMessage
@@ -129,7 +130,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                         })}
                         onClick={copyToClipboard}
                       >
-                        <IconCopy16 />
+                        <Icon icon={IconCopy} />
                       </Button>
                     )}
                   </CopyToClipboard>
@@ -139,7 +140,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                   <Spacer size="base" />
                   <section className={styles.warningInput}>
                     <TextIcon
-                      icon={<IconInfo24 size="md" />}
+                      icon={<Icon icon={IconInfo} size="md" />}
                       color="green"
                       size="mdS"
                     >
@@ -209,7 +210,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                               })}
                               onClick={copyToClipboard}
                             >
-                              <IconCopy16 />
+                              <Icon icon={IconCopy} />
                             </Button>
                           )}
                         </CopyToClipboard>

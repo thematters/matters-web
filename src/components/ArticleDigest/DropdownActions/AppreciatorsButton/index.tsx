@@ -1,6 +1,7 @@
 import { useIntl } from 'react-intl'
 
-import { IconClap16, Menu } from '~/components'
+import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
+import { Icon, Menu } from '~/components'
 
 interface AppreciatorsButtonProps {
   openDialog: () => void
@@ -17,7 +18,7 @@ const AppreciatorsButton = ({ openDialog }: AppreciatorsButtonProps) => {
           'src/components/ArticleDigest/DropdownActions/AppreciatorsButton/index.tsx',
         id: 'dZQ+ba',
       })}
-      icon={<IconClap16 size="mdS" />}
+      icon={<Icon icon={IconClap} size="mdS" />}
       onClick={openDialog}
       ariaHasPopup="dialog"
     />

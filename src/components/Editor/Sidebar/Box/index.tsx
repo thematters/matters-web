@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 
-import { Button, IconEdit16, TextIcon } from '~/components'
+import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import { Button, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -43,7 +44,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
             aria-haspopup="dialog"
             aria-label={title}
           >
-            <IconEdit16 color="grey" />
+            <Icon icon={IconEdit} color="grey" />
           </Button>
         )}
       </header>

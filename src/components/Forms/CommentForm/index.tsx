@@ -4,14 +4,7 @@ import { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { dom, stripHtml } from '~/common/utils'
-import {
-  Button,
-  IconSpinner16,
-  Spinner,
-  TextIcon,
-  Translate,
-  useMutation,
-} from '~/components'
+import { Button, Spinner, TextIcon, Translate, useMutation } from '~/components'
 import PUT_COMMENT from '~/components/GQL/mutations/putComment'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import { CommentDraftQuery, PutCommentMutation } from '~/gql/graphql'
@@ -159,7 +152,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
             color="white"
             size="mdS"
             weight="md"
-            icon={isSubmitting && <IconSpinner16 size="sm" />}
+            icon={isSubmitting && <Spinner size="sm" />}
           >
             {isSubmitting ? null : (
               <Translate zh_hant="送出" zh_hans="送出" en="Send" />

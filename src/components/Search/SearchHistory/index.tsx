@@ -1,5 +1,6 @@
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { analytics, toPath } from '~/common/utils'
-import { Button, IconClose32, Menu, TextIcon, Translate } from '~/components'
+import { Button, Icon, Menu, TextIcon, Translate } from '~/components'
 
 interface SearchHistoryProps {
   data: string[] | undefined
@@ -50,7 +51,7 @@ export const SearchHistory = ({
                   removeSearchHistoryItem(value)
                 }}
               >
-                <IconClose32 color="grey" size="md" />
+                <Icon icon={IconTimes} color="grey" size="md" />
               </Button>
             </section>
           </Menu.Item>

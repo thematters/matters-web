@@ -4,6 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
@@ -21,7 +22,7 @@ import {
 import {
   Dialog,
   Form,
-  IconHelp24,
+  Icon,
   LanguageContext,
   Spinner,
   TextIcon,
@@ -217,7 +218,7 @@ const BaseConfirm: React.FC<FormProps> = ({
                 >
                   <span>
                     <TextIcon
-                      icon={<IconHelp24 />}
+                      icon={<Icon icon={IconHelp} />}
                       spacing="xxtight"
                       textPlacement="left"
                     >

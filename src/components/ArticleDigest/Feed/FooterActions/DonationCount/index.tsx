@@ -1,7 +1,8 @@
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconDonate } from '@/public/static/icons/24px/donate.svg'
 import { numAbbr } from '~/common/utils'
-import { IconDonate18, TextIcon } from '~/components'
+import { Icon, TextIcon } from '~/components'
 import { ActionsDonationCountArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -20,7 +21,7 @@ const DonationCount = ({ article }: DonationCountProps) => {
 
   return (
     <TextIcon
-      icon={<IconDonate18 size="mdXS" />}
+      icon={<Icon icon={IconDonate} size="mdXS" />}
       size="xs"
       color="grey"
       aria-label={intl.formatMessage({

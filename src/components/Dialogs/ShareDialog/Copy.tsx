@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconLiknk } from '@/public/static/icons/24px/link.svg'
+import { ReactComponent as IconLink } from '@/public/static/icons/24px/link.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
@@ -43,7 +43,7 @@ const Copy = ({ link }: { link: string }) => {
             }}
           >
             <TextIcon
-              icon={withIcon(IconLiknk)({ size: 'md' })}
+              icon={withIcon(IconLink)({ size: 'md' })}
               spacing="base"
               size="md"
               color="black"

@@ -1,8 +1,9 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
 import { ASSET_TYPE } from '~/common/enums'
 import { toSizedImageURL, translate } from '~/common/utils'
-import { IconChecked, LanguageContext, Translate } from '~/components'
+import { Icon, LanguageContext, Translate } from '~/components'
 import { AssetFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -64,7 +65,7 @@ const Selector: React.FC<SelectorProps> = ({
               />
 
               {asset.path === selected?.path && (
-                <IconChecked size="md" color="green" />
+                <Icon icon={IconCircleCheckFill} size="md" color="green" />
               )}
             </button>
           </li>

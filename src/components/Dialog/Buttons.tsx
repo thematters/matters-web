@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-import { Button, ButtonProps, IconSpinner16, TextIcon } from '~/components'
+import { Button, ButtonProps, Spinner, TextIcon } from '~/components'
 
 export type DialogTextButtonProps = {
   text: React.ReactNode
@@ -49,11 +49,7 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 
   return (
     <Button {...buttonProps}>
-      <TextIcon
-        size="md"
-        weight="md"
-        icon={loading && <IconSpinner16 size="sm" />}
-      >
+      <TextIcon size="md" weight="md" icon={loading && <Spinner size="sm" />}>
         {!loading ? text : null}
       </TextIcon>
     </Button>
@@ -129,7 +125,7 @@ export const RoundedButton: React.FC<
         {...buttonProps}
       >
         <TextIcon
-          icon={icon || (loading && <IconSpinner16 size="md" />)}
+          icon={icon || (loading && <Spinner size="md" />)}
           size={textSize}
           weight={textWeight}
           textPlacement="left"

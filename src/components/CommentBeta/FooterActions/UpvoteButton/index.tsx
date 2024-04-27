@@ -1,14 +1,10 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
+import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
 import { numAbbr } from '~/common/utils'
-import {
-  Button,
-  IconLike16,
-  IconLikeFill16,
-  TextIcon,
-  useMutation,
-} from '~/components'
+import { Button, Icon, TextIcon, useMutation } from '~/components'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT,
@@ -91,7 +87,10 @@ const UpvoteButton = ({
           id: 'z3uIHQ',
         })}
       >
-        <TextIcon icon={<IconLikeFill16 color="redLight" />} color="black">
+        <TextIcon
+          icon={<Icon icon={IconLikeFill} color="redLight" />}
+          color="black"
+        >
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
         </TextIcon>
       </Button>
@@ -112,7 +111,7 @@ const UpvoteButton = ({
         id: 'ZD+vm/',
       })}
     >
-      <TextIcon icon={<IconLike16 />}>
+      <TextIcon icon={<Icon icon={IconLike} />}>
         {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
       </TextIcon>
     </Button>

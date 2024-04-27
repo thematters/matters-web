@@ -1,15 +1,14 @@
 import classNames from 'classnames'
 
-import {
-  IconAvatarLogo32,
-  IconBookmark16,
-  IconCircle16,
-  IconClap16,
-  IconComment16,
-  IconUpVote16,
-  IconUser16,
-  IconVolume32,
-} from '~/components'
+import { ReactComponent as IconCircle } from '@/public/static/icons/24px/circle.svg'
+import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
+import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import { ReactComponent as IconLatest } from '@/public/static/icons/24px/latest.svg'
+import { ReactComponent as IconSave } from '@/public/static/icons/24px/save.svg'
+import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
+import { ReactComponent as IconVoteUp } from '@/public/static/icons/24px/vote-up.svg'
+import { ReactComponent as IconAvatarLogo } from '@/public/static/icons/avatar-logo.svg'
+import { Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -26,21 +25,21 @@ type IconType =
 const getIcon = (type: IconType) => {
   switch (type) {
     case 'appreciate':
-      return <IconClap16 color="green" />
+      return <Icon icon={IconClap} color="green" />
     case 'bookmark':
-      return <IconBookmark16 color="green" />
+      return <Icon icon={IconSave} color="green" />
     case 'comment':
-      return <IconComment16 color="green" />
+      return <Icon icon={IconComment} color="green" />
     case 'user':
-      return <IconUser16 color="green" />
+      return <Icon icon={IconUser} color="green" />
     case 'upvote':
-      return <IconUpVote16 color="green" />
+      return <Icon icon={IconVoteUp} color="green" />
     case 'volume':
-      return <IconVolume32 color="greyDark" size="lg" />
+      return <Icon icon={IconLatest} color="greyDark" size="lg" />
     case 'circle':
-      return <IconCircle16 color="greyDark" />
+      return <Icon icon={IconCircle} color="greyDark" />
     case 'logo':
-      return <IconAvatarLogo32 size="lg" />
+      return <Icon icon={IconAvatarLogo} size="lg" />
   }
 }
 

@@ -1,8 +1,9 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
+import { ReactComponent as IconAnthology } from '@/public/static/icons/24px/anthology.svg'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { IconAnthology24, LinkWrapper } from '~/components'
+import { Icon, LinkWrapper } from '~/components'
 import { CollectionDigestAuthorSidebarCollectionFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -52,7 +53,7 @@ export const CollectionDigestAuthorSidebar = ({
   return (
     <section className={containerClasses}>
       <LinkWrapper {...path} textActiveColor="green">
-        <IconAnthology24 size="md" color="greyLight" />
+        <Icon icon={IconAnthology} size="md" color="greyLight" />
         <header>{title}</header>
       </LinkWrapper>
     </section>

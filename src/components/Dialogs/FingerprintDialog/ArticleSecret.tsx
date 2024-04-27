@@ -2,7 +2,8 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import { CopyToClipboard, IconCopy16, TextIcon, Translate } from '~/components'
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
+import { CopyToClipboard, Icon, TextIcon, Translate } from '~/components'
 import { ArticleSecretQuery } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -59,7 +60,7 @@ const ArticleSecretSection: React.FC<ArticleSecretSectionProps> = ({ id }) => {
               onClick={copyToClipboard}
             >
               <TextIcon
-                icon={<IconCopy16 />}
+                icon={<Icon icon={IconCopy} />}
                 textPlacement="left"
                 spacing="xtight"
               >

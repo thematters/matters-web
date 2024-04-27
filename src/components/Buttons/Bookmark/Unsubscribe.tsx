@@ -1,12 +1,12 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconSave2 } from '@/public/static/icons/24px/save2.svg'
 import { ERROR_CODES, ERROR_MESSAGES, TEST_ID } from '~/common/enums'
 import {
   Button,
   ButtonProps,
-  IconBookmarked20,
-  IconBookmarked24,
+  Icon,
   IconSize,
   Menu,
   toast,
@@ -76,7 +76,7 @@ const Unsubscribe = ({
             description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
           />
         }
-        icon={<IconBookmarked20 size={iconSize} />}
+        icon={<Icon icon={IconSave2} size={iconSize} />}
         onClick={onClick}
         testId={TEST_ID.ARTICLE_BOOKMARK}
       />
@@ -97,7 +97,7 @@ const Unsubscribe = ({
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}
       {...buttonProps}
     >
-      <IconBookmarked24 size={iconSize} />
+      <Icon icon={IconSave2} size={iconSize} />
     </Button>
   )
 }

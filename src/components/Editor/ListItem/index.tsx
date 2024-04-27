@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 
+import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import { toSizedImageURL } from '~/common/utils'
-import { Card, IconAdd16, IconExclaimHint } from '~/components'
+import { Card, Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -26,7 +28,7 @@ const CoverIndicator = ({ cover }: { cover?: string | null }) => (
         alt="cover"
       />
     ) : (
-      <IconAdd16 size="xs" />
+      <Icon icon={IconPlus} size="xs" />
     )}
   </span>
 )
@@ -42,7 +44,7 @@ const NumberIndicator = ({
     {num}
     {withHintOverlay && num === 0 && (
       <span className={styles.hintOverlay}>
-        <IconExclaimHint />
+        <Icon icon={IconInfo} color="gold" />
       </span>
     )}
   </span>

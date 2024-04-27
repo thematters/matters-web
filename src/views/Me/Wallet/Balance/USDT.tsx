@@ -1,12 +1,13 @@
 import classNames from 'classnames'
 import { useContext } from 'react'
 
+import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
 import { PATHS } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
-  IconUSDTActive40,
+  Icon,
   TextIcon,
   Translate,
   useBalanceUSDT,
@@ -36,7 +37,7 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
     return (
       <section className={classes}>
         <TextIcon
-          icon={<IconUSDTActive40 size="xlM" />}
+          icon={<Icon icon={IconTether} size="xlM" />}
           size="md"
           spacing="xtight"
         >
@@ -60,7 +61,7 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   return (
     <section className={classes}>
       <TextIcon
-        icon={<IconUSDTActive40 size="xlM" />}
+        icon={<Icon icon={IconTether} size="xlM" />}
         size="md"
         spacing="xtight"
       >

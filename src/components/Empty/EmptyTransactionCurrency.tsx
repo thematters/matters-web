@@ -1,8 +1,9 @@
-import { Empty, IconPrice64, Translate } from '~/components'
+import { ReactComponent as IconEmptyPrice } from '@/public/static/icons/empty-price.svg'
+import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyTransactionCurrency = () => (
   <Empty
-    icon={<IconPrice64 size="xxl" />}
+    icon={<Icon icon={IconEmptyPrice} size="xxl" />}
     description={
       <Translate
         zh_hant="還沒有此幣種記錄"

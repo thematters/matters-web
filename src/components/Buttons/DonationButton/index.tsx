@@ -1,10 +1,11 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
 import { TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
-  IconMoney24,
+  Icon,
   LanguageContext,
   TextIcon,
   Translate,
@@ -37,7 +38,11 @@ const DonationButton = ({
         }}
         data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
       >
-        <TextIcon icon={<IconMoney24 size="mdS" />} color="white" size="md">
+        <TextIcon
+          icon={<Icon icon={IconMoney} size="mdS" />}
+          color="white"
+          size="md"
+        >
           <Translate id="donationAgain" />
         </TextIcon>
       </Button>
@@ -57,7 +62,11 @@ const DonationButton = ({
       }}
       data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
     >
-      <TextIcon icon={<IconMoney24 size="mdS" />} color="white" size="md">
+      <TextIcon
+        icon={<Icon icon={IconMoney} size="mdS" />}
+        color="white"
+        size="md"
+      >
         <Translate id="donation" />
       </TextIcon>
     </Button>

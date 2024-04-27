@@ -1,9 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
 import {
   Button,
-  IconSettings24,
+  Icon,
   QueryError,
   Spinner,
   TagEditorDialog,
@@ -33,7 +34,7 @@ const ManageButton = ({ id }: Props) => {
           onClick={openDialog}
           aria-haspopup="dialog"
         >
-          <TextIcon icon={<IconSettings24 />} weight="md" size={'xs'}>
+          <TextIcon icon={<Icon icon={IconSettings} />} weight="md" size={'xs'}>
             <FormattedMessage defaultMessage="Manage" id="0Azlrb" />
           </TextIcon>
         </Button>
