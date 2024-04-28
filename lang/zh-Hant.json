@@ -287,6 +287,9 @@
     "defaultMessage": "繼續使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
+  "3rqn2V": {
+    "defaultMessage": "評論尚未發布，確定放棄內容離開此頁嗎？"
+  },
   "3w3CC8": {
     "defaultMessage": "關聯 ENS"
   },
