@@ -1,7 +1,7 @@
 // ref: https://github.com/Farzin-Firoozi/react-modern-drawer
 
 import classNames from 'classnames'
-import { CSSProperties } from 'react'
+import { CSSProperties, useEffect, useRef } from 'react'
 
 import styles from './styles.module.css'
 
@@ -81,7 +81,28 @@ export const BaseDrawer = ({
     [styles.baseDrawerContainer]: true,
   })
 
+  const ref = useRef<HTMLElement>(null)
+
   const idSuffix = Math.random().toString(36).substring(7)
+
+  useEffect(() => {
+    const handleClickOutside = (e: Event) => {
+      if (ref.current && !e.composedPath().includes(ref.current)) {
+        onClose && onClose()
+      }
+    }
+
+    const removeEventListener = () => {
+      document.removeEventListener('click', handleClickOutside)
+    }
+    if (open) {
+      document.addEventListener('click', handleClickOutside)
+    } else {
+      removeEventListener()
+    }
+
+    return removeEventListener
+  }, [open])
 
   return (
     <div className={styles.baseDrawer}>
@@ -97,16 +118,10 @@ export const BaseDrawer = ({
         style={drawerStyles}
         id={'Drawer__container' + idSuffix}
         className={`${containerClasses} ${className}`}
+        ref={ref}
       >
         {children}
       </nav>
-      {enableOverlay && (
-        <label
-          htmlFor={'Drawer__checkbox' + idSuffix}
-          id={'Drawer__overlay' + idSuffix}
-          className={styles.overlay}
-        />
-      )}
     </div>
   )
 }
