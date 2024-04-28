@@ -12,7 +12,7 @@ import {
 import {
   EmptySearch,
   InfiniteScroll,
-  Spinner,
+  SpinnerBlock,
   toDigestTagPlaceholder,
   usePublicLazyQuery,
   ViewerContext,
@@ -271,7 +271,7 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
 
       {inSearchingArea && (
         <section className={styles.area}>
-          {searching && <Spinner />}
+          {searching && <SpinnerBlock />}
 
           {/* Search */}
           {searchKey.length > 0 &&

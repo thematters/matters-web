@@ -8,7 +8,7 @@ import {
   Dialog,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   useMutation,
   UserDigest,
@@ -60,7 +60,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
   const circle = data?.circle
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

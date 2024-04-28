@@ -14,7 +14,7 @@ import {
   Dialog,
   Icon,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -142,7 +142,7 @@ const OthersProcessingForm: React.FC<Props> = ({
 
         {!error && (
           <>
-            <Spinner noSpacing />
+            <SpinnerBlock />
             {currency === CURRENCY.HKD && (
               <p className={styles.hint}>
                 <FormattedMessage
@@ -289,7 +289,7 @@ const USDTProcessingForm: React.FC<Props> = ({
         >
           {!isError && (
             <>
-              <Spinner noSpacing />
+              <SpinnerBlock noSpacing />
               <section className={styles.hint}>
                 <p>
                   <FormattedMessage

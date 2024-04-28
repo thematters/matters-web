@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
-import { Button, ButtonProps, Icon, Spinner, TextIcon } from '~/components'
+import { Button, ButtonProps, Icon, SpinnerBlock, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -17,7 +17,7 @@ export const ViewMoreCommentButton: React.FC<ViewMoreCommentButtonProps> = ({
 }) => (
   <div className={styles.container}>
     {loading ? (
-      placeholder || <Spinner />
+      placeholder || <SpinnerBlock />
     ) : (
       <Button spacing={['xtight', 0]} textColor="greyDarker" {...props}>
         <TextIcon icon={<Icon icon={IconDown} />} spacing="xxtight">

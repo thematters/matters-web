@@ -19,6 +19,7 @@ import {
   Icon,
   Spacer,
   Spinner,
+  SpinnerBlock,
   TextIcon,
   useEventListener,
   ViewerContext,
@@ -43,7 +44,7 @@ type HasDonatedArticle = NonNullable<
 
 const DynamicAnimation = dynamic(() => import('./Animation'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const SupportWidget = ({

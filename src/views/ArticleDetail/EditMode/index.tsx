@@ -9,7 +9,7 @@ import {
   Layout,
   Media,
   ReviseArticleDialog,
-  Spinner,
+  SpinnerBlock,
   Throw404,
 } from '~/components'
 import {
@@ -52,7 +52,7 @@ const Editor = dynamic(
     import('~/components/Editor/Article').then((mod) => mod.EditArticleEditor),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => <SpinnerBlock />,
   }
 )
 
@@ -159,7 +159,7 @@ const EditMode: React.FC<EditModeProps> = ({ article, onCancel, onSaved }) => {
   if (loading) {
     return (
       <EmptyLayout>
-        <Spinner />
+        <SpinnerBlock />
       </EmptyLayout>
     )
   }

@@ -5,7 +5,7 @@ import { OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   Dialog,
-  Spinner,
+  SpinnerBlock,
   useDialogSwitch,
   useEventListener,
   useStep,
@@ -20,7 +20,7 @@ type SubscribeCircleDialogProps = BaseSubscribeCircleDialogProps & {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseSubscribeCircleDialog = ({

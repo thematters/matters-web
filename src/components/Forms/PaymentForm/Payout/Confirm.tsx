@@ -24,7 +24,7 @@ import {
   Form,
   Icon,
   LanguageContext,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   Tooltip,
   Translate,
@@ -315,7 +315,7 @@ const Confirm = (props: Omit<FormProps, 'balance'>) => {
   const balance = data?.viewer?.wallet.balance.HKD || 0
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   return <BaseConfirm {...props} balance={balance} />

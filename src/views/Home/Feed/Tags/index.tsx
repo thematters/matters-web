@@ -11,7 +11,7 @@ import {
   QueryError,
   ShuffleButton,
   Slides,
-  Spinner,
+  SpinnerBlock,
   TagDigest,
   usePublicQuery,
   ViewerContext,
@@ -112,7 +112,7 @@ const TagsFeed = () => {
       <Slides header={SlideHeader}>
         {loading && (
           <Slides.Item>
-            <Spinner />
+            <SpinnerBlock />
           </Slides.Item>
         )}
 

@@ -7,7 +7,7 @@ import {
   List,
   QueryError,
   ShuffleButton,
-  Spinner,
+  SpinnerBlock,
   usePublicQuery,
   UserDigest,
   ViewerContext,
@@ -75,7 +75,7 @@ const Authors = () => {
         rightButton={<ShuffleButton onClick={shuffle} />}
       />
 
-      {loading && <Spinner />}
+      {loading && <SpinnerBlock />}
 
       {!loading && (
         <List hasBorder={false}>

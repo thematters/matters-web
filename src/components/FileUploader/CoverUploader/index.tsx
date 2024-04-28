@@ -18,7 +18,7 @@ import {
   CoverProps,
   Icon,
   LanguageContext,
-  Spinner,
+  SpinnerBlock,
   toast,
   Translate,
   useDirectImageUpload,
@@ -169,7 +169,7 @@ export const CoverUploader = ({
   const Mask = () => (
     <div className={styles.mask}>
       {loading || uploading ? (
-        <Spinner />
+        <SpinnerBlock />
       ) : (
         <Icon icon={IconCamera} color="white" size="xl" />
       )}
@@ -184,7 +184,7 @@ export const CoverUploader = ({
     return (
       <div className={maskClasses}>
         {loading || uploading ? (
-          <Spinner color={cover ? 'greyLight' : 'white'} />
+          <SpinnerBlock color={cover ? 'greyLight' : 'white'} />
         ) : (
           <section className={styles.userProfileCover}>
             <Icon icon={IconCamera} color="white" size="lg" />

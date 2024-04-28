@@ -49,7 +49,7 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 
   return (
     <Button {...buttonProps}>
-      <TextIcon size="md" weight="md" icon={loading && <Spinner size="sm" />}>
+      <TextIcon size="md" weight="md" icon={loading && <Spinner />}>
         {!loading ? text : null}
       </TextIcon>
     </Button>

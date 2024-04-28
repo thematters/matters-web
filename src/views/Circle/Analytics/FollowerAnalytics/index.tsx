@@ -4,7 +4,12 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconAnalyticsFollower24 } from '@/public/static/icons/24px/analytics-follower.svg'
 import { CHART_COLOR } from '~/common/enums'
-import { QueryError, Spinner, StackedAreaChart, useRoute } from '~/components'
+import {
+  QueryError,
+  SpinnerBlock,
+  StackedAreaChart,
+  useRoute,
+} from '~/components'
 import { CircleFollowerAnalyticsQuery } from '~/gql/graphql'
 
 import InfoTiles from '../InfoTiles'
@@ -28,7 +33,7 @@ const Content = () => {
   const follower = data?.circle?.analytics.follower
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

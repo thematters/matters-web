@@ -11,7 +11,7 @@ import {
   Expandable,
   Head,
   Layout,
-  Spinner,
+  SpinnerBlock,
   SubscribeCircleDialog,
   Throw404,
   useEventListener,
@@ -152,7 +152,7 @@ const CircleProfile = () => {
     return (
       <>
         <LayoutHeader />
-        <Spinner />
+        <SpinnerBlock />
       </>
     )
   }

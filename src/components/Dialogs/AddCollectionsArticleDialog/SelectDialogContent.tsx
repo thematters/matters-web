@@ -8,7 +8,7 @@ import {
   Dialog,
   Form,
   Icon,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   usePublicQuery,
   useRoute,
@@ -65,7 +65,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   if (loading) {
     return (
       <Dialog.Content>
-        <Spinner />
+        <SpinnerBlock />
       </Dialog.Content>
     )
   }

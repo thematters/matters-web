@@ -17,7 +17,7 @@ import {
   CircleAvatarProps,
   Icon,
   LanguageContext,
-  Spinner,
+  SpinnerBlock,
   toast,
   Translate,
   useDirectImageUpload,
@@ -150,7 +150,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
       <div className={styles.mask}>
         {loading || uploading ? (
-          <Spinner />
+          <SpinnerBlock />
         ) : (
           <Icon icon={IconCamera} color="white" size="lg" />
         )}

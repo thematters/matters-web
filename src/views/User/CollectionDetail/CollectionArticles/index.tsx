@@ -12,7 +12,7 @@ import {
   Icon,
   Layout,
   List,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   useRoute,
   ViewerContext,
@@ -27,7 +27,7 @@ import { fragments } from './gql'
 import styles from './styles.module.css'
 
 const DynamicViewerArticles = dynamic(() => import('./ViewerArticles'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 interface CollectionArticlesProps {

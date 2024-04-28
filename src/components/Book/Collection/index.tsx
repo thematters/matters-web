@@ -5,7 +5,12 @@ import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.
 import BOOK_COVER from '@/public/static/images/book-cover.png'
 import { TEST_ID } from '~/common/enums'
 import { countStrWidth } from '~/common/utils'
-import { Icon, ResponsiveImage, Spinner, useColorThief } from '~/components'
+import {
+  Icon,
+  ResponsiveImage,
+  SpinnerBlock,
+  useColorThief,
+} from '~/components'
 
 import styles from './styles.module.css'
 
@@ -60,7 +65,7 @@ const BookCollection: React.FC<BookCollectionProps> = ({
         {hasMask && (
           <div className={styles.mask}>
             {loading ? (
-              <Spinner />
+              <SpinnerBlock />
             ) : (
               <Icon icon={IconCamera} color="white" size="xl" />
             )}

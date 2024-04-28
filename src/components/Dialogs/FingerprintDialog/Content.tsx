@@ -15,7 +15,7 @@ import {
   Icon,
   LanguageContext,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   Translate,
   useMutation,
@@ -170,7 +170,7 @@ const FingerprintDialogContent = ({
             </p>
 
             <ul className={styles.gatewayUrls}>
-              {(!data || loading) && <Spinner />}
+              {(!data || loading) && <SpinnerBlock />}
 
               {gateways.slice(0, 4).map((url) => {
                 const gatewayUrl = url.replace(':hash', dataHash)

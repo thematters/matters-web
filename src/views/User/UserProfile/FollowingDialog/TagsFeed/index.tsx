@@ -6,7 +6,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   TagDigest,
   Translate,
   usePublicQuery,
@@ -79,7 +79,7 @@ const TagsFeed = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

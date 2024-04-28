@@ -18,7 +18,7 @@ import {
   RssFeedDialogProps,
   ShareDialog,
   ShareDialogProps,
-  Spinner,
+  SpinnerBlock,
   Translate,
   ViewerContext,
   withDialog,
@@ -41,17 +41,17 @@ const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
 
 const DynamicToggleRestrictUserButton = dynamic(
   () => import('./ToggleRestrictUser/Button'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicToggleRestrictUserDialog = dynamic(
   () => import('./ToggleRestrictUser/Dialog'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicArchiveUserButton = dynamic(() => import('./ArchiveUser/Button'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 const DynamicArchiveUserDialog = dynamic(() => import('./ArchiveUser/Dialog'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 interface DropdownActionsProps {

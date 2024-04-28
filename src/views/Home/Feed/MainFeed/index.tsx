@@ -10,7 +10,7 @@ import {
   List,
   Media,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -159,7 +159,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
       window.scrollTo(0, 0)
       document.body.focus()
     }
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

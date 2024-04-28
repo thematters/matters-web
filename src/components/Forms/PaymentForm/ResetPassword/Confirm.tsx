@@ -14,7 +14,7 @@ import {
   Dialog,
   Form,
   LanguageContext,
-  Spinner,
+  SpinnerBlock,
   useMutation,
   useStep,
 } from '~/components'
@@ -173,7 +173,7 @@ const Confirm: React.FC<FormProps> = ({
   if (isSubmitting) {
     return (
       <Dialog.Content>
-        <Spinner />
+        <SpinnerBlock />
       </Dialog.Content>
     )
   }

@@ -19,7 +19,7 @@ import {
   LanguageContext,
   ResetPaymentPasswordDialog,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   useMutation,
   ViewerContext,
@@ -185,7 +185,7 @@ const Confirm: React.FC<FormProps> = ({
   if (loading) {
     return (
       <Dialog.Content>
-        <Spinner />
+        <SpinnerBlock />
       </Dialog.Content>
     )
   }
@@ -209,7 +209,7 @@ const Confirm: React.FC<FormProps> = ({
 
       {isSubmitting && (
         <>
-          <Spinner noSpacing />
+          <SpinnerBlock />
           <p className={styles.hint}>
             <FormattedMessage
               defaultMessage="Transaction in progress, please wait"

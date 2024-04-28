@@ -6,7 +6,7 @@ import {
   Button,
   Icon,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   TagEditorDialog,
   TextIcon,
   UserDigest,
@@ -53,7 +53,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
   )
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

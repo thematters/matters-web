@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl'
 import { TEST_ID } from '~/common/enums'
 import {
   Dialog,
-  Spinner,
+  SpinnerBlock,
   useDialogSwitch,
   usePublicQuery,
   ViewerContext,
@@ -61,7 +61,7 @@ const ArticleFingerprintGQL = gql`
 `
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseFingerprintDialog = ({

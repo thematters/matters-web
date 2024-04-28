@@ -10,7 +10,7 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
-import { Dialog, Icon, Spinner, ViewerContext } from '~/components'
+import { Dialog, Icon, SpinnerBlock, ViewerContext } from '~/components'
 import {
   QueryUserByAddressQuery,
   UserDonationRecipientFragment,
@@ -66,7 +66,7 @@ const Complete: React.FC<Props> = ({
   const isHKD = currency === CURRENCY.HKD
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
   const shouldBindWallet =
     viewer.info.ethAddress === null && data?.user === null

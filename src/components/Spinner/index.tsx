@@ -1,40 +1,43 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 
 import { ReactComponent as IconSpinner } from '@/public/static/icons/24px/spinner.svg'
 import { TEST_ID } from '~/common/enums'
-import { Icon, IconColor, IconSize, Translate } from '~/components'
+import { Icon, IconColor, IconSize } from '~/components'
 
 import styles from './styles.module.css'
 
-export const Spinner = ({
-  color = 'greyLight',
-  size = 'lg',
-  noSpacing,
-}: {
+type SpinnerProps = {
   color?: IconColor
   size?: IconSize
-  noSpacing?: boolean
-}) => {
-  const spinnerClasses = classNames({
-    'u-motion-spinner': true,
-    [styles.spinner]: true,
+}
+
+export const Spinner = ({ color, size }: SpinnerProps) => {
+  return (
+    <Icon
+      aria-label="Loading..."
+      data-test-id={TEST_ID.SPINNER}
+      aria-busy="true"
+      aria-live="polite"
+      className="u-motion-spin"
+      icon={IconSpinner}
+      color={color}
+      size={size}
+    />
+  )
+}
+
+export const SpinnerBlock = ({
+  noSpacing,
+  ...spinnerProps
+}: { noSpacing?: boolean } & SpinnerProps) => {
+  const classes = classNames({
+    [styles.spinnerBlock]: true,
     [styles.noSpacing]: noSpacing,
   })
 
   return (
-    <div
-      className={spinnerClasses}
-      data-test-id={TEST_ID.SPINNER}
-      aria-busy="true"
-      aria-live="polite"
-    >
-      <VisuallyHidden>
-        <span>
-          <Translate zh_hant="載入中…" zh_hans="加载中…" en="Loading..." />
-        </span>
-      </VisuallyHidden>
-      <Icon icon={IconSpinner} color={color} size={size} />
+    <div className={classes}>
+      <Spinner color="greyLight" size="lg" {...spinnerProps} />
     </div>
   )
 }

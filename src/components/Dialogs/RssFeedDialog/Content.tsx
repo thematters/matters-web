@@ -16,7 +16,7 @@ import {
   Dialog,
   Icon,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
 } from '~/components'
 import { AuthorRssFeedFragment, RssGatewaysQuery } from '~/gql/graphql'
@@ -177,7 +177,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
               </p>
 
               <ul className={styles.gatewayUrls}>
-                {(!data || loading) && <Spinner />}
+                {(!data || loading) && <SpinnerBlock />}
 
                 {/* FIXME: remove filebase.io and meson.network */}
                 {gateways.slice(0, 4).map((url) => {

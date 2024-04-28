@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Button, ButtonProps, Spinner, TextIcon } from '~/components'
+import { Button, ButtonProps, SpinnerBlock, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -14,7 +14,7 @@ export const ViewMoreButton: React.FC<ViewMoreButtonProps> = ({
 }) => (
   <div className={styles.container}>
     {loading ? (
-      <Spinner />
+      <SpinnerBlock />
     ) : (
       <Button
         spacing={['xtight', 'base']}

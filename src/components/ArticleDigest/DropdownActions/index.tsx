@@ -23,7 +23,7 @@ import {
   RemoveArticleCollectionDialogProps,
   ShareDialog,
   ShareDialogProps,
-  Spinner,
+  SpinnerBlock,
   SubmitReport,
   SupportersDialog,
   SupportersDialogProps,
@@ -61,12 +61,12 @@ const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
 
 const DynamicToggleRecommendArticleButton = dynamic(
   () => import('./ToggleRecommendArticle/Button'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicToggleRecommendArticleDialog = dynamic(
   () => import('./ToggleRecommendArticle/Dialog'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 export interface DropdownActionsControls {

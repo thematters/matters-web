@@ -12,7 +12,7 @@ import {
   Dialog,
   Icon,
   LanguageContext,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   Translate,
   UserDigest,
@@ -156,7 +156,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
   )
 
   if (exchangeRateLoading || loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   return (

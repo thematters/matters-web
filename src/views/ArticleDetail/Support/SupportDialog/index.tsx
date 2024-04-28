@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { Dialog, Icon, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, Icon, SpinnerBlock, useDialogSwitch } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import { Step as SupportStep } from '../SupportAuthor/types'
@@ -15,7 +15,7 @@ type SupportDialogProps = {
 }
 
 const DynamicSupportAuthor = dynamic(() => import('../SupportAuthor'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseDonationDialog = ({ children, article }: SupportDialogProps) => {

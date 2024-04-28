@@ -10,7 +10,7 @@ import {
 import { dom, stripHtml } from '~/common/utils'
 import {
   Button,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   useMutation,
   useRoute,
@@ -231,7 +231,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
             <TextIcon
               color="white"
               size="sm"
-              icon={isSubmitting && <Spinner size="sm" />}
+              icon={isSubmitting && <SpinnerBlock size="sm" />}
             >
               {isSubmitting ? null : (
                 <FormattedMessage defaultMessage="Publish" id="syEQFE" />

@@ -27,7 +27,7 @@ import {
   Form,
   LanguageContext,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   useAllowanceUSDT,
   useApproveUSDT,
   useBalanceUSDT,
@@ -338,7 +338,7 @@ const SetAmount: React.FC<FormProps> = ({
   )
 
   if (exchangeRateLoading || loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   const submitButtonProps = {

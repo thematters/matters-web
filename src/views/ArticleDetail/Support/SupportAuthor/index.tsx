@@ -7,7 +7,7 @@ import { featureSupportedChains } from '~/common/utils'
 import {
   AuthWalletFeed,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   useStep,
   useTargetNetwork,
   ViewerContext,
@@ -30,42 +30,42 @@ interface SetAmountOpenTabCallbackValues {
 
 const DynamicPayToFormSetAmount = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/SetAmount'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicPayToFormConfirm = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Confirm'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicPayToFormComplete = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Complete'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicPaymentSetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicSwitchNetworkForm = dynamic(
   () => import('~/components/Forms/PaymentForm/SwitchNetwork'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicBindWalletForm = dynamic(
   () => import('~/components/Forms/PaymentForm/BindWallet'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicApproveUsdtContractForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ApproveUsdtContract'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 export type SupportAuthorProps = BaseSupportAuthorProps & {

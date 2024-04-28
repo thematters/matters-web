@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Spinner, Translate, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, Translate, useDialogSwitch } from '~/components'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 interface FollowingDialogProps {
@@ -10,7 +10,7 @@ interface FollowingDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
