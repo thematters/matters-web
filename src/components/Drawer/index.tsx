@@ -36,7 +36,11 @@ export const Drawer: React.ComponentType<
 }) => {
   const [mounted, setMounted] = useState(isOpen)
   const [showDrawer, setShowDrawer] = useState(false)
-  const id = Math.random().toString(36)
+  const [id, setId] = useState('')
+
+  useEffect(() => {
+    setId(crypto.randomUUID())
+  }, [])
 
   useEventListener(CLOSE_OTHER_DRAWERS, (detail: { [key: string]: any }) => {
     if (!isOpen) {
