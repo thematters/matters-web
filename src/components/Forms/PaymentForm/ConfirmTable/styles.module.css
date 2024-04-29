@@ -32,7 +32,7 @@
   }
 
   &.insufficient {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 
   &.breaker {
@@ -43,6 +43,6 @@
 
 .col {
   &.insufficient {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 }

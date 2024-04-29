@@ -11,7 +11,7 @@
 
     &:hover,
     &:focus {
-      color: var(--color-matters-green-dark);
+      color: var(--color-matters-green-hover);
     }
   }
 }

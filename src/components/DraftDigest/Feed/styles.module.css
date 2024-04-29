@@ -39,7 +39,7 @@
 
   &:hover,
   &:focus {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 
   & svg {

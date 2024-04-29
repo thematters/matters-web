@@ -75,7 +75,7 @@
     &:not(.disabled) {
       &:hover,
       &:focus {
-        background: var(--color-grey-lighter-active);
+        background: var(--color-grey-hover);
       }
     }
 
@@ -115,7 +115,7 @@
       &:hover,
       &:focus {
         color: var(--color-black);
-        background: var(--color-grey-lighter-active);
+        background: var(--color-grey-hover);
       }
     }
   }

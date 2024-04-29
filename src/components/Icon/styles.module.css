@@ -116,10 +116,10 @@
   }
 
   &.red {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 
   &.redLight {
-    color: var(--color-red-light);
+    color: var(--color-heart-red);
   }
 }

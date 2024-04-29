@@ -9,7 +9,7 @@
   padding: calc(var(--spacing-base-tight) - 1px) 0;
   color: black;
   text-align: center;
-  background: var(--color-grey-lighter-active);
+  background: var(--color-grey-hover);
 
   &.revision {
     background: var(--color-green-lighter);
