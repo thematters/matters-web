@@ -1,3 +1,4 @@
+export * from './ActiveCommentEditor'
 export * from './Features'
 export * from './Language'
 export * from './ReCaptcha'

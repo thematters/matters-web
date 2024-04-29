@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
-import { fireEvent, render, screen, waitFor } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { Drawer, useDialogSwitch } from '~/components'
 
 type AnyDrawerProps = {
@@ -45,8 +45,7 @@ describe('<Drawer>', () => {
 
     // close drawer
     fireEvent.click(screen.getByRole('button', { name: 'Close' }))
-    await waitFor(() => {
-      expect(screen.queryByText(title)).not.toBeInTheDocument()
-    })
+    // drawer component should not be removed from the DOM
+    expect(screen.getByText(title)).toBeInTheDocument()
   })
 })

@@ -73,6 +73,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const richShowMoreButtonClasses = classNames({
     [styles.richShowMoreButton]: true,
     [styles[`${bgColor}`]]: !!bgColor,
+    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
   })
 
   useIsomorphicLayoutEffect(() => {

@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { Editor } from '@matters/matters-editor'
 import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -43,6 +44,7 @@ export interface CommentFormBetaProps {
   closeCallback?: () => void
 
   placeholder?: string
+  syncQuote?: boolean
 }
 
 export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
@@ -57,11 +59,13 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   closeCallback,
 
   placeholder,
+  syncQuote,
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
+  const [editor, setEditor] = useState<Editor | null>(null)
 
   // retrieve comment draft
   const commentDraftId = `${articleId}-${type}-${commentId || 0}-${
@@ -147,12 +151,8 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
       }
 
       // clear content
-      const $editor = document.querySelector(
-        `#${formId} .ProseMirror`
-      ) as HTMLElement
-
-      if ($editor) {
-        $editor.innerHTML = ''
+      if (editor) {
+        editor.commands.setContent('')
       }
 
       // clear draft
@@ -195,6 +195,10 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
           content={content}
           update={onUpdate}
           placeholder={placeholder}
+          syncQuote={syncQuote}
+          setEditor={(editor) => {
+            setEditor(editor)
+          }}
         />
       </section>
 
