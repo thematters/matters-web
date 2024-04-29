@@ -31,6 +31,11 @@ import {
 } from '~/components'
 import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog/Dialog'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
+import { ArchiveUserDialogProps } from '~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'
+import {
+  OpenToggleRestrictUserDialogWithProps,
+  ToggleRestrictUserDialogProps,
+} from '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
 
 import AddCollectionButton from './AddCollectionButton'
 import ArchiveArticle from './ArchiveArticle'
@@ -59,10 +64,35 @@ const DynamicToggleRecommendArticleButton = dynamic(
   () => import('./ToggleRecommendArticle/Button'),
   { loading: () => <SpinnerBlock /> }
 )
-
 const DynamicToggleRecommendArticleDialog = dynamic(
   () => import('./ToggleRecommendArticle/Dialog'),
   { loading: () => <SpinnerBlock /> }
+)
+const DynamicToggleRestrictUserButton = dynamic(
+  () =>
+    import(
+      '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Button'
+    ),
+  { loading: () => <Spinner /> }
+)
+const DynamicToggleRestrictUserDialog = dynamic(
+  () =>
+    import(
+      '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
+    ),
+  { loading: () => <Spinner /> }
+)
+const DynamicArchiveUserButton = dynamic(
+  () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Button'),
+  {
+    loading: () => <Spinner />,
+  }
+)
+const DynamicArchiveUserDialog = dynamic(
+  () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'),
+  {
+    loading: () => <Spinner />,
+  }
 )
 
 export interface DropdownActionsControls {
@@ -134,9 +164,13 @@ interface DialogProps {
 }
 
 interface AdminProps {
-  openToggleRecommendDialog: (
+  openToggleRecommendArticleDialog: (
     props: OpenToggleRecommendArticleDialogWithProps
   ) => void
+  openToggleRestrictUserDialog: (
+    props: OpenToggleRestrictUserDialogWithProps
+  ) => void
+  openArchiveUserDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps &
@@ -185,7 +219,9 @@ const BaseDropdownActions = ({
   onRemoveCollection,
 
   // admin
-  openToggleRecommendDialog,
+  openToggleRecommendArticleDialog,
+  openToggleRestrictUserDialog,
+  openArchiveUserDialog,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
   const hasPublic = hasShare || hasIPFS || hasExtend || hasReport
@@ -270,13 +306,18 @@ const BaseDropdownActions = ({
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="icymi"
-            openDialog={openToggleRecommendDialog}
+            openDialog={openToggleRecommendArticleDialog}
           />
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="hottestAndNewest"
-            openDialog={openToggleRecommendDialog}
+            openDialog={openToggleRecommendArticleDialog}
           />
+          <DynamicToggleRestrictUserButton
+            id={article.author.id}
+            openDialog={openToggleRestrictUserDialog}
+          />
+          <DynamicArchiveUserButton openDialog={openArchiveUserDialog} />
         </>
       )}
     </Menu>
@@ -449,18 +490,34 @@ const DropdownActions = (props: DropdownActionsProps) => {
   /**
    * ADMIN ONLY
    */
-  const WithToggleRecommend = withDialog<
+  const WithToggleRecommendArticle = withDialog<
     Omit<ToggleRecommendArticleDialogProps, 'children'>
   >(
     WithRemoveArticleCollection,
     DynamicToggleRecommendArticleDialog,
     { article },
     ({ openDialog }) => ({
-      openToggleRecommendDialog: openDialog,
+      openToggleRecommendArticleDialog: openDialog,
     })
   )
+  const WithToggleRetrictUser = withDialog<
+    Omit<ToggleRestrictUserDialogProps, 'children'>
+  >(
+    WithToggleRecommendArticle,
+    DynamicToggleRestrictUserDialog,
+    { id: article.author.id, userName: article.author.userName! },
+    ({ openDialog }) => ({
+      openToggleRestrictUserDialog: openDialog,
+    })
+  )
+  const WithArchiveUser = withDialog<Omit<ArchiveUserDialogProps, 'children'>>(
+    WithToggleRetrictUser,
+    DynamicArchiveUserDialog,
+    { id: article.author.id, userName: article.author.userName! },
+    ({ openDialog }) => ({ openArchiveUserDialog: openDialog })
+  )
 
-  return <WithToggleRecommend />
+  return <WithArchiveUser />
 }
 
 DropdownActions.fragments = fragments

@@ -11,8 +11,9 @@ const Home = () => {
     <Layout.Main
       aside={
         <>
-          <Sidebar.Tags />
+          <Sidebar.Billboard />
           <Sidebar.Authors />
+          <Sidebar.Tags />
         </>
       }
     >

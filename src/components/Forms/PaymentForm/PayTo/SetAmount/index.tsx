@@ -219,7 +219,7 @@ const SetAmount: React.FC<FormProps> = ({
   const networkError =
     error || hasUSDTNetworkError ? (
       WALLET_ERROR_MESSAGES[lang].unknown
-    ) : isExceededAllowance ? (
+    ) : isExceededAllowance && isUSDT ? (
       <FormattedMessage
         defaultMessage="Transfer amount exceeds allowance"
         id="Tgd5id"
