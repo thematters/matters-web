@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import { Editor } from '@matters/matters-editor'
 import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -11,6 +10,7 @@ import {
 import { dom, stripHtml } from '~/common/utils'
 import {
   Button,
+  CommentDraftsContext,
   SpinnerBlock,
   TextIcon,
   useMutation,
@@ -24,8 +24,7 @@ import {
   updateCommentDetail,
 } from '~/components/GQL'
 import PUT_COMMENT_BETA from '~/components/GQL/mutations/putCommentBeta'
-import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
-import { CommentDraftQuery, PutCommentBetaMutation } from '~/gql/graphql'
+import { PutCommentBetaMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -63,6 +62,8 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
+  const { getDraft, updateDraft, removeDraft } =
+    useContext(CommentDraftsContext)
   const { getQuery, router, routerLang } = useRoute()
   const mediaHash = getQuery('mediaHash')
   const [editor, setEditor] = useState<Editor | null>(null)
@@ -73,14 +74,10 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   }-${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`
 
-  const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
-    variables: { id: commentDraftId },
-  })
-
   const [putComment] = useMutation<PutCommentBetaMutation>(PUT_COMMENT_BETA)
   const [isSubmitting, setSubmitting] = useState(false)
   const [content, setContent] = useState(
-    data?.commentDraft.content || defaultContent || ''
+    getDraft(commentDraftId) || defaultContent || ''
   )
 
   const contentCount = stripHtml(content).trim().length
@@ -156,10 +153,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
       }
 
       // clear draft
-      client.writeData({
-        id: `CommentDraft:${commentDraftId}`,
-        data: { content: '' },
-      })
+      removeDraft(commentDraftId)
 
       if (closeCallback) {
         closeCallback()
@@ -172,11 +166,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
     setContent(newContent)
-
-    client.writeData({
-      id: `CommentDraft:${commentDraftId}`,
-      data: { content: newContent },
-    })
+    updateDraft(commentDraftId, newContent)
   }
 
   return (
