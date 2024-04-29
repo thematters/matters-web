@@ -4,7 +4,7 @@ import { useContext, useEffect } from 'react'
 import { analytics } from '~/common/utils'
 import {
   Dialog,
-  Spinner,
+  SpinnerBlock,
   useDialogSwitch,
   useStep,
   ViewerContext,
@@ -16,14 +16,14 @@ interface AddCreditDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicPaymentSetPasswordForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: () => <Spinner /> }
+const DynamicSetPaymentPasswordContent = dynamic(
+  () => import('~/components/Dialogs/SetPaymentPasswordDialog/Content'),
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
@@ -57,13 +57,15 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         {isSetPaymentPassword && (
-          <DynamicPaymentSetPasswordForm
+          <DynamicSetPaymentPasswordContent
             submitCallback={() => forward('addCredit')}
             closeDialog={closeDialog}
           />
         )}
 
-        {isAddCredit && <DynamicAddCreditForm closeDialog={closeDialog} />}
+        {isAddCredit && (
+          <DynamicAddCreditForm closeDialog={closeDialog} isInDialog />
+        )}
       </Dialog>
     </>
   )

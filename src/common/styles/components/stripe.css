@@ -16,7 +16,7 @@
 
   &.StripeElement--invalid {
     background-color: transparent;
-    border-color: var(--color-red);
+    border-color: var(--color-negative-red);
   }
 
   /* Chrome, Safari, Edge, Opera */

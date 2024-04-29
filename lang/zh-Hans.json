@@ -3,6 +3,13 @@
     "defaultMessage": "请先验证邮箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
+  "+5O5ev": {
+    "defaultMessage": "「{circleName}」所有作品",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
+  "+5sU+5": {
+    "defaultMessage": "侵权"
+  },
   "+63O1f": {
     "defaultMessage": "邮箱或密码错误",
     "description": "USER_PASSWORD_INVALID"
@@ -13,6 +20,9 @@
   "+OStJM": {
     "defaultMessage": "重置交易密码"
   },
+  "+OtV6h": {
+    "defaultMessage": "保存失败"
+  },
   "+S8mxW": {
     "defaultMessage": "移至顶部",
     "description": "src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
@@ -22,9 +32,6 @@
   },
   "+aMAeT": {
     "defaultMessage": "地址已复制"
-  },
-  "+bwe8v": {
-    "defaultMessage": "Stripe will process your payment, so you can support the author wherever you are."
   },
   "+cS08C": {
     "defaultMessage": "确认要将“{article}”从选集中移出吗？",
@@ -61,6 +68,10 @@
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
+  "/NX9L+": {
+    "defaultMessage": "确认授权",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "/TXBJR": {
     "defaultMessage": "不知道哪里出错了，过几分钟看看",
     "description": "UNKNOWN_ERROR"
@@ -83,15 +94,17 @@
     "defaultMessage": "公开",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
-  "/qgntf": {
-    "defaultMessage": "查看支持者",
-    "description": "src/components/ArticleDigest/DropdownActions/DonatorsButton/index.tsx"
-  },
   "/usqHn": {
     "defaultMessage": "{displayName} 的创作空间站"
   },
+  "/wKyxw": {
+    "defaultMessage": "发布失败"
+  },
   "0/iEw/": {
     "defaultMessage": "管理社群"
+  },
+  "06XHBC": {
+    "defaultMessage": "加入围炉"
   },
   "0Azlrb": {
     "defaultMessage": "管理"
@@ -99,10 +112,6 @@
   "0CyECR": {
     "defaultMessage": "Matters ID 已设置，更多帐号相关设置可前往设置页修改",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
-  },
-  "0JLcHr": {
-    "defaultMessage": "内容可能包含色情、暴力、血腥等限制级内容，部分用户可能不适合观看，或引起不适、心理负担，请谨慎判断是否阅读。",
-    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "0JlaP1": {
     "defaultMessage": "Oops！链接已失效",
@@ -138,13 +147,28 @@
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
+  "17K30q": {
+    "defaultMessage": "正在通过 Google 翻译..."
+  },
   "1COpAA": {
     "defaultMessage": "失败",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "1PORwh": {
+    "defaultMessage": "仅作者本人可见封存作品，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "1QrwIl": {
     "defaultMessage": "去看看",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
+  },
+  "1U/MPD": {
+    "defaultMessage": "余额：",
+    "description": "src/components/Balance/index.tsx"
+  },
+  "1WeErK": {
+    "defaultMessage": "欢迎使用钱包！请先设置交易密码",
+    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
   },
   "1Z1M77": {
     "defaultMessage": "尚无阅读记录",
@@ -157,6 +181,10 @@
   "1qQzV0": {
     "defaultMessage": "免费邀请",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "1r1iQj": {
+    "defaultMessage": "重新授权",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "1y1U9f": {
     "defaultMessage": "Liker ID 已被其他人使用",
@@ -176,6 +204,10 @@
   "20yT4t": {
     "defaultMessage": "回应设置",
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
+  },
+  "24jhEp": {
+    "defaultMessage": "你的修订作品 {articleTitle} 发布失败",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "25oM9Q": {
     "defaultMessage": "排序"
@@ -198,12 +230,22 @@
   "2W0f9h": {
     "defaultMessage": "个人简介"
   },
+  "2bG/gP": {
+    "defaultMessage": "编辑",
+    "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
+  },
   "2ef/Xl": {
     "defaultMessage": "屏蔽",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
+  "2kpUZD": {
+    "defaultMessage": "提交成功"
+  },
   "2oxLHg": {
     "defaultMessage": "最多可设置 3 个代表作"
+  },
+  "2qbSh8": {
+    "defaultMessage": "发布时注册 "
   },
   "2slIPX": {
     "defaultMessage": "我的赞赏"
@@ -229,6 +271,9 @@
     "defaultMessage": "登录",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3Y6k4g": {
+    "defaultMessage": "喜欢我的作品吗？别忘了给予支持与赞赏，让我知道在创作的路上有你陪伴，一起延续这份热忱！"
+  },
   "3fqQHv": {
     "defaultMessage": "添加协作者"
   },
@@ -245,6 +290,9 @@
   "3w3CC8": {
     "defaultMessage": "关联 ENS"
   },
+  "3yVvk4": {
+    "defaultMessage": "请在 Liker Land 继续操作"
+  },
   "3yk8fB": {
     "defaultMessage": "我的钱包"
   },
@@ -260,6 +308,9 @@
   "4KuZ0o": {
     "defaultMessage": "资源不存在",
     "description": "ASSET_NOT_FOUND"
+  },
+  "4OMGUj": {
+    "defaultMessage": "评论详情"
   },
   "4RpVDe": {
     "defaultMessage": "刪除草稿"
@@ -290,7 +341,7 @@
     "defaultMessage": "目前尚无标签，立即添加提高作品曝光度！"
   },
   "5IS+ui": {
-    "defaultMessage": "设定支持"
+    "defaultMessage": "支持设置"
   },
   "5JN+nl": {
     "defaultMessage": "请检查邮件",
@@ -299,6 +350,9 @@
   "5MDA6O": {
     "defaultMessage": "标签名称已被使用",
     "description": "DUPLICATE_TAG"
+  },
+  "5UglrB": {
+    "defaultMessage": "送出成功"
   },
   "5XFd/5": {
     "defaultMessage": "管理围炉"
@@ -309,6 +363,10 @@
   },
   "5jlQTx": {
     "defaultMessage": "邀请管理"
+  },
+  "5rxHb7": {
+    "defaultMessage": "可能包含色情、暴力、血腥等，点此展开全部",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "5sWnog": {
     "defaultMessage": "Liker ID 邮箱已被其他人使用",
@@ -324,6 +382,9 @@
   "6/kgzs": {
     "defaultMessage": "退订成功"
   },
+  "62nsdy": {
+    "defaultMessage": "重试"
+  },
   "63HuBz": {
     "defaultMessage": "此标签目前无人主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -335,8 +396,9 @@
     "defaultMessage": "设定围炉门槛（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
-  "6ErzDk": {
-    "defaultMessage": "重新连接钱包"
+  "6KmKvZ": {
+    "defaultMessage": "请再次输入新交易密码",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
   "6N2LKY": {
     "defaultMessage": "授权信息已失效，请重新登入",
@@ -376,9 +438,6 @@
     "defaultMessage": "已取消",
     "description": "src/components/Transaction/State/index.tsx"
   },
-  "6yZXYK": {
-    "defaultMessage": "忘记交易密码"
-  },
   "70UCEy": {
     "defaultMessage": "在行动装置上使用问题，参考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -394,12 +453,24 @@
     "defaultMessage": "确认删除后，{commentType}会立即消失。",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
+  "78qsg6": {
+    "defaultMessage": "作者",
+    "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
   "79Ydsg": {
     "defaultMessage": "提现撤销",
     "description": "src/components/Transaction/index.tsx"
   },
   "7JlauX": {
     "defaultMessage": "指南"
+  },
+  "7UqcsO": {
+    "defaultMessage": "忘记交易密码？",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
+  "7VSfs3": {
+    "defaultMessage": "选择支持金额",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
   },
   "7WXDhH": {
     "defaultMessage": "确认要删除草稿吗？",
@@ -415,6 +486,10 @@
   "7xnrxG": {
     "defaultMessage": "作品已添加至精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
+  },
+  "7ykJ+l": {
+    "defaultMessage": "暂无评论，打个招呼吧",
+    "description": "src/components/Empty/EmptyComment.tsx"
   },
   "84VOdX": {
     "defaultMessage": "取消代表作",
@@ -461,6 +536,9 @@
     "defaultMessage": "已追踪",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
+  "99OtWT": {
+    "defaultMessage": "写入中…"
+  },
   "9Fpc9S": {
     "defaultMessage": "漏洞报告"
   },
@@ -470,6 +548,10 @@
   "9OIqBr": {
     "defaultMessage": "编辑评论",
     "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
+  "9SXN7s": {
+    "defaultMessage": "没有更多",
+    "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
   },
   "9UNFGm": {
     "defaultMessage": "交易密码"
@@ -512,6 +594,9 @@
   "AEiogR": {
     "defaultMessage": "该 Google 账号已关联至其他 Matters 账号，请登录该账号解绑后再试",
     "description": "USER_SOCIAL_ACCOUNT_EXISTS"
+  },
+  "AGDFGs": {
+    "defaultMessage": "歧视、侮辱或仇恨"
   },
   "AGcU5J": {
     "defaultMessage": "置顶",
@@ -560,6 +645,9 @@
   "BY343C": {
     "defaultMessage": "修改"
   },
+  "BaQj20": {
+    "defaultMessage": "报告问题"
+  },
   "Bb2R0G": {
     "defaultMessage": "创作",
     "description": "src/components/Buttons/Write/index.tsx"
@@ -574,6 +662,10 @@
   "BnMru1": {
     "defaultMessage": "语言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
+  },
+  "BoN8lF": {
+    "defaultMessage": "递出支持资金给",
+    "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
   },
   "C3NKBg": {
     "defaultMessage": "{type} 已绑定",
@@ -597,6 +689,9 @@
   "CNrhz9": {
     "defaultMessage": "什么是社区公告栏（Billboard）？",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
+  "CPvyYN": {
+    "defaultMessage": "密码错误"
   },
   "Cdkhl8": {
     "defaultMessage": "刪除{commentType}",
@@ -636,6 +731,13 @@
     "defaultMessage": "已超过 140 字，目前 {numbers} 字",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
   },
+  "DUvMii": {
+    "defaultMessage": "可自订号召支持的内容，以及收到支持后的感谢文字"
+  },
+  "DX0YH3": {
+    "defaultMessage": "已成功绑定钱包",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "DYrDcG": {
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
@@ -654,6 +756,9 @@
   "DyuHBH": {
     "defaultMessage": "取消代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
+  },
+  "E+dEI9": {
+    "defaultMessage": "有了你的支持，我将能够蓄积更多能量创作"
   },
   "E8W3qa": {
     "defaultMessage": "2-20 个字符"
@@ -676,6 +781,13 @@
   "Eb1U+/": {
     "defaultMessage": "储值成功"
   },
+  "EcglP9": {
+    "defaultMessage": "密钥"
+  },
+  "EmZFry": {
+    "defaultMessage": "请在加密钱包内继续操作",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
+  },
   "EoeUjA": {
     "defaultMessage": "你无权限进行该操作",
     "description": "FORBIDDEN_BY_STATE"
@@ -692,9 +804,17 @@
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
+  "FMIIAZ": {
+    "defaultMessage": "此为历史版本和 IPFS 入口查阅区，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "FOOymB": {
     "defaultMessage": "还没有成员",
     "description": "src/views/Circle/Profile/MembersDialog/Content.tsx"
+  },
+  "FWCa4O": {
+    "defaultMessage": "目前非 Optimism 网络，立即切换？",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
@@ -747,6 +867,9 @@
   "GZJpDf": {
     "defaultMessage": "数据后台"
   },
+  "GclYG/": {
+    "defaultMessage": "匿名用户"
+  },
   "GcvLBC": {
     "defaultMessage": "我知道了"
   },
@@ -768,15 +891,11 @@
   "H8KGyc": {
     "defaultMessage": "进入"
   },
-  "H9FKs4": {
-    "defaultMessage": "请再次输入交易密码"
-  },
   "HAlOn1": {
     "defaultMessage": "用户名"
   },
-  "HDjV1k": {
-    "defaultMessage": "分布式入口",
-    "description": "src/components/ArticleDigest/DropdownActions/FingerprintButton/index.tsx"
+  "HBxXD/": {
+    "defaultMessage": "版权声明"
   },
   "HEpsZ3": {
     "defaultMessage": "返回发现"
@@ -792,12 +911,27 @@
     "defaultMessage": "数字钱包",
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
+  "HQusql": {
+    "defaultMessage": "读者可以直接透过钱包地址转 USDT 等币种给你",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
+  "HR599l": {
+    "defaultMessage": "回到我的创作",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "HYW0fI": {
+    "defaultMessage": "上链后，作品不可删除，去中心化保存"
+  },
   "HkozYU": {
     "defaultMessage": "更换钱包",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
   "HnxG15": {
     "defaultMessage": "设定"
+  },
+  "Hpmiif": {
+    "defaultMessage": "选集",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
   "HqnUd1": {
     "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
@@ -806,6 +940,21 @@
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "HyjQns": {
+    "defaultMessage": "教学指南",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "Hyr5ET": {
+    "defaultMessage": "支持者",
+    "description": "src/components/Dialogs/SupportersDialog/Content.tsx"
+  },
+  "HzB4Lk": {
+    "defaultMessage": "告知读者你此次编辑的更动有哪些⋯"
+  },
+  "I8+06z": {
+    "defaultMessage": "评论已隐藏",
+    "description": "src/components/CommentBeta/Content/index.tsx"
   },
   "IKPYe9": {
     "defaultMessage": "查看",
@@ -833,9 +982,6 @@
     "defaultMessage": "评论数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
-  "JRkgKV": {
-    "defaultMessage": "复制失败"
-  },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -850,9 +996,6 @@
   "JkWLg6": {
     "defaultMessage": "被追踪",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JmzmVH": {
-    "defaultMessage": "切换到 "
   },
   "JpS59y": {
     "defaultMessage": "已接受",
@@ -888,9 +1031,23 @@
   "KQi/UZ": {
     "defaultMessage": "归档作品"
   },
+  "KTg17G": {
+    "defaultMessage": "取消置顶",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
+  "KWDSxB": {
+    "defaultMessage": "保存修订"
+  },
+  "KgVypx": {
+    "defaultMessage": "标签",
+    "description": "src/components/Dialogs/TagListDialog/index.tsx"
+  },
   "KlJEP9": {
     "defaultMessage": "钱包已绑定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "Kwv1n3": {
+    "defaultMessage": " 用以出版 Writing NFT，费用 ≈1 LIKE，推广期由平台补助"
   },
   "KxVlDj": {
     "defaultMessage": "设置 - 已屏蔽用户",
@@ -911,6 +1068,10 @@
     "defaultMessage": "目前总营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "L79o74": {
+    "defaultMessage": "展开",
+    "description": "src/components/Expandable/index.tsx"
+  },
   "L7Si5/": {
     "defaultMessage": "管理社群",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -921,6 +1082,9 @@
   },
   "LGox1K": {
     "defaultMessage": "已追踪"
+  },
+  "LILxpV": {
+    "defaultMessage": "评论尚未发布，确定放弃内容离开此页吗？"
   },
   "LOefol": {
     "defaultMessage": "上锁",
@@ -948,6 +1112,9 @@
     "defaultMessage": "IPNS 订阅",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "LgbKvU": {
+    "defaultMessage": "评论"
+  },
   "Lhhi5l": {
     "defaultMessage": "作品已发布",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -973,6 +1140,9 @@
   "LwFJTy": {
     "defaultMessage": "Matters ID 为用户唯一标识，设置后无法修改。",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "M05PcB": {
+    "defaultMessage": "想对你说："
   },
   "MDNaxs": {
     "defaultMessage": "人",
@@ -1005,8 +1175,18 @@
     "defaultMessage": "设置 - 围炉通知",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "Myrqtn": {
+    "defaultMessage": "🎉 感谢支持！"
+  },
   "N2IrpM": {
     "defaultMessage": "确认"
+  },
+  "N8ISx8": {
+    "defaultMessage": "Oops！该评论已被原作者删除"
+  },
+  "NACY16": {
+    "defaultMessage": "为什么需要设定钱包 ?",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "NAidKb": {
     "defaultMessage": "通知"
@@ -1023,9 +1203,12 @@
     "defaultMessage": "标签不存在",
     "description": "TAG_NOT_FOUND"
   },
-  "NONfAh": {
-    "defaultMessage": "豆瓣",
-    "description": "src/components/Share/Buttons/Douban.tsx"
+  "NYTGIb": {
+    "defaultMessage": "知道了"
+  },
+  "NbdvAd": {
+    "defaultMessage": "支持者名单",
+    "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
   },
   "NdtzIs": {
     "defaultMessage": "邮箱地址验证链接已发送至 {email}",
@@ -1050,9 +1233,16 @@
     "defaultMessage": "忘记密码？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
+  "OA3RuB": {
+    "defaultMessage": "尚未允许使用钱包里的 USDT",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
+  },
   "OIj8pQ": {
     "defaultMessage": "成功发送邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
+  },
+  "OJmFke": {
+    "defaultMessage": "告知读者你此次编辑的更动"
   },
   "OKhRC6": {
     "defaultMessage": "分享"
@@ -1064,9 +1254,24 @@
   "OpeFTV": {
     "defaultMessage": "输入六位数字交易密码"
   },
+  "Oru6G2": {
+    "defaultMessage": "使用 IPFS 生成的作品指纹，通过它可在节点调取内容"
+  },
+  "OsX3KM": {
+    "defaultMessage": "评论",
+    "description": "src/views/ArticleDetail/index.tsx"
+  },
   "P+sWM0": {
     "defaultMessage": "教学指南",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
+  },
+  "P2tEEn": {
+    "defaultMessage": "余额不足",
+    "description": "src/components/Balance/index.tsx"
+  },
+  "P3y9Bo": {
+    "defaultMessage": "前往签署",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "PLBmDT": {
     "defaultMessage": "登录密码",
@@ -1074,6 +1279,13 @@
   },
   "PXAur5": {
     "defaultMessage": "提现"
+  },
+  "PesLat": {
+    "defaultMessage": "正在发布，马上就好"
+  },
+  "PkUihI": {
+    "defaultMessage": "修订已保存",
+    "description": "src/views/ArticleDetail/Edit/Header/index.tsx"
   },
   "PliM8z": {
     "defaultMessage": "请移步相关页面重新获取链接，您也可以",
@@ -1093,13 +1305,12 @@
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
+  "QQSdHP": {
+    "defaultMessage": "查看更多"
+  },
   "QUqfbW": {
     "defaultMessage": "说说围炉的有趣之处，吸引支持者加入",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
-  "QV19cI": {
-    "defaultMessage": "你的修订作品发布失败",
-    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "QXJQ5G": {
     "defaultMessage": "授权信息已失效，请重新登入",
@@ -1109,6 +1320,14 @@
     "defaultMessage": "设置围炉网址（创建后不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "QfrKA6": {
+    "defaultMessage": "上一步",
+    "description": "src/components/Forms/PaymentForm"
+  },
+  "R410ei": {
+    "defaultMessage": "验证码错误",
+    "description": "CODE_INVALID"
+  },
   "R7yHDl": {
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
@@ -1117,9 +1336,25 @@
     "defaultMessage": "取消置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "RGEpvx": {
+    "defaultMessage": "编辑文案",
+    "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
+  },
+  "RM17b4": {
+    "defaultMessage": "来自作者",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
+  },
+  "RMV4wt": {
+    "defaultMessage": "充值成功",
+    "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
+  },
   "ROPCC0": {
     "defaultMessage": "请先绑定邮箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
+  },
+  "RU5NDB": {
+    "defaultMessage": "请再次输入交易密码",
+    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
   },
   "Rc4Oij": {
     "defaultMessage": "火闪电"
@@ -1140,6 +1375,10 @@
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
+  "SHWkv8": {
+    "defaultMessage": "为什么先采用 Optimism ?",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "SNh1n0": {
     "defaultMessage": "查看名单",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1147,6 +1386,10 @@
   "SPTRiT": {
     "defaultMessage": "最新",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "SYfw+k": {
+    "defaultMessage": "确认储值",
+    "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
   },
   "SYyBFF": {
     "defaultMessage": "复制成功"
@@ -1162,9 +1405,15 @@
   "Seanpx": {
     "defaultMessage": "必填欄位"
   },
+  "SebPdz": {
+    "defaultMessage": "交易进行中，请稍候"
+  },
   "Sep44m": {
     "defaultMessage": "提现",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "SuRTsQ": {
+    "defaultMessage": "注册 ISCN"
   },
   "Szd1tH": {
     "defaultMessage": "登出失败，再来一次"
@@ -1194,6 +1443,14 @@
     "defaultMessage": "付费人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "TX5UzL": {
+    "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
+    "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
+  "TgU+Mf": {
+    "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考 {tutorial}.",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "Tgd5id": {
     "defaultMessage": "支持金额超出授权额度"
   },
@@ -1203,6 +1460,10 @@
   },
   "TzhzIH": {
     "defaultMessage": "创作者"
+  },
+  "U+qEBM": {
+    "defaultMessage": "切换网络",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
   "U7o9Ba": {
     "defaultMessage": "累计阅读时長"
@@ -1236,6 +1497,10 @@
   "Up5U7K": {
     "defaultMessage": "屏蔽"
   },
+  "UxAA/V": {
+    "defaultMessage": "Optimism 是基于以太坊的第二层（Layer2）扩容方案，能提升交易速度，并降低手续费，同时确保安全性，让你更轻松地支持创作者。",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "V5OMr4": {
     "defaultMessage": "什么是数字钱包？",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
@@ -1260,6 +1525,10 @@
   "Vn5KLr": {
     "defaultMessage": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）",
     "description": "src/components/Editor/ToggleAccess/index.tsx"
+  },
+  "VqdOGQ": {
+    "defaultMessage": "相关推荐",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
   "VrOoVf": {
     "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
@@ -1301,6 +1570,9 @@
     "defaultMessage": "作品被收藏",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "Wjmng6": {
+    "defaultMessage": "正文及作品管理剩 {revisionCountLeft} 次修订"
+  },
   "WpvsPu": {
     "defaultMessage": "订阅",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1319,6 +1591,9 @@
   },
   "XHcb2q": {
     "defaultMessage": "飞船正在检修中，请稍后看看"
+  },
+  "XP1Vto": {
+    "defaultMessage": "Oops！该评论已被强制隐藏"
   },
   "XQTBu6": {
     "defaultMessage": "在你的围炉广播中留言提及你",
@@ -1348,12 +1623,18 @@
   "XgdZSb": {
     "defaultMessage": "值得关注"
   },
+  "Xh/txo": {
+    "defaultMessage": "作品指纹"
+  },
   "Xi40U9": {
     "defaultMessage": "操作无法撤销，确认删除选集吗？"
   },
   "XmnzQT": {
     "defaultMessage": "一个标签最多仅可有 4 名协作者共同管理",
     "description": "TAG_EDITORS_REACH_LIMIT"
+  },
+  "XnEruT": {
+    "defaultMessage": "绑定失败，请稍后再试"
   },
   "XuYhBC": {
     "defaultMessage": "代表作已设置"
@@ -1366,11 +1647,22 @@
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "Y47aYU": {
+    "defaultMessage": "充值"
+  },
   "Y7N/Jg": {
     "defaultMessage": "图片边长不得超过 12,000 像素"
   },
   "Y8zV4A": {
     "defaultMessage": "回复评论"
+  },
+  "YAIXL4": {
+    "defaultMessage": "请于钱包视窗点击确认授权使用{br}确认完成后即可开始支持步骤",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
+  },
+  "YOMY1y": {
+    "defaultMessage": "发布评论...",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "YPMn9n": {
     "defaultMessage": "请先登入再进行操作",
@@ -1402,6 +1694,10 @@
     "defaultMessage": "开始创作",
     "description": "src/components/Buttons/StartWriting/index.tsx"
   },
+  "Z7JXlF": {
+    "defaultMessage": "因违反用户协定而被封存，",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
   "ZAs170": {
     "defaultMessage": "基本资料",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -1417,7 +1713,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "修订",
+    "defaultMessage": "编辑作品",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZYvVYX": {
@@ -1441,6 +1737,18 @@
     "defaultMessage": "读者数量：访问过作品页的不重复的登录用户数加匿名 IP 数（数据周期更新，可能存在延迟）",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
+  "aCTmEO": {
+    "defaultMessage": "我还没有钱包",
+    "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
+  },
+  "aE5Qq+": {
+    "defaultMessage": "重新发送",
+    "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
+  },
+  "aFJE+p": {
+    "defaultMessage": "{totalCount} 篇作品",
+    "description": "src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
+  },
   "aOFCqL": {
     "defaultMessage": "最多评论",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
@@ -1463,9 +1771,6 @@
   "ai7kS4": {
     "defaultMessage": "我的创作"
   },
-  "aoDcrD": {
-    "defaultMessage": "首次需确认授权后继续"
-  },
   "aqX2Bt": {
     "defaultMessage": "前往首页",
     "description": "src/views/Callback/UI.tsx"
@@ -1484,6 +1789,10 @@
   "bBYO6x": {
     "defaultMessage": "取消屏蔽",
     "description": "src/components/BlockUser/Button/index.tsx"
+  },
+  "bQ5vZC": {
+    "defaultMessage": "此文已被{actor}标示为限制级内容",
+    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
   },
   "bSqeXm": {
     "defaultMessage": "{ext, select, gif {GIF 格式} other {} }图片大小不得超过 {sizeInMB}MB"
@@ -1556,6 +1865,9 @@
     "defaultMessage": "营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
+  "d5+b8r": {
+    "defaultMessage": "限制级内容"
+  },
   "dAPUJp": {
     "defaultMessage": "流星雨的绚烂光芒足以点亮夜空。流星号徽章纪念你曾参与「游牧者计划」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -1563,6 +1875,10 @@
   "dAvP6d": {
     "defaultMessage": "尚无屏蔽记录",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
+  },
+  "dQhNbF": {
+    "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
+    "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
   },
   "dSjI7E": {
     "defaultMessage": "暂无法断开钱包链接，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
@@ -1575,10 +1891,6 @@
     "defaultMessage": "评论和回复",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
-  "dZQ+ba": {
-    "defaultMessage": "查看赞赏",
-    "description": "src/components/ArticleDigest/DropdownActions/AppreciatorsButton/index.tsx"
-  },
   "deEeEI": {
     "defaultMessage": "注册"
   },
@@ -1588,9 +1900,16 @@
   "djJp6c": {
     "defaultMessage": "我的足跡"
   },
+  "dk+TLh": {
+    "defaultMessage": "钱包地址将公开显示于个人页作为个人身份识别",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "dzF4ci": {
     "defaultMessage": "重新发送",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
+  },
+  "e3qUqn": {
+    "defaultMessage": "涉及未成年人的色情"
   },
   "eKVBm/": {
     "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考{link}。"
@@ -1600,6 +1919,12 @@
   },
   "eXDZGQ": {
     "defaultMessage": "主理人"
+  },
+  "eY3YIa": {
+    "defaultMessage": "复制评论"
+  },
+  "eZ0m39": {
+    "defaultMessage": "或输入自定义金额"
   },
   "enMIYK": {
     "defaultMessage": "我的"
@@ -1611,11 +1936,18 @@
     "defaultMessage": "互相追踪",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
+  "exb/12": {
+    "defaultMessage": "之后就可以透过钱包快速登入啰！",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "ezYuE2": {
     "defaultMessage": "支持作者"
   },
   "fDdcbi": {
-    "defaultMessage": "此 {type} 被原作者删除"
+    "defaultMessage": "{type}已被原作者删除"
+  },
+  "fK6ptv": {
+    "defaultMessage": "送出失败，请稍后再试"
   },
   "fPcF7H": {
     "defaultMessage": "添加适合标签，帮助读者找到你的作品"
@@ -1661,6 +1993,9 @@
     "defaultMessage": "为确保帐号安全，修改邮箱將{resetHint}，你可在验证邮箱后再次设置密码。",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "h9CB9m": {
+    "defaultMessage": "结果以链上纪录为主，稍后同步至 Matters"
+  },
   "h9CG9E": {
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1675,6 +2010,10 @@
   "hYG5fb": {
     "defaultMessage": "人追踪",
     "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "hgjjhO": {
+    "defaultMessage": "评论",
+    "description": "src/components/Forms/CommentFormBeta/index.tsx"
   },
   "hk2aiz": {
     "defaultMessage": "追踪了你的围炉",
@@ -1694,6 +2033,10 @@
   "iEJeQH": {
     "defaultMessage": "设置 Liker ID"
   },
+  "iNZdM/": {
+    "defaultMessage": "切换后即可支持创作者，采用 Optimism 网络{br}让支持更方便且费用低廉",
+    "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
   "iTcMqz": {
     "defaultMessage": "月色之下，梦想即将实现。月之梦徽章纪念你曾参与「游牧者计划」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -1704,6 +2047,10 @@
   },
   "ieGrWo": {
     "defaultMessage": "追踪"
+  },
+  "imXsmo": {
+    "defaultMessage": "回到作品页",
+    "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
   "itPgxd": {
     "defaultMessage": "个人主页"
@@ -1726,9 +2073,23 @@
     "defaultMessage": "喜欢回应",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "jc3mW/": {
+    "defaultMessage": "支持者",
+    "description": "src/components/Comment/RoleLabel/index.tsx"
+  },
+  "jiB0Z2": {
+    "defaultMessage": "无法绑定钱包",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "jkrM1r": {
     "defaultMessage": "打开 IPNS 页面",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
+  },
+  "jtdQHR": {
+    "defaultMessage": "公共节点"
+  },
+  "jwnump": {
+    "defaultMessage": "发布评论..."
   },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 发布广播",
@@ -1747,6 +2108,9 @@
   "k5NnNF": {
     "defaultMessage": "追踪了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
+  },
+  "k6pcz/": {
+    "defaultMessage": "请确认网路和钱包是否正常运行"
   },
   "k97/u7": {
     "defaultMessage": "添加作品"
@@ -1773,6 +2137,17 @@
   "kkZioy": {
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "ksIL/T": {
+    "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"
+  },
+  "ksvOGO": {
+    "defaultMessage": "发送验证码",
+    "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
+  "kvUs/6": {
+    "defaultMessage": "请输入新交易密码",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
   "l/f7bu": {
     "defaultMessage": "想了解更多？詳見 ",
@@ -1813,6 +2188,9 @@
   },
   "ll/ufR": {
     "defaultMessage": "热门"
+  },
+  "lsccVJ": {
+    "defaultMessage": "正文及作品管理修订次数已达上限"
   },
   "m/Wg7b": {
     "defaultMessage": "围炉描述",
@@ -1861,6 +2239,10 @@
   "mu01Gw": {
     "defaultMessage": "验证码已失效，请使用最新验证码或重新发送",
     "description": "CODE_INACTIVE"
+  },
+  "myB890": {
+    "defaultMessage": "先不要，下次再说",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "mzCz0Z": {
     "defaultMessage": "全部标签",
@@ -1940,6 +2322,9 @@
     "defaultMessage": "导入作品累計超过 1MB",
     "description": "MIGRATION_REACH_LIMIT"
   },
+  "ptTHBL": {
+    "defaultMessage": "支持号召"
+  },
   "pzTOmv": {
     "defaultMessage": "追踪者"
   },
@@ -1962,6 +2347,10 @@
     "defaultMessage": "已归档",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
+  "qS19ij": {
+    "defaultMessage": "交易密码重置成功",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
+  },
   "qVhxp5": {
     "defaultMessage": "进入",
     "description": "src/components/Buttons/UniversalAuth/index.tsx"
@@ -1981,6 +2370,13 @@
   "qlxeW+": {
     "defaultMessage": "取消点踩"
   },
+  "quRPwZ": {
+    "defaultMessage": "支付请求已送出"
+  },
+  "qxKjcm": {
+    "defaultMessage": "置顶",
+    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  },
   "r66dXx": {
     "defaultMessage": "在 {circleName} 的广播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -1989,9 +2385,8 @@
     "defaultMessage": "不可用",
     "description": "FORBIDDEN_BY_STATE"
   },
-  "rBjwQy": {
-    "defaultMessage": "微博",
-    "description": "src/components/Share/Buttons/Weibo.tsx"
+  "rDX3h6": {
+    "defaultMessage": "版本简述"
   },
   "rHi+cL": {
     "defaultMessage": "最多读者",
@@ -2024,13 +2419,13 @@
     "defaultMessage": "请登录该帐户解绑钱包后再试",
     "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
-  "s5JCCO": {
-    "defaultMessage": "此文已被{actor}标示为限制级内容，是否确定展开全文？",
-    "description": "src/views/ArticleDetail/Wall/Sensitive/index.tsx"
-  },
   "sPgUkN": {
     "defaultMessage": "本月营收",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
+  },
+  "sfj+KG": {
+    "defaultMessage": "结果以链上纪录为主，稍后同步至 Matters",
+    "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "sg3nVO": {
     "defaultMessage": "邮箱已被使用，请前往登录或尝试另一个",
@@ -2047,6 +2442,9 @@
   "sy+pv5": {
     "defaultMessage": "邮箱"
   },
+  "syEQFE": {
+    "defaultMessage": "发布"
+  },
   "tBt9u0": {
     "defaultMessage": "登录",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2059,15 +2457,19 @@
     "defaultMessage": "你的作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
-  "tGn21M": {
-    "defaultMessage": "支持送达"
+  "tIDG14": {
+    "defaultMessage": "非法广告"
   },
   "tQ3+Xo": {
     "defaultMessage": "标签添加最多至 5 个",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
-  "tio9Gt": {
-    "defaultMessage": "分布式入口"
+  "tnWWrj": {
+    "defaultMessage": "评论已被强制隐藏",
+    "description": "src/components/CommentBeta/Content/index.tsx"
+  },
+  "twEps9": {
+    "defaultMessage": " 更新"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",
@@ -2083,8 +2485,15 @@
   "uJkv2X": {
     "defaultMessage": "编辑标签"
   },
+  "uQHRvx": {
+    "defaultMessage": "请选择问题类型："
+  },
   "uVCg1l": {
     "defaultMessage": "玩转 Matters 实用指南"
+  },
+  "uaFED8": {
+    "defaultMessage": "绑定后除原有登入方式，增加钱包登入管道",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
   "ub1kHa": {
     "defaultMessage": "加入选集"
@@ -2105,8 +2514,23 @@
   "us5QHt": {
     "defaultMessage": "{type} 被创作者折叠"
   },
+  "utMaM0": {
+    "defaultMessage": "验证码已通过邮件发送，有效期为 20 分钟",
+    "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
   "uw32VR": {
     "defaultMessage": "教学指南"
+  },
+  "ux4p3j": {
+    "defaultMessage": " 更新于"
+  },
+  "v4ddaP": {
+    "defaultMessage": "立即绑定钱包，与个人帐户连结",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
+  "v5MunN": {
+    "defaultMessage": "验证码逾期，请点击重新发送",
+    "description": "CODE_EXPIRED"
   },
   "v6YjIn": {
     "defaultMessage": "账户",
@@ -2134,12 +2558,23 @@
     "defaultMessage": "支持了",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
   },
+  "vRCDr8": {
+    "defaultMessage": "绑定后可以快速登入帐户{br}读者也能够透过其他管道自由转钱支持你！",
+    "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
+  },
   "vX2bDy": {
     "defaultMessage": "关联作品"
+  },
+  "va8Rnw": {
+    "defaultMessage": "作者已关闭评论区"
   },
   "viMrzF": {
     "defaultMessage": "广播",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "vmx+TU": {
+    "defaultMessage": "信用卡",
+    "description": "src/views/ArticleDetail/SupportAuthor/Tabs/index.tsx"
   },
   "vsD2wm": {
     "defaultMessage": "重置你的登录密码",
@@ -2147,6 +2582,10 @@
   },
   "w+6UiO": {
     "defaultMessage": "新增邀请"
+  },
+  "wBpJLd": {
+    "defaultMessage": "前往允许",
+    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "评论"
@@ -2170,6 +2609,12 @@
     "defaultMessage": "通知不存在",
     "description": "NOTICE_NOT_FOUND"
   },
+  "wNJjR5": {
+    "defaultMessage": "支持反馈设置成功"
+  },
+  "wSZR47": {
+    "defaultMessage": "提交"
+  },
   "wXzTZ0": {
     "defaultMessage": "給圍爐取一個吸引人的名字吧"
   },
@@ -2184,6 +2629,10 @@
     "defaultMessage": "了解更多",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
+  "wicnP9": {
+    "defaultMessage": "Visa / Mastercard / American Express 支付",
+    "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
+  },
   "wm9xNB": {
     "defaultMessage": "{type} 已解绑",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -2192,6 +2641,14 @@
     "defaultMessage": "ID 已被使用，请修改后再试",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "x7kxvC": {
+    "defaultMessage": "订阅解锁",
+    "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
+  },
+  "xDhqHi": {
+    "defaultMessage": "确认送出",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "xMaFCO": {
     "defaultMessage": "阅读",
     "description": "src/views/Me/History/HistoryTabs.tsx"
@@ -2199,6 +2656,9 @@
   "xOUZu2": {
     "defaultMessage": "设为代表作",
     "description": "src/components/CollectionDigest/DropdownActions/PinButton.tsx"
+  },
+  "xQNq3I": {
+    "defaultMessage": "支持后回复"
   },
   "xWZr13": {
     "defaultMessage": "{follower, plural, =1 {人} other {人}}",
@@ -2226,12 +2686,12 @@
     "defaultMessage": "付费",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
-  "y1AhBH": {
-    "defaultMessage": "输入金额"
-  },
   "y4Lyf1": {
     "defaultMessage": "该名称已被其他用户使用",
     "description": "NAME_EXISTS"
+  },
+  "y9LDu9": {
+    "defaultMessage": "已取消授权，若需支持创作者请重试"
   },
   "yAflVX": {
     "defaultMessage": "草稿已刪除"
@@ -2254,6 +2714,9 @@
     "defaultMessage": "储值",
     "description": "src/components/Transaction/index.tsx"
   },
+  "yOhatg": {
+    "defaultMessage": "其他恶意行为"
+  },
   "ySGgTo": {
     "defaultMessage": "添加精选",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -2274,6 +2737,10 @@
     "defaultMessage": "进入围炉",
     "description": "src/components/CircleDigest/Price/index.tsx"
   },
+  "yexhgj": {
+    "defaultMessage": "仅能置顶一则评论",
+    "description": "src/components/CommentBeta/DropdownActions/PinButton.tsx"
+  },
   "yoRaUc": {
     "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"
@@ -2284,6 +2751,9 @@
   },
   "z3uIHQ": {
     "defaultMessage": "取消点赞"
+  },
+  "z4Dl+l": {
+    "defaultMessage": "交易记录"
   },
   "zAK5G+": {
     "defaultMessage": "登录链接已发送至 {email}",
@@ -2300,8 +2770,15 @@
   "zQvVDJ": {
     "defaultMessage": "全部"
   },
+  "zaY8Cu": {
+    "defaultMessage": "输入交易密码",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
+  },
+  "zbaTLV": {
+    "defaultMessage": "在 IPFS 上查看"
   },
   "zkmfjn": {
     "defaultMessage": "置頂",
@@ -2310,6 +2787,10 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zn83cE": {
+    "defaultMessage": "效果预览",
+    "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",

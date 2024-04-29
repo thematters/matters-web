@@ -102,11 +102,11 @@
 }
 
 .red {
-  color: var(--color-red);
+  color: var(--color-negative-red);
 }
 
 .likecoinGreen {
-  color: var(--color-likecoin-green);
+  color: var(--color-likecoin);
 }
 
 .yellowLighter {

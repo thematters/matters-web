@@ -1,13 +1,9 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
+import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
 import { explorers } from '~/common/utils'
-import {
-  Button,
-  IconExternalLink16,
-  IconInfo16,
-  TextIcon,
-  Tooltip,
-} from '~/components'
+import { Button, Icon, TextIcon, Tooltip } from '~/components'
 import { DigestTransactionFragment, TransactionState } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -44,7 +40,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
         onClick={(event) => event?.stopPropagation()}
       >
         <TextIcon
-          icon={<IconExternalLink16 color="grey" size="xs" />}
+          icon={<Icon icon={IconExternal} color="grey" size="xs" />}
           spacing="xxtight"
           size="xs"
           weight="md"
@@ -69,7 +65,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
           aria-hidden
           onClick={(event) => event.stopPropagation()}
         >
-          <IconInfo16 size="xs" />
+          <Icon icon={IconInfo} size="xs" />
         </button>
       </Tooltip>
     )

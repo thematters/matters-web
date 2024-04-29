@@ -8,7 +8,7 @@ import styles from './styles.module.css'
 interface EmptyProps {
   description: string | React.ReactNode
   icon?: React.ReactNode
-  spacingY?: 'xxloose' | 'xxxloose'
+  spacingY?: 'loose' | 'xxloose' | 'xxxloose'
   footer?: React.ReactNode
 }
 

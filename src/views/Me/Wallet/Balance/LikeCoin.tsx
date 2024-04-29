@@ -3,14 +3,15 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
 
+import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
 import { PATHS } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
   getErrorCodes,
-  IconLikeCoin40,
-  IconSpinner16,
+  Icon,
+  Spinner,
   TextIcon,
   Translate,
   ViewerContext,
@@ -44,7 +45,11 @@ const Wrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
 
   return (
     <section className={classes}>
-      <TextIcon icon={<IconLikeCoin40 size="xlM" />} size="md" spacing="xtight">
+      <TextIcon
+        icon={<Icon icon={IconLikeCoin} size="xlM" />}
+        size="md"
+        spacing="xtight"
+      >
         <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
       </TextIcon>
 
@@ -77,7 +82,7 @@ export const LikeCoinBalance = ({
   if (loading) {
     return (
       <Wrapper>
-        <IconSpinner16 color="greyLight" size="sm" />
+        <Spinner color="greyLight" size="sm" />
       </Wrapper>
     )
   }

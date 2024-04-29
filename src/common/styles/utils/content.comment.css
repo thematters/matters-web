@@ -1,12 +1,12 @@
 .u-content-comment {
-  line-height: 1.6;
+  line-height: 1.75;
 
   & > * {
     margin: 0;
   }
 
   & > * + * {
-    margin: var(--spacing-base) 0;
+    margin: var(--spacing-x-tight) 0;
   }
 
   & > *:last-child {
@@ -55,6 +55,7 @@
   & blockquote {
     position: relative;
     padding: 0 var(--spacing-base);
+    color: var(--color-grey-darker);
 
     &::before {
       position: absolute;
@@ -63,7 +64,7 @@
       width: 4px;
       height: 100%;
       content: '';
-      background: var(--color-matters-gold);
+      background: var(--color-grey-light);
     }
   }
 
@@ -126,14 +127,12 @@
   /* Link
    ========================================================================== */
   & a {
-    padding-bottom: 2px;
     color: var(--color-matters-green);
-    border-bottom: 1px solid currentcolor;
 
     &:hover,
     &:active,
     &:focus {
-      color: var(--color-matters-green-dark);
+      color: var(--color-matters-green-hover);
     }
   }
 

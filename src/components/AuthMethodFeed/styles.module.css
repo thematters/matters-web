@@ -14,6 +14,17 @@
     border-radius: 0.5rem;
     transition-property: border-color;
 
+    &.supportItem {
+      background-color: var(--color-grey-lighter);
+      border-color: var(--color-grey-lighter);
+      border-radius: 6.1875rem;
+
+      &:hover,
+      &:focus {
+        border-color: var(--color-grey-light);
+      }
+    }
+
     &:hover,
     &:focus {
       border-color: var(--color-grey);
@@ -46,7 +57,7 @@
     margin-bottom: var(--spacing-base);
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 
   .title {
@@ -68,7 +79,7 @@
 
       &:hover,
       &:focus {
-        color: var(--color-matters-green-dark);
+        color: var(--color-matters-green-hover);
       }
     }
   }

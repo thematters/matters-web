@@ -1,0 +1,27 @@
+.header {
+  @mixin flex-center-space-between;
+
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-global-header);
+  padding-top: var(--spacing-xx-loose);
+  margin-bottom: var(--spacing-base);
+  background: var(--color-white);
+
+  & h2 {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    line-height: 1.5;
+  }
+
+  & .close {
+    &:hover,
+    &:focus {
+      color: var(--color-grey-darker);
+    }
+  }
+
+  &.fixedWidth {
+    width: 22.5rem;
+  }
+}

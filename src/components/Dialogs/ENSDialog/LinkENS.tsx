@@ -12,17 +12,18 @@ import {
 } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
 import {
   analytics,
   featureSupportedChains,
-  maskAddress,
   PublicResolverABI,
+  truncate,
 } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
   Dialog,
-  IconCopy16,
+  Icon,
   TextIcon,
   Translate,
   useTargetNetwork,
@@ -211,21 +212,24 @@ const LinkENS = ({
                   />
                 }
               >
-                <Button
-                  spacing={['xtight', 'xtight']}
-                  aria-label={intl.formatMessage({
-                    defaultMessage: 'Copy',
-                    id: '4l6vz1',
-                  })}
-                >
-                  <TextIcon
-                    icon={<IconCopy16 color="black" size="xs" />}
-                    color="grey"
-                    textPlacement="left"
+                {({ copyToClipboard }) => (
+                  <Button
+                    spacing={['xtight', 'xtight']}
+                    aria-label={intl.formatMessage({
+                      defaultMessage: 'Copy',
+                      id: '4l6vz1',
+                    })}
+                    onClick={copyToClipboard}
                   >
-                    {maskAddress(viewer.info.ethAddress || '')}
-                  </TextIcon>
-                </Button>
+                    <TextIcon
+                      icon={<Icon icon={IconCopy} color="black" size="xs" />}
+                      color="grey"
+                      textPlacement="left"
+                    >
+                      {truncate(viewer.info.ethAddress || '')}
+                    </TextIcon>
+                  </Button>
+                )}
               </CopyToClipboard>
             </p>
           </section>

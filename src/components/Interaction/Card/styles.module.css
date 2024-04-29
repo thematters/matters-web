@@ -58,7 +58,7 @@
   &:not(.disabled) {
     &:hover,
     &:focus {
-      background: var(--color-grey-lighter-active);
+      background: var(--color-grey-hover);
     }
   }
 }
@@ -100,7 +100,7 @@
 }
 
 .textRed {
-  color: var(--color-red);
+  color: var(--color-negative-red);
 }
 
 /* Text active color */
@@ -115,7 +115,7 @@
 .textActiveRedDark {
   &:hover,
   &:focus {
-    color: var(--color-red-dark);
+    color: var(--color-negative-red-2);
   }
 }
 

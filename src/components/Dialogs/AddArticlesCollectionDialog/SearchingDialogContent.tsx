@@ -7,7 +7,7 @@ import {
   DateTime,
   Form,
   InfiniteScroll,
-  Spinner,
+  SpinnerBlock,
   usePublicQuery,
 } from '~/components'
 import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
@@ -70,7 +70,7 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
   const searchingEdges = activeArticles || []
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (searchingEdges.length === 0) {

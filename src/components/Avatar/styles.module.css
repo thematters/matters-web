@@ -162,6 +162,20 @@
   }
 }
 
+/* 64px */
+.xxlm {
+  width: 4rem;
+  height: 4rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        transform: translateX(25%);
+      }
+    }
+  }
+}
+
 /* 72px */
 .xxxl {
   width: 4.5rem;

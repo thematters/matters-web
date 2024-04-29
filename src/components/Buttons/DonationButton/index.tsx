@@ -1,10 +1,11 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
 import { TEST_ID } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
   Button,
-  IconDonate24,
+  Icon,
   LanguageContext,
   TextIcon,
   Translate,
@@ -13,18 +14,21 @@ import {
 interface DonationButtonProps {
   supported: boolean
   onClick?: () => void
+  width?: '100%' | '19.5rem'
 }
 
-const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
+const DonationButton = ({
+  supported,
+  onClick,
+  width = '19.5rem',
+}: DonationButtonProps) => {
   const { lang } = useContext(LanguageContext)
 
   if (supported) {
     return (
       <Button
-        size={['19.5rem', '3rem']}
-        bgColor="yellowLighter"
-        borderColor="gold"
-        borderWidth="sm"
+        size={[width, '2.5rem']}
+        bgColor="gold"
         aria-haspopup="dialog"
         aria-label={translate({ id: 'donationAgain', lang })}
         onClick={() => {
@@ -34,7 +38,11 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
         }}
         data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
       >
-        <TextIcon icon={<IconDonate24 />} weight="md" color="gold" size="md">
+        <TextIcon
+          icon={<Icon icon={IconMoney} size="mdS" />}
+          color="white"
+          size="md"
+        >
           <Translate id="donationAgain" />
         </TextIcon>
       </Button>
@@ -43,8 +51,8 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
 
   return (
     <Button
-      size={['19.5rem', '3rem']}
-      bgColor="goldLinearGradient"
+      size={[width, '2.5rem']}
+      bgColor="gold"
       aria-haspopup="dialog"
       aria-label={translate({ id: 'donation', lang })}
       onClick={() => {
@@ -54,7 +62,11 @@ const DonationButton = ({ supported, onClick }: DonationButtonProps) => {
       }}
       data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
     >
-      <TextIcon icon={<IconDonate24 />} weight="md" color="white" size="md">
+      <TextIcon
+        icon={<Icon icon={IconMoney} size="mdS" />}
+        color="white"
+        size="md"
+      >
         <Translate id="donation" />
       </TextIcon>
     </Button>

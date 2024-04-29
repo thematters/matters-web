@@ -1,14 +1,15 @@
 import { useContext } from 'react'
 import { useAccount } from 'wagmi'
 
+import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
+import { ReactComponent as IconTetherDisabled } from '@/public/static/icons/tether-disabled.svg'
 import { PATHS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
-  IconSpinner16,
-  IconUSDT40,
-  IconUSDTActive40,
+  Icon,
+  Spinner,
   TextIcon,
   Translate,
   useBalanceUSDT,
@@ -54,7 +55,7 @@ const USDTChoice: React.FC<FormProps> = ({
     return (
       <section className={styles.item}>
         <TextIcon
-          icon={<IconUSDT40 size="xlM" />}
+          icon={<Icon icon={IconTetherDisabled} size="xlM" />}
           size="md"
           spacing="xtight"
           color="grey"
@@ -76,7 +77,7 @@ const USDTChoice: React.FC<FormProps> = ({
     return (
       <section className={styles.item}>
         <TextIcon
-          icon={<IconUSDT40 size="xlM" />}
+          icon={<Icon icon={IconTetherDisabled} size="xlM" />}
           size="md"
           spacing="xtight"
           color="grey"
@@ -103,14 +104,14 @@ const USDTChoice: React.FC<FormProps> = ({
         aria-label="Tether"
       >
         <TextIcon
-          icon={<IconUSDTActive40 size="xlM" />}
+          icon={<Icon icon={IconTether} size="xlM" />}
           size="md"
           spacing="xtight"
         >
           Tether
         </TextIcon>
         {balanceUSDTLoading ? (
-          <IconSpinner16 color="grey" size="sm" />
+          <Spinner size="sm" color="grey" />
         ) : (
           <CurrencyFormatter
             currency={CURRENCY.USDT}
@@ -126,7 +127,7 @@ const USDTChoice: React.FC<FormProps> = ({
   return (
     <section className={styles.item} aria-label="Tether">
       <TextIcon
-        icon={<IconUSDT40 size="xlM" color="grey" />}
+        icon={<Icon icon={IconTetherDisabled} size="xlM" color="grey" />}
         size="md"
         spacing="xtight"
         color="grey"

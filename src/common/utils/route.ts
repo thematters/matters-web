@@ -44,6 +44,12 @@ type ToPathArgs =
   | {
       page: 'articleDetail'
       article: ArticleArgs
+      collectionId?: string
+    }
+  | {
+      page: 'articleHistory'
+      article: ArticleArgs
+      versionId?: string
     }
   | {
       page:
@@ -114,6 +120,35 @@ export const toPath = (
           href = `/@${userName}/${articleId}-${slug}${
             mediaHash ? '-' + mediaHash : ''
           }`
+        }
+        if (!!args.collectionId) {
+          href = `${href}?collection=${args.collectionId}`
+        }
+      } catch (err) {
+        // do nothing
+      }
+
+      break
+    }
+    case 'articleHistory': {
+      const {
+        id,
+        slug,
+        mediaHash,
+        author: { userName },
+      } = args.article
+
+      href = `/@${userName}/${slug}-${mediaHash}`
+
+      try {
+        const { id: articleId } = fromGlobalId(id as string)
+        if (id && articleId) {
+          href = `/@${userName}/${articleId}-${slug}${
+            mediaHash ? '-' + mediaHash : ''
+          }/history`
+        }
+        if (!!args.versionId) {
+          href = `${href}?v=${args.versionId}`
         }
       } catch (err) {
         // do nothing

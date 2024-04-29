@@ -51,7 +51,7 @@
 
 .error {
   & h3 {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 }
 

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch, useStep } from '~/components'
 import { StagingNode } from '~/components/SearchSelect/StagingArea'
 
 type Step = 'search' | 'pre-send' | 'sent'
@@ -12,17 +12,17 @@ interface Props {
 
 const DynamicInviteeSearch = dynamic(() => import('./Search'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const DynamicInviteePreSend = dynamic(() => import('./PreSend'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const DynamicInvitationSent = dynamic(() => import('./Sent'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 /**

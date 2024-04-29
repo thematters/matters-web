@@ -3,17 +3,18 @@ import { FormattedMessage } from 'react-intl'
 import { namehash } from 'viem/ens'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
+import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
 import {
   analytics,
   featureSupportedChains,
-  maskAddress,
   PublicResolverABI,
+  truncate,
 } from '~/common/utils'
 import {
   CopyToClipboard,
   Dialog,
   ENSDialog,
-  IconWallet20,
+  Icon,
   Tooltip,
   Translate,
   useDialogSwitch,
@@ -65,7 +66,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
 
   const Content = (
     <span className={styles.wallet} onClick={openDialog}>
-      <IconWallet20 size="mdS" />
+      <Icon icon={IconWallet} size="mdS" />
     </span>
   )
 
@@ -107,7 +108,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
               )}
               {!ensName && (
                 <section className={styles.address}>
-                  {maskAddress(address)}
+                  {truncate(address)}
                 </section>
               )}
               {hasLinkedIPNS && !isMe && (
@@ -135,15 +136,18 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
                   />
                 }
               >
-                <Dialog.RoundedButton
-                  text={
-                    <FormattedMessage
-                      defaultMessage="Copy Address"
-                      id="me1nR+"
-                    />
-                  }
-                  color="green"
-                />
+                {({ copyToClipboard }) => (
+                  <Dialog.RoundedButton
+                    text={
+                      <FormattedMessage
+                        defaultMessage="Copy Address"
+                        id="me1nR+"
+                      />
+                    }
+                    color="green"
+                    onClick={copyToClipboard}
+                  />
+                )}
               </CopyToClipboard>
               {ensName && hasLinkedIPNS && (
                 <Dialog.RoundedButton
@@ -206,15 +210,18 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
                   />
                 }
               >
-                <Dialog.TextButton
-                  color="green"
-                  text={
-                    <FormattedMessage
-                      defaultMessage="Copy Address"
-                      id="me1nR+"
-                    />
-                  }
-                />
+                {({ copyToClipboard }) => (
+                  <Dialog.TextButton
+                    color="green"
+                    text={
+                      <FormattedMessage
+                        defaultMessage="Copy Address"
+                        id="me1nR+"
+                      />
+                    }
+                    onClick={copyToClipboard}
+                  />
+                )}
               </CopyToClipboard>
               {ensName && hasLinkedIPNS && (
                 <Dialog.TextButton

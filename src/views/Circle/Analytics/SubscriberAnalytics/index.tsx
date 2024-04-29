@@ -8,7 +8,7 @@ import { CHART_COLOR } from '~/common/enums'
 import {
   Button,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   StackedAreaChart,
   TextIcon,
   useRoute,
@@ -41,7 +41,7 @@ const Content = () => {
   const subscriber = data?.circle?.analytics.subscriber
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

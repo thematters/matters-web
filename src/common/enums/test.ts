@@ -15,6 +15,8 @@ export enum TEST_ID {
   DIGEST_ARTICLE_FEED_FOOTER_PIN = 'digest/article/feed/footer/pin',
   DIGEST_ARTICLE_NOTICE = 'digest/article/notice',
   DIGEST_ARTICLE_SIDEBAR = 'digest/article/sidebar',
+  DIGEST_ARTICLE_CURATED = 'digest/article/curated',
+  DIGEST_ARTICLE_AUTHOR_SIDEBAR = 'digest/article/author-sidebar',
   DIGEST_ARTICLE_TITLE = 'digest/article/title',
   DIGEST_ARTICLE_PUBLISHED = 'digest/article/published',
   DIGEST_ARTICLE_PUBLISHED_READER_COUNT = 'digest/article/published/reader-count',
@@ -82,6 +84,7 @@ export enum TEST_ID {
   // comment
   COMMENT_CONETNT = 'comment/content',
   COMMENT_REPLY_TO = 'comment/reply-to',
+  COMMENT_PINNED_LABEL = 'comment/pinned-label',
   // notification:components
   NOTICE_USER_DISPLAY_NAME = 'notice/user/display-name',
   NOTICE_ARTICLE_TITLE = 'notice/article/title',
@@ -158,5 +161,4 @@ export enum TEST_ID {
 
   // misc
   RESPONSIVE_IMG = 'responsive-img',
-  SPINNER = 'spinner',
 }

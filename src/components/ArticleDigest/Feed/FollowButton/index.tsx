@@ -3,12 +3,13 @@ import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
+import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import {
-  IconDotDivider,
+  Icon,
   TextIcon,
   Translate,
   useMutation,
@@ -86,7 +87,7 @@ const FollowButton = ({ user }: FollowButtonProps) => {
 
   return (
     <TextIcon
-      icon={<IconDotDivider color="greyDark" />}
+      icon={<Icon icon={IconDot} color="greyDark" />}
       color="green"
       size="sm"
       spacing={0}

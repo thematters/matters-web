@@ -1,13 +1,14 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconLink } from '@/public/static/icons/24px/link.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   CopyToClipboard,
-  IconLink16,
   TextIcon,
   ViewerContext,
+  withIcon,
 } from '~/components'
 
 import styles from './styles.module.css'
@@ -28,25 +29,33 @@ const Copy = ({ link }: { link: string }) => {
   return (
     <section className={styles.copy}>
       <CopyToClipboard text={link}>
-        <button
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Copy Link',
-            id: 'u5aHb4',
-          })}
-          onClick={() => {
-            analytics.trackEvent('share', {
-              type: 'copy-url',
-            })
-          }}
-        >
-          <TextIcon icon={<IconLink16 color="grey" />} spacing="base">
-            <div className={styles.text}>
-              <span>
-                <FormattedMessage defaultMessage="Copy Link" id="u5aHb4" />
-              </span>
-            </div>
-          </TextIcon>
-        </button>
+        {({ copyToClipboard }) => (
+          <button
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Copy Link',
+              id: 'u5aHb4',
+            })}
+            onClick={() => {
+              analytics.trackEvent('share', {
+                type: 'copy-url',
+              })
+              copyToClipboard()
+            }}
+          >
+            <TextIcon
+              icon={withIcon(IconLink)({ size: 'md' })}
+              spacing="base"
+              size="md"
+              color="black"
+            >
+              <div className={styles.text}>
+                <span>
+                  <FormattedMessage defaultMessage="Copy Link" id="u5aHb4" />
+                </span>
+              </div>
+            </TextIcon>
+          </button>
+        )}
       </CopyToClipboard>
     </section>
   )

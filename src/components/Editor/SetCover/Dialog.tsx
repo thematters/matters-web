@@ -1,11 +1,11 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 import { SetCoverProps } from '../SetCover'
 
 const DynamicSetCover = dynamic(() => import('../SetCover'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 type SetCoverDialogProps = SetCoverProps & {

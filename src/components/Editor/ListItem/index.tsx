@@ -1,7 +1,10 @@
 import classNames from 'classnames'
 
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
+import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import { ReactComponent as IconSquareChecked } from '@/public/static/icons/square-checked.svg'
 import { toSizedImageURL } from '~/common/utils'
-import { Card, IconAdd16, IconExclaimHint } from '~/components'
+import { Card, Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -26,31 +29,37 @@ const CoverIndicator = ({ cover }: { cover?: string | null }) => (
         alt="cover"
       />
     ) : (
-      <IconAdd16 size="xs" />
+      <Icon icon={IconPlus} size="xs" />
     )}
   </span>
 )
 
-const NumberIndicator = ({
-  num,
-  withHintOverlay = false,
-}: {
-  num: number
-  withHintOverlay?: boolean
-}) => (
-  <span className={`${styles.indicator} ${num > 0 ? styles.num : ''}`}>
-    {num}
-    {withHintOverlay && num === 0 && (
-      <span className={styles.hintOverlay}>
-        <IconExclaimHint />
-      </span>
-    )}
-  </span>
-)
+const NumberIndicator = ({ num }: { num: number }) =>
+  num > 0 ? (
+    <span className={`${styles.indicator} ${num > 0 ? styles.num : ''}`}>
+      {num}
+    </span>
+  ) : (
+    <span className={styles.indicator}>
+      <Icon icon={IconPlus} size="xs" />
+    </span>
+  )
+
+const ArrowIndicator = ({ checked }: { checked: boolean }) =>
+  checked ? (
+    <span className={[styles.indicator, styles.arrowIndicator].join(' ')}>
+      <Icon icon={IconSquareChecked} size="md" />
+    </span>
+  ) : (
+    <span className={[styles.arrowIndicator].join(' ')}>
+      <Icon icon={IconRight} color="grey" />
+    </span>
+  )
 
 const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> & {
   CoverIndicator: typeof CoverIndicator
   NumberIndicator: typeof NumberIndicator
+  ArrowIndicator: typeof ArrowIndicator
 } = ({ title, subTitle, hint, onClick, children }) => {
   const subtitleClasses = classNames({
     [styles.subtitle]: true,
@@ -75,5 +84,6 @@ const ListItem: React.FC<React.PropsWithChildren<ListItemProps>> & {
 
 ListItem.CoverIndicator = CoverIndicator
 ListItem.NumberIndicator = NumberIndicator
+ListItem.ArrowIndicator = ArrowIndicator
 
 export default ListItem

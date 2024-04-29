@@ -1,20 +1,11 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconShareTelegram } from '@/public/static/icons/16px/share-telegram.svg'
-import { ReactComponent as IconShareTelegramCircle } from '@/public/static/icons/40px/share-telegram-circle.svg'
+import { ReactComponent as IconTelegram } from '@/public/static/icons/24px/telegram.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { TextIcon, ViewerContext, withIcon } from '~/components'
+import { Icon, TextIcon, ViewerContext } from '~/components'
 
-const Telegram = ({
-  title,
-  link,
-  circle,
-}: {
-  title: string
-  link: string
-  circle?: boolean
-}) => {
+const Telegram = ({ title, link }: { title: string; link: string }) => {
   const viewer = useContext(ViewerContext)
 
   // append utm_source to link
@@ -40,13 +31,14 @@ const Telegram = ({
         return window.open(shareUrl, 'Share to Telegram')
       }}
     >
-      {circle && withIcon(IconShareTelegramCircle)({ size: 'xlM' })}
-
-      {!circle && (
-        <TextIcon icon={withIcon(IconShareTelegram)({})} spacing="base">
-          Telegram
-        </TextIcon>
-      )}
+      <TextIcon
+        icon={<Icon icon={IconTelegram} size="md" />}
+        spacing="base"
+        size="md"
+        color="black"
+      >
+        Telegram
+      </TextIcon>
     </button>
   )
 }

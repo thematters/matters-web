@@ -2,7 +2,8 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useIntl } from 'react-intl'
 
-import { Button, Dropdown, IconUnfollow24, Menu } from '~/components'
+import { ReactComponent as IconUnfollow } from '@/public/static/icons/24px/unfollow.svg'
+import { Button, Dropdown, Icon, Menu } from '~/components'
 
 export interface DropdownActionsControls {
   actions?: React.ReactNode
@@ -32,7 +33,10 @@ const BaseDropdownActions = ({ actions }: BaseDropdownActionsProps) => {
           aria-haspopup="listbox"
           ref={ref}
         >
-          <IconUnfollow24 style={{ width: '1.125rem', height: '1.125rem' }} />
+          <Icon
+            icon={IconUnfollow}
+            style={{ width: '1.125rem', height: '1.125rem' }}
+          />
         </Button>
       )}
     </Dropdown>

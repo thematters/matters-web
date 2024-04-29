@@ -1,6 +1,28 @@
 .commentEditor :global(.ProseMirror),
 .commentEditor :global(.tiptap) {
-  min-height: 7rem;
+  min-height: 4.125rem;
+
+  & > *:first-child {
+    margin: 0;
+  }
+
+  & > * + * {
+    margin: var(--spacing-x-tight) 0;
+  }
+
+  & p {
+    padding: 0;
+    font-size: var(--font-size-md-s);
+    line-height: 1.75;
+  }
+
+  & blockquote {
+    padding-left: var(--spacing-base);
+
+    & * + * {
+      margin-top: var(--spacing-x-tight);
+    }
+  }
 
   /* outline */
   &:focus {
@@ -19,5 +41,11 @@
   /* disable interactive */
   & a {
     pointer-events: none;
+  }
+
+  & :global(.mention) {
+    padding-bottom: 0;
+    color: var(--color-matters-green);
+    border-bottom: 0;
   }
 }

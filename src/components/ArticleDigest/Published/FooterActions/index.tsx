@@ -1,14 +1,13 @@
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
+import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
+import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import { TextIcon } from '~/components'
-import {
-  IconClap2V16,
-  IconComment2V16,
-  IconMoney16,
-  IconUser2V16,
-} from '~/components/Icon'
+import { Icon } from '~/components/Icon'
 import { FooterActionsPublishedArticlePublicFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
@@ -34,7 +33,7 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
     <footer className={styles.footer}>
       <section className={styles.left}>
         <TextIcon
-          icon={<IconUser2V16 />}
+          icon={<Icon icon={IconUser} />}
           spacing="basexxtight"
           size="sm"
           aria-label={intl.formatMessage({
@@ -53,7 +52,7 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
         </TextIcon>
 
         <TextIcon
-          icon={<IconClap2V16 />}
+          icon={<Icon icon={IconClap} />}
           spacing="basexxtight"
           size="sm"
           aria-label={intl.formatMessage({
@@ -74,7 +73,7 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
         </TextIcon>
 
         <TextIcon
-          icon={<IconComment2V16 />}
+          icon={<Icon icon={IconComment} />}
           spacing="basexxtight"
           size="sm"
           aria-label={intl.formatMessage({
@@ -93,7 +92,7 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
         </TextIcon>
 
         <TextIcon
-          icon={<IconMoney16 />}
+          icon={<Icon icon={IconMoney} />}
           spacing="basexxtight"
           size="sm"
           aria-label={intl.formatMessage({

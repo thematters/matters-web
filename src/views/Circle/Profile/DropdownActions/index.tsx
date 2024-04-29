@@ -3,15 +3,16 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconData } from '@/public/static/icons/24px/data.svg'
+import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import { ReactComponent as IconLogout } from '@/public/static/icons/24px/logout.svg'
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
 import { toPath } from '~/common/utils'
 import {
   Button,
   Dropdown,
-  IconAnalytics24,
-  IconEdit16,
-  IconLogout24,
-  IconMore32,
-  IconSettings32,
+  Icon,
   Menu,
   UnsubscribeCircleDialog,
   ViewerContext,
@@ -61,7 +62,7 @@ const BaseDropdownActions = ({
               description="src/views/Circle/Profile/DropdownActions/index.tsx"
             />
           }
-          icon={<IconEdit16 size="mdS" />}
+          icon={<Icon icon={IconEdit} size="mdS" />}
           {...toPath({ page: 'circleSettings', circle })}
           is="link"
         />
@@ -70,7 +71,7 @@ const BaseDropdownActions = ({
       {isCircleOwner && (
         <Menu.Item
           text={<FormattedMessage defaultMessage="Analytics" id="GZJpDf" />}
-          icon={<IconAnalytics24 size="mdS" />}
+          icon={<Icon icon={IconData} size="mdS" />}
           {...toPath({ page: 'circleAnalytics', circle })}
           is="link"
         />
@@ -85,7 +86,7 @@ const BaseDropdownActions = ({
               description="src/views/Circle/Profile/DropdownActions/index.tsx"
             />
           }
-          icon={<IconLogout24 size="mdS" />}
+          icon={<Icon icon={IconLogout} size="mdS" />}
           onClick={openUnsubscribeCircleDialog}
           aria-haspopup="dialog"
         />
@@ -107,9 +108,9 @@ const BaseDropdownActions = ({
           ref={ref}
         >
           {isCircleOwner ? (
-            <IconSettings32 size="lg" color="white" />
+            <Icon icon={IconSettings} size="lg" color="white" />
           ) : (
-            <IconMore32 size="lg" color="white" />
+            <Icon icon={IconMore} size="lg" color="white" />
           )}
         </Button>
       )}

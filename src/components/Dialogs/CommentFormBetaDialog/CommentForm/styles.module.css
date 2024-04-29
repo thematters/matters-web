@@ -1,0 +1,34 @@
+.context {
+  flex-grow: 0;
+  flex-shrink: 0;
+  margin-bottom: var(--spacing-base);
+}
+
+.form {
+  @mixin scrollbar-thin;
+
+  position: relative;
+  flex-grow: 1;
+  overflow-y: auto;
+
+  & > :global(#editor) {
+    height: 100%;
+
+    & > div {
+      height: 100%;
+
+      & > :global(.tiptap.ProseMirror) {
+        height: 100%;
+      }
+    }
+  }
+}
+
+.count {
+  display: flex;
+  align-items: center;
+  margin-right: var(--spacing-base-loose);
+  font-size: var(--font-size-sm);
+  line-height: 1.375rem;
+  color: var(--color-negative-red);
+}

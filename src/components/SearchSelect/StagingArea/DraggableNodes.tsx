@@ -6,8 +6,9 @@ import {
   DropResult,
 } from 'react-beautiful-dnd'
 
+import { ReactComponent as IconDrag } from '@/public/static/icons/24px/drag.svg'
 import { translate } from '~/common/utils'
-import { IconSort16, LanguageContext } from '~/components'
+import { Icon, LanguageContext } from '~/components'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'
@@ -85,7 +86,7 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
                         lang,
                       })}
                     >
-                      <IconSort16 color="greyLight" />
+                      <Icon icon={IconDrag} color="greyLight" />
                     </span>
 
                     <SearchSelectNode

@@ -2,11 +2,12 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components/UserDigest'
 
-import Content from './Content'
+import { AuthorSidebar } from './AuthorSidebar'
+import { FromAuthor } from './AuthorSidebar/FromAuthor'
+import { RelatedArticles } from './AuthorSidebar/RelatedArticles'
 import MetaInfo from './MetaInfo'
-import RelatedArticles from './RelatedArticles'
-import State from './State'
-import { fragments as supportWidgetFragments } from './SupportWidget/gql'
+import StickyTopBanner from './StickyTopBanner'
+import { fragments as supportWidgetFragments } from './Support/SupportWidget/gql'
 import TagList from './TagList'
 import Toolbar from './Toolbar'
 import { fragments as circleWallFragments } from './Wall/Circle/gql'
@@ -17,6 +18,7 @@ const articlePublicFragment = gql`
     title
     slug
     mediaHash
+    dataHash
     state
     cover
     summary
@@ -42,6 +44,9 @@ const articlePublicFragment = gql`
       }
     }
     canComment
+    comments(input: { filter: { state: active, parentComment: null } }) {
+      totalCount
+    }
     license
     sensitiveByAuthor
     sensitiveByAdmin
@@ -61,21 +66,26 @@ const articlePublicFragment = gql`
       language
     }
     availableTranslations
+    contents {
+      html
+    }
+    ...AuthorSidebarArticle
     ...MetaInfoArticle
-    ...ContentArticle
     ...TagListArticle
-    ...RelatedArticles
+    ...AuthorSidebarRelatedArticles
+    ...AuthorSidebarFromAuthor
     ...StateArticle
     ...ToolbarArticlePublic
     ...ToolbarArticlePrivate
     ...SupportWidgetArticlePublic
     ...SupportWidgetArticlePrivate
   }
+  ${AuthorSidebar.fragments.article}
   ${MetaInfo.fragments.article}
-  ${Content.fragments.article}
   ${TagList.fragments.article}
   ${RelatedArticles.fragments.article}
-  ${State.fragments.article}
+  ${FromAuthor.fragments.article}
+  ${StickyTopBanner.fragments.article}
   ${UserDigest.Rich.fragments.user.public}
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.public}
@@ -151,13 +161,14 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
             ...CircleWallCirclePrivate
           }
         }
-        ...ContentArticle
+        contents {
+          html
+        }
         ...ToolbarArticlePrivate
         ...SupportWidgetArticlePrivate
       }
     }
   }
-  ${Content.fragments.article}
   ${UserDigest.Rich.fragments.user.private}
   ${Toolbar.fragments.article.private}
   ${supportWidgetFragments.article.private}

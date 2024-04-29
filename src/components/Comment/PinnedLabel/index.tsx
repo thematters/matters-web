@@ -1,10 +1,9 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { IconPin24, TextIcon } from '~/components'
+import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
+import { Icon, Label, TextIcon } from '~/components'
 import { PinnedLabelCommentFragment } from '~/gql/graphql'
-
-import styles from './styles.module.css'
 
 const fragments = {
   comment: gql`
@@ -32,7 +31,12 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelCommentFragment }) => {
 
   if (circle) {
     return (
-      <TextIcon icon={<IconPin24 />} size="sm" color="grey" weight="md">
+      <TextIcon
+        icon={<Icon icon={IconPin} />}
+        size="sm"
+        color="grey"
+        weight="md"
+      >
         <FormattedMessage
           defaultMessage="Pinned"
           id="zkmfjn"
@@ -43,13 +47,13 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelCommentFragment }) => {
   }
 
   return (
-    <span className={styles.label}>
+    <Label color="green">
       <FormattedMessage
         defaultMessage="Featured"
         id="cO0im6"
         description="src/components/Comment/PinnedLabel/index.tsx"
       />
-    </span>
+    </Label>
   )
 }
 

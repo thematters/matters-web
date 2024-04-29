@@ -1,25 +1,28 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount, maskAddress } from '~/common/utils'
+import { formatAmount, truncate } from '~/common/utils'
 import {
   Avatar,
   Button,
   CopyToClipboard,
-  IconCopy16,
+  Icon,
   TextIcon,
-  Translate,
+  Viewer,
 } from '~/components'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 interface PaymentInfoProps {
-  amount: number
-  currency: CURRENCY
-  recipient: UserDonationRecipientFragment
+  recipient: UserDonationRecipientFragment | Viewer
+  amount?: number
+  currency?: CURRENCY
   children?: React.ReactNode
   showLikerID?: boolean
   showEthAddress?: boolean
+  isInBindWallet?: boolean
+  address?: string
 }
 
 const PaymentInfo: React.FC<PaymentInfoProps> = ({
@@ -29,19 +32,23 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
   children,
   showLikerID = false,
   showEthAddress = false,
+  isInBindWallet = false,
+  address: _address,
 }) => {
   const intl = useIntl()
-  const address = recipient.info.ethAddress || ''
+  const address = _address || recipient.info.ethAddress || ''
   return (
     <section className={styles.info}>
-      <p className={styles.to}>
-        <Translate
-          zh_hant="你將遞出支持資金給"
-          zh_hans="你将递出支持资金给"
-          en="You will support"
-        />
-      </p>
-      <Avatar user={recipient} size="xxxl" />
+      {!isInBindWallet && (
+        <p className={styles.to}>
+          <FormattedMessage
+            defaultMessage="Provide support funds to"
+            id="BoN8lF"
+            description="src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
+          />
+        </p>
+      )}
+      <Avatar user={recipient} size="xxxlm" />
       <p className={styles.recipient}>{recipient.displayName}</p>
       {showEthAddress && (
         <div className={styles.address}>
@@ -51,24 +58,27 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
               <FormattedMessage defaultMessage="Address copied" id="+aMAeT" />
             }
           >
-            <Button
-              spacing={['xxtight', 'tight']}
-              bgColor="greenLighter"
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Copy',
-                id: '4l6vz1',
-              })}
-            >
-              <TextIcon
-                icon={<IconCopy16 color="green" size="sm" />}
-                spacing="xxtight"
-                size="md"
-                color="green"
-                textPlacement="left"
+            {({ copyToClipboard }) => (
+              <Button
+                spacing={['xxtight', 'tight']}
+                bgColor="greenLighter"
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Copy',
+                  id: '4l6vz1',
+                })}
+                onClick={copyToClipboard}
               >
-                {maskAddress(address)}
-              </TextIcon>
-            </Button>
+                <TextIcon
+                  icon={<Icon icon={IconCopy} color="green" size="sm" />}
+                  spacing="xxtight"
+                  size="md"
+                  color="green"
+                  textPlacement="left"
+                >
+                  {truncate(address)}
+                </TextIcon>
+              </Button>
+            )}
           </CopyToClipboard>
         </div>
       )}
@@ -82,11 +92,14 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
         </div>
       )}
 
-      <p className={styles.amount}>
-        <b>
-          {currency} {formatAmount(amount, currency === CURRENCY.USDT ? 2 : 0)}
-        </b>
-      </p>
+      {!isInBindWallet && (
+        <p className={styles.amount}>
+          <b>
+            {currency}{' '}
+            {formatAmount(amount || 0, currency === CURRENCY.USDT ? 2 : 0)}
+          </b>
+        </p>
+      )}
 
       {children}
     </section>

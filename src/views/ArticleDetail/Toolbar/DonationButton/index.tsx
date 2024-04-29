@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,
@@ -12,8 +13,8 @@ import {
 import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
-  DonationDialog,
-  IconDonate24,
+  ButtonProps,
+  Icon,
   LanguageContext,
   TextIcon,
   toast,
@@ -24,33 +25,38 @@ import {
   DonationButtonArticleFragment,
 } from '~/gql/graphql'
 
-interface DonationButtonProps {
+import { SupportDialog } from '../../Support/SupportDialog'
+
+export type DonationButtonProps = {
   article: DonationButtonArticleFragment
-  disabled: boolean
   articleDetail: NonNullable<ArticleDetailPublicQuery['article']>
-}
+  iconSize?: 'mdS' | 'md'
+  textWeight?: 'md' | 'normal'
+  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
+} & ButtonProps
 
 const fragments = {
   article: gql`
     fragment DonationButtonArticle on Article {
       id
-      donationsToolbar: transactionsReceivedBy(
-        input: { first: 0, purpose: donation }
-      ) {
+      donationsToolbar: donations(input: { first: 0 }) {
         totalCount
       }
       author {
         ...UserDonationRecipient
       }
     }
-    ${DonationDialog.fragments.recipient}
+    ${SupportDialog.fragments.recipient}
   `,
 }
 
 const DonationButton = ({
   article,
-  disabled,
   articleDetail,
+  iconSize = 'mdS',
+  textWeight = 'md',
+  textIconSpacing = 'basexxtight',
+  ...buttonProps
 }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
@@ -69,15 +75,10 @@ const DonationButton = ({
       : 0
 
   return (
-    <DonationDialog
-      recipient={article.author}
-      targetId={article.id}
-      article={articleDetail}
-    >
+    <SupportDialog article={articleDetail}>
       {({ openDialog }) => (
         <Button
           spacing={['xtight', 'xtight']}
-          bgActiveColor="greyLighter"
           aria-label={translate({
             zh_hant: `${TEXT.zh_hant.donation}（當前 ${donationCount} 次支持）`,
             zh_hans: `${TEXT.zh_hans.donation}（当前 ${donationCount} 次支持）`,
@@ -85,7 +86,7 @@ const DonationButton = ({
             lang,
           })}
           aria-haspopup="dialog"
-          disabled={disabled || article.author.id === viewer.id}
+          disabled={article.author.id === viewer.id}
           onClick={() => {
             analytics.trackEvent('click_button', { type: 'donate' })
             if (!viewer.isAuthed) {
@@ -102,11 +103,14 @@ const DonationButton = ({
             }
             openDialog()
           }}
+          {...buttonProps}
         >
           <TextIcon
-            icon={<IconDonate24 size="mdS" />}
-            weight="md"
-            spacing="xtight"
+            icon={<Icon icon={IconMoney} size={iconSize} />}
+            weight={textWeight}
+            spacing={
+              article.donationsToolbar.totalCount > 0 ? textIconSpacing : 0
+            }
             size="sm"
           >
             {article.donationsToolbar.totalCount > 0
@@ -115,7 +119,7 @@ const DonationButton = ({
           </TextIcon>
         </Button>
       )}
-    </DonationDialog>
+    </SupportDialog>
   )
 }
 

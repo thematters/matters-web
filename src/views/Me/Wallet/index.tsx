@@ -13,7 +13,7 @@ import {
   Button,
   Head,
   Layout,
-  Spinner,
+  SpinnerBlock,
   TableView,
   TextIcon,
   ViewerContext,
@@ -77,7 +77,7 @@ const Wallet = () => {
             </Layout.Header.Title>
           }
         />
-        <Spinner />
+        <SpinnerBlock />
       </Layout.Main>
     )
   }

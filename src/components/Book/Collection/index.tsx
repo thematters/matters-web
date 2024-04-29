@@ -1,12 +1,13 @@
 import classNames from 'classnames'
 import { useEffect } from 'react'
 
+import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import BOOK_COVER from '@/public/static/images/book-cover.png'
 import { TEST_ID } from '~/common/enums'
 import {
-  IconCamera24,
+  Icon,
   ResponsiveImage,
-  Spinner,
+  SpinnerBlock,
   useColorThief,
 } from '~/components'
 
@@ -57,7 +58,11 @@ const BookCollection: React.FC<BookCollectionProps> = ({
         />
         {hasMask && (
           <div className={styles.mask}>
-            {loading ? <Spinner /> : <IconCamera24 color="white" size="xl" />}
+            {loading ? (
+              <SpinnerBlock />
+            ) : (
+              <Icon icon={IconCamera} color="white" size="xl" />
+            )}
           </div>
         )}
       </div>

@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  gap: var(--spacing-xx-tight);
+  align-items: flex-start;
+  margin-top: var(--spacing-base);
+  margin-bottom: var(--spacing-base);
+
+  & > a {
+    flex-grow: 1;
+  }
+
+  & header {
+    font-size: var(--font-size-sm);
+    line-height: 1.375rem;
+  }
+}

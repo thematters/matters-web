@@ -5,11 +5,11 @@ import {
 import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
-import { ReactComponent as IconEditorMenuAdd } from '@/public/static/icons/32px/editor-menu-add.svg'
-import { ReactComponent as IconEditorMenuCode } from '@/public/static/icons/32px/editor-menu-code.svg'
-import { ReactComponent as IconEditorMenuDivider } from '@/public/static/icons/32px/editor-menu-divider.svg'
-import { ReactComponent as IconEditorMenuQuote } from '@/public/static/icons/32px/editor-menu-quote.svg'
-import { ReactComponent as IconEditorMenuVideo } from '@/public/static/icons/32px/editor-menu-video.svg'
+import { ReactComponent as IconEditorAdd } from '@/public/static/icons/editor-add.svg'
+import { ReactComponent as IconEditorCode } from '@/public/static/icons/editor-code.svg'
+import { ReactComponent as IconEditorDivider } from '@/public/static/icons/editor-divider.svg'
+import { ReactComponent as IconEditorQuote } from '@/public/static/icons/editor-quote.svg'
+import { ReactComponent as IconEditorVideo } from '@/public/static/icons/editor-video.svg'
 import { translate } from '~/common/utils'
 import { LanguageContext, withIcon } from '~/components'
 
@@ -82,7 +82,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
             en: expand ? 'Collapse' : 'Expand',
           })}
         >
-          {withIcon(IconEditorMenuAdd)({ size: 'lg' })}
+          {withIcon(IconEditorAdd)({ size: 'lg' })}
         </button>
 
         {expand && (
@@ -120,7 +120,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorMenuVideo)({ size: 'lg' })}
+              {withIcon(IconEditorVideo)({ size: 'lg' })}
             </button>
 
             <UploadAudioButton editor={editor} upload={upload} />
@@ -156,7 +156,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorMenuCode)({ size: 'lg' })}
+              {withIcon(IconEditorCode)({ size: 'lg' })}
             </button>
 
             <button
@@ -176,7 +176,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorMenuQuote)({ size: 'lg' })}
+              {withIcon(IconEditorQuote)({ size: 'lg' })}
             </button>
 
             <button
@@ -199,7 +199,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorMenuDivider)({ size: 'lg' })}
+              {withIcon(IconEditorDivider)({ size: 'lg' })}
             </button>
           </div>
         )}

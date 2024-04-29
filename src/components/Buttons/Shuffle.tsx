@@ -1,9 +1,10 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconReset } from '@/public/static/icons/24px/reset.svg'
 import {
   Button,
   ButtonProps,
-  IconReload12,
+  Icon,
   TextIcon,
   TextIconProps,
 } from '~/components'
@@ -21,7 +22,7 @@ export const ShuffleButton: React.FC<ShuffleButtonProps> = ({
     {...props}
   >
     <TextIcon
-      icon={<IconReload12 size="xs" />}
+      icon={<Icon icon={IconReset} size="xs" />}
       color={color || 'grey'}
       size="xs"
       weight="md"

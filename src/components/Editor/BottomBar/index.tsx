@@ -1,12 +1,13 @@
 import classNames from 'classnames'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconCollection } from '@/public/static/icons/24px/collection.svg'
+import { ReactComponent as IconHashtag } from '@/public/static/icons/24px/hashtag.svg'
+import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
+import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
 import {
   EditorSearchSelectDialog,
-  IconCollection24,
-  IconHashTag24,
-  IconImage24,
-  IconSettings24,
+  Icon,
   Layout,
   TextIcon,
   Translate,
@@ -146,7 +147,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   aria-haspopup="dialog"
                 >
                   <TextIcon
-                    icon={<IconImage24 size="md" />}
+                    icon={<Icon icon={IconImage} size="md" />}
                     size="mdS"
                     weight="md"
                     spacing="xtight"
@@ -182,7 +183,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   aria-haspopup="dialog"
                 >
                   <TextIcon
-                    icon={<IconHashTag24 size="md" />}
+                    icon={<Icon icon={IconHashtag} size="md" />}
                     size="mdS"
                     weight="md"
                     spacing="xtight"
@@ -223,7 +224,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   aria-haspopup="dialog"
                 >
                   <TextIcon
-                    icon={<IconCollection24 size="md" />}
+                    icon={<Icon icon={IconCollection} size="md" />}
                     size="mdS"
                     weight="md"
                     spacing="xtight"
@@ -246,7 +247,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   onClick={openDialog}
                 >
                   <TextIcon
-                    icon={<IconSettings24 size="md" />}
+                    icon={<Icon icon={IconSettings} size="md" />}
                     size="mdS"
                     weight="md"
                     spacing="xtight"

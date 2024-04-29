@@ -16,7 +16,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -86,7 +86,7 @@ const Comments = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

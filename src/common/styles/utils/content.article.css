@@ -7,12 +7,10 @@
   line-height: var(--line-height-article-base);
   outline: none;
 
-  & > * + * {
-    margin: var(--spacing-loose) 0;
-  }
-
-  & > *:first-child {
-    margin-top: 0;
+  & > p,
+  & > ul,
+  & > ol {
+    padding: var(--ar17-100) 0;
   }
 
   & > *:last-child {
@@ -20,6 +18,10 @@
   }
 
   & p {
+    font-size: var(--font-size-article-base);
+    line-height: var(--line-height-article-base);
+    color: var(--color-black);
+
     /* FIXME: Firefox eats trailing spaces
      *
      * @see {@url https://github.com/quilljs/quill/issues/1760}
@@ -27,9 +29,16 @@
     white-space: pre-wrap;
   }
 
-  /* FIXME: first line of code has some indent */
-  & code {
-    padding: 0;
+  & strong,
+  & b {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  & code,
+  & pre {
+    font-size: var(--font-size-md-s);
+    line-height: 1.7;
+    color: var(--color-grey-darker);
   }
 
   /* Media
@@ -49,7 +58,8 @@
    ========================================================================== */
   & figure {
     position: relative;
-    margin: var(--spacing-x-loose) 0;
+    padding: var(--ar17-200) 0;
+    margin: 0;
     text-align: center;
 
     /* ad-hoc fix for nested figure */
@@ -59,10 +69,9 @@
     }
 
     & figcaption {
-      padding: 0 var(--spacing-base);
-      margin-top: var(--spacing-x-tight);
-      font-size: var(--font-size-sm-s);
-      line-height: 1.5;
+      margin-top: var(--spacing-tight);
+      font-size: var(--font-size-xs);
+      line-height: 1rem;
       color: var(--color-grey);
       white-space: pre-wrap;
     }
@@ -198,7 +207,18 @@
    ========================================================================== */
   & blockquote {
     position: relative;
-    padding-left: var(--spacing-loose);
+    padding-left: var(--spacing-x-loose);
+    margin: var(--ar17-100) 0;
+    color: var(--color-grey-darker);
+
+    & p {
+      padding: 0;
+      color: inherit;
+    }
+
+    & * + * {
+      margin-top: calc(var(--ar17-100) * 2);
+    }
 
     &::before {
       position: absolute;
@@ -215,12 +235,13 @@
    ========================================================================== */
   & ul,
   & ol {
-    padding-left: var(--spacing-x-loose);
+    padding-left: 2.125rem;
   }
 
-  & li {
-    padding-left: var(--spacing-x-tight);
-    margin: var(--spacing-base) 0;
+  & li + li,
+  & li > ul,
+  & li > ol {
+    margin-top: var(--spacing-x-tight);
   }
 
   & ul {
@@ -233,16 +254,31 @@
 
   /* Heading
    ========================================================================== */
+
   & h1 {
-    font-size: var(--font-size-article-h1);
+    font-size: var(--font-size-sm-article-h1);
   }
 
   & h2 {
-    font-size: var(--font-size-article-h2);
+    font-size: var(--font-size-sm-article-h2);
   }
 
   & h3 {
-    font-size: var(--font-size-article-h3);
+    font-size: var(--font-size-sm-article-h3);
+  }
+
+  @media (--sm-up) {
+    & h1 {
+      font-size: var(--font-size-article-h1);
+    }
+
+    & h2 {
+      font-size: var(--font-size-article-h2);
+    }
+
+    & h3 {
+      font-size: var(--font-size-article-h3);
+    }
   }
 
   & h4 {
@@ -263,7 +299,8 @@
   & h4,
   & h5,
   & h6 {
-    margin-top: var(--spacing-x-loose);
+    padding-top: var(--ar17-100);
+    font-weight: var(--font-weight-semibold);
     line-height: var(--line-height-article-heading);
   }
 
@@ -277,7 +314,13 @@
     &:hover,
     &:active,
     &:focus {
-      color: var(--color-matters-green-dark);
+      color: var(--color-matters-green-hover);
+    }
+
+    &.mention {
+      color: var(--color-grey-darker);
+      text-decoration: none;
+      border-bottom: 0;
     }
   }
 
@@ -294,15 +337,16 @@
     position: relative;
     display: block;
     width: 100%;
-    height: 2rem;
+    height: calc(var(--ar17-150) * 2 + var(--spacing-x-tight));
     border: none;
 
     &::before {
       position: absolute;
       inset: 0;
       display: block;
-      width: 4.5rem;
-      height: 2rem;
+      width: 3.5rem;
+      height: var(--spacing-x-tight);
+      padding: var(--ar17-150) 0;
       margin: 0 auto;
       content: '';
       background-image: radial-gradient(
@@ -314,6 +358,15 @@
       background-repeat-x: repeat;
     }
   }
+
+  /* FIXME: first line of code has some indent */
+  & code {
+    padding: 0;
+  }
+
+  & pre {
+    margin: var(--ar17-100) 0;
+  }
 }
 
 /****
@@ -322,7 +375,7 @@
 .u-summary,
 .editor-summary {
   position: relative;
-  margin: var(--spacing-loose) 0;
+  margin: var(--ar17-100) 0;
 
   & .counter {
     font-size: var(--font-size-xs);
@@ -331,23 +384,36 @@
   }
 
   & .error {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 }
 
 .u-summary,
 .editor-summary textarea {
+  @mixin font-serif;
   @mixin border-left-grey;
 
-  padding-left: var(--spacing-loose);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-article-base);
-  color: var(--color-grey-darker);
+  padding: var(--spacing-xx-tight) 0 var(--spacing-xx-tight)
+    var(--spacing-loose);
+  font-size: var(--font-size-xm);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.875rem;
+  color: var(--color-black);
   resize: none;
   background: transparent;
 
   &::placeholder {
     color: var(--color-grey);
     opacity: 1; /* Firefox */
+  }
+
+  @media (--md-up) {
+    padding-left: calc(var(--spacing-x-loose) + var(--spacing-xx-tight));
+    font-size: var(--font-size-lg);
+    line-height: 1.75;
+  }
+
+  @media (--lg-up) {
+    width: 71%; /* 5/7 */
   }
 }

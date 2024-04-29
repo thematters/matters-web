@@ -3,15 +3,16 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { clampTag, toPath } from '~/common/utils'
-import { IconClose16, IconProps, TextIcon, TextIconProps } from '~/components'
+import { Icon, IconProps, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 interface TagProps {
   tag: DigestTagFragment
-  type?: 'list' | 'title' | 'inline' | 'plain'
+  type?: 'list' | 'article' | 'title' | 'inline' | 'plain'
   iconProps?: IconProps
   textIconProps?: TextIconProps
   active?: boolean
@@ -105,6 +106,12 @@ export const Tag = ({
         color: 'white',
       }
       break
+    case 'article':
+      textIconProps = {
+        size: 'sm',
+        weight: 'normal',
+      }
+      break
     case 'inline':
       iconProps = {
         color: active ? 'green' : 'grey',
@@ -154,7 +161,7 @@ export const Tag = ({
             description: 'src/components/Tag/index.tsx',
           })}
         >
-          <IconClose16 color="grey" />
+          <Icon icon={IconTimes} color="grey" />
         </button>
       )}
 

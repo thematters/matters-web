@@ -1,5 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
 import { ReactComponent as Nomad1Background } from '@/public/static/images/badge-nomad1-background.svg'
 import { ReactComponent as Nomad2Background } from '@/public/static/images/badge-nomad2-background.svg'
 import { ReactComponent as Nomad3Background } from '@/public/static/images/badge-nomad3-background.svg'
@@ -9,7 +10,7 @@ import {
   Button,
   CopyToClipboard,
   Dialog,
-  IconArrowLeft16,
+  Icon,
   useMediaQuery,
 } from '~/components'
 
@@ -43,7 +44,7 @@ const BadgeNomadDialogContent = ({
               textColor="greyDarker"
               textActiveColor="black"
             >
-              <IconArrowLeft16 size="mdS" />
+              <Icon icon={IconLeft} size="mdS" />
             </Button>
           }
         />
@@ -120,10 +121,13 @@ const BadgeNomadDialogContent = ({
               />
             }
           >
-            <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-              color="greyDarker"
-            />
+            {({ copyToClipboard }) => (
+              <Dialog.RoundedButton
+                text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
+                color="greyDarker"
+                onClick={copyToClipboard}
+              />
+            )}
           </CopyToClipboard>
         }
         smUpBtns={
@@ -149,10 +153,13 @@ const BadgeNomadDialogContent = ({
                 />
               }
             >
-              <Dialog.TextButton
-                text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-                color="green"
-              />
+              {({ copyToClipboard }) => (
+                <Dialog.TextButton
+                  text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
+                  color="green"
+                  onClick={copyToClipboard}
+                />
+              )}
             </CopyToClipboard>
           </>
         }

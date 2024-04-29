@@ -1,17 +1,35 @@
 .tagList {
-  margin-right: calc(var(--spacing-base) * -1);
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--spacing-loose);
 
   & .list {
-    @mixin hide-scrollbar;
-
     display: flex;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    flex-wrap: wrap;
+    row-gap: var(--spacing-x-tight);
 
     & .listItem {
       flex-shrink: 0;
+      max-width: 100%;
       padding-right: var(--spacing-base);
+    }
+
+    & .moreTag {
+      @mixin flex-center-all;
+      @mixin transition;
+
+      height: 2rem;
+      padding: var(--spacing-x-tight) var(--spacing-base-tight)
+        var(--spacing-x-tight) var(--spacing-x-tight);
+      color: var(--color-grey-darker);
+      cursor: pointer;
+      background: var(--color-grey-lighter);
+      border-radius: 0.5rem;
+      transition-property: color, background;
+
+      &:hover,
+      &:focus {
+        color: var(--color-black);
+        background: var(--color-grey-hover);
+      }
     }
   }
 }

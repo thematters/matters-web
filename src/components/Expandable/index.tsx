@@ -1,11 +1,12 @@
 import classNames from 'classnames'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
 import { capitalizeFirstLetter, collapseContent } from '~/common/utils'
 import {
   Button,
-  IconArrowDown16,
-  IconArrowUp16,
+  Icon,
   TextIcon,
   Translate,
   Truncate,
@@ -50,7 +51,6 @@ export const Expandable: React.FC<ExpandableProps> = ({
   bgColor = 'white',
 }) => {
   const [expandable, setExpandable] = useState(false)
-  const [lineHeight, setLineHeight] = useState(24)
   const [firstRender, setFirstRender] = useState(true)
   const [expand, setExpand] = useState(true)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
@@ -74,6 +74,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const richShowMoreButtonClasses = classNames({
     [styles.richShowMoreButton]: true,
     [styles[`${bgColor}`]]: !!bgColor,
+    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
   })
 
   useIsomorphicLayoutEffect(() => {
@@ -84,7 +85,6 @@ export const Expandable: React.FC<ExpandableProps> = ({
       const lineHeight = window
         .getComputedStyle(node.current, null)
         .getPropertyValue('line-height')
-      setLineHeight(parseInt(lineHeight, 10))
       const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
 
       if (lines > limit + buffer) {
@@ -122,7 +122,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
               setExpand(!expand)
             }}
           >
-            <TextIcon icon={<IconArrowUp16 />} textPlacement="left">
+            <TextIcon icon={<Icon icon={IconUp} />} textPlacement="left">
               <Translate zh_hans="收起" zh_hant="收合" en="collapse" />
             </TextIcon>
           </Button>
@@ -154,7 +154,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
             <>
               <section
                 className={richWrapperClasses}
-                style={{ maxHeight: `${limit * lineHeight}px` }}
+                style={{ WebkitLineClamp: limit }}
               >
                 {children}
               </section>
@@ -164,9 +164,11 @@ export const Expandable: React.FC<ExpandableProps> = ({
                   setExpand(!expand)
                 }}
               >
-                <TextIcon icon={<IconArrowDown16 />}>
-                  <Translate id="expand" />
-                </TextIcon>
+                <FormattedMessage
+                  defaultMessage="Expand"
+                  id="L79o74"
+                  description="src/components/Expandable/index.tsx"
+                />
               </button>
             </>
           )}

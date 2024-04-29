@@ -45,3 +45,11 @@ export const RELATED_DONATIONS = gql`
   }
   ${ArticleDigestSidebar.fragments.article}
 `
+
+export const QUERY_USER_BY_ADDRESS = gql`
+  query QueryUserByAddress($ethAddress: String!) {
+    user(input: { ethAddress: $ethAddress }) {
+      id
+    }
+  }
+`

@@ -1,20 +1,17 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconShareTwitter } from '@/public/static/icons/16px/share-twitter.svg'
-import { ReactComponent as IconShareTwitterCircle } from '@/public/static/icons/40px/share-twitter-circle.svg'
+import { ReactComponent as IconX } from '@/public/static/icons/24px/x.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics, stripNonEnglishUrl } from '~/common/utils'
-import { TextIcon, ViewerContext, withIcon } from '~/components'
+import { Icon, TextIcon, ViewerContext } from '~/components'
 
 const Twitter = ({
   title,
   link,
-  circle,
   tags,
 }: {
   title: string
   link: string
-  circle?: boolean
   tags?: string[]
 }) => {
   const viewer = useContext(ViewerContext)
@@ -62,16 +59,17 @@ const Twitter = ({
           type: 'twitter',
         })
 
-        return window.open(shareUrl, 'Share to Twitter')
+        return window.open(shareUrl, 'Share to X')
       }}
     >
-      {circle && withIcon(IconShareTwitterCircle)({ size: 'xlM' })}
-
-      {!circle && (
-        <TextIcon icon={withIcon(IconShareTwitter)({})} spacing="base">
-          Twitter
-        </TextIcon>
-      )}
+      <TextIcon
+        icon={<Icon icon={IconX} size="md" />}
+        spacing="base"
+        size="md"
+        color="black"
+      >
+        X
+      </TextIcon>
     </button>
   )
 }

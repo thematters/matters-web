@@ -1,9 +1,31 @@
 .list {
   &.hasBorder {
-    & > :global(.list-item) {
-      @mixin border-bottom-grey-light;
+    &.borderPositionBottom {
+      & > :global(.list-item) {
+        @mixin border-bottom-grey-light;
 
-      border-bottom-style: dashed;
+        border-bottom-style: dashed;
+
+        &:last-child {
+          border-bottom-width: 0;
+        }
+      }
+
+      &.hasLastBorder {
+        & > :global(.list-item) {
+          &:last-child {
+            border-bottom-width: 1px;
+          }
+        }
+      }
+    }
+
+    &.borderPositionTop {
+      & > :global(.list-item) {
+        @mixin border-top-grey-light;
+
+        border-top-style: dashed;
+      }
     }
   }
 
@@ -11,6 +33,13 @@
     & > :global(.list-item) {
       padding-bottom: calc(var(--spacing-base) / 2);
       margin-bottom: calc(var(--spacing-base) / 2);
+    }
+  }
+
+  &.spacingYBaseLoose {
+    & > :global(.list-item) {
+      padding-bottom: calc(var(--spacing-base-loose) / 2);
+      margin-bottom: calc(var(--spacing-base-loose) / 2);
     }
   }
 
@@ -32,6 +61,13 @@
     & > :global(.list-item) {
       padding-right: var(--spacing-base);
       padding-left: var(--spacing-base);
+    }
+  }
+
+  &.spacingXBaseLoose {
+    & > :global(.list-item) {
+      padding-right: var(--spacing-base-loose);
+      padding-left: var(--spacing-base-loose);
     }
   }
 

@@ -132,7 +132,7 @@ export const MOCK_ARTILCE = {
     __typename: 'AppreciationConnection' as any,
     totalCount: 0,
   },
-  iscnId: '',
+  iscnId: 'isz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZE',
   pinned: false,
   readTime: 1234.5,
   tags: [],
@@ -142,12 +142,12 @@ export const MOCK_ARTILCE = {
   appreciationsReceivedTotal: 1000,
   commentCount: 9999,
   donationCount: 234,
-  transactionsReceivedBy: {
-    __typename: 'AppreciationConnection' as any,
+  donations: {
+    __typename: 'ArticleDonationConnection' as any,
     totalCount: 190,
   },
   donationsDialog: {
-    __typename: 'AppreciationConnection' as any,
+    __typename: 'ArticleDonationConnection' as any,
     totalCount: 190,
   },
   subscribed: false,
@@ -155,6 +155,7 @@ export const MOCK_ARTILCE = {
     __typename: 'ArticleAccess' as any,
     type: 'paywall' as any,
     circle: MOCK_CIRCLE,
+    secret: '6NMhDB51cCvNWa1GMS7LUkZEP2a',
   },
   drafts: [
     {

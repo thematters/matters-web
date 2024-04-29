@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconSave } from '@/public/static/icons/24px/save.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,
@@ -10,8 +11,8 @@ import {
 } from '~/common/enums'
 import {
   Button,
-  IconBookmark16,
-  IconBookmark20,
+  ButtonProps,
+  Icon,
   IconSize,
   Menu,
   toast,
@@ -22,14 +23,20 @@ import { ToggleSubscribeArticleMutation } from '~/gql/graphql'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
 
-interface SubscribeProps {
+export type SubscribeProps = {
   articleId?: string
-  size?: Extract<IconSize, 'mdS' | 'md'>
+  iconSize?: Extract<IconSize, 'mdS' | 'md'>
   disabled?: boolean
   inCard?: boolean
-}
+} & ButtonProps
 
-const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
+const Subscribe = ({
+  articleId,
+  iconSize,
+  disabled,
+  inCard,
+  ...buttonProps
+}: SubscribeProps) => {
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
 
@@ -84,7 +91,7 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
             description="src/components/Buttons/Bookmark/Subscribe.tsx"
           />
         }
-        icon={<IconBookmark20 size="mdS" />}
+        icon={<Icon icon={IconSave} size="mdS" />}
         onClick={onClick}
         testId={TEST_ID.ARTICLE_BOOKMARK}
       />
@@ -103,8 +110,9 @@ const Subscribe = ({ articleId, size, disabled, inCard }: SubscribeProps) => {
       onClick={onClick}
       disabled={disabled}
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}
+      {...buttonProps}
     >
-      <IconBookmark16 size={size} />
+      <Icon icon={IconSave} size={iconSize} />
     </Button>
   )
 }

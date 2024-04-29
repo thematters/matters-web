@@ -1,8 +1,8 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
+import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
-import { Button, Dropdown, Menu, TextIcon, withIcon } from '~/components'
+import { Button, Dropdown, Icon, Menu, TextIcon } from '~/components'
 
 type SelectProps = {
   period: number
@@ -107,7 +107,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
           ref={ref}
         >
           <TextIcon
-            icon={withIcon(IconArrowDown)({ size: 'xs' })}
+            icon={<Icon icon={IconDown} size="xs" />}
             size={'sm'}
             color={'grey'}
             spacing="xxtight"

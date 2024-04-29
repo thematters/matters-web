@@ -6,7 +6,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Translate,
   usePublicQuery,
   UserDigest,
@@ -82,7 +82,7 @@ const UsersFeed = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

@@ -6,7 +6,7 @@ import {
   InfiniteScroll,
   Layout,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   TagDigest,
   usePublicQuery,
 } from '~/components'
@@ -31,7 +31,7 @@ const Feed = ({ type }: Props) => {
   const { data, loading, error, fetchMore } = usePublicQuery<FeedQuery>(query)
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

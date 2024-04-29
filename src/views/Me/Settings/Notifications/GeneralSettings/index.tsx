@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { Spinner, Switch, TableView, useMutation } from '~/components'
+import { SpinnerBlock, Switch, TableView, useMutation } from '~/components'
 import {
   UpdateViewerNotificationsGeneralMutation,
   ViewerNotificationsGeneralSettingsQuery,
@@ -66,7 +66,7 @@ const NotificationsGeneralSettings = () => {
   const id = data?.viewer?.id
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (!id || !settings) {

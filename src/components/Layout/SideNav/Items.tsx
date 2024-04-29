@@ -1,14 +1,12 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconNavHome } from '@/public/static/icons/24px/nav-home.svg'
+import { ReactComponent as IconNavHomeActive } from '@/public/static/icons/24px/nav-home-active.svg'
+import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
+import { ReactComponent as IconNavSearchActive } from '@/public/static/icons/24px/nav-search-active.svg'
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import {
-  IconNavHome32,
-  IconNavHomeActive32,
-  IconNavSearch32,
-  IconNavSearchActive32,
-  useRoute,
-} from '~/components'
+import { Icon, useRoute } from '~/components'
 
 import NavListItem from './NavListItem'
 
@@ -19,8 +17,8 @@ export const NavListItemHome = () => {
   return (
     <NavListItem
       name={<FormattedMessage defaultMessage="Discover" id="cE4Hfw" />}
-      icon={<IconNavHome32 size="lg" />}
-      activeIcon={<IconNavHomeActive32 size="lg" />}
+      icon={<Icon icon={IconNavHome} size="lg" />}
+      activeIcon={<Icon icon={IconNavHomeActive} size="lg" />}
       active={isInHome}
       href={PATHS.HOME}
     />
@@ -34,8 +32,8 @@ export const NavListItemSearch = () => {
   return (
     <NavListItem
       name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}
-      icon={<IconNavSearch32 size="lg" />}
-      activeIcon={<IconNavSearchActive32 size="lg" />}
+      icon={<Icon icon={IconNavSearch} size="lg" />}
+      activeIcon={<Icon icon={IconNavSearchActive} size="lg" />}
       active={isInSearch}
       href={PATHS.SEARCH}
       onClick={(e) => {

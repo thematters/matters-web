@@ -2,14 +2,15 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
+import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { TEST_ID } from '~/common/enums'
 import { captureClicks, numAbbr, toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
-  IconArticle16,
-  IconUser16,
+  Icon,
   ResponsiveImage,
   Tag,
   TextIcon,
@@ -78,7 +79,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
 
           <section className={styles.nums}>
             <TextIcon
-              icon={<IconUser16 color="greyDark" size="xs" />}
+              icon={<Icon icon={IconUser} color="greyDark" size="xs" />}
               size="xs"
               spacing="xxtight"
               color="greyDark"
@@ -87,7 +88,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             </TextIcon>
 
             <TextIcon
-              icon={<IconArticle16 color="greyDark" size="xs" />}
+              icon={<Icon icon={IconDraft} color="greyDark" size="xs" />}
               size="xs"
               spacing="xxtight"
               color="greyDark"

@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { IconComment16 } from '~/components'
+import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import { Icon } from '~/components'
 
 import { SetResponseProps } from '../..'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
@@ -12,7 +13,7 @@ export type SidebarManagementProps = ToggleResponseProps & SetResponseProps
 const SidebarArticleResponse: React.FC<SidebarManagementProps> = (props) => {
   return (
     <Box
-      icon={<IconComment16 size="md" />}
+      icon={<Icon icon={IconComment} size="md" />}
       title={
         <FormattedMessage
           defaultMessage="Response"

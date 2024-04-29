@@ -248,6 +248,7 @@ type ArticleFeedType =
   | 'collection'
   | 'hottest'
   | 'icymi'
+  | 'icymi_curated'
   | 'newest'
   | 'read_history'
   | 'related_article'
@@ -263,6 +264,7 @@ type ArticleFeedType =
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
+  | 'article_detail_author-sidebar-collection'
 
 type CollectionFeedType =
   | 'user_collection'

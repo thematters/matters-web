@@ -1,13 +1,14 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
+import { ReactComponent as IconLogbook } from '@/public/static/icons/logbook.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
 import { TEST_ID } from '~/common/enums'
-import { IconLogbookBadge16, ResponsiveImage, Tooltip } from '~/components'
+import { Icon, ResponsiveImage, Tooltip } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -20,6 +21,7 @@ export type AvatarSize =
   | 'lg'
   | 'xl'
   | 'xxl'
+  | 'xxlm'
   | 'xxxl'
   | 'xxxlm'
   | 'xxxll'
@@ -131,7 +133,7 @@ export const Avatar = (props: AvatarProps) => {
               />
             </Tooltip>
           ) : (
-            <IconLogbookBadge16 />
+            <Icon icon={IconLogbook} />
           )}
         </section>
       )}

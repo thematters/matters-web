@@ -12,7 +12,7 @@
 
   &:hover,
   &:focus {
-    background: var(--color-matters-gold-active);
+    background: var(--color-matters-gold-hover);
   }
 
   @media (--sm-up) {

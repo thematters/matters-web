@@ -1,13 +1,9 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import {
-  Button,
-  IconDownVote16,
-  IconDownVoted16,
-  TextIcon,
-  useMutation,
-} from '~/components'
+import { ReactComponent as IconVoteDown } from '@/public/static/icons/24px/vote-down.svg'
+import { ReactComponent as IconVoteDownFill } from '@/public/static/icons/24px/vote-down-fill.svg'
+import { Button, Icon, TextIcon, useMutation } from '~/components'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT,
@@ -93,7 +89,11 @@ const DownvoteButton = ({
           id: 'qlxeW+',
         })}
       >
-        <TextIcon icon={<IconDownVoted16 />} color="green" weight="md">
+        <TextIcon
+          icon={<Icon icon={IconVoteDownFill} />}
+          color="green"
+          weight="md"
+        >
           {/* comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined */}
         </TextIcon>
       </Button>
@@ -113,7 +113,11 @@ const DownvoteButton = ({
         id: 'ZZ9zIR',
       })}
     >
-      <TextIcon icon={<IconDownVote16 color="grey" />} color="grey" weight="md">
+      <TextIcon
+        icon={<Icon icon={IconVoteDown} color="grey" />}
+        color="grey"
+        weight="md"
+      >
         {/* comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined */}
       </TextIcon>
     </Button>

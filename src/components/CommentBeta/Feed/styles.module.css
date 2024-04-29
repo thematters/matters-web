@@ -1,0 +1,51 @@
+.header {
+  @mixin flex-start-space-between;
+
+  & .left {
+    & .author {
+      @mixin flex-center-start;
+
+      gap: var(--spacing-x-tight);
+
+      & .info {
+        display: flex;
+        flex-direction: column;
+
+        & .top {
+          @mixin flex-center-start;
+
+          gap: var(--spacing-base-xx-tight);
+        }
+
+        & .displayName {
+          font-size: var(--font-size-md-s);
+          font-weight: var(--font-weight-medium);
+          line-height: 1.75;
+        }
+
+        & time {
+          line-height: 1.125rem;
+        }
+      }
+    }
+  }
+
+  & .right {
+    display: inline-flex;
+    align-items: center;
+    height: 1.375rem;
+    margin-left: var(--spacing-base);
+
+    & > * + * {
+      margin-left: var(--spacing-tight);
+    }
+  }
+}
+
+.contentContainer {
+  margin-top: var(--spacing-tight);
+
+  &.descendant {
+    width:;
+  }
+}

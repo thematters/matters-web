@@ -1,8 +1,9 @@
-import { Empty, IconCircle24, Translate } from '~/components'
+import { ReactComponent as IconCircle } from '@/public/static/icons/24px/circle.svg'
+import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyTransactionSubscription = () => (
   <Empty
-    icon={<IconCircle24 size="xxl" />}
+    icon={<Icon icon={IconCircle} size="xxl" />}
     description={
       <Translate
         zh_hant="還沒有訂閱記錄"
