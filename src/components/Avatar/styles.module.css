@@ -33,7 +33,7 @@
     bottom: 0;
 
     & img {
-      width: var(--spacing-base);
+      width: var(--sp16);
       height: auto;
       transform: translateX(25%);
     }

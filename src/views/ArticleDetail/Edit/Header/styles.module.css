@@ -1,5 +1,5 @@
 .hint {
-  margin-right: var(--spacing-base);
+  margin-right: var(--sp16);
   font-size: var(--font-size-sm);
   line-height: 1rem;
   color: var(--color-grey-darker);

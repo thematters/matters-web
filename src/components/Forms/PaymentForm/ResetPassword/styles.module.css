@@ -1,5 +1,5 @@
 .footer {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
   color: var(--color-black);

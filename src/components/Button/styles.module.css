@@ -136,145 +136,145 @@ span.container {
 /* Spacing */
 .spacingYXxtight {
   &:not(.isTransparent) {
-    padding-top: var(--spacing-xx-tight);
-    padding-bottom: var(--spacing-xx-tight);
+    padding-top: var(--sp4);
+    padding-bottom: var(--sp4);
   }
 
   & .hotarea {
-    margin-top: calc(var(--spacing-xx-tight) * -1);
-    margin-bottom: calc(var(--spacing-xx-tight) * -1);
+    margin-top: calc(var(--sp4) * -1);
+    margin-bottom: calc(var(--sp4) * -1);
   }
 }
 
 .spacingYXtight {
   &:not(.isTransparent) {
-    padding-top: var(--spacing-x-tight);
-    padding-bottom: var(--spacing-x-tight);
+    padding-top: var(--sp8);
+    padding-bottom: var(--sp8);
   }
 
   & .hotarea {
-    margin-top: calc(var(--spacing-x-tight) * -1);
-    margin-bottom: calc(var(--spacing-x-tight) * -1);
+    margin-top: calc(var(--sp8) * -1);
+    margin-bottom: calc(var(--sp8) * -1);
   }
 }
 
 .spacingYBaseTight {
   &:not(.isTransparent) {
-    padding-top: var(--spacing-base-tight);
-    padding-bottom: var(--spacing-base-tight);
+    padding-top: var(--sp10);
+    padding-bottom: var(--sp10);
   }
 
   & .hotarea {
-    margin-top: calc(var(--spacing-base-tight) * -1);
-    margin-bottom: calc(var(--spacing-base-tight) * -1);
+    margin-top: calc(var(--sp10) * -1);
+    margin-bottom: calc(var(--sp10) * -1);
   }
 }
 
 .spacingYTight {
   &:not(.isTransparent) {
-    padding-top: var(--spacing-tight);
-    padding-bottom: var(--spacing-tight);
+    padding-top: var(--sp12);
+    padding-bottom: var(--sp12);
   }
 
   & .hotarea {
-    margin-top: calc(var(--spacing-tight) * -1);
-    margin-bottom: calc(var(--spacing-tight) * -1);
+    margin-top: calc(var(--sp12) * -1);
+    margin-bottom: calc(var(--sp12) * -1);
   }
 }
 
 .spacingYBase {
   &:not(.isTransparent) {
-    padding-top: var(--spacing-base);
-    padding-bottom: var(--spacing-base);
+    padding-top: var(--sp16);
+    padding-bottom: var(--sp16);
   }
 
   & .hotarea {
-    margin-top: calc(var(--spacing-base) * -1);
-    margin-bottom: calc(var(--spacing-base) * -1);
+    margin-top: calc(var(--sp16) * -1);
+    margin-bottom: calc(var(--sp16) * -1);
   }
 }
 
 .spacingXXxtight {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-xx-tight);
-    padding-left: var(--spacing-xx-tight);
+    padding-right: var(--sp4);
+    padding-left: var(--sp4);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-xx-tight) * -1);
-    margin-left: calc(var(--spacing-xx-tight) * -1);
+    margin-right: calc(var(--sp4) * -1);
+    margin-left: calc(var(--sp4) * -1);
   }
 }
 
 .spacingXXtight {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-x-tight);
-    padding-left: var(--spacing-x-tight);
+    padding-right: var(--sp8);
+    padding-left: var(--sp8);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-x-tight) * -1);
-    margin-left: calc(var(--spacing-x-tight) * -1);
+    margin-right: calc(var(--sp8) * -1);
+    margin-left: calc(var(--sp8) * -1);
   }
 }
 
 .spacingXTight {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-tight);
-    padding-left: var(--spacing-tight);
+    padding-right: var(--sp12);
+    padding-left: var(--sp12);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-tight) * -1);
-    margin-left: calc(var(--spacing-tight) * -1);
+    margin-right: calc(var(--sp12) * -1);
+    margin-left: calc(var(--sp12) * -1);
   }
 }
 
 .spacingXBaseTight {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-base-tight);
-    padding-left: var(--spacing-base-tight);
+    padding-right: var(--sp10);
+    padding-left: var(--sp10);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-base-tight) * -1);
-    margin-left: calc(var(--spacing-base-tight) * -1);
+    margin-right: calc(var(--sp10) * -1);
+    margin-left: calc(var(--sp10) * -1);
   }
 }
 
 .spacingXBase {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-base);
-    padding-left: var(--spacing-base);
+    padding-right: var(--sp16);
+    padding-left: var(--sp16);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-base) * -1);
-    margin-left: calc(var(--spacing-base) * -1);
+    margin-right: calc(var(--sp16) * -1);
+    margin-left: calc(var(--sp16) * -1);
   }
 }
 
 .spacingXBaseLoose {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-base-loose);
-    padding-left: var(--spacing-base-loose);
+    padding-right: var(--sp20);
+    padding-left: var(--sp20);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-base-loose) * -1);
-    margin-left: calc(var(--spacing-base-loose) * -1);
+    margin-right: calc(var(--sp20) * -1);
+    margin-left: calc(var(--sp20) * -1);
   }
 }
 
 .spacingXLoose {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-loose);
-    padding-left: var(--spacing-loose);
+    padding-right: var(--sp24);
+    padding-left: var(--sp24);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-loose) * -1);
-    margin-left: calc(var(--spacing-loose) * -1);
+    margin-right: calc(var(--sp24) * -1);
+    margin-left: calc(var(--sp24) * -1);
   }
 }
 

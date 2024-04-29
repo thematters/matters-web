@@ -11,7 +11,7 @@
   }
 
   & .subCurrency {
-    padding-top: var(--spacing-x-tight);
+    padding-top: var(--sp8);
     font-size: var(--font-size-xs);
     color: var(--color-grey);
   }

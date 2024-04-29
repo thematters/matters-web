@@ -1,8 +1,8 @@
 .sidebar {
-  padding-top: calc(var(--global-header-height) - var(--spacing-x-loose));
-  padding-bottom: var(--spacing-base);
+  padding-top: calc(var(--global-header-height) - var(--sp32));
+  padding-bottom: var(--sp16);
 
   & > * + * {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
   }
 }

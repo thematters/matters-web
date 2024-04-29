@@ -1,6 +1,6 @@
 .otherOptions {
-  padding: 0 var(--spacing-tight) var(--spacing-x-tight);
-  margin-top: var(--spacing-base-loose);
+  padding: 0 var(--sp12) var(--sp8);
+  margin-top: var(--sp20);
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
   color: var(--color-grey);
@@ -9,7 +9,7 @@
   & .option {
     @mixin flex-center-all;
 
-    gap: var(--spacing-xx-tight);
+    gap: var(--sp4);
 
     & a,
     & button {
@@ -29,7 +29,7 @@
 
 .resendButton {
   display: inline-block;
-  padding-left: var(--spacing-x-tight);
+  padding-left: var(--sp8);
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
   color: var(--color-grey);
@@ -48,7 +48,7 @@
 .footer {
   @mixin flex-center-all;
 
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 }
 
 .footerBtns {

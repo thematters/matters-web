@@ -9,7 +9,7 @@
     grid-column: span 2;
 
     & + li + li {
-      margin-top: var(--spacing-base);
+      margin-top: var(--sp16);
     }
 
     @media (--sm-up) {

@@ -51,7 +51,7 @@
     & :global(figure.is-figure-empty::before) {
       position: absolute;
       right: 0;
-      bottom: var(--spacing-x-base);
+      bottom: var(--sp14);
       left: 0;
       z-index: -1;
       font-size: var(--font-size-sm-s);

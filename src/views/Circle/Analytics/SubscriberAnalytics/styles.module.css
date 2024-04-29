@@ -1,11 +1,11 @@
 .container {
-  padding-bottom: var(--spacing-x-loose);
+  padding-bottom: var(--sp32);
   background: var(--color-white);
 }
 
 .chart {
-  padding: 0 var(--spacing-x-tight) 0 var(--spacing-base);
-  margin-top: var(--spacing-xx-loose);
+  padding: 0 var(--sp8) 0 var(--sp16);
+  margin-top: var(--sp40);
 
   @media (--sm-up) {
     padding: 0;

@@ -1,7 +1,7 @@
 .item {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-base);
+  padding: var(--sp16);
   line-height: 1;
 
   & .title {
@@ -11,7 +11,7 @@
   }
 
   & .subtitle {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--sp8);
     font-size: var(--font-size-xs);
     line-height: 1rem;
     color: var(--color-matters-gold);
@@ -39,7 +39,7 @@
   font-size: var(--font-size-sm);
   color: var(--color-grey-darker);
   background: var(--color-grey-lighter);
-  border-radius: var(--spacing-x-tight);
+  border-radius: var(--sp8);
   transition: background 0.2s ease-in-out;
 
   &.num {

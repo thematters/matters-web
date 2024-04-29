@@ -1,6 +1,6 @@
 .recommendedTags {
-  padding: 0 var(--spacing-base);
-  margin: var(--spacing-base) 0;
+  padding: 0 var(--sp16);
+  margin: var(--sp16) 0;
 }
 
 .hint {
@@ -10,12 +10,12 @@
 }
 
 .tagList {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 
   & li {
     display: inline-block;
-    margin-right: var(--spacing-tight);
-    margin-bottom: var(--spacing-base);
+    margin-right: var(--sp12);
+    margin-bottom: var(--sp16);
     line-height: 1.25rem;
   }
 }

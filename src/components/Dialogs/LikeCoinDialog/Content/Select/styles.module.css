@@ -1,6 +1,6 @@
 .hint,
 .intro {
-  margin: var(--spacing-base) 0 var(--spacing-x-tight);
+  margin: var(--sp16) 0 var(--sp8);
 }
 
 .hint {
@@ -11,7 +11,7 @@
 
 .intro {
   & h4 {
-    margin-bottom: var(--spacing-x-tight);
+    margin-bottom: var(--sp8);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
   }

@@ -15,7 +15,7 @@
     z-index: calc(var(--z-index-over-bottom-bar) + 1);
     display: flex;
     flex-direction: column;
-    padding: 0 var(--spacing-xx-loose);
+    padding: 0 var(--sp40);
     overflow-y: auto;
     visibility: hidden;
     background: white;
@@ -32,9 +32,8 @@
     position: sticky;
     top: 0;
     z-index: var(--z-index-global-header);
-    padding: var(--spacing-xx-loose) var(--spacing-loose) 0
-      var(--spacing-xx-loose);
-    margin-bottom: var(--spacing-base);
+    padding: var(--sp40) var(--sp24) 0 var(--sp40);
+    margin-bottom: var(--sp16);
     background: var(--color-white);
 
     & h2 {

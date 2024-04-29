@@ -1,7 +1,7 @@
 .label {
   @mixin inline-flex-center-all;
 
-  padding: 0 var(--spacing-xx-tight);
+  padding: 0 var(--sp4);
   font-size: var(--font-size-xs);
   line-height: 1.125rem;
   user-select: none;

@@ -1,5 +1,5 @@
 .container {
-  margin-top: var(--spacing-xx-tight);
+  margin-top: var(--sp4);
   font-size: var(--font-size-xs);
 
   & a {

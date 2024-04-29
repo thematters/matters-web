@@ -2,23 +2,23 @@
   @mixin border-grey-light;
 
   position: relative;
-  padding: var(--spacing-x-tight) 0;
-  border-radius: var(--spacing-base);
+  padding: var(--sp8) 0;
+  border-radius: var(--sp16);
 }
 
 .content {
-  padding: var(--spacing-xx-tight) var(--spacing-tight);
-  margin-bottom: var(--spacing-x-tight);
+  padding: var(--sp4) var(--sp12);
+  margin-bottom: var(--sp8);
 }
 
 .footer {
   @mixin flex-center-end;
 
-  gap: var(--spacing-xx-tight);
-  padding: 0 var(--spacing-x-tight);
+  gap: var(--sp4);
+  padding: 0 var(--sp8);
 
   & .count {
-    padding-right: var(--spacing-base-loose);
+    padding-right: var(--sp20);
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
     color: var(--color-negative-red);

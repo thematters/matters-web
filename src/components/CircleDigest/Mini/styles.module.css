@@ -7,14 +7,14 @@
 .avatar {
   position: relative;
   display: inline-flex;
-  margin-right: var(--spacing-x-tight);
+  margin-right: var(--sp8);
 }
 
 .header {
   @mixin flex-center-space-between;
 
   & > * + * {
-    margin-left: var(--spacing-xx-tight);
+    margin-left: var(--sp4);
   }
 }
 

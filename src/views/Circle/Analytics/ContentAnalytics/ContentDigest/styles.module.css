@@ -1,16 +1,16 @@
 .container {
   display: flex;
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0;
+    padding: var(--sp16) 0;
   }
 }
 
 .number {
   display: flex;
   flex-shrink: 0;
-  padding-right: var(--spacing-tight);
+  padding-right: var(--sp12);
   font-size: var(--font-size-xm);
   font-weight: var(--font-weight-semibold);
   line-height: 1.3333333;
@@ -26,7 +26,7 @@
 .content {
   display: flex;
   flex-direction: row;
-  padding-bottom: var(--spacing-xx-tight);
+  padding-bottom: var(--sp4);
   line-height: 1.75;
 }
 

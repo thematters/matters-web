@@ -1,5 +1,5 @@
 .transaction {
-  padding: var(--spacing-base-loose) 0;
+  padding: var(--sp20) 0;
 }
 
 .header {
@@ -13,8 +13,8 @@
 .footer {
   @mixin flex-center-space-between;
 
-  margin-top: var(--spacing-x-tight);
-  margin-left: var(--spacing-x-loose);
+  margin-top: var(--sp8);
+  margin-left: var(--sp32);
   font-size: var(--font-size-xs);
   line-height: 1.125rem;
 }

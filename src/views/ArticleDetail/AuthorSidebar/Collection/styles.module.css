@@ -3,7 +3,7 @@
 
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-tight) 0;
+  padding: var(--sp12) 0;
   border-color: var(--color-grey-hover);
   border-radius: 0.5rem;
 
@@ -11,14 +11,14 @@
     @mixin line-clamp;
 
     -webkit-line-clamp: 2;
-    padding: 0 var(--spacing-base);
-    margin-bottom: var(--spacing-x-tight);
+    padding: 0 var(--sp16);
+    margin-bottom: var(--sp8);
     font-weight: var(--font-weight-medium);
   }
 
   & .totalCount {
-    padding: 0 var(--spacing-base);
-    margin-bottom: var(--spacing-tight);
+    padding: 0 var(--sp16);
+    margin-bottom: var(--sp12);
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
     color: var(--color-grey);
@@ -28,7 +28,7 @@
     @mixin scrollbar-thin;
 
     max-height: 18.5rem;
-    padding: 0 var(--spacing-base);
+    padding: 0 var(--sp16);
     overflow-y: auto;
   }
 }

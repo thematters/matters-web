@@ -1,8 +1,8 @@
 .container {
   display: flex;
-  gap: var(--spacing-loose);
+  gap: var(--sp24);
   align-items: center;
-  margin-top: var(--spacing-x-loose);
+  margin-top: var(--sp32);
 
   & > a {
     align-self: center;
@@ -12,7 +12,7 @@
     @mixin flex-start-center;
 
     flex-direction: column;
-    gap: var(--spacing-xx-tight);
+    gap: var(--sp4);
     color: var(--color-black);
 
     & .displayName {

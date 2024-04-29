@@ -1,5 +1,5 @@
 .card {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
   background: var(--color-white);
   border-radius: 0.5rem;
 
@@ -8,7 +8,7 @@
   }
 
   & .description {
-    margin-top: var(--spacing-xx-tight);
+    margin-top: var(--sp4);
   }
 
   & .error {

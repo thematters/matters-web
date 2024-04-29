@@ -1,8 +1,8 @@
 .list {
-  padding: 0 0 0 var(--spacing-base);
+  padding: 0 0 0 var(--sp16);
 
   & li {
     display: inline-block;
-    padding: var(--spacing-base) var(--spacing-base) 0 0;
+    padding: var(--sp16) var(--sp16) 0 0;
   }
 }

@@ -4,9 +4,9 @@
 
   position: relative;
   width: 21.5rem; /* 9 * 24 + 8 * 12 + 16 * 2 */
-  padding: var(--spacing-x-tight) var(--spacing-base);
+  padding: var(--sp8) var(--sp16);
   background: var(--color-white);
-  border-radius: var(--spacing-xx-tight);
+  border-radius: var(--sp4);
   box-shadow: var(--shadow-dark);
 
   &.comment {
@@ -14,7 +14,7 @@
   }
 
   & * + * {
-    margin-left: var(--spacing-tight);
+    margin-left: var(--sp12);
   }
 
   & .active {

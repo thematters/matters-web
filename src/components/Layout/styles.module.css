@@ -5,11 +5,11 @@
   margin: 0;
 
   @media (--sm-up) {
-    margin: 0 var(--spacing-base);
+    margin: 0 var(--sp16);
   }
 
   @media (--md-up) {
-    margin: 0 var(--spacing-xx-loose);
+    margin: 0 var(--sp40);
   }
 
   @media (--lg-up) {
@@ -73,7 +73,7 @@
 
     & .top {
       & :global(> *) {
-        margin-top: var(--spacing-x-loose);
+        margin-top: var(--sp32);
       }
     }
   }
@@ -88,6 +88,6 @@
     }
 
     grid-column: right;
-    padding-left: var(--spacing-x-tight);
+    padding-left: var(--sp8);
   }
 }

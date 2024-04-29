@@ -1,5 +1,5 @@
 .supportWidget {
-  margin: var(--spacing-x-loose) 0;
+  margin: var(--sp32) 0;
 }
 
 .donation {
@@ -8,11 +8,11 @@
 
   position: relative;
   flex-direction: column;
-  padding: var(--spacing-xx-loose) var(--spacing-base);
+  padding: var(--sp40) var(--sp16);
   text-align: center;
 
   @media (--sm-up) {
-    padding: var(--spacing-base-xx-loose) var(--spacing-base);
+    padding: var(--sp48) var(--sp16);
   }
 
   & p {
@@ -25,7 +25,7 @@
   }
 
   & .donationButton {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
     background: var(--color-white);
     border-radius: 5rem;
   }
@@ -33,13 +33,13 @@
   & .donators {
     @mixin flex-center-all;
 
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
   }
 
   & .transaction {
     @mixin flex-center-all;
 
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
     font-size: var(--font-size-xs);
 
     & .transactionLeft {
@@ -50,26 +50,26 @@
 
     & .transactionButton {
       display: inline-flex;
-      margin-left: var(--spacing-xx-tight);
+      margin-left: var(--sp4);
     }
   }
 }
 
 .hasCircle {
   & .donation {
-    border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
+    border-radius: var(--sp8) var(--sp8) 0 0;
 
     & .donators {
-      bottom: calc(1.25rem / 2 * -1 - var(--spacing-xx-tight) / 2);
+      bottom: calc(1.25rem / 2 * -1 - var(--sp4) / 2);
     }
   }
 }
 
 .circle {
-  margin-top: var(--spacing-xx-tight);
+  margin-top: var(--sp4);
   overflow: hidden;
   background: var(--color-grey-lighter);
-  border-radius: 0 0 var(--spacing-x-tight) var(--spacing-x-tight);
+  border-radius: 0 0 var(--sp8) var(--sp8);
 }
 
 .animationHint {

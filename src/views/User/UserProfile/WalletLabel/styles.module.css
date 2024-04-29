@@ -1,10 +1,10 @@
 .walletLabel {
   @mixin flex-center-start;
 
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 
   & > * + * {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--sp8);
   }
 }
 

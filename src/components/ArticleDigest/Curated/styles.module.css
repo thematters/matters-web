@@ -17,9 +17,9 @@
 }
 
 .author {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 }
 
 .title {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
 }

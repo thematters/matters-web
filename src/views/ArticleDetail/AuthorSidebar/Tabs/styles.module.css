@@ -2,20 +2,20 @@
   @mixin hide-scrollbar;
 
   display: flex;
-  gap: var(--spacing-base);
-  padding: var(--spacing-x-loose) 0 0;
+  gap: var(--sp16);
+  padding: var(--sp32) 0 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 
   @media (--sm-up) {
-    padding: var(--spacing-x-loose) 0 0;
+    padding: var(--sp32) 0 0;
   }
 
   & .tabItem {
     @mixin transition;
 
     flex-shrink: 0;
-    padding: var(--spacing-base-xxx-tight) var(--spacing-base-tight);
+    padding: var(--sp5) var(--sp10);
     font-size: var(--font-size-sm);
     font-feature-settings:
       'clig' off,

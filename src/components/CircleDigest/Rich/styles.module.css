@@ -3,11 +3,11 @@
 }
 
 .header {
-  margin-left: var(--spacing-base);
+  margin-left: var(--sp16);
 }
 
 .title {
-  margin-bottom: var(--spacing-xx-tight);
+  margin-bottom: var(--sp4);
   font-weight: var(--font-weight-medium);
   line-height: 1.5rem;
 }
@@ -24,7 +24,7 @@
   @mixin line-clamp;
 
   -webkit-line-clamp: 3;
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
   font-size: var(--font-size-md-s);
   line-height: 1.5rem;
   color: var(--color-grey-darker);
@@ -33,5 +33,5 @@
 .footer {
   @mixin flex-center-space-between;
 
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 }

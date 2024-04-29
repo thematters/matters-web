@@ -4,8 +4,8 @@
   position: sticky;
   top: 0;
   z-index: var(--z-index-global-header);
-  padding-top: var(--spacing-xx-loose);
-  margin-bottom: var(--spacing-base);
+  padding-top: var(--sp40);
+  margin-bottom: var(--sp16);
   background: var(--color-white);
 
   & h2 {

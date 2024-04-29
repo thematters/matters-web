@@ -1,6 +1,6 @@
 .hero {
   position: relative;
-  padding: var(--spacing-xx-loose) 0 var(--spacing-x-tight);
+  padding: var(--sp40) 0 var(--sp8);
   background-image: var(--about-hero-bg);
   background-position:
     top 128px right -70px,
@@ -11,7 +11,7 @@
   @media (--sm-up) {
     padding-bottom: 5rem;
     background-position:
-      top 259px right var(--spacing-x-loose),
+      top 259px right var(--sp32),
       right top,
       left bottom;
     background-size: 258px, 521px, 270px;
@@ -43,7 +43,7 @@
   text-align: center;
 
   & h2 {
-    margin-bottom: var(--spacing-loose);
+    margin-bottom: var(--sp24);
     font-size: 1.75rem;
   }
 
@@ -55,7 +55,7 @@
     display: block;
     flex-shrink: 0;
     height: 349px;
-    margin: var(--spacing-xx-loose) calc(var(--spacing-base) * -1) 0;
+    margin: var(--sp40) calc(var(--sp16) * -1) 0;
     background-position: left top;
   }
 
@@ -73,7 +73,7 @@
     & .ilusCity {
       width: 612px;
       height: 378px;
-      margin: var(--spacing-loose) auto 0;
+      margin: var(--sp24) auto 0;
       background-position: center;
     }
   }
@@ -102,11 +102,11 @@
 .reports {
   & .container {
     display: flex;
-    padding: 0 var(--spacing-base);
+    padding: 0 var(--sp16);
 
     & .emblaViewport {
       position: relative;
-      padding: 5rem var(--spacing-base) 0;
+      padding: 5rem var(--sp16) 0;
       overflow: hidden;
 
       & ul {
@@ -119,7 +119,7 @@
         & li {
           position: relative;
           flex: 0 0 100%;
-          margin-left: var(--spacing-loose);
+          margin-left: var(--sp24);
           cursor: inherit;
 
           & a {
@@ -130,7 +130,7 @@
             display: block;
             width: 100%;
             height: 136px;
-            padding: var(--spacing-base);
+            padding: var(--sp16);
             cursor: inherit;
             background: var(--color-grey-lighter);
             border-radius: 0.5rem;
@@ -156,8 +156,8 @@
 
           & cite {
             position: absolute;
-            right: var(--spacing-base);
-            bottom: var(--spacing-base);
+            right: var(--sp16);
+            bottom: var(--sp16);
             font-size: var(--font-size-sm);
             font-style: normal;
             font-weight: var(--font-weight-medium);

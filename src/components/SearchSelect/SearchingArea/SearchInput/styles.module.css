@@ -11,7 +11,7 @@
 
   & input[type='search'] {
     height: calc(3.375rem - 2px);
-    padding: 0 calc(2rem + var(--spacing-x-tight));
+    padding: 0 calc(2rem + var(--sp8));
     font-size: var(--font-size-sm);
     color: var(--color-black);
     caret-color: var(--color-matters-green);
@@ -32,10 +32,10 @@
   }
 
   & button.search {
-    left: var(--spacing-x-tight);
+    left: var(--sp8);
   }
 
   & button.clear {
-    right: var(--spacing-x-tight);
+    right: var(--sp8);
   }
 }

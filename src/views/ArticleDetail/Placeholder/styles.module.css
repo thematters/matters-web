@@ -1,11 +1,11 @@
 .container {
-  padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-base-loose);
+  padding: 0 var(--sp16);
+  margin-top: var(--sp20);
 
   @media (--sm-up) {
     grid-column: content;
     padding: 0;
-    margin-top: var(--spacing-xx-loose);
+    margin-top: var(--sp40);
   }
 
   & .title {
@@ -22,7 +22,7 @@
   & .metaInfo {
     width: 60px;
     height: 1rem;
-    margin: var(--spacing-base) 0;
+    margin: var(--sp16) 0;
     background: var(--color-grey-lighter);
 
     @media (--sm-up) {
@@ -31,9 +31,8 @@
   }
 
   & .summary {
-    padding: var(--spacing-xx-tight) 0 var(--spacing-xx-tight)
-      var(--spacing-base);
-    margin: var(--spacing-base) 0;
+    padding: var(--sp4) 0 var(--sp4) var(--sp16);
+    margin: var(--sp16) 0;
     border-left: 1px solid var(--color-line-grey-light);
 
     & .line {
@@ -43,7 +42,7 @@
     }
 
     & .line + .line {
-      margin-top: var(--spacing-x-tight);
+      margin-top: var(--sp8);
     }
 
     @media (--sm-up) {
@@ -76,17 +75,17 @@
 
   & .text {
     width: 100%;
-    margin: var(--spacing-base) 0;
+    margin: var(--sp16) 0;
 
     & .line {
       width: 100%;
       height: 1.25rem;
-      margin: var(--spacing-base-tight) 0;
+      margin: var(--sp10) 0;
       background: var(--color-grey-lighter);
 
       @media (--sm-up) {
         height: 1.125rem;
-        margin: var(--spacing-base-loose) 0;
+        margin: var(--sp20) 0;
       }
     }
 

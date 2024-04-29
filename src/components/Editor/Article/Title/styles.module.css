@@ -1,14 +1,14 @@
 .editorTitle {
-  margin: 0 0 var(--spacing-base);
+  margin: 0 0 var(--sp16);
 
   @media (--sm-up) {
-    margin: var(--spacing-base) 0;
+    margin: var(--sp16) 0;
   }
 
   & input {
     @mixin font-serif;
 
-    margin-bottom: var(--spacing-base);
+    margin-bottom: var(--sp16);
     font-size: var(--font-size-article-title);
     font-weight: var(--font-weight-article-title);
     line-height: var(--line-height-article-title);

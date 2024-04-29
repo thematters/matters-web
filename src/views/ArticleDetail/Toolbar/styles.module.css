@@ -6,7 +6,7 @@
   bottom: 0;
   z-index: var(--z-index-bottom-bar);
   min-height: var(--global-nav-height);
-  padding: var(--spacing-base);
+  padding: var(--sp16);
   background: var(--color-white);
 
   & .buttons {
@@ -25,7 +25,7 @@
       }
 
       & > * + * {
-        margin-left: var(--spacing-loose);
+        margin-left: var(--sp24);
       }
     }
   }
@@ -35,13 +35,13 @@
   }
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0;
+    padding: var(--sp16) 0;
 
     & .commentBar {
       display: block;
       flex-grow: 1;
       flex-shrink: 1;
-      margin-left: var(--spacing-base);
+      margin-left: var(--sp16);
     }
   }
 }

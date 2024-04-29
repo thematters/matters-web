@@ -12,41 +12,41 @@
     }
 
     & .description {
-      margin-top: var(--spacing-xx-tight);
+      margin-top: var(--sp4);
       font-size: var(--font-size-sm-s);
       color: var(--color-grey-darker);
     }
   }
 
   & .switch + * {
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
   }
 }
 
 .license {
   & .title {
-    margin-bottom: var(--spacing-base);
+    margin-bottom: var(--sp16);
   }
 
   & .select {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--sp8);
   }
 }
 
 .circle + .license {
-  margin-top: var(--spacing-x-loose);
+  margin-top: var(--sp32);
 }
 
 .sensitive,
 .iscn {
-  margin-top: var(--spacing-loose);
+  margin-top: var(--sp24);
 
   & .header {
     @mixin flex-center-space-between;
   }
 
   & .hint {
-    margin-top: var(--spacing-xx-tight);
+    margin-top: var(--sp4);
     font-size: var(--font-size-xs);
     color: var(--color-grey);
 
@@ -58,8 +58,7 @@
 }
 
 .supportSetting {
-  margin: var(--spacing-base) calc(var(--spacing-base) * -1)
-    calc(var(--spacing-base) * -1);
+  margin: var(--sp16) calc(var(--sp16) * -1) calc(var(--sp16) * -1);
 
   & button {
     width: 100%;
@@ -70,10 +69,10 @@
 
     flex-direction: column;
     width: 100%;
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
 
     & .hint {
-      margin-top: var(--spacing-x-tight);
+      margin-top: var(--sp8);
       font-size: var(--font-size-xs);
       color: var(--color-grey);
       text-align: left;
@@ -90,7 +89,7 @@
 
 /* sidebar */
 .container {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 
   &.compact {
     padding: 0;
@@ -100,7 +99,7 @@
     }
 
     & .circle + .license {
-      margin-top: var(--spacing-loose);
+      margin-top: var(--sp24);
     }
 
     & .license .title {

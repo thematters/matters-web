@@ -4,27 +4,27 @@
 
   & .step {
     grid-column: 1 / -1;
-    margin-top: var(--spacing-xx-loose);
+    margin-top: var(--sp40);
 
     @media (--md-up) {
       grid-column: span 3;
     }
     @media (--lg-up) {
       grid-column: span 4;
-      margin-top: var(--spacing-loose);
+      margin-top: var(--sp24);
     }
 
     & .avatar {
       display: inline-flex;
       align-items: center;
-      padding: var(--spacing-xx-tight);
-      padding-right: var(--spacing-tight);
+      padding: var(--sp4);
+      padding-right: var(--sp12);
       font-size: var(--color-black);
       background: var(--color-grey-lighter);
       border-radius: 2rem;
 
       & .info {
-        margin-left: var(--spacing-x-tight);
+        margin-left: var(--sp8);
       }
     }
 
@@ -33,21 +33,21 @@
       font-weight: var(--font-weight-medium);
 
       & span.number {
-        padding-right: var(--spacing-x-tight);
+        padding-right: var(--sp8);
         color: var(--color-grey-light);
       }
     }
 
     & .content,
     & .subContent {
-      margin-top: var(--spacing-base);
-      margin-bottom: var(--spacing-x-tight);
+      margin-top: var(--sp16);
+      margin-bottom: var(--sp8);
       font-size: var(--font-size-sm);
       color: var(--color-grey-dark);
     }
 
     & .content {
-      margin-bottom: var(--spacing-loose);
+      margin-bottom: var(--sp24);
     }
 
     & .subContentLink {

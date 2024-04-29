@@ -3,9 +3,9 @@
 
   position: relative;
   flex-shrink: 0;
-  padding: var(--spacing-x-loose) var(--spacing-base) var(--spacing-x-tight);
+  padding: var(--sp32) var(--sp16) var(--sp8);
   background: var(--color-white);
-  border-radius: var(--spacing-x-tight) var(--spacing-x-tight) 0 0;
+  border-radius: var(--sp8) var(--sp8) 0 0;
 
   & .title {
     font-size: var(--font-size-lg);
@@ -18,7 +18,7 @@
 
     position: absolute;
     inset: 0;
-    padding: var(--spacing-x-loose) 0 var(--spacing-x-tight);
+    padding: var(--sp32) 0 var(--sp8);
   }
 
   & .left,
@@ -36,8 +36,8 @@
 .smUpheader {
   @mixin flex-center-space-between;
 
-  padding: 0 var(--spacing-base-loose);
-  margin: var(--spacing-base-loose) 0 var(--spacing-base);
+  padding: 0 var(--sp20);
+  margin: var(--sp20) 0 var(--sp16);
 
   & .title {
     font-size: var(--font-size-lg);

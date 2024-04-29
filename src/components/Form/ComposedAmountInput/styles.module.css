@@ -14,7 +14,7 @@
   color: var(--color-black);
   background: var(--color-grey-lighter);
   border: 1px solid var(--color-grey-lighter);
-  border-radius: var(--spacing-x-tight);
+  border-radius: var(--sp8);
   transition-property: color, border-color, background-color;
 
   &.active {
@@ -24,7 +24,7 @@
   }
 
   &:nth-child(n + 4) {
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
   }
 
   & label {
@@ -32,8 +32,8 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
-    padding-top: var(--spacing-x-tight);
-    padding-bottom: var(--spacing-x-tight);
+    padding-top: var(--sp8);
+    padding-bottom: var(--sp8);
     text-align: center;
 
     & .currency {
@@ -51,13 +51,13 @@
 }
 
 .customInput {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 
   & .inputWrapper {
     @mixin form-input;
 
     display: flex;
-    gap: var(--spacing-base);
+    gap: var(--sp16);
     text-align: left;
 
     & .unit {
@@ -75,7 +75,7 @@
   }
 
   & .hint {
-    padding-top: var(--spacing-base);
+    padding-top: var(--sp16);
     font-size: var(--font-size-xs);
     color: var(--color-grey-dark);
   }
