@@ -9,18 +9,18 @@
 }
 
 .errorMessage {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
   font-size: var(--font-size-sm);
   color: var(--color-grey-dark);
 }
 
 .errorRedirect {
-  margin-top: var(--spacing-x-loose);
+  margin-top: var(--sp32);
 }
 
 .errorDetail {
-  padding: var(--spacing-loose);
-  margin-top: var(--spacing-x-loose);
+  padding: var(--sp24);
+  margin-top: var(--sp32);
   overflow: auto;
   color: var(--color-negative-red);
   text-align: left;

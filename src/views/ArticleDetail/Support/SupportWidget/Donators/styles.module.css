@@ -2,11 +2,11 @@
   @mixin flex-center-all;
 
   flex-wrap: wrap;
-  gap: var(--spacing-base) var(--spacing-x-tight);
+  gap: var(--sp16) var(--sp8);
   max-width: 312px;
 
   @media (--lg-up) {
-    gap: var(--spacing-base) var(--spacing-tight);
+    gap: var(--sp16) var(--sp12);
     max-width: 428px;
   }
 
@@ -28,7 +28,7 @@
   }
 
   & .donatorName {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--sp8);
     font-size: var(--font-size-xs);
     font-weight: var(--font-weight-medium);
     line-height: 1.25rem;
@@ -53,8 +53,8 @@
 .viewSupport {
   @mixin flex-center-all;
 
-  gap: var(--spacing-xx-tight);
-  margin-top: var(--spacing-x-tight);
+  gap: var(--sp4);
+  margin-top: var(--sp8);
   font-size: var(--font-size-xs);
   line-height: 1.125rem;
 

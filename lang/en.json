@@ -94,10 +94,6 @@
     "defaultMessage": "Public",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
-  "/qgntf": {
-    "defaultMessage": "Supporters",
-    "description": "src/components/ArticleDigest/DropdownActions/DonatorsButton/index.tsx"
-  },
   "/usqHn": {
     "defaultMessage": "{displayName}'s creative space"
   },
@@ -325,6 +321,10 @@
   },
   "4l6vz1": {
     "defaultMessage": "Copy"
+  },
+  "4wOWfp": {
+    "defaultMessage": "What's this?",
+    "description": "src/components/Billboard/index.tsx"
   },
   "50cquj": {
     "defaultMessage": "No discussion yet",
@@ -685,6 +685,10 @@
   "CD688y": {
     "defaultMessage": "bookmarked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "CNrhz9": {
+    "defaultMessage": "What is Billboard?",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "CPvyYN": {
     "defaultMessage": "Incorrect password"
@@ -1143,6 +1147,10 @@
   "MDNaxs": {
     "defaultMessage": "followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "MP6xe/": {
+    "defaultMessage": "Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding. Please check out our {announcements}.",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "MPEeBy": {
     "defaultMessage": "Operation failed, please try again later.",
@@ -1883,10 +1891,6 @@
     "defaultMessage": "Comments and replies",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
-  "dZQ+ba": {
-    "defaultMessage": "Likers",
-    "description": "src/components/ArticleDigest/DropdownActions/AppreciatorsButton/index.tsx"
-  },
   "deEeEI": {
     "defaultMessage": "Register"
   },
@@ -2431,6 +2435,10 @@
     "defaultMessage": "Log in",
     "description": "src/components/Buttons/Login/index.tsx"
   },
+  "stTITI": {
+    "defaultMessage": "announcements",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
   "sy+pv5": {
     "defaultMessage": "Email"
   },
@@ -2616,6 +2624,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "View All"
+  },
+  "wdz6Pf": {
+    "defaultMessage": "Learn more",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "wicnP9": {
     "defaultMessage": "Visa / Mastercard / American Express payment",

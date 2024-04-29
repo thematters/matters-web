@@ -1,6 +1,6 @@
 .confirmTable {
   width: 100%;
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--sp16);
   font-size: var(--font-size-sm);
   line-height: 1.5rem;
   color: var(--color-grey);
@@ -10,7 +10,7 @@
   @mixin flex-center-space-between;
 
   & + .row {
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
   }
 
   & .col:last-child {
@@ -36,7 +36,7 @@
   }
 
   &.breaker {
-    margin: var(--spacing-base) 0;
+    margin: var(--sp16) 0;
     border-bottom: 0.5px solid rgb(0 0 0 / 15%);
   }
 }

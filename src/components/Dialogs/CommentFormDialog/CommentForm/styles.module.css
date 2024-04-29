@@ -1,7 +1,7 @@
 .context {
   flex-grow: 0;
   flex-shrink: 0;
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--sp16);
 }
 
 .form {

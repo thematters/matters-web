@@ -217,14 +217,12 @@ export const CoverUploader = ({
       {isCollection && (
         <section className={styles.collection}>
           <section className={styles.collectionContent}>
-            {
-              <Book.Collection
-                title={bookTitle || ''}
-                cover={cover}
-                hasMask
-                loading={loading}
-              />
-            }
+            <Book.Collection
+              title={bookTitle || ''}
+              cover={cover}
+              hasMask
+              loading={loading}
+            />
           </section>
         </section>
       )}

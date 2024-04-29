@@ -1,6 +1,6 @@
 .container {
-  margin-top: var(--spacing-base);
-  margin-bottom: var(--spacing-base);
+  margin-top: var(--sp16);
+  margin-bottom: var(--sp16);
 
   @mixin flex-start-space-between;
 
@@ -47,7 +47,7 @@
 
     &.imageSizeSm {
       min-height: 2.75rem;
-      padding-right: calc(2.75rem + var(--spacing-loose));
+      padding-right: calc(2.75rem + var(--sp24));
 
       & .cover {
         width: 2.75rem;
@@ -57,7 +57,7 @@
 
     &.imageSizeMd {
       min-height: 4rem;
-      padding-right: calc(4rem + var(--spacing-loose));
+      padding-right: calc(4rem + var(--sp24));
 
       & .cover {
         width: 4rem;
@@ -74,7 +74,7 @@
       & img {
         @mixin object-fit-cover;
 
-        border-radius: var(--spacing-xx-tight);
+        border-radius: var(--sp4);
       }
     }
   }

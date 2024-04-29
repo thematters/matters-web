@@ -1,8 +1,8 @@
 .header {
   display: flex;
-  padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-x-loose);
-  margin-bottom: var(--spacing-base-loose);
+  padding: 0 var(--sp16);
+  margin-top: var(--sp32);
+  margin-bottom: var(--sp20);
 
   @media (--sm-up) {
     padding: 0;
@@ -10,22 +10,22 @@
 
   & .info {
     flex-grow: 1;
-    padding: var(--spacing-x-tight) 0;
-    margin-left: var(--spacing-x-loose);
+    padding: var(--sp8) 0;
+    margin-left: var(--sp32);
 
     & .title {
-      margin-bottom: var(--spacing-base-xx-tight);
+      margin-bottom: var(--sp6);
       font-size: var(--font-size-base);
       font-weight: var(--font-weight-medium);
 
       @media (--md-up) {
-        margin-bottom: var(--spacing-base);
+        margin-bottom: var(--sp16);
         font-size: var(--font-size-article-h2);
       }
     }
 
     & .author {
-      margin-bottom: var(--spacing-base-xx-tight);
+      margin-bottom: var(--sp6);
       font-size: var(--font-size-sm);
       color: var(--color-grey-darker);
     }
@@ -38,8 +38,8 @@
 }
 
 .description {
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-base-loose);
+  padding: 0 var(--sp16);
+  margin-bottom: var(--sp20);
   font-size: var(--font-size-sm);
   color: var(--color-grey-dark);
 

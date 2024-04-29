@@ -1,14 +1,14 @@
 .clear {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
   text-align: right;
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0;
+    padding: var(--sp16) 0;
   }
 }
 
 .tabs {
-  padding: var(--spacing-x-tight) 0;
+  padding: var(--sp8) 0;
 
   @media (--sm-up) {
     padding: 0;

@@ -1,9 +1,9 @@
 .support {
-  margin-top: var(--spacing-loose);
+  margin-top: var(--sp24);
   @mixin flex-center-space-between;
 
   & .hint {
-    margin-top: var(--spacing-xx-tight);
+    margin-top: var(--sp4);
     font-size: var(--font-size-xs);
     color: var(--color-grey);
   }
@@ -14,12 +14,11 @@
 }
 
 .tabs {
-  padding-bottom: var(--spacing-base);
-  margin: calc(var(--spacing-x-tight) * -1) calc(var(--spacing-base) * -1)
-    var(--spacing-x-tight);
+  padding-bottom: var(--sp16);
+  margin: calc(var(--sp8) * -1) calc(var(--sp16) * -1) var(--sp8);
 
   @media (--sm-up) {
-    margin: calc(var(--spacing-base) * -1) 0 var(--spacing-x-tight);
+    margin: calc(var(--sp16) * -1) 0 var(--sp8);
   }
 }
 
@@ -27,8 +26,8 @@
   @mixin polka-dot-background;
 
   position: relative;
-  padding: var(--spacing-xx-loose) var(--spacing-base);
-  margin: var(--spacing-x-tight) 0;
+  padding: var(--sp40) var(--sp16);
+  margin: var(--sp8) 0;
   line-height: var(--line-height-base);
   text-align: center;
 
@@ -45,7 +44,7 @@
   }
 
   & .button {
-    margin: var(--spacing-loose) 0 0;
+    margin: var(--sp24) 0 0;
 
     & button {
       width: 100%;
@@ -54,5 +53,5 @@
 }
 
 .previewTitle {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 }

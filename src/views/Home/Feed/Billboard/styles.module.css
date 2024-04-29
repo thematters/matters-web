@@ -1,0 +1,12 @@
+.container {
+  @mixin border-bottom-grey;
+
+  padding-top: var(--sp24);
+  padding-bottom: var(--sp24);
+  border-bottom-style: dashed;
+
+  & div {
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

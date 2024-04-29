@@ -116,85 +116,85 @@
 /* spacing */
 .spacingXxxtight.hasIcon {
   &.textRight > .text {
-    padding-left: var(--spacing-xxx-tight);
+    padding-left: var(--sp2);
   }
 
   &.textLeft > .text {
-    padding-right: var(--spacing-xxx-tight);
+    padding-right: var(--sp2);
   }
 
   &.textBottom > .text {
-    padding-top: var(--spacing-xxx-tight);
+    padding-top: var(--sp2);
   }
 }
 
 .spacingXxtight.hasIcon {
   &.textRight > .text {
-    padding-left: var(--spacing-xx-tight);
+    padding-left: var(--sp4);
   }
 
   &.textLeft > .text {
-    padding-right: var(--spacing-xx-tight);
+    padding-right: var(--sp4);
   }
 
   &.textBottom > .text {
-    padding-top: var(--spacing-xx-tight);
+    padding-top: var(--sp4);
   }
 }
 
 .spacingBasexxtight.hasIcon {
   &.textRight > .text {
-    padding-left: var(--spacing-base-xx-tight);
+    padding-left: var(--sp6);
   }
 
   &.textLeft > .text {
-    padding-right: var(--spacing-base-xx-tight);
+    padding-right: var(--sp6);
   }
 
   &.textBottom > .text {
-    padding-top: var(--spacing-base-xx-tight);
+    padding-top: var(--sp6);
   }
 }
 
 .spacingXtight.hasIcon {
   &.textRight > .text {
-    padding-left: var(--spacing-x-tight);
+    padding-left: var(--sp8);
   }
 
   &.textLeft > .text {
-    padding-right: var(--spacing-x-tight);
+    padding-right: var(--sp8);
   }
 
   &.textBottom > .text {
-    padding-top: var(--spacing-x-tight);
+    padding-top: var(--sp8);
   }
 }
 
 .spacingTight.hasIcon {
   &.textRight > .text {
-    padding-left: var(--spacing-tight);
+    padding-left: var(--sp12);
   }
 
   &.textLeft > .text {
-    padding-right: var(--spacing-tight);
+    padding-right: var(--sp12);
   }
 
   &.textBottom > .text {
-    padding-top: var(--spacing-tight);
+    padding-top: var(--sp12);
   }
 }
 
 .spacingBase.hasIcon {
   &.textRight > .text {
-    padding-left: var(--spacing-base);
+    padding-left: var(--sp16);
   }
 
   &.textLeft > .text {
-    padding-right: var(--spacing-base);
+    padding-right: var(--sp16);
   }
 
   &.textBottom > .text {
-    padding-top: var(--spacing-base);
+    padding-top: var(--sp16);
   }
 }
 

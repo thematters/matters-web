@@ -1,6 +1,6 @@
 .info {
-  padding: var(--spacing-tight) var(--spacing-base);
-  margin-bottom: var(--spacing-x-loose);
+  padding: var(--sp12) var(--sp16);
+  margin-bottom: var(--sp32);
   background: var(--color-grey-lighter);
   border-radius: 0.5rem;
 }
@@ -10,7 +10,7 @@
 }
 
 .header {
-  margin-bottom: var(--spacing-base-tight);
+  margin-bottom: var(--sp10);
 }
 
 .author {
@@ -18,7 +18,7 @@
 }
 
 .description {
-  margin-top: var(--spacing-base-tight);
+  margin-top: var(--sp10);
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
 }
@@ -27,13 +27,13 @@
   & .item {
     @mixin inline-flex-center-all;
 
-    margin-top: var(--spacing-base-tight);
-    margin-right: var(--spacing-base);
+    margin-top: var(--sp10);
+    margin-right: var(--sp16);
     font-size: var(--font-size-xs);
     line-height: 1.125rem;
 
     & .name {
-      margin-right: var(--spacing-x-tight);
+      margin-right: var(--sp8);
       font-weight: var(--font-weight-medium);
     }
 
@@ -50,7 +50,7 @@
     & .gatewayUrl + .gatewayUrl {
       &::before {
         display: inline-block;
-        padding: var(--spacing-xx-tight);
+        padding: var(--sp4);
         color: var(--color-black);
         content: '·';
       }

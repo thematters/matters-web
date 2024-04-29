@@ -1,15 +1,15 @@
 .tagList {
-  margin-bottom: var(--spacing-loose);
+  margin-bottom: var(--sp24);
 
   & .list {
     display: flex;
     flex-wrap: wrap;
-    row-gap: var(--spacing-x-tight);
+    row-gap: var(--sp8);
 
     & .listItem {
       flex-shrink: 0;
       max-width: 100%;
-      padding-right: var(--spacing-base);
+      padding-right: var(--sp16);
     }
 
     & .moreTag {
@@ -17,8 +17,7 @@
       @mixin transition;
 
       height: 2rem;
-      padding: var(--spacing-x-tight) var(--spacing-base-tight)
-        var(--spacing-x-tight) var(--spacing-x-tight);
+      padding: var(--sp8) var(--sp10) var(--sp8) var(--sp8);
       color: var(--color-grey-darker);
       cursor: pointer;
       background: var(--color-grey-lighter);

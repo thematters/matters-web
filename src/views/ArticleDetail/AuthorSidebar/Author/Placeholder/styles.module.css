@@ -1,7 +1,7 @@
 .container {
   display: flex;
-  gap: var(--spacing-loose);
-  margin-top: var(--spacing-x-loose);
+  gap: var(--sp24);
+  margin-top: var(--sp32);
 
   & .avatar {
     width: 4rem;
@@ -14,7 +14,7 @@
     @mixin flex-start-center;
 
     flex-direction: column;
-    gap: var(--spacing-xx-tight);
+    gap: var(--sp4);
 
     & .displayName {
       width: 3.75rem;

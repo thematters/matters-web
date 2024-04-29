@@ -1,12 +1,12 @@
 .versions {
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--sp16);
 }
 
 .version {
   @mixin flex-center-start;
 
   & * + * {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--sp8);
   }
 }
 
@@ -14,7 +14,7 @@
   @mixin flex-center-space-between;
 
   width: 100%;
-  padding: var(--spacing-tight);
+  padding: var(--sp12);
   border: 1px solid var(--color-line-grey-light);
   border-radius: 0.5rem;
 }

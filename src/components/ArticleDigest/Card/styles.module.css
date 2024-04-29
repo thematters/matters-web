@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 170px;
-  padding: var(--spacing-tight) var(--spacing-base);
+  padding: var(--sp12) var(--sp16);
   color: var(--color-black);
 }
 
@@ -17,7 +17,7 @@
 
 .summary,
 .footer {
-  margin-top: var(--spacing-tight);
+  margin-top: var(--sp12);
 }
 
 .summary {

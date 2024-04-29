@@ -3,11 +3,11 @@
   @mixin border-grey;
 
   height: 1.125rem;
-  padding: 0 var(--spacing-xx-tight);
+  padding: 0 var(--sp4);
   font-size: var(--font-size-xs);
   color: var(--color-white);
   user-select: none;
-  border-radius: var(--spacing-xx-tight);
+  border-radius: var(--sp4);
 
   &.authorLabel {
     color: var(--color-matters-green);

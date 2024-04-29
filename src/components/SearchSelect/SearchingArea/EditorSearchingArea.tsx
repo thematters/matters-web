@@ -214,6 +214,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
       return
     }
   }
+
   // searching
   useEffect(() => {
     if (debouncedSearchKey) {
@@ -306,8 +307,8 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                           node={node}
                           onClick={addNodeToStaging}
                           selected={
-                            stagingNodes.findIndex((SN) => {
-                              return SN.node.id === node.id
+                            stagingNodes.findIndex((sn) => {
+                              return sn.node.id === node.id
                             }) !== -1
                           }
                           inSearchingArea
@@ -339,6 +340,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                 </InfiniteScroll>
               )}
 
+              {/* URL Search */}
               {isArticleUrlMode && !searching && !hasArticle && <EmptySearch />}
 
               {isArticleUrlMode &&
@@ -350,8 +352,8 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
                     onClick={addNodeToStaging}
                     selected={
                       stagingNodes.findIndex(
-                        (SN) =>
-                          SN.node.id ===
+                        (sn) =>
+                          sn.node.id ===
                           (articleUrlData.node?.__typename === 'Article' &&
                             articleUrlData.node.id)
                       ) !== -1

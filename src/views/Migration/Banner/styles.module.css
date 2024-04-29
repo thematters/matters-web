@@ -1,5 +1,5 @@
 .banner {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
   margin-top: 5rem;
   margin-bottom: 8rem;
   background-image: var(--migration-banner-bg);
@@ -10,13 +10,13 @@
   }
 
   & p {
-    margin: var(--spacing-x-tight) 0 var(--spacing-base);
+    margin: var(--sp8) 0 var(--sp16);
     font-size: var(--font-size-sm);
     color: var(--color-grey-darker);
   }
 
   @media (--sm-up) {
-    padding: var(--spacing-x-loose) var(--spacing-xx-loose);
+    padding: var(--sp32) var(--sp40);
 
     & h4 {
       font-size: var(--font-size-lg);

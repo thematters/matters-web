@@ -3,10 +3,10 @@
 }
 
 .activeParentComment {
-  padding-right: var(--spacing-base) !important;
-  padding-left: var(--spacing-base) !important;
-  margin-right: calc(-1 * var(--spacing-base));
-  margin-left: calc(-1 * var(--spacing-base));
+  padding-right: var(--sp16) !important;
+  padding-left: var(--sp16) !important;
+  margin-right: calc(-1 * var(--sp16));
+  margin-left: calc(-1 * var(--sp16));
 }
 
 @keyframes comment-background-fade-out {

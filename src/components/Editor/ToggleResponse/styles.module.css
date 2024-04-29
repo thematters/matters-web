@@ -1,12 +1,12 @@
 .wrapper {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
   background: var(--color-grey-lighter);
   border-radius: 0.5rem;
 
   & .item {
     @mixin flex-center-space-between;
 
-    gap: var(--spacing-loose);
+    gap: var(--sp24);
     cursor: pointer;
 
     & h3 {
@@ -17,14 +17,14 @@
     }
 
     & .hint {
-      margin-top: var(--spacing-xx-tight);
+      margin-top: var(--sp4);
       font-size: var(--font-size-xs);
       color: var(--color-grey);
     }
   }
 
   & .item + .item {
-    padding-top: var(--spacing-base);
+    padding-top: var(--sp16);
   }
 }
 
@@ -34,8 +34,8 @@
   border-radius: 0;
 
   & .item {
-    gap: var(--spacing-x-loose);
-    padding: var(--spacing-base);
+    gap: var(--sp32);
+    padding: var(--sp16);
 
     & h3 {
       font-size: var(--font-size-md-s);
@@ -56,7 +56,7 @@
 
 .container {
   & .title {
-    padding-bottom: var(--spacing-base);
+    padding-bottom: var(--sp16);
     font-size: var(--font-size-base);
   }
 }

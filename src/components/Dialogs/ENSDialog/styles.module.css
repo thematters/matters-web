@@ -1,11 +1,11 @@
 .content {
-  padding: var(--spacing-loose) var(--spacing-base);
+  padding: var(--sp24) var(--sp16);
   font-size: var(--font-size-md-s);
   color: var(--color-grey-darker);
   text-align: center;
 
   & > * + * {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
   }
 
   & a {
@@ -15,7 +15,7 @@
 }
 
 .error {
-  margin-top: var(--spacing-loose);
+  margin-top: var(--sp24);
   font-size: var(--font-size-xs);
   color: var(--color-negative-red);
 }

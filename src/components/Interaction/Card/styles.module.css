@@ -121,63 +121,63 @@
 
 /* Spacing */
 .spacingYXtight {
-  padding-top: var(--spacing-x-tight);
-  padding-bottom: var(--spacing-x-tight);
+  padding-top: var(--sp8);
+  padding-bottom: var(--sp8);
 }
 
 .spacingYBaseTight {
-  padding-top: var(--spacing-base-tight);
-  padding-bottom: var(--spacing-base-tight);
+  padding-top: var(--sp10);
+  padding-bottom: var(--sp10);
 }
 
 .spacingYTight {
-  padding-top: var(--spacing-tight);
-  padding-bottom: var(--spacing-tight);
+  padding-top: var(--sp12);
+  padding-bottom: var(--sp12);
 }
 
 .spacingYBase {
-  padding-top: var(--spacing-base);
-  padding-bottom: var(--spacing-base);
+  padding-top: var(--sp16);
+  padding-bottom: var(--sp16);
 }
 
 .spacingYBaseLoose {
-  padding-top: var(--spacing-base-loose);
-  padding-bottom: var(--spacing-base-loose);
+  padding-top: var(--sp20);
+  padding-bottom: var(--sp20);
 }
 
 .spacingYLoose {
-  padding-top: var(--spacing-loose);
-  padding-bottom: var(--spacing-loose);
+  padding-top: var(--sp24);
+  padding-bottom: var(--sp24);
 }
 
 .spacingXXtight {
-  padding-right: var(--spacing-x-tight);
-  padding-left: var(--spacing-x-tight);
+  padding-right: var(--sp8);
+  padding-left: var(--sp8);
 }
 
 .spacingXBaseTight {
-  padding-right: var(--spacing-base-tight);
-  padding-left: var(--spacing-base-tight);
+  padding-right: var(--sp10);
+  padding-left: var(--sp10);
 }
 
 .spacingXTight {
-  padding-right: var(--spacing-tight);
-  padding-left: var(--spacing-tight);
+  padding-right: var(--sp12);
+  padding-left: var(--sp12);
 }
 
 .spacingXBase {
-  padding-right: var(--spacing-base);
-  padding-left: var(--spacing-base);
+  padding-right: var(--sp16);
+  padding-left: var(--sp16);
 }
 
 .spacingXBaseLoose {
-  padding-right: var(--spacing-base-loose);
-  padding-left: var(--spacing-base-loose);
+  padding-right: var(--sp20);
+  padding-left: var(--sp20);
 }
 
 .spacingXLoose {
-  padding-right: var(--spacing-loose);
-  padding-left: var(--spacing-loose);
+  padding-right: var(--sp24);
+  padding-left: var(--sp24);
 }
 
 /* Border */
@@ -198,17 +198,17 @@
 }
 
 .borderRadiusLoose {
-  border-radius: var(--spacing-loose);
+  border-radius: var(--sp24);
 }
 
 .borderRadiusBase {
-  border-radius: var(--spacing-base);
+  border-radius: var(--sp16);
 }
 
 .borderRadiusXtight {
-  border-radius: var(--spacing-x-tight);
+  border-radius: var(--sp8);
 }
 
 .borderRadiusXxtight {
-  border-radius: var(--spacing-xx-tight);
+  border-radius: var(--sp4);
 }

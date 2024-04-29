@@ -1,5 +1,5 @@
 .comment {
-  padding: var(--spacing-base) 0;
+  padding: var(--sp16) 0;
 
   & .avatar {
     width: 2.5rem;
@@ -9,7 +9,7 @@
   }
 
   & .content {
-    margin-top: var(--spacing-tight);
+    margin-top: var(--sp12);
 
     & p {
       width: 22.5rem;
@@ -18,7 +18,7 @@
     }
 
     & p + p {
-      margin-top: var(--spacing-x-tight);
+      margin-top: var(--sp8);
     }
 
     & p:last-child {

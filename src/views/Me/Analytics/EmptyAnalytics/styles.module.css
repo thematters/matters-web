@@ -3,7 +3,7 @@
 
   flex-direction: column;
   width: 100%;
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 
   & p {
     color: var(--color-grey-darker);
@@ -13,15 +13,15 @@
 .rocket {
   width: 101px;
   height: 89px;
-  margin: var(--spacing-loose) 0;
+  margin: var(--sp24) 0;
 
   @media (--sm-up) {
-    margin: var(--spacing-xx-loose) 0;
+    margin: var(--sp40) 0;
   }
 }
 
 .tips {
-  margin: var(--spacing-loose) 0 0;
+  margin: var(--sp24) 0 0;
   font-size: var(--font-size-xs);
   line-height: 1rem;
   color: var(--color-grey);

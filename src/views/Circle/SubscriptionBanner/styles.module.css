@@ -3,11 +3,11 @@
   @mixin transition;
 
   height: 3rem;
-  margin: var(--spacing-base) var(--spacing-base) var(--spacing-loose);
+  margin: var(--sp16) var(--sp16) var(--sp24);
   font-size: var(--font-size-md);
   color: var(--color-white);
   background: var(--color-matters-gold);
-  border-radius: var(--spacing-x-tight);
+  border-radius: var(--sp8);
   transition-property: background-color;
 
   &:hover,

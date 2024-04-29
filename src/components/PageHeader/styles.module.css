@@ -1,5 +1,5 @@
 .header {
-  padding-bottom: var(--spacing-x-tight);
+  padding-bottom: var(--sp8);
 
   &.hasBorder {
     @mixin border-bottom-grey;

@@ -18,8 +18,8 @@
     }
 
     & .info {
-      margin-top: var(--spacing-x-tight);
-      margin-bottom: var(--spacing-loose);
+      margin-top: var(--sp8);
+      margin-bottom: var(--sp24);
       font-size: var(--font-size-sm);
       line-height: 1.375rem;
       color: var(--color-grey-darker);
@@ -28,14 +28,14 @@
 
   & .footer {
     width: 100%;
-    padding-top: var(--spacing-base);
-    padding-bottom: var(--spacing-xx-loose);
+    padding-top: var(--sp16);
+    padding-bottom: var(--sp40);
     text-align: center;
 
     & .buttons {
       @mixin border-top-grey-light;
 
-      padding-top: var(--spacing-loose);
+      padding-top: var(--sp24);
       border-top-style: dashed;
 
       & button {
@@ -53,8 +53,8 @@
     }
 
     & .note {
-      margin-top: var(--spacing-base);
-      margin-left: var(--spacing-base);
+      margin-top: var(--sp16);
+      margin-left: var(--sp16);
       font-size: var(--font-size-sm);
       line-height: 1.75;
       color: var(--color-grey-darker);

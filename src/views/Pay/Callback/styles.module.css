@@ -1,5 +1,5 @@
 .content {
-  margin-top: var(--spacing-xx-loose);
+  margin-top: var(--sp40);
   text-align: center;
 
   & h2 {
@@ -8,7 +8,7 @@
   }
 
   & p {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--sp8);
     font-size: var(--font-size-sm);
     color: var(--color-grey-darker);
   }

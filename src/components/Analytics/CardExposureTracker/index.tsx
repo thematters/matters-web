@@ -8,13 +8,11 @@ export const CardExposureTracker = ({
   location,
   feedType,
   contentType,
-  horizontal = false,
 }: {
   location: number | string
   id: string
   feedType: FeedType
   contentType: ContentType | ActivityType
-  horizontal?: boolean
 }) => {
   const [timerId, setTimerId] = useState<number>()
   const [recorded, setRecorded] = useState(false)

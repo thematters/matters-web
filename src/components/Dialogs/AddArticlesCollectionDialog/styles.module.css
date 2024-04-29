@@ -1,5 +1,5 @@
 .newCollection {
-  padding: var(--spacing-x-tight) 0;
+  padding: var(--sp8) 0;
   font-size: var(--font-size-sm);
   line-height: var(--line-height-base-loose);
   color: var(--color-matters-green);
@@ -18,7 +18,7 @@
   -webkit-overflow-scrolling: touch;
 
   & .item {
-    margin-bottom: var(--spacing-tight);
+    margin-bottom: var(--sp12);
   }
 }
 
@@ -26,7 +26,7 @@
   @mixin flex-start-center;
 
   height: 23.375rem;
-  padding: var(--spacing-x-tight) var(--spacing-base-loose);
+  padding: var(--sp8) var(--sp20);
   font-size: var(--font-size-sm);
   color: var(--color-grey);
 }

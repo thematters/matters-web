@@ -3,10 +3,10 @@
   @mixin border-grey;
 
   height: var(--input-height);
-  padding: 0 0 0 var(--spacing-base);
+  padding: 0 0 0 var(--sp16);
   color: var(--color-grey-dark);
   caret-color: var(--color-matters-green);
-  border-radius: var(--spacing-x-tight);
+  border-radius: var(--sp8);
   transition-property: border-color, background-color;
 
   &.StripeElement--focus {

@@ -22,29 +22,29 @@
   & h2 + p,
   h3 + p,
   p + p {
-    margin-top: var(--spacing-tight);
+    margin-top: var(--sp12);
   }
 
   & ul,
   & ol {
-    padding-left: var(--spacing-loose);
+    padding-left: var(--sp24);
     font-size: var(--font-size-md-s);
     line-height: 1.5rem;
     color: var(--color-grey-dark);
   }
 
   & li {
-    padding-left: var(--spacing-xx-tight);
-    margin: var(--spacing-x-tight) 0;
+    padding-left: var(--sp4);
+    margin: var(--sp8) 0;
   }
 
   & ul {
-    margin: var(--spacing-base) 0;
+    margin: var(--sp16) 0;
     list-style-type: disc;
   }
 
   & ol {
-    margin: var(--spacing-base) 0;
+    margin: var(--sp16) 0;
     list-style-type: decimal;
   }
 }
@@ -76,5 +76,5 @@
 }
 
 .spacingBottom {
-  padding-bottom: var(--spacing-base);
+  padding-bottom: var(--sp16);
 }

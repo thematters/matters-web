@@ -1,5 +1,5 @@
 .meDigest {
-  padding: 0 var(--spacing-base);
+  padding: 0 var(--sp16);
 }
 
 .header {
@@ -7,7 +7,7 @@
 }
 
 .names {
-  margin-left: var(--spacing-x-tight);
+  margin-left: var(--sp8);
 
   & .displayName {
     font-size: var(--font-size-lg);

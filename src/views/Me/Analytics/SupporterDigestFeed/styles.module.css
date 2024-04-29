@@ -1,6 +1,6 @@
 .container {
   display: flex;
-  padding: var(--spacing-base) 0;
+  padding: var(--sp16) 0;
 }
 
 .supporter {
@@ -15,14 +15,14 @@
   line-height: 1.75;
 
   & h4 {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--sp8);
   }
 }
 
 .number {
   display: flex;
   flex-shrink: 0;
-  padding-right: var(--spacing-tight);
+  padding-right: var(--sp12);
   font-size: var(--font-size-xm);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-base);

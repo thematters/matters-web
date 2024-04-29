@@ -1,6 +1,6 @@
 .tags {
   & li {
-    padding: var(--spacing-x-tight) 0;
+    padding: var(--sp8) 0;
 
     &:hover,
     &:focus {

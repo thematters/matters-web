@@ -33,7 +33,7 @@
 .username {
   @mixin line-clamp;
 
-  margin-left: var(--spacing-xx-tight);
+  margin-left: var(--sp4);
   font-size: var(--font-size-sm);
   line-height: 1.25;
   color: var(--color-grey);
@@ -103,12 +103,12 @@
 
 .spacingXtight {
   &.hasAvatar .name {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--sp8);
   }
 }
 
 .spacingXxtight {
   &.hasAvatar .name {
-    margin-left: var(--spacing-xx-tight);
+    margin-left: var(--sp4);
   }
 }

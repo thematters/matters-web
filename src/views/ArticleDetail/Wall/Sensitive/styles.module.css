@@ -2,7 +2,7 @@
   @mixin flex-center-all;
 
   height: 8rem;
-  margin: var(--spacing-loose) 0;
+  margin: var(--sp24) 0;
   background-image: var(--circle-wall-bg-sm);
   background-size: contain;
 

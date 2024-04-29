@@ -1,9 +1,9 @@
 .container {
   display: flex;
-  gap: var(--spacing-xx-tight);
+  gap: var(--sp4);
   align-items: flex-start;
-  margin-top: var(--spacing-base);
-  margin-bottom: var(--spacing-base);
+  margin-top: var(--sp16);
+  margin-bottom: var(--sp16);
 
   & > a {
     flex-grow: 1;

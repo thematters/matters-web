@@ -2,7 +2,7 @@
   @mixin flex-center-all;
 
   width: 100%;
-  padding: 0 var(--spacing-base);
+  padding: 0 var(--sp16);
   margin: 0 auto;
 
   & .pinInputItem {
@@ -16,11 +16,11 @@
     line-height: 1.5rem;
     color: var(--color-black);
     text-align: center;
-    border-radius: var(--spacing-x-tight);
+    border-radius: var(--sp8);
     transition-property: border-color;
 
     & + .pinInputItem {
-      margin-left: var(--spacing-tight);
+      margin-left: var(--sp12);
     }
 
     &:focus,

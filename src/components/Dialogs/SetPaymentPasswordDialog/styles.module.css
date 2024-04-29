@@ -1,6 +1,6 @@
 .reason {
-  padding: var(--spacing-loose) 0;
-  margin: 0 var(--spacing-base);
+  padding: var(--sp24) 0;
+  margin: 0 var(--sp16);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-bold);
   line-height: 1.5rem;
@@ -8,7 +8,7 @@
 }
 
 .hint {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);
   color: var(--color-grey);
