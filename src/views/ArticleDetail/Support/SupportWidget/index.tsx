@@ -85,17 +85,17 @@ const SupportWidget = ({
       }
       setCurrency(payload.currency)
       setShowAvatarAnimation(true)
+
       const scrollToAnimation = () => {
+        const scrollTo = (element: HTMLElement) => {
+          element.scrollIntoView({ behavior: 'instant', block: 'center' })
+        }
+
         const animationEle = document.getElementById('animation')
         if (animationEle) {
-          animationEle.scrollIntoView({ behavior: 'instant', block: 'center' })
-          setTimeout(() => {
-            // Fix layout changes caused by lazy loading of image heights
-            animationEle.scrollIntoView({
-              behavior: 'instant',
-              block: 'center',
-            })
-          }, 100)
+          scrollTo(animationEle)
+          // Fix layout changes caused by lazy loading of image heights
+          setTimeout(() => scrollTo(animationEle), 100)
         }
       }
 
