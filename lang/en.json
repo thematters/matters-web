@@ -94,10 +94,6 @@
     "defaultMessage": "Public",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
-  "/qgntf": {
-    "defaultMessage": "Supporters",
-    "description": "src/components/ArticleDigest/DropdownActions/DonatorsButton/index.tsx"
-  },
   "/usqHn": {
     "defaultMessage": "{displayName}'s creative space"
   },
@@ -1894,10 +1890,6 @@
   "dVbKzB": {
     "defaultMessage": "Comments and replies",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "dZQ+ba": {
-    "defaultMessage": "Likers",
-    "description": "src/components/ArticleDigest/DropdownActions/AppreciatorsButton/index.tsx"
   },
   "deEeEI": {
     "defaultMessage": "Register"

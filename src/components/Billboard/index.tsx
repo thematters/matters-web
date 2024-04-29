@@ -1,11 +1,12 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useContractRead } from 'wagmi'
 
+import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
 import { analytics, BillboardABI, featureSupportedChains } from '~/common/utils'
 import {
   BillboardDialog,
   BillboardExposureTracker,
-  IconInfo24,
+  Icon,
   Spinner,
   TextIcon,
 } from '~/components'
@@ -68,7 +69,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
                   })}
                   onClick={openBillboardDialog}
                 >
-                  <TextIcon icon={<IconInfo24 />} size="xs">
+                  <TextIcon icon={<Icon icon={IconInfo} />} size="xs">
                     <FormattedMessage
                       defaultMessage="What's this?"
                       id="4wOWfp"

@@ -73,25 +73,25 @@ const DynamicToggleRestrictUserButton = dynamic(
     import(
       '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Button'
     ),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicToggleRestrictUserDialog = dynamic(
   () =>
     import(
       '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
     ),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicArchiveUserButton = dynamic(
   () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Button'),
   {
-    loading: () => <Spinner />,
+    loading: () => <SpinnerBlock />,
   }
 )
 const DynamicArchiveUserDialog = dynamic(
   () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'),
   {
-    loading: () => <Spinner />,
+    loading: () => <SpinnerBlock />,
   }
 )
 
