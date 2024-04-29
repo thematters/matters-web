@@ -15,7 +15,7 @@ export const Spinner = ({ color, size }: SpinnerProps) => {
   return (
     <Icon
       aria-label="Loading..."
-      data-test-id={TEST_ID.SPINNER}
+      data-test-id={TEST_ID.ICON_SPINNER}
       aria-busy="true"
       aria-live="polite"
       className="u-motion-spin"

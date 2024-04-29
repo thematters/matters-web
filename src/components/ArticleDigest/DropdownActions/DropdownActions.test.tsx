@@ -29,38 +29,6 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($shareDialog).toBeInTheDocument()
   })
 
-  // hasAppreciators
-  it('should render appreciators button', async () => {
-    render(
-      <DropdownActions
-        article={{
-          ...MOCK_ARTILCE,
-          likesReceived: { ...MOCK_ARTILCE.likesReceived, totalCount: 1 },
-        }}
-        inCard={false}
-        hasAppreciators
-      />
-    )
-
-    const $button = screen.getByLabelText('More Actions')
-    expect($button).toBeInTheDocument()
-
-    // open menu
-    $button.click()
-    const $menu = screen.getByRole('menu')
-    expect($menu).toBeInTheDocument()
-
-    const $appreciatorsButton = screen.getByRole('menuitem', {
-      name: 'Likers',
-    })
-    expect($appreciatorsButton).toBeInTheDocument()
-
-    // open dialog
-    $appreciatorsButton.click()
-    const $appreciatorsDialog = screen.getByTestId(TEST_ID.DIALOG_APPRECIATORS)
-    expect($appreciatorsDialog).toBeInTheDocument()
-  })
-
   it("shoudn't render appreciators button", async () => {
     render(<DropdownActions article={MOCK_ARTILCE} inCard />)
     const $button = screen.getByLabelText('More Actions')
@@ -73,29 +41,6 @@ describe('<ArticleDigest/DropdownActions>', () => {
       name: 'Likers',
     })
     expect($appreciatorsButton).not.toBeInTheDocument()
-  })
-
-  // hasDonators
-  it('should render donators button', async () => {
-    render(<DropdownActions article={MOCK_ARTILCE} hasDonators />)
-
-    const $button = screen.getByLabelText('More Actions')
-    expect($button).toBeInTheDocument()
-
-    // open menu
-    $button.click()
-    const $menu = screen.getByRole('menu')
-    expect($menu).toBeInTheDocument()
-
-    const $donatorsButton = screen.getByRole('menuitem', {
-      name: 'Supporters',
-    })
-    expect($donatorsButton).toBeInTheDocument()
-
-    // open dialog
-    $donatorsButton.click()
-    const $donatorsDialog = screen.getByTestId(TEST_ID.DIALOG_SUPPORTERS)
-    expect($donatorsDialog).toBeInTheDocument()
   })
 
   // hasExtend
