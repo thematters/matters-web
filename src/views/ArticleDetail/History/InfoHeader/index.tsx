@@ -2,13 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
+import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
+import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
 import { truncate } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
-  IconCopy16,
-  IconExternalLink16,
-  IconHelp24,
+  Icon,
   Media,
   TextIcon,
   toast,
@@ -44,7 +45,7 @@ function iscnLinkUrl(iscnId: string) {
 
 const IPFSTextIcon = () => (
   <TextIcon
-    icon={<IconHelp24 size="mdXS" />}
+    icon={<Icon icon={IconHelp} size="mdXS" />}
     color="greyDark"
     textPlacement="left"
     size="xs"
@@ -140,7 +141,7 @@ const InfoHeader = ({
                   onClick={copyToClipboard}
                 >
                   <TextIcon
-                    icon={<IconCopy16 size="xs" />}
+                    icon={<Icon icon={IconCopy} size="xs" />}
                     color="greyDarker"
                     size="xs"
                     spacing="xxtight"
@@ -201,7 +202,7 @@ const InfoHeader = ({
                 rel="noreferrer"
               >
                 <TextIcon
-                  icon={<IconExternalLink16 size="xs" />}
+                  icon={<Icon icon={IconExternal} size="xs" />}
                   color="greyDarker"
                   size="xs"
                   spacing="xxtight"
@@ -232,7 +233,7 @@ const InfoHeader = ({
                     onClick={copyToClipboard}
                   >
                     <TextIcon
-                      icon={<IconCopy16 size="xs" />}
+                      icon={<Icon icon={IconCopy} size="xs" />}
                       color="greyDarker"
                       size="xs"
                       spacing="xxtight"

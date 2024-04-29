@@ -1,5 +1,6 @@
+import { ReactComponent as IconDonate } from '@/public/static/icons/24px/donate.svg'
 import { toPath } from '~/common/utils'
-import { Card, IconDonate24, TextIcon, UserDigest } from '~/components'
+import { Card, Icon, TextIcon, UserDigest } from '~/components'
 import { MeAnalyticsQuery } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -38,7 +39,7 @@ const SupporterDigestFeed = ({
 
           <section className={styles.count}>
             <TextIcon
-              icon={<IconDonate24 size="xs" />}
+              icon={<Icon icon={IconDonate} size="xs" />}
               size="xs"
               color="greyDark"
             >

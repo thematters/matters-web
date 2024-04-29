@@ -2,16 +2,17 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
 import { URL_COLLECTION_DETAIL } from '~/common/enums'
 import { analytics, parseSorter, stringifySorter } from '~/common/utils'
 import {
   ArticleDigestFeed,
   DateTime,
-  IconArrowDown20,
-  IconArrowUp20,
+  Icon,
   Layout,
   List,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   useRoute,
   ViewerContext,
@@ -26,7 +27,7 @@ import { fragments } from './gql'
 import styles from './styles.module.css'
 
 const DynamicViewerArticles = dynamic(() => import('./ViewerArticles'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 interface CollectionArticlesProps {
@@ -125,12 +126,12 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
           className={styles.sortButton}
         >
           {isSequenceNormal && (
-            <TextIcon icon={<IconArrowDown20 size="mdS" />}>
+            <TextIcon icon={<Icon icon={IconDown} size="mdS" />}>
               <FormattedMessage defaultMessage="Sort" id="25oM9Q" />
             </TextIcon>
           )}
           {isSequenceReverse && (
-            <TextIcon icon={<IconArrowUp20 size="mdS" />}>
+            <TextIcon icon={<Icon icon={IconUp} size="mdS" />}>
               <FormattedMessage defaultMessage="Sort" id="25oM9Q" />
             </TextIcon>
           )}

@@ -2,9 +2,10 @@ import classNames from 'classnames'
 import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Dropdown, IconDown20, Label, Menu, useRoute } from '~/components'
+import { Dropdown, Icon, Label, Menu, useRoute } from '~/components'
 import { VersionsArticleFragment } from '~/gql/graphql'
 
 import versionStyles from '../VersionsSidebar/styles.module.css'
@@ -111,7 +112,7 @@ const VersionsDropdown = ({
               active={version.id === currVersion}
               latest={versions[0].id === version.id}
             />
-            <IconDown20 size="mdS" />
+            <Icon icon={IconDown} size="mdS" />
           </button>
         )}
       </Dropdown>

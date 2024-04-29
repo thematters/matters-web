@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 
+import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
 import { TEST_ID } from '~/common/enums'
-import { IconPin16 } from '~/components'
+import { Icon } from '~/components'
 import { PinnedLabelBetaCommentFragment } from '~/gql/graphql'
 
 const fragments = {
@@ -27,7 +28,13 @@ const PinnedLabel = ({
     return null
   }
 
-  return <IconPin16 color="black" data-test-id={TEST_ID.COMMENT_PINNED_LABEL} />
+  return (
+    <Icon
+      icon={IconPin}
+      color="black"
+      data-test-id={TEST_ID.COMMENT_PINNED_LABEL}
+    />
+  )
 }
 
 PinnedLabel.fragments = fragments

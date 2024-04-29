@@ -3,12 +3,12 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
-import { ReactComponent as IconEditorMenuImage } from '@/public/static/icons/32px/editor-menu-image.svg'
+import { ReactComponent as IconEditorImage } from '@/public/static/icons/editor-image.svg'
 import { ACCEPTED_UPLOAD_IMAGE_TYPES, ASSET_TYPE } from '~/common/enums'
 import { getFileType, translate, validateImage } from '~/common/utils'
 import {
-  IconSpinner16,
   LanguageContext,
+  Spinner,
   toast,
   Translate,
   withIcon,
@@ -93,8 +93,8 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
         lang,
       })}
     >
-      {!uploading && withIcon(IconEditorMenuImage)({ size: 'lg' })}
-      {uploading && <IconSpinner16 size="lg" color="greyLight" />}
+      {!uploading && withIcon(IconEditorImage)({ size: 'lg' })}
+      {uploading && <Spinner size="lg" color="greyLight" />}
 
       <VisuallyHidden>
         <input

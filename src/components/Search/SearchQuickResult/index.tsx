@@ -11,7 +11,7 @@ import {
   Media,
   Menu,
   // Spacer,
-  Spinner,
+  SpinnerBlock,
   TagDigest,
   UserDigest,
 } from '~/components'
@@ -88,7 +88,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   if (loading) {
     return (
       <Menu width={inPage ? undefined : 'md'}>
-        <Spinner />
+        <SpinnerBlock />
       </Menu>
     )
   }

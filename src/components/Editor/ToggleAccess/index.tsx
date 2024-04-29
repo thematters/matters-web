@@ -2,13 +2,9 @@ import classNames from 'classnames'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import {
-  CircleDigest,
-  IconArrowRight16,
-  IconChecked32,
-  Switch,
-  ViewerContext,
-} from '~/components'
+import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import { ReactComponent as IconSquareChecked } from '@/public/static/icons/square-checked.svg'
+import { CircleDigest, Icon, Switch, ViewerContext } from '~/components'
 import {
   ArticleAccessType,
   ArticleLicenseType,
@@ -171,9 +167,9 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
                 {content &&
                 (content.replyToDonator || content.requestForDonation) ? (
-                  <IconChecked32 size="md" />
+                  <Icon icon={IconSquareChecked} size="md" />
                 ) : (
-                  <IconArrowRight16 color="grey" />
+                  <Icon icon={IconRight} color="grey" />
                 )}
               </section>
 

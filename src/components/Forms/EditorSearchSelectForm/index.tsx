@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import {
   MAX_ARTICLE_COLLECT_LENGTH,
   MAX_ARTICLE_TAG_LENGTH,
   TEST_ID,
 } from '~/common/enums'
-import { Dialog, IconAdd16, TextIcon, Translate } from '~/components'
+import { Dialog, Icon, TextIcon, Translate } from '~/components'
 import SearchingArea, {
   SearchType,
   SelectNode,
@@ -162,7 +163,7 @@ const EditorSearchSelectForm = ({
             data-test-id={TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON}
           >
             <TextIcon
-              icon={<IconAdd16 size="mdS" />}
+              icon={<Icon icon={IconPlus} size="mdS" />}
               color={enableAdd ? 'green' : 'grey'}
               size="mdS"
               spacing="xtight"

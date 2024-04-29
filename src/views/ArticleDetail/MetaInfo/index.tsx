@@ -1,12 +1,13 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
 import { toPath } from '~/common/utils'
 import {
   Button,
   DateTime,
   DotDivider,
-  IconEdit16,
+  Icon,
   TextIcon,
   UserDigest,
   ViewerContext,
@@ -113,7 +114,7 @@ const MetaInfo = ({
                 href={editable ? `${href}/edit` : undefined}
                 disabled={!editable}
               >
-                <TextIcon icon={<IconEdit16 />} size="xs">
+                <TextIcon icon={<Icon icon={IconEdit} />} size="xs">
                   <FormattedMessage
                     defaultMessage="Edit"
                     id="2bG/gP"

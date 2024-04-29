@@ -3,10 +3,11 @@ import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { waitForTransaction } from 'wagmi/actions'
 
+import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
 import { WALLET_ERROR_MESSAGES } from '~/common/enums'
 import {
   Dialog,
-  IconOpenWallet20,
+  Icon,
   LanguageContext,
   TextIcon,
   useAllowanceUSDT,
@@ -84,7 +85,7 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
           textWeight="normal"
           textSize="md"
           text={
-            <TextIcon icon={<IconOpenWallet20 size="mdS" />}>
+            <TextIcon icon={<Icon icon={IconOpenWallet} size="mdS" />}>
               {!allowanceError && !approveError && (
                 <FormattedMessage
                   defaultMessage="Go to allow"

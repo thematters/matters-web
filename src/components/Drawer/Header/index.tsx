@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import { useIntl } from 'react-intl'
 
-import { IconClose24 } from '~/components'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { Icon } from '~/components'
 
 import { TextButton } from '../Buttons'
 import styles from './styles.module.css'
@@ -40,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({
             defaultMessage: 'Close',
             id: 'rbrahO',
           })}
-          text={<IconClose24 size="md" />}
+          text={<Icon icon={IconTimes} size="md" />}
         />
       )}
     </header>

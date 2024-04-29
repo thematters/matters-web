@@ -1,12 +1,13 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount, truncate } from '~/common/utils'
 import {
   Avatar,
   Button,
   CopyToClipboard,
-  IconCopy16,
+  Icon,
   TextIcon,
   Viewer,
 } from '~/components'
@@ -68,7 +69,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
                 onClick={copyToClipboard}
               >
                 <TextIcon
-                  icon={<IconCopy16 color="green" size="sm" />}
+                  icon={<Icon icon={IconCopy} color="green" size="sm" />}
                   spacing="xxtight"
                   size="md"
                   color="green"

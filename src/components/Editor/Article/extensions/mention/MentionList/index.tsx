@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-import { Menu, Spinner, UserDigest } from '~/components'
+import { Menu, SpinnerBlock, UserDigest } from '~/components'
 import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -23,7 +23,7 @@ export const MentionList = forwardRef(
         <section className={styles.mention}>
           <Menu width="md">
             <Menu.Item>
-              <Spinner />
+              <SpinnerBlock />
             </Menu.Item>
           </Menu>
         </section>

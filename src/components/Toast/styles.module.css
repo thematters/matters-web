@@ -39,7 +39,7 @@
 }
 
 .error {
-  background: var(--color-red);
+  background: var(--color-negative-red);
 
   & .actions {
     & :global(> * + *) {

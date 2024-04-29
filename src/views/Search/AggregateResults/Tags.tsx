@@ -10,7 +10,7 @@ import {
   EmptySearch,
   InfiniteScroll,
   Menu,
-  Spinner,
+  SpinnerBlock,
   TagDigest,
   Translate,
   usePublicQuery,
@@ -51,7 +51,7 @@ const AggregateTagResults = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {

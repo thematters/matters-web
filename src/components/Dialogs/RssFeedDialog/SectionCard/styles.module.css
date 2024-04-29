@@ -12,6 +12,6 @@
   }
 
   & .error {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 }

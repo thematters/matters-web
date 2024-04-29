@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {

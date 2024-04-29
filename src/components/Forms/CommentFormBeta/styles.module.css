@@ -21,6 +21,6 @@
     padding-right: var(--spacing-base-loose);
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 }

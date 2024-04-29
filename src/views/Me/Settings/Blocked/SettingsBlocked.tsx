@@ -3,7 +3,13 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
-import { Empty, InfiniteScroll, List, QueryError, Spinner } from '~/components'
+import {
+  Empty,
+  InfiniteScroll,
+  List,
+  QueryError,
+  SpinnerBlock,
+} from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerBlockListQuery } from '~/gql/graphql'
 
@@ -44,7 +50,7 @@ const SettingsBlocked = () => {
   )
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

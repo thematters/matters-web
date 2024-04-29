@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 interface ResetPaymentPasswordProps {
   autoCloseDialog?: boolean
@@ -9,7 +9,7 @@ interface ResetPaymentPasswordProps {
 
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({

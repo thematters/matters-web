@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 import { SocialAccountType } from '~/gql/graphql'
 
 interface RemoveSocialLoginDialogProps {
@@ -9,7 +9,7 @@ interface RemoveSocialLoginDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseRemoveSocialLoginDialog = ({

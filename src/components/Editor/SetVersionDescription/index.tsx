@@ -1,7 +1,7 @@
 import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 export interface SetVersionDescriptionDialogProps {
   description: string
@@ -10,7 +10,7 @@ export interface SetVersionDescriptionDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseSetVersionDescriptionDialog = ({

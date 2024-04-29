@@ -1,10 +1,11 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { truncate } from '~/common/utils'
 import {
   AddWalletLoginDialog,
-  IconClose20,
+  Icon,
   RemoveWalletLoginDialog,
   TableView,
   ViewerContext,
@@ -49,7 +50,7 @@ const Wallet = () => {
                   }
                   rightIcon={
                     hasETHAddress && canRemoveNonFacebookLogins ? (
-                      <IconClose20 size="mdS" color="greyDarker" />
+                      <Icon icon={IconTimes} size="mdS" color="greyDarker" />
                     ) : undefined
                   }
                   onClick={

@@ -12,6 +12,7 @@ import {
 } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
 import {
   analytics,
   featureSupportedChains,
@@ -22,7 +23,7 @@ import {
   Button,
   CopyToClipboard,
   Dialog,
-  IconCopy16,
+  Icon,
   TextIcon,
   Translate,
   useTargetNetwork,
@@ -221,7 +222,7 @@ const LinkENS = ({
                     onClick={copyToClipboard}
                   >
                     <TextIcon
-                      icon={<IconCopy16 color="black" size="xs" />}
+                      icon={<Icon icon={IconCopy} color="black" size="xs" />}
                       color="grey"
                       textPlacement="left"
                     >

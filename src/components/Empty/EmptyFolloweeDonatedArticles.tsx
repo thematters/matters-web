@@ -1,8 +1,9 @@
-import { Empty, IconEmptyWarning72, Translate } from '~/components'
+import { ReactComponent as IconWarn } from '@/public/static/icons/24px/warn.svg'
+import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyFolloweeDonatedArticles = () => (
   <Empty
-    icon={<IconEmptyWarning72 size="xxl" />}
+    icon={<Icon icon={IconWarn} size="xxl" />}
     description={
       <Translate
         zh_hant="還沒有支持的作品"

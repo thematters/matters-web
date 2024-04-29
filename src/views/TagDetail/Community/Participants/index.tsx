@@ -6,7 +6,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   usePublicQuery,
   UserDigest,
 } from '~/components'
@@ -57,7 +57,7 @@ const Participants = ({ id }: Props) => {
   }
 
   if (loading && (!edges || isNewLoading)) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

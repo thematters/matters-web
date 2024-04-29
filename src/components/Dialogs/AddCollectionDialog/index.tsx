@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 interface AddCollectionDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -8,7 +8,7 @@ interface AddCollectionDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseAddCollectionDialog = ({

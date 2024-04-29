@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
 import {
   PATHS,
   PAYMENT_CURRENCY as CURRENCY,
@@ -15,10 +16,10 @@ import { sleep } from '~/common/utils'
 import {
   Avatar,
   Button,
-  IconDollarCircle16,
-  IconSpinner16,
+  Icon,
   Spacer,
   Spinner,
+  SpinnerBlock,
   TextIcon,
   useEventListener,
   ViewerContext,
@@ -43,7 +44,7 @@ type HasDonatedArticle = NonNullable<
 
 const DynamicAnimation = dynamic(() => import('./Animation'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const SupportWidget = ({
@@ -121,7 +122,7 @@ const SupportWidget = ({
 
       {!showAnimation && (
         <section className={`${styles.donation} ${styles.note}`}>
-          {loading && <IconSpinner16 color="greyLight" size="lg" />}
+          {loading && <Spinner />}
 
           {!loading && isReader && (
             <>
@@ -214,7 +215,7 @@ const SupportWidget = ({
                   <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
                     <span className={styles.transactionButton}>
                       <TextIcon
-                        icon={<IconDollarCircle16 color="black" />}
+                        icon={<Icon icon={IconMoney} color="black" />}
                         color="black"
                         size="xs"
                         spacing="xxxtight"

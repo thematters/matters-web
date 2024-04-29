@@ -1,8 +1,9 @@
-import { Empty, IconBookmark24, Translate } from '~/components'
+import { ReactComponent as IconSave } from '@/public/static/icons/24px/save.svg'
+import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyBookmark = () => (
   <Empty
-    icon={<IconBookmark24 size="xxl" />}
+    icon={<Icon icon={IconSave} size="xxl" />}
     description={
       <>
         <Translate

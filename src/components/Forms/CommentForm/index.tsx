@@ -6,8 +6,8 @@ import { useIntl } from 'react-intl'
 import { dom, stripHtml } from '~/common/utils'
 import {
   Button,
-  IconSpinner16,
   Spinner,
+  SpinnerBlock,
   TextIcon,
   Translate,
   useMutation,
@@ -20,7 +20,7 @@ import styles from './styles.module.css'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 export type CommentFormType = 'article' | 'circleDiscussion' | 'circleBroadcast'
@@ -159,7 +159,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
             color="white"
             size="mdS"
             weight="md"
-            icon={isSubmitting && <IconSpinner16 size="sm" />}
+            icon={isSubmitting && <Spinner size="sm" />}
           >
             {isSubmitting ? null : (
               <Translate zh_hant="送出" zh_hans="送出" en="Send" />

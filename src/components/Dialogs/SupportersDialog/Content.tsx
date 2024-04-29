@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   useMediaQuery,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
@@ -45,7 +45,7 @@ const SupportersDialogContent = ({
     0
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {
@@ -98,7 +98,7 @@ const SupportersDialogContent = ({
 
       <Dialog.Content noSpacing>
         <InfiniteScroll
-          loader={<Spinner />}
+          loader={<SpinnerBlock />}
           loadMore={loadMore}
           hasNextPage={pageInfo.hasNextPage}
         >

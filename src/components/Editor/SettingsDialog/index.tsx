@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch, useStep } from '~/components'
 import {
   SetCollectionProps,
   SetCoverProps,
@@ -54,21 +54,21 @@ export type EditorSettingsDialogProps = {
 
 const DynamicEditorSearchSelectForm = dynamic(
   () => import('~/components/Forms/EditorSearchSelectForm'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicSetCover = dynamic(() => import('../SetCover'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const DynamicSetSupportFeedback = dynamic(
   () => import('~/components/Editor/ToggleAccess/SupportSettingDialog/Content'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicSetVersionDescription = dynamic(
   () => import('~/components/Editor/SetVersionDescription/Content'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const BaseEditorSettingsDialog = ({

@@ -1,10 +1,11 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconWorld } from '@/public/static/icons/24px/world.svg'
 import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 import {
   Button,
   Dropdown,
-  IconWorld16,
+  Icon,
   LanguageConsumer,
   LanguageContext,
   Menu,
@@ -71,7 +72,11 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
           aria-haspopup="listbox"
           ref={ref}
         >
-          <TextIcon icon={<IconWorld16 />} size={textSize} color={iconColor}>
+          <TextIcon
+            icon={<Icon icon={IconWorld} />}
+            size={textSize}
+            color={iconColor}
+          >
             {LANG_TEXT_MAP[lang]}
           </TextIcon>
         </Button>

@@ -175,7 +175,7 @@ export type ButtonProps = {
  *    spacing={['xtight', 'xtight']}
  *    onClick={onClick}
  *  >
- *    <IconBookmarked16 />
+ *    <Icon icon={IconSave} />
  *  </Button>
  *
  *  // with custom size, border, hover text & background

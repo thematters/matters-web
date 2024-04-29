@@ -1,7 +1,7 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 
-import { IconChecked } from '~/components'
-import { TextIcon } from '~/components/TextIcon'
+import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import { Icon, TextIcon } from '~/components'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.module.css'
@@ -34,7 +34,8 @@ const CheckBox: React.FC<CheckBoxProps> = ({
       <label className={styles.label} htmlFor={fieldId}>
         <TextIcon
           icon={
-            <IconChecked
+            <Icon
+              icon={IconCircleCheckFill}
               size="mdS"
               color={inputProps.checked ? 'green' : 'grey'}
             />

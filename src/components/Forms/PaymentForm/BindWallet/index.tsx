@@ -3,15 +3,16 @@ import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount, useSignMessage } from 'wagmi'
 
+import { ReactComponent as IconCircleCheck } from '@/public/static/icons/24px/circle-check.svg'
+import { ReactComponent as IconCircleTimes } from '@/public/static/icons/24px/circle-times.svg'
+import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
 import {
   Button,
-  IconCircleCheck40,
-  IconCircleTime40,
-  IconOpenWallet20,
+  Icon,
   TextIcon,
   useMutation,
   ViewerContext,
@@ -160,7 +161,7 @@ const BindWallet: React.FC<Props> = ({ currency, callback }) => {
               textWeight="normal"
               textSize="md"
               text={
-                <TextIcon icon={<IconOpenWallet20 size="mdS" />}>
+                <TextIcon icon={<Icon icon={IconOpenWallet} size="mdS" />}>
                   <FormattedMessage
                     defaultMessage="Go to sign"
                     id="P3y9Bo"
@@ -233,7 +234,7 @@ const BindWallet: React.FC<Props> = ({ currency, callback }) => {
             />
           </section>
           <section className={styles.resultIcon}>
-            <IconCircleCheck40 size="xlM" color="green" />
+            <Icon icon={IconCircleCheck} size="xlM" color="green" />
           </section>
           <section className={styles.resultInfo}>
             <FormattedMessage
@@ -263,7 +264,7 @@ const BindWallet: React.FC<Props> = ({ currency, callback }) => {
             />
           </section>
           <section className={styles.resultIcon}>
-            <IconCircleTime40 size="xlM" color="red" />
+            <Icon icon={IconCircleTimes} size="xlM" color="red" />
           </section>
           <section className={styles.resultInfo}>
             <FormattedMessage

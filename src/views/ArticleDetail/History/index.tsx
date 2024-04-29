@@ -13,7 +13,7 @@ import {
   Layout,
   Media,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   Title,
   toast,
@@ -57,12 +57,12 @@ type RevisionVersion = NonNullable<
 
 const DynamicCircleWall = dynamic(() => import('../Wall/Circle'), {
   ssr: true, // enable for first screen
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const DynamicSensitiveWall = dynamic(() => import('../Wall/Sensitive'), {
   ssr: true, // enable for first screen
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const isMediaHashPossiblyValid = (mediaHash?: string | null) => {

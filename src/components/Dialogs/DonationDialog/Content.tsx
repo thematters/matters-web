@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Spinner, Translate, ViewerContext } from '~/components'
+import { SpinnerBlock, Translate, ViewerContext } from '~/components'
 import { PayToMutation } from '~/gql/graphql'
 
 import { BaseDonationDialogProps, Step } from './types'
@@ -28,39 +28,39 @@ export type DonationDialogContentProps = BaseDonationDialogProps & {
 
 const DynamicPayToFormComplete = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Complete'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPayToFormConfirm = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Confirm'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPayToFormCurrencyChoice = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/CurrencyChoice'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicWalletAuthFormSelect = dynamic(
   () => import('~/components/Forms/WalletAuthForm/Select'),
-  { ssr: false, loading: () => <Spinner /> }
+  { ssr: false, loading: () => <SpinnerBlock /> }
 )
 const DynamicPayToFormSetAmount = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/SetAmount'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPaymentProcessingForm = dynamic(
   () => import('~/components/Forms/PaymentForm/Processing'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPaymentSetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DonationDialogContent = ({

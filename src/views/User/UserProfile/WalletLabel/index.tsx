@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { namehash } from 'viem/ens'
 import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
 
+import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
 import {
   analytics,
   featureSupportedChains,
@@ -13,7 +14,7 @@ import {
   CopyToClipboard,
   Dialog,
   ENSDialog,
-  IconWallet20,
+  Icon,
   Tooltip,
   Translate,
   useDialogSwitch,
@@ -65,7 +66,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
 
   const Content = (
     <span className={styles.wallet} onClick={openDialog}>
-      <IconWallet20 size="mdS" />
+      <Icon icon={IconWallet} size="mdS" />
     </span>
   )
 

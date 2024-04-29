@@ -1,9 +1,10 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconCollection } from '@/public/static/icons/24px/collection.svg'
 import {
   ArticleDigestDropdown,
   EditorSearchSelectDialog,
-  IconCollection24,
+  Icon,
 } from '~/components'
 import { SetCollectionProps } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
@@ -46,7 +47,7 @@ const SidebarCollection = ({
     >
       {({ openDialog }) => (
         <Box
-          icon={<IconCollection24 size="md" />}
+          icon={<Icon icon={IconCollection} size="md" />}
           title={
             <FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />
           }

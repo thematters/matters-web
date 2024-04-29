@@ -3,8 +3,10 @@ import { Formik } from 'formik'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconMinus } from '@/public/static/icons/24px/minus.svg'
+import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
 import { translate } from '~/common/utils'
-import { IconClear16, IconSearch16, LanguageContext } from '~/components'
+import { Icon, LanguageContext } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -107,7 +109,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
               type="submit"
               aria-label={translate({ id: 'search', lang })}
             >
-              <IconSearch16 color="green" />
+              <Icon icon={IconNavSearch} color="green" />
             </button>
 
             {value && (
@@ -123,7 +125,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
                   setValues({ q: '' })
                 }}
               >
-                <IconClear16 color="grey" />
+                <Icon icon={IconMinus} color="grey" />
               </button>
             )}
           </form>

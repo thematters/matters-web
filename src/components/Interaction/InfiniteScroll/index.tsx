@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { Spinner, useIntersectionObserver } from '~/components'
+import { SpinnerBlock, useIntersectionObserver } from '~/components'
 
 import EndOfResults from './EndOfResults'
 
@@ -12,7 +12,7 @@ import EndOfResults from './EndOfResults'
  *     loadMore={loadMore}
  *     loading={loading}
  *     Loader={
- *         <Spinner />
+ *         <SpinnerBlock />
  *     }
  *   >
  *     {edges.map(el => (
@@ -48,7 +48,7 @@ interface Props {
 
 export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
   hasNextPage,
-  loader = <Spinner />,
+  loader = <SpinnerBlock />,
   loadMore,
   eof,
   eofSpacingTop,

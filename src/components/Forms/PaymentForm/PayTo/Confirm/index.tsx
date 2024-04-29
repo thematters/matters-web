@@ -4,6 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_PASSSWORD_LENGTH,
@@ -13,12 +14,12 @@ import {
   BindEmailHintDialog,
   Dialog,
   Form,
-  IconOpenWallet20,
+  Icon,
   // IconExternalLink16,
   LanguageContext,
   ResetPaymentPasswordDialog,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   useMutation,
   ViewerContext,
@@ -184,7 +185,7 @@ const Confirm: React.FC<FormProps> = ({
   if (loading) {
     return (
       <Dialog.Content>
-        <Spinner />
+        <SpinnerBlock />
       </Dialog.Content>
     )
   }
@@ -208,7 +209,7 @@ const Confirm: React.FC<FormProps> = ({
 
       {isSubmitting && (
         <>
-          <Spinner noSpacing />
+          <SpinnerBlock />
           <p className={styles.hint}>
             <FormattedMessage
               defaultMessage="Transaction in progress, please wait"
@@ -263,7 +264,7 @@ const Confirm: React.FC<FormProps> = ({
             textWeight="normal"
             textSize="md"
             text={
-              <TextIcon icon={<IconOpenWallet20 size="mdS" />}>
+              <TextIcon icon={<Icon icon={IconOpenWallet} size="mdS" />}>
                 {isUSDT && (
                   <FormattedMessage
                     defaultMessage="Confirm authorization"

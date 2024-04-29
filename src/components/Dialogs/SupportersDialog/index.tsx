@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import dynamic from 'next/dynamic'
 
 import { TEST_ID } from '~/common/enums'
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 import { SupportsDialogArticleFragment } from '~/gql/graphql'
 
 export interface SupportersDialogProps {
@@ -23,7 +23,7 @@ const fragments = {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseSupportersDialog = ({ article, children }: SupportersDialogProps) => {

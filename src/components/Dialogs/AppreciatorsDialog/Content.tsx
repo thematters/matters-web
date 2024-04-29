@@ -7,7 +7,7 @@ import {
   Dialog,
   InfiniteScroll,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Translate,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
@@ -73,7 +73,7 @@ const AppreciatorsDialogContent = ({
     0
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {
@@ -116,7 +116,7 @@ const AppreciatorsDialogContent = ({
 
       <Dialog.Content noSpacing>
         <InfiniteScroll
-          loader={<Spinner />}
+          loader={<SpinnerBlock />}
           loadMore={loadMore}
           hasNextPage={pageInfo.hasNextPage}
         >

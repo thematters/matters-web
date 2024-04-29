@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react'
 
 import { redirectToHomePage } from '~/common/utils'
-import { Layout, Spinner, ViewerContext } from '~/components'
+import { Layout, SpinnerBlock, ViewerContext } from '~/components'
 
 export const Protected: React.FC<{ children?: React.ReactNode }> = ({
   children,
@@ -20,7 +20,7 @@ export const Protected: React.FC<{ children?: React.ReactNode }> = ({
 
   return (
     <Layout.Main>
-      <Spinner />
+      <SpinnerBlock />
     </Layout.Main>
   )
 }

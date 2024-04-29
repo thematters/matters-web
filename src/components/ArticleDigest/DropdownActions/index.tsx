@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
   AddCollectionsArticleDialog,
@@ -13,14 +14,14 @@ import {
   BookmarkButton,
   Button,
   Dropdown,
-  IconMore16,
+  Icon,
   IconSize,
   Menu,
   RemoveArticleCollectionDialog,
   RemoveArticleCollectionDialogProps,
   ShareDialog,
   ShareDialogProps,
-  Spinner,
+  SpinnerBlock,
   SubmitReport,
   SupportersDialog,
   SupportersDialogProps,
@@ -32,10 +33,8 @@ import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
 import AddCollectionButton from './AddCollectionButton'
-import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
 import { ArchiveArticleDialogProps } from './ArchiveArticle/Dialog'
-import DonatorsButton from './DonatorsButton'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
 import { fragments } from './gql'
@@ -58,12 +57,12 @@ const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
 
 const DynamicToggleRecommendArticleButton = dynamic(
   () => import('./ToggleRecommendArticle/Button'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicToggleRecommendArticleDialog = dynamic(
   () => import('./ToggleRecommendArticle/Dialog'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 export interface DropdownActionsControls {
@@ -95,8 +94,6 @@ export interface DropdownActionsControls {
   hasArchive?: boolean
   hasEdit?: boolean
   hasBookmark?: boolean
-  hasAppreciators?: boolean
-  hasDonators?: boolean
 
   collectionId?: string
   collectionArticleCount?: number
@@ -117,9 +114,7 @@ type DropdownActionsProps = {
 
 interface Controls {
   hasShare: boolean
-  hasAppreciators: boolean
   hasIPFS: boolean
-  hasDonators: boolean
   hasExtend: boolean
   hasReport: boolean
   hasSticky: boolean
@@ -163,9 +158,7 @@ const BaseDropdownActions = ({
   disabled,
 
   hasShare,
-  hasAppreciators,
   hasIPFS,
-  hasDonators,
   hasExtend,
   hasReport,
   hasSticky,
@@ -195,13 +188,7 @@ const BaseDropdownActions = ({
   openToggleRecommendDialog,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
-  const hasPublic =
-    hasShare ||
-    hasAppreciators ||
-    hasDonators ||
-    hasIPFS ||
-    hasExtend ||
-    hasReport
+  const hasPublic = hasShare || hasIPFS || hasExtend || hasReport
   const hasPrivate =
     hasSticky ||
     hasArchive ||
@@ -213,10 +200,6 @@ const BaseDropdownActions = ({
     <Menu>
       {/* public */}
       {hasShare && <ShareButton openDialog={openShareDialog} />}
-      {hasAppreciators && (
-        <AppreciatorsButton openDialog={openAppreciatorsDialog} />
-      )}
-      {hasDonators && <DonatorsButton openDialog={openSupportersDialog} />}
       {hasIPFS && <IPFSButton article={article} />}
       {hasExtend && <ExtendButton article={article} />}
       {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
@@ -319,7 +302,7 @@ const BaseDropdownActions = ({
             ref={ref}
             className={styles.moreButton}
           >
-            {icon ? icon : <IconMore16 size={size} />}
+            {icon ? icon : <Icon icon={IconMore} size={size} />}
           </button>
         ) : (
           <Button
@@ -333,7 +316,7 @@ const BaseDropdownActions = ({
             ref={ref}
             disabled={disabled}
           >
-            {icon ? icon : <IconMore16 size={size} />}
+            {icon ? icon : <Icon icon={IconMore} size={size} />}
           </Button>
         )
       }
@@ -359,8 +342,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
     hasEdit,
     hasArchive,
-    hasDonators,
-    hasAppreciators,
     hasBookmark = true,
     hasAddCollection,
     hasRemoveCollection,
@@ -383,10 +364,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const controls = {
     // public
     hasShare: !!hasShare,
-    hasAppreciators:
-      hasAppreciators && article.likesReceived.totalCount > 0 && !inCard,
-    hasDonators:
-      hasDonators && article.donationsDialog.totalCount > 0 && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
     hasReport: !!hasReport && !isArticleAuthor,
 

@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 interface SetPaymentPasswordDialogProps {
   submitCallback: () => void
@@ -8,7 +8,7 @@ interface SetPaymentPasswordDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseSetPaymentPasswordDialog = ({

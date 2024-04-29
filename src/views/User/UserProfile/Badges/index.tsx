@@ -1,16 +1,17 @@
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/20px/badge-architect.svg'
-import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/20px/badge-civic-liker.svg'
-import { ReactComponent as IconGoldenMotorBadge } from '@/public/static/icons/20px/badge-golden-motor.svg'
-import { ReactComponent as IconNomad1Badge } from '@/public/static/icons/20px/badge-nomad1-moon.svg'
-import { ReactComponent as IconNomad2Badge } from '@/public/static/icons/20px/badge-nomad2-star.svg'
-import { ReactComponent as IconNomad3Badge } from '@/public/static/icons/20px/badge-nomad3-light.svg'
-import { ReactComponent as IconNomad4Badge } from '@/public/static/icons/20px/badge-nomad4-fire.svg'
-import { ReactComponent as IconSeedBadge } from '@/public/static/icons/20px/badge-seed.svg'
-import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/20px/badge-traveloggers.svg'
-import { IconArrowAction24, Tooltip, Translate, withIcon } from '~/components'
+import { ReactComponent as IconNomad1Badge } from '@/public/static/icons/24px/badge-nomad1-moon.svg'
+import { ReactComponent as IconNomad2Badge } from '@/public/static/icons/24px/badge-nomad2-star.svg'
+import { ReactComponent as IconNomad3Badge } from '@/public/static/icons/24px/badge-nomad3-light.svg'
+import { ReactComponent as IconNomad4Badge } from '@/public/static/icons/24px/badge-nomad4-fire.svg'
+import { ReactComponent as IconCivicLikerBadge } from '@/public/static/icons/24px/civic-liker.svg'
+import { ReactComponent as IconGoldenMotorBadge } from '@/public/static/icons/24px/golden-motor-award.svg'
+import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/24px/matters-architect.svg'
+import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import { ReactComponent as IconSeedBadge } from '@/public/static/icons/24px/seed-user.svg'
+import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/24px/traveloggers.svg'
+import { Icon, Tooltip, Translate, withIcon } from '~/components'
 
 // import { BadgeNomadDialog } from '../BadgeNomadLabel'
 import styles from './styles.module.css'
@@ -234,7 +235,7 @@ export const NomadBadge = ({
             />
           </section>
         </section>
-        <IconArrowAction24 size="md" color="greyDarker" />
+        <Icon icon={IconRight} size="md" color="greyDarker" />
       </section>
     )
   }

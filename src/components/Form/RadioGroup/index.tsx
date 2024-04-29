@@ -2,7 +2,9 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useEffect, useRef } from 'react'
 
-import { IconCircleCheck20, IconCircleChecked20 } from '~/components/Icon'
+import { ReactComponent as IconCircleCheckedFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import { ReactComponent as IconCircleEmpty } from '@/public/static/icons/24px/circle-empty.svg'
+import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 
 import Field, { FieldProps } from '../Field'
@@ -80,9 +82,9 @@ const RadioInput: React.FC<RadioInputProps> = ({
           size="sm"
           icon={
             isActive ? (
-              <IconCircleChecked20 size="mdS" color="green" />
+              <Icon icon={IconCircleCheckedFill} size="mdS" color="green" />
             ) : (
-              <IconCircleCheck20 size="mdS" />
+              <Icon icon={IconCircleEmpty} size="mdS" />
             )
           }
         >

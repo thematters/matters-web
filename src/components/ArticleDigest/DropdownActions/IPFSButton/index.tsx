@@ -1,5 +1,6 @@
+import { ReactComponent as IconIPFS } from '@/public/static/icons/24px/ipfs.svg'
 import { toPath } from '~/common/utils'
-import { IconIPFS24, Menu } from '~/components'
+import { Icon, Menu } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
 type IPFSButtonProps = {
@@ -10,7 +11,7 @@ const IPFSButton: React.FC<IPFSButtonProps> = ({ article }) => {
   return (
     <Menu.Item
       text="IPFS"
-      icon={<IconIPFS24 size="mdS" />}
+      icon={<Icon icon={IconIPFS} size="mdS" />}
       ariaHasPopup="dialog"
       href={
         toPath({

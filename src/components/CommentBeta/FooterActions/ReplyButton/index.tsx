@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
@@ -10,7 +11,7 @@ import {
   Button,
   ButtonProps,
   CommentFormType,
-  IconComment2V16,
+  Icon,
   ViewerContext,
 } from '~/components'
 import { ReplyComemntFragment } from '~/gql/graphql'
@@ -74,7 +75,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
       })}
       {...props}
     >
-      <IconComment2V16 size="mdXS" />
+      <Icon icon={IconComment} size="mdXS" />
     </Button>
   )
 }

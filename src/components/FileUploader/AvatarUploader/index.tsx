@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
 
+import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
@@ -14,9 +15,9 @@ import {
   AvatarProps,
   CircleAvatar,
   CircleAvatarProps,
-  IconCamera24,
+  Icon,
   LanguageContext,
-  Spinner,
+  SpinnerBlock,
   toast,
   Translate,
   useDirectImageUpload,
@@ -149,9 +150,9 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
       <div className={styles.mask}>
         {loading || uploading ? (
-          <Spinner />
+          <SpinnerBlock />
         ) : (
-          <IconCamera24 color="white" size="lg" />
+          <Icon icon={IconCamera} color="white" size="lg" />
         )}
       </div>
 

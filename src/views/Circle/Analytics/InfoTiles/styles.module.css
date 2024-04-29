@@ -78,7 +78,7 @@
     }
 
     &.negative {
-      color: var(--color-red);
+      color: var(--color-negative-red);
       background-color: var(--color-red-lighter);
     }
   }

@@ -3,6 +3,8 @@ import classNames from 'classnames'
 import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
 
+import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import {
   ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
@@ -14,11 +16,9 @@ import {
   Button,
   Cover,
   CoverProps,
-  IconCamera24,
-  IconCamera32,
-  IconClose2V32,
+  Icon,
   LanguageContext,
-  Spinner,
+  SpinnerBlock,
   toast,
   Translate,
   useDirectImageUpload,
@@ -169,9 +169,9 @@ export const CoverUploader = ({
   const Mask = () => (
     <div className={styles.mask}>
       {loading || uploading ? (
-        <Spinner />
+        <SpinnerBlock />
       ) : (
-        <IconCamera24 color="white" size="xl" />
+        <Icon icon={IconCamera} color="white" size="xl" />
       )}
     </div>
   )
@@ -184,13 +184,13 @@ export const CoverUploader = ({
     return (
       <div className={maskClasses}>
         {loading || uploading ? (
-          <Spinner color={cover ? 'greyLight' : 'white'} />
+          <SpinnerBlock color={cover ? 'greyLight' : 'white'} />
         ) : (
           <section className={styles.userProfileCover}>
-            <IconCamera32 color="white" size="lg" />
+            <Icon icon={IconCamera} color="white" size="lg" />
             {cover && (
               <Button onClick={removeCover}>
-                <IconClose2V32 color="white" size="lg" />
+                <Icon icon={IconTimes} color="white" size="lg" />
               </Button>
             )}
           </section>

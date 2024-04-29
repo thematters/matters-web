@@ -2,10 +2,11 @@ import classNames from 'classnames'
 import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
 import { capitalizeFirstLetter, collapseContent } from '~/common/utils'
 import {
   Button,
-  IconArrowUp16,
+  Icon,
   TextIcon,
   Translate,
   Truncate,
@@ -121,7 +122,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
               setExpand(!expand)
             }}
           >
-            <TextIcon icon={<IconArrowUp16 />} textPlacement="left">
+            <TextIcon icon={<Icon icon={IconUp} />} textPlacement="left">
               <Translate zh_hans="收起" zh_hant="收合" en="collapse" />
             </TextIcon>
           </Button>

@@ -1,15 +1,11 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
+import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
+import { ReactComponent as IconPrice } from '@/public/static/icons/price.svg'
 import { numAbbr, translate } from '~/common/utils'
-import {
-  IconArticle16,
-  IconPrice12,
-  IconUser16,
-  LanguageContext,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { Icon, LanguageContext, TextIcon, Translate } from '~/components'
 import {
   FollowingFeedRecommendCircleFooterPrivateFragment,
   FollowingFeedRecommendCircleFooterPublicFragment,
@@ -63,7 +59,7 @@ const Footer = ({ circle }: Props) => {
     <footer>
       <section className={styles.footer}>
         <TextIcon
-          icon={<IconUser16 size="xs" />}
+          icon={<Icon icon={IconUser} size="xs" />}
           color="grey"
           weight="md"
           size="sm"
@@ -78,7 +74,7 @@ const Footer = ({ circle }: Props) => {
         </TextIcon>
 
         <TextIcon
-          icon={<IconArticle16 size="xs" />}
+          icon={<Icon icon={IconDraft} size="xs" />}
           color="grey"
           weight="md"
           size="sm"
@@ -94,7 +90,7 @@ const Footer = ({ circle }: Props) => {
 
         {price && (
           <TextIcon
-            icon={<IconPrice12 size="xs" />}
+            icon={<Icon icon={IconPrice} size="xs" />}
             color="grey"
             weight="md"
             size="sm"

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
-import { Spinner } from '~/components'
+import { SpinnerBlock } from '~/components'
 
 import { BaseENSDialogProps, Step } from './types'
 
@@ -13,19 +13,19 @@ type ENSDialogContentProps = BaseENSDialogProps & {
 
 const DynamicConnectWallet = dynamic(() => import('./ConnectWallet'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 const DynamicWalletAuthFormSelect = dynamic(
   () => import('~/components/Forms/WalletAuthForm/Select'),
-  { ssr: false, loading: () => <Spinner /> }
+  { ssr: false, loading: () => <SpinnerBlock /> }
 )
 const DynamicLinkENS = dynamic(() => import('./LinkENS'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 const DynamicComplete = dynamic(() => import('./Complete'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const ENSDialogContent: React.FC<ENSDialogContentProps> = ({

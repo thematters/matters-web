@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconComment88 } from '@/public/static/icons/88px/comment.svg'
+import { ReactComponent as IconEmptyComment } from '@/public/static/icons/empty-comment.svg'
 import { Empty, withIcon } from '~/components'
 
 export const EmptyComment = ({
@@ -9,7 +9,7 @@ export const EmptyComment = ({
   description?: React.ReactNode
 }) => (
   <Empty
-    icon={withIcon(IconComment88)({ size: 'xxxlM' })}
+    icon={withIcon(IconEmptyComment)({ size: 'xxxlM' })}
     spacingY="loose"
     description={
       description || (

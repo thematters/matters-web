@@ -31,6 +31,6 @@
     margin-top: var(--spacing-loose);
     font-size: var(--font-size-xs);
     line-height: 1.125rem;
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 }

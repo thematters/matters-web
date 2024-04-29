@@ -209,6 +209,10 @@
     "defaultMessage": "Response",
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
   },
+  "24jhEp": {
+    "defaultMessage": "Failed to republish {articleTitle}",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
+  },
   "25oM9Q": {
     "defaultMessage": "Sort"
   },
@@ -1191,10 +1195,6 @@
     "defaultMessage": "Tag not found",
     "description": "TAG_NOT_FOUND"
   },
-  "NONfAh": {
-    "defaultMessage": "Douban",
-    "description": "src/components/Share/Buttons/Douban.tsx"
-  },
   "NYTGIb": {
     "defaultMessage": "Got it"
   },
@@ -1303,10 +1303,6 @@
   "QUqfbW": {
     "defaultMessage": "Describe more about your Circle",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
-  "QV19cI": {
-    "defaultMessage": "Failed to republish article",
-    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "QXJQ5G": {
     "defaultMessage": "Please log in again.",
@@ -2384,10 +2380,6 @@
   "rADhX5": {
     "defaultMessage": "Unavailable",
     "description": "FORBIDDEN_BY_STATE"
-  },
-  "rBjwQy": {
-    "defaultMessage": "Weibo",
-    "description": "src/components/Share/Buttons/Weibo.tsx"
   },
   "rDX3h6": {
     "defaultMessage": "Version Description"

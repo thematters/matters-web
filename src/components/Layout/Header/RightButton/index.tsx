@@ -1,10 +1,4 @@
-import {
-  Button,
-  ButtonProps,
-  IconSpinner16,
-  Media,
-  TextIcon,
-} from '~/components'
+import { Button, ButtonProps, Media, Spinner, TextIcon } from '~/components'
 
 type RightButtonProps = {
   text: string | React.ReactNode
@@ -24,7 +18,7 @@ export const RightButton: React.FC<RightButtonProps> = ({
             color="green"
             size="md"
             weight="md"
-            icon={loading && <IconSpinner16 size="sm" />}
+            icon={loading && <Spinner size="sm" />}
           >
             {!loading ? text : null}
           </TextIcon>
@@ -41,7 +35,7 @@ export const RightButton: React.FC<RightButtonProps> = ({
             color="white"
             size="md"
             weight="md"
-            icon={loading && <IconSpinner16 size="sm" />}
+            icon={loading && <Spinner size="sm" />}
           >
             {!loading ? text : null}
           </TextIcon>

@@ -1,13 +1,10 @@
 import React from 'react'
 
-import {
-  IconDonate24,
-  IconExpand16,
-  IconExternalLink16,
-  IconPin24,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { ReactComponent as IconDonate } from '@/public/static/icons/24px/donate.svg'
+import { ReactComponent as IconExpand } from '@/public/static/icons/24px/expand.svg'
+import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
+import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
+import { Icon, TextIcon, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -15,14 +12,18 @@ const Toasts = () => (
   <section className={styles.container}>
     <ul>
       <li>
-        <TextIcon icon={<IconPin24 size="md" />} size="md" spacing="base">
+        <TextIcon
+          icon={<Icon icon={IconPin} size="md" />}
+          size="md"
+          spacing="base"
+        >
           <Translate id="pinArticle" />
         </TextIcon>
       </li>
 
       <li>
         <TextIcon
-          icon={<IconDonate24 size="mdS" />}
+          icon={<Icon icon={IconDonate} size="mdS" />}
           weight="md"
           spacing="xtight"
           size="sm"
@@ -32,12 +33,12 @@ const Toasts = () => (
       </li>
 
       <li>
-        <TextIcon icon={<IconExternalLink16 color="grey" size="sm" />} />
+        <TextIcon icon={<Icon icon={IconExternal} color="grey" size="sm" />} />
       </li>
 
       <li>
         <TextIcon
-          icon={<IconExpand16 size="xs" />}
+          icon={<Icon icon={IconExpand} size="xs" />}
           textPlacement="left"
           weight="normal"
           color="grey"

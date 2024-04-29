@@ -7,7 +7,7 @@ import {
   List,
   QueryError,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   Translate,
   UserDigest,
@@ -68,7 +68,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
   )
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

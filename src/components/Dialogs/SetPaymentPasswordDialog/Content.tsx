@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import {
   Dialog,
   SetPaymentPasswordForm,
-  Spinner,
+  SpinnerBlock,
   Translate,
   useStep,
 } from '~/components'
@@ -74,7 +74,7 @@ const SetPaymentPasswordContent: React.FC<FormProps> = ({
           step={currStep}
           forward={forward}
           header={header}
-          loading={<Spinner />}
+          loading={<SpinnerBlock />}
         />
       </Dialog.Content>
 

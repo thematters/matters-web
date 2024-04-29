@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Spinner, Translate } from '~/components'
+import { Dialog, SpinnerBlock, Translate } from '~/components'
 import { ViewerLikerIdQuery } from '~/gql/graphql'
 
 interface Props {
@@ -78,7 +78,7 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
             </h3>
           ) : (
             <>
-              <Spinner />
+              <SpinnerBlock />
 
               <p>
                 <Translate

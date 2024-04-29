@@ -11,7 +11,7 @@ import { dom, stripHtml } from '~/common/utils'
 import {
   Button,
   CommentDraftsContext,
-  IconSpinner16,
+  SpinnerBlock,
   TextIcon,
   useMutation,
   useRoute,
@@ -225,7 +225,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
             <TextIcon
               color="white"
               size="sm"
-              icon={isSubmitting && <IconSpinner16 size="sm" />}
+              icon={isSubmitting && <SpinnerBlock size="sm" />}
             >
               {isSubmitting ? null : (
                 <FormattedMessage defaultMessage="Publish" id="syEQFE" />

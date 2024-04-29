@@ -161,5 +161,4 @@ export enum TEST_ID {
 
   // misc
   RESPONSIVE_IMG = 'responsive-img',
-  SPINNER = 'spinner',
 }

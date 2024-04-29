@@ -11,7 +11,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Translate,
 } from '~/components'
 import { FollowingFeedQuery } from '~/gql/graphql'
@@ -31,7 +31,7 @@ const FollowingFeed = () => {
     useQuery<FollowingFeedQuery>(FOLLOWING_FEED)
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

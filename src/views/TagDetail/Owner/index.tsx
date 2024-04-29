@@ -1,9 +1,10 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconAvatarEmpty } from '@/public/static/icons/24px/avatar-empty.svg'
 import {
   Button,
-  IconAvatarEmpty24,
+  Icon,
   TagAdoptionDialog,
   TextIcon,
   toast,
@@ -37,7 +38,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
       <section className={styles.container}>
         <section className={styles.left}>
           <TextIcon
-            icon={<IconAvatarEmpty24 size="md" />}
+            icon={<Icon icon={IconAvatarEmpty} size="md" />}
             color="greyDark"
             size="mdS"
             spacing="xtight"

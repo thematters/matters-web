@@ -7,7 +7,7 @@ import { translate } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
-  Spinner,
+  SpinnerBlock,
   toast,
   useDialogSwitch,
   useMutation,
@@ -31,11 +31,11 @@ interface AddCircleArticleDialogProps {
 
 const DynamicSearchSelectForm = dynamic(
   () => import('~/components/Forms/SearchSelectForm'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicConfirmContent = dynamic(() => import('./ConfirmContent'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const AddCircleArticleDialog = ({
