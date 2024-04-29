@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import { useEffect } from 'react'
 
 import { analytics } from '~/common/utils'
-import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch, useStep } from '~/components'
 
 import { fragments } from './gql'
 import { BaseDonationDialogProps, Step } from './types'
@@ -13,7 +13,7 @@ type DonationDialogProps = BaseDonationDialogProps & {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseDonationDialog = ({

@@ -1,11 +1,12 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
 import { PATHS } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
-  IconLikeCoin40,
+  Icon,
   TextIcon,
   Translate,
   ViewerContext,
@@ -24,7 +25,7 @@ type LikeCoinChoiceProps = {
 
 const IconLikeDisabled = () => (
   <TextIcon
-    icon={<IconLikeCoin40 size="xlM" color="grey" />}
+    icon={<Icon icon={IconLikeCoin} size="xlM" color="grey" />}
     size="md"
     spacing="xtight"
     color="grey"
@@ -90,7 +91,11 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
       className={`${styles.item} ${styles.clickable}`}
       onClick={switchToSetAmount}
     >
-      <TextIcon icon={<IconLikeCoin40 size="xlM" />} size="md" spacing="xtight">
+      <TextIcon
+        icon={<Icon icon={IconLikeCoin} size="xlM" />}
+        size="md"
+        spacing="xtight"
+      >
         LikeCoin
       </TextIcon>
 

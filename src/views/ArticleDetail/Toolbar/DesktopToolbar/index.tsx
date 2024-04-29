@@ -86,9 +86,7 @@ const DesktopToolbar = ({
     hasEdit: true,
     hasArchive: true,
     hasAddCollection: true,
-    hasDonators: false,
     hasExtend: false,
-    hasAppreciators: false,
     ...props,
   }
 

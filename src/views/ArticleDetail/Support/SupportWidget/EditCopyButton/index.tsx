@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Button, IconEdit20, TextIcon } from '~/components'
+import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import { Button, Icon, TextIcon } from '~/components'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
@@ -39,7 +40,11 @@ const EditCopyButton = ({ article, disabled }: EditCopyButtonProps) => {
             disabled={disabled}
             onClick={openDialog}
           >
-            <TextIcon icon={<IconEdit20 size="mdS" />} size="md" color="gold">
+            <TextIcon
+              icon={<Icon icon={IconEdit} size="mdS" />}
+              size="md"
+              color="gold"
+            >
               <FormattedMessage
                 defaultMessage="Support setting"
                 id="RGEpvx"

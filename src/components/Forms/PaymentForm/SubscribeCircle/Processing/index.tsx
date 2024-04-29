@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
-import { Dialog, Spinner } from '~/components'
+import { Dialog, SpinnerBlock } from '~/components'
 import { ViewerCircleStateQuery } from '~/gql/graphql'
 
 import { VIEWER_CIRLCE_STATE } from './gql'
@@ -51,7 +51,7 @@ const Processing: React.FC<Props> = ({ circleName, nextStep }) => {
             <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.NETWORK_ERROR]} />
           </h3>
         ) : (
-          <Spinner />
+          <SpinnerBlock />
         )}
       </Dialog.Content.Message>
     </Dialog.Content>

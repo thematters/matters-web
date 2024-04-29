@@ -1,10 +1,11 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import { TEST_ID } from '~/common/enums'
 import { validateTagName } from '~/common/utils'
 import {
   Card,
-  IconAdd16,
+  Icon,
   LanguageContext,
   TextIcon,
   toast,
@@ -41,7 +42,7 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
       <section className={styles.addTag}>
-        <TextIcon icon={<IconAdd16 />} color="green" size="md">
+        <TextIcon icon={<Icon icon={IconPlus} />} color="green" size="md">
           <Translate id="create" />
         </TextIcon>
 

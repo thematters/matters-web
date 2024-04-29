@@ -4,14 +4,15 @@ import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconFiatCurrency } from '@/public/static/icons/24px/fiat-currency.svg'
 import { PAYMENT_CURRENCY as CURRENCY, TEST_ID } from '~/common/enums'
 import { formatAmount, translate } from '~/common/utils'
 import {
   CurrencyFormatter,
   Dialog,
-  IconFiatCurrency40,
+  Icon,
   LanguageContext,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   Translate,
   UserDigest,
@@ -127,7 +128,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
         aria-label={translate({ id: 'fiatCurrency', lang })}
       >
         <TextIcon
-          icon={<IconFiatCurrency40 size="xlM" />}
+          icon={<Icon icon={IconFiatCurrency} size="xlM" />}
           size="md"
           spacing="xtight"
         >
@@ -155,7 +156,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
   )
 
   if (exchangeRateLoading || loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   return (

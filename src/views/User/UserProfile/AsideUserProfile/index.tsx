@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import {
   OPEN_SHOW_NOMAD_BADGE_DIALOG,
   TEST_ID,
@@ -14,7 +15,7 @@ import {
   EditProfileDialog,
   Expandable,
   FollowUserButton,
-  IconCamera24,
+  Icon,
   LinkWrapper,
   usePublicQuery,
   useRoute,
@@ -166,7 +167,7 @@ export const AsideUserProfile = () => {
               >
                 <Avatar size="xxxxl" user={user} inProfile />
                 <div className={styles.mask}>
-                  <IconCamera24 color="white" size="xlM" />
+                  <Icon icon={IconCamera} color="white" size="xlM" />
                 </div>
               </section>
             )}

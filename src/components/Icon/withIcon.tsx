@@ -40,9 +40,11 @@ export interface IconProps {
   [key: string]: any
 }
 
-export const withIcon = (
-  WrappedIcon: React.FunctionComponent<React.SVGProps<HTMLOrSVGElement>>
-) => {
+export type WrappedIcon = React.FunctionComponent<
+  React.SVGProps<HTMLOrSVGElement>
+>
+
+export const withIcon = (WrappedIcon: WrappedIcon) => {
   const InnerIcon = (props: IconProps) => {
     const { size = '', color = '', className, ...restProps } = props
     const iconClasses = classNames({

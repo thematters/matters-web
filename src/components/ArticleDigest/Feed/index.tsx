@@ -1,10 +1,11 @@
 import React from 'react'
 
+import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
 import {
   DateTime,
-  IconDotDivider,
+  Icon,
   LinkWrapper,
   Media,
   ResponsiveImage,
@@ -104,7 +105,7 @@ const BaseArticleDigestFeed = ({
                       hasDisplayName
                       onClick={onClickAuthor}
                     />
-                    <IconDotDivider color="greyLight" size="mdS" />
+                    <Icon icon={IconDot} color="greyLight" size="mdS" />
                   </section>
                 </>
               )}

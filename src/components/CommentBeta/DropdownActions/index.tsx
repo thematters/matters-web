@@ -4,12 +4,13 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
   Button,
   CommentFormType,
   Dropdown,
-  IconMore16,
+  Icon,
   Menu,
   SubmitReport,
   ThreadCommentType,
@@ -166,7 +167,7 @@ const BaseDropdownActions = ({
           aria-haspopup="listbox"
           ref={ref}
         >
-          <IconMore16 size="mdXS" />
+          <Icon icon={IconMore} size="mdXS" />
         </Button>
       )}
     </Dropdown>

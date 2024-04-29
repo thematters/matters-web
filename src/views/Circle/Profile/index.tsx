@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import { numAbbr, stripSpaces } from '~/common/utils'
@@ -11,7 +11,7 @@ import {
   Expandable,
   Head,
   Layout,
-  Spinner,
+  SpinnerBlock,
   SubscribeCircleDialog,
   Throw404,
   useEventListener,
@@ -152,7 +152,7 @@ const CircleProfile = () => {
     return (
       <>
         <LayoutHeader />
-        <Spinner />
+        <SpinnerBlock />
       </>
     )
   }

@@ -3,14 +3,15 @@ import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { arrayMove, List as DnDList } from 'react-movable'
 
+import { ReactComponent as IconDrag } from '@/public/static/icons/24px/drag.svg'
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   AddArticlesCollectionDialog,
   ArticleDigestFeed,
   DateTime,
-  IconAdd20,
-  IconHandle24,
+  Icon,
   TextIcon,
   Tooltip,
   useMutation,
@@ -110,7 +111,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           placement="top"
         >
           <section className={styles.disableAddArticles}>
-            <TextIcon icon={<IconAdd20 size="mdS" />}>
+            <TextIcon icon={<Icon icon={IconPlus} size="mdS" />}>
               <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
             </TextIcon>
           </section>
@@ -126,7 +127,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
               className={styles.addArticles}
               onClick={openAddArticlesCollection}
             >
-              <TextIcon icon={<IconAdd20 size="mdS" />}>
+              <TextIcon icon={<Icon icon={IconPlus} size="mdS" />}>
                 <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
               </TextIcon>
             </section>
@@ -184,7 +185,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
               >
                 <section className={styles.dragContainer}>
                   <button data-movable-handle className={styles.handle}>
-                    <IconHandle24 size="md" color="greyDark" />
+                    <Icon icon={IconDrag} size="md" color="greyDark" />
                   </button>
                   <section className={styles.digestFeed}>
                     <ArticleDigestFeed

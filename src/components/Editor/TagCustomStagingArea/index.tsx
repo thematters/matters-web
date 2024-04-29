@@ -2,7 +2,7 @@ import _uniqBy from 'lodash/uniqBy'
 import { useContext } from 'react'
 
 import { MAX_ARTICLE_TAG_LENGTH } from '~/common/enums'
-import { Spinner, usePublicQuery, ViewerContext } from '~/components'
+import { SpinnerBlock, usePublicQuery, ViewerContext } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
 import { EditorRecommendedTagsQuery } from '~/gql/graphql'
@@ -61,7 +61,7 @@ const TagCustomStagingArea = ({
   if (loading) {
     return (
       <section className={styles.customTagArea}>
-        <Spinner />
+        <SpinnerBlock />
       </section>
     )
   }

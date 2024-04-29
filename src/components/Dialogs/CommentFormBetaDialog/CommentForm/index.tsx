@@ -8,7 +8,7 @@ import { dom, stripHtml } from '~/common/utils'
 import {
   CommentFormType,
   Dialog,
-  Spinner,
+  SpinnerBlock,
   useMutation,
   useRoute,
 } from '~/components'
@@ -25,7 +25,7 @@ import styles from './styles.module.css'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 export interface CommentFormProps {

@@ -25,7 +25,7 @@ import {
   Media,
   QueryError,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   Title,
   toast,
@@ -73,11 +73,11 @@ import TranslationToast from './TranslationToast'
 
 const DynamicSupportWidget = dynamic(() => import('./Support/SupportWidget'), {
   ssr: true, // enable for first screen
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 const DynamicCollection = dynamic(() => import('./Collection'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const DynamicComments = dynamic(() => import('./Comments'), {
@@ -87,12 +87,12 @@ const DynamicComments = dynamic(() => import('./Comments'), {
 
 const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
   ssr: true, // enable for first screen
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseArticleDetail = ({

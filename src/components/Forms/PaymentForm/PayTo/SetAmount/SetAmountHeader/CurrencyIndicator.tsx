@@ -1,12 +1,8 @@
+import { ReactComponent as IconFiatCurrency } from '@/public/static/icons/24px/fiat-currency.svg'
+import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
+import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import {
-  Button,
-  IconFiatCurrency40,
-  IconLikeCoin40,
-  IconUSDTActive40,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -27,7 +23,7 @@ const CurrencyIndicator: React.FC<CurrencyIndicatorProps> = ({
     <section>
       {isUSDT && (
         <TextIcon
-          icon={<IconUSDTActive40 size="md" />}
+          icon={<Icon icon={IconTether} size="md" />}
           size="md"
           spacing="xtight"
           weight="md"
@@ -37,7 +33,7 @@ const CurrencyIndicator: React.FC<CurrencyIndicatorProps> = ({
       )}
       {isHKD && (
         <TextIcon
-          icon={<IconFiatCurrency40 size="md" />}
+          icon={<Icon icon={IconFiatCurrency} size="md" />}
           size="md"
           spacing="xtight"
           weight="md"
@@ -47,7 +43,7 @@ const CurrencyIndicator: React.FC<CurrencyIndicatorProps> = ({
       )}
       {isLike && (
         <TextIcon
-          icon={<IconLikeCoin40 size="md" />}
+          icon={<Icon icon={IconLikeCoin} size="md" />}
           size="md"
           spacing="xtight"
           weight="md"

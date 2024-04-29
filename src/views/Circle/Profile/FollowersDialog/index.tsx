@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 import { ProfileCirclePublicFragment } from '~/gql/graphql'
 
 interface FollowersDialogProps {
@@ -10,7 +10,7 @@ interface FollowersDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseFollowersDialog = ({ circle, children }: FollowersDialogProps) => {

@@ -1,6 +1,7 @@
 import { useIntl } from 'react-intl'
 
-import { Empty, IconBook88 } from '~/components'
+import { ReactComponent as IconEmptyBook } from '@/public/static/icons/empty-book.svg'
+import { Empty, Icon } from '~/components'
 
 export const EmptyCollection = () => {
   const intl = useIntl()
@@ -8,7 +9,7 @@ export const EmptyCollection = () => {
   return (
     <Empty
       spacingY="xxloose"
-      icon={<IconBook88 size="xxxlM" />}
+      icon={<Icon icon={IconEmptyBook} size="xxxlM" />}
       description={intl.formatMessage({
         defaultMessage: 'No collection created yet',
         id: 'GU6vV0',

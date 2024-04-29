@@ -113,7 +113,7 @@ const Footer = () => {
                         size="md"
                         spacing="xtight"
                       >
-                        Twitter（中文）
+                        X（中文）
                       </TextIcon>
                     </a>
                   </li>
@@ -132,7 +132,7 @@ const Footer = () => {
                         size="md"
                         spacing="xtight"
                       >
-                        Twitter（English）
+                        X（English）
                       </TextIcon>
                     </a>
                   </li>

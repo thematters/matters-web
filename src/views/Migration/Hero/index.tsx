@@ -2,9 +2,10 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import Link from 'next/link'
 import { useContext } from 'react'
 
+import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
 import { PATHS } from '~/common/enums'
 import { translate } from '~/common/utils'
-import { IconLogo, LanguageContext } from '~/components'
+import { Icon, LanguageContext } from '~/components'
 
 import layoutStyles from '../../About/layout.module.css'
 import styles from './styles.module.css'
@@ -21,7 +22,7 @@ const Hero = () => {
               <VisuallyHidden>
                 <span>{translate({ id: 'discover', lang })}</span>
               </VisuallyHidden>
-              <IconLogo />
+              <Icon icon={IconLogo} />
             </a>
           </Link>
         </div>

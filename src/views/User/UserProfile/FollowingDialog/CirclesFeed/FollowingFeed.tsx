@@ -5,7 +5,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Translate,
   usePublicQuery,
   useRoute,
@@ -57,7 +57,7 @@ const FollowingFeed = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

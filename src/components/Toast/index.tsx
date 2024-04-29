@@ -4,13 +4,9 @@ import type { Toast as ToastType } from 'react-hot-toast'
 import baseToast, { Toaster as BaseToaster } from 'react-hot-toast'
 import { useIntl } from 'react-intl'
 
-import {
-  Button,
-  ButtonProps,
-  IconClose22,
-  IconWarning22,
-  TextIcon,
-} from '~/components'
+import { ReactComponent as IconMinus } from '@/public/static/icons/24px/minus.svg'
+import { ReactComponent as IconWarn } from '@/public/static/icons/24px/warn.svg'
+import { Button, ButtonProps, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -61,7 +57,8 @@ const ToastActions: React.FC<ToastActionsProps> = ({
             id: 'rbrahO',
           })}
         >
-          <IconClose22
+          <Icon
+            icon={IconMinus}
             color={type === 'error' ? 'white' : 'whiteLight'}
             size="mdM"
           />
@@ -113,7 +110,10 @@ const Toast: React.FC<
     >
       {isSuccess && message}
       {isError && (
-        <TextIcon icon={<IconWarning22 color="white" />} spacing="xtight">
+        <TextIcon
+          icon={<Icon icon={IconWarn} color="white" />}
+          spacing="xtight"
+        >
           {message}
         </TextIcon>
       )}

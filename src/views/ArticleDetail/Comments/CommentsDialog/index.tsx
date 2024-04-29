@@ -2,14 +2,10 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { OPEN_COMMENT_DETAIL_DIALOG } from '~/common/enums'
-import {
-  Dialog,
-  IconArrowLeft24,
-  IconClose24,
-  useDialogSwitch,
-  useEventListener,
-} from '~/components'
+import { Dialog, Icon, useDialogSwitch, useEventListener } from '~/components'
 import {
   ArticleDetailPublicQuery,
   ToolbarArticlePrivateFragment,
@@ -101,7 +97,7 @@ const BaseCommentsDialogDialog = ({
           leftBtn={
             isInCommentDetail && (
               <button onClick={backToCommentList}>
-                <IconArrowLeft24 size="md" />
+                <Icon icon={IconLeft} size="md" />
               </button>
             )
           }
@@ -113,7 +109,7 @@ const BaseCommentsDialogDialog = ({
                 closeDialog()
               }}
             >
-              <IconClose24 size="md" />
+              <Icon icon={IconTimes} size="md" />
             </button>
           }
         />

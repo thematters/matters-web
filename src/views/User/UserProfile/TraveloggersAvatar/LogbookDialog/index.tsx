@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconBook } from '@/public/static/icons/24px/book.svg'
 import {
   Dialog,
-  IconLogbook1,
-  IconLogbook2,
+  Icon,
   LanguageContext,
   TableView,
   TextIcon,
@@ -71,7 +71,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
               title={
                 <TextIcon
                   color="black"
-                  icon={<IconLogbook2 size="md" />}
+                  icon={<Icon icon={IconBook} size="md" />}
                   size="md"
                   spacing="xtight"
                 >
@@ -91,7 +91,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
               title={
                 <TextIcon
                   color="black"
-                  icon={<IconLogbook1 size="md" />}
+                  icon={<Icon icon={IconBook} size="md" />}
                   size="md"
                   spacing="xtight"
                 >

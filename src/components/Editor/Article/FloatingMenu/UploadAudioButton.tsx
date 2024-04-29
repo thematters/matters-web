@@ -3,7 +3,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useContext, useState } from 'react'
 
-import { ReactComponent as IconEditorMenuAudio } from '@/public/static/icons/32px/editor-menu-audio.svg'
+import { ReactComponent as IconEditorAudio } from '@/public/static/icons/editor-audio.svg'
 import {
   ACCEPTED_UPLOAD_AUDIO_TYPES,
   ASSET_TYPE,
@@ -11,8 +11,8 @@ import {
 } from '~/common/enums'
 import { translate } from '~/common/utils'
 import {
-  IconSpinner16,
   LanguageContext,
+  Spinner,
   toast,
   Translate,
   withIcon,
@@ -118,8 +118,8 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
         lang,
       })}
     >
-      {!uploading && withIcon(IconEditorMenuAudio)({ size: 'lg' })}
-      {uploading && <IconSpinner16 size="lg" color="greyLight" />}
+      {!uploading && withIcon(IconEditorAudio)({ size: 'lg' })}
+      {uploading && <Spinner size="lg" color="greyLight" />}
 
       <VisuallyHidden>
         <input

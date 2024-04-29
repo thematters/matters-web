@@ -10,7 +10,7 @@ import {
   Dialog,
   LanguageContext,
   Layout,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   Translate,
   UserDigest,
@@ -57,7 +57,7 @@ const BaseOAuthAuthorize = () => {
   if (loading) {
     return (
       <Box>
-        <Spinner />
+        <SpinnerBlock />
       </Box>
     )
   }

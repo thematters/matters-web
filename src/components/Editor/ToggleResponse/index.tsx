@@ -1,12 +1,10 @@
 import classNames from 'classnames'
 
+import { ReactComponent as IconChecked } from '@/public/static/icons/checked.svg'
+import { ReactComponent as IconUnChecked } from '@/public/static/icons/unchecked.svg'
+import { ReactComponent as IconUnCheckedGrey } from '@/public/static/icons/uncheckedGrey.svg'
 import { TEST_ID } from '~/common/enums'
-import {
-  IconChecked,
-  IconUnChecked,
-  IconUnCheckedGrey,
-  Translate,
-} from '~/components'
+import { Icon, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -60,12 +58,13 @@ const ToggleResponse = ({
           </section>
           <section className={styles.right}>
             {canComment ? (
-              <IconChecked
+              <Icon
+                icon={IconChecked}
                 size="md"
                 color={disableChangeCanComment ? 'grey' : 'green'}
               />
             ) : (
-              <IconUnChecked color="greyLight" size="md" />
+              <Icon icon={IconUnChecked} color="greyLight" size="md" />
             )}
           </section>
         </section>
@@ -89,12 +88,12 @@ const ToggleResponse = ({
           <section className={styles.right}>
             {canComment ? (
               disableChangeCanComment ? (
-                <IconUnCheckedGrey color="greyLight" size="md" />
+                <Icon icon={IconUnCheckedGrey} color="greyLight" size="md" />
               ) : (
-                <IconUnChecked color="greyLight" size="md" />
+                <Icon icon={IconUnChecked} color="greyLight" size="md" />
               )
             ) : (
-              <IconChecked size="md" color="green" />
+              <Icon icon={IconChecked} size="md" color="green" />
             )}
           </section>
         </section>
@@ -127,12 +126,13 @@ const ToggleResponse = ({
           </section>
           <section className={styles.right}>
             {canComment ? (
-              <IconChecked
+              <Icon
+                icon={IconChecked}
                 color={disableChangeCanComment ? 'grey' : 'green'}
                 size="mdS"
               />
             ) : (
-              <IconUnChecked color="greyLight" size="mdS" />
+              <Icon icon={IconUnChecked} color="greyLight" size="mdS" />
             )}
           </section>
         </section>
@@ -156,12 +156,12 @@ const ToggleResponse = ({
           <section className={styles.right}>
             {canComment ? (
               disableChangeCanComment ? (
-                <IconUnCheckedGrey color="greyLight" size="mdS" />
+                <Icon icon={IconUnCheckedGrey} color="greyLight" size="mdS" />
               ) : (
-                <IconUnChecked color="greyLight" size="mdS" />
+                <Icon icon={IconUnChecked} color="greyLight" size="mdS" />
               )
             ) : (
-              <IconChecked color="green" size="mdS" />
+              <Icon icon={IconChecked} color="green" size="mdS" />
             )}
           </section>
         </section>

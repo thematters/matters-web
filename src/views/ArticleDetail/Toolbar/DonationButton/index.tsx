@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,
@@ -13,7 +14,7 @@ import { analytics, numAbbr, translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
-  IconMoney24,
+  Icon,
   LanguageContext,
   TextIcon,
   toast,
@@ -105,7 +106,7 @@ const DonationButton = ({
           {...buttonProps}
         >
           <TextIcon
-            icon={<IconMoney24 size={iconSize} />}
+            icon={<Icon icon={IconMoney} size={iconSize} />}
             weight={textWeight}
             spacing={
               article.donationsToolbar.totalCount > 0 ? textIconSpacing : 0

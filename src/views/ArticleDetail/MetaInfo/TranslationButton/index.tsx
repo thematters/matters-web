@@ -1,8 +1,9 @@
 import { FC } from 'react'
 
+import { ReactComponent as IconTranslate } from '@/public/static/icons/24px/translate.svg'
 import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Button, IconTranslate16, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 
 const TranslationButton: FC<{
   translated: boolean
@@ -32,7 +33,7 @@ const TranslationButton: FC<{
       }}
     >
       <TextIcon
-        icon={<IconTranslate16 color="black" />}
+        icon={<Icon icon={IconTranslate} color="black" />}
         size="xs"
         spacing="xxxtight"
         color="black"

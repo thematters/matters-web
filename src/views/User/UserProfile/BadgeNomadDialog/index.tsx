@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 type BadgeNomadLabelProps = {
   nomadBadgeLevel: 1 | 2 | 3 | 4
@@ -12,7 +12,7 @@ type BadgeNomadDialogProps = BadgeNomadLabelProps & {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 export const BaseBadgeNomadDialog: React.FC<BadgeNomadDialogProps> = ({

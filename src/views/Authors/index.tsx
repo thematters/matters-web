@@ -9,7 +9,7 @@ import {
   Layout,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Translate,
   usePublicQuery,
   UserDigest,
@@ -79,7 +79,7 @@ const BaseAuthors = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

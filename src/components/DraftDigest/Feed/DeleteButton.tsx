@@ -1,14 +1,9 @@
 import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconDelete } from '@/public/static/icons/24px/delete.svg'
 import { TEST_ID } from '~/common/enums'
-import {
-  Dialog,
-  IconTrash24,
-  toast,
-  useDialogSwitch,
-  useMutation,
-} from '~/components'
+import { Dialog, Icon, toast, useDialogSwitch, useMutation } from '~/components'
 import { updateUserDrafts, updateViewerWorksTabs } from '~/components/GQL'
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
@@ -72,7 +67,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           id: 'K3r6DQ',
         })}
       >
-        <IconTrash24 size="md" />
+        <Icon icon={IconDelete} size="md" />
       </button>
 
       <Dialog

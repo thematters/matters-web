@@ -4,7 +4,7 @@ import { useContext, useEffect } from 'react'
 import { analytics } from '~/common/utils'
 import {
   Dialog,
-  Spinner,
+  SpinnerBlock,
   useDialogSwitch,
   useStep,
   ViewerContext,
@@ -18,12 +18,12 @@ interface AddCreditDialogProps {
 
 const DynamicSetPaymentPasswordContent = dynamic(
   () => import('~/components/Dialogs/SetPaymentPasswordDialog/Content'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {

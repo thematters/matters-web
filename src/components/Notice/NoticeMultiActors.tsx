@@ -1,4 +1,5 @@
-import { Button, IconMore32 } from '~/components'
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import { Button, Icon } from '~/components'
 
 import NoticeActorAvatar, { size } from './NoticeActorAvatar'
 import styles from './styles.module.css'
@@ -33,7 +34,7 @@ const NoticeMultiActors = ({ actors, size }: NoticeMultiActorsProps) => {
           bgActiveColor="greyLighter"
           borderRadius="5rem"
         >
-          <IconMore32 color="grey" size="lg" />
+          <Icon icon={IconMore} color="grey" size="lg" />
         </Button>
       </span>
     </>

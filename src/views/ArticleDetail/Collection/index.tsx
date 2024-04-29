@@ -8,7 +8,7 @@ import {
   ArticleDigestTitle,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Title,
   Translate,
   ViewMoreButton,
@@ -61,7 +61,7 @@ const Collection: React.FC<{
     })
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

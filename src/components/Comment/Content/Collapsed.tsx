@@ -2,9 +2,10 @@ import classNames from 'classnames'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import { TEST_ID } from '~/common/enums'
 import { captureClicks } from '~/common/utils'
-import { Button, IconArrowDown16, TextIcon } from '~/components'
+import { Button, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -53,7 +54,7 @@ const Collapsed = ({
           }}
         >
           <TextIcon
-            icon={<IconArrowDown16 size="xs" />}
+            icon={<Icon icon={IconDown} size="xs" />}
             textPlacement="left"
             weight="normal"
             color="greyDarker"

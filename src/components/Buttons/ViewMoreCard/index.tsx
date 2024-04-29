@@ -1,9 +1,10 @@
 import classNames from 'classnames'
 
+import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
 import {
   Card,
   CardProps,
-  IconArrowRight16,
+  Icon,
   IconProps,
   TextIcon,
   TextIconProps,
@@ -41,7 +42,7 @@ export const ViewMoreCard: React.FC<
         {...cardProps}
       >
         <TextIcon
-          icon={<IconArrowRight16 {...iconProps} />}
+          icon={<Icon icon={IconRight} {...iconProps} />}
           textPlacement="left"
           color="green"
           {...textIconProps}

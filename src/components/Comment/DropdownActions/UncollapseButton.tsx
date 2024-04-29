@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { IconExpand16, Menu, useMutation } from '~/components'
+import { ReactComponent as IconExpand } from '@/public/static/icons/24px/expand.svg'
+import { Icon, Menu, useMutation } from '~/components'
 import { UncollapseCommentMutation } from '~/gql/graphql'
 
 const UNCOLLAPSE_COMMENT = gql`
@@ -39,7 +40,7 @@ const UncollapseButton = ({ commentId }: { commentId: string }) => {
           description="src/components/Comment/DropdownActions/UncollapseButton.tsx"
         />
       }
-      icon={<IconExpand16 size="mdS" />}
+      icon={<Icon icon={IconExpand} size="mdS" />}
       onClick={uncollapseComment}
     />
   )

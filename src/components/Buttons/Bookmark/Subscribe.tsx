@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconSave } from '@/public/static/icons/24px/save.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,
@@ -11,8 +12,7 @@ import {
 import {
   Button,
   ButtonProps,
-  IconBookmark20,
-  IconBookmark24,
+  Icon,
   IconSize,
   Menu,
   toast,
@@ -91,7 +91,7 @@ const Subscribe = ({
             description="src/components/Buttons/Bookmark/Subscribe.tsx"
           />
         }
-        icon={<IconBookmark20 size="mdS" />}
+        icon={<Icon icon={IconSave} size="mdS" />}
         onClick={onClick}
         testId={TEST_ID.ARTICLE_BOOKMARK}
       />
@@ -112,7 +112,7 @@ const Subscribe = ({
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}
       {...buttonProps}
     >
-      <IconBookmark24 size={iconSize} />
+      <Icon icon={IconSave} size={iconSize} />
     </Button>
   )
 }

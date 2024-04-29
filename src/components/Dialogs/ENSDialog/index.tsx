@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch, useStep } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch, useStep } from '~/components'
 
 import { BaseENSDialogProps, Step } from './types'
 
@@ -10,7 +10,7 @@ type ENSDialogProps = BaseENSDialogProps & {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseENSDilaog = ({

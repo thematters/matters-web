@@ -7,15 +7,15 @@ import classNames from 'classnames'
 import { useContext, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconEditorMenuBold } from '@/public/static/icons/24px/editor-menu-bold.svg'
-import { ReactComponent as IconEditorMenuCode } from '@/public/static/icons/24px/editor-menu-code.svg'
-import { ReactComponent as IconEditorMenuH2 } from '@/public/static/icons/24px/editor-menu-h2.svg'
-import { ReactComponent as IconEditorMenuH3 } from '@/public/static/icons/24px/editor-menu-h3.svg'
-import { ReactComponent as IconEditorMenuLink } from '@/public/static/icons/24px/editor-menu-link.svg'
-import { ReactComponent as IconEditorMenuOl } from '@/public/static/icons/24px/editor-menu-ol.svg'
-import { ReactComponent as IconEditorMenuQuote } from '@/public/static/icons/24px/editor-menu-quote.svg'
-import { ReactComponent as IconEditorMenuStrike } from '@/public/static/icons/24px/editor-menu-strike.svg'
-import { ReactComponent as IconEditorMenuUl } from '@/public/static/icons/24px/editor-menu-ul.svg'
+import { ReactComponent as IconEditorBold } from '@/public/static/icons/24px/editor-bold.svg'
+import { ReactComponent as IconEditorCode } from '@/public/static/icons/24px/editor-code.svg'
+import { ReactComponent as IconEditorH2 } from '@/public/static/icons/24px/editor-h2.svg'
+import { ReactComponent as IconEditorH3 } from '@/public/static/icons/24px/editor-h3.svg'
+import { ReactComponent as IconEditorLink } from '@/public/static/icons/24px/editor-link.svg'
+import { ReactComponent as IconEditorOl } from '@/public/static/icons/24px/editor-ol.svg'
+import { ReactComponent as IconEditorQuote } from '@/public/static/icons/24px/editor-quote.svg'
+import { ReactComponent as IconEditorStrike } from '@/public/static/icons/24px/editor-strike.svg'
+import { ReactComponent as IconEditorUl } from '@/public/static/icons/24px/editor-ul.svg'
 import { KEYVALUE } from '~/common/enums'
 import { isUrl, translate } from '~/common/utils'
 import { LanguageContext, withIcon } from '~/components'
@@ -139,7 +139,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorMenuH2)({ size: 'md' })}
+                {withIcon(IconEditorH2)({ size: 'md' })}
               </button>
             )}
 
@@ -167,7 +167,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorMenuH3)({ size: 'md' })}
+                {withIcon(IconEditorH3)({ size: 'md' })}
               </button>
             )}
 
@@ -191,7 +191,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorMenuBold)({ size: 'md' })}
+                {withIcon(IconEditorBold)({ size: 'md' })}
               </button>
             )}
 
@@ -217,7 +217,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorMenuStrike)({ size: 'md' })}
+                {withIcon(IconEditorStrike)({ size: 'md' })}
               </button>
             )}
 
@@ -243,7 +243,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorMenuCode)({ size: 'md' })}
+                {withIcon(IconEditorCode)({ size: 'md' })}
               </button>
             )}
 
@@ -260,7 +260,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorMenuQuote)({ size: 'md' })}
+              {withIcon(IconEditorQuote)({ size: 'md' })}
             </button>
 
             {/* Unordered list */}
@@ -283,7 +283,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorMenuUl)({ size: 'md' })}
+                {withIcon(IconEditorUl)({ size: 'md' })}
               </button>
             )}
 
@@ -307,7 +307,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorMenuOl)({ size: 'md' })}
+                {withIcon(IconEditorOl)({ size: 'md' })}
               </button>
             )}
 
@@ -340,7 +340,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorMenuLink)({ size: 'md' })}
+              {withIcon(IconEditorLink)({ size: 'md' })}
             </button>
           </>
         )}

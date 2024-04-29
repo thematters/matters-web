@@ -1,5 +1,6 @@
+import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
 import { EXTERNAL_LINKS } from '~/common/enums'
-import { Button, IconExternalLink16, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -20,7 +21,7 @@ const CivicLikerButton: React.FC<CivicLikerButtonProps> = ({ likerId }) => {
           color="likecoinGreen"
           size="md"
           textPlacement="left"
-          icon={<IconExternalLink16 />}
+          icon={<Icon icon={IconExternal} />}
         >
           <Translate
             zh_hant="成為讚賞公民支持作者"

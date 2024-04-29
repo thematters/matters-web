@@ -14,7 +14,7 @@ import {
   Layout,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   useMutation,
 } from '~/components'
@@ -79,7 +79,7 @@ const BaseMeHistory = () => {
   if (loading) {
     return (
       <>
-        <Spinner />
+        <SpinnerBlock />
       </>
     )
   }

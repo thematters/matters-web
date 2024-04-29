@@ -3,15 +3,12 @@ import React, { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount, useConnect } from 'wagmi'
 
+import { ReactComponent as IconMetaMask } from '@/public/static/icons/24px/metamask.svg'
+import { ReactComponent as IconWalletConnect } from '@/public/static/icons/24px/walletconnect.svg'
 import { EXTERNAL_LINKS, GUIDE_LINKS } from '~/common/enums'
 import { PATHS } from '~/common/enums'
 import { analytics, WalletType } from '~/common/utils'
-import {
-  IconMetamask22,
-  IconSpinner22,
-  IconWalletConnect22,
-  LanguageContext,
-} from '~/components'
+import { Icon, LanguageContext, Spinner } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -74,12 +71,12 @@ export const AuthWalletFeed: React.FC<Props> = ({
             role="button"
           >
             <span className={styles.icon}>
-              <IconMetamask22 size="mdM" />
+              <Icon icon={IconMetaMask} size="mdM" />
             </span>
             <span className={styles.name}>MetaMask</span>
             {isMetaMaskLoading && (
               <span className={styles.right}>
-                <IconSpinner22 color="grey" size="mdM" />
+                <Spinner color="grey" size="mdM" />
               </span>
             )}
           </li>
@@ -87,7 +84,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
           <a href={EXTERNAL_LINKS.METAMASK} target="_blank">
             <li className={itemClasses} role="button">
               <span className={styles.icon}>
-                <IconMetamask22 size="mdM" />
+                <Icon icon={IconMetaMask} size="mdM" />
               </span>
               <span className={styles.name}>MetaMask</span>
             </li>
@@ -105,12 +102,12 @@ export const AuthWalletFeed: React.FC<Props> = ({
           role="button"
         >
           <span className={styles.icon}>
-            <IconWalletConnect22 size="mdM" />
+            <Icon icon={IconWalletConnect} size="mdM" />
           </span>
           <span className={styles.name}>WalletConnect</span>
           {isWalletConnectLoading && (
             <span className={styles.right}>
-              <IconSpinner22 color="grey" size="mdM" />
+              <Spinner color="grey" size="mdM" />
             </span>
           )}
         </li>

@@ -1,14 +1,11 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
+import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
+import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr, translate } from '~/common/utils'
-import {
-  IconArticle16,
-  IconUser16,
-  LanguageContext,
-  TextIcon,
-} from '~/components'
+import { Icon, LanguageContext, TextIcon } from '~/components'
 import { CountsCircleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -40,7 +37,7 @@ const Counts = ({ circle }: CountsProps) => {
   return (
     <section className={styles.counts}>
       <TextIcon
-        icon={<IconUser16 size="xs" />}
+        icon={<Icon icon={IconUser} size="xs" />}
         color="grey"
         weight="md"
         size="sm"
@@ -56,7 +53,7 @@ const Counts = ({ circle }: CountsProps) => {
       </TextIcon>
 
       <TextIcon
-        icon={<IconArticle16 size="xs" />}
+        icon={<Icon icon={IconDraft} size="xs" />}
         color="grey"
         weight="md"
         size="sm"

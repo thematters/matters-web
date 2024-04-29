@@ -1,6 +1,6 @@
 /* motion */
 .u-motion-spin {
-  animation: spinning 1s infinite linear;
+  animation: spinning 1.2s infinite linear;
 }
 
 @keyframes spinning {

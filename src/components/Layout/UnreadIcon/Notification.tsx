@@ -2,11 +2,9 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useContext, useEffect } from 'react'
 
-import {
-  IconNavNotification32,
-  IconNavNotificationActive32,
-  ViewerContext,
-} from '~/components'
+import { ReactComponent as IconNavNotifications } from '@/public/static/icons/24px/nav-notifications.svg'
+import { ReactComponent as IconNavNotificationsActive } from '@/public/static/icons/24px/nav-notifications-active.svg'
+import { Icon, ViewerContext } from '~/components'
 import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
 import { UnreadNoticeCountQuery } from '~/gql/graphql'
 
@@ -43,9 +41,9 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
   return (
     <span className={iconClasses}>
       {active ? (
-        <IconNavNotificationActive32 size="lg" />
+        <Icon icon={IconNavNotificationsActive} size="lg" />
       ) : (
-        <IconNavNotification32 size="lg" />
+        <Icon icon={IconNavNotifications} size="lg" />
       )}
     </span>
   )

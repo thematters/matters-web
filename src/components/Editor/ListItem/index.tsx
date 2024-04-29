@@ -1,7 +1,10 @@
 import classNames from 'classnames'
 
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
+import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import { ReactComponent as IconSquareChecked } from '@/public/static/icons/square-checked.svg'
 import { toSizedImageURL } from '~/common/utils'
-import { Card, IconAdd16, IconArrowRight16, IconChecked32 } from '~/components'
+import { Card, Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -26,7 +29,7 @@ const CoverIndicator = ({ cover }: { cover?: string | null }) => (
         alt="cover"
       />
     ) : (
-      <IconAdd16 size="xs" />
+      <Icon icon={IconPlus} size="xs" />
     )}
   </span>
 )
@@ -38,18 +41,18 @@ const NumberIndicator = ({ num }: { num: number }) =>
     </span>
   ) : (
     <span className={styles.indicator}>
-      <IconAdd16 size="xs" />
+      <Icon icon={IconPlus} size="xs" />
     </span>
   )
 
 const ArrowIndicator = ({ checked }: { checked: boolean }) =>
   checked ? (
     <span className={[styles.indicator, styles.arrowIndicator].join(' ')}>
-      <IconChecked32 size="md" />
+      <Icon icon={IconSquareChecked} size="md" />
     </span>
   ) : (
     <span className={[styles.arrowIndicator].join(' ')}>
-      <IconArrowRight16 color="grey" />
+      <Icon icon={IconRight} color="grey" />
     </span>
   )
 

@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Spinner, Translate } from '~/components'
+import { SpinnerBlock, Translate } from '~/components'
 
 import { Step } from './types'
 
@@ -16,19 +16,19 @@ interface PayoutDialogContentProps {
 
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPayoutFormComplete = dynamic(
   () => import('~/components/Forms/PaymentForm/Payout/Complete'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPayoutFormConfirm = dynamic(
   () => import('~/components/Forms/PaymentForm/Payout/Confirm'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicConnectStripeAccountForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ConnectStripeAccount'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const PayoutDialogContent = ({

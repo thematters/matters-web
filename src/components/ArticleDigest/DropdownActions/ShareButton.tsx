@@ -1,6 +1,7 @@
 import { useIntl } from 'react-intl'
 
-import { IconShare16, Menu } from '~/components'
+import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
+import { Icon, Menu } from '~/components'
 
 interface ShareButtonProps {
   openDialog: () => void
@@ -15,7 +16,7 @@ const ShareButton = ({ openDialog }: ShareButtonProps) => {
         defaultMessage: 'Share Article',
         id: '/GyMKa',
       })}
-      icon={<IconShare16 size="mdS" />}
+      icon={<Icon icon={IconShare} size="mdS" />}
       onClick={openDialog}
       ariaHasPopup="dialog"
     />

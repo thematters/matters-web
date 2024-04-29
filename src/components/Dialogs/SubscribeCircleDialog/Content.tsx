@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Spinner, Translate } from '~/components'
+import { SpinnerBlock, Translate } from '~/components'
 
 import Complete from './Complete'
 import { BaseSubscribeCircleDialogProps, Step } from './types'
@@ -15,15 +15,15 @@ type SubscribeCircleDialogContentProps = BaseSubscribeCircleDialogProps & {
 
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicSetPaymentPasswordContent = dynamic(
   () => import('~/components/Dialogs/SetPaymentPasswordDialog/Content'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicSubscribeCircleForm = dynamic(
   () => import('~/components/Forms/PaymentForm/SubscribeCircle'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const SubscribeCircleDialogContent = ({

@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 
+import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import { ReactComponent as IconCircleEmpty } from '@/public/static/icons/24px/circle-empty.svg'
 import { TEST_ID } from '~/common/enums'
-import { Card, IconChecked, IconUnChecked, UserDigest } from '~/components'
+import { Card, Icon, UserDigest } from '~/components'
 import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
 import styles from '../styles.module.css'
@@ -42,10 +44,10 @@ const SearchSelectUser: React.FC<SearchSelectUserProps> = ({
 
         <span className={styles.iconSelect}>
           {inStagingArea && selected && (
-            <IconChecked color="green" size="mdS" />
+            <Icon icon={IconCircleCheckFill} color="green" size="mdS" />
           )}
           {inStagingArea && !selected && (
-            <IconUnChecked color="greyLight" size="mdS" />
+            <Icon icon={IconCircleEmpty} color="greyLight" size="mdS" />
           )}
         </span>
       </section>

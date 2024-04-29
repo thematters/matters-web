@@ -1,8 +1,9 @@
 import classNames from 'classnames'
 import { useContext, useEffect, useRef, useState } from 'react'
 
+import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
 import { OPEN_COMMENT_LIST_DRAWER } from '~/common/enums'
-import { ActiveCommentEditorContext, IconComment24 } from '~/components'
+import { ActiveCommentEditorContext, Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -131,7 +132,7 @@ export const TextSelectionPopover = ({
           }}
         >
           <button onClick={onQuote} className={styles.quoteButton}>
-            <IconComment24 size="mdS" />
+            <Icon icon={IconComment} size="mdS" />
           </button>
           {/* <span className={styles.divider} />
           <button onClick={onShare} className={styles.shareButton}>

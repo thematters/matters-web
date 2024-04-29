@@ -1,5 +1,6 @@
+import { ReactComponent as IconLatest } from '@/public/static/icons/24px/latest.svg'
 import { toPath } from '~/common/utils'
-import { Card, IconBroadcast24, UserDigest } from '~/components'
+import { Card, Icon, UserDigest } from '~/components'
 import CommentContent from '~/components/Comment/Content'
 import { AuthorWidgetCircleFragment } from '~/gql/graphql'
 
@@ -36,7 +37,7 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
         {pinnedBroadcast && (
           <section className={styles.pinnedBroadcast}>
             <span className={styles.icon}>
-              <IconBroadcast24 size="md" />
+              <Icon icon={IconLatest} size="md" />
             </span>
 
             <CommentContent

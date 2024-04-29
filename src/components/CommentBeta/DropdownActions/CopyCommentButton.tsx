@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { CopyToClipboard, IconCopy16, Menu } from '~/components'
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
+import { CopyToClipboard, Icon, Menu } from '~/components'
 
 const CopyCommentButton = ({ content }: { content: string }) => {
   return (
@@ -8,7 +9,7 @@ const CopyCommentButton = ({ content }: { content: string }) => {
       {({ copyToClipboard }) => (
         <Menu.Item
           text={<FormattedMessage defaultMessage="Copy comment" id="eY3YIa" />}
-          icon={<IconCopy16 size="mdS" />}
+          icon={<Icon icon={IconCopy} size="mdS" />}
           onClick={copyToClipboard}
         />
       )}

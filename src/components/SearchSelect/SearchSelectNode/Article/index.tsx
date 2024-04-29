@@ -1,12 +1,9 @@
 import classNames from 'classnames'
 
+import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import { ReactComponent as IconCircleEmpty } from '@/public/static/icons/24px/circle-empty.svg'
 import { TEST_ID } from '~/common/enums'
-import {
-  ArticleDigestDropdown,
-  Card,
-  IconChecked,
-  IconUnChecked,
-} from '~/components'
+import { ArticleDigestDropdown, Card, Icon } from '~/components'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
 import styles from '../styles.module.css'
@@ -65,10 +62,10 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
 
         <span className={styles.iconSelect}>
           {inStagingArea && selected && (
-            <IconChecked color="green" size="mdS" />
+            <Icon icon={IconCircleCheckFill} color="green" size="mdS" />
           )}
           {inStagingArea && !selected && (
-            <IconUnChecked color="greyLight" size="mdS" />
+            <Icon icon={IconCircleEmpty} color="greyLight" size="mdS" />
           )}
         </span>
       </section>

@@ -209,6 +209,10 @@
     "defaultMessage": "回应设置",
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
   },
+  "24jhEp": {
+    "defaultMessage": "你的修订作品 {articleTitle} 发布失败",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
+  },
   "25oM9Q": {
     "defaultMessage": "排序"
   },
@@ -1188,10 +1192,6 @@
     "defaultMessage": "标签不存在",
     "description": "TAG_NOT_FOUND"
   },
-  "NONfAh": {
-    "defaultMessage": "豆瓣",
-    "description": "src/components/Share/Buttons/Douban.tsx"
-  },
   "NYTGIb": {
     "defaultMessage": "知道了"
   },
@@ -1300,10 +1300,6 @@
   "QUqfbW": {
     "defaultMessage": "说说围炉的有趣之处，吸引支持者加入",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
-  "QV19cI": {
-    "defaultMessage": "你的修订作品发布失败",
-    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "QXJQ5G": {
     "defaultMessage": "授权信息已失效，请重新登入",
@@ -2381,10 +2377,6 @@
   "rADhX5": {
     "defaultMessage": "不可用",
     "description": "FORBIDDEN_BY_STATE"
-  },
-  "rBjwQy": {
-    "defaultMessage": "微博",
-    "description": "src/components/Share/Buttons/Weibo.tsx"
   },
   "rDX3h6": {
     "defaultMessage": "版本简述"

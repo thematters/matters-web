@@ -11,7 +11,7 @@ import {
   QueryError,
   ShuffleButton,
   Slides,
-  Spinner,
+  SpinnerBlock,
   usePublicQuery,
   UserDigest,
   ViewerContext,
@@ -104,7 +104,7 @@ const Authors = () => {
       <Slides header={SlidesHeader}>
         {loading && (
           <Slides.Item size="md">
-            <Spinner />
+            <SpinnerBlock />
           </Slides.Item>
         )}
 

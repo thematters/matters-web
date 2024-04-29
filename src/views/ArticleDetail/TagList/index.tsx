@@ -1,13 +1,9 @@
 import gql from 'graphql-tag'
 
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { TEST_ID } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import {
-  IconMore16,
-  Tag,
-  TagExposureTracker,
-  TagListDialog,
-} from '~/components'
+import { Icon, Tag, TagExposureTracker, TagListDialog } from '~/components'
 import { TagListArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -57,7 +53,7 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
                 role="button"
                 onClick={openDialog}
               >
-                <IconMore16 />
+                <Icon icon={IconMore} />
               </li>
             )}
           </TagListDialog>

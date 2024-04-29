@@ -2,12 +2,9 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useLayoutEffect, useRef, useState } from 'react'
 
-import {
-  IconSquireCheck20,
-  IconSquireChecked20,
-  TextIcon,
-  Tooltip,
-} from '~/components'
+import { ReactComponent as IconSquare } from '@/public/static/icons/24px/squire.svg'
+import { ReactComponent as IconSquareCheck } from '@/public/static/icons/24px/squire-check.svg'
+import { Icon, TextIcon, Tooltip } from '~/components'
 
 import { FieldProps } from '../Field'
 import styles from './styles.module.css'
@@ -80,9 +77,13 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   })
 
   const checkboxIcon = checked ? (
-    <IconSquireChecked20 size="mdS" color={disabled ? 'grey' : 'green'} />
+    <Icon
+      icon={IconSquareCheck}
+      size="mdS"
+      color={disabled ? 'grey' : 'green'}
+    />
   ) : (
-    <IconSquireCheck20 size="mdS" color="greyDark" />
+    <Icon icon={IconSquare} size="mdS" color="greyDark" />
   )
 
   return (

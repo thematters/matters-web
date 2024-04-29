@@ -18,7 +18,7 @@ import {
   Head,
   Layout,
   SegmentedTabs,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   useFeatures,
   usePublicQuery,
@@ -49,7 +49,7 @@ import styles from './styles.module.css'
 
 const DynamicCommunity = dynamic(() => import('./Community'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
@@ -311,7 +311,7 @@ const TagDetailContainer = () => {
   if (loading || resultBySearch?.loading) {
     return (
       <EmptyLayout>
-        <Spinner />
+        <SpinnerBlock />
       </EmptyLayout>
     )
   }

@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { IconEdit16, Menu } from '~/components'
+import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import { Icon, Menu } from '~/components'
 
 interface EditButtonProps {
   openEditCommentDialog: () => void
@@ -16,7 +17,7 @@ const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
           description="src/components/Comment/DropdownActions/EditButton.tsx"
         />
       }
-      icon={<IconEdit16 size="mdS" />}
+      icon={<Icon icon={IconEdit} size="mdS" />}
       onClick={openEditCommentDialog}
       ariaHasPopup="dialog"
     />

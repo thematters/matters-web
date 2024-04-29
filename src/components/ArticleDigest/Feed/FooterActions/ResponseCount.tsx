@@ -2,9 +2,10 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext } from 'react'
 
+import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
 import { URL_FRAGMENT } from '~/common/enums'
 import { numAbbr, toPath, translate } from '~/common/utils'
-import { Button, IconComment16, LanguageContext, TextIcon } from '~/components'
+import { Button, Icon, LanguageContext, TextIcon } from '~/components'
 import { ActionsResponseCountArticleFragment } from '~/gql/graphql'
 
 interface ResponseCountProps {
@@ -50,7 +51,12 @@ const ResponseCount = ({ article }: ResponseCountProps) => {
         lang,
       })}
     >
-      <TextIcon icon={<IconComment16 />} color="grey" weight="md" size="sm">
+      <TextIcon
+        icon={<Icon icon={IconComment} />}
+        color="grey"
+        weight="md"
+        size="sm"
+      >
         {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
       </TextIcon>
     </Button>

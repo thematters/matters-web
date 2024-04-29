@@ -2,11 +2,12 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
 import { GUIDE_LINKS } from '~/common/enums'
 import { featureSupportedChains } from '~/common/utils'
 import {
   Dialog,
-  IconOpenWallet20,
+  Icon,
   LanguageContext,
   TextIcon,
   useTargetNetwork,
@@ -66,7 +67,7 @@ const SwitchNetwork: React.FC<SwitchNetworkProps> = ({ submitCallback }) => {
           textWeight="normal"
           textSize="md"
           text={
-            <TextIcon icon={<IconOpenWallet20 size="mdS" />}>
+            <TextIcon icon={<Icon icon={IconOpenWallet} size="mdS" />}>
               <FormattedMessage
                 defaultMessage="Switch Network"
                 id="U+qEBM"

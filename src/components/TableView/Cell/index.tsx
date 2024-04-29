@@ -1,8 +1,9 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
+import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
 import { capitalizeFirstLetter } from '~/common/utils'
-import { Card, CardProps, IconArrowRight20 } from '~/components'
+import { Card, CardProps, Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -27,7 +28,7 @@ const Cell: React.FC<CellProps> = forwardRef(
       right,
       rightText,
       rightTextColor = 'greyDarker',
-      rightIcon = <IconArrowRight20 size="mdS" color="greyDarker" />,
+      rightIcon = <Icon icon={IconRight} size="mdS" color="greyDarker" />,
 
       ...cardProps
     },

@@ -10,7 +10,7 @@ import {
   Layout,
   Media,
   ReviseArticleDialog,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   useRoute,
 } from '~/components'
@@ -50,7 +50,7 @@ type Article = NonNullable<
 
 const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
-  { ssr: false, loading: () => <Spinner /> }
+  { ssr: false, loading: () => <SpinnerBlock /> }
 )
 
 const BaseEdit = ({ article }: { article: Article }) => {
@@ -343,7 +343,7 @@ const Edit = () => {
   if (loading) {
     return (
       <EmptyLayout>
-        <Spinner />
+        <SpinnerBlock />
       </EmptyLayout>
     )
   }

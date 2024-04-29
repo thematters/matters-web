@@ -1,8 +1,9 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconUnlock } from '@/public/static/icons/24px/unlock.svg'
 import {
   Dropdown,
-  IconUnlock24,
+  Icon,
   Menu,
   ResetPaymentPasswordDialog,
   TableView,
@@ -25,7 +26,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
             id="+OStJM"
           />
         }
-        icon={<IconUnlock24 size="mdS" />}
+        icon={<Icon icon={IconUnlock} size="mdS" />}
         onClick={openResetPaymentPasswordDialog}
         ariaHasPopup="dialog"
       />

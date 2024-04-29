@@ -5,11 +5,12 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount } from 'wagmi'
 
+import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
-import { Dialog, IconCircleCheck40, Spinner, ViewerContext } from '~/components'
+import { Dialog, Icon, SpinnerBlock, ViewerContext } from '~/components'
 import {
   QueryUserByAddressQuery,
   UserDonationRecipientFragment,
@@ -65,7 +66,7 @@ const Complete: React.FC<Props> = ({
   const isHKD = currency === CURRENCY.HKD
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
   const shouldBindWallet =
     viewer.info.ethAddress === null && data?.user === null
@@ -80,7 +81,7 @@ const Complete: React.FC<Props> = ({
         showEthAddress={isUSDT}
       >
         <>
-          <IconCircleCheck40 size="xlM" color="green" />
+          <Icon icon={IconCircleCheckFill} size="xlM" color="green" />
           <p className={styles.hint}>
             {isHKD && (
               <FormattedMessage

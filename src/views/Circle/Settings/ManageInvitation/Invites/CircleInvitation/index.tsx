@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 
+import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
 import {
   Card,
-  IconInfo16,
+  Icon,
   TextIcon,
   Tooltip,
   Translate,
@@ -33,7 +34,7 @@ const CircleInvitationFailedInfo = () => (
   >
     <span className={styles.subtext}>
       <TextIcon
-        icon={<IconInfo16 />}
+        icon={<Icon icon={IconInfo} />}
         color="grey"
         size="xs"
         spacing="xxxtight"

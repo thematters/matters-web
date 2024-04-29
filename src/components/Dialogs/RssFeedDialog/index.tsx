@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   Dialog,
-  Spinner,
+  SpinnerBlock,
   useDialogSwitch,
   // usePublicLazyQuery,
   usePublicQuery,
@@ -47,7 +47,7 @@ const AuthorRssFeedGQL = gql`
 `
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 export type SearchSelectFormProps = {

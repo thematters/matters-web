@@ -1,7 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import { IconEnter20, IconSpinner22, Menu } from '~/components'
+import { ReactComponent as IconNavEnter } from '@/public/static/icons/24px/nav-enter.svg'
+import { Icon, Menu, Spinner } from '~/components'
 import { UserRestrictionsAdminQuery } from '~/gql/graphql'
 
 import { OpenToggleRestrictUserDialogWithProps } from './Dialog'
@@ -46,7 +47,7 @@ const ToggleRestrictUserButton: React.FC<ToggleRestrictUserButtonProps> = ({
   )
 
   if (loading) {
-    return <Menu.Item icon={<IconSpinner22 size="mdS" />} text="正在加載中…" />
+    return <Menu.Item icon={<Spinner size="mdS" />} text="正在加載中…" />
   }
 
   if (data?.user?.__typename !== 'User') return null
@@ -59,7 +60,7 @@ const ToggleRestrictUserButton: React.FC<ToggleRestrictUserButtonProps> = ({
   return (
     <Menu.Item
       text={enabled ? '放出小黑屋' : '關小黑屋'}
-      icon={<IconEnter20 size="mdS" />}
+      icon={<Icon icon={IconNavEnter} size="mdS" />}
       textColor={enabled ? 'greyDarker' : 'red'}
       textActiveColor={enabled ? 'black' : 'redDark'}
       onClick={() => {
