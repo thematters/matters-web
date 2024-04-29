@@ -1,11 +1,11 @@
 .count {
-  padding-left: var(--spacing-xx-tight);
+  padding-left: var(--sp4);
   font-weight: var(--font-weight-semibold);
   color: var(--color-grey);
 }
 
 .smSpacing {
-  padding-bottom: var(--spacing-x-tight);
+  padding-bottom: var(--sp8);
 
   @media (--sm-up) {
     padding-bottom: 0;

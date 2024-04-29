@@ -62,9 +62,9 @@
     & .title {
       @mixin line-clamp;
 
-      padding-top: var(--spacing-x-tight);
-      padding-right: var(--spacing-x-tight);
-      padding-left: var(--spacing-x-base);
+      padding-top: var(--sp8);
+      padding-right: var(--sp8);
+      padding-left: var(--sp14);
       font-size: var(--font-size-sm);
       font-weight: var(--font-weight-normal);
       line-height: 1.25rem;

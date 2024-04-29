@@ -4,7 +4,7 @@
 }
 
 .reconnectHint {
-  padding: var(--spacing-loose) 0 0;
+  padding: var(--sp24) 0 0;
   font-size: var(--font-size-xs);
   color: var(--color-black);
   text-align: left;

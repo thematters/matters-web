@@ -1,7 +1,7 @@
 .header {
   @mixin flex-center-space-between;
 
-  margin: 0 0 var(--spacing-x-tight);
+  margin: 0 0 var(--sp8);
 
   & label {
     font-size: var(--font-size-sm);

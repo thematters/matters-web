@@ -8,7 +8,7 @@
 
   flex-direction: column;
   flex-shrink: 0;
-  padding: var(--spacing-base-loose) var(--spacing-base) 0;
+  padding: var(--sp20) var(--sp16) 0;
 
   & > * {
     flex: 1;
@@ -16,18 +16,18 @@
   }
 
   & > * + * {
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
   }
 }
 
 .smUpContent {
   @mixin flex-center-end;
 
-  padding: 0 var(--spacing-base-loose) 0;
-  margin: var(--spacing-base) 0 var(--spacing-base-loose);
+  padding: 0 var(--sp20) 0;
+  margin: var(--sp16) 0 var(--sp20);
   text-align: right;
 
   & > * + * {
-    margin-left: var(--spacing-x-loose);
+    margin-left: var(--sp32);
   }
 }

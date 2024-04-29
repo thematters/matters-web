@@ -1,12 +1,12 @@
 .container {
   @mixin flex-start-space-between;
 
-  margin: var(--spacing-tight) 0;
+  margin: var(--sp12) 0;
 
   & .title {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-base-tight);
+    gap: var(--sp10);
 
     & .text {
       width: 9.375rem;

@@ -1,6 +1,6 @@
 .selectedTags {
-  padding: 0 var(--spacing-base);
-  margin: var(--spacing-base) 0;
+  padding: 0 var(--sp16);
+  margin: var(--sp16) 0;
 }
 
 .tagList {
@@ -8,8 +8,8 @@
 
   & li {
     display: inline-block;
-    margin-top: var(--spacing-base);
-    margin-right: var(--spacing-tight);
+    margin-top: var(--sp16);
+    margin-right: var(--sp12);
   }
 }
 

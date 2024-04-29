@@ -5,8 +5,8 @@
     @mixin transition;
 
     position: relative;
-    padding: var(--spacing-tight) var(--spacing-base);
-    margin-bottom: var(--spacing-base);
+    padding: var(--sp12) var(--sp16);
+    margin-bottom: var(--sp16);
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
     color: var(--color-black);
@@ -32,42 +32,42 @@
 
     & .icon {
       position: absolute;
-      left: var(--spacing-base-loose);
+      left: var(--sp20);
       height: 1.375rem;
     }
 
     & .right {
       position: absolute;
-      right: var(--spacing-base-loose);
+      right: var(--sp20);
       height: 1.375rem;
     }
   }
 }
 
 .info {
-  padding: 0 var(--spacing-base);
+  padding: 0 var(--sp16);
   color: var(--color-grey);
   text-align: center;
 
   @media (--sm-up) {
-    padding-bottom: var(--spacing-x-tight);
+    padding-bottom: var(--sp8);
   }
 
   .errorHint {
-    margin-bottom: var(--spacing-base);
+    margin-bottom: var(--sp16);
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
     color: var(--color-negative-red);
   }
 
   .title {
-    padding-top: var(--spacing-x-tight);
+    padding-top: var(--sp8);
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
 
     & .left {
       display: inline-block;
-      margin-right: var(--spacing-xx-tight);
+      margin-right: var(--sp4);
     }
 
     & .right {
@@ -85,7 +85,7 @@
   }
 
   .policy {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--sp8);
     font-size: var(--font-size-xs);
     line-height: 1.125rem;
   }

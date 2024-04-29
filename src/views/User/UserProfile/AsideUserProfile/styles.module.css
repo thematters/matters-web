@@ -1,12 +1,12 @@
 .userProfile {
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--sp16);
 }
 
 .header {
   @mixin flex-end-space-between;
 
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-base);
+  padding: 0 var(--sp16);
+  margin-bottom: var(--sp16);
 
   @media (--sm-up) {
     padding: 0;
@@ -41,8 +41,8 @@
 }
 
 .info {
-  padding-left: var(--spacing-x-tight);
-  margin-bottom: var(--spacing-base);
+  padding-left: var(--sp8);
+  margin-bottom: var(--sp16);
 
   & .displayName,
   & .username {
@@ -69,7 +69,7 @@
 
   & .username,
   & .description {
-    margin-bottom: var(--spacing-base);
+    margin-bottom: var(--sp16);
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
     color: var(--color-grey);
@@ -80,18 +80,18 @@
   display: flex;
 
   & > * + * {
-    margin-left: var(--spacing-tight);
+    margin-left: var(--sp12);
   }
 }
 
 .follow {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
   font-size: var(--font-size-md);
   line-height: 1.5rem;
   color: var(--color-grey-darker);
 
   & > * + * {
-    margin-left: var(--spacing-base);
+    margin-left: var(--sp16);
   }
 
   & .count {
@@ -102,24 +102,24 @@
 .meButtons {
   @mixin flex-center-start;
 
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
   font-size: var(--font-size-sm);
 
   & > *:first-child {
-    margin-right: var(--spacing-tight);
+    margin-right: var(--sp12);
   }
 }
 
 .buttons {
   @mixin flex-center-start;
 
-  margin-top: var(--spacing-x-loose);
+  margin-top: var(--sp32);
 
   & > button:first-child {
-    margin-right: var(--spacing-base);
+    margin-right: var(--sp16);
   }
 }
 
 .footer {
-  padding-left: var(--spacing-x-tight);
+  padding-left: var(--sp8);
 }

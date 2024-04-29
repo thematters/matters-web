@@ -1,12 +1,12 @@
 /* .versions {} */
 
 .item {
-  padding: 0 var(--spacing-x-tight);
+  padding: 0 var(--sp8);
   color: var(--color-grey-darker);
   border-left: 2px solid transparent;
 
   & + .item {
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
   }
 }
 
@@ -37,7 +37,7 @@
   line-height: 1.5rem;
 
   & > * + * {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--sp8);
   }
 }
 

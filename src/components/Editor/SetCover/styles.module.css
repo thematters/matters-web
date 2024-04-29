@@ -1,15 +1,15 @@
 .uploader {
   display: block;
-  padding: var(--spacing-x-tight) var(--spacing-base);
-  margin-bottom: var(--spacing-base);
+  padding: var(--sp8) var(--sp16);
+  margin-bottom: var(--sp16);
   border: 2px solid var(--color-grey-light);
   border-style: dashed;
-  border-radius: var(--spacing-xx-tight);
+  border-radius: var(--sp4);
 
   & h3 {
     @mixin flex-center-space-between;
 
-    margin-bottom: var(--spacing-x-tight);
+    margin-bottom: var(--sp8);
   }
 
   & p {
@@ -20,21 +20,21 @@
 
 .selector {
   & h3 {
-    margin-bottom: var(--spacing-base);
+    margin-bottom: var(--sp16);
     font-size: var(--font-size-sm-s);
     font-weight: var(--font-weight-normal);
     color: var(--color-grey);
   }
 
   & ul {
-    margin-right: calc(var(--spacing-base) * -1);
+    margin-right: calc(var(--sp16) * -1);
 
     & li {
       position: relative;
       display: inline-block;
       width: 4.5rem;
       height: 4.5rem;
-      margin: 0 var(--spacing-base) var(--spacing-base) 0;
+      margin: 0 var(--sp16) var(--sp16) 0;
 
       &.selected {
         & img {
@@ -52,7 +52,7 @@
         position: absolute;
         right: 0;
         bottom: 0;
-        margin: 0 var(--spacing-xx-tight) var(--spacing-xx-tight) 0;
+        margin: 0 var(--sp4) var(--sp4) 0;
       }
     }
   }

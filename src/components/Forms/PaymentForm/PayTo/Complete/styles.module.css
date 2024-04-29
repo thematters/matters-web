@@ -3,8 +3,8 @@
   flex-direction: column;
 
   & .hint {
-    padding: var(--spacing-base) 0;
-    margin-bottom: var(--spacing-loose);
+    padding: var(--sp16) 0;
+    margin-bottom: var(--sp24);
     font-size: var(--font-size-sm);
     line-height: 1.375rem;
     color: var(--color-black);

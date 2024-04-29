@@ -5,8 +5,8 @@
 }
 
 .currency {
-  padding-top: var(--spacing-xx-tight);
-  padding-right: var(--spacing-xx-tight);
+  padding-top: var(--sp4);
+  padding-right: var(--sp4);
   font-size: var(--font-size-sm);
 }
 

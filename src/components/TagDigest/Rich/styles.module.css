@@ -24,7 +24,7 @@
 .desc {
   @mixin line-clamp;
 
-  margin: var(--spacing-xx-tight) 0 0 1.25rem;
+  margin: var(--sp4) 0 0 1.25rem;
   font-size: var(--font-size-sm-s);
   color: var(--color-grey-darker);
 }

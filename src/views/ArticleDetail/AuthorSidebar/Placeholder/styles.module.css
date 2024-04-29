@@ -1,8 +1,8 @@
 .container {
   & .tabs {
     display: flex;
-    gap: var(--spacing-base);
-    margin-top: var(--spacing-x-loose);
+    gap: var(--sp16);
+    margin-top: var(--sp32);
 
     & .tabItem {
       width: 4.75rem;
@@ -16,21 +16,21 @@
   & .feed {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-base);
-    margin-top: var(--spacing-base);
+    gap: var(--sp16);
+    margin-top: var(--sp16);
   }
 }
 
 .item {
   display: flex;
-  gap: var(--spacing-x-loose);
-  padding: var(--spacing-tight) 0;
+  gap: var(--sp32);
+  padding: var(--sp12) 0;
 
   & .left {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    gap: var(--spacing-base-tight);
+    gap: var(--sp10);
 
     & .title {
       width: 100%;

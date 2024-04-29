@@ -6,7 +6,7 @@
   bottom: 0;
   z-index: var(--z-index-bottom-bar);
   width: 100%;
-  padding: var(--spacing-x-tight) var(--spacing-base);
+  padding: var(--sp8) var(--sp16);
   background: var(--color-white);
 
   & .buttons {
@@ -15,8 +15,8 @@
     & .commentButton {
       flex-grow: 1;
       justify-content: flex-start;
-      padding: var(--spacing-base-tight);
-      margin-right: var(--spacing-base);
+      padding: var(--sp10);
+      margin-right: var(--sp16);
       font-size: var(--font-size-sm);
       color: var(--color-grey-darker);
       background: var(--color-grey-lighter);

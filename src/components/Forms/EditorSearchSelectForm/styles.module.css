@@ -2,7 +2,7 @@
   @mixin flex-center-start;
   @mixin border-bottom-grey;
 
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 
   @media (--sm-up) {
     padding-top: 0;

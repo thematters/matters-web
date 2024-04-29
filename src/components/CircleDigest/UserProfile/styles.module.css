@@ -4,7 +4,7 @@
   line-height: 1.375rem;
 
   & > * + * {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--sp8);
   }
 }
 

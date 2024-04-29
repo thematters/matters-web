@@ -1,11 +1,11 @@
 .collection {
-  margin: 0 0 var(--spacing-loose);
+  margin: 0 0 var(--sp24);
 
   & .header {
     @mixin flex-center-space-between;
 
-    padding: var(--spacing-x-tight) 0;
-    margin-bottom: var(--spacing-base-loose);
+    padding: var(--sp8) 0;
+    margin-bottom: var(--sp20);
   }
 
   & :global(.list-item:last-child) {

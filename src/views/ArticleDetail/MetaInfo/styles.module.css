@@ -2,7 +2,7 @@
   @mixin flex-center-start;
 
   flex-wrap: wrap;
-  row-gap: var(--spacing-x-tight);
+  row-gap: var(--sp8);
   padding: var(--ar17-100) 0;
   margin-top: var(--ar17-100);
   font-size: var(--font-size-xs);
@@ -24,11 +24,11 @@
 }
 
 .time {
-  margin-right: var(--spacing-xx-tight);
+  margin-right: var(--sp4);
   color: var(--color-grey-darker);
 }
 
 .dot {
-  margin: 0 var(--spacing-x-tight);
+  margin: 0 var(--sp8);
   color: var(--color-grey-darker);
 }

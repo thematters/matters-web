@@ -8,24 +8,24 @@
 }
 
 .item {
-  padding: var(--spacing-x-tight) 0;
+  padding: var(--sp8) 0;
 }
 
 .createCollection {
-  padding: 0 var(--spacing-base) var(--spacing-base);
+  padding: 0 var(--sp16) var(--sp16);
   background: white;
 
   @media (--sm-up) {
-    padding: 0 var(--spacing-base-loose);
+    padding: 0 var(--sp20);
   }
 
   & .hr {
-    padding-top: var(--spacing-tight);
-    margin-top: var(--spacing-tight);
+    padding-top: var(--sp12);
+    margin-top: var(--sp12);
   }
 
   & .button {
-    padding: var(--spacing-x-tight) 0;
+    padding: var(--sp8) 0;
     font-size: var(--font-size-sm);
     line-height: var(--line-height-base-loose);
     color: var(--color-matters-green);
@@ -41,8 +41,8 @@
 .full {
   @mixin border-grey;
 
-  padding: var(--spacing-xxx-tightest) var(--spacing-base-xx-tight);
-  margin-right: var(--spacing-x-tight);
+  padding: var(--sp1) var(--sp6);
+  margin-right: var(--sp8);
   font-size: var(--font-size-xs);
   color: var(--color-grey);
   border-radius: 0.25rem;

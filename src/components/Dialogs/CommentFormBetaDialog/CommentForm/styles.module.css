@@ -1,7 +1,7 @@
 .context {
   flex-grow: 0;
   flex-shrink: 0;
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--sp16);
 }
 
 .form {
@@ -27,7 +27,7 @@
 .count {
   display: flex;
   align-items: center;
-  margin-right: var(--spacing-base-loose);
+  margin-right: var(--sp20);
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
   color: var(--color-negative-red);

@@ -1,5 +1,5 @@
 .head {
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--sp16);
 
   & h4 {
     @mixin flex-center-start;
@@ -23,7 +23,7 @@
     }
 
     & > * + * {
-      margin-left: var(--spacing-xx-tight);
+      margin-left: var(--sp4);
     }
   }
 }

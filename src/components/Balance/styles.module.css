@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   height: 1.875rem;
-  padding: var(--spacing-xx-tight) var(--spacing-x-tight);
+  padding: var(--sp4) var(--sp8);
   line-height: 1.375rem;
   background-color: var(--color-matters-gold-light);
   border-radius: 0.5rem;
@@ -14,10 +14,10 @@
   & .topup {
     @mixin border-left-grey;
 
-    padding-left: var(--spacing-x-tight);
-    margin-top: var(--spacing-xxx-tightest);
-    margin-bottom: var(--spacing-xxx-tightest);
-    margin-left: var(--spacing-x-tight);
+    padding-left: var(--sp8);
+    margin-top: var(--sp1);
+    margin-bottom: var(--sp1);
+    margin-left: var(--sp8);
     border-left-color: var(--color-line-matters-golod-lighter);
   }
 }

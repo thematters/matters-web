@@ -1,6 +1,6 @@
 .container {
   padding-right: calc(4.25rem + 5.25rem);
-  padding-left: var(--spacing-base);
+  padding-left: var(--sp16);
 
   @media (--sm-up) {
     padding-left: 0;
@@ -14,7 +14,7 @@
   top: 0;
   right: 0;
   height: 100%;
-  padding-right: var(--spacing-base);
+  padding-right: var(--sp16);
 
   @media (--sm-up) {
     padding-right: 0;
@@ -33,6 +33,6 @@
   }
 
   & .marginRight {
-    margin-right: var(--spacing-base);
+    margin-right: var(--sp16);
   }
 }

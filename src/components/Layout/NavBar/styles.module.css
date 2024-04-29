@@ -8,11 +8,11 @@
   left: 0;
   z-index: var(--z-index-global-bottom-bar);
   min-height: var(--global-nav-height);
-  padding: var(--spacing-base) var(--spacing-x-loose);
+  padding: var(--sp16) var(--sp32);
   background: var(--color-white);
 
   @media (--xs-down) {
-    padding: var(--spacing-base);
+    padding: var(--sp16);
   }
 
   & .list {

@@ -1,8 +1,8 @@
 .footer {
   @mixin flex-center-space-between;
 
-  padding-left: var(--spacing-x-tight);
-  margin: var(--spacing-x-loose) 0 var(--spacing-base-loose);
+  padding-left: var(--sp8);
+  margin: var(--sp32) 0 var(--sp20);
 }
 
 .links {

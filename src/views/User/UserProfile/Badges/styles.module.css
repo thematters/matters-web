@@ -16,7 +16,7 @@
   color: var(--color-black);
 
   & > * + * {
-    margin-left: var(--spacing-base-loose);
+    margin-left: var(--sp20);
   }
 
   &.itemNomad {
@@ -46,16 +46,16 @@
 .badgesInDialog {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-loose);
+  gap: var(--sp24);
 
   & .badgesGroup {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-base-loose);
+    gap: var(--sp20);
     align-items: stretch;
-    padding: var(--spacing-base) var(--spacing-base-loose);
+    padding: var(--sp16) var(--sp20);
     border: 1px solid var(--color-grey-light);
-    border-radius: var(--spacing-base);
+    border-radius: var(--sp16);
   }
 }
 

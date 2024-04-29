@@ -4,12 +4,12 @@
   & .area {
     width: 100%;
     height: 200rem;
-    padding: var(--spacing-base);
-    margin-top: var(--spacing-loose);
+    padding: var(--sp16);
+    margin-top: var(--sp24);
     color: var(--color-grey);
     text-align: center;
     background: var(--color-grey-lighter);
     border: 2px dashed var(--color-grey-light);
-    border-radius: var(--spacing-base);
+    border-radius: var(--sp16);
   }
 }

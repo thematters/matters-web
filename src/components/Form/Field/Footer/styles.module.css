@@ -1,17 +1,17 @@
 .footer {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
 }
 
 .spaceXTight {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
 }
 
 .spaceBase {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 }
 
 .spaceBaseLoose {
-  margin-top: var(--spacing-base-loose);
+  margin-top: var(--sp20);
 }
 
 .hint {

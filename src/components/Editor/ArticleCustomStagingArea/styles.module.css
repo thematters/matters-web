@@ -1,8 +1,8 @@
 .customArticleArea {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 
   & .hint {
-    padding-bottom: var(--spacing-base);
+    padding-bottom: var(--sp16);
     font-size: var(--font-size-sm-s);
     line-height: 1.125rem;
     color: var(--color-grey);
@@ -21,6 +21,6 @@
   }
 
   & .node + .node {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
   }
 }

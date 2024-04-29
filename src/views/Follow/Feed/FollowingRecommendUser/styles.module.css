@@ -6,17 +6,17 @@
 .head {
   display: flex;
   flex-direction: row;
-  margin-bottom: var(--spacing-x-tight);
+  margin-bottom: var(--sp8);
 }
 
 .wrap {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin-left: var(--spacing-base);
+  margin-left: var(--sp16);
 
   & .name {
-    margin-bottom: var(--spacing-xx-tight);
+    margin-bottom: var(--sp4);
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-medium);
   }

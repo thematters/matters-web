@@ -14,7 +14,7 @@
     display: flex;
 
     & > a {
-      margin-right: var(--spacing-x-tight);
+      margin-right: var(--sp8);
     }
 
     & .singleActorInfo {
@@ -27,19 +27,19 @@
   & .content {
     @mixin line-clamp-3;
 
-    margin-top: var(--spacing-tight);
+    margin-top: var(--sp12);
   }
 
   & .footer {
     @mixin flex-center-end;
 
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--sp8);
   }
 }
 
 .contentWrap {
   flex-grow: 1;
-  padding-top: var(--spacing-xx-tight);
+  padding-top: var(--sp4);
 
   &.overflowHidden {
     overflow: hidden;
@@ -91,7 +91,7 @@
 
 /* NoticeArticleCard */
 .noticeArticleCard {
-  margin-left: var(--spacing-xx-loose);
+  margin-left: var(--sp40);
 }
 
 /* NoticeContentDigest */
@@ -99,8 +99,8 @@
   @mixin border-left-grey;
   @mixin line-clamp;
 
-  padding-left: var(--spacing-base);
-  margin-left: var(--spacing-xx-loose);
+  padding-left: var(--sp16);
+  margin-left: var(--sp40);
   color: var(--color-black);
   text-overflow: ellipsis;
   border-left-style: dashed;

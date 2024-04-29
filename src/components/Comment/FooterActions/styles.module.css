@@ -1,7 +1,7 @@
 .footer {
   @mixin flex-center-space-between;
 
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
   font-size: var(--font-size-xs);
   color: var(--color-grey);
 
@@ -13,11 +13,11 @@
     }
 
     & > * + * {
-      padding-left: var(--spacing-loose);
+      padding-left: var(--sp24);
     }
   }
 }
 
 .reply-form {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 }

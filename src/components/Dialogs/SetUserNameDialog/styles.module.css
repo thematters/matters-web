@@ -1,6 +1,6 @@
 .atFlag {
   display: inline-block;
-  padding-right: var(--spacing-xx-tight);
+  padding-right: var(--sp4);
   font-size: var(--font-size-sm);
   line-height: 1.375rem;
   color: var(--color-grey-light);

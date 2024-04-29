@@ -16,7 +16,7 @@
     }
 
     & + ul {
-      padding-top: var(--spacing-base);
+      padding-top: var(--sp16);
     }
 
     @media (--sm-up) {
@@ -67,14 +67,14 @@
     }
 
     & + li {
-      margin-top: var(--spacing-base);
+      margin-top: var(--sp16);
     }
   }
 
   & time {
     box-sizing: content-box;
     min-width: 5.375rem;
-    padding-left: var(--spacing-base);
+    padding-left: var(--sp16);
     color: var(--color-grey-darker);
     white-space: nowrap;
 
@@ -94,7 +94,7 @@
 }
 
 .event {
-  padding-left: var(--spacing-x-tight);
+  padding-left: var(--sp8);
 }
 
 .coming-event {

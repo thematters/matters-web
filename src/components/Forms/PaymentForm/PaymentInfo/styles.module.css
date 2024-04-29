@@ -3,25 +3,25 @@
 }
 
 .to {
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--sp16);
   font-size: var(--font-size-sm);
 }
 
 .recipient {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-black);
 }
 
 .amount {
-  margin: var(--spacing-loose) 0;
+  margin: var(--sp24) 0;
   font-size: var(--font-size-xxxl-s);
   font-weight: var(--font-weight-semibold);
   line-height: 3rem;
 }
 
 .address {
-  margin-top: var(--spacing-x-tight);
-  margin-bottom: var(--spacing-loose);
+  margin-top: var(--sp8);
+  margin-bottom: var(--sp24);
 }

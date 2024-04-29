@@ -5,7 +5,7 @@
     & .author {
       @mixin flex-center-start;
 
-      gap: var(--spacing-x-tight);
+      gap: var(--sp8);
 
       & .info {
         display: flex;
@@ -14,7 +14,7 @@
         & .top {
           @mixin flex-center-start;
 
-          gap: var(--spacing-base-xx-tight);
+          gap: var(--sp6);
         }
 
         & .displayName {
@@ -34,16 +34,16 @@
     display: inline-flex;
     align-items: center;
     height: 1.375rem;
-    margin-left: var(--spacing-base);
+    margin-left: var(--sp16);
 
     & > * + * {
-      margin-left: var(--spacing-tight);
+      margin-left: var(--sp12);
     }
   }
 }
 
 .contentContainer {
-  margin-top: var(--spacing-tight);
+  margin-top: var(--sp12);
 
   &.descendant {
     width:;

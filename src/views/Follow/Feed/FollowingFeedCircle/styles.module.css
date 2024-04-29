@@ -1,5 +1,5 @@
 .container {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 
   @media (--sm-up) {
     padding-right: 0;
@@ -32,7 +32,7 @@
 
 .avatar {
   grid-area: avatar;
-  margin-left: var(--spacing-base);
+  margin-left: var(--sp16);
 }
 
 .footer {

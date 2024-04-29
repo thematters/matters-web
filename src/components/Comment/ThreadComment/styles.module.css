@@ -2,10 +2,10 @@
   padding-left: 2.5rem;
 
   & li {
-    margin: var(--spacing-base) 0;
+    margin: var(--sp16) 0;
 
     & + li {
-      padding-top: var(--spacing-xx-tight);
+      padding-top: var(--sp4);
     }
 
     &:last-child {
@@ -18,14 +18,11 @@
 
       &::before {
         position: absolute;
-        top: calc(1.5rem + var(--spacing-x-tight));
+        top: calc(1.5rem + var(--sp8));
         left: calc(1.5rem / 2);
         width: 1px;
         height: 0;
-        height: calc(
-          100% - var(--spacing-base) - var(--spacing-x-tight) +
-            var(--spacing-xx-tight)
-        );
+        height: calc(100% - var(--sp16) - var(--sp8) + var(--sp4));
         content: '';
         background-color: var(--color-line-grey-light);
       }
@@ -33,7 +30,7 @@
   }
 
   & .contentContainer {
-    padding-left: var(--spacing-x-loose);
-    margin-top: var(--spacing-x-tight);
+    padding-left: var(--sp32);
+    margin-top: var(--sp8);
   }
 }

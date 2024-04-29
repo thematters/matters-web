@@ -30,14 +30,14 @@
   }
 
   & ul {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
   }
 
   & li {
     & a {
       @mixin flex-center-space-between;
 
-      padding: var(--spacing-base) var(--spacing-base) var(--spacing-base) 0;
+      padding: var(--sp16) var(--sp16) var(--sp16) 0;
       font-size: var(--font-size-lg);
 
       &:hover,

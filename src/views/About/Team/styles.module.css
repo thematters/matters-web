@@ -28,7 +28,7 @@
   position: relative;
   grid-column: 1 / -1;
   align-self: end;
-  margin-top: var(--spacing-xx-loose);
+  margin-top: var(--sp40);
   text-align: center;
 
   & h3 {
@@ -37,7 +37,7 @@
     color: var(--color-matters-green);
 
     & span {
-      padding: 0 var(--spacing-base);
+      padding: 0 var(--sp16);
       background: var(--color-white);
     }
 
@@ -68,7 +68,7 @@
     & img {
       display: block;
       width: 8.75rem;
-      margin: 0 auto var(--spacing-loose);
+      margin: 0 auto var(--sp24);
     }
 
     & p,

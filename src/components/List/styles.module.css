@@ -31,57 +31,57 @@
 
   &.spacingYBase {
     & > :global(.list-item) {
-      padding-bottom: calc(var(--spacing-base) / 2);
-      margin-bottom: calc(var(--spacing-base) / 2);
+      padding-bottom: calc(var(--sp16) / 2);
+      margin-bottom: calc(var(--sp16) / 2);
     }
   }
 
   &.spacingYBaseLoose {
     & > :global(.list-item) {
-      padding-bottom: calc(var(--spacing-base-loose) / 2);
-      margin-bottom: calc(var(--spacing-base-loose) / 2);
+      padding-bottom: calc(var(--sp20) / 2);
+      margin-bottom: calc(var(--sp20) / 2);
     }
   }
 
   &.spacingYLoose {
     & > :global(.list-item) {
-      padding-bottom: calc(var(--spacing-loose) / 2);
-      margin-bottom: calc(var(--spacing-loose) / 2);
+      padding-bottom: calc(var(--sp24) / 2);
+      margin-bottom: calc(var(--sp24) / 2);
     }
   }
 
   &.spacingYXloose {
     & > :global(.list-item) {
-      padding-bottom: calc(var(--spacing-x-loose) / 2);
-      margin-bottom: calc(var(--spacing-x-loose) / 2);
+      padding-bottom: calc(var(--sp32) / 2);
+      margin-bottom: calc(var(--sp32) / 2);
     }
   }
 
   &.spacingXBase {
     & > :global(.list-item) {
-      padding-right: var(--spacing-base);
-      padding-left: var(--spacing-base);
+      padding-right: var(--sp16);
+      padding-left: var(--sp16);
     }
   }
 
   &.spacingXBaseLoose {
     & > :global(.list-item) {
-      padding-right: var(--spacing-base-loose);
-      padding-left: var(--spacing-base-loose);
+      padding-right: var(--sp20);
+      padding-left: var(--sp20);
     }
   }
 
   &.spacingXLoose {
     & > :global(.list-item) {
-      padding-right: var(--spacing-loose);
-      padding-left: var(--spacing-loose);
+      padding-right: var(--sp24);
+      padding-left: var(--sp24);
     }
   }
 
   &.spacingXXloose {
     & > :global(.list-item) {
-      padding-right: var(--spacing-x-loose);
-      padding-left: var(--spacing-x-loose);
+      padding-right: var(--sp32);
+      padding-left: var(--sp32);
     }
   }
 }

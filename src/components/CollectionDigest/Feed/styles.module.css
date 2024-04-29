@@ -1,5 +1,5 @@
 .wrapper {
-  padding: var(--spacing-base-loose) 0;
+  padding: var(--sp20) 0;
 }
 
 .container {
@@ -34,10 +34,10 @@
 p.articleCount,
 .description,
 .footer {
-  margin-top: var(--spacing-base-xx-tight);
+  margin-top: var(--sp6);
 
   @media (--sm-up) {
-    margin-top: var(--spacing-tight);
+    margin-top: var(--sp12);
   }
 }
 

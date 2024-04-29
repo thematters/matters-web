@@ -1,5 +1,5 @@
 .toolbar {
-  margin: var(--spacing-base) 0;
+  margin: var(--sp16) 0;
   background: var(--color-white);
 
   & .buttons {
@@ -7,12 +7,12 @@
 
     & .left {
       display: flex;
-      gap: var(--spacing-base);
+      gap: var(--sp16);
     }
 
     & .right {
       display: flex;
-      gap: var(--spacing-loose);
+      gap: var(--sp24);
     }
   }
 }

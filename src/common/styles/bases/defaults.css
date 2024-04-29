@@ -83,11 +83,11 @@ pre {
 code,
 kbd,
 samp {
-  padding: var(--spacing-xx-tight);
+  padding: var(--sp4);
 }
 
 pre {
-  padding: var(--spacing-tight) var(--spacing-base);
+  padding: var(--sp12) var(--sp16);
 }
 
 .grecaptcha-badge {

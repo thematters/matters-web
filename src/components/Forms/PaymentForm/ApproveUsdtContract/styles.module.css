@@ -19,8 +19,8 @@
     }
 
     & .info {
-      margin-top: var(--spacing-x-tight);
-      margin-bottom: var(--spacing-loose);
+      margin-top: var(--sp8);
+      margin-bottom: var(--sp24);
       font-size: var(--font-size-sm);
       line-height: 1.375rem;
       color: var(--color-grey-darker);
@@ -28,7 +28,7 @@
   }
 
   & .error {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
     font-size: var(--font-size-xs);
     line-height: 1.125rem;
     color: var(--color-negative-red);
