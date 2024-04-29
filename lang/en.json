@@ -209,6 +209,10 @@
     "defaultMessage": "Response",
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
   },
+  "24jhEp": {
+    "defaultMessage": "Failed to republish {articleTitle}",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
+  },
   "25oM9Q": {
     "defaultMessage": "Sort"
   },
@@ -1296,10 +1300,6 @@
   "QUqfbW": {
     "defaultMessage": "Describe more about your Circle",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
-  "QV19cI": {
-    "defaultMessage": "Failed to republish article",
-    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "QXJQ5G": {
     "defaultMessage": "Please log in again.",

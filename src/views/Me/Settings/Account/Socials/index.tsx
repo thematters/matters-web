@@ -2,10 +2,10 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconFacebook } from '@/public/static/icons/24px/facebook.svg'
-import { ReactComponent as IconGoogle } from '@/public/static/icons/24px/google.svg'
+import { ReactComponent as IconFacebook2 } from '@/public/static/icons/24px/facebook2.svg'
+import { ReactComponent as IconGoogle2 } from '@/public/static/icons/24px/google2.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { ReactComponent as IconX } from '@/public/static/icons/24px/x.svg'
+import { ReactComponent as IconX2 } from '@/public/static/icons/24px/x2.svg'
 import {
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
@@ -167,7 +167,7 @@ const Socials = () => {
             <TableView.Cell
               title={
                 <TextIcon
-                  icon={<Icon icon={IconGoogle} size="mdM" />}
+                  icon={<Icon icon={IconGoogle2} size="mdM" />}
                   spacing="tight"
                 >
                   Google
@@ -213,10 +213,10 @@ const Socials = () => {
             <TableView.Cell
               title={
                 <TextIcon
-                  icon={<Icon icon={IconX} size="mdM" />}
+                  icon={<Icon icon={IconX2} size="mdM" />}
                   spacing="tight"
                 >
-                  Twitter
+                  X
                 </TextIcon>
               }
               rightText={twitterId ? `@${twitterId}` : undefined}
@@ -259,7 +259,7 @@ const Socials = () => {
             <TableView.Cell
               title={
                 <TextIcon
-                  icon={<Icon icon={IconFacebook} size="mdM" />}
+                  icon={<Icon icon={IconFacebook2} size="mdM" />}
                   spacing="tight"
                 >
                   Facebook

@@ -209,6 +209,10 @@
     "defaultMessage": "回應設置",
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
   },
+  "24jhEp": {
+    "defaultMessage": "你的修訂作品 {articleTitle} 發布失敗",
+    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
+  },
   "25oM9Q": {
     "defaultMessage": "排序"
   },
@@ -1296,10 +1300,6 @@
   "QUqfbW": {
     "defaultMessage": "說說圍爐的有趣之處，吸引支持者加入",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
-  "QV19cI": {
-    "defaultMessage": "你的修訂作品發布失敗",
-    "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "QXJQ5G": {
     "defaultMessage": "授權信息已失效，請重新登入",

@@ -2,9 +2,9 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconGoogle } from '@/public/static/icons/24px/google.svg'
+import { ReactComponent as IconGoogle2 } from '@/public/static/icons/24px/google2.svg'
 import { ReactComponent as IconMail } from '@/public/static/icons/24px/mail.svg'
-import { ReactComponent as IconX } from '@/public/static/icons/24px/x.svg'
+import { ReactComponent as IconX2 } from '@/public/static/icons/24px/x2.svg'
 import { PATHS } from '~/common/enums'
 import {
   // facebookOauthUrl,
@@ -79,7 +79,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
         </li>
         <li className={styles.item} role="button" onClick={gotoGoogle}>
           <span className={styles.icon}>
-            <Icon icon={IconGoogle} size="mdM" />
+            <Icon icon={IconGoogle2} size="mdM" />
           </span>
           <span className={styles.name}>Google</span>
           {isGoogleLoading && (
@@ -90,9 +90,9 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
         </li>
         <li className={styles.item} role="button" onClick={gotoTwitter}>
           <span className={styles.icon}>
-            <Icon icon={IconX} size="mdM" />
+            <Icon icon={IconX2} size="mdM" />
           </span>
-          <span className={styles.name}>Twitter</span>
+          <span className={styles.name}>X</span>
           {isTwitterLoading && (
             <span className={styles.right}>
               <Spinner color="grey" size="mdM" />
