@@ -38,7 +38,6 @@ export const CommentDraftsProvider = ({
   const { router } = useRoute()
 
   const hint = intl.formatMessage({
-    // FIXME: fix i18n
     defaultMessage:
       'Your have unsaved comments that will be lost if you leave the page.',
     id: 'LILxpV',
