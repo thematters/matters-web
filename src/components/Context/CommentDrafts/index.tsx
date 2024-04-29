@@ -1,17 +1,18 @@
-import { useApolloClient } from '@apollo/react-hooks'
 import { createContext, ReactNode, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import { useRoute } from '~/components/Hook'
 
-type draft = string
+type Drafts = {
+  [key: string]: any
+}
 
 export const CommentDraftsContext = createContext(
   {} as {
-    drafts: draft[]
-    addDraft: (draft: draft) => void
-    removeDraft: (draft: draft) => void
+    drafts: Drafts
+    getDraft: (key: string) => string
+    updateDraft: (key: string, content: string) => void
+    removeDraft: (key: string) => void
   }
 )
 
@@ -21,23 +22,20 @@ export const CommentDraftsProvider = ({
   children: ReactNode
 }) => {
   const intl = useIntl()
-  const [drafts] = useState<draft[]>([])
-  const addDraft = (draft: draft) => {
-    if (drafts.indexOf(draft) !== -1) {
-      return
-    }
-    drafts.push(draft)
+  const [drafts] = useState<Drafts>({})
+  const updateDraft = (key: string, content: string) => {
+    drafts[key] = content
   }
 
-  const removeDraft = (draft: draft) => {
-    const index = drafts.indexOf(draft)
-    if (index !== -1) {
-      drafts.splice(index, 1)
-    }
+  const getDraft = (key: string) => {
+    return drafts[key]
+  }
+
+  const removeDraft = (key: string) => {
+    delete drafts[key]
   }
 
   const { router } = useRoute()
-  const client = useApolloClient()
 
   const hint = intl.formatMessage({
     // FIXME: fix i18n
@@ -74,28 +72,17 @@ export const CommentDraftsProvider = ({
       return content === '' || content === '<p></p>'
     }
 
-    const queryAllDrafts = async () => {
-      return await Promise.all(
-        drafts.map((draft) => {
-          return client.query({
-            query: COMMENT_DRAFT,
-            variables: { id: draft },
-          })
-        })
-      )
+    const checkAllDraftsEmpty = () => {
+      const keys = Object.keys(drafts)
+      return keys.every((key) => isDraftEmpty(drafts[key]))
     }
 
-    const checkAllDraftsEmpty = async () => {
-      const datas = await queryAllDrafts()
-      return datas.every(({ data }) => isDraftEmpty(data?.commentDraft.content))
-    }
-
-    const handleBeforeUnload = async (event: BeforeUnloadEvent) => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       if (drafts.length === 0) {
         return
       }
 
-      const allEmptyDraft = await checkAllDraftsEmpty()
+      const allEmptyDraft = checkAllDraftsEmpty()
       if (!allEmptyDraft) {
         event.returnValue = hint
         return hint
@@ -109,7 +96,8 @@ export const CommentDraftsProvider = ({
           return
         }
 
-        const allEmptyDraft = await checkAllDraftsEmpty()
+        const allEmptyDraft = checkAllDraftsEmpty()
+        console.log({ allEmptyDraft, drafts })
         if (allEmptyDraft) {
           navigateTo(url)
         } else {
@@ -128,7 +116,9 @@ export const CommentDraftsProvider = ({
   }, [drafts])
 
   return (
-    <CommentDraftsContext.Provider value={{ drafts, addDraft, removeDraft }}>
+    <CommentDraftsContext.Provider
+      value={{ drafts, getDraft, updateDraft, removeDraft }}
+    >
       {children}
     </CommentDraftsContext.Provider>
   )
