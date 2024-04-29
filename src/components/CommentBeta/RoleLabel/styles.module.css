@@ -4,7 +4,7 @@
 
   height: 1.125rem;
   padding: 0 var(--sp4);
-  font-size: var(--font-size-xs);
+  font-size: var(--text12);
   color: var(--color-white);
   user-select: none;
   border-radius: var(--sp4);

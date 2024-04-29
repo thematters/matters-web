@@ -1,8 +1,8 @@
 .notice {
   position: relative;
   padding: var(--sp8) var(--sp16);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
   visibility: visible;
   border-radius: var(--sp8);
   box-shadow: var(--shadow-light);
@@ -22,7 +22,7 @@
 
 .subDescription {
   margin-top: var(--sp4);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
   opacity: 0.7;
 }
 
@@ -30,7 +30,7 @@
   display: inline-flex;
   flex-shrink: 0;
   margin-left: var(--sp8);
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
 }
 
 .green {

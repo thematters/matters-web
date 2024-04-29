@@ -5,13 +5,13 @@
   background-image: var(--migration-banner-bg);
 
   & h4 {
-    font-size: var(--font-size-md);
+    font-size: var(--text16);
     color: var(--color-matters-green);
   }
 
   & p {
     margin: var(--sp8) 0 var(--sp16);
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     color: var(--color-grey-darker);
   }
 
@@ -19,11 +19,11 @@
     padding: var(--sp32) var(--sp40);
 
     & h4 {
-      font-size: var(--font-size-lg);
+      font-size: var(--text20);
     }
 
     & p {
-      font-size: var(--font-size-md);
+      font-size: var(--text16);
     }
   }
 }

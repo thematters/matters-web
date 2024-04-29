@@ -21,7 +21,7 @@
   }
 
   & .subtext {
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
   }
 
   & .period {

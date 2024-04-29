@@ -16,7 +16,7 @@
   }
 
   & p {
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     line-height: 1.25rem;
   }
 
@@ -40,7 +40,7 @@
     @mixin flex-center-all;
 
     margin-top: var(--sp16);
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
 
     & .transactionLeft {
       display: inline-flex;

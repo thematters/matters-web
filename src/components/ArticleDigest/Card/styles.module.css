@@ -21,7 +21,7 @@
 }
 
 .summary {
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   color: var(--color-grey-darker);
   -webkit-line-clamp: 2;
 

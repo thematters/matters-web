@@ -31,7 +31,7 @@
         width: 100%;
         padding-left: var(--sp8);
         margin-right: var(--sp8);
-        font-size: var(--font-size-sm);
+        font-size: var(--text14);
         line-height: 2.375rem;
         color: var(--color-grey-dark);
 
@@ -70,13 +70,13 @@
 }
 
 .title {
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1.375rem;
 }
 
 .description {
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-normal);
+  font-size: var(--text12);
+  font-weight: var(--font-normal);
   line-height: 1.125rem;
   color: var(--color-grey);
 
@@ -101,7 +101,7 @@
 
       padding-right: var(--sp8);
       font-family: var(--font-mono);
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
       background: transparent;
     }
   }
@@ -124,7 +124,7 @@
   @mixin flex-start-start;
 
   padding: var(--sp8) var(--sp16);
-  font-size: var(--font-size-md-s);
+  font-size: var(--text15);
   line-height: 1.5rem;
 
   & svg {

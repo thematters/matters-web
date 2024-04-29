@@ -8,7 +8,7 @@
   border-radius: 0.5rem;
 
   & .balance {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-medium);
   }
 
   & .topup {

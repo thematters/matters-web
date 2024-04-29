@@ -1,41 +1,41 @@
 .textSizeXs {
-  font-size: var(--font-size-xs);
+  font-size: var(--text12);
 }
 
 .textSizeSmS {
-  font-size: var(--font-size-sm-s);
+  font-size: var(--text13);
 }
 
 .textSizeSm {
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
 }
 
 .textSizeMdS {
-  font-size: var(--font-size-md-s);
+  font-size: var(--text15);
 }
 
 .textSizeMd {
-  font-size: var(--font-size-md);
+  font-size: var(--text16);
 }
 
 .textSizeXm {
-  font-size: var(--font-size-xm);
+  font-size: var(--text18);
 }
 
 .textSizeXl {
-  font-size: var(--font-size-xl);
+  font-size: var(--text24);
 }
 
 .textWeightNormal {
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
 }
 
 .textWeightMd {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
 }
 
 .textWeightSemibold {
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-semibold);
 }
 
 .lineClamp {

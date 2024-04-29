@@ -2,8 +2,8 @@
   @mixin flex-center-space-between;
 
   padding: var(--sp8) 0;
-  font-size: var(--font-size-md-s);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text15);
+  font-weight: var(--font-medium);
 }
 
 .count {

@@ -13,7 +13,7 @@
   }
 
   & p {
-    font-size: var(--font-size-sm-s);
+    font-size: var(--text13);
     color: var(--color-grey);
   }
 }
@@ -21,8 +21,8 @@
 .selector {
   & h3 {
     margin-bottom: var(--sp16);
-    font-size: var(--font-size-sm-s);
-    font-weight: var(--font-weight-normal);
+    font-size: var(--text13);
+    font-weight: var(--font-normal);
     color: var(--color-grey);
   }
 

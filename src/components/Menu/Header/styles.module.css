@@ -4,14 +4,14 @@
   padding: var(--sp8) var(--sp16);
 
   & h3 {
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-semibold);
   }
 }
 
 .sizeMdS {
-  font-size: var(--font-size-md-s);
+  font-size: var(--text15);
 }
 
 .sizeLg {
-  font-size: var(--font-size-lg);
+  font-size: var(--text20);
 }

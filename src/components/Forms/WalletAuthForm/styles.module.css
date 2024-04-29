@@ -21,13 +21,13 @@
 
 .subtitle {
   margin: var(--sp24) 0 calc(var(--sp8) * -1);
-  font-size: var(--font-size-xm);
+  font-size: var(--text18);
 }
 
 .notice {
   padding: var(--sp16);
   margin: var(--sp24) 0 var(--sp24);
-  font-size: var(--font-size-sm-s);
+  font-size: var(--text13);
   line-height: 1.5rem;
   text-align: center;
   background: var(--color-yellow-lighter);
@@ -69,7 +69,7 @@
   position: relative;
   padding: var(--sp12) var(--sp16);
   margin-bottom: var(--sp16);
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-black);
   cursor: pointer;
@@ -95,7 +95,7 @@
   gap: var(--sp12);
   align-self: stretch;
   height: 6.88rem;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-grey-darker);
   background: var(--color-green-lighter);

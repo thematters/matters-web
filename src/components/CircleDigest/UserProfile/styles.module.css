@@ -1,6 +1,6 @@
 .container {
   position: relative;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1.375rem;
 
   & > * + * {

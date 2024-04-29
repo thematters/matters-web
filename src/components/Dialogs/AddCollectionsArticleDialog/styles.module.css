@@ -26,7 +26,7 @@
 
   & .button {
     padding: var(--sp8) 0;
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     line-height: var(--line-height-base-loose);
     color: var(--color-matters-green);
     cursor: pointer;
@@ -43,7 +43,7 @@
 
   padding: var(--sp1) var(--sp6);
   margin-right: var(--sp8);
-  font-size: var(--font-size-xs);
+  font-size: var(--text12);
   color: var(--color-grey);
   border-radius: 0.25rem;
 }

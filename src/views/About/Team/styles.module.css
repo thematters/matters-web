@@ -2,8 +2,8 @@
   padding: 5rem 0;
 
   & h2 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--text24);
+    font-weight: var(--font-semibold);
     text-align: center;
   }
 
@@ -33,7 +33,7 @@
 
   & h3 {
     position: relative;
-    font-size: var(--font-size-lg);
+    font-size: var(--text20);
     color: var(--color-matters-green);
 
     & span {
@@ -73,16 +73,16 @@
 
     & p,
     & h4 {
-      font-weight: var(--font-weight-normal);
+      font-weight: var(--font-normal);
       line-height: 1.5rem;
     }
 
     & p {
-      font-size: var(--font-size-xs);
+      font-size: var(--text12);
     }
 
     & h4 {
-      font-size: var(--font-size-md);
+      font-size: var(--text16);
     }
   }
 

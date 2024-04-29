@@ -149,8 +149,8 @@
           & h3 {
             @mixin line-clamp;
 
-            font-size: var(--font-size-md);
-            font-weight: var(--font-weight-semibold);
+            font-size: var(--text16);
+            font-weight: var(--font-semibold);
             -webkit-line-clamp: 2;
           }
 
@@ -158,9 +158,9 @@
             position: absolute;
             right: var(--sp16);
             bottom: var(--sp16);
-            font-size: var(--font-size-sm);
+            font-size: var(--text14);
             font-style: normal;
-            font-weight: var(--font-weight-medium);
+            font-weight: var(--font-medium);
           }
         }
       }
@@ -183,11 +183,11 @@
             }
 
             & h3 {
-              font-size: var(--font-size-xl);
+              font-size: var(--text24);
             }
 
             & cite {
-              font-size: var(--font-size-md);
+              font-size: var(--text16);
             }
           }
         }

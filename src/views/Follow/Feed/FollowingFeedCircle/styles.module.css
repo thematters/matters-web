@@ -16,8 +16,8 @@
 
 .title {
   grid-area: title;
-  font-size: var(--font-size-xm);
-  font-weight: var(--font-weight-normal);
+  font-size: var(--text18);
+  font-weight: var(--font-normal);
   line-height: 1.5rem;
 }
 
@@ -25,7 +25,7 @@
   @mixin line-clamp;
 
   grid-area: description;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1.5rem;
   color: var(--color-grey-dark);
 }

@@ -5,19 +5,19 @@
 
 .hint {
   margin-top: 0;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   color: var(--color-grey-dark);
 }
 
 .intro {
   & h4 {
     margin-bottom: var(--sp8);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text12);
+    font-weight: var(--font-medium);
   }
 
   & p {
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
     color: var(--color-grey);
   }
 }

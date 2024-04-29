@@ -1,8 +1,8 @@
 .group {
   & .name {
     margin: var(--sp32) 0 0;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
+    font-size: var(--text14);
+    font-weight: var(--font-normal);
     color: var(--color-grey-dark);
   }
 

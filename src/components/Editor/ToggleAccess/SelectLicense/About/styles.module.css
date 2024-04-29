@@ -1,6 +1,6 @@
 .container {
   margin-top: var(--sp4);
-  font-size: var(--font-size-xs);
+  font-size: var(--text12);
 
   & a {
     color: var(--color-matters-green);

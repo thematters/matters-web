@@ -5,14 +5,14 @@
   line-height: 1rem;
 
   & .currency {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text16);
+    font-weight: var(--font-medium);
     color: black;
   }
 
   & .subCurrency {
     padding-top: var(--sp8);
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
     color: var(--color-grey);
   }
 }

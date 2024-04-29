@@ -41,7 +41,7 @@
   & .title {
     @mixin line-clamp;
 
-    font-size: var(--font-size-sm-s);
+    font-size: var(--text13);
     line-height: 1.5rem;
     color: var(--color-grey-dark);
 

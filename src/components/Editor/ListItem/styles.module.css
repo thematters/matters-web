@@ -5,14 +5,14 @@
   line-height: 1;
 
   & .title {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text16);
+    font-weight: var(--font-medium);
     line-height: 1rem;
   }
 
   & .subtitle {
     margin-top: var(--sp8);
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
     line-height: 1rem;
     color: var(--color-matters-gold);
 
@@ -36,7 +36,7 @@
   flex-shrink: 0;
   width: 2rem;
   height: 2rem;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   color: var(--color-grey-darker);
   background: var(--color-grey-lighter);
   border-radius: var(--sp8);

@@ -18,8 +18,8 @@
 
   & .title {
     margin-bottom: var(--sp8);
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text16);
+    font-weight: var(--font-medium);
 
     & > a {
       @mixin line-clamp;
@@ -53,7 +53,7 @@
   @mixin line-clamp;
 
   height: 2.75rem;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   color: var(--color-grey-dark);
   -webkit-line-clamp: 2;
 }

@@ -2,7 +2,7 @@
   & ul {
     position: relative;
     grid-column: 1 / -1;
-    font-size: var(--font-size-md);
+    font-size: var(--text16);
 
     &::before {
       position: absolute;
@@ -21,7 +21,7 @@
 
     @media (--sm-up) {
       grid-column: span 4;
-      font-size: var(--font-size-xm);
+      font-size: var(--text18);
       line-height: 2rem;
 
       & + ul {
@@ -31,7 +31,7 @@
 
     @media (--md-up) {
       grid-column: span 4;
-      font-size: var(--font-size-xl);
+      font-size: var(--text24);
 
       & + ul {
         grid-column: span 4 / -1;
@@ -98,6 +98,6 @@
 }
 
 .coming-event {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
   color: var(--color-matters-green);
 }

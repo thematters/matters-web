@@ -4,7 +4,7 @@
 
   height: 3rem;
   margin: var(--sp16) var(--sp16) var(--sp24);
-  font-size: var(--font-size-md);
+  font-size: var(--text16);
   color: var(--color-white);
   background: var(--color-matters-gold);
   border-radius: var(--sp8);

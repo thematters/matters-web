@@ -23,8 +23,8 @@
   display: flex;
   flex-shrink: 0;
   padding-right: var(--sp12);
-  font-size: var(--font-size-xm);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--text18);
+  font-weight: var(--font-semibold);
   line-height: var(--line-height-base);
   color: var(--color-matters-gold);
 }
@@ -33,7 +33,7 @@
   @mixin line-clamp;
 
   font-size: var(font-size-md-s);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
   line-height: var(--line-height-base);
 }
 

@@ -29,8 +29,8 @@
     }
 
     & .title {
-      font-size: var(--font-size-xm);
-      font-weight: var(--font-weight-medium);
+      font-size: var(--text18);
+      font-weight: var(--font-medium);
 
       & span.number {
         padding-right: var(--sp8);
@@ -42,7 +42,7 @@
     & .subContent {
       margin-top: var(--sp16);
       margin-bottom: var(--sp8);
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
       color: var(--color-grey-dark);
     }
 
@@ -51,7 +51,7 @@
     }
 
     & .subContentLink {
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
       color: var(--color-matters-green);
     }
   }

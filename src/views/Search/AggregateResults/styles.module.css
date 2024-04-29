@@ -2,8 +2,8 @@
   @mixin flex-center-start;
 
   padding: var(--sp24) var(--sp16) var(--sp16);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
   color: var(--color-grey);
 
   @media (--lg-up) {
@@ -11,7 +11,7 @@
 
     padding-right: 0;
     padding-left: 0;
-    font-size: var(--font-size-xm);
+    font-size: var(--text18);
   }
 
   & .titleLeft {

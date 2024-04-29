@@ -4,7 +4,7 @@
 }
 
 .hint {
-  font-size: var(--font-size-sm-s);
+  font-size: var(--text13);
   line-height: 1.125rem;
   color: var(--color-grey);
 }

@@ -3,17 +3,17 @@
 }
 
 .textSizeXs {
-  font-size: var(--font-size-xs);
+  font-size: var(--text12);
 }
 
 .textSizeMd {
-  font-size: var(--font-size-md);
+  font-size: var(--text16);
 }
 
 .textWeightNormal {
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
 }
 
 .textWeightMd {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
 }
