@@ -287,9 +287,6 @@
     "defaultMessage": "继续使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
-  "3rqn2V": {
-    "defaultMessage": "評論尚未發布，確定放棄內容離開此頁嗎？"
-  },
   "3w3CC8": {
     "defaultMessage": "关联 ENS"
   },
@@ -1077,6 +1074,9 @@
   },
   "LGox1K": {
     "defaultMessage": "已追踪"
+  },
+  "LILxpV": {
+    "defaultMessage": "评论尚未发布，确定放弃内容离开此页吗？"
   },
   "LOefol": {
     "defaultMessage": "上锁",

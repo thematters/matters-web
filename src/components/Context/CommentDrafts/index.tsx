@@ -41,8 +41,9 @@ export const CommentDraftsProvider = ({
 
   const hint = intl.formatMessage({
     // FIXME: fix i18n
-    defaultMessage: '評論尚未發布，確定放棄內容離開此頁嗎？',
-    id: '3rqn2V',
+    defaultMessage:
+      'Your have unsaved comments that will be lost if you leave the page.',
+    id: 'LILxpV',
   })
 
   useEffect(() => {

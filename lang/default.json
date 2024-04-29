@@ -287,9 +287,6 @@
     "defaultMessage": "Continued use indicates your agreement to",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
-  "3rqn2V": {
-    "defaultMessage": "評論尚未發布，確定放棄內容離開此頁嗎？"
-  },
   "3w3CC8": {
     "defaultMessage": "Link ENS"
   },
@@ -1077,6 +1074,9 @@
   },
   "LGox1K": {
     "defaultMessage": "Followed"
+  },
+  "LILxpV": {
+    "defaultMessage": "Your have unsaved comments that will be lost if you leave the page."
   },
   "LOefol": {
     "defaultMessage": "Paywalled",
