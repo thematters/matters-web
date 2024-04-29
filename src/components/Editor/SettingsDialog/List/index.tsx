@@ -22,6 +22,9 @@ export type SettingsListDialogProps = {
   forward: (nextStep: Step) => void
   closeDialog: () => void
 
+  versionDescription?: string
+  hasSetVersionDescription?: boolean
+
   cover?: string | null
   collectionCount: number
   tagsCount: number
@@ -40,6 +43,9 @@ const SettingsList = ({
   confirmButtonText,
   cancelButtonText,
   onConfirm,
+
+  versionDescription,
+  hasSetVersionDescription,
 
   cover,
   collectionCount,
@@ -75,6 +81,27 @@ const SettingsList = ({
 
       <Dialog.Content noSpacing>
         <ul className={styles.container} role="list">
+          {hasSetVersionDescription && (
+            <ListItem
+              title={
+                <FormattedMessage
+                  defaultMessage="Version Description"
+                  id="rDX3h6"
+                />
+              }
+              subTitle={
+                <FormattedMessage
+                  defaultMessage="Tell readers why you edited this time"
+                  id="OJmFke"
+                />
+              }
+              onClick={() => forward('versionDescription')}
+              hint
+            >
+              <ListItem.ArrowIndicator checked={!!versionDescription} />
+            </ListItem>
+          )}
+
           <ListItem
             title={<FormattedMessage defaultMessage="Add Tags" id="WNxQX0" />}
             subTitle={
@@ -90,10 +117,10 @@ const SettingsList = ({
                 />
               )
             }
-            hint={tagsCount > 0}
+            hint
             onClick={() => forward('tag')}
           >
-            <ListItem.NumberIndicator num={tagsCount} withHintOverlay />
+            <ListItem.NumberIndicator num={tagsCount} />
           </ListItem>
 
           <ListItem
@@ -121,9 +148,7 @@ const SettingsList = ({
             <ToggleResponse {...responseProps} />
           </section>
 
-          <section className={styles.access}>
-            <ToggleAccess {...restProps} />
-          </section>
+          <ToggleAccess {...restProps} />
         </ul>
       </Dialog.Content>
 

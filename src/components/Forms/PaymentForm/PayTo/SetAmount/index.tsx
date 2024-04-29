@@ -16,8 +16,8 @@ import {
 } from '~/common/enums'
 import {
   formatAmount,
-  maskAddress,
   numRound,
+  truncate,
   validateCurrency,
   validateDonationAmount,
 } from '~/common/utils'
@@ -388,7 +388,7 @@ const SetAmount: React.FC<FormProps> = ({
                   textColor="green"
                   textActiveColor="greenDark"
                 >
-                  {maskAddress(viewer.info.ethAddress || '')}
+                  {truncate(viewer.info.ethAddress || '')}
                 </Button>
               )}
             </CopyToClipboard>

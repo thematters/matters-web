@@ -18,11 +18,11 @@ import {
 } from '~/common/enums'
 import {
   analytics,
-  maskAddress,
   parseFormSubmitErrors,
   redirectToTarget,
   setCookies,
   storage,
+  truncate,
   WalletType,
 } from '~/common/utils'
 import {
@@ -317,7 +317,7 @@ const Connect: React.FC<FormProps> = ({
             {isMetamask && <Icon icon={IconMetaMask} size="mdM" />}
             {isWalletConnect && <Icon icon={IconWalletConnect} size="mdM" />}
           </span>
-          <span className={styles.address}>{maskAddress(values.address)}</span>
+          <span className={styles.address}>{truncate(values.address)}</span>
         </section>
         <section className={styles.loadingInfo}>
           <span>

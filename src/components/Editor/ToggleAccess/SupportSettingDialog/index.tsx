@@ -2,10 +2,13 @@ import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 
 import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
-import { ArticleDetailPublicQuery, EditMetaDraftFragment } from '~/gql/graphql'
+import { EditMetaDraftFragment } from '~/gql/graphql'
 
 interface SupportSettingDialogProps {
-  article?: ArticleDetailPublicQuery['article']
+  article?: {
+    replyToDonator?: string | null
+    requestForDonation?: string | null
+  }
   draft?: EditMetaDraftFragment
   editSupportSetting: (
     requestForDonation: string | null,

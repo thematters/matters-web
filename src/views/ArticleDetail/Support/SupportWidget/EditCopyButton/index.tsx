@@ -14,7 +14,7 @@ interface EditCopyButtonProps {
 
 const EditCopyButton = ({ article, disabled }: EditCopyButtonProps) => {
   const { edit: editSupport, saving: supportSaving } =
-    useEditArticleDetailSupportSetting(article)
+    useEditArticleDetailSupportSetting(article.id)
 
   return (
     <SupportSettingDialog

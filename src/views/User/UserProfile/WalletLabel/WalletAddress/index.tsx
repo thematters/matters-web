@@ -3,7 +3,7 @@ import { getAddress } from 'viem'
 
 import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
 import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
-import { maskAddress } from '~/common/utils'
+import { truncate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -71,7 +71,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
             {...textIconProps}
             icon={<Icon icon={IconCopy} size="sm" />}
           >
-            {ensName || maskAddress(getAddress(address))}
+            {ensName || truncate(getAddress(address))}
           </TextIcon>
         </Button>
       )}

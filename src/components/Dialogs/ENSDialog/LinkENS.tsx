@@ -16,8 +16,8 @@ import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
 import {
   analytics,
   featureSupportedChains,
-  maskAddress,
   PublicResolverABI,
+  truncate,
 } from '~/common/utils'
 import {
   Button,
@@ -226,7 +226,7 @@ const LinkENS = ({
                       color="grey"
                       textPlacement="left"
                     >
-                      {maskAddress(viewer.info.ethAddress || '')}
+                      {truncate(viewer.info.ethAddress || '')}
                     </TextIcon>
                   </Button>
                 )}

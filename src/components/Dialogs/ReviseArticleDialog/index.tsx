@@ -25,26 +25,6 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           <Dialog.Content.Message align="left" smUpAlign="left">
             <p>
               <Translate
-                zh_hant="修訂作品正文目前支持增加、刪除或替換中英文字符，"
-                zh_hans="修订作品正文目前支持增加、删除或替换中英文字符，"
-                en="We support adding, deleting or replacing Chinese and English characters "
-              />
-              <b>
-                <Translate
-                  zh_hant="單次修訂上限為"
-                  zh_hans="单次修订上限为"
-                  en="with a maximum of"
-                />
-                <span className={styles.count}> 50 </span>
-                <Translate
-                  zh_hant="個編輯距離。"
-                  zh_hans="個編輯距離。"
-                  en="editing spaces for a single revision."
-                />
-              </b>
-            </p>
-            <p>
-              <Translate
                 zh_hant="修訂後的作品即再版發佈至分佈式網絡。修訂前請自行保留上一版本備份"
                 zh_hans="修訂後的作品即再版發佈至分佈式網絡。修訂前請自行保留上一版本備份"
                 en="The revised work will be republished to decentralized network. Please backup of the previous edition before revision."

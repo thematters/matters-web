@@ -7,8 +7,8 @@ import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.
 import {
   analytics,
   featureSupportedChains,
-  maskAddress,
   PublicResolverABI,
+  truncate,
 } from '~/common/utils'
 import {
   CopyToClipboard,
@@ -108,7 +108,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
               )}
               {!ensName && (
                 <section className={styles.address}>
-                  {maskAddress(address)}
+                  {truncate(address)}
                 </section>
               )}
               {hasLinkedIPNS && !isMe && (

@@ -4,7 +4,14 @@ import { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { dom, stripHtml } from '~/common/utils'
-import { Button, Spinner, TextIcon, Translate, useMutation } from '~/components'
+import {
+  Button,
+  Spinner,
+  SpinnerBlock,
+  TextIcon,
+  Translate,
+  useMutation,
+} from '~/components'
 import PUT_COMMENT from '~/components/GQL/mutations/putComment'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import { CommentDraftQuery, PutCommentMutation } from '~/gql/graphql'
@@ -13,7 +20,7 @@ import styles from './styles.module.css'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 export type CommentFormType = 'article' | 'circleDiscussion' | 'circleBroadcast'

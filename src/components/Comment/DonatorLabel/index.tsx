@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
+import { Label } from '~/components'
 import { DonatorLabelCommentFragment } from '~/gql/graphql'
-
-import styles from './styles.module.css'
 
 const fragments = {
   comment: gql`
@@ -24,13 +23,13 @@ const DonatorLabel = ({
   }
 
   return (
-    <span className={styles.label}>
+    <Label color="gold">
       <FormattedMessage
         defaultMessage="Supporter"
         id="ZYvVYX"
         description="src/components/Comment/DonatorLabel/index.tsx"
       />
-    </span>
+    </Label>
   )
 }
 

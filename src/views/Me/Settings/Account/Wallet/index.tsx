@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { maskAddress } from '~/common/utils'
+import { truncate } from '~/common/utils'
 import {
   AddWalletLoginDialog,
   Icon,
@@ -46,7 +46,7 @@ const Wallet = () => {
                     />
                   }
                   rightText={
-                    hasETHAddress ? maskAddress(ethAddress, 6) : undefined
+                    hasETHAddress ? truncate(ethAddress, 6) : undefined
                   }
                   rightIcon={
                     hasETHAddress && canRemoveNonFacebookLogins ? (

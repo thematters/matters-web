@@ -25,10 +25,14 @@
   --font-size-sm: 0.875rem; /* 14px */
   --font-size-md-s: 0.9375rem; /* 15px */
   --font-size-md: 1rem; /* 16px */
+  --font-size-xm-s: 1.0625rem; /* 17px */
   --font-size-xm: 1.125rem; /* 18px */
+  --font-size-lg-s: 1.1875rem; /* 19px */
   --font-size-lg: 1.25rem; /* 20px */
+  --font-size-xl-xs: 1.3125rem; /* 21px */
   --font-size-xl-s: 1.375rem; /* 22px */
   --font-size-xl: 1.5rem; /* 24px */
+  --font-size-xxl-s: 1.725rem; /* 28px */
   --font-size-xxl: 2rem; /* 32px */
   --font-size-xxxl-s: 2.25rem; /* 36px */
   --font-weight-light: 300;
@@ -60,20 +64,25 @@
   --font-weight-subtext: var(--font-weight-normal);
 
   /* Article Title */
-  --font-size-article-title: var(--font-size-xxxl-s);
-  --line-height-article-title: 1.5555; /* 56/35 */
+  --font-size-article-title: var(--font-size-xxl);
+  --line-height-article-title: 1.6875; /* 54/32 */
   --font-weight-article-title: var(--font-weight-semibold);
 
   /* Article Body */
-  --font-size-article-base: 1rem; /* 16px; */
-  --line-height-article-base: 1.875; /* 30/16 */
+  --font-size-article-base: var(--font-size-xm-s); /* 17px */
+  --line-height-article-base: 1.75; /* 30/16 */
 
   /* Articke Heading */
-  --font-size-article-h1: var(--font-size-xl-s); /* 22px */
-  --font-size-article-h2: var(--font-size-lg); /* 20px */
-  --font-size-article-h3: var(--font-size-xm); /* 18px */
+  --font-size-article-h1: var(--font-size-xxxl-s); /* 36px */
+  --font-size-article-h2: var(--font-size-xxl-s); /* 28px */
+  --font-size-article-h3: var(--font-size-xl-s); /* 22px */
   --font-size-article-h4: var(--font-size-md); /* 16px */
   --font-size-article-h5: var(--font-size-sm); /* 14px */
   --font-size-article-h6: var(--font-size-xs); /* 12px */
-  --line-height-article-heading: var(--line-height-base);
+  --line-height-article-heading: 1.75;
+
+  /* sm */
+  --font-size-sm-article-h1: var(--font-size-xl); /* 24px */
+  --font-size-sm-article-h2: var(--font-size-xl-xs); /* 21px */
+  --font-size-sm-article-h3: var(--font-size-lg-s); /* 19px */
 }
