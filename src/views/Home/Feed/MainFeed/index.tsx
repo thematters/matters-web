@@ -21,6 +21,7 @@ import {
 } from '~/gql/graphql'
 
 import Authors from '../Authors'
+import Billboard from '../Billboard'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { HomeFeedType } from '../SortBy'
@@ -65,14 +66,19 @@ interface MainFeedProps {
 }
 
 const horizontalFeeds: FeedLocation = {
-  2: () => (
-    <Media lessThan="lg">
-      <Tags />
-    </Media>
-  ),
   5: () => (
     <Media lessThan="lg">
+      <Billboard />
+    </Media>
+  ),
+  11: () => (
+    <Media lessThan="lg">
       <Authors />
+    </Media>
+  ),
+  17: () => (
+    <Media lessThan="lg">
+      <Tags />
     </Media>
   ),
 }

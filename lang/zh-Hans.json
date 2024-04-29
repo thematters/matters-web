@@ -322,6 +322,10 @@
   "4l6vz1": {
     "defaultMessage": "复制"
   },
+  "4wOWfp": {
+    "defaultMessage": "这是什么？",
+    "description": "src/components/Billboard/index.tsx"
+  },
   "50cquj": {
     "defaultMessage": "还没有众聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
@@ -681,6 +685,10 @@
   "CD688y": {
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
+  },
+  "CNrhz9": {
+    "defaultMessage": "什么是社区公告栏（Billboard）？",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "CPvyYN": {
     "defaultMessage": "密码错误"
@@ -1136,6 +1144,10 @@
   "MDNaxs": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "MP6xe/": {
+    "defaultMessage": "Billboard 是一个公开且可付费租借的链上 NFT 广告协议。租借成功后，可以进行14天的内容投放。租借费用基于哈柏格税概念计算，产生的租借收入将以二次方配捐方式回馈给社区创作者。更多详情请查看{announcements}。",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "MPEeBy": {
     "defaultMessage": "操作失败，请稍候重试",
@@ -2436,6 +2448,10 @@
     "defaultMessage": "登录",
     "description": "src/components/Buttons/Login/index.tsx"
   },
+  "stTITI": {
+    "defaultMessage": "社区公告",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
   "sy+pv5": {
     "defaultMessage": "邮箱"
   },
@@ -2621,6 +2637,10 @@
   },
   "wbcwKd": {
     "defaultMessage": "查看全部"
+  },
+  "wdz6Pf": {
+    "defaultMessage": "了解更多",
+    "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
   "wicnP9": {
     "defaultMessage": "Visa / Mastercard / American Express 支付",

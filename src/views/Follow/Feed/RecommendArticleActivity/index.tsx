@@ -65,7 +65,6 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
               <FollowingRecommendArticle article={article} />
               {mountTracker && (
                 <CardExposureTracker
-                  horizontal={true}
                   location={`${location}.${index}`}
                   feedType="following"
                   contentType={contentType}

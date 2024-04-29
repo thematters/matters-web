@@ -52,4 +52,5 @@ export * from './SubscribeCircleDialog'
 export * from './UnsubscribeCircleDialog'
 
 // Misc
+export * from './BillboardDialog'
 export * from './PaymentPointerDialog'

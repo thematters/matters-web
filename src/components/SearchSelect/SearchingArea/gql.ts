@@ -21,6 +21,7 @@ export const SELECT_SEARCH = gql`
         first: $first
         exclude: $exclude
         includeAuthorTags: $includeAuthorTags
+        quicksearch: true
       }
     ) {
       pageInfo {

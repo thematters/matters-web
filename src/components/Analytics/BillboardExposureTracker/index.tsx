@@ -1,18 +1,14 @@
 import { useEffect, useState } from 'react'
 
-import { ActivityType, analytics, ContentType, FeedType } from '~/common/utils'
+import { analytics } from '~/common/utils'
 import { useIntersectionObserver } from '~/components/Hook'
 
-export const CardExposureTracker = ({
+export const BillboardExposureTracker = ({
   id,
-  location,
-  feedType,
-  contentType,
+  type,
 }: {
-  location: number | string
-  id: string
-  feedType: FeedType
-  contentType: ContentType | ActivityType
+  id: number
+  type: string
 }) => {
   const [timerId, setTimerId] = useState<number>()
   const [recorded, setRecorded] = useState(false)
@@ -24,11 +20,9 @@ export const CardExposureTracker = ({
     if (!recorded) {
       const timer = window.setTimeout(() => {
         // analytics
-        analytics.trackEvent('card_exposure', {
-          feedType,
-          contentType,
-          location,
+        analytics.trackEvent('billboard_exposure', {
           id,
+          type,
           delay_msecs: window?.performance.now() ?? -1,
         })
         setRecorded(true)
@@ -38,6 +32,14 @@ export const CardExposureTracker = ({
   }
 
   const onLeave = () => window.clearTimeout(timerId)
+
+  useEffect(() => {
+    if (isIntersecting) {
+      onEnter()
+    } else {
+      onLeave()
+    }
+  }, [isIntersecting])
 
   useEffect(() => {
     if (isIntersecting) {
