@@ -18,8 +18,8 @@
         }
 
         & .displayName {
-          font-size: var(--font-size-md-s);
-          font-weight: var(--font-weight-medium);
+          font-size: var(--text15);
+          font-weight: var(--font-medium);
           line-height: 1.75;
         }
 

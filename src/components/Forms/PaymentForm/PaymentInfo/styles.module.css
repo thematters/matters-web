@@ -4,20 +4,20 @@
 
 .to {
   margin-bottom: var(--sp16);
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
 }
 
 .recipient {
   margin-top: var(--sp8);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
   color: var(--color-black);
 }
 
 .amount {
   margin: var(--sp24) 0;
-  font-size: var(--font-size-xxxl-s);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--text36);
+  font-weight: var(--font-semibold);
   line-height: 3rem;
 }
 

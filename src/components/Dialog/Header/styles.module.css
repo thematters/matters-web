@@ -8,8 +8,8 @@
   border-radius: var(--sp8) var(--sp8) 0 0;
 
   & .title {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text20);
+    font-weight: var(--font-medium);
     line-height: 1.75rem;
   }
 
@@ -40,8 +40,8 @@
   margin: var(--sp20) 0 var(--sp16);
 
   & .title {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text20);
+    font-weight: var(--font-medium);
     line-height: 1.875rem;
   }
 }

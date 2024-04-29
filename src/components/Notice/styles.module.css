@@ -8,7 +8,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
 
   & .header {
     display: flex;

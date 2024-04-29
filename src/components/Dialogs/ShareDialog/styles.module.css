@@ -16,7 +16,7 @@
     height: 3.5rem;
     padding-right: var(--sp24);
     padding-left: var(--sp24);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-medium);
     text-align: left;
     transition-property: background-color;
 
@@ -43,7 +43,7 @@
 
 .description {
   padding: var(--sp16) var(--sp16) var(--sp8);
-  font-size: var(--font-size-md-s);
+  font-size: var(--text15);
   line-height: 1.5rem;
   color: var(--color-black);
 

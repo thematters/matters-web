@@ -25,6 +25,6 @@
   @mixin line-clamp;
 
   margin: var(--sp4) 0 0 1.25rem;
-  font-size: var(--font-size-sm-s);
+  font-size: var(--text13);
   color: var(--color-grey-darker);
 }

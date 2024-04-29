@@ -27,13 +27,13 @@
 }
 
 .type {
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   color: var(--color-grey-darker);
 }
 
 .num {
   font-size: 2.25rem;
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-semibold);
   color: var(--color-matters-green);
 
   @media (--sm-up) {

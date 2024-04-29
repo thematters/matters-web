@@ -4,7 +4,7 @@
   margin: 0 0 var(--sp8);
 
   & label {
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     color: var(--color-black);
   }
 }

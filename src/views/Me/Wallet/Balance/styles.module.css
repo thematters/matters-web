@@ -4,7 +4,7 @@
   & .subtitle {
     padding-left: calc(1.25rem + var(--sp12));
     margin-top: var(--sp4);
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
   }
 }
 

@@ -2,14 +2,14 @@
   align-self: center;
 
   & h3 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--text24);
+    font-weight: var(--font-semibold);
     text-align: center;
   }
 
   & p {
     margin-top: var(--sp24);
-    font-size: var(--font-size-md);
+    font-size: var(--text16);
     line-height: 2;
     color: var(--color-grey-darker);
   }
@@ -198,7 +198,7 @@
 
   & .flag {
     display: block;
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     text-align: center;
   }
 

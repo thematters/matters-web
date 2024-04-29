@@ -1,6 +1,6 @@
 .hint {
   margin-right: var(--sp16);
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1rem;
   color: var(--color-grey-darker);
 }

@@ -3,13 +3,13 @@
   text-align: center;
 
   & h2 {
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text16);
+    font-weight: var(--font-medium);
   }
 
   & p {
     margin-top: var(--sp8);
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     color: var(--color-grey-darker);
   }
 }

@@ -9,8 +9,8 @@
 
   display: flex;
   flex: 0 0 30%;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text20);
+  font-weight: var(--font-medium);
   color: var(--color-black);
   background: var(--color-grey-lighter);
   border: 1px solid var(--color-grey-lighter);
@@ -37,14 +37,14 @@
     text-align: center;
 
     & .currency {
-      font-size: var(--font-size-xs);
-      font-weight: var(--font-weight-medium);
+      font-size: var(--text12);
+      font-weight: var(--font-medium);
       color: var(--color-grey-darker);
     }
 
     & .amount {
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-semibold);
+      font-size: var(--text20);
+      font-weight: var(--font-semibold);
       color: var(--color-black);
     }
   }
@@ -76,7 +76,7 @@
 
   & .hint {
     padding-top: var(--sp16);
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
     color: var(--color-grey-dark);
   }
 }

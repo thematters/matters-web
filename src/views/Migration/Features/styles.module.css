@@ -22,19 +22,19 @@
     align-self: center;
 
     & h3 {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-semibold);
+      font-size: var(--text24);
+      font-weight: var(--font-semibold);
       color: var(--color-matters-green);
     }
 
     & p {
       margin: var(--sp16) 0;
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
       color: var(--color-grey-darker);
     }
 
     & a {
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
     }
   }
 

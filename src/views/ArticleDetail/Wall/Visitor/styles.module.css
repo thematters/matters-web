@@ -43,7 +43,7 @@
 
   & .desc {
     margin: var(--sp4) 0 var(--sp8);
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     color: var(--color-grey-darker);
   }
 

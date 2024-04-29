@@ -30,7 +30,7 @@
       display: inline-block;
       padding: var(--sp8) var(--sp16);
       margin-top: var(--sp16);
-      font-size: var(--font-size-md-s);
+      font-size: var(--text15);
       color: var(--color-white);
       background: #095552;
       border-radius: 3rem;

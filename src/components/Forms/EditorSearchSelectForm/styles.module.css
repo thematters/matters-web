@@ -9,7 +9,7 @@
   }
 
   & .number {
-    font-size: var(--font-size-md-s);
+    font-size: var(--text15);
     line-height: 1.4;
     color: var(--color-grey);
   }

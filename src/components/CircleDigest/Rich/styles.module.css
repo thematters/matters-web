@@ -8,16 +8,16 @@
 
 .title {
   margin-bottom: var(--sp4);
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
   line-height: 1.5rem;
 }
 
 .textSizeMdS {
-  font-size: var(--font-size-md-s);
+  font-size: var(--text15);
 }
 
 .textSizeXm {
-  font-size: var(--font-size-xm);
+  font-size: var(--text18);
 }
 
 .description {
@@ -25,7 +25,7 @@
 
   -webkit-line-clamp: 3;
   margin-top: var(--sp16);
-  font-size: var(--font-size-md-s);
+  font-size: var(--text15);
   line-height: 1.5rem;
   color: var(--color-grey-darker);
 }

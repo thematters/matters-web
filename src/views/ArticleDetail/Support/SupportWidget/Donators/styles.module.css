@@ -15,7 +15,7 @@
 
     width: 1.5rem;
     height: 1.5rem;
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
     line-height: 1.125rem;
     color: var(--color-grey-darker);
     background: var(--color-grey-lighter);
@@ -29,8 +29,8 @@
 
   & .donatorName {
     margin-left: var(--sp8);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text12);
+    font-weight: var(--font-medium);
     line-height: 1.25rem;
     color: var(--color-black);
   }
@@ -55,7 +55,7 @@
 
   gap: var(--sp4);
   margin-top: var(--sp8);
-  font-size: var(--font-size-xs);
+  font-size: var(--text12);
   line-height: 1.125rem;
 
   & span:first-child {

@@ -17,5 +17,5 @@
 .startWriting {
   display: flex;
   justify-content: center;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
 }

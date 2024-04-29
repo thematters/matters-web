@@ -1,6 +1,6 @@
 .count {
   padding-left: var(--sp4);
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-semibold);
   color: var(--color-grey);
 }
 

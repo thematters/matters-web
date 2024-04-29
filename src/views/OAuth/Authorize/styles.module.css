@@ -8,7 +8,7 @@
 
   & .list {
     padding: 0 var(--sp8) var(--sp32);
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     color: var(--color-grey-darker);
 
     & .listItem {
@@ -37,7 +37,7 @@
 
 .switchAccount {
   margin-top: var(--sp16);
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   color: var(--color-grey-dark);
   text-align: center;
 }

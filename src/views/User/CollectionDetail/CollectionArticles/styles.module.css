@@ -4,7 +4,7 @@
   @mixin flex-center-space-between;
 
   padding: var(--sp16);
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: var(--line-height-base-loose);
   color: var(--color-grey);
 

@@ -65,8 +65,8 @@
       padding-top: var(--sp8);
       padding-right: var(--sp8);
       padding-left: var(--sp14);
-      font-size: var(--font-size-sm);
-      font-weight: var(--font-weight-normal);
+      font-size: var(--text14);
+      font-weight: var(--font-normal);
       line-height: 1.25rem;
       color: var(--color-white);
       -webkit-line-clamp: 2;

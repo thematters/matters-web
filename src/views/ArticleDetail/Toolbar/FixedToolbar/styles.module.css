@@ -17,7 +17,7 @@
       justify-content: flex-start;
       padding: var(--sp10);
       margin-right: var(--sp16);
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
       color: var(--color-grey-darker);
       background: var(--color-grey-lighter);
       border-radius: 0.5rem;

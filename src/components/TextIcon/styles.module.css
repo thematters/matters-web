@@ -22,49 +22,49 @@
 /* size */
 .sizeXs {
   & .text {
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
   }
 }
 
 .sizeSm {
   & .text {
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
   }
 }
 
 .sizeSmS {
   & .text {
-    font-size: var(--font-size-sm-s);
+    font-size: var(--text13);
   }
 }
 
 .sizeMd {
   & .text {
-    font-size: var(--font-size-md);
+    font-size: var(--text16);
   }
 }
 
 .sizeMdS {
   & .text {
-    font-size: var(--font-size-md-s);
+    font-size: var(--text15);
   }
 }
 
 .sizeXm {
   & .text {
-    font-size: var(--font-size-xm);
+    font-size: var(--text18);
   }
 }
 
 .sizeLg {
   & .text {
-    font-size: var(--font-size-lg);
+    font-size: var(--text20);
   }
 }
 
 .sizeXl {
   & .text {
-    font-size: var(--font-size-xl);
+    font-size: var(--text24);
   }
 }
 
@@ -198,25 +198,20 @@
   }
 }
 
-/* weight */
-.weightLight {
-  font-weight: var(--font-weight-light);
-}
-
 .weightNormal {
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
 }
 
 .weightMd {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
 }
 
 .weightSemibold {
-  font-weight: var(--font-weight-semibold);
+  font-weight: var(--font-semibold);
 }
 
 .weightBold {
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-bold);
 }
 
 .textUnderline {
