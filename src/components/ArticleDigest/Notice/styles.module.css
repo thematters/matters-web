@@ -8,7 +8,7 @@
     @mixin line-clamp;
 
     padding-left: var(--sp12);
-    font-size: var(--font-size-md);
+    font-size: var(--text16);
     color: var(--color-grey);
     text-overflow: ellipsis;
     border-left-width: 3px;

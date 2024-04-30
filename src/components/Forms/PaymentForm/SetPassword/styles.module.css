@@ -5,8 +5,8 @@
 
 .hint {
   margin-bottom: var(--sp16);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
   line-height: 1.375rem;
   color: var(--color-black);
   text-align: center;

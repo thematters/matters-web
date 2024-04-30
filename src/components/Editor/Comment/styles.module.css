@@ -12,7 +12,7 @@
 
   & p {
     padding: 0;
-    font-size: var(--font-size-md-s);
+    font-size: var(--text15);
     line-height: 1.75;
   }
 

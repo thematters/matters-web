@@ -37,8 +37,8 @@
 
     & .name {
       margin-left: var(--sp16);
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-semibold);
+      font-size: var(--text20);
+      font-weight: var(--font-semibold);
     }
   }
 
@@ -48,12 +48,12 @@
     flex-shrink: 0;
     padding-left: var(--sp24);
     margin-left: var(--sp24);
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text16);
+    font-weight: var(--font-medium);
     color: var(--color-matters-gold);
 
     & .amount {
-      font-size: var(--font-size-xxl);
+      font-size: var(--text32);
       line-height: 2.25rem;
     }
   }
@@ -78,7 +78,7 @@
   }
 
   & .counts {
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     color: var(--color-grey);
 
     & > * {
@@ -94,8 +94,8 @@
     & .count {
       display: block;
       padding-right: var(--sp8);
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-bold);
+      font-size: var(--text20);
+      font-weight: var(--font-bold);
       line-height: 1.5rem;
       color: var(--color-black);
     }

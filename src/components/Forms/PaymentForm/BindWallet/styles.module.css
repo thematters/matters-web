@@ -12,8 +12,8 @@
 
     & .title {
       margin-top: var(--sp40);
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-semibold);
+      font-size: var(--text20);
+      font-weight: var(--font-semibold);
       line-height: 1.875rem;
       color: var(--color-black);
     }
@@ -21,29 +21,29 @@
     & .info {
       margin-top: var(--sp8);
       margin-bottom: var(--sp24);
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
       line-height: 1.375rem;
       color: var(--color-grey-darker);
     }
 
     & .passButton {
       margin-top: var(--sp24);
-      font-size: var(--font-size-xs);
+      font-size: var(--text12);
       line-height: 1.125rem;
     }
 
     & .resultTitle {
       margin-top: var(--sp16);
       margin-bottom: var(--sp24);
-      font-size: var(--font-size-xm);
-      font-weight: var(--font-weight-medium);
+      font-size: var(--text18);
+      font-weight: var(--font-medium);
       line-height: 1.75rem;
       color: var(--color-black);
     }
 
     & .resultInfo {
       margin: var(--sp16) 0 var(--sp40);
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
       line-height: 1.375rem;
       color: var(--color-black);
     }
@@ -68,8 +68,8 @@
       & button {
         @mixin transition;
 
-        font-size: var(--font-size-sm);
-        font-weight: var(--font-weight-medium);
+        font-size: var(--text14);
+        font-weight: var(--font-medium);
         line-height: 1.375rem;
         transition-property: color;
 
@@ -82,7 +82,7 @@
     & .note {
       margin-top: var(--sp16);
       margin-left: var(--sp16);
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
       line-height: 1.75;
       color: var(--color-grey-darker);
       text-align: left;

@@ -14,8 +14,8 @@
 
   & h1 {
     margin-top: var(--sp24);
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text16);
+    font-weight: var(--font-medium);
 
     &.left {
       text-align: left;

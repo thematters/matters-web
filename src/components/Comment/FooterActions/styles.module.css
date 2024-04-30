@@ -2,7 +2,7 @@
   @mixin flex-center-space-between;
 
   margin-top: var(--sp16);
-  font-size: var(--font-size-xs);
+  font-size: var(--text12);
   color: var(--color-grey);
 
   & .left {

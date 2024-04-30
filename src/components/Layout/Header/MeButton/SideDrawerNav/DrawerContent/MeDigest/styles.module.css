@@ -10,12 +10,12 @@
   margin-left: var(--sp8);
 
   & .displayName {
-    font-size: var(--font-size-lg);
+    font-size: var(--text20);
     line-height: 1.5rem;
   }
 
   & .username {
-    font-size: var(--font-size-md);
+    font-size: var(--text16);
     line-height: 1.5rem;
     color: var(--color-grey-dark);
   }

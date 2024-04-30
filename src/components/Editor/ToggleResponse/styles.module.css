@@ -10,7 +10,7 @@
     cursor: pointer;
 
     & h3 {
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
       font-weight: var(--font-weight-base);
       line-height: 1rem;
       color: var(--color-black);
@@ -18,7 +18,7 @@
 
     & .hint {
       margin-top: var(--sp4);
-      font-size: var(--font-size-xs);
+      font-size: var(--text12);
       color: var(--color-grey);
     }
   }
@@ -38,8 +38,8 @@
     padding: var(--sp16);
 
     & h3 {
-      font-size: var(--font-size-md-s);
-      font-weight: var(--font-weight-medium);
+      font-size: var(--text15);
+      font-weight: var(--font-medium);
     }
   }
 

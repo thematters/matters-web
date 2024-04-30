@@ -15,7 +15,7 @@
 
   & h2 {
     margin-bottom: var(--sp24);
-    font-size: var(--font-size-lg);
+    font-size: var(--text20);
   }
 
   & a {
@@ -65,7 +65,7 @@
   }
 
   & .copyright {
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     color: var(--color-grey);
     text-align: center;
   }

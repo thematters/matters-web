@@ -19,7 +19,7 @@
 .subtitle {
   padding: 0 var(--sp16);
   margin-top: var(--sp4);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-normal);
+  font-size: var(--text12);
+  font-weight: var(--font-normal);
   color: var(--color-grey);
 }

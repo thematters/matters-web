@@ -39,13 +39,13 @@
 .name {
   @mixin line-clamp;
 
-  font-size: var(--font-size-md-s);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text15);
+  font-weight: var(--font-medium);
 }
 
 .description {
   @mixin line-clamp;
 
-  font-size: var(--font-size-sm-s);
+  font-size: var(--text13);
   color: var(--color-grey-dark);
 }

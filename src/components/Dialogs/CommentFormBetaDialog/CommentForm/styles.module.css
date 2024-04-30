@@ -28,7 +28,7 @@
   display: flex;
   align-items: center;
   margin-right: var(--sp20);
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-negative-red);
 }

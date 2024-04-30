@@ -31,12 +31,12 @@
 
   & strong,
   & b {
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-semibold);
   }
 
   & code,
   & pre {
-    font-size: var(--font-size-md-s);
+    font-size: var(--text15);
     line-height: 1.7;
     color: var(--color-grey-darker);
   }
@@ -70,7 +70,7 @@
 
     & figcaption {
       margin-top: var(--sp12);
-      font-size: var(--font-size-xs);
+      font-size: var(--text12);
       line-height: 1rem;
       color: var(--color-grey);
       white-space: pre-wrap;
@@ -105,13 +105,13 @@
 
         & .title {
           margin: 0;
-          font-size: var(--font-size-md);
-          font-weight: var(--font-weight-medium);
+          font-size: var(--text16);
+          font-weight: var(--font-medium);
           outline: none;
         }
 
         & .time {
-          font-size: var(--font-size-xs);
+          font-size: var(--text12);
           color: var(--color-grey-dark);
 
           & .current,
@@ -256,15 +256,15 @@
    ========================================================================== */
 
   & h1 {
-    font-size: var(--font-size-sm-article-h1);
+    font-size: var(--text14-article-h1);
   }
 
   & h2 {
-    font-size: var(--font-size-sm-article-h2);
+    font-size: var(--text14-article-h2);
   }
 
   & h3 {
-    font-size: var(--font-size-sm-article-h3);
+    font-size: var(--text14-article-h3);
   }
 
   @media (--sm-up) {
@@ -300,7 +300,7 @@
   & h5,
   & h6 {
     padding-top: var(--ar17-100);
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-semibold);
     line-height: var(--line-height-article-heading);
   }
 
@@ -378,7 +378,7 @@
   margin: var(--ar17-100) 0;
 
   & .counter {
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
     color: var(--color-grey-light);
     text-align: right;
   }
@@ -394,8 +394,8 @@
   @mixin border-left-grey;
 
   padding: var(--sp4) 0 var(--sp4) var(--sp24);
-  font-size: var(--font-size-xm);
-  font-weight: var(--font-weight-normal);
+  font-size: var(--text18);
+  font-weight: var(--font-normal);
   line-height: 1.875rem;
   color: var(--color-black);
   resize: none;
@@ -408,7 +408,7 @@
 
   @media (--md-up) {
     padding-left: calc(var(--sp32) + var(--sp4));
-    font-size: var(--font-size-lg);
+    font-size: var(--text20);
     line-height: 1.75;
   }
 

@@ -1,6 +1,6 @@
 .title {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text16);
+  font-weight: var(--font-medium);
   line-height: 1rem;
 }
 
@@ -13,7 +13,7 @@
 
     & .description {
       margin-top: var(--sp4);
-      font-size: var(--font-size-sm-s);
+      font-size: var(--text13);
       color: var(--color-grey-darker);
     }
   }
@@ -47,7 +47,7 @@
 
   & .hint {
     margin-top: var(--sp4);
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
     color: var(--color-grey);
 
     & a {
@@ -73,7 +73,7 @@
 
     & .hint {
       margin-top: var(--sp8);
-      font-size: var(--font-size-xs);
+      font-size: var(--text12);
       color: var(--color-grey);
       text-align: left;
       white-space: break-spaces;
@@ -95,7 +95,7 @@
     padding: 0;
 
     & .title {
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
     }
 
     & .circle + .license {

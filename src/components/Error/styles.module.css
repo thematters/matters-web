@@ -10,7 +10,7 @@
 
 .errorMessage {
   margin-top: var(--sp8);
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   color: var(--color-grey-dark);
 }
 

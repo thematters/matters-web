@@ -55,13 +55,13 @@
     }
 
     & .isInUserPageName {
-      font-size: var(--font-size-xl);
+      font-size: var(--text24);
       line-height: 1.5;
     }
 
     & .name {
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-medium);
+      font-size: var(--text20);
+      font-weight: var(--font-medium);
       line-height: 1.5;
       cursor: pointer;
     }
@@ -70,7 +70,7 @@
   & .username,
   & .description {
     margin-bottom: var(--sp16);
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     line-height: 1.375rem;
     color: var(--color-grey);
   }
@@ -86,7 +86,7 @@
 
 .follow {
   margin-top: var(--sp16);
-  font-size: var(--font-size-md);
+  font-size: var(--text16);
   line-height: 1.5rem;
   color: var(--color-grey-darker);
 
@@ -95,7 +95,7 @@
   }
 
   & .count {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-medium);
   }
 }
 
@@ -103,7 +103,7 @@
   @mixin flex-center-start;
 
   margin-top: var(--sp16);
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
 
   & > *:first-child {
     margin-right: var(--sp12);

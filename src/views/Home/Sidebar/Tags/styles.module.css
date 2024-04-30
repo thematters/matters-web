@@ -12,7 +12,7 @@
   & p {
     flex-grow: 1;
     margin-right: var(--sp8);
-    font-size: var(--font-size-sm-s);
+    font-size: var(--text13);
     line-height: 1.85;
     color: var(--color-grey);
 

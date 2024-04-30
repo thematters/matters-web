@@ -7,7 +7,7 @@
   white-space: pre-wrap;
 
   & .num {
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-semibold);
     color: var(--color-black);
   }
 }

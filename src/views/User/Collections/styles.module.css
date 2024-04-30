@@ -7,7 +7,7 @@
   white-space: pre-wrap;
 
   & .num {
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-semibold);
     color: var(--color-black);
   }
 }
@@ -15,7 +15,7 @@
 .createCollection {
   display: flex;
   justify-content: center;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
 }
 
 .addCollection {

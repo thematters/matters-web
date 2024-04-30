@@ -150,7 +150,7 @@
 
   height: var(--input-height);
   padding: var(--sp12);
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-black);
   background-color: var(--color-white);
@@ -184,7 +184,7 @@
   }
 
   &:-webkit-autofill::first-line {
-    font-size: var(--font-size-md);
+    font-size: var(--text16);
   }
 }
 

@@ -16,7 +16,7 @@
 
     flex-shrink: 0;
     padding: var(--sp5) var(--sp10);
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     font-feature-settings:
       'clig' off,
       'liga' off;
@@ -34,7 +34,7 @@
       display: block;
       height: 0;
       overflow: hidden;
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-semibold);
       color: transparent;
       visibility: hidden;
       content: attr(data-title);
@@ -45,7 +45,7 @@
     }
 
     &.active {
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-semibold);
       color: var(--color-white);
       background: var(--color-black);
     }

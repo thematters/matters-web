@@ -11,8 +11,8 @@
   display: flex;
   flex-shrink: 0;
   padding-right: var(--sp12);
-  font-size: var(--font-size-xm);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--text18);
+  font-weight: var(--font-semibold);
   line-height: 1.3333333;
   color: var(--color-analytics-red);
 }
@@ -38,8 +38,8 @@
 .title {
   @mixin line-clamp;
 
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
 }
 
 .count {

@@ -1,7 +1,7 @@
 .confirmTable {
   width: 100%;
   margin-bottom: var(--sp16);
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1.5rem;
   color: var(--color-grey);
 }
@@ -18,16 +18,16 @@
   }
 
   &.total {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-bold);
     color: var(--color-black);
 
     & .col:last-child {
-      font-size: var(--font-size-lg);
+      font-size: var(--text20);
     }
   }
 
   &.balance {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-medium);
     color: var(--color-black);
   }
 

@@ -28,8 +28,8 @@
 
   & .title {
     position: relative;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text14);
+    font-weight: var(--font-medium);
     line-height: 1.5rem;
     color: var(--color-grey-dark);
 
@@ -48,16 +48,16 @@
     @mixin inline-flex-center-start;
 
     order: 1;
-    font-size: var(--font-size-xm);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text18);
+    font-weight: var(--font-medium);
     line-height: 2rem;
     color: var(--color-grey-dark);
   }
 
   & .unit {
     order: 2;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
+    font-size: var(--text14);
+    font-weight: var(--font-normal);
     line-height: 1;
     color: var(--color-grey-dark);
   }
@@ -119,8 +119,8 @@
     }
 
     & .value {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-bold);
+      font-size: var(--text24);
+      font-weight: var(--font-bold);
       color: var(--color-black);
     }
 
@@ -137,8 +137,8 @@
     }
 
     & .value {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-bold);
+      font-size: var(--text24);
+      font-weight: var(--font-bold);
       color: var(--color-black);
     }
   }

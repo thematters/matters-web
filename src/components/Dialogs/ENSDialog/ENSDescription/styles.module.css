@@ -4,7 +4,7 @@
 
 .description {
   padding: var(--sp24) var(--sp16) var(--sp16) var(--sp16);
-  font-size: var(--font-size-sm-s);
+  font-size: var(--text13);
   line-height: 1.5rem;
   color: var(--color-grey-dark);
 
@@ -15,7 +15,7 @@
 
   & .reference {
     margin-top: var(--sp16);
-    font-size: var(--font-size-xs-s);
+    font-size: var(--text12);
 
     & a {
       text-decoration: underline;

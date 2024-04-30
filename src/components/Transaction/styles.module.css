@@ -5,8 +5,8 @@
 .header {
   @mixin flex-center-space-between;
 
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text16);
+  font-weight: var(--font-medium);
   line-height: 1.5rem;
 }
 
@@ -15,6 +15,6 @@
 
   margin-top: var(--sp8);
   margin-left: var(--sp32);
-  font-size: var(--font-size-xs);
+  font-size: var(--text12);
   line-height: 1.125rem;
 }

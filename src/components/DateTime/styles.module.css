@@ -22,6 +22,6 @@
 }
 
 .sizeSm {
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: var(--line-height-base-loose);
 }

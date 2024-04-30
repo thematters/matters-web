@@ -30,7 +30,7 @@ export interface TextIconProps {
     | 'xtight'
     | 'tight'
     | 'base'
-  weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
+  weight?: 'normal' | 'md' | 'semibold' | 'bold'
   allowUserSelect?: boolean
 
   textPlacement?: 'bottom' | 'left' | 'right'
