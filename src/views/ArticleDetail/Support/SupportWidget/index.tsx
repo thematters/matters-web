@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
-import jump from 'jump.js'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
@@ -87,18 +86,31 @@ const SupportWidget = ({
       setCurrency(payload.currency)
       setShowAvatarAnimation(true)
 
+      const scrollToAnimation = () => {
+        const scrollTo = (element: HTMLElement) => {
+          element.scrollIntoView({ behavior: 'instant', block: 'center' })
+        }
+
+        const animationEle = document.getElementById('animation')
+        if (animationEle) {
+          scrollTo(animationEle)
+          // Fix layout changes caused by lazy loading of image heights
+          setTimeout(() => scrollTo(animationEle), 100)
+        }
+      }
+
       // HKD
       if (payload.currency === CURRENCY.HKD) {
         setShowAnimation(true)
         hasDonatedRefetch()
-        jump('#animation', { offset: -100 })
+        scrollToAnimation()
         return
       }
 
       // LIKE、USDT
       setPlayShipWaiting(true)
       setShowAnimation(true)
-      jump('#animation', { offset: -100 })
+      scrollToAnimation()
       await sleep(5 * 1000)
       setPlayShipWaiting(false)
       hasDonatedRefetch()

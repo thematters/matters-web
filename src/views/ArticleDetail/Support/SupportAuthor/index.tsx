@@ -215,6 +215,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       {isComplete && (
         <DynamicPayToFormComplete
           callback={() => {
+            forward('setAmount')
             onClose()
           }}
           recipient={recipient}
@@ -273,6 +274,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           <DynamicBindWalletForm
             currency={currency}
             callback={() => {
+              forward('setAmount')
               onClose()
             }}
           />
