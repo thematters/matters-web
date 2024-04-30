@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import React, { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import Lottie, { EventListener } from 'react-lottie'
@@ -29,6 +30,11 @@ const Animation: React.FC<Props> = ({
   const isDonate = currStep === 'donate'
   const isLoading = currStep === 'loading'
   const isSuccess = currStep === 'success'
+  const [rendered, setRendered] = React.useState(false)
+
+  useEffect(() => {
+    setRendered(true)
+  }, [])
 
   useEffect(() => {
     if (isLoading) {
@@ -80,8 +86,12 @@ const Animation: React.FC<Props> = ({
     width: 120,
   }
 
+  const containerClasses = classNames({
+    [styles.slideUp]: rendered,
+  })
+
   return (
-    <section>
+    <section className={containerClasses}>
       <p className={styles.animationHint}>
         {isLoading && currency === CURRENCY.LIKE && (
           <FormattedMessage

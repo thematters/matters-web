@@ -55,6 +55,7 @@ const SupportWidget = ({
   const [playLoading, setPlayLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
   const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
+  const [playSlideUp, setPlaySlideUp] = useState(false)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
     [styles.supportWidget]: true,
@@ -118,22 +119,26 @@ const SupportWidget = ({
     }
   )
 
+  const containerClasses = classNames({
+    [styles.note]: true,
+    [styles.slideUp]: playSlideUp,
+  })
+
   return (
     <section className={supportWidgetClasses} id="animation">
       {showAnimation && (
-        <section className={styles.donation}>
-          <DynamicAnimation
-            playLoading={playLoading}
-            playEnd={() => {
-              setShowAnimation(false)
-            }}
-            currency={currency}
-          />
-        </section>
+        <DynamicAnimation
+          playLoading={playLoading}
+          playEnd={() => {
+            setShowAnimation(false)
+            setPlaySlideUp(true)
+          }}
+          currency={currency}
+        />
       )}
 
       {!showAnimation && (
-        <section className={`${styles.donation} ${styles.note}`}>
+        <section className={containerClasses}>
           {loading && <Spinner />}
 
           {!loading && isReader && (
