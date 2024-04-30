@@ -2445,6 +2445,9 @@
   "syEQFE": {
     "defaultMessage": "Publish"
   },
+  "t2EpN/": {
+    "defaultMessage": "Request on {network} network will be confirmed and synced to Matters in a bit"
+  },
   "tBt9u0": {
     "defaultMessage": "Sign in",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"

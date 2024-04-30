@@ -2445,6 +2445,9 @@
   "syEQFE": {
     "defaultMessage": "发布"
   },
+  "t2EpN/": {
+    "defaultMessage": "持续与 {network} 网络同步，稍后更新至 Matters"
+  },
   "tBt9u0": {
     "defaultMessage": "登录",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"

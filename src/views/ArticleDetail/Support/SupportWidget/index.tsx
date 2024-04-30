@@ -52,7 +52,7 @@ const SupportWidget = ({
   toggleDonationDrawer,
 }: DonationProps) => {
   const viewer = useContext(ViewerContext)
-  const [playShipWaiting, setPlayShipWaiting] = useState(false)
+  const [playLoading, setPlayLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
   const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
@@ -108,11 +108,11 @@ const SupportWidget = ({
       }
 
       // LIKE、USDT
-      setPlayShipWaiting(true)
+      setPlayLoading(true)
       setShowAnimation(true)
       scrollToAnimation()
       await sleep(5 * 1000)
-      setPlayShipWaiting(false)
+      setPlayLoading(false)
       hasDonatedRefetch()
       return
     }
@@ -123,7 +123,7 @@ const SupportWidget = ({
       {showAnimation && (
         <section className={styles.donation}>
           <DynamicAnimation
-            playShipWaiting={playShipWaiting}
+            playLoading={playLoading}
             playEnd={() => {
               setShowAnimation(false)
             }}
