@@ -26,8 +26,8 @@ const SupportPreview = ({
         {!content &&
           (tabType === 'request' ? (
             <FormattedMessage
-              defaultMessage="Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
-              id="3Y6k4g"
+              defaultMessage="Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
+              id="9EABqX"
             />
           ) : (
             <>

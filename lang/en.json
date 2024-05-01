@@ -271,9 +271,6 @@
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
-  "3Y6k4g": {
-    "defaultMessage": "Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
-  },
   "3fqQHv": {
     "defaultMessage": "Add tag editor"
   },
@@ -538,6 +535,9 @@
   },
   "99OtWT": {
     "defaultMessage": "Pending..."
+  },
+  "9EABqX": {
+    "defaultMessage": "Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
   },
   "9Fpc9S": {
     "defaultMessage": "Bug Report"
