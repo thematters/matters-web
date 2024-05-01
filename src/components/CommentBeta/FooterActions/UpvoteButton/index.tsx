@@ -118,7 +118,7 @@ const UpvoteButton = ({
       >
         <TextIcon
           icon={
-            heartPulsDone && !playHeartPuls ? (
+            heartPulsDone || !playHeartPuls ? (
               <Icon icon={IconLikeFill} color="redLight" size="mdXS" />
             ) : (
               <Lottie
