@@ -11,7 +11,7 @@ const AddCollectionButton = ({ openDialog }: AddCollectionButtonProps) => {
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Add to collection" id="ub1kHa" />}
-      icon={<Icon icon={IconBook} size="mdS" />}
+      icon={<Icon icon={IconBook} size={20} />}
       onClick={openDialog}
       ariaHasPopup="dialog"
     />

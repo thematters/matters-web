@@ -29,8 +29,8 @@ const ReplyTo = ({ user }: ReplyToProps) => (
 
     <UserDigest.Mini
       user={user}
-      textSize="sm"
-      textWeight="md"
+      textSize={14}
+      textWeight="medium"
       hasDisplayName
       hasUserName
     />

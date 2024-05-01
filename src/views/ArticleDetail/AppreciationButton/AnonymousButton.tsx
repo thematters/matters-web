@@ -9,16 +9,16 @@ import AppreciateButton from './AppreciateButton'
 const AnonymousButton = ({
   count,
   total,
-  iconSize = 'mdS',
-  textWeight = 'md',
-  textIconSpacing = 'xtight',
+  iconSize = 20,
+  textWeight = 'medium',
+  textIconSpacing = 8,
   ...buttonProps
 }: {
   count?: number
   total: number
-  iconSize?: 'mdS' | 'md'
-  textWeight?: 'md' | 'normal'
-  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
+  iconSize?: 20 | 24
+  textWeight?: 'medium' | 'normal'
+  textIconSpacing?: 4 | 6 | 8
 } & ButtonProps) => (
   <AppreciateButton
     count={count}

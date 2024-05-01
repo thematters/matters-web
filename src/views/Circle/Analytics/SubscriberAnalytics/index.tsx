@@ -218,11 +218,11 @@ const SubscriberAnalytics = () => {
             <Button
               borderColor="greyLight"
               borderWidth="sm"
-              spacing={['xxtight', 'xtight']}
+              spacing={[4, 8]}
               onClick={openMembersDialog}
               aria-haspopup="dialog"
             >
-              <TextIcon color="greyDarker" size="xs">
+              <TextIcon color="greyDarker" size={12}>
                 <FormattedMessage
                   defaultMessage="View Members"
                   id="SNh1n0"

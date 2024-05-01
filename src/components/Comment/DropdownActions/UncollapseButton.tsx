@@ -40,7 +40,7 @@ const UncollapseButton = ({ commentId }: { commentId: string }) => {
           description="src/components/Comment/DropdownActions/UncollapseButton.tsx"
         />
       }
-      icon={<Icon icon={IconExpand} size="mdS" />}
+      icon={<Icon icon={IconExpand} size={20} />}
       onClick={uncollapseComment}
     />
   )

@@ -39,9 +39,9 @@ const DonationButton = ({
         data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
       >
         <TextIcon
-          icon={<Icon icon={IconMoney} size="mdS" />}
+          icon={<Icon icon={IconMoney} size={20} />}
           color="white"
-          size="md"
+          size={16}
         >
           <Translate id="donationAgain" />
         </TextIcon>
@@ -63,9 +63,9 @@ const DonationButton = ({
       data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
     >
       <TextIcon
-        icon={<Icon icon={IconMoney} size="mdS" />}
+        icon={<Icon icon={IconMoney} size={20} />}
         color="white"
-        size="md"
+        size={16}
       >
         <Translate id="donation" />
       </TextIcon>

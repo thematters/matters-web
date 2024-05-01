@@ -4,7 +4,7 @@
   position: relative;
   display: inline-flex;
 
-  &.iconMdS {
+  &.icon20 {
     & .icon {
       position: relative;
       width: 1.25rem;
@@ -12,7 +12,7 @@
     }
   }
 
-  &.iconMd {
+  &.icon24 {
     & .icon {
       position: relative;
       width: 1.5rem;

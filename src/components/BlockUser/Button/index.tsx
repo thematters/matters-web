@@ -53,7 +53,7 @@ const BlockUserButton = ({
             description="src/components/BlockUser/Button/index.tsx"
           />
         }
-        icon={<Icon icon={IconMute} size="mdS" />}
+        icon={<Icon icon={IconMute} size={20} />}
         onClick={onUnblock}
       />
     )
@@ -66,7 +66,7 @@ const BlockUserButton = ({
       textColor="greyDarker"
       textActiveColor="black"
       text={<FormattedMessage defaultMessage="Block User" id="vAc1Bw" />}
-      icon={<Icon icon={IconMute} size="mdS" />}
+      icon={<Icon icon={IconMute} size={20} />}
     />
   )
 }

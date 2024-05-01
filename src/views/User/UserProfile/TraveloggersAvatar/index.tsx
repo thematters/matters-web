@@ -1,4 +1,4 @@
-import { Avatar, Tooltip, Translate } from '~/components'
+import { Avatar, AvatarSize, Tooltip, Translate } from '~/components'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
 import LogbookDialog from './LogbookDialog'
@@ -6,13 +6,13 @@ import LogbookDialog from './LogbookDialog'
 type TraveloggersAvatarProps = {
   user: NonNullable<UserProfileUserPublicQuery['user']>
   isMe: boolean
-  size?: 'xxxlm' | 'xxxll' | 'xxxxl'
+  size?: AvatarSize
 }
 
 const TraveloggersAvatar: React.FC<TraveloggersAvatarProps> = ({
   user,
   isMe,
-  size = 'xxxxl',
+  size = 120,
 }) => {
   return (
     <Tooltip

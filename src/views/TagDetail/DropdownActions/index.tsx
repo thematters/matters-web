@@ -74,7 +74,7 @@ const BaseDropdownActions = ({
       {hasEditTag && (
         <Menu.Item
           text={<FormattedMessage defaultMessage="Edit" id="wEQDC6" />}
-          icon={<Icon icon={IconEdit} size="mdS" />}
+          icon={<Icon icon={IconEdit} size={20} />}
           onClick={openEditTagDialog}
           ariaHasPopup="dialog"
         />
@@ -88,7 +88,7 @@ const BaseDropdownActions = ({
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           }
-          icon={<Icon icon={IconCirclePlus} size="mdS" />}
+          icon={<Icon icon={IconCirclePlus} size={20} />}
           onClick={openTagAddSelectedArticlesDialog}
           ariaHasPopup="dialog"
         />
@@ -102,7 +102,7 @@ const BaseDropdownActions = ({
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           }
-          icon={<Icon icon={IconProfile} size="mdS" />}
+          icon={<Icon icon={IconProfile} size={20} />}
           onClick={openTagEditorDialog}
           ariaHasPopup="dialog"
         />
@@ -116,7 +116,7 @@ const BaseDropdownActions = ({
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           }
-          icon={<Icon icon={IconCircleMinus} size="mdS" />}
+          icon={<Icon icon={IconCircleMinus} size={20} />}
           onClick={openTagLeaveDialog}
           ariaHasPopup="dialog"
         />
@@ -138,7 +138,7 @@ const BaseDropdownActions = ({
           aria-haspopup="listbox"
           ref={ref}
         >
-          <Icon icon={IconSettings} size="md" color="white" />
+          <Icon icon={IconSettings} size={24} color="white" />
         </Button>
       )}
     </Dropdown>

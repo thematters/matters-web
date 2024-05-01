@@ -15,7 +15,7 @@ export const EmptyArticle = ({
   return (
     <Empty
       spacingY="xxloose"
-      icon={withIcon(IconEmptyFile)({ size: 'xxxlM' })}
+      icon={withIcon(IconEmptyFile)({ size: 88 })}
       description={
         description ||
         intl.formatMessage({

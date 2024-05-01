@@ -132,11 +132,11 @@ export const TextSelectionPopover = ({
           }}
         >
           <button onClick={onQuote} className={styles.quoteButton}>
-            <Icon icon={IconComment} size="mdS" />
+            <Icon icon={IconComment} size={20} />
           </button>
           {/* <span className={styles.divider} />
           <button onClick={onShare} className={styles.shareButton}>
-            <IconX20 size="mdS" />
+            <IconX20 size={20} />
           </button> */}
         </div>
       )}

@@ -91,8 +91,8 @@ export const ArticleDigestDropdown = ({
         <footer className={styles.footer}>
           <UserDigest.Mini
             user={article.author}
-            avatarSize="xs"
-            textSize="smS"
+            avatarSize={16}
+            textSize={13}
             hasAvatar
             hasUserName
             hasDisplayName

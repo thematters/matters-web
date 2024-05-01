@@ -60,11 +60,11 @@ const ToggleResponse = ({
             {canComment ? (
               <Icon
                 icon={IconChecked}
-                size="md"
+                size={24}
                 color={disableChangeCanComment ? 'grey' : 'green'}
               />
             ) : (
-              <Icon icon={IconUnChecked} color="greyLight" size="md" />
+              <Icon icon={IconUnChecked} color="greyLight" size={24} />
             )}
           </section>
         </section>
@@ -88,12 +88,12 @@ const ToggleResponse = ({
           <section className={styles.right}>
             {canComment ? (
               disableChangeCanComment ? (
-                <Icon icon={IconUnCheckedGrey} color="greyLight" size="md" />
+                <Icon icon={IconUnCheckedGrey} color="greyLight" size={24} />
               ) : (
-                <Icon icon={IconUnChecked} color="greyLight" size="md" />
+                <Icon icon={IconUnChecked} color="greyLight" size={24} />
               )
             ) : (
-              <Icon icon={IconChecked} size="md" color="green" />
+              <Icon icon={IconChecked} size={24} color="green" />
             )}
           </section>
         </section>
@@ -129,10 +129,10 @@ const ToggleResponse = ({
               <Icon
                 icon={IconChecked}
                 color={disableChangeCanComment ? 'grey' : 'green'}
-                size="mdS"
+                size={20}
               />
             ) : (
-              <Icon icon={IconUnChecked} color="greyLight" size="mdS" />
+              <Icon icon={IconUnChecked} color="greyLight" size={20} />
             )}
           </section>
         </section>
@@ -156,12 +156,12 @@ const ToggleResponse = ({
           <section className={styles.right}>
             {canComment ? (
               disableChangeCanComment ? (
-                <Icon icon={IconUnCheckedGrey} color="greyLight" size="mdS" />
+                <Icon icon={IconUnCheckedGrey} color="greyLight" size={20} />
               ) : (
-                <Icon icon={IconUnChecked} color="greyLight" size="mdS" />
+                <Icon icon={IconUnChecked} color="greyLight" size={20} />
               )
             ) : (
-              <Icon icon={IconChecked} color="green" size="mdS" />
+              <Icon icon={IconChecked} color="green" size={20} />
             )}
           </section>
         </section>

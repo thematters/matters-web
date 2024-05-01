@@ -8,15 +8,8 @@ import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-export type ArticleDigestTitleTextSize =
-  | 'xs'
-  | 'smS'
-  | 'sm'
-  | 'mdS'
-  | 'md'
-  | 'xm'
-  | 'xl'
-export type ArticleDigestTitleTextWeight = 'normal' | 'md' | 'semibold'
+export type ArticleDigestTitleTextSize = 12 | 13 | 14 | 15 | 16 | 18 | 24
+export type ArticleDigestTitleTextWeight = 'normal' | 'medium' | 'semibold'
 export type ArticleDigestTitleIs = 'h2' | 'h3'
 
 type ArticleDigestTitleProps = {
@@ -53,8 +46,8 @@ export const ArticleDigestTitle = ({
   article,
   collectionId,
 
-  textSize = 'md',
-  textWeight = 'md',
+  textSize = 16,
+  textWeight = 'medium',
   lineClamp = true,
   is = 'h2',
 
@@ -78,8 +71,8 @@ export const ArticleDigestTitle = ({
   const title = isBanned ? <Translate id="articleBanned" /> : article.title
   const titleClasses = classNames({
     [styles.title]: true,
-    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
-    [styles[`textWeight${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
+    [styles[`text${textSize}`]]: !!textSize,
+    [styles[`font${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
     [styles.lineClamp]: !!lineClamp,
     [styles[`lineClampLine${lineClamp}`]]: lineClamp === 1 || lineClamp === 3,
   })

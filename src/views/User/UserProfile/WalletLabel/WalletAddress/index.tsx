@@ -26,15 +26,15 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
 }) => {
   const intl = useIntl()
   const buttonProps: ButtonProps = {
-    spacing: ['xxtight', 'tight'],
+    spacing: [4, 12],
     bgColor: 'greenLighter',
     bgActiveColor: 'greyLighter',
   }
   const textIconProps: TextIconProps = {
-    spacing: 'xtight',
-    textPlacement: 'left',
+    spacing: 8,
+    placement: 'left',
     color: 'green',
-    size: 'md',
+    size: 16,
   }
 
   if (ensName && hasLinkedIPNS) {
@@ -69,7 +69,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
         >
           <TextIcon
             {...textIconProps}
-            icon={<Icon icon={IconCopy} size="sm" />}
+            icon={<Icon icon={IconCopy} size={14} />}
           >
             {ensName || truncate(getAddress(address))}
           </TextIcon>

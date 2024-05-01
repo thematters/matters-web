@@ -2,18 +2,18 @@
   line-height: 1.5rem;
 }
 
-.textSizeXs {
+.text12 {
   font-size: var(--text12);
 }
 
-.textSizeMd {
+.text16 {
   font-size: var(--text16);
 }
 
-.textWeightNormal {
+.fontNormal {
   font-weight: var(--font-normal);
 }
 
-.textWeightMd {
+.fontMedium {
   font-weight: var(--font-medium);
 }

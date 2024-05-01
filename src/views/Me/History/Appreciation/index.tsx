@@ -63,10 +63,10 @@ export const Appreciation = ({ type, appreciation }: AppreciationProps) => {
           })}
         >
           <TextIcon
-            icon={<Icon icon={IconClap} size="mdM" />}
-            size="sm"
-            spacing="xxtight"
-            weight="md"
+            icon={<Icon icon={IconClap} size={22} />}
+            size={14}
+            spacing={4}
+            weight="medium"
             color="green"
           >
             {amount}

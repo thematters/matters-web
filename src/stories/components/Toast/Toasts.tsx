@@ -13,7 +13,7 @@ const Toasts = () => (
 
     <section className={styles.buttons}>
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgColor="red"
         onClick={() => {
           toast.error({
@@ -30,7 +30,7 @@ const Toasts = () => (
       </Button>
 
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgColor="greenLighter"
         onClick={() => {
           toast.success({
@@ -42,7 +42,7 @@ const Toasts = () => (
       </Button>
 
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgColor="greenLighter"
         onClick={() => {
           toast.success({

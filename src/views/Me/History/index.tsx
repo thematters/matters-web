@@ -131,7 +131,7 @@ const BaseMeHistory = () => {
           textActiveColor="black"
           onClick={handlerClear}
         >
-          <TextIcon size="sm">
+          <TextIcon size={14}>
             <FormattedMessage defaultMessage="Clear" id="/GCoTA" />
           </TextIcon>
         </Button>

@@ -103,7 +103,7 @@ const FloatToolbar = ({
             <AppreciationButton
               article={article}
               privateFetched={privateFetched}
-              textIconSpacing="basexxtight"
+              textIconSpacing={6}
               disabled={lock}
               {...buttonProps}
             />
@@ -113,7 +113,7 @@ const FloatToolbar = ({
           <CommentButton
             article={article}
             disabled={!article.canComment}
-            textIconSpacing="basexxtight"
+            textIconSpacing={6}
             onClick={toggleCommentDrawer}
             {...buttonProps}
           />
@@ -122,7 +122,7 @@ const FloatToolbar = ({
             article={article}
             articleDetail={articleDetails}
             disabled={lock}
-            textIconSpacing="basexxtight"
+            textIconSpacing={6}
             onClick={toggleDonationDrawer}
             {...buttonProps}
           />

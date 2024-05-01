@@ -22,7 +22,7 @@ const MeButton = () => {
         onClick={() => setShowNav(!showNav)}
         aria-label={TEXT[lang].myPage}
       >
-        <MeAvatar user={viewer} size="lg" />
+        <MeAvatar user={viewer} size={32} />
       </Button>
 
       <SideDrawerNav isOpen={showNav} onDismiss={closeNav} />

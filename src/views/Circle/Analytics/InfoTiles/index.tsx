@@ -64,9 +64,9 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
         {change ? (
           <span className={changeClasses}>
             <TextIcon
-              icon={withIcon(IconAnalyticsChangeArrow12)({ size: 'xs' })}
-              size="xs"
-              spacing="xxxtight"
+              icon={withIcon(IconAnalyticsChangeArrow12)({ size: 12 })}
+              size={12}
+              spacing={2}
             >
               {numRound(change)}%
             </TextIcon>

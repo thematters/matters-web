@@ -19,7 +19,7 @@ import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle
 
 export type UnsubscribeProps = {
   articleId?: string
-  iconSize?: Extract<IconSize, 'mdS' | 'md'>
+  iconSize?: Extract<IconSize, 20 | 24>
   disabled?: boolean
   inCard?: boolean
 } & ButtonProps
@@ -85,7 +85,7 @@ const Unsubscribe = ({
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       aria-label={intl.formatMessage({
         defaultMessage: 'Remove bookmark',

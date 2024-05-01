@@ -77,7 +77,7 @@ export const ThreadCommentBeta = ({
                   comment={descendantComment}
                   pinnedComment={pinnedComment}
                   type={type}
-                  avatarSize="md"
+                  avatarSize={24}
                   hasReply
                   hasUserName
                   isInCommentDetail={isInCommentDetail}
@@ -110,7 +110,7 @@ export const ThreadCommentBeta = ({
               comment={descendantComment}
               pinnedComment={pinnedComment}
               type={type}
-              avatarSize="md"
+              avatarSize={24}
               hasReply
               hasUserName
               isInCommentDetail={isInCommentDetail}
@@ -126,7 +126,7 @@ export const ThreadCommentBeta = ({
                   comment={descendantComment}
                   pinnedComment={pinnedComment}
                   type={type}
-                  avatarSize="md"
+                  avatarSize={24}
                   hasReply
                   hasUserName
                   isInCommentDetail={isInCommentDetail}

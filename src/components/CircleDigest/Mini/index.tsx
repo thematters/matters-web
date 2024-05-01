@@ -40,7 +40,7 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
             <VisuallyHidden>
               <span>{circle.displayName}</span>
             </VisuallyHidden>
-            <CircleAvatar circle={circle} size="xl" />
+            <CircleAvatar circle={circle} size={48} />
           </a>
         </Link>
 

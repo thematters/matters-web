@@ -65,7 +65,7 @@ const Selector: React.FC<SelectorProps> = ({
               />
 
               {asset.path === selected?.path && (
-                <Icon icon={IconCircleCheckFill} size="md" color="green" />
+                <Icon icon={IconCircleCheckFill} size={24} color="green" />
               )}
             </button>
           </li>

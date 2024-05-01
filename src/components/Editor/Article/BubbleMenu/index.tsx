@@ -139,7 +139,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorH2)({ size: 'md' })}
+                {withIcon(IconEditorH2)({ size: 24 })}
               </button>
             )}
 
@@ -167,7 +167,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorH3)({ size: 'md' })}
+                {withIcon(IconEditorH3)({ size: 24 })}
               </button>
             )}
 
@@ -191,7 +191,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorBold)({ size: 'md' })}
+                {withIcon(IconEditorBold)({ size: 24 })}
               </button>
             )}
 
@@ -217,7 +217,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorStrike)({ size: 'md' })}
+                {withIcon(IconEditorStrike)({ size: 24 })}
               </button>
             )}
 
@@ -243,7 +243,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorCode)({ size: 'md' })}
+                {withIcon(IconEditorCode)({ size: 24 })}
               </button>
             )}
 
@@ -260,7 +260,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorQuote)({ size: 'md' })}
+              {withIcon(IconEditorQuote)({ size: 24 })}
             </button>
 
             {/* Unordered list */}
@@ -283,7 +283,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorUl)({ size: 'md' })}
+                {withIcon(IconEditorUl)({ size: 24 })}
               </button>
             )}
 
@@ -307,7 +307,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   lang,
                 })}
               >
-                {withIcon(IconEditorOl)({ size: 'md' })}
+                {withIcon(IconEditorOl)({ size: 24 })}
               </button>
             )}
 
@@ -340,7 +340,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorLink)({ size: 'md' })}
+              {withIcon(IconEditorLink)({ size: 24 })}
             </button>
           </>
         )}

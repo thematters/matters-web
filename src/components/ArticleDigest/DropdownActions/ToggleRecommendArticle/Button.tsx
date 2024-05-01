@@ -53,7 +53,7 @@ const RecommendArticleButton: React.FC<RecommendArticleButtonProps> = ({
   )
 
   if (loading) {
-    return <Menu.Item icon={<Spinner size="mdS" />} text="正在加載中…" />
+    return <Menu.Item icon={<Spinner size={20} />} text="正在加載中…" />
   }
 
   if (data?.article?.__typename !== 'Article') return null
@@ -76,7 +76,7 @@ const RecommendArticleButton: React.FC<RecommendArticleButtonProps> = ({
   return (
     <Menu.Item
       text={texts[type][+enabled]}
-      icon={<Icon icon={icons[type][+enabled]} size="mdS" />}
+      icon={<Icon icon={icons[type][+enabled]} size={20} />}
       onClick={() => {
         openDialog({ type, enabled })
       }}

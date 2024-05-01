@@ -70,7 +70,7 @@ const UnfollowCircleActionButton = ({
           zh_hans={`取消追踪 ${circle.displayName}`}
         />
       }
-      icon={<Icon icon={IconCircleMinus} size="mdS" />}
+      icon={<Icon icon={IconCircleMinus} size={20} />}
       onClick={async () => {
         await unfollow()
 

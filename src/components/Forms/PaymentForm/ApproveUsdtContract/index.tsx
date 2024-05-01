@@ -83,9 +83,9 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
           bgColor="green"
           onClick={approveWrite}
           textWeight="normal"
-          textSize="md"
+          textSize={16}
           text={
-            <TextIcon icon={<Icon icon={IconOpenWallet} size="mdS" />}>
+            <TextIcon icon={<Icon icon={IconOpenWallet} size={20} />}>
               {!allowanceError && !approveError && (
                 <FormattedMessage
                   defaultMessage="Go to allow"

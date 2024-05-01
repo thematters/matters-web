@@ -91,7 +91,7 @@ const DesktopToolbar = ({
   }
 
   const buttonProps: ButtonProps = {
-    spacing: ['xtight', 'tight'],
+    spacing: [8, 12],
     borderWidth: 'sm',
     borderColor: 'greyLighterActive',
     borderActiveColor: 'greyLight',
@@ -106,7 +106,7 @@ const DesktopToolbar = ({
             <AppreciationButton
               article={article}
               privateFetched={privateFetched}
-              iconSize="md"
+              iconSize={24}
               disabled={lock}
               {...buttonProps}
             />
@@ -115,7 +115,7 @@ const DesktopToolbar = ({
             <CommentButton
               article={article}
               disabled={!article.canComment}
-              iconSize="md"
+              iconSize={24}
               onClick={toggleDrawer}
               {...buttonProps}
             />
@@ -124,12 +124,12 @@ const DesktopToolbar = ({
 
         <section className={styles.right}>
           <ShareButton
-            iconSize="md"
+            iconSize={24}
             inCard={false}
             // title={makeTitle(article.title)}
             path={sharePath}
             disabled={lock}
-            spacing={['baseTight', 'baseTight']}
+            spacing={[10, 10]}
             tags={article.tags
               ?.map(({ content }) => content)
               .join(' ')
@@ -139,8 +139,8 @@ const DesktopToolbar = ({
 
           <BookmarkButton
             article={article}
-            iconSize="md"
-            spacing={['baseTight', 'baseTight']}
+            iconSize={24}
+            spacing={[10, 10]}
             inCard={false}
             disabled={lock}
           />
@@ -148,7 +148,7 @@ const DesktopToolbar = ({
           <DropdownActions
             article={article}
             disabled={lock}
-            size="md"
+            size={24}
             {...dropdonwActionsProps}
             hasBookmark={false}
           />

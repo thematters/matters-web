@@ -69,10 +69,10 @@ export const Balance: React.FC<BalanceProps> = ({
               <section className={styles.topup}>
                 <Button onClick={hasEmail ? switchToAddCredit : openDialog}>
                   <TextIcon
-                    size="sm"
-                    textDecoration="underline"
+                    size={14}
+                    decoration="underline"
                     color="gold"
-                    weight="md"
+                    weight="medium"
                   >
                     <FormattedMessage defaultMessage="Top up" id="Y47aYU" />
                   </TextIcon>

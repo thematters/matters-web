@@ -31,7 +31,7 @@ export const CustomAmount: React.FC<CustomAmountProps> = ({
   return (
     <section className={styles.container}>
       <Button {...buttonProps}>
-        <TextIcon weight="md" size="md">
+        <TextIcon weight="medium" size={16}>
           {fixed
             ? translate({
                 zh_hant: '其他金額',
@@ -50,12 +50,12 @@ export const CustomAmount: React.FC<CustomAmountProps> = ({
 
       {showBalance && (
         <span>
-          <TextIcon size="sm">
+          <TextIcon size={14}>
             <Translate
               id={insufficient ? 'walletBalanceInsufficient' : 'walletBalance'}
             />
           </TextIcon>
-          <TextIcon weight="md" size="sm">
+          <TextIcon weight="medium" size={14}>
             &nbsp;{PAYMENT_CURRENCY.HKD}&nbsp;{formatAmount(balance)}
           </TextIcon>
         </span>

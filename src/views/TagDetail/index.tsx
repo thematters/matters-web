@@ -186,7 +186,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             content={tag.description}
             color="greyDarker"
             spacingTop="base"
-            size="mdS"
+            size={15}
           >
             <p>{tag.description}</p>
           </Expandable>

@@ -82,7 +82,7 @@ const MetaInfo = ({
             }).href
           }
         >
-          <TextIcon size="xs">IPFS</TextIcon>
+          <TextIcon size={12}>IPFS</TextIcon>
         </Button>
       )}
 
@@ -114,7 +114,7 @@ const MetaInfo = ({
                 href={editable ? `${href}/edit` : undefined}
                 disabled={!editable}
               >
-                <TextIcon icon={<Icon icon={IconEdit} />} size="xs">
+                <TextIcon icon={<Icon icon={IconEdit} />} size={12}>
                   <FormattedMessage
                     defaultMessage="Edit"
                     id="2bG/gP"

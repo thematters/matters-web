@@ -262,9 +262,9 @@ const Confirm: React.FC<FormProps> = ({
             bgColor="green"
             onClick={isUSDT ? submitCallback : onSubmitLikeCoin}
             textWeight="normal"
-            textSize="md"
+            textSize={16}
             text={
-              <TextIcon icon={<Icon icon={IconOpenWallet} size="mdS" />}>
+              <TextIcon icon={<Icon icon={IconOpenWallet} size={20} />}>
                 {isUSDT && (
                   <FormattedMessage
                     defaultMessage="Confirm authorization"

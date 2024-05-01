@@ -88,27 +88,27 @@ export const Tag = ({
         color: 'grey',
       }
       textIconProps = {
-        size: 'md',
+        size: 16,
         weight: 'normal',
-        spacing: 'xxtight',
+        spacing: 4,
         color: 'black',
       }
       break
     case 'title':
       iconProps = {
         color: 'white',
-        size: 'md',
+        size: 24,
       }
       textIconProps = {
-        size: 'lg',
-        weight: 'md',
+        size: 20,
+        weight: 'medium',
         spacing: 0,
         color: 'white',
       }
       break
     case 'article':
       textIconProps = {
-        size: 'sm',
+        size: 14,
         weight: 'normal',
       }
       break
@@ -117,15 +117,15 @@ export const Tag = ({
         color: active ? 'green' : 'grey',
       }
       textIconProps = {
-        size: 'smS',
+        size: 13,
         weight: 'normal',
-        spacing: 'xxtight',
+        spacing: 4,
         color: active ? 'white' : 'greyDarker',
       }
       break
     case 'plain':
       textIconProps = {
-        size: 'xs',
+        size: 12,
         weight: 'normal',
         spacing: 0,
         color: 'green',

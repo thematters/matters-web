@@ -35,8 +35,8 @@ const NavBar = () => {
         <ul className={styles.list}>
           <NavListItem
             name={TEXT[lang].discover}
-            icon={<Icon icon={IconNavHome} size="lg" />}
-            activeIcon={<Icon icon={IconNavHomeActive} size="lg" />}
+            icon={<Icon icon={IconNavHome} size={32} />}
+            activeIcon={<Icon icon={IconNavHomeActive} size={32} />}
             active={isInHome}
             href={PATHS.HOME}
           />
@@ -47,8 +47,8 @@ const NavBar = () => {
 
           <NavListItem
             name={TEXT[lang].search}
-            icon={<Icon icon={IconNavSearch} size="lg" />}
-            activeIcon={<Icon icon={IconNavSearchActive} size="lg" />}
+            icon={<Icon icon={IconNavSearch} size={32} />}
+            activeIcon={<Icon icon={IconNavSearchActive} size={32} />}
             active={isInSearch}
             onClick={() => {
               const path = toPath({
@@ -72,8 +72,8 @@ const NavBar = () => {
       <ul className={styles.list}>
         <NavListItem
           name={TEXT[lang].discover}
-          icon={<Icon icon={IconNavHome} size="lg" />}
-          activeIcon={<Icon icon={IconNavHomeActive} size="lg" />}
+          icon={<Icon icon={IconNavHome} size={32} />}
+          activeIcon={<Icon icon={IconNavHomeActive} size={32} />}
           active={isInHome}
           href={PATHS.HOME}
         />
@@ -97,8 +97,8 @@ const NavBar = () => {
 
         <NavListItem
           name={TEXT[lang].search}
-          icon={<Icon icon={IconNavSearch} size="lg" />}
-          activeIcon={<Icon icon={IconNavSearchActive} size="lg" />}
+          icon={<Icon icon={IconNavSearch} size={32} />}
+          activeIcon={<Icon icon={IconNavSearchActive} size={32} />}
           active={isInSearch}
           onClick={() => {
             const path = toPath({

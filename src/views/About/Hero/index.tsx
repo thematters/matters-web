@@ -74,7 +74,7 @@ const Hero = () => {
                 <VisuallyHidden>
                   <span>{translate({ id: 'discover', lang })}</span>
                 </VisuallyHidden>
-                <Icon icon={IconLogo} />
+                <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
               </a>
             </Link>
           </div>
@@ -103,11 +103,11 @@ const Hero = () => {
 
               <Button
                 size={[null, '2.25rem']}
-                spacing={[0, 'base']}
+                spacing={[0, 16]}
                 bgColor="green"
                 href={PATHS.HOME}
               >
-                <TextIcon color="white" weight="md">
+                <TextIcon color="white" weight="medium">
                   <Translate
                     zh_hant="開始創作"
                     zh_hans="开始创作"
@@ -126,9 +126,9 @@ const Hero = () => {
         <section className={styles.container}>
           <section className={`${styles.scrollButton} ${styles.scrollLeft}`}>
             <Button onClick={scrollPrev} disabled={!prevBtnEnabled}>
-              <Media at="sm">{withIcon(IconButtonLeft)({ size: 'md' })}</Media>
+              <Media at="sm">{withIcon(IconButtonLeft)({ size: 24 })}</Media>
               <Media greaterThan="sm">
-                {withIcon(IconButtonLeft)({ size: 'lg' })}
+                {withIcon(IconButtonLeft)({ size: 32 })}
               </Media>
             </Button>
           </section>
@@ -314,9 +314,9 @@ const Hero = () => {
           </section>
           <section className={`${styles.scrollButton} ${styles.scrollRight}`}>
             <Button onClick={scrollNext} disabled={!nextBtnEnabled}>
-              <Media at="sm">{withIcon(IconButtonRight)({ size: 'md' })}</Media>
+              <Media at="sm">{withIcon(IconButtonRight)({ size: 24 })}</Media>
               <Media greaterThan="sm">
-                {withIcon(IconButtonRight)({ size: 'lg' })}
+                {withIcon(IconButtonRight)({ size: 32 })}
               </Media>
             </Button>
           </section>

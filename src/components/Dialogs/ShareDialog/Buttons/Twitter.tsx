@@ -63,9 +63,9 @@ const Twitter = ({
       }}
     >
       <TextIcon
-        icon={<Icon icon={IconX} size="md" />}
-        spacing="base"
-        size="md"
+        icon={<Icon icon={IconX} size={24} />}
+        spacing={16}
+        size={16}
         color="black"
       >
         X

@@ -28,14 +28,14 @@ const RetryButton = ({ id }: { id: string }) => {
   return (
     <Button
       size={[null, '1.25rem']}
-      spacing={[0, 'xtight']}
+      spacing={[0, 8]}
       bgActiveColor="red"
       onClick={() => retry()}
     >
       <TextIcon
         color="white"
-        icon={<Icon icon={IconRight} size="xs" />}
-        textPlacement="left"
+        icon={<Icon icon={IconRight} size={12} />}
+        placement="left"
       >
         <Translate id="retry" />
       </TextIcon>

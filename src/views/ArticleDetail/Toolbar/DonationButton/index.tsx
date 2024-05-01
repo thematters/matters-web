@@ -30,9 +30,9 @@ import { SupportDialog } from '../../Support/SupportDialog'
 export type DonationButtonProps = {
   article: DonationButtonArticleFragment
   articleDetail: NonNullable<ArticleDetailPublicQuery['article']>
-  iconSize?: 'mdS' | 'md'
-  textWeight?: 'md' | 'normal'
-  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
+  iconSize?: 20 | 24
+  textWeight?: 'medium' | 'normal'
+  textIconSpacing?: 4 | 6 | 8
 } & ButtonProps
 
 const fragments = {
@@ -53,9 +53,9 @@ const fragments = {
 const DonationButton = ({
   article,
   articleDetail,
-  iconSize = 'mdS',
-  textWeight = 'md',
-  textIconSpacing = 'basexxtight',
+  iconSize = 20,
+  textWeight = 'medium',
+  textIconSpacing = 6,
   ...buttonProps
 }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
@@ -78,7 +78,7 @@ const DonationButton = ({
     <SupportDialog article={articleDetail}>
       {({ openDialog }) => (
         <Button
-          spacing={['xtight', 'xtight']}
+          spacing={[8, 8]}
           aria-label={translate({
             zh_hant: `${TEXT.zh_hant.donation}（當前 ${donationCount} 次支持）`,
             zh_hans: `${TEXT.zh_hans.donation}（当前 ${donationCount} 次支持）`,
@@ -111,7 +111,7 @@ const DonationButton = ({
             spacing={
               article.donationsToolbar.totalCount > 0 ? textIconSpacing : 0
             }
-            size="sm"
+            size={14}
           >
             {article.donationsToolbar.totalCount > 0
               ? numAbbr(article.donationsToolbar.totalCount)

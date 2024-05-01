@@ -82,7 +82,7 @@ const BaseCollectionDigestFeed = ({
               </span>
 
               <span className={styles.iconDivider}>
-                <Icon icon={IconDot} size="mdS" />
+                <Icon icon={IconDot} size={20} />
               </span>
 
               <span>

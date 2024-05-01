@@ -38,7 +38,7 @@ export type UserDigestRichProps = {
   hasState?: boolean
   canClamp?: boolean
 } & CardProps &
-  AvatarProps
+  Omit<AvatarProps, 'size'>
 
 const Rich = ({
   user,
@@ -70,7 +70,7 @@ const Rich = ({
   if (isArchived || !user) {
     return (
       <Card
-        spacing={['tight', 'tight']}
+        spacing={[12, 12]}
         bgActiveColor="none"
         {...cardProps}
         onClick={undefined}
@@ -78,7 +78,7 @@ const Rich = ({
       >
         <section className={containerClasses}>
           <span className={styles.avatar}>
-            <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
+            <Avatar size={size === 'sm' ? 32 : 48} />
           </span>
 
           <section className={contentClasses}>
@@ -119,7 +119,7 @@ const Rich = ({
   return (
     <Card
       {...path}
-      spacing={['tight', 'tight']}
+      spacing={[12, 12]}
       bgActiveColor="none"
       {...cardProps}
       testId={TEST_ID.DIGEST_USER_RICH}
@@ -130,7 +130,7 @@ const Rich = ({
             <VisuallyHidden>
               <span>{user.displayName}</span>
             </VisuallyHidden>
-            <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />
+            <Avatar size={size === 'sm' ? 32 : 48} user={user} />
             {avatarBadge && <span className={styles.badge}>{avatarBadge}</span>}
           </a>
         </Link>

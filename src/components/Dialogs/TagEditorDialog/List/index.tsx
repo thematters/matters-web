@@ -47,12 +47,12 @@ interface Props {
 const RemoveButton = ({ remove }: { remove: () => void }) => (
   <section>
     <Button
-      spacing={[0, 'xtight']}
+      spacing={[0, 8]}
       size={[null, '1.25rem']}
       bgColor="greyLighter"
       onClick={() => remove()}
     >
-      <TextIcon size="xs" color="greyDark" weight="md">
+      <TextIcon size={12} color="greyDark" weight="medium">
         <Translate zh_hant="移除" zh_hans="移除" en="Remove" />
       </TextIcon>
     </Button>
@@ -125,7 +125,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                     en="Maintainer"
                   />
                 }
-                spacing={['tight', 'base']}
+                spacing={[12, 16]}
                 hasFollow={false}
               />
             </List.Item>
@@ -146,7 +146,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                 extraButton={
                   <RemoveButton remove={() => toRemoveStep(editor)} />
                 }
-                spacing={['tight', 'base']}
+                spacing={[12, 16]}
               />
             </List.Item>
           ))}

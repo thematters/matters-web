@@ -1,40 +1,40 @@
-.textSizeXs {
+.text12 {
   font-size: var(--text12);
 }
 
-.textSizeSmS {
+.text13 {
   font-size: var(--text13);
 }
 
-.textSizeSm {
+.text14 {
   font-size: var(--text14);
 }
 
-.textSizeMdS {
+.text15 {
   font-size: var(--text15);
 }
 
-.textSizeMd {
+.text16 {
   font-size: var(--text16);
 }
 
-.textSizeXm {
+.text18 {
   font-size: var(--text18);
 }
 
-.textSizeXl {
+.text24 {
   font-size: var(--text24);
 }
 
-.textWeightNormal {
+.fontNormal {
   font-weight: var(--font-normal);
 }
 
-.textWeightMd {
+.fontMedium {
   font-weight: var(--font-medium);
 }
 
-.textWeightSemibold {
+.fontSemibold {
   font-weight: var(--font-semibold);
 }
 

@@ -32,7 +32,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
   return (
     <section className={boxClasses}>
       <header className={styles.header}>
-        <TextIcon icon={icon} size="md" weight="md" spacing="xtight">
+        <TextIcon icon={icon} size={16} weight="medium" spacing={8}>
           {title}
         </TextIcon>
 
@@ -40,7 +40,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
           <Button
             onClick={onClick}
             bgActiveColor="greyLighter"
-            spacing={['xtight', 'xtight']}
+            spacing={[8, 8]}
             aria-haspopup="dialog"
             aria-label={title}
           >

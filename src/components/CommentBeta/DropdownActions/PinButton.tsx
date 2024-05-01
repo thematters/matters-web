@@ -114,7 +114,7 @@ const PinButton = ({
             description="src/components/Comment/DropdownActions/PinButton.tsx"
           />
         }
-        icon={<Icon icon={IconUnpin} size="mdS" />}
+        icon={<Icon icon={IconUnpin} size={20} />}
         onClick={async () => {
           await unpinComment()
           window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
@@ -132,7 +132,7 @@ const PinButton = ({
           description="src/components/Comment/DropdownActions/PinButton.tsx"
         />
       }
-      icon={<Icon icon={IconPin} size="mdS" />}
+      icon={<Icon icon={IconPin} size={20} />}
       onClick={
         canPin
           ? () => pinComment()

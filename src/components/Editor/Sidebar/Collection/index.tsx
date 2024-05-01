@@ -47,7 +47,7 @@ const SidebarCollection = ({
     >
       {({ openDialog }) => (
         <Box
-          icon={<Icon icon={IconCollection} size="md" />}
+          icon={<Icon icon={IconCollection} size={24} />}
           title={
             <FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />
           }
@@ -60,8 +60,8 @@ const SidebarCollection = ({
                 <li key={article.id}>
                   <ArticleDigestDropdown
                     article={article}
-                    titleTextSize="sm"
-                    spacing={['base', 'base']}
+                    titleTextSize={14}
+                    spacing={[16, 16]}
                     bgColor="none"
                     bgActiveColor="greyLighter"
                   />

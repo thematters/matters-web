@@ -24,9 +24,7 @@ const BlockedUsers = () => {
         />
       }
       rightText={loading ? undefined : data?.viewer?.blockList.totalCount}
-      rightIcon={
-        loading ? <Spinner color="greyDarker" size="mdS" /> : undefined
-      }
+      rightIcon={loading ? <Spinner color="greyDarker" size={20} /> : undefined}
       href={PATHS.ME_SETTINGS_BLOCKED}
     />
   )

@@ -94,11 +94,11 @@ const CurrencyChoice: React.FC<FormProps> = ({
         <span className={styles.userInfo}>
           <UserDigest.Mini
             user={recipient}
-            avatarSize="xs"
-            textSize="mdS"
+            avatarSize={16}
+            textSize={15}
             textWeight="semibold"
             nameColor="black"
-            spacing="xxtight"
+            spacing={4}
             hasAvatar
             hasDisplayName
           />
@@ -128,9 +128,9 @@ const CurrencyChoice: React.FC<FormProps> = ({
         aria-label={translate({ id: 'fiatCurrency', lang })}
       >
         <TextIcon
-          icon={<Icon icon={IconFiatCurrency} size="xlM" />}
-          size="md"
-          spacing="xtight"
+          icon={<Icon icon={IconFiatCurrency} size={40} />}
+          size={16}
+          spacing={8}
         >
           <Translate id="fiatCurrency" />
         </TextIcon>

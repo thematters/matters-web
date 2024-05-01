@@ -58,8 +58,8 @@ export const ArticleDigestList = ({
 
   const userProps: UserDigestMiniProps = {
     user: user || author,
-    avatarSize: 'sm',
-    textSize: 'xs',
+    avatarSize: 20,
+    textSize: 12,
     hasAvatar: true,
     hasDisplayName: true,
     onClick: onClickAuthor,
@@ -85,7 +85,7 @@ export const ArticleDigestList = ({
             <ArticleDigestTitle
               article={article}
               is="h2"
-              textSize="sm"
+              textSize={14}
               textWeight="normal"
               lineClamp={1}
             />

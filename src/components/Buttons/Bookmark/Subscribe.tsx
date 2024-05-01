@@ -25,7 +25,7 @@ import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle
 
 export type SubscribeProps = {
   articleId?: string
-  iconSize?: Extract<IconSize, 'mdS' | 'md'>
+  iconSize?: Extract<IconSize, 20 | 24>
   disabled?: boolean
   inCard?: boolean
 } & ButtonProps
@@ -91,7 +91,7 @@ const Subscribe = ({
             description="src/components/Buttons/Bookmark/Subscribe.tsx"
           />
         }
-        icon={<Icon icon={IconSave} size="mdS" />}
+        icon={<Icon icon={IconSave} size={20} />}
         onClick={onClick}
         testId={TEST_ID.ARTICLE_BOOKMARK}
       />
@@ -100,7 +100,7 @@ const Subscribe = ({
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgActiveColor={'greyLighter'}
       aria-label={intl.formatMessage({
         defaultMessage: 'Bookmark',

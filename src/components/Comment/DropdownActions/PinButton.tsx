@@ -115,7 +115,7 @@ const PinButton = ({
             />
           )
         }
-        icon={<Icon icon={IconUnpin} size="mdS" />}
+        icon={<Icon icon={IconUnpin} size={20} />}
         onClick={async () => {
           await unpinComment()
           window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
@@ -141,7 +141,7 @@ const PinButton = ({
           />
         )
       }
-      icon={<Icon icon={IconPin} size="mdS" />}
+      icon={<Icon icon={IconPin} size={20} />}
       onClick={
         canPin
           ? async () => {

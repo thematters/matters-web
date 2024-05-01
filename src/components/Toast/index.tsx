@@ -60,7 +60,7 @@ const ToastActions: React.FC<ToastActionsProps> = ({
           <Icon
             icon={IconMinus}
             color={type === 'error' ? 'white' : 'whiteLight'}
-            size="mdM"
+            size={22}
           />
         </button>
       )}
@@ -110,10 +110,7 @@ const Toast: React.FC<
     >
       {isSuccess && message}
       {isError && (
-        <TextIcon
-          icon={<Icon icon={IconWarn} color="white" />}
-          spacing="xtight"
-        >
+        <TextIcon icon={<Icon icon={IconWarn} color="white" />} spacing={8}>
           {message}
         </TextIcon>
       )}

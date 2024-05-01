@@ -47,7 +47,7 @@ const Collapsed = ({
       </p>
       {collapsed && (
         <Button
-          spacing={['xxtight', 'xtight']}
+          spacing={[4, 8]}
           onClick={() => {
             setCollapsed(false)
           }}

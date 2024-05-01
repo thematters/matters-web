@@ -37,7 +37,7 @@ const NoticeArticleTitle = ({
     )
   }
 
-  return <ArticleDigestTitle article={article} textSize="md" lineClamp={3} />
+  return <ArticleDigestTitle article={article} textSize={16} lineClamp={3} />
 }
 
 NoticeArticleTitle.fragments = {

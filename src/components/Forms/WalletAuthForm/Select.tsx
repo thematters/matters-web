@@ -202,9 +202,9 @@ const Select: React.FC<FormProps> = ({
               title={
                 <TextIcon
                   color="black"
-                  icon={<Icon icon={IconMetaMask} size="md" />}
-                  size="md"
-                  spacing="xtight"
+                  icon={<Icon icon={IconMetaMask} size={24} />}
+                  size={16}
+                  spacing={8}
                 >
                   MetaMask
                 </TextIcon>
@@ -223,9 +223,9 @@ const Select: React.FC<FormProps> = ({
               title={
                 <TextIcon
                   color="black"
-                  icon={<Icon icon={IconMetaMask} size="md" />}
-                  size="md"
-                  spacing="xtight"
+                  icon={<Icon icon={IconMetaMask} size={24} />}
+                  size={16}
+                  spacing={8}
                 >
                   <FormattedMessage
                     defaultMessage="Install MetaMask"
@@ -247,9 +247,9 @@ const Select: React.FC<FormProps> = ({
             title={
               <TextIcon
                 color="black"
-                icon={<Icon icon={IconWalletConnect} size="md" />}
-                size="md"
-                spacing="xtight"
+                icon={<Icon icon={IconWalletConnect} size={24} />}
+                size={16}
+                spacing={8}
               >
                 WalletConnect
               </TextIcon>

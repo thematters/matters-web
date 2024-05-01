@@ -53,7 +53,7 @@ export const CollectionDigestAuthorSidebar = ({
   return (
     <section className={containerClasses}>
       <LinkWrapper {...path} textActiveColor="green">
-        <Icon icon={IconAnthology} size="md" color="greyLight" />
+        <Icon icon={IconAnthology} size={24} color="greyLight" />
         <header>{title}</header>
       </LinkWrapper>
     </section>

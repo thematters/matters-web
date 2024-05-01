@@ -69,7 +69,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
                   })}
                   onClick={openBillboardDialog}
                 >
-                  <TextIcon icon={<Icon icon={IconInfo} />} size="xs">
+                  <TextIcon icon={<Icon icon={IconInfo} />} size={12}>
                     <FormattedMessage
                       defaultMessage="What's this?"
                       id="4wOWfp"
