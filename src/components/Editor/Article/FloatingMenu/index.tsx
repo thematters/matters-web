@@ -82,7 +82,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
             en: expand ? 'Collapse' : 'Expand',
           })}
         >
-          {withIcon(IconEditorAdd)({ size: 'lg' })}
+          {withIcon(IconEditorAdd)({ size: 32 })}
         </button>
 
         {expand && (
@@ -120,7 +120,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorVideo)({ size: 'lg' })}
+              {withIcon(IconEditorVideo)({ size: 32 })}
             </button>
 
             <UploadAudioButton editor={editor} upload={upload} />
@@ -156,7 +156,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorCode)({ size: 'lg' })}
+              {withIcon(IconEditorCode)({ size: 32 })}
             </button>
 
             <button
@@ -176,7 +176,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorQuote)({ size: 'lg' })}
+              {withIcon(IconEditorQuote)({ size: 32 })}
             </button>
 
             <button
@@ -199,7 +199,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 lang,
               })}
             >
-              {withIcon(IconEditorDivider)({ size: 'lg' })}
+              {withIcon(IconEditorDivider)({ size: 32 })}
             </button>
           </div>
         )}

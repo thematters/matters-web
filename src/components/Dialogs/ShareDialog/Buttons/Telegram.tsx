@@ -32,9 +32,9 @@ const Telegram = ({ title, link }: { title: string; link: string }) => {
       }}
     >
       <TextIcon
-        icon={<Icon icon={IconTelegram} size="md" />}
-        spacing="base"
-        size="md"
+        icon={<Icon icon={IconTelegram} size={24} />}
+        spacing={16}
+        size={16}
         color="black"
       >
         Telegram

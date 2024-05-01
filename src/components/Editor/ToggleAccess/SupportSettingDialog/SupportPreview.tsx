@@ -49,9 +49,9 @@ const SupportPreview = ({
 
         {content && tabType === 'reply' && (
           <>
-            <Avatar src={viewer?.avatar} size="xl" />
+            <Avatar src={viewer?.avatar} size={48} />
             <p className={styles.tagline}>
-              <TextIcon weight="md">{viewer?.displayName}&nbsp;</TextIcon>
+              <TextIcon weight="medium">{viewer?.displayName}&nbsp;</TextIcon>
               <TextIcon color="greyDarker">
                 <FormattedMessage defaultMessage="says: " id="M05PcB" />
               </TextIcon>

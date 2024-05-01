@@ -36,7 +36,7 @@ const ViewStripeCustomerPortal = () => {
       htmlHref={url}
       htmlTarget="_blank"
       right={
-        <TextIcon icon={<Icon icon={IconExternal} color="grey" size="sm" />} />
+        <TextIcon icon={<Icon icon={IconExternal} color="grey" size={14} />} />
       }
       role="link"
     />

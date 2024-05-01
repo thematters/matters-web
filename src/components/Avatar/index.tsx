@@ -14,18 +14,19 @@ import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 import styles from './styles.module.css'
 
 export type AvatarSize =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'mdS'
-  | 'lg'
-  | 'xl'
-  | 'xxl'
-  | 'xxlm'
-  | 'xxxl'
-  | 'xxxlm'
-  | 'xxxll'
-  | 'xxxxl'
+  | 16
+  | 20
+  | 22
+  | 24
+  | 32
+  | 40
+  | 48
+  | 56
+  | 64
+  | 72
+  | 76
+  | 88
+  | 120
 
 export type AvatarLogbook = PartialDeep<AvatarUserLogbookFragment>
 
@@ -66,7 +67,7 @@ const fragments = {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = 'default', src, title, inEditor, inProfile } = props
+  const { user, size = 40, src, title, inEditor, inProfile } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
@@ -77,7 +78,7 @@ export const Avatar = (props: AvatarProps) => {
   const avatarClasses = classNames({
     [styles.avatar]: true,
     avatar: true, // global selector for overwirting
-    [styles[size]]: true,
+    [styles[`size${size}`]]: true,
     [styles.hasRing]: isCivicLiker || hasArchitectBadge,
     [styles.hasBadge]: hasLogbook,
   })

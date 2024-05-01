@@ -34,8 +34,8 @@ const TranslationButton: FC<{
     >
       <TextIcon
         icon={<Icon icon={IconTranslate} color="black" />}
-        size="xs"
-        spacing="xxxtight"
+        size={12}
+        spacing={2}
         color="black"
       >
         {translated ? (

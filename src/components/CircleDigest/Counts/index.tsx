@@ -37,10 +37,10 @@ const Counts = ({ circle }: CountsProps) => {
   return (
     <section className={styles.counts}>
       <TextIcon
-        icon={<Icon icon={IconUser} size="xs" />}
+        icon={<Icon icon={IconUser} size={12} />}
         color="grey"
-        weight="md"
-        size="sm"
+        weight="medium"
+        size={14}
         aria-label={translate({
           zh_hant: `${memberCount} 個成員`,
           zh_hans: `${memberCount} 个成员`,
@@ -53,10 +53,10 @@ const Counts = ({ circle }: CountsProps) => {
       </TextIcon>
 
       <TextIcon
-        icon={<Icon icon={IconDraft} size="xs" />}
+        icon={<Icon icon={IconDraft} size={12} />}
         color="grey"
-        weight="md"
-        size="sm"
+        weight="medium"
+        size={14}
         aria-label={translate({
           zh_hant: `${articleCount} 篇作品`,
           zh_hans: `${articleCount} 篇作品`,

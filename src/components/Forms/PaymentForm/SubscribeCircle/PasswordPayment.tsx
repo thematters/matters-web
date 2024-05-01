@@ -143,16 +143,16 @@ const Confirm: React.FC<FormProps> = ({
 
         <section className={styles.currentCard}>
           <TextIcon
-            icon={withIcon(IconStripeCard)({ size: 'md' })}
+            icon={withIcon(IconStripeCard)({ size: 24 })}
             color="grey"
-            size="xs"
-            spacing="tight"
+            size={12}
+            spacing={12}
           >
             •••• •••• •••• {cardLast4}
           </TextIcon>
 
           <button type="button" onClick={switchToCardPayment}>
-            <TextIcon color="green" size="xs">
+            <TextIcon color="green" size={12}>
               <Translate zh_hant="更改" zh_hans="更改" />
             </TextIcon>
           </button>

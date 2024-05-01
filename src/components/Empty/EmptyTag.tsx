@@ -10,7 +10,7 @@ export const EmptyTag = ({
   description?: React.ReactNode
 }) => (
   <Empty
-    icon={<Icon icon={IconHashTag} size="xxl" />}
+    icon={<Icon icon={IconHashTag} size={64} />}
     description={
       description || (
         <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.TAG_NOT_FOUND]} />

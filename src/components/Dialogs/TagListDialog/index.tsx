@@ -45,7 +45,7 @@ const BaseDialog = ({ tags, children }: TagListDialogProps) => {
                   tag={tag}
                   type="list"
                   hasCount={false}
-                  textIconProps={{ color: 'black', weight: 'md' }}
+                  textIconProps={{ color: 'black', weight: 'medium' }}
                 />
               </li>
             ))}

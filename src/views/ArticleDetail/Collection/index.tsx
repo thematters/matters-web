@@ -88,7 +88,7 @@ const Collection: React.FC<{
           <List.Item key={node.id}>
             <ArticleDigestTitle
               article={node}
-              textSize="md"
+              textSize={16}
               textWeight="normal"
               onClick={() =>
                 analytics.trackEvent('click_feed', {

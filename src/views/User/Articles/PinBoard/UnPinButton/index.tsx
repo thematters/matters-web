@@ -92,7 +92,7 @@ const UnPinButton = ({
         className={styles.unpin}
         data-test-id={TEST_ID.USER_PROFILE_PIN_BOARD_UNPIN_BUTTON}
       >
-        <Icon icon={IconUnpin} size="mdS" color="white" />
+        <Icon icon={IconUnpin} size={20} color="white" />
       </button>
     </Tooltip>
   )

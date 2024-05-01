@@ -167,8 +167,8 @@ const Socials = () => {
             <TableView.Cell
               title={
                 <TextIcon
-                  icon={<Icon icon={IconGoogle2} size="mdM" />}
-                  spacing="tight"
+                  icon={<Icon icon={IconGoogle2} size={22} />}
+                  spacing={12}
                 >
                   Google
                 </TextIcon>
@@ -176,7 +176,7 @@ const Socials = () => {
               rightText={googleId}
               rightIcon={
                 googleId && canRemoveNonFacebookLogins ? (
-                  <Icon icon={IconTimes} size="mdS" color="greyDarker" />
+                  <Icon icon={IconTimes} size={20} color="greyDarker" />
                 ) : undefined
               }
               onClick={
@@ -195,9 +195,7 @@ const Socials = () => {
                         />
                       </SettingsButton>
                     )}
-                    {isGoogleLoading && (
-                      <Spinner color="greyLight" size="mdS" />
-                    )}
+                    {isGoogleLoading && <Spinner color="greyLight" size={20} />}
                   </>
                 )
               }
@@ -212,17 +210,14 @@ const Socials = () => {
           return (
             <TableView.Cell
               title={
-                <TextIcon
-                  icon={<Icon icon={IconX2} size="mdM" />}
-                  spacing="tight"
-                >
+                <TextIcon icon={<Icon icon={IconX2} size={22} />} spacing={12}>
                   X
                 </TextIcon>
               }
               rightText={twitterId ? `@${twitterId}` : undefined}
               rightIcon={
                 twitterId && canRemoveNonFacebookLogins ? (
-                  <Icon icon={IconTimes} size="mdS" color="greyDarker" />
+                  <Icon icon={IconTimes} size={20} color="greyDarker" />
                 ) : undefined
               }
               onClick={
@@ -242,7 +237,7 @@ const Socials = () => {
                       </SettingsButton>
                     )}
                     {isTwitterLoading && (
-                      <Spinner color="greyLight" size="mdS" />
+                      <Spinner color="greyLight" size={20} />
                     )}
                   </>
                 )
@@ -259,8 +254,8 @@ const Socials = () => {
             <TableView.Cell
               title={
                 <TextIcon
-                  icon={<Icon icon={IconFacebook2} size="mdM" />}
-                  spacing="tight"
+                  icon={<Icon icon={IconFacebook2} size={22} />}
+                  spacing={12}
                 >
                   Facebook
                 </TextIcon>
@@ -268,7 +263,7 @@ const Socials = () => {
               rightText={facebookId ? `@${facebookId}` : undefined}
               rightIcon={
                 facebookId ? (
-                  <Icon icon={IconTimes} size="mdS" color="greyDarker" />
+                  <Icon icon={IconTimes} size={20} color="greyDarker" />
                 ) : undefined
               }
               onClick={facebookId ? () => openDialog() : undefined}
@@ -284,7 +279,7 @@ const Socials = () => {
                       </SettingsButton>
                     )}
                     {isFacebookLoading && (
-                      <Spinner color="greyLight" size="mdS" />
+                      <Spinner color="greyLight" size={20} />
                     )}
                   </>
                 )

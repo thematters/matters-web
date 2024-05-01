@@ -93,8 +93,8 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
         lang,
       })}
     >
-      {!uploading && withIcon(IconEditorImage)({ size: 'lg' })}
-      {uploading && <Spinner size="lg" color="greyLight" />}
+      {!uploading && withIcon(IconEditorImage)({ size: 32 })}
+      {uploading && <Spinner size={32} color="greyLight" />}
 
       <VisuallyHidden>
         <input

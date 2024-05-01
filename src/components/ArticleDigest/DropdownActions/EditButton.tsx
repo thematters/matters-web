@@ -36,7 +36,7 @@ const EditArticleButton = ({
           description="src/components/ArticleDigest/DropdownActions/EditButton.tsx"
         />
       }
-      icon={<Icon icon={IconEdit} size="mdS" />}
+      icon={<Icon icon={IconEdit} size={20} />}
       href={`${href}/edit`}
       is="link"
     />

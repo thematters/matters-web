@@ -201,14 +201,14 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
         {!!closeCallback && (
           <Button
             size={[null, '2rem']}
-            spacing={[0, 'base']}
+            spacing={[0, 16]}
             bgColor="white"
             disabled={isSubmitting}
             onClick={closeCallback}
             textColor="black"
             textActiveColor="greyDarker"
           >
-            <TextIcon size="sm">
+            <TextIcon size={14}>
               <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
             </TextIcon>
           </Button>
@@ -218,14 +218,14 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
             type="submit"
             form={formId}
             size={[null, '2rem']}
-            spacing={[0, 'base']}
+            spacing={[0, 16]}
             bgColor="green"
             disabled={isSubmitting || !isValid}
           >
             <TextIcon
               color="white"
-              size="sm"
-              icon={isSubmitting && <SpinnerBlock size="sm" />}
+              size={14}
+              icon={isSubmitting && <SpinnerBlock size={14} />}
             >
               {isSubmitting ? null : (
                 <FormattedMessage defaultMessage="Publish" id="syEQFE" />
@@ -236,7 +236,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
         {!viewer.isAuthed && (
           <Button
             size={[null, '2rem']}
-            spacing={[0, 'base']}
+            spacing={[0, 16]}
             bgColor="green"
             onClick={() => {
               window.dispatchEvent(
@@ -246,7 +246,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
               )
             }}
           >
-            <TextIcon color="white" size="sm">
+            <TextIcon color="white" size={14}>
               <FormattedMessage defaultMessage="Sign In" id="Ub+AGc" />
             </TextIcon>
           </Button>

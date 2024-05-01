@@ -43,7 +43,7 @@ const Amount = ({
       : 'black'
 
   return (
-    <TextIcon spacing="xtight" size="md" weight="md" color={color}>
+    <TextIcon spacing={8} size={16} weight="medium" color={color}>
       <span
         className={styles.amount}
         {...(testId ? { ['data-test-id']: testId } : {})}

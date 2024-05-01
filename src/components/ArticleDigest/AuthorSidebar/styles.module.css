@@ -7,13 +7,13 @@
   & header {
     flex-grow: 1;
 
-    &.lineHeightMdS {
+    &.lineHeight15 {
       & h3 {
         line-height: 1.375rem;
       }
     }
 
-    &.lineHeightMd {
+    &.lineHeight16 {
       & h3 {
         line-height: 1.5rem;
       }

@@ -80,7 +80,7 @@ const Toolbar = ({
       : path.href
 
   const dropdonwActionsProps: DropdownActionsControls = {
-    size: 'mdS',
+    size: 20,
     inCard: false,
     sharePath,
     hasExtend: !lock,
@@ -110,11 +110,11 @@ const Toolbar = ({
           />
         </section>
 
-        <BookmarkButton article={article} iconSize="mdS" inCard={false} />
+        <BookmarkButton article={article} iconSize={20} inCard={false} />
 
         <Media greaterThan="sm">
           <ShareButton
-            iconSize="mdS"
+            iconSize={20}
             inCard={false}
             // title={makeTitle(article.title)}
             path={sharePath}

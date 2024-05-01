@@ -118,8 +118,8 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
         lang,
       })}
     >
-      {!uploading && withIcon(IconEditorAudio)({ size: 'lg' })}
-      {uploading && <Spinner size="lg" color="greyLight" />}
+      {!uploading && withIcon(IconEditorAudio)({ size: 32 })}
+      {uploading && <Spinner size={32} color="greyLight" />}
 
       <VisuallyHidden>
         <input

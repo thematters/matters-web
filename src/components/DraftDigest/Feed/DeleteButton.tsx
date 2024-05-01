@@ -67,7 +67,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
           id: 'K3r6DQ',
         })}
       >
-        <Icon icon={IconDelete} size="md" />
+        <Icon icon={IconDelete} size={24} />
       </button>
 
       <Dialog

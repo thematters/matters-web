@@ -74,7 +74,7 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
                     defaultMessage: 'Back',
                     id: 'cyR7Kh',
                   })}
-                  text={<Icon icon={IconLeft} size="md" />}
+                  text={<Icon icon={IconLeft} size={24} />}
                 />
               }
               closeDrawer={onClose}

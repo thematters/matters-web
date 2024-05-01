@@ -31,7 +31,7 @@ const Count = ({ count }: { count: number }) => {
       <button type="button" className={styles.count}>
         <TextIcon
           icon={<Icon icon={IconReadingTime} />}
-          size="xs"
+          size={12}
           color="greyDark"
         >
           {count}

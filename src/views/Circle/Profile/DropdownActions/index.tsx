@@ -62,7 +62,7 @@ const BaseDropdownActions = ({
               description="src/views/Circle/Profile/DropdownActions/index.tsx"
             />
           }
-          icon={<Icon icon={IconEdit} size="mdS" />}
+          icon={<Icon icon={IconEdit} size={20} />}
           {...toPath({ page: 'circleSettings', circle })}
           is="link"
         />
@@ -71,7 +71,7 @@ const BaseDropdownActions = ({
       {isCircleOwner && (
         <Menu.Item
           text={<FormattedMessage defaultMessage="Analytics" id="GZJpDf" />}
-          icon={<Icon icon={IconData} size="mdS" />}
+          icon={<Icon icon={IconData} size={20} />}
           {...toPath({ page: 'circleAnalytics', circle })}
           is="link"
         />
@@ -86,7 +86,7 @@ const BaseDropdownActions = ({
               description="src/views/Circle/Profile/DropdownActions/index.tsx"
             />
           }
-          icon={<Icon icon={IconLogout} size="mdS" />}
+          icon={<Icon icon={IconLogout} size={20} />}
           onClick={openUnsubscribeCircleDialog}
           aria-haspopup="dialog"
         />
@@ -108,9 +108,9 @@ const BaseDropdownActions = ({
           ref={ref}
         >
           {isCircleOwner ? (
-            <Icon icon={IconSettings} size="lg" color="white" />
+            <Icon icon={IconSettings} size={32} color="white" />
           ) : (
-            <Icon icon={IconMore} size="lg" color="white" />
+            <Icon icon={IconMore} size={32} color="white" />
           )}
         </Button>
       )}

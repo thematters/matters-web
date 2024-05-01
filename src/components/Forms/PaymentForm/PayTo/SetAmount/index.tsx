@@ -379,7 +379,7 @@ const SetAmount: React.FC<FormProps> = ({
             >
               {({ copyToClipboard }) => (
                 <Button
-                  spacing={['xtight', 'xtight']}
+                  spacing={[8, 8]}
                   aria-label={intl.formatMessage({
                     defaultMessage: 'Copy',
                     id: '4l6vz1',

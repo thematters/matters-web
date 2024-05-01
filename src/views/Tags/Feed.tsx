@@ -75,7 +75,7 @@ const Feed = ({ type }: Props) => {
             <li key={tag.id} className={styles.listItem}>
               <TagDigest.Feed
                 tag={tag}
-                spacing={['xtight', 0]}
+                spacing={[8, 0]}
                 href={
                   toPath({
                     page: 'tagDetail',

@@ -142,9 +142,9 @@ const SupportWidget = ({
                 <>
                   {replyToDonator && (
                     <section>
-                      <Avatar user={article?.author} size="xl" />
+                      <Avatar user={article?.author} size={48} />
                       <p>
-                        <TextIcon weight="md">
+                        <TextIcon weight="medium">
                           {article?.author.displayName}&nbsp;
                         </TextIcon>
                         <TextIcon color="greyDarker">
@@ -163,7 +163,7 @@ const SupportWidget = ({
                   {!replyToDonator && (
                     <section>
                       <p>
-                        <TextIcon weight="bold" size="md">
+                        <TextIcon weight="bold" size={16}>
                           <FormattedMessage
                             defaultMessage="🎉 Thank you for support!"
                             id="Myrqtn"
@@ -229,8 +229,8 @@ const SupportWidget = ({
                       <TextIcon
                         icon={<Icon icon={IconMoney} color="black" />}
                         color="black"
-                        size="xs"
-                        spacing="xxxtight"
+                        size={12}
+                        spacing={2}
                       >
                         <FormattedMessage
                           defaultMessage="Transaction History"

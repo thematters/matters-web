@@ -43,16 +43,16 @@ const FooterActions = ({
           <TextIcon
             icon={
               article.access.type === 'paywall' ? (
-                <Icon icon={IconPaywall} color="grey" size="sm" />
+                <Icon icon={IconPaywall} color="grey" size={14} />
               ) : null
             }
-            textPlacement="left"
-            spacing="xxtight"
+            placement="left"
+            spacing={4}
           >
             <CircleDigest.Title
               circle={circle}
               is="span"
-              textSize="xs"
+              textSize={12}
               textWeight="normal"
             />
           </TextIcon>
@@ -63,7 +63,7 @@ const FooterActions = ({
         <DropdownActions
           article={article}
           {...controls}
-          size="mdM"
+          size={22}
           inCard={true}
         />
       </section>

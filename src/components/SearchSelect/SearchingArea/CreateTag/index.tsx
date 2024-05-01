@@ -37,12 +37,12 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
 
   return (
     <Card
-      spacing={['base', 'base']}
+      spacing={[16, 16]}
       onClick={create}
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
       <section className={styles.addTag}>
-        <TextIcon icon={<Icon icon={IconPlus} />} color="green" size="md">
+        <TextIcon icon={<Icon icon={IconPlus} />} color="green" size={16}>
           <Translate id="create" />
         </TextIcon>
 

@@ -57,9 +57,9 @@ const Register = (selector = 'body', timeout = PTR_TIMEOUT) => {
       },
       getStyles: () => ``, // remove default styles
       iconArrow: ReactDOMServer.renderToString(
-        withIcon(IconPullToRefresh)({ size: 'md' })
+        withIcon(IconPullToRefresh)({ size: 24 })
       ),
-      iconRefreshing: ReactDOMServer.renderToString(<Spinner size="md" />),
+      iconRefreshing: ReactDOMServer.renderToString(<Spinner size={24} />),
     })
   }
 

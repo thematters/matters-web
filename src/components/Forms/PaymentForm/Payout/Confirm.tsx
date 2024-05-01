@@ -219,8 +219,8 @@ const BaseConfirm: React.FC<FormProps> = ({
                   <span>
                     <TextIcon
                       icon={<Icon icon={IconHelp} />}
-                      spacing="xxtight"
-                      textPlacement="left"
+                      spacing={4}
+                      placement="left"
                     >
                       <Translate
                         zh_hant="服務費 (20%)"

@@ -26,8 +26,8 @@ const ReadTime = ({ article }: ResponseCountProps) => {
 
   return (
     <TextIcon
-      icon={<Icon icon={IconReadingTime} size="mdXS" />}
-      size="xs"
+      icon={<Icon icon={IconReadingTime} size={18} />}
+      size={12}
       color="grey"
       aria-label={intl.formatMessage({
         defaultMessage: 'Accumulated read time',

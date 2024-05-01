@@ -64,14 +64,14 @@ const Follow = ({ tag }: FollowProps) => {
 
   return (
     <Button
-      spacing={['xtight', 'tight']}
+      spacing={[8, 12]}
       textColor="green"
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
       onClick={onClick}
     >
-      <TextIcon icon={<Icon icon={IconPlus} />} weight="md" size="mdS">
+      <TextIcon icon={<Icon icon={IconPlus} />} weight="medium" size={15}>
         <FormattedMessage defaultMessage="Follow" id="ieGrWo" />
       </TextIcon>
     </Button>

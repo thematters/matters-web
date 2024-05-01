@@ -18,7 +18,7 @@ describe('<Icon>', () => {
     const style = { width: '10px', height: '10px' }
 
     const { container } = render(
-      <>{withIcon(IconDot)({ size: 'md', className, style })}</>
+      <>{withIcon(IconDot)({ size: 24, className, style })}</>
     )
 
     /* eslint-disable */

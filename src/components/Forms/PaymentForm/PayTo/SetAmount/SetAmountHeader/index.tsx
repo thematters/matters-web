@@ -39,7 +39,7 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
       <section>
         {isUSDT && !isConnectedAddress && (
           <Button onClick={() => disconnect()}>
-            <TextIcon size="xs" textDecoration="underline" color="greyDark">
+            <TextIcon size={12} decoration="underline" color="greyDark">
               <Translate
                 zh_hant="切換錢包地址"
                 zh_hans="切换钱包地址"
@@ -53,11 +53,7 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
             <>
               {isUnsupportedNetwork ? (
                 <Button onClick={switchToTargetNetwork}>
-                  <TextIcon
-                    size="xs"
-                    textDecoration="underline"
-                    color="greyDark"
-                  >
+                  <TextIcon size={12} decoration="underline" color="greyDark">
                     <Translate
                       zh_hant="切換到 "
                       zh_hans="切换到 "
@@ -67,7 +63,7 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
                   </TextIcon>
                 </Button>
               ) : (
-                <TextIcon size="xs" color="black">
+                <TextIcon size={12} color="black">
                   {targetChainName}
                 </TextIcon>
               )}
@@ -77,7 +73,7 @@ const SetAmountHeader: React.FC<SetAmountHeaderProps> = ({
               {({ openDialog }) => (
                 <Button onClick={openDialog}>
                   <TextIcon
-                    icon={<Icon icon={IconInfo} size="md" color="grey" />}
+                    icon={<Icon icon={IconInfo} size={24} color="grey" />}
                   />
                 </Button>
               )}

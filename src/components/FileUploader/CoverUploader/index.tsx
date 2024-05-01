@@ -171,7 +171,7 @@ export const CoverUploader = ({
       {loading || uploading ? (
         <SpinnerBlock />
       ) : (
-        <Icon icon={IconCamera} color="white" size="xl" />
+        <Icon icon={IconCamera} color="white" size={48} />
       )}
     </div>
   )
@@ -187,10 +187,10 @@ export const CoverUploader = ({
           <SpinnerBlock color={cover ? 'greyLight' : 'white'} />
         ) : (
           <section className={styles.userProfileCover}>
-            <Icon icon={IconCamera} color="white" size="lg" />
+            <Icon icon={IconCamera} color="white" size={32} />
             {cover && (
               <Button onClick={removeCover}>
-                <Icon icon={IconTimes} color="white" size="lg" />
+                <Icon icon={IconTimes} color="white" size={32} />
               </Button>
             )}
           </section>

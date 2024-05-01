@@ -196,7 +196,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         {InnerForm(tabType)}
 
         <h3 className={styles.previewTitle}>
-          <TextIcon size="md" weight="md">
+          <TextIcon size={16} weight="medium">
             <FormattedMessage
               defaultMessage="Preview"
               id="zn83cE"

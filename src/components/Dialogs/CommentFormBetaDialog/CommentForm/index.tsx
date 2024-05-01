@@ -199,12 +199,12 @@ const CommentForm: React.FC<CommentFormProps> = ({
           <Dialog.RoundedButton
             disabled={isSubmitting}
             text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
-            textSize="sm"
+            textSize={14}
             textWeight="normal"
             bgColor="white"
             color="black"
             borderWidth="sm"
-            spacing={[0, 'baseLoose']}
+            spacing={[0, 20]}
             size={[null, '1.875rem']}
             onClick={closeDialog}
           />
@@ -221,11 +221,11 @@ const CommentForm: React.FC<CommentFormProps> = ({
               form={formId}
               disabled={isSubmitting || !isValid}
               text={<FormattedMessage defaultMessage="Publish" id="syEQFE" />}
-              textSize="sm"
+              textSize={14}
               textWeight="normal"
               bgColor="green"
               color="white"
-              spacing={[0, 'baseLoose']}
+              spacing={[0, 20]}
               size={[null, '1.875rem']}
             />
           </>

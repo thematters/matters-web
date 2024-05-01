@@ -13,7 +13,7 @@ export type SidebarManagementProps = ToggleResponseProps & SetResponseProps
 const SidebarArticleResponse: React.FC<SidebarManagementProps> = (props) => {
   return (
     <Box
-      icon={<Icon icon={IconComment} size="md" />}
+      icon={<Icon icon={IconComment} size={24} />}
       title={
         <FormattedMessage
           defaultMessage="Response"

@@ -7,7 +7,7 @@ export const EmptySearch = ({
   description?: string | React.ReactNode
 }) => (
   <Empty
-    icon={<Icon icon={IconNavSearch} size="xxl" />}
+    icon={<Icon icon={IconNavSearch} size={64} />}
     description={description || <Translate id="emptySearchResults" />}
   />
 )

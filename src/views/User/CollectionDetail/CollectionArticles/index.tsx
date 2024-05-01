@@ -126,12 +126,12 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
           className={styles.sortButton}
         >
           {isSequenceNormal && (
-            <TextIcon icon={<Icon icon={IconDown} size="mdS" />}>
+            <TextIcon icon={<Icon icon={IconDown} size={20} />}>
               <FormattedMessage defaultMessage="Sort" id="25oM9Q" />
             </TextIcon>
           )}
           {isSequenceReverse && (
-            <TextIcon icon={<Icon icon={IconUp} size="mdS" />}>
+            <TextIcon icon={<Icon icon={IconUp} size={20} />}>
               <FormattedMessage defaultMessage="Sort" id="25oM9Q" />
             </TextIcon>
           )}

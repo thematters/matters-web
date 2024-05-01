@@ -214,7 +214,7 @@ const LinkENS = ({
               >
                 {({ copyToClipboard }) => (
                   <Button
-                    spacing={['xtight', 'xtight']}
+                    spacing={[8, 8]}
                     aria-label={intl.formatMessage({
                       defaultMessage: 'Copy',
                       id: '4l6vz1',
@@ -222,9 +222,9 @@ const LinkENS = ({
                     onClick={copyToClipboard}
                   >
                     <TextIcon
-                      icon={<Icon icon={IconCopy} color="black" size="xs" />}
+                      icon={<Icon icon={IconCopy} color="black" size={12} />}
                       color="grey"
-                      textPlacement="left"
+                      placement="left"
                     >
                       {truncate(viewer.info.ethAddress || '')}
                     </TextIcon>

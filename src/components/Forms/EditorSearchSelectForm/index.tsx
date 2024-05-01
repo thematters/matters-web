@@ -163,10 +163,10 @@ const EditorSearchSelectForm = ({
             data-test-id={TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON}
           >
             <TextIcon
-              icon={<Icon icon={IconPlus} size="mdS" />}
+              icon={<Icon icon={IconPlus} size={20} />}
               color={enableAdd ? 'green' : 'grey'}
-              size="mdS"
-              spacing="xtight"
+              size={15}
+              spacing={8}
             >
               {searchType === 'Tag' && (
                 <Translate en="Add tag" zh_hans="添加标签" zh_hant="添加標籤" />

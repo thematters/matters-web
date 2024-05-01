@@ -9,7 +9,7 @@ const CopyCommentButton = ({ content }: { content: string }) => {
       {({ copyToClipboard }) => (
         <Menu.Item
           text={<FormattedMessage defaultMessage="Copy comment" id="eY3YIa" />}
-          icon={<Icon icon={IconCopy} size="mdS" />}
+          icon={<Icon icon={IconCopy} size={20} />}
           onClick={copyToClipboard}
         />
       )}

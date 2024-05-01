@@ -19,9 +19,9 @@ import type { MenuItemProps } from '~/components/Menu/Item'
 import { UserLogoutMutation } from '~/gql/graphql'
 
 const menuItemProps = {
-  spacing: ['base', 'loose'],
+  spacing: [16, 24],
   textColor: 'black',
-  size: 'xm',
+  size: 18,
 } as MenuItemProps
 
 const Top: React.FC = () => {
@@ -44,7 +44,7 @@ const Top: React.FC = () => {
       <Menu.Item
         {...menuItemProps}
         text={<FormattedMessage defaultMessage="Profile" id="itPgxd" />}
-        icon={<Icon icon={IconProfile} size="md" />}
+        icon={<Icon icon={IconProfile} size={24} />}
         {...viewerPath}
         is="link"
       />
@@ -52,7 +52,7 @@ const Top: React.FC = () => {
       <Menu.Item
         {...menuItemProps}
         text={<FormattedMessage defaultMessage="History" id="djJp6c" />}
-        icon={<Icon icon={IconHistory} size="md" />}
+        icon={<Icon icon={IconHistory} size={24} />}
         href={PATHS.ME_HISTORY}
         is="link"
       />
@@ -60,7 +60,7 @@ const Top: React.FC = () => {
       <Menu.Item
         {...menuItemProps}
         text={<FormattedMessage defaultMessage="Bookmarks" id="nGBrvw" />}
-        icon={<Icon icon={IconSave} size="md" />}
+        icon={<Icon icon={IconSave} size={24} />}
         href={PATHS.ME_BOOKMARKS}
         is="link"
       />
@@ -68,7 +68,7 @@ const Top: React.FC = () => {
       <Menu.Item
         {...menuItemProps}
         text={<FormattedMessage defaultMessage="My Works" id="ai7kS4" />}
-        icon={<Icon icon={IconDraft} size="md" />}
+        icon={<Icon icon={IconDraft} size={24} />}
         href={PATHS.ME_DRAFTS}
         is="link"
       />
@@ -77,7 +77,7 @@ const Top: React.FC = () => {
         <Menu.Item
           {...menuItemProps}
           text={<FormattedMessage defaultMessage="Circle" id="vH8sCb" />}
-          icon={<Icon icon={IconCircle} size="md" />}
+          icon={<Icon icon={IconCircle} size={24} />}
           href={circlePath.href}
           is="link"
         />
@@ -86,7 +86,7 @@ const Top: React.FC = () => {
       <Menu.Item
         {...menuItemProps}
         text={<FormattedMessage defaultMessage="Wallet" id="3yk8fB" />}
-        icon={<Icon icon={IconWallet} size="md" />}
+        icon={<Icon icon={IconWallet} size={24} />}
         href={PATHS.ME_WALLET}
         is="link"
       />
@@ -94,7 +94,7 @@ const Top: React.FC = () => {
       <Menu.Item
         {...menuItemProps}
         text={<FormattedMessage defaultMessage="Stats" id="U86B6w" />}
-        icon={<Icon icon={IconData} size="md" />}
+        icon={<Icon icon={IconData} size={24} />}
         href={PATHS.ME_ANALYTICS}
         is="link"
       />
@@ -136,7 +136,7 @@ const Bottom = () => {
       <Menu.Item
         {...menuItemProps}
         text={<FormattedMessage defaultMessage="Settings" id="D3idYv" />}
-        icon={<Icon icon={IconSettings} size="md" />}
+        icon={<Icon icon={IconSettings} size={24} />}
         href={PATHS.ME_SETTINGS}
         is="link"
       />
@@ -144,7 +144,7 @@ const Bottom = () => {
       <Menu.Item
         {...menuItemProps}
         text={<FormattedMessage defaultMessage="Log Out" id="H0JBH6" />}
-        icon={<Icon icon={IconLogout} size="md" />}
+        icon={<Icon icon={IconLogout} size={24} />}
         onClick={onClickLogout}
       />
     </Menu>

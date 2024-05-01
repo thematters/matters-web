@@ -26,7 +26,7 @@ const BasePaymentPassword: React.FC<PaymentPasswordProps> = ({
             id="+OStJM"
           />
         }
-        icon={<Icon icon={IconUnlock} size="mdS" />}
+        icon={<Icon icon={IconUnlock} size={20} />}
         onClick={openResetPaymentPasswordDialog}
         ariaHasPopup="dialog"
       />

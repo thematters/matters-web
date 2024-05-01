@@ -77,10 +77,10 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
           >
             <section className={styles.subscriptionBanner}>
               <TextIcon
-                icon={<Icon icon={IconCircle} size="mdS" />}
-                size="xm"
+                icon={<Icon icon={IconCircle} size={20} />}
+                size={18}
                 color="white"
-                weight="md"
+                weight="medium"
               >
                 {isInvited ? (
                   <Translate

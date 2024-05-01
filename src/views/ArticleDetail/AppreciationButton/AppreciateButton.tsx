@@ -24,9 +24,9 @@ export type AppreciateButtonProps = {
   total: number
   isSuperLike?: boolean
   superLiked?: boolean
-  iconSize?: 'mdS' | 'md'
-  textWeight?: 'md' | 'normal'
-  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
+  iconSize?: 20 | 24
+  textWeight?: 'medium' | 'normal'
+  textIconSpacing?: 4 | 6 | 8
 } & ButtonProps
 
 const AppreciateButton: React.FC<AppreciateButtonProps> = ({
@@ -36,9 +36,9 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   total,
   isSuperLike,
   superLiked,
-  iconSize = 'mdS',
-  textWeight = 'md',
-  textIconSpacing = 'xtight',
+  iconSize = 20,
+  textWeight = 'medium',
+  textIconSpacing = 8,
   ...buttonProps
 }) => {
   const { lang } = useContext(LanguageContext)
@@ -48,7 +48,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
     [styles.appreciateButton]: true,
     [styles.isSuperLike]: isSuperLike,
     [styles.superLiked]: superLiked,
-    [styles[`icon${capitalizeFirstLetter(iconSize)}`]]: true,
+    [styles[`icon${capitalizeFirstLetter(iconSize + '')}`]]: true,
   })
 
   return (
@@ -75,7 +75,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         <TextIcon
           weight={textWeight}
           spacing={total > 0 ? textIconSpacing : 0}
-          size="sm"
+          size={14}
           icon={
             <span
               className={`${styles.icon} ${clapStyles.clap}`}

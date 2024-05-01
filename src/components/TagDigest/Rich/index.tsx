@@ -61,8 +61,8 @@ const Rich = ({
         <TextIcon
           icon={<Icon icon={IconHashTag} color="grey" />}
           color="black"
-          size="md"
-          spacing="xxtight"
+          size={16}
+          spacing={4}
           weight="normal"
         >
           {tag.content}

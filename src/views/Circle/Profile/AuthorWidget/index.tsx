@@ -21,7 +21,7 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
     <section className={styles.authorWidget}>
       <Card
         bgColor="greyLighter"
-        spacing={['base', 'base']}
+        spacing={[16, 16]}
         borderColor="greyLighter"
         borderRadius="base"
         {...path}
@@ -37,7 +37,7 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
         {pinnedBroadcast && (
           <section className={styles.pinnedBroadcast}>
             <span className={styles.icon}>
-              <Icon icon={IconLatest} size="md" />
+              <Icon icon={IconLatest} size={24} />
             </span>
 
             <CommentContent

@@ -9,7 +9,7 @@ export const EmptyComment = ({
   description?: React.ReactNode
 }) => (
   <Empty
-    icon={withIcon(IconEmptyComment)({ size: 'xxxlM' })}
+    icon={withIcon(IconEmptyComment)({ size: 88 })}
     spacingY="loose"
     description={
       description || (

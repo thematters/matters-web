@@ -7,7 +7,7 @@ const DeleteCommentButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
-      icon={<Icon icon={IconDelete} size="mdS" />}
+      icon={<Icon icon={IconDelete} size={20} />}
       onClick={openDialog}
       ariaHasPopup="dialog"
     />

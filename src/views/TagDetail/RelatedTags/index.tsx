@@ -128,10 +128,10 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
 
         <section className={styles.backToAll}>
           <ViewMoreCard
-            spacing={['tight', 'tight']}
+            spacing={[12, 12]}
             href={PATHS.TAGS}
-            iconProps={{ size: 'sm' }}
-            textIconProps={{ size: 'sm', weight: 'md', spacing: 'xxtight' }}
+            iconProps={{ size: 14 }}
+            textIconProps={{ size: 14, weight: 'medium', spacing: 4 }}
             textAlign="center"
           >
             <FormattedMessage defaultMessage="Back to All" id="o2Na0B" />

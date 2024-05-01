@@ -19,7 +19,7 @@ const Buttons = () => (
     <ul>
       <li>
         <Button
-          spacing={['xtight', 'xtight']}
+          spacing={[8, 8]}
           bgActiveColor="greyLighterActive"
           aria-haspopup="dialog"
         >
@@ -46,8 +46,8 @@ const Buttons = () => (
       <li>
         <NavListItem
           name={TEXT.zh_hant.search}
-          icon={<Icon icon={IconNavSearch} size="md" />}
-          activeIcon={<Icon icon={IconNavSearch} size="md" color="green" />}
+          icon={<Icon icon={IconNavSearch} size={24} />}
+          activeIcon={<Icon icon={IconNavSearch} size={24} color="green" />}
           active
         />
       </li>

@@ -25,10 +25,10 @@ const AvatarItem = ({ user }: AvatarItemPros) => {
     >
       <div className={styles.avatarItem}>
         <Media lessThan="xl">
-          <Avatar user={user} size="md" />
+          <Avatar user={user} size={24} />
         </Media>
         <Media greaterThanOrEqual="xl">
-          <Avatar user={user} size="lg" />
+          <Avatar user={user} size={32} />
         </Media>
       </div>
     </Tooltip>

@@ -68,7 +68,7 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({
     //         role="button"
     //         bgColor="greyLighter"
     //         bgActiveColor="greyLighter"
-    //         spacing={[0, 'base']}
+    //         spacing={[0, 16]}
     //         borderRadius="xtight"
     //       />
     //     </TableView>

@@ -124,7 +124,7 @@ const UsersFeed = () => {
                   id: node.id,
                 })
               }
-              spacing={['tight', 'base']}
+              spacing={[12, 16]}
               hasFollow={false}
             />
           </List.Item>

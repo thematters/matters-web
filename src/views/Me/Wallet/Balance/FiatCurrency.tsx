@@ -45,7 +45,7 @@ const TopUpItem = ({
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Top Up" id="dTOtPO" />}
-      icon={<Icon icon={IconWallet} size="mdS" />}
+      icon={<Icon icon={IconWallet} size={20} />}
       onClick={() => {
         if (hasEmail) {
           openDialog()
@@ -66,7 +66,7 @@ const PayoutItem = ({
     return (
       <Menu.Item
         text={<FormattedMessage defaultMessage="Withdraw" id="PXAur5" />}
-        icon={<Icon icon={IconWithdraw} size="mdS" />}
+        icon={<Icon icon={IconWithdraw} size={20} />}
         onClick={openDialog}
       />
     )
@@ -76,9 +76,9 @@ const PayoutItem = ({
     <Menu.Item>
       <section className={styles.payoutItem}>
         <TextIcon
-          icon={<Icon icon={IconWithdraw} size="mdS" color="grey" />}
-          size="md"
-          spacing="tight"
+          icon={<Icon icon={IconWithdraw} size={20} color="grey" />}
+          size={16}
+          spacing={12}
           color="grey"
         >
           <FormattedMessage defaultMessage="Withdraw" id="PXAur5" />
@@ -153,9 +153,9 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                         ref={ref}
                       >
                         <TextIcon
-                          icon={<Icon icon={IconFiatCurrency} size="xlM" />}
-                          size="md"
-                          spacing="xtight"
+                          icon={<Icon icon={IconFiatCurrency} size={40} />}
+                          size={16}
+                          spacing={8}
                         >
                           <Translate
                             zh_hant="法幣"
@@ -165,8 +165,8 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                         </TextIcon>
                         <TextIcon
                           icon={<Icon icon={IconRight} />}
-                          spacing="xtight"
-                          textPlacement="left"
+                          spacing={8}
+                          placement="left"
                         >
                           <CurrencyFormatter
                             value={formatAmount(balanceHKD)}

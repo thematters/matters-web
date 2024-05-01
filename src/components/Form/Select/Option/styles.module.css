@@ -8,11 +8,11 @@
   font-weight: var(--font-normal);
   line-height: 1rem;
 
-  &.sm {
+  &.text14 {
     font-size: var(--text14);
   }
 
-  &.md {
+  &.text16 {
     font-size: var(--text16);
   }
 }

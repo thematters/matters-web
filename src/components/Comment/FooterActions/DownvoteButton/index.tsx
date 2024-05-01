@@ -78,7 +78,7 @@ const DownvoteButton = ({
   if (comment.myVote === 'down') {
     return (
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
         onClick={() => {
           onClick ? onClick() : unvote()
@@ -92,7 +92,7 @@ const DownvoteButton = ({
         <TextIcon
           icon={<Icon icon={IconVoteDownFill} />}
           color="green"
-          weight="md"
+          weight="medium"
         >
           {/* comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined */}
         </TextIcon>
@@ -102,7 +102,7 @@ const DownvoteButton = ({
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       onClick={() => {
         onClick ? onClick() : downvote()
@@ -116,7 +116,7 @@ const DownvoteButton = ({
       <TextIcon
         icon={<Icon icon={IconVoteDown} color="grey" />}
         color="grey"
-        weight="md"
+        weight="medium"
       >
         {/* comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined */}
       </TextIcon>

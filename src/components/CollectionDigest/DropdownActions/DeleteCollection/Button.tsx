@@ -7,7 +7,7 @@ const DeleteCollectionButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Delete collection" id="m4GG4b" />}
-      icon={<Icon icon={IconDelete} size="mdS" />}
+      icon={<Icon icon={IconDelete} size={20} />}
       onClick={openDialog}
       ariaHasPopup="dialog"
       textColor="red"

@@ -56,7 +56,7 @@ const BaseDropdownActions = ({
           ref={ref}
           className={styles.moreButton}
         >
-          <Icon icon={IconMore} size="mdS" />
+          <Icon icon={IconMore} size={20} />
         </button>
       )}
     </Dropdown>

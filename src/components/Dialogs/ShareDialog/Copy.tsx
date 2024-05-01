@@ -43,9 +43,9 @@ const Copy = ({ link }: { link: string }) => {
             }}
           >
             <TextIcon
-              icon={withIcon(IconLink)({ size: 'md' })}
-              spacing="base"
-              size="md"
+              icon={withIcon(IconLink)({ size: 24 })}
+              spacing={16}
+              size={16}
               color="black"
             >
               <div className={styles.text}>

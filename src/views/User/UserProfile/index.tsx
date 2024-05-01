@@ -126,7 +126,7 @@ export const UserProfile = () => {
    */
   const avatar = (
     <section className={styles.avatar}>
-      <Avatar size="xxxlm" user={user} inProfile />
+      <Avatar size={76} user={user} inProfile />
     </section>
   )
 
@@ -291,7 +291,7 @@ export const UserProfile = () => {
             <Expandable
               content={user.info.description}
               color="grey"
-              size="sm"
+              size={14}
               spacingTop="tight"
               collapseable={false}
             >

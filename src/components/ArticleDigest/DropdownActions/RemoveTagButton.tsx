@@ -65,7 +65,7 @@ const RemoveTagButton = ({
           description="src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
         />
       }
-      icon={<Icon icon={IconCircleMinus} size="mdS" />}
+      icon={<Icon icon={IconCircleMinus} size={20} />}
       onClick={async () => {
         await deleteArticlesTags()
 

@@ -71,7 +71,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
       <ul className={styles.feed}>
         <li className={styles.item} role="button" onClick={gotoEmailLogin}>
           <span className={styles.icon}>
-            <Icon icon={IconMail} size="mdM" />
+            <Icon icon={IconMail} size={22} />
           </span>
           <span className={styles.name}>
             <FormattedMessage defaultMessage="Email" id="sy+pv5" />
@@ -79,34 +79,34 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
         </li>
         <li className={styles.item} role="button" onClick={gotoGoogle}>
           <span className={styles.icon}>
-            <Icon icon={IconGoogle2} size="mdM" />
+            <Icon icon={IconGoogle2} size={22} />
           </span>
           <span className={styles.name}>Google</span>
           {isGoogleLoading && (
             <span className={styles.right}>
-              <Spinner color="grey" size="mdM" />
+              <Spinner color="grey" size={22} />
             </span>
           )}
         </li>
         <li className={styles.item} role="button" onClick={gotoTwitter}>
           <span className={styles.icon}>
-            <Icon icon={IconX2} size="mdM" />
+            <Icon icon={IconX2} size={22} />
           </span>
           <span className={styles.name}>X</span>
           {isTwitterLoading && (
             <span className={styles.right}>
-              <Spinner color="grey" size="mdM" />
+              <Spinner color="grey" size={22} />
             </span>
           )}
         </li>
         {/* <li className={styles.item} role="button" onClick={gotoFacebook}>
           <span className={styles.icon}>
-            <Icon icon={IconFacebook} size="mdM" />
+            <Icon icon={IconFacebook} size={22} />
           </span>
           <span className={styles.name}>Facebook</span>
           {isFacebookLoading && (
             <span className={styles.right}>
-              <Spinner color="grey" size="mdM" />
+              <Spinner color="grey" size={22} />
             </span>
           )}
         </li> */}

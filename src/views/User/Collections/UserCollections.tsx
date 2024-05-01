@@ -157,7 +157,7 @@ const UserCollections = () => {
           {({ openDialog }) => {
             return (
               <section className={styles.addCollection} onClick={openDialog}>
-                <TextIcon icon={<Icon icon={IconPlus} size="mdS" />}>
+                <TextIcon icon={<Icon icon={IconPlus} size={20} />}>
                   <FormattedMessage
                     defaultMessage="New Collection"
                     id="L4Fcr8"

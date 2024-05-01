@@ -166,9 +166,9 @@ const Uploader: React.FC<UploaderProps> = ({
         <TextIcon
           icon={<Icon icon={IconCamera} />}
           color="green"
-          size="sm"
-          weight="md"
-          spacing="xtight"
+          size={14}
+          weight="medium"
+          spacing={8}
         >
           <Translate id="uploadCover" />
         </TextIcon>

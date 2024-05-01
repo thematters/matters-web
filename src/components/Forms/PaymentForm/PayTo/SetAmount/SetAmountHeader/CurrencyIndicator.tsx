@@ -23,30 +23,30 @@ const CurrencyIndicator: React.FC<CurrencyIndicatorProps> = ({
     <section>
       {isUSDT && (
         <TextIcon
-          icon={<Icon icon={IconTether} size="md" />}
-          size="md"
-          spacing="xtight"
-          weight="md"
+          icon={<Icon icon={IconTether} size={24} />}
+          size={16}
+          spacing={8}
+          weight="medium"
         >
           USDT
         </TextIcon>
       )}
       {isHKD && (
         <TextIcon
-          icon={<Icon icon={IconFiatCurrency} size="md" />}
-          size="md"
-          spacing="xtight"
-          weight="md"
+          icon={<Icon icon={IconFiatCurrency} size={24} />}
+          size={16}
+          spacing={8}
+          weight="medium"
         >
           <Translate zh_hant="法幣 HKD" zh_hans="法币 HKD" en="HKD" />
         </TextIcon>
       )}
       {isLike && (
         <TextIcon
-          icon={<Icon icon={IconLikeCoin} size="md" />}
-          size="md"
-          spacing="xtight"
-          weight="md"
+          icon={<Icon icon={IconLikeCoin} size={24} />}
+          size={16}
+          spacing={8}
+          weight="medium"
         >
           LikeCoin
         </TextIcon>
@@ -54,7 +54,7 @@ const CurrencyIndicator: React.FC<CurrencyIndicatorProps> = ({
 
       <span className={styles.changeButton}>
         <Button onClick={switchToCurrencyChoice}>
-          <TextIcon size="xs" textDecoration="underline" color="greyDark">
+          <TextIcon size={12} decoration="underline" color="greyDark">
             <Translate
               zh_hant="更改支持方式"
               zh_hans="更改支持方式"

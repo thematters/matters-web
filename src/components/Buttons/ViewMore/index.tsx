@@ -17,13 +17,13 @@ export const ViewMoreButton: React.FC<ViewMoreButtonProps> = ({
       <SpinnerBlock />
     ) : (
       <Button
-        spacing={['xtight', 'base']}
+        spacing={[8, 16]}
         borderColor="greyLighter"
         borderRadius="5rem"
         textColor="black"
         {...props}
       >
-        <TextIcon size="sm">
+        <TextIcon size={14}>
           <FormattedMessage defaultMessage="View All" id="wbcwKd" />
         </TextIcon>
       </Button>

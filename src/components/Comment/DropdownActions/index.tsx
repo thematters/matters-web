@@ -180,7 +180,7 @@ const BaseDropdownActions = ({
       {({ openDropdown, ref }) => (
         <Button
           onClick={openDropdown}
-          spacing={['xtight', 'xtight']}
+          spacing={[8, 8]}
           bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
           aria-label={moreActionText}
           aria-haspopup="listbox"

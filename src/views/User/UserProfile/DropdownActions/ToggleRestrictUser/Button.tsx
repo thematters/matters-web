@@ -47,7 +47,7 @@ const ToggleRestrictUserButton: React.FC<ToggleRestrictUserButtonProps> = ({
   )
 
   if (loading) {
-    return <Menu.Item icon={<Spinner size="mdS" />} text="正在加載中…" />
+    return <Menu.Item icon={<Spinner size={20} />} text="正在加載中…" />
   }
 
   if (data?.user?.__typename !== 'User') return null
@@ -60,7 +60,7 @@ const ToggleRestrictUserButton: React.FC<ToggleRestrictUserButtonProps> = ({
   return (
     <Menu.Item
       text={enabled ? '放出小黑屋' : '關小黑屋'}
-      icon={<Icon icon={IconNavEnter} size="mdS" />}
+      icon={<Icon icon={IconNavEnter} size={20} />}
       textColor={enabled ? 'greyDarker' : 'red'}
       textActiveColor={enabled ? 'black' : 'redDark'}
       onClick={() => {

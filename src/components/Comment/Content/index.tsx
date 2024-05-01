@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
-import { capitalizeFirstLetter, captureClicks } from '~/common/utils'
+import { captureClicks } from '~/common/utils'
 import { CommentFormType, Expandable, LanguageContext } from '~/components'
 import {
   ContentCommentPrivateFragment,
@@ -17,7 +17,7 @@ import styles from './styles.module.css'
 interface ContentProps {
   comment: ContentCommentPublicFragment & Partial<ContentCommentPrivateFragment>
   type: CommentFormType
-  size?: 'sm' | 'mdS'
+  size?: 14 | 15
   bgColor?: 'greyLighter' | 'white'
   limit?: number
   textIndent?: boolean
@@ -60,7 +60,7 @@ const Content = ({
 
   const contentClasses = classNames({
     [styles.content]: true,
-    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
+    [size ? styles[`size${size}`] : '']: !!size,
   })
 
   if (state === 'collapsed' || isBlocked) {

@@ -50,7 +50,7 @@ const Wallet = () => {
                   }
                   rightIcon={
                     hasETHAddress && canRemoveNonFacebookLogins ? (
-                      <Icon icon={IconTimes} size="mdS" color="greyDarker" />
+                      <Icon icon={IconTimes} size={20} color="greyDarker" />
                     ) : undefined
                   }
                   onClick={

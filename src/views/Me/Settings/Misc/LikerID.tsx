@@ -25,7 +25,7 @@ const LikerID = () => {
             !!likerId ? undefined : (
               <Button
                 size={[null, '1.5rem']}
-                spacing={[0, 'tight']}
+                spacing={[0, 12]}
                 textColor="green"
                 borderColor="green"
                 onClick={openDialog}

@@ -54,7 +54,7 @@ const SetBottomCollectionButton = ({
           description="src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
         />
       }
-      icon={<Icon icon={IconArrowLDown} size="mdS" />}
+      icon={<Icon icon={IconArrowLDown} size={20} />}
       onClick={async () => {
         onClick()
         await update({
