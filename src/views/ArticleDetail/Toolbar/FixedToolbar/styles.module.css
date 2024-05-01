@@ -24,3 +24,36 @@
     }
   }
 }
+
+.appreciationButton {
+  transform: scale(0);
+  animation: scale-out 0.2s;
+}
+
+.scaleOut {
+  animation: scale-out 0.2s;
+}
+
+@keyframes scale-out {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0) translateX(-5px);
+  }
+}
+
+.scaleIn {
+  animation: scale-in 0.2s;
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

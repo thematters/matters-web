@@ -1,5 +1,6 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -110,6 +111,40 @@ const FixedToolbar = ({
     borderRadius: 0,
   }
 
+  const [playAnimation, setPlayAnimation] = useState(false)
+
+  useEffect(() => {
+    if (showCommentToolbar) {
+      setPlayAnimation(true)
+    }
+  }, [showCommentToolbar])
+
+  const leftAppreciationButtonClasses = classNames({
+    [styles.scaleOut]: playAnimation,
+  })
+
+  const [
+    isLeftAppreciationButtonScaleOut,
+    setIsLeftAppreciationButtonScaleOut,
+  ] = useState(false)
+  const [isCommentScaleInDone, setIsCommentScaleInDone] = useState(false)
+  const commentButtonClasses = classNames({
+    [styles.commentButton]: true,
+    [styles.scaleIn]: isLeftAppreciationButtonScaleOut,
+  })
+
+  const handleLeftAppreciationButtonScaleOutEnd = (
+    event: React.AnimationEvent<HTMLElement>
+  ) => {
+    setIsLeftAppreciationButtonScaleOut(true)
+  }
+
+  const handleCommentScaleInEnd = (
+    event: React.AnimationEvent<HTMLElement>
+  ) => {
+    setIsCommentScaleInDone(true)
+  }
+
   return (
     <section
       className={styles.toolbar}
@@ -119,9 +154,29 @@ const FixedToolbar = ({
       <CommentFormBetaDialog articleId={article.id} type="article">
         {({ openDialog: openCommentFormBetaDialog }) => (
           <section className={styles.buttons}>
+            {!isLeftAppreciationButtonScaleOut && (
+              <section
+                className={leftAppreciationButtonClasses}
+                onAnimationEnd={handleLeftAppreciationButtonScaleOutEnd}
+              >
+                <ReCaptchaProvider action="appreciateArticle">
+                  <AppreciationButton
+                    article={article}
+                    privateFetched={privateFetched}
+                    iconSize="md"
+                    textWeight="normal"
+                    textIconSpacing="xxtight"
+                    disabled={lock}
+                    {...buttonProps}
+                  />
+                </ReCaptchaProvider>
+              </section>
+            )}
+
             {showCommentToolbar && (
               <button
-                className={styles.commentButton}
+                className={commentButtonClasses}
+                onAnimationEnd={handleCommentScaleInEnd}
                 onClick={() => {
                   if (!viewer.isAuthed) {
                     window.dispatchEvent(
@@ -145,18 +200,6 @@ const FixedToolbar = ({
                 />
               </button>
             )}
-
-            <ReCaptchaProvider action="appreciateArticle">
-              <AppreciationButton
-                article={article}
-                privateFetched={privateFetched}
-                iconSize="md"
-                textWeight="normal"
-                textIconSpacing="xxtight"
-                disabled={lock}
-                {...buttonProps}
-              />
-            </ReCaptchaProvider>
 
             {!showCommentToolbar && (
               <CommentButton
@@ -187,15 +230,33 @@ const FixedToolbar = ({
               />
             )}
 
-            <DonationButton
-              article={article}
-              articleDetail={articleDetails}
-              disabled={lock}
-              iconSize="md"
-              textWeight="normal"
-              textIconSpacing="xxtight"
-              {...buttonProps}
-            />
+            <section>
+              <DonationButton
+                article={article}
+                articleDetail={articleDetails}
+                disabled={lock}
+                iconSize="md"
+                textWeight="normal"
+                textIconSpacing="xxtight"
+                {...buttonProps}
+              />
+            </section>
+
+            {showCommentToolbar && isCommentScaleInDone && (
+              <section className={styles.scaleIn}>
+                <ReCaptchaProvider action="appreciateArticle">
+                  <AppreciationButton
+                    article={article}
+                    privateFetched={privateFetched}
+                    iconSize="md"
+                    textWeight="normal"
+                    textIconSpacing="xxtight"
+                    disabled={lock}
+                    {...buttonProps}
+                  />
+                </ReCaptchaProvider>
+              </section>
+            )}
 
             <BookmarkButton
               article={article}
@@ -205,15 +266,17 @@ const FixedToolbar = ({
               {...buttonProps}
             />
 
-            {!showCommentToolbar && (
-              <DropdownActions
-                article={article}
-                disabled={lock}
-                {...dropdonwActionsProps}
-                hasShare
-                hasBookmark={false}
-                hasReport
-              />
+            {!isLeftAppreciationButtonScaleOut && (
+              <section className={leftAppreciationButtonClasses}>
+                <DropdownActions
+                  article={article}
+                  disabled={lock}
+                  {...dropdonwActionsProps}
+                  hasShare
+                  hasBookmark={false}
+                  hasReport
+                />
+              </section>
             )}
           </section>
         )}
