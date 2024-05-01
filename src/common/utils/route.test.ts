@@ -190,9 +190,8 @@ describe('utils/route/toPath', () => {
       expect(href2).toBe(
         `/@${MOCK_ARTILCE.author.userName}/${
           fromGlobalId(MOCK_ARTILCE.id).id
-        }-${MOCK_ARTILCE.slug}-${MOCK_ARTILCE.mediaHash}#${
-          MOCK_COMMENT.parentComment?.id
-        }-${MOCK_COMMENT.id}`
+        }-${MOCK_ARTILCE.slug}-${MOCK_ARTILCE.mediaHash}#${MOCK_COMMENT
+          .parentComment?.id}-${MOCK_COMMENT.id}`
       )
     })
 
