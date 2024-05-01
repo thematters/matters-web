@@ -1,4 +1,6 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
@@ -15,6 +17,8 @@ import {
   UpvoteCommentBetaPublicFragment,
   VoteCommentMutation,
 } from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 interface UpvoteButtonProps {
   comment: UpvoteCommentBetaPublicFragment &
@@ -48,6 +52,7 @@ const UpvoteButton = ({
   inCard,
 }: UpvoteButtonProps) => {
   const intl = useIntl()
+  const [playHeartBeat, setPlayHeartBeat] = useState(false)
 
   const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
@@ -74,12 +79,17 @@ const UpvoteButton = ({
     },
   })
 
+  const likeClassNames = classNames({
+    [styles.heartBeat]: playHeartBeat,
+  })
+
   if (comment.myVote === 'up') {
     return (
       <Button
         spacing={['xtight', 'xtight']}
         onClick={() => {
           onClick ? onClick() : unvote()
+          setPlayHeartBeat(false)
         }}
         disabled={disabled}
         aria-label={intl.formatMessage({
@@ -88,7 +98,11 @@ const UpvoteButton = ({
         })}
       >
         <TextIcon
-          icon={<Icon icon={IconLikeFill} color="redLight" size="mdXS" />}
+          icon={
+            <span className={likeClassNames}>
+              <Icon icon={IconLikeFill} color="redLight" size="mdXS" />
+            </span>
+          }
           color="black"
           size="mdS"
         >
@@ -105,6 +119,7 @@ const UpvoteButton = ({
       textActiveColor="black"
       onClick={() => {
         onClick ? onClick() : upvote()
+        setPlayHeartBeat(true)
       }}
       disabled={disabled}
       aria-label={intl.formatMessage({
