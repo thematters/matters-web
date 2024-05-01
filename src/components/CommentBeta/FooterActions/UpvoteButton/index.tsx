@@ -19,6 +19,8 @@ import {
   VoteCommentMutation,
 } from '~/gql/graphql'
 
+import styles from './styles.module.css'
+
 interface UpvoteButtonProps {
   comment: UpvoteCommentBetaPublicFragment &
     Partial<UpvoteCommentBetaPrivateFragment>
@@ -121,10 +123,12 @@ const UpvoteButton = ({
             heartPulsDone || !playHeartPuls ? (
               <Icon icon={IconLikeFill} color="redLight" size="mdXS" />
             ) : (
-              <Lottie
-                options={LottieOptions}
-                eventListeners={[heartPulsListener]}
-              />
+              <span className={styles.heart}>
+                <Lottie
+                  options={LottieOptions}
+                  eventListeners={[heartPulsListener]}
+                />
+              </span>
             )
           }
           color="black"
