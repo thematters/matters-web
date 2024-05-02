@@ -37,7 +37,7 @@ describe('<ArticleDigest.Published>', () => {
     const $title = screen.getByRole('heading', { name: MOCK_ARTILCE.title })
     expect($title).toBeInTheDocument()
     $title.click()
-    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
 
     mockRouter.back()
   })

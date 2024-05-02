@@ -96,7 +96,6 @@ export const CommentDraftsProvider = ({
         }
 
         const allEmptyDraft = checkAllDraftsEmpty()
-        console.log({ allEmptyDraft, drafts })
         if (allEmptyDraft) {
           navigateTo(url)
         } else {

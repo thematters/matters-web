@@ -79,8 +79,6 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
     [styles.hasIcon]: !!icon,
   })
 
-  console.log({ spacing, textIconClasses })
-
   if (placement === 'left') {
     return (
       <span className={textIconClasses} {...restProps}>
