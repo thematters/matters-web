@@ -39,7 +39,7 @@ const DeleteCommentDialog = ({
   children,
 }: DeleteCommentDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
-  const { router, routerLang } = useRoute()
+  const { routerLang } = useRoute()
   const commentId = comment.id
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined
@@ -67,13 +67,9 @@ const DeleteCommentDialog = ({
         type: 'delete',
       })
 
-      const articleIdFromRouter =
-        (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
-
       updateArticlePublic({
         cache,
-        articleId: articleIdFromRouter,
-        mediaHash: article.mediaHash,
+        shortHash: article.shortHash,
         routerLang,
         type: 'deleteComment',
       })

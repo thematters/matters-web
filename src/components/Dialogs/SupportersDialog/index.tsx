@@ -14,7 +14,7 @@ const fragments = {
   article: gql`
     fragment SupportsDialogArticle on Article {
       id
-      mediaHash
+      shortHash
       donationsDialog: donations(input: { first: 0 }) {
         totalCount
       }

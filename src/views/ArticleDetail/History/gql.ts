@@ -9,7 +9,7 @@ const articleHistoryPublicFragment = gql`
   fragment ArticleHistoryPublicArticle on Article {
     id
     slug
-    mediaHash
+    shortHash
     state
     cover
     summaryCustomized
@@ -60,8 +60,8 @@ const articleVersionFragment = gql`
 `
 
 export const ARTICLE_HISTORY_PUBLIC = gql`
-  query ArticleHistoryPublic($mediaHash: String!, $version: ID!) {
-    article(input: { mediaHash: $mediaHash }) {
+  query ArticleHistoryPublic($shortHash: String!, $version: ID!) {
+    article(input: { shortHash: $shortHash }) {
       ...ArticleHistoryPublicArticle
     }
     version: node(input: { id: $version }) {
@@ -117,8 +117,8 @@ export const ARTICLE_HISTORY_PRIVATE = gql`
 `
 
 export const ARTICLE_LATEST_VERSION = gql`
-  query ArticleLatestVersion($mediaHash: String!) {
-    article(input: { mediaHash: $mediaHash }) {
+  query ArticleLatestVersion($shortHash: String!) {
+    article(input: { shortHash: $shortHash }) {
       id
       versions(input: { first: 1 }) {
         edges {

@@ -92,7 +92,7 @@ const fragments = {
           }
           ... on Article {
             id
-            mediaHash
+            shortHash
             author {
               id
             }

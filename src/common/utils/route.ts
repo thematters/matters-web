@@ -9,14 +9,7 @@ import { slugifyTag } from './text'
 import { parseURL } from './url'
 
 interface ArticleArgs {
-  id?: string
-  slug: string
-  mediaHash?: string | null
-  shortHash?: string | null
-  collectionId?: string | null
-  author: {
-    userName?: string | null
-  }
+  shortHash: string
 }
 
 interface CircleArgs {
@@ -107,58 +100,23 @@ export const toPath = (
 
   switch (args.page) {
     case 'articleDetail': {
-      const {
-        id,
-        slug,
-        mediaHash,
-        shortHash,
-        collectionId,
-        author: { userName },
-      } = args.article
+      const { shortHash } = args.article
 
-      href = shortHash
-        ? `/a/${shortHash}`
-        : `/@${userName}/${slug}-${mediaHash}`
+      href = `/a/${shortHash}`
 
-      try {
-        const { id: articleId } = fromGlobalId(id as string)
-        if (id && articleId && !shortHash) {
-          href = `/@${userName}/${articleId}-${slug}${
-            mediaHash ? '-' + mediaHash : ''
-          }`
-        }
-      } catch (err) {
-        // do nothing
-      }
-
-      if (collectionId) {
-        href = `${href}?collection=${collectionId}`
+      if (args.collectionId) {
+        href = `${href}?collection=${args.collectionId}`
       }
 
       break
     }
     case 'articleHistory': {
-      const {
-        id,
-        slug,
-        mediaHash,
-        author: { userName },
-      } = args.article
+      const { shortHash } = args.article
 
-      href = `/@${userName}/${slug}-${mediaHash}`
+      href = `/a/${shortHash}/history`
 
-      try {
-        const { id: articleId } = fromGlobalId(id as string)
-        if (id && articleId) {
-          href = `/@${userName}/${articleId}-${slug}${
-            mediaHash ? '-' + mediaHash : ''
-          }/history`
-        }
-        if (!!args.versionId) {
-          href = `${href}?v=${args.versionId}`
-        }
-      } catch (err) {
-        // do nothing
+      if (args.versionId) {
+        href = `${href}?v=${args.versionId}`
       }
 
       break

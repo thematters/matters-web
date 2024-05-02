@@ -64,8 +64,8 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   const viewer = useContext(ViewerContext)
   const { getDraft, updateDraft, removeDraft } =
     useContext(CommentDraftsContext)
-  const { getQuery, router, routerLang } = useRoute()
-  const mediaHash = getQuery('mediaHash')
+  const { getQuery, routerLang } = useRoute()
+  const shortHash = getQuery('shortHash')
   const [editor, setEditor] = useState<Editor | null>(null)
 
   // retrieve comment draft
@@ -128,12 +128,9 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
               comment: mutationResult.data?.putComment,
             })
 
-            const articleIdFromRouter =
-              (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
             updateArticlePublic({
               cache,
-              articleId: articleIdFromRouter,
-              mediaHash,
+              shortHash,
               routerLang,
               type: 'addComment',
             })

@@ -22,7 +22,7 @@ const fragments = {
       id
       state
       slug
-      mediaHash
+      shortHash
       author {
         id
         userName
