@@ -1,6 +1,5 @@
 import classNames from 'classnames'
 
-import { useFeatures } from '~/components'
 import { CircleDigest } from '~/components/CircleDigest'
 import {
   UserProfileUserPrivateQuery,
@@ -31,7 +30,6 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({
   hasDescription = true,
   hasFooter = true,
 }) => {
-  const features = useFeatures()
   const hasCircle = circles && circles.length > 0
 
   const circleWidgetClasses = classNames({
@@ -44,10 +42,6 @@ const CircleWidget: React.FC<CircleWidgetProps> = ({
   }
 
   if (isMe && !hasCircle) {
-    if (!features.circle_management) {
-      return null
-    }
-
     return null
 
     // return (
