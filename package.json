@@ -201,6 +201,7 @@
     "typescript": "^5.1.6",
     "vite-plugin-svgr": "^3.3.0",
     "vitest": "^0.34.6",
+    "vitest-canvas-mock": "^0.3.3",
     "webpack-merge": "^5.9.0"
   },
   "overrides": {
