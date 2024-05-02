@@ -1,8 +1,11 @@
 import gql from 'graphql-tag'
+import { useState } from 'react'
 import { useIntl } from 'react-intl'
+import Lottie, { EventListener } from 'react-lottie'
 
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
+import hearPulsData from '@/public/static/json/heart-puls.json'
 import { numAbbr } from '~/common/utils'
 import { Button, Icon, TextIcon, useMutation } from '~/components'
 import {
@@ -15,6 +18,8 @@ import {
   UpvoteCommentBetaPublicFragment,
   VoteCommentMutation,
 } from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 interface UpvoteButtonProps {
   comment: UpvoteCommentBetaPublicFragment &
@@ -48,6 +53,27 @@ const UpvoteButton = ({
   inCard,
 }: UpvoteButtonProps) => {
   const intl = useIntl()
+  const [playHeartPuls, setPlayHeartPuls] = useState(false)
+  const [heartPulsDone, setHeartPulsDone] = useState(false)
+
+  const heartPulsListener: EventListener = {
+    eventName: 'complete',
+    callback: () => {
+      setHeartPulsDone(true)
+    },
+  }
+
+  const LottieOptions = {
+    loop: false,
+    autoplay: true,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+    animationData: hearPulsData,
+    isClickToPauseDisabled: true,
+    height: 18,
+    width: 18,
+  }
 
   const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
@@ -79,7 +105,12 @@ const UpvoteButton = ({
       <Button
         spacing={[8, 8]}
         onClick={() => {
-          onClick ? onClick() : unvote()
+          if (onClick) {
+            onClick()
+          } else {
+            unvote()
+            setHeartPulsDone(false)
+          }
         }}
         disabled={disabled}
         aria-label={intl.formatMessage({
@@ -88,7 +119,18 @@ const UpvoteButton = ({
         })}
       >
         <TextIcon
-          icon={<Icon icon={IconLikeFill} color="redLight" size={18} />}
+          icon={
+            heartPulsDone || !playHeartPuls ? (
+              <Icon icon={IconLikeFill} color="redLight" size={18} />
+            ) : (
+              <span className={styles.heart}>
+                <Lottie
+                  options={LottieOptions}
+                  eventListeners={[heartPulsListener]}
+                />
+              </span>
+            )
+          }
           color="black"
           size={15}
         >
@@ -104,7 +146,12 @@ const UpvoteButton = ({
       textColor="greyDarker"
       textActiveColor="black"
       onClick={() => {
-        onClick ? onClick() : upvote()
+        if (onClick) {
+          onClick()
+        } else {
+          upvote()
+          setPlayHeartPuls(true)
+        }
       }}
       disabled={disabled}
       aria-label={intl.formatMessage({
