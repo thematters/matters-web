@@ -122,7 +122,7 @@ const Confirm: React.FC<FormProps> = ({
           update: (cache, result) => {
             updateDonation({
               cache,
-              id: article.id,
+              shortHash: article.shortHash,
               viewer,
               txId: result.data?.payTo.transaction.id,
             })

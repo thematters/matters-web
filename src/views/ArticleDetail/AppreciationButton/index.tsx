@@ -138,7 +138,7 @@ const AppreciationButton = ({
           updateAppreciation({
             cache,
             left,
-            id: article.id,
+            shortHash: article.shortHash,
             total,
             viewer,
             canSuperLike: false,

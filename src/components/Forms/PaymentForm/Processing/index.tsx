@@ -246,7 +246,7 @@ const USDTProcessingForm: React.FC<Props> = ({
       update: (cache, result) => {
         updateDonation({
           cache,
-          id: article.id,
+          shortHash: article.shortHash,
           viewer: isConnectedAddress ? viewer : undefined,
           txId: result.data?.payTo.transaction.id,
         })

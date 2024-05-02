@@ -100,17 +100,6 @@ export const ARTICLE_AVAILABLE_TRANSLATIONS = gql`
   }
 `
 
-export const ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID = gql`
-  query ArticleAvailableTranslationsByNodeId($id: ID!) {
-    article: node(input: { id: $id }) {
-      ... on Article {
-        id
-        availableTranslations
-      }
-    }
-  }
-`
-
 export const ARTICLE_DETAIL_PUBLIC = gql`
   query ArticleDetailPublic(
     $shortHash: String
@@ -120,22 +109,6 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
   ) {
     article(input: { shortHash: $shortHash }) {
       ...ArticlePublicArticle
-    }
-  }
-  ${articlePublicFragment}
-`
-
-export const ARTICLE_DETAIL_PUBLIC_BY_NODE_ID = gql`
-  query ArticleDetailPublicByNodeId(
-    $id: ID!
-    $language: UserLanguage!
-    $includeTranslation: Boolean = false
-    $includeCanSuperLike: Boolean = true
-  ) {
-    article: node(input: { id: $id }) {
-      ... on Article {
-        ...ArticlePublicArticle
-      }
     }
   }
   ${articlePublicFragment}

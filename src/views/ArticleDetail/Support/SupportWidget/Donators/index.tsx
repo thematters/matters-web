@@ -68,9 +68,9 @@ const Donators = ({
         >
           <section className={styles.avatarList}>
             {frontDonators.map((user, index) => (
-              <>
+              <Fragment key={index}>
                 {index < maxAvatarNum && (
-                  <Fragment key={index}>
+                  <Fragment>
                     <AvatarItem user={user || undefined} />
                   </Fragment>
                 )}
@@ -82,7 +82,7 @@ const Donators = ({
                     {donatorsCount - maxAvatarNum > 99 && <>99+</>}
                   </span>
                 )}
-              </>
+              </Fragment>
             ))}
           </section>
           {isAuthor && donatorsCount > 0 && (
