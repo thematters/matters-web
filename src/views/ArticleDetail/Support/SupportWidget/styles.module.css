@@ -1,15 +1,12 @@
 .supportWidget {
-  margin: var(--sp32) 0;
-}
-
-.donation {
-  @mixin flex-center-all;
-  @mixin polka-dot-background;
-
   position: relative;
   flex-direction: column;
   padding: var(--sp40) var(--sp16);
+  margin: var(--sp32) 0;
   text-align: center;
+
+  @mixin flex-center-all;
+  @mixin polka-dot-background;
 
   @media (--sm-up) {
     padding: var(--sp48) var(--sp16);
@@ -20,7 +17,7 @@
     line-height: 1.25rem;
   }
 
-  &.note p {
+  & .note p {
     max-width: 29rem;
   }
 
@@ -78,5 +75,21 @@
 
   @media (--sm-up) {
     height: 1.5rem;
+  }
+}
+
+.slideUp {
+  animation: slide-up 0.2s linear;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
