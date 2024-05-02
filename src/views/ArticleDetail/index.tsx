@@ -41,7 +41,7 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
-import { CommentDrawer, CommentDrawerStep } from './CommentDrawer'
+import type { CommentDrawerStep } from './CommentDrawer'
 import { CommentsDialog } from './Comments/CommentsDialog'
 import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
 import Content from './Content'
@@ -57,7 +57,6 @@ import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
 import StickyTopBanner from './StickyTopBanner'
 import styles from './styles.module.css'
-import { SupportDrawer } from './Support/SupportDrawer'
 import TagList from './TagList'
 import DesktopToolbar from './Toolbar/DesktopToolbar'
 import FixedToolbar from './Toolbar/FixedToolbar'
@@ -72,21 +71,30 @@ const DynamicCollection = dynamic(() => import('./Collection'), {
   ssr: false,
   loading: () => <SpinnerBlock />,
 })
-
 const DynamicComments = dynamic(() => import('./Comments'), {
   ssr: false,
   loading: () => <CommentsPlaceholder />,
 })
-
 const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: () => <SpinnerBlock />,
 })
-
 const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
   ssr: true, // enable for first screen
   loading: () => <SpinnerBlock />,
 })
+const DynamicCommentDrawer = dynamic(
+  () => import('./CommentDrawer').then((mod) => mod.CommentDrawer),
+  {
+    ssr: false,
+  }
+)
+const DynamicSupportDrawer = dynamic(
+  () => import('./Support/SupportDrawer').then((mod) => mod.SupportDrawer),
+  {
+    ssr: false,
+  }
+)
 
 const BaseArticleDetail = ({
   article,
@@ -306,7 +314,7 @@ const BaseArticleDetail = ({
       <StickyTopBanner type="inactive" article={article} />
 
       <Media greaterThan="sm">
-        <CommentDrawer
+        <DynamicCommentDrawer
           isOpen={isOpenComment}
           onClose={toggleCommentDrawer}
           step={commentDrawerStep}
@@ -315,7 +323,7 @@ const BaseArticleDetail = ({
           switchToCommentList={() => setCommentDrawerStep('commentList')}
         />
 
-        <SupportDrawer
+        <DynamicSupportDrawer
           isOpen={isOpenDonationDrawer}
           onClose={toggleDonationDrawer}
           article={article}
@@ -370,6 +378,7 @@ const BaseArticleDetail = ({
             toggleDonationDrawer={toggleDonationDrawer}
           />
         )}
+
         <Media greaterThanOrEqual="lg">
           <div ref={desktopToolbarRef}>
             <DesktopToolbar
