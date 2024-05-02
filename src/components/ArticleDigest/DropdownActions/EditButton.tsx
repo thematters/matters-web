@@ -10,7 +10,7 @@ const fragments = {
   article: gql`
     fragment EditArticleButtonArticle on Article {
       id
-      mediaHash
+      shortHash
       slug
       author {
         id

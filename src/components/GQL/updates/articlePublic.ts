@@ -1,6 +1,5 @@
 import { DataProxy } from 'apollo-cache'
 
-import { isMediaHashPossiblyValid, toGlobalId } from '~/common/utils'
 import {
   ArticleAvailableTranslationsQuery,
   ArticleDetailPublicQuery,
@@ -9,43 +8,26 @@ import {
 
 export const updateArticlePublic = ({
   cache,
-  articleId,
-  mediaHash,
+  shortHash,
   routerLang,
   type,
 }: {
   cache: DataProxy
-  articleId: string
-  mediaHash: string
+  shortHash: string
   routerLang: UserLanguage
   type: 'deleteComment' | 'addComment'
 }) => {
   // FIXME: circular dependencies
   const {
     ARTICLE_DETAIL_PUBLIC,
-    ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
     ARTICLE_AVAILABLE_TRANSLATIONS,
-    ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID,
   } = require('~/views/ArticleDetail/gql.ts')
 
-  const isQueryByHash = !!(
-    mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
-  )
-
   try {
-    const TRANSLATIONS_QUERY_GQL = isQueryByHash
-      ? ARTICLE_AVAILABLE_TRANSLATIONS
-      : ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID
-    const translationQueryVariables = isQueryByHash
-      ? { mediaHash }
-      : { id: toGlobalId({ type: 'Article', id: articleId }) }
-
     const translationResult =
       cache.readQuery<ArticleAvailableTranslationsQuery>({
-        query: TRANSLATIONS_QUERY_GQL,
-        variables: translationQueryVariables,
+        query: ARTICLE_AVAILABLE_TRANSLATIONS,
+        variables: { shortHash },
       })
 
     if (!translationResult) {
@@ -58,23 +40,13 @@ export const updateArticlePublic = ({
         routerLang
       )
 
-    const DETAIL_QUERY_GQL = isQueryByHash
-      ? ARTICLE_DETAIL_PUBLIC
-      : ARTICLE_DETAIL_PUBLIC_BY_NODE_ID
-    const detailQueryVariables = isQueryByHash
-      ? {
-          mediaHash,
-          language: routerLang || UserLanguage.ZhHant,
-          includeTranslation,
-        }
-      : {
-          id: toGlobalId({ type: 'Article', id: articleId }),
-          language: routerLang,
-          includeTranslation,
-        }
-
+    const detailQueryVariables = {
+      shortHash,
+      language: routerLang || UserLanguage.ZhHant,
+      includeTranslation,
+    }
     const data = cache.readQuery<ArticleDetailPublicQuery>({
-      query: DETAIL_QUERY_GQL,
+      query: ARTICLE_DETAIL_PUBLIC,
       variables: detailQueryVariables,
     })
 
@@ -93,7 +65,7 @@ export const updateArticlePublic = ({
     }
 
     cache.writeQuery({
-      query: DETAIL_QUERY_GQL,
+      query: ARTICLE_DETAIL_PUBLIC,
       variables: detailQueryVariables,
       data: {
         article: {

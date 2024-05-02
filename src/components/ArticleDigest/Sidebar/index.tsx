@@ -27,7 +27,7 @@ const fragments = {
       articleState: state
       title
       slug
-      mediaHash
+      shortHash
       cover
       author {
         id

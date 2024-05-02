@@ -19,7 +19,7 @@ describe('<ArticleDigest.Title>', () => {
     expect($title).toBeInTheDocument()
 
     $title.click()
-    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).toHaveBeenCalled()
   })
 
@@ -56,7 +56,7 @@ describe('<ArticleDigest.Title>', () => {
     })
 
     $title.click()
-    expect(mockRouter.asPath).not.toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).not.toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).not.toHaveBeenCalled()
   })
 

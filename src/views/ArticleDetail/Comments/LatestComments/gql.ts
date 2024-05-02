@@ -14,7 +14,7 @@ export const LATEST_COMMENTS_PUBLIC = gql`
     article: node(input: { id: $id }) {
       ... on Article {
         id
-        mediaHash
+        shortHash
         id
         pinnedComments {
           ... on Comment {

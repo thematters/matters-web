@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 
 import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
-import { toGlobalId } from '~/common/utils'
 import {
   EmptyLayout,
   Layout,
@@ -324,16 +323,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
 }
 
 const Edit = () => {
-  const { router } = useRoute()
-  const articleId =
-    (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
-
+  const { getQuery } = useRoute()
+  const shortHash = getQuery('shortHash')
   const { data, loading, error } = useQuery<QueryEditArticleQuery>(
     GET_EDIT_ARTICLE,
-    {
-      variables: { id: toGlobalId({ type: 'Article', id: articleId }) },
-      fetchPolicy: 'network-only',
-    }
+    { variables: { shortHash }, fetchPolicy: 'network-only' }
   )
   const article = data?.article as Article
 

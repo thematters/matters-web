@@ -187,7 +187,7 @@ const SetAmount: React.FC<FormProps> = ({
             update: (cache) => {
               updateDonation({
                 cache,
-                id: article.id,
+                shortHash: article.shortHash,
                 viewer,
               })
             },

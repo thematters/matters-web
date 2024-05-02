@@ -18,7 +18,7 @@ const fragments = {
       id
       slug
       articleState: state
-      mediaHash
+      shortHash
       responseCount
       author {
         userName

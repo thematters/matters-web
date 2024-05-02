@@ -9,7 +9,7 @@ export const fragments = {
       }
       language
       slug
-      mediaHash
+      shortHash
       revisedAt
       createdAt
       author {

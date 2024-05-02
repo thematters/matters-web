@@ -51,7 +51,7 @@ const USDTChoice: React.FC<FormProps> = ({
   const curatorAddress = viewer.info.ethAddress
   const creatorAddress = recipient.info.ethAddress
 
-  if (mediaHash === '') {
+  if (!mediaHash) {
     return (
       <section className={styles.item}>
         <TextIcon

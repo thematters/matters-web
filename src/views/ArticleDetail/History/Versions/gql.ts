@@ -7,7 +7,7 @@ export const fragments = {
     fragment VersionsArticle on Article {
       id
       slug
-      mediaHash
+      shortHash
       author {
         id
         userName
