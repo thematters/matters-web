@@ -58,7 +58,7 @@ const SetTagSelectedButton = ({
           description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
         />
       }
-      icon={<Icon icon={IconCirclePlus} size="mdS" />}
+      icon={<Icon icon={IconCirclePlus} size={20} />}
       onClick={async () => {
         await update()
 

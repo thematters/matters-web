@@ -55,14 +55,14 @@ const USDTChoice: React.FC<FormProps> = ({
     return (
       <section className={styles.item}>
         <TextIcon
-          icon={<Icon icon={IconTetherDisabled} size="xlM" />}
-          size="md"
-          spacing="xtight"
+          icon={<Icon icon={IconTetherDisabled} size={40} />}
+          size={16}
+          spacing={8}
           color="grey"
         >
           Tether
         </TextIcon>
-        <TextIcon size="md" color="grey">
+        <TextIcon size={16} color="grey">
           <Translate
             zh_hant="暫時無法使用"
             zh_hans="暂时无法使用"
@@ -77,14 +77,14 @@ const USDTChoice: React.FC<FormProps> = ({
     return (
       <section className={styles.item}>
         <TextIcon
-          icon={<Icon icon={IconTetherDisabled} size="xlM" />}
-          size="md"
-          spacing="xtight"
+          icon={<Icon icon={IconTetherDisabled} size={40} />}
+          size={16}
+          spacing={8}
           color="grey"
         >
           Tether
         </TextIcon>
-        <TextIcon size="md" color="grey">
+        <TextIcon size={16} color="grey">
           <Translate
             zh_hant="作者尚未啟用"
             zh_hans="作者尚未启用"
@@ -104,14 +104,14 @@ const USDTChoice: React.FC<FormProps> = ({
         aria-label="Tether"
       >
         <TextIcon
-          icon={<Icon icon={IconTether} size="xlM" />}
-          size="md"
-          spacing="xtight"
+          icon={<Icon icon={IconTether} size={40} />}
+          size={16}
+          spacing={8}
         >
           Tether
         </TextIcon>
         {balanceUSDTLoading ? (
-          <Spinner size="sm" color="grey" />
+          <Spinner size={14} color="grey" />
         ) : (
           <CurrencyFormatter
             currency={CURRENCY.USDT}
@@ -127,9 +127,9 @@ const USDTChoice: React.FC<FormProps> = ({
   return (
     <section className={styles.item} aria-label="Tether">
       <TextIcon
-        icon={<Icon icon={IconTetherDisabled} size="xlM" color="grey" />}
-        size="md"
-        spacing="xtight"
+        icon={<Icon icon={IconTetherDisabled} size={40} color="grey" />}
+        size={16}
+        spacing={8}
         color="grey"
       >
         Tether
@@ -137,13 +137,13 @@ const USDTChoice: React.FC<FormProps> = ({
 
       {!curatorAddress && (
         <Button
-          spacing={[0, 'base']}
+          spacing={[0, 16]}
           size={[null, '1.5rem']}
           borderColor="green"
           borderRadius="5rem"
           href={PATHS.ME_SETTINGS}
         >
-          <TextIcon color="green" size="xs">
+          <TextIcon color="green" size={12}>
             <Translate
               zh_hant="前往設定錢包"
               zh_hans="前往设定钱包"
@@ -155,7 +155,7 @@ const USDTChoice: React.FC<FormProps> = ({
 
       {!!curatorAddress && (
         <Button
-          spacing={[0, 'base']}
+          spacing={[0, 16]}
           size={[null, '1.5rem']}
           borderColor="green"
           borderRadius="5rem"
@@ -163,7 +163,7 @@ const USDTChoice: React.FC<FormProps> = ({
             switchToWalletSelect()
           }}
         >
-          <TextIcon color="green" size="xs">
+          <TextIcon color="green" size={12}>
             <Translate
               zh_hant="連接錢包"
               zh_hans="连接钱包"

@@ -41,18 +41,18 @@ export type AppreciationButtonProps = {
     Partial<AppreciationButtonArticlePrivateFragment>
   privateFetched: boolean
   disabled?: boolean
-  iconSize?: 'mdS' | 'md'
-  textWeight?: 'md' | 'normal'
-  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
+  iconSize?: 20 | 24
+  textWeight?: 'medium' | 'normal'
+  textIconSpacing?: 4 | 6 | 8
 } & ButtonProps
 
 const AppreciationButton = ({
   article,
   privateFetched,
   disabled,
-  iconSize = 'mdS',
-  textWeight = 'md',
-  textIconSpacing = 'xtight',
+  iconSize = 20,
+  textWeight = 'medium',
+  textIconSpacing = 8,
   ...buttonProps
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)

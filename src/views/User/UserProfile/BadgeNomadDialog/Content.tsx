@@ -44,7 +44,7 @@ const BadgeNomadDialogContent = ({
               textColor="greyDarker"
               textActiveColor="black"
             >
-              <Icon icon={IconLeft} size="mdS" />
+              <Icon icon={IconLeft} size={20} />
             </Button>
           }
         />

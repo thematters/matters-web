@@ -8,7 +8,7 @@ import { AvatarCircleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-export type CircleAvatarSize = 'xl' | 'xxl' | 'xxxl'
+export type CircleAvatarSize = 48 | 56 | 72 // 'xl' | 'xxl' | 'xxxl'
 
 export interface CircleAvatarProps {
   circle?: AvatarCircleFragment

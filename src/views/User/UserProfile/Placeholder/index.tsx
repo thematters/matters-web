@@ -22,7 +22,7 @@ const Placeholder = () => {
       <Media at="sm">
         <header className={styles.header}>
           <section className={styles.avatar}>
-            <Avatar size="xxxlm" src={IMG_PLACEHOLDER} />
+            <Avatar size={76} src={IMG_PLACEHOLDER} />
           </section>
 
           <section className={rightClasses}>

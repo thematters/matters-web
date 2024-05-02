@@ -11,7 +11,7 @@ const ArchiveUserButton: React.FC<ArchiveUserButtonProps> = ({
   return (
     <Menu.Item
       text="註銷用戶"
-      icon={<Icon icon={IconWarn} size="mdS" />}
+      icon={<Icon icon={IconWarn} size={20} />}
       textColor="red"
       textActiveColor="redDark"
       onClick={openDialog}

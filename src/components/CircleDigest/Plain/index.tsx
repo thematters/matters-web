@@ -28,11 +28,11 @@ const CircleDigestPlain = ({ circle, onClick }: CircleDigestPlainProps) => {
       testId={TEST_ID.DIGRET_CIRCLE_PLAIN}
     >
       <TextIcon
-        icon={<Icon icon={IconCircle} size="xs" />}
+        icon={<Icon icon={IconCircle} size={12} />}
         color="green"
-        spacing="xxtight"
+        spacing={4}
         weight="normal"
-        size="xs"
+        size={12}
       >
         <span className={styles.name}>{circle.displayName}</span>
       </TextIcon>

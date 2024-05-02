@@ -90,8 +90,8 @@ const SideNavMenu = () => {
           <NavListItem
             onClick={openDropdown}
             name={<FormattedMessage defaultMessage="My Page" id="enMIYK" />}
-            icon={<Icon icon={IconNavUser} size="lg" />}
-            activeIcon={<Icon icon={IconNavUserActive} size="lg" />}
+            icon={<Icon icon={IconNavUser} size={32} />}
+            activeIcon={<Icon icon={IconNavUserActive} size={32} />}
             active={isInMe}
             canScrollTop={false}
             aira-haspopup="menu"

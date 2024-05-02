@@ -45,13 +45,13 @@ const ConfirmButton = ({
 }) => (
   <Button
     size={[null, '2rem']}
-    spacing={[0, 'base']}
+    spacing={[0, 16]}
     bgColor="green"
     onClick={openDialog}
     disabled={disabled}
     aria-haspopup="dialog"
   >
-    <TextIcon color="white" size="md" weight="md">
+    <TextIcon color="white" size={16} weight="medium">
       <Translate id="publish" />
     </TextIcon>
   </Button>

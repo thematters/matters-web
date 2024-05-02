@@ -9,10 +9,10 @@ import { IconProps, withIcon, WrappedIcon } from './withIcon'
  * import { Icon, withIcon } from '~/components'
  * import { ReactComponent as IconLike } from '@/public/static/icons/like.svg'
  *
- * <Icon icon={IconLike} size="md" />
+ * <Icon icon={IconLike} size={24} />
  *
  * // or
- * <>{withIcon(IconLike)({ size: 'md' })}</>
+ * <>{withIcon(IconLike)({ size: 24 })}</>
  * ```
  */
 

@@ -89,7 +89,7 @@ const Participants = ({ id }: Props) => {
               <UserDigest.Rich
                 user={node}
                 hasFollow={false}
-                spacing={['tight', 0]}
+                spacing={[12, 0]}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'tag_detail_community',

@@ -59,10 +59,10 @@ const Footer = ({ circle }: Props) => {
     <footer>
       <section className={styles.footer}>
         <TextIcon
-          icon={<Icon icon={IconUser} size="xs" />}
+          icon={<Icon icon={IconUser} size={12} />}
           color="grey"
-          weight="md"
-          size="sm"
+          weight="medium"
+          size={14}
           aira-label={translate({
             zh_hant: `${members.totalCount} 個成員`,
             zh_hans: `${members.totalCount} 个成员`,
@@ -74,10 +74,10 @@ const Footer = ({ circle }: Props) => {
         </TextIcon>
 
         <TextIcon
-          icon={<Icon icon={IconDraft} size="xs" />}
+          icon={<Icon icon={IconDraft} size={12} />}
           color="grey"
-          weight="md"
-          size="sm"
+          weight="medium"
+          size={14}
           aira-label={translate({
             zh_hant: `${works.totalCount} 篇作品`,
             zh_hans: `${works.totalCount} 篇作品`,
@@ -90,10 +90,10 @@ const Footer = ({ circle }: Props) => {
 
         {price && (
           <TextIcon
-            icon={<Icon icon={IconPrice} size="xs" />}
+            icon={<Icon icon={IconPrice} size={12} />}
             color="grey"
-            weight="md"
-            size="sm"
+            weight="medium"
+            size={14}
           >
             {price.amount} {price.currency} / <Translate id="month" />
           </TextIcon>

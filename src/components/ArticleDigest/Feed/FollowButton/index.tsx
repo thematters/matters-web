@@ -89,7 +89,7 @@ const FollowButton = ({ user }: FollowButtonProps) => {
     <TextIcon
       icon={<Icon icon={IconDot} color="greyDark" />}
       color="green"
-      size="sm"
+      size={14}
       spacing={0}
     >
       <button type="button" onClick={onClick}>

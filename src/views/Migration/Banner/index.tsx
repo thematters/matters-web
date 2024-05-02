@@ -49,7 +49,7 @@ const Banner = () => {
               lang,
             })}
           >
-            <TextIcon color="white" size="sm" weight="md">
+            <TextIcon color="white" size={14} weight="medium">
               <Translate
                 zh_hant="邀請朋友搬家"
                 zh_hans="邀请朋友搬家"

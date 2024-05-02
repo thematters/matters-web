@@ -45,7 +45,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
   return (
     <Card
       {...path}
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgColor="none"
       bgActiveColor="none"
       borderRadius="xtight"
@@ -78,24 +78,24 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
               tag={tag}
               type="plain"
               iconProps={{ color: 'greyDarker' }}
-              textIconProps={{ color: 'black', weight: 'md', size: 'sm' }}
+              textIconProps={{ color: 'black', weight: 'medium', size: 14 }}
             />
           </header>
 
           <section className={styles.nums}>
             <TextIcon
-              icon={<Icon icon={IconUser} color="greyDark" size="xs" />}
-              size="xs"
-              spacing="xxtight"
+              icon={<Icon icon={IconUser} color="greyDark" size={12} />}
+              size={12}
+              spacing={4}
               color="greyDark"
             >
               {numAbbr(tag.numAuthors)}
             </TextIcon>
 
             <TextIcon
-              icon={<Icon icon={IconDraft} color="greyDark" size="xs" />}
-              size="xs"
-              spacing="xxtight"
+              icon={<Icon icon={IconDraft} color="greyDark" size={12} />}
+              size={12}
+              spacing={4}
               color="greyDark"
             >
               {numAbbr(tag.numArticles)}

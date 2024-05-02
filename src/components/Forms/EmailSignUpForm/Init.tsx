@@ -258,8 +258,8 @@ const Init: React.FC<FormProps> = ({
               <Dialog.TextButton
                 text={
                   <TextIcon
-                    icon={<Icon icon={IconLeft} size="mdS" />}
-                    spacing="xxxtight"
+                    icon={<Icon icon={IconLeft} size={20} />}
+                    spacing={2}
                   >
                     <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                   </TextIcon>

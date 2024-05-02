@@ -97,9 +97,9 @@ const PinButton = ({ article }: PinButtonProps) => {
       }
       icon={
         article.pinned ? (
-          <Icon icon={IconUnpin} size="mdS" />
+          <Icon icon={IconUnpin} size={20} />
         ) : (
-          <Icon icon={IconPin} size="mdS" />
+          <Icon icon={IconPin} size={20} />
         )
       }
       onClick={togglePin}

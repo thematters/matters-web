@@ -71,12 +71,12 @@ export const AuthWalletFeed: React.FC<Props> = ({
             role="button"
           >
             <span className={styles.icon}>
-              <Icon icon={IconMetaMask} size="mdM" />
+              <Icon icon={IconMetaMask} size={22} />
             </span>
             <span className={styles.name}>MetaMask</span>
             {isMetaMaskLoading && (
               <span className={styles.right}>
-                <Spinner color="grey" size="mdM" />
+                <Spinner color="grey" size={22} />
               </span>
             )}
           </li>
@@ -84,7 +84,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
           <a href={EXTERNAL_LINKS.METAMASK} target="_blank">
             <li className={itemClasses} role="button">
               <span className={styles.icon}>
-                <Icon icon={IconMetaMask} size="mdM" />
+                <Icon icon={IconMetaMask} size={22} />
               </span>
               <span className={styles.name}>MetaMask</span>
             </li>
@@ -102,12 +102,12 @@ export const AuthWalletFeed: React.FC<Props> = ({
           role="button"
         >
           <span className={styles.icon}>
-            <Icon icon={IconWalletConnect} size="mdM" />
+            <Icon icon={IconWalletConnect} size={22} />
           </span>
           <span className={styles.name}>WalletConnect</span>
           {isWalletConnectLoading && (
             <span className={styles.right}>
-              <Spinner color="grey" size="mdM" />
+              <Spinner color="grey" size={22} />
             </span>
           )}
         </li>

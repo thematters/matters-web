@@ -29,7 +29,7 @@ const CoverIndicator = ({ cover }: { cover?: string | null }) => (
         alt="cover"
       />
     ) : (
-      <Icon icon={IconPlus} size="xs" />
+      <Icon icon={IconPlus} size={12} />
     )}
   </span>
 )
@@ -41,14 +41,14 @@ const NumberIndicator = ({ num }: { num: number }) =>
     </span>
   ) : (
     <span className={styles.indicator}>
-      <Icon icon={IconPlus} size="xs" />
+      <Icon icon={IconPlus} size={12} />
     </span>
   )
 
 const ArrowIndicator = ({ checked }: { checked: boolean }) =>
   checked ? (
     <span className={[styles.indicator, styles.arrowIndicator].join(' ')}>
-      <Icon icon={IconSquareChecked} size="md" />
+      <Icon icon={IconSquareChecked} size={24} />
     </span>
   ) : (
     <span className={[styles.arrowIndicator].join(' ')}>

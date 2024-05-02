@@ -112,7 +112,7 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
               <List.Item key={cursor}>
                 <ArticleDigestAuthorSidebar
                   article={node}
-                  titleTextSize="sm"
+                  titleTextSize={14}
                   collectionId={collectionId}
                   titleColor={node.id === article?.id ? 'black' : 'greyDarker'}
                   showCover={false}

@@ -11,7 +11,7 @@ const IPFSButton: React.FC<IPFSButtonProps> = ({ article }) => {
   return (
     <Menu.Item
       text="IPFS"
-      icon={<Icon icon={IconIPFS} size="mdS" />}
+      icon={<Icon icon={IconIPFS} size={20} />}
       ariaHasPopup="dialog"
       href={
         toPath({

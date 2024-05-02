@@ -118,8 +118,8 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             name="requestForDonation"
             placeholder={intl.formatMessage({
               defaultMessage:
-                'Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!',
-              id: '3Y6k4g',
+                "Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!",
+              id: '9EABqX',
             })}
             value={values.requestForDonation! || ''}
             hint={`${
@@ -196,7 +196,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         {InnerForm(tabType)}
 
         <h3 className={styles.previewTitle}>
-          <TextIcon size="md" weight="md">
+          <TextIcon size={16} weight="medium">
             <FormattedMessage
               defaultMessage="Preview"
               id="zn83cE"

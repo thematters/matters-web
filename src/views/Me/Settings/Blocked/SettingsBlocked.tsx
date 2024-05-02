@@ -94,7 +94,7 @@ const SettingsBlocked = () => {
           <List.Item key={node.id}>
             <UserDigest.Rich
               user={node}
-              spacing={['base', 0]}
+              spacing={[16, 0]}
               subtitle={`@${node.userName}`}
               hasFollow={false}
               extraButton={<ToggleBlockUserButton user={node} />}

@@ -78,7 +78,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
             {!ipnsKey ? (
               <>
                 <section className={styles.warningCard}>
-                  <Icon icon={IconInfo} size="md" />
+                  <Icon icon={IconInfo} size={24} />
 
                   <p>
                     <FormattedMessage
@@ -140,9 +140,9 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                   <Spacer size="base" />
                   <section className={styles.warningInput}>
                     <TextIcon
-                      icon={<Icon icon={IconInfo} size="md" />}
+                      icon={<Icon icon={IconInfo} size={24} />}
                       color="green"
-                      size="mdS"
+                      size={15}
                     >
                       <FormattedMessage
                         defaultMessage="Waiting ..."

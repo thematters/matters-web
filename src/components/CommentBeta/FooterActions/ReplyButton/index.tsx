@@ -66,7 +66,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       textColor="greyDarker"
       textActiveColor="black"
       aria-label={intl.formatMessage({
@@ -75,7 +75,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
       })}
       {...props}
     >
-      <Icon icon={IconComment} size="mdXS" />
+      <Icon icon={IconComment} size={18} />
     </Button>
   )
 }

@@ -271,9 +271,6 @@
     "defaultMessage": "登入",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
-  "3Y6k4g": {
-    "defaultMessage": "喜歡我的作品嗎？別忘了給予支持與讚賞，讓我知道在創作的路上有你陪伴，一起延續這份熱忱！"
-  },
   "3fqQHv": {
     "defaultMessage": "添加協作者"
   },
@@ -538,6 +535,9 @@
   },
   "99OtWT": {
     "defaultMessage": "寫入中…"
+  },
+  "9EABqX": {
+    "defaultMessage": "喜歡我的作品嗎？別忘了給予支持與讚賞，讓我知道在創作的路上有你陪伴，一起延續這份熱忱！"
   },
   "9Fpc9S": {
     "defaultMessage": "漏洞提報"
@@ -2444,6 +2444,9 @@
   },
   "syEQFE": {
     "defaultMessage": "發布"
+  },
+  "t2EpN/": {
+    "defaultMessage": "持續與 {network} 網絡同步，稍後更新至 Matters"
   },
   "tBt9u0": {
     "defaultMessage": "登入",

@@ -31,16 +31,16 @@ const SupporterDigestFeed = ({
           <UserDigest.Mini
             user={user}
             hasAvatar
-            avatarSize="md"
+            avatarSize={24}
             hasDisplayName
-            textSize="mdS"
-            textWeight="md"
+            textSize={15}
+            textWeight="medium"
           />
 
           <section className={styles.count}>
             <TextIcon
-              icon={<Icon icon={IconDonate} size="xs" />}
-              size="xs"
+              icon={<Icon icon={IconDonate} size={12} />}
+              size={12}
               color="greyDark"
             >
               {donationCount}

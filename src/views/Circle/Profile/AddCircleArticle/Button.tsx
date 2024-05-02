@@ -15,7 +15,7 @@ const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
       {({ openDialog: openAddCircleArticlesDialog }) => (
         <Button
           size={[null, '2rem']}
-          spacing={[0, 'tight']}
+          spacing={[0, 12]}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"
@@ -24,7 +24,7 @@ const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
           onClick={openAddCircleArticlesDialog}
           aria-haspopup="dialog"
         >
-          <TextIcon icon={<Icon icon={IconPen} />} weight="md" size="mdS">
+          <TextIcon icon={<Icon icon={IconPen} />} weight="medium" size={15}>
             <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
           </TextIcon>
         </Button>

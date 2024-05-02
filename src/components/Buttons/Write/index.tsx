@@ -46,7 +46,7 @@ const BaseWriteButton = (props: ButtonProps) => {
         })}
         {...props}
       >
-        <Icon icon={IconNavCreate} size="lg" color="black" />
+        <Icon icon={IconNavCreate} size={32} color="black" />
       </Button>
     </Tooltip>
   )

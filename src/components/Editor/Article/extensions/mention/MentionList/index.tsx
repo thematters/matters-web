@@ -23,7 +23,7 @@ export const MentionList = forwardRef(
         <section className={styles.mention}>
           <Menu width="md">
             <Menu.Item>
-              <SpinnerBlock />
+              <SpinnerBlock noSpacing />
             </Menu.Item>
           </Menu>
         </section>
@@ -39,7 +39,7 @@ export const MentionList = forwardRef(
         <Menu width="md">
           {users.map((user) => (
             <Menu.Item
-              spacing={['xtight', 'base']}
+              spacing={[8, 16]}
               onClick={() => {
                 onClick(user)
               }}

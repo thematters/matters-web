@@ -71,9 +71,9 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
               title={
                 <TextIcon
                   color="black"
-                  icon={<Icon icon={IconBook} size="md" />}
-                  size="md"
-                  spacing="xtight"
+                  icon={<Icon icon={IconBook} size={24} />}
+                  size={16}
+                  spacing={8}
                 >
                   <Translate
                     zh_hant="Logbook 2.0 Bookcase"
@@ -91,9 +91,9 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
               title={
                 <TextIcon
                   color="black"
-                  icon={<Icon icon={IconBook} size="md" />}
-                  size="md"
-                  spacing="xtight"
+                  icon={<Icon icon={IconBook} size={24} />}
+                  size={16}
+                  spacing={8}
                 >
                   <Translate
                     zh_hant="Logbook 1.0 Bookcase"

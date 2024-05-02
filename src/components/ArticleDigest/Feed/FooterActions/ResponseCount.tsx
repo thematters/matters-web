@@ -40,7 +40,7 @@ const ResponseCount = ({ article }: ResponseCountProps) => {
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgActiveColor="greyLighterActive"
       {...path}
       disabled={isBanned}
@@ -54,8 +54,8 @@ const ResponseCount = ({ article }: ResponseCountProps) => {
       <TextIcon
         icon={<Icon icon={IconComment} />}
         color="grey"
-        weight="md"
-        size="sm"
+        weight="medium"
+        size={14}
       >
         {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
       </TextIcon>

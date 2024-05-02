@@ -49,7 +49,7 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 
   return (
     <Button {...buttonProps}>
-      <TextIcon size="md" weight="md" icon={loading && <Spinner />}>
+      <TextIcon size={16} weight="medium" icon={loading && <Spinner />}>
         {!loading ? text : null}
       </TextIcon>
     </Button>
@@ -58,8 +58,8 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 
 export type DialogRoundedButtonProps = {
   text: React.ReactNode
-  textSize?: 'sm' | 'xm' | 'md'
-  textWeight?: 'md' | 'normal'
+  textSize?: 14 | 16 | 18
+  textWeight?: 'medium' | 'normal'
 
   color?: 'greyDarker' | 'green' | 'red' | 'white' | 'black'
   icon?: React.ReactNode
@@ -72,8 +72,8 @@ export const RoundedButton: React.FC<
   (
     {
       text,
-      textSize = 'xm',
-      textWeight = 'md',
+      textSize = 18,
+      textWeight = 'medium',
       color = 'green',
       loading,
       icon,
@@ -125,10 +125,10 @@ export const RoundedButton: React.FC<
         {...buttonProps}
       >
         <TextIcon
-          icon={icon || (loading && <Spinner size="md" />)}
+          icon={icon || (loading && <Spinner size={24} />)}
           size={textSize}
           weight={textWeight}
-          textPlacement="left"
+          placement="left"
         >
           {!loading ? text : null}
         </TextIcon>

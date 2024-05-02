@@ -220,13 +220,13 @@ const EditModeHeader = ({
         {({ openDialog: openEditorSettingsDialog }) => (
           <Button
             size={[null, '2rem']}
-            spacing={[0, 'base']}
+            spacing={[0, 16]}
             bgColor="green"
             onClick={openEditorSettingsDialog}
             aria-haspopup="dialog"
             disabled={isEditDisabled}
           >
-            <TextIcon color="white" size="md" weight="md">
+            <TextIcon color="white" size={16} weight="medium">
               <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
             </TextIcon>
           </Button>

@@ -19,50 +19,50 @@
   flex-direction: column;
 }
 
-/* size */
-.sizeXs {
+/* text size */
+.text12 {
   & .text {
     font-size: var(--text12);
   }
 }
 
-.sizeSm {
+.text14 {
   & .text {
     font-size: var(--text14);
   }
 }
 
-.sizeSmS {
+.text13 {
   & .text {
     font-size: var(--text13);
   }
 }
 
-.sizeMd {
+.text16 {
   & .text {
     font-size: var(--text16);
   }
 }
 
-.sizeMdS {
+.text15 {
   & .text {
     font-size: var(--text15);
   }
 }
 
-.sizeXm {
+.text18 {
   & .text {
     font-size: var(--text18);
   }
 }
 
-.sizeLg {
+.text20 {
   & .text {
     font-size: var(--text20);
   }
 }
 
-.sizeXl {
+.text24 {
   & .text {
     font-size: var(--text24);
   }
@@ -114,7 +114,7 @@
 }
 
 /* spacing */
-.spacingXxxtight.hasIcon {
+.spacing2.hasIcon {
   &.textRight > .text {
     padding-left: var(--sp2);
   }
@@ -128,7 +128,7 @@
   }
 }
 
-.spacingXxtight.hasIcon {
+.spacing4.hasIcon {
   &.textRight > .text {
     padding-left: var(--sp4);
   }
@@ -142,7 +142,7 @@
   }
 }
 
-.spacingBasexxtight.hasIcon {
+.spacing6.hasIcon {
   &.textRight > .text {
     padding-left: var(--sp6);
   }
@@ -156,7 +156,7 @@
   }
 }
 
-.spacingXtight.hasIcon {
+.spacing8.hasIcon {
   &.textRight > .text {
     padding-left: var(--sp8);
   }
@@ -170,7 +170,7 @@
   }
 }
 
-.spacingTight.hasIcon {
+.spacing12.hasIcon {
   &.textRight > .text {
     padding-left: var(--sp12);
   }
@@ -184,7 +184,7 @@
   }
 }
 
-.spacingBase.hasIcon {
+.spacing16.hasIcon {
   &.textRight > .text {
     padding-left: var(--sp16);
   }
@@ -202,7 +202,7 @@
   font-weight: var(--font-normal);
 }
 
-.weightMd {
+.weightMedium {
   font-weight: var(--font-medium);
 }
 

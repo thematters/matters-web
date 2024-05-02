@@ -112,7 +112,7 @@ const VersionsDropdown = ({
               active={version.id === currVersion}
               latest={versions[0].id === version.id}
             />
-            <Icon icon={IconDown} size="mdS" />
+            <Icon icon={IconDown} size={20} />
           </button>
         )}
       </Dropdown>

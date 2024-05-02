@@ -175,7 +175,7 @@ const CircleProfile = () => {
 
         <header className={styles.header}>
           <section className={styles.info}>
-            <CircleAvatar size="xxxl" circle={circle} />
+            <CircleAvatar size={72} circle={circle} />
             <h2 className={styles.name}>{circle.displayName}</h2>
           </section>
 
@@ -195,7 +195,7 @@ const CircleProfile = () => {
               content={circle.description}
               color="greyDarker"
               spacingTop="base"
-              size="md"
+              size={16}
             >
               <p>{circle.description}</p>
             </Expandable>

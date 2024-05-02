@@ -115,7 +115,7 @@ const BaseAuthors = () => {
                   id: node.id,
                 })
               }
-              spacing={['tight', 0]}
+              spacing={[12, 0]}
             />
           </List.Item>
         ))}

@@ -130,7 +130,7 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
           selected: license === value,
         }
       })}
-      size="sm"
+      size={14}
     />
   )
 }

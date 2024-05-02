@@ -78,13 +78,13 @@ const RadioInput: React.FC<RadioInputProps> = ({
     <li className={itemClasses}>
       <label htmlFor={fieldId}>
         <TextIcon
-          spacing="xtight"
-          size="sm"
+          spacing={8}
+          size={14}
           icon={
             isActive ? (
-              <Icon icon={IconCircleCheckedFill} size="mdS" color="green" />
+              <Icon icon={IconCircleCheckedFill} size={20} color="green" />
             ) : (
-              <Icon icon={IconCircleEmpty} size="mdS" />
+              <Icon icon={IconCircleEmpty} size={20} />
             )
           }
         >

@@ -28,7 +28,7 @@ const SubmitReportButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Report issues" id="BaQj20" />}
-      icon={<Icon icon={IconReport} size="mdS" />}
+      icon={<Icon icon={IconReport} size={20} />}
       onClick={onClick}
       ariaHasPopup="dialog"
     />

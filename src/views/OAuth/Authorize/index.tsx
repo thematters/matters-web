@@ -139,7 +139,7 @@ const BaseOAuthAuthorize = () => {
           <section className={styles.currentAccount}>
             <UserDigest.Mini
               user={viewer}
-              avatarSize="xs"
+              avatarSize={16}
               hasUserName
               hasAvatar
               hasDisplayName

@@ -15,7 +15,7 @@ import {
 
 type ShareButtonBaseProps = {
   hasIcon?: boolean
-  iconSize?: Extract<IconSize, 'mdS' | 'md'>
+  iconSize?: Extract<IconSize, 20 | 24>
   iconColor?: Extract<IconColor, 'green' | 'grey' | 'black' | 'white'>
   inCard: boolean
 } & Omit<ShareDialogProps, 'children'>
@@ -48,7 +48,7 @@ export const ShareButton: React.FC<
       : inCard
       ? 'greyLighterActive'
       : 'greyLighter'
-  const buttonSpacing = spacing || ['xtight', 'xtight']
+  const buttonSpacing = spacing || [8, 8]
 
   return (
     <ShareDialog {...props}>

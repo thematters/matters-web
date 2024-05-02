@@ -22,7 +22,7 @@ const Hero = () => {
               <VisuallyHidden>
                 <span>{translate({ id: 'discover', lang })}</span>
               </VisuallyHidden>
-              <Icon icon={IconLogo} />
+              <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
             </a>
           </Link>
         </div>

@@ -81,7 +81,7 @@ const Complete: React.FC<Props> = ({
         showEthAddress={isUSDT}
       >
         <>
-          <Icon icon={IconCircleCheckFill} size="xlM" color="green" />
+          <Icon icon={IconCircleCheckFill} size={40} color="green" />
           <p className={styles.hint}>
             {isHKD && (
               <FormattedMessage

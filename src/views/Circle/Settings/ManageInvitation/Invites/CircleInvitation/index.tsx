@@ -36,9 +36,9 @@ const CircleInvitationFailedInfo = () => (
       <TextIcon
         icon={<Icon icon={IconInfo} />}
         color="grey"
-        size="xs"
-        spacing="xxxtight"
-        textPlacement="left"
+        size={12}
+        spacing={2}
+        placement="left"
       >
         <Translate zh_hant="失敗" zh_hans="失败" en="Failed" />
       </TextIcon>
@@ -80,7 +80,7 @@ export const CircleInvitation = ({ invitation }: CircleInvitationProps) => {
   const isSucceeded = state === 'transfer_succeeded'
 
   return (
-    <Card spacing={['xtight', 0]}>
+    <Card spacing={[8, 0]}>
       <section className={styles.container}>
         <CircleInvitationInvitee invitee={invitee} />
         <section className={styles.info}>
