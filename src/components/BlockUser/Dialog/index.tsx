@@ -65,9 +65,9 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
           <Dialog.Content.Message>
             <p>
               <Translate
-                zh_hant={`封鎖之後，${user.displayName} 將無法評論、關聯你的作品，不能 @ 你，並且不能加入你的圍爐。你可以在設置裏管理你的封鎖用戶列表。`}
-                zh_hans={`封锁之后，${user.displayName} 将无法评论、关联你的作品，不能 @ 你，并且不能加入你的围炉。你可以在设置里管理你的封锁用户列表。`}
-                en={`${user.displayName} won't be able to comment and collect your article. Besides, he or she can't @ you and subscribe your circle. You can manage blocked list in settings.`}
+                zh_hant={`封鎖之後，${user.displayName} 將無法評論你的作品，不能 @ 你，並且不能加入你的圍爐。你可以在設置裏管理你的封鎖用戶列表。`}
+                zh_hans={`封锁之后，${user.displayName} 将无法评论你的作品，不能 @ 你，并且不能加入你的围炉。你可以在设置里管理你的封锁用户列表。`}
+                en={`${user.displayName} won't be able to comment your article. Besides, he or she can't @ you and subscribe your circle. You can manage blocked list in settings.`}
               />
             </p>
           </Dialog.Content.Message>
