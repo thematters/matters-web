@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import Lottie from 'lottie-react'
 import { useState } from 'react'
 import { useIntl } from 'react-intl'
-import Lottie, { EventListener } from 'react-lottie'
 
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
@@ -56,14 +56,7 @@ const UpvoteButton = ({
   const [playHeartPuls, setPlayHeartPuls] = useState(false)
   const [heartPulsDone, setHeartPulsDone] = useState(false)
 
-  const heartPulsListener: EventListener = {
-    eventName: 'complete',
-    callback: () => {
-      setHeartPulsDone(true)
-    },
-  }
-
-  const LottieOptions = {
+  const lottieOptions = {
     loop: false,
     autoplay: true,
     rendererSettings: {
@@ -125,8 +118,8 @@ const UpvoteButton = ({
             ) : (
               <span className={styles.heart}>
                 <Lottie
-                  options={LottieOptions}
-                  eventListeners={[heartPulsListener]}
+                  {...lottieOptions}
+                  onComplete={() => setHeartPulsDone(true)}
                 />
               </span>
             )
