@@ -44,7 +44,10 @@ const PayCallbackSuccess = () => {
             </h2>
 
             <p>
-              <Translate id="callbackClose" />
+              <FormattedMessage
+                defaultMessage="Return and continue"
+                id="zWXgmM"
+              />
             </p>
           </section>
         </Box>

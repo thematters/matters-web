@@ -1,9 +1,10 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath, UtmParams } from '~/common/utils'
-import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
+import { LinkWrapper, LinkWrapperProps } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -68,7 +69,14 @@ export const ArticleDigestTitle = ({
     utm_medium,
   })
   const isBanned = state === 'banned'
-  const title = isBanned ? <Translate id="articleBanned" /> : article.title
+  const title = isBanned ? (
+    <FormattedMessage
+      defaultMessage="The article has been archived due to violation of terms"
+      id="+GAaxB"
+    />
+  ) : (
+    article.title
+  )
   const titleClasses = classNames({
     [styles.title]: true,
     [styles[`text${textSize}`]]: !!textSize,

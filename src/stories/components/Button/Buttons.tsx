@@ -51,18 +51,6 @@ const Buttons = () => (
           active
         />
       </li>
-
-      {/* <li>
-        <Dialog.Footer>
-          <Dialog.Footer.Button type="submit">
-            <Translate id="agreeAndContinue" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button bgColor="greyLighter" textColor="black">
-            <Translate id="disagree" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </li> */}
     </ul>
   </section>
 )

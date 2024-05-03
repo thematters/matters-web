@@ -1,4 +1,7 @@
 {
+  "+12veD": {
+    "defaultMessage": "开启回应"
+  },
   "+51DoZ": {
     "defaultMessage": "请先验证邮箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -16,6 +19,9 @@
   },
   "+7SAix": {
     "defaultMessage": "2-12 个字符"
+  },
+  "+GAaxB": {
+    "defaultMessage": "作品因违反社区约章被封存"
   },
   "+OStJM": {
     "defaultMessage": "重置交易密码"
@@ -106,6 +112,9 @@
   "06XHBC": {
     "defaultMessage": "加入围炉"
   },
+  "09AywK": {
+    "defaultMessage": "编辑作品发布成功，快把作品分享到不同渠道，"
+  },
   "0Azlrb": {
     "defaultMessage": "管理"
   },
@@ -154,6 +163,9 @@
     "defaultMessage": "失败",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "1DNHwi": {
+    "defaultMessage": "你的作品即将存储在星际文件系统（IPFS）分布式节点中。在 IPFS 的存储费用目前由 Matters 平台支付。"
+  },
   "1PORwh": {
     "defaultMessage": "仅作者本人可见封存作品，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -173,6 +185,9 @@
   "1Z1M77": {
     "defaultMessage": "尚无阅读记录",
     "description": "src/views/Me/History/index.tsx"
+  },
+  "1exrSw": {
+    "defaultMessage": "欢迎上船！"
   },
   "1hyiZ8": {
     "defaultMessage": "确认 Matters ID",
@@ -206,7 +221,7 @@
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
   },
   "24jhEp": {
-    "defaultMessage": "你的修订作品 {articleTitle} 发布失败",
+    "defaultMessage": "你的编辑作品 {articleTitle} 发布失败",
     "description": "src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
   },
   "25oM9Q": {
@@ -389,6 +404,10 @@
   "69+D96": {
     "defaultMessage": "开始创作"
   },
+  "6B+QXo": {
+    "defaultMessage": "回应设置",
+    "description": "src/components/Editor/ToggleResponse/index.tsx"
+  },
   "6BXcdo": {
     "defaultMessage": "设定围炉门槛（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
@@ -536,6 +555,9 @@
   "99OtWT": {
     "defaultMessage": "写入中…"
   },
+  "9Dwh/Z": {
+    "defaultMessage": "编辑後的作品即再版發佈至分佈式網絡。编辑前請自行保留上一版本備份"
+  },
   "9EABqX": {
     "defaultMessage": "喜欢我的作品吗？别忘了给予支持与赞赏，让我知道在创作的路上有你陪伴，一起延续这份热忱！"
   },
@@ -605,6 +627,9 @@
   "ANA7sk": {
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "AQuumI": {
+    "defaultMessage": "查看编辑作品"
   },
   "AVpR3Q": {
     "defaultMessage": "已绑定钱包",
@@ -1036,7 +1061,7 @@
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "KWDSxB": {
-    "defaultMessage": "保存修订"
+    "defaultMessage": "保存编辑"
   },
   "KgVypx": {
     "defaultMessage": "标签",
@@ -1148,6 +1173,10 @@
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "MIA5xy": {
+    "defaultMessage": "编辑须知",
+    "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
+  },
   "MP6xe/": {
     "defaultMessage": "Billboard 是一个公开且可付费租借的链上 NFT 广告协议。租借成功后，可以进行14天的内容投放。租借费用基于哈柏格税概念计算，产生的租借收入将以二次方配捐方式回馈给社区创作者。更多详情请查看{announcements}。",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -1155,6 +1184,9 @@
   "MPEeBy": {
     "defaultMessage": "操作失败，请稍候重试",
     "description": "ACTION_FAILED"
+  },
+  "MV0JlP": {
+    "defaultMessage": "吸引更多人为你拍手！"
   },
   "Me4s4Q": {
     "defaultMessage": "请先绑定邮箱",
@@ -1284,7 +1316,7 @@
     "defaultMessage": "正在发布，马上就好"
   },
   "PkUihI": {
-    "defaultMessage": "修订已保存",
+    "defaultMessage": "编辑已保存",
     "description": "src/views/ArticleDetail/Edit/Header/index.tsx"
   },
   "PliM8z": {
@@ -1331,6 +1363,10 @@
   "R7yHDl": {
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "REQGgU": {
+    "defaultMessage": "發布须知",
+    "description": "src/views/Me/DraftDetail/SettingsButton/ConfirmPublishDialogContent/index.tsx"
   },
   "RFzVUD": {
     "defaultMessage": "取消置顶",
@@ -1415,6 +1451,9 @@
   "SuRTsQ": {
     "defaultMessage": "注册 ISCN"
   },
+  "SwoXPI": {
+    "defaultMessage": "指纹与节点随之公开可见，皆可用于分享作品。"
+  },
   "Szd1tH": {
     "defaultMessage": "登出失败，再来一次"
   },
@@ -1435,6 +1474,9 @@
   },
   "TF1OhT": {
     "defaultMessage": "临时密码已过期，请尝试重新发送"
+  },
+  "TInwt3": {
+    "defaultMessage": "关闭回应"
   },
   "TKsfIS": {
     "defaultMessage": "流星号"
@@ -1571,7 +1613,7 @@
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "Wjmng6": {
-    "defaultMessage": "正文及作品管理剩 {revisionCountLeft} 次修订"
+    "defaultMessage": "正文及作品管理剩 {revisionCountLeft} 次编辑"
   },
   "WpvsPu": {
     "defaultMessage": "订阅",
@@ -1710,6 +1752,9 @@
   },
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
+  },
+  "ZOW313": {
+    "defaultMessage": "首次发布作品后有四次正文编辑机会，你也可以封存原文重新发布作品。"
   },
   "ZUPQzl": {
     "defaultMessage": "回复了你",
@@ -1914,6 +1959,9 @@
   "e3qUqn": {
     "defaultMessage": "涉及未成年人的色情"
   },
+  "eIlMHB": {
+    "defaultMessage": "允许读者回应本文（开启后无法关闭）"
+  },
   "eKVBm/": {
     "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考{link}。"
   },
@@ -1946,11 +1994,17 @@
   "ezYuE2": {
     "defaultMessage": "支持作者"
   },
+  "fBzH+2": {
+    "defaultMessage": "不允许读者回应本文（可通过编辑打开回应功能）"
+  },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者删除"
   },
   "fK6ptv": {
     "defaultMessage": "送出失败，请稍后再试"
+  },
+  "fKkBPz": {
+    "defaultMessage": "再次支持"
   },
   "fPcF7H": {
     "defaultMessage": "添加适合标签，帮助读者找到你的作品"
@@ -1962,6 +2016,9 @@
   "fsB/4p": {
     "defaultMessage": "保存成功"
   },
+  "fxhue9": {
+    "defaultMessage": "作品将发布至 IPFS，无法被他人删改，创作权归你所有。"
+  },
   "g5pX+a": {
     "defaultMessage": "关于"
   },
@@ -1970,8 +2027,11 @@
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "gN4jLB": {
-    "defaultMessage": "你的修订作品 {articleTitle} 已发布到分布式网络",
+    "defaultMessage": "你的编辑作品 {articleTitle} 已发布到分布式网络",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
+  },
+  "gS1u3d": {
+    "defaultMessage": "你还可以编辑 {left} 版"
   },
   "gW/KWu": {
     "defaultMessage": "评论被精选",
@@ -1980,6 +2040,9 @@
   "ggS9L7": {
     "defaultMessage": "支付金额无效，请重新输入",
     "description": "PAYMENT_AMOUNT_INVALID"
+  },
+  "gz0EGC": {
+    "defaultMessage": "编辑作品已发布"
   },
   "h+punE": {
     "defaultMessage": "{date}更新",
@@ -2043,6 +2106,9 @@
   "iTcMqz": {
     "defaultMessage": "月色之下，梦想即将实现。月之梦徽章纪念你曾参与「游牧者计划」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
+  "iYk6P9": {
+    "defaultMessage": "不好意思，什么都没搜到"
   },
   "icdrwy": {
     "defaultMessage": "追踪了你",
@@ -2193,7 +2259,7 @@
     "defaultMessage": "热门"
   },
   "lsccVJ": {
-    "defaultMessage": "正文及作品管理修订次数已达上限"
+    "defaultMessage": "正文及作品管理编辑次数已达上限"
   },
   "m/Wg7b": {
     "defaultMessage": "围炉描述",
@@ -2398,6 +2464,10 @@
   "rJSVni": {
     "defaultMessage": "追踪",
     "description": "src/components/Buttons/FollowUser/Follow.tsx"
+  },
+  "rJqgwV": {
+    "defaultMessage": "开始编辑",
+    "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
   },
   "rLlTQ9": {
     "defaultMessage": "标签名称"
@@ -2675,7 +2745,7 @@
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "xjHiYx": {
-    "defaultMessage": "作品修订次数超出上限",
+    "defaultMessage": "作品编辑次数超出上限",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
   },
   "xkr+zo": {
@@ -2755,6 +2825,9 @@
     "defaultMessage": "设置",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
+  "z1ucgb": {
+    "defaultMessage": "作品已添加至围炉"
+  },
   "z3uIHQ": {
     "defaultMessage": "取消点赞"
   },
@@ -2775,6 +2848,9 @@
   },
   "zQvVDJ": {
     "defaultMessage": "全部"
+  },
+  "zWXgmM": {
+    "defaultMessage": "请回到原页面继续操作"
   },
   "zaY8Cu": {
     "defaultMessage": "输入交易密码",
