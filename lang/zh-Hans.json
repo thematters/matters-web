@@ -1694,6 +1694,9 @@
     "defaultMessage": "开始创作",
     "description": "src/components/Buttons/StartWriting/index.tsx"
   },
+  "Z39z+x": {
+    "defaultMessage": "封锁之后，{displayName} 将无法评论你的作品，不能 @ 你，并且不能加入你的围炉。你可以在设置里管理你的封锁用户列表"
+  },
   "Z7JXlF": {
     "defaultMessage": "因违反用户协定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
