@@ -4,7 +4,7 @@ import type { Toast as ToastType } from 'react-hot-toast'
 import baseToast, { Toaster as BaseToaster } from 'react-hot-toast'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconMinus } from '@/public/static/icons/24px/minus.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { ReactComponent as IconWarn } from '@/public/static/icons/24px/warn.svg'
 import { Button, ButtonProps, Icon, TextIcon } from '~/components'
 
@@ -58,7 +58,7 @@ const ToastActions: React.FC<ToastActionsProps> = ({
           })}
         >
           <Icon
-            icon={IconMinus}
+            icon={IconTimes}
             color={type === 'error' ? 'white' : 'whiteLight'}
             size={22}
           />
