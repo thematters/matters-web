@@ -1694,6 +1694,9 @@
     "defaultMessage": "Start writing",
     "description": "src/components/Buttons/StartWriting/index.tsx"
   },
+  "Z39z+x": {
+    "defaultMessage": "{displayName} won't be able to comment your article. Besides, he or she can't @ you and subscribe your circle. You can manage blocked list in settings."
+  },
   "Z7JXlF": {
     "defaultMessage": "Archived for violation.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
