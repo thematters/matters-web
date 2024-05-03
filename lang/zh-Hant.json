@@ -1694,6 +1694,9 @@
     "defaultMessage": "開始創作",
     "description": "src/components/Buttons/StartWriting/index.tsx"
   },
+  "Z39z+x": {
+    "defaultMessage": "封鎖之後，{displayName} 將無法評論你的作品，不能 @ 你，並且不能加入你的圍爐。你可以在設置裏管理你的封鎖用戶列表。`"
+  },
   "Z7JXlF": {
     "defaultMessage": "因違反用戶協定而被封存，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
