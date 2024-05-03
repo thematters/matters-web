@@ -242,7 +242,7 @@ const EditModeHeader = ({
             bgColor="green"
             onClick={openEditorSettingsDialog}
             aria-haspopup="dialog"
-            disabled={isEditDisabled}
+            disabled={!isRevised || isEditDisabled}
           >
             <TextIcon color="white" size={16} weight="medium">
               <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
