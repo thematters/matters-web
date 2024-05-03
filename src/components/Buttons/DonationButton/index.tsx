@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
 import { TEST_ID } from '~/common/enums'
@@ -23,6 +24,7 @@ const DonationButton = ({
   width = '19.5rem',
 }: DonationButtonProps) => {
   const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   if (supported) {
     return (
@@ -30,7 +32,10 @@ const DonationButton = ({
         size={[width, '2.5rem']}
         bgColor="gold"
         aria-haspopup="dialog"
-        aria-label={translate({ id: 'donationAgain', lang })}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Support Again',
+          id: 'fKkBPz',
+        })}
         onClick={() => {
           if (onClick) {
             onClick()
@@ -43,7 +48,7 @@ const DonationButton = ({
           color="white"
           size={16}
         >
-          <Translate id="donationAgain" />
+          <FormattedMessage defaultMessage="Support Again" id="fKkBPz" />
         </TextIcon>
       </Button>
     )

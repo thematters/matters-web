@@ -1,10 +1,11 @@
 import classNames from 'classnames'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconChecked } from '@/public/static/icons/checked.svg'
 import { ReactComponent as IconUnChecked } from '@/public/static/icons/unchecked.svg'
 import { ReactComponent as IconUnCheckedGrey } from '@/public/static/icons/uncheckedGrey.svg'
 import { TEST_ID } from '~/common/enums'
-import { Icon, Translate } from '~/components'
+import { Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -50,10 +51,13 @@ const ToggleResponse = ({
         >
           <section className={styles.left}>
             <h3>
-              <Translate id="allowResponses" />
+              <FormattedMessage defaultMessage="Allow Responses" id="+12veD" />
             </h3>
             <p className={styles.hint}>
-              <Translate id="allowResponsesHint" />
+              <FormattedMessage
+                defaultMessage="Allow readers to respond to this article (can NOT be disabled afterwards)"
+                id="eIlMHB"
+              />
             </p>
           </section>
           <section className={styles.right}>
@@ -79,10 +83,16 @@ const ToggleResponse = ({
         >
           <section className={styles.left}>
             <h3>
-              <Translate id="disableResponses" />
+              <FormattedMessage
+                defaultMessage="Disable Responses"
+                id="TInwt3"
+              />
             </h3>
             <p className={styles.hint}>
-              <Translate id="disableResponsesHint" />
+              <FormattedMessage
+                defaultMessage="Disallow readers to respond to this article (you can enable responses later by editing this article)"
+                id="fBzH+2"
+              />
             </p>
           </section>
           <section className={styles.right}>
@@ -104,7 +114,11 @@ const ToggleResponse = ({
   return (
     <section className={styles.container}>
       <h3 className={styles.title}>
-        <Translate id="articleResponse" />
+        <FormattedMessage
+          defaultMessage="Response"
+          id="6B+QXo"
+          description="src/components/Editor/ToggleResponse/index.tsx"
+        />
       </h3>
       <section className={wrapperClasses}>
         <section
@@ -118,10 +132,13 @@ const ToggleResponse = ({
         >
           <section className={styles.left}>
             <h3>
-              <Translate id="allowResponses" />
+              <FormattedMessage defaultMessage="Allow Responses" id="+12veD" />
             </h3>
             <p className={styles.hint}>
-              <Translate id="allowResponsesHint" />
+              <FormattedMessage
+                defaultMessage="Allow readers to respond to this article (can NOT be disabled afterwards)"
+                id="eIlMHB"
+              />
             </p>
           </section>
           <section className={styles.right}>
@@ -147,10 +164,16 @@ const ToggleResponse = ({
         >
           <section className={styles.left}>
             <h3>
-              <Translate id="disableResponses" />
+              <FormattedMessage
+                defaultMessage="Disable Responses"
+                id="TInwt3"
+              />
             </h3>
             <p className={styles.hint}>
-              <Translate id="disableResponsesHint" />
+              <FormattedMessage
+                defaultMessage="Disallow readers to respond to this article (you can enable responses later by editing this article)"
+                id="fBzH+2"
+              />
             </p>
           </section>
           <section className={styles.right}>

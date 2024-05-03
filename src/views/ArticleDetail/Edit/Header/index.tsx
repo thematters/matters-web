@@ -81,6 +81,17 @@ const EditModeHeader = ({
   const isCoverRevised = article.cover
     ? revision.cover?.path !== article.cover
     : !!revision.cover?.path
+  const isRequestForDonationRevised =
+    revision.requestForDonation !== article.requestForDonation
+  const isReplyToDonatorRevised =
+    revision.replyToDonator !== article.replyToDonator
+  const isCircleRevised = circle?.id !== article.access.circle?.id
+  const isAccessRevised = accessType !== article.access.type
+  const isLicenseRevised = license !== article.license
+  const isCanCommentRevised = restProps.canComment !== article.canComment
+  const isSensitiveRevised =
+    restProps.contentSensitive !== article.sensitiveByAuthor
+
   const needRepublish =
     isTitleRevised ||
     isSummaryRevised ||
@@ -88,6 +99,17 @@ const EditModeHeader = ({
     isTagRevised ||
     isCollectionRevised ||
     isCoverRevised
+
+  const isRevised =
+    needRepublish ||
+    isRequestForDonationRevised ||
+    isReplyToDonatorRevised ||
+    isCircleRevised ||
+    isAccessRevised ||
+    isLicenseRevised ||
+    isCanCommentRevised ||
+    isSensitiveRevised ||
+    restProps.iscnPublish
 
   const onSave = async () => {
     // check content length
@@ -121,24 +143,20 @@ const EditModeHeader = ({
             ? { collection: collection.map(({ id }) => id) }
             : {}),
           ...(isCoverRevised ? { cover: revision.cover?.id || null } : {}),
-          ...(revision.requestForDonation !== article.requestForDonation
+          ...(isRequestForDonationRevised
             ? { requestForDonation: revision.requestForDonation }
             : {}),
-          ...(revision.replyToDonator !== article.replyToDonator
+          ...(isReplyToDonatorRevised
             ? { replyToDonator: revision.replyToDonator }
             : {}),
-          ...(circle?.id !== article.access.circle?.id
-            ? { circle: circle?.id || null }
-            : {}),
-          ...(accessType !== article.access.type ? { accessType } : {}),
-          ...(license !== article.license ? { license } : {}),
+          ...(isCircleRevised ? { circle: circle?.id || null } : {}),
+          ...(isAccessRevised ? { accessType } : {}),
+          ...(isLicenseRevised ? { license } : {}),
           ...(restProps.iscnPublish
             ? { iscnPublish: restProps.iscnPublish }
             : {}),
-          ...(restProps.canComment !== article.canComment
-            ? { canComment: restProps.canComment }
-            : {}),
-          ...(restProps.contentSensitive !== article.sensitiveByAuthor
+          ...(isCanCommentRevised ? { canComment: restProps.canComment } : {}),
+          ...(isSensitiveRevised
             ? { sensitive: restProps.contentSensitive }
             : {}),
         },
@@ -203,7 +221,7 @@ const EditModeHeader = ({
           requestForDonation: revision.requestForDonation,
         }}
         saving={loading}
-        disabled={loading}
+        disabled={!isRevised || loading}
         confirmButtonText={
           needRepublish ? (
             <FormattedMessage defaultMessage="Publish" id="syEQFE" />
@@ -224,7 +242,7 @@ const EditModeHeader = ({
             bgColor="green"
             onClick={openEditorSettingsDialog}
             aria-haspopup="dialog"
-            disabled={isEditDisabled}
+            disabled={!isRevised || isEditDisabled}
           >
             <TextIcon color="white" size={16} weight="medium">
               <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />

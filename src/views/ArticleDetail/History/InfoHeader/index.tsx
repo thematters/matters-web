@@ -182,7 +182,7 @@ const InfoHeader = ({
                     key={url}
                     className={styles.gatewayUrl}
                   >
-                    {hostname}
+                    {truncate(hostname, 4, 5)}
                   </a>
                 )
               })}

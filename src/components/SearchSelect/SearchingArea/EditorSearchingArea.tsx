@@ -9,7 +9,6 @@ import {
   mergeConnections,
   normalizeTag,
   parseURL,
-  toGlobalId,
 } from '~/common/utils'
 import {
   EmptySearch,
@@ -174,20 +173,16 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
   const listNodeIds = listNode.map((n) => n.id).join(',')
   const search = (key: string) => {
     // Used to match links of the format like👇
-    // https://matters.town/@az/12-来自matters的第一封信-致好朋友-zdpuAnuMKxNv6SUj7kTRzgrWRdp9q4aMMKHJ6TGtn8tp4FwX2
+    // https://matters.town/a/{shortHash}
     const regex = new RegExp(
-      `^https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/@\\w+/\\d+.*$`
+      `^https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/[a-zA-Z0-9]+$`
     )
     if (searchType === 'Article' && isUrl(key) && regex.test(key)) {
       const urlObj = parseURL(key)
-      const paths = urlObj.pathname.split('-')
-      const subPaths = paths[0].split('/')
-      const articleId = subPaths?.[subPaths.length - 1]
+      const shortHash = urlObj.pathname.split('/a/')[1].split('?')[0]
       setMode('article_url')
       lazyArticleUrlQuery({
-        variables: {
-          id: toGlobalId({ type: 'Article', id: articleId }),
-        },
+        variables: { shortHash },
       })
     } else {
       const type = searchType
@@ -253,7 +248,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
 
   const hasNodes = searchNodes.length > 0
   const haslistNode = listNode.length > 0
-  const hasArticle = !!articleUrlData?.node
+  const hasArticle = !!articleUrlData?.article
   const canCreateTag =
     isTag &&
     searchKey &&
@@ -343,24 +338,18 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
               {/* URL Search */}
               {isArticleUrlMode && !searching && !hasArticle && <EmptySearch />}
 
-              {isArticleUrlMode &&
-                !searching &&
-                hasArticle &&
-                articleUrlData?.node?.__typename === 'Article' && (
-                  <SearchSelectNode
-                    node={articleUrlData.node}
-                    onClick={addNodeToStaging}
-                    selected={
-                      stagingNodes.findIndex(
-                        (sn) =>
-                          sn.node.id ===
-                          (articleUrlData.node?.__typename === 'Article' &&
-                            articleUrlData.node.id)
-                      ) !== -1
-                    }
-                    inSearchingArea
-                  />
-                )}
+              {isArticleUrlMode && !searching && hasArticle && (
+                <SearchSelectNode
+                  node={articleUrlData.article!}
+                  onClick={addNodeToStaging}
+                  selected={
+                    stagingNodes.findIndex(
+                      (sn) => sn.node.id === articleUrlData.article?.id
+                    ) !== -1
+                  }
+                  inSearchingArea
+                />
+              )}
             </>
           )}
         </section>
