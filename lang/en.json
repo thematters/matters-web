@@ -1,4 +1,7 @@
 {
+  "+12veD": {
+    "defaultMessage": "Allow Responses"
+  },
   "+51DoZ": {
     "defaultMessage": "Please verify email first",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -16,6 +19,9 @@
   },
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
+  },
+  "+GAaxB": {
+    "defaultMessage": "The article has been archived due to violation of terms"
   },
   "+OStJM": {
     "defaultMessage": "Reset Payment Password"
@@ -106,6 +112,9 @@
   "06XHBC": {
     "defaultMessage": "Add to Circle"
   },
+  "09AywK": {
+    "defaultMessage": "Your work has been republished. Share it on different platforms"
+  },
   "0Azlrb": {
     "defaultMessage": "Manage"
   },
@@ -154,6 +163,9 @@
     "defaultMessage": "Failed",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "1DNHwi": {
+    "defaultMessage": "Your work will be stored in IPFS network. Currently the fee is covered by Matters."
+  },
   "1PORwh": {
     "defaultMessage": "Archived article.",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -173,6 +185,9 @@
   "1Z1M77": {
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
+  },
+  "1exrSw": {
+    "defaultMessage": "Welcome onboard!"
   },
   "1hyiZ8": {
     "defaultMessage": "Confirm Matters ID",
@@ -389,6 +404,10 @@
   "69+D96": {
     "defaultMessage": "Start Creating"
   },
+  "6B+QXo": {
+    "defaultMessage": "Response",
+    "description": "src/components/Editor/ToggleResponse/index.tsx"
+  },
   "6BXcdo": {
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
@@ -536,6 +555,9 @@
   "99OtWT": {
     "defaultMessage": "Pending..."
   },
+  "9Dwh/Z": {
+    "defaultMessage": "The revised work will be republished to decentralized network. Please backup of the previous edition before revision."
+  },
   "9EABqX": {
     "defaultMessage": "Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
   },
@@ -605,6 +627,9 @@
   "ANA7sk": {
     "defaultMessage": "Maintain",
     "description": "src/views/TagDetail/Owner/index.tsx"
+  },
+  "AQuumI": {
+    "defaultMessage": "View republished article"
   },
   "AVpR3Q": {
     "defaultMessage": "Wallet linked",
@@ -1148,6 +1173,10 @@
     "defaultMessage": "followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "MIA5xy": {
+    "defaultMessage": "Notice",
+    "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
+  },
   "MP6xe/": {
     "defaultMessage": "Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding. Please check out our {announcements}.",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -1155,6 +1184,9 @@
   "MPEeBy": {
     "defaultMessage": "Operation failed, please try again later.",
     "description": "ACTION_FAILED"
+  },
+  "MV0JlP": {
+    "defaultMessage": "to receive more support"
   },
   "Me4s4Q": {
     "defaultMessage": "Please connect email",
@@ -1332,6 +1364,10 @@
     "defaultMessage": "Circle Revenue",
     "description": "src/components/Transaction/index.tsx"
   },
+  "REQGgU": {
+    "defaultMessage": "Notice",
+    "description": "src/views/Me/DraftDetail/SettingsButton/ConfirmPublishDialogContent/index.tsx"
+  },
   "RFzVUD": {
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -1415,6 +1451,9 @@
   "SuRTsQ": {
     "defaultMessage": "Register for ISCN"
   },
+  "SwoXPI": {
+    "defaultMessage": "Content hash and gateway addresses will be public, and can be used for sharing."
+  },
   "Szd1tH": {
     "defaultMessage": "Failed to log out, please try again."
   },
@@ -1435,6 +1474,9 @@
   },
   "TF1OhT": {
     "defaultMessage": "This login code has expired, please try to resend"
+  },
+  "TInwt3": {
+    "defaultMessage": "Disable Responses"
   },
   "TKsfIS": {
     "defaultMessage": "Meteor Canoe"
@@ -1711,6 +1753,9 @@
   "ZEMcZ6": {
     "defaultMessage": "Article Management"
   },
+  "ZOW313": {
+    "defaultMessage": "You can edit the article four times after publishing it. You can also archive the original and republish.."
+  },
   "ZUPQzl": {
     "defaultMessage": " ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -1914,6 +1959,9 @@
   "e3qUqn": {
     "defaultMessage": "Pornography involving minors"
   },
+  "eIlMHB": {
+    "defaultMessage": "Allow readers to respond to this article (can NOT be disabled afterwards)"
+  },
   "eKVBm/": {
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {link}."
   },
@@ -1946,11 +1994,17 @@
   "ezYuE2": {
     "defaultMessage": "Support Author"
   },
+  "fBzH+2": {
+    "defaultMessage": "Disallow readers to respond to this article (you can enable responses later by editing this article)"
+  },
   "fDdcbi": {
     "defaultMessage": "This {type} has been deleted by the author"
   },
   "fK6ptv": {
     "defaultMessage": "Sending failed. Please retry later."
+  },
+  "fKkBPz": {
+    "defaultMessage": "Support Again"
   },
   "fPcF7H": {
     "defaultMessage": "Adding tags helps readers find your articles."
@@ -1961,6 +2015,9 @@
   },
   "fsB/4p": {
     "defaultMessage": "Saved"
+  },
+  "fxhue9": {
+    "defaultMessage": "Article will be published to IPFS, others can not tamper with it, and you own the copyright."
   },
   "g5pX+a": {
     "defaultMessage": "About"
@@ -1973,6 +2030,9 @@
     "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
+  "gS1u3d": {
+    "defaultMessage": "{left} modifications available"
+  },
   "gW/KWu": {
     "defaultMessage": "Comments has been pinned",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1980,6 +2040,9 @@
   "ggS9L7": {
     "defaultMessage": "The payment amount is invalid, please re-enter.",
     "description": "PAYMENT_AMOUNT_INVALID"
+  },
+  "gz0EGC": {
+    "defaultMessage": "Article republished"
   },
   "h+punE": {
     "defaultMessage": "Updated {date}",
@@ -2043,6 +2106,9 @@
   "iTcMqz": {
     "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
+  },
+  "iYk6P9": {
+    "defaultMessage": "Result not found"
   },
   "icdrwy": {
     "defaultMessage": "Followed You",
@@ -2398,6 +2464,10 @@
   "rJSVni": {
     "defaultMessage": "Follow",
     "description": "src/components/Buttons/FollowUser/Follow.tsx"
+  },
+  "rJqgwV": {
+    "defaultMessage": "Edit",
+    "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
   },
   "rLlTQ9": {
     "defaultMessage": "Tag Name"
@@ -2755,6 +2825,9 @@
     "defaultMessage": "Settings",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
+  "z1ucgb": {
+    "defaultMessage": "Articles added"
+  },
   "z3uIHQ": {
     "defaultMessage": "Undo upvote"
   },
@@ -2775,6 +2848,9 @@
   },
   "zQvVDJ": {
     "defaultMessage": "All"
+  },
+  "zWXgmM": {
+    "defaultMessage": "Return and continue"
   },
   "zaY8Cu": {
     "defaultMessage": "Enter transaction password",
