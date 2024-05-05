@@ -173,7 +173,7 @@ export type ButtonProps = {
  *    onClick={onClick}
  *  >
  *    <TextIcon weight="medium" size={12}>
- *      <Translate id="follow" />
+ *      Follow
  *    </TextIcon>
  *  </Button>
  * ```

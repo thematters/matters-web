@@ -216,7 +216,6 @@ const CircleProfile = () => {
                   <span className={styles.count}>
                     {numAbbr(circle.members.totalCount)}
                   </span>
-                  {/* <Translate id="members" /> */}
                   <FormattedMessage defaultMessage="Members" id="+a+2ug" />
                 </button>
               )}
@@ -232,8 +231,6 @@ const CircleProfile = () => {
                   <span className={styles.count}>
                     {numAbbr(circle.followers.totalCount)}
                   </span>
-                  {/* <Translate id="follower" />  */}
-
                   <FormattedMessage defaultMessage="Followers" id="pzTOmv" />
                 </button>
               )}

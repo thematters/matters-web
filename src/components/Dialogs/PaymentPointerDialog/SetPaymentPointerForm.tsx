@@ -5,14 +5,7 @@ import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { parseFormSubmitErrors, validatePaymentPointer } from '~/common/utils'
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  toast,
-  Translate,
-  ViewerContext,
-} from '~/components'
+import { Dialog, Form, toast, Translate, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { UpdatePaymentPointerMutation } from '~/gql/graphql'
 
@@ -47,7 +40,6 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
   const [submitPaymentPointer] = useMutation<UpdatePaymentPointerMutation>(
     UPDATE_PAYMENT_POINTER
   )
-  const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
 
   const [defaultPaymentPointer, setDefaultPaymentPointer] = useState(
@@ -70,7 +62,7 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ paymentPointer }) =>
       _pickBy({
-        paymentPointer: validatePaymentPointer(paymentPointer, lang),
+        paymentPointer: validatePaymentPointer(paymentPointer, intl),
       }),
     onSubmit: async ({ paymentPointer }, { setFieldError }) => {
       try {

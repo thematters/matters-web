@@ -8,7 +8,6 @@ import {
   Button,
   Icon,
   TextIcon,
-  Translate,
   Truncate,
   useIsomorphicLayoutEffect,
 } from '~/components'
@@ -123,7 +122,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
             }}
           >
             <TextIcon icon={<Icon icon={IconUp} />} placement="left">
-              <Translate zh_hans="收起" zh_hant="收合" en="collapse" />
+              <FormattedMessage defaultMessage="Collapse" id="W/V6+Y" />
             </TextIcon>
           </Button>
         </section>
@@ -142,7 +141,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
                   className={styles.expandButton}
                 >
                   ...
-                  <Translate id="expand" />
+                  <FormattedMessage defaultMessage="Expand" id="0oLj/t" />
                 </span>
               }
               trimWhitespace={true}

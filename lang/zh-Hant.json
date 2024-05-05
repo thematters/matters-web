@@ -152,6 +152,9 @@
     "defaultMessage": "圍爐訂閱",
     "description": "src/components/Transaction/index.tsx"
   },
+  "0tHLRn": {
+    "defaultMessage": "錢包餘額不足"
+  },
   "0zZd0T": {
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -159,12 +162,18 @@
   "17K30q": {
     "defaultMessage": "正在透過 Google 翻譯..."
   },
+  "18HJlm": {
+    "defaultMessage": "標籤"
+  },
   "1COpAA": {
     "defaultMessage": "失敗",
     "description": "src/components/Transaction/State/index.tsx"
   },
   "1DNHwi": {
     "defaultMessage": "你的作品即將存儲在星際文件系統（IPFS）分佈式節點中。在 IPFS 的存儲費用目前由 Matters 平台支付。"
+  },
+  "1EYCdR": {
+    "defaultMessage": "標籤"
   },
   "1PORwh": {
     "defaultMessage": "僅作者本人可見封存作品，",
@@ -256,6 +265,9 @@
   "2kpUZD": {
     "defaultMessage": "提交成功"
   },
+  "2lAxMG": {
+    "defaultMessage": "法幣"
+  },
   "2oxLHg": {
     "defaultMessage": "最多可設置 3 個代表作"
   },
@@ -268,6 +280,9 @@
   "2vpUYs": {
     "defaultMessage": "回覆留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "2w2mhG": {
+    "defaultMessage": "已封鎖。該用戶無法評論你的作品和圍爐，他的評論對你闔上。"
   },
   "32bml8": {
     "defaultMessage": "追蹤",
@@ -301,6 +316,9 @@
   },
   "3w3CC8": {
     "defaultMessage": "關聯 ENS"
+  },
+  "3yQyYm": {
+    "defaultMessage": "最小金額爲 HKD {min}"
   },
   "3yVvk4": {
     "defaultMessage": "請在 Liker Land 繼續操作"
@@ -411,6 +429,9 @@
   "6BXcdo": {
     "defaultMessage": "設定圍爐門檻（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "6CQaLH": {
+    "defaultMessage": "請選擇或輸入金額"
   },
   "6KmKvZ": {
     "defaultMessage": "請再次輸入新交易密碼",
@@ -564,6 +585,9 @@
   "9Fpc9S": {
     "defaultMessage": "漏洞提報"
   },
+  "9HU8vw": {
+    "defaultMessage": "回覆"
+  },
   "9J0iCw": {
     "defaultMessage": "已註銷用戶"
   },
@@ -711,6 +735,9 @@
     "defaultMessage": "收藏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewSubscriberNotice.tsx"
   },
+  "CNMDU5": {
+    "defaultMessage": "字符數須介於 {MIN_USER_NAME_LENGTH} 到 {MAX_USER_NAME_LENGTH} 之間"
+  },
   "CNrhz9": {
     "defaultMessage": "什麼是社區公告欄（Billboard）？",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -785,8 +812,14 @@
   "E+dEI9": {
     "defaultMessage": "有了你的支持，我將能夠蓄積更多能量創作"
   },
+  "E048/V": {
+    "defaultMessage": "存至草稿"
+  },
   "E8W3qa": {
     "defaultMessage": "2-20 個字元"
+  },
+  "EBEwaP": {
+    "defaultMessage": "請填寫有效郵件地址"
   },
   "EQeKnO": {
     "defaultMessage": "邀請管理",
@@ -808,6 +841,9 @@
   },
   "EcglP9": {
     "defaultMessage": "密鑰"
+  },
+  "El+nq2": {
+    "defaultMessage": "輸入字數過短，僅供輸入 {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} 個字元"
   },
   "EmZFry": {
     "defaultMessage": "請在加密錢包內繼續操作",
@@ -866,6 +902,9 @@
     "defaultMessage": "ID 設置後無法修改，確認使用 {id} 作為 Matters ID 嗎？",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
+  "G4bk3r": {
+    "defaultMessage": "自訂金額大於餘額"
+  },
   "GHxtae": {
     "defaultMessage": "數字錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
@@ -912,6 +951,9 @@
   },
   "H0JBH6": {
     "defaultMessage": "登出"
+  },
+  "H5+NAX": {
+    "defaultMessage": "錢包餘額"
   },
   "H8KGyc": {
     "defaultMessage": "進入"
@@ -989,6 +1031,9 @@
     "defaultMessage": "確認使用",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
+  "ISly67": {
+    "defaultMessage": "同意"
+  },
   "IXycMo": {
     "defaultMessage": "重新發送"
   },
@@ -1030,6 +1075,9 @@
     "defaultMessage": "作品已取消精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
+  "Jt7xOX": {
+    "defaultMessage": "更多 ENS 資訊請參考"
+  },
   "Jxr/TM": {
     "defaultMessage": "已滿",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
@@ -1040,6 +1088,9 @@
   },
   "K3r6DQ": {
     "defaultMessage": "刪除"
+  },
+  "KBeSFM": {
+    "defaultMessage": "支持作者（當前 ${donationCount} 次支持）"
   },
   "KIQUHo": {
     "defaultMessage": "登入密碼",
@@ -1130,6 +1181,9 @@
     "defaultMessage": "編輯",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "LaI+XV": {
+    "defaultMessage": "關聯 ENS 名後，可以："
+  },
   "Lb0JsC": {
     "defaultMessage": "你封鎖了該用戶"
   },
@@ -1213,6 +1267,9 @@
   "N2IrpM": {
     "defaultMessage": "確認"
   },
+  "N6PWfU": {
+    "defaultMessage": "忘記密碼"
+  },
   "N8ISx8": {
     "defaultMessage": "Oops！該評論已被原作者刪除"
   },
@@ -1234,6 +1291,9 @@
   "NNF+3f": {
     "defaultMessage": "標籤不存在",
     "description": "TAG_NOT_FOUND"
+  },
+  "NSyuEP": {
+    "defaultMessage": "請輸入驗證碼"
   },
   "NYTGIb": {
     "defaultMessage": "知道了"
@@ -1292,6 +1352,12 @@
   "OsX3KM": {
     "defaultMessage": "評論",
     "description": "src/views/ArticleDetail/index.tsx"
+  },
+  "OwtCWk": {
+    "defaultMessage": "僅供輸入 {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字元"
+  },
+  "OxGicx": {
+    "defaultMessage": "請選擇一種幣別"
   },
   "P+sWM0": {
     "defaultMessage": "教學指南",
@@ -1355,6 +1421,9 @@
   "QfrKA6": {
     "defaultMessage": "上一步",
     "description": "src/components/Forms/PaymentForm"
+  },
+  "QvPc1q": {
+    "defaultMessage": "上傳封面"
   },
   "R410ei": {
     "defaultMessage": "驗證碼錯誤",
@@ -1489,6 +1558,9 @@
     "defaultMessage": "付款將由 Stripe 處理，讓你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
   },
+  "TcTp+J": {
+    "defaultMessage": "圖片上傳成功"
+  },
   "TgU+Mf": {
     "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考 {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -1507,6 +1579,9 @@
     "defaultMessage": "切換網路",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
+  "U4+4Rb": {
+    "defaultMessage": "僅供輸入 {MIN_CIRCLE_NAME_LENGTH}-{MAX_CIRCLE_NAME_LENGTH} 個字元"
+  },
   "U7o9Ba": {
     "defaultMessage": "累計閱讀時數"
   },
@@ -1520,6 +1595,12 @@
   "URljhZ": {
     "defaultMessage": "作品已移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "USOHRK": {
+    "defaultMessage": "修改失敗，請稍候重試"
+  },
+  "UUJzml": {
+    "defaultMessage": "Logbook 2.0 剛剛推出。如果你是 Traveloggers 的所有者，且尚未領取，你可以從新的日誌頁面領取："
   },
   "Ub+AGc": {
     "defaultMessage": "登入"
@@ -1583,6 +1664,9 @@
   "VzzYJk": {
     "defaultMessage": "新建"
   },
+  "W/V6+Y": {
+    "defaultMessage": "收合"
+  },
   "W0sZaX": {
     "defaultMessage": "最近 3 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -1597,6 +1681,9 @@
   "WDZndZ": {
     "defaultMessage": "請在錢包中完成簽名",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
+  },
+  "WFCO2w": {
+    "defaultMessage": "關聯作品"
   },
   "WNxQX0": {
     "defaultMessage": "添加標籤"
@@ -1670,6 +1757,9 @@
   },
   "Xi40U9": {
     "defaultMessage": "操作無法撤銷，確認刪除選集嗎？"
+  },
+  "XlfiKR": {
+    "defaultMessage": "2-20 個字元，僅支持英文小寫字母、數字或下劃線"
   },
   "XmnzQT": {
     "defaultMessage": "一個標籤最多僅可有 4 名協作者共同管理",
@@ -1756,6 +1846,9 @@
   "ZOW313": {
     "defaultMessage": "首次發布作品後有四次正文編輯機會，你也可以歸檔原文重新發布作品。"
   },
+  "ZR1YpJ": {
+    "defaultMessage": "獲得個性化 IPNS 頁連結，如：ipfs.io/ipns/matty.eth"
+  },
   "ZUPQzl": {
     "defaultMessage": "回覆了你",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -1774,6 +1867,9 @@
   "ZjDH42": {
     "defaultMessage": "關於我們"
   },
+  "ZxgUKj": {
+    "defaultMessage": "讚賞我的"
+  },
   "a/YQ1Z": {
     "defaultMessage": "作品已封存",
     "description": "src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
@@ -1788,6 +1884,9 @@
   "aCTmEO": {
     "defaultMessage": "我還沒有錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
+  },
+  "aDIygy": {
+    "defaultMessage": "已超过 {MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 {current} 字"
   },
   "aE5Qq+": {
     "defaultMessage": "重新發送",
@@ -2000,6 +2099,9 @@
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者刪除"
   },
+  "fJB38x": {
+    "defaultMessage": "剩餘 {remainDays} 天"
+  },
   "fK6ptv": {
     "defaultMessage": "送出失敗，請稍後再試"
   },
@@ -2036,6 +2138,9 @@
   "gW/KWu": {
     "defaultMessage": "評論被精選",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "gczcC5": {
+    "defaultMessage": "訂閱"
   },
   "ggS9L7": {
     "defaultMessage": "支付金額無效，請重新輸入",
@@ -2085,6 +2190,9 @@
     "defaultMessage": "追蹤了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
+  "hl9bd4": {
+    "defaultMessage": "封面"
+  },
   "hpIFGj": {
     "defaultMessage": "確認要刪除草稿「{title}」嗎？",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
@@ -2095,6 +2203,12 @@
   "hv1iYZ": {
     "defaultMessage": "讀者數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
+  "i4OBEw": {
+    "defaultMessage": "不能使用「{name}」"
+  },
+  "i7cXnf": {
+    "defaultMessage": "錢包地址以「$」開頭"
   },
   "iEJeQH": {
     "defaultMessage": "設置 Liker ID"
@@ -2133,6 +2247,9 @@
   },
   "izWS4J": {
     "defaultMessage": "取消追蹤"
+  },
+  "j8oldW": {
+    "defaultMessage": "已超過 {maxLength} 字，目前 {current} 字"
   },
   "jBx/nm": {
     "defaultMessage": "電子郵件註冊",
@@ -2183,6 +2300,12 @@
   },
   "k97/u7": {
     "defaultMessage": "添加作品"
+  },
+  "kCPl0r": {
+    "defaultMessage": "關聯"
+  },
+  "kHMa3H": {
+    "defaultMessage": "密碼不一致"
   },
   "kLEWkV": {
     "defaultMessage": "收藏",
@@ -2261,6 +2384,9 @@
   "lsccVJ": {
     "defaultMessage": "正文及作品管理編輯次數已達上限"
   },
+  "m+cdhC": {
+    "defaultMessage": "近期使用"
+  },
   "m/Wg7b": {
     "defaultMessage": "圍爐描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
@@ -2271,6 +2397,9 @@
   "m4KtjK": {
     "defaultMessage": "新訂閱者",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
+  },
+  "m6qWCv": {
+    "defaultMessage": "直接使用 ENS 名在閱讀器（如 Planet）中訂閱文章"
   },
   "mCAIcg": {
     "defaultMessage": "站內閱讀熱門排行",
@@ -2300,6 +2429,9 @@
   "mikY/9": {
     "defaultMessage": "編輯",
     "description": "src/components/Comment/DropdownActions/EditButton.tsx"
+  },
+  "ml3SZN": {
+    "defaultMessage": "至少 8 個字元，支持英文大小寫字母、數字和特殊符號"
   },
   "mp9SBo": {
     "defaultMessage": "圍爐通知",
@@ -2339,6 +2471,9 @@
   "nNB7KU": {
     "defaultMessage": "在",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "nWhqw9": {
+    "defaultMessage": "立即發布"
   },
   "nYrKWp": {
     "defaultMessage": "編輯個人資料"
@@ -2404,6 +2539,9 @@
   "q9oMKE": {
     "defaultMessage": "圍爐名稱"
   },
+  "qBOEDo": {
+    "defaultMessage": "最大金額爲 HKD {max}"
+  },
   "qE8ew4": {
     "defaultMessage": "收藏成功",
     "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
@@ -2411,6 +2549,9 @@
   "qNuRmA": {
     "defaultMessage": "發送臨時密碼",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
+  },
+  "qPVFTS": {
+    "defaultMessage": "將 {ensName} 指向到你的 IPNS 頁面"
   },
   "qPqap+": {
     "defaultMessage": "已封存",
@@ -2427,6 +2568,9 @@
   "qYzBk8": {
     "defaultMessage": "退訂了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qfi4cg": {
+    "defaultMessage": "圖片上傳失敗"
   },
   "qgPR68": {
     "defaultMessage": "設為代表作",
@@ -2485,12 +2629,19 @@
   "rdZi0V": {
     "defaultMessage": "你似乎遨遊到了一個未知空間，請返回重試"
   },
+  "rdxgu4": {
+    "defaultMessage": "請輸入電子信箱",
+    "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
+  },
   "rfz/fN": {
     "defaultMessage": "建議尺寸 1600 x 900 像素"
   },
   "rqS2aA": {
     "defaultMessage": "請登入該帳戶解綁錢包後再試",
     "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
+  },
+  "ruZqtT": {
+    "defaultMessage": "僅供輸入 {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} 個字元"
   },
   "sPgUkN": {
     "defaultMessage": "本月營收",
@@ -2503,6 +2654,9 @@
   "sg3nVO": {
     "defaultMessage": "郵箱已被使用，請前往登入或嘗試另一個",
     "description": "USER_EMAIL_EXISTS"
+  },
+  "sjdyQ0": {
+    "defaultMessage": "邀請已送出"
   },
   "skbUBl": {
     "defaultMessage": "登入",
@@ -2555,11 +2709,17 @@
     "defaultMessage": "我的圍爐",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "u0F4up": {
+    "defaultMessage": "ID 可使用小寫英文、數字及下劃線"
+  },
   "u5aHb4": {
     "defaultMessage": "複製連結"
   },
   "uJkv2X": {
     "defaultMessage": "編輯標籤"
+  },
+  "uM5qZr": {
+    "defaultMessage": "我讚賞的"
   },
   "uQHRvx": {
     "defaultMessage": "請選擇問題類型："
@@ -2821,6 +2981,9 @@
     "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"
   },
+  "yubNcI": {
+    "defaultMessage": "不支持單獨使用標點符號"
+  },
   "z+a1SW": {
     "defaultMessage": "設定",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -2837,6 +3000,9 @@
   "zAK5G+": {
     "defaultMessage": "登入連結已發送至 {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
+  },
+  "zE51j6": {
+    "defaultMessage": "發布失敗"
   },
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",

@@ -95,14 +95,14 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<Translate id="retry" />}
+            text={<FormattedMessage defaultMessage="Retry" id="62nsdy" />}
             disabled={!error}
             onClick={prevStep}
           />
         }
         smUpBtns={
           <Dialog.TextButton
-            text={<Translate id="retry" />}
+            text={<FormattedMessage defaultMessage="Retry" id="62nsdy" />}
             disabled={!error}
             onClick={prevStep}
           />

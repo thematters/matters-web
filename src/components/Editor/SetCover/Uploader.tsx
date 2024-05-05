@@ -1,8 +1,7 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
-import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import {
@@ -10,14 +9,12 @@ import {
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
-import { sleep, translate, validateImage } from '~/common/utils'
+import { sleep, validateImage } from '~/common/utils'
 import {
   Icon,
-  LanguageContext,
   Spinner,
   TextIcon,
   toast,
-  Translate,
   useCreateDraft,
   useDirectImageUpload,
   useMutation,
@@ -53,7 +50,7 @@ const Uploader: React.FC<UploaderProps> = ({
   setSelected,
   refetchAssets,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
     DIRECT_IMAGE_UPLOAD,
@@ -149,7 +146,14 @@ const Uploader: React.FC<UploaderProps> = ({
         throw new Error()
       }
     } catch (e) {
-      toast.error({ message: <Translate id="failureUploadImage" /> })
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="Failed to upload, please try again."
+            id="qfi4cg"
+          />
+        ),
+      })
     }
   }
 
@@ -170,7 +174,7 @@ const Uploader: React.FC<UploaderProps> = ({
           weight="medium"
           spacing={8}
         >
-          <Translate id="uploadCover" />
+          <FormattedMessage defaultMessage="Upload Cover" id="QvPc1q" />
         </TextIcon>
 
         {(loading || uploading) && <Spinner color="greyLight" />}
@@ -188,7 +192,10 @@ const Uploader: React.FC<UploaderProps> = ({
           id={fieldId}
           type="file"
           name="file"
-          aria-label={translate({ id: 'uploadCover', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Upload Cover',
+            id: 'QvPc1q',
+          })}
           accept={acceptTypes}
           multiple={false}
           onChange={handleChange}

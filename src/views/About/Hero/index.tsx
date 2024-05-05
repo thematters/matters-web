@@ -1,7 +1,8 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
 import { ReactComponent as IconButtonLeft } from '@/public/static/images/about/button-left.svg'
@@ -12,11 +13,9 @@ import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/hero-illustration
 import IMAGE_WAVE_1 from '@/public/static/images/about/wave-hero-1.svg'
 import IMAGE_WAVE_2 from '@/public/static/images/about/wave-hero-2.svg'
 import { PATHS } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Button,
   Icon,
-  LanguageContext,
   Media,
   TextIcon,
   Translate,
@@ -27,8 +26,6 @@ import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Hero = () => {
-  const { lang } = useContext(LanguageContext)
-
   const [emblaRef, emblaApi] = useEmblaCarousel({
     dragFree: true,
     draggable: true,
@@ -72,7 +69,9 @@ const Hero = () => {
             <Link href={PATHS.HOME} legacyBehavior>
               <a>
                 <VisuallyHidden>
-                  <span>{translate({ id: 'discover', lang })}</span>
+                  <span>
+                    <FormattedMessage defaultMessage="Discover" id="cE4Hfw" />
+                  </span>
                 </VisuallyHidden>
                 <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
               </a>

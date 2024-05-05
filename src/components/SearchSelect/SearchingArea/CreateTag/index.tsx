@@ -1,16 +1,9 @@
-import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import { TEST_ID } from '~/common/enums'
 import { validateTagName } from '~/common/utils'
-import {
-  Card,
-  Icon,
-  LanguageContext,
-  TextIcon,
-  toast,
-  Translate,
-} from '~/components'
+import { Card, Icon, TextIcon, toast } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -21,10 +14,10 @@ interface CreateTagProps {
 }
 
 const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const create = () => {
-    const msg = validateTagName(tag.content, lang)
+    const msg = validateTagName(tag.content, intl)
     if (msg) {
       toast.error({
         message: msg,
@@ -43,7 +36,7 @@ const CreateTag: React.FC<CreateTagProps> = ({ tag, onClick }) => {
     >
       <section className={styles.addTag}>
         <TextIcon icon={<Icon icon={IconPlus} />} color="green" size={16}>
-          <Translate id="create" />
+          <FormattedMessage defaultMessage="Create" id="VzzYJk" />
         </TextIcon>
 
         <span className={styles.content}>&nbsp;{tag.content}</span>

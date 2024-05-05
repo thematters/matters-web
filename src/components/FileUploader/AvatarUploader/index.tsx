@@ -2,6 +2,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import {
@@ -19,7 +20,6 @@ import {
   LanguageContext,
   SpinnerBlock,
   toast,
-  Translate,
   useDirectImageUpload,
   useMutation,
 } from '~/components'
@@ -128,7 +128,14 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         throw new Error()
       }
     } catch (e) {
-      toast.error({ message: <Translate id="failureUploadImage" /> })
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="Failed to upload, please try again."
+            id="qfi4cg"
+          />
+        ),
+      })
     }
 
     if (onUploadEnd) {

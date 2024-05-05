@@ -2,7 +2,6 @@ import React from 'react'
 
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
-import { TEXT } from '~/common/enums'
 import {
   Button,
   Icon,
@@ -45,7 +44,7 @@ const Buttons = () => (
 
       <li>
         <NavListItem
-          name={TEXT.zh_hant.search}
+          name="Search"
           icon={<Icon icon={IconNavSearch} size={24} />}
           activeIcon={<Icon icon={IconNavSearch} size={24} color="green" />}
           active

@@ -1,11 +1,12 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
 import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
 import { ReactComponent as IconPrice } from '@/public/static/icons/price.svg'
 import { numAbbr, translate } from '~/common/utils'
-import { Icon, LanguageContext, TextIcon, Translate } from '~/components'
+import { Icon, LanguageContext, TextIcon } from '~/components'
 import {
   FollowingFeedRecommendCircleFooterPrivateFragment,
   FollowingFeedRecommendCircleFooterPublicFragment,
@@ -95,7 +96,8 @@ const Footer = ({ circle }: Props) => {
             weight="medium"
             size={14}
           >
-            {price.amount} {price.currency} / <Translate id="month" />
+            {price.amount} {price.currency} /{' '}
+            <FormattedMessage defaultMessage="month" id="Cu3Cty" />
           </TextIcon>
         )}
       </section>

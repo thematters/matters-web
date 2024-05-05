@@ -19,7 +19,6 @@ import {
   ShareDialog,
   ShareDialogProps,
   SpinnerBlock,
-  Translate,
   ViewerContext,
   withDialog,
 } from '~/components'
@@ -144,7 +143,7 @@ const BaseDropdownActions = ({
           textColor="greyDarker"
           textActiveColor="black"
           spacing={[8, 16]}
-          text={<Translate id="subscriptions" />}
+          text={<FormattedMessage defaultMessage="Subscribe" id="gczcC5" />}
           icon={<Icon icon={IconRss} size={20} />}
         />
       )}

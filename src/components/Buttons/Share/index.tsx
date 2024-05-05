@@ -1,14 +1,12 @@
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
-import { translate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
   Icon,
   IconColor,
   IconSize,
-  LanguageContext,
   ShareDialog,
   ShareDialogProps,
 } from '~/components'
@@ -38,7 +36,7 @@ export const ShareButton: React.FC<
   spacing,
   ...props
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const isGreen = bgColor === 'green'
   const isHalfBlack = bgColor === 'halfBlack'
@@ -58,7 +56,10 @@ export const ShareButton: React.FC<
           size={size}
           spacing={buttonSpacing}
           bgActiveColor={buttonBgActiveColor}
-          aria-label={translate({ id: 'share', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Share',
+            id: 'OKhRC6',
+          })}
           aria-haspopup="dialog"
           onClick={openDialog}
           disabled={disabled}
