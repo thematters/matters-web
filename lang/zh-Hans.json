@@ -54,6 +54,9 @@
   "+vVZ/G": {
     "defaultMessage": "綁定"
   },
+  "//QMqf": {
+    "defaultMessage": "请输入标题…"
+  },
   "/3kw6k": {
     "defaultMessage": "尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -105,6 +108,9 @@
   },
   "/wKyxw": {
     "defaultMessage": "发布失败"
+  },
+  "0/gRer": {
+    "defaultMessage": "我正在搬家到 Matters，邀请你一起来"
   },
   "0/iEw/": {
     "defaultMessage": "管理社群"
@@ -158,6 +164,9 @@
   "0zZd0T": {
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+  },
+  "16zJ3o": {
+    "defaultMessage": "自定义摘要…"
   },
   "17K30q": {
     "defaultMessage": "正在通过 Google 翻译..."
@@ -294,6 +303,9 @@
   "39AHJm": {
     "defaultMessage": "注册"
   },
+  "3EeDnu": {
+    "defaultMessage": "贴上 JSFiddle 或 CodePen 链接后，Enter 进行新增"
+  },
   "3KNMbJ": {
     "defaultMessage": "作品"
   },
@@ -328,6 +340,9 @@
   },
   "4118K3": {
     "defaultMessage": "Optimism 是基于以太坊的第二层（Layer2）扩容方案，能提升交易速度，并降低手续费，同时确保安全性，让你更轻松地支持创作者。"
+  },
+  "43qbTk": {
+    "defaultMessage": "{amount} 次赞赏"
   },
   "47FYwb": {
     "defaultMessage": "取消"
@@ -367,6 +382,9 @@
   "5FO4vn": {
     "defaultMessage": "你尚无权限进行该操作"
   },
+  "5Ga0iK": {
+    "defaultMessage": "插入代码"
+  },
   "5IGdjy": {
     "defaultMessage": "目前尚无标签，立即添加提高作品曝光度！"
   },
@@ -390,6 +408,9 @@
   "5iii3x": {
     "defaultMessage": "围炉：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "5j/gIz": {
+    "defaultMessage": "有序列表"
   },
   "5jlQTx": {
     "defaultMessage": "邀请管理"
@@ -466,6 +487,9 @@
   "6lwWCu": {
     "defaultMessage": "其他",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
+  },
+  "6oOCCL": {
+    "defaultMessage": "上传档案"
   },
   "6q0G5e": {
     "defaultMessage": "加入成功",
@@ -683,6 +707,9 @@
     "defaultMessage": "没有更多",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
   },
+  "BDbgCL": {
+    "defaultMessage": "标题 3"
+  },
   "BHFHeY": {
     "defaultMessage": " 在围炉 {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -690,6 +717,12 @@
   "BMGZE2": {
     "defaultMessage": "作品或评论提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "BNupBu": {
+    "defaultMessage": "设置为封面"
+  },
+  "BW89hS": {
+    "defaultMessage": "{upvotes} 点赞"
   },
   "BY343C": {
     "defaultMessage": "修改"
@@ -797,6 +830,9 @@
   "DjIpR6": {
     "defaultMessage": "设置封面"
   },
+  "Dkkmwm": {
+    "defaultMessage": "粗体"
+  },
   "Dq29Hb": {
     "defaultMessage": "你尚未绑定邮箱。基于资金安全考虑，储值需绑定邮箱。",
     "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
@@ -897,6 +933,9 @@
   "Ft76YC": {
     "defaultMessage": "选集已刪除",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
+  "FuYW4i": {
+    "defaultMessage": "成为围炉一员，一起谈天说地"
   },
   "FxrSCh": {
     "defaultMessage": "ID 设置后无法修改，确认使用 {id} 作为 Matters ID 吗？",
@@ -1052,6 +1091,9 @@
     "defaultMessage": "评论数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
+  "JBWS0c": {
+    "defaultMessage": "链接"
+  },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -1070,6 +1112,9 @@
   "JpS59y": {
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "Jr12wo": {
+    "defaultMessage": "插入视频"
   },
   "Js/Fij": {
     "defaultMessage": "作品已取消精选",
@@ -1091,6 +1136,9 @@
   },
   "KBeSFM": {
     "defaultMessage": "支持作者（当前 {donationCount} 次支持）"
+  },
+  "KCM7q4": {
+    "defaultMessage": "{memberCount} 个成员"
   },
   "KIQUHo": {
     "defaultMessage": "登录密码",
@@ -1339,6 +1387,9 @@
   "OKhRC6": {
     "defaultMessage": "分享"
   },
+  "Onjs6P": {
+    "defaultMessage": "无序列表"
+  },
   "Opaa0R": {
     "defaultMessage": "作品被赞赏",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1400,6 +1451,9 @@
     "defaultMessage": "邮箱或密码错误",
     "description": "USER_EMAIL_NOT_FOUND"
   },
+  "Pv2PlK": {
+    "defaultMessage": "插入图片"
+  },
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
@@ -1417,6 +1471,9 @@
   "QZXKhG": {
     "defaultMessage": "设置围炉网址（创建后不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "QfVedX": {
+    "defaultMessage": "插入分隔线"
   },
   "QfrKA6": {
     "defaultMessage": "上一步",
@@ -1464,6 +1521,9 @@
   "Rc4Oij": {
     "defaultMessage": "火闪电"
   },
+  "RnKPVm": {
+    "defaultMessage": "{articleCount} 篇作品"
+  },
   "Ro0CuW": {
     "defaultMessage": "你尚无权限进行该操作",
     "description": "FORBIDDEN"
@@ -1479,6 +1539,9 @@
   "S8PcQf": {
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
+  "SFsQ1E": {
+    "defaultMessage": "查看回应"
   },
   "SHWkv8": {
     "defaultMessage": "为什么先采用 Optimism ?",
@@ -1620,6 +1683,9 @@
   "Up5U7K": {
     "defaultMessage": "屏蔽"
   },
+  "Uq6tfM": {
+    "defaultMessage": "添加说明文字…"
+  },
   "UxAA/V": {
     "defaultMessage": "Optimism 是基于以太坊的第二层（Layer2）扩容方案，能提升交易速度，并降低手续费，同时确保安全性，让你更轻松地支持创作者。",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -1644,6 +1710,9 @@
   },
   "VefaFQ": {
     "defaultMessage": "内容长度超出限制 ({length}/{limit})"
+  },
+  "VmYzLr": {
+    "defaultMessage": "{total} 個成員"
   },
   "Vn5KLr": {
     "defaultMessage": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）",
@@ -1720,6 +1789,9 @@
   },
   "XHcb2q": {
     "defaultMessage": "飞船正在检修中，请稍后看看"
+  },
+  "XOEFDf": {
+    "defaultMessage": "{total} 篇作品"
   },
   "XP1Vto": {
     "defaultMessage": "Oops！该评论已被强制隐藏"
@@ -1867,6 +1939,9 @@
   "ZjDH42": {
     "defaultMessage": "关于我们"
   },
+  "Zqekct": {
+    "defaultMessage": "标题 2"
+  },
   "ZxgUKj": {
     "defaultMessage": "赞赏我的"
   },
@@ -1921,6 +1996,9 @@
   "aqX2Bt": {
     "defaultMessage": "前往首页",
     "description": "src/views/Callback/UI.tsx"
+  },
+  "atzUcB": {
+    "defaultMessage": "引用"
   },
   "awW+lk": {
     "defaultMessage": "进行中…",
@@ -2000,6 +2078,9 @@
   "cufo9X": {
     "defaultMessage": "已达到单日支付上限（5000 HKD）",
     "description": "PAYMENT_REACH_MAXIMUM_LIMIT"
+  },
+  "cv6yHm": {
+    "defaultMessage": "菜单 - 我的"
   },
   "cyR7Kh": {
     "defaultMessage": "返回"
@@ -2102,6 +2183,9 @@
   "fJB38x": {
     "defaultMessage": "剩余 {remainDays} 天"
   },
+  "fJFvPm": {
+    "defaultMessage": "代码"
+  },
   "fK6ptv": {
     "defaultMessage": "送出失败，请稍后再试"
   },
@@ -2114,6 +2198,9 @@
   "fWDtpq": {
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "fnv5rD": {
+    "defaultMessage": "赞赏作品（当前 {total} 次赞赏）"
   },
   "fsB/4p": {
     "defaultMessage": "保存成功"
@@ -2146,6 +2233,9 @@
     "defaultMessage": "支付金额无效，请重新输入",
     "description": "PAYMENT_AMOUNT_INVALID"
   },
+  "gluNT8": {
+    "defaultMessage": "输入链接地址"
+  },
   "gz0EGC": {
     "defaultMessage": "编辑作品已发布"
   },
@@ -2174,6 +2264,9 @@
   "hASeng": {
     "defaultMessage": "已屏蔽用户",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
+  },
+  "hBLCwn": {
+    "defaultMessage": "其他金额"
   },
   "hG2cBH": {
     "defaultMessage": "订阅围炉"
@@ -2360,6 +2453,9 @@
     "defaultMessage": "{q} - Matters 搜索",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
+  "lH8y+X": {
+    "defaultMessage": "删除线"
+  },
   "lI2l2/": {
     "defaultMessage": "验证码不正确，请检查输入内容或重新发送",
     "description": "CODE_INVALID"
@@ -2408,6 +2504,9 @@
   "mJEqC/": {
     "defaultMessage": "跳转至 {href}"
   },
+  "mObpsB": {
+    "defaultMessage": "插入引用"
+  },
   "mPe6DK": {
     "defaultMessage": "订阅了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2436,6 +2535,9 @@
   "mp9SBo": {
     "defaultMessage": "围炉通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
+  "mqa6CF": {
+    "defaultMessage": "上传头像"
   },
   "mu01Gw": {
     "defaultMessage": "验证码已失效，请使用最新验证码或重新发送",
@@ -2488,6 +2590,9 @@
   },
   "o2Na0B": {
     "defaultMessage": "返回全部"
+  },
+  "oGiO//": {
+    "defaultMessage": "插入音频"
   },
   "ohbnFU": {
     "defaultMessage": "社交登录",
@@ -2590,9 +2695,15 @@
     "defaultMessage": "置顶",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "r5pj/5": {
+    "defaultMessage": "拖拽"
+  },
   "r66dXx": {
     "defaultMessage": "在 {circleName} 的广播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "r9LhcI": {
+    "defaultMessage": "贴上 YouTube、Vimeo 或 bilibili 链接后，Enter 进行新增"
   },
   "rADhX5": {
     "defaultMessage": "不可用",
@@ -2724,6 +2835,9 @@
   "uQHRvx": {
     "defaultMessage": "请选择问题类型："
   },
+  "uQrkG8": {
+    "defaultMessage": "三个步骤，立即搬家到 Matters"
+  },
   "uVCg1l": {
     "defaultMessage": "玩转 Matters 实用指南"
   },
@@ -2759,6 +2873,9 @@
   },
   "ux4p3j": {
     "defaultMessage": " 更新于"
+  },
+  "v+hbfO": {
+    "defaultMessage": "固定金额"
   },
   "v4ddaP": {
     "defaultMessage": "立即绑定钱包，与个人帐户连结",
@@ -2941,6 +3058,9 @@
   },
   "yBkdMI": {
     "defaultMessage": "在储值前请先设置交易密码"
+  },
+  "yCTXXb": {
+    "defaultMessage": "请输入正文…"
   },
   "yIlC0R": {
     "defaultMessage": "尚未发布作品",

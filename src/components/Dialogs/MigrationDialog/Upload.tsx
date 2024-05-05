@@ -1,6 +1,6 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
@@ -10,10 +10,8 @@ import {
   UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Dialog,
-  LanguageContext,
   toast,
   Translate,
   useMutation,
@@ -51,7 +49,7 @@ const MigrationDialogUpload = ({
   nextStep,
   closeDialog,
 }: MigrationDialogUploadProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const { zh_hant, zh_hans } = texts
   const acceptTypes = ACCEPTED_UPLOAD_MIGRATION_TYPES.join(',')
@@ -170,11 +168,9 @@ const MigrationDialogUpload = ({
             id={fieldId}
             type="file"
             name="file"
-            aria-label={translate({
-              zh_hant: '上傳檔案',
-              zh_hans: '上传档案',
-              en: 'Upload file',
-              lang,
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Upload file',
+              id: '6oOCCL',
             })}
             accept={acceptTypes}
             multiple

@@ -54,6 +54,9 @@
   "+vVZ/G": {
     "defaultMessage": "綁定"
   },
+  "//QMqf": {
+    "defaultMessage": "請輸入標題…"
+  },
   "/3kw6k": {
     "defaultMessage": "嘗試將內容寫入 IPFS 網絡中，需要一段時間，請耐心等候。若等候時間過久，可透過發佈文章來加速。",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -105,6 +108,9 @@
   },
   "/wKyxw": {
     "defaultMessage": "發布失敗"
+  },
+  "0/gRer": {
+    "defaultMessage": "我正在搬家到 Matters，邀請你一起來"
   },
   "0/iEw/": {
     "defaultMessage": "管理社群"
@@ -158,6 +164,9 @@
   "0zZd0T": {
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
+  },
+  "16zJ3o": {
+    "defaultMessage": "自定義摘要…"
   },
   "17K30q": {
     "defaultMessage": "正在透過 Google 翻譯..."
@@ -294,6 +303,9 @@
   "39AHJm": {
     "defaultMessage": "註冊"
   },
+  "3EeDnu": {
+    "defaultMessage": "貼上 JSFiddle 或 CodePen 連結後，Enter 進行新增"
+  },
   "3KNMbJ": {
     "defaultMessage": "作品"
   },
@@ -328,6 +340,9 @@
   },
   "4118K3": {
     "defaultMessage": "Optimism 是基於以太坊的第二層（Layer2）擴容方案，能提升交易速度，並降低手續費，同時確保安全性，讓你更輕鬆地支持創作者。"
+  },
+  "43qbTk": {
+    "defaultMessage": "{amount} 次讚賞"
   },
   "47FYwb": {
     "defaultMessage": "取消"
@@ -367,6 +382,9 @@
   "5FO4vn": {
     "defaultMessage": "你尚無權限進行該操作"
   },
+  "5Ga0iK": {
+    "defaultMessage": "插入程式碼"
+  },
   "5IGdjy": {
     "defaultMessage": "目前尚無標籤，立即添加提高作品曝光度！"
   },
@@ -390,6 +408,9 @@
   "5iii3x": {
     "defaultMessage": "圍爐：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "5j/gIz": {
+    "defaultMessage": "有序清單"
   },
   "5jlQTx": {
     "defaultMessage": "邀請管理"
@@ -466,6 +487,9 @@
   "6lwWCu": {
     "defaultMessage": "其他",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
+  },
+  "6oOCCL": {
+    "defaultMessage": "上傳檔案"
   },
   "6q0G5e": {
     "defaultMessage": "加入成功",
@@ -683,6 +707,9 @@
     "defaultMessage": "沒有更多",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
   },
+  "BDbgCL": {
+    "defaultMessage": "標題 3"
+  },
   "BHFHeY": {
     "defaultMessage": " 在圍爐 {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
@@ -690,6 +717,12 @@
   "BMGZE2": {
     "defaultMessage": "作品或評論提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "BNupBu": {
+    "defaultMessage": "設置為封面"
+  },
+  "BW89hS": {
+    "defaultMessage": "{upvotes} 點讚"
   },
   "BY343C": {
     "defaultMessage": "修改"
@@ -797,6 +830,9 @@
   "DjIpR6": {
     "defaultMessage": "設置封面"
   },
+  "Dkkmwm": {
+    "defaultMessage": "粗體"
+  },
   "Dq29Hb": {
     "defaultMessage": "你尚未綁定電子郵件。 基於資金安全考慮，儲值需綁定郵箱。",
     "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
@@ -897,6 +933,9 @@
   "Ft76YC": {
     "defaultMessage": "選集已刪除",
     "description": "src/components/CollectionDigest/DropdownActions/DeleteCollection/Dialog.tsx"
+  },
+  "FuYW4i": {
+    "defaultMessage": "成為圍爐一員，一起談天說地"
   },
   "FxrSCh": {
     "defaultMessage": "ID 設置後無法修改，確認使用 {id} 作為 Matters ID 嗎？",
@@ -1052,6 +1091,9 @@
     "defaultMessage": "評論數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
+  "JBWS0c": {
+    "defaultMessage": "連結"
+  },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -1070,6 +1112,9 @@
   "JpS59y": {
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "Jr12wo": {
+    "defaultMessage": "插入影片"
   },
   "Js/Fij": {
     "defaultMessage": "作品已取消精選",
@@ -1091,6 +1136,9 @@
   },
   "KBeSFM": {
     "defaultMessage": "支持作者（當前 ${donationCount} 次支持）"
+  },
+  "KCM7q4": {
+    "defaultMessage": "{memberCount} 個成員"
   },
   "KIQUHo": {
     "defaultMessage": "登入密碼",
@@ -1339,6 +1387,9 @@
   "OKhRC6": {
     "defaultMessage": "分享"
   },
+  "Onjs6P": {
+    "defaultMessage": "無序清單"
+  },
   "Opaa0R": {
     "defaultMessage": "作品被讚賞",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1400,6 +1451,9 @@
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_EMAIL_NOT_FOUND"
   },
+  "Pv2PlK": {
+    "defaultMessage": "插入圖片"
+  },
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
@@ -1417,6 +1471,9 @@
   "QZXKhG": {
     "defaultMessage": "設置圍爐網址（創建後不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "QfVedX": {
+    "defaultMessage": "插入分隔線"
   },
   "QfrKA6": {
     "defaultMessage": "上一步",
@@ -1464,6 +1521,9 @@
   "Rc4Oij": {
     "defaultMessage": "火閃電"
   },
+  "RnKPVm": {
+    "defaultMessage": "{articleCount} 篇作品"
+  },
   "Ro0CuW": {
     "defaultMessage": "你尚無權限進行該操作",
     "description": "FORBIDDEN"
@@ -1479,6 +1539,9 @@
   "S8PcQf": {
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
+  "SFsQ1E": {
+    "defaultMessage": "查看回應"
   },
   "SHWkv8": {
     "defaultMessage": "為什麼採用 Optimism？",
@@ -1620,6 +1683,9 @@
   "Up5U7K": {
     "defaultMessage": "封鎖"
   },
+  "Uq6tfM": {
+    "defaultMessage": "添加說明文字…"
+  },
   "UxAA/V": {
     "defaultMessage": "Optimism 是基於以太坊的第二層（Layer2）擴容方案，能提升交易速度，並降低手續費，同時確保安全性，讓你更輕鬆地支持創作者。",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -1644,6 +1710,9 @@
   },
   "VefaFQ": {
     "defaultMessage": "內容長度超出限制 ({length}/{limit})"
+  },
+  "VmYzLr": {
+    "defaultMessage": "{total} 個成員"
   },
   "Vn5KLr": {
     "defaultMessage": "開啟後，正文將被暫時遮蔽，只顯示標題與摘要，並由讀者選擇是否繼續閱讀（例如含有色情、暴力、血腥等內容）",
@@ -1720,6 +1789,9 @@
   },
   "XHcb2q": {
     "defaultMessage": "飛船正在檢修中，請稍後看看"
+  },
+  "XOEFDf": {
+    "defaultMessage": "{total} 篇作品"
   },
   "XP1Vto": {
     "defaultMessage": "Oops！該評論已被強制隱藏"
@@ -1867,6 +1939,9 @@
   "ZjDH42": {
     "defaultMessage": "關於我們"
   },
+  "Zqekct": {
+    "defaultMessage": "標題 2"
+  },
   "ZxgUKj": {
     "defaultMessage": "讚賞我的"
   },
@@ -1921,6 +1996,9 @@
   "aqX2Bt": {
     "defaultMessage": "前往首頁",
     "description": "src/views/Callback/UI.tsx"
+  },
+  "atzUcB": {
+    "defaultMessage": "引用"
   },
   "awW+lk": {
     "defaultMessage": "進行中…",
@@ -2000,6 +2078,9 @@
   "cufo9X": {
     "defaultMessage": "已達到單日支付上限（5000 HKD）",
     "description": "PAYMENT_REACH_MAXIMUM_LIMIT"
+  },
+  "cv6yHm": {
+    "defaultMessage": "菜單 - 我的"
   },
   "cyR7Kh": {
     "defaultMessage": "返回"
@@ -2102,6 +2183,9 @@
   "fJB38x": {
     "defaultMessage": "剩餘 {remainDays} 天"
   },
+  "fJFvPm": {
+    "defaultMessage": "程式碼"
+  },
   "fK6ptv": {
     "defaultMessage": "送出失敗，請稍後再試"
   },
@@ -2114,6 +2198,9 @@
   "fWDtpq": {
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "fnv5rD": {
+    "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"
   },
   "fsB/4p": {
     "defaultMessage": "儲存成功"
@@ -2146,6 +2233,9 @@
     "defaultMessage": "支付金額無效，請重新輸入",
     "description": "PAYMENT_AMOUNT_INVALID"
   },
+  "gluNT8": {
+    "defaultMessage": "輸入連結地址"
+  },
   "gz0EGC": {
     "defaultMessage": "編輯作品已發佈"
   },
@@ -2174,6 +2264,9 @@
   "hASeng": {
     "defaultMessage": "已封鎖用戶",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
+  },
+  "hBLCwn": {
+    "defaultMessage": "其他金額"
   },
   "hG2cBH": {
     "defaultMessage": "訂閱圍爐"
@@ -2360,6 +2453,9 @@
     "defaultMessage": "{q} - Matters 搜尋",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
+  "lH8y+X": {
+    "defaultMessage": "刪除線"
+  },
   "lI2l2/": {
     "defaultMessage": "驗證碼不正確，請檢查輸入內容或重新發送",
     "description": "CODE_INVALID"
@@ -2408,6 +2504,9 @@
   "mJEqC/": {
     "defaultMessage": "跳轉至 {href}"
   },
+  "mObpsB": {
+    "defaultMessage": "插入引用"
+  },
   "mPe6DK": {
     "defaultMessage": "訂閱了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2436,6 +2535,9 @@
   "mp9SBo": {
     "defaultMessage": "圍爐通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
+  },
+  "mqa6CF": {
+    "defaultMessage": "上傳頭像"
   },
   "mu01Gw": {
     "defaultMessage": "驗證碼已失效，請使用最新驗證碼或重新發送",
@@ -2488,6 +2590,9 @@
   },
   "o2Na0B": {
     "defaultMessage": "返回全部"
+  },
+  "oGiO//": {
+    "defaultMessage": "插入音訊"
   },
   "ohbnFU": {
     "defaultMessage": "社交登入",
@@ -2590,9 +2695,15 @@
     "defaultMessage": "置頂",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
+  "r5pj/5": {
+    "defaultMessage": "拖拽"
+  },
   "r66dXx": {
     "defaultMessage": "在 {circleName} 的廣播留言中提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
+  },
+  "r9LhcI": {
+    "defaultMessage": "貼上 YouTube、Vimeo 或 bilibili 連結後，Enter 進行新增"
   },
   "rADhX5": {
     "defaultMessage": "不可用",
@@ -2724,6 +2835,9 @@
   "uQHRvx": {
     "defaultMessage": "請選擇問題類型："
   },
+  "uQrkG8": {
+    "defaultMessage": "三個步驟，立即搬家到 Matters"
+  },
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"
   },
@@ -2759,6 +2873,9 @@
   },
   "ux4p3j": {
     "defaultMessage": " 更新於"
+  },
+  "v+hbfO": {
+    "defaultMessage": "固定金額"
   },
   "v4ddaP": {
     "defaultMessage": "立即綁定錢包，與個人帳戶連結",
@@ -2941,6 +3058,9 @@
   },
   "yBkdMI": {
     "defaultMessage": "在儲值前請先設置交易密碼"
+  },
+  "yCTXXb": {
+    "defaultMessage": "請輸入正文…"
   },
   "yIlC0R": {
     "defaultMessage": "尚未發布作品",

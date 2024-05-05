@@ -1,12 +1,11 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
 import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
 import { ReactComponent as IconPrice } from '@/public/static/icons/price.svg'
-import { numAbbr, translate } from '~/common/utils'
-import { Icon, LanguageContext, TextIcon } from '~/components'
+import { numAbbr } from '~/common/utils'
+import { Icon, TextIcon } from '~/components'
 import {
   FollowingFeedRecommendCircleFooterPrivateFragment,
   FollowingFeedRecommendCircleFooterPublicFragment,
@@ -51,7 +50,7 @@ const fragments = {
 }
 
 const Footer = ({ circle }: Props) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const { members, works, prices } = circle
 
   const price = prices ? prices[0] : null
@@ -64,12 +63,13 @@ const Footer = ({ circle }: Props) => {
           color="grey"
           weight="medium"
           size={14}
-          aira-label={translate({
-            zh_hant: `${members.totalCount} 個成員`,
-            zh_hans: `${members.totalCount} 个成员`,
-            en: `${members.totalCount} members`,
-            lang,
-          })}
+          aira-label={intl.formatMessage(
+            {
+              defaultMessage: `{total} members`,
+              id: 'VmYzLr',
+            },
+            { total: members.totalCount }
+          )}
         >
           {numAbbr(members.totalCount)}
         </TextIcon>
@@ -79,12 +79,13 @@ const Footer = ({ circle }: Props) => {
           color="grey"
           weight="medium"
           size={14}
-          aira-label={translate({
-            zh_hant: `${works.totalCount} 篇作品`,
-            zh_hans: `${works.totalCount} 篇作品`,
-            en: `${works.totalCount} articles`,
-            lang,
-          })}
+          aira-label={intl.formatMessage(
+            {
+              defaultMessage: `{total} articles`,
+              id: 'XOEFDf',
+            },
+            { total: works.totalCount }
+          )}
         >
           {numAbbr(works.totalCount)}
         </TextIcon>

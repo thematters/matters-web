@@ -1,8 +1,8 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
-import { useContext, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import {
@@ -10,14 +10,13 @@ import {
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
-import { translate, validateImage } from '~/common/utils'
+import { validateImage } from '~/common/utils'
 import {
   Avatar,
   AvatarProps,
   CircleAvatar,
   CircleAvatarProps,
   Icon,
-  LanguageContext,
   SpinnerBlock,
   toast,
   useDirectImageUpload,
@@ -55,7 +54,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   ...avatarProps
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
     DIRECT_IMAGE_UPLOAD,
@@ -168,11 +167,9 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
           id={fieldId}
           type="file"
           name="file"
-          aria-label={translate({
-            zh_hant: '上傳頭像',
-            zh_hans: '上传头像',
-            en: 'Upload avatar',
-            lang,
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Upload avatar',
+            id: 'mqa6CF',
           })}
           accept={acceptTypes}
           multiple={false}

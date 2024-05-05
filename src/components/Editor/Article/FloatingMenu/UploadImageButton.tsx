@@ -1,13 +1,13 @@
 import { Editor } from '@matters/matters-editor'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useContext, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconEditorImage } from '@/public/static/icons/editor-image.svg'
 import { ACCEPTED_UPLOAD_IMAGE_TYPES, ASSET_TYPE } from '~/common/enums'
-import { getFileType, translate, validateImage } from '~/common/utils'
-import { LanguageContext, Spinner, toast, withIcon } from '~/components'
+import { getFileType, validateImage } from '~/common/utils'
+import { Spinner, toast, withIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -28,7 +28,7 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
   editor,
   upload,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const [uploading, setUploading] = useState(false)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
@@ -88,11 +88,9 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
     <label
       className={labelClasses}
       htmlFor={fieldId}
-      title={translate({
-        zh_hant: '插入圖片',
-        zh_hans: '插入图片',
-        en: 'Insert image',
-        lang,
+      title={intl.formatMessage({
+        defaultMessage: 'Insert image',
+        id: 'Pv2PlK',
       })}
     >
       {!uploading && withIcon(IconEditorImage)({ size: 32 })}
@@ -103,11 +101,9 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
           id={fieldId}
           type="file"
           name="file"
-          aria-label={translate({
-            zh_hant: '插入圖片',
-            zh_hans: '插入图片',
-            en: 'Insert image',
-            lang,
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Insert image',
+            id: 'Pv2PlK',
           })}
           disabled={uploading}
           accept={acceptTypes}
