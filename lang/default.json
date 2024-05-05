@@ -1137,9 +1137,6 @@
   "KBeSFM": {
     "defaultMessage": "Support author (current {donationCount} supports)"
   },
-  "KCM7q4": {
-    "defaultMessage": "{memberCount} members"
-  },
   "KIQUHo": {
     "defaultMessage": "Login password",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"

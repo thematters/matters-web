@@ -1137,9 +1137,6 @@
   "KBeSFM": {
     "defaultMessage": "支持作者（当前 {donationCount} 次支持）"
   },
-  "KCM7q4": {
-    "defaultMessage": "{memberCount} 个成员"
-  },
   "KIQUHo": {
     "defaultMessage": "登录密码",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"

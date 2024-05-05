@@ -78,11 +78,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
                   size={16}
                   spacing={8}
                 >
-                  <Translate
-                    zh_hant="Logbook 2.0 Bookcase"
-                    zh_hans="Logbook 2.0 Bookcase"
-                    en="Logbook 2.0 Bookcase"
-                  />
+                  Logbook 2.0 Bookcase
                 </TextIcon>
               }
             />

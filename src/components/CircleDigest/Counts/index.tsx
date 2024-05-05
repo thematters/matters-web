@@ -43,10 +43,10 @@ const Counts = ({ circle }: CountsProps) => {
         size={14}
         aria-label={intl.formatMessage(
           {
-            defaultMessage: `{memberCount} members`,
-            id: 'KCM7q4',
+            defaultMessage: `{total} members`,
+            id: 'VmYzLr',
           },
-          { memberCount }
+          { total: memberCount }
         )}
         data-test-id={TEST_ID.DIGEST_CIRCLE_MEMBER_COUNT}
       >

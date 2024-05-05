@@ -1135,10 +1135,7 @@
     "defaultMessage": "刪除"
   },
   "KBeSFM": {
-    "defaultMessage": "支持作者（當前 ${donationCount} 次支持）"
-  },
-  "KCM7q4": {
-    "defaultMessage": "{memberCount} 個成員"
+    "defaultMessage": "支持作者（當前 {donationCount} 次支持）"
   },
   "KIQUHo": {
     "defaultMessage": "登入密碼",
