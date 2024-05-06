@@ -23,7 +23,6 @@
 
   & .donationButton {
     margin-top: var(--sp24);
-    background: var(--color-white);
     border-radius: 5rem;
   }
 
