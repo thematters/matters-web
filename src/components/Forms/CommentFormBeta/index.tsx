@@ -127,14 +127,14 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
               type: 'add',
               comment: mutationResult.data?.putComment,
             })
-
-            updateArticlePublic({
-              cache,
-              shortHash,
-              routerLang,
-              type: 'addComment',
-            })
           }
+
+          updateArticlePublic({
+            cache,
+            shortHash,
+            routerLang,
+            type: 'addComment',
+          })
         },
       })
 

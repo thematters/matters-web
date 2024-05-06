@@ -53,13 +53,15 @@ export const updateArticlePublic = ({
     if (data?.article?.__typename !== 'Article') {
       return
     }
-
-    let commentCount = data.article.comments.totalCount
+    let commentCount = data.article.commentCount
+    let totalCount = data.article.comments.totalCount
     switch (type) {
       case 'addComment':
+        totalCount += 1
         commentCount += 1
         break
       case 'deleteComment':
+        totalCount -= 1
         commentCount -= 1
         break
     }
@@ -70,9 +72,10 @@ export const updateArticlePublic = ({
       data: {
         article: {
           ...data.article,
+          commentCount: commentCount,
           comments: {
             ...data.article.comments,
-            totalCount: commentCount,
+            totalCount: totalCount,
           },
         },
       },
