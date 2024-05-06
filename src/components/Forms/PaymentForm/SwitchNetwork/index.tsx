@@ -9,6 +9,7 @@ import {
   Dialog,
   Icon,
   LanguageContext,
+  SpinnerBlock,
   TextIcon,
   useTargetNetwork,
 } from '~/components'
@@ -27,6 +28,7 @@ const SwitchNetwork: React.FC<SwitchNetworkProps> = ({ submitCallback }) => {
     useTargetNetwork(targetNetork)
 
   const [showNote, setShowNote] = useState(false)
+  const [showLoading, setShowLoading] = useState(true)
 
   const toggleNote = () => {
     setShowNote(!showNote)
@@ -36,11 +38,16 @@ const SwitchNetwork: React.FC<SwitchNetworkProps> = ({ submitCallback }) => {
     if (!isUnsupportedNetwork) {
       submitCallback()
     }
+    setShowLoading(false)
   }, [isUnsupportedNetwork])
 
   const noteClasses = classNames({
     [styles.note]: true,
   })
+
+  if (showLoading) {
+    return <SpinnerBlock />
+  }
 
   return (
     <section className={styles.container}>

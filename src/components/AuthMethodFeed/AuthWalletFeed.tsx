@@ -8,7 +8,7 @@ import { ReactComponent as IconWalletConnect } from '@/public/static/icons/24px/
 import { EXTERNAL_LINKS, GUIDE_LINKS } from '~/common/enums'
 import { PATHS } from '~/common/enums'
 import { analytics, WalletType } from '~/common/utils'
-import { Icon, LanguageContext, Spinner } from '~/components'
+import { Icon, LanguageContext, Spinner, SpinnerBlock } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -33,6 +33,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
   const { connectors, connect, pendingConnector } = useConnect()
   const { address: account, isConnecting } = useAccount()
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
+  const [showLoading, setShowLoading] = useState(true)
 
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
   const walletConnectConnector = connectors.find(
@@ -45,15 +46,23 @@ export const AuthWalletFeed: React.FC<Props> = ({
 
   // auto switch to next step if account is connected
   useEffect(() => {
-    if (!account) return
+    if (!account) {
+      setShowLoading(false)
+      return
+    }
 
     submitCallback(walletType)
+    setShowLoading(false)
   }, [account])
 
   const itemClasses = classNames({
     [styles.item]: true,
     [styles.supportItem]: isInSupport,
   })
+
+  if (showLoading && isInSupport) {
+    return <SpinnerBlock />
+  }
 
   return (
     <>
