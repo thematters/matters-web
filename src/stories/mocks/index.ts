@@ -118,6 +118,7 @@ export const MOCK_ARTILCE = {
   id: 'QXJ0aWNsZTox', // Article:1
   title: '中國四川：挑戰世界最危險的公路之一 川藏公路絕美風光',
   slug: 'slug',
+  shortHash: 'r5ade0on7x1g',
   mediaHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   dataHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   articleState: 'active' as any,

@@ -31,7 +31,7 @@ export type FormSelectProps = {
   name: string
   title?: React.ReactNode
   options: FormSelectOption[]
-  size?: 'md' | 'sm'
+  size?: 14 | 16
   onChange: (option: FormSelectOption) => void
 } & Omit<FieldProps, 'fieldMsgId'>
 

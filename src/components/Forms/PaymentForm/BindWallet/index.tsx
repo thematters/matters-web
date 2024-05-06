@@ -159,9 +159,9 @@ const BindWallet: React.FC<Props> = ({ currency, callback }) => {
               bgColor="green"
               onClick={gotoSign}
               textWeight="normal"
-              textSize="md"
+              textSize={16}
               text={
-                <TextIcon icon={<Icon icon={IconOpenWallet} size="mdS" />}>
+                <TextIcon icon={<Icon icon={IconOpenWallet} size={20} />}>
                   <FormattedMessage
                     defaultMessage="Go to sign"
                     id="P3y9Bo"
@@ -234,7 +234,7 @@ const BindWallet: React.FC<Props> = ({ currency, callback }) => {
             />
           </section>
           <section className={styles.resultIcon}>
-            <Icon icon={IconCircleCheck} size="xlM" color="green" />
+            <Icon icon={IconCircleCheck} size={40} color="green" />
           </section>
           <section className={styles.resultInfo}>
             <FormattedMessage
@@ -264,7 +264,7 @@ const BindWallet: React.FC<Props> = ({ currency, callback }) => {
             />
           </section>
           <section className={styles.resultIcon}>
-            <Icon icon={IconCircleTimes} size="xlM" color="red" />
+            <Icon icon={IconCircleTimes} size={40} color="red" />
           </section>
           <section className={styles.resultInfo}>
             <FormattedMessage

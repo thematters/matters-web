@@ -38,10 +38,10 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
       <section className={styles.container}>
         <section className={styles.left}>
           <TextIcon
-            icon={<Icon icon={IconAvatarEmpty} size="md" />}
+            icon={<Icon icon={IconAvatarEmpty} size={24} />}
             color="greyDark"
-            size="mdS"
-            spacing="xtight"
+            size={15}
+            spacing={8}
           >
             <FormattedMessage
               defaultMessage="This tag has no manager currently"
@@ -54,7 +54,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
           <TagAdoptionDialog id={tag.id}>
             {({ openDialog }) => (
               <Button
-                spacing={['xtight', 'tight']}
+                spacing={[8, 12]}
                 textColor="green"
                 textActiveColor="white"
                 bgActiveColor="green"
@@ -62,7 +62,7 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
                 onClick={viewer.isFrozen ? forbid : openDialog}
                 aria-haspopup="dialog"
               >
-                <TextIcon weight="md" size="xs">
+                <TextIcon weight="medium" size={12}>
                   <FormattedMessage
                     defaultMessage="Maintain Tag"
                     id="KMcrz8"
@@ -82,12 +82,12 @@ const Owner = ({ tag }: { tag: TagFragmentFragment }) => {
       <section className={styles.left}>
         <UserDigest.Mini
           user={tag.owner}
-          avatarSize="md"
+          avatarSize={24}
           hasAvatar
           hasDisplayName
         />
 
-        <TextIcon size="sm" color="greyDark">
+        <TextIcon size={14} color="greyDark">
           <FormattedMessage
             defaultMessage="Maintain"
             id="ANA7sk"

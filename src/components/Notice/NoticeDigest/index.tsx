@@ -13,6 +13,8 @@ import {
   CircleNewUserNoticeFragment,
   CommentMentionedYouNoticeFragment,
   CommentNewReplyNoticeFragment,
+  NoticeActorAvatarUserFragment,
+  NoticeHeadActorsUserFragment,
   PaymentReceivedDonationNoticeFragment,
   UserNewFollowerNoticeFragment,
 } from '~/gql/graphql'
@@ -39,7 +41,7 @@ type NoticeDigestProps = {
     | CommentNewReplyNoticeFragment
     | PaymentReceivedDonationNoticeFragment
     | UserNewFollowerNoticeFragment
-  actors?: any[]
+  actors?: (NoticeActorAvatarUserFragment & NoticeHeadActorsUserFragment)[]
   action: string | ReactElement
   secondAction?: string | ReactElement
   title?: string | ReactElement
@@ -71,7 +73,7 @@ const NoticeDigest = ({
       {...(testId ? { ['data-test-id']: testId } : {})}
     >
       <section className={styles.header}>
-        <NoticeMultiActors actors={actors} size="lg" />
+        <NoticeMultiActors actors={actors} size={32} />
         {!isMultiActors && (
           <section className={styles.singleActorInfo}>
             <NoticeActorsNameAndTitle

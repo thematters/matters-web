@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, TextIcon, toast, Translate } from '~/components'
@@ -13,7 +14,7 @@ const Toasts = () => (
 
     <section className={styles.buttons}>
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgColor="red"
         onClick={() => {
           toast.error({
@@ -30,11 +31,13 @@ const Toasts = () => (
       </Button>
 
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgColor="greenLighter"
         onClick={() => {
           toast.success({
-            message: <Translate id="successUploadImage" />,
+            message: (
+              <FormattedMessage defaultMessage="Image uploaded" id="TcTp+J" />
+            ),
           })
         }}
       >
@@ -42,7 +45,7 @@ const Toasts = () => (
       </Button>
 
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgColor="greenLighter"
         onClick={() => {
           toast.success({

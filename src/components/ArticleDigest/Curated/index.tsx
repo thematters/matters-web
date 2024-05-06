@@ -26,7 +26,7 @@ const fragments = {
       articleState: state
       title
       slug
-      mediaHash
+      shortHash
       cover
       author {
         id
@@ -81,10 +81,10 @@ export const ArticleDigestCurated = ({
       <section className={styles.author}>
         <UserDigest.Mini
           user={article.author}
-          avatarSize="sm"
-          textSize="smS"
+          avatarSize={20}
+          textSize={13}
           nameColor="black"
-          spacing="xxtight"
+          spacing={4}
           hasAvatar
           hasDisplayName
           onClick={onClickAuthor}
@@ -94,7 +94,7 @@ export const ArticleDigestCurated = ({
       <section className={styles.title}>
         <ArticleDigestTitle
           article={article}
-          textSize="md"
+          textSize={16}
           lineClamp={titleLineClamp}
         />
       </section>

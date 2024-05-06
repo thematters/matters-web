@@ -8,12 +8,7 @@ import {
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
 } from '~/common/enums'
-import {
-  isMediaHashPossiblyValid,
-  normalizeTag,
-  toGlobalId,
-  toPath,
-} from '~/common/utils'
+import { normalizeTag, toPath } from '~/common/utils'
 import {
   ActiveCommentEditorProvider,
   BackToHomeButton,
@@ -46,17 +41,15 @@ import {
 } from '~/gql/graphql'
 
 import { AuthorSidebar } from './AuthorSidebar'
-import { CommentDrawer, CommentDrawerStep } from './CommentDrawer'
+import type { CommentDrawerStep } from './CommentDrawer'
 import { CommentsDialog } from './Comments/CommentsDialog'
 import { Placeholder as CommentsPlaceholder } from './Comments/Placeholder'
 import Content from './Content'
 import CustomizedSummary from './CustomizedSummary'
 import {
   ARTICLE_AVAILABLE_TRANSLATIONS,
-  ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID,
   ARTICLE_DETAIL_PRIVATE,
   ARTICLE_DETAIL_PUBLIC,
-  ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
   ARTICLE_TRANSLATION,
 } from './gql'
 import License from './License'
@@ -64,7 +57,6 @@ import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
 import StickyTopBanner from './StickyTopBanner'
 import styles from './styles.module.css'
-import { SupportDrawer } from './Support/SupportDrawer'
 import TagList from './TagList'
 import DesktopToolbar from './Toolbar/DesktopToolbar'
 import FixedToolbar from './Toolbar/FixedToolbar'
@@ -79,21 +71,30 @@ const DynamicCollection = dynamic(() => import('./Collection'), {
   ssr: false,
   loading: () => <SpinnerBlock />,
 })
-
 const DynamicComments = dynamic(() => import('./Comments'), {
   ssr: false,
   loading: () => <CommentsPlaceholder />,
 })
-
 const DynamicCircleWall = dynamic(() => import('./Wall/Circle'), {
   ssr: true, // enable for first screen
   loading: () => <SpinnerBlock />,
 })
-
 const DynamicSensitiveWall = dynamic(() => import('./Wall/Sensitive'), {
   ssr: true, // enable for first screen
   loading: () => <SpinnerBlock />,
 })
+const DynamicCommentDrawer = dynamic(
+  () => import('./CommentDrawer').then((mod) => mod.CommentDrawer),
+  {
+    ssr: false,
+  }
+)
+const DynamicSupportDrawer = dynamic(
+  () => import('./Support/SupportDrawer').then((mod) => mod.SupportDrawer),
+  {
+    ssr: false,
+  }
+)
 
 const BaseArticleDetail = ({
   article,
@@ -116,8 +117,7 @@ const BaseArticleDetail = ({
     parentId = fragment.split('-')[0]
   }
 
-  const { getQuery, routerLang } = useRoute()
-  const mediaHash = getQuery('mediaHash')
+  const { routerLang } = useRoute()
   const viewer = useContext(ViewerContext)
 
   const features = useFeatures()
@@ -193,7 +193,9 @@ const BaseArticleDetail = ({
     useLazyQuery<ArticleTranslationQuery>(ARTICLE_TRANSLATION)
 
   const translate = () => {
-    getTranslation({ variables: { mediaHash, language: preferredLang } })
+    getTranslation({
+      variables: { shortHash: article.shortHash, language: preferredLang },
+    })
 
     toast.success({
       message: (
@@ -312,7 +314,7 @@ const BaseArticleDetail = ({
       <StickyTopBanner type="inactive" article={article} />
 
       <Media greaterThan="sm">
-        <CommentDrawer
+        <DynamicCommentDrawer
           isOpen={isOpenComment}
           onClose={toggleCommentDrawer}
           step={commentDrawerStep}
@@ -321,7 +323,7 @@ const BaseArticleDetail = ({
           switchToCommentList={() => setCommentDrawerStep('commentList')}
         />
 
-        <SupportDrawer
+        <DynamicSupportDrawer
           isOpen={isOpenDonationDrawer}
           onClose={toggleDonationDrawer}
           article={article}
@@ -376,6 +378,7 @@ const BaseArticleDetail = ({
             toggleDonationDrawer={toggleDonationDrawer}
           />
         )}
+
         <Media greaterThanOrEqual="lg">
           <div ref={desktopToolbarRef}>
             <DesktopToolbar
@@ -473,57 +476,27 @@ const ArticleDetail = ({
 }: {
   includeTranslation: boolean
 }) => {
-  const { getQuery, router, routerLang } = useRoute()
-  const mediaHash = getQuery('mediaHash')
+  const { getQuery, routerLang } = useRoute()
   const shortHash = getQuery('shortHash')
-  const articleId =
-    (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
 
   /**
    * fetch public data
    */
-  const isQueryByHash = !!(
-    (shortHash || (mediaHash && isMediaHashPossiblyValid(mediaHash)))
-    // && !articleId
-  )
-
-  // - `/a/:shortHash`
-  // backward compatible with:
-  // - `/:username:/:articleId:-:slug:-:mediaHash`
-  // - `/:username:/:articleId:`
-  // - `/:username:/:slug:-:mediaHash:`
   const resultByHash = usePublicQuery<ArticleDetailPublicQuery>(
     ARTICLE_DETAIL_PUBLIC,
     {
       variables: {
-        mediaHash,
         shortHash,
         language: routerLang || UserLanguage.ZhHant,
         includeTranslation,
       },
-      skip: !isQueryByHash,
-    }
-  )
-  const resultByNodeId = usePublicQuery<ArticleDetailPublicQuery>(
-    ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
-    {
-      variables: {
-        id: toGlobalId({ type: 'Article', id: articleId }),
-        language: routerLang || UserLanguage.ZhHant,
-        includeTranslation,
-      },
-      skip: isQueryByHash,
     }
   )
 
-  const {
-    data,
-    client,
-    refetch: refetchPublic,
-  } = resultByHash.data ? resultByHash : resultByNodeId
-  const loading = resultByHash.loading || resultByNodeId.loading
-  const error = resultByHash.error || resultByNodeId.error
+  const { data, client, refetch: refetchPublic } = resultByHash
+  const loading = resultByHash.loading
+  const error = resultByHash.error
 
   const article = data?.article
   const authorId = article?.author?.id
@@ -559,48 +532,12 @@ const ArticleDetail = ({
       await refetchPublic()
       await loadPrivate()
     })()
-  }, [mediaHash, shortHash])
+  }, [shortHash])
 
-  // fetch private data when mediaHash of public data is changed
+  // fetch private data when shortHash of public data is changed
   useEffect(() => {
     loadPrivate()
-  }, [article?.mediaHash, viewer.id])
-
-  // shadow replace URL
-  const latestHash = article?.drafts?.filter(
-    (d) => d.publishState === 'published'
-  )[0]?.mediaHash
-  useEffect(() => {
-    if (shortHash || !article || !latestHash) {
-      return // don't rewrite URL for shortHash
-    }
-
-    const newPath = toPath({
-      page: 'articleDetail',
-      article: { ...article, mediaHash: latestHash, shortHash },
-    })
-
-    // parse current URL: router.asPath
-    const u = new URL(
-      `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}`
-    )
-    const n = new URL(
-      `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${newPath.href}`
-    )
-
-    // hide all utm_ tracking code parameters
-    // copy all others
-    const rems = [
-      ...u.searchParams, // uses .entries()
-      ...n.searchParams,
-    ].filter(([k, v]) => !k?.startsWith('utm_'))
-    const nsearch = rems.length > 0 ? `?${new URLSearchParams(rems)}` : ''
-    const nhref = `${n.pathname}${nsearch}${n.hash || u.hash}`
-
-    if (nhref !== router.asPath || routerLang) {
-      router.replace(nhref, undefined, { shallow: true, locale: false })
-    }
-  }, [latestHash])
+  }, [article?.shortHash, viewer.id])
 
   /**
    * Render:Loading
@@ -675,30 +612,15 @@ const ArticleDetail = ({
 }
 
 const ArticleDetailOuter = () => {
-  const { getQuery, router, routerLang } = useRoute()
-  const mediaHash = getQuery('mediaHash')
+  const { getQuery, routerLang } = useRoute()
   const shortHash = getQuery('shortHash')
-  const articleId =
-    (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
-
-  const isQueryByHash = !!(
-    (mediaHash && isMediaHashPossiblyValid(mediaHash))
-    // && !articleId
-  )
 
   const resultByHash = usePublicQuery<ArticleAvailableTranslationsQuery>(
     ARTICLE_AVAILABLE_TRANSLATIONS,
-    { variables: { mediaHash, shortHash }, skip: !isQueryByHash }
+    { variables: { shortHash } }
   )
-  const resultByNodeId = usePublicQuery<ArticleAvailableTranslationsQuery>(
-    ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID,
-    {
-      variables: { id: toGlobalId({ type: 'Article', id: articleId }) },
-      skip: isQueryByHash,
-    }
-  )
-  const { data } = resultByHash.data ? resultByHash : resultByNodeId
-  const loading = resultByHash.loading || resultByNodeId.loading
+  const { data } = resultByHash
+  const loading = resultByHash.loading
   const includeTranslation =
     !!routerLang &&
     (data?.article?.availableTranslations || []).includes(routerLang)

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
@@ -9,7 +9,6 @@ import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
   Dialog,
   Form,
-  LanguageContext,
   SpinnerBlock,
   TextIcon,
   Translate,
@@ -49,8 +48,6 @@ const Confirm: React.FC<FormProps> = ({
   closeDialog,
 }) => {
   const intl = useIntl()
-  const { lang } = useContext(LanguageContext)
-
   const formId = 'subscirbe-circle-form'
 
   const [subscribeCircle] = useMutation<SubscribeCircleMutation>(
@@ -75,7 +72,7 @@ const Confirm: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ password }) =>
       _pickBy({
-        password: validatePaymentPassword(password, lang),
+        password: validatePaymentPassword(password, intl),
       }),
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
@@ -143,16 +140,16 @@ const Confirm: React.FC<FormProps> = ({
 
         <section className={styles.currentCard}>
           <TextIcon
-            icon={withIcon(IconStripeCard)({ size: 'md' })}
+            icon={withIcon(IconStripeCard)({ size: 24 })}
             color="grey"
-            size="xs"
-            spacing="tight"
+            size={12}
+            spacing={12}
           >
             •••• •••• •••• {cardLast4}
           </TextIcon>
 
           <button type="button" onClick={switchToCardPayment}>
-            <TextIcon color="green" size="xs">
+            <TextIcon color="green" size={12}>
               <Translate zh_hant="更改" zh_hans="更改" />
             </TextIcon>
           </button>
@@ -166,7 +163,9 @@ const Confirm: React.FC<FormProps> = ({
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<Translate id="forgetPassword" />}
+            text={
+              <FormattedMessage defaultMessage="Forget Password" id="N6PWfU" />
+            }
             color="greyDarker"
             onClick={switchToResetPassword}
           />
@@ -179,7 +178,12 @@ const Confirm: React.FC<FormProps> = ({
               onClick={closeDialog}
             />
             <Dialog.TextButton
-              text={<Translate id="forgetPassword" />}
+              text={
+                <FormattedMessage
+                  defaultMessage="Forget Password"
+                  id="N6PWfU"
+                />
+              }
               color="greyDarker"
               onClick={switchToResetPassword}
             />

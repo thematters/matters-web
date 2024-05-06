@@ -64,7 +64,7 @@ const BaseDonationDialog = ({ children, article }: SupportDialogProps) => {
                 defaultMessage: 'Close',
                 id: 'rbrahO',
               })}
-              text={<Icon icon={IconTimes} size="md" />}
+              text={<Icon icon={IconTimes} size={24} />}
               color="black"
             />
           }

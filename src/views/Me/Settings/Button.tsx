@@ -6,7 +6,7 @@ export const SettingsButton: React.FC<React.PropsWithChildren<ButtonProps>> = ({
 }) => (
   <Button
     size={[null, '1.5rem']}
-    spacing={[0, 'tight']}
+    spacing={[0, 12]}
     textColor="green"
     textActiveColor="greenDark"
     borderColor="green"

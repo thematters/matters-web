@@ -40,40 +40,40 @@
 }
 
 /* 12px */
-.textSizeXs {
+.text12 {
   font-size: var(--text12);
   line-height: 1.125rem;
 }
 
 /* 13px */
-.textSizeSmS {
+.text13 {
   font-size: var(--text13);
   line-height: 1.25;
 }
 
 /* 14px */
-.textSizeSm {
+.text14 {
   font-size: var(--text14);
   line-height: 1.375rem;
 }
 
 /* 15px */
-.textSizeMdS {
+.text15 {
   font-size: var(--text15);
   line-height: 1.25;
 }
 
 /* 16px */
-.textSizeMd {
+.text16 {
   font-size: var(--text16);
   line-height: 1.5rem;
 }
 
-.textWeightMd {
+.fontMedium {
   font-weight: var(--font-medium);
 }
 
-.textWeightSemibold {
+.fontSemibold {
   font-weight: var(--font-semibold);
 }
 
@@ -101,13 +101,13 @@
   }
 }
 
-.spacingXtight {
+.spacing8 {
   &.hasAvatar .name {
     margin-left: var(--sp8);
   }
 }
 
-.spacingXxtight {
+.spacing4 {
   &.hasAvatar .name {
     margin-left: var(--sp4);
   }

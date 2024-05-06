@@ -15,7 +15,7 @@ type OptionProps = {
   selected?: boolean
   expanded?: boolean
 
-  size?: 'md' | 'sm'
+  size?: 14 | 16
 
   role?: 'button' | 'option'
 
@@ -33,7 +33,7 @@ const Option: React.FC<OptionProps> = forwardRef(
       selected,
       expanded,
 
-      size = 'md',
+      size = 16,
 
       role = 'option',
 
@@ -45,7 +45,7 @@ const Option: React.FC<OptionProps> = forwardRef(
   ) => {
     const nameClasses = classNames({
       [styles.name]: true,
-      [styles[`${size}`]]: !!size,
+      [styles[`text${size}`]]: !!size,
     })
 
     return (

@@ -1,5 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
-import { Empty, Icon, Translate } from '~/components'
+import { Empty, Icon } from '~/components'
 
 export const EmptySearch = ({
   description,
@@ -7,7 +9,11 @@ export const EmptySearch = ({
   description?: string | React.ReactNode
 }) => (
   <Empty
-    icon={<Icon icon={IconNavSearch} size="xxl" />}
-    description={description || <Translate id="emptySearchResults" />}
+    icon={<Icon icon={IconNavSearch} size={64} />}
+    description={
+      description || (
+        <FormattedMessage defaultMessage="Result not found" id="iYk6P9" />
+      )
+    }
   />
 )

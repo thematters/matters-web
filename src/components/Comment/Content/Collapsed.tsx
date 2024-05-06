@@ -47,15 +47,15 @@ const Collapsed = ({
 
       {collapsed && (
         <Button
-          spacing={['xxtight', 'xtight']}
+          spacing={[4, 8]}
           bgActiveColor="greyLighter"
           onClick={() => {
             setCollapsed(false)
           }}
         >
           <TextIcon
-            icon={<Icon icon={IconDown} size="xs" />}
-            textPlacement="left"
+            icon={<Icon icon={IconDown} size={12} />}
+            placement="left"
             weight="normal"
             color="greyDarker"
           >

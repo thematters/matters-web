@@ -250,7 +250,7 @@ const BaseDropdownActions = ({
       {hasSticky && <PinButton article={article} />}
 
       {hasBookmark && (
-        <BookmarkButton article={article} inCard={inCard} iconSize="mdS" />
+        <BookmarkButton article={article} inCard={inCard} iconSize={20} />
       )}
 
       {hasSetTagSelected && tagDetailId && (
@@ -348,9 +348,7 @@ const BaseDropdownActions = ({
         ) : (
           <Button
             onClick={openDropdown}
-            spacing={
-              inFixedToolbar ? ['baseTight', 'baseTight'] : ['xtight', 'xtight']
-            }
+            spacing={inFixedToolbar ? [10, 10] : [8, 8]}
             borderRadius={inFixedToolbar ? 0 : '5rem'}
             bgActiveColor={inFixedToolbar ? undefined : 'greyLighter'}
             aria-label={moreActionText}

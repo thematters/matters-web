@@ -3,20 +3,19 @@ import classNames from 'classnames'
 import styles from './styles.module.css'
 
 export type IconSize =
-  | 'xxs'
-  | 'xs'
-  | 'smS'
-  | 'sm'
-  | 'mdXS'
-  | 'mdS'
-  | 'mdM'
-  | 'md'
-  | 'lg'
-  | 'xlM'
-  | 'xl'
-  | 'xxl'
-  | 'xxxl'
-  | 'xxxlM'
+  | 12
+  | 13
+  | 14
+  | 16
+  | 18
+  | 20
+  | 22
+  | 24
+  | 32
+  | 40
+  | 48
+  | 64
+  | 88
 
 export type IconColor =
   | 'white'
@@ -46,11 +45,11 @@ export type WrappedIcon = React.FunctionComponent<
 
 export const withIcon = (WrappedIcon: WrappedIcon) => {
   const InnerIcon = (props: IconProps) => {
-    const { size = '', color = '', className, ...restProps } = props
+    const { size = '16', color = '', className, ...restProps } = props
     const iconClasses = classNames({
       [styles.icon]: true,
       icon: true, // global selector
-      [styles[size]]: !!size,
+      [styles[`size${size}`]]: !!size,
       [styles[color]]: !!color,
       [className]: !!className,
     })

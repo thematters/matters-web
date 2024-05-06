@@ -9,7 +9,7 @@ export const EmptyCollection = () => {
   return (
     <Empty
       spacingY="xxloose"
-      icon={<Icon icon={IconEmptyBook} size="xxxlM" />}
+      icon={<Icon icon={IconEmptyBook} size={88} />}
       description={intl.formatMessage({
         defaultMessage: 'No collection created yet',
         id: 'GU6vV0',

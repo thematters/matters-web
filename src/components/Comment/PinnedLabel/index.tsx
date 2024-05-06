@@ -33,9 +33,9 @@ const PinnedLabel = ({ comment }: { comment: PinnedLabelCommentFragment }) => {
     return (
       <TextIcon
         icon={<Icon icon={IconPin} />}
-        size="sm"
+        size={14}
         color="grey"
-        weight="md"
+        weight="medium"
       >
         <FormattedMessage
           defaultMessage="Pinned"

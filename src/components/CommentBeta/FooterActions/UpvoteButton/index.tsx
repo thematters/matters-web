@@ -86,7 +86,7 @@ const UpvoteButton = ({
   if (comment.myVote === 'up') {
     return (
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         onClick={() => {
           onClick ? onClick() : unvote()
           setPlayHeartBeat(false)
@@ -100,11 +100,11 @@ const UpvoteButton = ({
         <TextIcon
           icon={
             <span className={likeClassNames}>
-              <Icon icon={IconLikeFill} color="redLight" size="mdXS" />
+              <Icon icon={IconLikeFill} color="redLight" size={18} />
             </span>
           }
           color="black"
-          size="mdS"
+          size={15}
         >
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
         </TextIcon>
@@ -114,7 +114,7 @@ const UpvoteButton = ({
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       textColor="greyDarker"
       textActiveColor="black"
       onClick={() => {
@@ -127,7 +127,7 @@ const UpvoteButton = ({
         id: 'ZD+vm/',
       })}
     >
-      <TextIcon icon={<Icon icon={IconLike} size="mdXS" />} size="mdS">
+      <TextIcon icon={<Icon icon={IconLike} size={18} />} size={15}>
         {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
       </TextIcon>
     </Button>

@@ -15,8 +15,6 @@ import {
   Dialog,
   Form,
   Icon,
-  // IconExternalLink16,
-  LanguageContext,
   ResetPaymentPasswordDialog,
   Spacer,
   SpinnerBlock,
@@ -72,7 +70,6 @@ const Confirm: React.FC<FormProps> = ({
   tx,
 }) => {
   const intl = useIntl()
-  const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
 
@@ -106,7 +103,7 @@ const Confirm: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ password }) =>
       _pickBy({
-        password: validatePaymentPassword(password, lang),
+        password: validatePaymentPassword(password, intl),
       }),
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
@@ -122,7 +119,7 @@ const Confirm: React.FC<FormProps> = ({
           update: (cache, result) => {
             updateDonation({
               cache,
-              id: article.id,
+              shortHash: article.shortHash,
               viewer,
               txId: result.data?.payTo.transaction.id,
             })
@@ -262,9 +259,9 @@ const Confirm: React.FC<FormProps> = ({
             bgColor="green"
             onClick={isUSDT ? submitCallback : onSubmitLikeCoin}
             textWeight="normal"
-            textSize="md"
+            textSize={16}
             text={
-              <TextIcon icon={<Icon icon={IconOpenWallet} size="mdS" />}>
+              <TextIcon icon={<Icon icon={IconOpenWallet} size={20} />}>
                 {isUSDT && (
                   <FormattedMessage
                     defaultMessage="Confirm authorization"

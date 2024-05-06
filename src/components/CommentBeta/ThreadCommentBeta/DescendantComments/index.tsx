@@ -161,7 +161,7 @@ export const DescendantComments = ({
             comment={node}
             pinnedComment={pinnedComment}
             type={'article'}
-            avatarSize="md"
+            avatarSize={24}
             hasReply
             hasUserName
             isInCommentDetail={isInCommentDetail}

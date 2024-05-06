@@ -8,7 +8,7 @@ export const EmptyResponse = ({
 }) => {
   return (
     <Empty
-      icon={<Icon icon={IconComment} size="xxl" />}
+      icon={<Icon icon={IconComment} size={64} />}
       description={
         articleOnlyMode ? (
           <Translate

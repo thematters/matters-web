@@ -7,7 +7,7 @@ import {
 import { Button, ButtonProps, IconSize, TextIcon } from '~/components'
 
 interface LoginButtonBaseProps {
-  iconSize?: Extract<IconSize, 'md'>
+  iconSize?: Extract<IconSize, 24>
   resideIn?: 'visitorWall' | 'migration'
 }
 
@@ -40,7 +40,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
   const isGreen = bgColor === 'green'
   const buttonBgActiveColor = isGreen ? undefined : 'greyLighter'
   const buttonSize = size || [null, '2.25rem']
-  const buttonSpacing = spacing || [0, 'loose']
+  const buttonSpacing = spacing || [0, 24]
   const textIconColor = isGreen ? 'white' : 'green'
   const textIconSize = iconSize || undefined
   const buttonProps: ButtonProps = {
@@ -52,7 +52,7 @@ export const LoginButton: React.FC<LoginButtonProps> = ({
 
   return (
     <Button aria-haspopup="dialog" {...buttonProps} {...props}>
-      <TextIcon color={textIconColor} size={textIconSize} weight="md">
+      <TextIcon color={textIconColor} size={textIconSize} weight="medium">
         <FormattedMessage
           defaultMessage="Log in"
           id="skbUBl"

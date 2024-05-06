@@ -3,7 +3,7 @@ import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyBookmark = () => (
   <Empty
-    icon={<Icon icon={IconSave} size="xxl" />}
+    icon={<Icon icon={IconSave} size={64} />}
     description={
       <>
         <Translate

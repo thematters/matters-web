@@ -99,13 +99,13 @@ const BaseArticleDigestFeed = ({
                   <section className={styles.author}>
                     <UserDigest.Mini
                       user={author}
-                      avatarSize="sm"
-                      textSize="xs"
+                      avatarSize={20}
+                      textSize={12}
                       hasAvatar
                       hasDisplayName
                       onClick={onClickAuthor}
                     />
-                    <Icon icon={IconDot} color="greyLight" size="mdS" />
+                    <Icon icon={IconDot} color="greyLight" size={20} />
                   </section>
                 </>
               )}
@@ -117,7 +117,7 @@ const BaseArticleDigestFeed = ({
               <ArticleDigestTitle
                 article={article}
                 collectionId={collectionId}
-                textSize="md"
+                textSize={16}
                 lineClamp={2}
                 onClick={onClick}
               />

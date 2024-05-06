@@ -1,18 +1,11 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { MAX_ARTICLE_SUPPORT_LENGTH } from '~/common/enums'
 import { validateSupportWords } from '~/common/utils'
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  TextIcon,
-  toast,
-  useRoute,
-} from '~/components'
+import { Dialog, Form, TextIcon, toast, useRoute } from '~/components'
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -51,7 +44,6 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
   editSupportSetting,
   supportSettingSaving,
 }) => {
-  const { lang } = useContext(LanguageContext)
   const formId = 'support-setting-form'
   const intl = useIntl()
 
@@ -78,8 +70,8 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ requestForDonation, replyToDonator }) =>
       _pickBy({
-        requestForDonation: validateSupportWords(requestForDonation!, lang),
-        replyToDonator: validateSupportWords(replyToDonator!, lang),
+        requestForDonation: validateSupportWords(requestForDonation!, intl),
+        replyToDonator: validateSupportWords(replyToDonator!, intl),
       }),
     onSubmit: async ({}, { setSubmitting }) => {
       editSupportSetting(values.requestForDonation, values.replyToDonator)
@@ -118,8 +110,8 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             name="requestForDonation"
             placeholder={intl.formatMessage({
               defaultMessage:
-                'Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!',
-              id: '3Y6k4g',
+                "Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!",
+              id: '9EABqX',
             })}
             value={values.requestForDonation! || ''}
             hint={`${
@@ -196,7 +188,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         {InnerForm(tabType)}
 
         <h3 className={styles.previewTitle}>
-          <TextIcon size="md" weight="md">
+          <TextIcon size={16} weight="medium">
             <FormattedMessage
               defaultMessage="Preview"
               id="zn83cE"

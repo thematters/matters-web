@@ -13,7 +13,7 @@ export type SidebarManagementProps = ToggleAccessProps & SetPublishISCNProps
 const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
   return (
     <Box
-      icon={<Icon icon={IconSettings} size="md" />}
+      icon={<Icon icon={IconSettings} size={24} />}
       title={
         <FormattedMessage defaultMessage="Article Management" id="ZEMcZ6" />
       }

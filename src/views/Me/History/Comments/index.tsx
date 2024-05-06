@@ -121,8 +121,8 @@ const Comments = () => {
                 <section className={styles.user}>
                   <UserDigest.Mini
                     user={node.author}
-                    avatarSize="sm"
-                    textSize="xs"
+                    avatarSize={20}
+                    textSize={12}
                     hasAvatar
                     hasDisplayName
                   />
@@ -138,7 +138,7 @@ const Comments = () => {
                     <ArticleDigestTitle
                       article={node}
                       is="h2"
-                      textSize="md"
+                      textSize={16}
                       lineClamp={1}
                     />
                   </LinkWrapper>

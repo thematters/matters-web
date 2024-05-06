@@ -26,7 +26,7 @@ const fragments = {
       articleState: state
       title
       slug
-      mediaHash
+      shortHash
       cover
       ...ArticleDigestTitleArticle
     }
@@ -38,7 +38,7 @@ export const ArticleDigestAuthorSidebar = ({
   article,
   collectionId,
 
-  titleTextSize = 'mdS',
+  titleTextSize = 15,
   titleColor = 'greyDarker',
   imageSize = 'sm',
   showCover = true,
@@ -59,7 +59,7 @@ export const ArticleDigestAuthorSidebar = ({
 
   const headerClasses = classNames({
     [styles[`textColor${capitalizeFirstLetter(titleColor)}`]]: !!titleColor,
-    [styles[`lineHeight${capitalizeFirstLetter(titleTextSize)}`]]:
+    [styles[`lineHeight${capitalizeFirstLetter(titleTextSize + '')}`]]:
       !!titleTextSize,
   })
   const imgSize = imageSize === 'sm' ? 44 : 64

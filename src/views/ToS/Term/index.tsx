@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 
-import { translate } from '~/common/utils'
 import { LanguageContext } from '~/components'
 
 import Privacy from './privacy'
@@ -15,40 +14,28 @@ export const Term = () => {
       {lang?.startsWith('zh') && (
         <section
           dangerouslySetInnerHTML={{
-            __html: translate({
-              ...ToS,
-              lang,
-            }),
+            __html: ToS[lang],
           }}
         />
       )}
 
       <section
         dangerouslySetInnerHTML={{
-          __html: translate({
-            ...ToS,
-            lang: 'en',
-          }),
+          __html: ToS.en,
         }}
       />
 
       {lang?.startsWith('zh') && (
         <section
           dangerouslySetInnerHTML={{
-            __html: translate({
-              ...Privacy,
-              lang,
-            }),
+            __html: Privacy[lang],
           }}
         />
       )}
 
       <section
         dangerouslySetInnerHTML={{
-          __html: translate({
-            ...Privacy,
-            lang: 'en',
-          }),
+          __html: Privacy.en,
         }}
       />
     </section>

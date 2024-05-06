@@ -93,7 +93,7 @@ const FixedToolbar = ({
       : path.href
 
   const dropdonwActionsProps: DropdownActionsControls = {
-    size: 'md',
+    size: 24,
     inCard: false,
     inFixedToolbar: true,
     sharePath,
@@ -105,7 +105,7 @@ const FixedToolbar = ({
   }
 
   const buttonProps: ButtonProps = {
-    spacing: ['baseTight', 'baseTight'],
+    spacing: [10, 10],
     bgColor: 'white',
     borderRadius: 0,
   }
@@ -150,9 +150,9 @@ const FixedToolbar = ({
               <AppreciationButton
                 article={article}
                 privateFetched={privateFetched}
-                iconSize="md"
+                iconSize={24}
                 textWeight="normal"
-                textIconSpacing="xxtight"
+                textIconSpacing={4}
                 disabled={lock}
                 {...buttonProps}
               />
@@ -162,9 +162,9 @@ const FixedToolbar = ({
               <CommentButton
                 article={article}
                 disabled={!article.canComment}
-                iconSize="md"
+                iconSize={24}
                 textWeight="normal"
-                textIconSpacing="xxtight"
+                textIconSpacing={4}
                 onClick={() => {
                   if (!viewer.isAuthed) {
                     window.dispatchEvent(
@@ -191,15 +191,15 @@ const FixedToolbar = ({
               article={article}
               articleDetail={articleDetails}
               disabled={lock}
-              iconSize="md"
+              iconSize={24}
               textWeight="normal"
-              textIconSpacing="xxtight"
+              textIconSpacing={4}
               {...buttonProps}
             />
 
             <BookmarkButton
               article={article}
-              iconSize="md"
+              iconSize={24}
               inCard={false}
               disabled={lock}
               {...buttonProps}

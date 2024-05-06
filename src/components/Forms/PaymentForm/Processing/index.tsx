@@ -125,7 +125,7 @@ const OthersProcessingForm: React.FC<Props> = ({
       >
         {error && (
           <>
-            <Icon icon={IconCircleTimes} size="xlM" color="red" />
+            <Icon icon={IconCircleTimes} size={40} color="red" />
             <p className={styles.hint}>
               <FormattedMessage
                 defaultMessage="Sending failed. Please retry later."
@@ -246,7 +246,7 @@ const USDTProcessingForm: React.FC<Props> = ({
       update: (cache, result) => {
         updateDonation({
           cache,
-          id: article.id,
+          shortHash: article.shortHash,
           viewer: isConnectedAddress ? viewer : undefined,
           txId: result.data?.payTo.transaction.id,
         })
@@ -310,7 +310,7 @@ const USDTProcessingForm: React.FC<Props> = ({
           )}
           {isError && (
             <>
-              <Icon icon={IconCircleTimes} size="xlM" color="red" />
+              <Icon icon={IconCircleTimes} size={40} color="red" />
               <p className={styles.hint}>
                 <FormattedMessage
                   defaultMessage="Sending failed. Please retry later."

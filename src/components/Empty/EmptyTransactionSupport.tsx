@@ -3,7 +3,7 @@ import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyTransactionSupport = () => (
   <Empty
-    icon={<Icon icon={IconDonate} size="xxl" />}
+    icon={<Icon icon={IconDonate} size={64} />}
     description={
       <Translate
         zh_hant="還沒有支持記錄"

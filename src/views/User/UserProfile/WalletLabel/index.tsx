@@ -66,7 +66,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
 
   const Content = (
     <span className={styles.wallet} onClick={openDialog}>
-      <Icon icon={IconWallet} size="mdS" />
+      <Icon icon={IconWallet} size={20} />
     </span>
   )
 

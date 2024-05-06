@@ -11,7 +11,7 @@ export const LATEST_VERSION_ARTICLE = gql`
         }
         slug
         title
-        mediaHash
+        shortHash
         versions(input: { first: 1 }) {
           edges {
             node {

@@ -1,20 +1,21 @@
+import classNames from 'classnames'
+import Lottie from 'lottie-react'
 import React, { useEffect } from 'react'
-import Lottie, { EventListener } from 'react-lottie'
+import { FormattedMessage } from 'react-intl'
 
-import coinShipData from '@/public/static/json/coin-ship.json'
-import openHeartData from '@/public/static/json/open-heart.json'
-import shipSprinkHeartData from '@/public/static/json/ship-sprinkle-heart.json'
-import shipWaitingData from '@/public/static/json/ship-waiting.json'
+import donateData from '@/public/static/json/donate.json'
+import loadingData from '@/public/static/json/loading.json'
+import successData from '@/public/static/json/success.json'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Translate, useStep } from '~/components'
+import { useStep } from '~/components'
 
 import styles from './styles.module.css'
 
-type Step = 'coinShip' | 'shipWaiting' | 'shipSprinkleHeart' | 'openHeart'
+type Step = 'donate' | 'loading' | 'success'
 
 interface Props {
   playEnd: () => void
-  playShipWaiting: boolean
+  playLoading: boolean
   currency: CURRENCY
   defaultStep?: Step
 }
@@ -22,20 +23,24 @@ interface Props {
 const Animation: React.FC<Props> = ({
   playEnd,
   currency,
-  playShipWaiting = false,
-  defaultStep = 'coinShip',
+  playLoading = false,
+  defaultStep = 'donate',
 }) => {
   const { currStep, forward } = useStep<Step>(defaultStep)
-  const isCoinShip = currStep === 'coinShip'
-  const isShipWaiting = currStep === 'shipWaiting'
-  const isShipSprinkHeart = currStep === 'shipSprinkleHeart'
-  const isOpenHeart = currStep === 'openHeart'
+  const isDonate = currStep === 'donate'
+  const isLoading = currStep === 'loading'
+  const isSuccess = currStep === 'success'
+  const [rendered, setRendered] = React.useState(false)
 
   useEffect(() => {
-    if (isShipWaiting) {
-      forward('shipSprinkleHeart')
+    setRendered(true)
+  }, [])
+
+  useEffect(() => {
+    if (isLoading) {
+      forward('success')
     }
-  }, [playShipWaiting])
+  }, [playLoading])
 
   const defaultOptions = {
     loop: false,
@@ -45,94 +50,71 @@ const Animation: React.FC<Props> = ({
     },
   }
 
-  const coinShipOptions = {
+  const donateOptions = {
     ...defaultOptions,
-    animationData: coinShipData,
+    animationData: donateData,
   }
 
-  const coinShipListener: EventListener = {
-    eventName: 'complete',
-    callback: () => {
-      playShipWaiting ? forward('shipWaiting') : forward('openHeart')
-    },
-  }
-
-  const shipWaitingOptions = {
+  const loadingOptions = {
     ...defaultOptions,
     loop: true,
-    animationData: shipWaitingData,
+    animationData: loadingData,
   }
 
-  const shipSprinkleHeartOptions = {
+  const successOptions = {
     ...defaultOptions,
-    animationData: shipSprinkHeartData,
+    animationData: successData,
   }
 
-  const shipSprinkleHeartListener: EventListener = {
-    eventName: 'complete',
-    callback: () => {
-      forward('openHeart')
-    },
-  }
-
-  const openHeartOptions = {
-    ...defaultOptions,
-    animationData: openHeartData,
-  }
-
-  const openHeartListener: EventListener = {
-    eventName: 'complete',
-    callback: () => {
-      playEnd()
-    },
-  }
-
-  const LottieProps = {
+  const lottieProps = {
     isClickToPauseDisabled: true,
-    height: 136,
-    width: 166,
+    height: 120,
+    width: 120,
   }
+
+  const containerClasses = classNames({
+    [styles.slideUp]: rendered,
+  })
 
   return (
-    <section>
+    <section className={containerClasses}>
       <p className={styles.animationHint}>
-        {isShipWaiting && currency === CURRENCY.LIKE && (
-          <Translate
-            zh_hant="持續與 LikeCoin 網絡同步，稍後更新至 Matters"
-            zh_hans="持续与 LikeCoin 网络同步，稍后更新至 Matters"
-            en="Request on LikeCoin network will be confirmed and synced to Matters in a bit"
+        {isLoading && currency === CURRENCY.LIKE && (
+          <FormattedMessage
+            defaultMessage="Request on {network} network will be confirmed and synced to Matters in a bit"
+            values={{
+              network: 'LikeCoin',
+            }}
+            id="t2EpN/"
           />
         )}
-        {isShipWaiting && currency === CURRENCY.USDT && (
-          <Translate
-            zh_hant="持續與 Optimism 網絡同步，稍後更新至 Matters"
-            zh_hans="持续与 Optimism 网络同步，稍后更新至 Matters"
-            en="Request on Optimism network will be confirmed and synced to Matters in a bit"
+        {isLoading && currency === CURRENCY.USDT && (
+          <FormattedMessage
+            defaultMessage="Request on {network} network will be confirmed and synced to Matters in a bit"
+            values={{
+              network: 'Optimism',
+            }}
+            id="t2EpN/"
           />
         )}
       </p>
-      {isCoinShip && (
+      {isDonate && (
         <Lottie
-          options={coinShipOptions}
-          eventListeners={[coinShipListener]}
-          {...LottieProps}
+          {...donateOptions}
+          {...lottieProps}
+          onComplete={() => {
+            playLoading ? forward('loading') : forward('success')
+          }}
         />
       )}
-      {isShipWaiting && (
-        <Lottie options={shipWaitingOptions} {...LottieProps} />
-      )}
-      {isShipSprinkHeart && (
+      {isLoading && <Lottie {...loadingOptions} {...lottieProps} />}
+      {isSuccess && (
         <Lottie
-          options={shipSprinkleHeartOptions}
-          eventListeners={[shipSprinkleHeartListener]}
-          {...LottieProps}
-        />
-      )}
-      {isOpenHeart && (
-        <Lottie
-          options={openHeartOptions}
-          eventListeners={[openHeartListener]}
-          {...LottieProps}
+          {...successOptions}
+          {...lottieProps}
+          onComplete={() => {
+            playEnd()
+          }}
         />
       )}
     </section>

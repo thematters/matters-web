@@ -28,7 +28,7 @@ const Cell: React.FC<CellProps> = forwardRef(
       right,
       rightText,
       rightTextColor = 'greyDarker',
-      rightIcon = <Icon icon={IconRight} size="mdS" color="greyDarker" />,
+      rightIcon = <Icon icon={IconRight} size={20} color="greyDarker" />,
 
       ...cardProps
     },

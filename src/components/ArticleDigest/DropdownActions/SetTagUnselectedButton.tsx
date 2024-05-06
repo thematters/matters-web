@@ -116,7 +116,7 @@ const SetTagUnselectedButton = ({
           description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
         />
       }
-      icon={<Icon icon={IconLTime} size="mdS" />}
+      icon={<Icon icon={IconLTime} size={20} />}
       onClick={async () => {
         await update()
       }}

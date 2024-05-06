@@ -64,7 +64,7 @@ export const CurrencySwitch: React.FC<CurrencySwitchProps> = ({
         <Button onClick={openDropdown} aria-haspopup="listbox" ref={ref}>
           <TextIcon
             icon={<Icon icon={IconDown} />}
-            textPlacement="left"
+            placement="left"
             color="grey"
           >
             {currency === Currency.ALL ? (

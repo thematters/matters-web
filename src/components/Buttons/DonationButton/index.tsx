@@ -1,15 +1,8 @@
-import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
 import { TEST_ID } from '~/common/enums'
-import { translate } from '~/common/utils'
-import {
-  Button,
-  Icon,
-  LanguageContext,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { Button, Icon, TextIcon } from '~/components'
 
 interface DonationButtonProps {
   supported: boolean
@@ -22,7 +15,7 @@ const DonationButton = ({
   onClick,
   width = '19.5rem',
 }: DonationButtonProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   if (supported) {
     return (
@@ -30,7 +23,10 @@ const DonationButton = ({
         size={[width, '2.5rem']}
         bgColor="gold"
         aria-haspopup="dialog"
-        aria-label={translate({ id: 'donationAgain', lang })}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Support Again',
+          id: 'fKkBPz',
+        })}
         onClick={() => {
           if (onClick) {
             onClick()
@@ -39,11 +35,11 @@ const DonationButton = ({
         data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
       >
         <TextIcon
-          icon={<Icon icon={IconMoney} size="mdS" />}
+          icon={<Icon icon={IconMoney} size={20} />}
           color="white"
-          size="md"
+          size={16}
         >
-          <Translate id="donationAgain" />
+          <FormattedMessage defaultMessage="Support Again" id="fKkBPz" />
         </TextIcon>
       </Button>
     )
@@ -54,7 +50,10 @@ const DonationButton = ({
       size={[width, '2.5rem']}
       bgColor="gold"
       aria-haspopup="dialog"
-      aria-label={translate({ id: 'donation', lang })}
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Support Author',
+        id: 'ezYuE2',
+      })}
       onClick={() => {
         if (onClick) {
           onClick()
@@ -63,11 +62,11 @@ const DonationButton = ({
       data-test-id={TEST_ID.ARTICLE_SUPPORT_SUPPORT_BUTTON}
     >
       <TextIcon
-        icon={<Icon icon={IconMoney} size="mdS" />}
+        icon={<Icon icon={IconMoney} size={20} />}
         color="white"
-        size="md"
+        size={16}
       >
-        <Translate id="donation" />
+        <FormattedMessage defaultMessage="Support Author" id="ezYuE2" />
       </TextIcon>
     </Button>
   )

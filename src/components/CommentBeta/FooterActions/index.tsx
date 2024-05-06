@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext, useEffect, useRef, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   ERROR_CODES,
@@ -8,12 +8,11 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { makeMentionElement, translate } from '~/common/utils'
+import { makeMentionElement } from '~/common/utils'
 import {
   CommentFormBeta,
   CommentFormBetaDialog,
   CommentFormType,
-  LanguageContext,
   Media,
   Spacer,
   toast,
@@ -92,8 +91,8 @@ const BaseFooterActions = ({
   isInCommentDetail,
   ...replyButtonProps
 }: FooterActionsProps) => {
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const formWrapperRef = useRef<HTMLDivElement>(null)
 
   const [showForm, setShowForm] = useState(false)
@@ -178,12 +177,13 @@ const BaseFooterActions = ({
     <>
       <footer
         className={styles.footer}
-        aria-label={translate({
-          zh_hant: `${comment.upvotes} 點讚`,
-          zh_hans: `${comment.upvotes} 点赞`,
-          en: `${comment.upvotes} upvotes`,
-          lang,
-        })}
+        aria-label={intl.formatMessage(
+          {
+            defaultMessage: `{upvotes} upvotes`,
+            id: 'BW89hS',
+          },
+          { upvotes: comment.upvotes }
+        )}
       >
         <section className={styles.left}>
           {hasUpvote && <UpvoteButton {...buttonProps} />}

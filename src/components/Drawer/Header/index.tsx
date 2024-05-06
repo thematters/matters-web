@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({
             defaultMessage: 'Close',
             id: 'rbrahO',
           })}
-          text={<Icon icon={IconTimes} size="md" />}
+          text={<Icon icon={IconTimes} size={24} />}
         />
       )}
     </header>

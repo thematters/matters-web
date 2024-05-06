@@ -97,7 +97,7 @@ const BaseCommentsDialogDialog = ({
           leftBtn={
             isInCommentDetail && (
               <button onClick={backToCommentList}>
-                <Icon icon={IconLeft} size="md" />
+                <Icon icon={IconLeft} size={24} />
               </button>
             )
           }
@@ -109,7 +109,7 @@ const BaseCommentsDialogDialog = ({
                 closeDialog()
               }}
             >
-              <Icon icon={IconTimes} size="md" />
+              <Icon icon={IconTimes} size={24} />
             </button>
           }
         />

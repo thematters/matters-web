@@ -1,7 +1,8 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
-import { useCallback, useContext, useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
 import { ReactComponent as IconButtonLeft } from '@/public/static/images/about/button-left.svg'
@@ -12,11 +13,9 @@ import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/hero-illustration
 import IMAGE_WAVE_1 from '@/public/static/images/about/wave-hero-1.svg'
 import IMAGE_WAVE_2 from '@/public/static/images/about/wave-hero-2.svg'
 import { PATHS } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Button,
   Icon,
-  LanguageContext,
   Media,
   TextIcon,
   Translate,
@@ -27,8 +26,6 @@ import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Hero = () => {
-  const { lang } = useContext(LanguageContext)
-
   const [emblaRef, emblaApi] = useEmblaCarousel({
     dragFree: true,
     draggable: true,
@@ -72,9 +69,11 @@ const Hero = () => {
             <Link href={PATHS.HOME} legacyBehavior>
               <a>
                 <VisuallyHidden>
-                  <span>{translate({ id: 'discover', lang })}</span>
+                  <span>
+                    <FormattedMessage defaultMessage="Discover" id="cE4Hfw" />
+                  </span>
                 </VisuallyHidden>
-                <Icon icon={IconLogo} />
+                <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
               </a>
             </Link>
           </div>
@@ -103,11 +102,11 @@ const Hero = () => {
 
               <Button
                 size={[null, '2.25rem']}
-                spacing={[0, 'base']}
+                spacing={[0, 16]}
                 bgColor="green"
                 href={PATHS.HOME}
               >
-                <TextIcon color="white" weight="md">
+                <TextIcon color="white" weight="medium">
                   <Translate
                     zh_hant="開始創作"
                     zh_hans="开始创作"
@@ -126,9 +125,9 @@ const Hero = () => {
         <section className={styles.container}>
           <section className={`${styles.scrollButton} ${styles.scrollLeft}`}>
             <Button onClick={scrollPrev} disabled={!prevBtnEnabled}>
-              <Media at="sm">{withIcon(IconButtonLeft)({ size: 'md' })}</Media>
+              <Media at="sm">{withIcon(IconButtonLeft)({ size: 24 })}</Media>
               <Media greaterThan="sm">
-                {withIcon(IconButtonLeft)({ size: 'lg' })}
+                {withIcon(IconButtonLeft)({ size: 32 })}
               </Media>
             </Button>
           </section>
@@ -314,9 +313,9 @@ const Hero = () => {
           </section>
           <section className={`${styles.scrollButton} ${styles.scrollRight}`}>
             <Button onClick={scrollNext} disabled={!nextBtnEnabled}>
-              <Media at="sm">{withIcon(IconButtonRight)({ size: 'md' })}</Media>
+              <Media at="sm">{withIcon(IconButtonRight)({ size: 24 })}</Media>
               <Media greaterThan="sm">
-                {withIcon(IconButtonRight)({ size: 'lg' })}
+                {withIcon(IconButtonRight)({ size: 32 })}
               </Media>
             </Button>
           </section>

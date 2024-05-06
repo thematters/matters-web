@@ -17,6 +17,6 @@ describe('<ArticleDigest.Archived>', () => {
     expect($title).toBeInTheDocument()
 
     $title.click()
-    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
   })
 })

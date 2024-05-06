@@ -17,9 +17,9 @@ const articlePublicFragment = gql`
     id
     title
     slug
-    mediaHash
-    dataHash
     shortHash
+    dataHash
+    mediaHash
     state
     cover
     summary
@@ -53,12 +53,6 @@ const articlePublicFragment = gql`
     sensitiveByAdmin
     requestForDonation
     replyToDonator
-    drafts {
-      id
-      mediaHash
-      publishState
-      iscnPublish
-    }
     translation(input: { language: $language })
       @include(if: $includeTranslation) {
       content
@@ -98,51 +92,23 @@ const articlePublicFragment = gql`
 `
 
 export const ARTICLE_AVAILABLE_TRANSLATIONS = gql`
-  query ArticleAvailableTranslations($mediaHash: String, $shortHash: String) {
-    article(input: { mediaHash: $mediaHash, shortHash: $shortHash }) {
+  query ArticleAvailableTranslations($shortHash: String) {
+    article(input: { shortHash: $shortHash }) {
       id
       availableTranslations
     }
   }
 `
 
-export const ARTICLE_AVAILABLE_TRANSLATIONS_BY_NODE_ID = gql`
-  query ArticleAvailableTranslationsByNodeId($id: ID!) {
-    article: node(input: { id: $id }) {
-      ... on Article {
-        id
-        availableTranslations
-      }
-    }
-  }
-`
-
 export const ARTICLE_DETAIL_PUBLIC = gql`
   query ArticleDetailPublic(
-    $mediaHash: String
     $shortHash: String
     $language: UserLanguage!
     $includeTranslation: Boolean = false
     $includeCanSuperLike: Boolean = true
   ) {
-    article(input: { mediaHash: $mediaHash, shortHash: $shortHash }) {
+    article(input: { shortHash: $shortHash }) {
       ...ArticlePublicArticle
-    }
-  }
-  ${articlePublicFragment}
-`
-
-export const ARTICLE_DETAIL_PUBLIC_BY_NODE_ID = gql`
-  query ArticleDetailPublicByNodeId(
-    $id: ID!
-    $language: UserLanguage!
-    $includeTranslation: Boolean = false
-    $includeCanSuperLike: Boolean = true
-  ) {
-    article: node(input: { id: $id }) {
-      ... on Article {
-        ...ArticlePublicArticle
-      }
     }
   }
   ${articlePublicFragment}
@@ -178,12 +144,8 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
 `
 
 export const ARTICLE_TRANSLATION = gql`
-  query ArticleTranslation(
-    $mediaHash: String
-    $shortHash: String
-    $language: UserLanguage!
-  ) {
-    article(input: { mediaHash: $mediaHash, shortHash: $shortHash }) {
+  query ArticleTranslation($shortHash: String!, $language: UserLanguage!) {
+    article(input: { shortHash: $shortHash }) {
       id
       translation(input: { language: $language }) {
         content

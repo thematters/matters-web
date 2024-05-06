@@ -9,7 +9,7 @@ const articleHistoryPublicFragment = gql`
   fragment ArticleHistoryPublicArticle on Article {
     id
     slug
-    mediaHash
+    shortHash
     state
     cover
     summaryCustomized
@@ -60,8 +60,8 @@ const articleVersionFragment = gql`
 `
 
 export const ARTICLE_HISTORY_PUBLIC = gql`
-  query ArticleHistoryPublic($mediaHash: String!, $version: ID!) {
-    article(input: { mediaHash: $mediaHash }) {
+  query ArticleHistoryPublic($shortHash: String!, $version: ID!) {
+    article(input: { shortHash: $shortHash }) {
       ...ArticleHistoryPublicArticle
     }
     version: node(input: { id: $version }) {
@@ -74,33 +74,14 @@ export const ARTICLE_HISTORY_PUBLIC = gql`
   ${articleVersionFragment}
 `
 
-export const ARTICLE_HISTORY_PUBLIC_BY_NODE_ID = gql`
-  query ArticleHistoryPublicByNodeId($id: ID!, $version: ID!) {
-    article: node(input: { id: $id }) {
-      ... on Article {
-        ...ArticleHistoryPublicArticle
-      }
-    }
-    version: node(input: { id: $version }) {
-      ... on ArticleVersion {
-        ...ArticleVersion
-      }
-    }
-  }
-  ${articleHistoryPublicFragment}
-  ${articleVersionFragment}
-`
-
 export const ARTICLE_HISTORY_PRIVATE = gql`
-  query ArticleHistoryPrivate($id: ID!, $version: ID!) {
-    article: node(input: { id: $id }) {
-      ... on Article {
-        id
-        access {
-          circle {
-            id
-            ...CircleWallCirclePrivate
-          }
+  query ArticleHistoryPrivate($shortHash: String!, $version: ID!) {
+    article(input: { shortHash: $shortHash }) {
+      id
+      access {
+        circle {
+          id
+          ...CircleWallCirclePrivate
         }
       }
     }
@@ -117,30 +98,13 @@ export const ARTICLE_HISTORY_PRIVATE = gql`
 `
 
 export const ARTICLE_LATEST_VERSION = gql`
-  query ArticleLatestVersion($mediaHash: String!) {
-    article(input: { mediaHash: $mediaHash }) {
+  query ArticleLatestVersion($shortHash: String!) {
+    article(input: { shortHash: $shortHash }) {
       id
       versions(input: { first: 1 }) {
         edges {
           node {
             id
-          }
-        }
-      }
-    }
-  }
-`
-
-export const ARTICLE_LATEST_VERSION_BY_NODE_ID = gql`
-  query ArticleLatestVersionByNodeId($id: ID!) {
-    article: node(input: { id: $id }) {
-      ... on Article {
-        id
-        versions(input: { first: 1 }) {
-          edges {
-            node {
-              id
-            }
           }
         }
       }

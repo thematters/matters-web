@@ -33,6 +33,7 @@
     line-height: 1.125rem;
 
     & .name {
+      flex-shrink: 0;
       margin-right: var(--sp8);
       font-weight: var(--font-medium);
     }
@@ -40,10 +41,14 @@
     & .content {
       @mixin inline-flex-center-all;
 
+      flex-wrap: wrap;
+      justify-content: flex-start;
       color: var(--color-grey-darker);
 
       & a {
         @mixin inline-flex-center-all;
+
+        flex-shrink: 0;
       }
     }
 

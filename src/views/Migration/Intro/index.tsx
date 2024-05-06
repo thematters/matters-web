@@ -47,11 +47,11 @@ const Intro = () => {
 
             <Button
               size={[null, '2.25rem']}
-              spacing={[0, 'base']}
+              spacing={[0, 16]}
               bgColor="green"
               onClick={() => jump('#steps', { offset: 10 })}
             >
-              <TextIcon color="white" weight="md">
+              <TextIcon color="white" weight="medium">
                 <Translate
                   zh_hant="開始搬家"
                   zh_hans="开始搬家"

@@ -2,7 +2,6 @@ import React from 'react'
 
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
-import { TEXT } from '~/common/enums'
 import {
   Button,
   Icon,
@@ -19,7 +18,7 @@ const Buttons = () => (
     <ul>
       <li>
         <Button
-          spacing={['xtight', 'xtight']}
+          spacing={[8, 8]}
           bgActiveColor="greyLighterActive"
           aria-haspopup="dialog"
         >
@@ -45,24 +44,12 @@ const Buttons = () => (
 
       <li>
         <NavListItem
-          name={TEXT.zh_hant.search}
-          icon={<Icon icon={IconNavSearch} size="md" />}
-          activeIcon={<Icon icon={IconNavSearch} size="md" color="green" />}
+          name="Search"
+          icon={<Icon icon={IconNavSearch} size={24} />}
+          activeIcon={<Icon icon={IconNavSearch} size={24} color="green" />}
           active
         />
       </li>
-
-      {/* <li>
-        <Dialog.Footer>
-          <Dialog.Footer.Button type="submit">
-            <Translate id="agreeAndContinue" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button bgColor="greyLighter" textColor="black">
-            <Translate id="disagree" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </li> */}
     </ul>
   </section>
 )

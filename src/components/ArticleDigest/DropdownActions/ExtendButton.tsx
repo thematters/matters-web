@@ -85,7 +85,7 @@ const ExtendButton = ({
         description:
           'src/components/ArticleDigest/DropdownActions/ExtendButton.tsx',
       })}
-      icon={<Icon icon={IconCollection} size="mdS" />}
+      icon={<Icon icon={IconCollection} size={20} />}
       onClick={onClick}
     />
   )

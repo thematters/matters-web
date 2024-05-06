@@ -52,9 +52,10 @@ const SupportWidget = ({
   toggleDonationDrawer,
 }: DonationProps) => {
   const viewer = useContext(ViewerContext)
-  const [playShipWaiting, setPlayShipWaiting] = useState(false)
+  const [playLoading, setPlayLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
   const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
+  const [playSlideUp, setPlaySlideUp] = useState(false)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
     [styles.supportWidget]: true,
@@ -108,32 +109,36 @@ const SupportWidget = ({
       }
 
       // LIKE、USDT
-      setPlayShipWaiting(true)
+      setPlayLoading(true)
       setShowAnimation(true)
       scrollToAnimation()
       await sleep(5 * 1000)
-      setPlayShipWaiting(false)
+      setPlayLoading(false)
       hasDonatedRefetch()
       return
     }
   )
 
+  const containerClasses = classNames({
+    [styles.note]: true,
+    [styles.slideUp]: playSlideUp,
+  })
+
   return (
     <section className={supportWidgetClasses} id="animation">
       {showAnimation && (
-        <section className={styles.donation}>
-          <DynamicAnimation
-            playShipWaiting={playShipWaiting}
-            playEnd={() => {
-              setShowAnimation(false)
-            }}
-            currency={currency}
-          />
-        </section>
+        <DynamicAnimation
+          playLoading={playLoading}
+          playEnd={() => {
+            setShowAnimation(false)
+            setPlaySlideUp(true)
+          }}
+          currency={currency}
+        />
       )}
 
       {!showAnimation && (
-        <section className={`${styles.donation} ${styles.note}`}>
+        <section className={containerClasses}>
           {loading && <Spinner />}
 
           {!loading && isReader && (
@@ -142,9 +147,9 @@ const SupportWidget = ({
                 <>
                   {replyToDonator && (
                     <section>
-                      <Avatar user={article?.author} size="xl" />
+                      <Avatar user={article?.author} size={48} />
                       <p>
-                        <TextIcon weight="md">
+                        <TextIcon weight="medium">
                           {article?.author.displayName}&nbsp;
                         </TextIcon>
                         <TextIcon color="greyDarker">
@@ -163,7 +168,7 @@ const SupportWidget = ({
                   {!replyToDonator && (
                     <section>
                       <p>
-                        <TextIcon weight="bold" size="md">
+                        <TextIcon weight="bold" size={16}>
                           <FormattedMessage
                             defaultMessage="🎉 Thank you for support!"
                             id="Myrqtn"
@@ -192,8 +197,8 @@ const SupportWidget = ({
                   {!requestForDonation && (
                     <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
                       <FormattedMessage
-                        defaultMessage="Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
-                        id="3Y6k4g"
+                        defaultMessage="Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
+                        id="9EABqX"
                       />
                     </p>
                   )}
@@ -229,8 +234,8 @@ const SupportWidget = ({
                       <TextIcon
                         icon={<Icon icon={IconMoney} color="black" />}
                         color="black"
-                        size="xs"
-                        spacing="xxxtight"
+                        size={12}
+                        spacing={2}
                       >
                         <FormattedMessage
                           defaultMessage="Transaction History"
@@ -254,8 +259,8 @@ const SupportWidget = ({
               {!requestForDonation && (
                 <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
                   <FormattedMessage
-                    defaultMessage="Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
-                    id="3Y6k4g"
+                    defaultMessage="Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
+                    id="9EABqX"
                   />
                 </p>
               )}

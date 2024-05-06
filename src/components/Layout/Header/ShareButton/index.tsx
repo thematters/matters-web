@@ -20,7 +20,7 @@ export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (
           bgColor="halfBlack"
           onClick={openShareDialog}
         >
-          <Icon icon={IconShare} size="md" color="white" />
+          <Icon icon={IconShare} size={24} color="white" />
         </Button>
       )}
     </ShareDialog>

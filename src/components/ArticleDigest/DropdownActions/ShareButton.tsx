@@ -16,7 +16,7 @@ const ShareButton = ({ openDialog }: ShareButtonProps) => {
         defaultMessage: 'Share Article',
         id: '/GyMKa',
       })}
-      icon={<Icon icon={IconShare} size="mdS" />}
+      icon={<Icon icon={IconShare} size={20} />}
       onClick={openDialog}
       ariaHasPopup="dialog"
     />

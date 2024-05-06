@@ -10,7 +10,7 @@ import zh_Hans from './content_ZhHans'
 import zh_Hant from './content_ZhHant'
 
 const content = {
-  en: en,
+  en,
   'zh-Hans': zh_Hans,
   'zh-Hant': zh_Hant,
 }

@@ -120,16 +120,3 @@ export const optimizeEmbed = (content: string) => {
  */
 export const measureDiffs = (source: string, target: string) =>
   distance(source, target)
-
-export const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
-  // is there a better way to detect valid?
-  // a valid mediaHash, should have length 49 or 59 chars
-  // 'zdpuAsCXC87Tm1fFvAbysV7HVt7J8aV6chaTKeJZ5ryLALK3Z'
-  // 'bafyreief6bryqsa4byabnmx222jvo4khlodvpypw27af43frecbumn6ocq'
-
-  return (
-    mediaHash &&
-    ((mediaHash?.length === 49 && mediaHash.startsWith('zdpu')) ||
-      (mediaHash?.length === 59 && mediaHash.startsWith('bafy')))
-  )
-}

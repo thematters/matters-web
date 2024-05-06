@@ -61,7 +61,7 @@ const BookCollection: React.FC<BookCollectionProps> = ({
             {loading ? (
               <SpinnerBlock />
             ) : (
-              <Icon icon={IconCamera} color="white" size="xl" />
+              <Icon icon={IconCamera} color="white" size={48} />
             )}
           </div>
         )}

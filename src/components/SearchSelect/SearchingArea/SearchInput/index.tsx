@@ -34,7 +34,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const fieldId = `search-input-${type}`.toLocaleLowerCase()
   const { lang } = useContext(LanguageContext)
   const intl = useIntl()
-  const textAriaLabel = translate({ id: 'search', lang })
+  const textAriaLabel = intl.formatMessage({
+    defaultMessage: 'Search',
+    id: 'xmcVZ0',
+  })
   const textPlaceholder = {
     Article: translate({
       zh_hant: '輸入作品標題或貼上作品連結',
@@ -107,7 +110,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
             <button
               className={styles.search}
               type="submit"
-              aria-label={translate({ id: 'search', lang })}
+              aria-label={textAriaLabel}
             >
               <Icon icon={IconNavSearch} color="green" />
             </button>

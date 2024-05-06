@@ -35,9 +35,9 @@ const LINE = ({ title, link }: { title: string; link: string }) => {
       }}
     >
       <TextIcon
-        icon={<Icon icon={IconLINE} size="md" />}
-        spacing="base"
-        size="md"
+        icon={<Icon icon={IconLINE} size={24} />}
+        spacing={16}
+        size={16}
         color="black"
       >
         LINE

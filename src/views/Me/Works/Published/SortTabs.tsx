@@ -109,7 +109,7 @@ export const SortTabs = ({
               textActiveColor="black"
               onClick={() => setShowHint(false)}
             >
-              <Icon icon={IconTimes} size="mdS" />
+              <Icon icon={IconTimes} size={20} />
             </Button>
           </section>
         </section>

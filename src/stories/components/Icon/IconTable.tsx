@@ -23,7 +23,11 @@ export default function IconTable(props: IconProps) {
       {/* Logo */}
       <Tooltip content={'IconLogo'}>
         <span>
-          <Icon icon={IconLogo} {...props} />
+          <Icon
+            icon={IconLogo}
+            style={{ width: 120, height: 24.75 }}
+            {...props}
+          />
         </span>
       </Tooltip>
 

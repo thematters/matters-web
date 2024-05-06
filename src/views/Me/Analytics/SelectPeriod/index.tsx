@@ -101,17 +101,17 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
         <Button
           onClick={openDropdown}
           size={[null, '1.25rem']}
-          spacing={[0, 'xtight']}
+          spacing={[0, 8]}
           bgColor={'white'}
           aria-haspopup="listbox"
           ref={ref}
         >
           <TextIcon
-            icon={<Icon icon={IconDown} size="xs" />}
-            size={'sm'}
+            icon={<Icon icon={IconDown} size={12} />}
+            size={14}
             color={'grey'}
-            spacing="xxtight"
-            textPlacement="left"
+            spacing={4}
+            placement="left"
           >
             {options.filter((option) => option.value === period)[0].label}
           </TextIcon>

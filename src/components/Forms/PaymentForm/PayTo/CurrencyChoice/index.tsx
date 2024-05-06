@@ -2,16 +2,15 @@ import { useQuery } from '@apollo/react-hooks'
 import _find from 'lodash/find'
 import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconFiatCurrency } from '@/public/static/icons/24px/fiat-currency.svg'
 import { PAYMENT_CURRENCY as CURRENCY, TEST_ID } from '~/common/enums'
-import { formatAmount, translate } from '~/common/utils'
+import { formatAmount } from '~/common/utils'
 import {
   CurrencyFormatter,
   Dialog,
   Icon,
-  LanguageContext,
   SpinnerBlock,
   TextIcon,
   Translate,
@@ -47,7 +46,7 @@ const CurrencyChoice: React.FC<FormProps> = ({
   switchToWalletSelect,
   closeDialog,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const viewer = useContext(ViewerContext)
   const currency = viewer.settings.currency
@@ -94,11 +93,11 @@ const CurrencyChoice: React.FC<FormProps> = ({
         <span className={styles.userInfo}>
           <UserDigest.Mini
             user={recipient}
-            avatarSize="xs"
-            textSize="mdS"
+            avatarSize={16}
+            textSize={15}
             textWeight="semibold"
             nameColor="black"
-            spacing="xxtight"
+            spacing={4}
             hasAvatar
             hasDisplayName
           />
@@ -125,14 +124,17 @@ const CurrencyChoice: React.FC<FormProps> = ({
         onClick={() => {
           switchToSetAmount(CURRENCY.HKD)
         }}
-        aria-label={translate({ id: 'fiatCurrency', lang })}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Fiat Currency',
+          id: '2lAxMG',
+        })}
       >
         <TextIcon
-          icon={<Icon icon={IconFiatCurrency} size="xlM" />}
-          size="md"
-          spacing="xtight"
+          icon={<Icon icon={IconFiatCurrency} size={40} />}
+          size={16}
+          spacing={8}
         >
-          <Translate id="fiatCurrency" />
+          <FormattedMessage defaultMessage="Fiat Currency" id="2lAxMG" />
         </TextIcon>
         <CurrencyFormatter
           value={formatAmount(balanceHKD)}

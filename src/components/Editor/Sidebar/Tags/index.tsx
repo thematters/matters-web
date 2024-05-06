@@ -48,7 +48,7 @@ const SidebarTags = ({
     >
       {({ openDialog }) => (
         <Box
-          icon={<Icon icon={IconHashtag} size="md" />}
+          icon={<Icon icon={IconHashtag} size={24} />}
           title={<FormattedMessage defaultMessage="Add Tag" id="GUW//c" />}
           subtitle={
             <FormattedMessage

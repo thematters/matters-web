@@ -64,7 +64,7 @@ const UnfollowTagActionButton = ({ tag }: UnfollowTagActionButtonProps) => {
           zh_hans={`取消追踪 #${tag.content}`}
         />
       }
-      icon={<Icon icon={IconCircleMinus} size="mdS" />}
+      icon={<Icon icon={IconCircleMinus} size={20} />}
       onClick={async () => {
         await unfollow()
 

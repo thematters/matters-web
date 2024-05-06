@@ -8,7 +8,6 @@ import {
   Button,
   Icon,
   TextIcon,
-  Translate,
   Truncate,
   useIsomorphicLayoutEffect,
 } from '~/components'
@@ -29,7 +28,7 @@ interface ExpandableProps {
   limit?: number
   buffer?: number
   color?: CollapseTextColor
-  size?: 'sm' | 'mdS' | 'md'
+  size?: 14 | 15 | 16
   spacingTop?: 'tight' | 'base'
   textIndent?: boolean
   isRichShow?: boolean
@@ -59,7 +58,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const contentClasses = classNames({
     [styles.expandable]: true,
     [styles[`${color}`]]: !!color,
-    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
+    [size ? styles[`text${size}`] : '']: !!size,
     [spacingTop
       ? styles[`spacingTop${capitalizeFirstLetter(spacingTop)}`]
       : '']: !!spacingTop,
@@ -74,7 +73,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const richShowMoreButtonClasses = classNames({
     [styles.richShowMoreButton]: true,
     [styles[`${bgColor}`]]: !!bgColor,
-    [size ? styles[`size${capitalizeFirstLetter(size)}`] : '']: !!size,
+    [size ? styles[`text${size}`] : '']: !!size,
   })
 
   useIsomorphicLayoutEffect(() => {
@@ -115,15 +114,15 @@ export const Expandable: React.FC<ExpandableProps> = ({
       {expandable && collapseable && expand && !isRichShow && (
         <section className={styles.collapseWrapper}>
           <Button
-            spacing={['xxtight', 'xtight']}
+            spacing={[4, 8]}
             bgColor="greyLighter"
             textColor="grey"
             onClick={() => {
               setExpand(!expand)
             }}
           >
-            <TextIcon icon={<Icon icon={IconUp} />} textPlacement="left">
-              <Translate zh_hans="收起" zh_hant="收合" en="collapse" />
+            <TextIcon icon={<Icon icon={IconUp} />} placement="left">
+              <FormattedMessage defaultMessage="Collapse" id="W/V6+Y" />
             </TextIcon>
           </Button>
         </section>
@@ -142,7 +141,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
                   className={styles.expandButton}
                 >
                   ...
-                  <Translate id="expand" />
+                  <FormattedMessage defaultMessage="Expand" id="0oLj/t" />
                 </span>
               }
               trimWhitespace={true}

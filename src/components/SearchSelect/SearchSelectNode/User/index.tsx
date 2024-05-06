@@ -28,7 +28,7 @@ const SearchSelectUser: React.FC<SearchSelectUserProps> = ({
 
   return (
     <Card
-      spacing={['xtight', 'base']}
+      spacing={[8, 16]}
       onClick={() => onClick(user)}
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
@@ -44,10 +44,10 @@ const SearchSelectUser: React.FC<SearchSelectUserProps> = ({
 
         <span className={styles.iconSelect}>
           {inStagingArea && selected && (
-            <Icon icon={IconCircleCheckFill} color="green" size="mdS" />
+            <Icon icon={IconCircleCheckFill} color="green" size={20} />
           )}
           {inStagingArea && !selected && (
-            <Icon icon={IconCircleEmpty} color="greyLight" size="mdS" />
+            <Icon icon={IconCircleEmpty} color="greyLight" size={20} />
           )}
         </span>
       </section>

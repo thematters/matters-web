@@ -21,8 +21,8 @@ const DonationCount = ({ article }: DonationCountProps) => {
 
   return (
     <TextIcon
-      icon={<Icon icon={IconMoney} size="mdXS" />}
-      size="xs"
+      icon={<Icon icon={IconMoney} size={18} />}
+      size={12}
       color="grey"
       aria-label={intl.formatMessage({
         defaultMessage: 'Donation count',

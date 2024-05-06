@@ -34,8 +34,8 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
       <section className={styles.left}>
         <TextIcon
           icon={<Icon icon={IconUser} />}
-          spacing="basexxtight"
-          size="sm"
+          spacing={6}
+          size={14}
           aria-label={intl.formatMessage({
             defaultMessage: 'Number of readers',
             id: 'hv1iYZ',
@@ -53,8 +53,8 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
 
         <TextIcon
           icon={<Icon icon={IconClap} />}
-          spacing="basexxtight"
-          size="sm"
+          spacing={6}
+          size={14}
           aria-label={intl.formatMessage({
             defaultMessage: 'Number of claps',
             id: 'C9jbHn',
@@ -74,8 +74,8 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
 
         <TextIcon
           icon={<Icon icon={IconComment} />}
-          spacing="basexxtight"
-          size="sm"
+          spacing={6}
+          size={14}
           aria-label={intl.formatMessage({
             defaultMessage: 'Number of comments',
             id: 'J6f6iN',
@@ -93,8 +93,8 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
 
         <TextIcon
           icon={<Icon icon={IconMoney} />}
-          spacing="basexxtight"
-          size="sm"
+          spacing={6}
+          size={14}
           aria-label={intl.formatMessage({
             defaultMessage: 'Number of supporters',
             id: 'NfCbnZ',
@@ -115,7 +115,7 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
         <DropdownActions
           article={article}
           {...controls}
-          size="mdM"
+          size={22}
           inCard={true}
         />
       </section>

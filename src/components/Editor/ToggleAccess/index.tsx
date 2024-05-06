@@ -123,8 +123,8 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
               circle={circle}
               bgColor="greyLighter"
               borderRadius="xtight"
-              avatarSize="xl"
-              textSize="mdS"
+              avatarSize={48}
+              textSize={15}
               hasOwner={false}
               hasDescription={false}
               disabled
@@ -167,7 +167,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
 
                 {content &&
                 (content.replyToDonator || content.requestForDonation) ? (
-                  <Icon icon={IconSquareChecked} size="md" />
+                  <Icon icon={IconSquareChecked} size={24} />
                 ) : (
                   <Icon icon={IconRight} color="grey" />
                 )}

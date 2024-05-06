@@ -39,24 +39,9 @@ export type ButtonHeight =
   | undefined
   | null
 
-export type ButtonSpacingY =
-  | 0
-  | 'xxtight'
-  | 'xtight'
-  | 'baseTight'
-  | 'tighter'
-  | 'tight'
-  | 'base'
+export type ButtonSpacingY = 0 | 4 | 8 | 10 | 12 | 16
 
-export type ButtonSpacingX =
-  | 0
-  | 'xxtight'
-  | 'xtight'
-  | 'baseTight'
-  | 'tight'
-  | 'base'
-  | 'baseLoose'
-  | 'loose'
+export type ButtonSpacingX = 0 | 4 | 8 | 10 | 12 | 16 | 20 | 24
 
 type ButtonColor =
   | 'white'
@@ -172,7 +157,7 @@ export type ButtonProps = {
  * ```jsx
  *  // with custom spacing
  *  <Button
- *    spacing={['xtight', 'xtight']}
+ *    spacing={[8, 8]}
  *    onClick={onClick}
  *  >
  *    <Icon icon={IconSave} />
@@ -187,8 +172,8 @@ export type ButtonProps = {
  *    borderColor="green"
  *    onClick={onClick}
  *  >
- *    <TextIcon weight="md" size="xs">
- *      <Translate id="follow" />
+ *    <TextIcon weight="medium" size={12}>
+ *      Follow
  *    </TextIcon>
  *  </Button>
  * ```

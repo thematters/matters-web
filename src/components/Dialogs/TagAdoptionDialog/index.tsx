@@ -1,7 +1,10 @@
+import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
+
 import {
   Dialog,
+  LanguageContext,
   toast,
-  Translate,
   useDialogSwitch,
   useMutation,
 } from '~/components'
@@ -13,22 +16,23 @@ interface Props {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const textZhHant =
-  '當你認領標籤後，即刻成為該標籤的主理人。' +
-  '你將可以為標籤設置封面，編輯描述，並添加作品至精選列表。' +
-  '你主理的標籤可以用作文集、策展，也可以變成圈子、小組、討論區等，更多主理人玩法等你發掘！'
-
-const textZhHans =
-  '当你认领标签后，即刻成为该标签的主理人。' +
-  '你将可以为标签设置封面，编辑描述，并添加作品至精选列表。' +
-  '你主理的标签可以用作文集、策展，也可以变成圈子、小组、讨论区等，更多主理人玩法等你发掘！'
-
-const textEn =
-  'After adopting the tag, you become the maintainer of it.' +
-  ' You can set the cover and description of the tag, and add works to selected feed. ' +
-  ' You can use it for writing collection, curation, or subcommunity and group discussions, be creative and discover new usages!'
+const texts = {
+  zh_hans:
+    '当你认领标签后，即刻成为该标签的主理人。' +
+    '你将可以为标签设置封面，编辑描述，并添加作品至精选列表。' +
+    '你主理的标签可以用作文集、策展，也可以变成圈子、小组、讨论区等，更多主理人玩法等你发掘！',
+  zh_hant:
+    '當你認領標籤後，即刻成為該標籤的主理人。' +
+    '你將可以為標籤設置封面，編輯描述，並添加作品至精選列表。' +
+    '你主理的標籤可以用作文集、策展，也可以變成圈子、小組、討論區等，更多主理人玩法等你發掘！',
+  en:
+    'After adopting the tag, you become the maintainer of it.' +
+    ' You can set the cover and description of the tag, and add works to selected feed. ' +
+    ' You can use it for writing collection, curation, or subcommunity and group discussions, be creative and discover new usages!',
+}
 
 const BaseDialog = ({ id, children }: Props) => {
+  const { lang } = useContext(LanguageContext)
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const [update, { loading }] =
@@ -44,7 +48,7 @@ const BaseDialog = ({ id, children }: Props) => {
     }
 
     toast.success({
-      message: <Translate zh_hant="認領成功" zh_hans="认领成功" />,
+      message: <FormattedMessage defaultMessage="Adopted" id="P2Btra" />,
     })
   }
 
@@ -54,39 +58,29 @@ const BaseDialog = ({ id, children }: Props) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={
-            <Translate zh_hant="認領標籤" zh_hans="认领标签" en="Adopt Tag" />
-          }
+          title={<FormattedMessage defaultMessage="Adopt Tag" id="Uv0hqn" />}
         />
 
         <Dialog.Content>
           <Dialog.Content.Message>
-            <p>
-              <Translate
-                zh_hant={textZhHant}
-                zh_hans={textZhHans}
-                en={textEn}
-              />
-            </p>
+            <p>{texts[lang]}</p>
           </Dialog.Content.Message>
         </Dialog.Content>
 
         <Dialog.Footer
           closeDialog={closeDialog}
           closeText={
-            <Translate
-              zh_hant="考慮一下"
-              zh_hans="考虑一下"
-              en="Let me think about it"
+            <FormattedMessage
+              defaultMessage="Let me think about it"
+              id="IjNYll"
             />
           }
           btns={
             <Dialog.RoundedButton
               text={
-                <Translate
-                  zh_hant="即刻主理"
-                  zh_hans="即刻主理"
-                  en="Maintain immediately"
+                <FormattedMessage
+                  defaultMessage="Maintain immediately"
+                  id="a3j20X"
                 />
               }
               loading={loading}
@@ -96,10 +90,9 @@ const BaseDialog = ({ id, children }: Props) => {
           smUpBtns={
             <Dialog.TextButton
               text={
-                <Translate
-                  zh_hant="即刻主理"
-                  zh_hans="即刻主理"
-                  en="Maintain immediately"
+                <FormattedMessage
+                  defaultMessage="Maintain immediately"
+                  id="a3j20X"
                 />
               }
               loading={loading}

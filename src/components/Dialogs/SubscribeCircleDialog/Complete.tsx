@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 import { DigestRichCirclePublicFragment } from '~/gql/graphql'
 
 interface CompleteProps {
@@ -23,9 +23,9 @@ const Complete: React.FC<CompleteProps> = ({ circle }) => {
       <Dialog.Content>
         <Dialog.Content.Message align="left" smUpAlign="left">
           <p>
-            <Translate
-              zh_hant="恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
-              zh_hans="恭喜成为围炉一员。现在你可以免费浏览围炉内作品，还可以去围炉与大家谈天说地。"
+            <FormattedMessage
+              defaultMessage="Congratulations! Now you can browse all works within the cirlce for free and chat with everyone."
+              id="Q1PHUd"
             />
           </p>
           <br />
@@ -35,13 +35,13 @@ const Complete: React.FC<CompleteProps> = ({ circle }) => {
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<Translate zh_hant="馬上逛逛" zh_hans="马上逛逛" />}
+            text={<FormattedMessage defaultMessage="View Circle" id="ob+HDS" />}
             htmlHref={toPath({ page: 'circleDetail', circle }).href}
           />
         }
         smUpBtns={
           <Dialog.TextButton
-            text={<Translate zh_hant="馬上逛逛" zh_hans="马上逛逛" />}
+            text={<FormattedMessage defaultMessage="View Circle" id="ob+HDS" />}
             htmlHref={toPath({ page: 'circleDetail', circle }).href}
           />
         }

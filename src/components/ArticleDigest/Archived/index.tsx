@@ -1,7 +1,6 @@
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { UtmParams } from '~/common/utils'
 import { DateTime } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
@@ -10,12 +9,10 @@ import styles from './styles.module.css'
 
 export type ArticleDigestArchivedProps = {
   article: ArticleDigestTitleArticleFragment & { createdAt: string }
-} & UtmParams
+}
 
 export const ArticleDigestArchived = ({
   article,
-  utm_source,
-  utm_medium,
 }: ArticleDigestArchivedProps) => {
   return (
     <section

@@ -34,7 +34,7 @@
       }
     }
 
-    & .sizeMdS {
+    & .text15 {
       font-size: var(--text15);
       line-height: 1.75;
     }
@@ -67,15 +67,15 @@
 }
 
 /* size */
-.sizeSm {
+.text14 {
   font-size: var(--text14);
 }
 
-.sizeMdS {
+.text15 {
   font-size: var(--text15);
 }
 
-.sizeMd {
+.text16 {
   font-size: var(--text16);
 }
 

@@ -1,6 +1,7 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { Form, LanguageContext, Translate } from '~/components'
+import { Form, LanguageContext } from '~/components'
 import { ArticleLicenseType } from '~/gql/graphql'
 
 import About from './About'
@@ -113,8 +114,8 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
   return (
     <Form.Select
       name="select-license"
-      label={<Translate id="license" />}
-      title={<Translate id="license" />}
+      label={<FormattedMessage defaultMessage="License" id="HBxXD/" />}
+      title={<FormattedMessage defaultMessage="License" id="HBxXD/" />}
       onChange={(option) => onChange(option.value)}
       options={options.map((value) => {
         const extraDesc = LICENSE_TEXT[isInCircle ? 1 : 0][value].extra[lang]
@@ -130,7 +131,7 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
           selected: license === value,
         }
       })}
-      size="sm"
+      size={14}
     />
   )
 }

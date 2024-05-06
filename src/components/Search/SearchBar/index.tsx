@@ -46,7 +46,7 @@ const SearchButton = () => {
         id: 'xmcVZ0',
       })}
     >
-      <Icon icon={IconNavSearch} color="greyDark" size="mdM" />
+      <Icon icon={IconNavSearch} color="greyDark" size={22} />
     </Button>
   )
 }

@@ -28,7 +28,7 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
 
   return (
     <Card
-      spacing={['base', 'base']}
+      spacing={[16, 16]}
       onClick={() => onClick(tag)}
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
@@ -37,10 +37,10 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
 
         <span className={styles.iconSelect}>
           {inStagingArea && selected && (
-            <Icon icon={IconCircleCheckFill} color="green" size="mdS" />
+            <Icon icon={IconCircleCheckFill} color="green" size={20} />
           )}
           {inStagingArea && !selected && (
-            <Icon icon={IconCircleEmpty} color="greyLight" size="mdS" />
+            <Icon icon={IconCircleEmpty} color="greyLight" size={20} />
           )}
         </span>
       </section>
