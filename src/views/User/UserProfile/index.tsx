@@ -14,8 +14,6 @@ import {
   FollowUserButton,
   Media,
   Throw404,
-  Translate,
-  // Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -179,7 +177,7 @@ export const UserProfile = () => {
                       onClick={openEditProfileDialog}
                       size={['5.3125rem', '2rem']}
                     >
-                      <Translate id="edit" />
+                      <FormattedMessage defaultMessage="Edit" id="wEQDC6" />
                     </Button>
                   )}
                 </EditProfileDialog>

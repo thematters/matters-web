@@ -11,7 +11,7 @@ import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { STRIPE_ERROR_MESSAGES } from '~/common/enums'
-import { analytics, parseFormSubmitErrors, translate } from '~/common/utils'
+import { analytics, parseFormSubmitErrors } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
@@ -81,7 +81,9 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
 
       setCheckoutError(msg || event.error.message)
     } else if (event.empty) {
-      setCheckoutError(translate({ lang, id: 'required' }))
+      setCheckoutError(
+        intl.formatMessage({ defaultMessage: 'Required', id: 'Seanpx' })
+      )
     } else {
       setCheckoutError('')
     }

@@ -1,14 +1,13 @@
-import { useContext } from 'react'
 import {
   DragDropContext,
   Draggable,
   Droppable,
   DropResult,
 } from 'react-beautiful-dnd'
+import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconDrag } from '@/public/static/icons/24px/drag.svg'
-import { translate } from '~/common/utils'
-import { Icon, LanguageContext } from '~/components'
+import { Icon } from '~/components'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'
@@ -37,7 +36,7 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
   setNodes,
   toggleSelectNode,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const onDragEnd = (result: DropResult) => {
     if (!result.destination) {
@@ -79,11 +78,9 @@ const DraggableNodes: React.FC<DraggableNodesProps> = ({
                   >
                     <span
                       className={areaStyles.dragHandler}
-                      aria-label={translate({
-                        zh_hant: '拖拽',
-                        zh_hans: '拖拽',
-                        en: 'Drag',
-                        lang,
+                      aria-label={intl.formatMessage({
+                        defaultMessage: 'Drag',
+                        id: 'r5pj/5',
                       })}
                     >
                       <Icon icon={IconDrag} color="greyLight" />

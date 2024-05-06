@@ -1,21 +1,19 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
-  TEXT,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { analytics, numAbbr, translate } from '~/common/utils'
+import { analytics, numAbbr } from '~/common/utils'
 import {
   Button,
   ButtonProps,
   Icon,
-  LanguageContext,
   TextIcon,
   toast,
   ViewerContext,
@@ -59,7 +57,7 @@ const DonationButton = ({
   ...buttonProps
 }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const forbid = () => {
     toast.error({
@@ -79,12 +77,15 @@ const DonationButton = ({
       {({ openDialog }) => (
         <Button
           spacing={[8, 8]}
-          aria-label={translate({
-            zh_hant: `${TEXT.zh_hant.donation}（當前 ${donationCount} 次支持）`,
-            zh_hans: `${TEXT.zh_hans.donation}（当前 ${donationCount} 次支持）`,
-            en: `${TEXT.en.donation} (current ${donationCount} supports)`,
-            lang,
-          })}
+          aria-label={intl.formatMessage(
+            {
+              defaultMessage:
+                'Support author (current {donationCount} supports)',
+
+              id: 'KBeSFM',
+            },
+            { donationCount }
+          )}
           aria-haspopup="dialog"
           disabled={article.author.id === viewer.id}
           onClick={() => {

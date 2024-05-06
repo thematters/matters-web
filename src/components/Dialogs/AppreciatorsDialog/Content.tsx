@@ -3,13 +3,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
-import {
-  Dialog,
-  InfiniteScroll,
-  QueryError,
-  SpinnerBlock,
-  Translate,
-} from '~/components'
+import { Dialog, InfiniteScroll, QueryError, SpinnerBlock } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleAppreciatorsQuery } from '~/gql/graphql'
 
@@ -104,10 +98,10 @@ const AppreciatorsDialogContent = ({
     <>
       <Dialog.Header
         title={
-          <Translate
-            zh_hant={`${totalCount} 人讚賞了作品`}
-            zh_hans={`${totalCount} 人赞赏了作品`}
-            en={`${totalCount} people have liked the article.`}
+          <FormattedMessage
+            defaultMessage="{totalCount} people have liked the article."
+            id="+3ny7b"
+            values={{ totalCount }}
           />
         }
         closeDialog={closeDialog}

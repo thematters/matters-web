@@ -152,7 +152,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                     weight="medium"
                     spacing={8}
                   >
-                    <Translate id="cover" />
+                    <FormattedMessage defaultMessage="Cover" id="hl9bd4" />
                   </TextIcon>
                 </button>
               )}
@@ -188,7 +188,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                     weight="medium"
                     spacing={8}
                   >
-                    <Translate id="tag" />
+                    <FormattedMessage defaultMessage="Tag" id="18HJlm" />
                   </TextIcon>
                 </button>
               )}
@@ -229,7 +229,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                     weight="medium"
                     spacing={8}
                   >
-                    <Translate id="extend" />
+                    <FormattedMessage defaultMessage="Collect" id="kCPl0r" />
                   </TextIcon>
                 </button>
               )}

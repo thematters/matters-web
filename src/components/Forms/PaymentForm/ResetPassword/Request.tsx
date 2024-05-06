@@ -6,7 +6,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { ERROR_CODES, SEND_CODE_COUNTDOWN } from '~/common/enums'
 import {
   parseFormSubmitErrors,
-  translate,
   validateCode,
   validateEmail,
 } from '~/common/utils'
@@ -14,7 +13,6 @@ import {
   Button,
   Dialog,
   Form,
-  LanguageContext,
   ReCaptchaContext,
   ResendCodeButton,
   useCountdown,
@@ -47,6 +45,7 @@ const Request: React.FC<FormProps> = ({
   closeDialog,
   back,
 }) => {
+  const intl = useIntl()
   const { token, refreshToken } = useContext(ReCaptchaContext)
 
   const [send, { loading: sendingCode }] =
@@ -61,8 +60,6 @@ const Request: React.FC<FormProps> = ({
     { showToast: false }
   )
 
-  const intl = useIntl()
-  const { lang } = useContext(LanguageContext)
   const formId = `payment-password-reset-request-form`
 
   const {
@@ -82,8 +79,8 @@ const Request: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ email, code }) =>
       _pickBy({
-        email: validateEmail(email, lang, { allowPlusSign: true }),
-        code: validateCode(code, lang),
+        email: validateEmail(email, intl, { allowPlusSign: true }),
+        code: validateCode(code, intl),
       }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
@@ -149,9 +146,11 @@ const Request: React.FC<FormProps> = ({
         type="email"
         name="email"
         required
-        placeholder={translate({
-          id: 'enterEmail',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Email',
+          description:
+            'src/components/Forms/PaymentForm/ResetPassword/Request.tsx',
+          id: 'rdxgu4',
         })}
         value={values.email}
         error={touched.email && errors.email}
@@ -166,7 +165,10 @@ const Request: React.FC<FormProps> = ({
         type="text"
         name="code"
         required
-        placeholder={translate({ id: 'enterVerificationCode', lang })}
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter verification code',
+          id: 'NSyuEP',
+        })}
         hintAlign="center"
         value={values.code}
         error={touched.code && errors.code}

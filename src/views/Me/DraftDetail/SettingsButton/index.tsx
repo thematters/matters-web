@@ -1,10 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ENTITY_TYPE } from '~/common/enums'
-import {
-  Button,
-  TextIcon,
-  toDigestTagPlaceholder,
-  Translate,
-} from '~/components'
+import { Button, TextIcon, toDigestTagPlaceholder } from '~/components'
 import {
   SetCollectionProps,
   SetCoverProps,
@@ -52,7 +49,7 @@ const ConfirmButton = ({
     aria-haspopup="dialog"
   >
     <TextIcon color="white" size={16} weight="medium">
-      <Translate id="publish" />
+      <FormattedMessage defaultMessage="Publish" id="syEQFE" />
     </TextIcon>
   </Button>
 )
@@ -145,8 +142,12 @@ const SettingsButton = ({
         accessSaving ||
         canCommentSaving
       }
-      confirmButtonText={<Translate id="publishNow" />}
-      cancelButtonText={<Translate id="publishAbort" />}
+      confirmButtonText={
+        <FormattedMessage defaultMessage="Publish Now" id="nWhqw9" />
+      }
+      cancelButtonText={
+        <FormattedMessage defaultMessage="Save as Draft" id="E048/V" />
+      }
       ConfirmStepContent={ConfirmPublishDialogContent}
       {...coverProps}
       {...tagsProps}

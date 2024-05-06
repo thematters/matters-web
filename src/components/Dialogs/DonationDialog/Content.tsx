@@ -2,9 +2,10 @@
 
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { SpinnerBlock, Translate, ViewerContext } from '~/components'
+import { SpinnerBlock, ViewerContext } from '~/components'
 import { PayToMutation } from '~/gql/graphql'
 
 import { BaseDonationDialogProps, Step } from './types'
@@ -241,11 +242,7 @@ const DonationDialogContent = ({
           closeDialog={closeDialog}
           callback={() => forward('setAmount')}
           callbackText={
-            <Translate
-              zh_hant="回到支持"
-              zh_hans="回到支持"
-              en="Back to support"
-            />
+            <FormattedMessage defaultMessage="Back to support" id="/MgyCo" />
           }
         />
       )}
@@ -254,11 +251,7 @@ const DonationDialogContent = ({
         <DynamicPaymentResetPasswordForm
           callback={() => forward('setAmount')}
           callbackText={
-            <Translate
-              zh_hant="回到支持"
-              zh_hans="回到支持"
-              en="Back to support"
-            />
+            <FormattedMessage defaultMessage="Back to support" id="/MgyCo" />
           }
           closeDialog={closeDialog}
           back={() => forward('currencyChoice')}

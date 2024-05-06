@@ -1,11 +1,10 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { MAX_REVISION_DESCRIPTION_LENGTH } from '~/common/enums'
 import { validateDescription } from '~/common/utils'
-import { Dialog, Form, LanguageContext } from '~/components'
+import { Dialog, Form } from '~/components'
 
 interface FormProps {
   back?: () => any
@@ -28,7 +27,6 @@ const SetVersionDescriptionDialogContent: React.FC<FormProps> = ({
   description,
   editDescription,
 }) => {
-  const { lang } = useContext(LanguageContext)
   const formId = 'edit-revision-description-form'
   const intl = useIntl()
 
@@ -48,7 +46,7 @@ const SetVersionDescriptionDialogContent: React.FC<FormProps> = ({
       _pickBy({
         description: validateDescription(
           description,
-          lang,
+          intl,
           MAX_REVISION_DESCRIPTION_LENGTH
         ),
       }),

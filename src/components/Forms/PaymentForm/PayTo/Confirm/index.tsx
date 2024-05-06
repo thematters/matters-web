@@ -15,8 +15,6 @@ import {
   Dialog,
   Form,
   Icon,
-  // IconExternalLink16,
-  LanguageContext,
   ResetPaymentPasswordDialog,
   Spacer,
   SpinnerBlock,
@@ -72,7 +70,6 @@ const Confirm: React.FC<FormProps> = ({
   tx,
 }) => {
   const intl = useIntl()
-  const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
 
@@ -106,7 +103,7 @@ const Confirm: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ password }) =>
       _pickBy({
-        password: validatePaymentPassword(password, lang),
+        password: validatePaymentPassword(password, intl),
       }),
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {

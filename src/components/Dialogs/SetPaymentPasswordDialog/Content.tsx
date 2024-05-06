@@ -6,7 +6,6 @@ import {
   Dialog,
   SetPaymentPasswordForm,
   SpinnerBlock,
-  Translate,
   useStep,
 } from '~/components'
 
@@ -54,7 +53,10 @@ const SetPaymentPasswordContent: React.FC<FormProps> = ({
       )}
 
       <p className={styles.hint}>
-        <Translate id="hintPaymentPassword" />
+        <FormattedMessage
+          defaultMessage="Enter a 6-digit payment password."
+          id="OpeFTV"
+        />
       </p>
     </section>
   )

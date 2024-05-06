@@ -137,7 +137,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ email, password }) =>
       _pickBy({
-        email: validateEmail(email, lang, { allowPlusSign: true }),
+        email: validateEmail(email, intl, { allowPlusSign: true }),
       }),
     onSubmit: async ({ email, password }, { setFieldError }) => {
       try {
@@ -221,7 +221,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   })
 
   const sendLoginCode = async () => {
-    const error = validateEmail(values.email, lang, { allowPlusSign: true })
+    const error = validateEmail(values.email, intl, { allowPlusSign: true })
     if (error) {
       setFieldError('email', error)
       return

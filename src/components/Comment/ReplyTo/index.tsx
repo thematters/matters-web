@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ReplyToUserFragment } from '~/gql/graphql'
 
@@ -24,7 +24,7 @@ const fragments = {
 const ReplyTo = ({ user }: ReplyToProps) => (
   <section className={styles.container} data-test-id={TEST_ID.COMMENT_REPLY_TO}>
     <span className={styles.replyTo}>
-      <Translate id="reply" />
+      <FormattedMessage defaultMessage="Reply" id="9HU8vw" />
     </span>
 
     <UserDigest.Mini

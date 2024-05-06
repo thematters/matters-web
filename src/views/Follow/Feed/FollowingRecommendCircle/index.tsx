@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
@@ -15,7 +16,6 @@ import {
   LinkWrapper,
   SubscribeCircleDialog,
   TextIcon,
-  Translate,
   ViewerContext,
 } from '~/components'
 import {
@@ -95,7 +95,10 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
                       }}
                     >
                       <TextIcon weight="medium" size={12}>
-                        <Translate id="subscriptions" />
+                        <FormattedMessage
+                          defaultMessage="Subscribe"
+                          id="gczcC5"
+                        />
                       </TextIcon>
                     </Button>
                   </section>

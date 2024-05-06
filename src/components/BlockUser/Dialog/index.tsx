@@ -38,7 +38,12 @@ const BlockUserDialog = ({ user, children }: BlockUserDialogProps) => {
     await blockUser()
 
     toast.success({
-      message: <Translate id="successBlock" />,
+      message: (
+        <FormattedMessage
+          defaultMessage="User blocked. User now can't reply to your articles and user's comments have been hidden from you."
+          id="2w2mhG"
+        />
+      ),
       actions: [
         {
           content: <Translate zh_hant="查看" zh_hans="查看" />,

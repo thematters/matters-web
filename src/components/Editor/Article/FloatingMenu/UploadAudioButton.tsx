@@ -1,7 +1,8 @@
 import { Editor } from '@matters/matters-editor'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconEditorAudio } from '@/public/static/icons/editor-audio.svg'
 import {
@@ -9,14 +10,7 @@ import {
   ASSET_TYPE,
   UPLOAD_AUDIO_SIZE_LIMIT,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
-import {
-  LanguageContext,
-  Spinner,
-  toast,
-  Translate,
-  withIcon,
-} from '~/components'
+import { Spinner, toast, Translate, withIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -36,7 +30,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
   editor,
   upload,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const [uploading, setUploading] = useState(false)
 
   const acceptTypes = ACCEPTED_UPLOAD_AUDIO_TYPES.join(',')
@@ -111,11 +105,9 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
     <label
       className={labelClasses}
       htmlFor={fieldId}
-      title={translate({
-        zh_hant: '插入音訊',
-        zh_hans: '插入音频',
-        en: 'Insert audio',
-        lang,
+      title={intl.formatMessage({
+        defaultMessage: 'Insert audio',
+        id: 'oGiO//',
       })}
     >
       {!uploading && withIcon(IconEditorAudio)({ size: 32 })}
@@ -126,11 +118,9 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
           id={fieldId}
           type="file"
           name="file"
-          aria-label={translate({
-            zh_hant: '插入音訊',
-            zh_hans: '插入音频',
-            en: 'Insert audio',
-            lang,
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Insert audio',
+            id: 'oGiO//',
           })}
           disabled={uploading}
           accept={acceptTypes}

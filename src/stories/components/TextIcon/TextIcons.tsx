@@ -4,7 +4,7 @@ import { ReactComponent as IconDonate } from '@/public/static/icons/24px/donate.
 import { ReactComponent as IconExpand } from '@/public/static/icons/24px/expand.svg'
 import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
 import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
-import { Icon, TextIcon, Translate } from '~/components'
+import { Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -17,7 +17,7 @@ const Toasts = () => (
           size={16}
           spacing={16}
         >
-          <Translate id="pinArticle" />
+          Pin Article
         </TextIcon>
       </li>
 
@@ -43,7 +43,7 @@ const Toasts = () => (
           weight="normal"
           color="grey"
         >
-          <Translate zh_hant="打開" zh_hans="展开" />
+          Expand
         </TextIcon>
       </li>
 
@@ -55,10 +55,7 @@ const Toasts = () => (
           placement="left"
           decoration="underline"
         >
-          <Translate
-            zh_hant="改使用 Google 搜尋關鍵字"
-            zh_hans="改使用 Google 搜索关键字"
-          />
+          Search on Google
         </TextIcon>
       </li>
     </ul>

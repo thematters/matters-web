@@ -22,7 +22,10 @@ const ConfirmRevisedPublishDialogContent = ({
   }
 
   const SubmitButton = (
-    <Dialog.TextButton text={<Translate id="publish" />} onClick={onPublish} />
+    <Dialog.TextButton
+      text={<FormattedMessage defaultMessage="Publish" id="syEQFE" />}
+      onClick={onPublish}
+    />
   )
 
   return (
