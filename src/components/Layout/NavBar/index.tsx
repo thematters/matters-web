@@ -1,14 +1,14 @@
 import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconNavHome } from '@/public/static/icons/24px/nav-home.svg'
 import { ReactComponent as IconNavHomeActive } from '@/public/static/icons/24px/nav-home-active.svg'
 import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
 import { ReactComponent as IconNavSearchActive } from '@/public/static/icons/24px/nav-search-active.svg'
-import { PATHS, TEXT } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Icon,
-  LanguageContext,
   UniversalAuthButton,
   useRoute,
   ViewerContext,
@@ -22,7 +22,7 @@ import styles from './styles.module.css'
 const NavBar = () => {
   const viewer = useContext(ViewerContext)
   const { router, isInPath } = useRoute()
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const isInHome = isInPath('HOME')
   const isInFollow = isInPath('FOLLOW')
   const isInNotification = isInPath('ME_NOTIFICATIONS')
@@ -34,7 +34,7 @@ const NavBar = () => {
       <section className={styles.navBar} role="navigation">
         <ul className={styles.list}>
           <NavListItem
-            name={TEXT[lang].discover}
+            name={<FormattedMessage defaultMessage="Discover" id="cE4Hfw" />}
             icon={<Icon icon={IconNavHome} size={32} />}
             activeIcon={<Icon icon={IconNavHomeActive} size={32} />}
             active={isInHome}
@@ -46,7 +46,7 @@ const NavBar = () => {
           </li>
 
           <NavListItem
-            name={TEXT[lang].search}
+            name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}
             icon={<Icon icon={IconNavSearch} size={32} />}
             activeIcon={<Icon icon={IconNavSearchActive} size={32} />}
             active={isInSearch}
@@ -71,7 +71,7 @@ const NavBar = () => {
     <section className={styles.navBar} role="navigation">
       <ul className={styles.list}>
         <NavListItem
-          name={TEXT[lang].discover}
+          name={<FormattedMessage defaultMessage="Discover" id="cE4Hfw" />}
           icon={<Icon icon={IconNavHome} size={32} />}
           activeIcon={<Icon icon={IconNavHomeActive} size={32} />}
           active={isInHome}
@@ -79,7 +79,7 @@ const NavBar = () => {
         />
 
         <NavListItem
-          name={TEXT[lang].follow}
+          name={<FormattedMessage defaultMessage="Follow" id="ieGrWo" />}
           icon={<UnreadIcon.Follow />}
           activeIcon={<UnreadIcon.Follow active />}
           active={isInFollow}
@@ -96,7 +96,7 @@ const NavBar = () => {
         )}
 
         <NavListItem
-          name={TEXT[lang].search}
+          name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}
           icon={<Icon icon={IconNavSearch} size={32} />}
           activeIcon={<Icon icon={IconNavSearchActive} size={32} />}
           active={isInSearch}
@@ -114,12 +114,15 @@ const NavBar = () => {
         />
 
         <NavListItem
-          name={TEXT[lang].notifications}
+          name={<FormattedMessage defaultMessage="Notifications" id="NAidKb" />}
           icon={<UnreadIcon.Notification />}
           activeIcon={<UnreadIcon.Notification active />}
           active={isInNotification}
           href={PATHS.ME_NOTIFICATIONS}
-          aria-label={TEXT[lang].notifications}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Notifications',
+            id: 'NAidKb',
+          })}
         />
       </ul>
     </section>

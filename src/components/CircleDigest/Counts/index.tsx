@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
 import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
 import { TEST_ID } from '~/common/enums'
-import { numAbbr, translate } from '~/common/utils'
-import { Icon, LanguageContext, TextIcon } from '~/components'
+import { numAbbr } from '~/common/utils'
+import { Icon, TextIcon } from '~/components'
 import { CountsCircleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -29,7 +29,7 @@ const fragments = {
 }
 
 const Counts = ({ circle }: CountsProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const memberCount = circle.members.totalCount
   const articleCount = circle.works.totalCount
@@ -41,12 +41,13 @@ const Counts = ({ circle }: CountsProps) => {
         color="grey"
         weight="medium"
         size={14}
-        aria-label={translate({
-          zh_hant: `${memberCount} 個成員`,
-          zh_hans: `${memberCount} 个成员`,
-          en: `${memberCount} members`,
-          lang,
-        })}
+        aria-label={intl.formatMessage(
+          {
+            defaultMessage: `{total} members`,
+            id: 'VmYzLr',
+          },
+          { total: memberCount }
+        )}
         data-test-id={TEST_ID.DIGEST_CIRCLE_MEMBER_COUNT}
       >
         {numAbbr(memberCount)}
@@ -57,12 +58,13 @@ const Counts = ({ circle }: CountsProps) => {
         color="grey"
         weight="medium"
         size={14}
-        aria-label={translate({
-          zh_hant: `${articleCount} 篇作品`,
-          zh_hans: `${articleCount} 篇作品`,
-          en: `${articleCount} articles`,
-          lang,
-        })}
+        aria-label={intl.formatMessage(
+          {
+            defaultMessage: `{articleCount} articles`,
+            id: 'RnKPVm',
+          },
+          { articleCount }
+        )}
         data-test-id={TEST_ID.DIGEST_CIRCLE_ARTICLE_COUNT}
       >
         {numAbbr(articleCount)}

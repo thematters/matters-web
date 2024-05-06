@@ -47,7 +47,10 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
         <Dialog.Content>
           <Dialog.Content.Message>
             <p>
-              <Translate id="logbook2LaunchText" />
+              <FormattedMessage
+                defaultMessage="Logbook 2.0 has just launched. If you are an owner of Traveloggers, and haven't claimed, you may claim one from the new Logbook page:"
+                id="UUJzml"
+              />
               &nbsp;
               <a
                 className="u-link-green"
@@ -75,11 +78,7 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
                   size={16}
                   spacing={8}
                 >
-                  <Translate
-                    zh_hant="Logbook 2.0 Bookcase"
-                    zh_hans="Logbook 2.0 Bookcase"
-                    en="Logbook 2.0 Bookcase"
-                  />
+                  Logbook 2.0 Bookcase
                 </TextIcon>
               }
             />

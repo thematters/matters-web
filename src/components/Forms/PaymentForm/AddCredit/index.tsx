@@ -22,7 +22,6 @@ import {
 import {
   analytics,
   parseFormSubmitErrors,
-  translate,
   validateAmount,
 } from '~/common/utils'
 import {
@@ -116,7 +115,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
 
       setCheckoutError(msg || event.error.message)
     } else if (event.empty) {
-      setCheckoutError(translate({ lang, id: 'required' }))
+      setCheckoutError(
+        intl.formatMessage({ defaultMessage: 'Required', id: 'Seanpx' })
+      )
     } else {
       setCheckoutError('')
     }
@@ -144,7 +145,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
     validateOnChange: true,
     validate: ({ amount }) =>
       _pickBy({
-        amount: validateAmount(amount, lang),
+        amount: validateAmount(amount, intl),
       }),
     onSubmit: async ({ amount }, { setSubmitting }) => {
       /**

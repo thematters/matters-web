@@ -15,13 +15,7 @@ import {
   parseFormSubmitErrors,
   validateEmail,
 } from '~/common/utils'
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+import { Dialog, Form, useMutation, ViewerContext } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import {
   SendVerificationCodeMutation,
@@ -70,8 +64,6 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   )
 
   const intl = useIntl()
-  const { lang } = useContext(LanguageContext)
-
   const presetEmail = viewer.info.email
   const formId = 'edit-email-form'
 
@@ -91,7 +83,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     validateOnChange: false,
     validate: ({ email }) =>
       _pickBy({
-        email: validateEmail(email, lang, { allowPlusSign: true }),
+        email: validateEmail(email, intl, { allowPlusSign: true }),
       }),
     onSubmit: async ({ email }, { setSubmitting, setFieldError }) => {
       try {

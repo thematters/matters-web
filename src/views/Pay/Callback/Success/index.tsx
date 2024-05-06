@@ -11,7 +11,7 @@ const PayCallbackSuccess = () => {
   const { getQuery, router } = useRoute()
   const provider = getQuery('provider')
   const title: { [key: string]: any } = {
-    likecoin: <Translate id="donation" />,
+    likecoin: <FormattedMessage defaultMessage="Support Author" id="ezYuE2" />,
   }
   const avatar: { [key: string]: any } = {
     likecoin: ICON_LIKECOIN,

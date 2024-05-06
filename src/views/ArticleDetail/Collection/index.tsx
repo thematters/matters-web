@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
@@ -10,7 +11,6 @@ import {
   QueryError,
   SpinnerBlock,
   Title,
-  Translate,
   ViewMoreButton,
 } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
@@ -79,7 +79,7 @@ const Collection: React.FC<{
     >
       <header className={styles.header}>
         <Title type="nav" is="h2">
-          <Translate id="collectArticle" />
+          <FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />
         </Title>
       </header>
 

@@ -108,7 +108,7 @@ const Init: React.FC<FormProps> = ({
     validateOnChange: true, // enable for signup form
     validate: ({ email }) =>
       _pickBy({
-        email: validateEmail(email, lang, { allowPlusSign: false }),
+        email: validateEmail(email, intl, { allowPlusSign: false }),
       }),
     onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
       try {

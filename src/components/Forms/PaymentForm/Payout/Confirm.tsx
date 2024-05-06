@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useRef } from 'react'
+import { useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
@@ -23,7 +23,6 @@ import {
   Dialog,
   Form,
   Icon,
-  LanguageContext,
   SpinnerBlock,
   TextIcon,
   Tooltip,
@@ -59,7 +58,6 @@ const BaseConfirm: React.FC<FormProps> = ({
   back,
 }: FormProps) => {
   const intl = useIntl()
-  const { lang } = useContext(LanguageContext)
   const formId = 'payout-confirm-form'
 
   const inputRef: React.RefObject<any> | null = useRef(null)
@@ -90,9 +88,9 @@ const BaseConfirm: React.FC<FormProps> = ({
           min: PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD,
           max: balance,
           value: amount,
-          lang,
+          intl,
         }),
-        password: validatePaymentPassword(password, lang),
+        password: validatePaymentPassword(password, intl),
       }),
     onSubmit: async ({ amount, password }, { setSubmitting }) => {
       try {
@@ -149,7 +147,7 @@ const BaseConfirm: React.FC<FormProps> = ({
           <ConfirmTable>
             <ConfirmTable.Row type="balance">
               <ConfirmTable.Col>
-                <Translate id="walletBalance" />
+                <FormattedMessage defaultMessage="Balance" id="H5+NAX" />
               </ConfirmTable.Col>
 
               <ConfirmTable.Col>
@@ -275,7 +273,9 @@ const BaseConfirm: React.FC<FormProps> = ({
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<Translate id="forgetPassword" />}
+            text={
+              <FormattedMessage defaultMessage="Forget Password" id="N6PWfU" />
+            }
             color="greyDarker"
             onClick={switchToResetPassword}
           />
@@ -295,7 +295,12 @@ const BaseConfirm: React.FC<FormProps> = ({
             />
 
             <Dialog.TextButton
-              text={<Translate id="forgetPassword" />}
+              text={
+                <FormattedMessage
+                  defaultMessage="Forget Password"
+                  id="N6PWfU"
+                />
+              }
               color="greyDarker"
               onClick={switchToResetPassword}
             />

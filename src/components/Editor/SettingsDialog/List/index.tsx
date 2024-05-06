@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 import { SetPublishISCNProps } from '~/components/Editor'
 
 import ListItem from '../../ListItem'
@@ -66,7 +66,7 @@ const SettingsList = ({
   return (
     <>
       <Dialog.Header
-        title={<Translate id="settings" />}
+        title={<FormattedMessage defaultMessage="Settings" id="D3idYv" />}
         closeDialog={cancelButtonText ? closeDialog : undefined}
         closeText={cancelButtonText || undefined}
         rightBtn={
@@ -124,7 +124,7 @@ const SettingsList = ({
           </ListItem>
 
           <ListItem
-            title={<Translate id="setCover" />}
+            title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
             subTitle={
               <FormattedMessage
                 defaultMessage="Recommended square image."
@@ -138,7 +138,9 @@ const SettingsList = ({
           </ListItem>
 
           <ListItem
-            title={<Translate id="setCollection" />}
+            title={
+              <FormattedMessage defaultMessage="Set Collection" id="WFCO2w" />
+            }
             onClick={() => forward('collection')}
           >
             <ListItem.NumberIndicator num={collectionCount} />

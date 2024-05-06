@@ -1,9 +1,8 @@
 import classNames from 'classnames'
-import React, { useContext } from 'react'
+import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { MAX_ARTICE_TITLE_LENGTH } from '~/common/enums'
-import { translate } from '~/common/utils'
-import { LanguageContext } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -13,7 +12,7 @@ interface Props {
 }
 
 const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const classes = classNames([styles.editorTitle])
 
   const [value, setValue] = React.useState(defaultValue)
@@ -32,17 +31,13 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
     <header className={classes}>
       <input
         type="text"
-        aria-label={translate({
-          en: 'Enter title ...',
-          zh_hans: '请输入标题…',
-          zh_hant: '請輸入標題…',
-          lang,
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Enter title ...',
+          id: '//QMqf',
         })}
-        placeholder={translate({
-          en: 'Enter title ...',
-          zh_hans: '请输入标题…',
-          zh_hant: '請輸入標題…',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter title ...',
+          id: '//QMqf',
         })}
         onChange={handleChange}
         onBlur={handleBlur}

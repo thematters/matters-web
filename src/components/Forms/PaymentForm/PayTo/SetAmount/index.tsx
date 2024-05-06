@@ -169,8 +169,8 @@ const SetAmount: React.FC<FormProps> = ({
     validateOnChange: true,
     validate: ({ amount, customAmount }) =>
       _pickBy({
-        amount: validateDonationAmount(customAmount || amount, balance, lang),
-        currency: validateCurrency(currency, lang),
+        amount: validateDonationAmount(customAmount || amount, balance, intl),
+        currency: validateCurrency(currency, intl),
       }),
     onSubmit: async ({ amount, customAmount }, { setSubmitting }) => {
       const submitAmount = customAmount || amount

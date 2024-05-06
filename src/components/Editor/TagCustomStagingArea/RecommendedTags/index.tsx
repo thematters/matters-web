@@ -1,4 +1,6 @@
-import { Tag, Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Tag } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { EditorRecommendedTagsQuery } from '~/gql/graphql'
 
@@ -22,7 +24,7 @@ const RecommendedTags: React.FC<RecommendedTagsProps> = ({
   return (
     <section className={styles.recommendedTags}>
       <p className={styles.hint}>
-        <Translate id="hintAddRecommendedTag" />
+        <FormattedMessage defaultMessage="Recently used" id="m+cdhC" />
       </p>
 
       <ul className={styles.tagList}>

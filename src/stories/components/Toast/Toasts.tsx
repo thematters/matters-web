@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, TextIcon, toast, Translate } from '~/components'
@@ -34,7 +35,9 @@ const Toasts = () => (
         bgColor="greenLighter"
         onClick={() => {
           toast.success({
-            message: <Translate id="successUploadImage" />,
+            message: (
+              <FormattedMessage defaultMessage="Image uploaded" id="TcTp+J" />
+            ),
           })
         }}
       >

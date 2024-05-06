@@ -3,15 +3,15 @@ import {
   FloatingMenu as TipTapFloatingMenu,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconEditorAdd } from '@/public/static/icons/editor-add.svg'
 import { ReactComponent as IconEditorCode } from '@/public/static/icons/editor-code.svg'
 import { ReactComponent as IconEditorDivider } from '@/public/static/icons/editor-divider.svg'
 import { ReactComponent as IconEditorQuote } from '@/public/static/icons/editor-quote.svg'
 import { ReactComponent as IconEditorVideo } from '@/public/static/icons/editor-video.svg'
-import { translate } from '~/common/utils'
-import { LanguageContext, withIcon } from '~/components'
+import { withIcon } from '~/components'
 
 import styles from './styles.module.css'
 import UploadAudioButton from './UploadAudioButton'
@@ -25,7 +25,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
   editor,
   upload,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const [expand, setExpand] = useState(false)
 
   const containerClasses = classNames({
@@ -76,11 +76,17 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
           className={styles.expandButton}
           type="button"
           onClick={() => setExpand(!expand)}
-          aria-label={translate({
-            zh_hant: expand ? '收起' : '展開',
-            zh_hans: expand ? '收起' : '展开',
-            en: expand ? 'Collapse' : 'Expand',
-          })}
+          aria-label={
+            expand
+              ? intl.formatMessage({
+                  defaultMessage: 'Collapse',
+                  id: 'W/V6+Y',
+                })
+              : intl.formatMessage({
+                  defaultMessage: 'Expand',
+                  id: '0oLj/t',
+                })
+          }
         >
           {withIcon(IconEditorAdd)({ size: 32 })}
         </button>
@@ -95,29 +101,22 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                   .chain()
                   .focus()
                   .addFigureEmbedLinkInput({
-                    placeholder: translate({
-                      zh_hant:
-                        '貼上 YouTube、Vimeo 或 bilibili 連結後，Enter 進行新增',
-                      zh_hans:
-                        '贴上 YouTube、Vimeo 或 bilibili 链接后，Enter 进行新增',
-                      en: 'Paste YouTube, Vimeo or bilibili link, and press enter',
-                      lang,
+                    placeholder: intl.formatMessage({
+                      defaultMessage:
+                        'Paste YouTube, Vimeo or bilibili link, and press enter',
+                      id: 'r9LhcI',
                     }),
                   })
                   .run()
               }}
               type="button"
-              title={translate({
-                zh_hant: '插入影片',
-                zh_hans: '插入视频',
-                en: 'Insert video',
-                lang,
+              title={intl.formatMessage({
+                defaultMessage: 'Insert video',
+                id: 'Jr12wo',
               })}
-              aria-label={translate({
-                zh_hant: '插入影片',
-                zh_hans: '插入视频',
-                en: 'Insert video',
-                lang,
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Insert video',
+                id: 'Jr12wo',
               })}
             >
               {withIcon(IconEditorVideo)({ size: 32 })}
@@ -131,29 +130,22 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                   .chain()
                   .focus()
                   .addFigureEmbedLinkInput({
-                    placeholder: translate({
-                      zh_hant:
-                        '貼上 JSFiddle 或 CodePen 連結後，Enter 進行新增',
-                      zh_hans:
-                        '贴上 JSFiddle 或 CodePen 链接后，Enter 进行新增',
-                      en: 'Paste JSFiddle or CodePen link, and press enter',
-                      lang,
+                    placeholder: intl.formatMessage({
+                      defaultMessage:
+                        'Paste JSFiddle or CodePen link, and press enter',
+                      id: '3EeDnu',
                     }),
                   })
                   .run()
               }}
               type="button"
-              title={translate({
-                zh_hant: '插入程式碼',
-                zh_hans: '插入代码',
-                en: 'Insert code',
-                lang,
+              title={intl.formatMessage({
+                defaultMessage: 'Insert code',
+                id: '5Ga0iK',
               })}
-              aria-label={translate({
-                zh_hant: '插入程式碼',
-                zh_hans: '插入代码',
-                en: 'Insert code',
-                lang,
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Insert code',
+                id: '5Ga0iK',
               })}
             >
               {withIcon(IconEditorCode)({ size: 32 })}
@@ -163,17 +155,13 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               // @ts-ignore
               onClick={() => editor.chain().focus().setBlockquote().run()}
               type="button"
-              title={translate({
-                zh_hant: '插入引用',
-                zh_hans: '插入引用',
-                en: 'Insert Blockquote',
-                lang,
+              title={intl.formatMessage({
+                defaultMessage: 'Insert Blockquote',
+                id: 'mObpsB',
               })}
-              aria-label={translate({
-                zh_hant: '插入引用',
-                zh_hans: '插入引用',
-                en: 'Insert Blockquote',
-                lang,
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Insert Blockquote',
+                id: 'mObpsB',
               })}
             >
               {withIcon(IconEditorQuote)({ size: 32 })}
@@ -186,17 +174,13 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 setExpand(false)
               }}
               type="button"
-              title={translate({
-                zh_hant: '插入分隔線',
-                zh_hans: '插入分隔线',
-                en: 'Insert divider',
-                lang,
+              title={intl.formatMessage({
+                defaultMessage: 'Insert divider',
+                id: 'QfVedX',
               })}
-              aria-label={translate({
-                zh_hant: '插入分隔線',
-                zh_hans: '插入分隔线',
-                en: 'Insert divider',
-                lang,
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Insert divider',
+                id: 'QfVedX',
               })}
             >
               {withIcon(IconEditorDivider)({ size: 32 })}
