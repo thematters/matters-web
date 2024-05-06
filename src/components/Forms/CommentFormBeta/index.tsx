@@ -127,7 +127,16 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
               type: 'add',
               comment: mutationResult.data?.putComment,
             })
+          }
 
+          if (!!parentId) {
+            updateArticlePublic({
+              cache,
+              shortHash,
+              routerLang,
+              type: 'addSecondaryComment',
+            })
+          } else {
             updateArticlePublic({
               cache,
               shortHash,
