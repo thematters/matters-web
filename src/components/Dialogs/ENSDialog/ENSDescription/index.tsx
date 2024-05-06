@@ -1,7 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
 import { EXTERNAL_LINKS } from '~/common/enums'
-import { Translate } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -35,14 +34,24 @@ const ENSDescription = () => {
 
         <p className={styles.reference}>
           <FormattedMessage
-            defaultMessage="More ENS information, check"
-            id="Jt7xOX"
+            defaultMessage="More ENS information, check {node}."
+            id="Hlwud7"
+            values={{
+              node: (
+                <a
+                  href={EXTERNAL_LINKS.ENS_DOCS}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <FormattedMessage
+                    defaultMessage="docs"
+                    description="src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
+                    id="aHTyGJ"
+                  />
+                </a>
+              ),
+            }}
           />
-          &nbsp;
-          <a href={EXTERNAL_LINKS.ENS_DOCS} target="_blank" rel="noreferrer">
-            <Translate zh_hans="官方文档" zh_hant="官方文檔" en="docs" />
-          </a>
-          <Translate en="." zh_hans="" zh_hant="" />
         </p>
       </section>
     </>

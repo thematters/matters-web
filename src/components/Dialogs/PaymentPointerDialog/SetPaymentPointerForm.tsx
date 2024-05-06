@@ -2,10 +2,10 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useState } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { parseFormSubmitErrors, validatePaymentPointer } from '~/common/utils'
-import { Dialog, Form, toast, Translate, ViewerContext } from '~/components'
+import { Dialog, Form, toast, ViewerContext } from '~/components'
 import { useMutation } from '~/components/GQL'
 import { UpdatePaymentPointerMutation } from '~/gql/graphql'
 
@@ -73,7 +73,10 @@ const SetPaymentPointerForm: React.FC<FormProps> = ({
 
         toast.success({
           message: (
-            <Translate zh_hant="收款地址已更新" zh_hans="收款地址已更新" />
+            <FormattedMessage
+              defaultMessage="Payment pointer updated"
+              id="WrQjnc"
+            />
           ),
         })
 
