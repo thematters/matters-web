@@ -23,7 +23,6 @@
 
   & .donationButton {
     margin-top: var(--sp24);
-    background: var(--color-white);
     border-radius: 5rem;
   }
 
@@ -76,6 +75,14 @@
   @media (--sm-up) {
     height: 1.5rem;
   }
+}
+
+.container {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+  min-width: 7.5rem; /* 120px */
+  min-height: 9.375rem; /* 150px */
 }
 
 .slideUp {

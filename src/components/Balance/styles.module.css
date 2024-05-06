@@ -15,8 +15,7 @@
     @mixin border-left-grey;
 
     padding-left: var(--sp8);
-    margin-top: var(--sp1);
-    margin-bottom: var(--sp1);
+    margin-bottom: var(--sp2);
     margin-left: var(--sp8);
     border-left-color: var(--color-line-matters-golod-lighter);
   }
