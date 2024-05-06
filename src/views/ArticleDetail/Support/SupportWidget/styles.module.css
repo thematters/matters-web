@@ -78,6 +78,14 @@
   }
 }
 
+.container {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+  min-width: 7.5rem; /* 120px */
+  min-height: 9.375rem; /* 150px */
+}
+
 .slideUp {
   animation: slide-up 0.2s linear;
 }
