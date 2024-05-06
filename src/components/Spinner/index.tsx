@@ -37,7 +37,7 @@ export const SpinnerBlock = ({
 
   return (
     <div className={classes}>
-      <Spinner color="greyLight" size="lg" {...spinnerProps} />
+      <Spinner color="greyLight" size={32} {...spinnerProps} />
     </div>
   )
 }

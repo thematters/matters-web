@@ -25,12 +25,12 @@ import styles from './styles.module.css'
 export type UserDigestMiniProps = {
   user?: UserDigestMiniUserFragment
 
-  avatarSize?: Extract<AvatarSize, 'xs' | 'sm' | 'md' | 'lg'>
-  textSize?: 'xs' | 'smS' | 'sm' | 'mdS' | 'md'
-  textWeight?: 'md' | 'semibold'
+  avatarSize?: AvatarSize
+  textSize?: 12 | 13 | 14 | 15 | 16
+  textWeight?: 'medium' | 'semibold'
   nameColor?: 'black' | 'white' | 'greyDarker' | 'green'
   direction?: 'row' | 'column'
-  spacing?: 'xxtight' | 'xtight'
+  spacing?: 4 | 8
 
   hasAvatar?: boolean
   hasDisplayName?: boolean
@@ -58,11 +58,11 @@ const Mini = ({
   user,
 
   avatarSize,
-  textSize = 'sm',
+  textSize = 14,
   textWeight,
   nameColor = 'black',
   direction = 'row',
-  spacing = 'xtight',
+  spacing = 8,
 
   hasAvatar,
   hasDisplayName,
@@ -74,12 +74,11 @@ const Mini = ({
   const isArchived = user?.status?.state === 'archived'
   const containerClasses = classNames({
     [styles.container]: true,
-    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
-    [textWeight
-      ? styles[`textWeight${capitalizeFirstLetter(textWeight)}`]
-      : '']: !!textWeight,
+    [styles[`text${textSize}`]]: !!textSize,
+    [textWeight ? styles[`font${capitalizeFirstLetter(textWeight)}`] : '']:
+      !!textWeight,
     [styles[`nameColor${capitalizeFirstLetter(nameColor)}`]]: !!nameColor,
-    [styles[`spacing${capitalizeFirstLetter(spacing)}`]]: !!spacing,
+    [styles[`spacing${capitalizeFirstLetter(spacing + '')}`]]: !!spacing,
     [styles.hasAvatar]: hasAvatar,
     [styles.disabled]: disabled || isArchived,
   })

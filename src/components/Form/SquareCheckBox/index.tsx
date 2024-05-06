@@ -79,11 +79,11 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   const checkboxIcon = checked ? (
     <Icon
       icon={IconSquareCheck}
-      size="mdS"
+      size={20}
       color={disabled ? 'grey' : 'green'}
     />
   ) : (
-    <Icon icon={IconSquare} size="mdS" color="greyDark" />
+    <Icon icon={IconSquare} size={20} color="greyDark" />
   )
 
   return (
@@ -97,7 +97,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
     >
       <section className={styles.wrapper} ref={node}>
         <label className={labelClasses}>
-          <TextIcon spacing="xtight" size="sm" icon={icon || checkboxIcon}>
+          <TextIcon spacing={8} size={14} icon={icon || checkboxIcon}>
             <section className={styles.content}>
               {sup}
               <span className={hintClasses}>

@@ -314,14 +314,14 @@ const Connect: React.FC<FormProps> = ({
         )}
         <section className={styles.walletInfo}>
           <span className={styles.icon}>
-            {isMetamask && <Icon icon={IconMetaMask} size="mdM" />}
-            {isWalletConnect && <Icon icon={IconWalletConnect} size="mdM" />}
+            {isMetamask && <Icon icon={IconMetaMask} size={22} />}
+            {isWalletConnect && <Icon icon={IconWalletConnect} size={22} />}
           </span>
           <span className={styles.address}>{truncate(values.address)}</span>
         </section>
         <section className={styles.loadingInfo}>
           <span>
-            <Spinner color="grey" size="mdM" />
+            <Spinner color="grey" size={22} />
           </span>
           <span>
             <FormattedMessage
@@ -338,10 +338,7 @@ const Connect: React.FC<FormProps> = ({
           <section className={styles.footerSmUpBtns}>
             <Dialog.TextButton
               text={
-                <TextIcon
-                  icon={<Icon icon={IconLeft} size="mdS" />}
-                  spacing="xxxtight"
-                >
+                <TextIcon icon={<Icon icon={IconLeft} size={20} />} spacing={2}>
                   <FormattedMessage
                     defaultMessage="Switch wallet"
                     id="HkozYU"

@@ -17,7 +17,7 @@ const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
           description="src/components/Comment/DropdownActions/EditButton.tsx"
         />
       }
-      icon={<Icon icon={IconEdit} size="mdS" />}
+      icon={<Icon icon={IconEdit} size={20} />}
       onClick={openEditCommentDialog}
       ariaHasPopup="dialog"
     />

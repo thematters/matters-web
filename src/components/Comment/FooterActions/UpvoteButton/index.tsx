@@ -77,7 +77,7 @@ const UpvoteButton = ({
   if (comment.myVote === 'up') {
     return (
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
         onClick={() => {
           onClick ? onClick() : unvote()
@@ -91,7 +91,7 @@ const UpvoteButton = ({
         <TextIcon
           icon={<Icon icon={IconVoteUpFill} />}
           color="green"
-          weight="md"
+          weight="medium"
         >
           {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
         </TextIcon>
@@ -101,7 +101,7 @@ const UpvoteButton = ({
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       onClick={() => {
         onClick ? onClick() : upvote()
@@ -115,7 +115,7 @@ const UpvoteButton = ({
       <TextIcon
         icon={<Icon icon={IconVoteUp} color="grey" />}
         color="grey"
-        weight="md"
+        weight="medium"
       >
         {comment.upvotes > 0 ? numAbbr(comment.upvotes) : undefined}
       </TextIcon>

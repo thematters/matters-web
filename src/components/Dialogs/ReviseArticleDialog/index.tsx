@@ -1,4 +1,6 @@
-import { Dialog, Translate, useDialogSwitch } from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Dialog, useDialogSwitch } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -17,32 +19,33 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
-            <Translate zh_hant="修訂須知" zh_hans="修订须知" en="Notice" />
+            <FormattedMessage
+              defaultMessage="Notice"
+              id="MIA5xy"
+              description="src/components/Dialogs/ReviseArticleDialog/index.tsx"
+            />
           }
         />
 
         <Dialog.Content>
           <Dialog.Content.Message align="left" smUpAlign="left">
             <p>
-              <Translate
-                zh_hant="修訂後的作品即再版發佈至分佈式網絡。修訂前請自行保留上一版本備份"
-                zh_hans="修訂後的作品即再版發佈至分佈式網絡。修訂前請自行保留上一版本備份"
-                en="The revised work will be republished to decentralized network. Please backup of the previous edition before revision."
+              <FormattedMessage
+                defaultMessage="The revised work will be republished to decentralized network. Please backup of the previous edition before revision."
+                id="9Dwh/Z"
               />{' '}
               📃
             </p>
             <p>
               <b>
-                <Translate
-                  zh_hant="你還可以修訂"
-                  zh_hans="你还可以修订"
-                  en=""
-                />
-                <span className={styles.count}> {revisionCountLeft} </span>
-                <Translate
-                  zh_hant="版"
-                  zh_hans="版"
-                  en="modifications available"
+                <FormattedMessage
+                  defaultMessage="{left} modifications available"
+                  id="gS1u3d"
+                  values={{
+                    left: (
+                      <span className={styles.count}>{revisionCountLeft}</span>
+                    ),
+                  }}
                 />
               </b>
             </p>
@@ -53,7 +56,11 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           btns={
             <Dialog.RoundedButton
               text={
-                <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
+                <FormattedMessage
+                  defaultMessage="Edit"
+                  id="rJqgwV"
+                  description="src/components/Dialogs/ReviseArticleDialog/index.tsx"
+                />
               }
               onClick={closeDialog}
             />
@@ -61,7 +68,11 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           smUpBtns={
             <Dialog.TextButton
               text={
-                <Translate zh_hant="開始修訂" zh_hans="开始修订" en="Edit" />
+                <FormattedMessage
+                  defaultMessage="Edit"
+                  id="rJqgwV"
+                  description="src/components/Dialogs/ReviseArticleDialog/index.tsx"
+                />
               }
               onClick={closeDialog}
             />

@@ -26,7 +26,7 @@ const ManageButton = ({ id }: Props) => {
     <TagEditorDialog id={id}>
       {({ openDialog }) => (
         <Button
-          spacing={['xtight', 'xtight']}
+          spacing={[8, 8]}
           textColor="green"
           textActiveColor="white"
           bgActiveColor="green"
@@ -34,7 +34,11 @@ const ManageButton = ({ id }: Props) => {
           onClick={openDialog}
           aria-haspopup="dialog"
         >
-          <TextIcon icon={<Icon icon={IconSettings} />} weight="md" size={'xs'}>
+          <TextIcon
+            icon={<Icon icon={IconSettings} />}
+            weight="medium"
+            size={12}
+          >
             <FormattedMessage defaultMessage="Manage" id="0Azlrb" />
           </TextIcon>
         </Button>
@@ -87,7 +91,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
             <UserDigest.Rich
               user={tag.owner}
               hasFollow={false}
-              spacing={['tight', 0]}
+              spacing={[12, 0]}
             />
           </section>
         </>
@@ -107,7 +111,7 @@ const Maintainers = ({ id, isOwner }: Props) => {
                 <UserDigest.Rich
                   user={editor}
                   hasFollow={false}
-                  spacing={['tight', 0]}
+                  spacing={[12, 0]}
                 />
               </li>
             ))}

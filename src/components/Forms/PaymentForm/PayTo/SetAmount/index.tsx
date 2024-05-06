@@ -169,8 +169,8 @@ const SetAmount: React.FC<FormProps> = ({
     validateOnChange: true,
     validate: ({ amount, customAmount }) =>
       _pickBy({
-        amount: validateDonationAmount(customAmount || amount, balance, lang),
-        currency: validateCurrency(currency, lang),
+        amount: validateDonationAmount(customAmount || amount, balance, intl),
+        currency: validateCurrency(currency, intl),
       }),
     onSubmit: async ({ amount, customAmount }, { setSubmitting }) => {
       const submitAmount = customAmount || amount
@@ -187,7 +187,7 @@ const SetAmount: React.FC<FormProps> = ({
             update: (cache) => {
               updateDonation({
                 cache,
-                id: article.id,
+                shortHash: article.shortHash,
                 viewer,
               })
             },
@@ -379,7 +379,7 @@ const SetAmount: React.FC<FormProps> = ({
             >
               {({ copyToClipboard }) => (
                 <Button
-                  spacing={['xtight', 'xtight']}
+                  spacing={[8, 8]}
                   aria-label={intl.formatMessage({
                     defaultMessage: 'Copy',
                     id: '4l6vz1',

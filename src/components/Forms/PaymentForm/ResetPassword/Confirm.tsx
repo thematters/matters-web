@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
@@ -10,14 +10,7 @@ import {
   validateComparedPassword,
   validatePaymentPassword,
 } from '~/common/utils'
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  SpinnerBlock,
-  useMutation,
-  useStep,
-} from '~/components'
+import { Dialog, Form, SpinnerBlock, useMutation, useStep } from '~/components'
 import { ResetPaymentPasswordMutation } from '~/gql/graphql'
 
 interface FormProps {
@@ -45,7 +38,6 @@ const Confirm: React.FC<FormProps> = ({
   back,
 }) => {
   const intl = useIntl()
-  const { lang } = useContext(LanguageContext)
   const [reset] = useMutation<ResetPaymentPasswordMutation>(
     RESET_PAYMENT_PASSWORD,
     undefined,
@@ -73,11 +65,11 @@ const Confirm: React.FC<FormProps> = ({
     validateOnBlur: false,
     validateOnChange: false,
     validate: ({ password, comparedPassword }) => {
-      const passwordError = validatePaymentPassword(password, lang)
+      const passwordError = validatePaymentPassword(password, intl)
       const comparedPasswordError = validateComparedPassword(
         password,
         comparedPassword,
-        lang
+        intl
       )
 
       // jump to next step

@@ -68,9 +68,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
   }:${replyToId || 0}`
   const formId = `comment-form-${commentDraftId}`
   const formRef = useRef<HTMLFormElement>(null)
-  // TODO: beware of the breaking change by the new article URL
-  const { getQuery, router, routerLang } = useRoute()
-  const mediaHash = getQuery('mediaHash')
+  const { getQuery, routerLang } = useRoute()
+  const shortHash = getQuery('shortHash')
 
   const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
     variables: { id: commentDraftId },
@@ -130,12 +129,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
               comment: mutationResult.data?.putComment,
             })
 
-            const articleIdFromRouter =
-              (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
             updateArticlePublic({
               cache,
-              articleId: articleIdFromRouter,
-              mediaHash,
+              shortHash,
               routerLang,
               type: 'addComment',
             })
@@ -199,12 +195,12 @@ const CommentForm: React.FC<CommentFormProps> = ({
           <Dialog.RoundedButton
             disabled={isSubmitting}
             text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
-            textSize="sm"
+            textSize={14}
             textWeight="normal"
             bgColor="white"
             color="black"
             borderWidth="sm"
-            spacing={[0, 'baseLoose']}
+            spacing={[0, 20]}
             size={[null, '1.875rem']}
             onClick={closeDialog}
           />
@@ -221,11 +217,11 @@ const CommentForm: React.FC<CommentFormProps> = ({
               form={formId}
               disabled={isSubmitting || !isValid}
               text={<FormattedMessage defaultMessage="Publish" id="syEQFE" />}
-              textSize="sm"
+              textSize={14}
               textWeight="normal"
               bgColor="green"
               color="white"
-              spacing={[0, 'baseLoose']}
+              spacing={[0, 20]}
               size={[null, '1.875rem']}
             />
           </>

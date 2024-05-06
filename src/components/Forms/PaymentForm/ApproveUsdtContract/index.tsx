@@ -9,6 +9,7 @@ import {
   Dialog,
   Icon,
   LanguageContext,
+  SpinnerBlock,
   TextIcon,
   useAllowanceUSDT,
   useApproveUSDT,
@@ -24,6 +25,7 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
   submitCallback,
 }) => {
   const { lang } = useContext(LanguageContext)
+  const [showLoading, setShowLoading] = useState(true)
   const [approveConfirming, setApproveConfirming] = useState(false)
   const {
     data: allowanceData,
@@ -43,6 +45,7 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
     if (allowanceUSDT > 0n) {
       submitCallback()
     }
+    setShowLoading(false)
   }, [allowanceData])
 
   // USDT approval
@@ -59,6 +62,10 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
 
   const errorName = _get(approveError, 'cause.name')
   const isUserRejected = errorName === 'UserRejectedRequestError'
+
+  if (showLoading) {
+    return <SpinnerBlock />
+  }
 
   return (
     <section className={styles.container}>
@@ -83,9 +90,9 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
           bgColor="green"
           onClick={approveWrite}
           textWeight="normal"
-          textSize="md"
+          textSize={16}
           text={
-            <TextIcon icon={<Icon icon={IconOpenWallet} size="mdS" />}>
+            <TextIcon icon={<Icon icon={IconOpenWallet} size={20} />}>
               {!allowanceError && !approveError && (
                 <FormattedMessage
                   defaultMessage="Go to allow"

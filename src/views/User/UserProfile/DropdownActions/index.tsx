@@ -19,7 +19,6 @@ import {
   ShareDialog,
   ShareDialogProps,
   SpinnerBlock,
-  Translate,
   ViewerContext,
   withDialog,
 } from '~/components'
@@ -133,9 +132,9 @@ const BaseDropdownActions = ({
         ariaHasPopup="dialog"
         textColor="greyDarker"
         textActiveColor="black"
-        spacing={['xtight', 'base']}
+        spacing={[8, 16]}
         text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-        icon={<Icon icon={IconShare} size="mdS" />}
+        icon={<Icon icon={IconShare} size={20} />}
       />
       {hasRssFeed && (
         <Menu.Item
@@ -143,9 +142,9 @@ const BaseDropdownActions = ({
           ariaHasPopup="dialog"
           textColor="greyDarker"
           textActiveColor="black"
-          spacing={['xtight', 'base']}
-          text={<Translate id="subscriptions" />}
-          icon={<Icon icon={IconRss} size="mdS" />}
+          spacing={[8, 16]}
+          text={<FormattedMessage defaultMessage="Subscribe" id="gczcC5" />}
+          icon={<Icon icon={IconRss} size={20} />}
         />
       )}
 
@@ -183,12 +182,12 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <Icon icon={IconMore} size="mdM" />
+                <Icon icon={IconMore} size={22} />
               </Button>
             )}
             {isInAside && !isMe && (
               <Button
-                spacing={['xtight', 'xtight']}
+                spacing={[8, 8]}
                 textColor="greyDarker"
                 textActiveColor="black"
                 borderWidth="md"
@@ -201,12 +200,12 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <Icon icon={IconMore} size="mdM" />
+                <Icon icon={IconMore} size={22} />
               </Button>
             )}
             {!isInAside && (
               <Button
-                spacing={['xtight', 'xtight']}
+                spacing={[8, 8]}
                 textColor="greyDarker"
                 textActiveColor="black"
                 borderWidth="md"

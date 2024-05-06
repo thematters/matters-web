@@ -17,15 +17,15 @@ export const ShuffleButton: React.FC<ShuffleButtonProps> = ({
 }) => (
   <Button
     size={[null, '1.25rem']}
-    spacing={[0, 'xtight']}
+    spacing={[0, 8]}
     bgActiveColor="greyLighter"
     {...props}
   >
     <TextIcon
-      icon={<Icon icon={IconReset} size="xs" />}
+      icon={<Icon icon={IconReset} size={12} />}
       color={color || 'grey'}
-      size="xs"
-      weight="md"
+      size={12}
+      weight="medium"
     >
       <FormattedMessage defaultMessage="Shuffle" id="Pp/0po" />
     </TextIcon>

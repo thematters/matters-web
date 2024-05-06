@@ -44,7 +44,7 @@ export const RelatedArticles = ({ article }: RelatedArticlesProps) => {
             <ArticleDigestAuthorSidebar
               article={node}
               titleColor="black"
-              titleTextSize="sm"
+              titleTextSize={14}
               imageSize="md"
             />
           </List.Item>

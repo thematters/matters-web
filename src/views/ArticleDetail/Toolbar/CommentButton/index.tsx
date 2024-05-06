@@ -33,9 +33,9 @@ type CommentButtonArticle = CommentButtonArticlePublicFragment &
 type CommentButtonProps = {
   article: CommentButtonArticle
   disabled?: boolean
-  iconSize?: 'mdS' | 'md'
-  textWeight?: 'md' | 'normal'
-  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
+  iconSize?: 20 | 24
+  textWeight?: 'medium' | 'normal'
+  textIconSpacing?: 4 | 6 | 8
 } & ButtonProps
 
 const fragments = {
@@ -61,22 +61,22 @@ const fragments = {
 
 const Content = ({
   article,
-  iconSize = 'mdS',
-  textWeight = 'md',
-  textIconSpacing = 'xtight',
+  iconSize = 20,
+  textWeight = 'medium',
+  textIconSpacing = 8,
   ...props
 }: (CardProps | ButtonProps) & {
   article: CommentButtonArticle
-  iconSize?: 'mdS' | 'md'
-  textWeight?: 'md' | 'normal'
-  textIconSpacing?: 'xxtight' | 'xtight' | 'basexxtight'
+  iconSize?: 20 | 24
+  textWeight?: 'medium' | 'normal'
+  textIconSpacing?: 4 | 6 | 8
 }) => {
   const intl = useIntl()
 
   return (
     <>
       <Button
-        spacing={['xtight', 'tight']}
+        spacing={[8, 12]}
         aria-label={`${intl.formatMessage({
           defaultMessage: 'Comment',
           id: 'Ix3e3Q',
@@ -89,7 +89,7 @@ const Content = ({
           icon={<Icon icon={IconComment} size={iconSize} />}
           weight={textWeight}
           spacing={textIconSpacing}
-          size="sm"
+          size={14}
         >
           {article.commentCount > 0 ? numAbbr(article.commentCount) : undefined}
         </TextIcon>
@@ -101,9 +101,9 @@ const Content = ({
 const CommentButton = ({
   article,
   disabled,
-  iconSize = 'mdS',
-  textWeight = 'md',
-  textIconSpacing = 'xtight',
+  iconSize = 20,
+  textWeight = 'medium',
+  textIconSpacing = 8,
   ...buttonProps
 }: CommentButtonProps) => {
   const viewer = useContext(ViewerContext)

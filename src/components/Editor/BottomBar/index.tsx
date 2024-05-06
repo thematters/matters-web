@@ -147,12 +147,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   aria-haspopup="dialog"
                 >
                   <TextIcon
-                    icon={<Icon icon={IconImage} size="md" />}
-                    size="mdS"
-                    weight="md"
-                    spacing="xtight"
+                    icon={<Icon icon={IconImage} size={24} />}
+                    size={15}
+                    weight="medium"
+                    spacing={8}
                   >
-                    <Translate id="cover" />
+                    <FormattedMessage defaultMessage="Cover" id="hl9bd4" />
                   </TextIcon>
                 </button>
               )}
@@ -183,12 +183,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   aria-haspopup="dialog"
                 >
                   <TextIcon
-                    icon={<Icon icon={IconHashtag} size="md" />}
-                    size="mdS"
-                    weight="md"
-                    spacing="xtight"
+                    icon={<Icon icon={IconHashtag} size={24} />}
+                    size={15}
+                    weight="medium"
+                    spacing={8}
                   >
-                    <Translate id="tag" />
+                    <FormattedMessage defaultMessage="Tag" id="18HJlm" />
                   </TextIcon>
                 </button>
               )}
@@ -224,12 +224,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   aria-haspopup="dialog"
                 >
                   <TextIcon
-                    icon={<Icon icon={IconCollection} size="md" />}
-                    size="mdS"
-                    weight="md"
-                    spacing="xtight"
+                    icon={<Icon icon={IconCollection} size={24} />}
+                    size={15}
+                    weight="medium"
+                    spacing={8}
                   >
-                    <Translate id="extend" />
+                    <FormattedMessage defaultMessage="Collect" id="kCPl0r" />
                   </TextIcon>
                 </button>
               )}
@@ -247,10 +247,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   onClick={openDialog}
                 >
                   <TextIcon
-                    icon={<Icon icon={IconSettings} size="md" />}
-                    size="mdS"
-                    weight="md"
-                    spacing="xtight"
+                    icon={<Icon icon={IconSettings} size={24} />}
+                    size={15}
+                    weight="medium"
+                    spacing={8}
                   >
                     <Translate zh_hant="管理" zh_hans="管理" en="Manage" />
                   </TextIcon>

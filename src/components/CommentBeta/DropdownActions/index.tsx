@@ -79,7 +79,7 @@ const fragments = {
         node {
           ... on Article {
             id
-            mediaHash
+            shortHash
             author {
               id
             }
@@ -160,14 +160,14 @@ const BaseDropdownActions = ({
       {({ openDropdown, ref }) => (
         <Button
           onClick={openDropdown}
-          spacing={['xtight', 'xtight']}
+          spacing={[8, 8]}
           textColor="black"
           textActiveColor="greyDarker"
           aria-label={moreActionText}
           aria-haspopup="listbox"
           ref={ref}
         >
-          <Icon icon={IconMore} size="mdXS" />
+          <Icon icon={IconMore} size={18} />
         </Button>
       )}
     </Dropdown>

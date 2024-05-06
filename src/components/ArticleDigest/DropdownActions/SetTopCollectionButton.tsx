@@ -41,7 +41,7 @@ const SetTopCollectionButton = ({
           description="src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
         />
       }
-      icon={<Icon icon={IconArrowLTop} size="mdS" />}
+      icon={<Icon icon={IconArrowLTop} size={20} />}
       onClick={async () => {
         onClick()
         await update({

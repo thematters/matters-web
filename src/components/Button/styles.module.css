@@ -134,7 +134,7 @@ span.container {
 }
 
 /* Spacing */
-.spacingYXxtight {
+.spacingY4 {
   &:not(.isTransparent) {
     padding-top: var(--sp4);
     padding-bottom: var(--sp4);
@@ -146,7 +146,7 @@ span.container {
   }
 }
 
-.spacingYXtight {
+.spacingY8 {
   &:not(.isTransparent) {
     padding-top: var(--sp8);
     padding-bottom: var(--sp8);
@@ -158,7 +158,7 @@ span.container {
   }
 }
 
-.spacingYBaseTight {
+.spacingY10 {
   &:not(.isTransparent) {
     padding-top: var(--sp10);
     padding-bottom: var(--sp10);
@@ -170,7 +170,7 @@ span.container {
   }
 }
 
-.spacingYTight {
+.spacingY12 {
   &:not(.isTransparent) {
     padding-top: var(--sp12);
     padding-bottom: var(--sp12);
@@ -182,7 +182,7 @@ span.container {
   }
 }
 
-.spacingYBase {
+.spacingY16 {
   &:not(.isTransparent) {
     padding-top: var(--sp16);
     padding-bottom: var(--sp16);
@@ -194,7 +194,7 @@ span.container {
   }
 }
 
-.spacingXXxtight {
+.spacingX4 {
   &:not(.isTransparent) {
     padding-right: var(--sp4);
     padding-left: var(--sp4);
@@ -206,7 +206,7 @@ span.container {
   }
 }
 
-.spacingXXtight {
+.spacingX8 {
   &:not(.isTransparent) {
     padding-right: var(--sp8);
     padding-left: var(--sp8);
@@ -218,7 +218,7 @@ span.container {
   }
 }
 
-.spacingXTight {
+.spacingX12 {
   &:not(.isTransparent) {
     padding-right: var(--sp12);
     padding-left: var(--sp12);
@@ -230,7 +230,7 @@ span.container {
   }
 }
 
-.spacingXBaseTight {
+.spacingX10 {
   &:not(.isTransparent) {
     padding-right: var(--sp10);
     padding-left: var(--sp10);
@@ -242,7 +242,7 @@ span.container {
   }
 }
 
-.spacingXBase {
+.spacingX16 {
   &:not(.isTransparent) {
     padding-right: var(--sp16);
     padding-left: var(--sp16);
@@ -254,7 +254,7 @@ span.container {
   }
 }
 
-.spacingXBaseLoose {
+.spacingX20 {
   &:not(.isTransparent) {
     padding-right: var(--sp20);
     padding-left: var(--sp20);
@@ -266,7 +266,7 @@ span.container {
   }
 }
 
-.spacingXLoose {
+.spacingX24 {
   &:not(.isTransparent) {
     padding-right: var(--sp24);
     padding-left: var(--sp24);

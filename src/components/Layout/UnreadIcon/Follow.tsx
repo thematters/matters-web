@@ -41,9 +41,9 @@ const FollowUnreadIcon: React.FC<FollowUnreadIconProps> = ({ active }) => {
   return (
     <span className={iconClasses}>
       {active ? (
-        <Icon icon={IconNavFollowingActive} size="lg" />
+        <Icon icon={IconNavFollowingActive} size={32} />
       ) : (
-        <Icon icon={IconNavFollowing} size="lg" />
+        <Icon icon={IconNavFollowing} size={32} />
       )}
     </span>
   )

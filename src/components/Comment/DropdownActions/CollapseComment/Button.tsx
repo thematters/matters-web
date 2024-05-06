@@ -13,7 +13,7 @@ const CollapseCommentButton = ({ openDialog }: { openDialog: () => void }) => {
           description="src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
         />
       }
-      icon={<Icon icon={IconCollapse} size="mdS" />}
+      icon={<Icon icon={IconCollapse} size={20} />}
       onClick={openDialog}
       ariaHasPopup="dialog"
     />

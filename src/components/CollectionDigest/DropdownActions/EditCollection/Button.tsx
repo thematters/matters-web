@@ -7,7 +7,7 @@ const EditCollectionButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Edit collection" id="WQT8ZA" />}
-      icon={<Icon icon={IconEdit} size="mdS" />}
+      icon={<Icon icon={IconEdit} size={20} />}
       onClick={openDialog}
       ariaHasPopup="dialog"
       textColor="greyDarker"

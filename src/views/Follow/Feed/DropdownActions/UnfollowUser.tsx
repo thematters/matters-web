@@ -61,7 +61,7 @@ const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
           zh_hans={`取消追踪 ${user.displayName}`}
         />
       }
-      icon={<Icon icon={IconCircleMinus} size="mdS" />}
+      icon={<Icon icon={IconCircleMinus} size={20} />}
       onClick={async () => {
         await unfollow()
 

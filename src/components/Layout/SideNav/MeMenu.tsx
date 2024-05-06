@@ -64,28 +64,28 @@ const MeMenu: React.FC = () => {
     <Menu>
       <Menu.Item
         text={<FormattedMessage defaultMessage="Profile" id="itPgxd" />}
-        icon={<Icon icon={IconProfile} size="mdS" />}
+        icon={<Icon icon={IconProfile} size={20} />}
         {...viewerPath}
         is="link"
       />
 
       <Menu.Item
         text={<FormattedMessage defaultMessage="History" id="djJp6c" />}
-        icon={<Icon icon={IconHistory} size="mdS" />}
+        icon={<Icon icon={IconHistory} size={20} />}
         href={PATHS.ME_HISTORY}
         is="link"
       />
 
       <Menu.Item
         text={<FormattedMessage defaultMessage="Bookmarks" id="nGBrvw" />}
-        icon={<Icon icon={IconSave} size="mdS" />}
+        icon={<Icon icon={IconSave} size={20} />}
         href={PATHS.ME_BOOKMARKS}
         is="link"
       />
 
       <Menu.Item
         text={<FormattedMessage defaultMessage="My Works" id="ai7kS4" />}
-        icon={<Icon icon={IconDraft} size="mdS" />}
+        icon={<Icon icon={IconDraft} size={20} />}
         href={PATHS.ME_DRAFTS}
         is="link"
       />
@@ -93,7 +93,7 @@ const MeMenu: React.FC = () => {
       {circlePath && (
         <Menu.Item
           text={<FormattedMessage defaultMessage="Circle" id="vH8sCb" />}
-          icon={<Icon icon={IconCircle} size="mdS" />}
+          icon={<Icon icon={IconCircle} size={20} />}
           href={circlePath.href}
           is="link"
         />
@@ -101,14 +101,14 @@ const MeMenu: React.FC = () => {
 
       <Menu.Item
         text={<FormattedMessage defaultMessage="Wallet" id="3yk8fB" />}
-        icon={<Icon icon={IconWallet} size="mdS" />}
+        icon={<Icon icon={IconWallet} size={20} />}
         href={PATHS.ME_WALLET}
         is="link"
       />
 
       <Menu.Item
         text={<FormattedMessage defaultMessage="Stats" id="U86B6w" />}
-        icon={<Icon icon={IconData} size="mdS" />}
+        icon={<Icon icon={IconData} size={20} />}
         href={PATHS.ME_ANALYTICS}
         is="link"
       />
@@ -117,14 +117,14 @@ const MeMenu: React.FC = () => {
 
       <Menu.Item
         text={<FormattedMessage defaultMessage="Settings" id="D3idYv" />}
-        icon={<Icon icon={IconSettings} size="mdS" />}
+        icon={<Icon icon={IconSettings} size={20} />}
         href={PATHS.ME_SETTINGS}
         is="link"
       />
 
       <Menu.Item
         text={<FormattedMessage defaultMessage="Log Out" id="H0JBH6" />}
-        icon={<Icon icon={IconLogout} size="mdS" />}
+        icon={<Icon icon={IconLogout} size={20} />}
         onClick={onClickLogout}
       />
     </Menu>

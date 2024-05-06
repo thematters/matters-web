@@ -35,7 +35,7 @@ export const ViewMoreCard: React.FC<
   return (
     <section className={viewMoreCardClasses}>
       <Card
-        spacing={['base', 'base']}
+        spacing={[16, 16]}
         borderColor="green"
         borderRadius="loose"
         bgActiveColor="none"
@@ -43,7 +43,7 @@ export const ViewMoreCard: React.FC<
       >
         <TextIcon
           icon={<Icon icon={IconRight} {...iconProps} />}
-          textPlacement="left"
+          placement="left"
           color="green"
           {...textIconProps}
         >

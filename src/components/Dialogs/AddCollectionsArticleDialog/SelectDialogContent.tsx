@@ -145,7 +145,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
         {collectionEdges.length > 0 && <hr className={styles.hr}></hr>}
 
         <button className={styles.button} onClick={switchToCreating}>
-          <TextIcon icon={<Icon icon={IconPlus} size="mdS" />}>
+          <TextIcon icon={<Icon icon={IconPlus} size={20} />}>
             <FormattedMessage defaultMessage="New Collection" id="L4Fcr8" />
           </TextIcon>
         </button>

@@ -31,12 +31,12 @@ const MyProfile = () => {
             <span className={styles.viewerProfile}>
               <span className={styles.displayName}>{viewer.displayName}</span>
               <TextIcon
-                icon={<Icon icon={IconRight} size="mdS" color="greyDarker" />}
-                size="sm"
-                textPlacement="left"
-                spacing="basexxtight"
+                icon={<Icon icon={IconRight} size={20} color="greyDarker" />}
+                size={14}
+                placement="left"
+                spacing={6}
               >
-                <Avatar size="mdS" user={viewer} />
+                <Avatar size={22} user={viewer} />
               </TextIcon>
             </span>
           }

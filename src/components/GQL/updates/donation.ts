@@ -9,29 +9,27 @@ import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 export const updateDonation = ({
   cache,
-  id,
+  shortHash,
   viewer,
   txId,
 }: {
   cache: DataProxy
-  id: string
+  shortHash: string
   viewer?: Viewer
   txId?: string
 }) => {
-  const {
-    ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
-  } = require('~/views/ArticleDetail/gql')
+  const { ARTICLE_DETAIL_PUBLIC } = require('~/views/ArticleDetail/gql')
 
   try {
-    if (!id || !txId) {
+    if (!shortHash || !txId) {
       return
     }
 
     // read from local cache
-    const variables = { id }
+    const variables = { shortHash }
     const cacheData = _cloneDeep(
       cache.readQuery<ArticleDetailPublicQuery>({
-        query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
+        query: ARTICLE_DETAIL_PUBLIC,
         variables,
       })
     )
@@ -86,7 +84,7 @@ export const updateDonation = ({
 
     // write to local cache
     cache.writeQuery({
-      query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
+      query: ARTICLE_DETAIL_PUBLIC,
       data: cacheData,
       variables,
     })

@@ -9,7 +9,7 @@ import Unsubscribe from './Unsubscribe'
 
 export type BookmarkButtonProps = {
   article: Partial<BookmarkArticlePrivateFragment>
-  iconSize?: Extract<IconSize, 'mdS' | 'md'>
+  iconSize?: Extract<IconSize, 20 | 24>
   inCard?: boolean
 } & ButtonProps
 

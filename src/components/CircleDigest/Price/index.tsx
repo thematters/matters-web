@@ -63,13 +63,8 @@ const Price = ({ circle, onClick }: PriceProps) => {
 
   if (isMember) {
     return (
-      <Button
-        size={[null, '2rem']}
-        spacing={[0, 'base']}
-        bgColor="green"
-        {...path}
-      >
-        <TextIcon weight="md" size="sm" color="white">
+      <Button size={[null, '2rem']} spacing={[0, 16]} bgColor="green" {...path}>
+        <TextIcon weight="medium" size={14} color="white">
           <FormattedMessage
             defaultMessage="Enter"
             id="ydQPbv"
@@ -86,7 +81,7 @@ const Price = ({ circle, onClick }: PriceProps) => {
   return (
     <Button
       size={[null, '2rem']}
-      spacing={[0, 'base']}
+      spacing={[0, 16]}
       bgColor="gold"
       onClick={() => {
         if (!viewer.isAuthed) {
@@ -106,7 +101,7 @@ const Price = ({ circle, onClick }: PriceProps) => {
       }}
       testId={TEST_ID.DIGEST_CIRCLE_PRICE}
     >
-      <TextIcon weight="md" size="sm" color="white">
+      <TextIcon weight="medium" size={14} color="white">
         {price.amount} {price.currency} /
         <FormattedMessage defaultMessage="month" id="Cu3Cty" />
       </TextIcon>

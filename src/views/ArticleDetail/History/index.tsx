@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { toGlobalId, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import {
   BackToHomeButton,
   EmptyLayout,
@@ -26,7 +26,6 @@ import {
   ArticleAccessType,
   ArticleHistoryPublicQuery,
   ArticleHistoryTranslationQuery,
-  ArticleLatestVersionByNodeIdQuery,
   ArticleLatestVersionQuery,
 } from '~/gql/graphql'
 
@@ -40,10 +39,8 @@ import styles from '../styles.module.css'
 import {
   ARTICLE_HISTORY_PRIVATE,
   ARTICLE_HISTORY_PUBLIC,
-  ARTICLE_HISTORY_PUBLIC_BY_NODE_ID,
   ARTICLE_HISTORY_TRANSLATION,
   ARTICLE_LATEST_VERSION,
-  ARTICLE_LATEST_VERSION_BY_NODE_ID,
 } from './gql'
 import InfoHeader from './InfoHeader'
 import Versions from './Versions'
@@ -64,19 +61,6 @@ const DynamicSensitiveWall = dynamic(() => import('../Wall/Sensitive'), {
   ssr: true, // enable for first screen
   loading: () => <SpinnerBlock />,
 })
-
-const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
-  // is there a better way to detect valid?
-  // a valid mediaHash, should have length 49 or 59 chars
-  // 'zdpuAsCXC87Tm1fFvAbysV7HVt7J8aV6chaTKeJZ5ryLALK3Z'
-  // 'bafyreief6bryqsa4byabnmx222jvo4khlodvpypw27af43frecbumn6ocq'
-
-  return (
-    mediaHash &&
-    ((mediaHash?.length === 49 && mediaHash.startsWith('zdpu')) ||
-      (mediaHash?.length === 59 && mediaHash.startsWith('bafy')))
-  )
-}
 
 const BaseArticleDetailHistory = ({
   article,
@@ -216,50 +200,22 @@ const BaseArticleDetailHistory = ({
 }
 
 const ArticleDetailHistory = ({ latestVersion }: { latestVersion: string }) => {
-  const { getQuery, router } = useRoute()
-  const mediaHash = getQuery('mediaHash')
+  const { getQuery } = useRoute()
+  const shortHash = getQuery('shortHash')
   const currVersion = getQuery('v') || latestVersion
-  const articleId =
-    (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
   const viewer = useContext(ViewerContext)
 
   /**
    * fetch public data
    */
-  const isQueryByHash = !!(
-    mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
-  )
-
-  // backward compatible with:
-  // - `/:username:/:articleId:-:slug:-:mediaHash`
-  // - `/:username:/:articleId:`
-  // - `/:username:/:slug:-:mediaHash:`
   const resultByHash = usePublicQuery<ArticleHistoryPublicQuery>(
     ARTICLE_HISTORY_PUBLIC,
-    {
-      variables: {
-        mediaHash,
-        version: currVersion,
-      },
-      skip: !isQueryByHash,
-    }
-  )
-  const resultByNodeId = usePublicQuery<ArticleHistoryPublicQuery>(
-    ARTICLE_HISTORY_PUBLIC_BY_NODE_ID,
-    {
-      variables: {
-        id: toGlobalId({ type: 'Article', id: articleId }),
-        version: currVersion,
-      },
-      skip: isQueryByHash,
-    }
+    { variables: { shortHash, version: currVersion } }
   )
 
-  const { data, client } = resultByHash.data ? resultByHash : resultByNodeId
-  const loading = resultByHash.loading || resultByNodeId.loading
-  const error = resultByHash.error || resultByNodeId.error
+  const { data, client } = resultByHash
+  const loading = resultByHash.loading
+  const error = resultByHash.error
 
   const { article, version } = data || {}
   const authorId = article?.author?.id
@@ -360,30 +316,16 @@ const ArticleDetailHistory = ({ latestVersion }: { latestVersion: string }) => {
 }
 
 const ArticleDetailHistoryOuter = () => {
-  const { getQuery, router } = useRoute()
-  const mediaHash = getQuery('mediaHash')
-  const articleId =
-    (router.query.mediaHash as string)?.match(/^(\d+)/)?.[1] || ''
-
-  const isQueryByHash = !!(
-    mediaHash &&
-    isMediaHashPossiblyValid(mediaHash) &&
-    !articleId
-  )
+  const { getQuery } = useRoute()
+  const shortHash = getQuery('shortHash')
 
   const resultByHash = usePublicQuery<ArticleLatestVersionQuery>(
     ARTICLE_LATEST_VERSION,
-    { variables: { mediaHash }, skip: !isQueryByHash }
+    { variables: { shortHash } }
   )
-  const resultByNodeId = usePublicQuery<ArticleLatestVersionByNodeIdQuery>(
-    ARTICLE_LATEST_VERSION_BY_NODE_ID,
-    {
-      variables: { id: toGlobalId({ type: 'Article', id: articleId }) },
-      skip: isQueryByHash,
-    }
-  )
-  const { data } = resultByHash.data ? resultByHash : resultByNodeId
-  const loading = resultByHash.loading || resultByNodeId.loading
+
+  const { data } = resultByHash
+  const loading = resultByHash.loading
   const latestVersion =
     data?.article?.__typename === 'Article' &&
     data.article.versions.edges[0]?.node.id

@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
 import { URL_FRAGMENT } from '~/common/enums'
-import { numAbbr, toPath, translate } from '~/common/utils'
-import { Button, Icon, LanguageContext, TextIcon } from '~/components'
+import { numAbbr, toPath } from '~/common/utils'
+import { Button, Icon, TextIcon } from '~/components'
 import { ActionsResponseCountArticleFragment } from '~/gql/graphql'
 
 interface ResponseCountProps {
@@ -18,7 +18,7 @@ const fragments = {
       id
       slug
       articleState: state
-      mediaHash
+      shortHash
       responseCount
       author {
         userName
@@ -28,7 +28,7 @@ const fragments = {
 }
 
 const ResponseCount = ({ article }: ResponseCountProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const { articleState: state } = article
   const path = toPath({
@@ -40,22 +40,20 @@ const ResponseCount = ({ article }: ResponseCountProps) => {
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgActiveColor="greyLighterActive"
       {...path}
       disabled={isBanned}
-      aria-label={translate({
-        zh_hant: '查看回應',
-        zh_hans: '查看回应',
-        en: 'View responses',
-        lang,
+      aria-label={intl.formatMessage({
+        defaultMessage: 'View responses',
+        id: 'SFsQ1E',
       })}
     >
       <TextIcon
         icon={<Icon icon={IconComment} />}
         color="grey"
-        weight="md"
-        size="sm"
+        weight="medium"
+        size={14}
       >
         {article.responseCount > 0 ? numAbbr(article.responseCount) : undefined}
       </TextIcon>

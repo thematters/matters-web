@@ -22,7 +22,7 @@ const fragments = {
       id
       state
       slug
-      mediaHash
+      shortHash
       author {
         id
         userName
@@ -63,7 +63,7 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
       {lang === UserLanguage.En && <>&nbsp;</>}
 
       <Link href={PATHS.ME_ARCHIVED}>
-        <TextIcon textDecoration="underline" size="md" weight="semibold">
+        <TextIcon decoration="underline" size={16} weight="semibold">
           <FormattedMessage
             defaultMessage="Back to my works"
             id="HR599l"
@@ -101,7 +101,7 @@ const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
       {lang === 'en' && <span>&nbsp;</span>}
 
       <Link href={path.href}>
-        <TextIcon textDecoration="underline" size="md" weight="semibold">
+        <TextIcon decoration="underline" size={16} weight="semibold">
           <FormattedMessage
             defaultMessage="back to latest"
             id="imXsmo"

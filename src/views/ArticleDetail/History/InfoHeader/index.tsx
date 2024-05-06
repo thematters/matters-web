@@ -45,11 +45,11 @@ function iscnLinkUrl(iscnId: string) {
 
 const IPFSTextIcon = () => (
   <TextIcon
-    icon={<Icon icon={IconHelp} size="mdXS" />}
+    icon={<Icon icon={IconHelp} size={18} />}
     color="greyDark"
-    textPlacement="left"
-    size="xs"
-    spacing="xxtight"
+    placement="left"
+    size={12}
+    spacing={4}
   >
     <FormattedMessage defaultMessage="View on IPFS" id="zbaTLV" />
   </TextIcon>
@@ -75,10 +75,10 @@ const InfoHeader = ({
             user={article.author}
             hasDisplayName
             hasAvatar
-            avatarSize="md"
-            textSize="xs"
-            textWeight="md"
-            spacing="xtight"
+            avatarSize={24}
+            textSize={12}
+            textWeight="medium"
+            spacing={8}
           />
 
           <section className={styles.viewIpfs}>
@@ -141,11 +141,11 @@ const InfoHeader = ({
                   onClick={copyToClipboard}
                 >
                   <TextIcon
-                    icon={<Icon icon={IconCopy} size="xs" />}
+                    icon={<Icon icon={IconCopy} size={12} />}
                     color="greyDarker"
-                    size="xs"
-                    spacing="xxtight"
-                    textPlacement="left"
+                    size={12}
+                    spacing={4}
+                    placement="left"
                   >
                     {truncate(version.dataHash!, 4, 4)}
                   </TextIcon>
@@ -154,7 +154,7 @@ const InfoHeader = ({
             </CopyToClipboard>
           )}
           {!version.dataHash && (
-            <TextIcon color="greyDarker" size="xs">
+            <TextIcon color="greyDarker" size={12}>
               <FormattedMessage defaultMessage="Pending..." id="99OtWT" />
             </TextIcon>
           )}
@@ -182,7 +182,7 @@ const InfoHeader = ({
                     key={url}
                     className={styles.gatewayUrl}
                   >
-                    {hostname}
+                    {truncate(hostname, 4, 5)}
                   </a>
                 )
               })}
@@ -202,11 +202,11 @@ const InfoHeader = ({
                 rel="noreferrer"
               >
                 <TextIcon
-                  icon={<Icon icon={IconExternal} size="xs" />}
+                  icon={<Icon icon={IconExternal} size={12} />}
                   color="greyDarker"
-                  size="xs"
-                  spacing="xxtight"
-                  textPlacement="left"
+                  size={12}
+                  spacing={4}
+                  placement="left"
                 >
                   {truncate(article.iscnId, 4, 4)}
                 </TextIcon>
@@ -233,11 +233,11 @@ const InfoHeader = ({
                     onClick={copyToClipboard}
                   >
                     <TextIcon
-                      icon={<Icon icon={IconCopy} size="xs" />}
+                      icon={<Icon icon={IconCopy} size={12} />}
                       color="greyDarker"
-                      size="xs"
-                      spacing="xxtight"
-                      textPlacement="left"
+                      size={12}
+                      spacing={4}
+                      placement="left"
                     >
                       {truncate(article.access.secret!, 4, 4)}
                     </TextIcon>

@@ -18,10 +18,10 @@ const SectionHead: React.FC<React.PropsWithChildren<SectionHeadProps>> = ({
     <section className={styles.head}>
       <h2 className={styles.h2}>
         <TextIcon
-          icon={withIcon(icon)({ size: 'md' })}
-          size="xm"
-          spacing="tight"
-          weight="md"
+          icon={withIcon(icon)({ size: 24 })}
+          size={18}
+          spacing={12}
+          weight="medium"
         >
           {title}
         </TextIcon>

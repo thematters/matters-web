@@ -9,7 +9,7 @@ export const EmptyDraft = () => {
   return (
     <Empty
       spacingY="xxloose"
-      icon={withIcon(IconEmptyFile)({ size: 'xxxlM' })}
+      icon={withIcon(IconEmptyFile)({ size: 88 })}
       description={intl.formatMessage({
         defaultMessage: 'No drafts yet',
         id: 'PmLGMc',

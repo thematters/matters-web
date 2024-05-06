@@ -151,15 +151,15 @@ export const CommentForm: React.FC<CommentFormProps> = ({
           type="submit"
           form={formId}
           size={[null, '2rem']}
-          spacing={[0, 'base']}
+          spacing={[0, 16]}
           bgColor="green"
           disabled={isSubmitting || !isValid}
         >
           <TextIcon
             color="white"
-            size="mdS"
-            weight="md"
-            icon={isSubmitting && <Spinner size="sm" />}
+            size={15}
+            weight="medium"
+            icon={isSubmitting && <Spinner size={14} />}
           >
             {isSubmitting ? null : (
               <Translate zh_hant="送出" zh_hans="送出" en="Send" />

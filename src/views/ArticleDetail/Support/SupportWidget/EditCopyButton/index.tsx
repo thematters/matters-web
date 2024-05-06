@@ -41,8 +41,8 @@ const EditCopyButton = ({ article, disabled }: EditCopyButtonProps) => {
             onClick={openDialog}
           >
             <TextIcon
-              icon={<Icon icon={IconEdit} size="mdS" />}
-              size="md"
+              icon={<Icon icon={IconEdit} size={20} />}
+              size={16}
               color="gold"
             >
               <FormattedMessage

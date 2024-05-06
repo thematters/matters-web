@@ -27,7 +27,7 @@ const fragments = {
       articleState: state
       title
       slug
-      mediaHash
+      shortHash
       cover
       author {
         id
@@ -44,7 +44,7 @@ const fragments = {
 export const ArticleDigestSidebar = ({
   article,
 
-  titleTextSize = 'mdS',
+  titleTextSize = 15,
   hasBackground,
   hasCover = true,
   onClick,
@@ -68,7 +68,7 @@ export const ArticleDigestSidebar = ({
   return (
     <Card
       {...path}
-      spacing={['tight', 'tight']}
+      spacing={[12, 12]}
       borderRadius="xtight"
       bgColor={hasBackground ? 'greyLighter' : 'none'}
       onClick={onClick}
@@ -98,8 +98,8 @@ export const ArticleDigestSidebar = ({
         <footer className={styles.footer}>
           <UserDigest.Mini
             user={article.author}
-            avatarSize="xs"
-            textSize="smS"
+            avatarSize={16}
+            textSize={13}
             nameColor="greyDarker"
             hasAvatar
             hasDisplayName

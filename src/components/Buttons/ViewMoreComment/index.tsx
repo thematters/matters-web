@@ -19,8 +19,8 @@ export const ViewMoreCommentButton: React.FC<ViewMoreCommentButtonProps> = ({
     {loading ? (
       placeholder || <SpinnerBlock />
     ) : (
-      <Button spacing={['xtight', 0]} textColor="greyDarker" {...props}>
-        <TextIcon icon={<Icon icon={IconDown} />} spacing="xxtight">
+      <Button spacing={[8, 0]} textColor="greyDarker" {...props}>
+        <TextIcon icon={<Icon icon={IconDown} />} spacing={4}>
           <FormattedMessage defaultMessage="View More" id="QQSdHP" />
         </TextIcon>
       </Button>

@@ -25,7 +25,7 @@ import { fragments } from './gql'
 import styles from './styles.module.css'
 
 export type CommentControls = {
-  avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
+  avatarSize?: AvatarSize
   hasUserName?: boolean
 } & FooterActionsControls &
   DropdownActionsControls
@@ -41,7 +41,7 @@ export const BaseCommentFeed = ({
   comment,
   pinnedComment,
   type,
-  avatarSize = 'lg',
+  avatarSize = 32,
   hasUserName,
   replySubmitCallback,
   ...actionControls
@@ -103,7 +103,7 @@ export const BaseCommentFeed = ({
       </header>
 
       <section className={contentClasses}>
-        <Content comment={comment} type={type} size="mdS" limit={5} />
+        <Content comment={comment} type={type} size={15} limit={5} />
 
         <FooterActions
           comment={comment}

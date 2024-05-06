@@ -124,7 +124,7 @@ const TagsFeed = () => {
                   <TagDigest.Sidebar
                     key={node.id}
                     tag={node}
-                    spacing={['tight', 0]}
+                    spacing={[12, 0]}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'tags',
@@ -142,12 +142,12 @@ const TagsFeed = () => {
       <Media lessThan="md">
         <section className={styles.backToAll}>
           <ViewMoreCard
-            spacing={['tight', 'tight']}
+            spacing={[12, 12]}
             href={PATHS.TAGS}
             textIconProps={{
-              size: 'md',
+              size: 16,
               weight: 'semibold',
-              spacing: 'xxtight',
+              spacing: 4,
             }}
             textAlign="center"
           >

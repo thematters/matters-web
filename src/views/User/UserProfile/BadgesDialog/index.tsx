@@ -71,7 +71,7 @@ export const BaseBadgesDialog = ({
                   textColor="greyDarker"
                   textActiveColor="black"
                 >
-                  <Icon icon={IconTimes} size="mdS" />
+                  <Icon icon={IconTimes} size={20} />
                 </Button>
               }
             />

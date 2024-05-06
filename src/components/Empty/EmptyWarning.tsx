@@ -6,5 +6,5 @@ export const EmptyWarning = ({
 }: {
   description: React.ReactNode
 }) => (
-  <Empty icon={<Icon icon={IconWarn} size="xxl" />} description={description} />
+  <Empty icon={<Icon icon={IconWarn} size={64} />} description={description} />
 )

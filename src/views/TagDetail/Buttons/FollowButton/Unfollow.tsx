@@ -41,7 +41,7 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
 
   return (
     <Button
-      spacing={['xtight', 'tight']}
+      spacing={[8, 12]}
       textColor="white"
       bgColor="green"
       bgActiveColor="red"
@@ -49,7 +49,7 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <TextIcon weight="md" size="mdS">
+      <TextIcon weight="medium" size={15}>
         {hover ? (
           <FormattedMessage defaultMessage="Unfollow" id="izWS4J" />
         ) : (

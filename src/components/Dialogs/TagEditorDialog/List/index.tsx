@@ -9,7 +9,6 @@ import {
   Spacer,
   SpinnerBlock,
   TextIcon,
-  Translate,
   UserDigest,
 } from '~/components'
 import TAG_MAINTAINERS from '~/components/GQL/queries/tagMaintainers'
@@ -47,13 +46,13 @@ interface Props {
 const RemoveButton = ({ remove }: { remove: () => void }) => (
   <section>
     <Button
-      spacing={[0, 'xtight']}
+      spacing={[0, 8]}
       size={[null, '1.25rem']}
       bgColor="greyLighter"
       onClick={() => remove()}
     >
-      <TextIcon size="xs" color="greyDark" weight="md">
-        <Translate zh_hant="移除" zh_hans="移除" en="Remove" />
+      <TextIcon size={12} color="greyDark" weight="medium">
+        <FormattedMessage defaultMessage="Remove" id="G/yZLu" />
       </TextIcon>
     </Button>
   </section>
@@ -91,13 +90,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
 
   const AddEditorButton = () => (
     <Dialog.TextButton
-      text={
-        <Translate
-          zh_hant="新增協作者"
-          zh_hans="新增协作者"
-          en="Add collaborator"
-        />
-      }
+      text={<FormattedMessage defaultMessage="Add collaborator" id="nNLkZ8" />}
       onClick={toAddStep}
     />
   )
@@ -119,13 +112,9 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
               <UserDigest.Rich
                 user={tag.owner}
                 subtitle={
-                  <Translate
-                    zh_hant="主理人"
-                    zh_hans="主理人"
-                    en="Maintainer"
-                  />
+                  <FormattedMessage defaultMessage="Maintainer" id="eXDZGQ" />
                 }
-                spacing={['tight', 'base']}
+                spacing={[12, 16]}
                 hasFollow={false}
               />
             </List.Item>
@@ -137,16 +126,12 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
                 user={editor}
                 hasFollow={false}
                 subtitle={
-                  <Translate
-                    zh_hant="協作者"
-                    zh_hans="协作者"
-                    en="Collaborator"
-                  />
+                  <FormattedMessage defaultMessage="Collaborator" id="P1AKC5" />
                 }
                 extraButton={
                   <RemoveButton remove={() => toRemoveStep(editor)} />
                 }
-                spacing={['tight', 'base']}
+                spacing={[12, 16]}
               />
             </List.Item>
           ))}
@@ -157,40 +142,33 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
         <Dialog.Content>
           <Dialog.Content.Message smUpAlign="center">
             <p className={styles.hint}>
-              <Translate
-                zh_hant="協作者可以與你共同管理精選"
-                zh_hans="协作者可以与你共同管理精选"
-                en="Collaborator can manage selected feed with you."
+              <FormattedMessage
+                defaultMessage="Collaborator can manage selected feed with you."
+                id="KoR0wt"
               />
 
               {(isHavingNoneEditors || isReachingLimit) && (
                 <p>
-                  <Translate
-                    zh_hant="每個標籤最多添加"
-                    zh_hans="每个标签最多添加"
-                    en="Every tag can have maximum"
-                  />
-                  <span className={styles.count}> 4 </span>
-                  <Translate
-                    zh_hant="名協作者"
-                    zh_hans="名协作者"
-                    en="collaborators."
+                  <FormattedMessage
+                    defaultMessage="Every tag can have maximum {count} collaborators."
+                    id="TAPLOf"
+                    values={{
+                      count: <span className={styles.count}> 4 </span>,
+                    }}
                   />
                 </p>
               )}
 
               {isAllowAdd && isHavingEditors && (
                 <p>
-                  <Translate
-                    zh_hant="你還可以添加"
-                    zh_hans="你还可以添加"
-                    en="You can add"
-                  />
-                  <span className={styles.count}> {4 - count} </span>
-                  <Translate
-                    zh_hant="名協作者"
-                    zh_hans="名协作者"
-                    en="more collaborators."
+                  <FormattedMessage
+                    defaultMessage="You can add {count} more collaborators."
+                    id="aKlTO2"
+                    values={{
+                      count: (
+                        <span className={styles.count}> {4 - count} </span>
+                      ),
+                    }}
                   />
                 </p>
               )}

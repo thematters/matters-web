@@ -37,7 +37,7 @@ const ViewStripeAccount = () => {
       htmlTarget="_blank"
       right={
         loading ? (
-          <Spinner size="sm" color="grey" />
+          <Spinner size={14} color="grey" />
         ) : (
           <TextIcon icon={<Icon icon={IconExternal} color="greyDarker" />} />
         )

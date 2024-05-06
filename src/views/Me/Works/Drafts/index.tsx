@@ -66,7 +66,7 @@ export const BaseMeWorksDrafts = () => {
       eof
     >
       <section className={styles.addDraft} onClick={addDraft} role="button">
-        <TextIcon icon={<Icon icon={IconPlus} size="mdS" />}>
+        <TextIcon icon={<Icon icon={IconPlus} size={20} />}>
           <FormattedMessage defaultMessage="Write" id="k2veDA" />
         </TextIcon>
       </section>

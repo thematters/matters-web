@@ -21,12 +21,12 @@ interface DonatorProps {
 const Donator = ({ user }: DonatorProps) => {
   return (
     <UserDigest.Mini
-      textSize="md"
-      textWeight="md"
+      textSize={16}
+      textWeight="medium"
       user={user || undefined}
       hasDisplayName
       hasAvatar
-      avatarSize="md"
+      avatarSize={24}
     />
   )
 }

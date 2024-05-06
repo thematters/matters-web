@@ -10,7 +10,7 @@ const fragments = {
   article: gql`
     fragment EditArticleButtonArticle on Article {
       id
-      mediaHash
+      shortHash
       slug
       author {
         id
@@ -36,7 +36,7 @@ const EditArticleButton = ({
           description="src/components/ArticleDigest/DropdownActions/EditButton.tsx"
         />
       }
-      icon={<Icon icon={IconEdit} size="mdS" />}
+      icon={<Icon icon={IconEdit} size={20} />}
       href={`${href}/edit`}
       is="link"
     />

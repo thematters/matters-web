@@ -137,7 +137,7 @@ const InviteePreSend = ({ closeDialog, confirm, invitees }: Props) => {
             ({ node }, i) =>
               node.__typename === 'User' && (
                 <List.Item key={i}>
-                  <Card spacing={['xtight', 'base']}>
+                  <Card spacing={[8, 16]}>
                     <UserDigest.Mini
                       user={node}
                       direction="column"

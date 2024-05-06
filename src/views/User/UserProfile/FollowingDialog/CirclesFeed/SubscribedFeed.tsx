@@ -88,7 +88,7 @@ const SubscribedFeed = () => {
           <List.Item key={node.id}>
             <CircleDigest.Mini
               circle={node}
-              spacing={['tight', 'base']}
+              spacing={[12, 16]}
               onClick={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'user_circle',

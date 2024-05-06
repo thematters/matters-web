@@ -1,7 +1,8 @@
 import { useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Dialog, ShareDialog, Translate } from '~/components'
+import { Dialog, ShareDialog } from '~/components'
 import { LatestVersionArticleQuery } from '~/gql/graphql'
 interface PublishedStateProps {
   article: NonNullable<
@@ -32,35 +33,28 @@ const PublishedState = ({ article }: PublishedStateProps) => {
       description={
         <>
           <p>
-            <Translate
-              zh_hant="修訂作品發佈成功，快把作品分享到不同渠道，"
-              zh_hans="修订作品发布成功，快把作品分享到不同渠道，"
-              en="Your work has been republished. Share it on different platforms "
+            <FormattedMessage
+              defaultMessage="Your work has been republished. Share it on different platforms "
+              id="09AywK"
             />
           </p>
           <p>
-            <Translate
-              zh_hant="吸引更多人為你拍手！"
-              zh_hans="吸引更多人为你拍手！"
-              en="to receive more support"
+            <FormattedMessage
+              defaultMessage="to receive more support"
+              id="MV0JlP"
             />
           </p>
         </>
       }
       headerTitle={
-        <Translate
-          zh_hant="修訂作品已發佈"
-          zh_hans="修订作品已发布"
-          en="Article republished"
-        />
+        <FormattedMessage defaultMessage="Article republished" id="gz0EGC" />
       }
       btns={
         <Dialog.RoundedButton
           text={
-            <Translate
-              zh_hant="查看修訂作品"
-              zh_hans="查看修订作品"
-              en="View republished article"
+            <FormattedMessage
+              defaultMessage="View republished article"
+              id="AQuumI"
             />
           }
           onClick={() => {
@@ -71,10 +65,9 @@ const PublishedState = ({ article }: PublishedStateProps) => {
       smUpBtns={
         <Dialog.TextButton
           text={
-            <Translate
-              zh_hant="查看修訂作品"
-              zh_hans="查看修订作品"
-              en="View republished article"
+            <FormattedMessage
+              defaultMessage="View republished article"
+              id="AQuumI"
             />
           }
           onClick={() => {

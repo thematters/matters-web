@@ -17,8 +17,8 @@ const TriggerFullSearchItem = ({ searchKey }: TriggerFullSearchItemProps) => {
       <TextIcon
         icon={<Icon icon={IconRight} color="green" />}
         color="green"
-        weight="md"
-        textPlacement="left"
+        weight="medium"
+        placement="left"
       >
         <Translate
           zh_hant="查看所有作品、用戶、標籤檢索結果"

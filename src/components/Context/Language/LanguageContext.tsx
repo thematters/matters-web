@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { createContext, useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { COOKIE_LANGUAGE } from '~/common/enums'
 import {
@@ -9,13 +10,7 @@ import {
   toLocale,
   toUserLanguage,
 } from '~/common/utils'
-import {
-  toast,
-  Translate,
-  useMutation,
-  useRoute,
-  ViewerContext,
-} from '~/components'
+import { toast, useMutation, useRoute, ViewerContext } from '~/components'
 import { UpdateLanguageMutation, UserLanguage } from '~/gql/graphql'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
@@ -119,7 +114,12 @@ export const LanguageProvider = ({
       })
     } catch (e) {
       toast.error({
-        message: <Translate id="failureChange" />,
+        message: (
+          <FormattedMessage
+            defaultMessage="Failed to edit, please try again."
+            id="USOHRK"
+          />
+        ),
       })
     }
   }

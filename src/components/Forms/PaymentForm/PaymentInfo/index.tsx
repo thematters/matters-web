@@ -48,7 +48,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
           />
         </p>
       )}
-      <Avatar user={recipient} size="xxxlm" />
+      <Avatar user={recipient} size={76} />
       <p className={styles.recipient}>{recipient.displayName}</p>
       {showEthAddress && (
         <div className={styles.address}>
@@ -60,7 +60,7 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
           >
             {({ copyToClipboard }) => (
               <Button
-                spacing={['xxtight', 'tight']}
+                spacing={[4, 12]}
                 bgColor="greenLighter"
                 aria-label={intl.formatMessage({
                   defaultMessage: 'Copy',
@@ -69,11 +69,11 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
                 onClick={copyToClipboard}
               >
                 <TextIcon
-                  icon={<Icon icon={IconCopy} color="green" size="sm" />}
-                  spacing="xxtight"
-                  size="md"
+                  icon={<Icon icon={IconCopy} color="green" size={14} />}
+                  spacing={4}
+                  size={16}
                   color="green"
-                  textPlacement="left"
+                  placement="left"
                 >
                   {truncate(address)}
                 </TextIcon>
@@ -84,8 +84,8 @@ const PaymentInfo: React.FC<PaymentInfoProps> = ({
       )}
       {showLikerID && (
         <div className={styles.address}>
-          <Button spacing={['xxtight', 'tight']} bgColor="greenLighter">
-            <TextIcon size="xs" weight="md" color="green">
+          <Button spacing={[4, 12]} bgColor="greenLighter">
+            <TextIcon size={12} weight="medium" color="green">
               LikeID: {recipient.liker.likerId}
             </TextIcon>
           </Button>

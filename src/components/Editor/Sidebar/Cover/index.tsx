@@ -17,7 +17,7 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
     <SetCover.Dialog cover={cover} {...restProps}>
       {({ openDialog: openSetCoverDialog }) => (
         <Box
-          icon={<Icon icon={IconImage} size="md" />}
+          icon={<Icon icon={IconImage} size={24} />}
           title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
           onClick={openSetCoverDialog}
           disabled={disabled}

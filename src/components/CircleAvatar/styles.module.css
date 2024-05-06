@@ -14,7 +14,7 @@
 }
 
 /* 48px */
-.xl {
+.size48 {
   width: 3rem;
   height: 3rem;
 
@@ -24,7 +24,7 @@
 }
 
 /* 56px */
-.xxl {
+.size56 {
   width: 3.5rem;
   height: 3.5rem;
 
@@ -34,7 +34,7 @@
 }
 
 /* 72px */
-.xxxl {
+.size72 {
   width: 4.5rem;
   height: 4.5rem;
 

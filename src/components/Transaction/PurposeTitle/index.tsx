@@ -23,13 +23,13 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
   return (
     <section className={styles.purpose}>
       {currency === TransactionCurrency.Usdt && (
-        <Icon icon={IconTether} size="md" />
+        <Icon icon={IconTether} size={24} />
       )}
       {currency === TransactionCurrency.Hkd && (
-        <Icon icon={IconFiatCurrency} size="md" />
+        <Icon icon={IconFiatCurrency} size={24} />
       )}
       {currency === TransactionCurrency.Like && (
-        <Icon icon={IconLikeCoin} size="md" />
+        <Icon icon={IconLikeCoin} size={24} />
       )}
 
       <section className={styles.title}>
@@ -104,7 +104,7 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
                 aria-hidden
                 onClick={(event) => event.stopPropagation()}
               >
-                <Icon icon={IconHelp} size="sm" />
+                <Icon icon={IconHelp} size={14} />
               </button>
             </Tooltip>
           </>

@@ -25,7 +25,7 @@ const Author = ({ article }: AuthorProps) => {
       <section>
         <LinkWrapper {...userProfilePath}>
           <section className={styles.avatar}>
-            <Avatar size="xxlm" user={author} inProfile />
+            <Avatar size={64} user={author} inProfile />
           </section>
         </LinkWrapper>
       </section>

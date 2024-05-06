@@ -36,12 +36,12 @@ const CheckBox: React.FC<CheckBoxProps> = ({
           icon={
             <Icon
               icon={IconCircleCheckFill}
-              size="mdS"
+              size={20}
               color={inputProps.checked ? 'green' : 'grey'}
             />
           }
           color="greyDark"
-          spacing="xtight"
+          spacing={8}
         >
           <span>{hint}</span>
         </TextIcon>

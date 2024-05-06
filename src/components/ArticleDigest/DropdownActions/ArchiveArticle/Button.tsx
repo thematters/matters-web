@@ -7,7 +7,7 @@ const ArchiveArticleButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Archive" id="hrgo+E" />}
-      icon={<Icon icon={IconArchive} size="mdS" />}
+      icon={<Icon icon={IconArchive} size={20} />}
       onClick={openDialog}
       ariaHasPopup="dialog"
       textColor="red"

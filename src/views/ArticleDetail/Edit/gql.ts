@@ -6,59 +6,57 @@ import assetFragment from '~/components/GQL/fragments/asset'
 
 export const GET_EDIT_ARTICLE = gql`
   query QueryEditArticle(
-    $id: ID!
+    $shortHash: String!
     $after: String
     $first: first_Int_min_0 = null
   ) {
-    article: node(input: { id: $id }) {
-      ... on Article {
-        id
-        title
-        slug
-        mediaHash
-        cover
-        contents {
-          html
-        }
-        summary
-        summaryCustomized
-        assets {
-          ...Asset
-        }
-        tags {
-          ...DigestTag
-        }
-        author {
-          id
-          ownCircles {
-            ...DigestRichCirclePublic
-          }
-          displayName
-          avatar
-          userName
-        }
-        access {
-          type
-          circle {
-            id
-            ...DigestRichCirclePublic
-          }
-        }
-        canComment
-        license
-        sensitiveByAuthor
-        requestForDonation
-        replyToDonator
-        revisionCount
-        versions(input: { first: 1 }) {
-          edges {
-            node {
-              id
-            }
-          }
-        }
-        ...ArticleCollection
+    article(input: { shortHash: $shortHash }) {
+      id
+      title
+      slug
+      shortHash
+      cover
+      contents {
+        html
       }
+      summary
+      summaryCustomized
+      assets {
+        ...Asset
+      }
+      tags {
+        ...DigestTag
+      }
+      author {
+        id
+        ownCircles {
+          ...DigestRichCirclePublic
+        }
+        displayName
+        avatar
+        userName
+      }
+      access {
+        type
+        circle {
+          id
+          ...DigestRichCirclePublic
+        }
+      }
+      canComment
+      license
+      sensitiveByAuthor
+      requestForDonation
+      replyToDonator
+      revisionCount
+      versions(input: { first: 1 }) {
+        edges {
+          node {
+            id
+          }
+        }
+      }
+      ...ArticleCollection
     }
   }
   ${assetFragment}

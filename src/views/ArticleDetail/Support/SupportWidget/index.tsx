@@ -147,9 +147,9 @@ const SupportWidget = ({
                 <>
                   {replyToDonator && (
                     <section>
-                      <Avatar user={article?.author} size="xl" />
+                      <Avatar user={article?.author} size={48} />
                       <p>
-                        <TextIcon weight="md">
+                        <TextIcon weight="medium">
                           {article?.author.displayName}&nbsp;
                         </TextIcon>
                         <TextIcon color="greyDarker">
@@ -168,7 +168,7 @@ const SupportWidget = ({
                   {!replyToDonator && (
                     <section>
                       <p>
-                        <TextIcon weight="bold" size="md">
+                        <TextIcon weight="bold" size={16}>
                           <FormattedMessage
                             defaultMessage="🎉 Thank you for support!"
                             id="Myrqtn"
@@ -197,8 +197,8 @@ const SupportWidget = ({
                   {!requestForDonation && (
                     <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
                       <FormattedMessage
-                        defaultMessage="Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
-                        id="3Y6k4g"
+                        defaultMessage="Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
+                        id="9EABqX"
                       />
                     </p>
                   )}
@@ -234,8 +234,8 @@ const SupportWidget = ({
                       <TextIcon
                         icon={<Icon icon={IconMoney} color="black" />}
                         color="black"
-                        size="xs"
-                        spacing="xxxtight"
+                        size={12}
+                        spacing={2}
                       >
                         <FormattedMessage
                           defaultMessage="Transaction History"
@@ -259,8 +259,8 @@ const SupportWidget = ({
               {!requestForDonation && (
                 <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REQUEST}>
                   <FormattedMessage
-                    defaultMessage="Like my work? Don’t forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
-                    id="3Y6k4g"
+                    defaultMessage="Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
+                    id="9EABqX"
                   />
                 </p>
               )}

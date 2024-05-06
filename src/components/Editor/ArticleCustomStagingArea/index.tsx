@@ -41,7 +41,7 @@ const ArticleCustomStagingArea = ({
               <li key={node.id} className={styles.node}>
                 <ArticleDigestDropdown
                   article={node}
-                  titleTextSize="md"
+                  titleTextSize={16}
                   spacing={[0, 0]}
                   bgColor="none"
                   lineClamp={false}
@@ -54,7 +54,7 @@ const ArticleCustomStagingArea = ({
                 >
                   {({ openDialog }) => (
                     <Button onClick={openDialog}>
-                      <Icon icon={IconTimes} size="mdS" color="grey" />
+                      <Icon icon={IconTimes} size={20} color="grey" />
                     </Button>
                   )}
                 </ConfirmDialog>

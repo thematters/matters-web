@@ -1,7 +1,7 @@
 import classNames from 'classnames'
+import Lottie from 'lottie-react'
 import React, { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
-import Lottie, { EventListener } from 'react-lottie'
 
 import donateData from '@/public/static/json/donate.json'
 import loadingData from '@/public/static/json/loading.json'
@@ -55,13 +55,6 @@ const Animation: React.FC<Props> = ({
     animationData: donateData,
   }
 
-  const donateListener: EventListener = {
-    eventName: 'complete',
-    callback: () => {
-      playLoading ? forward('loading') : forward('success')
-    },
-  }
-
   const loadingOptions = {
     ...defaultOptions,
     loop: true,
@@ -73,20 +66,14 @@ const Animation: React.FC<Props> = ({
     animationData: successData,
   }
 
-  const successListener: EventListener = {
-    eventName: 'complete',
-    callback: () => {
-      playEnd()
-    },
-  }
-
-  const LottieProps = {
+  const lottieProps = {
     isClickToPauseDisabled: true,
     height: 120,
     width: 120,
   }
 
   const containerClasses = classNames({
+    [styles.container]: true,
     [styles.slideUp]: rendered,
   })
 
@@ -114,17 +101,21 @@ const Animation: React.FC<Props> = ({
       </p>
       {isDonate && (
         <Lottie
-          options={donateOptions}
-          eventListeners={[donateListener]}
-          {...LottieProps}
+          {...donateOptions}
+          {...lottieProps}
+          onComplete={() => {
+            playLoading ? forward('loading') : forward('success')
+          }}
         />
       )}
-      {isLoading && <Lottie options={loadingOptions} {...LottieProps} />}
+      {isLoading && <Lottie {...loadingOptions} {...lottieProps} />}
       {isSuccess && (
         <Lottie
-          options={successOptions}
-          eventListeners={[successListener]}
-          {...LottieProps}
+          {...successOptions}
+          {...lottieProps}
+          onComplete={() => {
+            playEnd()
+          }}
         />
       )}
     </section>

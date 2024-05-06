@@ -111,7 +111,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           placement="top"
         >
           <section className={styles.disableAddArticles}>
-            <TextIcon icon={<Icon icon={IconPlus} size="mdS" />}>
+            <TextIcon icon={<Icon icon={IconPlus} size={20} />}>
               <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
             </TextIcon>
           </section>
@@ -127,7 +127,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
               className={styles.addArticles}
               onClick={openAddArticlesCollection}
             >
-              <TextIcon icon={<Icon icon={IconPlus} size="mdS" />}>
+              <TextIcon icon={<Icon icon={IconPlus} size={20} />}>
                 <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
               </TextIcon>
             </section>
@@ -185,7 +185,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
               >
                 <section className={styles.dragContainer}>
                   <button data-movable-handle className={styles.handle}>
-                    <Icon icon={IconDrag} size="md" color="greyDark" />
+                    <Icon icon={IconDrag} size={24} color="greyDark" />
                   </button>
                   <section className={styles.digestFeed}>
                     <ArticleDigestFeed

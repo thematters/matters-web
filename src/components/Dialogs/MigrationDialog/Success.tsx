@@ -1,7 +1,8 @@
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { Dialog, Translate } from '~/components'
+import { Dialog, LanguageContext } from '~/components'
 
 const texts: {
   zh_hant: Record<string, string>
@@ -26,19 +27,13 @@ const texts: {
 }
 
 const MigrationDialogSuccess = () => {
-  const { zh_hant, zh_hans, en } = texts
+  const { lang } = useContext(LanguageContext)
 
   return (
     <>
       <Dialog.Content>
         <Dialog.Content.Message>
-          <p>
-            <Translate
-              zh_hant={zh_hant.content}
-              zh_hans={zh_hans.content}
-              en={en.content}
-            />
-          </p>
+          <p>{texts[lang].content}</p>
         </Dialog.Content.Message>
       </Dialog.Content>
 

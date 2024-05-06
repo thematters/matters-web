@@ -1,12 +1,10 @@
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { REFETCH_CIRCLE_DETAIL_ARTICLES } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Dialog,
-  LanguageContext,
   SpinnerBlock,
   toast,
   useDialogSwitch,
@@ -58,7 +56,7 @@ const AddCircleArticleDialog = ({
   const isConfirm = currStep === 'confirm'
 
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [articles, setArticles] = useState<SearchSelectNode[]>([])
   const [add, { loading }] =
@@ -82,7 +80,10 @@ const AddCircleArticleDialog = ({
     })
 
     toast.success({
-      message: translate({ id: 'addedArticleCircle', lang }),
+      message: intl.formatMessage({
+        defaultMessage: 'Articles added ',
+        id: 'z1ucgb',
+      }),
     })
 
     window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL_ARTICLES))

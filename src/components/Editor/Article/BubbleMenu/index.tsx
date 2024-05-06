@@ -4,8 +4,8 @@ import {
   isTextSelection,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useContext, useRef, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useRef, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconEditorBold } from '@/public/static/icons/24px/editor-bold.svg'
 import { ReactComponent as IconEditorCode } from '@/public/static/icons/24px/editor-code.svg'
@@ -17,8 +17,8 @@ import { ReactComponent as IconEditorQuote } from '@/public/static/icons/24px/ed
 import { ReactComponent as IconEditorStrike } from '@/public/static/icons/24px/editor-strike.svg'
 import { ReactComponent as IconEditorUl } from '@/public/static/icons/24px/editor-ul.svg'
 import { KEYVALUE } from '~/common/enums'
-import { isUrl, translate } from '~/common/utils'
-import { LanguageContext, withIcon } from '~/components'
+import { isUrl } from '~/common/utils'
+import { withIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -31,7 +31,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   editor,
   isCommentEditor,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const urlInput = useRef<HTMLInputElement>(null)
 
   const [showLinkInput, setShowLinkInput] = useState(false)
@@ -126,20 +126,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 className={
                   editor.isActive('heading', { level: 2 }) ? styles.active : ''
                 }
-                title={translate({
-                  zh_hant: '標題 2',
-                  zh_hans: '标题 2',
-                  en: 'Heading 2',
-                  lang,
+                title={intl.formatMessage({
+                  defaultMessage: 'Heading 2',
+                  id: 'Zqekct',
                 })}
-                aria-label={translate({
-                  zh_hant: '標題 2',
-                  zh_hans: '标题 2',
-                  en: 'Heading 2',
-                  lang,
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Heading 2',
+                  id: 'Zqekct',
                 })}
               >
-                {withIcon(IconEditorH2)({ size: 'md' })}
+                {withIcon(IconEditorH2)({ size: 24 })}
               </button>
             )}
 
@@ -154,20 +150,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 className={
                   editor.isActive('heading', { level: 3 }) ? styles.active : ''
                 }
-                title={translate({
-                  zh_hant: '標題 3',
-                  zh_hans: '标题 3',
-                  en: 'Heading 3',
-                  lang,
+                title={intl.formatMessage({
+                  defaultMessage: 'Heading 3',
+                  id: 'BDbgCL',
                 })}
-                aria-label={translate({
-                  zh_hant: '標題 3',
-                  zh_hans: '标题 3',
-                  en: 'Heading 3',
-                  lang,
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Heading 3',
+                  id: 'BDbgCL',
                 })}
               >
-                {withIcon(IconEditorH3)({ size: 'md' })}
+                {withIcon(IconEditorH3)({ size: 24 })}
               </button>
             )}
 
@@ -178,20 +170,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 onClick={() => editor.chain().focus().toggleBold().run()}
                 disabled={!editor.can().chain().focus().toggleBold().run()}
                 className={editor.isActive('bold') ? styles.active : ''}
-                title={translate({
-                  zh_hant: '粗體',
-                  zh_hans: '粗体',
-                  en: 'Bold',
-                  lang,
+                title={intl.formatMessage({
+                  defaultMessage: 'Bold',
+                  id: 'Dkkmwm',
                 })}
-                aria-label={translate({
-                  zh_hant: '粗體',
-                  zh_hans: '粗体',
-                  en: 'Bold',
-                  lang,
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Bold',
+                  id: 'Dkkmwm',
                 })}
               >
-                {withIcon(IconEditorBold)({ size: 'md' })}
+                {withIcon(IconEditorBold)({ size: 24 })}
               </button>
             )}
 
@@ -204,20 +192,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 // @ts-ignore
                 disabled={!editor.can().chain().focus().toggleStrike().run()}
                 className={editor.isActive('strike') ? styles.active : ''}
-                title={translate({
-                  zh_hant: '刪除線',
-                  zh_hans: '删除线',
-                  en: 'Strikethrough',
-                  lang,
+                title={intl.formatMessage({
+                  defaultMessage: 'Strikethrough',
+                  id: 'lH8y+X',
                 })}
-                aria-label={translate({
-                  zh_hant: '刪除線',
-                  zh_hans: '删除线',
-                  en: 'Strikethrough',
-                  lang,
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Strikethrough',
+                  id: 'lH8y+X',
                 })}
               >
-                {withIcon(IconEditorStrike)({ size: 'md' })}
+                {withIcon(IconEditorStrike)({ size: 24 })}
               </button>
             )}
 
@@ -230,20 +214,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 // @ts-ignore
                 disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
                 className={editor.isActive('codeBlock') ? styles.active : ''}
-                title={translate({
-                  zh_hant: '程式碼',
-                  zh_hans: '代码',
-                  en: 'Code Block',
-                  lang,
+                title={intl.formatMessage({
+                  defaultMessage: 'Code Block',
+                  id: 'fJFvPm',
                 })}
-                aria-label={translate({
-                  zh_hant: '程式碼',
-                  zh_hans: '代码',
-                  en: 'Code Block',
-                  lang,
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Code Block',
+                  id: 'fJFvPm',
                 })}
               >
-                {withIcon(IconEditorCode)({ size: 'md' })}
+                {withIcon(IconEditorCode)({ size: 24 })}
               </button>
             )}
 
@@ -253,14 +233,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
               className={editor.isActive('blockquote') ? styles.active : ''}
-              aria-label={translate({
-                zh_hant: '引用',
-                zh_hans: '引用',
-                en: 'Quote',
-                lang,
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Quote',
+                id: 'atzUcB',
               })}
             >
-              {withIcon(IconEditorQuote)({ size: 'md' })}
+              {withIcon(IconEditorQuote)({ size: 24 })}
             </button>
 
             {/* Unordered list */}
@@ -270,20 +248,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 // @ts-ignore
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={editor.isActive('bulletList') ? styles.active : ''}
-                title={translate({
-                  zh_hant: '無序清單',
-                  zh_hans: '无序列表',
-                  en: 'Unordered list',
-                  lang,
+                title={intl.formatMessage({
+                  defaultMessage: 'Unordered list',
+                  id: 'Onjs6P',
                 })}
-                aria-label={translate({
-                  zh_hant: '無序清單',
-                  zh_hans: '无序列表',
-                  en: 'Unordered list',
-                  lang,
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Unordered list',
+                  id: 'Onjs6P',
                 })}
               >
-                {withIcon(IconEditorUl)({ size: 'md' })}
+                {withIcon(IconEditorUl)({ size: 24 })}
               </button>
             )}
 
@@ -294,20 +268,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 // @ts-ignore
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={editor.isActive('orderedList') ? styles.active : ''}
-                title={translate({
-                  zh_hant: '有序清單',
-                  zh_hans: '有序列表',
-                  en: 'Ordered list',
-                  lang,
+                title={intl.formatMessage({
+                  defaultMessage: 'Ordered list',
+                  id: '5j/gIz',
                 })}
-                aria-label={translate({
-                  zh_hant: '有序清單',
-                  zh_hans: '有序列表',
-                  en: 'Ordered list',
-                  lang,
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Ordered list',
+                  id: '5j/gIz',
                 })}
               >
-                {withIcon(IconEditorOl)({ size: 'md' })}
+                {withIcon(IconEditorOl)({ size: 24 })}
               </button>
             )}
 
@@ -327,20 +297,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               // @ts-ignore
               disabled={!editor.can().chain().focus().toggleLink().run()}
               className={editor.isActive('link') ? styles.active : ''}
-              title={translate({
-                zh_hant: '連結',
-                zh_hans: '链接',
-                en: 'Link',
-                lang,
+              title={intl.formatMessage({
+                defaultMessage: 'Link',
+                id: 'JBWS0c',
               })}
-              aria-label={translate({
-                zh_hant: '連結',
-                zh_hans: '链接',
-                en: 'Link',
-                lang,
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Link',
+                id: 'JBWS0c',
               })}
             >
-              {withIcon(IconEditorLink)({ size: 'md' })}
+              {withIcon(IconEditorLink)({ size: 24 })}
             </button>
           </>
         )}
@@ -351,17 +317,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               className="urlInput"
               ref={urlInput}
               type="text"
-              title={translate({
-                zh_hant: '輸入連結地址',
-                zh_hans: '输入链接地址',
-                en: 'Enter URL',
-                lang,
+              title={intl.formatMessage({
+                defaultMessage: 'Enter URL',
+                id: 'gluNT8',
               })}
-              placeholder={translate({
-                zh_hant: '輸入連結地址',
-                zh_hans: '输入链接地址',
-                en: 'Enter URL',
-                lang,
+              placeholder={intl.formatMessage({
+                defaultMessage: 'Enter URL',
+                id: 'gluNT8',
               })}
               autoFocus
               onKeyDown={onLinkInputKeyDown}

@@ -17,7 +17,7 @@ const RemoveArticleCollectionButton = ({
       text={
         <FormattedMessage defaultMessage="Remove from collection" id="0Om2Kl" />
       }
-      icon={<Icon icon={IconDelete} size="mdS" />}
+      icon={<Icon icon={IconDelete} size={20} />}
       onClick={() => {
         onClick()
         openDialog()

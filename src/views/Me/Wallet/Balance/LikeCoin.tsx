@@ -46,9 +46,9 @@ const Wrapper: React.FC<{ children?: React.ReactNode }> = ({ children }) => {
   return (
     <section className={classes}>
       <TextIcon
-        icon={<Icon icon={IconLikeCoin} size="xlM" />}
-        size="md"
-        spacing="xtight"
+        icon={<Icon icon={IconLikeCoin} size={40} />}
+        size={16}
+        spacing={8}
       >
         <Translate zh_hant="LikeCoin" zh_hans="LikeCoin" en="LikeCoin" />
       </TextIcon>
@@ -82,7 +82,7 @@ export const LikeCoinBalance = ({
   if (loading) {
     return (
       <Wrapper>
-        <Spinner color="greyLight" size="sm" />
+        <Spinner color="greyLight" size={14} />
       </Wrapper>
     )
   }
@@ -91,12 +91,12 @@ export const LikeCoinBalance = ({
     return (
       <Wrapper>
         <Button
-          spacing={[0, 'tight']}
+          spacing={[0, 12]}
           size={[null, '1.5rem']}
           borderColor="black"
           href={PATHS.ME_SETTINGS_MISC}
         >
-          <TextIcon color="black" size="xs">
+          <TextIcon color="black" size={12}>
             <Translate
               zh_hant="重新綁定 Liker ID"
               zh_hans="重新绑定 Liker ID"
@@ -124,12 +124,12 @@ export const LikeCoinBalance = ({
   return (
     <Wrapper>
       <Button
-        spacing={[0, 'tight']}
+        spacing={[0, 12]}
         size={[null, '1.5rem']}
         borderColor="black"
         href={PATHS.ME_SETTINGS_MISC}
       >
-        <TextIcon color="black" size="xs">
+        <TextIcon color="black" size={12}>
           <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />
         </TextIcon>
       </Button>
