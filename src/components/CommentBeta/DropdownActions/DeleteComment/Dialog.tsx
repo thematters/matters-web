@@ -67,12 +67,21 @@ const DeleteCommentDialog = ({
         type: 'delete',
       })
 
-      updateArticlePublic({
-        cache,
-        shortHash: article.shortHash,
-        routerLang,
-        type: 'deleteComment',
-      })
+      if (comment.parentComment) {
+        updateArticlePublic({
+          cache,
+          shortHash: article.shortHash,
+          routerLang,
+          type: 'deleteSecondaryComment',
+        })
+      } else {
+        updateArticlePublic({
+          cache,
+          shortHash: article.shortHash,
+          routerLang,
+          type: 'deleteComment',
+        })
+      }
     },
   })
 

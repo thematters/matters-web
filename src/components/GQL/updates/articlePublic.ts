@@ -15,7 +15,11 @@ export const updateArticlePublic = ({
   cache: DataProxy
   shortHash: string
   routerLang: UserLanguage
-  type: 'deleteComment' | 'addComment'
+  type:
+    | 'deleteComment'
+    | 'addComment'
+    | 'addSecondaryComment'
+    | 'deleteSecondaryComment'
 }) => {
   // FIXME: circular dependencies
   const {
@@ -62,6 +66,12 @@ export const updateArticlePublic = ({
         break
       case 'deleteComment':
         totalCount -= 1
+        commentCount -= 1
+        break
+      case 'addSecondaryComment':
+        commentCount += 1
+        break
+      case 'deleteSecondaryComment':
         commentCount -= 1
         break
     }
