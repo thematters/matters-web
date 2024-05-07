@@ -142,6 +142,11 @@ const FixedToolbar = ({
     [styles.justifyContentCenter]: isLeftAppreciationButtonScaleOut,
   })
 
+  const rightAppreciationButtonClasses = classNames({
+    [styles.rightAppreciationButton]: true,
+    [styles.scaleInWidth]: isCommentScaleInDone,
+  })
+
   const handleLeftAppreciationButtonScaleOutEnd = (
     event: React.AnimationEvent<HTMLElement>
   ) => {
@@ -239,20 +244,8 @@ const FixedToolbar = ({
               />
             )}
 
-            <section>
-              <DonationButton
-                article={article}
-                articleDetail={articleDetails}
-                disabled={lock}
-                iconSize={24}
-                textWeight="normal"
-                textIconSpacing={4}
-                {...buttonProps}
-              />
-            </section>
-
-            {isCommentScaleInDone && (
-              <section className={styles.scaleInWidth}>
+            {isLeftAppreciationButtonScaleOut && (
+              <section className={rightAppreciationButtonClasses}>
                 <ReCaptchaProvider action="appreciateArticle">
                   <AppreciationButton
                     article={article}
@@ -266,6 +259,18 @@ const FixedToolbar = ({
                 </ReCaptchaProvider>
               </section>
             )}
+
+            <section>
+              <DonationButton
+                article={article}
+                articleDetail={articleDetails}
+                disabled={lock}
+                iconSize={24}
+                textWeight="normal"
+                textIconSpacing={4}
+                {...buttonProps}
+              />
+            </section>
 
             <BookmarkButton
               article={article}

@@ -37,7 +37,7 @@
 .scaleOut {
   flex-grow: 0;
   transform: scale(0);
-  animation: scale-out 3s;
+  animation: scale-out 0.3s;
 }
 
 @keyframes scale-out {
@@ -51,7 +51,7 @@
 }
 
 .scaleIn {
-  animation: scale-in 3s;
+  animation: scale-in 0.3s;
 }
 
 @keyframes scale-in {
@@ -66,7 +66,7 @@
 
 .scaleInX {
   flex-grow: 0;
-  animation: scale-in-x 3s;
+  animation: scale-in-x 0.3s;
 }
 
 @keyframes scale-in-x {
@@ -81,19 +81,21 @@
   }
 }
 
+.rightAppreciationButton {
+  transform: scale(0);
+}
+
 .scaleInWidth {
-  /* width: 44px; */
-  animation: scale-in-width 3s;
+  transform: scale(1);
+  animation: scale-in-width 0.3s;
 }
 
 @keyframes scale-in-width {
   0% {
-    /* width: 0; */
     transform: scale(0);
   }
 
   100% {
-    /* width: 44px; */
     transform: scale(1);
   }
 }
