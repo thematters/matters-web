@@ -73,6 +73,7 @@ const Animation: React.FC<Props> = ({
   }
 
   const containerClasses = classNames({
+    [styles.container]: true,
     [styles.slideUp]: rendered,
   })
 

@@ -128,7 +128,16 @@ const CommentForm: React.FC<CommentFormProps> = ({
               type: 'add',
               comment: mutationResult.data?.putComment,
             })
+          }
 
+          if (!!parentId) {
+            updateArticlePublic({
+              cache,
+              shortHash,
+              routerLang,
+              type: 'addSecondaryComment',
+            })
+          } else {
             updateArticlePublic({
               cache,
               shortHash,

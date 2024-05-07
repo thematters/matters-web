@@ -24,19 +24,12 @@
       @mixin transition;
 
       margin-top: var(--sp4);
-      font-size: var(--text14);
-      line-height: 1.375rem;
       color: var(--color-grey-darker);
       transition-property: color;
 
       &:hover {
         color: var(--color-black);
       }
-    }
-
-    & .text15 {
-      font-size: var(--text15);
-      line-height: 1.75;
     }
   }
 
@@ -69,14 +62,17 @@
 /* size */
 .text14 {
   font-size: var(--text14);
+  line-height: 1.375rem;
 }
 
 .text15 {
   font-size: var(--text15);
+  line-height: 1.75;
 }
 
 .text16 {
   font-size: var(--text16);
+  line-height: 1.5;
 }
 
 /* space top */
