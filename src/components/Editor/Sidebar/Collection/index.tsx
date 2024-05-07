@@ -25,6 +25,7 @@ const SidebarCollection = ({
   collection,
   editCollection,
   collectionSaving,
+  nodeExclude,
   disabled,
 }: SidebarCollectionProps) => {
   return (
@@ -38,6 +39,7 @@ const SidebarCollection = ({
       }
       searchType="Article"
       searchExclude={SearchExclude.Blocked}
+      nodeExclude={nodeExclude}
       onSave={(nodes: SearchSelectNode[]) =>
         editCollection(nodes as ArticleDigestDropdownArticleFragment[])
       }

@@ -156,6 +156,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
     collectionSaving: false,
     editCollection: async (c: ArticleDigestDropdownArticleFragment[]) =>
       setCollection(c),
+    nodeExclude: article.id,
   }
 
   const setCommentProps: SetResponseProps = {
