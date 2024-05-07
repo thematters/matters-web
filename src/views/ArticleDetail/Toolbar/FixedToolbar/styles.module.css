@@ -25,13 +25,19 @@
   }
 }
 
+.justifyContentCenter {
+  justify-content: center !important;
+}
+
 .appreciationButton {
   transform: scale(0);
-  animation: scale-out 0.2s;
+  animation: scale-out 10s;
 }
 
 .scaleOut {
-  animation: scale-out 0.2s;
+  flex-grow: 0;
+  transform: scale(0);
+  animation: scale-out 3s;
 }
 
 @keyframes scale-out {
@@ -40,12 +46,12 @@
   }
 
   100% {
-    transform: scale(0) translateX(-5px);
+    transform: scale(0);
   }
 }
 
 .scaleIn {
-  animation: scale-in 0.2s;
+  animation: scale-in 3s;
 }
 
 @keyframes scale-in {
@@ -54,6 +60,40 @@
   }
 
   100% {
+    transform: scale(1);
+  }
+}
+
+.scaleInX {
+  flex-grow: 0;
+  animation: scale-in-x 3s;
+}
+
+@keyframes scale-in-x {
+  0% {
+    flex-grow: 0;
+    transform: scaleX(0);
+  }
+
+  100% {
+    flex-grow: 1;
+    transform: scaleX(1);
+  }
+}
+
+.scaleInWidth {
+  /* width: 44px; */
+  animation: scale-in-width 3s;
+}
+
+@keyframes scale-in-width {
+  0% {
+    /* width: 0; */
+    transform: scale(0);
+  }
+
+  100% {
+    /* width: 44px; */
     transform: scale(1);
   }
 }

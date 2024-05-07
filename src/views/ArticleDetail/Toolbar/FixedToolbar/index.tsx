@@ -130,7 +130,16 @@ const FixedToolbar = ({
   const [isCommentScaleInDone, setIsCommentScaleInDone] = useState(false)
   const commentButtonClasses = classNames({
     [styles.commentButton]: true,
-    [styles.scaleIn]: isLeftAppreciationButtonScaleOut,
+    [styles.scaleInX]: isLeftAppreciationButtonScaleOut,
+  })
+
+  const toolbarClasses = classNames({
+    [styles.toolbar]: true,
+  })
+
+  const buttonsClasses = classNames({
+    [styles.buttons]: true,
+    [styles.justifyContentCenter]: isLeftAppreciationButtonScaleOut,
   })
 
   const handleLeftAppreciationButtonScaleOutEnd = (
@@ -147,13 +156,13 @@ const FixedToolbar = ({
 
   return (
     <section
-      className={styles.toolbar}
+      className={toolbarClasses}
       data-test-id={TEST_ID.ARTICLE_TOOLBAR}
       id={TOOLBAR_FIXEDTOOLBAR_ID}
     >
       <CommentFormBetaDialog articleId={article.id} type="article">
         {({ openDialog: openCommentFormBetaDialog }) => (
-          <section className={styles.buttons}>
+          <section className={buttonsClasses}>
             {!isLeftAppreciationButtonScaleOut && (
               <section
                 className={leftAppreciationButtonClasses}
@@ -173,7 +182,7 @@ const FixedToolbar = ({
               </section>
             )}
 
-            {showCommentToolbar && (
+            {isLeftAppreciationButtonScaleOut && (
               <button
                 className={commentButtonClasses}
                 onAnimationEnd={handleCommentScaleInEnd}
@@ -201,7 +210,7 @@ const FixedToolbar = ({
               </button>
             )}
 
-            {!showCommentToolbar && (
+            {!isLeftAppreciationButtonScaleOut && (
               <CommentButton
                 article={article}
                 disabled={!article.canComment}
@@ -242,8 +251,8 @@ const FixedToolbar = ({
               />
             </section>
 
-            {showCommentToolbar && isCommentScaleInDone && (
-              <section className={styles.scaleIn}>
+            {isCommentScaleInDone && (
+              <section className={styles.scaleInWidth}>
                 <ReCaptchaProvider action="appreciateArticle">
                   <AppreciationButton
                     article={article}
