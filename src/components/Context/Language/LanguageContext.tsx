@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 import { createContext, useContext, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import { COOKIE_LANGUAGE } from '~/common/enums'
 import {
@@ -114,12 +113,13 @@ export const LanguageProvider = ({
       })
     } catch (e) {
       toast.error({
-        message: (
-          <FormattedMessage
-            defaultMessage="Failed to edit, please try again."
-            id="USOHRK"
-          />
-        ),
+        // FIXME: cannot use <FormattedMessage> here cuz it's outer of <TranslationProvider>
+        message:
+          language === UserLanguage.En
+            ? 'Failed to edit, please try again.'
+            : language === UserLanguage.ZhHans
+            ? '修改失败，请稍候重试'
+            : '修改失敗，請稍候重試',
       })
     }
   }
