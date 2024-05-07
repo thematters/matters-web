@@ -44,7 +44,7 @@ const Hint = () => {
           />
           <a
             className="u-link-green"
-            href={GUIDE_LINKS.mobilePayment[lang]}
+            href={GUIDE_LINKS.mobileWallet[lang]}
             target="_blank"
             rel="noreferrer"
           >
@@ -61,7 +61,7 @@ const Hint = () => {
           />
           <a
             className="u-link-green"
-            href={GUIDE_LINKS.connectWallet[lang]}
+            href={GUIDE_LINKS.wallet[lang]}
             target="_blank"
             rel="noreferrer"
           >
