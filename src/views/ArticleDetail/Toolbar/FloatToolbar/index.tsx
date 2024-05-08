@@ -1,8 +1,12 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
-import { ButtonProps, ReCaptchaProvider } from '~/components'
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
+import { ButtonProps, ReCaptchaProvider, ViewerContext } from '~/components'
 import {
   ArticleDetailPublicQuery,
   ToolbarArticlePrivateFragment,
@@ -59,6 +63,8 @@ const FloatToolbar = ({
   toggleCommentDrawer,
   toggleDonationDrawer,
 }: FloatToolbarProps) => {
+  const viewer = useContext(ViewerContext)
+
   const [mounted, setMounted] = useState(false)
   const [displayContainer, setDisplayContainer] = useState(false)
   useEffect(() => {
@@ -123,7 +129,18 @@ const FloatToolbar = ({
             articleDetail={articleDetails}
             disabled={lock}
             textIconSpacing={6}
-            onClick={toggleDonationDrawer}
+            onClick={() => {
+              if (!viewer.isAuthed) {
+                window.dispatchEvent(
+                  new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+                    detail: {
+                      trigger: UNIVERSAL_AUTH_TRIGGER.support,
+                    },
+                  })
+                )
+                return
+              }
+            }}
             {...buttonProps}
           />
         </section>
