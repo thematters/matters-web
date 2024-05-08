@@ -45,7 +45,9 @@ const ApproveUsdtContract: React.FC<ApproveUsdtContractProps> = ({
     if (allowanceUSDT > 0n) {
       submitCallback()
     }
-    setShowLoading(false)
+    if (!allowanceLoading) {
+      setShowLoading(false)
+    }
   }, [allowanceData])
 
   // USDT approval
