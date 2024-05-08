@@ -59,7 +59,7 @@
     }
 
     @media (--lg-up) {
-      width: 71%;
+      width: 85%; /* 6/7 */
     }
   }
 
