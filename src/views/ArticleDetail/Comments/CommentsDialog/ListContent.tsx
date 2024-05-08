@@ -1,3 +1,5 @@
+import { useEffect, useState } from 'react'
+
 import { Dialog, Spacer } from '~/components'
 import {
   ArticleDetailPublicQuery,
@@ -38,6 +40,13 @@ const CommentsDialogListContent = ({
   showCommentToolbar,
   openCommentsDialog,
 }: CommentsDialogListContentProps) => {
+  const [rendered, setRendered] = useState(false)
+  useEffect(() => {
+    setTimeout(() => {
+      setRendered(true)
+    }, 300)
+  }, [])
+
   return (
     <>
       <Dialog.Content fixedHeight>
@@ -51,8 +60,7 @@ const CommentsDialogListContent = ({
             translatedLanguage={translatedLanguage}
             privateFetched={privateFetched}
             lock={lock}
-            showCommentToolbar={true}
-            mustPlayAnimation={true}
+            showCommentToolbar={rendered}
             openCommentsDialog={openCommentsDialog}
           />
         </section>

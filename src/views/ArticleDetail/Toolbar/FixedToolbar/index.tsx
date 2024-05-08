@@ -39,7 +39,6 @@ export type FixedToolbarProps = {
   privateFetched: boolean
   lock: boolean
   showCommentToolbar: boolean
-  mustPlayAnimation?: boolean
   openCommentsDialog?: () => void
 } & DropdownActionsControls
 
@@ -85,7 +84,6 @@ const FixedToolbar = ({
   lock,
   showCommentToolbar,
   openCommentsDialog,
-  mustPlayAnimation = false,
   ...props
 }: FixedToolbarProps) => {
   const viewer = useContext(ViewerContext)
@@ -130,33 +128,13 @@ const FixedToolbar = ({
     setIsCommentScaleInDone(false)
   }
 
-  const [hasScroll, setHasScroll] = useState(false)
-
   useEffect(() => {
-    const readyPlayAnimation = () => {
-      setHasScroll(true)
-
-      window.removeEventListener('scroll', readyPlayAnimation)
-    }
-
-    window.addEventListener('scroll', readyPlayAnimation)
-
-    return () => {
-      window.removeEventListener('scroll', readyPlayAnimation)
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!hasScroll && !mustPlayAnimation) {
-      return
-    }
-
     if (showCommentToolbar) {
       startAnimation()
     } else {
       resetAnimation()
     }
-  }, [showCommentToolbar, hasScroll])
+  }, [showCommentToolbar])
 
   const leftAppreciationButtonClasses = classNames({
     [styles.scaleOut]: playAnimation,
@@ -203,8 +181,7 @@ const FixedToolbar = ({
       <CommentFormBetaDialog articleId={article.id} type="article">
         {({ openDialog: openCommentFormBetaDialog }) => (
           <section className={buttonsClasses}>
-            {((playAnimation && !isLeftAppreciationButtonScaleOut) ||
-              (!playAnimation && !showCommentToolbar)) && (
+            {!isLeftAppreciationButtonScaleOut && (
               <section
                 className={leftAppreciationButtonClasses}
                 onAnimationEnd={handleLeftAppreciationButtonScaleOutEnd}
@@ -223,10 +200,7 @@ const FixedToolbar = ({
               </section>
             )}
 
-            {((playAnimation && isLeftAppreciationButtonScaleOut) ||
-              (!playAnimation &&
-                !isLeftAppreciationButtonScaleOut &&
-                showCommentToolbar)) && (
+            {isLeftAppreciationButtonScaleOut && (
               <button
                 className={commentButtonClasses}
                 onAnimationEnd={handleCommentScaleInEnd}
@@ -254,8 +228,7 @@ const FixedToolbar = ({
               </button>
             )}
 
-            {((playAnimation && !isLeftAppreciationButtonScaleOut) ||
-              (!playAnimation && !showCommentToolbar)) && (
+            {!isLeftAppreciationButtonScaleOut && (
               <CommentButton
                 article={article}
                 disabled={!article.canComment}
