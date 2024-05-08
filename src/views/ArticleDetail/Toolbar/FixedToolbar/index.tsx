@@ -2,8 +2,10 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
+import { useDebounce } from 'use-debounce'
 
 import {
+  INPUT_DEBOUNCE,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
   TOOLBAR_FIXEDTOOLBAR_ID,
@@ -112,6 +114,15 @@ const FixedToolbar = ({
   }
 
   const [playAnimation, setPlayAnimation] = useState(false)
+  // NOTE: Implement debounce to address button flickering issue during browser page navigation forward or backward.
+  const [debouncedPlayAnimation, setDebouncedPlayAnimation] = useDebounce(
+    playAnimation,
+    INPUT_DEBOUNCE
+  )
+
+  useEffect(() => {
+    setPlayAnimation(debouncedPlayAnimation)
+  }, [debouncedPlayAnimation])
 
   const [
     isLeftAppreciationButtonScaleOut,
@@ -120,7 +131,7 @@ const FixedToolbar = ({
   const [isCommentScaleInDone, setIsCommentScaleInDone] = useState(false)
 
   const startAnimation = () => {
-    setPlayAnimation(true)
+    setDebouncedPlayAnimation(true)
   }
   const resetAnimation = () => {
     setPlayAnimation(false)
