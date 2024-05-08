@@ -113,9 +113,26 @@ const FixedToolbar = ({
 
   const [playAnimation, setPlayAnimation] = useState(false)
 
+  const [
+    isLeftAppreciationButtonScaleOut,
+    setIsLeftAppreciationButtonScaleOut,
+  ] = useState(false)
+  const [isCommentScaleInDone, setIsCommentScaleInDone] = useState(false)
+
+  const startAnimation = () => {
+    setPlayAnimation(true)
+  }
+  const resetAnimation = () => {
+    setPlayAnimation(false)
+    setIsLeftAppreciationButtonScaleOut(false)
+    setIsCommentScaleInDone(false)
+  }
+
   useEffect(() => {
     if (showCommentToolbar) {
-      setPlayAnimation(true)
+      startAnimation()
+    } else {
+      resetAnimation()
     }
   }, [showCommentToolbar])
 
@@ -123,14 +140,9 @@ const FixedToolbar = ({
     [styles.scaleOut]: playAnimation,
   })
 
-  const [
-    isLeftAppreciationButtonScaleOut,
-    setIsLeftAppreciationButtonScaleOut,
-  ] = useState(false)
-  const [isCommentScaleInDone, setIsCommentScaleInDone] = useState(false)
   const commentButtonClasses = classNames({
     [styles.commentButton]: true,
-    [styles.scaleInX]: isLeftAppreciationButtonScaleOut,
+    [styles.expandX]: isLeftAppreciationButtonScaleOut,
   })
 
   const toolbarClasses = classNames({
@@ -139,12 +151,13 @@ const FixedToolbar = ({
 
   const buttonsClasses = classNames({
     [styles.buttons]: true,
+    [styles.justifyContentSpaceBetween]: !isLeftAppreciationButtonScaleOut,
     [styles.justifyContentCenter]: isLeftAppreciationButtonScaleOut,
   })
 
   const rightAppreciationButtonClasses = classNames({
     [styles.rightAppreciationButton]: true,
-    [styles.scaleInWidth]: isCommentScaleInDone,
+    [styles.scaleAnimation]: isCommentScaleInDone,
   })
 
   const handleLeftAppreciationButtonScaleOutEnd = (

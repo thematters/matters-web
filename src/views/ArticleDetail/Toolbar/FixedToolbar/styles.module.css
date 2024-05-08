@@ -10,7 +10,8 @@
   background: var(--color-white);
 
   & .buttons {
-    @mixin flex-center-space-between;
+    display: flex;
+    align-items: center;
 
     & .commentButton {
       flex-grow: 1;
@@ -25,8 +26,12 @@
   }
 }
 
+.justifyContentSpaceBetween {
+  justify-content: space-between;
+}
+
 .justifyContentCenter {
-  justify-content: center !important;
+  justify-content: center;
 }
 
 .appreciationButton {
@@ -40,6 +45,24 @@
   animation: scale-out 0.3s;
 }
 
+.scaleIn {
+  animation: scale-in 0.3s;
+}
+
+.expandX {
+  flex-grow: 0;
+  animation: expand-x 0.3s;
+}
+
+.rightAppreciationButton {
+  transform: scale(0);
+}
+
+.scaleAnimation {
+  transform: scale(1);
+  animation: scale-in 0.3s;
+}
+
 @keyframes scale-out {
   0% {
     transform: scale(1);
@@ -50,26 +73,7 @@
   }
 }
 
-.scaleIn {
-  animation: scale-in 0.3s;
-}
-
-@keyframes scale-in {
-  0% {
-    transform: scale(0);
-  }
-
-  100% {
-    transform: scale(1);
-  }
-}
-
-.scaleInX {
-  flex-grow: 0;
-  animation: scale-in-x 0.3s;
-}
-
-@keyframes scale-in-x {
+@keyframes expand-x {
   0% {
     flex-grow: 0;
     transform: scaleX(0);
@@ -81,16 +85,7 @@
   }
 }
 
-.rightAppreciationButton {
-  transform: scale(0);
-}
-
-.scaleInWidth {
-  transform: scale(1);
-  animation: scale-in-width 0.3s;
-}
-
-@keyframes scale-in-width {
+@keyframes scale-in {
   0% {
     transform: scale(0);
   }
