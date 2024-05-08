@@ -60,6 +60,7 @@ type SearchingAreaProps = {
   searchType: SearchType
   searchFilter?: SearchFilter
   searchExclude?: SearchExclude
+  nodeExclude?: string
   stagingNodes: StagingNode[]
 
   inSearchingArea: boolean
@@ -78,6 +79,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
   searchType,
   searchFilter,
   searchExclude,
+  nodeExclude,
   stagingNodes,
 
   inSearchingArea,
@@ -164,13 +166,18 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
     })
   }
 
-  const searchNodes = searchEdges?.map(({ node }) => node) || []
+  const searchNodes =
+    searchEdges
+      ?.map(({ node }) => node)
+      .filter((node) => node.id !== nodeExclude) || []
   const searchNodeIds = searchNodes.map((n) => n.id).join(',')
-  const listNode =
+  const listNodes =
     listEdges
       ?.map(({ node }) => node)
-      .filter((node) => node.articleState === 'active') || []
-  const listNodeIds = listNode.map((n) => n.id).join(',')
+      .filter(
+        (node) => node.articleState === 'active' && node.id !== nodeExclude
+      ) || []
+  const listNodeIds = listNodes.map((n) => n.id).join(',')
   const search = (key: string) => {
     // Used to match links of the format like👇
     // https://matters.town/a/{shortHash}
@@ -229,8 +236,8 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
     }
 
     // use cache or fetch
-    if (listNode.length > 0) {
-      setSearchingNodes(listNode)
+    if (listNodes.length > 0) {
+      setSearchingNodes(listNodes)
     } else {
       loadList()
     }
@@ -238,7 +245,7 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
 
   useEffect(() => {
     setSearching(listLoading)
-    setSearchingNodes(listNode)
+    setSearchingNodes(listNodes)
   }, [listLoading, listNodeIds])
 
   // article url
@@ -247,8 +254,9 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
   }, [articleUrlLoding])
 
   const hasNodes = searchNodes.length > 0
-  const haslistNode = listNode.length > 0
-  const hasArticle = !!articleUrlData?.article
+  const hasListNode = listNodes.length > 0
+  const hasArticle =
+    !!articleUrlData?.article && articleUrlData?.article.id !== nodeExclude
   const canCreateTag =
     isTag &&
     searchKey &&
@@ -315,9 +323,9 @@ const EditorSearchingArea: React.FC<SearchingAreaProps> = ({
               )}
 
               {/* List */}
-              {isListMode && !searching && !haslistNode && <EmptySearch />}
+              {isListMode && !searching && !hasListNode && <EmptySearch />}
 
-              {isListMode && !searching && haslistNode && (
+              {isListMode && !searching && hasListNode && (
                 <InfiniteScroll
                   hasNextPage={!!listPageInfo?.hasNextPage}
                   loadMore={loadMoreList}

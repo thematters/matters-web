@@ -55,6 +55,7 @@ export type EditorSearchSelectFormProps = {
   searchType: SearchType
   searchFilter?: SearchFilter
   searchExclude?: SearchExclude
+  nodeExclude?: string
 
   draggable?: boolean
 
@@ -80,6 +81,7 @@ const EditorSearchSelectForm = ({
   searchType,
   searchFilter,
   searchExclude,
+  nodeExclude,
 
   draggable,
 
@@ -187,6 +189,7 @@ const EditorSearchSelectForm = ({
             searchType={searchType}
             searchFilter={searchFilter}
             searchExclude={searchExclude}
+            nodeExclude={nodeExclude}
             stagingNodes={stagingNodes}
             toStagingArea={toStagingArea}
             toSearchingArea={toSearchingArea}
