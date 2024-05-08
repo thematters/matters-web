@@ -60,27 +60,21 @@ const SettingsButton = ({
   publishable,
 }: SettingsButtonProps) => {
   const { edit: editCollection, saving: collectionSaving } =
-    useEditDraftCollection(draft)
-  const {
-    edit: editCover,
-    saving: coverSaving,
-    refetch,
-  } = useEditDraftCover(draft)
-  const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
+    useEditDraftCollection()
+  const { edit: editCover, saving: coverSaving, refetch } = useEditDraftCover()
+  const { edit: editTags, saving: tagsSaving } = useEditDraftTags()
   const { edit: toggleContentSensitive, saving: contentSensitiveSaving } =
-    useEditDraftSensitiveByAuthor(draft)
+    useEditDraftSensitiveByAuthor()
   const { edit: togglePublishISCN, saving: iscnPublishSaving } =
-    useEditDraftPublishISCN(draft)
+    useEditDraftPublishISCN()
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
-    draft,
     ownCircles && ownCircles[0]
   )
 
-  const { edit: editSupport, saving: supportSaving } =
-    useEditSupportSetting(draft)
+  const { edit: editSupport, saving: supportSaving } = useEditSupportSetting()
 
   const { edit: toggleComment, saving: canCommentSaving } =
-    useEditDraftCanComment(draft)
+    useEditDraftCanComment()
   const canComment = draft.canComment
 
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
