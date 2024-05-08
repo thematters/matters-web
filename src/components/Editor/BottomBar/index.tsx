@@ -58,6 +58,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
   collection,
   editCollection,
   collectionSaving,
+  nodeExclude,
 
   tags,
   editTags,
@@ -210,6 +211,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               }
               searchType="Article"
               searchExclude={SearchExclude.Blocked}
+              nodeExclude={nodeExclude}
               onSave={(nodes: SearchSelectNode[]) =>
                 editCollection(nodes as ArticleDigestDropdownArticleFragment[])
               }

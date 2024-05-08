@@ -13,6 +13,7 @@ export type SetCollectionProps = {
     articles: ArticleDigestDropdownArticleFragment[]
   ) => Promise<any>
   collectionSaving?: boolean
+  nodeExclude?: string
 }
 
 export type SetTagsProps = {

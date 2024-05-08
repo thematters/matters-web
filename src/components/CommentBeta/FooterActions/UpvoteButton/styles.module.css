@@ -1,4 +1,25 @@
-.heart {
-  max-width: 1.125rem;
-  max-height: 1.125rem;
+.heartBeat {
+  animation: heart-beat 2s;
+}
+
+@keyframes heart-beat {
+  0% {
+    transform: scale(1);
+  }
+
+  14% {
+    transform: scale(1.2);
+  }
+
+  28% {
+    transform: scale(1);
+  }
+
+  42% {
+    transform: scale(1.2);
+  }
+
+  70% {
+    transform: scale(1);
+  }
 }
