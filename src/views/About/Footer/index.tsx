@@ -106,14 +106,14 @@ const Footer = () => {
                     >
                       <TextIcon
                         icon={withIcon(IconFooterTwitter)({
-                          size: 'md',
+                          size: 24,
                           color: 'white',
                         })}
                         color="grey"
-                        size="md"
-                        spacing="xtight"
+                        size={16}
+                        spacing={8}
                       >
-                        Twitter（中文）
+                        X（中文）
                       </TextIcon>
                     </a>
                   </li>
@@ -125,14 +125,14 @@ const Footer = () => {
                     >
                       <TextIcon
                         icon={withIcon(IconFooterTwitter)({
-                          size: 'md',
+                          size: 24,
                           color: 'white',
                         })}
                         color="grey"
-                        size="md"
-                        spacing="xtight"
+                        size={16}
+                        spacing={8}
                       >
-                        Twitter（English）
+                        X（English）
                       </TextIcon>
                     </a>
                   </li>
@@ -145,12 +145,12 @@ const Footer = () => {
                     >
                       <TextIcon
                         icon={withIcon(IconFooterDiscord)({
-                          size: 'md',
+                          size: 24,
                           color: 'white',
                         })}
                         color="grey"
-                        size="md"
-                        spacing="xtight"
+                        size={16}
+                        spacing={8}
                       >
                         Discord
                       </TextIcon>
@@ -164,12 +164,12 @@ const Footer = () => {
                     >
                       <TextIcon
                         icon={withIcon(IconFooterFacebook)({
-                          size: 'md',
+                          size: 24,
                           color: 'white',
                         })}
                         color="grey"
-                        size="md"
-                        spacing="xtight"
+                        size={16}
+                        spacing={8}
                       >
                         Facebook
                       </TextIcon>
@@ -186,12 +186,12 @@ const Footer = () => {
                     >
                       <TextIcon
                         icon={withIcon(IconFooterBlog)({
-                          size: 'md',
+                          size: 24,
                           color: 'white',
                         })}
                         color="grey"
-                        size="md"
-                        spacing="xtight"
+                        size={16}
+                        spacing={8}
                       >
                         Matters Blog
                       </TextIcon>
@@ -206,12 +206,12 @@ const Footer = () => {
                     >
                       <TextIcon
                         icon={withIcon(IconFooterLinkedin)({
-                          size: 'md',
+                          size: 24,
                           color: 'white',
                         })}
                         color="grey"
-                        size="md"
-                        spacing="xtight"
+                        size={16}
+                        spacing={8}
                       >
                         LinkedIn
                       </TextIcon>
@@ -225,12 +225,12 @@ const Footer = () => {
                     >
                       <TextIcon
                         icon={withIcon(IconFooterInstagram)({
-                          size: 'md',
+                          size: 24,
                           color: 'white',
                         })}
                         color="grey"
-                        size="md"
-                        spacing="xtight"
+                        size={16}
+                        spacing={8}
                       >
                         Instagram
                       </TextIcon>
@@ -260,7 +260,7 @@ const Footer = () => {
                 rel="noreferrer"
                 className={styles.buttons}
               >
-                <TextIcon size="md">
+                <TextIcon size={16}>
                   <Translate
                     zh_hant="註冊並訂閱每週 Newsletter"
                     zh_hans="注册并订阅每周 Newsletter"

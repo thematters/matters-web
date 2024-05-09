@@ -1,0 +1,13 @@
+.content {
+  &.inactive {
+    color: var(--color-grey);
+  }
+}
+
+.text14 {
+  font-size: var(--text14);
+}
+
+.text15 {
+  font-size: var(--text15);
+}

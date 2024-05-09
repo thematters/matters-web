@@ -20,12 +20,12 @@
 
 .solid {
   & .content {
-    margin-top: var(--spacing-base);
-    margin-bottom: var(--spacing-x-tight);
+    margin-top: var(--sp16);
+    margin-bottom: var(--sp8);
 
     @media (--sm-up) {
-      margin-top: var(--spacing-x-loose);
-      margin-bottom: var(--spacing-base-loose);
+      margin-top: var(--sp32);
+      margin-bottom: var(--sp20);
     }
   }
 }
@@ -43,8 +43,8 @@
 .content {
   @mixin flex-center-space-between;
 
-  padding-right: var(--spacing-base);
-  padding-left: var(--spacing-base);
+  padding-right: var(--sp16);
+  padding-left: var(--sp16);
 
   @media (--sm-up) {
     padding-right: 0;
@@ -55,10 +55,10 @@
 .left {
   display: inline-flex;
   flex-shrink: 0;
-  margin-right: var(--spacing-x-tight);
+  margin-right: var(--sp8);
 
   @media (--sm-up) {
-    margin-right: var(--spacing-base);
+    margin-right: var(--sp16);
   }
 }
 

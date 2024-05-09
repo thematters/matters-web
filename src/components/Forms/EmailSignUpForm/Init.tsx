@@ -4,6 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
 import {
   ERROR_CODES,
   REFERRAL_QUERY_REFERRAL_KEY,
@@ -22,7 +23,7 @@ import {
   AuthWalletFeed,
   Dialog,
   Form,
-  IconLeft20,
+  Icon,
   LanguageContext,
   Media,
   ReCaptchaContext,
@@ -107,7 +108,7 @@ const Init: React.FC<FormProps> = ({
     validateOnChange: true, // enable for signup form
     validate: ({ email }) =>
       _pickBy({
-        email: validateEmail(email, lang, { allowPlusSign: false }),
+        email: validateEmail(email, intl, { allowPlusSign: false }),
       }),
     onSubmit: async ({ email }, { setFieldError, setSubmitting }) => {
       try {
@@ -256,7 +257,10 @@ const Init: React.FC<FormProps> = ({
             <section className={styles.footerBtns}>
               <Dialog.TextButton
                 text={
-                  <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                  <TextIcon
+                    icon={<Icon icon={IconLeft} size={20} />}
+                    spacing={2}
+                  >
                     <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                   </TextIcon>
                 }

@@ -51,10 +51,10 @@
     & :global(figure.is-figure-empty::before) {
       position: absolute;
       right: 0;
-      bottom: 0;
+      bottom: var(--sp14);
       left: 0;
       z-index: -1;
-      font-size: var(--font-size-sm-s);
+      font-size: var(--text13);
       line-height: 1.5;
       color: var(--color-grey);
       white-space: pre-wrap;

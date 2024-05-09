@@ -3,16 +3,16 @@
   @mixin transition;
 
   height: 3rem;
-  margin: var(--spacing-base) var(--spacing-base) var(--spacing-loose);
-  font-size: var(--font-size-md);
+  margin: var(--sp16) var(--sp16) var(--sp24);
+  font-size: var(--text16);
   color: var(--color-white);
   background: var(--color-matters-gold);
-  border-radius: var(--spacing-x-tight);
+  border-radius: var(--sp8);
   transition-property: background-color;
 
   &:hover,
   &:focus {
-    background: var(--color-matters-gold-active);
+    background: var(--color-matters-gold-hover);
   }
 
   @media (--sm-up) {

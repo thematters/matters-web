@@ -1,2 +1,2 @@
 export * from './LinkSent'
-export * from './SendCodeButton'
+export * from './ResendCodeButton'

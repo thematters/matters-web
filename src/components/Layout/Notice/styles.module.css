@@ -1,10 +1,10 @@
 .notice {
   position: relative;
-  padding: var(--spacing-x-tight) var(--spacing-base);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  padding: var(--sp8) var(--sp16);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
   visibility: visible;
-  border-radius: var(--spacing-x-tight);
+  border-radius: var(--sp8);
   box-shadow: var(--shadow-light);
 
   &.centerX {
@@ -21,16 +21,16 @@
 }
 
 .subDescription {
-  margin-top: var(--spacing-xx-tight);
-  font-weight: var(--font-weight-normal);
+  margin-top: var(--sp4);
+  font-weight: var(--font-normal);
   opacity: 0.7;
 }
 
 .customButton {
   display: inline-flex;
   flex-shrink: 0;
-  margin-left: var(--spacing-x-tight);
-  font-weight: var(--font-weight-normal);
+  margin-left: var(--sp8);
+  font-weight: var(--font-normal);
 }
 
 .green {
@@ -45,5 +45,5 @@
 
 .red {
   color: var(--color-white);
-  background: var(--color-red);
+  background: var(--color-negative-red);
 }

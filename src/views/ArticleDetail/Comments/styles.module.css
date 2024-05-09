@@ -1,0 +1,10 @@
+.responses {
+  overflow-x: hidden;
+
+  & .smUpTitle {
+    padding: var(--sp16) 0;
+    font-size: var(--text20);
+    font-weight: var(--font-semibold);
+    line-height: 1.875rem;
+  }
+}

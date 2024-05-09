@@ -3,31 +3,33 @@ import _cloneDeep from 'lodash/cloneDeep'
 import _remove from 'lodash/remove'
 import _some from 'lodash/some'
 
+import { toGlobalId } from '~/common/utils'
+import { Viewer } from '~/components/Context'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 export const updateDonation = ({
   cache,
-  id,
+  shortHash,
   viewer,
+  txId,
 }: {
   cache: DataProxy
-  id: string
-  viewer: any
+  shortHash: string
+  viewer?: Viewer
+  txId?: string
 }) => {
-  const {
-    ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
-  } = require('~/views/ArticleDetail/gql')
+  const { ARTICLE_DETAIL_PUBLIC } = require('~/views/ArticleDetail/gql')
 
   try {
-    if (!id) {
+    if (!shortHash || !txId) {
       return
     }
 
     // read from local cache
-    const variables = { id }
+    const variables = { shortHash }
     const cacheData = _cloneDeep(
       cache.readQuery<ArticleDetailPublicQuery>({
-        query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
+        query: ARTICLE_DETAIL_PUBLIC,
         variables,
       })
     )
@@ -37,10 +39,10 @@ export const updateDonation = ({
     }
 
     // unshift viewer into donations
-    const donators = cacheData.article?.donations?.edges || []
+    const donations = cacheData.article?.donations?.edges || []
     let existed = false
-    _remove(donators, (d) => {
-      if (d.node.id !== viewer.id) {
+    _remove(donations, (d) => {
+      if (!viewer?.id || d.node.sender?.id !== viewer.id) {
         return false
       }
       existed = true
@@ -52,31 +54,37 @@ export const updateDonation = ({
       ? donatorsCount
       : donatorsCount + 1
 
-    donators.unshift({
-      cursor: window.btoa(`arrayconnection:${donators.length}`) || '',
+    donations.unshift({
+      cursor: window.btoa(`arrayconnection:${donations.length}`) || '',
       node: {
-        avatar: viewer.avatar,
-        id: viewer.id,
-        displayName: viewer.displayName,
-        userName: viewer.userName,
-        liker: {
-          civicLiker: viewer.liker.civicLiker,
-          __typename: 'Liker',
-        },
-        info: {
-          badges: viewer.info.badges,
-          __typename: 'UserInfo',
-        },
-        __typename: 'User',
+        id: toGlobalId({ type: 'Transaction', id: txId }),
+        sender: viewer
+          ? {
+              avatar: viewer.avatar,
+              id: viewer.id,
+              displayName: viewer.displayName,
+              userName: viewer.userName,
+              liker: {
+                civicLiker: viewer.liker.civicLiker,
+                __typename: 'Liker',
+              },
+              info: {
+                badges: viewer.info.badges,
+                __typename: 'UserInfo',
+              },
+              __typename: 'User',
+            }
+          : null,
+        __typename: 'ArticleDonation',
       },
-      __typename: 'UserEdge',
+      __typename: 'ArticleDonationEdge',
     })
 
-    cacheData.article.donations.edges = donators
+    cacheData.article.donations.edges = donations
 
     // write to local cache
     cache.writeQuery({
-      query: ARTICLE_DETAIL_PUBLIC_BY_NODE_ID,
+      query: ARTICLE_DETAIL_PUBLIC,
       data: cacheData,
       variables,
     })

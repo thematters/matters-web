@@ -1,0 +1,25 @@
+.activeBgColor {
+  animation: comment-background-fade-out 1.6s ease-out 0s;
+}
+
+.activeParentComment {
+  padding-right: var(--sp16) !important;
+  padding-left: var(--sp16) !important;
+  margin-right: calc(-1 * var(--sp16));
+  margin-left: calc(-1 * var(--sp16));
+}
+
+@keyframes comment-background-fade-out {
+  0% {
+    background: var(--color-green-lighter);
+  }
+
+  /* 1s later */
+  62.5% {
+    background: var(--color-green-lighter);
+  }
+
+  100% {
+    background: var(--color-white);
+  }
+}

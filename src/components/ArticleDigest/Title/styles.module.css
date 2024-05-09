@@ -1,41 +1,41 @@
-.textSizeXs {
-  font-size: var(--font-size-xs);
+.text12 {
+  font-size: var(--text12);
 }
 
-.textSizeSmS {
-  font-size: var(--font-size-sm-s);
+.text13 {
+  font-size: var(--text13);
 }
 
-.textSizeSm {
-  font-size: var(--font-size-sm);
+.text14 {
+  font-size: var(--text14);
 }
 
-.textSizeMdS {
-  font-size: var(--font-size-md-s);
+.text15 {
+  font-size: var(--text15);
 }
 
-.textSizeMd {
-  font-size: var(--font-size-md);
+.text16 {
+  font-size: var(--text16);
 }
 
-.textSizeXm {
-  font-size: var(--font-size-xm);
+.text18 {
+  font-size: var(--text18);
 }
 
-.textSizeXl {
-  font-size: var(--font-size-xl);
+.text24 {
+  font-size: var(--text24);
 }
 
-.textWeightNormal {
-  font-weight: var(--font-weight-normal);
+.fontNormal {
+  font-weight: var(--font-normal);
 }
 
-.textWeightMd {
-  font-weight: var(--font-weight-medium);
+.fontMedium {
+  font-weight: var(--font-medium);
 }
 
-.textWeightSemibold {
-  font-weight: var(--font-weight-semibold);
+.fontSemibold {
+  font-weight: var(--font-semibold);
 }
 
 .lineClamp {

@@ -5,7 +5,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Translate,
   usePublicQuery,
   useRoute,
@@ -54,7 +54,7 @@ const SubscribedFeed = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {
@@ -88,7 +88,7 @@ const SubscribedFeed = () => {
           <List.Item key={node.id}>
             <CircleDigest.Mini
               circle={node}
-              spacing={['tight', 'base']}
+              spacing={[12, 16]}
               onClick={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'user_circle',

@@ -8,7 +8,7 @@ export const StartWriting = () => {
   return (
     <Button
       size={[null, '2rem']}
-      spacing={[0, 'tight']}
+      spacing={[0, 12]}
       borderColor="green"
       borderActiveColor="greenDark"
       borderWidth="md"

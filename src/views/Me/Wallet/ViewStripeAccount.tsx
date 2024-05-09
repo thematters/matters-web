@@ -1,13 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import {
-  IconExternalLink16,
-  IconSpinner16,
-  TableView,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
+import { Icon, Spinner, TableView, TextIcon, Translate } from '~/components'
 import { GetStripeLoginUrlQuery } from '~/gql/graphql'
 
 const GET_STRIPE_LOGIN_URL = gql`
@@ -42,9 +37,9 @@ const ViewStripeAccount = () => {
       htmlTarget="_blank"
       right={
         loading ? (
-          <IconSpinner16 color="grey" size="sm" />
+          <Spinner size={14} color="grey" />
         ) : (
-          <TextIcon icon={<IconExternalLink16 color="greyDarker" />} />
+          <TextIcon icon={<Icon icon={IconExternal} color="greyDarker" />} />
         )
       }
       role="link"

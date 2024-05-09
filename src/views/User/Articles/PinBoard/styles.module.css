@@ -1,7 +1,7 @@
 .pinBoard {
   @mixin polka-dot-background;
 
-  padding: var(--spacing-base) 0;
+  padding: var(--sp16) 0;
 
   @media (--md-up) {
     position: relative;
@@ -21,22 +21,22 @@
   scroll-snap-type: x mandatory;
 
   & .listItem {
-    margin-left: var(--spacing-tight);
+    margin-left: var(--sp12);
   }
 
   & .listItem:first-child {
-    margin-left: var(--spacing-base);
+    margin-left: var(--sp16);
   }
 
   & .listItem:last-child {
-    margin-right: var(--spacing-base);
+    margin-right: var(--sp16);
   }
 
   @media (--md-up) {
     @mixin flex-center-all;
 
     & .listItem + .listItem {
-      margin-left: var(--spacing-xx-loose);
+      margin-left: var(--sp40);
     }
 
     & .listItem:nth-child(2n) {
@@ -53,8 +53,8 @@
   @mixin transition;
 
   position: absolute;
-  top: var(--spacing-tight);
-  right: var(--spacing-tight);
+  top: var(--sp12);
+  right: var(--sp12);
   z-index: 1;
   display: none;
   opacity: 0;

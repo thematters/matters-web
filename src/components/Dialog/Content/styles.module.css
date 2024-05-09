@@ -21,7 +21,7 @@
 }
 
 .smExtraSpacing {
-  padding-bottom: var(--spacing-xx-loose);
+  padding-bottom: var(--sp40);
 
   @media (--sm-up) {
     padding-bottom: 0;
@@ -29,15 +29,19 @@
 }
 
 .spacing {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 
   @media (--sm-up) {
-    padding: 0 var(--spacing-base-loose);
+    padding: 0 var(--sp20);
   }
 }
 
 .noSpacingBottom {
   padding-bottom: 0;
+}
+
+.noSpacingTop {
+  padding-top: 0;
 }
 
 .noMaxHeight {

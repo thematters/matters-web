@@ -1,9 +1,9 @@
 .container {
-  padding-bottom: var(--spacing-x-tight);
+  padding-bottom: var(--sp8);
 }
 
 .item {
   @mixin border-grey;
 
-  border-radius: var(--spacing-x-tight);
+  border-radius: var(--sp8);
 }

@@ -14,9 +14,9 @@ const MenuItem: React.FC<React.PropsWithChildren<MenuItemProps>> = ({
   text,
   icon,
   children,
-  spacing = ['xtight', 'base'],
+  spacing = [8, 16],
   weight,
-  size = 'md',
+  size = 16,
   ...restProps
 }) => {
   return (
@@ -31,7 +31,7 @@ const MenuItem: React.FC<React.PropsWithChildren<MenuItemProps>> = ({
       >
         {children || (
           <div className={styles.content}>
-            <TextIcon icon={icon} size={size} spacing="tight" weight={weight}>
+            <TextIcon icon={icon} size={size} spacing={12} weight={weight}>
               {text}
             </TextIcon>
           </div>

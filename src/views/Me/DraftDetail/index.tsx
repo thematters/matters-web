@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -11,16 +11,17 @@ import {
 } from '~/common/enums'
 import { stripHtml } from '~/common/utils'
 import {
+  DraftDetailStateContext,
+  DraftDetailStateProvider,
   EmptyLayout,
   Head,
   Layout,
   Media,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   toast,
   useCreateDraft,
   useDirectImageUpload,
-  useRoute,
   useUnloadConfirm,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
@@ -52,7 +53,7 @@ const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => <SpinnerBlock />,
   }
 )
 
@@ -85,13 +86,13 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
   canComment: true,
 }
 
-const DraftDetail = () => {
+const BaseDraftDetail = () => {
   const intl = useIntl()
-  const { getQuery } = useRoute()
-  const id = getQuery('draftId')
-  const isInNew = id === 'new'
 
-  const [initNew] = useState(isInNew)
+  const { addRequest, getDraftId, isNewDraft } = useContext(
+    DraftDetailStateContext
+  )
+  const [initNew] = useState(isNewDraft())
   const { createDraft } = useCreateDraft()
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
   const [singleFileUpload] =
@@ -113,9 +114,9 @@ const DraftDetail = () => {
   const { data, loading, error } = useQuery<DraftDetailQueryQuery>(
     DRAFT_DETAIL,
     {
-      variables: { id },
+      variables: { id: getDraftId() },
       fetchPolicy: 'network-only',
-      skip: isInNew,
+      skip: isNewDraft(),
     }
   )
   const { data: circleData, loading: circleLoading } =
@@ -126,12 +127,12 @@ const DraftDetail = () => {
   const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
   const ownCircles = circleData?.viewer?.ownCircles || undefined
 
-  useUnloadConfirm({ block: saveStatus === 'saving' && !isInNew })
+  useUnloadConfirm({ block: saveStatus === 'saving' && !isNewDraft() })
 
   if ((loading && !initNew) || circleLoading) {
     return (
       <EmptyLayout>
-        <Spinner />
+        <SpinnerBlock />
       </EmptyLayout>
     )
   }
@@ -144,7 +145,7 @@ const DraftDetail = () => {
     )
   }
 
-  if (!draft && !isInNew) {
+  if (!draft && !isNewDraft()) {
     return (
       <EmptyLayout>
         <Throw404 />
@@ -157,7 +158,7 @@ const DraftDetail = () => {
   const hasTitle = draft?.title && draft.title.length > 0
   const isUnpublished = draft?.publishState === 'unpublished'
   const publishable = !!(
-    id &&
+    getDraftId() &&
     isUnpublished &&
     hasContent &&
     hasTitle &&
@@ -241,7 +242,7 @@ const DraftDetail = () => {
     summary?: string | null
   }) => {
     const isEmpty = Object.values(newDraft).every((x) => x === '')
-    if (isInNew && isEmpty) {
+    if (isNewDraft() && isEmpty) {
       return
     }
 
@@ -270,8 +271,8 @@ const DraftDetail = () => {
 
       setSaveStatus('saving')
 
-      if (draft?.id) {
-        await setContent({ variables: { id: draft.id, ...newDraft } })
+      if (!isNewDraft()) {
+        await setContent({ variables: { id: getDraftId(), ...newDraft } })
       } else {
         await createDraft({
           onCreate: async (draftId: string) => {
@@ -332,7 +333,11 @@ const DraftDetail = () => {
       <PublishState draft={draft} />
 
       <Layout.Main.Spacing>
-        <Editor draft={draft} update={update} upload={upload} />
+        <Editor
+          draft={draft}
+          update={async (props) => addRequest(() => update(props))}
+          upload={upload}
+        />
       </Layout.Main.Spacing>
 
       <Media lessThan="lg">
@@ -341,5 +346,11 @@ const DraftDetail = () => {
     </Layout.Main>
   )
 }
+
+const DraftDetail = () => (
+  <DraftDetailStateProvider>
+    <BaseDraftDetail />
+  </DraftDetailStateProvider>
+)
 
 export default DraftDetail

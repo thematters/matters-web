@@ -1,11 +1,11 @@
 .circleWidget {
-  padding-top: var(--spacing-tight);
+  padding-top: var(--sp12);
 }
 
 .inAside {
   @mixin border-top-grey;
 
-  padding-top: var(--spacing-loose);
+  padding-top: var(--sp24);
   margin-top: 3rem;
   border-top-style: dashed;
 }

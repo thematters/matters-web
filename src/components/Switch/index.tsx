@@ -2,7 +2,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
-import { IconSpinner16 } from '~/components'
+import { Spinner } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -41,7 +41,7 @@ export const Switch = forwardRef(
 
         {loading && (
           <span className={styles.loading}>
-            <IconSpinner16 color="greyLight" />
+            <Spinner color="greyLight" />
           </span>
         )}
       </label>

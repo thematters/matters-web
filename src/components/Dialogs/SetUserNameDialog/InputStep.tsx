@@ -10,7 +10,7 @@ import {
   MIN_USER_NAME_LENGTH,
 } from '~/common/enums'
 import { normalizeUserName, validateUserName } from '~/common/utils'
-import { Dialog, Form, LanguageContext, ViewerContext } from '~/components'
+import { Dialog, Form, ViewerContext } from '~/components'
 
 import Field from '../../Form/Field'
 import { QUERY_USER_NAME } from './gql'
@@ -26,7 +26,6 @@ interface FormValues {
 }
 
 const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
-  const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
 
   const client = useApolloClient()
@@ -62,7 +61,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     validateOnChange: true,
     validate: ({ mattersID }) =>
       _pickBy({
-        mattersID: validateUserName(mattersID, lang),
+        mattersID: validateUserName(mattersID, intl),
       }),
     onSubmit: async ({ mattersID }, { setSubmitting, setFieldError }) => {
       if (isLegacyUserConfirm && viewer.userName === mattersID) {

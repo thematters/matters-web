@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { IconCirclePlus20, Menu, toast, useMutation } from '~/components'
+import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/circle-plus.svg'
+import { Icon, Menu, toast, useMutation } from '~/components'
 import {
   SetTagSelectedButtonArticleFragment,
   SetTagSelectedMutation,
@@ -57,7 +58,7 @@ const SetTagSelectedButton = ({
           description="src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
         />
       }
-      icon={<IconCirclePlus20 size="mdS" />}
+      icon={<Icon icon={IconCirclePlus} size={20} />}
       onClick={async () => {
         await update()
 

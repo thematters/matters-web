@@ -1,8 +1,11 @@
+// TODO: Will delete this file after the new article support is ready
+
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Spinner, Translate, ViewerContext } from '~/components'
+import { SpinnerBlock, ViewerContext } from '~/components'
 import { PayToMutation } from '~/gql/graphql'
 
 import { BaseDonationDialogProps, Step } from './types'
@@ -26,39 +29,39 @@ export type DonationDialogContentProps = BaseDonationDialogProps & {
 
 const DynamicPayToFormComplete = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Complete'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPayToFormConfirm = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/Confirm'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPayToFormCurrencyChoice = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/CurrencyChoice'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicWalletAuthFormSelect = dynamic(
   () => import('~/components/Forms/WalletAuthForm/Select'),
-  { ssr: false, loading: () => <Spinner /> }
+  { ssr: false, loading: () => <SpinnerBlock /> }
 )
 const DynamicPayToFormSetAmount = dynamic(
   () => import('~/components/Forms/PaymentForm/PayTo/SetAmount'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPaymentProcessingForm = dynamic(
   () => import('~/components/Forms/PaymentForm/Processing'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPaymentSetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DonationDialogContent = ({
@@ -170,14 +173,8 @@ const DonationDialogContent = ({
           recipient={recipient}
           article={article}
           submitCallback={setAmountCallback}
-          switchToCurrencyChoice={() => {
-            forward('currencyChoice')
-          }}
           switchToAddCredit={() => {
             forward('addCredit')
-          }}
-          back={() => {
-            forward('currencyChoice')
           }}
           setTabUrl={setTabUrl}
           setTx={setTx}
@@ -193,8 +190,6 @@ const DonationDialogContent = ({
           recipient={recipient}
           switchToSetAmount={() => forward('setAmount')}
           submitCallback={() => forward('processing')}
-          switchToResetPassword={() => forward('resetPassword')}
-          switchToCurrencyChoice={() => forward('currencyChoice')}
           targetId={targetId}
           openTabCallback={setAmountOpenTabCallback}
           tabUrl={tabUrl}
@@ -208,6 +203,7 @@ const DonationDialogContent = ({
           currency={currency}
           recipient={recipient}
           closeDialog={closeDialog}
+          prevStep={() => forward('confirm')}
           nextStep={() => {
             closeDialog()
           }}
@@ -225,12 +221,19 @@ const DonationDialogContent = ({
           callback={completeCallback}
           recipient={recipient}
           targetId={targetId}
+          amount={amount}
+          currency={currency}
+          switchToBindWallet={() => {}}
         />
       )}
 
       {isSetPaymentPassword && (
         <DynamicPaymentSetPasswordForm
           submitCallback={() => forward('confirm')}
+          switchToSetAmount={() => forward('setAmount')}
+          recipient={recipient}
+          amount={amount}
+          currency={currency}
         />
       )}
 
@@ -239,11 +242,7 @@ const DonationDialogContent = ({
           closeDialog={closeDialog}
           callback={() => forward('setAmount')}
           callbackText={
-            <Translate
-              zh_hant="回到支持"
-              zh_hans="回到支持"
-              en="Back to support"
-            />
+            <FormattedMessage defaultMessage="Back to support" id="/MgyCo" />
           }
         />
       )}
@@ -252,11 +251,7 @@ const DonationDialogContent = ({
         <DynamicPaymentResetPasswordForm
           callback={() => forward('setAmount')}
           callbackText={
-            <Translate
-              zh_hant="回到支持"
-              zh_hans="回到支持"
-              en="Back to support"
-            />
+            <FormattedMessage defaultMessage="Back to support" id="/MgyCo" />
           }
           closeDialog={closeDialog}
           back={() => forward('currencyChoice')}

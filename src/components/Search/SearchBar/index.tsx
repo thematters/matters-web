@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
+import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import {
   INPUT_DEBOUNCE,
   KEYVALUE,
@@ -13,8 +15,7 @@ import { getSearchType, toPath } from '~/common/utils'
 import {
   Button,
   Dropdown,
-  IconClear16,
-  IconSearch16,
+  Icon,
   SearchQuickResult,
   useNativeEventListener,
   useRoute,
@@ -39,14 +40,13 @@ const SearchButton = () => {
   const intl = useIntl()
   return (
     <Button
-      size={['2rem', '2rem']}
       type="submit"
       aria-label={intl.formatMessage({
         defaultMessage: 'Search',
         id: 'xmcVZ0',
       })}
     >
-      <IconSearch16 color="greyDark" />
+      <Icon icon={IconNavSearch} color="greyDark" size={22} />
     </Button>
   )
 }
@@ -65,7 +65,7 @@ const ClearButton = ({ onClick }: ClearButtonProps) => {
       aria-label={intl.formatMessage({ defaultMessage: 'Clear', id: '/GCoTA' })}
       onClick={onClick}
     >
-      <IconClear16 color="greyDark" />
+      <Icon icon={IconTimes} color="greyDark" />
     </Button>
   )
 }

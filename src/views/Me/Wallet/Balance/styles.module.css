@@ -2,19 +2,19 @@
   color: var(--color-grey);
 
   & .subtitle {
-    padding-left: calc(1.25rem + var(--spacing-tight));
-    margin-top: var(--spacing-xx-tight);
-    font-size: var(--font-size-xs);
+    padding-left: calc(1.25rem + var(--sp12));
+    margin-top: var(--sp4);
+    font-size: var(--text12);
   }
 }
 
 .assetsItem {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-loose) var(--spacing-base);
+  padding: var(--sp24) var(--sp16);
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0;
+    padding: var(--sp16) 0;
   }
 
   &.clickable {
@@ -24,7 +24,7 @@
     transition-property: background-color;
 
     &:hover {
-      background-color: var(--color-grey-lighter-active);
+      background-color: var(--color-grey-hover);
     }
   }
 }

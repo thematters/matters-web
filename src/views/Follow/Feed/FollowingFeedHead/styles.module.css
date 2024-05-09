@@ -1,11 +1,11 @@
 .head {
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--sp16);
 
   & h4 {
     @mixin flex-center-start;
 
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-normal);
+    font-size: var(--text12);
+    font-weight: var(--font-normal);
     line-height: 1rem;
     color: var(--color-grey);
 
@@ -23,7 +23,7 @@
     }
 
     & > * + * {
-      margin-left: var(--spacing-xx-tight);
+      margin-left: var(--sp4);
     }
   }
 }

@@ -10,7 +10,7 @@ import {
   EmptySearch,
   InfiniteScroll,
   Menu,
-  Spinner,
+  SpinnerBlock,
   TagDigest,
   Translate,
   usePublicQuery,
@@ -51,7 +51,7 @@ const AggregateTagResults = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
@@ -110,7 +110,7 @@ const AggregateTagResults = () => {
               node.__typename === 'Tag' && (
                 <Fragment key={cursor + node.id}>
                   <Menu.Item
-                    spacing={['base', 0]}
+                    spacing={[16, 0]}
                     {...toPath({
                       page: 'tagDetail',
                       tag: node,

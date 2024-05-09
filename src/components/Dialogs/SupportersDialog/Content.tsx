@@ -1,13 +1,15 @@
 import { useQuery } from '@apollo/react-hooks'
 import { FormattedMessage } from 'react-intl'
 
+import { BREAKPOINTS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   InfiniteScroll,
+  List,
   QueryError,
-  Spinner,
-  Translate,
+  SpinnerBlock,
+  useMediaQuery,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
@@ -16,6 +18,7 @@ import {
 } from '~/gql/graphql'
 
 import { ARTICLE_DONATORS } from './gql'
+import styles from './styles.module.css'
 
 interface SupportersDialogContentProps {
   article: SupportsDialogArticleFragment
@@ -31,6 +34,8 @@ const SupportersDialogContent = ({
     { variables: { id: article.id } }
   )
 
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
+
   const connectionPath = 'article.donations'
   const { edges, pageInfo } =
     (data?.article?.__typename === 'Article' && data?.article?.donations) || {}
@@ -40,7 +45,7 @@ const SupportersDialogContent = ({
     0
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {
@@ -73,35 +78,53 @@ const SupportersDialogContent = ({
       <Dialog.Header
         title={
           <>
-            {totalCount}&nbsp;
-            <Translate id="hasSupportedArticle" />
+            <FormattedMessage
+              defaultMessage="Supporter"
+              id="Hyr5ET"
+              description="src/components/Dialogs/SupportersDialog/Content.tsx"
+            />
+            <sup className={styles.count}>{totalCount}</sup>
           </>
         }
-        closeDialog={closeDialog}
-        closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+        titleLeft
+        rightBtn={
+          <Dialog.TextButton
+            text={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
+            color="greyDarker"
+            onClick={closeDialog}
+          />
+        }
       />
 
       <Dialog.Content noSpacing>
         <InfiniteScroll
-          loader={<Spinner />}
+          loader={<SpinnerBlock />}
           loadMore={loadMore}
           hasNextPage={pageInfo.hasNextPage}
         >
-          {edges.map(({ node }, i) => (
-            <UserDigest.Rich
-              user={node}
-              key={node.id}
-              onClick={() => {
-                analytics.trackEvent('click_feed', {
-                  type: 'donators',
-                  contentType: 'user',
-                  location: i,
-                  id: node.id,
-                })
-              }}
-              hasFollow={false}
-            />
-          ))}
+          <div className={styles.smSpacing} />
+          <List
+            hasBorder={false}
+            spacing={isSmUp ? ['base', 'baseLoose'] : ['base', 'base']}
+          >
+            {edges.map(({ node }, i) => (
+              <List.Item key={node.id}>
+                <UserDigest.Rich
+                  user={node.sender || undefined}
+                  onClick={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: 'donators',
+                      contentType: 'user',
+                      location: i,
+                      id: node.id,
+                    })
+                  }}
+                  hasFollow={false}
+                  spacing={[0, 0]}
+                />
+              </List.Item>
+            ))}
+          </List>
         </InfiniteScroll>
       </Dialog.Content>
 

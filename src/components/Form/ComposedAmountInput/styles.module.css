@@ -9,12 +9,12 @@
 
   display: flex;
   flex: 0 0 30%;
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text20);
+  font-weight: var(--font-medium);
   color: var(--color-black);
-  background: var(--color-white);
-  border: 1px solid var(--color-line-grey-light);
-  border-radius: var(--spacing-x-tight);
+  background: var(--color-grey-lighter);
+  border: 1px solid var(--color-grey-lighter);
+  border-radius: var(--sp8);
   transition-property: color, border-color, background-color;
 
   &.active {
@@ -24,31 +24,59 @@
   }
 
   &:nth-child(n + 4) {
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
   }
 
   & label {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: 100%;
-    padding-top: var(--spacing-base);
-    padding-bottom: var(--spacing-base);
+    padding-top: var(--sp8);
+    padding-bottom: var(--sp8);
     text-align: center;
+
+    & .currency {
+      font-size: var(--text12);
+      font-weight: var(--font-medium);
+      color: var(--color-grey-darker);
+    }
+
+    & .amount {
+      font-size: var(--text20);
+      font-weight: var(--font-semibold);
+      color: var(--color-black);
+    }
   }
 }
 
 .customInput {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 
-  & .input {
+  & .inputWrapper {
     @mixin form-input;
-    @mixin form-input-number;
 
-    text-align: center;
+    display: flex;
+    gap: var(--sp16);
+    text-align: left;
+
+    & .unit {
+      color: var(--color-grey-darker);
+      word-break: keep-all;
+    }
+
+    & .input {
+      @mixin form-input-number;
+    }
+
+    &:has(> .input:focus, > .input.focus) {
+      border-color: var(--color-grey);
+    }
   }
 
   & .hint {
-    padding-top: var(--spacing-base);
-    font-size: var(--font-size-xs);
+    padding-top: var(--sp16);
+    font-size: var(--text12);
     color: var(--color-grey-dark);
   }
 }

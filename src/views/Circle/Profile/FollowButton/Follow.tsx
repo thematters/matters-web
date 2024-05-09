@@ -75,7 +75,7 @@ const Follow = ({ circle }: FollowProps) => {
       borderColor="green"
       onClick={onClick}
     >
-      <TextIcon weight="md" size="mdS">
+      <TextIcon weight="medium" size={15}>
         <FormattedMessage defaultMessage="Follow" id="ieGrWo" />
       </TextIcon>
     </Button>

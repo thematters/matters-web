@@ -9,12 +9,7 @@ import { slugifyTag } from './text'
 import { parseURL } from './url'
 
 interface ArticleArgs {
-  id?: string
-  slug: string
-  mediaHash?: string | null
-  author: {
-    userName?: string | null
-  }
+  shortHash: string
 }
 
 interface CircleArgs {
@@ -44,6 +39,12 @@ type ToPathArgs =
   | {
       page: 'articleDetail'
       article: ArticleArgs
+      collectionId?: string
+    }
+  | {
+      page: 'articleHistory'
+      article: ArticleArgs
+      versionId?: string
     }
   | {
       page:
@@ -99,24 +100,23 @@ export const toPath = (
 
   switch (args.page) {
     case 'articleDetail': {
-      const {
-        id,
-        slug,
-        mediaHash,
-        author: { userName },
-      } = args.article
+      const { shortHash } = args.article
 
-      href = `/@${userName}/${slug}-${mediaHash}`
+      href = `/a/${shortHash}`
 
-      try {
-        const { id: articleId } = fromGlobalId(id as string)
-        if (id && articleId) {
-          href = `/@${userName}/${articleId}-${slug}${
-            mediaHash ? '-' + mediaHash : ''
-          }`
-        }
-      } catch (err) {
-        // do nothing
+      if (args.collectionId) {
+        href = `${href}?collection=${args.collectionId}`
+      }
+
+      break
+    }
+    case 'articleHistory': {
+      const { shortHash } = args.article
+
+      href = `/a/${shortHash}/history`
+
+      if (args.versionId) {
+        href = `${href}?v=${args.versionId}`
       }
 
       break

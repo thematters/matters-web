@@ -1,8 +1,21 @@
-import { toast, Translate } from '~/components'
+import { ButtonProps, toast, Translate } from '~/components'
 
 import AppreciateButton from './AppreciateButton'
 
-const BlockedButton = ({ count, total }: { count?: number; total: number }) => (
+const BlockedButton = ({
+  count,
+  total,
+  iconSize = 20,
+  textWeight = 'medium',
+  textIconSpacing = 8,
+  ...buttonProps
+}: {
+  count?: number
+  total: number
+  iconSize?: 20 | 24
+  textWeight?: 'medium' | 'normal'
+  textIconSpacing?: 4 | 6 | 8
+} & ButtonProps) => (
   <AppreciateButton
     count={count}
     total={total}
@@ -17,6 +30,10 @@ const BlockedButton = ({ count, total }: { count?: number; total: number }) => (
         ),
       })
     }}
+    iconSize={iconSize}
+    textWeight={textWeight}
+    textIconSpacing={textIconSpacing}
+    {...buttonProps}
   />
 )
 

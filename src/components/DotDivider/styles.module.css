@@ -1,0 +1,5 @@
+.dot {
+  display: inline-flex;
+  justify-content: center;
+  width: 0.375rem; /* 6px */
+}

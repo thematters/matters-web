@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
@@ -15,7 +16,6 @@ import {
   LinkWrapper,
   SubscribeCircleDialog,
   TextIcon,
-  Translate,
   ViewerContext,
 } from '~/components'
 import {
@@ -52,13 +52,13 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
           <Card
             bgActiveColor="none"
             borderRadius="xtight"
-            spacing={['base', 'base']}
+            spacing={[16, 16]}
             {...path}
             {...cardProps}
           >
             <section className={styles.container}>
               <section className={styles.head}>
-                <CircleAvatar circle={circle} size="xxl" />
+                <CircleAvatar circle={circle} size={56} />
 
                 <section className={styles.wrap}>
                   <p className={styles.name}>
@@ -69,7 +69,7 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
 
                   <section className={styles.follow}>
                     <Button
-                      spacing={['xtight', 'tight']}
+                      spacing={[8, 12]}
                       textColor="green"
                       textActiveColor="white"
                       bgActiveColor="green"
@@ -94,8 +94,11 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
                         openSubscribeCircleDialog()
                       }}
                     >
-                      <TextIcon weight="md" size="xs">
-                        <Translate id="subscriptions" />
+                      <TextIcon weight="medium" size={12}>
+                        <FormattedMessage
+                          defaultMessage="Subscribe"
+                          id="gczcC5"
+                        />
                       </TextIcon>
                     </Button>
                   </section>

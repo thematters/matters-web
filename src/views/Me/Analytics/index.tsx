@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
-import { Head, Layout, List, QueryError, Spinner } from '~/components'
+import { Head, Layout, List, QueryError, SpinnerBlock } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { MeAnalyticsQuery } from '~/gql/graphql'
 
@@ -91,7 +91,7 @@ const MyAnalytics = () => {
       <Layout.Main>
         <Header />
 
-        <Spinner />
+        <SpinnerBlock />
       </Layout.Main>
     )
   }

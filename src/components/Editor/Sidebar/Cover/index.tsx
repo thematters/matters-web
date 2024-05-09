@@ -1,7 +1,8 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
 import { toSizedImageURL } from '~/common/utils'
-import { IconImage24 } from '~/components'
+import { Icon } from '~/components'
 
 import SetCover, { SetCoverProps } from '../../SetCover'
 import Box from '../Box'
@@ -16,7 +17,7 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
     <SetCover.Dialog cover={cover} {...restProps}>
       {({ openDialog: openSetCoverDialog }) => (
         <Box
-          icon={<IconImage24 size="md" />}
+          icon={<Icon icon={IconImage} size={24} />}
           title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
           onClick={openSetCoverDialog}
           disabled={disabled}

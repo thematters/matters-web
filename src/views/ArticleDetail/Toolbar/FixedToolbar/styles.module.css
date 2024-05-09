@@ -1,0 +1,96 @@
+.toolbar {
+  @mixin shadow-border-top-grey;
+  @mixin safe-area-botttom;
+
+  position: fixed;
+  bottom: 0;
+  z-index: var(--z-index-bottom-bar);
+  width: 100%;
+  padding: var(--sp8) var(--sp16);
+  background: var(--color-white);
+
+  & .buttons {
+    display: flex;
+    align-items: center;
+
+    & .commentButton {
+      flex-grow: 1;
+      justify-content: flex-start;
+      padding: var(--sp10);
+      margin-right: var(--sp16);
+      font-size: var(--text14);
+      color: var(--color-grey-darker);
+      background: var(--color-grey-lighter);
+      border-radius: 0.5rem;
+    }
+  }
+}
+
+.justifyContentSpaceBetween {
+  justify-content: space-between;
+}
+
+.justifyContentCenter {
+  justify-content: center;
+}
+
+.appreciationButton {
+  transform: scale(0);
+  animation: scale-out 10s;
+}
+
+.scaleOut {
+  flex-grow: 0;
+  transform: scale(0);
+  animation: scale-out 0.3s;
+}
+
+.scaleIn {
+  animation: scale-in 0.3s;
+}
+
+.expandX {
+  flex-grow: 0;
+  animation: expand-x 0.3s;
+}
+
+.rightAppreciationButton {
+  transform: scale(0);
+}
+
+.scaleAnimation {
+  transform: scale(1);
+  animation: scale-in 0.3s;
+}
+
+@keyframes scale-out {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
+  }
+}
+
+@keyframes expand-x {
+  0% {
+    flex-grow: 0;
+    transform: scaleX(0);
+  }
+
+  100% {
+    flex-grow: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(0);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

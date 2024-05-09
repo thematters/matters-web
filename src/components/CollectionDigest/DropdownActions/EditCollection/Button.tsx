@@ -1,12 +1,13 @@
 import { FormattedMessage } from 'react-intl'
 
-import { IconEdit20, Menu } from '~/components'
+import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import { Icon, Menu } from '~/components'
 
 const EditCollectionButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Edit collection" id="WQT8ZA" />}
-      icon={<IconEdit20 size="mdS" />}
+      icon={<Icon icon={IconEdit} size={20} />}
       onClick={openDialog}
       ariaHasPopup="dialog"
       textColor="greyDarker"

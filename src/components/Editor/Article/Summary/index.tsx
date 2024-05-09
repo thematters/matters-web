@@ -1,10 +1,9 @@
 import autosize from 'autosize'
 import classNames from 'classnames'
-import React, { useContext } from 'react'
+import React from 'react'
+import { useIntl } from 'react-intl'
 
 import { KEYVALUE, MAX_ARTICE_SUMMARY_LENGTH } from '~/common/enums'
-import { translate } from '~/common/utils'
-import { LanguageContext } from '~/components'
 
 /**
  * This is an optional component for user to add summary.
@@ -13,7 +12,6 @@ import { LanguageContext } from '~/components'
  *   <EditorSummary
  *      devalutValue="Default summary"
  *      enable={true}
- *      readOnly={false}
  *      texts={{}}
  *      update={() => func({ summary: '' })}
  *   />
@@ -22,17 +20,15 @@ import { LanguageContext } from '~/components'
 interface Props {
   defaultValue?: string
   enable?: boolean
-  readOnly?: boolean
   update: (params: { summary: any }) => void
 }
 
 const EditorSummary: React.FC<Props> = ({
   defaultValue = '',
   enable,
-  readOnly,
   update,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const instance: React.RefObject<any> | null = React.useRef(null)
 
   const [value, setValue] = React.useState(defaultValue)
@@ -65,7 +61,6 @@ const EditorSummary: React.FC<Props> = ({
 
   const classes = classNames({
     'editor-summary': true,
-    'u-area-disable': readOnly,
   })
   const counterClasses = classNames({
     counter: true,
@@ -77,28 +72,22 @@ const EditorSummary: React.FC<Props> = ({
       <textarea
         ref={instance}
         rows={1}
-        aria-label={translate({
-          en: 'Enter summary…',
-          zh_hans: '自定义摘要…',
-          zh_hant: '自定義摘要…',
-          lang,
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Enter summary…',
+          id: '16zJ3o',
         })}
-        placeholder={translate({
-          en: 'Enter summary…',
-          zh_hans: '自定义摘要…',
-          zh_hant: '自定義摘要…',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter summary…',
+          id: '16zJ3o',
         })}
         value={value}
         onBlur={handleBlur}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
-      {!readOnly && (
-        <section className={counterClasses}>
-          ({length}/{MAX_ARTICE_SUMMARY_LENGTH})
-        </section>
-      )}
+      <section className={counterClasses}>
+        ({length}/{MAX_ARTICE_SUMMARY_LENGTH})
+      </section>
     </section>
   )
 }

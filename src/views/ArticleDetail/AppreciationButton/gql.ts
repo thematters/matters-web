@@ -5,6 +5,7 @@ export const fragments = {
     public: gql`
       fragment AppreciationButtonArticlePublic on Article {
         id
+        shortHash
         author {
           id
         }

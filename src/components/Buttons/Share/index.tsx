@@ -1,26 +1,25 @@
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
+import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
 import {
   Button,
   ButtonProps,
+  Icon,
   IconColor,
-  IconShare16,
   IconSize,
-  LanguageContext,
   ShareDialog,
   ShareDialogProps,
 } from '~/components'
 
 type ShareButtonBaseProps = {
   hasIcon?: boolean
-  iconSize?: Extract<IconSize, 'mdS'>
+  iconSize?: Extract<IconSize, 20 | 24>
   iconColor?: Extract<IconColor, 'green' | 'grey' | 'black' | 'white'>
   inCard: boolean
 } & Omit<ShareDialogProps, 'children'>
 
 type ShareButtonProps = ShareButtonBaseProps &
-  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
+  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing' | 'disabled'>
 
 export const ShareButton: React.FC<
   React.PropsWithChildren<ShareButtonProps>
@@ -31,12 +30,13 @@ export const ShareButton: React.FC<
   hasIcon = true,
   iconSize,
   iconColor = 'black',
+  disabled,
   inCard,
   size,
   spacing,
   ...props
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const isGreen = bgColor === 'green'
   const isHalfBlack = bgColor === 'halfBlack'
@@ -46,7 +46,7 @@ export const ShareButton: React.FC<
       : inCard
       ? 'greyLighterActive'
       : 'greyLighter'
-  const buttonSpacing = spacing || ['xtight', 'xtight']
+  const buttonSpacing = spacing || [8, 8]
 
   return (
     <ShareDialog {...props}>
@@ -56,11 +56,17 @@ export const ShareButton: React.FC<
           size={size}
           spacing={buttonSpacing}
           bgActiveColor={buttonBgActiveColor}
-          aria-label={translate({ id: 'share', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Share',
+            id: 'OKhRC6',
+          })}
           aria-haspopup="dialog"
           onClick={openDialog}
+          disabled={disabled}
         >
-          {hasIcon && <IconShare16 size={iconSize} color={iconColor} />}
+          {hasIcon && (
+            <Icon icon={IconShare} size={iconSize} color={iconColor} />
+          )}
           {children}
         </Button>
       )}

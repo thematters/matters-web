@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { IconCollapse16, Menu } from '~/components'
+import { ReactComponent as IconCollapse } from '@/public/static/icons/24px/collapse.svg'
+import { Icon, Menu } from '~/components'
 
 const CollapseCommentButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
@@ -12,7 +13,7 @@ const CollapseCommentButton = ({ openDialog }: { openDialog: () => void }) => {
           description="src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
         />
       }
-      icon={<IconCollapse16 size="mdS" />}
+      icon={<Icon icon={IconCollapse} size={20} />}
       onClick={openDialog}
       ariaHasPopup="dialog"
     />

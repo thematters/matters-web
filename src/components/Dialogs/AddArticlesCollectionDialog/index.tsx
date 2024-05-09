@@ -8,7 +8,7 @@ import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   useDialogSwitch,
   useMutation,
   usePublicQuery,
@@ -162,7 +162,7 @@ const BaseAddArticlesCollectionDialog = ({
         {children({ openDialog })}
         <Dialog isOpen={show} onDismiss={closeDialog}>
           <Dialog.Content>
-            <Spinner />
+            <SpinnerBlock />
           </Dialog.Content>
         </Dialog>
       </>

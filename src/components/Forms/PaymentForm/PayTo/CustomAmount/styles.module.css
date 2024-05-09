@@ -2,6 +2,6 @@
   @mixin flex-center-space-between;
 
   width: 100%;
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-loose);
+  padding: 0 var(--sp16);
+  margin-bottom: var(--sp24);
 }

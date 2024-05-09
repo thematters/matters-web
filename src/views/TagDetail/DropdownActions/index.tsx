@@ -3,17 +3,18 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
+import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/circle-plus.svg'
+import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import { ReactComponent as IconProfile } from '@/public/static/icons/24px/profile.svg'
+import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
 import {
   Button,
   Dropdown,
   EditTagDialog,
   EditTagDialogProps,
-  IconAdd24,
-  IconEdit16,
-  IconProfile24,
-  IconRemove24,
-  IconSettings32,
+  Icon,
   Menu,
   TagEditorDialog,
   TagEditorDialogProps,
@@ -73,7 +74,7 @@ const BaseDropdownActions = ({
       {hasEditTag && (
         <Menu.Item
           text={<FormattedMessage defaultMessage="Edit" id="wEQDC6" />}
-          icon={<IconEdit16 size="mdS" />}
+          icon={<Icon icon={IconEdit} size={20} />}
           onClick={openEditTagDialog}
           ariaHasPopup="dialog"
         />
@@ -87,7 +88,7 @@ const BaseDropdownActions = ({
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           }
-          icon={<IconAdd24 size="mdS" />}
+          icon={<Icon icon={IconCirclePlus} size={20} />}
           onClick={openTagAddSelectedArticlesDialog}
           ariaHasPopup="dialog"
         />
@@ -101,7 +102,7 @@ const BaseDropdownActions = ({
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           }
-          icon={<IconProfile24 size="mdS" />}
+          icon={<Icon icon={IconProfile} size={20} />}
           onClick={openTagEditorDialog}
           ariaHasPopup="dialog"
         />
@@ -115,7 +116,7 @@ const BaseDropdownActions = ({
               description="src/views/TagDetail/DropdownActions/index.tsx"
             />
           }
-          icon={<IconRemove24 size="mdS" />}
+          icon={<Icon icon={IconCircleMinus} size={20} />}
           onClick={openTagLeaveDialog}
           ariaHasPopup="dialog"
         />
@@ -127,6 +128,7 @@ const BaseDropdownActions = ({
     <Dropdown content={<Content />}>
       {({ openDropdown, ref }) => (
         <Button
+          size={['2rem', '2rem']}
           onClick={openDropdown}
           bgColor="halfBlack"
           aria-label={intl.formatMessage({
@@ -136,7 +138,7 @@ const BaseDropdownActions = ({
           aria-haspopup="listbox"
           ref={ref}
         >
-          <IconSettings32 size="lg" color="white" />
+          <Icon icon={IconSettings} size={24} color="white" />
         </Button>
       )}
     </Dropdown>

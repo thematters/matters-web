@@ -2,18 +2,18 @@
   line-height: 1.5rem;
 }
 
-.textSizeXs {
-  font-size: var(--font-size-xs);
+.text12 {
+  font-size: var(--text12);
 }
 
-.textSizeMd {
-  font-size: var(--font-size-md);
+.text16 {
+  font-size: var(--text16);
 }
 
-.textWeightNormal {
-  font-weight: var(--font-weight-normal);
+.fontNormal {
+  font-weight: var(--font-normal);
 }
 
-.textWeightMd {
-  font-weight: var(--font-weight-medium);
+.fontMedium {
+  font-weight: var(--font-medium);
 }

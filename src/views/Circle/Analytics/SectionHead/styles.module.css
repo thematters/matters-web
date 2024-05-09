@@ -1,11 +1,11 @@
 .head {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-loose) var(--spacing-base) 0;
-  margin-bottom: var(--spacing-base);
+  padding: var(--sp24) var(--sp16) 0;
+  margin-bottom: var(--sp16);
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0 0;
+    padding: var(--sp16) 0 0;
   }
 }
 

@@ -2,7 +2,7 @@
   & ul {
     position: relative;
     grid-column: 1 / -1;
-    font-size: var(--font-size-md);
+    font-size: var(--text16);
 
     &::before {
       position: absolute;
@@ -16,12 +16,12 @@
     }
 
     & + ul {
-      padding-top: var(--spacing-base);
+      padding-top: var(--sp16);
     }
 
     @media (--sm-up) {
       grid-column: span 4;
-      font-size: var(--font-size-xm);
+      font-size: var(--text18);
       line-height: 2rem;
 
       & + ul {
@@ -31,7 +31,7 @@
 
     @media (--md-up) {
       grid-column: span 4;
-      font-size: var(--font-size-xl);
+      font-size: var(--text24);
 
       & + ul {
         grid-column: span 4 / -1;
@@ -67,14 +67,14 @@
     }
 
     & + li {
-      margin-top: var(--spacing-base);
+      margin-top: var(--sp16);
     }
   }
 
   & time {
     box-sizing: content-box;
     min-width: 5.375rem;
-    padding-left: var(--spacing-base);
+    padding-left: var(--sp16);
     color: var(--color-grey-darker);
     white-space: nowrap;
 
@@ -94,10 +94,10 @@
 }
 
 .event {
-  padding-left: var(--spacing-x-tight);
+  padding-left: var(--sp8);
 }
 
 .coming-event {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
   color: var(--color-matters-green);
 }
