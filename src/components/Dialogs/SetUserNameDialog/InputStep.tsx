@@ -38,7 +38,10 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   )
 
   useEffect(() => {
-    setFieldValue('mattersID', userName)
+    setFieldValue(
+      'mattersID',
+      isLegacyUserConfirm ? userName.toLowerCase() : userName
+    )
   }, [userName])
 
   const intl = useIntl()
@@ -53,7 +56,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
-      mattersID: userName,
+      mattersID: isLegacyUserConfirm ? userName.toLowerCase() : userName,
     },
     validateOnBlur: false,
     validateOnChange: true,
@@ -75,7 +78,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         })
         setSubmitting(false)
 
-        if (!!data.user) {
+        if (!!data.user && data.user.id !== viewer.id) {
           setFieldError(
             'mattersID',
             intl.formatMessage({
