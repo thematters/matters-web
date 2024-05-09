@@ -80,9 +80,6 @@
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
-  "/MgyCo": {
-    "defaultMessage": "回到支持"
-  },
   "/NX9L+": {
     "defaultMessage": "确认授权",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
@@ -285,9 +282,6 @@
   },
   "2kpUZD": {
     "defaultMessage": "提交成功"
-  },
-  "2lAxMG": {
-    "defaultMessage": "法币"
   },
   "2oxLHg": {
     "defaultMessage": "最多可设置 3 个代表作"
