@@ -480,9 +480,6 @@
     "defaultMessage": "Please log in again.",
     "description": "OAUTH_TOKEN_INVALID"
   },
-  "6OB9UA": {
-    "defaultMessage": "Connection error, please come back later"
-  },
   "6OBAOi": {
     "defaultMessage": "subscribers_empty",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -490,6 +487,9 @@
   "6Vznnt": {
     "defaultMessage": "left a comment in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "6XIcxZ": {
+    "defaultMessage": "ID can only contain lowercase letters, numbers and underscores"
   },
   "6aE6hr": {
     "defaultMessage": "All",
@@ -1038,9 +1038,6 @@
   },
   "HBxXD/": {
     "defaultMessage": "License"
-  },
-  "HEpsZ3": {
-    "defaultMessage": "Back to discovery"
   },
   "HFVDeB": {
     "defaultMessage": "Related Tags",
@@ -1885,9 +1882,6 @@
   "XHMco9": {
     "defaultMessage": "subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "XHcb2q": {
-    "defaultMessage": "Spaceship maintaining, please come back later"
   },
   "XOEFDf": {
     "defaultMessage": "{total} articles"
@@ -2890,9 +2884,6 @@
   "rbrahO": {
     "defaultMessage": "Close"
   },
-  "rdZi0V": {
-    "defaultMessage": "It seems you've come to an unknown space, please go back and retry"
-  },
   "rdxgu4": {
     "defaultMessage": "Email",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
@@ -2972,9 +2963,6 @@
   "u+cgOo": {
     "defaultMessage": "My circle",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
-  },
-  "u0F4up": {
-    "defaultMessage": "ID can be in lowercase letters, numbers and underscores"
   },
   "u1cbFV": {
     "defaultMessage": "Switch to {networkName}"

@@ -30,7 +30,7 @@ const ConfirmPublishDialogContent: React.FC<
 > = ({ onBack, closeDialog }) => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
-  const id = getQuery('draftId')
+  const draftId = getQuery('draftId')
   const [publish] = useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
     refetchQueries: [
       {
@@ -49,7 +49,7 @@ const ConfirmPublishDialogContent: React.FC<
   })
 
   const onPublish = async () => {
-    publish({ variables: { id } })
+    publish({ variables: { id: draftId } })
     closeDialog()
   }
 

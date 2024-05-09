@@ -18,6 +18,7 @@ type QueryKey =
   | 'shortHash'
   | 'draftId'
   | 'tagId'
+  | 'collection'
   | 'collectionId'
   | 'q'
   | 'type'

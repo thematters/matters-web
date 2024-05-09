@@ -163,8 +163,9 @@ export const validateUserName = (value: string, intl: IntlShape) => {
 
   if (hasUpperCase(value)) {
     return intl.formatMessage({
-      defaultMessage: 'ID can be in lowercase letters, numbers and underscores',
-      id: 'u0F4up',
+      defaultMessage:
+        'ID can only contain lowercase letters, numbers and underscores',
+      id: '6XIcxZ',
     })
   }
 }
