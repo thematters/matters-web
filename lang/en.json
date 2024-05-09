@@ -779,6 +779,9 @@
     "defaultMessage": "Provide support funds to",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
   },
+  "C2fUvW": {
+    "defaultMessage": "ID should be in lowercase letters, numbers and underscores"
+  },
   "C3NKBg": {
     "defaultMessage": "Connected to {type}",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
@@ -2961,9 +2964,6 @@
   "u+cgOo": {
     "defaultMessage": "My circle",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
-  },
-  "u0F4up": {
-    "defaultMessage": "ID can be in lowercase letters, numbers and underscores"
   },
   "u1cbFV": {
     "defaultMessage": "Switch to {networkName}"
