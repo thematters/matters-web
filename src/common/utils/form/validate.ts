@@ -125,9 +125,9 @@ export const validateUserName = (value: string, lang: Language) => {
 
   if (hasUpperCase(value)) {
     return translate({
-      zh_hant: 'ID 只允許包含小寫英文、數字及下劃線',
-      zh_hans: 'ID 只允许包含小写英文、数字及下划线',
-      en: 'ID should be in lowercase letters, numbers and underscores',
+      zh_hant: 'ID 只允許包含小寫英文字母、數字及下劃線',
+      zh_hans: 'ID 只允许包含小写英文字母、数字及下划线',
+      en: 'ID can only contain lowercase letters, numbers and underscores',
       lang,
     })
   }
