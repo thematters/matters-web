@@ -49,7 +49,7 @@ const LegacyIDArticle = ({ articleId }: { articleId: string }) => {
     if (!shortHash) return
 
     const path = toPath({ page: 'articleDetail', article: { shortHash } })
-    router.push(path.href)
+    router.replace(path.href)
   }, [shortHash])
 
   if (loading) {
@@ -84,7 +84,7 @@ const LegacyMediaHashArticle = ({ mediaHash }: { mediaHash: string }) => {
     if (!shortHash) return
 
     const path = toPath({ page: 'articleDetail', article: { shortHash } })
-    router.push(path.href)
+    router.replace(path.href)
   }, [shortHash])
 
   if (loading) {
