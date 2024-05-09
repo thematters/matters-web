@@ -488,6 +488,9 @@
     "defaultMessage": "left a comment in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "6XIcxZ": {
+    "defaultMessage": "ID can only contain lowercase letters, numbers and underscores"
+  },
   "6aE6hr": {
     "defaultMessage": "All",
     "description": "src/views/Me/Transactions/index.tsx"
@@ -775,9 +778,6 @@
   "BoN8lF": {
     "defaultMessage": "Provide support funds to",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
-  },
-  "C2fUvW": {
-    "defaultMessage": "ID should be in lowercase letters, numbers and underscores"
   },
   "C3NKBg": {
     "defaultMessage": "Connected to {type}",

@@ -488,6 +488,9 @@
     "defaultMessage": "在你的围炉中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
   },
+  "6XIcxZ": {
+    "defaultMessage": "ID 只允许包含英文字母、数字及下划线"
+  },
   "6aE6hr": {
     "defaultMessage": "全部",
     "description": "src/views/Me/Transactions/index.tsx"
@@ -775,9 +778,6 @@
   "BoN8lF": {
     "defaultMessage": "递出支持资金给",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
-  },
-  "C2fUvW": {
-    "defaultMessage": "ID 只允许包含英文、数字及下划线"
   },
   "C3NKBg": {
     "defaultMessage": "{type} 已绑定",
