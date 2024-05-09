@@ -1608,6 +1608,9 @@
     "defaultMessage": "用戶不存在",
     "description": "USER_NOT_FOUND"
   },
+  "S15KFb": {
+    "defaultMessage": "{totalCount} 篇作品"
+  },
   "S8PcQf": {
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
@@ -2068,10 +2071,6 @@
   "aE5Qq+": {
     "defaultMessage": "重新發送",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
-  },
-  "aFJE+p": {
-    "defaultMessage": "{totalCount} 篇作品",
-    "description": "src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
   },
   "aHTyGJ": {
     "defaultMessage": "官方文檔",

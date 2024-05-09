@@ -92,8 +92,7 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
           <section className={styles.totalCount}>
             <FormattedMessage
               defaultMessage="{totalCount} articles"
-              description="src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
-              id="aFJE+p"
+              id="S15KFb"
               values={{
                 totalCount: collection.articles.totalCount,
               }}

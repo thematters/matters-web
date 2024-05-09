@@ -1608,6 +1608,9 @@
     "defaultMessage": "User not found",
     "description": "USER_NOT_FOUND"
   },
+  "S15KFb": {
+    "defaultMessage": "{totalCount} articles"
+  },
   "S8PcQf": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
@@ -2068,10 +2071,6 @@
   "aE5Qq+": {
     "defaultMessage": "Resend",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
-  },
-  "aFJE+p": {
-    "defaultMessage": "{totalCount} articles",
-    "description": "src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
   },
   "aHTyGJ": {
     "defaultMessage": "docs",

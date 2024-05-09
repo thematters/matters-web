@@ -1,9 +1,9 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconAnthology } from '@/public/static/icons/24px/anthology.svg'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { Icon, LinkWrapper } from '~/components'
+import { LinkWrapper } from '~/components'
 import { CollectionDigestAuthorSidebarCollectionFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -53,8 +53,18 @@ export const CollectionDigestAuthorSidebar = ({
   return (
     <section className={containerClasses}>
       <LinkWrapper {...path} textActiveColor="green">
-        <Icon icon={IconAnthology} size={24} color="greyLight" />
         <header>{title}</header>
+      </LinkWrapper>
+      <LinkWrapper {...path} textActiveColor="green">
+        <section className={styles.totalCount}>
+          <FormattedMessage
+            defaultMessage="{totalCount} articles"
+            id="S15KFb"
+            values={{
+              totalCount: collection.articles.totalCount,
+            }}
+          />
+        </section>
       </LinkWrapper>
     </section>
   )
