@@ -46,6 +46,7 @@ export const RelatedArticles = ({ article }: RelatedArticlesProps) => {
               titleColor="black"
               titleTextSize={14}
               imageSize="md"
+              showAuthorInfo
             />
           </List.Item>
         ))}

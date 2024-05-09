@@ -4,6 +4,12 @@
 
   @mixin flex-start-space-between;
 
+  & > .left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp8);
+  }
+
   & header {
     flex-grow: 1;
 

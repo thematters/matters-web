@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, ResponsiveImage } from '~/components'
+import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestAuthorSidebarArticleFragment } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
@@ -16,6 +17,7 @@ export type ArticleDigestAuthorSidebarProps = {
   titleTextSize?: ArticleDigestTitleTextSize
   titleColor?: 'greyDarker' | 'black'
   showCover?: boolean
+  showAuthorInfo?: boolean
   imageSize?: 'sm' | 'md'
 }
 
@@ -28,8 +30,14 @@ const fragments = {
       slug
       shortHash
       cover
+      author {
+        id
+        userName
+        ...UserDigestMiniUser
+      }
       ...ArticleDigestTitleArticle
     }
+    ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
   `,
 }
@@ -42,8 +50,9 @@ export const ArticleDigestAuthorSidebar = ({
   titleColor = 'greyDarker',
   imageSize = 'sm',
   showCover = true,
+  showAuthorInfo = false,
 }: ArticleDigestAuthorSidebarProps) => {
-  const { articleState: state } = article
+  const { articleState: state, author } = article
   const isBanned = state === 'banned'
   const cover = !isBanned ? article.cover : null
   const containerClasses = classNames({
@@ -69,15 +78,29 @@ export const ArticleDigestAuthorSidebar = ({
       className={containerClasses}
       data-test-id={TEST_ID.DIGEST_ARTICLE_AUTHOR_SIDEBAR}
     >
-      <header className={headerClasses}>
-        <ArticleDigestTitle
-          article={article}
-          textSize={titleTextSize}
-          collectionId={collectionId}
-          textWeight="normal"
-          is="h3"
-        />
-      </header>
+      <section className={styles.left}>
+        <header className={headerClasses}>
+          <ArticleDigestTitle
+            article={article}
+            textSize={titleTextSize}
+            collectionId={collectionId}
+            textWeight="normal"
+            is="h3"
+          />
+        </header>
+        {showAuthorInfo && (
+          <section>
+            <UserDigest.Mini
+              user={author}
+              avatarSize={16}
+              textSize={12}
+              nameColor="grey"
+              hasAvatar
+              hasDisplayName
+            />
+          </section>
+        )}
+      </section>
 
       {showCover && cover && (
         <LinkWrapper {...path} disabled={isBanned}>

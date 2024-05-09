@@ -28,7 +28,7 @@ export type UserDigestMiniProps = {
   avatarSize?: AvatarSize
   textSize?: 12 | 13 | 14 | 15 | 16
   textWeight?: 'medium' | 'semibold'
-  nameColor?: 'black' | 'white' | 'greyDarker' | 'green'
+  nameColor?: 'black' | 'white' | 'grey' | 'greyDarker' | 'green'
   direction?: 'row' | 'column'
   spacing?: 4 | 8
 

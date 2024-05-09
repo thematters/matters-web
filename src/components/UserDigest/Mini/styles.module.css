@@ -89,6 +89,12 @@
   }
 }
 
+.nameColorGrey {
+  & .displayname {
+    color: var(--color-grey);
+  }
+}
+
 .nameColorGreyDarker {
   & .displayname {
     color: var(--color-grey-darker);
