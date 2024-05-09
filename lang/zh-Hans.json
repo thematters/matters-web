@@ -665,6 +665,9 @@
     "defaultMessage": "广播留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "A0MNSc": {
+    "defaultMessage": "CC BY-NC-ND 2.0 授权"
+  },
   "A3g33H": {
     "defaultMessage": "归档的作品仅自己可见，且操作无法撤销。如文章已加入选集，将从选集中移除。（已发布到 IPFS 的版本不受影响）"
   },
@@ -1684,6 +1687,9 @@
   },
   "TKsfIS": {
     "defaultMessage": "流星号"
+  },
+  "TPEQMa": {
+    "defaultMessage": "CC BY-NC-ND 4.0 授权"
   },
   "TSDiqB": {
     "defaultMessage": "付费人数",
@@ -2759,6 +2765,9 @@
     "defaultMessage": "登录密码已设置",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
+  "pKRF+E": {
+    "defaultMessage": "作者保留所有权利"
+  },
   "pKkpI9": {
     "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
   },
@@ -2853,6 +2862,9 @@
   },
   "rDX3h6": {
     "defaultMessage": "版本简述"
+  },
+  "rE7sE3": {
+    "defaultMessage": "CC0 公众领域贡献宣告"
   },
   "rHi+cL": {
     "defaultMessage": "最多读者",

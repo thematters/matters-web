@@ -665,6 +665,9 @@
     "defaultMessage": "New replies to broadcast",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "A0MNSc": {
+    "defaultMessage": "CC BY-NC-ND 2.0"
+  },
   "A3g33H": {
     "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
   },
@@ -1684,6 +1687,9 @@
   },
   "TKsfIS": {
     "defaultMessage": "Meteor Canoe"
+  },
+  "TPEQMa": {
+    "defaultMessage": "CC BY-NC-ND 4.0"
   },
   "TSDiqB": {
     "defaultMessage": "Subscribers",
@@ -2759,6 +2765,9 @@
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
+  "pKRF+E": {
+    "defaultMessage": "No Copyright"
+  },
   "pKkpI9": {
     "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
   },
@@ -2853,6 +2862,9 @@
   },
   "rDX3h6": {
     "defaultMessage": "Version Description"
+  },
+  "rE7sE3": {
+    "defaultMessage": "CC0 License"
   },
   "rHi+cL": {
     "defaultMessage": "Most readers",
