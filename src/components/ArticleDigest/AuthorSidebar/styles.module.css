@@ -23,8 +23,7 @@
       & a {
         color: var(--color-black);
 
-        &:hover,
-        &:focus {
+        &:hover {
           color: var(--color-matters-green);
         }
       }
@@ -34,8 +33,7 @@
       & a {
         color: var(--color-grey-darker);
 
-        &:hover,
-        &:focus {
+        &:hover {
           color: var(--color-matters-green);
         }
       }
