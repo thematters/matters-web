@@ -88,6 +88,7 @@ const Collection: React.FC<{
           <List.Item key={node.id}>
             <ArticleDigestTitle
               article={node}
+              lineClamp={1}
               textSize={16}
               textWeight="normal"
               onClick={() =>
