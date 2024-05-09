@@ -1,10 +1,11 @@
 import React from 'react'
 
+import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, UtmParams } from '~/common/utils'
 import {
   DateTime,
-  IconDotDivider,
+  Icon,
   LinkWrapper,
   Media,
   ResponsiveImage,
@@ -34,6 +35,7 @@ export type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublicFragment &
     Partial<ArticleDigestFeedArticlePrivateFragment>
   header?: React.ReactNode
+  collectionId?: string
 } & ArticleDigestFeedControls &
   FooterActionsProps &
   UtmParams
@@ -41,6 +43,7 @@ export type ArticleDigestFeedProps = {
 const BaseArticleDigestFeed = ({
   article,
   header,
+  collectionId,
 
   hasHeader = true,
   hasCircle = true,
@@ -65,6 +68,7 @@ const BaseArticleDigestFeed = ({
   const path = toPath({
     page: 'articleDetail',
     article,
+    collectionId,
     utm_source,
     utm_medium,
   })
@@ -72,6 +76,7 @@ const BaseArticleDigestFeed = ({
   const footerActions = (
     <FooterActions
       article={article}
+      collectionId={collectionId}
       hasReadTime={hasReadTime}
       hasDonationCount={hasDonationCount}
       hasCircle={hasCircle}
@@ -94,13 +99,13 @@ const BaseArticleDigestFeed = ({
                   <section className={styles.author}>
                     <UserDigest.Mini
                       user={author}
-                      avatarSize="sm"
-                      textSize="xs"
+                      avatarSize={20}
+                      textSize={12}
                       hasAvatar
                       hasDisplayName
                       onClick={onClickAuthor}
                     />
-                    <IconDotDivider color="greyLight" size="mdS" />
+                    <Icon icon={IconDot} color="greyLight" size={20} />
                   </section>
                 </>
               )}
@@ -111,7 +116,8 @@ const BaseArticleDigestFeed = ({
             <section className={styles.title}>
               <ArticleDigestTitle
                 article={article}
-                textSize="md"
+                collectionId={collectionId}
+                textSize={16}
                 lineClamp={2}
                 onClick={onClick}
               />

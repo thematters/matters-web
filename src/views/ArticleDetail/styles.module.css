@@ -1,8 +1,9 @@
 .content {
   min-height: 100vh;
-  padding: var(--spacing-base);
+  padding: var(--sp20) var(--sp16);
 
   @media (--sm-up) {
+    padding: var(--sp32);
     padding-right: 0;
     padding-left: 0;
   }
@@ -14,10 +15,15 @@
 }
 
 .title {
-  margin-bottom: var(--spacing-base);
+  & h1 {
+    @mixin font-serif;
+  }
 }
 
 .block {
-  padding: var(--spacing-loose) 0 0;
-  margin: var(--spacing-loose) 0 var(--spacing-base);
+  margin: var(--sp24) 0 var(--sp40);
+}
+
+.smUpCommentBlock {
+  padding-top: var(--sp40);
 }

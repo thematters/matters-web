@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { IconMute20, Menu, toast, useMutation } from '~/components'
+import { ReactComponent as IconCircleSlash } from '@/public/static/icons/24px/circle-slash.svg'
+import { Icon, Menu, toast, useMutation } from '~/components'
 import TOGGLE_BLOCK_USER from '~/components/GQL/mutations/toggleBlockUser'
 import {
   BlockUserPrivateFragment,
@@ -52,7 +53,7 @@ const BlockUserButton = ({
             description="src/components/BlockUser/Button/index.tsx"
           />
         }
-        icon={<IconMute20 size="mdS" />}
+        icon={<Icon icon={IconCircleSlash} size={20} />}
         onClick={onUnblock}
       />
     )
@@ -65,7 +66,7 @@ const BlockUserButton = ({
       textColor="greyDarker"
       textActiveColor="black"
       text={<FormattedMessage defaultMessage="Block User" id="vAc1Bw" />}
-      icon={<IconMute20 size="mdS" />}
+      icon={<Icon icon={IconCircleSlash} size={20} />}
     />
   )
 }

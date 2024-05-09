@@ -15,7 +15,7 @@ import { UserLanguage } from '~/gql/graphql'
  */
 type QueryKey =
   | 'name' // circle or user name
-  | 'mediaHash'
+  | 'shortHash'
   | 'draftId'
   | 'tagId'
   | 'collectionId'
@@ -43,9 +43,6 @@ export const useRoute = () => {
     switch (key) {
       case 'name':
         query = query.replace(/[@~～]/g, '')
-        break
-      case 'mediaHash':
-        query = query.split('-').slice(-1)[0]
         break
     }
 

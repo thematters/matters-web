@@ -2,14 +2,15 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
+import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
+import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { TEST_ID } from '~/common/enums'
 import { captureClicks, numAbbr, toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
-  IconArticle16,
-  IconUser16,
+  Icon,
   ResponsiveImage,
   Tag,
   TextIcon,
@@ -37,7 +38,7 @@ const fragments = {
             id
             title
             slug
-            mediaHash
+            shortHash
             author {
               id
               userName
@@ -60,7 +61,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
   return (
     <Card
       {...path}
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgColor="none"
       bgActiveColor="none"
       borderRadius="xtight"
@@ -73,23 +74,23 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
             tag={tag}
             type="plain"
             iconProps={{ color: 'greyDarker' }}
-            textIconProps={{ color: 'black', weight: 'md', size: 'sm' }}
+            textIconProps={{ color: 'black', weight: 'medium', size: 14 }}
           />
 
           <section className={styles.nums}>
             <TextIcon
-              icon={<IconUser16 color="greyDark" size="xs" />}
-              size="xs"
-              spacing="xxtight"
+              icon={<Icon icon={IconUser} color="greyDark" size={12} />}
+              size={12}
+              spacing={4}
               color="greyDark"
             >
               {numAbbr(tag.numAuthors)}
             </TextIcon>
 
             <TextIcon
-              icon={<IconArticle16 color="greyDark" size="xs" />}
-              size="xs"
-              spacing="xxtight"
+              icon={<Icon icon={IconDraft} color="greyDark" size={12} />}
+              size={12}
+              spacing={4}
               color="greyDark"
             >
               {numAbbr(tag.numArticles)}

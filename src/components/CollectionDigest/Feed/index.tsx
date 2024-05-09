@@ -1,15 +1,10 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath } from '~/common/utils'
-import {
-  Book,
-  DateTime,
-  IconDotDivider,
-  LinkWrapper,
-  Media,
-} from '~/components'
+import { Book, DateTime, Icon, LinkWrapper, Media } from '~/components'
 import { CollectionDigestFeedCollectionFragment } from '~/gql/graphql'
 
 import DropdownActions from '../DropdownActions'
@@ -87,7 +82,7 @@ const BaseCollectionDigestFeed = ({
               </span>
 
               <span className={styles.iconDivider}>
-                <IconDotDivider size="mdS" />
+                <Icon icon={IconDot} size={20} />
               </span>
 
               <span>

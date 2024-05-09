@@ -203,8 +203,8 @@ export const OAUTH_SCOPE_TREE = {
       },
       putComment: {
         _t: {
-          zh_hant: '發布和修訂評論',
-          zh_hans: '发布和修订评论',
+          zh_hant: '發布和編輯評論',
+          zh_hans: '发布和编辑评论',
         },
       },
       deleteComment: {
@@ -239,8 +239,8 @@ export const OAUTH_SCOPE_TREE = {
       },
       editArticle: {
         _t: {
-          zh_hant: '修訂作品',
-          zh_hans: '修订作品',
+          zh_hant: '編輯作品',
+          zh_hans: '编辑作品',
         },
       },
       appreciateArticle: {

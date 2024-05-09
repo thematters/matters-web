@@ -13,7 +13,7 @@ import {
   Button,
   Head,
   Layout,
-  Spinner,
+  SpinnerBlock,
   TableView,
   TextIcon,
   ViewerContext,
@@ -77,7 +77,7 @@ const Wallet = () => {
             </Layout.Header.Title>
           }
         />
-        <Spinner />
+        <SpinnerBlock />
       </Layout.Main>
     )
   }
@@ -94,12 +94,12 @@ const Wallet = () => {
           <>
             <span />
             <Button
-              spacing={[0, 'tight']}
+              spacing={[0, 12]}
               size={[null, '2rem']}
               bgColor="green"
               href={PATHS.ME_WALLET_TRANSACTIONS}
             >
-              <TextIcon color="white" weight="md">
+              <TextIcon color="white" weight="medium">
                 <FormattedMessage defaultMessage="Transactions" id="/jJLYy" />
               </TextIcon>
             </Button>

@@ -31,7 +31,7 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
     <Card
       bgActiveColor="none"
       borderRadius="xtight"
-      spacing={['base', 'base']}
+      spacing={[16, 16]}
       {...path}
       {...cardProps}
     >
@@ -47,8 +47,8 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
             <section className={styles.author}>
               <UserDigest.Mini
                 user={author}
-                avatarSize="xs"
-                textSize="sm"
+                avatarSize={16}
+                textSize={14}
                 hasAvatar
                 hasDisplayName
               />

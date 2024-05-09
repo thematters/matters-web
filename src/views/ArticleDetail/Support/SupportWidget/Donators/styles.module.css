@@ -1,0 +1,64 @@
+.avatarList {
+  @mixin flex-center-all;
+
+  flex-wrap: wrap;
+  gap: var(--sp16) var(--sp8);
+  max-width: 312px;
+
+  @media (--lg-up) {
+    gap: var(--sp16) var(--sp12);
+    max-width: 428px;
+  }
+
+  & .count {
+    @mixin inline-flex-center-all;
+
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: var(--text12);
+    line-height: 1.125rem;
+    color: var(--color-grey-darker);
+    background: var(--color-grey-lighter);
+    border-radius: 50%;
+
+    @media (--sm-up) {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+
+  & .donatorName {
+    margin-left: var(--sp8);
+    font-size: var(--text12);
+    font-weight: var(--font-medium);
+    line-height: 1.25rem;
+    color: var(--color-black);
+  }
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.avatarItem {
+  & > * {
+    height: 1.5rem;
+
+    @media (--sm-up) {
+      height: 2rem;
+    }
+  }
+}
+
+.viewSupport {
+  @mixin flex-center-all;
+
+  gap: var(--sp4);
+  margin-top: var(--sp8);
+  font-size: var(--text12);
+  line-height: 1.125rem;
+
+  & span:first-child {
+    color: var(--color-grey-dark);
+  }
+}

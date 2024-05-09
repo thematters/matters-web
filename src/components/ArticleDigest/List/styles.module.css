@@ -1,18 +1,18 @@
 .container {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-base) 0;
+  padding: var(--sp16) 0;
 }
 
 .left {
   & > * + * {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--sp8);
   }
 }
 
 .right {
   flex-shrink: 0;
-  margin-left: var(--spacing-base);
+  margin-left: var(--sp16);
   text-align: right;
 }
 

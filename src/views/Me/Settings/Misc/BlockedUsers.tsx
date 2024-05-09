@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { IconSpinner22, TableView } from '~/components'
+import { Spinner, TableView } from '~/components'
 import { ViewerBlockedUsersQuery } from '~/gql/graphql'
 
 import { VIEWER_BLOCKED_USERS } from './gql'
@@ -24,9 +24,7 @@ const BlockedUsers = () => {
         />
       }
       rightText={loading ? undefined : data?.viewer?.blockList.totalCount}
-      rightIcon={
-        loading ? <IconSpinner22 size="mdS" color="greyDarker" /> : undefined
-      }
+      rightIcon={loading ? <Spinner color="greyDarker" size={20} /> : undefined}
       href={PATHS.ME_SETTINGS_BLOCKED}
     />
   )

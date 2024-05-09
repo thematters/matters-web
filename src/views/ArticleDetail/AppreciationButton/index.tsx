@@ -1,9 +1,15 @@
 // import Script from 'next/script'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { APPRECIATE_DEBOUNCE, EXTERNAL_LINKS, Z_INDEX } from '~/common/enums'
 import {
+  APPRECIATE_DEBOUNCE,
+  EXTERNAL_LINKS,
+  SYNC_APPRECIATE_BUTTON_COUNT,
+  Z_INDEX,
+} from '~/common/enums'
+import {
+  ButtonProps,
   ReCaptchaContext,
   toast,
   Tooltip,
@@ -12,6 +18,7 @@ import {
   // TURNSTILE_DEFAULT_SCRIPT_ID,
   // TURNSTILE_SCRIPT_URL,
   TurnstileInstance,
+  useEventListener,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -29,29 +36,48 @@ import BlockedButton from './BlockedButton'
 import ForbiddenButton from './ForbiddenButton'
 import { APPRECIATE_ARTICLE, fragments } from './gql'
 
-interface AppreciationButtonProps {
+export type AppreciationButtonProps = {
   article: AppreciationButtonArticlePublicFragment &
     Partial<AppreciationButtonArticlePrivateFragment>
   privateFetched: boolean
   disabled?: boolean
-}
+  iconSize?: 20 | 24
+  textWeight?: 'medium' | 'normal'
+  textIconSpacing?: 4 | 6 | 8
+} & ButtonProps
 
 const AppreciationButton = ({
   article,
   privateFetched,
   disabled,
+  iconSize = 20,
+  textWeight = 'medium',
+  textIconSpacing = 8,
+  ...buttonProps
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
 
   const turnstileRef = useRef<TurnstileInstance>(null)
   const { token, refreshToken } = useContext(ReCaptchaContext)
+  const [uuid, setUuid] = useState('')
 
-  const isArticleAuthor = article.author.id === viewer.id
+  useEffect(() => {
+    setUuid(crypto.randomUUID())
+  }, [])
 
   /**
    * Normal Appreciation
    */
   const [amount, setAmount] = useState(0)
+
+  useEventListener(
+    SYNC_APPRECIATE_BUTTON_COUNT,
+    (detail: CustomEvent['detail']) => {
+      if (detail.uuid !== uuid) {
+        setAmount(detail.amount)
+      }
+    }
+  )
   const [sendAppreciation] =
     useMutation<AppreciateArticleMutation>(APPRECIATE_ARTICLE)
   const limit = article.appreciateLimit
@@ -61,13 +87,21 @@ const AppreciationButton = ({
       : limit) - amount
   const total = article.likesReceivedTotal + amount
   const appreciatedCount = limit - left
-  const isReachLimit = left <= 0 || isArticleAuthor
+  const isReachLimit = left <= 0
   const debouncedSendAppreciation = useDebouncedCallback(async () => {
     try {
+      window.dispatchEvent(
+        new CustomEvent(SYNC_APPRECIATE_BUTTON_COUNT, {
+          detail: {
+            uuid,
+            amount,
+          },
+        })
+      )
       await sendAppreciation({
         variables: {
           id: article.id,
-          amount,
+          amount: amount,
           token:
             // (viewer.info.group === UserGroup.A &&
             // turnstileRef.current?.getResponse()) || // fallback to ReCaptchaContext token
@@ -104,7 +138,7 @@ const AppreciationButton = ({
           updateAppreciation({
             cache,
             left,
-            id: article.id,
+            shortHash: article.shortHash,
             total,
             viewer,
             canSuperLike: false,
@@ -174,42 +208,54 @@ const AppreciationButton = ({
 
   // Anonymous
   if (!viewer.isAuthed) {
-    return <AnonymousButton total={total} />
+    return (
+      <AnonymousButton
+        total={total}
+        iconSize={iconSize}
+        textIconSpacing={textIconSpacing}
+        {...buttonProps}
+      />
+    )
   }
 
   // Blocked
   if (article.author.isBlocking) {
-    return <BlockedButton total={total} />
+    return (
+      <BlockedButton
+        total={total}
+        iconSize={iconSize}
+        textWeight={textWeight}
+        textIconSpacing={textIconSpacing}
+        {...buttonProps}
+      />
+    )
   }
 
   // Frobidden
   if (viewer.isFrozen) {
-    return <ForbiddenButton total={total} />
-  }
-
-  // Article Author
-  if (isArticleAuthor && !isSuperLike) {
     return (
-      <Tooltip
-        content={
-          <Translate
-            zh_hant="去讚賞其他用戶吧"
-            zh_hans="去赞赏其他用户吧"
-            en="send Likes to others"
-          />
-        }
-        zIndex={Z_INDEX.OVER_BOTTOM_BAR}
-      >
-        <span>
-          <AppreciateButton disabled total={total} />
-        </span>
-      </Tooltip>
+      <ForbiddenButton
+        total={total}
+        iconSize={iconSize}
+        textWeight={textWeight}
+        textIconSpacing={textIconSpacing}
+        {...buttonProps}
+      />
     )
   }
 
   // Blocked by private query
   if (!privateFetched) {
-    return <AppreciateButton total={total} disabled />
+    return (
+      <AppreciateButton
+        total={total}
+        disabled
+        iconSize={iconSize}
+        textWeight={textWeight}
+        textIconSpacing={textIconSpacing}
+        {...buttonProps}
+      />
+    )
   }
 
   const siteKey = process.env
@@ -240,6 +286,10 @@ const AppreciationButton = ({
           total={total}
           isSuperLike={isSuperLike}
           superLiked={superLiked}
+          iconSize={iconSize}
+          textWeight={textWeight}
+          textIconSpacing={textIconSpacing}
+          {...buttonProps}
         />
       </section>
     )
@@ -273,13 +323,26 @@ const AppreciationButton = ({
         }}
         isSuperLike={isSuperLike}
         superLiked={superLiked}
+        iconSize={iconSize}
+        textWeight={textWeight}
+        textIconSpacing={textIconSpacing}
+        {...buttonProps}
       />
     )
   }
 
   // MAX
   if (isReachLimit && !isSuperLike) {
-    return <AppreciateButton count="MAX" total={total} />
+    return (
+      <AppreciateButton
+        count="MAX"
+        total={total}
+        iconSize={iconSize}
+        textWeight={textWeight}
+        textIconSpacing={textIconSpacing}
+        {...buttonProps}
+      />
+    )
   }
 
   // Disabled
@@ -299,6 +362,10 @@ const AppreciationButton = ({
           disabled
           count={appreciatedCount > 0 ? appreciatedCount : undefined}
           total={total}
+          iconSize={iconSize}
+          textWeight={textWeight}
+          textIconSpacing={textIconSpacing}
+          {...buttonProps}
         />
       </span>
     </Tooltip>

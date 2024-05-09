@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconCircle } from '@/public/static/icons/24px/circle.svg'
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -9,7 +10,7 @@ import { analytics } from '~/common/utils'
 import {
   BindEmailHintDialog,
   Card,
-  IconCircle16,
+  Icon,
   TextIcon,
   Translate,
   ViewerContext,
@@ -76,10 +77,10 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
           >
             <section className={styles.subscriptionBanner}>
               <TextIcon
-                icon={<IconCircle16 size="mdS" />}
-                size="xm"
+                icon={<Icon icon={IconCircle} size={20} />}
+                size={18}
                 color="white"
-                weight="md"
+                weight="medium"
               >
                 {isInvited ? (
                   <Translate

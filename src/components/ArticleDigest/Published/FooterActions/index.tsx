@@ -1,14 +1,13 @@
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
+import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
+import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import { TextIcon } from '~/components'
-import {
-  IconClap2V16,
-  IconComment2V16,
-  IconMoney16,
-  IconUser2V16,
-} from '~/components/Icon'
+import { Icon } from '~/components/Icon'
 import { FooterActionsPublishedArticlePublicFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
@@ -34,9 +33,9 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
     <footer className={styles.footer}>
       <section className={styles.left}>
         <TextIcon
-          icon={<IconUser2V16 />}
-          spacing="basexxtight"
-          size="sm"
+          icon={<Icon icon={IconUser} />}
+          spacing={6}
+          size={14}
           aria-label={intl.formatMessage({
             defaultMessage: 'Number of readers',
             id: 'hv1iYZ',
@@ -53,9 +52,9 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
         </TextIcon>
 
         <TextIcon
-          icon={<IconClap2V16 />}
-          spacing="basexxtight"
-          size="sm"
+          icon={<Icon icon={IconClap} />}
+          spacing={6}
+          size={14}
           aria-label={intl.formatMessage({
             defaultMessage: 'Number of claps',
             id: 'C9jbHn',
@@ -74,9 +73,9 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
         </TextIcon>
 
         <TextIcon
-          icon={<IconComment2V16 />}
-          spacing="basexxtight"
-          size="sm"
+          icon={<Icon icon={IconComment} />}
+          spacing={6}
+          size={14}
           aria-label={intl.formatMessage({
             defaultMessage: 'Number of comments',
             id: 'J6f6iN',
@@ -93,9 +92,9 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
         </TextIcon>
 
         <TextIcon
-          icon={<IconMoney16 />}
-          spacing="basexxtight"
-          size="sm"
+          icon={<Icon icon={IconMoney} />}
+          spacing={6}
+          size={14}
           aria-label={intl.formatMessage({
             defaultMessage: 'Number of supporters',
             id: 'NfCbnZ',
@@ -116,7 +115,7 @@ const FooterActions = ({ article, ...controls }: FooterActionsProps) => {
         <DropdownActions
           article={article}
           {...controls}
-          size="mdM"
+          size={22}
           inCard={true}
         />
       </section>

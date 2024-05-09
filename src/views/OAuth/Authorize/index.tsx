@@ -10,7 +10,7 @@ import {
   Dialog,
   LanguageContext,
   Layout,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   Translate,
   UserDigest,
@@ -57,7 +57,7 @@ const BaseOAuthAuthorize = () => {
   if (loading) {
     return (
       <Box>
-        <Spinner />
+        <SpinnerBlock />
       </Box>
     )
   }
@@ -139,7 +139,7 @@ const BaseOAuthAuthorize = () => {
           <section className={styles.currentAccount}>
             <UserDigest.Mini
               user={viewer}
-              avatarSize="xs"
+              avatarSize={16}
               hasUserName
               hasAvatar
               hasDisplayName
@@ -174,7 +174,7 @@ const BaseOAuthAuthorize = () => {
                     en="Please setup Liker ID first"
                   />
                 ) : (
-                  <Translate id="agree" />
+                  <FormattedMessage defaultMessage="Agree" id="ISly67" />
                 )
               }
               href={isNoLiker ? PATHS.ME_SETTINGS_MISC : undefined}
@@ -191,7 +191,7 @@ const BaseOAuthAuthorize = () => {
                     en="Please setup Liker ID first"
                   />
                 ) : (
-                  <Translate id="agree" />
+                  <FormattedMessage defaultMessage="Agree" id="ISly67" />
                 )
               }
               href={isNoLiker ? PATHS.ME_SETTINGS_MISC : undefined}

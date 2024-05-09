@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import {
   OPEN_SHOW_NOMAD_BADGE_DIALOG,
   TEST_ID,
@@ -14,7 +15,7 @@ import {
   EditProfileDialog,
   Expandable,
   FollowUserButton,
-  IconCamera24,
+  Icon,
   LinkWrapper,
   usePublicQuery,
   useRoute,
@@ -131,7 +132,7 @@ export const AsideUserProfile = () => {
       <section className={styles.userProfile}>
         <header className={styles.header}>
           <section className={styles.avatar}>
-            <Avatar size="xxxxl" />
+            <Avatar size={120} />
           </section>
         </header>
 
@@ -164,9 +165,9 @@ export const AsideUserProfile = () => {
                 className={styles.avatar + ' ' + styles.clickable}
                 onClick={openEditProfileDialog}
               >
-                <Avatar size="xxxxl" user={user} inProfile />
+                <Avatar size={120} user={user} inProfile />
                 <div className={styles.mask}>
-                  <IconCamera24 color="white" size="xlM" />
+                  <Icon icon={IconCamera} color="white" size={40} />
                 </div>
               </section>
             )}
@@ -175,14 +176,14 @@ export const AsideUserProfile = () => {
         {isInUserPage && !isMe && (
           <section className={styles.avatar}>
             <LinkWrapper {...userProfilePath}>
-              <Avatar size="xxxxl" user={user} inProfile />
+              <Avatar size={120} user={user} inProfile />
             </LinkWrapper>
           </section>
         )}
         {!isInUserPage && (
           <LinkWrapper {...userProfilePath}>
             <section className={styles.avatar}>
-              <Avatar size="xxxll" user={user} inProfile />
+              <Avatar size={88} user={user} inProfile />
             </section>
           </LinkWrapper>
         )}
@@ -319,7 +320,7 @@ export const AsideUserProfile = () => {
           <Expandable
             content={user.info.description}
             color="grey"
-            size="sm"
+            size={14}
             spacingTop="base"
             collapseable={false}
             limit={8}

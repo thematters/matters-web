@@ -1,26 +1,21 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath, UtmParams } from '~/common/utils'
-import { LinkWrapper, LinkWrapperProps, Translate } from '~/components'
+import { LinkWrapper, LinkWrapperProps } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-export type ArticleDigestTitleTextSize =
-  | 'xs'
-  | 'smS'
-  | 'sm'
-  | 'mdS'
-  | 'md'
-  | 'xm'
-  | 'xl'
-export type ArticleDigestTitleTextWeight = 'normal' | 'md' | 'semibold'
+export type ArticleDigestTitleTextSize = 12 | 13 | 14 | 15 | 16 | 18 | 24
+export type ArticleDigestTitleTextWeight = 'normal' | 'medium' | 'semibold'
 export type ArticleDigestTitleIs = 'h2' | 'h3'
 
 type ArticleDigestTitleProps = {
   article: ArticleDigestTitleArticleFragment
+  collectionId?: string
 
   textSize?: ArticleDigestTitleTextSize
   textWeight?: ArticleDigestTitleTextWeight
@@ -39,7 +34,7 @@ const fragments = {
       title
       articleState: state
       slug
-      mediaHash
+      shortHash
       author {
         id
         userName
@@ -50,9 +45,10 @@ const fragments = {
 
 export const ArticleDigestTitle = ({
   article,
+  collectionId,
 
-  textSize = 'md',
-  textWeight = 'md',
+  textSize = 16,
+  textWeight = 'medium',
   lineClamp = true,
   is = 'h2',
 
@@ -68,15 +64,23 @@ export const ArticleDigestTitle = ({
   const path = toPath({
     page: 'articleDetail',
     article,
+    collectionId,
     utm_source,
     utm_medium,
   })
   const isBanned = state === 'banned'
-  const title = isBanned ? <Translate id="articleBanned" /> : article.title
+  const title = isBanned ? (
+    <FormattedMessage
+      defaultMessage="The article has been archived due to violation of terms"
+      id="+GAaxB"
+    />
+  ) : (
+    article.title
+  )
   const titleClasses = classNames({
     [styles.title]: true,
-    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
-    [styles[`textWeight${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
+    [styles[`text${textSize}`]]: !!textSize,
+    [styles[`font${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
     [styles.lineClamp]: !!lineClamp,
     [styles[`lineClampLine${lineClamp}`]]: lineClamp === 1 || lineClamp === 3,
   })

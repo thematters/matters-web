@@ -1,24 +1,31 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ERROR_CODES, SEND_CODE_COUNTDOWN } from '~/common/enums'
 import {
   parseFormSubmitErrors,
-  translate,
   validateCode,
   validateEmail,
 } from '~/common/utils'
 import {
+  Button,
   Dialog,
   Form,
-  LanguageContext,
-  Translate,
+  ReCaptchaContext,
+  ResendCodeButton,
+  useCountdown,
   useMutation,
-  VerificationSendCodeButton,
 } from '~/components'
+import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import { CONFIRM_CODE } from '~/components/GQL/mutations/verificationCode'
-import { ConfirmVerificationCodeMutation } from '~/gql/graphql'
+import {
+  ConfirmVerificationCodeMutation,
+  SendVerificationCodeMutation,
+} from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 interface FormProps {
   defaultEmail: string
@@ -38,14 +45,21 @@ const Request: React.FC<FormProps> = ({
   closeDialog,
   back,
 }) => {
+  const intl = useIntl()
+  const { token, refreshToken } = useContext(ReCaptchaContext)
+
+  const [send, { loading: sendingCode }] =
+    useMutation<SendVerificationCodeMutation>(SEND_CODE)
+  const [sent, setSent] = useState(false)
+
+  const { countdown, setCountdown } = useCountdown(0)
+
   const [confirmCode] = useMutation<ConfirmVerificationCodeMutation>(
     CONFIRM_CODE,
     undefined,
     { showToast: false }
   )
 
-  const intl = useIntl()
-  const { lang } = useContext(LanguageContext)
   const formId = `payment-password-reset-request-form`
 
   const {
@@ -65,8 +79,8 @@ const Request: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ email, code }) =>
       _pickBy({
-        email: validateEmail(email, lang, { allowPlusSign: true }),
-        code: validateCode(code, lang),
+        email: validateEmail(email, intl, { allowPlusSign: true }),
+        code: validateCode(code, intl),
       }),
     onSubmit: async ({ email, code }, { setFieldError, setSubmitting }) => {
       try {
@@ -86,7 +100,21 @@ const Request: React.FC<FormProps> = ({
         const [messages, codes] = parseFormSubmitErrors(error as any)
         codes.forEach((code) => {
           if (code.includes('CODE_')) {
-            setFieldError('code', intl.formatMessage(messages[code]))
+            let m = intl.formatMessage(messages[code])
+            if (code === ERROR_CODES.CODE_INVALID) {
+              m = intl.formatMessage({
+                defaultMessage: 'Incorrect verification code',
+                id: 'R410ei',
+                description: 'CODE_INVALID',
+              })
+            } else if (code === ERROR_CODES.CODE_EXPIRED) {
+              m = intl.formatMessage({
+                defaultMessage: 'Verification code has expired, please resend.',
+                id: 'v5MunN',
+                description: 'CODE_EXPIRED',
+              })
+            }
+            setFieldError('code', m)
           } else {
             setFieldError('email', intl.formatMessage(messages[code]))
           }
@@ -95,17 +123,34 @@ const Request: React.FC<FormProps> = ({
     },
   })
 
+  const sendCode = async () => {
+    // reCaptcha check is disabled for now
+    await send({
+      variables: {
+        input: { email: values.email, type: 'payment_password_reset', token },
+      },
+    })
+
+    setCountdown(SEND_CODE_COUNTDOWN)
+    setSent(true)
+
+    if (refreshToken) {
+      refreshToken()
+    }
+  }
+
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
       <Form.Input
-        label={<Translate id="email" />}
         hasLabel
         type="email"
         name="email"
         required
-        placeholder={translate({
-          id: 'enterEmail',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Email',
+          description:
+            'src/components/Forms/PaymentForm/ResetPassword/Request.tsx',
+          id: 'rdxgu4',
         })}
         value={values.email}
         error={touched.email && errors.email}
@@ -116,22 +161,26 @@ const Request: React.FC<FormProps> = ({
       />
 
       <Form.Input
-        label={<Translate id="verificationCode" />}
         hasLabel
         type="text"
         name="code"
         required
-        placeholder={translate({ id: 'enterVerificationCode', lang })}
-        hint={translate({ id: 'hintVerificationCode', lang })}
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter verification code',
+          id: 'NSyuEP',
+        })}
+        hintAlign="center"
         value={values.code}
         error={touched.code && errors.code}
         onBlur={handleBlur}
         onChange={handleChange}
-        extraButton={
-          <VerificationSendCodeButton
-            email={values.email}
-            type="payment_password_reset"
-            disabled={!!errors.email}
+        rightButton={
+          <ResendCodeButton
+            showCountDown={sent}
+            showResendButton={sent}
+            disabled={sendingCode || countdown !== 0}
+            sendCode={sendCode}
+            countdown={countdown}
           />
         }
       />
@@ -143,7 +192,7 @@ const Request: React.FC<FormProps> = ({
       text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
       type="submit"
       form={formId}
-      disabled={isSubmitting}
+      disabled={isSubmitting || values.code === '' || values.email === ''}
       loading={isSubmitting}
     />
   )
@@ -169,7 +218,35 @@ const Request: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>{InnerForm}</Dialog.Content>
+      <Dialog.Content>
+        <section>{InnerForm}</section>
+
+        <section className={styles.footer}>
+          {sent && (
+            <section className={styles.sent}>
+              <FormattedMessage
+                defaultMessage="Verification code has been sent via email and is valid for 20 minutes."
+                id="utMaM0"
+                description="src/components/Forms/Verification/SendCodeButton/index.tsx"
+              />
+            </section>
+          )}
+          {!sent && (
+            <Button
+              disabled={!values.email || countdown !== 0}
+              onClick={sendCode}
+              textColor="green"
+              textActiveColor="greenDark"
+            >
+              <FormattedMessage
+                defaultMessage="Send the verification code"
+                description="src/components/Forms/Verification/SendCodeButton/index.tsx"
+                id="ksvOGO"
+              />
+            </Button>
+          )}
+        </section>
+      </Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

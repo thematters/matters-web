@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
+import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { ERROR_CODES } from '~/common/enums'
-import { IconPin20, IconUnPin20, Menu, toast, useMutation } from '~/components'
+import { Icon, Menu, toast, useMutation } from '~/components'
 import { updateUserArticles } from '~/components/GQL'
 import { PinButtonArticleFragment, TogglePinMutation } from '~/gql/graphql'
 
@@ -94,7 +96,11 @@ const PinButton = ({ article }: PinButtonProps) => {
         )
       }
       icon={
-        article.pinned ? <IconUnPin20 size="mdS" /> : <IconPin20 size="mdS" />
+        article.pinned ? (
+          <Icon icon={IconUnpin} size={20} />
+        ) : (
+          <Icon icon={IconPin} size={20} />
+        )
       }
       onClick={togglePin}
     />

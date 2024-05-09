@@ -1,30 +1,49 @@
 :root {
+  /* logo */
   --color-matters-gold: #c0a46b;
+  --color-matters-gold-hover: #ab8840;
+  --color-matters-gold-press: #8a6b2c;
+  --color-matters-gold-lighter: #faf7f0; /* FIXME: undocumented */
+  --color-matters-gold-light: #fff4dc; /* FIXME: undocumented */
+  --color-yellow-lighter: #faf7f0;
   --color-matters-green: #0d6763;
-  --color-matters-green-dark: #0a524f;
+  --color-matters-green-hover: #0a524f;
+  --color-matters-green-press: #074643;
+  --color-green-lighter: #f2faf7;
+
+  /* grey scale */
   --color-black: #333;
-  --color-grey-darkest: #505050;
   --color-grey-darker: #808080;
   --color-grey-dark: #999c9d;
   --color-grey: #b3b3b3;
+  --color-grey-darkest: #505050; /* FIXME: undocumented */
   --color-grey-light: #ddd;
   --color-grey-lighter: #f7f7f7;
+  --color-grey-hover: #ededed;
   --color-white: #fff;
-  --color-white-light: #fff9;
-  --color-red-dark: #a04a34;
-  --color-red: #c85c41;
-  --color-red-lighter: #fae7e3;
-  --color-green-lighter: #f2faf7;
-  --color-yellow-lighter: #faf7f0;
-  --color-likecoin-green: #40bfa5;
-  --color-analytics-red: #c25050;
+  --color-white-light: #fff9; /* FIXME: undocumented */
 
-  /* hover */
-  --color-matters-gold-active: #b69c66;
-  --color-grey-lighter-active: #ededed;
+  /* function */
+  --color-positive-green: #5c9969;
+  --color-warn-yellow: #dba34f;
+  --color-negative-red: #c85c41;
+  --color-negative-red-2: #a04a34;
+  --color-heart-red: #e95656;
+  --color-red-lighter: #fae7e3; /* FIXME: undocumented */
+  --color-analytics-red: #c25050; /* FIXME: undocumented */
+
+  /* others */
+  --color-noir: #000;
+  --color-likecoin: #40bfa5;
+  --color-debug: #f00;
 
   /* line */
+
+  /* FIXME: undocumented */
   --color-line-grey-light: rgb(0 0 0 / 8%);
   --color-line-grey: rgb(0 0 0 / 16%);
   --color-line-grey-dark: rgb(0 0 0 / 24%);
+  --color-line-matters-green-light: #0d676366;
+  --color-line-matters-gold-light: rgb(192 164 107 / 40%);
+  --color-line-matters-golod-lighter: rgb(192 164 107 / 20%);
 }

@@ -1,8 +1,9 @@
 import React from 'react'
 
+import { ReactComponent as IconCircle } from '@/public/static/icons/24px/circle.svg'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { IconCircle16, LinkWrapper, TextIcon } from '~/components'
+import { Icon, LinkWrapper, TextIcon } from '~/components'
 import { DigestPlainCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -27,11 +28,11 @@ const CircleDigestPlain = ({ circle, onClick }: CircleDigestPlainProps) => {
       testId={TEST_ID.DIGRET_CIRCLE_PLAIN}
     >
       <TextIcon
-        icon={<IconCircle16 size="xs" />}
+        icon={<Icon icon={IconCircle} size={12} />}
         color="green"
-        spacing="xxtight"
+        spacing={4}
         weight="normal"
-        size="xs"
+        size={12}
       >
         <span className={styles.name}>{circle.displayName}</span>
       </TextIcon>

@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -81,7 +81,7 @@ const MembersDialogContent = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

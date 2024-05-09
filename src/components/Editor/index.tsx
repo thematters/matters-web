@@ -13,6 +13,7 @@ export type SetCollectionProps = {
     articles: ArticleDigestDropdownArticleFragment[]
   ) => Promise<any>
   collectionSaving?: boolean
+  nodeExclude?: string
 }
 
 export type SetTagsProps = {
@@ -30,4 +31,9 @@ export type SetPublishISCNProps = {
 export type SetResponseProps = {
   canComment: boolean | null
   toggleComment: (canComment: boolean) => void
+}
+
+export type SetVersionDescriptionProps = {
+  versionDescription: string
+  editVersionDescription: (description: string) => any
 }

@@ -1,16 +1,10 @@
 import { useApolloClient } from '@apollo/react-hooks'
-import {
-  EditorContent,
-  useArticleEdtor,
-  useEditArticleEdtor,
-} from '@matters/matters-editor'
+import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
-import { translate } from '~/common/utils'
-import { LanguageContext } from '~/components'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
@@ -40,7 +34,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   update,
   upload,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const client = useApolloClient()
 
   const { content, publishState, summary, summaryCustomized, title } = draft
@@ -54,11 +48,9 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
 
   const editor = useArticleEdtor({
     editable: !isReadOnly,
-    placeholder: translate({
-      zh_hant: '請輸入正文…',
-      zh_hans: '请输入正文…',
-      en: 'Enter content…',
-      lang,
+    placeholder: intl.formatMessage({
+      defaultMessage: 'Enter content…',
+      id: 'yCTXXb',
     }),
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
@@ -69,11 +61,9 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     extensions: [
       FigureEmbedLinkInput,
       FigurePlaceholder.configure({
-        placeholder: translate({
-          zh_hant: '添加說明文字…',
-          zh_hans: '添加说明文字…',
-          en: 'Add caption…',
-          lang,
+        placeholder: intl.formatMessage({
+          defaultMessage: 'Add caption…',
+          id: 'Uq6tfM',
         }),
       }),
       CaptionLimit.configure({
@@ -99,67 +89,6 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
 
       {editor && <BubbleMenu editor={editor} />}
       {editor && <FloatingMenu editor={editor} upload={upload} />}
-
-      <EditorContent editor={editor} />
-    </div>
-  )
-}
-
-export const EditArticleEditor: React.FC<ArticleEditorProps> = ({
-  draft,
-
-  update,
-  upload,
-}) => {
-  const { lang } = useContext(LanguageContext)
-  const client = useApolloClient()
-
-  const { content, publishState, summary, summaryCustomized, title } = draft
-  const isPending = publishState === 'pending'
-  const isReadOnly = isPending
-
-  const editor = useEditArticleEdtor({
-    editable: !isReadOnly,
-    placeholder: translate({
-      zh_hant: '請輸入正文…',
-      zh_hans: '请输入正文…',
-      en: 'Enter content…',
-      lang,
-    }),
-    content: content || '',
-    onUpdate: async ({ editor, transaction }) => {
-      const content = editor.getHTML()
-      update({ content })
-    },
-    mentionSuggestion: makeMentionSuggestion({ client }),
-    extensions: [
-      FigureEmbedLinkInput,
-      FigurePlaceholder.configure({
-        placeholder: translate({
-          zh_hant: '添加說明文字…',
-          zh_hans: '添加说明文字…',
-          en: 'Add caption…',
-          lang,
-        }),
-      }),
-    ],
-  })
-
-  return (
-    <div
-      className={classNames({
-        [styles.articleEditor]: true,
-        [styles.revisedMode]: true,
-      })}
-    >
-      <EditorTitle defaultValue={title || ''} readOnly update={update} />
-
-      <EditorSummary
-        defaultValue={summaryCustomized && summary ? summary : ''}
-        readOnly
-        update={update}
-        enable
-      />
 
       <EditorContent editor={editor} />
     </div>

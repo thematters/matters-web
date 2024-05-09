@@ -1,11 +1,12 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { BREAKPOINTS } from '~/common/enums'
 import {
   Button,
   Dialog,
-  IconClose20,
+  Icon,
   useDialogSwitch,
   useMediaQuery,
 } from '~/components'
@@ -70,7 +71,7 @@ export const BaseBadgesDialog = ({
                   textColor="greyDarker"
                   textActiveColor="black"
                 >
-                  <IconClose20 size="mdS" />
+                  <Icon icon={IconTimes} size={20} />
                 </Button>
               }
             />

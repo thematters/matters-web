@@ -1,12 +1,12 @@
 .u-content-comment {
-  line-height: 1.6;
+  line-height: 1.75;
 
   & > * {
     margin: 0;
   }
 
   & > * + * {
-    margin: var(--spacing-base) 0;
+    margin: var(--sp8) 0;
   }
 
   & > *:last-child {
@@ -43,9 +43,9 @@
     text-align: center;
 
     & figcaption {
-      padding: 0 var(--spacing-base);
-      margin-top: var(--spacing-x-tight);
-      font-size: var(--font-size-sm-s);
+      padding: 0 var(--sp16);
+      margin-top: var(--sp8);
+      font-size: var(--text13);
       color: var(--color-grey);
     }
   }
@@ -54,7 +54,8 @@
    ========================================================================== */
   & blockquote {
     position: relative;
-    padding: 0 var(--spacing-base);
+    padding: 0 var(--sp16);
+    color: var(--color-grey-darker);
 
     &::before {
       position: absolute;
@@ -63,7 +64,7 @@
       width: 4px;
       height: 100%;
       content: '';
-      background: var(--color-matters-gold);
+      background: var(--color-grey-light);
     }
   }
 
@@ -71,12 +72,12 @@
    ========================================================================== */
   & ul,
   & ol {
-    padding-left: var(--spacing-loose);
+    padding-left: var(--sp24);
   }
 
   & li {
-    padding-left: var(--spacing-x-tight);
-    margin: var(--spacing-x-tight) 0;
+    padding-left: var(--sp8);
+    margin: var(--sp8) 0;
   }
 
   & ul {
@@ -119,21 +120,19 @@
   & h4,
   & h5,
   & h6 {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
     line-height: var(--line-height-article-heading);
   }
 
   /* Link
    ========================================================================== */
   & a {
-    padding-bottom: 2px;
     color: var(--color-matters-green);
-    border-bottom: 1px solid currentcolor;
 
     &:hover,
     &:active,
     &:focus {
-      color: var(--color-matters-green-dark);
+      color: var(--color-matters-green-hover);
     }
   }
 
@@ -150,7 +149,7 @@
     display: block;
     width: 10rem;
     height: 0.125rem;
-    margin: var(--spacing-loose) auto;
+    margin: var(--sp24) auto;
     border: 0;
     border-top: 1px solid var(--color-line-grey-dark);
     border-bottom: 1px solid var(--color-line-grey-dark);

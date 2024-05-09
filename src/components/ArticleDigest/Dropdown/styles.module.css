@@ -3,7 +3,7 @@
   text-align: left;
 
   &.hasExtraButton {
-    padding-right: calc(1rem + var(--spacing-xx-tight));
+    padding-right: calc(1rem + var(--sp4));
 
     &:hover,
     &:focus {
@@ -35,5 +35,5 @@
 }
 
 .footer {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
 }

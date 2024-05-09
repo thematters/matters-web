@@ -18,7 +18,7 @@ import {
 } from '~/gql/graphql'
 
 import AppreciationButton from '../AppreciationButton'
-import CommentBar from './CommentBar'
+import CommentButton from './CommentButton'
 import DonationButton from './DonationButton'
 import styles from './styles.module.css'
 
@@ -43,23 +43,23 @@ const fragments = {
         ...DropdownActionsArticle
         ...DonationButtonArticle
         ...AppreciationButtonArticlePublic
-        ...CommentBarArticlePublic
+        ...CommentButtonArticlePublic
       }
       ${DonationButton.fragments.article}
       ${DropdownActions.fragments.article}
       ${AppreciationButton.fragments.article.public}
-      ${CommentBar.fragments.article.public}
+      ${CommentButton.fragments.article.public}
     `,
     private: gql`
       fragment ToolbarArticlePrivate on Article {
         id
         ...BookmarkArticlePrivate
         ...AppreciationButtonArticlePrivate
-        ...CommentBarArticlePrivate
+        ...CommentButtonArticlePrivate
       }
       ${AppreciationButton.fragments.article.private}
       ${BookmarkButton.fragments.article.private}
-      ${CommentBar.fragments.article.private}
+      ${CommentButton.fragments.article.private}
     `,
   },
 }
@@ -80,7 +80,7 @@ const Toolbar = ({
       : path.href
 
   const dropdonwActionsProps: DropdownActionsControls = {
-    size: 'mdS',
+    size: 20,
     inCard: false,
     sharePath,
     hasExtend: !lock,
@@ -101,24 +101,20 @@ const Toolbar = ({
           />
         </ReCaptchaProvider>
 
-        <DonationButton
-          article={article}
-          disabled={lock}
-          articleDetail={articleDetails}
-        />
+        <DonationButton article={article} articleDetail={articleDetails} />
 
-        <section className={styles.commentBar}>
-          <CommentBar
+        <section className={styles.CommentButton}>
+          <CommentButton
             article={article}
             disabled={lock || !article.canComment}
           />
         </section>
 
-        <BookmarkButton article={article} size="mdS" inCard={false} />
+        <BookmarkButton article={article} iconSize={20} inCard={false} />
 
         <Media greaterThan="sm">
           <ShareButton
-            iconSize="mdS"
+            iconSize={20}
             inCard={false}
             // title={makeTitle(article.title)}
             path={sharePath}

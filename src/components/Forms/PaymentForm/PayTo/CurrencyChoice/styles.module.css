@@ -5,8 +5,8 @@
   & .header {
     @mixin flex-center-start;
 
-    margin-bottom: var(--spacing-base);
-    font-size: var(--font-size-md-s);
+    margin-bottom: var(--sp16);
+    font-size: var(--text15);
     line-height: 1.5rem;
 
     & > * {
@@ -17,7 +17,7 @@
       @mixin inline-flex-center-all;
 
       flex-shrink: 1;
-      margin: 0 var(--spacing-x-tight);
+      margin: 0 var(--sp8);
     }
   }
 
@@ -25,8 +25,8 @@
     @mixin flex-center-space-between;
     @mixin transition;
 
-    padding: var(--spacing-base);
-    margin-bottom: var(--spacing-base);
+    padding: var(--sp16);
+    margin-bottom: var(--sp16);
     background: var(--color-white);
     border: 1px solid var(--color-line-grey-light);
     border-radius: 0.5rem;

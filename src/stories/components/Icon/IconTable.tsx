@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { IconLogo, IconProps, Tooltip } from '~/components'
+import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
+import { Icon, IconProps, Tooltip } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -22,7 +23,11 @@ export default function IconTable(props: IconProps) {
       {/* Logo */}
       <Tooltip content={'IconLogo'}>
         <span>
-          <IconLogo {...props} />
+          <Icon
+            icon={IconLogo}
+            style={{ width: 120, height: 24.75 }}
+            {...props}
+          />
         </span>
       </Tooltip>
 

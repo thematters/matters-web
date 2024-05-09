@@ -1,33 +1,33 @@
 .container {
   @mixin flex-start-space-between;
 
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 }
 
 .name {
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
   line-height: 1rem;
 
-  &.sm {
-    font-size: var(--font-size-sm);
+  &.text14 {
+    font-size: var(--text14);
   }
 
-  &.md {
-    font-size: var(--font-size-md);
+  &.text16 {
+    font-size: var(--text16);
   }
 }
 
 [aria-selected='true'] .name {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
 }
 
 [aria-selected='false'] .name {
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
 }
 
 .subtitle {
-  margin-top: var(--spacing-xx-tight);
-  font-size: var(--font-size-xs);
+  margin-top: var(--sp4);
+  font-size: var(--text12);
   line-height: 1.125rem;
   color: var(--color-grey);
 }

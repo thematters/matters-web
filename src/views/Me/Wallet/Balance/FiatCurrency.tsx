@@ -2,16 +2,17 @@ import classNames from 'classnames'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconFiatCurrency } from '@/public/static/icons/24px/fiat-currency.svg'
+import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
+import { ReactComponent as IconWithdraw } from '@/public/static/icons/24px/withdraw.svg'
 import { analytics, formatAmount } from '~/common/utils'
 import {
   AddCreditDialog,
   BindEmailHintDialog,
   CurrencyFormatter,
   Dropdown,
-  IconArrowRight16,
-  IconFiatCurrency40,
-  IconPayout24,
-  IconWallet24,
+  Icon,
   Menu,
   PayoutDialog,
   TextIcon,
@@ -44,7 +45,7 @@ const TopUpItem = ({
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Top Up" id="dTOtPO" />}
-      icon={<IconWallet24 size="mdS" />}
+      icon={<Icon icon={IconWallet} size={20} />}
       onClick={() => {
         if (hasEmail) {
           openDialog()
@@ -65,7 +66,7 @@ const PayoutItem = ({
     return (
       <Menu.Item
         text={<FormattedMessage defaultMessage="Withdraw" id="PXAur5" />}
-        icon={<IconPayout24 size="mdS" />}
+        icon={<Icon icon={IconWithdraw} size={20} />}
         onClick={openDialog}
       />
     )
@@ -75,9 +76,9 @@ const PayoutItem = ({
     <Menu.Item>
       <section className={styles.payoutItem}>
         <TextIcon
-          icon={<IconPayout24 size="mdS" color="grey" />}
-          size="md"
-          spacing="tight"
+          icon={<Icon icon={IconWithdraw} size={20} color="grey" />}
+          size={16}
+          spacing={12}
           color="grey"
         >
           <FormattedMessage defaultMessage="Withdraw" id="PXAur5" />
@@ -152,9 +153,9 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                         ref={ref}
                       >
                         <TextIcon
-                          icon={<IconFiatCurrency40 size="xlM" />}
-                          size="md"
-                          spacing="xtight"
+                          icon={<Icon icon={IconFiatCurrency} size={40} />}
+                          size={16}
+                          spacing={8}
                         >
                           <Translate
                             zh_hant="法幣"
@@ -163,9 +164,9 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                           />
                         </TextIcon>
                         <TextIcon
-                          icon={<IconArrowRight16 />}
-                          spacing="xtight"
-                          textPlacement="left"
+                          icon={<Icon icon={IconRight} />}
+                          spacing={8}
+                          placement="left"
                         >
                           <CurrencyFormatter
                             value={formatAmount(balanceHKD)}

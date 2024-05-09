@@ -15,7 +15,7 @@ import {
   Head,
   Layout,
   Media,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   toast,
   useCreateDraft,
@@ -52,7 +52,7 @@ const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => <SpinnerBlock />,
   }
 )
 
@@ -131,7 +131,7 @@ const DraftDetail = () => {
   if ((loading && !initNew) || circleLoading) {
     return (
       <EmptyLayout>
-        <Spinner />
+        <SpinnerBlock />
       </EmptyLayout>
     )
   }

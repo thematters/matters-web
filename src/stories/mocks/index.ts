@@ -118,6 +118,7 @@ export const MOCK_ARTILCE = {
   id: 'QXJ0aWNsZTox', // Article:1
   title: '中國四川：挑戰世界最危險的公路之一 川藏公路絕美風光',
   slug: 'slug',
+  shortHash: 'r5ade0on7x1g',
   mediaHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   dataHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   articleState: 'active' as any,
@@ -132,7 +133,7 @@ export const MOCK_ARTILCE = {
     __typename: 'AppreciationConnection' as any,
     totalCount: 0,
   },
-  iscnId: '',
+  iscnId: 'isz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZE',
   pinned: false,
   readTime: 1234.5,
   tags: [],
@@ -142,12 +143,12 @@ export const MOCK_ARTILCE = {
   appreciationsReceivedTotal: 1000,
   commentCount: 9999,
   donationCount: 234,
-  transactionsReceivedBy: {
-    __typename: 'AppreciationConnection' as any,
+  donations: {
+    __typename: 'ArticleDonationConnection' as any,
     totalCount: 190,
   },
   donationsDialog: {
-    __typename: 'AppreciationConnection' as any,
+    __typename: 'ArticleDonationConnection' as any,
     totalCount: 190,
   },
   subscribed: false,
@@ -155,6 +156,7 @@ export const MOCK_ARTILCE = {
     __typename: 'ArticleAccess' as any,
     type: 'paywall' as any,
     circle: MOCK_CIRCLE,
+    secret: '6NMhDB51cCvNWa1GMS7LUkZEP2a',
   },
   drafts: [
     {

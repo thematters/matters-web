@@ -1,0 +1,13 @@
+.count {
+  padding-left: var(--sp4);
+  font-weight: var(--font-semibold);
+  color: var(--color-grey);
+}
+
+.smSpacing {
+  padding-bottom: var(--sp8);
+
+  @media (--sm-up) {
+    padding-bottom: 0;
+  }
+}

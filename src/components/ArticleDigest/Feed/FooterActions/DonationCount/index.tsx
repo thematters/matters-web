@@ -1,7 +1,8 @@
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
 import { numAbbr } from '~/common/utils'
-import { IconDonate18, TextIcon } from '~/components'
+import { Icon, TextIcon } from '~/components'
 import { ActionsDonationCountArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -12,24 +13,23 @@ interface DonationCountProps {
 
 const DonationCount = ({ article }: DonationCountProps) => {
   const intl = useIntl()
+  const count = article.donations.totalCount
 
-  if (!article.transactionsReceivedBy.totalCount) {
+  if (!count) {
     return null
   }
 
   return (
     <TextIcon
-      icon={<IconDonate18 size="mdXS" />}
-      size="xs"
+      icon={<Icon icon={IconMoney} size={18} />}
+      size={12}
       color="grey"
       aria-label={intl.formatMessage({
         defaultMessage: 'Donation count',
         id: 'DP3yqI',
       })}
     >
-      {article.transactionsReceivedBy.totalCount > 0
-        ? numAbbr(article.transactionsReceivedBy.totalCount)
-        : undefined}
+      {count > 0 ? numAbbr(count) : undefined}
     </TextIcon>
   )
 }

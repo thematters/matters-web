@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  gap: var(--sp4);
+  align-items: flex-start;
+  margin-top: var(--sp16);
+  margin-bottom: var(--sp16);
+
+  & > a {
+    flex-grow: 1;
+  }
+
+  & header {
+    font-size: var(--text14);
+    line-height: 1.375rem;
+  }
+}

@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { capitalizeFirstLetter, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
@@ -32,15 +32,15 @@ export type CircleDigestRichProps = {
   circle: DigestRichCirclePublicFragment &
     Partial<DigestRichCirclePrivateFragment>
   avatarSize?: CircleAvatarSize
-  textSize?: 'mdS' | 'xm'
+  textSize?: 15 | 18
 } & CircleDigestRichControls &
   CardProps
 
 const Rich = ({
   circle,
 
-  avatarSize = 'xxl',
-  textSize = 'xm',
+  avatarSize = 56,
+  textSize = 18,
 
   hasOwner = true,
   hasFooter,
@@ -63,13 +63,13 @@ const Rich = ({
   })
   const titleClasses = classNames({
     [styles.title]: true,
-    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
+    [styles[`text${textSize}`]]: !!textSize,
   })
 
   return (
     <Card
       href={disabled ? undefined : path.href}
-      spacing={['base', 'base']}
+      spacing={[16, 16]}
       {...cardProps}
       onClick={disabled ? undefined : cardProps.onClick}
       testId={TEST_ID.DIGEST_CIRCLE_RICH}
@@ -93,8 +93,8 @@ const Rich = ({
             {hasOwner && (
               <UserDigest.Mini
                 user={owner}
-                avatarSize="sm"
-                textSize="sm"
+                avatarSize={20}
+                textSize={14}
                 nameColor="greyDarker"
                 hasAvatar
                 hasDisplayName

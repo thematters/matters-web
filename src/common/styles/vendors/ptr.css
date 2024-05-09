@@ -17,7 +17,7 @@
 
 .ptr--box {
   flex-basis: 100%;
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 }
 
 .ptr--pull {

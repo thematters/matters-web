@@ -1,8 +1,9 @@
-import { Empty, IconDonate24, Translate } from '~/components'
+import { ReactComponent as IconDonate } from '@/public/static/icons/24px/donate.svg'
+import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyTransactionSupport = () => (
   <Empty
-    icon={<IconDonate24 size="xxl" />}
+    icon={<Icon icon={IconDonate} size={64} />}
     description={
       <Translate
         zh_hant="還沒有支持記錄"

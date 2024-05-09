@@ -4,15 +4,15 @@
   height: 2rem;
   margin-right: auto;
   margin-left: auto;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 2rem;
 
   & input[type='search'] {
     @mixin transition;
 
     height: 100%;
-    padding: 0 var(--spacing-base) 0 2rem;
-    font-size: var(--font-size-sm);
+    padding: 0 var(--sp16) 0 calc(1.375rem + var(--sp8) * 2);
+    font-size: var(--text14);
     color: var(--color-black);
     text-overflow: ellipsis;
     background: white;
@@ -34,7 +34,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 2rem;
+    width: calc(1.375rem + var(--sp8) * 2);
     height: 100%;
   }
 
@@ -42,7 +42,7 @@
     position: absolute;
     top: 0;
     right: 0;
-    width: 2rem;
+    width: calc(1.375rem + var(--sp8) * 2);
     height: 100%;
   }
 }

@@ -5,15 +5,15 @@
     color: var(--color-grey);
 
     & button {
-      margin: 0 0 0 var(--spacing-tight);
+      margin: 0 0 0 var(--sp12);
     }
   }
 }
 
-.sizeSm {
-  font-size: var(--font-size-sm);
+.size14 {
+  font-size: var(--text14);
 }
 
-.sizeMdS {
-  font-size: var(--font-size-md-s);
+.size15 {
+  font-size: var(--text15);
 }

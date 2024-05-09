@@ -1,0 +1,22 @@
+& .container {
+  display: flex;
+  align-items: center;
+  height: 1.875rem;
+  padding: var(--sp4) var(--sp8);
+  line-height: 1.375rem;
+  background-color: var(--color-matters-gold-light);
+  border-radius: 0.5rem;
+
+  & .balance {
+    font-weight: var(--font-medium);
+  }
+
+  & .topup {
+    @mixin border-left-grey;
+
+    padding-left: var(--sp8);
+    margin-bottom: var(--sp2);
+    margin-left: var(--sp8);
+    border-left-color: var(--color-line-matters-golod-lighter);
+  }
+}

@@ -1,8 +1,9 @@
-import { Empty, IconWallet24, Translate } from '~/components'
+import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
+import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyTransaction = () => (
   <Empty
-    icon={<IconWallet24 size="xxl" />}
+    icon={<Icon icon={IconWallet} size={64} />}
     description={
       <Translate
         zh_hant="還沒有交易記錄"

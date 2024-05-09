@@ -1,8 +1,8 @@
 .container {
-  padding: var(--spacing-base) 0 0;
+  padding: var(--sp16) 0 0;
 
   @media (--sm-up) {
-    padding: var(--spacing-x-loose) 0 var(--spacing-xx-loose);
+    padding: var(--sp32) 0 var(--sp40);
   }
 }
 
@@ -15,5 +15,5 @@
 }
 
 .title {
-  margin: var(--spacing-base) 0;
+  margin: var(--sp16) 0;
 }

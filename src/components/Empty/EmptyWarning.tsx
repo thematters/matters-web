@@ -1,9 +1,10 @@
-import { Empty, IconEmptyWarning72 } from '~/components'
+import { ReactComponent as IconWarn } from '@/public/static/icons/24px/warn.svg'
+import { Empty, Icon } from '~/components'
 
 export const EmptyWarning = ({
   description,
 }: {
   description: React.ReactNode
 }) => (
-  <Empty icon={<IconEmptyWarning72 size="xxl" />} description={description} />
+  <Empty icon={<Icon icon={IconWarn} size={64} />} description={description} />
 )

@@ -1,7 +1,7 @@
 .footer {
   @mixin feed-footer-actions;
 
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
 
   & .left {
     & .count {

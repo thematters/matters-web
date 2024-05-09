@@ -1,12 +1,5 @@
 .license {
-  margin: var(--spacing-base) 0;
-  text-align: center;
-}
-
-.icons {
-  display: inline-flex;
-
-  & * + * {
-    margin-left: var(--spacing-x-tight);
-  }
+  font-size: var(--text12);
+  line-height: 1.5;
+  color: var(--color-grey-dark);
 }

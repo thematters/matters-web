@@ -6,7 +6,7 @@ import {
   Head,
   Layout,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   Switch,
   TableView,
   useMutation,
@@ -79,7 +79,7 @@ const BaseNotificationSettings = () => {
   const id = data?.viewer?.id
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (!id || !settings) {

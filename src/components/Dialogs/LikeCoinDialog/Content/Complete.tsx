@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { redirectToTarget } from '~/common/utils'
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 
 const Complete: React.FC = () => {
   return (
@@ -13,10 +13,9 @@ const Complete: React.FC = () => {
       <Dialog.Content>
         <Dialog.Content.Message>
           <p>
-            <Translate
-              zh_hant="你的專屬 Liker ID 已就位！"
-              zh_hans="你的专属 Liker ID 已就位！"
-              en="Your Liker ID is ready!"
+            <FormattedMessage
+              defaultMessage="Your Liker ID is ready!"
+              id="OKcHPP"
             />
           </p>
         </Dialog.Content.Message>

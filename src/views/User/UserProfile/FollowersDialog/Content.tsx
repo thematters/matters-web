@@ -7,7 +7,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Translate,
   usePublicQuery,
   useRoute,
@@ -81,7 +81,7 @@ const FollowersDialogContent = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {
@@ -124,7 +124,7 @@ const FollowersDialogContent = () => {
                     id: node.id,
                   })
                 }
-                spacing={['tight', 'base']}
+                spacing={[12, 16]}
                 hasFollow={false}
               />
             </List.Item>

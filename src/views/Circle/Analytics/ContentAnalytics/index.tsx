@@ -8,7 +8,7 @@ import {
   EmptyAnalytics,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   useRoute,
 } from '~/components'
 import {
@@ -61,7 +61,7 @@ const Feed: React.FC<FeedProps> = ({ type }) => {
   ) as FeedContent[]
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

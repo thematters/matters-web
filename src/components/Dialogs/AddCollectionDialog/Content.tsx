@@ -11,7 +11,6 @@ import {
   CollectionDigestFeed,
   Dialog,
   Form,
-  LanguageContext,
   useMutation,
   useRoute,
   ViewerContext,
@@ -46,6 +45,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
   onUpdate,
   gotoDetailPage,
 }) => {
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
 
   const [create] = useMutation<CreateCollectionMutation>(
@@ -53,7 +53,6 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
     undefined,
     { showToast: false }
   )
-  const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
   const router = useRouter()
@@ -62,7 +61,6 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
 
   const formId = 'edit-new-collection-form'
 
-  const intl = useIntl()
   const {
     values,
     errors,
@@ -79,7 +77,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ title }) =>
       _pickBy({
-        title: validateCollectionTitle(title, lang),
+        title: validateCollectionTitle(title, intl),
       }),
     onSubmit: async ({ title }, { setSubmitting, setFieldError }) => {
       try {

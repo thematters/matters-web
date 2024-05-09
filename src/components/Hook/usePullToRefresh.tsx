@@ -3,7 +3,7 @@ import ReactDOMServer from 'react-dom/server'
 
 import { ReactComponent as IconPullToRefresh } from '@/public/static/icons/24px/pull-to-refresh.svg'
 import { analytics, sleep } from '~/common/utils'
-import { IconSpinner16, withIcon } from '~/components'
+import { Spinner, withIcon } from '~/components'
 
 import { useEventListener } from './useEventListener'
 
@@ -57,11 +57,9 @@ const Register = (selector = 'body', timeout = PTR_TIMEOUT) => {
       },
       getStyles: () => ``, // remove default styles
       iconArrow: ReactDOMServer.renderToString(
-        withIcon(IconPullToRefresh)({ size: 'md' })
+        withIcon(IconPullToRefresh)({ size: 24 })
       ),
-      iconRefreshing: ReactDOMServer.renderToString(
-        <IconSpinner16 size="md" />
-      ),
+      iconRefreshing: ReactDOMServer.renderToString(<Spinner size={24} />),
     })
   }
 

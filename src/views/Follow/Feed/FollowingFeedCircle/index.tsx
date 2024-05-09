@@ -35,7 +35,7 @@ const FeedCircle = ({
 
       <Card
         href={path.href}
-        spacing={['base', 'base']}
+        spacing={[16, 16]}
         bgColor="greyLighter"
         borderRadius="xtight"
         {...rest}
@@ -50,7 +50,7 @@ const FeedCircle = ({
           {description && <p className={styles.description}>{description}</p>}
 
           <section className={styles.avatar}>
-            <CircleAvatar circle={circle} size="xl" />
+            <CircleAvatar circle={circle} size={48} />
           </section>
         </section>
       </Card>

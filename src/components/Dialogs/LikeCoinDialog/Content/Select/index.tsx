@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, TableView, Translate } from '~/components'
+import { Dialog, TableView } from '~/components'
 
 import Intro from './Intro'
 
@@ -22,17 +22,15 @@ const Select: React.FC<SelectProps> = ({ startBind, closeDialog }) => {
         <TableView spacingX={0}>
           <TableView.Cell
             title={
-              <Translate
-                zh_hant="綁定現有 Liker ID"
-                zh_hans="绑定现有 Liker ID"
-                en="Connect your own Liker ID"
+              <FormattedMessage
+                defaultMessage="Connect your own Liker ID"
+                id="OxLyC5"
               />
             }
             subtitle={
-              <Translate
-                zh_hant="跳轉到 like.co 驗證已有 Liker ID"
-                zh_hans="跳转到 like.co 验证已有 Liker ID"
-                en="Verify your Liker ID through like.co"
+              <FormattedMessage
+                defaultMessage="Verify your Liker ID through like.co"
+                id="gzJEFb"
               />
             }
             onClick={() => {

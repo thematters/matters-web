@@ -14,7 +14,7 @@ import {
   Layout,
   List,
   SegmentedTabs,
-  Spinner,
+  SpinnerBlock,
   Transaction,
 } from '~/components'
 import { MeTransactionsQuery } from '~/gql/graphql'
@@ -84,7 +84,7 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
   )
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (!data?.viewer) {
