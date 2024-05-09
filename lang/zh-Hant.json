@@ -480,9 +480,6 @@
     "defaultMessage": "授權信息已失效，請重新登入",
     "description": "OAUTH_TOKEN_INVALID"
   },
-  "6OB9UA": {
-    "defaultMessage": "星球連線出現問題，請稍後看看"
-  },
   "6OBAOi": {
     "defaultMessage": "目前總訂閱人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1038,9 +1035,6 @@
   },
   "HBxXD/": {
     "defaultMessage": "版權聲明"
-  },
-  "HEpsZ3": {
-    "defaultMessage": "返回發現"
   },
   "HFVDeB": {
     "defaultMessage": "相關標籤",
@@ -1879,9 +1873,6 @@
   "XHMco9": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "XHcb2q": {
-    "defaultMessage": "飛船正在檢修中，請稍後看看"
   },
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"
@@ -2881,9 +2872,6 @@
   },
   "rbrahO": {
     "defaultMessage": "關閉"
-  },
-  "rdZi0V": {
-    "defaultMessage": "你似乎遨遊到了一個未知空間，請返回重試"
   },
   "rdxgu4": {
     "defaultMessage": "請輸入電子信箱",
