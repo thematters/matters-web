@@ -18,17 +18,17 @@ const License: React.FC<LicenseProps> = ({ license }) => {
     <section className={styles.license} data-test-id={TEST_ID.ARTICLE_LICENSE}>
       {isCC0 && (
         <Translate
-          zh_hant="NO RIGHTS RESERVED 授權"
-          zh_hans="NO RIGHTS RESERVED 授权"
-          en="NO RIGHTS RESERVED"
+          zh_hant="CC0 公眾領域貢獻宣告"
+          zh_hans="CC0 公众领域贡献宣告"
+          en="CC0 License"
         />
       )}
 
       {isARR && (
         <Translate
-          zh_hant="ALL RIGHTS RESERVED 授權"
-          zh_hans="ALL RIGHTS RESERVED 授权"
-          en="ALL RIGHTS RESERVED"
+          zh_hant="作者保留所有權利"
+          zh_hans="作者保留所有權利"
+          en="No Copyright"
         />
       )}
 

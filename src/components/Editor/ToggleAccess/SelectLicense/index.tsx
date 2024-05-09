@@ -61,8 +61,8 @@ const LICENSE_TEXT = {
   0: {
     [ArticleLicenseType.CcByNcNd_4]: {
       title: {
-        zh_hant: 'CC BY-NC-ND 4.0',
-        zh_hans: 'CC BY-NC-ND 4.0',
+        zh_hant: 'CC BY-NC-ND 4.0 授權',
+        zh_hans: 'CC BY-NC-ND 4.0 授权',
         en: 'CC BY-NC-ND 4.0 License',
       },
       subtitle: {
