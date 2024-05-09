@@ -77,10 +77,6 @@ export const CommentDraftsProvider = ({
     }
 
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-      if (drafts.length === 0) {
-        return
-      }
-
       const allEmptyDraft = checkAllDraftsEmpty()
       if (!allEmptyDraft) {
         event.returnValue = hint
@@ -90,11 +86,6 @@ export const CommentDraftsProvider = ({
 
     const handleRouteChange = (url: string) => {
       const processRouteChange = async () => {
-        if (drafts.length === 0) {
-          navigateTo(url)
-          return
-        }
-
         const allEmptyDraft = checkAllDraftsEmpty()
         if (allEmptyDraft) {
           navigateTo(url)
