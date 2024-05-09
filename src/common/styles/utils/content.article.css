@@ -7,14 +7,16 @@
   line-height: var(--line-height-article-base);
   outline: none;
 
-  & > p,
-  & > ul,
-  & > ol {
-    padding: var(--ar17-100) 0;
+  & > *:first-child {
+    margin-top: var(--ar17-200);
+  }
+
+  & > * + * {
+    margin: var(--ar17-200) 0;
   }
 
   & > *:last-child {
-    margin-bottom: var(--sp24);
+    margin-bottom: var(--ar17-200);
   }
 
   & p {
@@ -58,8 +60,7 @@
    ========================================================================== */
   & figure {
     position: relative;
-    padding: var(--ar17-200) 0;
-    margin: 0;
+    margin: var(--ar17-200) 0;
     text-align: center;
 
     /* ad-hoc fix for nested figure */
@@ -70,11 +71,15 @@
 
     & figcaption {
       margin-top: var(--sp12);
-      font-size: var(--text12);
-      line-height: 1rem;
+      font-size: var(--text14);
+      line-height: 1.375rem;
       color: var(--color-grey);
       white-space: pre-wrap;
     }
+  }
+
+  & figure + figure {
+    margin-top: calc(var(--ar17-200) * 2);
   }
 
   /* Audio
@@ -299,7 +304,6 @@
   & h4,
   & h5,
   & h6 {
-    padding-top: var(--ar17-100);
     font-weight: var(--font-semibold);
     line-height: var(--line-height-article-heading);
   }
@@ -337,7 +341,8 @@
     position: relative;
     display: block;
     width: 100%;
-    height: calc(var(--ar17-150) * 2 + var(--sp8));
+    height: var(--sp8);
+    margin: calc(var(--ar17-150) + var(--ar17-100)) auto;
     border: none;
 
     &::before {
@@ -346,7 +351,6 @@
       display: block;
       width: 3.5rem;
       height: var(--sp8);
-      padding: var(--ar17-150) 0;
       margin: 0 auto;
       content: '';
       background-image: radial-gradient(
@@ -413,6 +417,6 @@
   }
 
   @media (--lg-up) {
-    width: 71%; /* 5/7 */
+    width: 85%; /* 6/7 */
   }
 }
