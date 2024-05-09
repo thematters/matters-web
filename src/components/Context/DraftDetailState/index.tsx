@@ -1,30 +1,33 @@
 import { createContext, useRef } from 'react'
 
-import { NEW_DRAFT_ID } from '~/common/enums'
 import { randomString } from '~/common/utils'
-
-export const DraftEditorStateContext = createContext(
-  {} as {
-    addJob: (fn: () => Promise<any>) => void
-    getDraftId: () => string | undefined
-    isNewDraft: () => boolean
-  }
-)
 
 type Job = {
   id: string
   fn: () => Promise<any>
 }
 
-export const DraftEditorStateProvider = ({
+const NEW_DRAFT_ID = 'new'
+
+export const DraftDetailStateContext = createContext(
+  {} as {
+    addRequest: (fn: () => Promise<any>) => void
+    getDraftId: () => string | undefined
+    isNewDraft: () => boolean
+  }
+)
+
+export const DraftDetailStateProvider = ({
   children,
 }: {
   children: React.ReactNode
 }) => {
+  // Run request jobs in sequence
   const jobsRef = useRef<Job[]>()
   const runningRef = useRef<string>()
 
-  const addJob = (fn: () => Promise<any>) => {
+  // push request job
+  const addRequest = (fn: () => Promise<any>) => {
     const id = randomString()
     const jobs = jobsRef.current || []
     const newJobs = [...jobs, { id, fn }]
@@ -50,29 +53,36 @@ export const DraftEditorStateProvider = ({
       return
     }
 
+    // run first job
     runningRef.current = firstJob.id
     await firstJob.fn()
     runningRef.current = ''
+
+    // set to rest jobs
     const { restJobs } = getJobs()
     jobsRef.current = restJobs
+
+    // run next job
     runFirstJob()
   }
 
+  // get draft id from URL instead of `useRouter.getQuery`
   const getDraftId = () => {
     const id = window.location.href.split('/').pop()
     return id === NEW_DRAFT_ID ? undefined : id
   }
 
+  // Match `/me/drafts/new` path
   const isNewDraft = () => {
     const draftId = getDraftId()
-    return draftId === NEW_DRAFT_ID
+    return draftId === undefined
   }
 
   return (
-    <DraftEditorStateContext.Provider
-      value={{ addJob, getDraftId, isNewDraft }}
+    <DraftDetailStateContext.Provider
+      value={{ addRequest, getDraftId, isNewDraft }}
     >
       {children}
-    </DraftEditorStateContext.Provider>
+    </DraftDetailStateContext.Provider>
   )
 }

@@ -11,8 +11,8 @@ import {
 } from '~/common/enums'
 import { stripHtml } from '~/common/utils'
 import {
-  DraftEditorStateContext,
-  DraftEditorStateProvider,
+  DraftDetailStateContext,
+  DraftDetailStateProvider,
   EmptyLayout,
   Head,
   Layout,
@@ -57,8 +57,6 @@ const Editor = dynamic(
   }
 )
 
-const NEW_DRAFT_ID = 'new'
-
 const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
   id: '',
   title: '',
@@ -91,18 +89,10 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
 const BaseDraftDetail = () => {
   const intl = useIntl()
 
-  const getDraftId = () => {
-    const id = window.location.href.split('/').pop()
-    return id
-  }
-
-  const isNewDraft = () => {
-    const draftId = getDraftId()
-    return draftId === NEW_DRAFT_ID
-  }
-
+  const { addRequest, getDraftId, isNewDraft } = useContext(
+    DraftDetailStateContext
+  )
   const [initNew] = useState(isNewDraft())
-  const { addJob } = useContext(DraftEditorStateContext)
   const { createDraft } = useCreateDraft()
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
   const [singleFileUpload] =
@@ -251,7 +241,6 @@ const BaseDraftDetail = () => {
     cover?: string | null
     summary?: string | null
   }) => {
-    const draftId = getDraftId()
     const isEmpty = Object.values(newDraft).every((x) => x === '')
     if (isNewDraft() && isEmpty) {
       return
@@ -282,8 +271,8 @@ const BaseDraftDetail = () => {
 
       setSaveStatus('saving')
 
-      if (draftId !== NEW_DRAFT_ID) {
-        await setContent({ variables: { id: draftId, ...newDraft } })
+      if (!isNewDraft()) {
+        await setContent({ variables: { id: getDraftId(), ...newDraft } })
       } else {
         await createDraft({
           onCreate: async (draftId: string) => {
@@ -346,7 +335,7 @@ const BaseDraftDetail = () => {
       <Layout.Main.Spacing>
         <Editor
           draft={draft}
-          update={async (props) => addJob(() => update(props))}
+          update={async (props) => addRequest(() => update(props))}
           upload={upload}
         />
       </Layout.Main.Spacing>
@@ -359,9 +348,9 @@ const BaseDraftDetail = () => {
 }
 
 const DraftDetail = () => (
-  <DraftEditorStateProvider>
+  <DraftDetailStateProvider>
     <BaseDraftDetail />
-  </DraftEditorStateProvider>
+  </DraftDetailStateProvider>
 )
 
 export default DraftDetail

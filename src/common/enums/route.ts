@@ -71,8 +71,6 @@ type ROUTE_KEY =
   | 'TOS'
   | 'RECOMMENDATION'
 
-export const NEW_DRAFT_ID = 'new'
-
 export const ROUTES: {
   key: ROUTE_KEY
   pathname: string

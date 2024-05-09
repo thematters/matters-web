@@ -1,6 +1,6 @@
 export * from './ActiveCommentEditor'
 export * from './CommentDrafts'
-export * from './DraftEditorState'
+export * from './DraftDetailState'
 export * from './Features'
 export * from './Language'
 export * from './ReCaptcha'

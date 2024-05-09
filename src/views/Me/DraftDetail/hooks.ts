@@ -1,7 +1,7 @@
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
 
-import { DraftEditorStateContext, useCreateDraft } from '~/components'
+import { DraftDetailStateContext, useCreateDraft } from '~/components'
 import { useImperativeQuery, useMutation } from '~/components/GQL'
 import {
   ArticleAccessType,
@@ -36,7 +36,7 @@ import {
  * Hooks for editing draft cover, tags and collection
  */
 export const useEditDraftCover = () => {
-  const { addJob, getDraftId } = useContext(DraftEditorStateContext)
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
   const { createDraft } = useCreateDraft()
   const refetch = useImperativeQuery<DraftAssetsQuery>(DRAFT_ASSETS, {
     variables: { id: getDraftId() },
@@ -59,14 +59,14 @@ export const useEditDraftCover = () => {
   }
 
   return {
-    edit: async (props: any) => addJob(() => createDraftAndEdit(props)),
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
     saving,
     refetch,
   }
 }
 
 export const useEditDraftTags = () => {
-  const { addJob, getDraftId } = useContext(DraftEditorStateContext)
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
   const { createDraft } = useCreateDraft()
   const [updateTags, { loading: saving }] =
     useMutation<SetDraftTagsMutation>(SET_TAGS)
@@ -87,13 +87,13 @@ export const useEditDraftTags = () => {
   }
 
   return {
-    edit: async (props: any) => addJob(() => createDraftAndEdit(props)),
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
     saving,
   }
 }
 
 export const useEditDraftCollection = () => {
-  const { addJob, getDraftId } = useContext(DraftEditorStateContext)
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
   const { createDraft } = useCreateDraft()
   const [setCollection, { loading: saving }] =
     useMutation<SetDraftCollectionMutation>(SET_COLLECTION)
@@ -120,13 +120,13 @@ export const useEditDraftCollection = () => {
   }
 
   return {
-    edit: async (props: any) => addJob(() => createDraftAndEdit(props)),
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
     saving,
   }
 }
 
 export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
-  const { addJob, getDraftId } = useContext(DraftEditorStateContext)
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
   const { createDraft } = useCreateDraft()
   const [setAccess, { loading: saving }] =
     useMutation<SetDraftAccessMutation>(SET_ACCESS)
@@ -163,13 +163,13 @@ export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
 
   return {
     edit: async (p1: any, p2: any, p3: any) =>
-      addJob(() => createDraftAndEdit(p1, p2, p3)),
+      addRequest(() => createDraftAndEdit(p1, p2, p3)),
     saving,
   }
 }
 
 export const useEditSupportSetting = () => {
-  const { addJob, getDraftId } = useContext(DraftEditorStateContext)
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
   const { createDraft } = useCreateDraft()
   const [update, { loading: saving }] =
     useMutation<SetSupportRequestReplyMutation>(SET_SUPPORT_REQUEST_REPLY)
@@ -200,13 +200,14 @@ export const useEditSupportSetting = () => {
   }
 
   return {
-    edit: async (p1: any, p2: any) => addJob(() => createDraftAndEdit(p1, p2)),
+    edit: async (p1: any, p2: any) =>
+      addRequest(() => createDraftAndEdit(p1, p2)),
     saving,
   }
 }
 
 export const useEditDraftSensitiveByAuthor = () => {
-  const { addJob, getDraftId } = useContext(DraftEditorStateContext)
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
   const { createDraft } = useCreateDraft()
   const [update, { loading: saving }] =
     useMutation<SetDraftSensitiveByAuthorMutation>(SET_SENSITIVE_BY_AUTHOR)
@@ -223,13 +224,13 @@ export const useEditDraftSensitiveByAuthor = () => {
   }
 
   return {
-    edit: async (props: any) => addJob(() => createDraftAndEdit(props)),
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
     saving,
   }
 }
 
 export const useEditDraftPublishISCN = () => {
-  const { addJob, getDraftId } = useContext(DraftEditorStateContext)
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
   const { createDraft } = useCreateDraft()
   const [update, { loading: saving }] =
     useMutation<SetDraftPublishIscnMutation>(SET_PUBLISH_ISCN)
@@ -246,13 +247,13 @@ export const useEditDraftPublishISCN = () => {
   }
 
   return {
-    edit: async (props: any) => addJob(() => createDraftAndEdit(props)),
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
     saving,
   }
 }
 
 export const useEditDraftCanComment = () => {
-  const { addJob, getDraftId } = useContext(DraftEditorStateContext)
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
   const { createDraft } = useCreateDraft()
   const [update, { loading: saving }] =
     useMutation<SetDraftCanCommentMutation>(SET_CAN_COMMENT)
@@ -269,7 +270,7 @@ export const useEditDraftCanComment = () => {
   }
 
   return {
-    edit: async (props: any) => addJob(() => createDraftAndEdit(props)),
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
     saving,
   }
 }
