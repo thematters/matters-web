@@ -247,7 +247,7 @@ const FixedToolbar = ({
                 textWeight="normal"
                 textIconSpacing={4}
                 onClick={() => {
-                  if (!viewer.isAuthed) {
+                  if (!viewer.isAuthed && article.commentCount === 0) {
                     window.dispatchEvent(
                       new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
                         detail: {
