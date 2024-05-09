@@ -140,6 +140,8 @@ const FloatToolbar = ({
                 )
                 return
               }
+
+              toggleDonationDrawer()
             }}
             {...buttonProps}
           />
