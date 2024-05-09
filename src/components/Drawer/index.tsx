@@ -31,7 +31,7 @@ export const Drawer: React.ComponentType<
   children,
   size,
   duration = 300,
-  enableOverlay = true,
+  enableOverlay = false,
   direction = 'right',
 }) => {
   const [mounted, setMounted] = useState(isOpen)
