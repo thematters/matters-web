@@ -779,6 +779,9 @@
     "defaultMessage": "递出支持资金给",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
   },
+  "C2fUvW": {
+    "defaultMessage": "ID 只允许包含英文、数字及下划线"
+  },
   "C3NKBg": {
     "defaultMessage": "{type} 已绑定",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
@@ -2961,9 +2964,6 @@
   "u+cgOo": {
     "defaultMessage": "我的围炉",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
-  },
-  "u0F4up": {
-    "defaultMessage": "ID 可使用小写英文、数字及下划线"
   },
   "u1cbFV": {
     "defaultMessage": "切换到 {networkName}"
