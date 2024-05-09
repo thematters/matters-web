@@ -15,6 +15,10 @@
     margin: var(--ar17-200) 0;
   }
 
+  & > *:last-child {
+    margin-bottom: var(--ar17-200);
+  }
+
   & p {
     font-size: var(--font-size-article-base);
     line-height: var(--line-height-article-base);
