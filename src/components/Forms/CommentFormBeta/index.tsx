@@ -42,6 +42,7 @@ export interface CommentFormBetaProps {
   submitCallback?: () => void
   closeCallback?: () => void
 
+  showClear?: boolean
   placeholder?: string
   syncQuote?: boolean
 }
@@ -56,7 +57,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   defaultContent,
   submitCallback,
   closeCallback,
-
+  showClear,
   placeholder,
   syncQuote,
 }) => {
@@ -154,13 +155,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
         submitCallback()
       }
 
-      // clear content
-      if (editor) {
-        editor.commands.setContent('')
-      }
-
-      // clear draft
-      removeDraft(commentDraftId)
+      onClear()
 
       if (closeCallback) {
         closeCallback()
@@ -169,6 +164,14 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
       setSubmitting(false)
       console.error(e)
     }
+  }
+
+  const onClear = () => {
+    setContent('')
+    if (editor) {
+      editor.commands.setContent('')
+    }
+    removeDraft(commentDraftId)
   }
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
@@ -217,6 +220,21 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
           >
             <TextIcon size={14}>
               <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+            </TextIcon>
+          </Button>
+        )}
+        {showClear && content.length > 0 && (
+          <Button
+            size={[null, '2rem']}
+            spacing={[0, 16]}
+            bgColor="white"
+            disabled={isSubmitting}
+            onClick={onClear}
+            textColor="black"
+            textActiveColor="greyDarker"
+          >
+            <TextIcon size={14}>
+              <FormattedMessage defaultMessage="Clear" id="/GCoTA" />
             </TextIcon>
           </Button>
         )}

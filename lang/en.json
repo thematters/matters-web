@@ -624,9 +624,6 @@
   "99OtWT": {
     "defaultMessage": "Pending..."
   },
-  "9Dwh/Z": {
-    "defaultMessage": "The revised work will be republished to decentralized network. Please backup of the previous edition before revision."
-  },
   "9EABqX": {
     "defaultMessage": "Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
   },
@@ -1052,6 +1049,9 @@
   "HJ0iZJ": {
     "defaultMessage": "Confirm Archiving"
   },
+  "HJcB0d": {
+    "defaultMessage": "After the modification is completed, the new version will be released to IPFS again. You can view the historical version from \"...published on IPFS\" under the article title."
+  },
   "HPVOw/": {
     "defaultMessage": "Wallet",
     "description": "src/views/Me/Settings/Settings/index.tsx"
@@ -1328,10 +1328,6 @@
   "MDNaxs": {
     "defaultMessage": "followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
-  },
-  "MIA5xy": {
-    "defaultMessage": "Notice",
-    "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
   },
   "MP6xe/": {
     "defaultMessage": "Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding. Please check out our {announcements}.",

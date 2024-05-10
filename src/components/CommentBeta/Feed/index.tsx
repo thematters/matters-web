@@ -47,6 +47,8 @@ export const BaseCommentFeed = ({
   ...actionControls
 }: CommentProps) => {
   const { id, author, parentComment } = comment
+  const article =
+    comment.node.__typename === 'Article' ? comment.node : undefined
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
 
   const submitCallback = () => {
@@ -63,6 +65,12 @@ export const BaseCommentFeed = ({
   const userProfilePath = toPath({
     page: 'userProfile',
     userName: author.userName || '',
+  })
+
+  const commentDetailPath = toPath({
+    page: 'commentDetail',
+    comment,
+    article,
   })
 
   return (
@@ -86,7 +94,9 @@ export const BaseCommentFeed = ({
                 </LinkWrapper>
                 <RoleLabel comment={comment} />
               </section>
-              <DateTime date={comment.createdAt} color="grey" />
+              <LinkWrapper {...commentDetailPath}>
+                <DateTime date={comment.createdAt} color="grey" />
+              </LinkWrapper>
             </section>
           </section>
         </section>

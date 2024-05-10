@@ -36,7 +36,9 @@ const fragments = {
 }
 
 export const FromAuthor = ({ article }: FromAuthorProps) => {
-  const latestWorks = article.author?.latestWorks
+  const latestWorks = article.author?.latestWorks.filter((work) => {
+    return work.id !== article.id
+  })
 
   if (!latestWorks || latestWorks.length <= 0) {
     return null
@@ -45,7 +47,7 @@ export const FromAuthor = ({ article }: FromAuthorProps) => {
   return (
     <section>
       <List borderPosition="bottom" hasLastBorder={false}>
-        {latestWorks.map((work, i) => (
+        {latestWorks.slice(0, 3).map((work, i) => (
           <List.Item key={`FromAuthor` + i}>
             {work.__typename === 'Article' && (
               <ArticleDigestAuthorSidebar

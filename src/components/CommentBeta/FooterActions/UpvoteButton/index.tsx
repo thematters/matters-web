@@ -80,6 +80,7 @@ const UpvoteButton = ({
   })
 
   const likeClassNames = classNames({
+    [styles.like]: true,
     [styles.heartBeat]: playHeartBeat,
   })
 
