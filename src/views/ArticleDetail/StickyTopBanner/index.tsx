@@ -63,13 +63,15 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
       {lang === UserLanguage.En && <>&nbsp;</>}
 
       <Link href={PATHS.ME_ARCHIVED}>
-        <TextIcon decoration="underline" size={16} weight="semibold">
-          <FormattedMessage
-            defaultMessage="Back to my works"
-            id="HR599l"
-            description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
-          />
-        </TextIcon>
+        <a>
+          <TextIcon decoration="underline" size={16} weight="semibold">
+            <FormattedMessage
+              defaultMessage="Back to my works"
+              id="HR599l"
+              description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
+            />
+          </TextIcon>
+        </a>
       </Link>
 
       <style global jsx>{`
@@ -100,14 +102,16 @@ const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
 
       {lang === 'en' && <span>&nbsp;</span>}
 
-      <Link href={path.href}>
-        <TextIcon decoration="underline" size={16} weight="semibold">
-          <FormattedMessage
-            defaultMessage="back to latest"
-            id="imXsmo"
-            description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
-          />
-        </TextIcon>
+      <Link {...path}>
+        <a>
+          <TextIcon decoration="underline" size={16} weight="semibold">
+            <FormattedMessage
+              defaultMessage="back to latest"
+              id="imXsmo"
+              description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
+            />
+          </TextIcon>
+        </a>
       </Link>
 
       <style global jsx>{`

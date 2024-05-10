@@ -95,6 +95,9 @@
     "defaultMessage": "回覆評論",
     "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
+  "/dKzfc": {
+    "defaultMessage": "該作品因違反社區約章，已被站方強制歸檔。"
+  },
   "/faseS": {
     "defaultMessage": "已複製分享連結"
   },
@@ -973,6 +976,9 @@
   },
   "G/yZLu": {
     "defaultMessage": "移除"
+  },
+  "G0pqnh": {
+    "defaultMessage": "閱讀原文"
   },
   "G4bk3r": {
     "defaultMessage": "自訂金額大於餘額"
@@ -2816,6 +2822,9 @@
   "qgPR68": {
     "defaultMessage": "設為代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
+  "qhVSGI": {
+    "defaultMessage": "吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
   },
   "qlki7w": {
     "defaultMessage": "移除作品",

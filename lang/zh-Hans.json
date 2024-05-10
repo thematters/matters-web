@@ -95,6 +95,9 @@
     "defaultMessage": "回复评论",
     "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
+  "/dKzfc": {
+    "defaultMessage": "该作品因违反社区约章，已被站方强制封存。"
+  },
   "/faseS": {
     "defaultMessage": "已复制分享连结"
   },
@@ -973,6 +976,9 @@
   },
   "G/yZLu": {
     "defaultMessage": "移除"
+  },
+  "G0pqnh": {
+    "defaultMessage": "阅读原文"
   },
   "G4bk3r": {
     "defaultMessage": "自订金额大于余额"
@@ -2816,6 +2822,9 @@
   "qgPR68": {
     "defaultMessage": "设为代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
+  "qhVSGI": {
+    "defaultMessage": "呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
   },
   "qlki7w": {
     "defaultMessage": "移除作品",
