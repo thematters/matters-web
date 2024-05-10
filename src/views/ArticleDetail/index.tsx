@@ -22,7 +22,6 @@ import {
   Spacer,
   SpinnerBlock,
   Throw404,
-  Title,
   toast,
   useEventListener,
   useFeatures,
@@ -329,8 +328,8 @@ const BaseArticleDetail = ({
       </Media>
 
       <section className={styles.content}>
-        <section className={styles.title}>
-          <Title type="article">{title}</Title>
+        <section className="u-article-title">
+          <h1>{title}</h1>
 
           <MetaInfo
             article={article}

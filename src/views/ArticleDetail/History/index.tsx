@@ -15,7 +15,6 @@ import {
   QueryError,
   SpinnerBlock,
   Throw404,
-  Title,
   toast,
   usePublicQuery,
   useRoute,
@@ -155,8 +154,8 @@ const BaseArticleDetailHistory = ({
 
         <InfoHeader article={article} version={version} />
 
-        <section className={styles.title}>
-          <Title type="article">{title}</Title>
+        <section className="u-article-title">
+          <h1>{title}</h1>
 
           <MetaInfo
             article={article}

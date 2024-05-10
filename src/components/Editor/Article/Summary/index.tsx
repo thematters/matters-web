@@ -1,9 +1,14 @@
 import autosize from 'autosize'
 import classNames from 'classnames'
-import React from 'react'
+import React, { useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useDebouncedCallback } from 'use-debounce'
 
-import { KEYVALUE, MAX_ARTICE_SUMMARY_LENGTH } from '~/common/enums'
+import {
+  INPUT_DEBOUNCE,
+  KEYVALUE,
+  MAX_ARTICE_SUMMARY_LENGTH,
+} from '~/common/enums'
 
 /**
  * This is an optional component for user to add summary.
@@ -29,15 +34,18 @@ const EditorSummary: React.FC<Props> = ({
   update,
 }) => {
   const intl = useIntl()
-  const instance: React.RefObject<any> | null = React.useRef(null)
-
-  const [value, setValue] = React.useState(defaultValue)
+  const instance: React.RefObject<any> | null = useRef(null)
+  const [value, setValue] = useState(defaultValue)
+  const debouncedUpdate = useDebouncedCallback(() => {
+    update({ summary: value })
+  }, INPUT_DEBOUNCE)
 
   const length = (value && value.length) || 0
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
     const text = (event.target.value || '').replace(/\r\n|\r|\n/g, '')
     setValue(text)
+    debouncedUpdate()
   }
 
   const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) =>
@@ -59,16 +67,13 @@ const EditorSummary: React.FC<Props> = ({
     return null
   }
 
-  const classes = classNames({
-    'editor-summary': true,
-  })
   const counterClasses = classNames({
     counter: true,
     error: length > MAX_ARTICE_SUMMARY_LENGTH,
   })
 
   return (
-    <section className={classes}>
+    <section className="editor-summary">
       <textarea
         ref={instance}
         rows={1}
