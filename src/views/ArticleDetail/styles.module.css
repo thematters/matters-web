@@ -14,12 +14,6 @@
   }
 }
 
-.title {
-  & h1 {
-    @mixin font-serif;
-  }
-}
-
 .block {
   margin: var(--sp24) 0 var(--sp40);
 }

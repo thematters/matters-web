@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 
 import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 import {
@@ -12,6 +12,7 @@ import {
   SpinnerBlock,
   Throw404,
   useRoute,
+  ViewerContext,
 } from '~/components'
 import {
   SetCollectionProps,
@@ -324,13 +325,15 @@ const BaseEdit = ({ article }: { article: Article }) => {
 }
 
 const Edit = () => {
+  const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
   const { data, loading, error } = useQuery<QueryEditArticleQuery>(
     GET_EDIT_ARTICLE,
     { variables: { shortHash }, fetchPolicy: 'network-only' }
   )
-  const article = data?.article as Article
+  const article = data?.article
+  const isAuthor = viewer.id === article?.author.id
 
   /**
    * Render
@@ -351,7 +354,7 @@ const Edit = () => {
     )
   }
 
-  if (!article) {
+  if (!article || !isAuthor) {
     return (
       <EmptyLayout>
         <Throw404 />
@@ -359,7 +362,7 @@ const Edit = () => {
     )
   }
 
-  return <BaseEdit article={article} />
+  return <BaseEdit article={article as Article} />
 }
 
 export default Edit
