@@ -41,6 +41,7 @@ type ToPathArgs =
       article: ArticleArgs
       collectionId?: string
     }
+  | { page: 'articleEdit'; article: ArticleArgs }
   | {
       page: 'articleHistory'
       article: ArticleArgs
@@ -107,6 +108,13 @@ export const toPath = (
       if (args.collectionId) {
         href = `${href}?collection=${args.collectionId}`
       }
+
+      break
+    }
+    case 'articleEdit': {
+      const { shortHash } = args.article
+
+      href = `/a/${shortHash}/edit`
 
       break
     }

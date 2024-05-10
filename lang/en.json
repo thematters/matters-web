@@ -1386,6 +1386,9 @@
     "defaultMessage": "Email",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "NFIbLb": {
+    "defaultMessage": "Used up edit quota"
+  },
   "NNF+3f": {
     "defaultMessage": "Tag not found",
     "description": "TAG_NOT_FOUND"

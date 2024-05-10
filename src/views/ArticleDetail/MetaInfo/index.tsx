@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import { MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Button,
@@ -45,7 +46,8 @@ const MetaInfo = ({
   const authorId = article.author.id
   const isAuthor = viewer.id === authorId
   const originalLanguage = article?.language ? article.language : ''
-  const { href } = toPath({ page: 'articleDetail', article })
+  const editPath = toPath({ page: 'articleEdit', article })
+  const isExceedRevision = article.revisionCount >= MAX_ARTICLE_REVISION_COUNT
 
   const { router } = useRoute()
   const { shortHash, ...qs } = router.query
@@ -113,20 +115,33 @@ const MetaInfo = ({
                 <DotDivider />
               </section>
 
-              <Button
-                textColor="black"
-                textActiveColor="greyDarker"
-                href={editable ? `${href}/edit` : undefined}
-                disabled={!editable}
-              >
-                <TextIcon icon={<Icon icon={IconEdit} />} size={12}>
+              {isExceedRevision ? (
+                <TextIcon
+                  icon={<Icon icon={IconEdit} />}
+                  size={12}
+                  color="grey"
+                >
                   <FormattedMessage
-                    defaultMessage="Edit"
-                    id="2bG/gP"
-                    description="src/views/ArticleDetail/MetaInfo/index.tsx"
+                    defaultMessage="Used up edit quota"
+                    id="NFIbLb"
                   />
                 </TextIcon>
-              </Button>
+              ) : (
+                <Button
+                  textColor="black"
+                  textActiveColor="greyDarker"
+                  href={editable ? editPath.href : undefined}
+                  disabled={!editable}
+                >
+                  <TextIcon icon={<Icon icon={IconEdit} />} size={12}>
+                    <FormattedMessage
+                      defaultMessage="Edit"
+                      id="2bG/gP"
+                      description="src/views/ArticleDetail/MetaInfo/index.tsx"
+                    />
+                  </TextIcon>
+                </Button>
+              )}
             </>
           )}
         </>

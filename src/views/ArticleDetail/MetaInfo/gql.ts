@@ -10,6 +10,7 @@ export const fragments = {
       language
       slug
       shortHash
+      revisionCount
       revisedAt
       createdAt
       author {
