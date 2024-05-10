@@ -104,7 +104,7 @@ const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
 
       <Link {...path}>
         <a>
-          <TextIcon decoration="underline" size={16} weight="semibold">
+          <TextIcon decoration="underline" size={16} weight="medium">
             <FormattedMessage
               defaultMessage="back to latest"
               id="imXsmo"
