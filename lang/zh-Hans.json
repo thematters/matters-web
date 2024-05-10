@@ -279,7 +279,7 @@
     "defaultMessage": "个人简介"
   },
   "2bG/gP": {
-    "defaultMessage": "编辑",
+    "defaultMessage": "修改",
     "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
   },
   "2ef/Xl": {
@@ -624,9 +624,6 @@
   "99OtWT": {
     "defaultMessage": "写入中…"
   },
-  "9Dwh/Z": {
-    "defaultMessage": "编辑後的作品即再版發佈至分佈式網絡。编辑前請自行保留上一版本備份"
-  },
   "9EABqX": {
     "defaultMessage": "喜欢我的作品吗？别忘了给予支持与赞赏，让我知道在创作的路上有你陪伴，一起延续这份热忱！"
   },
@@ -819,7 +816,7 @@
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "CnPG8j": {
-    "defaultMessage": "精华"
+    "defaultMessage": "精选"
   },
   "CoF9qv": {
     "defaultMessage": "确认要解绑钱包？",
@@ -1051,6 +1048,9 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "确认归档"
+  },
+  "HJcB0d": {
+    "defaultMessage": "完成修改后，新版会再次发布到 IPFS，你可以从文章标题下的「…更新于 IPFS」进入查看历史版本。"
   },
   "HPVOw/": {
     "defaultMessage": "数字钱包",
@@ -1329,10 +1329,6 @@
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "MIA5xy": {
-    "defaultMessage": "编辑须知",
-    "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
-  },
   "MP6xe/": {
     "defaultMessage": "Billboard 是一个公开且可付费租借的链上 NFT 广告协议。租借成功后，可以进行14天的内容投放。租借费用基于哈柏格税概念计算，产生的租借收入将以二次方配捐方式回馈给社区创作者。更多详情请查看{announcements}。",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -1571,7 +1567,7 @@
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "RGEpvx": {
-    "defaultMessage": "编辑文案",
+    "defaultMessage": "修改文案",
     "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
   },
   "RM17b4": {
@@ -2022,7 +2018,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "编辑作品",
+    "defaultMessage": "修改",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZYvVYX": {
@@ -2338,7 +2334,7 @@
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "gS1u3d": {
-    "defaultMessage": "你还可以编辑 {left} 版"
+    "defaultMessage": "你还可以修改 {left} 次"
   },
   "gW/KWu": {
     "defaultMessage": "评论被精选",
@@ -2878,7 +2874,7 @@
     "description": "src/components/Buttons/FollowUser/Follow.tsx"
   },
   "rJqgwV": {
-    "defaultMessage": "开始编辑",
+    "defaultMessage": "开始修改",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
   },
   "rLlTQ9": {
