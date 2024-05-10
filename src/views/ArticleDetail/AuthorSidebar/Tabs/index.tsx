@@ -43,7 +43,10 @@ export const Tabs = ({ article, tab, setTab }: TabsProps) => {
   const intl = useIntl()
   const { getQuery } = useRoute()
   const cid = getQuery('collection')
-  const hasFromAuthor = article.author.latestWorks.length > 0
+  const latestWorks = article.author?.latestWorks.filter((work) => {
+    return work.id !== article.id
+  })
+  const hasFromAuthor = latestWorks && latestWorks.length > 0
   const hasRecommendation = article.relatedArticles?.totalCount > 0
 
   return (
