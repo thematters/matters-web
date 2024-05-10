@@ -276,7 +276,7 @@
     "defaultMessage": "個人簡介"
   },
   "2bG/gP": {
-    "defaultMessage": "編輯",
+    "defaultMessage": "修改",
     "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
   },
   "2ef/Xl": {
@@ -1568,7 +1568,7 @@
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "RGEpvx": {
-    "defaultMessage": "編輯文案",
+    "defaultMessage": "修改文案",
     "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
   },
   "RM17b4": {
@@ -2022,7 +2022,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "編輯作品",
+    "defaultMessage": "修改",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZYvVYX": {
