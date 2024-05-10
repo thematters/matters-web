@@ -14,7 +14,7 @@ type Props = {
 const DonationTabs = ({ recipient, currency, setCurrency }: Props) => {
   const viewer = useContext(ViewerContext)
   const creatorAddress = recipient.info.ethAddress
-  const hasLikeId = viewer.liker.likerId !== null
+  const hasLikeId = !!viewer.liker.likerId
 
   const isHKD = currency === CURRENCY.HKD
   const isUSDT = currency === CURRENCY.USDT
