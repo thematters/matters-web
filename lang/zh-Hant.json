@@ -1390,6 +1390,9 @@
     "defaultMessage": "電子郵件",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "NFIbLb": {
+    "defaultMessage": "已用完修改次數"
+  },
   "NNF+3f": {
     "defaultMessage": "標籤不存在",
     "description": "TAG_NOT_FOUND"
