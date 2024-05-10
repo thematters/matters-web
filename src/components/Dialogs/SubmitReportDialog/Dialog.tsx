@@ -45,7 +45,7 @@ interface FormValues {
 }
 
 const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
-  const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog: _closeDialog } = useDialogSwitch(true)
   const formId = 'submit-report-dialog-form'
   const order = [
     ReportReason.Tort,
@@ -92,6 +92,13 @@ const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
       }
     },
   })
+
+  const closeDialog = () => {
+    _closeDialog()
+    setTimeout(() => {
+      setFieldValue('reason', '', false)
+    }, 100)
+  }
 
   return (
     <>
