@@ -200,9 +200,9 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
 
       <footer className={styles.footer}>
         {contentCount > MAX_ARTICLE_COMMENT_LENGTH && (
-          <p className={styles.count}>
+          <span className={styles.count}>
             {contentCount}/{MAX_ARTICLE_COMMENT_LENGTH}
-          </p>
+          </span>
         )}
         {!!closeCallback && (
           <Button

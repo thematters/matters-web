@@ -1789,9 +1789,6 @@
     "defaultMessage": "Drafts",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
-  "VefaFQ": {
-    "defaultMessage": "Content length exceeds limit ({length}/{limit})"
-  },
   "VmYzLr": {
     "defaultMessage": "{total} members"
   },

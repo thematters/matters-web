@@ -1789,9 +1789,6 @@
     "defaultMessage": "草稿",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
-  "VefaFQ": {
-    "defaultMessage": "内容长度超出限制 ({length}/{limit})"
-  },
   "VmYzLr": {
     "defaultMessage": "{total} 個成員"
   },
