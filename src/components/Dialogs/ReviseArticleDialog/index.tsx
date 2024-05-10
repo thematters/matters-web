@@ -20,9 +20,11 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
         <Dialog.Header
           title={
             <FormattedMessage
-              defaultMessage="Notice"
-              id="MIA5xy"
-              description="src/components/Dialogs/ReviseArticleDialog/index.tsx"
+              defaultMessage="{left} modifications available"
+              id="gS1u3d"
+              values={{
+                left: <span className={styles.count}>{revisionCountLeft}</span>,
+              }}
             />
           }
         />
@@ -31,23 +33,10 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           <Dialog.Content.Message align="left" smUpAlign="left">
             <p>
               <FormattedMessage
-                defaultMessage="The revised work will be republished to decentralized network. Please backup of the previous edition before revision."
-                id="9Dwh/Z"
-              />{' '}
+                defaultMessage='After the modification is completed, the new version will be released to IPFS again. You can view the historical version from "...published on IPFS" under the article title.'
+                id="HJcB0d"
+              />
               📃
-            </p>
-            <p>
-              <b>
-                <FormattedMessage
-                  defaultMessage="{left} modifications available"
-                  id="gS1u3d"
-                  values={{
-                    left: (
-                      <span className={styles.count}>{revisionCountLeft}</span>
-                    ),
-                  }}
-                />
-              </b>
             </p>
           </Dialog.Content.Message>
         </Dialog.Content>

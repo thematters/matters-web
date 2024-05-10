@@ -621,9 +621,6 @@
   "99OtWT": {
     "defaultMessage": "写入中…"
   },
-  "9Dwh/Z": {
-    "defaultMessage": "编辑後的作品即再版發佈至分佈式網絡。编辑前請自行保留上一版本備份"
-  },
   "9EABqX": {
     "defaultMessage": "喜欢我的作品吗？别忘了给予支持与赞赏，让我知道在创作的路上有你陪伴，一起延续这份热忱！"
   },
@@ -1046,6 +1043,9 @@
   "HJ0iZJ": {
     "defaultMessage": "确认归档"
   },
+  "HJcB0d": {
+    "defaultMessage": "完成修改后，新版会再次发布到 IPFS，你可以从文章标题下的「…更新于 IPFS」进入查看历史版本。"
+  },
   "HPVOw/": {
     "defaultMessage": "数字钱包",
     "description": "src/views/Me/Settings/Settings/index.tsx"
@@ -1322,10 +1322,6 @@
   "MDNaxs": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
-  },
-  "MIA5xy": {
-    "defaultMessage": "编辑须知",
-    "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
   },
   "MP6xe/": {
     "defaultMessage": "Billboard 是一个公开且可付费租借的链上 NFT 广告协议。租借成功后，可以进行14天的内容投放。租借费用基于哈柏格税概念计算，产生的租借收入将以二次方配捐方式回馈给社区创作者。更多详情请查看{announcements}。",
@@ -2334,7 +2330,7 @@
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "gS1u3d": {
-    "defaultMessage": "你还可以编辑 {left} 版"
+    "defaultMessage": "你还可以修改 {left} 次"
   },
   "gW/KWu": {
     "defaultMessage": "评论被精选",
@@ -2868,7 +2864,7 @@
     "description": "src/components/Buttons/FollowUser/Follow.tsx"
   },
   "rJqgwV": {
-    "defaultMessage": "开始编辑",
+    "defaultMessage": "开始修改",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
   },
   "rLlTQ9": {
