@@ -19,7 +19,9 @@ const License: React.FC<LicenseProps> = ({ license }) => {
     <section className={styles.license} data-test-id={TEST_ID.ARTICLE_LICENSE}>
       {isCC0 && <FormattedMessage defaultMessage="CC0 License" id="rE7sE3" />}
 
-      {isARR && <FormattedMessage defaultMessage="No Copyright" id="pKRF+E" />}
+      {isARR && (
+        <FormattedMessage defaultMessage="All rights reserved" id="iSM+et" />
+      )}
 
       {isCCBYNCND2 && (
         <FormattedMessage defaultMessage="CC BY-NC-ND 2.0" id="A0MNSc" />

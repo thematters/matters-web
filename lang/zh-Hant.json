@@ -2427,6 +2427,9 @@
     "defaultMessage": "切換後即可支持創作者，採用 Optimism 網路{br}讓支持更方便且費用低廉",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
+  "iSM+et": {
+    "defaultMessage": "作者保留所有權利"
+  },
   "iTcMqz": {
     "defaultMessage": "月色之下，夢想即將實現。月之夢徽章紀念你曾參與「遊牧者計畫」。",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -2757,9 +2760,6 @@
   "pHg5Ju": {
     "defaultMessage": "登入密碼已設定",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
-  },
-  "pKRF+E": {
-    "defaultMessage": "作者保留所有權利"
   },
   "pKkpI9": {
     "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"

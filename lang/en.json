@@ -2427,6 +2427,9 @@
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
+  "iSM+et": {
+    "defaultMessage": "All rights reserved"
+  },
   "iTcMqz": {
     "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"
@@ -2757,9 +2760,6 @@
   "pHg5Ju": {
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
-  },
-  "pKRF+E": {
-    "defaultMessage": "No Copyright"
   },
   "pKkpI9": {
     "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
