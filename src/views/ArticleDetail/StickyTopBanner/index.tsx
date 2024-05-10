@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { LanguageContext, TextIcon } from '~/components'
+import { LanguageContext, TextIcon, useRoute } from '~/components'
 import { StateArticleFragment, UserLanguage } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -85,9 +85,13 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
 
 const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
   const { lang } = useContext(LanguageContext)
+  const { router } = useRoute()
+  const { shortHash, v, ...qs } = router.query
+
   const path = toPath({
     page: 'articleDetail',
     article,
+    search: qs as { [key: string]: string },
   })
 
   return (
