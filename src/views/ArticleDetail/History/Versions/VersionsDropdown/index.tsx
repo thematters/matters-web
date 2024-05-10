@@ -56,13 +56,14 @@ const VersionsDropdown = ({
 }: {
   article: VersionsArticleFragment
 }) => {
-  const { getQuery } = useRoute()
+  const { router, getQuery } = useRoute()
+  const { shortHash, v, ...qs } = router.query
 
   const versions = article.versions.edges.map((edge) => edge?.node!)
   const currVersion = getQuery('v') || versions[0]?.id
   const version = versions.find((v) => v.id === currVersion)
 
-  if (versions.length < 1 || !version) {
+  if (versions.length <= 1 || !version) {
     return null
   }
 
@@ -84,6 +85,7 @@ const VersionsDropdown = ({
                 page: 'articleHistory',
                 article,
                 versionId: version.id,
+                search: qs as { [key: string]: string },
               }).href
             }
           />

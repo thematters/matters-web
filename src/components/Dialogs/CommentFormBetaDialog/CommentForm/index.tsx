@@ -218,9 +218,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
         rightBtn={
           <>
             {contentCount > MAX_ARTICLE_COMMENT_LENGTH && (
-              <div className={styles.count}>
+              <span className={styles.count}>
                 {contentCount}/{MAX_ARTICLE_COMMENT_LENGTH}
-              </div>
+              </span>
             )}
             <Dialog.RoundedButton
               type="submit"

@@ -95,6 +95,9 @@
     "defaultMessage": "Write a comment",
     "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
+  "/dKzfc": {
+    "defaultMessage": "This work is archived due to violation of community guidelines."
+  },
   "/faseS": {
     "defaultMessage": "Share link copied"
   },
@@ -977,6 +980,9 @@
   "G/yZLu": {
     "defaultMessage": "Remove"
   },
+  "G0pqnh": {
+    "defaultMessage": "View original content"
+  },
   "G4bk3r": {
     "defaultMessage": "Custom amount is greater than your balance"
   },
@@ -1451,9 +1457,6 @@
   "OpeFTV": {
     "defaultMessage": "Enter a 6-digit payment password."
   },
-  "Oru6G2": {
-    "defaultMessage": "The Fingerprint from IPFS, you can read it via a gateway"
-  },
   "OsX3KM": {
     "defaultMessage": "Comment",
     "description": "src/views/ArticleDetail/index.tsx"
@@ -1794,9 +1797,6 @@
   "VeEfHm": {
     "defaultMessage": "Drafts",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
-  },
-  "VefaFQ": {
-    "defaultMessage": "Content length exceeds limit ({length}/{limit})"
   },
   "VmYzLr": {
     "defaultMessage": "{total} members"
@@ -2297,6 +2297,10 @@
   "fJFvPm": {
     "defaultMessage": "Code Block"
   },
+  "fJVe7H": {
+    "defaultMessage": "IPFS",
+    "description": "src/views/ArticleDetail/History/InfoHeader/index.tsx"
+  },
   "fK6ptv": {
     "defaultMessage": "Sending failed. Please retry later."
   },
@@ -2721,6 +2725,9 @@
   "nYrKWp": {
     "defaultMessage": "Edit profile"
   },
+  "nhkx3t": {
+    "defaultMessage": "IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"
+  },
   "no7l8z": {
     "defaultMessage": "Disconnect wallet",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
@@ -2824,6 +2831,9 @@
   "qgPR68": {
     "defaultMessage": "Pin to profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
+  "qhVSGI": {
+    "defaultMessage": "Hmm... It seems the author has hidden this work. Go see something else"
   },
   "qlki7w": {
     "defaultMessage": "Remove Article",
@@ -3032,6 +3042,9 @@
   "v6YjIn": {
     "defaultMessage": "Account",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "v84cGN": {
+    "defaultMessage": "What is this"
   },
   "v8dGSd": {
     "defaultMessage": "Wallet is linked to a different account",
@@ -3297,9 +3310,6 @@
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."
-  },
-  "zbaTLV": {
-    "defaultMessage": "View on IPFS"
   },
   "zkmfjn": {
     "defaultMessage": "Pinned",
