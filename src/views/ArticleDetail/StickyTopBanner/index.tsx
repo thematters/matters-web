@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { LanguageContext, TextIcon } from '~/components'
+import { LanguageContext, TextIcon, useRoute } from '~/components'
 import { StateArticleFragment, UserLanguage } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -63,13 +63,15 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
       {lang === UserLanguage.En && <>&nbsp;</>}
 
       <Link href={PATHS.ME_ARCHIVED}>
-        <TextIcon decoration="underline" size={16} weight="semibold">
-          <FormattedMessage
-            defaultMessage="Back to my works"
-            id="HR599l"
-            description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
-          />
-        </TextIcon>
+        <a>
+          <TextIcon decoration="underline" size={16} weight="semibold">
+            <FormattedMessage
+              defaultMessage="Back to my works"
+              id="HR599l"
+              description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
+            />
+          </TextIcon>
+        </a>
       </Link>
 
       <style global jsx>{`
@@ -83,9 +85,13 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
 
 const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
   const { lang } = useContext(LanguageContext)
+  const { router } = useRoute()
+  const { shortHash, v, ...qs } = router.query
+
   const path = toPath({
     page: 'articleDetail',
     article,
+    search: qs as { [key: string]: string },
   })
 
   return (
@@ -100,14 +106,16 @@ const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
 
       {lang === 'en' && <span>&nbsp;</span>}
 
-      <Link href={path.href}>
-        <TextIcon decoration="underline" size={16} weight="semibold">
-          <FormattedMessage
-            defaultMessage="back to latest"
-            id="imXsmo"
-            description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
-          />
-        </TextIcon>
+      <Link {...path}>
+        <a>
+          <TextIcon decoration="underline" size={16} weight="medium">
+            <FormattedMessage
+              defaultMessage="back to latest"
+              id="imXsmo"
+              description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
+            />
+          </TextIcon>
+        </a>
       </Link>
 
       <style global jsx>{`

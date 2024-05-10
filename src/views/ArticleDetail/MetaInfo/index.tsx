@@ -10,6 +10,7 @@ import {
   Icon,
   TextIcon,
   UserDigest,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import {
@@ -46,6 +47,9 @@ const MetaInfo = ({
   const originalLanguage = article?.language ? article.language : ''
   const { href } = toPath({ page: 'articleDetail', article })
 
+  const { router } = useRoute()
+  const { shortHash, ...qs } = router.query
+
   return (
     <section className={styles.info}>
       {/* TODO: Confirm display word length with product */}
@@ -79,6 +83,7 @@ const MetaInfo = ({
             toPath({
               page: 'articleHistory',
               article,
+              search: qs as { [key: string]: string },
             }).href
           }
         >

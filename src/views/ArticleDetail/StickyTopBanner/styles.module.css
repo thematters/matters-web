@@ -4,7 +4,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: var(--z-index-under-global-header);
   width: 100%;
   padding: calc(var(--sp10) - 1px) 0;
   color: black;
@@ -13,5 +13,9 @@
 
   &.revision {
     background: var(--color-green-lighter);
+  }
+
+  & a {
+    font-size: 0;
   }
 }

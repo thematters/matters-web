@@ -17,7 +17,6 @@ import {
   Throw404,
   Title,
   toast,
-  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -218,8 +217,6 @@ const ArticleDetailHistory = ({ latestVersion }: { latestVersion: string }) => {
   const error = resultByHash.error
 
   const { article, version } = data || {}
-  const authorId = article?.author?.id
-  const isAuthor = viewer.id === authorId
 
   /**
    * fetch private data
@@ -278,22 +275,20 @@ const ArticleDetailHistory = ({ latestVersion }: { latestVersion: string }) => {
   /**
    * Render:Archived/Banned
    */
-  if (article.state !== 'active' && !isAuthor) {
+  if (article.state !== 'active') {
     return (
       <EmptyLayout>
         <Error
           message={
             article.state === 'archived' ? (
-              <Translate
-                zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
-                zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
-                en="Hmm... It seems the author has hidden this work. Go see something else"
+              <FormattedMessage
+                defaultMessage="Hmm... It seems the author has hidden this work. Go see something else"
+                id="qhVSGI"
               />
             ) : article.state === 'banned' ? (
-              <Translate
-                zh_hant="該作品因違反社區約章，已被站方強制歸檔。"
-                zh_hans="该作品因违反社区约章，已被站方强制封存。"
-                en="This work is archived due to violation of community guidelines."
+              <FormattedMessage
+                defaultMessage="This work is archived due to violation of community guidelines."
+                id="/dKzfc"
               />
             ) : null
           }

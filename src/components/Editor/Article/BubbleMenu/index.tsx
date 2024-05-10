@@ -232,6 +232,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
+              disabled={
+                // @ts-ignore
+                !editor.can().chain().focus().toggleCodeBlock().run() ||
+                editor.isActive('codeBlock')
+              }
               className={editor.isActive('blockquote') ? styles.active : ''}
               aria-label={intl.formatMessage({
                 defaultMessage: 'Quote',

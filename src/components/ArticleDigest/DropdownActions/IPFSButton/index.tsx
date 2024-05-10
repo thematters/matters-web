@@ -1,6 +1,6 @@
 import { ReactComponent as IconIPFS } from '@/public/static/icons/24px/ipfs.svg'
 import { toPath } from '~/common/utils'
-import { Icon, Menu } from '~/components'
+import { Icon, Menu, useRoute } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
 type IPFSButtonProps = {
@@ -8,6 +8,9 @@ type IPFSButtonProps = {
 }
 
 const IPFSButton: React.FC<IPFSButtonProps> = ({ article }) => {
+  const { router } = useRoute()
+  const { shortHash, v, ...qs } = router.query
+
   return (
     <Menu.Item
       text="IPFS"
@@ -17,6 +20,7 @@ const IPFSButton: React.FC<IPFSButtonProps> = ({ article }) => {
         toPath({
           page: 'articleHistory',
           article,
+          search: qs as { [key: string]: string },
         }).href
       }
     />
