@@ -9,8 +9,10 @@ import {
   ArticleDigestTitle,
   List,
   QueryError,
+  Spacer,
   SpinnerBlock,
   Title,
+  UserDigest,
   ViewMoreButton,
 } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
@@ -88,6 +90,7 @@ const Collection: React.FC<{
           <List.Item key={node.id}>
             <ArticleDigestTitle
               article={node}
+              lineClamp={1}
               textSize={16}
               textWeight="normal"
               onClick={() =>
@@ -98,6 +101,15 @@ const Collection: React.FC<{
                   id: node.id,
                 })
               }
+            />
+            <Spacer size="xtight" />
+            <UserDigest.Mini
+              user={node.author}
+              avatarSize={16}
+              textSize={12}
+              nameColor="grey"
+              hasAvatar
+              hasDisplayName
             />
           </List.Item>
         ))}

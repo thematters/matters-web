@@ -24,17 +24,20 @@ const Author = ({ article }: AuthorProps) => {
     <section className={styles.container}>
       <section>
         <LinkWrapper {...userProfilePath}>
-          <section className={styles.avatar}>
-            <Avatar size={64} user={author} inProfile />
-          </section>
+          <Avatar size={64} user={author} inProfile />
         </LinkWrapper>
       </section>
-      <LinkWrapper {...userProfilePath}>
-        <section className={styles.info}>
+
+      <section className={styles.info}>
+        <LinkWrapper {...userProfilePath}>
           <span className={styles.displayName}>{displayName}</span>
-          {!!description && <span className={styles.bio}>{description}</span>}
-        </section>
-      </LinkWrapper>
+        </LinkWrapper>
+        {!!description && (
+          <LinkWrapper {...userProfilePath}>
+            <span className={styles.bio}>{description}</span>
+          </LinkWrapper>
+        )}
+      </section>
     </section>
   )
 }

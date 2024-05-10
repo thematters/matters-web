@@ -1,7 +1,8 @@
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Tabs } from '~/components'
+import { Tabs, ViewerContext } from '~/components'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
 type Props = {
@@ -11,7 +12,9 @@ type Props = {
 }
 
 const DonationTabs = ({ recipient, currency, setCurrency }: Props) => {
+  const viewer = useContext(ViewerContext)
   const creatorAddress = recipient.info.ethAddress
+  const hasLikeId = !!viewer.liker.likerId
 
   const isHKD = currency === CURRENCY.HKD
   const isUSDT = currency === CURRENCY.USDT
@@ -33,12 +36,14 @@ const DonationTabs = ({ recipient, currency, setCurrency }: Props) => {
       >
         USDT
       </Tabs.Tab>
-      <Tabs.Tab
-        selected={isLikecoin}
-        onClick={() => setCurrency(CURRENCY.LIKE)}
-      >
-        LikeCoin
-      </Tabs.Tab>
+      {hasLikeId && (
+        <Tabs.Tab
+          selected={isLikecoin}
+          onClick={() => setCurrency(CURRENCY.LIKE)}
+        >
+          LikeCoin
+        </Tabs.Tab>
+      )}
     </Tabs>
   )
 }

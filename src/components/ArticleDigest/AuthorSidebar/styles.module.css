@@ -4,6 +4,12 @@
 
   @mixin flex-start-space-between;
 
+  & > .left {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp8);
+  }
+
   & header {
     flex-grow: 1;
 
@@ -23,8 +29,7 @@
       & a {
         color: var(--color-black);
 
-        &:hover,
-        &:focus {
+        &:hover {
           color: var(--color-matters-green);
         }
       }
@@ -34,8 +39,7 @@
       & a {
         color: var(--color-grey-darker);
 
-        &:hover,
-        &:focus {
+        &:hover {
           color: var(--color-matters-green);
         }
       }

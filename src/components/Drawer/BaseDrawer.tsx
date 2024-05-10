@@ -68,7 +68,7 @@ export const BaseDrawer = ({
   direction,
   children,
   duration = 200,
-  enableOverlay = true,
+  enableOverlay = false,
   className,
   size,
 }: BaseDrawerProps) => {
@@ -86,6 +86,8 @@ export const BaseDrawer = ({
   const idSuffix = Math.random().toString(36).substring(7)
 
   useEffect(() => {
+    if (!enableOverlay) return
+
     const handleClickOutside = (e: Event) => {
       if (ref.current && !e.composedPath().includes(ref.current)) {
         onClose && onClose()

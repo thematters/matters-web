@@ -665,6 +665,9 @@
     "defaultMessage": "廣播留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "A0MNSc": {
+    "defaultMessage": "CC BY-NC-ND 2.0 授權"
+  },
   "A3g33H": {
     "defaultMessage": "封存作品僅自己可見，且操作無法撤銷。如文章已加入選集，將從選集中移除。（已發佈到 IPFS 的版本不受影響）"
   },
@@ -1602,6 +1605,9 @@
     "defaultMessage": "用戶不存在",
     "description": "USER_NOT_FOUND"
   },
+  "S15KFb": {
+    "defaultMessage": "{totalCount} 篇作品"
+  },
   "S8PcQf": {
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
@@ -1681,6 +1687,9 @@
   },
   "TKsfIS": {
     "defaultMessage": "流星號"
+  },
+  "TPEQMa": {
+    "defaultMessage": "CC BY-NC-ND 4.0 授權"
   },
   "TSDiqB": {
     "defaultMessage": "付費人數",
@@ -2057,10 +2066,6 @@
     "defaultMessage": "重新發送",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
   },
-  "aFJE+p": {
-    "defaultMessage": "{totalCount} 篇作品",
-    "description": "src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
-  },
   "aHTyGJ": {
     "defaultMessage": "官方文檔",
     "description": "src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
@@ -2421,6 +2426,9 @@
   "iNZdM/": {
     "defaultMessage": "切換後即可支持創作者，採用 Optimism 網路{br}讓支持更方便且費用低廉",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "iSM+et": {
+    "defaultMessage": "作者保留所有權利"
   },
   "iTcMqz": {
     "defaultMessage": "月色之下，夢想即將實現。月之夢徽章紀念你曾參與「遊牧者計畫」。",
@@ -2847,6 +2855,9 @@
   },
   "rDX3h6": {
     "defaultMessage": "版本簡述"
+  },
+  "rE7sE3": {
+    "defaultMessage": "CC0 公眾領域貢獻宣告"
   },
   "rHi+cL": {
     "defaultMessage": "最多讀者",

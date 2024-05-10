@@ -665,6 +665,9 @@
     "defaultMessage": "New replies to broadcast",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "A0MNSc": {
+    "defaultMessage": "CC BY-NC-ND 2.0"
+  },
   "A3g33H": {
     "defaultMessage": "Archived articles can only be seen by you, and this operation cannot be undone. If this article has been added to collections, it will be removed. (IPFS version will not be effected)"
   },
@@ -1602,6 +1605,9 @@
     "defaultMessage": "User not found",
     "description": "USER_NOT_FOUND"
   },
+  "S15KFb": {
+    "defaultMessage": "{totalCount} articles"
+  },
   "S8PcQf": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
@@ -1681,6 +1687,9 @@
   },
   "TKsfIS": {
     "defaultMessage": "Meteor Canoe"
+  },
+  "TPEQMa": {
+    "defaultMessage": "CC BY-NC-ND 4.0"
   },
   "TSDiqB": {
     "defaultMessage": "Subscribers",
@@ -2057,10 +2066,6 @@
     "defaultMessage": "Resend",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
   },
-  "aFJE+p": {
-    "defaultMessage": "{totalCount} articles",
-    "description": "src/views/ArticleDetail/AuthorSidebar/Collection/index.tsx"
-  },
   "aHTyGJ": {
     "defaultMessage": "docs",
     "description": "src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
@@ -2421,6 +2426,9 @@
   "iNZdM/": {
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "iSM+et": {
+    "defaultMessage": "All rights reserved"
   },
   "iTcMqz": {
     "defaultMessage": "Under the moonlight, dreams are about to come true. The Moonlight Dream badge signifies your participation in the Nomad Matters.",
@@ -2847,6 +2855,9 @@
   },
   "rDX3h6": {
     "defaultMessage": "Version Description"
+  },
+  "rE7sE3": {
+    "defaultMessage": "CC0 License"
   },
   "rHi+cL": {
     "defaultMessage": "Most readers",

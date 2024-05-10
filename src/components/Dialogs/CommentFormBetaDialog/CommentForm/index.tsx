@@ -86,10 +86,11 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
+    const trimContent = content.replace(/^(<p>\s*<\/p>)+|(<p>\s*<\/p>)+$/g, '')
     const input = {
       id: commentId,
       comment: {
-        content,
+        content: trimContent,
         replyTo: replyToId,
         articleId,
         circleId,

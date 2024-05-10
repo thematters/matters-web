@@ -3,7 +3,7 @@
 
   position: relative;
   padding: var(--sp8) 0;
-  border-radius: var(--sp16);
+  border-radius: var(--sp8);
 }
 
 .content {

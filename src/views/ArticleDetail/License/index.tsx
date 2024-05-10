@@ -1,5 +1,6 @@
+import { FormattedMessage } from 'react-intl'
+
 import { TEST_ID } from '~/common/enums'
-import { Translate } from '~/components'
 import { ArticleLicenseType } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -16,36 +17,18 @@ const License: React.FC<LicenseProps> = ({ license }) => {
 
   return (
     <section className={styles.license} data-test-id={TEST_ID.ARTICLE_LICENSE}>
-      {isCC0 && (
-        <Translate
-          zh_hant="NO RIGHTS RESERVED 授權"
-          zh_hans="NO RIGHTS RESERVED 授权"
-          en="NO RIGHTS RESERVED"
-        />
-      )}
+      {isCC0 && <FormattedMessage defaultMessage="CC0 License" id="rE7sE3" />}
 
       {isARR && (
-        <Translate
-          zh_hant="ALL RIGHTS RESERVED 授權"
-          zh_hans="ALL RIGHTS RESERVED 授权"
-          en="ALL RIGHTS RESERVED"
-        />
+        <FormattedMessage defaultMessage="All rights reserved" id="iSM+et" />
       )}
 
       {isCCBYNCND2 && (
-        <Translate
-          zh_hant="CC BY-NC-ND 2.0 授權"
-          zh_hans="CC BY-NC-ND 2.0 授权"
-          en="CC BY-NC-ND 2.0"
-        />
+        <FormattedMessage defaultMessage="CC BY-NC-ND 2.0" id="A0MNSc" />
       )}
 
       {isCCBYNCND4 && (
-        <Translate
-          zh_hant="CC BY-NC-ND 4.0 授權"
-          zh_hans="CC BY-NC-ND 4.0 授权"
-          en="CC BY-NC-ND 4.0"
-        />
+        <FormattedMessage defaultMessage="CC BY-NC-ND 4.0" id="TPEQMa" />
       )}
     </section>
   )
