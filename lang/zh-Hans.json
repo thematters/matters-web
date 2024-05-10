@@ -1454,9 +1454,6 @@
   "OpeFTV": {
     "defaultMessage": "输入六位数字交易密码"
   },
-  "Oru6G2": {
-    "defaultMessage": "使用 IPFS 生成的作品指纹，通过它可在节点调取内容"
-  },
   "OsX3KM": {
     "defaultMessage": "评论",
     "description": "src/views/ArticleDetail/index.tsx"
@@ -2298,6 +2295,10 @@
   "fJFvPm": {
     "defaultMessage": "代码"
   },
+  "fJVe7H": {
+    "defaultMessage": "IPFS 指纹",
+    "description": "src/views/ArticleDetail/History/InfoHeader/index.tsx"
+  },
   "fK6ptv": {
     "defaultMessage": "送出失败，请稍后再试"
   },
@@ -2719,6 +2720,9 @@
   "nYrKWp": {
     "defaultMessage": "编辑个人信息"
   },
+  "nhkx3t": {
+    "defaultMessage": "IPFS 是一种分散式储存技术，具有去中心、易存续、不易被审查等优点。 每一篇在 Matters 发布的文章都会上传到 IPFS。 IPFS 会产生一定储存费用，目前暂时由 Matters 承担。 （到 IPFS 官网 ipfs.com 可以了解更多）"
+  },
   "no7l8z": {
     "defaultMessage": "解绑钱包",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
@@ -3031,6 +3035,9 @@
     "defaultMessage": "账户",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "v84cGN": {
+    "defaultMessage": "这是什么"
+  },
   "v8dGSd": {
     "defaultMessage": "该钱包已关联至其他帐号",
     "description": "CRYPTO_WALLET_EXISTS"
@@ -3295,9 +3302,6 @@
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
-  },
-  "zbaTLV": {
-    "defaultMessage": "在 IPFS 上查看"
   },
   "zkmfjn": {
     "defaultMessage": "置頂",

@@ -15,7 +15,7 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
   const versions = article.versions.edges.map((edge) => edge?.node!)
   const currVersion = getQuery('v') || versions[0]?.id
 
-  if (versions.length < 1) {
+  if (versions.length <= 1) {
     return null
   }
 
