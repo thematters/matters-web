@@ -2350,6 +2350,9 @@
   "gluNT8": {
     "defaultMessage": "輸入連結地址"
   },
+  "gy/Kkr": {
+    "defaultMessage": "（修改过）"
+  },
   "gz0EGC": {
     "defaultMessage": "編輯作品已發佈"
   },
@@ -2959,9 +2962,6 @@
     "defaultMessage": "評論已被強制隱藏",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
-  "twEps9": {
-    "defaultMessage": " 更新"
-  },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3020,9 +3020,6 @@
   },
   "uw32VR": {
     "defaultMessage": "教學指南"
-  },
-  "ux4p3j": {
-    "defaultMessage": " 更新於"
   },
   "v+hbfO": {
     "defaultMessage": "固定金額"

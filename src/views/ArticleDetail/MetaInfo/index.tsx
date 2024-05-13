@@ -52,6 +52,12 @@ const MetaInfo = ({
   const { router } = useRoute()
   const { shortHash, ...qs } = router.query
 
+  const path = toPath({
+    page: 'articleHistory',
+    article,
+    search: qs as { [key: string]: string },
+  }).href
+
   return (
     <section className={styles.info}>
       {/* TODO: Confirm display word length with product */}
@@ -69,28 +75,23 @@ const MetaInfo = ({
           color="greyDarker"
         />
         <span>
-          {version?.createdAt ? (
-            <FormattedMessage defaultMessage=" published" id="twEps9" />
-          ) : (
-            <FormattedMessage defaultMessage=" published on" id="ux4p3j" />
+          {!version && article?.revisionCount > 0 && (
+            <Button textColor="greyDarker" textActiveColor="black" href={path}>
+              <FormattedMessage defaultMessage="(edited)" id="gy/Kkr" />
+            </Button>
           )}
         </span>
       </section>
 
       {!version && (
-        <Button
-          textColor="black"
-          textActiveColor="greyDarker"
-          href={
-            toPath({
-              page: 'articleHistory',
-              article,
-              search: qs as { [key: string]: string },
-            }).href
-          }
-        >
-          <TextIcon size={12}>IPFS</TextIcon>
-        </Button>
+        <>
+          <section className={styles.dot}>
+            <DotDivider />
+          </section>
+          <Button textColor="black" textActiveColor="greyDarker" href={path}>
+            <TextIcon size={12}>IPFS</TextIcon>
+          </Button>
+        </>
       )}
 
       {canReadFullContent && (

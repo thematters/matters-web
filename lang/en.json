@@ -2350,6 +2350,9 @@
   "gluNT8": {
     "defaultMessage": "Enter URL"
   },
+  "gy/Kkr": {
+    "defaultMessage": " (edited)"
+  },
   "gz0EGC": {
     "defaultMessage": "Article republished"
   },
@@ -2959,9 +2962,6 @@
     "defaultMessage": "The comment has been forcibly hidden",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
-  "twEps9": {
-    "defaultMessage": " published"
-  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3020,9 +3020,6 @@
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
-  },
-  "ux4p3j": {
-    "defaultMessage": " published on"
   },
   "v+hbfO": {
     "defaultMessage": "fixed amount"
