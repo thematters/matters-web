@@ -224,7 +224,6 @@ const BaseEdit = ({ article }: { article: Article }) => {
             </SupportSettingDialog>
           </section>
         }
-        inEditor
       >
         <Layout.Header
           mode="compact"

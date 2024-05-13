@@ -63,7 +63,7 @@ const VersionsDropdown = ({
   const currVersion = getQuery('v') || versions[0]?.id
   const version = versions.find((v) => v.id === currVersion)
 
-  if (versions.length <= 1 || !version) {
+  if (versions.length < 1 || !version) {
     return null
   }
 
