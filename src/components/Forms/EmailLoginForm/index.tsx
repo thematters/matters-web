@@ -23,6 +23,7 @@ import {
   validateEmail,
   WalletType,
 } from '~/common/utils'
+import type { TurnstileInstance } from '~/components'
 import {
   AuthFeedType,
   AuthNormalFeed,
@@ -34,15 +35,13 @@ import {
   LanguageContext,
   LanguageSwitch,
   Media,
+  ReCaptcha,
   ResendCodeButton,
   TextIcon,
-  Turnstile,
-  TurnstileInstance,
   useCountdown,
   // toast,
   useMutation,
   useRoute,
-  ViewerContext,
 } from '~/components'
 import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -82,7 +81,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   setAuthFeedType,
   back,
 }) => {
-  const viewer = useContext(ViewerContext)
   const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
     showToast: false,
   })
@@ -270,26 +268,15 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const fieldMsgId = `field-msg-sign-in`
 
-  const siteKey = process.env
-    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
   const InnerForm = (
     <>
-      <Turnstile
+      <ReCaptcha
         ref={turnstileRef}
-        siteKey={siteKey}
-        options={{
-          action: 'email_login',
-          cData: `user-group-${viewer.info.group}`,
-          size: 'invisible',
-        }}
-        scriptOptions={{
-          compat: 'recaptcha',
-          appendTo: 'body',
-        }}
-        onSuccess={(token) => {
-          setTurnstileToken(token)
-        }}
+        action="email_login"
+        setToken={setTurnstileToken}
+        silence
       />
+
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}

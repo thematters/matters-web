@@ -17,6 +17,7 @@ import {
   validateEmail,
 } from '~/common/utils'
 import { WalletType } from '~/common/utils'
+import type { TurnstileInstance } from '~/components'
 import {
   AuthFeedType,
   AuthTabs,
@@ -26,13 +27,10 @@ import {
   Icon,
   LanguageContext,
   Media,
+  ReCaptcha,
   TextIcon,
-  Turnstile,
-  // TURNSTILE_DEFAULT_SCRIPT_ID,
-  TurnstileInstance,
   useMutation,
   useRoute,
-  ViewerContext,
 } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 // import { UserGroup } from '~/gql/graphql'
@@ -65,7 +63,6 @@ const Init: React.FC<FormProps> = ({
   setAuthFeedType,
   back,
 }) => {
-  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const formId = 'email-sign-up-init-form'
 
@@ -147,25 +144,12 @@ const Init: React.FC<FormProps> = ({
     },
   })
 
-  const siteKey = process.env
-    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <Turnstile
+      <ReCaptcha
         ref={turnstileRef}
-        siteKey={siteKey}
-        options={{
-          action: 'register',
-          cData: `user-group-${viewer.info.group}`,
-          size: 'invisible',
-        }}
-        scriptOptions={{
-          compat: 'recaptcha',
-          appendTo: 'body',
-        }}
-        onSuccess={(token) => {
-          setTurnstileToken(token)
-        }}
+        action="register"
+        setToken={setTurnstileToken}
       />
       <Form.Input
         label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}

@@ -8,13 +8,13 @@ import {
   SYNC_APPRECIATE_BUTTON_COUNT,
   Z_INDEX,
 } from '~/common/enums'
+import type { TurnstileInstance } from '~/components'
 import {
   ButtonProps,
+  ReCaptcha,
   toast,
   Tooltip,
   Translate,
-  Turnstile,
-  TurnstileInstance,
   useEventListener,
   useMutation,
   ViewerContext,
@@ -246,26 +246,11 @@ const AppreciationButton = ({
     )
   }
 
-  const siteKey = process.env
-    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
-
   // Appreciable
   if (canAppreciate && !disabled) {
     return (
       <section>
-        <Turnstile
-          ref={turnstileRef}
-          options={{
-            action: 'appreciate',
-            cData: `user-group-${viewer.info.group}`,
-            size: 'invisible',
-          }}
-          siteKey={siteKey}
-          scriptOptions={{
-            compat: 'recaptcha',
-            appendTo: 'body',
-          }}
-        />
+        <ReCaptcha ref={turnstileRef} action="appreciate" />
         <AppreciateButton
           onClick={appreciate}
           count={appreciatedCount > 0 ? appreciatedCount : undefined}
