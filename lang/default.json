@@ -1959,10 +1959,6 @@
     "defaultMessage": "Please confirm authorization in the wallet dialog.{br}Once confirmed, support steps can begin.",
     "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
-  "YOMY1y": {
-    "defaultMessage": "Comment...",
-    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
-  },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
     "description": "UNAUTHENTICATED"
@@ -2325,6 +2321,10 @@
   "g5pX+a": {
     "defaultMessage": "About"
   },
+  "gK6OxL": {
+    "defaultMessage": "Leave a comment?",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "gMZfHO": {
     "defaultMessage": "RSS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -2487,9 +2487,6 @@
   "jtdQHR": {
     "defaultMessage": "Gateways"
   },
-  "jwnump": {
-    "defaultMessage": "Comment..."
-  },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2605,6 +2602,9 @@
   "lZukEr": {
     "defaultMessage": "commented",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+  },
+  "liBHHE": {
+    "defaultMessage": "Any thoughts? Leave a kind comment~"
   },
   "ll/ufR": {
     "defaultMessage": "Trending"

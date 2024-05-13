@@ -35,8 +35,8 @@ const CommentEditor: React.FC<Props> = ({
     placeholder:
       placeholder ||
       intl.formatMessage({
-        id: 'jwnump',
-        defaultMessage: 'Comment...',
+        id: 'liBHHE',
+        defaultMessage: 'Any thoughts? Leave a kind comment~',
       }),
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {

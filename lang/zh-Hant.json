@@ -1959,10 +1959,6 @@
     "defaultMessage": "請於錢包視窗點擊確認授權使用{br}確認完成後即可開始支持步驟",
     "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
-  "YOMY1y": {
-    "defaultMessage": "發布評論...",
-    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
-  },
   "YPMn9n": {
     "defaultMessage": "請先登入再進行操作",
     "description": "UNAUTHENTICATED"
@@ -2325,6 +2321,10 @@
   "g5pX+a": {
     "defaultMessage": "關於"
   },
+  "gK6OxL": {
+    "defaultMessage": "留個友善的評論？",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "gMZfHO": {
     "defaultMessage": "RSS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -2487,9 +2487,6 @@
   "jtdQHR": {
     "defaultMessage": "公共節點"
   },
-  "jwnump": {
-    "defaultMessage": "發布評論..."
-  },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2605,6 +2602,9 @@
   "lZukEr": {
     "defaultMessage": "評論了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+  },
+  "liBHHE": {
+    "defaultMessage": "什麼看法，都可以留個友善的評論～"
   },
   "ll/ufR": {
     "defaultMessage": "熱門"
