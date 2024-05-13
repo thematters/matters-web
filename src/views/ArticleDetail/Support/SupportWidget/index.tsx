@@ -128,7 +128,7 @@ const SupportWidget = ({
     <section className={supportWidgetClasses} id="animation">
       {showAnimation && (
         <DynamicAnimation
-          playLoading={playLoading}
+          playShipWaiting={playLoading}
           playEnd={() => {
             setShowAnimation(false)
             setPlaySlideUp(true)
