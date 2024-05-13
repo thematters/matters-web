@@ -1857,9 +1857,6 @@
   "WiGHyF": {
     "defaultMessage": "Web Monetization 標準"
   },
-  "Wjmng6": {
-    "defaultMessage": "正文及作品管理剩 {revisionCountLeft} 版編輯"
-  },
   "WpvsPu": {
     "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -2608,9 +2605,6 @@
   },
   "lqdpsm": {
     "defaultMessage": "回到訂閱"
-  },
-  "lsccVJ": {
-    "defaultMessage": "正文及作品管理編輯次數已達上限"
   },
   "m+cdhC": {
     "defaultMessage": "近期使用"
