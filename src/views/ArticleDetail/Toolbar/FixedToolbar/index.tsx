@@ -286,7 +286,6 @@ const FixedToolbar = ({
 
             <section>
               <DonationButton
-                article={article}
                 articleDetail={articleDetails}
                 disabled={lock}
                 iconSize={24}
