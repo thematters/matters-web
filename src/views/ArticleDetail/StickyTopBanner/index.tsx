@@ -91,7 +91,7 @@ const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
   const path = toPath({
     page: 'articleDetail',
     article,
-    search: qs as { [key: string]: string },
+    search: qs as { [key: string]: string }, // forward qs back to detail page
   })
 
   return (

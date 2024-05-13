@@ -136,7 +136,7 @@ const BaseArticleDetailHistory = ({
           toPath({
             page: 'articleHistory',
             article,
-            versionId: version.id,
+            search: { v: version.id },
           }).href
         }
         noSuffix

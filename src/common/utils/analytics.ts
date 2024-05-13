@@ -319,14 +319,3 @@ type PageType =
   | 'user_profile'
   | 'circle_detail'
   | 'edit_draft'
-
-export interface UtmParams {
-  utm_source?: string // required in most cases
-  utm_medium?: string // required in most cases
-  utm_campaign?: string // all others are really optional
-  utm_content?: string
-  utm_term?: string
-  utm_id?: string
-}
-
-export type UtmParam = keyof UtmParams

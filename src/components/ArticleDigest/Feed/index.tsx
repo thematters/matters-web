@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
-import { stripHtml, toPath, UtmParams } from '~/common/utils'
+import { stripHtml, toPath } from '~/common/utils'
 import {
   DateTime,
   Icon,
@@ -37,8 +37,7 @@ export type ArticleDigestFeedProps = {
   header?: React.ReactNode
   collectionId?: string
 } & ArticleDigestFeedControls &
-  FooterActionsProps &
-  UtmParams
+  FooterActionsProps
 
 const BaseArticleDigestFeed = ({
   article,
@@ -53,9 +52,6 @@ const BaseArticleDigestFeed = ({
 
   isFirstFold = false,
 
-  utm_source,
-  utm_medium,
-
   hasReadTime,
   hasDonationCount,
   ...controls
@@ -69,8 +65,6 @@ const BaseArticleDigestFeed = ({
     page: 'articleDetail',
     article,
     collectionId,
-    utm_source,
-    utm_medium,
   })
 
   const footerActions = (

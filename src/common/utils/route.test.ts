@@ -39,18 +39,6 @@ describe('utils/route/toPath', () => {
       expect(href).toBe(`/a/${MOCK_ARTILCE.shortHash}?collection=123`)
     })
 
-    it('should return the correct path with utm paramaters', () => {
-      const { href } = toPath({
-        page: 'articleDetail',
-        article: MOCK_ARTILCE,
-        utm_source: 'test-source',
-        utm_campaign: 'test-campaign',
-      })
-      expect(href).toBe(
-        `/a/${MOCK_ARTILCE.shortHash}?utm_source=test-source&utm_campaign=test-campaign`
-      )
-    })
-
     it('should return the correct path with custom search', () => {
       const { href } = toPath({
         page: 'articleDetail',
@@ -83,7 +71,9 @@ describe('utils/route/toPath', () => {
         article: {
           ...MOCK_ARTILCE,
         },
-        versionId: '123',
+        search: {
+          v: '123',
+        },
       })
 
       expect(href).toBe(`/a/${MOCK_ARTILCE.shortHash}/history?v=123`)

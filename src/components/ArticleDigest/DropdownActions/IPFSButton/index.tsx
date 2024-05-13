@@ -20,7 +20,7 @@ const IPFSButton: React.FC<IPFSButtonProps> = ({ article }) => {
         toPath({
           page: 'articleHistory',
           article,
-          search: qs as { [key: string]: string },
+          search: qs as { [key: string]: string }, // forward qs to history page
         }).href
       }
     />

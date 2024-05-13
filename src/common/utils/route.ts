@@ -3,7 +3,6 @@ import { Key, pathToRegexp } from 'path-to-regexp'
 
 import { PATHS, ROUTES } from '~/common/enums'
 
-import { UtmParams } from './analytics'
 import { fromGlobalId } from './globalId'
 import { slugifyTag } from './text'
 import { parseURL } from './url'
@@ -42,11 +41,7 @@ type ToPathArgs =
       collectionId?: string
     }
   | { page: 'articleEdit'; article: ArticleArgs }
-  | {
-      page: 'articleHistory'
-      article: ArticleArgs
-      versionId?: string
-    }
+  | { page: 'articleHistory'; article: ArticleArgs }
   | {
       page:
         | 'circleDetail'
@@ -91,8 +86,7 @@ type ToPathArgs =
  * (works on SSR & CSR)
  */
 export const toPath = (
-  args: ToPathArgs &
-    UtmParams & { fragment?: string; search?: { [key: string]: string } }
+  args: ToPathArgs & { fragment?: string; search?: { [key: string]: string } }
 ): {
   href: string
 } => {
@@ -122,10 +116,6 @@ export const toPath = (
       const { shortHash } = args.article
 
       href = `/a/${shortHash}/history`
-
-      if (args.versionId) {
-        href = `${href}?v=${args.versionId}`
-      }
 
       break
     }
@@ -229,15 +219,7 @@ export const toPath = (
 
   // query string
   let searchParams: URLSearchParams = new URLSearchParams(
-    [
-      ['utm_source', args.utm_source as string],
-      ['utm_medium', args.utm_medium as string],
-      ['utm_campaign', args.utm_campaign as string],
-      ['utm_content', args.utm_content as string],
-      ['utm_id', args.utm_id as string],
-      ['utm_term', args.utm_term as string],
-      ...(Object.entries(search) as [string, string][]),
-    ].filter(([k, v]) => !!v)
+    [...(Object.entries(search) as [string, string][])].filter(([k, v]) => !!v)
   )
   if (searchParams.toString()) {
     href = `${href}?${searchParams.toString()}`
