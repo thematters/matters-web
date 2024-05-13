@@ -231,7 +231,7 @@ const SetAmount: React.FC<FormProps> = ({
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (
       <section>
-        <Spacer size="base" />
+        <Spacer size="xxtight" />
         <FormattedMessage
           defaultMessage="Payment will be processed by Stripe, allowing your support to be unrestricted by region."
           id="TX5UzL"
