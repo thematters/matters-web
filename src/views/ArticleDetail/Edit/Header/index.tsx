@@ -180,24 +180,7 @@ const EditModeHeader = ({
 
   return (
     <section className={styles.header}>
-      <p className={styles.hint}>
-        <>
-          {!isOverRevisionLimit ? (
-            <FormattedMessage
-              defaultMessage="{revisionCountLeft} revisions remaining"
-              id="Wjmng6"
-              values={{
-                revisionCountLeft,
-              }}
-            />
-          ) : (
-            <FormattedMessage
-              defaultMessage="You have reached the limit of republished articles"
-              id="lsccVJ"
-            />
-          )}
-        </>
-      </p>
+      <span />
 
       <section>
         {isOverLength && (

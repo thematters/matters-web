@@ -1857,9 +1857,6 @@
   "WiGHyF": {
     "defaultMessage": "Web Monetization standard"
   },
-  "Wjmng6": {
-    "defaultMessage": "{revisionCountLeft} revisions remaining"
-  },
   "WpvsPu": {
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -2611,9 +2608,6 @@
   },
   "lqdpsm": {
     "defaultMessage": "Back to subscribe"
-  },
-  "lsccVJ": {
-    "defaultMessage": "You have reached the limit of republished articles"
   },
   "m+cdhC": {
     "defaultMessage": "Recently used"
