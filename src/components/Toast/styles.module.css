@@ -38,6 +38,10 @@
   background: var(--color-black);
 }
 
+.warning {
+  background: var(--color-warn-yellow);
+}
+
 .error {
   background: var(--color-negative-red);
 

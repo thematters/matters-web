@@ -95,6 +95,9 @@
     "defaultMessage": "回复评论",
     "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
+  "/dKzfc": {
+    "defaultMessage": "该作品因违反社区约章，已被站方强制封存。"
+  },
   "/faseS": {
     "defaultMessage": "已复制分享连结"
   },
@@ -813,7 +816,7 @@
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "CnPG8j": {
-    "defaultMessage": "精华"
+    "defaultMessage": "精选"
   },
   "CoF9qv": {
     "defaultMessage": "确认要解绑钱包？",
@@ -973,6 +976,9 @@
   },
   "G/yZLu": {
     "defaultMessage": "移除"
+  },
+  "G0pqnh": {
+    "defaultMessage": "阅读原文"
   },
   "G4bk3r": {
     "defaultMessage": "自订金额大于余额"
@@ -1380,6 +1386,9 @@
     "defaultMessage": "邮件",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "NFIbLb": {
+    "defaultMessage": "已用完修改次数"
+  },
   "NNF+3f": {
     "defaultMessage": "标签不存在",
     "description": "TAG_NOT_FOUND"
@@ -1446,9 +1455,6 @@
   },
   "OpeFTV": {
     "defaultMessage": "输入六位数字交易密码"
-  },
-  "Oru6G2": {
-    "defaultMessage": "使用 IPFS 生成的作品指纹，通过它可在节点调取内容"
   },
   "OsX3KM": {
     "defaultMessage": "评论",
@@ -1790,9 +1796,6 @@
   "VeEfHm": {
     "defaultMessage": "草稿",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
-  },
-  "VefaFQ": {
-    "defaultMessage": "内容长度超出限制 ({length}/{limit})"
   },
   "VmYzLr": {
     "defaultMessage": "{total} 個成員"
@@ -2293,6 +2296,10 @@
   "fJFvPm": {
     "defaultMessage": "代码"
   },
+  "fJVe7H": {
+    "defaultMessage": "IPFS 指纹",
+    "description": "src/views/ArticleDetail/History/InfoHeader/index.tsx"
+  },
   "fK6ptv": {
     "defaultMessage": "送出失败，请稍后再试"
   },
@@ -2717,6 +2724,9 @@
   "nYrKWp": {
     "defaultMessage": "编辑个人信息"
   },
+  "nhkx3t": {
+    "defaultMessage": "IPFS 是一种分散式储存技术，具有去中心、易存续、不易被审查等优点。 每一篇在 Matters 发布的文章都会上传到 IPFS。 IPFS 会产生一定储存费用，目前暂时由 Matters 承担。 （到 IPFS 官网 ipfs.com 可以了解更多）"
+  },
   "no7l8z": {
     "defaultMessage": "解绑钱包",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
@@ -2820,6 +2830,9 @@
   "qgPR68": {
     "defaultMessage": "设为代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
+  "qhVSGI": {
+    "defaultMessage": "呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
   },
   "qlki7w": {
     "defaultMessage": "移除作品",
@@ -3028,6 +3041,9 @@
   "v6YjIn": {
     "defaultMessage": "账户",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "v84cGN": {
+    "defaultMessage": "这是什么"
   },
   "v8dGSd": {
     "defaultMessage": "该钱包已关联至其他帐号",
@@ -3293,9 +3309,6 @@
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
-  },
-  "zbaTLV": {
-    "defaultMessage": "在 IPFS 上查看"
   },
   "zkmfjn": {
     "defaultMessage": "置頂",

@@ -49,9 +49,17 @@ const IPFSTextIcon = () => (
     color="greyDark"
     placement="left"
     size={12}
-    spacing={4}
+    spacing={2}
   >
-    <FormattedMessage defaultMessage="View on IPFS" id="zbaTLV" />
+    <TextIcon color="black" size={12}>
+      <FormattedMessage
+        defaultMessage="IPFS"
+        id="fJVe7H"
+        description="src/views/ArticleDetail/History/InfoHeader/index.tsx"
+      />
+    </TextIcon>
+    &nbsp;
+    <FormattedMessage defaultMessage="What is this" id="v84cGN" />
   </TextIcon>
 )
 
@@ -66,6 +74,12 @@ const InfoHeader = ({
   const { data } = useQuery<GatewaysQuery>(GATEWAYS)
 
   const gateways = data?.official.gatewayUrls || []
+
+  article = {
+    ...article,
+    iscnId: 'r32gwefsdfasdafafsasadasd',
+    access: { ...article.access, secret: 'r32gwefsdfasdafafsasadasd' },
+  }
 
   return (
     <section className={styles.info}>
@@ -89,8 +103,8 @@ const InfoHeader = ({
                   toast.success({
                     message: (
                       <FormattedMessage
-                        defaultMessage="The Fingerprint from IPFS, you can read it via a gateway"
-                        id="Oru6G2"
+                        defaultMessage="IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"
+                        id="nhkx3t"
                       />
                     ),
                   })
@@ -103,8 +117,8 @@ const InfoHeader = ({
               <Tooltip
                 content={
                   <FormattedMessage
-                    defaultMessage="The Fingerprint from IPFS, you can read it via a gateway"
-                    id="Oru6G2"
+                    defaultMessage="IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"
+                    id="nhkx3t"
                   />
                 }
                 placement="top"
@@ -147,7 +161,8 @@ const InfoHeader = ({
                     spacing={4}
                     placement="left"
                   >
-                    {truncate(version.dataHash!, 4, 4)}
+                    <Media at="sm">{truncate(version.dataHash!, 10, 14)}</Media>
+                    <Media greaterThan="sm">{version.dataHash}</Media>
                   </TextIcon>
                 </Button>
               )}
@@ -161,7 +176,7 @@ const InfoHeader = ({
         </section>
 
         {/* gateways */}
-        {version.dataHash && (
+        {version.dataHash && gateways.length > 0 && (
           <section className={styles.item}>
             <section className={styles.name}>
               <FormattedMessage defaultMessage="Gateways" id="jtdQHR" />
@@ -175,15 +190,18 @@ const InfoHeader = ({
                 )
 
                 return (
-                  <a
-                    href={gatewayUrl}
-                    target="_blank"
+                  <Button
+                    htmlHref={gatewayUrl}
+                    htmlTarget="_blank"
                     rel="noreferrer"
                     key={url}
                     className={styles.gatewayUrl}
+                    textColor="greyDarker"
+                    textActiveColor="black"
                   >
-                    {truncate(hostname, 4, 5)}
-                  </a>
+                    <Media at="sm">{truncate(hostname, 8, 4)}</Media>
+                    <Media greaterThan="sm">{hostname}</Media>
+                  </Button>
                 )
               })}
             </section>
@@ -192,32 +210,33 @@ const InfoHeader = ({
 
         {/* ISCN */}
         {article.iscnId && (
-          <section className={styles.item}>
+          <section className={[styles.item, styles.inline].join(' ')}>
             <section className={styles.name}>ISCN</section>
 
             <section className={styles.content}>
-              <a
-                href={iscnLinkUrl(article.iscnId)}
-                target="_blank"
+              <Button
+                htmlHref={iscnLinkUrl(article.iscnId)}
+                htmlTarget="_blank"
                 rel="noreferrer"
+                textColor="greyDarker"
+                textActiveColor="black"
               >
                 <TextIcon
                   icon={<Icon icon={IconExternal} size={12} />}
-                  color="greyDarker"
                   size={12}
                   spacing={4}
                   placement="left"
                 >
-                  {truncate(article.iscnId, 4, 4)}
+                  {truncate(article.iscnId, 14, 4)}
                 </TextIcon>
-              </a>
+              </Button>
             </section>
           </section>
         )}
 
         {/* Secret */}
         {article.access.secret && (
-          <section className={styles.item}>
+          <section className={[styles.item, styles.inline].join(' ')}>
             <section className={styles.name}>
               <FormattedMessage defaultMessage="Key" id="EcglP9" />
             </section>
@@ -239,7 +258,7 @@ const InfoHeader = ({
                       spacing={4}
                       placement="left"
                     >
-                      {truncate(article.access.secret!, 4, 4)}
+                      {truncate(article.access.secret!, 3, 2)}
                     </TextIcon>
                   </Button>
                 )}

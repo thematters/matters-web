@@ -251,10 +251,26 @@
 
   & ul {
     list-style-type: disc;
+
+    & ul {
+      list-style-type: cirlce;
+
+      & ul {
+        list-style-type: square;
+      }
+    }
   }
 
   & ol {
     list-style-type: decimal;
+
+    & ol {
+      list-style-type: lower-latin;
+
+      & ol {
+        list-style-type: lower-roman;
+      }
+    }
   }
 
   /* Heading
@@ -374,9 +390,40 @@
 }
 
 /****
+ * Article title
+ */
+.u-article-title,
+.editor-title {
+  position: relative;
+  margin: var(--ar17-100) 0;
+}
+
+.editor-title textarea {
+  @mixin font-serif;
+
+  margin: 0 0 var(--sp16);
+  font-size: var(--text24);
+  font-weight: var(--font-weight-article-title);
+  line-height: 1.5;
+  letter-spacing: 1.2px;
+  resize: none;
+  background: transparent;
+
+  &::placeholder {
+    color: var(--color-grey);
+    opacity: 1; /* Firefox */
+  }
+
+  @media (--md-up) {
+    font-size: var(--font-size-article-title);
+    line-height: var(--line-height-article-title);
+  }
+}
+
+/****
  * Article Summary
  */
-.u-summary,
+.u-article-summary,
 .editor-summary {
   position: relative;
   margin: var(--ar17-100) 0;
@@ -392,7 +439,6 @@
   }
 }
 
-.u-summary,
 .editor-summary textarea {
   @mixin font-serif;
   @mixin border-left-grey;

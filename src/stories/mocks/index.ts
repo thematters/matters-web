@@ -122,6 +122,7 @@ export const MOCK_ARTILCE = {
   mediaHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   dataHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   articleState: 'active' as any,
+  revisionCount: 3,
   state: 'active' as any,
   cover: 'https://source.unsplash.com/256x256?article',
   summary:

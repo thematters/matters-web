@@ -68,6 +68,10 @@ export const DraftDetailStateProvider = ({
 
   // get draft id from URL instead of `useRouter.getQuery`
   const getDraftId = () => {
+    if (typeof window === 'undefined') {
+      return undefined
+    }
+
     const id = window.location.href.split('/').pop()
     return id === NEW_DRAFT_ID ? undefined : id
   }

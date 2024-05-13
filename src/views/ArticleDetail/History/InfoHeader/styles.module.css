@@ -25,12 +25,20 @@
 
 .footer {
   & .item {
-    @mixin inline-flex-center-all;
+    @mixin flex-center-start;
 
-    margin-top: var(--sp10);
+    margin-top: var(--sp4);
     margin-right: var(--sp16);
     font-size: var(--text12);
     line-height: 1.125rem;
+
+    &.inline {
+      @mixin inline-flex-center-start;
+    }
+
+    @media (--sm-up) {
+      margin-top: var(--sp10);
+    }
 
     & .name {
       flex-shrink: 0;
@@ -55,7 +63,7 @@
     & .gatewayUrl + .gatewayUrl {
       &::before {
         display: inline-block;
-        padding: var(--sp4);
+        padding: 0 var(--sp4);
         color: var(--color-black);
         content: '·';
       }

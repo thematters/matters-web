@@ -1,10 +1,13 @@
-import classNames from 'classnames'
-import React from 'react'
+import autosize from 'autosize'
+import React, { useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useDebouncedCallback } from 'use-debounce'
 
-import { MAX_ARTICE_TITLE_LENGTH } from '~/common/enums'
-
-import styles from './styles.module.css'
+import {
+  INPUT_DEBOUNCE,
+  KEYVALUE,
+  MAX_ARTICE_TITLE_LENGTH,
+} from '~/common/enums'
 
 interface Props {
   defaultValue?: string
@@ -13,24 +16,38 @@ interface Props {
 
 const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
   const intl = useIntl()
-  const classes = classNames([styles.editorTitle])
+  const instance: React.RefObject<any> | null = useRef(null)
+  const [value, setValue] = useState(defaultValue)
+  const debouncedUpdate = useDebouncedCallback(() => {
+    update({ title: value })
+  }, INPUT_DEBOUNCE)
 
-  const [value, setValue] = React.useState(defaultValue)
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const title = event.target.value.slice(0, MAX_ARTICE_TITLE_LENGTH)
+    setValue(title)
+    debouncedUpdate()
+  }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setValue(event.target.value)
-
-  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) =>
+  const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) =>
     update({ title: value })
 
-  React.useEffect(() => setValue(defaultValue), [defaultValue])
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key.toLowerCase() === KEYVALUE.enter) {
+      event.preventDefault()
+    }
+  }
 
-  const title = value.slice(0, MAX_ARTICE_TITLE_LENGTH)
+  React.useEffect(() => {
+    if (instance) {
+      autosize(instance.current)
+    }
+  }, [])
 
   return (
-    <header className={classes}>
-      <input
-        type="text"
+    <header className="editor-title">
+      <textarea
+        ref={instance}
+        rows={1}
         aria-label={intl.formatMessage({
           defaultMessage: 'Enter title ...',
           id: '//QMqf',
@@ -39,9 +56,10 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
           defaultMessage: 'Enter title ...',
           id: '//QMqf',
         })}
+        value={value}
         onChange={handleChange}
         onBlur={handleBlur}
-        value={title}
+        onKeyDown={handleKeyDown}
       />
     </header>
   )
