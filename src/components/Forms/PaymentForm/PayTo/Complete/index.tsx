@@ -1,13 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import _random from 'lodash/random'
 import _range from 'lodash/range'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount } from 'wagmi'
 
 import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
+  SUPPORT_SUCCESS,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
 import { Dialog, Icon, SpinnerBlock, ViewerContext } from '~/components'
@@ -60,6 +61,10 @@ const Complete: React.FC<Props> = ({
       callback()
     }
   }
+
+  useEffect(() => {
+    window.dispatchEvent(new CustomEvent(SUPPORT_SUCCESS))
+  }, [])
 
   const isUSDT = currency === CURRENCY.USDT
   const isLikecoin = currency === CURRENCY.LIKE
