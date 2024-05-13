@@ -294,7 +294,6 @@ const BaseDraftDetail = () => {
           <Sidebar draft={draft} ownCircles={ownCircles} />
         </Media>
       }
-      inEditor
     >
       <Layout.Header
         mode="compact"
