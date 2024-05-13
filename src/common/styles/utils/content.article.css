@@ -398,6 +398,7 @@
   margin: var(--ar17-100) 0;
 }
 
+.u-article-title h1,
 .editor-title textarea {
   @mixin font-serif;
 
@@ -439,6 +440,7 @@
   }
 }
 
+.u-article-summary,
 .editor-summary textarea {
   @mixin font-serif;
   @mixin border-left-grey;

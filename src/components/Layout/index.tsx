@@ -66,13 +66,14 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 interface MainProps {
   aside?: React.ReactNode
   showAside?: boolean
-  inEditor?: boolean
 }
 
 const Main: React.FC<React.PropsWithChildren<MainProps>> & {
   Spacing: typeof Spacing
-} = ({ aside, showAside = true, inEditor, children }) => {
+} = ({ aside, showAside = true, children }) => {
   const { isInPath } = useRoute()
+  const isInEditor =
+    isInPath('ARTICLE_DETAIL_EDIT') || isInPath('ME_DRAFT_DETAIL')
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
@@ -82,6 +83,8 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
     [styles.article]: true,
     [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
   })
+
+  const enbableSticky = !isInArticleDetailHistory && !isInEditor
 
   usePullToRefresh.Register('#ptr')
   usePullToRefresh.Handler(() => window.location.reload())
@@ -95,15 +98,15 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
       {showAside && (
         <aside className={styles.aside}>
           <Media greaterThanOrEqual="lg">
-            <Sticky enabled top={0} enableTransforms={false}>
+            <Sticky enabled={enbableSticky} top={0} enableTransforms={false}>
               <section className={styles.content}>
                 <section className={styles.top}>
-                  {!inEditor && !isInArticleDetailHistory && <SearchBar />}
+                  {!isInEditor && !isInArticleDetailHistory && <SearchBar />}
 
                   {aside}
                 </section>
 
-                {!inEditor && !isInSettings && !isInArticleDetailHistory && (
+                {!isInEditor && !isInSettings && !isInArticleDetailHistory && (
                   <SideFooter />
                 )}
               </section>
