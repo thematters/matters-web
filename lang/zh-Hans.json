@@ -832,6 +832,9 @@
     "defaultMessage": "该 {type} 账号已关联至其他 Matters 账号，请登录该账号解绑后再试",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
+  "D+uyeZ": {
+    "defaultMessage": "选择离开围炉，你将马上失去成员资格。下一个账单日（每月 1 日）将不会扣除费用。"
+  },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一网址到 RSS 阅读器",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1519,9 +1522,6 @@
   "Pv2PlK": {
     "defaultMessage": "插入图片"
   },
-  "Q1PHUd": {
-    "defaultMessage": "恭喜成为围炉一员。现在你可以免费浏览围炉内作品，还可以去围炉与大家谈天说地。"
-  },
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
@@ -1856,9 +1856,6 @@
   },
   "WiGHyF": {
     "defaultMessage": "Web Monetization 标准"
-  },
-  "Wjmng6": {
-    "defaultMessage": "正文及作品管理剩 {revisionCountLeft} 次编辑"
   },
   "WpvsPu": {
     "defaultMessage": "订阅",
@@ -2306,9 +2303,6 @@
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "fjBDmp": {
-    "defaultMessage": "选择离开围炉，你将马上失去成员资格。下一个账单日（每月 1 日）将不会扣除费用。"
-  },
   "fnv5rD": {
     "defaultMessage": "赞赏作品（当前 {total} 次赞赏）"
   },
@@ -2615,9 +2609,6 @@
   "lqdpsm": {
     "defaultMessage": "回到订阅"
   },
-  "lsccVJ": {
-    "defaultMessage": "正文及作品管理编辑次数已达上限"
-  },
   "m+cdhC": {
     "defaultMessage": "最近使用"
   },
@@ -2751,6 +2742,9 @@
   "ohgTH4": {
     "defaultMessage": "追踪中",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "onDesU": {
+    "defaultMessage": "恭喜成为围炉一员。现在你可以免费浏览围炉内作品，还可以去围炉与大家谈天说地。"
   },
   "p5qZnJ": {
     "defaultMessage": "赞赏了",

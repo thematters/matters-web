@@ -72,7 +72,7 @@ export const MOCK_USER = {
 // Circle
 export const MOCK_CIRCLE = {
   __typename: 'Circle' as any,
-  id: 'Q2lyY2xlOjE', // Cirlce:1
+  id: 'Q2lyY2xlOjE', // Circle:1
   state: 'active',
   name: 'matters_class',
   displayName: 'Matters 自由課（第一季第二期）',

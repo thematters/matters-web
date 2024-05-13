@@ -832,6 +832,9 @@
     "defaultMessage": "This {type} account is connected to a Matters account. Sign in to that account to disconnect it then try again",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
+  "D+uyeZ": {
+    "defaultMessage": "Unsubscribe circle will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
+  },
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1519,9 +1522,6 @@
   "Pv2PlK": {
     "defaultMessage": "Insert image"
   },
-  "Q1PHUd": {
-    "defaultMessage": "Congratulations! Now you can browse all works within the cirlce for free and chat with everyone."
-  },
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
@@ -1856,9 +1856,6 @@
   },
   "WiGHyF": {
     "defaultMessage": "Web Monetization standard"
-  },
-  "Wjmng6": {
-    "defaultMessage": "{revisionCountLeft} revisions remaining"
   },
   "WpvsPu": {
     "defaultMessage": "Subscribe",
@@ -2306,9 +2303,6 @@
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "fjBDmp": {
-    "defaultMessage": "Unsubscribe cirlce will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
-  },
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"
   },
@@ -2615,9 +2609,6 @@
   "lqdpsm": {
     "defaultMessage": "Back to subscribe"
   },
-  "lsccVJ": {
-    "defaultMessage": "You have reached the limit of republished articles"
-  },
   "m+cdhC": {
     "defaultMessage": "Recently used"
   },
@@ -2751,6 +2742,9 @@
   "ohgTH4": {
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "onDesU": {
+    "defaultMessage": "Congratulations! Now you can browse all works within the circle for free and chat with everyone."
   },
   "p5qZnJ": {
     "defaultMessage": "liked",
