@@ -2,12 +2,7 @@ import gql from 'graphql-tag'
 
 import { TEST_ID } from '~/common/enums'
 import { normalizeTag, toLocale, toPath } from '~/common/utils'
-import {
-  BookmarkButton,
-  Media,
-  ReCaptchaProvider,
-  ShareButton,
-} from '~/components'
+import { BookmarkButton, Media, ShareButton } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
@@ -93,13 +88,11 @@ const Toolbar = ({
   return (
     <section className={styles.toolbar} data-test-id={TEST_ID.ARTICLE_TOOLBAR}>
       <section className={styles.buttons}>
-        <ReCaptchaProvider action="appreciateArticle">
-          <AppreciationButton
-            article={article}
-            privateFetched={privateFetched}
-            disabled={lock}
-          />
-        </ReCaptchaProvider>
+        <AppreciationButton
+          article={article}
+          privateFetched={privateFetched}
+          disabled={lock}
+        />
 
         <DonationButton article={article} articleDetail={articleDetails} />
 

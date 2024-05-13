@@ -34,7 +34,6 @@ import {
   LanguageContext,
   LanguageSwitch,
   Media,
-  ReCaptchaContext,
   ResendCodeButton,
   TextIcon,
   Turnstile,
@@ -100,7 +99,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
-  const { token: reCaptchaToken, refreshToken } = useContext(ReCaptchaContext)
   const turnstileRef = useRef<TurnstileInstance>(null)
   const [turnstileToken, setTurnstileToken] = useState<string>()
 
@@ -235,9 +233,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           input: {
             email: values.email,
             type: 'email_otp',
-            token: turnstileToken
-              ? `${reCaptchaToken} ${turnstileToken}`
-              : reCaptchaToken,
+            token: turnstileToken,
             redirectUrl,
             language: lang,
           },
@@ -268,7 +264,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           )
         }
       })
-      refreshToken?.()
       turnstileRef.current?.reset()
     }
   }
