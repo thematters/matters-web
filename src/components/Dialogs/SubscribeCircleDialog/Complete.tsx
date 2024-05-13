@@ -24,8 +24,8 @@ const Complete: React.FC<CompleteProps> = ({ circle }) => {
         <Dialog.Content.Message align="left" smUpAlign="left">
           <p>
             <FormattedMessage
-              defaultMessage="Congratulations! Now you can browse all works within the cirlce for free and chat with everyone."
-              id="Q1PHUd"
+              defaultMessage="Congratulations! Now you can browse all works within the circle for free and chat with everyone."
+              id="onDesU"
             />
           </p>
           <br />
