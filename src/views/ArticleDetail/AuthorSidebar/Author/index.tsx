@@ -32,11 +32,7 @@ const Author = ({ article }: AuthorProps) => {
         <LinkWrapper {...userProfilePath}>
           <span className={styles.displayName}>{displayName}</span>
         </LinkWrapper>
-        {!!description && (
-          <LinkWrapper {...userProfilePath}>
-            <span className={styles.bio}>{description}</span>
-          </LinkWrapper>
-        )}
+        {!!description && <span className={styles.bio}>{description}</span>}
       </section>
     </section>
   )
