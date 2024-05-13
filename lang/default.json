@@ -2058,9 +2058,6 @@
     "defaultMessage": "I don't have a wallet yet",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
   },
-  "aDIygy": {
-    "defaultMessage": "Maximum {MAX_ARTICLE_SUPPORT_LENGTH} characters, current {current} characters."
-  },
   "aE5Qq+": {
     "defaultMessage": "Resend",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"

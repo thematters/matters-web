@@ -2058,9 +2058,6 @@
     "defaultMessage": "我还没有钱包",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
   },
-  "aDIygy": {
-    "defaultMessage": "已超過 {MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 {current} 字"
-  },
   "aE5Qq+": {
     "defaultMessage": "重新发送",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
