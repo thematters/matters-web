@@ -832,6 +832,9 @@
     "defaultMessage": "該 {type} 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
+  "D+uyeZ": {
+    "defaultMessage": "選擇離開圍爐，你將馬上失去成員資格。下一個賬單日（每月 1 日）將不會扣除費用。"
+  },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一網址到 RSS 閱讀器",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1518,9 +1521,6 @@
   },
   "Pv2PlK": {
     "defaultMessage": "插入圖片"
-  },
-  "Q1PHUd": {
-    "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
   },
   "Q8Qw5B": {
     "defaultMessage": "描述"
@@ -2310,9 +2310,6 @@
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "fjBDmp": {
-    "defaultMessage": "選擇離開圍爐，你將馬上失去成員資格。下一個賬單日（每月 1 日）將不會扣除費用。"
-  },
   "fnv5rD": {
     "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"
   },
@@ -2748,6 +2745,9 @@
   "ohgTH4": {
     "defaultMessage": "追蹤中",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "onDesU": {
+    "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
   },
   "p5qZnJ": {
     "defaultMessage": "讚賞了",

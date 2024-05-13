@@ -108,7 +108,7 @@ const BaseNotificationSettings = () => {
 
   return (
     <>
-      {/* My cirlce */}
+      {/* My circle */}
       <TableView
         groupName={
           <FormattedMessage
