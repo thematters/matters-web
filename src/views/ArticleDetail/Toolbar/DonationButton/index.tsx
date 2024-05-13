@@ -18,15 +18,11 @@ import {
   toast,
   ViewerContext,
 } from '~/components'
-import {
-  ArticleDetailPublicQuery,
-  DonationButtonArticleFragment,
-} from '~/gql/graphql'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import { SupportDialog } from '../../Support/SupportDialog'
 
 export type DonationButtonProps = {
-  article: DonationButtonArticleFragment
   articleDetail: NonNullable<ArticleDetailPublicQuery['article']>
   iconSize?: 20 | 24
   textWeight?: 'medium' | 'normal'
@@ -37,9 +33,6 @@ const fragments = {
   article: gql`
     fragment DonationButtonArticle on Article {
       id
-      donationsToolbar: donations(input: { first: 0 }) {
-        totalCount
-      }
       author {
         ...UserDonationRecipient
       }
@@ -49,7 +42,6 @@ const fragments = {
 }
 
 const DonationButton = ({
-  article,
   articleDetail,
   iconSize = 20,
   textWeight = 'medium',
@@ -68,8 +60,8 @@ const DonationButton = ({
   }
 
   const donationCount =
-    article.donationsToolbar.totalCount > 0
-      ? article.donationsToolbar.totalCount
+    articleDetail.donations.totalCount > 0
+      ? articleDetail.donations.totalCount
       : 0
 
   return (
@@ -87,7 +79,7 @@ const DonationButton = ({
             { donationCount }
           )}
           aria-haspopup="dialog"
-          disabled={article.author.id === viewer.id}
+          disabled={articleDetail.author.id === viewer.id}
           onClick={() => {
             analytics.trackEvent('click_button', { type: 'donate' })
             if (!viewer.isAuthed) {
@@ -109,14 +101,10 @@ const DonationButton = ({
           <TextIcon
             icon={<Icon icon={IconMoney} size={iconSize} />}
             weight={textWeight}
-            spacing={
-              article.donationsToolbar.totalCount > 0 ? textIconSpacing : 0
-            }
+            spacing={donationCount > 0 ? textIconSpacing : 0}
             size={14}
           >
-            {article.donationsToolbar.totalCount > 0
-              ? numAbbr(article.donationsToolbar.totalCount)
-              : undefined}
+            {donationCount > 0 ? numAbbr(donationCount) : undefined}
           </TextIcon>
         </Button>
       )}

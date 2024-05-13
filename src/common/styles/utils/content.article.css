@@ -449,7 +449,7 @@
   font-size: var(--text18);
   font-weight: var(--font-normal);
   line-height: 1.875rem;
-  color: var(--color-black);
+  color: var(--color-grey-darker);
   resize: none;
   background: transparent;
 

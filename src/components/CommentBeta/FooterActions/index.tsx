@@ -166,7 +166,7 @@ const BaseFooterActions = ({
         sel?.selectAllChildren(editor)
         sel?.collapseToEnd()
       }
-    })
+    }, 100)
   }, [showForm])
 
   // customize case for banned user

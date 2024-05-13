@@ -32,9 +32,10 @@ import {
   useApproveUSDT,
   useBalanceUSDT,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
-import { updateDonation } from '~/components/GQL'
+import { updateArticlePublic } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -105,6 +106,7 @@ const SetAmount: React.FC<FormProps> = ({
   const viewer = useContext(ViewerContext)
   const quoteCurrency = viewer.settings.currency
   const { lang } = useContext(LanguageContext)
+  const { routerLang } = useRoute()
 
   const { address } = useAccount()
   const ethAddress = viewer.info.ethAddress
@@ -184,11 +186,14 @@ const SetAmount: React.FC<FormProps> = ({
               recipientId: recipient.id,
               targetId,
             },
-            update: (cache) => {
-              updateDonation({
+            update: (cache, result) => {
+              updateArticlePublic({
                 cache,
                 shortHash: article.shortHash,
                 viewer,
+                routerLang,
+                txId: result.data?.payTo.transaction.id,
+                type: 'updateDonation',
               })
             },
           })
@@ -231,7 +236,7 @@ const SetAmount: React.FC<FormProps> = ({
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (
       <section>
-        <Spacer size="base" />
+        <Spacer size="xxtight" />
         <FormattedMessage
           defaultMessage="Payment will be processed by Stripe, allowing your support to be unrestricted by region."
           id="TX5UzL"

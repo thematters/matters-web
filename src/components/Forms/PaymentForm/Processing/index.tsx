@@ -16,9 +16,10 @@ import {
   Spacer,
   SpinnerBlock,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
-import { updateDonation } from '~/components/GQL'
+import { updateArticlePublic } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import {
   ArticleDetailPublicQuery,
@@ -202,6 +203,7 @@ const USDTProcessingForm: React.FC<Props> = ({
 }) => {
   const [payTo] = useMutation<PayToMutation>(PAY_TO)
   const viewer = useContext(ViewerContext)
+  const { routerLang } = useRoute()
 
   const { address } = useAccount()
 
@@ -244,11 +246,13 @@ const USDTProcessingForm: React.FC<Props> = ({
         txHash: data.hash,
       },
       update: (cache, result) => {
-        updateDonation({
+        updateArticlePublic({
           cache,
           shortHash: article.shortHash,
           viewer: isConnectedAddress ? viewer : undefined,
+          routerLang,
           txId: result.data?.payTo.transaction.id,
+          type: 'updateDonation',
         })
       },
     })
