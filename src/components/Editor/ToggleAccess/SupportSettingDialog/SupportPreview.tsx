@@ -1,13 +1,8 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import {
-  Avatar,
-  Spacer,
-  TextIcon,
-  Translate,
-  ViewerContext,
-} from '~/components'
+import { MAX_ARTICLE_SUPPORT_LENGTH } from '~/common/enums'
+import { Avatar, Spacer, TextIcon, ViewerContext } from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 
 import styles from './styles.module.css'
@@ -20,6 +15,7 @@ const SupportPreview = ({
   tabType: string
 }) => {
   const viewer = useContext(ViewerContext)
+
   return (
     <section className={styles.preview}>
       <section className={styles.content}>
@@ -60,9 +56,7 @@ const SupportPreview = ({
           </>
         )}
 
-        <p>
-          <Translate zh_hant={content} zh_hans={content} en={content} />
-        </p>
+        <p>{content.slice(0, MAX_ARTICLE_SUPPORT_LENGTH)}</p>
       </section>
 
       <section className={styles.button}>

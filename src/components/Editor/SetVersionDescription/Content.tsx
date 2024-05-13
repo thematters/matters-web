@@ -3,7 +3,6 @@ import _pickBy from 'lodash/pickBy'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { MAX_REVISION_DESCRIPTION_LENGTH } from '~/common/enums'
-import { validateDescription } from '~/common/utils'
 import { Dialog, Form } from '~/components'
 
 interface FormProps {
@@ -42,14 +41,6 @@ const SetVersionDescriptionDialogContent: React.FC<FormProps> = ({
     initialValues: { description },
     validateOnBlur: false,
     validateOnChange: false,
-    validate: ({ description }) =>
-      _pickBy({
-        description: validateDescription(
-          description,
-          intl,
-          MAX_REVISION_DESCRIPTION_LENGTH
-        ),
-      }),
     onSubmit: async ({}, { setSubmitting }) => {
       editDescription(values.description)
 
@@ -62,6 +53,10 @@ const SetVersionDescriptionDialogContent: React.FC<FormProps> = ({
       }
     },
   })
+
+  const isOverLength =
+    values.description.length > MAX_REVISION_DESCRIPTION_LENGTH
+  const hint = `${values.description.length}/${MAX_REVISION_DESCRIPTION_LENGTH}`
 
   const InnerForm = () => {
     return (
@@ -79,10 +74,8 @@ const SetVersionDescriptionDialogContent: React.FC<FormProps> = ({
             id: 'HzB4Lk',
           })}
           value={values.description}
-          hint={`${
-            values.description?.length || 0
-          }/${MAX_REVISION_DESCRIPTION_LENGTH}`}
-          error={errors.description}
+          hint={hint}
+          error={isOverLength ? hint : errors.description}
           hintAlign={errors.description ? 'left' : 'right'}
           onBlur={handleBlur}
           onChange={(e) => setFieldValue('description', e.currentTarget.value)}
@@ -95,7 +88,7 @@ const SetVersionDescriptionDialogContent: React.FC<FormProps> = ({
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting}
+      disabled={!isValid || isOverLength || isSubmitting}
       text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting}
     />
