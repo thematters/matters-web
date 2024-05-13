@@ -1,7 +1,6 @@
 import { IntlShape } from 'react-intl'
 
 import {
-  MAX_ARTICLE_SUPPORT_LENGTH,
   MAX_CIRCLE_DISPLAY_NAME_LENGTH,
   MAX_CIRCLE_NAME_LENGTH,
   MAX_COLLECTION_TITLE_LENGTH,
@@ -287,24 +286,6 @@ export const validateDescription = (
         current: value.length,
       }
     )
-  }
-}
-
-export const validateSupportWords = (value: string, intl: IntlShape) => {
-  if (!value) return
-  if (value.length > MAX_ARTICLE_SUPPORT_LENGTH) {
-    {
-      return intl.formatMessage(
-        {
-          defaultMessage: `Maximum {MAX_ARTICLE_SUPPORT_LENGTH} characters, current {current} characters.`,
-          id: 'aDIygy',
-        },
-        {
-          MAX_ARTICLE_SUPPORT_LENGTH,
-          current: value.length,
-        }
-      )
-    }
   }
 }
 
