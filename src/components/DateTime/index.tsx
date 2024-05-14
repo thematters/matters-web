@@ -10,30 +10,14 @@ interface DateTimeProps {
   date: Date | string | number
   size?: 'xs' | 'sm'
   color?: 'grey' | 'greyDark' | 'greyDarker'
-  type?: 'absolute' | 'relative'
+  isTruncated?: boolean
 }
-
-/**
- * This component is for DateTime showing
- *
- * Usage:
- *
- * ```tsx
- * // absolute date
- * <DateTime date="2019-02-15T08:09:03.626Z" type="absolute" />
- *
- * // relative date
- * <DateTime date={1550218410080} type="relative" />
- * <DateTime date={new Date()} type="relative" />
- *
- * ```
- */
 
 const BaseDateTime = ({
   date,
   size = 'xs',
-  type = 'absolute',
   color = 'greyDark',
+  isTruncated = false,
 }: DateTimeProps) => {
   const { lang } = useContext(LanguageContext)
   const timeclasses = classNames({
@@ -44,7 +28,7 @@ const BaseDateTime = ({
 
   return (
     <time dateTime={new Date(date).toISOString()} className={timeclasses}>
-      {datetimeFormat[type](date, lang)}
+      {datetimeFormat['relative'](date, lang, isTruncated)}
     </time>
   )
 }
