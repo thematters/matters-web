@@ -22,5 +22,9 @@
       background: var(--color-grey-lighter);
       border-radius: 0.5rem;
     }
+
+    & > button {
+      padding: var(--sp10);
+    }
   }
 }
