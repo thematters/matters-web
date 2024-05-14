@@ -6,7 +6,7 @@ export const EmptyTransactionCurrency = () => (
     icon={<Icon icon={IconEmptyPrice} size={64} />}
     description={
       <Translate
-        zh_hant="還沒有此幣種記錄"
+        zh_hant="還沒有此幣種紀錄"
         zh_hans="还没有此币种记录"
         en="No this currency history."
       />

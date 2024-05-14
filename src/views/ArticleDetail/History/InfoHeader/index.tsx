@@ -140,7 +140,7 @@ const InfoHeader = ({
 
       <footer className={styles.footer}>
         {/* dataHash */}
-        <section className={styles.item}>
+        <section className={[styles.item, styles.dataHash].join(' ')}>
           <section className={styles.name}>
             <FormattedMessage defaultMessage="Content Hash" id="Xh/txo" />
           </section>
@@ -174,39 +174,6 @@ const InfoHeader = ({
             </TextIcon>
           )}
         </section>
-
-        {/* gateways */}
-        {version.dataHash && gateways.length > 0 && (
-          <section className={styles.item}>
-            <section className={styles.name}>
-              <FormattedMessage defaultMessage="Gateways" id="jtdQHR" />
-            </section>
-            <section className={styles.content}>
-              {gateways.slice(0, 3).map((url) => {
-                const gatewayUrl = url.replace(':hash', version.dataHash!)
-                const hostname = url.replace(
-                  /(https:\/\/|\/ipfs\/|:hash.?)/g,
-                  ''
-                )
-
-                return (
-                  <Button
-                    htmlHref={gatewayUrl}
-                    htmlTarget="_blank"
-                    rel="noreferrer"
-                    key={url}
-                    className={styles.gatewayUrl}
-                    textColor="greyDarker"
-                    textActiveColor="black"
-                  >
-                    <Media at="sm">{truncate(hostname, 8, 4)}</Media>
-                    <Media greaterThan="sm">{hostname}</Media>
-                  </Button>
-                )
-              })}
-            </section>
-          </section>
-        )}
 
         {/* ISCN */}
         {article.iscnId && (
@@ -263,6 +230,38 @@ const InfoHeader = ({
                   </Button>
                 )}
               </CopyToClipboard>
+            </section>
+          </section>
+        )}
+
+        {/* gateways */}
+        {version.dataHash && gateways.length > 0 && (
+          <section className={styles.item}>
+            <section className={styles.name}>
+              <FormattedMessage defaultMessage="Gateways" id="jtdQHR" />
+            </section>
+            <section className={styles.content}>
+              {gateways.slice(0, 3).map((url) => {
+                const gatewayUrl = url.replace(':hash', version.dataHash!)
+                const hostname = url.replace(
+                  /(https:\/\/|\/ipfs\/|:hash.?)/g,
+                  ''
+                )
+
+                return (
+                  <Button
+                    htmlHref={gatewayUrl}
+                    htmlTarget="_blank"
+                    rel="noreferrer"
+                    key={url}
+                    className={styles.gatewayUrl}
+                    textColor="greyDarker"
+                    textActiveColor="black"
+                  >
+                    {hostname}
+                  </Button>
+                )
+              })}
             </section>
           </section>
         )}

@@ -32,6 +32,7 @@ export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
 
 // Support
 export const SUPPORT_SUCCESS = 'supportSuccess'
+export const SUPPORT_SUCCESS_USDT_VISITOR = 'supportSuccessUSDTVisitor'
 export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'
 
 // Universal auth

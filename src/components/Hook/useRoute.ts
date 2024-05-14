@@ -1,3 +1,4 @@
+import _omitBy from 'lodash/omitBy'
 import { useRouter } from 'next/router'
 
 import { PATHS } from '~/common/enums'
@@ -51,7 +52,7 @@ export const useRoute = () => {
   }
 
   const setQuery = (key: QueryKey, value: string) => {
-    const query = { ...router.query, [key]: value }
+    const query = _omitBy({ ...router.query, [key]: value }, (v) => !v)
     router.push({ query })
   }
 

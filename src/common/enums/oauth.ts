@@ -4,7 +4,7 @@ export const OAUTH_SCOPE_TREE = {
   query: {
     viewer: {
       _t: {
-        zh_hant: '電子信箱、Liker ID、帳戶設定、草稿、收藏作品、瀏覽記錄等',
+        zh_hant: '電子信箱、Liker ID、帳戶設定、草稿、收藏作品、瀏覽紀錄等',
         zh_hans: '邮箱、Liker ID、帳戶设定、草稿、收藏作品、浏览记录等',
       },
       settings: {
@@ -39,7 +39,7 @@ export const OAUTH_SCOPE_TREE = {
       },
       activity: {
         _t: {
-          zh_hant: '閱讀、搜尋、讚賞等歷史記錄',
+          zh_hant: '閱讀、搜尋、讚賞等歷史紀錄',
           zh_hans: '阅读、搜寻、赞赏等历史记录',
         },
       },
@@ -69,7 +69,7 @@ export const OAUTH_SCOPE_TREE = {
       },
       wallet: {
         _t: {
-          zh_hant: '錢包餘額、交易記錄等',
+          zh_hant: '錢包餘額、交易紀錄等',
           zh_hans: '钱包余额、交易记录等',
         },
       },
