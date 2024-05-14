@@ -87,16 +87,11 @@ const Donators = ({
           </section>
           {isAuthor && donatorsCount > 0 && (
             <section className={styles.viewSupport}>
-              <span>
-                <FormattedMessage defaultMessage="View" id="FgydNe" />
-              </span>
-              <span>
-                <FormattedMessage
-                  defaultMessage="Supporter"
-                  id="NbdvAd"
-                  description="src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
-                />
-              </span>
+              <FormattedMessage
+                defaultMessage="View supporters"
+                id="uME1sk"
+                description="src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
+              />
             </section>
           )}
         </section>

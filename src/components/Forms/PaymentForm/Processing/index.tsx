@@ -8,7 +8,12 @@ import { useAccount, useContractWrite } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
 import { ReactComponent as IconCircleTimes } from '@/public/static/icons/24px/circle-times.svg'
-import { CHAIN, contract, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import {
+  CHAIN,
+  contract,
+  PAYMENT_CURRENCY as CURRENCY,
+  SUPPORT_SUCCESS_USDT_VISITOR,
+} from '~/common/enums'
 import { CurationABI } from '~/common/utils'
 import {
   Dialog,
@@ -258,6 +263,12 @@ const USDTProcessingForm: React.FC<Props> = ({
     })
 
     await waitForTransaction({ hash: data.hash })
+
+    window.dispatchEvent(
+      new CustomEvent(SUPPORT_SUCCESS_USDT_VISITOR, {
+        detail: { chain: CHAIN.OPTIMISM, txHash: data.hash },
+      })
+    )
 
     nextStep()
   }

@@ -54,11 +54,8 @@
   @mixin flex-center-all;
 
   gap: var(--sp4);
-  margin-top: var(--sp8);
+  margin-top: var(--sp16);
   font-size: var(--text12);
   line-height: 1.125rem;
-
-  & span:first-child {
-    color: var(--color-grey-dark);
-  }
+  color: var(--color-grey-dark);
 }

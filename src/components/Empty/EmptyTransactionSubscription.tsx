@@ -6,7 +6,7 @@ export const EmptyTransactionSubscription = () => (
     icon={<Icon icon={IconCircle} size={64} />}
     description={
       <Translate
-        zh_hant="還沒有訂閱記錄"
+        zh_hant="還沒有訂閱紀錄"
         zh_hans="还没有订阅记录"
         en="No subscription history."
       />

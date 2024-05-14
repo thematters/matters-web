@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import { ReactComponent as IconCircleCheckFill2 } from '@/public/static/icons/24px/circle-check-fill-2.svg'
 import { ASSET_TYPE } from '~/common/enums'
 import { toSizedImageURL } from '~/common/utils'
 import { Icon, Translate } from '~/components'
@@ -63,7 +63,7 @@ const Selector: React.FC<SelectorProps> = ({
               />
 
               {asset.path === selected?.path && (
-                <Icon icon={IconCircleCheckFill} size={24} color="green" />
+                <Icon icon={IconCircleCheckFill2} size={24} />
               )}
             </button>
           </li>
