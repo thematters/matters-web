@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
-import { dom, stripHtml } from '~/common/utils'
+import { dom, stripHtml, trimCommentContent } from '~/common/utils'
 import {
   CommentFormType,
   Dialog,
@@ -86,7 +86,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
-    const trimContent = content.replace(/^(<p>\s*<\/p>)+|(<p>\s*<\/p>)+$/g, '')
+    const trimContent = trimCommentContent(content)
     const input = {
       id: commentId,
       comment: {
