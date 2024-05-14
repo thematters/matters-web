@@ -9,6 +9,7 @@ import {
   DateTime,
   DotDivider,
   Icon,
+  LanguageContext,
   TextIcon,
   UserDigest,
   useRoute,
@@ -17,6 +18,7 @@ import {
 import {
   MetaInfoArticleFragment,
   MetaInfoArticleVersionFragment,
+  UserLanguage,
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -43,6 +45,7 @@ const MetaInfo = ({
   editable,
 }: MetaInfoProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const authorId = article.author.id
   const isAuthor = viewer.id === authorId
   const originalLanguage = article?.language ? article.language : ''
@@ -57,6 +60,8 @@ const MetaInfo = ({
     article,
     search: qs as { [key: string]: string },
   }).href
+
+  const isEn = lang === UserLanguage.En
 
   return (
     <section className={styles.info}>
@@ -74,13 +79,17 @@ const MetaInfo = ({
           size="xs"
           color="greyDarker"
         />
-        <span>
-          {!version && article?.revisionCount > 0 && (
+
+        {!version && article?.revisionCount > 0 && (
+          <span>
+            {isEn && <>&nbsp;</>}
             <Button textColor="greyDarker" textActiveColor="black" href={path}>
-              <FormattedMessage defaultMessage="(edited)" id="gy/Kkr" />
+              <span>
+                <FormattedMessage defaultMessage="(edited)" id="gy/Kkr" />
+              </span>
             </Button>
-          )}
-        </span>
+          </span>
+        )}
       </section>
 
       {!version && (
