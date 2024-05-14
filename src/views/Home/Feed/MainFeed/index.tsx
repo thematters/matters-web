@@ -227,7 +227,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                   article={edge.node}
                   hasReadTime={true}
                   hasDonationCount={true}
-                  utm_source={`homepage_${sortBy}`}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: sortBy,

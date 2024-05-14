@@ -84,8 +84,10 @@ const VersionsDropdown = ({
               toPath({
                 page: 'articleHistory',
                 article,
-                versionId: version.id,
-                search: qs as { [key: string]: string },
+                search: {
+                  ...(qs as { [key: string]: string }), // forward qs to history page
+                  v: version.id,
+                },
               }).href
             }
           />

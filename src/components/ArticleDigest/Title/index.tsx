@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { capitalizeFirstLetter, toPath, UtmParams } from '~/common/utils'
+import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, LinkWrapperProps } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
@@ -24,8 +24,7 @@ type ArticleDigestTitleProps = {
 
   disabled?: boolean
   onClick?: () => void
-} & Pick<LinkWrapperProps, 'onClick'> &
-  UtmParams
+} & Pick<LinkWrapperProps, 'onClick'>
 
 const fragments = {
   article: gql`
@@ -55,9 +54,6 @@ export const ArticleDigestTitle = ({
   disabled,
   onClick,
 
-  utm_source,
-  utm_medium,
-
   ...restProps
 }: ArticleDigestTitleProps) => {
   const { articleState: state } = article
@@ -65,8 +61,6 @@ export const ArticleDigestTitle = ({
     page: 'articleDetail',
     article,
     collectionId,
-    utm_source,
-    utm_medium,
   })
   const isBanned = state === 'banned'
   const title = isBanned ? (
