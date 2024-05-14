@@ -8,6 +8,7 @@ import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.sv
 import {
   PATHS,
   PAYMENT_CURRENCY as CURRENCY,
+  SUPPORT_SUCCESS,
   SUPPORT_SUCCESS_ANIMATION,
   TEST_ID,
 } from '~/common/enums'
@@ -78,6 +79,10 @@ const SupportWidget = ({
   const requestForDonation = article?.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
 
+  useEventListener(SUPPORT_SUCCESS, () => {
+    hasDonatedRefetch()
+  })
+
   useEventListener(
     SUPPORT_SUCCESS_ANIMATION,
     async (payload: { [key: string]: any }) => {
@@ -103,7 +108,6 @@ const SupportWidget = ({
       // HKD
       if (payload.currency === CURRENCY.HKD) {
         setShowAnimation(true)
-        hasDonatedRefetch()
         scrollToAnimation()
         return
       }
@@ -114,7 +118,6 @@ const SupportWidget = ({
       scrollToAnimation()
       await sleep(5 * 1000)
       setPlayLoading(false)
-      hasDonatedRefetch()
       return
     }
   )
@@ -128,7 +131,7 @@ const SupportWidget = ({
     <section className={supportWidgetClasses} id="animation">
       {showAnimation && (
         <DynamicAnimation
-          playLoading={playLoading}
+          playShipWaiting={playLoading}
           playEnd={() => {
             setShowAnimation(false)
             setPlaySlideUp(true)

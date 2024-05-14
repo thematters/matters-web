@@ -1,11 +1,8 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
-import { useDebounce } from 'use-debounce'
 
 import {
-  INPUT_DEBOUNCE,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   TEST_ID,
   TOOLBAR_FIXEDTOOLBAR_ID,
@@ -112,106 +109,18 @@ const FixedToolbar = ({
     borderRadius: 0,
   }
 
-  const [playAnimation, setPlayAnimation] = useState(false)
-  // NOTE: Implement debounce to address button flickering issue during browser page navigation forward or backward.
-  const [debouncedPlayAnimation, setDebouncedPlayAnimation] = useDebounce(
-    playAnimation,
-    INPUT_DEBOUNCE
-  )
-
-  useEffect(() => {
-    setPlayAnimation(debouncedPlayAnimation)
-  }, [debouncedPlayAnimation])
-
-  const [
-    isLeftAppreciationButtonScaleOut,
-    setIsLeftAppreciationButtonScaleOut,
-  ] = useState(false)
-  const [isCommentScaleInDone, setIsCommentScaleInDone] = useState(false)
-
-  const startAnimation = () => {
-    setDebouncedPlayAnimation(true)
-  }
-  const resetAnimation = () => {
-    setPlayAnimation(false)
-    setIsLeftAppreciationButtonScaleOut(false)
-    setIsCommentScaleInDone(false)
-  }
-
-  useEffect(() => {
-    if (showCommentToolbar) {
-      startAnimation()
-    } else {
-      resetAnimation()
-    }
-  }, [showCommentToolbar])
-
-  const leftAppreciationButtonClasses = classNames({
-    [styles.scaleOut]: playAnimation,
-  })
-
-  const commentButtonClasses = classNames({
-    [styles.commentButton]: true,
-    [styles.expandX]: isLeftAppreciationButtonScaleOut,
-  })
-
-  const toolbarClasses = classNames({
-    [styles.toolbar]: true,
-  })
-
-  const buttonsClasses = classNames({
-    [styles.buttons]: true,
-    [styles.justifyContentSpaceBetween]: !isLeftAppreciationButtonScaleOut,
-    [styles.justifyContentCenter]: isLeftAppreciationButtonScaleOut,
-  })
-
-  const rightAppreciationButtonClasses = classNames({
-    [styles.rightAppreciationButton]: true,
-    [styles.scaleAnimation]: isCommentScaleInDone,
-  })
-
-  const handleLeftAppreciationButtonScaleOutEnd = (
-    event: React.AnimationEvent<HTMLElement>
-  ) => {
-    setIsLeftAppreciationButtonScaleOut(true)
-  }
-
-  const handleCommentScaleInEnd = (
-    event: React.AnimationEvent<HTMLElement>
-  ) => {
-    setIsCommentScaleInDone(true)
-  }
-
   return (
     <section
-      className={toolbarClasses}
+      className={styles.toolbar}
       data-test-id={TEST_ID.ARTICLE_TOOLBAR}
       id={TOOLBAR_FIXEDTOOLBAR_ID}
     >
       <CommentFormBetaDialog articleId={article.id} type="article">
         {({ openDialog: openCommentFormBetaDialog }) => (
-          <section className={buttonsClasses}>
-            {!isLeftAppreciationButtonScaleOut && (
-              <section
-                className={leftAppreciationButtonClasses}
-                onAnimationEnd={handleLeftAppreciationButtonScaleOutEnd}
-              >
-                <AppreciationButton
-                  article={article}
-                  privateFetched={privateFetched}
-                  iconSize={24}
-                  textWeight="normal"
-                  textIconSpacing={4}
-                  disabled={lock}
-                  {...buttonProps}
-                />
-              </section>
-            )}
-
-            {isLeftAppreciationButtonScaleOut && (
+          <section className={styles.buttons}>
+            {showCommentToolbar && (
               <button
-                className={commentButtonClasses}
-                onAnimationEnd={handleCommentScaleInEnd}
+                className={styles.commentButton}
                 onClick={() => {
                   if (!viewer.isAuthed) {
                     window.dispatchEvent(
@@ -229,14 +138,24 @@ const FixedToolbar = ({
                 disabled={lock}
               >
                 <FormattedMessage
-                  defaultMessage="Comment..."
-                  id="YOMY1y"
+                  defaultMessage="Leave a comment?"
+                  id="gK6OxL"
                   description="src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
                 />
               </button>
             )}
 
-            {!isLeftAppreciationButtonScaleOut && (
+            <AppreciationButton
+              article={article}
+              privateFetched={privateFetched}
+              iconSize={24}
+              textWeight="normal"
+              textIconSpacing={4}
+              disabled={lock}
+              {...buttonProps}
+            />
+
+            {!showCommentToolbar && (
               <CommentButton
                 article={article}
                 disabled={!article.canComment}
@@ -265,31 +184,14 @@ const FixedToolbar = ({
               />
             )}
 
-            {isLeftAppreciationButtonScaleOut && (
-              <section className={rightAppreciationButtonClasses}>
-                <AppreciationButton
-                  article={article}
-                  privateFetched={privateFetched}
-                  iconSize={24}
-                  textWeight="normal"
-                  textIconSpacing={4}
-                  disabled={lock}
-                  {...buttonProps}
-                />
-              </section>
-            )}
-
-            <section>
-              <DonationButton
-                article={article}
-                articleDetail={articleDetails}
-                disabled={lock}
-                iconSize={24}
-                textWeight="normal"
-                textIconSpacing={4}
-                {...buttonProps}
-              />
-            </section>
+            <DonationButton
+              articleDetail={articleDetails}
+              disabled={lock}
+              iconSize={24}
+              textWeight="normal"
+              textIconSpacing={4}
+              {...buttonProps}
+            />
 
             <BookmarkButton
               article={article}
@@ -299,17 +201,15 @@ const FixedToolbar = ({
               {...buttonProps}
             />
 
-            {!isLeftAppreciationButtonScaleOut && (
-              <section className={leftAppreciationButtonClasses}>
-                <DropdownActions
-                  article={article}
-                  disabled={lock}
-                  {...dropdonwActionsProps}
-                  hasShare
-                  hasBookmark={false}
-                  hasReport
-                />
-              </section>
+            {!showCommentToolbar && (
+              <DropdownActions
+                article={article}
+                disabled={lock}
+                {...dropdonwActionsProps}
+                hasShare
+                hasBookmark={false}
+                hasReport
+              />
             )}
           </section>
         )}

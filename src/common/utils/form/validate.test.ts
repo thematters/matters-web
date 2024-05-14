@@ -2,7 +2,6 @@ import { createIntl } from 'react-intl'
 import { describe, expect, it } from 'vitest'
 
 import {
-  MAX_ARTICLE_SUPPORT_LENGTH,
   MAX_CIRCLE_DISPLAY_NAME_LENGTH,
   MAX_CIRCLE_NAME_LENGTH,
   MAX_COLLECTION_TITLE_LENGTH,
@@ -40,7 +39,6 @@ import {
   validatePaymentPassword,
   validatePaymentPointer,
   validatePayoutAmount,
-  validateSupportWords,
   validateTagName,
   validateUserName,
 } from './validate'
@@ -322,20 +320,6 @@ describe('utils/form/validate/validatePayoutAmount', () => {
     expect(validatePayoutAmount({ min, max, value: 150, intl })).toBeUndefined()
     expect(validatePayoutAmount({ min, max, value: 5001, intl })).toBe(
       `Maximum amount is HKD ${max}`
-    )
-  })
-})
-
-describe('utils/form/validate/validateSupportWords', () => {
-  it('should validate support words correctly', () => {
-    expect(validateSupportWords('', intl)).toBeUndefined()
-    expect(validateSupportWords('1234567890', intl)).toBeUndefined()
-    expect(validateSupportWords('你好世界🌍', intl)).toBeUndefined()
-
-    // length
-    const value = 'a'.repeat(MAX_ARTICLE_SUPPORT_LENGTH + 1)
-    expect(validateSupportWords(value, intl)).toBe(
-      `Maximum ${MAX_ARTICLE_SUPPORT_LENGTH} characters, current ${value.length} characters.`
     )
   })
 })

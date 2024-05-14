@@ -123,7 +123,6 @@ const FloatToolbar = ({
           />
           <span className={styles.divider} />
           <DonationButton
-            article={article}
             articleDetail={articleDetails}
             disabled={lock}
             textIconSpacing={6}

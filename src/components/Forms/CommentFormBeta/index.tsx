@@ -7,7 +7,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { dom, stripHtml } from '~/common/utils'
+import { dom, stripHtml, trimCommentContent } from '~/common/utils'
 import {
   Button,
   CommentDraftsContext,
@@ -87,7 +87,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
-    const trimContent = content.replace(/^(<p>\s*<\/p>)+|(<p>\s*<\/p>)+$/g, '')
+    const trimContent = trimCommentContent(content)
     const input = {
       id: commentId,
       comment: {

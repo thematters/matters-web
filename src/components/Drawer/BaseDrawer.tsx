@@ -29,6 +29,7 @@ const getDirectionStyle = (
         transform: 'translate3d(-100%, 0, 0)',
         width: size,
         height: '100vh',
+        overflowX: 'hidden',
       }
     case 'right':
       return {
@@ -37,6 +38,7 @@ const getDirectionStyle = (
         transform: 'translate3d(100%, 0, 0)',
         width: size,
         height: '100vh',
+        overflowX: 'hidden',
       }
     case 'bottom':
       return {

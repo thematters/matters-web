@@ -253,7 +253,7 @@
     list-style-type: disc;
 
     & ul {
-      list-style-type: cirlce;
+      list-style-type: circle;
 
       & ul {
         list-style-type: square;
@@ -449,7 +449,7 @@
   font-size: var(--text18);
   font-weight: var(--font-normal);
   line-height: 1.875rem;
-  color: var(--color-black);
+  color: var(--color-grey-darker);
   resize: none;
   background: transparent;
 

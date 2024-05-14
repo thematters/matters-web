@@ -3,19 +3,20 @@ import Lottie from 'lottie-react'
 import React, { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import donateData from '@/public/static/json/donate.json'
-import loadingData from '@/public/static/json/loading.json'
-import successData from '@/public/static/json/success.json'
+import coinShipData from '@/public/static/json/coin-ship.json'
+import openHeartData from '@/public/static/json/open-heart.json'
+import shipSprinkHeartData from '@/public/static/json/ship-sprinkle-heart.json'
+import shipWaitingData from '@/public/static/json/ship-waiting.json'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { useStep } from '~/components'
 
 import styles from './styles.module.css'
 
-type Step = 'donate' | 'loading' | 'success'
+type Step = 'coinShip' | 'shipWaiting' | 'shipSprinkleHeart' | 'openHeart'
 
 interface Props {
   playEnd: () => void
-  playLoading: boolean
+  playShipWaiting: boolean
   currency: CURRENCY
   defaultStep?: Step
 }
@@ -23,13 +24,14 @@ interface Props {
 const Animation: React.FC<Props> = ({
   playEnd,
   currency,
-  playLoading = false,
-  defaultStep = 'donate',
+  playShipWaiting = false,
+  defaultStep = 'coinShip',
 }) => {
   const { currStep, forward } = useStep<Step>(defaultStep)
-  const isDonate = currStep === 'donate'
-  const isLoading = currStep === 'loading'
-  const isSuccess = currStep === 'success'
+  const isCoinShip = currStep === 'coinShip'
+  const isShipWaiting = currStep === 'shipWaiting'
+  const isShipSprinkHeart = currStep === 'shipSprinkleHeart'
+  const isOpenHeart = currStep === 'openHeart'
   const [rendered, setRendered] = React.useState(false)
 
   useEffect(() => {
@@ -37,10 +39,10 @@ const Animation: React.FC<Props> = ({
   }, [])
 
   useEffect(() => {
-    if (isLoading) {
-      forward('success')
+    if (isShipWaiting) {
+      forward('shipSprinkleHeart')
     }
-  }, [playLoading])
+  }, [playShipWaiting])
 
   const defaultOptions = {
     loop: false,
@@ -50,26 +52,31 @@ const Animation: React.FC<Props> = ({
     },
   }
 
-  const donateOptions = {
+  const coinShipOptions = {
     ...defaultOptions,
-    animationData: donateData,
+    animationData: coinShipData,
   }
 
-  const loadingOptions = {
+  const shipWaitingOptions = {
     ...defaultOptions,
     loop: true,
-    animationData: loadingData,
+    animationData: shipWaitingData,
   }
 
-  const successOptions = {
+  const shipSprinkleHeartOptions = {
     ...defaultOptions,
-    animationData: successData,
+    animationData: shipSprinkHeartData,
+  }
+
+  const openHeartOptions = {
+    ...defaultOptions,
+    animationData: openHeartData,
   }
 
   const lottieProps = {
     isClickToPauseDisabled: true,
-    height: 120,
-    width: 120,
+    height: 136,
+    width: 166,
   }
 
   const containerClasses = classNames({
@@ -80,7 +87,7 @@ const Animation: React.FC<Props> = ({
   return (
     <section className={containerClasses}>
       <p className={styles.animationHint}>
-        {isLoading && currency === CURRENCY.LIKE && (
+        {isShipWaiting && currency === CURRENCY.LIKE && (
           <FormattedMessage
             defaultMessage="Request on {network} network will be confirmed and synced to Matters in a bit"
             values={{
@@ -89,7 +96,7 @@ const Animation: React.FC<Props> = ({
             id="t2EpN/"
           />
         )}
-        {isLoading && currency === CURRENCY.USDT && (
+        {isShipWaiting && currency === CURRENCY.USDT && (
           <FormattedMessage
             defaultMessage="Request on {network} network will be confirmed and synced to Matters in a bit"
             values={{
@@ -99,19 +106,28 @@ const Animation: React.FC<Props> = ({
           />
         )}
       </p>
-      {isDonate && (
+      {isCoinShip && (
         <Lottie
-          {...donateOptions}
+          {...coinShipOptions}
           {...lottieProps}
           onComplete={() => {
-            playLoading ? forward('loading') : forward('success')
+            playShipWaiting ? forward('shipWaiting') : forward('openHeart')
           }}
         />
       )}
-      {isLoading && <Lottie {...loadingOptions} {...lottieProps} />}
-      {isSuccess && (
+      {isShipWaiting && <Lottie {...shipWaitingOptions} {...lottieProps} />}
+      {isShipSprinkHeart && (
         <Lottie
-          {...successOptions}
+          {...shipSprinkleHeartOptions}
+          onComplete={() => {
+            forward('openHeart')
+          }}
+          {...lottieProps}
+        />
+      )}
+      {isOpenHeart && (
+        <Lottie
+          {...openHeartOptions}
           {...lottieProps}
           onComplete={() => {
             playEnd()

@@ -9,6 +9,7 @@ import {
   DateTime,
   DotDivider,
   Icon,
+  LanguageContext,
   TextIcon,
   UserDigest,
   useRoute,
@@ -17,6 +18,7 @@ import {
 import {
   MetaInfoArticleFragment,
   MetaInfoArticleVersionFragment,
+  UserLanguage,
 } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -43,6 +45,7 @@ const MetaInfo = ({
   editable,
 }: MetaInfoProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const authorId = article.author.id
   const isAuthor = viewer.id === authorId
   const originalLanguage = article?.language ? article.language : ''
@@ -51,6 +54,14 @@ const MetaInfo = ({
 
   const { router } = useRoute()
   const { shortHash, ...qs } = router.query
+
+  const path = toPath({
+    page: 'articleHistory',
+    article,
+    search: qs as { [key: string]: string },
+  }).href
+
+  const isEn = lang === UserLanguage.En
 
   return (
     <section className={styles.info}>
@@ -68,29 +79,28 @@ const MetaInfo = ({
           size="xs"
           color="greyDarker"
         />
-        <span>
-          {version?.createdAt ? (
-            <FormattedMessage defaultMessage=" published" id="twEps9" />
-          ) : (
-            <FormattedMessage defaultMessage=" published on" id="ux4p3j" />
-          )}
-        </span>
+
+        {!version && article?.revisionCount > 0 && (
+          <span>
+            {isEn && <>&nbsp;</>}
+            <Button textColor="greyDarker" textActiveColor="black" href={path}>
+              <span>
+                <FormattedMessage defaultMessage="(edited)" id="gy/Kkr" />
+              </span>
+            </Button>
+          </span>
+        )}
       </section>
 
       {!version && (
-        <Button
-          textColor="black"
-          textActiveColor="greyDarker"
-          href={
-            toPath({
-              page: 'articleHistory',
-              article,
-              search: qs as { [key: string]: string },
-            }).href
-          }
-        >
-          <TextIcon size={12}>IPFS</TextIcon>
-        </Button>
+        <>
+          <section className={styles.dot}>
+            <DotDivider />
+          </section>
+          <Button textColor="black" textActiveColor="greyDarker" href={path}>
+            <TextIcon size={12}>IPFS</TextIcon>
+          </Button>
+        </>
       )}
 
       {canReadFullContent && (

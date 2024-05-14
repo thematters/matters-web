@@ -94,7 +94,7 @@ const Toolbar = ({
           disabled={lock}
         />
 
-        <DonationButton article={article} articleDetail={articleDetails} />
+        <DonationButton articleDetail={articleDetails} />
 
         <section className={styles.CommentButton}>
           <CommentButton

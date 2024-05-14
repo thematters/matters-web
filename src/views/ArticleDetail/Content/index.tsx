@@ -6,8 +6,8 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { TEST_ID } from '~/common/enums'
 import { captureClicks, initAudioPlayers, optimizeEmbed } from '~/common/utils'
 import {
-  Media,
-  TextSelectionPopover,
+  // Media,
+  // TextSelectionPopover,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -126,13 +126,13 @@ const Content = ({
         ref={contentContainer}
         data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
-      <Media greaterThan="sm">
+      {/* <Media greaterThan="sm">
         {contentContainer.current && (
           <TextSelectionPopover
             targetElement={contentContainer.current as HTMLElement}
           />
         )}
-      </Media>
+      </Media> */}
     </>
   )
 }

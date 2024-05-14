@@ -832,6 +832,9 @@
     "defaultMessage": "该 {type} 账号已关联至其他 Matters 账号，请登录该账号解绑后再试",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
+  "D+uyeZ": {
+    "defaultMessage": "选择离开围炉，你将马上失去成员资格。下一个账单日（每月 1 日）将不会扣除费用。"
+  },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一网址到 RSS 阅读器",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1519,9 +1522,6 @@
   "Pv2PlK": {
     "defaultMessage": "插入图片"
   },
-  "Q1PHUd": {
-    "defaultMessage": "恭喜成为围炉一员。现在你可以免费浏览围炉内作品，还可以去围炉与大家谈天说地。"
-  },
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
@@ -1857,9 +1857,6 @@
   "WiGHyF": {
     "defaultMessage": "Web Monetization 标准"
   },
-  "Wjmng6": {
-    "defaultMessage": "正文及作品管理剩 {revisionCountLeft} 次编辑"
-  },
   "WpvsPu": {
     "defaultMessage": "订阅",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1959,10 +1956,6 @@
     "defaultMessage": "请于钱包视窗点击确认授权使用{br}确认完成后即可开始支持步骤",
     "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
-  "YOMY1y": {
-    "defaultMessage": "发布评论...",
-    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
-  },
   "YPMn9n": {
     "defaultMessage": "请先登入再进行操作",
     "description": "UNAUTHENTICATED"
@@ -2057,9 +2050,6 @@
   "aCTmEO": {
     "defaultMessage": "我还没有钱包",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
-  },
-  "aDIygy": {
-    "defaultMessage": "已超過 {MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 {current} 字"
   },
   "aE5Qq+": {
     "defaultMessage": "重新发送",
@@ -2313,9 +2303,6 @@
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "fjBDmp": {
-    "defaultMessage": "选择离开围炉，你将马上失去成员资格。下一个账单日（每月 1 日）将不会扣除费用。"
-  },
   "fnv5rD": {
     "defaultMessage": "赞赏作品（当前 {total} 次赞赏）"
   },
@@ -2327,6 +2314,10 @@
   },
   "g5pX+a": {
     "defaultMessage": "关于"
+  },
+  "gK6OxL": {
+    "defaultMessage": "留个友善的评论？",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "gMZfHO": {
     "defaultMessage": "RSS 订阅",
@@ -2352,6 +2343,9 @@
   },
   "gluNT8": {
     "defaultMessage": "输入链接地址"
+  },
+  "gy/Kkr": {
+    "defaultMessage": "（修改过）"
   },
   "gz0EGC": {
     "defaultMessage": "编辑作品已发布"
@@ -2490,9 +2484,6 @@
   "jtdQHR": {
     "defaultMessage": "公共节点"
   },
-  "jwnump": {
-    "defaultMessage": "发布评论..."
-  },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 发布广播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2609,14 +2600,14 @@
     "defaultMessage": "评论了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "liBHHE": {
+    "defaultMessage": "什么看法，都可以留个友善的评论～"
+  },
   "ll/ufR": {
     "defaultMessage": "热门"
   },
   "lqdpsm": {
     "defaultMessage": "回到订阅"
-  },
-  "lsccVJ": {
-    "defaultMessage": "正文及作品管理编辑次数已达上限"
   },
   "m+cdhC": {
     "defaultMessage": "最近使用"
@@ -2751,6 +2742,9 @@
   "ohgTH4": {
     "defaultMessage": "追踪中",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "onDesU": {
+    "defaultMessage": "恭喜成为围炉一员。现在你可以免费浏览围炉内作品，还可以去围炉与大家谈天说地。"
   },
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
@@ -2965,9 +2959,6 @@
     "defaultMessage": "评论已被强制隐藏",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
-  "twEps9": {
-    "defaultMessage": " 更新"
-  },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3026,9 +3017,6 @@
   },
   "uw32VR": {
     "defaultMessage": "教学指南"
-  },
-  "ux4p3j": {
-    "defaultMessage": " 更新于"
   },
   "v+hbfO": {
     "defaultMessage": "固定金额"

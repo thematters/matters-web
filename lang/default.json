@@ -832,6 +832,9 @@
     "defaultMessage": "This {type} account is connected to a Matters account. Sign in to that account to disconnect it then try again",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
+  "D+uyeZ": {
+    "defaultMessage": "Unsubscribe circle will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
+  },
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1519,9 +1522,6 @@
   "Pv2PlK": {
     "defaultMessage": "Insert image"
   },
-  "Q1PHUd": {
-    "defaultMessage": "Congratulations! Now you can browse all works within the cirlce for free and chat with everyone."
-  },
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
@@ -1857,9 +1857,6 @@
   "WiGHyF": {
     "defaultMessage": "Web Monetization standard"
   },
-  "Wjmng6": {
-    "defaultMessage": "{revisionCountLeft} revisions remaining"
-  },
   "WpvsPu": {
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1959,10 +1956,6 @@
     "defaultMessage": "Please confirm authorization in the wallet dialog.{br}Once confirmed, support steps can begin.",
     "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
-  "YOMY1y": {
-    "defaultMessage": "Comment...",
-    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
-  },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
     "description": "UNAUTHENTICATED"
@@ -2057,9 +2050,6 @@
   "aCTmEO": {
     "defaultMessage": "I don't have a wallet yet",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
-  },
-  "aDIygy": {
-    "defaultMessage": "Maximum {MAX_ARTICLE_SUPPORT_LENGTH} characters, current {current} characters."
   },
   "aE5Qq+": {
     "defaultMessage": "Resend",
@@ -2313,9 +2303,6 @@
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "fjBDmp": {
-    "defaultMessage": "Unsubscribe cirlce will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
-  },
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"
   },
@@ -2327,6 +2314,10 @@
   },
   "g5pX+a": {
     "defaultMessage": "About"
+  },
+  "gK6OxL": {
+    "defaultMessage": "Leave a comment?",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "gMZfHO": {
     "defaultMessage": "RSS Subscription",
@@ -2352,6 +2343,9 @@
   },
   "gluNT8": {
     "defaultMessage": "Enter URL"
+  },
+  "gy/Kkr": {
+    "defaultMessage": "(edited)"
   },
   "gz0EGC": {
     "defaultMessage": "Article republished"
@@ -2490,9 +2484,6 @@
   "jtdQHR": {
     "defaultMessage": "Gateways"
   },
-  "jwnump": {
-    "defaultMessage": "Comment..."
-  },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2609,14 +2600,14 @@
     "defaultMessage": "commented",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "liBHHE": {
+    "defaultMessage": "Any thoughts? Leave a kind comment~"
+  },
   "ll/ufR": {
     "defaultMessage": "Trending"
   },
   "lqdpsm": {
     "defaultMessage": "Back to subscribe"
-  },
-  "lsccVJ": {
-    "defaultMessage": "You have reached the limit of republished articles"
   },
   "m+cdhC": {
     "defaultMessage": "Recently used"
@@ -2751,6 +2742,9 @@
   "ohgTH4": {
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "onDesU": {
+    "defaultMessage": "Congratulations! Now you can browse all works within the circle for free and chat with everyone."
   },
   "p5qZnJ": {
     "defaultMessage": "liked",
@@ -2965,9 +2959,6 @@
     "defaultMessage": "The comment has been forcibly hidden",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
-  "twEps9": {
-    "defaultMessage": "published"
-  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3026,9 +3017,6 @@
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
-  },
-  "ux4p3j": {
-    "defaultMessage": "published on"
   },
   "v+hbfO": {
     "defaultMessage": "fixed amount"

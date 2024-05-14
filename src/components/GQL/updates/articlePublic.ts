@@ -1,5 +1,8 @@
 import { DataProxy } from 'apollo-cache'
+import _remove from 'lodash/remove'
 
+import { toGlobalId } from '~/common/utils'
+import { Viewer } from '~/components/Context'
 import {
   ArticleAvailableTranslationsQuery,
   ArticleDetailPublicQuery,
@@ -11,15 +14,20 @@ export const updateArticlePublic = ({
   shortHash,
   routerLang,
   type,
+  viewer,
+  txId,
 }: {
   cache: DataProxy
   shortHash: string
   routerLang: UserLanguage
+  viewer?: Viewer
+  txId?: string
   type:
     | 'deleteComment'
     | 'addComment'
     | 'addSecondaryComment'
     | 'deleteSecondaryComment'
+    | 'updateDonation'
 }) => {
   // FIXME: circular dependencies
   const {
@@ -73,6 +81,53 @@ export const updateArticlePublic = ({
         break
       case 'deleteSecondaryComment':
         commentCount -= 1
+        break
+      case 'updateDonation':
+        if (!txId) {
+          return
+        }
+        // unshift viewer into donations
+        const donations = data.article?.donations?.edges || []
+        let existed = false
+        _remove(donations, (d) => {
+          if (!viewer?.id || d.node.sender?.id !== viewer.id) {
+            return false
+          }
+          existed = true
+          return true
+        })
+        const donatorsCount = data.article?.donations?.totalCount || 0
+
+        data.article.donations.totalCount = existed
+          ? donatorsCount
+          : donatorsCount + 1
+
+        donations.unshift({
+          cursor: window.btoa(`arrayconnection:${donations.length}`) || '',
+          node: {
+            id: toGlobalId({ type: 'Transaction', id: txId }),
+            sender: viewer
+              ? {
+                  avatar: viewer.avatar,
+                  id: viewer.id,
+                  displayName: viewer.displayName,
+                  userName: viewer.userName,
+                  liker: {
+                    civicLiker: viewer.liker.civicLiker,
+                    __typename: 'Liker',
+                  },
+                  info: {
+                    badges: viewer.info.badges,
+                    __typename: 'UserInfo',
+                  },
+                  __typename: 'User',
+                }
+              : null,
+            __typename: 'ArticleDonation',
+          },
+          __typename: 'ArticleDonationEdge',
+        })
+        data.article.donations.edges = donations
         break
     }
 

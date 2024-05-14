@@ -832,6 +832,9 @@
     "defaultMessage": "該 {type} 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
+  "D+uyeZ": {
+    "defaultMessage": "選擇離開圍爐，你將馬上失去成員資格。下一個賬單日（每月 1 日）將不會扣除費用。"
+  },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一網址到 RSS 閱讀器",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -1519,9 +1522,6 @@
   "Pv2PlK": {
     "defaultMessage": "插入圖片"
   },
-  "Q1PHUd": {
-    "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
-  },
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
@@ -1857,9 +1857,6 @@
   "WiGHyF": {
     "defaultMessage": "Web Monetization 標準"
   },
-  "Wjmng6": {
-    "defaultMessage": "正文及作品管理剩 {revisionCountLeft} 版編輯"
-  },
   "WpvsPu": {
     "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1959,10 +1956,6 @@
     "defaultMessage": "請於錢包視窗點擊確認授權使用{br}確認完成後即可開始支持步驟",
     "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
-  "YOMY1y": {
-    "defaultMessage": "發布評論...",
-    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
-  },
   "YPMn9n": {
     "defaultMessage": "請先登入再進行操作",
     "description": "UNAUTHENTICATED"
@@ -2057,9 +2050,6 @@
   "aCTmEO": {
     "defaultMessage": "我還沒有錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
-  },
-  "aDIygy": {
-    "defaultMessage": "已超过 {MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 {current} 字"
   },
   "aE5Qq+": {
     "defaultMessage": "重新發送",
@@ -2313,9 +2303,6 @@
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "fjBDmp": {
-    "defaultMessage": "選擇離開圍爐，你將馬上失去成員資格。下一個賬單日（每月 1 日）將不會扣除費用。"
-  },
   "fnv5rD": {
     "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"
   },
@@ -2327,6 +2314,10 @@
   },
   "g5pX+a": {
     "defaultMessage": "關於"
+  },
+  "gK6OxL": {
+    "defaultMessage": "留個友善的評論？",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "gMZfHO": {
     "defaultMessage": "RSS 訂閱",
@@ -2352,6 +2343,9 @@
   },
   "gluNT8": {
     "defaultMessage": "輸入連結地址"
+  },
+  "gy/Kkr": {
+    "defaultMessage": "（修改过）"
   },
   "gz0EGC": {
     "defaultMessage": "編輯作品已發佈"
@@ -2490,9 +2484,6 @@
   "jtdQHR": {
     "defaultMessage": "公共節點"
   },
-  "jwnump": {
-    "defaultMessage": "發布評論..."
-  },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2609,14 +2600,14 @@
     "defaultMessage": "評論了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "liBHHE": {
+    "defaultMessage": "什麼看法，都可以留個友善的評論～"
+  },
   "ll/ufR": {
     "defaultMessage": "熱門"
   },
   "lqdpsm": {
     "defaultMessage": "回到訂閱"
-  },
-  "lsccVJ": {
-    "defaultMessage": "正文及作品管理編輯次數已達上限"
   },
   "m+cdhC": {
     "defaultMessage": "近期使用"
@@ -2751,6 +2742,9 @@
   "ohgTH4": {
     "defaultMessage": "追蹤中",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "onDesU": {
+    "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
   },
   "p5qZnJ": {
     "defaultMessage": "讚賞了",
@@ -2965,9 +2959,6 @@
     "defaultMessage": "評論已被強制隱藏",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
-  "twEps9": {
-    "defaultMessage": " 更新"
-  },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3026,9 +3017,6 @@
   },
   "uw32VR": {
     "defaultMessage": "教學指南"
-  },
-  "ux4p3j": {
-    "defaultMessage": " 更新於"
   },
   "v+hbfO": {
     "defaultMessage": "固定金額"
