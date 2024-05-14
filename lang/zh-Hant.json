@@ -102,7 +102,7 @@
     "defaultMessage": "已複製分享連結"
   },
   "/jJLYy": {
-    "defaultMessage": "交易記錄"
+    "defaultMessage": "交易紀錄"
   },
   "/pnYHM": {
     "defaultMessage": "圍爐不存在",
@@ -474,6 +474,9 @@
   },
   "6CQaLH": {
     "defaultMessage": "請選擇或輸入金額"
+  },
+  "6E7VKR": {
+    "defaultMessage": "我的交易紀錄"
   },
   "6ErzDk": {
     "defaultMessage": "重新連接錢包"
@@ -1016,7 +1019,7 @@
     "defaultMessage": "數據後台"
   },
   "GclYG/": {
-    "defaultMessage": "匿名用戶"
+    "defaultMessage": "匿名支持用戶"
   },
   "GcvLBC": {
     "defaultMessage": "我知道了"
@@ -1267,9 +1270,6 @@
   "LGox1K": {
     "defaultMessage": "已追蹤"
   },
-  "LILxpV": {
-    "defaultMessage": "評論尚未發布，確定放棄內容離開此頁嗎？"
-  },
   "LOefol": {
     "defaultMessage": "上鎖",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
@@ -1407,10 +1407,6 @@
   },
   "NYTGIb": {
     "defaultMessage": "知道了"
-  },
-  "NbdvAd": {
-    "defaultMessage": "支持者名單",
-    "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
   },
   "NdtzIs": {
     "defaultMessage": "郵件地址驗證連結已發送至 {email}",
@@ -2985,6 +2981,10 @@
   "uM5qZr": {
     "defaultMessage": "我讚賞的"
   },
+  "uME1sk": {
+    "defaultMessage": "查看支持者名單",
+    "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
+  },
   "uQHRvx": {
     "defaultMessage": "請選擇問題類型："
   },
@@ -3275,9 +3275,6 @@
   },
   "z3uIHQ": {
     "defaultMessage": "取消點讚"
-  },
-  "z4Dl+l": {
-    "defaultMessage": "交易記錄"
   },
   "zAK5G+": {
     "defaultMessage": "登入連結已發送至 {email}",
