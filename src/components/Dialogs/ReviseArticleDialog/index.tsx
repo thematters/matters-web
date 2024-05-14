@@ -36,7 +36,6 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
                 defaultMessage='After the modification is completed, the new version will be released to IPFS again. You can view the historical version from "...published on IPFS" under the article title.'
                 id="HJcB0d"
               />
-              📃
             </p>
           </Dialog.Content.Message>
         </Dialog.Content>

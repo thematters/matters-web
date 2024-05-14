@@ -13,7 +13,6 @@ import {
   BookmarkButton,
   ButtonProps,
   CommentFormBetaDialog,
-  ReCaptchaProvider,
   ViewerContext,
 } from '~/components'
 import DropdownActions, {
@@ -146,17 +145,15 @@ const FixedToolbar = ({
               </button>
             )}
 
-            <ReCaptchaProvider action="appreciateArticle">
-              <AppreciationButton
-                article={article}
-                privateFetched={privateFetched}
-                iconSize={24}
-                textWeight="normal"
-                textIconSpacing={4}
-                disabled={lock}
-                {...buttonProps}
-              />
-            </ReCaptchaProvider>
+            <AppreciationButton
+              article={article}
+              privateFetched={privateFetched}
+              iconSize={24}
+              textWeight="normal"
+              textIconSpacing={4}
+              disabled={lock}
+              {...buttonProps}
+            />
 
             {!showCommentToolbar && (
               <CommentButton

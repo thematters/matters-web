@@ -2812,6 +2812,9 @@
     "defaultMessage": "已归档",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
+  "qRYMPk": {
+    "defaultMessage": "登入遇到问题，请稍候或关闭 Ad Blocker 后再次尝试"
+  },
   "qS19ij": {
     "defaultMessage": "交易密码重置成功",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
