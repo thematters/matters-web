@@ -385,6 +385,9 @@
   "4l6vz1": {
     "defaultMessage": "複製"
   },
+  "4tqFCR": {
+    "defaultMessage": "作者尚未启用 USDT 钱包"
+  },
   "4wOWfp": {
     "defaultMessage": "這是什麼？",
     "description": "src/components/Billboard/index.tsx"
@@ -1144,6 +1147,9 @@
   "J6f6iN": {
     "defaultMessage": "評論數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
+  "J7hiLV": {
+    "defaultMessage": "作者尚未綁定 LikeCoin 錢包"
   },
   "JBWS0c": {
     "defaultMessage": "連結"
