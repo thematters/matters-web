@@ -47,12 +47,14 @@ const Donators = ({
   isAuthor,
 }: DonatorsProps) => {
   const maxAvatarNum = 49
-
   const edges = article.donations.edges
   const donatorsCount = article.donations.totalCount
   const frontDonators = (edges?.map(({ node }) => node.sender) || []).slice(
     0,
     maxAvatarNum + 1
+  )
+  const isAllAnonymousSupporters = frontDonators.every(
+    (donator) => !donator?.id
   )
 
   const containerClasses = classNames({
@@ -85,7 +87,7 @@ const Donators = ({
               </Fragment>
             ))}
           </section>
-          {isAuthor && donatorsCount > 0 && (
+          {isAuthor && donatorsCount > 0 && !isAllAnonymousSupporters && (
             <section className={styles.viewSupport}>
               <FormattedMessage
                 defaultMessage="View supporters"
