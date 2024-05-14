@@ -10,9 +10,10 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS,
   SUPPORT_SUCCESS_ANIMATION,
+  SUPPORT_SUCCESS_USDT_VISITOR,
   TEST_ID,
 } from '~/common/enums'
-import { sleep } from '~/common/utils'
+import { explorers, sleep } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -24,7 +25,7 @@ import {
   useEventListener,
   ViewerContext,
 } from '~/components'
-import { ArticleDetailPublicQuery, HasDonatedQuery } from '~/gql/graphql'
+import { ArticleDetailPublicQuery, Chain, HasDonatedQuery } from '~/gql/graphql'
 
 import Donators from './Donators'
 import EditCopyButton from './EditCopyButton'
@@ -57,6 +58,8 @@ const SupportWidget = ({
   const [showAnimation, setShowAnimation] = useState(false)
   const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
   const [playSlideUp, setPlaySlideUp] = useState(false)
+  const [tx, setTx] = useState<{ chain: Chain; txHash: string }>()
+  const [showTx, setShowTx] = useState(false)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
   const supportWidgetClasses = classNames({
     [styles.supportWidget]: true,
@@ -81,7 +84,15 @@ const SupportWidget = ({
 
   useEventListener(SUPPORT_SUCCESS, () => {
     hasDonatedRefetch()
+    setShowTx(true)
   })
+
+  useEventListener(
+    SUPPORT_SUCCESS_USDT_VISITOR,
+    (detail: { chain: Chain; txHash: string }) => {
+      setTx(detail)
+    }
+  )
 
   useEventListener(
     SUPPORT_SUCCESS_ANIMATION,
@@ -227,25 +238,30 @@ const SupportWidget = ({
                 </section>
               )}
 
-              {isViewerDonated && (
+              {(isViewerDonated || (tx && showTx)) && (
                 <section className={styles.transaction}>
-                  <span className={styles.transactionLeft}>
-                    <FormattedMessage defaultMessage="View" id="FgydNe" />
-                  </span>
-                  <Button href={PATHS.ME_WALLET_TRANSACTIONS}>
-                    <span className={styles.transactionButton}>
-                      <TextIcon
-                        icon={<Icon icon={IconMoney} color="black" />}
-                        color="black"
-                        size={12}
-                        spacing={2}
-                      >
-                        <FormattedMessage
-                          defaultMessage="Transaction History"
-                          id="z4Dl+l"
-                        />
-                      </TextIcon>
-                    </span>
+                  <Button
+                    href={
+                      tx && showTx ? undefined : PATHS.ME_WALLET_TRANSACTIONS
+                    }
+                    htmlHref={
+                      tx && showTx
+                        ? `${explorers[tx.chain].url}/tx/${tx.txHash}`
+                        : undefined
+                    }
+                    htmlTarget={tx && showTx ? '_blank' : undefined}
+                  >
+                    <TextIcon
+                      icon={<Icon icon={IconMoney} color="greyDarker" />}
+                      color="greyDarker"
+                      size={12}
+                      spacing={2}
+                    >
+                      <FormattedMessage
+                        defaultMessage="My transaction history"
+                        id="6E7VKR"
+                      />
+                    </TextIcon>
                   </Button>
                 </section>
               )}

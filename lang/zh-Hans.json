@@ -475,6 +475,9 @@
   "6CQaLH": {
     "defaultMessage": "请选择或输入金额"
   },
+  "6E7VKR": {
+    "defaultMessage": "我的交易记录"
+  },
   "6ErzDk": {
     "defaultMessage": "重新连接钱包"
   },
@@ -506,7 +509,7 @@
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
   },
   "6kMb9Z": {
-    "defaultMessage": "链上纪录"
+    "defaultMessage": "链上记录"
   },
   "6lwWCu": {
     "defaultMessage": "其他",
@@ -1404,10 +1407,6 @@
   },
   "NYTGIb": {
     "defaultMessage": "知道了"
-  },
-  "NbdvAd": {
-    "defaultMessage": "支持者名单",
-    "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
   },
   "NdtzIs": {
     "defaultMessage": "邮箱地址验证链接已发送至 {email}",
@@ -2372,7 +2371,7 @@
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
   "h9CB9m": {
-    "defaultMessage": "结果以链上纪录为主，稍后同步至 Matters"
+    "defaultMessage": "结果以链上记录为主，稍后同步至 Matters"
   },
   "h9CG9E": {
     "defaultMessage": "{commentType}已刪除",
@@ -2912,7 +2911,7 @@
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
   },
   "sfj+KG": {
-    "defaultMessage": "结果以链上纪录为主，稍后同步至 Matters",
+    "defaultMessage": "结果以链上记录为主，稍后同步至 Matters",
     "description": "src/components/Forms/PaymentForm/Processing/index.tsx"
   },
   "sg3nVO": {
@@ -2981,6 +2980,10 @@
   },
   "uM5qZr": {
     "defaultMessage": "我赞赏的"
+  },
+  "uME1sk": {
+    "defaultMessage": "查看支持者名单",
+    "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
   },
   "uQHRvx": {
     "defaultMessage": "请选择问题类型："
@@ -3272,9 +3275,6 @@
   },
   "z3uIHQ": {
     "defaultMessage": "取消点赞"
-  },
-  "z4Dl+l": {
-    "defaultMessage": "交易记录"
   },
   "zAK5G+": {
     "defaultMessage": "登录链接已发送至 {email}",

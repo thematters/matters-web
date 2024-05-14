@@ -475,6 +475,9 @@
   "6CQaLH": {
     "defaultMessage": "Please select or enter amount"
   },
+  "6E7VKR": {
+    "defaultMessage": "My transaction history"
+  },
   "6ErzDk": {
     "defaultMessage": "Reconnect Wallet"
   },
@@ -1404,10 +1407,6 @@
   },
   "NYTGIb": {
     "defaultMessage": "Got it"
-  },
-  "NbdvAd": {
-    "defaultMessage": "Supporter",
-    "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
   },
   "NdtzIs": {
     "defaultMessage": "The email verification link has been sent to {email}",
@@ -2982,6 +2981,10 @@
   "uM5qZr": {
     "defaultMessage": "Likes Given"
   },
+  "uME1sk": {
+    "defaultMessage": "View supporters",
+    "description": "src/views/ArticleDetail/SupportWidget/Donators/index.tsx"
+  },
   "uQHRvx": {
     "defaultMessage": "Please select the type of issues:"
   },
@@ -3272,9 +3275,6 @@
   },
   "z3uIHQ": {
     "defaultMessage": "Undo upvote"
-  },
-  "z4Dl+l": {
-    "defaultMessage": "Transaction History"
   },
   "zAK5G+": {
     "defaultMessage": "The login link has been sent to {email}",

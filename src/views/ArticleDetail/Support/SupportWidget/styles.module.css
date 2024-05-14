@@ -37,17 +37,6 @@
 
     margin-top: var(--sp16);
     font-size: var(--text12);
-
-    & .transactionLeft {
-      display: inline-flex;
-      line-height: 1.125rem;
-      color: var(--color-grey-darker);
-    }
-
-    & .transactionButton {
-      display: inline-flex;
-      margin-left: var(--sp4);
-    }
   }
 }
 

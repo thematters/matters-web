@@ -53,7 +53,6 @@ export const useRoute = () => {
 
   const setQuery = (key: QueryKey, value: string) => {
     const query = _omitBy({ ...router.query, [key]: value }, (v) => !v)
-    console.log(query)
     router.push({ query })
   }
 
