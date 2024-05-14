@@ -124,10 +124,6 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
             e.stopPropagation()
           }
         }}
-        onPaste={(e) => {
-          e.preventDefault()
-          return false
-        }}
         onKeyUp={() => {
           const v = normalizeUserName(values.mattersID)
           setFieldValue('mattersID', v.slice(0, maxUsername))

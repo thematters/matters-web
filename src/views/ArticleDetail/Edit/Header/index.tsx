@@ -111,23 +111,10 @@ const EditModeHeader = ({
     isSensitiveRevised ||
     restProps.iscnPublish
 
+  const contentLength = revision.content?.length || 0
+  const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
+
   const onSave = async () => {
-    // check content length
-    const contentCount = revision.content?.length || 0
-
-    if (needRepublish && contentCount > MAX_ARTICLE_CONTENT_LENGTH) {
-      toast.error({
-        message: (
-          <FormattedMessage
-            defaultMessage={`Content length exceeds limit ({length}/{limit})`}
-            id="VefaFQ"
-            values={{ length: contentCount, limit: MAX_ARTICLE_CONTENT_LENGTH }}
-          />
-        ),
-      })
-      return
-    }
-
     try {
       await editArticle({
         variables: {
@@ -192,65 +179,56 @@ const EditModeHeader = ({
   )
 
   return (
-    <>
-      <p className={styles.hint}>
-        <>
-          {!isOverRevisionLimit ? (
-            <FormattedMessage
-              defaultMessage="{revisionCountLeft} revisions remaining"
-              id="Wjmng6"
-              values={{
-                revisionCountLeft,
-              }}
-            />
-          ) : (
-            <FormattedMessage
-              defaultMessage="You have reached the limit of republished articles"
-              id="lsccVJ"
-            />
-          )}
-        </>
-      </p>
+    <section className={styles.header}>
+      <span />
 
-      <EditorSettingsDialog
-        {...restProps}
-        versionDescription={revision.versionDescription}
-        article={{
-          ...article,
-          replyToDonator: revision.replyToDonator,
-          requestForDonation: revision.requestForDonation,
-        }}
-        saving={loading}
-        disabled={!isRevised || loading}
-        confirmButtonText={
-          needRepublish ? (
-            <FormattedMessage defaultMessage="Publish" id="syEQFE" />
-          ) : (
-            <FormattedMessage defaultMessage="Save revisions" id="KWDSxB" />
-          )
-        }
-        cancelButtonText={
-          <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
-        }
-        onConfirm={needRepublish ? undefined : onSave}
-        ConfirmStepContent={ConfirmStepContent}
-      >
-        {({ openDialog: openEditorSettingsDialog }) => (
-          <Button
-            size={[null, '2rem']}
-            spacing={[0, 16]}
-            bgColor="green"
-            onClick={openEditorSettingsDialog}
-            aria-haspopup="dialog"
-            disabled={!isRevised || isEditDisabled}
-          >
-            <TextIcon color="white" size={16} weight="medium">
-              <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
-            </TextIcon>
-          </Button>
+      <section>
+        {isOverLength && (
+          <span className={styles.count}>
+            {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
+          </span>
         )}
-      </EditorSettingsDialog>
-    </>
+
+        <EditorSettingsDialog
+          {...restProps}
+          versionDescription={revision.versionDescription}
+          article={{
+            ...article,
+            replyToDonator: revision.replyToDonator,
+            requestForDonation: revision.requestForDonation,
+          }}
+          saving={loading}
+          disabled={!isRevised || loading}
+          confirmButtonText={
+            needRepublish ? (
+              <FormattedMessage defaultMessage="Publish" id="syEQFE" />
+            ) : (
+              <FormattedMessage defaultMessage="Save revisions" id="KWDSxB" />
+            )
+          }
+          cancelButtonText={
+            <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+          }
+          onConfirm={needRepublish ? undefined : onSave}
+          ConfirmStepContent={ConfirmStepContent}
+        >
+          {({ openDialog: openEditorSettingsDialog }) => (
+            <Button
+              size={[null, '2rem']}
+              spacing={[0, 16]}
+              bgColor="green"
+              onClick={openEditorSettingsDialog}
+              aria-haspopup="dialog"
+              disabled={!isRevised || isEditDisabled || isOverLength}
+            >
+              <TextIcon color="white" size={16} weight="medium">
+                <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />
+              </TextIcon>
+            </Button>
+          )}
+        </EditorSettingsDialog>
+      </section>
+    </section>
   )
 }
 

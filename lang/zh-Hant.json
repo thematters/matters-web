@@ -95,6 +95,9 @@
     "defaultMessage": "回覆評論",
     "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
+  "/dKzfc": {
+    "defaultMessage": "該作品因違反社區約章，已被站方強制歸檔。"
+  },
   "/faseS": {
     "defaultMessage": "已複製分享連結"
   },
@@ -276,7 +279,7 @@
     "defaultMessage": "個人簡介"
   },
   "2bG/gP": {
-    "defaultMessage": "編輯",
+    "defaultMessage": "修改",
     "description": "src/views/ArticleDetail/MetaInfo/index.tsx"
   },
   "2ef/Xl": {
@@ -621,9 +624,6 @@
   "99OtWT": {
     "defaultMessage": "寫入中…"
   },
-  "9Dwh/Z": {
-    "defaultMessage": "編輯後的作品即再版發佈至分佈式網絡。編輯前請自行保留上一版本備份"
-  },
   "9EABqX": {
     "defaultMessage": "喜歡我的作品嗎？別忘了給予支持與讚賞，讓我知道在創作的路上有你陪伴，一起延續這份熱忱！"
   },
@@ -816,7 +816,7 @@
     "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "CnPG8j": {
-    "defaultMessage": "精華"
+    "defaultMessage": "精選"
   },
   "CoF9qv": {
     "defaultMessage": "確認要解綁錢包？",
@@ -831,6 +831,9 @@
   "D+N1Q6": {
     "defaultMessage": "該 {type} 帳號已關聯至其他 Matters 帳號，請登入該帳號解綁後再試",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
+  },
+  "D+uyeZ": {
+    "defaultMessage": "選擇離開圍爐，你將馬上失去成員資格。下一個賬單日（每月 1 日）將不會扣除費用。"
   },
   "D2Sw/t": {
     "defaultMessage": "添加以下任一網址到 RSS 閱讀器",
@@ -977,6 +980,9 @@
   "G/yZLu": {
     "defaultMessage": "移除"
   },
+  "G0pqnh": {
+    "defaultMessage": "閱讀原文"
+  },
   "G4bk3r": {
     "defaultMessage": "自訂金額大於餘額"
   },
@@ -1045,6 +1051,9 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "確認封存"
+  },
+  "HJcB0d": {
+    "defaultMessage": "完成修改後，新版會再次發佈到 IPFS，你可以從文章標題下的「…更新於 IPFS」進入查看歷史版本。"
   },
   "HPVOw/": {
     "defaultMessage": "數字錢包",
@@ -1323,10 +1332,6 @@
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "MIA5xy": {
-    "defaultMessage": "編輯須知",
-    "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
-  },
   "MP6xe/": {
     "defaultMessage": "Billboard 是一個公開且可付費租借的鏈上 NFT 廣告協議。租借成功後，可進行 14 天的內容投放。租借費用基於哈柏格稅概念計算，產生的租借收入將以二次方配捐方式回饋給社區創作者。更多詳情請查看{announcements}。",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -1383,6 +1388,9 @@
   "NEKHMm": {
     "defaultMessage": "電子郵件",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
+  "NFIbLb": {
+    "defaultMessage": "已用完修改次數"
   },
   "NNF+3f": {
     "defaultMessage": "標籤不存在",
@@ -1451,9 +1459,6 @@
   "OpeFTV": {
     "defaultMessage": "輸入六位數字交易密碼"
   },
-  "Oru6G2": {
-    "defaultMessage": "使用 IPFS 生成的作品指紋，通過它可在節點調取內容"
-  },
   "OsX3KM": {
     "defaultMessage": "評論",
     "description": "src/views/ArticleDetail/index.tsx"
@@ -1517,9 +1522,6 @@
   "Pv2PlK": {
     "defaultMessage": "插入圖片"
   },
-  "Q1PHUd": {
-    "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
-  },
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
@@ -1568,7 +1570,7 @@
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "RGEpvx": {
-    "defaultMessage": "編輯文案",
+    "defaultMessage": "修改文案",
     "description": "src/views/ArticleDetail/SupportWidget/EditCopyButton/index.tsx"
   },
   "RM17b4": {
@@ -1795,9 +1797,6 @@
     "defaultMessage": "草稿",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
-  "VefaFQ": {
-    "defaultMessage": "內容長度超出限制 ({length}/{limit})"
-  },
   "VmYzLr": {
     "defaultMessage": "{total} 個成員"
   },
@@ -1857,9 +1856,6 @@
   },
   "WiGHyF": {
     "defaultMessage": "Web Monetization 標準"
-  },
-  "Wjmng6": {
-    "defaultMessage": "正文及作品管理剩 {revisionCountLeft} 版編輯"
   },
   "WpvsPu": {
     "defaultMessage": "訂閱",
@@ -1960,10 +1956,6 @@
     "defaultMessage": "請於錢包視窗點擊確認授權使用{br}確認完成後即可開始支持步驟",
     "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
-  "YOMY1y": {
-    "defaultMessage": "發布評論...",
-    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
-  },
   "YPMn9n": {
     "defaultMessage": "請先登入再進行操作",
     "description": "UNAUTHENTICATED"
@@ -2022,7 +2014,7 @@
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
   "ZVoJan": {
-    "defaultMessage": "編輯作品",
+    "defaultMessage": "修改",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
   "ZYvVYX": {
@@ -2058,9 +2050,6 @@
   "aCTmEO": {
     "defaultMessage": "我還沒有錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
-  },
-  "aDIygy": {
-    "defaultMessage": "已超过 {MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 {current} 字"
   },
   "aE5Qq+": {
     "defaultMessage": "重新發送",
@@ -2297,6 +2286,10 @@
   "fJFvPm": {
     "defaultMessage": "程式碼"
   },
+  "fJVe7H": {
+    "defaultMessage": "IPFS 指紋",
+    "description": "src/views/ArticleDetail/History/InfoHeader/index.tsx"
+  },
   "fK6ptv": {
     "defaultMessage": "送出失敗，請稍後再試"
   },
@@ -2310,9 +2303,6 @@
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "fjBDmp": {
-    "defaultMessage": "選擇離開圍爐，你將馬上失去成員資格。下一個賬單日（每月 1 日）將不會扣除費用。"
-  },
   "fnv5rD": {
     "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"
   },
@@ -2325,6 +2315,10 @@
   "g5pX+a": {
     "defaultMessage": "關於"
   },
+  "gK6OxL": {
+    "defaultMessage": "留個友善的評論？",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "gMZfHO": {
     "defaultMessage": "RSS 訂閱",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -2334,7 +2328,7 @@
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "gS1u3d": {
-    "defaultMessage": "你還可以編輯 {left} 版"
+    "defaultMessage": "你還可以修改 {left} 次"
   },
   "gW/KWu": {
     "defaultMessage": "評論被精選",
@@ -2349,6 +2343,9 @@
   },
   "gluNT8": {
     "defaultMessage": "輸入連結地址"
+  },
+  "gy/Kkr": {
+    "defaultMessage": "（修改过）"
   },
   "gz0EGC": {
     "defaultMessage": "編輯作品已發佈"
@@ -2487,9 +2484,6 @@
   "jtdQHR": {
     "defaultMessage": "公共節點"
   },
-  "jwnump": {
-    "defaultMessage": "發布評論..."
-  },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2606,14 +2600,14 @@
     "defaultMessage": "評論了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "liBHHE": {
+    "defaultMessage": "什麼看法，都可以留個友善的評論～"
+  },
   "ll/ufR": {
     "defaultMessage": "熱門"
   },
   "lqdpsm": {
     "defaultMessage": "回到訂閱"
-  },
-  "lsccVJ": {
-    "defaultMessage": "正文及作品管理編輯次數已達上限"
   },
   "m+cdhC": {
     "defaultMessage": "近期使用"
@@ -2721,6 +2715,9 @@
   "nYrKWp": {
     "defaultMessage": "編輯個人資料"
   },
+  "nhkx3t": {
+    "defaultMessage": "IPFS 是一種分散式儲存技術，具有去中心、易存續、不易被審查等優點。 每一篇在 Matters 發佈的文章都會上傳到 IPFS。 IPFS 會產生一定儲存費用，目前暫時由 Matters 承擔。 （到 IPFS 官網 ipfs.com 可以了解更多）"
+  },
   "no7l8z": {
     "defaultMessage": "解綁錢包",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
@@ -2745,6 +2742,9 @@
   "ohgTH4": {
     "defaultMessage": "追蹤中",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "onDesU": {
+    "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
   },
   "p5qZnJ": {
     "defaultMessage": "讚賞了",
@@ -2825,6 +2825,9 @@
     "defaultMessage": "設為代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
+  "qhVSGI": {
+    "defaultMessage": "吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
+  },
   "qlki7w": {
     "defaultMessage": "移除作品",
     "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
@@ -2868,7 +2871,7 @@
     "description": "src/components/Buttons/FollowUser/Follow.tsx"
   },
   "rJqgwV": {
-    "defaultMessage": "開始編輯",
+    "defaultMessage": "開始修改",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
   },
   "rLlTQ9": {
@@ -2953,9 +2956,6 @@
     "defaultMessage": "評論已被強制隱藏",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
-  "twEps9": {
-    "defaultMessage": " 更新"
-  },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3015,9 +3015,6 @@
   "uw32VR": {
     "defaultMessage": "教學指南"
   },
-  "ux4p3j": {
-    "defaultMessage": " 更新於"
-  },
   "v+hbfO": {
     "defaultMessage": "固定金額"
   },
@@ -3032,6 +3029,9 @@
   "v6YjIn": {
     "defaultMessage": "帳戶",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "v84cGN": {
+    "defaultMessage": "這是什麼"
   },
   "v8dGSd": {
     "defaultMessage": "該錢包已關聯至其他帳號",
@@ -3297,9 +3297,6 @@
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
-  },
-  "zbaTLV": {
-    "defaultMessage": "在 IPFS 上查看"
   },
   "zkmfjn": {
     "defaultMessage": "置頂",

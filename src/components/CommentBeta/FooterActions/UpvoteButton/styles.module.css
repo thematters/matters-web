@@ -1,5 +1,9 @@
+.like {
+  height: 1.125rem;
+}
+
 .heartBeat {
-  animation: heart-beat 2s;
+  animation: heart-beat 1s;
 }
 
 @keyframes heart-beat {
@@ -7,19 +11,11 @@
     transform: scale(1);
   }
 
-  14% {
+  50% {
     transform: scale(1.2);
   }
 
-  28% {
-    transform: scale(1);
-  }
-
-  42% {
-    transform: scale(1.2);
-  }
-
-  70% {
+  100% {
     transform: scale(1);
   }
 }

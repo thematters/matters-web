@@ -55,8 +55,8 @@ const BaseUnsubscribeCircleDialog = ({
             ) : (
               <p>
                 <FormattedMessage
-                  defaultMessage="Unsubscribe cirlce will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
-                  id="fjBDmp"
+                  defaultMessage="Unsubscribe circle will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
+                  id="D+uyeZ"
                 />
               </p>
             )}

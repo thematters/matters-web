@@ -45,8 +45,15 @@ interface FormValues {
 }
 
 const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
-  const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog: _closeDialog } = useDialogSwitch(true)
   const formId = 'submit-report-dialog-form'
+  const order = [
+    ReportReason.Tort,
+    ReportReason.DiscriminationInsultHatred,
+    ReportReason.PornographyInvolvingMinors,
+    ReportReason.IllegalAdvertising,
+    ReportReason.Other,
+  ]
 
   const [submitReport] = useMutation<SubmitReportMutation>(SUBMIT_REPORT)
 
@@ -86,6 +93,13 @@ const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
     },
   })
 
+  const closeDialog = () => {
+    _closeDialog()
+    setTimeout(() => {
+      setFieldValue('reason', '', false)
+    }, 100)
+  }
+
   return (
     <>
       {children({ openDialog })}
@@ -107,7 +121,7 @@ const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
                   id="uQHRvx"
                 />
               }
-              options={Object.values(ReportReason).map((reason) => ({
+              options={order.map((reason) => ({
                 label: Reasons[reason],
                 value: reason,
               }))}

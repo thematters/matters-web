@@ -70,4 +70,6 @@ export const MaxUint256 = BigInt(
   '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
 )
 
+export const MaxApprovedUSDTAmount = BigInt('999999999999')
+
 export type WalletType = 'MetaMask' | 'WalletConnect'

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { MAX_ARTICLE_SUPPORT_LENGTH } from '~/common/enums'
-import { validateSupportWords } from '~/common/utils'
 import { Dialog, Form, TextIcon, toast, useRoute } from '~/components'
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
@@ -68,11 +67,6 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     },
     validateOnBlur: false,
     validateOnChange: false,
-    validate: ({ requestForDonation, replyToDonator }) =>
-      _pickBy({
-        requestForDonation: validateSupportWords(requestForDonation!, intl),
-        replyToDonator: validateSupportWords(replyToDonator!, intl),
-      }),
     onSubmit: async ({}, { setSubmitting }) => {
       editSupportSetting(values.requestForDonation, values.replyToDonator)
 
@@ -99,6 +93,17 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     setTabType(newType)
   }
 
+  const isRequestOverLength =
+    (values.requestForDonation?.length || 0) > MAX_ARTICLE_SUPPORT_LENGTH
+  const isReplyOverLength =
+    (values.replyToDonator?.length || 0) > MAX_ARTICLE_SUPPORT_LENGTH
+  const requestHint = `${
+    values.requestForDonation?.length || 0
+  }/${MAX_ARTICLE_SUPPORT_LENGTH}`
+  const replyHint = `${
+    values.replyToDonator?.length || 0
+  }/${MAX_ARTICLE_SUPPORT_LENGTH}`
+
   const InnerForm = (tab: string) => {
     return (
       <Form id={formId} onSubmit={handleSubmit}>
@@ -114,10 +119,10 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
               id: '9EABqX',
             })}
             value={values.requestForDonation! || ''}
-            hint={`${
-              values.requestForDonation?.length || 0
-            }/${MAX_ARTICLE_SUPPORT_LENGTH}`}
-            error={errors.requestForDonation}
+            hint={requestHint}
+            error={
+              isRequestOverLength ? requestHint : errors.requestForDonation
+            }
             hintAlign={errors.requestForDonation ? 'left' : 'right'}
             onBlur={handleBlur}
             onChange={(e) => {
@@ -137,10 +142,8 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
               id: 'E+dEI9',
             })}
             value={values.replyToDonator! || ''}
-            hint={`${
-              values.replyToDonator?.length || 0
-            }/${MAX_ARTICLE_SUPPORT_LENGTH}`}
-            error={errors.replyToDonator}
+            hint={replyHint}
+            error={isReplyOverLength ? replyHint : errors.replyToDonator}
             hintAlign={errors.replyToDonator ? 'left' : 'right'}
             onBlur={handleBlur}
             onChange={(e) =>
@@ -156,7 +159,13 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting || supportSettingSaving}
+      disabled={
+        !isValid ||
+        isRequestOverLength ||
+        isReplyOverLength ||
+        isSubmitting ||
+        supportSettingSaving
+      }
       text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting}
     />

@@ -20,9 +20,10 @@ import {
   SpinnerBlock,
   TextIcon,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
-import { updateDonation } from '~/components/GQL'
+import { updateArticlePublic } from '~/components/GQL'
 import PAY_TO from '~/components/GQL/mutations/payTo'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
 import {
@@ -72,6 +73,7 @@ const Confirm: React.FC<FormProps> = ({
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
+  const { routerLang } = useRoute()
 
   const formId = 'pay-to-confirm-form'
 
@@ -117,17 +119,18 @@ const Confirm: React.FC<FormProps> = ({
             targetId,
           },
           update: (cache, result) => {
-            updateDonation({
+            updateArticlePublic({
               cache,
               shortHash: article.shortHash,
               viewer,
+              routerLang,
               txId: result.data?.payTo.transaction.id,
+              type: 'updateDonation',
             })
           },
         })
 
         const transaction = result?.data?.payTo.transaction
-
         if (!transaction) {
           throw new Error()
         }

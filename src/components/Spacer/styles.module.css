@@ -1,3 +1,7 @@
+.xxtight {
+  padding-bottom: var(--sp4);
+}
+
 .xtight {
   padding-bottom: var(--sp8);
 }

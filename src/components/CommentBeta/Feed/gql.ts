@@ -14,6 +14,7 @@ export const fragments = {
     public: gql`
       fragment FeedCommentBetaPublic on Comment {
         id
+        type
         author {
           id
           ...UserDigestMiniUser

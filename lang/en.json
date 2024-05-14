@@ -95,6 +95,9 @@
     "defaultMessage": "Write a comment",
     "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
+  "/dKzfc": {
+    "defaultMessage": "This work is archived due to violation of community guidelines."
+  },
   "/faseS": {
     "defaultMessage": "Share link copied"
   },
@@ -621,9 +624,6 @@
   "99OtWT": {
     "defaultMessage": "Pending..."
   },
-  "9Dwh/Z": {
-    "defaultMessage": "The revised work will be republished to decentralized network. Please backup of the previous edition before revision."
-  },
   "9EABqX": {
     "defaultMessage": "Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
   },
@@ -832,6 +832,9 @@
     "defaultMessage": "This {type} account is connected to a Matters account. Sign in to that account to disconnect it then try again",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
+  "D+uyeZ": {
+    "defaultMessage": "Unsubscribe circle will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
+  },
   "D2Sw/t": {
     "defaultMessage": "Add any URL in the following list into RSS reader",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -977,6 +980,9 @@
   "G/yZLu": {
     "defaultMessage": "Remove"
   },
+  "G0pqnh": {
+    "defaultMessage": "View original content"
+  },
   "G4bk3r": {
     "defaultMessage": "Custom amount is greater than your balance"
   },
@@ -1045,6 +1051,9 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "Confirm Archiving"
+  },
+  "HJcB0d": {
+    "defaultMessage": "After the modification is completed, the new version will be released to IPFS again. You can view the historical version from \"...published on IPFS\" under the article title."
   },
   "HPVOw/": {
     "defaultMessage": "Wallet",
@@ -1323,10 +1332,6 @@
     "defaultMessage": "followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "MIA5xy": {
-    "defaultMessage": "Notice",
-    "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
-  },
   "MP6xe/": {
     "defaultMessage": "Billboard is an open and rentable on-chain NFT advertising protocol. Once a rental is completed, the content can be displayed for 14 days. The rental fee is calculated based on the concept of the Harberger tax, and the generated rental income is distributed to the community creators through quadratic funding. Please check out our {announcements}.",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -1383,6 +1388,9 @@
   "NEKHMm": {
     "defaultMessage": "Email",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
+  },
+  "NFIbLb": {
+    "defaultMessage": "Used up edit quota"
   },
   "NNF+3f": {
     "defaultMessage": "Tag not found",
@@ -1451,9 +1459,6 @@
   "OpeFTV": {
     "defaultMessage": "Enter a 6-digit payment password."
   },
-  "Oru6G2": {
-    "defaultMessage": "The Fingerprint from IPFS, you can read it via a gateway"
-  },
   "OsX3KM": {
     "defaultMessage": "Comment",
     "description": "src/views/ArticleDetail/index.tsx"
@@ -1516,9 +1521,6 @@
   },
   "Pv2PlK": {
     "defaultMessage": "Insert image"
-  },
-  "Q1PHUd": {
-    "defaultMessage": "Congratulations! Now you can browse all works within the cirlce for free and chat with everyone."
   },
   "Q8Qw5B": {
     "defaultMessage": "Description"
@@ -1795,9 +1797,6 @@
     "defaultMessage": "Drafts",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
-  "VefaFQ": {
-    "defaultMessage": "Content length exceeds limit ({length}/{limit})"
-  },
   "VmYzLr": {
     "defaultMessage": "{total} members"
   },
@@ -1857,9 +1856,6 @@
   },
   "WiGHyF": {
     "defaultMessage": "Web Monetization standard"
-  },
-  "Wjmng6": {
-    "defaultMessage": "{revisionCountLeft} revisions remaining"
   },
   "WpvsPu": {
     "defaultMessage": "Subscribe",
@@ -1960,10 +1956,6 @@
     "defaultMessage": "Please confirm authorization in the wallet dialog.{br}Once confirmed, support steps can begin.",
     "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
-  "YOMY1y": {
-    "defaultMessage": "Comment...",
-    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
-  },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
     "description": "UNAUTHENTICATED"
@@ -2058,9 +2050,6 @@
   "aCTmEO": {
     "defaultMessage": "I don't have a wallet yet",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
-  },
-  "aDIygy": {
-    "defaultMessage": "Maximum {MAX_ARTICLE_SUPPORT_LENGTH} characters, current {current} characters."
   },
   "aE5Qq+": {
     "defaultMessage": "Resend",
@@ -2297,6 +2286,10 @@
   "fJFvPm": {
     "defaultMessage": "Code Block"
   },
+  "fJVe7H": {
+    "defaultMessage": "IPFS",
+    "description": "src/views/ArticleDetail/History/InfoHeader/index.tsx"
+  },
   "fK6ptv": {
     "defaultMessage": "Sending failed. Please retry later."
   },
@@ -2310,9 +2303,6 @@
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "fjBDmp": {
-    "defaultMessage": "Unsubscribe cirlce will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
-  },
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"
   },
@@ -2324,6 +2314,10 @@
   },
   "g5pX+a": {
     "defaultMessage": "About"
+  },
+  "gK6OxL": {
+    "defaultMessage": "Leave a comment?",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
   "gMZfHO": {
     "defaultMessage": "RSS Subscription",
@@ -2349,6 +2343,9 @@
   },
   "gluNT8": {
     "defaultMessage": "Enter URL"
+  },
+  "gy/Kkr": {
+    "defaultMessage": " (edited)"
   },
   "gz0EGC": {
     "defaultMessage": "Article republished"
@@ -2487,9 +2484,6 @@
   "jtdQHR": {
     "defaultMessage": "Gateways"
   },
-  "jwnump": {
-    "defaultMessage": "Comment..."
-  },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2606,14 +2600,14 @@
     "defaultMessage": "commented",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "liBHHE": {
+    "defaultMessage": "Any thoughts? Leave a kind comment~"
+  },
   "ll/ufR": {
     "defaultMessage": "Trending"
   },
   "lqdpsm": {
     "defaultMessage": "Back to subscribe"
-  },
-  "lsccVJ": {
-    "defaultMessage": "You have reached the limit of republished articles"
   },
   "m+cdhC": {
     "defaultMessage": "Recently used"
@@ -2721,6 +2715,9 @@
   "nYrKWp": {
     "defaultMessage": "Edit profile"
   },
+  "nhkx3t": {
+    "defaultMessage": "IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"
+  },
   "no7l8z": {
     "defaultMessage": "Disconnect wallet",
     "description": "src/components/Dialogs/RemoveWalletLoginDialog/Content.tsx"
@@ -2745,6 +2742,9 @@
   "ohgTH4": {
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "onDesU": {
+    "defaultMessage": "Congratulations! Now you can browse all works within the circle for free and chat with everyone."
   },
   "p5qZnJ": {
     "defaultMessage": "liked",
@@ -2824,6 +2824,9 @@
   "qgPR68": {
     "defaultMessage": "Pin to profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
+  "qhVSGI": {
+    "defaultMessage": "Hmm... It seems the author has hidden this work. Go see something else"
   },
   "qlki7w": {
     "defaultMessage": "Remove Article",
@@ -2953,9 +2956,6 @@
     "defaultMessage": "The comment has been forcibly hidden",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
-  "twEps9": {
-    "defaultMessage": " published"
-  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3015,9 +3015,6 @@
   "uw32VR": {
     "defaultMessage": "tutorial"
   },
-  "ux4p3j": {
-    "defaultMessage": " published on"
-  },
   "v+hbfO": {
     "defaultMessage": "fixed amount"
   },
@@ -3032,6 +3029,9 @@
   "v6YjIn": {
     "defaultMessage": "Account",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
+  },
+  "v84cGN": {
+    "defaultMessage": "What is this"
   },
   "v8dGSd": {
     "defaultMessage": "This wallet is linked to a different account",
@@ -3297,9 +3297,6 @@
   },
   "zb8Kx1": {
     "defaultMessage": "Announcement, reminder, chattering..."
-  },
-  "zbaTLV": {
-    "defaultMessage": "View on IPFS"
   },
   "zkmfjn": {
     "defaultMessage": "Pinned",

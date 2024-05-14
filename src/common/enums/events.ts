@@ -31,6 +31,7 @@ export const CLOSE_OTHER_DRAWERS = 'closeOtherDrawers'
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
 
 // Support
+export const SUPPORT_SUCCESS = 'supportSuccess'
 export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'
 
 // Universal auth

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import {
   ASSET_TYPE,
@@ -19,7 +19,6 @@ import {
   Media,
   SpinnerBlock,
   Throw404,
-  toast,
   useCreateDraft,
   useDirectImageUpload,
   useUnloadConfirm,
@@ -48,6 +47,7 @@ import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
 import Sidebar from './Sidebar'
+import styles from './styles.module.css'
 
 const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
@@ -126,6 +126,8 @@ const BaseDraftDetail = () => {
 
   const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
   const ownCircles = circleData?.viewer?.ownCircles || undefined
+  const [contentLength, setContentLength] = useState(0)
+  const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
 
   useUnloadConfirm({ block: saveStatus === 'saving' && !isNewDraft() })
 
@@ -162,7 +164,8 @@ const BaseDraftDetail = () => {
     isUnpublished &&
     hasContent &&
     hasTitle &&
-    hasValidSummary
+    hasValidSummary &&
+    !isOverLength
   )
 
   const upload = async (input: {
@@ -252,20 +255,9 @@ const BaseDraftDetail = () => {
       }
 
       // check content length
-      const contentCount = newDraft.content?.length || 0
-      if (contentCount > MAX_ARTICLE_CONTENT_LENGTH) {
-        toast.error({
-          message: (
-            <FormattedMessage
-              defaultMessage={`Content length exceeds limit ({length}/{limit})`}
-              id="VefaFQ"
-              values={{
-                length: contentCount,
-                limit: MAX_ARTICLE_CONTENT_LENGTH,
-              }}
-            />
-          ),
-        })
+      const len = newDraft.content?.length || 0
+      setContentLength(len)
+      if (len > MAX_ARTICLE_CONTENT_LENGTH) {
         return
       }
 
@@ -302,21 +294,28 @@ const BaseDraftDetail = () => {
           <Sidebar draft={draft} ownCircles={ownCircles} />
         </Media>
       }
-      inEditor
     >
       <Layout.Header
         mode="compact"
         right={
-          <>
+          <section className={styles.headerRight}>
             <SaveStatus status={saveStatus} />
-            {draft && (
-              <SettingsButton
-                draft={draft}
-                ownCircles={ownCircles}
-                publishable={!!publishable}
-              />
-            )}
-          </>
+
+            <section>
+              {isOverLength && (
+                <span className={styles.count}>
+                  {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
+                </span>
+              )}
+              {draft && (
+                <SettingsButton
+                  draft={draft}
+                  ownCircles={ownCircles}
+                  publishable={!!publishable}
+                />
+              )}
+            </section>
+          </section>
         }
       />
 

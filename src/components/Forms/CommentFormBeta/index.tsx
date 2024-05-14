@@ -7,7 +7,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { dom, stripHtml } from '~/common/utils'
+import { dom, stripHtml, trimCommentContent } from '~/common/utils'
 import {
   Button,
   CommentDraftsContext,
@@ -42,6 +42,7 @@ export interface CommentFormBetaProps {
   submitCallback?: () => void
   closeCallback?: () => void
 
+  showClear?: boolean
   placeholder?: string
   syncQuote?: boolean
 }
@@ -56,7 +57,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   defaultContent,
   submitCallback,
   closeCallback,
-
+  showClear,
   placeholder,
   syncQuote,
 }) => {
@@ -86,7 +87,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
-    const trimContent = content.replace(/^(<p>\s*<\/p>)+|(<p>\s*<\/p>)+$/g, '')
+    const trimContent = trimCommentContent(content)
     const input = {
       id: commentId,
       comment: {
@@ -154,13 +155,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
         submitCallback()
       }
 
-      // clear content
-      if (editor) {
-        editor.commands.setContent('')
-      }
-
-      // clear draft
-      removeDraft(commentDraftId)
+      onClear()
 
       if (closeCallback) {
         closeCallback()
@@ -169,6 +164,14 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
       setSubmitting(false)
       console.error(e)
     }
+  }
+
+  const onClear = () => {
+    setContent('')
+    if (editor) {
+      editor.commands.setContent('')
+    }
+    removeDraft(commentDraftId)
   }
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
@@ -201,9 +204,9 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
 
       <footer className={styles.footer}>
         {contentCount > MAX_ARTICLE_COMMENT_LENGTH && (
-          <p className={styles.count}>
+          <span className={styles.count}>
             {contentCount}/{MAX_ARTICLE_COMMENT_LENGTH}
-          </p>
+          </span>
         )}
         {!!closeCallback && (
           <Button
@@ -217,6 +220,21 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
           >
             <TextIcon size={14}>
               <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+            </TextIcon>
+          </Button>
+        )}
+        {showClear && content.length > 0 && (
+          <Button
+            size={[null, '2rem']}
+            spacing={[0, 16]}
+            bgColor="white"
+            disabled={isSubmitting}
+            onClick={onClear}
+            textColor="black"
+            textActiveColor="greyDarker"
+          >
+            <TextIcon size={14}>
+              <FormattedMessage defaultMessage="Clear" id="/GCoTA" />
             </TextIcon>
           </Button>
         )}

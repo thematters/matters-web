@@ -22,9 +22,7 @@ import {
   Spacer,
   SpinnerBlock,
   Throw404,
-  Title,
   toast,
-  Translate,
   useEventListener,
   useFeatures,
   useIntersectionObserver,
@@ -224,10 +222,9 @@ const BaseArticleDetail = ({
         actions: [
           {
             content: (
-              <Translate
-                zh_hans="阅读原文"
-                zh_hant="閱讀原文"
-                en="View original content"
+              <FormattedMessage
+                defaultMessage="View original content"
+                id="G0pqnh"
               />
             ),
             onClick: toggleTranslate,
@@ -331,8 +328,8 @@ const BaseArticleDetail = ({
       </Media>
 
       <section className={styles.content}>
-        <section className={styles.title}>
-          <Title type="article">{title}</Title>
+        <section className="u-article-title">
+          <h1>{title}</h1>
 
           <MetaInfo
             article={article}
@@ -581,16 +578,14 @@ const ArticleDetail = ({
         <Error
           message={
             article.state === 'archived' ? (
-              <Translate
-                zh_hant="吶，作者親手掩蓋了這篇作品的痕跡，看看別的吧"
-                zh_hans="呐，作者亲手掩盖了这篇作品的痕迹，看看别的吧"
-                en="Hmm... It seems the author has hidden this work. Go see something else"
+              <FormattedMessage
+                defaultMessage="Hmm... It seems the author has hidden this work. Go see something else"
+                id="qhVSGI"
               />
             ) : article.state === 'banned' ? (
-              <Translate
-                zh_hant="該作品因違反社區約章，已被站方強制歸檔。"
-                zh_hans="该作品因违反社区约章，已被站方强制封存。"
-                en="This work is archived due to violation of community guidelines."
+              <FormattedMessage
+                defaultMessage="This work is archived due to violation of community guidelines."
+                id="/dKzfc"
               />
             ) : null
           }

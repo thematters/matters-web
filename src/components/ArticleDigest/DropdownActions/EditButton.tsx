@@ -2,8 +2,9 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import { MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Icon, Menu } from '~/components'
+import { Icon, Menu, toast } from '~/components'
 import { EditArticleButtonArticleFragment } from '~/gql/graphql'
 
 const fragments = {
@@ -12,6 +13,7 @@ const fragments = {
       id
       shortHash
       slug
+      revisionCount
       author {
         id
         userName
@@ -25,7 +27,16 @@ const EditArticleButton = ({
 }: {
   article: EditArticleButtonArticleFragment
 }) => {
-  const { href } = toPath({ page: 'articleDetail', article })
+  const path = toPath({ page: 'articleEdit', article })
+  const isExceedRevision = article.revisionCount >= MAX_ARTICLE_REVISION_COUNT
+  const onExceed = () => {
+    toast.warning({
+      message: (
+        <FormattedMessage defaultMessage="Used up edit quota" id="NFIbLb" />
+      ),
+    })
+    return
+  }
 
   return (
     <Menu.Item
@@ -37,8 +48,9 @@ const EditArticleButton = ({
         />
       }
       icon={<Icon icon={IconEdit} size={20} />}
-      href={`${href}/edit`}
-      is="link"
+      onClick={isExceedRevision ? onExceed : undefined}
+      href={isExceedRevision ? undefined : path.href}
+      is={isExceedRevision ? undefined : 'link'}
     />
   )
 }

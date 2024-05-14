@@ -139,8 +139,8 @@ const FixedToolbar = ({
                 disabled={lock}
               >
                 <FormattedMessage
-                  defaultMessage="Comment..."
-                  id="YOMY1y"
+                  defaultMessage="Leave a comment?"
+                  id="gK6OxL"
                   description="src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
                 />
               </button>
@@ -188,7 +188,6 @@ const FixedToolbar = ({
             )}
 
             <DonationButton
-              article={article}
               articleDetail={articleDetails}
               disabled={lock}
               iconSize={24}

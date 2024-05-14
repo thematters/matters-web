@@ -1,3 +1,10 @@
+import { Protected } from '~/components'
 import ArticleDetailEdit from '~/views/ArticleDetail/Edit'
 
-export default ArticleDetailEdit
+const ProtectedArticleDetailEdit = () => (
+  <Protected>
+    <ArticleDetailEdit />
+  </Protected>
+)
+
+export default ProtectedArticleDetailEdit

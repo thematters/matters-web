@@ -72,7 +72,7 @@ export const MOCK_USER = {
 // Circle
 export const MOCK_CIRCLE = {
   __typename: 'Circle' as any,
-  id: 'Q2lyY2xlOjE', // Cirlce:1
+  id: 'Q2lyY2xlOjE', // Circle:1
   state: 'active',
   name: 'matters_class',
   displayName: 'Matters 自由課（第一季第二期）',
@@ -122,6 +122,7 @@ export const MOCK_ARTILCE = {
   mediaHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   dataHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   articleState: 'active' as any,
+  revisionCount: 3,
   state: 'active' as any,
   cover: 'https://source.unsplash.com/256x256?article',
   summary:
