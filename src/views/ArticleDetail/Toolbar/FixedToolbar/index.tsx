@@ -85,6 +85,8 @@ const FixedToolbar = ({
   ...props
 }: FixedToolbarProps) => {
   const viewer = useContext(ViewerContext)
+  const isAuthor = viewer.id === article.author.id
+
   const path = toPath({ page: 'articleDetail', article })
   const sharePath =
     translated && translatedLanguage
@@ -186,7 +188,7 @@ const FixedToolbar = ({
 
             <DonationButton
               articleDetail={articleDetails}
-              disabled={lock}
+              disabled={lock || isAuthor}
               iconSize={24}
               textWeight="normal"
               textIconSpacing={4}
