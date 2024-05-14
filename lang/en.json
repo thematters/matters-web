@@ -1956,10 +1956,6 @@
     "defaultMessage": "Please confirm authorization in the wallet dialog.{br}Once confirmed, support steps can begin.",
     "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
-  "YOMY1y": {
-    "defaultMessage": "Comment...",
-    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
-  },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
     "description": "UNAUTHENTICATED"
@@ -2319,6 +2315,10 @@
   "g5pX+a": {
     "defaultMessage": "About"
   },
+  "gK6OxL": {
+    "defaultMessage": "Leave a comment?",
+    "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
+  },
   "gMZfHO": {
     "defaultMessage": "RSS Subscription",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
@@ -2343,6 +2343,9 @@
   },
   "gluNT8": {
     "defaultMessage": "Enter URL"
+  },
+  "gy/Kkr": {
+    "defaultMessage": " (edited)"
   },
   "gz0EGC": {
     "defaultMessage": "Article republished"
@@ -2481,9 +2484,6 @@
   "jtdQHR": {
     "defaultMessage": "Gateways"
   },
-  "jwnump": {
-    "defaultMessage": "Comment..."
-  },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2599,6 +2599,9 @@
   "lZukEr": {
     "defaultMessage": "commented",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
+  },
+  "liBHHE": {
+    "defaultMessage": "Any thoughts? Leave a kind comment~"
   },
   "ll/ufR": {
     "defaultMessage": "Trending"
@@ -2953,9 +2956,6 @@
     "defaultMessage": "The comment has been forcibly hidden",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
-  "twEps9": {
-    "defaultMessage": " published"
-  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -3014,9 +3014,6 @@
   },
   "uw32VR": {
     "defaultMessage": "tutorial"
-  },
-  "ux4p3j": {
-    "defaultMessage": " published on"
   },
   "v+hbfO": {
     "defaultMessage": "fixed amount"
