@@ -93,12 +93,12 @@ const FixedToolbar = ({
 
   const dropdonwActionsProps: DropdownActionsControls = {
     size: 24,
-    inCard: false,
-    inFixedToolbar: true,
+    inCard: true,
     sharePath,
     hasExtend: false,
     hasEdit: true,
     hasArchive: true,
+    hasBookmark: true,
     hasAddCollection: true,
     ...props,
   }
@@ -193,24 +193,13 @@ const FixedToolbar = ({
               {...buttonProps}
             />
 
-            <BookmarkButton
+            <DropdownActions
               article={article}
-              iconSize={24}
-              inCard={false}
               disabled={lock}
-              {...buttonProps}
+              {...dropdonwActionsProps}
+              hasShare
+              hasReport
             />
-
-            {!showCommentToolbar && (
-              <DropdownActions
-                article={article}
-                disabled={lock}
-                {...dropdonwActionsProps}
-                hasShare
-                hasBookmark={false}
-                hasReport
-              />
-            )}
           </section>
         )}
       </CommentFormBetaDialog>

@@ -77,8 +77,9 @@ const DesktopToolbar = ({
       : path.href
 
   const dropdonwActionsProps: DropdownActionsControls = {
-    inCard: false,
+    inCard: true,
     hasEdit: true,
+    hasBookmark: true,
     hasArchive: true,
     hasAddCollection: true,
     hasExtend: false,
@@ -130,20 +131,11 @@ const DesktopToolbar = ({
               .map(normalizeTag)}
           />
 
-          <BookmarkButton
-            article={article}
-            iconSize={24}
-            spacing={[10, 10]}
-            inCard={false}
-            disabled={lock}
-          />
-
           <DropdownActions
             article={article}
             disabled={lock}
             size={24}
             {...dropdonwActionsProps}
-            hasBookmark={false}
           />
         </section>
       </section>

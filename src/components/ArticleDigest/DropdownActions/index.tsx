@@ -112,7 +112,6 @@ export interface DropdownActionsControls {
 
   // based on type
   inCard?: boolean
-  inFixedToolbar?: boolean
   inUserArticles?: boolean
 
   // tag
@@ -188,7 +187,6 @@ const BaseDropdownActions = ({
   icon,
   size,
   inCard,
-  inFixedToolbar,
   disabled,
 
   hasShare,
@@ -348,9 +346,9 @@ const BaseDropdownActions = ({
         ) : (
           <Button
             onClick={openDropdown}
-            spacing={inFixedToolbar ? [10, 10] : [8, 8]}
-            borderRadius={inFixedToolbar ? 0 : '5rem'}
-            bgActiveColor={inFixedToolbar ? undefined : 'greyLighter'}
+            spacing={[8, 8]}
+            borderRadius={'5rem'}
+            bgActiveColor={'greyLighter'}
             aria-label={moreActionText}
             ref={ref}
             disabled={disabled}
