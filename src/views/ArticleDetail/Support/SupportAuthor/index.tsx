@@ -15,6 +15,7 @@ import {
 import PaymentProcessingForm from '~/components/Forms/PaymentForm/Processing'
 import { PayToMutation } from '~/gql/graphql'
 
+import { DisableSupport } from './DisableSupport'
 import DonationTabs from './Tabs'
 import { BaseSupportAuthorProps, Step as SupportStep } from './types'
 
@@ -78,6 +79,8 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const viewer = useContext(ViewerContext)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
+  const hasAuthorAddress = recipient.info.ethAddress
+  const hasAuthorLikeID = !!recipient.liker.likerId
 
   const { address } = useAccount()
   // TODO: support multiple networks
@@ -91,6 +94,9 @@ const SupportAuthor = (props: SupportAuthorProps) => {
 
   const [amount, setAmount] = useState<number>(0)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
+
+  const isUSDT = currency === CURRENCY.USDT
+  const isLikecoin = currency === CURRENCY.LIKE
 
   const [payToTx, setPayToTx] =
     useState<Omit<PayToMutation['payTo']['transaction'], '__typename'>>()
@@ -152,6 +158,17 @@ const SupportAuthor = (props: SupportAuthorProps) => {
 
   const showTabs =
     isSetAmount || isWalletSelect || isNetworkSelect || isApproveContract
+
+  if ((!hasAuthorAddress && isUSDT) || (!hasAuthorLikeID && isLikecoin)) {
+    return (
+      <DisableSupport
+        currency={currency}
+        setCurrency={setCurrency}
+        recipient={props.recipient}
+        onClose={onClose}
+      />
+    )
+  }
 
   return (
     <>

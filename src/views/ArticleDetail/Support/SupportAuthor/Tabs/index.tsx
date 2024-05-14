@@ -13,9 +13,7 @@ type Props = {
 
 const DonationTabs = ({ recipient, currency, setCurrency }: Props) => {
   const viewer = useContext(ViewerContext)
-  const creatorAddress = recipient.info.ethAddress
   const hasViewerLikeId = !!viewer.liker.likerId
-  const hasAuthorLikeId = !!recipient.liker.likerId
 
   const isHKD = currency === CURRENCY.HKD
   const isUSDT = currency === CURRENCY.USDT
@@ -30,18 +28,13 @@ const DonationTabs = ({ recipient, currency, setCurrency }: Props) => {
           description="src/views/ArticleDetail/SupportAuthor/Tabs/index.tsx"
         />
       </Tabs.Tab>
-      <Tabs.Tab
-        selected={isUSDT}
-        onClick={() => setCurrency(CURRENCY.USDT)}
-        disabled={!creatorAddress}
-      >
+      <Tabs.Tab selected={isUSDT} onClick={() => setCurrency(CURRENCY.USDT)}>
         USDT
       </Tabs.Tab>
       {hasViewerLikeId && (
         <Tabs.Tab
           selected={isLikecoin}
           onClick={() => setCurrency(CURRENCY.LIKE)}
-          disabled={!hasAuthorLikeId}
         >
           LikeCoin
         </Tabs.Tab>
