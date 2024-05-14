@@ -385,6 +385,9 @@
   "4l6vz1": {
     "defaultMessage": "Copy"
   },
+  "4tqFCR": {
+    "defaultMessage": "The author has not bound the USDT wallet yet"
+  },
   "4wOWfp": {
     "defaultMessage": "What's this?",
     "description": "src/components/Billboard/index.tsx"
@@ -1144,6 +1147,9 @@
   "J6f6iN": {
     "defaultMessage": "Number of comments",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
+  },
+  "J7hiLV": {
+    "defaultMessage": "The author has not bound the LikeCoin wallet yet"
   },
   "JBWS0c": {
     "defaultMessage": "Link"
@@ -2805,6 +2811,9 @@
   "qPqap+": {
     "defaultMessage": "Archived",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
+  },
+  "qRYMPk": {
+    "defaultMessage": "Problems logging in, please wait or close Ad Blocker and try again"
   },
   "qS19ij": {
     "defaultMessage": "Reset successful",
