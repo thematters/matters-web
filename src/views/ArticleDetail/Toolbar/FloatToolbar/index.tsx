@@ -6,7 +6,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { ButtonProps, ReCaptchaProvider, ViewerContext } from '~/components'
+import { ButtonProps, ViewerContext } from '~/components'
 import {
   ArticleDetailPublicQuery,
   ToolbarArticlePrivateFragment,
@@ -104,16 +104,14 @@ const FloatToolbar = ({
         }}
       >
         <section className={styles.toolbar}>
-          <ReCaptchaProvider action="appreciateArticle">
-            {/* TODO: confirm can appreciate your own article */}
-            <AppreciationButton
-              article={article}
-              privateFetched={privateFetched}
-              textIconSpacing={6}
-              disabled={lock}
-              {...buttonProps}
-            />
-          </ReCaptchaProvider>
+          {/* TODO: confirm can appreciate your own article */}
+          <AppreciationButton
+            article={article}
+            privateFetched={privateFetched}
+            textIconSpacing={6}
+            disabled={lock}
+            {...buttonProps}
+          />
 
           <span className={styles.divider} />
           <CommentButton

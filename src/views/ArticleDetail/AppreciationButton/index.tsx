@@ -8,22 +8,18 @@ import {
   SYNC_APPRECIATE_BUTTON_COUNT,
   Z_INDEX,
 } from '~/common/enums'
+import type { TurnstileInstance } from '~/components'
 import {
   ButtonProps,
-  ReCaptchaContext,
+  ReCaptcha,
   toast,
   Tooltip,
   Translate,
-  Turnstile,
-  // TURNSTILE_DEFAULT_SCRIPT_ID,
-  // TURNSTILE_SCRIPT_URL,
-  TurnstileInstance,
   useEventListener,
   useMutation,
   ViewerContext,
 } from '~/components'
 import { updateAppreciation } from '~/components/GQL'
-// import { UserGroup } from '~/gql/graphql'
 import {
   AppreciateArticleMutation,
   AppreciationButtonArticlePrivateFragment,
@@ -58,7 +54,6 @@ const AppreciationButton = ({
   const viewer = useContext(ViewerContext)
 
   const turnstileRef = useRef<TurnstileInstance>(null)
-  const { token, refreshToken } = useContext(ReCaptchaContext)
   const [uuid, setUuid] = useState('')
 
   useEffect(() => {
@@ -102,16 +97,12 @@ const AppreciationButton = ({
         variables: {
           id: article.id,
           amount: amount,
-          token:
-            // (viewer.info.group === UserGroup.A &&
-            // turnstileRef.current?.getResponse()) || // fallback to ReCaptchaContext token
-            `${token} ${turnstileRef.current?.getResponse()}`,
+          token: turnstileRef.current?.getResponse(),
         },
       }) // .then(refreshToken)
     } catch (e) {
       console.error(e)
     } finally {
-      refreshToken?.()
       turnstileRef.current?.reset()
     }
   }, APPRECIATE_DEBOUNCE)
@@ -128,10 +119,7 @@ const AppreciationButton = ({
         variables: {
           id: article.id,
           amount: 1,
-          token:
-            // (viewer.info.group === UserGroup.A &&
-            // turnstileRef.current?.getResponse()) || // fallback to ReCaptchaContext token
-            `${token} ${turnstileRef.current?.getResponse()}`,
+          token: turnstileRef.current?.getResponse(),
           superLike: true,
         },
         update: (cache) => {
@@ -258,28 +246,11 @@ const AppreciationButton = ({
     )
   }
 
-  const siteKey = process.env
-    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
-
   // Appreciable
   if (canAppreciate && !disabled) {
     return (
       <section>
-        <Turnstile
-          ref={turnstileRef}
-          options={{
-            action: 'appreciate',
-            cData: `user-group-${viewer.info.group}`,
-            // refreshExpired: 'manual',
-            size: 'invisible',
-          }}
-          siteKey={siteKey}
-          // injectScript={false}
-          scriptOptions={{
-            compat: 'recaptcha',
-            appendTo: 'body',
-          }}
-        />
+        <ReCaptcha ref={turnstileRef} action="appreciate" />
         <AppreciateButton
           onClick={appreciate}
           count={appreciatedCount > 0 ? appreciatedCount : undefined}

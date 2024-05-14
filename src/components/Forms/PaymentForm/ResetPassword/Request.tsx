@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ERROR_CODES, SEND_CODE_COUNTDOWN } from '~/common/enums'
@@ -13,7 +13,6 @@ import {
   Button,
   Dialog,
   Form,
-  ReCaptchaContext,
   ResendCodeButton,
   useCountdown,
   useMutation,
@@ -46,7 +45,6 @@ const Request: React.FC<FormProps> = ({
   back,
 }) => {
   const intl = useIntl()
-  const { token, refreshToken } = useContext(ReCaptchaContext)
 
   const [send, { loading: sendingCode }] =
     useMutation<SendVerificationCodeMutation>(SEND_CODE)
@@ -127,16 +125,12 @@ const Request: React.FC<FormProps> = ({
     // reCaptcha check is disabled for now
     await send({
       variables: {
-        input: { email: values.email, type: 'payment_password_reset', token },
+        input: { email: values.email, type: 'payment_password_reset' },
       },
     })
 
     setCountdown(SEND_CODE_COUNTDOWN)
     setSent(true)
-
-    if (refreshToken) {
-      refreshToken()
-    }
   }
 
   const InnerForm = (

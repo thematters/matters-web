@@ -15,7 +15,6 @@ import {
   Dialog,
   EmailLoginForm,
   EmailSignUpForm,
-  ReCaptchaProvider,
   SelectAuthMethodForm,
   useDialogSwitch,
   useEventListener,
@@ -122,22 +121,20 @@ const BaseUniversalAuthDialog = () => {
 
       {/* Wallet */}
       {currStep === 'wallet-connect' && (
-        <ReCaptchaProvider>
-          <WalletAuthForm.Connect
-            type="login"
-            purpose="dialog"
-            walletType={walletType}
-            closeDialog={closeDialog}
-            back={() => forward('select-login-method')}
-            gotoSignInTab={() => {
-              setAuthFeedType('normal')
-              forward('select-login-method')
-            }}
-            setUnavailable={() => {
-              setHasUnavailable(true)
-            }}
-          />
-        </ReCaptchaProvider>
+        <WalletAuthForm.Connect
+          type="login"
+          purpose="dialog"
+          walletType={walletType}
+          closeDialog={closeDialog}
+          back={() => forward('select-login-method')}
+          gotoSignInTab={() => {
+            setAuthFeedType('normal')
+            forward('select-login-method')
+          }}
+          setUnavailable={() => {
+            setHasUnavailable(true)
+          }}
+        />
       )}
 
       {/* Email */}
@@ -156,23 +153,21 @@ const BaseUniversalAuthDialog = () => {
         />
       )}
       {currStep === 'email-sign-up-init' && (
-        <ReCaptchaProvider>
-          <EmailSignUpForm.Init
-            purpose="dialog"
-            submitCallback={(email: string) => {
-              setEmail(email)
-              forward('email-verification-sent')
-            }}
-            gotoWalletConnect={(type) => {
-              setWalletType(type)
-              forward('wallet-connect')
-            }}
-            authFeedType={authFeedType}
-            setAuthFeedType={setAuthFeedType}
-            closeDialog={closeDialog}
-            back={() => forward('select-login-method')}
-          />
-        </ReCaptchaProvider>
+        <EmailSignUpForm.Init
+          purpose="dialog"
+          submitCallback={(email: string) => {
+            setEmail(email)
+            forward('email-verification-sent')
+          }}
+          gotoWalletConnect={(type) => {
+            setWalletType(type)
+            forward('wallet-connect')
+          }}
+          authFeedType={authFeedType}
+          setAuthFeedType={setAuthFeedType}
+          closeDialog={closeDialog}
+          back={() => forward('select-login-method')}
+        />
       )}
       {currStep === 'email-verification-sent' && (
         <VerificationLinkSent

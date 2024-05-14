@@ -2806,6 +2806,9 @@
     "defaultMessage": "已封存",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
   },
+  "qRYMPk": {
+    "defaultMessage": "登入遇到問題，請稍候或關閉 Ad Blocker 後再次嘗試"
+  },
   "qS19ij": {
     "defaultMessage": "交易密碼重置成功",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
