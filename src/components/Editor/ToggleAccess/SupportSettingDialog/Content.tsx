@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { MAX_ARTICLE_SUPPORT_LENGTH } from '~/common/enums'
-import { Dialog, Form, TextIcon, toast, useRoute } from '~/components'
+import { Dialog, Form, TextIcon, toast } from '~/components'
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -46,9 +46,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
   const formId = 'support-setting-form'
   const intl = useIntl()
 
-  const { getQuery } = useRoute()
-  const qsType = getQuery('type') as TabType
-  const [tabType, setTabType] = useState<TabType>(qsType || 'request')
+  const [tabType, setTabType] = useState<TabType>('request')
   const content = draft ? draft : article
   const {
     values,
