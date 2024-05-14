@@ -1267,9 +1267,6 @@
   "LGox1K": {
     "defaultMessage": "Followed"
   },
-  "LILxpV": {
-    "defaultMessage": "Your have unsaved comments that will be lost if you leave the page."
-  },
   "LOefol": {
     "defaultMessage": "Paywalled",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"

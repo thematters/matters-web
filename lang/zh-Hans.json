@@ -1267,9 +1267,6 @@
   "LGox1K": {
     "defaultMessage": "已追踪"
   },
-  "LILxpV": {
-    "defaultMessage": "评论尚未发布，确定放弃内容离开此页吗？"
-  },
   "LOefol": {
     "defaultMessage": "上锁",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
