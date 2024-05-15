@@ -1,10 +1,10 @@
 // import { Dialog as HeadlessDialog } from '@headlessui/react'
 import { VisuallyHidden } from '@reach/visually-hidden'
-import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 // @ts-ignore
 import { Portal } from 'react-portal'
+import { useLockBodyScroll } from 'react-use'
 
 import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
