@@ -6,11 +6,7 @@ import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { OPEN_COMMENT_DETAIL_DIALOG } from '~/common/enums'
 import { Dialog, Icon, useDialogSwitch, useEventListener } from '~/components'
-import {
-  ArticleDetailPublicQuery,
-  FixedToolbarArticlePrivateFragment,
-  FixedToolbarArticlePublicFragment,
-} from '~/gql/graphql'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import { Placeholder } from '../Placeholder'
 
@@ -21,9 +17,6 @@ interface CommentsDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   step?: Step
 
-  // FixedToolbar
-  article: FixedToolbarArticlePublicFragment &
-    Partial<FixedToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null
@@ -54,8 +47,6 @@ const BaseCommentsDialogDialog = ({
   children,
   step: _step = 'commentList',
 
-  // from FixedToolbar
-  article,
   articleDetails,
   translated,
   translatedLanguage,
@@ -119,7 +110,6 @@ const BaseCommentsDialogDialog = ({
             id={id}
             lock={lock}
             closeDialog={closeDialog}
-            article={article}
             articleDetails={articleDetails}
             translated={translated}
             translatedLanguage={translatedLanguage}

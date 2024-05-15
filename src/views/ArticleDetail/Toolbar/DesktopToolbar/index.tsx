@@ -6,11 +6,7 @@ import { BookmarkButton, ButtonProps, ShareButton } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
-import {
-  ArticleDetailPublicQuery,
-  DesktopToolbarArticlePrivateFragment,
-  DesktopToolbarArticlePublicFragment,
-} from '~/gql/graphql'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
 import CommentButton from '../Button/CommentButton'
@@ -18,8 +14,6 @@ import DonationButton from '../Button/DonationButton'
 import styles from './styles.module.css'
 
 export type DesktopToolbarProps = {
-  article: DesktopToolbarArticlePublicFragment &
-    Partial<DesktopToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null
@@ -62,7 +56,6 @@ const fragments = {
 }
 
 const DesktopToolbar = ({
-  article,
   articleDetails,
   translated,
   translatedLanguage,
@@ -71,7 +64,7 @@ const DesktopToolbar = ({
   toggleDrawer,
   ...props
 }: DesktopToolbarProps) => {
-  const path = toPath({ page: 'articleDetail', article })
+  const path = toPath({ page: 'articleDetail', article: articleDetails })
   const sharePath =
     translated && translatedLanguage
       ? `${path.href}?locale=${toLocale(translatedLanguage)}`
@@ -100,7 +93,7 @@ const DesktopToolbar = ({
       <section className={styles.buttons}>
         <section className={styles.left}>
           <AppreciationButton
-            article={article}
+            article={articleDetails}
             privateFetched={privateFetched}
             iconSize={24}
             disabled={lock}
@@ -108,8 +101,8 @@ const DesktopToolbar = ({
           />
           <section className={styles.commentBar}>
             <CommentButton
-              article={article}
-              disabled={!article.canComment}
+              article={articleDetails}
+              disabled={!articleDetails.canComment}
               iconSize={24}
               onClick={toggleDrawer}
               {...buttonProps}
@@ -125,7 +118,7 @@ const DesktopToolbar = ({
             path={sharePath}
             disabled={lock}
             spacing={[10, 10]}
-            tags={article.tags
+            tags={articleDetails.tags
               ?.map(({ content }) => content)
               .join(' ')
               .split(/\s+/)
@@ -133,7 +126,7 @@ const DesktopToolbar = ({
           />
 
           <DropdownActions
-            article={article}
+            article={articleDetails}
             disabled={lock}
             size={24}
             {...dropdonwActionsProps}

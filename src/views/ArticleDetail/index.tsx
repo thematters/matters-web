@@ -379,7 +379,6 @@ const BaseArticleDetail = ({
         <Media greaterThanOrEqual="lg">
           <div ref={desktopToolbarRef}>
             <DesktopToolbar
-              article={article}
               articleDetails={article}
               translated={translated}
               translatedLanguage={translatedLanguage}
@@ -415,7 +414,6 @@ const BaseArticleDetail = ({
         <Spacer size="xxxloose" />
         <CommentsDialog
           id={article.id}
-          article={article}
           articleDetails={article}
           translated={translated}
           translatedLanguage={translatedLanguage}
@@ -425,7 +423,6 @@ const BaseArticleDetail = ({
         >
           {({ openDialog: openCommentsDialog }) => (
             <FixedToolbar
-              article={article}
               articleDetails={article}
               translated={translated}
               translatedLanguage={translatedLanguage}
@@ -444,7 +441,6 @@ const BaseArticleDetail = ({
         <Spacer size="xloose" />
         <FloatToolbar
           show={true}
-          article={article}
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
@@ -456,7 +452,6 @@ const BaseArticleDetail = ({
       <Media greaterThanOrEqual="lg">
         <FloatToolbar
           show={showFloatToolbar}
-          article={article}
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}

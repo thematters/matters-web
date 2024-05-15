@@ -1,9 +1,5 @@
 import { Dialog, Spacer } from '~/components'
-import {
-  ArticleDetailPublicQuery,
-  FixedToolbarArticlePrivateFragment,
-  FixedToolbarArticlePublicFragment,
-} from '~/gql/graphql'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import FixedToolbar from '../../Toolbar/FixedToolbar'
 import LatestComments from '../LatestComments'
@@ -14,9 +10,6 @@ interface CommentsDialogListContentProps {
   lock: boolean
   closeDialog: () => void
 
-  // FixedToolbar
-  article: FixedToolbarArticlePublicFragment &
-    Partial<FixedToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null
@@ -30,8 +23,6 @@ const CommentsDialogListContent = ({
   lock,
   closeDialog,
 
-  // from FixedToolbar
-  article,
   articleDetails,
   translated,
   translatedLanguage,
@@ -46,7 +37,6 @@ const CommentsDialogListContent = ({
         <Spacer size="baseLoose" />
         <section className={styles.fixedToolbar}>
           <FixedToolbar
-            article={article}
             articleDetails={articleDetails}
             translated={translated}
             translatedLanguage={translatedLanguage}

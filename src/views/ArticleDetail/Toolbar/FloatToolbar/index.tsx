@@ -7,11 +7,7 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { ButtonProps, ViewerContext } from '~/components'
-import {
-  ArticleDetailPublicQuery,
-  FloatToolbarArticlePrivateFragment,
-  FloatToolbarArticlePublicFragment,
-} from '~/gql/graphql'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
 import CommentButton from '../Button/CommentButton'
@@ -19,8 +15,6 @@ import DonationButton from '../Button/DonationButton'
 import styles from './styles.module.css'
 
 export type FloatToolbarProps = {
-  article: FloatToolbarArticlePublicFragment &
-    Partial<FloatToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
   lock: boolean
@@ -57,7 +51,6 @@ const fragments = {
 
 const FloatToolbar = ({
   show,
-  article,
   articleDetails,
   privateFetched,
   lock,
@@ -65,7 +58,7 @@ const FloatToolbar = ({
   toggleDonationDrawer,
 }: FloatToolbarProps) => {
   const viewer = useContext(ViewerContext)
-  const isAuthor = viewer.id === article.author.id
+  const isAuthor = viewer.id === articleDetails.author.id
 
   const [mounted, setMounted] = useState(false)
   const [displayContainer, setDisplayContainer] = useState(false)
@@ -107,7 +100,7 @@ const FloatToolbar = ({
       >
         <section className={styles.toolbar}>
           <AppreciationButton
-            article={article}
+            article={articleDetails}
             privateFetched={privateFetched}
             textIconSpacing={6}
             disabled={lock}
@@ -116,8 +109,8 @@ const FloatToolbar = ({
 
           <span className={styles.divider} />
           <CommentButton
-            article={article}
-            disabled={!article.canComment}
+            article={articleDetails}
+            disabled={!articleDetails.canComment}
             textIconSpacing={6}
             onClick={toggleCommentDrawer}
             {...buttonProps}
