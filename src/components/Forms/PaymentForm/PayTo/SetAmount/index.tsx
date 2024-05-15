@@ -70,7 +70,6 @@ interface FormProps {
 
 interface FormValues {
   amount: number
-  customAmount: number
 }
 
 const AMOUNT_DEFAULT = {
@@ -164,18 +163,17 @@ const SetAmount: React.FC<FormProps> = ({
     values,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: AMOUNT_DEFAULT[currency],
-      customAmount: 0,
+      amount: 0,
     },
     validateOnBlur: false,
     validateOnChange: true,
-    validate: ({ amount, customAmount }) =>
+    validate: ({ amount }) =>
       _pickBy({
-        amount: validateDonationAmount(customAmount || amount, balance, intl),
+        amount: validateDonationAmount(amount, balance, intl),
         currency: validateCurrency(currency, intl),
       }),
-    onSubmit: async ({ amount, customAmount }, { setSubmitting }) => {
-      const submitAmount = customAmount || amount
+    onSubmit: async ({ amount }, { setSubmitting }) => {
+      const submitAmount = amount
       try {
         if (currency === CURRENCY.LIKE) {
           const result = await payTo({
@@ -213,7 +211,7 @@ const SetAmount: React.FC<FormProps> = ({
     },
   })
 
-  const value = values.customAmount || values.amount
+  const value = values.amount
   const isBalanceInsufficient = balance < value
   const isExceededAllowance =
     isUSDT &&
@@ -250,9 +248,11 @@ const SetAmount: React.FC<FormProps> = ({
 
     return (
       <section>
-        <p>
-          ≈&nbsp;{quoteCurrency}&nbsp;{convertedTotal}
-        </p>
+        {value > 0 && (
+          <p>
+            ≈&nbsp;{quoteCurrency}&nbsp;{convertedTotal}
+          </p>
+        )}
         {hkdHint}
       </section>
     )
@@ -297,11 +297,10 @@ const SetAmount: React.FC<FormProps> = ({
         onChange={async (e) => {
           const value = parseInt(e.target.value, 10) || 0
           await setFieldValue('amount', value, false)
-          await setFieldValue('customAmount', 0, true)
           e.target.blur()
 
           if (customInputRef.current) {
-            customInputRef.current.value = ''
+            customInputRef.current.value = value
           }
         }}
         // custom input
@@ -320,8 +319,7 @@ const SetAmount: React.FC<FormProps> = ({
             }
             value = Math.abs(Math.min(value, maxAmount))
 
-            await setFieldValue('customAmount', value, false)
-            await setFieldValue('amount', 0, true)
+            await setFieldValue('amount', value, true)
 
             // correct the input value if not equal
             const $el = customInputRef.current
