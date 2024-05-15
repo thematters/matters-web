@@ -9,6 +9,7 @@ import MetaInfo from './MetaInfo'
 import StickyTopBanner from './StickyTopBanner'
 import { fragments as supportWidgetFragments } from './Support/SupportWidget/gql'
 import TagList from './TagList'
+import Toolbar from './Toolbar'
 import { fragments as circleWallFragments } from './Wall/Circle/gql'
 
 const articlePublicFragment = gql`
@@ -70,6 +71,8 @@ const articlePublicFragment = gql`
     ...AuthorSidebarRelatedArticles
     ...AuthorSidebarFromAuthor
     ...StateArticle
+    ...ToolbarArticlePublic
+    ...ToolbarArticlePrivate
     ...SupportWidgetArticlePublic
     ...SupportWidgetArticlePrivate
   }
@@ -81,6 +84,8 @@ const articlePublicFragment = gql`
   ${StickyTopBanner.fragments.article}
   ${UserDigest.Rich.fragments.user.public}
   ${UserDigest.Rich.fragments.user.private}
+  ${Toolbar.fragments.article.public}
+  ${Toolbar.fragments.article.private}
   ${supportWidgetFragments.article.public}
   ${supportWidgetFragments.article.private}
   ${circleWallFragments.circle.public}
@@ -134,6 +139,7 @@ export const ARTICLE_DETAIL_PRIVATE = gql`
     }
   }
   ${UserDigest.Rich.fragments.user.private}
+  ${Toolbar.fragments.article.private}
   ${supportWidgetFragments.article.private}
   ${circleWallFragments.circle.private}
 `
