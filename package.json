@@ -59,6 +59,7 @@
     "@tiptap/extension-bubble-menu": "^2.0.3",
     "@tiptap/extension-floating-menu": "^2.0.3",
     "@tiptap/extension-placeholder": "^2.0.3",
+    "@uidotdev/usehooks": "^2.4.1",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-cache-persist": "^0.1.1",
     "apollo-client": "^2.6.10",

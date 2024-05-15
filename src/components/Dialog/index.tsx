@@ -1,5 +1,6 @@
 // import { Dialog as HeadlessDialog } from '@headlessui/react'
 import { VisuallyHidden } from '@reach/visually-hidden'
+import { useLockBodyScroll } from '@uidotdev/usehooks'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 // @ts-ignore
@@ -87,6 +88,7 @@ const Container: React.FC<
   }
 
   useOutsideClick(node, handleClickOutside)
+  useLockBodyScroll()
 
   return (
     <div
