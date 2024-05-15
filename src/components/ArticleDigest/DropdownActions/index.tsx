@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
@@ -6,6 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
+import { capitalizeFirstLetter } from '~/common/utils'
 import {
   AddCollectionsArticleDialog,
   AddCollectionsArticleDialogProps,
@@ -98,6 +100,7 @@ const DynamicArchiveUserDialog = dynamic(
 export interface DropdownActionsControls {
   icon?: React.ReactNode
   size?: IconSize
+  color?: 'greyDark' | 'black'
   sharePath?: string
   disabled?: boolean
 
@@ -186,6 +189,7 @@ const BaseDropdownActions = ({
 
   icon,
   size,
+  color = 'greyDark',
   inCard,
   disabled,
 
@@ -327,6 +331,11 @@ const BaseDropdownActions = ({
     id: 'A7ugfn',
   })
 
+  const moreButtonClasses = classNames({
+    [styles.moreButton]: true,
+    [styles[`text${capitalizeFirstLetter(color)}`]]: !!color,
+  })
+
   return (
     <Dropdown content={<Content />}>
       {({ openDropdown, ref }) =>
@@ -339,7 +348,7 @@ const BaseDropdownActions = ({
             aria-label={moreActionText}
             aria-haspopup="listbox"
             ref={ref}
-            className={styles.moreButton}
+            className={moreButtonClasses}
           >
             {icon ? icon : <Icon icon={IconMore} size={size} />}
           </button>
