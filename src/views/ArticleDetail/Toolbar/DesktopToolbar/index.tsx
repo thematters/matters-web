@@ -1,24 +1,16 @@
-import gql from 'graphql-tag'
-
 import { TEST_ID } from '~/common/enums'
 import { normalizeTag, toLocale, toPath } from '~/common/utils'
-import { BookmarkButton, ButtonProps, ShareButton } from '~/components'
+import { ButtonProps, ShareButton } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
-import {
-  ArticleDetailPublicQuery,
-  ToolbarArticlePrivateFragment,
-  ToolbarArticlePublicFragment,
-} from '~/gql/graphql'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
-import CommentButton from '../CommentButton'
-import DonationButton from '../DonationButton'
+import CommentButton from '../Button/CommentButton'
 import styles from './styles.module.css'
 
 export type DesktopToolbarProps = {
-  article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null
@@ -27,41 +19,7 @@ export type DesktopToolbarProps = {
   toggleDrawer: () => void
 } & DropdownActionsControls
 
-const fragments = {
-  article: {
-    public: gql`
-      fragment DesktopToolbarArticlePublic on Article {
-        id
-        title
-        tags {
-          content
-        }
-        ...DropdownActionsArticle
-        ...DonationButtonArticle
-        ...AppreciationButtonArticlePublic
-        ...CommentButtonArticlePublic
-      }
-      ${DonationButton.fragments.article}
-      ${DropdownActions.fragments.article}
-      ${AppreciationButton.fragments.article.public}
-      ${CommentButton.fragments.article.public}
-    `,
-    private: gql`
-      fragment DesktopToolbarArticlePrivate on Article {
-        id
-        ...BookmarkArticlePrivate
-        ...AppreciationButtonArticlePrivate
-        ...CommentButtonArticlePrivate
-      }
-      ${AppreciationButton.fragments.article.private}
-      ${BookmarkButton.fragments.article.private}
-      ${CommentButton.fragments.article.private}
-    `,
-  },
-}
-
 const DesktopToolbar = ({
-  article,
   articleDetails,
   translated,
   translatedLanguage,
@@ -70,7 +28,7 @@ const DesktopToolbar = ({
   toggleDrawer,
   ...props
 }: DesktopToolbarProps) => {
-  const path = toPath({ page: 'articleDetail', article })
+  const path = toPath({ page: 'articleDetail', article: articleDetails })
   const sharePath =
     translated && translatedLanguage
       ? `${path.href}?locale=${toLocale(translatedLanguage)}`
@@ -99,7 +57,7 @@ const DesktopToolbar = ({
       <section className={styles.buttons}>
         <section className={styles.left}>
           <AppreciationButton
-            article={article}
+            article={articleDetails}
             privateFetched={privateFetched}
             iconSize={24}
             disabled={lock}
@@ -107,8 +65,8 @@ const DesktopToolbar = ({
           />
           <section className={styles.commentBar}>
             <CommentButton
-              article={article}
-              disabled={!article.canComment}
+              article={articleDetails}
+              disabled={!articleDetails.canComment}
               iconSize={24}
               onClick={toggleDrawer}
               {...buttonProps}
@@ -124,7 +82,7 @@ const DesktopToolbar = ({
             path={sharePath}
             disabled={lock}
             spacing={[10, 10]}
-            tags={article.tags
+            tags={articleDetails.tags
               ?.map(({ content }) => content)
               .join(' ')
               .split(/\s+/)
@@ -132,7 +90,7 @@ const DesktopToolbar = ({
           />
 
           <DropdownActions
-            article={article}
+            article={articleDetails}
             disabled={lock}
             size={24}
             {...dropdonwActionsProps}
@@ -142,7 +100,5 @@ const DesktopToolbar = ({
     </section>
   )
 }
-
-DesktopToolbar.fragments = fragments
 
 export default DesktopToolbar
