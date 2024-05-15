@@ -1,4 +1,4 @@
-import { Dialog as HeadlessDialog } from '@headlessui/react'
+// import { Dialog as HeadlessDialog } from '@headlessui/react'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
@@ -149,22 +149,19 @@ export const Dialog: React.ComponentType<
 
   return (
     <>
-      <HeadlessDialog
-        open={isOpen}
-        onClose={() => {
-          if (onRest) {
-            onRest()
-          }
-        }}
+      <div
+        // open={isOpen}
+        // onClose={() => {
+        //   if (onRest) {
+        //     onRest()
+        //   }
+        // }}
         className={dialogOverlayClasses}
       >
-        <HeadlessDialog.Panel
-          aria-labelledby="dialog-title"
-          className={styles.panel}
-        >
+        <div aria-labelledby="dialog-title" className={styles.panel}>
           <Container initialFocusRef={initialFocusRef} {...props} />
-        </HeadlessDialog.Panel>
-      </HeadlessDialog>
+        </div>
+      </div>
     </>
   )
 }
