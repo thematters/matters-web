@@ -45,7 +45,7 @@ const relative = (
   }
 
   // if it is within 2 minutes
-  if (differenceInMinutes(date, new Date()) < 2) {
+  if (differenceInMinutes(new Date(), date) < 2) {
     return DIFFS[lang].justNow
   }
 

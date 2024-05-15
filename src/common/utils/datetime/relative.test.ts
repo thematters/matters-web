@@ -59,11 +59,11 @@ describe('utils/datetime/relative', () => {
   })
 
   it('should format a date more than 2 minutes but truncated', () => {
-    expect(toRelativeDate(new Date(2023, 6, 1, 8, 27), 'en')).toBe('3m')
+    expect(toRelativeDate(new Date(2023, 6, 1, 8, 27), 'en', true)).toBe('3m')
   })
 
   it('should format a date within 24 hours but truncated', () => {
-    expect(toRelativeDate(new Date(2023, 6, 1, 7, 20), 'en')).toBe('1h')
-    expect(toRelativeDate(new Date(2023, 6, 1, 5, 20), 'en')).toBe('3h')
+    expect(toRelativeDate(new Date(2023, 6, 1, 7, 20), 'en', true)).toBe('1h')
+    expect(toRelativeDate(new Date(2023, 6, 1, 5, 20), 'en', true)).toBe('3h')
   })
 })
