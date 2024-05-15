@@ -1,19 +1,15 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import _get from 'lodash/get'
 import { useEffect, useRef, useState } from 'react'
-import { animated, useSpring } from 'react-spring'
-import { useDrag } from 'react-use-gesture'
 
 import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
-import { Media, useOutsideClick } from '~/components'
+import { useOutsideClick } from '~/components'
 
 import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
 import Footer from './Footer'
-import Handle from './Handle'
 import Header from './Header'
 import Lazy from './Lazy'
 import styles from './styles.module.css'
@@ -39,7 +35,6 @@ const Container: React.FC<
   React.PropsWithChildren<
     {
       style?: React.CSSProperties
-      setDragGoal: (val: any) => void
       initialFocusRef: React.RefObject<any>
     } & DialogProps
   >
@@ -53,7 +48,6 @@ const Container: React.FC<
   dismissOnHandle = true,
   children,
   style,
-  setDragGoal,
   initialFocusRef,
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
@@ -90,14 +84,6 @@ const Container: React.FC<
     closeTopDialog()
   }
 
-  const bind = useDrag(({ down, movement: [, my] }) => {
-    if (!down && my > 30) {
-      onDismiss()
-    } else {
-      setDragGoal({ top: down ? Math.max(my, -30) : 0 })
-    }
-  })
-
   useOutsideClick(node, handleClickOutside)
 
   return (
@@ -120,10 +106,6 @@ const Container: React.FC<
         <button type="button" ref={initialFocusRef} aria-hidden="true" />
       </VisuallyHidden>
 
-      <Media at="sm">
-        {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}
-      </Media>
-
       {children}
     </div>
   )
@@ -143,35 +125,15 @@ export const Dialog: React.ComponentType<
   const [mounted, setMounted] = useState(isOpen)
   const initialFocusRef = useRef<any>(null)
 
-  // Drag
-  const [{ top }, setDragGoal] = useSpring(() => ({ top: 0 }))
-
-  // Fade In/ Fade Out
-  const [{ opacity }, setFade] = useSpring<{
-    opacity: number
-  }>(() => ({
-    opacity: 0,
-    config: { tension: 270 },
-    onRest: (val: any) => {
-      const isFadedOut = _get(val, 'value.opacity') <= 0
-
-      if (isFadedOut) {
-        setMounted(false)
-        setDragGoal({ top: 0 })
-      }
+  useEffect(() => {
+    if (isOpen) {
+      setMounted(true)
+    } else {
+      setMounted(false)
 
       if (onRest) {
         onRest()
       }
-    },
-  }))
-
-  useEffect(() => {
-    if (isOpen) {
-      setMounted(true)
-      setFade({ opacity: 1 })
-    } else {
-      setFade({ opacity: 0 })
     }
   })
 
@@ -181,29 +143,20 @@ export const Dialog: React.ComponentType<
     [styles.overlay]: !!mounted,
   })
 
-  const AnimatedDialogOverlay = animated(DialogOverlay)
-  const AnimatedContainer = animated(Container)
-
   if (!mounted) {
     return null
   }
 
   return (
     <>
-      <AnimatedDialogOverlay
+      <DialogOverlay
         className={dialogOverlayClasses}
         initialFocusRef={initialFocusRef}
-        style={{ opacity: opacity as any }}
       >
         <DialogContent aria-labelledby="dialog-title">
-          <AnimatedContainer
-            style={{ opacity: opacity as any, top }}
-            setDragGoal={setDragGoal}
-            initialFocusRef={initialFocusRef}
-            {...props}
-          />
+          <Container initialFocusRef={initialFocusRef} {...props} />
         </DialogContent>
-      </AnimatedDialogOverlay>
+      </DialogOverlay>
     </>
   )
 }
