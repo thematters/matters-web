@@ -64,6 +64,7 @@ const FloatToolbar = ({
   toggleDonationDrawer,
 }: FloatToolbarProps) => {
   const viewer = useContext(ViewerContext)
+  const isAuthor = viewer.id === article.author.id
 
   const [mounted, setMounted] = useState(false)
   const [displayContainer, setDisplayContainer] = useState(false)
@@ -104,7 +105,6 @@ const FloatToolbar = ({
         }}
       >
         <section className={styles.toolbar}>
-          {/* TODO: confirm can appreciate your own article */}
           <AppreciationButton
             article={article}
             privateFetched={privateFetched}
@@ -124,7 +124,7 @@ const FloatToolbar = ({
           <span className={styles.divider} />
           <DonationButton
             articleDetail={articleDetails}
-            disabled={lock}
+            disabled={lock || isAuthor}
             textIconSpacing={6}
             onClick={() => {
               if (!viewer.isAuthed) {
