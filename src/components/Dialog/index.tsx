@@ -2,6 +2,8 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
+// @ts-ignore
+import { Portal } from 'react-portal'
 
 import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
@@ -148,7 +150,7 @@ export const Dialog: React.ComponentType<
   }
 
   return (
-    <>
+    <Portal>
       <div
         // open={isOpen}
         // onClose={() => {
@@ -162,7 +164,7 @@ export const Dialog: React.ComponentType<
           <Container initialFocusRef={initialFocusRef} {...props} />
         </div>
       </div>
-    </>
+    </Portal>
   )
 }
 
