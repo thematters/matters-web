@@ -1,8 +1,6 @@
-import gql from 'graphql-tag'
-
 import { TEST_ID } from '~/common/enums'
 import { normalizeTag, toLocale, toPath } from '~/common/utils'
-import { BookmarkButton, ButtonProps, ShareButton } from '~/components'
+import { ButtonProps, ShareButton } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
@@ -10,7 +8,6 @@ import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
 import CommentButton from '../Button/CommentButton'
-import DonationButton from '../Button/DonationButton'
 import styles from './styles.module.css'
 
 export type DesktopToolbarProps = {
@@ -21,39 +18,6 @@ export type DesktopToolbarProps = {
   lock: boolean
   toggleDrawer: () => void
 } & DropdownActionsControls
-
-const fragments = {
-  article: {
-    public: gql`
-      fragment DesktopToolbarArticlePublic on Article {
-        id
-        title
-        tags {
-          content
-        }
-        ...DropdownActionsArticle
-        ...DonationButtonArticle
-        ...AppreciationButtonArticlePublic
-        ...CommentButtonArticlePublic
-      }
-      ${DonationButton.fragments.article}
-      ${DropdownActions.fragments.article}
-      ${AppreciationButton.fragments.article.public}
-      ${CommentButton.fragments.article.public}
-    `,
-    private: gql`
-      fragment DesktopToolbarArticlePrivate on Article {
-        id
-        ...BookmarkArticlePrivate
-        ...AppreciationButtonArticlePrivate
-        ...CommentButtonArticlePrivate
-      }
-      ${AppreciationButton.fragments.article.private}
-      ${BookmarkButton.fragments.article.private}
-      ${CommentButton.fragments.article.private}
-    `,
-  },
-}
 
 const DesktopToolbar = ({
   articleDetails,
@@ -136,7 +100,5 @@ const DesktopToolbar = ({
     </section>
   )
 }
-
-DesktopToolbar.fragments = fragments
 
 export default DesktopToolbar

@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
 
 import {
@@ -21,32 +20,6 @@ export type FloatToolbarProps = {
   show: boolean
   toggleCommentDrawer: () => void
   toggleDonationDrawer: () => void
-}
-
-const fragments = {
-  article: {
-    public: gql`
-      fragment FloatToolbarArticlePublic on Article {
-        id
-        title
-        ...DonationButtonArticle
-        ...AppreciationButtonArticlePublic
-        ...CommentButtonArticlePublic
-      }
-      ${DonationButton.fragments.article}
-      ${AppreciationButton.fragments.article.public}
-      ${CommentButton.fragments.article.public}
-    `,
-    private: gql`
-      fragment FloatToolbarArticlePrivate on Article {
-        id
-        ...AppreciationButtonArticlePrivate
-        ...CommentButtonArticlePrivate
-      }
-      ${AppreciationButton.fragments.article.private}
-      ${CommentButton.fragments.article.private}
-    `,
-  },
 }
 
 const FloatToolbar = ({
@@ -141,7 +114,5 @@ const FloatToolbar = ({
     </section>
   )
 }
-
-FloatToolbar.fragments = fragments
 
 export default FloatToolbar

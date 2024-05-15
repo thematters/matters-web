@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -9,12 +8,7 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { toLocale, toPath } from '~/common/utils'
-import {
-  BookmarkButton,
-  ButtonProps,
-  CommentFormBetaDialog,
-  ViewerContext,
-} from '~/components'
+import { ButtonProps, CommentFormBetaDialog, ViewerContext } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
@@ -34,39 +28,6 @@ export type FixedToolbarProps = {
   showCommentToolbar: boolean
   openCommentsDialog?: () => void
 } & DropdownActionsControls
-
-const fragments = {
-  article: {
-    public: gql`
-      fragment FixedToolbarArticlePublic on Article {
-        id
-        title
-        tags {
-          content
-        }
-        ...DropdownActionsArticle
-        ...DonationButtonArticle
-        ...AppreciationButtonArticlePublic
-        ...CommentButtonArticlePublic
-      }
-      ${DonationButton.fragments.article}
-      ${DropdownActions.fragments.article}
-      ${AppreciationButton.fragments.article.public}
-      ${CommentButton.fragments.article.public}
-    `,
-    private: gql`
-      fragment FixedToolbarArticlePrivate on Article {
-        id
-        ...BookmarkArticlePrivate
-        ...AppreciationButtonArticlePrivate
-        ...CommentButtonArticlePrivate
-      }
-      ${AppreciationButton.fragments.article.private}
-      ${BookmarkButton.fragments.article.private}
-      ${CommentButton.fragments.article.private}
-    `,
-  },
-}
 
 const FixedToolbar = ({
   articleDetails,
@@ -202,7 +163,5 @@ const FixedToolbar = ({
     </section>
   )
 }
-
-FixedToolbar.fragments = fragments
 
 export default FixedToolbar
