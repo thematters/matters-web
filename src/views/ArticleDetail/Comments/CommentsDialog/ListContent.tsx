@@ -1,8 +1,8 @@
 import { Dialog, Spacer } from '~/components'
 import {
   ArticleDetailPublicQuery,
-  ToolbarArticlePrivateFragment,
-  ToolbarArticlePublicFragment,
+  FixedToolbarArticlePrivateFragment,
+  FixedToolbarArticlePublicFragment,
 } from '~/gql/graphql'
 
 import FixedToolbar from '../../Toolbar/FixedToolbar'
@@ -15,7 +15,8 @@ interface CommentsDialogListContentProps {
   closeDialog: () => void
 
   // FixedToolbar
-  article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
+  article: FixedToolbarArticlePublicFragment &
+    Partial<FixedToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null

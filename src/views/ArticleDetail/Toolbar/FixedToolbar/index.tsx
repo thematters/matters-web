@@ -20,17 +20,18 @@ import DropdownActions, {
 } from '~/components/ArticleDigest/DropdownActions'
 import {
   ArticleDetailPublicQuery,
-  ToolbarArticlePrivateFragment,
-  ToolbarArticlePublicFragment,
+  FixedToolbarArticlePrivateFragment,
+  FixedToolbarArticlePublicFragment,
 } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
-import CommentButton from '../CommentButton'
-import DonationButton from '../DonationButton'
+import CommentButton from '../Button/CommentButton'
+import DonationButton from '../Button/DonationButton'
 import styles from './styles.module.css'
 
 export type FixedToolbarProps = {
-  article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
+  article: FixedToolbarArticlePublicFragment &
+    Partial<FixedToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null

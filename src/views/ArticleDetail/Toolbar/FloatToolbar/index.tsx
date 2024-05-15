@@ -9,17 +9,18 @@ import {
 import { ButtonProps, ViewerContext } from '~/components'
 import {
   ArticleDetailPublicQuery,
-  ToolbarArticlePrivateFragment,
-  ToolbarArticlePublicFragment,
+  FloatToolbarArticlePrivateFragment,
+  FloatToolbarArticlePublicFragment,
 } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
-import CommentButton from '../CommentButton'
-import DonationButton from '../DonationButton'
+import CommentButton from '../Button/CommentButton'
+import DonationButton from '../Button/DonationButton'
 import styles from './styles.module.css'
 
 export type FloatToolbarProps = {
-  article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
+  article: FloatToolbarArticlePublicFragment &
+    Partial<FloatToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
   lock: boolean

@@ -8,8 +8,8 @@ import { OPEN_COMMENT_DETAIL_DIALOG } from '~/common/enums'
 import { Dialog, Icon, useDialogSwitch, useEventListener } from '~/components'
 import {
   ArticleDetailPublicQuery,
-  ToolbarArticlePrivateFragment,
-  ToolbarArticlePublicFragment,
+  FixedToolbarArticlePrivateFragment,
+  FixedToolbarArticlePublicFragment,
 } from '~/gql/graphql'
 
 import { Placeholder } from '../Placeholder'
@@ -22,7 +22,8 @@ interface CommentsDialogProps {
   step?: Step
 
   // FixedToolbar
-  article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
+  article: FixedToolbarArticlePublicFragment &
+    Partial<FixedToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null

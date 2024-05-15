@@ -19,8 +19,7 @@ import {
   ViewerContext,
 } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
-
-import { SupportDialog } from '../../Support/SupportDialog'
+import { SupportDialog } from '~/views/ArticleDetail/Support/SupportDialog'
 
 export type DonationButtonProps = {
   articleDetail: NonNullable<ArticleDetailPublicQuery['article']>

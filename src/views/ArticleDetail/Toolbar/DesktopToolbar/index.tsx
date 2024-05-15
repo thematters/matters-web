@@ -8,17 +8,18 @@ import DropdownActions, {
 } from '~/components/ArticleDigest/DropdownActions'
 import {
   ArticleDetailPublicQuery,
-  ToolbarArticlePrivateFragment,
-  ToolbarArticlePublicFragment,
+  DesktopToolbarArticlePrivateFragment,
+  DesktopToolbarArticlePublicFragment,
 } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
-import CommentButton from '../CommentButton'
-import DonationButton from '../DonationButton'
+import CommentButton from '../Button/CommentButton'
+import DonationButton from '../Button/DonationButton'
 import styles from './styles.module.css'
 
 export type DesktopToolbarProps = {
-  article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
+  article: DesktopToolbarArticlePublicFragment &
+    Partial<DesktopToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null
