@@ -84,6 +84,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   const amountClasses = classNames({
     [styles.radioInputItem]: true,
     [styles.active]: isActive,
+    'u-area-disable': disabled,
   })
 
   const decimals = 0
