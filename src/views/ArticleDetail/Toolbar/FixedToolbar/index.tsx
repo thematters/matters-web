@@ -91,6 +91,8 @@ const FixedToolbar = ({
       ? `${path.href}?locale=${toLocale(translatedLanguage)}`
       : path.href
 
+  const isAuthor = viewer.id === article.author.id
+
   const dropdonwActionsProps: DropdownActionsControls = {
     size: 24,
     inCard: true,
@@ -186,7 +188,7 @@ const FixedToolbar = ({
 
             <DonationButton
               articleDetail={articleDetails}
-              disabled={lock}
+              disabled={lock || isAuthor}
               iconSize={24}
               textWeight="normal"
               textIconSpacing={4}
