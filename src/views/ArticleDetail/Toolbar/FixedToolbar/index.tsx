@@ -1,4 +1,3 @@
-import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -9,28 +8,18 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { toLocale, toPath } from '~/common/utils'
-import {
-  BookmarkButton,
-  ButtonProps,
-  CommentFormBetaDialog,
-  ViewerContext,
-} from '~/components'
+import { ButtonProps, CommentFormBetaDialog, ViewerContext } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
-import {
-  ArticleDetailPublicQuery,
-  ToolbarArticlePrivateFragment,
-  ToolbarArticlePublicFragment,
-} from '~/gql/graphql'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
-import CommentButton from '../CommentButton'
-import DonationButton from '../DonationButton'
+import CommentButton from '../Button/CommentButton'
+import DonationButton from '../Button/DonationButton'
 import styles from './styles.module.css'
 
 export type FixedToolbarProps = {
-  article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
   translatedLanguage?: string | null
@@ -40,41 +29,7 @@ export type FixedToolbarProps = {
   openCommentsDialog?: () => void
 } & DropdownActionsControls
 
-const fragments = {
-  article: {
-    public: gql`
-      fragment FixedToolbarArticlePublic on Article {
-        id
-        title
-        tags {
-          content
-        }
-        ...DropdownActionsArticle
-        ...DonationButtonArticle
-        ...AppreciationButtonArticlePublic
-        ...CommentButtonArticlePublic
-      }
-      ${DonationButton.fragments.article}
-      ${DropdownActions.fragments.article}
-      ${AppreciationButton.fragments.article.public}
-      ${CommentButton.fragments.article.public}
-    `,
-    private: gql`
-      fragment FixedToolbarArticlePrivate on Article {
-        id
-        ...BookmarkArticlePrivate
-        ...AppreciationButtonArticlePrivate
-        ...CommentButtonArticlePrivate
-      }
-      ${AppreciationButton.fragments.article.private}
-      ${BookmarkButton.fragments.article.private}
-      ${CommentButton.fragments.article.private}
-    `,
-  },
-}
-
 const FixedToolbar = ({
-  article,
   articleDetails,
   translated,
   translatedLanguage,
@@ -85,11 +40,13 @@ const FixedToolbar = ({
   ...props
 }: FixedToolbarProps) => {
   const viewer = useContext(ViewerContext)
-  const path = toPath({ page: 'articleDetail', article })
+  const path = toPath({ page: 'articleDetail', article: articleDetails })
   const sharePath =
     translated && translatedLanguage
       ? `${path.href}?locale=${toLocale(translatedLanguage)}`
       : path.href
+
+  const isAuthor = viewer.id === articleDetails.author.id
 
   const dropdonwActionsProps: DropdownActionsControls = {
     size: 24,
@@ -115,7 +72,7 @@ const FixedToolbar = ({
       data-test-id={TEST_ID.ARTICLE_TOOLBAR}
       id={TOOLBAR_FIXEDTOOLBAR_ID}
     >
-      <CommentFormBetaDialog articleId={article.id} type="article">
+      <CommentFormBetaDialog articleId={articleDetails.id} type="article">
         {({ openDialog: openCommentFormBetaDialog }) => (
           <section className={styles.buttons}>
             {showCommentToolbar && (
@@ -146,7 +103,7 @@ const FixedToolbar = ({
             )}
 
             <AppreciationButton
-              article={article}
+              article={articleDetails}
               privateFetched={privateFetched}
               iconSize={24}
               textWeight="normal"
@@ -157,13 +114,13 @@ const FixedToolbar = ({
 
             {!showCommentToolbar && (
               <CommentButton
-                article={article}
-                disabled={!article.canComment}
+                article={articleDetails}
+                disabled={!articleDetails.canComment}
                 iconSize={24}
                 textWeight="normal"
                 textIconSpacing={4}
                 onClick={() => {
-                  if (!viewer.isAuthed && article.commentCount === 0) {
+                  if (!viewer.isAuthed && articleDetails.commentCount === 0) {
                     window.dispatchEvent(
                       new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
                         detail: {
@@ -186,7 +143,7 @@ const FixedToolbar = ({
 
             <DonationButton
               articleDetail={articleDetails}
-              disabled={lock}
+              disabled={lock || isAuthor}
               iconSize={24}
               textWeight="normal"
               textIconSpacing={4}
@@ -194,7 +151,7 @@ const FixedToolbar = ({
             />
 
             <DropdownActions
-              article={article}
+              article={articleDetails}
               disabled={lock}
               {...dropdonwActionsProps}
               hasShare
@@ -206,7 +163,5 @@ const FixedToolbar = ({
     </section>
   )
 }
-
-FixedToolbar.fragments = fragments
 
 export default FixedToolbar

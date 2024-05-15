@@ -1,5 +1,4 @@
 import classNames from 'classnames'
-import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
 
 import {
@@ -7,19 +6,14 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { ButtonProps, ViewerContext } from '~/components'
-import {
-  ArticleDetailPublicQuery,
-  ToolbarArticlePrivateFragment,
-  ToolbarArticlePublicFragment,
-} from '~/gql/graphql'
+import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
-import CommentButton from '../CommentButton'
-import DonationButton from '../DonationButton'
+import CommentButton from '../Button/CommentButton'
+import DonationButton from '../Button/DonationButton'
 import styles from './styles.module.css'
 
 export type FloatToolbarProps = {
-  article: ToolbarArticlePublicFragment & Partial<ToolbarArticlePrivateFragment>
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
   lock: boolean
@@ -28,35 +22,8 @@ export type FloatToolbarProps = {
   toggleDonationDrawer: () => void
 }
 
-const fragments = {
-  article: {
-    public: gql`
-      fragment FloatToolbarArticlePublic on Article {
-        id
-        title
-        ...DonationButtonArticle
-        ...AppreciationButtonArticlePublic
-        ...CommentButtonArticlePublic
-      }
-      ${DonationButton.fragments.article}
-      ${AppreciationButton.fragments.article.public}
-      ${CommentButton.fragments.article.public}
-    `,
-    private: gql`
-      fragment FloatToolbarArticlePrivate on Article {
-        id
-        ...AppreciationButtonArticlePrivate
-        ...CommentButtonArticlePrivate
-      }
-      ${AppreciationButton.fragments.article.private}
-      ${CommentButton.fragments.article.private}
-    `,
-  },
-}
-
 const FloatToolbar = ({
   show,
-  article,
   articleDetails,
   privateFetched,
   lock,
@@ -64,6 +31,7 @@ const FloatToolbar = ({
   toggleDonationDrawer,
 }: FloatToolbarProps) => {
   const viewer = useContext(ViewerContext)
+  const isAuthor = viewer.id === articleDetails.author.id
 
   const [mounted, setMounted] = useState(false)
   const [displayContainer, setDisplayContainer] = useState(false)
@@ -104,9 +72,8 @@ const FloatToolbar = ({
         }}
       >
         <section className={styles.toolbar}>
-          {/* TODO: confirm can appreciate your own article */}
           <AppreciationButton
-            article={article}
+            article={articleDetails}
             privateFetched={privateFetched}
             textIconSpacing={6}
             disabled={lock}
@@ -115,8 +82,8 @@ const FloatToolbar = ({
 
           <span className={styles.divider} />
           <CommentButton
-            article={article}
-            disabled={!article.canComment}
+            article={articleDetails}
+            disabled={!articleDetails.canComment}
             textIconSpacing={6}
             onClick={toggleCommentDrawer}
             {...buttonProps}
@@ -124,7 +91,7 @@ const FloatToolbar = ({
           <span className={styles.divider} />
           <DonationButton
             articleDetail={articleDetails}
-            disabled={lock}
+            disabled={lock || isAuthor}
             textIconSpacing={6}
             onClick={() => {
               if (!viewer.isAuthed) {
@@ -147,7 +114,5 @@ const FloatToolbar = ({
     </section>
   )
 }
-
-FloatToolbar.fragments = fragments
 
 export default FloatToolbar
