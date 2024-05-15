@@ -30,9 +30,11 @@ export type DialogProps = {
   smBgColor?: 'greyLighter'
   smUpBgColor?: 'greyLighter'
   hidePaddingBottom?: boolean
+  scrollable?: boolean
+
+  disableScrollLock?: boolean
 
   testId?: string
-  scrollable?: boolean
 } & DialogOverlayProps
 
 const Container: React.FC<
@@ -139,7 +141,7 @@ export const Dialog: React.ComponentType<
   RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
-  const { isOpen, onRest, scrollable } = props
+  const { isOpen, onRest, disableScrollLock, scrollable } = props
   const [mounted, setMounted] = useState(isOpen)
   const initialFocusRef = useRef<any>(null)
 
@@ -194,6 +196,7 @@ export const Dialog: React.ComponentType<
         className={dialogOverlayClasses}
         initialFocusRef={initialFocusRef}
         style={{ opacity: opacity as any }}
+        dangerouslyBypassScrollLock={disableScrollLock}
       >
         <DialogContent aria-labelledby="dialog-title">
           <AnimatedContainer

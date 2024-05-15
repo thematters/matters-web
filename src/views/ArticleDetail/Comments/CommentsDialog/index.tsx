@@ -71,6 +71,7 @@ const BaseCommentsDialogDialog = ({
           backToCommentList()
           closeDialog()
         }}
+        disableScrollLock
       >
         <Dialog.Header
           title={
