@@ -153,6 +153,7 @@ export const Dialog: React.ComponentType<
         className={dialogOverlayClasses}
         initialFocusRef={initialFocusRef}
         dangerouslyBypassFocusLock
+        dangerouslyBypassScrollLock
         allowPinchZoom
       >
         <DialogContent aria-labelledby="dialog-title">
