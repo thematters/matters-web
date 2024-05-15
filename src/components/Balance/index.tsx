@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -36,8 +37,21 @@ export const Balance: React.FC<BalanceProps> = ({
   const isHKD = currency === CURRENCY.HKD
   const isLike = currency === CURRENCY.LIKE
 
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.insufficient]: isHKD && isBalanceInsufficient,
+  })
+
+  const formattedAmount = formatAmount(amount, isUSDT ? 2 : 0)
+  const maxLength = 7
+  let displayValue = formattedAmount
+
+  if (displayValue.length > maxLength) {
+    displayValue = displayValue.slice(0, maxLength) + '...'
+  }
+
   return (
-    <span className={styles.container}>
+    <span className={containerClasses}>
       {!isBalanceInsufficient && (
         <>
           <FormattedMessage
@@ -48,19 +62,17 @@ export const Balance: React.FC<BalanceProps> = ({
           {lang === 'en' && <>&nbsp;</>}
         </>
       )}
-      <span className={styles.balance}>
-        {isUSDT && <span>USDT {formatAmount(amount)}</span>}
-        {isHKD && !isBalanceInsufficient && (
-          <span>HKD {formatAmount(amount)}</span>
-        )}
-        {isLike && <span>LIKE {formatAmount(amount, 0)}</span>}
+      <span className={styles.balance} title={formattedAmount}>
+        {isUSDT && <span>USDT {displayValue}</span>}
         {isHKD && isBalanceInsufficient && (
           <FormattedMessage
-            defaultMessage="Insufficient balance"
+            defaultMessage="Insufficient: "
             description="src/components/Balance/index.tsx"
-            id="P2tEEn"
+            id="hWq/ii"
           />
         )}
+        {isHKD && <span>HKD {displayValue}</span>}
+        {isLike && <span>LIKE {displayValue}</span>}
       </span>
       {isHKD && showTopUp && (
         <BindEmailHintDialog>
@@ -74,7 +86,11 @@ export const Balance: React.FC<BalanceProps> = ({
                     color="gold"
                     weight="medium"
                   >
-                    <FormattedMessage defaultMessage="Top up" id="Y47aYU" />
+                    <FormattedMessage
+                      defaultMessage="Top up"
+                      id="hAyhzq"
+                      description="SUPPORT_HKD"
+                    />
                   </TextIcon>
                 </Button>
               </section>

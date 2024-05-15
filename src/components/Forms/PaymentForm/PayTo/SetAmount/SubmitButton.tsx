@@ -9,6 +9,7 @@ import { UserDonationRecipientFragment } from '~/gql/graphql'
 type SubmitButtonProps = {
   mode: 'text' | 'rounded'
   currency: CURRENCY
+  value: number
   formId: string
   recipient: UserDonationRecipientFragment
 
@@ -41,13 +42,20 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
   isSubmitting,
   isBalanceInsufficient,
   switchToAddCredit,
+  value,
 }) => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
   if (isBalanceInsufficient) {
     const props = {
       mode,
-      text: <FormattedMessage defaultMessage="Top Up" id="dTOtPO" />,
+      text: (
+        <FormattedMessage
+          defaultMessage="Top up"
+          id="hAyhzq"
+          description="SUPPORT_HKD"
+        />
+      ),
       form: formId,
     }
     return (
@@ -70,10 +78,10 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
   return (
     <WrapperButton
       mode={mode}
-      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
+      text={<FormattedMessage defaultMessage="Next" id="9+Ddtu" />}
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting || isBalanceInsufficient}
+      disabled={!isValid || isSubmitting || isBalanceInsufficient || value <= 0}
       loading={isSubmitting}
     />
   )
@@ -95,7 +103,7 @@ const LIKESubmitButton: React.FC<SubmitButtonProps> = ({
 
       <WrapperButton
         mode={mode}
-        text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
+        text={<FormattedMessage defaultMessage="Next" id="9+Ddtu" />}
         type="submit"
         form={formId}
         disabled={!isValid || isSubmitting || isBalanceInsufficient}
@@ -140,7 +148,7 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
   return (
     <WrapperButton
       mode={mode}
-      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
+      text={<FormattedMessage defaultMessage="Next" id="9+Ddtu" />}
       type="submit"
       form={formId}
       disabled={!isValid || isSubmitting || isBalanceInsufficient}

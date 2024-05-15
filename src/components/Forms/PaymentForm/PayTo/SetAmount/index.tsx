@@ -212,7 +212,7 @@ const SetAmount: React.FC<FormProps> = ({
   })
 
   const value = values.amount
-  const isBalanceInsufficient = balance < value
+  const isBalanceInsufficient = balance < value || (isHKD && balance === 0)
   const isExceededAllowance =
     isUSDT &&
     allowanceUSDT > 0n &&
@@ -296,7 +296,7 @@ const SetAmount: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={async (e) => {
           const value = parseInt(e.target.value, 10) || 0
-          await setFieldValue('amount', value, false)
+          await setFieldValue('amount', value, true)
           e.target.blur()
 
           if (customInputRef.current) {
@@ -345,6 +345,7 @@ const SetAmount: React.FC<FormProps> = ({
   }
 
   const submitButtonProps = {
+    value: values.amount,
     currency,
     formId,
     recipient,

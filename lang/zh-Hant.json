@@ -623,6 +623,9 @@
     "defaultMessage": "離開圍爐",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
+  "9+Ddtu": {
+    "defaultMessage": "下一步"
+  },
   "91IQdk": {
     "defaultMessage": "已追蹤",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
@@ -988,9 +991,6 @@
   },
   "G0pqnh": {
     "defaultMessage": "閱讀原文"
-  },
-  "G4bk3r": {
-    "defaultMessage": "自訂金額大於餘額"
   },
   "GHxtae": {
     "defaultMessage": "數字錢包",
@@ -1483,10 +1483,6 @@
   },
   "P2Btra": {
     "defaultMessage": "認領成功"
-  },
-  "P2tEEn": {
-    "defaultMessage": "餘額不足",
-    "description": "src/components/Balance/index.tsx"
   },
   "P3y9Bo": {
     "defaultMessage": "前往簽署",
@@ -2381,11 +2377,19 @@
     "defaultMessage": "已封鎖用戶",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
   },
+  "hAyhzq": {
+    "defaultMessage": "去儲值",
+    "description": "SUPPORT_HKD"
+  },
   "hBLCwn": {
     "defaultMessage": "其他金額"
   },
   "hG2cBH": {
     "defaultMessage": "訂閱圍爐"
+  },
+  "hWq/ii": {
+    "defaultMessage": "餘額不足：",
+    "description": "src/components/Balance/index.tsx"
   },
   "hYG5fb": {
     "defaultMessage": "人追蹤",

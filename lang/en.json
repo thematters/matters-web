@@ -623,6 +623,9 @@
     "defaultMessage": "Unsubscribe Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
+  "9+Ddtu": {
+    "defaultMessage": "Next"
+  },
   "91IQdk": {
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
@@ -988,9 +991,6 @@
   },
   "G0pqnh": {
     "defaultMessage": "View original content"
-  },
-  "G4bk3r": {
-    "defaultMessage": "Custom amount is greater than your balance"
   },
   "GHxtae": {
     "defaultMessage": "Wallet",
@@ -1483,10 +1483,6 @@
   },
   "P2Btra": {
     "defaultMessage": "Adopted"
-  },
-  "P2tEEn": {
-    "defaultMessage": "Insufficient balance",
-    "description": "src/components/Balance/index.tsx"
   },
   "P3y9Bo": {
     "defaultMessage": "Go to sign",
@@ -2381,11 +2377,19 @@
     "defaultMessage": "Blocked Users",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
   },
+  "hAyhzq": {
+    "defaultMessage": "Top up",
+    "description": "SUPPORT_HKD"
+  },
   "hBLCwn": {
     "defaultMessage": "other amount"
   },
   "hG2cBH": {
     "defaultMessage": "Subscribe Circle"
+  },
+  "hWq/ii": {
+    "defaultMessage": "Insufficient: ",
+    "description": "src/components/Balance/index.tsx"
   },
   "hYG5fb": {
     "defaultMessage": "are following",

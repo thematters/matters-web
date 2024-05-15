@@ -7,6 +7,11 @@
   background-color: var(--color-matters-gold-light);
   border-radius: 0.5rem;
 
+  &.insufficient {
+    color: var(--color-negative-red);
+    background-color: var(--color-insufficient-red);
+  }
+
   & .balance {
     font-weight: var(--font-medium);
   }

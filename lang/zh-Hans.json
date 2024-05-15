@@ -623,6 +623,9 @@
     "defaultMessage": "离开围炉",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
+  "9+Ddtu": {
+    "defaultMessage": "下一步"
+  },
   "91IQdk": {
     "defaultMessage": "已追踪",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
@@ -988,9 +991,6 @@
   },
   "G0pqnh": {
     "defaultMessage": "阅读原文"
-  },
-  "G4bk3r": {
-    "defaultMessage": "自订金额大于余额"
   },
   "GHxtae": {
     "defaultMessage": "数字钱包",
@@ -1483,10 +1483,6 @@
   },
   "P2Btra": {
     "defaultMessage": "认领成功"
-  },
-  "P2tEEn": {
-    "defaultMessage": "余额不足",
-    "description": "src/components/Balance/index.tsx"
   },
   "P3y9Bo": {
     "defaultMessage": "前往签署",
@@ -2381,11 +2377,19 @@
     "defaultMessage": "已屏蔽用户",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
   },
+  "hAyhzq": {
+    "defaultMessage": "去充值",
+    "description": "SUPPORT_HKD"
+  },
   "hBLCwn": {
     "defaultMessage": "其他金额"
   },
   "hG2cBH": {
     "defaultMessage": "订阅围炉"
+  },
+  "hWq/ii": {
+    "defaultMessage": "余额不足：",
+    "description": "src/components/Balance/index.tsx"
   },
   "hYG5fb": {
     "defaultMessage": "人追踪",
