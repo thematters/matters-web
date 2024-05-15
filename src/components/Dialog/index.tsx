@@ -152,6 +152,7 @@ export const Dialog: React.ComponentType<
       <DialogOverlay
         className={dialogOverlayClasses}
         initialFocusRef={initialFocusRef}
+        dangerouslyBypassFocusLock
       >
         <DialogContent aria-labelledby="dialog-title">
           <Container initialFocusRef={initialFocusRef} {...props} />
