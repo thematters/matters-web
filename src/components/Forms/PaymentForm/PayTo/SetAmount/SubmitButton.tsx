@@ -1,14 +1,23 @@
+import { ApolloError } from 'apollo-client'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { BindEmailHintDialog, Dialog, ViewerContext } from '~/components'
+import {
+  BindEmailHintDialog,
+  Dialog,
+  Icon,
+  TextIcon,
+  ViewerContext,
+} from '~/components'
 import type { DialogTextButtonProps } from '~/components/Dialog/Buttons'
 import { UserDonationRecipientFragment } from '~/gql/graphql'
 
 type SubmitButtonProps = {
   mode: 'text' | 'rounded'
   currency: CURRENCY
+  value: number
   formId: string
   recipient: UserDonationRecipientFragment
 
@@ -22,6 +31,10 @@ type SubmitButtonProps = {
   allowanceLoading: boolean
 
   approveWrite?: () => void
+
+  walletBalanceError?: ApolloError
+  walletBalanceLoading?: boolean
+  refetchWalletBalance?: () => void
 }
 
 const WrapperButton: React.FC<
@@ -30,7 +43,15 @@ const WrapperButton: React.FC<
   if (mode === 'text') {
     return <Dialog.TextButton {...restProps} />
   } else {
-    return <Dialog.RoundedButton {...restProps} color="white" bgColor="green" />
+    return (
+      <Dialog.RoundedButton
+        {...restProps}
+        color="white"
+        bgColor="green"
+        textSize={16}
+        textWeight="normal"
+      />
+    )
   }
 }
 
@@ -41,13 +62,37 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
   isSubmitting,
   isBalanceInsufficient,
   switchToAddCredit,
+  value,
+
+  walletBalanceError,
+  walletBalanceLoading,
+  refetchWalletBalance,
 }) => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
+  if (walletBalanceError && refetchWalletBalance) {
+    return (
+      <WrapperButton
+        mode={mode}
+        text={<FormattedMessage defaultMessage="Retry" id="62nsdy" />}
+        form={formId}
+        disabled={walletBalanceLoading}
+        loading={walletBalanceLoading}
+        onClick={refetchWalletBalance}
+      />
+    )
+  }
+
   if (isBalanceInsufficient) {
     const props = {
       mode,
-      text: <FormattedMessage defaultMessage="Top Up" id="dTOtPO" />,
+      text: (
+        <FormattedMessage
+          defaultMessage="Top up"
+          id="hAyhzq"
+          description="SUPPORT_HKD"
+        />
+      ),
       form: formId,
     }
     return (
@@ -70,10 +115,10 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
   return (
     <WrapperButton
       mode={mode}
-      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
+      text={<FormattedMessage defaultMessage="Next" id="9+Ddtu" />}
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting || isBalanceInsufficient}
+      disabled={!isValid || isSubmitting || value <= 0}
       loading={isSubmitting}
     />
   )
@@ -86,6 +131,7 @@ const LIKESubmitButton: React.FC<SubmitButtonProps> = ({
   isValid,
   isSubmitting,
   isBalanceInsufficient,
+  value,
 }) => {
   return (
     <>
@@ -95,10 +141,10 @@ const LIKESubmitButton: React.FC<SubmitButtonProps> = ({
 
       <WrapperButton
         mode={mode}
-        text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
+        text={<FormattedMessage defaultMessage="Next" id="9+Ddtu" />}
         type="submit"
         form={formId}
-        disabled={!isValid || isSubmitting || isBalanceInsufficient}
+        disabled={!isValid || isSubmitting || value <= 0}
         loading={isSubmitting}
       />
     </>
@@ -107,6 +153,7 @@ const LIKESubmitButton: React.FC<SubmitButtonProps> = ({
 
 const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
   mode,
+  value,
   formId,
   isValid,
   isSubmitting,
@@ -122,10 +169,12 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
       <WrapperButton
         mode={mode}
         text={
-          <FormattedMessage
-            defaultMessage="Reapprove to continue"
-            id="3lMsOU"
-          />
+          <TextIcon icon={<Icon icon={IconOpenWallet} size={20} />}>
+            <FormattedMessage
+              defaultMessage="Go to Authorization"
+              id="/cyuh2"
+            />
+          </TextIcon>
         }
         loading={approving || approveConfirming || allowanceLoading}
         onClick={() => {
@@ -140,10 +189,10 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
   return (
     <WrapperButton
       mode={mode}
-      text={<FormattedMessage defaultMessage="Next Step" id="8cv9D4" />}
+      text={<FormattedMessage defaultMessage="Next" id="9+Ddtu" />}
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting || isBalanceInsufficient}
+      disabled={!isValid || isSubmitting || value <= 0}
       loading={isSubmitting}
     />
   )

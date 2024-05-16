@@ -80,9 +80,6 @@
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
-  "/MgyCo": {
-    "defaultMessage": "回到支持"
-  },
   "/NX9L+": {
     "defaultMessage": "确认授权",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
@@ -94,6 +91,9 @@
   "/agKbX": {
     "defaultMessage": "回复评论",
     "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
+  },
+  "/cyuh2": {
+    "defaultMessage": "前往授权"
   },
   "/dKzfc": {
     "defaultMessage": "该作品因违反社区约章，已被站方强制封存。"
@@ -230,10 +230,6 @@
     "defaultMessage": "免费邀请",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
-  "1r1iQj": {
-    "defaultMessage": "重新授权",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "1y1U9f": {
     "defaultMessage": "Liker ID 已被其他人使用",
     "description": "LIKER_USER_ID_EXISTS"
@@ -336,9 +332,6 @@
   },
   "3kbIhS": {
     "defaultMessage": "未命名"
-  },
-  "3lMsOU": {
-    "defaultMessage": "重新授权后继续"
   },
   "3phEFL": {
     "defaultMessage": "继续使用表示您同意",
@@ -623,6 +616,9 @@
     "defaultMessage": "离开围炉",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
+  "9+Ddtu": {
+    "defaultMessage": "下一步"
+  },
   "91IQdk": {
     "defaultMessage": "已追踪",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
@@ -893,6 +889,9 @@
   "E048/V": {
     "defaultMessage": "存至草稿"
   },
+  "E7vGxB": {
+    "defaultMessage": "余额加载中⋯"
+  },
   "E8W3qa": {
     "defaultMessage": "2-20 个字符"
   },
@@ -988,9 +987,6 @@
   },
   "G0pqnh": {
     "defaultMessage": "阅读原文"
-  },
-  "G4bk3r": {
-    "defaultMessage": "自订金额大于余额"
   },
   "GHxtae": {
     "defaultMessage": "数字钱包",
@@ -1431,10 +1427,6 @@
     "defaultMessage": "忘记密码？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
-  "OA3RuB": {
-    "defaultMessage": "尚未允许使用钱包里的 USDT",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "OIj8pQ": {
     "defaultMessage": "成功发送邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -1483,10 +1475,6 @@
   },
   "P2Btra": {
     "defaultMessage": "认领成功"
-  },
-  "P2tEEn": {
-    "defaultMessage": "余额不足",
-    "description": "src/components/Balance/index.tsx"
   },
   "P3y9Bo": {
     "defaultMessage": "前往签署",
@@ -1710,9 +1698,6 @@
     "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考 {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "Tgd5id": {
-    "defaultMessage": "支持金额超出授权额度"
-  },
   "ThSfXQ": {
     "defaultMessage": "添加协作者成功"
   },
@@ -1881,6 +1866,9 @@
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "XMpFQE": {
+    "defaultMessage": "网路连线异常，请确保连线畅通后重试"
+  },
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"
   },
@@ -1953,10 +1941,6 @@
   },
   "Y8zV4A": {
     "defaultMessage": "回复评论"
-  },
-  "YAIXL4": {
-    "defaultMessage": "请于钱包视窗点击确认授权使用{br}确认完成后即可开始支持步骤",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "YPMn9n": {
     "defaultMessage": "请先登入再进行操作",
@@ -2381,11 +2365,19 @@
     "defaultMessage": "已屏蔽用户",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
   },
+  "hAyhzq": {
+    "defaultMessage": "去充值",
+    "description": "SUPPORT_HKD"
+  },
   "hBLCwn": {
     "defaultMessage": "其他金额"
   },
   "hG2cBH": {
     "defaultMessage": "订阅围炉"
+  },
+  "hWq/ii": {
+    "defaultMessage": "余额不足：",
+    "description": "src/components/Balance/index.tsx"
   },
   "hYG5fb": {
     "defaultMessage": "人追踪",
@@ -3095,10 +3087,6 @@
   "w+6UiO": {
     "defaultMessage": "新增邀请"
   },
-  "wBpJLd": {
-    "defaultMessage": "前往允许",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "wCgTu5": {
     "defaultMessage": "评论"
   },
@@ -3202,9 +3190,6 @@
     "defaultMessage": "该名称已被其他用户使用",
     "description": "NAME_EXISTS"
   },
-  "y9LDu9": {
-    "defaultMessage": "已取消授权，若需支持创作者请重试"
-  },
   "yAflVX": {
     "defaultMessage": "草稿已刪除"
   },
@@ -3286,6 +3271,9 @@
   "zKOr2x": {
     "defaultMessage": "已追踪用户占总观看人数比例",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "zOXvqB": {
+    "defaultMessage": "钱包余额不足，请确认余额后重试"
   },
   "zOZ77e": {
     "defaultMessage": "用户协议及隐私条款",

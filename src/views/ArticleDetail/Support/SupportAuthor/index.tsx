@@ -64,11 +64,6 @@ const DynamicBindWalletForm = dynamic(
   { loading: () => <SpinnerBlock /> }
 )
 
-const DynamicApproveUsdtContractForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/ApproveUsdtContract'),
-  { loading: () => <SpinnerBlock /> }
-)
-
 export type SupportAuthorProps = BaseSupportAuthorProps & {
   updateSupportStep: (step: SupportStep) => void
   onClose: () => void
@@ -94,6 +89,16 @@ const SupportAuthor = (props: SupportAuthorProps) => {
 
   const [amount, setAmount] = useState<number>(0)
   const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
+
+  const switchCurrency = async (currency: CURRENCY) => {
+    setAmount(0)
+    setCurrency(currency)
+  }
+
+  const reset = () => {
+    setAmount(0)
+    forward('setAmount')
+  }
 
   const isUSDT = currency === CURRENCY.USDT
   const isLikecoin = currency === CURRENCY.LIKE
@@ -153,17 +158,15 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const isTopup = currStep === 'topup'
   const isWalletSelect = currStep === 'walletSelect'
   const isNetworkSelect = currStep === 'networkSelect'
-  const isApproveContract = currStep === 'approveContract'
   const isBindWallet = currStep === 'bindWallet'
 
-  const showTabs =
-    isSetAmount || isWalletSelect || isNetworkSelect || isApproveContract
+  const showTabs = isSetAmount || isWalletSelect || isNetworkSelect
 
   if ((!hasAuthorAddress && isUSDT) || (!hasAuthorLikeID && isLikecoin)) {
     return (
       <DisableSupport
         currency={currency}
-        setCurrency={setCurrency}
+        setCurrency={switchCurrency}
         recipient={props.recipient}
         onClose={onClose}
       />
@@ -175,13 +178,15 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       {showTabs && (
         <DonationTabs
           currency={currency}
-          setCurrency={setCurrency}
+          setCurrency={switchCurrency}
           recipient={props.recipient}
         />
       )}
       {isSetAmount && (
         <>
           <DynamicPayToFormSetAmount
+            amount={amount}
+            setAmount={setAmount}
             currency={currency}
             recipient={recipient}
             article={article}
@@ -232,7 +237,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       {isComplete && (
         <DynamicPayToFormComplete
           callback={() => {
-            forward('setAmount')
+            reset()
             onClose()
           }}
           recipient={recipient}
@@ -271,18 +276,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
         <>
           <Spacer size="xxloose" />
           <DynamicSwitchNetworkForm
-            submitCallback={() => forward('approveContract')}
-          />
-        </>
-      )}
-      {isApproveContract && (
-        <>
-          <Spacer size="xxloose" />
-          <DynamicApproveUsdtContractForm
-            submitCallback={() => {
-              setCurrency(CURRENCY.USDT)
-              forward('setAmount')
-            }}
+            submitCallback={() => forward('setAmount')}
           />
         </>
       )}
@@ -291,7 +285,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           <DynamicBindWalletForm
             currency={currency}
             callback={() => {
-              forward('setAmount')
+              reset()
               onClose()
             }}
           />

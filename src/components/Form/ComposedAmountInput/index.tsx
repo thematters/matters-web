@@ -79,14 +79,12 @@ const AmountOption: React.FC<AmountOptionProps> = ({
 
   const fieldId = `field-${name}-${amount}`
 
-  const isBalanceInsufficient =
-    typeof balance === 'number' ? balance < amount : false
   const isActive = currentAmount === amount
 
   const amountClasses = classNames({
     [styles.radioInputItem]: true,
     [styles.active]: isActive,
-    'u-area-disable': disabled || isBalanceInsufficient,
+    'u-area-disable': disabled,
   })
 
   const decimals = 0

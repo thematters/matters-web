@@ -474,13 +474,6 @@ export const validateDonationAmount = (
       id: '6CQaLH',
     })
   }
-
-  if (balance < value) {
-    return intl.formatMessage({
-      defaultMessage: 'Custom amount is greater than your balance',
-      id: 'G4bk3r',
-    })
-  }
 }
 
 export const validatePayoutAmount = ({

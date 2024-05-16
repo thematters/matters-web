@@ -12,8 +12,7 @@
   font-size: var(--text20);
   font-weight: var(--font-medium);
   color: var(--color-black);
-  background: var(--color-grey-lighter);
-  border: 1px solid var(--color-grey-lighter);
+  border: 1px solid var(--color-grey-light);
   border-radius: var(--sp8);
   transition-property: color, border-color, background-color;
 

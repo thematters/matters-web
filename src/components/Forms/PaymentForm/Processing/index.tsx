@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { parseUnits } from 'viem'
 import { useAccount, useContractWrite } from 'wagmi'
@@ -215,6 +215,8 @@ const USDTProcessingForm: React.FC<Props> = ({
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
 
+  const [isInSufficientError, setIsInSufficientError] = useState(false)
+
   const {
     data,
     error,
@@ -288,8 +290,14 @@ const USDTProcessingForm: React.FC<Props> = ({
   // error handling
   useEffect(() => {
     const errorName = _get(error, 'cause.name')
+    const reason = _get(error, 'cause.reason')
     if (error && errorName === 'UserRejectedRequestError') {
       switchToConfirm()
+      return
+    }
+
+    if (error && reason === 'ERC20: transfer amount exceeds balance') {
+      setIsInSufficientError(true)
     }
   }, [error])
 
@@ -327,15 +335,27 @@ const USDTProcessingForm: React.FC<Props> = ({
             <>
               <Icon icon={IconCircleTimes} size={40} color="red" />
               <p className={styles.hint}>
-                <FormattedMessage
-                  defaultMessage="Sending failed. Please retry later."
-                  id="fK6ptv"
-                />
-                <br />
-                <FormattedMessage
-                  defaultMessage="Check the wallet status and confirm your network."
-                  id="k6pcz/"
-                />
+                {!isInSufficientError && (
+                  <>
+                    <FormattedMessage
+                      defaultMessage="Sending failed. Please retry later."
+                      id="fK6ptv"
+                    />
+                    <br />
+                    <FormattedMessage
+                      defaultMessage="Check the wallet status and confirm your network."
+                      id="k6pcz/"
+                    />
+                  </>
+                )}
+                {isInSufficientError && (
+                  <>
+                    <FormattedMessage
+                      defaultMessage="Insufficient balance, please make sure you have enough balance and retry"
+                      id="zOXvqB"
+                    />
+                  </>
+                )}
               </p>
             </>
           )}

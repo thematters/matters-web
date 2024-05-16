@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -19,6 +20,7 @@ type BalanceProps = {
   isBalanceInsufficient?: boolean
   showTopUp?: boolean
   switchToAddCredit?: () => void
+  loading?: boolean
 }
 
 export const Balance: React.FC<BalanceProps> = ({
@@ -27,6 +29,7 @@ export const Balance: React.FC<BalanceProps> = ({
   isBalanceInsufficient,
   showTopUp = true,
   switchToAddCredit,
+  loading,
 }) => {
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
@@ -36,9 +39,24 @@ export const Balance: React.FC<BalanceProps> = ({
   const isHKD = currency === CURRENCY.HKD
   const isLike = currency === CURRENCY.LIKE
 
+  if (loading) {
+    return (
+      <span className={styles.container}>
+        <FormattedMessage defaultMessage="Balance loading..." id="E7vGxB" />
+      </span>
+    )
+  }
+
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.insufficient]: isHKD && isBalanceInsufficient,
+  })
+
+  const formattedAmount = formatAmount(amount, isUSDT ? 2 : 0)
+
   return (
-    <span className={styles.container}>
-      {isHKD && !isBalanceInsufficient && (
+    <span className={containerClasses}>
+      {!isBalanceInsufficient && (
         <>
           <FormattedMessage
             defaultMessage="Balance:"
@@ -48,19 +66,17 @@ export const Balance: React.FC<BalanceProps> = ({
           {lang === 'en' && <>&nbsp;</>}
         </>
       )}
-      <span className={styles.balance}>
-        {isHKD && !isBalanceInsufficient && (
-          <span>HKD {formatAmount(amount)}</span>
-        )}
+      <span className={styles.balance} title={formattedAmount}>
+        {isUSDT && <span>USDT {formattedAmount}</span>}
         {isHKD && isBalanceInsufficient && (
           <FormattedMessage
-            defaultMessage="Insufficient balance"
+            defaultMessage="Insufficient: "
             description="src/components/Balance/index.tsx"
-            id="P2tEEn"
+            id="hWq/ii"
           />
         )}
-        {isUSDT && <span>USDT {formatAmount(amount)}</span>}
-        {isLike && <span>LIKE {formatAmount(amount, 0)}</span>}
+        {isHKD && <span>HKD {formattedAmount}</span>}
+        {isLike && <span>LIKE {formattedAmount}</span>}
       </span>
       {isHKD && showTopUp && (
         <BindEmailHintDialog>
@@ -74,7 +90,11 @@ export const Balance: React.FC<BalanceProps> = ({
                     color="gold"
                     weight="medium"
                   >
-                    <FormattedMessage defaultMessage="Top up" id="Y47aYU" />
+                    <FormattedMessage
+                      defaultMessage="Top up"
+                      id="hAyhzq"
+                      description="SUPPORT_HKD"
+                    />
                   </TextIcon>
                 </Button>
               </section>

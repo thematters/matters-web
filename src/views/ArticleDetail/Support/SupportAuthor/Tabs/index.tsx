@@ -8,7 +8,7 @@ import { UserDonationRecipientFragment } from '~/gql/graphql'
 type Props = {
   recipient: UserDonationRecipientFragment
   currency: CURRENCY
-  setCurrency: React.Dispatch<React.SetStateAction<CURRENCY>>
+  setCurrency: (currency: CURRENCY) => void
 }
 
 const DonationTabs = ({ recipient, currency, setCurrency }: Props) => {

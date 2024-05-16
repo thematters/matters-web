@@ -80,9 +80,6 @@
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
-  "/MgyCo": {
-    "defaultMessage": "Back to support"
-  },
   "/NX9L+": {
     "defaultMessage": "Confirm authorization",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
@@ -94,6 +91,9 @@
   "/agKbX": {
     "defaultMessage": "Write a comment",
     "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
+  },
+  "/cyuh2": {
+    "defaultMessage": "Go to Authorization"
   },
   "/dKzfc": {
     "defaultMessage": "This work is archived due to violation of community guidelines."
@@ -230,10 +230,6 @@
     "defaultMessage": "Invitees",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
-  "1r1iQj": {
-    "defaultMessage": "Reauthorize",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "1y1U9f": {
     "defaultMessage": "Liker ID is already taken.",
     "description": "LIKER_USER_ID_EXISTS"
@@ -336,9 +332,6 @@
   },
   "3kbIhS": {
     "defaultMessage": "Untitled"
-  },
-  "3lMsOU": {
-    "defaultMessage": "Reapprove to continue"
   },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to",
@@ -623,6 +616,9 @@
     "defaultMessage": "Unsubscribe Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
+  "9+Ddtu": {
+    "defaultMessage": "Next"
+  },
   "91IQdk": {
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
@@ -893,6 +889,9 @@
   "E048/V": {
     "defaultMessage": "Save as Draft"
   },
+  "E7vGxB": {
+    "defaultMessage": "Balance loading..."
+  },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
   },
@@ -988,9 +987,6 @@
   },
   "G0pqnh": {
     "defaultMessage": "View original content"
-  },
-  "G4bk3r": {
-    "defaultMessage": "Custom amount is greater than your balance"
   },
   "GHxtae": {
     "defaultMessage": "Wallet",
@@ -1431,10 +1427,6 @@
     "defaultMessage": "Forgot password?",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
-  "OA3RuB": {
-    "defaultMessage": "Allow to use USDT in the wallet",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "OIj8pQ": {
     "defaultMessage": "Invitation Sent",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -1483,10 +1475,6 @@
   },
   "P2Btra": {
     "defaultMessage": "Adopted"
-  },
-  "P2tEEn": {
-    "defaultMessage": "Insufficient balance",
-    "description": "src/components/Balance/index.tsx"
   },
   "P3y9Bo": {
     "defaultMessage": "Go to sign",
@@ -1710,9 +1698,6 @@
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "Tgd5id": {
-    "defaultMessage": "Transfer amount exceeds allowance"
-  },
   "ThSfXQ": {
     "defaultMessage": "Successfully added collaborator"
   },
@@ -1881,6 +1866,9 @@
     "defaultMessage": "subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "XMpFQE": {
+    "defaultMessage": "Connection abnormality, please make sure the connection is stable and retry"
+  },
   "XOEFDf": {
     "defaultMessage": "{total} articles"
   },
@@ -1953,10 +1941,6 @@
   },
   "Y8zV4A": {
     "defaultMessage": "Write a comment"
-  },
-  "YAIXL4": {
-    "defaultMessage": "Please confirm authorization in the wallet dialog.{br}Once confirmed, support steps can begin.",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
@@ -2381,11 +2365,19 @@
     "defaultMessage": "Blocked Users",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
   },
+  "hAyhzq": {
+    "defaultMessage": "Top up",
+    "description": "SUPPORT_HKD"
+  },
   "hBLCwn": {
     "defaultMessage": "other amount"
   },
   "hG2cBH": {
     "defaultMessage": "Subscribe Circle"
+  },
+  "hWq/ii": {
+    "defaultMessage": "Insufficient:",
+    "description": "src/components/Balance/index.tsx"
   },
   "hYG5fb": {
     "defaultMessage": "are following",
@@ -3095,10 +3087,6 @@
   "w+6UiO": {
     "defaultMessage": "Add Invitation"
   },
-  "wBpJLd": {
-    "defaultMessage": "Go to allow",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "wCgTu5": {
     "defaultMessage": "Comments"
   },
@@ -3202,9 +3190,6 @@
     "defaultMessage": "This name is already taken.",
     "description": "NAME_EXISTS"
   },
-  "y9LDu9": {
-    "defaultMessage": "Authorization has been cancelled. If you want to support the author, please retry"
-  },
   "yAflVX": {
     "defaultMessage": "Draft has been deleted"
   },
@@ -3286,6 +3271,9 @@
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "zOXvqB": {
+    "defaultMessage": "Insufficient balance, please make sure you have enough balance and retry"
   },
   "zOZ77e": {
     "defaultMessage": "the User Agreement and Privacy Policy.",

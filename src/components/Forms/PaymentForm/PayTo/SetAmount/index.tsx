@@ -2,7 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect, useRef, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { parseUnits } from 'viem'
 import { useAccount } from 'wagmi'
@@ -58,6 +65,8 @@ interface SetAmountCallbackValues {
 }
 
 interface FormProps {
+  amount: number
+  setAmount: Dispatch<SetStateAction<number>>
   currency: CURRENCY
   recipient: UserDonationRecipientFragment
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -70,7 +79,6 @@ interface FormProps {
 
 interface FormValues {
   amount: number
-  customAmount: number
 }
 
 const AMOUNT_DEFAULT = {
@@ -86,6 +94,8 @@ const AMOUNT_OPTIONS = {
 }
 
 const SetAmount: React.FC<FormProps> = ({
+  amount: _amount,
+  setAmount,
   currency,
   recipient,
   article,
@@ -123,10 +133,14 @@ const SetAmount: React.FC<FormProps> = ({
     })
 
   // HKD balance
-  const { data, loading, error } = useQuery<WalletBalanceQuery>(
-    WALLET_BALANCE,
-    { fetchPolicy: 'network-only' }
-  )
+  const {
+    data,
+    refetch: refetchWalletBalance,
+    loading: walletBalanceLoading,
+    error: walletBalanceError,
+  } = useQuery<WalletBalanceQuery>(WALLET_BALANCE, {
+    fetchPolicy: 'network-only',
+  })
 
   // USDT balance & allowance
   const [approveConfirming, setApproveConfirming] = useState(false)
@@ -164,18 +178,17 @@ const SetAmount: React.FC<FormProps> = ({
     values,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: AMOUNT_DEFAULT[currency],
-      customAmount: 0,
+      amount: _amount,
     },
     validateOnBlur: false,
     validateOnChange: true,
-    validate: ({ amount, customAmount }) =>
+    validate: ({ amount }) =>
       _pickBy({
-        amount: validateDonationAmount(customAmount || amount, balance, intl),
+        amount: validateDonationAmount(amount, balance, intl),
         currency: validateCurrency(currency, intl),
       }),
-    onSubmit: async ({ amount, customAmount }, { setSubmitting }) => {
-      const submitAmount = customAmount || amount
+    onSubmit: async ({ amount }, { setSubmitting }) => {
+      const submitAmount = amount
       try {
         if (currency === CURRENCY.LIKE) {
           const result = await payTo({
@@ -213,25 +226,26 @@ const SetAmount: React.FC<FormProps> = ({
     },
   })
 
-  const value = values.customAmount || values.amount
-  const isBalanceInsufficient = balance < value
+  const value = values.amount
+  const isBalanceInsufficient = balance < value || (isHKD && balance === 0)
   const isExceededAllowance =
     isUSDT &&
-    allowanceUSDT > 0n &&
+    allowanceUSDT >= 0n &&
     parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
   const hasUSDTNetworkError =
     isUSDT && (allowanceError || balanceUSDTError || approveError) // TODO: better error handling
-  const networkError =
-    error || hasUSDTNetworkError ? (
-      WALLET_ERROR_MESSAGES[lang].unknown
-    ) : isExceededAllowance && isUSDT ? (
-      <FormattedMessage
-        defaultMessage="Transfer amount exceeds allowance"
-        id="Tgd5id"
-      />
-    ) : (
-      ''
-    )
+  const isUserRejectedError =
+    _get(hasUSDTNetworkError, 'cause.name') === 'UserRejectedRequestError'
+  const hasWalletBalanceError = walletBalanceError && !isUSDT
+  const networkError = hasWalletBalanceError
+    ? intl.formatMessage({
+        defaultMessage:
+          'Connection abnormality, please make sure the connection is stable and retry',
+        id: 'XMpFQE',
+      })
+    : hasUSDTNetworkError && !isUserRejectedError
+    ? WALLET_ERROR_MESSAGES[lang].unknown
+    : ''
 
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (
@@ -250,9 +264,11 @@ const SetAmount: React.FC<FormProps> = ({
 
     return (
       <section>
-        <p>
-          ≈&nbsp;{quoteCurrency}&nbsp;{convertedTotal}
-        </p>
+        {value > 0 && (
+          <p>
+            ≈&nbsp;{quoteCurrency}&nbsp;{convertedTotal}
+          </p>
+        )}
         {hkdHint}
       </section>
     )
@@ -270,6 +286,13 @@ const SetAmount: React.FC<FormProps> = ({
     })()
   }, [approveData])
 
+  useEffect(() => {
+    setFieldValue('amount', _amount, false)
+    if (customInputRef.current) {
+      customInputRef.current.value = _amount <= 0 ? '' : _amount
+    }
+  }, [currency])
+
   /**
    * Rendering
    */
@@ -282,6 +305,7 @@ const SetAmount: React.FC<FormProps> = ({
         balanceLike={balanceLike}
         isBalanceInsufficient={isBalanceInsufficient}
         switchToAddCredit={switchToAddCredit}
+        loading={!!walletBalanceError || walletBalanceLoading}
       />
 
       <Form.ComposedAmountInput
@@ -296,18 +320,19 @@ const SetAmount: React.FC<FormProps> = ({
         onBlur={handleBlur}
         onChange={async (e) => {
           const value = parseInt(e.target.value, 10) || 0
-          await setFieldValue('amount', value, false)
-          await setFieldValue('customAmount', 0, true)
+          await setFieldValue('amount', value, true)
+          setAmount(value)
           e.target.blur()
 
           if (customInputRef.current) {
-            customInputRef.current.value = ''
+            customInputRef.current.value = value
           }
         }}
         // custom input
         customAmount={{
           min: 0,
           max: maxAmount,
+          defaultValue: _amount <= 0 ? '' : _amount,
           step: isUSDT ? '0.01' : undefined,
           onBlur: handleBlur,
           onChange: async (e) => {
@@ -320,8 +345,8 @@ const SetAmount: React.FC<FormProps> = ({
             }
             value = Math.abs(Math.min(value, maxAmount))
 
-            await setFieldValue('customAmount', value, false)
-            await setFieldValue('amount', 0, true)
+            await setFieldValue('amount', value, true)
+            setAmount(value)
 
             // correct the input value if not equal
             const $el = customInputRef.current
@@ -342,11 +367,12 @@ const SetAmount: React.FC<FormProps> = ({
     </Form>
   )
 
-  if (exchangeRateLoading || loading) {
+  if (exchangeRateLoading || walletBalanceLoading) {
     return <SpinnerBlock />
   }
 
   const submitButtonProps = {
+    value: values.amount,
     currency,
     formId,
     recipient,
@@ -359,6 +385,9 @@ const SetAmount: React.FC<FormProps> = ({
     approveConfirming,
     allowanceLoading,
     approveWrite,
+    walletBalanceError,
+    walletBalanceLoading,
+    refetchWalletBalance: () => refetchWalletBalance(),
   }
 
   return (
