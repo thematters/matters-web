@@ -14,6 +14,7 @@ import {
   ArticleAppreciationContext,
   ArticleAppreciationProvider,
   BackToHomeButton,
+  BackToHomeMobileButton,
   EmptyLayout,
   Error,
   Head,
@@ -321,6 +322,10 @@ const BaseArticleDetail = ({
       />
 
       <StickyTopBanner type="inactive" article={article} />
+
+      <Media at="sm">
+        <BackToHomeMobileButton />
+      </Media>
 
       <Media greaterThan="sm">
         <DynamicCommentDrawer
