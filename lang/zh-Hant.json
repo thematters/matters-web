@@ -2326,7 +2326,7 @@
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "gN4jLB": {
-    "defaultMessage": "你的編輯作品 {articleTitle} 已發布到分佈式網絡",
+    "defaultMessage": "你對 {articleTitle} 的修改已發佈到 IPFS",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
   },
   "gS1u3d": {
@@ -2947,7 +2947,7 @@
     "description": "src/views/Me/Works/Drafts/index.tsx"
   },
   "tEeEJT": {
-    "defaultMessage": "你的作品 {articleTitle} 已發布到分佈式網絡",
+    "defaultMessage": "你的作品 {articleTitle} 已發布到 IPFS",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
   "tIDG14": {
