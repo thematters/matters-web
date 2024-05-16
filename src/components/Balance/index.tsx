@@ -62,7 +62,7 @@ export const Balance: React.FC<BalanceProps> = ({
 
   return (
     <span className={containerClasses}>
-      {isHKD && !isBalanceInsufficient && (
+      {!isBalanceInsufficient && (
         <>
           <FormattedMessage
             defaultMessage="Balance:"
