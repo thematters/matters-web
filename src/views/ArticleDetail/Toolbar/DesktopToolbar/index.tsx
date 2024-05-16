@@ -37,6 +37,7 @@ const DesktopToolbar = ({
   const dropdonwActionsProps: DropdownActionsControls = {
     inCard: true,
     hasEdit: true,
+    hasIPFS: true,
     hasBookmark: true,
     hasArchive: true,
     hasAddCollection: true,

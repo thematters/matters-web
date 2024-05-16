@@ -226,33 +226,28 @@ const BaseDropdownActions = ({
   openArchiveUserDialog,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
-  const hasPublic = hasShare || hasIPFS || hasExtend || hasReport
-  const hasPrivate =
-    hasSticky ||
-    hasArchive ||
-    hasSetTagSelected ||
-    hasSetTagUnselected ||
-    hasRemoveTag
+
+  const isAuth = viewer.isAuthed
+  const isAuthor = viewer.id === article.author.id
 
   const Content = () => (
     <Menu>
       {/* public */}
       {hasShare && <ShareButton openDialog={openShareDialog} />}
-      {hasIPFS && <IPFSButton article={article} />}
       {hasExtend && <ExtendButton article={article} />}
-      {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
 
-      {/* private */}
-      {hasPublic && hasPrivate && <Menu.Divider />}
+      {hasSticky && <PinButton article={article} />}
+      {hasBookmark && isAuth && (
+        <BookmarkButton article={article} inCard={inCard} iconSize={20} />
+      )}
+      {hasIPFS && <IPFSButton article={article} />}
+      {hasReport && isAuth && !isAuthor && (
+        <SubmitReport.Button openDialog={openSubmitReportDialog} />
+      )}
+
       {hasEdit && <EditButton article={article} />}
       {hasAddCollection && (
         <AddCollectionButton openDialog={openAddCollectionsArticleDialog} />
-      )}
-
-      {hasSticky && <PinButton article={article} />}
-
-      {hasBookmark && (
-        <BookmarkButton article={article} inCard={inCard} iconSize={20} />
       )}
 
       {hasSetTagSelected && tagDetailId && (
