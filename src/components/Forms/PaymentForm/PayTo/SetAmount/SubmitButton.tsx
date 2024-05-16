@@ -1,3 +1,4 @@
+import { ApolloError } from 'apollo-client'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -30,6 +31,10 @@ type SubmitButtonProps = {
   allowanceLoading: boolean
 
   approveWrite?: () => void
+
+  walletBalanceError?: ApolloError
+  walletBalanceLoading?: boolean
+  refetchWalletBalance?: () => void
 }
 
 const WrapperButton: React.FC<
@@ -58,9 +63,26 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
   isBalanceInsufficient,
   switchToAddCredit,
   value,
+
+  walletBalanceError,
+  walletBalanceLoading,
+  refetchWalletBalance,
 }) => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
+  if (walletBalanceError && refetchWalletBalance) {
+    return (
+      <WrapperButton
+        mode={mode}
+        text={<FormattedMessage defaultMessage="Retry" id="62nsdy" />}
+        form={formId}
+        disabled={walletBalanceLoading}
+        loading={walletBalanceLoading}
+        onClick={refetchWalletBalance}
+      />
+    )
+  }
+
   if (isBalanceInsufficient) {
     const props = {
       mode,

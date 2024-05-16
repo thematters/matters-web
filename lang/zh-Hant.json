@@ -889,6 +889,9 @@
   "E048/V": {
     "defaultMessage": "存至草稿"
   },
+  "E7vGxB": {
+    "defaultMessage": "餘額加載中⋯"
+  },
   "E8W3qa": {
     "defaultMessage": "2-20 個字元"
   },
@@ -1862,6 +1865,9 @@
   "XHMco9": {
     "defaultMessage": "人",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "XMpFQE": {
+    "defaultMessage": "網路連線異常，請確保連線暢通後重試"
   },
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"

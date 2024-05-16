@@ -20,6 +20,7 @@ type BalanceProps = {
   isBalanceInsufficient?: boolean
   showTopUp?: boolean
   switchToAddCredit?: () => void
+  loading?: boolean
 }
 
 export const Balance: React.FC<BalanceProps> = ({
@@ -28,6 +29,7 @@ export const Balance: React.FC<BalanceProps> = ({
   isBalanceInsufficient,
   showTopUp = true,
   switchToAddCredit,
+  loading,
 }) => {
   const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
@@ -36,6 +38,14 @@ export const Balance: React.FC<BalanceProps> = ({
   const isUSDT = currency === CURRENCY.USDT
   const isHKD = currency === CURRENCY.HKD
   const isLike = currency === CURRENCY.LIKE
+
+  if (loading) {
+    return (
+      <span className={styles.container}>
+        <FormattedMessage defaultMessage="Balance loading..." id="E7vGxB" />
+      </span>
+    )
+  }
 
   const containerClasses = classNames({
     [styles.container]: true,

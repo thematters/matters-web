@@ -12,6 +12,7 @@ type SetAmountBalanceProps = {
   balanceLike: number
   isBalanceInsufficient: boolean
   switchToAddCredit: () => void
+  loading?: boolean
 }
 
 const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
@@ -21,6 +22,7 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
   balanceLike,
   isBalanceInsufficient,
   switchToAddCredit,
+  loading,
 }) => {
   const isUSDT = currency === CURRENCY.USDT
   const isHKD = currency === CURRENCY.HKD
@@ -43,6 +45,7 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
           amount={amount}
           isBalanceInsufficient={isBalanceInsufficient}
           switchToAddCredit={switchToAddCredit}
+          loading={loading}
         />
       </span>
     </section>

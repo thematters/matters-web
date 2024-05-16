@@ -889,6 +889,9 @@
   "E048/V": {
     "defaultMessage": "Save as Draft"
   },
+  "E7vGxB": {
+    "defaultMessage": "Balance loading..."
+  },
   "E8W3qa": {
     "defaultMessage": "Must be between 2-20 characters long. Chinese characters, letters, numbers and underscores are allowed."
   },
@@ -1862,6 +1865,9 @@
   "XHMco9": {
     "defaultMessage": "subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "XMpFQE": {
+    "defaultMessage": "Connection abnormality, please make sure the connection is stable and retry"
   },
   "XOEFDf": {
     "defaultMessage": "{total} articles"

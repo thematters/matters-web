@@ -133,10 +133,14 @@ const SetAmount: React.FC<FormProps> = ({
     })
 
   // HKD balance
-  const { data, loading, error } = useQuery<WalletBalanceQuery>(
-    WALLET_BALANCE,
-    { fetchPolicy: 'network-only' }
-  )
+  const {
+    data,
+    refetch: refetchWalletBalance,
+    loading: walletBalanceLoading,
+    error: walletBalanceError,
+  } = useQuery<WalletBalanceQuery>(WALLET_BALANCE, {
+    fetchPolicy: 'network-only',
+  })
 
   // USDT balance & allowance
   const [approveConfirming, setApproveConfirming] = useState(false)
@@ -230,8 +234,18 @@ const SetAmount: React.FC<FormProps> = ({
     parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
   const hasUSDTNetworkError =
     isUSDT && (allowanceError || balanceUSDTError || approveError) // TODO: better error handling
-  const networkError =
-    error || hasUSDTNetworkError ? WALLET_ERROR_MESSAGES[lang].unknown : ''
+  const isUserRejectedError =
+    _get(hasUSDTNetworkError, 'cause.name') === 'UserRejectedRequestError'
+  const hasWalletBalanceError = walletBalanceError && !isUSDT
+  const networkError = hasWalletBalanceError
+    ? intl.formatMessage({
+        defaultMessage:
+          'Connection abnormality, please make sure the connection is stable and retry',
+        id: 'XMpFQE',
+      })
+    : hasUSDTNetworkError && !isUserRejectedError
+    ? WALLET_ERROR_MESSAGES[lang].unknown
+    : ''
 
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (
@@ -291,6 +305,7 @@ const SetAmount: React.FC<FormProps> = ({
         balanceLike={balanceLike}
         isBalanceInsufficient={isBalanceInsufficient}
         switchToAddCredit={switchToAddCredit}
+        loading={!!walletBalanceError || walletBalanceLoading}
       />
 
       <Form.ComposedAmountInput
@@ -352,7 +367,7 @@ const SetAmount: React.FC<FormProps> = ({
     </Form>
   )
 
-  if (exchangeRateLoading || loading) {
+  if (exchangeRateLoading || walletBalanceLoading) {
     return <SpinnerBlock />
   }
 
@@ -370,6 +385,9 @@ const SetAmount: React.FC<FormProps> = ({
     approveConfirming,
     allowanceLoading,
     approveWrite,
+    walletBalanceError,
+    walletBalanceLoading,
+    refetchWalletBalance: () => refetchWalletBalance(),
   }
 
   return (
