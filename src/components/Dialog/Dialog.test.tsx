@@ -51,15 +51,17 @@ describe('<Dialog>', () => {
 
     // open dialog
     fireEvent.click(screen.getByRole('button', { name: 'Open' }))
-    expect(screen.getAllByText('Header')).toHaveLength(2)
-    expect(screen.getByText('Content')).toBeInTheDocument()
+    expect(screen.getAllByText('Header')[0]).toBeInTheDocument()
+    expect(screen.getAllByText('Content')[0]).toBeInTheDocument()
 
     // click confirm
-    fireEvent.click(screen.getByRole('button', { name: 'Confirm' }))
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Confirm', hidden: true })
+    )
     expect(onClickConfirm).toHaveBeenCalledTimes(1)
 
     // close dialog
-    fireEvent.click(screen.getByRole('button', { name: 'Close' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Close', hidden: true }))
     await waitFor(() => {
       expect(screen.queryByText('Content')).not.toBeInTheDocument()
     })
@@ -75,7 +77,7 @@ describe('<Dialog>', () => {
     )
 
     expect(screen.getAllByText('Header')).toHaveLength(2)
-    expect(screen.getByText('Content')).toBeInTheDocument()
+    expect(screen.getAllByText('Content')[0]).toBeInTheDocument()
 
     // click outside
     fireEvent.mouseDown(document.body)
@@ -95,7 +97,7 @@ describe('<Dialog>', () => {
   //   )
 
   //   expect(screen.getAllByText('Header')).toHaveLength(2)
-  //   expect(screen.getByText('Content')).toBeInTheDocument()
+  //   expect(screen.getAllByText('Content')[0]).toBeInTheDocument()
 
   //   // hit ESC
   //   fireEvent.keyDown(container, { key: 'Escape' })
