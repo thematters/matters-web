@@ -4,7 +4,6 @@ import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
-import { useDrag } from 'react-use-gesture'
 
 import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
@@ -30,16 +29,22 @@ export type DialogProps = {
   smBgColor?: 'greyLighter'
   smUpBgColor?: 'greyLighter'
   hidePaddingBottom?: boolean
+  scrollable?: boolean
+
+  disableScrollLock?: boolean
 
   testId?: string
-  scrollable?: boolean
 } & DialogOverlayProps
+
+export type DialogMounterProps = {
+  mounted: boolean
+  setMounted: (val: boolean) => void
+}
 
 const Container: React.FC<
   React.PropsWithChildren<
     {
       style?: React.CSSProperties
-      setDragGoal: (val: any) => void
       initialFocusRef: React.RefObject<any>
     } & DialogProps
   >
@@ -53,7 +58,6 @@ const Container: React.FC<
   dismissOnHandle = true,
   children,
   style,
-  setDragGoal,
   initialFocusRef,
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
@@ -90,14 +94,6 @@ const Container: React.FC<
     closeTopDialog()
   }
 
-  const bind = useDrag(({ down, movement: [, my] }) => {
-    if (!down && my > 30) {
-      onDismiss()
-    } else {
-      setDragGoal({ top: down ? Math.max(my, -30) : 0 })
-    }
-  })
-
   useOutsideClick(node, handleClickOutside)
 
   return (
@@ -121,11 +117,110 @@ const Container: React.FC<
       </VisuallyHidden>
 
       <Media at="sm">
-        {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}
+        {dismissOnHandle && <Handle closeDialog={onDismiss} />}
       </Media>
 
       {children}
     </div>
+  )
+}
+
+const AnimatedDilaog: React.ComponentType<
+  React.PropsWithChildren<DialogProps & DialogMounterProps>
+> = (props) => {
+  const { isOpen, mounted, setMounted, onRest, disableScrollLock, scrollable } =
+    props
+  const initialFocusRef = useRef<any>(null)
+
+  // Fade In/ Fade Out
+  const [{ opacity }, setFade] = useSpring<{
+    opacity: number
+  }>(() => ({
+    opacity: 0,
+    config: { tension: 270 },
+    onRest: (val: any) => {
+      const isFadedOut = _get(val, 'value.opacity') <= 0
+
+      if (isFadedOut) {
+        setMounted(false)
+      }
+
+      if (onRest) {
+        onRest()
+      }
+    },
+  }))
+
+  useEffect(() => {
+    if (isOpen) {
+      setFade({ opacity: 1 })
+    } else {
+      setFade({ opacity: 0 })
+    }
+  }, [isOpen])
+
+  const dialogOverlayClasses = classNames({
+    dialog: true,
+    [styles.scrollable]: !!scrollable,
+    [styles.overlay]: !!mounted,
+  })
+
+  const AnimatedDialogOverlay = animated(DialogOverlay)
+  const AnimatedContainer = animated(Container)
+
+  return (
+    <AnimatedDialogOverlay
+      className={dialogOverlayClasses}
+      initialFocusRef={initialFocusRef}
+      style={{ opacity: opacity as any }}
+      dangerouslyBypassScrollLock={disableScrollLock}
+    >
+      <DialogContent aria-labelledby="dialog-title">
+        <AnimatedContainer
+          style={{ opacity: opacity as any }}
+          initialFocusRef={initialFocusRef}
+          {...props}
+        />
+      </DialogContent>
+    </AnimatedDialogOverlay>
+  )
+}
+
+const SimpleDialog: React.ComponentType<
+  React.PropsWithChildren<DialogProps & DialogMounterProps>
+> = (props) => {
+  const { isOpen, mounted, setMounted, onRest, disableScrollLock, scrollable } =
+    props
+  const initialFocusRef = useRef<any>(null)
+
+  useEffect(() => {
+    if (isOpen) {
+      return
+    }
+
+    setMounted(false)
+
+    if (onRest) {
+      onRest()
+    }
+  }, [isOpen])
+
+  const dialogOverlayClasses = classNames({
+    dialog: true,
+    [styles.scrollable]: !!scrollable,
+    [styles.overlay]: !!mounted,
+  })
+
+  return (
+    <DialogOverlay
+      className={dialogOverlayClasses}
+      initialFocusRef={initialFocusRef}
+      dangerouslyBypassScrollLock={disableScrollLock}
+    >
+      <DialogContent aria-labelledby="dialog-title">
+        <Container initialFocusRef={initialFocusRef} {...props} />
+      </DialogContent>
+    </DialogOverlay>
   )
 }
 
@@ -139,50 +234,14 @@ export const Dialog: React.ComponentType<
   RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
-  const { isOpen, onRest, scrollable } = props
+  const { isOpen } = props
   const [mounted, setMounted] = useState(isOpen)
-  const initialFocusRef = useRef<any>(null)
-
-  // Drag
-  const [{ top }, setDragGoal] = useSpring(() => ({ top: 0 }))
-
-  // Fade In/ Fade Out
-  const [{ opacity }, setFade] = useSpring<{
-    opacity: number
-  }>(() => ({
-    opacity: 0,
-    config: { tension: 270 },
-    onRest: (val: any) => {
-      const isFadedOut = _get(val, 'value.opacity') <= 0
-
-      if (isFadedOut) {
-        setMounted(false)
-        setDragGoal({ top: 0 })
-      }
-
-      if (onRest) {
-        onRest()
-      }
-    },
-  }))
 
   useEffect(() => {
     if (isOpen) {
       setMounted(true)
-      setFade({ opacity: 1 })
-    } else {
-      setFade({ opacity: 0 })
     }
-  })
-
-  const dialogOverlayClasses = classNames({
-    dialog: true,
-    [styles.scrollable]: !!scrollable,
-    [styles.overlay]: !!mounted,
-  })
-
-  const AnimatedDialogOverlay = animated(DialogOverlay)
-  const AnimatedContainer = animated(Container)
+  }, [isOpen])
 
   if (!mounted) {
     return null
@@ -190,20 +249,12 @@ export const Dialog: React.ComponentType<
 
   return (
     <>
-      <AnimatedDialogOverlay
-        className={dialogOverlayClasses}
-        initialFocusRef={initialFocusRef}
-        style={{ opacity: opacity as any }}
-      >
-        <DialogContent aria-labelledby="dialog-title">
-          <AnimatedContainer
-            style={{ opacity: opacity as any, top }}
-            setDragGoal={setDragGoal}
-            initialFocusRef={initialFocusRef}
-            {...props}
-          />
-        </DialogContent>
-      </AnimatedDialogOverlay>
+      <Media at="sm">
+        <SimpleDialog {...props} mounted={mounted} setMounted={setMounted} />
+      </Media>
+      <Media greaterThan="sm">
+        <AnimatedDilaog {...props} mounted={mounted} setMounted={setMounted} />
+      </Media>
     </>
   )
 }

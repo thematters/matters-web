@@ -36,6 +36,7 @@ const BaseCommentFormBetaDialog = ({
         isOpen={show}
         onDismiss={closeDialog}
         onRest={focusEditor}
+        disableScrollLock
         testId={TEST_ID.DIALOG_COMMENT_FORM}
       >
         <CommentForm {...props} closeDialog={closeDialog} />

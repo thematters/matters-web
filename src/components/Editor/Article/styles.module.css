@@ -9,6 +9,7 @@
   & :global(.ProseMirror),
   & :global(.tiptap) {
     min-height: 50vh;
+    min-height: calc(var(--vvh) * 50);
     margin-bottom: var(var(--global-nav-height));
 
     @media (--lg-up) {

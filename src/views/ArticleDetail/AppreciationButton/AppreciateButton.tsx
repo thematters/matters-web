@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
+import { ReactComponent as IconClapFill } from '@/public/static/icons/24px/clap-fill.svg'
 import { ReactComponent as IconSuperLike } from '@/public/static/icons/superlike.svg'
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, numAbbr } from '~/common/utils'
@@ -82,7 +83,11 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
               }}
             >
               <Icon
-                icon={IconClap}
+                icon={
+                  (typeof count === 'number' && count <= 0) || !count
+                    ? IconClap
+                    : IconClapFill
+                }
                 className={[styles.iconLike, clapStyles.iconLike].join(' ')}
                 size={iconSize}
               />

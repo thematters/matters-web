@@ -224,7 +224,7 @@ const AppreciationButton = ({
   if (canAppreciate && !disabled) {
     return (
       <section>
-        <ReCaptcha ref={turnstileRef} action="appreciate" />
+        <ReCaptcha ref={turnstileRef} action="appreciate" silence />
         <AppreciateButton
           onClick={appreciate}
           count={appreciatedCount > 0 ? appreciatedCount : undefined}

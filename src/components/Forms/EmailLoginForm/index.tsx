@@ -274,7 +274,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         ref={turnstileRef}
         action="email_login"
         setToken={setTurnstileToken}
-        silence
       />
 
       <Form id={formId} onSubmit={handleSubmit}>
