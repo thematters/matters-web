@@ -45,11 +45,6 @@ const DynamicPayToFormComplete = dynamic(
   { loading: () => <SpinnerBlock /> }
 )
 
-const DynamicPaymentSetPasswordForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: () => <SpinnerBlock /> }
-)
-
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
   { loading: () => <SpinnerBlock /> }
@@ -159,7 +154,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const isConfirm = currStep === 'confirm'
   const isProcessing = currStep === 'processing'
   const isComplete = currStep === 'complete'
-  const isSetPaymentPassword = currStep === 'setPaymentPassword'
   const isTopup = currStep === 'topup'
   const isWalletSelect = currStep === 'walletSelect'
   const isNetworkSelect = currStep === 'networkSelect'
@@ -256,15 +250,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           currency={currency}
           targetId={targetId}
           switchToBindWallet={() => forward('bindWallet')}
-        />
-      )}
-      {isSetPaymentPassword && (
-        <DynamicPaymentSetPasswordForm
-          submitCallback={() => forward('confirm')}
-          recipient={recipient}
-          amount={amount}
-          currency={currency}
-          switchToSetAmount={() => forward('setAmount')}
         />
       )}
 

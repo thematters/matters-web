@@ -208,10 +208,6 @@
     "defaultMessage": "Balance:",
     "description": "src/components/Balance/index.tsx"
   },
-  "1WeErK": {
-    "defaultMessage": "Welcome to use your wallet! {br} Please set a transaction password first",
-    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
-  },
   "1Z1M77": {
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"

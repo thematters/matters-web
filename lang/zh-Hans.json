@@ -208,10 +208,6 @@
     "defaultMessage": "余额：",
     "description": "src/components/Balance/index.tsx"
   },
-  "1WeErK": {
-    "defaultMessage": "欢迎使用钱包！请先设置交易密码",
-    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
-  },
   "1Z1M77": {
     "defaultMessage": "尚无阅读记录",
     "description": "src/views/Me/History/index.tsx"
