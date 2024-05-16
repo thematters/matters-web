@@ -323,10 +323,6 @@ const BaseArticleDetail = ({
 
       <StickyTopBanner type="inactive" article={article} />
 
-      <Media at="sm">
-        <BackToHomeMobileButton />
-      </Media>
-
       <Media greaterThan="sm">
         <DynamicCommentDrawer
           isOpen={isOpenComment}
@@ -345,6 +341,16 @@ const BaseArticleDetail = ({
       </Media>
 
       <section className={styles.content}>
+        <Media
+          at="sm"
+          style={{
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            display: 'inline-flex',
+          }}
+        >
+          <BackToHomeMobileButton />
+        </Media>
         <section className="u-article-title">
           <h1>{title}</h1>
 

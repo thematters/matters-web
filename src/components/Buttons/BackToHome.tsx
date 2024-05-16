@@ -31,7 +31,7 @@ export const BackToHomeMobileButton = () => {
     <Button href="/">
       <Icon
         icon={IconLogoMobile}
-        style={{ width: 343, height: 51, padding: 20 }}
+        style={{ width: 76, height: 16, left: 0, top: 0 }}
       />
     </Button>
   )
