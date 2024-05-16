@@ -10,7 +10,7 @@ import styles from './styles.module.css'
 type Props = {
   recipient: UserDonationRecipientFragment
   currency: CURRENCY
-  setCurrency: React.Dispatch<React.SetStateAction<CURRENCY>>
+  setCurrency: (currency: CURRENCY) => void
   onClose: () => void
 }
 

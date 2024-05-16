@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 
-import { CircleDigest, DonationDialog } from '~/components'
+import { CircleDigest } from '~/components'
 
+import { SupportDialog } from '../SupportDialog'
 import Donators from './Donators'
 
 export const fragments = {
@@ -22,7 +23,7 @@ export const fragments = {
         ...DonatorsArticle
       }
       ${Donators.fragments.article}
-      ${DonationDialog.fragments.recipient}
+      ${SupportDialog.fragments.recipient}
       ${CircleDigest.Rich.fragments.circle.public}
     `,
     private: gql`

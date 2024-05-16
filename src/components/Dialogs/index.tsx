@@ -45,7 +45,6 @@ export * from './SearchSelectDialog'
 
 // Payment
 export * from './AddCreditDialog'
-export * from './DonationDialog'
 export * from './PayoutDialog'
 export * from './ResetPaymentPasswordDialog'
 export * from './SubscribeCircleDialog'

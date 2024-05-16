@@ -2,7 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect, useRef, useState } from 'react'
+import {
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { parseUnits } from 'viem'
 import { useAccount } from 'wagmi'
@@ -58,6 +65,8 @@ interface SetAmountCallbackValues {
 }
 
 interface FormProps {
+  amount: number
+  setAmount: Dispatch<SetStateAction<number>>
   currency: CURRENCY
   recipient: UserDonationRecipientFragment
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -85,6 +94,8 @@ const AMOUNT_OPTIONS = {
 }
 
 const SetAmount: React.FC<FormProps> = ({
+  amount: _amount,
+  setAmount,
   currency,
   recipient,
   article,
@@ -163,7 +174,7 @@ const SetAmount: React.FC<FormProps> = ({
     values,
   } = useFormik<FormValues>({
     initialValues: {
-      amount: 0,
+      amount: _amount,
     },
     validateOnBlur: false,
     validateOnChange: true,
@@ -261,6 +272,13 @@ const SetAmount: React.FC<FormProps> = ({
     })()
   }, [approveData])
 
+  useEffect(() => {
+    setFieldValue('amount', _amount, false)
+    if (customInputRef.current) {
+      customInputRef.current.value = _amount <= 0 ? '' : _amount
+    }
+  }, [currency])
+
   /**
    * Rendering
    */
@@ -288,6 +306,7 @@ const SetAmount: React.FC<FormProps> = ({
         onChange={async (e) => {
           const value = parseInt(e.target.value, 10) || 0
           await setFieldValue('amount', value, true)
+          setAmount(value)
           e.target.blur()
 
           if (customInputRef.current) {
@@ -298,6 +317,7 @@ const SetAmount: React.FC<FormProps> = ({
         customAmount={{
           min: 0,
           max: maxAmount,
+          defaultValue: _amount <= 0 ? '' : _amount,
           step: isUSDT ? '0.01' : undefined,
           onBlur: handleBlur,
           onChange: async (e) => {
@@ -311,6 +331,7 @@ const SetAmount: React.FC<FormProps> = ({
             value = Math.abs(Math.min(value, maxAmount))
 
             await setFieldValue('amount', value, true)
+            setAmount(value)
 
             // correct the input value if not equal
             const $el = customInputRef.current
