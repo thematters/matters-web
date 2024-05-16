@@ -80,9 +80,6 @@
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
-  "/MgyCo": {
-    "defaultMessage": "Back to support"
-  },
   "/NX9L+": {
     "defaultMessage": "Confirm authorization",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
