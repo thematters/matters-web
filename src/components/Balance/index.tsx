@@ -53,12 +53,6 @@ export const Balance: React.FC<BalanceProps> = ({
   })
 
   const formattedAmount = formatAmount(amount, isUSDT ? 2 : 0)
-  const maxLength = 7
-  let displayValue = formattedAmount
-
-  if (displayValue.length > maxLength) {
-    displayValue = displayValue.slice(0, maxLength) + '...'
-  }
 
   return (
     <span className={containerClasses}>
@@ -73,7 +67,7 @@ export const Balance: React.FC<BalanceProps> = ({
         </>
       )}
       <span className={styles.balance} title={formattedAmount}>
-        {isUSDT && <span>USDT {displayValue}</span>}
+        {isUSDT && <span>USDT {formattedAmount}</span>}
         {isHKD && isBalanceInsufficient && (
           <FormattedMessage
             defaultMessage="Insufficient: "
@@ -81,8 +75,8 @@ export const Balance: React.FC<BalanceProps> = ({
             id="hWq/ii"
           />
         )}
-        {isHKD && <span>HKD {displayValue}</span>}
-        {isLike && <span>LIKE {displayValue}</span>}
+        {isHKD && <span>HKD {formattedAmount}</span>}
+        {isLike && <span>LIKE {formattedAmount}</span>}
       </span>
       {isHKD && showTopUp && (
         <BindEmailHintDialog>

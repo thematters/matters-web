@@ -14,6 +14,7 @@
 
   & .balance {
     font-weight: var(--font-medium);
+    white-space: pre-line;
   }
 
   & .topup {
