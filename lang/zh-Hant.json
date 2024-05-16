@@ -95,6 +95,9 @@
     "defaultMessage": "回覆評論",
     "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
+  "/cyuh2": {
+    "defaultMessage": "前往授權"
+  },
   "/dKzfc": {
     "defaultMessage": "該作品因違反社區約章，已被站方強制歸檔。"
   },
@@ -230,10 +233,6 @@
     "defaultMessage": "免費邀請",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
-  "1r1iQj": {
-    "defaultMessage": "重新授權",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "1y1U9f": {
     "defaultMessage": "Liker ID 已被其他人使用",
     "description": "LIKER_USER_ID_EXISTS"
@@ -336,9 +335,6 @@
   },
   "3kbIhS": {
     "defaultMessage": "未命名"
-  },
-  "3lMsOU": {
-    "defaultMessage": "重新授權後繼續"
   },
   "3phEFL": {
     "defaultMessage": "繼續使用表示您同意",
@@ -1431,10 +1427,6 @@
     "defaultMessage": "忘記密碼？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
-  "OA3RuB": {
-    "defaultMessage": "尚未允許使用錢包裡的 USDT",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "OIj8pQ": {
     "defaultMessage": "成功發送邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -1706,9 +1698,6 @@
     "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考 {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "Tgd5id": {
-    "defaultMessage": "支持金額超出授權額度"
-  },
   "ThSfXQ": {
     "defaultMessage": "添加協作者成功"
   },
@@ -1949,10 +1938,6 @@
   },
   "Y8zV4A": {
     "defaultMessage": "回覆評論"
-  },
-  "YAIXL4": {
-    "defaultMessage": "請於錢包視窗點擊確認授權使用{br}確認完成後即可開始支持步驟",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "YPMn9n": {
     "defaultMessage": "請先登入再進行操作",
@@ -3099,10 +3084,6 @@
   "w+6UiO": {
     "defaultMessage": "新增邀請"
   },
-  "wBpJLd": {
-    "defaultMessage": "前往允許",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "wCgTu5": {
     "defaultMessage": "評論"
   },
@@ -3206,9 +3187,6 @@
     "defaultMessage": "該名稱已被其他使用者使用",
     "description": "NAME_EXISTS"
   },
-  "y9LDu9": {
-    "defaultMessage": "已取消授權，若需支持創作者請重試"
-  },
   "yAflVX": {
     "defaultMessage": "草稿已刪除"
   },
@@ -3290,6 +3268,9 @@
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "zOXvqB": {
+    "defaultMessage": "錢包餘額不足，請確認餘額後重試"
   },
   "zOZ77e": {
     "defaultMessage": "用戶協議及隱私條款",

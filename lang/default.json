@@ -95,6 +95,9 @@
     "defaultMessage": "Write a comment",
     "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
   },
+  "/cyuh2": {
+    "defaultMessage": "Go to Authorization"
+  },
   "/dKzfc": {
     "defaultMessage": "This work is archived due to violation of community guidelines."
   },
@@ -230,10 +233,6 @@
     "defaultMessage": "Invitees",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
-  "1r1iQj": {
-    "defaultMessage": "Reauthorize",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "1y1U9f": {
     "defaultMessage": "Liker ID is already taken.",
     "description": "LIKER_USER_ID_EXISTS"
@@ -336,9 +335,6 @@
   },
   "3kbIhS": {
     "defaultMessage": "Untitled"
-  },
-  "3lMsOU": {
-    "defaultMessage": "Reapprove to continue"
   },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to",
@@ -1431,10 +1427,6 @@
     "defaultMessage": "Forgot password?",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
-  "OA3RuB": {
-    "defaultMessage": "Allow to use USDT in the wallet",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "OIj8pQ": {
     "defaultMessage": "Invitation Sent",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -1706,9 +1698,6 @@
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "Tgd5id": {
-    "defaultMessage": "Transfer amount exceeds allowance"
-  },
   "ThSfXQ": {
     "defaultMessage": "Successfully added collaborator"
   },
@@ -1949,10 +1938,6 @@
   },
   "Y8zV4A": {
     "defaultMessage": "Write a comment"
-  },
-  "YAIXL4": {
-    "defaultMessage": "Please confirm authorization in the wallet dialog.{br}Once confirmed, support steps can begin.",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
   },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
@@ -3099,10 +3084,6 @@
   "w+6UiO": {
     "defaultMessage": "Add Invitation"
   },
-  "wBpJLd": {
-    "defaultMessage": "Go to allow",
-    "description": "src/components/Forms/PaymentForm/ApproveUsdtContract/index.tsx"
-  },
   "wCgTu5": {
     "defaultMessage": "Comments"
   },
@@ -3206,9 +3187,6 @@
     "defaultMessage": "This name is already taken.",
     "description": "NAME_EXISTS"
   },
-  "y9LDu9": {
-    "defaultMessage": "Authorization has been cancelled. If you want to support the author, please retry"
-  },
   "yAflVX": {
     "defaultMessage": "Draft has been deleted"
   },
@@ -3290,6 +3268,9 @@
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "zOXvqB": {
+    "defaultMessage": "Insufficient balance, please make sure you have enough balance and retry"
   },
   "zOZ77e": {
     "defaultMessage": "the User Agreement and Privacy Policy.",

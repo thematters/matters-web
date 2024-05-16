@@ -14,7 +14,6 @@ export type Step =
   // Wallet
   | 'walletSelect'
   | 'networkSelect'
-  | 'approveContract'
   | 'bindWallet'
 
 export interface BaseSupportAuthorProps {

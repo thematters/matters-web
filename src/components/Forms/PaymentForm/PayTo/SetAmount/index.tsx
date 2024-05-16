@@ -215,21 +215,12 @@ const SetAmount: React.FC<FormProps> = ({
   const isBalanceInsufficient = balance < value || (isHKD && balance === 0)
   const isExceededAllowance =
     isUSDT &&
-    allowanceUSDT > 0n &&
+    allowanceUSDT >= 0n &&
     parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
   const hasUSDTNetworkError =
     isUSDT && (allowanceError || balanceUSDTError || approveError) // TODO: better error handling
   const networkError =
-    error || hasUSDTNetworkError ? (
-      WALLET_ERROR_MESSAGES[lang].unknown
-    ) : isExceededAllowance && isUSDT ? (
-      <FormattedMessage
-        defaultMessage="Transfer amount exceeds allowance"
-        id="Tgd5id"
-      />
-    ) : (
-      ''
-    )
+    error || hasUSDTNetworkError ? WALLET_ERROR_MESSAGES[lang].unknown : ''
 
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (

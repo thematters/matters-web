@@ -64,11 +64,6 @@ const DynamicBindWalletForm = dynamic(
   { loading: () => <SpinnerBlock /> }
 )
 
-const DynamicApproveUsdtContractForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/ApproveUsdtContract'),
-  { loading: () => <SpinnerBlock /> }
-)
-
 export type SupportAuthorProps = BaseSupportAuthorProps & {
   updateSupportStep: (step: SupportStep) => void
   onClose: () => void
@@ -153,11 +148,9 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const isTopup = currStep === 'topup'
   const isWalletSelect = currStep === 'walletSelect'
   const isNetworkSelect = currStep === 'networkSelect'
-  const isApproveContract = currStep === 'approveContract'
   const isBindWallet = currStep === 'bindWallet'
 
-  const showTabs =
-    isSetAmount || isWalletSelect || isNetworkSelect || isApproveContract
+  const showTabs = isSetAmount || isWalletSelect || isNetworkSelect
 
   if ((!hasAuthorAddress && isUSDT) || (!hasAuthorLikeID && isLikecoin)) {
     return (
@@ -271,18 +264,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
         <>
           <Spacer size="xxloose" />
           <DynamicSwitchNetworkForm
-            submitCallback={() => forward('approveContract')}
-          />
-        </>
-      )}
-      {isApproveContract && (
-        <>
-          <Spacer size="xxloose" />
-          <DynamicApproveUsdtContractForm
-            submitCallback={() => {
-              setCurrency(CURRENCY.USDT)
-              forward('setAmount')
-            }}
+            submitCallback={() => forward('setAmount')}
           />
         </>
       )}
