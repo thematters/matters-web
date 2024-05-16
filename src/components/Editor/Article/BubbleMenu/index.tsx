@@ -233,8 +233,9 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
               disabled={
-                // @ts-ignore
-                !editor.can().chain().focus().toggleCodeBlock().run() ||
+                (!isCommentEditor &&
+                  // @ts-ignore
+                  !editor.can().chain().focus().toggleCodeBlock().run()) ||
                 editor.isActive('codeBlock')
               }
               className={editor.isActive('blockquote') ? styles.active : ''}
