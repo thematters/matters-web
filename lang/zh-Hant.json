@@ -643,7 +643,7 @@
     "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
   },
   "9UNFGm": {
-    "defaultMessage": "交易密碼"
+    "defaultMessage": "設置交易密碼"
   },
   "9Vkz9W": {
     "defaultMessage": "圖片面積不得超過 1 億像素（如 10,000x10,000 像素）"
@@ -2104,9 +2104,6 @@
   "beLe/F": {
     "defaultMessage": "廣播"
   },
-  "bhehIF": {
-    "defaultMessage": "爲了保護你的資產安全"
-  },
   "c/z318": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2277,6 +2274,9 @@
   },
   "fKkBPz": {
     "defaultMessage": "再次支持"
+  },
+  "fLvbqA": {
+    "defaultMessage": "為了保護你的資產安全，請先設置六位數字交易密碼"
   },
   "fPcF7H": {
     "defaultMessage": "添加合適標籤，讓站內外讀者找到你的作品"
@@ -3195,9 +3195,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "操作無法撤銷，確認封存嗎？"
-  },
-  "yBkdMI": {
-    "defaultMessage": "在儲值前請先設置交易密碼"
   },
   "yCTXXb": {
     "defaultMessage": "請輸入正文…"
