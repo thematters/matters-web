@@ -37,10 +37,12 @@ const DesktopToolbar = ({
   const dropdonwActionsProps: DropdownActionsControls = {
     inCard: true,
     hasEdit: true,
+    hasIPFS: true,
     hasBookmark: true,
     hasArchive: true,
     hasAddCollection: true,
     hasExtend: false,
+    color: 'black',
     ...props,
   }
 
@@ -78,7 +80,7 @@ const DesktopToolbar = ({
           <ShareButton
             iconSize={24}
             inCard={false}
-            // title={makeTitle(article.title)}
+            textActiveColor="greyDarker"
             path={sharePath}
             disabled={lock}
             spacing={[10, 10]}

@@ -1,21 +1,16 @@
 // import Script from 'next/script'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
-import {
-  APPRECIATE_DEBOUNCE,
-  EXTERNAL_LINKS,
-  SYNC_APPRECIATE_BUTTON_COUNT,
-  Z_INDEX,
-} from '~/common/enums'
+import { APPRECIATE_DEBOUNCE, EXTERNAL_LINKS, Z_INDEX } from '~/common/enums'
 import type { TurnstileInstance } from '~/components'
 import {
+  ArticleAppreciationContext,
   ButtonProps,
   ReCaptcha,
   toast,
   Tooltip,
   Translate,
-  useEventListener,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -52,47 +47,25 @@ const AppreciationButton = ({
   ...buttonProps
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
+  const { likesReceivedTotal, appreciateLeft, incrementLikesReceivedTotal } =
+    useContext(ArticleAppreciationContext)
 
   const turnstileRef = useRef<TurnstileInstance>(null)
-  const [uuid, setUuid] = useState('')
-
-  useEffect(() => {
-    setUuid(crypto.randomUUID())
-  }, [])
 
   /**
    * Normal Appreciation
    */
   const [amount, setAmount] = useState(0)
 
-  useEventListener(
-    SYNC_APPRECIATE_BUTTON_COUNT,
-    (detail: CustomEvent['detail']) => {
-      if (detail.uuid !== uuid) {
-        setAmount(detail.amount)
-      }
-    }
-  )
   const [sendAppreciation] =
     useMutation<AppreciateArticleMutation>(APPRECIATE_ARTICLE)
   const limit = article.appreciateLimit
-  const left =
-    (typeof article.appreciateLeft === 'number'
-      ? article.appreciateLeft
-      : limit) - amount
-  const total = article.likesReceivedTotal + amount
+  const left = appreciateLeft
+  const total = likesReceivedTotal
   const appreciatedCount = limit - left
   const isReachLimit = left <= 0
   const debouncedSendAppreciation = useDebouncedCallback(async () => {
     try {
-      window.dispatchEvent(
-        new CustomEvent(SYNC_APPRECIATE_BUTTON_COUNT, {
-          detail: {
-            uuid,
-            amount,
-          },
-        })
-      )
       await sendAppreciation({
         variables: {
           id: article.id,
@@ -187,6 +160,7 @@ const AppreciationButton = ({
       sendSuperLike()
     } else {
       setAmount(amount + 1)
+      incrementLikesReceivedTotal()
       debouncedSendAppreciation()
     }
   }

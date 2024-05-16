@@ -53,6 +53,7 @@ const FixedToolbar = ({
     inCard: true,
     sharePath,
     hasExtend: false,
+    hasIPFS: true,
     hasEdit: true,
     hasArchive: true,
     hasBookmark: true,

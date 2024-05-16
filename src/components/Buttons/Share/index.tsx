@@ -19,13 +19,16 @@ type ShareButtonBaseProps = {
 } & Omit<ShareDialogProps, 'children'>
 
 type ShareButtonProps = ShareButtonBaseProps &
-  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing' | 'disabled'>
+  Pick<
+    ButtonProps,
+    'bgColor' | 'size' | 'spacing' | 'disabled' | 'textActiveColor'
+  >
 
 export const ShareButton: React.FC<
   React.PropsWithChildren<ShareButtonProps>
 > = ({
   children,
-
+  textActiveColor,
   bgColor,
   hasIcon = true,
   iconSize,
@@ -38,14 +41,6 @@ export const ShareButton: React.FC<
 }) => {
   const intl = useIntl()
 
-  const isGreen = bgColor === 'green'
-  const isHalfBlack = bgColor === 'halfBlack'
-  const buttonBgActiveColor =
-    isGreen || isHalfBlack
-      ? undefined
-      : inCard
-      ? 'greyLighterActive'
-      : 'greyLighter'
   const buttonSpacing = spacing || [8, 8]
 
   return (
@@ -54,8 +49,9 @@ export const ShareButton: React.FC<
         <Button
           bgColor={bgColor}
           size={size}
+          textColor={iconColor}
+          textActiveColor={textActiveColor}
           spacing={buttonSpacing}
-          bgActiveColor={buttonBgActiveColor}
           aria-label={intl.formatMessage({
             defaultMessage: 'Share',
             id: 'OKhRC6',
@@ -64,9 +60,7 @@ export const ShareButton: React.FC<
           onClick={openDialog}
           disabled={disabled}
         >
-          {hasIcon && (
-            <Icon icon={IconShare} size={iconSize} color={iconColor} />
-          )}
+          {hasIcon && <Icon icon={IconShare} size={iconSize} />}
           {children}
         </Button>
       )}
