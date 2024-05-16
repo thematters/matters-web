@@ -58,6 +58,7 @@ const FixedToolbar = ({
     hasArchive: true,
     hasBookmark: true,
     hasAddCollection: true,
+    color: 'black',
     ...props,
   }
 
