@@ -38,7 +38,7 @@ export const Balance: React.FC<BalanceProps> = ({
 
   return (
     <span className={styles.container}>
-      {!isBalanceInsufficient && (
+      {isHKD && !isBalanceInsufficient && (
         <>
           <FormattedMessage
             defaultMessage="Balance:"
@@ -49,11 +49,9 @@ export const Balance: React.FC<BalanceProps> = ({
         </>
       )}
       <span className={styles.balance}>
-        {isUSDT && <span>USDT {formatAmount(amount)}</span>}
         {isHKD && !isBalanceInsufficient && (
           <span>HKD {formatAmount(amount)}</span>
         )}
-        {isLike && <span>LIKE {formatAmount(amount, 0)}</span>}
         {isHKD && isBalanceInsufficient && (
           <FormattedMessage
             defaultMessage="Insufficient balance"
@@ -61,6 +59,8 @@ export const Balance: React.FC<BalanceProps> = ({
             id="P2tEEn"
           />
         )}
+        {isUSDT && <span>USDT {formatAmount(amount)}</span>}
+        {isLike && <span>LIKE {formatAmount(amount, 0)}</span>}
       </span>
       {isHKD && showTopUp && (
         <BindEmailHintDialog>
