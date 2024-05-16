@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
+import { TEST_ID } from '~/common/enums'
 import { render, screen, waitFor } from '~/common/utils/test'
 import { MOCK_COLLECTION } from '~/stories/mocks'
 
@@ -29,9 +30,9 @@ describe('<CollectionDigest/DropdownActions>', () => {
     })
     expect($editButton).toBeInTheDocument()
     $editButton.click()
-    const $editDialog = screen.getByRole('dialog', { name: 'Edit collection' })
+    const $editDialog = screen.getByTestId(TEST_ID.DIALOG_EDIT_COLLECTION)
     expect($editDialog).toBeInTheDocument()
-    screen.getByRole('button', { name: 'Close' }).click()
+    screen.getByRole('button', { name: 'Close', hidden: true }).click()
     await waitFor(() => {
       expect(
         screen.queryByRole('button', { name: 'Close' })

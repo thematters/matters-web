@@ -52,7 +52,6 @@ const Container: React.FC<
   smBgColor,
   smUpBgColor,
   hidePaddingBottom,
-  testId,
   onDismiss,
   dismissOnClickOutside = false,
   dismissOnHandle = true,
@@ -98,7 +97,6 @@ const Container: React.FC<
 
   return (
     <div
-      {...(testId ? { 'data-test-id': testId } : {})}
       ref={node}
       className={containerClasses}
       style={style}
@@ -234,7 +232,7 @@ export const Dialog: React.ComponentType<
   RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
-  const { isOpen } = props
+  const { isOpen, testId } = props
   const [mounted, setMounted] = useState(isOpen)
 
   useEffect(() => {
@@ -248,14 +246,14 @@ export const Dialog: React.ComponentType<
   }
 
   return (
-    <>
+    <div {...(testId ? { 'data-test-id': testId } : {})}>
       <Media at="sm">
         <SimpleDialog {...props} mounted={mounted} setMounted={setMounted} />
       </Media>
       <Media greaterThan="sm">
         <AnimatedDilaog {...props} mounted={mounted} setMounted={setMounted} />
       </Media>
-    </>
+    </div>
   )
 }
 
