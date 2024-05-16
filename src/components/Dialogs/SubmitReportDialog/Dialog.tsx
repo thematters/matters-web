@@ -9,6 +9,12 @@ const SUBMIT_REPORT = gql`
   mutation SubmitReport($id: ID!, $reason: ReportReason!) {
     submitReport(input: { targetId: $id, reason: $reason }) {
       id
+      target {
+        ... on Comment {
+          id
+          state
+        }
+      }
     }
   }
 `
