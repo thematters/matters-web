@@ -13,6 +13,7 @@ import {
   Button,
   Head,
   Layout,
+  PaymentPasswordContext,
   SpinnerBlock,
   TableView,
   TextIcon,
@@ -32,6 +33,7 @@ import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 const Wallet = () => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
+  const { hasPaymentPassword } = useContext(PaymentPasswordContext)
 
   const currency = viewer.settings.currency
 
@@ -65,7 +67,6 @@ const Wallet = () => {
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const canPayout = balanceHKD >= PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
   const hasStripeAccount = !!data?.viewer?.wallet.stripeAccount?.id
-  const hasPaymentPassword = viewer.status?.hasPaymentPassword
 
   if (exchangeRateLoading || loading) {
     return (

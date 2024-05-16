@@ -16,6 +16,7 @@ import {
   LanguageProvider,
   Layout,
   MediaContextProvider,
+  PaymentPasswordProvider,
   QueryError,
   TranslationsProvider,
   useRoute,
@@ -110,22 +111,26 @@ const Root = ({
   return (
     <WagmiConfig config={wagmiConfig}>
       <ViewerProvider viewer={viewer}>
-        <LanguageProvider headers={headers}>
-          <FeaturesProvider official={official}>
-            <MediaContextProvider>
-              <TranslationsProvider>
-                {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+        <PaymentPasswordProvider
+          hasPaymentPassword={!!viewer.status?.hasPaymentPassword}
+        >
+          <LanguageProvider headers={headers}>
+            <FeaturesProvider official={official}>
+              <MediaContextProvider>
+                <TranslationsProvider>
+                  {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-                <DynamicToaster />
-                <DynamicAnalyticsInitilizer user={viewer || {}} />
-                <DynamicGlobalDialogs />
-                <DynamicGlobalToasts />
-                <DynamicProgressBar />
-                <DynamicFingerprint />
-              </TranslationsProvider>
-            </MediaContextProvider>
-          </FeaturesProvider>
-        </LanguageProvider>
+                  <DynamicToaster />
+                  <DynamicAnalyticsInitilizer user={viewer || {}} />
+                  <DynamicGlobalDialogs />
+                  <DynamicGlobalToasts />
+                  <DynamicProgressBar />
+                  <DynamicFingerprint />
+                </TranslationsProvider>
+              </MediaContextProvider>
+            </FeaturesProvider>
+          </LanguageProvider>
+        </PaymentPasswordProvider>
       </ViewerProvider>
     </WagmiConfig>
   )

@@ -6,12 +6,12 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { featureSupportedChains } from '~/common/utils'
 import {
   AuthWalletFeed,
+  PaymentPasswordContext,
   SetPaymentPasswordDialog,
   Spacer,
   SpinnerBlock,
   useStep,
   useTargetNetwork,
-  ViewerContext,
 } from '~/components'
 import PaymentProcessingForm from '~/components/Forms/PaymentForm/Processing'
 import { PayToMutation } from '~/gql/graphql'
@@ -67,7 +67,7 @@ export type SupportAuthorProps = BaseSupportAuthorProps & {
 
 const SupportAuthor = (props: SupportAuthorProps) => {
   const { recipient, targetId, article, updateSupportStep, onClose } = props
-  const viewer = useContext(ViewerContext)
+  const { hasPaymentPassword } = useContext(PaymentPasswordContext)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
   const hasAuthorAddress = recipient.info.ethAddress
@@ -110,10 +110,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   ) => {
     setAmount(values.amount)
     setCurrency(values.currency)
-    if (
-      values.currency === CURRENCY.HKD &&
-      !viewer.status?.hasPaymentPassword
-    ) {
+    if (values.currency === CURRENCY.HKD && !hasPaymentPassword) {
       openSetPaymentPasswordDialog()
     } else {
       forward('confirm')
