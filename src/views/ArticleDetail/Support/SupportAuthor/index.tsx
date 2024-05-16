@@ -6,6 +6,7 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { featureSupportedChains } from '~/common/utils'
 import {
   AuthWalletFeed,
+  SetPaymentPasswordDialog,
   Spacer,
   SpinnerBlock,
   useStep,
@@ -108,13 +109,17 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const [tabUrl, setTabUrl] = useState('')
   const [tx, setTx] = useState<PayToMutation['payTo']['transaction']>()
 
-  const setAmountCallback = (values: SetAmountCallbackValues) => {
+  const setAmountCallback = (
+    values: SetAmountCallbackValues,
+    openSetPaymentPasswordDialog: () => void
+  ) => {
     setAmount(values.amount)
     setCurrency(values.currency)
-    if (values.currency === CURRENCY.HKD) {
-      forward(
-        viewer.status?.hasPaymentPassword ? 'confirm' : 'setPaymentPassword'
-      )
+    if (
+      values.currency === CURRENCY.HKD &&
+      !viewer.status?.hasPaymentPassword
+    ) {
+      openSetPaymentPasswordDialog()
     } else {
       forward('confirm')
     }
@@ -184,20 +189,26 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       )}
       {isSetAmount && (
         <>
-          <DynamicPayToFormSetAmount
-            amount={amount}
-            setAmount={setAmount}
-            currency={currency}
-            recipient={recipient}
-            article={article}
-            submitCallback={setAmountCallback}
-            switchToAddCredit={() => {
-              forward('topup')
-            }}
-            setTabUrl={setTabUrl}
-            setTx={setTx}
-            targetId={targetId}
-          />
+          <SetPaymentPasswordDialog submitCallback={() => forward('confirm')}>
+            {({ openDialog: openSetPaymentPasswordDialog }) => (
+              <DynamicPayToFormSetAmount
+                amount={amount}
+                setAmount={setAmount}
+                currency={currency}
+                recipient={recipient}
+                article={article}
+                submitCallback={(value) => {
+                  setAmountCallback(value, openSetPaymentPasswordDialog)
+                }}
+                switchToAddCredit={() => {
+                  forward('topup')
+                }}
+                setTabUrl={setTabUrl}
+                setTx={setTx}
+                targetId={targetId}
+              />
+            )}
+          </SetPaymentPasswordDialog>
         </>
       )}
       {isConfirm && (
