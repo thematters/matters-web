@@ -208,10 +208,6 @@
     "defaultMessage": "余额：",
     "description": "src/components/Balance/index.tsx"
   },
-  "1WeErK": {
-    "defaultMessage": "欢迎使用钱包！请先设置交易密码",
-    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
-  },
   "1Z1M77": {
     "defaultMessage": "尚无阅读记录",
     "description": "src/views/Me/History/index.tsx"
@@ -647,7 +643,7 @@
     "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
   },
   "9UNFGm": {
-    "defaultMessage": "交易密码"
+    "defaultMessage": "设置交易密码"
   },
   "9Vkz9W": {
     "defaultMessage": "图片面积不得超过 1 亿像素（如 10,000 x 10,000 像素）"
@@ -2108,9 +2104,6 @@
   "beLe/F": {
     "defaultMessage": "广播"
   },
-  "bhehIF": {
-    "defaultMessage": "为了保护你的资产安全"
-  },
   "c/z318": {
     "defaultMessage": "邮箱或密码错误",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2281,6 +2274,9 @@
   },
   "fKkBPz": {
     "defaultMessage": "再次支持"
+  },
+  "fLvbqA": {
+    "defaultMessage": "为了保护你的资产安全，请先设置六位数字交易密码"
   },
   "fPcF7H": {
     "defaultMessage": "添加适合标签，帮助读者找到你的作品"
@@ -3199,9 +3195,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "操作无法撤销，确认归档吗？"
-  },
-  "yBkdMI": {
-    "defaultMessage": "在储值前请先设置交易密码"
   },
   "yCTXXb": {
     "defaultMessage": "请输入正文…"
