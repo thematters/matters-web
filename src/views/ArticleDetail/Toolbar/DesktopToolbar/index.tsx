@@ -77,19 +77,21 @@ const DesktopToolbar = ({
         </section>
 
         <section className={styles.right}>
-          <ShareButton
-            iconSize={24}
-            inCard={false}
-            textActiveColor="greyDarker"
-            path={sharePath}
-            disabled={lock}
-            spacing={[10, 10]}
-            tags={articleDetails.tags
-              ?.map(({ content }) => content)
-              .join(' ')
-              .split(/\s+/)
-              .map(normalizeTag)}
-          />
+          <span>
+            <ShareButton
+              iconSize={24}
+              inCard={false}
+              textActiveColor="greyDarker"
+              path={sharePath}
+              disabled={lock}
+              spacing={[10, 10]}
+              tags={articleDetails.tags
+                ?.map(({ content }) => content)
+                .join(' ')
+                .split(/\s+/)
+                .map(normalizeTag)}
+            />
+          </span>
 
           <DropdownActions
             article={articleDetails}
