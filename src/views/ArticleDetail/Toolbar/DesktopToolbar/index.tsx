@@ -93,12 +93,14 @@ const DesktopToolbar = ({
             />
           </span>
 
-          <DropdownActions
-            article={articleDetails}
-            disabled={lock}
-            size={24}
-            {...dropdonwActionsProps}
-          />
+          <span>
+            <DropdownActions
+              article={articleDetails}
+              disabled={lock}
+              size={24}
+              {...dropdonwActionsProps}
+            />
+          </span>
         </section>
       </section>
     </section>
