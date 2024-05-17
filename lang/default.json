@@ -208,10 +208,6 @@
     "defaultMessage": "Balance:",
     "description": "src/components/Balance/index.tsx"
   },
-  "1WeErK": {
-    "defaultMessage": "Welcome to use your wallet! {br} Please set a transaction password first",
-    "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
-  },
   "1Z1M77": {
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
@@ -2108,9 +2104,6 @@
   "beLe/F": {
     "defaultMessage": "Broadcast"
   },
-  "bhehIF": {
-    "defaultMessage": "To protect your assets,"
-  },
   "c/z318": {
     "defaultMessage": "Incorrect email or password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2281,6 +2274,9 @@
   },
   "fKkBPz": {
     "defaultMessage": "Support Again"
+  },
+  "fLvbqA": {
+    "defaultMessage": "To protect the security of your assets, please set a six-digit transaction password first."
   },
   "fPcF7H": {
     "defaultMessage": "Adding tags helps readers find your articles."
@@ -3199,9 +3195,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
-  },
-  "yBkdMI": {
-    "defaultMessage": "please set transaction password before top-up"
   },
   "yCTXXb": {
     "defaultMessage": "Enter content…"

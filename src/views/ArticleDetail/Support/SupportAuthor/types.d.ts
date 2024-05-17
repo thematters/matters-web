@@ -10,7 +10,6 @@ export type Step =
   | 'complete'
   | 'processing'
   | 'resetPassword'
-  | 'setPaymentPassword'
   // Wallet
   | 'walletSelect'
   | 'networkSelect'

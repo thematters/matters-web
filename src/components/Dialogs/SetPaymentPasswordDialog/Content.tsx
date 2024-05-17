@@ -27,17 +27,12 @@ const SetPaymentPasswordContent: React.FC<FormProps> = ({
   const isInComparedPassword = currStep === 'comparedPassword'
 
   const header = (
-    <section className={styles.reason}>
+    <section className={styles.hint}>
       {isInPassword && (
         <p>
           <FormattedMessage
-            defaultMessage="To protect your assets,"
-            id="bhehIF"
-          />
-          <br />
-          <FormattedMessage
-            defaultMessage="please set transaction password before top-up"
-            id="yBkdMI"
+            defaultMessage="To protect the security of your assets, please set a six-digit transaction password first."
+            id="fLvbqA"
           />
         </p>
       )}
@@ -51,13 +46,6 @@ const SetPaymentPasswordContent: React.FC<FormProps> = ({
           />
         </p>
       )}
-
-      <p className={styles.hint}>
-        <FormattedMessage
-          defaultMessage="Enter a 6-digit payment password."
-          id="OpeFTV"
-        />
-      </p>
     </section>
   )
 
