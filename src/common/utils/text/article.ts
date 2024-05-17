@@ -17,6 +17,9 @@ export const stripHtml = (
 ) => {
   html = String(html) || ''
 
+  html = html.replace(/\&nbsp\;/g, ' ')
+
+  // Replace block-level elements with newlines
   html = html.replace(/<(\/?p|\/?blockquote|br\/?)>/gi, lineReplacement)
 
   // Remove remaining HTML tags
@@ -27,7 +30,6 @@ export const stripHtml = (
 
   return plainText
 }
-
 /**
  * Return beginning of text in html as summary, split on sentence break within buffer range.
  * @param html - html string to extract summary
