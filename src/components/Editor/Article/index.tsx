@@ -1,6 +1,5 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
-import classNames from 'classnames'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -57,6 +56,13 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       const content = editor.getHTML()
       debouncedUpdate({ content })
     },
+    // toggle body class
+    onFocus: () => {
+      document.body.classList.add('editor-focused')
+    },
+    onBlur: () => {
+      document.body.classList.remove('editor-focused')
+    },
     mentionSuggestion: makeMentionSuggestion({ client }),
     extensions: [
       FigureEmbedLinkInput,
@@ -74,9 +80,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
 
   return (
     <div
-      className={classNames({
-        [styles.articleEditor]: true,
-      })}
+      className={styles.articleEditor}
       id="editor" // anchor for mention plugin
     >
       <EditorTitle defaultValue={title || ''} update={update} />
