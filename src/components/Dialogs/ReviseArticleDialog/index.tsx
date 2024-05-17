@@ -33,8 +33,8 @@ export const ReviseArticleDialog = ({ children, revisionCountLeft }: Props) => {
           <Dialog.Content.Message align="left" smUpAlign="left">
             <p>
               <FormattedMessage
-                defaultMessage='After the modification is completed, the new version will be released to IPFS again. You can view the historical version from "...published on IPFS" under the article title.'
-                id="HJcB0d"
+                defaultMessage='After the modification is completed, the new version will be released to IPFS again. You can view the historical version from "IPFS" under the article title.'
+                id="XZ8IJ3"
               />
             </p>
           </Dialog.Content.Message>

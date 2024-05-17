@@ -19,6 +19,7 @@
     position: absolute;
     inset: 0;
     padding: var(--sp32) 0 var(--sp8);
+    white-space: break-spaces;
   }
 
   & .left,

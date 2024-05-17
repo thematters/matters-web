@@ -1050,9 +1050,6 @@
   "HJ0iZJ": {
     "defaultMessage": "確認封存"
   },
-  "HJcB0d": {
-    "defaultMessage": "完成修改後，新版會再次發佈到 IPFS，你可以從文章標題下的「…更新於 IPFS」進入查看歷史版本。"
-  },
   "HPVOw/": {
     "defaultMessage": "數字錢包",
     "description": "src/views/Me/Settings/Settings/index.tsx"
@@ -1887,6 +1884,9 @@
   "XYUhx0": {
     "defaultMessage": "解綁 {type}",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
+  "XZ8IJ3": {
+    "defaultMessage": "完成修改後，新版會再次發佈到 IPFS，你可以從文章標題下的「IPFS」進入查看歷史版本。"
   },
   "Xd0J7Y": {
     "defaultMessage": "開放社區"

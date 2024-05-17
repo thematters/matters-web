@@ -1050,9 +1050,6 @@
   "HJ0iZJ": {
     "defaultMessage": "Confirm Archiving"
   },
-  "HJcB0d": {
-    "defaultMessage": "After the modification is completed, the new version will be released to IPFS again. You can view the historical version from \"...published on IPFS\" under the article title."
-  },
   "HPVOw/": {
     "defaultMessage": "Wallet",
     "description": "src/views/Me/Settings/Settings/index.tsx"
@@ -1887,6 +1884,9 @@
   "XYUhx0": {
     "defaultMessage": "Disconnect from {type}",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
+  "XZ8IJ3": {
+    "defaultMessage": "After the modification is completed, the new version will be released to IPFS again. You can view the historical version from \"IPFS\" under the article title."
   },
   "Xd0J7Y": {
     "defaultMessage": "Open Source"
