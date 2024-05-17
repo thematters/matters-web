@@ -84,7 +84,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
     [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
   })
 
-  const enbableSticky = !isInArticleDetailHistory && !isInEditor
+  const enbableSticky = !isInArticleDetailHistory
 
   usePullToRefresh.Register('#ptr')
   usePullToRefresh.Handler(() => window.location.reload())
