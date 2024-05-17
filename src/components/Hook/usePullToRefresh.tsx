@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import ReactDOMServer from 'react-dom/server'
 
 import { ReactComponent as IconPullToRefresh } from '@/public/static/icons/24px/pull-to-refresh.svg'
-import { analytics, sleep } from '~/common/utils'
+import { analytics, dom, sleep } from '~/common/utils'
 import { Spinner, withIcon } from '~/components'
 
 import { useEventListener } from './useEventListener'
@@ -60,6 +60,15 @@ const Register = (selector = 'body', timeout = PTR_TIMEOUT) => {
         withIcon(IconPullToRefresh)({ size: 24 })
       ),
       iconRefreshing: ReactDOMServer.renderToString(<Spinner size={24} />),
+      shouldPullToRefresh: () => {
+        // prevent PTR when dialog is open
+        const dialog = dom.$('[data-reach-dialog-overlay]')
+        if (dialog) {
+          return false
+        }
+
+        return true
+      },
     })
   }
 

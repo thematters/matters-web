@@ -1,14 +1,7 @@
 import classNames from 'classnames'
 import Sticky from 'react-stickynode'
 
-import {
-  Head,
-  Media,
-  PullToRefresh,
-  SearchBar,
-  usePullToRefresh,
-  useRoute,
-} from '~/components'
+import { Head, Media, PullToRefresh, SearchBar, useRoute } from '~/components'
 
 import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
@@ -86,12 +79,9 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
 
   const enbableSticky = !isInArticleDetailHistory
 
-  usePullToRefresh.Register('#ptr')
-  usePullToRefresh.Handler(() => window.location.reload())
-
   return (
     <>
-      <article id="ptr" className={articleClasses}>
+      <article className={articleClasses}>
         <PullToRefresh>{children}</PullToRefresh>
       </article>
 

@@ -1,5 +1,6 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { VisuallyHidden } from '@reach/visually-hidden'
+import { useDrag } from '@use-gesture/react'
 import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useEffect, useRef, useState } from 'react'
@@ -85,6 +86,14 @@ const Container: React.FC<
     onDismiss()
   }
 
+  const bind = useDrag(({ down, movement: [, y] }) => {
+    if (!down && y > 30) {
+      onDismiss()
+    } else {
+      node.current.style.transform = `translateY(${Math.max(y, 0)}px)`
+    }
+  })
+
   const handleClickOutside = () => {
     if (!dismissOnClickOutside) {
       return
@@ -115,7 +124,7 @@ const Container: React.FC<
       </VisuallyHidden>
 
       <Media at="sm">
-        {dismissOnHandle && <Handle closeDialog={onDismiss} />}
+        {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}
       </Media>
 
       {children}
