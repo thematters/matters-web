@@ -6,11 +6,12 @@ import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { featureSupportedChains } from '~/common/utils'
 import {
   AuthWalletFeed,
+  PaymentPasswordContext,
+  SetPaymentPasswordDialog,
   Spacer,
   SpinnerBlock,
   useStep,
   useTargetNetwork,
-  ViewerContext,
 } from '~/components'
 import PaymentProcessingForm from '~/components/Forms/PaymentForm/Processing'
 import { PayToMutation } from '~/gql/graphql'
@@ -44,11 +45,6 @@ const DynamicPayToFormComplete = dynamic(
   { loading: () => <SpinnerBlock /> }
 )
 
-const DynamicPaymentSetPasswordForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: () => <SpinnerBlock /> }
-)
-
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
   { loading: () => <SpinnerBlock /> }
@@ -71,7 +67,7 @@ export type SupportAuthorProps = BaseSupportAuthorProps & {
 
 const SupportAuthor = (props: SupportAuthorProps) => {
   const { recipient, targetId, article, updateSupportStep, onClose } = props
-  const viewer = useContext(ViewerContext)
+  const { hasPaymentPassword } = useContext(PaymentPasswordContext)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
   const hasAuthorAddress = recipient.info.ethAddress
@@ -108,13 +104,14 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const [tabUrl, setTabUrl] = useState('')
   const [tx, setTx] = useState<PayToMutation['payTo']['transaction']>()
 
-  const setAmountCallback = (values: SetAmountCallbackValues) => {
+  const setAmountCallback = (
+    values: SetAmountCallbackValues,
+    openSetPaymentPasswordDialog: () => void
+  ) => {
     setAmount(values.amount)
     setCurrency(values.currency)
-    if (values.currency === CURRENCY.HKD) {
-      forward(
-        viewer.status?.hasPaymentPassword ? 'confirm' : 'setPaymentPassword'
-      )
+    if (values.currency === CURRENCY.HKD && !hasPaymentPassword) {
+      openSetPaymentPasswordDialog()
     } else {
       forward('confirm')
     }
@@ -154,7 +151,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const isConfirm = currStep === 'confirm'
   const isProcessing = currStep === 'processing'
   const isComplete = currStep === 'complete'
-  const isSetPaymentPassword = currStep === 'setPaymentPassword'
   const isTopup = currStep === 'topup'
   const isWalletSelect = currStep === 'walletSelect'
   const isNetworkSelect = currStep === 'networkSelect'
@@ -184,20 +180,26 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       )}
       {isSetAmount && (
         <>
-          <DynamicPayToFormSetAmount
-            amount={amount}
-            setAmount={setAmount}
-            currency={currency}
-            recipient={recipient}
-            article={article}
-            submitCallback={setAmountCallback}
-            switchToAddCredit={() => {
-              forward('topup')
-            }}
-            setTabUrl={setTabUrl}
-            setTx={setTx}
-            targetId={targetId}
-          />
+          <SetPaymentPasswordDialog submitCallback={() => forward('confirm')}>
+            {({ openDialog: openSetPaymentPasswordDialog }) => (
+              <DynamicPayToFormSetAmount
+                amount={amount}
+                setAmount={setAmount}
+                currency={currency}
+                recipient={recipient}
+                article={article}
+                submitCallback={(value) => {
+                  setAmountCallback(value, openSetPaymentPasswordDialog)
+                }}
+                switchToAddCredit={() => {
+                  forward('topup')
+                }}
+                setTabUrl={setTabUrl}
+                setTx={setTx}
+                targetId={targetId}
+              />
+            )}
+          </SetPaymentPasswordDialog>
         </>
       )}
       {isConfirm && (
@@ -245,15 +247,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           currency={currency}
           targetId={targetId}
           switchToBindWallet={() => forward('bindWallet')}
-        />
-      )}
-      {isSetPaymentPassword && (
-        <DynamicPaymentSetPasswordForm
-          submitCallback={() => forward('confirm')}
-          recipient={recipient}
-          amount={amount}
-          currency={currency}
-          switchToSetAmount={() => forward('setAmount')}
         />
       )}
 

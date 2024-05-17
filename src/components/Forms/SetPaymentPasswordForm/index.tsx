@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
@@ -10,7 +10,7 @@ import {
   validateComparedPassword,
   validatePaymentPassword,
 } from '~/common/utils'
-import { Form, useMutation } from '~/components'
+import { Form, PaymentPasswordContext, useMutation } from '~/components'
 import { SetPaymentPasswordMutation } from '~/gql/graphql'
 
 interface FormProps {
@@ -30,9 +30,10 @@ const SET_PAYMENT_PASSWORD = gql`
   mutation SetPaymentPassword($password: String) {
     updateUserInfo(input: { paymentPassword: $password }) {
       id
-      status {
-        hasPaymentPassword
-      }
+      # FIXME: Returning this field forces all dialog to close
+      # status {
+      #   hasPaymentPassword
+      # }
     }
   }
 `
@@ -45,6 +46,7 @@ export const SetPaymentPasswordForm: React.FC<FormProps> = ({
   header,
 }) => {
   const intl = useIntl()
+  const { setHasPaymentPassword } = useContext(PaymentPasswordContext)
 
   const [setPassword] = useMutation<SetPaymentPasswordMutation>(
     SET_PAYMENT_PASSWORD,
@@ -95,6 +97,7 @@ export const SetPaymentPasswordForm: React.FC<FormProps> = ({
     onSubmit: async ({ password }, { setFieldError, setSubmitting }) => {
       try {
         await setPassword({ variables: { password } })
+        setHasPaymentPassword(true)
 
         setSubmitting(false)
         submitCallback()

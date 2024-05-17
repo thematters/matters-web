@@ -2,7 +2,6 @@
   @mixin flex-center-all;
 
   width: 100%;
-  padding: 0 var(--sp16);
   margin: 0 auto;
 
   & .pinInputItem {

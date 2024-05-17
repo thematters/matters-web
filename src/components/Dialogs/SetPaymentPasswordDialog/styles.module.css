@@ -1,15 +1,7 @@
-.reason {
-  padding: var(--sp24) 0;
-  margin: 0 var(--sp16);
-  font-size: var(--text16);
-  font-weight: var(--font-bold);
-  line-height: 1.5rem;
-  text-align: center;
-}
-
 .hint {
-  margin-top: var(--sp8);
+  margin-bottom: var(--sp24);
   font-size: var(--text14);
-  font-weight: var(--font-normal);
-  color: var(--color-grey);
+  line-height: 1.375rem;
+  color: var(--color-grey-darker);
+  text-align: left;
 }
