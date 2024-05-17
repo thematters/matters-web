@@ -4,7 +4,6 @@ import Sticky from 'react-stickynode'
 import {
   Head,
   Media,
-  PullToRefresh,
   SearchBar,
   usePullToRefresh,
   useRoute,
@@ -92,7 +91,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
   return (
     <>
       <article id="ptr" className={articleClasses}>
-        <PullToRefresh>{children}</PullToRefresh>
+        {children}
       </article>
 
       {showAside && (
