@@ -45,10 +45,10 @@
 .handle {
   position: absolute;
   top: 0;
-  left: 50%;
+  left: 0;
   z-index: calc(var(--z-index-dialog) + 1);
-  padding: var(--sp8);
-  transform: translateX(-50%);
+  width: 100%;
+  padding: var(--sp8) 0 var(--sp16);
 
   & .icon {
     display: inline-block;
