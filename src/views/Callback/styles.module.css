@@ -2,6 +2,7 @@
   @mixin flex-center-all;
 
   height: 100dvh;
+  height: calc(var(--vvh) * 100);
 
   & .logo {
     & svg {

@@ -1,26 +1,38 @@
 import { useEffect } from 'react'
 
-import { useEventListener } from '~/components'
+// import { useEventListener } from '~/components'
 
 export const ClientUpdater = () => {
-  const visualViewport =
-    typeof window !== 'undefined' ? window.visualViewport : undefined
+  // const visualViewport =
+  //   typeof window !== 'undefined' ? window.visualViewport : undefined
+
+  // const upadteVVH = () => {
+  //   if (!visualViewport) {
+  //     return
+  //   }
+
+  //   const vvh = (visualViewport.height || 0) / 100 + 'px'
+  //   document.documentElement.style.setProperty('--vvh', vvh)
+  // }
+  // useEventListener(
+  //   'resize',
+  //   () => {
+  //     upadteVVH()
+  //   },
+  //   visualViewport
+  // )
+
+  const innerHeight =
+    typeof window !== 'undefined' ? window.innerHeight : undefined
 
   const upadteVVH = () => {
-    if (!visualViewport) {
+    if (!innerHeight) {
       return
     }
 
-    const vvh = (visualViewport.height || 0) / 100 + 'px'
+    const vvh = (innerHeight || 0) / 100 + 'px'
     document.documentElement.style.setProperty('--vvh', vvh)
   }
-  useEventListener(
-    'resize',
-    () => {
-      upadteVVH()
-    },
-    visualViewport
-  )
 
   useEffect(() => {
     upadteVVH()

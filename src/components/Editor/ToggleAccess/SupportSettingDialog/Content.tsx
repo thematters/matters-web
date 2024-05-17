@@ -187,7 +187,7 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content noMaxHeight>
+      <Dialog.Content fixedHeight>
         <section className={styles.tabs}>
           <Tab tabType={tabType} setTabType={changeTabType} />
         </section>
