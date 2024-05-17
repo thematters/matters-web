@@ -563,6 +563,9 @@
     "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
+  "7oytv9": {
+    "defaultMessage": "（修改过）"
+  },
   "7xnrxG": {
     "defaultMessage": "作品已添加至精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
@@ -2325,9 +2328,6 @@
   },
   "gluNT8": {
     "defaultMessage": "輸入連結地址"
-  },
-  "gy/Kkr": {
-    "defaultMessage": "（修改过）"
   },
   "gz0EGC": {
     "defaultMessage": "編輯作品已發佈"

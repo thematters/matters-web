@@ -31,3 +31,7 @@
   margin: 0 var(--sp8);
   color: var(--color-grey-darker);
 }
+
+.edited {
+  white-space: break-spaces;
+}

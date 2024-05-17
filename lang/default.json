@@ -563,6 +563,9 @@
     "defaultMessage": "No results",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
+  "7oytv9": {
+    "defaultMessage": "(edited)"
+  },
   "7xnrxG": {
     "defaultMessage": "The article has been added to the Trending",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
@@ -2325,9 +2328,6 @@
   },
   "gluNT8": {
     "defaultMessage": "Enter URL"
-  },
-  "gy/Kkr": {
-    "defaultMessage": "(edited)"
   },
   "gz0EGC": {
     "defaultMessage": "Article republished"
