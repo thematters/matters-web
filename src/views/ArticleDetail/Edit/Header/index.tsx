@@ -2,7 +2,7 @@ import _isEqual from 'lodash/isEqual'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_CONTENT_LENGTH } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { stripHtml, toPath } from '~/common/utils'
 import { Button, TextIcon, toast, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
@@ -111,7 +111,7 @@ const EditModeHeader = ({
     isSensitiveRevised ||
     restProps.iscnPublish
 
-  const contentLength = revision.content?.length || 0
+  const contentLength = stripHtml(revision.content || '').length
   const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
 
   const onSave = async () => {

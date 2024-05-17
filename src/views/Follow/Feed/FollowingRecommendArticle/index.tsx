@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { stripHtml, toPath } from '~/common/utils'
+import { makeSummary, toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
@@ -21,7 +21,7 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
   const { author, summary, title } = article
   const isBanned = article.recommendArticleState === 'banned'
   const cover = !isBanned ? article.cover : null
-  const cleanedSummary = isBanned ? '' : stripHtml(summary)
+  const cleanedSummary = isBanned ? '' : makeSummary(summary)
   const path = toPath({
     page: 'articleDetail',
     article,
