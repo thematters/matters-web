@@ -7,7 +7,6 @@ import { formatAmount } from '~/common/utils'
 import {
   BindEmailHintDialog,
   Button,
-  LanguageContext,
   TextIcon,
   ViewerContext,
 } from '~/components'
@@ -28,7 +27,7 @@ const BalanceMessage: React.FC<{
   isBalanceInsufficient: boolean
 }> = ({ isHKD, isBalanceInsufficient }) => {
   return (
-    <>
+    <span className={styles.message}>
       {isHKD && isBalanceInsufficient ? (
         <FormattedMessage
           defaultMessage="Insufficient: "
@@ -42,7 +41,7 @@ const BalanceMessage: React.FC<{
           id="1U/MPD"
         />
       )}
-    </>
+    </span>
   )
 }
 
@@ -97,7 +96,6 @@ export const Balance: React.FC<BalanceProps> = ({
   switchToAddCredit,
   loading = false,
 }) => {
-  const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
 
@@ -127,7 +125,6 @@ export const Balance: React.FC<BalanceProps> = ({
           isHKD={isHKD}
           isBalanceInsufficient={isBalanceInsufficient}
         />
-        {lang === 'en' && <>&nbsp;</>}
       </>
       <span className={styles.balance} title={formattedAmount}>
         <BalanceAmount currency={currency} formattedAmount={formattedAmount} />

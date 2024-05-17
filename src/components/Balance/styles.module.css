@@ -30,3 +30,7 @@
     }
   }
 }
+
+.message {
+  white-space: break-spaces;
+}

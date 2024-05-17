@@ -205,7 +205,7 @@
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
   "1U/MPD": {
-    "defaultMessage": "Balance:",
+    "defaultMessage": "Balance: ",
     "description": "src/components/Balance/index.tsx"
   },
   "1Z1M77": {
