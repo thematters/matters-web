@@ -2,7 +2,7 @@ import React from 'react'
 
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
-import { stripHtml, toPath } from '~/common/utils'
+import { makeSummary, toPath } from '~/common/utils'
 import {
   DateTime,
   Icon,
@@ -59,7 +59,7 @@ const BaseArticleDigestFeed = ({
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
-  const cleanedSummary = isBanned ? '' : stripHtml(summary)
+  const cleanedSummary = isBanned ? '' : makeSummary(summary)
 
   const path = toPath({
     page: 'articleDetail',

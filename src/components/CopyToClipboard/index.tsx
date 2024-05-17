@@ -1,6 +1,7 @@
 import * as clipboard from 'clipboard-polyfill'
 import { FormattedMessage } from 'react-intl'
 
+import { stripHtml } from '~/common/utils'
 import { toast } from '~/components'
 
 interface CopyToClipboardProps {
@@ -24,9 +25,11 @@ export const CopyToClipboard: React.FC<CopyToClipboardProps> = ({
     let item = new clipboard.ClipboardItem({
       'text/plain': new Blob([text], { type: 'text/plain' }),
     })
+
     if (type === 'html') {
       item = new clipboard.ClipboardItem({
         'text/html': new Blob([text], { type: 'text/html' }),
+        'text/plain': new Blob([stripHtml(text)], { type: 'text/plain' }),
       })
     }
 

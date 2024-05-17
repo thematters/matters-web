@@ -80,8 +80,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''
   )
-  const contentCount = stripHtml(content).trim().length
-
+  const contentCount = stripHtml(content).length
   const isValid = contentCount > 0 && contentCount <= MAX_ARTICLE_COMMENT_LENGTH
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
