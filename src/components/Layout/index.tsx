@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import Sticky from 'react-stickynode'
 
-import { Head, Media, PullToRefresh, SearchBar, useRoute } from '~/components'
+import { Head, Media, SearchBar, useRoute } from '~/components'
 
 import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
@@ -81,9 +81,7 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
 
   return (
     <>
-      <article className={articleClasses}>
-        <PullToRefresh>{children}</PullToRefresh>
-      </article>
+      <article className={articleClasses}>{children}</article>
 
       {showAside && (
         <aside className={styles.aside}>
