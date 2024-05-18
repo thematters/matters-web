@@ -3,7 +3,11 @@ import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { INPUT_DEBOUNCE } from '~/common/enums'
+import {
+  BYPASS_SCROLL_LOCK,
+  ENBABLE_SCROLL_LOCK,
+  INPUT_DEBOUNCE,
+} from '~/common/enums'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
@@ -56,12 +60,16 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       const content = editor.getHTML()
       debouncedUpdate({ content })
     },
-    // toggle body class
+    // FIXME: toggle body class and scroll lock when editor is focused
+    // can be removed if editor is only used in single page
+    // instead of being used in dialog
     onFocus: () => {
       document.body.classList.add('editor-focused')
+      window.dispatchEvent(new CustomEvent(BYPASS_SCROLL_LOCK))
     },
     onBlur: () => {
       document.body.classList.remove('editor-focused')
+      window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
     extensions: [

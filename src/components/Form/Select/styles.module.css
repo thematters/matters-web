@@ -9,7 +9,7 @@
 .options {
   width: 100%;
   max-height: 50vh;
-  max-height: calc(var(--vvh) * 50);
+  max-height: calc(var(--ih) * 50);
   padding-top: var(--sp8);
   padding-bottom: var(--sp8);
   overflow: auto;
@@ -18,7 +18,7 @@
 
   @media (--sm-up) {
     max-height: 30vh;
-    max-height: calc(var(--vvh) * 30);
+    max-height: calc(var(--ih) * 30);
   }
 
   &.dropdown {

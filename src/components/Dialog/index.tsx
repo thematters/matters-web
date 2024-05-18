@@ -1,141 +1,39 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { VisuallyHidden } from '@reach/visually-hidden'
-import { useDrag } from '@use-gesture/react'
 import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 
-import { KEYVALUE } from '~/common/enums'
-import { capitalizeFirstLetter, dom } from '~/common/utils'
-import { Media, useOutsideClick } from '~/components'
+import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
+import { Media, useEventListener } from '~/components'
 
 import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
 import Footer from './Footer'
-import Handle from './Handle'
 import Header from './Header'
+import Inner, { DialogInnerProps } from './Inner'
 import Lazy from './Lazy'
 import styles from './styles.module.css'
 
-export interface DialogOverlayProps {
+export type DialogProps = {
   isOpen: boolean | undefined
   onDismiss: () => void
   onRest?: () => void
-  dismissOnClickOutside?: boolean
-  dismissOnHandle?: boolean
-}
 
-export type DialogProps = {
-  smBgColor?: 'greyLighter'
-  smUpBgColor?: 'greyLighter'
-  hidePaddingBottom?: boolean
   scrollable?: boolean
-
-  disableScrollLock?: boolean
-
   testId?: string
-} & DialogOverlayProps
+} & DialogInnerProps
 
-export type DialogMounterProps = {
+export type BaseDialogProps = {
   mounted: boolean
   setMounted: (val: boolean) => void
+  bypassScrollLock: boolean
 }
 
-const Container: React.FC<
-  React.PropsWithChildren<
-    {
-      style?: React.CSSProperties
-      initialFocusRef: React.RefObject<any>
-    } & DialogProps
-  >
-> = ({
-  smBgColor,
-  smUpBgColor,
-  hidePaddingBottom,
-  onDismiss,
-  dismissOnClickOutside = false,
-  dismissOnHandle = true,
-  children,
-  style,
-  initialFocusRef,
-}) => {
-  const node: React.RefObject<any> | null = useRef(null)
-
-  const containerClasses = classNames({
-    [styles.container]: true,
-    [smBgColor ? styles[`bg${capitalizeFirstLetter(smBgColor)}`] : '']:
-      !!smBgColor,
-    [smUpBgColor ? styles[`bg${capitalizeFirstLetter(smUpBgColor)}SmUp`] : '']:
-      !!smUpBgColor,
-    [styles.hidePaddingBottom]: !!hidePaddingBottom,
-  })
-
-  const closeTopDialog = () => {
-    const dialogs = Array.prototype.slice.call(
-      dom.$$('[data-reach-dialog-overlay]')
-    ) as Element[]
-    const topDialog = dialogs[dialogs.length - 1]
-    const isTopDialog =
-      topDialog && node.current && topDialog.contains(node.current)
-
-    if (!isTopDialog) {
-      return
-    }
-
-    onDismiss()
-  }
-
-  const bind = useDrag(({ down, movement: [, y] }) => {
-    if (!down && y > 30) {
-      onDismiss()
-    } else {
-      node.current.style.transform = `translateY(${Math.max(y, 0)}px)`
-    }
-  })
-
-  const handleClickOutside = () => {
-    if (!dismissOnClickOutside) {
-      return
-    }
-
-    closeTopDialog()
-  }
-
-  useOutsideClick(node, handleClickOutside)
-
-  return (
-    <div
-      ref={node}
-      className={containerClasses}
-      style={style}
-      onKeyDown={(event) => {
-        if (event.code.toLowerCase() !== KEYVALUE.escape) {
-          return
-        }
-        if (!dismissOnHandle) {
-          return
-        }
-        closeTopDialog()
-      }}
-    >
-      <VisuallyHidden>
-        <button type="button" ref={initialFocusRef} aria-hidden="true" />
-      </VisuallyHidden>
-
-      <Media at="sm">
-        {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}
-      </Media>
-
-      {children}
-    </div>
-  )
-}
-
-const AnimatedDilaog: React.ComponentType<
-  React.PropsWithChildren<DialogProps & DialogMounterProps>
+const BaseAnimatedDilaog: React.ComponentType<
+  React.PropsWithChildren<DialogProps & BaseDialogProps>
 > = (props) => {
-  const { isOpen, mounted, setMounted, onRest, disableScrollLock, scrollable } =
+  const { isOpen, mounted, setMounted, onRest, scrollable, bypassScrollLock } =
     props
   const initialFocusRef = useRef<any>(null)
 
@@ -167,23 +65,23 @@ const AnimatedDilaog: React.ComponentType<
   }, [isOpen])
 
   const dialogOverlayClasses = classNames({
-    dialog: true,
-    [styles.scrollable]: !!scrollable,
+    [styles.dialog]: true,
     [styles.overlay]: !!mounted,
+    [styles.scrollable]: !!scrollable,
   })
 
   const AnimatedDialogOverlay = animated(DialogOverlay)
-  const AnimatedContainer = animated(Container)
+  const AnimatedInner = animated(Inner)
 
   return (
     <AnimatedDialogOverlay
       className={dialogOverlayClasses}
       initialFocusRef={initialFocusRef}
       style={{ opacity: opacity as any }}
-      dangerouslyBypassScrollLock={disableScrollLock}
+      dangerouslyBypassScrollLock={bypassScrollLock}
     >
-      <DialogContent aria-labelledby="dialog-title">
-        <AnimatedContainer
+      <DialogContent className={styles.content} aria-labelledby="dialog-title">
+        <AnimatedInner
           style={{ opacity: opacity as any }}
           initialFocusRef={initialFocusRef}
           {...props}
@@ -193,10 +91,10 @@ const AnimatedDilaog: React.ComponentType<
   )
 }
 
-const SimpleDialog: React.ComponentType<
-  React.PropsWithChildren<DialogProps & DialogMounterProps>
+const BaseSimpleDialog: React.ComponentType<
+  React.PropsWithChildren<DialogProps & BaseDialogProps>
 > = (props) => {
-  const { isOpen, mounted, setMounted, onRest, disableScrollLock, scrollable } =
+  const { isOpen, mounted, setMounted, onRest, bypassScrollLock, scrollable } =
     props
   const initialFocusRef = useRef<any>(null)
 
@@ -213,19 +111,19 @@ const SimpleDialog: React.ComponentType<
   }, [isOpen])
 
   const dialogOverlayClasses = classNames({
-    dialog: true,
-    [styles.scrollable]: !!scrollable,
+    [styles.dialog]: true,
     [styles.overlay]: !!mounted,
+    [styles.scrollable]: !!scrollable,
   })
 
   return (
     <DialogOverlay
       className={dialogOverlayClasses}
       initialFocusRef={initialFocusRef}
-      dangerouslyBypassScrollLock={disableScrollLock}
+      dangerouslyBypassScrollLock={bypassScrollLock}
     >
-      <DialogContent aria-labelledby="dialog-title">
-        <Container initialFocusRef={initialFocusRef} {...props} />
+      <DialogContent className={styles.content} aria-labelledby="dialog-title">
+        <Inner initialFocusRef={initialFocusRef} {...props} />
       </DialogContent>
     </DialogOverlay>
   )
@@ -243,6 +141,7 @@ export const Dialog: React.ComponentType<
 } = (props) => {
   const { isOpen, testId } = props
   const [mounted, setMounted] = useState(isOpen)
+  const [bypassScrollLock, setBypassScrollLock] = useState(false)
 
   useEffect(() => {
     if (isOpen) {
@@ -250,17 +149,26 @@ export const Dialog: React.ComponentType<
     }
   }, [isOpen])
 
+  useEventListener(BYPASS_SCROLL_LOCK, () => {
+    setBypassScrollLock(true)
+  })
+  useEventListener(ENBABLE_SCROLL_LOCK, () => {
+    setBypassScrollLock(false)
+  })
+
   if (!mounted) {
     return null
   }
 
+  const dialogProps = { ...props, mounted, setMounted, bypassScrollLock }
+
   return (
     <div {...(testId ? { 'data-test-id': testId } : {})}>
       <Media at="sm">
-        <SimpleDialog {...props} mounted={mounted} setMounted={setMounted} />
+        <BaseSimpleDialog {...dialogProps} />
       </Media>
       <Media greaterThan="sm">
-        <AnimatedDilaog {...props} mounted={mounted} setMounted={setMounted} />
+        <BaseAnimatedDilaog {...dialogProps} />
       </Media>
     </div>
   )

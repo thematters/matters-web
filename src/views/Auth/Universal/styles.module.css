@@ -5,7 +5,7 @@
 
     width: 100vw;
     height: 100vh;
-    height: calc(var(--vvh) * 100);
+    height: calc(var(--ih) * 100);
 
     & .container {
       @mixin border-grey-light;
