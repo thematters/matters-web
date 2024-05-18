@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconLogoMobile } from '@/public/static/icons/logo-mobile.svg'
+import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
 import { PATHS } from '~/common/enums'
 import { Button, Icon, LanguageContext, TextIcon } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
@@ -30,8 +30,9 @@ export const BackToHomeMobileButton = () => {
   return (
     <Button href="/">
       <Icon
-        icon={IconLogoMobile}
+        icon={IconLogo}
         style={{ width: 76, height: 16, left: 0, top: 0 }}
+        color="greyLight"
       />
     </Button>
   )

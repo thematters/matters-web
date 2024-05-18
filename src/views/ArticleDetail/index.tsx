@@ -341,14 +341,7 @@ const BaseArticleDetail = ({
       </Media>
 
       <section className={styles.content}>
-        <Media
-          at="sm"
-          style={{
-            justifyContent: 'flex-start',
-            alignItems: 'center',
-            display: 'inline-flex',
-          }}
-        >
+        <Media at="sm" className={styles.mobileLogo}>
           <BackToHomeMobileButton />
         </Media>
         <section className="u-article-title">
