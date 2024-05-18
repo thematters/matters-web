@@ -80,7 +80,10 @@ const BaseAnimatedDilaog: React.ComponentType<
       style={{ opacity: opacity as any }}
       dangerouslyBypassScrollLock={bypassScrollLock}
     >
-      <DialogContent className={styles.content} aria-labelledby="dialog-title">
+      <DialogContent
+        className={styles.container}
+        aria-labelledby="dialog-title"
+      >
         <AnimatedInner
           style={{ opacity: opacity as any }}
           initialFocusRef={initialFocusRef}
@@ -122,7 +125,10 @@ const BaseSimpleDialog: React.ComponentType<
       initialFocusRef={initialFocusRef}
       dangerouslyBypassScrollLock={bypassScrollLock}
     >
-      <DialogContent className={styles.content} aria-labelledby="dialog-title">
+      <DialogContent
+        className={styles.container}
+        aria-labelledby="dialog-title"
+      >
         <Inner initialFocusRef={initialFocusRef} {...props} />
       </DialogContent>
     </DialogOverlay>

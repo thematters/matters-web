@@ -3,7 +3,7 @@
 
   height: 100vh;
   height: 100dvh;
-  height: calc(var(--ih) * 100);
+  height: calc(var(--ivh) * 100);
 
   & .logo {
     & svg {

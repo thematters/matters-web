@@ -17,26 +17,26 @@ export const ClientUpdater = () => {
     document.documentElement.style.setProperty('--vvh', vvh)
   }
 
-  const upadteIH = () => {
+  const upadteIVH = () => {
     if (!innerHeight) {
       return
     }
 
     const vvh = innerHeight / 100 + 'px'
-    document.documentElement.style.setProperty('--ih', vvh)
+    document.documentElement.style.setProperty('--ivh', vvh)
   }
 
   useEventListener(
     'resize',
     () => {
-      upadteIH()
+      upadteIVH()
       upadteVVH()
     },
     visualViewport
   )
 
   useEffect(() => {
-    upadteIH()
+    upadteIVH()
     upadteVVH()
   }, [])
 
