@@ -870,10 +870,6 @@
   "Dkkmwm": {
     "defaultMessage": "粗體"
   },
-  "Dq29Hb": {
-    "defaultMessage": "你尚未綁定電子郵件。 基於資金安全考慮，儲值需綁定郵箱。",
-    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
-  },
   "DqQvtL": {
     "defaultMessage": "解除封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
@@ -1186,6 +1182,9 @@
     "defaultMessage": "暫時無法解綁 {type}，因為你沒有其他登入方式（電子郵件/數字錢包/社交帳號）。",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "K2ec8y": {
+    "defaultMessage": "請先驗證電子郵件"
+  },
   "K3r6DQ": {
     "defaultMessage": "刪除"
   },
@@ -1239,6 +1238,10 @@
   "L34EMG": {
     "defaultMessage": "沒有帳號？",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
+  "L487Vy": {
+    "defaultMessage": "去驗證",
+    "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
   },
   "L4Fcr8": {
     "defaultMessage": "新建選集"
@@ -1341,10 +1344,6 @@
   "MV0JlP": {
     "defaultMessage": "吸引更多人為你拍手！"
   },
-  "Me4s4Q": {
-    "defaultMessage": "請先綁定電子郵件",
-    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
-  },
   "Me5cJu": {
     "defaultMessage": "綁定錢包",
     "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
@@ -1429,6 +1428,9 @@
   },
   "OJmFke": {
     "defaultMessage": "告知讀者你此次編輯的更動"
+  },
+  "OK2u69": {
+    "defaultMessage": "你尚未綁定電子郵件。 基於資金安全考慮，儲值需綁定郵箱。"
   },
   "OKcHPP": {
     "defaultMessage": "你的專屬 Liker ID 已就位！"
@@ -1854,6 +1856,9 @@
     "defaultMessage": "{circleName} 的追蹤者",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
   },
+  "WxhsrG": {
+    "defaultMessage": "請先綁定電子郵件"
+  },
   "X+Xvgq": {
     "defaultMessage": "取消精選",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -1897,10 +1902,6 @@
   "XdLnXf": {
     "defaultMessage": "錢包餘額不足",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
-  },
-  "XfRKZY": {
-    "defaultMessage": "去綁定",
-    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "XgdZSb": {
     "defaultMessage": "值得關注"
@@ -2444,6 +2445,9 @@
   },
   "ivXY6L": {
     "defaultMessage": "全部作者"
+  },
+  "iyvpwA": {
+    "defaultMessage": "你尚未驗證電子郵件。 基於資金安全考慮，儲值需驗證郵箱。"
   },
   "izWS4J": {
     "defaultMessage": "取消追蹤"
@@ -3036,6 +3040,10 @@
   },
   "vAc1Bw": {
     "defaultMessage": "封鎖用戶"
+  },
+  "vB45rC": {
+    "defaultMessage": "去綁定",
+    "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
   },
   "vCt85u": {
     "defaultMessage": "剛接觸加密錢包？參考 ",

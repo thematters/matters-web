@@ -73,6 +73,7 @@ const Confirm: React.FC<FormProps> = ({
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
+  const isEmailVerified = !!viewer.info.emailVerified
   const { routerLang } = useRoute()
 
   const formId = 'pay-to-confirm-form'
@@ -237,7 +238,7 @@ const Confirm: React.FC<FormProps> = ({
                   <button
                     className={styles.forgetPassword}
                     onClick={
-                      hasEmail
+                      hasEmail && isEmailVerified
                         ? openResetPaymentPasswordDialog
                         : openBindEmailHintDialog
                     }
