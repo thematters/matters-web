@@ -571,7 +571,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "7ykJ+l": {
-    "defaultMessage": "暫無評論，打個招呼吧",
+    "defaultMessage": "暫無評論",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
   "84VOdX": {

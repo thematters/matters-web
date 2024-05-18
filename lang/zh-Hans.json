@@ -571,7 +571,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "7ykJ+l": {
-    "defaultMessage": "暂无评论，打个招呼吧",
+    "defaultMessage": "暂无评论",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
   "84VOdX": {
