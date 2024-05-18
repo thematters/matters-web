@@ -563,6 +563,9 @@
     "defaultMessage": "无结果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
+  "7oytv9": {
+    "defaultMessage": "（修改过）"
+  },
   "7xnrxG": {
     "defaultMessage": "作品已添加至精选",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
@@ -1049,9 +1052,6 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "确认归档"
-  },
-  "HJcB0d": {
-    "defaultMessage": "完成修改后，新版会再次发布到 IPFS，你可以从文章标题下的「…更新于 IPFS」进入查看历史版本。"
   },
   "HPVOw/": {
     "defaultMessage": "数字钱包",
@@ -1888,6 +1888,9 @@
     "defaultMessage": "解绑 {type}",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "XZ8IJ3": {
+    "defaultMessage": "完成修改后，新版会再次发布到 IPFS，你可以从文章标题下的「IPFS」进入查看历史版本。"
+  },
   "Xd0J7Y": {
     "defaultMessage": "开放社区"
   },
@@ -2325,9 +2328,6 @@
   },
   "gluNT8": {
     "defaultMessage": "输入链接地址"
-  },
-  "gy/Kkr": {
-    "defaultMessage": "（修改过）"
   },
   "gz0EGC": {
     "defaultMessage": "编辑作品已发布"

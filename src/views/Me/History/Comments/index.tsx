@@ -4,9 +4,9 @@ import { useIntl } from 'react-intl'
 
 import {
   analytics,
-  collapseContent,
   filterComments,
   mergeConnections,
+  stripHtml,
   toPath,
 } from '~/common/utils'
 import { Head, Layout, LinkWrapper, UserDigest } from '~/components'
@@ -156,7 +156,7 @@ const Comments = () => {
                           })}
                         >
                           <section className={styles.content}>
-                            {collapseContent(comment.content)}
+                            {stripHtml(comment.content || '')}
                           </section>
                         </LinkWrapper>
                       </section>

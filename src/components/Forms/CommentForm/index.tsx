@@ -69,7 +69,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''
   )
-  const isValid = stripHtml(content).trim().length > 0
+  const isValid = stripHtml(content).length > 0
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)

@@ -3,7 +3,7 @@ import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
-import { capitalizeFirstLetter, collapseContent } from '~/common/utils'
+import { capitalizeFirstLetter, stripHtml } from '~/common/utils'
 import {
   Button,
   Icon,
@@ -53,7 +53,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const [firstRender, setFirstRender] = useState(true)
   const [expand, setExpand] = useState(true)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
-  const collapsedContent = collapseContent(content)
+  const collapsedContent = stripHtml(content || '')
 
   const contentClasses = classNames({
     [styles.expandable]: true,

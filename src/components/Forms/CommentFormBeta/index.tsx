@@ -81,7 +81,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
     getDraft(commentDraftId) || defaultContent || ''
   )
 
-  const contentCount = stripHtml(content).trim().length
+  const contentCount = stripHtml(content).length
 
   const isValid = contentCount > 0 && contentCount <= MAX_ARTICLE_COMMENT_LENGTH
 

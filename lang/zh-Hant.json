@@ -563,6 +563,9 @@
     "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
+  "7oytv9": {
+    "defaultMessage": "（修改过）"
+  },
   "7xnrxG": {
     "defaultMessage": "作品已添加至精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
@@ -1049,9 +1052,6 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "確認封存"
-  },
-  "HJcB0d": {
-    "defaultMessage": "完成修改後，新版會再次發佈到 IPFS，你可以從文章標題下的「…更新於 IPFS」進入查看歷史版本。"
   },
   "HPVOw/": {
     "defaultMessage": "數字錢包",
@@ -1631,7 +1631,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
   },
   "Seanpx": {
-    "defaultMessage": "必填栏位"
+    "defaultMessage": "必填欄位"
   },
   "SebPdz": {
     "defaultMessage": "交易進行中，請稍候"
@@ -1887,6 +1887,9 @@
   "XYUhx0": {
     "defaultMessage": "解綁 {type}",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
+  },
+  "XZ8IJ3": {
+    "defaultMessage": "完成修改後，新版會再次發佈到 IPFS，你可以從文章標題下的「IPFS」進入查看歷史版本。"
   },
   "Xd0J7Y": {
     "defaultMessage": "開放社區"
@@ -2195,7 +2198,7 @@
     "defaultMessage": "儲值"
   },
   "dVbKzB": {
-    "defaultMessage": "作品或評論提及我",
+    "defaultMessage": "評論和回覆",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "deEeEI": {
@@ -2325,9 +2328,6 @@
   },
   "gluNT8": {
     "defaultMessage": "輸入連結地址"
-  },
-  "gy/Kkr": {
-    "defaultMessage": "（修改过）"
   },
   "gz0EGC": {
     "defaultMessage": "編輯作品已發佈"

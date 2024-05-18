@@ -8,9 +8,11 @@
   overflow-x: hidden;
   overflow-y: auto;
 
-  @media (--lg-up) {
+  @media (--md-up) {
     height: auto;
     padding-bottom: 0;
+    overflow-x: initial;
+    overflow-y: initial;
   }
 
   & :global(.ProseMirror),
@@ -102,7 +104,7 @@
     height: calc(100vh - 3rem - var(--sp16) * 2); /* 3rem for header */
     height: calc(var(--vvh) * 100 - 3rem - var(--sp16) * 2);
 
-    @media (--lg-up) {
+    @media (--md-up) {
       height: auto;
     }
   }

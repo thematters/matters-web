@@ -155,8 +155,7 @@ const BaseDraftDetail = () => {
     )
   }
 
-  const hasContent =
-    draft?.content && stripHtml(draft.content).trim().length > 0
+  const hasContent = draft?.content && stripHtml(draft.content).length > 0
   const hasTitle = draft?.title && draft.title.length > 0
   const isUnpublished = draft?.publishState === 'unpublished'
   const publishable = !!(
@@ -255,7 +254,7 @@ const BaseDraftDetail = () => {
       }
 
       // check content length
-      const len = newDraft.content?.length || 0
+      const len = stripHtml(newDraft.content || '').length
       setContentLength(len)
       if (len > MAX_ARTICLE_CONTENT_LENGTH) {
         return
