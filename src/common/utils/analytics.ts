@@ -77,6 +77,7 @@ interface ClickButtonProp {
     | 'try_login_from_visitor'
     | 'bind_ens'
     | 'bind_ens_successfully'
+    | 'edit_support_copy'
   pageType?: PageType
 }
 
