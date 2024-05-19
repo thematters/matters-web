@@ -78,6 +78,7 @@ interface ClickButtonProp {
     | 'bind_ens'
     | 'bind_ens_successfully'
     | 'edit_support_copy'
+    | 'history_version'
   pageType?: PageType
 }
 
@@ -319,6 +320,7 @@ type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
 
 type PageType =
   | 'article_detail'
+  | 'article_history'
   | 'user_profile'
   | 'circle_detail'
   | 'edit_draft'
