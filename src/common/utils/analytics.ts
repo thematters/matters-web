@@ -77,6 +77,7 @@ interface ClickButtonProp {
     | 'try_login_from_visitor'
     | 'bind_ens'
     | 'bind_ens_successfully'
+    | 'bind_wallet_after_donation'
     | 'edit_support_copy'
     | 'history_version'
   pageType?: PageType
