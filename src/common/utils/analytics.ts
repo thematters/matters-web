@@ -32,6 +32,7 @@ type EventArgs =
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
   | ['view_subscribe_circle_dialog', ViewDialogProp]
+  | ['view_comment_drawer', ViewDrawerProp]
   | ['banner_exposure', BannerExposureProp]
   | ['card_exposure', CardExposureProp]
   | ['tag_exposure', TagExposureProp]
@@ -139,6 +140,14 @@ interface SubscribeProps {
  */
 interface ViewDialogProp {
   step: string
+}
+
+/**
+ * Event: View Drawer
+ */
+interface ViewDrawerProp {
+  contentType: ContentType
+  id: string
 }
 
 /**
