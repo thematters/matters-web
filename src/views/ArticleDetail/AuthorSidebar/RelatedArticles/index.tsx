@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestAuthorSidebar,
   ArticleDigestSidebar,
@@ -47,6 +48,14 @@ export const RelatedArticles = ({ article }: RelatedArticlesProps) => {
               titleTextSize={14}
               imageSize="md"
               showAuthorInfo
+              clickEvent={() => {
+                analytics.trackEvent('click_feed', {
+                  type: 'article_detail_author_sidebar_recommendation',
+                  contentType: 'article',
+                  location: i,
+                  id: node.id,
+                })
+              }}
             />
           </List.Item>
         ))}

@@ -59,7 +59,7 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
   // load next page
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
-      type: 'article_detail_author-sidebar-collection',
+      type: 'article_detail_author_sidebar_collection',
       location: edges?.length || 0,
     })
 
@@ -115,6 +115,14 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
                   collectionId={collectionId}
                   titleColor={node.id === article?.id ? 'black' : 'greyDarker'}
                   showCover={false}
+                  clickEvent={() => {
+                    analytics.trackEvent('click_feed', {
+                      type: 'article_detail_author_sidebar_collection',
+                      contentType: 'article',
+                      location: i,
+                      id: node.id,
+                    })
+                  }}
                 />
               </List.Item>
             ))}

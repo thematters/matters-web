@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestAuthorSidebar,
   ArticleDigestSidebar,
@@ -55,10 +56,28 @@ export const FromAuthor = ({ article }: FromAuthorProps) => {
                 titleColor="black"
                 titleTextSize={14}
                 showCover={false}
+                clickEvent={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: 'article_detail_author_sidebar_author',
+                    contentType: 'article',
+                    location: i,
+                    id: work.id,
+                  })
+                }}
               />
             )}
             {work.__typename === 'Collection' && (
-              <CollectionDigestAuthorSidebar collection={work} />
+              <CollectionDigestAuthorSidebar
+                collection={work}
+                clickEvent={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: 'article_detail_author_sidebar_author',
+                    contentType: 'collection',
+                    location: i,
+                    id: work.id,
+                  })
+                }}
+              />
             )}
           </List.Item>
         ))}

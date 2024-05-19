@@ -264,7 +264,9 @@ type ArticleFeedType =
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
-  | 'article_detail_author-sidebar-collection'
+  | 'article_detail_author_sidebar_collection'
+  | 'article_detail_author_sidebar_author'
+  | 'article_detail_author_sidebar_recommendation'
 
 type CollectionFeedType =
   | 'user_collection'
