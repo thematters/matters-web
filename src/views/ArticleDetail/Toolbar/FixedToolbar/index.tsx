@@ -81,6 +81,11 @@ const FixedToolbar = ({
               <button
                 className={styles.commentButton}
                 onClick={() => {
+                  analytics.trackEvent('click_button', {
+                    type: 'fixed_toolbar_comment_open',
+                    pageType: 'article_detail',
+                  })
+
                   if (!viewer.isAuthed) {
                     window.dispatchEvent(
                       new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
@@ -128,6 +133,11 @@ const FixedToolbar = ({
                 textWeight="normal"
                 textIconSpacing={4}
                 onClick={() => {
+                  analytics.trackEvent('click_button', {
+                    type: 'fixed_toolbar_comment_open',
+                    pageType: 'article_detail',
+                  })
+
                   if (!viewer.isAuthed && articleDetails.commentCount === 0) {
                     window.dispatchEvent(
                       new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
