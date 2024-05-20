@@ -1,7 +1,9 @@
 .callback {
   @mixin flex-center-all;
 
+  height: 100vh;
   height: 100dvh;
+  height: calc(var(--ivh) * 100);
 
   & .logo {
     & svg {

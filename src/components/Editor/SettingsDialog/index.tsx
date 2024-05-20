@@ -186,7 +186,7 @@ const BaseEditorSettingsDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} hidePaddingBottom>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         {isList && (
           <SettingsList
             saving={saving}
