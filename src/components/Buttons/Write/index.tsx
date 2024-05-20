@@ -2,6 +2,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
 import {
+  BREAKPOINTS,
   ERROR_CODES,
   ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -15,6 +16,7 @@ import {
   Icon,
   toast,
   Tooltip,
+  useMediaQuery,
   useRoute,
 } from '~/components'
 
@@ -25,6 +27,7 @@ interface Props {
 
 const BaseWriteButton = (props: ButtonProps) => {
   const intl = useIntl()
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   return (
     <Tooltip
@@ -35,6 +38,7 @@ const BaseWriteButton = (props: ButtonProps) => {
       })}
       placement="left"
       delay={[1000, null]}
+      disabled={!isSmUp}
     >
       <Button
         bgActiveColor="greyLighter"
