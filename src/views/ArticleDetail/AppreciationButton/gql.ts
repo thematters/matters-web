@@ -18,7 +18,6 @@ export const fragments = {
         id
         hasAppreciate
         appreciateLeft
-        canSuperLike @include(if: $includeCanSuperLike)
         author {
           id
           isBlocking
@@ -33,13 +32,9 @@ export const APPRECIATE_ARTICLE = gql`
     $id: ID!
     $amount: amount_Int_NotNull_min_1!
     $token: String!
-    $superLike: Boolean
   ) {
-    appreciateArticle(
-      input: { id: $id, amount: $amount, token: $token, superLike: $superLike }
-    ) {
+    appreciateArticle(input: { id: $id, amount: $amount, token: $token }) {
       id
-      canSuperLike
     }
   }
 `

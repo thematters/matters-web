@@ -14,8 +14,6 @@ export const EXTERNAL_LINKS = {
     isProd
       ? `https://liker.land/${likerId}/civic?utm_source=Matters`
       : `https://rinkeby.liker.land/${likerId}/civic?utm_source=Matters`,
-  SUPER_LIKE:
-    'https://docs.like.co/v/zh/user-guide/likecoin-button/superlike?utm_source=Matters&utm_medium=website&utm_campaign=superlike_funnel',
   PLANET: 'https://www.planetable.xyz/',
   ENS_DOCS: 'https://docs.ens.domains/',
   METAMASK: 'https://metamask.io/download/',

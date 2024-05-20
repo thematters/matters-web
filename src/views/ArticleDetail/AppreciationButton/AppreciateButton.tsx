@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
 import { ReactComponent as IconClapFill } from '@/public/static/icons/24px/clap-fill.svg'
-import { ReactComponent as IconSuperLike } from '@/public/static/icons/superlike.svg'
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, numAbbr } from '~/common/utils'
 import { Button, ButtonProps, Icon, TextIcon } from '~/components'
@@ -18,8 +17,6 @@ export type AppreciateButtonProps = {
   onClick?: () => void
   count?: number | 'MAX'
   total: number
-  isSuperLike?: boolean
-  superLiked?: boolean
   iconSize?: 20 | 24
   textWeight?: 'medium' | 'normal'
   textIconSpacing?: 4 | 6 | 8
@@ -31,8 +28,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   onClick,
   count,
   total,
-  isSuperLike,
-  superLiked,
   iconSize = 20,
   textWeight = 'medium',
   textIconSpacing = 8,
@@ -43,8 +38,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   const iconRef = useRef<HTMLButtonElement>(null)
   const buttonClasses = classNames({
     [styles.appreciateButton]: true,
-    [styles.isSuperLike]: isSuperLike,
-    [styles.superLiked]: superLiked,
     [styles[`icon${capitalizeFirstLetter(iconSize + '')}`]]: true,
   })
 
@@ -94,14 +87,6 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
                     : IconClapFill
                 }
                 className={[styles.iconLike, clapStyles.iconLike].join(' ')}
-                size={iconSize}
-              />
-              <Icon
-                icon={IconSuperLike}
-                className={[
-                  styles.iconSuperlike,
-                  clapStyles.iconSuperlike,
-                ].join(' ')}
                 size={iconSize}
               />
             </span>

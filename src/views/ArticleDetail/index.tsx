@@ -572,7 +572,6 @@ const ArticleDetail = ({
       fetchPolicy: 'network-only',
       variables: {
         id: article?.id,
-        includeCanSuperLike: viewer.isCivicLiker,
       },
     })
 
