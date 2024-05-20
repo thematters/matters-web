@@ -106,16 +106,21 @@ export async function main() {
   const command = new ListMetricsCommand({
     Dimensions: [
       // { Name: "LogGroupName", },
+      { Name: "InstanceId", Value: instanceId },
     ],
-    MetricName: "mem_used_percent",
-    Namespace: "System/Linux",
+    // MetricName: "mem_used_percent",
+    // Namespace: "System/Linux",
   });
 
   const out = await client.send(command);
   console.log("output:", out?.Metrics?.length);
   // console.log("output:", out.Metrics);
   console.dir(
-    out.Metrics.findLast((m) => m.Dimensions.length >= 4),
+    out.Metrics.filter(
+      (
+        m, // m.Dimensions.length >= 3
+      ) => m.MetricName?.match(/percent/i),
+    ),
     { depth: null },
   );
 
@@ -136,7 +141,7 @@ export async function main() {
   console.log(new Date(), "set exit at nextTs:", new Date(nextTs));
   setTimeout(
     () => {
-      console.log(new Date(), "runtime out at most 1 minute.");
+      console.log(new Date(), "runtime out at alignment of next 1 minute.");
       process.exit();
     },
     nextTs - started,
@@ -148,10 +153,10 @@ async function SendV8Metrics(dimensions) {
   const stats = v8.getHeapStatistics();
   console.log("v8:", stats);
 
-  const now = new Date();
-  const Dimensions = Object.entries({ ...dimensions }).map(([key, value]) => ({
-    Name: key,
-    Value: value,
+  const started = new Date();
+  const Dimensions = Object.entries({ ...dimensions }).map(([Name, Value]) => ({
+    Name,
+    Value,
   }));
   const putCmd = new PutMetricDataCommand({
     Namespace: "System/Nodejs", // required
@@ -159,28 +164,28 @@ async function SendV8Metrics(dimensions) {
       {
         MetricName: "heap_size_limit",
         Dimensions,
-        Timestamp: now, // new Date(), // ("TIMESTAMP"),
+        Timestamp: started, // new Date(), // ("TIMESTAMP"),
         Value: stats.heap_size_limit, // Number("double"),
         Unit: "Bytes",
       },
       {
         MetricName: "used_heap_size",
         Dimensions,
-        Timestamp: now, // new Date(), // ("TIMESTAMP"),
+        Timestamp: started, // new Date(), // ("TIMESTAMP"),
         Value: stats.used_heap_size, // Number("double"),
         Unit: "Bytes",
       },
     ],
   });
-  console.log(now, "send putCmd:", putCmd, putCmd.input);
+  console.log(new Date(), "send putCmd:", putCmd, putCmd.input);
   console.dir(putCmd.input, { depth: null });
 
   const putCmdOut = await client.send(putCmd);
-  console.log(now, "SendV8Metrics putCmdOut:", putCmdOut);
+  console.log(new Date(), "SendV8Metrics putCmdOut:", putCmdOut);
 }
 
 async function SendSystemMemInfo(dimensions) {
-  const ts = new Date();
+  const timestamp = new Date();
   const contents = await fs.promises.readFile("/proc/meminfo", {
     encoding: "utf8",
   });
@@ -195,7 +200,7 @@ async function SendSystemMemInfo(dimensions) {
     })
     .filter(Boolean);
   const obj = new Map(lines.map((d) => [d.key, d]));
-  console.log(ts, `read meminfo:`, obj);
+  console.log(timestamp, `read meminfo:`, obj);
 
   const Dimensions = Object.entries({ ...dimensions }).map(([key, value]) => ({
     Name: key,
@@ -207,8 +212,16 @@ async function SendSystemMemInfo(dimensions) {
   const MemBuffers = obj.get("Buffers").value;
   const MemCached = obj.get("Cached").value;
   // https://github.com/shirou/gopsutil/blob/master/mem/mem_linux.go#L333C2-L334
-  const MemUsed = MemTotal - MemFree - MemFree - MemCached;
+  const MemUsed = MemTotal - MemFree - MemBuffers - MemCached;
   const MemAvailable = obj.get("MemAvailable").value;
+  console.log(new Date(), `memory metrics:`, {
+    MemTotal,
+    MemFree,
+    MemBuffers,
+    MemCached,
+    MemAvailable,
+    MemUsed,
+  });
 
   const putCmd = new PutMetricDataCommand({
     Namespace: "System/Linux", // required
@@ -216,49 +229,49 @@ async function SendSystemMemInfo(dimensions) {
       {
         MetricName: "MemTotal",
         Dimensions,
-        Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+        Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
         Value: MemTotal, // Number("double"),
         Unit: obj.get("MemTotal").unit === "kB" ? "Kilobytes" : "Bytes",
       },
       {
         MetricName: "MemFree",
         Dimensions,
-        Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+        Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
         Value: MemFree, // Number("double"),
         Unit: obj.get("MemFree").unit === "kB" ? "Kilobytes" : "Bytes",
       },
       {
         MetricName: "MemBuffers",
         Dimensions,
-        Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+        Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
         Value: MemBuffers, // Number("double"),
         Unit: obj.get("Buffers").unit === "kB" ? "Kilobytes" : "Bytes",
       },
       {
         MetricName: "MemCached",
         Dimensions,
-        Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+        Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
         Value: MemCached, // Number("double"),
         Unit: obj.get("Cached").unit === "kB" ? "Kilobytes" : "Bytes",
       },
       {
         MetricName: "MemUsed",
         Dimensions,
-        Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+        Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
         Value: MemUsed, // Number("double"),
         Unit: obj.get("MemFree").unit === "kB" ? "Kilobytes" : "Bytes",
       },
       {
         MetricName: "MemUsedPercent",
         Dimensions,
-        Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+        Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
         Value: (100.0 * MemUsed) / MemTotal, // Number("double"),
         Unit: "Percent",
       },
       {
         MetricName: "MemAvailable",
         Dimensions,
-        Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+        Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
         Value: MemAvailable, // Number("double"),
         Unit: obj.get("MemAvailable").unit === "kB" ? "Kilobytes" : "Bytes",
       },
@@ -266,9 +279,9 @@ async function SendSystemMemInfo(dimensions) {
   });
 
   const putCmdOut = await client.send(putCmd);
-  console.log(ts, "SendSystemMemInfo putCmdOut:", putCmdOut);
+  console.log(new Date(), "SendSystemMemInfo putCmdOut:", putCmdOut);
 
-  const nextTs = Math.ceil(ts / 15e3) * 15e3;
+  const nextTs = Math.ceil(timestamp / 15e3) * 15e3;
   setTimeout(SendSystemMemInfo, nextTs - Date.now(), dimensions);
 
   return obj;
@@ -303,7 +316,7 @@ async function SendNextjsMemInfo(dimensions, systemMemObj) {
     if (cmdline.includes(".bin/next")) break;
   }
 
-  const ts = new Date();
+  const timestamp = new Date();
   const contentsStatusPid = await fs.promises.readFile(
     `/proc/${mainNextjsPID}/status`,
     {
@@ -328,9 +341,9 @@ async function SendNextjsMemInfo(dimensions, systemMemObj) {
   const obj = new Map(statusPid.map((d) => [d.key, d]));
   console.log(`main nextjs pid:`, mainNextjsPID, obj);
 
-  const Dimensions = Object.entries({ ...dimensions }).map(([key, value]) => ({
-    Name: key,
-    Value: value,
+  const Dimensions = Object.entries({ ...dimensions }).map(([Name, Value]) => ({
+    Name,
+    Value,
   }));
   const putCmd = new PutMetricDataCommand({
     Namespace: "System/Nodejs", // required
@@ -338,14 +351,14 @@ async function SendNextjsMemInfo(dimensions, systemMemObj) {
       {
         MetricName: "NextjsVmSize",
         Dimensions,
-        Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+        Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
         Value: obj.get("VmSize").value, // Number("double"),
         Unit: obj.get("VmSize").unit === "kB" ? "Kilobytes" : "Count",
       },
       {
         MetricName: "NextjsVmRSS",
         Dimensions,
-        Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+        Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
         Value: obj.get("VmRSS").value, // Number("double"),
         Unit: obj.get("VmSize").unit === "kB" ? "Kilobytes" : "Count",
       },
@@ -353,14 +366,14 @@ async function SendNextjsMemInfo(dimensions, systemMemObj) {
         MemTotal?.unit === obj.get("VmSize").unit && {
           MetricName: "NextjsMemPercent",
           Dimensions,
-          Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+          Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
           Value: (100.0 * obj.get("VmRSS").value) / MemTotal.value, // Number("double"),
           Unit: "Percent",
         },
       {
         MetricName: "NextjsThreads",
         Dimensions,
-        Timestamp: ts, // new Date(), // ("TIMESTAMP"),
+        Timestamp: timestamp, // new Date(), // ("TIMESTAMP"),
         Value: obj.get("Threads").value, // Number("double"),
         Unit: obj.get("Threads").unit === "kB" ? "Kilobytes" : "Count",
       },
@@ -368,14 +381,12 @@ async function SendNextjsMemInfo(dimensions, systemMemObj) {
   });
 
   const putCmdOut = await client.send(putCmd);
-  console.log(ts, "SendNextjsMemInfo putCmdOut:", putCmdOut);
+  console.log(new Date(), "SendNextjsMemInfo putCmdOut:", putCmdOut);
 
-  const nextTs = Math.ceil(ts / 5e3) * 5e3; // align to next 5 seconds
+  const nextTs = Math.ceil(timestamp / 5e3) * 5e3; // align to next 5 seconds
   setTimeout(SendNextjsMemInfo, nextTs - Date.now(), dimensions, systemMemObj);
 }
 
-function delay(ms, ...args) {
-  return new Promise((fulfilled) => setTimeout(fulfilled, ms, args));
-}
+// function delay(ms, ...args) { return new Promise((fulfilled) => setTimeout(fulfilled, ms, args)); }
 
 main().catch((err) => console.error(new Date(), "ERROR:", err));
