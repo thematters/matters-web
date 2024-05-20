@@ -28,12 +28,8 @@ export const fragments = {
 }
 
 export const APPRECIATE_ARTICLE = gql`
-  mutation AppreciateArticle(
-    $id: ID!
-    $amount: amount_Int_NotNull_min_1!
-    $token: String!
-  ) {
-    appreciateArticle(input: { id: $id, amount: $amount, token: $token }) {
+  mutation AppreciateArticle($id: ID!, $amount: amount_Int_NotNull_min_1!) {
+    appreciateArticle(input: { id: $id, amount: $amount }) {
       id
     }
   }
