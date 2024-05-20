@@ -4,8 +4,12 @@ import _get from 'lodash/get'
 import { useEffect, useRef, useState } from 'react'
 import { animated, useSpring } from 'react-spring'
 
-import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
-import { Media, useEventListener } from '~/components'
+import {
+  BREAKPOINTS,
+  BYPASS_SCROLL_LOCK,
+  ENBABLE_SCROLL_LOCK,
+} from '~/common/enums'
+import { useEventListener, useMediaQuery } from '~/components'
 
 import { RoundedButton, TextButton } from './Buttons'
 import Content from './Content'
@@ -145,9 +149,10 @@ export const Dialog: React.ComponentType<
   RoundedButton: typeof RoundedButton
   Lazy: typeof Lazy
 } = (props) => {
-  const { isOpen, testId } = props
+  const { isOpen } = props
   const [mounted, setMounted] = useState(isOpen)
   const [bypassScrollLock, setBypassScrollLock] = useState(false)
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   useEffect(() => {
     if (isOpen) {
@@ -168,15 +173,10 @@ export const Dialog: React.ComponentType<
 
   const dialogProps = { ...props, mounted, setMounted, bypassScrollLock }
 
-  return (
-    <div {...(testId ? { 'data-test-id': testId } : {})}>
-      <Media at="sm">
-        <BaseSimpleDialog {...dialogProps} />
-      </Media>
-      <Media greaterThan="sm">
-        <BaseAnimatedDilaog {...dialogProps} />
-      </Media>
-    </div>
+  return isSmUp ? (
+    <BaseAnimatedDilaog {...dialogProps} />
+  ) : (
+    <BaseSimpleDialog {...dialogProps} />
   )
 }
 

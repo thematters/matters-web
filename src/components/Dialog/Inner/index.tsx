@@ -19,6 +19,8 @@ export type DialogInnerProps = {
 
   dismissOnClickOutside?: boolean
   dismissOnHandle?: boolean
+
+  testId?: string
 }
 
 const Inner: React.FC<
@@ -39,6 +41,7 @@ const Inner: React.FC<
 
   style,
   initialFocusRef,
+  testId,
 
   children,
 }) => {
@@ -87,6 +90,7 @@ const Inner: React.FC<
 
   return (
     <div
+      {...(testId ? { 'data-test-id': testId } : {})}
       ref={node}
       className={innerClasses}
       style={style}
