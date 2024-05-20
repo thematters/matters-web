@@ -50,11 +50,6 @@ const SupportButton = ({
         <DonationButton
           supported={supported}
           onClick={() => {
-            analytics.trackEvent('click_button', {
-              type: 'article_end_donate_open',
-              pageType: 'article_detail',
-            })
-
             if (!viewer.isAuthed) {
               window.dispatchEvent(
                 new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
@@ -85,7 +80,17 @@ const SupportButton = ({
     <>
       <Media at="sm">
         <SupportDialog article={article}>
-          {({ openDialog }) => <Content onClick={openDialog} />}
+          {({ openDialog }) => (
+            <Content
+              onClick={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'article_end_donate_open',
+                  pageType: 'article_detail',
+                })
+                openDialog()
+              }}
+            />
+          )}
         </SupportDialog>
       </Media>
       <Media greaterThan="sm">
