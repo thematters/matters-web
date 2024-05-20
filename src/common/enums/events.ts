@@ -26,6 +26,8 @@ export const OPEN_SHOW_NOMAD_BADGE_DIALOG = 'openShowNomadBadgeDialog'
 export const OPEN_COMMENT_DETAIL_DIALOG = 'openCommentDetailDialog'
 export const OPEN_COMMENT_LIST_DRAWER = 'openCommentListDrawer'
 export const CLOSE_OTHER_DRAWERS = 'closeOtherDrawers'
+export const BYPASS_SCROLL_LOCK = 'bypassScrollLock'
+export const ENBABLE_SCROLL_LOCK = 'enableScrollLock'
 
 // Toast
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'

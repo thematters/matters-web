@@ -1,10 +1,10 @@
 .articleEditor {
   position: relative;
   height: calc(
-    100vh - 3rem -4rem - var(--sp16) * 2
+    100vh - 3rem - 4rem - var(--sp16) * 2
   ); /* 3rem for header, 4rem for bottom bar */
 
-  height: calc(var(--vvh) * 100 - 3rem -4rem - var(--sp16) * 2);
+  height: calc(var(--ivh) * 100 - 3rem - 4rem - var(--sp16) * 2);
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -18,7 +18,7 @@
   & :global(.ProseMirror),
   & :global(.tiptap) {
     min-height: 50vh;
-    min-height: calc(var(--vvh) * 50);
+    min-height: calc(var(--ivh) * 50);
 
     /* outline */
     &:focus {
@@ -95,17 +95,6 @@
       & > * {
         pointer-events: none;
       }
-    }
-  }
-}
-
-:global(body.editor-focused) {
-  & .articleEditor {
-    height: calc(100vh - 3rem - var(--sp16) * 2); /* 3rem for header */
-    height: calc(var(--vvh) * 100 - 3rem - var(--sp16) * 2);
-
-    @media (--md-up) {
-      height: auto;
     }
   }
 }

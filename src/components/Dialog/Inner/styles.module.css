@@ -1,0 +1,34 @@
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-white);
+  border-radius: var(--sp8) var(--sp8) 0 0;
+  will-change: transform, top;
+
+  & :global(:nth-last-child(1 of [data-dialog-entity='true'])) {
+    @media (--sm-down) {
+      padding-bottom: var(--sp40);
+    }
+  }
+
+  &.bgGreyLighter {
+    background: var(--color-grey-lighter);
+
+    @media (--sm-up) {
+      background: var(--color-white);
+    }
+  }
+
+  &.bgGreyLighterSmUp {
+    @media (--md-up) {
+      background: var(--color-grey-lighter);
+    }
+  }
+
+  @media (--sm-up) {
+    border-radius: var(--sp8);
+    will-change: opacity;
+  }
+}

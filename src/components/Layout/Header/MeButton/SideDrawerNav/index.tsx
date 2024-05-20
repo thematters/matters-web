@@ -5,6 +5,7 @@ import { animated, useTransition } from 'react-spring'
 
 import DrawerContent from './DrawerContent'
 import Overlay from './Overlay'
+import styles from './styles.module.css'
 
 export interface SideDrawerNavProps {
   isOpen: boolean | undefined
@@ -37,12 +38,13 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
     <>
       {transition(({ opacity, transform }) => (
         <AnimatedDrawerOverlay
+          className={styles.overlay}
           initialFocusRef={closeButtonRef}
-          className="sideDrawerNav"
         >
           <AnimatedOverlay style={{ opacity: opacity as any }} />
 
           <DialogContent
+            className={styles.content}
             aria-labelledby={intl.formatMessage({
               defaultMessage: 'Menu: Me',
               id: 'cv6yHm',
