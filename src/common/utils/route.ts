@@ -276,12 +276,6 @@ export const redirectToTarget = ({
  *
  * (works on CSR)
  */
-export const redirectToLogin = () => {
-  const target = getTarget() || getEncodedCurrent()
-
-  return Router.push(`${PATHS.LOGIN}?target=${target}`)
-}
-
 export const redirectToHomePage = () => {
   const target = getTarget() || getEncodedCurrent()
 

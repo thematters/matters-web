@@ -35,6 +35,7 @@ type Props = {
 const RecommendCircle = ({ circle, ...cardProps }: Props) => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
+  const isEmailVerified = !!viewer.info.emailVerified
 
   const { displayName, description } = circle
   const path = toPath({
@@ -86,7 +87,7 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
                           return
                         }
 
-                        if (!hasEmail) {
+                        if (!hasEmail || !isEmailVerified) {
                           openBindEmailHintDialog()
                           return
                         }

@@ -1,6 +1,8 @@
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, URL_ME_SETTINGS } from '~/common/enums'
+import { ViewerContext } from '~/components/Context'
 import { Dialog } from '~/components/Dialog'
 import { useRoute } from '~/components/Hook'
 
@@ -10,35 +12,52 @@ interface Props {
 
 const Content: React.FC<Props> = ({ closeDialog }) => {
   const { router } = useRoute()
+  const viewer = useContext(ViewerContext)
+  const hasEmail = !!viewer.info.email
 
-  const gotoBindEmail = () => {
-    // go to settings page and open setEmailDialog
-    router.push(
-      PATHS.ME_SETTINGS +
-        `?${URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.key}=${URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.value}`
-    )
+  const gotoSettings = () => {
+    if (!hasEmail) {
+      router.push(
+        PATHS.ME_SETTINGS +
+          `?${URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.key}=${URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.value}`
+      )
+    } else {
+      router.push(PATHS.ME_SETTINGS)
+    }
   }
 
   return (
     <>
       <Dialog.Header
         title={
-          <FormattedMessage
-            defaultMessage="Please connect email"
-            id="Me4s4Q"
-            description="src/components/Dialogs/BindEmailHintDialog/index.tsx"
-          />
+          !hasEmail ? (
+            <FormattedMessage
+              defaultMessage="Please connect email"
+              id="WxhsrG"
+            />
+          ) : (
+            <FormattedMessage
+              defaultMessage="Please verify email"
+              id="K2ec8y"
+            />
+          )
         }
       />
 
       <Dialog.Content>
         <Dialog.Content.Message>
           <p>
-            <FormattedMessage
-              defaultMessage="You have not connected your email yet. For security, email is required for top-up."
-              id="Dq29Hb"
-              description="src/components/Dialogs/BindEmailHintDialog/index.tsx"
-            />
+            {!hasEmail ? (
+              <FormattedMessage
+                defaultMessage="You have not connected your email yet. For security, email is required for top-up."
+                id="OK2u69"
+              />
+            ) : (
+              <FormattedMessage
+                defaultMessage="You have not verified your email yet. For security, email is required for top-up."
+                id="iyvpwA"
+              />
+            )}
           </p>
         </Dialog.Content.Message>
       </Dialog.Content>
@@ -48,13 +67,21 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
           <>
             <Dialog.RoundedButton
               text={
-                <FormattedMessage
-                  defaultMessage="Go to Settings"
-                  id="XfRKZY"
-                  description="src/components/Dialogs/BindEmailHintDialog/index.tsx"
-                />
+                !hasEmail ? (
+                  <FormattedMessage
+                    defaultMessage="Connect"
+                    description="src/components/Dialogs/BindEmailHintDialog/Content.tsx"
+                    id="vB45rC"
+                  />
+                ) : (
+                  <FormattedMessage
+                    defaultMessage="Verify"
+                    description="src/components/Dialogs/BindEmailHintDialog/Content.tsx"
+                    id="L487Vy"
+                  />
+                )
               }
-              onClick={gotoBindEmail}
+              onClick={gotoSettings}
             />
             <Dialog.RoundedButton
               text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
@@ -72,13 +99,21 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
             />
             <Dialog.TextButton
               text={
-                <FormattedMessage
-                  defaultMessage="Go to Settings"
-                  id="XfRKZY"
-                  description="src/components/Dialogs/BindEmailHintDialog/index.tsx"
-                />
+                !hasEmail ? (
+                  <FormattedMessage
+                    defaultMessage="Connect"
+                    description="src/components/Dialogs/BindEmailHintDialog/Content.tsx"
+                    id="vB45rC"
+                  />
+                ) : (
+                  <FormattedMessage
+                    defaultMessage="Verify"
+                    description="src/components/Dialogs/BindEmailHintDialog/Content.tsx"
+                    id="L487Vy"
+                  />
+                )
               }
-              onClick={gotoBindEmail}
+              onClick={gotoSettings}
             />
           </>
         }

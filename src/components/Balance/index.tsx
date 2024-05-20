@@ -57,9 +57,11 @@ const BalanceAmount: React.FC<{
 
 const TopUpButton: React.FC<{
   isBalanceInsufficient: boolean
-  hasEmail: boolean
   switchToAddCredit?: () => void
-}> = ({ isBalanceInsufficient, hasEmail, switchToAddCredit }) => {
+}> = ({ isBalanceInsufficient, switchToAddCredit }) => {
+  const viewer = useContext(ViewerContext)
+  const hasEmail = !!viewer.info.email
+  const isEmailVerified = !!viewer.info.emailVerified
   const topUpButtonClasses = classNames(styles.topUpButton, {
     [styles.insufficientBorder]: isBalanceInsufficient,
   })
@@ -68,7 +70,11 @@ const TopUpButton: React.FC<{
     <BindEmailHintDialog>
       {({ openDialog }) => (
         <section className={topUpButtonClasses}>
-          <Button onClick={hasEmail ? switchToAddCredit : openDialog}>
+          <Button
+            onClick={
+              hasEmail && isEmailVerified ? switchToAddCredit : openDialog
+            }
+          >
             <TextIcon
               size={14}
               decoration="underline"
@@ -96,9 +102,6 @@ export const Balance: React.FC<BalanceProps> = ({
   switchToAddCredit,
   loading = false,
 }) => {
-  const viewer = useContext(ViewerContext)
-  const hasEmail = !!viewer.info.email
-
   const isHKD = currency === CURRENCY.HKD
 
   const formattedAmount = formatAmount(
@@ -132,7 +135,6 @@ export const Balance: React.FC<BalanceProps> = ({
       {isHKD && showTopUp && (
         <TopUpButton
           isBalanceInsufficient={isBalanceInsufficient}
-          hasEmail={hasEmail}
           switchToAddCredit={switchToAddCredit}
         />
       )}
