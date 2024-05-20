@@ -1,9 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
+import _omit from 'lodash/omit'
 import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
-import { ENTITY_TYPE, MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
+import {
+  ASSET_TYPE,
+  ENTITY_TYPE,
+  MAX_ARTICLE_REVISION_COUNT,
+} from '~/common/enums'
 import {
   EmptyLayout,
   Layout,
@@ -11,6 +16,8 @@ import {
   ReviseArticleDialog,
   SpinnerBlock,
   Throw404,
+  useDirectImageUpload,
+  useMutation,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -27,14 +34,22 @@ import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
 import {
+  DIRECT_IMAGE_UPLOAD,
+  DIRECT_IMAGE_UPLOAD_DONE,
+  SINGLE_FILE_UPLOAD,
+} from '~/components/GQL/mutations/uploadFile'
+import {
   ArticleAccessType,
   ArticleDigestDropdownArticleFragment,
   ArticleLicenseType,
   AssetFragment,
   DigestRichCirclePublicFragment,
   DigestTagFragment,
+  DirectImageUploadDoneMutation,
+  DirectImageUploadMutation,
   QueryEditArticleAssetsQuery,
   QueryEditArticleQuery,
+  SingleFileUploadMutation,
 } from '~/gql/graphql'
 
 import { GET_EDIT_ARTICLE, GET_EDIT_ARTICLE_ASSETS } from './gql'
@@ -195,6 +210,77 @@ const BaseEdit = ({ article }: { article: Article }) => {
     editVersionDescription: setVersionDescription,
   }
 
+  const [singleFileUpload] =
+    useMutation<SingleFileUploadMutation>(SINGLE_FILE_UPLOAD)
+  const [directImageUpload] =
+    useMutation<DirectImageUploadMutation>(DIRECT_IMAGE_UPLOAD)
+  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
+    DIRECT_IMAGE_UPLOAD_DONE,
+    undefined,
+    { showToast: false }
+  )
+  const { upload: uploadImage } = useDirectImageUpload()
+
+  const upload = async (input: {
+    [key: string]: any
+  }): Promise<{ id: string; path: string }> => {
+    const isImage = input.type !== ASSET_TYPE.embedaudio
+
+    const variables = {
+      input: {
+        type: ASSET_TYPE.embed,
+        entityType: ENTITY_TYPE.article,
+        entityId: article.id,
+        ...input,
+      },
+    }
+
+    // upload via directImageUpload
+    if (isImage) {
+      const result = await directImageUpload({
+        variables: _omit(variables, ['input.file']),
+      })
+      const {
+        id: assetId,
+        path,
+        uploadURL,
+      } = result?.data?.directImageUpload || {}
+
+      if (assetId && path && uploadURL) {
+        try {
+          await uploadImage({ uploadURL, file: input.file })
+        } catch (error) {
+          console.error(error)
+          throw new Error('upload not successful')
+        }
+
+        // (async) mark asset draft as false
+        directImageUploadDone({
+          variables: {
+            ..._omit(variables.input, ['file']),
+            draft: false,
+            url: path,
+          },
+        }).catch(console.error)
+
+        return { id: assetId, path }
+      } else {
+        throw new Error('upload not successful')
+      }
+    }
+    // upload via singleFileUpload
+    else {
+      const result = await singleFileUpload({ variables })
+      const { id: assetId, path } = result?.data?.singleFileUpload || {}
+
+      if (assetId && path) {
+        return { id: assetId, path }
+      } else {
+        throw new Error('upload not successful')
+      }
+    }
+  }
+
   return (
     <>
       <Layout.Main
@@ -286,7 +372,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                 setContent(update.content || '')
               }
             }}
-            upload={async () => ({ id: '', path: '' })}
+            upload={upload}
           />
         </Layout.Main.Spacing>
 
