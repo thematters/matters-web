@@ -461,15 +461,9 @@ const BaseArticleDetail = ({
               privateFetched={privateFetched}
               lock={lock}
               showCommentToolbar={showCommentToolbar && article.canComment}
-              openCommentsDialog={() => {
-                analytics.trackEvent('click_button', {
-                  type: 'fixed_toolbar_comment_open',
-                  pageType: 'article_detail',
-                })
-                if (article.commentCount > 0) {
-                  openCommentsDialog()
-                }
-              }}
+              openCommentsDialog={
+                article.commentCount > 0 ? openCommentsDialog : undefined
+              }
             />
           )}
         </CommentsDialog>
