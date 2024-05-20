@@ -85,7 +85,7 @@ const DonationButton = ({
             analytics.trackEvent('click_button', {
               type:
                 resideIn === 'fixedToolbar'
-                  ? 'fixed_toolbar_donate_open'
+                  ? 'fixed_toolbar_support_open'
                   : 'donate',
               pageType: 'article_detail',
             })

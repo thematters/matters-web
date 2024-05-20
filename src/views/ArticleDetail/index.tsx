@@ -391,8 +391,8 @@ const BaseArticleDetail = ({
             toggleDonationDrawer={() => {
               analytics.trackEvent('click_button', {
                 type: isOpenDonationDrawer
-                  ? 'article_end_donate_close'
-                  : 'article_end_donate_open',
+                  ? 'article_end_support_close'
+                  : 'article_end_support_open',
                 pageType: 'article_detail',
               })
               toggleDonationDrawer()
@@ -488,8 +488,8 @@ const BaseArticleDetail = ({
           toggleDonationDrawer={() => {
             analytics.trackEvent('click_button', {
               type: isOpenDonationDrawer
-                ? 'float_toolbar_donate_close'
-                : 'float_toolbar_donate_open',
+                ? 'float_toolbar_support_close'
+                : 'float_toolbar_support_open',
               pageType: 'article_detail',
             })
             toggleDonationDrawer()
@@ -515,8 +515,8 @@ const BaseArticleDetail = ({
           toggleDonationDrawer={() => {
             analytics.trackEvent('click_button', {
               type: isOpenDonationDrawer
-                ? 'float_toolbar_donate_close'
-                : 'float_toolbar_donate_open',
+                ? 'float_toolbar_support_close'
+                : 'float_toolbar_support_open',
               pageType: 'article_detail',
             })
             toggleDonationDrawer()

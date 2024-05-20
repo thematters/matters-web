@@ -77,7 +77,17 @@ const MetaInfo = ({
 
         {!version && article?.revisionCount > 0 && (
           <span>
-            <Button textColor="greyDarker" textActiveColor="black" href={path}>
+            <Button
+              textColor="greyDarker"
+              textActiveColor="black"
+              href={path}
+              onClick={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'article_meta_edited',
+                  pageType: 'article_detail',
+                })
+              }}
+            >
               <span className={styles.edited}>
                 <FormattedMessage defaultMessage=" (edited) " id="7oytv9" />
               </span>
@@ -148,7 +158,7 @@ const MetaInfo = ({
                   disabled={!editable}
                   onClick={() => {
                     analytics.trackEvent('click_button', {
-                      type: 'article_meta_revise',
+                      type: 'article_meta_edit',
                       pageType: 'article_detail',
                     })
                   }}
