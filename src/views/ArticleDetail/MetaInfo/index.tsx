@@ -97,7 +97,7 @@ const MetaInfo = ({
             href={path}
             onClick={() => {
               analytics.trackEvent('click_button', {
-                type: 'meta_ipfs',
+                type: 'article_meta_ipfs',
                 pageType: 'article_detail',
               })
             }}
@@ -146,6 +146,12 @@ const MetaInfo = ({
                   textActiveColor="greyDarker"
                   href={editable ? editPath.href : undefined}
                   disabled={!editable}
+                  onClick={() => {
+                    analytics.trackEvent('click_button', {
+                      type: 'article_meta_revise',
+                      pageType: 'article_detail',
+                    })
+                  }}
                 >
                   <TextIcon icon={<Icon icon={IconEdit} />} size={12}>
                     <FormattedMessage
