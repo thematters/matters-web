@@ -19,6 +19,7 @@ export type ArticleDigestAuthorSidebarProps = {
   showCover?: boolean
   showAuthorInfo?: boolean
   imageSize?: 'sm' | 'md'
+  clickEvent?: () => void
 }
 
 const fragments = {
@@ -51,6 +52,7 @@ export const ArticleDigestAuthorSidebar = ({
   imageSize = 'sm',
   showCover = true,
   showAuthorInfo = false,
+  clickEvent,
 }: ArticleDigestAuthorSidebarProps) => {
   const { articleState: state, author } = article
   const isBanned = state === 'banned'
@@ -77,6 +79,7 @@ export const ArticleDigestAuthorSidebar = ({
     <section
       className={containerClasses}
       data-test-id={TEST_ID.DIGEST_ARTICLE_AUTHOR_SIDEBAR}
+      onClick={clickEvent}
     >
       <section className={styles.left}>
         <header className={headerClasses}>

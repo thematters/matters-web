@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import { analytics } from '~/common/utils'
 import { Button, Icon, TextIcon } from '~/components'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
@@ -38,7 +39,13 @@ const EditCopyButton = ({ article, disabled }: EditCopyButtonProps) => {
               />
             }
             disabled={disabled}
-            onClick={openDialog}
+            onClick={() => {
+              analytics.trackEvent('click_button', {
+                type: 'edit_support_copy',
+                pageType: 'article_detail',
+              })
+              openDialog()
+            }}
           >
             <TextIcon
               icon={<Icon icon={IconEdit} size={20} />}

@@ -35,6 +35,7 @@ export type AppreciationButtonProps = {
   iconSize?: 20 | 24
   textWeight?: 'medium' | 'normal'
   textIconSpacing?: 4 | 6 | 8
+  clickEvent?: () => void
 } & ButtonProps
 
 const AppreciationButton = ({
@@ -44,6 +45,7 @@ const AppreciationButton = ({
   iconSize = 20,
   textWeight = 'medium',
   textIconSpacing = 8,
+  clickEvent,
   ...buttonProps
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
@@ -175,6 +177,7 @@ const AppreciationButton = ({
         total={total}
         iconSize={iconSize}
         textIconSpacing={textIconSpacing}
+        clickEvent={clickEvent}
         {...buttonProps}
       />
     )
@@ -215,6 +218,7 @@ const AppreciationButton = ({
         iconSize={iconSize}
         textWeight={textWeight}
         textIconSpacing={textIconSpacing}
+        clickEvent={clickEvent}
         {...buttonProps}
       />
     )
@@ -234,6 +238,7 @@ const AppreciationButton = ({
           iconSize={iconSize}
           textWeight={textWeight}
           textIconSpacing={textIconSpacing}
+          clickEvent={clickEvent}
           {...buttonProps}
         />
       </section>
@@ -271,6 +276,7 @@ const AppreciationButton = ({
         iconSize={iconSize}
         textWeight={textWeight}
         textIconSpacing={textIconSpacing}
+        clickEvent={clickEvent}
         {...buttonProps}
       />
     )
@@ -285,6 +291,7 @@ const AppreciationButton = ({
         iconSize={iconSize}
         textWeight={textWeight}
         textIconSpacing={textIconSpacing}
+        clickEvent={clickEvent}
         {...buttonProps}
       />
     )
@@ -310,6 +317,7 @@ const AppreciationButton = ({
           iconSize={iconSize}
           textWeight={textWeight}
           textIconSpacing={textIconSpacing}
+          clickEvent={clickEvent}
           {...buttonProps}
         />
       </span>

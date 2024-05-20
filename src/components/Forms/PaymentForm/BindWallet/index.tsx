@@ -10,6 +10,7 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,
 } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Button,
   Icon,
@@ -157,7 +158,13 @@ const BindWallet: React.FC<Props> = ({ currency, callback }) => {
             <Dialog.RoundedButton
               color="white"
               bgColor="green"
-              onClick={gotoSign}
+              onClick={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'bind_wallet_after_donation',
+                  pageType: 'article_detail',
+                })
+                gotoSign()
+              }}
               textWeight="normal"
               textSize={16}
               text={

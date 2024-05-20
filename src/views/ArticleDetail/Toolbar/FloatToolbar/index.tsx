@@ -5,6 +5,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import { ButtonProps, ViewerContext } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
@@ -77,6 +78,12 @@ const FloatToolbar = ({
             privateFetched={privateFetched}
             textIconSpacing={6}
             disabled={lock}
+            clickEvent={() => {
+              analytics.trackEvent('click_button', {
+                type: 'float_toolbar_appreciate',
+                pageType: 'article_detail',
+              })
+            }}
             {...buttonProps}
           />
 
