@@ -7,6 +7,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import { Media, toast, Translate, ViewerContext } from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 import {
@@ -79,7 +80,17 @@ const SupportButton = ({
     <>
       <Media at="sm">
         <SupportDialog article={article}>
-          {({ openDialog }) => <Content onClick={openDialog} />}
+          {({ openDialog }) => (
+            <Content
+              onClick={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'article_end_donate_open',
+                  pageType: 'article_detail',
+                })
+                openDialog()
+              }}
+            />
+          )}
         </SupportDialog>
       </Media>
       <Media greaterThan="sm">
