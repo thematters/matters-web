@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { TEST_ID } from '~/common/enums'
 import { analytics } from '~/common/utils'
@@ -31,6 +32,10 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
           <li key={tag.id} className={styles.listItem}>
             <Tag
               tag={tag}
+              textIconProps={{
+                icon: <Icon icon={IconHashTag} color="grey" />,
+                placement: 'right',
+              }}
               type="article"
               onClick={() => {
                 analytics.trackEvent('click_button', {

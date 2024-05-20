@@ -146,7 +146,7 @@ export const Tag = ({
   const Inner = () => (
     <>
       <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
-        <span className={styles.name}>#&nbsp;{tagName}</span>
+        <span className={styles.name}>{tagName}</span>
       </TextIcon>
 
       {onRemoveTag && (
