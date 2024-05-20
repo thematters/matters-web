@@ -870,10 +870,6 @@
   "Dkkmwm": {
     "defaultMessage": "Bold"
   },
-  "Dq29Hb": {
-    "defaultMessage": "You have not connected your email yet. For security, email is required for top-up.",
-    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
-  },
   "DqQvtL": {
     "defaultMessage": "Unblock",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
@@ -1186,6 +1182,9 @@
     "defaultMessage": "Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account).",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "K2ec8y": {
+    "defaultMessage": "Please verify email"
+  },
   "K3r6DQ": {
     "defaultMessage": "Delete"
   },
@@ -1239,6 +1238,10 @@
   "L34EMG": {
     "defaultMessage": "No account?",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
+  "L487Vy": {
+    "defaultMessage": "Verify",
+    "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
   },
   "L4Fcr8": {
     "defaultMessage": "New Collection"
@@ -1341,10 +1344,6 @@
   "MV0JlP": {
     "defaultMessage": "to receive more support"
   },
-  "Me4s4Q": {
-    "defaultMessage": "Please connect email",
-    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
-  },
   "Me5cJu": {
     "defaultMessage": "Connect wallet",
     "description": "src/components/Dialogs/AddWalletLoginDialog/Content.tsx"
@@ -1429,6 +1428,9 @@
   },
   "OJmFke": {
     "defaultMessage": "Tell readers why you edited this time"
+  },
+  "OK2u69": {
+    "defaultMessage": "You have not connected your email yet. For security, email is required for top-up."
   },
   "OKcHPP": {
     "defaultMessage": "Your Liker ID is ready!"
@@ -1854,6 +1856,9 @@
     "defaultMessage": "Followers of {circleName}",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
   },
+  "WxhsrG": {
+    "defaultMessage": "Please connect email"
+  },
   "X+Xvgq": {
     "defaultMessage": "Unpin Comment",
     "description": "src/components/Comment/DropdownActions/PinButton.tsx"
@@ -1897,10 +1902,6 @@
   "XdLnXf": {
     "defaultMessage": "Insufficient wallet balance.",
     "description": "PAYMENT_BALANCE_INSUFFICIENT"
-  },
-  "XfRKZY": {
-    "defaultMessage": "Go to Settings",
-    "description": "src/components/Dialogs/BindEmailHintDialog/index.tsx"
   },
   "XgdZSb": {
     "defaultMessage": "Authors"
@@ -2444,6 +2445,9 @@
   },
   "ivXY6L": {
     "defaultMessage": "All Authors"
+  },
+  "iyvpwA": {
+    "defaultMessage": "You have not verified your email yet. For security, email is required for top-up."
   },
   "izWS4J": {
     "defaultMessage": "Unfollow"
@@ -3036,6 +3040,10 @@
   },
   "vAc1Bw": {
     "defaultMessage": "Block User"
+  },
+  "vB45rC": {
+    "defaultMessage": "Connect",
+    "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
   },
   "vCt85u": {
     "defaultMessage": "Don't have a wallet yet? Check the",

@@ -136,7 +136,6 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const revisionCountLeft =
     MAX_ARTICLE_REVISION_COUNT - (article?.revisionCount || 0)
   const isOverRevisionLimit = revisionCountLeft <= 0
-  const isReviseDisabled = isOverRevisionLimit
 
   const coverProps: SetCoverProps = {
     cover: cover?.path,
@@ -171,7 +170,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
     license,
     accessSaving: false,
     editAccess,
-    canToggleCircle: !!hasOwnCircle && !isReviseDisabled,
+    canToggleCircle: !!hasOwnCircle && !isOverRevisionLimit,
     iscnPublish,
 
     article: { ...article, replyToDonator, requestForDonation },
@@ -245,9 +244,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                 replyToDonator,
                 requestForDonation,
               }}
-              revisionCountLeft={revisionCountLeft}
               isOverRevisionLimit={isOverRevisionLimit}
-              isEditDisabled={showPublishState}
               onPublish={() => {
                 setShowPublishState(true)
               }}
@@ -316,9 +313,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
         </Media>
       </Layout.Main>
 
-      {!isReviseDisabled && (
-        <ReviseArticleDialog revisionCountLeft={revisionCountLeft} />
-      )}
+      <ReviseArticleDialog revisionCountLeft={revisionCountLeft} />
     </>
   )
 }

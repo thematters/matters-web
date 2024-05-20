@@ -32,7 +32,7 @@ describe('<CollectionDigest/DropdownActions>', () => {
     $editButton.click()
     const $editDialog = screen.getByTestId(TEST_ID.DIALOG_EDIT_COLLECTION)
     expect($editDialog).toBeInTheDocument()
-    screen.getByRole('button', { name: 'Close', hidden: true }).click()
+    screen.getByRole('button', { name: 'Close' }).click()
     await waitFor(() => {
       expect(
         screen.queryByRole('button', { name: 'Close' })

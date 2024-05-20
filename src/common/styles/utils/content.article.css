@@ -392,17 +392,19 @@
 /****
  * Article title
  */
-.u-article-title,
-.editor-title {
+.u-article-title {
   position: relative;
   margin: var(--ar17-100) 0;
+
+  @media (--sm-up) {
+    margin: 0 0 var(--ar17-100) 0;
+  }
 }
 
 .u-article-title h1,
 .editor-title textarea {
   @mixin font-serif;
 
-  margin: 0 0 var(--sp16);
   font-size: var(--text24);
   font-weight: var(--font-weight-article-title);
   line-height: 1.5;
@@ -418,6 +420,14 @@
   @media (--md-up) {
     font-size: var(--font-size-article-title);
     line-height: var(--line-height-article-title);
+  }
+}
+
+.editor-title textarea {
+  margin: 0 0 var(--sp16);
+
+  @media (--sm-up) {
+    margin: var(--sp16) 0;
   }
 }
 

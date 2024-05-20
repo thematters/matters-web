@@ -14,6 +14,7 @@ import {
   ArticleAppreciationContext,
   ArticleAppreciationProvider,
   BackToHomeButton,
+  BackToHomeMobileButton,
   EmptyLayout,
   Error,
   Head,
@@ -340,6 +341,9 @@ const BaseArticleDetail = ({
       </Media>
 
       <section className={styles.content}>
+        <Media at="sm" className={styles.mobileLogo}>
+          <BackToHomeMobileButton />
+        </Media>
         <section className="u-article-title">
           <h1>{title}</h1>
 

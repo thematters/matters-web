@@ -41,13 +41,14 @@ const TopUpItem = ({
 }: ItemProps & { openBindEmailHintDialog: () => void }) => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
+  const isEmailVerified = !!viewer.info.emailVerified
 
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Top Up" id="dTOtPO" />}
       icon={<Icon icon={IconWallet} size={20} />}
       onClick={() => {
-        if (hasEmail) {
+        if (hasEmail && isEmailVerified) {
           openDialog()
         } else {
           openBindEmailHintDialog()

@@ -112,12 +112,6 @@ const Bottom = () => {
 
       removeCookies([COOKIE_TOKEN_NAME, COOKIE_USER_GROUP])
 
-      // toast.success({
-      //   message: <FormattedMessage defaultMessage="Logged out successfully" />,
-      // })
-
-      // await clearPersistCache()
-
       redirectToTarget()
     } catch (e) {
       toast.error({
