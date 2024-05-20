@@ -54,12 +54,8 @@
 .article {
   position: relative;
   grid-column: content;
-  min-height: 100vh;
-  min-height: calc(var(--ivh) * 100);
 
   @media (--sm-up) {
-    grid-column: content;
-
     /* FIXME: page scrollbar is showed on open dialog */
     min-height: calc(100vh + 1px);
     min-height: calc(var(--ivh) * 100 + 1px);

@@ -80,6 +80,7 @@ const UniversalAuth = () => {
   return (
     <>
       <Head />
+
       <section className={styles.wrapper}>
         <section className={containerClasses}>
           {currStep === 'select-login-method' && (

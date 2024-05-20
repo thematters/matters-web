@@ -36,9 +36,7 @@ type EditModeHeaderProps = {
     replyToDonator?: string | null
   }
 
-  revisionCountLeft: number
   isOverRevisionLimit: boolean
-  isEditDisabled: boolean
 
   onPublish: () => any
 } & Omit<
@@ -55,9 +53,7 @@ type EditModeHeaderProps = {
 const EditModeHeader = ({
   article,
   revision,
-  revisionCountLeft,
   isOverRevisionLimit,
-  isEditDisabled,
 
   onPublish,
 
@@ -66,6 +62,10 @@ const EditModeHeader = ({
   const { tags, collection, circle, accessType, license } = restProps
   const [editArticle, { loading }] =
     useMutation<EditArticleMutation>(EDIT_ARTICLE)
+
+  const hasTitle = revision.title && revision.title.trim().length > 0
+  const hasContent =
+    revision.content && stripHtml(revision.content).trim().length > 0
 
   const isTitleRevised = revision.title !== article.title
   const isSummaryRevised = revision.summary !== article.summary
@@ -178,6 +178,14 @@ const EditModeHeader = ({
     <ConfirmRevisedPublishDialogContent onSave={onSave} {...props} />
   )
 
+  const disabled =
+    !isRevised ||
+    loading ||
+    isOverRevisionLimit ||
+    !hasTitle ||
+    !hasContent ||
+    isOverLength
+
   return (
     <section className={styles.header}>
       <span />
@@ -198,7 +206,7 @@ const EditModeHeader = ({
             requestForDonation: revision.requestForDonation,
           }}
           saving={loading}
-          disabled={!isRevised || loading}
+          disabled={disabled}
           confirmButtonText={
             needRepublish ? (
               <FormattedMessage defaultMessage="Publish" id="syEQFE" />
@@ -219,7 +227,7 @@ const EditModeHeader = ({
               bgColor="green"
               onClick={openEditorSettingsDialog}
               aria-haspopup="dialog"
-              disabled={!isRevised || isEditDisabled || isOverLength}
+              disabled={disabled}
             >
               <TextIcon color="white" size={16} weight="medium">
                 <FormattedMessage defaultMessage="Next Step" id="8cv9D4" />

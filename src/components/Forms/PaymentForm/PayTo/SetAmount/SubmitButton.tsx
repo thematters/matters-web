@@ -70,6 +70,8 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
 }) => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
+  const isEmailVerified = !!viewer.info.emailVerified
+
   if (walletBalanceError && refetchWalletBalance) {
     return (
       <WrapperButton
@@ -102,7 +104,9 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
             return (
               <WrapperButton
                 type="button"
-                onClick={hasEmail ? switchToAddCredit : openDialog}
+                onClick={
+                  hasEmail && isEmailVerified ? switchToAddCredit : openDialog
+                }
                 {...props}
               />
             )

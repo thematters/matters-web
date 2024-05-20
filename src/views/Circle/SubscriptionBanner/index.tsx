@@ -35,6 +35,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
   const isOwner = circle?.owner?.id === viewer.id
   const isInvited = circle?.invitedBy?.state === InvitationState.Pending
   const hasEmail = !!viewer.info.email
+  const isEmailVerified = !!viewer.info.emailVerified
 
   if (isMember || isOwner) {
     return null
@@ -67,7 +68,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
                 return
               }
 
-              if (!hasEmail) {
+              if (!hasEmail || !isEmailVerified) {
                 openBindEmailHintDialog()
                 return
               }
