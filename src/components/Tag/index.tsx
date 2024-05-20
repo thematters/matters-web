@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { clampTag, toPath } from '~/common/utils'
 import { Icon, IconProps, TextIcon, TextIconProps } from '~/components'
@@ -141,6 +142,8 @@ export const Tag = ({
   textIconProps = {
     ...textIconProps,
     ...customTextIconProps,
+    icon: <Icon icon={IconHashTag} color="grey" />,
+    placement: 'right',
   }
 
   const Inner = () => (
