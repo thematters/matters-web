@@ -86,6 +86,7 @@ interface ClickButtonProp {
     | 'article_end_toolbar_appreciate'
     | 'article_end_toolbar_comment_open'
     | 'article_end_toolbar_comment_close'
+    | 'article_end_toolbar_share_open'
     | 'article_end_donate_open'
     | 'article_end_donate_close'
     | 'fixed_toolbar_appreciate'
