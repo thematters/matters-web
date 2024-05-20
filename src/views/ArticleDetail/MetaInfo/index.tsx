@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
 import { MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import {
   Button,
   DateTime,
@@ -91,7 +91,17 @@ const MetaInfo = ({
           <section className={styles.dot}>
             <DotDivider />
           </section>
-          <Button textColor="black" textActiveColor="greyDarker" href={path}>
+          <Button
+            textColor="black"
+            textActiveColor="greyDarker"
+            href={path}
+            onClick={() => {
+              analytics.trackEvent('click_button', {
+                type: 'meta_ipfs',
+                pageType: 'article_detail',
+              })
+            }}
+          >
             <TextIcon size={12}>IPFS</TextIcon>
           </Button>
         </>

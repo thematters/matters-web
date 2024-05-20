@@ -7,6 +7,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import { Media, toast, Translate, ViewerContext } from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 import {
@@ -49,6 +50,11 @@ const SupportButton = ({
         <DonationButton
           supported={supported}
           onClick={() => {
+            analytics.trackEvent('click_button', {
+              type: 'article_end_donate_open',
+              pageType: 'article_detail',
+            })
+
             if (!viewer.isAuthed) {
               window.dispatchEvent(
                 new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {

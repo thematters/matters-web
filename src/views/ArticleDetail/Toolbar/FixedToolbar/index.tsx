@@ -82,7 +82,7 @@ const FixedToolbar = ({
                 className={styles.commentButton}
                 onClick={() => {
                   analytics.trackEvent('click_button', {
-                    type: 'fixed_toolbar_comment_open',
+                    type: 'fixed_toolbar_comment_placeholder',
                     pageType: 'article_detail',
                   })
 

@@ -81,6 +81,7 @@ interface ClickButtonProp {
     | 'bind_wallet_after_donation'
     | 'edit_support_copy'
     | 'history_version'
+    | 'meta_ipfs'
     | 'article_end_toolbar_appreciate'
     | 'article_end_toolbar_comment_open'
     | 'article_end_toolbar_comment_close'
@@ -88,6 +89,7 @@ interface ClickButtonProp {
     | 'article_end_donate_close'
     | 'fixed_toolbar_appreciate'
     | 'fixed_toolbar_comment_open'
+    | 'fixed_toolbar_comment_placeholder'
     | 'fixed_toolbar_donate_open'
     | 'float_toolbar_appreciate'
     | 'float_toolbar_comment_open'
@@ -171,6 +173,7 @@ interface ClickFeedProp {
   contentType: ContentType | ActivityType
   location: number | string
   id?: string
+  rootId?: string
   searchKey?: string
 }
 
