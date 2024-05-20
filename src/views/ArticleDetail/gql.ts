@@ -106,7 +106,6 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
     $shortHash: String
     $language: UserLanguage!
     $includeTranslation: Boolean = false
-    $includeCanSuperLike: Boolean = true
   ) {
     article(input: { shortHash: $shortHash }) {
       ...ArticlePublicArticle
@@ -116,7 +115,7 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
-  query ArticleDetailPrivate($id: ID!, $includeCanSuperLike: Boolean!) {
+  query ArticleDetailPrivate($id: ID!) {
     article: node(input: { id: $id }) {
       ... on Article {
         id

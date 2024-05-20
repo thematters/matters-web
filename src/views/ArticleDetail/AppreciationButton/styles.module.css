@@ -28,40 +28,4 @@
     transition: transform 0.2s ease-in-out;
     transform: scale(1);
   }
-
-  & .iconSuperlike {
-    position: absolute;
-    top: -0.25rem;
-    left: -0.25rem;
-    width: 1.75rem;
-    height: 1.75rem;
-    opacity: 0;
-    transition: transform 0.2s ease-in-out;
-    transform: scale(0);
-  }
-
-  & .iconSuperlike :global(.superlike_svg__star) {
-    fill-opacity: 0;
-    transition: fill-opacity 0.1s ease-in-out;
-  }
-}
-
-.isSuperLike {
-  color: var(--color-matters-gold);
-
-  & .iconLike {
-    opacity: 0;
-    transform: scale(0);
-  }
-
-  & .iconSuperlike {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  &.superLiked {
-    & .iconSuperlike :global(.superlike_svg__star) {
-      fill-opacity: 1;
-    }
-  }
 }
