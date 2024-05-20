@@ -6,7 +6,7 @@
     "defaultMessage": "{totalCount} 人赞赏了作品"
   },
   "+51DoZ": {
-    "defaultMessage": "请先验证邮箱",
+    "defaultMessage": "请验证邮箱",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
   "+5O5ev": {
@@ -1239,10 +1239,6 @@
     "defaultMessage": "没有帐号？",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
-  "L487Vy": {
-    "defaultMessage": "去验证",
-    "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
-  },
   "L4Fcr8": {
     "defaultMessage": "新建选集"
   },
@@ -2257,6 +2253,9 @@
   "ezYuE2": {
     "defaultMessage": "支持作者"
   },
+  "f24jaP": {
+    "defaultMessage": "信用卡支持需发送财务信息相关邮件，请您先验证电子邮件地址。"
+  },
   "fBzH+2": {
     "defaultMessage": "不允许读者回应本文（可通过编辑打开回应功能）"
   },
@@ -2445,9 +2444,6 @@
   },
   "ivXY6L": {
     "defaultMessage": "全部作者"
-  },
-  "iyvpwA": {
-    "defaultMessage": "你尚未验证邮箱。基于资金安全考虑，储值需验证邮箱。"
   },
   "izWS4J": {
     "defaultMessage": "取消追踪"

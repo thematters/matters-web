@@ -54,8 +54,8 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
               />
             ) : (
               <FormattedMessage
-                defaultMessage="You have not verified your email yet. For security, email is required for top-up."
-                id="iyvpwA"
+                defaultMessage="Credit card support requires emails related to financial information, please verify your email address first."
+                id="f24jaP"
               />
             )}
           </p>
@@ -65,26 +65,26 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
       <Dialog.Footer
         btns={
           <>
-            <Dialog.RoundedButton
-              text={
-                !hasEmail ? (
+            {!hasEmail && (
+              <Dialog.RoundedButton
+                text={
                   <FormattedMessage
                     defaultMessage="Connect"
                     description="src/components/Dialogs/BindEmailHintDialog/Content.tsx"
                     id="vB45rC"
                   />
+                }
+                onClick={gotoSettings}
+              />
+            )}
+            <Dialog.RoundedButton
+              text={
+                !hasEmail ? (
+                  <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
                 ) : (
-                  <FormattedMessage
-                    defaultMessage="Verify"
-                    description="src/components/Dialogs/BindEmailHintDialog/Content.tsx"
-                    id="L487Vy"
-                  />
+                  <FormattedMessage defaultMessage="Close" id="rbrahO" />
                 )
               }
-              onClick={gotoSettings}
-            />
-            <Dialog.RoundedButton
-              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
               color="greyDarker"
               onClick={closeDialog}
             />
@@ -93,28 +93,28 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
         smUpBtns={
           <>
             <Dialog.TextButton
-              text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
+              text={
+                !hasEmail ? (
+                  <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+                ) : (
+                  <FormattedMessage defaultMessage="Close" id="rbrahO" />
+                )
+              }
               color="greyDarker"
               onClick={closeDialog}
             />
-            <Dialog.TextButton
-              text={
-                !hasEmail ? (
+            {!hasEmail && (
+              <Dialog.TextButton
+                text={
                   <FormattedMessage
                     defaultMessage="Connect"
                     description="src/components/Dialogs/BindEmailHintDialog/Content.tsx"
                     id="vB45rC"
                   />
-                ) : (
-                  <FormattedMessage
-                    defaultMessage="Verify"
-                    description="src/components/Dialogs/BindEmailHintDialog/Content.tsx"
-                    id="L487Vy"
-                  />
-                )
-              }
-              onClick={gotoSettings}
-            />
+                }
+                onClick={gotoSettings}
+              />
+            )}
           </>
         }
       />

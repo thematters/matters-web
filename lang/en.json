@@ -1239,10 +1239,6 @@
     "defaultMessage": "No account?",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
-  "L487Vy": {
-    "defaultMessage": "Verify",
-    "description": "src/components/Dialogs/BindEmailHintDialog/Content.tsx"
-  },
   "L4Fcr8": {
     "defaultMessage": "New Collection"
   },
@@ -2257,6 +2253,9 @@
   "ezYuE2": {
     "defaultMessage": "Support Author"
   },
+  "f24jaP": {
+    "defaultMessage": "Credit card support requires emails related to financial information, please verify your email address first."
+  },
   "fBzH+2": {
     "defaultMessage": "Disallow readers to respond to this article (you can enable responses later by editing this article)"
   },
@@ -2445,9 +2444,6 @@
   },
   "ivXY6L": {
     "defaultMessage": "All Authors"
-  },
-  "iyvpwA": {
-    "defaultMessage": "You have not verified your email yet. For security, email is required for top-up."
   },
   "izWS4J": {
     "defaultMessage": "Unfollow"
