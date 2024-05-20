@@ -16,6 +16,7 @@ type ShareButtonBaseProps = {
   iconSize?: Extract<IconSize, 20 | 24>
   iconColor?: Extract<IconColor, 'green' | 'grey' | 'black' | 'white'>
   inCard: boolean
+  clickEvent?: () => void
 } & Omit<ShareDialogProps, 'children'>
 
 type ShareButtonProps = ShareButtonBaseProps &
@@ -37,6 +38,7 @@ export const ShareButton: React.FC<
   inCard,
   size,
   spacing,
+  clickEvent,
   ...props
 }) => {
   const intl = useIntl()
@@ -57,7 +59,12 @@ export const ShareButton: React.FC<
             id: 'OKhRC6',
           })}
           aria-haspopup="dialog"
-          onClick={openDialog}
+          onClick={() => {
+            if (clickEvent) {
+              clickEvent()
+            }
+            openDialog()
+          }}
           disabled={disabled}
         >
           {hasIcon && <Icon icon={IconShare} size={iconSize} />}
