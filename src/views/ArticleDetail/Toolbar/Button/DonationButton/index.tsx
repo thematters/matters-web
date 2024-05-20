@@ -26,6 +26,7 @@ export type DonationButtonProps = {
   iconSize?: 20 | 24
   textWeight?: 'medium' | 'normal'
   textIconSpacing?: 4 | 6 | 8
+  resideIn?: string
 } & ButtonProps
 
 const fragments = {
@@ -45,6 +46,7 @@ const DonationButton = ({
   iconSize = 20,
   textWeight = 'medium',
   textIconSpacing = 6,
+  resideIn,
   ...buttonProps
 }: DonationButtonProps) => {
   const viewer = useContext(ViewerContext)
@@ -80,7 +82,13 @@ const DonationButton = ({
           aria-haspopup="dialog"
           disabled={articleDetail.author.id === viewer.id}
           onClick={() => {
-            analytics.trackEvent('click_button', { type: 'donate' })
+            analytics.trackEvent('click_button', {
+              type:
+                resideIn === 'fixedToolbar'
+                  ? 'fixed_toolbar_donate_open'
+                  : 'donate',
+              pageType: 'article_detail',
+            })
             if (!viewer.isAuthed) {
               window.dispatchEvent(
                 new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {

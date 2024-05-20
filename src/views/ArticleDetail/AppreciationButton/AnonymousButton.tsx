@@ -12,6 +12,7 @@ const AnonymousButton = ({
   iconSize = 20,
   textWeight = 'medium',
   textIconSpacing = 8,
+  clickEvent,
   ...buttonProps
 }: {
   count?: number
@@ -19,11 +20,16 @@ const AnonymousButton = ({
   iconSize?: 20 | 24
   textWeight?: 'medium' | 'normal'
   textIconSpacing?: 4 | 6 | 8
+  clickEvent?: () => void
 } & ButtonProps) => (
   <AppreciateButton
     count={count}
     total={total}
     onClick={() => {
+      if (clickEvent) {
+        clickEvent()
+      }
+
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
           detail: { trigger: UNIVERSAL_AUTH_TRIGGER.appreciation },

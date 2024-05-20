@@ -23,6 +23,7 @@ export type AppreciateButtonProps = {
   iconSize?: 20 | 24
   textWeight?: 'medium' | 'normal'
   textIconSpacing?: 4 | 6 | 8
+  clickEvent?: () => void
 } & ButtonProps
 
 const AppreciateButton: React.FC<AppreciateButtonProps> = ({
@@ -35,6 +36,7 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
   iconSize = 20,
   textWeight = 'medium',
   textIconSpacing = 8,
+  clickEvent,
   ...buttonProps
 }) => {
   const intl = useIntl()
@@ -58,6 +60,9 @@ const AppreciateButton: React.FC<AppreciateButtonProps> = ({
         )}
         disabled={disabled}
         onClick={() => {
+          if (clickEvent) {
+            clickEvent()
+          }
           if (iconRef.current) {
             clap.clap(iconRef.current)
           }

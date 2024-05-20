@@ -7,7 +7,7 @@ import {
   TOOLBAR_FIXEDTOOLBAR_ID,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { toLocale, toPath } from '~/common/utils'
+import { analytics, toLocale, toPath } from '~/common/utils'
 import { ButtonProps, CommentFormBetaDialog, ViewerContext } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -111,6 +111,12 @@ const FixedToolbar = ({
               textWeight="normal"
               textIconSpacing={4}
               disabled={lock}
+              clickEvent={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'fixed_toolbar_appreciate',
+                  pageType: 'article_detail',
+                })
+              }}
               {...buttonProps}
             />
 
@@ -149,6 +155,7 @@ const FixedToolbar = ({
               iconSize={24}
               textWeight="normal"
               textIconSpacing={4}
+              resideIn="fixedToolbar"
               {...buttonProps}
             />
 
