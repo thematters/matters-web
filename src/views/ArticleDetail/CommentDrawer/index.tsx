@@ -1,7 +1,9 @@
 import dynamic from 'next/dynamic'
+import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
+import { analytics } from '~/common/utils'
 import { CommentDraftsProvider, Drawer, Icon } from '~/components'
 
 import { Placeholder as CommentsPlaceholder } from '../Comments/Placeholder'
@@ -41,6 +43,15 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
   const intl = useIntl()
   const isCommentDetail = step === 'commentDetail'
   const isCommentList = step === 'commentList'
+
+  useEffect(() => {
+    if (isOpen) {
+      analytics.trackEvent('view_comment_drawer', {
+        contentType: 'article',
+        id: id,
+      })
+    }
+  }, [isOpen])
 
   return (
     <CommentDraftsProvider>

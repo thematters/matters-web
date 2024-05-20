@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import { Dropdown, Icon, Label, Menu, useRoute } from '~/components'
 import { VersionsArticleFragment } from '~/gql/graphql'
 
@@ -90,6 +90,12 @@ const VersionsDropdown = ({
                 },
               }).href
             }
+            onClick={() => {
+              analytics.trackEvent('click_button', {
+                type: 'history_version',
+                pageType: 'article_history',
+              })
+            }}
           />
         ))}
       </Menu>

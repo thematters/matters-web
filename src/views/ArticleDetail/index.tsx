@@ -8,7 +8,7 @@ import {
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
 } from '~/common/enums'
-import { normalizeTag, toPath } from '~/common/utils'
+import { analytics, normalizeTag, toPath } from '~/common/utils'
 import {
   ActiveCommentEditorProvider,
   ArticleAppreciationContext,
@@ -388,7 +388,15 @@ const BaseArticleDetail = ({
           <DynamicSupportWidget
             article={article}
             disable={lock}
-            toggleDonationDrawer={toggleDonationDrawer}
+            toggleDonationDrawer={() => {
+              analytics.trackEvent('click_button', {
+                type: isOpenDonationDrawer
+                  ? 'article_end_donate_close'
+                  : 'article_end_donate_open',
+                pageType: 'article_detail',
+              })
+              toggleDonationDrawer()
+            }}
           />
         )}
 
@@ -401,7 +409,15 @@ const BaseArticleDetail = ({
               privateFetched={privateFetched}
               hasReport
               lock={lock}
-              toggleDrawer={toggleCommentDrawer}
+              toggleDrawer={() => {
+                analytics.trackEvent('click_button', {
+                  type: isOpenComment
+                    ? 'article_end_toolbar_comment_close'
+                    : 'article_end_toolbar_comment_open',
+                  pageType: 'article_detail',
+                })
+                toggleCommentDrawer()
+              }}
             />
           </div>
         </Media>
@@ -445,9 +461,15 @@ const BaseArticleDetail = ({
               privateFetched={privateFetched}
               lock={lock}
               showCommentToolbar={showCommentToolbar && article.canComment}
-              openCommentsDialog={
-                article.commentCount > 0 ? openCommentsDialog : undefined
-              }
+              openCommentsDialog={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'fixed_toolbar_comment_open',
+                  pageType: 'article_detail',
+                })
+                if (article.commentCount > 0) {
+                  openCommentsDialog()
+                }
+              }}
             />
           )}
         </CommentsDialog>
@@ -460,8 +482,24 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
-          toggleCommentDrawer={toggleCommentDrawer}
-          toggleDonationDrawer={toggleDonationDrawer}
+          toggleCommentDrawer={() => {
+            analytics.trackEvent('click_button', {
+              type: isOpenComment
+                ? 'float_toolbar_comment_close'
+                : 'float_toolbar_comment_open',
+              pageType: 'article_detail',
+            })
+            toggleCommentDrawer()
+          }}
+          toggleDonationDrawer={() => {
+            analytics.trackEvent('click_button', {
+              type: isOpenDonationDrawer
+                ? 'float_toolbar_donate_close'
+                : 'float_toolbar_donate_open',
+              pageType: 'article_detail',
+            })
+            toggleDonationDrawer()
+          }}
         />
       </Media>
 
@@ -471,8 +509,24 @@ const BaseArticleDetail = ({
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
-          toggleCommentDrawer={toggleCommentDrawer}
-          toggleDonationDrawer={toggleDonationDrawer}
+          toggleCommentDrawer={() => {
+            analytics.trackEvent('click_button', {
+              type: isOpenComment
+                ? 'float_toolbar_comment_close'
+                : 'float_toolbar_comment_open',
+              pageType: 'article_detail',
+            })
+            toggleCommentDrawer()
+          }}
+          toggleDonationDrawer={() => {
+            analytics.trackEvent('click_button', {
+              type: isOpenDonationDrawer
+                ? 'float_toolbar_donate_close'
+                : 'float_toolbar_donate_open',
+              pageType: 'article_detail',
+            })
+            toggleDonationDrawer()
+          }}
         />
       </Media>
     </Layout.Main>

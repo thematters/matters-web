@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 import Sticky from 'react-stickynode'
 
-import { toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import { Label, useRoute } from '~/components'
 import { VersionsArticleFragment } from '~/gql/graphql'
 
@@ -33,6 +33,12 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
                 [styles.item]: true,
                 [styles.active]: version.id === currVersion,
               })}
+              onClick={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'history_version',
+                  pageType: 'article_history',
+                })
+              }}
             >
               <Link
                 href={

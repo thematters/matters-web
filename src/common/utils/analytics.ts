@@ -32,6 +32,7 @@ type EventArgs =
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
   | ['view_subscribe_circle_dialog', ViewDialogProp]
+  | ['view_comment_drawer', ViewDrawerProp]
   | ['banner_exposure', BannerExposureProp]
   | ['card_exposure', CardExposureProp]
   | ['tag_exposure', TagExposureProp]
@@ -77,6 +78,22 @@ interface ClickButtonProp {
     | 'try_login_from_visitor'
     | 'bind_ens'
     | 'bind_ens_successfully'
+    | 'bind_wallet_after_donation'
+    | 'edit_support_copy'
+    | 'history_version'
+    | 'article_end_toolbar_appreciate'
+    | 'article_end_toolbar_comment_open'
+    | 'article_end_toolbar_comment_close'
+    | 'article_end_donate_open'
+    | 'article_end_donate_close'
+    | 'fixed_toolbar_appreciate'
+    | 'fixed_toolbar_comment_open'
+    | 'fixed_toolbar_donate_open'
+    | 'float_toolbar_appreciate'
+    | 'float_toolbar_comment_open'
+    | 'float_toolbar_comment_close'
+    | 'float_toolbar_donate_open'
+    | 'float_toolbar_donate_close'
   pageType?: PageType
 }
 
@@ -136,6 +153,14 @@ interface SubscribeProps {
  */
 interface ViewDialogProp {
   step: string
+}
+
+/**
+ * Event: View Drawer
+ */
+interface ViewDrawerProp {
+  contentType: ContentType
+  id: string
 }
 
 /**
@@ -264,7 +289,9 @@ type ArticleFeedType =
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
-  | 'article_detail_author-sidebar-collection'
+  | 'article_detail_author_sidebar_collection'
+  | 'article_detail_author_sidebar_author'
+  | 'article_detail_author_sidebar_recommendation'
 
 type CollectionFeedType =
   | 'user_collection'
@@ -316,6 +343,7 @@ type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
 
 type PageType =
   | 'article_detail'
+  | 'article_history'
   | 'user_profile'
   | 'circle_detail'
   | 'edit_draft'

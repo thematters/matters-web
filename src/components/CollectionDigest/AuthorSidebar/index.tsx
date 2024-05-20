@@ -11,6 +11,7 @@ import styles from './styles.module.css'
 export type CollectionDigestAuthorSidebarProps = {
   collection: CollectionDigestAuthorSidebarCollectionFragment
   imageSize?: 'md'
+  clickEvent?: () => void
 }
 
 const fragments = {
@@ -33,6 +34,7 @@ const fragments = {
 export const CollectionDigestAuthorSidebar = ({
   collection,
   imageSize = 'md',
+  clickEvent,
 }: CollectionDigestAuthorSidebarProps) => {
   const {
     title,
@@ -51,7 +53,7 @@ export const CollectionDigestAuthorSidebar = ({
   })
 
   return (
-    <section className={containerClasses}>
+    <section className={containerClasses} onClick={clickEvent}>
       <LinkWrapper {...path} textActiveColor="green">
         <header>{title}</header>
       </LinkWrapper>

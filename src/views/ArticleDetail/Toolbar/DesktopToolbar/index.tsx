@@ -1,5 +1,5 @@
 import { TEST_ID } from '~/common/enums'
-import { normalizeTag, toLocale, toPath } from '~/common/utils'
+import { analytics, normalizeTag, toLocale, toPath } from '~/common/utils'
 import { ButtonProps, ShareButton } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -63,6 +63,12 @@ const DesktopToolbar = ({
             privateFetched={privateFetched}
             iconSize={24}
             disabled={lock}
+            clickEvent={() => {
+              analytics.trackEvent('click_button', {
+                type: 'article_end_toolbar_appreciate',
+                pageType: 'article_detail',
+              })
+            }}
             {...buttonProps}
           />
           <section className={styles.commentBar}>
