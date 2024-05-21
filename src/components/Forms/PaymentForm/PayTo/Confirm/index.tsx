@@ -11,11 +11,11 @@ import {
 } from '~/common/enums'
 import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
-  BindEmailHintDialog,
   Dialog,
   Form,
   Icon,
   ResetPaymentPasswordDialog,
+  SetEmailDialog,
   Spacer,
   SpinnerBlock,
   TextIcon,
@@ -231,8 +231,8 @@ const Confirm: React.FC<FormProps> = ({
           </p>
           {InnerForm}
 
-          <BindEmailHintDialog>
-            {({ openDialog: openBindEmailHintDialog }) => (
+          <SetEmailDialog>
+            {({ openDialog: openSetEmailDialog }) => (
               <ResetPaymentPasswordDialog autoCloseDialog>
                 {({ openDialog: openResetPaymentPasswordDialog }) => (
                   <button
@@ -240,7 +240,7 @@ const Confirm: React.FC<FormProps> = ({
                     onClick={
                       hasEmail && isEmailVerified
                         ? openResetPaymentPasswordDialog
-                        : openBindEmailHintDialog
+                        : openSetEmailDialog
                     }
                   >
                     <FormattedMessage
@@ -252,7 +252,7 @@ const Confirm: React.FC<FormProps> = ({
                 )}
               </ResetPaymentPasswordDialog>
             )}
-          </BindEmailHintDialog>
+          </SetEmailDialog>
         </>
       )}
 

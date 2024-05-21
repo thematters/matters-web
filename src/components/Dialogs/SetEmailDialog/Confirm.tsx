@@ -48,24 +48,22 @@ const SET_EMAIL = gql`
 
 const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const viewer = useContext(ViewerContext)
+  const intl = useIntl()
+
+  const presetEmail = viewer.info.email
+  const formId = 'edit-email-form'
+
   const hasPassword = !!viewer.status?.hasEmailLoginPassword
   const editable = (viewer.status?.changeEmailTimesLeft as number) > 0
 
   const [set] = useMutation<SetEmailMutation>(SET_EMAIL, undefined, {
     showToast: false,
   })
-
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
     undefined,
-    {
-      showToast: false,
-    }
+    { showToast: false }
   )
-
-  const intl = useIntl()
-  const presetEmail = viewer.info.email
-  const formId = 'edit-email-form'
 
   const {
     values,

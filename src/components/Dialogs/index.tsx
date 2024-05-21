@@ -15,7 +15,6 @@ export * from './SetUserNameDialog'
 
 // Article
 export * from './AppreciatorsDialog'
-export * from './BindEmailHintDialog'
 export * from './CommentFormBetaDialog'
 export * from './CommentFormDialog'
 export * from './MigrationDialog'
