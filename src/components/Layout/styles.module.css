@@ -59,6 +59,7 @@
     /* FIXME: page scrollbar is showed on open dialog */
     min-height: calc(100vh + 1px);
     min-height: calc(var(--ivh) * 100 + 1px);
+    min-height: calc(100dvh + 1px);
     padding-bottom: 0;
   }
 
