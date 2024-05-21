@@ -4,12 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
-import {
-  BindEmailHintDialog,
-  Button,
-  TextIcon,
-  ViewerContext,
-} from '~/components'
+import { Button, SetEmailDialog, TextIcon, ViewerContext } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -67,7 +62,7 @@ const TopUpButton: React.FC<{
   })
 
   return (
-    <BindEmailHintDialog>
+    <SetEmailDialog>
       {({ openDialog }) => (
         <section className={topUpButtonClasses}>
           <Button
@@ -90,7 +85,7 @@ const TopUpButton: React.FC<{
           </Button>
         </section>
       )}
-    </BindEmailHintDialog>
+    </SetEmailDialog>
   )
 }
 
