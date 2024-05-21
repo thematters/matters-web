@@ -1,4 +1,3 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
@@ -120,9 +119,6 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           >
             <Link {...path} legacyBehavior>
               <a>
-                <VisuallyHidden>
-                  <span>{tag.content}</span>
-                </VisuallyHidden>
                 <ResponsiveImage
                   url={tag.cover || IMAGE_TAG_COVER.src}
                   width={144}
