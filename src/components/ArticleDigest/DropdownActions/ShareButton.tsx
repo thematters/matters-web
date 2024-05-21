@@ -1,13 +1,19 @@
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
+import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
+import { analytics } from '~/common/utils'
 import { Icon, Menu } from '~/components'
 
-interface ShareButtonProps {
+type ShareButtonProps = {
   openDialog: () => void
-}
+} & Omit<TrackEventProps, 'type'>
 
-const ShareButton = ({ openDialog }: ShareButtonProps) => {
+const ShareButton = ({
+  openDialog,
+  pageType,
+  pageComponent,
+}: ShareButtonProps) => {
   const intl = useIntl()
 
   return (
@@ -17,7 +23,16 @@ const ShareButton = ({ openDialog }: ShareButtonProps) => {
         id: '/GyMKa',
       })}
       icon={<Icon icon={IconShare} size={20} />}
-      onClick={openDialog}
+      onClick={() => {
+        if (pageType || pageComponent) {
+          analytics.trackEvent('click_button', {
+            type: 'share_article_open',
+            pageType,
+            pageComponent,
+          })
+        }
+        openDialog()
+      }}
       ariaHasPopup="dialog"
     />
   )

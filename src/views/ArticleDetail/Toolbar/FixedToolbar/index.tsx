@@ -178,6 +178,8 @@ const FixedToolbar = ({
               {...dropdonwActionsProps}
               hasShare
               hasReport
+              pageType="article_detail"
+              pageComponent="article_fixed_toolbar"
             />
           </section>
         )}
