@@ -84,8 +84,9 @@ const SupportButton = ({
             <Content
               onClick={() => {
                 analytics.trackEvent('click_button', {
-                  type: 'article_end_support_open',
+                  type: 'support_open',
                   pageType: 'article_detail',
+                  pageComponent: 'article_end',
                 })
                 openDialog()
               }}

@@ -83,8 +83,9 @@ const MetaInfo = ({
               href={path}
               onClick={() => {
                 analytics.trackEvent('click_button', {
-                  type: 'article_meta_edited',
+                  type: 'edited',
                   pageType: 'article_detail',
+                  pageComponent: 'article_meta',
                 })
               }}
             >
@@ -107,8 +108,9 @@ const MetaInfo = ({
             href={path}
             onClick={() => {
               analytics.trackEvent('click_button', {
-                type: 'article_meta_ipfs',
+                type: 'ipfs',
                 pageType: 'article_detail',
+                pageComponent: 'article_meta',
               })
             }}
           >
@@ -158,8 +160,9 @@ const MetaInfo = ({
                   disabled={!editable}
                   onClick={() => {
                     analytics.trackEvent('click_button', {
-                      type: 'article_meta_edit',
+                      type: 'edit',
                       pageType: 'article_detail',
+                      pageComponent: 'article_meta',
                     })
                   }}
                 >
