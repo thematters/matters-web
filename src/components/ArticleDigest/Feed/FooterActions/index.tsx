@@ -1,5 +1,7 @@
+import { useContext } from 'react'
+
 import { ReactComponent as IconPaywall } from '@/public/static/icons/24px/paywall.svg'
-import { CircleDigest, Icon, TextIcon } from '~/components'
+import { CircleDigest, Icon, TextIcon, ViewerContext } from '~/components'
 import { FooterActionsArticlePublicFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
@@ -29,6 +31,7 @@ const FooterActions = ({
   const {
     access: { circle },
   } = article
+  const viewer = useContext(ViewerContext)
 
   return (
     <footer className={styles.footer}>
@@ -60,12 +63,14 @@ const FooterActions = ({
       </section>
 
       <section className={styles.right}>
-        <DropdownActions
-          article={article}
-          {...controls}
-          size={22}
-          inCard={true}
-        />
+        {viewer.isAuthed && (
+          <DropdownActions
+            article={article}
+            {...controls}
+            size={22}
+            inCard={true}
+          />
+        )}
       </section>
     </footer>
   )
