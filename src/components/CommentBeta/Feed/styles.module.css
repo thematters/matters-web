@@ -18,6 +18,8 @@
         }
 
         & .displayName {
+          @mixin line-clamp;
+
           font-size: var(--text15);
           font-weight: var(--font-medium);
           line-height: 1.75;

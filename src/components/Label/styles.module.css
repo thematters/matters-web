@@ -4,6 +4,7 @@
   padding: 0 var(--sp4);
   font-size: var(--text12);
   line-height: 1.125rem;
+  word-break: keep-all;
   user-select: none;
   border-style: solid;
   border-width: 1px;
