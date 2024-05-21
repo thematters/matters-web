@@ -65,8 +65,9 @@ const DesktopToolbar = ({
             disabled={lock}
             clickEvent={() => {
               analytics.trackEvent('click_button', {
-                type: 'article_end_toolbar_appreciate',
+                type: 'appreciate',
                 pageType: 'article_detail',
+                pageComponent: 'article_end_toolbar',
               })
             }}
             {...buttonProps}
@@ -98,8 +99,9 @@ const DesktopToolbar = ({
                 .map(normalizeTag)}
               clickEvent={() => {
                 analytics.trackEvent('click_button', {
-                  type: 'article_end_toolbar_share_open',
+                  type: 'share_article_open',
                   pageType: 'article_detail',
+                  pageComponent: 'article_end_toolbar',
                 })
               }}
             />

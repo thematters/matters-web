@@ -82,8 +82,9 @@ const FixedToolbar = ({
                 className={styles.commentButton}
                 onClick={() => {
                   analytics.trackEvent('click_button', {
-                    type: 'fixed_toolbar_comment_placeholder',
+                    type: 'comment_placeholder',
                     pageType: 'article_detail',
+                    pageComponent: 'article_fixed_toolbar',
                   })
 
                   if (!viewer.isAuthed) {
@@ -118,8 +119,9 @@ const FixedToolbar = ({
               disabled={lock}
               clickEvent={() => {
                 analytics.trackEvent('click_button', {
-                  type: 'fixed_toolbar_appreciate',
+                  type: 'appreciate',
                   pageType: 'article_detail',
+                  pageComponent: 'article_fixed_toolbar',
                 })
               }}
               {...buttonProps}
@@ -134,8 +136,9 @@ const FixedToolbar = ({
                 textIconSpacing={4}
                 onClick={() => {
                   analytics.trackEvent('click_button', {
-                    type: 'fixed_toolbar_comment_open',
+                    type: 'comment_open',
                     pageType: 'article_detail',
+                    pageComponent: 'article_fixed_toolbar',
                   })
 
                   if (!viewer.isAuthed && articleDetails.commentCount === 0) {

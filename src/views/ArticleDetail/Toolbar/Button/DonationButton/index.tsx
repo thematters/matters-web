@@ -83,11 +83,12 @@ const DonationButton = ({
           disabled={articleDetail.author.id === viewer.id}
           onClick={() => {
             analytics.trackEvent('click_button', {
-              type:
-                resideIn === 'fixedToolbar'
-                  ? 'fixed_toolbar_donate_open'
-                  : 'donate',
+              type: resideIn === 'fixedToolbar' ? 'support_open' : 'donate',
               pageType: 'article_detail',
+              pageComponent:
+                resideIn === 'fixedToolbar'
+                  ? 'article_fixed_toolbar'
+                  : undefined,
             })
             if (!viewer.isAuthed) {
               window.dispatchEvent(
