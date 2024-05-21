@@ -69,11 +69,7 @@ const MetaInfo = ({
       </section>
 
       <section className={styles.time}>
-        <DateTime
-          date={version?.createdAt || article.revisedAt || article.createdAt}
-          size="xs"
-          color="greyDarker"
-        />
+        <DateTime date={article.createdAt} size="xs" color="greyDarker" />
 
         {!version && article?.revisionCount > 0 && (
           <span>
