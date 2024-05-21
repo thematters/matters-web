@@ -27,7 +27,7 @@ interface Props {
 
 const BaseWriteButton = (props: ButtonProps) => {
   const intl = useIntl()
-  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
+  const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.LG}px)`)
 
   return (
     <Tooltip
@@ -38,7 +38,7 @@ const BaseWriteButton = (props: ButtonProps) => {
       })}
       placement="left"
       delay={[1000, null]}
-      disabled={!isSmUp}
+      disabled={!isMdUp}
     >
       <Button
         bgActiveColor="greyLighter"
