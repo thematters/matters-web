@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
 import { MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { toPath } from '~/common/utils'
 import {
   Button,
   DateTime,
@@ -49,8 +49,10 @@ const MetaInfo = ({
   const editPath = toPath({ page: 'articleEdit', article })
   const isExceedRevision = article.revisionCount >= MAX_ARTICLE_REVISION_COUNT
 
-  const { router } = useRoute()
+  const { router, isInPath } = useRoute()
   const { shortHash, ...qs } = router.query
+
+  const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
   const path = toPath({
     page: 'articleHistory',
@@ -69,7 +71,13 @@ const MetaInfo = ({
       </section>
 
       <section className={styles.time}>
-        <DateTime date={article.createdAt} size="xs" color="greyDarker" />
+        <DateTime
+          date={
+            isInArticleDetailHistory ? version?.createdAt : article.createdAt
+          }
+          size="xs"
+          color="greyDarker"
+        />
 
         {!version && article?.revisionCount > 0 && (
           <span>
@@ -87,17 +95,7 @@ const MetaInfo = ({
           <section className={styles.dot}>
             <DotDivider />
           </section>
-          <Button
-            textColor="black"
-            textActiveColor="greyDarker"
-            href={path}
-            onClick={() => {
-              analytics.trackEvent('click_button', {
-                type: 'article_meta_ipfs',
-                pageType: 'article_detail',
-              })
-            }}
-          >
+          <Button textColor="black" textActiveColor="greyDarker" href={path}>
             <TextIcon size={12}>IPFS</TextIcon>
           </Button>
         </>
@@ -142,12 +140,6 @@ const MetaInfo = ({
                   textActiveColor="greyDarker"
                   href={editable ? editPath.href : undefined}
                   disabled={!editable}
-                  onClick={() => {
-                    analytics.trackEvent('click_button', {
-                      type: 'article_meta_revise',
-                      pageType: 'article_detail',
-                    })
-                  }}
                 >
                   <TextIcon icon={<Icon icon={IconEdit} />} size={12}>
                     <FormattedMessage
