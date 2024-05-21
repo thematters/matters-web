@@ -49,8 +49,10 @@ const MetaInfo = ({
   const editPath = toPath({ page: 'articleEdit', article })
   const isExceedRevision = article.revisionCount >= MAX_ARTICLE_REVISION_COUNT
 
-  const { router } = useRoute()
+  const { router, isInPath } = useRoute()
   const { shortHash, ...qs } = router.query
+
+  const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
   const path = toPath({
     page: 'articleHistory',
@@ -60,7 +62,6 @@ const MetaInfo = ({
 
   return (
     <section className={styles.info}>
-      {/* TODO: Confirm display word length with product */}
       <section className={styles.author}>
         <UserDigest.Plain user={article.author} />
         <section className={styles.dot}>
@@ -69,7 +70,13 @@ const MetaInfo = ({
       </section>
 
       <section className={styles.time}>
-        <DateTime date={article.createdAt} size="xs" color="greyDarker" />
+        <DateTime
+          date={
+            isInArticleDetailHistory ? version?.createdAt : article.createdAt
+          }
+          size="xs"
+          color="greyDarker"
+        />
 
         {!version && article?.revisionCount > 0 && (
           <span>
