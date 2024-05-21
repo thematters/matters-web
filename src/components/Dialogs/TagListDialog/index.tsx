@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Tag, useDialogSwitch } from '~/components'
+import { Dialog, ListTag, useDialogSwitch } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -41,9 +41,8 @@ const BaseDialog = ({ tags, children }: TagListDialogProps) => {
           <ul className={styles.tags}>
             {tags.map((tag) => (
               <li key={tag.id}>
-                <Tag
+                <ListTag
                   tag={tag}
-                  type="list"
                   hasCount={false}
                   textIconProps={{ color: 'black', weight: 'medium' }}
                 />

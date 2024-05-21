@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
-import { Cover, Tag } from '~/components'
+import { Cover, TitleTag } from '~/components'
 import { CoverTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -21,7 +21,7 @@ const TagCover = ({ tag }: TagCoverProps) => {
     <Cover cover={tag.cover} fallbackCover={IMAGE_TAG_COVER.src}>
       <div className={titleClasses}>
         <div className={styles.content}>
-          <Tag tag={tag} type="title" is="span" />
+          <TitleTag tag={tag} is="span" />
         </div>
       </div>
     </Cover>
@@ -35,7 +35,7 @@ TagCover.fragments = {
       cover
       ...DigestTag
     }
-    ${Tag.fragments.tag}
+    ${TitleTag.fragments.tag}
   `,
 }
 

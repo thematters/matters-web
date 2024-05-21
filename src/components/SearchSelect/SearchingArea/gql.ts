@@ -1,6 +1,8 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestDropdown, Tag, UserDigest } from './internal'
+import { tagFragments } from '~/components/Tag'
+
+import { ArticleDigestDropdown, UserDigest } from './internal'
 
 export const SELECT_SEARCH = gql`
   query SelectSearch(
@@ -48,7 +50,7 @@ export const SELECT_SEARCH = gql`
   }
   ${UserDigest.Mini.fragments.user}
   ${ArticleDigestDropdown.fragments.article}
-  ${Tag.fragments.tag}
+  ${tagFragments.tag}
 `
 
 export const LIST_VIEWER_ARTICLES = gql`

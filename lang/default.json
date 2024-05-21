@@ -730,10 +730,6 @@
     "defaultMessage": "Please set your transcation password.",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
-  "Ayepqz": {
-    "defaultMessage": "Remove",
-    "description": "src/components/Tag/index.tsx"
-  },
   "B2As08": {
     "defaultMessage": "That's all",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
@@ -1392,6 +1388,10 @@
   "NNF+3f": {
     "defaultMessage": "Tag not found",
     "description": "TAG_NOT_FOUND"
+  },
+  "NPNj9D": {
+    "defaultMessage": "Remove",
+    "description": "src/components/Tag/InlineTag.tsx"
   },
   "NSyuEP": {
     "defaultMessage": "Enter verification code"
@@ -3149,6 +3149,10 @@
     "defaultMessage": "Subscribe to unlock all articles of",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
+  "xCkDtt": {
+    "defaultMessage": "Remove",
+    "description": "src/components/Tag/TitleTag.tsx"
+  },
   "xDhqHi": {
     "defaultMessage": "Confirm",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
@@ -3203,6 +3207,10 @@
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
+  },
+  "yCQ8tL": {
+    "defaultMessage": "Remove",
+    "description": "src/components//Tag/ListTag/index.tsx"
   },
   "yCTXXb": {
     "defaultMessage": "Enter content…"

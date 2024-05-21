@@ -2,13 +2,13 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
 import { cleanup, render, screen } from '~/common/utils/test'
-import { Tag } from '~/components'
+import { InlineTag, ListTag, PlainTag } from '~/components'
 import { MOCK_TAG } from '~/stories/mocks'
 
 describe('<Tag>', () => {
   it('should render a Tag', () => {
     const handleClick = vi.fn()
-    render(<Tag tag={MOCK_TAG} onClick={handleClick} />)
+    render(<ListTag tag={MOCK_TAG} onClick={handleClick} />)
 
     const $name = screen.getByText(new RegExp(MOCK_TAG.content, 'i'))
     expect($name).toBeInTheDocument()
@@ -22,7 +22,7 @@ describe('<Tag>', () => {
 
     // render as "span"
     cleanup()
-    render(<Tag tag={MOCK_TAG} is="span" onClick={handleClick} />)
+    render(<InlineTag tag={MOCK_TAG} is="span" onClick={handleClick} />)
     const $name2 = screen.getByText(new RegExp(MOCK_TAG.content, 'i'))
     expect($name2).toBeInTheDocument()
     mockRouter.push('/')
@@ -33,7 +33,7 @@ describe('<Tag>', () => {
 
   it('should render a Tag without count', () => {
     // hasCount is false
-    render(<Tag tag={MOCK_TAG} hasCount={false} />)
+    render(<ListTag tag={MOCK_TAG} hasCount={false} />)
 
     const $name = screen.getByText(new RegExp(MOCK_TAG.content, 'i'))
     expect($name).toBeInTheDocument()
@@ -43,13 +43,13 @@ describe('<Tag>', () => {
 
     // not "list" type
     cleanup()
-    render(<Tag tag={MOCK_TAG} type="title" />)
+    render(<PlainTag tag={MOCK_TAG} />)
     expect(screen.queryByText(MOCK_TAG.numArticles)).not.toBeInTheDocument()
   })
 
   it('should render a Tag with remove button', () => {
     const onRemoveTag = vi.fn()
-    render(<Tag tag={MOCK_TAG} onRemoveTag={onRemoveTag} />)
+    render(<ListTag tag={MOCK_TAG} onRemoveTag={onRemoveTag} />)
 
     const $remove = screen.getByRole('button', { name: 'Remove' })
     expect($remove).toBeInTheDocument()

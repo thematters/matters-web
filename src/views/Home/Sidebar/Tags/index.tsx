@@ -8,8 +8,8 @@ import {
   QueryError,
   ShuffleButton,
   SpinnerBlock,
-  Tag,
   TagDigest,
+  tagFragments,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -41,7 +41,7 @@ const SIDEBAR_TAGS = gql`
       }
     }
   }
-  ${Tag.fragments.tag}
+  ${tagFragments.tag}
 `
 
 const Tags = () => {

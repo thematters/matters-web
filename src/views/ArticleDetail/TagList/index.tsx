@@ -3,7 +3,13 @@ import gql from 'graphql-tag'
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { TEST_ID } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Icon, Tag, TagExposureTracker, TagListDialog } from '~/components'
+import {
+  ArticleTag,
+  Icon,
+  TagExposureTracker,
+  tagFragments,
+  TagListDialog,
+} from '~/components'
 import { TagListArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -15,7 +21,7 @@ const fragments = {
         ...DigestTag
       }
     }
-    ${Tag.fragments.tag}
+    ${tagFragments.tag}
   `,
 }
 
@@ -29,9 +35,8 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
       <ul className={styles.list}>
         {article.tags.slice(0, 3).map((tag, i) => (
           <li key={tag.id} className={styles.listItem}>
-            <Tag
+            <ArticleTag
               tag={tag}
-              type="article"
               onClick={() => {
                 analytics.trackEvent('click_button', {
                   type: 'click_tag',

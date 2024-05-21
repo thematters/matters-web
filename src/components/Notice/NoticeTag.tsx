@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { toPath } from '~/common/utils'
 import { LinkWrapper } from '~/components'
-import { Tag } from '~/components/Tag'
+import { tagFragments } from '~/components/Tag'
 import { NoticeTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -34,7 +34,7 @@ NoticeTag.fragments = {
       id
       ...DigestTag
     }
-    ${Tag.fragments.tag}
+    ${tagFragments.tag}
   `,
 }
 

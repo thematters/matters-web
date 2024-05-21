@@ -730,10 +730,6 @@
     "defaultMessage": "請先設定交易密碼",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
-  "Ayepqz": {
-    "defaultMessage": "移除",
-    "description": "src/components/Tag/index.tsx"
-  },
   "B2As08": {
     "defaultMessage": "沒有更多",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
@@ -1392,6 +1388,10 @@
   "NNF+3f": {
     "defaultMessage": "標籤不存在",
     "description": "TAG_NOT_FOUND"
+  },
+  "NPNj9D": {
+    "defaultMessage": "Remove",
+    "description": "src/components/Tag/InlineTag.tsx"
   },
   "NSyuEP": {
     "defaultMessage": "請輸入驗證碼"
@@ -3149,6 +3149,10 @@
     "defaultMessage": "訂閱解鎖",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
+  "xCkDtt": {
+    "defaultMessage": "Remove",
+    "description": "src/components/Tag/TitleTag.tsx"
+  },
   "xDhqHi": {
     "defaultMessage": "確認送出",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
@@ -3203,6 +3207,10 @@
   },
   "yBUiiy": {
     "defaultMessage": "操作無法撤銷，確認封存嗎？"
+  },
+  "yCQ8tL": {
+    "defaultMessage": "Remove",
+    "description": "src/components//Tag/ListTag/index.tsx"
   },
   "yCTXXb": {
     "defaultMessage": "請輸入正文…"
