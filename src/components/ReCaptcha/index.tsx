@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from 'react'
+import { useContext, useRef } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toast, ViewerContext } from '~/components'
@@ -13,13 +13,15 @@ type ReCaptchaProps = {
   silence?: boolean
 }
 
-const siteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
+const siteKey = process.env.NEXT_PUBLIC_CF_TURNSTILE_SITE_KEY as string
 
-export const ReCaptcha = forwardRef<
-  TurnstileInstance | undefined,
-  ReCaptchaProps
->(({ action, setToken, silence }, ref) => {
+export const ReCaptcha: React.FC<ReCaptchaProps> = ({
+  action,
+  setToken,
+  silence,
+}) => {
   const viewer = useContext(ViewerContext)
+  const turnstileRef = useRef<TurnstileInstance>(null)
 
   const onError = () => {
     if (silence) return
@@ -36,10 +38,10 @@ export const ReCaptcha = forwardRef<
 
   return (
     <Turnstile
-      ref={ref}
+      ref={turnstileRef}
       siteKey={siteKey}
       options={{
-        action: action,
+        action,
         cData: `user-group-${viewer.info.group}`,
         size: 'invisible',
       }}
@@ -54,8 +56,7 @@ export const ReCaptcha = forwardRef<
       }}
       onError={onError}
       onUnsupported={onError}
+      onExpire={() => turnstileRef.current?.reset()}
     />
   )
-})
-
-ReCaptcha.displayName = 'ReCaptcha'
+}
