@@ -5,9 +5,9 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import {
-  BindEmailHintDialog,
   Dialog,
   Icon,
+  SetEmailDialog,
   TextIcon,
   ViewerContext,
 } from '~/components'
@@ -99,7 +99,7 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
     }
     return (
       <>
-        <BindEmailHintDialog>
+        <SetEmailDialog>
           {({ openDialog }) => {
             return (
               <WrapperButton
@@ -111,7 +111,7 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
               />
             )
           }}
-        </BindEmailHintDialog>
+        </SetEmailDialog>
       </>
     )
   }

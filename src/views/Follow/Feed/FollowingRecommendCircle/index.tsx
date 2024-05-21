@@ -8,12 +8,12 @@ import {
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
-  BindEmailHintDialog,
   Button,
   Card,
   CardProps,
   CircleAvatar,
   LinkWrapper,
+  SetEmailDialog,
   SubscribeCircleDialog,
   TextIcon,
   ViewerContext,
@@ -47,8 +47,8 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
   return (
-    <BindEmailHintDialog>
-      {({ openDialog: openBindEmailHintDialog }) => {
+    <SetEmailDialog>
+      {({ openDialog: openSetEmailDialog }) => {
         return (
           <Card
             bgActiveColor="none"
@@ -88,7 +88,7 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
                         }
 
                         if (!hasEmail || !isEmailVerified) {
-                          openBindEmailHintDialog()
+                          openSetEmailDialog()
                           return
                         }
 
@@ -119,7 +119,7 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
           </Card>
         )
       }}
-    </BindEmailHintDialog>
+    </SetEmailDialog>
   )
 }
 
