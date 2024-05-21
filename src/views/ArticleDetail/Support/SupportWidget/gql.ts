@@ -42,15 +42,11 @@ export const fragments = {
 }
 
 export const HAS_DONATED = gql`
-  query HasDonated($id: ID!, $senderId: ID!) {
+  query HasDonated($id: ID!) {
     article: node(input: { id: $id }) {
       ... on Article {
         id
-        donation: transactionsReceivedBy(
-          input: { senderId: $senderId, purpose: donation }
-        ) {
-          totalCount
-        }
+        donated
         replyToDonator
       }
     }

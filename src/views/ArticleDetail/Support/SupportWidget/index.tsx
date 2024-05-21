@@ -73,12 +73,11 @@ const SupportWidget = ({
     loading,
     refetch: hasDonatedRefetch,
   } = useQuery<HasDonatedQuery>(HAS_DONATED, {
-    variables: { id: article.id, senderId: viewer.id },
+    variables: { id: article.id },
   })
 
   const hasDonatedArticle = hasDonatedData?.article as HasDonatedArticle
-  const isViewerDonated =
-    !!viewer.id && hasDonatedArticle?.donation?.totalCount >= 1
+  const isViewerDonated = !!viewer.id && hasDonatedArticle?.donated
   const requestForDonation = article?.requestForDonation
   const replyToDonator = hasDonatedArticle?.replyToDonator
 
