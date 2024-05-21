@@ -24,8 +24,14 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
   const viewer = useContext(ViewerContext)
   const client = useApolloClient()
 
-  const { articles, pinAmount, note } = recommendation.icymiTopic || {}
+  const {
+    id: rootId,
+    articles,
+    pinAmount,
+    note,
+  } = recommendation.icymiTopic || {}
   const cardArticles = articles?.slice(0, pinAmount) || []
+  const cardArticleNum = cardArticles.length
   const listArticles = articles?.slice(pinAmount) || []
 
   const loadPrivate = () => {
@@ -60,6 +66,7 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
       contentType,
       location,
       id,
+      rootId,
     })
   }
 
@@ -108,15 +115,17 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
             <List.Item key={article.id}>
               <ArticleDigestFeed
                 article={article}
-                onClick={() => onClickArticle('article', i, article.id)}
+                onClick={() =>
+                  onClickArticle('article', cardArticleNum + i, article.id)
+                }
                 onClickAuthor={() =>
-                  onClickArticle('user', i, article.author.id)
+                  onClickArticle('user', cardArticleNum + i, article.author.id)
                 }
               />
               <CardExposureTracker
                 contentType="article"
                 feedType="icymi_curated"
-                location={i}
+                location={cardArticleNum + i}
                 id={article.id}
               />
             </List.Item>

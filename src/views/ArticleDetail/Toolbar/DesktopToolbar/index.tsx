@@ -96,6 +96,12 @@ const DesktopToolbar = ({
                 .join(' ')
                 .split(/\s+/)
                 .map(normalizeTag)}
+              clickEvent={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'article_end_toolbar_share_open',
+                  pageType: 'article_detail',
+                })
+              }}
             />
           </span>
 

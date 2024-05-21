@@ -12,12 +12,12 @@
     'WenQuanYi Micro Hei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   --font-serif-tc: 'Noto Serif', 'Noto Serif TC', 'Noto Serif SC',
     'Noto Serif CJK TC', 'Noto Serif CJK SC', 'Source Han Serif TW',
-    'Source Han Serif CN', 'Songti TC', 'Songti SC', serif, 'Apple Color Emoji',
-    'Segoe UI Emoji';
+    'Source Han Serif CN', 'Songti TC', 'Songti SC', 'NSimSun', 'SimSun', serif,
+    'Apple Color Emoji', 'Segoe UI Emoji';
   --font-serif-sc: 'Noto Serif', 'Noto Serif SC', 'Noto Serif TC',
     'Noto Serif CJK SC', 'Noto Serif CJK TC', 'Source Han Sans CN',
-    'Source Han Sans TW', 'Songti SC', 'Songti TC', serif, 'Apple Color Emoji',
-    'Segoe UI Emoji';
+    'Source Han Sans TW', 'Songti SC', 'Songti TC', 'NSimSun', 'SimSun', serif,
+    'Apple Color Emoji', 'Segoe UI Emoji';
   --font-mono: menlo, 'SFMono-Regular', consolas, monaco, monospace,
     'Apple Color Emoji', 'Segoe UI Emoji';
 
