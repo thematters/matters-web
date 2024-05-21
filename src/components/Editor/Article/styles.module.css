@@ -5,6 +5,7 @@
   ); /* 3rem for header, 4rem for bottom bar */
 
   height: calc(var(--ivh) * 100 - 3rem - 4rem - var(--sp16) * 2);
+  height: calc(100dvh - 3rem - 4rem - var(--sp16) * 2);
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -19,6 +20,7 @@
   & :global(.tiptap) {
     min-height: 50vh;
     min-height: calc(var(--ivh) * 50);
+    min-height: 50dvh;
 
     /* outline */
     &:focus {
