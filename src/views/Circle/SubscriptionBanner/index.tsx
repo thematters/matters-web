@@ -8,9 +8,9 @@ import {
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
-  BindEmailHintDialog,
   Card,
   Icon,
+  SetEmailDialog,
   TextIcon,
   Translate,
   ViewerContext,
@@ -45,8 +45,8 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
   return (
-    <BindEmailHintDialog>
-      {({ openDialog: openBindEmailHintDialog }) => {
+    <SetEmailDialog>
+      {({ openDialog: openSetEmailDialog }) => {
         return (
           <Card
             bgColor="none"
@@ -69,7 +69,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
               }
 
               if (!hasEmail || !isEmailVerified) {
-                openBindEmailHintDialog()
+                openSetEmailDialog()
                 return
               }
 
@@ -101,7 +101,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
           </Card>
         )
       }}
-    </BindEmailHintDialog>
+    </SetEmailDialog>
   )
 }
 

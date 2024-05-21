@@ -1,36 +1,27 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS, URL_ME_SETTINGS } from '~/common/enums'
 import { ViewerContext } from '~/components/Context'
 import { Dialog } from '~/components/Dialog'
-import { useRoute } from '~/components/Hook'
 
 interface Props {
+  gotoConnect?: () => void
   closeDialog: () => void
 }
 
-const Content: React.FC<Props> = ({ closeDialog }) => {
-  const { router } = useRoute()
+/**
+ * Request to connect or verify email
+ */
+const Request: React.FC<Props> = ({ gotoConnect, closeDialog }) => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
-
-  const gotoSettings = () => {
-    if (!hasEmail) {
-      router.push(
-        PATHS.ME_SETTINGS +
-          `?${URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.key}=${URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.value}`
-      )
-    } else {
-      router.push(PATHS.ME_SETTINGS)
-    }
-  }
+  const isConnect = !hasEmail
 
   return (
     <>
       <Dialog.Header
         title={
-          !hasEmail ? (
+          isConnect ? (
             <FormattedMessage
               defaultMessage="Please connect email"
               id="WxhsrG"
@@ -47,7 +38,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
       <Dialog.Content>
         <Dialog.Content.Message>
           <p>
-            {!hasEmail ? (
+            {isConnect ? (
               <FormattedMessage
                 defaultMessage="You have not connected your email yet. For security, email is required for top-up."
                 id="OK2u69"
@@ -65,7 +56,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
       <Dialog.Footer
         btns={
           <>
-            {!hasEmail && (
+            {isConnect && (
               <Dialog.RoundedButton
                 text={
                   <FormattedMessage
@@ -74,12 +65,12 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
                     id="vB45rC"
                   />
                 }
-                onClick={gotoSettings}
+                onClick={gotoConnect}
               />
             )}
             <Dialog.RoundedButton
               text={
-                !hasEmail ? (
+                isConnect ? (
                   <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
                 ) : (
                   <FormattedMessage defaultMessage="Close" id="rbrahO" />
@@ -94,7 +85,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
           <>
             <Dialog.TextButton
               text={
-                !hasEmail ? (
+                isConnect ? (
                   <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
                 ) : (
                   <FormattedMessage defaultMessage="Close" id="rbrahO" />
@@ -103,7 +94,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
               color="greyDarker"
               onClick={closeDialog}
             />
-            {!hasEmail && (
+            {isConnect && (
               <Dialog.TextButton
                 text={
                   <FormattedMessage
@@ -112,7 +103,7 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
                     id="vB45rC"
                   />
                 }
-                onClick={gotoSettings}
+                onClick={gotoConnect}
               />
             )}
           </>
@@ -122,4 +113,4 @@ const Content: React.FC<Props> = ({ closeDialog }) => {
   )
 }
 
-export default Content
+export default Request

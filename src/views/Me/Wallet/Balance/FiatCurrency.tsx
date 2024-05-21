@@ -9,12 +9,12 @@ import { ReactComponent as IconWithdraw } from '@/public/static/icons/24px/withd
 import { analytics, formatAmount } from '~/common/utils'
 import {
   AddCreditDialog,
-  BindEmailHintDialog,
   CurrencyFormatter,
   Dropdown,
   Icon,
   Menu,
   PayoutDialog,
+  SetEmailDialog,
   TextIcon,
   Translate,
   ViewerContext,
@@ -37,8 +37,8 @@ interface ItemProps {
 
 const TopUpItem = ({
   openDialog,
-  openBindEmailHintDialog,
-}: ItemProps & { openBindEmailHintDialog: () => void }) => {
+  openSetEmailDialog,
+}: ItemProps & { openSetEmailDialog: () => void }) => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
   const isEmailVerified = !!viewer.info.emailVerified
@@ -51,7 +51,7 @@ const TopUpItem = ({
         if (hasEmail && isEmailVerified) {
           openDialog()
         } else {
-          openBindEmailHintDialog()
+          openSetEmailDialog()
         }
         analytics.trackEvent('click_button', { type: 'top_up' })
       }}
@@ -113,24 +113,24 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
   const Content = ({
     openAddCreditDialog,
     openPayoutDialog,
-    openBindEmailHintDialog,
+    openSetEmailDialog,
   }: {
     openAddCreditDialog: () => void
     openPayoutDialog: () => void
-    openBindEmailHintDialog: () => void
+    openSetEmailDialog: () => void
   }) => (
     <Menu>
       <TopUpItem
         openDialog={openAddCreditDialog}
-        openBindEmailHintDialog={openBindEmailHintDialog}
+        openSetEmailDialog={openSetEmailDialog}
       />
       <PayoutItem openDialog={openPayoutDialog} canPayout={canPayout} />
     </Menu>
   )
 
   return (
-    <BindEmailHintDialog>
-      {({ openDialog: openBindEmailHintDialog }) => {
+    <SetEmailDialog>
+      {({ openDialog: openSetEmailDialog }) => {
         return (
           <PayoutDialog hasStripeAccount={hasStripeAccount}>
             {({ openDialog: openPayoutDialog }) => (
@@ -141,7 +141,7 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                       <Content
                         openAddCreditDialog={openAddCreditDialog}
                         openPayoutDialog={openPayoutDialog}
-                        openBindEmailHintDialog={openBindEmailHintDialog}
+                        openSetEmailDialog={openSetEmailDialog}
                       />
                     }
                   >
@@ -188,6 +188,6 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
           </PayoutDialog>
         )
       }}
-    </BindEmailHintDialog>
+    </SetEmailDialog>
   )
 }

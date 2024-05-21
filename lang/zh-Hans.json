@@ -870,6 +870,10 @@
   "Dkkmwm": {
     "defaultMessage": "粗体"
   },
+  "Dom0EF": {
+    "defaultMessage": "验证成功",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "DqQvtL": {
     "defaultMessage": "解除屏蔽",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"

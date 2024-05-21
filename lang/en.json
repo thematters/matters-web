@@ -870,6 +870,10 @@
   "Dkkmwm": {
     "defaultMessage": "Bold"
   },
+  "Dom0EF": {
+    "defaultMessage": "Verification successful",
+    "description": "src/components/GlobalToast/index.tsx"
+  },
   "DqQvtL": {
     "defaultMessage": "Unblock",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
