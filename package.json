@@ -16,7 +16,7 @@
     "test:unit": "vitest run",
     "test:unit:coverage": "vitest run --coverage",
     "test:unit:report": "vitest --ui --coverage.enabled=true",
-    "start": "PORT=\"${PORT:-3000}\"; cross-env NODE_OPTIONS='--no-experimental-fetch' next start -p $PORT",
+    "start": "PORT=\"${PORT:-3000}\"; cross-env NODE_OPTIONS='--no-experimental-fetch --max-old-space-size=3000' next start -p $PORT",
     "build": "npm run i18n && NODE_ENV=production next build",
     "export": "next export",
     "format": "prettier --write \"{,!(.next|build|node_modules|coverage|out|lang)/**/*.{js,jsx,ts,tsx,json}}\"",
