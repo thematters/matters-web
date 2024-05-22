@@ -21,15 +21,16 @@ import {
 } from '~/common/enums'
 import {
   analytics,
-  formatAmount,
   parseFormSubmitErrors,
-  translate,
   validateAmount,
 } from '~/common/utils'
 import {
+  Balance,
   Dialog,
   Form,
   LanguageContext,
+  Spacer,
+  toast,
   Translate,
   useMutation,
 } from '~/components'
@@ -43,12 +44,15 @@ import {
 import ConfirmTable from '../ConfirmTable'
 import { CurrencyAmount } from '../CurrencyAmount'
 import StripeCheckout from '../StripeCheckout'
+import styles from './styles.module.css'
 
 interface FormProps {
   defaultAmount?: number
   callback?: () => any
   callbackText?: React.ReactNode
   closeDialog?: () => any
+  isInDialog?: boolean
+  switchToSetAmount?: () => void
 }
 
 interface FormValues {
@@ -80,6 +84,8 @@ const BaseAddCredit: React.FC<FormProps> = ({
   callback,
   callbackText,
   closeDialog,
+  isInDialog,
+  switchToSetAmount,
 }) => {
   const intl = useIntl()
   const stripe = useStripe()
@@ -95,6 +101,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
   const balance = balanceData?.viewer?.wallet.balance.HKD || 0
 
   const [disabled, setDisabled] = useState(true)
+  const [waiting, setWaiting] = useState(false)
   const [completed, setCompleted] = useState(false)
   const [checkoutError, setCheckoutError] = useState('')
   const onCheckoutChange = (event: StripeCardElementChangeEvent) => {
@@ -108,7 +115,9 @@ const BaseAddCredit: React.FC<FormProps> = ({
 
       setCheckoutError(msg || event.error.message)
     } else if (event.empty) {
-      setCheckoutError(translate({ lang, id: 'required' }))
+      setCheckoutError(
+        intl.formatMessage({ defaultMessage: 'Required', id: 'Seanpx' })
+      )
     } else {
       setCheckoutError('')
     }
@@ -136,7 +145,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
     validateOnChange: true,
     validate: ({ amount }) =>
       _pickBy({
-        amount: validateAmount(amount, lang),
+        amount: validateAmount(amount, intl),
       }),
     onSubmit: async ({ amount }, { setSubmitting }) => {
       /**
@@ -197,6 +206,24 @@ const BaseAddCredit: React.FC<FormProps> = ({
           analytics.trackEvent('purchase', { amount, success: true })
         }
         setCompleted(true)
+        if (!isInDialog && switchToSetAmount) {
+          setWaiting(true)
+          // FIXME:  wait for 3 seconds to server to update the balance
+          setTimeout(() => {
+            toast.success({
+              message: (
+                <FormattedMessage
+                  defaultMessage="Top-up successful"
+                  id="RMV4wt"
+                  description="src/components/Forms/PaymentForm/AddCredit/index.tsx"
+                />
+              ),
+            })
+            setWaiting(false)
+            switchToSetAmount()
+          }, 3 * 1000)
+          return
+        }
       }
 
       setSubmitting(false)
@@ -234,10 +261,66 @@ const BaseAddCredit: React.FC<FormProps> = ({
           setFieldValue('amount', sanitizedAmount)
         }}
         autoFocus
-        spacingBottom="base"
+        spacingBottom="loose"
       />
     </Form>
   )
+
+  const Content = (
+    <>
+      <ConfirmTable>
+        <ConfirmTable.Row type="balance">
+          <Balance currency={currency} amount={balance} showTopUp={false} />
+        </ConfirmTable.Row>
+        <Spacer size="xtight" />
+      </ConfirmTable>
+      {InnerForm}
+      <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
+    </>
+  )
+
+  if (!isInDialog) {
+    return (
+      <section className={styles.container}>
+        {Content}
+        <Spacer size="loose" />
+        <Dialog.RoundedButton
+          text={
+            <FormattedMessage
+              defaultMessage="Confirm"
+              id="SYfw+k"
+              description="src/components/Forms/PaymentForm/AddCredit/index.tsx"
+            />
+          }
+          type="submit"
+          color="white"
+          bgColor="green"
+          textWeight="normal"
+          form={formId}
+          disabled={
+            disabled || !isValid || isSubmitting || !!checkoutError || waiting
+          }
+          loading={isSubmitting || waiting}
+        />
+        <Spacer size="base" />
+        <Dialog.RoundedButton
+          color="black"
+          onClick={switchToSetAmount}
+          borderColor="greyLight"
+          borderWidth="sm"
+          textWeight="normal"
+          borderActiveColor="grey"
+          text={
+            <FormattedMessage
+              defaultMessage="Back"
+              id="QfrKA6"
+              description="src/components/Forms/PaymentForm"
+            />
+          }
+        />
+      </section>
+    )
+  }
 
   if (completed) {
     return (
@@ -294,7 +377,13 @@ const BaseAddCredit: React.FC<FormProps> = ({
 
   const SubmitButton = (
     <Dialog.TextButton
-      text={<Translate zh_hant="確認儲值" zh_hans="确认储值" en="Confirm" />}
+      text={
+        <FormattedMessage
+          defaultMessage="Confirm"
+          id="SYfw+k"
+          description="src/components/Forms/PaymentForm/AddCredit/index.tsx"
+        />
+      }
       type="submit"
       form={formId}
       disabled={disabled || !isValid || isSubmitting || !!checkoutError}
@@ -310,23 +399,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         rightBtn={SubmitButton}
       />
 
-      <Dialog.Content>
-        <ConfirmTable>
-          <ConfirmTable.Row type="balance">
-            <ConfirmTable.Col>
-              <Translate id="walletBalance" />
-            </ConfirmTable.Col>
-
-            <ConfirmTable.Col>
-              {currency} {formatAmount(balance)}
-            </ConfirmTable.Col>
-          </ConfirmTable.Row>
-        </ConfirmTable>
-
-        {InnerForm}
-
-        <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
-      </Dialog.Content>
+      <Dialog.Content>{Content}</Dialog.Content>
 
       <Dialog.Footer
         smUpBtns={

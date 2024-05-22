@@ -3,7 +3,7 @@ import React from 'react'
 
 import styles from './styles.module.css'
 
-type TitleType = 'article' | 'feed' | 'nav' | 'base'
+type TitleType = 'feed' | 'nav' | 'base'
 
 type TitleIs = 'h1' | 'h2' | 'h3'
 

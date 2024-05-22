@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
@@ -11,7 +12,7 @@ import {
   ButtonProps,
   CommentFormDialog,
   CommentFormType,
-  IconComment16,
+  Icon,
   ViewerContext,
 } from '~/components'
 import { ReplyComemntFragment } from '~/gql/graphql'
@@ -66,7 +67,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       aria-label={intl.formatMessage({
         defaultMessage: 'Write a comment',
@@ -74,7 +75,7 @@ const CommentButton: React.FC<ButtonProps & { inCard: boolean }> = ({
       })}
       {...props}
     >
-      <IconComment16 />
+      <Icon icon={IconComment} />
     </Button>
   )
 }

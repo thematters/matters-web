@@ -30,7 +30,7 @@ const EmptyAnalytics = () => {
         href={PATHS.ME_DRAFT_NEW}
         onClick={() => analytics.trackEvent('click_button', { type: 'write' })}
       >
-        <TextIcon color="white" weight="md">
+        <TextIcon color="white" weight="medium">
           <FormattedMessage defaultMessage="Start Creating" id="69+D96" />
         </TextIcon>
       </Button>

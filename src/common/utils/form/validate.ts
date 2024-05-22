@@ -1,5 +1,6 @@
+import { IntlShape } from 'react-intl'
+
 import {
-  MAX_ARTICLE_SUPPORT_LENGTH,
   MAX_CIRCLE_DISPLAY_NAME_LENGTH,
   MAX_CIRCLE_NAME_LENGTH,
   MAX_COLLECTION_TITLE_LENGTH,
@@ -22,7 +23,6 @@ import {
   isValidEmail,
   isValidPassword,
   isValidPaymentPassword,
-  translate,
   ValidEmailOptions,
 } from '~/common/utils'
 
@@ -38,20 +38,18 @@ const REGEXP_ALL_PUNCTUATIONS = new RegExp(
 /**
  * Tag
  */
-export const validateTagName = (value: string, lang: Language) => {
+export const validateTagName = (value: string, intl: IntlShape) => {
   if (!value) {
-    return translate({
-      id: 'required',
-      lang,
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
     })
   }
 
   if (REGEXP_ALL_PUNCTUATIONS.test(value)) {
-    return translate({
-      zh_hant: '不支持單獨使用標點符號',
-      zh_hans: '不支持单独使用标点符号',
-      en: 'Not support using punctuation marks alone.',
-      lang,
+    return intl.formatMessage({
+      defaultMessage: 'Not support using punctuation marks alone.',
+      id: 'yubNcI',
     })
   }
 }
@@ -61,328 +59,419 @@ export const validateTagName = (value: string, lang: Language) => {
  */
 export const validateEmail = (
   value: string,
-  lang: Language,
+  intl: IntlShape,
   options: ValidEmailOptions
 ) => {
   if (!value) {
-    return translate({ id: 'required', lang })
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
   } else if (!isValidEmail(value, options)) {
-    return translate({ id: 'invalidEmail', lang })
+    return intl.formatMessage({
+      defaultMessage: 'Please fill in a valid email address',
+      id: 'EBEwaP',
+    })
   }
 }
 
-export const validateCode = (value: string, lang: Language) => {
+export const validateCode = (value: string, intl: IntlShape) => {
   if (!value) {
-    return translate({ id: 'required', lang })
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
   }
 }
 
-export const validatePassword = (value: string, lang: Language) => {
+export const validatePassword = (value: string, intl: IntlShape) => {
   if (!value) {
-    return translate({ id: 'required', lang })
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
   } else if (!isValidPassword(value)) {
-    return translate({ id: 'hintPassword', lang })
+    return intl.formatMessage({
+      defaultMessage:
+        'Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed',
+      id: 'ml3SZN',
+    })
   }
 }
 
 export const validateComparedPassword = (
   value: string,
   comparedValue: string,
-  lang: Language
+  intl: IntlShape
 ) => {
   if (!comparedValue) {
-    return translate({ id: 'required', lang })
-  } else if (comparedValue !== value) {
-    return translate({ id: 'passwordNotMatch', lang })
-  }
-}
-
-export const validatePaymentPassword = (value: string, lang: Language) => {
-  if (!value) {
-    return translate({ id: 'required', lang })
-  } else if (!isValidPaymentPassword(value)) {
-    return translate({ id: 'hintPaymentPassword', lang })
-  }
-}
-
-export const validatePaymentPointer = (value: string, lang: Language) => {
-  if (!value) {
-    return translate({ id: 'required', lang })
-  } else if (!isValidPaymentPointer(value)) {
-    return translate({ id: 'hintPaymentPointer', lang })
-  }
-}
-
-export const validateUserName = (value: string, lang: Language) => {
-  if (value.length > MAX_USER_NAME_LENGTH) {
-    return translate({
-      zh_hant: `ID 字符數須介於 ${MIN_USER_NAME_LENGTH} 到 ${MAX_USER_NAME_LENGTH} 之間`,
-      zh_hans: `ID 字符数须介于 ${MIN_USER_NAME_LENGTH} 到 ${MAX_USER_NAME_LENGTH} 之间`,
-      en: `ID must be between ${MIN_USER_NAME_LENGTH} and ${MAX_USER_NAME_LENGTH} characters long`,
-      lang,
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
     })
+  } else if (comparedValue !== value) {
+    return intl.formatMessage({
+      defaultMessage:
+        'The new password and confirmation password do not match.',
+      id: 'kHMa3H',
+    })
+  }
+}
+
+export const validatePaymentPassword = (value: string, intl: IntlShape) => {
+  if (!value) {
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
+  } else if (!isValidPaymentPassword(value)) {
+    return intl.formatMessage({
+      defaultMessage: 'Enter a 6-digit payment password.',
+      id: 'OpeFTV',
+    })
+  }
+}
+
+export const validatePaymentPointer = (value: string, intl: IntlShape) => {
+  if (!value) {
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
+  } else if (!isValidPaymentPointer(value)) {
+    return intl.formatMessage({
+      defaultMessage: 'The wallet address starts with "$".',
+      id: 'i7cXnf',
+    })
+  }
+}
+
+export const validateUserName = (value: string, intl: IntlShape) => {
+  if (value.length > MAX_USER_NAME_LENGTH) {
+    return intl.formatMessage(
+      {
+        defaultMessage: `ID must be between {MIN_USER_NAME_LENGTH} and {MAX_USER_NAME_LENGTH} characters long`,
+        id: 'CNMDU5',
+      },
+      {
+        MAX_USER_NAME_LENGTH,
+        MIN_USER_NAME_LENGTH,
+      }
+    )
   }
 
   if (hasUpperCase(value)) {
-    return translate({
-      zh_hant: 'ID 只允許包含小寫英文字母、數字及下劃線',
-      zh_hans: 'ID 只允许包含小写英文字母、数字及下划线',
-      en: 'ID can only contain lowercase letters, numbers and underscores',
-      lang,
+    return intl.formatMessage({
+      defaultMessage:
+        'ID can only contain lowercase letters, numbers and underscores',
+      id: '6XIcxZ',
     })
   }
 }
 
-export const validateCollectionTitle = (value: string, lang: Language) => {
+export const validateCollectionTitle = (value: string, intl: IntlShape) => {
   if (!value) {
-    return translate({ id: 'required', lang })
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
   }
 
   if (value.length < MIN_COLLECTION_TITLE_LENGTH) {
-    return translate({
-      zh_hant: `輸入字數過短，僅供輸入 ${MIN_COLLECTION_TITLE_LENGTH}-${MAX_COLLECTION_TITLE_LENGTH} 個字元`,
-      zh_hans: `输入字数过短，仅供输入 ${MIN_COLLECTION_TITLE_LENGTH}-${MAX_COLLECTION_TITLE_LENGTH} 个字符`,
-      en: `Must be between ${MIN_COLLECTION_TITLE_LENGTH}-${MAX_COLLECTION_TITLE_LENGTH} characters long.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Must be between {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} characters long.`,
+        id: 'El+nq2',
+      },
+      {
+        MAX_COLLECTION_TITLE_LENGTH,
+        MIN_COLLECTION_TITLE_LENGTH,
+      }
+    )
   }
 
   if (value.length > MAX_COLLECTION_TITLE_LENGTH) {
-    return translate({
-      zh_hant: `輸入字數過長，僅供輸入 ${MIN_COLLECTION_TITLE_LENGTH}-${MAX_COLLECTION_TITLE_LENGTH} 個字元`,
-      zh_hans: `输入字数过长，仅供输入 ${MIN_COLLECTION_TITLE_LENGTH}-${MAX_COLLECTION_TITLE_LENGTH} 个字符`,
-      en: `Must be between ${MIN_COLLECTION_TITLE_LENGTH}-${MAX_COLLECTION_TITLE_LENGTH} characters long.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Must be between {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} characters long.`,
+        id: 'El+nq2',
+      },
+      {
+        MAX_COLLECTION_TITLE_LENGTH,
+        MIN_COLLECTION_TITLE_LENGTH,
+      }
+    )
   }
 }
 
 export const validateDisplayName = (
   value: string,
-  lang: Language,
+  intl: IntlShape,
   isAdmin?: boolean
 ) => {
   if (!value) {
-    return translate({ id: 'required', lang })
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
   }
 
   if (value.length < MIN_USER_DISPLAY_NAME_LENGTH) {
-    return translate({
-      zh_hant: `輸入字數過短，僅供輸入 ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} 個字元`,
-      zh_hans: `输入字数过短，仅供输入 ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} 个字符`,
-      en: `Must be between ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} characters long.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Must be between {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} characters long.`,
+        id: 'ruZqtT',
+      },
+      {
+        MIN_USER_DISPLAY_NAME_LENGTH,
+        MAX_USER_DISPLAY_NAME_LENGTH,
+      }
+    )
   }
 
   if (value.length > MAX_USER_DISPLAY_NAME_LENGTH) {
-    return translate({
-      zh_hant: `輸入字數過長，僅供輸入 ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} 個字元`,
-      zh_hans: `输入字数过长，仅供输入 ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} 个字符`,
-      en: `Must be between ${MIN_USER_DISPLAY_NAME_LENGTH}-${MAX_USER_DISPLAY_NAME_LENGTH} characters long.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Must be between {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} characters long.`,
+        id: 'ruZqtT',
+      },
+      {
+        MIN_USER_DISPLAY_NAME_LENGTH,
+        MAX_USER_DISPLAY_NAME_LENGTH,
+      }
+    )
   }
 
   const invalidNameIndex = RESERVED_NAMES.indexOf(value.toLowerCase())
   if (invalidNameIndex >= 0 && !isAdmin) {
-    return translate({
-      zh_hant: `不能使用「${RESERVED_NAMES[invalidNameIndex]}」`,
-      zh_hans: `不能使用 “${RESERVED_NAMES[invalidNameIndex]}”`,
-      en: `"${RESERVED_NAMES[invalidNameIndex]}" is invalid.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `"{name}" is invalid.`,
+        id: 'i4OBEw',
+      },
+      {
+        name: RESERVED_NAMES[invalidNameIndex],
+      }
+    )
   }
 
   if (REGEXP_ALL_PUNCTUATIONS.test(value)) {
-    return translate({
-      zh_hant: '不支持單獨使用標點符號',
-      zh_hans: '不支持单独使用标点符号',
-      en: 'Not support using punctuation marks alone.',
-      lang,
+    return intl.formatMessage({
+      defaultMessage: 'Not support using punctuation marks alone.',
+      id: 'yubNcI',
     })
   }
 }
 
-export const validateDescription = (value: string, lang: Language) => {
+export const validateDescription = (
+  value: string,
+  intl: IntlShape,
+  max?: number
+) => {
+  const maxLength = max || MAX_DESCRIPTION_LENGTH
+
   if (!value) {
-    return translate({ id: 'required', lang })
-  } else if (value.length > MAX_DESCRIPTION_LENGTH) {
-    return translate({
-      zh_hant: `已超過 ${MAX_DESCRIPTION_LENGTH} 字，目前 ${value.length} 字`,
-      zh_hans: `已超过 ${MAX_DESCRIPTION_LENGTH} 字，目前 ${value.length} 字`,
-      en: `Maximum ${MAX_DESCRIPTION_LENGTH} characters, current ${value.length} characters.`,
-      lang,
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
     })
-  }
-}
-
-export const validateSupportWords = (value: string, lang: Language) => {
-  if (!value) return
-  if (value.length > MAX_ARTICLE_SUPPORT_LENGTH) {
-    {
-      return translate({
-        zh_hant: `已超過 ${MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 ${value.length} 字`,
-        zh_hans: `已超过 ${MAX_ARTICLE_SUPPORT_LENGTH} 字，目前 ${value.length} 字`,
-        en: `Maximum ${MAX_ARTICLE_SUPPORT_LENGTH} characters, current ${value.length} characters.`,
-        lang,
-      })
-    }
+  } else if (value.length > maxLength) {
+    return intl.formatMessage(
+      {
+        defaultMessage: `Maximum {maxLength} characters, current {current} characters.`,
+        id: 'j8oldW',
+      },
+      {
+        maxLength,
+        current: value.length,
+      }
+    )
   }
 }
 
 /**
  * Circle
  */
-export const validateCircleName = (value: string, lang: Language) => {
+export const validateCircleName = (value: string, intl: IntlShape) => {
   if (!value) {
-    return translate({ id: 'required', lang })
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
   }
 
   // 2-20 characters, only accept alphabet, number and _.
   if (value.length < MIN_CIRCLE_NAME_LENGTH) {
-    return translate({
-      zh_hant: `輸入字數過短，僅供輸入 ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} 個字元`,
-      zh_hans: `输入字数过短，仅供输入 ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} 个字符`,
-      en: `Must be between ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} characters long.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Must be between {MIN_CIRCLE_NAME_LENGTH}-{MAX_CIRCLE_NAME_LENGTH} characters long.`,
+        id: 'U4+4Rb',
+      },
+      {
+        MIN_CIRCLE_NAME_LENGTH,
+        MAX_CIRCLE_NAME_LENGTH,
+      }
+    )
   }
 
   if (value.length > MAX_CIRCLE_NAME_LENGTH) {
-    return translate({
-      zh_hant: `輸入字數過長，僅供輸入 ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} 個字元`,
-      zh_hans: `输入字数过长，仅供输入 ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} 个字符`,
-      en: `Must be between ${MIN_CIRCLE_NAME_LENGTH}-${MAX_CIRCLE_NAME_LENGTH} characters long.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Must be between {MIN_CIRCLE_NAME_LENGTH}-{MAX_CIRCLE_NAME_LENGTH} characters long.`,
+        id: 'U4+4Rb',
+      },
+      {
+        MIN_CIRCLE_NAME_LENGTH,
+        MAX_CIRCLE_NAME_LENGTH,
+      }
+    )
   }
 
   const invalidNameIndex = RESERVED_CIRCLE_NAMES.indexOf(value.toLowerCase())
   if (invalidNameIndex >= 0) {
-    return translate({
-      zh_hant: `不能使用「${RESERVED_CIRCLE_NAMES[invalidNameIndex]}」`,
-      zh_hans: `不能使用 “${RESERVED_CIRCLE_NAMES[invalidNameIndex]}”`,
-      en: `"${RESERVED_CIRCLE_NAMES[invalidNameIndex]}" is invalid.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `"{name}" is invalid.`,
+        id: 'i4OBEw',
+      },
+      {
+        name: RESERVED_CIRCLE_NAMES[invalidNameIndex],
+      }
+    )
   }
 
   if (!/^[a-zA-Z0-9_]*$/.test(value)) {
-    return translate({
-      id: 'hintCircleName',
-      lang,
+    return intl.formatMessage({
+      defaultMessage:
+        'Must be between 2-20 characters long. Only letters letters, numbers and underline are allowed.',
+      id: 'XlfiKR',
     })
   }
 }
 
-export const validateCircleDisplayName = (value: string, lang: Language) => {
+export const validateCircleDisplayName = (value: string, intl: IntlShape) => {
   if (!value) {
-    return translate({ id: 'required', lang })
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
   }
 
   if (value.length < MIN_CIRCLE_DISPLAY_NAME_LENGTH) {
-    return translate({
-      zh_hant: `輸入字數過短，僅供輸入 ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字元`,
-      zh_hans: `输入字数过短，仅供输入 ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字符`,
-      en: `Must be between ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} characters long.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Must be between {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} characters long.`,
+        id: 'OwtCWk',
+      },
+      {
+        MIN_CIRCLE_DISPLAY_NAME_LENGTH,
+        MAX_CIRCLE_DISPLAY_NAME_LENGTH,
+      }
+    )
   }
 
   if (value.length > MAX_CIRCLE_DISPLAY_NAME_LENGTH) {
-    return translate({
-      zh_hant: `輸入字數過長，僅供輸入 ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字元`,
-      zh_hans: `输入字数过长，仅供输入 ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} 個字符`,
-      en: `Must be between ${MIN_CIRCLE_DISPLAY_NAME_LENGTH}-${MAX_CIRCLE_DISPLAY_NAME_LENGTH} characters long.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Must be between {MIN_CIRCLE_DISPLAY_NAME_LENGTH}-{MAX_CIRCLE_DISPLAY_NAME_LENGTH} characters long.`,
+        id: 'OwtCWk',
+      },
+      {
+        MIN_CIRCLE_DISPLAY_NAME_LENGTH,
+        MAX_CIRCLE_DISPLAY_NAME_LENGTH,
+      }
+    )
   }
 
   const invalidNameIndex = RESERVED_NAMES.indexOf(value.toLowerCase())
   if (invalidNameIndex >= 0) {
-    return translate({
-      zh_hant: `不能使用「${RESERVED_NAMES[invalidNameIndex]}」`,
-      zh_hans: `不能使用 “${RESERVED_NAMES[invalidNameIndex]}”`,
-      en: `"${RESERVED_NAMES[invalidNameIndex]}" is invalid.`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `"{name}" is invalid.`,
+        id: 'i4OBEw',
+      },
+      {
+        name: RESERVED_NAMES[invalidNameIndex],
+      }
+    )
   }
 
   if (REGEXP_ALL_PUNCTUATIONS.test(value)) {
-    return translate({
-      zh_hant: '不支持單獨使用標點符號',
-      zh_hans: '不支持单独使用标点符号',
-      en: 'Not support using punctuation marks alone.',
-      lang,
+    return intl.formatMessage({
+      defaultMessage: 'Not support using punctuation marks alone.',
+      id: 'yubNcI',
     })
   }
 }
 
-export const validateCircleAmount = (value: number, lang: Language) => {
+export const validateCircleAmount = (value: number, intl: IntlShape) => {
   if (!value) {
-    return translate({ id: 'required', lang })
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
   }
 
   if (value < PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD) {
-    return translate({
-      zh_hant: `最小金額爲 HKD ${PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}`,
-      zh_hans: `最小金额为 HKD ${PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}`,
-      en: `Minimum amount is HKD ${PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD}`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Minimum amount is HKD {min}`,
+        id: '3yQyYm',
+      },
+      {
+        min: PAYMENT_MINIMAL_CIRCLE_AMOUNT.HKD,
+      }
+    )
   }
 
   if (value > PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD) {
-    return translate({
-      zh_hant: `最大金額爲 HKD ${PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}`,
-      zh_hans: `最大金额为 HKD ${PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}`,
-      en: `Maximum amount is HKD ${PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD}`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Maximum amount is HKD {max}`,
+        id: 'qBOEDo',
+      },
+      {
+        max: PAYMENT_MAXIMUM_CIRCLE_AMOUNT.HKD,
+      }
+    )
   }
 }
 
 /**
  * Payment
  */
-export const validateAmount = (value: number, lang: Language) => {
+export const validateAmount = (value: number, intl: IntlShape) => {
   // TODO: multi-currency support
 
   if (!value) {
-    return translate({ id: 'required', lang })
+    return intl.formatMessage({
+      defaultMessage: 'Required',
+      id: 'Seanpx',
+    })
   }
 
   if (value < PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD) {
-    return translate({
-      zh_hant: `最小储值金額爲 HKD ${PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD}`,
-      zh_hans: `最小储值金额为 HKD ${PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD}`,
-      en: `Minimum amount is HKD ${PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD}`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Minimum amount is HKD {min}`,
+        id: '3yQyYm',
+      },
+      {
+        min: PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT.HKD,
+      }
+    )
   }
 }
 
 export const validateDonationAmount = (
   value: number,
   balance: number,
-  lang: Language
+  intl: IntlShape
 ) => {
   if (value === 0) {
-    return translate({
-      zh_hant: '請選擇或輸入金額',
-      zh_hans: '请选择或输入金额',
-      en: 'Please select or enter amount',
-      lang,
-    })
-  }
-
-  if (balance < value) {
-    return translate({
-      zh_hant: '自訂金額大於餘額',
-      zh_hans: '自订金额大于余额',
-      en: 'Custom amount is greater than your balance',
-      lang,
+    return intl.formatMessage({
+      defaultMessage: 'Please select or enter amount',
+      id: '6CQaLH',
     })
   }
 }
@@ -391,39 +480,43 @@ export const validatePayoutAmount = ({
   min,
   max,
   value,
-  lang,
+  intl,
 }: {
   min: number
   max: number
   value: number
-  lang: Language
+  intl: IntlShape
 }) => {
   if (value < min) {
-    return translate({
-      zh_hant: `最少提現金額爲 HKD ${min}`,
-      zh_hans: `最少提现金額爲 HKD ${min}`,
-      en: `Minimum amount is HKD ${min}`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Minimum amount is HKD {min}`,
+        id: '3yQyYm',
+      },
+      {
+        min,
+      }
+    )
   }
 
   if (value > max) {
-    return translate({
-      zh_hant: `最高提現金額爲 HKD ${max}`,
-      zh_hans: `最高提现金額爲 HKD ${max}`,
-      en: `Maximum amount is HKD ${max}`,
-      lang,
-    })
+    return intl.formatMessage(
+      {
+        defaultMessage: `Maximum amount is HKD {max}`,
+        id: 'qBOEDo',
+      },
+      {
+        max,
+      }
+    )
   }
 }
 
-export const validateCurrency = (value: string, lang: Language) => {
+export const validateCurrency = (value: string, intl: IntlShape) => {
   if (!PAYMENT_CURRENCY[value as keyof typeof PAYMENT_CURRENCY]) {
-    return translate({
-      zh_hant: '請選擇一種幣別',
-      zh_hans: '请选择一种币别',
-      en: 'Please select a currency',
-      lang,
+    return intl.formatMessage({
+      defaultMessage: 'Please select a currency',
+      id: 'OxGicx',
     })
   }
 }

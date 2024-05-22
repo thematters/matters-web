@@ -4,18 +4,14 @@ import type { Toast as ToastType } from 'react-hot-toast'
 import baseToast, { Toaster as BaseToaster } from 'react-hot-toast'
 import { useIntl } from 'react-intl'
 
-import {
-  Button,
-  ButtonProps,
-  IconClose22,
-  IconWarning22,
-  TextIcon,
-} from '~/components'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { ReactComponent as IconWarn } from '@/public/static/icons/24px/warn.svg'
+import { Button, ButtonProps, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
 type ToastActionsProps = {
-  type: 'success' | 'error'
+  type: 'success' | 'warning' | 'error'
   actions: Array<{ content: string | React.ReactNode } & ButtonProps>
   onDismiss?: () => void
   hasClose?: boolean
@@ -61,9 +57,10 @@ const ToastActions: React.FC<ToastActionsProps> = ({
             id: 'rbrahO',
           })}
         >
-          <IconClose22
+          <Icon
+            icon={IconTimes}
             color={type === 'error' ? 'white' : 'whiteLight'}
-            size="mdM"
+            size={22}
           />
         </button>
       )}
@@ -95,12 +92,13 @@ const getAnimationStyle = (visible: boolean): React.CSSProperties => {
 }
 
 const Toast: React.FC<
-  ToastProps & { type: 'success' | 'error'; toast: ToastType }
+  ToastProps & { type: 'success' | 'warning' | 'error'; toast: ToastType }
 > = React.memo(({ message, actions, type, toast, hasClose = true }) => {
   const animationStyle: React.CSSProperties = toast.height
     ? getAnimationStyle(toast.visible)
     : { opacity: 0 }
   const isSuccess = type === 'success'
+  const isWarning = type === 'warning'
   const isError = type === 'error'
 
   return (
@@ -112,8 +110,8 @@ const Toast: React.FC<
       aria-atomic="true"
     >
       {isSuccess && message}
-      {isError && (
-        <TextIcon icon={<IconWarning22 color="white" />} spacing="xtight">
+      {(isWarning || isError) && (
+        <TextIcon icon={<Icon icon={IconWarn} color="white" />} spacing={8}>
           {message}
         </TextIcon>
       )}
@@ -136,6 +134,12 @@ export const toast = {
     return baseToast.custom(
       (toast) => <Toast {...props} toast={toast} type="success" />,
       { duration: !!duration ? duration : props.actions ? 5000 : 3000 }
+    )
+  },
+  warning: (props: ToastProps) => {
+    return baseToast.custom(
+      (toast) => <Toast {...props} toast={toast} type="warning" />,
+      { duration: props.actions ? 5000 : 3000 }
     )
   },
   error: (props: ToastProps) => {

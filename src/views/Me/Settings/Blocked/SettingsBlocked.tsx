@@ -3,7 +3,13 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
-import { Empty, InfiniteScroll, List, QueryError, Spinner } from '~/components'
+import {
+  Empty,
+  InfiniteScroll,
+  List,
+  QueryError,
+  SpinnerBlock,
+} from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ViewerBlockListQuery } from '~/gql/graphql'
 
@@ -44,7 +50,7 @@ const SettingsBlocked = () => {
   )
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {
@@ -88,7 +94,7 @@ const SettingsBlocked = () => {
           <List.Item key={node.id}>
             <UserDigest.Rich
               user={node}
-              spacing={['base', 0]}
+              spacing={[16, 0]}
               subtitle={`@${node.userName}`}
               hasFollow={false}
               extraButton={<ToggleBlockUserButton user={node} />}

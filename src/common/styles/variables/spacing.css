@@ -1,17 +1,21 @@
 :root {
-  --spacing-xxx-tightest: 0.0625rem; /* 1px */
-  --spacing-xxx-tight: 0.125rem; /* 2px */
-  --spacing-xx-tight: 0.25rem; /* 4px */
-  --spacing-base-xxx-tight: 0.3125rem; /* 5px */
-  --spacing-base-xx-tight: 0.375rem; /* 6px */
-  --spacing-x-tight: 0.5rem; /* 8px */
-  --spacing-base-tight: 0.625rem; /* 10px */
-  --spacing-tight: 0.75rem; /* 12px */
-  --spacing-x-base: 0.875rem; /* 14px */
-  --spacing-base: 1rem; /* 16px */
-  --spacing-base-loose: 1.25rem; /* 20px */
-  --spacing-loose: 1.5rem; /* 24px */
-  --spacing-x-loose: 2rem; /* 32px */
-  --spacing-xx-loose: 2.5rem; /* 40px */
-  --spacing-xxx-loose: 4rem; /* 64px */
+  --sp1: 0.0625rem; /* 1px */
+  --sp2: 0.125rem; /* 2px */
+  --sp4: 0.25rem; /* 4px */
+  --sp5: 0.3125rem; /* 5px */
+  --sp6: 0.375rem; /* 6px */
+  --sp8: 0.5rem; /* 8px */
+  --sp10: 0.625rem; /* 10px */
+  --sp12: 0.75rem; /* 12px */
+  --sp14: 0.875rem; /* 14px */
+  --sp16: 1rem; /* 16px */
+  --sp20: 1.25rem; /* 20px */
+  --sp24: 1.5rem; /* 24px */
+  --sp32: 2rem; /* 32px */
+  --sp40: 2.5rem; /* 40px */
+  --sp48: 3rem; /* 48px */
+  --sp64: 4rem; /* 64px */
+  --ar17-100: 0.93125rem; /* 14.9px */
+  --ar17-150: 1.4rem; /* 22.4px */
+  --ar17-200: 1.8625rem; /* 29.8px */
 }

@@ -1,12 +1,13 @@
 import classNames from 'classnames'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconCollection } from '@/public/static/icons/24px/collection.svg'
+import { ReactComponent as IconHashtag } from '@/public/static/icons/24px/hashtag.svg'
+import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
+import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
 import {
   EditorSearchSelectDialog,
-  IconCollection24,
-  IconHashTag24,
-  IconImage24,
-  IconSettings24,
+  Icon,
   Layout,
   TextIcon,
   Translate,
@@ -57,6 +58,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
   collection,
   editCollection,
   collectionSaving,
+  nodeExclude,
 
   tags,
   editTags,
@@ -146,12 +148,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   aria-haspopup="dialog"
                 >
                   <TextIcon
-                    icon={<IconImage24 size="md" />}
-                    size="mdS"
-                    weight="md"
-                    spacing="xtight"
+                    icon={<Icon icon={IconImage} size={24} />}
+                    size={15}
+                    weight="medium"
+                    spacing={8}
                   >
-                    <Translate id="cover" />
+                    <FormattedMessage defaultMessage="Cover" id="hl9bd4" />
                   </TextIcon>
                 </button>
               )}
@@ -182,12 +184,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   aria-haspopup="dialog"
                 >
                   <TextIcon
-                    icon={<IconHashTag24 size="md" />}
-                    size="mdS"
-                    weight="md"
-                    spacing="xtight"
+                    icon={<Icon icon={IconHashtag} size={24} />}
+                    size={15}
+                    weight="medium"
+                    spacing={8}
                   >
-                    <Translate id="tag" />
+                    <FormattedMessage defaultMessage="Tag" id="18HJlm" />
                   </TextIcon>
                 </button>
               )}
@@ -209,6 +211,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
               }
               searchType="Article"
               searchExclude={SearchExclude.Blocked}
+              nodeExclude={nodeExclude}
               onSave={(nodes: SearchSelectNode[]) =>
                 editCollection(nodes as ArticleDigestDropdownArticleFragment[])
               }
@@ -223,12 +226,12 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   aria-haspopup="dialog"
                 >
                   <TextIcon
-                    icon={<IconCollection24 size="md" />}
-                    size="mdS"
-                    weight="md"
-                    spacing="xtight"
+                    icon={<Icon icon={IconCollection} size={24} />}
+                    size={15}
+                    weight="medium"
+                    spacing={8}
                   >
-                    <Translate id="extend" />
+                    <FormattedMessage defaultMessage="Collect" id="kCPl0r" />
                   </TextIcon>
                 </button>
               )}
@@ -246,10 +249,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   onClick={openDialog}
                 >
                   <TextIcon
-                    icon={<IconSettings24 size="md" />}
-                    size="mdS"
-                    weight="md"
-                    spacing="xtight"
+                    icon={<Icon icon={IconSettings} size={24} />}
+                    size={15}
+                    weight="medium"
+                    spacing={8}
                   >
                     <Translate zh_hant="管理" zh_hans="管理" en="Manage" />
                   </TextIcon>

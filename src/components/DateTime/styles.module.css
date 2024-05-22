@@ -12,12 +12,16 @@
   color: var(--color-grey-dark);
 }
 
+.greyDarker {
+  color: var(--color-grey-darker);
+}
+
 .sizeXs {
   font-size: var(--font-size-subtext);
   line-height: var(--line-height-article-title);
 }
 
 .sizeSm {
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: var(--line-height-base-loose);
 }

@@ -11,6 +11,7 @@ export type ButtonWidth =
   | '2.5rem'
   | '3rem'
   | '3.25rem'
+  | '3.75rem'
   | '4rem'
   | '5rem'
   | '5.3125rem'
@@ -30,6 +31,7 @@ export type ButtonHeight =
   | '1.25rem'
   | '1.5rem'
   | '1.75rem'
+  | '1.875rem'
   | '2rem'
   | '2.25rem'
   | '2.5rem'
@@ -37,15 +39,9 @@ export type ButtonHeight =
   | undefined
   | null
 
-export type ButtonSpacingY = 0 | 'xxtight' | 'xtight' | 'tight' | 'base'
+export type ButtonSpacingY = 0 | 4 | 8 | 10 | 12 | 16
 
-export type ButtonSpacingX =
-  | 0
-  | 'xxtight'
-  | 'xtight'
-  | 'tight'
-  | 'base'
-  | 'loose'
+export type ButtonSpacingX = 0 | 4 | 8 | 10 | 12 | 16 | 20 | 24
 
 type ButtonColor =
   | 'white'
@@ -83,7 +79,7 @@ type ButtonTextColor = Extract<
 
 type ButtonTextActiveColor = Extract<
   ButtonColor,
-  'white' | 'black' | 'green' | 'greenDark' | 'redDark'
+  'white' | 'black' | 'green' | 'greenDark' | 'redDark' | 'greyDarker'
 >
 
 export type ButtonBgColor = Extract<
@@ -112,7 +108,10 @@ type ButtonBgActiveColor = Extract<
   | 'red'
 >
 
-type ButtonBorderActiveColor = Extract<ButtonColor, 'greenDark' | 'black'>
+type ButtonBorderActiveColor = Extract<
+  ButtonColor,
+  'greenDark' | 'black' | 'greyLight' | 'grey'
+>
 
 export type ButtonProps = {
   size?: [ButtonWidth, ButtonHeight]
@@ -127,7 +126,7 @@ export type ButtonProps = {
   borderColor?: ButtonColor
   borderActiveColor?: ButtonBorderActiveColor
   borderWidth?: 'sm' | 'md'
-  borderRadius?: 0 | '5rem'
+  borderRadius?: 0 | '0.5rem' | '0.75rem' | '5rem'
 
   href?: string
   replace?: boolean
@@ -158,10 +157,10 @@ export type ButtonProps = {
  * ```jsx
  *  // with custom spacing
  *  <Button
- *    spacing={['xtight', 'xtight']}
+ *    spacing={[8, 8]}
  *    onClick={onClick}
  *  >
- *    <IconBookmarked16 />
+ *    <Icon icon={IconSave} />
  *  </Button>
  *
  *  // with custom size, border, hover text & background
@@ -173,8 +172,8 @@ export type ButtonProps = {
  *    borderColor="green"
  *    onClick={onClick}
  *  >
- *    <TextIcon weight="md" size="xs">
- *      <Translate id="follow" />
+ *    <TextIcon weight="medium" size={12}>
+ *      Follow
  *    </TextIcon>
  *  </Button>
  * ```

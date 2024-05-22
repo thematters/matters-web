@@ -1,12 +1,13 @@
 import { FormattedMessage } from 'react-intl'
 
-import { IconRemove24, Menu } from '~/components'
+import { ReactComponent as IconDelete } from '@/public/static/icons/24px/delete.svg'
+import { Icon, Menu } from '~/components'
 
 const DeleteCommentButton = ({ openDialog }: { openDialog: () => void }) => {
   return (
     <Menu.Item
       text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
-      icon={<IconRemove24 size="mdS" />}
+      icon={<Icon icon={IconDelete} size={20} />}
       onClick={openDialog}
       ariaHasPopup="dialog"
     />

@@ -1,5 +1,5 @@
 .userProfile {
-  margin-bottom: var(--spacing-base-loose);
+  margin-bottom: var(--sp20);
 }
 
 .right {
@@ -7,25 +7,25 @@
 
   & > * {
     &:nth-child(2) {
-      margin-left: var(--spacing-base);
+      margin-left: var(--sp16);
     }
   }
 }
 
 .spaceTop {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 }
 
 .header {
   @mixin flex-start-space-between;
 
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-base);
+  padding: 0 var(--sp16);
+  margin-bottom: var(--sp16);
 
   & .avatar {
     z-index: 0;
     display: inline-flex;
-    margin-top: calc(var(--spacing-loose) * -1);
+    margin-top: calc(var(--sp24) * -1);
     border-radius: 50%;
     box-shadow: 0 0 0 3px var(--color-white);
   }
@@ -36,24 +36,24 @@
 }
 
 .headerWithoutCover {
-  margin-top: calc(var(--spacing-base-loose) + var(--spacing-loose));
+  margin-top: calc(var(--sp20) + var(--sp24));
 }
 
 .info {
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-tight);
+  padding: 0 var(--sp16);
+  margin-bottom: var(--sp12);
 
   & .displayName,
   & .username {
     @mixin flex-center-start;
 
     & > * + * {
-      margin-left: var(--spacing-x-tight);
+      margin-left: var(--sp8);
     }
   }
 
   & .displayName {
-    font-size: var(--font-size-xl);
+    font-size: var(--text24);
     line-height: 1;
 
     & .name {
@@ -62,8 +62,8 @@
   }
 
   & .username {
-    margin-top: var(--spacing-x-tight);
-    font-size: var(--font-size-md);
+    margin-top: var(--sp8);
+    font-size: var(--text16);
     line-height: 1;
     color: var(--color-grey-dark);
   }
@@ -100,21 +100,21 @@
 }
 
 .follow {
-  padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-base);
-  font-size: var(--font-size-md);
+  padding: 0 var(--sp16);
+  margin-top: var(--sp16);
+  font-size: var(--text16);
   line-height: 1.5rem;
   color: var(--color-grey-darker);
 
   & > * + * {
-    margin-left: var(--spacing-base);
+    margin-left: var(--sp16);
   }
 
   & .count {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-medium);
   }
 }
 
 .footer {
-  padding: 0 var(--spacing-base);
+  padding: 0 var(--sp16);
 }

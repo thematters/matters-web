@@ -32,6 +32,7 @@ type EventArgs =
   | ['view_add_credit_dialog', ViewDialogProp]
   | ['view_donation_dialog', ViewDialogProp]
   | ['view_subscribe_circle_dialog', ViewDialogProp]
+  | ['view_comment_drawer', ViewDrawerProp]
   | ['banner_exposure', BannerExposureProp]
   | ['card_exposure', CardExposureProp]
   | ['tag_exposure', TagExposureProp]
@@ -51,7 +52,7 @@ interface PageViewProp {
 /**
  * Event: Click Button
  */
-interface ClickButtonProp {
+export interface ClickButtonProp {
   type:
     | 'checkout' // `next step` after top up dialog
     | 'donate'
@@ -77,7 +78,25 @@ interface ClickButtonProp {
     | 'try_login_from_visitor'
     | 'bind_ens'
     | 'bind_ens_successfully'
+    | 'bind_wallet_after_support'
+    | 'edit_support_copy'
+    | 'history_version'
+    | 'ipfs'
+    | 'edit'
+    | 'edited'
+    | 'appreciate'
+    | 'comment_open'
+    | 'comment_close'
+    | 'comment_placeholder'
+    | 'report_article_open'
+    | 'share_article_open'
+    | 'support_open'
+    | 'support_close'
+    | 'supporter_list'
+    | 'user_avatar'
+    | 'user_name'
   pageType?: PageType
+  pageComponent?: PageComponent
 }
 
 /**
@@ -139,6 +158,14 @@ interface ViewDialogProp {
 }
 
 /**
+ * Event: View Drawer
+ */
+interface ViewDrawerProp {
+  contentType: ContentType
+  id: string
+}
+
+/**
  * Event: Click Feed
  */
 interface ClickFeedProp {
@@ -146,6 +173,7 @@ interface ClickFeedProp {
   contentType: ContentType | ActivityType
   location: number | string
   id?: string
+  rootId?: string
   searchKey?: string
 }
 
@@ -248,6 +276,7 @@ type ArticleFeedType =
   | 'collection'
   | 'hottest'
   | 'icymi'
+  | 'icymi_curated'
   | 'newest'
   | 'read_history'
   | 'related_article'
@@ -263,6 +292,9 @@ type ArticleFeedType =
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
+  | 'article_detail_author_sidebar_collection'
+  | 'article_detail_author_sidebar_author'
+  | 'article_detail_author_sidebar_recommendation'
 
 type CollectionFeedType =
   | 'user_collection'
@@ -314,17 +346,15 @@ type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
 
 type PageType =
   | 'article_detail'
+  | 'article_history'
   | 'user_profile'
   | 'circle_detail'
   | 'edit_draft'
 
-export interface UtmParams {
-  utm_source?: string // required in most cases
-  utm_medium?: string // required in most cases
-  utm_campaign?: string // all others are really optional
-  utm_content?: string
-  utm_term?: string
-  utm_id?: string
-}
-
-export type UtmParam = keyof UtmParams
+type PageComponent =
+  | 'article_meta'
+  | 'article_end'
+  | 'article_end_toolbar'
+  | 'article_fixed_toolbar'
+  | 'article_float_toolbar'
+  | 'article_author'

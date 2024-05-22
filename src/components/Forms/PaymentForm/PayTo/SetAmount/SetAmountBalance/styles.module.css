@@ -1,12 +1,13 @@
 .setAmountBalance {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-base) 0 0;
+  padding: var(--sp16) 0 0;
+  font-size: var(--text14);
+  line-height: 1.375rem;
+  color: var(--color-black);
+  white-space: pre;
 
   & .left {
-    font-size: 1rem;
-    font-weight: var(--font-weight-medium);
-    line-height: 1.5rem;
-    color: var(--color-black);
+    font-weight: var(--font-medium);
   }
 }

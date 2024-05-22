@@ -16,13 +16,11 @@ describe('utils/datetime/relative', () => {
   it('should format a date within this minute correctly', () => {
     const date = new Date()
     const result = toRelativeDate(date, 'en')
-    expect(result).toBe('just now')
+    expect(result).toBe('Now')
   })
 
   it('should format a date within this hour but not this minute correctly', () => {
-    expect(toRelativeDate(new Date(2023, 6, 1, 8, 29), 'en')).toBe(
-      '1 minute ago'
-    )
+    expect(toRelativeDate(new Date(2023, 6, 1, 8, 29), 'en')).toBe('Now')
     expect(toRelativeDate(new Date(2023, 6, 1, 8, 28), 'en')).toBe(
       '2 minutes ago'
     )
@@ -35,11 +33,6 @@ describe('utils/datetime/relative', () => {
     expect(toRelativeDate(new Date(2023, 6, 1, 6, 20, 0), 'en')).toBe(
       '2 hours ago'
     )
-  })
-
-  it('should format a date within this week but not today correctly', () => {
-    expect(toRelativeDate(new Date('2023-06-30'), 'en')).toBe('1 day ago')
-    expect(toRelativeDate(new Date('2023-06-26'), 'en')).toBe('5 days ago')
   })
 
   it('should format a date within this year but not this week correctly', () => {
@@ -63,5 +56,14 @@ describe('utils/datetime/relative', () => {
     const date = new Date('2021-01-01')
     const dateResult = toRelativeDate(date, 'en')
     expect(dateResult).toBe('Jan 1, 2021')
+  })
+
+  it('should format a date more than 2 minutes but truncated', () => {
+    expect(toRelativeDate(new Date(2023, 6, 1, 8, 27), 'en', true)).toBe('3m')
+  })
+
+  it('should format a date within 24 hours but truncated', () => {
+    expect(toRelativeDate(new Date(2023, 6, 1, 7, 20), 'en', true)).toBe('1h')
+    expect(toRelativeDate(new Date(2023, 6, 1, 5, 20), 'en', true)).toBe('3h')
   })
 })

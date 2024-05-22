@@ -1,10 +1,14 @@
+import classNames from 'classnames'
 import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
+import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
+import { capitalizeFirstLetter } from '~/common/utils'
 import {
   AddCollectionsArticleDialog,
   AddCollectionsArticleDialogProps,
@@ -13,33 +17,36 @@ import {
   BookmarkButton,
   Button,
   Dropdown,
-  FingerprintDialog,
-  FingerprintDialogProps,
-  IconMore16,
+  Icon,
   IconSize,
   Menu,
   RemoveArticleCollectionDialog,
   RemoveArticleCollectionDialogProps,
   ShareDialog,
   ShareDialogProps,
-  Spinner,
+  SpinnerBlock,
+  SubmitReport,
   SupportersDialog,
   SupportersDialogProps,
   toast,
   ViewerContext,
   withDialog,
 } from '~/components'
+import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog/Dialog'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
+import { ArchiveUserDialogProps } from '~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'
+import {
+  OpenToggleRestrictUserDialogWithProps,
+  ToggleRestrictUserDialogProps,
+} from '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
 
 import AddCollectionButton from './AddCollectionButton'
-import AppreciatorsButton from './AppreciatorsButton'
 import ArchiveArticle from './ArchiveArticle'
 import { ArchiveArticleDialogProps } from './ArchiveArticle/Dialog'
-import DonatorsButton from './DonatorsButton'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
-import FingerprintButton from './FingerprintButton'
 import { fragments } from './gql'
+import IPFSButton from './IPFSButton'
 import PinButton from './PinButton'
 import RemoveArticleCollectionButton from './RemoveArticleCollectionButton'
 import RemoveTagButton from './RemoveTagButton'
@@ -58,26 +65,54 @@ const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
 
 const DynamicToggleRecommendArticleButton = dynamic(
   () => import('./ToggleRecommendArticle/Button'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
-
 const DynamicToggleRecommendArticleDialog = dynamic(
   () => import('./ToggleRecommendArticle/Dialog'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
+)
+const DynamicToggleRestrictUserButton = dynamic(
+  () =>
+    import(
+      '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Button'
+    ),
+  { loading: () => <SpinnerBlock /> }
+)
+const DynamicToggleRestrictUserDialog = dynamic(
+  () =>
+    import(
+      '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
+    ),
+  { loading: () => <SpinnerBlock /> }
+)
+const DynamicArchiveUserButton = dynamic(
+  () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Button'),
+  {
+    loading: () => <SpinnerBlock />,
+  }
+)
+const DynamicArchiveUserDialog = dynamic(
+  () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'),
+  {
+    loading: () => <SpinnerBlock />,
+  }
 )
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode
   size?: IconSize
+  color?: 'greyDark' | 'black'
   sharePath?: string
+  disabled?: boolean
 
   /**
    * options to control visibility
    */
   // force to hide
   hasShare?: boolean
-  hasFingerprint?: boolean
+  hasIPFS?: boolean
   hasExtend?: boolean
+  hasReport?: boolean
 
   // based on type
   inCard?: boolean
@@ -108,14 +143,14 @@ export interface DropdownActionsControls {
 
 type DropdownActionsProps = {
   article: DropdownActionsArticleFragment
-} & DropdownActionsControls
+} & DropdownActionsControls &
+  Omit<TrackEventProps, 'type'>
 
 interface Controls {
   hasShare: boolean
-  hasAppreciators: boolean
-  hasDonators: boolean
-  hasFingerprint: boolean
+  hasIPFS: boolean
   hasExtend: boolean
+  hasReport: boolean
   hasSticky: boolean
   hasSetTagSelected: boolean
   hasSetTagUnselected: boolean
@@ -124,7 +159,7 @@ interface Controls {
 
 interface DialogProps {
   openShareDialog: () => void
-  openFingerprintDialog: () => void
+  openSubmitReportDialog: () => void
   openAppreciatorsDialog: () => void
   openSupportersDialog: () => void
   openArchiveDialog: () => void
@@ -133,9 +168,13 @@ interface DialogProps {
 }
 
 interface AdminProps {
-  openToggleRecommendDialog: (
+  openToggleRecommendArticleDialog: (
     props: OpenToggleRecommendArticleDialogWithProps
   ) => void
+  openToggleRestrictUserDialog: (
+    props: OpenToggleRestrictUserDialogWithProps
+  ) => void
+  openArchiveUserDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps &
@@ -152,13 +191,14 @@ const BaseDropdownActions = ({
 
   icon,
   size,
+  color = 'greyDark',
   inCard,
+  disabled,
 
   hasShare,
-  hasAppreciators,
-  hasDonators,
-  hasFingerprint,
+  hasIPFS,
   hasExtend,
+  hasReport,
   hasSticky,
   hasArchive,
   hasSetTagSelected,
@@ -172,7 +212,7 @@ const BaseDropdownActions = ({
   hasSetBottomCollection,
 
   openShareDialog,
-  openFingerprintDialog,
+  openSubmitReportDialog,
   openAppreciatorsDialog,
   openSupportersDialog,
   openArchiveDialog,
@@ -183,42 +223,44 @@ const BaseDropdownActions = ({
   onRemoveCollection,
 
   // admin
-  openToggleRecommendDialog,
+  openToggleRecommendArticleDialog,
+  openToggleRestrictUserDialog,
+  openArchiveUserDialog,
+
+  // tracker
+  pageType,
+  pageComponent,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
-  const hasPublic =
-    hasShare || hasAppreciators || hasDonators || hasFingerprint || hasExtend
-  const hasPrivate =
-    hasSticky ||
-    hasArchive ||
-    hasSetTagSelected ||
-    hasSetTagUnselected ||
-    hasRemoveTag
+
+  const isAuth = viewer.isAuthed
+  const isAuthor = viewer.id === article.author.id
+
+  const trackEventProps = { pageType, pageComponent }
 
   const Content = () => (
     <Menu>
       {/* public */}
-      {hasShare && <ShareButton openDialog={openShareDialog} />}
-      {hasAppreciators && (
-        <AppreciatorsButton openDialog={openAppreciatorsDialog} />
-      )}
-      {hasDonators && <DonatorsButton openDialog={openSupportersDialog} />}
-      {hasFingerprint && (
-        <FingerprintButton openDialog={openFingerprintDialog} />
+      {hasShare && (
+        <ShareButton openDialog={openShareDialog} {...trackEventProps} />
       )}
       {hasExtend && <ExtendButton article={article} />}
 
-      {/* private */}
-      {hasPublic && hasPrivate && <Menu.Divider />}
+      {hasSticky && <PinButton article={article} />}
+      {hasBookmark && isAuth && (
+        <BookmarkButton article={article} inCard={inCard} iconSize={20} />
+      )}
+      {hasIPFS && <IPFSButton article={article} {...trackEventProps} />}
+      {hasReport && isAuth && !isAuthor && (
+        <SubmitReport.Button
+          openDialog={openSubmitReportDialog}
+          {...{ type: 'report_article_open', ...trackEventProps }}
+        />
+      )}
+
       {hasEdit && <EditButton article={article} />}
       {hasAddCollection && (
         <AddCollectionButton openDialog={openAddCollectionsArticleDialog} />
-      )}
-
-      {hasSticky && <PinButton article={article} />}
-
-      {hasBookmark && (
-        <BookmarkButton article={article} inCard={inCard} size="mdS" />
       )}
 
       {hasSetTagSelected && tagDetailId && (
@@ -274,13 +316,18 @@ const BaseDropdownActions = ({
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="icymi"
-            openDialog={openToggleRecommendDialog}
+            openDialog={openToggleRecommendArticleDialog}
           />
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="hottestAndNewest"
-            openDialog={openToggleRecommendDialog}
+            openDialog={openToggleRecommendArticleDialog}
           />
+          <DynamicToggleRestrictUserButton
+            id={article.author.id}
+            openDialog={openToggleRestrictUserDialog}
+          />
+          <DynamicArchiveUserButton openDialog={openArchiveUserDialog} />
         </>
       )}
     </Menu>
@@ -290,6 +337,11 @@ const BaseDropdownActions = ({
   const moreActionText = intl.formatMessage({
     defaultMessage: 'More Actions',
     id: 'A7ugfn',
+  })
+
+  const moreButtonClasses = classNames({
+    [styles.moreButton]: true,
+    [styles[`text${capitalizeFirstLetter(color)}`]]: !!color,
   })
 
   return (
@@ -304,19 +356,21 @@ const BaseDropdownActions = ({
             aria-label={moreActionText}
             aria-haspopup="listbox"
             ref={ref}
-            className={styles.moreButton}
+            className={moreButtonClasses}
           >
-            {icon ? icon : <IconMore16 size={size} />}
+            {icon ? icon : <Icon icon={IconMore} size={size} />}
           </button>
         ) : (
           <Button
             onClick={openDropdown}
-            spacing={['xtight', 'xtight']}
-            bgActiveColor="greyLighter"
+            spacing={[8, 8]}
+            borderRadius={'5rem'}
+            bgActiveColor={'greyLighter'}
             aria-label={moreActionText}
             ref={ref}
+            disabled={disabled}
           >
-            {icon ? icon : <IconMore16 size={size} />}
+            {icon ? icon : <Icon icon={IconMore} size={size} />}
           </Button>
         )
       }
@@ -330,8 +384,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
     collectionId,
 
     hasShare,
-    hasFingerprint = true,
     hasExtend = true,
+    hasReport,
 
     inCard,
     inUserArticles,
@@ -364,10 +418,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const controls = {
     // public
     hasShare: !!hasShare,
-    hasAppreciators: article.likesReceived.totalCount > 0 && !inCard,
-    hasDonators: article.donationsDialog.totalCount > 0 && !inCard,
-    hasFingerprint: hasFingerprint && (isActive || isArticleAuthor) && !inCard,
     hasExtend: hasExtend && !!isActive && !inCard,
+    hasReport: !!hasReport && !isArticleAuthor,
 
     // privates
     hasSticky: !!(
@@ -400,15 +452,15 @@ const DropdownActions = (props: DropdownActionsProps) => {
     { path: props.sharePath },
     ({ openDialog }) => ({ ...props, ...controls, openShareDialog: openDialog })
   )
-  const WithFingerprint = withDialog<Omit<FingerprintDialogProps, 'children'>>(
+  const WithReport = withDialog<Omit<SubmitReportDialogProps, 'children'>>(
     WithShareDialog,
-    FingerprintDialog,
-    { article },
-    ({ openDialog }) => ({ openFingerprintDialog: openDialog })
+    SubmitReport.Dialog,
+    { id: article.id },
+    ({ openDialog }) => ({ openSubmitReportDialog: openDialog })
   )
   const WithAppreciators = withDialog<
     Omit<AppreciatorsDialogProps, 'children'>
-  >(WithFingerprint, AppreciatorsDialog, { article }, ({ openDialog }) => ({
+  >(WithReport, AppreciatorsDialog, { article }, ({ openDialog }) => ({
     openAppreciatorsDialog: openDialog,
   }))
   const WithSupporters = withDialog<Omit<SupportersDialogProps, 'children'>>(
@@ -451,18 +503,34 @@ const DropdownActions = (props: DropdownActionsProps) => {
   /**
    * ADMIN ONLY
    */
-  const WithToggleRecommend = withDialog<
+  const WithToggleRecommendArticle = withDialog<
     Omit<ToggleRecommendArticleDialogProps, 'children'>
   >(
     WithRemoveArticleCollection,
     DynamicToggleRecommendArticleDialog,
     { article },
     ({ openDialog }) => ({
-      openToggleRecommendDialog: openDialog,
+      openToggleRecommendArticleDialog: openDialog,
     })
   )
+  const WithToggleRetrictUser = withDialog<
+    Omit<ToggleRestrictUserDialogProps, 'children'>
+  >(
+    WithToggleRecommendArticle,
+    DynamicToggleRestrictUserDialog,
+    { id: article.author.id, userName: article.author.userName! },
+    ({ openDialog }) => ({
+      openToggleRestrictUserDialog: openDialog,
+    })
+  )
+  const WithArchiveUser = withDialog<Omit<ArchiveUserDialogProps, 'children'>>(
+    WithToggleRetrictUser,
+    DynamicArchiveUserDialog,
+    { id: article.author.id, userName: article.author.userName! },
+    ({ openDialog }) => ({ openArchiveUserDialog: openDialog })
+  )
 
-  return <WithToggleRecommend />
+  return <WithArchiveUser />
 }
 
 DropdownActions.fragments = fragments

@@ -9,7 +9,6 @@ import {
   EmailSignUpForm,
   Head,
   LanguageSwitch,
-  ReCaptchaProvider,
   SelectAuthMethodForm,
   useRoute,
   useStep,
@@ -81,6 +80,7 @@ const UniversalAuth = () => {
   return (
     <>
       <Head />
+
       <section className={styles.wrapper}>
         <section className={containerClasses}>
           {currStep === 'select-login-method' && (
@@ -105,18 +105,16 @@ const UniversalAuth = () => {
 
           {/* Wallet */}
           {currStep === 'wallet-connect' && (
-            <ReCaptchaProvider>
-              <WalletAuthForm.Connect
-                type="login"
-                purpose="page"
-                walletType={walletType}
-                back={() => forward('select-login-method')}
-                gotoSignInTab={() => {
-                  setAuthFeedType('normal')
-                  forward('select-login-method')
-                }}
-              />
-            </ReCaptchaProvider>
+            <WalletAuthForm.Connect
+              type="login"
+              purpose="page"
+              walletType={walletType}
+              back={() => forward('select-login-method')}
+              gotoSignInTab={() => {
+                setAuthFeedType('normal')
+                forward('select-login-method')
+              }}
+            />
           )}
 
           {/* Email */}
@@ -135,22 +133,20 @@ const UniversalAuth = () => {
           )}
 
           {currStep === 'email-sign-up-init' && (
-            <ReCaptchaProvider>
-              <EmailSignUpForm.Init
-                purpose="page"
-                submitCallback={(email: string) => {
-                  setEmail(email)
-                  forward('email-verification-sent')
-                }}
-                gotoWalletConnect={(type) => {
-                  setWalletType(type)
-                  forward('wallet-connect')
-                }}
-                authFeedType={authFeedType}
-                setAuthFeedType={setAuthFeedType}
-                back={() => forward('select-login-method')}
-              />
-            </ReCaptchaProvider>
+            <EmailSignUpForm.Init
+              purpose="page"
+              submitCallback={(email: string) => {
+                setEmail(email)
+                forward('email-verification-sent')
+              }}
+              gotoWalletConnect={(type) => {
+                setWalletType(type)
+                forward('wallet-connect')
+              }}
+              authFeedType={authFeedType}
+              setAuthFeedType={setAuthFeedType}
+              back={() => forward('select-login-method')}
+            />
           )}
           {currStep === 'email-verification-sent' && (
             <VerificationLinkSent

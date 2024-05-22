@@ -1,6 +1,7 @@
 import { useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { Button, TextIcon, toast, Translate, useMutation } from '~/components'
+import { Button, TextIcon, toast, useMutation } from '~/components'
 import INVITE_CIRCLE from '~/components/GQL/mutations/invite'
 import { InviteCircleInvitee, InviteCircleMutation } from '~/gql/graphql'
 
@@ -44,11 +45,7 @@ const CircleInvitationResendButton = ({
 
       toast.success({
         message: (
-          <Translate
-            zh_hant="邀請已送出"
-            zh_hans="邀请已送出"
-            en="Invitation sent"
-          />
+          <FormattedMessage defaultMessage="Invitation sent" id="sjdyQ0" />
         ),
       })
     } catch (e) {
@@ -60,14 +57,14 @@ const CircleInvitationResendButton = ({
 
   return (
     <Button
-      spacing={[0, 'base']}
+      spacing={[0, 16]}
       size={[null, '2rem']}
       bgColor="greyLighter"
       onClick={() => resend()}
       disabled={disabled}
     >
-      <TextIcon size="smS" color="black" weight="md">
-        <Translate id="resend" />
+      <TextIcon size={13} color="black" weight="medium">
+        <FormattedMessage defaultMessage="Resend" id="IXycMo" />
       </TextIcon>
     </Button>
   )

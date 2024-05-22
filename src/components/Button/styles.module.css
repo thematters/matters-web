@@ -33,7 +33,7 @@ span.container {
 }
 
 .textRed {
-  color: var(--color-red);
+  color: var(--color-negative-red);
 }
 
 .textGrey {
@@ -68,14 +68,21 @@ span.container {
 .textActiveGreenDark {
   &:hover,
   &:focus {
-    color: var(--color-matters-green-dark);
+    color: var(--color-matters-green-hover);
+  }
+}
+
+.textActiveGreyDarker {
+  &:hover,
+  &:focus {
+    color: var(--color-grey-darker);
   }
 }
 
 .textActiveRedDark {
   &:hover,
   &:focus {
-    color: var(--color-red-dark);
+    color: var(--color-negative-red-2);
   }
 }
 
@@ -127,115 +134,157 @@ span.container {
 }
 
 /* Spacing */
-.spacingYXxtight {
+.spacingY4 {
   &:not(.isTransparent) {
-    padding-top: var(--spacing-xx-tight);
-    padding-bottom: var(--spacing-xx-tight);
+    padding-top: var(--sp4);
+    padding-bottom: var(--sp4);
   }
 
   & .hotarea {
-    margin-top: calc(var(--spacing-xx-tight) * -1);
-    margin-bottom: calc(var(--spacing-xx-tight) * -1);
+    margin-top: calc(var(--sp4) * -1);
+    margin-bottom: calc(var(--sp4) * -1);
   }
 }
 
-.spacingYXtight {
+.spacingY8 {
   &:not(.isTransparent) {
-    padding-top: var(--spacing-x-tight);
-    padding-bottom: var(--spacing-x-tight);
+    padding-top: var(--sp8);
+    padding-bottom: var(--sp8);
   }
 
   & .hotarea {
-    margin-top: calc(var(--spacing-x-tight) * -1);
-    margin-bottom: calc(var(--spacing-x-tight) * -1);
+    margin-top: calc(var(--sp8) * -1);
+    margin-bottom: calc(var(--sp8) * -1);
   }
 }
 
-.spacingYTight {
+.spacingY10 {
   &:not(.isTransparent) {
-    padding-top: var(--spacing-tight);
-    padding-bottom: var(--spacing-tight);
+    padding-top: var(--sp10);
+    padding-bottom: var(--sp10);
   }
 
   & .hotarea {
-    margin-top: calc(var(--spacing-tight) * -1);
-    margin-bottom: calc(var(--spacing-tight) * -1);
+    margin-top: calc(var(--sp10) * -1);
+    margin-bottom: calc(var(--sp10) * -1);
   }
 }
 
-.spacingYBase {
+.spacingY12 {
   &:not(.isTransparent) {
-    padding-top: var(--spacing-base);
-    padding-bottom: var(--spacing-base);
+    padding-top: var(--sp12);
+    padding-bottom: var(--sp12);
   }
 
   & .hotarea {
-    margin-top: calc(var(--spacing-base) * -1);
-    margin-bottom: calc(var(--spacing-base) * -1);
+    margin-top: calc(var(--sp12) * -1);
+    margin-bottom: calc(var(--sp12) * -1);
   }
 }
 
-.spacingXXxtight {
+.spacingY16 {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-xx-tight);
-    padding-left: var(--spacing-xx-tight);
+    padding-top: var(--sp16);
+    padding-bottom: var(--sp16);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-xx-tight) * -1);
-    margin-left: calc(var(--spacing-xx-tight) * -1);
+    margin-top: calc(var(--sp16) * -1);
+    margin-bottom: calc(var(--sp16) * -1);
   }
 }
 
-.spacingXXtight {
+.spacingX4 {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-x-tight);
-    padding-left: var(--spacing-x-tight);
+    padding-right: var(--sp4);
+    padding-left: var(--sp4);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-x-tight) * -1);
-    margin-left: calc(var(--spacing-x-tight) * -1);
+    margin-right: calc(var(--sp4) * -1);
+    margin-left: calc(var(--sp4) * -1);
   }
 }
 
-.spacingXTight {
+.spacingX8 {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-tight);
-    padding-left: var(--spacing-tight);
+    padding-right: var(--sp8);
+    padding-left: var(--sp8);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-tight) * -1);
-    margin-left: calc(var(--spacing-tight) * -1);
+    margin-right: calc(var(--sp8) * -1);
+    margin-left: calc(var(--sp8) * -1);
   }
 }
 
-.spacingXBase {
+.spacingX12 {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-base);
-    padding-left: var(--spacing-base);
+    padding-right: var(--sp12);
+    padding-left: var(--sp12);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-base) * -1);
-    margin-left: calc(var(--spacing-base) * -1);
+    margin-right: calc(var(--sp12) * -1);
+    margin-left: calc(var(--sp12) * -1);
   }
 }
 
-.spacingXLoose {
+.spacingX10 {
   &:not(.isTransparent) {
-    padding-right: var(--spacing-loose);
-    padding-left: var(--spacing-loose);
+    padding-right: var(--sp10);
+    padding-left: var(--sp10);
   }
 
   & .hotarea {
-    margin-right: calc(var(--spacing-loose) * -1);
-    margin-left: calc(var(--spacing-loose) * -1);
+    margin-right: calc(var(--sp10) * -1);
+    margin-left: calc(var(--sp10) * -1);
+  }
+}
+
+.spacingX16 {
+  &:not(.isTransparent) {
+    padding-right: var(--sp16);
+    padding-left: var(--sp16);
+  }
+
+  & .hotarea {
+    margin-right: calc(var(--sp16) * -1);
+    margin-left: calc(var(--sp16) * -1);
+  }
+}
+
+.spacingX20 {
+  &:not(.isTransparent) {
+    padding-right: var(--sp20);
+    padding-left: var(--sp20);
+  }
+
+  & .hotarea {
+    margin-right: calc(var(--sp20) * -1);
+    margin-left: calc(var(--sp20) * -1);
+  }
+}
+
+.spacingX24 {
+  &:not(.isTransparent) {
+    padding-right: var(--sp24);
+    padding-left: var(--sp24);
+  }
+
+  & .hotarea {
+    margin-right: calc(var(--sp24) * -1);
+    margin-left: calc(var(--sp24) * -1);
   }
 }
 
 /* Background */
+.bgWhite {
+  & .hotarea {
+    background: var(--color-white);
+  }
+}
+
 .bgGreyDarkest {
   & .hotarea {
     background: var(--color-grey-darkest);
@@ -256,7 +305,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-grey-lighter-active);
+      background: var(--color-grey-hover);
     }
   }
 }
@@ -269,7 +318,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-matters-green-dark);
+      background: var(--color-matters-green-hover);
     }
   }
 }
@@ -282,7 +331,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-grey-lighter-active);
+      background: var(--color-grey-hover);
     }
   }
 }
@@ -295,14 +344,14 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-matters-gold-active);
+      background: var(--color-matters-gold-hover);
     }
   }
 }
 
 .bgRed {
   & .hotarea {
-    background: var(--color-red);
+    background: var(--color-negative-red);
   }
 }
 
@@ -351,7 +400,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-grey-lighter-active);
+      background: var(--color-grey-hover);
     }
   }
 }
@@ -389,7 +438,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      background: var(--color-red);
+      background: var(--color-negative-red);
     }
   }
 }
@@ -431,6 +480,12 @@ span.container {
   }
 }
 
+.borderGreyLighterActive {
+  & .hotarea {
+    border-color: var(--color-grey-hover);
+  }
+}
+
 .borderGreenLighter {
   & .hotarea {
     border-color: var(--color-green-lighter);
@@ -451,13 +506,31 @@ span.container {
 
 .borderRed {
   & .hotarea {
-    border-color: var(--color-red);
+    border-color: var(--color-negative-red);
   }
 }
 
 .borderLikecoinGreen {
   & .hotarea {
-    border-color: var(--color-likecoin-green);
+    border-color: var(--color-likecoin);
+  }
+}
+
+.borderActiveGreyLight {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-grey-light);
+    }
+  }
+}
+
+.borderActiveGrey {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      border-color: var(--color-grey);
+    }
   }
 }
 
@@ -465,7 +538,7 @@ span.container {
   &:hover,
   &:focus {
     & .hotarea {
-      border-color: var(--color-matters-green-dark);
+      border-color: var(--color-matters-green-hover);
     }
   }
 }

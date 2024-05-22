@@ -1,14 +1,11 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
+import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
 import { TEST_ID } from '~/common/enums'
-import { numAbbr, translate } from '~/common/utils'
-import {
-  IconArticle16,
-  IconUser16,
-  LanguageContext,
-  TextIcon,
-} from '~/components'
+import { numAbbr } from '~/common/utils'
+import { Icon, TextIcon } from '~/components'
 import { CountsCircleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -32,7 +29,7 @@ const fragments = {
 }
 
 const Counts = ({ circle }: CountsProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const memberCount = circle.members.totalCount
   const articleCount = circle.works.totalCount
@@ -40,32 +37,34 @@ const Counts = ({ circle }: CountsProps) => {
   return (
     <section className={styles.counts}>
       <TextIcon
-        icon={<IconUser16 size="xs" />}
+        icon={<Icon icon={IconUser} size={12} />}
         color="grey"
-        weight="md"
-        size="sm"
-        aria-label={translate({
-          zh_hant: `${memberCount} 個成員`,
-          zh_hans: `${memberCount} 个成员`,
-          en: `${memberCount} members`,
-          lang,
-        })}
+        weight="medium"
+        size={14}
+        aria-label={intl.formatMessage(
+          {
+            defaultMessage: `{total} members`,
+            id: 'VmYzLr',
+          },
+          { total: memberCount }
+        )}
         data-test-id={TEST_ID.DIGEST_CIRCLE_MEMBER_COUNT}
       >
         {numAbbr(memberCount)}
       </TextIcon>
 
       <TextIcon
-        icon={<IconArticle16 size="xs" />}
+        icon={<Icon icon={IconDraft} size={12} />}
         color="grey"
-        weight="md"
-        size="sm"
-        aria-label={translate({
-          zh_hant: `${articleCount} 篇作品`,
-          zh_hans: `${articleCount} 篇作品`,
-          en: `${articleCount} articles`,
-          lang,
-        })}
+        weight="medium"
+        size={14}
+        aria-label={intl.formatMessage(
+          {
+            defaultMessage: `{articleCount} articles`,
+            id: 'RnKPVm',
+          },
+          { articleCount }
+        )}
         data-test-id={TEST_ID.DIGEST_CIRCLE_ARTICLE_COUNT}
       >
         {numAbbr(articleCount)}

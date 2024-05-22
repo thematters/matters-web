@@ -13,7 +13,7 @@ import {
   Media,
   Notice,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   useMutation,
 } from '~/components'
 import { updateViewerUnreadNoticeCount } from '~/components/GQL'
@@ -72,7 +72,7 @@ const BaseNotifications = () => {
   const { edges, pageInfo } = data?.viewer?.notices || {}
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {

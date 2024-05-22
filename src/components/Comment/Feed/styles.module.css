@@ -11,19 +11,18 @@
     display: inline-flex;
 
     & > * + * {
-      margin-left: var(--spacing-tight);
+      margin-left: var(--sp12);
     }
   }
 }
 
 .replyToContainer {
-  margin: var(--spacing-xx-tight) 0 var(--spacing-x-tight)
-    var(--spacing-x-loose);
+  margin: var(--sp4) 0 var(--sp8) var(--sp32);
 }
 
 .contentContainer {
-  padding-left: var(--spacing-xx-loose);
-  margin-top: var(--spacing-xx-tight);
+  padding-left: var(--sp40);
+  margin-top: var(--sp4);
 }
 
 @keyframes comment-background-fade-out {

@@ -1,12 +1,11 @@
 import { DialogContent, DialogOverlay } from '@reach/dialog'
-import { useContext, useRef } from 'react'
+import { useRef } from 'react'
+import { useIntl } from 'react-intl'
 import { animated, useTransition } from 'react-spring'
-
-import { translate } from '~/common/utils'
-import { LanguageContext } from '~/components'
 
 import DrawerContent from './DrawerContent'
 import Overlay from './Overlay'
+import styles from './styles.module.css'
 
 export interface SideDrawerNavProps {
   isOpen: boolean | undefined
@@ -14,7 +13,7 @@ export interface SideDrawerNavProps {
 }
 
 const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const closeButtonRef: React.RefObject<any> | null = useRef(null)
 
@@ -39,17 +38,16 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
     <>
       {transition(({ opacity, transform }) => (
         <AnimatedDrawerOverlay
+          className={styles.overlay}
           initialFocusRef={closeButtonRef}
-          className="sideDrawerNav"
         >
           <AnimatedOverlay style={{ opacity: opacity as any }} />
 
           <DialogContent
-            aria-labelledby={translate({
-              zh_hant: '菜單 - 我的',
-              zh_hans: '菜单 - 我的',
-              en: 'Menu: Me',
-              lang,
+            className={styles.content}
+            aria-labelledby={intl.formatMessage({
+              defaultMessage: 'Menu: Me',
+              id: 'cv6yHm',
             })}
           >
             <AnimatedDrawerContent

@@ -12,7 +12,7 @@ const Placeholder = () => {
     <section className={styles.userProfile} aria-busy="true" aria-live="polite">
       <header className={styles.header}>
         <section className={styles.avatar}>
-          <Avatar size="xxxxl" src={IMG_PLACEHOLDER} inProfile />
+          <Avatar size={120} src={IMG_PLACEHOLDER} inProfile />
         </section>
       </header>
 

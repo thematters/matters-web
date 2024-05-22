@@ -18,7 +18,7 @@ import {
   Head,
   Layout,
   SegmentedTabs,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   useFeatures,
   usePublicQuery,
@@ -49,7 +49,7 @@ import styles from './styles.module.css'
 
 const DynamicCommunity = dynamic(() => import('./Community'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
@@ -168,7 +168,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
       <TagCover tag={tag} />
 
       <section className={styles.info}>
-        {features.NOTICE_TAG_ADOPTION && <Owner tag={tag} />}
+        {features.tag_adoption && <Owner tag={tag} />}
 
         <section className={styles.top}>
           <section className={styles.statistics}>
@@ -186,7 +186,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
             content={tag.description}
             color="greyDarker"
             spacingTop="base"
-            size="mdS"
+            size={15}
           >
             <p>{tag.description}</p>
           </Expandable>
@@ -311,7 +311,7 @@ const TagDetailContainer = () => {
   if (loading || resultBySearch?.loading) {
     return (
       <EmptyLayout>
-        <Spinner />
+        <SpinnerBlock />
       </EmptyLayout>
     )
   }

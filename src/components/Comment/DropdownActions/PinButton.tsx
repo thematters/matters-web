@@ -1,14 +1,10 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
+import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
-import {
-  CommentFormType,
-  IconPin24,
-  IconUnPin24,
-  Menu,
-  useMutation,
-} from '~/components'
+import { CommentFormType, Icon, Menu, useMutation } from '~/components'
 import { updateCircleBroadcast } from '~/components/GQL'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
 import {
@@ -119,7 +115,7 @@ const PinButton = ({
             />
           )
         }
-        icon={<IconUnPin24 size="mdS" />}
+        icon={<Icon icon={IconUnpin} size={20} />}
         onClick={async () => {
           await unpinComment()
           window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
@@ -145,7 +141,7 @@ const PinButton = ({
           />
         )
       }
-      icon={<IconPin24 size="mdS" />}
+      icon={<Icon icon={IconPin} size={20} />}
       onClick={
         canPin
           ? async () => {

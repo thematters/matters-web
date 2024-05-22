@@ -1,12 +1,12 @@
 .toastContainer {
-  inset: var(--spacing-x-loose) !important;
+  inset: var(--sp32) !important;
 }
 
 .toast {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-tight);
-  font-size: var(--font-size-sm);
+  padding: var(--sp12);
+  font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-white);
   border-radius: 0.5rem;
@@ -15,7 +15,7 @@
     @mixin flex-center-space-between;
 
     & :global(> *) {
-      margin-left: var(--spacing-x-loose);
+      margin-left: var(--sp32);
     }
 
     & :global(> * + *) {
@@ -24,7 +24,7 @@
       &::before {
         position: absolute;
         top: 0;
-        left: calc(var(--spacing-base) * -1);
+        left: calc(var(--sp16) * -1);
         width: 1px;
         height: 100%;
         content: '';
@@ -38,8 +38,12 @@
   background: var(--color-black);
 }
 
+.warning {
+  background: var(--color-warn-yellow);
+}
+
 .error {
-  background: var(--color-red);
+  background: var(--color-negative-red);
 
   & .actions {
     & :global(> * + *) {

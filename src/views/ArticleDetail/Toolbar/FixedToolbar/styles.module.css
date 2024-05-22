@@ -1,0 +1,30 @@
+.toolbar {
+  @mixin shadow-border-top-grey;
+  @mixin safe-area-botttom;
+
+  position: fixed;
+  bottom: 0;
+  z-index: var(--z-index-bottom-bar);
+  width: 100%;
+  padding: var(--sp8) var(--sp16);
+  background: var(--color-white);
+
+  & .buttons {
+    @mixin flex-center-space-between;
+
+    & .commentButton {
+      flex-grow: 1;
+      justify-content: flex-start;
+      padding: var(--sp10);
+      margin-right: var(--sp16);
+      font-size: var(--text14);
+      color: var(--color-grey-darker);
+      background: var(--color-grey-lighter);
+      border-radius: 0.5rem;
+    }
+
+    & > button {
+      padding: var(--sp10);
+    }
+  }
+}

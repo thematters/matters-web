@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconCircle } from '@/public/static/icons/24px/circle.svg'
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -7,9 +8,9 @@ import {
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
-  BindEmailHintDialog,
   Card,
-  IconCircle16,
+  Icon,
+  SetEmailDialog,
   TextIcon,
   Translate,
   ViewerContext,
@@ -34,6 +35,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
   const isOwner = circle?.owner?.id === viewer.id
   const isInvited = circle?.invitedBy?.state === InvitationState.Pending
   const hasEmail = !!viewer.info.email
+  const isEmailVerified = !!viewer.info.emailVerified
 
   if (isMember || isOwner) {
     return null
@@ -43,8 +45,8 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
   return (
-    <BindEmailHintDialog>
-      {({ openDialog: openBindEmailHintDialog }) => {
+    <SetEmailDialog>
+      {({ openDialog: openSetEmailDialog }) => {
         return (
           <Card
             bgColor="none"
@@ -66,8 +68,8 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
                 return
               }
 
-              if (!hasEmail) {
-                openBindEmailHintDialog()
+              if (!hasEmail || !isEmailVerified) {
+                openSetEmailDialog()
                 return
               }
 
@@ -76,10 +78,10 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
           >
             <section className={styles.subscriptionBanner}>
               <TextIcon
-                icon={<IconCircle16 size="mdS" />}
-                size="xm"
+                icon={<Icon icon={IconCircle} size={20} />}
+                size={18}
                 color="white"
-                weight="md"
+                weight="medium"
               >
                 {isInvited ? (
                   <Translate
@@ -99,7 +101,7 @@ const SubscriptionBanner = ({ circle }: SubscriptionBannerProps) => {
           </Card>
         )
       }}
-    </BindEmailHintDialog>
+    </SetEmailDialog>
   )
 }
 

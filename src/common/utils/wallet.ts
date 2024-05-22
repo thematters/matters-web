@@ -66,14 +66,10 @@ export const wagmiConfig = createConfig({
   publicClient,
 })
 
-export const maskAddress = (address: string, prefixLen: number = 8) => {
-  return `${address.substring(0, prefixLen)}...${address.substring(
-    address.length - 6
-  )}`
-}
-
 export const MaxUint256 = BigInt(
   '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff'
 )
+
+export const MaxApprovedUSDTAmount = BigInt('999999999999')
 
 export type WalletType = 'MetaMask' | 'WalletConnect'

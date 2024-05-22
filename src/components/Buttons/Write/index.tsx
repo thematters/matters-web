@@ -1,6 +1,8 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
 import {
+  BREAKPOINTS,
   ERROR_CODES,
   ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -11,9 +13,10 @@ import { analytics } from '~/common/utils'
 import {
   Button,
   ButtonProps,
-  IconNavCreate32,
+  Icon,
   toast,
   Tooltip,
+  useMediaQuery,
   useRoute,
 } from '~/components'
 
@@ -24,6 +27,7 @@ interface Props {
 
 const BaseWriteButton = (props: ButtonProps) => {
   const intl = useIntl()
+  const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.LG}px)`)
 
   return (
     <Tooltip
@@ -34,6 +38,7 @@ const BaseWriteButton = (props: ButtonProps) => {
       })}
       placement="left"
       delay={[1000, null]}
+      disabled={!isMdUp}
     >
       <Button
         bgActiveColor="greyLighter"
@@ -45,7 +50,7 @@ const BaseWriteButton = (props: ButtonProps) => {
         })}
         {...props}
       >
-        <IconNavCreate32 size="lg" color="black" />
+        <Icon icon={IconNavCreate} size={32} color="black" />
       </Button>
     </Tooltip>
   )

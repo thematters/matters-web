@@ -1,5 +1,5 @@
 .container {
-  padding: var(--spacing-base) var(--spacing-base) 0;
+  padding: var(--sp16) var(--sp16) 0;
 }
 
 .cover {
@@ -9,7 +9,7 @@
   padding-top: 56.25%;
   overflow: hidden;
   background: var(--color-grey-lighter);
-  border-radius: var(--spacing-xxx-tight);
+  border-radius: var(--sp2);
 
   & img {
     @mixin object-fit-cover;

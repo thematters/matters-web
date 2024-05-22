@@ -1,6 +1,6 @@
 .container {
-  padding: 0 var(--spacing-base);
-  margin: var(--spacing-loose) 0 0;
+  padding: 0 var(--sp16);
+  margin: var(--sp24) 0 0;
 
   @media (--sm-up) {
     padding: 0;
@@ -16,8 +16,8 @@
     @mixin flex-center-start;
 
     & + .group {
-      padding-left: var(--spacing-xx-loose);
-      margin-left: var(--spacing-xx-loose);
+      padding-left: var(--sp40);
+      margin-left: var(--sp40);
       border-left: 1px solid var(--color-grey-light);
     }
   }
@@ -28,8 +28,8 @@
 
   & .title {
     position: relative;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text14);
+    font-weight: var(--font-medium);
     line-height: 1.5rem;
     color: var(--color-grey-dark);
 
@@ -48,16 +48,16 @@
     @mixin inline-flex-center-start;
 
     order: 1;
-    font-size: var(--font-size-xm);
-    font-weight: var(--font-weight-medium);
+    font-size: var(--text18);
+    font-weight: var(--font-medium);
     line-height: 2rem;
     color: var(--color-grey-dark);
   }
 
   & .unit {
     order: 2;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
+    font-size: var(--text14);
+    font-weight: var(--font-normal);
     line-height: 1;
     color: var(--color-grey-dark);
   }
@@ -65,7 +65,7 @@
   & .change {
     display: inline-flex;
     order: 0;
-    padding: var(--spacing-xx-tight) var(--spacing-x-tight);
+    padding: var(--sp4) var(--sp8);
     border-radius: 1rem;
 
     &.positive {
@@ -78,7 +78,7 @@
     }
 
     &.negative {
-      color: var(--color-red);
+      color: var(--color-negative-red);
       background-color: var(--color-red-lighter);
     }
   }
@@ -87,7 +87,7 @@
     @mixin flex-center-space-between;
 
     & > * {
-      margin-left: var(--spacing-x-tight);
+      margin-left: var(--sp8);
     }
   }
 
@@ -96,7 +96,7 @@
     align-items: start;
 
     & + .tile {
-      margin-left: var(--spacing-xx-loose);
+      margin-left: var(--sp40);
     }
 
     & .content {
@@ -105,7 +105,7 @@
       }
 
       & > * + * {
-        margin-left: var(--spacing-x-tight);
+        margin-left: var(--sp8);
       }
     }
 
@@ -119,8 +119,8 @@
     }
 
     & .value {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-bold);
+      font-size: var(--text24);
+      font-weight: var(--font-bold);
       color: var(--color-black);
     }
 
@@ -137,8 +137,8 @@
     }
 
     & .value {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-bold);
+      font-size: var(--text24);
+      font-weight: var(--font-bold);
       color: var(--color-black);
     }
   }

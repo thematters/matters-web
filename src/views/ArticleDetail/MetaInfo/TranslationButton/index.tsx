@@ -1,8 +1,9 @@
 import { FC } from 'react'
 
+import { ReactComponent as IconTranslate } from '@/public/static/icons/24px/translate.svg'
 import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Button, IconTranslate16, TextIcon, Translate } from '~/components'
+import { Button, Icon, TextIcon, Translate } from '~/components'
 
 const TranslationButton: FC<{
   translated: boolean
@@ -30,14 +31,12 @@ const TranslationButton: FC<{
         toggleTranslate()
         analytics.trackEvent('click_button', { type: 'translation' })
       }}
-      spacing={['xxtight', 'xtight']}
-      bgColor="greenLighter"
     >
       <TextIcon
-        icon={<IconTranslate16 color="green" />}
-        size="xs"
-        spacing="xxtight"
-        color="green"
+        icon={<Icon icon={IconTranslate} color="black" />}
+        size={12}
+        spacing={2}
+        color="black"
       >
         {translated ? (
           <Translate

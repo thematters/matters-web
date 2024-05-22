@@ -1,6 +1,8 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Button, TextIcon, Translate } from '~/components'
+import IMAGE_WALL_BACKGROUND_MD from '@/public/static/images/circle-wall-background-md.jpg'
+import IMAGE_WALL_BACKGROUND_SM from '@/public/static/images/circle-wall-background-sm.jpg'
+import { Translate } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -15,52 +17,32 @@ const SensitiveWall = ({
   sensitiveByAdmin,
   expandAll,
 }: SensitiveWallProps) => {
+  const style = {
+    '--circle-wall-bg-sm': `url(${IMAGE_WALL_BACKGROUND_SM.src})`,
+    '--circle-wall-bg-md': `url(${IMAGE_WALL_BACKGROUND_MD.src})`,
+  } as React.CSSProperties
+
   return (
-    <section className={styles.container}>
-      <p className={styles.bgBlurContent}>
+    <section className={styles.container} style={style}>
+      <section className={styles.message} onClick={expandAll}>
         <FormattedMessage
-          defaultMessage="Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress."
-          id="0JLcHr"
+          defaultMessage="This article has been marked as restricted content by the {actor}. "
+          id="bQ5vZC"
+          description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
+          values={{
+            actor: sensitiveByAuthor ? (
+              <Translate en="author" zh_hans="作者" zh_hant="作者" />
+            ) : (
+              <Translate en="site" zh_hans="站方" zh_hant="站方" />
+            ),
+          }}
+        />
+        <br />
+        <FormattedMessage
+          defaultMessage="May contain pornography, violence, gore, etc. Click here to expand all."
+          id="5rxHb7"
           description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
         />
-      </p>
-      <section className={styles.message}>
-        <section className={styles.header}>
-          <FormattedMessage
-            defaultMessage="This post may include sensitive content and has been marked by the {actor} as restricted content. Are you sure you want to expand the full text?"
-            id="s5JCCO"
-            description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
-            values={{
-              actor: sensitiveByAuthor ? (
-                <Translate en="author" zh_hans="作者" zh_hant="作者" />
-              ) : (
-                <Translate en="site" zh_hans="站方" zh_hant="站方" />
-              ),
-            }}
-          />
-        </section>
-        <section className={styles.content}>
-          <FormattedMessage
-            defaultMessage="Caution: The following content may include age-restricted or explicit content, violence, gore, etc. Some may experience discomfort and psychological distress."
-            id="0JLcHr"
-            description="src/views/ArticleDetail/Wall/Sensitive/index.tsx"
-          />
-        </section>
-        <section className={styles.footer}>
-          <Button
-            spacing={['xtight', 'base']}
-            bgColor="green"
-            onClick={expandAll}
-          >
-            <TextIcon color="white" weight="md" size="md">
-              <Translate
-                en="Expand All"
-                zh_hans="展开全文"
-                zh_hant="展開全文"
-              />
-            </TextIcon>
-          </Button>
-        </section>
       </section>
     </section>
   )

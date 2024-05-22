@@ -1,5 +1,5 @@
 .container {
-  padding: 0 var(--spacing-base);
+  padding: 0 var(--sp16);
 
   @media (--sm-up) {
     padding: 0;

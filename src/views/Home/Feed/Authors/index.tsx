@@ -11,7 +11,7 @@ import {
   QueryError,
   ShuffleButton,
   Slides,
-  Spinner,
+  SpinnerBlock,
   usePublicQuery,
   UserDigest,
   ViewerContext,
@@ -104,7 +104,7 @@ const Authors = () => {
       <Slides header={SlidesHeader}>
         {loading && (
           <Slides.Item size="md">
-            <Spinner />
+            <SpinnerBlock />
           </Slides.Item>
         )}
 
@@ -116,7 +116,7 @@ const Authors = () => {
                   <UserDigest.Rich
                     key={node.id}
                     user={node}
-                    spacing={['tight', 0]}
+                    spacing={[12, 0]}
                     bgColor="none"
                     hasFollow={false}
                     hasState={false}
@@ -138,12 +138,12 @@ const Authors = () => {
       <Media lessThan="md">
         <section className={styles.backToAll}>
           <ViewMoreCard
-            spacing={['tight', 'tight']}
+            spacing={[12, 12]}
             href={PATHS.AUTHORS}
             textIconProps={{
-              size: 'md',
+              size: 16,
               weight: 'semibold',
-              spacing: 'xxtight',
+              spacing: 4,
             }}
             textAlign="center"
           >

@@ -4,10 +4,10 @@ import { useContext, useEffect } from 'react'
 import { analytics } from '~/common/utils'
 import {
   Dialog,
-  Spinner,
+  PaymentPasswordContext,
+  SpinnerBlock,
   useDialogSwitch,
   useStep,
-  ViewerContext,
 } from '~/components'
 
 type Step = 'setPaymentPassword' | 'addCredit'
@@ -16,27 +16,25 @@ interface AddCreditDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DynamicPaymentSetPasswordForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: () => <Spinner /> }
+const DynamicSetPaymentPasswordContent = dynamic(
+  () => import('~/components/Dialogs/SetPaymentPasswordDialog/Content'),
+  { loading: () => <SpinnerBlock /> }
 )
 
 const DynamicAddCreditForm = dynamic(
   () => import('~/components/Forms/PaymentForm/AddCredit'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
-  const viewer = useContext(ViewerContext)
+  const { hasPaymentPassword } = useContext(PaymentPasswordContext)
   const {
     show,
     openDialog: baseOpenDialog,
     closeDialog,
   } = useDialogSwitch(true)
 
-  const initialStep = viewer.status?.hasPaymentPassword
-    ? 'addCredit'
-    : 'setPaymentPassword'
+  const initialStep = hasPaymentPassword ? 'addCredit' : 'setPaymentPassword'
   const { currStep, forward } = useStep<Step>(initialStep)
 
   const openDialog = () => {
@@ -57,13 +55,15 @@ const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         {isSetPaymentPassword && (
-          <DynamicPaymentSetPasswordForm
+          <DynamicSetPaymentPasswordContent
             submitCallback={() => forward('addCredit')}
             closeDialog={closeDialog}
           />
         )}
 
-        {isAddCredit && <DynamicAddCreditForm closeDialog={closeDialog} />}
+        {isAddCredit && (
+          <DynamicAddCreditForm closeDialog={closeDialog} isInDialog />
+        )}
       </Dialog>
     </>
   )

@@ -3,17 +3,18 @@ import React, { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
+import { ReactComponent as IconMetaMask } from '@/public/static/icons/24px/metamask.svg'
+import { ReactComponent as IconWalletConnect } from '@/public/static/icons/24px/walletconnect.svg'
 import { EXTERNAL_LINKS, GUIDE_LINKS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   Dialog,
   Form,
-  IconMetaMask24,
-  IconSpinner16,
-  IconWalletConnect24,
+  Icon,
   LanguageContext,
   Layout,
   Media,
+  Spinner,
   TableView,
   TextIcon,
   ViewerContext,
@@ -43,7 +44,7 @@ const Hint = () => {
           />
           <a
             className="u-link-green"
-            href={GUIDE_LINKS.mobilePayment[lang]}
+            href={GUIDE_LINKS.mobileWallet[lang]}
             target="_blank"
             rel="noreferrer"
           >
@@ -60,7 +61,7 @@ const Hint = () => {
           />
           <a
             className="u-link-green"
-            href={GUIDE_LINKS.connectWallet[lang]}
+            href={GUIDE_LINKS.wallet[lang]}
             target="_blank"
             rel="noreferrer"
           >
@@ -201,9 +202,9 @@ const Select: React.FC<FormProps> = ({
               title={
                 <TextIcon
                   color="black"
-                  icon={<IconMetaMask24 size="md" />}
-                  size="md"
-                  spacing="xtight"
+                  icon={<Icon icon={IconMetaMask} size={24} />}
+                  size={16}
+                  spacing={8}
                 >
                   MetaMask
                 </TextIcon>
@@ -215,16 +216,16 @@ const Select: React.FC<FormProps> = ({
                 connect({ connector: injectedConnector })
               }}
               role="button"
-              right={isMetaMaskLoading ? <IconSpinner16 color="grey" /> : null}
+              right={isMetaMaskLoading ? <Spinner color="grey" /> : null}
             />
           ) : (
             <TableView.Cell
               title={
                 <TextIcon
                   color="black"
-                  icon={<IconMetaMask24 size="md" />}
-                  size="md"
-                  spacing="xtight"
+                  icon={<Icon icon={IconMetaMask} size={24} />}
+                  size={16}
+                  spacing={8}
                 >
                   <FormattedMessage
                     defaultMessage="Install MetaMask"
@@ -246,9 +247,9 @@ const Select: React.FC<FormProps> = ({
             title={
               <TextIcon
                 color="black"
-                icon={<IconWalletConnect24 size="md" />}
-                size="md"
-                spacing="xtight"
+                icon={<Icon icon={IconWalletConnect} size={24} />}
+                size={16}
+                spacing={8}
               >
                 WalletConnect
               </TextIcon>
@@ -260,9 +261,7 @@ const Select: React.FC<FormProps> = ({
               connect({ connector: walletConnectConnector })
             }}
             role="button"
-            right={
-              isWalletConnectLoading ? <IconSpinner16 color="grey" /> : null
-            }
+            right={isWalletConnectLoading ? <Spinner color="grey" /> : null}
           />
         </TableView>
 

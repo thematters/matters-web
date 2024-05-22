@@ -4,9 +4,9 @@ import { useIntl } from 'react-intl'
 
 import {
   analytics,
-  collapseContent,
   filterComments,
   mergeConnections,
+  stripHtml,
   toPath,
 } from '~/common/utils'
 import { Head, Layout, LinkWrapper, UserDigest } from '~/components'
@@ -16,7 +16,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -86,7 +86,7 @@ const Comments = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {
@@ -121,8 +121,8 @@ const Comments = () => {
                 <section className={styles.user}>
                   <UserDigest.Mini
                     user={node.author}
-                    avatarSize="sm"
-                    textSize="xs"
+                    avatarSize={20}
+                    textSize={12}
                     hasAvatar
                     hasDisplayName
                   />
@@ -138,7 +138,7 @@ const Comments = () => {
                     <ArticleDigestTitle
                       article={node}
                       is="h2"
-                      textSize="md"
+                      textSize={16}
                       lineClamp={1}
                     />
                   </LinkWrapper>
@@ -156,7 +156,7 @@ const Comments = () => {
                           })}
                         >
                           <section className={styles.content}>
-                            {collapseContent(comment.content)}
+                            {stripHtml(comment.content || '')}
                           </section>
                         </LinkWrapper>
                       </section>

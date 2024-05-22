@@ -1,6 +1,7 @@
 import _uniq from 'lodash/uniq'
+import { useContext } from 'react'
 
-import { useCreateDraft } from '~/components'
+import { DraftDetailStateContext, useCreateDraft } from '~/components'
 import { useImperativeQuery, useMutation } from '~/components/GQL'
 import {
   ArticleAccessType,
@@ -9,7 +10,6 @@ import {
   DigestRichCirclePublicFragment,
   DigestTagFragment,
   DraftAssetsQuery,
-  EditMetaDraftFragment,
   SetDraftAccessMutation,
   SetDraftCanCommentMutation,
   SetDraftCollectionMutation,
@@ -35,62 +35,68 @@ import {
 /**
  * Hooks for editing draft cover, tags and collection
  */
-export const useEditDraftCover = (draft: EditMetaDraftFragment) => {
-  const draftId = draft.id
+export const useEditDraftCover = () => {
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
+  const { createDraft } = useCreateDraft()
   const refetch = useImperativeQuery<DraftAssetsQuery>(DRAFT_ASSETS, {
-    variables: { id: draft.id },
+    variables: { id: getDraftId() },
     fetchPolicy: 'network-only',
   })
   const [update, { loading: saving }] =
     useMutation<SetDraftCoverMutation>(SET_COVER)
-  const { createDraft } = useCreateDraft()
 
   const edit = (asset?: any, newId?: string) =>
     update({
-      variables: { id: draftId || newId, cover: asset ? asset.id : null },
+      variables: { id: newId || getDraftId(), cover: asset ? asset.id : null },
     })
 
   const createDraftAndEdit = async (asset?: any) => {
-    if (draftId) return edit(asset)
+    if (getDraftId()) return edit(asset)
 
     return createDraft({
       onCreate: (newDraftId) => edit(asset, newDraftId),
     })
   }
 
-  return { edit: createDraftAndEdit, saving, refetch }
+  return {
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    saving,
+    refetch,
+  }
 }
 
-export const useEditDraftTags = (draft: EditMetaDraftFragment) => {
-  const draftId = draft.id
+export const useEditDraftTags = () => {
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
+  const { createDraft } = useCreateDraft()
   const [updateTags, { loading: saving }] =
     useMutation<SetDraftTagsMutation>(SET_TAGS)
-  const { createDraft } = useCreateDraft()
-
   const edit = (newTags: DigestTagFragment[], newId?: string) =>
     updateTags({
       variables: {
-        id: draftId || newId,
+        id: newId || getDraftId(),
         tags: _uniq(newTags.map(({ content }) => content)),
       },
     })
 
   const createDraftAndEdit = async (newTags: DigestTagFragment[]) => {
-    if (draftId) return edit(newTags)
+    if (getDraftId()) return edit(newTags)
 
     return createDraft({
       onCreate: (newDraftId) => edit(newTags, newDraftId),
     })
   }
 
-  return { edit: createDraftAndEdit, saving }
+  return {
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    saving,
+  }
 }
 
-export const useEditDraftCollection = (draft: EditMetaDraftFragment) => {
-  const draftId = draft.id
+export const useEditDraftCollection = () => {
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
+  const { createDraft } = useCreateDraft()
   const [setCollection, { loading: saving }] =
     useMutation<SetDraftCollectionMutation>(SET_COLLECTION)
-  const { createDraft } = useCreateDraft()
 
   const edit = (
     newArticles: ArticleDigestDropdownArticleFragment[],
@@ -98,7 +104,7 @@ export const useEditDraftCollection = (draft: EditMetaDraftFragment) => {
   ) =>
     setCollection({
       variables: {
-        id: draftId || newId,
+        id: newId || getDraftId(),
         collection: _uniq(newArticles.map(({ id }) => id)),
       },
     })
@@ -106,24 +112,24 @@ export const useEditDraftCollection = (draft: EditMetaDraftFragment) => {
   const createDraftAndEdit = async (
     newArticles: ArticleDigestDropdownArticleFragment[]
   ) => {
-    if (draftId) return edit(newArticles)
+    if (getDraftId()) return edit(newArticles)
 
     return createDraft({
       onCreate: (newDraftId) => edit(newArticles, newDraftId),
     })
   }
 
-  return { edit: createDraftAndEdit, saving }
+  return {
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    saving,
+  }
 }
 
-export const useEditDraftAccess = (
-  draft: EditMetaDraftFragment,
-  circle?: DigestRichCirclePublicFragment
-) => {
-  const draftId = draft.id
+export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
+  const { createDraft } = useCreateDraft()
   const [setAccess, { loading: saving }] =
     useMutation<SetDraftAccessMutation>(SET_ACCESS)
-  const { createDraft } = useCreateDraft()
 
   const edit = async (
     addToCircle: boolean,
@@ -133,7 +139,7 @@ export const useEditDraftAccess = (
   ) =>
     setAccess({
       variables: {
-        id: draftId || newId,
+        id: newId || getDraftId(),
         circle: (addToCircle && circle?.id) || null,
         license,
         accessType: paywalled
@@ -147,7 +153,7 @@ export const useEditDraftAccess = (
     paywalled: boolean,
     license: ArticleLicenseType
   ) => {
-    if (draftId) return edit(addToCircle, paywalled, license)
+    if (getDraftId()) return edit(addToCircle, paywalled, license)
 
     return createDraft({
       onCreate: (newDraftId) =>
@@ -155,14 +161,18 @@ export const useEditDraftAccess = (
     })
   }
 
-  return { edit: createDraftAndEdit, saving }
+  return {
+    edit: async (p1: any, p2: any, p3: any) =>
+      addRequest(() => createDraftAndEdit(p1, p2, p3)),
+    saving,
+  }
 }
 
-export const useEditSupportSetting = (draft?: EditMetaDraftFragment) => {
-  const draftId = draft?.id
+export const useEditSupportSetting = () => {
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
+  const { createDraft } = useCreateDraft()
   const [update, { loading: saving }] =
     useMutation<SetSupportRequestReplyMutation>(SET_SUPPORT_REQUEST_REPLY)
-  const { createDraft } = useCreateDraft()
 
   const edit = (
     requestForDonation: string | null,
@@ -171,7 +181,7 @@ export const useEditSupportSetting = (draft?: EditMetaDraftFragment) => {
   ) =>
     update({
       variables: {
-        id: draftId || newId,
+        id: newId || getDraftId(),
         requestForDonation,
         replyToDonator,
       },
@@ -181,7 +191,7 @@ export const useEditSupportSetting = (draft?: EditMetaDraftFragment) => {
     requestForDonation: string | null,
     replyToDonator: string | null
   ) => {
-    if (draftId) return edit(requestForDonation, replyToDonator)
+    if (getDraftId()) return edit(requestForDonation, replyToDonator)
 
     return createDraft({
       onCreate: (newDraftId) =>
@@ -189,65 +199,78 @@ export const useEditSupportSetting = (draft?: EditMetaDraftFragment) => {
     })
   }
 
-  return { edit: createDraftAndEdit, saving }
+  return {
+    edit: async (p1: any, p2: any) =>
+      addRequest(() => createDraftAndEdit(p1, p2)),
+    saving,
+  }
 }
 
-export const useEditDraftSensitiveByAuthor = (draft: EditMetaDraftFragment) => {
-  const draftId = draft.id
+export const useEditDraftSensitiveByAuthor = () => {
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
+  const { createDraft } = useCreateDraft()
   const [update, { loading: saving }] =
     useMutation<SetDraftSensitiveByAuthorMutation>(SET_SENSITIVE_BY_AUTHOR)
-  const { createDraft } = useCreateDraft()
 
   const edit = (sensitiveByAuthor: boolean, newId?: string) =>
-    update({ variables: { id: draftId || newId, sensitiveByAuthor } })
+    update({ variables: { id: newId || getDraftId(), sensitiveByAuthor } })
 
   const createDraftAndEdit = async (sensitiveByAuthor: boolean) => {
-    if (draftId) return edit(sensitiveByAuthor)
+    if (getDraftId()) return edit(sensitiveByAuthor)
 
     return createDraft({
       onCreate: (newDraftId) => edit(sensitiveByAuthor, newDraftId),
     })
   }
 
-  return { edit: createDraftAndEdit, saving }
+  return {
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    saving,
+  }
 }
 
-export const useEditDraftPublishISCN = (draft: EditMetaDraftFragment) => {
-  const draftId = draft.id
+export const useEditDraftPublishISCN = () => {
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
+  const { createDraft } = useCreateDraft()
   const [update, { loading: saving }] =
     useMutation<SetDraftPublishIscnMutation>(SET_PUBLISH_ISCN)
-  const { createDraft } = useCreateDraft()
 
   const edit = (iscnPublish: boolean, newId?: string) =>
-    update({ variables: { id: draftId || newId, iscnPublish } })
+    update({ variables: { id: newId || getDraftId(), iscnPublish } })
 
   const createDraftAndEdit = async (iscnPublish: boolean) => {
-    if (draftId) return edit(iscnPublish)
+    if (getDraftId()) return edit(iscnPublish)
 
     return createDraft({
       onCreate: (newDraftId) => edit(iscnPublish, newDraftId),
     })
   }
 
-  return { edit: createDraftAndEdit, saving }
+  return {
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    saving,
+  }
 }
 
-export const useEditDraftCanComment = (draft: EditMetaDraftFragment) => {
-  const draftId = draft.id
+export const useEditDraftCanComment = () => {
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
+  const { createDraft } = useCreateDraft()
   const [update, { loading: saving }] =
     useMutation<SetDraftCanCommentMutation>(SET_CAN_COMMENT)
-  const { createDraft } = useCreateDraft()
 
   const edit = (canComment: boolean, newId?: string) =>
-    update({ variables: { id: draftId || newId, canComment } })
+    update({ variables: { id: newId || getDraftId(), canComment } })
 
   const createDraftAndEdit = async (canComment: boolean) => {
-    if (draftId) return edit(canComment)
+    if (getDraftId()) return edit(canComment)
 
     return createDraft({
       onCreate: (newDraftId) => edit(canComment, newDraftId),
     })
   }
 
-  return { edit: createDraftAndEdit, saving }
+  return {
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    saving,
+  }
 }

@@ -1,7 +1,7 @@
 .wrapper {
-  padding: var(--spacing-base) 0;
+  padding: var(--sp16) 0;
 
   & header {
-    margin-bottom: var(--spacing-x-tight);
+    margin-bottom: var(--sp8);
   }
 }

@@ -11,14 +11,14 @@
   flex-shrink: 0;
 
   & > * {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--sp8);
   }
 }
 
 .content {
   @mixin flex-start-space-between;
 
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
 }
 
 .cover {
@@ -27,7 +27,7 @@
   flex-shrink: 0;
   width: 4.5rem;
   height: 4.5rem;
-  margin-left: var(--spacing-x-tight);
+  margin-left: var(--sp8);
 
   & img {
     @mixin object-fit-cover;
@@ -41,7 +41,7 @@
   & .title {
     @mixin line-clamp;
 
-    font-size: var(--font-size-sm-s);
+    font-size: var(--text13);
     line-height: 1.5rem;
     color: var(--color-grey-dark);
 

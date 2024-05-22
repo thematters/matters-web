@@ -8,7 +8,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   useRoute,
   ViewerContext,
@@ -63,7 +63,7 @@ const AcceptedInvites = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

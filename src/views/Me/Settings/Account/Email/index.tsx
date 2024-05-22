@@ -20,7 +20,7 @@ const Email = () => {
     getQuery(key) === URL_ME_SETTINGS.OPEN_SET_EMAIL_DIALOG.value
 
   return (
-    <SetEmailDialog>
+    <SetEmailDialog initStep="confirm">
       {({ openDialog }) => {
         if (needOpenDialog) {
           setTimeout(() => {

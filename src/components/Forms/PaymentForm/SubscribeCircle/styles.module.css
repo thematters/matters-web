@@ -2,10 +2,10 @@
   & .features {
     @mixin flex-center-space-between;
 
-    padding: var(--spacing-x-tight) var(--spacing-loose);
-    margin: var(--spacing-base) 0;
+    padding: var(--sp8) var(--sp24);
+    margin: var(--sp16) 0;
     background: var(--color-yellow-lighter);
-    border-radius: var(--spacing-loose);
+    border-radius: var(--sp24);
 
     & li {
       display: inline-flex;
@@ -18,5 +18,5 @@
 }
 
 .hint {
-  margin: var(--spacing-base) 0;
+  margin: var(--sp16) 0;
 }

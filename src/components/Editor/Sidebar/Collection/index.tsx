@@ -1,9 +1,10 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconCollection } from '@/public/static/icons/24px/collection.svg'
 import {
   ArticleDigestDropdown,
   EditorSearchSelectDialog,
-  IconCollection24,
+  Icon,
 } from '~/components'
 import { SetCollectionProps } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
@@ -24,6 +25,7 @@ const SidebarCollection = ({
   collection,
   editCollection,
   collectionSaving,
+  nodeExclude,
   disabled,
 }: SidebarCollectionProps) => {
   return (
@@ -37,6 +39,7 @@ const SidebarCollection = ({
       }
       searchType="Article"
       searchExclude={SearchExclude.Blocked}
+      nodeExclude={nodeExclude}
       onSave={(nodes: SearchSelectNode[]) =>
         editCollection(nodes as ArticleDigestDropdownArticleFragment[])
       }
@@ -46,7 +49,7 @@ const SidebarCollection = ({
     >
       {({ openDialog }) => (
         <Box
-          icon={<IconCollection24 size="md" />}
+          icon={<Icon icon={IconCollection} size={24} />}
           title={
             <FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />
           }
@@ -59,8 +62,8 @@ const SidebarCollection = ({
                 <li key={article.id}>
                   <ArticleDigestDropdown
                     article={article}
-                    titleTextSize="sm"
-                    spacing={['base', 'base']}
+                    titleTextSize={14}
+                    spacing={[16, 16]}
                     bgColor="none"
                     bgActiveColor="greyLighter"
                   />

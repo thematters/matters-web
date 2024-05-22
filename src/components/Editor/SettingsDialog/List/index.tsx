@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Translate } from '~/components'
+import { Dialog } from '~/components'
 import { SetPublishISCNProps } from '~/components/Editor'
 
 import ListItem from '../../ListItem'
@@ -22,6 +22,9 @@ export type SettingsListDialogProps = {
   forward: (nextStep: Step) => void
   closeDialog: () => void
 
+  versionDescription?: string
+  hasSetVersionDescription?: boolean
+
   cover?: string | null
   collectionCount: number
   tagsCount: number
@@ -40,6 +43,9 @@ const SettingsList = ({
   confirmButtonText,
   cancelButtonText,
   onConfirm,
+
+  versionDescription,
+  hasSetVersionDescription,
 
   cover,
   collectionCount,
@@ -60,7 +66,7 @@ const SettingsList = ({
   return (
     <>
       <Dialog.Header
-        title={<Translate id="settings" />}
+        title={<FormattedMessage defaultMessage="Settings" id="D3idYv" />}
         closeDialog={cancelButtonText ? closeDialog : undefined}
         closeText={cancelButtonText || undefined}
         rightBtn={
@@ -75,6 +81,27 @@ const SettingsList = ({
 
       <Dialog.Content noSpacing>
         <ul className={styles.container} role="list">
+          {hasSetVersionDescription && (
+            <ListItem
+              title={
+                <FormattedMessage
+                  defaultMessage="Version Description"
+                  id="rDX3h6"
+                />
+              }
+              subTitle={
+                <FormattedMessage
+                  defaultMessage="Tell readers why you edited this time"
+                  id="OJmFke"
+                />
+              }
+              onClick={() => forward('versionDescription')}
+              hint
+            >
+              <ListItem.ArrowIndicator checked={!!versionDescription} />
+            </ListItem>
+          )}
+
           <ListItem
             title={<FormattedMessage defaultMessage="Add Tags" id="WNxQX0" />}
             subTitle={
@@ -90,14 +117,14 @@ const SettingsList = ({
                 />
               )
             }
-            hint={tagsCount > 0}
+            hint
             onClick={() => forward('tag')}
           >
-            <ListItem.NumberIndicator num={tagsCount} withHintOverlay />
+            <ListItem.NumberIndicator num={tagsCount} />
           </ListItem>
 
           <ListItem
-            title={<Translate id="setCover" />}
+            title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
             subTitle={
               <FormattedMessage
                 defaultMessage="Recommended square image."
@@ -111,7 +138,9 @@ const SettingsList = ({
           </ListItem>
 
           <ListItem
-            title={<Translate id="setCollection" />}
+            title={
+              <FormattedMessage defaultMessage="Set Collection" id="WFCO2w" />
+            }
             onClick={() => forward('collection')}
           >
             <ListItem.NumberIndicator num={collectionCount} />
@@ -121,9 +150,7 @@ const SettingsList = ({
             <ToggleResponse {...responseProps} />
           </section>
 
-          <section className={styles.access}>
-            <ToggleAccess {...restProps} />
-          </section>
+          <ToggleAccess {...restProps} />
         </ul>
       </Dialog.Content>
 

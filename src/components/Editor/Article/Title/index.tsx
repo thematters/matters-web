@@ -1,60 +1,65 @@
-import classNames from 'classnames'
-import React, { useContext } from 'react'
+import autosize from 'autosize'
+import React, { useRef, useState } from 'react'
+import { useIntl } from 'react-intl'
+import { useDebouncedCallback } from 'use-debounce'
 
-import { MAX_ARTICE_TITLE_LENGTH } from '~/common/enums'
-import { translate } from '~/common/utils'
-import { LanguageContext } from '~/components'
-
-import styles from './styles.module.css'
+import {
+  INPUT_DEBOUNCE,
+  KEYVALUE,
+  MAX_ARTICE_TITLE_LENGTH,
+} from '~/common/enums'
 
 interface Props {
   defaultValue?: string
-  readOnly?: boolean
   update: (params: { title: any }) => void
 }
 
-const EditorTitle: React.FC<Props> = ({
-  defaultValue = '',
-  readOnly,
-  update,
-}) => {
-  const { lang } = useContext(LanguageContext)
-  const classes = classNames(
-    [styles.editorTitle],
-    readOnly ? 'u-area-disable' : ''
-  )
+const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
+  const intl = useIntl()
+  const instance: React.RefObject<any> | null = useRef(null)
+  const [value, setValue] = useState(defaultValue)
+  const debouncedUpdate = useDebouncedCallback(() => {
+    update({ title: value })
+  }, INPUT_DEBOUNCE)
 
-  const [value, setValue] = React.useState(defaultValue)
+  const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const title = event.target.value.slice(0, MAX_ARTICE_TITLE_LENGTH)
+    setValue(title)
+    debouncedUpdate()
+  }
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setValue(event.target.value)
-
-  const handleBlur = (event: React.FocusEvent<HTMLInputElement>) =>
+  const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) =>
     update({ title: value })
 
-  React.useEffect(() => setValue(defaultValue), [defaultValue])
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key.toLowerCase() === KEYVALUE.enter) {
+      event.preventDefault()
+    }
+  }
 
-  const title = value.slice(0, MAX_ARTICE_TITLE_LENGTH)
+  React.useEffect(() => {
+    if (instance) {
+      autosize(instance.current)
+    }
+  }, [])
 
   return (
-    <header className={classes}>
-      <input
-        type="text"
-        aria-label={translate({
-          en: 'Enter title ...',
-          zh_hans: '请输入标题…',
-          zh_hant: '請輸入標題…',
-          lang,
+    <header className="editor-title">
+      <textarea
+        ref={instance}
+        rows={1}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Enter title ...',
+          id: '//QMqf',
         })}
-        placeholder={translate({
-          en: 'Enter title ...',
-          zh_hans: '请输入标题…',
-          zh_hant: '請輸入標題…',
-          lang,
+        placeholder={intl.formatMessage({
+          defaultMessage: 'Enter title ...',
+          id: '//QMqf',
         })}
+        value={value}
         onChange={handleChange}
         onBlur={handleBlur}
-        value={title}
+        onKeyDown={handleKeyDown}
       />
     </header>
   )

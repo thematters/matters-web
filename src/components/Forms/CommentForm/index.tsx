@@ -6,8 +6,8 @@ import { useIntl } from 'react-intl'
 import { dom, stripHtml } from '~/common/utils'
 import {
   Button,
-  IconSpinner16,
   Spinner,
+  SpinnerBlock,
   TextIcon,
   Translate,
   useMutation,
@@ -20,7 +20,7 @@ import styles from './styles.module.css'
 
 const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 export type CommentFormType = 'article' | 'circleDiscussion' | 'circleBroadcast'
@@ -69,7 +69,7 @@ export const CommentForm: React.FC<CommentFormProps> = ({
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''
   )
-  const isValid = stripHtml(content).trim().length > 0
+  const isValid = stripHtml(content).length > 0
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
@@ -151,15 +151,15 @@ export const CommentForm: React.FC<CommentFormProps> = ({
           type="submit"
           form={formId}
           size={[null, '2rem']}
-          spacing={[0, 'base']}
+          spacing={[0, 16]}
           bgColor="green"
           disabled={isSubmitting || !isValid}
         >
           <TextIcon
             color="white"
-            size="mdS"
-            weight="md"
-            icon={isSubmitting && <IconSpinner16 size="sm" />}
+            size={15}
+            weight="medium"
+            icon={isSubmitting && <Spinner size={14} />}
           >
             {isSubmitting ? null : (
               <Translate zh_hant="送出" zh_hans="送出" en="Send" />

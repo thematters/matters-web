@@ -4,7 +4,7 @@
   right: 0;
   left: 0;
   z-index: 1;
-  padding: var(--spacing-xx-loose) 0;
+  padding: var(--sp40) 0;
 
   & .logo {
     & svg {

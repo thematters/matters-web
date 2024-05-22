@@ -2,8 +2,9 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { TEST_ID, Z_INDEX } from '~/common/enums'
-import { IconUnPin20, Tooltip, useMutation, ViewerContext } from '~/components'
+import { Icon, Tooltip, useMutation, ViewerContext } from '~/components'
 import { updateUserArticles } from '~/components/GQL'
 import { UnpinArticleMutation, UnpinCollectionMutation } from '~/gql/graphql'
 
@@ -91,7 +92,7 @@ const UnPinButton = ({
         className={styles.unpin}
         data-test-id={TEST_ID.USER_PROFILE_PIN_BOARD_UNPIN_BUTTON}
       >
-        <IconUnPin20 size="mdS" color="white" />
+        <Icon icon={IconUnpin} size={20} color="white" />
       </button>
     </Tooltip>
   )

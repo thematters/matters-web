@@ -14,7 +14,7 @@ import {
   Layout,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   TextIcon,
   useMutation,
 } from '~/components'
@@ -79,7 +79,7 @@ const BaseMeHistory = () => {
   if (loading) {
     return (
       <>
-        <Spinner />
+        <SpinnerBlock />
       </>
     )
   }
@@ -131,7 +131,7 @@ const BaseMeHistory = () => {
           textActiveColor="black"
           onClick={handlerClear}
         >
-          <TextIcon size="sm">
+          <TextIcon size={14}>
             <FormattedMessage defaultMessage="Clear" id="/GCoTA" />
           </TextIcon>
         </Button>

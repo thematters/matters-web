@@ -1,10 +1,10 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconBook } from '@/public/static/icons/24px/book.svg'
 import {
   Dialog,
-  IconLogbook1,
-  IconLogbook2,
+  Icon,
   LanguageContext,
   TableView,
   TextIcon,
@@ -47,7 +47,10 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
         <Dialog.Content>
           <Dialog.Content.Message>
             <p>
-              <Translate id="logbook2LaunchText" />
+              <FormattedMessage
+                defaultMessage="Logbook 2.0 has just launched. If you are an owner of Traveloggers, and haven't claimed, you may claim one from the new Logbook page:"
+                id="UUJzml"
+              />
               &nbsp;
               <a
                 className="u-link-green"
@@ -71,15 +74,11 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
               title={
                 <TextIcon
                   color="black"
-                  icon={<IconLogbook2 size="md" />}
-                  size="md"
-                  spacing="xtight"
+                  icon={<Icon icon={IconBook} size={24} />}
+                  size={16}
+                  spacing={8}
                 >
-                  <Translate
-                    zh_hant="Logbook 2.0 Bookcase"
-                    zh_hans="Logbook 2.0 Bookcase"
-                    en="Logbook 2.0 Bookcase"
-                  />
+                  Logbook 2.0 Bookcase
                 </TextIcon>
               }
             />
@@ -91,9 +90,9 @@ const LogbookDialog: React.FC<LogbookDialogProps> = ({
               title={
                 <TextIcon
                   color="black"
-                  icon={<IconLogbook1 size="md" />}
-                  size="md"
-                  spacing="xtight"
+                  icon={<Icon icon={IconBook} size={24} />}
+                  size={16}
+                  spacing={8}
                 >
                   <Translate
                     zh_hant="Logbook 1.0 Bookcase"

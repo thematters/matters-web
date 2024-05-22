@@ -2,7 +2,9 @@ import classNames from 'classnames'
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { Button, IconClose20, IconUser2V16 } from '~/components'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
+import { Button, Icon } from '~/components'
 import { UserArticlesSort } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -94,7 +96,7 @@ export const SortTabs = ({
       {showHint && (
         <section className={styles.hint}>
           <p className={styles.left}>
-            <IconUser2V16 color="grey" />
+            <Icon icon={IconUser} color="grey" />
             <FormattedMessage
               defaultMessage="Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)"
               description="src/views/Me/Works/Published/SortTabs.tsx"
@@ -107,7 +109,7 @@ export const SortTabs = ({
               textActiveColor="black"
               onClick={() => setShowHint(false)}
             >
-              <IconClose20 size="mdS" />
+              <Icon icon={IconTimes} size={20} />
             </Button>
           </section>
         </section>

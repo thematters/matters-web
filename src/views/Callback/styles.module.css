@@ -1,6 +1,8 @@
 .callback {
   @mixin flex-center-all;
 
+  height: 100vh;
+  height: calc(var(--ivh) * 100);
   height: 100dvh;
 
   & .logo {
@@ -19,7 +21,7 @@
     @mixin flex-center-all;
 
     flex-direction: column;
-    gap: var(--spacing-xx-loose);
+    gap: var(--sp40);
 
     & svg {
       width: 168px;
@@ -30,14 +32,14 @@
       text-align: center;
 
       & .title {
-        font-size: var(--font-size-lg);
+        font-size: var(--text20);
         line-height: 1.875rem;
         color: var(--color-black);
       }
 
       & .content {
-        margin-top: var(--spacing-x-tight);
-        font-size: var(--font-size-sm);
+        margin-top: var(--sp8);
+        font-size: var(--text14);
         line-height: 1.375rem;
         color: var(--color-grey-dark);
 

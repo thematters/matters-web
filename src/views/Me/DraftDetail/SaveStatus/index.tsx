@@ -8,7 +8,7 @@ interface SaveStatus {
 
 const SaveStatus: React.FC<SaveStatus> = ({ status }) => {
   return (
-    <TextIcon size="sm" color="grey">
+    <TextIcon size={14} color="grey">
       {status === 'saved' && (
         <Translate zh_hans="草稿已保存" zh_hant="草稿已保存" en="Draft Saved" />
       )}

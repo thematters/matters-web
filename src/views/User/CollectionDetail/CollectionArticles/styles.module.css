@@ -3,13 +3,13 @@
   @mixin border-bottom-grey-light;
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-base);
-  font-size: var(--font-size-sm);
+  padding: var(--sp16);
+  font-size: var(--text14);
   line-height: var(--line-height-base-loose);
   color: var(--color-grey);
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0;
+    padding: var(--sp16) 0;
   }
 
   & .sortButton {
@@ -28,7 +28,7 @@
   @mixin flex-center-all;
   @mixin transition;
 
-  padding: var(--spacing-base) 0;
+  padding: var(--sp16) 0;
   color: var(--color-matters-green);
   cursor: pointer;
   border-bottom: 1px dashed var(--color-grey-light);
@@ -36,20 +36,20 @@
 
   &:hover,
   &:focus {
-    color: var(--color-matters-green-dark);
+    color: var(--color-matters-green-hover);
   }
 }
 
 .disableAddArticles {
   @mixin flex-center-all;
 
-  padding: var(--spacing-base) 0;
+  padding: var(--sp16) 0;
   color: var(--color-grey);
   border-bottom: 1px dashed var(--color-grey-light);
 }
 
 .feed {
-  padding: 0 var(--spacing-base);
+  padding: 0 var(--sp16);
 
   @media (--sm-up) {
     padding: 0;
@@ -58,7 +58,7 @@
 
 .dragContainer {
   display: flex;
-  gap: var(--spacing-base);
+  gap: var(--sp16);
   align-items: center;
 }
 

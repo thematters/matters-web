@@ -1,14 +1,11 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import {
-  IconFiatCurrency40,
-  IconHelp16,
-  IconLikeCoin40,
-  IconUSDTActive40,
-  Tooltip,
-  ViewerContext,
-} from '~/components'
+import { ReactComponent as IconFiatCurrency } from '@/public/static/icons/24px/fiat-currency.svg'
+import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
+import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
+import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
+import { Icon, Tooltip, ViewerContext } from '~/components'
 import {
   DigestTransactionFragment,
   TransactionCurrency,
@@ -25,9 +22,15 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
 
   return (
     <section className={styles.purpose}>
-      {currency === TransactionCurrency.Usdt && <IconUSDTActive40 size="md" />}
-      {currency === TransactionCurrency.Hkd && <IconFiatCurrency40 size="md" />}
-      {currency === TransactionCurrency.Like && <IconLikeCoin40 size="md" />}
+      {currency === TransactionCurrency.Usdt && (
+        <Icon icon={IconTether} size={24} />
+      )}
+      {currency === TransactionCurrency.Hkd && (
+        <Icon icon={IconFiatCurrency} size={24} />
+      )}
+      {currency === TransactionCurrency.Like && (
+        <Icon icon={IconLikeCoin} size={24} />
+      )}
 
       <section className={styles.title}>
         {purpose === TransactionPurpose.SubscriptionSplit &&
@@ -101,7 +104,7 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
                 aria-hidden
                 onClick={(event) => event.stopPropagation()}
               >
-                <IconHelp16 size="sm" />
+                <Icon icon={IconHelp} size={14} />
               </button>
             </Tooltip>
           </>

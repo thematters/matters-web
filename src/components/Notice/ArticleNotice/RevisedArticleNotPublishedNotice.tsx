@@ -5,9 +5,8 @@ import { TEST_ID } from '~/common/enums'
 import { RevisedArticleNotPublishedNoticeFragment } from '~/gql/graphql'
 
 import NoticeArticleCard from '../NoticeArticleCard'
+import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeDate from '../NoticeDate'
-import NoticeHead from '../NoticeHead'
-import NoticeTypeIcon from '../NoticeTypeIcon'
 import styles from '../styles.module.css'
 
 const RevisedArticleNotPublishedNotice = ({
@@ -20,21 +19,18 @@ const RevisedArticleNotPublishedNotice = ({
       className={styles.container}
       data-test-id={TEST_ID.NOTICE_REVISED_ARTICLE_NOT_PUBLISHED}
     >
-      <section className={styles.avatarWrap}>
-        <NoticeTypeIcon type="logo" />
+      <section className={styles.noticeActorsNameAndTitleInfo}>
+        <FormattedMessage
+          defaultMessage="Failed to republish {articleTitle}"
+          id="24jhEp"
+          description="src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
+          values={{
+            articleTitle: <NoticeArticleTitle article={notice.article} />,
+          }}
+        />
       </section>
 
-      <section className={styles.contentWrap}>
-        <NoticeHead>
-          <FormattedMessage
-            defaultMessage="Failed to republish article"
-            id="QV19cI"
-            description="src/components/Notice/ArticleNotice/RevisedArticleNotPublishedNotice.tsx"
-          />
-        </NoticeHead>
-
-        <NoticeArticleCard article={notice.article} />
-
+      <section className={styles.footer}>
         <NoticeDate notice={notice} />
       </section>
     </section>

@@ -1,8 +1,8 @@
 .container {
   @mixin border-bottom-grey;
 
-  padding-top: var(--spacing-loose);
-  padding-bottom: var(--spacing-loose);
+  padding-top: var(--sp24);
+  padding-bottom: var(--sp24);
   border-bottom-style: dashed;
 
   & div {

@@ -6,7 +6,7 @@ import placeholderStyles from './styles.module.css'
 
 const Placeholder = () => {
   return (
-    <Card spacing={['baseLoose', 0]} bgActiveColor="none">
+    <Card spacing={[20, 0]} bgActiveColor="none">
       <section className={styles.container} aria-busy="true" aria-live="polite">
         <section className={styles.content}>
           <div className={placeholderStyles.text} />

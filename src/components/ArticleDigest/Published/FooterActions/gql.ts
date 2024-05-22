@@ -11,7 +11,7 @@ export const fragments = {
         id
         title
         slug
-        mediaHash
+        shortHash
         createdAt
         readerCount
         appreciationsReceivedTotal
