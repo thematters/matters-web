@@ -42,6 +42,14 @@ export const TextSelectionPopover = ({
     setSelection(undefined)
   }
 
+  const onSelectChange = () => {
+    const activeSelection = document.getSelection()
+
+    if (!activeSelection || !activeSelection.toString()) {
+      setSelection(undefined)
+    }
+  }
+
   const onSelectEnd = () => {
     const activeSelection = document.getSelection()
 
@@ -89,9 +97,11 @@ export const TextSelectionPopover = ({
   useEffect(() => {
     document.addEventListener('selectstart', onSelectStart)
     document.addEventListener('mouseup', onSelectEnd)
+    document.addEventListener('selectionchange', onSelectChange)
     return () => {
       document.removeEventListener('selectstart', onSelectStart)
       document.removeEventListener('mouseup', onSelectEnd)
+      document.removeEventListener('selectionchange', onSelectChange)
     }
   }, [])
 
