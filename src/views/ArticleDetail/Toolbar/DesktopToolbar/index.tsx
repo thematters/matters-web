@@ -112,6 +112,8 @@ const DesktopToolbar = ({
               article={articleDetails}
               disabled={lock}
               size={24}
+              pageType="article_detail"
+              pageComponent="article_end_toolbar"
               {...dropdonwActionsProps}
             />
           </span>

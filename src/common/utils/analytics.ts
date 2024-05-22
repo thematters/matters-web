@@ -52,7 +52,7 @@ interface PageViewProp {
 /**
  * Event: Click Button
  */
-interface ClickButtonProp {
+export interface ClickButtonProp {
   type:
     | 'checkout' // `next step` after top up dialog
     | 'donate'
@@ -88,10 +88,13 @@ interface ClickButtonProp {
     | 'comment_open'
     | 'comment_close'
     | 'comment_placeholder'
+    | 'report_article_open'
     | 'share_article_open'
     | 'support_open'
     | 'support_close'
     | 'supporter_list'
+    | 'user_avatar'
+    | 'user_name'
   pageType?: PageType
   pageComponent?: PageComponent
 }
@@ -354,3 +357,4 @@ type PageComponent =
   | 'article_end_toolbar'
   | 'article_fixed_toolbar'
   | 'article_float_toolbar'
+  | 'article_author'

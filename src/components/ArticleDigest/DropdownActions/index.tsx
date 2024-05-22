@@ -7,6 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
+import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
 import { capitalizeFirstLetter } from '~/common/utils'
 import {
   AddCollectionsArticleDialog,
@@ -142,7 +143,8 @@ export interface DropdownActionsControls {
 
 type DropdownActionsProps = {
   article: DropdownActionsArticleFragment
-} & DropdownActionsControls
+} & DropdownActionsControls &
+  Omit<TrackEventProps, 'type'>
 
 interface Controls {
   hasShare: boolean
@@ -224,25 +226,36 @@ const BaseDropdownActions = ({
   openToggleRecommendArticleDialog,
   openToggleRestrictUserDialog,
   openArchiveUserDialog,
+
+  // tracker
+  pageType,
+  pageComponent,
 }: BaseDropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
 
   const isAuth = viewer.isAuthed
   const isAuthor = viewer.id === article.author.id
 
+  const trackEventProps = { pageType, pageComponent }
+
   const Content = () => (
     <Menu>
       {/* public */}
-      {hasShare && <ShareButton openDialog={openShareDialog} />}
+      {hasShare && (
+        <ShareButton openDialog={openShareDialog} {...trackEventProps} />
+      )}
       {hasExtend && <ExtendButton article={article} />}
 
       {hasSticky && <PinButton article={article} />}
       {hasBookmark && isAuth && (
         <BookmarkButton article={article} inCard={inCard} iconSize={20} />
       )}
-      {hasIPFS && <IPFSButton article={article} />}
+      {hasIPFS && <IPFSButton article={article} {...trackEventProps} />}
       {hasReport && isAuth && !isAuthor && (
-        <SubmitReport.Button openDialog={openSubmitReportDialog} />
+        <SubmitReport.Button
+          openDialog={openSubmitReportDialog}
+          {...{ type: 'report_article_open', ...trackEventProps }}
+        />
       )}
 
       {hasEdit && <EditButton article={article} />}
