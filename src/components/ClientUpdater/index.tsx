@@ -5,8 +5,6 @@ import { useEventListener } from '~/components'
 export const ClientUpdater = () => {
   const visualViewport =
     typeof window !== 'undefined' ? window.visualViewport : undefined
-  const innerHeight =
-    typeof window !== 'undefined' ? window.innerHeight : undefined
 
   const upadteVVH = () => {
     if (!visualViewport) {
@@ -18,6 +16,9 @@ export const ClientUpdater = () => {
   }
 
   const upadteIVH = () => {
+    const innerHeight =
+      typeof window !== 'undefined' ? window.innerHeight : undefined
+
     if (!innerHeight) {
       return
     }
