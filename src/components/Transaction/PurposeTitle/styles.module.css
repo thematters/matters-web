@@ -7,9 +7,9 @@
 .title {
   @mixin inline-flex-center-all;
 
-  margin-left: var(--spacing-x-tight);
+  margin-left: var(--sp8);
 }
 
 .tooltip {
-  margin-left: var(--spacing-xx-tight);
+  margin-left: var(--sp4);
 }

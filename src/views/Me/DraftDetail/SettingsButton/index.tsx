@@ -1,10 +1,7 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ENTITY_TYPE } from '~/common/enums'
-import {
-  Button,
-  TextIcon,
-  toDigestTagPlaceholder,
-  Translate,
-} from '~/components'
+import { Button, TextIcon, toDigestTagPlaceholder } from '~/components'
 import {
   SetCollectionProps,
   SetCoverProps,
@@ -45,14 +42,14 @@ const ConfirmButton = ({
 }) => (
   <Button
     size={[null, '2rem']}
-    spacing={[0, 'base']}
+    spacing={[0, 16]}
     bgColor="green"
     onClick={openDialog}
     disabled={disabled}
     aria-haspopup="dialog"
   >
-    <TextIcon color="white" size="md" weight="md">
-      <Translate id="publish" />
+    <TextIcon color="white" size={16} weight="medium">
+      <FormattedMessage defaultMessage="Publish" id="syEQFE" />
     </TextIcon>
   </Button>
 )
@@ -63,27 +60,21 @@ const SettingsButton = ({
   publishable,
 }: SettingsButtonProps) => {
   const { edit: editCollection, saving: collectionSaving } =
-    useEditDraftCollection(draft)
-  const {
-    edit: editCover,
-    saving: coverSaving,
-    refetch,
-  } = useEditDraftCover(draft)
-  const { edit: editTags, saving: tagsSaving } = useEditDraftTags(draft)
+    useEditDraftCollection()
+  const { edit: editCover, saving: coverSaving, refetch } = useEditDraftCover()
+  const { edit: editTags, saving: tagsSaving } = useEditDraftTags()
   const { edit: toggleContentSensitive, saving: contentSensitiveSaving } =
-    useEditDraftSensitiveByAuthor(draft)
+    useEditDraftSensitiveByAuthor()
   const { edit: togglePublishISCN, saving: iscnPublishSaving } =
-    useEditDraftPublishISCN(draft)
+    useEditDraftPublishISCN()
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
-    draft,
     ownCircles && ownCircles[0]
   )
 
-  const { edit: editSupport, saving: supportSaving } =
-    useEditSupportSetting(draft)
+  const { edit: editSupport, saving: supportSaving } = useEditSupportSetting()
 
   const { edit: toggleComment, saving: canCommentSaving } =
-    useEditDraftCanComment(draft)
+    useEditDraftCanComment()
   const canComment = draft.canComment
 
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
@@ -145,8 +136,12 @@ const SettingsButton = ({
         accessSaving ||
         canCommentSaving
       }
-      confirmButtonText={<Translate id="publishNow" />}
-      cancelButtonText={<Translate id="publishAbort" />}
+      confirmButtonText={
+        <FormattedMessage defaultMessage="Publish Now" id="nWhqw9" />
+      }
+      cancelButtonText={
+        <FormattedMessage defaultMessage="Save as Draft" id="E048/V" />
+      }
       ConfirmStepContent={ConfirmPublishDialogContent}
       {...coverProps}
       {...tagsProps}

@@ -1,21 +1,21 @@
 .coverField {
   position: relative;
-  margin: calc(var(--spacing-base) * -1) calc(var(--spacing-base) * -1);
+  margin: calc(var(--sp16) * -1) calc(var(--sp16) * -1);
 
   @media (--sm-up) {
-    margin: 0 calc(var(--spacing-base-loose) * -1);
+    margin: 0 calc(var(--sp20) * -1);
   }
 
   & .hint {
     position: absolute;
     top: 100%;
     right: 0;
-    padding: var(--spacing-x-tight) var(--spacing-base);
-    font-size: var(--font-size-xs);
+    padding: var(--sp8) var(--sp16);
+    font-size: var(--text12);
     color: var(--color-grey);
   }
 }
 
 .avatarField {
-  margin-top: calc(var(--spacing-xx-loose) * -1);
+  margin-top: calc(var(--sp40) * -1);
 }

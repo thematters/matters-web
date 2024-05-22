@@ -5,6 +5,8 @@
 
     width: 100vw;
     height: 100vh;
+    height: calc(var(--ivh) * 100);
+    height: 100dvh;
 
     & .container {
       @mixin border-grey-light;
@@ -14,8 +16,7 @@
       border-radius: 0.5rem;
 
       &.containerSpace {
-        padding: var(--spacing-xx-loose) var(--spacing-loose)
-          var(--spacing-x-loose);
+        padding: var(--sp40) var(--sp24) var(--sp32);
       }
     }
   }
@@ -24,5 +25,5 @@
 .footer {
   @mixin flex-center-all;
 
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 }

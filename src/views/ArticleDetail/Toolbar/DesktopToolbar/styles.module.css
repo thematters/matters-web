@@ -1,0 +1,18 @@
+.toolbar {
+  margin: var(--sp16) 0;
+  background: var(--color-white);
+
+  & .buttons {
+    @mixin flex-center-space-between;
+
+    & .left {
+      display: flex;
+      gap: var(--sp16);
+    }
+
+    & .right {
+      display: flex;
+      gap: var(--sp24);
+    }
+  }
+}

@@ -17,9 +17,9 @@
 }
 
 .header {
-  padding: var(--spacing-base) 0 var(--spacing-loose);
+  padding: var(--sp16) 0 var(--sp24);
 }
 
 .footer {
-  padding: var(--spacing-loose) 0;
+  padding: var(--sp24) 0;
 }

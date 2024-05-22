@@ -1,18 +1,18 @@
 .container {
   display: flex;
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0;
+    padding: var(--sp16) 0;
   }
 }
 
 .number {
   display: flex;
   flex-shrink: 0;
-  padding-right: var(--spacing-tight);
-  font-size: var(--font-size-xm);
-  font-weight: var(--font-weight-semibold);
+  padding-right: var(--sp12);
+  font-size: var(--text18);
+  font-weight: var(--font-semibold);
   line-height: 1.3333333;
   color: var(--color-analytics-red);
 }
@@ -26,7 +26,7 @@
 .content {
   display: flex;
   flex-direction: row;
-  padding-bottom: var(--spacing-xx-tight);
+  padding-bottom: var(--sp4);
   line-height: 1.75;
 }
 
@@ -38,8 +38,8 @@
 .title {
   @mixin line-clamp;
 
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
 }
 
 .count {

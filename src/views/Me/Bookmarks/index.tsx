@@ -11,7 +11,7 @@ import {
   Layout,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
 } from '~/components'
 import { MeBookmarkFeedQuery } from '~/gql/graphql'
 
@@ -44,7 +44,7 @@ const BaseMeBookmarks = () => {
     useQuery<MeBookmarkFeedQuery>(ME_BOOKMARK_FEED)
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

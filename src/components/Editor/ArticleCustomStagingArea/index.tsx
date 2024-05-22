@@ -1,9 +1,5 @@
-import {
-  ArticleDigestDropdown,
-  Button,
-  IconClose16,
-  Translate,
-} from '~/components'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { ArticleDigestDropdown, Button, Icon, Translate } from '~/components'
 import { SelectArticle } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
 
@@ -45,7 +41,7 @@ const ArticleCustomStagingArea = ({
               <li key={node.id} className={styles.node}>
                 <ArticleDigestDropdown
                   article={node}
-                  titleTextSize="md"
+                  titleTextSize={16}
                   spacing={[0, 0]}
                   bgColor="none"
                   lineClamp={false}
@@ -58,7 +54,7 @@ const ArticleCustomStagingArea = ({
                 >
                   {({ openDialog }) => (
                     <Button onClick={openDialog}>
-                      <IconClose16 size="mdS" color="grey" />
+                      <Icon icon={IconTimes} size={20} color="grey" />
                     </Button>
                   )}
                 </ConfirmDialog>

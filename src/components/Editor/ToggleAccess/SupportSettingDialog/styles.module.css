@@ -1,10 +1,10 @@
 .support {
-  margin-top: var(--spacing-loose);
+  margin-top: var(--sp24);
   @mixin flex-center-space-between;
 
   & .hint {
-    margin-top: var(--spacing-xx-tight);
-    font-size: var(--font-size-xs);
+    margin-top: var(--sp4);
+    font-size: var(--text12);
     color: var(--color-grey);
   }
 
@@ -14,39 +14,44 @@
 }
 
 .tabs {
-  margin: calc(var(--spacing-x-tight) * -1) calc(var(--spacing-base) * -1) 0;
+  padding-bottom: var(--sp16);
+  margin: calc(var(--sp8) * -1) calc(var(--sp16) * -1) var(--sp8);
 
   @media (--sm-up) {
-    margin: calc(var(--spacing-base) * -1) 0 0;
+    margin: calc(var(--sp16) * -1) 0 var(--sp8);
   }
 }
 
 .preview {
+  @mixin polka-dot-background;
+
   position: relative;
-  padding: var(--spacing-base);
-  margin: var(--spacing-base) 0;
+  padding: var(--sp40) var(--sp16);
+  margin: var(--sp8) 0;
   line-height: var(--line-height-base);
   text-align: center;
-  background: var(--color-yellow-lighter);
-  border-radius: 1.25rem;
 
   & .content {
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
-    line-height: 1.5rem;
+    font-size: var(--text14);
+    font-weight: var(--font-normal);
+    line-height: 1.375rem;
     color: var(--color-black);
 
     & .tagline {
-      font-size: var(--font-size-md-s);
-      font-weight: var(--font-weight-medium);
+      font-size: var(--text15);
+      font-weight: var(--font-medium);
     }
   }
 
   & .button {
-    margin: var(--spacing-base) 0 0;
+    margin: var(--sp24) 0 0;
 
     & button {
       width: 100%;
     }
   }
+}
+
+.previewTitle {
+  margin-top: var(--sp16);
 }

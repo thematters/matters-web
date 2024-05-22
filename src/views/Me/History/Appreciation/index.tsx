@@ -1,13 +1,9 @@
 import gql from 'graphql-tag'
-import React, { useContext } from 'react'
+import React from 'react'
+import { useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
-import {
-  ArticleDigestList,
-  IconClap24,
-  LanguageContext,
-  TextIcon,
-} from '~/components'
+import { ReactComponent as IconClap } from '@/public/static/icons/24px/clap.svg'
+import { ArticleDigestList, Icon, TextIcon } from '~/components'
 import { DigestAppreciationFragment } from '~/gql/graphql'
 
 interface AppreciationProps {
@@ -36,7 +32,7 @@ const fragments = {
 }
 
 export const Appreciation = ({ type, appreciation }: AppreciationProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const { amount, purpose, recipient, sender, target } = appreciation
 
@@ -54,18 +50,19 @@ export const Appreciation = ({ type, appreciation }: AppreciationProps) => {
       userPlacement={isSent ? 'top' : 'bottom'}
       right={
         <div
-          aria-label={translate({
-            zh_hant: `${amount} 次讚賞`,
-            zh_hans: `${amount} 次赞赏`,
-            en: `${amount} likes`,
-            lang,
-          })}
+          aria-label={intl.formatMessage(
+            {
+              defaultMessage: `{amount} likes`,
+              id: '43qbTk',
+            },
+            { amount }
+          )}
         >
           <TextIcon
-            icon={<IconClap24 size="mdM" />}
-            size="sm"
-            spacing="xxtight"
-            weight="md"
+            icon={<Icon icon={IconClap} size={22} />}
+            size={14}
+            spacing={4}
+            weight="medium"
             color="green"
           >
             {amount}

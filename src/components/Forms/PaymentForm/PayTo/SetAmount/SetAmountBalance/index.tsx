@@ -1,15 +1,7 @@
-import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { GUIDE_LINKS, PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { formatAmount } from '~/common/utils'
-import {
-  BindEmailHintDialog,
-  Button,
-  LanguageContext,
-  TextIcon,
-  Translate,
-  ViewerContext,
-} from '~/components'
+import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import { Balance } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -20,6 +12,7 @@ type SetAmountBalanceProps = {
   balanceLike: number
   isBalanceInsufficient: boolean
   switchToAddCredit: () => void
+  loading?: boolean
 }
 
 const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
@@ -29,61 +22,32 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
   balanceLike,
   isBalanceInsufficient,
   switchToAddCredit,
+  loading,
 }) => {
-  const { lang } = useContext(LanguageContext)
-  const viewer = useContext(ViewerContext)
-  const hasEmail = !!viewer.info.email
-
   const isUSDT = currency === CURRENCY.USDT
   const isHKD = currency === CURRENCY.HKD
-  const isLike = currency === CURRENCY.LIKE
+
+  let amount = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
 
   return (
     <section className={styles.setAmountBalance}>
       <span className={styles.left}>
-        <Translate zh_hant="餘額 " zh_hans="余额 " en="Balance " />
-        {isUSDT && <span>{formatAmount(balanceUSDT)} USDT</span>}
-        {isHKD && <span>{formatAmount(balanceHKD)} HKD</span>}
-        {isLike && <span>{formatAmount(balanceLike, 0)} LIKE</span>}
+        <FormattedMessage
+          defaultMessage="Select amount"
+          description="src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountBalance/index.tsx"
+          id="7VSfs3"
+        />
       </span>
 
-      {isHKD && (
-        <BindEmailHintDialog>
-          {({ openDialog }) => {
-            return (
-              <Button onClick={hasEmail ? switchToAddCredit : openDialog}>
-                <TextIcon
-                  size="xs"
-                  textDecoration="underline"
-                  color="green"
-                  weight="md"
-                >
-                  {isBalanceInsufficient ? (
-                    <Translate
-                      zh_hant="餘額不足，請儲值"
-                      zh_hans="余额不足，请储值"
-                      en="Insufficient balance, please top up"
-                    />
-                  ) : (
-                    <Translate zh_hant="儲值" zh_hans="储值" en="Top Up" />
-                  )}
-                </TextIcon>
-              </Button>
-            )
-          }}
-        </BindEmailHintDialog>
-      )}
-      {isUSDT && balanceUSDT <= 0 && (
-        <a href={GUIDE_LINKS.usdt[lang]} target="_blank" rel="noreferrer">
-          <TextIcon size="xs" textDecoration="underline" color="greyDark">
-            <Translate
-              zh_hant="如何移轉資金到 Optimism？"
-              zh_hans="如何移转资金到 Optimism？"
-              en="How to transfer funds to Optimism?"
-            />
-          </TextIcon>
-        </a>
-      )}
+      <span className={styles.right}>
+        <Balance
+          currency={currency}
+          amount={amount}
+          isBalanceInsufficient={isBalanceInsufficient}
+          switchToAddCredit={switchToAddCredit}
+          loading={loading}
+        />
+      </span>
     </section>
   )
 }

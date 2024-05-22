@@ -13,7 +13,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   ThreadComment,
   Throw404,
   toast,
@@ -209,7 +209,7 @@ const CricleDiscussion = () => {
     return (
       <>
         <CircleDetailTabs />
-        <Spinner />
+        <SpinnerBlock />
       </>
     )
   }

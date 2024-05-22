@@ -29,7 +29,7 @@ describe('<ArticleDigest.Card>', () => {
     expect($author).toBeInTheDocument()
 
     $digest.click()
-    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).toHaveBeenCalled()
 
     $author.click()

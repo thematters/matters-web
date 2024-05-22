@@ -2,22 +2,36 @@
   @mixin flex-center-start;
 
   flex-wrap: wrap;
-  padding-top: var(--spacing-x-tight);
+  row-gap: var(--sp8);
+  padding: var(--ar17-100) 0;
+  margin-top: var(--ar17-100);
+  font-size: var(--text12);
+  line-height: 1.125rem;
 
-  & > * {
-    margin-right: var(--spacing-base);
-    margin-bottom: var(--spacing-x-tight);
+  & .author {
+    display: flex;
+    margin-right: 0;
+    color: var(--color-grey-darker);
+
+    @media (--sm-up) {
+      display: none;
+    }
+  }
+
+  & :global(button) {
+    line-height: 1.125rem;
   }
 }
 
 .time {
-  flex-shrink: 0;
-  font-size: var(--font-size-subtext);
-  font-weight: var(--font-weight-subtext);
-  line-height: var(--line-height-subtext);
+  color: var(--color-grey-darker);
+}
 
-  & .edited {
-    margin-right: var(--spacing-xx-tight);
-    color: var(--color-grey);
-  }
+.dot {
+  margin: 0 var(--sp8);
+  color: var(--color-grey-darker);
+}
+
+.edited {
+  white-space: break-spaces;
 }

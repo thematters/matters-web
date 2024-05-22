@@ -6,7 +6,7 @@ import {
   EmptyLayout,
   Head,
   Layout,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   usePublicQuery,
   useRoute,
@@ -34,7 +34,7 @@ const EditProfile = () => {
   if (loading) {
     return (
       <EmptyLayout>
-        <Spinner />
+        <SpinnerBlock />
       </EmptyLayout>
     )
   }

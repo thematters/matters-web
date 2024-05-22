@@ -1,12 +1,9 @@
 import classNames from 'classnames'
 
+import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import { ReactComponent as IconCircleEmpty } from '@/public/static/icons/24px/circle-empty.svg'
 import { TEST_ID } from '~/common/enums'
-import {
-  ArticleDigestDropdown,
-  Card,
-  IconChecked,
-  IconUnChecked,
-} from '~/components'
+import { ArticleDigestDropdown, Card, Icon } from '~/components'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
 import styles from '../styles.module.css'
@@ -34,11 +31,11 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
 
   if (inSearchingArea && selected) {
     return (
-      <Card spacing={['tight', 'base']} testId={TEST_ID.SEARCH_RESULTS_ITEM}>
+      <Card spacing={[12, 16]} testId={TEST_ID.SEARCH_RESULTS_ITEM}>
         <section className={nodeClass}>
           <ArticleDigestDropdown
             article={article}
-            titleTextSize="md"
+            titleTextSize={16}
             spacing={[0, 0]}
             bgColor="none"
             disabled
@@ -50,14 +47,14 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
 
   return (
     <Card
-      spacing={['tight', 'base']}
+      spacing={[12, 16]}
       onClick={() => onClick(article)}
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
       <section className={nodeClass}>
         <ArticleDigestDropdown
           article={article}
-          titleTextSize="md"
+          titleTextSize={16}
           spacing={[0, 0]}
           bgColor="none"
           disabled
@@ -65,10 +62,10 @@ const SearchSelectArticle: React.FC<SearchSelectArticleProps> = ({
 
         <span className={styles.iconSelect}>
           {inStagingArea && selected && (
-            <IconChecked color="green" size="mdS" />
+            <Icon icon={IconCircleCheckFill} color="green" size={20} />
           )}
           {inStagingArea && !selected && (
-            <IconUnChecked color="greyLight" size="mdS" />
+            <Icon icon={IconCircleEmpty} color="greyLight" size={20} />
           )}
         </span>
       </section>

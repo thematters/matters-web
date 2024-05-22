@@ -8,8 +8,8 @@ import { ME_WORKS_TABS } from '~/views/Me/Works/WorksTabs/gql'
 export const useCreateDraft = () => {
   const { router } = useRoute()
 
-  // refetch /me/drafts after creating a new draft
   const [create] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
+    // refetch /me/drafts once a new draft has been created
     refetchQueries: [{ query: ME_DRAFTS_FEED }, { query: ME_WORKS_TABS }],
   })
 

@@ -2,13 +2,14 @@ import { useQuery } from '@apollo/react-hooks'
 import router from 'next/router'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import { PATHS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   DraftDigest,
   EmptyDraft,
   Head,
-  IconAdd20,
+  Icon,
   InfiniteScroll,
   Layout,
   List,
@@ -65,7 +66,7 @@ export const BaseMeWorksDrafts = () => {
       eof
     >
       <section className={styles.addDraft} onClick={addDraft} role="button">
-        <TextIcon icon={<IconAdd20 size="mdS" />}>
+        <TextIcon icon={<Icon icon={IconPlus} size={20} />}>
           <FormattedMessage defaultMessage="Write" id="k2veDA" />
         </TextIcon>
       </section>

@@ -1,7 +1,8 @@
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconReadingTime } from '@/public/static/icons/24px/reading-time.svg'
 import { numAbbr, numRound } from '~/common/utils'
-import { IconReadTime18, TextIcon, Translate } from '~/components'
+import { Icon, TextIcon, Translate } from '~/components'
 import { ActionsReadTimeArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -25,8 +26,8 @@ const ReadTime = ({ article }: ResponseCountProps) => {
 
   return (
     <TextIcon
-      icon={<IconReadTime18 size="mdXS" />}
-      size="xs"
+      icon={<Icon icon={IconReadingTime} size={18} />}
+      size={12}
       color="grey"
       aria-label={intl.formatMessage({
         defaultMessage: 'Accumulated read time',

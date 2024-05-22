@@ -1,5 +1,6 @@
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { analytics, toPath } from '~/common/utils'
-import { Button, IconClose32, Menu, TextIcon, Translate } from '~/components'
+import { Button, Icon, Menu, TextIcon, Translate } from '~/components'
 
 interface SearchHistoryProps {
   data: string[] | undefined
@@ -19,7 +20,7 @@ export const SearchHistory = ({
   return (
     <section>
       <section className={styles.title}>
-        <TextIcon size="xm" color="grey" weight="md">
+        <TextIcon size={18} color="grey" weight="medium">
           <Translate zh_hans="最近搜索" zh_hant="最近搜尋" en="History" />
         </TextIcon>
       </section>
@@ -32,7 +33,7 @@ export const SearchHistory = ({
               page: 'search',
               q: value,
             })}
-            spacing={['base', 'base']}
+            spacing={[16, 16]}
             onClick={() => {
               analytics.trackEvent('click_feed', {
                 type: 'search_history',
@@ -50,7 +51,7 @@ export const SearchHistory = ({
                   removeSearchHistoryItem(value)
                 }}
               >
-                <IconClose32 color="grey" size="md" />
+                <Icon icon={IconTimes} color="grey" size={24} />
               </Button>
             </section>
           </Menu.Item>

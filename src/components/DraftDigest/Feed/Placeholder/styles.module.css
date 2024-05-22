@@ -1,6 +1,6 @@
 .content {
   width: 100%;
-  padding: 0 var(--spacing-base);
+  padding: 0 var(--sp16);
 
   @media (--sm-up) {
     padding: 0;
@@ -16,6 +16,6 @@
 .title {
   width: 100%;
   height: 1.125rem;
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
   background: var(--color-grey-lighter);
 }

@@ -1,10 +1,10 @@
 import { forwardRef } from 'react'
 
-import { Button, ButtonProps, IconSpinner16, TextIcon } from '~/components'
+import { Button, ButtonProps, Spinner, TextIcon } from '~/components'
 
 export type DialogTextButtonProps = {
   text: React.ReactNode
-  color?: 'greyDarker' | 'green' | 'red'
+  color?: 'greyDarker' | 'green' | 'red' | 'black'
   loading?: boolean
 } & ButtonProps
 
@@ -38,15 +38,18 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
         textActiveColor: 'redDark',
       }
       break
+    case 'red':
+      buttonProps = {
+        ...buttonProps,
+        textColor: 'black',
+        textActiveColor: 'greyDarker',
+      }
+      break
   }
 
   return (
     <Button {...buttonProps}>
-      <TextIcon
-        size="md"
-        weight="md"
-        icon={loading && <IconSpinner16 size="sm" />}
-      >
+      <TextIcon size={16} weight="medium" icon={loading && <Spinner />}>
         {!loading ? text : null}
       </TextIcon>
     </Button>
@@ -55,7 +58,10 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 
 export type DialogRoundedButtonProps = {
   text: React.ReactNode
-  color?: 'greyDarker' | 'green' | 'red'
+  textSize?: 14 | 16 | 18
+  textWeight?: 'medium' | 'normal'
+
+  color?: 'greyDarker' | 'green' | 'red' | 'white' | 'black'
   icon?: React.ReactNode
   loading?: boolean
 } & ButtonProps
@@ -63,7 +69,19 @@ export type DialogRoundedButtonProps = {
 export const RoundedButton: React.FC<
   React.PropsWithChildren<DialogRoundedButtonProps>
 > = forwardRef(
-  ({ text, color = 'green', loading, icon, disabled, ...restProps }, ref) => {
+  (
+    {
+      text,
+      textSize = 18,
+      textWeight = 'medium',
+      color = 'green',
+      loading,
+      icon,
+      disabled,
+      ...restProps
+    },
+    ref
+  ) => {
     let buttonProps: ButtonProps = restProps
 
     switch (color) {
@@ -84,6 +102,19 @@ export const RoundedButton: React.FC<
       case 'red':
         buttonProps = { ...buttonProps, borderColor: 'red', textColor: 'red' }
         break
+      case 'white':
+        buttonProps = {
+          ...buttonProps,
+          textColor: 'white',
+        }
+        break
+      case 'black':
+        buttonProps = {
+          ...buttonProps,
+          borderColor: 'greyLight',
+          textColor: 'black',
+        }
+        break
     }
 
     return (
@@ -94,10 +125,10 @@ export const RoundedButton: React.FC<
         {...buttonProps}
       >
         <TextIcon
-          icon={icon || (loading && <IconSpinner16 size="md" />)}
-          size="xm"
-          weight="md"
-          textPlacement="left"
+          icon={icon || (loading && <Spinner size={24} />)}
+          size={textSize}
+          weight={textWeight}
+          placement="left"
         >
           {!loading ? text : null}
         </TextIcon>

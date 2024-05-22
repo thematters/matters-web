@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Layout, Translate } from '~/components'
 import { PublishStateDraftFragment } from '~/gql/graphql'
 
@@ -6,7 +8,12 @@ import RetryButton from './RetryButton'
 const ErrorState = ({ draft }: { draft: PublishStateDraftFragment }) => (
   <Layout.Notice
     color="red"
-    content={<Translate id="failurePublish" />}
+    content={
+      <FormattedMessage
+        defaultMessage="Failed to publish, please try again."
+        id="zE51j6"
+      />
+    }
     subDescription={
       <Translate
         zh_hant="請檢查網絡後重試"

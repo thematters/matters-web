@@ -27,7 +27,7 @@ const fragments = {
 
 export const ArticleDigestNotice = ({
   article,
-  titleTextSize = 'md',
+  titleTextSize = 16,
 }: ArticleDigestNoticeProps) => {
   const { summary } = article
 

@@ -2,6 +2,8 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestFeed } from '~/components'
 
+import { IcymiCuratedFeed } from './IcymiCuratedFeed'
+
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
     pageInfo {
@@ -53,6 +55,7 @@ export const FEED_ARTICLES_PUBLIC = {
       viewer @connection(key: "viewerFeedIcymi") {
         id
         recommendation {
+          ...IcymiCuratedFeedRecommendation
           feed: icymi(input: { first: 20, after: $after }) {
             ...FeedArticleConnection
           }
@@ -60,6 +63,7 @@ export const FEED_ARTICLES_PUBLIC = {
       }
     }
     ${feedFragment}
+    ${IcymiCuratedFeed.fragments}
   `,
 }
 

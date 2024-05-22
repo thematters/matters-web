@@ -17,13 +17,13 @@
 
 .delete {
   position: absolute;
-  right: var(--spacing-base);
-  bottom: var(--spacing-base);
+  right: var(--sp16);
+  bottom: var(--sp16);
 }
 
 .userProfileCover {
   display: flex;
-  gap: var(--spacing-xx-loose);
+  gap: var(--sp40);
 }
 
 .collection {

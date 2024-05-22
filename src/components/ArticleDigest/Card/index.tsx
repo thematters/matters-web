@@ -67,7 +67,7 @@ export const ArticleDigestCard = ({
           <ArticleDigestTitle
             article={{ ...article, title }}
             is="h3"
-            textSize="mdS"
+            textSize={15}
           />
 
           {!cover && <p className={styles.summary}>{cleanedSummary}</p>}
@@ -76,7 +76,7 @@ export const ArticleDigestCard = ({
         <footer className={styles.footer}>
           <UserDigest.Mini
             user={article.author}
-            avatarSize="xs"
+            avatarSize={16}
             nameColor={cover ? 'white' : undefined}
             hasAvatar
             hasDisplayName

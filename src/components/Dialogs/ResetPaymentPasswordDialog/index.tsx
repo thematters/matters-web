@@ -1,17 +1,19 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 interface ResetPaymentPasswordProps {
+  autoCloseDialog?: boolean
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
+  autoCloseDialog,
   children,
 }) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
@@ -21,7 +23,10 @@ const BaseResetPaymentPasswordDialog: React.FC<ResetPaymentPasswordProps> = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
-        <DynamicPaymentResetPasswordForm closeDialog={closeDialog} />
+        <DynamicPaymentResetPasswordForm
+          closeDialog={closeDialog}
+          autoCloseDialog={autoCloseDialog}
+        />
       </Dialog>
     </>
   )

@@ -1,14 +1,25 @@
+import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
+
+import { capitalizeFirstLetter } from '~/common/utils'
 
 import styles from './styles.module.css'
 
 type EndOfResultsProps = {
   message?: React.ReactNode
+  spacingTop?: 'base' | 'xLoose'
 }
 
-const EndOfResults: React.FC<EndOfResultsProps> = ({ message }) => {
+const EndOfResults: React.FC<EndOfResultsProps> = ({
+  message,
+  spacingTop = 'xLoose',
+}) => {
+  const containerClasses = classNames({
+    [styles.endOfResults]: true,
+    [styles[`spacingTop${capitalizeFirstLetter(spacingTop)}`]]: true,
+  })
   return (
-    <section className={styles.endOfResults}>
+    <section className={containerClasses}>
       {typeof message === 'boolean' && message ? (
         <FormattedMessage
           defaultMessage="That's all"

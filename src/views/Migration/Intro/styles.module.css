@@ -8,7 +8,7 @@
   background-image: var(--migration-intro-bg-xs);
 
   & p {
-    padding: var(--spacing-x-loose) 0;
+    padding: var(--sp32) 0;
     color: var(--color-grey-darker);
   }
 }

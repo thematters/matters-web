@@ -1,6 +1,6 @@
 /* motion */
 .u-motion-spin {
-  animation: spinning 1s infinite linear;
+  animation: spinning 1.2s infinite linear;
 }
 
 @keyframes spinning {
@@ -55,7 +55,7 @@
   &:hover,
   &:active,
   &:focus {
-    color: var(--color-matters-green-dark);
+    color: var(--color-matters-green-hover);
   }
 }
 

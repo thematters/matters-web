@@ -1,7 +1,8 @@
 import classNames from 'classnames'
 import { forwardRef } from 'react'
 
-import { Card, CardProps, IconArrowDown16, TextIcon } from '~/components'
+import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import { Card, CardProps, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -14,7 +15,7 @@ type OptionProps = {
   selected?: boolean
   expanded?: boolean
 
-  size?: 'md' | 'sm'
+  size?: 14 | 16
 
   role?: 'button' | 'option'
 
@@ -32,7 +33,7 @@ const Option: React.FC<OptionProps> = forwardRef(
       selected,
       expanded,
 
-      size = 'md',
+      size = 16,
 
       role = 'option',
 
@@ -44,7 +45,7 @@ const Option: React.FC<OptionProps> = forwardRef(
   ) => {
     const nameClasses = classNames({
       [styles.name]: true,
-      [styles[`${size}`]]: !!size,
+      [styles[`text${size}`]]: !!size,
     })
 
     return (
@@ -70,7 +71,7 @@ const Option: React.FC<OptionProps> = forwardRef(
 
             {!expanded && (
               <section className={styles.right}>
-                <TextIcon icon={<IconArrowDown16 color="grey" />} />
+                <TextIcon icon={<Icon icon={IconDown} color="grey" />} />
               </section>
             )}
           </section>

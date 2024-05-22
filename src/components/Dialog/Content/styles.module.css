@@ -3,25 +3,47 @@
   flex-direction: column;
   flex-shrink: 1;
   max-height: calc(70vh - 4.25rem); /* 4.25rem is the height of header */
+  max-height: calc(var(--ivh) * 90 - 4.25rem);
+  max-height: calc(90dvh - 4.25rem);
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 
   &.fixedHeight {
     height: calc(70vh - 4.25rem); /* 4.25rem is the height of header */
+    height: calc(var(--ivh) * 90 - 4.25rem);
+    height: calc(90dvh - 4.25rem);
 
     @media (--sm-up) {
       height: min(34rem, 64vh);
+      height: min(34rem, calc(var(--ivh) * 64));
+      height: min(34rem, 64dvh);
     }
   }
 
   @media (--sm-up) {
     max-height: min(34rem, 64vh);
+    max-height: min(34rem, calc(var(--ivh) * 64));
+    max-height: min(34rem, 64dvh);
+  }
+}
+
+/* FIXME: can be removed if editor is only used in single page instead of being used in dialog, use vvh to exclude visual keyboard */
+:global(body.editor-focused) {
+  & .content {
+    max-height: calc(var(--vvh) * 100 - 4.25rem);
+
+    &.fixedHeight {
+      height: calc(var(--vvh) * 100 - 4.25rem);
+
+      /* inner height - visual keyboard height */
+      margin-bottom: calc(var(--ivh) * 100 - var(--vvh) * 100);
+    }
   }
 }
 
 .smExtraSpacing {
-  padding-bottom: var(--spacing-xx-loose);
+  padding-bottom: var(--sp40);
 
   @media (--sm-up) {
     padding-bottom: 0;
@@ -29,15 +51,19 @@
 }
 
 .spacing {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 
   @media (--sm-up) {
-    padding: 0 var(--spacing-base-loose);
+    padding: 0 var(--sp20);
   }
 }
 
 .noSpacingBottom {
   padding-bottom: 0;
+}
+
+.noSpacingTop {
+  padding-top: 0;
 }
 
 .noMaxHeight {

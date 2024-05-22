@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/react-hooks'
 import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useContext, useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import {
   ASSET_TYPE,
@@ -11,16 +11,16 @@ import {
 } from '~/common/enums'
 import { stripHtml } from '~/common/utils'
 import {
+  DraftDetailStateContext,
+  DraftDetailStateProvider,
   EmptyLayout,
   Head,
   Layout,
   Media,
-  Spinner,
+  SpinnerBlock,
   Throw404,
-  toast,
   useCreateDraft,
   useDirectImageUpload,
-  useRoute,
   useUnloadConfirm,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
@@ -47,12 +47,13 @@ import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
 import Sidebar from './Sidebar'
+import styles from './styles.module.css'
 
 const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
   {
     ssr: false,
-    loading: () => <Spinner />,
+    loading: () => <SpinnerBlock />,
   }
 )
 
@@ -85,13 +86,13 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
   canComment: true,
 }
 
-const DraftDetail = () => {
+const BaseDraftDetail = () => {
   const intl = useIntl()
-  const { getQuery } = useRoute()
-  const id = getQuery('draftId')
-  const isInNew = id === 'new'
 
-  const [initNew] = useState(isInNew)
+  const { addRequest, getDraftId, isNewDraft } = useContext(
+    DraftDetailStateContext
+  )
+  const [initNew] = useState(isNewDraft())
   const { createDraft } = useCreateDraft()
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
   const [singleFileUpload] =
@@ -113,9 +114,9 @@ const DraftDetail = () => {
   const { data, loading, error } = useQuery<DraftDetailQueryQuery>(
     DRAFT_DETAIL,
     {
-      variables: { id },
+      variables: { id: getDraftId() },
       fetchPolicy: 'network-only',
-      skip: isInNew,
+      skip: isNewDraft(),
     }
   )
   const { data: circleData, loading: circleLoading } =
@@ -125,13 +126,15 @@ const DraftDetail = () => {
 
   const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
   const ownCircles = circleData?.viewer?.ownCircles || undefined
+  const [contentLength, setContentLength] = useState(0)
+  const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
 
-  useUnloadConfirm({ block: saveStatus === 'saving' && !isInNew })
+  useUnloadConfirm({ block: saveStatus === 'saving' && !isNewDraft() })
 
   if ((loading && !initNew) || circleLoading) {
     return (
       <EmptyLayout>
-        <Spinner />
+        <SpinnerBlock />
       </EmptyLayout>
     )
   }
@@ -144,7 +147,7 @@ const DraftDetail = () => {
     )
   }
 
-  if (!draft && !isInNew) {
+  if (!draft && !isNewDraft()) {
     return (
       <EmptyLayout>
         <Throw404 />
@@ -152,16 +155,16 @@ const DraftDetail = () => {
     )
   }
 
-  const hasContent =
-    draft?.content && stripHtml(draft.content).trim().length > 0
+  const hasContent = draft?.content && stripHtml(draft.content).length > 0
   const hasTitle = draft?.title && draft.title.length > 0
   const isUnpublished = draft?.publishState === 'unpublished'
   const publishable = !!(
-    id &&
+    getDraftId() &&
     isUnpublished &&
     hasContent &&
     hasTitle &&
-    hasValidSummary
+    hasValidSummary &&
+    !isOverLength
   )
 
   const upload = async (input: {
@@ -241,7 +244,7 @@ const DraftDetail = () => {
     summary?: string | null
   }) => {
     const isEmpty = Object.values(newDraft).every((x) => x === '')
-    if (isInNew && isEmpty) {
+    if (isNewDraft() && isEmpty) {
       return
     }
 
@@ -251,27 +254,16 @@ const DraftDetail = () => {
       }
 
       // check content length
-      const contentCount = newDraft.content?.length || 0
-      if (contentCount > MAX_ARTICLE_CONTENT_LENGTH) {
-        toast.error({
-          message: (
-            <FormattedMessage
-              defaultMessage={`Content length exceeds limit ({length}/{limit})`}
-              id="VefaFQ"
-              values={{
-                length: contentCount,
-                limit: MAX_ARTICLE_CONTENT_LENGTH,
-              }}
-            />
-          ),
-        })
+      const len = stripHtml(newDraft.content || '').length
+      setContentLength(len)
+      if (len > MAX_ARTICLE_CONTENT_LENGTH) {
         return
       }
 
       setSaveStatus('saving')
 
-      if (draft?.id) {
-        await setContent({ variables: { id: draft.id, ...newDraft } })
+      if (!isNewDraft()) {
+        await setContent({ variables: { id: getDraftId(), ...newDraft } })
       } else {
         await createDraft({
           onCreate: async (draftId: string) => {
@@ -301,21 +293,28 @@ const DraftDetail = () => {
           <Sidebar draft={draft} ownCircles={ownCircles} />
         </Media>
       }
-      inEditor
     >
       <Layout.Header
         mode="compact"
         right={
-          <>
+          <section className={styles.headerRight}>
             <SaveStatus status={saveStatus} />
-            {draft && (
-              <SettingsButton
-                draft={draft}
-                ownCircles={ownCircles}
-                publishable={!!publishable}
-              />
-            )}
-          </>
+
+            <section>
+              {isOverLength && (
+                <span className={styles.count}>
+                  {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
+                </span>
+              )}
+              {draft && (
+                <SettingsButton
+                  draft={draft}
+                  ownCircles={ownCircles}
+                  publishable={!!publishable}
+                />
+              )}
+            </section>
+          </section>
         }
       />
 
@@ -332,7 +331,11 @@ const DraftDetail = () => {
       <PublishState draft={draft} />
 
       <Layout.Main.Spacing>
-        <Editor draft={draft} update={update} upload={upload} />
+        <Editor
+          draft={draft}
+          update={async (props) => addRequest(() => update(props))}
+          upload={upload}
+        />
       </Layout.Main.Spacing>
 
       <Media lessThan="lg">
@@ -341,5 +344,11 @@ const DraftDetail = () => {
     </Layout.Main>
   )
 }
+
+const DraftDetail = () => (
+  <DraftDetailStateProvider>
+    <BaseDraftDetail />
+  </DraftDetailStateProvider>
+)
 
 export default DraftDetail

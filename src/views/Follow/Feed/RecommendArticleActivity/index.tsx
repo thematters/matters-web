@@ -1,8 +1,11 @@
-import { useState } from 'react'
-import { Waypoint } from 'react-waypoint'
+import { useEffect, useState } from 'react'
 
 import { analytics } from '~/common/utils'
-import { CardExposureTracker, Slides } from '~/components'
+import {
+  CardExposureTracker,
+  Slides,
+  useIntersectionObserver,
+} from '~/components'
 import {
   ArticleRecommendationActivitySource,
   RecommendArticleActivityFragment,
@@ -22,6 +25,14 @@ interface Props {
 const RecommendArticleActivity = ({ articles, source, location }: Props) => {
   // only mount horizontal scroll tracker when container is in view
   const [mountTracker, setMountTracker] = useState(false)
+
+  const { isIntersecting, ref } = useIntersectionObserver()
+
+  useEffect(() => {
+    if (isIntersecting) {
+      setMountTracker(true)
+    }
+  })
 
   if (!articles || articles.length <= 0 || !source) {
     return null
@@ -54,7 +65,6 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
               <FollowingRecommendArticle article={article} />
               {mountTracker && (
                 <CardExposureTracker
-                  horizontal={true}
                   location={`${location}.${index}`}
                   feedType="following"
                   contentType={contentType}
@@ -65,7 +75,7 @@ const RecommendArticleActivity = ({ articles, source, location }: Props) => {
           </Slides.Item>
         ))}
       </Slides>
-      <Waypoint onEnter={() => setMountTracker(true)} />
+      <span ref={ref} />
     </section>
   )
 }

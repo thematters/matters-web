@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { TEXT } from '~/common/enums'
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
 import {
   Button,
-  IconMore16,
-  IconNavSearch32,
+  Icon,
   LoginButton,
   ViewMoreButton,
   WriteButton,
@@ -18,11 +18,11 @@ const Buttons = () => (
     <ul>
       <li>
         <Button
-          spacing={['xtight', 'xtight']}
+          spacing={[8, 8]}
           bgActiveColor="greyLighterActive"
           aria-haspopup="dialog"
         >
-          <IconMore16 color="grey" />
+          <Icon icon={IconMore} color="grey" />
         </Button>
       </li>
 
@@ -44,24 +44,12 @@ const Buttons = () => (
 
       <li>
         <NavListItem
-          name={TEXT.zh_hant.search}
-          icon={<IconNavSearch32 size="md" />}
-          activeIcon={<IconNavSearch32 size="md" color="green" />}
+          name="Search"
+          icon={<Icon icon={IconNavSearch} size={24} />}
+          activeIcon={<Icon icon={IconNavSearch} size={24} color="green" />}
           active
         />
       </li>
-
-      {/* <li>
-        <Dialog.Footer>
-          <Dialog.Footer.Button type="submit">
-            <Translate id="agreeAndContinue" />
-          </Dialog.Footer.Button>
-
-          <Dialog.Footer.Button bgColor="greyLighter" textColor="black">
-            <Translate id="disagree" />
-          </Dialog.Footer.Button>
-        </Dialog.Footer>
-      </li> */}
     </ul>
   </section>
 )

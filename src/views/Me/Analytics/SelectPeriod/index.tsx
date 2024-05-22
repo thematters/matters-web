@@ -1,8 +1,8 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconArrowDown } from '@/public/static/icons/8px/arrow-down.svg'
+import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
-import { Button, Dropdown, Menu, TextIcon, withIcon } from '~/components'
+import { Button, Dropdown, Icon, Menu, TextIcon } from '~/components'
 
 type SelectProps = {
   period: number
@@ -101,17 +101,17 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
         <Button
           onClick={openDropdown}
           size={[null, '1.25rem']}
-          spacing={[0, 'xtight']}
+          spacing={[0, 8]}
           bgColor={'white'}
           aria-haspopup="listbox"
           ref={ref}
         >
           <TextIcon
-            icon={withIcon(IconArrowDown)({ size: 'xs' })}
-            size={'sm'}
+            icon={<Icon icon={IconDown} size={12} />}
+            size={14}
             color={'grey'}
-            spacing="xxtight"
-            textPlacement="left"
+            spacing={4}
+            placement="left"
           >
             {options.filter((option) => option.value === period)[0].label}
           </TextIcon>

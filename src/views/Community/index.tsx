@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { captureClicks, translate } from '~/common/utils'
+import { captureClicks } from '~/common/utils'
 import { Head, LanguageContext, Layout } from '~/components'
 
 import content from './content'
@@ -30,10 +30,7 @@ const Community = () => {
       <Layout.Main.Spacing>
         <section
           dangerouslySetInnerHTML={{
-            __html: translate({
-              ...content,
-              lang,
-            }),
+            __html: content[lang],
           }}
           className="u-content"
           onClick={captureClicks}

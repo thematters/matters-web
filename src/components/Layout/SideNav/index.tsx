@@ -2,12 +2,13 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconNavUser } from '@/public/static/icons/24px/nav-user.svg'
+import { ReactComponent as IconNavUserActive } from '@/public/static/icons/24px/nav-user-active.svg'
 import { PATHS, TEST_ID, Z_INDEX } from '~/common/enums'
 import {
   Dropdown,
   hidePopperOnClick,
-  IconNavMe32,
-  IconNavMeActive32,
+  Icon,
   Media,
   UniversalAuthButton,
   useRoute,
@@ -89,8 +90,8 @@ const SideNavMenu = () => {
           <NavListItem
             onClick={openDropdown}
             name={<FormattedMessage defaultMessage="My Page" id="enMIYK" />}
-            icon={<IconNavMe32 size="lg" />}
-            activeIcon={<IconNavMeActive32 size="lg" />}
+            icon={<Icon icon={IconNavUser} size={32} />}
+            activeIcon={<Icon icon={IconNavUserActive} size={32} />}
             active={isInMe}
             canScrollTop={false}
             aira-haspopup="menu"

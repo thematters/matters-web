@@ -26,9 +26,6 @@ export default gql`
     "Login or sign up wall in article detail page"
     wall: Boolean!
 
-    "Log route history for page back button"
-    routeHistory: [String!]
-
     "Whether cicle banner is shown"
     circleBanner: Boolean!
 

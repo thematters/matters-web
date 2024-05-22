@@ -1,6 +1,6 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { EXTERNAL_LINKS } from '~/common/enums'
 import { Button, TextIcon, toast, Translate } from '~/components'
 
 import styles from './styles.module.css'
@@ -13,7 +13,7 @@ const Toasts = () => (
 
     <section className={styles.buttons}>
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgColor="red"
         onClick={() => {
           toast.error({
@@ -30,42 +30,17 @@ const Toasts = () => (
       </Button>
 
       <Button
-        spacing={['xtight', 'xtight']}
-        bgColor="greenLighter"
-        onClick={() => {
-          toast.success({
-            message: <Translate id="successUploadImage" />,
-          })
-        }}
-      >
-        <TextIcon color="green">Success</TextIcon>
-      </Button>
-
-      <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgColor="greenLighter"
         onClick={() => {
           toast.success({
             message: (
-              <Translate
-                zh_hant="你對作品送出了一個 Super Like！"
-                zh_hans="你对作品送出了一个 Super Like！"
-                en="You sent a Super Like to this article!"
-              />
+              <FormattedMessage defaultMessage="Image uploaded" id="TcTp+J" />
             ),
-            actions: [
-              {
-                content: (
-                  <Translate zh_hant="詳情" zh_hans="详情" en="More info" />
-                ),
-                htmlHref: EXTERNAL_LINKS.SUPER_LIKE,
-                htmlTarget: '_blank',
-              },
-            ],
           })
         }}
       >
-        <TextIcon color="green">Custom Button</TextIcon>
+        <TextIcon color="green">Success</TextIcon>
       </Button>
     </section>
   </section>

@@ -7,21 +7,21 @@
   text-align: center;
   background: var(--color-grey-lighter);
   border: 2px dashed var(--color-grey-light);
-  border-radius: var(--spacing-base);
+  border-radius: var(--sp16);
 }
 
 .buttons {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
 }
 
 .buttons :global(> *) {
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--sp16);
 }
 
 .buttons :global(> * + *) {
-  margin-left: var(--spacing-x-tight);
+  margin-left: var(--sp8);
 }
 
 .h3 {
-  margin-bottom: var(--spacing-x-tight);
+  margin-bottom: var(--sp8);
 }

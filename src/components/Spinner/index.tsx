@@ -1,28 +1,43 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import classNames from 'classnames'
 
+import { ReactComponent as IconSpinner } from '@/public/static/icons/24px/spinner.svg'
 import { TEST_ID } from '~/common/enums'
-import { IconSpinner16, Translate } from '~/components'
+import { Icon, IconColor, IconSize } from '~/components'
 
 import styles from './styles.module.css'
 
-export const Spinner = ({
-  color = 'greyLight',
-}: {
-  color?: 'greyLight' | 'white'
-}) => {
+type SpinnerProps = {
+  color?: IconColor
+  size?: IconSize
+}
+
+export const Spinner = ({ color, size }: SpinnerProps) => {
   return (
-    <div
-      className={styles.spinner}
-      data-test-id={TEST_ID.SPINNER}
+    <Icon
+      aria-label="Loading..."
+      data-test-id={TEST_ID.ICON_SPINNER}
       aria-busy="true"
       aria-live="polite"
-    >
-      <VisuallyHidden>
-        <span>
-          <Translate zh_hant="載入中…" zh_hans="加载中…" en="Loading..." />
-        </span>
-      </VisuallyHidden>
-      <IconSpinner16 color={color} size="lg" />
+      className="u-motion-spin"
+      icon={IconSpinner}
+      color={color}
+      size={size}
+    />
+  )
+}
+
+export const SpinnerBlock = ({
+  noSpacing,
+  ...spinnerProps
+}: { noSpacing?: boolean } & SpinnerProps) => {
+  const classes = classNames({
+    [styles.spinnerBlock]: true,
+    [styles.noSpacing]: noSpacing,
+  })
+
+  return (
+    <div className={classes}>
+      <Spinner color="greyLight" size={32} {...spinnerProps} />
     </div>
   )
 }

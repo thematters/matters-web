@@ -7,8 +7,8 @@
   background-size: 196px;
 
   & h2 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--text24);
+    font-weight: var(--font-semibold);
     text-align: center;
   }
 
@@ -30,15 +30,15 @@
   }
 
   & ul {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
   }
 
   & li {
     & a {
       @mixin flex-center-space-between;
 
-      padding: var(--spacing-base) var(--spacing-base) var(--spacing-base) 0;
-      font-size: var(--font-size-lg);
+      padding: var(--sp16) var(--sp16) var(--sp16) 0;
+      font-size: var(--text20);
 
       &:hover,
       &:focus {

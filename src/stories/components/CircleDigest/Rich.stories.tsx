@@ -27,7 +27,6 @@ Default.args = {
 export const Simple = Template.bind({})
 Simple.args = {
   circle: MOCK_CIRCLE,
-  avatarSize: 'xl',
   hasFooter: false,
   hasPrice: false,
   hasOwner: false,

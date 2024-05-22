@@ -1,10 +1,10 @@
 .walletLabel {
   @mixin flex-center-start;
 
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 
   & > * + * {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--sp8);
   }
 }
 
@@ -25,7 +25,7 @@
 .dialogContent {
   display: flex;
   flex-direction: column;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   color: var(--color-grey-darker);
 
   & .ensName {

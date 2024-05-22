@@ -46,12 +46,12 @@ const Intro = () => {
               <section className={styles.buttons}>
                 <Button
                   bgColor="green"
-                  spacing={['tight', 'loose']}
+                  spacing={[12, 24]}
                   htmlHref={EXTERNAL_LINKS.MATTERS_LAB}
                   htmlTarget="_blank"
                   rel="noopener"
                 >
-                  <TextIcon color="white" size="md" weight="md">
+                  <TextIcon color="white" size={16} weight="medium">
                     <Translate
                       zh_hant="探索 Matters Lab 生態系"
                       zh_hans="探索 Matters Lab 生态系"
@@ -91,12 +91,12 @@ const Intro = () => {
                   textColor="white"
                   textActiveColor="black"
                   borderWidth="sm"
-                  spacing={['tight', 'loose']}
+                  spacing={[12, 24]}
                   htmlHref={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
                   htmlTarget="_blank"
                   rel="noopener"
                 >
-                  <TextIcon size="md">
+                  <TextIcon size={16}>
                     <Translate
                       zh_hant="GitHub 代碼倉庫"
                       zh_hans="GitHub 代码仓库"
@@ -138,7 +138,7 @@ const Intro = () => {
                 <Button
                   bgColor="green"
                   textColor="white"
-                  spacing={['tight', 'loose']}
+                  spacing={[12, 24]}
                   htmlHref={
                     lang === UserLanguage.En
                       ? 'https://en.frontlinefellowship.io/'
@@ -147,7 +147,7 @@ const Intro = () => {
                   htmlTarget="_blank"
                   rel="noopener"
                 >
-                  <TextIcon color="white" size="md" weight="md">
+                  <TextIcon color="white" size={16} weight="medium">
                     <Translate
                       zh_hant="在場獎學金"
                       zh_hans="在场奖学金"

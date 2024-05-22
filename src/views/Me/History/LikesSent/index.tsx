@@ -9,7 +9,7 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spinner,
+  SpinnerBlock,
 } from '~/components'
 import { MeLikesSentQuery } from '~/gql/graphql'
 
@@ -45,7 +45,7 @@ const BaseLikesSent = () => {
   const { data, loading, fetchMore } = useQuery<MeLikesSentQuery>(ME_LIKES_SENT)
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (!data?.viewer) {

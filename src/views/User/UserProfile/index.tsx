@@ -14,8 +14,6 @@ import {
   FollowUserButton,
   Media,
   Throw404,
-  Translate,
-  // Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -126,7 +124,7 @@ export const UserProfile = () => {
    */
   const avatar = (
     <section className={styles.avatar}>
-      <Avatar size="xxxlm" user={user} inProfile />
+      <Avatar size={76} user={user} inProfile />
     </section>
   )
 
@@ -179,7 +177,7 @@ export const UserProfile = () => {
                       onClick={openEditProfileDialog}
                       size={['5.3125rem', '2rem']}
                     >
-                      <Translate id="edit" />
+                      <FormattedMessage defaultMessage="Edit" id="wEQDC6" />
                     </Button>
                   )}
                 </EditProfileDialog>
@@ -291,7 +289,7 @@ export const UserProfile = () => {
             <Expandable
               content={user.info.description}
               color="grey"
-              size="sm"
+              size={14}
               spacingTop="tight"
               collapseable={false}
             >

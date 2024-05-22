@@ -12,8 +12,8 @@ const Home = () => {
       aside={
         <>
           <Sidebar.Billboard />
-          <Sidebar.Tags />
           <Sidebar.Authors />
+          <Sidebar.Tags />
         </>
       }
     >

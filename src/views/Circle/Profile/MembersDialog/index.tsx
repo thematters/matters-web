@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 interface MembersDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -9,7 +9,7 @@ interface MembersDialogProps {
 
 const DynamicContent = dynamic(() => import('./Content'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseMembersDialog = ({ children }: MembersDialogProps) => {

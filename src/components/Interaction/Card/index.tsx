@@ -11,14 +11,7 @@ import styles from './styles.module.css'
 
 export type CardBgColor = 'greyLighter' | 'white' | 'transparent' | 'none'
 export type CardBgHoverColor = 'greyLighter' | 'transparent' | 'none'
-export type CardSpacing =
-  | 0
-  | 'xtight'
-  | 'baseTight'
-  | 'tight'
-  | 'base'
-  | 'baseLoose'
-  | 'loose'
+export type CardSpacing = 0 | 8 | 10 | 12 | 16 | 20 | 24
 export type CardBorderColor = 'greyLighter' | 'lineGreyLight' | 'green'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base' | 'loose'
 
@@ -56,7 +49,7 @@ export interface CardProps {
 export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
   (
     {
-      spacing = ['base', 0],
+      spacing = [16, 0],
 
       bgColor = 'white',
       bgActiveColor,

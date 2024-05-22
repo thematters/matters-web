@@ -98,7 +98,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       placement="bottom-end"
       animation="shift-away"
       theme="dropdown"
-      zIndex={Z_INDEX.OVER_BOTTOM_BAR}
+      zIndex={Z_INDEX.OVER_DIALOG}
       appendTo={typeof window !== 'undefined' ? document.body : undefined}
       aria={{ content: 'describedby', expanded: true }}
       {...props}

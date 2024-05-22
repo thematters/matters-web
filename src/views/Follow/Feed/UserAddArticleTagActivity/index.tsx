@@ -13,7 +13,7 @@ const UserAddArticleTagActivity = ({
   <>
     <ArticleDigestFeed
       article={node}
-      tag={<Tag tag={target} type="plain" iconProps={{ size: 'sm' }} />}
+      tag={<Tag tag={target} type="plain" iconProps={{ size: 14 }} />}
       onClick={() => {
         analytics.trackEvent('click_feed', {
           type: 'following',

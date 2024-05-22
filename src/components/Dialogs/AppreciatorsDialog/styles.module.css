@@ -7,8 +7,8 @@
     height: 1rem;
     margin-top: -2px;
     margin-right: -2px;
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-bold);
+    font-size: var(--text12);
+    font-weight: var(--font-bold);
     color: var(--color-white);
     text-align: center;
     background: var(--color-matters-green);

@@ -20,7 +20,7 @@ const Template: ComponentStory<typeof UserDigest.Mini> = (args) => (
 export const Mini = Template.bind({})
 Mini.args = {
   user: MOCK_USER,
-  avatarSize: 'xs',
+  avatarSize: 16,
   hasAvatar: true,
   hasDisplayName: true,
   hasUserName: true,

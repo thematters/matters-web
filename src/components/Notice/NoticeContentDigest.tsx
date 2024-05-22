@@ -1,5 +1,5 @@
 import { TEST_ID } from '~/common/enums'
-import { collapseContent } from '~/common/utils'
+import { stripHtml } from '~/common/utils'
 
 import styles from './styles.module.css'
 
@@ -9,7 +9,7 @@ const NoticeContentDigest = ({ content }: { content: string }) => {
       className={styles.noticeContentDigest}
       data-test-id={TEST_ID.NOTICE_COMMENT_CONTENT}
     >
-      {collapseContent(content)}
+      {stripHtml(content)}
     </section>
   )
 }

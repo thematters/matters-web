@@ -60,7 +60,7 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
   > = {
     xl: [0, 0],
     lg: [0, 0],
-    md: [0, 'tight'],
+    md: [0, 12],
   }
 
   return (
@@ -74,8 +74,8 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
       onClick={() => unfollow()}
     >
       <TextIcon
-        weight="md"
-        size={size === 'xl' ? 'md' : size === 'lg' ? 'sm' : 'xs'}
+        weight="medium"
+        size={size === 'xl' ? 16 : size === 'lg' ? 14 : 12}
       >
         <FormattedMessage
           defaultMessage="Followed"

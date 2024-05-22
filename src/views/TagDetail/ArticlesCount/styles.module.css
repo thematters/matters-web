@@ -1,7 +1,7 @@
 .container {
   @mixin inline-flex-center-all;
 
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1;
   color: var(--color-grey-darker);
 

@@ -142,7 +142,7 @@ const Steps = () => {
             {viewer.isAuthed ? (
               <section className={styles.avatar}>
                 <Avatar
-                  size="lg"
+                  size={32}
                   user={viewer.isInactive ? undefined : viewer}
                 />
                 <section className={styles.info}>
@@ -153,7 +153,7 @@ const Steps = () => {
               <>
                 <LoginButton
                   bgColor="green"
-                  iconSize="md"
+                  iconSize={24}
                   size={['7rem', '2.5rem']}
                   spacing={[0, 0]}
                   resideIn="migration"
@@ -187,7 +187,7 @@ const Steps = () => {
               rel="noopener"
               {...buttonProps}
             >
-              <TextIcon color="green" size="md" weight="md">
+              <TextIcon color="green" size={16} weight="medium">
                 <Translate
                   zh_hant={zh_hant.sub_content_2_1}
                   zh_hans={zh_hans.sub_content_2_1}
@@ -207,7 +207,7 @@ const Steps = () => {
                   spacing={[0, 0]}
                   onClick={openDialog}
                 >
-                  <TextIcon color="white" size="md" weight="md">
+                  <TextIcon color="white" size={16} weight="medium">
                     <Translate
                       zh_hant={zh_hant.title_3}
                       zh_hans={zh_hans.title_3}

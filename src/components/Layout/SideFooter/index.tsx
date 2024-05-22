@@ -31,10 +31,6 @@ const CommunityMenu = () => {
   )
 }
 
-const Dot = () => {
-  return <span className={styles.dot}>&nbsp;·&nbsp;</span>
-}
-
 const SideFooter = () => {
   return (
     <footer className={styles.footer}>
@@ -44,21 +40,18 @@ const SideFooter = () => {
         <Link href={PATHS.ABOUT} legacyBehavior>
           <a>
             <FormattedMessage defaultMessage="About" id="g5pX+a" />
-            <Dot />
           </a>
         </Link>
 
         <Link href={PATHS.GUIDE} legacyBehavior>
           <a>
             <FormattedMessage defaultMessage="Explore" id="7JlauX" />
-            <Dot />
           </a>
         </Link>
 
         <Link href={PATHS.TOS} legacyBehavior>
           <a>
             <FormattedMessage defaultMessage="Terms" id="xkr+zo" />
-            <Dot />
           </a>
         </Link>
 

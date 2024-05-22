@@ -5,8 +5,13 @@ import { useContext, useEffect, useRef, useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { captureClicks, initAudioPlayers, optimizeEmbed } from '~/common/utils'
-import { useMutation, ViewerContext } from '~/components'
-import { ContentArticleFragment, ReadArticleMutation } from '~/gql/graphql'
+import {
+  // Media,
+  // TextSelectionPopover,
+  useMutation,
+  ViewerContext,
+} from '~/components'
+import { ReadArticleMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -19,11 +24,11 @@ const READ_ARTICLE = gql`
 `
 
 const Content = ({
-  article,
+  articleId,
   content,
   translating,
 }: {
-  article: ContentArticleFragment
+  articleId: string
   content: string
   translating?: boolean
 }) => {
@@ -32,7 +37,7 @@ const Content = ({
     showToast: false,
   })
 
-  const contentContainer = useRef(null)
+  const contentContainer = useRef<HTMLDivElement>(null)
 
   // idle timer
   const [lastScroll, setScrollTime] = useState(0)
@@ -88,12 +93,12 @@ const Content = ({
 
         // if user is logged in, ReadArticle mutation will be invoked multiple times
         if (viewer.isAuthed && isReading()) {
-          read({ variables: { id: article.id } })
+          read({ variables: { id: articleId } })
         }
 
         // if visitor, invoke ReadArticle mutation only once
         if (!viewer.isAuthed && !visitorReadRef.current) {
-          read({ variables: { id: article.id } })
+          read({ variables: { id: articleId } })
           visitorReadRef.current = true
         }
         return heartbeat
@@ -121,19 +126,15 @@ const Content = ({
         ref={contentContainer}
         data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
+      {/* <Media greaterThan="sm">
+        {contentContainer.current && (
+          <TextSelectionPopover
+            targetElement={contentContainer.current as HTMLElement}
+          />
+        )}
+      </Media> */}
     </>
   )
-}
-
-Content.fragments = {
-  article: gql`
-    fragment ContentArticle on Article {
-      id
-      contents {
-        html
-      }
-    }
-  `,
 }
 
 export default Content

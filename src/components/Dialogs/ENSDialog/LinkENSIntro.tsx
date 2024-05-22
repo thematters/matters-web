@@ -1,10 +1,14 @@
-import { Translate } from '~/components'
+import { FormattedMessage } from 'react-intl'
 
 const LinkENSIntro = ({ ensName = '' }: { ensName?: string | null }) => (
   <p>
-    <Translate zh_hans="将" zh_hant="將" en="Link" />
-    <span className="u-highlight">&nbsp;{ensName}&nbsp;</span>
-    <Translate id="toYourIPNSPage" />
+    <FormattedMessage
+      defaultMessage="Link {ensName} to your IPNS page"
+      id="qPVFTS"
+      values={{
+        ensName: <span className="u-highlight">&nbsp;{ensName}&nbsp;</span>,
+      }}
+    />
   </p>
 )
 

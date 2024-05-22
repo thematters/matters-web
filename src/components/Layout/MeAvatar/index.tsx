@@ -11,7 +11,7 @@ type MeAvatarProps = {
 
 const MeAvatar: React.FC<MeAvatarProps> = ({
   active,
-  size = 'md',
+  size = 24,
   user,
   ...avatarProps
 }) => {

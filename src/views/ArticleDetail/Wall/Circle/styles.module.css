@@ -1,25 +1,22 @@
 .container {
-  padding: var(--spacing-x-loose) 1rem 1.5rem 1rem;
-  margin: 1rem -1rem -1rem;
-  background-image: var(--circle-wall-bg-sm);
-  background-position: center top;
-  background-size: cover;
+  @mixin flex-center-all;
 
-  & :global(.card) {
-    box-shadow: 0 0 4px rgb(0 0 0 / 16%);
-  }
+  height: 8rem;
+  margin: var(--sp24) 0;
+  background-image: var(--circle-wall-bg-sm);
+  background-size: contain;
 
   @media (--sm-up) {
-    .container {
-      background-image: var(--circle-wall-bg-md);
-    }
+    background-image: var(--circle-wall-bg-md);
   }
 }
 
 .message {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  margin-bottom: var(--spacing-base);
-  font-weight: var(--font-weight-medium);
+  color: var(--color-grey-darker);
+  text-align: center;
+
+  &:hover,
+  &:focus {
+    color: var(--color-matters-green);
+  }
 }

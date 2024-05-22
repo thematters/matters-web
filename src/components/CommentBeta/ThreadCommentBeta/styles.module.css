@@ -1,0 +1,17 @@
+.container {
+  & article {
+    padding: var(--sp16) 0;
+  }
+}
+
+.descendants {
+  & > li {
+    @mixin border-left-grey-light;
+    @mixin transition;
+
+    padding-left: var(--sp16);
+    margin-left: var(--sp8);
+    border-left-style: dashed;
+    transition-property: background-color;
+  }
+}

@@ -1,5 +1,10 @@
-.spinner {
-  padding: var(--spacing-x-loose) 0;
+.spinnerBlock {
+  padding: var(--sp32) 0;
+  font-size: 0;
   line-height: 1;
   text-align: center;
+}
+
+.noSpacing {
+  padding: 0;
 }

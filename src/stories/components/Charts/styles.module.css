@@ -2,7 +2,7 @@
   & li {
     @mixin border-bottom-grey;
 
-    margin-bottom: var(--spacing-loose);
+    margin-bottom: var(--sp24);
     border: 1px solid #999c9d;
   }
 }

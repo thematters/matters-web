@@ -15,6 +15,8 @@ export enum TEST_ID {
   DIGEST_ARTICLE_FEED_FOOTER_PIN = 'digest/article/feed/footer/pin',
   DIGEST_ARTICLE_NOTICE = 'digest/article/notice',
   DIGEST_ARTICLE_SIDEBAR = 'digest/article/sidebar',
+  DIGEST_ARTICLE_CURATED = 'digest/article/curated',
+  DIGEST_ARTICLE_AUTHOR_SIDEBAR = 'digest/article/author-sidebar',
   DIGEST_ARTICLE_TITLE = 'digest/article/title',
   DIGEST_ARTICLE_PUBLISHED = 'digest/article/published',
   DIGEST_ARTICLE_PUBLISHED_READER_COUNT = 'digest/article/published/reader-count',
@@ -82,6 +84,7 @@ export enum TEST_ID {
   // comment
   COMMENT_CONETNT = 'comment/content',
   COMMENT_REPLY_TO = 'comment/reply-to',
+  COMMENT_PINNED_LABEL = 'comment/pinned-label',
   // notification:components
   NOTICE_USER_DISPLAY_NAME = 'notice/user/display-name',
   NOTICE_ARTICLE_TITLE = 'notice/article/title',
@@ -112,9 +115,9 @@ export enum TEST_ID {
   NOTICE_TAG_LEAVE_EDITOR = 'notice/tag-leave-editor',
   NOTICE_PAYMENT_PAYOUT = 'notice/payment-payout',
   NOTICE_PAYMENT_RECEIVE_DONATION = 'notice/payment-receive-donation',
-  NOTICE_CIRCLE_NEW_FOLLOWER = 'notice/cirlce-new-follower',
-  NOTICE_CIRCLE_NEW_SUBSCRIBER = 'notice/cirlce-new-subscriber',
-  NOTICE_CIRCLE_NEW_UNSUBSCRIBER = 'notice/cirlce-new-unsubscriber',
+  NOTICE_CIRCLE_NEW_FOLLOWER = 'notice/circle-new-follower',
+  NOTICE_CIRCLE_NEW_SUBSCRIBER = 'notice/circle-new-subscriber',
+  NOTICE_CIRCLE_NEW_UNSUBSCRIBER = 'notice/circle-new-unsubscriber',
   NOTICE_CIRCLE_INVITATION = 'notice/circle-invitation',
   NOTICE_CIRCLE_NEW_BROADCAST_COMMENTS = 'notice/circle-new-broadcast-comments',
   NOTICE_CIRCLE_NEW_DISCUSSION_COMMENTS = 'notice/circle-new-discussion-comments',
@@ -158,5 +161,4 @@ export enum TEST_ID {
 
   // misc
   RESPONSIVE_IMG = 'responsive-img',
-  SPINNER = 'spinner',
 }

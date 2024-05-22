@@ -1,0 +1,91 @@
+.supportWidget {
+  position: relative;
+  flex-direction: column;
+  padding: var(--sp40) var(--sp16);
+  margin: var(--sp32) 0;
+  text-align: center;
+
+  @mixin flex-center-all;
+  @mixin polka-dot-background;
+
+  @media (--sm-up) {
+    padding: var(--sp48) var(--sp16);
+  }
+
+  & p {
+    font-size: var(--text14);
+    line-height: 1.25rem;
+  }
+
+  & .note p {
+    max-width: 29rem;
+  }
+
+  & .donationButton {
+    margin-top: var(--sp24);
+    border-radius: 5rem;
+  }
+
+  & .donators {
+    @mixin flex-center-all;
+
+    margin-top: var(--sp24);
+  }
+
+  & .transaction {
+    @mixin flex-center-all;
+
+    margin-top: var(--sp16);
+    font-size: var(--text12);
+  }
+}
+
+.hasCircle {
+  & .donation {
+    border-radius: var(--sp8) var(--sp8) 0 0;
+
+    & .donators {
+      bottom: calc(1.25rem / 2 * -1 - var(--sp4) / 2);
+    }
+  }
+}
+
+.circle {
+  margin-top: var(--sp4);
+  overflow: hidden;
+  background: var(--color-grey-lighter);
+  border-radius: 0 0 var(--sp8) var(--sp8);
+}
+
+.animationHint {
+  height: 2.5rem;
+  margin: 0 auto;
+
+  @media (--sm-up) {
+    height: 1.5rem;
+  }
+}
+
+.container {
+  @mixin flex-center-all;
+
+  flex-direction: column;
+  min-width: 7.5rem; /* 120px */
+  min-height: 9.375rem; /* 150px */
+}
+
+.slideUp {
+  animation: slide-up 0.2s linear;
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

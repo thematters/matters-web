@@ -1,18 +1,18 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import _uniq from 'lodash/uniq'
-import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { analytics, mergeConnections, translate } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
-  ArticleDigestSidebar,
-  LanguageContext,
+  ArticleDigestTitle,
   List,
   QueryError,
-  Spinner,
+  Spacer,
+  SpinnerBlock,
   Title,
-  Translate,
+  UserDigest,
   ViewMoreButton,
 } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
@@ -40,8 +40,6 @@ const Collection: React.FC<{
   article: NonNullable<ArticleDetailPublicQuery['article']>
   collectionCount?: number
 }> = ({ article, collectionCount }) => {
-  const { lang } = useContext(LanguageContext)
-
   const { data, loading, error, fetchMore } = useQuery<CollectionListQuery>(
     COLLECTION_LIST,
     { variables: { id: article.id, first: 3 } }
@@ -65,7 +63,7 @@ const Collection: React.FC<{
     })
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {
@@ -83,28 +81,18 @@ const Collection: React.FC<{
     >
       <header className={styles.header}>
         <Title type="nav" is="h2">
-          <Translate id="collectArticle" />
-
-          <span
-            className={styles.count}
-            aria-label={translate({
-              zh_hant: `${collectionCount} 篇關聯作品`,
-              zh_hans: `${collectionCount} 篇关联作品`,
-              en: `${collectionCount} collected articles`,
-              lang,
-            })}
-          >
-            {collectionCount}
-          </span>
+          <FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />
         </Title>
       </header>
 
-      <List spacing={['base', 0]} hasBorder={false}>
-        {edges.map(({ node, cursor }, i) => (
+      <List spacing={['loose', 0]} hasLastBorder={false}>
+        {edges.map(({ node }, i) => (
           <List.Item key={node.id}>
-            <ArticleDigestSidebar
+            <ArticleDigestTitle
               article={node}
-              hasBackground
+              lineClamp={1}
+              textSize={16}
+              textWeight="normal"
               onClick={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'collection',
@@ -113,14 +101,15 @@ const Collection: React.FC<{
                   id: node.id,
                 })
               }
-              onClickAuthor={() => {
-                analytics.trackEvent('click_feed', {
-                  type: 'collection',
-                  contentType: 'user',
-                  location: i,
-                  id: node.author.id,
-                })
-              }}
+            />
+            <Spacer size="xtight" />
+            <UserDigest.Mini
+              user={node.author}
+              avatarSize={16}
+              textSize={12}
+              nameColor="grey"
+              hasAvatar
+              hasDisplayName
             />
           </List.Item>
         ))}

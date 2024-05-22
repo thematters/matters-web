@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useRef } from 'react'
+import { useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -18,13 +18,7 @@ import {
   validateCircleDisplayName,
   validateCircleName,
 } from '~/common/utils'
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  Layout,
-  useMutation,
-} from '~/components'
+import { Dialog, Form, Layout, useMutation } from '~/components'
 import PUT_CIRCLE from '~/components/GQL/mutations/putCircle'
 import { PutCircleMutation } from '~/gql/graphql'
 
@@ -51,7 +45,6 @@ const Init: React.FC<FormProps> = ({
   const [create] = useMutation<PutCircleMutation>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
-  const { lang } = useContext(LanguageContext)
   const inputRef: React.RefObject<any> | null = useRef(null)
   // const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
@@ -76,9 +69,9 @@ const Init: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ name, displayName, amount }) =>
       _pickBy({
-        name: validateCircleName(name, lang),
-        displayName: validateCircleDisplayName(displayName, lang),
-        amount: validateCircleAmount(amount, lang),
+        name: validateCircleName(name, intl),
+        displayName: validateCircleDisplayName(displayName, intl),
+        amount: validateCircleAmount(amount, intl),
       }),
     onSubmit: async (
       { name, displayName, amount },

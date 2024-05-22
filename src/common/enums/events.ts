@@ -3,6 +3,8 @@ export const ANALYTICS = 'analytics'
 
 // Article
 export const REFETCH_RESPONSES = 'refetchResponses'
+export const SYNC_APPRECIATE_BUTTON_COUNT = 'syncAppreciateButtonCount'
+export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
 
 // Tag
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'
@@ -21,11 +23,18 @@ export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 export const OPEN_SET_USER_NAME_DIALOG = 'openSetUserNameDialog'
 export const OPEN_SHOW_NOMAD_BADGE_DIALOG = 'openShowNomadBadgeDialog'
+export const OPEN_COMMENT_DETAIL_DIALOG = 'openCommentDetailDialog'
+export const OPEN_COMMENT_LIST_DRAWER = 'openCommentListDrawer'
+export const CLOSE_OTHER_DRAWERS = 'closeOtherDrawers'
+export const BYPASS_SCROLL_LOCK = 'bypassScrollLock'
+export const ENBABLE_SCROLL_LOCK = 'enableScrollLock'
 
 // Toast
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
 
 // Support
+export const SUPPORT_SUCCESS = 'supportSuccess'
+export const SUPPORT_SUCCESS_USDT_VISITOR = 'supportSuccessUSDTVisitor'
 export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'
 
 // Universal auth
@@ -35,6 +44,7 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   circlePrice = 'circlePrice',
   circleSubscription = 'circleSubscription',
   collectArticle = 'collectArticle',
+  reportIssues = 'reportIssues',
   comment = 'comment',
   createDraft = 'createDraft',
   error = 'error',

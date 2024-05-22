@@ -1,4 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
+import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -6,28 +9,48 @@ import {
   SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
 import { emailVerifyCallbackUrl, storage } from '~/common/utils'
-import { useCountdown, useMutation, ViewerContext } from '~/components'
+import { toast, useCountdown, useMutation, ViewerContext } from '~/components'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
 import {
   SendVerificationCodeMutation,
   VerificationCodeType,
+  ViewerEmailQuery,
 } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-interface Props {
-  initCountdown?: number
-}
+const VIEWER_EMAIL = gql`
+  query ViewerEmail {
+    viewer {
+      id
+      info {
+        email
+        emailVerified
+      }
+    }
+  }
+`
 
-const ResendAction = ({ initCountdown }: Props) => {
+const ResendAction = () => {
   const viewer = useContext(ViewerContext)
   const { countdown, setCountdown } = useCountdown(0)
-  let firstRender = false
 
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
     undefined
   )
+  const { error, startPolling, stopPolling } = useQuery<ViewerEmailQuery>(
+    VIEWER_EMAIL,
+    {
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: typeof window === 'undefined',
+    }
+  )
+  const email = viewer.info.email
+  const emailVerified = viewer.info.emailVerified
+
+  let firstRender = false
 
   useEffect(() => {
     const cd = storage.get(OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN)
@@ -43,9 +66,33 @@ const ResendAction = ({ initCountdown }: Props) => {
     }
   }, [countdown])
 
-  const resend = async () => {
-    const email = viewer.info.email
+  useEffect(() => {
+    if (error) {
+      stopPolling()
+    } else {
+      startPolling(5000)
+    }
+  }, [error])
 
+  useEffect(() => {
+    if (!email || !emailVerified) {
+      return
+    }
+
+    baseToast.dismiss()
+    toast.success({
+      message: (
+        <FormattedMessage
+          defaultMessage="Verification successful"
+          id="Dom0EF"
+          description="src/components/GlobalToast/index.tsx"
+        />
+      ),
+      hasClose: false,
+    })
+  }, [email, emailVerified])
+
+  const resend = async () => {
     const redirectUrl = emailVerifyCallbackUrl(email)
     await sendCode({
       variables: {
@@ -56,7 +103,6 @@ const ResendAction = ({ initCountdown }: Props) => {
         },
       },
     })
-
     setCountdown(SEND_CODE_COUNTDOWN)
   }
 

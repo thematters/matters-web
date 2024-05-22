@@ -64,7 +64,7 @@ export const ThreadComment = ({
                 <Feed
                   comment={descendantComment}
                   type={type}
-                  avatarSize="md"
+                  avatarSize={24}
                   hasReply
                   hasUserName
                   hasCreatedAt

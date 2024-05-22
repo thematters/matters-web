@@ -1,7 +1,7 @@
 import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect, useState } from 'react'
 
-import { Spinner, ViewerContext } from '~/components'
+import { SpinnerBlock, ViewerContext } from '~/components'
 
 import ConfirmStep from './ConfirmStep'
 import { useAvailableUserName } from './hook'
@@ -35,7 +35,7 @@ const SetUserNameDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   }, [loading])
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   return (

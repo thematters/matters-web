@@ -26,7 +26,7 @@ const Entity = ({ tx }: { tx: DigestTransactionFragment }) => {
               article={article}
               is="h2"
               textWeight="normal"
-              textSize="xs"
+              textSize={12}
             />
           </section>
         </LinkWrapper>
@@ -39,7 +39,7 @@ const Entity = ({ tx }: { tx: DigestTransactionFragment }) => {
               circle={circle}
               is="h2"
               textWeight="normal"
-              textSize="xs"
+              textSize={12}
             />
           </section>
         </LinkWrapper>

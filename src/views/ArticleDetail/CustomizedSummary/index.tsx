@@ -10,7 +10,10 @@ const CustomizedSummary = ({ summary }: CustomizedSummaryProps) => {
   }
 
   return (
-    <section className="u-summary" data-test-id={TEST_ID.ARTICLE_SUMMARY}>
+    <section
+      className="u-article-summary"
+      data-test-id={TEST_ID.ARTICLE_SUMMARY}
+    >
       {summary}
     </section>
   )

@@ -1,13 +1,9 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
+import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
 import { explorers } from '~/common/utils'
-import {
-  Button,
-  IconExternalLink16,
-  IconInfo16,
-  TextIcon,
-  Tooltip,
-} from '~/components'
+import { Button, Icon, TextIcon, Tooltip } from '~/components'
 import { DigestTransactionFragment, TransactionState } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -38,18 +34,18 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
 
     return (
       <Button
-        spacing={['xxtight', 'tight']}
+        spacing={[4, 12]}
         htmlHref={`${explorerUrl}/tx/${blockchainTx.txHash}`}
         htmlTarget="_blank"
         onClick={(event) => event?.stopPropagation()}
       >
         <TextIcon
-          icon={<IconExternalLink16 color="grey" size="xs" />}
-          spacing="xxtight"
-          size="xs"
-          weight="md"
+          icon={<Icon icon={IconExternal} color="grey" size={12} />}
+          spacing={4}
+          size={12}
+          weight="medium"
           color="grey"
-          textPlacement="left"
+          placement="left"
         >
           <FormattedMessage defaultMessage="On-chain records" id="6kMb9Z" />
         </TextIcon>
@@ -69,7 +65,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
           aria-hidden
           onClick={(event) => event.stopPropagation()}
         >
-          <IconInfo16 size="xs" />
+          <Icon icon={IconInfo} size={12} />
         </button>
       </Tooltip>
     )
@@ -110,11 +106,11 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
     <section className={styles.content}>
       <TextIcon
         icon={<StateIcon />}
-        spacing="xxtight"
-        size="xs"
+        spacing={4}
+        size={12}
         weight="normal"
         color={state === TransactionState.Failed ? 'red' : 'greyDark'}
-        textPlacement="left"
+        placement="left"
       >
         <span className={styles.stateText}>
           <StateText />

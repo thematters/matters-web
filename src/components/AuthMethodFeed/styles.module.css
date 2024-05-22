@@ -5,14 +5,25 @@
     @mixin transition;
 
     position: relative;
-    padding: var(--spacing-tight) var(--spacing-base);
-    margin-bottom: var(--spacing-base);
-    font-size: var(--font-size-sm);
+    padding: var(--sp12) var(--sp16);
+    margin-bottom: var(--sp16);
+    font-size: var(--text14);
     line-height: 1.375rem;
     color: var(--color-black);
     cursor: pointer;
     border-radius: 0.5rem;
     transition-property: border-color;
+
+    &.supportItem {
+      background-color: var(--color-grey-lighter);
+      border-color: var(--color-grey-lighter);
+      border-radius: 6.1875rem;
+
+      &:hover,
+      &:focus {
+        border-color: var(--color-grey-light);
+      }
+    }
 
     &:hover,
     &:focus {
@@ -21,42 +32,42 @@
 
     & .icon {
       position: absolute;
-      left: var(--spacing-base-loose);
+      left: var(--sp20);
       height: 1.375rem;
     }
 
     & .right {
       position: absolute;
-      right: var(--spacing-base-loose);
+      right: var(--sp20);
       height: 1.375rem;
     }
   }
 }
 
 .info {
-  padding: 0 var(--spacing-base);
+  padding: 0 var(--sp16);
   color: var(--color-grey);
   text-align: center;
 
   @media (--sm-up) {
-    padding-bottom: var(--spacing-x-tight);
+    padding-bottom: var(--sp8);
   }
 
   .errorHint {
-    margin-bottom: var(--spacing-base);
-    font-size: var(--font-size-sm);
+    margin-bottom: var(--sp16);
+    font-size: var(--text14);
     line-height: 1.375rem;
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 
   .title {
-    padding-top: var(--spacing-x-tight);
-    font-size: var(--font-size-sm);
+    padding-top: var(--sp8);
+    font-size: var(--text14);
     line-height: 1.375rem;
 
     & .left {
       display: inline-block;
-      margin-right: var(--spacing-xx-tight);
+      margin-right: var(--sp4);
     }
 
     & .right {
@@ -68,14 +79,14 @@
 
       &:hover,
       &:focus {
-        color: var(--color-matters-green-dark);
+        color: var(--color-matters-green-hover);
       }
     }
   }
 
   .policy {
-    margin-top: var(--spacing-x-tight);
-    font-size: var(--font-size-xs);
+    margin-top: var(--sp8);
+    font-size: var(--text12);
     line-height: 1.125rem;
   }
 }

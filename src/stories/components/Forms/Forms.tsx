@@ -1,7 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { translate } from '~/common/utils'
 import { Form, Translate } from '~/components'
 
 import styles from './styles.module.css'
@@ -13,19 +12,19 @@ const Forms = () => (
       <li>
         <Form>
           <Form.Input
-            label={<Translate id="email" />}
+            label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
             type="email"
             name="email"
             required
-            placeholder={translate({ id: 'enterEmail', lang: 'zh_hant' })}
+            placeholder="Enter email"
           />
 
           <Form.Input
-            label={<Translate id="password" />}
+            label={<FormattedMessage defaultMessage="Password" id="5sg7KC" />}
             type="password"
             name="password"
             required
-            placeholder={translate({ id: 'enterPassword', lang: 'zh_hant' })}
+            placeholder="Enter password"
           />
         </Form>
       </li>
@@ -52,12 +51,11 @@ const Forms = () => (
       <li>
         <Form>
           <Form.Textarea
-            label={<Translate id="tagDescription" />}
+            label={
+              <FormattedMessage defaultMessage="Description" id="Q8Qw5B" />
+            }
             name="newDescription"
-            placeholder={translate({
-              id: 'tagDescriptionPlaceholder',
-              lang: 'zh_hant',
-            })}
+            placeholder="Enter description"
           />
         </Form>
       </li>
@@ -92,7 +90,7 @@ const Forms = () => (
           options={[30, 90, 180, 360].map((value) => ({
             name: (
               <>
-                {value} <Translate id="days" />
+                {value} <FormattedMessage defaultMessage="days" id="Bc20la" />
               </>
             ),
             value,

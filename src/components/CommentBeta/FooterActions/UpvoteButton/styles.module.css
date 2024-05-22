@@ -1,0 +1,21 @@
+.like {
+  height: 1.125rem;
+}
+
+.heartBeat {
+  animation: heart-beat 1s;
+}
+
+@keyframes heart-beat {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}

@@ -9,22 +9,22 @@
 }
 
 .errorMessage {
-  margin-top: var(--spacing-x-tight);
-  font-size: var(--font-size-sm);
+  margin-top: var(--sp8);
+  font-size: var(--text14);
   color: var(--color-grey-dark);
 }
 
 .errorRedirect {
-  margin-top: var(--spacing-x-loose);
+  margin-top: var(--sp32);
 }
 
 .errorDetail {
-  padding: var(--spacing-loose);
-  margin-top: var(--spacing-x-loose);
+  padding: var(--sp24);
+  margin-top: var(--sp32);
   overflow: auto;
-  color: var(--color-red);
+  color: var(--color-negative-red);
   text-align: left;
   background: var(--color-yellow-lighter);
-  border: 1px solid var(--color-red);
+  border: 1px solid var(--color-negative-red);
   -webkit-overflow-scrolling: touch;
 }

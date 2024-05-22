@@ -7,7 +7,6 @@ import {
   Menu,
   TableView,
   toast,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -50,7 +49,12 @@ const Currency = () => {
       })
     } catch (e) {
       toast.error({
-        message: <Translate id="failureChange" />,
+        message: (
+          <FormattedMessage
+            defaultMessage="Failed to edit, please try again."
+            id="USOHRK"
+          />
+        ),
       })
     }
   }

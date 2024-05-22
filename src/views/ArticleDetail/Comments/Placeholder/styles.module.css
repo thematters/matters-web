@@ -1,0 +1,7 @@
+.CommentFeed {
+  margin-top: var(--sp16);
+
+  & > * + * {
+    margin-top: var(--sp16);
+  }
+}

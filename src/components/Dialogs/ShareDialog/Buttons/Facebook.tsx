@@ -1,20 +1,11 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconShareFacebook } from '@/public/static/icons/16px/share-facebook.svg'
-import { ReactComponent as IconShareFacebookCircle } from '@/public/static/icons/40px/share-facebook-circle.svg'
+import { ReactComponent as IconFacebook } from '@/public/static/icons/24px/facebook.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { TextIcon, ViewerContext, withIcon } from '~/components'
+import { Icon, TextIcon, ViewerContext } from '~/components'
 
-const Facebook = ({
-  title,
-  link,
-  circle,
-}: {
-  title: string
-  link: string
-  circle?: boolean
-}) => {
+const Facebook = ({ title, link }: { title: string; link: string }) => {
   const viewer = useContext(ViewerContext)
 
   // append utm_source to link
@@ -41,13 +32,14 @@ const Facebook = ({
         return window.open(shareUrl, 'Share to Facebook')
       }}
     >
-      {circle && withIcon(IconShareFacebookCircle)({ size: 'xlM' })}
-
-      {!circle && (
-        <TextIcon icon={withIcon(IconShareFacebook)({})} spacing="base">
-          Facebook
-        </TextIcon>
-      )}
+      <TextIcon
+        icon={<Icon icon={IconFacebook} size={24} />}
+        spacing={16}
+        size={16}
+        color="black"
+      >
+        Facebook
+      </TextIcon>
     </button>
   )
 }

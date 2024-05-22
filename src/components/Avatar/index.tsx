@@ -1,29 +1,32 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
 import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg'
+import { ReactComponent as IconLogbook } from '@/public/static/icons/logbook.svg'
 import LOGBOOK from '@/public/static/images/logbook.gif'
 import { TEST_ID } from '~/common/enums'
-import { IconLogbookBadge16, ResponsiveImage, Tooltip } from '~/components'
+import { Icon, ResponsiveImage, Tooltip } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 export type AvatarSize =
-  | 'xs'
-  | 'sm'
-  | 'md'
-  | 'mdS'
-  | 'lg'
-  | 'xl'
-  | 'xxl'
-  | 'xxxl'
-  | 'xxxlm'
-  | 'xxxll'
-  | 'xxxxl'
+  | 16
+  | 20
+  | 22
+  | 24
+  | 32
+  | 40
+  | 48
+  | 56
+  | 64
+  | 72
+  | 76
+  | 88
+  | 120
 
 export type AvatarLogbook = PartialDeep<AvatarUserLogbookFragment>
 
@@ -64,7 +67,7 @@ const fragments = {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = 'default', src, title, inEditor, inProfile } = props
+  const { user, size = 40, src, title, inEditor, inProfile } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
@@ -75,7 +78,7 @@ export const Avatar = (props: AvatarProps) => {
   const avatarClasses = classNames({
     [styles.avatar]: true,
     avatar: true, // global selector for overwirting
-    [styles[size]]: true,
+    [styles[`size${size}`]]: true,
     [styles.hasRing]: isCivicLiker || hasArchitectBadge,
     [styles.hasBadge]: hasLogbook,
   })
@@ -131,7 +134,7 @@ export const Avatar = (props: AvatarProps) => {
               />
             </Tooltip>
           ) : (
-            <IconLogbookBadge16 />
+            <Icon icon={IconLogbook} />
           )}
         </section>
       )}

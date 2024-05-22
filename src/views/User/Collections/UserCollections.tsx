@@ -1,7 +1,8 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
@@ -9,7 +10,7 @@ import {
   CollectionDigestFeed,
   Empty,
   Head,
-  IconAdd20,
+  Icon,
   InfiniteScroll,
   Layout,
   List,
@@ -156,7 +157,7 @@ const UserCollections = () => {
           {({ openDialog }) => {
             return (
               <section className={styles.addCollection} onClick={openDialog}>
-                <TextIcon icon={<IconAdd20 size="mdS" />}>
+                <TextIcon icon={<Icon icon={IconPlus} size={20} />}>
                   <FormattedMessage
                     defaultMessage="New Collection"
                     id="L4Fcr8"

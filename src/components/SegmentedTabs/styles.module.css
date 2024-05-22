@@ -1,10 +1,10 @@
 .nav {
   position: relative;
-  padding: var(--spacing-x-tight) var(--spacing-base);
+  padding: var(--sp8) var(--sp16);
   white-space: nowrap;
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0;
+    padding: var(--sp16) 0;
   }
 
   &.sticky {
@@ -34,7 +34,7 @@
       display: inline-block;
 
       & + li {
-        margin-left: var(--spacing-x-tight);
+        margin-left: var(--sp8);
       }
     }
   }

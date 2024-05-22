@@ -1,0 +1,36 @@
+& .container {
+  display: flex;
+  align-items: center;
+  height: 1.875rem;
+  padding: var(--sp4) var(--sp8);
+  line-height: 1.375rem;
+  background-color: var(--color-matters-gold-light);
+  border-radius: 0.5rem;
+
+  &.insufficient {
+    color: var(--color-negative-red);
+    background-color: var(--color-insufficient-red);
+  }
+
+  & .balance {
+    font-weight: var(--font-medium);
+    white-space: pre-line;
+  }
+
+  & .topUpButton {
+    @mixin border-left-grey;
+
+    padding-left: var(--sp8);
+    margin-bottom: var(--sp2);
+    margin-left: var(--sp8);
+    border-left-color: var(--color-line-matters-golod-lighter);
+
+    &.insufficientBorder {
+      border-left-color: var(--color-line-matters-negative-red-lighter);
+    }
+  }
+}
+
+.message {
+  white-space: break-spaces;
+}

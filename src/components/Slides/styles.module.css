@@ -1,16 +1,16 @@
 .slides {
-  padding: var(--spacing-base) 0;
+  padding: var(--sp16) 0;
 
   & ul {
     @mixin hide-scrollbar;
 
     display: flex;
-    margin-right: calc(var(--spacing-base) * -1);
+    margin-right: calc(var(--sp16) * -1);
 
     & li {
       position: relative;
       flex-shrink: 0;
-      padding: 0 var(--spacing-base) 0 0;
+      padding: 0 var(--sp16) 0 0;
       margin: 0;
       scroll-snap-align: start;
     }
@@ -25,12 +25,12 @@
   scroll-snap-type: x mandatory;
 
   @media (--sm-down) {
-    margin-right: calc(var(--spacing-base) * -1);
-    margin-left: calc(var(--spacing-base) * -1);
+    margin-right: calc(var(--sp16) * -1);
+    margin-left: calc(var(--sp16) * -1);
 
     & ul {
       & li:first-child {
-        padding-left: var(--spacing-base);
+        padding-left: var(--sp16);
       }
     }
   }

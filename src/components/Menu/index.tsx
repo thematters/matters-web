@@ -3,7 +3,6 @@ import classNames from 'classnames'
 import { capitalizeFirstLetter } from '~/common/utils'
 
 import Divider from './Divider'
-import Header from './Header'
 import Item from './Item'
 import styles from './styles.module.css'
 
@@ -14,7 +13,6 @@ interface MenuProps {
 export const Menu: React.FC<React.PropsWithChildren<MenuProps>> & {
   Item: typeof Item
   Divider: typeof Divider
-  Header: typeof Header
 } = ({ width, children }) => {
   const menuClasses = classNames({
     [styles.menu]: true,
@@ -30,4 +28,3 @@ export const Menu: React.FC<React.PropsWithChildren<MenuProps>> & {
 
 Menu.Item = Item
 Menu.Divider = Divider
-Menu.Header = Header

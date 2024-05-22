@@ -1,6 +1,6 @@
 .container {
   @mixin border-top-grey;
 
-  padding: var(--spacing-base) var(--spacing-base) 0;
-  margin-top: var(--spacing-base);
+  padding: var(--sp16) var(--sp16) 0;
+  margin-top: var(--sp16);
 }

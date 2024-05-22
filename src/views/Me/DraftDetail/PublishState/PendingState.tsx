@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import { useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { Layout, Translate } from '~/components'
 import DRAFT_PUBLISH_STATE from '~/components/GQL/queries/draftPublishState'
@@ -30,7 +31,7 @@ const PendingState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   return (
     <Layout.Notice
       color="green"
-      content={<Translate id="publishing" />}
+      content={<FormattedMessage defaultMessage="Publishing..." id="PesLat" />}
       subDescription={
         <Translate
           zh_hant="上鏈後，作品不可刪除，去中心化保存"

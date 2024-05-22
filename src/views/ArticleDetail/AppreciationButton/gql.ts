@@ -5,6 +5,7 @@ export const fragments = {
     public: gql`
       fragment AppreciationButtonArticlePublic on Article {
         id
+        shortHash
         author {
           id
         }
@@ -17,7 +18,6 @@ export const fragments = {
         id
         hasAppreciate
         appreciateLeft
-        canSuperLike @include(if: $includeCanSuperLike)
         author {
           id
           isBlocking
@@ -28,17 +28,9 @@ export const fragments = {
 }
 
 export const APPRECIATE_ARTICLE = gql`
-  mutation AppreciateArticle(
-    $id: ID!
-    $amount: amount_Int_NotNull_min_1!
-    $token: String!
-    $superLike: Boolean
-  ) {
-    appreciateArticle(
-      input: { id: $id, amount: $amount, token: $token, superLike: $superLike }
-    ) {
+  mutation AppreciateArticle($id: ID!, $amount: amount_Int_NotNull_min_1!) {
+    appreciateArticle(input: { id: $id, amount: $amount }) {
       id
-      canSuperLike
     }
   }
 `

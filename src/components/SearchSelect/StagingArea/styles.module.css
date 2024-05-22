@@ -1,5 +1,5 @@
 .hint {
-  padding: 6.75rem var(--spacing-base);
+  padding: 6.75rem var(--sp16);
   color: var(--color-grey);
   text-align: center;
 }

@@ -32,12 +32,12 @@ export const SignUpButton: React.FC<
   const buttonProps: ButtonProps = {
     bgColor: 'green',
     size: size || [null, '2.25rem'],
-    spacing: [0, 'loose'],
+    spacing: [0, 24],
   }
 
   return (
     <Button aria-haspopup="dialog" {...buttonProps} {...props}>
-      <TextIcon color="white" weight="md">
+      <TextIcon color="white" weight="medium">
         <FormattedMessage defaultMessage="Register" id="deEeEI" />
       </TextIcon>
     </Button>

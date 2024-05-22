@@ -1,15 +1,9 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
-import { translate } from '~/common/utils'
-import {
-  CommentFormType,
-  LanguageContext,
-  toast,
-  ViewerContext,
-} from '~/components'
+import { CommentFormType, toast, ViewerContext } from '~/components'
 import {
   FooterActionsCommentPrivateFragment,
   FooterActionsCommentPublicFragment,
@@ -97,8 +91,8 @@ const BaseFooterActions = ({
 
   ...replyButtonProps
 }: FooterActionsProps) => {
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
 
   const { state, node } = comment
   const article = node.__typename === 'Article' ? node : undefined
@@ -144,12 +138,13 @@ const BaseFooterActions = ({
   return (
     <footer
       className={styles.footer}
-      aria-label={translate({
-        zh_hant: `${comment.upvotes} 點讚`,
-        zh_hans: `${comment.upvotes} 点赞`,
-        en: `${comment.upvotes} upvotes`,
-        lang,
-      })}
+      aria-label={intl.formatMessage(
+        {
+          defaultMessage: `{upvotes} upvotes`,
+          id: 'BW89hS',
+        },
+        { upvotes: comment.upvotes }
+      )}
     >
       <section className={styles.left}>
         {hasReply && (

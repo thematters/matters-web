@@ -5,21 +5,20 @@ import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import { ReactComponent as IconRss } from '@/public/static/icons/24px/rss.svg'
+import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
 import {
   Button,
   Dropdown,
   EditProfileDialog,
-  IconMore16,
-  IconMore22,
-  IconRss20,
-  IconShare20,
+  Icon,
   Menu,
   RssFeedDialog,
   RssFeedDialogProps,
   ShareDialog,
   ShareDialogProps,
-  Spinner,
-  Translate,
+  SpinnerBlock,
   ViewerContext,
   withDialog,
 } from '~/components'
@@ -41,17 +40,17 @@ const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
 
 const DynamicToggleRestrictUserButton = dynamic(
   () => import('./ToggleRestrictUser/Button'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicToggleRestrictUserDialog = dynamic(
   () => import('./ToggleRestrictUser/Dialog'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicArchiveUserButton = dynamic(() => import('./ArchiveUser/Button'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 const DynamicArchiveUserDialog = dynamic(() => import('./ArchiveUser/Dialog'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 interface DropdownActionsProps {
@@ -133,9 +132,9 @@ const BaseDropdownActions = ({
         ariaHasPopup="dialog"
         textColor="greyDarker"
         textActiveColor="black"
-        spacing={['xtight', 'base']}
+        spacing={[8, 16]}
         text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
-        icon={<IconShare20 size="mdS" />}
+        icon={<Icon icon={IconShare} size={20} />}
       />
       {hasRssFeed && (
         <Menu.Item
@@ -143,9 +142,9 @@ const BaseDropdownActions = ({
           ariaHasPopup="dialog"
           textColor="greyDarker"
           textActiveColor="black"
-          spacing={['xtight', 'base']}
-          text={<Translate id="subscriptions" />}
-          icon={<IconRss20 size="mdS" />}
+          spacing={[8, 16]}
+          text={<FormattedMessage defaultMessage="Subscribe" id="gczcC5" />}
+          icon={<Icon icon={IconRss} size={20} />}
         />
       )}
 
@@ -183,12 +182,12 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore22 size="mdM" />
+                <Icon icon={IconMore} size={22} />
               </Button>
             )}
             {isInAside && !isMe && (
               <Button
-                spacing={['xtight', 'xtight']}
+                spacing={[8, 8]}
                 textColor="greyDarker"
                 textActiveColor="black"
                 borderWidth="md"
@@ -201,12 +200,12 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore22 size="mdM" />
+                <Icon icon={IconMore} size={22} />
               </Button>
             )}
             {!isInAside && (
               <Button
-                spacing={['xtight', 'xtight']}
+                spacing={[8, 8]}
                 textColor="greyDarker"
                 textActiveColor="black"
                 borderWidth="md"
@@ -219,7 +218,7 @@ const BaseDropdownActions = ({
                 onClick={openDropdown}
                 ref={ref}
               >
-                <IconMore16 />
+                <Icon icon={IconMore} />
               </Button>
             )}
           </>

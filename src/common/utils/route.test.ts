@@ -16,57 +16,27 @@ import { getSearchType, toPath } from './route'
 describe('utils/route/toPath', () => {
   describe('page: articleDetail', () => {
     it('should return the correct path', () => {
-      const { href } = toPath({ page: 'articleDetail', article: MOCK_ARTILCE })
-      // /@matty/1-slug-Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a
-      expect(href).toBe(
-        `/@${MOCK_ARTILCE.author.userName}/${
-          fromGlobalId(MOCK_ARTILCE.id).id
-        }-${MOCK_ARTILCE.slug}-${MOCK_ARTILCE.mediaHash}`
-      )
-    })
-
-    it('should return the correct path when the article id is not a valid global id', () => {
       const { href } = toPath({
         page: 'articleDetail',
         article: {
           ...MOCK_ARTILCE,
-          id: 'invalidId',
+          shortHash: 'r5ade0on7x1g',
         },
       })
-      // /@matty/slug-Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a
-      expect(href).toBe(
-        `/@${MOCK_ARTILCE.author.userName}/${MOCK_ARTILCE.slug}-${MOCK_ARTILCE.mediaHash}`
-      )
+
+      expect(href).toBe(`/a/r5ade0on7x1g`)
     })
 
-    it('should return the correct path when the article id is not provided', () => {
+    it('should return the correct path with collection id', () => {
       const { href } = toPath({
         page: 'articleDetail',
         article: {
           ...MOCK_ARTILCE,
-          id: undefined,
         },
+        collectionId: '123',
       })
-      // /@matty/slug-Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a
-      expect(href).toBe(
-        `/@${MOCK_ARTILCE.author.userName}/${MOCK_ARTILCE.slug}-${MOCK_ARTILCE.mediaHash}`
-      )
-    })
 
-    it('should return the correct path with utm paramaters', () => {
-      const { href } = toPath({
-        page: 'articleDetail',
-        article: MOCK_ARTILCE,
-        utm_source: 'test-source',
-        utm_campaign: 'test-campaign',
-      })
-      expect(href).toBe(
-        `/@${MOCK_ARTILCE.author.userName}/${
-          fromGlobalId(MOCK_ARTILCE.id).id
-        }-${MOCK_ARTILCE.slug}-${
-          MOCK_ARTILCE.mediaHash
-        }?utm_source=test-source&utm_campaign=test-campaign`
-      )
+      expect(href).toBe(`/a/${MOCK_ARTILCE.shortHash}?collection=123`)
     })
 
     it('should return the correct path with custom search', () => {
@@ -79,12 +49,34 @@ describe('utils/route/toPath', () => {
         },
       })
       expect(href).toBe(
-        `/@${MOCK_ARTILCE.author.userName}/${
-          fromGlobalId(MOCK_ARTILCE.id).id
-        }-${MOCK_ARTILCE.slug}-${
-          MOCK_ARTILCE.mediaHash
-        }?referral=code&utm_source=test-source`
+        `/a/${MOCK_ARTILCE.shortHash}?referral=code&utm_source=test-source`
       )
+    })
+  })
+
+  describe('page: articleHistory', () => {
+    it('should return the correct path', () => {
+      const { href } = toPath({
+        page: 'articleHistory',
+        article: {
+          ...MOCK_ARTILCE,
+        },
+      })
+
+      expect(href).toBe(`/a/${MOCK_ARTILCE.shortHash}/history`)
+    })
+    it('should return the correct path with version id', () => {
+      const { href } = toPath({
+        page: 'articleHistory',
+        article: {
+          ...MOCK_ARTILCE,
+        },
+        search: {
+          v: '123',
+        },
+      })
+
+      expect(href).toBe(`/a/${MOCK_ARTILCE.shortHash}/history?v=123`)
     })
   })
 
@@ -163,11 +155,7 @@ describe('utils/route/toPath', () => {
         comment: { ...MOCK_COMMENT, parentComment: null },
         article: MOCK_ARTILCE,
       })
-      expect(href).toBe(
-        `/@${MOCK_ARTILCE.author.userName}/${
-          fromGlobalId(MOCK_ARTILCE.id).id
-        }-${MOCK_ARTILCE.slug}-${MOCK_ARTILCE.mediaHash}#${MOCK_COMMENT.id}`
-      )
+      expect(href).toBe(`/a/${MOCK_ARTILCE.shortHash}#${MOCK_COMMENT.id}`)
 
       // with parent comment
       const { href: href2 } = toPath({
@@ -176,10 +164,7 @@ describe('utils/route/toPath', () => {
         article: MOCK_ARTILCE,
       })
       expect(href2).toBe(
-        `/@${MOCK_ARTILCE.author.userName}/${
-          fromGlobalId(MOCK_ARTILCE.id).id
-        }-${MOCK_ARTILCE.slug}-${MOCK_ARTILCE.mediaHash}#${MOCK_COMMENT
-          .parentComment?.id}-${MOCK_COMMENT.id}`
+        `/a/${MOCK_ARTILCE.shortHash}#${MOCK_COMMENT.parentComment?.id}-${MOCK_COMMENT.id}`
       )
     })
 

@@ -1,8 +1,8 @@
 .title {
   display: flex;
   justify-content: space-between;
-  padding: 0 var(--spacing-base) 0;
-  margin-bottom: var(--spacing-tight);
+  padding: 0 var(--sp16) 0;
+  margin-bottom: var(--sp12);
 }
 
 .noSupporter {
@@ -10,15 +10,15 @@
 
   flex-direction: column;
   width: 100%;
-  margin: var(--spacing-loose) 0;
+  margin: var(--sp24) 0;
 
   & p {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--sp8);
     color: var(--color-grey-darker);
   }
 
   @media (--sm-up) {
-    margin: var(--spacing-xx-loose) 0;
+    margin: var(--sp40) 0;
   }
 }
 

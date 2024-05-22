@@ -1,14 +1,14 @@
 .authors {
   @mixin border-bottom-grey;
 
-  padding-bottom: var(--spacing-x-loose);
+  padding-bottom: var(--sp32);
   border-bottom-style: dashed;
 
   @media (--sm-up) {
-    padding-bottom: var(--spacing-x-tight);
+    padding-bottom: var(--sp8);
   }
 
   & :global(.list-item > .card) {
-    margin: 0 calc(var(--spacing-x-tight) * -1);
+    margin: 0 calc(var(--sp8) * -1);
   }
 }

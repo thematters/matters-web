@@ -3,10 +3,10 @@ import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
-import { Dialog, Spinner } from '~/components'
+import { Dialog, SpinnerBlock } from '~/components'
 import { ViewerCircleStateQuery } from '~/gql/graphql'
 
-import { VIEWER_CIRLCE_STATE } from './gql'
+import { VIEWER_CIRCLE_STATE } from './gql'
 
 interface Props {
   circleName: string
@@ -15,7 +15,7 @@ interface Props {
 
 const Processing: React.FC<Props> = ({ circleName, nextStep }) => {
   const { data, error, startPolling, stopPolling } =
-    useQuery<ViewerCircleStateQuery>(VIEWER_CIRLCE_STATE, {
+    useQuery<ViewerCircleStateQuery>(VIEWER_CIRCLE_STATE, {
       variables: { name: circleName },
       errorPolicy: 'none',
       fetchPolicy: 'network-only',
@@ -51,7 +51,7 @@ const Processing: React.FC<Props> = ({ circleName, nextStep }) => {
             <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.NETWORK_ERROR]} />
           </h3>
         ) : (
-          <Spinner />
+          <SpinnerBlock />
         )}
       </Dialog.Content.Message>
     </Dialog.Content>

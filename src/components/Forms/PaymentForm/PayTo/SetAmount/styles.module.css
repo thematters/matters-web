@@ -1,6 +1,11 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
 .reconnectHint {
-  padding: var(--spacing-base) var(--spacing-base) 0;
-  font-size: var(--font-size-xs);
-  color: var(--color-red);
-  text-align: center;
+  padding: var(--sp24) 0 0;
+  font-size: var(--text12);
+  color: var(--color-black);
+  text-align: left;
 }

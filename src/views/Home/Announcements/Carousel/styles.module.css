@@ -1,10 +1,10 @@
 .carousel {
   position: relative;
   width: 100%;
-  padding: var(--spacing-base) var(--spacing-base) 0;
+  padding: var(--sp16) var(--sp16) 0;
 
   @media (--sm-up) {
-    padding: var(--spacing-x-loose) 0 0;
+    padding: var(--sp32) 0 0;
   }
 }
 
@@ -12,18 +12,18 @@
   @mixin flex-center-space-between;
 
   position: absolute;
-  top: var(--spacing-base);
-  right: var(--spacing-base);
-  left: var(--spacing-base);
+  top: var(--sp16);
+  right: var(--sp16);
+  left: var(--sp16);
   z-index: 1;
   height: 2rem;
-  padding-top: var(--spacing-x-tight);
-  padding-left: var(--spacing-x-tight);
+  padding-top: var(--sp8);
+  padding-left: var(--sp8);
 
   @media (--sm-up) {
-    padding-top: var(--spacing-x-loose);
+    padding-top: var(--sp32);
     padding-left: 0;
-    margin-left: calc(0 - var(--spacing-x-tight));
+    margin-left: calc(0 - var(--sp8));
   }
 
   & .left {
@@ -33,7 +33,7 @@
   & .dots {
     @mixin flex-center-start;
 
-    padding-left: var(--spacing-x-tight);
+    padding-left: var(--sp8);
   }
 }
 
@@ -43,24 +43,23 @@
 
   & .container {
     display: flex;
-    margin-left: calc(var(--spacing-x-tight) * -1);
+    margin-left: calc(var(--sp8) * -1);
   }
 
   & .slide {
     position: relative;
     min-width: 100%;
-    padding-left: var(--spacing-x-tight);
+    padding-left: var(--sp8);
   }
 
   & .content {
     position: relative;
     z-index: 0;
     height: 7rem;
-    padding: calc(2rem + var(--spacing-x-tight) + var(--spacing-x-tight))
-      var(--spacing-base) var(--spacing-base);
+    padding: calc(2rem + var(--sp8) + var(--sp8)) var(--sp16) var(--sp16);
     overflow: hidden;
     background-position: bottom right;
-    border-radius: var(--spacing-base);
+    border-radius: var(--sp16);
 
     & img {
       @mixin object-fit-cover;
@@ -76,8 +75,8 @@
     & h3 {
       @mixin line-clamp;
 
-      font-size: var(--font-size-md);
-      font-weight: var(--font-weight-semibold);
+      font-size: var(--text16);
+      font-weight: var(--font-semibold);
       line-height: 1.5rem;
       color: var(--color-white);
       -webkit-line-clamp: 2;
@@ -89,15 +88,15 @@
 
     @media (--sm-up) {
       & h3 {
-        font-size: var(--font-size-xm);
+        font-size: var(--text18);
         -webkit-line-clamp: 1;
       }
 
       & p {
         @mixin line-clamp;
 
-        margin-top: var(--spacing-xx-tight);
-        font-size: var(--font-size-sm-s);
+        margin-top: var(--sp4);
+        font-size: var(--text13);
         line-height: 1.25rem;
         color: rgb(255 255 255 / 80%);
         -webkit-line-clamp: 1;
@@ -113,7 +112,7 @@
   box-sizing: border-box;
   width: 0.25rem;
   height: 0.25rem;
-  margin-right: var(--spacing-x-tight);
+  margin-right: var(--sp8);
   cursor: pointer;
   background: rgb(255 255 255 / 70%);
   border: 2px solid rgb(255 255 255 / 0%);

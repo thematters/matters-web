@@ -1,31 +1,31 @@
 .footer {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
 }
 
 .spaceXTight {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
 }
 
 .spaceBase {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 }
 
 .spaceBaseLoose {
-  margin-top: var(--spacing-base-loose);
+  margin-top: var(--sp20);
 }
 
 .hint {
-  font-size: var(--font-size-xs);
+  font-size: var(--text12);
   color: var(--color-grey);
 }
 
 .hintSizeSm {
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: 1.375rem;
 }
 
 .error {
-  color: var(--color-red);
+  color: var(--color-negative-red);
 }
 
 .alignCenter {

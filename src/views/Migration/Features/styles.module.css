@@ -2,18 +2,18 @@
   margin-top: 5rem;
 
   & h2 {
-    padding-bottom: var(--spacing-x-tight);
+    padding-bottom: var(--sp8);
     text-align: center;
   }
 
   & ul {
     & li {
-      margin-top: var(--spacing-xx-loose);
+      margin-top: var(--sp40);
     }
 
     @media (--sm-up) {
       & li {
-        margin-top: var(--spacing-xxx-loose);
+        margin-top: var(--sp64);
       }
     }
   }
@@ -22,19 +22,19 @@
     align-self: center;
 
     & h3 {
-      font-size: var(--font-size-xl);
-      font-weight: var(--font-weight-semibold);
+      font-size: var(--text24);
+      font-weight: var(--font-semibold);
       color: var(--color-matters-green);
     }
 
     & p {
-      margin: var(--spacing-base) 0;
-      font-size: var(--font-size-sm);
+      margin: var(--sp16) 0;
+      font-size: var(--text14);
       color: var(--color-grey-darker);
     }
 
     & a {
-      font-size: var(--font-size-sm);
+      font-size: var(--text14);
     }
   }
 

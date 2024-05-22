@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import {
   MAX_ARTICLE_COLLECT_LENGTH,
   MAX_ARTICLE_TAG_LENGTH,
   TEST_ID,
 } from '~/common/enums'
-import { Dialog, IconAdd16, TextIcon, Translate } from '~/components'
+import { Dialog, Icon, TextIcon, Translate } from '~/components'
 import SearchingArea, {
   SearchType,
   SelectNode,
@@ -54,6 +55,7 @@ export type EditorSearchSelectFormProps = {
   searchType: SearchType
   searchFilter?: SearchFilter
   searchExclude?: SearchExclude
+  nodeExclude?: string
 
   draggable?: boolean
 
@@ -79,6 +81,7 @@ const EditorSearchSelectForm = ({
   searchType,
   searchFilter,
   searchExclude,
+  nodeExclude,
 
   draggable,
 
@@ -162,10 +165,10 @@ const EditorSearchSelectForm = ({
             data-test-id={TEST_ID.EDITOR_SEARCH_SELECT_FORM_DIALOG_ADD_BUTTON}
           >
             <TextIcon
-              icon={<IconAdd16 size="mdS" />}
+              icon={<Icon icon={IconPlus} size={20} />}
               color={enableAdd ? 'green' : 'grey'}
-              size="mdS"
-              spacing="xtight"
+              size={15}
+              spacing={8}
             >
               {searchType === 'Tag' && (
                 <Translate en="Add tag" zh_hans="添加标签" zh_hant="添加標籤" />
@@ -186,6 +189,7 @@ const EditorSearchSelectForm = ({
             searchType={searchType}
             searchFilter={searchFilter}
             searchExclude={searchExclude}
+            nodeExclude={nodeExclude}
             stagingNodes={stagingNodes}
             toStagingArea={toStagingArea}
             toSearchingArea={toSearchingArea}

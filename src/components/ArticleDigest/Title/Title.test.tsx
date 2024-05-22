@@ -19,7 +19,7 @@ describe('<ArticleDigest.Title>', () => {
     expect($title).toBeInTheDocument()
 
     $title.click()
-    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).toHaveBeenCalled()
   })
 
@@ -56,26 +56,16 @@ describe('<ArticleDigest.Title>', () => {
     })
 
     $title.click()
-    expect(mockRouter.asPath).not.toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).not.toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).not.toHaveBeenCalled()
   })
 
   it('should render an ArticleDigest.Title with custom utm params', () => {
-    render(
-      <ArticleDigestTitle
-        article={MOCK_ARTILCE}
-        utm_source="source"
-        utm_medium="medium"
-      />
-    )
+    render(<ArticleDigestTitle article={MOCK_ARTILCE} />)
 
     const $title = screen.getByRole('heading', {
       name: MOCK_ARTILCE.title,
     })
     expect($title).toBeInTheDocument()
-
-    $title.click()
-    expect(mockRouter.asPath).toContain('utm_source=source')
-    expect(mockRouter.asPath).toContain('utm_medium=medium')
   })
 })

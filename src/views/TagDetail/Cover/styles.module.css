@@ -23,9 +23,9 @@
 
   & .content {
     position: absolute;
-    right: var(--spacing-base);
-    bottom: var(--spacing-loose);
-    left: var(--spacing-base);
+    right: var(--sp16);
+    bottom: var(--sp24);
+    left: var(--sp16);
     line-height: 1;
   }
 

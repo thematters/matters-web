@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { Dialog, toast, Translate, useMutation } from '~/components'
 import { updateTagMaintainers } from '~/components/GQL'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
@@ -55,10 +57,9 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
 
     toast.success({
       message: (
-        <Translate
-          zh_hant="移除協作者成功"
-          zh_hans="移除协作者成功"
-          en="successfully removed collaborator"
+        <FormattedMessage
+          defaultMessage="Successfully removed collaborator"
+          id="LnesNr"
         />
       ),
     })
@@ -70,10 +71,9 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
     <>
       <Dialog.Header
         title={
-          <Translate
-            zh_hant="確定移除協作者"
-            zh_hans="确定移除协作者"
-            en="confirm collaborator removal"
+          <FormattedMessage
+            defaultMessage="Confirm collaborator removal"
+            id="Hm2DAQ"
           />
         }
       />
@@ -81,16 +81,17 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
       <Dialog.Content>
         <Dialog.Content.Message>
           <p>
+            <FormattedMessage
+              defaultMessage="After removal, {user} user will not be able to manage selected feed."
+              id="vLcHiG"
+              values={{
+                user: <span className={styles.name}>{editor.displayName}</span>,
+              }}
+            />
             <Translate
               zh_hant="移除後， "
               zh_hans="移除后， "
               en="After removal, "
-            />
-            <span className={styles.name}>{editor.displayName}</span>{' '}
-            <Translate
-              zh_hant="將無法繼續參與「精選」作品管理。"
-              zh_hans="将无法继续参与「精选」作品管理。"
-              en="user will not be able to manage selected feed."
             />
           </p>
         </Dialog.Content.Message>
@@ -101,11 +102,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
         btns={
           <Dialog.RoundedButton
             text={
-              <Translate
-                zh_hant="確認移除"
-                zh_hans="确认移除"
-                en="Confirm Removal"
-              />
+              <FormattedMessage defaultMessage="Confirm Removal" id="1ZFwRz" />
             }
             color={loading ? 'green' : 'red'}
             onClick={onClick}
@@ -115,11 +112,7 @@ const TagRemoveEditor = ({ id, editor, closeDialog }: Props) => {
         smUpBtns={
           <Dialog.TextButton
             text={
-              <Translate
-                zh_hant="確認移除"
-                zh_hans="确认移除"
-                en="Confirm Removal"
-              />
+              <FormattedMessage defaultMessage="Confirm Removal" id="1ZFwRz" />
             }
             color={loading ? 'green' : 'red'}
             onClick={onClick}

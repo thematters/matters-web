@@ -12,7 +12,7 @@ import {
   List,
   Media,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   useEventListener,
   usePublicQuery,
   ViewerContext,
@@ -155,7 +155,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
    * Render
    */
   if (loading && (!edges || isNewLoading)) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

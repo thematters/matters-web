@@ -1,8 +1,15 @@
 .endOfResults {
   @mixin flex-center-all;
 
-  padding-top: var(--spacing-x-loose);
-  padding-bottom: var(--spacing-xx-loose);
-  font-size: var(--font-size-sm);
+  padding-bottom: var(--sp40);
+  font-size: var(--text14);
   color: var(--color-grey);
+}
+
+.spacingTopBase {
+  padding-top: var(--sp16);
+}
+
+.spacingTopXLoose {
+  padding-top: var(--sp32);
 }

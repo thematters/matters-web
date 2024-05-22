@@ -11,7 +11,7 @@ const NoticeUserCard = ({ user }: { user: NoticeUserCardFragment | null }) => {
   return (
     <UserDigest.Rich
       user={user}
-      spacing={['base', 'base']}
+      spacing={[16, 16]}
       borderRadius="xtight"
       bgColor="greyLighter"
       hasState={false}

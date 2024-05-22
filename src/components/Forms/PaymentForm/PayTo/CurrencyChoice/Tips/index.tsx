@@ -31,7 +31,7 @@ const Tips = () => {
           />
           <a
             className="u-link-green"
-            href={GUIDE_LINKS.connectWallet[lang]}
+            href={GUIDE_LINKS.wallet[lang]}
             target="_blank"
             rel="noreferrer"
           >

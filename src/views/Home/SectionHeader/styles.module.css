@@ -2,6 +2,6 @@
   @mixin flex-center-all;
 
   & > * + * {
-    margin-left: var(--spacing-base);
+    margin-left: var(--sp16);
   }
 }

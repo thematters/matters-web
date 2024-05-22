@@ -1,8 +1,9 @@
-import { Empty, IconNavNotification32, Translate } from '~/components'
+import { ReactComponent as IconNavNotifications } from '@/public/static/icons/24px/nav-notifications.svg'
+import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyNotice = () => (
   <Empty
-    icon={<IconNavNotification32 size="xxl" />}
+    icon={<Icon icon={IconNavNotifications} size={64} />}
     description={
       <Translate
         zh_hant="還沒有通知"

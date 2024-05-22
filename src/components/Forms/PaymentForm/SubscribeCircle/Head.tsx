@@ -43,27 +43,27 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
       <ul className={styles.features}>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureReading)({ size: 'mdS' })}
+            icon={withIcon(IconCircleFeatureReading)({ size: 20 })}
             color="gold"
-            size="mdS"
+            size={15}
           >
             <Translate zh_hant="無限閱讀" zh_hans="无限阅读" />
           </TextIcon>
         </li>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureDiscussion)({ size: 'mdS' })}
+            icon={withIcon(IconCircleFeatureDiscussion)({ size: 20 })}
             color="gold"
-            size="mdS"
+            size={15}
           >
             <Translate zh_hant="眾聊互動" zh_hans="众聊互动" />
           </TextIcon>
         </li>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureConnection)({ size: 'mdS' })}
+            icon={withIcon(IconCircleFeatureConnection)({ size: 20 })}
             color="gold"
-            size="mdS"
+            size={15}
           >
             <Translate zh_hant="解鎖社群" zh_hans="解锁社群" />
           </TextIcon>

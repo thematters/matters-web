@@ -1,18 +1,18 @@
 .form {
   position: relative;
   width: initial;
-  margin-bottom: var(--spacing-base);
+  margin-bottom: var(--sp16);
 
   & input[type='search'] {
     @mixin border-grey;
 
-    padding: var(--spacing-tight) calc(2rem + var(--spacing-x-tight));
-    font-size: var(--font-size-sm);
+    padding: var(--sp12) calc(2rem + var(--sp8));
+    font-size: var(--text14);
     line-height: 1.375rem;
     color: var(--color-black);
     caret-color: var(--color-matters-green);
     background: white;
-    border-radius: var(--spacing-x-tight);
+    border-radius: var(--sp8);
 
     &::placeholder {
       color: var(--color-grey-dark);
@@ -29,11 +29,11 @@
   }
 
   & button.search {
-    left: var(--spacing-x-tight);
+    left: var(--sp8);
     cursor: initial;
   }
 
   & button.clear {
-    right: var(--spacing-x-tight);
+    right: var(--sp8);
   }
 }

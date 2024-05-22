@@ -1,23 +1,23 @@
 .hint,
 .intro {
-  margin: var(--spacing-base) 0 var(--spacing-x-tight);
+  margin: var(--sp16) 0 var(--sp8);
 }
 
 .hint {
   margin-top: 0;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   color: var(--color-grey-dark);
 }
 
 .intro {
   & h4 {
-    margin-bottom: var(--spacing-x-tight);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--sp8);
+    font-size: var(--text12);
+    font-weight: var(--font-medium);
   }
 
   & p {
-    font-size: var(--font-size-xs);
+    font-size: var(--text12);
     color: var(--color-grey);
   }
 }

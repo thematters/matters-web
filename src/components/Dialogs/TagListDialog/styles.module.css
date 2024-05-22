@@ -1,0 +1,12 @@
+.tags {
+  & li {
+    padding: var(--sp8) 0;
+
+    &:hover,
+    &:focus {
+      & span {
+        color: var(--color-matters-green);
+      }
+    }
+  }
+}

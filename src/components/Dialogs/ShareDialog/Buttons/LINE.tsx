@@ -1,20 +1,11 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconShareLINE } from '@/public/static/icons/16px/share-line.svg'
-import { ReactComponent as IconShareLINECircle } from '@/public/static/icons/40px/share-line-circle.svg'
+import { ReactComponent as IconLINE } from '@/public/static/icons/24px/line.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { TextIcon, ViewerContext, withIcon } from '~/components'
+import { Icon, TextIcon, ViewerContext } from '~/components'
 
-const LINE = ({
-  title,
-  link,
-  circle,
-}: {
-  title: string
-  link: string
-  circle?: boolean
-}) => {
+const LINE = ({ title, link }: { title: string; link: string }) => {
   const viewer = useContext(ViewerContext)
 
   // append utm_source to link
@@ -43,13 +34,14 @@ const LINE = ({
         return window.open(shareUrl, 'Share to Line')
       }}
     >
-      {circle && withIcon(IconShareLINECircle)({ size: 'xlM' })}
-
-      {!circle && (
-        <TextIcon icon={withIcon(IconShareLINE)({})} spacing="base">
-          LINE
-        </TextIcon>
-      )}
+      <TextIcon
+        icon={<Icon icon={IconLINE} size={24} />}
+        spacing={16}
+        size={16}
+        color="black"
+      >
+        LINE
+      </TextIcon>
     </button>
   )
 }

@@ -9,7 +9,7 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Spinner,
+  SpinnerBlock,
 } from '~/components'
 import { MeLikesReceivedQuery } from '~/gql/graphql'
 
@@ -49,7 +49,7 @@ const BaseLikesReceived = () => {
   )
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (!data?.viewer) {

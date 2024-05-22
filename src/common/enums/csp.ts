@@ -89,6 +89,7 @@ const IMG_SRC = [
 
   // WalletConnect
   '*.walletconnect.com',
+  '*.walletconnect.org',
 
   // Billboard
   process.env.NEXT_PUBLIC_BILLBOARD_IMAGE_URL,
@@ -184,6 +185,7 @@ const FRAME_SRC = [
 
   // WalletConnect
   '*.walletconnect.com',
+  '*.walletconnect.org',
 ]
 
 export const CSP_POLICY = Object.entries({

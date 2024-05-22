@@ -14,6 +14,6 @@ const Template: ComponentStory<typeof IconTable> = (args) => (
 
 export const All = Template.bind({})
 All.args = {
-  size: 'lg',
+  size: 32,
   color: 'black',
 }

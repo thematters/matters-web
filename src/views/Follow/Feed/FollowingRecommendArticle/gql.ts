@@ -10,7 +10,7 @@ export const fragments = {
         id
         title
         slug
-        mediaHash
+        shortHash
         recommendArticleState: state
         cover
         summary

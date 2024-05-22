@@ -7,7 +7,7 @@
 .avatar {
   position: relative;
   display: inline-flex;
-  margin-right: var(--spacing-x-tight);
+  margin-right: var(--sp8);
 
   & .badge {
     position: absolute;
@@ -29,7 +29,7 @@
   @mixin flex-center-start;
 
   & > * + * {
-    margin-left: var(--spacing-xx-tight);
+    margin-left: var(--sp4);
   }
 }
 
@@ -37,14 +37,14 @@
   @mixin line-clamp;
   @mixin fix-cropped-letters;
 
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
   color: var(--color-black);
 }
 
 .subtitle {
   @mixin line-clamp;
 
-  font-size: var(--font-size-sm-s);
+  font-size: var(--text13);
   color: var(--color-grey-dark);
 }
 
@@ -68,7 +68,7 @@
   }
 
   & .name {
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
   }
 
   & .extraButton {
@@ -87,6 +87,6 @@
   }
 
   & .name {
-    font-size: var(--font-size-md-s);
+    font-size: var(--text15);
   }
 }

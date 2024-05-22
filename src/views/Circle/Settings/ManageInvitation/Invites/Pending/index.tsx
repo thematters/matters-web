@@ -9,7 +9,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   useEventListener,
   useRoute,
@@ -67,7 +67,7 @@ const PendingInvites = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

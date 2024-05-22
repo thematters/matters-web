@@ -2,8 +2,9 @@ import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 
+import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
 import {
-  IconRemove24,
+  Icon,
   Menu,
   toast,
   Translate,
@@ -69,7 +70,7 @@ const UnfollowCircleActionButton = ({
           zh_hans={`取消追踪 ${circle.displayName}`}
         />
       }
-      icon={<IconRemove24 size="mdS" />}
+      icon={<Icon icon={IconCircleMinus} size={20} />}
       onClick={async () => {
         await unfollow()
 

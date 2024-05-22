@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Spinner } from '~/components'
+import { SpinnerBlock } from '~/components'
 
 import { SelectNode } from '../SearchingArea'
 import SearchSelectNode from '../SearchSelectNode'
@@ -38,7 +38,7 @@ type StagingAreaProps = BaseStagingAreaProps & {
 }
 
 const DynamicDraggableNodes = dynamic(() => import('./DraggableNodes'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const StagingArea: React.FC<StagingAreaProps> = ({

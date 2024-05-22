@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Button, IconPen16, TextIcon } from '~/components'
+import { ReactComponent as IconPen } from '@/public/static/icons/pen.svg'
+import { Button, Icon, TextIcon } from '~/components'
 
 import AddCircleArticleDialog from './Dialog'
 
@@ -14,7 +15,7 @@ const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
       {({ openDialog: openAddCircleArticlesDialog }) => (
         <Button
           size={[null, '2rem']}
-          spacing={[0, 'tight']}
+          spacing={[0, 12]}
           textColor="gold"
           textActiveColor="white"
           bgActiveColor="gold"
@@ -23,7 +24,7 @@ const AddArticlesButton = ({ circle }: AddArticlesButtonProps) => {
           onClick={openAddCircleArticlesDialog}
           aria-haspopup="dialog"
         >
-          <TextIcon icon={<IconPen16 />} weight="md" size="mdS">
+          <TextIcon icon={<Icon icon={IconPen} />} weight="medium" size={15}>
             <FormattedMessage defaultMessage="Add Articles" id="k97/u7" />
           </TextIcon>
         </Button>

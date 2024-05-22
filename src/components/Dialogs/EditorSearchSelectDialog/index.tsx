@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 import { EditorSearchSelectFormProps } from '~/components/Forms/EditorSearchSelectForm'
 import { SelectNode } from '~/components/SearchSelect/SearchingArea'
 
@@ -13,7 +13,7 @@ type EditorSearchSelectDialogProps = Omit<
 
 const DynamicEditorSearchSelectForm = dynamic(
   () => import('~/components/Forms/EditorSearchSelectForm'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const BaseSearchSelectDialog = ({

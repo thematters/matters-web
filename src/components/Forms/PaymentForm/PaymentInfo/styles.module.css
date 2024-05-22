@@ -1,24 +1,27 @@
 .info {
-  margin-bottom: var(--spacing-base);
   text-align: center;
 }
 
 .to {
-  margin-bottom: var(--spacing-base);
-  font-size: var(--font-size-md-s);
+  margin-bottom: var(--sp16);
+  font-size: var(--text14);
 }
 
 .recipient {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
   color: var(--color-black);
 }
 
 .amount {
-  margin-top: var(--spacing-loose);
-  font-size: var(--font-size-xl);
-  line-height: 1;
+  margin: var(--sp24) 0;
+  font-size: var(--text36);
+  font-weight: var(--font-semibold);
+  line-height: 3rem;
 }
 
 .address {
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
+  margin-bottom: var(--sp24);
 }

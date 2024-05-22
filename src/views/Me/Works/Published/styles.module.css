@@ -1,9 +1,9 @@
 .hint {
   @mixin flex-center-space-between;
 
-  gap: var(--spacing-x-tight);
-  padding: var(--spacing-tight);
-  margin-top: var(--spacing-base);
+  gap: var(--sp8);
+  padding: var(--sp12);
+  margin-top: var(--sp16);
   background: var(--color-grey-lighter);
 
   @media (--sm-up) {
@@ -12,7 +12,7 @@
 
   & .left {
     position: relative;
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     line-height: 1.375rem;
     color: var(--color-grey);
 
@@ -21,7 +21,7 @@
 
       /* FIX: align text */
       top: 2px;
-      margin-right: var(--spacing-x-tight);
+      margin-right: var(--sp8);
     }
   }
 }
@@ -30,21 +30,21 @@
   @mixin hide-scrollbar;
 
   display: flex;
-  gap: var(--spacing-base);
-  padding: var(--spacing-base) var(--spacing-base) 0;
+  gap: var(--sp16);
+  padding: var(--sp16) var(--sp16) 0;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0 0;
+    padding: var(--sp16) 0 0;
   }
 
   & .tabItem {
     @mixin transition;
 
     flex-shrink: 0;
-    padding: var(--spacing-base-xxx-tight) var(--spacing-base-tight);
-    font-size: var(--font-size-sm);
+    padding: var(--sp5) var(--sp10);
+    font-size: var(--text14);
     font-feature-settings:
       'clig' off,
       'liga' off;
@@ -62,7 +62,7 @@
       display: block;
       height: 0;
       overflow: hidden;
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-semibold);
       color: transparent;
       visibility: hidden;
       content: attr(data-title);
@@ -73,7 +73,7 @@
     }
 
     &.active {
-      font-weight: var(--font-weight-semibold);
+      font-weight: var(--font-semibold);
       color: var(--color-white);
       background: var(--color-black);
     }

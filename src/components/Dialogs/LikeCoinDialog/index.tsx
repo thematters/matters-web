@@ -1,14 +1,14 @@
 import dynamic from 'next/dynamic'
 
 import { TEST_ID } from '~/common/enums'
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 interface LikeCoinDialogProps {
   children?: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseLikeCoinDialog: React.FC<LikeCoinDialogProps> = ({ children }) => {

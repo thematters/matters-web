@@ -1,11 +1,12 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
 import { PATHS } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
-  IconLikeCoin40,
+  Icon,
   TextIcon,
   Translate,
   ViewerContext,
@@ -24,9 +25,9 @@ type LikeCoinChoiceProps = {
 
 const IconLikeDisabled = () => (
   <TextIcon
-    icon={<IconLikeCoin40 size="xlM" color="grey" />}
-    size="md"
-    spacing="xtight"
+    icon={<Icon icon={IconLikeCoin} size={40} color="grey" />}
+    size={16}
+    spacing={8}
     color="grey"
   >
     LikeCoin
@@ -50,13 +51,13 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
         <IconLikeDisabled />
 
         <Button
-          spacing={[0, 'base']}
+          spacing={[0, 16]}
           size={[null, '1.5rem']}
           borderColor="green"
           borderRadius="5rem"
           href={PATHS.ME_SETTINGS_MISC}
         >
-          <TextIcon color="green" size="xs">
+          <TextIcon color="green" size={12}>
             <Translate
               zh_hant="綁定現有 Liker ID"
               zh_hans="绑定现有 Liker ID"
@@ -73,7 +74,7 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
       <section className={styles.item}>
         <IconLikeDisabled />
 
-        <TextIcon size="md" color="grey">
+        <TextIcon size={16} color="grey">
           <Translate
             zh_hant="作者尚未啟用"
             zh_hans="作者尚未启用"
@@ -90,7 +91,11 @@ const LikeCoinChoice: React.FC<LikeCoinChoiceProps> = ({
       className={`${styles.item} ${styles.clickable}`}
       onClick={switchToSetAmount}
     >
-      <TextIcon icon={<IconLikeCoin40 size="xlM" />} size="md" spacing="xtight">
+      <TextIcon
+        icon={<Icon icon={IconLikeCoin} size={40} />}
+        size={16}
+        spacing={8}
+      >
         LikeCoin
       </TextIcon>
 

@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
 
 import {
-  collapseContent,
   countChars,
   makeSummary,
   measureDiffs,
@@ -11,29 +10,24 @@ import {
 } from './article'
 
 describe('utils/text/article/stripHtml', () => {
-  it('should remove HTML tags and replace with spaces', () => {
-    expect(stripHtml('<p>Hello, <strong>world</strong>!</p>')).toBe(
-      ' Hello,  world ! '
-    )
+  it('should remove HTML tags', () => {
     expect(stripHtml('')).toBe('')
-  })
 
-  it('should remove HTML tags and replace with custom string', () => {
-    expect(stripHtml('<p>Hello, <strong>world</strong>!</p>', '-')).toBe(
-      '-Hello, -world-!-'
-    )
-    expect(stripHtml('<p>Hello, <strong>world</strong>!</p>', '')).toBe(
+    expect(stripHtml('<p>Hello, <strong>world</strong>!</p>')).toBe(
       'Hello, world!'
     )
-  })
-})
 
-describe('utils/text/article/collapseContent', () => {
-  it('should collapse content correctly', () => {
-    expect(collapseContent('<p>Hello, \n<strong>world</strong>!</p>')).toBe(
-      'Hello,world!'
+    expect(
+      stripHtml(
+        '<p>Hello, <strong>world</strong>!</p><p>Hello, <strong>world</strong>!</p><blockquote>Hello, <br>world!</blockquote>'
+      )
+    ).toBe('Hello, world!\nHello, world!\nHello, \nworld!')
+  })
+
+  it('should remove HTML tags and custom replacement', () => {
+    expect(stripHtml('<p>Hello, <strong>world</strong>!</p>', ' ')).toBe(
+      'Hello,  world !'
     )
-    expect(collapseContent('')).toBe('')
   })
 })
 

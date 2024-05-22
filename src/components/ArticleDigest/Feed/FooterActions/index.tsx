@@ -1,4 +1,7 @@
-import { CircleDigest, IconPaywall24, TextIcon } from '~/components'
+import { useContext } from 'react'
+
+import { ReactComponent as IconPaywall } from '@/public/static/icons/24px/paywall.svg'
+import { CircleDigest, Icon, TextIcon, ViewerContext } from '~/components'
 import { FooterActionsArticlePublicFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
@@ -28,6 +31,7 @@ const FooterActions = ({
   const {
     access: { circle },
   } = article
+  const viewer = useContext(ViewerContext)
 
   return (
     <footer className={styles.footer}>
@@ -42,16 +46,16 @@ const FooterActions = ({
           <TextIcon
             icon={
               article.access.type === 'paywall' ? (
-                <IconPaywall24 color="grey" size="sm" />
+                <Icon icon={IconPaywall} color="grey" size={14} />
               ) : null
             }
-            textPlacement="left"
-            spacing="xxtight"
+            placement="left"
+            spacing={4}
           >
             <CircleDigest.Title
               circle={circle}
               is="span"
-              textSize="xs"
+              textSize={12}
               textWeight="normal"
             />
           </TextIcon>
@@ -59,12 +63,14 @@ const FooterActions = ({
       </section>
 
       <section className={styles.right}>
-        <DropdownActions
-          article={article}
-          {...controls}
-          size="mdM"
-          inCard={true}
-        />
+        {viewer.isAuthed && (
+          <DropdownActions
+            article={article}
+            {...controls}
+            size={22}
+            inCard={true}
+          />
+        )}
       </section>
     </footer>
   )

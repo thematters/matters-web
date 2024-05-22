@@ -20,6 +20,6 @@ describe('<ArticleDigest.Notice>', () => {
     expect($summary).toBeInTheDocument()
 
     $digest.click()
-    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
   })
 })

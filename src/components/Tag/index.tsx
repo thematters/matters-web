@@ -3,15 +3,16 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { clampTag, toPath } from '~/common/utils'
-import { IconClose16, IconProps, TextIcon, TextIconProps } from '~/components'
+import { Icon, IconProps, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 interface TagProps {
   tag: DigestTagFragment
-  type?: 'list' | 'title' | 'inline' | 'plain'
+  type?: 'list' | 'article' | 'title' | 'inline' | 'plain'
   iconProps?: IconProps
   textIconProps?: TextIconProps
   active?: boolean
@@ -87,22 +88,28 @@ export const Tag = ({
         color: 'grey',
       }
       textIconProps = {
-        size: 'md',
+        size: 16,
         weight: 'normal',
-        spacing: 'xxtight',
+        spacing: 4,
         color: 'black',
       }
       break
     case 'title':
       iconProps = {
         color: 'white',
-        size: 'md',
+        size: 24,
       }
       textIconProps = {
-        size: 'lg',
-        weight: 'md',
+        size: 20,
+        weight: 'medium',
         spacing: 0,
         color: 'white',
+      }
+      break
+    case 'article':
+      textIconProps = {
+        size: 14,
+        weight: 'normal',
       }
       break
     case 'inline':
@@ -110,15 +117,15 @@ export const Tag = ({
         color: active ? 'green' : 'grey',
       }
       textIconProps = {
-        size: 'smS',
+        size: 13,
         weight: 'normal',
-        spacing: 'xxtight',
+        spacing: 4,
         color: active ? 'white' : 'greyDarker',
       }
       break
     case 'plain':
       textIconProps = {
-        size: 'xs',
+        size: 12,
         weight: 'normal',
         spacing: 0,
         color: 'green',
@@ -154,7 +161,7 @@ export const Tag = ({
             description: 'src/components/Tag/index.tsx',
           })}
         >
-          <IconClose16 color="grey" />
+          <Icon icon={IconTimes} color="grey" />
         </button>
       )}
 

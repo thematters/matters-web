@@ -1,6 +1,6 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   ACCEPTED_UPLOAD_MIGRATION_TYPES,
@@ -10,22 +10,17 @@ import {
   UPLOAD_FILE_COUNT_LIMIT,
   UPLOAD_MIGRATION_SIZE_LIMIT,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
 import {
   Dialog,
   LanguageContext,
   toast,
-  Translate,
   useMutation,
   ViewerContext,
 } from '~/components'
 import MIGRATION from '~/components/GQL/mutations/migration'
 import { MigrationMutation } from '~/gql/graphql'
 
-const texts: {
-  zh_hant: Record<string, string>
-  zh_hans: Record<string, string>
-} = {
+const texts = {
   zh_hant: {
     content:
       '選中想要搬家的作品檔案並上傳，目前一次最多支持上传 50 篇 HTML 档案。请特别注意区分作品档案和评论档案。搬家成功的作品會匯入你的草稿箱。',
@@ -51,13 +46,12 @@ const MigrationDialogUpload = ({
   nextStep,
   closeDialog,
 }: MigrationDialogUploadProps) => {
-  const { lang } = useContext(LanguageContext)
-
-  const { zh_hant, zh_hans } = texts
-  const acceptTypes = ACCEPTED_UPLOAD_MIGRATION_TYPES.join(',')
-
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
+  const acceptTypes = ACCEPTED_UPLOAD_MIGRATION_TYPES.join(',')
   const [migration, { loading }] = useMutation<MigrationMutation>(MIGRATION)
+  const language = lang === 'en' ? 'zh_hant' : lang
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -73,12 +67,7 @@ const MigrationDialogUpload = ({
 
     if (event.target.files.length > UPLOAD_FILE_COUNT_LIMIT) {
       toast.error({
-        message: (
-          <Translate
-            zh_hant={zh_hant.count_limit}
-            zh_hans={zh_hans.count_limit}
-          />
-        ),
+        message: texts[language].count_limit,
       })
       return
     }
@@ -109,9 +98,7 @@ const MigrationDialogUpload = ({
       })
 
       toast.success({
-        message: (
-          <Translate zh_hant={zh_hant.success} zh_hans={zh_hans.success} />
-        ),
+        message: texts[language].success,
       })
 
       nextStep()
@@ -126,9 +113,7 @@ const MigrationDialogUpload = ({
     <>
       <Dialog.Content>
         <Dialog.Content.Message>
-          <p>
-            <Translate zh_hant={zh_hant.content} zh_hans={zh_hans.content} />
-          </p>
+          <p>{texts[language].content}</p>
         </Dialog.Content.Message>
       </Dialog.Content>
 
@@ -137,9 +122,7 @@ const MigrationDialogUpload = ({
           closeDialog={closeDialog}
           btns={
             <Dialog.RoundedButton
-              text={
-                <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
-              }
+              text={texts[language].upload}
               loading={loading}
               onClick={() => {
                 const element = document.getElementById(fieldId)
@@ -151,9 +134,7 @@ const MigrationDialogUpload = ({
           }
           smUpBtns={
             <Dialog.TextButton
-              text={
-                <Translate zh_hant={zh_hant.upload} zh_hans={zh_hans.upload} />
-              }
+              text={texts[language].upload}
               loading={loading}
               onClick={() => {
                 const element = document.getElementById(fieldId)
@@ -170,11 +151,9 @@ const MigrationDialogUpload = ({
             id={fieldId}
             type="file"
             name="file"
-            aria-label={translate({
-              zh_hant: '上傳檔案',
-              zh_hans: '上传档案',
-              en: 'Upload file',
-              lang,
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Upload file',
+              id: '6oOCCL',
             })}
             accept={acceptTypes}
             multiple

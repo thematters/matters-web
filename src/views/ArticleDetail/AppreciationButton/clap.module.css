@@ -1,7 +1,6 @@
 .clap {
   &:hover {
-    & .iconLike,
-    & .iconSuperlike {
+    & .iconLike {
       will-change: transform;
       transition: transform 0.15s ease-in;
       transform: scale(1) !important;
@@ -13,8 +12,7 @@
   }
 
   &.clapHandZoomIn {
-    & .iconLike,
-    & .iconSuperlike {
+    & .iconLike {
       transform: scale(1.15) !important;
     }
   }

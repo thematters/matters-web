@@ -13,7 +13,7 @@ describe('<Comemnt/CreatedAt>', () => {
     expect($time).toBeInTheDocument()
 
     $time.click()
-    expect(mockRouter.asPath).toContain(MOCK_COMMENT.node.slug)
+    expect(mockRouter.asPath).toContain(MOCK_COMMENT.id)
   })
 
   it('should render a Comment/CreatedAt without link', () => {

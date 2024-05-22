@@ -3,18 +3,12 @@ import { Key, pathToRegexp } from 'path-to-regexp'
 
 import { PATHS, ROUTES } from '~/common/enums'
 
-import { UtmParams } from './analytics'
 import { fromGlobalId } from './globalId'
 import { slugifyTag } from './text'
 import { parseURL } from './url'
 
 interface ArticleArgs {
-  id?: string
-  slug: string
-  mediaHash?: string | null
-  author: {
-    userName?: string | null
-  }
+  shortHash: string
 }
 
 interface CircleArgs {
@@ -44,7 +38,10 @@ type ToPathArgs =
   | {
       page: 'articleDetail'
       article: ArticleArgs
+      collectionId?: string
     }
+  | { page: 'articleEdit'; article: ArticleArgs }
+  | { page: 'articleHistory'; article: ArticleArgs }
   | {
       page:
         | 'circleDetail'
@@ -89,8 +86,7 @@ type ToPathArgs =
  * (works on SSR & CSR)
  */
 export const toPath = (
-  args: ToPathArgs &
-    UtmParams & { fragment?: string; search?: { [key: string]: string } }
+  args: ToPathArgs & { fragment?: string; search?: { [key: string]: string } }
 ): {
   href: string
 } => {
@@ -99,25 +95,27 @@ export const toPath = (
 
   switch (args.page) {
     case 'articleDetail': {
-      const {
-        id,
-        slug,
-        mediaHash,
-        author: { userName },
-      } = args.article
+      const { shortHash } = args.article
 
-      href = `/@${userName}/${slug}-${mediaHash}`
+      href = `/a/${shortHash}`
 
-      try {
-        const { id: articleId } = fromGlobalId(id as string)
-        if (id && articleId) {
-          href = `/@${userName}/${articleId}-${slug}${
-            mediaHash ? '-' + mediaHash : ''
-          }`
-        }
-      } catch (err) {
-        // do nothing
+      if (args.collectionId) {
+        href = `${href}?collection=${args.collectionId}`
       }
+
+      break
+    }
+    case 'articleEdit': {
+      const { shortHash } = args.article
+
+      href = `/a/${shortHash}/edit`
+
+      break
+    }
+    case 'articleHistory': {
+      const { shortHash } = args.article
+
+      href = `/a/${shortHash}/history`
 
       break
     }
@@ -221,15 +219,7 @@ export const toPath = (
 
   // query string
   let searchParams: URLSearchParams = new URLSearchParams(
-    [
-      ['utm_source', args.utm_source as string],
-      ['utm_medium', args.utm_medium as string],
-      ['utm_campaign', args.utm_campaign as string],
-      ['utm_content', args.utm_content as string],
-      ['utm_id', args.utm_id as string],
-      ['utm_term', args.utm_term as string],
-      ...(Object.entries(search) as [string, string][]),
-    ].filter(([k, v]) => !!v)
+    [...(Object.entries(search) as [string, string][])].filter(([k, v]) => !!v)
   )
   if (searchParams.toString()) {
     href = `${href}?${searchParams.toString()}`
@@ -286,12 +276,6 @@ export const redirectToTarget = ({
  *
  * (works on CSR)
  */
-export const redirectToLogin = () => {
-  const target = getTarget() || getEncodedCurrent()
-
-  return Router.push(`${PATHS.LOGIN}?target=${target}`)
-}
-
 export const redirectToHomePage = () => {
   const target = getTarget() || getEncodedCurrent()
 

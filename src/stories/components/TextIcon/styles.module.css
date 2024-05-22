@@ -2,6 +2,6 @@
   & li {
     @mixin border-bottom-grey;
 
-    padding: var(--spacing-base);
+    padding: var(--sp16);
   }
 }

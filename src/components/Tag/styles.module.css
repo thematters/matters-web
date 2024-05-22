@@ -19,7 +19,7 @@
     bottom: 0;
     justify-content: flex-end;
     width: 3rem;
-    font-size: var(--font-size-md-s);
+    font-size: var(--text15);
     line-height: 1rem;
     color: var(--color-grey);
     text-align: right;
@@ -31,7 +31,7 @@
   line-height: 1.5rem;
 
   & svg {
-    margin-right: var(--spacing-xxx-tight);
+    margin-right: var(--sp2);
     opacity: 0.35;
   }
 }
@@ -40,7 +40,7 @@
   display: inline-flex;
   align-items: center;
   height: 1.25rem;
-  padding: 0 var(--spacing-x-tight) 0 var(--spacing-x-tight);
+  padding: 0 var(--sp8) 0 var(--sp8);
   line-height: 1.25rem;
   background: var(--color-grey-lighter);
   border-radius: 1.25rem;
@@ -75,7 +75,7 @@
     &:not(.disabled) {
       &:hover,
       &:focus {
-        background: var(--color-grey-lighter-active);
+        background: var(--color-grey-hover);
       }
     }
 
@@ -90,5 +90,32 @@
 
   & svg {
     opacity: 0.5;
+  }
+}
+
+.article {
+  @mixin transition;
+
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp5) var(--sp10) var(--sp5) var(--sp8);
+  color: var(--color-grey-darker);
+  background: var(--color-grey-lighter);
+  border-radius: 0.5rem;
+  transition-property: color, background;
+
+  & .name {
+    font-size: var(--text14);
+    line-height: 1.375rem; /* 22px */
+  }
+
+  &.active {
+    &:not(.disabled) {
+      &:hover,
+      &:focus {
+        color: var(--color-black);
+        background: var(--color-grey-hover);
+      }
+    }
   }
 }

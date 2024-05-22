@@ -12,7 +12,7 @@ import {
   Head,
   InfiniteScroll,
   List,
-  Spinner,
+  SpinnerBlock,
   Translate,
   usePublicQuery,
   useRoute,
@@ -59,7 +59,7 @@ const AggregateArticleResults = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {

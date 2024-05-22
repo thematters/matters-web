@@ -26,7 +26,7 @@ import styles from './styles.module.css'
  *   <UserDigest.Rich user={user} />
  */
 export type UserDigestRichProps = {
-  user: UserDigestRichUserPublicFragment &
+  user?: UserDigestRichUserPublicFragment &
     Partial<UserDigestRichUserPrivateFragment>
 
   size?: 'sm' | 'lg'
@@ -38,7 +38,7 @@ export type UserDigestRichProps = {
   hasState?: boolean
   canClamp?: boolean
 } & CardProps &
-  AvatarProps
+  Omit<AvatarProps, 'size'>
 
 const Rich = ({
   user,
@@ -54,10 +54,6 @@ const Rich = ({
 
   ...cardProps
 }: UserDigestRichProps) => {
-  const path = toPath({
-    page: 'userProfile',
-    userName: user.userName || '',
-  })
   const isArchived = user?.status?.state === 'archived'
   const containerClasses = classNames({
     [styles.container]: true,
@@ -71,10 +67,10 @@ const Rich = ({
     [styles.archived]: isArchived,
   })
 
-  if (isArchived) {
+  if (isArchived || !user) {
     return (
       <Card
-        spacing={['tight', 'tight']}
+        spacing={[12, 12]}
         bgActiveColor="none"
         {...cardProps}
         onClick={undefined}
@@ -82,7 +78,7 @@ const Rich = ({
       >
         <section className={containerClasses}>
           <span className={styles.avatar}>
-            <Avatar size={size === 'sm' ? 'lg' : 'xl'} />
+            <Avatar size={size === 'sm' ? 32 : 48} />
           </span>
 
           <section className={contentClasses}>
@@ -91,16 +87,23 @@ const Rich = ({
                 className={styles.name}
                 data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
               >
-                <FormattedMessage
-                  defaultMessage="Account Archived"
-                  id="YS8YSV"
-                />
+                {user ? (
+                  <FormattedMessage
+                    defaultMessage="Account Archived"
+                    id="YS8YSV"
+                  />
+                ) : (
+                  <FormattedMessage
+                    defaultMessage="Anonymous User"
+                    id="GclYG/"
+                  />
+                )}
               </span>
             </header>
           </section>
 
           <section className={styles.extraButton}>
-            {hasFollow && <FollowUserButton user={user} />}
+            {hasFollow && user && <FollowUserButton user={user} />}
             {extraButton}
           </section>
         </section>
@@ -108,10 +111,15 @@ const Rich = ({
     )
   }
 
+  const path = toPath({
+    page: 'userProfile',
+    userName: user.userName || '',
+  })
+
   return (
     <Card
       {...path}
-      spacing={['tight', 'tight']}
+      spacing={[12, 12]}
       bgActiveColor="none"
       {...cardProps}
       testId={TEST_ID.DIGEST_USER_RICH}
@@ -122,7 +130,7 @@ const Rich = ({
             <VisuallyHidden>
               <span>{user.displayName}</span>
             </VisuallyHidden>
-            <Avatar size={size === 'sm' ? 'lg' : 'xl'} user={user} />
+            <Avatar size={size === 'sm' ? 32 : 48} user={user} />
             {avatarBadge && <span className={styles.badge}>{avatarBadge}</span>}
           </a>
         </Link>
@@ -168,9 +176,9 @@ const MemoizedRich = React.memo(
   Rich,
   ({ user: prevUser, ...prevProps }, { user, ...props }) => {
     return (
-      prevUser.id === user.id &&
-      prevUser.isFollowee === user.isFollowee &&
-      prevUser.isFollower === user.isFollower &&
+      prevUser?.id === user?.id &&
+      prevUser?.isFollowee === user?.isFollowee &&
+      prevUser?.isFollower === user?.isFollower &&
       prevProps.extraButton === props.extraButton
     )
   }

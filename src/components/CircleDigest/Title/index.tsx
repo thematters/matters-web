@@ -8,8 +8,8 @@ import { DigestTitleCircleFragment } from '~/gql/graphql'
 import { fragments } from './gql'
 import styles from './styles.module.css'
 
-export type CircleDigestTitleTextSize = 'xs' | 'md'
-export type CircleDigestTitleTextWeight = 'normal' | 'md'
+export type CircleDigestTitleTextSize = 12 | 16
+export type CircleDigestTitleTextWeight = 'normal' | 'medium'
 export type CircleDigestTitleIs = 'h2' | 'span'
 
 type CircleDigestTitleProps = {
@@ -26,8 +26,8 @@ type CircleDigestTitleProps = {
 const CircleDigestTitle = ({
   circle,
 
-  textSize = 'md',
-  textWeight = 'md',
+  textSize = 16,
+  textWeight = 'medium',
   is = 'h2',
 
   disabled,
@@ -40,8 +40,8 @@ const CircleDigestTitle = ({
   })
   const titleClasses = classNames({
     [styles.title]: is === 'h2',
-    [styles[`textSize${capitalizeFirstLetter(textSize)}`]]: !!textSize,
-    [styles[`textWeight${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
+    [styles[`text${textSize}`]]: !!textSize,
+    [styles[`font${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
   })
 
   return (

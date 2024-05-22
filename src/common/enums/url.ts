@@ -2,10 +2,6 @@ export const URL_FRAGMENT = {
   COMMENTS: 'comments',
 }
 
-export const URL_QS = {
-  MODE_EDIT: { key: 'mode', value: 'edit' },
-}
-
 export const URL_USER_PROFILE = {
   OPEN_NOMAD_BADGE_DIALOG: { key: 'dialog', value: 'nomad-badge' },
 }

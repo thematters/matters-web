@@ -11,7 +11,7 @@ export const fragments = {
       state
       title
       slug
-      mediaHash
+      shortHash
       cover
       summary
       author {

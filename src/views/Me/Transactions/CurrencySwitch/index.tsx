@@ -1,12 +1,6 @@
+import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
-import {
-  Button,
-  Dropdown,
-  IconArrowDown16,
-  Menu,
-  TextIcon,
-  Translate,
-} from '~/components'
+import { Button, Dropdown, Icon, Menu, TextIcon, Translate } from '~/components'
 
 export enum Currency {
   ALL = 'ALL',
@@ -69,8 +63,8 @@ export const CurrencySwitch: React.FC<CurrencySwitchProps> = ({
       {({ openDropdown, ref }) => (
         <Button onClick={openDropdown} aria-haspopup="listbox" ref={ref}>
           <TextIcon
-            icon={<IconArrowDown16 />}
-            textPlacement="left"
+            icon={<Icon icon={IconDown} />}
+            placement="left"
             color="grey"
           >
             {currency === Currency.ALL ? (

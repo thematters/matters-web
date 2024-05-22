@@ -1,14 +1,14 @@
 .container {
   & .header {
-    margin-bottom: var(--spacing-x-tight);
+    margin-bottom: var(--sp8);
   }
 
   & .content {
     @mixin border-left-grey;
     @mixin line-clamp;
 
-    padding-left: var(--spacing-tight);
-    font-size: var(--font-size-md);
+    padding-left: var(--sp12);
+    font-size: var(--text16);
     color: var(--color-grey);
     text-overflow: ellipsis;
     border-left-width: 3px;

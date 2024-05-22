@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 import { TEST_ID } from '~/common/enums'
 import { analytics, isMobile } from '~/common/utils'
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 import { ShareDialogContentProps } from './Content'
 
@@ -31,7 +31,7 @@ type BaseShareDialogProps = {
 
 const DynamicContent = dynamic(() => import('./Content'), {
   ssr: false,
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseShareDialog = ({

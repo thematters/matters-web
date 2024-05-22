@@ -1,14 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
-import {
-  IconCircleMinus20,
-  IconNavCreate32,
-  IconReset20,
-  IconSpinner22,
-  IconUnPin24,
-  Menu,
-} from '~/components'
+import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
+import { ReactComponent as IconLTime } from '@/public/static/icons/24px/l-time.svg'
+import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
+import { ReactComponent as IconReset } from '@/public/static/icons/24px/reset.svg'
+import { Icon, Menu, Spinner } from '~/components'
 import { ArticleRecommendAdminQuery } from '~/gql/graphql'
 
 import { OpenToggleRecommendArticleDialogWithProps } from './Dialog'
@@ -56,7 +53,7 @@ const RecommendArticleButton: React.FC<RecommendArticleButtonProps> = ({
   )
 
   if (loading) {
-    return <Menu.Item icon={<IconSpinner22 size="mdS" />} text="正在加載中…" />
+    return <Menu.Item icon={<Spinner size={20} />} text="正在加載中…" />
   }
 
   if (data?.article?.__typename !== 'Article') return null
@@ -72,15 +69,14 @@ const RecommendArticleButton: React.FC<RecommendArticleButtonProps> = ({
     hottestAndNewest: ['撤銷移出', '移出熱門與最新'],
   }
   const icons = {
-    icymi: [IconNavCreate32, IconCircleMinus20],
-    hottestAndNewest: [IconReset20, IconUnPin24],
+    icymi: [IconNavCreate, IconCircleMinus],
+    hottestAndNewest: [IconReset, IconLTime],
   }
-  const IconComp = icons[type][+enabled]
 
   return (
     <Menu.Item
       text={texts[type][+enabled]}
-      icon={<IconComp size="mdS" />}
+      icon={<Icon icon={icons[type][+enabled]} size={20} />}
       onClick={() => {
         openDialog({ type, enabled })
       }}

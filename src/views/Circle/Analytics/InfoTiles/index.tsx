@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { ReactComponent as IconAnalyticsChangeArrow12 } from '@/public/static/icons/12px/analytics-change-arrow.svg'
+import { ReactComponent as IconAnalyticsChangeArrow12 } from '@/public/static/icons/analytics-change-arrow.svg'
 import { numRound } from '~/common/utils'
 import { TextIcon, withIcon } from '~/components'
 
@@ -64,9 +64,9 @@ const InfoTilesTile: React.FC<InfoTilesTileProps> = ({
         {change ? (
           <span className={changeClasses}>
             <TextIcon
-              icon={withIcon(IconAnalyticsChangeArrow12)({ size: 'xs' })}
-              size="xs"
-              spacing="xxxtight"
+              icon={withIcon(IconAnalyticsChangeArrow12)({ size: 12 })}
+              size={12}
+              spacing={2}
             >
               {numRound(change)}%
             </TextIcon>

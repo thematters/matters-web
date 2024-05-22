@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { OPEN_SET_USER_NAME_DIALOG } from '~/common/enums'
 import {
   Dialog,
-  Spinner,
+  SpinnerBlock,
   useDialogSwitch,
   useEventListener,
 } from '~/components'
@@ -13,7 +13,7 @@ interface SetUserNameDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseSetUserNameDialog = ({ children }: SetUserNameDialogProps) => {

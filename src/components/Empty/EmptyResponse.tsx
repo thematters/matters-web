@@ -1,4 +1,5 @@
-import { Empty, IconComment16, Translate } from '~/components'
+import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyResponse = ({
   articleOnlyMode,
@@ -7,7 +8,7 @@ export const EmptyResponse = ({
 }) => {
   return (
     <Empty
-      icon={<IconComment16 size="xxl" />}
+      icon={<Icon icon={IconComment} size={64} />}
       description={
         articleOnlyMode ? (
           <Translate

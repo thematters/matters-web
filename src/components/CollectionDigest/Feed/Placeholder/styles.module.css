@@ -9,6 +9,6 @@
   }
 
   & + & {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--sp8);
   }
 }

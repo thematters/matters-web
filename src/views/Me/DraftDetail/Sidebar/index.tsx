@@ -27,7 +27,7 @@ interface BaseSidebarProps {
 type SidebarProps = BaseSidebarProps & { disabled: boolean }
 
 const EditDraftCollection = ({ draft, disabled }: SidebarProps) => {
-  const { edit, saving } = useEditDraftCollection(draft)
+  const { edit, saving } = useEditDraftCollection()
   const articles = draft?.collection?.edges?.map(({ node }) => node) || []
 
   return (
@@ -41,7 +41,7 @@ const EditDraftCollection = ({ draft, disabled }: SidebarProps) => {
 }
 
 const EditDraftCover = ({ draft, disabled }: SidebarProps) => {
-  const { edit, refetch, saving } = useEditDraftCover(draft)
+  const { edit, refetch, saving } = useEditDraftCover()
 
   return (
     <Sidebar.Cover
@@ -58,7 +58,7 @@ const EditDraftCover = ({ draft, disabled }: SidebarProps) => {
 }
 
 const EditDraftTags = ({ draft, disabled }: SidebarProps) => {
-  const { edit, saving } = useEditDraftTags(draft)
+  const { edit, saving } = useEditDraftTags()
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
 
   return (
@@ -72,19 +72,15 @@ const EditDraftTags = ({ draft, disabled }: SidebarProps) => {
 }
 
 const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
-  const { edit, saving } = useEditDraftAccess(
-    draft,
-    ownCircles && ownCircles[0]
-  )
+  const { edit, saving } = useEditDraftAccess(ownCircles && ownCircles[0])
 
-  const { edit: editSupport, saving: supportSaving } =
-    useEditSupportSetting(draft)
+  const { edit: editSupport, saving: supportSaving } = useEditSupportSetting()
 
   const { edit: togglePublishISCN, saving: iscnPublishSaving } =
-    useEditDraftPublishISCN(draft)
+    useEditDraftPublishISCN()
 
   const { edit: toggleContentSensitive, saving: contentSensitiveSaving } =
-    useEditDraftSensitiveByAuthor(draft)
+    useEditDraftSensitiveByAuthor()
 
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
 
@@ -119,7 +115,7 @@ const EditDraftCircle = ({ draft, ownCircles }: SidebarProps) => {
 }
 
 const EditDraftResponse = ({ draft }: SidebarProps) => {
-  const { edit: toggleComment } = useEditDraftCanComment(draft)
+  const { edit: toggleComment } = useEditDraftCanComment()
   const canComment = draft.canComment
 
   return (

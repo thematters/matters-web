@@ -1,10 +1,11 @@
 import { useContext } from 'react'
 
+import { ReactComponent as IconWorld } from '@/public/static/icons/24px/world.svg'
 import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 import {
   Button,
   Dropdown,
-  IconWorld16,
+  Icon,
   LanguageConsumer,
   LanguageContext,
   Menu,
@@ -58,7 +59,7 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
   const { lang } = useContext(LanguageContext)
 
   const iconColor = bgColor === 'greyDarkest' ? 'white' : 'grey'
-  const textSize = size === 'sm' ? 'xs' : 'md'
+  const textSize = size === 'sm' ? 12 : 16
 
   return (
     <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG}>
@@ -66,12 +67,16 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
         <Button
           onClick={openDropdown}
           size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
-          spacing={size === 'sm' ? [0, 0] : [0, 'xtight']}
+          spacing={size === 'sm' ? [0, 0] : [0, 8]}
           bgColor={bgColor}
           aria-haspopup="listbox"
           ref={ref}
         >
-          <TextIcon icon={<IconWorld16 />} size={textSize} color={iconColor}>
+          <TextIcon
+            icon={<Icon icon={IconWorld} />}
+            size={textSize}
+            color={iconColor}
+          >
             {LANG_TEXT_MAP[lang]}
           </TextIcon>
         </Button>

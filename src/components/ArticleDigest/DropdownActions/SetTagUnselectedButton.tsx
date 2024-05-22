@@ -3,7 +3,8 @@ import _filter from 'lodash/filter'
 import _get from 'lodash/get'
 import { FormattedMessage } from 'react-intl'
 
-import { IconUnSelected20, Menu, toast, useMutation } from '~/components'
+import { ReactComponent as IconLTime } from '@/public/static/icons/24px/l-time.svg'
+import { Icon, Menu, toast, useMutation } from '~/components'
 import {
   SetTagUnselectedButtonArticleFragment,
   SetTagUnselectedMutation,
@@ -115,7 +116,7 @@ const SetTagUnselectedButton = ({
           description="src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
         />
       }
-      icon={<IconUnSelected20 size="mdS" />}
+      icon={<Icon icon={IconLTime} size={20} />}
       onClick={async () => {
         await update()
       }}

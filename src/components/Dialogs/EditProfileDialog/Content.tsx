@@ -19,7 +19,6 @@ import {
   CoverUploader,
   Dialog,
   Form,
-  LanguageContext,
   toast,
   useMutation,
   ViewerContext,
@@ -72,14 +71,10 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     undefined,
     { showToast: false }
   )
-  const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
-
   const formId = 'edit-profile-form'
-
   const intl = useIntl()
-
-  const validateDescription = (value: string, lang: Language) => {
+  const validateDescription = (value: string) => {
     if (value.length > MAX_USER_DESCRIPTION_LENGTH) {
       return intl.formatMessage(
         {
@@ -114,8 +109,8 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ displayName, description }) =>
       _pickBy({
-        displayName: validateDisplayName(displayName, lang, viewer.isAdmin),
-        description: validateDescription(description, lang),
+        displayName: validateDisplayName(displayName, intl, viewer.isAdmin),
+        description: validateDescription(description),
       }),
     onSubmit: async (
       { avatar, profileCover, displayName, description },

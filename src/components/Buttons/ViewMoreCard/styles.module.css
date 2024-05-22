@@ -1,6 +1,6 @@
 .viewMoreCard {
   /* border: 1px solid var(--color-matters-green);
-  border-radius: var(--spacing-loose); */
+  border-radius: var(--sp24); */
 
   &.left {
     text-align: left;

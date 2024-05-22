@@ -3,19 +3,17 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { toPath } from '~/common/utils'
-import { Avatar } from '~/components/Avatar'
+import { Avatar, AvatarSize } from '~/components/Avatar'
 import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-export type size = 'md' | 'lg'
-
 export const NoticeActorAvatar = ({
   user,
-  size = 'lg',
+  size = 32,
 }: {
   user: NoticeActorAvatarUserFragment | null
-  size?: size
+  size?: AvatarSize
 }) => {
   if (!user) {
     return null

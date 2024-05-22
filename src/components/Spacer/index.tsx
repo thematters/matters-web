@@ -2,6 +2,7 @@ import styles from './styles.module.css'
 
 interface SpacerProps {
   size?:
+    | 'xxtight'
     | 'xtight'
     | 'base'
     | 'baseLoose'

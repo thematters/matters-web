@@ -1,14 +1,7 @@
 import classNames from 'classnames'
 import Sticky from 'react-stickynode'
 
-import {
-  Head,
-  Media,
-  PullToRefresh,
-  SearchBar,
-  usePullToRefresh,
-  useRoute,
-} from '~/components'
+import { Head, Media, SearchBar, useRoute } from '~/components'
 
 import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
@@ -30,6 +23,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
+  const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
   return (
     <>
@@ -37,19 +31,21 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
       <div className={styles.container}>
         <main className={styles.main}>
-          <nav role="navigation" className={styles.sidenav}>
-            <section className={styles.sideNavContent}>
-              <Media greaterThan="sm">
-                <SideNav />
-              </Media>
-            </section>
-          </nav>
+          {!isInArticleDetailHistory && (
+            <nav role="navigation" className={styles.sidenav}>
+              <section className={styles.sideNavContent}>
+                <Media greaterThan="sm">
+                  <SideNav />
+                </Media>
+              </section>
+            </nav>
+          )}
 
           {children}
         </main>
       </div>
 
-      {!isInDraftDetail && !isInArticleDetail && (
+      {!isInDraftDetail && !isInArticleDetail && !isInArticleDetailHistory && (
         <Media at="sm">
           <footer>
             <NavBar />
@@ -62,46 +58,50 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
 interface MainProps {
   aside?: React.ReactNode
-  inEditor?: boolean
+  showAside?: boolean
 }
 
 const Main: React.FC<React.PropsWithChildren<MainProps>> & {
   Spacing: typeof Spacing
-} = ({ aside, inEditor, children }) => {
+} = ({ aside, showAside = true, children }) => {
   const { isInPath } = useRoute()
+  const isInEditor =
+    isInPath('ARTICLE_DETAIL_EDIT') || isInPath('ME_DRAFT_DETAIL')
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
   const articleClasses = classNames({
     [styles.article]: true,
     [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
   })
 
-  usePullToRefresh.Register('#ptr')
-  usePullToRefresh.Handler(() => window.location.reload())
+  const enbableSticky = !isInArticleDetailHistory
 
   return (
     <>
-      <article id="ptr" className={articleClasses}>
-        <PullToRefresh>{children}</PullToRefresh>
-      </article>
+      <article className={articleClasses}>{children}</article>
 
-      <aside className={styles.aside}>
-        <Media greaterThanOrEqual="lg">
-          <Sticky enabled top={0}>
-            <section className={styles.content}>
-              <section className={styles.top}>
-                {!inEditor && <SearchBar />}
+      {showAside && (
+        <aside className={styles.aside}>
+          <Media greaterThanOrEqual="lg">
+            <Sticky enabled={enbableSticky} top={0} enableTransforms={false}>
+              <section className={styles.content}>
+                <section className={styles.top}>
+                  {!isInEditor && !isInArticleDetailHistory && <SearchBar />}
 
-                {aside}
+                  {aside}
+                </section>
+
+                {!isInEditor && !isInSettings && !isInArticleDetailHistory && (
+                  <SideFooter />
+                )}
               </section>
-
-              {!inEditor && !isInSettings && <SideFooter />}
-            </section>
-          </Sticky>
-        </Media>
-      </aside>
+            </Sticky>
+          </Media>
+        </aside>
+      )}
     </>
   )
 }

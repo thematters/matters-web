@@ -1,4 +1,6 @@
 import NextHead from 'next/head'
+import type { NextSeoProps } from 'next-seo'
+import { NextSeo } from 'next-seo'
 import { useContext } from 'react'
 
 import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
@@ -32,26 +34,30 @@ interface HeadProps {
   availableLanguages?: UserLanguage[]
 }
 
+// @see NextSeoProps[languageAlternatives], tho this is readonly so making it mutable
+// is kind of a hassle (doable but a bit much)
+type LocalAlternativeLang = {
+  hrefLang: string
+  href: string
+}
+
 export const Head: React.FC<HeadProps> = (props) => {
   const { router } = useRoute()
   const { lang } = useContext(LanguageContext)
   const title = props.title
 
-  const head = {
-    title: title ? (props.noSuffix ? title : `${title} - Matters`) : 'Matters',
-    description:
-      props.description ||
-      'Matters 致力搭建去中心化的寫作社群與內容生態。基於 IPFS 技術，令創作不受制於任何平台，獨立性得到保障；引入加密貨幣，以收入的形式回饋給作者；代碼開源，建立創作者自治社區。',
-    keywords: props.keywords
-      ? `${props.keywords.join(',')},matters,${
-          process.env.NEXT_PUBLIC_SITE_DOMAIN
-        },創作有價`
-      : `matters,${process.env.NEXT_PUBLIC_SITE_DOMAIN},創作有價`,
-    url: props.path
-      ? `https://${siteDomain}${props.path}`
-      : `https://${siteDomain}${router.asPath || '/'}`,
-    image: props.image || IMAGE_INTRO.src,
-  }
+  // seo base metadata
+  const seoTitle = title
+    ? props.noSuffix
+      ? title
+      : `${title} - Matters`
+    : 'Matters'
+  const seoDescription =
+    props.description ||
+    'Matters 致力搭建去中心化的寫作社群與內容生態。基於 IPFS 技術，令創作不受制於任何平台，獨立性得到保障；引入加密貨幣，以收入的形式回饋給作者；代碼開源，建立創作者自治社區。'
+  const url = props.path
+    ? `https://${siteDomain}${props.path}`
+    : `https://${siteDomain}${router.asPath || '/'}`
 
   const i18nUrl = (language: string) => {
     return props.path
@@ -59,177 +65,177 @@ export const Head: React.FC<HeadProps> = (props) => {
       : `https://${siteDomain}/${router.asPath || '/'}?locale=${language}`
   }
 
-  if (props.jsonLdData && !props.jsonLdData.description) {
-    props.jsonLdData.description = head.description
+  const getLocalLang = (props: HeadProps): LocalAlternativeLang[] => {
+    if (props.availableLanguages) {
+      const alternativeLanguages: LocalAlternativeLang[] = []
+      for (const lang of props.availableLanguages) {
+        // we only want these 3 languages so far
+        if (
+          lang === UserLanguage.En ||
+          lang === UserLanguage.ZhHans ||
+          lang === UserLanguage.ZhHant
+        ) {
+          alternativeLanguages.push({
+            href: i18nUrl(lang),
+            hrefLang: toLocale(lang),
+          })
+        }
+      }
+      return alternativeLanguages
+    }
+    return []
   }
 
-  const canonicalUrl = head.url?.split('#')[0].split('?')[0]
+  // next-seo config
+  const seoConfig: NextSeoProps = {
+    title: seoTitle,
+    description: seoDescription,
+    canonical: url?.split('#')[0].split('?')[0],
+    noindex: !isProdServingCanonical,
+    nofollow: !isProdServingCanonical,
+    facebook: { appId: process.env.NEXT_PUBLIC_FB_APP_ID || '' },
+    themeColor: '#fff',
+    // twitter uses og:* for twitter:* unless otherwise specified by next-seo docs
+    openGraph: {
+      title: seoTitle,
+      siteName: 'Matters',
+      url,
+      type: 'website',
+      images: [{ url: props.image || IMAGE_INTRO.src }],
+      description: seoDescription,
+      locale: toOGLanguage(lang),
+    },
+    twitter: {
+      cardType: 'summary_large_image',
+    },
+    // localization
+    languageAlternates: [
+      ...getLocalLang(props),
+      {
+        hrefLang: 'x-default',
+        href: url,
+      },
+    ],
+    // non-conventional tags for next-seo
+    additionalMetaTags: [
+      {
+        name: 'keywords',
+        content: props.keywords
+          ? `${props.keywords.join(',')},matters,${
+              process.env.NEXT_PUBLIC_SITE_DOMAIN
+            },創作有價`
+          : `matters,${process.env.NEXT_PUBLIC_SITE_DOMAIN},創作有價`,
+      },
+      {
+        name: 'viewport',
+        content:
+          'minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover',
+      },
+      {
+        name: 'application-name',
+        content: 'Matters',
+      },
+      {
+        name: 'apple-mobile-web-app-title',
+        content: 'Matters',
+      },
+      {
+        name: 'apple-mobile-web-app-status-bar-style',
+        content: 'default',
+      },
+      {
+        name: 'apple-mobile-web-app-capable',
+        content: 'yes',
+      },
+      {
+        name: 'mobile-web-app-capable',
+        content: 'yes',
+      },
+      {
+        name: 'format-detection',
+        content: 'telephone=no',
+      },
+    ],
+    additionalLinkTags: [
+      {
+        rel: 'icon',
+        href: IMAGE_FAVICON_32.src,
+        sizes: '32x32',
+        type: 'image/png',
+        keyOverride: 'favicon-32',
+      },
+      {
+        rel: 'icon',
+        href: IMAGE_FAVICON_64.src,
+        sizes: '64x64',
+        type: 'image/png',
+        keyOverride: 'favicon-64',
+      },
+      {
+        // Note: With the attribute key, dapp can't get the shortcut icon.
+        // key: "favicon-128"
+        rel: 'shortcut icon',
+        href: IMAGE_FAVICON_128.src,
+        sizes: '128x128',
+        type: 'image/png',
+      },
+      {
+        rel: 'apple-touch-icon',
+        href: IMAGE_APPLE_TOUCH_ICON.src,
+      },
+      {
+        rel: 'manifest',
+        href: '/manifest.json',
+      },
+      {
+        rel: 'dns-prefetch',
+        href: 'https://www.gstatic.com',
+      },
+      {
+        rel: 'dns-prefetch',
+        href: 'https://sentry.matters.one',
+      },
+    ],
+  }
+
+  if (props.jsonLdData && !props.jsonLdData.description) {
+    props.jsonLdData.description = seoConfig.description
+  }
 
   return (
-    <NextHead>
-      <meta charSet="utf-8" key="charSet" />
-      <meta
-        name="viewport"
-        key="viewport"
-        content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, user-scalable=no, viewport-fit=cover"
-      />
-      <title>{head.title}</title>
-      <meta name="description" key="description" content={head.description} />
-      <meta name="keywords" key="keywords" content={head.keywords} />
-      <link
-        rel="icon"
-        type="image/png"
-        href={IMAGE_FAVICON_32.src}
-        sizes="32x32"
-        key="favicon-32"
-      />
-      <link
-        rel="icon"
-        type="image/png"
-        href={IMAGE_FAVICON_64.src}
-        sizes="64x64"
-        key="favicon-64"
-      />
-      <link
-        rel="shortcut icon"
-        type="image/png"
-        href={IMAGE_FAVICON_128.src}
-        sizes="128x128"
-        // Note: With the attribute key, dapp can't get the shortcut icon.
-        // key="favicon-128"
-      />
-      <link
-        rel="search"
-        title="Matters"
-        href="/opensearch.xml"
-        type="application/opensearchdescription+xml"
-        key="opensearch"
-      />
-      {props.path && (
-        <link rel="canonical" href={canonicalUrl} key="canonical" />
-      )}
-      {props.paymentPointer && (
-        <meta name="monetization" content={props.paymentPointer} />
-      )}
-
-      {/* noindex for non-production enviroment */}
-      {!isProdServingCanonical && (
-        <meta name="robots" content="noindex, nofollow" key="robots" />
-      )}
-      {!isProdServingCanonical && (
-        <meta name="googlebot" content="noindex, nofollow" key="googlebot" />
-      )}
-
-      {/* social */}
-      <meta property="fb:app_id" content={process.env.NEXT_PUBLIC_FB_APP_ID} />
-      <meta name="og:title" key="og:title" content={head.title} />
-      <meta property="og:site_name" key="og:site_name" content="Matters" />
-      <meta property="og:url" key="og:url" content={head.url} />
-      <meta property="og:type" key="og:type" content="website" />
-      <meta property="og:image" key="og:image" content={head.image} />
-      <meta
-        property="og:description"
-        key="og:description"
-        content={head.description}
-      />
-      <meta property="og:locale" key="og:locale" content={toOGLanguage(lang)} />
-      <meta name="twitter:url" key="twitter:url" content={head.url} />
-      <meta
-        name="twitter:card"
-        key="twitter:card"
-        content="summary_large_image"
-      />
-      <meta name="twitter:title" key="twitter:title" content={head.title} />
-      <meta
-        name="twitter:description"
-        key="twitter:description"
-        content={head.description}
-      />
-      <meta name="twitter:image" key="twitter:image" content={head.image} />
-
-      {/* i18n */}
-      {props.availableLanguages?.includes(UserLanguage.En) && (
+    <>
+      <NextSeo {...seoConfig} />
+      {/** for the ones that next-seo does not support, we still need to add them with next/head, see: https://github.com/garmeeh/next-seo/issues/265#issuecomment-610216521 */}
+      <NextHead>
+        <meta charSet="utf-8" key="charSet" />
         <link
-          rel="alternate"
-          hrefLang={toLocale(UserLanguage.En)}
-          href={i18nUrl(toLocale(UserLanguage.En))}
-          key={`alternate:${UserLanguage.En}`}
+          rel="search"
+          title="Matters"
+          href="/opensearch.xml"
+          type="application/opensearchdescription+xml"
+          key="opensearch"
         />
-      )}
-      {props.availableLanguages?.includes(UserLanguage.ZhHans) && (
-        <link
-          rel="alternate"
-          hrefLang={toLocale(UserLanguage.ZhHans)}
-          href={i18nUrl(toLocale(UserLanguage.ZhHans))}
-          key={`alternate:${UserLanguage.ZhHans}`}
-        />
-      )}
-      {props.availableLanguages?.includes(UserLanguage.ZhHant) && (
-        <link
-          rel="alternate"
-          hrefLang={toLocale(UserLanguage.ZhHant)}
-          href={i18nUrl(toLocale(UserLanguage.ZhHant))}
-          key={`alternate:${UserLanguage.ZhHant}`}
-        />
-      )}
-      <link
-        rel="alternate"
-        hrefLang="x-default"
-        href={head.url}
-        key={`alternate:x-default`}
-      />
-
-      {/* PWA */}
-      <link
-        rel="apple-touch-icon"
-        key="apple-touch-icon"
-        href={IMAGE_APPLE_TOUCH_ICON.src}
-      />
-      <meta name="application-name" key="application-name" content="Matters" />
-      <meta name="theme-color" key="theme-color" content="#fff" />
-      <meta
-        name="apple-mobile-web-app-title"
-        key="apple-mobile-web-app-title"
-        content="Matters"
-      />
-      <meta
-        name="apple-mobile-web-app-status-bar-style"
-        key="apple-mobile-web-app-status-bar-style"
-        content="default"
-      />
-      <meta
-        name="apple-mobile-web-app-capable"
-        key="apple-mobile-web-app-capable"
-        content="yes"
-      />
-      <meta
-        name="mobile-web-app-capable"
-        key="mobile-web-app-capable"
-        content="yes"
-      />
-
-      <link rel="manifest" key="manifest" href="/manifest.json" />
-
-      <meta
-        name="format-detection"
-        key="format-detection"
-        content="telephone=no"
-      />
-
-      {/* DNS */}
-      <link rel="dns-prefetch" href="https://www.gstatic.com" />
-      <link rel="dns-prefetch" href="https://sentry.matters.one" />
-
-      {props.jsonLdData && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: sanitize(JSON.stringify(props.jsonLdData)),
-          }}
-          key="ld-json-data"
-        />
-      )}
-    </NextHead>
+        {props.jsonLdData && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: sanitize(JSON.stringify(props.jsonLdData)),
+            }}
+            key="ld-json-data"
+          />
+        )}
+        {props.paymentPointer && (
+          <meta name="monetization" content={props.paymentPointer} />
+        )}
+        {/* noindex for non-production enviroment */}
+        {!isProdServingCanonical && (
+          <meta name="robots" content="noindex, nofollow" key="robots" />
+        )}
+        {!isProdServingCanonical && (
+          <meta name="googlebot" content="noindex, nofollow" key="googlebot" />
+        )}
+      </NextHead>
+    </>
   )
 }
 

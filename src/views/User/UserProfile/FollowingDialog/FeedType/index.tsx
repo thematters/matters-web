@@ -2,6 +2,8 @@ import { Tabs, Translate } from '~/components'
 
 export type FollowingFeedType = 'user' | 'circle' | 'tag'
 
+import { FormattedMessage } from 'react-intl'
+
 import styles from './styles.module.css'
 
 interface FeedTypeProps {
@@ -26,7 +28,7 @@ const FeedType = ({ type, setFeedType }: FeedTypeProps) => {
         </Tabs.Tab>
 
         <Tabs.Tab onClick={() => setFeedType('tag')} selected={isTag}>
-          <Translate id="tags" />
+          <FormattedMessage defaultMessage="Tags" id="1EYCdR" />
         </Tabs.Tab>
       </Tabs>
     </section>

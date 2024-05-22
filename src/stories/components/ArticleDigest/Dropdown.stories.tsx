@@ -20,8 +20,8 @@ const Template: ComponentStory<typeof ArticleDigestDropdown> = (args) => (
 export const Dropdown = Template.bind({})
 Dropdown.args = {
   article: MOCK_ARTILCE,
-  titleTextSize: 'sm',
-  spacing: ['base', 'base'],
+  titleTextSize: 14,
+  spacing: [16, 16],
   bgColor: 'none',
   bgActiveColor: 'greyLighter',
 }

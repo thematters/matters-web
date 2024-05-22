@@ -5,11 +5,11 @@ import { OPEN_SUBSCRIBE_CIRCLE_DIALOG } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   Dialog,
-  Spinner,
+  PaymentPasswordContext,
+  SpinnerBlock,
   useDialogSwitch,
   useEventListener,
   useStep,
-  ViewerContext,
 } from '~/components'
 
 import { fragments } from './gql'
@@ -20,21 +20,21 @@ type SubscribeCircleDialogProps = BaseSubscribeCircleDialogProps & {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseSubscribeCircleDialog = ({
   children,
   ...restProps
 }: SubscribeCircleDialogProps) => {
-  const viewer = useContext(ViewerContext)
+  const { hasPaymentPassword } = useContext(PaymentPasswordContext)
   const {
     show,
     openDialog: baseOpenDialog,
     closeDialog,
   } = useDialogSwitch(true)
 
-  const initialStep = viewer.status?.hasPaymentPassword
+  const initialStep = hasPaymentPassword
     ? 'subscribeCircle'
     : 'setPaymentPassword'
   const { currStep, forward, prevStep, back } = useStep<Step>(initialStep)

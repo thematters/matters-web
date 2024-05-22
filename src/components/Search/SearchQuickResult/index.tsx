@@ -11,7 +11,7 @@ import {
   Media,
   Menu,
   // Spacer,
-  Spinner,
+  SpinnerBlock,
   TagDigest,
   UserDigest,
 } from '~/components'
@@ -88,7 +88,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   if (loading) {
     return (
       <Menu width={inPage ? undefined : 'md'}>
-        <Spinner />
+        <SpinnerBlock />
       </Menu>
     )
   }
@@ -149,7 +149,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
             node.__typename === 'Tag' && (
               <Fragment key={node.id}>
                 <Menu.Item
-                  spacing={['base', 'base']}
+                  spacing={[16, 16]}
                   bgActiveColor="greyLighter"
                   activeOutline="auto"
                   isActive={`tag${cursor}` === activeItem}
@@ -168,7 +168,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
                     })
                   }}
                 >
-                  <TagDigest.Concise tag={node} textSize="sm" />
+                  <TagDigest.Concise tag={node} textSize={14} />
                 </Menu.Item>
               </Fragment>
             )

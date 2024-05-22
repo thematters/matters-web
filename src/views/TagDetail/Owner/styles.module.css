@@ -1,17 +1,17 @@
 .container {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-x-tight) var(--spacing-base);
-  margin-top: var(--spacing-base);
+  padding: var(--sp8) var(--sp16);
+  margin-top: var(--sp16);
   background: var(--color-grey-lighter);
-  border-radius: var(--spacing-x-tight);
+  border-radius: var(--sp8);
 }
 
 .left {
   @mixin flex-center-start;
 
   & > * + * {
-    margin-left: var(--spacing-x-tight);
+    margin-left: var(--sp8);
   }
 }
 

@@ -15,13 +15,13 @@ const FollowState = ({ user }: FollowStateProps) => {
 
   return (
     <Button
-      spacing={[0, 'xtight']}
+      spacing={[0, 8]}
       size={[null, '1rem']}
       borderWidth="sm"
       borderColor="grey"
       is="span"
     >
-      <TextIcon size="xs" color="grey" weight="md">
+      <TextIcon size={12} color="grey" weight="medium">
         {user.isFollowee ? (
           <FormattedMessage
             defaultMessage="Followed"

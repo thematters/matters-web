@@ -8,13 +8,13 @@
 .container {
   display: flex;
   flex-direction: column;
-  font-weight: var(--font-weight-normal);
+  font-weight: var(--font-normal);
 
   & .header {
     display: flex;
 
     & > a {
-      margin-right: var(--spacing-x-tight);
+      margin-right: var(--sp8);
     }
 
     & .singleActorInfo {
@@ -27,75 +27,23 @@
   & .content {
     @mixin line-clamp-3;
 
-    margin-top: var(--spacing-tight);
+    margin-top: var(--sp12);
   }
 
   & .footer {
     @mixin flex-center-end;
 
-    margin-top: var(--spacing-x-tight);
-  }
-}
-
-.avatarWrap {
-  flex-shrink: 0;
-  width: 2rem;
-  margin-right: var(--spacing-x-tight);
-
-  &.multi {
-    & .avatar {
-      border: 2px solid var(--color-white);
-    }
-
-    & > * {
-      position: relative;
-      display: inline-flex;
-
-      & + :global(*) {
-        margin-left: calc(var(--spacing-x-tight) * -1);
-      }
-
-      &:nth-child(1) {
-        z-index: 2;
-      }
-
-      &:nth-child(2) {
-        z-index: 1;
-      }
-    }
+    margin-top: var(--sp8);
   }
 }
 
 .contentWrap {
   flex-grow: 1;
-  padding-top: var(--spacing-xx-tight);
+  padding-top: var(--sp4);
 
   &.overflowHidden {
     overflow: hidden;
   }
-}
-
-.headWrap {
-  margin-bottom: var(--spacing-x-tight);
-
-  & h4 {
-    font-weight: var(--font-weight-normal);
-    color: var(--color-grey);
-
-    & a {
-      font-weight: var(--font-weight-medium);
-      color: var(--color-black);
-    }
-  }
-
-  & p {
-    margin-top: var(--spacing-xx-tight);
-    color: var(--color-grey);
-  }
-}
-
-.iconWrap {
-  padding: var(--spacing-x-tight);
 }
 
 /* NoticeCircleName */
@@ -143,7 +91,7 @@
 
 /* NoticeArticleCard */
 .noticeArticleCard {
-  margin-left: var(--spacing-xx-loose);
+  margin-left: var(--sp40);
 }
 
 /* NoticeContentDigest */
@@ -151,8 +99,8 @@
   @mixin border-left-grey;
   @mixin line-clamp;
 
-  padding-left: var(--spacing-base);
-  margin-left: var(--spacing-xx-loose);
+  padding-left: var(--sp16);
+  margin-left: var(--sp40);
   color: var(--color-black);
   text-overflow: ellipsis;
   border-left-style: dashed;

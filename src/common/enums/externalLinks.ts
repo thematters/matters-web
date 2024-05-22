@@ -14,8 +14,6 @@ export const EXTERNAL_LINKS = {
     isProd
       ? `https://liker.land/${likerId}/civic?utm_source=Matters`
       : `https://rinkeby.liker.land/${likerId}/civic?utm_source=Matters`,
-  SUPER_LIKE:
-    'https://docs.like.co/v/zh/user-guide/likecoin-button/superlike?utm_source=Matters&utm_medium=website&utm_campaign=superlike_funnel',
   PLANET: 'https://www.planetable.xyz/',
   ENS_DOCS: 'https://docs.ens.domains/',
   METAMASK: 'https://metamask.io/download/',
@@ -37,11 +35,6 @@ export const GUIDE_LINKS = {
     zh_hans: `https://matters.town/@hi176/387126?locale=zh-Hans`,
     en: `https://matters.town/@hi176/387126?locale=en`,
   },
-  connectWallet: {
-    zh_hant: `https://matters.town/@hi176/387112`,
-    zh_hans: `https://matters.town/@hi176/387112?locale=zh-Hans`,
-    en: `https://matters.town@hi176/387112?locale=en`,
-  },
   payment: {
     zh_hant: `https://matters.town/@hi176/387119`,
     zh_hans: `https://matters.town/@hi176/387119?locale=zh-Hans`,
@@ -62,10 +55,15 @@ export const GUIDE_LINKS = {
     zh_hans: `https://matters.town/@hi176/387116?locale=zh-Hans`,
     en: `https://matters.town/@hi176/387116?locale=en`,
   },
-  mobilePayment: {
-    zh_hant: `https://matters.town/@hi176/387120`,
-    zh_hans: `https://matters.town/zh_Hans/@hi176/387120?locale=zh-Hans`,
-    en: `https://matters.town/@hi176/387120?locale=en`,
+  wallet: {
+    zh_hant: `https://matters.town/@hi176/589118`,
+    zh_hans: `https://matters.town/@hi176/589118?locale=zh-Hans`,
+    en: `https://matters.town/@hi176/589118?locale=en`,
+  },
+  mobileWallet: {
+    zh_hant: `https://matters.town/@hi176/589139`,
+    zh_hans: `https://matters.town/@hi176/589139?locale=zh-Hans`,
+    en: `https://matters.town/@hi176/589139?locale=en`,
   },
   billboard: {
     zh_hant: `https://matters.town/@hi176/554162`,

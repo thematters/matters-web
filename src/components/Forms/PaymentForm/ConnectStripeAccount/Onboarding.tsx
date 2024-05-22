@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useEffect, useState } from 'react'
 
-import { Dialog, Spinner, Translate } from '~/components'
+import { Dialog, SpinnerBlock, Translate } from '~/components'
 import { ViewerStripeAccountQuery } from '~/gql/graphql'
 
 interface Props {
@@ -69,7 +69,7 @@ const Onboarding: React.FC<Props> = ({ nextStep }) => {
           </h3>
         ) : (
           <>
-            <Spinner />
+            <SpinnerBlock />
 
             <p>
               <Translate

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/72px/avatar-default.svg'
+import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import { numAbbr, stripSpaces } from '~/common/utils'
@@ -11,7 +11,7 @@ import {
   Expandable,
   Head,
   Layout,
-  Spinner,
+  SpinnerBlock,
   SubscribeCircleDialog,
   Throw404,
   useEventListener,
@@ -152,7 +152,7 @@ const CircleProfile = () => {
     return (
       <>
         <LayoutHeader />
-        <Spinner />
+        <SpinnerBlock />
       </>
     )
   }
@@ -175,7 +175,7 @@ const CircleProfile = () => {
 
         <header className={styles.header}>
           <section className={styles.info}>
-            <CircleAvatar size="xxxl" circle={circle} />
+            <CircleAvatar size={72} circle={circle} />
             <h2 className={styles.name}>{circle.displayName}</h2>
           </section>
 
@@ -195,7 +195,7 @@ const CircleProfile = () => {
               content={circle.description}
               color="greyDarker"
               spacingTop="base"
-              size="md"
+              size={16}
             >
               <p>{circle.description}</p>
             </Expandable>
@@ -216,7 +216,6 @@ const CircleProfile = () => {
                   <span className={styles.count}>
                     {numAbbr(circle.members.totalCount)}
                   </span>
-                  {/* <Translate id="members" /> */}
                   <FormattedMessage defaultMessage="Members" id="+a+2ug" />
                 </button>
               )}
@@ -232,8 +231,6 @@ const CircleProfile = () => {
                   <span className={styles.count}>
                     {numAbbr(circle.followers.totalCount)}
                   </span>
-                  {/* <Translate id="follower" />  */}
-
                   <FormattedMessage defaultMessage="Followers" id="pzTOmv" />
                 </button>
               )}

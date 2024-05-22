@@ -129,7 +129,7 @@ describe('<ComposedAmountInput>', () => {
     expect(screen.getByText(customInputHint)).toBeInTheDocument()
 
     // custom input
-    const $customInput = screen.getByPlaceholderText('Enter a custom amount')
+    const $customInput = screen.getByPlaceholderText('Enter the amount')
     expect($customInput).toHaveAttribute('name', 'customAmount')
     expect($customInput).toHaveAttribute('type', 'number')
     expect($customInput).toHaveAttribute('min', String(min))

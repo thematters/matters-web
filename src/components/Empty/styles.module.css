@@ -1,26 +1,31 @@
 .empty {
-  padding: var(--spacing-xxx-loose) var(--spacing-base);
-  font-size: var(--font-size-md);
+  padding: var(--sp64) var(--sp16);
+  font-size: var(--text16);
   line-height: 1.5rem;
   color: var(--color-grey-light);
   text-align: center;
 
   & footer {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
   }
 }
 
 .description {
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
   color: var(--color-grey);
 }
 
+.spacingYLoose {
+  padding-top: var(--sp24);
+  padding-bottom: var(--sp24);
+}
+
 .spacingYXxloose {
-  padding-top: var(--spacing-xx-loose);
-  padding-bottom: var(--spacing-xx-loose);
+  padding-top: var(--sp40);
+  padding-bottom: var(--sp40);
 }
 
 .spacingYXxxloose {
-  padding-top: var(--spacing-xxx-loose);
-  padding-bottom: var(--spacing-xxx-loose);
+  padding-top: var(--sp64);
+  padding-bottom: var(--sp64);
 }

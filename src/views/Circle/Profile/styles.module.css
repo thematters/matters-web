@@ -1,22 +1,22 @@
 .buttons {
   display: inline-flex;
-  gap: var(--spacing-base);
-  margin-top: var(--spacing-x-tight);
+  gap: var(--sp16);
+  margin-top: var(--sp8);
 
   @media (--sm-up) {
-    padding-right: var(--spacing-base);
-    margin-top: var(--spacing-base);
+    padding-right: var(--sp16);
+    margin-top: var(--sp16);
   }
 }
 
 .profile {
   position: relative;
-  padding-bottom: var(--spacing-loose);
-  margin-bottom: var(--spacing-x-tight);
+  padding-bottom: var(--sp24);
+  margin-bottom: var(--sp8);
   background: var(--color-white);
 
   @media (--sm-up) {
-    padding-bottom: var(--spacing-base);
+    padding-bottom: var(--sp16);
     margin-bottom: 0;
     border-radius: 0;
   }
@@ -25,8 +25,8 @@
 .header {
   @mixin flex-start-space-between;
 
-  padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-base);
+  padding: 0 var(--sp16);
+  margin-top: var(--sp16);
 
   @media (--sm-up) {
     padding: 0;
@@ -36,9 +36,9 @@
     @mixin flex-start-start;
 
     & .name {
-      margin-left: var(--spacing-base);
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-semibold);
+      margin-left: var(--sp16);
+      font-size: var(--text20);
+      font-weight: var(--font-semibold);
     }
   }
 
@@ -46,21 +46,21 @@
     @mixin border-left-grey;
 
     flex-shrink: 0;
-    padding-left: var(--spacing-loose);
-    margin-left: var(--spacing-loose);
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
+    padding-left: var(--sp24);
+    margin-left: var(--sp24);
+    font-size: var(--text16);
+    font-weight: var(--font-medium);
     color: var(--color-matters-gold);
 
     & .amount {
-      font-size: var(--font-size-xxl);
+      font-size: var(--text32);
       line-height: 2.25rem;
     }
   }
 }
 
 .description {
-  padding: 0 var(--spacing-base);
+  padding: 0 var(--sp16);
 
   @media (--sm-up) {
     padding: 0;
@@ -70,15 +70,15 @@
 .footer {
   @mixin flex-center-space-between;
 
-  padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-base);
+  padding: 0 var(--sp16);
+  margin-top: var(--sp16);
 
   @media (--sm-up) {
     padding: 0;
   }
 
   & .counts {
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     color: var(--color-grey);
 
     & > * {
@@ -87,15 +87,15 @@
       line-height: 1.5rem;
 
       & + * {
-        margin-left: var(--spacing-loose);
+        margin-left: var(--sp24);
       }
     }
 
     & .count {
       display: block;
-      padding-right: var(--spacing-x-tight);
-      font-size: var(--font-size-lg);
-      font-weight: var(--font-weight-bold);
+      padding-right: var(--sp8);
+      font-size: var(--text20);
+      font-weight: var(--font-bold);
       line-height: 1.5rem;
       color: var(--color-black);
     }

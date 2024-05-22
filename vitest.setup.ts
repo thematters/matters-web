@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom/vitest'
+import 'vitest-canvas-mock'
 
 import { Globals } from '@react-spring/web'
 import { cleanup, configure } from '@testing-library/react'

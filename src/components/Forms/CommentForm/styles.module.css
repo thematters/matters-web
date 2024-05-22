@@ -3,10 +3,10 @@
 }
 
 .content {
-  padding: var(--spacing-base);
-  margin-bottom: var(--spacing-tight);
+  padding: var(--sp16);
+  margin-bottom: var(--sp12);
   background: var(--color-grey-lighter);
-  border-radius: var(--spacing-base);
+  border-radius: var(--sp16);
 }
 
 .footer {

@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl'
 import { toPath } from '~/common/utils'
 import {
   Dialog,
-  Spinner,
+  SpinnerBlock,
   toast,
   useDialogSwitch,
   useMutation,
@@ -32,7 +32,7 @@ export interface AddCollectionsArticleDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('../AddCollectionDialog/Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseAddCollectionsArticleDialog = ({

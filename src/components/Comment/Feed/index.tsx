@@ -19,7 +19,7 @@ import { fragments, REFETCH_COMMENT } from './gql'
 import styles from './styles.module.css'
 
 export type CommentControls = {
-  avatarSize?: Extract<AvatarSize, 'md' | 'lg'>
+  avatarSize?: AvatarSize
   hasUserName?: boolean
 } & FooterActionsControls &
   DropdownActionsControls
@@ -32,7 +32,7 @@ export type CommentProps = {
 export const BaseCommentFeed = ({
   comment,
   type,
-  avatarSize = 'lg',
+  avatarSize = 32,
   hasUserName,
   replySubmitCallback,
   ...actionControls
@@ -62,8 +62,8 @@ export const BaseCommentFeed = ({
         <UserDigest.Mini
           user={author}
           avatarSize={avatarSize}
-          textSize="mdS"
-          textWeight="md"
+          textSize={15}
+          textWeight="medium"
           hasAvatar
           hasDisplayName
           hasUserName={hasUserName}
@@ -89,10 +89,10 @@ export const BaseCommentFeed = ({
 
       <section className={styles.contentContainer}>
         <Media at="sm">
-          <Content comment={comment} type={type} size="mdS" limit={17} />
+          <Content comment={comment} type={type} size={15} limit={17} />
         </Media>
         <Media greaterThan="sm">
-          <Content comment={comment} type={type} size="mdS" limit={13} />
+          <Content comment={comment} type={type} size={15} limit={13} />
         </Media>
 
         <FooterActions

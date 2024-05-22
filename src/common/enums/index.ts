@@ -1,4 +1,5 @@
 export * from './analytics'
+export * from './article'
 export * from './chart'
 export * from './contract'
 export * from './cookie'
@@ -53,9 +54,9 @@ export const MAX_ARTICE_TITLE_LENGTH = 100
 export const MAX_ARTICE_SUMMARY_LENGTH = 200
 export const MAX_ARTICLE_CONTENT_LENGTH = 50e3
 export const MAX_ARTICLE_SUPPORT_LENGTH = 140
+export const MAX_ARTICLE_COMMENT_LENGTH = 1200
 
 export const MAX_ARTICLE_REVISION_COUNT = 4
-export const MAX_ARTICLE_REVISION_DIFF = 50
 export const MAX_ARTICLE_TAG_LENGTH = 3
 export const MAX_ARTICLE_COLLECT_LENGTH = 3
 
@@ -76,6 +77,7 @@ export const MIN_CIRCLE_DISPLAY_NAME_LENGTH = 2
 export const MAX_CIRCLE_DISPLAY_NAME_LENGTH = 12
 
 export const MAX_DESCRIPTION_LENGTH = 200
+export const MAX_REVISION_DESCRIPTION_LENGTH = 140
 
 export const MIN_USER_DISPLAY_NAME_LENGTH = 2
 export const MAX_USER_DISPLAY_NAME_LENGTH = 20

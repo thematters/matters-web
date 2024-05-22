@@ -12,19 +12,19 @@ import {
 } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
 import {
   analytics,
   featureSupportedChains,
-  maskAddress,
   PublicResolverABI,
+  truncate,
 } from '~/common/utils'
 import {
   Button,
   CopyToClipboard,
   Dialog,
-  IconCopy16,
+  Icon,
   TextIcon,
-  Translate,
   useTargetNetwork,
   ViewerContext,
 } from '~/components'
@@ -129,10 +129,9 @@ const LinkENS = ({
           <section className={styles.content}>
             {isSwitchingNetwork ? (
               <p>
-                <Translate
-                  zh_hans="切换网络中…"
-                  zh_hant="切換網絡中…"
-                  en="Switching the network…"
+                <FormattedMessage
+                  defaultMessage="Switching the network…"
+                  id="Bkx6Gk"
                 />
               </p>
             ) : (
@@ -147,14 +146,11 @@ const LinkENS = ({
           btns={
             <Dialog.RoundedButton
               text={
-                <>
-                  <Translate
-                    zh_hant="切換到 "
-                    zh_hans="切换到 "
-                    en="Switch to "
-                  />
-                  {targetNetwork.name}
-                </>
+                <FormattedMessage
+                  defaultMessage="Switch to {networkName}"
+                  id="u1cbFV"
+                  values={{ networkName: targetNetwork.name }}
+                />
               }
               onClick={switchToTargetNetwork}
             />
@@ -164,14 +160,11 @@ const LinkENS = ({
               <CancelButton />
               <Dialog.TextButton
                 text={
-                  <>
-                    <Translate
-                      zh_hant="切換到 "
-                      zh_hans="切换到 "
-                      en="Switch to "
-                    />
-                    {targetNetwork.name}
-                  </>
+                  <FormattedMessage
+                    defaultMessage="Switch to {networkName}"
+                    id="u1cbFV"
+                    values={{ networkName: targetNetwork.name }}
+                  />
                 }
                 loading={isSwitchingNetwork}
               />
@@ -211,21 +204,24 @@ const LinkENS = ({
                   />
                 }
               >
-                <Button
-                  spacing={['xtight', 'xtight']}
-                  aria-label={intl.formatMessage({
-                    defaultMessage: 'Copy',
-                    id: '4l6vz1',
-                  })}
-                >
-                  <TextIcon
-                    icon={<IconCopy16 color="black" size="xs" />}
-                    color="grey"
-                    textPlacement="left"
+                {({ copyToClipboard }) => (
+                  <Button
+                    spacing={[8, 8]}
+                    aria-label={intl.formatMessage({
+                      defaultMessage: 'Copy',
+                      id: '4l6vz1',
+                    })}
+                    onClick={copyToClipboard}
                   >
-                    {maskAddress(viewer.info.ethAddress || '')}
-                  </TextIcon>
-                </Button>
+                    <TextIcon
+                      icon={<Icon icon={IconCopy} color="black" size={12} />}
+                      color="grey"
+                      placement="left"
+                    >
+                      {truncate(viewer.info.ethAddress || '')}
+                    </TextIcon>
+                  </Button>
+                )}
               </CopyToClipboard>
             </p>
           </section>
@@ -237,10 +233,9 @@ const LinkENS = ({
           btns={
             <Dialog.RoundedButton
               text={
-                <Translate
-                  zh_hant="重新連接錢包"
-                  zh_hans="重新连接钱包"
-                  en="Reconnect Wallet"
+                <FormattedMessage
+                  defaultMessage="Reconnect Wallet"
+                  id="6ErzDk"
                 />
               }
               onClick={() => disconnect()}
@@ -252,10 +247,9 @@ const LinkENS = ({
 
               <Dialog.TextButton
                 text={
-                  <Translate
-                    zh_hant="重新連接錢包"
-                    zh_hans="重新连接钱包"
-                    en="Reconnect Wallet"
+                  <FormattedMessage
+                    defaultMessage="Reconnect Wallet"
+                    id="6ErzDk"
                   />
                 }
                 onClick={() => disconnect()}
@@ -283,10 +277,9 @@ const LinkENS = ({
 
           {(isError || error) && (
             <p className={styles.error}>
-              <Translate
-                zh_hans="未知错误，请确认你的钱包并重新尝试"
-                zh_hant="未知錯誤，請確認你的錢包並重新嘗試"
-                en="Unknown error. Please check wallet and retry."
+              <FormattedMessage
+                defaultMessage="Unknown error. Please check wallet and retry."
+                id="JFv0yt"
               />
             </p>
           )}

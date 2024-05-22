@@ -5,6 +5,6 @@
   }
 
   & * + * {
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
   }
 }

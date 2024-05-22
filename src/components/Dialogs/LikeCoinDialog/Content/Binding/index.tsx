@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Spinner, Translate } from '~/components'
+import { Dialog, SpinnerBlock } from '~/components'
 import { ViewerLikerIdQuery } from '~/gql/graphql'
 
 interface Props {
@@ -70,21 +70,19 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
         >
           {error ? (
             <h3>
-              <Translate
-                zh_hant="哎呀，設置失敗了。"
-                zh_hans="哎呀，设置失败了。"
-                en="Oops! Setup failed."
+              <FormattedMessage
+                defaultMessage="Oops! Setup failed."
+                id="7Y9hwb"
               />
             </h3>
           ) : (
             <>
-              <Spinner />
+              <SpinnerBlock />
 
               <p>
-                <Translate
-                  zh_hant="請在新頁面完成綁定，不要關閉本窗口"
-                  zh_hans="请在新页面完成绑定，不要关闭本窗口"
-                  en="Processing... Don't leave the page."
+                <FormattedMessage
+                  defaultMessage="Processing... Don't leave the page."
+                  id="mThL4h"
                 />
               </p>
             </>
@@ -95,14 +93,14 @@ const Binding: React.FC<Props> = ({ prevStep, nextStep, windowRef }) => {
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<Translate id="retry" />}
+            text={<FormattedMessage defaultMessage="Retry" id="62nsdy" />}
             disabled={!error}
             onClick={prevStep}
           />
         }
         smUpBtns={
           <Dialog.TextButton
-            text={<Translate id="retry" />}
+            text={<FormattedMessage defaultMessage="Retry" id="62nsdy" />}
             disabled={!error}
             onClick={prevStep}
           />

@@ -27,7 +27,7 @@ describe('<ArticleDigest.Dropdown>', () => {
     expect($author).toBeInTheDocument()
 
     $digest.click()
-    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).toHaveBeenCalled()
   })
 
@@ -52,7 +52,7 @@ describe('<ArticleDigest.Dropdown>', () => {
     expect($author).toBeInTheDocument()
 
     $digest.click()
-    expect(mockRouter.asPath).not.toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).not.toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).not.toHaveBeenCalled()
   })
 })

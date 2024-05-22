@@ -2,6 +2,10 @@ import { useApolloClient } from '@apollo/react-hooks'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconFacebook2 } from '@/public/static/icons/24px/facebook2.svg'
+import { ReactComponent as IconGoogle2 } from '@/public/static/icons/24px/google2.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { ReactComponent as IconX2 } from '@/public/static/icons/24px/x2.svg'
 import {
   OAUTH_STORAGE_BIND_STATE,
   OAUTH_STORAGE_BIND_STATE_FAILURE,
@@ -17,12 +21,9 @@ import {
   twitterOauthUrl,
 } from '~/common/utils'
 import {
-  IconClose20,
-  IconFacebook22,
-  IconGoogle22,
-  IconSpinner16,
-  IconX22,
+  Icon,
   RemoveSocialLoginDialog,
+  Spinner,
   TableView,
   TextIcon,
   toast,
@@ -165,14 +166,17 @@ const Socials = () => {
           return (
             <TableView.Cell
               title={
-                <TextIcon icon={<IconGoogle22 size="mdM" />} spacing="tight">
+                <TextIcon
+                  icon={<Icon icon={IconGoogle2} size={22} />}
+                  spacing={12}
+                >
                   Google
                 </TextIcon>
               }
               rightText={googleId}
               rightIcon={
                 googleId && canRemoveNonFacebookLogins ? (
-                  <IconClose20 size="mdS" color="greyDarker" />
+                  <Icon icon={IconTimes} size={20} color="greyDarker" />
                 ) : undefined
               }
               onClick={
@@ -191,9 +195,7 @@ const Socials = () => {
                         />
                       </SettingsButton>
                     )}
-                    {isGoogleLoading && (
-                      <IconSpinner16 color="greyLight" size="mdS" />
-                    )}
+                    {isGoogleLoading && <Spinner color="greyLight" size={20} />}
                   </>
                 )
               }
@@ -208,14 +210,14 @@ const Socials = () => {
           return (
             <TableView.Cell
               title={
-                <TextIcon icon={<IconX22 size="mdM" />} spacing="tight">
-                  Twitter
+                <TextIcon icon={<Icon icon={IconX2} size={22} />} spacing={12}>
+                  X
                 </TextIcon>
               }
               rightText={twitterId ? `@${twitterId}` : undefined}
               rightIcon={
                 twitterId && canRemoveNonFacebookLogins ? (
-                  <IconClose20 size="mdS" color="greyDarker" />
+                  <Icon icon={IconTimes} size={20} color="greyDarker" />
                 ) : undefined
               }
               onClick={
@@ -235,7 +237,7 @@ const Socials = () => {
                       </SettingsButton>
                     )}
                     {isTwitterLoading && (
-                      <IconSpinner16 color="greyLight" size="mdS" />
+                      <Spinner color="greyLight" size={20} />
                     )}
                   </>
                 )
@@ -251,14 +253,17 @@ const Socials = () => {
           return (
             <TableView.Cell
               title={
-                <TextIcon icon={<IconFacebook22 size="mdM" />} spacing="tight">
+                <TextIcon
+                  icon={<Icon icon={IconFacebook2} size={22} />}
+                  spacing={12}
+                >
                   Facebook
                 </TextIcon>
               }
               rightText={facebookId ? `@${facebookId}` : undefined}
               rightIcon={
                 facebookId ? (
-                  <IconClose20 size="mdS" color="greyDarker" />
+                  <Icon icon={IconTimes} size={20} color="greyDarker" />
                 ) : undefined
               }
               onClick={facebookId ? () => openDialog() : undefined}
@@ -274,7 +279,7 @@ const Socials = () => {
                       </SettingsButton>
                     )}
                     {isFacebookLoading && (
-                      <IconSpinner16 color="greyLight" size="mdS" />
+                      <Spinner color="greyLight" size={20} />
                     )}
                   </>
                 )

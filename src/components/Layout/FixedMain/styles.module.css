@@ -12,11 +12,11 @@
   margin: 0;
 
   @media (--sm-up) {
-    margin: 0 var(--spacing-base);
+    margin: 0 var(--sp16);
   }
 
   @media (--md-up) {
-    margin: 0 var(--spacing-xx-loose);
+    margin: 0 var(--sp40);
   }
 
   @media (--lg-up) {

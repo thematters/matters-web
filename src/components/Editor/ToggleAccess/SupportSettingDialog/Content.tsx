@@ -1,20 +1,11 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { MAX_ARTICLE_SUPPORT_LENGTH } from '~/common/enums'
-import { translate, validateSupportWords } from '~/common/utils'
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  TextIcon,
-  toast,
-  Translate,
-  useRoute,
-} from '~/components'
-import { ArticleDetailPublicQuery, EditMetaDraftFragment } from '~/gql/graphql'
+import { Dialog, Form, TextIcon, toast } from '~/components'
+import { EditMetaDraftFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 import SupportPreview from './SupportPreview'
@@ -26,7 +17,10 @@ interface FormProps {
   submitCallback?: () => void
 
   draft?: EditMetaDraftFragment
-  article?: ArticleDetailPublicQuery['article']
+  article?: {
+    replyToDonator?: string | null
+    requestForDonation?: string | null
+  }
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null
@@ -49,12 +43,10 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
   editSupportSetting,
   supportSettingSaving,
 }) => {
-  const { lang } = useContext(LanguageContext)
   const formId = 'support-setting-form'
+  const intl = useIntl()
 
-  const { getQuery } = useRoute()
-  const qsType = getQuery('type') as TabType
-  const [tabType, setTabType] = useState<TabType>(qsType || 'request')
+  const [tabType, setTabType] = useState<TabType>('request')
   const content = draft ? draft : article
   const {
     values,
@@ -73,16 +65,16 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     },
     validateOnBlur: false,
     validateOnChange: false,
-    validate: ({ requestForDonation, replyToDonator }) =>
-      _pickBy({
-        requestForDonation: validateSupportWords(requestForDonation!, lang),
-        replyToDonator: validateSupportWords(replyToDonator!, lang),
-      }),
     onSubmit: async ({}, { setSubmitting }) => {
       editSupportSetting(values.requestForDonation, values.replyToDonator)
 
       toast.success({
-        message: <Translate id="successSetSupportSetting" />,
+        message: (
+          <FormattedMessage
+            defaultMessage="Support setting updated"
+            id="wNJjR5"
+          />
+        ),
       })
 
       setSubmitting(false)
@@ -99,22 +91,36 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     setTabType(newType)
   }
 
+  const isRequestOverLength =
+    (values.requestForDonation?.length || 0) > MAX_ARTICLE_SUPPORT_LENGTH
+  const isReplyOverLength =
+    (values.replyToDonator?.length || 0) > MAX_ARTICLE_SUPPORT_LENGTH
+  const requestHint = `${
+    values.requestForDonation?.length || 0
+  }/${MAX_ARTICLE_SUPPORT_LENGTH}`
+  const replyHint = `${
+    values.replyToDonator?.length || 0
+  }/${MAX_ARTICLE_SUPPORT_LENGTH}`
+
   const InnerForm = (tab: string) => {
     return (
       <Form id={formId} onSubmit={handleSubmit}>
         {tab === 'request' && (
           <Form.Textarea
-            label={<Translate id="requestForDonation" />}
+            label={
+              <FormattedMessage defaultMessage="Call-to-Support" id="ptTHBL" />
+            }
             name="requestForDonation"
-            placeholder={translate({
-              id: 'supportRequestDescription',
-              lang,
+            placeholder={intl.formatMessage({
+              defaultMessage:
+                "Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!",
+              id: '9EABqX',
             })}
             value={values.requestForDonation! || ''}
-            hint={`${
-              values.requestForDonation?.length || 0
-            }/${MAX_ARTICLE_SUPPORT_LENGTH}`}
-            error={errors.requestForDonation}
+            hint={requestHint}
+            error={
+              isRequestOverLength ? requestHint : errors.requestForDonation
+            }
             hintAlign={errors.requestForDonation ? 'left' : 'right'}
             onBlur={handleBlur}
             onChange={(e) => {
@@ -124,16 +130,18 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
         )}
         {tab === 'reply' && (
           <Form.Textarea
-            label={<Translate id="replyToDonator" />}
+            label={
+              <FormattedMessage defaultMessage="Thank-you card" id="xQNq3I" />
+            }
             name="replyToDonator"
-            placeholder={translate({
-              id: 'supportResponseDescription',
-              lang,
+            placeholder={intl.formatMessage({
+              defaultMessage:
+                'With your support, I will be able to accumulate more energy to create.',
+              id: 'E+dEI9',
             })}
-            hint={`${
-              values.replyToDonator?.length || 0
-            }/${MAX_ARTICLE_SUPPORT_LENGTH}`}
-            error={errors.replyToDonator}
+            value={values.replyToDonator! || ''}
+            hint={replyHint}
+            error={isReplyOverLength ? replyHint : errors.replyToDonator}
             hintAlign={errors.replyToDonator ? 'left' : 'right'}
             onBlur={handleBlur}
             onChange={(e) =>
@@ -149,7 +157,13 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     <Dialog.TextButton
       type="submit"
       form={formId}
-      disabled={!isValid || isSubmitting || supportSettingSaving}
+      disabled={
+        !isValid ||
+        isRequestOverLength ||
+        isReplyOverLength ||
+        isSubmitting ||
+        supportSettingSaving
+      }
       text={<FormattedMessage defaultMessage="Confirm" id="N2IrpM" />}
       loading={isSubmitting}
     />
@@ -180,12 +194,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
 
         {InnerForm(tabType)}
 
-        <h3>
-          <TextIcon size="md" weight="md">
-            <Translate
-              zh_hans="效果预览"
-              zh_hant="效果預覽"
-              en="Support Setting Preview"
+        <h3 className={styles.previewTitle}>
+          <TextIcon size={16} weight="medium">
+            <FormattedMessage
+              defaultMessage="Preview"
+              id="zn83cE"
+              description="src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
             />
           </TextIcon>
         </h3>

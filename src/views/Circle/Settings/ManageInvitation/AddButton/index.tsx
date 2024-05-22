@@ -23,7 +23,7 @@ const CircleInvitationAddButton = () => {
           onClick={openDialog}
           aria-haspopup="dialog"
         >
-          <TextIcon color="white" size="mdS" weight="md">
+          <TextIcon color="white" size={15} weight="medium">
             <FormattedMessage
               defaultMessage="Add Invitation"
               id="b8ogKp"

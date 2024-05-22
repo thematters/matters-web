@@ -2,7 +2,7 @@ import _get from 'lodash/get'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, toast, Translate, useMutation } from '~/components'
+import { Dialog, toast, useMutation } from '~/components'
 import { updateTagMaintainers } from '~/components/GQL'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import SearchingArea, {
@@ -87,10 +87,9 @@ const TagSearchSelectEditor = ({ id, closeDialog, toListStep }: Props) => {
 
     toast.success({
       message: (
-        <Translate
-          zh_hant="添加協作者成功"
-          zh_hans="添加协作者成功"
-          en="successfully added collaborator"
+        <FormattedMessage
+          defaultMessage="Successfully added collaborator"
+          id="ThSfXQ"
         />
       ),
     })

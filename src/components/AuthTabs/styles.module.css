@@ -1,26 +1,29 @@
 .tabs {
-  margin-bottom: var(--spacing-loose);
+  margin-bottom: var(--sp24);
 
-  & .logo {
-    @mixin flex-start-center;
+  & .header {
+    @mixin flex-start-space-between;
 
-    margin-top: var(--spacing-loose);
-    margin-bottom: var(--spacing-loose);
+    margin-top: var(--sp24);
+    margin-bottom: var(--sp24);
 
     @media (--sm-up) {
-      justify-content: start;
+      @mixin flex-start-start;
+
       margin-top: 0;
     }
 
-    & svg {
-      width: 96px;
-      height: 20px;
+    & .logo {
+      & svg {
+        width: 96px;
+        height: 20px;
+      }
     }
   }
 }
 
 .spacingTop {
   @media (--sm-up) {
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
   }
 }

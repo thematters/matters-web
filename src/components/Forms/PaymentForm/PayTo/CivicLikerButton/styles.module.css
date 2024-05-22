@@ -8,11 +8,11 @@
 
   & > svg {
     position: absolute;
-    top: var(--spacing-xx-tight);
-    left: var(--spacing-xx-tight);
+    top: var(--sp4);
+    left: var(--sp4);
 
     & path {
-      fill: var(--color-likecoin-green);
+      fill: var(--color-likecoin);
     }
   }
 }

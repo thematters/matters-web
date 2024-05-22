@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
@@ -16,14 +16,7 @@ import {
   parseFormSubmitErrors,
   validateTagName,
 } from '~/common/utils'
-import {
-  CoverUploader,
-  Dialog,
-  Form,
-  LanguageContext,
-  toast,
-  useMutation,
-} from '~/components'
+import { CoverUploader, Dialog, Form, toast, useMutation } from '~/components'
 import { PutTagMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -69,8 +62,6 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
   const [update] = useMutation<PutTagMutation>(PUT_TAG, undefined, {
     showToast: false,
   })
-  const { lang } = useContext(LanguageContext)
-
   const formId = 'put-tag-form'
 
   const {
@@ -92,7 +83,7 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
     validateOnChange: false,
     validate: ({ newContent }) =>
       _pickBy({
-        newContent: validateTagName(newContent, lang),
+        newContent: validateTagName(newContent, intl),
       }),
 
     onSubmit: async (

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   OPEN_SUBSCRIBE_CIRCLE_DIALOG,
@@ -7,15 +8,14 @@ import {
 } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
-  BindEmailHintDialog,
   Button,
   Card,
   CardProps,
   CircleAvatar,
   LinkWrapper,
+  SetEmailDialog,
   SubscribeCircleDialog,
   TextIcon,
-  Translate,
   ViewerContext,
 } from '~/components'
 import {
@@ -35,6 +35,7 @@ type Props = {
 const RecommendCircle = ({ circle, ...cardProps }: Props) => {
   const viewer = useContext(ViewerContext)
   const hasEmail = !!viewer.info.email
+  const isEmailVerified = !!viewer.info.emailVerified
 
   const { displayName, description } = circle
   const path = toPath({
@@ -46,19 +47,19 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
     window.dispatchEvent(new CustomEvent(OPEN_SUBSCRIBE_CIRCLE_DIALOG, {}))
 
   return (
-    <BindEmailHintDialog>
-      {({ openDialog: openBindEmailHintDialog }) => {
+    <SetEmailDialog>
+      {({ openDialog: openSetEmailDialog }) => {
         return (
           <Card
             bgActiveColor="none"
             borderRadius="xtight"
-            spacing={['base', 'base']}
+            spacing={[16, 16]}
             {...path}
             {...cardProps}
           >
             <section className={styles.container}>
               <section className={styles.head}>
-                <CircleAvatar circle={circle} size="xxl" />
+                <CircleAvatar circle={circle} size={56} />
 
                 <section className={styles.wrap}>
                   <p className={styles.name}>
@@ -69,7 +70,7 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
 
                   <section className={styles.follow}>
                     <Button
-                      spacing={['xtight', 'tight']}
+                      spacing={[8, 12]}
                       textColor="green"
                       textActiveColor="white"
                       bgActiveColor="green"
@@ -86,16 +87,19 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
                           return
                         }
 
-                        if (!hasEmail) {
-                          openBindEmailHintDialog()
+                        if (!hasEmail || !isEmailVerified) {
+                          openSetEmailDialog()
                           return
                         }
 
                         openSubscribeCircleDialog()
                       }}
                     >
-                      <TextIcon weight="md" size="xs">
-                        <Translate id="subscriptions" />
+                      <TextIcon weight="medium" size={12}>
+                        <FormattedMessage
+                          defaultMessage="Subscribe"
+                          id="gczcC5"
+                        />
                       </TextIcon>
                     </Button>
                   </section>
@@ -115,7 +119,7 @@ const RecommendCircle = ({ circle, ...cardProps }: Props) => {
           </Card>
         )
       }}
-    </BindEmailHintDialog>
+    </SetEmailDialog>
   )
 }
 

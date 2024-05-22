@@ -2,14 +2,14 @@
   align-self: center;
 
   & h3 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--text24);
+    font-weight: var(--font-semibold);
     text-align: center;
   }
 
   & p {
-    margin-top: var(--spacing-loose);
-    font-size: var(--font-size-md);
+    margin-top: var(--sp24);
+    font-size: var(--text16);
     line-height: 2;
     color: var(--color-grey-darker);
   }
@@ -83,7 +83,7 @@
 /* section-specfic */
 .ecosystem {
   position: relative;
-  padding: 3.25rem var(--spacing-base);
+  padding: 3.25rem var(--sp16);
   background-image: var(--about-wave-bg-1);
   background-position: right bottom 2rem;
   background-size: 212px;
@@ -95,11 +95,11 @@
   }
 
   & .buttons {
-    margin-top: var(--spacing-x-loose);
+    margin-top: var(--sp32);
     text-align: center;
 
     & > * + * {
-      margin-left: var(--spacing-x-loose);
+      margin-left: var(--sp32);
     }
   }
 
@@ -125,7 +125,7 @@
 }
 
 .community {
-  padding: 4.375rem var(--spacing-base);
+  padding: 4.375rem var(--sp16);
   color: var(--color-white);
   background-color: var(--color-black);
 
@@ -140,11 +140,11 @@
   }
 
   & .buttons {
-    margin-top: var(--spacing-x-loose);
+    margin-top: var(--sp32);
     text-align: center;
 
     & > * + * {
-      margin-left: var(--spacing-x-loose);
+      margin-left: var(--sp32);
     }
   }
 
@@ -169,7 +169,7 @@
 }
 
 .feature {
-  padding: 5rem var(--spacing-base);
+  padding: 5rem var(--sp16);
   background-color: var(--color-green-lighter);
   background-image: var(--about-wave-bg-2);
   background-position: right bottom;
@@ -178,8 +178,8 @@
   & img {
     width: 258px;
     height: 312px;
-    margin-top: var(--spacing-xx-loose);
-    margin-bottom: var(--spacing-xx-loose);
+    margin-top: var(--sp40);
+    margin-bottom: var(--sp40);
 
     @media (--sm-up) {
       width: 328px;
@@ -188,17 +188,17 @@
   }
 
   & .buttons {
-    margin-top: var(--spacing-x-loose);
+    margin-top: var(--sp32);
     text-align: center;
 
     & > * + * {
-      margin-left: var(--spacing-x-loose);
+      margin-left: var(--sp32);
     }
   }
 
   & .flag {
     display: block;
-    font-size: var(--font-size-sm);
+    font-size: var(--text14);
     text-align: center;
   }
 

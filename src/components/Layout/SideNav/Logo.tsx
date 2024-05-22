@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconLogoGraph } from '@/public/static/icons/logo-graph.svg'
 import { PATHS } from '~/common/enums'
-import { IconLogoGraph } from '~/components'
+import { Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -18,7 +19,7 @@ const Logo = () => {
             id: 'cE4Hfw',
           })}
         >
-          <IconLogoGraph />
+          <Icon icon={IconLogoGraph} style={{ width: 48, height: 33 }} />
         </a>
       </Link>
     </section>

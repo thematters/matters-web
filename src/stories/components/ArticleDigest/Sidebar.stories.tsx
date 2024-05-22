@@ -20,7 +20,7 @@ const Template: ComponentStory<typeof ArticleDigestSidebar> = (args) => (
 export const Sidebar = Template.bind({})
 Sidebar.args = {
   article: MOCK_ARTILCE,
-  titleTextSize: 'sm',
+  titleTextSize: 14,
   hasCover: true,
   bgActiveColor: 'greyLighter',
 }

@@ -37,7 +37,7 @@ const BaseAccessDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} hidePaddingBottom>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
             <FormattedMessage defaultMessage="Article Management" id="ZEMcZ6" />
@@ -52,7 +52,7 @@ const BaseAccessDialog = ({
           </section>
 
           <section className={styles.access}>
-            <ToggleAccess {...props} />
+            <ToggleAccess {...props} compact />
           </section>
         </Dialog.Content>
 

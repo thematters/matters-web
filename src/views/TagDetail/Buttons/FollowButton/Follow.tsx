@@ -2,13 +2,14 @@ import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import {
   Button,
-  IconAdd16,
+  Icon,
   TextIcon,
   useMutation,
   ViewerContext,
@@ -63,14 +64,14 @@ const Follow = ({ tag }: FollowProps) => {
 
   return (
     <Button
-      spacing={['xtight', 'tight']}
+      spacing={[8, 12]}
       textColor="green"
       textActiveColor="white"
       bgActiveColor="green"
       borderColor="green"
       onClick={onClick}
     >
-      <TextIcon icon={<IconAdd16 />} weight="md" size="mdS">
+      <TextIcon icon={<Icon icon={IconPlus} />} weight="medium" size={15}>
         <FormattedMessage defaultMessage="Follow" id="ieGrWo" />
       </TextIcon>
     </Button>

@@ -1,10 +1,11 @@
 import React from 'react'
 
+import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
-import { stripHtml, toPath, UtmParams } from '~/common/utils'
+import { makeSummary, toPath } from '~/common/utils'
 import {
   DateTime,
-  IconDotDivider,
+  Icon,
   LinkWrapper,
   Media,
   ResponsiveImage,
@@ -34,13 +35,14 @@ export type ArticleDigestFeedProps = {
   article: ArticleDigestFeedArticlePublicFragment &
     Partial<ArticleDigestFeedArticlePrivateFragment>
   header?: React.ReactNode
+  collectionId?: string
 } & ArticleDigestFeedControls &
-  FooterActionsProps &
-  UtmParams
+  FooterActionsProps
 
 const BaseArticleDigestFeed = ({
   article,
   header,
+  collectionId,
 
   hasHeader = true,
   hasCircle = true,
@@ -50,9 +52,6 @@ const BaseArticleDigestFeed = ({
 
   isFirstFold = false,
 
-  utm_source,
-  utm_medium,
-
   hasReadTime,
   hasDonationCount,
   ...controls
@@ -60,18 +59,18 @@ const BaseArticleDigestFeed = ({
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const cover = !isBanned ? article.cover : null
-  const cleanedSummary = isBanned ? '' : stripHtml(summary)
+  const cleanedSummary = isBanned ? '' : makeSummary(summary)
 
   const path = toPath({
     page: 'articleDetail',
     article,
-    utm_source,
-    utm_medium,
+    collectionId,
   })
 
   const footerActions = (
     <FooterActions
       article={article}
+      collectionId={collectionId}
       hasReadTime={hasReadTime}
       hasDonationCount={hasDonationCount}
       hasCircle={hasCircle}
@@ -94,13 +93,13 @@ const BaseArticleDigestFeed = ({
                   <section className={styles.author}>
                     <UserDigest.Mini
                       user={author}
-                      avatarSize="sm"
-                      textSize="xs"
+                      avatarSize={20}
+                      textSize={12}
                       hasAvatar
                       hasDisplayName
                       onClick={onClickAuthor}
                     />
-                    <IconDotDivider color="greyLight" size="mdS" />
+                    <Icon icon={IconDot} color="greyLight" size={20} />
                   </section>
                 </>
               )}
@@ -111,7 +110,8 @@ const BaseArticleDigestFeed = ({
             <section className={styles.title}>
               <ArticleDigestTitle
                 article={article}
-                textSize="md"
+                collectionId={collectionId}
+                textSize={16}
                 lineClamp={2}
                 onClick={onClick}
               />

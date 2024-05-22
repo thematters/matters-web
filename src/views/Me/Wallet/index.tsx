@@ -13,7 +13,8 @@ import {
   Button,
   Head,
   Layout,
-  Spinner,
+  PaymentPasswordContext,
+  SpinnerBlock,
   TableView,
   TextIcon,
   ViewerContext,
@@ -32,6 +33,7 @@ import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
 const Wallet = () => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
+  const { hasPaymentPassword } = useContext(PaymentPasswordContext)
 
   const currency = viewer.settings.currency
 
@@ -65,7 +67,6 @@ const Wallet = () => {
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const canPayout = balanceHKD >= PAYMENT_MINIMAL_PAYOUT_AMOUNT.HKD
   const hasStripeAccount = !!data?.viewer?.wallet.stripeAccount?.id
-  const hasPaymentPassword = viewer.status?.hasPaymentPassword
 
   if (exchangeRateLoading || loading) {
     return (
@@ -77,7 +78,7 @@ const Wallet = () => {
             </Layout.Header.Title>
           }
         />
-        <Spinner />
+        <SpinnerBlock />
       </Layout.Main>
     )
   }
@@ -94,12 +95,12 @@ const Wallet = () => {
           <>
             <span />
             <Button
-              spacing={[0, 'tight']}
+              spacing={[0, 12]}
               size={[null, '2rem']}
               bgColor="green"
               href={PATHS.ME_WALLET_TRANSACTIONS}
             >
-              <TextIcon color="white" weight="md">
+              <TextIcon color="white" weight="medium">
                 <FormattedMessage defaultMessage="Transactions" id="/jJLYy" />
               </TextIcon>
             </Button>

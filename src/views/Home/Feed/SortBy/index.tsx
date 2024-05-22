@@ -24,17 +24,17 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
       </SegmentedTabs.Tab>
 
       <SegmentedTabs.Tab
-        onClick={() => setFeedType('newest')}
-        selected={isNewset}
-      >
-        <FormattedMessage defaultMessage="Latest" id="adThp5" />
-      </SegmentedTabs.Tab>
-
-      <SegmentedTabs.Tab
         onClick={() => setFeedType('icymi')}
         selected={isICYMI}
       >
         <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+      </SegmentedTabs.Tab>
+
+      <SegmentedTabs.Tab
+        onClick={() => setFeedType('newest')}
+        selected={isNewset}
+      >
+        <FormattedMessage defaultMessage="Latest" id="adThp5" />
       </SegmentedTabs.Tab>
     </SegmentedTabs>
   )

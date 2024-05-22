@@ -3,7 +3,6 @@ const clientPreferenceResolver = (_: any) => {
     __typename: 'ClientPreference',
     id: 'local',
     wall: true,
-    routeHistory: [],
     circleBanner: true,
   }
 }

@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 
+import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { Card, CardProps, IconHashTag16, TextIcon } from '~/components'
+import { Card, CardProps, Icon, TextIcon } from '~/components'
 import {
   TagDigestRichTagPrivateFragment,
   TagDigestRichTagPublicFragment,
@@ -58,10 +59,10 @@ const Rich = ({
     >
       <section className={styles.content}>
         <TextIcon
-          icon={<IconHashTag16 color="grey" />}
+          icon={<Icon icon={IconHashTag} color="grey" />}
           color="black"
-          size="md"
-          spacing="xxtight"
+          size={16}
+          spacing={4}
           weight="normal"
         >
           {tag.content}

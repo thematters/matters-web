@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { SegmentedTabs, Translate } from '~/components'
+import { SegmentedTabs } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -14,28 +14,28 @@ const AllTabs = () => {
           onClick={() => setCurr('article')}
           selected={curr === 'article'}
         >
-          <Translate id="articles" />
+          Articles
         </SegmentedTabs.Tab>
 
         <SegmentedTabs.Tab
           onClick={() => setCurr('comment')}
           selected={curr === 'comment'}
         >
-          <Translate id="responses" />
+          Responses
         </SegmentedTabs.Tab>
 
         <SegmentedTabs.Tab
           onClick={() => setCurr('tag')}
           selected={curr === 'tag'}
         >
-          <Translate id="tag" />
+          Tag
         </SegmentedTabs.Tab>
 
         <SegmentedTabs.Tab
           onClick={() => setCurr('support')}
           selected={curr === 'support'}
         >
-          <Translate zh_hant="支持" zh_hans="支持" />
+          Support
         </SegmentedTabs.Tab>
       </SegmentedTabs>
 

@@ -9,7 +9,7 @@ const fragments = {
         id
         title
         slug
-        mediaHash
+        shortHash
         author {
           id
           userName

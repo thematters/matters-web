@@ -10,17 +10,19 @@ export * from './RemoveSocialLoginDialog'
 export * from './RemoveWalletLoginDialog'
 export * from './SetEmailDialog'
 export * from './SetPasswordDialog'
+export * from './SetPaymentPasswordDialog'
 export * from './SetUserNameDialog'
 
 // Article
 export * from './AppreciatorsDialog'
-export * from './BindEmailHintDialog'
+export * from './CommentFormBetaDialog'
 export * from './CommentFormDialog'
-export * from './FingerprintDialog'
 export * from './MigrationDialog'
 export * from './ReviseArticleDialog'
 export * from './ShareDialog'
+export * from './SubmitReportDialog'
 export * from './SupportersDialog'
+export * from './TagListDialog'
 
 // Collection
 export * from './AddArticlesCollectionDialog'
@@ -42,7 +44,6 @@ export * from './SearchSelectDialog'
 
 // Payment
 export * from './AddCreditDialog'
-export * from './DonationDialog'
 export * from './PayoutDialog'
 export * from './ResetPaymentPasswordDialog'
 export * from './SubscribeCircleDialog'

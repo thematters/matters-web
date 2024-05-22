@@ -7,7 +7,7 @@ import {
   Layout,
   Media,
   Spacer,
-  Spinner,
+  SpinnerBlock,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -52,7 +52,7 @@ const BaseFollow = () => {
   }, [])
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (!data) {

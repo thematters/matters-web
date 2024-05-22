@@ -10,7 +10,7 @@ import {
   Layout,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
 } from '~/components'
 import { MeDraftFeedQuery } from '~/gql/graphql'
 
@@ -21,7 +21,7 @@ export const BaseMeDrafts = () => {
     useQuery<MeDraftFeedQuery>(ME_DRAFTS_FEED)
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

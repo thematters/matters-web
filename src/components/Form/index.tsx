@@ -4,6 +4,7 @@ import ComposedAmountInput from './ComposedAmountInput'
 import Field from './Field'
 import Input from './Input'
 import PinInput from './PinInput'
+import RadioGroup from './RadioGroup'
 import Select from './Select'
 import SquareCheckBox from './SquareCheckBox'
 import Textarea from './Textarea'
@@ -23,6 +24,7 @@ export const Form: React.FC<FormProps> & {
   Field: typeof Field
   Select: typeof Select
   ComposedAmountInput: typeof ComposedAmountInput
+  RadioGroup: typeof RadioGroup
 } = ({ children, ...formProps }) => (
   <form method="POST" autoComplete="off" {...formProps}>
     {children}
@@ -39,3 +41,4 @@ Form.AmountInput = AmountInput
 Form.Field = Field
 Form.Select = Select
 Form.ComposedAmountInput = ComposedAmountInput
+Form.RadioGroup = RadioGroup

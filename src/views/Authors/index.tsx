@@ -9,7 +9,7 @@ import {
   Layout,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Translate,
   usePublicQuery,
   UserDigest,
@@ -79,7 +79,7 @@ const BaseAuthors = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {
@@ -115,7 +115,7 @@ const BaseAuthors = () => {
                   id: node.id,
                 })
               }
-              spacing={['tight', 0]}
+              spacing={[12, 0]}
             />
           </List.Item>
         ))}

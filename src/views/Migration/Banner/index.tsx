@@ -1,14 +1,13 @@
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
 import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
-import { translate } from '~/common/utils'
-import { LanguageContext, ShareButton, TextIcon, Translate } from '~/components'
+import { ShareButton, TextIcon, Translate } from '~/components'
 
 import layoutStyles from '../../About/layout.module.css'
 import styles from './styles.module.css'
 
 const Banner = () => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const style = {
     '--migration-banner-bg': `url(${IMAGE_BANNER})`,
@@ -42,14 +41,13 @@ const Banner = () => {
             size={['7rem', '2.5rem']}
             spacing={[0, 0]}
             inCard={false}
-            title={translate({
-              zh_hant: '我正在搬家到 Matters，邀請你一起來',
-              zh_hans: '我正在搬家到 Matters，邀请你一起来',
-              en: 'I am migrating to Matters, and I invite you to come along',
-              lang,
+            title={intl.formatMessage({
+              defaultMessage:
+                'I am migrating to Matters, and I invite you to come along',
+              id: '0/gRer',
             })}
           >
-            <TextIcon color="white" size="sm" weight="md">
+            <TextIcon color="white" size={14} weight="medium">
               <Translate
                 zh_hant="邀請朋友搬家"
                 zh_hans="邀请朋友搬家"

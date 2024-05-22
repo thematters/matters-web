@@ -1,22 +1,16 @@
 import { Editor } from '@matters/matters-editor'
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconEditorMenuAudio } from '@/public/static/icons/32px/editor-menu-audio.svg'
+import { ReactComponent as IconEditorAudio } from '@/public/static/icons/editor-audio.svg'
 import {
   ACCEPTED_UPLOAD_AUDIO_TYPES,
   ASSET_TYPE,
   UPLOAD_AUDIO_SIZE_LIMIT,
 } from '~/common/enums'
-import { translate } from '~/common/utils'
-import {
-  IconSpinner16,
-  LanguageContext,
-  toast,
-  Translate,
-  withIcon,
-} from '~/components'
+import { Spinner, toast, Translate, withIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -36,7 +30,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
   editor,
   upload,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const [uploading, setUploading] = useState(false)
 
   const acceptTypes = ACCEPTED_UPLOAD_AUDIO_TYPES.join(',')
@@ -111,26 +105,22 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
     <label
       className={labelClasses}
       htmlFor={fieldId}
-      title={translate({
-        zh_hant: '插入音訊',
-        zh_hans: '插入音频',
-        en: 'Insert audio',
-        lang,
+      title={intl.formatMessage({
+        defaultMessage: 'Insert audio',
+        id: 'oGiO//',
       })}
     >
-      {!uploading && withIcon(IconEditorMenuAudio)({ size: 'lg' })}
-      {uploading && <IconSpinner16 size="lg" color="greyLight" />}
+      {!uploading && withIcon(IconEditorAudio)({ size: 32 })}
+      {uploading && <Spinner size={32} color="greyLight" />}
 
       <VisuallyHidden>
         <input
           id={fieldId}
           type="file"
           name="file"
-          aria-label={translate({
-            zh_hant: '插入音訊',
-            zh_hans: '插入音频',
-            en: 'Insert audio',
-            lang,
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Insert audio',
+            id: 'oGiO//',
           })}
           disabled={uploading}
           accept={acceptTypes}

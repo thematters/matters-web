@@ -1,8 +1,9 @@
 .content {
   min-height: 100vh;
-  padding: var(--spacing-base);
+  padding: var(--sp20) var(--sp16);
 
   @media (--sm-up) {
+    padding: var(--sp32);
     padding-right: 0;
     padding-left: 0;
   }
@@ -13,11 +14,16 @@
   }
 }
 
-.title {
-  margin-bottom: var(--spacing-base);
+.block {
+  margin: var(--sp24) 0 var(--sp40);
 }
 
-.block {
-  padding: var(--spacing-loose) 0 0;
-  margin: var(--spacing-loose) 0 var(--spacing-base);
+.smUpCommentBlock {
+  padding-top: var(--sp40);
+}
+
+.mobileLogo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
 }

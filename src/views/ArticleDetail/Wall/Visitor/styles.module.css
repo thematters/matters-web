@@ -26,7 +26,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  padding: var(--spacing-base);
+  padding: var(--sp16);
   background-color: var(--color-white);
   background-image: var(--wall-visitor-bg);
   border-top-left-radius: 1.25rem;
@@ -42,8 +42,8 @@
   }
 
   & .desc {
-    margin: var(--spacing-xx-tight) 0 var(--spacing-x-tight);
-    font-size: var(--font-size-sm);
+    margin: var(--sp4) 0 var(--sp8);
+    font-size: var(--text14);
     color: var(--color-grey-darker);
   }
 
@@ -56,6 +56,6 @@
     top: 0;
     right: 0;
     display: inline-flex;
-    padding: var(--spacing-base);
+    padding: var(--sp16);
   }
 }

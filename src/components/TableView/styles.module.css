@@ -1,8 +1,8 @@
 .group {
   & .name {
-    margin: var(--spacing-x-loose) 0 0;
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-normal);
+    margin: var(--sp32) 0 0;
+    font-size: var(--text14);
+    font-weight: var(--font-normal);
     color: var(--color-grey-dark);
   }
 
@@ -17,11 +17,11 @@
 }
 
 .spacingXBase {
-  margin-right: var(--spacing-base);
-  margin-left: var(--spacing-base);
+  margin-right: var(--sp16);
+  margin-left: var(--sp16);
 }
 
 .spacingYXloose {
-  margin-top: var(--spacing-x-loose);
-  margin-bottom: var(--spacing-x-loose);
+  margin-top: var(--sp32);
+  margin-bottom: var(--sp32);
 }

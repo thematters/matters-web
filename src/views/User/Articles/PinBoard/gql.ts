@@ -12,7 +12,7 @@ export const fragments = {
         cover
         ... on Article {
           slug
-          mediaHash
+          shortHash
           summary
           author {
             id

@@ -1,6 +1,6 @@
 .searchingArea {
   @media (--sm-up) {
-    margin-top: calc(var(--spacing-base) * -1);
+    margin-top: calc(var(--sp16) * -1);
   }
 }
 
@@ -29,7 +29,7 @@
     &.Article {
       & .dragHandler {
         height: auto;
-        padding-top: var(--spacing-tight);
+        padding-top: var(--sp12);
       }
     }
 

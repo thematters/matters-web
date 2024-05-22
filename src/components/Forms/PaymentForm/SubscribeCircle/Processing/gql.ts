@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-export const VIEWER_CIRLCE_STATE = gql`
+export const VIEWER_CIRCLE_STATE = gql`
   query ViewerCircleState($name: String!) {
     circle(input: { name: $name }) {
       id

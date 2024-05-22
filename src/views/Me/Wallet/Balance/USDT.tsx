@@ -1,12 +1,13 @@
 import classNames from 'classnames'
 import { useContext } from 'react'
 
+import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
 import { PATHS } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
-  IconUSDTActive40,
+  Icon,
   TextIcon,
   Translate,
   useBalanceUSDT,
@@ -36,20 +37,20 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
     return (
       <section className={classes}>
         <TextIcon
-          icon={<IconUSDTActive40 size="xlM" />}
-          size="md"
-          spacing="xtight"
+          icon={<Icon icon={IconTether} size={40} />}
+          size={16}
+          spacing={8}
         >
           <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
         </TextIcon>
 
         <Button
-          spacing={[0, 'tight']}
+          spacing={[0, 12]}
           size={[null, '1.5rem']}
           borderColor="black"
           href={PATHS.ME_SETTINGS}
         >
-          <TextIcon color="black" size="xs">
+          <TextIcon color="black" size={12}>
             <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />
           </TextIcon>
         </Button>
@@ -60,9 +61,9 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   return (
     <section className={classes}>
       <TextIcon
-        icon={<IconUSDTActive40 size="xlM" />}
-        size="md"
-        spacing="xtight"
+        icon={<Icon icon={IconTether} size={40} />}
+        size={16}
+        spacing={8}
       >
         <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
       </TextIcon>

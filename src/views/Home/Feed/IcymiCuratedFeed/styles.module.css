@@ -1,0 +1,42 @@
+.container {
+  padding: var(--sp24) 0 0;
+
+  @media (--sm-up) {
+    padding: var(--sp8) 0 0;
+  }
+}
+
+.description {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 var(--sp16) var(--sp8);
+  margin-bottom: var(--sp24);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
+  line-height: 1.375rem;
+  color: var(--color-grey-dark);
+
+  & > p {
+    padding: 0 var(--sp16);
+  }
+
+  @media (--sm-up) {
+    padding-bottom: var(--sp16);
+  }
+}
+
+.cards {
+  @mixin border-bottom-grey-light;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp32) var(--sp16);
+  padding-bottom: var(--sp40);
+  border-bottom-style: dashed;
+
+  @media (--sm-up) {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp32) var(--sp40);
+  }
+}

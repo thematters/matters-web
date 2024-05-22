@@ -13,7 +13,7 @@ const Inactive = () => {
       <Media at="sm">
         <header className={styles.header}>
           <section className={styles.avatar}>
-            <Avatar size="xxxlm" />
+            <Avatar size={76} />
           </section>
         </header>
 

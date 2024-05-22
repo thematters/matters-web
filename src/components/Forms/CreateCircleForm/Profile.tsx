@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
@@ -22,7 +22,6 @@ import {
   CoverUploader,
   Dialog,
   Form,
-  LanguageContext,
   Layout,
   toast,
   useMutation,
@@ -59,13 +58,11 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   const [update] = useMutation<PutCircleMutation>(PUT_CIRCLE, undefined, {
     showToast: false,
   })
-  const { lang } = useContext(LanguageContext)
   const isInPage = purpose === 'page'
-
   const isCreate = type === 'create'
   const formId = 'edit-circle-profile-form'
-
   const intl = useIntl()
+
   const {
     values,
     errors,
@@ -87,9 +84,9 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
     validate: ({ displayName, description }) =>
       _pickBy({
         displayName: !isCreate
-          ? validateCircleDisplayName(displayName, lang)
+          ? validateCircleDisplayName(displayName, intl)
           : undefined,
-        description: validateDescription(description, lang),
+        description: validateDescription(description, intl),
       }),
     onSubmit: async (
       { avatar, cover, displayName, description },

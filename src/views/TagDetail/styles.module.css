@@ -1,6 +1,6 @@
 .info {
-  padding: 0 var(--spacing-base);
-  margin-bottom: var(--spacing-x-tight);
+  padding: 0 var(--sp16);
+  margin-bottom: var(--sp8);
 
   @media (--sm-up) {
     padding: 0;
@@ -9,23 +9,23 @@
   & .top {
     @mixin flex-center-space-between;
 
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
   }
 }
 
 .buttons {
   display: inline-flex;
-  gap: var(--spacing-base);
-  margin-top: var(--spacing-x-tight);
+  gap: var(--sp16);
+  margin-top: var(--sp8);
 
   @media (--sm-up) {
-    padding-right: var(--spacing-base);
-    margin-top: var(--spacing-base);
+    padding-right: var(--sp16);
+    margin-top: var(--sp16);
   }
 }
 
 .statistics {
   @mixin flex-center-start;
 
-  gap: var(--spacing-x-tight);
+  gap: var(--sp8);
 }

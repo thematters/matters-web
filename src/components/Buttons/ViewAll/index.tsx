@@ -8,12 +8,12 @@ export const ViewAllButton: React.FC<ViewAllButtonProps> = ({ ...props }) => {
   return (
     <Button
       size={[null, '1.75rem']}
-      spacing={[0, 'tight']}
+      spacing={[0, 12]}
       borderColor="green"
       borderWidth="sm"
       {...props}
     >
-      <TextIcon color="green" size="xs" weight="md" textPlacement="left">
+      <TextIcon color="green" size={12} weight="medium" placement="left">
         <FormattedMessage defaultMessage="View All" id="wbcwKd" />
       </TextIcon>
     </Button>

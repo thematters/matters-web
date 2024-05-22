@@ -2,18 +2,14 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import {
-  IconDotDivider,
-  TextIcon,
-  Translate,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+import { Icon, TextIcon, useMutation, ViewerContext } from '~/components'
 import {
   updateUserFollowerCount,
   updateViewerFolloweeCount,
@@ -86,13 +82,13 @@ const FollowButton = ({ user }: FollowButtonProps) => {
 
   return (
     <TextIcon
-      icon={<IconDotDivider color="greyDark" />}
+      icon={<Icon icon={IconDot} color="greyDark" />}
       color="green"
-      size="sm"
+      size={14}
       spacing={0}
     >
       <button type="button" onClick={onClick}>
-        <Translate id="follow" />
+        <FormattedMessage defaultMessage="Follow" id="ieGrWo" />
       </button>
     </TextIcon>
   )

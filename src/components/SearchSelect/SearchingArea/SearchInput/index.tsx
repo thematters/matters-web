@@ -3,8 +3,10 @@ import { Formik } from 'formik'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconMinus } from '@/public/static/icons/24px/minus.svg'
+import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
 import { translate } from '~/common/utils'
-import { IconClear16, IconSearch16, LanguageContext } from '~/components'
+import { Icon, LanguageContext } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -32,7 +34,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const fieldId = `search-input-${type}`.toLocaleLowerCase()
   const { lang } = useContext(LanguageContext)
   const intl = useIntl()
-  const textAriaLabel = translate({ id: 'search', lang })
+  const textAriaLabel = intl.formatMessage({
+    defaultMessage: 'Search',
+    id: 'xmcVZ0',
+  })
   const textPlaceholder = {
     Article: translate({
       zh_hant: '輸入作品標題或貼上作品連結',
@@ -105,9 +110,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
             <button
               className={styles.search}
               type="submit"
-              aria-label={translate({ id: 'search', lang })}
+              aria-label={textAriaLabel}
             >
-              <IconSearch16 color="green" />
+              <Icon icon={IconNavSearch} color="green" />
             </button>
 
             {value && (
@@ -123,7 +128,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
                   setValues({ q: '' })
                 }}
               >
-                <IconClear16 color="grey" />
+                <Icon icon={IconMinus} color="grey" />
               </button>
             )}
           </form>

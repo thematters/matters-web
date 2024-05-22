@@ -1,5 +1,5 @@
 .authorWidget {
-  margin: var(--spacing-base) var(--spacing-base) 0;
+  margin: var(--sp16) var(--sp16) 0;
 
   @media (--sm-up) {
     margin-right: 0;
@@ -9,7 +9,7 @@
 
 .pinnedBroadcast {
   position: relative;
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 
   & .icon {
     position: absolute;

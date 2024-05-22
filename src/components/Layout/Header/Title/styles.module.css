@@ -1,6 +1,6 @@
 .title {
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text24);
+  font-weight: var(--font-medium);
   line-height: 2.25rem;
   cursor: pointer;
 }

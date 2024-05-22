@@ -2,6 +2,6 @@
   @mixin inline-flex-center-all;
 
   & > * + * {
-    padding-left: var(--spacing-base);
+    padding-left: var(--sp16);
   }
 }

@@ -8,9 +8,9 @@
 .currency {
   position: absolute;
   top: 0;
-  left: var(--spacing-base);
+  left: var(--sp16);
   height: 100%;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   line-height: var(--input-height);
   color: var(--color-black);
   pointer-events: none;

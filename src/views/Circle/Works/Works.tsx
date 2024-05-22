@@ -9,7 +9,7 @@ import {
   Layout,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   Throw404,
   useEventListener,
   usePublicQuery,
@@ -107,7 +107,7 @@ const CircleDetailWorks = () => {
     return (
       <>
         <CircleDetailTabs />
-        <Spinner />
+        <SpinnerBlock />
       </>
     )
   }

@@ -1,10 +1,6 @@
-import {
-  Dialog,
-  toast,
-  Translate,
-  useDialogSwitch,
-  useMutation,
-} from '~/components'
+import { FormattedMessage } from 'react-intl'
+
+import { Dialog, toast, useDialogSwitch, useMutation } from '~/components'
 import UPDATE_TAG_SETTING from '~/components/GQL/mutations/updateTagSetting'
 import { UpdateTagSettingMutation } from '~/gql/graphql'
 
@@ -33,11 +29,7 @@ const BaseDialog = ({ id, isOwner, children }: TagLeaveDialogProps) => {
 
     toast.success({
       message: (
-        <Translate
-          zh_hant="辭去權限成功"
-          zh_hans="辞去权限成功"
-          en="Resignation Success"
-        />
+        <FormattedMessage defaultMessage="Resignation Success" id="lMKb5N" />
       ),
     })
 
@@ -51,10 +43,9 @@ const BaseDialog = ({ id, isOwner, children }: TagLeaveDialogProps) => {
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
-            <Translate
-              zh_hant="辭去權限"
-              zh_hans="辞去权限"
-              en="resign as tag maintainer"
+            <FormattedMessage
+              defaultMessage="Resign as tag maintainer"
+              id="Qzdtxi"
             />
           }
         />
@@ -62,18 +53,12 @@ const BaseDialog = ({ id, isOwner, children }: TagLeaveDialogProps) => {
         <Dialog.Content>
           <Dialog.Content.Message>
             <h3>
-              <Translate
-                zh_hant="確定要這麼做嗎"
-                zh_hans="确定要这么做吗"
-                en="are you sure"
-              />{' '}
-              😭
+              <FormattedMessage defaultMessage="Are you sure 😭" id="yXWwSW" />
             </h3>
             <p>
-              <Translate
-                zh_hant="如果辭去權限，你將無法繼續管理標籤。"
-                zh_hans="如果辞去权限，你将无法继续管理标签。"
-                en="After resignation, you will not be able to manage tags."
+              <FormattedMessage
+                defaultMessage="After resignation, you will not be able to manage tags."
+                id="kCp8A9"
               />
             </p>
           </Dialog.Content.Message>
@@ -84,10 +69,9 @@ const BaseDialog = ({ id, isOwner, children }: TagLeaveDialogProps) => {
           btns={
             <Dialog.RoundedButton
               text={
-                <Translate
-                  zh_hant="確認辭去"
-                  zh_hans="确认辞去"
-                  en="Confirm Resignation"
+                <FormattedMessage
+                  defaultMessage="Confirm Resignation"
+                  id="lT6Dt8"
                 />
               }
               color={loading ? 'green' : 'red'}
@@ -98,10 +82,9 @@ const BaseDialog = ({ id, isOwner, children }: TagLeaveDialogProps) => {
           smUpBtns={
             <Dialog.TextButton
               text={
-                <Translate
-                  zh_hant="確認辭去"
-                  zh_hans="确认辞去"
-                  en="Confirm Resignation"
+                <FormattedMessage
+                  defaultMessage="Confirm Resignation"
+                  id="lT6Dt8"
                 />
               }
               color={loading ? 'green' : 'red'}

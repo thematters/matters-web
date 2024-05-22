@@ -1,11 +1,12 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconReadingTime } from '@/public/static/icons/24px/reading-time.svg'
 import { toPath } from '~/common/utils'
 import {
   Card,
   DateTime,
-  IconRead16,
+  Icon,
   LinkWrapper,
   TextIcon,
   Tooltip,
@@ -28,7 +29,11 @@ const Count = ({ count }: { count: number }) => {
       trigger="click"
     >
       <button type="button" className={styles.count}>
-        <TextIcon icon={<IconRead16 />} size="xs" color="greyDark">
+        <TextIcon
+          icon={<Icon icon={IconReadingTime} />}
+          size={12}
+          color="greyDark"
+        >
           {count}
         </TextIcon>
       </button>

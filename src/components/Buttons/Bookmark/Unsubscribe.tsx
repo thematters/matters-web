@@ -1,11 +1,12 @@
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconSave2 } from '@/public/static/icons/24px/save2.svg'
 import { ERROR_CODES, ERROR_MESSAGES, TEST_ID } from '~/common/enums'
 import {
   Button,
-  IconBookmarked16,
-  IconBookmarked20,
+  ButtonProps,
+  Icon,
   IconSize,
   Menu,
   toast,
@@ -16,18 +17,19 @@ import { ToggleSubscribeArticleMutation } from '~/gql/graphql'
 
 import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
 
-interface UnsubscribeProps {
+export type UnsubscribeProps = {
   articleId?: string
-  size?: Extract<IconSize, 'mdS' | 'md'>
+  iconSize?: Extract<IconSize, 20 | 24>
   disabled?: boolean
   inCard?: boolean
-}
+} & ButtonProps
 
 const Unsubscribe = ({
   articleId,
-  size,
+  iconSize,
   disabled,
   inCard,
+  ...buttonProps
 }: UnsubscribeProps) => {
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
@@ -74,7 +76,7 @@ const Unsubscribe = ({
             description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
           />
         }
-        icon={<IconBookmarked20 size={size} />}
+        icon={<Icon icon={IconSave2} size={iconSize} />}
         onClick={onClick}
         testId={TEST_ID.ARTICLE_BOOKMARK}
       />
@@ -83,7 +85,7 @@ const Unsubscribe = ({
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       aria-label={intl.formatMessage({
         defaultMessage: 'Remove bookmark',
@@ -93,8 +95,9 @@ const Unsubscribe = ({
       onClick={onClick}
       disabled={disabled}
       data-test-id={TEST_ID.ARTICLE_BOOKMARK}
+      {...buttonProps}
     >
-      <IconBookmarked16 color="black" size={size} />
+      <Icon icon={IconSave2} size={iconSize} />
     </Button>
   )
 }

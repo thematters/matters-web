@@ -1,9 +1,9 @@
-import { ReactComponent as IconLike88 } from '@/public/static/icons/88px/like.svg'
+import { ReactComponent as IconEmptyLike } from '@/public/static/icons/empty-like.svg'
 import { Empty, Translate, withIcon } from '~/components'
 
 export const EmptyLike = () => (
   <Empty
-    icon={withIcon(IconLike88)({ size: 'xxxlM' })}
+    icon={withIcon(IconEmptyLike)({ size: 88 })}
     description={
       <Translate
         zh_hant="尚無讚賞紀錄"

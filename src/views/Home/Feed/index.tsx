@@ -12,7 +12,7 @@ const HomeFeed = () => {
   const [feedType, setFeedType] = useState<HomeFeedType>(qsType || 'hottest')
 
   const changeFeed = (newType: HomeFeedType) => {
-    setQuery('type', newType)
+    setQuery('type', newType === 'hottest' ? '' : newType)
     setFeedType(newType)
   }
 

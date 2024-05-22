@@ -1,10 +1,12 @@
 .addTag {
   @mixin line-clamp;
 
-  font-size: var(--font-size-md);
+  font-size: var(--text16);
   line-height: inherit;
 
   & .content {
+    @mixin fix-cropped-letters;
+
     vertical-align: middle;
   }
 }

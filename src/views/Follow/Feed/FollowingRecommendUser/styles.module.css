@@ -6,19 +6,19 @@
 .head {
   display: flex;
   flex-direction: row;
-  margin-bottom: var(--spacing-x-tight);
+  margin-bottom: var(--sp8);
 }
 
 .wrap {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  margin-left: var(--spacing-base);
+  margin-left: var(--sp16);
 
   & .name {
-    margin-bottom: var(--spacing-xx-tight);
-    font-size: var(--font-size-md);
-    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--sp4);
+    font-size: var(--text16);
+    font-weight: var(--font-medium);
   }
 }
 
@@ -26,7 +26,7 @@
   @mixin line-clamp;
 
   height: 4rem;
-  font-size: var(--font-size-sm);
+  font-size: var(--text14);
   color: var(--color-grey-dark);
   -webkit-line-clamp: 3;
 }

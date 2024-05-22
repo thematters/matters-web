@@ -1,5 +1,5 @@
 .meDigest {
-  padding: 0 var(--spacing-base);
+  padding: 0 var(--sp16);
 }
 
 .header {
@@ -7,15 +7,15 @@
 }
 
 .names {
-  margin-left: var(--spacing-x-tight);
+  margin-left: var(--sp8);
 
   & .displayName {
-    font-size: var(--font-size-lg);
+    font-size: var(--text20);
     line-height: 1.5rem;
   }
 
   & .username {
-    font-size: var(--font-size-md);
+    font-size: var(--text16);
     line-height: 1.5rem;
     color: var(--color-grey-dark);
   }

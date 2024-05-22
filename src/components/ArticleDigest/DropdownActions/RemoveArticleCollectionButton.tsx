@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { IconTrash20, Menu } from '~/components'
+import { ReactComponent as IconDelete } from '@/public/static/icons/24px/delete.svg'
+import { Icon, Menu } from '~/components'
 
 interface RemoveArticleCollectionButtonProps {
   openDialog: () => void
@@ -16,7 +17,7 @@ const RemoveArticleCollectionButton = ({
       text={
         <FormattedMessage defaultMessage="Remove from collection" id="0Om2Kl" />
       }
-      icon={<IconTrash20 size="mdS" />}
+      icon={<Icon icon={IconDelete} size={20} />}
       onClick={() => {
         onClick()
         openDialog()

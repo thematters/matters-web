@@ -32,7 +32,7 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
     <Card
       bgActiveColor="none"
       borderRadius="xtight"
-      spacing={['base', 'base']}
+      spacing={[16, 16]}
       {...path}
       {...cardProps}
     >
@@ -43,7 +43,7 @@ const RecommendUser = ({ user, ...cardProps }: Props) => {
               <VisuallyHidden>
                 <span>{user.displayName}</span>
               </VisuallyHidden>
-              <Avatar size="xxl" user={user} />
+              <Avatar size={56} user={user} />
             </a>
           </Link>
 

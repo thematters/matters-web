@@ -7,7 +7,7 @@ type FeatureName =
   | 'payment'
   | 'add_credit'
   | 'payout'
-  | 'NOTICE_TAG_ADOPTION'
+  | 'tag_adoption'
   | 'circle_management'
   | 'circle_interact'
 
@@ -15,7 +15,7 @@ export const FeaturesContext = React.createContext({
   payment: false,
   add_credit: false,
   payout: false,
-  NOTICE_TAG_ADOPTION: false,
+  tag_adoption: false,
   circle_management: false,
   circle_interact: false,
 })

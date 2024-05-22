@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { useAccount, useEnsName } from 'wagmi'
 
 import { featureSupportedChains } from '~/common/utils'
-import { Dialog, Translate, ViewerContext } from '~/components'
+import { Dialog, ViewerContext } from '~/components'
 
 import ENSDescription from './ENSDescription'
 import LinkENSIntro from './LinkENSIntro'
@@ -56,11 +56,7 @@ const ConnectWallet = ({
         btns={
           <Dialog.RoundedButton
             text={
-              <Translate
-                zh_hans="连接钱包"
-                zh_hant="連接錢包"
-                en="Connect Wallet"
-              />
+              <FormattedMessage defaultMessage="Connect Wallet" id="cg1VJ2" />
             }
             onClick={switchToWalletSelect}
           />
@@ -68,11 +64,7 @@ const ConnectWallet = ({
         smUpBtns={
           <Dialog.TextButton
             text={
-              <Translate
-                zh_hans="连接钱包"
-                zh_hant="連接錢包"
-                en="Connect Wallet"
-              />
+              <FormattedMessage defaultMessage="Connect Wallet" id="cg1VJ2" />
             }
             onClick={switchToWalletSelect}
           />

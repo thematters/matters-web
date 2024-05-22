@@ -7,7 +7,7 @@ import {
   List,
   QueryError,
   ShuffleButton,
-  Spinner,
+  SpinnerBlock,
   Tag,
   TagDigest,
   usePublicQuery,
@@ -93,7 +93,7 @@ const Tags = () => {
         rightButton={<ShuffleButton onClick={shuffle} />}
       />
 
-      {loading && <Spinner />}
+      {loading && <SpinnerBlock />}
 
       {!loading && (
         <List hasBorder={false}>

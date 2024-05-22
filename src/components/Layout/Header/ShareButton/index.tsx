@@ -1,11 +1,7 @@
 import { useIntl } from 'react-intl'
 
-import {
-  Button,
-  IconShare32,
-  ShareDialog,
-  ShareDialogProps,
-} from '~/components'
+import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
+import { Button, Icon, ShareDialog, ShareDialogProps } from '~/components'
 
 export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (
   props
@@ -15,6 +11,7 @@ export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (
     <ShareDialog {...props}>
       {({ openDialog: openShareDialog }) => (
         <Button
+          size={['2rem', '2rem']}
           aria-label={intl.formatMessage({
             defaultMessage: 'Share',
             id: 'OKhRC6',
@@ -23,7 +20,7 @@ export const ShareButton: React.FC<Omit<ShareDialogProps, 'children'>> = (
           bgColor="halfBlack"
           onClick={openShareDialog}
         >
-          <IconShare32 size="lg" color="white" />
+          <Icon icon={IconShare} size={24} color="white" />
         </Button>
       )}
     </ShareDialog>

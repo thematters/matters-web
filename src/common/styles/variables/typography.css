@@ -4,74 +4,84 @@
     'Segoe UI', roboto, arial, 'PingFang TC', 'PingFang SC', 'Noto Sans TC',
     'Noto Sans SC', 'Noto Sans CJK TC', 'Noto Sans CJK SC', 'Source Han Sans TW',
     'Source Han Sans CN', 'Microsoft JhengHei', 'Microsoft YaHei',
-    'WenQuanYi Micro Hei', sans-serif;
+    'WenQuanYi Micro Hei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   --font-sans-sc: -apple-system, blinkmacsystemfont, 'Helvetica Neue',
     'Segoe UI', roboto, arial, 'PingFang SC', 'PingFang TC', 'Noto Sans SC',
     'Noto Sans TC', 'Noto Sans CJK SC', 'Noto Sans CJK TC', 'Source Han Sans CN',
     'Source Han Sans TW', 'Microsoft YaHei', 'Microsoft JhengHei',
-    'WenQuanYi Micro Hei', sans-serif;
+    'WenQuanYi Micro Hei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
   --font-serif-tc: 'Noto Serif', 'Noto Serif TC', 'Noto Serif SC',
     'Noto Serif CJK TC', 'Noto Serif CJK SC', 'Source Han Serif TW',
-    'Source Han Serif CN', 'Songti TC', 'Songti SC', serif;
+    'Source Han Serif CN', 'Songti TC', 'Songti SC', 'NSimSun', 'SimSun', serif,
+    'Apple Color Emoji', 'Segoe UI Emoji';
   --font-serif-sc: 'Noto Serif', 'Noto Serif SC', 'Noto Serif TC',
     'Noto Serif CJK SC', 'Noto Serif CJK TC', 'Source Han Sans CN',
-    'Source Han Sans TW', 'Songti SC', 'Songti TC', serif;
-  --font-mono: menlo, 'SFMono-Regular', consolas, monaco, monospace;
+    'Source Han Sans TW', 'Songti SC', 'Songti TC', 'NSimSun', 'SimSun', serif,
+    'Apple Color Emoji', 'Segoe UI Emoji';
+  --font-mono: menlo, 'SFMono-Regular', consolas, monaco, monospace,
+    'Apple Color Emoji', 'Segoe UI Emoji';
 
   /* Type Scale */
-  --font-size-xs-s: 0.6875rem; /* 11px */
-  --font-size-xs: 0.75rem; /* 12px */
-  --font-size-sm-s: 0.8125rem; /* 13px */
-  --font-size-sm: 0.875rem; /* 14px */
-  --font-size-md-s: 0.9375rem; /* 15px */
-  --font-size-md: 1rem; /* 16px */
-  --font-size-xm: 1.125rem; /* 18px */
-  --font-size-lg: 1.25rem; /* 20px */
-  --font-size-xl: 1.5rem; /* 24px */
-  --font-size-xxl: 2rem; /* 32px */
-  --font-weight-light: 300;
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-bolder: 900;
+  --text12: 0.75rem; /* 12px */
+  --text13: 0.8125rem; /* 13px */
+  --text14: 0.875rem; /* 14px */
+  --text15: 0.9375rem; /* 15px */
+  --text16: 1rem; /* 16px */
+  --text18: 1.125rem; /* 18px */
+  --text20: 1.25rem; /* 20px */
+  --text24: 1.5rem; /* 24px */
+  --text32: 2rem; /* 32px */
+  --text36: 2.25rem; /* 36px */
+
+  /* Font Weight */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Line Height */
   --line-height-base-loose: 1.571428; /* 22/14 */
 
   /* Base */
-  --font-size-base: var(--font-size-md);
-  --font-weight-base: var(--font-weight-normal);
+  --font-size-base: var(--text16);
+  --font-weight-base: var(--font-normal);
   --line-height-base: 1.5;
 
   /* Nav Title */
-  --font-size-nav-title: var(--font-size-lg);
+  --font-size-nav-title: var(--text20);
   --line-height-nav-title: 2; /* 32/20 */
-  --font-weight-nav-title: var(--font-weight-semibold);
+  --font-weight-nav-title: var(--font-semibold);
 
   /* Feed Title */
-  --font-size-feed-title: var(--font-size-xm);
+  --font-size-feed-title: var(--text18);
   --line-height-feed-title: 1.3333333; /* 24/18 */
-  --font-weight-feed-title: var(--font-weight-medium);
+  --font-weight-feed-title: var(--font-medium);
 
   /* Subtext: digest footer, datetime, etc. */
-  --font-size-subtext: var(--font-size-xs);
+  --font-size-subtext: var(--text12);
   --line-height-subtext: 1.3333333; /* 16/12 */
-  --font-weight-subtext: var(--font-weight-normal);
+  --font-weight-subtext: var(--font-normal);
 
   /* Article Title */
-  --font-size-article-title: var(--font-size-xl);
-  --line-height-article-title: 1.5; /* 36/24 */
-  --font-weight-article-title: var(--font-weight-semibold);
+  --font-size-article-title: var(--text32);
+  --line-height-article-title: 1.6875; /* 54/32 */
+  --font-weight-article-title: var(--font-semibold);
 
   /* Article Body */
-  --font-size-article-base: 1rem; /* 16px; */
-  --line-height-article-base: 1.875; /* 30/16 */
+  --font-size-article-base: 1.0625rem; /* 17px */
+  --line-height-article-base: 1.75; /* 30/16 */
 
   /* Articke Heading */
-  --font-size-article-h1: 1.375; /* 22px */
-  --font-size-article-h2: var(--font-size-lg); /* 20px */
-  --font-size-article-h3: var(--font-size-xm); /* 18px */
-  --font-size-article-h4: var(--font-size-md); /* 16px */
-  --font-size-article-h5: var(--font-size-sm); /* 14px */
-  --font-size-article-h6: var(--font-size-xs); /* 12px */
-  --line-height-article-heading: var(--line-height-base);
+  --font-size-article-h1: var(--text36); /* 36px */
+  --font-size-article-h2: var(--text24); /* 24px */
+  --font-size-article-h3: var(--text20); /* 20px */
+  --font-size-article-h4: var(--text16); /* 16px */
+  --font-size-article-h5: var(--text14); /* 14px */
+  --font-size-article-h6: var(--text12); /* 12px */
+  --line-height-article-heading: 1.7;
+
+  /* sm */
+  --text14-article-h1: var(--text24); /* 24px */
+  --text14-article-h2: 1.3125rem; /* 21px */
+  --text14-article-h3: 1.1875rem; /* 19px */
 }

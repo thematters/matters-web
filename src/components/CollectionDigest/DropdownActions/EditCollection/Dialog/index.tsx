@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 
 import { TEST_ID } from '~/common/enums'
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 import { EditCollectionCollectionFragment } from '~/gql/graphql'
 
 interface EditCollectionDialogProps {
@@ -10,7 +10,7 @@ interface EditCollectionDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseEditCollectionDialog = ({

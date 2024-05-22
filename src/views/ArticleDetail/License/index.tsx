@@ -1,11 +1,6 @@
-import { ReactComponent as IconLicenseARR } from '@/public/static/icons/24px/license-arr.svg'
-import { ReactComponent as IconLicenseBY } from '@/public/static/icons/24px/license-by.svg'
-import { ReactComponent as IconLicenseCC } from '@/public/static/icons/24px/license-cc.svg'
-import { ReactComponent as IconLicenseCC0 } from '@/public/static/icons/24px/license-cc-0.svg'
-import { ReactComponent as IconLicenseNC } from '@/public/static/icons/24px/license-nc.svg'
-import { ReactComponent as IconLicenseND } from '@/public/static/icons/24px/license-nd.svg'
+import { FormattedMessage } from 'react-intl'
+
 import { TEST_ID } from '~/common/enums'
-import { TextIcon, Translate, withIcon } from '~/components'
 import { ArticleLicenseType } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -22,90 +17,18 @@ const License: React.FC<LicenseProps> = ({ license }) => {
 
   return (
     <section className={styles.license} data-test-id={TEST_ID.ARTICLE_LICENSE}>
-      {isCC0 && (
-        <TextIcon
-          icon={
-            <span className={styles.icons}>
-              {withIcon(IconLicenseCC0)({ size: 'md' })}
-            </span>
-          }
-          color="gold"
-          size="xs"
-          weight="md"
-          spacing="xtight"
-        >
-          <Translate
-            zh_hant="NO RIGHTS RESERVED 版權聲明"
-            zh_hans="NO RIGHTS RESERVED 版权声明"
-            en="NO RIGHTS RESERVED"
-          />
-        </TextIcon>
-      )}
+      {isCC0 && <FormattedMessage defaultMessage="CC0 License" id="rE7sE3" />}
 
       {isARR && (
-        <TextIcon
-          icon={
-            <span className={styles.icons}>
-              {withIcon(IconLicenseARR)({ size: 'md' })}
-            </span>
-          }
-          color="gold"
-          size="xs"
-          weight="md"
-          spacing="xtight"
-        >
-          <Translate
-            zh_hant="ALL RIGHTS RESERVED 版權聲明"
-            zh_hans="ALL RIGHTS RESERVED 版权声明"
-            en="ALL RIGHTS RESERVED"
-          />
-        </TextIcon>
+        <FormattedMessage defaultMessage="All rights reserved" id="iSM+et" />
       )}
 
       {isCCBYNCND2 && (
-        <TextIcon
-          icon={
-            <span className={styles.icons}>
-              {withIcon(IconLicenseCC)({ size: 'md' })}
-              {withIcon(IconLicenseBY)({ size: 'md' })}
-              {withIcon(IconLicenseNC)({ size: 'md' })}
-              {withIcon(IconLicenseND)({ size: 'md' })}
-            </span>
-          }
-          color="gold"
-          size="xs"
-          weight="md"
-          spacing="xtight"
-        >
-          <Translate
-            zh_hant="CC BY-NC-ND 2.0 版權聲明"
-            zh_hans="CC BY-NC-ND 2.0 版权声明"
-            en="CC BY-NC-ND 2.0"
-          />
-        </TextIcon>
+        <FormattedMessage defaultMessage="CC BY-NC-ND 2.0" id="A0MNSc" />
       )}
 
       {isCCBYNCND4 && (
-        <TextIcon
-          icon={
-            <span className={styles.icons}>
-              {withIcon(IconLicenseCC)({ size: 'md' })}
-              {withIcon(IconLicenseBY)({ size: 'md' })}
-              {withIcon(IconLicenseNC)({ size: 'md' })}
-              {withIcon(IconLicenseND)({ size: 'md' })}
-            </span>
-          }
-          color="gold"
-          size="xs"
-          weight="md"
-          spacing="xtight"
-        >
-          <Translate
-            zh_hant="CC BY-NC-ND 4.0 版權聲明"
-            zh_hans="CC BY-NC-ND 4.0 版权声明"
-            en="CC BY-NC-ND 4.0"
-          />
-        </TextIcon>
+        <FormattedMessage defaultMessage="CC BY-NC-ND 4.0" id="TPEQMa" />
       )}
     </section>
   )

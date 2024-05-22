@@ -1,7 +1,7 @@
 .response {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 }
 
 .access {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 }

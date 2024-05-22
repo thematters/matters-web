@@ -1,7 +1,9 @@
 import classNames from 'classnames'
 
+import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import { ReactComponent as IconCircleEmpty } from '@/public/static/icons/24px/circle-empty.svg'
 import { TEST_ID } from '~/common/enums'
-import { Card, IconChecked, IconUnChecked, Tag } from '~/components'
+import { Card, Icon, Tag } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from '../styles.module.css'
@@ -26,7 +28,7 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
 
   return (
     <Card
-      spacing={['base', 'base']}
+      spacing={[16, 16]}
       onClick={() => onClick(tag)}
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
@@ -35,10 +37,10 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
 
         <span className={styles.iconSelect}>
           {inStagingArea && selected && (
-            <IconChecked color="green" size="mdS" />
+            <Icon icon={IconCircleCheckFill} color="green" size={20} />
           )}
           {inStagingArea && !selected && (
-            <IconUnChecked color="greyLight" size="mdS" />
+            <Icon icon={IconCircleEmpty} color="greyLight" size={20} />
           )}
         </span>
       </section>

@@ -9,7 +9,7 @@ import {
 } from 'wagmi'
 
 import { contract } from '~/common/enums'
-import { featureSupportedChains, MaxUint256 } from '~/common/utils'
+import { featureSupportedChains, MaxApprovedUSDTAmount } from '~/common/utils'
 import { ViewerContext } from '~/components'
 
 export const useAllowanceUSDT = () => {
@@ -61,7 +61,7 @@ export const useApproveUSDT = () => {
     address: contract.Optimism.tokenAddress,
     abi: erc20ABI,
     functionName: 'approve',
-    args: [contract.Optimism.curationAddress, MaxUint256],
+    args: [contract.Optimism.curationAddress, MaxApprovedUSDTAmount],
   })
 
   return useContractWrite(config)

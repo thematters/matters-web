@@ -1,10 +1,10 @@
 import classNames from 'classnames'
-import Link from 'next/link'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconMatters } from '@/public/static/images/matters.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
 import { PATHS } from '~/common/enums'
-import { Tabs, withIcon } from '~/components'
+import { Button, Icon, Media, Tabs, useRoute } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -24,9 +24,10 @@ export const AuthTabs = ({
   normalText,
 }: AuthTabsProps) => {
   const intl = useIntl()
+  const { router, getQuery } = useRoute()
+  const hasTarget = getQuery('target')
 
   const isInPage = purpose === 'page'
-
   const isNormal = type === 'normal'
   const isWallet = type === 'wallet'
 
@@ -38,18 +39,29 @@ export const AuthTabs = ({
   return (
     <section className={tabsClasses}>
       {isInPage && (
-        <section className={styles.logo}>
-          <Link href={PATHS.HOME} legacyBehavior>
-            <a
+        <header className={styles.header}>
+          <section className={styles.logo}>
+            <Button
+              href={PATHS.HOME}
               aria-label={intl.formatMessage({
                 defaultMessage: 'Discover',
                 id: 'cE4Hfw',
               })}
             >
-              {withIcon(IconMatters)({})}
-            </a>
-          </Link>
-        </section>
+              <Icon icon={IconLogo} />
+            </Button>
+          </section>
+
+          <section className={styles.back}>
+            {hasTarget && (
+              <Media at="sm">
+                <Button onClick={() => router.back()}>
+                  <Icon icon={IconTimes} size={24} />
+                </Button>
+              </Media>
+            )}
+          </section>
+        </header>
       )}
       <Tabs noSpacing fill>
         <Tabs.Tab onClick={() => setType('normal')} selected={isNormal}>

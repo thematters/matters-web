@@ -5,7 +5,12 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/24px/analytics-income.svg'
 import { CHART_COLOR } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
-import { QueryError, Spinner, StackedAreaChart, useRoute } from '~/components'
+import {
+  QueryError,
+  SpinnerBlock,
+  StackedAreaChart,
+  useRoute,
+} from '~/components'
 import { CircleIncomeAnalyticsQuery } from '~/gql/graphql'
 
 import InfoTiles from '../InfoTiles'
@@ -27,7 +32,7 @@ const Content = () => {
   const income = data?.circle?.analytics.income
 
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {

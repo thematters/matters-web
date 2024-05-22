@@ -1,19 +1,26 @@
 .articleEditor {
   position: relative;
-  padding-bottom: 4rem; /* bottom bar height */
+  height: calc(
+    100vh - 3rem - 4rem - var(--sp16) * 2
+  ); /* 3rem for header, 4rem for bottom bar */
 
-  @media (--lg-up) {
+  height: calc(var(--ivh) * 100 - 3rem - 4rem - var(--sp16) * 2);
+  height: calc(100dvh - 3rem - 4rem - var(--sp16) * 2);
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  @media (--md-up) {
+    height: auto;
     padding-bottom: 0;
+    overflow-x: initial;
+    overflow-y: initial;
   }
 
   & :global(.ProseMirror),
   & :global(.tiptap) {
     min-height: 50vh;
-    margin-bottom: var(var(--global-nav-height));
-
-    @media (--lg-up) {
-      margin-bottom: 0;
-    }
+    min-height: calc(var(--ivh) * 50);
+    min-height: 50dvh;
 
     /* outline */
     &:focus {
@@ -54,7 +61,7 @@
       bottom: 0;
       left: 0;
       z-index: -1;
-      font-size: var(--font-size-sm-s);
+      font-size: var(--text13);
       line-height: 1.5;
       color: var(--color-grey);
       white-space: pre-wrap;

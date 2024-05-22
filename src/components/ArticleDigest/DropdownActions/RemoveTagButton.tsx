@@ -2,8 +2,9 @@ import gql from 'graphql-tag'
 import _isArray from 'lodash/isArray'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
-import { IconCircleMinus20, Menu, useMutation } from '~/components'
+import { Icon, Menu, useMutation } from '~/components'
 import { updateTagArticlesCount } from '~/components/GQL'
 import {
   DeleteArticlesTagsMutation,
@@ -64,7 +65,7 @@ const RemoveTagButton = ({
           description="src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
         />
       }
-      icon={<IconCircleMinus20 size="mdS" />}
+      icon={<Icon icon={IconCircleMinus} size={20} />}
       onClick={async () => {
         await deleteArticlesTags()
 

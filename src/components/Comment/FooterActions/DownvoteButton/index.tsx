@@ -1,13 +1,9 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import {
-  Button,
-  IconDownVote16,
-  IconDownVoted16,
-  TextIcon,
-  useMutation,
-} from '~/components'
+import { ReactComponent as IconVoteDown } from '@/public/static/icons/24px/vote-down.svg'
+import { ReactComponent as IconVoteDownFill } from '@/public/static/icons/24px/vote-down-fill.svg'
+import { Button, Icon, TextIcon, useMutation } from '~/components'
 import {
   UNVOTE_COMMENT,
   VOTE_COMMENT,
@@ -82,7 +78,7 @@ const DownvoteButton = ({
   if (comment.myVote === 'down') {
     return (
       <Button
-        spacing={['xtight', 'xtight']}
+        spacing={[8, 8]}
         bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
         onClick={() => {
           onClick ? onClick() : unvote()
@@ -93,7 +89,11 @@ const DownvoteButton = ({
           id: 'qlxeW+',
         })}
       >
-        <TextIcon icon={<IconDownVoted16 />} color="green" weight="md">
+        <TextIcon
+          icon={<Icon icon={IconVoteDownFill} />}
+          color="green"
+          weight="medium"
+        >
           {/* comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined */}
         </TextIcon>
       </Button>
@@ -102,7 +102,7 @@ const DownvoteButton = ({
 
   return (
     <Button
-      spacing={['xtight', 'xtight']}
+      spacing={[8, 8]}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       onClick={() => {
         onClick ? onClick() : downvote()
@@ -113,7 +113,11 @@ const DownvoteButton = ({
         id: 'ZZ9zIR',
       })}
     >
-      <TextIcon icon={<IconDownVote16 color="grey" />} color="grey" weight="md">
+      <TextIcon
+        icon={<Icon icon={IconVoteDown} color="grey" />}
+        color="grey"
+        weight="medium"
+      >
         {/* comment.downvotes > 0 ? numAbbr(comment.downvotes) : undefined */}
       </TextIcon>
     </Button>

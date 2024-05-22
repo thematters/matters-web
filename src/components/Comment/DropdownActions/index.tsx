@@ -4,13 +4,14 @@ import _pickBy from 'lodash/pickBy'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
   Button,
   CommentFormDialog,
   CommentFormType,
   Dropdown,
-  IconMore16,
+  Icon,
   Menu,
   toast,
   ViewerContext,
@@ -91,7 +92,7 @@ const fragments = {
           }
           ... on Article {
             id
-            mediaHash
+            shortHash
             author {
               id
             }
@@ -179,13 +180,13 @@ const BaseDropdownActions = ({
       {({ openDropdown, ref }) => (
         <Button
           onClick={openDropdown}
-          spacing={['xtight', 'xtight']}
+          spacing={[8, 8]}
           bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
           aria-label={moreActionText}
           aria-haspopup="listbox"
           ref={ref}
         >
-          <IconMore16 color="grey" />
+          <Icon icon={IconMore} color="grey" />
         </Button>
       )}
     </Dropdown>

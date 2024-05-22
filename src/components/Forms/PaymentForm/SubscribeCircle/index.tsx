@@ -3,7 +3,7 @@ import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
 import { useEffect, useState } from 'react'
 
-import { Dialog, Spinner } from '~/components'
+import { Dialog, SpinnerBlock } from '~/components'
 import {
   DigestRichCirclePrivateFragment,
   DigestRichCirclePublicFragment,
@@ -37,7 +37,7 @@ const SubscribeCircleForm: React.FC<FormProps> = (props) => {
   if (loading) {
     return (
       <Dialog.Content>
-        <Spinner />
+        <SpinnerBlock />
       </Dialog.Content>
     )
   }
