@@ -390,10 +390,9 @@ const BaseArticleDetail = ({
             disable={lock}
             toggleDonationDrawer={() => {
               analytics.trackEvent('click_button', {
-                type: isOpenDonationDrawer
-                  ? 'article_end_donate_close'
-                  : 'article_end_donate_open',
+                type: isOpenDonationDrawer ? 'support_close' : 'support_open',
                 pageType: 'article_detail',
+                pageComponent: 'article_end',
               })
               toggleDonationDrawer()
             }}
@@ -411,10 +410,9 @@ const BaseArticleDetail = ({
               lock={lock}
               toggleDrawer={() => {
                 analytics.trackEvent('click_button', {
-                  type: isOpenComment
-                    ? 'article_end_toolbar_comment_close'
-                    : 'article_end_toolbar_comment_open',
+                  type: isOpenComment ? 'comment_close' : 'comment_open',
                   pageType: 'article_detail',
+                  pageComponent: 'article_end_toolbar',
                 })
                 toggleCommentDrawer()
               }}
@@ -478,19 +476,17 @@ const BaseArticleDetail = ({
           lock={lock}
           toggleCommentDrawer={() => {
             analytics.trackEvent('click_button', {
-              type: isOpenComment
-                ? 'float_toolbar_comment_close'
-                : 'float_toolbar_comment_open',
+              type: isOpenComment ? 'comment_close' : 'comment_open',
               pageType: 'article_detail',
+              pageComponent: 'article_float_toolbar',
             })
             toggleCommentDrawer()
           }}
           toggleDonationDrawer={() => {
             analytics.trackEvent('click_button', {
-              type: isOpenDonationDrawer
-                ? 'float_toolbar_donate_close'
-                : 'float_toolbar_donate_open',
+              type: isOpenDonationDrawer ? 'support_close' : 'support_open',
               pageType: 'article_detail',
+              pageComponent: 'article_float_toolbar',
             })
             toggleDonationDrawer()
           }}
@@ -505,19 +501,17 @@ const BaseArticleDetail = ({
           lock={lock}
           toggleCommentDrawer={() => {
             analytics.trackEvent('click_button', {
-              type: isOpenComment
-                ? 'float_toolbar_comment_close'
-                : 'float_toolbar_comment_open',
+              type: isOpenComment ? 'comment_close' : 'comment_open',
               pageType: 'article_detail',
+              pageComponent: 'article_float_toolbar',
             })
             toggleCommentDrawer()
           }}
           toggleDonationDrawer={() => {
             analytics.trackEvent('click_button', {
-              type: isOpenDonationDrawer
-                ? 'float_toolbar_donate_close'
-                : 'float_toolbar_donate_open',
+              type: isOpenDonationDrawer ? 'support_close' : 'support_open',
               pageType: 'article_detail',
+              pageComponent: 'article_float_toolbar',
             })
             toggleDonationDrawer()
           }}

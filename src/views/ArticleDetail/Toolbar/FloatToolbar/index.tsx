@@ -80,8 +80,9 @@ const FloatToolbar = ({
             disabled={lock}
             clickEvent={() => {
               analytics.trackEvent('click_button', {
-                type: 'float_toolbar_appreciate',
+                type: 'appreciate',
                 pageType: 'article_detail',
+                pageComponent: 'article_float_toolbar',
               })
             }}
             {...buttonProps}

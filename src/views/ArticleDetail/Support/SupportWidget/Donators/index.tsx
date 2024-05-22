@@ -2,6 +2,7 @@ import classNames from 'classnames'
 import { Fragment } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { analytics } from '~/common/utils'
 import { Media, SupportersDialog, Tooltip } from '~/components'
 import { Avatar, AvatarProps } from '~/components/Avatar'
 import { DonatorsArticleFragment } from '~/gql/graphql'
@@ -66,7 +67,15 @@ const Donators = ({
       {({ openDialog }) => (
         <section
           className={containerClasses}
-          onClick={() => isAuthor && openDialog()}
+          onClick={() => {
+            if (isAuthor) {
+              analytics.trackEvent('click_button', {
+                type: 'supporter_list',
+                pageType: 'article_detail',
+              })
+              openDialog()
+            }
+          }}
         >
           <section className={styles.avatarList}>
             {frontDonators.map((user, index) => (

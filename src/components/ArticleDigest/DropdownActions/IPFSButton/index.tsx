@@ -1,13 +1,18 @@
 import { ReactComponent as IconIPFS } from '@/public/static/icons/24px/ipfs.svg'
-import { toPath } from '~/common/utils'
+import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import { Icon, Menu, useRoute } from '~/components'
 import { DropdownActionsArticleFragment } from '~/gql/graphql'
 
 type IPFSButtonProps = {
   article: DropdownActionsArticleFragment
-}
+} & Omit<TrackEventProps, 'type'>
 
-const IPFSButton: React.FC<IPFSButtonProps> = ({ article }) => {
+const IPFSButton: React.FC<IPFSButtonProps> = ({
+  article,
+  pageType,
+  pageComponent,
+}) => {
   const { router } = useRoute()
   const { shortHash, v, ...qs } = router.query
 
@@ -23,6 +28,15 @@ const IPFSButton: React.FC<IPFSButtonProps> = ({ article }) => {
           search: qs as { [key: string]: string }, // forward qs to history page
         }).href
       }
+      onClick={() => {
+        if (pageType || pageComponent) {
+          analytics.trackEvent('click_button', {
+            type: 'ipfs',
+            pageType,
+            pageComponent,
+          })
+        }
+      }}
     />
   )
 }

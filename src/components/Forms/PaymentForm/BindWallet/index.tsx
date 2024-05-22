@@ -160,7 +160,7 @@ const BindWallet: React.FC<Props> = ({ currency, callback }) => {
               bgColor="green"
               onClick={() => {
                 analytics.trackEvent('click_button', {
-                  type: 'bind_wallet_after_donation',
+                  type: 'bind_wallet_after_support',
                   pageType: 'article_detail',
                 })
                 gotoSign()
