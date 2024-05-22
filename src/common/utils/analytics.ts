@@ -93,6 +93,8 @@ export interface ClickButtonProp {
     | 'support_open'
     | 'support_close'
     | 'supporter_list'
+    | 'user_avatar'
+    | 'user_name'
   pageType?: PageType
   pageComponent?: PageComponent
 }
@@ -355,3 +357,4 @@ type PageComponent =
   | 'article_end_toolbar'
   | 'article_fixed_toolbar'
   | 'article_float_toolbar'
+  | 'article_author'
