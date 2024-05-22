@@ -7,7 +7,7 @@ import { ReactComponent as IconMail } from '@/public/static/icons/24px/mail.svg'
 import { ReactComponent as IconX2 } from '@/public/static/icons/24px/x2.svg'
 import { PATHS } from '~/common/enums'
 import {
-  // facebookOauthUrl,
+  facebookOauthUrl,
   googleOauthUrl,
   sleep,
   twitterOauthUrl,
@@ -28,7 +28,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
   const [loadingState, setLoadingState] = useState('')
   const isGoogleLoading = loadingState === 'Google'
   const isTwitterLoading = loadingState === 'Twitter'
-  // const isFacebookLoading = loadingState === 'Facebook'
+  const isFacebookLoading = loadingState === 'Facebook'
   useEffect(() => {
     return setLoadingState('')
   }, [])
@@ -60,11 +60,11 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
     }
   }
 
-  // const gotoFacebook = async () => {
-  //   setLoadingState('Facebook')
-  //   const url = await facebookOauthUrl(oauthType)
-  //   router.push(url)
-  // }
+  const gotoFacebook = async () => {
+    setLoadingState('Facebook')
+    const url = await facebookOauthUrl(oauthType)
+    router.push(url)
+  }
 
   return (
     <>
@@ -99,7 +99,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
             </span>
           )}
         </li>
-        {/* <li className={styles.item} role="button" onClick={gotoFacebook}>
+        <li className={styles.item} role="button" onClick={gotoFacebook}>
           <span className={styles.icon}>
             <Icon icon={IconFacebook} size={22} />
           </span>
@@ -109,7 +109,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
               <Spinner color="grey" size={22} />
             </span>
           )}
-        </li> */}
+        </li>
       </ul>
       <section className={styles.info}>
         <section className={styles.title}>
