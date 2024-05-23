@@ -123,7 +123,6 @@ const LegacyArticle = () => {
   }
 
   if (mediaHash) {
-    const mediaHash = idOrMediaHash
     return <LegacyMediaHashArticle mediaHash={mediaHash} />
   }
 
