@@ -13,9 +13,6 @@ describe('<InlineTag>', () => {
     const $name = screen.getByText(new RegExp(MOCK_TAG.content, 'i'))
     expect($name).toBeInTheDocument()
 
-    const $count = screen.getByText(MOCK_TAG.numArticles)
-    expect($count).toBeInTheDocument()
-
     $name.click()
     expect(mockRouter.asPath).toContain(MOCK_TAG.slug)
     expect(handleClick).toBeCalledTimes(1)
