@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
+import { COMMENT_FEED_ID_PREFIX } from '~/common/enums'
 import {
   QueryError,
   ThreadCommentBeta,
@@ -13,6 +14,7 @@ import { COMMENT_DETAIL } from './gql'
 import styles from './styles.module.css'
 
 const CommentDetail = () => {
+  const ref = useRef<HTMLDivElement>(null)
   /**
    * Fragment Patterns
    *
@@ -43,47 +45,49 @@ const CommentDetail = () => {
 
   // Jump to comment
   useEffect(() => {
-    if (readyJump) {
-      let selector = `${parentId}`
-      if (!!descendantId) {
-        selector = `${parentId}-${descendantId}`
-      }
+    if (!readyJump || !ref.current) {
+      return
+    }
 
-      const comment = document.getElementById(selector)
+    let selector = `#${COMMENT_FEED_ID_PREFIX}${parentId}`
+    if (!!descendantId) {
+      selector = `#${COMMENT_FEED_ID_PREFIX}${parentId}-${descendantId}`
+    }
 
-      let targetElement = comment
-      if (!!descendantId && comment) {
-        targetElement = comment.parentElement
-      }
+    const comment = ref.current.querySelector(selector)
 
+    let targetElement = comment
+    if (!!descendantId && comment) {
+      targetElement = comment.parentElement
+    }
+
+    if (!targetElement) {
+      return
+    }
+
+    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+    setTimeout(() => {
       if (!targetElement) {
         return
       }
-
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      targetElement.classList.add(styles.activeBgColor)
+      if (!descendantId) {
+        // parent comment
+        targetElement.classList.add(styles.activeParentComment)
+      }
 
       setTimeout(() => {
         if (!targetElement) {
           return
         }
-        targetElement.classList.add(styles.activeBgColor)
+        targetElement.classList.remove(styles.activeBgColor)
         if (!descendantId) {
           // parent comment
-          targetElement.classList.add(styles.activeParentComment)
+          targetElement.classList.remove(styles.activeParentComment)
         }
-
-        setTimeout(() => {
-          if (!targetElement) {
-            return
-          }
-          targetElement.classList.remove(styles.activeBgColor)
-          if (!descendantId) {
-            // parent comment
-            targetElement.classList.remove(styles.activeParentComment)
-          }
-        }, 5000)
-      }, 500)
-    }
+      }, 5000)
+    }, 500)
   }, [readyJump])
 
   /**
@@ -104,7 +108,7 @@ const CommentDetail = () => {
   const comment = data?.node as ThreadCommentType
 
   return (
-    <section>
+    <section ref={ref}>
       <ThreadCommentBeta
         comment={comment}
         type="article"
