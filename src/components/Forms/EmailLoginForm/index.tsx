@@ -23,7 +23,6 @@ import {
   validateEmail,
   WalletType,
 } from '~/common/utils'
-import type { TurnstileInstance } from '~/components'
 import {
   AuthFeedType,
   AuthNormalFeed,
@@ -97,7 +96,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
-  const turnstileRef = useRef<TurnstileInstance>(null)
   const [turnstileToken, setTurnstileToken] = useState<string>()
 
   const [isSelectMethod, setIsSelectMethod] = useState(false)
@@ -262,7 +260,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           )
         }
       })
-      turnstileRef.current?.reset()
     }
   }
 
@@ -270,11 +267,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const InnerForm = (
     <>
-      <ReCaptcha
-        ref={turnstileRef}
-        action="email_login"
-        setToken={setTurnstileToken}
-      />
+      <ReCaptcha action="email_login" setToken={setTurnstileToken} />
 
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input

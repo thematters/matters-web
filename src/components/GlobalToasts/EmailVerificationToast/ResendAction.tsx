@@ -1,10 +1,11 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
 
 import {
+  CHANNEL_VERIFIED_EMAIL,
   OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN,
   SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
@@ -39,14 +40,10 @@ const ResendAction = () => {
     SEND_CODE,
     undefined
   )
-  const { error, startPolling, stopPolling } = useQuery<ViewerEmailQuery>(
-    VIEWER_EMAIL,
-    {
-      errorPolicy: 'none',
-      fetchPolicy: 'network-only',
-      skip: typeof window === 'undefined',
-    }
-  )
+  const [refetchViewerEmail] = useLazyQuery<ViewerEmailQuery>(VIEWER_EMAIL, {
+    fetchPolicy: 'network-only',
+  })
+
   const email = viewer.info.email
   const emailVerified = viewer.info.emailVerified
 
@@ -67,14 +64,6 @@ const ResendAction = () => {
   }, [countdown])
 
   useEffect(() => {
-    if (error) {
-      stopPolling()
-    } else {
-      startPolling(5000)
-    }
-  }, [error])
-
-  useEffect(() => {
     if (!email || !emailVerified) {
       return
     }
@@ -91,6 +80,17 @@ const ResendAction = () => {
       hasClose: false,
     })
   }, [email, emailVerified])
+
+  useEffect(() => {
+    const bc = new BroadcastChannel(CHANNEL_VERIFIED_EMAIL)
+    bc.addEventListener('message', () => {
+      refetchViewerEmail()
+    })
+
+    return () => {
+      bc.close()
+    }
+  }, [])
 
   const resend = async () => {
     const redirectUrl = emailVerifyCallbackUrl(email)

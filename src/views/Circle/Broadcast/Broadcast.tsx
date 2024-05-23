@@ -5,7 +5,12 @@ import { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { URL_FRAGMENT } from '~/common/enums'
-import { dom, filterComments, mergeConnections } from '~/common/utils'
+import {
+  dom,
+  filterComments,
+  mergeConnections,
+  parseCommentHash,
+} from '~/common/utils'
 import {
   CommentForm,
   EmptyComment,
@@ -125,20 +130,7 @@ const CricleBroadcast = () => {
     loadPrivate(newData)
   }
 
-  /**
-   * Fragment Patterns
-   *
-   * 0. ``
-   * 1. `#parentCommentId`
-   * 2. `#parentComemntId-childCommentId`
-   */
-  let fragment = ''
-  let parentId = ''
-  let descendantId = ''
-  if (process.browser) {
-    fragment = window.location.hash.replace('#', '')
-    ;[parentId, descendantId] = fragment.split('-') // [0] ; = fragment.split('-')[1]
-  }
+  const { fragment, parentId, descendantId } = parseCommentHash()
 
   // jump to comment area
   useEffect(() => {
@@ -156,7 +148,7 @@ const CricleBroadcast = () => {
       const element = dom.$(`#${fragment}`)
 
       if (!element) {
-        loadMore({ before: parentId }).then(jumpToFragment)
+        loadMore({ before: parentId || '' }).then(jumpToFragment)
       } else {
         jumpToFragment()
       }
