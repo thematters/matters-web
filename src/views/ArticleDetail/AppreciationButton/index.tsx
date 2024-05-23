@@ -3,7 +3,6 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import { APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
 import {
-  ArticleAppreciationContext,
   ButtonProps,
   Tooltip,
   Translate,
@@ -44,21 +43,31 @@ const AppreciationButton = ({
   ...buttonProps
 }: AppreciationButtonProps) => {
   const viewer = useContext(ViewerContext)
-  const { likesReceivedTotal, appreciateLeft, incrementLikesReceivedTotal } =
-    useContext(ArticleAppreciationContext)
-
   const [amount, setAmount] = useState(0)
-
   const [sendAppreciation] =
     useMutation<AppreciateArticleMutation>(APPRECIATE_ARTICLE)
+
   const limit = article.appreciateLimit
-  const left = appreciateLeft
-  const total = likesReceivedTotal
+  const left =
+    (typeof article.appreciateLeft === 'number'
+      ? article.appreciateLeft
+      : limit) - amount
+  const total = article.likesReceivedTotal + amount
   const appreciatedCount = limit - left
   const isReachLimit = left <= 0
   const debouncedSendAppreciation = useDebouncedCallback(async () => {
     try {
-      await sendAppreciation({ variables: { id: article.id, amount } })
+      await sendAppreciation({
+        variables: { id: article.id, amount },
+        optimisticResponse: {
+          appreciateArticle: {
+            id: article.id,
+            likesReceivedTotal: total,
+            appreciateLeft: left,
+            __typename: 'Article',
+          },
+        },
+      })
     } catch (e) {
       console.error(e)
     }
@@ -66,7 +75,6 @@ const AppreciationButton = ({
 
   const appreciate = () => {
     setAmount(amount + 1)
-    incrementLikesReceivedTotal()
     debouncedSendAppreciation()
   }
 

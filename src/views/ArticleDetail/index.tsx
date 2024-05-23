@@ -16,8 +16,6 @@ import {
 } from '~/common/utils'
 import {
   ActiveCommentEditorProvider,
-  ArticleAppreciationContext,
-  ArticleAppreciationProvider,
   BackToHomeButton,
   BackToHomeMobileButton,
   EmptyLayout,
@@ -113,9 +111,6 @@ const BaseArticleDetail = ({
 
   const { routerLang } = useRoute()
   const viewer = useContext(ViewerContext)
-  const { initArticleAppreciationContext } = useContext(
-    ArticleAppreciationContext
-  )
 
   const features = useFeatures()
 
@@ -232,13 +227,6 @@ const BaseArticleDetail = ({
       })
     }
   }, [])
-
-  useEffect(() => {
-    initArticleAppreciationContext(
-      article.likesReceivedTotal,
-      article.appreciateLeft
-    )
-  }, [article.appreciateLeft, article.likesReceivedTotal])
 
   // set language cookie for anonymous if it doesn't exist
   useEffect(() => {
@@ -645,11 +633,9 @@ const ArticleDetail = ({
    * Render:Article
    */
   return (
-    <ArticleAppreciationProvider>
-      <ActiveCommentEditorProvider>
-        <BaseArticleDetail article={article} privateFetched={privateFetched} />
-      </ActiveCommentEditorProvider>
-    </ArticleAppreciationProvider>
+    <ActiveCommentEditorProvider>
+      <BaseArticleDetail article={article} privateFetched={privateFetched} />
+    </ActiveCommentEditorProvider>
   )
 }
 
