@@ -237,7 +237,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
         }
       />
 
-      <Dialog.Content fixedHeight>
+      <Dialog.Content fixedHeight className="dialog-editor">
         {context && <section className={styles.context}>{context}</section>}
 
         <form

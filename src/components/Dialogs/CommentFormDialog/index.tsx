@@ -16,18 +16,6 @@ const BaseCommentFormDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const ref: React.RefObject<HTMLDivElement> | null = useRef(null)
 
-  // FIXME: editor can't be focused with dialog on Android devices
-  const focusEditor = () => {
-    if (!show) {
-      return
-    }
-
-    const $editor = ref.current?.querySelector('.ProseMirror') as HTMLElement
-    if ($editor) {
-      $editor.focus()
-    }
-  }
-
   return (
     <div ref={ref}>
       {children && children({ openDialog })}
@@ -35,7 +23,6 @@ const BaseCommentFormDialog = ({
       <Dialog
         isOpen={show}
         onDismiss={closeDialog}
-        onRest={focusEditor}
         testId={TEST_ID.DIALOG_COMMENT_FORM}
       >
         <CommentForm {...props} closeDialog={closeDialog} />
