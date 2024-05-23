@@ -5,14 +5,7 @@ import { ReactComponent as Nomad1Background } from '@/public/static/images/badge
 import { ReactComponent as Nomad2Background } from '@/public/static/images/badge-nomad2-background.svg'
 import { ReactComponent as Nomad3Background } from '@/public/static/images/badge-nomad3-background.svg'
 import { ReactComponent as Nomad4Background } from '@/public/static/images/badge-nomad4-background.svg'
-import { BREAKPOINTS } from '~/common/enums'
-import {
-  Button,
-  CopyToClipboard,
-  Dialog,
-  Icon,
-  useMediaQuery,
-} from '~/components'
+import { Button, CopyToClipboard, Dialog, Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -31,8 +24,6 @@ const BadgeNomadDialogContent = ({
   isNested,
   goBack,
 }: BadgeNomadDialogContentProps) => {
-  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
-
   return (
     <>
       {isNested && goBack && (
@@ -50,7 +41,7 @@ const BadgeNomadDialogContent = ({
         />
       )}
 
-      <Dialog.Content fixedHeight={!isSmUp} noMaxHeight>
+      <Dialog.Content>
         <section className={styles.container}>
           <section className={styles.badgeIcon}>
             {nomadBadgeLevel === 4 ? (

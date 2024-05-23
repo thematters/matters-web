@@ -10,6 +10,7 @@ interface DialogContentProps {
   noSpacingTop?: boolean
   noSpacingBottom?: boolean
   noMaxHeight?: boolean
+  className?: string
 }
 
 const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> & {
@@ -21,6 +22,7 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> & {
   noSpacingBottom,
   noMaxHeight,
   fixedHeight,
+  className,
   children,
 }) => {
   const contentClasses = classNames({
@@ -31,6 +33,7 @@ const DialogContent: React.FC<React.PropsWithChildren<DialogContentProps>> & {
     [styles.noSpacingTop]: !!noSpacingTop,
     [styles.noSpacingBottom]: !!noSpacingBottom,
     [styles.noMaxHeight]: !!noMaxHeight,
+    [className || '']: !!className,
   })
 
   return (
