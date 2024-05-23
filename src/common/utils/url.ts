@@ -114,3 +114,16 @@ export const stringifySorter = (sorter: any) => {
   })
   return sorterStr
 }
+
+export const parseCommentHash = () => {
+  if (typeof window === 'undefined') {
+    return { parentId: undefined, descendantId: undefined }
+  }
+  const fragment = window.location.hash.replace('#', '')
+  const [parentId, descendantId] = fragment.split('-')
+  return {
+    fragment,
+    parentId: parentId || undefined,
+    descendantId: descendantId || undefined,
+  }
+}
