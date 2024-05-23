@@ -1,7 +1,8 @@
-import { describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import {
   isUrl,
+  parseCommentHash,
   parseSorter,
   parseURL,
   stringifySorter,
@@ -211,5 +212,57 @@ describe('utils/url/toSizedImageURL', () => {
     ).toBe(
       'https://assets.matters.news/cover/63049798-ea19-4ba1-9325-d93ae4cc4857.jpeg'
     )
+  })
+})
+
+describe('utils/url/parseCommentHash', () => {
+  let originalWindow: typeof global.window
+
+  beforeEach(() => {
+    // Save the original window object
+    originalWindow = global.window
+    // Reset the window location hash before each test
+    window.location.hash = ''
+  })
+
+  afterEach(() => {
+    // Restore the original window object after each test
+    global.window = originalWindow
+  })
+
+  it('should return undefined when window is undefined', () => {
+    global.window = undefined as any
+
+    const result = parseCommentHash()
+    expect(result).toEqual({ parentId: undefined, descendantId: undefined })
+  })
+
+  it('should return undefined when hash is empty', () => {
+    const result = parseCommentHash()
+    expect(result).toEqual({
+      fragment: '',
+      parentId: undefined,
+      descendantId: undefined,
+    })
+  })
+
+  it('should return parentId and undefined descendantId when hash contains single ID', () => {
+    window.location.hash = '#12345'
+    const result = parseCommentHash()
+    expect(result).toEqual({
+      fragment: '12345',
+      parentId: '12345',
+      descendantId: undefined,
+    })
+  })
+
+  it('should return parentId and descendantId when hash contains both IDs', () => {
+    window.location.hash = '#12345-67890'
+    const result = parseCommentHash()
+    expect(result).toEqual({
+      fragment: '12345-67890',
+      parentId: '12345',
+      descendantId: '67890',
+    })
   })
 })

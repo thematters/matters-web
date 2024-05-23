@@ -8,7 +8,12 @@ import {
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
 } from '~/common/enums'
-import { analytics, normalizeTag, toPath } from '~/common/utils'
+import {
+  analytics,
+  normalizeTag,
+  parseCommentHash,
+  toPath,
+} from '~/common/utils'
 import {
   ActiveCommentEditorProvider,
   ArticleAppreciationContext,
@@ -104,19 +109,7 @@ const BaseArticleDetail = ({
   article: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
 }) => {
-  /**
-   * Fragment Patterns
-   *
-   * 0. ``
-   * 1. `#parentCommentId`
-   * 2. `#parentComemntId-childCommentId`
-   */
-  let fragment = ''
-  let parentId = ''
-  if (typeof window !== 'undefined') {
-    fragment = window.location.hash.replace('#', '')
-    parentId = fragment.split('-')[0]
-  }
+  const { parentId } = parseCommentHash()
 
   const { routerLang } = useRoute()
   const viewer = useContext(ViewerContext)
@@ -150,7 +143,7 @@ const BaseArticleDetail = ({
 
   // Comment
   const [commentDrawerStep, setCommentDrawerStep] = useState<CommentDrawerStep>(
-    parentId !== '' ? 'commentDetail' : 'commentList'
+    !!parentId ? 'commentDetail' : 'commentList'
   )
   const [isOpenComment, setIsOpenComment] = useState(false)
   const toggleCommentDrawer = () => {
@@ -258,7 +251,7 @@ const BaseArticleDetail = ({
 
   // show comment detail drawer/dialog if fragment exists
   useEffect(() => {
-    if (parentId === '') {
+    if (!parentId) {
       return
     }
     setTimeout(() => {
