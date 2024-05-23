@@ -109,31 +109,33 @@ const LegacyMediaHashArticle = ({ mediaHash }: { mediaHash: string }) => {
 const LegacyArticle = () => {
   const { getQuery } = useRoute()
   const idOrMediaHash = getQuery('idOrMediaHash')
-  const articleId = idOrMediaHash?.match(/^(\d+)/)?.[1] || ''
 
-  const isMediaHashPossiblyValid = (mediaHash?: string | null) => {
-    // is there a better way to detect valid?
-    // a valid mediaHash, should have length 49 or 59 chars
-    // 'zdpuAsCXC87Tm1fFvAbysV7HVt7J8aV6chaTKeJZ5ryLALK3Z'
-    // 'bafyreief6bryqsa4byabnmx222jvo4khlodvpypw27af43frecbumn6ocq'
-    return (
-      mediaHash &&
-      ((mediaHash?.length === 49 && mediaHash.startsWith('zdpu')) ||
-        (mediaHash?.length === 59 && mediaHash.startsWith('bafy')))
-    )
+  const mediaHashMatch = idOrMediaHash.match(/^.*-?(bafy\w{55}|zdpu\w{45})$/)
+  const articleIdMatch = idOrMediaHash.match(/^(\d+)-?[^\/]*$/)
+
+  let mediaHash = ''
+  let articleId = ''
+  if (mediaHashMatch) {
+    mediaHash = mediaHashMatch[1]
+  }
+  if (articleIdMatch) {
+    articleId = articleIdMatch[1]
   }
 
-  const isMediaHash = !!(
-    (idOrMediaHash && isMediaHashPossiblyValid(idOrMediaHash))
-    // && !articleId
-  )
-
-  if (isMediaHash) {
+  if (mediaHash) {
     const mediaHash = idOrMediaHash
     return <LegacyMediaHashArticle mediaHash={mediaHash} />
-  } else {
+  }
+
+  if (articleId) {
     return <LegacyIDArticle articleId={articleId} />
   }
+
+  return (
+    <EmptyLayout>
+      <Throw404 />
+    </EmptyLayout>
+  )
 }
 
 export default LegacyArticle
