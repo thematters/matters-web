@@ -3145,10 +3145,6 @@
     "defaultMessage": "Subscribe to unlock all articles of",
     "description": "src/views/ArticleDetail/Wall/Circle/index.tsx"
   },
-  "xCkDtt": {
-    "defaultMessage": "Remove",
-    "description": "src/components/Tag/TitleTag.tsx"
-  },
   "xDhqHi": {
     "defaultMessage": "Confirm",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
