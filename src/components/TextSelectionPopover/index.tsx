@@ -11,11 +11,49 @@ interface TextSelectionPopoverProps {
   targetElement: HTMLElement
 }
 
+const isSelectionCrossingParagraphs = (selection: Selection): boolean => {
+  if (!selection.rangeCount) {
+    return false
+  }
+
+  const range = selection.getRangeAt(0)
+  const commonAncestor = range.commonAncestorContainer as Element
+
+  const allowedNodeNames = ['p', '#text']
+  return (
+    /\n/.test(selection.toString() || '') &&
+    !allowedNodeNames.includes(commonAncestor.nodeName.toLowerCase())
+  )
+}
+
+const isValidSelection = (
+  selection: Selection | null,
+  targetElement: HTMLElement,
+  ref: React.RefObject<HTMLDivElement>
+): boolean => {
+  if (!selection || !selection.toString() || !ref.current) {
+    return false
+  }
+
+  if (isSelectionCrossingParagraphs(selection)) {
+    return false
+  }
+
+  const range = selection.getRangeAt(0)
+  const commonAncestor = range.commonAncestorContainer
+
+  if (!targetElement.contains(commonAncestor)) {
+    return false
+  }
+
+  return true
+}
+
 export const TextSelectionPopover = ({
   targetElement,
 }: TextSelectionPopoverProps) => {
   const [selection, setSelection] = useState<string>()
-  const [position, setPosition] = useState<Record<string, number>>() // { x, y, width, height }
+  const [position, setPosition] = useState<Record<string, number>>() // { x, y }
   const ref = useRef<HTMLDivElement>(null)
   const { editor } = useContext(ActiveCommentEditorContext)
   const [quote, setQuote] = useState<string | null>(null)
@@ -53,44 +91,26 @@ export const TextSelectionPopover = ({
   const onSelectEnd = () => {
     const activeSelection = document.getSelection()
 
-    // Check if it's the same paragraph
-    if (/\n/.test(activeSelection?.toString() || '')) {
-      return
-    }
-
     const text = activeSelection?.toString()
 
-    if (!activeSelection || !text) {
+    if (!isValidSelection(activeSelection, targetElement, ref)) {
       setSelection(undefined)
-      return
-    }
-
-    if (!ref.current) {
-      return
-    }
-
-    if (
-      !targetElement ||
-      !targetElement.contains(
-        activeSelection.getRangeAt(0).commonAncestorContainer
-      )
-    ) {
       return
     }
 
     setSelection(text)
 
-    const rect = activeSelection.getRangeAt(0).getBoundingClientRect()
-    const targetRect = ref.current.getBoundingClientRect()
+    const rect = (activeSelection as Selection)
+      .getRangeAt(0)
+      .getBoundingClientRect()
+    const targetRect = (ref.current as HTMLDivElement).getBoundingClientRect()
 
-    const tooltipHeight = 44 + 16
+    const tooltipHeight = 60 // 44 + 16 (height + margin)
     const tooltipWidth = 44
 
     setPosition({
       x: rect.left - targetRect.left + rect.width / 2 - tooltipWidth / 2,
       y: rect.top + window.scrollY - tooltipHeight,
-      width: rect.width,
-      height: rect.height,
     })
   }
 
