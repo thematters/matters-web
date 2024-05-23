@@ -1,0 +1,33 @@
+.tag .name {
+  @mixin line-clamp;
+  @mixin fix-cropped-letters;
+
+  line-height: inherit;
+}
+
+.article {
+  @mixin transition;
+
+  display: inline-flex;
+  align-items: center;
+  padding: var(--sp5) var(--sp10) var(--sp5) var(--sp8);
+  color: var(--color-grey-darker);
+  background: var(--color-grey-lighter);
+  border-radius: 0.5rem;
+  transition-property: color, background;
+
+  & .name {
+    font-size: var(--text14);
+    line-height: 1.375rem; /* 22px */
+  }
+
+  &.active {
+    &:not(.disabled) {
+      &:hover,
+      &:focus {
+        color: var(--color-black);
+        background: var(--color-grey-hover);
+      }
+    }
+  }
+}

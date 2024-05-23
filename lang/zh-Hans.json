@@ -1389,10 +1389,6 @@
     "defaultMessage": "标签不存在",
     "description": "TAG_NOT_FOUND"
   },
-  "NPNj9D": {
-    "defaultMessage": "Remove",
-    "description": "src/components/Tag/InlineTag.tsx"
-  },
   "NSyuEP": {
     "defaultMessage": "请输入验证码"
   },
@@ -3207,10 +3203,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "操作无法撤销，确认归档吗？"
-  },
-  "yCQ8tL": {
-    "defaultMessage": "Remove",
-    "description": "src/components//Tag/ListTag/index.tsx"
   },
   "yCTXXb": {
     "defaultMessage": "请输入正文…"

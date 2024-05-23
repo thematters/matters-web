@@ -2,11 +2,11 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
 import { cleanup, render, screen } from '~/common/utils/test'
-import { InlineTag, ListTag, PlainTag } from '~/components'
+import { ListTag } from '~/components'
 import { MOCK_TAG } from '~/stories/mocks'
 
-describe('<Tag>', () => {
-  it('should render a Tag', () => {
+describe('<ListTag>', () => {
+  it('should render a ListTag', () => {
     const handleClick = vi.fn()
     render(<ListTag tag={MOCK_TAG} onClick={handleClick} />)
 
@@ -22,7 +22,7 @@ describe('<Tag>', () => {
 
     // render as "span"
     cleanup()
-    render(<InlineTag tag={MOCK_TAG} is="span" onClick={handleClick} />)
+    render(<ListTag tag={MOCK_TAG} is="span" onClick={handleClick} />)
     const $name2 = screen.getByText(new RegExp(MOCK_TAG.content, 'i'))
     expect($name2).toBeInTheDocument()
     mockRouter.push('/')
@@ -31,23 +31,7 @@ describe('<Tag>', () => {
     expect(handleClick).toBeCalledTimes(2)
   })
 
-  it('should render a Tag without count', () => {
-    // hasCount is false
-    render(<ListTag tag={MOCK_TAG} hasCount={false} />)
-
-    const $name = screen.getByText(new RegExp(MOCK_TAG.content, 'i'))
-    expect($name).toBeInTheDocument()
-
-    const $count = screen.queryByText(MOCK_TAG.numArticles)
-    expect($count).not.toBeInTheDocument()
-
-    // not "list" type
-    cleanup()
-    render(<PlainTag tag={MOCK_TAG} />)
-    expect(screen.queryByText(MOCK_TAG.numArticles)).not.toBeInTheDocument()
-  })
-
-  it('should render a Tag with remove button', () => {
+  it('should render a ListTag with remove button', () => {
     const onRemoveTag = vi.fn()
     render(<ListTag tag={MOCK_TAG} onRemoveTag={onRemoveTag} />)
 

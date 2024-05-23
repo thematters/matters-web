@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
@@ -6,7 +7,6 @@ import { toPath } from '~/common/utils'
 import { Icon, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
-import { tagFragments } from './index'
 import styles from './styles.module.css'
 
 export const PlainTag = ({
@@ -16,15 +16,11 @@ export const PlainTag = ({
   tag: DigestTagFragment
   textIconProps?: TextIconProps
 }) => {
+  const tagName = tag.content
   const tagClasses = classNames({
     [styles.tag]: true,
-    [styles['inline']]: 'inline',
-    [styles.active]: false,
-    [styles.clickable]: false,
-    [styles.disabled]: true,
+    [styles.plain]: 'plain',
   })
-
-  const tagName = tag.content
 
   const path = toPath({
     page: 'tagDetail',
@@ -36,20 +32,27 @@ export const PlainTag = ({
     weight: 'normal',
     spacing: 0,
     color: 'green',
-    icon: <Icon icon={IconHashTag} color="grey" />,
+    icon: <Icon icon={IconHashTag} color="black" />,
     placement: 'right',
     ...customTextIconProps,
   }
 
   return (
-    <Link {...path} legacyBehavior>
-      <a className={tagClasses}>
-        <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
-          <span className={styles.name}>{tagName}</span>
-        </TextIcon>
-      </a>
+    <Link {...path} className={tagClasses}>
+      <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
+        <span className={styles.name}>{tagName}</span>
+      </TextIcon>
     </Link>
   )
 }
 
-PlainTag.fragments = tagFragments
+PlainTag.fragments = {
+  tag: gql`
+    fragment DigestTag on Tag {
+      id
+      content
+      numArticles
+      numAuthors
+    }
+  `,
+}

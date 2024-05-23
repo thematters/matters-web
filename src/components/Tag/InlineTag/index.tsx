@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
@@ -8,33 +9,33 @@ import { toPath } from '~/common/utils'
 import { Icon, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
-import { tagFragments } from './index'
 import styles from './styles.module.css'
 
-interface TitleTagProps {
+export interface InlineTagProps {
   tag: DigestTagFragment
   textIconProps?: TextIconProps
   active?: boolean
   is?: 'a' | 'span'
-  hasCount?: boolean
   onRemoveTag?: (tag: DigestTagFragment) => void
+  onClick?: () => void
 }
 
-export const TitleTag = ({
+export const InlineTag = ({
   tag,
   textIconProps: customTextIconProps,
   active,
   is,
-  hasCount = true,
   onRemoveTag,
-}: TitleTagProps) => {
+  onClick,
+}: InlineTagProps) => {
   const intl = useIntl()
+
   const tagClasses = classNames({
     [styles.tag]: true,
-    [styles['title']]: 'title',
+    [styles.inline]: 'inline',
     [styles.active]: active,
-    [styles.clickable]: false,
-    [styles.disabled]: false,
+    [styles.clickable]: !!onClick,
+    [styles.disabled]: !!(is === 'span') && !onClick,
   })
 
   const tagName = tag.content
@@ -44,12 +45,12 @@ export const TitleTag = ({
     tag,
   })
 
-  let textIconProps: TextIconProps = {
-    size: 20,
-    weight: 'medium',
-    spacing: 0,
-    color: 'white',
-    icon: <Icon icon={IconHashTag} color="grey" />,
+  const textIconProps: TextIconProps = {
+    size: 13,
+    weight: 'normal',
+    spacing: 4,
+    color: active ? 'white' : 'greyDarker',
+    icon: <Icon icon={IconHashTag} color="black" />,
     placement: 'right',
     ...customTextIconProps,
   }
@@ -68,30 +69,34 @@ export const TitleTag = ({
           }}
           aria-label={intl.formatMessage({
             defaultMessage: 'Remove',
-            id: 'xCkDtt',
-            description: 'src/components/Tag/TitleTag.tsx',
+            id: 'G/yZLu',
           })}
         >
           <Icon icon={IconTimes} color="grey" />
         </button>
       )}
-
-      {hasCount && tag?.numArticles ? (
-        <span className={styles.count}>{tag.numArticles}</span>
-      ) : null}
     </>
   )
-  return is !== 'span' ? (
+  return is === 'span' ? (
+    <span className={tagClasses} onClick={onClick}>
+      <Inner />{' '}
+    </span>
+  ) : (
     <Link {...path} legacyBehavior>
-      <a className={tagClasses}>
+      <a className={tagClasses} onClick={onClick}>
         <Inner />
       </a>
     </Link>
-  ) : (
-    <span className={tagClasses}>
-      <Inner />
-    </span>
   )
 }
 
-TitleTag.fragments = tagFragments
+InlineTag.fragments = {
+  tag: gql`
+    fragment DigestTag on Tag {
+      id
+      content
+      numArticles
+      numAuthors
+    }
+  `,
+}

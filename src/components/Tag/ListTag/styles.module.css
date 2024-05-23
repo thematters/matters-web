@@ -1,0 +1,27 @@
+.tag .name {
+  @mixin line-clamp;
+  @mixin fix-cropped-letters;
+
+  line-height: inherit;
+}
+
+.list {
+  position: relative;
+  display: block;
+  padding-right: 3rem;
+
+  & .count {
+    @mixin inline-flex-center-all;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: flex-end;
+    width: 3rem;
+    font-size: var(--text15);
+    line-height: 1rem;
+    color: var(--color-grey);
+    text-align: right;
+  }
+}

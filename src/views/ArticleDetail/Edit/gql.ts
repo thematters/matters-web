@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { CircleDigest } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
 import assetFragment from '~/components/GQL/fragments/asset'
-import { tagFragments } from '~/components/Tag'
+import { ArticleTag } from '~/components/Tag'
 
 export const GET_EDIT_ARTICLE = gql`
   query QueryEditArticle(
@@ -61,7 +61,7 @@ export const GET_EDIT_ARTICLE = gql`
     }
   }
   ${assetFragment}
-  ${tagFragments.tag}
+  ${ArticleTag.fragments.tag}
   ${articleFragments.articleCollection}
   ${CircleDigest.Rich.fragments.circle.public}
 `

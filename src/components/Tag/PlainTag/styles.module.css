@@ -1,0 +1,14 @@
+.tag .name {
+  @mixin line-clamp;
+  @mixin fix-cropped-letters;
+
+  line-height: inherit;
+}
+
+.plain {
+  display: inline-flex;
+
+  & svg {
+    opacity: 0.5;
+  }
+}

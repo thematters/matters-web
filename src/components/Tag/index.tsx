@@ -1,17 +1,4 @@
-import gql from 'graphql-tag'
-
-import { DigestTagFragment } from '~/gql/graphql'
-
-export const tagFragments = {
-  tag: gql`
-    fragment DigestTag on Tag {
-      id
-      content
-      numArticles
-      numAuthors
-    }
-  `,
-}
+import type { DigestTagFragment } from '~/gql/graphql'
 
 export const toDigestTagPlaceholder = (content: string) =>
   ({

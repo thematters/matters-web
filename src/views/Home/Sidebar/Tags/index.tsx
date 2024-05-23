@@ -5,11 +5,11 @@ import { useContext } from 'react'
 import { analytics } from '~/common/utils'
 import {
   List,
+  ListTag,
   QueryError,
   ShuffleButton,
   SpinnerBlock,
   TagDigest,
-  tagFragments,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -41,7 +41,7 @@ const SIDEBAR_TAGS = gql`
       }
     }
   }
-  ${tagFragments.tag}
+  ${ListTag.fragments.tag}
 `
 
 const Tags = () => {

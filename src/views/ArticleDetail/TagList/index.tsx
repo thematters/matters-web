@@ -7,7 +7,6 @@ import {
   ArticleTag,
   Icon,
   TagExposureTracker,
-  tagFragments,
   TagListDialog,
 } from '~/components'
 import { TagListArticleFragment } from '~/gql/graphql'
@@ -21,7 +20,7 @@ const fragments = {
         ...DigestTag
       }
     }
-    ${tagFragments.tag}
+    ${ArticleTag.fragments.tag}
   `,
 }
 

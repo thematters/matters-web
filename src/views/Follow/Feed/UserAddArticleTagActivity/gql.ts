@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestFeed, tagFragments, UserDigest } from '~/components'
+import { ArticleDigestFeed, ArticleTag, UserDigest } from '~/components'
 
 import UnfollowTag from '../DropdownActions/UnfollowTag'
 
@@ -20,7 +20,7 @@ export const fragments = gql`
     }
   }
   ${UserDigest.Plain.fragments.user}
-  ${tagFragments.tag}
+  ${ArticleTag.fragments.tag}
   ${UnfollowTag.fragments.tag.private}
   ${ArticleDigestFeed.fragments.article.public}
   ${ArticleDigestFeed.fragments.article.private}

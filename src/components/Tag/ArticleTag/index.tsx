@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
@@ -6,7 +7,6 @@ import { clampTag, toPath } from '~/common/utils'
 import { Icon, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
-import { tagFragments } from './index'
 import styles from './styles.module.css'
 
 interface ArticleTagProps {
@@ -29,7 +29,6 @@ export const ArticleTag = ({
     [styles['article']]: 'article',
     [styles.active]: active,
     [styles.clickable]: !!onClick,
-    [styles.disabled]: !onClick,
   })
 
   const tagName = canClamp ? clampTag(tag.content) : tag.content
@@ -41,9 +40,9 @@ export const ArticleTag = ({
 
   const textIconProps: TextIconProps = {
     size: 14,
+    spacing: 2,
     weight: 'normal',
-    icon: <Icon icon={IconHashTag} color="grey" />,
-    placement: 'right',
+    icon: <Icon icon={IconHashTag} color="greyDarker" />,
     ...customTextIconProps,
   }
 
@@ -51,11 +50,20 @@ export const ArticleTag = ({
     <Link {...path} legacyBehavior>
       <a className={tagClasses} onClick={onClick}>
         <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
-          <span className={styles.name}>#&nbsp;{tagName}</span>
+          <span className={styles.name}>{tagName}</span>
         </TextIcon>
       </a>
     </Link>
   )
 }
 
-ArticleTag.fragments = tagFragments
+ArticleTag.fragments = {
+  tag: gql`
+    fragment DigestTag on Tag {
+      id
+      content
+      numArticles
+      numAuthors
+    }
+  `,
+}

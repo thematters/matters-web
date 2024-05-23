@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 import articleFragments from '~/components/GQL/fragments/article'
-import { tagFragments } from '~/components/Tag'
+import { ArticleTag } from '~/components/Tag'
 
 export const EDIT_ARTICLE = gql`
   mutation EditArticle(
@@ -60,6 +60,6 @@ export const EDIT_ARTICLE = gql`
       ...ArticleCollection
     }
   }
-  ${tagFragments.tag}
+  ${ArticleTag.fragments.tag}
   ${articleFragments.articleCollection}
 `
