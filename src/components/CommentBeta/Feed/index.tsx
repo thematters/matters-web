@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { TEST_ID } from '~/common/enums'
+import { COMMENT_FEED_ID_PREFIX, TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Avatar,
@@ -76,7 +76,7 @@ export const BaseCommentFeed = ({
   return (
     <article
       className={styles.comment}
-      id={nodeId}
+      id={`${COMMENT_FEED_ID_PREFIX}${nodeId}`}
       data-test-id={TEST_ID.ARTICLE_COMMENT_FEED}
     >
       <header className={styles.header}>
