@@ -44,15 +44,13 @@ const CommentEditor: React.FC<Props> = ({
       const content = editor.getHTML()
       update({ content })
     },
-    // FIXME: toggle body class and scroll lock when editor is focused
+    // FIXME: toggle scroll lock when editor is focused
     // can be removed if editor is only used in single page
     // instead of being used in dialog
     onFocus: () => {
-      document.body.classList.add('editor-focused')
       window.dispatchEvent(new CustomEvent(BYPASS_SCROLL_LOCK))
     },
-    onBlur: () => {
-      document.body.classList.remove('editor-focused')
+    onDestroy: () => {
       window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
