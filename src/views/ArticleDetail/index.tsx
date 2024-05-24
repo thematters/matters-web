@@ -234,7 +234,11 @@ const BaseArticleDetail = ({
     }
     setTimeout(() => {
       setIsOpenComment(true)
-      window.dispatchEvent(new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG, {
+          detail: { parentId },
+        })
+      )
     }, 500)
   }, [parentId])
 

@@ -52,12 +52,14 @@ const BaseCommentsDialogDialog = ({
   showCommentToolbar,
   openCommentsDialog,
 }: CommentsDialogProps) => {
-  const { show, closeDialog } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const [step, setStep] = useState<Step>(initStep)
   const isInCommentDetail = step === 'commentDetail'
   const isInCommentList = step === 'commentList'
 
   const backToCommentList = () => setStep('commentList')
+
+  useEventListener(OPEN_COMMENT_DETAIL_DIALOG, openDialog)
 
   return (
     <>
@@ -128,12 +130,19 @@ const BaseCommentsDialogDialog = ({
 export const CommentsDialog = (props: CommentsDialogProps) => {
   const [step, setStep] = useState<Step>('commentList')
   const Children = ({ openDialog }: { openDialog: () => void }) => {
-    useEventListener(OPEN_COMMENT_DETAIL_DIALOG, () => {
-      setStep('commentDetail')
-      setTimeout(() => {
-        openDialog()
-      })
-    })
+    useEventListener(
+      OPEN_COMMENT_DETAIL_DIALOG,
+      (detail?: { parentId: string }) => {
+        if (detail?.parentId) {
+          setStep('commentDetail')
+          setTimeout(() => {
+            openDialog()
+          })
+        } else {
+          openDialog()
+        }
+      }
+    )
     return <></>
   }
   return (
