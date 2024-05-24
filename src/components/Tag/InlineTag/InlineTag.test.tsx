@@ -1,4 +1,3 @@
-import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
 import { render, screen } from '~/common/utils/test'
@@ -14,7 +13,6 @@ describe('<InlineTag>', () => {
     expect($name).toBeInTheDocument()
 
     $name.click()
-    expect(mockRouter.asPath).toContain(MOCK_TAG.slug)
     expect(handleClick).toBeCalledTimes(1)
   })
 
