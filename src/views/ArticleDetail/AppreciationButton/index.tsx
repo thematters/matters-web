@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { memo, useContext, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { APPRECIATE_DEBOUNCE, Z_INDEX } from '~/common/enums'
@@ -66,6 +66,9 @@ const AppreciationButton = ({
             appreciateLeft: left,
             __typename: 'Article',
           },
+        },
+        update: () => {
+          setAmount(0)
         },
       })
     } catch (e) {
@@ -195,6 +198,24 @@ const AppreciationButton = ({
   )
 }
 
-AppreciationButton.fragments = fragments
+type MemoizedAppreciationButtonType = React.MemoExoticComponent<
+  React.FC<AppreciationButtonProps>
+> & {
+  fragments: typeof fragments
+}
 
-export default AppreciationButton
+const MemoizedAppreciationButton = memo(
+  AppreciationButton,
+  ({ article: prevArticle }, { article }) => {
+    return (
+      prevArticle.id === article.id &&
+      prevArticle.appreciateLimit === article.appreciateLimit &&
+      prevArticle.appreciateLeft === article.appreciateLeft &&
+      prevArticle.likesReceivedTotal === article.likesReceivedTotal
+    )
+  }
+) as MemoizedAppreciationButtonType
+
+MemoizedAppreciationButton.fragments = fragments
+
+export default MemoizedAppreciationButton

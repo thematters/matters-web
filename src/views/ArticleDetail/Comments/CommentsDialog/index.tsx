@@ -14,8 +14,7 @@ type Step = 'commentList' | 'commentDetail'
 interface CommentsDialogProps {
   id: string
   lock: boolean
-  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-  step?: Step
+  initStep?: Step
 
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
@@ -44,8 +43,7 @@ const DynamicDetailContent = dynamic(() => import('./DetailContent'), {
 const BaseCommentsDialogDialog = ({
   id,
   lock,
-  children,
-  step: _step = 'commentList',
+  initStep = 'commentList',
 
   articleDetails,
   translated,
@@ -54,8 +52,8 @@ const BaseCommentsDialogDialog = ({
   showCommentToolbar,
   openCommentsDialog,
 }: CommentsDialogProps) => {
-  const { show, openDialog, closeDialog } = useDialogSwitch(true)
-  const [step, setStep] = useState<Step>(_step)
+  const { show, closeDialog } = useDialogSwitch(true)
+  const [step, setStep] = useState<Step>(initStep)
   const isInCommentDetail = step === 'commentDetail'
   const isInCommentList = step === 'commentList'
 
@@ -63,8 +61,6 @@ const BaseCommentsDialogDialog = ({
 
   return (
     <>
-      {children({ openDialog })}
-
       <Dialog
         isOpen={show}
         onDismiss={() => {
@@ -138,10 +134,12 @@ export const CommentsDialog = (props: CommentsDialogProps) => {
         openDialog()
       })
     })
-    return <>{props.children && props.children({ openDialog })}</>
+    return <></>
   }
   return (
-    <Dialog.Lazy mounted={<BaseCommentsDialogDialog {...props} step={step} />}>
+    <Dialog.Lazy
+      mounted={<BaseCommentsDialogDialog {...props} initStep={step} />}
+    >
       {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )
