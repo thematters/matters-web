@@ -14,7 +14,7 @@ import { Form, useMutation } from '~/components'
 import { SetPaymentPasswordMutation } from '~/gql/graphql'
 
 interface FormProps {
-  submitCallback: () => void
+  submitCallback?: () => void
   step: 'password' | 'comparedPassword'
   forward: (step: 'password' | 'comparedPassword') => void
   header?: React.ReactNode
@@ -97,7 +97,9 @@ export const SetPaymentPasswordForm: React.FC<FormProps> = ({
         await setPassword({ variables: { password } })
 
         setSubmitting(false)
-        submitCallback()
+        if (submitCallback) {
+          submitCallback()
+        }
       } catch (error) {
         setSubmitting(false)
 

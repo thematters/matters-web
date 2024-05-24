@@ -2,7 +2,11 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { useAccount } from 'wagmi'
 
-import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
+import {
+  CLOSE_SET_PAYMENT_PASSWORD_DIALOG,
+  OPEN_SET_PAYMENT_PASSWORD_DIALOG,
+  PAYMENT_CURRENCY as CURRENCY,
+} from '~/common/enums'
 import { featureSupportedChains } from '~/common/utils'
 import {
   AuthWalletFeed,
@@ -104,17 +108,25 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const [tabUrl, setTabUrl] = useState('')
   const [tx, setTx] = useState<PayToMutation['payTo']['transaction']>()
 
-  const setAmountCallback = (
-    values: SetAmountCallbackValues,
-    openSetPaymentPasswordDialog: () => void
-  ) => {
+  const setAmountCallback = (values: SetAmountCallbackValues) => {
     setAmount(values.amount)
     setCurrency(values.currency)
     if (
       values.currency === CURRENCY.HKD &&
       !viewer.status?.hasPaymentPassword
     ) {
-      openSetPaymentPasswordDialog()
+      window.dispatchEvent(
+        new CustomEvent(OPEN_SET_PAYMENT_PASSWORD_DIALOG, {
+          detail: {
+            submitCallback: () => {
+              forward('confirm')
+              window.dispatchEvent(
+                new CustomEvent(CLOSE_SET_PAYMENT_PASSWORD_DIALOG)
+              )
+            },
+          },
+        })
+      )
     } else {
       forward('confirm')
     }
@@ -174,6 +186,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
 
   return (
     <>
+      <SetPaymentPasswordDialog />
       {showTabs && (
         <DonationTabs
           currency={currency}
@@ -183,26 +196,22 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       )}
       {isSetAmount && (
         <>
-          <SetPaymentPasswordDialog submitCallback={() => forward('confirm')}>
-            {({ openDialog: openSetPaymentPasswordDialog }) => (
-              <DynamicPayToFormSetAmount
-                amount={amount}
-                setAmount={setAmount}
-                currency={currency}
-                recipient={recipient}
-                article={article}
-                submitCallback={(value) => {
-                  setAmountCallback(value, openSetPaymentPasswordDialog)
-                }}
-                switchToAddCredit={() => {
-                  forward('topup')
-                }}
-                setTabUrl={setTabUrl}
-                setTx={setTx}
-                targetId={targetId}
-              />
-            )}
-          </SetPaymentPasswordDialog>
+          <DynamicPayToFormSetAmount
+            amount={amount}
+            setAmount={setAmount}
+            currency={currency}
+            recipient={recipient}
+            article={article}
+            submitCallback={(value) => {
+              setAmountCallback(value)
+            }}
+            switchToAddCredit={() => {
+              forward('topup')
+            }}
+            setTabUrl={setTabUrl}
+            setTx={setTx}
+            targetId={targetId}
+          />
         </>
       )}
       {isConfirm && (
