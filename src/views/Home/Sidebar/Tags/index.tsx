@@ -5,10 +5,10 @@ import { useContext } from 'react'
 import { analytics } from '~/common/utils'
 import {
   List,
+  ListTag,
   QueryError,
   ShuffleButton,
   SpinnerBlock,
-  Tag,
   TagDigest,
   usePublicQuery,
   ViewerContext,
@@ -41,7 +41,7 @@ const SIDEBAR_TAGS = gql`
       }
     }
   }
-  ${Tag.fragments.tag}
+  ${ListTag.fragments.tag}
 `
 
 const Tags = () => {

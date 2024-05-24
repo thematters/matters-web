@@ -38,6 +38,11 @@ export const VERIFY_EMAIL = gql`
         }
         info {
           group
+          email
+          emailVerified
+        }
+        status {
+          hasEmailLoginPassword
         }
       }
     }

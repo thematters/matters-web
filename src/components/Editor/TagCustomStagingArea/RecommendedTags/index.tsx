@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Tag } from '~/components'
+import { InlineTag } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { EditorRecommendedTagsQuery } from '~/gql/graphql'
 
@@ -30,10 +30,8 @@ const RecommendedTags: React.FC<RecommendedTagsProps> = ({
       <ul className={styles.tagList}>
         {tags.map((tag) => (
           <li key={tag.id}>
-            <Tag
+            <InlineTag
               tag={tag}
-              type="inline"
-              is="span"
               onClick={!disabled ? () => onAddTag(tag) : undefined}
             />
           </li>

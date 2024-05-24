@@ -1,4 +1,3 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
@@ -11,8 +10,8 @@ import {
   Card,
   CardProps,
   Icon,
+  PlainTag,
   ResponsiveImage,
-  Tag,
   TextIcon,
 } from '~/components'
 import { TagDigestFeedTagFragment } from '~/gql/graphql'
@@ -70,10 +69,8 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
     >
       <section className={styles.container}>
         <header className={styles.header}>
-          <Tag
+          <PlainTag
             tag={tag}
-            type="plain"
-            iconProps={{ color: 'greyDarker' }}
             textIconProps={{ color: 'black', weight: 'medium', size: 14 }}
           />
 
@@ -120,9 +117,6 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
           >
             <Link {...path} legacyBehavior>
               <a>
-                <VisuallyHidden>
-                  <span>{tag.content}</span>
-                </VisuallyHidden>
                 <ResponsiveImage
                   url={tag.cover || IMAGE_TAG_COVER.src}
                   width={144}

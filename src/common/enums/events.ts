@@ -58,3 +58,8 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   support = 'support',
   visitorWall = 'visitorWall',
 }
+
+/**
+ * Broadcast channel
+ */
+export const CHANNEL_VERIFIED_EMAIL = 'channel-verified-email'

@@ -14,8 +14,7 @@ type Step = 'commentList' | 'commentDetail'
 interface CommentsDialogProps {
   id: string
   lock: boolean
-  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-  step?: Step
+  initStep?: Step
 
   articleDetails: NonNullable<ArticleDetailPublicQuery['article']>
   translated: boolean
@@ -44,8 +43,7 @@ const DynamicDetailContent = dynamic(() => import('./DetailContent'), {
 const BaseCommentsDialogDialog = ({
   id,
   lock,
-  children,
-  step: _step = 'commentList',
+  initStep = 'commentList',
 
   articleDetails,
   translated,
@@ -55,16 +53,16 @@ const BaseCommentsDialogDialog = ({
   openCommentsDialog,
 }: CommentsDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
-  const [step, setStep] = useState<Step>(_step)
+  const [step, setStep] = useState<Step>(initStep)
   const isInCommentDetail = step === 'commentDetail'
   const isInCommentList = step === 'commentList'
 
   const backToCommentList = () => setStep('commentList')
 
+  useEventListener(OPEN_COMMENT_DETAIL_DIALOG, openDialog)
+
   return (
     <>
-      {children({ openDialog })}
-
       <Dialog
         isOpen={show}
         onDismiss={() => {
@@ -132,16 +130,25 @@ const BaseCommentsDialogDialog = ({
 export const CommentsDialog = (props: CommentsDialogProps) => {
   const [step, setStep] = useState<Step>('commentList')
   const Children = ({ openDialog }: { openDialog: () => void }) => {
-    useEventListener(OPEN_COMMENT_DETAIL_DIALOG, () => {
-      setStep('commentDetail')
-      setTimeout(() => {
-        openDialog()
-      })
-    })
-    return <>{props.children && props.children({ openDialog })}</>
+    useEventListener(
+      OPEN_COMMENT_DETAIL_DIALOG,
+      (detail?: { parentId: string }) => {
+        if (detail?.parentId) {
+          setStep('commentDetail')
+          setTimeout(() => {
+            openDialog()
+          })
+        } else {
+          openDialog()
+        }
+      }
+    )
+    return <></>
   }
   return (
-    <Dialog.Lazy mounted={<BaseCommentsDialogDialog {...props} step={step} />}>
+    <Dialog.Lazy
+      mounted={<BaseCommentsDialogDialog {...props} initStep={step} />}
+    >
       {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )

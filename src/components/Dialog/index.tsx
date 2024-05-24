@@ -22,7 +22,6 @@ import styles from './styles.module.css'
 export type DialogProps = {
   isOpen: boolean | undefined
   onDismiss: () => void
-  onRest?: () => void
 
   scrollable?: boolean
   testId?: string
@@ -37,8 +36,7 @@ export type BaseDialogProps = {
 const BaseAnimatedDilaog: React.ComponentType<
   React.PropsWithChildren<DialogProps & BaseDialogProps>
 > = (props) => {
-  const { isOpen, mounted, setMounted, onRest, scrollable, bypassScrollLock } =
-    props
+  const { isOpen, mounted, setMounted, scrollable, bypassScrollLock } = props
   const initialFocusRef = useRef<any>(null)
 
   // Fade In/ Fade Out
@@ -52,10 +50,6 @@ const BaseAnimatedDilaog: React.ComponentType<
 
       if (isFadedOut) {
         setMounted(false)
-      }
-
-      if (onRest) {
-        onRest()
       }
     },
   }))
@@ -101,8 +95,7 @@ const BaseAnimatedDilaog: React.ComponentType<
 const BaseSimpleDialog: React.ComponentType<
   React.PropsWithChildren<DialogProps & BaseDialogProps>
 > = (props) => {
-  const { isOpen, mounted, setMounted, onRest, bypassScrollLock, scrollable } =
-    props
+  const { isOpen, mounted, setMounted, bypassScrollLock, scrollable } = props
   const initialFocusRef = useRef<any>(null)
 
   useEffect(() => {
@@ -111,10 +104,6 @@ const BaseSimpleDialog: React.ComponentType<
     }
 
     setMounted(false)
-
-    if (onRest) {
-      onRest()
-    }
   }, [isOpen])
 
   const dialogOverlayClasses = classNames({
