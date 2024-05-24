@@ -40,7 +40,7 @@ export const InlineTag = ({
     weight: 'normal',
     spacing: 0,
     color: active ? 'white' : 'greyDarker',
-    icon: <Icon icon={IconHashTag} color="black" />,
+    icon: <Icon icon={IconHashTag} color="greyDark" />,
     placement: 'right',
     ...customTextIconProps,
   }
