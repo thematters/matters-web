@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
 import { ReactComponent as IconCircleEmpty } from '@/public/static/icons/24px/circle-empty.svg'
 import { TEST_ID } from '~/common/enums'
-import { Card, Icon, Tag } from '~/components'
+import { Card, Icon, ListTag } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from '../styles.module.css'
@@ -33,7 +33,7 @@ const SearchSelectTag: React.FC<SearchSelectTagProps> = ({
       testId={TEST_ID.SEARCH_RESULTS_ITEM}
     >
       <section className={nodeClass}>
-        <Tag tag={tag} type="list" hasCount is="span" />
+        <ListTag tag={tag} hasCount is="span" />
 
         <span className={styles.iconSelect}>
           {inStagingArea && selected && (

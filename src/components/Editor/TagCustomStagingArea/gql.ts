@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { Tag } from '~/components'
+import { ListTag } from '~/components/Tag'
 
 export const EDITOR_RECOMMENDED_TAGS = gql`
   query EditorRecommendedTags($userName: String!) {
@@ -16,5 +16,5 @@ export const EDITOR_RECOMMENDED_TAGS = gql`
       }
     }
   }
-  ${Tag.fragments.tag}
+  ${ListTag.fragments.tag}
 `

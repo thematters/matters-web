@@ -1,0 +1,51 @@
+.inline {
+  display: inline-flex;
+  align-items: center;
+  height: 1.25rem;
+  padding: 0 var(--sp8) 0 var(--sp8);
+  line-height: 1.25rem;
+  background: var(--color-grey-lighter);
+  border-radius: 1.25rem;
+
+  &.disabled {
+    & .name {
+      color: var(--color-grey);
+    }
+  }
+
+  & .name {
+    @mixin line-clamp;
+    @mixin fix-cropped-letters;
+
+    line-height: inherit;
+    color: var(--color-black);
+  }
+
+  & .close {
+    display: inline-flex;
+    margin-left: var(--sp2);
+  }
+
+  &.clickable {
+    cursor: pointer;
+  }
+
+  &.active {
+    background: var(--color-green-lighter);
+
+    & .name {
+      color: var(--color-matters-green);
+    }
+
+    &:not(.disabled) {
+      &:hover,
+      &:focus {
+        background: var(--color-grey-hover);
+      }
+    }
+
+    & svg {
+      opacity: 0.5;
+    }
+  }
+}

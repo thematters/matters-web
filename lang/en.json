@@ -730,10 +730,6 @@
     "defaultMessage": "Please set your transcation password.",
     "description": "PAYMENT_PASSWORD_NOT_SET"
   },
-  "Ayepqz": {
-    "defaultMessage": "Remove",
-    "description": "src/components/Tag/index.tsx"
-  },
   "B2As08": {
     "defaultMessage": "That's all",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
