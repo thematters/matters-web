@@ -1,9 +1,10 @@
 import classNames from 'classnames'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
 import { OPEN_COMMENT_LIST_DRAWER } from '~/common/enums'
-import { ActiveCommentEditorContext, Icon } from '~/components'
+import { isElementInViewport } from '~/common/utils'
+import { Icon, useCommentEditorContext } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -55,12 +56,20 @@ export const TextSelectionPopover = ({
   const [selection, setSelection] = useState<string>()
   const [position, setPosition] = useState<Record<string, number>>() // { x, y }
   const ref = useRef<HTMLDivElement>(null)
-  const { editor } = useContext(ActiveCommentEditorContext)
+  const { fallbackEditor, getCurrentEditor } = useCommentEditorContext()
   const [quote, setQuote] = useState<string | null>(null)
 
   useEffect(() => {
+    const editor = getCurrentEditor()
     if (!editor || !quote) {
       return
+    }
+
+    if (!isElementInViewport(editor.view.dom)) {
+      editor.view.dom.scrollIntoView({
+        behavior: 'instant',
+        block: 'center',
+      })
     }
 
     setTimeout(() => {
@@ -74,7 +83,7 @@ export const TextSelectionPopover = ({
 
       //  wait for the drawer animation to complete
     }, 100)
-  }, [editor, quote])
+  }, [quote, fallbackEditor])
 
   const onSelectStart = () => {
     setSelection(undefined)

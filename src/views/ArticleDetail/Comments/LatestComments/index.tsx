@@ -149,7 +149,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
         <CommentFormBeta
           articleId={article?.id}
           type={'article'}
-          syncQuote
+          isFallbackEditor
           showClear
         />
         <Spacer size="base" />

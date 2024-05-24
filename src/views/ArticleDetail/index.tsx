@@ -10,11 +10,11 @@ import {
 } from '~/common/enums'
 import { analytics, normalizeTag, toPath } from '~/common/utils'
 import {
-  ActiveCommentEditorProvider,
   ArticleAppreciationContext,
   ArticleAppreciationProvider,
   BackToHomeButton,
   BackToHomeMobileButton,
+  CommentEditorProvider,
   EmptyLayout,
   Error,
   Head,
@@ -653,9 +653,9 @@ const ArticleDetail = ({
    */
   return (
     <ArticleAppreciationProvider>
-      <ActiveCommentEditorProvider>
+      <CommentEditorProvider>
         <BaseArticleDetail article={article} privateFetched={privateFetched} />
-      </ActiveCommentEditorProvider>
+      </CommentEditorProvider>
     </ArticleAppreciationProvider>
   )
 }
