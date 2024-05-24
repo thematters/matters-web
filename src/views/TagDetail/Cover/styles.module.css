@@ -33,3 +33,19 @@
     background: rgb(0 0 0 / 35%);
   }
 }
+
+.tag {
+  & .name {
+    @mixin line-clamp;
+    @mixin fix-cropped-letters;
+
+    line-height: inherit;
+  }
+
+  display: inline-flex;
+  line-height: 1.5rem;
+
+  & svg {
+    margin-right: var(--sp2);
+  }
+}

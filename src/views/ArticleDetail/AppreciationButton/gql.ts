@@ -31,6 +31,8 @@ export const APPRECIATE_ARTICLE = gql`
   mutation AppreciateArticle($id: ID!, $amount: amount_Int_NotNull_min_1!) {
     appreciateArticle(input: { id: $id, amount: $amount }) {
       id
+      likesReceivedTotal: appreciationsReceivedTotal
+      appreciateLeft
     }
   }
 `

@@ -15,7 +15,7 @@ describe('<TagDigest.Feed>', () => {
     $digest.click()
     expect(mockRouter.asPath).toContain(MOCK_TAG.slug)
 
-    const $name = screen.getByText(MOCK_TAG.content)
+    const $name = screen.getAllByText(MOCK_TAG.content)[0] // duplicated items in the mock
     expect($name).toBeInTheDocument()
 
     const $articleCount = screen.getByText(MOCK_TAG.numArticles)

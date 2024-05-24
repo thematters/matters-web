@@ -1,4 +1,3 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
@@ -11,8 +10,8 @@ import {
   Card,
   CardProps,
   Icon,
+  PlainTag,
   ResponsiveImage,
-  Tag,
   TextIcon,
 } from '~/components'
 import { TagDigestSidebarTagFragment } from '~/gql/graphql'
@@ -59,9 +58,6 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
         >
           <Link {...path} legacyBehavior>
             <a>
-              <VisuallyHidden>
-                <span>{tag.content}</span>
-              </VisuallyHidden>
               <ResponsiveImage
                 url={tag.cover || IMAGE_TAG_COVER.src}
                 width={144}
@@ -74,10 +70,8 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
 
         <section className={styles.content}>
           <header className={styles.header}>
-            <Tag
+            <PlainTag
               tag={tag}
-              type="plain"
-              iconProps={{ color: 'greyDarker' }}
               textIconProps={{ color: 'black', weight: 'medium', size: 14 }}
             />
           </header>
