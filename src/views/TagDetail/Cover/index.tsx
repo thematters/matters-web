@@ -30,7 +30,7 @@ const TagCover = ({ tag }: { tag: CoverTagFragment }) => {
               weight="medium"
               spacing={0}
               color="white"
-              icon={<Icon icon={IconHashTag} color="white" />}
+              icon={<Icon icon={IconHashTag} color="white" size={20} />}
               placement="right"
               allowUserSelect
             >
