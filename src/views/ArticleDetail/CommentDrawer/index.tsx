@@ -4,7 +4,12 @@ import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
 import { analytics } from '~/common/utils'
-import { CommentDraftsProvider, Drawer, Icon } from '~/components'
+import {
+  CommentDraftsProvider,
+  Drawer,
+  Icon,
+  useCommentEditorContext,
+} from '~/components'
 
 import { Placeholder as CommentsPlaceholder } from '../Comments/Placeholder'
 
@@ -43,6 +48,7 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
   const intl = useIntl()
   const isCommentDetail = step === 'commentDetail'
   const isCommentList = step === 'commentList'
+  const { setActiveEditor } = useCommentEditorContext()
 
   useEffect(() => {
     if (isOpen) {
@@ -50,6 +56,10 @@ export const CommentDrawer: React.FC<CommentDrawerProps> = ({
         contentType: 'article',
         id: id,
       })
+    }
+
+    if (!isOpen && isCommentList) {
+      setActiveEditor(null)
     }
   }, [isOpen])
 
