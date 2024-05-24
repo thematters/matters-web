@@ -12,7 +12,6 @@ import styles from './styles.module.css'
 interface ArticleTagProps {
   tag: DigestTagFragment
   textIconProps?: TextIconProps
-  active?: boolean
   canClamp?: boolean
   onClick?: () => void
 }
@@ -20,14 +19,11 @@ interface ArticleTagProps {
 export const ArticleTag = ({
   tag,
   textIconProps: customTextIconProps,
-  active,
   canClamp = false,
   onClick,
 }: ArticleTagProps) => {
   const tagClasses = classNames({
-    [styles.tag]: true,
-    [styles['article']]: 'article',
-    [styles.active]: active,
+    [styles.article]: 'article',
     [styles.clickable]: !!onClick,
   })
 
@@ -40,7 +36,7 @@ export const ArticleTag = ({
 
   const textIconProps: TextIconProps = {
     size: 14,
-    spacing: 2,
+    spacing: 0,
     weight: 'normal',
     icon: <Icon icon={IconHashTag} color="greyDarker" />,
     ...customTextIconProps,

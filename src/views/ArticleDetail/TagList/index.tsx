@@ -43,7 +43,6 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
                 })
               }}
               canClamp
-              active
             />
             <TagExposureTracker location={i} id={tag.id} horizontal />
           </li>

@@ -30,15 +30,4 @@ describe('<ListTag>', () => {
     expect(mockRouter.asPath).toBe('/')
     expect(handleClick).toBeCalledTimes(2)
   })
-
-  it('should render a ListTag with remove button', () => {
-    const onRemoveTag = vi.fn()
-    render(<ListTag tag={MOCK_TAG} onRemoveTag={onRemoveTag} />)
-
-    const $remove = screen.getByRole('button', { name: 'Remove' })
-    expect($remove).toBeInTheDocument()
-
-    $remove.click()
-    expect(onRemoveTag).toHaveBeenCalled()
-  })
 })

@@ -1,10 +1,8 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { toPath } from '~/common/utils'
 import { Icon, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
@@ -17,7 +15,6 @@ interface ListTagProps {
   active?: boolean
   is?: 'a' | 'span'
   hasCount?: boolean
-  onRemoveTag?: (tag: DigestTagFragment) => void
   onClick?: () => void
 }
 
@@ -28,9 +25,7 @@ export const ListTag = ({
   is,
   hasCount = true,
   onClick,
-  onRemoveTag,
 }: ListTagProps) => {
-  const intl = useIntl()
   const tagClasses = classNames({
     [styles.tag]: true,
     [styles.list]: 'list',
@@ -61,21 +56,6 @@ export const ListTag = ({
       <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
         <span className={styles.name}>{tagName}</span>
       </TextIcon>
-
-      {onRemoveTag && (
-        <button
-          className={styles.close}
-          onClick={() => {
-            onRemoveTag(tag)
-          }}
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Remove',
-            id: 'G/yZLu',
-          })}
-        >
-          <Icon icon={IconTimes} color="grey" />
-        </button>
-      )}
 
       {hasCount && tag?.numArticles ? (
         <span className={styles.count}>{tag.numArticles}</span>
