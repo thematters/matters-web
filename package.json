@@ -9,7 +9,7 @@
   "license": "Apache-2.0",
   "sideEffects": false,
   "scripts": {
-    "dev": "PORT=\"${PORT:-3000}\"; cross-env NODE_OPTIONS='--no-experimental-fetch' next -p $PORT",
+    "dev": "PORT=\"${PORT:-3000}\"; cross-env NODE_OPTIONS='--no-experimental-fetch --heapsnapshot-signal=SIGUSR2' next -p $PORT",
     "test": "npm run test:unit && npm run test:e2e",
     "test:e2e": "playwright test",
     "test:e2e:prepare": "playwright install --with-deps",

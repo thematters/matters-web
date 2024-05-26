@@ -42,7 +42,9 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
   user,
   closeDialog,
 }) => {
-  const { loading, data } = useQuery<RssGatewaysQuery>(RSS_GATEWAYS)
+  const { loading, data } = useQuery<RssGatewaysQuery>(RSS_GATEWAYS, {
+    skip: typeof window === 'undefined',
+  })
 
   const gateways = data?.official.gatewayUrls || []
   const ipnsKey = user.info.ipnsKey
