@@ -145,7 +145,6 @@ const CONNECT_SRC = [
   // IPFS Gateways
   'gateway.ipfs.io/ipfs/',
   'cloudflare-ipfs.com/ipfs/',
-  'gateway.pinata.cloud/ipfs/',
   'ipfs.io/ipfs/',
   '*.cf-ipfs.com',
   'cf-ipfs.com/ipfs/',
