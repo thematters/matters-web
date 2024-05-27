@@ -9,17 +9,12 @@ interface CommentEditorContextProps {
   getCurrentEditor: () => Editor | null
 }
 
-const CommentEditorContext = createContext<
-  CommentEditorContextProps | undefined
->(undefined)
+const CommentEditorContext = createContext<CommentEditorContextProps>(
+  {} as CommentEditorContextProps
+)
 
 export const useCommentEditorContext = (): CommentEditorContextProps => {
   const context = useContext(CommentEditorContext)
-  if (!context) {
-    throw new Error(
-      'useCommentEditorContext must be used within a CommentEditorProvider'
-    )
-  }
   return context
 }
 
