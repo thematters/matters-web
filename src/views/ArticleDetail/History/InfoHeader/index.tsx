@@ -71,7 +71,9 @@ const InfoHeader = ({
   version: InfoHeaderArticleVersionFragment
 }) => {
   const intl = useIntl()
-  const { data } = useQuery<GatewaysQuery>(GATEWAYS)
+  const { data } = useQuery<GatewaysQuery>(GATEWAYS, {
+    skip: typeof window === 'undefined',
+  })
 
   const gateways = data?.official.gatewayUrls || []
 
