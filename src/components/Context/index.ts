@@ -1,5 +1,5 @@
-export * from './ActiveCommentEditor'
 export * from './CommentDrafts'
+export * from './CommentEditor'
 export * from './DraftDetailState'
 export * from './Features'
 export * from './Language'
