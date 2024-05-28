@@ -32,6 +32,7 @@ import {
   useEventListener,
   useFeatures,
   useIntersectionObserver,
+  useNativeEventListener,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -538,6 +539,27 @@ const ArticleDetail = ({
   useEffect(() => {
     loadPrivate()
   }, [article?.shortHash, viewer.id])
+
+  // floating toolbar is blocking some text when pressing page up and down
+  // offsetting it with the height of floating toolbar
+  useNativeEventListener('keydown', (event: KeyboardEvent) => {
+    if (
+      event.code.toLowerCase() === 'pagedown' ||
+      event.code.toLowerCase() === 'pageup'
+    ) {
+      event.preventDefault()
+      const remInPixels = parseFloat(
+        getComputedStyle(document.documentElement).fontSize
+      )
+      const scrollDirection = event.code.toLowerCase() === 'pagedown' ? 1 : -1
+      const scrollAmount = window.innerHeight - 5 * remInPixels // the height of floating toolbar
+
+      window.scrollBy({
+        top: scrollAmount * scrollDirection,
+        behavior: 'smooth',
+      })
+    }
+  })
 
   /**
    * Render:Loading
