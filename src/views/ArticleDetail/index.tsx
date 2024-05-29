@@ -545,7 +545,8 @@ const ArticleDetail = ({
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
     if (
       event.code.toLowerCase() === 'pagedown' ||
-      event.code.toLowerCase() === 'pageup'
+      event.code.toLowerCase() === 'pageup' ||
+      event.code.toLowerCase() === 'space'
     ) {
       event.preventDefault()
       const remInPixels = parseFloat(
