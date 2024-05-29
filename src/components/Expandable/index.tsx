@@ -80,11 +80,22 @@ export const Expandable: React.FC<ExpandableProps> = ({
     setExpandable(false)
     setExpand(true)
     if (node?.current) {
-      const height = node.current.firstElementChild?.clientHeight || 0
+      let height = node.current.firstElementChild?.clientHeight || 0
+      if (isRichShow) {
+        height = 0
+        let contentNode = node.current.firstElementChild?.firstElementChild
+        if (contentNode) {
+          contentNode.childNodes.forEach((child) => {
+            let e = child as HTMLElement
+            height += e.clientHeight
+          })
+        }
+      }
+
       const lineHeight = window
         .getComputedStyle(node.current, null)
         .getPropertyValue('line-height')
-      const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
+      const lines = Math.max(Math.ceil(height / parseFloat(lineHeight)), 0)
 
       if (lines > limit + buffer) {
         setExpandable(true)
