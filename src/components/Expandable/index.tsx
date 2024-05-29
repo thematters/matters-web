@@ -32,8 +32,21 @@ interface ExpandableProps {
   spacingTop?: 'tight' | 'base'
   textIndent?: boolean
   isRichShow?: boolean
+  isComment?: boolean
   collapseable?: boolean
   bgColor?: 'greyLighter' | 'white'
+}
+
+const calculateCommentContentHeight = (element: HTMLElement): number => {
+  let height = 0
+  const contentNode = element.firstElementChild?.firstElementChild
+  if (contentNode) {
+    contentNode.childNodes.forEach((child) => {
+      const e = child as HTMLElement
+      height += e.clientHeight
+    })
+  }
+  return height
 }
 
 export const Expandable: React.FC<ExpandableProps> = ({
@@ -46,22 +59,22 @@ export const Expandable: React.FC<ExpandableProps> = ({
   spacingTop,
   textIndent = false,
   isRichShow = false,
+  isComment = false,
   collapseable = true,
   bgColor = 'white',
 }) => {
-  const [expandable, setExpandable] = useState(false)
+  const [isOverFlowing, setIsOverFlowing] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
   const [expand, setExpand] = useState(true)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
   const collapsedContent = stripHtml(content || '')
 
   const contentClasses = classNames({
-    [styles.expandable]: true,
+    [styles.content]: true,
     [styles[`${color}`]]: !!color,
-    [size ? styles[`text${size}`] : '']: !!size,
-    [spacingTop
-      ? styles[`spacingTop${capitalizeFirstLetter(spacingTop)}`]
-      : '']: !!spacingTop,
+    [styles[`text${size}`]]: !!size,
+    [styles[`spacingTop${capitalizeFirstLetter(spacingTop || '')}`]]:
+      !!spacingTop,
     [styles.textIndent]: textIndent,
   })
 
@@ -73,23 +86,16 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const richShowMoreButtonClasses = classNames({
     [styles.richShowMoreButton]: true,
     [styles[`${bgColor}`]]: !!bgColor,
-    [size ? styles[`text${size}`] : '']: !!size,
+    [styles[`text${size}`]]: !!size,
   })
 
   useIsomorphicLayoutEffect(() => {
-    setExpandable(false)
+    setIsOverFlowing(false)
     setExpand(true)
     if (node?.current) {
       let height = node.current.firstElementChild?.clientHeight || 0
-      if (isRichShow) {
-        height = 0
-        let contentNode = node.current.firstElementChild?.firstElementChild
-        if (contentNode) {
-          contentNode.childNodes.forEach((child) => {
-            let e = child as HTMLElement
-            height += e.clientHeight
-          })
-        }
+      if (isRichShow && isComment) {
+        height = calculateCommentContentHeight(node.current)
       }
 
       const lineHeight = window
@@ -98,7 +104,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
       const lines = Math.max(Math.ceil(height / parseFloat(lineHeight)), 0)
 
       if (lines > limit + buffer) {
-        setExpandable(true)
+        setIsOverFlowing(true)
         setExpand(false)
       }
     }
@@ -113,16 +119,18 @@ export const Expandable: React.FC<ExpandableProps> = ({
   return (
     <section className={contentClasses}>
       <div ref={node}>
-        {(!expandable || (expandable && expand)) && (
+        {(!isOverFlowing || (isOverFlowing && expand)) && (
           <div
             className={firstRender ? styles.lineClamp : ''}
+            // Set WebkitLineClamp to limit + 2 to prevent displaying too many lines
+            // thus providing a better user experience when first render.
             style={{ WebkitLineClamp: limit + 2 }}
           >
             {children}
           </div>
         )}
       </div>
-      {expandable && collapseable && expand && !isRichShow && (
+      {isOverFlowing && collapseable && expand && !isRichShow && (
         <section className={styles.collapseWrapper}>
           <Button
             spacing={[4, 8]}
@@ -138,7 +146,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
           </Button>
         </section>
       )}
-      {expandable && !expand && (
+      {isOverFlowing && !expand && (
         <p className={styles.unexpandWrapper}>
           {!isRichShow && (
             <Truncate
