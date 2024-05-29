@@ -12,7 +12,7 @@ import {
 import styles from './styles.module.css'
 
 interface FormProps {
-  submitCallback: () => void
+  submitCallback?: () => void
   closeDialog?: () => any
 }
 
