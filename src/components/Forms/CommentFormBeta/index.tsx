@@ -13,6 +13,7 @@ import {
   CommentDraftsContext,
   SpinnerBlock,
   TextIcon,
+  useCommentEditorContext,
   useMutation,
   useRoute,
   ViewerContext,
@@ -31,11 +32,12 @@ import styles from './styles.module.css'
 export type CommentFormBetaType = 'article'
 
 export interface CommentFormBetaProps {
+  type: CommentFormBetaType
+
   commentId?: string
   replyToId?: string
   parentId?: string
   articleId?: string
-  type: CommentFormBetaType
   isInCommentDetail?: boolean
 
   defaultContent?: string | null
@@ -44,7 +46,9 @@ export interface CommentFormBetaProps {
 
   showClear?: boolean
   placeholder?: string
-  syncQuote?: boolean
+
+  isFallbackEditor?: boolean
+  setEditor?: (editor: Editor | null) => void
 }
 
 export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
@@ -59,15 +63,21 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
   closeCallback,
   showClear,
   placeholder,
-  syncQuote,
+  isFallbackEditor,
+  setEditor: propsSetEditor,
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { getDraft, updateDraft, removeDraft } =
     useContext(CommentDraftsContext)
   const { getQuery, routerLang } = useRoute()
+  const { setActiveEditor } = useCommentEditorContext()
+  const [editor, localSetEditor] = useState<Editor | null>(null)
+  const setEditor = (editor: Editor | null) => {
+    localSetEditor(editor)
+    propsSetEditor?.(editor)
+  }
   const shortHash = getQuery('shortHash')
-  const [editor, setEditor] = useState<Editor | null>(null)
 
   // retrieve comment draft
   const commentDraftId = `${articleId}-${type}-${commentId || 0}-${
@@ -172,6 +182,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
       editor.commands.setContent('')
     }
     removeDraft(commentDraftId)
+    setActiveEditor(null)
   }
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
@@ -195,7 +206,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
           content={content}
           update={onUpdate}
           placeholder={placeholder}
-          syncQuote={syncQuote}
+          isFallbackEditor={isFallbackEditor}
           setEditor={(editor) => {
             setEditor(editor)
           }}

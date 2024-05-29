@@ -6,4 +6,6 @@ export const KEYVALUE = {
   arrowUp: 'arrowup',
   arrowDown: 'arrowdown',
   space: 'space',
+  pageDown: 'pagedown',
+  pageUp: 'pageup',
 }

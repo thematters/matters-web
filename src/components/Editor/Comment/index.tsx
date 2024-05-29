@@ -4,11 +4,11 @@ import {
   EditorContent,
   useCommentEditor,
 } from '@matters/matters-editor'
-import { useContext, useEffect } from 'react'
+import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
-import { ActiveCommentEditorContext } from '~/components/Context'
+import { useCommentEditorContext } from '~/components/Context'
 
 import { makeMentionSuggestion } from '../Article/extensions'
 import styles from './styles.module.css'
@@ -18,7 +18,7 @@ interface Props {
   update: (params: { content: string }) => void
   placeholder?: string
   setEditor?: (editor: Editor | null) => void
-  syncQuote?: boolean
+  isFallbackEditor?: boolean
 }
 
 const CommentEditor: React.FC<Props> = ({
@@ -26,11 +26,11 @@ const CommentEditor: React.FC<Props> = ({
   update,
   placeholder,
   setEditor,
-  syncQuote,
+  isFallbackEditor,
 }) => {
   const client = useApolloClient()
   const intl = useIntl()
-  const { setEditor: setActiveEditor } = useContext(ActiveCommentEditorContext)
+  const { setActiveEditor, setFallbackEditor } = useCommentEditorContext()
 
   const editor = useCommentEditor({
     placeholder:
@@ -58,8 +58,8 @@ const CommentEditor: React.FC<Props> = ({
 
   useEffect(() => {
     setEditor?.(editor)
-    if (syncQuote) {
-      setActiveEditor(editor)
+    if (isFallbackEditor) {
+      setFallbackEditor(editor)
     }
   }, [editor])
 
@@ -68,7 +68,12 @@ const CommentEditor: React.FC<Props> = ({
       className={styles.commentEditor}
       id="editor" // anchor for mention plugin
     >
-      <EditorContent editor={editor} />
+      <EditorContent
+        editor={editor}
+        onFocus={() => {
+          setActiveEditor(editor)
+        }}
+      />
     </div>
   )
 }

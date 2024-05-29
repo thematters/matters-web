@@ -1,3 +1,4 @@
+import { Editor } from '@matters/matters-editor'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -16,6 +17,7 @@ import {
   Media,
   Spacer,
   toast,
+  useCommentEditorContext,
   ViewerContext,
 } from '~/components'
 import {
@@ -97,6 +99,8 @@ const BaseFooterActions = ({
 
   const [showForm, setShowForm] = useState(false)
   const toggleShowForm = () => setShowForm(!showForm)
+  const [editor, setEditor] = useState<Editor | null>(null)
+  const { setActiveEditor, activeEditor } = useCommentEditorContext()
 
   const { state, node } = comment
   const article = node.__typename === 'Article' ? node : undefined
@@ -224,7 +228,12 @@ const BaseFooterActions = ({
                   {...buttonProps}
                   {...replyButtonProps}
                   {...replyCustomButtonProps}
-                  onClick={toggleShowForm}
+                  onClick={() => {
+                    if (editor === activeEditor) {
+                      setActiveEditor(null)
+                    }
+                    toggleShowForm()
+                  }}
                 />
               </Media>
             </>
@@ -237,11 +246,17 @@ const BaseFooterActions = ({
             <Spacer size="base" />
             <CommentFormBeta
               articleId={article?.id}
+              setEditor={setEditor}
               type={'article'}
               replyToId={comment.id}
               parentId={comment.parentComment?.id || comment.id}
               submitCallback={submitCallback}
-              closeCallback={() => setShowForm(false)}
+              closeCallback={() => {
+                if (editor === activeEditor) {
+                  setActiveEditor(null)
+                }
+                setShowForm(false)
+              }}
               isInCommentDetail={isInCommentDetail}
               defaultContent={defaultContent}
             />

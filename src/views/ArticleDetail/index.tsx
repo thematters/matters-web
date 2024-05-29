@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
+  KEYVALUE,
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
 } from '~/common/enums'
@@ -15,9 +16,9 @@ import {
   toPath,
 } from '~/common/utils'
 import {
-  ActiveCommentEditorProvider,
   BackToHomeButton,
   BackToHomeMobileButton,
+  CommentEditorProvider,
   EmptyLayout,
   Error,
   Head,
@@ -32,6 +33,7 @@ import {
   useEventListener,
   useFeatures,
   useIntersectionObserver,
+  useNativeEventListener,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -539,6 +541,30 @@ const ArticleDetail = ({
     loadPrivate()
   }, [article?.shortHash, viewer.id])
 
+  // floating toolbar is blocking some text when pressing page up and down
+  // offsetting it with the height of floating toolbar
+  useNativeEventListener('keydown', (event: KeyboardEvent) => {
+    const keyToScrollDirection = {
+      [KEYVALUE.pageDown]: 1,
+      [KEYVALUE.pageUp]: -1,
+      [KEYVALUE.space]: 1,
+    } // map the key to scroll direction
+    const key = event.code.toLowerCase()
+    if (key in keyToScrollDirection) {
+      event.preventDefault()
+      const remInPixels = parseFloat(
+        getComputedStyle(document.documentElement).fontSize
+      )
+      const scrollDirection = keyToScrollDirection[key]
+      const scrollAmount = window.innerHeight - 5 * remInPixels // the height of floating toolbar
+
+      window.scrollBy({
+        top: scrollAmount * scrollDirection,
+        behavior: 'smooth',
+      })
+    }
+  })
+
   /**
    * Render:Loading
    */
@@ -603,9 +629,9 @@ const ArticleDetail = ({
    * Render:Article
    */
   return (
-    <ActiveCommentEditorProvider>
+    <CommentEditorProvider>
       <BaseArticleDetail article={article} privateFetched={privateFetched} />
-    </ActiveCommentEditorProvider>
+    </CommentEditorProvider>
   )
 }
 
