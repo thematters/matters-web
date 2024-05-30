@@ -77,8 +77,8 @@ const FloatToolbar = ({
     if (
       key in keyToScrollDirection &&
       floatingToolbarRef.current &&
-      event.target &&
-      floatingToolbarRef.current.contains(event.target as HTMLElement)
+      event.target instanceof HTMLElement &&
+      event.target.contains(floatingToolbarRef.current)
     ) {
       event.preventDefault()
       const remInPixels = parseFloat(
