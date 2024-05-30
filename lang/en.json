@@ -127,9 +127,6 @@
   "06XHBC": {
     "defaultMessage": "Add to Circle"
   },
-  "09AywK": {
-    "defaultMessage": "Your work has been republished. Share it on different platforms"
-  },
   "0Azlrb": {
     "defaultMessage": "Manage"
   },
@@ -707,9 +704,6 @@
     "defaultMessage": "Maintain",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "AQuumI": {
-    "defaultMessage": "View republished article"
-  },
   "AVpR3Q": {
     "defaultMessage": "Wallet linked",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
@@ -989,6 +983,9 @@
   "GHxtae": {
     "defaultMessage": "Wallet",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
+  },
+  "GRrsEH": {
+    "defaultMessage": "View published article"
   },
   "GRtGnZ": {
     "defaultMessage": "Resign From Maintainer",
@@ -2329,9 +2326,6 @@
   "gluNT8": {
     "defaultMessage": "Enter URL"
   },
-  "gz0EGC": {
-    "defaultMessage": "Article republished"
-  },
   "gzJEFb": {
     "defaultMessage": "Verify your Liker ID through like.co"
   },
@@ -2949,6 +2943,9 @@
     "defaultMessage": "The comment has been forcibly hidden",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
+  "tqEGfa": {
+    "defaultMessage": "Your work has been published. Share it on different platforms"
+  },
   "tzq2+W": {
     "defaultMessage": "Send",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -2981,6 +2978,9 @@
   },
   "uVCg1l": {
     "defaultMessage": "Explore Matters"
+  },
+  "uYwH7j": {
+    "defaultMessage": "Article published"
   },
   "uaFED8": {
     "defaultMessage": "After binding, in addition to the original login method, a wallet login channel will be added.",

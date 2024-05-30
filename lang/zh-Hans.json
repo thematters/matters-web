@@ -127,9 +127,6 @@
   "06XHBC": {
     "defaultMessage": "加入围炉"
   },
-  "09AywK": {
-    "defaultMessage": "编辑作品发布成功，快把作品分享到不同渠道，"
-  },
   "0Azlrb": {
     "defaultMessage": "管理"
   },
@@ -707,9 +704,6 @@
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "AQuumI": {
-    "defaultMessage": "查看编辑作品"
-  },
   "AVpR3Q": {
     "defaultMessage": "已绑定钱包",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
@@ -989,6 +983,9 @@
   "GHxtae": {
     "defaultMessage": "数字钱包",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
+  },
+  "GRrsEH": {
+    "defaultMessage": "View published article"
   },
   "GRtGnZ": {
     "defaultMessage": "辞去权限",
@@ -2329,9 +2326,6 @@
   "gluNT8": {
     "defaultMessage": "输入链接地址"
   },
-  "gz0EGC": {
-    "defaultMessage": "编辑作品已发布"
-  },
   "gzJEFb": {
     "defaultMessage": "跳转到 like.co 验证已有 Liker ID"
   },
@@ -2949,6 +2943,9 @@
     "defaultMessage": "评论已被强制隐藏",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
+  "tqEGfa": {
+    "defaultMessage": "Your work has been published. Share it on different platforms"
+  },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/PreSend.tsx"
@@ -2981,6 +2978,9 @@
   },
   "uVCg1l": {
     "defaultMessage": "玩转 Matters 实用指南"
+  },
+  "uYwH7j": {
+    "defaultMessage": "Article published"
   },
   "uaFED8": {
     "defaultMessage": "绑定后除原有登入方式，增加钱包登入管道",
