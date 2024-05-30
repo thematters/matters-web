@@ -9,6 +9,7 @@ import {
   Media,
   TextSelectionPopover,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { ReadArticleMutation } from '~/gql/graphql'
@@ -38,6 +39,9 @@ const Content = ({
   })
 
   const contentContainer = useRef<HTMLDivElement>(null)
+
+  const { isInPath } = useRoute()
+  const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
   // idle timer
   const [lastScroll, setScrollTime] = useState(0)
@@ -127,7 +131,7 @@ const Content = ({
         data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
       <Media greaterThan="sm">
-        {contentContainer.current && (
+        {!isInArticleDetailHistory && contentContainer.current && (
           <TextSelectionPopover
             targetElement={contentContainer.current as HTMLElement}
           />
