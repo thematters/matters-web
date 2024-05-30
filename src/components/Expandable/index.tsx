@@ -49,6 +49,33 @@ const calculateCommentContentHeight = (element: HTMLElement): number => {
   return height
 }
 
+const calculateContentHeight = (
+  element: HTMLElement,
+  isRichShow: boolean,
+  isComment: boolean
+): number => {
+  if (isRichShow && isComment) {
+    return calculateCommentContentHeight(element)
+  }
+  return element.firstElementChild?.clientHeight || 0
+}
+
+const checkOverflow = (
+  element: HTMLElement,
+  limit: number,
+  buffer: number,
+  isRichShow: boolean,
+  isComment: boolean
+) => {
+  const height = calculateContentHeight(element, isRichShow, isComment)
+  const lineHeight = window
+    .getComputedStyle(element, null)
+    .getPropertyValue('line-height')
+  const lines = Math.max(Math.ceil(height / parseFloat(lineHeight)), 0)
+
+  return lines > limit + buffer
+}
+
 export const Expandable: React.FC<ExpandableProps> = ({
   children,
   content,
@@ -89,24 +116,20 @@ export const Expandable: React.FC<ExpandableProps> = ({
     [styles[`text${size}`]]: !!size,
   })
 
-  useIsomorphicLayoutEffect(() => {
+  const reset = () => {
     setIsOverFlowing(false)
     setExpand(true)
-    if (node?.current) {
-      let height = node.current.firstElementChild?.clientHeight || 0
-      if (isRichShow && isComment) {
-        height = calculateCommentContentHeight(node.current)
-      }
+  }
 
-      const lineHeight = window
-        .getComputedStyle(node.current, null)
-        .getPropertyValue('line-height')
-      const lines = Math.max(Math.ceil(height / parseFloat(lineHeight)), 0)
-
-      if (lines > limit + buffer) {
-        setIsOverFlowing(true)
-        setExpand(false)
-      }
+  useIsomorphicLayoutEffect(() => {
+    // FIXED: reset state to fix the case from overflow to non-overflow condition.
+    reset()
+    if (!node?.current) {
+      return
+    }
+    if (checkOverflow(node.current, limit, buffer, isRichShow, isComment)) {
+      setIsOverFlowing(true)
+      setExpand(false)
     }
   }, [content])
 
@@ -130,7 +153,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
           </div>
         )}
       </div>
-      {isOverFlowing && collapseable && expand && !isRichShow && (
+      {isOverFlowing && expand && collapseable && !isRichShow && (
         <section className={styles.collapseWrapper}>
           <Button
             spacing={[4, 8]}
