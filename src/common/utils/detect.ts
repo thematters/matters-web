@@ -13,3 +13,15 @@ export const isMobile = () => {
     userAgent
   )
 }
+
+export const checkIsSafariVersionLessThan17 = () => {
+  const userAgent = navigator.userAgent
+  const safariMatch = userAgent.match(/Version\/(\d+\.\d+)/)
+
+  if (safariMatch && safariMatch[1]) {
+    const safariVersion = parseFloat(safariMatch[1])
+    return safariVersion < 17
+  }
+
+  return false
+}

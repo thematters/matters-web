@@ -3,7 +3,11 @@ import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
-import { capitalizeFirstLetter, stripHtml } from '~/common/utils'
+import {
+  capitalizeFirstLetter,
+  checkIsSafariVersionLessThan17,
+  stripHtml,
+} from '~/common/utils'
 import {
   Button,
   Icon,
@@ -85,16 +89,26 @@ export const Expandable: React.FC<ExpandableProps> = ({
   size,
   spacingTop,
   textIndent = false,
-  isRichShow = false,
+  isRichShow: _isRichShow = false,
   isComment = false,
   collapseable = true,
   bgColor = 'white',
 }) => {
   const [isOverFlowing, setIsOverFlowing] = useState(false)
-  const [firstRender, setFirstRender] = useState(true)
   const [expand, setExpand] = useState(true)
+  const [isRichShow, setIsRichShow] = useState(_isRichShow)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
   const collapsedContent = stripHtml(content || '')
+
+  const [isSafariVersionLessThan17, setIsSafariVersionLessThan17] =
+    useState(false)
+
+  useEffect(() => {
+    // FIXME: Safari version less than 17 has a bug that -webkit-line-clamp overlapping blocks even with overflow: hidden, when mixing <span> and <div>.
+    if (checkIsSafariVersionLessThan17()) {
+      setIsSafariVersionLessThan17(true)
+    }
+  }, [])
 
   const contentClasses = classNames({
     [styles.content]: true,
@@ -121,9 +135,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
     setExpand(true)
   }
 
-  useIsomorphicLayoutEffect(() => {
-    // FIXED: reset state to fix the case from overflow to non-overflow condition.
-    reset()
+  const handleOverflowCheck = () => {
     if (!node?.current) {
       return
     }
@@ -131,27 +143,29 @@ export const Expandable: React.FC<ExpandableProps> = ({
       setIsOverFlowing(true)
       setExpand(false)
     }
+  }
+
+  useIsomorphicLayoutEffect(() => {
+    // FIXED: reset state to fix the case from overflow to non-overflow condition.
+    reset()
+
+    handleOverflowCheck()
   }, [content])
 
   useEffect(() => {
-    if (firstRender) {
-      setFirstRender(false)
+    if (isSafariVersionLessThan17 && isRichShow) {
+      reset()
+      setIsRichShow(false)
+      setTimeout(() => {
+        handleOverflowCheck()
+      })
     }
-  }, [firstRender])
+  }, [isSafariVersionLessThan17])
 
   return (
     <section className={contentClasses}>
       <div ref={node}>
-        {(!isOverFlowing || (isOverFlowing && expand)) && (
-          <div
-            className={firstRender ? styles.lineClamp : ''}
-            // Set WebkitLineClamp to limit + 2 to prevent displaying too many lines
-            // thus providing a better user experience when first render.
-            style={{ WebkitLineClamp: limit + 2 }}
-          >
-            {children}
-          </div>
-        )}
+        {(!isOverFlowing || (isOverFlowing && expand)) && <div>{children}</div>}
       </div>
       {isOverFlowing && expand && collapseable && !isRichShow && (
         <section className={styles.collapseWrapper}>
