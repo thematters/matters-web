@@ -1,10 +1,19 @@
 import dynamic from 'next/dynamic'
+import { useState } from 'react'
 
-import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
+import {
+  CLOSE_SET_PAYMENT_PASSWORD_DIALOG,
+  OPEN_SET_PAYMENT_PASSWORD_DIALOG,
+} from '~/common/enums'
+import {
+  Dialog,
+  SpinnerBlock,
+  useDialogSwitch,
+  useEventListener,
+} from '~/components'
 
 interface SetPaymentPasswordDialogProps {
-  submitCallback: () => void
-  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
+  submitCallback?: () => void
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
@@ -12,15 +21,15 @@ const DynamicContent = dynamic(() => import('./Content'), {
 })
 
 const BaseSetPaymentPasswordDialog = ({
-  children,
   submitCallback,
 }: SetPaymentPasswordDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
+  useEventListener(OPEN_SET_PAYMENT_PASSWORD_DIALOG, openDialog)
+  useEventListener(CLOSE_SET_PAYMENT_PASSWORD_DIALOG, closeDialog)
+
   return (
     <>
-      {children({ openDialog })}
-
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent
           closeDialog={closeDialog}
@@ -33,8 +42,33 @@ const BaseSetPaymentPasswordDialog = ({
 
 export const SetPaymentPasswordDialog = (
   props: SetPaymentPasswordDialogProps
-) => (
-  <Dialog.Lazy mounted={<BaseSetPaymentPasswordDialog {...props} />}>
-    {({ openDialog }) => <>{props.children({ openDialog })}</>}
-  </Dialog.Lazy>
-)
+) => {
+  const [sumbitCallback, setSubmitCallback] = useState<() => void>(
+    () => () => {}
+  )
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(
+      OPEN_SET_PAYMENT_PASSWORD_DIALOG,
+      (detail?: { submitCallback: () => void }) => {
+        if (detail?.submitCallback) {
+          setSubmitCallback(() => detail.submitCallback)
+          openDialog()
+        }
+      }
+    )
+    return <></>
+  }
+
+  return (
+    <Dialog.Lazy
+      mounted={
+        <BaseSetPaymentPasswordDialog
+          {...props}
+          submitCallback={sumbitCallback}
+        />
+      }
+    >
+      {({ openDialog }) => <Children openDialog={openDialog} />}
+    </Dialog.Lazy>
+  )
+}

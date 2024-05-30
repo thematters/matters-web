@@ -4,10 +4,10 @@ import { useContext, useEffect } from 'react'
 import { analytics } from '~/common/utils'
 import {
   Dialog,
-  PaymentPasswordContext,
   SpinnerBlock,
   useDialogSwitch,
   useStep,
+  ViewerContext,
 } from '~/components'
 
 type Step = 'setPaymentPassword' | 'addCredit'
@@ -27,14 +27,16 @@ const DynamicAddCreditForm = dynamic(
 )
 
 const BaseAddCreditDialog = ({ children }: AddCreditDialogProps) => {
-  const { hasPaymentPassword } = useContext(PaymentPasswordContext)
+  const viewer = useContext(ViewerContext)
   const {
     show,
     openDialog: baseOpenDialog,
     closeDialog,
   } = useDialogSwitch(true)
 
-  const initialStep = hasPaymentPassword ? 'addCredit' : 'setPaymentPassword'
+  const initialStep = viewer.status?.hasPaymentPassword
+    ? 'addCredit'
+    : 'setPaymentPassword'
   const { currStep, forward } = useStep<Step>(initialStep)
 
   const openDialog = () => {

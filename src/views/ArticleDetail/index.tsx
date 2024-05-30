@@ -15,9 +15,9 @@ import {
   toPath,
 } from '~/common/utils'
 import {
-  ActiveCommentEditorProvider,
   BackToHomeButton,
   BackToHomeMobileButton,
+  CommentEditorProvider,
   EmptyLayout,
   Error,
   Head,
@@ -603,9 +603,9 @@ const ArticleDetail = ({
    * Render:Article
    */
   return (
-    <ActiveCommentEditorProvider>
+    <CommentEditorProvider>
       <BaseArticleDetail article={article} privateFetched={privateFetched} />
-    </ActiveCommentEditorProvider>
+    </CommentEditorProvider>
   )
 }
 

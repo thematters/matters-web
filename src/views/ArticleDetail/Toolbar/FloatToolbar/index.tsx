@@ -1,12 +1,17 @@
 import classNames from 'classnames'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 
 import {
+  // KEYVALUE,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { ButtonProps, ViewerContext } from '~/components'
+import {
+  ButtonProps,
+  // useNativeEventListener,
+  ViewerContext,
+} from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import AppreciationButton from '../../AppreciationButton'
@@ -59,9 +64,40 @@ const FloatToolbar = ({
     textActiveColor: 'greyDarker',
   }
 
+  const floatingToolbarRef = useRef<HTMLElement>(null)
+  // floating toolbar is blocking some text when pressing page up and down
+  // offsetting it with the height of floating toolbar
+  // useNativeEventListener('keydown', (event: KeyboardEvent) => {
+  //   const keyToScrollDirection = {
+  //     [KEYVALUE.pageDown]: 1,
+  //     [KEYVALUE.pageUp]: -1,
+  //     [KEYVALUE.space]: 1,
+  //   } // map the key to scroll direction
+  //   const key = event.code.toLowerCase()
+  //   if (
+  //     key in keyToScrollDirection &&
+  //     floatingToolbarRef.current &&
+  //     event.target instanceof HTMLElement &&
+  //     event.target.contains(floatingToolbarRef.current)
+  //   ) {
+  //     event.preventDefault()
+  //     const remInPixels = parseFloat(
+  //       getComputedStyle(document.documentElement).fontSize
+  //     )
+  //     const scrollDirection = keyToScrollDirection[key]
+  //     const scrollAmount = window.innerHeight - 5 * remInPixels // the height of floating toolbar
+
+  //     window.scrollBy({
+  //       top: scrollAmount * scrollDirection,
+  //       behavior: 'smooth',
+  //     })
+  //   }
+  // })
+
   return (
     <section className={styles.wrapper}>
       <section
+        ref={floatingToolbarRef}
         className={containerClasses}
         style={{ display: displayContainer ? 'flex' : 'none' }}
         onTransitionEnd={() => {
