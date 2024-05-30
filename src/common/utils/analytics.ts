@@ -85,6 +85,7 @@ export interface ClickButtonProp {
     | 'edit'
     | 'edited'
     | 'appreciate'
+    | 'article_content_quote'
     | 'comment_open'
     | 'comment_close'
     | 'comment_placeholder'
