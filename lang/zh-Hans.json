@@ -173,6 +173,9 @@
   "0tHLRn": {
     "defaultMessage": "钱包余额不足"
   },
+  "0tRUjd": {
+    "defaultMessage": "This comment has been hidden due to violation of community terms of services"
+  },
   "0zZd0T": {
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -1868,9 +1871,6 @@
   },
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"
-  },
-  "XP1Vto": {
-    "defaultMessage": "Oops！该评论已被强制隐藏"
   },
   "XQTBu6": {
     "defaultMessage": "在你的围炉广播中留言提及你",

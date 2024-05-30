@@ -173,6 +173,9 @@
   "0tHLRn": {
     "defaultMessage": "錢包餘額不足"
   },
+  "0tRUjd": {
+    "defaultMessage": "This comment has been hidden due to violation of community terms of services"
+  },
   "0zZd0T": {
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -1869,9 +1872,6 @@
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"
   },
-  "XP1Vto": {
-    "defaultMessage": "Oops！該評論已被強制隱藏"
-  },
   "XQTBu6": {
     "defaultMessage": "在你的圍爐廣播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -2946,7 +2946,7 @@
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
   "tnWWrj": {
-    "defaultMessage": "評論已被強制隱藏",
+    "defaultMessage": "因違反社區約章，評論已被隱藏",
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
   "tzq2+W": {
