@@ -180,6 +180,7 @@ export const CommentFormBeta: React.FC<CommentFormBetaProps> = ({
     setContent('')
     if (editor) {
       editor.commands.setContent('')
+      editor.commands.blur()
     }
     removeDraft(commentDraftId)
     setActiveEditor(null)
