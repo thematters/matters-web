@@ -144,13 +144,15 @@ export const Expandable: React.FC<ExpandableProps> = ({
   }, [content])
 
   useEffect(() => {
-    if (isSafariVersionLessThan17 && isRichShow) {
-      reset()
-      setIsRichShow(false)
-      setTimeout(() => {
+    const adjustForSafari = async () => {
+      if (isSafariVersionLessThan17 && isRichShow) {
+        await reset()
+        await setIsRichShow(false)
         handleOverflowCheck()
-      })
+      }
     }
+
+    adjustForSafari()
   }, [isSafariVersionLessThan17])
 
   const toggleIsExpand = () => {
