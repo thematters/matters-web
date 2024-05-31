@@ -34,8 +34,8 @@ const PublishedState = ({ article }: PublishedStateProps) => {
         <>
           <p>
             <FormattedMessage
-              defaultMessage="Your work has been republished. Share it on different platforms "
-              id="09AywK"
+              defaultMessage="Your work has been published. Share it on different platforms "
+              id="tqEGfa"
             />
           </p>
           <p>
@@ -47,14 +47,14 @@ const PublishedState = ({ article }: PublishedStateProps) => {
         </>
       }
       headerTitle={
-        <FormattedMessage defaultMessage="Article republished" id="gz0EGC" />
+        <FormattedMessage defaultMessage="Article published" id="uYwH7j" />
       }
       btns={
         <Dialog.RoundedButton
           text={
             <FormattedMessage
-              defaultMessage="View republished article"
-              id="AQuumI"
+              defaultMessage="View published article"
+              id="GRrsEH"
             />
           }
           onClick={() => {
@@ -66,8 +66,8 @@ const PublishedState = ({ article }: PublishedStateProps) => {
         <Dialog.TextButton
           text={
             <FormattedMessage
-              defaultMessage="View republished article"
-              id="AQuumI"
+              defaultMessage="View published article"
+              id="GRrsEH"
             />
           }
           onClick={() => {
