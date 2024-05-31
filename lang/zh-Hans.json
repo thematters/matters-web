@@ -171,7 +171,7 @@
     "defaultMessage": "钱包余额不足"
   },
   "0tRUjd": {
-    "defaultMessage": "This comment has been hidden due to violation of community terms of services"
+    "defaultMessage": "因违反社区规定，评论已被隐藏"
   },
   "0zZd0T": {
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
@@ -985,7 +985,7 @@
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
   "GRrsEH": {
-    "defaultMessage": "View published article"
+    "defaultMessage": "查看作品"
   },
   "GRtGnZ": {
     "defaultMessage": "辞去权限",
@@ -2944,7 +2944,7 @@
     "description": "src/components/CommentBeta/Content/index.tsx"
   },
   "tqEGfa": {
-    "defaultMessage": "Your work has been published. Share it on different platforms"
+    "defaultMessage": "作品发布成功，快把作品分享到不同渠道，"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀请",
@@ -2980,7 +2980,7 @@
     "defaultMessage": "玩转 Matters 实用指南"
   },
   "uYwH7j": {
-    "defaultMessage": "Article published"
+    "defaultMessage": "作品已发布"
   },
   "uaFED8": {
     "defaultMessage": "绑定后除原有登入方式，增加钱包登入管道",
