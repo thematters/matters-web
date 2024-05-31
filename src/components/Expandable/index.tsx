@@ -86,6 +86,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
 
   const [isSafariVersionLessThan17, setIsSafariVersionLessThan17] =
     useState(false)
+  const [needAdjustForSafari, setNeedAdjustForSafari] = useState(false)
 
   useEffect(() => {
     // FIXME: Safari version less than 17 has a bug that -webkit-line-clamp overlapping blocks even with overflow: hidden, when mixing <span> and <div>.
@@ -144,16 +145,18 @@ export const Expandable: React.FC<ExpandableProps> = ({
   }, [content])
 
   useEffect(() => {
-    const adjustForSafari = async () => {
-      if (isSafariVersionLessThan17 && isRichShow) {
-        await reset()
-        await setIsRichShow(false)
-        handleOverflowCheck()
-      }
+    if (isSafariVersionLessThan17 && isRichShow) {
+      reset()
+      setIsRichShow(false)
+      setNeedAdjustForSafari(true)
     }
-
-    adjustForSafari()
   }, [isSafariVersionLessThan17])
+
+  useEffect(() => {
+    if (needAdjustForSafari) {
+      handleOverflowCheck()
+    }
+  }, [needAdjustForSafari])
 
   const toggleIsExpand = () => {
     setIsExpand(!isExpand)
