@@ -2,14 +2,14 @@ import classNames from 'classnames'
 import { useContext, useEffect, useRef, useState } from 'react'
 
 import {
-  // KEYVALUE,
+  KEYVALUE,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   ButtonProps,
-  // useNativeEventListener,
+  useNativeEventListener,
   ViewerContext,
 } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
@@ -41,6 +41,20 @@ const FloatToolbar = ({
 
   const [mounted, setMounted] = useState(false)
   const [displayContainer, setDisplayContainer] = useState(false)
+  const [isCommentDrawerOpen, setIsCommentDrawerOpen] = useState(false)
+  const [isDonationDrawerOpen, setIsDonationDrawerOpen] = useState(false)
+
+  const [toggleToolbarCommentDrawer, toggleToolbarDonationDrawer] = [
+    () => {
+      setIsCommentDrawerOpen(!isCommentDrawerOpen)
+      toggleCommentDrawer()
+    },
+    () => {
+      setIsDonationDrawerOpen(!isDonationDrawerOpen)
+      toggleDonationDrawer()
+    },
+  ]
+
   useEffect(() => {
     if (show) {
       setDisplayContainer(show)
@@ -67,32 +81,36 @@ const FloatToolbar = ({
   const floatingToolbarRef = useRef<HTMLElement>(null)
   // floating toolbar is blocking some text when pressing page up and down
   // offsetting it with the height of floating toolbar
-  // useNativeEventListener('keydown', (event: KeyboardEvent) => {
-  //   const keyToScrollDirection = {
-  //     [KEYVALUE.pageDown]: 1,
-  //     [KEYVALUE.pageUp]: -1,
-  //     [KEYVALUE.space]: 1,
-  //   } // map the key to scroll direction
-  //   const key = event.code.toLowerCase()
-  //   if (
-  //     key in keyToScrollDirection &&
-  //     floatingToolbarRef.current &&
-  //     event.target instanceof HTMLElement &&
-  //     event.target.contains(floatingToolbarRef.current)
-  //   ) {
-  //     event.preventDefault()
-  //     const remInPixels = parseFloat(
-  //       getComputedStyle(document.documentElement).fontSize
-  //     )
-  //     const scrollDirection = keyToScrollDirection[key]
-  //     const scrollAmount = window.innerHeight - 5 * remInPixels // the height of floating toolbar
+  useNativeEventListener('keydown', (event: KeyboardEvent) => {
+    const keyToScrollDirection = {
+      [KEYVALUE.pageDown]: 1,
+      [KEYVALUE.pageUp]: -1,
+      [KEYVALUE.space]: 1,
+    } // map the key to scroll direction
+    console.log(`isCommentDrawerOpen: ${isCommentDrawerOpen}`)
+    console.log(`isDonationDrawerOpen: ${isDonationDrawerOpen}`)
+    const key = event.code.toLowerCase()
+    if (
+      key in keyToScrollDirection &&
+      floatingToolbarRef.current &&
+      event.target instanceof HTMLElement &&
+      event.target.contains(floatingToolbarRef.current) &&
+      !isCommentDrawerOpen &&
+      !isDonationDrawerOpen
+    ) {
+      event.preventDefault()
+      const remInPixels = parseFloat(
+        getComputedStyle(document.documentElement).fontSize
+      )
+      const scrollDirection = keyToScrollDirection[key]
+      const scrollAmount = window.innerHeight - 5 * remInPixels // the height of floating toolbar
 
-  //     window.scrollBy({
-  //       top: scrollAmount * scrollDirection,
-  //       behavior: 'smooth',
-  //     })
-  //   }
-  // })
+      window.scrollBy({
+        top: scrollAmount * scrollDirection,
+        behavior: 'smooth',
+      })
+    }
+  })
 
   return (
     <section className={styles.wrapper}>
@@ -129,7 +147,7 @@ const FloatToolbar = ({
             article={articleDetails}
             disabled={!articleDetails.canComment}
             textIconSpacing={6}
-            onClick={toggleCommentDrawer}
+            onClick={toggleToolbarCommentDrawer}
             {...buttonProps}
           />
           <span className={styles.divider} />
@@ -149,7 +167,7 @@ const FloatToolbar = ({
                 return
               }
 
-              toggleDonationDrawer()
+              toggleToolbarDonationDrawer()
             }}
             {...buttonProps}
           />
