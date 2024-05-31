@@ -64,22 +64,6 @@ const calculateContentHeight = (
   return element.firstElementChild?.clientHeight || 0
 }
 
-const checkOverflow = (
-  element: HTMLElement,
-  limit: number,
-  buffer: number,
-  isRichShow: boolean,
-  isComment: boolean
-) => {
-  const height = calculateContentHeight(element, isRichShow, isComment)
-  const lineHeight = window
-    .getComputedStyle(element, null)
-    .getPropertyValue('line-height')
-  const lines = Math.max(Math.ceil(height / parseFloat(lineHeight)), 0)
-
-  return lines > limit + buffer
-}
-
 export const Expandable: React.FC<ExpandableProps> = ({
   children,
   content,
@@ -139,7 +123,14 @@ export const Expandable: React.FC<ExpandableProps> = ({
     if (!node?.current) {
       return
     }
-    if (checkOverflow(node.current, limit, buffer, isRichShow, isComment)) {
+    const element = node.current
+    const height = calculateContentHeight(element, isRichShow, isComment)
+    const lineHeight = window
+      .getComputedStyle(element, null)
+      .getPropertyValue('line-height')
+    const lines = Math.max(Math.ceil(height / parseFloat(lineHeight)), 0)
+
+    if (lines > limit + buffer) {
       setIsOverFlowing(true)
       setIsExpand(false)
     }
