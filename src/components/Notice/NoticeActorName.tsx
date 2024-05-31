@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { TEST_ID } from '~/common/enums'
+import { MAX_USER_DISPLAY_NAME_LENGTH, TEST_ID } from '~/common/enums'
 import { toPath, truncate } from '~/common/utils'
 import { NoticeActorNameUserFragment } from '~/gql/graphql'
 
@@ -27,7 +27,8 @@ const NoticeActorName = ({
         className={styles.displayName}
         data-test-id={TEST_ID.NOTICE_USER_DISPLAY_NAME}
       >
-        {user.displayName && user.displayName.length > 20
+        {user.displayName &&
+        user.displayName.length > MAX_USER_DISPLAY_NAME_LENGTH
           ? truncate(user.displayName, 8, 8)
           : user.displayName}
       </a>
