@@ -127,9 +127,6 @@
   "06XHBC": {
     "defaultMessage": "加入圍爐"
   },
-  "09AywK": {
-    "defaultMessage": "編輯作品發佈成功，快把作品分享到不同渠道，"
-  },
   "0Azlrb": {
     "defaultMessage": "管理"
   },
@@ -172,6 +169,9 @@
   },
   "0tHLRn": {
     "defaultMessage": "錢包餘額不足"
+  },
+  "0tRUjd": {
+    "defaultMessage": "因違反社區約章，評論已被隱藏"
   },
   "0zZd0T": {
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
@@ -704,9 +704,6 @@
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
   },
-  "AQuumI": {
-    "defaultMessage": "查看編輯作品"
-  },
   "AVpR3Q": {
     "defaultMessage": "已綁定錢包",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
@@ -986,6 +983,9 @@
   "GHxtae": {
     "defaultMessage": "數字錢包",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
+  },
+  "GRrsEH": {
+    "defaultMessage": "查看作品"
   },
   "GRtGnZ": {
     "defaultMessage": "辭去權限",
@@ -1869,9 +1869,6 @@
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"
   },
-  "XP1Vto": {
-    "defaultMessage": "Oops！該評論已被強制隱藏"
-  },
   "XQTBu6": {
     "defaultMessage": "在你的圍爐廣播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -2328,9 +2325,6 @@
   },
   "gluNT8": {
     "defaultMessage": "輸入連結地址"
-  },
-  "gz0EGC": {
-    "defaultMessage": "編輯作品已發佈"
   },
   "gzJEFb": {
     "defaultMessage": "跳轉到 like.co 驗證已有 Liker ID"
@@ -2946,8 +2940,11 @@
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
   "tnWWrj": {
-    "defaultMessage": "評論已被強制隱藏",
+    "defaultMessage": "因違反社區約章，評論已被隱藏",
     "description": "src/components/CommentBeta/Content/index.tsx"
+  },
+  "tqEGfa": {
+    "defaultMessage": "作品發佈成功，快把作品分享到不同渠道，"
   },
   "tzq2+W": {
     "defaultMessage": "寄出邀請",
@@ -2981,6 +2978,9 @@
   },
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"
+  },
+  "uYwH7j": {
+    "defaultMessage": "作品已發佈"
   },
   "uaFED8": {
     "defaultMessage": "綁定後除原有登入方式，增加錢包登入管道",
