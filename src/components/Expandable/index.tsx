@@ -95,7 +95,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   bgColor = 'white',
 }) => {
   const [isOverFlowing, setIsOverFlowing] = useState(false)
-  const [expand, setExpand] = useState(true)
+  const [isExpand, setIsExpand] = useState(true)
   const [isRichShow, setIsRichShow] = useState(_isRichShow)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
   const collapsedContent = stripHtml(content || '')
@@ -132,7 +132,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
 
   const reset = () => {
     setIsOverFlowing(false)
-    setExpand(true)
+    setIsExpand(true)
   }
 
   const handleOverflowCheck = () => {
@@ -141,7 +141,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
     }
     if (checkOverflow(node.current, limit, buffer, isRichShow, isComment)) {
       setIsOverFlowing(true)
-      setExpand(false)
+      setIsExpand(false)
     }
   }
 
@@ -162,20 +162,24 @@ export const Expandable: React.FC<ExpandableProps> = ({
     }
   }, [isSafariVersionLessThan17])
 
+  const toggleIsExpand = () => {
+    setIsExpand(!isExpand)
+  }
+
   return (
     <section className={contentClasses}>
       <div ref={node}>
-        {(!isOverFlowing || (isOverFlowing && expand)) && <div>{children}</div>}
+        {(!isOverFlowing || (isOverFlowing && isExpand)) && (
+          <div>{children}</div>
+        )}
       </div>
-      {isOverFlowing && expand && collapseable && !isRichShow && (
+      {isOverFlowing && isExpand && collapseable && !isRichShow && (
         <section className={styles.collapseWrapper}>
           <Button
             spacing={[4, 8]}
             bgColor="greyLighter"
             textColor="grey"
-            onClick={() => {
-              setExpand(!expand)
-            }}
+            onClick={toggleIsExpand}
           >
             <TextIcon icon={<Icon icon={IconUp} />} placement="left">
               <FormattedMessage defaultMessage="Collapse" id="W/V6+Y" />
@@ -183,7 +187,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
           </Button>
         </section>
       )}
-      {isOverFlowing && !expand && (
+      {isOverFlowing && !isExpand && (
         <p className={styles.unexpandWrapper}>
           {!isRichShow && (
             <Truncate
@@ -191,7 +195,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
               ellipsis={
                 <span
                   onClick={(e) => {
-                    setExpand(!expand)
+                    toggleIsExpand()
                     e.stopPropagation()
                   }}
                   className={styles.expandButton}
@@ -215,9 +219,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
               </section>
               <button
                 className={richShowMoreButtonClasses}
-                onClick={() => {
-                  setExpand(!expand)
-                }}
+                onClick={toggleIsExpand}
               >
                 <FormattedMessage
                   defaultMessage="Expand"
