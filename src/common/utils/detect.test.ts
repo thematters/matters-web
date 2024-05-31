@@ -67,6 +67,38 @@ describe('utils/detect/checkIsSafariVersionLessThan17', () => {
     })
   })
 
+  it('should return true for Safari 16 on Apple M series chip', () => {
+    const originalUserAgent = navigator.userAgent
+    Object.defineProperty(navigator, 'userAgent', {
+      value:
+        'Mozilla/5.0 (Macintosh; Apple Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.0 Safari/605.1.15',
+      configurable: true,
+    })
+
+    expect(checkIsSafariVersionLessThan17()).toBe(true)
+
+    Object.defineProperty(navigator, 'userAgent', {
+      value: originalUserAgent,
+      configurable: true,
+    })
+  })
+
+  it('should return false for Safari 17 on Apple M series chip', () => {
+    const originalUserAgent = navigator.userAgent
+    Object.defineProperty(navigator, 'userAgent', {
+      value:
+        'Mozilla/5.0 (Macintosh; Apple Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Safari/605.1.15',
+      configurable: true,
+    })
+
+    expect(checkIsSafariVersionLessThan17()).toBe(false)
+
+    Object.defineProperty(navigator, 'userAgent', {
+      value: originalUserAgent,
+      configurable: true,
+    })
+  })
+
   it('should return false for non-Safari browsers', () => {
     const originalUserAgent = navigator.userAgent
     Object.defineProperty(navigator, 'userAgent', {
