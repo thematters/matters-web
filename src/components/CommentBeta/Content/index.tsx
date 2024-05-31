@@ -102,6 +102,8 @@ const Content = ({
           bgColor={bgColor}
           textIndent={textIndent}
           size={size}
+          collapseable={false}
+          isComment
         >
           <section
             className={`${contentClasses} u-content-comment`}
