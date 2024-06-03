@@ -19,19 +19,36 @@ type AuthorSidebarProps = {
 export const AuthorSidebar = ({ article }: AuthorSidebarProps) => {
   const { getQuery } = useRoute()
   const cid = getQuery('collection')
-  const [tab, setTab] = useState<TABS>(!!cid ? 'Collection' : 'Author')
+  const latestWorks = article.author?.latestWorks.filter((work) => {
+    return work.id !== article.id
+  })
+  const hasFromAuthor = latestWorks && latestWorks.length > 0
+  const hasRecommendation = article.relatedArticles?.totalCount > 0
+  const [tab, setTab] = useState<TABS>(
+    !!cid
+      ? 'Collection'
+      : hasFromAuthor
+      ? 'Author'
+      : hasRecommendation
+      ? 'Recommendation'
+      : undefined
+  )
 
   return (
     <>
       <Author article={article} />
-      <Tabs article={article} tab={tab} setTab={setTab} />
-      <section className={styles.list}>
-        {!!cid && tab === 'Collection' && (
-          <Collection article={article} collectionId={cid} />
-        )}
-        {tab === 'Author' && <FromAuthor article={article} />}
-        {tab === 'Recommendation' && <RelatedArticles article={article} />}
-      </section>
+      {!!tab && (
+        <>
+          <Tabs article={article} tab={tab} setTab={setTab} />
+          <section className={styles.list}>
+            {!!cid && tab === 'Collection' && (
+              <Collection article={article} collectionId={cid} />
+            )}
+            {tab === 'Author' && <FromAuthor article={article} />}
+            {tab === 'Recommendation' && <RelatedArticles article={article} />}
+          </section>
+        </>
+      )}
     </>
   )
 }

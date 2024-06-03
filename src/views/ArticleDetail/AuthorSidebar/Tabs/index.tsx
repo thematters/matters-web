@@ -6,7 +6,7 @@ import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-export type TABS = 'Collection' | 'Author' | 'Recommendation'
+export type TABS = 'Collection' | 'Author' | 'Recommendation' | undefined
 
 type TabsProps = {
   article: NonNullable<ArticleDetailPublicQuery['article']>
