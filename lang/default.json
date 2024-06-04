@@ -1905,6 +1905,9 @@
   "Xi40U9": {
     "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
   },
+  "Xj0yv9": {
+    "defaultMessage": "Write Articles"
+  },
   "XlfiKR": {
     "defaultMessage": "Must be between 2-20 characters long. Only letters letters, numbers and underline are allowed."
   },
@@ -2910,6 +2913,9 @@
   "stTITI": {
     "defaultMessage": "announcements",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
+  "subQNF": {
+    "defaultMessage": "New Journal"
   },
   "sy+pv5": {
     "defaultMessage": "Email"
