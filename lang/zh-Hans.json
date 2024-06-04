@@ -1905,6 +1905,9 @@
   "Xi40U9": {
     "defaultMessage": "操作无法撤销，确认删除选集吗？"
   },
+  "Xj0yv9": {
+    "defaultMessage": "写文章"
+  },
   "XlfiKR": {
     "defaultMessage": "2-20 个字符，仅支持英文小写字母、数字或下划线"
   },
@@ -2910,6 +2913,9 @@
   "stTITI": {
     "defaultMessage": "社区公告",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
+  },
+  "subQNF": {
+    "defaultMessage": "发动态"
   },
   "sy+pv5": {
     "defaultMessage": "邮箱"
