@@ -3,6 +3,7 @@
 import classNames from 'classnames'
 import { CSSProperties, useEffect, useRef } from 'react'
 
+import { useDrawerContext } from '../Context'
 import styles from './styles.module.css'
 
 type BaseDrawerProps = {
@@ -85,6 +86,8 @@ export const BaseDrawer = ({
 
   const ref = useRef<HTMLElement>(null)
 
+  const { hasOpenDrawer, setHasOpenDrawer } = useDrawerContext()
+
   const idSuffix = Math.random().toString(36).substring(7)
 
   useEffect(() => {
@@ -107,6 +110,24 @@ export const BaseDrawer = ({
 
     return removeEventListener
   }, [open])
+
+  useEffect(() => {
+    if (!ref.current) return
+    const handleTransformnEnd = (event: TransitionEvent) => {
+      if (event.propertyName !== 'transform') return
+      if (open) {
+        console.log('open end', { hasOpenDrawer })
+      } else {
+        console.log('close end', { hasOpenDrawer })
+        setHasOpenDrawer(false)
+      }
+    }
+    ref.current.addEventListener('transitionend', handleTransformnEnd)
+
+    return () => {
+      ref.current?.removeEventListener('transitionend', handleTransformnEnd)
+    }
+  }, [ref, open])
 
   return (
     <div className={styles.baseDrawer}>
