@@ -1,8 +1,8 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
 
 interface DrawerContextProps {
-  hasOpenDrawer: boolean
-  setHasOpenDrawer: (hasOpenDrawer: boolean) => void
+  hasOpeningDrawer: boolean
+  setHasOpeningDrawer: (hasOpeningDrawer: boolean) => void
 }
 
 const DrawerContext = createContext<DrawerContextProps>(
@@ -15,10 +15,10 @@ export const useDrawerContext = (): DrawerContextProps => {
 }
 
 export const DrawerProvider = ({ children }: { children: ReactNode }) => {
-  const [hasOpenDrawer, setHasOpenDrawer] = useState(false)
+  const [hasOpeningDrawer, setHasOpeningDrawer] = useState(false)
 
   return (
-    <DrawerContext.Provider value={{ hasOpenDrawer, setHasOpenDrawer }}>
+    <DrawerContext.Provider value={{ hasOpeningDrawer, setHasOpeningDrawer }}>
       {children}
     </DrawerContext.Provider>
   )

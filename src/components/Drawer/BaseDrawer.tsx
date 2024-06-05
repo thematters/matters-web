@@ -7,7 +7,7 @@ import { useDrawerContext } from '../Context'
 import styles from './styles.module.css'
 
 type BaseDrawerProps = {
-  open: boolean
+  isOpen: boolean
   onClose?: () => void
   direction: 'left' | 'right' | 'top' | 'bottom'
   children?: React.ReactNode
@@ -66,7 +66,7 @@ const getDirectionStyle = (
 }
 
 export const BaseDrawer = ({
-  open,
+  isOpen,
   onClose,
   direction,
   children,
@@ -86,7 +86,7 @@ export const BaseDrawer = ({
 
   const ref = useRef<HTMLElement>(null)
 
-  const { hasOpenDrawer, setHasOpenDrawer } = useDrawerContext()
+  const { setHasOpeningDrawer } = useDrawerContext()
 
   const idSuffix = Math.random().toString(36).substring(7)
 
@@ -102,32 +102,29 @@ export const BaseDrawer = ({
     const removeEventListener = () => {
       document.removeEventListener('click', handleClickOutside)
     }
-    if (open) {
+    if (isOpen) {
       document.addEventListener('click', handleClickOutside)
     } else {
       removeEventListener()
     }
 
     return removeEventListener
-  }, [open])
+  }, [isOpen])
 
   useEffect(() => {
     if (!ref.current) return
-    const handleTransformnEnd = (event: TransitionEvent) => {
+    const handleTransformEnd = (event: TransitionEvent) => {
       if (event.propertyName !== 'transform') return
-      if (open) {
-        console.log('open end', { hasOpenDrawer })
-      } else {
-        console.log('close end', { hasOpenDrawer })
-        setHasOpenDrawer(false)
+      if (!isOpen) {
+        setHasOpeningDrawer(false)
       }
     }
-    ref.current.addEventListener('transitionend', handleTransformnEnd)
+    ref.current.addEventListener('transitionend', handleTransformEnd)
 
     return () => {
-      ref.current?.removeEventListener('transitionend', handleTransformnEnd)
+      ref.current?.removeEventListener('transitionend', handleTransformEnd)
     }
-  }, [ref, open])
+  }, [ref, isOpen])
 
   return (
     <div className={styles.baseDrawer}>
@@ -136,7 +133,7 @@ export const BaseDrawer = ({
         id={'Drawer__checkbox' + idSuffix}
         className={styles.baseDrawerCheckbox}
         onChange={onClose}
-        checked={open}
+        checked={isOpen}
       />
       <nav
         role="navigation"

@@ -37,7 +37,7 @@ export const Drawer: React.ComponentType<
 }) => {
   const [mounted, setMounted] = useState(isOpen)
   const [showDrawer, setShowDrawer] = useState(false)
-  const { hasOpenDrawer, setHasOpenDrawer } = useDrawerContext()
+  const { hasOpeningDrawer, setHasOpeningDrawer } = useDrawerContext()
   const [needCloseOtherDrawers, setNeedCloseOtherDrawers] = useState(false)
 
   const [id, setId] = useState('')
@@ -61,7 +61,7 @@ export const Drawer: React.ComponentType<
   useEffect(() => {
     if (isOpen) {
       setMounted(true)
-      if (hasOpenDrawer) {
+      if (hasOpeningDrawer) {
         setNeedCloseOtherDrawers(true)
       }
     } else {
@@ -83,11 +83,11 @@ export const Drawer: React.ComponentType<
   }, [needCloseOtherDrawers])
 
   useEffect(() => {
-    if (isOpen && mounted && !hasOpenDrawer) {
+    if (isOpen && mounted && !hasOpeningDrawer) {
       setShowDrawer(true)
-      setHasOpenDrawer(true)
+      setHasOpeningDrawer(true)
     }
-  }, [isOpen, hasOpenDrawer, mounted])
+  }, [isOpen, hasOpeningDrawer, mounted])
 
   if (!mounted) {
     return null
@@ -95,7 +95,7 @@ export const Drawer: React.ComponentType<
 
   return (
     <BaseDrawer
-      open={showDrawer}
+      isOpen={showDrawer}
       onClose={onClose}
       className={styles.drawer}
       direction={direction}
