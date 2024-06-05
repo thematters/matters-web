@@ -135,6 +135,10 @@ export const CoverUploader = ({
         onUploadStart()
       }
 
+      if (localSrc) {
+        URL.revokeObjectURL(localSrc)
+      }
+
       setLocalSrc(URL.createObjectURL(file))
 
       const variables = {
