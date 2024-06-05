@@ -78,8 +78,10 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   const fieldId = 'avatar-upload-form'
 
   useEffect(() => {
-    if (localSrc) {
-      URL.revokeObjectURL(localSrc)
+    return () => {
+      if (localSrc) {
+        URL.revokeObjectURL(localSrc)
+      }
     }
   }, [])
 
