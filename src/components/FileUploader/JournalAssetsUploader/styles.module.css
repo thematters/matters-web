@@ -1,0 +1,8 @@
+.addAssetButton {
+  @mixin flex-center-all;
+
+  width: 4.5rem;
+  height: 4.5rem;
+  background: var(--color-grey-lighter);
+  border-radius: var(--sp8);
+}

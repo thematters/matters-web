@@ -2745,6 +2745,9 @@
     "defaultMessage": "登录密码已设置",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
+  "pIj6ZF": {
+    "defaultMessage": "Upload Journal Asset"
+  },
   "pKkpI9": {
     "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
   },
