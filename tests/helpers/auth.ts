@@ -42,6 +42,8 @@ export const login = async ({
     target = encodeURIComponent(
       `${process.env.PLAYWRIGHT_TEST_BASE_URL}${target}`
     )
+    // console.log(`Login with email: ${email}, password: ${password}`)
+    console.log(`Redirect to target: /login?target=${target}`)
     await page.goto(`/login?target=${target}`, { waitUntil: 'networkidle' })
   }
 
