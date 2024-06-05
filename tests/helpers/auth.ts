@@ -47,12 +47,14 @@ export const login = async ({
     await page.goto(`/login?target=${target}`, { waitUntil: 'networkidle' })
   }
   const bodyHTML = await page.evaluate(() => {
-    const newDocument = document.implementation.createHTMLDocument();
-    Array.from(document.body.childNodes).forEach(node => newDocument.body.appendChild(node.cloneNode(true)));
-    return newDocument.documentElement.outerHTML;
-  });
+    const newDocument = document.implementation.createHTMLDocument()
+    Array.from(document.body.childNodes).forEach((node) =>
+      newDocument.body.appendChild(node.cloneNode(true))
+    )
+    return newDocument.documentElement.outerHTML
+  })
 
-  console.log(bodyHTML);
+  console.log(bodyHTML)
   // Login with email & password
   await page.getByRole('button', { name: 'Email', exact: true }).click()
 
