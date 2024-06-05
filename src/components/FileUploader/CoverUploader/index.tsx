@@ -102,6 +102,8 @@ export const CoverUploader = ({
   )
   const { upload: uploadImage, uploading } = useDirectImageUpload()
 
+  const [localSrc, setLocalSrc] = useState<string | undefined>(undefined)
+
   const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'cover-upload-form'
 
@@ -124,6 +126,8 @@ export const CoverUploader = ({
       if (onUploadStart) {
         onUploadStart()
       }
+
+      setLocalSrc(URL.createObjectURL(file))
 
       const variables = {
         input: { file, mime, type: assetType, entityId, entityType },
@@ -211,12 +215,16 @@ export const CoverUploader = ({
   return (
     <label className={styles.label} htmlFor={fieldId}>
       {!isCollection && !isUserProfile && (
-        <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
+        <Cover
+          cover={localSrc || cover}
+          fallbackCover={fallbackCover}
+          inEditor={inEditor}
+        >
           <Mask />
         </Cover>
       )}
       {isUserProfile && (
-        <Cover cover={cover} inEditor={inEditor}>
+        <Cover cover={localSrc || cover} inEditor={inEditor}>
           <UserProfileMask />
         </Cover>
       )}
@@ -225,7 +233,7 @@ export const CoverUploader = ({
           <section className={styles.collectionContent}>
             <Book.Collection
               title={bookTitle || ''}
-              cover={cover}
+              cover={localSrc || cover}
               hasMask
               loading={loading}
             />

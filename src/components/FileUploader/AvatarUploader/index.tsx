@@ -1,7 +1,7 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
@@ -72,8 +72,16 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
     avatarProps.src
   )
 
+  const [localSrc, setLocalSrc] = useState<string | undefined>(undefined)
+
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'avatar-upload-form'
+
+  useEffect(() => {
+    if (localSrc) {
+      URL.revokeObjectURL(localSrc)
+    }
+  }, [])
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -94,6 +102,12 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       if (onUploadStart) {
         onUploadStart()
       }
+
+      if (localSrc) {
+        URL.revokeObjectURL(localSrc)
+      }
+
+      setLocalSrc(URL.createObjectURL(file))
 
       const variables = {
         input: {
@@ -151,8 +165,12 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   return (
     <label className={labelClasses} htmlFor={fieldId}>
-      {!isCircle && <Avatar size={72} {...avatarProps} src={avatar} />}
-      {isCircle && <CircleAvatar size={72} {...avatarProps} src={avatar} />}
+      {!isCircle && (
+        <Avatar size={72} {...avatarProps} src={localSrc || avatar} />
+      )}
+      {isCircle && (
+        <CircleAvatar size={72} {...avatarProps} src={localSrc || avatar} />
+      )}
 
       <div className={styles.mask}>
         {loading || uploading ? (
