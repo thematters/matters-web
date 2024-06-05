@@ -42,11 +42,17 @@ export const login = async ({
     target = encodeURIComponent(
       `${process.env.PLAYWRIGHT_TEST_BASE_URL}${target}`
     )
-    // console.log(`Login with email: ${email}, password: ${password}`)
+
     console.log(`Redirect to target: /login?target=${target}`)
     await page.goto(`/login?target=${target}`, { waitUntil: 'networkidle' })
   }
+  const bodyHTML = await page.evaluate(() => {
+    const newDocument = document.implementation.createHTMLDocument();
+    Array.from(document.body.childNodes).forEach(node => newDocument.body.appendChild(node.cloneNode(true)));
+    return newDocument.documentElement.outerHTML;
+  });
 
+  console.log(bodyHTML);
   // Login with email & password
   await page.getByRole('button', { name: 'Email', exact: true }).click()
 
