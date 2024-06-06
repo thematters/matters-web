@@ -23,7 +23,9 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
   }, INPUT_DEBOUNCE)
 
   const handleChange = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const title = event.target.value.slice(0, MAX_ARTICE_TITLE_LENGTH)
+    const title = event.target.value
+      .replace(/\r\n|\r|\n/g, '')
+      .slice(0, MAX_ARTICE_TITLE_LENGTH)
     setValue(title)
     debouncedUpdate()
   }
@@ -35,6 +37,13 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
     if (event.key.toLowerCase() === KEYVALUE.enter) {
       event.preventDefault()
     }
+  }
+
+  const handlePaste = () => {
+    // FIXME: triggers the height adjustment on paste
+    setTimeout(() => {
+      autosize.update(instance.current)
+    })
   }
 
   React.useEffect(() => {
@@ -57,6 +66,7 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
           id: '//QMqf',
         })}
         value={value}
+        onPaste={handlePaste}
         onChange={handleChange}
         onBlur={handleBlur}
         onKeyDown={handleKeyDown}
