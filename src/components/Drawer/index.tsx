@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { CLOSE_OTHER_DRAWERS } from '~/common/enums'
 
+import { useDrawerContext } from '../Context'
 import { useEventListener } from '../Hook'
 import { BaseDrawer } from './BaseDrawer'
 import { TextButton } from './Buttons'
@@ -36,6 +37,9 @@ export const Drawer: React.ComponentType<
 }) => {
   const [mounted, setMounted] = useState(isOpen)
   const [showDrawer, setShowDrawer] = useState(false)
+  const { hasOpeningDrawer, setHasOpeningDrawer } = useDrawerContext()
+  const [needCloseOtherDrawers, setNeedCloseOtherDrawers] = useState(false)
+
   const [id, setId] = useState('')
 
   useEffect(() => {
@@ -57,7 +61,9 @@ export const Drawer: React.ComponentType<
   useEffect(() => {
     if (isOpen) {
       setMounted(true)
-      setTimeout(() => setShowDrawer(true), 0)
+      if (hasOpeningDrawer) {
+        setNeedCloseOtherDrawers(true)
+      }
     } else {
       setShowDrawer(false)
       // Unmount BaseDrawer Component after close
@@ -66,15 +72,22 @@ export const Drawer: React.ComponentType<
   }, [isOpen])
 
   useEffect(() => {
-    if (showDrawer) {
-      // close other drawers when open new drawer
+    if (needCloseOtherDrawers) {
       window.dispatchEvent(
         new CustomEvent(CLOSE_OTHER_DRAWERS, {
           detail: { id },
         })
       )
+      setNeedCloseOtherDrawers(false)
     }
-  }, [showDrawer])
+  }, [needCloseOtherDrawers])
+
+  useEffect(() => {
+    if (isOpen && mounted && !hasOpeningDrawer) {
+      setShowDrawer(true)
+      setHasOpeningDrawer(true)
+    }
+  }, [isOpen, hasOpeningDrawer, mounted])
 
   if (!mounted) {
     return null
@@ -82,7 +95,7 @@ export const Drawer: React.ComponentType<
 
   return (
     <BaseDrawer
-      open={showDrawer}
+      isOpen={showDrawer}
       onClose={onClose}
       className={styles.drawer}
       direction={direction}
