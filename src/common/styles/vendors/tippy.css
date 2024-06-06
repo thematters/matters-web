@@ -24,6 +24,7 @@
 
 .tippy-box[data-placement^='top'] > .tippy-arrow {
   bottom: 0;
+  color: #fff;
 }
 
 .tippy-box[data-placement^='top'] > .tippy-arrow::before {

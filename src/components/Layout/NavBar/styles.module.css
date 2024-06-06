@@ -23,3 +23,9 @@
     }
   }
 }
+
+.pop-over {
+  & .list {
+    @mixin flex-center-all;
+  }
+}
