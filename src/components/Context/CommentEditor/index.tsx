@@ -15,6 +15,11 @@ const CommentEditorContext = createContext<CommentEditorContextProps>(
 
 export const useCommentEditorContext = (): CommentEditorContextProps => {
   const context = useContext(CommentEditorContext)
+  if (!context) {
+    throw new Error(
+      'useCommentEditorContext must be used within a CommentEditorProvider'
+    )
+  }
   return context
 }
 
