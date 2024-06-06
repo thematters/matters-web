@@ -7,7 +7,6 @@ import {
   BillboardDialog,
   BillboardExposureTracker,
   Icon,
-  Spinner,
   TextIcon,
 } from '~/components'
 
@@ -34,7 +33,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
     cacheTime: 60_000,
   })
 
-  if (!id || isError || !data || !data.contentURI) {
+  if (!id || isError || isLoading || !data || !data.contentURI) {
     return null
   }
 
@@ -43,43 +42,40 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
       {({ openDialog: openBillboardDialog }) => {
         return (
           <div className={styles.billboard}>
-            {isLoading && <Spinner />}
-            {!isLoading && (
-              <>
-                <a
-                  href={data.redirectURI}
-                  target="_blank"
-                  onClick={() =>
-                    analytics.trackEvent('click_billboard', {
-                      id,
-                      type,
-                      target: data.redirectURI,
-                    })
-                  }
-                >
-                  <img src={data.contentURI} alt="ad" />
-                </a>
-                <button
-                  className={styles.button}
-                  type="button"
-                  aria-label={intl.formatMessage({
-                    defaultMessage: "What's this?",
-                    id: '4wOWfp',
-                    description: 'src/components/Billboard/index.tsx',
-                  })}
-                  onClick={openBillboardDialog}
-                >
-                  <TextIcon icon={<Icon icon={IconInfo} />} size={12}>
-                    <FormattedMessage
-                      defaultMessage="What's this?"
-                      id="4wOWfp"
-                      description="src/components/Billboard/index.tsx"
-                    />
-                  </TextIcon>
-                </button>
-                <BillboardExposureTracker id={id} type={type} />
-              </>
-            )}
+            <a
+              href={data.redirectURI}
+              target="_blank"
+              onClick={() =>
+                analytics.trackEvent('click_billboard', {
+                  id,
+                  type,
+                  target: data.redirectURI,
+                })
+              }
+            >
+              <img src={data.contentURI} alt="ad" />
+            </a>
+
+            <button
+              className={styles.button}
+              type="button"
+              aria-label={intl.formatMessage({
+                defaultMessage: "What's this?",
+                id: '4wOWfp',
+                description: 'src/components/Billboard/index.tsx',
+              })}
+              onClick={openBillboardDialog}
+            >
+              <TextIcon icon={<Icon icon={IconInfo} />} size={12}>
+                <FormattedMessage
+                  defaultMessage="What's this?"
+                  id="4wOWfp"
+                  description="src/components/Billboard/index.tsx"
+                />
+              </TextIcon>
+            </button>
+
+            <BillboardExposureTracker id={id} type={type} />
           </div>
         )
       }}

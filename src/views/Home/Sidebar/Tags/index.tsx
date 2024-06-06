@@ -52,7 +52,7 @@ const Tags = () => {
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags // last Random
-  const perPage = 6
+  const perPage = 4
   const randomMaxSize = 50
   const { data, loading, error, refetch } =
     usePublicQuery<SidebarTagsPublicQuery>(

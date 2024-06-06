@@ -31,7 +31,7 @@ const Authors = () => {
   /**
    * Data Fetching
    */
-  const perPage = 5
+  const perPage = 4
   const randomMaxSize = 50
   const { data, loading, error, refetch } = usePublicQuery<SidebarAuthorsQuery>(
     SIDEBAR_AUTHORS,
