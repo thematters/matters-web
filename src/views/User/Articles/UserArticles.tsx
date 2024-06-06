@@ -18,6 +18,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { JournalAssetsUploader } from '~/components/FileUploader/JournalAssetsUploader'
 import { UserArticlesPublicQuery } from '~/gql/graphql'
 
 import { USER_ARTICLES_PRIVATE, USER_ARTICLES_PUBLIC } from './gql'
@@ -174,6 +175,10 @@ const UserArticles = () => {
       <CustomHead />
 
       <PinBoard user={user} />
+
+      <section>
+        <JournalAssetsUploader />
+      </section>
 
       <Layout.Main.Spacing hasVertical={false}>
         <InfiniteScroll

@@ -1992,6 +1992,9 @@
     "defaultMessage": "回覆了你",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "ZVDsIg": {
+    "defaultMessage": "不能超过3张"
+  },
   "ZVoJan": {
     "defaultMessage": "修改",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
