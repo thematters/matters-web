@@ -10,6 +10,7 @@ import {
   Icon,
   useDialogSwitch,
 } from '~/components'
+import NavBanner from '~/components/Layout/NavBar/NavBanner'
 import NavPopover from '~/components/Layout/NavBar/NavPopover'
 import Activity from '~/components/Layout/SideNav/Activity'
 import NavListItem from '~/components/Layout/SideNav/NavListItem'
@@ -18,32 +19,30 @@ export default {
   component: Activity,
 } satisfies Meta<typeof Activity>
 
-export const ActivityPopover: StoryFn = () => {
-  return (
-    <Dropdown
-      content={
-        <section>
-          <Activity />
-        </section>
-      }
-      placement="right-start"
-      offset={[-16, 16]}
-    >
-      {({ openDropdown, ref }) => (
-        <NavListItem
-          onClick={openDropdown}
-          name={<FormattedMessage defaultMessage="My Page" id="enMIYK" />}
-          icon={<Icon icon={IconNavCreate} size={32} />}
-          activeIcon={<Icon icon={IconNavCreate} size={32} />}
-          active={false}
-          canScrollTop={false}
-          aria-haspopup="menu"
-          ref={ref}
-        />
-      )}
-    </Dropdown>
-  )
-}
+export const ActivityPopover: StoryFn = () => (
+  <Dropdown
+    content={
+      <section>
+        <Activity />
+      </section>
+    }
+    placement="right-start"
+    offset={[-16, 16]}
+  >
+    {({ openDropdown, ref }) => (
+      <NavListItem
+        onClick={openDropdown}
+        name={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
+        icon={<Icon icon={IconNavCreate} size={32} />}
+        activeIcon={<Icon icon={IconNavCreate} size={32} />}
+        active={false}
+        canScrollTop={false}
+        aria-haspopup="menu"
+        ref={ref}
+      />
+    )}
+  </Dropdown>
+)
 
 export const ActivityPopoverMobile: StoryFn = () => {
   const {
@@ -76,6 +75,44 @@ export const ActivityPopoverMobile: StoryFn = () => {
           icon={<Icon icon={IconNavCreate} size={32} />}
           activeIcon={<Icon icon={IconCircleTimes} size={32} />}
           active={show}
+          canScrollTop={false}
+          aria-haspopup="menu"
+          ref={ref}
+        />
+      )}
+    </Dropdown>
+  )
+}
+
+// this is for marketing
+export const ActivityBanner: StoryFn = () => {
+  const {
+    show,
+    openDialog: openDropdown,
+    closeDialog: closeDropdown,
+  } = useDialogSwitch(false)
+  const toggle = () => (show ? closeDropdown() : openDropdown())
+
+  // const customArrow = <div className="tippy-arrow custom-arrow"></div>
+
+  return (
+    <Dropdown
+      content={
+        <section>
+          <NavBanner />
+        </section>
+      }
+      visible={show}
+      placement="top"
+      arrow={true}
+    >
+      {({ ref }) => (
+        <NavListItem
+          onClick={toggle}
+          name={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
+          icon={<Icon icon={IconNavCreate} size={32} />}
+          activeIcon={<Icon icon={IconNavCreate} size={32} />}
+          active={false}
           canScrollTop={false}
           aria-haspopup="menu"
           ref={ref}
