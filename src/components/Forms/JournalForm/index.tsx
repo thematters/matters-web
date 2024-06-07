@@ -1,9 +1,10 @@
 import { Editor } from '@matters/matters-editor'
+import { random } from 'lodash'
 import { useCallback, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
-  MAX_ARTICLE_COMMENT_LENGTH,
+  ADD_JOURNAL,
   MAX_JOURNAL_CONTENT_LENGTH,
   UPLOAD_JOURNAL_ASSET_COUNT_LIMIT,
 } from '~/common/enums'
@@ -63,17 +64,33 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
 
   const contentCount = stripHtml(content).length
 
-  const isValid = contentCount > 0 && contentCount <= MAX_ARTICLE_COMMENT_LENGTH
+  const isValid =
+    (contentCount > 0 && contentCount <= MAX_JOURNAL_CONTENT_LENGTH) ||
+    assets.length > 0
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setSubmitting(true)
 
+    const input = {
+      id: crypto.randomUUID(),
+      createdAt: new Date().toISOString(),
+      content,
+      assets: assets,
+    }
+
+    const delay = random(1, 5, false) * 1000
+
     // mock submitting
     setTimeout(() => {
+      window.dispatchEvent(
+        new CustomEvent(ADD_JOURNAL, {
+          detail: { input },
+        })
+      )
       onClear()
       setSubmitting(false)
-    }, 5 * 1000)
+    }, delay)
   }
 
   const onClear = () => {

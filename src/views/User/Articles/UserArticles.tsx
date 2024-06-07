@@ -1,8 +1,9 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
+import { ADD_JOURNAL } from '~/common/enums'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   ArticleDigestFeed,
@@ -15,10 +16,12 @@ import {
   List,
   QueryError,
   Translate,
+  useEventListener,
   usePublicQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
+import { JournalDigest, JournalDigestProps } from '~/components/JournalDigest'
 import { UserArticlesPublicQuery } from '~/gql/graphql'
 
 import { USER_ARTICLES_PRIVATE, USER_ARTICLES_PUBLIC } from './gql'
@@ -31,6 +34,7 @@ const UserArticles = () => {
   const { getQuery } = useRoute()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
+  const [journals, setJournals] = useState<JournalDigestProps[]>([])
 
   /**
    * Data Fetching
@@ -86,6 +90,19 @@ const UserArticles = () => {
 
     loadPrivate(newData)
   }
+
+  useEventListener(ADD_JOURNAL, (payload: { [key: string]: any }) => {
+    console.log({ payload })
+    const input = payload?.input
+    const newJournal = {
+      id: input.id,
+      content: input.content,
+      createdAt: input.createdAt,
+      assets: input.assets,
+    } as JournalDigestProps
+
+    setJournals([newJournal, ...journals])
+  })
 
   /**
    * Render
@@ -191,6 +208,11 @@ const UserArticles = () => {
           eof
         >
           <List>
+            {journals.map((journal) => (
+              <List.Item key={journal.id}>
+                <JournalDigest {...journal} />
+              </List.Item>
+            ))}
             {articleEdges.map(({ node }, i) => (
               <List.Item key={node.id}>
                 <ArticleDigestFeed
