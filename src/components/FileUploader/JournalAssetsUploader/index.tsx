@@ -21,6 +21,8 @@ export type JournalAsset = {
   file: File
   uploaded: boolean
   src: string
+  width: number
+  height: number
 }
 
 type JournalAssetsUploaderProps = {

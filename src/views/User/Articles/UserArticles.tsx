@@ -4,7 +4,12 @@ import { useIntl } from 'react-intl'
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { ADD_JOURNAL } from '~/common/enums'
-import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
+import {
+  analytics,
+  mergeConnections,
+  storage,
+  stripSpaces,
+} from '~/common/utils'
 import {
   ArticleDigestFeed,
   Empty,
@@ -29,12 +34,25 @@ import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
+const KEY = 'user-journals'
+
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
   const [journals, setJournals] = useState<JournalDigestProps[]>([])
+
+  useEffect(() => {
+    if (isViewer) {
+      setJournals(storage.get(KEY) || [])
+    }
+  }, [isViewer])
+
+  useEffect(() => {
+    console.log(journals)
+    storage.set(KEY, journals)
+  }, [journals])
 
   /**
    * Data Fetching
@@ -92,7 +110,6 @@ const UserArticles = () => {
   }
 
   useEventListener(ADD_JOURNAL, (payload: { [key: string]: any }) => {
-    console.log({ payload })
     const input = payload?.input
     const newJournal = {
       id: input.id,

@@ -1,4 +1,7 @@
+import 'photoswipe/dist/photoswipe.css'
+
 import { random } from 'lodash'
+import { Gallery, Item } from 'react-photoswipe-gallery'
 
 import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
@@ -23,7 +26,11 @@ export const JournalDigest: React.FC<JournalDigestProps> = ({
   assets,
   createdAt,
 }: JournalDigestProps) => {
-  const liked = random(0, 2, false) === 1
+  const liked = random(0, 1, false) === 1
+
+  const options = {
+    padding: { top: 20, bottom: 40, left: 100, right: 100 },
+  }
 
   return (
     <section className={styles.container}>
@@ -53,20 +60,32 @@ export const JournalDigest: React.FC<JournalDigestProps> = ({
       )}
       {assets.length > 0 && (
         <section className={styles.assets}>
-          {assets.map((asset) => (
-            <div key={asset.id} className={styles.item}>
-              <ResponsiveImage
-                url={asset.src}
-                // url={
-                //   'https://imagedelivery.net/kDRCweMmqLnTPNlbum-pYA/prod/embed/c768fc54-92d3-4aea-808e-a668b903fc62.png/w=212,h=212,fit=crop,anim=false'
-                // }
-                width={106}
-                height={106}
-                smUpWidth={106}
-                smUpHeight={106}
-              />
-            </div>
-          ))}
+          <Gallery options={options}>
+            {assets.map((asset) => (
+              <Item
+                key={asset.id}
+                original={asset.src}
+                thumbnail={asset.src}
+                width={asset.width}
+                height={asset.height}
+              >
+                {({ ref, open }) => (
+                  <div ref={ref} onClick={open} className={styles.item}>
+                    <ResponsiveImage
+                      url={asset.src}
+                      // url={
+                      //   'https://imagedelivery.net/kDRCweMmqLnTPNlbum-pYA/prod/embed/c768fc54-92d3-4aea-808e-a668b903fc62.png/w=212,h=212,fit=crop,anim=false'
+                      // }
+                      width={106}
+                      height={106}
+                      smUpWidth={106}
+                      smUpHeight={106}
+                    />
+                  </div>
+                )}
+              </Item>
+            ))}
+          </Gallery>
         </section>
       )}
       <footer>

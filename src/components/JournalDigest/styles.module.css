@@ -25,6 +25,7 @@
       position: relative;
       width: 6.625rem;
       height: 6.625rem;
+      cursor: pointer;
 
       & img {
         width: 100%;

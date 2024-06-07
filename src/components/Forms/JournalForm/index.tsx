@@ -20,6 +20,24 @@ import styles from './styles.module.css'
 
 export interface JournalFormProps {}
 
+interface Dimensions {
+  width: number
+  height: number
+}
+
+const getImageDimensions = (file: File): Promise<Dimensions> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => {
+      resolve({ width: img.width, height: img.height })
+    }
+    img.onerror = reject
+
+    const url = URL.createObjectURL(file)
+    img.src = url
+  })
+}
+
 export const JournalForm: React.FC<JournalFormProps> = ({}) => {
   const intl = useIntl()
   const [isEditing, setEditing] = useState(false)
@@ -27,23 +45,29 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
   const [assets, setAssets] = useState<JournalAsset[]>([])
 
   const addAssets = useCallback(
-    (files: File[]) => {
+    async (files: File[]) => {
       setEditing(true)
       const newFiles = Array.from(files).slice(
         0,
         UPLOAD_JOURNAL_ASSET_COUNT_LIMIT - assets.length
       )
 
-      setTimeout(() => {
-        setAssets([
-          ...assets,
-          ...newFiles.map((file) => ({
+      const newAssets = await Promise.all(
+        newFiles.map(async (file) => {
+          const { width, height } = await getImageDimensions(file)
+          return {
             id: crypto.randomUUID(),
             file,
             uploaded: false,
             src: URL.createObjectURL(file),
-          })),
-        ])
+            width,
+            height,
+          }
+        })
+      )
+
+      setTimeout(() => {
+        setAssets((prevAssets) => [...prevAssets, ...newAssets])
       }, 500)
     },
     [assets]
