@@ -2,7 +2,13 @@
   padding: var(--sp20) 0;
 
   header {
+    @mixin flex-center-start;
+
     height: 18px;
+
+    & time {
+      line-height: 18px !important;
+    }
   }
 
   .say {
