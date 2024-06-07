@@ -67,6 +67,7 @@ export const ActivityPopoverMobile: StoryFn = () => {
       placement="top"
       onShown={hidePopperOnClick}
       offset={[0, 12]} // 16px - 4px (default tippy padding)
+      theme="mobile"
     >
       {({ ref }) => (
         <NavListItem
@@ -93,8 +94,6 @@ export const ActivityBanner: StoryFn = () => {
   } = useDialogSwitch(false)
   const toggle = () => (show ? closeDropdown() : openDropdown())
 
-  // const customArrow = <div className="tippy-arrow custom-arrow"></div>
-
   return (
     <Dropdown
       content={
@@ -105,6 +104,7 @@ export const ActivityBanner: StoryFn = () => {
       visible={show}
       placement="top"
       arrow={true}
+      theme="banner"
     >
       {({ ref }) => (
         <NavListItem

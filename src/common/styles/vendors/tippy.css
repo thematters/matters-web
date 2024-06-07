@@ -24,7 +24,6 @@
 
 .tippy-box[data-placement^='top'] > .tippy-arrow {
   bottom: 0;
-  color: var(--color-white);
 }
 
 .tippy-box[data-placement^='top'] > .tippy-arrow::before {
@@ -142,7 +141,20 @@
   padding: 0;
 }
 
+/* theme:banner */
+
+/* this is for the banner theme to introduce the new journal feature */
+.tippy-box[data-theme='banner'] > .tippy-arrow {
+  color: var(--color-matters-green);
+}
+
+/* theme:mobile - for mobile popover */
+.tippy-box[data-theme='mobile'] > .tippy-arrow {
+  color: var(--color-white);
+}
+
 /* theme:dropdown */
+.tippy-box[data-theme='mobile'],
 .tippy-box[data-theme='dropdown'] {
   color: var(--color-black);
   background: var(--color-white);

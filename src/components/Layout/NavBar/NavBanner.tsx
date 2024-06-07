@@ -11,11 +11,7 @@ const NavBanner: React.FC = () => {
         短動態上線囉！
         <div className={styles['sub-text']}>分享今天開心或難過的小故事吧</div>
       </div>
-      <img
-        src={MATTY.src}
-        alt="Profile Icon"
-        className={styles['profile-icon']}
-      />
+      <img src={MATTY.src} alt="Matty" className={styles['profile-icon']} />
     </div>
   )
 }
