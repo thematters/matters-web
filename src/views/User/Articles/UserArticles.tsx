@@ -213,6 +213,16 @@ const UserArticles = () => {
 
       {isViewer && (
         <section className={styles.journal}>
+          <section className={styles.clearJournals}>
+            <button
+              onClick={() => {
+                setJournals([])
+                storage.set(KEY, [])
+              }}
+            >
+              Clear Journals
+            </button>
+          </section>
           <JournalForm />
         </section>
       )}
