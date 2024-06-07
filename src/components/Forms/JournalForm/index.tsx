@@ -103,7 +103,7 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
       assets: assets,
     }
 
-    const delay = random(1, 5, false) * 1000
+    const delay = random(1, 4, false) * 1000
 
     // mock submitting
     setTimeout(() => {

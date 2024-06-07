@@ -2,6 +2,7 @@ import { random } from 'lodash'
 import { memo, useEffect, useState } from 'react'
 
 import { ReactComponent as IconCircleTimesFill } from '@/public/static/icons/24px/circle-times-fill.svg'
+import { ReactComponent as IconWarn } from '@/public/static/icons/24px/warn.svg'
 import { Button } from '~/components/Button'
 import { Icon } from '~/components/Icon'
 import { ResponsiveImage } from '~/components/ResponsiveImage'
@@ -17,6 +18,7 @@ type ItemProps = {
 
 export const Item = memo(function Item({ asset, removeAsset }: ItemProps) {
   const [uploading, setUploading] = useState(!asset.uploaded)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     if (!asset.uploaded) {
@@ -24,6 +26,10 @@ export const Item = memo(function Item({ asset, removeAsset }: ItemProps) {
       // mock uploading
       setTimeout(() => {
         setUploading(false)
+        if (random(0, 2, false) === 1) {
+          setError('未知錯誤')
+          return
+        }
         asset.uploaded = true
       }, ms)
     }
@@ -43,16 +49,24 @@ export const Item = memo(function Item({ asset, removeAsset }: ItemProps) {
           </Button>
         )}
       </div>
-      <ResponsiveImage
-        url={asset.src}
-        // url={
-        //   'https://imagedelivery.net/kDRCweMmqLnTPNlbum-pYA/prod/embed/c768fc54-92d3-4aea-808e-a668b903fc62.png/w=212,h=212,fit=crop,anim=false'
-        // }
-        width={72}
-        height={72}
-        smUpWidth={72}
-        smUpHeight={72}
-      />
+      {error && (
+        <div className={styles.error}>
+          <Icon icon={IconWarn} color="red" size={24} />
+          <span>未知錯誤</span>
+        </div>
+      )}
+      {!error && (
+        <ResponsiveImage
+          url={asset.src}
+          // url={
+          //   'https://imagedelivery.net/kDRCweMmqLnTPNlbum-pYA/prod/embed/c768fc54-92d3-4aea-808e-a668b903fc62.png/w=212,h=212,fit=crop,anim=false'
+          // }
+          width={72}
+          height={72}
+          smUpWidth={72}
+          smUpHeight={72}
+        />
+      )}
     </div>
   )
 })

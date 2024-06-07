@@ -6,7 +6,6 @@ export const REFETCH_RESPONSES = 'refetchResponses'
 export const SYNC_APPRECIATE_BUTTON_COUNT = 'syncAppreciateButtonCount'
 export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
 
-
 // Journal
 export const ADD_JOURNAL = 'addJournal'
 
