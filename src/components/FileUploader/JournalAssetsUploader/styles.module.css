@@ -1,7 +1,18 @@
 .container {
   display: flex;
   gap: var(--sp12);
-  margin-top: var(--sp16);
+}
+
+.imageButton {
+  @mixin flex-center-all;
+
+  padding: var(--sp12);
+
+  &.editing {
+    padding: var(--sp10) var(--sp12) var(--sp12);
+    margin-bottom: calc(var(--sp8) * -1);
+    margin-left: calc(var(--sp8) * -1);
+  }
 }
 
 .addAssetButton {

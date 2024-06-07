@@ -10,6 +10,7 @@ import {
   EmptyArticle,
   Head,
   InfiniteScroll,
+  JournalForm,
   Layout,
   List,
   QueryError,
@@ -18,12 +19,12 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { JournalAssetsUploader } from '~/components/FileUploader/JournalAssetsUploader'
 import { UserArticlesPublicQuery } from '~/gql/graphql'
 
 import { USER_ARTICLES_PRIVATE, USER_ARTICLES_PUBLIC } from './gql'
 import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
+import styles from './styles.module.css'
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
@@ -176,9 +177,11 @@ const UserArticles = () => {
 
       <PinBoard user={user} />
 
-      <section>
-        <JournalAssetsUploader />
-      </section>
+      {isViewer && (
+        <section className={styles.journal}>
+          <JournalForm />
+        </section>
+      )}
 
       <Layout.Main.Spacing hasVertical={false}>
         <InfiniteScroll

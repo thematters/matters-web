@@ -890,6 +890,9 @@
   "EBEwaP": {
     "defaultMessage": "請填寫有效郵件地址"
   },
+  "EIoAY7": {
+    "defaultMessage": "說點什麼..."
+  },
   "EQeKnO": {
     "defaultMessage": "邀請管理",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -2688,6 +2691,10 @@
   },
   "nGBrvw": {
     "defaultMessage": "我的收藏"
+  },
+  "nJaVYb": {
+    "defaultMessage": "Journal",
+    "description": "src/components/Forms/JournalForm/index.tsx"
   },
   "nNB7KU": {
     "defaultMessage": "在",

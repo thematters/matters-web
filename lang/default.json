@@ -890,6 +890,9 @@
   "EBEwaP": {
     "defaultMessage": "Please fill in a valid email address"
   },
+  "EIoAY7": {
+    "defaultMessage": "說點什麼..."
+  },
   "EQeKnO": {
     "defaultMessage": "Manage Invitation",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -2688,6 +2691,10 @@
   },
   "nGBrvw": {
     "defaultMessage": "Bookmarks"
+  },
+  "nJaVYb": {
+    "defaultMessage": "Journal",
+    "description": "src/components/Forms/JournalForm/index.tsx"
   },
   "nNB7KU": {
     "defaultMessage": "replied your comment in",

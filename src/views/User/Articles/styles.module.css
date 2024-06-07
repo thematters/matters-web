@@ -11,3 +11,7 @@
     color: var(--color-black);
   }
 }
+
+.journal {
+  margin: var(--sp20) 0;
+}
