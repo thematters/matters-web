@@ -11,43 +11,43 @@ import styles from './styles.module.css'
 
 const NavPopover: React.FC = () => {
   return (
-    <section className={styles['pop-over']}>
+    <section className={styles.popOver}>
       <ul className={styles.list}>
-        <li key={'new-journal'}>
+        <li key="new-journal">
           <Card
             spacing={[8, 16]}
             textColor="greyDarker"
             textActiveColor="black"
             bgColor="transparent"
-            role="menuitem"
             borderRadius="xxtight"
+            role="menuitem"
           >
             <TextIcon
               icon={<Icon icon={IconStory} size={32} />}
               size={12}
               spacing={12}
-              weight={'normal'}
+              weight="normal"
               placement="bottom"
             >
               <FormattedMessage defaultMessage="New Journal" id="subQNF" />
             </TextIcon>
           </Card>
         </li>
-        <li key={'write-articles'}>
+        <li key="write-articles">
           <Card
             spacing={[8, 16]}
             textColor="greyDarker"
             textActiveColor="black"
             bgColor="transparent"
+            borderRadius="xxtight"
             role="menuitem"
             href={PATHS.ME_DRAFT_NEW}
-            borderRadius="xxtight"
           >
             <TextIcon
               icon={<Icon icon={IconEdit} size={32} />}
               size={12}
               spacing={12}
-              weight={'normal'}
+              weight="normal"
               placement="bottom"
             >
               <FormattedMessage defaultMessage="Write Articles" id="Xj0yv9" />

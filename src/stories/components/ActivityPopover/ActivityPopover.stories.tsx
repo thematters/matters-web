@@ -14,6 +14,7 @@ import NavBanner from '~/components/Layout/NavBar/NavBanner'
 import NavPopover from '~/components/Layout/NavBar/NavPopover'
 import Activity from '~/components/Layout/SideNav/Activity'
 import NavListItem from '~/components/Layout/SideNav/NavListItem'
+
 export default {
   title: 'Components/Layout/SideNav/Activity',
   component: Activity,
@@ -47,7 +48,6 @@ export const ActivityPopover: StoryFn = () => (
 export const ActivityPopoverMobile: StoryFn = () => {
   const {
     show,
-    setShow,
     openDialog: openDropdown,
     closeDialog: closeDropdown,
   } = useDialogSwitch(false)
@@ -59,11 +59,7 @@ export const ActivityPopoverMobile: StoryFn = () => {
       onHidden={closeDropdown}
       onClickOutside={closeDropdown}
       visible={show}
-      content={
-        <section onClick={() => setShow(false)}>
-          <NavPopover />
-        </section>
-      }
+      content={<NavPopover />}
       placement="top"
       onShown={hidePopperOnClick}
       offset={[0, 12]} // 16px - 4px (default tippy padding)

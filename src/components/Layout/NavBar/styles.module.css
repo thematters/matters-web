@@ -24,7 +24,9 @@
   }
 }
 
-.pop-over {
+.popOver {
+  box-shadow: var(--shadow-light);
+
   & .list {
     @mixin flex-center-all;
   }
@@ -39,24 +41,25 @@
   background-color: var(--color-matters-green);
   border-radius: 10px;
 
-  & .profile-icon {
+  & .profileIcon {
+    align-self: flex-end;
     width: 104px;
     height: 83px;
     margin-left: var(--sp24);
   }
 
-  & .notification-text {
+  & .notificationText {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     margin-left: var(--sp16);
     font-family: Arial, sans-serif;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: var(--text18);
+    font-weight: var(--font-medium);
     color: white;
 
-    & .sub-text {
-      font-size: 14px;
+    & .subText {
+      font-size: var(--text14);
       font-weight: normal;
     }
   }
