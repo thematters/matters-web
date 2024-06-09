@@ -18,6 +18,7 @@ import {
   BackToHomeButton,
   BackToHomeMobileButton,
   CommentEditorProvider,
+  DrawerProvider,
   EmptyLayout,
   Error,
   Head,
@@ -603,9 +604,11 @@ const ArticleDetail = ({
    * Render:Article
    */
   return (
-    <CommentEditorProvider>
-      <BaseArticleDetail article={article} privateFetched={privateFetched} />
-    </CommentEditorProvider>
+    <DrawerProvider>
+      <CommentEditorProvider>
+        <BaseArticleDetail article={article} privateFetched={privateFetched} />
+      </CommentEditorProvider>
+    </DrawerProvider>
   )
 }
 
