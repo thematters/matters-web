@@ -9,7 +9,7 @@ import {
   ENTITY_TYPE,
   MAX_ARTICLE_CONTENT_LENGTH,
 } from '~/common/enums'
-import { stripHtml } from '~/common/utils'
+import { containsFigureTag, stripHtml } from '~/common/utils'
 import {
   DraftDetailStateContext,
   DraftDetailStateProvider,
@@ -155,7 +155,9 @@ const BaseDraftDetail = () => {
     )
   }
 
-  const hasContent = draft?.content && stripHtml(draft.content).length > 0
+  const hasContent =
+    draft?.content &&
+    (stripHtml(draft.content).length > 0 || containsFigureTag(draft.content))
   const hasTitle = draft?.title && draft.title.length > 0
   const isUnpublished = draft?.publishState === 'unpublished'
   const publishable = !!(
