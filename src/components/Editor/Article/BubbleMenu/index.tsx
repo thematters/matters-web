@@ -89,9 +89,10 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
         // figureImage, figureAudio, figureEmbed contain `<figcaption>`
         const isFigure = $anchor.parent.type.name.includes('figure')
+        const isHr = $anchor.nodeAfter?.type.name === 'horizontalRule'
 
-        // hr
-        const isHr = $anchor.nodeAfter?.type.name.includes('horizontalRule')
+        const $grandParent = $anchor.node($anchor.depth - 1)
+        const isInBlockquote = $grandParent?.type.name === 'blockquote'
 
         if (
           !hasEditorFocus ||
@@ -99,7 +100,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           isEmptyTextBlock ||
           !editor.isEditable ||
           isFigure ||
-          isHr
+          isHr ||
+          isInBlockquote
         ) {
           return false
         }
@@ -232,12 +234,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
-              disabled={
-                (!isCommentEditor &&
-                  // @ts-ignore
-                  !editor.can().chain().focus().toggleCodeBlock().run()) ||
-                editor.isActive('codeBlock')
-              }
+              // @ts-ignore
+              disabled={!editor.can().chain().focus().toggleBlockquote().run()}
               className={editor.isActive('blockquote') ? styles.active : ''}
               aria-label={intl.formatMessage({
                 defaultMessage: 'Quote',

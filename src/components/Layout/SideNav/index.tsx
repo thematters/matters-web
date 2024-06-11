@@ -94,7 +94,7 @@ const SideNavMenu = () => {
             activeIcon={<Icon icon={IconNavUserActive} size={32} />}
             active={isInMe}
             canScrollTop={false}
-            aira-haspopup="menu"
+            aria-haspopup="menu"
             ref={ref}
             testId={TEST_ID.SIDE_NAV_MY_PAGE}
           />
