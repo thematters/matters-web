@@ -1,5 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
+import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
 import { analytics } from '~/common/utils'
 import { SegmentedTabs } from '~/components'
 
@@ -15,7 +16,7 @@ const SortBy: React.FC<SortByProps> = ({ feedType, setFeedType }) => {
   const isNewset = feedType === 'newest'
   const isICYMI = feedType === 'icymi'
 
-  const trackClick = (type: string) => {
+  const trackClick = (type: TrackEventProps['type']) => {
     analytics.trackEvent('click_button', {
       type,
       pageType: 'home',
