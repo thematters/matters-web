@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import _omit from 'lodash/omit'
-import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
@@ -43,6 +42,7 @@ import {
   ArticleDigestDropdownArticleFragment,
   ArticleLicenseType,
   AssetFragment,
+  AssetType,
   DigestRichCirclePublicFragment,
   DigestTagFragment,
   DirectImageUploadDoneMutation,
@@ -79,7 +79,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const [content, setContent] = useState(article.contents.html)
 
   // cover
-  const assets = article.assets || []
+  const [assets, setAssets] = useState(article.assets || [])
   const [cover, setCover] = useState<AssetFragment | undefined>(
     assets.find((asset) => asset.path === article.cover)
   )
@@ -262,6 +262,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
             url: path,
           },
         }).catch(console.error)
+
+        setAssets((assets) => [
+          ...assets,
+          { id: assetId, path, type: AssetType.Embed },
+        ])
 
         return { id: assetId, path }
       } else {
