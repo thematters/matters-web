@@ -25,6 +25,7 @@ const Tab = ({ active, onClick, title }: TabProps) => {
   )
 }
 
+// TODO: refactor the tabs view into a separate component
 const Tabs = () => {
   const [activeTab, setActiveTab] = useState<TabsType>('ALL')
   const intl = useIntl()

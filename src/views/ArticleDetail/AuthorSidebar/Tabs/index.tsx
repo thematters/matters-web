@@ -38,7 +38,7 @@ const TabItem = ({
     </li>
   )
 }
-
+// TODO: refactor the tabs view into a separate component
 export const Tabs = ({ article, tab, setTab }: TabsProps) => {
   const intl = useIntl()
   const { getQuery } = useRoute()
