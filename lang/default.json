@@ -2891,6 +2891,9 @@
   "ruZqtT": {
     "defaultMessage": "Must be between {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} characters long."
   },
+  "sDQSFv": {
+    "defaultMessage": "Articles Only"
+  },
   "sPgUkN": {
     "defaultMessage": "This Month",
     "description": "src/views/Circle/Analytics/IncomeAnalytics/index.tsx"
