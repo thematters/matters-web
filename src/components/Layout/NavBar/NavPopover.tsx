@@ -29,7 +29,7 @@ const NavPopover: React.FC = () => {
               weight="normal"
               placement="bottom"
             >
-              <FormattedMessage defaultMessage="發動態" id="pcuiJf" />
+              <FormattedMessage defaultMessage="New Journal" id="subQNF" />
             </TextIcon>
           </Card>
         </li>
@@ -50,7 +50,7 @@ const NavPopover: React.FC = () => {
               weight="normal"
               placement="bottom"
             >
-              <FormattedMessage defaultMessage="寫文章" id="aIs0hF" />
+              <FormattedMessage defaultMessage="Write Articles" id="Xj0yv9" />
             </TextIcon>
           </Card>
         </li>

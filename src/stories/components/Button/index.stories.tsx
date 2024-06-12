@@ -6,7 +6,6 @@ import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
 import {
   Button,
-  FeedButton as FeedButtonComponent,
   Icon,
   LoginButton as LoginButtonComponent,
   ViewMoreButton as ViewMoreButtonComponent,
@@ -63,11 +62,5 @@ export const WriteButton = () => (
 export const ViewMoreButton = () => (
   <MockedProvider>
     <ViewMoreButtonComponent />
-  </MockedProvider>
-)
-
-export const FeedButton = () => (
-  <MockedProvider>
-    <FeedButtonComponent />
   </MockedProvider>
 )
