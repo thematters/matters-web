@@ -107,25 +107,32 @@ const Collection = ({ article, collectionId }: CollectionProps) => {
           loader={<ArticleDigestAuthorSidebarFeedPlaceholder />}
         >
           <List borderPosition="top">
-            {edges?.map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
-                <ArticleDigestAuthorSidebar
-                  article={node}
-                  titleTextSize={14}
-                  collectionId={collectionId}
-                  titleColor={node.id === article?.id ? 'black' : 'greyDarker'}
-                  showCover={false}
-                  clickEvent={() => {
-                    analytics.trackEvent('click_feed', {
-                      type: 'article_detail_author_sidebar_collection',
-                      contentType: 'article',
-                      location: i,
-                      id: node.id,
-                    })
-                  }}
-                />
-              </List.Item>
-            ))}
+            {edges?.map(
+              (
+                { node, cursor },
+                i // TODO: find focus factor
+              ) => (
+                <List.Item key={cursor}>
+                  <ArticleDigestAuthorSidebar
+                    article={node}
+                    titleTextSize={14}
+                    collectionId={collectionId}
+                    titleColor={
+                      node.id === article?.id ? 'black' : 'greyDarker'
+                    }
+                    showCover={false}
+                    clickEvent={() => {
+                      analytics.trackEvent('click_feed', {
+                        type: 'article_detail_author_sidebar_collection',
+                        contentType: 'article',
+                        location: i,
+                        id: node.id,
+                      })
+                    }}
+                  />
+                </List.Item>
+              )
+            )}
           </List>
         </InfiniteScroll>
       </section>
