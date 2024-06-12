@@ -195,6 +195,7 @@ const JournalDetailDialogContent = ({
                           height={106}
                           smUpWidth={106}
                           smUpHeight={106}
+                          objectFix="cover"
                         />
                       </div>
                     )}
