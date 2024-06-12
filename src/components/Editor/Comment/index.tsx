@@ -71,7 +71,7 @@ const CommentEditor: React.FC<Props> = ({
       <EditorContent
         editor={editor}
         onFocus={() => {
-          setActiveEditor(editor)
+          setActiveEditor?.(editor)
         }}
       />
     </div>
