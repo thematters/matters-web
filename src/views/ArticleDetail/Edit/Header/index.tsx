@@ -2,7 +2,7 @@ import _isEqual from 'lodash/isEqual'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_CONTENT_LENGTH } from '~/common/enums'
-import { stripHtml, toPath } from '~/common/utils'
+import { containsFigureTag, stripHtml, toPath } from '~/common/utils'
 import { Button, TextIcon, toast, useMutation } from '~/components'
 import {
   ConfirmStepContentProps,
@@ -65,7 +65,9 @@ const EditModeHeader = ({
 
   const hasTitle = revision.title && revision.title.trim().length > 0
   const hasContent =
-    revision.content && stripHtml(revision.content).trim().length > 0
+    revision.content &&
+    (stripHtml(revision.content).trim().length > 0 ||
+      containsFigureTag(revision.content))
 
   const isTitleRevised = revision.title !== article.title
   const isSummaryRevised = revision.summary !== article.summary
