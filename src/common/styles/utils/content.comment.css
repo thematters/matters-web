@@ -6,7 +6,7 @@
   }
 
   & > * + * {
-    margin: var(--sp8) 0;
+    margin: var(--sp12) 0;
   }
 
   & > *:last-child {

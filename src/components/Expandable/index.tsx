@@ -3,7 +3,11 @@ import React, { ReactElement, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
-import { capitalizeFirstLetter, stripHtml } from '~/common/utils'
+import {
+  capitalizeFirstLetter,
+  checkIsSafariVersionLessThan17,
+  stripHtml,
+} from '~/common/utils'
 import {
   Button,
   Icon,
@@ -32,8 +36,32 @@ interface ExpandableProps {
   spacingTop?: 'tight' | 'base'
   textIndent?: boolean
   isRichShow?: boolean
+  isComment?: boolean
   collapseable?: boolean
   bgColor?: 'greyLighter' | 'white'
+}
+
+const calculateCommentContentHeight = (element: HTMLElement): number => {
+  let height = 0
+  const contentNode = element.firstElementChild?.firstElementChild
+  if (contentNode) {
+    contentNode.childNodes.forEach((child) => {
+      const e = child as HTMLElement
+      height += e.clientHeight
+    })
+  }
+  return height
+}
+
+const calculateContentHeight = (
+  element: HTMLElement,
+  isRichShow: boolean,
+  isComment: boolean
+): number => {
+  if (isRichShow && isComment) {
+    return calculateCommentContentHeight(element)
+  }
+  return element.firstElementChild?.clientHeight || 0
 }
 
 export const Expandable: React.FC<ExpandableProps> = ({
@@ -45,23 +73,34 @@ export const Expandable: React.FC<ExpandableProps> = ({
   size,
   spacingTop,
   textIndent = false,
-  isRichShow = false,
+  isRichShow: _isRichShow = false,
+  isComment = false,
   collapseable = true,
   bgColor = 'white',
 }) => {
-  const [expandable, setExpandable] = useState(false)
-  const [firstRender, setFirstRender] = useState(true)
-  const [expand, setExpand] = useState(true)
+  const [isOverFlowing, setIsOverFlowing] = useState(false)
+  const [isExpanded, setIsExpanded] = useState(true)
+  const [isRichShow, setIsRichShow] = useState(_isRichShow)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
   const collapsedContent = stripHtml(content || '')
 
+  const [isSafariVersionLessThan17, setIsSafariVersionLessThan17] =
+    useState(false)
+  const [needAdjustForSafari, setNeedAdjustForSafari] = useState(false)
+
+  useEffect(() => {
+    // FIXME: Safari version less than 17 has a bug that -webkit-line-clamp overlapping blocks even with overflow: hidden, when mixing <span> and <div>.
+    if (checkIsSafariVersionLessThan17()) {
+      setIsSafariVersionLessThan17(true)
+    }
+  }, [])
+
   const contentClasses = classNames({
-    [styles.expandable]: true,
+    [styles.content]: true,
     [styles[`${color}`]]: !!color,
-    [size ? styles[`text${size}`] : '']: !!size,
-    [spacingTop
-      ? styles[`spacingTop${capitalizeFirstLetter(spacingTop)}`]
-      : '']: !!spacingTop,
+    [styles[`text${size}`]]: !!size,
+    [styles[`spacingTop${capitalizeFirstLetter(spacingTop || '')}`]]:
+      !!spacingTop,
     [styles.textIndent]: textIndent,
   })
 
@@ -73,53 +112,70 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const richShowMoreButtonClasses = classNames({
     [styles.richShowMoreButton]: true,
     [styles[`${bgColor}`]]: !!bgColor,
-    [size ? styles[`text${size}`] : '']: !!size,
+    [styles[`text${size}`]]: !!size,
   })
 
-  useIsomorphicLayoutEffect(() => {
-    setExpandable(false)
-    setExpand(true)
-    if (node?.current) {
-      const height = node.current.firstElementChild?.clientHeight || 0
-      const lineHeight = window
-        .getComputedStyle(node.current, null)
-        .getPropertyValue('line-height')
-      const lines = Math.max(Math.ceil(height / parseInt(lineHeight, 10)), 0)
+  const reset = () => {
+    setIsOverFlowing(false)
+    setIsExpanded(true)
+  }
 
-      if (lines > limit + buffer) {
-        setExpandable(true)
-        setExpand(false)
-      }
+  const handleOverflowCheck = () => {
+    if (!node?.current) {
+      return
     }
+    const element = node.current
+    const height = calculateContentHeight(element, isRichShow, isComment)
+    const lineHeight = window
+      .getComputedStyle(element, null)
+      .getPropertyValue('line-height')
+    const lines = Math.max(Math.ceil(height / parseFloat(lineHeight)), 0)
+
+    if (lines > limit + buffer) {
+      setIsOverFlowing(true)
+      setIsExpanded(false)
+    }
+  }
+
+  useIsomorphicLayoutEffect(() => {
+    // FIXED: reset state to fix the case from overflow to non-overflow condition.
+    reset()
+
+    handleOverflowCheck()
   }, [content])
 
   useEffect(() => {
-    if (firstRender) {
-      setFirstRender(false)
+    if (isSafariVersionLessThan17 && isRichShow) {
+      reset()
+      setIsRichShow(false)
+      setNeedAdjustForSafari(true)
     }
-  }, [firstRender])
+  }, [isSafariVersionLessThan17])
+
+  useEffect(() => {
+    if (needAdjustForSafari) {
+      handleOverflowCheck()
+    }
+  }, [needAdjustForSafari])
+
+  const toggleIsExpand = () => {
+    setIsExpanded(!isExpanded)
+  }
 
   return (
     <section className={contentClasses}>
       <div ref={node}>
-        {(!expandable || (expandable && expand)) && (
-          <div
-            className={firstRender ? styles.lineClamp : ''}
-            style={{ WebkitLineClamp: limit + 2 }}
-          >
-            {children}
-          </div>
+        {(!isOverFlowing || (isOverFlowing && isExpanded)) && (
+          <div>{children}</div>
         )}
       </div>
-      {expandable && collapseable && expand && !isRichShow && (
+      {isOverFlowing && isExpanded && collapseable && !isRichShow && (
         <section className={styles.collapseWrapper}>
           <Button
             spacing={[4, 8]}
             bgColor="greyLighter"
             textColor="grey"
-            onClick={() => {
-              setExpand(!expand)
-            }}
+            onClick={toggleIsExpand}
           >
             <TextIcon icon={<Icon icon={IconUp} />} placement="left">
               <FormattedMessage defaultMessage="Collapse" id="W/V6+Y" />
@@ -127,7 +183,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
           </Button>
         </section>
       )}
-      {expandable && !expand && (
+      {isOverFlowing && !isExpanded && (
         <p className={styles.unexpandWrapper}>
           {!isRichShow && (
             <Truncate
@@ -135,7 +191,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
               ellipsis={
                 <span
                   onClick={(e) => {
-                    setExpand(!expand)
+                    toggleIsExpand()
                     e.stopPropagation()
                   }}
                   className={styles.expandButton}
@@ -159,9 +215,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
               </section>
               <button
                 className={richShowMoreButtonClasses}
-                onClick={() => {
-                  setExpand(!expand)
-                }}
+                onClick={toggleIsExpand}
               >
                 <FormattedMessage
                   defaultMessage="Expand"

@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { fireEvent, render, screen } from '~/common/utils/test'
-import { Drawer, useDialogSwitch } from '~/components'
+import { Drawer, DrawerProvider, useDialogSwitch } from '~/components'
 
 type AnyDrawerProps = {
   children: React.ReactNode
@@ -17,10 +17,12 @@ const AnyDrawer = ({ defaultOpen, title, children }: AnyDrawerProps) => {
       <button type="button" onClick={openDialog}>
         Open
       </button>
-      <Drawer isOpen={show} onClose={closeDialog}>
-        <Drawer.Header title={title} closeDrawer={closeDialog} />
-        {children}
-      </Drawer>
+      <DrawerProvider>
+        <Drawer isOpen={show} onClose={closeDialog}>
+          <Drawer.Header title={title} closeDrawer={closeDialog} />
+          {children}
+        </Drawer>
+      </DrawerProvider>
     </>
   )
 }

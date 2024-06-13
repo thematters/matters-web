@@ -1,7 +1,7 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
@@ -102,8 +102,18 @@ export const CoverUploader = ({
   )
   const { upload: uploadImage, uploading } = useDirectImageUpload()
 
+  const [localSrc, setLocalSrc] = useState<string | undefined>(undefined)
+
   const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'cover-upload-form'
+
+  useEffect(() => {
+    return () => {
+      if (localSrc) {
+        URL.revokeObjectURL(localSrc)
+      }
+    }
+  }, [])
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -124,6 +134,12 @@ export const CoverUploader = ({
       if (onUploadStart) {
         onUploadStart()
       }
+
+      if (localSrc) {
+        URL.revokeObjectURL(localSrc)
+      }
+
+      setLocalSrc(URL.createObjectURL(file))
 
       const variables = {
         input: { file, mime, type: assetType, entityId, entityType },
@@ -169,6 +185,7 @@ export const CoverUploader = ({
   const removeCover = (event: any) => {
     event.preventDefault()
     setCover(undefined)
+    setLocalSrc(undefined)
     onUploaded(null)
   }
 
@@ -185,7 +202,7 @@ export const CoverUploader = ({
   const UserProfileMask = () => {
     const maskClasses = classNames({
       [styles.mask]: true,
-      [styles.emptyMask]: !cover,
+      [styles.emptyMask]: !localSrc && !cover,
     })
     return (
       <div className={maskClasses}>
@@ -211,12 +228,16 @@ export const CoverUploader = ({
   return (
     <label className={styles.label} htmlFor={fieldId}>
       {!isCollection && !isUserProfile && (
-        <Cover cover={cover} fallbackCover={fallbackCover} inEditor={inEditor}>
+        <Cover
+          cover={localSrc || cover}
+          fallbackCover={fallbackCover}
+          inEditor={inEditor}
+        >
           <Mask />
         </Cover>
       )}
       {isUserProfile && (
-        <Cover cover={cover} inEditor={inEditor}>
+        <Cover cover={localSrc || cover} inEditor={inEditor}>
           <UserProfileMask />
         </Cover>
       )}
@@ -225,7 +246,7 @@ export const CoverUploader = ({
           <section className={styles.collectionContent}>
             <Book.Collection
               title={bookTitle || ''}
-              cover={cover}
+              cover={localSrc || cover}
               hasMask
               loading={loading}
             />

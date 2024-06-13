@@ -69,8 +69,8 @@ const NoticeComment = ({
           toast.success({
             message: (
               <FormattedMessage
-                defaultMessage="Oops! This comment has been forcibly hidden"
-                id="XP1Vto"
+                defaultMessage="This comment has been hidden due to violation of community terms of services"
+                id="0tRUjd"
               />
             ),
           })
