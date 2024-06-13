@@ -29,6 +29,7 @@ const JournalEditor: React.FC<Props> = ({
   const intl = useIntl()
 
   const editor = useJournalEditor({
+    autofocus: true,
     placeholder:
       placeholder ||
       intl.formatMessage({
