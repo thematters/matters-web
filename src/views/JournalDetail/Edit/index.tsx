@@ -7,29 +7,29 @@ import JournalEditor from '~/components/Editor/Journal'
 import styles from './styles.module.css'
 
 // 创建并触发触摸事件的函数
-function triggerTouchEvent(element: HTMLElement, eventType: string) {
-  const touchObj = new Touch({
-    identifier: Date.now(),
-    target: element,
-    clientX: 30, // 设置触摸点的x坐标
-    clientY: 30, // 设置触摸点的y坐标
-    radiusX: 2.5,
-    radiusY: 2.5,
-    rotationAngle: 10,
-    force: 1,
-  })
+// function triggerTouchEvent(element: HTMLElement, eventType: string) {
+//   const touchObj = new Touch({
+//     identifier: Date.now(),
+//     target: element,
+//     clientX: 30, // 设置触摸点的x坐标
+//     clientY: 30, // 设置触摸点的y坐标
+//     radiusX: 2.5,
+//     radiusY: 2.5,
+//     rotationAngle: 10,
+//     force: 1,
+//   })
 
-  const touchEvent = new TouchEvent(eventType, {
-    cancelable: true,
-    bubbles: true,
-    touches: [touchObj],
-    targetTouches: [],
-    changedTouches: [touchObj],
-    shiftKey: true, // 其他事件属性可以根据需要设置
-  })
+//   const touchEvent = new TouchEvent(eventType, {
+//     cancelable: true,
+//     bubbles: true,
+//     touches: [touchObj],
+//     targetTouches: [],
+//     changedTouches: [touchObj],
+//     shiftKey: true, // 其他事件属性可以根据需要设置
+//   })
 
-  element.dispatchEvent(touchEvent)
-}
+//   element.dispatchEvent(touchEvent)
+// }
 
 const Edit = () => {
   const intl = useIntl()
@@ -47,12 +47,14 @@ const Edit = () => {
     if (editor) {
       setTimeout(() => {
         editor.chain().focus().insertContent('test touch event').run()
-        editor.commands.focus()
+        // editor.commands.focus()
 
         console.log({ editor })
         const editorElement = editor.view.dom as HTMLElement
-        triggerTouchEvent(editorElement, 'touchstart')
-        triggerTouchEvent(editorElement, 'touchend')
+        editorElement.focus()
+        console.log({ editorElement })
+        // triggerTouchEvent(editorElement, 'touchstart')
+        // triggerTouchEvent(editorElement, 'touchend')
       }, 0.5 * 1000)
     }
   }, [editor])
