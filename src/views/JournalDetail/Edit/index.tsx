@@ -22,7 +22,7 @@ const Edit = () => {
     if (editor) {
       setTimeout(() => {
         editor.commands.focus('end')
-      }, 1 * 1000)
+      }, 3 * 1000)
     }
   }, [editor])
 
