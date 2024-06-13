@@ -21,7 +21,15 @@ const Edit = () => {
   useEffect(() => {
     if (editor) {
       setTimeout(() => {
-        editor.chain().focus().enter().insertContent('hello tiptap').run()
+        editor
+          .chain()
+          .focus()
+          .enter()
+          .insertContent('hello tiptap')
+          .focus()
+          .run()
+
+        editor.commands.focus()
       }, 3 * 1000)
     }
   }, [editor])
