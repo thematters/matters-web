@@ -64,7 +64,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
       tippyOptions={{
         theme: 'bubble-menu',
         duration: 200,
-        placement: 'auto-start',
+        placement: 'top',
         arrow: false,
         onHidden: () => setShowLinkInput(false),
       }}
