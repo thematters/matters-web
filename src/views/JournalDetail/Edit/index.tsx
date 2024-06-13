@@ -20,7 +20,9 @@ const Edit = () => {
 
   useEffect(() => {
     if (editor) {
-      editor.commands.focus('end')
+      setTimeout(() => {
+        editor.commands.focus('end')
+      }, 1 * 1000)
     }
   }, [editor])
 
