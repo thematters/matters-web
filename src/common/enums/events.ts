@@ -9,6 +9,7 @@ export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
 // Journal
 export const ADD_JOURNAL = 'addJournal'
 export const ADD_JOURNAL_COMMENT = 'addJournalComment'
+export const ADD_COMMENT_MENTION = 'addCommentMention'
 
 // Tag
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'

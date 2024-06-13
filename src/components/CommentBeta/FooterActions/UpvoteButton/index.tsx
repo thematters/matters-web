@@ -9,13 +9,13 @@ import { numAbbr } from '~/common/utils'
 import { Button, Icon, TextIcon, useMutation } from '~/components'
 import {
   UNVOTE_COMMENT,
-  VOTE_COMMENT,
+  // VOTE_COMMENT,
 } from '~/components/GQL/mutations/voteComment'
 import {
   UnvoteCommentMutation,
   UpvoteCommentBetaPrivateFragment,
   UpvoteCommentBetaPublicFragment,
-  VoteCommentMutation,
+  // VoteCommentMutation,
 } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -66,18 +66,18 @@ const UpvoteButton = ({
       },
     },
   })
-  const [upvote] = useMutation<VoteCommentMutation>(VOTE_COMMENT, {
-    variables: { id: comment.id, vote: 'up' },
-    optimisticResponse: {
-      voteComment: {
-        id: comment.id,
-        upvotes: comment.upvotes + 1,
-        downvotes: 0,
-        myVote: 'up' as any,
-        __typename: 'Comment',
-      },
-    },
-  })
+  // const [upvote] = useMutation<VoteCommentMutation>(VOTE_COMMENT, {
+  //   variables: { id: comment.id, vote: 'up' },
+  //   optimisticResponse: {
+  //     voteComment: {
+  //       id: comment.id,
+  //       upvotes: comment.upvotes + 1,
+  //       downvotes: 0,
+  //       myVote: 'up' as any,
+  //       __typename: 'Comment',
+  //     },
+  //   },
+  // })
 
   const likeClassNames = classNames({
     [styles.like]: true,
@@ -119,7 +119,8 @@ const UpvoteButton = ({
       textColor="greyDarker"
       textActiveColor="black"
       onClick={() => {
-        onClick ? onClick() : upvote()
+        // TODO:
+        // onClick ? onClick() : upvote()
         setPlayHeartBeat(true)
       }}
       disabled={disabled}

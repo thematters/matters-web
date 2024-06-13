@@ -106,7 +106,7 @@ export const BaseJournalCommentFeed = ({
             comment={comment}
             pinnedComment={pinnedComment}
             type={type}
-            hasPin={actionControls.hasPin}
+            hasPin={false}
             inCard={actionControls.inCard}
           />
         </section>
