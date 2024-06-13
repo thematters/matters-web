@@ -1,4 +1,5 @@
 import { useContext, useEffect } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -8,7 +9,6 @@ import {
   QueryError,
   SpinnerBlock,
   TagDigest,
-  Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -96,10 +96,9 @@ const TagsFeed = () => {
     return (
       <EmptyWarning
         description={
-          <Translate
-            zh_hant="還沒有追蹤任標籤"
-            zh_hans="还没有追踪任标签"
-            en="Not following any tag"
+          <FormattedMessage
+            defaultMessage="Not following any tag"
+            id="Zakh0i"
           />
         }
       />
