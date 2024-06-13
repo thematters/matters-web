@@ -21,7 +21,7 @@ const Edit = () => {
   useEffect(() => {
     if (editor) {
       setTimeout(() => {
-        editor.commands.focus('end')
+        editor.chain().focus().run()
       }, 3 * 1000)
     }
   }, [editor])
