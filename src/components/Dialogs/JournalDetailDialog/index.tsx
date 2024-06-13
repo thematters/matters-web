@@ -22,9 +22,7 @@ const BaseJournalDetailDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog} fixedWidth={false}>
-        {/* <Dialog.Content noMaxHeight> */}
         <DynamicContent journalId={journalId} closeDialog={closeDialog} />
-        {/* </Dialog.Content> */}
       </Dialog>
     </>
   )

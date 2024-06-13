@@ -51,7 +51,10 @@
 }
 
 .scrollContainer {
-  max-height: 70vh;
+  /* TODO: Confirm height with producion team */
+
+  /* max-height: calc(var(--ivh) - 158px); */
+  max-height: calc(90vh - 158px);
   overflow-y: auto;
 }
 
@@ -115,11 +118,15 @@
   padding: var(--sp16) var(--sp24) var(--sp16) var(--sp13);
 
   & .likeButton {
-    width: 2.75rem;
+    @mixin flex-center-all;
+
     height: 2.75rem;
+
+    /* width: 2.75rem; */
+    padding: 0 var(--sp11);
   }
 
-  & .activeButton {
+  & .editButton {
     @mixin flex-center-start;
 
     flex-grow: 1;

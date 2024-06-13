@@ -20,6 +20,7 @@
 
   .content {
     margin: var(--sp8) 0 var(--sp12);
+    cursor: pointer;
   }
 
   .assets {

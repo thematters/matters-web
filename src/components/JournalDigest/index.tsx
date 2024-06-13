@@ -1,6 +1,6 @@
 import 'photoswipe/dist/photoswipe.css'
 
-import { random } from 'lodash'
+import { useState } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 
 import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
@@ -29,7 +29,11 @@ export const JournalDigest: React.FC<JournalDigestProps> = ({
   assets,
   createdAt,
 }: JournalDigestProps) => {
-  const liked = random(0, 1, false) === 1
+  const [liked, setLiked] = useState(false)
+
+  const toggleLike = () => {
+    setLiked(!liked)
+  }
 
   const options = {
     padding: { top: 20, bottom: 40, left: 100, right: 100 },
@@ -95,11 +99,11 @@ export const JournalDigest: React.FC<JournalDigestProps> = ({
             </section>
           )}
           <footer>
-            <button>
+            <button onClick={toggleLike}>
               {liked && <Icon icon={IconLikeFill} size={20} color="redLight" />}
               {!liked && <Icon icon={IconLike} size={20} />}
             </button>
-            <button>
+            <button onClick={openDialog}>
               <Icon icon={IconComment} size={20} />
             </button>
           </footer>

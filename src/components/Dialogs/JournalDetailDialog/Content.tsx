@@ -6,6 +6,7 @@ import { FormattedMessage } from 'react-intl'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
+import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { ADD_JOURNAL_COMMENT } from '~/common/enums'
 import { storage, toPath } from '~/common/utils'
@@ -106,6 +107,18 @@ const JournalDetailDialogContent = ({
   const journal = journals.find((j) => j.id === journalId)
 
   const [comments] = useState<ThreadCommentType[]>([])
+
+  const [likeCount, setLikeCount] = useState(0)
+  const [isLiked, setIsLiked] = useState(false)
+
+  const toggleLike = () => {
+    if (isLiked) {
+      setLikeCount(likeCount - 1)
+    } else {
+      setLikeCount(likeCount + 1)
+    }
+    setIsLiked(!isLiked)
+  }
 
   useEventListener(ADD_JOURNAL_COMMENT, (payload: { [key: string]: any }) => {
     const input = payload?.input
@@ -249,17 +262,22 @@ const JournalDetailDialogContent = ({
       <footer className={styles.footer}>
         {!isEditing && (
           <>
-            <button
-              className={styles.likeButton}
-              onClick={() => {
-                console.log('like')
-              }}
-            >
-              <Icon icon={IconLike} size={22} />
-            </button>
+            <div className={styles.likeButton}>
+              <button
+                onClick={() => {
+                  toggleLike()
+                }}
+              >
+                {isLiked && (
+                  <Icon icon={IconLikeFill} size={22} color="redLight" />
+                )}
+                {!isLiked && <Icon icon={IconLike} size={22} />}
+              </button>
+              {likeCount > 0 && <span>&nbsp;{likeCount}</span>}
+            </div>
             <button
               onClick={() => setEditing(true)}
-              className={styles.activeButton}
+              className={styles.editButton}
             >
               <FormattedMessage defaultMessage="說點什麼..." id="EIoAY7" />
             </button>
