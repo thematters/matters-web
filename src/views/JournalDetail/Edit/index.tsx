@@ -21,7 +21,7 @@ const Edit = () => {
   useEffect(() => {
     if (editor) {
       setTimeout(() => {
-        editor.chain().focus().run()
+        editor.chain().focus().enter().insertContent('hello tiptap').run()
       }, 3 * 1000)
     }
   }, [editor])
