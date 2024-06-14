@@ -133,7 +133,7 @@ const BaseDropdownActions = ({
 
   const Content = () => (
     <Menu>
-      {hasCopy && <CopyCommentButton content={comment.content || ''} />}
+      <CopyCommentButton content={comment.content || ''} />
       {_hasPin && (
         <PinButton
           comment={comment}
@@ -189,7 +189,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const isDescendantComment = comment.parentComment
 
   const controls = {
-    hasCopy: viewer.id === comment.author.id,
     hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
     hasDelete: !!(isCommentAuthor && isActive),
     hasReport: !isCommentAuthor,
