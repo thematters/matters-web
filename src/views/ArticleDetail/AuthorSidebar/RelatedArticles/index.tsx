@@ -5,8 +5,13 @@ import {
   ArticleDigestAuthorSidebar,
   ArticleDigestSidebar,
   List,
+  SpinnerBlock,
+  usePublicQuery,
 } from '~/components'
-import { ArticleDetailPublicQuery } from '~/gql/graphql'
+import {
+  ArticleDetailPublicQuery,
+  AuthorSidebarRelatedArticlesQuery,
+} from '~/gql/graphql'
 
 type RelatedArticlesProps = {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -30,8 +35,29 @@ const fragments = {
   `,
 }
 
+const RELATED_ARTICLES = gql`
+  query AuthorSidebarRelatedArticles($shortHash: String) {
+    article(input: { shortHash: $shortHash }) {
+      id
+      ...AuthorSidebarRelatedArticles
+    }
+  }
+  ${fragments.article}
+`
+
 export const RelatedArticles = ({ article }: RelatedArticlesProps) => {
-  const edges = article.relatedArticles.edges
+  const { data, loading } = usePublicQuery<AuthorSidebarRelatedArticlesQuery>(
+    RELATED_ARTICLES,
+    {
+      variables: { shortHash: article.shortHash },
+    }
+  )
+
+  const edges = data?.article?.relatedArticles.edges
+
+  if (loading) {
+    return <SpinnerBlock />
+  }
 
   if (!edges || edges.length <= 0) {
     return null
