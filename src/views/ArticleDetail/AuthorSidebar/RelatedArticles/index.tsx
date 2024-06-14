@@ -5,8 +5,14 @@ import {
   ArticleDigestAuthorSidebar,
   ArticleDigestSidebar,
   List,
+  usePublicQuery,
 } from '~/components'
-import { ArticleDetailPublicQuery } from '~/gql/graphql'
+import {
+  ArticleDetailPublicQuery,
+  AuthorSidebarRelatedArticlesQuery,
+} from '~/gql/graphql'
+
+import { FeedPlaceholder } from '../Placeholder'
 
 type RelatedArticlesProps = {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -30,8 +36,29 @@ const fragments = {
   `,
 }
 
+const RELATED_ARTICLES = gql`
+  query AuthorSidebarRelatedArticles($shortHash: String) {
+    article(input: { shortHash: $shortHash }) {
+      id
+      ...AuthorSidebarRelatedArticles
+    }
+  }
+  ${fragments.article}
+`
+
 export const RelatedArticles = ({ article }: RelatedArticlesProps) => {
-  const edges = article.relatedArticles.edges
+  const { data, loading } = usePublicQuery<AuthorSidebarRelatedArticlesQuery>(
+    RELATED_ARTICLES,
+    {
+      variables: { shortHash: article.shortHash },
+    }
+  )
+
+  const edges = data?.article?.relatedArticles.edges
+
+  if (loading) {
+    return <FeedPlaceholder />
+  }
 
   if (!edges || edges.length <= 0) {
     return null

@@ -1,5 +1,7 @@
 import { ReactRenderer } from '@tiptap/react'
+import type { SuggestionProps } from '@tiptap/suggestion'
 import ApolloClient from 'apollo-client'
+import type { GetReferenceClientRect, Instance } from 'tippy.js'
 import tippy from 'tippy.js'
 
 import { KEYVALUE } from '~/common/enums'
@@ -35,7 +37,7 @@ export const makeMentionSuggestion = ({
 
   render: () => {
     let component: ReactRenderer
-    let popup: any
+    let popup: Instance[]
 
     const destroy = () => {
       if (popup) {
@@ -48,17 +50,23 @@ export const makeMentionSuggestion = ({
     }
 
     return {
-      onStart: (props: any) => {
+      onStart: (props: SuggestionProps) => {
         component = new ReactRenderer(MentionList, {
           props: {
             ...props,
             users: props.items,
-            onClick: (user: UserDigestMiniUserFragment) =>
+            onClick: (user: UserDigestMiniUserFragment) => {
               props.command({
                 id: user.id,
                 userName: user.userName,
                 displayName: user.displayName,
-              }),
+              })
+              props.editor.commands.focus()
+            },
+            onHide: () => {
+              popup[0]?.hide()
+              props.editor.commands.focus()
+            },
           },
           editor: props.editor,
         })
@@ -68,7 +76,7 @@ export const makeMentionSuggestion = ({
         }
 
         popup = tippy('body', {
-          getReferenceClientRect: props.clientRect,
+          getReferenceClientRect: props.clientRect as GetReferenceClientRect,
           appendTo: () => document.body,
           content: component.element,
           showOnCreate: true,
@@ -98,7 +106,9 @@ export const makeMentionSuggestion = ({
       },
 
       onKeyDown(props: any) {
-        if (popup && props.event.key.toLowerCase() === KEYVALUE.escape) {
+        const key = props.event.key.toLowerCase()
+
+        if (popup && key === KEYVALUE.escape) {
           popup[0].hide()
           return true
         }

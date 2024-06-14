@@ -96,6 +96,9 @@ export interface ClickButtonProp {
     | 'supporter_list'
     | 'user_avatar'
     | 'user_name'
+    | 'hottest'
+    | 'icymi'
+    | 'newest'
   pageType?: PageType
   pageComponent?: PageComponent
 }
@@ -346,6 +349,7 @@ type TagFeedType =
 type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
 
 type PageType =
+  | 'home'
   | 'article_detail'
   | 'article_history'
   | 'user_profile'
@@ -353,6 +357,7 @@ type PageType =
   | 'edit_draft'
 
 type PageComponent =
+  | 'home_feed_tab'
   | 'article_meta'
   | 'article_end'
   | 'article_end_toolbar'
