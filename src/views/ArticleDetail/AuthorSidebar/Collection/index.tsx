@@ -27,7 +27,7 @@ type CollectionProps = {
   article: ArticleDetailPublicQuery['article']
 }
 
-export const Collection = ({ article, collectionId }: CollectionProps) => {
+const Collection = ({ article, collectionId }: CollectionProps) => {
   /**
    * Data Fetching
    */
@@ -132,3 +132,5 @@ export const Collection = ({ article, collectionId }: CollectionProps) => {
     </section>
   )
 }
+
+export default Collection
