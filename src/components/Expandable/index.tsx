@@ -47,7 +47,7 @@ const calculateCommentContentHeight = (element: HTMLElement): number => {
   if (contentNode) {
     contentNode.childNodes.forEach((child) => {
       const e = child as HTMLElement
-      height += e.clientHeight
+      height += e.getBoundingClientRect().height
     })
   }
   return height
