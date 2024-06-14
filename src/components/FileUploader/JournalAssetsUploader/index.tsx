@@ -31,6 +31,7 @@ type JournalAssetsUploaderProps = {
   removeAsset: (asset: JournalAsset) => void
   fieldId?: string
   isEditing?: boolean
+  isInPage?: boolean
   onClick?: () => void
 }
 
@@ -48,6 +49,7 @@ const handleFileValidation = async (files: File[]): Promise<File[]> => {
 export const JournalAssetsUploader = memo(function JournalAssetsUploader({
   fieldId: _fieldId,
   isEditing,
+  isInPage,
   assets,
   addAssets,
   removeAsset,
@@ -133,12 +135,21 @@ export const JournalAssetsUploader = memo(function JournalAssetsUploader({
       ))}
       {assets.length < UPLOAD_JOURNAL_ASSET_COUNT_LIMIT && (
         <label className={styles.label} htmlFor={fieldId}>
-          {assets.length === 0 && (
-            <div className={imageButtonClasses}>
-              <Icon icon={IconImage} size={22} color="greyDarker" />
-            </div>
+          {!isInPage && (
+            <>
+              {assets.length === 0 && (
+                <div className={imageButtonClasses}>
+                  <Icon icon={IconImage} size={22} color="greyDarker" />
+                </div>
+              )}
+              {assets.length > 0 && (
+                <div className={styles.addAssetButton}>
+                  <Icon icon={IconCirclePlus} size={32} color="greyDarker" />
+                </div>
+              )}
+            </>
           )}
-          {assets.length > 0 && (
+          {isInPage && (
             <div className={styles.addAssetButton}>
               <Icon icon={IconCirclePlus} size={32} color="greyDarker" />
             </div>

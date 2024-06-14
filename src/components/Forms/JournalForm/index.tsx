@@ -8,7 +8,7 @@ import {
   MAX_JOURNAL_CONTENT_LENGTH,
   UPLOAD_JOURNAL_ASSET_COUNT_LIMIT,
 } from '~/common/enums'
-import { stripHtml } from '~/common/utils'
+import { getImageDimensions, stripHtml } from '~/common/utils'
 import { Button, SpinnerBlock, TextIcon } from '~/components'
 import JournalEditor from '~/components/Editor/Journal'
 import {
@@ -19,24 +19,6 @@ import {
 import styles from './styles.module.css'
 
 export interface JournalFormProps {}
-
-interface Dimensions {
-  width: number
-  height: number
-}
-
-const getImageDimensions = (file: File): Promise<Dimensions> => {
-  return new Promise((resolve, reject) => {
-    const img = new Image()
-    img.onload = () => {
-      resolve({ width: img.width, height: img.height })
-    }
-    img.onerror = reject
-
-    const url = URL.createObjectURL(file)
-    img.src = url
-  })
-}
 
 export const JournalForm: React.FC<JournalFormProps> = ({}) => {
   const intl = useIntl()

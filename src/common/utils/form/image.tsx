@@ -86,3 +86,20 @@ export const validateImage = (image: File, isAvatar: boolean = false) =>
       }
     })
   })
+
+interface Dimensions {
+  width: number
+  height: number
+}
+export const getImageDimensions = (file: File): Promise<Dimensions> => {
+  return new Promise((resolve, reject) => {
+    const img = new Image()
+    img.onload = () => {
+      resolve({ width: img.width, height: img.height })
+    }
+    img.onerror = reject
+
+    const url = URL.createObjectURL(file)
+    img.src = url
+  })
+}
