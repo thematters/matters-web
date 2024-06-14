@@ -5,13 +5,14 @@ import {
   ArticleDigestAuthorSidebar,
   ArticleDigestSidebar,
   List,
-  SpinnerBlock,
   usePublicQuery,
 } from '~/components'
 import {
   ArticleDetailPublicQuery,
   AuthorSidebarRelatedArticlesQuery,
 } from '~/gql/graphql'
+
+import { FeedPlaceholder } from '../Placeholder'
 
 type RelatedArticlesProps = {
   article: NonNullable<ArticleDetailPublicQuery['article']>
@@ -56,7 +57,7 @@ export const RelatedArticles = ({ article }: RelatedArticlesProps) => {
   const edges = data?.article?.relatedArticles.edges
 
   if (loading) {
-    return <SpinnerBlock />
+    return <FeedPlaceholder />
   }
 
   if (!edges || edges.length <= 0) {
