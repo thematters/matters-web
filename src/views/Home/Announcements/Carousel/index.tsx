@@ -1,5 +1,12 @@
 import useEmblaCarousel from 'embla-carousel-react'
-import { useCallback, useContext, useEffect, useRef, useState } from 'react'
+import {
+  type MouseEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 
 import {
   BannerExposureTracker,
@@ -60,7 +67,7 @@ const Carousel = ({ items }: CarouselProps) => {
     }
   }
 
-  const onCaptureClick = (event: any) => {
+  const onCaptureClick = (event: MouseEvent) => {
     if (scrolling.current) {
       event.preventDefault()
       event.stopPropagation()
