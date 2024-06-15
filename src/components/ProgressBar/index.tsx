@@ -6,7 +6,7 @@ const ProgressBar = () => {
   const router = useRouter()
 
   const showAfterMs = 300
-  let timer: any = null
+  let timer: ReturnType<typeof setTimeout>
 
   const routeChangeStart = () => {
     clearTimeout(timer)
