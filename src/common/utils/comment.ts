@@ -15,6 +15,10 @@ interface Comment {
   } | null
 }
 
+type Response = {
+  articleState?: string
+}
+
 const filterComment = (comment: Comment) => {
   // skip if comment's state is active or collapse
   if (
@@ -48,10 +52,6 @@ const filterComment = (comment: Comment) => {
 
 export function filterComments<T>(comments: Comment[]): T[] {
   return comments.filter(filterComment) as any
-}
-
-interface Response {
-  articleState?: string
 }
 
 /**
