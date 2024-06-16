@@ -50,20 +50,26 @@ export function filterComments<T>(comments: Comment[]): T[] {
   return comments.filter(filterComment) as any
 }
 
+interface Response {
+  articleState?: string
+}
+
 /**
  * Filter out comment that banned/archived and hasn't descendants
  *
  * @param responses
  */
-export function filterResponses<T>(responses: any[]): T[] {
-  return responses.filter((response) => {
+export function filterResponses<T extends Response | Comment>(
+  responses: T[]
+): T[] {
+  return responses.filter((response: T) => {
     // article
     if (_has(response, 'articleState')) {
       return true
     }
 
     // comment
-    return filterComment(response)
+    return filterComment(response as Comment)
   })
 }
 
