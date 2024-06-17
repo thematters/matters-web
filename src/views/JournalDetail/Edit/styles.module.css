@@ -26,17 +26,16 @@
 
 .form {
   position: relative;
-  max-height: 9999rem;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(var(--ivh) * 100 - 62px);
   padding: var(--sp12) 0;
-  overflow: hidden;
 }
 
 .content {
   @mixin hide-scrollbar;
 
   min-height: 6.5rem;
-
-  /* max-height: calc(24px + 3.5 * 26.25px); */
   padding: var(--sp4) var(--sp16);
   margin-bottom: var(--sp8);
   overflow: scroll;
