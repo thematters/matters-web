@@ -28,7 +28,6 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  max-height: calc(var(--ivh) * 100 - 62px);
   padding: var(--sp12) 0;
 }
 
@@ -36,9 +35,15 @@
   @mixin hide-scrollbar;
 
   min-height: 6.5rem;
+  max-height: calc(var(--ivh) * 100 - 62px - 96px);
   padding: var(--sp4) var(--sp16);
   margin-bottom: var(--sp8);
   overflow: scroll;
+
+  & :global(.ProseMirror),
+  & :global(.tiptap) {
+    min-height: 6.5rem;
+  }
 }
 
 .footer {
