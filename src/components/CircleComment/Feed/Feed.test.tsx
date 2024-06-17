@@ -2,12 +2,12 @@ import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
 import { cleanup, render, screen } from '~/common/utils/test'
-import { Comment } from '~/components'
+import { CircleCommentFeed } from '~/components'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
-describe('<Comemnt.Feed>', () => {
+describe('<CircleCommentFeed>', () => {
   it('should render a Comment.Feed', () => {
-    render(<Comment.Feed comment={MOCK_COMMENT} type="article" />)
+    render(<CircleCommentFeed comment={MOCK_COMMENT} type="article" />)
 
     const $digest = screen.getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)
     expect($digest).toBeInTheDocument()
@@ -23,7 +23,7 @@ describe('<Comemnt.Feed>', () => {
 
   it('should render a Comment.Feed with replyTo', () => {
     render(
-      <Comment.Feed
+      <CircleCommentFeed
         comment={{
           ...MOCK_COMMENT,
           replyTo: {
@@ -47,7 +47,7 @@ describe('<Comemnt.Feed>', () => {
   it('should render a Comment.Feed without replyTo', () => {
     // not a replyTo
     render(
-      <Comment.Feed
+      <CircleCommentFeed
         comment={{
           ...MOCK_COMMENT,
           replyTo: null,
@@ -64,7 +64,7 @@ describe('<Comemnt.Feed>', () => {
     // has parentComment
     cleanup()
     render(
-      <Comment.Feed
+      <CircleCommentFeed
         comment={{
           ...MOCK_COMMENT,
           replyTo: null,

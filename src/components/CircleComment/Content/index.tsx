@@ -27,14 +27,14 @@ interface ContentProps {
 const fragments = {
   comment: {
     public: gql`
-      fragment ContentCommentPublic on Comment {
+      fragment CircleCommentContentCommentPublic on Comment {
         id
         content
         state
       }
     `,
     private: gql`
-      fragment ContentCommentPrivate on Comment {
+      fragment CircleCommentContentCommentPrivate on Comment {
         id
         author {
           id
@@ -45,7 +45,7 @@ const fragments = {
   },
 }
 
-const Content = ({
+export const CircleCommentContent = ({
   comment,
   type,
   size,
@@ -139,6 +139,4 @@ const Content = ({
   return null
 }
 
-Content.fragments = fragments
-
-export default Content
+CircleCommentContent.fragments = fragments

@@ -3,11 +3,11 @@ import { useState } from 'react'
 import { filterComments } from '~/common/utils'
 import { CommentFormType } from '~/components'
 import {
-  ThreadCommentCommentPrivateFragment,
-  ThreadCommentCommentPublicFragment,
+  CircleCommentThreadCommentCommentPrivateFragment,
+  CircleCommentThreadCommentCommentPublicFragment,
 } from '~/gql/graphql'
 
-import Feed from '../Feed'
+import { CircleCommentFeed } from '../Feed'
 import ExpandButton from './ExpandButton'
 import { fragments } from './gql'
 import styles from './styles.module.css'
@@ -25,14 +25,14 @@ interface ThreadCommentControls {
   disabled?: boolean
 }
 
-type Comment = ThreadCommentCommentPublicFragment &
-  Partial<ThreadCommentCommentPrivateFragment>
+type Comment = CircleCommentThreadCommentCommentPublicFragment &
+  Partial<CircleCommentThreadCommentCommentPrivateFragment>
 
 type ThreadCommentProps = {
   comment: Comment
 } & ThreadCommentControls
 
-export const ThreadComment = ({
+export const CircleThreadComment = ({
   comment,
   type,
   defaultExpand,
@@ -46,7 +46,7 @@ export const ThreadComment = ({
 
   return (
     <section className={styles.container}>
-      <Feed
+      <CircleCommentFeed
         comment={comment}
         type={type}
         hasReply
@@ -61,7 +61,7 @@ export const ThreadComment = ({
             .slice(0, expand ? undefined : COLLAPSE_COUNT)
             .map((descendantComment) => (
               <li key={descendantComment.id}>
-                <Feed
+                <CircleCommentFeed
                   comment={descendantComment}
                   type={type}
                   avatarSize={24}
@@ -85,4 +85,4 @@ export const ThreadComment = ({
   )
 }
 
-ThreadComment.fragments = fragments
+CircleThreadComment.fragments = fragments

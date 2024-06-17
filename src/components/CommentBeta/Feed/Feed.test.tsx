@@ -2,12 +2,12 @@ import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
 import { render, screen } from '~/common/utils/test'
-import { Comment } from '~/components'
+import { CommentBeta } from '~/components'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
 describe('<Comemnt.Feed>', () => {
   it('should render a Comment.Feed', () => {
-    render(<Comment.Feed comment={MOCK_COMMENT} type="article" />)
+    render(<CommentBeta.Feed comment={MOCK_COMMENT} type="article" />)
 
     const $digest = screen.getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)
     expect($digest).toBeInTheDocument()

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
 import { LinkWrapper, toast } from '~/components'
-import CommentContent from '~/components/Comment/Content'
+import CommentContent from '~/components/CommentBeta/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
 import NoticeContentDigest from './NoticeContentDigest'

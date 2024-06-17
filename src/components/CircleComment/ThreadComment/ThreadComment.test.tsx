@@ -3,12 +3,12 @@ import { describe, expect, it } from 'vitest'
 import { render, screen } from '~/common/utils/test'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
-import { ThreadComment } from './'
+import { CircleThreadComment } from './'
 
 describe('<ThreadComment>', () => {
   it('should render a ThreadComment', () => {
     render(
-      <ThreadComment
+      <CircleThreadComment
         comment={{
           ...MOCK_COMMENT,
           comments: {
@@ -41,7 +41,7 @@ describe('<ThreadComment>', () => {
 
   it('should render a ThreadComment without expand', () => {
     render(
-      <ThreadComment
+      <CircleThreadComment
         comment={{
           ...MOCK_COMMENT,
           comments: {

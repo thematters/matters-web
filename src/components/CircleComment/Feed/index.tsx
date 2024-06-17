@@ -4,18 +4,16 @@ import React from 'react'
 import { TEST_ID } from '~/common/enums'
 import { AvatarSize, CommentFormType, Media, UserDigest } from '~/components'
 import {
-  FeedCommentPrivateFragment,
-  FeedCommentPublicFragment,
-  RefetchCommentQuery,
+  CircleCommentFeedCommentPrivateFragment,
+  CircleCommentFeedCommentPublicFragment,
+  RefetchCircleCommentQuery,
 } from '~/gql/graphql'
 
-import Content from '../Content'
-import DonatorLabel from '../DonatorLabel'
+import { CircleCommentContent } from '../Content'
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
-import PinnedLabel from '../PinnedLabel'
 import ReplyTo from '../ReplyTo'
-import { fragments, REFETCH_COMMENT } from './gql'
+import { fragments, REFETCH_CIRCLE_COMMENT } from './gql'
 import styles from './styles.module.css'
 
 export type CommentControls = {
@@ -25,11 +23,12 @@ export type CommentControls = {
   DropdownActionsControls
 
 export type CommentProps = {
-  comment: FeedCommentPublicFragment & Partial<FeedCommentPrivateFragment>
+  comment: CircleCommentFeedCommentPublicFragment &
+    Partial<CircleCommentFeedCommentPrivateFragment>
   type: CommentFormType
 } & CommentControls
 
-export const BaseCommentFeed = ({
+const BaseCommentFeed = ({
   comment,
   type,
   avatarSize = 32,
@@ -37,9 +36,12 @@ export const BaseCommentFeed = ({
   replySubmitCallback,
   ...actionControls
 }: CommentProps) => {
-  const [refetchComment] = useLazyQuery<RefetchCommentQuery>(REFETCH_COMMENT, {
-    fetchPolicy: 'network-only',
-  })
+  const [refetchComment] = useLazyQuery<RefetchCircleCommentQuery>(
+    REFETCH_CIRCLE_COMMENT,
+    {
+      fetchPolicy: 'network-only',
+    }
+  )
 
   const { id, replyTo, author, parentComment } = comment
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
@@ -70,8 +72,6 @@ export const BaseCommentFeed = ({
         />
 
         <section className={styles.right}>
-          <DonatorLabel comment={comment} />
-          <PinnedLabel comment={comment} />
           <DropdownActions
             comment={comment}
             type={type}
@@ -89,10 +89,20 @@ export const BaseCommentFeed = ({
 
       <section className={styles.contentContainer}>
         <Media at="sm">
-          <Content comment={comment} type={type} size={15} limit={17} />
+          <CircleCommentContent
+            comment={comment}
+            type={type}
+            size={15}
+            limit={17}
+          />
         </Media>
         <Media greaterThan="sm">
-          <Content comment={comment} type={type} size={15} limit={13} />
+          <CircleCommentContent
+            comment={comment}
+            type={type}
+            size={15}
+            limit={13}
+          />
         </Media>
 
         <FooterActions
@@ -113,7 +123,7 @@ type MemoizedCommentFeed = React.MemoExoticComponent<React.FC<CommentProps>> & {
   fragments: typeof fragments
 }
 
-const CommentFeed = React.memo(
+export const CircleCommentFeed = React.memo(
   BaseCommentFeed,
   ({ comment: prevComment, disabled: prevDisabled }, { comment, disabled }) => {
     return (
@@ -128,6 +138,4 @@ const CommentFeed = React.memo(
   }
 ) as MemoizedCommentFeed
 
-CommentFeed.fragments = fragments
-
-export default CommentFeed
+CircleCommentFeed.fragments = fragments

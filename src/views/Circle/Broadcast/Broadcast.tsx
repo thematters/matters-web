@@ -12,13 +12,13 @@ import {
   parseCommentHash,
 } from '~/common/utils'
 import {
+  CircleThreadComment,
   CommentForm,
   EmptyComment,
   InfiniteScroll,
   List,
   QueryError,
   SpinnerBlock,
-  ThreadComment,
   Throw404,
   toast,
   usePublicQuery,
@@ -243,7 +243,7 @@ const CricleBroadcast = () => {
           <List spacing={['xloose', 0]}>
             {comments.map((comment) => (
               <List.Item key={comment.id}>
-                <ThreadComment
+                <CircleThreadComment
                   comment={comment}
                   type="circleBroadcast"
                   defaultExpand={comment.id === parentId && !!descendantId}
