@@ -26,23 +26,20 @@
 
 .form {
   position: relative;
-  display: flex;
-  flex-direction: column;
   padding: var(--sp12) 0;
 }
 
 .content {
   @mixin hide-scrollbar;
 
-  min-height: 6.5rem;
-  max-height: calc(var(--ivh) * 100 - 62px - 108px);
+  height: calc(var(--ivh) * 100 - 62px - 108px);
   padding: var(--sp4) var(--sp16);
   margin-bottom: var(--sp8);
   overflow: scroll;
 
   & :global(.ProseMirror),
   & :global(.tiptap) {
-    min-height: 6.5rem;
+    height: calc(var(--ivh) * 100 - 62px - 108px);
   }
 }
 
