@@ -7,8 +7,8 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 import ReplyButton from './'
 
 describe('<Comemnt/FooterActions/ReplyButton>', () => {
-  it('should render a Comment/FooterActions/ReplyButton', () => {
-    render(<ReplyButton comment={MOCK_COMMENT} type="article" inCard />)
+  it('should render a CircleComment/FooterActions/ReplyButton', () => {
+    render(<ReplyButton comment={MOCK_COMMENT} type="circleBroadcast" inCard />)
 
     const $button = screen.getByRole('button', { name: 'Write a comment' })
     expect($button).toBeInTheDocument()
@@ -18,13 +18,13 @@ describe('<Comemnt/FooterActions/ReplyButton>', () => {
     expect(screen.getByTestId(TEST_ID.DIALOG_COMMENT_FORM)).toBeInTheDocument()
   })
 
-  it('should render a Comment/FooterActions/ReplyButton with custom onClick', () => {
+  it('should render a CircleComment/FooterActions/ReplyButton with custom onClick', () => {
     const onClick = vi.fn()
 
     render(
       <ReplyButton
         comment={MOCK_COMMENT}
-        type="article"
+        type="circleBroadcast"
         onClick={onClick}
         inCard
       />
@@ -37,13 +37,13 @@ describe('<Comemnt/FooterActions/ReplyButton>', () => {
     expect(onClick).toHaveBeenCalled()
   })
 
-  it('should render a disabled Comment/FooterActions/ReplyButton ', () => {
+  it('should render a disabled CircleComment/FooterActions/ReplyButton ', () => {
     const onClick = vi.fn()
 
     render(
       <ReplyButton
         comment={MOCK_COMMENT}
-        type="article"
+        type="circleBroadcast"
         onClick={onClick}
         disabled
         inCard

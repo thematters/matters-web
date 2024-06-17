@@ -9,15 +9,15 @@ import {
   VOTE_COMMENT,
 } from '~/components/GQL/mutations/voteComment'
 import {
-  DownvoteCommentPrivateFragment,
-  DownvoteCommentPublicFragment,
+  CircleCommentDownvoteCommentPrivateFragment,
+  CircleCommentDownvoteCommentPublicFragment,
   UnvoteCommentMutation,
   VoteCommentMutation,
 } from '~/gql/graphql'
 
 interface DownvoteButtonProps {
-  comment: DownvoteCommentPublicFragment &
-    Partial<DownvoteCommentPrivateFragment>
+  comment: CircleCommentDownvoteCommentPublicFragment &
+    Partial<CircleCommentDownvoteCommentPrivateFragment>
   onClick?: () => void
   disabled?: boolean
   inCard: boolean
@@ -26,14 +26,14 @@ interface DownvoteButtonProps {
 const fragments = {
   comment: {
     public: gql`
-      fragment DownvoteCommentPublic on Comment {
+      fragment CircleCommentDownvoteCommentPublic on Comment {
         id
         upvotes
         downvotes
       }
     `,
     private: gql`
-      fragment DownvoteCommentPrivate on Comment {
+      fragment CircleCommentDownvoteCommentPrivate on Comment {
         id
         myVote
       }

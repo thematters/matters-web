@@ -8,8 +8,8 @@ import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
   Button,
-  CommentFormDialog,
-  CommentFormType,
+  CircleCommentFormDialog,
+  CircleCommentFormType,
   Dropdown,
   Icon,
   Menu,
@@ -19,10 +19,10 @@ import {
 } from '~/components'
 import { BlockUser } from '~/components/BlockUser'
 import { BlockUserDialogProps } from '~/components/BlockUser/Dialog'
-import type { CommentFormDialogProps } from '~/components/Dialogs/CommentFormDialog'
+import type { CircleCommentFormDialogProps } from '~/components/Dialogs/CircleCommentFormDialog'
 import {
-  DropdownActionsCommentPrivateFragment,
-  DropdownActionsCommentPublicFragment,
+  CircleCommentDropdownActionsCommentPrivateFragment,
+  CircleCommentDropdownActionsCommentPublicFragment,
 } from '~/gql/graphql'
 
 import CollapseComment from './CollapseComment'
@@ -45,9 +45,9 @@ export type DropdownActionsControls = {
 }
 
 type DropdownActionsProps = {
-  comment: DropdownActionsCommentPublicFragment &
-    Partial<DropdownActionsCommentPrivateFragment>
-  type: CommentFormType
+  comment: CircleCommentDropdownActionsCommentPublicFragment &
+    Partial<CircleCommentDropdownActionsCommentPrivateFragment>
+  type: CircleCommentFormType
 } & DropdownActionsControls
 
 interface Controls {
@@ -71,7 +71,7 @@ type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 const fragments = {
   comment: {
     public: gql`
-      fragment DropdownActionsCommentPublic on Comment {
+      fragment CircleCommentDropdownActionsCommentPublic on Comment {
         id
         state
         content
@@ -104,7 +104,7 @@ const fragments = {
       ${BlockUser.fragments.user.public}
     `,
     private: gql`
-      fragment DropdownActionsCommentPrivate on Comment {
+      fragment CircleCommentDropdownActionsCommentPrivate on Comment {
         id
         author {
           id
@@ -232,9 +232,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
     return null
   }
 
-  const WithEditComment = withDialog<Omit<CommentFormDialogProps, 'children'>>(
+  const WithEditComment = withDialog<
+    Omit<CircleCommentFormDialogProps, 'children'>
+  >(
     BaseDropdownActions,
-    CommentFormDialog,
+    CircleCommentFormDialog,
     {
       articleId: article?.id,
       circleId: circle?.id,
@@ -244,14 +246,14 @@ const DropdownActions = (props: DropdownActionsProps) => {
       title: article ? (
         <FormattedMessage
           defaultMessage="Edit Comment"
-          id="9OIqBr"
-          description="src/components/Comment/DropdownActions/index.tsx"
+          id="ZJskDG"
+          description="src/components/CircleComment/DropdownActions/index.tsx"
         />
       ) : (
         <FormattedMessage
           defaultMessage="Edit"
-          id="LYl9+i"
-          description="src/components/Comment/DropdownActions/index.tsx"
+          id="9+vzKn"
+          description="src/components/CircleComment/DropdownActions/index.tsx"
         />
       ),
     },

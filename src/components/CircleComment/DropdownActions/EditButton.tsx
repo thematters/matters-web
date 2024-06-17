@@ -13,8 +13,8 @@ const EditButton = ({ openEditCommentDialog }: EditButtonProps) => {
       text={
         <FormattedMessage
           defaultMessage="Edit"
-          id="mikY/9"
-          description="src/components/Comment/DropdownActions/EditButton.tsx"
+          id="6vgoSf"
+          description="src/components/CircleComment/DropdownActions/EditButton.tsx"
         />
       }
       icon={<Icon icon={IconEdit} size={20} />}

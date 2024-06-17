@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
 import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
-import { CommentFormType, Icon, Menu, useMutation } from '~/components'
+import { CircleCommentFormType, Icon, Menu, useMutation } from '~/components'
 import { updateCircleBroadcast } from '~/components/GQL'
 import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
 import {
@@ -35,7 +35,7 @@ const PinButton = ({
   type,
   comment,
 }: {
-  type: CommentFormType
+  type: CircleCommentFormType
   comment: PinButtonCommentFragment
 }) => {
   const article =
@@ -104,14 +104,14 @@ const PinButton = ({
           circle ? (
             <FormattedMessage
               defaultMessage="Unpin Broadcast"
-              id="RFzVUD"
-              description="src/components/Comment/DropdownActions/PinButton.tsx"
+              id="DrBuEI"
+              description="src/components/CircleComment/DropdownActions/PinButton.tsx"
             />
           ) : (
             <FormattedMessage
               defaultMessage="Unpin Comment"
-              id="X+Xvgq"
-              description="src/components/Comment/DropdownActions/PinButton.tsx"
+              id="Zya3dV"
+              description="src/components/CircleComment/DropdownActions/PinButton.tsx"
             />
           )
         }
@@ -130,14 +130,14 @@ const PinButton = ({
         circle ? (
           <FormattedMessage
             defaultMessage="Pin Broadcast"
-            id="AGcU5J"
-            description="src/components/Comment/DropdownActions/PinButton.tsx"
+            id="8gRHks"
+            description="src/components/CircleComment/DropdownActions/PinButton.tsx"
           />
         ) : (
           <FormattedMessage
             defaultMessage="Pin Comment"
-            id="jJ1Brc"
-            description="src/components/Comment/DropdownActions/PinButton.tsx"
+            id="uWUeYl"
+            description="src/components/CircleComment/DropdownActions/PinButton.tsx"
           />
         )
       }

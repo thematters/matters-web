@@ -7,12 +7,12 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 
 import DropdownActions from './'
 
-describe('<Comment/DropdownActions>', () => {
+describe('<CircleComment/DropdownActions>', () => {
   it('should not render dropdown actions if comment is archived', async () => {
     render(
       <DropdownActions
         comment={{ ...MOCK_COMMENT, state: CommentState.Archived }}
-        type="article"
+        type="circleBroadcast"
       />
     )
     const $button = screen.queryByLabelText('More Actions')
@@ -24,7 +24,7 @@ describe('<Comment/DropdownActions>', () => {
     render(
       <DropdownActions
         comment={{ ...MOCK_COMMENT, pinned: false, parentComment: null }}
-        type="article"
+        type="circleBroadcast"
         hasPin
       />
     )
@@ -41,7 +41,7 @@ describe('<Comment/DropdownActions>', () => {
     render(
       <DropdownActions
         comment={{ ...MOCK_COMMENT, pinned: true, parentComment: null }}
-        type="article"
+        type="circleBroadcast"
         hasPin
       />
     )
@@ -66,7 +66,7 @@ describe('<Comment/DropdownActions>', () => {
           pinned: false,
           parentComment: null,
         }}
-        type="article"
+        type="circleBroadcast"
         hasPin
       />
     )
@@ -82,7 +82,7 @@ describe('<Comment/DropdownActions>', () => {
     render(
       <DropdownActions
         comment={{ ...MOCK_COMMENT, state: CommentState.Active }}
-        type="article"
+        type="circleBroadcast"
       />
     )
 
@@ -102,7 +102,7 @@ describe('<Comment/DropdownActions>', () => {
           author: { ...MOCK_COMMENT.author, id: 'another_user' },
           state: CommentState.Active,
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
     const $button = screen.getByLabelText('More Actions')
@@ -118,7 +118,7 @@ describe('<Comment/DropdownActions>', () => {
     render(
       <DropdownActions
         comment={{ ...MOCK_COMMENT, state: CommentState.Active }}
-        type="article"
+        type="circleBroadcast"
       />
     )
 
@@ -143,7 +143,7 @@ describe('<Comment/DropdownActions>', () => {
           ...MOCK_COMMENT,
           author: { ...MOCK_COMMENT.author, id: 'another-user' },
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
 
@@ -170,7 +170,7 @@ describe('<Comment/DropdownActions>', () => {
           ...MOCK_COMMENT,
           author: { ...MOCK_COMMENT.author, id: 'another-user' },
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
 
@@ -198,7 +198,7 @@ describe('<Comment/DropdownActions>', () => {
           author: { ...MOCK_COMMENT.author, id: 'another-user' },
           state: CommentState.Collapsed,
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
 

@@ -36,8 +36,8 @@ const UncollapseButton = ({ commentId }: { commentId: string }) => {
       text={
         <FormattedMessage
           defaultMessage="Uncollapse"
-          id="k1SWZ2"
-          description="src/components/Comment/DropdownActions/UncollapseButton.tsx"
+          id="g//2O2"
+          description="src/components/CircleComment/DropdownActions/UncollapseButton.tsx"
         />
       }
       icon={<Icon icon={IconExpand} size={20} />}

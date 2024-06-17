@@ -3,10 +3,10 @@ import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
-import { CommentFormType, toast, ViewerContext } from '~/components'
+import { CircleCommentFormType, toast, ViewerContext } from '~/components'
 import {
-  FooterActionsCommentPrivateFragment,
-  FooterActionsCommentPublicFragment,
+  CircleCommentFooterActionsCommentPrivateFragment,
+  CircleCommentFooterActionsCommentPublicFragment,
 } from '~/gql/graphql'
 
 import CreatedAt, { CreatedAtControls } from '../CreatedAt'
@@ -26,21 +26,21 @@ export type FooterActionsControls = {
   Pick<ReplyButtonProps, 'replySubmitCallback'>
 
 export type FooterActionsProps = {
-  comment: FooterActionsCommentPublicFragment &
-    Partial<FooterActionsCommentPrivateFragment>
-  type: CommentFormType
+  comment: CircleCommentFooterActionsCommentPublicFragment &
+    Partial<CircleCommentFooterActionsCommentPrivateFragment>
+  type: CircleCommentFormType
 } & FooterActionsControls
 
 const fragments = {
   comment: {
     public: gql`
-      fragment FooterActionsCommentPublic on Comment {
+      fragment CircleCommentFooterActionsCommentPublic on Comment {
         id
         state
         ...CreatedAtComment
-        ...ReplyComemnt
-        ...UpvoteCommentPublic
-        ...DownvoteCommentPublic
+        ...CircleCommentReplyComemnt
+        ...CircleCommentUpvoteCommentPublic
+        ...CircleCommentDownvoteCommentPublic
       }
       ${CreatedAt.fragments.comment}
       ${ReplyButton.fragments.comment}
@@ -48,7 +48,7 @@ const fragments = {
       ${DownvoteButton.fragments.comment.public}
     `,
     private: gql`
-      fragment FooterActionsCommentPrivate on Comment {
+      fragment CircleCommentFooterActionsCommentPrivate on Comment {
         id
         node {
           ... on Circle {
@@ -67,8 +67,8 @@ const fragments = {
             }
           }
         }
-        ...UpvoteCommentPrivate
-        ...DownvoteCommentPrivate
+        ...CircleCommentUpvoteCommentPrivate
+        ...CircleCommentDownvoteCommentPrivate
         ...CreatedAtComment
       }
       ${CreatedAt.fragments.comment}

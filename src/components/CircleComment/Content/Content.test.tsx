@@ -8,7 +8,9 @@ import { CircleCommentContent } from './'
 
 describe('<Comemnt.Content>', () => {
   it('should render a Comment.Content', () => {
-    render(<CircleCommentContent comment={MOCK_COMMENT} type="article" />)
+    render(
+      <CircleCommentContent comment={MOCK_COMMENT} type="circleBroadcast" />
+    )
 
     const $content = screen.getByText(MOCK_COMMENT.content)
     expect($content).toBeInTheDocument()
@@ -23,7 +25,7 @@ describe('<Comemnt.Content>', () => {
           state: CommentState.Collapsed,
           author: { ...MOCK_COMMENT.author, isBlocked: false },
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
     expect(
@@ -38,7 +40,7 @@ describe('<Comemnt.Content>', () => {
           state: CommentState.Active,
           author: { ...MOCK_COMMENT.author, isBlocked: true },
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
     expect(screen.getByText('You have blocked that user')).toBeInTheDocument()
@@ -51,7 +53,7 @@ describe('<Comemnt.Content>', () => {
           ...MOCK_COMMENT,
           state: CommentState.Banned,
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
     expect(
@@ -68,7 +70,7 @@ describe('<Comemnt.Content>', () => {
           ...MOCK_COMMENT,
           state: CommentState.Archived,
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
     expect(

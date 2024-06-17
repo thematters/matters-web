@@ -12,8 +12,8 @@ import {
   parseCommentHash,
 } from '~/common/utils'
 import {
+  CircleCommentForm,
   CircleThreadComment,
-  CommentForm,
   EmptyComment,
   InfiniteScroll,
   List,
@@ -210,7 +210,7 @@ const CricleBroadcast = () => {
       <section className={styles.broadcast}>
         {isOwner && (
           <header className={styles.header}>
-            <CommentForm
+            <CircleCommentForm
               circleId={circle?.id}
               type="circleBroadcast"
               placeholder={intl.formatMessage({

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { filterComments } from '~/common/utils'
-import { CommentFormType } from '~/components'
+import { CircleCommentFormType } from '~/components'
 import {
   CircleCommentThreadCommentCommentPrivateFragment,
   CircleCommentThreadCommentCommentPublicFragment,
@@ -15,7 +15,7 @@ import styles from './styles.module.css'
 const COLLAPSE_COUNT = 2
 
 interface ThreadCommentControls {
-  type: CommentFormType
+  type: CircleCommentFormType
   defaultExpand?: boolean
   hasPin?: boolean
   hasLink?: boolean

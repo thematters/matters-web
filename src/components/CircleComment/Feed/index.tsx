@@ -2,7 +2,12 @@ import { useLazyQuery } from '@apollo/react-hooks'
 import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { AvatarSize, CommentFormType, Media, UserDigest } from '~/components'
+import {
+  AvatarSize,
+  CircleCommentFormType,
+  Media,
+  UserDigest,
+} from '~/components'
 import {
   CircleCommentFeedCommentPrivateFragment,
   CircleCommentFeedCommentPublicFragment,
@@ -16,17 +21,17 @@ import ReplyTo from '../ReplyTo'
 import { fragments, REFETCH_CIRCLE_COMMENT } from './gql'
 import styles from './styles.module.css'
 
-export type CommentControls = {
+export type CircleCommentControls = {
   avatarSize?: AvatarSize
   hasUserName?: boolean
 } & FooterActionsControls &
   DropdownActionsControls
 
-export type CommentProps = {
+export type CircleCommentProps = {
   comment: CircleCommentFeedCommentPublicFragment &
     Partial<CircleCommentFeedCommentPrivateFragment>
-  type: CommentFormType
-} & CommentControls
+  type: CircleCommentFormType
+} & CircleCommentControls
 
 const BaseCommentFeed = ({
   comment,
@@ -35,7 +40,7 @@ const BaseCommentFeed = ({
   hasUserName,
   replySubmitCallback,
   ...actionControls
-}: CommentProps) => {
+}: CircleCommentProps) => {
   const [refetchComment] = useLazyQuery<RefetchCircleCommentQuery>(
     REFETCH_CIRCLE_COMMENT,
     {
@@ -119,7 +124,9 @@ const BaseCommentFeed = ({
 /**
  * Memoizing
  */
-type MemoizedCommentFeed = React.MemoExoticComponent<React.FC<CommentProps>> & {
+type MemoizedCircleCommentFeed = React.MemoExoticComponent<
+  React.FC<CircleCommentProps>
+> & {
   fragments: typeof fragments
 }
 
@@ -136,6 +143,6 @@ export const CircleCommentFeed = React.memo(
       prevDisabled === disabled
     )
   }
-) as MemoizedCommentFeed
+) as MemoizedCircleCommentFeed
 
 CircleCommentFeed.fragments = fragments

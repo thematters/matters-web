@@ -6,7 +6,7 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 import FooterActions from './'
 
 describe('<Comemnt/FooterActions>', () => {
-  it('should render a Comment/FooterActions', () => {
+  it('should render a CircleComment/FooterActions', () => {
     render(
       <FooterActions
         comment={MOCK_COMMENT}
@@ -14,7 +14,7 @@ describe('<Comemnt/FooterActions>', () => {
         hasUpvote
         hasReply
         hasCreatedAt
-        type="article"
+        type="circleBroadcast"
       />
     )
 
@@ -31,7 +31,7 @@ describe('<Comemnt/FooterActions>', () => {
     expect($downvote).toBeInTheDocument()
   })
 
-  it('should render a Comment/FooterActions without reply', () => {
+  it('should render a CircleComment/FooterActions without reply', () => {
     render(
       <FooterActions
         comment={MOCK_COMMENT}
@@ -39,7 +39,7 @@ describe('<Comemnt/FooterActions>', () => {
         hasDownvote
         hasUpvote
         hasCreatedAt
-        type="article"
+        type="circleBroadcast"
       />
     )
 
@@ -48,7 +48,7 @@ describe('<Comemnt/FooterActions>', () => {
     expect($reply).not.toBeInTheDocument()
   })
 
-  it('should render a Comment/FooterActions without votes', () => {
+  it('should render a CircleComment/FooterActions without votes', () => {
     render(
       <FooterActions
         comment={MOCK_COMMENT}
@@ -56,7 +56,7 @@ describe('<Comemnt/FooterActions>', () => {
         hasDownvote={false}
         hasUpvote={false}
         hasCreatedAt
-        type="article"
+        type="circleBroadcast"
       />
     )
 

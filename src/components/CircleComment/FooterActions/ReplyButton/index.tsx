@@ -10,18 +10,18 @@ import {
 import {
   Button,
   ButtonProps,
-  CommentFormDialog,
-  CommentFormType,
+  CircleCommentFormDialog,
+  CircleCommentFormType,
   Icon,
   ViewerContext,
 } from '~/components'
-import { ReplyComemntFragment } from '~/gql/graphql'
+import { CircleCommentReplyComemntFragment } from '~/gql/graphql'
 
 import ReplyTo from '../../ReplyTo'
 
 export interface ReplyButtonProps {
-  comment: ReplyComemntFragment
-  type: CommentFormType
+  comment: CircleCommentReplyComemntFragment
+  type: CircleCommentFormType
   replySubmitCallback?: () => void
   onClick?: () => void
   disabled?: boolean
@@ -30,7 +30,7 @@ export interface ReplyButtonProps {
 
 const fragments = {
   comment: gql`
-    fragment ReplyComemnt on Comment {
+    fragment CircleCommentReplyComemnt on Comment {
       id
       state
       author {
@@ -132,7 +132,7 @@ const ReplyButton = ({
   }
 
   return (
-    <CommentFormDialog
+    <CircleCommentFormDialog
       articleId={article?.id}
       circleId={circle?.id}
       type={type}
@@ -143,14 +143,14 @@ const ReplyButton = ({
         article ? (
           <FormattedMessage
             defaultMessage="Write a comment"
-            id="/agKbX"
-            description="src/components/Comment/FooterActions/ReplyButton/index.tsx"
+            id="oI8PNE"
+            description="src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
           />
         ) : (
           <FormattedMessage
             defaultMessage="Reply"
-            id="UgpqlF"
-            description="src/components/Comment/FooterActions/ReplyButton/index.tsx"
+            id="MRn08S"
+            description="src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
           />
         )
       }
@@ -164,7 +164,7 @@ const ReplyButton = ({
           aria-haspopup="dialog"
         />
       )}
-    </CommentFormDialog>
+    </CircleCommentFormDialog>
   )
 }
 

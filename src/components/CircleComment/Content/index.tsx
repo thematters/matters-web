@@ -5,18 +5,23 @@ import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import { captureClicks } from '~/common/utils'
-import { CommentFormType, Expandable, LanguageContext } from '~/components'
 import {
-  ContentCommentPrivateFragment,
-  ContentCommentPublicFragment,
+  CircleCommentFormType,
+  Expandable,
+  LanguageContext,
+} from '~/components'
+import {
+  ArticleCommentContentCommentPrivateFragment,
+  ArticleCommentContentCommentPublicFragment,
 } from '~/gql/graphql'
 
 import Collapsed from './Collapsed'
 import styles from './styles.module.css'
 
 interface ContentProps {
-  comment: ContentCommentPublicFragment & Partial<ContentCommentPrivateFragment>
-  type: CommentFormType
+  comment: ArticleCommentContentCommentPublicFragment &
+    Partial<ArticleCommentContentCommentPrivateFragment>
+  type: CircleCommentFormType
   size?: 14 | 15
   bgColor?: 'greyLighter' | 'white'
   limit?: number

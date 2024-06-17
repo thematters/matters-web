@@ -7,7 +7,7 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 
 describe('<CircleCommentFeed>', () => {
   it('should render a Comment.Feed', () => {
-    render(<CircleCommentFeed comment={MOCK_COMMENT} type="article" />)
+    render(<CircleCommentFeed comment={MOCK_COMMENT} type="circleBroadcast" />)
 
     const $digest = screen.getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)
     expect($digest).toBeInTheDocument()
@@ -32,7 +32,7 @@ describe('<CircleCommentFeed>', () => {
           },
           parentComment: null,
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
 
@@ -53,7 +53,7 @@ describe('<CircleCommentFeed>', () => {
           replyTo: null,
           parentComment: null,
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
     const $digest = screen.getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)
@@ -70,7 +70,7 @@ describe('<CircleCommentFeed>', () => {
           replyTo: null,
           parentComment: MOCK_COMMENT,
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
     const $digest2 = screen.getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)

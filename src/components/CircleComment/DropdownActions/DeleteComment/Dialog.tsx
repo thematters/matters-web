@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import {
-  CommentFormType,
+  CircleCommentFormType,
   Dialog,
   LanguageContext,
   toast,
@@ -12,8 +12,8 @@ import {
   useMutation,
 } from '~/components'
 import {
+  CircleCommentDropdownActionsCommentPublicFragment,
   DeleteCommentMutation,
-  DropdownActionsCommentPublicFragment,
 } from '~/gql/graphql'
 
 const DELETE_COMMENT = gql`
@@ -26,8 +26,8 @@ const DELETE_COMMENT = gql`
 `
 
 export interface DeleteCommentDialogProps {
-  comment: DropdownActionsCommentPublicFragment
-  type: CommentFormType
+  comment: CircleCommentDropdownActionsCommentPublicFragment
+  type: CircleCommentFormType
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -59,8 +59,8 @@ const DeleteCommentDialog = ({
       message: (
         <FormattedMessage
           defaultMessage="{commentType} has been deleted"
-          id="h9CG9E"
-          description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+          id="wAccv4"
+          description="src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
           values={{
             commentType: COMMENT_TYPE_TEXT[lang][type],
           }}
@@ -82,8 +82,8 @@ const DeleteCommentDialog = ({
           title={
             <FormattedMessage
               defaultMessage="Delete {commentType}"
-              id="Cdkhl8"
-              description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+              id="XH1s8E"
+              description="src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
               values={{
                 commentType: COMMENT_TYPE_TEXT[lang][type],
               }}
@@ -96,8 +96,8 @@ const DeleteCommentDialog = ({
             <p>
               <FormattedMessage
                 defaultMessage="After deletion, the {commentType} will be removed immediately"
-                id="77tYPg"
-                description="src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
+                id="NlX31w"
+                description="src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
                 values={{
                   commentType: COMMENT_TYPE_TEXT[lang][type],
                 }}

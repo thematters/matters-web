@@ -88,10 +88,6 @@
     "defaultMessage": "不知道哪裏出錯了，過幾分鐘看看",
     "description": "UNKNOWN_ERROR"
   },
-  "/agKbX": {
-    "defaultMessage": "回覆評論",
-    "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
-  },
   "/cyuh2": {
     "defaultMessage": "前往授權"
   },
@@ -103,6 +99,10 @@
   },
   "/jJLYy": {
     "defaultMessage": "交易紀錄"
+  },
+  "/kUr1+": {
+    "defaultMessage": "取消置頂",
+    "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
   "/pnYHM": {
     "defaultMessage": "圍爐不存在",
@@ -478,6 +478,10 @@
     "defaultMessage": "授權信息已失效，請重新登入",
     "description": "OAUTH_TOKEN_INVALID"
   },
+  "6O3d1u": {
+    "defaultMessage": "評論已隱藏",
+    "description": "src/components/ArticleComment/Content/index.tsx"
+  },
   "6OBAOi": {
     "defaultMessage": "目前總訂閱人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -515,6 +519,10 @@
     "defaultMessage": "已取消",
     "description": "src/components/Transaction/State/index.tsx"
   },
+  "6vgoSf": {
+    "defaultMessage": "編輯",
+    "description": "src/components/CircleComment/DropdownActions/EditButton.tsx"
+  },
   "70UCEy": {
     "defaultMessage": "在行動裝置上使用問題，參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -525,14 +533,6 @@
   },
   "76yoL6": {
     "defaultMessage": "月之夢"
-  },
-  "77tYPg": {
-    "defaultMessage": "確認刪除後，{commentType}會立即消失。",
-    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
-  },
-  "78qsg6": {
-    "defaultMessage": "作者",
-    "description": "src/components/Comment/RoleLabel/index.tsx"
   },
   "79Ydsg": {
     "defaultMessage": "提現撤銷",
@@ -591,6 +591,10 @@
   "8cv9D4": {
     "defaultMessage": "下一步"
   },
+  "8gRHks": {
+    "defaultMessage": "置頂",
+    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
+  },
   "8iciCA": {
     "defaultMessage": "實體不存在",
     "description": "ENTITY_NOT_FOUND"
@@ -618,6 +622,10 @@
   "9+Ddtu": {
     "defaultMessage": "下一步"
   },
+  "9+vzKn": {
+    "defaultMessage": "編輯",
+    "description": "src/components/CircleComment/DropdownActions/index.tsx"
+  },
   "91IQdk": {
     "defaultMessage": "已追蹤",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
@@ -636,10 +644,6 @@
   },
   "9J0iCw": {
     "defaultMessage": "已註銷用戶"
-  },
-  "9OIqBr": {
-    "defaultMessage": "編輯評論",
-    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "9SXN7s": {
     "defaultMessage": "沒有更多",
@@ -696,10 +700,6 @@
   "AGDFGs": {
     "defaultMessage": "歧視、侮辱或仇恨"
   },
-  "AGcU5J": {
-    "defaultMessage": "置頂",
-    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
-  },
   "ANA7sk": {
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -711,6 +711,10 @@
   "AYTnjk": {
     "defaultMessage": "追蹤",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
+  },
+  "AbhFxG": {
+    "defaultMessage": "確認刪除後，{commentType}會立即消失。",
+    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "AlHYvk": {
     "defaultMessage": "{type}已編輯"
@@ -805,10 +809,6 @@
   "CPvyYN": {
     "defaultMessage": "密碼錯誤"
   },
-  "Cdkhl8": {
-    "defaultMessage": "刪除{commentType}",
-    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
-  },
   "CnPG8j": {
     "defaultMessage": "精選"
   },
@@ -842,6 +842,10 @@
   "DP3yqI": {
     "defaultMessage": "支持人數"
   },
+  "DTDkJN": {
+    "defaultMessage": "刪除{commentType}",
+    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
   "DUoV1W": {
     "defaultMessage": "已超過 140 字，目前 {numbers} 字",
     "description": "src/components/Dialogs/EditProfileDialog/Content.tsx"
@@ -857,6 +861,10 @@
     "defaultMessage": "徽章",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "DZaTBr": {
+    "defaultMessage": "支持者",
+    "description": "src/components/ArticleComment/RoleLabel/index.tsx"
+  },
   "DjIpR6": {
     "defaultMessage": "設置封面"
   },
@@ -870,6 +878,10 @@
   "DqQvtL": {
     "defaultMessage": "解除封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "DrBuEI": {
+    "defaultMessage": "取消置頂",
+    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
   "DyuHBH": {
     "defaultMessage": "取消代表作",
@@ -1100,10 +1112,6 @@
   "HzB4Lk": {
     "defaultMessage": "告知讀者你此次編輯的更動有哪些⋯"
   },
-  "I8+06z": {
-    "defaultMessage": "評論已隱藏",
-    "description": "src/components/CommentBeta/Content/index.tsx"
-  },
   "IKPYe9": {
     "defaultMessage": "查看",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -1206,10 +1214,6 @@
   "KQi/UZ": {
     "defaultMessage": "封存作品"
   },
-  "KTg17G": {
-    "defaultMessage": "取消置頂",
-    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
-  },
   "KWDSxB": {
     "defaultMessage": "保存編輯"
   },
@@ -1276,10 +1280,6 @@
   "LWE7oq": {
     "defaultMessage": "草稿保存中，確定要離開嗎？"
   },
-  "LYl9+i": {
-    "defaultMessage": "編輯",
-    "description": "src/components/Comment/DropdownActions/index.tsx"
-  },
   "LaI+XV": {
     "defaultMessage": "關聯 ENS 名後，可以："
   },
@@ -1336,6 +1336,10 @@
   "MPEeBy": {
     "defaultMessage": "操作失敗，請稍候重試",
     "description": "ACTION_FAILED"
+  },
+  "MRn08S": {
+    "defaultMessage": "回覆",
+    "description": "src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
   },
   "MV0JlP": {
     "defaultMessage": "吸引更多人為你拍手！"
@@ -1403,6 +1407,10 @@
     "defaultMessage": "支持者數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
   },
+  "NlX31w": {
+    "defaultMessage": "確認刪除後，{commentType}會立即消失。",
+    "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
   "NmhF45": {
     "defaultMessage": "通過添加標籤幫助讀者更好地找到你的作品。如果沒有合適的標籤，你可以創建新的。"
   },
@@ -1436,6 +1444,10 @@
   },
   "OQ/lbb": {
     "defaultMessage": "已成功關聯，稍後完成。在 {explorerName} 查看紀錄"
+  },
+  "OjC4aZ": {
+    "defaultMessage": "作者",
+    "description": "src/components/ArticleComment/RoleLabel/index.tsx"
   },
   "Onjs6P": {
     "defaultMessage": "無序清單"
@@ -1548,10 +1560,6 @@
   "REQGgU": {
     "defaultMessage": "發布須知",
     "description": "src/views/Me/DraftDetail/SettingsButton/ConfirmPublishDialogContent/index.tsx"
-  },
-  "RFzVUD": {
-    "defaultMessage": "取消置頂",
-    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "RGEpvx": {
     "defaultMessage": "修改文案",
@@ -1739,10 +1747,6 @@
     "defaultMessage": "移至底部",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
-  "UgpqlF": {
-    "defaultMessage": "回覆",
-    "description": "src/components/Comment/FooterActions/ReplyButton/index.tsx"
-  },
   "UjKkhq": {
     "defaultMessage": "作品已添加標籤",
     "description": "src/views/TagDetail/DropdownActions/index.tsx"
@@ -1821,6 +1825,10 @@
   "WFCO2w": {
     "defaultMessage": "關聯作品"
   },
+  "WIOxG+": {
+    "defaultMessage": "闔上",
+    "description": "src/components/CircleComment/DropdownActions/CollapseComment/Button.tsx"
+  },
   "WNxQX0": {
     "defaultMessage": "添加標籤"
   },
@@ -1855,9 +1863,9 @@
   "WxhsrG": {
     "defaultMessage": "請先綁定電子郵件"
   },
-  "X+Xvgq": {
-    "defaultMessage": "取消精選",
-    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
+  "XH1s8E": {
+    "defaultMessage": "刪除{commentType}",
+    "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "XHMco9": {
     "defaultMessage": "人",
@@ -1982,6 +1990,10 @@
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
   },
+  "ZJskDG": {
+    "defaultMessage": "編輯",
+    "description": "src/components/CircleComment/DropdownActions/index.tsx"
+  },
   "ZOW313": {
     "defaultMessage": "首次發布作品後有四次正文編輯機會，你也可以歸檔原文重新發布作品。"
   },
@@ -1995,10 +2007,6 @@
   "ZVoJan": {
     "defaultMessage": "修改",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
-  },
-  "ZYvVYX": {
-    "defaultMessage": "支持者",
-    "description": "src/components/Comment/DonatorLabel/index.tsx"
   },
   "ZZ9zIR": {
     "defaultMessage": "點踩"
@@ -2014,6 +2022,10 @@
   },
   "ZxgUKj": {
     "defaultMessage": "讚賞我的"
+  },
+  "Zya3dV": {
+    "defaultMessage": "取消置頂",
+    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
   "a/YQ1Z": {
     "defaultMessage": "作品已封存",
@@ -2101,6 +2113,10 @@
   "bSqeXm": {
     "defaultMessage": "{ext, select, gif {GIF 格式} other {} }圖片大小不得超過 {sizeInMB}MB"
   },
+  "bTNYGv": {
+    "defaultMessage": "評論",
+    "description": "src/components/Forms/ArticleCommentForm/index.tsx"
+  },
   "beLe/F": {
     "defaultMessage": "廣播"
   },
@@ -2118,10 +2134,6 @@
   "cE4Hfw": {
     "defaultMessage": "發現"
   },
-  "cO0im6": {
-    "defaultMessage": "作者精選",
-    "description": "src/components/Comment/PinnedLabel/index.tsx"
-  },
   "cPIKU2": {
     "defaultMessage": "追蹤中"
   },
@@ -2135,6 +2147,10 @@
   "cQYXjl": {
     "defaultMessage": "匯率幣別",
     "description": "src/views/Me/Settings/Misc/Currency/index.tsx"
+  },
+  "cY4mv9": {
+    "defaultMessage": "因違反社區約章，評論已被隱藏",
+    "description": "src/components/ArticleComment/Content/index.tsx"
   },
   "cYvIpp": {
     "defaultMessage": "無需重複訂閱此圍爐",
@@ -2198,6 +2214,10 @@
     "defaultMessage": "評論和回覆",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "ddJbkg": {
+    "defaultMessage": "置頂",
+    "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
+  },
   "deEeEI": {
     "defaultMessage": "註冊"
   },
@@ -2235,6 +2255,10 @@
   },
   "eZ0m39": {
     "defaultMessage": "或輸入自定義金額"
+  },
+  "ehO5xU": {
+    "defaultMessage": "{commentType}已刪除",
+    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "enMIYK": {
     "defaultMessage": "我的"
@@ -2297,6 +2321,10 @@
   "fxhue9": {
     "defaultMessage": "作品將發布至 IPFS，無法被他人刪改，創作權歸你所有。"
   },
+  "g//2O2": {
+    "defaultMessage": "取消闔上",
+    "description": "src/components/CircleComment/DropdownActions/UncollapseButton.tsx"
+  },
   "g5pX+a": {
     "defaultMessage": "關於"
   },
@@ -2350,10 +2378,6 @@
   "h9CB9m": {
     "defaultMessage": "結果以鏈上紀錄為主，稍後同步至 Matters"
   },
-  "h9CG9E": {
-    "defaultMessage": "{commentType}已刪除",
-    "description": "src/components/Comment/DropdownActions/DeleteComment/Dialog.tsx"
-  },
   "hASeng": {
     "defaultMessage": "已封鎖用戶",
     "description": "src/views/Me/Settings/Misc/BlockedUsers.tsx"
@@ -2375,10 +2399,6 @@
   "hYG5fb": {
     "defaultMessage": "人追蹤",
     "description": "src/views/TagDetail/Followers/index.tsx"
-  },
-  "hgjjhO": {
-    "defaultMessage": "評論",
-    "description": "src/components/Forms/CommentFormBeta/index.tsx"
   },
   "hk2aiz": {
     "defaultMessage": "追蹤了你的圍爐",
@@ -2452,14 +2472,6 @@
     "defaultMessage": "電子郵件註冊",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
-  "jJ1Brc": {
-    "defaultMessage": "喜歡回應",
-    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
-  },
-  "jc3mW/": {
-    "defaultMessage": "支持者",
-    "description": "src/components/Comment/RoleLabel/index.tsx"
-  },
   "jiB0Z2": {
     "defaultMessage": "無法綁定錢包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2477,10 +2489,6 @@
   },
   "k0ooDW": {
     "defaultMessage": "標籤描述"
-  },
-  "k1SWZ2": {
-    "defaultMessage": "取消闔上",
-    "description": "src/components/Comment/DropdownActions/UncollapseButton.tsx"
   },
   "k2veDA": {
     "defaultMessage": "創作"
@@ -2644,10 +2652,6 @@
   "me1nR+": {
     "defaultMessage": "複製地址"
   },
-  "mikY/9": {
-    "defaultMessage": "編輯",
-    "description": "src/components/Comment/DropdownActions/EditButton.tsx"
-  },
   "ml3SZN": {
     "defaultMessage": "至少 8 個字元，支持英文大小寫字母、數字和特殊符號"
   },
@@ -2719,6 +2723,10 @@
   "oGiO//": {
     "defaultMessage": "插入音訊"
   },
+  "oI8PNE": {
+    "defaultMessage": "回覆評論",
+    "description": "src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
+  },
   "ob+HDS": {
     "defaultMessage": "馬上逛逛"
   },
@@ -2750,10 +2758,6 @@
   },
   "pKkpI9": {
     "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
-  },
-  "pRV+UD": {
-    "defaultMessage": "闔上",
-    "description": "src/components/Comment/DropdownActions/CollapseComment/Button.tsx"
   },
   "phAZoj": {
     "defaultMessage": "選集"
@@ -2800,6 +2804,10 @@
     "defaultMessage": "交易密碼重置成功",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Confirm.tsx"
   },
+  "qTHZmd": {
+    "defaultMessage": "僅能置頂一則評論",
+    "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
+  },
   "qVhxp5": {
     "defaultMessage": "進入",
     "description": "src/components/Buttons/UniversalAuth/index.tsx"
@@ -2827,10 +2835,6 @@
   },
   "quRPwZ": {
     "defaultMessage": "支付請求已送出"
-  },
-  "qxKjcm": {
-    "defaultMessage": "置頂",
-    "description": "src/components/Comment/DropdownActions/PinButton.tsx"
   },
   "r5pj/5": {
     "defaultMessage": "拖拽"
@@ -2942,10 +2946,6 @@
     "defaultMessage": "標籤添加最多至 5 個",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
-  "tnWWrj": {
-    "defaultMessage": "因違反社區約章，評論已被隱藏",
-    "description": "src/components/CommentBeta/Content/index.tsx"
-  },
   "tqEGfa": {
     "defaultMessage": "作品發佈成功，快把作品分享到不同渠道，"
   },
@@ -2981,6 +2981,10 @@
   },
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"
+  },
+  "uWUeYl": {
+    "defaultMessage": "置頂",
+    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
   "uYwH7j": {
     "defaultMessage": "作品已發佈"
@@ -3089,6 +3093,10 @@
   },
   "w+6UiO": {
     "defaultMessage": "新增邀請"
+  },
+  "wAccv4": {
+    "defaultMessage": "{commentType}已刪除",
+    "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "wCgTu5": {
     "defaultMessage": "評論"
@@ -3240,10 +3248,6 @@
     "defaultMessage": "進入圍爐",
     "description": "src/components/CircleDigest/Price/index.tsx"
   },
-  "yexhgj": {
-    "defaultMessage": "僅能置頂一則評論",
-    "description": "src/components/CommentBeta/DropdownActions/PinButton.tsx"
-  },
   "yoRaUc": {
     "defaultMessage": "退款",
     "description": "src/components/Transaction/index.tsx"
@@ -3291,10 +3295,6 @@
   },
   "zb8Kx1": {
     "defaultMessage": "公告、提醒、碎碎念…"
-  },
-  "zkmfjn": {
-    "defaultMessage": "置頂",
-    "description": "src/components/Comment/PinnedLabel/index.tsx"
   },
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",

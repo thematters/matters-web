@@ -6,7 +6,7 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 import UpvoteButton from './'
 
 describe('<Comemnt/FooterActions/UpvoteButton>', () => {
-  it('should render a Comment/FooterActions/UpvoteButton', () => {
+  it('should render a CircleComment/FooterActions/UpvoteButton', () => {
     render(<UpvoteButton comment={MOCK_COMMENT} inCard />)
 
     const $button = screen.getByRole('button', { name: 'Upvote' })
@@ -16,7 +16,7 @@ describe('<Comemnt/FooterActions/UpvoteButton>', () => {
     expect(screen.getByText(MOCK_COMMENT.upvotes)).toBeInTheDocument()
   })
 
-  it('should render a Comment/FooterActions/UpvoteButton with custom onClick', () => {
+  it('should render a CircleComment/FooterActions/UpvoteButton with custom onClick', () => {
     const onClick = vi.fn()
 
     render(<UpvoteButton comment={MOCK_COMMENT} onClick={onClick} inCard />)
@@ -28,7 +28,7 @@ describe('<Comemnt/FooterActions/UpvoteButton>', () => {
     expect(onClick).toHaveBeenCalled()
   })
 
-  it('should render a disabled Comment/FooterActions/UpvoteButton ', () => {
+  it('should render a disabled CircleComment/FooterActions/UpvoteButton ', () => {
     const onClick = vi.fn()
 
     render(

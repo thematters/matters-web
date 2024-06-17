@@ -20,7 +20,7 @@ describe('<ThreadComment>', () => {
             ],
           },
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
 
@@ -49,7 +49,7 @@ describe('<ThreadComment>', () => {
             edges: [{ node: MOCK_COMMENT, cursor: 'cursor-1' }],
           },
         }}
-        type="article"
+        type="circleBroadcast"
       />
     )
 

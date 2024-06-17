@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import {
-  CommentFormType,
+  CircleCommentFormType,
   Dialog,
   toast,
   Translate,
@@ -11,8 +11,8 @@ import {
   useMutation,
 } from '~/components'
 import {
+  CircleCommentDropdownActionsCommentPublicFragment,
   CollapseCommentMutation,
-  DropdownActionsCommentPublicFragment,
 } from '~/gql/graphql'
 
 const COLLAPSE_COMMENT = gql`
@@ -25,8 +25,8 @@ const COLLAPSE_COMMENT = gql`
 `
 
 export interface CollapseCommentDialogProps {
-  comment: DropdownActionsCommentPublicFragment
-  type: CommentFormType
+  comment: CircleCommentDropdownActionsCommentPublicFragment
+  type: CircleCommentFormType
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

@@ -13,8 +13,8 @@ import {
   parseCommentHash,
 } from '~/common/utils'
 import {
+  CircleCommentForm,
   CircleThreadComment,
-  CommentForm,
   EmptyComment,
   InfiniteScroll,
   List,
@@ -240,7 +240,7 @@ const CricleDiscussion = () => {
       <section className={styles.discussion}>
         {!circle.owner.isBlocking && (
           <header className={styles.header}>
-            <CommentForm
+            <CircleCommentForm
               circleId={circle?.id}
               type="circleDiscussion"
               placeholder={intl.formatMessage({

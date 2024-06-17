@@ -23,8 +23,8 @@ export const fragments = {
             ...ReplyToUser
           }
         }
-        ...FooterActionsCommentPublic
-        ...DropdownActionsCommentPublic
+        ...CircleCommentFooterActionsCommentPublic
+        ...CircleCommentDropdownActionsCommentPublic
         ...CircleCommentContentCommentPublic
       }
       ${UserDigest.Mini.fragments.user}
@@ -36,8 +36,8 @@ export const fragments = {
     private: gql`
       fragment CircleCommentFeedCommentPrivate on Comment {
         id
-        ...FooterActionsCommentPrivate
-        ...DropdownActionsCommentPrivate
+        ...CircleCommentFooterActionsCommentPrivate
+        ...CircleCommentDropdownActionsCommentPrivate
         ...CircleCommentContentCommentPrivate
       }
       ${FooterActions.fragments.comment.private}
