@@ -49,10 +49,6 @@
 }
 
 .contentContainer {
-  margin-top: var(--sp12);
+  margin-top: var(--sp8);
   margin-left: var(--sp48);
-
-  &.descendant {
-    width:;
-  }
 }

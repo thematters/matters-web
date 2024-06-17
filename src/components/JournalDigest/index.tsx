@@ -7,11 +7,13 @@ import { ReactComponent as IconComment } from '@/public/static/icons/24px/commen
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
+import { toPath } from '~/common/utils'
 
 import { DateTime } from '../DateTime'
 import { JournalDetailDialog } from '../Dialogs'
 import { Expandable } from '../Expandable'
 import { JournalAsset } from '../FileUploader/JournalAssetsUploader'
+import { useRoute } from '../Hook'
 import { Icon } from '../Icon'
 import { Media } from '../Media'
 import { ResponsiveImage } from '../ResponsiveImage'
@@ -31,6 +33,7 @@ export const JournalDigest: React.FC<JournalDigestProps> = ({
   createdAt,
 }: JournalDigestProps) => {
   const [liked, setLiked] = useState(false)
+  const { router } = useRoute()
 
   const toggleLike = () => {
     setLiked(!liked)
@@ -38,6 +41,11 @@ export const JournalDigest: React.FC<JournalDigestProps> = ({
 
   const options = {
     // padding: { top: 20, bottom: 40, left: 100, right: 100 },
+  }
+
+  const gotoDetail = () => {
+    const path = toPath({ page: 'journalDetail', journal: { id } })
+    router.push(path.href)
   }
 
   const Container = ({ openDialog }: { openDialog?: () => void }) => {
@@ -114,7 +122,7 @@ export const JournalDigest: React.FC<JournalDigestProps> = ({
   return (
     <>
       <Media at="sm">
-        <Container openDialog={() => {}} />
+        <Container openDialog={gotoDetail} />
       </Media>
       <Media greaterThan="sm">
         <JournalDetailDialog journalId={id}>

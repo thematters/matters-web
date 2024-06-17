@@ -1,0 +1,145 @@
+.container {
+  /* width: 40.5rem; */
+}
+
+.header {
+  @mixin flex-start-space-between;
+
+  padding: var(--sp16) var(--sp16) var(--sp12);
+
+  & .left {
+    & .author {
+      @mixin flex-center-start;
+
+      gap: var(--sp8);
+
+      & .info {
+        display: flex;
+        flex-direction: column;
+
+        & .top {
+          @mixin flex-center-start;
+
+          gap: var(--sp6);
+        }
+
+        & .displayName {
+          @mixin line-clamp;
+
+          font-size: var(--text15);
+          font-weight: var(--font-medium);
+          line-height: 1.75;
+        }
+
+        & time {
+          line-height: 1.125rem;
+        }
+      }
+    }
+  }
+
+  & .right {
+    display: inline-flex;
+    align-items: center;
+    height: 1.375rem;
+    margin-left: var(--sp16);
+
+    & > * + * {
+      margin-left: var(--sp12);
+    }
+  }
+}
+
+.scrollContainer {
+  /* TODO: Confirm height with producion team */
+
+  max-height: calc(var(--ivh) * 100 - 158px);
+  overflow-y: auto;
+}
+
+.contentContainer {
+  margin-top: var(--sp12);
+}
+
+.mainContent {
+  @mixin border-bottom-grey;
+
+  padding: 0 var(--sp16) var(--sp16);
+  border-bottom-color: var(--color-grey-hover);
+
+  .content {
+    font-size: var(--text17);
+    line-height: 1.75;
+  }
+}
+
+.assets {
+  display: flex;
+  gap: var(--sp4);
+  margin-top: var(--sp12);
+
+  .item {
+    position: relative;
+    width: 6.625rem;
+    height: 6.625rem;
+    cursor: pointer;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      background: var(--color-grey-lighter);
+
+      /* border-radius: var(--sp8); */
+    }
+  }
+}
+
+.comments {
+  padding: var(--sp16);
+
+  & .title {
+    font-size: var(--text15);
+    line-height: 1.75;
+    color: var(--color-black);
+
+    & .count {
+      color: var(--color-grey-dark);
+    }
+  }
+}
+
+.footer {
+  @mixin border-top-grey-light;
+  @mixin flex-center-start;
+
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+
+  /* color: var(--color-grey); */
+  gap: var(--sp9);
+  width: 100%;
+  padding: var(--sp16) var(--sp16) var(--sp16) var(--sp13);
+  background: var(--color-white);
+
+  & .likeButton {
+    @mixin flex-center-all;
+
+    height: 2.75rem;
+
+    /* width: 2.75rem; */
+    padding: 0 var(--sp11);
+  }
+
+  & .editButton {
+    @mixin flex-center-start;
+
+    flex-grow: 1;
+    padding: var(--sp8) var(--sp12);
+    font-size: var(--text15);
+    line-height: 1.75;
+    color: var(--color-grey);
+    background: var(--color-grey-lighter);
+    border-radius: var(--sp8);
+  }
+}
