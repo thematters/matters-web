@@ -6,8 +6,8 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 
 import { CircleCommentContent } from './'
 
-describe('<Comemnt.Content>', () => {
-  it('should render a Comment.Content', () => {
+describe('<CircleComemnt.Content>', () => {
+  it('should render a CircleComemnt.Content', () => {
     render(
       <CircleCommentContent comment={MOCK_COMMENT} type="circleBroadcast" />
     )
@@ -16,7 +16,7 @@ describe('<Comemnt.Content>', () => {
     expect($content).toBeInTheDocument()
   })
 
-  it('should render a collapsed Comment.Content', () => {
+  it('should render a collapsed CircleComemnt.Content', () => {
     // collapsed by author
     render(
       <CircleCommentContent
@@ -29,7 +29,7 @@ describe('<Comemnt.Content>', () => {
       />
     )
     expect(
-      screen.getByText('This comment has been collapsed by the author')
+      screen.getByText('This broadcast has been collapsed by the author')
     ).toBeInTheDocument()
 
     // blocked by user
@@ -46,7 +46,7 @@ describe('<Comemnt.Content>', () => {
     expect(screen.getByText('You have blocked that user')).toBeInTheDocument()
   })
 
-  it('should render a banned Comment.Content', () => {
+  it('should render a banned CircleComemnt.Content', () => {
     render(
       <CircleCommentContent
         comment={{
@@ -58,12 +58,12 @@ describe('<Comemnt.Content>', () => {
     )
     expect(
       screen.getByText(
-        'This comment has been archived due to a violation of the user agreement'
+        'This broadcast has been archived due to a violation of the user agreement'
       )
     ).toBeInTheDocument()
   })
 
-  it('should render an archived Comment.Content', () => {
+  it('should render an archived CircleComemnt.Content', () => {
     render(
       <CircleCommentContent
         comment={{
@@ -74,7 +74,7 @@ describe('<Comemnt.Content>', () => {
       />
     )
     expect(
-      screen.getByText('This comment has been deleted by the author')
+      screen.getByText('This broadcast has been deleted by the author')
     ).toBeInTheDocument()
   })
 })
