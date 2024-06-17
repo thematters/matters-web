@@ -35,7 +35,7 @@
   @mixin hide-scrollbar;
 
   min-height: 6.5rem;
-  max-height: calc(var(--ivh) * 100 - 62px - 96px);
+  max-height: calc(var(--ivh) * 100 - 62px - 108px);
   padding: var(--sp4) var(--sp16);
   margin-bottom: var(--sp8);
   overflow: scroll;
@@ -49,8 +49,10 @@
 .footer {
   @mixin flex-end-space-between;
 
+  position: fixed;
+  bottom: 0;
   gap: var(--sp4);
-  padding: 0 var(--sp16);
+  padding: var(--sp12) var(--sp16);
 
   & .count {
     padding-right: var(--sp20);
