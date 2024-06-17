@@ -27,7 +27,7 @@ type AmountInputProps = {
     HTMLInputElement
   >
 
-const AmountInput = forwardRef(
+const AmountInput = forwardRef<HTMLInputElement, AmountInputProps>(
   (
     {
       name,
@@ -45,8 +45,8 @@ const AmountInput = forwardRef(
       spacingBottom,
 
       ...inputProps
-    }: AmountInputProps,
-    ref: any
+    },
+    ref
   ) => {
     const fieldId = `field-${name}`
     const fieldMsgId = `field-msg-${name}`

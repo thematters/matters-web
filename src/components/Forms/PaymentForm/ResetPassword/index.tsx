@@ -40,7 +40,10 @@ const PaymentResetPasswordForm = ({
     baseResetPasswordData
   )
 
-  const resetPasswordRequestCallback = ({ email, codeId }: any) => {
+  const resetPasswordRequestCallback = ({
+    email,
+    codeId,
+  }: ResetPasswordData) => {
     setResetPasswordData({ ...resetPasswordData, email, codeId })
     forward('resetPasswordConfirm')
   }

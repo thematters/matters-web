@@ -14,7 +14,7 @@ import styles from './styles.module.css'
 export type UploadImageButtonProps = {
   editor: Editor
   upload: (input: {
-    file?: any
+    file?: File
     url?: string
     type?: ASSET_TYPE.embed | ASSET_TYPE.embedaudio
     mime?: string
