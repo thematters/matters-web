@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import useEmblaCarousel from 'embla-carousel-react'
-import { useEffect, useState } from 'react'
+import { type MouseEvent, useEffect, useState } from 'react'
 
 import { capitalizeFirstLetter } from '~/common/utils'
 
@@ -50,7 +50,7 @@ export const Slides: React.FC<React.PropsWithChildren<SlidesProps>> & {
     [styles[`bg-${bgColor}`]]: !!bgColor,
   })
 
-  const onCaptureClick = (event: any) => {
+  const onCaptureClick = (event: MouseEvent) => {
     if (scrolling) {
       event.preventDefault()
       event.stopPropagation()
