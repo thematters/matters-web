@@ -187,6 +187,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       <Form.Input
         type="text"
         name="displayName"
+        autoFocus
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Name',
