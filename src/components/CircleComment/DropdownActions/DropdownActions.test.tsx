@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { TEST_ID } from '~/common/enums'
 import { cleanup, render, screen } from '~/common/utils/test'
 import { CommentState } from '~/gql/graphql'
-import { MOCK_COMMENT } from '~/stories/mocks'
+import { MOCK_CIRCLE, MOCK_COMMENT } from '~/stories/mocks'
 
 import DropdownActions from './'
 
@@ -54,14 +54,13 @@ describe('<CircleComment/DropdownActions>', () => {
     expect($unpinButton).toBeInTheDocument()
   })
 
-  it('should not render pin buttons if viewer is not article author', async () => {
+  it('should not render pin buttons if viewer is not circle author', async () => {
     render(
       <DropdownActions
         comment={{
           ...MOCK_COMMENT,
           node: {
-            ...MOCK_COMMENT.node,
-            author: { ...MOCK_COMMENT.node.author, id: 'another-user' },
+            ...MOCK_CIRCLE,
           },
           pinned: false,
           parentComment: null,
@@ -163,7 +162,7 @@ describe('<CircleComment/DropdownActions>', () => {
   })
 
   // hasCollapse
-  it('should render collapse button if viewer is article author but not comment author', async () => {
+  it('should render collapse button if viewer is circle author but not comment author', async () => {
     render(
       <DropdownActions
         comment={{
@@ -190,7 +189,7 @@ describe('<CircleComment/DropdownActions>', () => {
   })
 
   // hasUncollapse
-  it('should render uncollapse button if viewer is article author but not comment author', async () => {
+  it('should render uncollapse button if viewer is circle author but not comment author', async () => {
     render(
       <DropdownActions
         comment={{

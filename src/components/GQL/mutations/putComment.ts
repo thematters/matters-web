@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { ArticleThreadComment } from '~/components/ArticleComment'
 
-export default gql`
+export const PUT_ARTICLE_COMMENT = gql`
   mutation PutArticleComment($input: PutCommentInput!) {
     putComment(input: $input) {
       ...ArticleThreadCommentCommentPublic
@@ -11,4 +11,13 @@ export default gql`
   }
   ${ArticleThreadComment.fragments.comment.public}
   ${ArticleThreadComment.fragments.comment.private}
+`
+
+export const PUT_CIRCLE_COMMENT = gql`
+  mutation PutCircleComment($input: PutCommentInput!) {
+    putComment(input: $input) {
+      id
+      content
+    }
+  }
 `

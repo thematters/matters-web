@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl'
 import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
 import { dom, stripHtml, trimCommentContent } from '~/common/utils'
 import { Dialog, SpinnerBlock, useMutation, useRoute } from '~/components'
-import PUT_ARTICLE_COMMENT from '~/components/GQL/mutations/putArticleComment'
+import { PUT_ARTICLE_COMMENT } from '~/components/GQL/mutations/putComment'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import {
   updateArticleComments,

@@ -57,14 +57,6 @@ const fragments = {
       fragment ArticleCommentFooterActionsCommentPrivate on Comment {
         id
         node {
-          ... on Circle {
-            id
-            name
-            owner {
-              id
-              isBlocking
-            }
-          }
           ... on Article {
             id
             author {
@@ -101,8 +93,7 @@ const BaseFooterActions = ({
 
   const { state, node } = comment
   const article = node.__typename === 'Article' ? node : undefined
-  const circle = node.__typename === 'Circle' ? node : undefined
-  const targetAuthor = article?.author || circle?.owner
+  const targetAuthor = article?.author
 
   const isActive = state === 'active'
   const isCollapsed = state === 'collapsed'

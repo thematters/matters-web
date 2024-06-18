@@ -83,7 +83,7 @@ const fragments = {
             }
           }
         }
-        ...PinButtonComment
+        ...ArticleCommentPinButtonComment
       }
       ${PinButton.fragments.comment}
       ${BlockUser.fragments.user.public}

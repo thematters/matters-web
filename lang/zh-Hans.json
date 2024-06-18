@@ -461,6 +461,9 @@
     "defaultMessage": "设定围炉门槛（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "6BbPcY": {
+    "defaultMessage": "评论已被强制隐藏"
+  },
   "6CQaLH": {
     "defaultMessage": "请选择或输入金额"
   },
@@ -477,10 +480,6 @@
   "6N2LKY": {
     "defaultMessage": "授权信息已失效，请重新登入",
     "description": "OAUTH_TOKEN_INVALID"
-  },
-  "6O3d1u": {
-    "defaultMessage": "评论已隐藏",
-    "description": "src/components/ArticleComment/Content/index.tsx"
   },
   "6OBAOi": {
     "defaultMessage": "目前总订阅人数",
@@ -712,10 +711,6 @@
     "defaultMessage": "追踪",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "AbhFxG": {
-    "defaultMessage": "确认删除后，{commentType}会立即消失。",
-    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
-  },
   "AlHYvk": {
     "defaultMessage": "{type}已编辑"
   },
@@ -841,10 +836,6 @@
   },
   "DP3yqI": {
     "defaultMessage": "支持人数"
-  },
-  "DTDkJN": {
-    "defaultMessage": "刪除{commentType}",
-    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "DUoV1W": {
     "defaultMessage": "已超过 140 字，目前 {numbers} 字",
@@ -1075,6 +1066,9 @@
   },
   "HYW0fI": {
     "defaultMessage": "上链后，作品不可删除，去中心化保存"
+  },
+  "HbEL82": {
+    "defaultMessage": "评论已刪除"
   },
   "HkozYU": {
     "defaultMessage": "更换钱包",
@@ -1577,6 +1571,9 @@
     "defaultMessage": "请先绑定邮箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
+  "RPH69U": {
+    "defaultMessage": "作者已关闭评论区"
+  },
   "RU5NDB": {
     "defaultMessage": "请再次输入交易密码",
     "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
@@ -1962,6 +1959,9 @@
     "defaultMessage": "我的创作 - 已归档",
     "description": "src/views/Me/Works/Archived/index.tsx"
   },
+  "YjW2MT": {
+    "defaultMessage": "评论已隐藏"
+  },
   "YlPCRU": {
     "defaultMessage": "关联了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -1989,10 +1989,6 @@
   },
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
-  },
-  "ZJskDG": {
-    "defaultMessage": "编辑",
-    "description": "src/components/CircleComment/DropdownActions/index.tsx"
   },
   "ZOW313": {
     "defaultMessage": "首次发布作品后有四次正文编辑机会，你也可以封存原文重新发布作品。"
@@ -2022,10 +2018,6 @@
   },
   "ZxgUKj": {
     "defaultMessage": "赞赏我的"
-  },
-  "Zya3dV": {
-    "defaultMessage": "取消置顶",
-    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
   "a/YQ1Z": {
     "defaultMessage": "作品已归档",
@@ -2148,10 +2140,6 @@
     "defaultMessage": "汇率币别",
     "description": "src/views/Me/Settings/Misc/Currency/index.tsx"
   },
-  "cY4mv9": {
-    "defaultMessage": "评论已被强制隐藏",
-    "description": "src/components/ArticleComment/Content/index.tsx"
-  },
   "cYvIpp": {
     "defaultMessage": "无需重复订阅此围炉",
     "description": "DUPLICATE_CIRCLE_SUBSCRIPTION"
@@ -2255,10 +2243,6 @@
   },
   "eZ0m39": {
     "defaultMessage": "或输入自定义金额"
-  },
-  "ehO5xU": {
-    "defaultMessage": "{commentType}已刪除",
-    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "enMIYK": {
     "defaultMessage": "我的"
@@ -2723,10 +2707,6 @@
   "oGiO//": {
     "defaultMessage": "插入音频"
   },
-  "oI8PNE": {
-    "defaultMessage": "回复评论",
-    "description": "src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
-  },
   "ob+HDS": {
     "defaultMessage": "马上逛逛"
   },
@@ -3116,12 +3096,18 @@
     "defaultMessage": "注册",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
+  "wLSBAX": {
+    "defaultMessage": "确认删除后，评论会立即消失。"
+  },
   "wMNZJa": {
     "defaultMessage": "通知不存在",
     "description": "NOTICE_NOT_FOUND"
   },
   "wNJjR5": {
     "defaultMessage": "支持反馈设置成功"
+  },
+  "wOZRKW": {
+    "defaultMessage": "刪除评论"
   },
   "wSZR47": {
     "defaultMessage": "提交"

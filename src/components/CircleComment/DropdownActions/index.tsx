@@ -90,15 +90,8 @@ const fragments = {
               id
             }
           }
-          ... on Article {
-            id
-            shortHash
-            author {
-              id
-            }
-          }
         }
-        ...PinButtonComment
+        ...CircleCommentPinButtonComment
       }
       ${PinButton.fragments.comment}
       ${BlockUser.fragments.user.public}
@@ -114,13 +107,6 @@ const fragments = {
           ... on Circle {
             id
             owner {
-              id
-              isBlocking
-            }
-          }
-          ... on Article {
-            id
-            author {
               id
               isBlocking
             }
@@ -198,10 +184,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
   const { isArchived, isBanned, isFrozen } = viewer
 
-  const article =
-    comment.node.__typename === 'Article' ? comment.node : undefined
   const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
-  const targetAuthor = article?.author || circle?.owner
+  const targetAuthor = circle?.owner
 
   const isTargetAuthor = viewer.id === targetAuthor?.id
   const isBlocked = targetAuthor?.isBlocking
@@ -238,18 +222,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
     BaseDropdownActions,
     CircleCommentFormDialog,
     {
-      articleId: article?.id,
       circleId: circle?.id,
       type,
       commentId: comment.id,
       defaultContent: comment.content,
-      title: article ? (
-        <FormattedMessage
-          defaultMessage="Edit Comment"
-          id="ZJskDG"
-          description="src/components/CircleComment/DropdownActions/index.tsx"
-        />
-      ) : (
+      title: (
         <FormattedMessage
           defaultMessage="Edit"
           id="9+vzKn"

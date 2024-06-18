@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT } from '~/common/enums'
@@ -8,13 +8,14 @@ import { dom, stripHtml } from '~/common/utils'
 import {
   CircleCommentFormType,
   Dialog,
+  LanguageContext,
   SpinnerBlock,
   toast,
   useMutation,
 } from '~/components'
-import PUT_CIRCLE_COMMENT from '~/components/GQL/mutations/putCircleComment'
+import { PUT_CIRCLE_COMMENT } from '~/components/GQL/mutations/putComment'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
-import { CommentDraftQuery, PutCommentMutation } from '~/gql/graphql'
+import { CommentDraftQuery, PutCircleCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -57,9 +58,8 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
     />
   ),
   context,
-
-  ...props
 }) => {
+  const { lang } = useContext(LanguageContext)
   // retrieve comment draft
   const commentDraftId = `${articleId || circleId}:${commentId || 0}:${
     parentId || 0
@@ -70,7 +70,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
     variables: { id: commentDraftId },
   })
 
-  const [putComment] = useMutation<PutCommentMutation>(PUT_CIRCLE_COMMENT)
+  const [putComment] = useMutation<PutCircleCommentMutation>(PUT_CIRCLE_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''
@@ -111,13 +111,13 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
           <FormattedMessage
             defaultMessage="{type} edited"
             id="AlHYvk"
-            values={{ type: COMMENT_TYPE_TEXT.en[type] }}
+            values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
           />
         ) : (
           <FormattedMessage
             defaultMessage="{type} sent"
             id="aPxJXi"
-            values={{ type: COMMENT_TYPE_TEXT.en[type] }}
+            values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
           />
         ),
       })

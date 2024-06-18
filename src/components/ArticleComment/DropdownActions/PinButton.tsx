@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
 import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
-import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import {
   ArticleThreadCommentType,
   Icon,
@@ -12,25 +11,21 @@ import {
   useMutation,
 } from '~/components'
 import { updateArticleComments } from '~/components/GQL'
-import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
+import { TOGGLE_ARTICLE_PIN_COMMENT } from '~/components/GQL/mutations/togglePinComment'
 import {
-  PinButtonCommentFragment,
-  TogglePinCommentMutation,
+  ArticleCommentPinButtonCommentFragment,
+  ToggleArticlePinCommentMutation,
 } from '~/gql/graphql'
 
 const fragments = {
   comment: gql`
-    fragment PinButtonComment on Comment {
+    fragment ArticleCommentPinButtonComment on Comment {
       id
       pinned
       node {
         ... on Article {
           id
           pinCommentLeft
-        }
-        ... on Circle {
-          id
-          name
         }
       }
     }
@@ -41,15 +36,15 @@ const PinButton = ({
   comment,
   pinnedComment,
 }: {
-  comment: PinButtonCommentFragment
+  comment: ArticleCommentPinButtonCommentFragment
   pinnedComment?: ArticleThreadCommentType
 }) => {
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined
   const canPin = !pinnedComment
 
-  const [unpinComment] = useMutation<TogglePinCommentMutation>(
-    TOGGLE_PIN_COMMENT,
+  const [unpinComment] = useMutation<ToggleArticlePinCommentMutation>(
+    TOGGLE_ARTICLE_PIN_COMMENT,
     {
       variables: { id: comment.id, enabled: false },
       optimisticResponse: {
@@ -74,8 +69,8 @@ const PinButton = ({
       },
     }
   )
-  const [pinComment] = useMutation<TogglePinCommentMutation>(
-    TOGGLE_PIN_COMMENT,
+  const [pinComment] = useMutation<ToggleArticlePinCommentMutation>(
+    TOGGLE_ARTICLE_PIN_COMMENT,
     {
       variables: { id: comment.id, enabled: true },
       optimisticResponse: {
@@ -114,7 +109,6 @@ const PinButton = ({
         icon={<Icon icon={IconUnpin} size={20} />}
         onClick={async () => {
           await unpinComment()
-          window.dispatchEvent(new CustomEvent(REFETCH_CIRCLE_DETAIL))
         }}
       />
     )

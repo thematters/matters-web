@@ -11,16 +11,16 @@ import {
   LanguageContext,
 } from '~/components'
 import {
-  ArticleCommentContentCommentPrivateFragment,
-  ArticleCommentContentCommentPublicFragment,
+  CircleCommentContentCommentPrivateFragment,
+  CircleCommentContentCommentPublicFragment,
 } from '~/gql/graphql'
 
 import Collapsed from './Collapsed'
 import styles from './styles.module.css'
 
 interface ContentProps {
-  comment: ArticleCommentContentCommentPublicFragment &
-    Partial<ArticleCommentContentCommentPrivateFragment>
+  comment: CircleCommentContentCommentPublicFragment &
+    Partial<CircleCommentContentCommentPrivateFragment>
   type: CircleCommentFormType
   size?: 14 | 15
   bgColor?: 'greyLighter' | 'white'
