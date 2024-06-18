@@ -18,6 +18,8 @@ import {
 import Content from '../Content'
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import { FooterActionsControls } from '../FooterActions'
+import ReplyButton from '../FooterActions/ReplyButton'
+import UpvoteButton from '../FooterActions/UpvoteButton'
 import RoleLabel from '../RoleLabel'
 // import { fragments } from './gql'
 import styles from './styles.module.css'
@@ -46,12 +48,6 @@ const BaseJournalCommentFeed = ({
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
-
-  // const submitCallback = () => {
-  //   if (replySubmitCallback) {
-  //     replySubmitCallback()
-  //   }
-  // }
 
   const contentClasses = classNames({
     [styles.contentContainer]: true,
@@ -109,12 +105,21 @@ const BaseJournalCommentFeed = ({
       <section className={contentClasses}>
         <Content comment={comment} type={type} size={15} limit={5} />
 
-        {/* <FooterActions
-          comment={comment}
-          type={type}
-          replySubmitCallback={submitCallback}
-          {...actionControls}
-        /> */}
+        <section className={styles.footer}>
+          <UpvoteButton comment={comment} inCard />
+          <ReplyButton
+            type={type}
+            comment={comment}
+            inCard
+            onClick={() => {
+              // TODO:
+              // if (editor === activeEditor) {
+              //   setActiveEditor(null)
+              // }
+              // toggleShowForm()
+            }}
+          />
+        </section>
       </section>
     </article>
   )

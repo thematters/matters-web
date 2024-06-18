@@ -48,6 +48,12 @@
   }
 }
 
+.footer {
+  display: flex;
+  gap: var(--sp16);
+  margin-top: var(--sp8);
+}
+
 .contentContainer {
   margin-top: var(--sp8);
   margin-left: var(--sp48);
