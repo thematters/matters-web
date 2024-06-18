@@ -2,7 +2,7 @@ import { ApolloError } from 'apollo-client'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
@@ -72,6 +72,15 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     { showToast: false }
   )
   const viewer = useContext(ViewerContext)
+  const ref = useRef<HTMLInputElement | null>(null)
+
+  useEffect(() => {
+    if (ref.current) {
+      setTimeout(() => {
+        ref.current?.focus()
+      }, 1000)
+    }
+  }, [ref])
   const formId = 'edit-profile-form'
   const intl = useIntl()
   const validateDescription = (value: string) => {
@@ -185,9 +194,9 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       </section>
 
       <Form.Input
+        ref={ref}
         type="text"
         name="displayName"
-        autoFocus
         required
         placeholder={intl.formatMessage({
           defaultMessage: 'Name',
