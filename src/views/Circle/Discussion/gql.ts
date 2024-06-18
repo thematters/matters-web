@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ThreadComment } from '~/components'
+import { CircleThreadComment } from '~/components'
 
 export const DISCUSSION_PUBLIC = gql`
   query DiscussionPublic($name: String!) {
@@ -60,13 +60,13 @@ export const DISCUSSION_COMMENTS = gql`
         }
         edges {
           node {
-            ...ThreadCommentCommentPublic
-            ...ThreadCommentCommentPrivate
+            ...CircleCommentThreadCommentCommentPublic
+            ...CircleCommentThreadCommentCommentPrivate
           }
         }
       }
     }
   }
-  ${ThreadComment.fragments.comment.public}
-  ${ThreadComment.fragments.comment.private}
+  ${CircleThreadComment.fragments.comment.public}
+  ${CircleThreadComment.fragments.comment.private}
 `

@@ -13,13 +13,13 @@ import {
   parseCommentHash,
 } from '~/common/utils'
 import {
-  CommentForm,
+  CircleCommentForm,
+  CircleThreadComment,
   EmptyComment,
   InfiniteScroll,
   List,
   QueryError,
   SpinnerBlock,
-  ThreadComment,
   Throw404,
   toast,
   usePublicQuery,
@@ -240,7 +240,7 @@ const CricleDiscussion = () => {
       <section className={styles.discussion}>
         {!circle.owner.isBlocking && (
           <header className={styles.header}>
-            <CommentForm
+            <CircleCommentForm
               circleId={circle?.id}
               type="circleDiscussion"
               placeholder={intl.formatMessage({
@@ -274,7 +274,7 @@ const CricleDiscussion = () => {
           <List spacing={['xloose', 0]}>
             {comments.map((comment) => (
               <List.Item key={comment.id}>
-                <ThreadComment
+                <CircleThreadComment
                   comment={comment}
                   type="circleDiscussion"
                   defaultExpand={comment.id === parentId && !!descendantId}
