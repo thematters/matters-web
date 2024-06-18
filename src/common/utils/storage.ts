@@ -1,3 +1,5 @@
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
+
 const parseJSON = (data: string | null) => {
   if (!data) {
     return null
@@ -37,13 +39,16 @@ function isQuotaExceededError(err: unknown): boolean {
  */
 export const storage = {
   get: (key: string) => {
-    if (process.env.DEBUG) {
+    if (isLocal) {
       console.log(`[storage:GET] ${key}`)
+    }
+    if (typeof window === 'undefined') {
+      return null
     }
     return parseJSON(window.localStorage.getItem(key))
   },
   set: (key: string, value: any) => {
-    if (process.env.DEBUG) {
+    if (isLocal) {
       console.log(`[storage:SET] ${key}`, value)
     }
 
@@ -60,7 +65,7 @@ export const storage = {
     }
   },
   remove: (key: string) => {
-    if (process.env.DEBUG) {
+    if (isLocal) {
       console.log(`[storage:REMOVE] ${key}`)
     }
     const item = parseJSON(window.localStorage.getItem(key))
@@ -76,19 +81,22 @@ export const storage = {
  */
 export const sessionStorage = {
   get: (key: string) => {
-    if (process.env.DEBUG) {
+    if (isLocal) {
       console.log(`[sessionStorage:GET] ${key}`)
+    }
+    if (typeof window === 'undefined') {
+      return null
     }
     return parseJSON(window.sessionStorage.getItem(key))
   },
   set: (key: string, value: any) => {
-    if (process.env.DEBUG) {
+    if (isLocal) {
       console.log(`[sessionStorage:SET] ${key}`, value)
     }
     window.sessionStorage.setItem(key, JSON.stringify(value))
   },
   remove: (key: string) => {
-    if (process.env.DEBUG) {
+    if (isLocal) {
       console.log(`[sessionStorage:REMOVE] ${key}`)
     }
     const item = parseJSON(window.sessionStorage.getItem(key))
@@ -105,25 +113,56 @@ export const sessionStorage = {
  * - Edit profile
  * - ...
  */
-type FormDraftStorageKey = `form-draft:${string}:${string}`
-type FormDraftStorageType = 'session' | 'local'
-type FormDraftGenKeyProps = {
+type FormStorageKey = `form-draft:${string}:${string}`
+type FormStorageType = 'session' | 'local'
+type FormGenKeyProps = {
   authorId: string
   formId: string
 }
+type FormGenArticleCommentKeyProps = {
+  authorId: string
+  articleId: string
+  parentId?: string
+  replyToId?: string
+}
 
-export const formDraft = {
-  genKey: ({ authorId, formId }: FormDraftGenKeyProps): FormDraftStorageKey =>
+type FormGenCircleCommentKeyProps = {
+  authorId: string
+  circleId: string
+  type: string
+  parentId?: string
+  replyToId?: string
+}
+
+export const formStorage = {
+  genKey: ({ authorId, formId }: FormGenKeyProps): FormStorageKey =>
     `form-draft:${authorId}:${formId}`,
-  get: (key: FormDraftStorageKey, type: FormDraftStorageType) => {
+  genArticleCommentKey: ({
+    authorId,
+    articleId,
+    parentId,
+    replyToId,
+  }: FormGenArticleCommentKeyProps): FormStorageKey =>
+    `form-draft:${authorId}:${articleId}:${parentId || 0}:${replyToId || 0}`,
+  genCircleCommentKey: ({
+    authorId,
+    circleId,
+    type,
+    parentId,
+    replyToId,
+  }: FormGenCircleCommentKeyProps): FormStorageKey =>
+    `form-draft:${authorId}:${circleId}:${type}:${parentId || 0}:${
+      replyToId || 0
+    }`,
+  get: (key: FormStorageKey, type: FormStorageType) => {
     return type === 'session' ? sessionStorage.get(key) : storage.get(key)
   },
-  set: (key: FormDraftStorageKey, value: any, type: FormDraftStorageType) => {
+  set: (key: FormStorageKey, value: any, type: FormStorageType) => {
     type === 'session'
       ? sessionStorage.set(key, value)
       : storage.set(key, value)
   },
-  remove: (key: FormDraftStorageKey, type: FormDraftStorageType) => {
+  remove: (key: FormStorageKey, type: FormStorageType) => {
     if (type === 'session') {
       return sessionStorage.remove(key)
     } else {
