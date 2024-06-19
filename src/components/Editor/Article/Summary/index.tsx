@@ -57,6 +57,13 @@ const EditorSummary: React.FC<Props> = ({
     }
   }
 
+  const handlePaste = () => {
+    // FIXME: triggers the height adjustment on paste
+    setTimeout(() => {
+      autosize.update(instance.current)
+    })
+  }
+
   React.useEffect(() => {
     if (enable && instance) {
       autosize(instance.current)
@@ -86,6 +93,7 @@ const EditorSummary: React.FC<Props> = ({
           id: '16zJ3o',
         })}
         value={value}
+        onPaste={handlePaste}
         onBlur={handleBlur}
         onChange={handleChange}
         onKeyDown={handleKeyDown}

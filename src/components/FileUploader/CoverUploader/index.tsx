@@ -185,6 +185,7 @@ export const CoverUploader = ({
   const removeCover = (event: any) => {
     event.preventDefault()
     setCover(undefined)
+    setLocalSrc(undefined)
     onUploaded(null)
   }
 
@@ -201,7 +202,7 @@ export const CoverUploader = ({
   const UserProfileMask = () => {
     const maskClasses = classNames({
       [styles.mask]: true,
-      [styles.emptyMask]: !cover,
+      [styles.emptyMask]: !localSrc && !cover,
     })
     return (
       <div className={maskClasses}>

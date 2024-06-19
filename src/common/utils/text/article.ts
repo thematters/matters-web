@@ -1,5 +1,3 @@
-import { distance } from 'fastest-levenshtein'
-
 import { toSizedImageURL } from '../url'
 
 /**
@@ -128,7 +126,10 @@ export const optimizeEmbed = (content: string) => {
 }
 
 /**
- * Get distances of two context diffs.
+ * Match figure tag in HTML content.
  */
-export const measureDiffs = (source: string, target: string) =>
-  distance(source, target)
+const REGEXP_FIGURE_TAG = new RegExp('<figure[^>]*>(.*?)</figure>')
+
+export const containsFigureTag = (content: string) => {
+  return REGEXP_FIGURE_TAG.test(content)
+}

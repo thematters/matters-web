@@ -9,7 +9,7 @@ import {
   ENTITY_TYPE,
   MAX_ARTICLE_CONTENT_LENGTH,
 } from '~/common/enums'
-import { stripHtml } from '~/common/utils'
+import { containsFigureTag, stripHtml } from '~/common/utils'
 import {
   DraftDetailStateContext,
   DraftDetailStateProvider,
@@ -155,7 +155,9 @@ const BaseDraftDetail = () => {
     )
   }
 
-  const hasContent = draft?.content && stripHtml(draft.content).length > 0
+  const hasContent =
+    draft?.content &&
+    (stripHtml(draft.content).length > 0 || containsFigureTag(draft.content))
   const hasTitle = draft?.title && draft.title.length > 0
   const isUnpublished = draft?.publishState === 'unpublished'
   const publishable = !!(
@@ -168,7 +170,7 @@ const BaseDraftDetail = () => {
   )
 
   const upload = async (input: {
-    [key: string]: any
+    [key: string]: string | File
   }): Promise<{ id: string; path: string }> => {
     const isImage = input.type !== ASSET_TYPE.embedaudio
 
@@ -202,7 +204,7 @@ const BaseDraftDetail = () => {
         uploadURL,
       } = result?.data?.directImageUpload || {}
 
-      if (assetId && path && uploadURL) {
+      if (assetId && path && uploadURL && input.file instanceof File) {
         try {
           await uploadImage({ uploadURL, file: input.file })
         } catch (error) {
