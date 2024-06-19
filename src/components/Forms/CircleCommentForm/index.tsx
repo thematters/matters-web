@@ -12,9 +12,9 @@ import {
   Translate,
   useMutation,
 } from '~/components'
-import PUT_CIRCLE_COMMENT from '~/components/GQL/mutations/putCircleComment'
+import { PUT_CIRCLE_COMMENT } from '~/components/GQL/mutations/putComment'
 import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
-import { CommentDraftQuery, PutCommentMutation } from '~/gql/graphql'
+import { CommentDraftQuery, PutCircleCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -64,7 +64,7 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
     variables: { id: commentDraftId },
   })
 
-  const [putComment] = useMutation<PutCommentMutation>(PUT_CIRCLE_COMMENT)
+  const [putComment] = useMutation<PutCircleCommentMutation>(PUT_CIRCLE_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
   const [content, setContent] = useState(
     data?.commentDraft.content || defaultContent || ''

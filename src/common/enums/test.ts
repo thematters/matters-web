@@ -79,6 +79,8 @@ export enum TEST_ID {
   ARTICLE_TOOLBAR = 'article/toolbar',
   ARTICLE_BOOKMARK = 'article/bookmark',
   ARTICLE_COMMENT_FEED = 'article/comment/feed',
+  // circle
+  CIRCLE_COMMENT_FEED = 'circle/comment/feed',
   // payto
   PAY_TO_CURRENCY_CHOICE = 'payto/currency-choice',
   // comment

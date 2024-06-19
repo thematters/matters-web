@@ -68,8 +68,7 @@ export const ArticleCommentContent = ({
       <p className={contentClasses}>
         <FormattedMessage
           defaultMessage="The comment has been forcibly hidden"
-          description="src/components/ArticleComment/Content/index.tsx"
-          id="cY4mv9"
+          id="6BbPcY"
         />
       </p>
     )
@@ -82,8 +81,7 @@ export const ArticleCommentContent = ({
         collapsedContent={
           <FormattedMessage
             defaultMessage="Comment has been hidden"
-            id="6O3d1u"
-            description="src/components/ArticleComment/Content/index.tsx"
+            id="YjW2MT"
           />
         }
         className={contentClasses}

@@ -461,6 +461,9 @@
     "defaultMessage": "Set threshold for circle (per month)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "6BbPcY": {
+    "defaultMessage": "The comment has been forcibly hidden"
+  },
   "6CQaLH": {
     "defaultMessage": "Please select or enter amount"
   },
@@ -477,10 +480,6 @@
   "6N2LKY": {
     "defaultMessage": "Please log in again.",
     "description": "OAUTH_TOKEN_INVALID"
-  },
-  "6O3d1u": {
-    "defaultMessage": "Comment has been hidden",
-    "description": "src/components/ArticleComment/Content/index.tsx"
   },
   "6OBAOi": {
     "defaultMessage": "subscribers_empty",
@@ -712,10 +711,6 @@
     "defaultMessage": "Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "AbhFxG": {
-    "defaultMessage": "After deletion, the {commentType} will be removed immediately",
-    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
-  },
   "AlHYvk": {
     "defaultMessage": "{type} edited"
   },
@@ -841,10 +836,6 @@
   },
   "DP3yqI": {
     "defaultMessage": "Donation count"
-  },
-  "DTDkJN": {
-    "defaultMessage": "Delete {commentType}",
-    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "DUoV1W": {
     "defaultMessage": "Over 140 words, current {numbers}",
@@ -1075,6 +1066,9 @@
   },
   "HYW0fI": {
     "defaultMessage": "After publication, your work cannot be deleted."
+  },
+  "HbEL82": {
+    "defaultMessage": "Comment has been deleted"
   },
   "HkozYU": {
     "defaultMessage": "Switch wallet",
@@ -1577,6 +1571,9 @@
     "defaultMessage": "Please add email first",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
+  "RPH69U": {
+    "defaultMessage": "The author has disabled comments for this circle"
+  },
   "RU5NDB": {
     "defaultMessage": "Please confirm transaction password",
     "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
@@ -1962,6 +1959,9 @@
     "defaultMessage": "My Works - Archived",
     "description": "src/views/Me/Works/Archived/index.tsx"
   },
+  "YjW2MT": {
+    "defaultMessage": "Comment has been hidden"
+  },
   "YlPCRU": {
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -1989,10 +1989,6 @@
   },
   "ZEMcZ6": {
     "defaultMessage": "Article Management"
-  },
-  "ZJskDG": {
-    "defaultMessage": "Edit Comment",
-    "description": "src/components/CircleComment/DropdownActions/index.tsx"
   },
   "ZOW313": {
     "defaultMessage": "You can edit the article four times after publishing it. You can also archive the original and republish.."
@@ -2022,10 +2018,6 @@
   },
   "ZxgUKj": {
     "defaultMessage": "Likes Received"
-  },
-  "Zya3dV": {
-    "defaultMessage": "Unpin Comment",
-    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
   "a/YQ1Z": {
     "defaultMessage": "Archived",
@@ -2148,10 +2140,6 @@
     "defaultMessage": "Currency",
     "description": "src/views/Me/Settings/Misc/Currency/index.tsx"
   },
-  "cY4mv9": {
-    "defaultMessage": "The comment has been forcibly hidden",
-    "description": "src/components/ArticleComment/Content/index.tsx"
-  },
   "cYvIpp": {
     "defaultMessage": "Already subscribed to this circle.",
     "description": "DUPLICATE_CIRCLE_SUBSCRIPTION"
@@ -2255,10 +2243,6 @@
   },
   "eZ0m39": {
     "defaultMessage": "Enter the amount"
-  },
-  "ehO5xU": {
-    "defaultMessage": "{commentType} has been deleted",
-    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "enMIYK": {
     "defaultMessage": "My Page"
@@ -2723,10 +2707,6 @@
   "oGiO//": {
     "defaultMessage": "Insert audio"
   },
-  "oI8PNE": {
-    "defaultMessage": "Write a comment",
-    "description": "src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
-  },
   "ob+HDS": {
     "defaultMessage": "View Circle"
   },
@@ -2982,10 +2962,6 @@
   "uVCg1l": {
     "defaultMessage": "Explore Matters"
   },
-  "uWUeYl": {
-    "defaultMessage": "Pin Comment",
-    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
-  },
   "uYwH7j": {
     "defaultMessage": "Article published"
   },
@@ -3116,12 +3092,18 @@
     "defaultMessage": "Continue",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
+  "wLSBAX": {
+    "defaultMessage": "After deletion, the comment will be removed immediately"
+  },
   "wMNZJa": {
     "defaultMessage": "Notification not found",
     "description": "NOTICE_NOT_FOUND"
   },
   "wNJjR5": {
     "defaultMessage": "Support setting updated"
+  },
+  "wOZRKW": {
+    "defaultMessage": "Delete comment"
   },
   "wSZR47": {
     "defaultMessage": "Submit"

@@ -1,11 +1,9 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
+import { TEST_ID } from '~/common/enums'
 import {
   Dialog,
-  LanguageContext,
   toast,
   useDialogSwitch,
   useMutation,
@@ -40,8 +38,6 @@ const DeleteCommentDialog = ({
   const commentId = comment.id
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined
-
-  const { lang } = useContext(LanguageContext)
 
   const [deleteComment] = useMutation<DeleteCommentMutation>(DELETE_COMMENT, {
     variables: { id: commentId },
@@ -88,12 +84,8 @@ const DeleteCommentDialog = ({
     toast.success({
       message: (
         <FormattedMessage
-          defaultMessage="{commentType} has been deleted"
-          id="ehO5xU"
-          description="src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
-          values={{
-            commentType: COMMENT_TYPE_TEXT[lang].article,
-          }}
+          defaultMessage="Comment has been deleted"
+          id="HbEL82"
         />
       ),
     })
@@ -110,14 +102,7 @@ const DeleteCommentDialog = ({
       >
         <Dialog.Header
           title={
-            <FormattedMessage
-              defaultMessage="Delete {commentType}"
-              id="DTDkJN"
-              description="src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
-              values={{
-                commentType: COMMENT_TYPE_TEXT[lang].article,
-              }}
-            />
+            <FormattedMessage defaultMessage="Delete comment" id="wOZRKW" />
           }
         />
 
@@ -125,12 +110,8 @@ const DeleteCommentDialog = ({
           <Dialog.Content.Message>
             <p>
               <FormattedMessage
-                defaultMessage="After deletion, the {commentType} will be removed immediately"
-                id="AbhFxG"
-                description="src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
-                values={{
-                  commentType: COMMENT_TYPE_TEXT[lang].article,
-                }}
+                defaultMessage="After deletion, the comment will be removed immediately"
+                id="wLSBAX"
               />
             </p>
           </Dialog.Content.Message>

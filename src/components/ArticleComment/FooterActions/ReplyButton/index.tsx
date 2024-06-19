@@ -30,12 +30,6 @@ const fragments = {
         ...ReplyToUser
       }
       node {
-        ... on Circle {
-          id
-          owner {
-            id
-          }
-        }
         ... on Article {
           id
           author {
