@@ -47,7 +47,7 @@ export const storage = {
     }
     return parseJSON(window.localStorage.getItem(key))
   },
-  set: (key: string, value: any) => {
+  set: <T>(key: string, value: T) => {
     if (isLocal) {
       console.log(`[storage:SET] ${key}`, value)
     }
@@ -89,7 +89,7 @@ export const sessionStorage = {
     }
     return parseJSON(window.sessionStorage.getItem(key))
   },
-  set: (key: string, value: any) => {
+  set: <T>(key: string, value: T) => {
     if (isLocal) {
       console.log(`[sessionStorage:SET] ${key}`, value)
     }
@@ -157,7 +157,7 @@ export const formStorage = {
   get: <T>(key: FormStorageKey, type: FormStorageType): T | null => {
     return type === 'session' ? sessionStorage.get<T>(key) : storage.get<T>(key)
   },
-  set: (key: FormStorageKey, value: any, type: FormStorageType) => {
+  set: <T>(key: FormStorageKey, value: T, type: FormStorageType) => {
     type === 'session'
       ? sessionStorage.set(key, value)
       : storage.set(key, value)
