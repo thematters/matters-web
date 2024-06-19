@@ -152,9 +152,12 @@ const Comments = () => {
                             article: node as CommentArticle,
                           })}
                         >
-                          <section className={styles.content}>
-                            {stripHtml(comment.content || '')}
-                          </section>
+                          <section
+                            className={styles.content}
+                            dangerouslySetInnerHTML={{
+                              __html: stripHtml(comment.content || ''),
+                            }}
+                          />
                         </LinkWrapper>
                       </section>
                     </List.Item>
