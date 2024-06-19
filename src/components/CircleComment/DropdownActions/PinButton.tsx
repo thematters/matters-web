@@ -113,19 +113,11 @@ const PinButton = ({
   return (
     <Menu.Item
       text={
-        circle ? (
-          <FormattedMessage
-            defaultMessage="Pin Broadcast"
-            id="8gRHks"
-            description="src/components/CircleComment/DropdownActions/PinButton.tsx"
-          />
-        ) : (
-          <FormattedMessage
-            defaultMessage="Pin Comment"
-            id="uWUeYl"
-            description="src/components/CircleComment/DropdownActions/PinButton.tsx"
-          />
-        )
+        <FormattedMessage
+          defaultMessage="Pin Broadcast"
+          id="8gRHks"
+          description="src/components/CircleComment/DropdownActions/PinButton.tsx"
+        />
       }
       icon={<Icon icon={IconPin} size={20} />}
       onClick={

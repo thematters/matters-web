@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { TEST_ID } from '~/common/enums'
 import { cleanup, render, screen } from '~/common/utils/test'
 import { CommentState } from '~/gql/graphql'
-import { MOCK_CIRCLE, MOCK_COMMENT } from '~/stories/mocks'
+import { MOCK_CIRCLE_COMMENT } from '~/stories/mocks'
 
 import DropdownActions from './'
 
@@ -11,7 +11,7 @@ describe('<CircleComment/DropdownActions>', () => {
   it('should not render dropdown actions if comment is archived', async () => {
     render(
       <DropdownActions
-        comment={{ ...MOCK_COMMENT, state: CommentState.Archived }}
+        comment={{ ...MOCK_CIRCLE_COMMENT, state: CommentState.Archived }}
         type="circleBroadcast"
       />
     )
@@ -23,7 +23,11 @@ describe('<CircleComment/DropdownActions>', () => {
   it('should render pin buttons', async () => {
     render(
       <DropdownActions
-        comment={{ ...MOCK_COMMENT, pinned: false, parentComment: null }}
+        comment={{
+          ...MOCK_CIRCLE_COMMENT,
+          pinned: false,
+          parentComment: null,
+        }}
         type="circleBroadcast"
         hasPin
       />
@@ -33,14 +37,14 @@ describe('<CircleComment/DropdownActions>', () => {
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
     $button.click()
-    const $pinButton = screen.getByRole('menuitem', { name: 'Pin Comment' })
+    const $pinButton = screen.getByRole('menuitem', { name: 'Pin Broadcast' })
     expect($pinButton).toBeInTheDocument()
 
     // unpin button
     cleanup()
     render(
       <DropdownActions
-        comment={{ ...MOCK_COMMENT, pinned: true, parentComment: null }}
+        comment={{ ...MOCK_CIRCLE_COMMENT, pinned: true, parentComment: null }}
         type="circleBroadcast"
         hasPin
       />
@@ -50,7 +54,9 @@ describe('<CircleComment/DropdownActions>', () => {
     const $button2 = screen.getByLabelText('More Actions')
     expect($button2).toBeInTheDocument()
     $button2.click()
-    const $unpinButton = screen.getByRole('menuitem', { name: 'Unpin Comment' })
+    const $unpinButton = screen.getByRole('menuitem', {
+      name: 'Unpin Broadcast',
+    })
     expect($unpinButton).toBeInTheDocument()
   })
 
@@ -58,9 +64,10 @@ describe('<CircleComment/DropdownActions>', () => {
     render(
       <DropdownActions
         comment={{
-          ...MOCK_COMMENT,
+          ...MOCK_CIRCLE_COMMENT,
           node: {
-            ...MOCK_CIRCLE,
+            ...MOCK_CIRCLE_COMMENT.node,
+            owner: { ...MOCK_CIRCLE_COMMENT.node.owner, id: 'another_user' },
           },
           pinned: false,
           parentComment: null,
@@ -72,7 +79,7 @@ describe('<CircleComment/DropdownActions>', () => {
     const $button = screen.getByLabelText('More Actions')
     expect($button).toBeInTheDocument()
     $button.click()
-    const $pinButton = screen.queryByRole('menuitem', { name: 'Pin Comment' })
+    const $pinButton = screen.queryByRole('menuitem', { name: 'Pin Broadcast' })
     expect($pinButton).not.toBeInTheDocument()
   })
 
@@ -80,7 +87,7 @@ describe('<CircleComment/DropdownActions>', () => {
   it('should render edit button', async () => {
     render(
       <DropdownActions
-        comment={{ ...MOCK_COMMENT, state: CommentState.Active }}
+        comment={{ ...MOCK_CIRCLE_COMMENT, state: CommentState.Active }}
         type="circleBroadcast"
       />
     )
@@ -97,8 +104,8 @@ describe('<CircleComment/DropdownActions>', () => {
     render(
       <DropdownActions
         comment={{
-          ...MOCK_COMMENT,
-          author: { ...MOCK_COMMENT.author, id: 'another_user' },
+          ...MOCK_CIRCLE_COMMENT,
+          author: { ...MOCK_CIRCLE_COMMENT.author, id: 'another_user' },
           state: CommentState.Active,
         }}
         type="circleBroadcast"
@@ -116,7 +123,7 @@ describe('<CircleComment/DropdownActions>', () => {
   it('should render delete button', async () => {
     render(
       <DropdownActions
-        comment={{ ...MOCK_COMMENT, state: CommentState.Active }}
+        comment={{ ...MOCK_CIRCLE_COMMENT, state: CommentState.Active }}
         type="circleBroadcast"
       />
     )
@@ -139,8 +146,8 @@ describe('<CircleComment/DropdownActions>', () => {
     render(
       <DropdownActions
         comment={{
-          ...MOCK_COMMENT,
-          author: { ...MOCK_COMMENT.author, id: 'another-user' },
+          ...MOCK_CIRCLE_COMMENT,
+          author: { ...MOCK_CIRCLE_COMMENT.author, id: 'another-user' },
         }}
         type="circleBroadcast"
       />
@@ -166,8 +173,8 @@ describe('<CircleComment/DropdownActions>', () => {
     render(
       <DropdownActions
         comment={{
-          ...MOCK_COMMENT,
-          author: { ...MOCK_COMMENT.author, id: 'another-user' },
+          ...MOCK_CIRCLE_COMMENT,
+          author: { ...MOCK_CIRCLE_COMMENT.author, id: 'another-user' },
         }}
         type="circleBroadcast"
       />
@@ -193,8 +200,8 @@ describe('<CircleComment/DropdownActions>', () => {
     render(
       <DropdownActions
         comment={{
-          ...MOCK_COMMENT,
-          author: { ...MOCK_COMMENT.author, id: 'another-user' },
+          ...MOCK_CIRCLE_COMMENT,
+          author: { ...MOCK_CIRCLE_COMMENT.author, id: 'another-user' },
           state: CommentState.Collapsed,
         }}
         type="circleBroadcast"
