@@ -12,17 +12,12 @@
   @mixin flex-center-space-between;
 
   position: absolute;
-  top: var(--sp16);
   right: var(--sp16);
   left: var(--sp16);
   z-index: 1;
   height: 2rem;
-  padding-top: var(--sp8);
-  padding-left: var(--sp8);
 
   @media (--sm-up) {
-    padding-top: var(--sp32);
-    padding-left: 0;
     margin-left: calc(0 - var(--sp8));
   }
 
