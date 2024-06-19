@@ -46,6 +46,7 @@ const CommentDetail = () => {
       variables: {
         id: parentId,
       },
+      fetchPolicy: 'network-only',
     }
   )
 

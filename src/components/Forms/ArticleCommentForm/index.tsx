@@ -23,7 +23,7 @@ import {
   updateArticlePublic,
   updateCommentDetail,
 } from '~/components/GQL'
-import PUT_ARTICLE_COMMENT from '~/components/GQL/mutations/putArticleComment'
+import { PUT_ARTICLE_COMMENT } from '~/components/GQL/mutations/putComment'
 import { PutArticleCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'

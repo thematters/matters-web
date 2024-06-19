@@ -7,13 +7,14 @@ import { dom, formStorage, stripHtml } from '~/common/utils'
 import {
   CircleCommentFormType,
   Dialog,
+  LanguageContext,
   SpinnerBlock,
   toast,
   useMutation,
   ViewerContext,
 } from '~/components'
-import PUT_CIRCLE_COMMENT from '~/components/GQL/mutations/putCircleComment'
-import { PutCommentMutation } from '~/gql/graphql'
+import { PUT_CIRCLE_COMMENT } from '~/components/GQL/mutations/putComment'
+import { PutCircleCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -56,8 +57,9 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
   context,
 }) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
 
-  const [putComment] = useMutation<PutCommentMutation>(PUT_CIRCLE_COMMENT)
+  const [putComment] = useMutation<PutCircleCommentMutation>(PUT_CIRCLE_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
 
   const formStorageKey = formStorage.genCircleCommentKey({
@@ -105,13 +107,13 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
           <FormattedMessage
             defaultMessage="{type} edited"
             id="AlHYvk"
-            values={{ type: COMMENT_TYPE_TEXT.en[type] }}
+            values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
           />
         ) : (
           <FormattedMessage
             defaultMessage="{type} sent"
             id="aPxJXi"
-            values={{ type: COMMENT_TYPE_TEXT.en[type] }}
+            values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
           />
         ),
       })

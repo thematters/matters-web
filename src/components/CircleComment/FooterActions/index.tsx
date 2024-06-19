@@ -110,8 +110,8 @@ const BaseFooterActions = ({
       toast.error({
         message: (
           <FormattedMessage
-            defaultMessage="The author has disabled comments for this article"
-            id="7cwoRo"
+            defaultMessage="The author has disabled comments for this circle"
+            id="RPH69U"
           />
         ),
       })

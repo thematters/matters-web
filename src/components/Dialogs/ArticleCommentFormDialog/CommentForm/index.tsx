@@ -11,7 +11,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import PUT_ARTICLE_COMMENT from '~/components/GQL/mutations/putArticleComment'
+import { PUT_ARTICLE_COMMENT } from '~/components/GQL/mutations/putComment'
 import {
   updateArticleComments,
   updateArticlePublic,

@@ -12,8 +12,8 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import PUT_CIRCLE_COMMENT from '~/components/GQL/mutations/putCircleComment'
-import { PutCommentMutation } from '~/gql/graphql'
+import { PUT_CIRCLE_COMMENT } from '~/components/GQL/mutations/putComment'
+import { PutCircleCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -52,7 +52,7 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
 
-  const [putComment] = useMutation<PutCommentMutation>(PUT_CIRCLE_COMMENT)
+  const [putComment] = useMutation<PutCircleCommentMutation>(PUT_CIRCLE_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
 
   const formStorageKey = formStorage.genCircleCommentKey({

@@ -9,7 +9,7 @@ describe('<CircleCommentFeed>', () => {
   it('should render a Comment.Feed', () => {
     render(<CircleCommentFeed comment={MOCK_COMMENT} type="circleBroadcast" />)
 
-    const $digest = screen.getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)
+    const $digest = screen.getByTestId(TEST_ID.CIRCLE_COMMENT_FEED)
     expect($digest).toBeInTheDocument()
 
     // author
@@ -36,7 +36,7 @@ describe('<CircleCommentFeed>', () => {
       />
     )
 
-    const $digest = screen.getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)
+    const $digest = screen.getByTestId(TEST_ID.CIRCLE_COMMENT_FEED)
     expect($digest).toBeInTheDocument()
 
     // replyTo
@@ -56,7 +56,7 @@ describe('<CircleCommentFeed>', () => {
         type="circleBroadcast"
       />
     )
-    const $digest = screen.getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)
+    const $digest = screen.getByTestId(TEST_ID.CIRCLE_COMMENT_FEED)
     expect($digest).toBeInTheDocument()
     const $replyTo = screen.queryByTestId(TEST_ID.COMMENT_REPLY_TO)
     expect($replyTo).not.toBeInTheDocument()
@@ -73,7 +73,7 @@ describe('<CircleCommentFeed>', () => {
         type="circleBroadcast"
       />
     )
-    const $digest2 = screen.getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)
+    const $digest2 = screen.getByTestId(TEST_ID.CIRCLE_COMMENT_FEED)
     expect($digest2).toBeInTheDocument()
     const $replyTo2 = screen.queryByTestId(TEST_ID.COMMENT_REPLY_TO)
     expect($replyTo2).not.toBeInTheDocument()
