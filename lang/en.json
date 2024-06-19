@@ -2962,10 +2962,6 @@
   "uVCg1l": {
     "defaultMessage": "Explore Matters"
   },
-  "uWUeYl": {
-    "defaultMessage": "Pin Comment",
-    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
-  },
   "uYwH7j": {
     "defaultMessage": "Article published"
   },

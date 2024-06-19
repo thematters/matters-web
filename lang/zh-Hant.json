@@ -2962,10 +2962,6 @@
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"
   },
-  "uWUeYl": {
-    "defaultMessage": "置頂",
-    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
-  },
   "uYwH7j": {
     "defaultMessage": "作品已發佈"
   },
