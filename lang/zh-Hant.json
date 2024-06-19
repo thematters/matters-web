@@ -461,6 +461,9 @@
     "defaultMessage": "設定圍爐門檻（每月）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "6BbPcY": {
+    "defaultMessage": "因違反社區約章，評論已被隱藏"
+  },
   "6CQaLH": {
     "defaultMessage": "請選擇或輸入金額"
   },
@@ -477,10 +480,6 @@
   "6N2LKY": {
     "defaultMessage": "授權信息已失效，請重新登入",
     "description": "OAUTH_TOKEN_INVALID"
-  },
-  "6O3d1u": {
-    "defaultMessage": "評論已隱藏",
-    "description": "src/components/ArticleComment/Content/index.tsx"
   },
   "6OBAOi": {
     "defaultMessage": "目前總訂閱人數",
@@ -712,10 +711,6 @@
     "defaultMessage": "追蹤",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "AbhFxG": {
-    "defaultMessage": "確認刪除後，{commentType}會立即消失。",
-    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
-  },
   "AlHYvk": {
     "defaultMessage": "{type}已編輯"
   },
@@ -841,10 +836,6 @@
   },
   "DP3yqI": {
     "defaultMessage": "支持人數"
-  },
-  "DTDkJN": {
-    "defaultMessage": "刪除{commentType}",
-    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "DUoV1W": {
     "defaultMessage": "已超過 140 字，目前 {numbers} 字",
@@ -1075,6 +1066,9 @@
   },
   "HYW0fI": {
     "defaultMessage": "上鏈後，作品不可刪除，去中心化保存"
+  },
+  "HbEL82": {
+    "defaultMessage": "評論已刪除"
   },
   "HkozYU": {
     "defaultMessage": "更換錢包",
@@ -1577,6 +1571,9 @@
     "defaultMessage": "請先綁定郵箱",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/Email.tsx"
   },
+  "RPH69U": {
+    "defaultMessage": "作者已關閉評論區"
+  },
   "RU5NDB": {
     "defaultMessage": "請再次輸入交易密碼",
     "description": "src/components/Forms/PaymentForm/SetPassword/index.tsx"
@@ -1962,6 +1959,9 @@
     "defaultMessage": "我的創作 - 已封存",
     "description": "src/views/Me/Works/Archived/index.tsx"
   },
+  "YjW2MT": {
+    "defaultMessage": "評論已隱藏"
+  },
   "YlPCRU": {
     "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
@@ -1989,10 +1989,6 @@
   },
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
-  },
-  "ZJskDG": {
-    "defaultMessage": "編輯",
-    "description": "src/components/CircleComment/DropdownActions/index.tsx"
   },
   "ZOW313": {
     "defaultMessage": "首次發布作品後有四次正文編輯機會，你也可以歸檔原文重新發布作品。"
@@ -2022,10 +2018,6 @@
   },
   "ZxgUKj": {
     "defaultMessage": "讚賞我的"
-  },
-  "Zya3dV": {
-    "defaultMessage": "取消置頂",
-    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
   },
   "a/YQ1Z": {
     "defaultMessage": "作品已封存",
@@ -2148,10 +2140,6 @@
     "defaultMessage": "匯率幣別",
     "description": "src/views/Me/Settings/Misc/Currency/index.tsx"
   },
-  "cY4mv9": {
-    "defaultMessage": "因違反社區約章，評論已被隱藏",
-    "description": "src/components/ArticleComment/Content/index.tsx"
-  },
   "cYvIpp": {
     "defaultMessage": "無需重複訂閱此圍爐",
     "description": "DUPLICATE_CIRCLE_SUBSCRIPTION"
@@ -2255,10 +2243,6 @@
   },
   "eZ0m39": {
     "defaultMessage": "或輸入自定義金額"
-  },
-  "ehO5xU": {
-    "defaultMessage": "{commentType}已刪除",
-    "description": "src/components/ArticleComment/DropdownActions/DeleteComment/Dialog.tsx"
   },
   "enMIYK": {
     "defaultMessage": "我的"
@@ -2723,10 +2707,6 @@
   "oGiO//": {
     "defaultMessage": "插入音訊"
   },
-  "oI8PNE": {
-    "defaultMessage": "回覆評論",
-    "description": "src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
-  },
   "ob+HDS": {
     "defaultMessage": "馬上逛逛"
   },
@@ -2982,10 +2962,6 @@
   "uVCg1l": {
     "defaultMessage": "玩轉 Matters 實用指南"
   },
-  "uWUeYl": {
-    "defaultMessage": "置頂",
-    "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
-  },
   "uYwH7j": {
     "defaultMessage": "作品已發佈"
   },
@@ -3116,12 +3092,18 @@
     "defaultMessage": "註冊",
     "description": "src/components/Forms/EmailSignUpForm/Init.tsx"
   },
+  "wLSBAX": {
+    "defaultMessage": "確認刪除後，評論會立即消失。"
+  },
   "wMNZJa": {
     "defaultMessage": "通知不存在",
     "description": "NOTICE_NOT_FOUND"
   },
   "wNJjR5": {
     "defaultMessage": "支持反饋設置成功"
+  },
+  "wOZRKW": {
+    "defaultMessage": "刪除評論"
   },
   "wSZR47": {
     "defaultMessage": "提交"
