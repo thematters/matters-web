@@ -81,7 +81,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
     parentId,
     replyToId,
   })
-  const formDraft = formStorage.get(formStorageKey, 'local')
+  const formDraft = formStorage.get<string>(formStorageKey, 'local')
   const [content, setContent] = useState(
     (typeof formDraft === 'string' && formDraft.length > 0 && formDraft) ||
       defaultContent ||
@@ -165,7 +165,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
       onClear()
 
       // clear draft
-      formStorage.remove(formStorageKey, 'local')
+      formStorage.remove<string>(formStorageKey, 'local')
 
       if (closeCallback) {
         closeCallback()

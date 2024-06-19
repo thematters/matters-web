@@ -186,7 +186,7 @@ const agentHashLink = setContext((_, { headers }) => {
   let hash: string | null = null
 
   if (typeof window !== 'undefined') {
-    const stored = storage.get(STORAGE_KEY_AGENT_HASH)
+    const stored = storage.get<string>(STORAGE_KEY_AGENT_HASH)
     if (stored && stored.startsWith(AGENT_HASH_PREFIX)) {
       hash = stored
     }
