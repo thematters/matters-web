@@ -69,7 +69,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
     parentId,
     replyToId,
   })
-  const formDraft = formStorage.get(formStorageKey, 'local')
+  const formDraft = formStorage.get<string>(formStorageKey, 'local')
   const [content, setContent] = useState(
     (typeof formDraft === 'string' && formDraft.length > 0 && formDraft) ||
       defaultContent ||
@@ -100,7 +100,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
       setContent('')
 
       // clear draft
-      formStorage.remove(formStorageKey, 'local')
+      formStorage.remove<string>(formStorageKey, 'local')
 
       toast.success({
         message: commentId ? (

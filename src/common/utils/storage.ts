@@ -38,7 +38,7 @@ function isQuotaExceededError(err: unknown): boolean {
  * (works on CSR)
  */
 export const storage = {
-  get: (key: string) => {
+  get: <T>(key: string): T | null => {
     if (isLocal) {
       console.log(`[storage:GET] ${key}`)
     }
@@ -64,7 +64,7 @@ export const storage = {
       }
     }
   },
-  remove: (key: string) => {
+  remove: <T>(key: string): T | null => {
     if (isLocal) {
       console.log(`[storage:REMOVE] ${key}`)
     }
@@ -80,7 +80,7 @@ export const storage = {
  * (works on CSR)
  */
 export const sessionStorage = {
-  get: (key: string) => {
+  get: <T>(key: string): T | null => {
     if (isLocal) {
       console.log(`[sessionStorage:GET] ${key}`)
     }
@@ -95,7 +95,7 @@ export const sessionStorage = {
     }
     window.sessionStorage.setItem(key, JSON.stringify(value))
   },
-  remove: (key: string) => {
+  remove: <T>(key: string): T | null => {
     if (isLocal) {
       console.log(`[sessionStorage:REMOVE] ${key}`)
     }
@@ -154,19 +154,19 @@ export const formStorage = {
     `form-draft:${authorId}:${circleId}:${type}:${parentId || 0}:${
       replyToId || 0
     }`,
-  get: (key: FormStorageKey, type: FormStorageType) => {
-    return type === 'session' ? sessionStorage.get(key) : storage.get(key)
+  get: <T>(key: FormStorageKey, type: FormStorageType): T | null => {
+    return type === 'session' ? sessionStorage.get<T>(key) : storage.get<T>(key)
   },
   set: (key: FormStorageKey, value: any, type: FormStorageType) => {
     type === 'session'
       ? sessionStorage.set(key, value)
       : storage.set(key, value)
   },
-  remove: (key: FormStorageKey, type: FormStorageType) => {
+  remove: <T>(key: FormStorageKey, type: FormStorageType): T | null => {
     if (type === 'session') {
-      return sessionStorage.remove(key)
+      return sessionStorage.remove<T>(key)
     } else {
-      return storage.remove(key)
+      return storage.remove<T>(key)
     }
   },
 }
