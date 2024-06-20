@@ -4,7 +4,7 @@
   white-space: nowrap;
 
   @media (--sm-up) {
-    padding: var(--sp16) 0;
+    padding: var(--sp32) 0 var(--sp16);
   }
 
   &.sticky {
