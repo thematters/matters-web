@@ -117,6 +117,7 @@ const JournalDetail = () => {
   useEventListener(ADD_JOURNAL_COMMENT, (payload: { [key: string]: any }) => {
     const input = payload?.input
     const newComment = Object.assign({}, mockComment) as ThreadCommentType
+    newComment.author = viewer as any
     newComment.id = input.id
     newComment.content = input.content
     newComment.createdAt = input.createdAt
