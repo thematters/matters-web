@@ -50,16 +50,6 @@ const UserArticles = () => {
   const [journals, setJournals] = useState<JournalDigestProps[]>([])
 
   useEffect(() => {
-    const journalId = window.location.hash.replace('#', '')
-    if (!journalId) {
-      return
-    }
-    document
-      .querySelector(`#${USER_PROFILE_JOURNAL_DIGEST_FEED_PREFIX}${journalId}`)
-      ?.scrollIntoView({ behavior: 'smooth', block: 'center' })
-  }, [])
-
-  useEffect(() => {
     if (isViewer) {
       setJournals(storage.get(KEY) || [])
     }
@@ -135,6 +125,24 @@ const UserArticles = () => {
 
     setJournals([newJournal, ...journals])
   })
+
+  useEffect(() => {
+    if (!data && !journals.length) {
+      return
+    }
+
+    const journalId = window.location.hash.replace('#', '')
+    if (!journalId) {
+      return
+    }
+    const selector = `#${USER_PROFILE_JOURNAL_DIGEST_FEED_PREFIX}${journalId}`
+
+    const element = document.querySelector(selector)
+    console.log({ selector, element })
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [data, journals])
 
   /**
    * Render
