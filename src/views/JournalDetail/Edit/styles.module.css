@@ -26,28 +26,24 @@
 
 .form {
   position: relative;
-  padding: var(--sp12) 0;
 }
 
 .content {
   @mixin hide-scrollbar;
 
-  /* height: calc(var(--ivh) * 100 - 62px - 108px); */
-  padding: var(--sp4) var(--sp16);
-  margin-bottom: var(--sp8);
+  min-height: 104px;
+  padding: 0 var(--sp16);
   overflow: scroll;
 
   & :global(.ProseMirror),
   & :global(.tiptap) {
-    height: calc(var(--vvh) * 100 - 62px - 108px);
+    min-height: 104px;
   }
 }
 
 .footer {
   @mixin flex-end-space-between;
 
-  position: fixed;
-  top: calc(var(--vvh) * 100 - 108px);
   gap: var(--sp4);
   padding: var(--sp12) var(--sp16);
 
