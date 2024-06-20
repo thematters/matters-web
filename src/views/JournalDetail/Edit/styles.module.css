@@ -32,14 +32,14 @@
 .content {
   @mixin hide-scrollbar;
 
-  height: calc(var(--ivh) * 100 - 62px - 108px);
+  /* height: calc(var(--ivh) * 100 - 62px - 108px); */
   padding: var(--sp4) var(--sp16);
   margin-bottom: var(--sp8);
   overflow: scroll;
 
   & :global(.ProseMirror),
   & :global(.tiptap) {
-    height: calc(var(--ivh) * 100 - 62px - 108px);
+    height: calc(var(--vvh) * 100 - 62px - 108px);
   }
 }
 
