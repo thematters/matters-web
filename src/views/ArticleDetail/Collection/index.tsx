@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import _uniq from 'lodash/uniq'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'

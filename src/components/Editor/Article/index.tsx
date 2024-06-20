@@ -12,6 +12,7 @@ import {
   FigureEmbedLinkInput,
   FigurePlaceholder,
   makeMentionSuggestion,
+  SmartLink,
 } from './extensions'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.module.css'
@@ -67,6 +68,22 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       }),
       CaptionLimit.configure({
         maxCaptionLength: 100,
+      }),
+      SmartLink.configure({
+        findRule: new RegExp(
+          `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/(?<key>[a-zA-Z0-9]+)`,
+          'g'
+        ),
+        search: async ({
+          key,
+          replace,
+        }: {
+          key: string
+          replace: (text: string) => void
+        }) => {
+          // TODO
+          console.log('search', key)
+        },
       }),
     ],
   })
