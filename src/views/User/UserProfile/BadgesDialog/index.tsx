@@ -45,7 +45,7 @@ export const BaseBadgesDialog = ({
     <>
       {children({ openDialog: openStepDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog} dismissOnClickOutside>
+      <Dialog isOpen={show} onDismiss={closeDialog}>
         {isInBadgesStep && (
           <>
             <Dialog.Header

@@ -176,6 +176,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
               saving={tagsSaving}
               createTag
               CustomStagingArea={TagCustomStagingArea}
+              dismissOnClickOutside={false}
+              dismissOnESC={false}
             >
               {({ openDialog }) => (
                 <button
@@ -218,6 +220,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
               nodes={collection}
               saving={collectionSaving}
               CustomStagingArea={ArticleCustomStagingArea}
+              dismissOnClickOutside={false}
+              dismissOnESC={false}
             >
               {({ openDialog }) => (
                 <button

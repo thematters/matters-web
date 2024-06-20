@@ -9,6 +9,8 @@ type EditorSearchSelectDialogProps = Omit<
   'closeDialog'
 > & {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
+  dismissOnClickOutside?: boolean
+  dismissOnESC?: boolean
 }
 
 const DynamicEditorSearchSelectForm = dynamic(
@@ -18,6 +20,8 @@ const DynamicEditorSearchSelectForm = dynamic(
 
 const BaseSearchSelectDialog = ({
   children,
+  dismissOnClickOutside,
+  dismissOnESC,
   ...props
 }: EditorSearchSelectDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
@@ -26,7 +30,12 @@ const BaseSearchSelectDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        dismissOnClickOutside={dismissOnClickOutside}
+        dismissOnESC={dismissOnESC}
+      >
         <DynamicEditorSearchSelectForm
           {...props}
           onSave={async (nodes: SelectNode[]) => {
