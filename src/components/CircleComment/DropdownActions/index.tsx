@@ -222,7 +222,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
     BaseDropdownActions,
     CircleCommentFormDialog,
     {
-      circleId: circle?.id,
+      circleId: circle?.id!,
       type,
       commentId: comment.id,
       defaultContent: comment.content,

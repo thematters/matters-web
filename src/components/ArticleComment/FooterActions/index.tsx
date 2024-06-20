@@ -190,7 +190,7 @@ const BaseFooterActions = ({
             <>
               <Media at="sm">
                 <ArticleCommentFormDialog
-                  articleId={article?.id}
+                  articleId={article?.id!}
                   replyToId={comment.id}
                   parentId={comment.parentComment?.id || comment.id}
                   submitCallback={submitCallback}
@@ -230,7 +230,7 @@ const BaseFooterActions = ({
           <>
             <Spacer size="base" />
             <ArticleCommentForm
-              articleId={article?.id}
+              articleId={article?.id!}
               setEditor={setEditor}
               replyToId={comment.id}
               parentId={comment.parentComment?.id || comment.id}

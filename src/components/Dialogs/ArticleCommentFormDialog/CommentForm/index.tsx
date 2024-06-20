@@ -1,19 +1,23 @@
-import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
-import { dom, stripHtml, trimCommentContent } from '~/common/utils'
-import { Dialog, SpinnerBlock, useMutation, useRoute } from '~/components'
+import { dom, formStorage, stripHtml, trimCommentContent } from '~/common/utils'
+import {
+  Dialog,
+  SpinnerBlock,
+  useMutation,
+  useRoute,
+  ViewerContext,
+} from '~/components'
 import { PUT_ARTICLE_COMMENT } from '~/components/GQL/mutations/putComment'
-import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
 import {
   updateArticleComments,
   updateArticlePublic,
   updateCommentDetail,
 } from '~/components/GQL/updates'
-import { CommentDraftQuery, PutArticleCommentMutation } from '~/gql/graphql'
+import { PutArticleCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -23,11 +27,9 @@ const CommentEditor = dynamic(() => import('~/components/Editor/Comment'), {
 })
 
 export interface CommentFormProps {
-  commentId?: string
   replyToId?: string
   parentId?: string
-  circleId?: string
-  articleId?: string
+  articleId: string
 
   isInCommentDetail?: boolean
 
@@ -39,39 +41,36 @@ export interface CommentFormProps {
 }
 
 const CommentForm: React.FC<CommentFormProps> = ({
-  commentId,
   replyToId,
   parentId,
   articleId,
-  circleId,
 
   isInCommentDetail,
   defaultContent,
   submitCallback,
   closeDialog,
-  title,
   context,
-
-  ...props
 }) => {
-  // retrieve comment draft
-  const commentDraftId = `${articleId || circleId}:${commentId || 0}:${
-    parentId || 0
-  }:${replyToId || 0}`
-  const formId = `comment-form-${commentDraftId}`
+  const viewer = useContext(ViewerContext)
   const formRef = useRef<HTMLFormElement>(null)
   const { getQuery, routerLang } = useRoute()
   const shortHash = getQuery('shortHash')
 
-  const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
-    variables: { id: commentDraftId },
-  })
-
   const [putComment] =
     useMutation<PutArticleCommentMutation>(PUT_ARTICLE_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
+
+  const formStorageKey = formStorage.genArticleCommentKey({
+    authorId: viewer.id,
+    articleId,
+    parentId,
+    replyToId,
+  })
+  const formDraft = formStorage.get<string>(formStorageKey, 'local')
   const [content, setContent] = useState(
-    data?.commentDraft.content || defaultContent || ''
+    (typeof formDraft === 'string' && formDraft.length > 0 && formDraft) ||
+      defaultContent ||
+      ''
   )
   const contentCount = stripHtml(content).length
   const isValid = contentCount > 0 && contentCount <= MAX_ARTICLE_COMMENT_LENGTH
@@ -80,12 +79,10 @@ const CommentForm: React.FC<CommentFormProps> = ({
     const mentions = dom.getAttributes('data-id', content)
     const trimContent = trimCommentContent(content)
     const input = {
-      id: commentId,
       comment: {
         content: trimContent,
         replyTo: replyToId,
         articleId,
-        circleId,
         parentId,
         type: 'article',
         mentions,
@@ -102,7 +99,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
           if (!!parentId && !isInCommentDetail) {
             updateArticleComments({
               cache,
-              articleId: articleId || '',
+              articleId,
               commentId: parentId,
               type: 'addSecondaryComment',
               comment: mutationResult.data?.putComment,
@@ -117,7 +114,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
           } else {
             updateArticleComments({
               cache,
-              articleId: articleId || '',
+              articleId,
               type: 'add',
               comment: mutationResult.data?.putComment,
             })
@@ -144,10 +141,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
       setContent('')
 
       // clear draft
-      client.writeData({
-        id: `CommentDraft:${commentDraftId}`,
-        data: { content: '' },
-      })
+      formStorage.remove<string>(formStorageKey, 'local')
 
       setSubmitting(false)
 
@@ -165,10 +159,8 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const onUpdate = ({ content: newContent }: { content: string }) => {
     setContent(newContent)
 
-    client.writeData({
-      id: `CommentDraft:${commentDraftId}`,
-      data: { content: newContent },
-    })
+    // save draft
+    formStorage.set(formStorageKey, newContent, 'local')
   }
 
   useEffect(() => {
@@ -216,7 +208,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
             )}
             <Dialog.RoundedButton
               type="submit"
-              form={formId}
+              form={formStorageKey}
               disabled={isSubmitting || !isValid}
               text={<FormattedMessage defaultMessage="Publish" id="syEQFE" />}
               textSize={14}
@@ -235,7 +227,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
         <form
           className={styles.form}
-          id={formId}
+          id={formStorageKey}
           onSubmit={handleSubmit}
           ref={formRef}
         >
