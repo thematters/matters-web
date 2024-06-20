@@ -6,7 +6,6 @@ import { Gallery, Item } from 'react-photoswipe-gallery'
 import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
-import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { toPath } from '~/common/utils'
 
 import { DateTime } from '../DateTime'
@@ -52,8 +51,6 @@ export const JournalDigest: React.FC<JournalDigestProps> = ({
     return (
       <section className={styles.container}>
         <header>
-          <b className={styles.say}>说</b>
-          <Icon icon={IconDot} color="greyLight" size={18} />
           <DateTime date={createdAt} color="grey" />
         </header>
         {!!content && (
