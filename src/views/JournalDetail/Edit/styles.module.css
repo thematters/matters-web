@@ -47,6 +47,7 @@
   @mixin flex-end-space-between;
 
   position: fixed;
+  top: calc(var(--vvh) * 100 - 108px);
   bottom: 0;
   gap: var(--sp4);
   padding: var(--sp12) var(--sp16);
