@@ -6,13 +6,13 @@ import { useIntl } from 'react-intl'
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
 import { numAbbr } from '~/common/utils'
-import { Button, Icon, TextIcon, useMutation } from '~/components'
+import { Button, Icon, TextIcon } from '~/components'
+// import {
+//   UNVOTE_COMMENT,
+//   // VOTE_COMMENT,
+// } from '~/components/GQL/mutations/voteComment'
 import {
-  UNVOTE_COMMENT,
-  // VOTE_COMMENT,
-} from '~/components/GQL/mutations/voteComment'
-import {
-  UnvoteCommentMutation,
+  // UnvoteCommentMutation,
   UpvoteCommentBetaPrivateFragment,
   UpvoteCommentBetaPublicFragment,
   // VoteCommentMutation,
@@ -53,19 +53,20 @@ const UpvoteButton = ({
 }: UpvoteButtonProps) => {
   const intl = useIntl()
   const [playHeartBeat, setPlayHeartBeat] = useState(false)
+  const [voted, setVoted] = useState(false)
 
-  const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
-    variables: { id: comment.id },
-    optimisticResponse: {
-      unvoteComment: {
-        id: comment.id,
-        upvotes: comment.upvotes - 1,
-        downvotes: 0,
-        myVote: null,
-        __typename: 'Comment',
-      },
-    },
-  })
+  // const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
+  //   variables: { id: comment.id },
+  //   optimisticResponse: {
+  //     unvoteComment: {
+  //       id: comment.id,
+  //       upvotes: comment.upvotes - 1,
+  //       downvotes: 0,
+  //       myVote: null,
+  //       __typename: 'Comment',
+  //     },
+  //   },
+  // })
   // const [upvote] = useMutation<VoteCommentMutation>(VOTE_COMMENT, {
   //   variables: { id: comment.id, vote: 'up' },
   //   optimisticResponse: {
@@ -84,12 +85,12 @@ const UpvoteButton = ({
     [styles.heartBeat]: playHeartBeat,
   })
 
-  if (comment.myVote === 'up') {
+  if (voted) {
     return (
       <Button
         spacing={[8, 8]}
         onClick={() => {
-          onClick ? onClick() : unvote()
+          onClick ? onClick() : setVoted(false)
           setPlayHeartBeat(false)
         }}
         disabled={disabled}
@@ -121,6 +122,7 @@ const UpvoteButton = ({
       onClick={() => {
         // TODO:
         // onClick ? onClick() : upvote()
+        setVoted(true)
         setPlayHeartBeat(true)
       }}
       disabled={disabled}
