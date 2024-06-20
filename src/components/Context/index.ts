@@ -1,4 +1,3 @@
-export * from './CommentDrafts'
 export * from './CommentEditor'
 export * from './DraftDetailState'
 export * from './Drawer'

@@ -7,10 +7,9 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { dom, stripHtml, trimCommentContent } from '~/common/utils'
+import { dom, formStorage, stripHtml, trimCommentContent } from '~/common/utils'
 import {
   Button,
-  CommentDraftsContext,
   SpinnerBlock,
   TextIcon,
   useCommentEditorContext,
@@ -33,7 +32,7 @@ export interface ArticleCommentFormProps {
   commentId?: string
   replyToId?: string
   parentId?: string
-  articleId?: string
+  articleId: string
   isInCommentDetail?: boolean
 
   defaultContent?: string | null
@@ -63,8 +62,6 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
-  const { getDraft, updateDraft, removeDraft } =
-    useContext(CommentDraftsContext)
   const { getQuery, routerLang } = useRoute()
   const { setActiveEditor } = useCommentEditorContext()
   const [editor, localSetEditor] = useState<Editor | null>(null)
@@ -74,17 +71,21 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
   }
   const shortHash = getQuery('shortHash')
 
-  // retrieve comment draft
-  const commentDraftId = `${articleId}-article-${commentId || 0}-${
-    parentId || 0
-  }-${replyToId || 0}`
-  const formId = `comment-form-${commentDraftId}`
-
   const [putComment] =
     useMutation<PutArticleCommentMutation>(PUT_ARTICLE_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
+
+  const formStorageKey = formStorage.genArticleCommentKey({
+    authorId: viewer.id,
+    articleId,
+    parentId,
+    replyToId,
+  })
+  const formDraft = formStorage.get<string>(formStorageKey, 'local')
   const [content, setContent] = useState(
-    getDraft(commentDraftId) || defaultContent || ''
+    (typeof formDraft === 'string' && formDraft.length > 0 && formDraft) ||
+      defaultContent ||
+      ''
   )
 
   const contentCount = stripHtml(content).length
@@ -163,6 +164,9 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
 
       onClear()
 
+      // clear draft
+      formStorage.remove<string>(formStorageKey, 'local')
+
       if (closeCallback) {
         closeCallback()
       }
@@ -178,19 +182,20 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
       editor.commands.setContent('')
       editor.commands.blur()
     }
-    removeDraft(commentDraftId)
     setActiveEditor(null)
   }
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
     setContent(newContent)
-    updateDraft(commentDraftId, newContent)
+
+    // save draft
+    formStorage.set(formStorageKey, newContent, 'local')
   }
 
   return (
     <form
       className={styles.form}
-      id={formId}
+      id={formStorageKey}
       onSubmit={handleSubmit}
       aria-label={intl.formatMessage({
         defaultMessage: 'Comment',
@@ -249,7 +254,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
         {viewer.isAuthed && (
           <Button
             type="submit"
-            form={formId}
+            form={formStorageKey}
             size={[null, '2rem']}
             spacing={[0, 16]}
             bgColor="green"

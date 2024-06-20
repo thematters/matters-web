@@ -126,7 +126,7 @@ const ReplyButton = ({
 
   return (
     <CircleCommentFormDialog
-      circleId={circle?.id}
+      circleId={circle?.id!}
       type={type}
       replyToId={id}
       parentId={parentComment?.id || id}

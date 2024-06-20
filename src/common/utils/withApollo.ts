@@ -33,6 +33,7 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 })
 
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 /**
@@ -122,7 +123,7 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
   const operationVariables = operation.variables || {}
   const isPublicOperation = restCtx[GQL_CONTEXT_PUBLIC_QUERY_KEY]
 
-  if (process.env.DEBUG) {
+  if (isLocal) {
     console.log(
       `%c[GraphQL operation]%c ${operationName} ` +
         `${isPublicOperation ? '' : '(w/ credentials)'}` +
@@ -185,7 +186,7 @@ const agentHashLink = setContext((_, { headers }) => {
   let hash: string | null = null
 
   if (typeof window !== 'undefined') {
-    const stored = storage.get(STORAGE_KEY_AGENT_HASH)
+    const stored = storage.get<string>(STORAGE_KEY_AGENT_HASH)
     if (stored && stored.startsWith(AGENT_HASH_PREFIX)) {
       hash = stored
     }

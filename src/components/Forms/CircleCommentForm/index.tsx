@@ -1,9 +1,8 @@
-import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { dom, stripHtml } from '~/common/utils'
+import { dom, formStorage, stripHtml } from '~/common/utils'
 import {
   Button,
   Spinner,
@@ -11,10 +10,10 @@ import {
   TextIcon,
   Translate,
   useMutation,
+  ViewerContext,
 } from '~/components'
 import { PUT_CIRCLE_COMMENT } from '~/components/GQL/mutations/putComment'
-import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
-import { CommentDraftQuery, PutCircleCommentMutation } from '~/gql/graphql'
+import { PutCircleCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -29,8 +28,7 @@ export interface CircleCommentFormProps {
   commentId?: string
   replyToId?: string
   parentId?: string
-  circleId?: string
-  articleId?: string
+  circleId: string
   type: CircleCommentFormType
 
   defaultContent?: string | null
@@ -43,7 +41,6 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
   commentId,
   replyToId,
   parentId,
-  articleId,
   circleId,
   type,
 
@@ -52,22 +49,24 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
 
   placeholder,
 }) => {
+  const viewer = useContext(ViewerContext)
   const intl = useIntl()
-
-  // retrieve comment draft
-  const commentDraftId = `${articleId || circleId}-${type}-${commentId || 0}-${
-    parentId || 0
-  }-${replyToId || 0}`
-  const formId = `comment-form-${commentDraftId}`
-
-  const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
-    variables: { id: commentDraftId },
-  })
 
   const [putComment] = useMutation<PutCircleCommentMutation>(PUT_CIRCLE_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
+
+  const formStorageKey = formStorage.genCircleCommentKey({
+    authorId: viewer.id,
+    circleId,
+    type,
+    parentId,
+    replyToId,
+  })
+  const formDraft = formStorage.get<string>(formStorageKey, 'local')
   const [content, setContent] = useState(
-    data?.commentDraft.content || defaultContent || ''
+    (typeof formDraft === 'string' && formDraft.length > 0 && formDraft) ||
+      defaultContent ||
+      ''
   )
   const isValid = stripHtml(content).length > 0
 
@@ -78,7 +77,6 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
       comment: {
         content,
         replyTo: replyToId,
-        articleId,
         circleId,
         parentId,
         type,
@@ -99,19 +97,10 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
       }
 
       // clear content
-      const $editor = document.querySelector(
-        `#${formId} .ProseMirror`
-      ) as HTMLElement
-
-      if ($editor) {
-        $editor.innerHTML = ''
-      }
+      setContent('')
 
       // clear draft
-      client.writeData({
-        id: `CommentDraft:${commentDraftId}`,
-        data: { content: '' },
-      })
+      formStorage.remove<string>(formStorageKey, 'local')
     } catch (e) {
       setSubmitting(false)
       console.error(e)
@@ -121,16 +110,14 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
   const onUpdate = ({ content: newContent }: { content: string }) => {
     setContent(newContent)
 
-    client.writeData({
-      id: `CommentDraft:${commentDraftId}`,
-      data: { content: newContent },
-    })
+    // save draft
+    formStorage.set(formStorageKey, newContent, 'local')
   }
 
   return (
     <form
       className={styles.form}
-      id={formId}
+      id={formStorageKey}
       onSubmit={handleSubmit}
       aria-label={intl.formatMessage({
         defaultMessage: 'Comment',
@@ -149,7 +136,7 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
       <footer className={styles.footer}>
         <Button
           type="submit"
-          form={formId}
+          form={formStorageKey}
           size={[null, '2rem']}
           spacing={[0, 16]}
           bgColor="green"
