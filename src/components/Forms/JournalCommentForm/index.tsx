@@ -120,11 +120,7 @@ export const JournalCommentForm: React.FC<JournalCommentFormProps> = ({
         defaultMessage: 'Comment',
         id: 'LgbKvU',
       })}
-      onClick={() => {
-        if (editing) {
-          return
-        }
-        console.log('onClick')
+      onFocus={() => {
         document.getElementById('test-wake-up-input')?.focus()
         setTimeout(() => {
           setEditing?.(true)
