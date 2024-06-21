@@ -138,7 +138,7 @@ const JournalDetail = () => {
       editor.commands.focus('end')
       setTimeout(() => {
         editor.view.dom.click()
-      })
+      }, 1000)
     }
   })
 
@@ -147,7 +147,7 @@ const JournalDetail = () => {
       editor.commands.focus('end')
       setTimeout(() => {
         editor.view.dom.click()
-      })
+      }, 1000)
     }
   }, [editor, editing])
 
