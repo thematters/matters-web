@@ -1,4 +1,5 @@
 import { Editor } from '@matters/matters-editor'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import { random } from 'lodash'
 import { useState } from 'react'
@@ -119,7 +120,12 @@ export const JournalCommentForm: React.FC<JournalCommentFormProps> = ({
         defaultMessage: 'Comment',
         id: 'LgbKvU',
       })}
-      onFocus={() => setEditing?.(true)}
+      onFocus={() => {
+        document.getElementById('test-wake-up-input')?.focus()
+        setTimeout(() => {
+          setEditing?.(true)
+        }, 100)
+      }}
     >
       <section className={contentClasses}>
         <CommentEditor
@@ -133,6 +139,9 @@ export const JournalCommentForm: React.FC<JournalCommentFormProps> = ({
             setEditor(editor)
           }}
         />
+        <VisuallyHidden>
+          <input type="text" id="test-wake-up-input" />
+        </VisuallyHidden>
       </section>
 
       {editing && (
