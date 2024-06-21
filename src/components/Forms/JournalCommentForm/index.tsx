@@ -116,8 +116,8 @@ export const JournalCommentForm: React.FC<JournalCommentFormProps> = ({
     }
 
     if (editing) {
-      editor.commands.focus()
       editor.commands.setContent(content)
+      editor.commands.focus()
     } else {
       //  clear content when close
       editor.commands.setContent('')
