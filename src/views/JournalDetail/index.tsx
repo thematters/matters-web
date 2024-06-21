@@ -134,14 +134,14 @@ const JournalDetail = () => {
     )
 
     if (editor) {
-      editor.commands.focus('end')
       editor.commands.insertContent(mentionElement)
+      // editor.commands.focus('end')
     }
   })
 
   useEffect(() => {
     if (editor && editing) {
-      editor.commands.focus('end')
+      // editor.commands.focus('end')
     }
   }, [editor, editing])
 

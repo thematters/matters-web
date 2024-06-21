@@ -1,7 +1,7 @@
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { random } from 'lodash'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ADD_JOURNAL_COMMENT, MAX_JOURNAL_COMMENT_LENGTH } from '~/common/enums'
@@ -109,20 +109,6 @@ export const JournalCommentForm: React.FC<JournalCommentFormProps> = ({
     [styles.content]: true,
     [styles.focus]: editing,
   })
-
-  useEffect(() => {
-    if (!editor) {
-      return
-    }
-
-    if (editing) {
-      editor.commands.setContent(content)
-      editor.commands.focus()
-    } else {
-      //  clear content when close
-      editor.commands.setContent('')
-    }
-  }, [editing])
 
   return (
     <form
