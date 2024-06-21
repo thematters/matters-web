@@ -136,6 +136,7 @@ const JournalDetail = () => {
     if (editor) {
       editor.commands.insertContent(mentionElement)
       editor.commands.focus('end')
+      editor.view.dom.click()
       setTimeout(() => {
         editor.view.dom.click()
       }, 1000)
@@ -145,6 +146,7 @@ const JournalDetail = () => {
   useEffect(() => {
     if (editor && editing) {
       editor.commands.focus('end')
+      editor.view.dom.click()
       setTimeout(() => {
         editor.view.dom.click()
       }, 1000)
