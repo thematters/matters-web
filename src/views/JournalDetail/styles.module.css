@@ -125,7 +125,7 @@
   & .likeButton {
     @mixin flex-center-all;
 
-    height: 2.75rem;
+    /* height: 2.75rem; */
 
     /* width: 2.75rem; */
     padding: 0 var(--sp11);

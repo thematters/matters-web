@@ -1,6 +1,7 @@
 import { Editor } from '@matters/matters-editor'
+import classNames from 'classnames'
 import { random } from 'lodash'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ADD_JOURNAL_COMMENT, MAX_JOURNAL_COMMENT_LENGTH } from '~/common/enums'
@@ -22,6 +23,9 @@ export interface JournalCommentFormProps {
   closeCallback?: () => void
 
   setEditor?: (editor: Editor | null) => void
+
+  editing?: boolean
+  setEditing?: (editing: boolean) => void
 }
 
 export const JournalCommentForm: React.FC<JournalCommentFormProps> = ({
@@ -32,6 +36,9 @@ export const JournalCommentForm: React.FC<JournalCommentFormProps> = ({
   closeCallback,
 
   setEditor: propsSetEditor,
+
+  editing,
+  setEditing,
 }) => {
   const intl = useIntl()
   const [editor, localSetEditor] = useState<Editor | null>(null)
@@ -93,17 +100,42 @@ export const JournalCommentForm: React.FC<JournalCommentFormProps> = ({
     setContent(newContent)
   }
 
+  const formClasses = classNames({
+    [styles.form]: true,
+    [styles.focus]: editing,
+  })
+
+  const contentClasses = classNames({
+    [styles.content]: true,
+    [styles.focus]: editing,
+  })
+
+  useEffect(() => {
+    if (!editor) {
+      return
+    }
+
+    if (editing) {
+      editor.commands.focus()
+      editor.commands.setContent(content)
+    } else {
+      //  clear content when close
+      editor.commands.setContent('')
+    }
+  }, [editing])
+
   return (
     <form
-      className={styles.form}
+      className={formClasses}
       id={formId}
       onSubmit={handleSubmit}
       aria-label={intl.formatMessage({
         defaultMessage: 'Comment',
         id: 'LgbKvU',
       })}
+      onFocus={() => setEditing?.(true)}
     >
-      <section className={styles.content}>
+      <section className={contentClasses}>
         <CommentEditor
           content={content}
           update={onUpdate}
@@ -117,46 +149,48 @@ export const JournalCommentForm: React.FC<JournalCommentFormProps> = ({
         />
       </section>
 
-      <footer className={styles.footer}>
-        {contentCount > MAX_JOURNAL_COMMENT_LENGTH && (
-          <span className={styles.count}>
-            {contentCount}/{MAX_JOURNAL_COMMENT_LENGTH}
-          </span>
-        )}
-        {!!closeCallback && (
+      {editing && (
+        <footer className={styles.footer}>
+          {contentCount > MAX_JOURNAL_COMMENT_LENGTH && (
+            <span className={styles.count}>
+              {contentCount}/{MAX_JOURNAL_COMMENT_LENGTH}
+            </span>
+          )}
+          {!!closeCallback && (
+            <Button
+              size={[null, '2rem']}
+              spacing={[0, 16]}
+              bgColor="white"
+              disabled={isSubmitting}
+              onClick={closeCallback}
+              textColor="black"
+              textActiveColor="greyDarker"
+            >
+              <TextIcon size={14}>
+                <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+              </TextIcon>
+            </Button>
+          )}
           <Button
+            type="submit"
+            form={formId}
             size={[null, '2rem']}
             spacing={[0, 16]}
-            bgColor="white"
-            disabled={isSubmitting}
-            onClick={closeCallback}
-            textColor="black"
-            textActiveColor="greyDarker"
+            bgColor="green"
+            disabled={isSubmitting || !isValid}
           >
-            <TextIcon size={14}>
-              <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+            <TextIcon
+              color="white"
+              size={14}
+              icon={isSubmitting && <SpinnerBlock size={14} />}
+            >
+              {isSubmitting ? null : (
+                <FormattedMessage defaultMessage="Publish" id="syEQFE" />
+              )}
             </TextIcon>
           </Button>
-        )}
-        <Button
-          type="submit"
-          form={formId}
-          size={[null, '2rem']}
-          spacing={[0, 16]}
-          bgColor="green"
-          disabled={isSubmitting || !isValid}
-        >
-          <TextIcon
-            color="white"
-            size={14}
-            icon={isSubmitting && <SpinnerBlock size={14} />}
-          >
-            {isSubmitting ? null : (
-              <FormattedMessage defaultMessage="Publish" id="syEQFE" />
-            )}
-          </TextIcon>
-        </Button>
-      </footer>
+        </footer>
+      )}
     </form>
   )
 }

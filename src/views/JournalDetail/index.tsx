@@ -8,8 +8,8 @@ import { Gallery, Item } from 'react-photoswipe-gallery'
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { ADD_JOURNAL_COMMENT } from '~/common/enums'
-import { storage, toPath } from '~/common/utils'
+import { ADD_COMMENT_MENTION, ADD_JOURNAL_COMMENT } from '~/common/enums'
+import { makeMentionElement, storage, toPath } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -94,7 +94,7 @@ const KEY = 'user-journals'
 const JournalDetail = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery, router } = useRoute()
-  const [isEditing, setEditing] = useState(false)
+  const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
   const journalId = getQuery('id')
   const journals = storage.get(KEY) as JournalDigestProps[]
@@ -124,11 +124,26 @@ const JournalDetail = () => {
     comments.push(newComment)
   })
 
+  useEventListener(ADD_COMMENT_MENTION, (payload: { [key: string]: any }) => {
+    setEditing(true)
+    const author = payload?.author
+    const mentionElement = makeMentionElement(
+      author.id,
+      author.userName,
+      author.displayName
+    )
+
+    if (editor) {
+      editor.commands.focus('end')
+      editor.commands.insertContent(mentionElement)
+    }
+  })
+
   useEffect(() => {
-    if (editor && isEditing) {
+    if (editor && editing) {
       editor.commands.focus('end')
     }
-  }, [editor, isEditing])
+  }, [editor, editing])
 
   if (!journal) {
     return null
@@ -260,7 +275,7 @@ const JournalDetail = () => {
         </section>
       </section>
       <footer className={styles.footer}>
-        {!isEditing && (
+        {!editing && (
           <>
             <div className={styles.likeButton}>
               <button
@@ -275,25 +290,19 @@ const JournalDetail = () => {
               </button>
               {likeCount > 0 && <span>&nbsp;{likeCount}</span>}
             </div>
-            <button
-              onClick={() => setEditing(true)}
-              className={styles.editButton}
-            >
-              <FormattedMessage defaultMessage="說點什麼..." id="EIoAY7" />
-            </button>
           </>
         )}
-        {isEditing && (
-          <JournalCommentForm
-            type="journal"
-            journalId={journalId}
-            closeCallback={() => setEditing(false)}
-            setEditor={(editor) => {
-              setEditor(editor)
-            }}
-            submitCallback={() => setEditing(false)}
-          />
-        )}
+        <JournalCommentForm
+          type="journal"
+          journalId={journalId}
+          closeCallback={() => setEditing(false)}
+          setEditor={(editor) => {
+            setEditor(editor)
+          }}
+          submitCallback={() => setEditing(false)}
+          editing={editing}
+          setEditing={setEditing}
+        />
       </footer>
     </section>
   )

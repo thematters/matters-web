@@ -1,7 +1,11 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { COMMENT_FEED_ID_PREFIX, TEST_ID } from '~/common/enums'
+import {
+  ADD_COMMENT_MENTION,
+  COMMENT_FEED_ID_PREFIX,
+  TEST_ID,
+} from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Avatar,
@@ -112,11 +116,14 @@ const BaseJournalCommentFeed = ({
             comment={comment}
             inCard
             onClick={() => {
-              // TODO:
-              // if (editor === activeEditor) {
-              //   setActiveEditor(null)
-              // }
-              // toggleShowForm()
+              const detail = {
+                author: comment.author,
+              }
+              window.dispatchEvent(
+                new CustomEvent(ADD_COMMENT_MENTION, {
+                  detail,
+                })
+              )
             }}
           />
         </section>

@@ -1,26 +1,50 @@
 .form {
-  @mixin border-grey-light;
-
   position: relative;
-  padding: var(--sp8) 0;
+  flex-grow: 1;
+  width: auto;
+  padding: var(--sp7) var(--sp16);
+  background: var(--color-grey-lighter);
   border-radius: var(--sp8);
+
+  &.focus {
+    @mixin border-grey-light;
+
+    padding: 0;
+    background: none;
+  }
 }
 
 .content {
   @mixin hide-scrollbar;
 
-  min-height: 3rem;
-  max-height: calc(24px + 3.5 * 26.25px);
-  padding: var(--sp4) var(--sp12);
-  margin-bottom: var(--sp8);
+  height: 22px;
   overflow: scroll;
+
+  & :global(.ProseMirror),
+  & :global(.tiptap) {
+    min-height: 22px;
+    max-height: 22px;
+  }
+
+  &.focus {
+    height: auto;
+    min-height: 3rem;
+    max-height: 88px;
+    padding: var(--sp12);
+    margin-bottom: var(--sp8);
+
+    & :global(.ProseMirror),
+    & :global(.tiptap) {
+      max-height: 88px;
+    }
+  }
 }
 
 .footer {
   @mixin flex-center-end;
 
   gap: var(--sp4);
-  padding: 0 var(--sp8);
+  padding: 0 var(--sp8) var(--sp8);
 
   & .count {
     padding-right: var(--sp20);
