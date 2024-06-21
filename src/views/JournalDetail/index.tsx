@@ -1,6 +1,7 @@
 import 'photoswipe/dist/photoswipe.css'
 
 import { Editor } from '@matters/matters-editor'
+import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { Gallery, Item } from 'react-photoswipe-gallery'
@@ -284,15 +285,20 @@ const JournalDetail = () => {
           </>
         )}
         {isEditing && (
-          <JournalCommentForm
-            type="journal"
-            journalId={journalId}
-            closeCallback={() => setEditing(false)}
-            setEditor={(editor) => {
-              setEditor(editor)
-            }}
-            submitCallback={() => setEditing(false)}
-          />
+          <>
+            <JournalCommentForm
+              type="journal"
+              journalId={journalId}
+              closeCallback={() => setEditing(false)}
+              setEditor={(editor) => {
+                setEditor(editor)
+              }}
+              submitCallback={() => setEditing(false)}
+            />
+            <VisuallyHidden>
+              <input autoFocus></input>
+            </VisuallyHidden>
+          </>
         )}
       </footer>
     </section>
