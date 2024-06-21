@@ -21,14 +21,6 @@ const fragments = {
         id
       }
       node {
-        ... on Article {
-          id
-          slug
-          shortHash
-          author {
-            userName
-          }
-        }
         ... on Circle {
           id
           name
@@ -40,17 +32,15 @@ const fragments = {
 }
 
 const CreatedAt = ({ comment, hasLink }: CreatedAtProps) => {
-  const article =
-    comment.node.__typename === 'Article' ? comment.node : undefined
   const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
 
-  if (article || circle) {
+  if (circle) {
     const path = toPath({
       page: 'commentDetail',
       comment,
-      article,
       circle,
     })
+
     return (
       <LinkWrapper {...path} disabled={!hasLink}>
         <DateTime date={comment.createdAt} />

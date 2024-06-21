@@ -63,7 +63,7 @@ const BaseCommentFeed = ({
     <article
       className={styles.comment}
       id={actionControls.hasLink ? nodeId : ''}
-      data-test-id={TEST_ID.ARTICLE_COMMENT_FEED}
+      data-test-id={TEST_ID.CIRCLE_COMMENT_FEED}
     >
       <header className={styles.header}>
         <UserDigest.Mini

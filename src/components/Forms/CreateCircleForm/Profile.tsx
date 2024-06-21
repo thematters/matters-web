@@ -150,6 +150,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           onUploaded={(assetId) => setFieldValue('cover', assetId)}
           onUploadStart={() => setCoverLoading(true)}
           onUploadEnd={() => setCoverLoading(false)}
+          onReset={() => setFieldValue('cover', null)}
           entityType={ENTITY_TYPE.user}
           entityId={circle.id}
         />

@@ -6,22 +6,18 @@ import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.sv
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import { CircleCommentFormType, Icon, Menu, useMutation } from '~/components'
 import { updateCircleBroadcast } from '~/components/GQL'
-import TOGGLE_PIN_COMMENT from '~/components/GQL/mutations/togglePinComment'
+import { TOGGLE_CIRCLE_PIN_COMMENT } from '~/components/GQL/mutations/togglePinComment'
 import {
-  PinButtonCommentFragment,
-  TogglePinCommentMutation,
+  CircleCommentPinButtonCommentFragment,
+  ToggleCirclePinCommentMutation,
 } from '~/gql/graphql'
 
 const fragments = {
   comment: gql`
-    fragment PinButtonComment on Comment {
+    fragment CircleCommentPinButtonComment on Comment {
       id
       pinned
       node {
-        ... on Article {
-          id
-          pinCommentLeft
-        }
         ... on Circle {
           id
           name
@@ -36,16 +32,14 @@ const PinButton = ({
   comment,
 }: {
   type: CircleCommentFormType
-  comment: PinButtonCommentFragment
+  comment: CircleCommentPinButtonCommentFragment
 }) => {
-  const article =
-    comment.node.__typename === 'Article' ? comment.node : undefined
   const circle = comment.node.__typename === 'Circle' ? comment.node : undefined
-  const canPin = !!circle || (article?.pinCommentLeft || 0) > 0
+  const canPin = !!circle
   const isCircleBroadcast = type === 'circleBroadcast'
 
-  const [unpinComment] = useMutation<TogglePinCommentMutation>(
-    TOGGLE_PIN_COMMENT,
+  const [unpinComment] = useMutation<ToggleCirclePinCommentMutation>(
+    TOGGLE_CIRCLE_PIN_COMMENT,
     {
       variables: { id: comment.id, enabled: false },
       optimisticResponse: {
@@ -70,8 +64,8 @@ const PinButton = ({
       },
     }
   )
-  const [pinComment] = useMutation<TogglePinCommentMutation>(
-    TOGGLE_PIN_COMMENT,
+  const [pinComment] = useMutation<ToggleCirclePinCommentMutation>(
+    TOGGLE_CIRCLE_PIN_COMMENT,
     {
       variables: { id: comment.id, enabled: true },
       optimisticResponse: {
@@ -101,19 +95,11 @@ const PinButton = ({
     return (
       <Menu.Item
         text={
-          circle ? (
-            <FormattedMessage
-              defaultMessage="Unpin Broadcast"
-              id="DrBuEI"
-              description="src/components/CircleComment/DropdownActions/PinButton.tsx"
-            />
-          ) : (
-            <FormattedMessage
-              defaultMessage="Unpin Comment"
-              id="Zya3dV"
-              description="src/components/CircleComment/DropdownActions/PinButton.tsx"
-            />
-          )
+          <FormattedMessage
+            defaultMessage="Unpin Broadcast"
+            id="DrBuEI"
+            description="src/components/CircleComment/DropdownActions/PinButton.tsx"
+          />
         }
         icon={<Icon icon={IconUnpin} size={20} />}
         onClick={async () => {
@@ -127,19 +113,11 @@ const PinButton = ({
   return (
     <Menu.Item
       text={
-        circle ? (
-          <FormattedMessage
-            defaultMessage="Pin Broadcast"
-            id="8gRHks"
-            description="src/components/CircleComment/DropdownActions/PinButton.tsx"
-          />
-        ) : (
-          <FormattedMessage
-            defaultMessage="Pin Comment"
-            id="uWUeYl"
-            description="src/components/CircleComment/DropdownActions/PinButton.tsx"
-          />
-        )
+        <FormattedMessage
+          defaultMessage="Pin Broadcast"
+          id="8gRHks"
+          description="src/components/CircleComment/DropdownActions/PinButton.tsx"
+        />
       }
       icon={<Icon icon={IconPin} size={20} />}
       onClick={

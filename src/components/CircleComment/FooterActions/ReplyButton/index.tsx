@@ -44,12 +44,6 @@ const fragments = {
             id
           }
         }
-        ... on Article {
-          id
-          author {
-            id
-          }
-        }
       }
       parentComment {
         id
@@ -91,7 +85,6 @@ const ReplyButton = ({
   const viewer = useContext(ViewerContext)
 
   const { id, parentComment, author, node } = comment
-  const article = node.__typename === 'Article' ? node : undefined
   const circle = node.__typename === 'Circle' ? node : undefined
 
   const submitCallback = () => {
@@ -133,26 +126,17 @@ const ReplyButton = ({
 
   return (
     <CircleCommentFormDialog
-      articleId={article?.id}
-      circleId={circle?.id}
+      circleId={circle?.id!}
       type={type}
       replyToId={id}
       parentId={parentComment?.id || id}
       submitCallback={submitCallback}
       title={
-        article ? (
-          <FormattedMessage
-            defaultMessage="Write a comment"
-            id="oI8PNE"
-            description="src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
-          />
-        ) : (
-          <FormattedMessage
-            defaultMessage="Reply"
-            id="MRn08S"
-            description="src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
-          />
-        )
+        <FormattedMessage
+          defaultMessage="Reply"
+          id="MRn08S"
+          description="src/components/CircleComment/FooterActions/ReplyButton/index.tsx"
+        />
       }
       context={<ReplyTo user={author} />}
     >

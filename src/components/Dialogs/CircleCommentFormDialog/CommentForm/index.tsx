@@ -1,20 +1,20 @@
-import { useQuery } from '@apollo/react-hooks'
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT } from '~/common/enums'
-import { dom, stripHtml } from '~/common/utils'
+import { dom, formStorage, stripHtml } from '~/common/utils'
 import {
   CircleCommentFormType,
   Dialog,
+  LanguageContext,
   SpinnerBlock,
   toast,
   useMutation,
+  ViewerContext,
 } from '~/components'
-import PUT_CIRCLE_COMMENT from '~/components/GQL/mutations/putCircleComment'
-import COMMENT_DRAFT from '~/components/GQL/queries/commentDraft'
-import { CommentDraftQuery, PutCommentMutation } from '~/gql/graphql'
+import { PUT_CIRCLE_COMMENT } from '~/components/GQL/mutations/putComment'
+import { PutCircleCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -27,8 +27,7 @@ export interface CircleCommentFormProps {
   commentId?: string
   replyToId?: string
   parentId?: string
-  circleId?: string
-  articleId?: string
+  circleId: string
   type: CircleCommentFormType
 
   defaultContent?: string | null
@@ -42,7 +41,6 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
   commentId,
   replyToId,
   parentId,
-  articleId,
   circleId,
   type,
 
@@ -57,23 +55,25 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
     />
   ),
   context,
-
-  ...props
 }) => {
-  // retrieve comment draft
-  const commentDraftId = `${articleId || circleId}:${commentId || 0}:${
-    parentId || 0
-  }:${replyToId || 0}`
-  const formId = `comment-form-${commentDraftId}`
+  const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
 
-  const { data, client } = useQuery<CommentDraftQuery>(COMMENT_DRAFT, {
-    variables: { id: commentDraftId },
-  })
-
-  const [putComment] = useMutation<PutCommentMutation>(PUT_CIRCLE_COMMENT)
+  const [putComment] = useMutation<PutCircleCommentMutation>(PUT_CIRCLE_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
+
+  const formStorageKey = formStorage.genCircleCommentKey({
+    authorId: viewer.id,
+    circleId,
+    type,
+    parentId,
+    replyToId,
+  })
+  const formDraft = formStorage.get<string>(formStorageKey, 'local')
   const [content, setContent] = useState(
-    data?.commentDraft.content || defaultContent || ''
+    (typeof formDraft === 'string' && formDraft.length > 0 && formDraft) ||
+      defaultContent ||
+      ''
   )
   const isValid = stripHtml(content).length > 0
 
@@ -84,7 +84,6 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
       comment: {
         content,
         replyTo: replyToId,
-        articleId,
         circleId,
         parentId,
         type,
@@ -101,23 +100,20 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
       setContent('')
 
       // clear draft
-      client.writeData({
-        id: `CommentDraft:${commentDraftId}`,
-        data: { content: '' },
-      })
+      formStorage.remove<string>(formStorageKey, 'local')
 
       toast.success({
         message: commentId ? (
           <FormattedMessage
             defaultMessage="{type} edited"
             id="AlHYvk"
-            values={{ type: COMMENT_TYPE_TEXT.en[type] }}
+            values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
           />
         ) : (
           <FormattedMessage
             defaultMessage="{type} sent"
             id="aPxJXi"
-            values={{ type: COMMENT_TYPE_TEXT.en[type] }}
+            values={{ type: COMMENT_TYPE_TEXT[lang][type] }}
           />
         ),
       })
@@ -138,10 +134,8 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
   const onUpdate = ({ content: newContent }: { content: string }) => {
     setContent(newContent)
 
-    client.writeData({
-      id: `CommentDraft:${commentDraftId}`,
-      data: { content: newContent },
-    })
+    // save draft
+    formStorage.set(formStorageKey, newContent, 'local')
   }
 
   return (
@@ -152,7 +146,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
         rightBtn={
           <Dialog.TextButton
             type="submit"
-            form={formId}
+            form={formStorageKey}
             disabled={isSubmitting || !isValid}
             text={<FormattedMessage defaultMessage="Send" id="9WRlF4" />}
             loading={isSubmitting}
@@ -163,7 +157,11 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
       <Dialog.Content>
         {context && <section className={styles.context}>{context}</section>}
 
-        <form className={styles.form} id={formId} onSubmit={handleSubmit}>
+        <form
+          className={styles.form}
+          id={formStorageKey}
+          onSubmit={handleSubmit}
+        >
           <CommentEditor content={content} update={onUpdate} />
         </form>
       </Dialog.Content>
@@ -178,7 +176,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
             />
             <Dialog.TextButton
               type="submit"
-              form={formId}
+              form={formStorageKey}
               disabled={isSubmitting || !isValid}
               text={<FormattedMessage defaultMessage="Send" id="9WRlF4" />}
               loading={isSubmitting}
