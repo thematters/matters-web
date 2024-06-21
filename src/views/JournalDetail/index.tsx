@@ -136,15 +136,18 @@ const JournalDetail = () => {
     if (editor) {
       editor.commands.insertContent(mentionElement)
       editor.commands.focus('end')
-      // editor.commands.keyboardShortcut('Enter')
-      editor.view.dom.click()
+      setTimeout(() => {
+        editor.view.dom.click()
+      })
     }
   })
 
   useEffect(() => {
     if (editor && editing) {
       editor.commands.focus('end')
-      editor.view.dom.click()
+      setTimeout(() => {
+        editor.view.dom.click()
+      })
     }
   }, [editor, editing])
 
