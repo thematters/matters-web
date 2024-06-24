@@ -2327,10 +2327,6 @@
   "gS1u3d": {
     "defaultMessage": "{left} modifications available"
   },
-  "gW/KWu": {
-    "defaultMessage": "Comments has been pinned",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "gczcC5": {
     "defaultMessage": "Subscribe"
   },

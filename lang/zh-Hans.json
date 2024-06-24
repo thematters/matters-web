@@ -2327,10 +2327,6 @@
   "gS1u3d": {
     "defaultMessage": "你还可以修改 {left} 次"
   },
-  "gW/KWu": {
-    "defaultMessage": "评论被精选",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "gczcC5": {
     "defaultMessage": "订阅"
   },
