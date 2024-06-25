@@ -11,6 +11,7 @@ import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.sv
 import { ADD_COMMENT_MENTION, ADD_JOURNAL_COMMENT } from '~/common/enums'
 import { makeMentionElement, storage, toPath } from '~/common/utils'
 import {
+  ArticleThreadCommentType,
   Avatar,
   Button,
   DateTime,
@@ -21,12 +22,11 @@ import {
   LinkWrapper,
   List,
   ResponsiveImage,
-  ThreadCommentType,
   useEventListener,
   useRoute,
   ViewerContext,
 } from '~/components'
-import JournalCommentFeed from '~/components/CommentBeta/JournalCommentFeed'
+import JournalCommentFeed from '~/components/ArticleComment/JournalCommentFeed'
 import { JournalDigestProps } from '~/components/JournalDigest'
 
 import styles from './styles.module.css'
@@ -100,7 +100,7 @@ const JournalDetail = () => {
   const journals = storage.get(KEY) as JournalDigestProps[]
   const journal = journals.find((j) => j.id === journalId)
 
-  const [comments] = useState<ThreadCommentType[]>([])
+  const [comments] = useState<ArticleThreadCommentType[]>([])
 
   const [likeCount, setLikeCount] = useState(0)
   const [isLiked, setIsLiked] = useState(false)
@@ -116,7 +116,10 @@ const JournalDetail = () => {
 
   useEventListener(ADD_JOURNAL_COMMENT, (payload: { [key: string]: any }) => {
     const input = payload?.input
-    const newComment = Object.assign({}, mockComment) as ThreadCommentType
+    const newComment = Object.assign(
+      {},
+      mockComment
+    ) as ArticleThreadCommentType
     newComment.author = viewer as any
     newComment.id = input.id
     newComment.content = input.content
@@ -260,11 +263,7 @@ const JournalDetail = () => {
                       !comment.pinned &&
                       comment.state !== 'archived' && (
                         <List.Item key={comment.id}>
-                          <JournalCommentFeed
-                            comment={comment}
-                            type="article"
-                            hasReply
-                          />
+                          <JournalCommentFeed comment={comment} hasReply />
                         </List.Item>
                       )
                   )}
