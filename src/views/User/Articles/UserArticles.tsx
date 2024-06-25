@@ -19,6 +19,7 @@ import {
   JournalForm,
   Layout,
   List,
+  Media,
   QueryError,
   Translate,
   useEventListener,
@@ -223,7 +224,9 @@ const UserArticles = () => {
               Clear Journals
             </button>
           </section>
-          <JournalForm />
+          <Media greaterThan="sm">
+            <JournalForm />
+          </Media>
         </section>
       )}
 
@@ -236,7 +239,7 @@ const UserArticles = () => {
         >
           <List>
             {journals.map((journal) => (
-              <List.Item key={journal.id}>
+              <List.Item key={journal.id} id={`journal-digest-${journal.id}`}>
                 <JournalDigest {...journal} />
               </List.Item>
             ))}

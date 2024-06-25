@@ -64,11 +64,13 @@ export const WriteButton = ({ authed, forbidden }: Props) => {
     <BaseWriteButton
       href={
         authed && !forbidden && !isInDraftDetail
-          ? PATHS.ME_DRAFT_NEW
+          ? PATHS.JOURNAL_DETAIL_EDIT
           : undefined
       }
       htmlHref={
-        authed && !forbidden && isInDraftDetail ? PATHS.ME_DRAFT_NEW : undefined
+        authed && !forbidden && isInDraftDetail
+          ? PATHS.JOURNAL_DETAIL_EDIT
+          : undefined
       }
       onClick={async () => {
         if (!authed) {

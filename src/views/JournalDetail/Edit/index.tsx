@@ -1,34 +1,45 @@
 import { Editor } from '@matters/matters-editor'
 import { random } from 'lodash'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import {
   ADD_JOURNAL,
   MAX_JOURNAL_CONTENT_LENGTH,
   UPLOAD_JOURNAL_ASSET_COUNT_LIMIT,
 } from '~/common/enums'
-import { getImageDimensions, stripHtml } from '~/common/utils'
-import { Button, SpinnerBlock, TextIcon } from '~/components'
+import { getImageDimensions, storage, stripHtml, toPath } from '~/common/utils'
+import {
+  Button,
+  Icon,
+  SpinnerBlock,
+  TextIcon,
+  useRoute,
+  ViewerContext,
+} from '~/components'
 import JournalEditor from '~/components/Editor/Journal'
 import {
   JournalAsset,
   JournalAssetsUploader,
 } from '~/components/FileUploader/JournalAssetsUploader'
+import { JournalDigestProps } from '~/components/JournalDigest'
 
 import styles from './styles.module.css'
 
-export interface JournalFormProps {}
+const KEY = 'user-journals'
 
-export const JournalForm: React.FC<JournalFormProps> = ({}) => {
+const Edit = () => {
   const intl = useIntl()
-  const [isEditing, setEditing] = useState(false)
+  const viewer = useContext(ViewerContext)
+  const { router } = useRoute()
   const [editor, setEditor] = useState<Editor | null>(null)
+
   const [assets, setAssets] = useState<JournalAsset[]>([])
 
   const addAssets = useCallback(
     async (files: File[]) => {
-      setEditing(true)
+      // setEditing(true)
       const newFiles = Array.from(files).slice(
         0,
         UPLOAD_JOURNAL_ASSET_COUNT_LIMIT - assets.length
@@ -64,7 +75,6 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
   )
 
   const formId = `journal-form`
-
   const [isSubmitting, setSubmitting] = useState(false)
   const [content, setContent] = useState('')
 
@@ -83,7 +93,7 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
       createdAt: new Date().toISOString(),
       content,
       assets: assets,
-    }
+    } as JournalDigestProps
 
     const delay = random(1, 4, false) * 1000
 
@@ -94,8 +104,10 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
           detail: { input },
         })
       )
+      addJournal(input)
       onClear()
       setSubmitting(false)
+      goToUserProfile(input.id)
     }, delay)
   }
 
@@ -106,7 +118,6 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
       editor.commands.blur()
     }
     setAssets([])
-    setEditing(false)
   }
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
@@ -114,91 +125,55 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
   }
 
   useEffect(() => {
-    if (editor && isEditing) {
-      editor.commands.focus('end')
+    if (editor) {
+      editor.commands.focus()
     }
-  }, [editor, isEditing])
+  }, [editor])
 
-  if (!isEditing) {
-    return (
-      <section className={styles.defalut}>
-        <JournalAssetsUploader
-          assets={assets}
-          addAssets={addAssets}
-          removeAsset={removeAsset}
-        />
-        <button
-          onClick={() => setEditing(true)}
-          className={styles.activeButton}
-        >
-          <FormattedMessage defaultMessage="說點什麼..." id="EIoAY7" />
-        </button>
-      </section>
-    )
+  const goBack = () => {
+    window.history.back()
+  }
+
+  const goToUserProfile = (id: string) => {
+    const path = toPath({
+      page: 'userProfile',
+      userName: viewer.userName || '',
+    })
+    router.push(path.href + `#${id}`)
+  }
+
+  const addJournal = (journal: JournalDigestProps) => {
+    const journals = storage.get(KEY) || []
+    storage.set(KEY, [journal, ...journals])
   }
 
   return (
-    <form
-      className={styles.form}
-      id={formId}
-      onSubmit={handleSubmit}
-      aria-label={intl.formatMessage({
-        defaultMessage: 'Journal',
-        id: 'nJaVYb',
-        description: 'src/components/Forms/JournalForm/index.tsx',
-      })}
-    >
-      <section className={styles.content}>
-        <JournalEditor
-          content={content}
-          update={onUpdate}
-          // placeholder={placeholder}
-          setEditor={(editor) => {
-            setEditor(editor)
-          }}
-        />
-      </section>
-
-      <footer className={styles.footer}>
-        <section>
-          <JournalAssetsUploader
-            assets={assets}
-            addAssets={addAssets}
-            removeAsset={removeAsset}
-            isEditing
-          />
-        </section>
-        <section>
-          {contentCount > MAX_JOURNAL_CONTENT_LENGTH && (
-            <span className={styles.count}>
-              {contentCount}/{MAX_JOURNAL_CONTENT_LENGTH}
-            </span>
-          )}
+    <>
+      <header className={styles.header}>
+        <section className={styles.left}>
           <Button
-            size={[null, '2rem']}
-            spacing={[0, 16]}
-            bgColor="white"
-            disabled={isSubmitting}
-            onClick={() => setEditing(false)}
             textColor="black"
             textActiveColor="greyDarker"
+            onClick={goBack}
           >
-            <TextIcon size={14}>
-              <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
-            </TextIcon>
+            <Icon icon={IconTimes} size={24} />
           </Button>
+          <span className={styles.title}>發動態</span>
+        </section>
+        <section className={styles.right}>
           <Button
             type="submit"
             form={formId}
-            size={[null, '2rem']}
-            spacing={[0, 16]}
-            bgColor="green"
+            size={[null, '1.875rem']}
+            spacing={[0, 12]}
             disabled={isSubmitting || !isValid}
+            textColor="white"
+            bgColor="green"
           >
             <TextIcon
               color="white"
               size={14}
-              icon={isSubmitting && <SpinnerBlock size={14} />}
+              icon={isSubmitting && <SpinnerBlock size={14} noSpacing />}
             >
               {isSubmitting ? null : (
                 <FormattedMessage defaultMessage="Publish" id="syEQFE" />
@@ -206,7 +181,42 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
             </TextIcon>
           </Button>
         </section>
-      </footer>
-    </form>
+      </header>
+      <form
+        className={styles.form}
+        id={formId}
+        onSubmit={handleSubmit}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Journal',
+          id: 'nJaVYb',
+          description: 'src/components/Forms/JournalForm/index.tsx',
+        })}
+      >
+        <section className={styles.content}>
+          <JournalEditor
+            content={content}
+            update={onUpdate}
+            // placeholder={placeholder}
+            setEditor={(editor) => {
+              setEditor(editor)
+            }}
+          />
+        </section>
+
+        <footer className={styles.footer}>
+          <section>
+            <JournalAssetsUploader
+              assets={assets}
+              addAssets={addAssets}
+              removeAsset={removeAsset}
+              isEditing
+              isInPage
+            />
+          </section>
+        </footer>
+      </form>
+    </>
   )
 }
+
+export default Edit
