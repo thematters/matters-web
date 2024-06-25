@@ -97,10 +97,29 @@ const JournalDetail = () => {
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
   const journalId = getQuery('id')
-  const journals = storage.get(KEY) as JournalDigestProps[]
-  const journal = journals.find((j) => j.id === journalId)
 
-  const [comments] = useState<ArticleThreadCommentType[]>([])
+  const [journal, setJournal] = useState<JournalDigestProps | undefined>(
+    undefined
+  )
+
+  const [comments, setComments] = useState<ArticleThreadCommentType[]>([])
+  useEffect(() => {
+    const journals = storage.get(KEY) as JournalDigestProps[]
+    const journal = journals.find((j) => j.id === journalId)
+    setJournal(journal)
+    setComments(journal?.comments || [])
+  }, [])
+
+  const addComment = (comment: ArticleThreadCommentType) => {
+    // update display comments
+    setComments([comment, ...comments])
+    // update storage
+    journal && (journal.comments = [...(journal?.comments || []), comment])
+    const journals = storage.get(KEY) as JournalDigestProps[]
+    const index = journals.findIndex((j) => j.id === journalId)
+    journals[index] = journal as JournalDigestProps
+    storage.set(KEY, journals)
+  }
 
   const [likeCount, setLikeCount] = useState(0)
   const [isLiked, setIsLiked] = useState(false)
@@ -124,7 +143,7 @@ const JournalDetail = () => {
     newComment.id = input.id
     newComment.content = input.content
     newComment.createdAt = input.createdAt
-    comments.push(newComment)
+    addComment(newComment)
   })
 
   useEventListener(ADD_COMMENT_MENTION, (payload: { [key: string]: any }) => {

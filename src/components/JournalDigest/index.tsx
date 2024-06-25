@@ -8,6 +8,7 @@ import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
 import { toPath } from '~/common/utils'
 
+import { ArticleThreadCommentType } from '../ArticleComment'
 import { DateTime } from '../DateTime'
 import { JournalDetailDialog } from '../Dialogs'
 import { Expandable } from '../Expandable'
@@ -23,6 +24,7 @@ export type JournalDigestProps = {
   content: string
   assets: JournalAsset[]
   createdAt: string
+  comments: ArticleThreadCommentType[]
 }
 
 export const JournalDigest: React.FC<JournalDigestProps> = ({
