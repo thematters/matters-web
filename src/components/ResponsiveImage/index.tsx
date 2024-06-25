@@ -1,7 +1,14 @@
+import classNames from 'classnames'
 import React, { useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
-import { toSizedImageURL, ToSizedImageURLSize } from '~/common/utils'
+import {
+  capitalizeFirstLetter,
+  toSizedImageURL,
+  ToSizedImageURLSize,
+} from '~/common/utils'
+
+import styles from './styles.module.css'
 
 /**
  * Responsive Image
@@ -18,6 +25,7 @@ interface ResponsiveImageProps {
   anonymous?: boolean
   disableAnimation?: boolean
   fetchPriority?: 'high' | 'low' | 'auto'
+  objectFix?: 'cover'
 }
 
 const BaseResponsiveImage = ({
@@ -31,6 +39,7 @@ const BaseResponsiveImage = ({
   anonymous,
   disableAnimation,
   fetchPriority,
+  objectFix,
 }: ResponsiveImageProps) => {
   const [error, setError] = useState(false)
   const [loaded, setLoaded] = useState(false)
@@ -49,6 +58,10 @@ const BaseResponsiveImage = ({
       <img src={url} loading={loading} fetchPriority={fetchPriority} alt="" />
     )
   }
+
+  const imageClasses = classNames({
+    [styles[`objectFix${capitalizeFirstLetter(objectFix || '')}`]]: !!objectFix,
+  })
 
   return (
     <picture
@@ -77,6 +90,7 @@ const BaseResponsiveImage = ({
       />
 
       <img
+        className={imageClasses}
         src={url}
         srcSet={toSizedImageURL({
           url,

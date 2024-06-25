@@ -7,7 +7,7 @@ import {
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
-import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
+// import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
 import { useCommentEditorContext } from '~/components/Context'
 
 import { makeMentionSuggestion } from '../Article/extensions'
@@ -48,10 +48,10 @@ const CommentEditor: React.FC<Props> = ({
     // can be removed if editor is only used in single page
     // instead of being used in dialog
     onFocus: () => {
-      window.dispatchEvent(new CustomEvent(BYPASS_SCROLL_LOCK))
+      // window.dispatchEvent(new CustomEvent(BYPASS_SCROLL_LOCK))
     },
     onDestroy: () => {
-      window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
+      // window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
   })

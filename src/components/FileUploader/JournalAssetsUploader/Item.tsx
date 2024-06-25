@@ -26,7 +26,7 @@ export const Item = memo(function Item({ asset, removeAsset }: ItemProps) {
       // mock uploading
       setTimeout(() => {
         setUploading(false)
-        if (random(0, 2, false) === 1) {
+        if (random(0, 4, false) === 1) {
           setError('未知錯誤')
           return
         }
@@ -65,6 +65,7 @@ export const Item = memo(function Item({ asset, removeAsset }: ItemProps) {
           height={72}
           smUpWidth={72}
           smUpHeight={72}
+          objectFix="cover"
         />
       )}
     </div>

@@ -27,11 +27,13 @@
 }
 
 .content {
+  @mixin hide-scrollbar;
+
   min-height: 3rem;
   max-height: calc(24px + 3.5 * 26.25px);
   padding: var(--sp4) var(--sp12);
   margin-bottom: var(--sp8);
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .footer {

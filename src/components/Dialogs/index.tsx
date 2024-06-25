@@ -24,6 +24,9 @@ export * from './SubmitReportDialog'
 export * from './SupportersDialog'
 export * from './TagListDialog'
 
+// Journal
+export * from './JournalDetailDialog'
+
 // Collection
 export * from './AddArticlesCollectionDialog'
 export * from './AddCollectionDialog'

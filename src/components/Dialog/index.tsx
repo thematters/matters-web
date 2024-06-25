@@ -24,6 +24,7 @@ export type DialogProps = {
   onDismiss: () => void
 
   scrollable?: boolean
+  fixedWidth?: boolean
   testId?: string
 } & DialogInnerProps
 
@@ -35,7 +36,7 @@ export type BaseDialogProps = {
 
 const BaseAnimatedDilaog: React.ComponentType<
   React.PropsWithChildren<DialogProps & BaseDialogProps>
-> = (props) => {
+> = ({ fixedWidth = true, ...props }) => {
   const { isOpen, mounted, setMounted, scrollable, bypassScrollLock } = props
   const initialFocusRef = useRef<any>(null)
 
@@ -68,6 +69,10 @@ const BaseAnimatedDilaog: React.ComponentType<
     [styles.scrollable]: !!scrollable,
   })
 
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.fixedWidth]: fixedWidth,
+  })
   const AnimatedDialogOverlay = animated(DialogOverlay)
   const AnimatedInner = animated(Inner)
 
@@ -79,7 +84,7 @@ const BaseAnimatedDilaog: React.ComponentType<
       dangerouslyBypassScrollLock={bypassScrollLock}
     >
       <DialogContent
-        className={styles.container}
+        className={containerClasses}
         aria-labelledby="dialog-title"
       >
         <AnimatedInner

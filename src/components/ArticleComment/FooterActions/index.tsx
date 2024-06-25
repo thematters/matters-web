@@ -87,7 +87,7 @@ const BaseFooterActions = ({
   const formWrapperRef = useRef<HTMLDivElement>(null)
 
   const [showForm, setShowForm] = useState(false)
-  const toggleShowForm = () => setShowForm(!showForm)
+  // const toggleShowForm = () => setShowForm(!showForm)
   const [editor, setEditor] = useState<Editor | null>(null)
   const { setActiveEditor, activeEditor } = useCommentEditorContext()
 
@@ -214,10 +214,11 @@ const BaseFooterActions = ({
                   {...replyButtonProps}
                   {...replyCustomButtonProps}
                   onClick={() => {
-                    if (editor === activeEditor) {
-                      setActiveEditor(null)
-                    }
-                    toggleShowForm()
+                    // TODO:
+                    // if (editor === activeEditor) {
+                    //   setActiveEditor(null)
+                    // }
+                    // toggleShowForm()
                   }}
                 />
               </Media>

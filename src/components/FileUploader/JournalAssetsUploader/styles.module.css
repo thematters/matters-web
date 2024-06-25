@@ -37,7 +37,7 @@
     height: 1.5rem;
     cursor: pointer;
     background: var(--color-white);
-    border-radius: var(--sp8);
+    border-radius: 50%;
   }
 
   & .error {
