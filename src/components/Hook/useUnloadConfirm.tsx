@@ -33,14 +33,14 @@ export const useUnloadConfirm = ({
     throw "Abort route change by user's confirmation."
   }
 
-  const onBeforeUnload = (event: any) => {
+  const onBeforeUnload = (event: Event) => {
     if (!blockRef.current) {
       return null
     }
 
     // legacy browsers
     if (event) {
-      event.returnValue = hint
+      event.returnValue = !!hint
     }
 
     // modern browsers (ignore text)

@@ -4,9 +4,14 @@
   position: sticky;
   top: 0;
   z-index: var(--z-index-global-header);
+  width: 21.5rem;
   padding-top: var(--sp40);
   padding-bottom: var(--sp16);
   background: var(--color-white);
+
+  @media (--md-up) {
+    width: 30rem;
+  }
 
   & h2 {
     font-size: var(--text20);
@@ -22,6 +27,6 @@
   }
 
   &.fixedWidth {
-    width: 22.5rem;
+    width: 21.5rem;
   }
 }

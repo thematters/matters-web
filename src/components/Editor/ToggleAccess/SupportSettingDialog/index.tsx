@@ -35,7 +35,12 @@ const BaseSupportSettingDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        dismissOnClickOutside={false}
+        dismissOnESC={false}
+      >
         <DynamicContent
           closeDialog={closeDialog}
           draft={draft}

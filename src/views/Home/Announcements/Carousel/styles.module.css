@@ -1,10 +1,10 @@
 .carousel {
   position: relative;
   width: 100%;
-  padding: var(--sp16) var(--sp16) 0;
+  padding: var(--sp8) 0 0;
 
   @media (--sm-up) {
-    padding: var(--sp32) 0 0;
+    padding: 0;
   }
 }
 
@@ -12,17 +12,12 @@
   @mixin flex-center-space-between;
 
   position: absolute;
-  top: var(--sp16);
   right: var(--sp16);
   left: var(--sp16);
   z-index: 1;
   height: 2rem;
-  padding-top: var(--sp8);
-  padding-left: var(--sp8);
 
   @media (--sm-up) {
-    padding-top: var(--sp32);
-    padding-left: 0;
     margin-left: calc(0 - var(--sp8));
   }
 

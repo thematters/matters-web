@@ -7,7 +7,7 @@ interface ContentProps {
 }
 
 const Content: React.FC<React.PropsWithChildren<ContentProps>> = ({
-  fixedWidth = true,
+  fixedWidth = false,
   children,
 }) => {
   const contentClasses = classNames({

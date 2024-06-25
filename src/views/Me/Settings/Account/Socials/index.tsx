@@ -89,7 +89,13 @@ const Socials = () => {
   }
 
   useEffect(() => {
-    const bindResult = storage.remove(OAUTH_STORAGE_BIND_STATE)
+    const bindResult = storage.remove<{
+      type: SocialAccountType
+      state:
+        | typeof OAUTH_STORAGE_BIND_STATE_SUCCESS
+        | typeof OAUTH_STORAGE_BIND_STATE_FAILURE
+        | typeof OAUTH_STORAGE_BIND_STATE_UNAVAILABLE
+    }>(OAUTH_STORAGE_BIND_STATE)
     if (!bindResult) {
       return
     }
