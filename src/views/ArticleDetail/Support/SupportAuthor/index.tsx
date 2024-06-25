@@ -6,8 +6,9 @@ import {
   CLOSE_SET_PAYMENT_PASSWORD_DIALOG,
   OPEN_SET_PAYMENT_PASSWORD_DIALOG,
   PAYMENT_CURRENCY as CURRENCY,
+  SUPPORT_TAB_PREFERENCE_KEY,
 } from '~/common/enums'
-import { featureSupportedChains } from '~/common/utils'
+import { featureSupportedChains, storage } from '~/common/utils'
 import {
   AuthWalletFeed,
   SetPaymentPasswordDialog,
@@ -76,6 +77,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
   const hasAuthorAddress = recipient.info.ethAddress
   const hasAuthorLikeID = !!recipient.liker.likerId
+  const supportCurrency = storage.get<CURRENCY>(SUPPORT_TAB_PREFERENCE_KEY)
 
   const { address } = useAccount()
   // TODO: support multiple networks
@@ -88,11 +90,14 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   }
 
   const [amount, setAmount] = useState<number>(0)
-  const [currency, setCurrency] = useState<CURRENCY>(CURRENCY.HKD)
+  const [currency, setCurrency] = useState<CURRENCY>(
+    supportCurrency || CURRENCY.HKD
+  )
 
   const switchCurrency = async (currency: CURRENCY) => {
     setAmount(0)
     setCurrency(currency)
+    storage.set(SUPPORT_TAB_PREFERENCE_KEY, currency)
   }
 
   const reset = () => {

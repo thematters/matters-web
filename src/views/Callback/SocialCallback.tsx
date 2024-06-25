@@ -72,12 +72,13 @@ const SocialCallback = ({ type }: Props) => {
   useEffect(() => {
     const referralCode =
       getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
-      storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+      storage.get<{ referralCode: string }>(REFERRAL_STORAGE_REFERRAL_CODE)
+        ?.referralCode ||
       undefined
-    const localState = storage.get(OAUTH_STORAGE_STATE)
-    const localNonce = storage.get(OAUTH_STORAGE_NONCE)
-    const localCodeVerifier = storage.get(OAUTH_STORAGE_CODE_VERIFIER)
-    const localPath = storage.get(OAUTH_STORAGE_PATH)
+    const localState = storage.get<string>(OAUTH_STORAGE_STATE)
+    const localNonce = storage.get<string>(OAUTH_STORAGE_NONCE)
+    const localCodeVerifier = storage.get<string>(OAUTH_STORAGE_CODE_VERIFIER)
+    const localPath = storage.get<string>(OAUTH_STORAGE_PATH)
 
     const localOauthToken = sessionStorage.get(
       OAUTH_SESSSION_STORAGE_OAUTH_TOKEN
@@ -86,7 +87,7 @@ const SocialCallback = ({ type }: Props) => {
       OAUTH_SESSSION_STORAGE_OAUTH_TYPE
     )
 
-    if (!!error) {
+    if (!!error && localPath) {
       window.location.href = localPath
       return
     }
@@ -141,7 +142,9 @@ const SocialCallback = ({ type }: Props) => {
 
           analytics.identifyUser()
 
-          window.location.href = localPath
+          if (localPath) {
+            window.location.href = localPath
+          }
         } catch (error) {
           let hasFobiddenError = false
           const codes = getErrorCodes(error as any)
@@ -198,7 +201,10 @@ const SocialCallback = ({ type }: Props) => {
             type,
             state: OAUTH_STORAGE_BIND_STATE_SUCCESS,
           })
-          window.location.href = localPath
+
+          if (localPath) {
+            window.location.href = localPath
+          }
         } catch (error) {
           const codes = getErrorCodes(error as any)
           let hasBindFailure = false
@@ -217,7 +223,7 @@ const SocialCallback = ({ type }: Props) => {
               hasBindFailure = true
             }
           })
-          if (hasBindFailure) {
+          if (hasBindFailure && localPath) {
             window.location.href = localPath
             return
           }

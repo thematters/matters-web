@@ -32,7 +32,8 @@ const LoginCallback = () => {
       try {
         const referralCode =
           getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
-          storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+          storage.get<{ referralCode: string }>(REFERRAL_STORAGE_REFERRAL_CODE)
+            ?.referralCode ||
           undefined
         const { data } = await login({
           variables: {

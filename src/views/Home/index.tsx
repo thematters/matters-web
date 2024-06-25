@@ -1,8 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Layout, Spacer } from '~/components'
+import { Layout } from '~/components'
 
-import Announcements from './Announcements'
 import Feed from './Feed'
 import Sidebar from './Sidebar'
 
@@ -20,10 +19,6 @@ const Home = () => {
       <Layout.AuthHeader
         title={<FormattedMessage defaultMessage="Discover" id="cE4Hfw" />}
       />
-
-      <Announcements />
-
-      <Spacer size="xtight" />
 
       <Feed />
     </Layout.Main>

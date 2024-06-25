@@ -39,8 +39,9 @@ export const SupportDrawer: React.FC<SupportDrawerProps> = ({
               })
         }
         closeDrawer={onClose}
+        fixedWidth
       />
-      <Drawer.Content>
+      <Drawer.Content fixedWidth>
         <SupportAuthor
           recipient={article.author}
           targetId={article.id}
