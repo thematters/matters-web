@@ -1,4 +1,4 @@
-const clientPreferenceResolver = (_: any) => {
+const clientPreferenceResolver = (_: unknown) => {
   return {
     __typename: 'ClientPreference',
     id: 'local',

@@ -1,8 +1,10 @@
+import type { ReactNode } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
 import ICON_STRIPE from '@/public/static/icons/stripe.svg'
 import { OAUTH_PROVIDER, PATHS } from '~/common/enums'
+import type { TranslateArgs } from '~/common/utils'
 import { Layout, Translate, useRoute } from '~/components'
 
 import { Box } from '../../Box'
@@ -21,7 +23,7 @@ const OAUTH_CALLBACK_ERROR_CODE = {
   stripeAccountRefresh: 7,
 }
 
-const ERROR_TEXT = {
+const ERROR_TEXT: { [key: number]: TranslateArgs } = {
   [OAUTH_CALLBACK_ERROR_CODE.userNotFound]: {
     zh_hant: '用戶不存在，請回到 Matters 再次嘗試',
     zh_hans: '用户不存在，请回到 Matters 再次尝试',
@@ -61,9 +63,9 @@ const ERROR_TEXT = {
 
 const OAuthCallbackFailure = () => {
   const { getQuery, router } = useRoute()
-  const code = getQuery('code')
+  const code = Number(getQuery('code'))
   const provider = getQuery('provider')
-  const title: { [key: string]: any } = {
+  const title: { [key: string]: ReactNode } = {
     likecoin: (
       <Translate
         zh_hant="設置 Liker ID"
@@ -72,11 +74,11 @@ const OAuthCallbackFailure = () => {
       />
     ),
   }
-  const avatar: { [key: string]: any } = {
+  const avatar: { [key: string]: string } = {
     likecoin: ICON_LIKECOIN,
     'stripe-connect': ICON_STRIPE,
   }
-  const errorDetail = ERROR_TEXT[code as any]
+  const errorDetail = code in ERROR_TEXT ? ERROR_TEXT[code] : null
 
   if (!provider || OAUTH_PROVIDER.indexOf(provider) < 0) {
     router.push(PATHS.HOME)

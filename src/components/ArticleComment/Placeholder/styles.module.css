@@ -1,0 +1,28 @@
+.comment {
+  padding: var(--sp16) 0;
+
+  & .avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    background-color: var(--color-grey-lighter);
+    border-radius: 50%;
+  }
+
+  & .content {
+    margin-top: var(--sp12);
+
+    & p {
+      width: 100%;
+      height: 0.875rem;
+      background-color: var(--color-grey-lighter);
+    }
+
+    & p + p {
+      margin-top: var(--sp8);
+    }
+
+    & p:last-child {
+      width: 50%;
+    }
+  }
+}

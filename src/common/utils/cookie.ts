@@ -2,6 +2,8 @@ import Cookie, { CookieAttributes } from 'js-cookie'
 
 import { COOKIE_EXPIRES_IN_DAYS } from '~/common/enums'
 
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
+
 export const getCookieOptions = () => {
   return {
     expires: COOKIE_EXPIRES_IN_DAYS,
@@ -22,7 +24,7 @@ export const getIsomorphicCookie = (cookie: string, name: string) => {
 }
 
 export const getCookie = (name: string) => {
-  if (process.env.DEBUG) {
+  if (isLocal) {
     console.log('[cookie:GET]', name)
   }
   return Cookie.get(name)
@@ -33,7 +35,7 @@ export const setCookies = (cookies: { [name: string]: string }) => {
 
   const names = Object.keys(cookies)
   names.forEach((name) => {
-    if (process.env.DEBUG) {
+    if (isLocal) {
       console.log('[cookie:SET]', name, cookies[name])
     }
     Cookie.set(name, cookies[name], options)
@@ -43,7 +45,7 @@ export const setCookies = (cookies: { [name: string]: string }) => {
 export const removeCookies = (names: string[]) => {
   const options = getCookieOptions()
   names.forEach((name) => {
-    if (process.env.DEBUG) {
+    if (isLocal) {
       console.log('[cookie:REMOVE]', names)
     }
     Cookie.remove(name, options)

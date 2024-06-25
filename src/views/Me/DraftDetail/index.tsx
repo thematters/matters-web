@@ -170,7 +170,7 @@ const BaseDraftDetail = () => {
   )
 
   const upload = async (input: {
-    [key: string]: any
+    [key: string]: string | File
   }): Promise<{ id: string; path: string }> => {
     const isImage = input.type !== ASSET_TYPE.embedaudio
 
@@ -204,7 +204,7 @@ const BaseDraftDetail = () => {
         uploadURL,
       } = result?.data?.directImageUpload || {}
 
-      if (assetId && path && uploadURL) {
+      if (assetId && path && uploadURL && input.file instanceof File) {
         try {
           await uploadImage({ uploadURL, file: input.file })
         } catch (error) {
