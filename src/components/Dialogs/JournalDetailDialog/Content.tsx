@@ -11,6 +11,7 @@ import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.sv
 import { ADD_JOURNAL_COMMENT } from '~/common/enums'
 import { storage, toPath } from '~/common/utils'
 import {
+  ArticleThreadCommentType,
   Avatar,
   Button,
   DateTime,
@@ -21,11 +22,10 @@ import {
   LinkWrapper,
   List,
   ResponsiveImage,
-  ThreadCommentType,
   useEventListener,
   ViewerContext,
 } from '~/components'
-import JournalCommentFeed from '~/components/CommentBeta/JournalCommentFeed'
+import JournalCommentFeed from '~/components/ArticleComment/JournalCommentFeed'
 import { JournalDigestProps } from '~/components/JournalDigest'
 
 import styles from './styles.module.css'
@@ -106,7 +106,7 @@ const JournalDetailDialogContent = ({
   const journals = storage.get(KEY) as JournalDigestProps[]
   const journal = journals.find((j) => j.id === journalId)
 
-  const [comments] = useState<ThreadCommentType[]>([])
+  const [comments] = useState<ArticleThreadCommentType[]>([])
 
   const [likeCount, setLikeCount] = useState(0)
   const [isLiked, setIsLiked] = useState(false)
@@ -122,7 +122,10 @@ const JournalDetailDialogContent = ({
 
   useEventListener(ADD_JOURNAL_COMMENT, (payload: { [key: string]: any }) => {
     const input = payload?.input
-    const newComment = Object.assign({}, mockComment) as ThreadCommentType
+    const newComment = Object.assign(
+      {},
+      mockComment
+    ) as ArticleThreadCommentType
     newComment.id = input.id
     newComment.content = input.content
     newComment.createdAt = input.createdAt
@@ -245,11 +248,7 @@ const JournalDetailDialogContent = ({
                       !comment.pinned &&
                       comment.state !== 'archived' && (
                         <List.Item key={comment.id}>
-                          <JournalCommentFeed
-                            comment={comment}
-                            type="article"
-                            hasReply
-                          />
+                          <JournalCommentFeed comment={comment} hasReply />
                         </List.Item>
                       )
                   )}

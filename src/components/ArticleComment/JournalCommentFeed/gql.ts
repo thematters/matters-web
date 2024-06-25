@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components/UserDigest'
 
-import Content from '../Content'
+import { ArticleCommentContent } from '../Content'
 import DropdownActions from '../DropdownActions'
 import FooterActions from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
@@ -28,10 +28,10 @@ export const fragments = {
           }
         }
         ...RoleLabelComment
-        ...PinnedLabelBetaComment
-        ...FooterActionsCommentBetaPublic
-        ...DropdownActionsCommentBetaPublic
-        ...ContentCommentPublic
+        ...PinnedLabelComment
+        ...ArticleCommentFooterActionsCommentPublic
+        ...ArticleCommentDropdownActionsCommentPublic
+        ...ArticleCommentContentCommentPublic
       }
       ${UserDigest.Mini.fragments.user}
       ${ReplyTo.fragments.user}
@@ -39,18 +39,18 @@ export const fragments = {
       ${PinnedLabel.fragments.comment}
       ${FooterActions.fragments.comment.public}
       ${DropdownActions.fragments.comment.public}
-      ${Content.fragments.comment.public}
+      ${ArticleCommentContent.fragments.comment.public}
     `,
     private: gql`
       fragment JournalCommentFeedCommentPrivate on Comment {
         id
-        ...FooterActionsCommentBetaPrivate
-        ...DropdownActionsCommentBetaPrivate
-        ...ContentCommentPrivate
+        ...ArticleCommentFooterActionsCommentPrivate
+        ...ArticleCommentDropdownActionsCommentPrivate
+        ...ArticleCommentContentCommentPrivate
       }
       ${FooterActions.fragments.comment.private}
       ${DropdownActions.fragments.comment.private}
-      ${Content.fragments.comment.private}
+      ${ArticleCommentContent.fragments.comment.private}
     `,
   },
 }

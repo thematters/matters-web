@@ -15,7 +15,7 @@ import {
   ArticleCommentUpvoteCommentPrivateFragment,
   ArticleCommentUpvoteCommentPublicFragment,
   UnvoteCommentMutation,
-  VoteCommentMutation,
+  // VoteCommentMutation,
 } from '~/gql/graphql'
 
 import styles from './styles.module.css'

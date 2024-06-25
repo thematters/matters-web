@@ -4,19 +4,18 @@ import React from 'react'
 import { COMMENT_FEED_ID_PREFIX, TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
+  ArticleCommentContent,
+  ArticleThreadCommentType,
   Avatar,
   AvatarSize,
-  CommentFormType,
   DateTime,
   LinkWrapper,
-  ThreadCommentType,
 } from '~/components'
 import {
-  FeedCommentBetaPrivateFragment,
-  FeedCommentBetaPublicFragment,
+  JournalCommentFeedCommentPrivateFragment,
+  JournalCommentFeedCommentPublicFragment,
 } from '~/gql/graphql'
 
-import Content from '../Content'
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
@@ -31,16 +30,14 @@ export type CommentControls = {
   DropdownActionsControls
 
 export type CommentProps = {
-  comment: FeedCommentBetaPublicFragment &
-    Partial<FeedCommentBetaPrivateFragment>
-  pinnedComment?: ThreadCommentType
-  type: CommentFormType
+  comment: JournalCommentFeedCommentPublicFragment &
+    Partial<JournalCommentFeedCommentPrivateFragment>
+  pinnedComment?: ArticleThreadCommentType
 } & CommentControls
 
 export const BaseJournalCommentFeed = ({
   comment,
   pinnedComment,
-  type,
   avatarSize = 32,
   hasUserName,
   replySubmitCallback,
@@ -105,7 +102,6 @@ export const BaseJournalCommentFeed = ({
           <DropdownActions
             comment={comment}
             pinnedComment={pinnedComment}
-            type={type}
             hasPin={false}
             inCard={actionControls.inCard}
           />
@@ -113,11 +109,10 @@ export const BaseJournalCommentFeed = ({
       </header>
 
       <section className={contentClasses}>
-        <Content comment={comment} type={type} size={15} limit={5} />
+        <ArticleCommentContent comment={comment} size={15} limit={5} />
 
         <FooterActions
           comment={comment}
-          type={type}
           replySubmitCallback={submitCallback}
           {...actionControls}
         />
