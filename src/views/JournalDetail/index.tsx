@@ -8,7 +8,11 @@ import { Gallery, Item } from 'react-photoswipe-gallery'
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { ADD_COMMENT_MENTION, ADD_JOURNAL_COMMENT } from '~/common/enums'
+import {
+  ADD_COMMENT_MENTION,
+  ADD_JOURNAL_COMMENT,
+  JOURNAL_COMMENTS_TITLE,
+} from '~/common/enums'
 import { makeMentionElement, storage, toPath } from '~/common/utils'
 import {
   ArticleThreadCommentType,
@@ -144,6 +148,12 @@ const JournalDetail = () => {
     newComment.content = input.content
     newComment.createdAt = input.createdAt
     addComment(newComment)
+
+    // scroll to the new comment
+    setTimeout(() => {
+      const commentElement = document.getElementById(JOURNAL_COMMENTS_TITLE)
+      commentElement?.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
   })
 
   useEventListener(ADD_COMMENT_MENTION, (payload: { [key: string]: any }) => {
@@ -259,7 +269,7 @@ const JournalDetail = () => {
           {comments.length === 0 && <EmptyComment description="暫無評論" />}
           {comments.length > 0 && (
             <>
-              <section className={styles.title}>
+              <section className={styles.title} id={JOURNAL_COMMENTS_TITLE}>
                 <span>評論</span>
                 <span className={styles.count}>&nbsp;{comments.length}</span>
               </section>
