@@ -12,7 +12,7 @@
     margin-top: var(--sp12);
 
     & p {
-      width: 22.5rem;
+      width: 100%;
       height: 0.875rem;
       background-color: var(--color-grey-lighter);
     }
@@ -22,7 +22,7 @@
     }
 
     & p:last-child {
-      width: 11.25rem;
+      width: 50%;
     }
   }
 }
