@@ -34,7 +34,7 @@ import {
 import styles from './styles.module.css'
 
 export type AvatarUploaderProps = {
-  onUploaded: (assetId: string) => void
+  onUploaded: (assetId: string, path: string) => void
   onUploadStart: () => void
   onUploadEnd: () => void
   hasBorder?: boolean
@@ -138,7 +138,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         }).catch(console.error)
 
         setAvatar(path)
-        onUploaded(assetId)
+        onUploaded(assetId, path)
       } else {
         throw new Error()
       }

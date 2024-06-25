@@ -25,6 +25,7 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
           onUploaded={(assetId) => alert({ assetId })}
           onUploadStart={() => null}
           onUploadEnd={() => null}
+          onReset={() => null}
           fallbackCover={IMAGE_COVER.src}
         />
       </li>
@@ -35,6 +36,7 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
           onUploaded={(assetId) => alert({ assetId })}
           onUploadStart={() => null}
           onUploadEnd={() => null}
+          onReset={() => null}
           fallbackCover={IMAGE_COVER.src}
           cover="https://source.unsplash.com/512x512?cover"
         />
@@ -49,6 +51,7 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
           onUploaded={(assetId) => alert({ assetId })}
           onUploadStart={() => null}
           onUploadEnd={() => null}
+          onReset={() => null}
           fallbackCover={CIRCLE_COVER}
         />
       </li>
@@ -60,6 +63,7 @@ const Template: ComponentStory<typeof CoverUploader> = () => (
           onUploaded={(assetId) => alert({ assetId })}
           onUploadStart={() => null}
           onUploadEnd={() => null}
+          onReset={() => null}
           fallbackCover={CIRCLE_COVER}
           cover="https://source.unsplash.com/512x512?circle-cover"
         />

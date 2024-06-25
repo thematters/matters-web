@@ -2,6 +2,10 @@ export { default as isUrl } from 'validator/lib/isURL'
 
 import { URL_COLLECTION_DETAIL } from '../enums'
 
+type Sorter = {
+  [key: string]: string
+}
+
 export const parseURL = (url: string) => {
   const parser = document.createElement('a')
 
@@ -85,7 +89,7 @@ export const toSizedImageURL = ({
 }
 
 export const parseSorter = (sorterStr: string) => {
-  const sorter: { [key: string]: string } = {}
+  const sorter: Sorter = {}
   if (sorterStr === '') {
     return sorter
   }
@@ -101,7 +105,7 @@ export const parseSorter = (sorterStr: string) => {
   return sorter
 }
 
-export const stringifySorter = (sorter: any) => {
+export const stringifySorter = (sorter: Sorter) => {
   let sorterStr = ''
   const keys = Object.keys(sorter)
   keys.map((key, index) => {

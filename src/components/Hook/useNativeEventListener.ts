@@ -13,12 +13,12 @@ import { useEffect } from 'react'
  *
  */
 
-export function useNativeEventListener(
+export function useNativeEventListener<T extends Event>(
   event: string,
-  action: any,
-  element?: any
+  action: (evt: T) => void,
+  element?: EventTarget
 ) {
-  const eventAction = (eventInstance: Event) => action(eventInstance)
+  const eventAction = (eventInstance: T) => action(eventInstance)
 
   useEffect(() => {
     const target = element || window
@@ -26,10 +26,10 @@ export function useNativeEventListener(
       return
     }
 
-    target.addEventListener(event, eventAction)
+    target.addEventListener(event, eventAction as EventListener) // TSC is not smart enough here to know yet
 
     return () => {
-      target.removeEventListener(event, eventAction)
+      target.removeEventListener(event, eventAction as EventListener)
     }
   })
 }

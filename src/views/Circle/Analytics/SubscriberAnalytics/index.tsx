@@ -7,6 +7,7 @@ import { ReactComponent as IconAnalyticsSubscriber24 } from '@/public/static/ico
 import { CHART_COLOR } from '~/common/enums'
 import {
   Button,
+  type Datum,
   QueryError,
   SpinnerBlock,
   StackedAreaChart,
@@ -76,7 +77,7 @@ const Content = () => {
     [DatumKey.subscriber]: CHART_COLOR.yellow,
   }
 
-  const tooltipFormatter = (datum: any) => {
+  const tooltipFormatter = (datum: Datum) => {
     const { time, ...values } = datum
 
     return [
