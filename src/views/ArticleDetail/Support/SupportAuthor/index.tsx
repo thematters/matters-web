@@ -97,7 +97,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const switchCurrency = async (currency: CURRENCY) => {
     setAmount(0)
     setCurrency(currency)
-    storage.set(SUPPORT_TAB_PREFERENCE_KEY, currency)
   }
 
   const reset = () => {
@@ -243,6 +242,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
             forward('confirm')
           }}
           nextStep={() => {
+            storage.set(SUPPORT_TAB_PREFERENCE_KEY, currency)
             forward('complete')
           }}
           txId={payToTx?.id || ''}
