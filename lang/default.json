@@ -577,6 +577,9 @@
     "defaultMessage": "Unpin from profile",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
+  "8Asqdm": {
+    "defaultMessage": "確認清空當前編輯的内容嗎？"
+  },
   "8KFsZN": {
     "defaultMessage": "Read Counts"
   },
@@ -1047,6 +1050,9 @@
   },
   "HBxXD/": {
     "defaultMessage": "License"
+  },
+  "HEiu24": {
+    "defaultMessage": "清空内容"
   },
   "HFVDeB": {
     "defaultMessage": "Related Tags",

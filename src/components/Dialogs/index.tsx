@@ -25,6 +25,7 @@ export * from './SupportersDialog'
 export * from './TagListDialog'
 
 // Journal
+export * from './ClearJournalDialog'
 export * from './JournalDetailDialog'
 
 // Collection

@@ -577,6 +577,9 @@
     "defaultMessage": "取消代表作",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
+  "8Asqdm": {
+    "defaultMessage": "確認清空當前編輯的内容嗎？"
+  },
   "8KFsZN": {
     "defaultMessage": "閱讀次數"
   },
@@ -1047,6 +1050,9 @@
   },
   "HBxXD/": {
     "defaultMessage": "版權聲明"
+  },
+  "HEiu24": {
+    "defaultMessage": "清空内容"
   },
   "HFVDeB": {
     "defaultMessage": "相關標籤",

@@ -3,13 +3,20 @@ import { random } from 'lodash'
 import { useCallback, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
 import {
   ADD_JOURNAL,
   MAX_JOURNAL_CONTENT_LENGTH,
   UPLOAD_JOURNAL_ASSET_COUNT_LIMIT,
 } from '~/common/enums'
 import { getImageDimensions, stripHtml } from '~/common/utils'
-import { Button, SpinnerBlock, TextIcon } from '~/components'
+import {
+  Button,
+  ClearJournalDialog,
+  Icon,
+  SpinnerBlock,
+  TextIcon,
+} from '~/components'
 import JournalEditor from '~/components/Editor/Journal'
 import {
   JournalAsset,
@@ -106,7 +113,7 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
       editor.commands.blur()
     }
     setAssets([])
-    setEditing(false)
+    // setEditing(false)
   }
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
@@ -121,16 +128,11 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
 
   if (!isEditing) {
     return (
-      <section className={styles.defalut}>
-        <JournalAssetsUploader
-          assets={assets}
-          addAssets={addAssets}
-          removeAsset={removeAsset}
-        />
-        <button
-          onClick={() => setEditing(true)}
-          className={styles.activeButton}
-        >
+      <section className={styles.defalut} onClick={() => setEditing(true)}>
+        <div className={styles.imageButton}>
+          <Icon icon={IconImage} size={22} color="greyDarker" />
+        </div>
+        <button className={styles.activeButton}>
           <FormattedMessage defaultMessage="說點什麼..." id="EIoAY7" />
         </button>
       </section>
@@ -168,25 +170,30 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
             isEditing
           />
         </section>
-        <section>
-          {contentCount > MAX_JOURNAL_CONTENT_LENGTH && (
-            <span className={styles.count}>
-              {contentCount}/{MAX_JOURNAL_CONTENT_LENGTH}
-            </span>
+        <section className={styles.right}>
+          <span className={styles.count}>
+            {contentCount}/{MAX_JOURNAL_CONTENT_LENGTH}
+          </span>
+          <div className={styles.line} />
+          {isValid && (
+            <ClearJournalDialog onConfirm={onClear}>
+              {({ openDialog }) => (
+                <Button
+                  size={[null, '2rem']}
+                  spacing={[0, 16]}
+                  bgColor="white"
+                  disabled={isSubmitting}
+                  onClick={openDialog}
+                  textColor="black"
+                  textActiveColor="greyDarker"
+                >
+                  <TextIcon size={14}>
+                    <FormattedMessage defaultMessage="Clear" id="/GCoTA" />
+                  </TextIcon>
+                </Button>
+              )}
+            </ClearJournalDialog>
           )}
-          <Button
-            size={[null, '2rem']}
-            spacing={[0, 16]}
-            bgColor="white"
-            disabled={isSubmitting}
-            onClick={() => setEditing(false)}
-            textColor="black"
-            textActiveColor="greyDarker"
-          >
-            <TextIcon size={14}>
-              <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
-            </TextIcon>
-          </Button>
           <Button
             type="submit"
             form={formId}
