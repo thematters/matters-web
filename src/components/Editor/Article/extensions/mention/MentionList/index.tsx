@@ -91,7 +91,7 @@ export const MentionList = forwardRef(
               onClick={() => {
                 onClick(user)
               }}
-              activeOutline="auto"
+              bgActiveColor="greyLighter"
               isActive={activeItem === user.id}
               key={user.id}
             >
