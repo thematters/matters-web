@@ -1,6 +1,6 @@
 import { Editor } from '@matters/matters-editor'
 import { random } from 'lodash'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
@@ -32,6 +32,7 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
   const [isEditing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
   const [assets, setAssets] = useState<JournalAsset[]>([])
+  const formRef = useRef<HTMLFormElement | null>(null)
 
   const addAssets = useCallback(
     async (files: File[]) => {
@@ -80,6 +81,26 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
   const isValid =
     (contentCount > 0 && contentCount <= MAX_JOURNAL_CONTENT_LENGTH) ||
     assets.length > 0
+
+  useEffect(() => {
+    const clickOutside = (event: MouseEvent) => {
+      if (
+        formRef.current &&
+        !formRef.current.contains(event.target as Node) &&
+        isEditing &&
+        assets.length === 0 &&
+        stripHtml(content).length === 0
+      ) {
+        setEditing(false)
+      }
+    }
+
+    document.addEventListener('click', clickOutside)
+
+    return () => {
+      document.removeEventListener('click', clickOutside)
+    }
+  }, [isEditing, assets, content])
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -141,6 +162,7 @@ export const JournalForm: React.FC<JournalFormProps> = ({}) => {
 
   return (
     <form
+      ref={formRef}
       className={styles.form}
       id={formId}
       onSubmit={handleSubmit}
