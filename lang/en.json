@@ -1420,6 +1420,9 @@
     "defaultMessage": "Forgot password?",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
+  "O7ozeo": {
+    "defaultMessage": "Update profile"
+  },
   "OIj8pQ": {
     "defaultMessage": "Invitation Sent",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -2682,9 +2685,6 @@
   },
   "nWhqw9": {
     "defaultMessage": "Publish Now"
-  },
-  "nYrKWp": {
-    "defaultMessage": "Edit profile"
   },
   "nhkx3t": {
     "defaultMessage": "IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"
