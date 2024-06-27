@@ -53,6 +53,8 @@
 .scrollContainer {
   /* TODO: Confirm height with producion team */
 
+  @mixin hide-scrollbar;
+
   /* max-height: calc(var(--ivh) - 158px); */
   max-height: calc(90vh - 158px);
   overflow-y: auto;
