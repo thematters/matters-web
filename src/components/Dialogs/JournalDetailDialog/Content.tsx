@@ -8,8 +8,12 @@ import { Gallery, Item } from 'react-photoswipe-gallery'
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { ADD_JOURNAL_COMMENT } from '~/common/enums'
-import { storage, toPath } from '~/common/utils'
+import {
+  ADD_COMMENT_MENTION,
+  ADD_JOURNAL_COMMENT,
+  JOURNAL_COMMENTS_TITLE,
+} from '~/common/enums'
+import { makeMentionElement, storage, toPath } from '~/common/utils'
 import {
   ArticleThreadCommentType,
   Avatar,
@@ -100,13 +104,29 @@ const JournalDetailDialogContent = ({
   closeDialog,
 }: JournalDetailDialogContentProps) => {
   const viewer = useContext(ViewerContext)
-  const [isEditing, setEditing] = useState(false)
+  const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
+  const [comments, setComments] = useState<ArticleThreadCommentType[]>([])
+  const [journal, setJournal] = useState<JournalDigestProps | undefined>(
+    undefined
+  )
+  useEffect(() => {
+    const journals = storage.get(KEY) as JournalDigestProps[]
+    const journal = journals.find((j) => j.id === journalId)
+    setJournal(journal)
+    setComments(journal?.comments || [])
+  }, [])
 
-  const journals = storage.get(KEY) as JournalDigestProps[]
-  const journal = journals.find((j) => j.id === journalId)
-
-  const [comments] = useState<ArticleThreadCommentType[]>([])
+  const addComment = (comment: ArticleThreadCommentType) => {
+    // update display comments
+    setComments([comment, ...comments])
+    // update storage
+    journal && (journal.comments = [...(journal?.comments || []), comment])
+    const journals = storage.get(KEY) as JournalDigestProps[]
+    const index = journals.findIndex((j) => j.id === journalId)
+    journals[index] = journal as JournalDigestProps
+    storage.set(KEY, journals)
+  }
 
   const [likeCount, setLikeCount] = useState(0)
   const [isLiked, setIsLiked] = useState(false)
@@ -126,17 +146,39 @@ const JournalDetailDialogContent = ({
       {},
       mockComment
     ) as ArticleThreadCommentType
+    newComment.author = viewer as any
     newComment.id = input.id
     newComment.content = input.content
     newComment.createdAt = input.createdAt
-    comments.push(newComment)
+    addComment(newComment)
+
+    // scroll to the new comment
+    setTimeout(() => {
+      const commentElement = document.getElementById(JOURNAL_COMMENTS_TITLE)
+      commentElement?.scrollIntoView({ behavior: 'smooth' })
+    }, 100)
+  })
+
+  useEventListener(ADD_COMMENT_MENTION, (payload: { [key: string]: any }) => {
+    setEditing(true)
+    const author = payload?.author
+    const mentionElement = makeMentionElement(
+      author.id,
+      author.userName,
+      author.displayName
+    )
+
+    if (editor) {
+      editor.commands.insertContent(mentionElement)
+      editor.commands.focus('end')
+    }
   })
 
   useEffect(() => {
-    if (editor && isEditing) {
+    if (editor && editing) {
       editor.commands.focus('end')
     }
-  }, [editor, isEditing])
+  }, [editor, editing])
 
   const options = {
     padding: { top: 20, bottom: 40, left: 100, right: 100 },
@@ -225,7 +267,7 @@ const JournalDetailDialogContent = ({
           {comments.length === 0 && <EmptyComment description="暫無評論" />}
           {comments.length > 0 && (
             <>
-              <section className={styles.title}>
+              <section className={styles.title} id={JOURNAL_COMMENTS_TITLE}>
                 <span>評論</span>
                 <span className={styles.count}>&nbsp;{comments.length}</span>
               </section>
@@ -259,7 +301,7 @@ const JournalDetailDialogContent = ({
         </section>
       </section>
       <footer className={styles.footer}>
-        {!isEditing && (
+        {!editing && (
           <>
             <div className={styles.likeButton}>
               <button
@@ -274,25 +316,19 @@ const JournalDetailDialogContent = ({
               </button>
               {likeCount > 0 && <span>&nbsp;{likeCount}</span>}
             </div>
-            <button
-              onClick={() => setEditing(true)}
-              className={styles.editButton}
-            >
-              <FormattedMessage defaultMessage="說點什麼..." id="EIoAY7" />
-            </button>
           </>
         )}
-        {isEditing && (
-          <JournalCommentForm
-            type="journal"
-            journalId={journalId}
-            closeCallback={() => setEditing(false)}
-            setEditor={(editor) => {
-              setEditor(editor)
-            }}
-            submitCallback={() => setEditing(false)}
-          />
-        )}
+        <JournalCommentForm
+          type="journal"
+          journalId={journalId}
+          closeCallback={() => setEditing(false)}
+          editing={editing}
+          setEditor={(editor) => {
+            setEditor(editor)
+          }}
+          submitCallback={() => setEditing(false)}
+          setEditing={setEditing}
+        />
       </footer>
     </section>
   )
