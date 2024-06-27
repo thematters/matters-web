@@ -7,7 +7,7 @@ import { storage } from '~/common/utils'
 const Fingerprint = () => {
   useEffect(() => {
     try {
-      const stored = storage.get(STORAGE_KEY_AGENT_HASH)
+      const stored = storage.get<string>(STORAGE_KEY_AGENT_HASH)
       if (!stored || !stored.startsWith(AGENT_HASH_PREFIX)) {
         fingerprint.get((components) => {
           const values = components.map((component) => component.value)

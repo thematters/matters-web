@@ -116,7 +116,7 @@ const BaseOAuthAuthorize = () => {
               />
             </li>
             {validScopes &&
-              validScopes.map((s: any) => {
+              validScopes.map((s) => {
                 const readableScope = toReadableScope({
                   scope: s,
                   lang,

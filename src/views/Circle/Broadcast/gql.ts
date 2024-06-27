@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ThreadComment } from '~/components'
+import { CircleThreadComment } from '~/components'
 
 export const BROADCAST_PUBLIC = gql`
   query BroadcastPublic(
@@ -35,15 +35,15 @@ export const BROADCAST_PUBLIC = gql`
         }
         edges {
           node {
-            ...ThreadCommentCommentPublic
-            ...ThreadCommentCommentPrivate
+            ...CircleCommentThreadCommentCommentPublic
+            ...CircleCommentThreadCommentCommentPrivate
           }
         }
       }
     }
   }
-  ${ThreadComment.fragments.comment.public}
-  ${ThreadComment.fragments.comment.private}
+  ${CircleThreadComment.fragments.comment.public}
+  ${CircleThreadComment.fragments.comment.private}
 `
 
 export const BROADCAST_PRIVATE = gql`
@@ -59,9 +59,9 @@ export const BROADCAST_PRIVATE = gql`
     nodes(input: { ids: $ids }) {
       id
       ... on Comment {
-        ...ThreadCommentCommentPrivate
+        ...CircleCommentThreadCommentCommentPrivate
       }
     }
   }
-  ${ThreadComment.fragments.comment.private}
+  ${CircleThreadComment.fragments.comment.private}
 `

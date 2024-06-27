@@ -38,6 +38,11 @@ export const FigurePlaceholder = Extension.create<PlaceholderOptions>({
               const isFigure = node.type.name.startsWith('figure')
 
               if (isEmpty && isFigure) {
+                const isAtFigcaption = selection.$anchor.pos === pos + 1
+                if (isAtFigcaption) {
+                  return false
+                }
+
                 const decoration = Decoration.node(pos, pos + node.nodeSize, {
                   class: this.options.emptyNodeClass,
                   'data-figure-placeholder': this.options.placeholder,

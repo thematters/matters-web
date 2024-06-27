@@ -46,6 +46,8 @@ const SidebarCollection = ({
       nodes={collection}
       saving={collectionSaving}
       CustomStagingArea={ArticleCustomStagingArea}
+      dismissOnClickOutside={false}
+      dismissOnESC={false}
     >
       {({ openDialog }) => (
         <Box

@@ -8,9 +8,8 @@ const NoticeContentDigest = ({ content }: { content: string }) => {
     <section
       className={styles.noticeContentDigest}
       data-test-id={TEST_ID.NOTICE_COMMENT_CONTENT}
-    >
-      {stripHtml(content)}
-    </section>
+      dangerouslySetInnerHTML={{ __html: stripHtml(content) }}
+    />
   )
 }
 

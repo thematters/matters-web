@@ -64,13 +64,15 @@ export type CoverUploaderProps = {
     | ENTITY_TYPE.tag
     | ENTITY_TYPE.circle
     | ENTITY_TYPE.collection
-  onUploaded: (assetId: string | null) => void
+
+  onUploaded: (assetId: string, path: string) => void
   onUploadStart: () => void
   onUploadEnd: () => void
+  onReset: () => void
+
   type?: 'circle' | 'collection' | 'userProfile'
 
   bookTitle?: string
-  bookArticleCount?: number
 } & CoverProps
 
 export const CoverUploader = ({
@@ -80,12 +82,14 @@ export const CoverUploader = ({
   entityId,
   entityType,
   inEditor,
+
   onUploaded,
   onUploadStart,
   onUploadEnd,
+  onReset,
+
   type,
   bookTitle,
-  bookArticleCount,
 }: CoverUploaderProps) => {
   const intl = useIntl()
 
@@ -162,7 +166,7 @@ export const CoverUploader = ({
         }).catch(console.error)
 
         setCover(path)
-        onUploaded(assetId)
+        onUploaded(assetId, path)
       } else {
         throw new Error()
       }
@@ -186,7 +190,10 @@ export const CoverUploader = ({
     event.preventDefault()
     setCover(undefined)
     setLocalSrc(undefined)
-    onUploaded(null)
+
+    if (onReset) {
+      onReset()
+    }
   }
 
   const Mask = () => (

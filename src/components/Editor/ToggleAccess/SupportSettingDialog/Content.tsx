@@ -1,10 +1,11 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { MAX_ARTICLE_SUPPORT_LENGTH } from '~/common/enums'
-import { Dialog, Form, TextIcon, toast } from '~/components'
+import { formStorage } from '~/common/utils'
+import { Dialog, Form, TextIcon, toast, ViewerContext } from '~/components'
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -43,8 +44,12 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
   editSupportSetting,
   supportSettingSaving,
 }) => {
-  const formId = 'support-setting-form'
   const intl = useIntl()
+  const viewer = useContext(ViewerContext)
+
+  const formId = `support-setting-form:${draft?.id || ''}`
+  const formStorageKey = formStorage.genKey({ authorId: viewer.id, formId })
+  const formDraft = formStorage.get<FormValues>(formStorageKey, 'session')
 
   const [tabType, setTabType] = useState<TabType>('request')
   const content = draft ? draft : article
@@ -58,10 +63,10 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
     isValid,
   } = useFormik<FormValues>({
     initialValues: {
-      requestForDonation: content?.requestForDonation
-        ? content.requestForDonation
-        : '',
-      replyToDonator: content?.replyToDonator ? content.replyToDonator : '',
+      requestForDonation:
+        formDraft?.requestForDonation || content?.requestForDonation || '',
+      replyToDonator:
+        formDraft?.replyToDonator || content?.replyToDonator || '',
     },
     validateOnBlur: false,
     validateOnChange: false,
@@ -76,6 +81,9 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
           />
         ),
       })
+
+      // clear draft
+      formStorage.remove(formStorageKey, 'session')
 
       setSubmitting(false)
 
@@ -125,6 +133,11 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             onBlur={handleBlur}
             onChange={(e) => {
               setFieldValue('requestForDonation', e.currentTarget.value)
+              formStorage.set<FormValues>(
+                formStorageKey,
+                { ...values, requestForDonation: e.target.value },
+                'session'
+              )
             }}
           />
         )}
@@ -144,9 +157,14 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
             error={isReplyOverLength ? replyHint : errors.replyToDonator}
             hintAlign={errors.replyToDonator ? 'left' : 'right'}
             onBlur={handleBlur}
-            onChange={(e) =>
+            onChange={(e) => {
               setFieldValue('replyToDonator', e.currentTarget.value)
-            }
+              formStorage.set<FormValues>(
+                formStorageKey,
+                { ...values, replyToDonator: e.target.value },
+                'session'
+              )
+            }}
           />
         )}
       </Form>
