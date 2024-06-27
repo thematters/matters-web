@@ -66,7 +66,6 @@ export const JournalDigest: React.FC<JournalDigestProps> = ({
               isComment
             >
               <section
-                className={`u-content-comment`}
                 dangerouslySetInnerHTML={{
                   __html: content || '',
                 }}
