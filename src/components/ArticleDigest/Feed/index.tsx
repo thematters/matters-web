@@ -3,13 +3,7 @@ import React from 'react'
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
-import {
-  DateTime,
-  Icon,
-  LinkWrapper,
-  Media,
-  ResponsiveImage,
-} from '~/components'
+import { Icon, LinkWrapper, Media, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDigestFeedArticlePrivateFragment,
@@ -89,21 +83,18 @@ const BaseArticleDigestFeed = ({
           {hasHeader && (
             <header className={styles.header}>
               {hasAuthor && (
-                <>
-                  <section className={styles.author}>
-                    <UserDigest.Mini
-                      user={author}
-                      avatarSize={20}
-                      textSize={12}
-                      hasAvatar
-                      hasDisplayName
-                      onClick={onClickAuthor}
-                    />
-                    <Icon icon={IconDot} color="greyLight" size={20} />
-                  </section>
-                </>
+                <section className={styles.author}>
+                  <UserDigest.Mini
+                    user={author}
+                    avatarSize={20}
+                    textSize={12}
+                    hasAvatar
+                    hasDisplayName
+                    onClick={onClickAuthor}
+                  />
+                  <Icon icon={IconDot} color="greyLight" size={20} />
+                </section>
               )}
-              <DateTime date={article.createdAt} color="grey" />
             </header>
           )}
           <section className={styles.head}>
