@@ -17,12 +17,6 @@ import { fragments } from './gql'
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
-declare global {
-  interface Window {
-    gtag: any
-  }
-}
-
 export type AnalyticsListenerProps = {
   user: AnalyticsUserFragment | {}
 }
@@ -33,7 +27,7 @@ const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
     )
   : {}
 
-const analyticsDebugger = (event: string, params: any) => {
+const analyticsDebugger = (event: string, params: unknown) => {
   if (isLocal) {
     console.log(
       `%c[Analytics debugger]%c ${event} %cVariables`,
