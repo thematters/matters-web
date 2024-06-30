@@ -60,7 +60,7 @@ const Tooltip: React.FC<TooltipProps> = ({
     setTooltip(tippyInstance)
   }, [])
 
-  const showTooltip = (event: any) => {
+  const showTooltip = (event: MouseEvent | TouchEvent) => {
     const line = d3Select(lineRef.current)
     const circle = d3Select(circleRef.current)
 
@@ -69,7 +69,7 @@ const Tooltip: React.FC<TooltipProps> = ({
 
     // calculate the offset
     let offsetX = 0
-    if (['touchmove', 'touchstart'].indexOf(event.type) >= 0) {
+    if (event instanceof TouchEvent) {
       const svgRect = svgRef.current.getBoundingClientRect()
       offsetX = event.touches[0].clientX - svgRect.left
     } else {

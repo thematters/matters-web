@@ -95,7 +95,7 @@ const SupportWidget = ({
 
   useEventListener(
     SUPPORT_SUCCESS_ANIMATION,
-    async (payload: { [key: string]: any }) => {
+    async (payload: { [key: string]: CURRENCY }) => {
       if (!payload || Object.keys(payload).length === 0) {
         return
       }
