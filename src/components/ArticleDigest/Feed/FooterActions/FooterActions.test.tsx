@@ -5,7 +5,7 @@ import { MOCK_ARTILCE } from '~/stories/mocks'
 
 import FooterActions from '.'
 
-describe('<ArticleDigest/Feed/FooterAction>', () => {
+describe('<ArticleDigest/Feed/FooterActions>', () => {
   it('should render read time', () => {
     render(<FooterActions article={MOCK_ARTILCE} hasReadTime />)
     expect(screen.getByLabelText('Accumulated read time')).toBeTruthy()
