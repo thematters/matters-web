@@ -1420,6 +1420,9 @@
     "defaultMessage": "忘記密碼？",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
   },
+  "O7ozeo": {
+    "defaultMessage": "修改個人資料"
+  },
   "OIj8pQ": {
     "defaultMessage": "成功發送邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddInvitationDialog/Sent.tsx"
@@ -2327,10 +2330,6 @@
   "gS1u3d": {
     "defaultMessage": "你還可以修改 {left} 次"
   },
-  "gW/KWu": {
-    "defaultMessage": "評論被精選",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "gczcC5": {
     "defaultMessage": "訂閱"
   },
@@ -2686,9 +2685,6 @@
   },
   "nWhqw9": {
     "defaultMessage": "立即發布"
-  },
-  "nYrKWp": {
-    "defaultMessage": "編輯個人資料"
   },
   "nhkx3t": {
     "defaultMessage": "IPFS 是一種分散式儲存技術，具有去中心、易存續、不易被審查等優點。 每一篇在 Matters 發佈的文章都會上傳到 IPFS。 IPFS 會產生一定儲存費用，目前暫時由 Matters 承擔。 （到 IPFS 官網 ipfs.com 可以了解更多）"
