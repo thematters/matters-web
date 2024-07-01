@@ -13,7 +13,11 @@ import {
   MAX_USER_DESCRIPTION_LENGTH,
   MAX_USER_DISPLAY_NAME_LENGTH,
 } from '~/common/enums'
-import { parseFormSubmitErrors, validateDisplayName } from '~/common/utils'
+import {
+  formStorage,
+  parseFormSubmitErrors,
+  validateDisplayName,
+} from '~/common/utils'
 import {
   AvatarUploader,
   CoverUploader,
@@ -43,6 +47,11 @@ interface FormValues {
   description: string
 }
 
+type FormDraft = FormValues & {
+  avatarPath?: string | null
+  profileCoverPath?: string | null
+}
+
 const UPDATE_USER_INFO = gql`
   mutation UpdateUserInfoProfile($input: UpdateUserInfoInput!) {
     updateUserInfo(input: $input) {
@@ -66,14 +75,19 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   user,
   closeDialog,
 }) => {
+  const intl = useIntl()
+  const viewer = useContext(ViewerContext)
+
+  const formId = 'edit-profile-form'
+  const formStorageKey = formStorage.genKey({ authorId: viewer.id, formId })
+  const formDraft = formStorage.get<FormDraft>(formStorageKey, 'session')
+
   const [update] = useMutation<UpdateUserInfoProfileMutation>(
     UPDATE_USER_INFO,
     undefined,
     { showToast: false }
   )
-  const viewer = useContext(ViewerContext)
-  const formId = 'edit-profile-form'
-  const intl = useIntl()
+
   const validateDescription = (value: string) => {
     if (value.length > MAX_USER_DESCRIPTION_LENGTH) {
       return intl.formatMessage(
@@ -100,10 +114,10 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
     setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
-      avatar: UNCHANGED_FIELD,
-      profileCover: UNCHANGED_FIELD,
-      displayName: user.displayName || '',
-      description: user.info.description || '',
+      avatar: formDraft?.avatar || UNCHANGED_FIELD,
+      profileCover: formDraft?.profileCover || UNCHANGED_FIELD,
+      displayName: formDraft?.displayName || user.displayName || '',
+      description: formDraft?.description || user.info.description || '',
     },
     validateOnBlur: false,
     validateOnChange: false,
@@ -131,6 +145,9 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         toast.success({
           message: <FormattedMessage defaultMessage="Saved" id="fsB/4p" />,
         })
+
+        // clear draft
+        formStorage.remove(formStorageKey, 'session')
 
         setSubmitting(false)
         closeDialog()
@@ -163,21 +180,43 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
       <section className={styles.coverField}>
         <CoverUploader
           assetType={ASSET_TYPE.profileCover}
-          cover={user.info.profileCover}
+          cover={formDraft?.profileCoverPath || user.info.profileCover}
           fallbackCover={IMAGE_COVER.src}
           entityType={ENTITY_TYPE.user}
           type="userProfile"
           inEditor
-          onUploaded={(assetId) => setFieldValue('profileCover', assetId)}
+          onUploaded={(assetId, path) => {
+            setFieldValue('profileCover', assetId)
+            formStorage.set<FormDraft>(
+              formStorageKey,
+              { ...values, profileCover: assetId, profileCoverPath: path },
+              'session'
+            )
+          }}
           onUploadStart={() => setCoverLoading(true)}
           onUploadEnd={() => setCoverLoading(false)}
+          onReset={() => {
+            setFieldValue('profileCover', null)
+            formStorage.set<FormDraft>(
+              formStorageKey,
+              { ...values, profileCover: null, profileCoverPath: null },
+              'session'
+            )
+          }}
         />
       </section>
 
       <section className={styles.avatarField}>
         <AvatarUploader
-          user={user}
-          onUploaded={(assetId) => setFieldValue('avatar', assetId)}
+          src={formDraft?.avatarPath || user.avatar}
+          onUploaded={(assetId, path) => {
+            setFieldValue('avatar', assetId)
+            formStorage.set<FormDraft>(
+              formStorageKey,
+              { ...values, avatar: assetId, avatarPath: path },
+              'session'
+            )
+          }}
           onUploadStart={() => setAvatarLoading(true)}
           onUploadEnd={() => setAvatarLoading(false)}
           hasBorder
@@ -197,7 +236,14 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         error={touched.displayName && errors.displayName}
         hintAlign={touched.displayName && errors.displayName ? 'left' : 'right'}
         onBlur={handleBlur}
-        onChange={handleChange}
+        onChange={(e) => {
+          handleChange(e)
+          formStorage.set<FormDraft>(
+            formStorageKey,
+            { ...values, displayName: e.target.value },
+            'session'
+          )
+        }}
         maxLength={MAX_USER_DISPLAY_NAME_LENGTH}
         spacingTop="base"
         spacingBottom="base"
@@ -215,7 +261,14 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
         error={touched.description && errors.description}
         hintAlign={touched.description && errors.description ? 'left' : 'right'}
         onBlur={handleBlur}
-        onChange={handleChange}
+        onChange={(e) => {
+          handleChange(e)
+          formStorage.set<FormDraft>(
+            formStorageKey,
+            { ...values, description: e.target.value },
+            'session'
+          )
+        }}
       />
     </Form>
   )
@@ -233,7 +286,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<FormattedMessage defaultMessage="Edit profile" id="nYrKWp" />}
+        title={<FormattedMessage defaultMessage="Update profile" id="O7ozeo" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
         hasSmUpTitle={false}

@@ -10,7 +10,7 @@ import styles from './styles.module.css'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 interface ErrorProps {
-  error?: any
+  error?: Error
   type?: 'network' | 'server' | 'not_found'
   message?: string | React.ReactNode
 }

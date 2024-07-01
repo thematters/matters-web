@@ -1,7 +1,7 @@
 import { ReactComponent as IconLatest } from '@/public/static/icons/24px/latest.svg'
 import { toPath } from '~/common/utils'
 import { Card, Icon, UserDigest } from '~/components'
-import CommentContent from '~/components/Comment/Content'
+import { CircleCommentContent } from '~/components/CircleComment/Content'
 import { AuthorWidgetCircleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -40,7 +40,7 @@ const AuthorWidget = ({ circle }: AuthorWidgetProps) => {
               <Icon icon={IconLatest} size={24} />
             </span>
 
-            <CommentContent
+            <CircleCommentContent
               comment={pinnedBroadcast}
               type="circleBroadcast"
               limit={2}

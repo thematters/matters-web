@@ -340,7 +340,10 @@ export const AsideUserProfile = () => {
                   textActiveColor="green"
                   onClick={openEditProfileDialog}
                 >
-                  <FormattedMessage defaultMessage="Edit profile" id="nYrKWp" />
+                  <FormattedMessage
+                    defaultMessage="Update profile"
+                    id="O7ozeo"
+                  />
                 </Button>
               )}
             </EditProfileDialog>

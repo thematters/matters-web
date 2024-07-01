@@ -15,11 +15,7 @@ import { AnalyticsUserFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 
-declare global {
-  interface Window {
-    gtag: any
-  }
-}
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 export type AnalyticsListenerProps = {
   user: AnalyticsUserFragment | {}
@@ -31,8 +27,8 @@ const FIREBASE_CONFIG = process.env.NEXT_PUBLIC_FIREBASE_CONFIG
     )
   : {}
 
-const analyticsDebugger = (event: string, params: any) => {
-  if (process.env.DEBUG) {
+const analyticsDebugger = (event: string, params: unknown) => {
+  if (isLocal) {
     console.log(
       `%c[Analytics debugger]%c ${event} %cVariables`,
       'background: #800080; color: #fff',

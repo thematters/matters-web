@@ -50,8 +50,8 @@ const ResendAction = () => {
   let firstRender = false
 
   useEffect(() => {
-    const cd = storage.get(OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN)
-    if (cd > 0) {
+    const cd = storage.get<number>(OAUTH_STORAGE_SEND_EMAIL_CODE_COUNTDOWN)
+    if (cd && cd > 0) {
       setCountdown(cd)
     }
     firstRender = true

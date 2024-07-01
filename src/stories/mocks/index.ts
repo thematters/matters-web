@@ -225,6 +225,7 @@ export const MOCK_COLLECTON = {
 
 export const MOCK_CIRCLE_COMMENT = {
   ...MOCK_COMMENT,
+  type: 'circleBroadcast' as any,
   node: MOCK_CIRCLE,
 }
 

@@ -45,6 +45,8 @@ const SidebarTags = ({
       saving={saving}
       createTag
       CustomStagingArea={TagCustomStagingArea}
+      dismissOnClickOutside={false}
+      dismissOnESC={false}
     >
       {({ openDialog }) => (
         <Box

@@ -132,6 +132,7 @@ const EditTagDialogContent: React.FC<BaseEditTagDialogContentProps> = ({
           onUploaded={(assetId) => setFieldValue('newCover', assetId)}
           onUploadStart={() => setCoverLoading(true)}
           onUploadEnd={() => setCoverLoading(false)}
+          onReset={() => setFieldValue('newCover', null)}
         />
       </section>
 

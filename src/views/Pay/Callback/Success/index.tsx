@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import ICON_LIKECOIN from '@/public/static/icons/likecoin.svg'
@@ -10,10 +11,10 @@ import styles from '../styles.module.css'
 const PayCallbackSuccess = () => {
   const { getQuery, router } = useRoute()
   const provider = getQuery('provider')
-  const title: { [key: string]: any } = {
+  const title: { [key: string]: ReactNode } = {
     likecoin: <FormattedMessage defaultMessage="Support Author" id="ezYuE2" />,
   }
-  const avatar: { [key: string]: any } = {
+  const avatar: { [key: string]: string } = {
     likecoin: ICON_LIKECOIN,
   }
 
