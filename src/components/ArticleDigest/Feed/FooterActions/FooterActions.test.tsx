@@ -22,4 +22,15 @@ describe('<ArticleDigest/Feed/FooterActions>', () => {
       screen.getByText(MOCK_ARTILCE.access.circle.displayName)
     ).toBeTruthy()
   })
+
+  it('should not render metadata', () => {
+    render(
+      <FooterActions
+        article={MOCK_ARTILCE}
+        hasCircle
+        includesMetaData={false}
+      />
+    )
+    expect(screen.queryByText('Accumulated read time')).toBeNull()
+  })
 })
