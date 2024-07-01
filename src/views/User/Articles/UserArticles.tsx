@@ -3,7 +3,10 @@ import { useIntl } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
-import { ADD_JOURNAL } from '~/common/enums'
+import {
+  ADD_JOURNAL,
+  USER_PROFILE_JOURNAL_DIGEST_FEED_PREFIX,
+} from '~/common/enums'
 import {
   analytics,
   mergeConnections,
@@ -41,6 +44,8 @@ const UserArticles = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
+  // const hash = getQuery('hash')
+  // console.log({ hash })
   const isViewer = viewer.userName === userName
   const [journals, setJournals] = useState<JournalDigestProps[]>([])
 
@@ -51,7 +56,6 @@ const UserArticles = () => {
   }, [isViewer])
 
   useEffect(() => {
-    console.log(journals)
     storage.set(KEY, journals)
   }, [journals])
 
@@ -121,6 +125,24 @@ const UserArticles = () => {
 
     setJournals([newJournal, ...journals])
   })
+
+  useEffect(() => {
+    if (!data && !journals.length) {
+      return
+    }
+
+    const journalId = window.location.hash.replace('#', '')
+    if (!journalId) {
+      return
+    }
+    const selector = `#${USER_PROFILE_JOURNAL_DIGEST_FEED_PREFIX}${journalId}`
+
+    const element = document.querySelector(selector)
+    console.log({ selector, element })
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [data, journals])
 
   /**
    * Render
@@ -239,7 +261,10 @@ const UserArticles = () => {
         >
           <List>
             {journals.map((journal) => (
-              <List.Item key={journal.id} id={`journal-digest-${journal.id}`}>
+              <List.Item
+                key={journal.id}
+                id={`${USER_PROFILE_JOURNAL_DIGEST_FEED_PREFIX}${journal.id}`}
+              >
                 <JournalDigest {...journal} />
               </List.Item>
             ))}

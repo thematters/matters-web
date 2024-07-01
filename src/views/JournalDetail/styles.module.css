@@ -1,11 +1,11 @@
 .container {
-  width: 40.5rem;
+  /* width: 40.5rem; */
 }
 
 .header {
   @mixin flex-start-space-between;
 
-  padding: var(--sp24) var(--sp24) var(--sp12);
+  padding: var(--sp16) var(--sp16) var(--sp12);
 
   & .left {
     & .author {
@@ -53,10 +53,7 @@
 .scrollContainer {
   /* TODO: Confirm height with producion team */
 
-  @mixin hide-scrollbar;
-
-  /* max-height: calc(var(--ivh) - 158px); */
-  max-height: calc(90vh - 158px);
+  max-height: calc(var(--ivh) * 100 - 158px);
   overflow-y: auto;
 }
 
@@ -67,7 +64,7 @@
 .mainContent {
   @mixin border-bottom-grey;
 
-  padding: 0 var(--sp24) var(--sp24);
+  padding: 0 var(--sp16) var(--sp16);
   border-bottom-color: var(--color-grey-hover);
 
   .content {
@@ -98,7 +95,7 @@
 }
 
 .comments {
-  padding: var(--sp24);
+  padding: var(--sp16);
 
   & .title {
     font-size: var(--text15);
@@ -115,14 +112,20 @@
   @mixin border-top-grey-light;
   @mixin flex-center-start;
 
+  position: fixed;
+  bottom: 0;
+  z-index: 999;
+
   /* color: var(--color-grey); */
   gap: var(--sp9);
-  padding: var(--sp16) var(--sp24) var(--sp16) var(--sp13);
+  width: 100%;
+  padding: var(--sp16) var(--sp16) var(--sp16) var(--sp13);
+  background: var(--color-white);
 
   & .likeButton {
     @mixin flex-center-all;
 
-    height: 2.75rem;
+    /* height: 2.75rem; */
 
     /* width: 2.75rem; */
     padding: 0 var(--sp11);

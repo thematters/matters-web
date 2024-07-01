@@ -9,6 +9,7 @@ export * from './events'
 export * from './externalLinks'
 export * from './file'
 export * from './hardcode'
+export * from './journal'
 export * from './keyValue'
 export * from './lang'
 export * from './oauth'
@@ -91,3 +92,6 @@ export const MAX_USER_NAME_LENGTH = 15
 export const MIN_PASSWORD_LENGTH = 8
 
 export const MAX_CHANGE_EMAIL_TIME_DAILY = 3
+
+export const USER_PROFILE_JOURNAL_DIGEST_FEED_PREFIX =
+  'user-profile-journal-digest-feed-'

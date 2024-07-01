@@ -19,6 +19,8 @@ interface Props {
   placeholder?: string
   setEditor?: (editor: Editor | null) => void
   isFallbackEditor?: boolean
+  onFocus?: () => void
+  onBlur?: () => void
 }
 
 const CommentEditor: React.FC<Props> = ({
@@ -27,6 +29,8 @@ const CommentEditor: React.FC<Props> = ({
   placeholder,
   setEditor,
   isFallbackEditor,
+  onFocus,
+  onBlur,
 }) => {
   const client = useApolloClient()
   const intl = useIntl()

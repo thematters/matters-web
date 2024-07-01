@@ -22,6 +22,7 @@ type ROUTE_KEY =
   | 'ARTICLE_DETAIL_EDIT'
   | 'ARTICLE_DETAIL_HISTORY'
   // Journal
+  | 'JOURNAL_DETAIL'
   | 'JOURNAL_DETAIL_EDIT'
   // User
   | 'USER_ARTICLES'
@@ -108,6 +109,7 @@ export const ROUTES: {
 
   // Journal
   { key: 'JOURNAL_DETAIL_EDIT', pathname: '/j/edit' },
+  { key: 'JOURNAL_DETAIL', pathname: '/j/[id]' },
 
   // Circle
   { key: 'CIRCLE_DETAIL', pathname: '/[name]' },

@@ -144,7 +144,7 @@ const Edit = () => {
 
   const addJournal = (journal: JournalDigestProps) => {
     const journals = storage.get(KEY) || []
-    storage.set(KEY, [journal, ...journals])
+    storage.set(KEY, [journal, ...(journals as JournalDigestProps[])])
   }
 
   return (

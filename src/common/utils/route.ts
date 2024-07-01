@@ -11,6 +11,10 @@ interface ArticleArgs {
   shortHash: string
 }
 
+interface JournalArgs {
+  id: string
+}
+
 interface CircleArgs {
   name: string
 }
@@ -42,6 +46,7 @@ type ToPathArgs =
     }
   | { page: 'articleEdit'; article: ArticleArgs }
   | { page: 'articleHistory'; article: ArticleArgs }
+  | { page: 'journalDetail'; journal: JournalArgs }
   | {
       page:
         | 'circleDetail'
@@ -117,6 +122,11 @@ export const toPath = (
 
       href = `/a/${shortHash}/history`
 
+      break
+    }
+    case 'journalDetail': {
+      const { id } = args.journal
+      href = `/j/${id}`
       break
     }
     case 'circleDetail': {

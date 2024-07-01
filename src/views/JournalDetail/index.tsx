@@ -27,19 +27,13 @@ import {
   List,
   ResponsiveImage,
   useEventListener,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import JournalCommentFeed from '~/components/ArticleComment/JournalCommentFeed'
 import { JournalDigestProps } from '~/components/JournalDigest'
 
 import styles from './styles.module.css'
-
-const KEY = 'user-journals'
-
-interface JournalDetailDialogContentProps {
-  journalId: string
-  closeDialog: () => void
-}
 
 const mockComment = {
   id: 'Q29tbWVudDozNDA1MQ',
@@ -99,17 +93,20 @@ const mockComment = {
   myVote: null,
 }
 
-const JournalDetailDialogContent = ({
-  journalId,
-  closeDialog,
-}: JournalDetailDialogContentProps) => {
+const KEY = 'user-journals'
+
+const JournalDetail = () => {
   const viewer = useContext(ViewerContext)
+  const { getQuery, router } = useRoute()
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
-  const [comments, setComments] = useState<ArticleThreadCommentType[]>([])
+  const journalId = getQuery('id')
+
   const [journal, setJournal] = useState<JournalDigestProps | undefined>(
     undefined
   )
+
+  const [comments, setComments] = useState<ArticleThreadCommentType[]>([])
   useEffect(() => {
     const journals = storage.get(KEY) as JournalDigestProps[]
     const journal = journals.find((j) => j.id === journalId)
@@ -180,12 +177,12 @@ const JournalDetailDialogContent = ({
     }
   }, [editor, editing])
 
-  const options = {
-    padding: { top: 20, bottom: 40, left: 100, right: 100 },
-  }
-
   if (!journal) {
     return null
+  }
+
+  const options = {
+    // padding: { top: 20, bottom: 40, left: 100, right: 100 },
   }
 
   const { content, assets } = journal
@@ -194,6 +191,11 @@ const JournalDetailDialogContent = ({
     page: 'userProfile',
     userName: viewer.userName || '',
   })
+
+  const goback = () => {
+    router.back()
+  }
+
   return (
     <section className={styles.container}>
       <header className={styles.header}>
@@ -219,7 +221,7 @@ const JournalDetailDialogContent = ({
         <section className={styles.right}>
           {/* Close Button */}
           <Button textColor="greyDarker" textActiveColor="black">
-            <Icon icon={IconTimes} onClick={closeDialog} size={22} />
+            <Icon icon={IconTimes} onClick={goback} size={22} />
           </Button>
         </section>
       </header>
@@ -322,11 +324,11 @@ const JournalDetailDialogContent = ({
           type="journal"
           journalId={journalId}
           closeCallback={() => setEditing(false)}
-          editing={editing}
           setEditor={(editor) => {
             setEditor(editor)
           }}
           submitCallback={() => setEditing(false)}
+          editing={editing}
           setEditing={setEditing}
         />
       </footer>
@@ -334,4 +336,4 @@ const JournalDetailDialogContent = ({
   )
 }
 
-export default JournalDetailDialogContent
+export default JournalDetail
