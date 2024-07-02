@@ -1,6 +1,6 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/circle-plus.svg'
@@ -23,9 +23,8 @@ export type MomentAsset = {
 }
 
 type MomentAssetsUploaderProps = {
-  // assets: MomentAsset[]
-  // addAssets: (files: File[]) => void
-  // removeAsset: (asset: MomentAsset) => void
+  assets: MomentAsset[]
+  updateAssets: (assets: MomentAsset[]) => void
   fieldId?: string
   isInPage?: boolean
 }
@@ -42,15 +41,18 @@ const handleFileValidation = async (files: File[]): Promise<File[]> => {
 }
 
 export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
-  // assets,
-  // addAssets,
-  // removeAsset,
+  assets: _assets,
+  updateAssets,
   fieldId: _fieldId,
   isInPage,
 }) => {
   const intl = useIntl()
 
-  const [assets, setAssets] = useState<MomentAsset[]>([])
+  const [assets, setAssets] = useState<MomentAsset[]>(_assets)
+
+  useEffect(() => {
+    updateAssets(assets)
+  }, [assets])
 
   const addAssets = useCallback(
     async (files: File[]) => {
@@ -61,14 +63,11 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
 
       const newAssets = await Promise.all(
         newFiles.map(async (file) => {
-          // const { width, height } = await getImageDimensions(file)
           return {
             id: crypto.randomUUID(),
             file,
             uploaded: false,
             src: URL.createObjectURL(file),
-            // width,
-            // height,
           }
         })
       )
