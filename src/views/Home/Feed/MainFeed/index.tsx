@@ -229,7 +229,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                   article={edge.node}
                   hasReadTime={true}
                   hasDonationCount={true}
-                  includesMetaData={false}
+                  includesMetaData={sortBy !== 'icymi'}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: sortBy,
