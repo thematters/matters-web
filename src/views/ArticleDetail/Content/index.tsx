@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import throttle from 'lodash/throttle'
+import _throttle from 'lodash/throttle'
 import { useContext, useEffect, useRef, useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
@@ -50,7 +50,7 @@ const Content = ({
   useEffect(() => {
     initAudioPlayers()
 
-    const handleScroll = throttle(() => setScrollTime(Date.now() / 1000), 3000)
+    const handleScroll = _throttle(() => setScrollTime(Date.now() / 1000), 3000)
     window.addEventListener('scroll', handleScroll)
 
     return () => {
