@@ -1926,6 +1926,9 @@
   "XnEruT": {
     "defaultMessage": "绑定失败，请稍后再试"
   },
+  "Xq7h6o": {
+    "defaultMessage": "上传动态图片"
+  },
   "XuYhBC": {
     "defaultMessage": "代表作已设置"
   },
@@ -2727,6 +2730,9 @@
   "p6D+Uc": {
     "defaultMessage": "请输入地址"
   },
+  "p9gEZh": {
+    "defaultMessage": "动态最多支持 3 张图片"
+  },
   "pAQR0S": {
     "defaultMessage": "已发布",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -2930,6 +2936,9 @@
   "tQ3+Xo": {
     "defaultMessage": "标签添加最多至 5 个",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
+  },
+  "tQV8l8": {
+    "defaultMessage": "未知错误"
   },
   "tqEGfa": {
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，"

@@ -1926,6 +1926,9 @@
   "XnEruT": {
     "defaultMessage": "Binding failed. Please retry later."
   },
+  "Xq7h6o": {
+    "defaultMessage": "Upload Moment Assets"
+  },
   "XuYhBC": {
     "defaultMessage": "Pinned to profile"
   },
@@ -2727,6 +2730,9 @@
   "p6D+Uc": {
     "defaultMessage": "Enter Payment Pointer"
   },
+  "p9gEZh": {
+    "defaultMessage": "Up to 3 images can be uploaded"
+  },
   "pAQR0S": {
     "defaultMessage": "Published",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -2930,6 +2936,9 @@
   "tQ3+Xo": {
     "defaultMessage": "Add up to 5 tags",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
+  },
+  "tQV8l8": {
+    "defaultMessage": "Unknown Error"
   },
   "tqEGfa": {
     "defaultMessage": "Your work has been published. Share it on different platforms"

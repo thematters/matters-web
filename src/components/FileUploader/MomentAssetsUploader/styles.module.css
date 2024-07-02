@@ -1,0 +1,66 @@
+.container {
+  display: flex;
+  gap: var(--sp12);
+}
+
+.imageButton {
+  @mixin flex-center-all;
+
+  padding: var(--sp12);
+
+  &.editing {
+    padding: var(--sp10) var(--sp12) var(--sp12);
+    margin-bottom: calc(var(--sp8) * -1);
+    margin-left: calc(var(--sp8) * -1);
+  }
+}
+
+.addAssetButton {
+  @mixin flex-center-all;
+
+  width: 4.5rem;
+  height: 4.5rem;
+  background: var(--color-grey-lighter);
+  border-radius: var(--sp8);
+}
+
+.item {
+  position: relative;
+  width: 4.5rem;
+  height: 4.5rem;
+
+  & .action {
+    position: absolute;
+    top: calc(var(--sp8) * -1);
+    right: calc(var(--sp8) * -1);
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    background: var(--color-white);
+    border-radius: 50%;
+  }
+
+  & .error {
+    @mixin flex-center-all;
+
+    flex-direction: column;
+    gap: var(--sp2);
+    width: 4.5rem;
+    height: 4.5rem;
+    font-size: var(--text12);
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color-negative-red);
+    text-align: center;
+    background: var(--color-grey-hover);
+    border-radius: var(--sp8);
+  }
+
+  & img {
+    width: 100%;
+    height: 100%;
+    background: var(--color-grey-lighter);
+    border-radius: var(--sp8);
+  }
+}
