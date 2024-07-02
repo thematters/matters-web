@@ -28,7 +28,7 @@ interface TagArgs {
 
 interface CommentArgs {
   id: string
-  type: 'article' | 'circleDiscussion' | 'circleBroadcast' // comment type: article/discussion/broadcast
+  type: 'article' | 'circleDiscussion' | 'circleBroadcast' | 'moment' // comment type: article/discussion/broadcast
   parentComment?: {
     id: string
   } | null
