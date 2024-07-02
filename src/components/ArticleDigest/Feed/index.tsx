@@ -54,6 +54,7 @@ const BaseArticleDigestFeed = ({
 
   hasReadTime,
   hasDonationCount,
+  includesMetaData,
   ...controls
 }: ArticleDigestFeedProps) => {
   const { author, summary } = article
@@ -75,6 +76,7 @@ const BaseArticleDigestFeed = ({
       hasDonationCount={hasDonationCount}
       hasCircle={hasCircle}
       inCard
+      includesMetaData={includesMetaData}
       {...controls}
     />
   )
@@ -89,19 +91,17 @@ const BaseArticleDigestFeed = ({
           {hasHeader && (
             <header className={styles.header}>
               {hasAuthor && (
-                <>
-                  <section className={styles.author}>
-                    <UserDigest.Mini
-                      user={author}
-                      avatarSize={20}
-                      textSize={12}
-                      hasAvatar
-                      hasDisplayName
-                      onClick={onClickAuthor}
-                    />
-                    <Icon icon={IconDot} color="greyLight" size={20} />
-                  </section>
-                </>
+                <section className={styles.author}>
+                  <UserDigest.Mini
+                    user={author}
+                    avatarSize={20}
+                    textSize={12}
+                    hasAvatar
+                    hasDisplayName
+                    onClick={onClickAuthor}
+                  />
+                  <Icon icon={IconDot} color="greyLight" size={20} />
+                </section>
               )}
               <DateTime date={article.createdAt} color="grey" />
             </header>
