@@ -1,34 +1,58 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
-import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
+import { ADD_JOURNAL } from '~/common/enums'
+import {
+  analytics,
+  mergeConnections,
+  storage,
+  stripSpaces,
+} from '~/common/utils'
 import {
   ArticleDigestFeed,
   Empty,
   EmptyArticle,
   Head,
   InfiniteScroll,
+  JournalForm,
   Layout,
   List,
   QueryError,
   Translate,
+  useEventListener,
   usePublicQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
+import { JournalDigest, JournalDigestProps } from '~/components/JournalDigest'
 import { UserArticlesPublicQuery } from '~/gql/graphql'
 
 import { USER_ARTICLES_PRIVATE, USER_ARTICLES_PUBLIC } from './gql'
 import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
+import styles from './styles.module.css'
+
+const KEY = 'user-journals'
 
 const UserArticles = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
+  const [journals, setJournals] = useState<JournalDigestProps[]>([])
+
+  useEffect(() => {
+    if (isViewer) {
+      setJournals(storage.get(KEY) || [])
+    }
+  }, [isViewer])
+
+  useEffect(() => {
+    console.log(journals)
+    storage.set(KEY, journals)
+  }, [journals])
 
   /**
    * Data Fetching
@@ -84,6 +108,18 @@ const UserArticles = () => {
 
     loadPrivate(newData)
   }
+
+  useEventListener(ADD_JOURNAL, (payload: { [key: string]: any }) => {
+    const input = payload?.input
+    const newJournal = {
+      id: input.id,
+      content: input.content,
+      createdAt: input.createdAt,
+      assets: input.assets,
+    } as JournalDigestProps
+
+    setJournals([newJournal, ...journals])
+  })
 
   /**
    * Render
@@ -175,6 +211,22 @@ const UserArticles = () => {
 
       <PinBoard user={user} />
 
+      {isViewer && (
+        <section className={styles.journal}>
+          <section className={styles.clearJournals}>
+            <button
+              onClick={() => {
+                setJournals([])
+                storage.set(KEY, [])
+              }}
+            >
+              Clear Journals
+            </button>
+          </section>
+          <JournalForm />
+        </section>
+      )}
+
       <Layout.Main.Spacing hasVertical={false}>
         <InfiniteScroll
           hasNextPage={pageInfo.hasNextPage}
@@ -183,6 +235,11 @@ const UserArticles = () => {
           eof
         >
           <List>
+            {journals.map((journal) => (
+              <List.Item key={journal.id}>
+                <JournalDigest {...journal} />
+              </List.Item>
+            ))}
             {articleEdges.map(({ node }, i) => (
               <List.Item key={node.id}>
                 <ArticleDigestFeed

@@ -893,6 +893,9 @@
   "EBEwaP": {
     "defaultMessage": "Please fill in a valid email address"
   },
+  "EIoAY7": {
+    "defaultMessage": "說點什麼..."
+  },
   "EQeKnO": {
     "defaultMessage": "Manage Invitation",
     "description": "src/views/Circle/Settings/index.tsx"
@@ -2003,6 +2006,9 @@
     "defaultMessage": "comment",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
   },
+  "ZVDsIg": {
+    "defaultMessage": "不能超过3张"
+  },
   "ZVoJan": {
     "defaultMessage": "Edit",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
@@ -2676,6 +2682,10 @@
   "nGBrvw": {
     "defaultMessage": "Bookmarks"
   },
+  "nJaVYb": {
+    "defaultMessage": "Journal",
+    "description": "src/components/Forms/JournalForm/index.tsx"
+  },
   "nNB7KU": {
     "defaultMessage": "replied your comment in",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -2731,6 +2741,9 @@
   "pHg5Ju": {
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
+  "pIj6ZF": {
+    "defaultMessage": "Upload Journal Asset"
   },
   "pKkpI9": {
     "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
