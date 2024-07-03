@@ -56,13 +56,8 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
 
   const addAssets = useCallback(
     async (files: File[]) => {
-      const newFiles = Array.from(files).slice(
-        0,
-        UPLOAD_MOMENT_ASSET_COUNT_LIMIT - assets.length
-      )
-
       const newAssets = await Promise.all(
-        newFiles.map(async (file) => {
+        files.map(async (file) => {
           return {
             id: crypto.randomUUID(),
             file,
@@ -72,9 +67,7 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
         })
       )
 
-      setTimeout(() => {
-        setAssets((prevAssets) => [...prevAssets, ...newAssets])
-      }, 500)
+      setAssets((prevAssets) => [...prevAssets, ...newAssets])
     },
     [assets]
   )
