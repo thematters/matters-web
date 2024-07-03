@@ -19,7 +19,7 @@ export type MomentAsset = {
   id: string
   file: File
   uploaded: boolean
-  src: string
+  path: string
 }
 
 type MomentAssetsUploaderProps = {
@@ -67,7 +67,7 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
             id: crypto.randomUUID(),
             file,
             uploaded: false,
-            src: URL.createObjectURL(file),
+            path: URL.createObjectURL(file),
           }
         })
       )
@@ -81,7 +81,7 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
 
   const removeAsset = useCallback(
     (asset: MomentAsset) => {
-      URL.revokeObjectURL(asset.src)
+      URL.revokeObjectURL(asset.path)
       setAssets(assets.filter((a) => a.id !== asset.id))
     },
     [assets]

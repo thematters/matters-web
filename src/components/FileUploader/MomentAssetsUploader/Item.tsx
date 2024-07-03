@@ -147,7 +147,7 @@ export const Item = memo(function Item({
       )}
       {!error && (
         <ResponsiveImage
-          url={asset.src}
+          url={asset.path}
           width={72}
           height={72}
           smUpWidth={72}
