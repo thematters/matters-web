@@ -48,8 +48,7 @@
     width: 4.5rem;
     height: 4.5rem;
     font-size: var(--text12);
-    font-style: normal;
-    font-weight: 400;
+    font-weight: var(--font-normal);
     line-height: 1.5;
     color: var(--color-negative-red);
     text-align: center;
