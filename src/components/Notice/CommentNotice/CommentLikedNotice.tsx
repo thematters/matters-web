@@ -4,8 +4,12 @@ import { FormattedMessage } from 'react-intl'
 import { TEST_ID } from '~/common/enums'
 import { CommentNoticeFragment } from '~/gql/graphql'
 
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeArticleTitle from '../NoticeArticleTitle'
 import NoticeComment from '../NoticeComment'
+import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'
+import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeLiked from '../NoticeLiked'
 
 const CommentLikedNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
@@ -47,14 +51,17 @@ CommentLikedNotice.fragments = {
         ...NoticeComment
         node {
           ... on Article {
-            ...NoticeLiked
+            ...NoticeArticleTitle
           }
         }
       }
     }
-    ${NoticeLiked.fragments.article}
+    ${NoticeActorAvatar.fragments.user}
+    ${NoticeHeadActors.fragments.user}
     ${NoticeComment.fragments.comment}
+    ${NoticeArticleTitle.fragments.article}
     ${NoticeDigest.fragments.notice}
+    ${NoticeDate.fragments.notice}
   `,
 }
 
