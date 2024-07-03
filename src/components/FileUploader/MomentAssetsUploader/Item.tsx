@@ -152,7 +152,6 @@ export const Item = memo(function Item({
           height={72}
           smUpWidth={72}
           smUpHeight={72}
-          objectFix="cover"
         />
       )}
     </div>
