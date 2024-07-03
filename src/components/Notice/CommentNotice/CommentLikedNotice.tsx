@@ -20,7 +20,9 @@ const CommentLikedNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
   return (
     <NoticeDigest
       notice={notice}
-      action={<FormattedMessage defaultMessage="liked" id="TvKqBp" />}
+      action={
+        <FormattedMessage defaultMessage="liked your comment" id="ZNK0I9" />
+      }
       title={
         commentLiked?.__typename === 'Article' ? (
           <NoticeLiked article={commentLiked} />
