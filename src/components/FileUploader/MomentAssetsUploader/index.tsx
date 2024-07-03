@@ -91,7 +91,7 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
     (asset: MomentAsset, path: string) => {
       setAssets(
         assets.map((a) =>
-          a.id === asset.id ? { ...a, uploaded: true, src: path } : a
+          a.id === asset.id ? { ...a, uploaded: true, path } : a
         )
       )
     },
