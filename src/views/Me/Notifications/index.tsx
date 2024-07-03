@@ -22,6 +22,31 @@ import {
   MeNotificationsQuery,
 } from '~/gql/graphql'
 
+type NoticeNode = {
+  __typename?: string
+  id?: string
+}
+
+function isSpecificNoticeType(
+  node: NoticeNode
+): node is NoticeNode & { id: string } {
+  const validTypes = new Set([
+    'ArticleArticleNotice',
+    'CircleNotice',
+    'ArticleNotice',
+    'CommentCommentNotice',
+    'CommentNotice',
+    'OfficialAnnouncementNotice',
+    'TransactionNotice',
+    'UserNotice',
+  ])
+  return (
+    node.__typename !== undefined &&
+    validTypes.has(node.__typename) &&
+    Boolean(node.id)
+  )
+}
+
 const ME_NOTIFICATIONS = gql`
   query MeNotifications($after: String) {
     viewer {
@@ -93,11 +118,14 @@ const BaseNotifications = () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List spacing={['xloose', 0]}>
-        {edges.map(({ node, cursor }) => (
-          <List.Item key={node.id}>
-            <Notice notice={node} />
-          </List.Item>
-        ))}
+        {edges.map(
+          ({ node }) =>
+            isSpecificNoticeType(node) && (
+              <List.Item key={node.id}>
+                <Notice notice={node} />
+              </List.Item>
+            )
+        )}
       </List>
     </InfiniteScroll>
   )
