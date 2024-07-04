@@ -10,27 +10,17 @@ import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
-import NoticeLiked from '../NoticeLiked'
 
 const CommentLikedNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
   if (!notice.actors) {
     return null
   }
-  const commentLiked =
-    notice.comment?.node.__typename === 'Article'
-      ? notice.comment.node
-      : undefined
 
   return (
     <NoticeDigest
       notice={notice}
       action={
         <FormattedMessage defaultMessage="liked your comment" id="ZNK0I9" />
-      }
-      title={
-        commentLiked?.__typename === 'Article' ? (
-          <NoticeLiked article={commentLiked} />
-        ) : undefined
       }
       content={<NoticeComment comment={notice.comment} />}
       testId={TEST_ID.NOTICE_COMMENT_LIKED}
@@ -60,7 +50,6 @@ CommentLikedNotice.fragments = {
     ${NoticeHeadActors.fragments.user}
     ${NoticeComment.fragments.comment}
     ${NoticeArticleTitle.fragments.article}
-    ${NoticeDigest.fragments.notice}
     ${NoticeDate.fragments.notice}
   `,
 }
