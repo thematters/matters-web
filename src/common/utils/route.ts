@@ -11,6 +11,10 @@ interface ArticleArgs {
   shortHash: string
 }
 
+interface MomentArgs {
+  shortHash: string
+}
+
 interface CircleArgs {
   name: string
 }
@@ -42,6 +46,10 @@ type ToPathArgs =
     }
   | { page: 'articleEdit'; article: ArticleArgs }
   | { page: 'articleHistory'; article: ArticleArgs }
+  | {
+      page: 'momentDetail'
+      moment: MomentArgs
+    }
   | {
       page:
         | 'circleDetail'
@@ -116,6 +124,13 @@ export const toPath = (
       const { shortHash } = args.article
 
       href = `/a/${shortHash}/history`
+
+      break
+    }
+    case 'momentDetail': {
+      const { shortHash } = args.moment
+
+      href = `/m/${shortHash}`
 
       break
     }

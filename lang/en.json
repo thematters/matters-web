@@ -46,6 +46,9 @@
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+ixiPI": {
+    "defaultMessage": "Delete moment"
+  },
   "+o9W2T": {
     "defaultMessage": "File upload failed, please verify the file link is valid, or manually download and upload again.",
     "description": "UNABLE_TO_UPLOAD_FROM_URL"
@@ -147,6 +150,9 @@
   "0ThOw1": {
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
+  },
+  "0bTlm4": {
+    "defaultMessage": "Are you sure you want to delete this moment?"
   },
   "0e1xjL": {
     "defaultMessage": "Email can be modified up to {count} times per day.",
@@ -2610,6 +2616,9 @@
   "m6qWCv": {
     "defaultMessage": "Subscribers can add ENS to reader such as Planet"
   },
+  "mBkZcw": {
+    "defaultMessage": "Like moment"
+  },
   "mCAIcg": {
     "defaultMessage": "Hottest",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
@@ -2939,6 +2948,9 @@
   },
   "tQV8l8": {
     "defaultMessage": "Unknown Error"
+  },
+  "tZKvnZ": {
+    "defaultMessage": "Unlike moment"
   },
   "tqEGfa": {
     "defaultMessage": "Your work has been published. Share it on different platforms"

@@ -167,6 +167,36 @@ export const MOCK_ARTILCE = {
   ],
 }
 
+export const MOCK_MOMENT = {
+  __typename: 'Moment' as any,
+  id: 'TW9tZW50OjE',
+  shortHash: 'r5ade0on7x1g',
+  content: '這是一個時刻',
+  assets: [
+    {
+      __typename: 'Asset' as any,
+      id: 'QXNzZXQ6MQ',
+      path: 'https://images.unsplash.com/photo-1719209618812-a11aea8d1a32',
+    },
+    {
+      __typename: 'Asset' as any,
+      id: 'QXNzZXQ6Mg',
+      path: 'https://images.unsplash.com/photo-1719210146204-17dc9c95b34d',
+    },
+    {
+      __typename: 'Asset' as any,
+      id: 'QXNzZXQ6Mw',
+      path: 'https://images.unsplash.com/photo-1719212328828-5ad8dd12be00',
+    },
+  ],
+  author: MOCK_USER,
+  state: 'active' as any,
+  commentCount: 10,
+  likeCount: 100,
+  liked: false,
+  createdAt: '2020-12-24T07:29:17.682Z',
+}
+
 export const MOCK_CIRCLE_ARTICLE = {
   ...MOCK_ARTILCE,
   circle: MOCK_CIRCLE,

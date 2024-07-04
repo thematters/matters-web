@@ -46,6 +46,9 @@
     "defaultMessage": "確認要將「{article}」從選集中移出嗎？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+ixiPI": {
+    "defaultMessage": "刪除動態"
+  },
   "+o9W2T": {
     "defaultMessage": "檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳",
     "description": "UNABLE_TO_UPLOAD_FROM_URL"
@@ -147,6 +150,9 @@
   "0ThOw1": {
     "defaultMessage": "新建選集",
     "description": "src/views/User/Collections/UserCollections.tsx"
+  },
+  "0bTlm4": {
+    "defaultMessage": "確認要刪除該動態嗎？"
   },
   "0e1xjL": {
     "defaultMessage": "郵件地址每天最多可修改 {count} 次",
@@ -2610,6 +2616,9 @@
   "m6qWCv": {
     "defaultMessage": "直接使用 ENS 名在閱讀器（如 Planet）中訂閱文章"
   },
+  "mBkZcw": {
+    "defaultMessage": "喜歡動態"
+  },
   "mCAIcg": {
     "defaultMessage": "站內閱讀熱門排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
@@ -2939,6 +2948,9 @@
   },
   "tQV8l8": {
     "defaultMessage": "未知錯誤"
+  },
+  "tZKvnZ": {
+    "defaultMessage": "取消喜歡動態"
   },
   "tqEGfa": {
     "defaultMessage": "作品發佈成功，快把作品分享到不同渠道，"

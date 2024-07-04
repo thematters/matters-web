@@ -1,0 +1,25 @@
+.container {
+  padding: var(--sp20) 0;
+
+  header {
+    @mixin flex-center-start;
+
+    height: 18px;
+
+    & time {
+      line-height: 18px !important;
+    }
+  }
+
+  .content {
+    margin: var(--sp8) 0 var(--sp12);
+    cursor: pointer;
+  }
+
+  footer {
+    display: flex;
+    gap: var(--sp16);
+    align-items: center;
+    margin-top: var(--sp12);
+  }
+}
