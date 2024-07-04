@@ -217,6 +217,15 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CircleNewDiscussion' as any,
     comment: MOCK_CIRCLE_COMMENT,
   },
+  {
+    __typename: 'CommentNotice',
+    id: 'CommentLikedNotice',
+    unread: false,
+    createdAt: '2024-06-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'CommentLiked',
+    comment: MOCK_CIRCLE_COMMENT,
+  },
 
   /**
    * Comment - Comment

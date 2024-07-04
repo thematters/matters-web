@@ -41,6 +41,7 @@ CommentNotice.fragments = {
     ${CommentPinnedNotice.fragments.notice}
     ${ArticleNewCommentNotice.fragments.notice}
     ${CircleNewBroadcastNotice.fragments.notice}
+    ${CommentLikedNotice.fragments.notice}
   `,
 }
 
