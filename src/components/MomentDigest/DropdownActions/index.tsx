@@ -11,10 +11,12 @@ import {
   Dropdown,
   Icon,
   Menu,
+  SubmitReport,
   toast,
   ViewerContext,
   withDialog,
 } from '~/components'
+import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog/Dialog'
 import { MomentDigestDropdownActionsMomentFragment } from '~/gql/graphql'
 
 import DeleteMoment from './DeleteMoment'
@@ -38,22 +40,28 @@ type DropdownActionsProps = {
 
 interface Controls {
   hasDelete: boolean
+  hasReport: boolean
 }
 
 interface DialogProps {
   openDeleteMomentDialog: () => void
+  openSubmitReportDialog: () => void
 }
 
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
 const BaseDropdownActions = ({
   moment,
+
   hasDelete,
+  hasReport,
 
   openDeleteMomentDialog,
+  openSubmitReportDialog,
 }: BaseDropdownActionsProps) => {
   const Content = () => (
     <Menu>
+      {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
       {hasDelete && <DeleteMoment.Button openDialog={openDeleteMomentDialog} />}
     </Menu>
   )
@@ -93,6 +101,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   const controls = {
     hasDelete: isMomentAuthor && isActive,
+    hasReport: !isMomentAuthor,
   }
 
   const forbid = () => {
@@ -107,10 +116,17 @@ const DropdownActions = (props: DropdownActionsProps) => {
     return null
   }
 
+  const WithReport = withDialog<Omit<SubmitReportDialogProps, 'children'>>(
+    BaseDropdownActions,
+    SubmitReport.Dialog,
+    { id: moment.id },
+    ({ openDialog }) => ({ openSubmitReportDialog: openDialog })
+  )
+
   const WithDeleteMoment = withDialog<
     Omit<DeleteMomentDialogProps, 'children'>
   >(
-    BaseDropdownActions,
+    WithReport,
     DeleteMoment.Dialog,
     { momentId: moment.id },
     ({ openDialog }) => {

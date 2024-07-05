@@ -171,7 +171,7 @@ export const MOCK_MOMENT = {
   __typename: 'Moment' as any,
   id: 'TW9tZW50OjE',
   shortHash: 'r5ade0on7x1g',
-  content: '<p>這是一個時刻</p>', 
+  content: '<p>這是一個時刻</p>',
   assets: [
     {
       __typename: 'Asset' as any,
