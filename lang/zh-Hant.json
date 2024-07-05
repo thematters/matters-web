@@ -1499,6 +1499,10 @@
   "PesLat": {
     "defaultMessage": "正在發布，馬上就好"
   },
+  "PhzTJa": {
+    "defaultMessage": "留言了",
+    "description": "src/components/MomentDigest/FooterActions/CommentedFollowees/index.tsx"
+  },
   "PkUihI": {
     "defaultMessage": "編輯已保存",
     "description": "src/views/ArticleDetail/Edit/Header/index.tsx"

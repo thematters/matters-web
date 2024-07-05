@@ -4,7 +4,8 @@ export const MOCK_USER = {
   id: 'VXNlcjox', // User:1
   userName: 'matty',
   displayName: 'Matty',
-  avatar: 'https://source.unsplash.com/256x256?user',
+  avatar:
+    'https://imagedelivery.net/kDRCweMmqLnTPNlbum-pYA/prod/avatar/19b36f6e-6311-4cd6-b703-c143a4a49113.png/public',
   liker: {
     __typename: 'Liker' as any,
     likerId: 'liker-id-0000',
@@ -195,6 +196,29 @@ export const MOCK_MOMENT = {
   likeCount: 100,
   liked: false,
   createdAt: '2020-12-24T07:29:17.682Z',
+  commentedFollowees: [
+    {
+      ...MOCK_USER,
+      id: 'VXNlcjox',
+      userName: 'matty2020',
+      displayName: 'Matty2020',
+      avatar: 'https://images.unsplash.com/photo-1720072480766-7a584e2ea03c',
+    },
+    {
+      ...MOCK_USER,
+      id: 'VXNlcsdf',
+      userName: 'matty2021',
+      displayName: 'Matty2021',
+      avatar: 'https://images.unsplash.com/photo-1662850886700-4ec19bd30d11',
+    },
+    {
+      ...MOCK_USER,
+      id: 'VXNlcddx',
+      userName: 'matty2022',
+      displayName: 'Matty2022',
+      avatar: 'https://images.unsplash.com/photo-1716403006232-5891fa7f2a24',
+    },
+  ],
 }
 
 export const MOCK_CIRCLE_ARTICLE = {

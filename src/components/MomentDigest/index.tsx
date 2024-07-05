@@ -23,9 +23,14 @@ export type MomentDigestProps = {
   moment: MomentDigestMomentPublicFragment &
     Partial<MomentDigestMomentPrivateFragment>
   hasAuhor?: boolean
+  hasCommentedFollowees?: boolean
 }
 
-export const MomentDigest = ({ moment, hasAuhor }: MomentDigestProps) => {
+export const MomentDigest = ({
+  moment,
+  hasAuhor,
+  hasCommentedFollowees,
+}: MomentDigestProps) => {
   const { content, createdAt, assets, author } = moment
   const { router } = useRoute()
 
@@ -95,7 +100,10 @@ export const MomentDigest = ({ moment, hasAuhor }: MomentDigestProps) => {
         </section>
       )}
       {!!assets && assets.length > 0 && <Assets moment={moment} />}
-      <FooterActions moment={moment} />
+      <FooterActions
+        moment={moment}
+        hasCommentedFollowees={hasCommentedFollowees}
+      />
     </section>
   )
 }

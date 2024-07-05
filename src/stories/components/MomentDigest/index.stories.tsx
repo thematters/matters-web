@@ -29,3 +29,12 @@ LongContent.args = {
     content: `<p>This is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content</p>`,
   },
 }
+
+export const FollowFeed = Template.bind({})
+FollowFeed.args = {
+  moment: {
+    ...MOCK_MOMENT,
+  },
+  hasAuhor: true,
+  hasCommentedFollowees: true,
+}

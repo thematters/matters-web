@@ -1499,6 +1499,10 @@
   "PesLat": {
     "defaultMessage": "Publishing..."
   },
+  "PhzTJa": {
+    "defaultMessage": "commented",
+    "description": "src/components/MomentDigest/FooterActions/CommentedFollowees/index.tsx"
+  },
   "PkUihI": {
     "defaultMessage": "Saved",
     "description": "src/views/ArticleDetail/Edit/Header/index.tsx"
