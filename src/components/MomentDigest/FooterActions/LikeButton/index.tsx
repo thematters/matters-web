@@ -52,28 +52,10 @@ const LikeButton = ({ moment }: LikeButtonProps) => {
 
   const [likeMoment] = useMutation<LikeMomentMutation>(LIKE_MOMENT, {
     variables: { id: moment.id },
-    // optimisticResponse: {
-    //   __typename: 'Mutation',
-    //   likeMoment: {
-    //     __typename: 'LikeMomentPayload',
-    //     id: moment.id,
-    //     likeCount: likeCount + 1,
-    //     liked: true,
-    //   },
-    // },
   })
 
   const [unlikeMoment] = useMutation<UnlikeMomentMutation>(UNLIKE_MOMENT, {
     variables: { id: moment.id },
-    // optimisticResponse: {
-    //   __typename: 'Mutation',
-    //   unlikeMoment: {
-    //     __typename: 'UnlikeMomentPayload',
-    //     id: moment.id,
-    //     likeCount: likeCount - 1,
-    //     liked: false,
-    //   },
-    // },
   })
 
   const likeClassNames = classNames({
