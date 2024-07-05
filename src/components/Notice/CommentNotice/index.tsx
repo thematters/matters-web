@@ -23,7 +23,8 @@ const CommentNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
       // exclusive to moment
       return <MomentNewCommentNotice notice={notice} />
     case 'CommentLiked':
-      // this can be both moment and article
+    // this can be both moment and article
+    case 'CommentLiked':
       return <CommentLikedNotice notice={notice} />
     default:
       return null

@@ -6,7 +6,6 @@ import { CommentLikedNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeArticleTitle from '../NoticeArticleTitle'
-// import { CommentMentionedYouNoticeFragment } from '~/gql/graphql'
 import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'

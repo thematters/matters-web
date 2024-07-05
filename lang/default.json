@@ -110,6 +110,10 @@
     "defaultMessage": "Unpin",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
+  "/kdFi6": {
+    "defaultMessage": "mentioned you in a moment comment",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "/pnYHM": {
     "defaultMessage": "Circle not found",
     "description": "CIRCLE_NOT_FOUND"
@@ -1274,6 +1278,9 @@
   "LETb4b": {
     "defaultMessage": "Collections allow up to {count} articles currently",
     "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
+  },
+  "LG37gc": {
+    "defaultMessage": "liked your article comment"
   },
   "LGox1K": {
     "defaultMessage": "Followed"
@@ -2560,9 +2567,6 @@
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
-  "knlV+D": {
-    "defaultMessage": "commented your moment"
-  },
   "ksIL/T": {
     "defaultMessage": "Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
   },
@@ -2812,9 +2816,6 @@
   "qE8ew4": {
     "defaultMessage": "Bookmarked",
     "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
-  },
-  "qKAW1a": {
-    "defaultMessage": "mentioned you in a moment comment"
   },
   "qNuRmA": {
     "defaultMessage": "Send login code",
@@ -3350,6 +3351,10 @@
   "zn83cE": {
     "defaultMessage": "Preview",
     "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
+  },
+  "znsO4a": {
+    "defaultMessage": "commented in you moment",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

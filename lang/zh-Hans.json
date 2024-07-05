@@ -110,6 +110,10 @@
     "defaultMessage": "取消置顶",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
+  "/kdFi6": {
+    "defaultMessage": "mentioned you in a moment comment",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "/pnYHM": {
     "defaultMessage": "围炉不存在",
     "description": "CIRCLE_NOT_FOUND"
@@ -1274,6 +1278,9 @@
   "LETb4b": {
     "defaultMessage": "选集暂时不允许超过 {count} 篇",
     "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
+  },
+  "LG37gc": {
+    "defaultMessage": "liked your article comment"
   },
   "LGox1K": {
     "defaultMessage": "已追踪"
@@ -2560,9 +2567,6 @@
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
-  "knlV+D": {
-    "defaultMessage": "在动态中留言"
-  },
   "ksIL/T": {
     "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"
   },
@@ -2812,9 +2816,6 @@
   "qE8ew4": {
     "defaultMessage": "收藏成功",
     "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
-  },
-  "qKAW1a": {
-    "defaultMessage": "在动态留言中提及了你"
   },
   "qNuRmA": {
     "defaultMessage": "发送临时密码",
@@ -3350,6 +3351,10 @@
   "zn83cE": {
     "defaultMessage": "效果预览",
     "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
+  },
+  "znsO4a": {
+    "defaultMessage": "commented in you moment",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",
