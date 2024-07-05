@@ -35,6 +35,6 @@ FollowFeed.args = {
   moment: {
     ...MOCK_MOMENT,
   },
-  hasAuhor: true,
+  hasAuthor: true,
   hasCommentedFollowees: true,
 }

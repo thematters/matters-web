@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { UserDigest } from '~/components'
+import { TEST_ID } from '~/common/enums'
+import { UserDigest } from '~/components/UserDigest'
 import { MomentDigestFooterActionsCommentedFolloweesMomentFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -31,7 +32,10 @@ const CommentedFollowees = ({ moment }: CommentedFolloweesProps) => {
   }
 
   return (
-    <section className={styles.container}>
+    <section
+      className={styles.container}
+      data-test-id={TEST_ID.MOMENT_DIGEST_FOOTER_ACTIONS_COMMENTED_FOLLOWEES}
+    >
       <section className={styles.followees}>
         {commentedFollowees.slice(0, 3).map((user) => (
           <section className={styles.user} key={user.id}>

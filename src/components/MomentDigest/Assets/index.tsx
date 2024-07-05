@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { TEST_ID } from '~/common/enums'
 import { ResponsiveImage } from '~/components'
 import { MomentDigestAssetsMomentFragment } from '~/gql/graphql'
 
@@ -19,7 +20,10 @@ const fragments = {
 const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
   const { assets } = moment
   return (
-    <section className={styles.assets}>
+    <section
+      className={styles.assets}
+      data-test-id={TEST_ID.MOMENT_DIGEST_ASSETS}
+    >
       {assets.map((asset) => (
         <div className={styles.item} key={asset.id}>
           <ResponsiveImage

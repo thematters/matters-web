@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   DateTime,
@@ -22,13 +23,13 @@ import styles from './styles.module.css'
 export type MomentDigestProps = {
   moment: MomentDigestMomentPublicFragment &
     Partial<MomentDigestMomentPrivateFragment>
-  hasAuhor?: boolean
+  hasAuthor?: boolean
   hasCommentedFollowees?: boolean
 }
 
 export const MomentDigest = ({
   moment,
-  hasAuhor,
+  hasAuthor,
   hasCommentedFollowees,
 }: MomentDigestProps) => {
   const { content, createdAt, assets, author } = moment
@@ -46,8 +47,11 @@ export const MomentDigest = ({
   return (
     <section className={styles.container}>
       <header className={styles.header}>
-        {hasAuhor && (
-          <section className={styles.author}>
+        {hasAuthor && (
+          <section
+            className={styles.author}
+            data-test-id={TEST_ID.MOMENT_DIGEST_AUTHOR}
+          >
             <UserDigest.Mini
               user={author}
               avatarSize={20}
@@ -69,6 +73,7 @@ export const MomentDigest = ({
             // TODO: open moment detail dialog
             goToMomentDetail()
           }}
+          data-test-id={TEST_ID.MOMENT_DIGEST_CONTENT}
         >
           <Expandable
             content={content}
