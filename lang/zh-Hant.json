@@ -1926,6 +1926,9 @@
   "XnEruT": {
     "defaultMessage": "綁定失敗，請稍後再試"
   },
+  "Xq7h6o": {
+    "defaultMessage": "上傳動態圖片"
+  },
   "XuYhBC": {
     "defaultMessage": "代表作已設置"
   },
@@ -2727,6 +2730,9 @@
   "p6D+Uc": {
     "defaultMessage": "請輸入地址"
   },
+  "p9gEZh": {
+    "defaultMessage": "動態最多支持 3 張圖片"
+  },
   "pAQR0S": {
     "defaultMessage": "已發布",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -2930,6 +2936,9 @@
   "tQ3+Xo": {
     "defaultMessage": "標籤添加最多至 5 個",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
+  },
+  "tQV8l8": {
+    "defaultMessage": "未知錯誤"
   },
   "tqEGfa": {
     "defaultMessage": "作品發佈成功，快把作品分享到不同渠道，"
