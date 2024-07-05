@@ -2262,6 +2262,10 @@
   "enMIYK": {
     "defaultMessage": "我的"
   },
+  "eoQN04": {
+    "defaultMessage": "详情",
+    "description": "src/components/MomentDigest/index.tsx"
+  },
   "eov+J2": {
     "defaultMessage": "自定义网址名称"
   },

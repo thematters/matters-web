@@ -100,7 +100,7 @@ export const ArticleCommentContent = ({
           textIndent={textIndent}
           size={size}
           collapseable={false}
-          isComment
+          isCommentOrMoment
         >
           <section
             className={`${contentClasses} u-content-comment`}

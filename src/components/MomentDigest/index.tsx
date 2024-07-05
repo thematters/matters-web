@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { toPath } from '~/common/utils'
 import { DateTime, Expandable, LinkWrapper, useRoute } from '~/components'
 import {
@@ -35,15 +37,33 @@ export const MomentDigest = ({ moment }: MomentDigestProps) => {
         </LinkWrapper>
       </header>
       {!!content && (
-        // TODO: open moment detail dialog
-        <section className={styles.content} onClick={goToMomentDetail}>
+        <section
+          className={styles.content}
+          onClick={() => {
+            // TODO: open moment detail dialog
+            goToMomentDetail()
+          }}
+        >
           <Expandable
             content={content}
             limit={4}
             isRichShow={true}
             size={15}
             collapseable={false}
-            isComment
+            isCommentOrMoment
+            expandButton={
+              <button
+                onClick={() => {
+                  // TODO: open moment detail dialog or navigate to moment detail page
+                }}
+              >
+                <FormattedMessage
+                  defaultMessage="More"
+                  id="eoQN04"
+                  description="src/components/MomentDigest/index.tsx"
+                />
+              </button>
+            }
           >
             <section
               dangerouslySetInnerHTML={{

@@ -2262,6 +2262,10 @@
   "enMIYK": {
     "defaultMessage": "My Page"
   },
+  "eoQN04": {
+    "defaultMessage": "More",
+    "description": "src/components/MomentDigest/index.tsx"
+  },
   "eov+J2": {
     "defaultMessage": "Custom URL Name"
   },

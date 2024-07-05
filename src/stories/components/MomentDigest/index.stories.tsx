@@ -21,3 +21,11 @@ export const Default = Template.bind({})
 Default.args = {
   moment: MOCK_MOMENT,
 }
+
+export const LongContent = Template.bind({})
+LongContent.args = {
+  moment: {
+    ...MOCK_MOMENT,
+    content: `<p>This is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content\nThis is a content</p>`,
+  },
+}
