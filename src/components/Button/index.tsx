@@ -101,6 +101,7 @@ export type ButtonBgColor = Extract<
 type ButtonBgActiveColor = Extract<
   ButtonColor,
   | 'greyLighter'
+  | 'greyLight'
   | 'greenLighter'
   | 'greyLighterActive'
   | 'green'

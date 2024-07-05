@@ -352,6 +352,42 @@ export const MOCK_CAMPAIGN = {
         end: '2020-12-27T07:29:17.682Z',
       },
     },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第四天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-27T07:29:17.682Z',
+        end: '2020-12-28T07:29:17.682Z',
+      },
+    },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第五天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-28T07:29:17.682Z',
+        end: '2020-12-29T07:29:17.682Z',
+      },
+    },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第六天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-29T07:29:17.682Z',
+        end: '2020-12-30T07:29:17.682Z',
+      },
+    },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第七天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-30T07:29:17.682Z',
+        end: '2021-01-01T07:29:17.682Z',
+      },
+    },
   ],
   participants: {
     __typename: 'UserConnection' as any,
@@ -377,7 +413,17 @@ export const MOCK_CAMPAIGN = {
   articles: {
     __typename: 'ArticleConnection' as any,
     totalCount: 1,
-    edges: [{ node: MOCK_ARTILCE }],
+    edges: [
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+    ],
   },
   // applicationState: null,
   applicationState: 'succeeded',

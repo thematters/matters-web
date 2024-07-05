@@ -59,7 +59,6 @@ const IMG_SRC = [
   'data:',
   process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN,
   process.env.NEXT_PUBLIC_LEGACY_ASSET_DOMAIN,
-  'placehold.co',
 
   process.env.NEXT_PUBLIC_CF_IMAGE_URL
     ? new URL(process.env.NEXT_PUBLIC_CF_IMAGE_URL).hostname

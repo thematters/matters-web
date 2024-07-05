@@ -11,7 +11,6 @@ import {
   // Expandable,
   Head,
   Layout,
-  SegmentedTabs,
   // SpinnerBlock,
   // Throw404,
   // usePublicQuery,
@@ -22,12 +21,11 @@ import {
 // import { CampaignFragmentFragment, CampaignPublicQuery } from '~/gql/graphql'
 import { MOCK_CAMPAIGN } from '~/stories/mocks'
 
+import ArticleFeeds from './ArticleFeeds'
 import Description from './Description'
 import InfoHeader from './InfoHeader'
 import SideParticipants from './SideParticipants'
 
-// import CampaignArticles from './Articles'
-// import CampaignCover from './Cover'
 // import { CAMPAIGN_DETAIL_PRIVATE, CAMPAIGN_DETAIL_PUBLIC } from './gql'
 // import styles from './styles.module.css'
 
@@ -77,17 +75,7 @@ const BaseCampaignDetail = ({
         <Description description={campaign.description} />
       )}
 
-      {!isInApplicationPeriod && (
-        <SegmentedTabs sticky>
-          {campaign.stages.map((stage, i) => (
-            <SegmentedTabs.Tab selected key={stage.name}>
-              {stage.name}
-            </SegmentedTabs.Tab>
-          ))}
-        </SegmentedTabs>
-      )}
-
-      {/* <CampaignArticles tag={tag} feedType={feedType} /> */}
+      {!isInApplicationPeriod && <ArticleFeeds campaign={campaign} />}
     </Layout.Main>
   )
 }
