@@ -36,6 +36,7 @@ CommentNotice.fragments = {
       ...CommentPinnedNotice
       ...ArticleNewCommentNotice
       ...CircleNewBroadcastNotice
+      ...CommentLikedNotice
     }
     ${CommentMentionedYouNotice.fragments.notice}
     ${CommentPinnedNotice.fragments.notice}
