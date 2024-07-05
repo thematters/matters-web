@@ -308,8 +308,8 @@ export const MOCK_CAMPAIGN = {
   state: 'active',
   applicationPeriod: {
     __typename: 'DatetimeRange' as any,
-    start: '2020-12-21T07:29:17.682Z',
-    end: '2020-12-24T07:29:17.682Z',
+    start: '2024-12-21T07:29:17.682Z',
+    end: '2024-12-24T07:29:17.682Z',
   },
   writingPeriod: {
     __typename: 'DatetimeRange' as any,
@@ -425,6 +425,8 @@ export const MOCK_CAMPAIGN = {
       { node: MOCK_ARTILCE },
     ],
   },
-  // applicationState: null,
-  applicationState: 'succeeded',
+  applicationState: null,
+  // applicationState: 'succeeded',
+  // applicationState: 'pending',
+  // applicationState: 'rejected',
 }

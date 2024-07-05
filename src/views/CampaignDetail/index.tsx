@@ -45,7 +45,7 @@ const BaseCampaignDetail = ({
 
   const now = new Date()
   const isInApplicationPeriod =
-    new Date(campaign.applicationPeriod.start) < now &&
+    !campaign.applicationPeriod.end ||
     now < new Date(campaign.applicationPeriod.end)
 
   // const changeFeed = (newType: string) => {

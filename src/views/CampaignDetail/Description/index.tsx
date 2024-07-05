@@ -1,11 +1,15 @@
+import { Layout } from '~/components'
+
 import styles from './styles.module.css'
 
 const Description = ({ description }: { description: string }) => {
   return (
-    <section
-      className={styles.description}
-      dangerouslySetInnerHTML={{ __html: description }}
-    />
+    <Layout.Main.Spacing hasVertical={false}>
+      <section
+        className={styles.description}
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
+    </Layout.Main.Spacing>
   )
 }
 

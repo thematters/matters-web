@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 import { ReactComponent as IconCheck } from '@/public/static/icons/24px/check.svg'
-import { Button, Dialog, Icon, TextIcon } from '~/components'
+import { Button, Icon, TextIcon } from '~/components'
 import { MOCK_CAMPAIGN } from '~/stories/mocks'
 
 const ApplyButton = ({
@@ -15,7 +15,7 @@ const ApplyButton = ({
 }) => {
   const now = new Date()
   const isInApplicationPeriod =
-    new Date(campaign.applicationPeriod.start) < now &&
+    !campaign.applicationPeriod.end ||
     now < new Date(campaign.applicationPeriod.end)
   const applicationState = campaign.applicationState
   const isSucceeded = applicationState === 'succeeded'
@@ -35,7 +35,10 @@ const ApplyButton = ({
    */
   if (isSucceeded) {
     return (
-      <TextIcon icon={<Icon icon={IconCheck} size={16} />} color="green">
+      <TextIcon
+        icon={<Icon icon={IconCheck} size={16} />}
+        color={isInApplicationPeriod ? 'green' : 'black'}
+      >
         {isInApplicationPeriod ? '報名成功' : '陪跑成功'}
       </TextIcon>
     )
@@ -53,12 +56,25 @@ const ApplyButton = ({
 
   if (size === 'lg') {
     return (
-      <Dialog.RoundedButton
-        text={text}
-        color={isInApplicationPeriod ? 'green' : 'black'}
-        icon={isPending ? <Icon icon={IconCheck} size={20} /> : null}
-        onClick={onClick}
-      />
+      <Button
+        size={['100%', '3rem']}
+        disabled={isPending}
+        borderWidth="sm"
+        borderColor={isInApplicationPeriod ? 'green' : 'black'}
+        bgColor={isInApplicationPeriod && isNotApplied ? 'green' : undefined}
+      >
+        <TextIcon
+          icon={isPending ? <Icon icon={IconCheck} size={20} /> : null}
+          size={16}
+          color={
+            isInApplicationPeriod ? (isNotApplied ? 'white' : 'green') : 'black'
+          }
+          weight="normal"
+          placement="right"
+        >
+          {text}
+        </TextIcon>
+      </Button>
     )
   } else {
     return (
@@ -66,6 +82,8 @@ const ApplyButton = ({
         onClick={onClick}
         size={[null, '1.875rem']}
         spacing={[0, 20]}
+        borderWidth="sm"
+        disabled={isPending}
         textColor={isInApplicationPeriod ? 'white' : 'black'}
         bgColor={isInApplicationPeriod ? 'green' : undefined}
         borderColor={isInApplicationPeriod ? undefined : 'greyLight'}

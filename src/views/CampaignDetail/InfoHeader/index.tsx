@@ -17,7 +17,7 @@ import styles from './styles.module.css'
 const InfoHeader = ({ campaign }: { campaign: typeof MOCK_CAMPAIGN }) => {
   const now = new Date()
   const isInApplicationPeriod =
-    new Date(campaign.applicationPeriod.start) < now &&
+    !campaign.applicationPeriod.end ||
     now < new Date(campaign.applicationPeriod.end)
 
   return (
