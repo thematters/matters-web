@@ -1,13 +1,14 @@
 .container {
   padding: var(--sp20) 0;
 
-  header {
-    @mixin flex-center-start;
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--sp8);
+    line-height: 1;
 
-    height: 18px;
-
-    & time {
-      line-height: 18px !important;
+    .author {
+      @mixin flex-center-start;
     }
   }
 

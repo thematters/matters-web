@@ -1,7 +1,15 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { toPath } from '~/common/utils'
-import { DateTime, Expandable, LinkWrapper, useRoute } from '~/components'
+import {
+  DateTime,
+  Expandable,
+  Icon,
+  LinkWrapper,
+  UserDigest,
+  useRoute,
+} from '~/components'
 import {
   MomentDigestMomentPrivateFragment,
   MomentDigestMomentPublicFragment,
@@ -14,10 +22,11 @@ import styles from './styles.module.css'
 export type MomentDigestProps = {
   moment: MomentDigestMomentPublicFragment &
     Partial<MomentDigestMomentPrivateFragment>
+  hasAuhor?: boolean
 }
 
-export const MomentDigest = ({ moment }: MomentDigestProps) => {
-  const { content, createdAt, assets } = moment
+export const MomentDigest = ({ moment, hasAuhor }: MomentDigestProps) => {
+  const { content, createdAt, assets, author } = moment
   const { router } = useRoute()
 
   const momentDetailPath = toPath({
@@ -31,7 +40,19 @@ export const MomentDigest = ({ moment }: MomentDigestProps) => {
 
   return (
     <section className={styles.container}>
-      <header>
+      <header className={styles.header}>
+        {hasAuhor && (
+          <section className={styles.author}>
+            <UserDigest.Mini
+              user={author}
+              avatarSize={20}
+              textSize={12}
+              hasAvatar
+              hasDisplayName
+            />
+            <Icon icon={IconDot} color="greyLight" size={20} />
+          </section>
+        )}
         <LinkWrapper {...momentDetailPath}>
           <DateTime date={createdAt} color="grey" />
         </LinkWrapper>
