@@ -4,7 +4,7 @@ import { ReactComponent as IconCheck } from '@/public/static/icons/24px/check.sv
 import { Button, Icon, TextIcon } from '~/components'
 import { MOCK_CAMPAIGN } from '~/stories/mocks'
 
-const ApplyButton = ({
+const ApplyCampaignButton = ({
   campaign,
   size,
   onClick,
@@ -100,11 +100,11 @@ const ApplyButton = ({
   }
 }
 
-ApplyButton.fragments = gql`
+ApplyCampaignButton.fragments = gql`
   fragment ApplyCampaignPrivate on Campaign {
     id
     applicationState
   }
 `
 
-export default ApplyButton
+export default ApplyCampaignButton
