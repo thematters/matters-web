@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 
-import { Avatar } from '~/components'
-
 import Apply from '../Apply'
+import Participants from './Participants'
 
 export const fragments = {
   campaign: {
@@ -21,17 +20,9 @@ export const fragments = {
           start
           end
         }
-        participants(input: { first: 15 }) {
-          totalCount
-          edges {
-            node {
-              id
-              ...AvatarUser
-            }
-          }
-        }
+        ...InfoHeaderParticipantsCampaign
       }
-      ${Avatar.fragments.user}
+      ${Participants.fragments}
     `,
     private: gql`
       fragment InfoHeaderCampaignPrivate on Campaign {

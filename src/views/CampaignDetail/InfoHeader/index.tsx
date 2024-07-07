@@ -1,17 +1,12 @@
 import Link from 'next/link'
 
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
-import {
-  Avatar,
-  DotDivider,
-  Icon,
-  ResponsiveImage,
-  TextIcon,
-} from '~/components'
+import { DotDivider, Icon, ResponsiveImage, TextIcon } from '~/components'
 import { MOCK_CAMPAIGN } from '~/stories/mocks'
 
 import Apply from '../Apply'
 import { fragments } from './gql'
+import Participants from './Participants'
 import styles from './styles.module.css'
 
 const InfoHeader = ({ campaign }: { campaign: typeof MOCK_CAMPAIGN }) => {
@@ -65,18 +60,7 @@ const InfoHeader = ({ campaign }: { campaign: typeof MOCK_CAMPAIGN }) => {
             </section>
           </section>
 
-          <section className={styles.participants}>
-            <span className={styles.count}>
-              {' '}
-              {campaign.participants.totalCount}
-            </span>{' '}
-            位寫作者
-            <section className={styles.avatars}>
-              {campaign.participants.edges.map(({ node }, i) => (
-                <Avatar key={i} user={node} size={20} />
-              ))}
-            </section>
-          </section>
+          <Participants campaign={campaign} />
 
           <section className={styles.mobileApply}>
             <Apply.Button campaign={campaign} size="lg" onClick={openDialog} />
