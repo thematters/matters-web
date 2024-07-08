@@ -37,7 +37,8 @@ export const stripHtml = (
 export const makeSummary = (html: string, length = 140, buffer = 20) => {
   // split on sentence breaks
   const sections = stripHtml(html, '', ' ')
-    .replace(/([?!。？！]|(\.\s))\s*/g, '$1|')
+    .replace(/&[^;]+;/g, ' ') // remove html entities
+    .replace(/([?!。？！]|(\.\s))\s*/g, '$1|') // split on sentence breaks
     .split('|')
 
   // grow summary within buffer
