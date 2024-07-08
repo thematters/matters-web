@@ -12,19 +12,20 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  MomentDigest,
   QueryError,
   Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
-import { UserArticlesPublicQuery } from '~/gql/graphql'
+import { UserWritingsPublicQuery } from '~/gql/graphql'
 
-import { USER_ARTICLES_PRIVATE, USER_ARTICLES_PUBLIC } from './gql'
+import { USER_WRITINGS_PRIVATE, USER_WRITINGS_PUBLIC } from './gql'
 import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
 
-const UserArticles = () => {
+const UserWritings = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
@@ -35,26 +36,26 @@ const UserArticles = () => {
    */
   // public data
   const { data, loading, error, fetchMore, client } =
-    usePublicQuery<UserArticlesPublicQuery>(USER_ARTICLES_PUBLIC, {
+    usePublicQuery<UserWritingsPublicQuery>(USER_WRITINGS_PUBLIC, {
       variables: { userName },
     })
 
   // pagination
-  const connectionPath = 'user.articles'
+  const connectionPath = 'user.writings'
   const user = data?.user
-  const { edges, pageInfo } = user?.articles || {}
+  const { edges, pageInfo } = user?.writings || {}
 
   // private data
-  const loadPrivate = (publicData?: UserArticlesPublicQuery) => {
+  const loadPrivate = (publicData?: UserWritingsPublicQuery) => {
     if (!viewer.isAuthed || isViewer || !publicData || !user) {
       return
     }
 
-    const publiceEdges = publicData.user?.articles?.edges || []
+    const publiceEdges = publicData.user?.writings?.edges || []
     const publicIds = publiceEdges.map(({ node }) => node.id)
 
     client.query({
-      query: USER_ARTICLES_PRIVATE,
+      query: USER_WRITINGS_PRIVATE,
       fetchPolicy: 'network-only',
       variables: { ids: publicIds },
     })
@@ -68,7 +69,7 @@ const UserArticles = () => {
   // load next page
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
-      type: 'user_article',
+      type: 'user_writing',
       location: edges?.length || 0,
     })
 
@@ -165,9 +166,8 @@ const UserArticles = () => {
     )
   }
 
-  const articleEdges = edges.filter(
-    ({ node }) => node.articleState === 'active'
-  )
+  // const writingEdges = edges.filter(({ node }) => node.state === 'active')
+  const writingEdges = edges
 
   return (
     <>
@@ -183,24 +183,27 @@ const UserArticles = () => {
           eof
         >
           <List>
-            {articleEdges.map(({ node }, i) => (
+            {writingEdges.map(({ node }, i) => (
               <List.Item key={node.id}>
-                <ArticleDigestFeed
-                  article={node}
-                  inUserArticles
-                  hasAuthor={false}
-                  hasEdit={true}
-                  hasAddCollection={true}
-                  hasArchive={true}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'user_article',
-                      contentType: 'article',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                />
+                {node.__typename === 'Article' && (
+                  <ArticleDigestFeed
+                    article={node}
+                    inUserArticles
+                    hasAuthor={false}
+                    hasEdit={true}
+                    hasAddCollection={true}
+                    hasArchive={true}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'user_article',
+                        contentType: 'article',
+                        location: i,
+                        id: node.id,
+                      })
+                    }
+                  />
+                )}
+                {node.__typename === 'Moment' && <MomentDigest moment={node} />}
               </List.Item>
             ))}
           </List>
@@ -210,4 +213,4 @@ const UserArticles = () => {
   )
 }
 
-export default UserArticles
+export default UserWritings

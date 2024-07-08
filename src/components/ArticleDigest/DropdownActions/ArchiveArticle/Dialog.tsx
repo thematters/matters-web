@@ -15,7 +15,7 @@ import {
 } from '~/gql/graphql'
 import { ME_WORKS_ARCHIVED_FEED } from '~/views/Me/Works/Archived/gql'
 import { ME_WORKS_TABS } from '~/views/Me/Works/WorksTabs/gql'
-import { USER_PINNED_WORKS } from '~/views/User/Articles/PinBoard/gql'
+import { USER_PINNED_WORKS } from '~/views/User/Writings/PinBoard/gql'
 
 const ARCHIVE_ARTICLE = gql`
   mutation ArchiveArticle($id: ID!) {
