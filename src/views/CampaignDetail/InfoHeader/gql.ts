@@ -20,16 +20,18 @@ export const fragments = {
           start
           end
         }
+        ...ApplyCampaignPublic
         ...InfoHeaderParticipantsCampaign
       }
       ${Participants.fragments}
+      ${Apply.fragments.public}
     `,
     private: gql`
       fragment InfoHeaderCampaignPrivate on WritingChallenge {
         id
         ...ApplyCampaignPrivate
       }
-      ${Apply.fragments}
+      ${Apply.fragments.private}
     `,
   },
 }

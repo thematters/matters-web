@@ -1,3 +1,5 @@
+import { useQuery } from '@apollo/react-hooks'
+
 import { toPath } from '~/common/utils'
 import {
   EmptyLayout,
@@ -5,7 +7,6 @@ import {
   Layout,
   SpinnerBlock,
   Throw404,
-  usePublicQuery,
   useRoute,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -21,11 +22,9 @@ const CampaignDetail = () => {
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
 
-  const { data, loading, error } = usePublicQuery<CampaignDetailQuery>(
+  const { data, loading, error } = useQuery<CampaignDetailQuery>(
     CAMPAIGN_DETAIL,
-    {
-      variables: { shortHash },
-    }
+    { variables: { shortHash } }
   )
 
   const campaign = data?.campaign

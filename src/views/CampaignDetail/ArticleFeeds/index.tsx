@@ -35,7 +35,6 @@ const ArticleFeeds = ({ campaign }: { campaign: typeof MOCK_CAMPAIGN }) => {
         <InfiniteScroll hasNextPage={false} loadMore={async () => {}} eof>
           <List>
             {(campaign.articles.edges || []).map(({ node }, i) => (
-              // TODO: cursor
               <React.Fragment key={`${feedType}:${i}`}>
                 <List.Item>
                   <ArticleDigestFeed

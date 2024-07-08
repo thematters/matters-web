@@ -6,6 +6,7 @@ import { Dialog, useDialogSwitch, useMutation } from '~/components'
 import {
   ApplyCampaignMutation,
   ApplyCampaignPrivateFragment,
+  ApplyCampaignPublicFragment,
 } from '~/gql/graphql'
 
 const APPLY_CAMPAIGN = gql`
@@ -20,7 +21,7 @@ const APPLY_CAMPAIGN = gql`
 `
 
 export interface ApplyCampaignDialogProps {
-  campaign: ApplyCampaignPrivateFragment
+  campaign: ApplyCampaignPublicFragment & Partial<ApplyCampaignPrivateFragment>
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

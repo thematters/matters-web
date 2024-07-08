@@ -1,16 +1,28 @@
+import { useContext } from 'react'
+
 import { ReactComponent as IconCheck } from '@/public/static/icons/24px/check.svg'
-import { Button, Icon, TextIcon } from '~/components'
-import { ApplyCampaignPrivateFragment } from '~/gql/graphql'
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
+import { Button, Icon, TextIcon, ViewerContext } from '~/components'
+import {
+  ApplyCampaignPrivateFragment,
+  ApplyCampaignPublicFragment,
+} from '~/gql/graphql'
+
+type ApplyCampaignButtonProps = {
+  campaign: ApplyCampaignPublicFragment & Partial<ApplyCampaignPrivateFragment>
+  size: 'lg' | 'sm'
+  onClick: () => void
+}
 
 const ApplyCampaignButton = ({
   campaign,
   size,
   onClick,
-}: {
-  campaign: ApplyCampaignPrivateFragment
-  size: 'lg' | 'sm'
-  onClick: () => void
-}) => {
+}: ApplyCampaignButtonProps) => {
+  const viewer = useContext(ViewerContext)
   const now = new Date()
   const isInApplicationPeriod =
     !campaign.applicationPeriod.end ||
@@ -50,6 +62,16 @@ const ApplyCampaignButton = ({
     text = isInApplicationPeriod ? '報名審核中' : '陪跑審核中'
   } else if (isNotApplied) {
     text = isInApplicationPeriod ? '報名參加' : '陪跑參加'
+  }
+
+  if (!viewer.isAuthed) {
+    onClick = () => {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.replyComment },
+        })
+      )
+    }
   }
 
   if (size === 'lg') {
