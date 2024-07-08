@@ -1,26 +1,19 @@
 .container {
   padding: var(--sp20) 0;
 
-  .header {
+  & .header {
     display: flex;
     align-items: center;
     margin-bottom: var(--sp8);
     line-height: 1;
 
-    .author {
+    & .author {
       @mixin flex-center-start;
     }
   }
 
-  .content {
+  & .content {
     margin: var(--sp8) 0 var(--sp12);
     cursor: pointer;
-  }
-
-  footer {
-    display: flex;
-    gap: var(--sp16);
-    align-items: center;
-    margin-top: var(--sp12);
   }
 }

@@ -25,7 +25,8 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
       data-test-id={TEST_ID.MOMENT_DIGEST_ASSETS}
     >
       {assets.map((asset) => (
-        <div className={styles.item} key={asset.id}>
+        // TODO: add lightbox
+        <div className={styles.item} key={asset.id} role="button">
           <ResponsiveImage url={asset.path} width={106} height={106} />
         </div>
       ))}
