@@ -1,0 +1,9 @@
+.footer {
+  @mixin flex-center-space-between;
+}
+
+.left {
+  display: flex;
+  gap: var(--sp16);
+  align-items: center;
+}

@@ -46,6 +46,9 @@
     "defaultMessage": "确认要将“{article}”从选集中移出吗？",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+ixiPI": {
+    "defaultMessage": "删除动态"
+  },
   "+o9W2T": {
     "defaultMessage": "文件上传失败，请确认文件链接是否有效，或手动下载后再上传",
     "description": "UNABLE_TO_UPLOAD_FROM_URL"
@@ -147,6 +150,9 @@
   "0ThOw1": {
     "defaultMessage": "新建选集",
     "description": "src/views/User/Collections/UserCollections.tsx"
+  },
+  "0bTlm4": {
+    "defaultMessage": "确认要删除该动态吗？"
   },
   "0e1xjL": {
     "defaultMessage": "邮箱每天最多可修改 {count} 次",
@@ -1493,6 +1499,10 @@
   "PesLat": {
     "defaultMessage": "正在发布，马上就好"
   },
+  "PhzTJa": {
+    "defaultMessage": "留言了",
+    "description": "src/components/MomentDigest/FooterActions/CommentedFollowees/index.tsx"
+  },
   "PkUihI": {
     "defaultMessage": "编辑已保存",
     "description": "src/views/ArticleDetail/Edit/Header/index.tsx"
@@ -2256,6 +2266,10 @@
   "enMIYK": {
     "defaultMessage": "我的"
   },
+  "eoQN04": {
+    "defaultMessage": "详情",
+    "description": "src/components/MomentDigest/index.tsx"
+  },
   "eov+J2": {
     "defaultMessage": "自定义网址名称"
   },
@@ -2610,6 +2624,9 @@
   "m6qWCv": {
     "defaultMessage": "直接使用 ENS 名在阅读器（如 Planet）中订阅文章"
   },
+  "mBkZcw": {
+    "defaultMessage": "喜欢动态"
+  },
   "mCAIcg": {
     "defaultMessage": "站内阅读热门排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
@@ -2939,6 +2956,9 @@
   },
   "tQV8l8": {
     "defaultMessage": "未知错误"
+  },
+  "tZKvnZ": {
+    "defaultMessage": "取消喜欢动态"
   },
   "tqEGfa": {
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，"

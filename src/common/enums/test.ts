@@ -79,6 +79,13 @@ export enum TEST_ID {
   ARTICLE_TOOLBAR = 'article/toolbar',
   ARTICLE_BOOKMARK = 'article/bookmark',
   ARTICLE_COMMENT_FEED = 'article/comment/feed',
+  // moment
+  MOMENT_DIGEST = 'moment-digest',
+  MOMENT_DIGEST_AUTHOR = 'moment-digest/author',
+  MOMENT_DIGEST_CONTENT = 'moment-digest/content',
+  MOMENT_DIGEST_ASSETS = 'moment-digest/assets',
+  MOMENT_DIGEST_FOOTER_ACTIONS_COMMENTED_FOLLOWEES = 'moment-digest/footer-actions/commented-followees',
+  MOMENT_DIGEST_FOOTER_ACTIONS_REPLY_BUTTON = 'moment-digest/footer-actions/reply-button',
   // circle
   CIRCLE_COMMENT_FEED = 'circle/comment/feed',
   // payto
