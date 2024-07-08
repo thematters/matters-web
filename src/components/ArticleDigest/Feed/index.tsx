@@ -100,7 +100,9 @@ const BaseArticleDigestFeed = ({
                     hasDisplayName
                     onClick={onClickAuthor}
                   />
-                  <Icon icon={IconDot} color="greyLight" size={20} />
+                  {includesMetaData && (
+                    <Icon icon={IconDot} color="greyLight" size={20} />
+                  )}
                 </section>
               )}
               {includesMetaData && (
