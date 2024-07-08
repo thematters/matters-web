@@ -7,8 +7,7 @@ import LikeButton from '.'
 
 describe('src/components/MomentDigest/FooterActions/LikeButton/LikeButton.test.tsx', () => {
   it('should render like button', async () => {
-    MOCK_MOMENT.liked = false
-    render(<LikeButton moment={MOCK_MOMENT} />)
+    render(<LikeButton moment={{ ...MOCK_MOMENT, liked: false }} />)
 
     expect(
       screen.getByRole('button', { name: 'Like moment' })
@@ -16,8 +15,7 @@ describe('src/components/MomentDigest/FooterActions/LikeButton/LikeButton.test.t
   })
 
   it('should render liked button', async () => {
-    MOCK_MOMENT.liked = true
-    render(<LikeButton moment={MOCK_MOMENT} />)
+    render(<LikeButton moment={{ ...MOCK_MOMENT, liked: true }} />)
 
     expect(
       screen.getByRole('button', { name: 'Unlike moment' })
