@@ -1,28 +1,26 @@
-// import gql from 'graphql-tag'
-// import // ApplyCampaignMutation,
-// '~/gql/graphql'
-
+import gql from 'graphql-tag'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { Dialog, useDialogSwitch, useMutation } from '~/components'
 import {
-  Dialog,
-  useDialogSwitch,
-  // useMutation,
-} from '~/components'
-import { MOCK_CAMPAIGN } from '~/stories/mocks'
+  ApplyCampaignMutation,
+  ApplyCampaignPrivateFragment,
+} from '~/gql/graphql'
 
-// const APPLY_CAMPAIGN = gql`
-//   mutation ApplyCampaign($id: ID!) {
-//     applyCampaign(input: { id: $id }) {
-//       id
-//       applicationState
-//     }
-//   }
-// `
+const APPLY_CAMPAIGN = gql`
+  mutation ApplyCampaign($id: ID!) {
+    applyCampaign(input: { id: $id }) {
+      id
+      ... on WritingChallenge {
+        applicationState
+      }
+    }
+  }
+`
 
 export interface ApplyCampaignDialogProps {
-  campaign: typeof MOCK_CAMPAIGN
+  campaign: ApplyCampaignPrivateFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -37,17 +35,19 @@ const ApplyCampaignDialog = ({
     !campaign.applicationPeriod.end ||
     now < new Date(campaign.applicationPeriod.end)
 
-  const applyCampaign = () => {}
-  // const [applyCampaign] = useMutation<ApplyCampaignMutation>(APPLY_CAMPAIGN, {
-  //   variables: { id: user.id },
-  //   optimisticResponse: {
-  //     applyCampaign: {
-  //       id: user.id,
-  //       applicationState: 'pending',
-  //       __typename: 'Campaign',
-  //     },
-  //   },
-  // })
+  const [applyCampaign, { loading }] = useMutation<ApplyCampaignMutation>(
+    APPLY_CAMPAIGN,
+    {
+      variables: { id: campaign.id },
+      optimisticResponse: {
+        applyCampaign: {
+          id: campaign.id,
+          applicationState: 'pending' as any,
+          __typename: 'WritingChallenge',
+        },
+      },
+    }
+  )
 
   // auto apply
   useEffect(() => {
@@ -81,8 +81,8 @@ const ApplyCampaignDialog = ({
               {!isInApplicationPeriod && (
                 <Dialog.RoundedButton
                   text="確認參加"
-                  // loading={loading}
-                  onClick={applyCampaign}
+                  loading={loading}
+                  onClick={() => applyCampaign()}
                 />
               )}
               <Dialog.RoundedButton
@@ -117,9 +117,9 @@ const ApplyCampaignDialog = ({
               {!isInApplicationPeriod && (
                 <Dialog.TextButton
                   text="確認參加"
-                  // loading={loading}
+                  loading={loading}
                   color="green"
-                  onClick={applyCampaign}
+                  onClick={() => applyCampaign()}
                 />
               )}
             </>

@@ -1,10 +1,25 @@
-import { Avatar, Tooltip } from '~/components'
-import { MOCK_CAMPAIGN } from '~/stories/mocks'
+import { useContext } from 'react'
 
+import { Avatar, Tooltip, ViewerContext } from '~/components'
+import {
+  SideParticipantsCampaignPrivateFragment,
+  SideParticipantsCampaignPublicFragment,
+} from '~/gql/graphql'
+
+import { fragments } from './gql'
 import styles from './styles.module.css'
 
-const Participants = ({ campaign }: { campaign: typeof MOCK_CAMPAIGN }) => {
-  if (campaign.participants.edges.length <= 0) {
+type SideParticipantsProps = {
+  campaign: SideParticipantsCampaignPublicFragment &
+    Partial<SideParticipantsCampaignPrivateFragment>
+}
+
+const SideParticipants = ({ campaign }: SideParticipantsProps) => {
+  const viewer = useContext(ViewerContext)
+  const edges = campaign.sideParticipants.edges
+  const isViewerApplySucceeded = campaign.applicationState === 'succeeded'
+
+  if (edges && edges.length <= 0) {
     return null
   }
 
@@ -12,18 +27,30 @@ const Participants = ({ campaign }: { campaign: typeof MOCK_CAMPAIGN }) => {
     <section className={styles.participants}>
       <h2>
         Writer{' '}
-        <span className={styles.count}>{campaign.participants.totalCount}</span>
+        <span className={styles.count}>
+          {campaign.sideParticipants.totalCount}
+        </span>
       </h2>
 
       <section className={styles.avatars}>
-        {campaign.participants.edges.map(({ node }, i) => (
-          <Tooltip key={i} content={node.displayName} placement="top">
-            <Avatar user={node} size={32} />
-          </Tooltip>
-        ))}
+        {isViewerApplySucceeded && <Avatar user={viewer} size={32} />}
+        {edges?.map(({ node, cursor }) =>
+          node.id !== viewer.id ? (
+            <Tooltip
+              key={cursor}
+              content={node.displayName}
+              placement="top"
+              disabled={!node.displayName}
+            >
+              <Avatar user={node} size={32} />
+            </Tooltip>
+          ) : null
+        )}
       </section>
     </section>
   )
 }
 
-export default Participants
+SideParticipants.fragments = fragments
+
+export default SideParticipants

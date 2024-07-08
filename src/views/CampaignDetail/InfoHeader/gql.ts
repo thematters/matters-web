@@ -6,7 +6,7 @@ import Participants from './Participants'
 export const fragments = {
   campaign: {
     public: gql`
-      fragment InfoHeaderCampaignPublic on Campaign {
+      fragment InfoHeaderCampaignPublic on WritingChallenge {
         id
         name
         description
@@ -25,11 +25,11 @@ export const fragments = {
       ${Participants.fragments}
     `,
     private: gql`
-      fragment InfoHeaderCampaignPrivate on Campaign {
+      fragment InfoHeaderCampaignPrivate on WritingChallenge {
         id
         ...ApplyCampaignPrivate
       }
-      ${Apply.Button.fragments}
+      ${Apply.fragments}
     `,
   },
 }

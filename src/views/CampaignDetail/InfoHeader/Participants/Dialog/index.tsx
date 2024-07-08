@@ -2,10 +2,10 @@ import dynamic from 'next/dynamic'
 import { FormattedMessage } from 'react-intl'
 
 import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
-import { MOCK_CAMPAIGN } from '~/stories/mocks'
+import { InfoHeaderParticipantsCampaignFragment } from '~/gql/graphql'
 
 interface ParticipantsDialogProps {
-  campaign: typeof MOCK_CAMPAIGN
+  campaign: InfoHeaderParticipantsCampaignFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

@@ -1,13 +1,13 @@
 import gql from 'graphql-tag'
 
 import { Avatar } from '~/components'
-import { MOCK_CAMPAIGN } from '~/stories/mocks'
+import { InfoHeaderParticipantsCampaignFragment } from '~/gql/graphql'
 
 import { ParticipantsDialog } from './Dialog'
 import styles from './styles.module.css'
 
 const fragments = gql`
-  fragment InfoHeaderParticipantsCampaign on Campaign {
+  fragment InfoHeaderParticipantsCampaign on WritingChallenge {
     id
     participants(input: { first: 15 }) {
       totalCount
@@ -21,7 +21,11 @@ const fragments = gql`
   }
 `
 
-const Participants = ({ campaign }: { campaign: typeof MOCK_CAMPAIGN }) => {
+const Participants = ({
+  campaign,
+}: {
+  campaign: InfoHeaderParticipantsCampaignFragment
+}) => {
   return (
     <ParticipantsDialog campaign={campaign}>
       {({ openDialog }) => (
@@ -36,7 +40,7 @@ const Participants = ({ campaign }: { campaign: typeof MOCK_CAMPAIGN }) => {
           </span>{' '}
           位寫作者
           <section className={styles.avatars}>
-            {campaign.participants.edges.map(({ node }, i) => (
+            {campaign.participants.edges?.map(({ node }, i) => (
               <Avatar key={i} user={node} size={20} />
             ))}
           </section>

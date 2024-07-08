@@ -3,19 +3,22 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 export const GET_PARTICIPANTS = gql`
-  query GetParticipants($id: ID!, $after: String) {
-    campaign(input: { id: $$ID }) {
+  query GetParticipants($shortHash: String!, $after: String) {
+    campaign(input: { shortHash: $shortHash }) {
       id
-      participants(input: { first: 20, after: $after }) {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...UserDigestRichUserPublic
+      ... on WritingChallenge {
+        applicationState
+        participants(input: { first: 20, after: $after }) {
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            cursor
+            node {
+              ...UserDigestRichUserPublic
+            }
           }
         }
       }

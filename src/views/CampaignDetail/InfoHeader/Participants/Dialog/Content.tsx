@@ -1,102 +1,99 @@
-// import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 
-// import {
-//   analytics,
-//   // mergeConnections
-// } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   Dialog,
-  // EmptyWarning,
   InfiniteScroll,
   List,
-  // QueryError,
-  // SpinnerBlock,
-  // Translate,
-  // usePublicQuery,
-  // useRoute,
-  // ViewerContext,
+  QueryError,
+  SpinnerBlock,
+  usePublicQuery,
+  useRoute,
+  ViewerContext,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import { MOCK_CAMPAIGN } from '~/stories/mocks'
+import { GetParticipantsQuery } from '~/gql/graphql'
 
-// import { UserFollowerPublicQuery } from '~/gql/graphql'
-// import { GET_PARTICIPANTS } from './gql'
+import { GET_PARTICIPANTS } from './gql'
 
 const ParticipantsDialogContent = () => {
-  // const viewer = useContext(ViewerContext)
-  // const { getQuery } = useRoute()
+  const viewer = useContext(ViewerContext)
+  const { getQuery } = useRoute()
+  const shortHash = getQuery('shortHash')
 
-  /**
-   * Data Fetching
-   */
-  // public data
-  // const { data, loading, error, fetchMore, client } =
-  //   usePublicQuery<UserFollowerPublicQuery>(GET_PARTICIPANTS, {
-  //     variables: { id },
-  //   })
+  const { data, loading, error, fetchMore } =
+    usePublicQuery<GetParticipantsQuery>(GET_PARTICIPANTS, {
+      variables: { shortHash },
+    })
 
   // pagination
-  // const user = data?.user
-  // const connectionPath = 'user.followers'
-  // const { edges, pageInfo } = user?.followers || {}
+  const campaign = data?.campaign
+  const connectionPath = 'campaign.participants'
+  const { edges, pageInfo } = campaign?.participants || {}
 
   // load next page
-  // const loadMore = async () => {
-  //   analytics.trackEvent('load_more', {
-  //     type: 'follower',
-  //     location: edges?.length || 0,
-  //   })
-  //   const { data: newData } = await fetchMore({
-  //     variables: { after: pageInfo?.endCursor },
-  //     updateQuery: (previousResult, { fetchMoreResult }) =>
-  //       mergeConnections({
-  //         oldData: previousResult,
-  //         newData: fetchMoreResult,
-  //         path: connectionPath,
-  //       }),
-  //   })
+  const loadMore = async () => {
+    analytics.trackEvent('load_more', {
+      type: 'follower',
+      location: edges?.length || 0,
+    })
+    await fetchMore({
+      variables: { after: pageInfo?.endCursor },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+        }),
+    })
+  }
 
-  //   loadPrivate(newData)
-  // }
+  if (loading) {
+    return <SpinnerBlock />
+  }
 
-  /**
-   * Render
-   */
-  // if (loading) {
-  //   return <SpinnerBlock />
-  // }
+  if (error) {
+    return <QueryError error={error} />
+  }
 
-  // if (error) {
-  //   return <QueryError error={error} />
-  // }
-  const campaign = MOCK_CAMPAIGN
+  if (!edges || edges.length <= 0 || !pageInfo) {
+    return null
+  }
+
+  const isViewerApplySucceeded = campaign?.applicationState === 'succeeded'
 
   return (
     <Dialog.Content noSpacing>
-      <InfiniteScroll
-        // hasNextPage={pageInfo.hasNextPage}
-        // loadMore={loadMore}
-        hasNextPage={false}
-        loadMore={async () => {}}
-      >
+      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
-          {campaign.participants.edges.map(({ node }, i) => (
-            <List.Item key={node.id}>
+          {isViewerApplySucceeded && (
+            <List.Item>
               <UserDigest.Rich
-                user={node}
-                // onClick={() =>
-                //   analytics.trackEvent('click_feed', {
-                //     type: 'follower',
-                //     contentType: 'user',
-                //     location: i,
-                //     id: node.id,
-                //   })
-                // }
+                user={viewer}
                 spacing={[12, 16]}
                 hasFollow={false}
               />
             </List.Item>
-          ))}
+          )}
+          {edges.map(({ node, cursor }) =>
+            node.id !== viewer.id ? (
+              <List.Item key={cursor}>
+                <UserDigest.Rich
+                  user={node}
+                  // onClick={() =>
+                  //   analytics.trackEvent('click_feed', {
+                  //     type: 'follower',
+                  //     contentType: 'user',
+                  //     location: i,
+                  //     id: node.id,
+                  //   })
+                  // }
+                  spacing={[12, 16]}
+                  hasFollow={false}
+                />
+              </List.Item>
+            ) : null
+          )}
         </List>
       </InfiniteScroll>
     </Dialog.Content>

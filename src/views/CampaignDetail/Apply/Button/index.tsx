@@ -1,15 +1,13 @@
-import gql from 'graphql-tag'
-
 import { ReactComponent as IconCheck } from '@/public/static/icons/24px/check.svg'
 import { Button, Icon, TextIcon } from '~/components'
-import { MOCK_CAMPAIGN } from '~/stories/mocks'
+import { ApplyCampaignPrivateFragment } from '~/gql/graphql'
 
 const ApplyCampaignButton = ({
   campaign,
   size,
   onClick,
 }: {
-  campaign: typeof MOCK_CAMPAIGN
+  campaign: ApplyCampaignPrivateFragment
   size: 'lg' | 'sm'
   onClick: () => void
 }) => {
@@ -99,12 +97,5 @@ const ApplyCampaignButton = ({
     )
   }
 }
-
-ApplyCampaignButton.fragments = gql`
-  fragment ApplyCampaignPrivate on Campaign {
-    id
-    applicationState
-  }
-`
 
 export default ApplyCampaignButton
