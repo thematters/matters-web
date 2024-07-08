@@ -293,6 +293,7 @@ type ArticleFeedType =
   | 'transaction' // transaction history
   | 'topics'
   | 'user_article'
+  | 'user_writing'
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'
