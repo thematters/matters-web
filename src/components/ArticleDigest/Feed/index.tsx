@@ -103,7 +103,9 @@ const BaseArticleDigestFeed = ({
                   <Icon icon={IconDot} color="greyLight" size={20} />
                 </section>
               )}
-              <DateTime date={article.createdAt} color="grey" />
+              {includesMetaData && (
+                <DateTime date={article.createdAt} color="grey" />
+              )}
             </header>
           )}
           <section className={styles.head}>
