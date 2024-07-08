@@ -6,5 +6,4 @@
   display: flex;
   gap: var(--sp16);
   align-items: center;
-  margin-top: var(--sp12);
 }
