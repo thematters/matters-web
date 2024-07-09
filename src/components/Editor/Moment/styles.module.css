@@ -17,14 +17,6 @@
     line-height: 1.75;
   }
 
-  & blockquote {
-    padding-left: var(--sp16);
-
-    & * + * {
-      margin-top: var(--sp8);
-    }
-  }
-
   /* outline */
   &:focus {
     outline: none;
