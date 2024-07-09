@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
 import { MAX_MOMENT_CONTENT_LENGTH } from '~/common/enums'
-import { parseFormSubmitErrors, stripHtml } from '~/common/utils'
+import { formStorage, parseFormSubmitErrors, stripHtml } from '~/common/utils'
 import {
   Button,
   ClearMomentDialog,
@@ -24,6 +24,11 @@ import { USER_WRITINGS_PUBLIC } from '~/views/User/Writings/gql'
 
 import styles from './styles.module.css'
 
+type FormDraft = {
+  content?: string
+  assets?: MomentAsset[]
+}
+
 export const MomentForm = () => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
@@ -35,11 +40,18 @@ export const MomentForm = () => {
 
   const formRef = useRef<HTMLFormElement | null>(null)
   const formId = 'moment-form'
+  const formStorageKey = formStorage.genKey({ formId, authorId: viewer.id })
+  const formDraft = formStorage.get<FormDraft>(formStorageKey, 'local')
   const [isSubmitting, setSubmitting] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
-  const [content, setContent] = useState('')
-  const [assets, setAssets] = useState<MomentAsset[]>([])
+  const [content, setContent] = useState(formDraft?.content || '')
+  const [assets, setAssets] = useState<MomentAsset[]>(formDraft?.assets || [])
   const updateAssets = (assets: MomentAsset[]) => {
+    formStorage.set<FormDraft>(
+      formStorageKey,
+      { ...formDraft, assets },
+      'local'
+    )
     setAssets(assets)
   }
 
@@ -80,7 +92,7 @@ export const MomentForm = () => {
             assets: assets.map(({ assetId }) => assetId),
           },
         },
-        // TODO: Update cache
+        // FIXME: Update cache
         // update: (cache, mutationResult) => {
         //   console.log({ cache, mutationResult })
         //   updateUserWritings({
@@ -132,9 +144,15 @@ export const MomentForm = () => {
       editor.commands.blur()
     }
     setAssets([])
+    formStorage.remove(formStorageKey, 'local')
   }
 
   const onUpdate = ({ content: newContent }: { content: string }) => {
+    formStorage.set<FormDraft>(
+      formStorageKey,
+      { ...formDraft, content: newContent },
+      'local'
+    )
     setContent(newContent)
   }
 
