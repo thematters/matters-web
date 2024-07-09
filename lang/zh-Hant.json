@@ -299,6 +299,9 @@
   "2slIPX": {
     "defaultMessage": "讚賞"
   },
+  "2vSss6": {
+    "defaultMessage": "Mentioned in {users} Moment"
+  },
   "2vpUYs": {
     "defaultMessage": "回覆留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -321,6 +324,9 @@
   },
   "3KNMbJ": {
     "defaultMessage": "作品"
+  },
+  "3PKS5m": {
+    "defaultMessage": "{user} commented under your moment"
   },
   "3Tg548": {
     "defaultMessage": "登入",
@@ -1156,6 +1162,9 @@
   "JFv0yt": {
     "defaultMessage": "未知錯誤，請確認你的錢包並重新嘗試"
   },
+  "JKuRSI": {
+    "defaultMessage": "Your moment was liked by {username}"
+  },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -1493,6 +1502,9 @@
     "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
+  "PTDbvr": {
+    "defaultMessage": "{user} liked one of your comments in a moment"
+  },
   "PXAur5": {
     "defaultMessage": "提現"
   },
@@ -1615,6 +1627,9 @@
   "S8PcQf": {
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
+  "SFeU5Y": {
+    "defaultMessage": "{user} mentioned you in a comment section of a Moment"
   },
   "SFsQ1E": {
     "defaultMessage": "查看回應"

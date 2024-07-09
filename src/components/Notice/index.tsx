@@ -8,6 +8,7 @@ import ArticleNotice from './ArticleNotice'
 import CircleNotice from './CircleNotice'
 import CommentCommentNotice from './CommentCommentNotice'
 import CommentNotice from './CommentNotice'
+import MomentNotice from './MomentNotice'
 import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
 import TransactionNotice from './TransactionNotice'
 import UserNotice from './UserNotice'
@@ -75,6 +76,8 @@ export const Notice: React.FC<NoticeProps> & {
       return <CircleNotice notice={notice} />
     case 'OfficialAnnouncementNotice':
       return <OfficialAnnouncementNotice notice={notice} />
+    case 'MomentNotice':
+      return <MomentNotice notice={notice as any} />
     default:
       return null
   }

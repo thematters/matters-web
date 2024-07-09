@@ -299,6 +299,9 @@
   "2slIPX": {
     "defaultMessage": "Likes"
   },
+  "2vSss6": {
+    "defaultMessage": "Mentioned in {users} Moment"
+  },
   "2vpUYs": {
     "defaultMessage": "New replies to discussions",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -321,6 +324,9 @@
   },
   "3KNMbJ": {
     "defaultMessage": "Articles"
+  },
+  "3PKS5m": {
+    "defaultMessage": "{user} commented under your moment"
   },
   "3Tg548": {
     "defaultMessage": "Sign In",
@@ -1156,6 +1162,9 @@
   "JFv0yt": {
     "defaultMessage": "Unknown error. Please check wallet and retry."
   },
+  "JKuRSI": {
+    "defaultMessage": "Your moment was liked by {username}"
+  },
   "JTWayV": {
     "defaultMessage": "Add description",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -1493,6 +1502,9 @@
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
+  "PTDbvr": {
+    "defaultMessage": "{user} liked one of your comments in a moment"
+  },
   "PXAur5": {
     "defaultMessage": "Withdraw"
   },
@@ -1615,6 +1627,9 @@
   "S8PcQf": {
     "defaultMessage": "Unpin from profile",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
+  },
+  "SFeU5Y": {
+    "defaultMessage": "{user} mentioned you in a comment section of a Moment"
   },
   "SFsQ1E": {
     "defaultMessage": "View responses"
