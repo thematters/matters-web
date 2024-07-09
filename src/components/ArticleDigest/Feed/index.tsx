@@ -56,7 +56,7 @@ const BaseArticleDigestFeed = ({
   hasReadTime,
   hasDonationCount,
   includesMetaData,
-  includesTimeStamp,
+  includesTimeStamp = true,
   ...controls
 }: ArticleDigestFeedProps) => {
   const { author, summary } = article

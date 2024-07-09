@@ -22,7 +22,6 @@ const UserAddArticleTagActivity = ({
           id: node.id,
         })
       }}
-      includesTimeStamp={false}
     />
     <CardExposureTracker
       location={location}
