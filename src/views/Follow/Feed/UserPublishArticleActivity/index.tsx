@@ -21,6 +21,7 @@ const UserPublishArticleActivity = ({
           id: node.id,
         })
       }}
+      includesTimeStamp={false}
       article={node}
     />
     <CardExposureTracker
