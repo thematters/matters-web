@@ -58,8 +58,9 @@ export const MomentForm = () => {
   const contentCount = stripHtml(content).length
 
   const isValid =
-    (contentCount > 0 && contentCount <= MAX_MOMENT_CONTENT_LENGTH) ||
-    (assets.length > 0 && assets.every(({ uploaded }) => uploaded))
+    ((contentCount > 0 && contentCount <= MAX_MOMENT_CONTENT_LENGTH) ||
+      assets.length > 0) &&
+    assets.every(({ uploaded }) => uploaded)
 
   useEffect(() => {
     const clickOutside = (event: MouseEvent) => {
