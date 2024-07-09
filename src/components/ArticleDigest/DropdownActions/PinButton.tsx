@@ -5,7 +5,7 @@ import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
 import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { ERROR_CODES } from '~/common/enums'
 import { Icon, Menu, toast, useMutation } from '~/components'
-import { updateUserArticles } from '~/components/GQL'
+import { updateUserWritings } from '~/components/GQL'
 import { PinButtonArticleFragment, TogglePinMutation } from '~/gql/graphql'
 
 type PinButtonProps = { article: PinButtonArticleFragment }
@@ -45,7 +45,7 @@ const PinButton = ({ article }: PinButtonProps) => {
       //   },
       // },
       update: (cache) => {
-        updateUserArticles({
+        updateUserWritings({
           cache,
           targetId: article.id,
           userName: article.author.userName!,

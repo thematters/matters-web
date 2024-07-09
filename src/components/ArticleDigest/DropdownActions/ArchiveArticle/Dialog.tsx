@@ -8,7 +8,7 @@ import {
   useMutation,
   useStep,
 } from '~/components'
-import { updateUserArticles, updateUserProfile } from '~/components/GQL'
+import { updateUserProfile, updateUserWritings } from '~/components/GQL'
 import {
   ArchiveArticleArticleFragment,
   ArchiveArticleMutation,
@@ -57,7 +57,7 @@ const ArchiveArticleDialog = ({
         },
       },
       update: (cache) => {
-        updateUserArticles({
+        updateUserWritings({
           cache,
           targetId: article.id,
           userName: article.author.userName!,

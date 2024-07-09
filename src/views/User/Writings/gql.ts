@@ -30,11 +30,13 @@ const fragments = gql`
             id
             createdAt
             wordCount
+            artileState: state
             ...ArticleDigestFeedArticlePublic
             ...ArticleDigestFeedArticlePrivate
           }
           ... on Moment {
             id
+            momentState: state
             ...MomentDigestMomentPublic
             ...MomentDigestMomentPrivate
           }
