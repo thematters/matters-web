@@ -2,7 +2,7 @@ import { DataProxy } from 'apollo-cache'
 
 import { UserCollectionsQuery, UserWritingsPublicQuery } from '~/gql/graphql'
 
-export const updateUserArticles = ({
+export const updateUserWritings = ({
   cache,
   targetId,
   userName,
@@ -37,21 +37,27 @@ export const updateUserArticles = ({
     //
   }
 
-  const writingEdges = writingsData?.user?.writings?.edges || []
+  let writingEdges = writingsData?.user?.writings?.edges || []
   const collectionEdges = collectionsData?.user?.collections?.edges || []
   const writings = writingEdges.map((e) => e.node)
   const articles = writings.filter((a) => a.__typename === 'Article')
   const collecetions = collectionEdges.map((e) => e.node)
 
-  const target = (articles.find((a) => a.id === targetId) ||
-    collecetions.find((a) => a.id === targetId))!
-  if (target.__typename !== 'Article' && target.__typename !== 'Collection') {
-    return
-  }
   let pinnedWorks = writingsData?.user?.pinnedWorks || []
 
   switch (type) {
     case 'pin':
+      if (!targetId) {
+        return
+      }
+      const target = (articles.find((a) => a.id === targetId) ||
+        collecetions.find((a) => a.id === targetId))!
+      if (
+        target.__typename !== 'Article' &&
+        target.__typename !== 'Collection'
+      ) {
+        return
+      }
       pinnedWorks = [...pinnedWorks, target]
       break
     case 'unpin':
@@ -60,7 +66,6 @@ export const updateUserArticles = ({
     case 'archive':
       // remove pinned article if it's archived
       pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
-
       break
   }
 
@@ -72,6 +77,12 @@ export const updateUserArticles = ({
         ...writingsData,
         user: {
           ...writingsData?.user,
+          writings: {
+            ...writingsData?.user?.writings,
+            edges: {
+              ...writingEdges,
+            },
+          },
           pinnedWorks,
         },
       },

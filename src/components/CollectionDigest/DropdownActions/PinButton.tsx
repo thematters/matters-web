@@ -6,7 +6,7 @@ import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.sv
 import { ERROR_CODES } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Icon, Menu, toast, useMutation } from '~/components'
-import { updateUserArticles } from '~/components/GQL'
+import { updateUserWritings } from '~/components/GQL'
 import {
   PinButtonCollectionFragment,
   TogglePinWorkMutation,
@@ -51,7 +51,7 @@ const PinButton = ({
         },
       },
       update: (cache) => {
-        updateUserArticles({
+        updateUserWritings({
           cache,
           targetId: collection.id,
           userName: collection.author.userName!,
