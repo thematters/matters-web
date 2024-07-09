@@ -166,8 +166,13 @@ const UserWritings = () => {
     )
   }
 
-  // const writingEdges = edges.filter(({ node }) => node.state === 'active')
-  const writingEdges = edges
+  const writingEdges = edges.filter(({ node }) => {
+    const isActiveArticle =
+      node.__typename === 'Article' && node.articleState === 'active'
+    const isActiveMoment =
+      node.__typename === 'Moment' && node.momentState === 'active'
+    return isActiveArticle || isActiveMoment
+  })
 
   return (
     <>
