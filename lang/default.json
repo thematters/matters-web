@@ -583,6 +583,9 @@
     "defaultMessage": "Unpin from profile",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
+  "8Asqdm": {
+    "defaultMessage": "確認清空當前編輯的内容嗎？"
+  },
   "8KFsZN": {
     "defaultMessage": "Read Counts"
   },
@@ -890,6 +893,10 @@
   "E048/V": {
     "defaultMessage": "Save as Draft"
   },
+  "E3uFyt": {
+    "defaultMessage": "Moment",
+    "description": "src/components/Forms/MomentForm/index.tsx"
+  },
   "E7vGxB": {
     "defaultMessage": "Balance loading..."
   },
@@ -898,6 +905,9 @@
   },
   "EBEwaP": {
     "defaultMessage": "Please fill in a valid email address"
+  },
+  "EIoAY7": {
+    "defaultMessage": "說點什麼..."
   },
   "EQeKnO": {
     "defaultMessage": "Manage Invitation",
@@ -1051,6 +1061,9 @@
   "HBxXD/": {
     "defaultMessage": "License"
   },
+  "HEiu24": {
+    "defaultMessage": "清空内容"
+  },
   "HFVDeB": {
     "defaultMessage": "Related Tags",
     "description": "src/views/TagDetail/RelatedTags/index.tsx"
@@ -1131,6 +1144,9 @@
   },
   "IjNYll": {
     "defaultMessage": "Let me think about it"
+  },
+  "IpMWC4": {
+    "defaultMessage": "You’ve posted several times in a short period. Please take a break."
   },
   "Is5PqP": {
     "defaultMessage": "Interledger Protocol"
@@ -1984,6 +2000,9 @@
   "YlPCRU": {
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+  },
+  "YoiwCD": {
+    "defaultMessage": "Say something..."
   },
   "Z+nZlT": {
     "defaultMessage": "Content Feed"

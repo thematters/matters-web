@@ -1,17 +1,26 @@
 import { DataProxy } from 'apollo-cache'
 
-import { UserCollectionsQuery, UserWritingsPublicQuery } from '~/gql/graphql'
+import {
+  MomentDigestMomentPrivateFragment,
+  MomentDigestMomentPublicFragment,
+  MomentState,
+  UserCollectionsQuery,
+  UserWritingsPublicQuery,
+} from '~/gql/graphql'
 
 export const updateUserWritings = ({
   cache,
   targetId,
   userName,
   type,
+  momentDigest,
 }: {
   cache: DataProxy
   targetId?: string
   userName: string
-  type: 'pin' | 'unpin' | 'archive'
+  momentDigest?: MomentDigestMomentPublicFragment &
+    MomentDigestMomentPrivateFragment
+  type: 'pin' | 'unpin' | 'archive' | 'addMoment'
 }) => {
   // FIXME: circular dependencies
   const { USER_WRITINGS_PUBLIC } = require('~/views/User/Writings/gql')
@@ -24,7 +33,7 @@ export const updateUserWritings = ({
       variables: { userName },
     })
   } catch (e) {
-    //
+    console.error(e)
   }
 
   let collectionsData: UserCollectionsQuery | null = null
@@ -34,7 +43,7 @@ export const updateUserWritings = ({
       variables: { userName },
     })
   } catch (e) {
-    //
+    console.error(e)
   }
 
   let writingEdges = writingsData?.user?.writings?.edges || []
@@ -67,6 +76,26 @@ export const updateUserWritings = ({
       // remove pinned article if it's archived
       pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
       break
+    case 'addMoment':
+      if (!momentDigest) {
+        return
+      }
+      console.log({ momentDigest, writingEdges })
+      writingEdges = [
+        {
+          cursor: momentDigest.id,
+          node: {
+            ...momentDigest,
+            momentState: MomentState.Active,
+            liked: false,
+            __typename: 'Moment',
+          },
+          __typename: 'WritingEdge',
+        },
+        ...writingEdges,
+      ]
+      console.log({ writingEdges })
+      break
   }
 
   if (writingsData) {
@@ -80,6 +109,7 @@ export const updateUserWritings = ({
           writings: {
             ...writingsData?.user?.writings,
             edges: {
+              ...writingsData?.user?.writings.edges,
               ...writingEdges,
             },
           },

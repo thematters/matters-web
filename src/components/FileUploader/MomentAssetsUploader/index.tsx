@@ -20,6 +20,7 @@ export type MomentAsset = {
   file: File
   uploaded: boolean
   path: string
+  assetId?: string
 }
 
 type MomentAssetsUploaderProps = {
@@ -49,6 +50,10 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
   const intl = useIntl()
 
   const [assets, setAssets] = useState<MomentAsset[]>(_assets)
+
+  useEffect(() => {
+    setAssets(_assets)
+  }, [_assets])
 
   useEffect(() => {
     updateAssets(assets)
@@ -81,10 +86,12 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
   )
 
   const onUploaded = useCallback(
-    (asset: MomentAsset, path: string) => {
+    (asset: MomentAsset, assetId: string, path: string) => {
       setAssets(
         assets.map((a) =>
-          a.id === asset.id ? { ...a, uploaded: true, path } : a
+          a.id === asset.id
+            ? { ...a, assetId: assetId, uploaded: true, path }
+            : a
         )
       )
     },

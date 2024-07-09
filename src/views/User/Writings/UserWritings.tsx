@@ -12,7 +12,9 @@ import {
   InfiniteScroll,
   Layout,
   List,
+  Media,
   MomentDigest,
+  MomentForm,
   QueryError,
   Translate,
   usePublicQuery,
@@ -24,6 +26,7 @@ import { UserWritingsPublicQuery } from '~/gql/graphql'
 import { USER_WRITINGS_PRIVATE, USER_WRITINGS_PUBLIC } from './gql'
 import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
+import styles from './styles.module.css'
 
 const UserWritings = () => {
   const viewer = useContext(ViewerContext)
@@ -179,6 +182,14 @@ const UserWritings = () => {
       <CustomHead />
 
       <PinBoard user={user} />
+
+      {isViewer && (
+        <Media greaterThan="sm">
+          <section className={styles.momentForm}>
+            <MomentForm />
+          </section>
+        </Media>
+      )}
 
       <Layout.Main.Spacing hasVertical={false}>
         <InfiniteScroll
