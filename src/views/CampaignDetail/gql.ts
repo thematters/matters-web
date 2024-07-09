@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import ArticleFeeds from './ArticleFeeds'
 import Description from './Description'
 import InfoHeader from './InfoHeader'
 import SideParticipants from './SideParticipants'
@@ -15,6 +16,7 @@ export const CAMPAIGN_DETAIL = gql`
         ...DescriptionCampaign
         ...SideParticipantsCampaignPublic
         ...SideParticipantsCampaignPrivate
+        ...ArticleFeedsCampaign
       }
     }
   }
@@ -23,4 +25,5 @@ export const CAMPAIGN_DETAIL = gql`
   ${Description.fragments}
   ${SideParticipants.fragments.public}
   ${SideParticipants.fragments.private}
+  ${ArticleFeeds.fragments}
 `

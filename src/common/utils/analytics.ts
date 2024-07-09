@@ -299,6 +299,7 @@ type ArticleFeedType =
   | 'article_detail_author_sidebar_collection'
   | 'article_detail_author_sidebar_author'
   | 'article_detail_author_sidebar_recommendation'
+  | 'campaign_detail'
 
 type CollectionFeedType =
   | 'user_collection'

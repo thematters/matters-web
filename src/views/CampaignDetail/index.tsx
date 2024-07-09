@@ -12,7 +12,7 @@ import {
 import { QueryError } from '~/components/GQL'
 import { CampaignDetailQuery } from '~/gql/graphql'
 
-// import ArticleFeeds from './ArticleFeeds'
+import ArticleFeeds from './ArticleFeeds'
 import Description from './Description'
 import { CAMPAIGN_DETAIL } from './gql'
 import InfoHeader from './InfoHeader'
@@ -72,7 +72,7 @@ const CampaignDetail = () => {
 
       {isInApplicationPeriod && <Description campaign={campaign} />}
 
-      {/* {!isInApplicationPeriod && <ArticleFeeds campaign={campaign} />} */}
+      {!isInApplicationPeriod && <ArticleFeeds campaign={campaign} />}
     </Layout.Main>
   )
 }

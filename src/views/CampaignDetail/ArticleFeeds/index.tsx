@@ -1,69 +1,51 @@
+import gql from 'graphql-tag'
 import React, { useState } from 'react'
 
-// import { analytics } from '~/common/utils'
-import {
-  ArticleDigestFeed,
-  InfiniteScroll,
-  Layout,
-  List,
-  SquareTabs,
-} from '~/components'
-import { MOCK_CAMPAIGN } from '~/stories/mocks'
+import { Layout, useRoute } from '~/components'
+import { ArticleFeedsTabsCampaignFragment } from '~/gql/graphql'
 
+import MainFeed from './MainFeed'
 import styles from './styles.module.css'
+import ArticleFeedsTabs, { CampaignFeedType, LATEST_FEED_TYPE } from './Tabs'
 
-const ArticleFeeds = ({ campaign }: { campaign: typeof MOCK_CAMPAIGN }) => {
-  const [feedType, setFeedType] = useState<string>(campaign.stages[0].name)
+const ArticleFeeds = ({
+  campaign,
+}: {
+  campaign: ArticleFeedsTabsCampaignFragment
+}) => {
+  const { getQuery, setQuery } = useRoute()
+  const qsType = getQuery('type') as CampaignFeedType
+
+  const [feedType, setFeedType] = useState<CampaignFeedType>(
+    qsType || LATEST_FEED_TYPE
+  )
+
+  const changeFeed = (newType: CampaignFeedType) => {
+    setQuery('type', newType === LATEST_FEED_TYPE ? '' : newType)
+    setFeedType(newType)
+  }
 
   return (
     <section className={styles.feeds}>
-      <section className={styles.tabs}>
-        <SquareTabs sticky>
-          {campaign.stages.map((stage, i) => (
-            <SquareTabs.Tab
-              selected={stage.name === feedType}
-              onClick={() => setFeedType(stage.name)}
-              key={stage.name}
-            >
-              {stage.name}
-            </SquareTabs.Tab>
-          ))}
-        </SquareTabs>
-      </section>
+      <ArticleFeedsTabs
+        feedType={feedType}
+        setFeedType={changeFeed}
+        campaign={campaign}
+      />
 
       <Layout.Main.Spacing hasVertical={false}>
-        <InfiniteScroll hasNextPage={false} loadMore={async () => {}} eof>
-          <List>
-            {(campaign.articles.edges || []).map(({ node }, i) => (
-              <React.Fragment key={`${feedType}:${i}`}>
-                <List.Item>
-                  <ArticleDigestFeed
-                    article={node}
-                    // onClick={() => {}
-                    // analytics.trackEvent('click_feed', {
-                    //   type: trackingType,
-                    //   contentType: 'article',
-                    //   location: i,
-                    //   id: node.id,
-                    // })
-                    // }
-                    // onClickAuthor={() => {
-                    // analytics.trackEvent('click_feed', {
-                    //   type: trackingType,
-                    //   contentType: 'user',
-                    //   location: i,
-                    //   id: node.author.id,
-                    // })
-                    // }}
-                  />
-                </List.Item>
-              </React.Fragment>
-            ))}
-          </List>
-        </InfiniteScroll>
+        <MainFeed feedType={feedType} />
       </Layout.Main.Spacing>
     </section>
   )
 }
+
+ArticleFeeds.fragments = gql`
+  fragment ArticleFeedsCampaign on WritingChallenge {
+    id
+    ...ArticleFeedsTabsCampaign
+  }
+  ${ArticleFeedsTabs.fragments}
+`
 
 export default ArticleFeeds
