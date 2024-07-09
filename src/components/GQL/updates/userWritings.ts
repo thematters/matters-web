@@ -1,8 +1,8 @@
 import { DataProxy } from 'apollo-cache'
 
-import { UserArticlesPublicQuery, UserCollectionsQuery } from '~/gql/graphql'
+import { UserCollectionsQuery, UserWritingsPublicQuery } from '~/gql/graphql'
 
-export const updateUserArticles = ({
+export const updateUserWritings = ({
   cache,
   targetId,
   userName,
@@ -14,13 +14,13 @@ export const updateUserArticles = ({
   type: 'pin' | 'unpin' | 'archive'
 }) => {
   // FIXME: circular dependencies
-  const { USER_ARTICLES_PUBLIC } = require('~/views/User/Articles/gql')
+  const { USER_WRITINGS_PUBLIC } = require('~/views/User/Writings/gql')
   const { USER_COLLECTIONS } = require('~/views/User/Collections/gql')
 
-  let articlesData: UserArticlesPublicQuery | null = null
+  let writingsData: UserWritingsPublicQuery | null = null
   try {
-    articlesData = cache.readQuery<UserArticlesPublicQuery>({
-      query: USER_ARTICLES_PUBLIC,
+    writingsData = cache.readQuery<UserWritingsPublicQuery>({
+      query: USER_WRITINGS_PUBLIC,
       variables: { userName },
     })
   } catch (e) {
@@ -37,17 +37,27 @@ export const updateUserArticles = ({
     //
   }
 
-  const articleEdges = articlesData?.user?.articles?.edges || []
+  let writingEdges = writingsData?.user?.writings?.edges || []
   const collectionEdges = collectionsData?.user?.collections?.edges || []
-  const articles = articleEdges.map((e) => e.node)
+  const writings = writingEdges.map((e) => e.node)
+  const articles = writings.filter((a) => a.__typename === 'Article')
   const collecetions = collectionEdges.map((e) => e.node)
 
-  const target = (articles.find((a) => a.id === targetId) ||
-    collecetions.find((a) => a.id === targetId))!
-  let pinnedWorks = articlesData?.user?.pinnedWorks || []
+  let pinnedWorks = writingsData?.user?.pinnedWorks || []
 
   switch (type) {
     case 'pin':
+      if (!targetId) {
+        return
+      }
+      const target = (articles.find((a) => a.id === targetId) ||
+        collecetions.find((a) => a.id === targetId))!
+      if (
+        target.__typename !== 'Article' &&
+        target.__typename !== 'Collection'
+      ) {
+        return
+      }
       pinnedWorks = [...pinnedWorks, target]
       break
     case 'unpin':
@@ -56,18 +66,23 @@ export const updateUserArticles = ({
     case 'archive':
       // remove pinned article if it's archived
       pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
-
       break
   }
 
-  if (articlesData) {
+  if (writingsData) {
     cache.writeQuery({
-      query: USER_ARTICLES_PUBLIC,
+      query: USER_WRITINGS_PUBLIC,
       variables: { userName },
       data: {
-        ...articlesData,
+        ...writingsData,
         user: {
-          ...articlesData?.user,
+          ...writingsData?.user,
+          writings: {
+            ...writingsData?.user?.writings,
+            edges: {
+              ...writingEdges,
+            },
+          },
           pinnedWorks,
         },
       },

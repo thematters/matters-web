@@ -6,8 +6,8 @@ import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 import { Dialog, useMutation, useRoute, ViewerContext } from '~/components'
 import { PublishArticleMutation, UserArticlesSort } from '~/gql/graphql'
 import { ME_WORKS_PUBLISHED_FEED } from '~/views/Me/Works/Published/gql'
-import { VIEWER_ARTICLES } from '~/views/User/Articles/gql'
 import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
+import { VIEWER_WRITINGS } from '~/views/User/Writings/gql'
 
 import styles from './styles.module.css'
 
@@ -38,7 +38,7 @@ const ConfirmPublishDialogContent: React.FC<
         variables: { userName: viewer.userName },
       },
       {
-        query: VIEWER_ARTICLES,
+        query: VIEWER_WRITINGS,
         variables: { userName: viewer.userName },
       },
       {

@@ -12,7 +12,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { updateUserArticles, updateUserCollections } from '~/components/GQL'
+import { updateUserCollections, updateUserWritings } from '~/components/GQL'
 import {
   DeleteCollectionCollectionFragment,
   DeleteCollectionMutation,
@@ -68,7 +68,7 @@ const DeleteCollectionDialog = ({
     useMutation<DeleteCollectionMutation>(DELETE_COLLECTION, {
       variables: { id: collection.id },
       update: (cache) => {
-        updateUserArticles({
+        updateUserWritings({
           cache,
           targetId: collection.id,
           userName: collection.author.userName!,

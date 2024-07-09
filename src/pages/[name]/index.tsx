@@ -1,12 +1,12 @@
 import { EmptyLayout, Throw404, useRoute } from '~/components'
 import CircleWorks from '~/views/Circle/Works'
-import UserArticles from '~/views/User/Articles'
+import UserWritings from '~/views/User/Writings'
 
 const NameIndex = () => {
   const { isPathStartWith } = useRoute()
 
   if (isPathStartWith('/@', true)) {
-    return <UserArticles />
+    return <UserWritings />
   } else if (isPathStartWith('/~', true)) {
     return <CircleWorks />
   }
