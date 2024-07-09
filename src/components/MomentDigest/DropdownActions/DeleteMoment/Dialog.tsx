@@ -6,7 +6,10 @@ import { DeleteMomentMutation } from '~/gql/graphql'
 
 const DELETE_MOMENT = gql`
   mutation DeleteMoment($id: ID!) {
-    deleteMoment(input: { id: $id })
+    deleteMoment(input: { id: $id }) {
+      id
+      momentState: state
+    }
   }
 `
 
@@ -23,6 +26,7 @@ const DeleteMomentDialog = ({
 
   const [deleteMoment] = useMutation<DeleteMomentMutation>(DELETE_MOMENT, {
     variables: { id: momentId },
+    // TODO: update writings count
   })
 
   const onDelete = async () => {

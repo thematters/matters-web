@@ -18,6 +18,7 @@ import {
 
 import Assets from './Assets'
 import FooterActions from './FooterActions'
+import { fragments } from './gql'
 import styles from './styles.module.css'
 
 export type MomentDigestProps = {
@@ -112,3 +113,5 @@ export const MomentDigest = ({
     </section>
   )
 }
+
+MomentDigest.fragments = fragments

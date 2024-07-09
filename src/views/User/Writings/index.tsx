@@ -2,13 +2,13 @@ import { Layout } from '~/components'
 
 import UserProfile from '../UserProfile'
 import AsideUserProfile from '../UserProfile/AsideUserProfile'
-import BaseUserArticles from './UserArticles'
+import BaseUserWriting from './UserWritings'
 
-const UserArticles = () => (
+const UserWritings = () => (
   <Layout.Main aside={<AsideUserProfile />}>
     <UserProfile />
-    <BaseUserArticles />
+    <BaseUserWriting />
   </Layout.Main>
 )
 
-export default UserArticles
+export default UserWritings
