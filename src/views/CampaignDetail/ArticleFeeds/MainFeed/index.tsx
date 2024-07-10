@@ -15,7 +15,7 @@ import {
 } from '~/components'
 import { CampaignArticlesPublicQuery } from '~/gql/graphql'
 
-import { CampaignFeedType } from '../Tabs'
+import { CampaignFeedType, LATEST_FEED_TYPE } from '../Tabs'
 import { CAMPAIGN_ARTICLES_PRIVATE, CAMPAIGN_ARTICLES_PUBLIC } from './gql'
 
 interface MainFeedProps {
@@ -31,7 +31,9 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
     usePublicQuery<CampaignArticlesPublicQuery>(CAMPAIGN_ARTICLES_PUBLIC, {
       variables: {
         shortHash,
-        filter: { stage: feedType },
+        ...(feedType !== LATEST_FEED_TYPE
+          ? { filter: { stage: feedType } }
+          : {}),
       },
       notifyOnNetworkStatusChange: true,
     })

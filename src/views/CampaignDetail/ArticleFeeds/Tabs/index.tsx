@@ -42,9 +42,9 @@ const ArticleFeedsTabs = ({
         {stages.map((stage) =>
           shouldShowTab(stage.period?.start) ? (
             <SquareTabs.Tab
-              selected={stage.name === feedType}
-              onClick={() => setFeedType(stage.name)}
-              key={stage.name}
+              selected={stage.id === feedType}
+              onClick={() => setFeedType(stage.id)}
+              key={stage.id}
             >
               {stage.name}
             </SquareTabs.Tab>
