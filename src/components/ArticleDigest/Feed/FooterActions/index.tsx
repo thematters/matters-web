@@ -18,6 +18,7 @@ export type FooterActionsProps = {
   hasDonationCount?: boolean
   hasCircle?: boolean
   tag?: React.ReactNode
+  includesMetaData?: boolean
 } & FooterActionsControls
 
 const FooterActions = ({
@@ -26,6 +27,7 @@ const FooterActions = ({
   hasDonationCount,
   hasCircle,
   tag,
+  includesMetaData = true,
   ...controls
 }: FooterActionsProps) => {
   const {
@@ -36,29 +38,33 @@ const FooterActions = ({
   return (
     <footer className={styles.footer}>
       <section className={styles.left}>
-        {hasReadTime && <ReadTime article={article} />}
+        {includesMetaData && (
+          <>
+            {hasReadTime && <ReadTime article={article} />}
 
-        {hasDonationCount && <DonationCount article={article} />}
+            {hasDonationCount && <DonationCount article={article} />}
 
-        {tag}
+            {tag}
 
-        {hasCircle && circle && (
-          <TextIcon
-            icon={
-              article.access.type === 'paywall' ? (
-                <Icon icon={IconPaywall} color="grey" size={14} />
-              ) : null
-            }
-            placement="left"
-            spacing={4}
-          >
-            <CircleDigest.Title
-              circle={circle}
-              is="span"
-              textSize={12}
-              textWeight="normal"
-            />
-          </TextIcon>
+            {hasCircle && circle && (
+              <TextIcon
+                icon={
+                  article.access.type === 'paywall' ? (
+                    <Icon icon={IconPaywall} color="grey" size={14} />
+                  ) : null
+                }
+                placement="left"
+                spacing={4}
+              >
+                <CircleDigest.Title
+                  circle={circle}
+                  is="span"
+                  textSize={12}
+                  textWeight="normal"
+                />
+              </TextIcon>
+            )}
+          </>
         )}
       </section>
 
