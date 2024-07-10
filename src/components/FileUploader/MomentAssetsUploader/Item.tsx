@@ -25,7 +25,12 @@ import styles from './styles.module.css'
 type ItemProps = {
   asset: MomentAsset
   removeAsset: (asset: MomentAsset) => void
-  onUploaded: (asset: MomentAsset, path: string) => void
+  onUploaded: (asset: MomentAsset, assetId: string, path: string) => void
+}
+
+type UploadedAsset = {
+  assetId: string
+  path: string
 }
 
 export const Item = memo(function Item({
@@ -37,7 +42,8 @@ export const Item = memo(function Item({
   const [hoverAction, setHoverAction] = useState(false)
   const [error, setError] = useState<any>(undefined)
   const [deleted, setDeleted] = useState(false)
-  const [uploadedPath, setUploadedPath] = useState<string | undefined>(
+
+  const [uploadedAsset, setUploadedAsset] = useState<UploadedAsset | undefined>(
     undefined
   )
 
@@ -56,14 +62,14 @@ export const Item = memo(function Item({
   const { upload: uploadImage, uploading } = useDirectImageUpload()
 
   useEffect(() => {
-    if (deleted || !uploadedPath) {
+    if (deleted || !uploadedAsset) {
       return
     }
 
-    if (uploadedPath) {
-      onUploaded(asset, uploadedPath)
+    if (uploadedAsset) {
+      onUploaded(asset, uploadedAsset.assetId, uploadedAsset.path)
     }
-  }, [deleted, uploadedPath])
+  }, [deleted, uploadedAsset])
 
   useEffect(() => {
     const uploadAsset = async () => {
@@ -107,7 +113,7 @@ export const Item = memo(function Item({
             },
           }).catch(console.error)
 
-          setUploadedPath(path)
+          setUploadedAsset({ assetId, path })
         } else {
           throw new Error()
         }

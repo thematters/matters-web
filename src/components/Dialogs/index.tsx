@@ -24,6 +24,9 @@ export * from './SubmitReportDialog'
 export * from './SupportersDialog'
 export * from './TagListDialog'
 
+// Moment
+export * from './ClearMomentDialog'
+
 // Collection
 export * from './AddArticlesCollectionDialog'
 export * from './AddCollectionDialog'

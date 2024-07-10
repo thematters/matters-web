@@ -890,6 +890,10 @@
   "E048/V": {
     "defaultMessage": "存至草稿"
   },
+  "E3uFyt": {
+    "defaultMessage": "动态",
+    "description": "src/components/Forms/MomentForm/index.tsx"
+  },
   "E7vGxB": {
     "defaultMessage": "余额加载中⋯"
   },
@@ -1131,6 +1135,9 @@
   },
   "IjNYll": {
     "defaultMessage": "等等再说"
+  },
+  "IpMWC4": {
+    "defaultMessage": "短时间内已发布多条动态，请先休息一会吧～"
   },
   "Is5PqP": {
     "defaultMessage": "跨账本协议"
@@ -1985,6 +1992,9 @@
     "defaultMessage": "关联了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
+  "YoiwCD": {
+    "defaultMessage": "说点什么..."
+  },
   "Z+nZlT": {
     "defaultMessage": "内容订阅"
   },
@@ -2253,6 +2263,9 @@
   },
   "eTpiYa": {
     "defaultMessage": "尚无支持数据"
+  },
+  "eWXgsZ": {
+    "defaultMessage": "清空内容"
   },
   "eXDZGQ": {
     "defaultMessage": "主理人"
@@ -2899,6 +2912,9 @@
   },
   "sDQSFv": {
     "defaultMessage": "只看文章"
+  },
+  "sFJ/Is": {
+    "defaultMessage": "确认清空当前编辑的内容吗？"
   },
   "sPgUkN": {
     "defaultMessage": "本月营收",

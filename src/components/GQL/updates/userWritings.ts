@@ -1,17 +1,26 @@
 import { DataProxy } from 'apollo-cache'
 
-import { UserCollectionsQuery, UserWritingsPublicQuery } from '~/gql/graphql'
+import {
+  MomentDigestMomentPrivateFragment,
+  MomentDigestMomentPublicFragment,
+  MomentState,
+  UserCollectionsQuery,
+  UserWritingsPublicQuery,
+} from '~/gql/graphql'
 
 export const updateUserWritings = ({
   cache,
   targetId,
   userName,
   type,
+  momentDigest,
 }: {
   cache: DataProxy
   targetId?: string
   userName: string
-  type: 'pin' | 'unpin' | 'archive'
+  momentDigest?: MomentDigestMomentPublicFragment &
+    MomentDigestMomentPrivateFragment
+  type: 'pin' | 'unpin' | 'archive' | 'addMoment'
 }) => {
   // FIXME: circular dependencies
   const { USER_WRITINGS_PUBLIC } = require('~/views/User/Writings/gql')
@@ -67,6 +76,24 @@ export const updateUserWritings = ({
       // remove pinned article if it's archived
       pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
       break
+    case 'addMoment':
+      if (!momentDigest) {
+        return
+      }
+      writingEdges = [
+        {
+          cursor: momentDigest.id,
+          node: {
+            ...momentDigest,
+            momentState: MomentState.Active,
+            liked: false,
+            __typename: 'Moment',
+          },
+          __typename: 'WritingEdge',
+        },
+        ...writingEdges,
+      ]
+      break
   }
 
   if (writingsData) {
@@ -79,9 +106,7 @@ export const updateUserWritings = ({
           ...writingsData?.user,
           writings: {
             ...writingsData?.user?.writings,
-            edges: {
-              ...writingEdges,
-            },
+            edges: [...writingEdges],
           },
           pinnedWorks,
         },

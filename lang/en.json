@@ -890,6 +890,10 @@
   "E048/V": {
     "defaultMessage": "Save as Draft"
   },
+  "E3uFyt": {
+    "defaultMessage": "Moment",
+    "description": "src/components/Forms/MomentForm/index.tsx"
+  },
   "E7vGxB": {
     "defaultMessage": "Balance loading..."
   },
@@ -1131,6 +1135,9 @@
   },
   "IjNYll": {
     "defaultMessage": "Let me think about it"
+  },
+  "IpMWC4": {
+    "defaultMessage": "You’ve posted several times in a short period. Please take a break."
   },
   "Is5PqP": {
     "defaultMessage": "Interledger Protocol"
@@ -1985,6 +1992,9 @@
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
+  "YoiwCD": {
+    "defaultMessage": "Say something..."
+  },
   "Z+nZlT": {
     "defaultMessage": "Content Feed"
   },
@@ -2253,6 +2263,9 @@
   },
   "eTpiYa": {
     "defaultMessage": "No data yet."
+  },
+  "eWXgsZ": {
+    "defaultMessage": "Clear Content"
   },
   "eXDZGQ": {
     "defaultMessage": "Maintainer"
@@ -2899,6 +2912,9 @@
   },
   "sDQSFv": {
     "defaultMessage": "Articles Only"
+  },
+  "sFJ/Is": {
+    "defaultMessage": "Are you sure you want to clear the current content?"
   },
   "sPgUkN": {
     "defaultMessage": "This Month",

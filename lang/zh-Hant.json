@@ -890,6 +890,10 @@
   "E048/V": {
     "defaultMessage": "存至草稿"
   },
+  "E3uFyt": {
+    "defaultMessage": "動態",
+    "description": "src/components/Forms/MomentForm/index.tsx"
+  },
   "E7vGxB": {
     "defaultMessage": "餘額加載中⋯"
   },
@@ -1131,6 +1135,9 @@
   },
   "IjNYll": {
     "defaultMessage": "等等再說"
+  },
+  "IpMWC4": {
+    "defaultMessage": "短時間內已發布多條動態，請先休息一會吧～"
   },
   "Is5PqP": {
     "defaultMessage": "跨賬本協議"
@@ -1985,6 +1992,9 @@
     "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
+  "YoiwCD": {
+    "defaultMessage": "說點什麼..."
+  },
   "Z+nZlT": {
     "defaultMessage": "内容訂閱"
   },
@@ -2253,6 +2263,9 @@
   },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
+  },
+  "eWXgsZ": {
+    "defaultMessage": "清空内容"
   },
   "eXDZGQ": {
     "defaultMessage": "主理人"
@@ -2899,6 +2912,9 @@
   },
   "sDQSFv": {
     "defaultMessage": "只看文章"
+  },
+  "sFJ/Is": {
+    "defaultMessage": "確認清空當前編輯的内容嗎？"
   },
   "sPgUkN": {
     "defaultMessage": "本月營收",
