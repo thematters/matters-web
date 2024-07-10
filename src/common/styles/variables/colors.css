@@ -32,6 +32,8 @@
   --color-insufficient-red: #ffe8e8;
   --color-red-lighter: #fae7e3; /* FIXME: undocumented */
   --color-analytics-red: #c25050; /* FIXME: undocumented */
+  --color-free-write-blue-bg: #f0f9fe;
+  --color-free-write-blue: #1999d0;
 
   /* others */
   --color-noir: #000;

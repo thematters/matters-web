@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestDropdown, CircleDigest } from '~/components'
 import { fragments as EditorFragments } from '~/components/Editor/fragments'
+import SelectCampaign from '~/components/Editor/SelectCampaign'
 import assetFragment from '~/components/GQL/fragments/asset'
 
 import PublishState from './PublishState'
@@ -31,6 +32,14 @@ export const editMetaFragment = gql`
         ...DigestRichCirclePublic
       }
     }
+    campaigns {
+      campaign {
+        id
+      }
+      stage {
+        id
+      }
+    }
     license
     requestForDonation
     replyToDonator
@@ -46,10 +55,17 @@ export const editMetaFragment = gql`
 /**
  * Fetch draft detail or assets only
  */
-export const DRAFT_DETAIL_CIRCLES = gql`
-  query DraftDetailCirclesQuery {
+export const DRAFT_DETAIL_VIEWER = gql`
+  query DraftDetailViewerQuery {
     viewer {
       id
+      campaigns(input: { first: 1 }) {
+        edges {
+          node {
+            ...EditorSelectCampaign
+          }
+        }
+      }
       ownCircles {
         ...DigestRichCirclePublic
       }
@@ -58,6 +74,7 @@ export const DRAFT_DETAIL_CIRCLES = gql`
     }
   }
   ${CircleDigest.Rich.fragments.circle.public}
+  ${SelectCampaign.fragments}
 `
 
 export const DRAFT_DETAIL = gql`
@@ -229,4 +246,36 @@ export const SET_ACCESS = gql`
     }
   }
   ${CircleDigest.Rich.fragments.circle.public}
+`
+
+export const SET_CAMPAIGN = gql`
+  mutation SetDraftCampaign($id: ID!, $campaigns: [ArticleCampaignInput!]) {
+    putDraft(input: { id: $id, campaigns: $campaigns }) {
+      id
+      campaigns {
+        campaign {
+          id
+        }
+        stage {
+          id
+        }
+      }
+    }
+  }
+`
+
+export const RESET_CAMPAIGN = gql`
+  mutation ResetDraftCampaign($id: ID!) {
+    putDraft(input: { id: $id, campaigns: null }) {
+      id
+      campaigns {
+        campaign {
+          id
+        }
+        stage {
+          id
+        }
+      }
+    }
+  }
 `

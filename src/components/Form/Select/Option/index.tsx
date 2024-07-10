@@ -16,6 +16,7 @@ type OptionProps = {
   expanded?: boolean
 
   size?: 14 | 16
+  color?: 'freeWriteBlue'
 
   role?: 'button' | 'option'
 
@@ -34,6 +35,7 @@ const Option: React.FC<OptionProps> = forwardRef(
       expanded,
 
       size = 16,
+      color,
 
       role = 'option',
 
@@ -43,6 +45,10 @@ const Option: React.FC<OptionProps> = forwardRef(
     },
     ref
   ) => {
+    const containerClasses = classNames({
+      [styles.container]: true,
+      [styles[`${color}`]]: !!color,
+    })
     const nameClasses = classNames({
       [styles.name]: true,
       [styles[`text${size}`]]: !!size,
@@ -57,12 +63,12 @@ const Option: React.FC<OptionProps> = forwardRef(
         onClick={onClick}
       >
         <Card
-          bgColor={expanded ? undefined : 'greyLighter'}
+          bgColor={expanded ? undefined : color || 'greyLighter'}
           {...cardProps}
           spacing={cardProps.spacing || [0, 0]}
           ref={ref}
         >
-          <section className={styles.container}>
+          <section className={containerClasses}>
             <section className={styles.left}>
               <h5 className={nameClasses}>{name}</h5>
               {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
@@ -71,7 +77,9 @@ const Option: React.FC<OptionProps> = forwardRef(
 
             {!expanded && (
               <section className={styles.right}>
-                <TextIcon icon={<Icon icon={IconDown} color="grey" />} />
+                <TextIcon
+                  icon={<Icon icon={IconDown} color={color || 'grey'} />}
+                />
               </section>
             )}
           </section>

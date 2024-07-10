@@ -5,10 +5,12 @@ import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettin
 import {
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
+  EditorSelectCampaignFragment,
 } from '~/gql/graphql'
 
 import {
   useEditDraftAccess,
+  useEditDraftCampaign,
   useEditDraftCanComment,
   useEditDraftCollection,
   useEditDraftCover,
@@ -21,6 +23,7 @@ import styles from './styles.module.css'
 
 interface BaseSidebarProps {
   draft: EditMetaDraftFragment
+  campaigns?: EditorSelectCampaignFragment[]
   ownCircles?: DigestRichCirclePublicFragment[]
 }
 
@@ -123,6 +126,28 @@ const EditDraftResponse = ({ draft }: SidebarProps) => {
   )
 }
 
+const EditDraftCampaign = ({ draft, campaigns }: SidebarProps) => {
+  const { edit } = useEditDraftCampaign()
+
+  if (!campaigns || campaigns.length === 0) {
+    return null
+  }
+
+  const appliedCampaign = campaigns[0]
+  const selectedCampaign = draft.campaigns.filter(
+    (c) => c.campaign.id === appliedCampaign?.id
+  )[0]
+  const selectedStage = selectedCampaign?.stage?.id
+
+  return (
+    <Sidebar.Campaign
+      campaign={appliedCampaign}
+      stage={selectedStage}
+      editCampaign={edit}
+    />
+  )
+}
+
 const EditDraftSidebar = (props: BaseSidebarProps) => {
   const isPending = props.draft.publishState === 'pending'
   const isPublished = props.draft.publishState === 'published'
@@ -130,6 +155,7 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
 
   return (
     <section className={styles.sidebar}>
+      <EditDraftCampaign {...props} disabled={disabled} />
       <EditDraftTags {...props} disabled={disabled} />
       <EditDraftCover {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />
