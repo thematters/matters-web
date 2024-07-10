@@ -116,6 +116,7 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
               <ArticleDigestFeed
                 article={article}
                 includesMetaData={false}
+                includesTimeStamp={false}
                 onClick={() =>
                   onClickArticle('article', cardArticleNum + i, article.id)
                 }
