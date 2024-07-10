@@ -22,15 +22,17 @@ const BaseDialog = ({ onConfirm, children }: ClearMomentDialogProps) => {
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={<FormattedMessage defaultMessage="清空内容" id="HEiu24" />}
+          title={
+            <FormattedMessage defaultMessage="Clear Content" id="eWXgsZ" />
+          }
         />
 
         <Dialog.Content>
           <Dialog.Content.Message>
             <p>
               <FormattedMessage
-                defaultMessage="確認清空當前編輯的内容嗎？"
-                id="8Asqdm"
+                defaultMessage="Are you sure you want to clear the current content?"
+                id="sFJ/Is"
               />
             </p>
           </Dialog.Content.Message>

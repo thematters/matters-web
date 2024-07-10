@@ -583,9 +583,6 @@
     "defaultMessage": "取消代表作",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
-  "8Asqdm": {
-    "defaultMessage": "確認清空當前編輯的内容嗎？"
-  },
   "8KFsZN": {
     "defaultMessage": "閱讀次數"
   },
@@ -1057,9 +1054,6 @@
   },
   "HBxXD/": {
     "defaultMessage": "版權聲明"
-  },
-  "HEiu24": {
-    "defaultMessage": "清空内容"
   },
   "HFVDeB": {
     "defaultMessage": "相關標籤",
@@ -2270,6 +2264,9 @@
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
   },
+  "eWXgsZ": {
+    "defaultMessage": "清空内容"
+  },
   "eXDZGQ": {
     "defaultMessage": "主理人"
   },
@@ -2915,6 +2912,9 @@
   },
   "sDQSFv": {
     "defaultMessage": "只看文章"
+  },
+  "sFJ/Is": {
+    "defaultMessage": "確認清空當前編輯的内容嗎？"
   },
   "sPgUkN": {
     "defaultMessage": "本月營收",
