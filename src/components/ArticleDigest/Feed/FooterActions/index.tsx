@@ -37,34 +37,36 @@ const FooterActions = ({
 
   return (
     <footer className={styles.footer}>
-      {includesMetaData && (
-        <section className={styles.left}>
-          {hasReadTime && <ReadTime article={article} />}
+      <section className={styles.left}>
+        {includesMetaData && (
+          <>
+            {hasReadTime && <ReadTime article={article} />}
 
-          {hasDonationCount && <DonationCount article={article} />}
+            {hasDonationCount && <DonationCount article={article} />}
 
-          {tag}
+            {tag}
 
-          {hasCircle && circle && (
-            <TextIcon
-              icon={
-                article.access.type === 'paywall' ? (
-                  <Icon icon={IconPaywall} color="grey" size={14} />
-                ) : null
-              }
-              placement="left"
-              spacing={4}
-            >
-              <CircleDigest.Title
-                circle={circle}
-                is="span"
-                textSize={12}
-                textWeight="normal"
-              />
-            </TextIcon>
-          )}
-        </section>
-      )}
+            {hasCircle && circle && (
+              <TextIcon
+                icon={
+                  article.access.type === 'paywall' ? (
+                    <Icon icon={IconPaywall} color="grey" size={14} />
+                  ) : null
+                }
+                placement="left"
+                spacing={4}
+              >
+                <CircleDigest.Title
+                  circle={circle}
+                  is="span"
+                  textSize={12}
+                  textWeight="normal"
+                />
+              </TextIcon>
+            )}
+          </>
+        )}
+      </section>
 
       <section className={styles.right}>
         {viewer.isAuthed && (
