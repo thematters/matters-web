@@ -1,9 +1,11 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { Editor, EditorContent, useMomentEditor } from '@matters/matters-editor'
+import classNames from 'classnames'
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { makeMentionSuggestion } from '../Article/extensions'
+import commonStyles from '../styles.module.css'
 import styles from './styles.module.css'
 
 interface Props {
@@ -42,9 +44,11 @@ const MomentEditor: React.FC<Props> = ({
     setEditor?.(editor)
   }, [editor])
 
+  const editorClaaes = classNames(commonStyles.editor, styles.momentEditor)
+
   return (
     <div
-      className={styles.momentEditor}
+      className={editorClaaes}
       id="editor" // anchor for mention plugin
     >
       <EditorContent editor={editor} />

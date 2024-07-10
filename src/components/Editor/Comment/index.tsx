@@ -11,7 +11,7 @@ import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
 import { useCommentEditorContext } from '~/components/Context'
 
 import { makeMentionSuggestion } from '../Article/extensions'
-import styles from './styles.module.css'
+import styles from '../styles.module.css'
 
 interface Props {
   content: string
@@ -65,7 +65,7 @@ const CommentEditor: React.FC<Props> = ({
 
   return (
     <div
-      className={styles.commentEditor}
+      className={styles.editor}
       id="editor" // anchor for mention plugin
     >
       <EditorContent

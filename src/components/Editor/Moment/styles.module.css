@@ -1,44 +1,4 @@
 .momentEditor :global(.ProseMirror),
 .momentEditor :global(.tiptap) {
-  min-height: 4.125rem;
   padding-top: var(--sp12);
-
-  & > *:first-child {
-    margin: 0;
-  }
-
-  & > * + * {
-    margin: var(--sp8) 0;
-  }
-
-  & p {
-    padding: 0;
-    font-size: var(--text15);
-    line-height: 1.75;
-  }
-
-  /* outline */
-  &:focus {
-    outline: none;
-  }
-
-  /* placeholder */
-  & :global(p.is-editor-empty:first-child::before) {
-    float: left;
-    height: 0;
-    color: var(--color-grey);
-    pointer-events: none;
-    content: attr(data-placeholder);
-  }
-
-  /* disable interactive */
-  & a {
-    pointer-events: none;
-  }
-
-  & :global(.mention) {
-    padding-bottom: 0;
-    color: var(--color-matters-green);
-    border-bottom: 0;
-  }
 }
