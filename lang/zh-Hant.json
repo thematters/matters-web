@@ -906,9 +906,6 @@
   "EBEwaP": {
     "defaultMessage": "請填寫有效郵件地址"
   },
-  "EIoAY7": {
-    "defaultMessage": "說點什麼..."
-  },
   "EQeKnO": {
     "defaultMessage": "邀請管理",
     "description": "src/views/Circle/Settings/index.tsx"
