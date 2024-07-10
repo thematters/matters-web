@@ -179,6 +179,12 @@ const BaseEdit = ({ article }: { article: Article }) => {
     toggleComment: setCanComment,
   }
 
+  // const campaignProps: Partial<SelectCampaignProps> = {
+  //   campaign: article.campaign,
+  //   stage: article.stage,
+  //   editCampaign: () => undefined,
+  // }
+
   const accessProps: ToggleAccessProps = {
     circle,
     accessType,
@@ -397,6 +403,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                 {...collectionProps}
                 {...accessProps}
                 {...setCommentProps}
+                // {...campaignProps}
                 onOpenSupportSetting={openSupportSettingDialog}
               />
             )}

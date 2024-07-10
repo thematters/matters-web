@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { Dialog, useDialogSwitch } from '~/components'
 
+import SelectCampaign, { SelectCampaignProps } from '../../SelectCampaign'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
 import styles from './styles.module.css'
@@ -10,15 +11,28 @@ import styles from './styles.module.css'
 type AccessDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & ToggleAccessProps &
-  ToggleResponseProps
+  ToggleResponseProps &
+  Partial<SelectCampaignProps>
 
 const BaseAccessDialog = ({
   children,
   canComment,
   toggleComment,
+  campaign,
+  stage,
+  editCampaign,
   ...props
 }: AccessDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+
+  const campaignProps =
+    campaign && editCampaign
+      ? {
+          campaign,
+          stage,
+          editCampaign,
+        }
+      : null
 
   const toggleResponseProps: ToggleResponseProps = {
     canComment,
@@ -47,12 +61,19 @@ const BaseAccessDialog = ({
         />
 
         <Dialog.Content noSpacing>
+          {campaignProps && (
+            <section className={styles.campaign}>
+              <h3 className={styles.title}>投稿七日书自由写</h3>
+              <SelectCampaign {...campaignProps} />
+            </section>
+          )}
+
           <section className={styles.response}>
             <ToggleResponse {...toggleResponseProps} />
           </section>
 
           <section className={styles.access}>
-            <ToggleAccess {...props} compact />
+            <ToggleAccess {...props} theme="bottomBar" />
           </section>
         </Dialog.Content>
 

@@ -317,7 +317,7 @@ const BaseDraftDetail = () => {
               {draft && (
                 <SettingsButton
                   draft={draft}
-                  // campaigns={campaigns}
+                  campaigns={campaigns}
                   ownCircles={ownCircles}
                   publishable={!!publishable}
                 />
@@ -348,7 +348,11 @@ const BaseDraftDetail = () => {
       </Layout.Main.Spacing>
 
       <Media lessThan="lg">
-        <BottomBar draft={draft} ownCircles={ownCircles} />
+        <BottomBar
+          draft={draft}
+          ownCircles={ownCircles}
+          campaigns={campaigns}
+        />
       </Media>
     </Layout.Main>
   )

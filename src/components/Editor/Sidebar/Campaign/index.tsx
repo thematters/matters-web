@@ -7,7 +7,11 @@ import styles from './styles.module.css'
 
 const SidebarCampaign: React.FC<SelectCampaignProps> = (props) => {
   return (
-    <Box icon={<Icon icon={IconRead} size={24} />} title="投稿七日書自由寫">
+    <Box
+      icon={<Icon icon={IconRead} size={24} />}
+      title="投稿七日書自由寫"
+      borderColor="freeWriteBlue"
+    >
       <section className={styles.container}>
         <SelectCampaign {...props} />
       </section>

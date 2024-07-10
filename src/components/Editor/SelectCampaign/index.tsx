@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 
+import { datetimeFormat } from '~/common/utils'
 import { Form } from '~/components'
 import { EditorSelectCampaignFragment } from '~/gql/graphql'
 
@@ -31,8 +32,6 @@ const SelectCampaign = ({
   return (
     <Form.Select<string | undefined>
       name="select-campaign"
-      // label={<FormattedMessage defaultMessage="License" id="HBxXD/" />}
-      // title={<FormattedMessage defaultMessage="License" id="HBxXD/" />}
       onChange={(option) =>
         editCampaign(
           option.value
@@ -44,7 +43,9 @@ const SelectCampaign = ({
         RESET_OPTION,
         ...availableStages.map((s) => {
           return {
-            name: s.name,
+            name: s.period?.start
+              ? `${s.name} - ${datetimeFormat.absolute(s.period?.start)}`
+              : s.name,
             value: s.id,
             selected: s.id === stage,
           }

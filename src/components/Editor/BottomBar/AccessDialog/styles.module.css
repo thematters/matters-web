@@ -1,5 +1,11 @@
+.campaign,
 .response {
   padding: var(--sp16);
+}
+
+.title {
+  padding-bottom: var(--sp16);
+  font-size: var(--font-size-base);
 }
 
 .access {

@@ -4,6 +4,7 @@ import { Dialog } from '~/components'
 import { SetPublishISCNProps } from '~/components/Editor'
 
 import ListItem from '../../ListItem'
+import SelectCampaign, { SelectCampaignProps } from '../../SelectCampaign'
 import { Step } from '../../SettingsDialog'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
@@ -31,7 +32,8 @@ export type SettingsListDialogProps = {
 } & SettingsListDialogButtons &
   ToggleResponseProps &
   ToggleAccessProps &
-  SetPublishISCNProps
+  SetPublishISCNProps &
+  Partial<SelectCampaignProps>
 
 const SettingsList = ({
   saving,
@@ -51,12 +53,25 @@ const SettingsList = ({
   collectionCount,
   tagsCount,
 
+  campaign,
+  stage,
+  editCampaign,
+
   canComment,
   toggleComment,
   disableChangeCanComment,
 
   ...restProps
 }: SettingsListDialogProps) => {
+  const campaignProps =
+    campaign && editCampaign
+      ? {
+          campaign,
+          stage,
+          editCampaign,
+        }
+      : null
+
   const responseProps: ToggleResponseProps = {
     canComment,
     toggleComment,
@@ -102,6 +117,27 @@ const SettingsList = ({
             </ListItem>
           )}
 
+          {campaignProps && (
+            <section className={styles.campaign}>
+              <h3 className={styles.title}>投稿七日書自由寫</h3>
+              <SelectCampaign {...campaignProps} />
+            </section>
+          )}
+
+          <ListItem
+            title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
+            subTitle={
+              <FormattedMessage
+                defaultMessage="Recommended square image."
+                id="CxYcYR"
+              />
+            }
+            hint
+            onClick={() => forward('cover')}
+          >
+            <ListItem.CoverIndicator cover={cover} />
+          </ListItem>
+
           <ListItem
             title={<FormattedMessage defaultMessage="Add Tags" id="WNxQX0" />}
             subTitle={
@@ -124,20 +160,6 @@ const SettingsList = ({
           </ListItem>
 
           <ListItem
-            title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
-            subTitle={
-              <FormattedMessage
-                defaultMessage="Recommended square image."
-                id="CxYcYR"
-              />
-            }
-            hint
-            onClick={() => forward('cover')}
-          >
-            <ListItem.CoverIndicator cover={cover} />
-          </ListItem>
-
-          <ListItem
             title={
               <FormattedMessage defaultMessage="Set Collection" id="WFCO2w" />
             }
@@ -150,7 +172,7 @@ const SettingsList = ({
             <ToggleResponse {...responseProps} />
           </section>
 
-          <ToggleAccess {...restProps} />
+          <ToggleAccess {...restProps} theme="settingsDialog" />
         </ul>
       </Dialog.Content>
 

@@ -28,6 +28,7 @@ import {
 } from '~/gql/graphql'
 
 import ArticleCustomStagingArea from '../ArticleCustomStagingArea'
+import { SelectCampaignProps } from '../SelectCampaign'
 import SetCover from '../SetCover'
 import TagCustomStagingArea from '../TagCustomStagingArea'
 import AccessDialog from './AccessDialog'
@@ -40,7 +41,8 @@ export type BottomBarProps = {
   SetCollectionProps &
   SetTagsProps &
   SetResponseProps &
-  ToggleAccessProps
+  ToggleAccessProps &
+  Partial<SelectCampaignProps>
 
 /**
  * Editor toolbar that fixed on bottom to edit cover, tags and collection,
@@ -88,6 +90,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
   canComment,
   toggleComment,
 
+  campaign,
+  stage,
+  editCampaign,
+
   saving,
   disabled,
 }) => {
@@ -107,7 +113,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
     entityType,
     coverSaving,
   }
-  const accessProps: ToggleAccessProps & ToggleResponseProps = {
+  const accessProps: ToggleAccessProps &
+    ToggleResponseProps &
+    Partial<SelectCampaignProps> = {
     circle,
     accessType,
     license,
@@ -132,6 +140,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
     canComment,
     toggleComment,
     disableChangeCanComment: article?.canComment,
+
+    campaign,
+    stage,
+    editCampaign,
   }
 
   return (

@@ -13,10 +13,12 @@ import { EditorSettingsDialog } from '~/components/Editor/SettingsDialog'
 import {
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
+  EditorSelectCampaignFragment,
 } from '~/gql/graphql'
 
 import {
   useEditDraftAccess,
+  useEditDraftCampaign,
   useEditDraftCanComment,
   useEditDraftCollection,
   useEditDraftCover,
@@ -30,6 +32,7 @@ import ConfirmPublishDialogContent from './ConfirmPublishDialogContent'
 interface SettingsButtonProps {
   draft: EditMetaDraftFragment
   ownCircles?: DigestRichCirclePublicFragment[]
+  campaigns?: EditorSelectCampaignFragment[]
   publishable?: boolean
 }
 
@@ -57,6 +60,7 @@ const ConfirmButton = ({
 const SettingsButton = ({
   draft,
   ownCircles,
+  campaigns,
   publishable,
 }: SettingsButtonProps) => {
   const { edit: editCollection, saving: collectionSaving } =
@@ -70,6 +74,7 @@ const SettingsButton = ({
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
     ownCircles && ownCircles[0]
   )
+  const { edit: editCampaign } = useEditDraftCampaign()
 
   const { edit: editSupport, saving: supportSaving } = useEditSupportSetting()
 
@@ -121,6 +126,18 @@ const SettingsButton = ({
     iscnPublishSaving,
   }
 
+  const appliedCampaign = campaigns && campaigns[0]
+  const selectedCampaign = draft.campaigns.filter(
+    (c) => c.campaign.id === appliedCampaign?.id
+  )[0]
+  const selectedStage = selectedCampaign?.stage?.id
+
+  const campaignProps = {
+    campaign: appliedCampaign,
+    stage: selectedStage,
+    editCampaign,
+  }
+
   const responseProps: SetResponseProps = {
     canComment,
     toggleComment,
@@ -148,6 +165,7 @@ const SettingsButton = ({
       {...collectionProps}
       {...accessProps}
       {...responseProps}
+      {...campaignProps}
     >
       {({ openDialog: openEditorSettingsDialog }) => (
         <ConfirmButton

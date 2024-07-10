@@ -1,6 +1,6 @@
 {
   "+12veD": {
-    "defaultMessage": "開啟回應"
+    "defaultMessage": "開啟評論"
   },
   "+3ny7b": {
     "defaultMessage": "{totalCount} 人讚賞了作品"
@@ -242,7 +242,7 @@
     "defaultMessage": "眾聊"
   },
   "20yT4t": {
-    "defaultMessage": "回應設置",
+    "defaultMessage": "評論設置",
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
   },
   "24jhEp": {
@@ -454,7 +454,7 @@
     "defaultMessage": "開始創作"
   },
   "6B+QXo": {
-    "defaultMessage": "回應設置",
+    "defaultMessage": "評論設置",
     "description": "src/components/Editor/ToggleResponse/index.tsx"
   },
   "6BXcdo": {
@@ -2230,7 +2230,7 @@
     "defaultMessage": "涉及未成年人的色情"
   },
   "eIlMHB": {
-    "defaultMessage": "允許讀者回應本文（開啟後無法關閉）"
+    "defaultMessage": "允許讀者評論本文（開啟後無法關閉）"
   },
   "eKVBm/": {
     "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考{link}。"
@@ -2268,7 +2268,7 @@
     "defaultMessage": "信用卡支持需發送財務信息相關郵件，請您先驗證電子郵件地址。"
   },
   "fBzH+2": {
-    "defaultMessage": "不允許讀者回應本文（可通過編輯打開回應功能）"
+    "defaultMessage": "不允許讀者評論本文（可通過編輯打開評論功能）"
   },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者刪除"
