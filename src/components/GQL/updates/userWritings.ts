@@ -33,7 +33,7 @@ export const updateUserWritings = ({
       variables: { userName },
     })
   } catch (e) {
-    console.error(e)
+    //
   }
 
   let collectionsData: UserCollectionsQuery | null = null
@@ -43,7 +43,7 @@ export const updateUserWritings = ({
       variables: { userName },
     })
   } catch (e) {
-    console.error(e)
+    //
   }
 
   let writingEdges = writingsData?.user?.writings?.edges || []
@@ -80,7 +80,6 @@ export const updateUserWritings = ({
       if (!momentDigest) {
         return
       }
-      console.log({ momentDigest, writingEdges })
       writingEdges = [
         {
           cursor: momentDigest.id,
@@ -94,7 +93,6 @@ export const updateUserWritings = ({
         },
         ...writingEdges,
       ]
-      console.log({ writingEdges })
       break
   }
 
@@ -108,10 +106,7 @@ export const updateUserWritings = ({
           ...writingsData?.user,
           writings: {
             ...writingsData?.user?.writings,
-            edges: {
-              ...writingsData?.user?.writings.edges,
-              ...writingEdges,
-            },
+            edges: [...writingEdges],
           },
           pinnedWorks,
         },

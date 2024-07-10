@@ -17,10 +17,9 @@ import {
 } from '~/components'
 import MomentEditor from '~/components/Editor/Moment'
 import { MomentAsset, MomentAssetsUploader } from '~/components/FileUploader'
-// import { updateUserWritings } from '~/components/GQL'
+import { updateUserWritings } from '~/components/GQL'
 import { PUT_MOMENT } from '~/components/GQL/mutations/putMoment'
 import { PutMomentMutation } from '~/gql/graphql'
-import { USER_WRITINGS_PUBLIC } from '~/views/User/Writings/gql'
 
 import styles from './styles.module.css'
 
@@ -94,22 +93,14 @@ export const MomentForm = () => {
           },
         },
         // FIXME: Update cache
-        // update: (cache, mutationResult) => {
-        //   console.log({ cache, mutationResult })
-        //   updateUserWritings({
-        //     cache,
-        //     type: 'addMoment',
-        //     userName: viewer.userName || '',
-        //     momentDigest: mutationResult.data?.putMoment,
-        //   })
-        // },
-        refetchQueries: [
-          {
-            query: USER_WRITINGS_PUBLIC,
-            variables: { userName: viewer.userName },
-          },
-        ],
-        awaitRefetchQueries: true,
+        update: (cache, mutationResult) => {
+          updateUserWritings({
+            cache,
+            type: 'addMoment',
+            userName: viewer.userName || '',
+            momentDigest: mutationResult.data?.putMoment,
+          })
+        },
       })
 
       const { putMoment: moment } = data || {}
