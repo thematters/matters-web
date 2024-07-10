@@ -14,14 +14,23 @@ import {
   List,
   Media,
   MomentDigest,
-  MomentForm,
   QueryError,
+  SpinnerBlock,
   Translate,
   usePublicQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
 import { UserWritingsPublicQuery } from '~/gql/graphql'
+
+const DynamicMomentForm = dynamic(
+  () => import('~/components/Forms/MomentForm'),
+  {
+    loading: () => <SpinnerBlock />,
+  }
+)
+
+import dynamic from 'next/dynamic'
 
 import { USER_WRITINGS_PRIVATE, USER_WRITINGS_PUBLIC } from './gql'
 import PinBoard from './PinBoard'
@@ -186,7 +195,7 @@ const UserWritings = () => {
       {isViewer && (
         <Media greaterThan="sm">
           <section className={styles.momentForm}>
-            <MomentForm />
+            <DynamicMomentForm />
           </section>
         </Media>
       )}

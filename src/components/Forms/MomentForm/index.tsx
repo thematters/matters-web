@@ -28,7 +28,7 @@ type FormDraft = {
   assets?: MomentAsset[]
 }
 
-export const MomentForm = () => {
+const MomentForm = () => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const [putMoment] = useMutation<PutMomentMutation>(PUT_MOMENT, undefined, {
@@ -240,3 +240,5 @@ export const MomentForm = () => {
     </form>
   )
 }
+
+export default MomentForm
