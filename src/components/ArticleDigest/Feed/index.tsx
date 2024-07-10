@@ -36,6 +36,7 @@ export type ArticleDigestFeedProps = {
     Partial<ArticleDigestFeedArticlePrivateFragment>
   header?: React.ReactNode
   collectionId?: string
+  excludesTimeStamp?: boolean // this is only for timestamp next to the profile
 } & ArticleDigestFeedControls &
   FooterActionsProps
 
@@ -55,6 +56,7 @@ const BaseArticleDigestFeed = ({
   hasReadTime,
   hasDonationCount,
   includesMetaData,
+  excludesTimeStamp,
   ...controls
 }: ArticleDigestFeedProps) => {
   const { author, summary } = article
@@ -100,12 +102,12 @@ const BaseArticleDigestFeed = ({
                     hasDisplayName
                     onClick={onClickAuthor}
                   />
-                  {includesMetaData && (
+                  {!excludesTimeStamp && (
                     <Icon icon={IconDot} color="greyLight" size={20} />
                   )}
                 </section>
               )}
-              {includesMetaData && (
+              {!excludesTimeStamp && (
                 <DateTime date={article.createdAt} color="grey" />
               )}
             </header>
