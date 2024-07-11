@@ -291,7 +291,6 @@ export const useEditDraftCampaign = () => {
       variables: {
         id: newId || getDraftId(),
         campaigns: selected ? [selected] : [],
-        isSet: !!selected,
         isReset: !selected,
       },
     })

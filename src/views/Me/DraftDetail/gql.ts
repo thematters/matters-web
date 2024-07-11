@@ -252,11 +252,10 @@ export const SET_CAMPAIGN = gql`
   mutation SetDraftCampaign(
     $id: ID!
     $campaigns: [ArticleCampaignInput!]
-    $isSet: Boolean!
     $isReset: Boolean!
   ) {
     setDraftCampaign: putDraft(input: { id: $id, campaigns: $campaigns })
-      @include(if: $isSet) {
+      @skip(if: $isReset) {
       id
       campaigns {
         campaign {
@@ -267,7 +266,7 @@ export const SET_CAMPAIGN = gql`
         }
       }
     }
-    resetDraftCampaign: putDraft(input: { id: $id, campaigns: null })
+    resetDraftCampaign: putDraft(input: { id: $id, campaigns: [] })
       @include(if: $isReset) {
       id
       campaigns {

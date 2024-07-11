@@ -3,6 +3,35 @@ import gql from 'graphql-tag'
 import articleFragments from '~/components/GQL/fragments/article'
 import { ArticleTag } from '~/components/Tag'
 
+const fragment = gql`
+  fragment ArticleDetailEditHeaderArticle on Article {
+    id
+    cover
+    tags {
+      ...DigestTag
+    }
+    access {
+      type
+    }
+    canComment
+    sensitiveByAuthor
+    license
+    requestForDonation
+    replyToDonator
+    campaigns {
+      campaign {
+        id
+      }
+      stage {
+        id
+      }
+    }
+    ...ArticleCollection
+  }
+  ${ArticleTag.fragments.tag}
+  ${articleFragments.articleCollection}
+`
+
 export const EDIT_ARTICLE = gql`
   mutation EditArticle(
     $id: ID!
@@ -24,6 +53,7 @@ export const EDIT_ARTICLE = gql`
     $canComment: Boolean
     $sensitive: Boolean
     $campaigns: [ArticleCampaignInput!]
+    $isResetCampaign: Boolean! = false
   ) {
     editArticle(
       input: {
@@ -45,31 +75,34 @@ export const EDIT_ARTICLE = gql`
         sensitive: $sensitive
         campaigns: $campaigns
       }
-    ) {
+    ) @skip(if: $isResetCampaign) {
       id
-      cover
-      tags {
-        ...DigestTag
+      ...ArticleDetailEditHeaderArticle
+    }
+    editArticleResetCampaign: editArticle(
+      input: {
+        id: $id
+        description: $description
+        title: $title
+        summary: $summary
+        content: $content
+        cover: $cover
+        tags: $tags
+        collection: $collection
+        circle: $circle
+        accessType: $accessType
+        license: $license
+        iscnPublish: $iscnPublish
+        requestForDonation: $requestForDonation
+        replyToDonator: $replyToDonator
+        canComment: $canComment
+        sensitive: $sensitive
+        campaigns: []
       }
-      access {
-        type
-      }
-      canComment
-      sensitiveByAuthor
-      license
-      requestForDonation
-      replyToDonator
-      campaigns {
-        campaign {
-          id
-        }
-        stage {
-          id
-        }
-      }
-      ...ArticleCollection
+    ) @include(if: $isResetCampaign) {
+      id
+      ...ArticleDetailEditHeaderArticle
     }
   }
-  ${ArticleTag.fragments.tag}
-  ${articleFragments.articleCollection}
+  ${fragment}
 `

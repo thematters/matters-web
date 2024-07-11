@@ -94,6 +94,8 @@ const EditModeHeader = ({
   const isSensitiveRevised =
     restProps.contentSensitive !== article.sensitiveByAuthor
   const isCampaignRevised = restProps.stage !== article.campaigns[0]?.stage.id
+  const isResetCampaign =
+    isCampaignRevised && (!restProps.campaign?.id || !restProps.stage)
 
   const needRepublish =
     isTitleRevised ||
@@ -151,8 +153,18 @@ const EditModeHeader = ({
             ? { sensitive: restProps.contentSensitive }
             : {}),
           ...(isCampaignRevised
-            ? [{ campaign: restProps.campaign?.id, stage: restProps.stage }]
-            : null),
+            ? {
+                campaigns: isResetCampaign
+                  ? []
+                  : [
+                      {
+                        campaign: restProps.campaign?.id,
+                        stage: restProps.stage,
+                      },
+                    ],
+              }
+            : {}),
+          isResetCampaign,
         },
       })
       if (needRepublish) {
