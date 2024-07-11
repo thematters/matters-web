@@ -67,6 +67,9 @@
     "defaultMessage": "尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/5OvMK": {
+    "defaultMessage": "喜欢你的动态"
+  },
   "/5jk3i": {
     "defaultMessage": "订阅成功！🎉"
   },
@@ -299,9 +302,6 @@
   "2slIPX": {
     "defaultMessage": "我的赞赏"
   },
-  "2vSss6": {
-    "defaultMessage": "Mentioned in {users} Moment"
-  },
   "2vpUYs": {
     "defaultMessage": "回复留言",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -324,9 +324,6 @@
   },
   "3KNMbJ": {
     "defaultMessage": "作品"
-  },
-  "3PKS5m": {
-    "defaultMessage": "{user} commented under your moment"
   },
   "3Tg548": {
     "defaultMessage": "登录",
@@ -1162,9 +1159,6 @@
   "JFv0yt": {
     "defaultMessage": "未知错误，请确认你的钱包并重新尝试"
   },
-  "JKuRSI": {
-    "defaultMessage": "Your moment was liked by {username}"
-  },
   "JTWayV": {
     "defaultMessage": "添加描述",
     "description": "src/views/User/CollectionDetail/Content.tsx"
@@ -1175,6 +1169,9 @@
   "JaLEXz": {
     "defaultMessage": "进入围炉",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
+  },
+  "Jaxf/L": {
+    "defaultMessage": "喜欢你的留言"
   },
   "JkWLg6": {
     "defaultMessage": "被追踪",
@@ -1502,9 +1499,6 @@
     "defaultMessage": "登录密码",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
   },
-  "PTDbvr": {
-    "defaultMessage": "{user} liked one of your comments in a moment"
-  },
   "PXAur5": {
     "defaultMessage": "提现"
   },
@@ -1627,9 +1621,6 @@
   "S8PcQf": {
     "defaultMessage": "取消代表作",
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
-  },
-  "SFeU5Y": {
-    "defaultMessage": "{user} mentioned you in a comment section of a Moment"
   },
   "SFsQ1E": {
     "defaultMessage": "查看回应"
@@ -2334,6 +2325,9 @@
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fkQOxQ": {
+    "defaultMessage": "在动态中提及了你"
+  },
   "fnv5rD": {
     "defaultMessage": "赞赏作品（当前 {total} 次赞赏）"
   },
@@ -2552,6 +2546,9 @@
   "kkZioy": {
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "knlV+D": {
+    "defaultMessage": "在动态中留言"
   },
   "ksIL/T": {
     "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"
@@ -2802,6 +2799,9 @@
   "qE8ew4": {
     "defaultMessage": "收藏成功",
     "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
+  },
+  "qKAW1a": {
+    "defaultMessage": "在动态留言中提及了你"
   },
   "qNuRmA": {
     "defaultMessage": "发送临时密码",

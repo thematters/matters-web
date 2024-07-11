@@ -14,10 +14,7 @@ const Comment = ({ notice }: { notice: CommentMentionedYouNoticeFragment }) => {
     <NoticeDigest
       notice={notice}
       action={
-        <FormattedMessage
-          defaultMessage="{user} commented under your moment"
-          id="3PKS5m"
-        />
+        <FormattedMessage defaultMessage="commented your moment" id="knlV+D" />
       }
       content={<NoticeComment comment={notice.comment} />}
       // testId={TEST_ID.NOTICE_COMMENT_MENTION}
@@ -27,7 +24,7 @@ const Comment = ({ notice }: { notice: CommentMentionedYouNoticeFragment }) => {
 
 Comment.fragments = {
   notice: gql`
-    fragment CommentPinnedNotice on CommentNotice {
+    fragment CommentMomentNotice on CommentNotice {
       id
       ...NoticeDate
       actors {

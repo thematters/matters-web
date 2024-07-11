@@ -19,8 +19,8 @@ const LikeComment = ({
       notice={notice}
       action={
         <FormattedMessage
-          defaultMessage="{user} liked one of your comments in a moment"
-          id="PTDbvr"
+          defaultMessage="liked your moment comment"
+          id="Jaxf/L"
         />
       }
       content={<NoticeComment comment={notice.comment} />}
@@ -31,7 +31,7 @@ const LikeComment = ({
 
 LikeComment.fragments = {
   notice: gql`
-    fragment CommentPinnedNotice on CommentNotice {
+    fragment LikeMomentCommentNotice on CommentNotice {
       id
       ...NoticeDate
       actors {

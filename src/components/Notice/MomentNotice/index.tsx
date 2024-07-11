@@ -27,16 +27,16 @@ const MomentNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
 
 MomentNotice.fragments = {
   notice: gql`
-    fragment CommentNotice on CommentNotice {
+    fragment MomentNotice on CommentNotice {
       id
       unread
       __typename
       commentNoticeType: type
-      ...Comment
-      ...CommentMention
-      ...LikeComment
-      ...Like
-      ...Mention
+      ...CommentMomentNotice
+      ...CommentMomentMentionNotice
+      ...LikeMomentCommentNotice
+      ...LikeMomentNotice
+      ...MomentMentionNotice
     }
     ${Comment.fragments.notice}
     ${CommentMention.fragments.notice}

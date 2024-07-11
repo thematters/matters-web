@@ -14,10 +14,7 @@ const Like = ({ notice }: { notice: CommentMentionedYouNoticeFragment }) => {
     <NoticeDigest
       notice={notice}
       action={
-        <FormattedMessage
-          defaultMessage="Your moment was liked by {username}"
-          id="JKuRSI"
-        />
+        <FormattedMessage defaultMessage="liked your moment" id="/5OvMK" />
       }
       content={<NoticeComment comment={notice.comment} />}
       // testId={TEST_ID.NOTICE_COMMENT_MENTION}
@@ -27,7 +24,7 @@ const Like = ({ notice }: { notice: CommentMentionedYouNoticeFragment }) => {
 
 Like.fragments = {
   notice: gql`
-    fragment CommentPinnedNotice on CommentNotice {
+    fragment LikeMomentNotice on CommentNotice {
       id
       ...NoticeDate
       actors {

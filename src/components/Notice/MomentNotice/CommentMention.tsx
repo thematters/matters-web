@@ -19,8 +19,8 @@ const CommentMentionNotice = ({
       notice={notice}
       action={
         <FormattedMessage
-          defaultMessage="{user} mentioned you in a comment section of a Moment"
-          id="SFeU5Y"
+          defaultMessage="mentioned you in a moment comment"
+          id="qKAW1a"
         />
       }
       content={<NoticeComment comment={notice.comment} />}
@@ -31,7 +31,7 @@ const CommentMentionNotice = ({
 
 CommentMentionNotice.fragments = {
   notice: gql`
-    fragment CommentPinnedNotice on CommentNotice {
+    fragment CommentMomentMentionNotice on CommentNotice {
       id
       ...NoticeDate
       actors {
