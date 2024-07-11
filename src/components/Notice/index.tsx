@@ -44,12 +44,16 @@ const fragments = {
       ... on OfficialAnnouncementNotice {
         ...OfficialAnnouncementNotice
       }
+      ... on MomentNotice {
+        ...MomentNotice
+      }
     }
     ${UserNotice.fragments.notice}
     ${ArticleArticleNotice.fragments.notice}
     ${ArticleNotice.fragments.notice}
     ${CommentCommentNotice.fragments.notice}
     ${CommentNotice.fragments.notice}
+    ${MomentNotice.fragments.notice}
     ${TransactionNotice.fragments.notice}
     ${CircleNotice.fragments.notice}
     ${OfficialAnnouncementNotice.fragments.notice}
@@ -77,7 +81,7 @@ export const Notice: React.FC<NoticeProps> & {
     case 'OfficialAnnouncementNotice':
       return <OfficialAnnouncementNotice notice={notice} />
     case 'MomentNotice':
-      return <MomentNotice notice={notice as any} />
+      return <MomentNotice notice={notice} />
     default:
       return null
   }

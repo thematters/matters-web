@@ -115,6 +115,7 @@ export enum TEST_ID {
   NOTICE_COMMENT_NEW_REPLY = 'notice/comment-new-reply',
   NOTICE_COMMENT_MENTIONED_YOU = 'notice/comment-mentioned-you',
   NOTICE_COMMENT_PINNED = 'notice/comment-pinned',
+  NOTICE_COMMENT_LIKED = 'notice/comment-liked',
   NOTICE_ARTICLE_NEW_COMMENT = 'notice/article-new-comment',
   NOTICE_SUBSCRIBED_ARTICLE_NEW_COMMENT = 'notice/subscribed-article-new-comment',
   NOTICE_CIRCLE_NEW_BROADCAST = 'notice/circle-new-broadcast',
@@ -133,6 +134,8 @@ export enum TEST_ID {
   NOTICE_CRYPTO_WALLET_AIRDROP = 'notice/crypto-wallet-airdrop',
   NOTICE_CRYPTO_WALLET_CONNECTED = 'notice/crypto-wallet-connected',
   NOTICE_OFFICIAL_ANNOUNCEMENT = 'notice/official-announcement',
+  NOTICE_MOMENT_LIKED = 'notice/moment-liked',
+  NOTICE_MOMENT_MENTIONED = 'notice/moment-mentioned',
   // me
   ME_WALLET_TRANSACTIONS_ITEM = 'me/wallet/transactions/item',
   ME_WALLET_TRANSACTIONS_ITEM_AMOUNT = 'me/wallet/transactions/item/amount',

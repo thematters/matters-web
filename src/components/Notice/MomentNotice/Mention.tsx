@@ -2,14 +2,15 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { CommentMentionedYouNoticeFragment } from '~/gql/graphql'
+import { TEST_ID } from '~/common/enums'
+import { MentionMomentNoticeFragment } from '~/gql/graphql'
 
-// import NoticeActorName from '../NoticeActorName'
-import NoticeComment from '../NoticeComment'
+import NoticeActorAvatar from '../NoticeActorAvatar'
+import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'
+import NoticeHeadActors from '../NoticeHeadActors'
 
-// 3. {user} commented under your moment
-const Mention = ({ notice }: { notice: CommentMentionedYouNoticeFragment }) => {
+const Mention = ({ notice }: { notice: MentionMomentNoticeFragment }) => {
   return (
     <NoticeDigest
       notice={notice}
@@ -19,30 +20,29 @@ const Mention = ({ notice }: { notice: CommentMentionedYouNoticeFragment }) => {
           id="fkQOxQ"
         />
       }
-      content={<NoticeComment comment={notice.comment} />}
-      // testId={TEST_ID.NOTICE_COMMENT_MENTION}
+      title={notice.moment.content || 'FIXME title'}
+      testId={TEST_ID.NOTICE_MOMENT_MENTIONED}
     />
   )
 }
 
 Mention.fragments = {
   notice: gql`
-    fragment MomentMentionNotice on CommentNotice {
+    fragment MentionMomentNotice on MomentNotice {
       id
       ...NoticeDate
       actors {
         ...NoticeActorAvatarUser
-        ...NoticeActorNameUser
+        ...NoticeHeadActorsUser
       }
-      comment: target {
-        ...NoticeComment
-        node {
-          ... on Article {
-            ...NoticeArticleTitle
-          }
-        }
+      moment: target {
+        id
+        content
       }
     }
+    ${NoticeActorAvatar.fragments.user}
+    ${NoticeHeadActors.fragments.user}
+    ${NoticeDate.fragments.notice}
   `,
 }
 

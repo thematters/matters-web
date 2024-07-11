@@ -1,24 +1,15 @@
 import gql from 'graphql-tag'
 
-import { CommentNoticeFragment } from '~/gql/graphql'
+import { MomentNoticeFragment } from '~/gql/graphql'
 
-import Comment from './Comment'
-import CommentMention from './CommentMention'
 import Like from './Like'
-import LikeComment from './LikeComment'
 import Mention from './Mention'
 
-const MomentNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
-  switch (notice.commentNoticeType) {
-    case 'CommentMentionedYou':
-      return <CommentMention notice={notice} />
-    case 'MomentNewComment':
-      return <Comment notice={notice} />
-    case 'ArticleNewComment':
-      return <LikeComment notice={notice} />
-    case 'CircleNewBroadcast':
+const MomentNotice = ({ notice }: { notice: MomentNoticeFragment }) => {
+  switch (notice.momentNoticeType) {
+    case 'MomentLiked':
       return <Like notice={notice} />
-    case 'CommentLiked':
+    case 'MomentMentionedYou':
       return <Mention notice={notice} />
     default:
       return null
@@ -27,20 +18,14 @@ const MomentNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
 
 MomentNotice.fragments = {
   notice: gql`
-    fragment MomentNotice on CommentNotice {
+    fragment MomentNotice on MomentNotice {
       id
       unread
       __typename
-      commentNoticeType: type
-      ...CommentMomentNotice
-      ...CommentMomentMentionNotice
-      ...LikeMomentCommentNotice
+      momentNoticeType: type
       ...LikeMomentNotice
-      ...MomentMentionNotice
+      ...MentionMomentNotice
     }
-    ${Comment.fragments.notice}
-    ${CommentMention.fragments.notice}
-    ${LikeComment.fragments.notice}
     ${Like.fragments.notice}
     ${Mention.fragments.notice}
   `,

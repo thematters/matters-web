@@ -13,6 +13,9 @@ import {
   CircleNewUserNoticeFragment,
   CommentMentionedYouNoticeFragment,
   CommentNewReplyNoticeFragment,
+  LikeMomentNoticeFragment,
+  MentionMomentNoticeFragment,
+  MomentNewCommentNoticeFragment,
   NoticeActorAvatarUserFragment,
   NoticeHeadActorsUserFragment,
   PaymentReceivedDonationNoticeFragment,
@@ -41,6 +44,9 @@ type NoticeDigestProps = {
     | CommentNewReplyNoticeFragment
     | PaymentReceivedDonationNoticeFragment
     | UserNewFollowerNoticeFragment
+    | MomentNewCommentNoticeFragment
+    | LikeMomentNoticeFragment
+    | MentionMomentNoticeFragment
   actors?: (NoticeActorAvatarUserFragment & NoticeHeadActorsUserFragment)[]
   action: string | ReactElement
   secondAction?: string | ReactElement
