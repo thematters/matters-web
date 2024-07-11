@@ -86,12 +86,12 @@
   }
 }
 
-.theme.settingsDialog {
+.container {
   padding: var(--sp16);
 }
 
-.theme.sidebar,
-.theme.bottomBar {
+.container.themeSidebar,
+.container.themeBottomBar {
   padding: 0;
 
   & .title {
@@ -111,7 +111,7 @@
   }
 }
 
-.theme.bottomBar {
+.container.themeBottomBar {
   & .title {
     font-size: var(--text16);
   }

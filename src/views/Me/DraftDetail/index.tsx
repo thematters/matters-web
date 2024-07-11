@@ -127,7 +127,9 @@ const BaseDraftDetail = () => {
 
   const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
   const ownCircles = viewerData?.viewer?.ownCircles || undefined
-  const campaigns = viewerData?.viewer?.campaigns.edges?.map((e) => e.node)
+  const appliedCampaigns = viewerData?.viewer?.campaigns.edges?.map(
+    (e) => e.node
+  )
   const [contentLength, setContentLength] = useState(0)
   const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
 
@@ -296,7 +298,7 @@ const BaseDraftDetail = () => {
         <Media greaterThanOrEqual="lg">
           <Sidebar
             draft={draft}
-            campaigns={campaigns}
+            campaigns={appliedCampaigns}
             ownCircles={ownCircles}
           />
         </Media>
@@ -317,7 +319,7 @@ const BaseDraftDetail = () => {
               {draft && (
                 <SettingsButton
                   draft={draft}
-                  campaigns={campaigns}
+                  campaigns={appliedCampaigns}
                   ownCircles={ownCircles}
                   publishable={!!publishable}
                 />
@@ -351,7 +353,7 @@ const BaseDraftDetail = () => {
         <BottomBar
           draft={draft}
           ownCircles={ownCircles}
-          campaigns={campaigns}
+          campaigns={appliedCampaigns}
         />
       </Media>
     </Layout.Main>

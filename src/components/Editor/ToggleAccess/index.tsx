@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
 import { ReactComponent as IconSquareChecked } from '@/public/static/icons/square-checked.svg'
+import { capitalizeFirstLetter } from '~/common/utils'
 import { CircleDigest, Icon, Switch, ViewerContext } from '~/components'
 import {
   ArticleAccessType,
@@ -51,7 +52,7 @@ export type ToggleAccessProps = {
   togglePublishISCN: (iscnPublish: boolean) => void
   iscnPublishSaving: boolean
 
-  theme?: 'sidebar' | 'bottomBar' | 'settingsDialog'
+  theme?: 'sidebar' | 'bottomBar'
 }
 
 const ToggleAccess: React.FC<ToggleAccessProps> = ({
@@ -85,8 +86,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
     <section
       className={classNames({
         [styles.container]: true,
-        [styles.theme]: !!theme,
-        [styles[`${theme}`]]: !!theme,
+        [styles[`theme${capitalizeFirstLetter(theme + '')}`]]: !!theme,
       })}
     >
       {canToggleCircle && (
@@ -155,7 +155,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
       </section>
 
       <section className={styles.supportSetting}>
-        {theme !== 'settingsDialog' ? (
+        {theme ? (
           <button type="button" onClick={onOpenSupportSetting}>
             <section className={styles.support}>
               <section className={styles.left}>

@@ -2,12 +2,15 @@ import gql from 'graphql-tag'
 
 import { datetimeFormat } from '~/common/utils'
 import { Form } from '~/components'
-import { EditorSelectCampaignFragment } from '~/gql/graphql'
+import {
+  ArticleCampaignInput,
+  EditorSelectCampaignFragment,
+} from '~/gql/graphql'
 
 export interface SelectCampaignProps {
   campaign: EditorSelectCampaignFragment
   stage?: string // selected stage
-  editCampaign: (value?: { campaign: string; stage: string }) => Promise<any>
+  editCampaign: (value?: ArticleCampaignInput) => any
 }
 
 const SelectCampaign = ({

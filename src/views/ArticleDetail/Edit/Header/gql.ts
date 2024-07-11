@@ -23,6 +23,7 @@ export const EDIT_ARTICLE = gql`
     $replyToDonator: replyToDonator_String_maxLength_140
     $canComment: Boolean
     $sensitive: Boolean
+    $campaigns: [ArticleCampaignInput!]
   ) {
     editArticle(
       input: {
@@ -42,6 +43,7 @@ export const EDIT_ARTICLE = gql`
         replyToDonator: $replyToDonator
         canComment: $canComment
         sensitive: $sensitive
+        campaigns: $campaigns
       }
     ) {
       id
@@ -57,6 +59,14 @@ export const EDIT_ARTICLE = gql`
       license
       requestForDonation
       replyToDonator
+      campaigns {
+        campaign {
+          id
+        }
+        stage {
+          id
+        }
+      }
       ...ArticleCollection
     }
   }

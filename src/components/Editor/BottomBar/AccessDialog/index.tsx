@@ -51,7 +51,11 @@ const BaseAccessDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        dismissOnClickOutside={false}
+      >
         <Dialog.Header
           title={
             <FormattedMessage defaultMessage="Article Management" id="ZEMcZ6" />

@@ -29,6 +29,7 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
+import { SelectCampaignProps } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
@@ -39,6 +40,7 @@ import {
 } from '~/components/GQL/mutations/uploadFile'
 import {
   ArticleAccessType,
+  ArticleCampaignInput,
   ArticleDigestDropdownArticleFragment,
   ArticleLicenseType,
   AssetFragment,
@@ -130,6 +132,23 @@ const BaseEdit = ({ article }: { article: Article }) => {
     setLicense(newLicense)
   }
 
+  // campaign
+  const appliedCampaigns = article.author.campaigns.edges?.map((e) => e.node)
+  const appliedCampaign = appliedCampaigns && appliedCampaigns[0]
+  const selectedCampaign = article.campaigns.filter(
+    (c) => c.campaign.id === appliedCampaign?.id
+  )[0]
+  const selectedStage = selectedCampaign?.stage?.id
+
+  const [campaign, setCampaign] = useState<ArticleCampaignInput | undefined>(
+    appliedCampaign?.id
+      ? {
+          campaign: appliedCampaign.id,
+          stage: selectedStage,
+        }
+      : undefined
+  )
+
   const [requestForDonation, setRequestForDonation] = useState(
     article.requestForDonation
   )
@@ -173,17 +192,15 @@ const BaseEdit = ({ article }: { article: Article }) => {
       setCollection(c),
     nodeExclude: article.id,
   }
-
   const setCommentProps: SetResponseProps = {
     canComment,
     toggleComment: setCanComment,
   }
-
-  // const campaignProps: Partial<SelectCampaignProps> = {
-  //   campaign: article.campaign,
-  //   stage: article.stage,
-  //   editCampaign: () => undefined,
-  // }
+  const campaignProps: Partial<SelectCampaignProps> = {
+    campaign: appliedCampaign,
+    stage: campaign?.stage,
+    editCampaign: setCampaign,
+  }
 
   const accessProps: ToggleAccessProps = {
     circle,
@@ -297,6 +314,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
       <Layout.Main
         aside={
           <section className={styles.sidebar}>
+            <Sidebar.Campaign {...campaignProps} />
             <Sidebar.Tags {...tagsProps} />
             <Sidebar.Cover {...coverProps} />
             <Sidebar.Collection {...collectionProps} />
@@ -331,6 +349,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
               {...accessProps}
               {...setCommentProps}
               {...versionDescriptionProps}
+              {...campaignProps}
               article={article}
               revision={{
                 versionDescription,
@@ -403,7 +422,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                 {...collectionProps}
                 {...accessProps}
                 {...setCommentProps}
-                // {...campaignProps}
+                {...campaignProps}
                 onOpenSupportSetting={openSupportSettingDialog}
               />
             )}

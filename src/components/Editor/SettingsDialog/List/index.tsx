@@ -172,7 +172,7 @@ const SettingsList = ({
             <ToggleResponse {...responseProps} />
           </section>
 
-          <ToggleAccess {...restProps} theme="settingsDialog" />
+          <ToggleAccess {...restProps} />
         </ul>
       </Dialog.Content>
 

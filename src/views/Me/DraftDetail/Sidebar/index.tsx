@@ -129,11 +129,7 @@ const EditDraftResponse = ({ draft }: SidebarProps) => {
 const EditDraftCampaign = ({ draft, campaigns }: SidebarProps) => {
   const { edit } = useEditDraftCampaign()
 
-  if (!campaigns || campaigns.length === 0) {
-    return null
-  }
-
-  const appliedCampaign = campaigns[0]
+  const appliedCampaign = campaigns && campaigns[0]
   const selectedCampaign = draft.campaigns.filter(
     (c) => c.campaign.id === appliedCampaign?.id
   )[0]

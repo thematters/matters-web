@@ -5,7 +5,11 @@ import SelectCampaign, { SelectCampaignProps } from '../../SelectCampaign'
 import Box from '../Box'
 import styles from './styles.module.css'
 
-const SidebarCampaign: React.FC<SelectCampaignProps> = (props) => {
+const SidebarCampaign: React.FC<Partial<SelectCampaignProps>> = (props) => {
+  if (!props.campaign || !props.editCampaign) {
+    return null
+  }
+
   return (
     <Box
       icon={<Icon icon={IconRead} size={24} />}
@@ -13,7 +17,7 @@ const SidebarCampaign: React.FC<SelectCampaignProps> = (props) => {
       borderColor="freeWriteBlue"
     >
       <section className={styles.container}>
-        <SelectCampaign {...props} />
+        <SelectCampaign {...(props as SelectCampaignProps)} />
       </section>
     </Box>
   )
