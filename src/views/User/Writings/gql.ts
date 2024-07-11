@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-import { MomentDigest } from '~/components'
 import { ArticleDigestFeed } from '~/components/ArticleDigest/Feed'
+import { MomentDigest } from '~/components/MomentDigest'
 
 import PinBoard from './PinBoard'
 
