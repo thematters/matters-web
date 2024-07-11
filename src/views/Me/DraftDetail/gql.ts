@@ -249,8 +249,14 @@ export const SET_ACCESS = gql`
 `
 
 export const SET_CAMPAIGN = gql`
-  mutation SetDraftCampaign($id: ID!, $campaigns: [ArticleCampaignInput!]) {
-    putDraft(input: { id: $id, campaigns: $campaigns }) {
+  mutation SetDraftCampaign(
+    $id: ID!
+    $campaigns: [ArticleCampaignInput!]
+    $isSet: Boolean!
+    $isReset: Boolean!
+  ) {
+    setDraftCampaign: putDraft(input: { id: $id, campaigns: $campaigns })
+      @include(if: $isSet) {
       id
       campaigns {
         campaign {
@@ -261,12 +267,8 @@ export const SET_CAMPAIGN = gql`
         }
       }
     }
-  }
-`
-
-export const RESET_CAMPAIGN = gql`
-  mutation ResetDraftCampaign($id: ID!) {
-    putDraft(input: { id: $id, campaigns: null }) {
+    resetDraftCampaign: putDraft(input: { id: $id, campaigns: null })
+      @include(if: $isReset) {
       id
       campaigns {
         campaign {

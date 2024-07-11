@@ -22,7 +22,6 @@ import {
 
 import {
   DRAFT_ASSETS,
-  RESET_CAMPAIGN,
   SET_ACCESS,
   SET_CAMPAIGN,
   SET_CAN_COMMENT,
@@ -283,17 +282,19 @@ export const useEditDraftCampaign = () => {
   const { createDraft } = useCreateDraft()
   const [update, { loading: saving }] =
     useMutation<SetDraftCanCommentMutation>(SET_CAMPAIGN)
-  const [reset, { loading: reseting }] = useMutation(RESET_CAMPAIGN)
 
   const edit = (
     selected?: { campaign: string; stage: string },
     newId?: string
   ) =>
-    selected
-      ? update({
-          variables: { id: newId || getDraftId(), campaigns: [selected] },
-        })
-      : reset({ variables: { id: newId || getDraftId() } })
+    update({
+      variables: {
+        id: newId || getDraftId(),
+        campaigns: selected ? [selected] : [],
+        isSet: !!selected,
+        isReset: !selected,
+      },
+    })
 
   const createDraftAndEdit = async (selected: {
     campaign: string
@@ -308,6 +309,6 @@ export const useEditDraftCampaign = () => {
 
   return {
     edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
-    saving: saving || reseting,
+    saving: saving,
   }
 }
