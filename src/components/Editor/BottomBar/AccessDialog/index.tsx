@@ -67,7 +67,12 @@ const BaseAccessDialog = ({
         <Dialog.Content noSpacing>
           {campaignProps && (
             <section className={styles.campaign}>
-              <h3 className={styles.title}>投稿七日书自由写</h3>
+              <h3 className={styles.title}>
+                <FormattedMessage
+                  defaultMessage="Add to FreeWrite"
+                  id="6pc948"
+                />
+              </h3>
               <SelectCampaign {...campaignProps} />
             </section>
           )}

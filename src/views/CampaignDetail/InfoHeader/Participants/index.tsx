@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { Avatar } from '~/components'
 import { InfoHeaderParticipantsCampaignFragment } from '~/gql/graphql'
@@ -38,7 +39,11 @@ const Participants = ({
             {' '}
             {campaign.participants.totalCount}
           </span>{' '}
-          位寫作者
+          <FormattedMessage
+            defaultMessage="writers"
+            id="syBMnY"
+            description="src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
+          />
           <section className={styles.avatars}>
             {campaign.participants.edges?.map(({ node }, i) => (
               <Avatar key={i} user={node} size={20} />

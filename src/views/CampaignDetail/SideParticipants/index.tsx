@@ -1,7 +1,10 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import { Avatar, Tooltip, ViewerContext } from '~/components'
+import { toPath } from '~/common/utils'
+import { Avatar, LinkWrapper, Tooltip, ViewerContext } from '~/components'
 import {
+  AvatarUserFragment,
   SideParticipantsCampaignPrivateFragment,
   SideParticipantsCampaignPublicFragment,
 } from '~/gql/graphql'
@@ -12,6 +15,37 @@ import styles from './styles.module.css'
 type SideParticipantsProps = {
   campaign: SideParticipantsCampaignPublicFragment &
     Partial<SideParticipantsCampaignPrivateFragment>
+}
+
+const Participant = ({
+  user,
+}: {
+  user: AvatarUserFragment & {
+    userName?: string | null
+    displayName?: string | null
+  }
+}) => {
+  const path = toPath({
+    page: 'userProfile',
+    userName: user.userName || '',
+  })
+  if (!user.displayName) {
+    return (
+      <LinkWrapper {...path}>
+        <Avatar user={user} size={32} />
+      </LinkWrapper>
+    )
+  }
+
+  return (
+    <Tooltip content={user.displayName} placement="top">
+      <span>
+        <LinkWrapper {...path}>
+          <Avatar user={user} size={32} />
+        </LinkWrapper>
+      </span>
+    </Tooltip>
+  )
 }
 
 const SideParticipants = ({ campaign }: SideParticipantsProps) => {
@@ -26,26 +60,22 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
   return (
     <section className={styles.participants}>
       <h2>
-        Writer{' '}
+        <FormattedMessage
+          defaultMessage="Writers"
+          id="xl95XN"
+          description="src/views/CampaignDetail/SideParticipants/index.tsx"
+        />{' '}
         <span className={styles.count}>
           {campaign.sideParticipants.totalCount}
         </span>
       </h2>
 
       <section className={styles.avatars}>
-        {isViewerApplySucceeded && <Avatar user={viewer} size={32} />}
-        {edges?.map(({ node, cursor }) =>
-          node.id !== viewer.id ? (
-            <Tooltip
-              key={cursor}
-              content={node.displayName}
-              placement="top"
-              disabled={!node.displayName}
-            >
-              <Avatar user={node} size={32} />
-            </Tooltip>
-          ) : null
-        )}
+        {isViewerApplySucceeded && <Participant user={viewer} />}
+
+        {edges
+          ?.filter((u) => u.node.id !== viewer.id)
+          .map(({ node, cursor }) => <Participant key={cursor} user={node} />)}
       </section>
     </section>
   )

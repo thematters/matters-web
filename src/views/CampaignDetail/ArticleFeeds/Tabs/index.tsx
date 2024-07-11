@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { SquareTabs } from '~/components'
 import { ArticleFeedsTabsCampaignFragment } from '~/gql/graphql'
@@ -36,7 +37,7 @@ const ArticleFeedsTabs = ({
           selected={feedType === LATEST_FEED_TYPE}
           onClick={() => setFeedType(LATEST_FEED_TYPE)}
         >
-          Latest
+          <FormattedMessage defaultMessage="Latest" id="adThp5" />
         </SquareTabs.Tab>
 
         {stages.map((stage) =>

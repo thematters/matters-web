@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 import { InfoHeaderParticipantsCampaignFragment } from '~/gql/graphql'
@@ -17,6 +17,7 @@ const BaseParticipantsDialog = ({
   campaign,
   children,
 }: ParticipantsDialogProps) => {
+  const intl = useIntl()
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (
@@ -25,7 +26,15 @@ const BaseParticipantsDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={`寫作者 ${campaign.participants.totalCount}`}
+          title={intl.formatMessage(
+            {
+              defaultMessage: 'Writers {count}',
+              description:
+                'src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx',
+              id: 'hfRsLB',
+            },
+            { count: campaign.participants.totalCount }
+          )}
           closeDialog={closeDialog}
           closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
         />

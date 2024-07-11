@@ -13,6 +13,7 @@ export const fragments = {
           node {
             id
             displayName
+            userName
             ...AvatarUser
           }
         }

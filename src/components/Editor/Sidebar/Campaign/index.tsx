@@ -1,3 +1,5 @@
+import { FormattedMessage } from 'react-intl'
+
 import { ReactComponent as IconRead } from '@/public/static/icons/24px/read.svg'
 import { Icon } from '~/components'
 
@@ -13,7 +15,7 @@ const SidebarCampaign: React.FC<Partial<SelectCampaignProps>> = (props) => {
   return (
     <Box
       icon={<Icon icon={IconRead} size={24} />}
-      title="投稿七日書自由寫"
+      title={<FormattedMessage defaultMessage="Add to FreeWrite" id="6pc948" />}
       borderColor="freeWriteBlue"
     >
       <section className={styles.container}>

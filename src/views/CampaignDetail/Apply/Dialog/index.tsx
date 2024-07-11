@@ -63,15 +63,35 @@ const ApplyCampaignDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title={isInApplicationPeriod ? '報名申請已遞交 🎉' : '陪跑參與活動'}
+          title={
+            isInApplicationPeriod ? (
+              <FormattedMessage
+                defaultMessage="Application has been submitted 🎉"
+                id="oLOus+"
+              />
+            ) : (
+              <FormattedMessage
+                defaultMessage="Confirm to participate"
+                id="FM+YIG"
+              />
+            )
+          }
         />
 
         <Dialog.Content>
           <Dialog.Content.Message>
             <p>
-              {isInApplicationPeriod
-                ? '我們將盡快審核你的申請，敬請期待活動開跑！'
-                : '錯過了正式報名期，仍然可以在報名成功後投稿作品，但無法獲得大滿貫徽章。下次記得早點報名，就有機會獲得徽章了！'}
+              {isInApplicationPeriod ? (
+                <FormattedMessage
+                  defaultMessage="We will review your application as soon as possible, so stay tuned for the event!"
+                  id="N3xGd5"
+                />
+              ) : (
+                <FormattedMessage
+                  defaultMessage="If you miss the official registration period, you can still submit works after successful registration, but you will not be able to obtain the Grand Slam badge. Remember to register early next time for a chance to get a badge!"
+                  id="fH6B/f"
+                />
+              )}
             </p>
           </Dialog.Content.Message>
         </Dialog.Content>
@@ -81,7 +101,13 @@ const ApplyCampaignDialog = ({
             <>
               {!isInApplicationPeriod && (
                 <Dialog.RoundedButton
-                  text="確認參加"
+                  text={
+                    <FormattedMessage
+                      defaultMessage="Confirm"
+                      description="src/views/CampaignDetail/Apply/Dialog/index.tsx"
+                      id="f5jWMJ"
+                    />
+                  }
                   loading={loading}
                   onClick={() => applyCampaign()}
                 />
@@ -117,7 +143,13 @@ const ApplyCampaignDialog = ({
               )}
               {!isInApplicationPeriod && (
                 <Dialog.TextButton
-                  text="確認參加"
+                  text={
+                    <FormattedMessage
+                      defaultMessage="Confirm"
+                      description="src/views/CampaignDetail/Apply/Dialog/index.tsx"
+                      id="f5jWMJ"
+                    />
+                  }
                   loading={loading}
                   color="green"
                   onClick={() => applyCampaign()}

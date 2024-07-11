@@ -374,6 +374,9 @@
   "4l6vz1": {
     "defaultMessage": "Copy"
   },
+  "4nHH2x": {
+    "defaultMessage": "Applied successfully"
+  },
   "4tqFCR": {
     "defaultMessage": "The author has not bound the USDT wallet yet"
   },
@@ -510,6 +513,9 @@
   "6oOCCL": {
     "defaultMessage": "Upload file"
   },
+  "6pc948": {
+    "defaultMessage": "Add to FreeWrite"
+  },
   "6q0G5e": {
     "defaultMessage": "Successfully added",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -561,6 +567,9 @@
   "7jjWxF": {
     "defaultMessage": "No results",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
+  },
+  "7m2h5x": {
+    "defaultMessage": "Participate successfully"
   },
   "7oytv9": {
     "defaultMessage": " (edited) "
@@ -767,6 +776,9 @@
   "Bkx6Gk": {
     "defaultMessage": "Switching the network…"
   },
+  "Bmy3Ms": {
+    "defaultMessage": "Event period: "
+  },
   "BnMru1": {
     "defaultMessage": "Language",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
@@ -937,6 +949,9 @@
     "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
+  "FM+YIG": {
+    "defaultMessage": "Confirm to participate"
+  },
   "FMIIAZ": {
     "defaultMessage": "Revision history and IPFS entry,",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -1069,6 +1084,10 @@
   },
   "HbEL82": {
     "defaultMessage": "Comment has been deleted"
+  },
+  "HgY+72": {
+    "defaultMessage": "Apply",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "HkozYU": {
     "defaultMessage": "Switch wallet",
@@ -1349,6 +1368,9 @@
     "defaultMessage": "Selected activities related to you in the past 24 hours",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "MnTJ0Q": {
+    "defaultMessage": "Application period: "
+  },
   "MoyOR+": {
     "defaultMessage": "Settings - Circle notifications",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -1358,6 +1380,9 @@
   },
   "N2IrpM": {
     "defaultMessage": "Confirm"
+  },
+  "N3xGd5": {
+    "defaultMessage": "We will review your application as soon as possible, so stay tuned for the event!"
   },
   "N6PWfU": {
     "defaultMessage": "Forget Password"
@@ -1621,6 +1646,10 @@
     "defaultMessage": "Latest",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
+  "SX+8mP": {
+    "defaultMessage": "Reviewing...",
+    "description": "type:participate"
+  },
   "SYfw+k": {
     "defaultMessage": "Confirm",
     "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
@@ -1777,6 +1806,10 @@
   },
   "VZsE96": {
     "defaultMessage": "Collection Name"
+  },
+  "VaB2pS": {
+    "defaultMessage": "Participate",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "VeEfHm": {
     "defaultMessage": "Drafts",
@@ -2115,6 +2148,9 @@
   "beLe/F": {
     "defaultMessage": "Broadcast"
   },
+  "buf5vO": {
+    "defaultMessage": "Event Information"
+  },
   "c/z318": {
     "defaultMessage": "Incorrect email or password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2267,11 +2303,18 @@
   "f24jaP": {
     "defaultMessage": "Credit card support requires emails related to financial information, please verify your email address first."
   },
+  "f5jWMJ": {
+    "defaultMessage": "Confirm",
+    "description": "src/views/CampaignDetail/Apply/Dialog/index.tsx"
+  },
   "fBzH+2": {
     "defaultMessage": "Disallow readers to respond to this article (you can enable responses later by editing this article)"
   },
   "fDdcbi": {
     "defaultMessage": "This {type} has been deleted by the author"
+  },
+  "fH6B/f": {
+    "defaultMessage": "If you miss the official registration period, you can still submit works after successful registration, but you will not be able to obtain the Grand Slam badge. Remember to register early next time for a chance to get a badge!"
   },
   "fJB38x": {
     "defaultMessage": "Trial ends in {remainDays} days"
@@ -2383,6 +2426,10 @@
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hfRsLB": {
+    "defaultMessage": "Writers {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2454,6 +2501,10 @@
   "jBx/nm": {
     "defaultMessage": "Sign up with email",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
+  "jLkKbI": {
+    "defaultMessage": "Reviewing...",
+    "description": "type:apply"
   },
   "jiB0Z2": {
     "defaultMessage": "Unable to bind wallet",
@@ -2703,6 +2754,9 @@
   "oGiO//": {
     "defaultMessage": "Insert audio"
   },
+  "oLOus+": {
+    "defaultMessage": "Application has been submitted 🎉"
+  },
   "ob+HDS": {
     "defaultMessage": "View Circle"
   },
@@ -2896,6 +2950,10 @@
   },
   "sy+pv5": {
     "defaultMessage": "Email"
+  },
+  "syBMnY": {
+    "defaultMessage": "writers",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
   },
   "syEQFE": {
     "defaultMessage": "Publish"
@@ -3163,6 +3221,10 @@
   },
   "xkr+zo": {
     "defaultMessage": "Terms"
+  },
+  "xl95XN": {
+    "defaultMessage": "Writers",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "xmcVZ0": {
     "defaultMessage": "Search"

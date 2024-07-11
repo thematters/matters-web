@@ -335,6 +335,7 @@ type UserFeedType =
   | 'tag_detail_selected'
   | 'tag_detail_community'
   | 'transaction'
+  | 'campaign_participant'
 
 type TagFeedType =
   | 'all_tags' // all tags page (hottest)

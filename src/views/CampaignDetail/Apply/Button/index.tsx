@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconCheck } from '@/public/static/icons/24px/check.svg'
 import {
@@ -49,7 +50,14 @@ const ApplyCampaignButton = ({
         icon={<Icon icon={IconCheck} size={16} />}
         color={isInApplicationPeriod ? 'green' : 'black'}
       >
-        {isInApplicationPeriod ? '報名成功' : '陪跑成功'}
+        {isInApplicationPeriod ? (
+          <FormattedMessage defaultMessage="Applied successfully" id="4nHH2x" />
+        ) : (
+          <FormattedMessage
+            defaultMessage="Participate successfully"
+            id="7m2h5x"
+          />
+        )}
       </TextIcon>
     )
   }
@@ -57,11 +65,35 @@ const ApplyCampaignButton = ({
   /**
    * Pending or not applied
    */
-  let text = ''
+  let text: React.ReactNode = ''
   if (isPending) {
-    text = isInApplicationPeriod ? '報名審核中' : '陪跑審核中'
+    text = isInApplicationPeriod ? (
+      <FormattedMessage
+        defaultMessage="Reviewing..."
+        description="type:apply"
+        id="jLkKbI"
+      />
+    ) : (
+      <FormattedMessage
+        defaultMessage="Reviewing..."
+        description="type:participate"
+        id="SX+8mP"
+      />
+    )
   } else if (isNotApplied) {
-    text = isInApplicationPeriod ? '報名參加' : '陪跑參加'
+    text = isInApplicationPeriod ? (
+      <FormattedMessage
+        defaultMessage="Apply"
+        description="src/views/CampaignDetail/Apply/Button/index.tsx"
+        id="HgY+72"
+      />
+    ) : (
+      <FormattedMessage
+        defaultMessage="Participate"
+        description="src/views/CampaignDetail/Apply/Button/index.tsx"
+        id="VaB2pS"
+      />
+    )
   }
 
   if (!viewer.isAuthed) {

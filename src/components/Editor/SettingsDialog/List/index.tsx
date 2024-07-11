@@ -119,7 +119,12 @@ const SettingsList = ({
 
           {campaignProps && (
             <section className={styles.campaign}>
-              <h3 className={styles.title}>投稿七日書自由寫</h3>
+              <h3 className={styles.title}>
+                <FormattedMessage
+                  defaultMessage="Add to FreeWrite"
+                  id="6pc948"
+                />
+              </h3>
               <SelectCampaign {...campaignProps} />
             </section>
           )}

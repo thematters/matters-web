@@ -75,25 +75,25 @@ const ParticipantsDialogContent = () => {
               />
             </List.Item>
           )}
-          {edges.map(({ node, cursor }) =>
-            node.id !== viewer.id ? (
+          {edges
+            .filter((e) => e.node.id !== viewer.id)
+            .map(({ node, cursor }, i) => (
               <List.Item key={cursor}>
                 <UserDigest.Rich
                   user={node}
-                  // onClick={() =>
-                  //   analytics.trackEvent('click_feed', {
-                  //     type: 'follower',
-                  //     contentType: 'user',
-                  //     location: i,
-                  //     id: node.id,
-                  //   })
-                  // }
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'campaign_participant',
+                      contentType: 'user',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
                   spacing={[12, 16]}
                   hasFollow={false}
                 />
               </List.Item>
-            ) : null
-          )}
+            ))}
         </List>
       </InfiniteScroll>
     </Dialog.Content>
