@@ -19,7 +19,7 @@ const SelectCampaign = ({
   editCampaign,
 }: SelectCampaignProps) => {
   const RESET_OPTION = {
-    name: '---',
+    name: '請選擇⋯',
     value: undefined,
     selected: !stage,
   }

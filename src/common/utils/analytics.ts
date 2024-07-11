@@ -82,6 +82,7 @@ export interface ClickButtonProp {
     | 'edit_support_copy'
     | 'history_version'
     | 'ipfs'
+    | 'campaign'
     | 'edit'
     | 'edited'
     | 'appreciate'
