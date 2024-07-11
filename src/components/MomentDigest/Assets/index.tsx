@@ -1,12 +1,15 @@
 import 'photoswipe/dist/photoswipe.css'
 
 import gql from 'graphql-tag'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 
 import { TEST_ID } from '~/common/enums'
-import { toSizedImageURL } from '~/common/utils'
-import { getImageDimensions } from '~/common/utils/form'
+import {
+  calculateRenderedImageSize,
+  checkImagesLoaded,
+  toSizedImageURL,
+} from '~/common/utils'
 import { ResponsiveImage } from '~/components'
 import { MomentDigestAssetsMomentFragment } from '~/gql/graphql'
 
@@ -31,33 +34,58 @@ type LoadedAsset = {
   height: number
 }
 
-const ImagePlaceholder = () => <div className={styles.imagePlaceholder} />
+const ImagePlaceholder: React.FC = () => (
+  <div className={styles.imagePlaceholder} />
+)
 
 const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
   const { assets } = moment
   const [loadedAssets, setLoadedAssets] = useState<LoadedAsset[] | null>(null)
+  const ref = useRef<HTMLDivElement>(null)
+  const width = 106 * 2
+
   useEffect(() => {
-    const loadAssets = async () => {
-      const newAssets = await Promise.all(
-        assets.map(async (asset) => {
-          const { width, height } = await getImageDimensions(asset.path)
-          return {
-            ...asset,
-            width,
-            height,
-          }
-        })
-      )
+    const calcAssets = async () => {
+      if (!ref.current) {
+        return
+      }
+
+      const images = ref.current.querySelectorAll('img')
+      await checkImagesLoaded(images)
+      const newAssets = Array.from(images).map((image, index) => {
+        const { width, height } = calculateRenderedImageSize(
+          window.innerWidth,
+          window.innerHeight,
+          image.naturalWidth,
+          image.naturalHeight
+        )
+        const asset = assets[index]
+        return {
+          ...asset,
+          width,
+          height,
+        }
+      })
       setLoadedAssets(newAssets)
     }
-    loadAssets()
+    calcAssets()
   }, [assets])
+
   if (!loadedAssets) {
     return (
-      <section className={styles.assets}>
+      <section
+        className={styles.assets}
+        data-test-id={TEST_ID.MOMENT_DIGEST_ASSETS}
+      >
         {assets.map((asset) => (
           <ImagePlaceholder key={asset.id} />
         ))}
+
+        <section className={styles.assetsPlaceholder} ref={ref}>
+          {assets.map((asset) => (
+            <ResponsiveImage key={asset.id} url={asset.path} width={width} />
+          ))}
+        </section>
       </section>
     )
   }
@@ -74,7 +102,7 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
             original={asset.path}
             thumbnail={toSizedImageURL({
               url: asset.path,
-              width: 106,
+              width: width,
               disableAnimation: true,
             })}
             width={asset.width}
@@ -88,7 +116,7 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
                 key={asset.id}
                 role="button"
               >
-                <ResponsiveImage url={asset.path} width={106} height={106} />
+                <ResponsiveImage url={asset.path} width={width} />
               </div>
             )}
           </Item>
