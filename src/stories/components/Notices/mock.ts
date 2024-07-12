@@ -218,7 +218,7 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CircleNewDiscussion' as any,
     comment: MOCK_CIRCLE_COMMENT,
   },
-  // CommentLikeNotice
+  // ✅ CommentLikeNotice
   {
     __typename: 'CommentNotice',
     id: 'CommentLikedNotice',
@@ -238,7 +238,7 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CommentLiked',
     moment: MOCK_MOMENT,
   },
-  // Moment new comment notice
+  // ✅ Moment new comment notice
   {
     __typename: 'CommentNotice',
     id: 'MomentNewCommentNotice',
@@ -246,6 +246,7 @@ export const MOCK_NOTICE_LIST = [
     createdAt: '2024-06-24T07:29:17.682Z',
     actors: [MOCK_USER],
     commentNoticeType: 'MomentNewComment',
+    comment: MOCK_COMMENT,
   },
   // moment comment mentioned you notice
   {
@@ -255,8 +256,9 @@ export const MOCK_NOTICE_LIST = [
     createdAt: '2024-06-24T07:29:17.682Z',
     actors: [MOCK_USER],
     commentNoticeType: 'CommentMentionedYou',
+    comment: MOCK_COMMENT,
   },
-  // Moment Mentioned You notice
+  // ⭕ Moment Mentioned You notice
   {
     __typename: 'MomentNotice',
     id: 'MomentMentionedYouNotice',
@@ -266,7 +268,7 @@ export const MOCK_NOTICE_LIST = [
     momentNoticeType: 'MomentMentionedYou',
     moment: MOCK_MOMENT,
   },
-  // Moment Liked notice
+  // ⭕ Moment Liked notice
   {
     __typename: 'MomentNotice',
     id: 'MomentLikedNotice',
@@ -274,7 +276,7 @@ export const MOCK_NOTICE_LIST = [
     createdAt: '2020-07-10T07:29:17.682Z',
     actors: [MOCK_USER],
     momentNoticeType: 'MomentLiked',
-    comment: MOCK_COMMENT,
+    moment: MOCK_MOMENT,
   },
 
   /**

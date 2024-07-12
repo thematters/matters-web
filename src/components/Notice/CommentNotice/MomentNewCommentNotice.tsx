@@ -19,10 +19,6 @@ const MomentNewCommentNotice = ({
     return null
   }
 
-  // const commentMoment =
-  //   notice.comment?.node.__typename === 'Moment'
-  //     ? notice.comment.node
-  //     : undefined
   return (
     <NoticeDigest
       notice={notice}
@@ -33,7 +29,7 @@ const MomentNewCommentNotice = ({
           description="src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
         />
       }
-      content={<NoticeComment comment={notice.comment} />}
+      title={notice.comment?.content || 'FIXME title'}
       testId={TEST_ID.NOTICE_ARTICLE_NEW_COMMENT}
     />
   )

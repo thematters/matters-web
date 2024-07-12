@@ -20,7 +20,7 @@ const Mention = ({ notice }: { notice: MentionMomentNoticeFragment }) => {
           id="fkQOxQ"
         />
       }
-      title={notice.moment.content || 'FIXME title'}
+      title={notice.moment?.content || ''}
       testId={TEST_ID.NOTICE_MOMENT_MENTIONED}
     />
   )

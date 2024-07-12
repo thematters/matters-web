@@ -18,7 +18,7 @@ const Like = ({ notice }: { notice: LikeMomentNoticeFragment }) => {
       action={
         <FormattedMessage defaultMessage="liked your moment" id="/5OvMK" />
       }
-      title={notice.moment.content || 'FIXME title'}
+      title={notice.moment?.content || ''}
       testId={TEST_ID.NOTICE_MOMENT_LIKED}
     />
   )
@@ -34,6 +34,7 @@ Like.fragments = {
         ...NoticeHeadActorsUser
       }
       moment: target {
+        id
         liked
         content
       }

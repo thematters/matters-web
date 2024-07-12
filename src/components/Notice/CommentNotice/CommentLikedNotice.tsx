@@ -22,24 +22,9 @@ const CommentLikedNotice = ({
   }
   const commentArticle =
     notice.comment?.node.__typename === 'Article' ? notice.comment.node : null
-  const commentMoment =
-    notice.comment?.node.__typename === 'Moment' ? notice.comment.node : null
 
   return (
     <>
-      {commentMoment && (
-        <NoticeDigest
-          notice={notice}
-          action={
-            <FormattedMessage
-              defaultMessage="liked your moment comment"
-              id="Jaxf/L"
-            />
-          }
-          content={<NoticeComment comment={notice.comment} />}
-          testId={TEST_ID.NOTICE_COMMENT_LIKED}
-        />
-      )}
       {commentArticle && (
         <NoticeDigest
           notice={notice}
