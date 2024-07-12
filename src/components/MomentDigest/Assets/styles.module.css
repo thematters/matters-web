@@ -27,6 +27,19 @@
       width: 100%;
       height: 100%;
       background: var(--color-grey-lighter);
+      object-fit: cover;
     }
   }
+}
+
+.imagePlaceholder {
+  width: 6.625rem;
+  height: 6.625rem;
+  background: var(--color-grey-hover);
+}
+
+.assetsPlaceholder {
+  position: absolute;
+  top: -100%;
+  left: -100%;
 }
