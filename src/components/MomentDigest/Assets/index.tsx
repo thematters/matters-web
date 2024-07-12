@@ -103,7 +103,6 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
             thumbnail={toSizedImageURL({
               url: asset.path,
               width: width,
-              disableAnimation: true,
             })}
             width={asset.width}
             height={asset.height}
