@@ -2813,6 +2813,10 @@
   "qBOEDo": {
     "defaultMessage": "最大金额为 HKD {max}"
   },
+  "qCotH5": {
+    "defaultMessage": "在动态中留言",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
+  },
   "qE8ew4": {
     "defaultMessage": "收藏成功",
     "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
@@ -3351,10 +3355,6 @@
   "zn83cE": {
     "defaultMessage": "效果预览",
     "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
-  },
-  "znsO4a": {
-    "defaultMessage": "commented in you moment",
-    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",

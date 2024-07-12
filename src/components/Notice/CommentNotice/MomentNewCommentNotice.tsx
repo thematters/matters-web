@@ -28,8 +28,8 @@ const MomentNewCommentNotice = ({
       notice={notice}
       action={
         <FormattedMessage
-          defaultMessage="commented in you moment"
-          id="znsO4a"
+          defaultMessage="commented in your moment"
+          id="qCotH5"
           description="src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
         />
       }

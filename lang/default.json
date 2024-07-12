@@ -2813,6 +2813,10 @@
   "qBOEDo": {
     "defaultMessage": "Maximum amount is HKD {max}"
   },
+  "qCotH5": {
+    "defaultMessage": "commented in your moment",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
+  },
   "qE8ew4": {
     "defaultMessage": "Bookmarked",
     "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
@@ -3351,10 +3355,6 @@
   "zn83cE": {
     "defaultMessage": "Preview",
     "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
-  },
-  "znsO4a": {
-    "defaultMessage": "commented in you moment",
-    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

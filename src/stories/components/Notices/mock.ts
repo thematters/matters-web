@@ -4,6 +4,7 @@ import {
   MOCK_CIRCLE_ARTICLE,
   MOCK_CIRCLE_COMMENT,
   MOCK_COMMENT,
+  MOCK_MOMENT,
   MOCK_PARENT_COMMENT,
   MOCK_TAG,
   MOCK_TRANSACTION,
@@ -217,6 +218,7 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CircleNewDiscussion' as any,
     comment: MOCK_CIRCLE_COMMENT,
   },
+  // CommentLikeNotice
   {
     __typename: 'CommentNotice',
     id: 'CommentLikedNotice',
@@ -224,7 +226,55 @@ export const MOCK_NOTICE_LIST = [
     createdAt: '2024-06-24T07:29:17.682Z',
     actors: [MOCK_USER],
     commentNoticeType: 'CommentLiked',
-    comment: MOCK_CIRCLE_COMMENT,
+    comment: MOCK_COMMENT,
+  },
+  // Moment comment Like Notice
+  {
+    __typename: 'CommentNotice',
+    id: 'MomentCommentLikedNotice',
+    unread: false,
+    createdAt: '2024-06-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'CommentLiked',
+    moment: MOCK_MOMENT,
+  },
+  // Moment new comment notice
+  {
+    __typename: 'CommentNotice',
+    id: 'MomentNewCommentNotice',
+    unread: false,
+    createdAt: '2024-06-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'MomentNewComment',
+  },
+  // moment comment mentioned you notice
+  {
+    __typename: 'CommentNotice',
+    id: 'MomentCommentMentionedYouNotice',
+    unread: false,
+    createdAt: '2024-06-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'CommentMentionedYou',
+  },
+  // Moment Mentioned You notice
+  {
+    __typename: 'MomentNotice',
+    id: 'MomentMentionedYouNotice',
+    unread: false,
+    createdAt: '2020-07-10T07:29:17.682Z',
+    actors: [MOCK_USER],
+    momentNoticeType: 'MomentMentionedYou',
+    moment: MOCK_MOMENT,
+  },
+  // Moment Liked notice
+  {
+    __typename: 'MomentNotice',
+    id: 'MomentLikedNotice',
+    unread: false,
+    createdAt: '2020-07-10T07:29:17.682Z',
+    actors: [MOCK_USER],
+    momentNoticeType: 'MomentLiked',
+    comment: MOCK_COMMENT,
   },
 
   /**
