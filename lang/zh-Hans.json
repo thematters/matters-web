@@ -68,7 +68,7 @@
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "/5OvMK": {
-    "defaultMessage": "喜欢你的动态"
+    "defaultMessage": "liked your moment"
   },
   "/5jk3i": {
     "defaultMessage": "订阅成功！🎉"
@@ -111,7 +111,7 @@
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
   "/kdFi6": {
-    "defaultMessage": "mentioned you in a moment comment",
+    "defaultMessage": "在动态留言中提及了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "/pnYHM": {
@@ -1182,7 +1182,7 @@
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "Jaxf/L": {
-    "defaultMessage": "喜欢你的留言"
+    "defaultMessage": "liked your moment comment"
   },
   "JkWLg6": {
     "defaultMessage": "被追踪",
@@ -2346,7 +2346,7 @@
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
   "fkQOxQ": {
-    "defaultMessage": "在动态中提及了你"
+    "defaultMessage": "mentioned you in moment"
   },
   "fnv5rD": {
     "defaultMessage": "赞赏作品（当前 {total} 次赞赏）"
