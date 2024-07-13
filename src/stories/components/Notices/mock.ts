@@ -228,7 +228,7 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CommentLiked',
     comment: MOCK_COMMENT,
   },
-  // Moment comment Like Notice
+  // ✅ Moment comment Like Notice
   {
     __typename: 'CommentNotice',
     id: 'MomentCommentLikedNotice',
@@ -236,7 +236,10 @@ export const MOCK_NOTICE_LIST = [
     createdAt: '2024-06-24T07:29:17.682Z',
     actors: [MOCK_USER],
     commentNoticeType: 'CommentLiked',
-    moment: MOCK_MOMENT,
+    comment: {
+      ...MOCK_COMMENT,
+      type: 'moment'
+    }
   },
   // ✅ Moment new comment notice
   {
@@ -256,7 +259,10 @@ export const MOCK_NOTICE_LIST = [
     createdAt: '2024-06-24T07:29:17.682Z',
     actors: [MOCK_USER],
     commentNoticeType: 'CommentMentionedYou',
-    comment: MOCK_COMMENT,
+    comment: {
+      ...MOCK_COMMENT,
+      type: 'moment'
+    }
   },
   // ⭕ Moment Mentioned You notice
   {

@@ -21,10 +21,26 @@ const CommentLikedNotice = ({
     return null
   }
   const commentArticle =
-    notice.comment?.node.__typename === 'Article' ? notice.comment.node : null
+    notice.comment?.node?.__typename === 'Article' ? notice.comment.node : null
+  const commentMoment =
+    notice.comment?.type === 'moment' ? notice.comment : null
 
   return (
     <>
+      {commentMoment && (
+        <NoticeDigest
+          notice={notice}
+          action={
+            <FormattedMessage
+              defaultMessage="liked your moment comment"
+              id="Jaxf/L"
+            />
+          }
+          // TODO: add title={notice.comment?.content || 'FIXME title'}
+          content={<NoticeComment comment={notice.comment} />}
+          testId={TEST_ID.NOTICE_COMMENT_LIKED}
+        />
+      )}
       {commentArticle && (
         <NoticeDigest
           notice={notice}

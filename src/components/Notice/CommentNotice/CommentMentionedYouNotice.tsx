@@ -26,8 +26,7 @@ const CommentMentionedYouNotice = ({
     notice.comment?.node.__typename === 'Article' ? notice.comment.node : null
   const commentCircle =
     notice.comment?.node.__typename === 'Circle' ? notice.comment.node : null
-  const commentMoment =
-    notice.comment?.node.__typename === 'Moment' ? notice.comment.node : null
+  const isCommentMoment = notice.comment?.type === 'moment'
 
   const commentCircleDiscussion =
     notice.comment?.type === 'circleDiscussion' ? notice.comment.type : null
@@ -49,7 +48,7 @@ const CommentMentionedYouNotice = ({
 
   return (
     <>
-      {commentMoment && (
+      {isCommentMoment && (
         <NoticeDigest
           notice={notice}
           action={
