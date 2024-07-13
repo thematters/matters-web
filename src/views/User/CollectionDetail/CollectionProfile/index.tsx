@@ -114,6 +114,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                 {!!description && (
                   <p className={styles.description}>{description}</p>
                 )}
+                <p>❤️</p>
                 {!description && isViewer && (
                   <p className={styles.addDescription}>
                     <Button
