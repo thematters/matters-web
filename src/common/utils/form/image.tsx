@@ -86,3 +86,49 @@ export const validateImage = (image: File, isAvatar: boolean = false) =>
       }
     })
   })
+
+export const calculateRenderedImageSize = (
+  viewportWidth: number,
+  viewportHeight: number,
+  imageWidth: number,
+  imageHeight: number
+): { width: number; height: number } => {
+  const viewportAspectRatio = viewportWidth / viewportHeight
+  const imageAspectRatio = imageWidth / imageHeight
+
+  let renderedWidth: number
+  let renderedHeight: number
+
+  if (viewportAspectRatio > imageAspectRatio) {
+    // If the viewport aspect ratio is greater than the image aspect ratio, fit by height
+    renderedHeight = viewportHeight
+    renderedWidth = viewportHeight * imageAspectRatio
+  } else {
+    // If the viewport aspect ratio is less than or equal to the image aspect ratio, fit by width
+    renderedWidth = viewportWidth
+    renderedHeight = viewportWidth / imageAspectRatio
+  }
+
+  return { width: renderedWidth, height: renderedHeight }
+}
+
+export const checkImagesLoaded = async (
+  images: NodeListOf<HTMLImageElement>
+): Promise<void> => {
+  const imagePromises: Promise<void>[] = []
+
+  for (let img of images) {
+    if (img.complete) {
+      continue
+    }
+
+    const imgPromise = new Promise<void>((resolve, reject) => {
+      img.addEventListener('load', () => resolve())
+      img.addEventListener('error', (err) => reject(err))
+    })
+
+    imagePromises.push(imgPromise)
+  }
+
+  await Promise.all(imagePromises)
+}
