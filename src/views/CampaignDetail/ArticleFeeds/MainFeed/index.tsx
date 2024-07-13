@@ -41,7 +41,10 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
   // pagination
   const connectionPath = 'campaign.articles'
   const { edges, pageInfo } = data?.campaign?.articles || {}
-  const isNewLoading = networkStatus === NetworkStatus.loading
+  const isNewLoading =
+    [NetworkStatus.loading, NetworkStatus.setVariables].indexOf(
+      networkStatus
+    ) >= 0
 
   // private data
   const loadPrivate = (publicData?: CampaignArticlesPublicQuery) => {
