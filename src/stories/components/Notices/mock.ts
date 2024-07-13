@@ -238,8 +238,8 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CommentLiked',
     comment: {
       ...MOCK_COMMENT,
-      type: 'moment'
-    }
+      type: 'moment',
+    },
   },
   // ✅ Moment new comment notice
   {
@@ -261,8 +261,8 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CommentMentionedYou',
     comment: {
       ...MOCK_COMMENT,
-      type: 'moment'
-    }
+      type: 'moment',
+    },
   },
   // ⭕ Moment Mentioned You notice
   {
