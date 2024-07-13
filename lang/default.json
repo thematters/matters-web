@@ -1856,10 +1856,6 @@
     "defaultMessage": "Add to Featured",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
-  "Wg0ZvI": {
-    "defaultMessage": "Articles has been bookmarked",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "WiGHyF": {
     "defaultMessage": "Web Monetization standard"
   },
@@ -2570,10 +2566,6 @@
     "defaultMessage": "Last step: Set Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
-  "l02bPO": {
-    "defaultMessage": "Articles has been collected",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "l2eEyp": {
     "defaultMessage": "Transaction Password successfully changed."
   },
@@ -3172,6 +3164,10 @@
     "defaultMessage": "Learn more",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
+  "wh5Xgf": {
+    "defaultMessage": "Content has been bookmarked",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "wicnP9": {
     "defaultMessage": "Visa / Mastercard / American Express payment",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
@@ -3303,6 +3299,10 @@
   },
   "zE51j6": {
     "defaultMessage": "Failed to publish, please try again."
+  },
+  "zHDrpp": {
+    "defaultMessage": "Content has been collected",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",

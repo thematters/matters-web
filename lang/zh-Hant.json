@@ -1856,10 +1856,6 @@
     "defaultMessage": "添加到精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
-  "Wg0ZvI": {
-    "defaultMessage": "作品被收藏",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "WiGHyF": {
     "defaultMessage": "Web Monetization 標準"
   },
@@ -2570,10 +2566,6 @@
     "defaultMessage": "最後一步：設置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
-  "l02bPO": {
-    "defaultMessage": "作品被關聯",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "l2eEyp": {
     "defaultMessage": "交易密碼重置成功"
   },
@@ -3172,6 +3164,10 @@
     "defaultMessage": "瞭解更多",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
+  "wh5Xgf": {
+    "defaultMessage": "作品被收藏",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "wicnP9": {
     "defaultMessage": "Visa / Mastercard / American Express 支付",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
@@ -3303,6 +3299,10 @@
   },
   "zE51j6": {
     "defaultMessage": "發布失敗"
+  },
+  "zHDrpp": {
+    "defaultMessage": "作品被關聯",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "zKOr2x": {
     "defaultMessage": "已追蹤用戶佔總觀看人數比例",
