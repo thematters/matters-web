@@ -97,7 +97,7 @@ const EditModeHeader = ({
     restProps.selectedStage !== article.campaigns[0]?.stage.id
   const isResetCampaign =
     isCampaignRevised &&
-    (!restProps.selectedCampaign?.id || !restProps.selectedStage)
+    (!restProps.appliedCampaign?.id || !restProps.selectedStage)
 
   const needRepublish =
     isTitleRevised ||
@@ -160,7 +160,7 @@ const EditModeHeader = ({
                   ? []
                   : [
                       {
-                        campaign: restProps.selectedCampaign?.id,
+                        campaign: restProps.appliedCampaign?.id,
                         stage: restProps.selectedStage,
                       },
                     ],

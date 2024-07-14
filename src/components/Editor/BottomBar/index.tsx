@@ -90,7 +90,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
   canComment,
   toggleComment,
 
-  selectedCampaign,
+  appliedCampaign,
   selectedStage,
   editCampaign,
 
@@ -141,7 +141,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
     toggleComment,
     disableChangeCanComment: article?.canComment,
 
-    selectedCampaign,
+    appliedCampaign,
     selectedStage,
     editCampaign,
   }

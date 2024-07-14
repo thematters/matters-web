@@ -23,6 +23,7 @@ export const GET_EDIT_ARTICLE = gql`
       }
       summary
       summaryCustomized
+      createdAt
       assets {
         ...Asset
       }
@@ -37,6 +38,7 @@ export const GET_EDIT_ARTICLE = gql`
         campaigns(input: { first: 1 }) {
           edges {
             node {
+              id
               ...EditorSelectCampaign
             }
           }

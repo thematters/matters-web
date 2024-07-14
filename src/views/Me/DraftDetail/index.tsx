@@ -60,6 +60,7 @@ const Editor = dynamic(
 const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
   id: '',
   title: '',
+  createdAt: new Date().toISOString(),
   publishState: PublishStateType.Unpublished,
   content: '',
   summary: '',

@@ -14,6 +14,7 @@ export const editMetaFragment = gql`
   fragment EditMetaDraft on Draft {
     id
     publishState
+    createdAt
     cover
     assets {
       ...Asset
@@ -62,6 +63,7 @@ export const DRAFT_DETAIL_VIEWER = gql`
       campaigns(input: { first: 1 }) {
         edges {
           node {
+            id
             ...EditorSelectCampaign
           }
         }

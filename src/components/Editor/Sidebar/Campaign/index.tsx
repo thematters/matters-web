@@ -8,7 +8,7 @@ import Box from '../Box'
 import styles from './styles.module.css'
 
 const SidebarCampaign: React.FC<Partial<SelectCampaignProps>> = (props) => {
-  if (!props.selectedCampaign || !props.editCampaign) {
+  if (!props.appliedCampaign || !props.editCampaign) {
     return null
   }
 

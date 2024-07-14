@@ -53,7 +53,7 @@ const SettingsList = ({
   collectionCount,
   tagsCount,
 
-  selectedCampaign,
+  appliedCampaign,
   selectedStage,
   editCampaign,
 
@@ -108,7 +108,7 @@ const SettingsList = ({
             </ListItem>
           )}
 
-          {selectedCampaign && editCampaign && (
+          {appliedCampaign && editCampaign && (
             <section className={styles.campaign}>
               <h3 className={styles.title}>
                 <FormattedMessage
@@ -117,7 +117,7 @@ const SettingsList = ({
                 />
               </h3>
               <SelectCampaign
-                selectedCampaign={selectedCampaign}
+                appliedCampaign={appliedCampaign}
                 selectedStage={selectedStage}
                 editCampaign={editCampaign}
               />

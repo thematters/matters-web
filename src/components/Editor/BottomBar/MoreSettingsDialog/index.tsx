@@ -18,7 +18,7 @@ const BaseMoreSettingsDialog = ({
   children,
   canComment,
   toggleComment,
-  selectedCampaign,
+  appliedCampaign,
   selectedStage,
   editCampaign,
   ...props
@@ -56,7 +56,7 @@ const BaseMoreSettingsDialog = ({
         />
 
         <Dialog.Content noSpacing>
-          {selectedCampaign && editCampaign && (
+          {appliedCampaign && editCampaign && (
             <section className={styles.campaign}>
               <h3 className={styles.title}>
                 <FormattedMessage
@@ -65,7 +65,7 @@ const BaseMoreSettingsDialog = ({
                 />
               </h3>
               <SelectCampaign
-                selectedCampaign={selectedCampaign}
+                appliedCampaign={appliedCampaign}
                 selectedStage={selectedStage}
                 editCampaign={editCampaign}
               />

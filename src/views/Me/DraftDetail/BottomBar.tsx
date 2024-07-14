@@ -8,7 +8,10 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
-import { SelectCampaignProps } from '~/components/Editor/SelectCampaign'
+import {
+  getSelectCampaign,
+  SelectCampaignProps,
+} from '~/components/Editor/SelectCampaign'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import {
   DigestRichCirclePublicFragment,
@@ -63,11 +66,11 @@ const EditDraftBottomBar = ({
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
 
-  const appliedCampaign = campaigns && campaigns[0]
-  const selectedCampaign = draft.campaigns.filter(
-    (c) => c.campaign.id === appliedCampaign?.id
-  )[0]
-  const selectedStage = selectedCampaign?.stage?.id
+  const { appliedCampaign, selectedStage } = getSelectCampaign({
+    applied: campaigns && campaigns[0],
+    attached: draft.campaigns,
+    createdAt: draft.createdAt,
+  })
 
   const coverProps: SetCoverProps = {
     cover: draft.cover,
@@ -111,8 +114,8 @@ const EditDraftBottomBar = ({
     canComment,
     toggleComment,
 
-    selectedCampaign: appliedCampaign,
-    selectedStage: selectedStage,
+    appliedCampaign,
+    selectedStage,
     editCampaign,
   }
 

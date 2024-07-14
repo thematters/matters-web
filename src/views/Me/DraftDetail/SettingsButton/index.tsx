@@ -9,6 +9,10 @@ import {
   SetTagsProps,
   ToggleAccessProps,
 } from '~/components/Editor'
+import {
+  getSelectCampaign,
+  SelectCampaignProps,
+} from '~/components/Editor/SelectCampaign'
 import { EditorSettingsDialog } from '~/components/Editor/SettingsDialog'
 import {
   DigestRichCirclePublicFragment,
@@ -126,15 +130,15 @@ const SettingsButton = ({
     iscnPublishSaving,
   }
 
-  const appliedCampaign = campaigns && campaigns[0]
-  const selectedCampaign = draft.campaigns.filter(
-    (c) => c.campaign.id === appliedCampaign?.id
-  )[0]
-  const selectedStage = selectedCampaign?.stage?.id
+  const { appliedCampaign, selectedStage } = getSelectCampaign({
+    applied: campaigns && campaigns[0],
+    attached: draft.campaigns,
+    createdAt: draft.createdAt,
+  })
 
-  const campaignProps = {
-    campaign: appliedCampaign,
-    stage: selectedStage,
+  const campaignProps: Partial<SelectCampaignProps> = {
+    appliedCampaign,
+    selectedStage,
     editCampaign,
   }
 

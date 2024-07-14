@@ -1,5 +1,6 @@
 import { ENTITY_TYPE } from '~/common/enums'
 import { toDigestTagPlaceholder } from '~/components'
+import { getSelectCampaign } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import {
@@ -129,15 +130,15 @@ const EditDraftResponse = ({ draft }: SidebarProps) => {
 const EditDraftCampaign = ({ draft, campaigns }: SidebarProps) => {
   const { edit } = useEditDraftCampaign()
 
-  const appliedCampaign = campaigns && campaigns[0]
-  const selectedCampaign = draft.campaigns.filter(
-    (c) => c.campaign.id === appliedCampaign?.id
-  )[0]
-  const selectedStage = selectedCampaign?.stage?.id
+  const { appliedCampaign, selectedStage } = getSelectCampaign({
+    applied: campaigns && campaigns[0],
+    attached: draft.campaigns,
+    createdAt: draft.createdAt,
+  })
 
   return (
     <Sidebar.Campaign
-      selectedCampaign={appliedCampaign}
+      appliedCampaign={appliedCampaign}
       selectedStage={selectedStage}
       editCampaign={edit}
     />

@@ -49,7 +49,7 @@ const MetaInfo = ({
   const editPath = toPath({ page: 'articleEdit', article })
   const isExceedRevision = article.revisionCount >= MAX_ARTICLE_REVISION_COUNT
 
-  const campaign = article.campaigns[0].campaign
+  const campaign = article.campaigns[0]?.campaign
 
   const { router, isInPath } = useRoute()
   const { shortHash, ...qs } = router.query

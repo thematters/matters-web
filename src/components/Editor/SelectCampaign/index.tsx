@@ -9,13 +9,40 @@ import {
 } from '~/gql/graphql'
 
 export interface SelectCampaignProps {
-  selectedCampaign: EditorSelectCampaignFragment
+  appliedCampaign: EditorSelectCampaignFragment
   selectedStage?: string
   editCampaign: (value?: ArticleCampaignInput) => any
 }
 
+export const getSelectCampaign = ({
+  applied,
+  attached,
+  createdAt,
+}: {
+  applied?: EditorSelectCampaignFragment
+  attached: Array<{ campaign: { id: string }; stage: { id: string } }>
+  createdAt: string // draft or article creation time
+}) => {
+  const { start, end } = applied?.writingPeriod || {}
+  const isCampaignStarted = !!start && new Date(createdAt) >= new Date(start)
+  const isCampaignEnded = !end || (!!end && new Date(createdAt) < new Date(end))
+
+  // only show appliedCampaign if the article or draft is created during the writing period
+  const appliedCampaign =
+    isCampaignStarted && isCampaignEnded ? applied : undefined
+  const selectedCampaign = attached.filter(
+    (c) => c.campaign.id === applied?.id
+  )[0]
+  const selectedStage = selectedCampaign?.stage?.id
+
+  return {
+    appliedCampaign,
+    selectedStage,
+  }
+}
+
 const SelectCampaign = ({
-  selectedCampaign,
+  appliedCampaign,
   selectedStage,
   editCampaign,
 }: SelectCampaignProps) => {
@@ -25,7 +52,7 @@ const SelectCampaign = ({
     selected: !selectedStage,
   }
   const now = new Date()
-  const availableStages = selectedCampaign.stages.filter((s) => {
+  const availableStages = appliedCampaign.stages.filter((s) => {
     const period = s.period
 
     if (!period) return false
@@ -39,7 +66,7 @@ const SelectCampaign = ({
       onChange={(option) =>
         editCampaign(
           option.value
-            ? { campaign: selectedCampaign.id, stage: option.value }
+            ? { campaign: appliedCampaign.id, stage: option.value }
             : undefined
         )
       }
@@ -64,6 +91,11 @@ const SelectCampaign = ({
 SelectCampaign.fragments = gql`
   fragment EditorSelectCampaign on WritingChallenge {
     id
+    writingPeriod {
+      start
+      end
+    }
+
     stages {
       id
       name

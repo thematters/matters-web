@@ -29,7 +29,10 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
-import { SelectCampaignProps } from '~/components/Editor/SelectCampaign'
+import {
+  getSelectCampaign,
+  SelectCampaignProps,
+} from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
@@ -134,11 +137,11 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   // campaign
   const appliedCampaigns = article.author.campaigns.edges?.map((e) => e.node)
-  const appliedCampaign = appliedCampaigns && appliedCampaigns[0]
-  const selectedCampaign = article.campaigns.filter(
-    (c) => c.campaign.id === appliedCampaign?.id
-  )[0]
-  const selectedStage = selectedCampaign?.stage?.id
+  const { appliedCampaign, selectedStage } = getSelectCampaign({
+    applied: appliedCampaigns && appliedCampaigns[0],
+    attached: article.campaigns,
+    createdAt: article.createdAt,
+  })
 
   const [campaign, setCampaign] = useState<ArticleCampaignInput | undefined>(
     appliedCampaign?.id
@@ -197,7 +200,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
     toggleComment: setCanComment,
   }
   const campaignProps: Partial<SelectCampaignProps> = {
-    selectedCampaign: appliedCampaign,
+    appliedCampaign,
     selectedStage: campaign?.stage,
     editCampaign: setCampaign,
   }
