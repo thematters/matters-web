@@ -111,8 +111,8 @@ const EditDraftBottomBar = ({
     canComment,
     toggleComment,
 
-    campaign: appliedCampaign,
-    stage: selectedStage,
+    selectedCampaign: appliedCampaign,
+    selectedStage: selectedStage,
     editCampaign,
   }
 

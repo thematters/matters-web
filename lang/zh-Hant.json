@@ -1826,6 +1826,9 @@
     "defaultMessage": "相關推薦",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
+  "VrK0Q0": {
+    "defaultMessage": "請選擇⋯"
+  },
   "VrOoVf": {
     "defaultMessage": "Matters 不會透過任何渠道主動詢問你的錢包私鑰。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"

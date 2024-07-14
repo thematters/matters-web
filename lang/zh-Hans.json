@@ -1826,6 +1826,9 @@
     "defaultMessage": "相关推荐",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
+  "VrK0Q0": {
+    "defaultMessage": "请选择⋯"
+  },
   "VrOoVf": {
     "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"

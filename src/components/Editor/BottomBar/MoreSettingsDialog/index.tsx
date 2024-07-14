@@ -8,31 +8,22 @@ import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
 import styles from './styles.module.css'
 
-type AccessDialogProps = {
+type MoreSettingsDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & ToggleAccessProps &
   ToggleResponseProps &
   Partial<SelectCampaignProps>
 
-const BaseAccessDialog = ({
+const BaseMoreSettingsDialog = ({
   children,
   canComment,
   toggleComment,
-  campaign,
-  stage,
+  selectedCampaign,
+  selectedStage,
   editCampaign,
   ...props
-}: AccessDialogProps) => {
+}: MoreSettingsDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
-
-  const campaignProps =
-    campaign && editCampaign
-      ? {
-          campaign,
-          stage,
-          editCampaign,
-        }
-      : null
 
   const toggleResponseProps: ToggleResponseProps = {
     canComment,
@@ -65,7 +56,7 @@ const BaseAccessDialog = ({
         />
 
         <Dialog.Content noSpacing>
-          {campaignProps && (
+          {selectedCampaign && editCampaign && (
             <section className={styles.campaign}>
               <h3 className={styles.title}>
                 <FormattedMessage
@@ -73,7 +64,11 @@ const BaseAccessDialog = ({
                   id="6pc948"
                 />
               </h3>
-              <SelectCampaign {...campaignProps} />
+              <SelectCampaign
+                selectedCampaign={selectedCampaign}
+                selectedStage={selectedStage}
+                editCampaign={editCampaign}
+              />
             </section>
           )}
 
@@ -92,10 +87,10 @@ const BaseAccessDialog = ({
   )
 }
 
-const AccessDialog = (props: AccessDialogProps) => (
-  <Dialog.Lazy mounted={<BaseAccessDialog {...props} />}>
+const MoreSettingsDialog = (props: MoreSettingsDialogProps) => (
+  <Dialog.Lazy mounted={<BaseMoreSettingsDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 
-export default AccessDialog
+export default MoreSettingsDialog

@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { FormattedMessage } from 'react-intl'
 
 import { datetimeFormat } from '~/common/utils'
 import { Form } from '~/components'
@@ -8,23 +9,23 @@ import {
 } from '~/gql/graphql'
 
 export interface SelectCampaignProps {
-  campaign: EditorSelectCampaignFragment
-  stage?: string // selected stage
+  selectedCampaign: EditorSelectCampaignFragment
+  selectedStage?: string
   editCampaign: (value?: ArticleCampaignInput) => any
 }
 
 const SelectCampaign = ({
-  campaign,
-  stage,
+  selectedCampaign,
+  selectedStage,
   editCampaign,
 }: SelectCampaignProps) => {
   const RESET_OPTION = {
-    name: '請選擇⋯',
+    name: <FormattedMessage defaultMessage="Please select..." id="VrK0Q0" />,
     value: undefined,
-    selected: !stage,
+    selected: !selectedStage,
   }
   const now = new Date()
-  const availableStages = campaign.stages.filter((s) => {
+  const availableStages = selectedCampaign.stages.filter((s) => {
     const period = s.period
 
     if (!period) return false
@@ -38,7 +39,7 @@ const SelectCampaign = ({
       onChange={(option) =>
         editCampaign(
           option.value
-            ? { campaign: campaign.id, stage: option.value }
+            ? { campaign: selectedCampaign.id, stage: option.value }
             : undefined
         )
       }
@@ -50,7 +51,7 @@ const SelectCampaign = ({
               ? `${s.name} - ${datetimeFormat.absolute(s.period?.start)}`
               : s.name,
             value: s.id,
-            selected: s.id === stage,
+            selected: s.id === selectedStage,
           }
         }),
       ]}

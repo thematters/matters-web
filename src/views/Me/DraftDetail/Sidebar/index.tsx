@@ -137,8 +137,8 @@ const EditDraftCampaign = ({ draft, campaigns }: SidebarProps) => {
 
   return (
     <Sidebar.Campaign
-      campaign={appliedCampaign}
-      stage={selectedStage}
+      selectedCampaign={appliedCampaign}
+      selectedStage={selectedStage}
       editCampaign={edit}
     />
   )

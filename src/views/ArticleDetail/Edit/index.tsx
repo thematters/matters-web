@@ -197,8 +197,8 @@ const BaseEdit = ({ article }: { article: Article }) => {
     toggleComment: setCanComment,
   }
   const campaignProps: Partial<SelectCampaignProps> = {
-    campaign: appliedCampaign,
-    stage: campaign?.stage,
+    selectedCampaign: appliedCampaign,
+    selectedStage: campaign?.stage,
     editCampaign: setCampaign,
   }
 

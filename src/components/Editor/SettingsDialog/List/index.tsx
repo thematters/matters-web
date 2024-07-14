@@ -53,8 +53,8 @@ const SettingsList = ({
   collectionCount,
   tagsCount,
 
-  campaign,
-  stage,
+  selectedCampaign,
+  selectedStage,
   editCampaign,
 
   canComment,
@@ -63,15 +63,6 @@ const SettingsList = ({
 
   ...restProps
 }: SettingsListDialogProps) => {
-  const campaignProps =
-    campaign && editCampaign
-      ? {
-          campaign,
-          stage,
-          editCampaign,
-        }
-      : null
-
   const responseProps: ToggleResponseProps = {
     canComment,
     toggleComment,
@@ -117,7 +108,7 @@ const SettingsList = ({
             </ListItem>
           )}
 
-          {campaignProps && (
+          {selectedCampaign && editCampaign && (
             <section className={styles.campaign}>
               <h3 className={styles.title}>
                 <FormattedMessage
@@ -125,7 +116,11 @@ const SettingsList = ({
                   id="6pc948"
                 />
               </h3>
-              <SelectCampaign {...campaignProps} />
+              <SelectCampaign
+                selectedCampaign={selectedCampaign}
+                selectedStage={selectedStage}
+                editCampaign={editCampaign}
+              />
             </section>
           )}
 

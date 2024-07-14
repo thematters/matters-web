@@ -31,7 +31,7 @@ import ArticleCustomStagingArea from '../ArticleCustomStagingArea'
 import { SelectCampaignProps } from '../SelectCampaign'
 import SetCover from '../SetCover'
 import TagCustomStagingArea from '../TagCustomStagingArea'
-import AccessDialog from './AccessDialog'
+import MoreSettingsDialog from './MoreSettingsDialog'
 import styles from './styles.module.css'
 
 export type BottomBarProps = {
@@ -90,8 +90,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
   canComment,
   toggleComment,
 
-  campaign,
-  stage,
+  selectedCampaign,
+  selectedStage,
   editCampaign,
 
   saving,
@@ -113,7 +113,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
     entityType,
     coverSaving,
   }
-  const accessProps: ToggleAccessProps &
+  const settingsProps: ToggleAccessProps &
     ToggleResponseProps &
     Partial<SelectCampaignProps> = {
     circle,
@@ -141,8 +141,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
     toggleComment,
     disableChangeCanComment: article?.canComment,
 
-    campaign,
-    stage,
+    selectedCampaign,
+    selectedStage,
     editCampaign,
   }
 
@@ -253,8 +253,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
               )}
             </EditorSearchSelectDialog>
 
-            {/* Circle & License & Support Feedback & ISCN & canComment */}
-            <AccessDialog {...accessProps}>
+            {/* Campaign & Circle & License & Support Feedback & ISCN & canComment */}
+            <MoreSettingsDialog {...settingsProps}>
               {({ openDialog }) => (
                 <button
                   aria-label={intl.formatMessage({
@@ -274,7 +274,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   </TextIcon>
                 </button>
               )}
-            </AccessDialog>
+            </MoreSettingsDialog>
           </section>
         </section>
       </Layout.FixedMain>

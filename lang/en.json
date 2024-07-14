@@ -1826,6 +1826,9 @@
     "defaultMessage": "More",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
+  "VrK0Q0": {
+    "defaultMessage": "Please select..."
+  },
   "VrOoVf": {
     "defaultMessage": "Matters will never ask your wallet key through any channel.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"

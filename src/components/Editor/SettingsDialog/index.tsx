@@ -113,8 +113,8 @@ const BaseEditorSettingsDialog = ({
   togglePublishISCN,
   iscnPublishSaving,
 
-  campaign,
-  stage,
+  selectedCampaign,
+  selectedStage,
   editCampaign,
 
   canComment,
@@ -183,8 +183,8 @@ const BaseEditorSettingsDialog = ({
   }
 
   const campaignProps: Partial<SelectCampaignProps> = {
-    campaign,
-    stage,
+    selectedCampaign,
+    selectedStage,
     editCampaign,
   }
 
