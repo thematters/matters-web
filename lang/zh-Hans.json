@@ -1632,7 +1632,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "SFsQ1E": {
-    "defaultMessage": "查看回应"
+    "defaultMessage": "查看评论"
   },
   "SHWkv8": {
     "defaultMessage": "为什么先采用 Optimism ?",
@@ -1706,7 +1706,7 @@
     "defaultMessage": "临时密码已过期，请尝试重新发送"
   },
   "TInwt3": {
-    "defaultMessage": "关闭回应"
+    "defaultMessage": "关闭评论"
   },
   "TKsfIS": {
     "defaultMessage": "流星号"

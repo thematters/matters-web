@@ -21,8 +21,8 @@ const ExpandButton = ({
       icon={<Icon icon={IconDown} size={12} />}
     >
       <Translate
-        zh_hant={`查看 ${restCount} 條回應`}
-        zh_hans={`查看 ${restCount} 条回应`}
+        zh_hant={`查看 ${restCount} 條評論`}
+        zh_hans={`查看 ${restCount} 条评论`}
         en={`Load the rest ${restCount} replies`}
       />
     </TextIcon>

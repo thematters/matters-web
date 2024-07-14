@@ -1632,7 +1632,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "SFsQ1E": {
-    "defaultMessage": "查看回應"
+    "defaultMessage": "查看評論"
   },
   "SHWkv8": {
     "defaultMessage": "為什麼採用 Optimism？",
@@ -1706,7 +1706,7 @@
     "defaultMessage": "臨時密碼已過期，請嘗試重新發送"
   },
   "TInwt3": {
-    "defaultMessage": "關閉回應"
+    "defaultMessage": "關閉評論"
   },
   "TKsfIS": {
     "defaultMessage": "流星號"
