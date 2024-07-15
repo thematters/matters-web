@@ -4,11 +4,11 @@ import { TEST_ID } from '~/common/enums'
 import { render, screen } from '~/common/utils/test'
 import { MOCK_MOMENT } from '~/stories/mocks'
 
-import { MomentDigest } from '.'
+import { MomentDigestFeed } from '.'
 
-describe('src/components/MomentDigest/MomentDigest.test.tsx', () => {
-  it('should render MomentDigest', async () => {
-    render(<MomentDigest moment={MOCK_MOMENT} />)
+describe('src/components/MomentDigest/MomentDigestFeed.test.tsx', () => {
+  it('should render MomentDigestFeed', async () => {
+    render(<MomentDigestFeed moment={MOCK_MOMENT} />)
 
     // author
     const $author = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_AUTHOR)
@@ -29,8 +29,8 @@ describe('src/components/MomentDigest/MomentDigest.test.tsx', () => {
     expect($commentedFollowees).not.toBeInTheDocument()
   })
 
-  it('should render MomentDigest with CommentedFollowees', async () => {
-    render(<MomentDigest moment={MOCK_MOMENT} hasCommentedFollowees />)
+  it('should render MomentDigestFeed with CommentedFollowees', async () => {
+    render(<MomentDigestFeed moment={MOCK_MOMENT} hasCommentedFollowees />)
 
     // commented followees
     const $commentedFollowees = screen.queryByTestId(
@@ -39,17 +39,17 @@ describe('src/components/MomentDigest/MomentDigest.test.tsx', () => {
     expect($commentedFollowees).toBeInTheDocument()
   })
 
-  it('should render MomentDigest with author', async () => {
-    render(<MomentDigest moment={MOCK_MOMENT} hasAuthor />)
+  it('should render MomentDigestFeed with author', async () => {
+    render(<MomentDigestFeed moment={MOCK_MOMENT} hasAuthor />)
 
     // author
     const $author = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_AUTHOR)
     expect($author).toBeInTheDocument()
   })
 
-  it('should render MomentDigest without assets', async () => {
+  it('should render MomentDigestFeed without assets', async () => {
     render(
-      <MomentDigest
+      <MomentDigestFeed
         moment={{
           ...MOCK_MOMENT,
           assets: [],
@@ -62,9 +62,9 @@ describe('src/components/MomentDigest/MomentDigest.test.tsx', () => {
     expect($assets).not.toBeInTheDocument()
   })
 
-  it('shoudl render MomentDigest without content', async () => {
+  it('shoudl render MomentDigestFeed without content', async () => {
     render(
-      <MomentDigest
+      <MomentDigestFeed
         moment={{
           ...MOCK_MOMENT,
           content: '',

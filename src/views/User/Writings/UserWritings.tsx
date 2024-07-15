@@ -13,7 +13,7 @@ import {
   Layout,
   List,
   Media,
-  MomentDigest,
+  MomentDigestFeed,
   QueryError,
   SpinnerBlock,
   Translate,
@@ -228,7 +228,9 @@ const UserWritings = () => {
                     }
                   />
                 )}
-                {node.__typename === 'Moment' && <MomentDigest moment={node} />}
+                {node.__typename === 'Moment' && (
+                  <MomentDigestFeed moment={node} />
+                )}
               </List.Item>
             ))}
           </List>
