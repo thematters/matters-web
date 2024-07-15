@@ -1,6 +1,6 @@
 {
   "+12veD": {
-    "defaultMessage": "开启回应"
+    "defaultMessage": "开启评论"
   },
   "+3ny7b": {
     "defaultMessage": "{totalCount} 人赞赏了作品"
@@ -242,7 +242,7 @@
     "defaultMessage": "众聊"
   },
   "20yT4t": {
-    "defaultMessage": "回应设置",
+    "defaultMessage": "评论设置",
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
   },
   "24jhEp": {
@@ -454,7 +454,7 @@
     "defaultMessage": "开始创作"
   },
   "6B+QXo": {
-    "defaultMessage": "回应设置",
+    "defaultMessage": "评论设置",
     "description": "src/components/Editor/ToggleResponse/index.tsx"
   },
   "6BXcdo": {
@@ -1607,7 +1607,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "SFsQ1E": {
-    "defaultMessage": "查看回应"
+    "defaultMessage": "查看评论"
   },
   "SHWkv8": {
     "defaultMessage": "为什么先采用 Optimism ?",
@@ -1677,7 +1677,7 @@
     "defaultMessage": "临时密码已过期，请尝试重新发送"
   },
   "TInwt3": {
-    "defaultMessage": "关闭回应"
+    "defaultMessage": "关闭评论"
   },
   "TKsfIS": {
     "defaultMessage": "流星号"
@@ -2233,7 +2233,7 @@
     "defaultMessage": "涉及未成年人的色情"
   },
   "eIlMHB": {
-    "defaultMessage": "允许读者回应本文（开启后无法关闭）"
+    "defaultMessage": "允许读者评论本文（开启后无法关闭）"
   },
   "eKVBm/": {
     "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考{link}。"
@@ -2271,7 +2271,7 @@
     "defaultMessage": "信用卡支持需发送财务信息相关邮件，请您先验证电子邮件地址。"
   },
   "fBzH+2": {
-    "defaultMessage": "不允许读者回应本文（可通过编辑打开回应功能）"
+    "defaultMessage": "不允许读者评论本文（可通过编辑打开评论功能）"
   },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者删除"
