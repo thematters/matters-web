@@ -5,8 +5,8 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 
 import DonatorLabel from './'
 
-describe('<ArticleComemnt/DonatorLabel>', () => {
-  it('should render a ArticleComment/DonatorLabel', () => {
+describe('<Comemnt/DonatorLabel>', () => {
+  it('should render a Comment/DonatorLabel', () => {
     // from article author
     render(
       <DonatorLabel

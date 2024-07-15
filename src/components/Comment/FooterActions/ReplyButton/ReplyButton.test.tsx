@@ -5,8 +5,8 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 
 import ReplyButton from './'
 
-describe('<ArticleComment/FooterActions/ReplyButton>', () => {
-  it('should render a ArticleComment/FooterActions/ReplyButton with custom onClick', () => {
+describe('<Comment/FooterActions/ReplyButton>', () => {
+  it('should render a Comment/FooterActions/ReplyButton with custom onClick', () => {
     const onClick = vi.fn()
 
     render(<ReplyButton comment={MOCK_COMMENT} onClick={onClick} inCard />)
@@ -18,7 +18,7 @@ describe('<ArticleComment/FooterActions/ReplyButton>', () => {
     expect(onClick).toHaveBeenCalled()
   })
 
-  it('should render a disabled ArticleComment/FooterActions/ReplyButton ', () => {
+  it('should render a disabled Comment/FooterActions/ReplyButton ', () => {
     const onClick = vi.fn()
 
     render(
