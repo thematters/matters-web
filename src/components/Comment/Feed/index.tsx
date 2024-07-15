@@ -4,18 +4,18 @@ import React from 'react'
 import { COMMENT_FEED_ID_PREFIX, TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
-  ArticleThreadCommentType,
   Avatar,
   AvatarSize,
+  CommentThreadCommentType,
   DateTime,
   LinkWrapper,
 } from '~/components'
 import {
-  ArticleFeedCommentPrivateFragment,
-  ArticleFeedCommentPublicFragment,
+  CommentFeedCommentPrivateFragment,
+  CommentFeedCommentPublicFragment,
 } from '~/gql/graphql'
 
-import { ArticleCommentContent } from '../Content'
+import { CommentContent } from '../Content'
 import DropdownActions, { DropdownActionsControls } from '../DropdownActions'
 import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
@@ -30,9 +30,9 @@ export type CommentControls = {
   DropdownActionsControls
 
 export type CommentProps = {
-  comment: ArticleFeedCommentPublicFragment &
-    Partial<ArticleFeedCommentPrivateFragment>
-  pinnedComment?: ArticleThreadCommentType
+  comment: CommentFeedCommentPublicFragment &
+    Partial<CommentFeedCommentPrivateFragment>
+  pinnedComment?: CommentThreadCommentType
 } & CommentControls
 
 const BaseCommentFeed = ({
@@ -109,7 +109,7 @@ const BaseCommentFeed = ({
       </header>
 
       <section className={contentClasses}>
-        <ArticleCommentContent comment={comment} size={15} limit={5} />
+        <CommentContent comment={comment} size={15} limit={5} />
 
         <FooterActions
           comment={comment}
@@ -124,13 +124,11 @@ const BaseCommentFeed = ({
 /**
  * Memoizing
  */
-type MemoizedArticleCommentFeed = React.MemoExoticComponent<
-  React.FC<CommentProps>
-> & {
+type MemoizedCommentFeed = React.MemoExoticComponent<React.FC<CommentProps>> & {
   fragments: typeof fragments
 }
 
-export const ArticleCommentFeed = React.memo(
+export const CommentFeed = React.memo(
   BaseCommentFeed,
   (
     {
@@ -151,6 +149,6 @@ export const ArticleCommentFeed = React.memo(
       prevPinnedComment?.id === pinnedComment?.id
     )
   }
-) as MemoizedArticleCommentFeed
+) as MemoizedCommentFeed
 
-ArticleCommentFeed.fragments = fragments
+CommentFeed.fragments = fragments

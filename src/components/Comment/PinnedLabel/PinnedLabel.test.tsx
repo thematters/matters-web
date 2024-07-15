@@ -6,8 +6,8 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 
 import PinnedLabel from './'
 
-describe('<ArticleComment/PinnedLabel>', () => {
-  it('should render a ArticleComment/PinnedLabel', () => {
+describe('<Comment/PinnedLabel>', () => {
+  it('should render a Comment/PinnedLabel', () => {
     // not pinned
     render(<PinnedLabel comment={{ ...MOCK_COMMENT, pinned: false }} />)
     expect(

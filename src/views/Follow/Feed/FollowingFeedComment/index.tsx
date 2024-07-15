@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ArticleCommentContent, DateTime } from '~/components'
+import { CommentContent, DateTime } from '~/components'
 import {
   FollowingFeedCommentPrivateFragment,
   FollowingFeedCommentPublicFragment,
@@ -25,7 +25,7 @@ const FollowingFeedComment: React.FC<FollowingFeedCommentProps> & {
       {header}
 
       <section className={styles.content}>
-        <ArticleCommentContent comment={comment} size={15} />
+        <CommentContent comment={comment} size={15} />
       </section>
 
       <footer className={styles.footer}>

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
 import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import {
-  ArticleThreadCommentType,
+  CommentThreadCommentType,
   Icon,
   Menu,
   toast,
@@ -13,13 +13,13 @@ import {
 import { updateArticleComments } from '~/components/GQL'
 import { TOGGLE_ARTICLE_PIN_COMMENT } from '~/components/GQL/mutations/togglePinComment'
 import {
-  ArticleCommentPinButtonCommentFragment,
+  CommentPinButtonCommentFragment,
   ToggleArticlePinCommentMutation,
 } from '~/gql/graphql'
 
 const fragments = {
   comment: gql`
-    fragment ArticleCommentPinButtonComment on Comment {
+    fragment CommentPinButtonComment on Comment {
       id
       pinned
       node {
@@ -36,8 +36,8 @@ const PinButton = ({
   comment,
   pinnedComment,
 }: {
-  comment: ArticleCommentPinButtonCommentFragment
-  pinnedComment?: ArticleThreadCommentType
+  comment: CommentPinButtonCommentFragment
+  pinnedComment?: CommentThreadCommentType
 }) => {
   const article =
     comment.node.__typename === 'Article' ? comment.node : undefined

@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components/UserDigest'
 
-import { ArticleCommentContent } from '../Content'
+import { CommentContent } from '../Content'
 import DropdownActions from '../DropdownActions'
 import FooterActions from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
@@ -12,7 +12,7 @@ import RoleLabel from '../RoleLabel'
 export const fragments = {
   comment: {
     public: gql`
-      fragment ArticleFeedCommentPublic on Comment {
+      fragment CommentFeedCommentPublic on Comment {
         id
         type
         author {
@@ -29,9 +29,9 @@ export const fragments = {
         }
         ...RoleLabelComment
         ...PinnedLabelComment
-        ...ArticleCommentFooterActionsCommentPublic
-        ...ArticleCommentDropdownActionsCommentPublic
-        ...ArticleCommentContentCommentPublic
+        ...CommentFooterActionsCommentPublic
+        ...CommentDropdownActionsCommentPublic
+        ...CommentContentCommentPublic
       }
       ${UserDigest.Mini.fragments.user}
       ${ReplyTo.fragments.user}
@@ -39,18 +39,18 @@ export const fragments = {
       ${PinnedLabel.fragments.comment}
       ${FooterActions.fragments.comment.public}
       ${DropdownActions.fragments.comment.public}
-      ${ArticleCommentContent.fragments.comment.public}
+      ${CommentContent.fragments.comment.public}
     `,
     private: gql`
-      fragment ArticleFeedCommentPrivate on Comment {
+      fragment CommentFeedCommentPrivate on Comment {
         id
-        ...ArticleCommentFooterActionsCommentPrivate
-        ...ArticleCommentDropdownActionsCommentPrivate
-        ...ArticleCommentContentCommentPrivate
+        ...CommentFooterActionsCommentPrivate
+        ...CommentDropdownActionsCommentPrivate
+        ...CommentContentCommentPrivate
       }
       ${FooterActions.fragments.comment.private}
       ${DropdownActions.fragments.comment.private}
-      ${ArticleCommentContent.fragments.comment.private}
+      ${CommentContent.fragments.comment.private}
     `,
   },
 }
@@ -60,14 +60,14 @@ export const REFETCH_ARTICLE_COMMENT = gql`
     node(input: { id: $id }) {
       ... on Comment {
         id
-        ...ArticleFeedCommentPublic
-        ...ArticleFeedCommentPrivate
+        ...CommentFeedCommentPublic
+        ...CommentFeedCommentPrivate
         comments(input: { sort: oldest, first: null }) {
           edges {
             cursor
             node {
-              ...ArticleFeedCommentPublic
-              ...ArticleFeedCommentPrivate
+              ...CommentFeedCommentPublic
+              ...CommentFeedCommentPrivate
             }
           }
         }

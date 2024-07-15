@@ -4,11 +4,11 @@ import { cleanup, render, screen } from '~/common/utils/test'
 import { CommentState } from '~/gql/graphql'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
-import { ArticleCommentContent } from './'
+import { CommentContent } from './'
 
 describe('<Comemnt.Content>', () => {
   it('should render a Comment.Content', () => {
-    render(<ArticleCommentContent comment={MOCK_COMMENT} />)
+    render(<CommentContent comment={MOCK_COMMENT} />)
 
     const $content = screen.getByText(MOCK_COMMENT.content)
     expect($content).toBeInTheDocument()
@@ -17,7 +17,7 @@ describe('<Comemnt.Content>', () => {
   it('should render a collapsed Comment.Content', () => {
     // collapsed by author
     render(
-      <ArticleCommentContent
+      <CommentContent
         comment={{
           ...MOCK_COMMENT,
           state: CommentState.Collapsed,
@@ -30,7 +30,7 @@ describe('<Comemnt.Content>', () => {
     // blocked by user
     cleanup()
     render(
-      <ArticleCommentContent
+      <CommentContent
         comment={{
           ...MOCK_COMMENT,
           state: CommentState.Active,
@@ -43,7 +43,7 @@ describe('<Comemnt.Content>', () => {
     // banned by user
     cleanup()
     render(
-      <ArticleCommentContent
+      <CommentContent
         comment={{
           ...MOCK_COMMENT,
           state: CommentState.Banned,
@@ -57,7 +57,7 @@ describe('<Comemnt.Content>', () => {
 
   it('should render an archived Comment.Content', () => {
     render(
-      <ArticleCommentContent
+      <CommentContent
         comment={{
           ...MOCK_COMMENT,
           state: CommentState.Archived,

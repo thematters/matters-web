@@ -1,13 +1,13 @@
 import gql from 'graphql-tag'
 
-import { ArticleCommentFeed } from '../Feed'
+import { CommentFeed } from '../Feed'
 
 export const fragments = {
   comment: {
     public: gql`
-      fragment ArticleThreadCommentCommentPublic on Comment {
+      fragment CommentThreadCommentCommentPublic on Comment {
         id
-        ...ArticleFeedCommentPublic
+        ...CommentFeedCommentPublic
         comments(input: { sort: oldest, first: 3 }) {
           pageInfo {
             startCursor
@@ -17,27 +17,27 @@ export const fragments = {
           edges {
             cursor
             node {
-              ...ArticleFeedCommentPublic
+              ...CommentFeedCommentPublic
             }
           }
         }
       }
-      ${ArticleCommentFeed.fragments.comment.public}
+      ${CommentFeed.fragments.comment.public}
     `,
     private: gql`
-      fragment ArticleThreadCommentCommentPrivate on Comment {
+      fragment CommentThreadCommentCommentPrivate on Comment {
         id
-        ...ArticleFeedCommentPrivate
+        ...CommentFeedCommentPrivate
         comments(input: { sort: oldest, first: 3 }) {
           edges {
             cursor
             node {
-              ...ArticleFeedCommentPrivate
+              ...CommentFeedCommentPrivate
             }
           }
         }
       }
-      ${ArticleCommentFeed.fragments.comment.private}
+      ${CommentFeed.fragments.comment.private}
     `,
   },
 }
@@ -60,8 +60,8 @@ export const DESCENDANT_COMMENTS_COMMENT_PUBLIC = gql`
           edges {
             node {
               ... on Comment {
-                ...ArticleThreadCommentCommentPublic
-                ...ArticleThreadCommentCommentPrivate
+                ...CommentThreadCommentCommentPublic
+                ...CommentThreadCommentCommentPrivate
               }
             }
           }
@@ -77,7 +77,7 @@ export const DESCENDANT_COMMENTS_COMMENT_PRIVATE = gql`
     nodes(input: { ids: $ids }) {
       id
       ... on Comment {
-        ...ArticleThreadCommentCommentPrivate
+        ...CommentThreadCommentCommentPrivate
       }
     }
   }

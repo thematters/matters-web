@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { COMMENT_FEED_ID_PREFIX } from '~/common/enums'
 import { parseCommentHash } from '~/common/utils'
 import {
-  ArticleThreadComment,
-  ArticleThreadCommentType,
+  CommentThreadComment,
+  CommentThreadCommentType,
   QueryError,
   usePublicQuery,
 } from '~/components'
@@ -94,11 +94,11 @@ const CommentDetail = () => {
     return null
   }
 
-  const comment = data.node as ArticleThreadCommentType
+  const comment = data.node as CommentThreadCommentType
 
   return (
     <section ref={ref}>
-      <ArticleThreadComment
+      <CommentThreadComment
         comment={comment}
         hasLink
         firstRenderCallback={() => setReadyJump(true)}

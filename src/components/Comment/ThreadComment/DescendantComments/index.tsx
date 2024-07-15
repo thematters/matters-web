@@ -13,12 +13,9 @@ import {
   DescendantCommentsCommentPublicQuery,
 } from '~/gql/graphql'
 
-import { ArticleCommentFeed } from '../../Feed'
+import { CommentFeed } from '../../Feed'
 import Placeholder from '../../Placeholder'
-import {
-  ArticleThreadCommentType as ArticleThreadCommentComment,
-  ArticleThreadCommentType,
-} from '..'
+import { CommentThreadCommentType } from '..'
 import {
   DESCENDANT_COMMENTS_COMMENT_PRIVATE,
   DESCENDANT_COMMENTS_COMMENT_PUBLIC,
@@ -47,11 +44,11 @@ type Props = {
   replySubmitCallback?: () => void
   endCurosr: string
   isInCommentDetail?: boolean
-  comments?: ArticleThreadCommentComment[]
-  pinnedComment?: ArticleThreadCommentType
+  comments?: CommentThreadCommentType[]
+  pinnedComment?: CommentThreadCommentType
 }
 
-export const ArticleDescendantComments = ({
+export const DescendantComments = ({
   id,
   comments,
   pinnedComment,
@@ -140,7 +137,7 @@ export const ArticleDescendantComments = ({
       ...(comments || []),
       ...(filterComments(
         (edges || []).map(({ node }) => node)
-      ) as ArticleThreadCommentComment[]),
+      ) as CommentThreadCommentType[]),
     ],
     (comment) => comment.id
   )
@@ -157,7 +154,7 @@ export const ArticleDescendantComments = ({
     <>
       {result.map((node) => (
         <li key={node.id}>
-          <ArticleCommentFeed
+          <CommentFeed
             comment={node}
             pinnedComment={pinnedComment}
             avatarSize={24}

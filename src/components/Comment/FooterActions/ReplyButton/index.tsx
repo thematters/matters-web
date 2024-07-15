@@ -8,12 +8,12 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { Button, ButtonProps, Icon, ViewerContext } from '~/components'
-import { ArticleCommentReplyComemntFragment } from '~/gql/graphql'
+import { CommentReplyComemntFragment } from '~/gql/graphql'
 
 import ReplyTo from '../../ReplyTo'
 
 export interface ReplyButtonProps {
-  comment: ArticleCommentReplyComemntFragment
+  comment: CommentReplyComemntFragment
   replySubmitCallback?: () => void
   onClick?: () => void
   disabled?: boolean
@@ -22,7 +22,7 @@ export interface ReplyButtonProps {
 
 const fragments = {
   comment: gql`
-    fragment ArticleCommentReplyComemnt on Comment {
+    fragment CommentReplyComemnt on Comment {
       id
       state
       author {

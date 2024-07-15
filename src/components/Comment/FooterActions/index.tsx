@@ -20,8 +20,8 @@ import {
   ViewerContext,
 } from '~/components'
 import {
-  ArticleCommentFooterActionsCommentPrivateFragment,
-  ArticleCommentFooterActionsCommentPublicFragment,
+  CommentFooterActionsCommentPrivateFragment,
+  CommentFooterActionsCommentPublicFragment,
 } from '~/gql/graphql'
 
 import ReplyButton, { ReplyButtonProps } from './ReplyButton'
@@ -37,24 +37,24 @@ export type FooterActionsControls = {
 } & Pick<ReplyButtonProps, 'replySubmitCallback'>
 
 export type FooterActionsProps = {
-  comment: ArticleCommentFooterActionsCommentPublicFragment &
-    Partial<ArticleCommentFooterActionsCommentPrivateFragment>
+  comment: CommentFooterActionsCommentPublicFragment &
+    Partial<CommentFooterActionsCommentPrivateFragment>
 } & FooterActionsControls
 
 const fragments = {
   comment: {
     public: gql`
-      fragment ArticleCommentFooterActionsCommentPublic on Comment {
+      fragment CommentFooterActionsCommentPublic on Comment {
         id
         state
-        ...ArticleCommentReplyComemnt
-        ...ArticleCommentUpvoteCommentPublic
+        ...CommentReplyComemnt
+        ...CommentUpvoteCommentPublic
       }
       ${ReplyButton.fragments.comment}
       ${UpvoteButton.fragments.comment.public}
     `,
     private: gql`
-      fragment ArticleCommentFooterActionsCommentPrivate on Comment {
+      fragment CommentFooterActionsCommentPrivate on Comment {
         id
         node {
           ... on Article {
@@ -65,7 +65,7 @@ const fragments = {
             }
           }
         }
-        ...ArticleCommentUpvoteCommentPrivate
+        ...CommentUpvoteCommentPrivate
       }
       ${UpvoteButton.fragments.comment.private}
     `,

@@ -11,7 +11,7 @@ import {
 } from '~/components'
 import { updateArticleComments, updateArticlePublic } from '~/components/GQL'
 import {
-  ArticleCommentDropdownActionsCommentPublicFragment,
+  CommentDropdownActionsCommentPublicFragment,
   DeleteCommentMutation,
 } from '~/gql/graphql'
 
@@ -25,7 +25,7 @@ const DELETE_COMMENT = gql`
 `
 
 export interface DeleteCommentDialogProps {
-  comment: ArticleCommentDropdownActionsCommentPublicFragment
+  comment: CommentDropdownActionsCommentPublicFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 

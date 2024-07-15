@@ -1,12 +1,12 @@
-import ArticleCommentPlaceholder from '~/components/ArticleComment/Placeholder'
+import CommentPlaceholder from '~/components/Comment/Placeholder'
 
 import styles from './styles.module.css'
 
 export const Placeholder = () => {
   return (
     <section className={styles.CommentFeed}>
-      <ArticleCommentPlaceholder />
-      <ArticleCommentPlaceholder />
+      <CommentPlaceholder />
+      <CommentPlaceholder />
     </section>
   )
 }

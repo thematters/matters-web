@@ -5,8 +5,8 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 
 import FooterActions from './'
 
-describe('<ArticleComment/FooterActions>', () => {
-  it('should render a ArticleComment/FooterActions', () => {
+describe('<Comment/FooterActions>', () => {
+  it('should render a Comment/FooterActions', () => {
     render(<FooterActions comment={MOCK_COMMENT} hasUpvote hasReply />)
     // reply
     const $reply = screen.getAllByRole('button', { name: 'Write a comment' })
@@ -19,7 +19,7 @@ describe('<ArticleComment/FooterActions>', () => {
     expect($upvote).toBeInTheDocument()
   })
 
-  it('should render a ArticleComment/FooterActions without reply', () => {
+  it('should render a Comment/FooterActions without reply', () => {
     render(<FooterActions comment={MOCK_COMMENT} hasReply={false} hasUpvote />)
 
     // reply

@@ -7,7 +7,7 @@ import { MOCK_COMMENT } from '~/stories/mocks'
 
 import DropdownActions from './'
 
-describe('<ArticleComment/DropdownActions>', () => {
+describe('<Comment/DropdownActions>', () => {
   // hasPin
   it('should render pin buttons', async () => {
     render(

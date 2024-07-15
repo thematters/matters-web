@@ -7,16 +7,16 @@ import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
 import { captureClicks } from '~/common/utils'
 import { Expandable, LanguageContext } from '~/components'
 import {
-  ArticleCommentContentCommentPrivateFragment,
-  ArticleCommentContentCommentPublicFragment,
+  CommentContentCommentPrivateFragment,
+  CommentContentCommentPublicFragment,
 } from '~/gql/graphql'
 
 import Collapsed from './Collapsed'
 import styles from './styles.module.css'
 
 interface ContentProps {
-  comment: ArticleCommentContentCommentPublicFragment &
-    Partial<ArticleCommentContentCommentPrivateFragment>
+  comment: CommentContentCommentPublicFragment &
+    Partial<CommentContentCommentPrivateFragment>
   size?: 14 | 15
   bgColor?: 'greyLighter' | 'white'
   limit?: number
@@ -27,14 +27,14 @@ interface ContentProps {
 const fragments = {
   comment: {
     public: gql`
-      fragment ArticleCommentContentCommentPublic on Comment {
+      fragment CommentContentCommentPublic on Comment {
         id
         content
         state
       }
     `,
     private: gql`
-      fragment ArticleCommentContentCommentPrivate on Comment {
+      fragment CommentContentCommentPrivate on Comment {
         id
         author {
           id
@@ -45,7 +45,7 @@ const fragments = {
   },
 }
 
-export const ArticleCommentContent = ({
+export const CommentContent = ({
   comment,
   size,
   bgColor,
@@ -130,4 +130,4 @@ export const ArticleCommentContent = ({
   return null
 }
 
-ArticleCommentContent.fragments = fragments
+CommentContent.fragments = fragments

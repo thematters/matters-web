@@ -7,8 +7,8 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
 import {
-  ArticleThreadCommentType,
   Button,
+  CommentThreadCommentType,
   Dropdown,
   Icon,
   Menu,
@@ -20,8 +20,8 @@ import {
 import { BlockUser } from '~/components/BlockUser'
 import { SubmitReportDialogProps } from '~/components/Dialogs/SubmitReportDialog/Dialog'
 import {
-  ArticleCommentDropdownActionsCommentPrivateFragment,
-  ArticleCommentDropdownActionsCommentPublicFragment,
+  CommentDropdownActionsCommentPrivateFragment,
+  CommentDropdownActionsCommentPublicFragment,
 } from '~/gql/graphql'
 
 import CopyCommentButton from './CopyCommentButton'
@@ -41,9 +41,9 @@ export type DropdownActionsControls = {
 }
 
 type DropdownActionsProps = {
-  comment: ArticleCommentDropdownActionsCommentPublicFragment &
-    Partial<ArticleCommentDropdownActionsCommentPrivateFragment>
-  pinnedComment?: ArticleThreadCommentType
+  comment: CommentDropdownActionsCommentPublicFragment &
+    Partial<CommentDropdownActionsCommentPrivateFragment>
+  pinnedComment?: CommentThreadCommentType
 } & DropdownActionsControls
 
 interface Controls {
@@ -63,7 +63,7 @@ type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 const fragments = {
   comment: {
     public: gql`
-      fragment ArticleCommentDropdownActionsCommentPublic on Comment {
+      fragment CommentDropdownActionsCommentPublic on Comment {
         id
         state
         content
@@ -83,13 +83,13 @@ const fragments = {
             }
           }
         }
-        ...ArticleCommentPinButtonComment
+        ...CommentPinButtonComment
       }
       ${PinButton.fragments.comment}
       ${BlockUser.fragments.user.public}
     `,
     private: gql`
-      fragment ArticleCommentDropdownActionsCommentPrivate on Comment {
+      fragment CommentDropdownActionsCommentPrivate on Comment {
         id
         author {
           id
