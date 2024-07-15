@@ -4,6 +4,7 @@ import gql from 'graphql-tag'
 import { useEffect, useRef, useState } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 
+import IMG_PLACEHOLDER from '@/public/static/images/placeholder.svg'
 import { TEST_ID } from '~/common/enums'
 import {
   calculateRenderedImageSize,
@@ -33,10 +34,6 @@ type LoadedAsset = {
   width: number
   height: number
 }
-
-const ImagePlaceholder: React.FC = () => (
-  <div className={styles.imagePlaceholder} />
-)
 
 const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
   const { assets } = moment
@@ -78,7 +75,9 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
         data-test-id={TEST_ID.MOMENT_DIGEST_ASSETS}
       >
         {assets.map((asset) => (
-          <ImagePlaceholder key={asset.id} />
+          <div className={styles.item} key={asset.id}>
+            <ResponsiveImage url={IMG_PLACEHOLDER} width={width} />
+          </div>
         ))}
 
         <section className={styles.assetsPlaceholder} ref={ref}>
