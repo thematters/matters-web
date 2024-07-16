@@ -1831,6 +1831,9 @@
     "defaultMessage": "最近 3 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "W3tqQO": {
+    "defaultMessage": "[圖]"
+  },
   "W66Eyq": {
     "defaultMessage": "密碼需至少 8 位，支持字母、數字及符號的組合。",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"

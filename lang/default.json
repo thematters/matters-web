@@ -1831,6 +1831,9 @@
     "defaultMessage": "Last 3 months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "W3tqQO": {
+    "defaultMessage": "[image]"
+  },
   "W66Eyq": {
     "defaultMessage": "Password must be at least 8 characters long, support letter, numbers and symbols.",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"

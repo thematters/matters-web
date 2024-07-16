@@ -1,6 +1,6 @@
 // 1. Your moment was liked by {username}
 import gql from 'graphql-tag'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { LikeMomentNoticeFragment } from '~/gql/graphql'
@@ -18,6 +18,8 @@ function extractTextFromHTML(htmlString: string) {
 }
 
 const Like = ({ notice }: { notice: LikeMomentNoticeFragment }) => {
+  const intl = useIntl()
+
   const truncateTitle = (title: string, maxLength: number) => {
     const regex = /@[\w]+/g
     const taggedUsers: string[] = title.match(regex) || []
@@ -45,7 +47,9 @@ const Like = ({ notice }: { notice: LikeMomentNoticeFragment }) => {
   )
 
   const images = notice.moment?.assets?.length
-    ? notice.moment.assets.map((asset) => `[${asset.type}]`).join('')
+    ? intl
+        .formatMessage({ defaultMessage: `[image]`, id: 'W3tqQO' })
+        .repeat(notice.moment.assets.length)
     : ''
 
   return (
