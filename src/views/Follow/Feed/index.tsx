@@ -18,7 +18,6 @@ import { FollowingFeedQuery } from '~/gql/graphql'
 
 import { FOLLOWING_FEED } from './gql'
 import RecommendArticleActivity from './RecommendArticleActivity'
-import RecommendCircleActivity from './RecommendCircleActivity'
 import RecommendUserActivity from './RecommendUserActivity'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
@@ -111,12 +110,6 @@ const FollowingFeed = () => {
                   location={i}
                   articles={node.recommendArticles}
                   source={node.source}
-                />
-              )}
-              {node.__typename === 'CircleRecommendationActivity' && (
-                <RecommendCircleActivity
-                  location={i}
-                  circles={node.recommendCircles}
                 />
               )}
               {node.__typename === 'UserRecommendationActivity' && (
