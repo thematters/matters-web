@@ -67,6 +67,9 @@
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/5OvMK": {
+    "defaultMessage": "liked your moment"
+  },
   "/5jk3i": {
     "defaultMessage": "Circle successfully subscribed."
   },

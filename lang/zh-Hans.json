@@ -67,6 +67,9 @@
     "defaultMessage": "尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/5OvMK": {
+    "defaultMessage": "喜欢你的动态"
+  },
   "/5jk3i": {
     "defaultMessage": "订阅成功！🎉"
   },
