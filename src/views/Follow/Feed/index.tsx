@@ -80,7 +80,7 @@ const FollowingFeed = () => {
     })
   }
 
-  const isRenderNode = (node: any) => {
+  const shouldRenderNode = (node: any) => {
     return (
       node.__typename === 'UserPublishArticleActivity' ||
       node.__typename === 'UserBroadcastCircleActivity' ||
@@ -103,7 +103,7 @@ const FollowingFeed = () => {
       >
         <List>
           {edges.map(({ node }, i) => {
-            return isRenderNode(node) ? (
+            return shouldRenderNode(node) ? (
               <List.Item key={`${node.__typename}:${i}`}>
                 {node.__typename === 'UserPublishArticleActivity' && (
                   <UserPublishArticleActivity location={i} {...node} />
