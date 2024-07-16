@@ -13,6 +13,7 @@ import {
   CircleNewUserNoticeFragment,
   CommentMentionedYouNoticeFragment,
   CommentNewReplyNoticeFragment,
+  MentionMomentNoticeFragment,
   NoticeActorAvatarUserFragment,
   NoticeHeadActorsUserFragment,
   PaymentReceivedDonationNoticeFragment,
@@ -41,6 +42,7 @@ type NoticeDigestProps = {
     | CommentNewReplyNoticeFragment
     | PaymentReceivedDonationNoticeFragment
     | UserNewFollowerNoticeFragment
+    | MentionMomentNoticeFragment
   actors?: (NoticeActorAvatarUserFragment & NoticeHeadActorsUserFragment)[]
   action: string | ReactElement
   secondAction?: string | ReactElement

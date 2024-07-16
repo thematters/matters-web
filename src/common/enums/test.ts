@@ -133,6 +133,7 @@ export enum TEST_ID {
   NOTICE_CRYPTO_WALLET_AIRDROP = 'notice/crypto-wallet-airdrop',
   NOTICE_CRYPTO_WALLET_CONNECTED = 'notice/crypto-wallet-connected',
   NOTICE_OFFICIAL_ANNOUNCEMENT = 'notice/official-announcement',
+  NOTICE_MOMENT_MENTIONED = 'notice/moment-mentioned',
   // me
   ME_WALLET_TRANSACTIONS_ITEM = 'me/wallet/transactions/item',
   ME_WALLET_TRANSACTIONS_ITEM_AMOUNT = 'me/wallet/transactions/item/amount',
