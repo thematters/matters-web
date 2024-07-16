@@ -32,9 +32,8 @@ const ApplyCampaignDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const now = new Date()
-  const isInApplicationPeriod =
-    !campaign.applicationPeriod.end ||
-    now < new Date(campaign.applicationPeriod.end)
+  const { end: appEnd } = campaign.applicationPeriod || {}
+  const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
 
   const [applyCampaign, { loading }] = useMutation<ApplyCampaignMutation>(
     APPLY_CAMPAIGN,
@@ -49,6 +48,11 @@ const ApplyCampaignDialog = ({
       },
     }
   )
+
+  const onApplyAfterPeriod = async () => {
+    await applyCampaign()
+    closeDialog()
+  }
 
   // auto apply
   useEffect(() => {
@@ -109,7 +113,7 @@ const ApplyCampaignDialog = ({
                     />
                   }
                   loading={loading}
-                  onClick={() => applyCampaign()}
+                  onClick={() => onApplyAfterPeriod()}
                 />
               )}
               <Dialog.RoundedButton
@@ -152,7 +156,7 @@ const ApplyCampaignDialog = ({
                   }
                   loading={loading}
                   color="green"
-                  onClick={() => applyCampaign()}
+                  onClick={() => onApplyAfterPeriod()}
                 />
               )}
             </>

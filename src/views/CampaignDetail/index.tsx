@@ -55,9 +55,8 @@ const CampaignDetail = () => {
 
   const path = toPath({ page: 'campaignDetail', campaign })
   const now = new Date()
-  const isInApplicationPeriod =
-    !campaign.applicationPeriod.end ||
-    now < new Date(campaign.applicationPeriod.end)
+  const { end: appEnd } = campaign.applicationPeriod || {}
+  const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
 
   return (
     <Layout.Main aside={<SideParticipants campaign={campaign} />}>

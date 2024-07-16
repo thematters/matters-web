@@ -29,9 +29,9 @@ type InfoHeaderProps = {
 const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   const { lang } = useContext(LanguageContext)
   const now = new Date()
-  const isInApplicationPeriod =
-    !campaign.applicationPeriod.end ||
-    now < new Date(campaign.applicationPeriod.end)
+  const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
+  const { start: writingStart } = campaign.writingPeriod || {}
+  const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
 
   return (
     <Apply.Dialog campaign={campaign}>
@@ -53,15 +53,8 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                     defaultMessage="Application period: "
                     id="MnTJ0Q"
                   />
-                  {datetimeFormat.absolute(
-                    campaign.applicationPeriod.start,
-                    lang
-                  )}{' '}
-                  -{' '}
-                  {datetimeFormat.absolute(
-                    campaign.applicationPeriod.end,
-                    lang
-                  )}
+                  {datetimeFormat.absolute(appStart, lang)} -{' '}
+                  {datetimeFormat.absolute(appEnd, lang)}
                 </span>
               )}
               {!isInApplicationPeriod && (
@@ -70,9 +63,8 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                     defaultMessage="Event period: "
                     id="Bmy3Ms"
                   />
-                  {datetimeFormat.absolute(campaign.writingPeriod.start, lang)}{' '}
-                  -{' '}
-                  {datetimeFormat.absolute(campaign.writingPeriod.start, lang)}
+                  {datetimeFormat.absolute(writingStart, lang)} -{' '}
+                  {datetimeFormat.absolute(writingStart, lang)}
                 </span>
               )}
 

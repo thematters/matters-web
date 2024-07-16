@@ -95,7 +95,6 @@ SelectCampaign.fragments = gql`
       start
       end
     }
-
     stages {
       id
       name

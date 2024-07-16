@@ -25,9 +25,8 @@ const ApplyCampaignButton = ({
 }: ApplyCampaignButtonProps) => {
   const viewer = useContext(ViewerContext)
   const now = new Date()
-  const isInApplicationPeriod =
-    !campaign.applicationPeriod.end ||
-    now < new Date(campaign.applicationPeriod.end)
+  const { end: appEnd } = campaign.applicationPeriod || {}
+  const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
   const applicationState = campaign.applicationState
   const isSucceeded = applicationState === 'succeeded'
   const isPending = applicationState === 'pending'
