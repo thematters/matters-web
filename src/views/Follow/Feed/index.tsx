@@ -80,6 +80,17 @@ const FollowingFeed = () => {
     })
   }
 
+  const isRenderNode = (node: any) => {
+    return (
+      node.__typename === 'UserPublishArticleActivity' ||
+      node.__typename === 'UserBroadcastCircleActivity' ||
+      node.__typename === 'UserCreateCircleActivity' ||
+      node.__typename === 'UserAddArticleTagActivity' ||
+      node.__typename === 'ArticleRecommendationActivity' ||
+      node.__typename === 'UserRecommendationActivity'
+    )
+  }
+
   return (
     <>
       <Head
@@ -91,32 +102,34 @@ const FollowingFeed = () => {
         eof
       >
         <List>
-          {edges.map(({ node }, i) => (
-            <List.Item key={`${node.__typename}:${i}`}>
-              {node.__typename === 'UserPublishArticleActivity' && (
-                <UserPublishArticleActivity location={i} {...node} />
-              )}
-              {node.__typename === 'UserBroadcastCircleActivity' && (
-                <UserBroadcastCircleActivity {...node} />
-              )}
-              {node.__typename === 'UserCreateCircleActivity' && (
-                <UserCreateCircleActivity location={i} {...node} />
-              )}
-              {node.__typename === 'UserAddArticleTagActivity' && (
-                <UserAddArticleTagActivity location={i} {...node} />
-              )}
-              {node.__typename === 'ArticleRecommendationActivity' && (
-                <RecommendArticleActivity
-                  location={i}
-                  articles={node.recommendArticles}
-                  source={node.source}
-                />
-              )}
-              {node.__typename === 'UserRecommendationActivity' && (
-                <RecommendUserActivity users={node.recommendUsers} />
-              )}
-            </List.Item>
-          ))}
+          {edges.map(({ node }, i) => {
+            return isRenderNode(node) ? (
+              <List.Item key={`${node.__typename}:${i}`}>
+                {node.__typename === 'UserPublishArticleActivity' && (
+                  <UserPublishArticleActivity location={i} {...node} />
+                )}
+                {node.__typename === 'UserBroadcastCircleActivity' && (
+                  <UserBroadcastCircleActivity {...node} />
+                )}
+                {node.__typename === 'UserCreateCircleActivity' && (
+                  <UserCreateCircleActivity location={i} {...node} />
+                )}
+                {node.__typename === 'UserAddArticleTagActivity' && (
+                  <UserAddArticleTagActivity location={i} {...node} />
+                )}
+                {node.__typename === 'ArticleRecommendationActivity' && (
+                  <RecommendArticleActivity
+                    location={i}
+                    articles={node.recommendArticles}
+                    source={node.source}
+                  />
+                )}
+                {node.__typename === 'UserRecommendationActivity' && (
+                  <RecommendUserActivity users={node.recommendUsers} />
+                )}
+              </List.Item>
+            ) : null
+          })}
         </List>
       </InfiniteScroll>
     </>
