@@ -1,10 +1,13 @@
 import { NetworkStatus } from 'apollo-client'
 import React, { useContext, useEffect, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconRead } from '@/public/static/icons/24px/read.svg'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
-  EmptyArticle,
+  Empty,
+  Icon,
   InfiniteScroll,
   List,
   QueryError,
@@ -107,7 +110,17 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle />
+    return (
+      <Empty
+        icon={<Icon icon={IconRead} size={88} />}
+        description={
+          <FormattedMessage
+            defaultMessage="還沒有人投稿，晚點再來瞧瞧吧！"
+            id="ALzRKc"
+          />
+        }
+      />
+    )
   }
 
   return (

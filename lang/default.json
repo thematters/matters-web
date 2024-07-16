@@ -708,6 +708,9 @@
   "AGDFGs": {
     "defaultMessage": "Discrimination, insult, or hatred"
   },
+  "ALzRKc": {
+    "defaultMessage": "還沒有人投稿，晚點再來瞧瞧吧！"
+  },
   "ANA7sk": {
     "defaultMessage": "Maintain",
     "description": "src/views/TagDetail/Owner/index.tsx"

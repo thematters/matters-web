@@ -72,7 +72,7 @@ const SelectCampaign = ({
       }
       options={[
         RESET_OPTION,
-        ...availableStages.map((s) => {
+        ...availableStages.reverse().map((s) => {
           return {
             name: s.period?.start
               ? `${s.name} - ${datetimeFormat.absolute(s.period?.start)}`
