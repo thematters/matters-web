@@ -4,7 +4,7 @@ import _flatten from 'lodash/flatten'
 import _get from 'lodash/get'
 import { useIntl } from 'react-intl'
 
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
   EmptyWarning,
   Head,
@@ -23,6 +23,15 @@ import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
 import UserCreateCircleActivity from './UserCreateCircleActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
+
+const renderableTypes = new Set([
+  'UserPublishArticleActivity',
+  'UserBroadcastCircleActivity',
+  'UserCreateCircleActivity',
+  'UserAddArticleTagActivity',
+  'ArticleRecommendationActivity',
+  'UserRecommendationActivity',
+])
 
 const FollowingFeed = () => {
   const intl = useIntl()
@@ -80,17 +89,6 @@ const FollowingFeed = () => {
     })
   }
 
-  const shouldRenderNode = (node: any) => {
-    return (
-      node.__typename === 'UserPublishArticleActivity' ||
-      node.__typename === 'UserBroadcastCircleActivity' ||
-      node.__typename === 'UserCreateCircleActivity' ||
-      node.__typename === 'UserAddArticleTagActivity' ||
-      node.__typename === 'ArticleRecommendationActivity' ||
-      node.__typename === 'UserRecommendationActivity'
-    )
-  }
-
   return (
     <>
       <Head
@@ -103,7 +101,7 @@ const FollowingFeed = () => {
       >
         <List>
           {edges.map(({ node }, i) => {
-            return shouldRenderNode(node) ? (
+            return shouldRenderNode(node, renderableTypes) ? (
               <List.Item key={`${node.__typename}:${i}`}>
                 {node.__typename === 'UserPublishArticleActivity' && (
                   <UserPublishArticleActivity location={i} {...node} />
