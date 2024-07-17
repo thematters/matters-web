@@ -177,16 +177,19 @@ export const MOCK_MOMENT = {
     {
       __typename: 'Asset' as any,
       id: 'QXNzZXQ6MQ',
+      type: 'embed' as any,
       path: 'https://images.unsplash.com/photo-1719209618812-a11aea8d1a32',
     },
     {
       __typename: 'Asset' as any,
       id: 'QXNzZXQ6Mg',
+      type: 'embed' as any,
       path: 'https://images.unsplash.com/photo-1719210146204-17dc9c95b34d',
     },
     {
       __typename: 'Asset' as any,
       id: 'QXNzZXQ6Mw',
+      type: 'embed' as any,
       path: 'https://images.unsplash.com/photo-1719212328828-5ad8dd12be00',
     },
   ],
@@ -219,6 +222,11 @@ export const MOCK_MOMENT = {
       avatar: 'https://images.unsplash.com/photo-1716403006232-5891fa7f2a24',
     },
   ],
+}
+
+export const MOCK_MOMENT_LIKE = {
+  ...MOCK_MOMENT,
+  content: '<p>這是一個時刻!!!!!!!!!!!!!!!! @jj</p>',
 }
 
 export const MOCK_CIRCLE_ARTICLE = {

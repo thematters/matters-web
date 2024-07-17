@@ -97,6 +97,7 @@ export enum TEST_ID {
   // notification:components
   NOTICE_USER_DISPLAY_NAME = 'notice/user/display-name',
   NOTICE_ARTICLE_TITLE = 'notice/article/title',
+  NOTICE_MOMENT_TITLE = 'notice/moment/title',
   NOTICE_COMMENT_CONTENT = 'notice/comment/content',
   NOTICE_PAYMENT_RECEIVE_DONATION_AMOUNT = 'notice/payment-receive-donation/amount',
   // notification:types
@@ -133,6 +134,7 @@ export enum TEST_ID {
   NOTICE_CRYPTO_WALLET_AIRDROP = 'notice/crypto-wallet-airdrop',
   NOTICE_CRYPTO_WALLET_CONNECTED = 'notice/crypto-wallet-connected',
   NOTICE_OFFICIAL_ANNOUNCEMENT = 'notice/official-announcement',
+  NOTICE_MOMENT_LIKED = 'notice/moment-liked',
   // me
   ME_WALLET_TRANSACTIONS_ITEM = 'me/wallet/transactions/item',
   ME_WALLET_TRANSACTIONS_ITEM_AMOUNT = 'me/wallet/transactions/item/amount',

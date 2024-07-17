@@ -4,6 +4,7 @@ import {
   MOCK_CIRCLE_ARTICLE,
   MOCK_CIRCLE_COMMENT,
   MOCK_COMMENT,
+  MOCK_MOMENT_LIKE,
   MOCK_PARENT_COMMENT,
   MOCK_TAG,
   MOCK_TRANSACTION,
@@ -217,7 +218,16 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CircleNewDiscussion' as any,
     comment: MOCK_CIRCLE_COMMENT,
   },
-
+  ,
+  {
+    __typename: 'MomentNotice',
+    id: 'MomentLikedNotice',
+    unread: false,
+    createdAt: '2020-07-10T07:29:17.682Z',
+    actors: [MOCK_USER],
+    momentNoticeType: 'MomentLiked',
+    moment: MOCK_MOMENT_LIKE,
+  },
   /**
    * Comment - Comment
    */
