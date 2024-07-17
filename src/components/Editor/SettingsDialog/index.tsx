@@ -19,6 +19,7 @@ import {
 } from '~/gql/graphql'
 
 import ArticleCustomStagingArea from '../ArticleCustomStagingArea'
+import { SelectCampaignProps } from '../SelectCampaign'
 import TagCustomStagingArea from '../TagCustomStagingArea'
 import SettingsList, { SettingsListDialogButtons } from './List'
 
@@ -50,7 +51,8 @@ export type EditorSettingsDialogProps = {
   ToggleResponseProps &
   SetPublishISCNProps &
   SettingsListDialogButtons &
-  Partial<SetVersionDescriptionProps>
+  Partial<SetVersionDescriptionProps> &
+  Partial<SelectCampaignProps>
 
 const DynamicEditorSearchSelectForm = dynamic(
   () => import('~/components/Forms/EditorSearchSelectForm'),
@@ -110,6 +112,10 @@ const BaseEditorSettingsDialog = ({
   iscnPublish,
   togglePublishISCN,
   iscnPublishSaving,
+
+  appliedCampaign,
+  selectedStage,
+  editCampaign,
 
   canComment,
   toggleComment,
@@ -176,6 +182,12 @@ const BaseEditorSettingsDialog = ({
     },
   }
 
+  const campaignProps: Partial<SelectCampaignProps> = {
+    appliedCampaign,
+    selectedStage,
+    editCampaign,
+  }
+
   const responseProps: ToggleResponseProps = {
     canComment,
     toggleComment,
@@ -207,6 +219,7 @@ const BaseEditorSettingsDialog = ({
             collectionCount={collection.length}
             tagsCount={tags.length}
             {...accessProps}
+            {...campaignProps}
             {...responseProps}
           />
         )}

@@ -26,6 +26,11 @@ interface TagArgs {
   // feedType?: string
 }
 
+interface CampaignArgs {
+  id: string
+  shortHash: string
+}
+
 interface CommentArgs {
   id: string
   type: 'article' | 'circleDiscussion' | 'circleBroadcast' | 'moment' // comment type: article/discussion/broadcast
@@ -64,6 +69,10 @@ type ToPathArgs =
       page: 'tagDetail'
       tag: TagArgs
       feedType?: string
+    }
+  | {
+      page: 'campaignDetail'
+      campaign: CampaignArgs
     }
   | {
       page: 'userProfile' | 'userCollections'
@@ -184,6 +193,10 @@ export const toPath = (
         }
       }
       href = `/tags/${numberId}-${name}`
+      break
+    }
+    case 'campaignDetail': {
+      href = `/e/${args.campaign.shortHash}`
       break
     }
     case 'userProfile': {

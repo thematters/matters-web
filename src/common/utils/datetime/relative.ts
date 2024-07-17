@@ -32,13 +32,11 @@ const DIFFS = {
  *
  * @param {Date|string|number} date - input date
  * @param {Language} lang - switch format based on language
- * @param {boolean} isTruncated - `Feed needs truncated datetime
  * @returns {string}
  */
 const relative = (
   date: Date | string | number,
-  lang: Language = 'zh_hant',
-  isTruncated: boolean = false
+  lang: Language = 'zh_hant'
 ): string => {
   if (typeof date === 'string') {
     date = parseISO(date)
@@ -51,18 +49,15 @@ const relative = (
 
   if (isThisHour(date)) {
     const diffMins = differenceInMinutes(new Date(), date)
-    return diffMins + (isTruncated ? 'm' : DIFFS[lang]['minutesAgo'])
+    return diffMins + DIFFS[lang]['minutesAgo']
   }
 
   if (isToday(date)) {
     const diffHrs = differenceInHours(new Date(), date) || 1
-    return (
-      diffHrs +
-      (isTruncated ? 'h' : DIFFS[lang][diffHrs === 1 ? 'hourAgo' : 'hoursAgo'])
-    )
+    return diffHrs + DIFFS[lang][diffHrs === 1 ? 'hourAgo' : 'hoursAgo']
   }
 
-  return absolute(date, lang, isTruncated)
+  return absolute(date, lang)
 }
 
 export default relative

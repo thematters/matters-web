@@ -19,25 +19,24 @@ import styles from './styles.module.css'
  * ```
  *
  */
-export type FormSelectOption = {
+export type FormSelectOption<OptionValue> = {
   name: string | React.ReactNode
   subtitle?: string | React.ReactNode
   extra?: string | React.ReactNode
-  value: any
+  value: OptionValue
   selected?: boolean
 }
 
-export type FormSelectProps = {
+export type FormSelectProps<OptionValue> = {
   name: string
-  title?: React.ReactNode
-  options: FormSelectOption[]
+  options: FormSelectOption<OptionValue>[]
   size?: 14 | 16
-  onChange: (option: FormSelectOption) => void
+  color?: 'freeWriteBlue'
+  onChange: (option: FormSelectOption<OptionValue>) => void
 } & Omit<FieldProps, 'fieldMsgId'>
 
-const Select: React.FC<FormSelectProps> = ({
+const Select = <OptionValue,>({
   name,
-  title,
   label,
   hasLabel,
 
@@ -45,10 +44,11 @@ const Select: React.FC<FormSelectProps> = ({
   onChange,
 
   size,
+  color,
 
   spacingTop,
   spacingBottom,
-}) => {
+}: FormSelectProps<OptionValue>) => {
   const fieldId = `field-${name}`
   const selectedOptionId = `${fieldId}-selected`
 
@@ -78,7 +78,7 @@ const Select: React.FC<FormSelectProps> = ({
             selected={option.selected}
             expanded
             size={size}
-            key={option.value}
+            key={index}
           />
         ))}
       </ul>
@@ -98,6 +98,7 @@ const Select: React.FC<FormSelectProps> = ({
             selected
             extra={selectedOption?.extra}
             size={size}
+            color={color}
             ref={ref}
           />
         </ul>

@@ -17,35 +17,16 @@ const FORMATS = {
   },
 } as const
 
-const TRUNC_FORMATS = {
-  absoluteTruncatedThisYear: 'MM-dd',
-  absoluteTruncatedFull: 'yyyy-MM-dd',
-} as const
-
-const absolute = (
-  date: Date | string | number,
-  lang: Language = 'zh_hant',
-  isTruncated: boolean = false
-) => {
+const absolute = (date: Date | string | number, lang: Language = 'zh_hant') => {
   if (typeof date === 'string') {
     date = parseISO(date)
   }
 
   if (isThisYear(date)) {
-    return format(
-      date,
-      isTruncated
-        ? TRUNC_FORMATS.absoluteTruncatedThisYear
-        : FORMATS[lang].absoluteThisYear
-    )
+    return format(date, FORMATS[lang].absoluteThisYear)
   }
 
-  return format(
-    date,
-    isTruncated
-      ? TRUNC_FORMATS.absoluteTruncatedFull
-      : FORMATS[lang].absoluteFull
-  )
+  return format(date, FORMATS[lang].absoluteFull)
 }
 
 export default absolute

@@ -46,16 +46,4 @@ describe('utils/datetime/absolute', () => {
     const dateResult = toAbsoluteDate(date, 'en')
     expect(dateResult).toBe('Jan 1, 2021')
   })
-
-  it('should format truncated time for this year', () => {
-    const stringDate = '2023-07-01'
-    const stringResult = toAbsoluteDate(stringDate, 'en', true)
-    expect(stringResult).toBe('07-01')
-  })
-
-  it('should format truncated time for previous years', () => {
-    const stringDate = '2021-07-01'
-    const stringResult = toAbsoluteDate(stringDate, 'en', true)
-    expect(stringResult).toBe('2021-07-01')
-  })
 })

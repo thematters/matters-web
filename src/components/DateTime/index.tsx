@@ -10,14 +10,12 @@ interface DateTimeProps {
   date: Date | string | number
   size?: 'xs' | 'sm'
   color?: 'grey' | 'greyDark' | 'greyDarker'
-  isTruncated?: boolean
 }
 
 const BaseDateTime = ({
   date,
   size = 'xs',
   color = 'greyDark',
-  isTruncated = false,
 }: DateTimeProps) => {
   const { lang } = useContext(LanguageContext)
   const timeclasses = classNames({
@@ -28,7 +26,7 @@ const BaseDateTime = ({
 
   return (
     <time dateTime={new Date(date).toISOString()} className={timeclasses}>
-      {datetimeFormat['relative'](date, lang, isTruncated)}
+      {datetimeFormat['relative'](date, lang)}
     </time>
   )
 }

@@ -24,17 +24,19 @@ const OPTIONS = [
   },
 ]
 
-const CountrySelect = (props: Omit<FormSelectProps, 'options'>) => {
+const CountrySelect = (props: Omit<FormSelectProps<string>, 'options'>) => {
   const [options, setOptions] = useState(OPTIONS)
 
-  const onChange = (option: FormSelectOption) => {
+  const onChange = (option: FormSelectOption<string>) => {
     setOptions([
       ...options.map((o) => ({ ...o, selected: option.name === o.name })),
     ])
     props.onChange(option)
   }
 
-  return <Form.Select {...props} options={options} onChange={onChange} />
+  return (
+    <Form.Select<string> {...props} options={options} onChange={onChange} />
+  )
 }
 
 describe('<Form.Select>', () => {
