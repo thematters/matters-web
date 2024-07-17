@@ -20,6 +20,7 @@ import styles from './styles.module.css'
 type BadgePros = {
   isInDialog?: boolean
   hasTooltip?: boolean
+  onClick?: () => void
 }
 
 const withBadge = ({
@@ -83,20 +84,19 @@ export const CivicLikerBadge = withBadge({
 
 export const TraveloggersBadge = withBadge({
   icon: IconTraveloggersBadge,
-  name: <FormattedMessage defaultMessage="Traveloggers" id="wS2NAM" />,
+  name: 'Traveloggers',
 })
 
 export const NomadBadge = ({
   isInDialog,
   hasTooltip,
+  onClick,
   level,
   gotoNomadBadge,
 }: BadgePros & {
   level: 1 | 2 | 3 | 4
   gotoNomadBadge?: () => void
 }) => {
-  const copy = <FormattedMessage defaultMessage="Nomad Matters" id="lKJZiW" />
-
   let icon = IconNomad1Badge
   switch (level) {
     case 2:
@@ -145,10 +145,26 @@ export const NomadBadge = ({
 
   if (hasTooltip) {
     return (
-      <Tooltip content={copy} placement="top">
-        <span className={[styles.badge, styles.nomad].join(' ')}>
+      <Tooltip
+        content={
+          level === 4 ? (
+            <FormattedMessage defaultMessage="Firebolt" id="Rc4Oij" />
+          ) : level === 3 ? (
+            <FormattedMessage defaultMessage="Nimbus Ferry" id="8MeJ4b" />
+          ) : level === 2 ? (
+            <FormattedMessage defaultMessage="Meteor Canoe" id="TKsfIS" />
+          ) : (
+            <FormattedMessage defaultMessage="Moonlight Dream" id="76yoL6" />
+          )
+        }
+        placement="top"
+      >
+        <button
+          onClick={onClick}
+          className={[styles.badge, styles.nomad].join(' ')}
+        >
           <Icon icon={icon} size={20} />
-        </span>
+        </button>
       </Tooltip>
     )
   }
@@ -163,6 +179,7 @@ export const NomadBadge = ({
 export const GrandSlamBadge = ({
   isInDialog,
   hasTooltip,
+  onClick,
   gotoGrandSlamBadge,
 }: BadgePros & { gotoGrandSlamBadge?: () => void }) => {
   if (isInDialog) {
@@ -200,9 +217,12 @@ export const GrandSlamBadge = ({
         }
         placement="top"
       >
-        <span className={[styles.badge, styles.nomad].join(' ')}>
+        <button
+          onClick={onClick}
+          className={[styles.badge, styles.nomad].join(' ')}
+        >
           <Icon icon={IconGrandSlam} size={20} />
-        </span>
+        </button>
       </Tooltip>
     )
   }
@@ -229,8 +249,6 @@ export interface BadgesOptions {
   hasGoldenMotorBadge?: boolean
   hasArchitectBadge?: boolean
   isCivicLiker?: boolean
-
-  shareLink: string
 }
 
 export const Badges = ({

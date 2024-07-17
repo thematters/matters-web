@@ -1,10 +1,15 @@
 import classNames from 'classnames'
 import dynamic from 'next/dynamic'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID, URL_USER_PROFILE } from '~/common/enums'
-import { numAbbr, toPath } from '~/common/utils'
+import {
+  OPEN_GRAND_SLAM_BADGE_DIALOG,
+  OPEN_NOMAD_BADGE_DIALOG,
+  TEST_ID,
+  URL_USER_PROFILE,
+} from '~/common/enums'
+import { numAbbr } from '~/common/utils'
 import {
   Avatar,
   Button,
@@ -42,16 +47,10 @@ export const UserProfile = () => {
 
   // public user data
   const userName = getQuery('name')
-  const showBadges =
-    getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
-    URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
-  const [hasShowBadges, setHasShowBadges] = useState(false)
   const isMe = !userName || viewer.userName === userName
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
-    {
-      variables: { userName },
-    }
+    { variables: { userName } }
   )
   const user = data?.user
 
@@ -68,6 +67,24 @@ export const UserProfile = () => {
     })
   }, [user?.id, viewer.id])
 
+  useEffect(() => {
+    const shouldOpenNomadBadgeDialog =
+      getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
+      URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
+
+    if (shouldOpenNomadBadgeDialog) {
+      window.dispatchEvent(new CustomEvent(OPEN_NOMAD_BADGE_DIALOG))
+    }
+
+    const shouldOpenGrandSlamBadgeDialog =
+      getQuery(URL_USER_PROFILE.OPEN_GRAND_SLAM_BADGE_DIALOG.key) ===
+      URL_USER_PROFILE.OPEN_GRAND_SLAM_BADGE_DIALOG.value
+
+    if (shouldOpenGrandSlamBadgeDialog) {
+      window.dispatchEvent(new CustomEvent(OPEN_GRAND_SLAM_BADGE_DIALOG))
+    }
+  }, [])
+
   /**
    * Render
    */
@@ -83,15 +100,6 @@ export const UserProfile = () => {
   if (!user) {
     return <Throw404 />
   }
-
-  const userProfilePath = toPath({
-    page: 'userProfile',
-    userName,
-  })
-  const shareLink =
-    typeof window !== 'undefined'
-      ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key}=${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value}`
-      : ''
 
   const badges = user.info.badges || []
   const circles = user.ownCircles || []
@@ -199,7 +207,6 @@ export const UserProfile = () => {
                 {user.displayName}
               </h1>
               <BadgesDialog
-                isInDialog
                 hasNomadBadge={hasNomadBadge}
                 nomadBadgeLevel={nomadBadgeLevel}
                 hasGrandSlamBadge={hasGrandSlamBadge}
@@ -208,36 +215,25 @@ export const UserProfile = () => {
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
                 hasArchitectBadge={hasArchitectBadge}
                 isCivicLiker={isCivicLiker}
-                shareLink={shareLink}
               >
-                {({ openDialog }) => {
-                  if (showBadges && hasNomadBadge && !hasShowBadges) {
-                    setTimeout(() => {
-                      openDialog('nomad')
-                      // FIXED: infinite loop render of BadgesDialog
-                      setHasShowBadges(true)
-                    })
-                  }
-                  return (
-                    <section
-                      role="button"
-                      className={styles.badges}
-                      onClick={() => openDialog()}
-                    >
-                      <Badges
-                        hasNomadBadge={hasNomadBadge}
-                        nomadBadgeLevel={nomadBadgeLevel}
-                        hasGrandSlamBadge={hasGrandSlamBadge}
-                        hasTraveloggersBadge={hasTraveloggersBadge}
-                        hasSeedBadge={hasSeedBadge}
-                        hasGoldenMotorBadge={hasGoldenMotorBadge}
-                        hasArchitectBadge={hasArchitectBadge}
-                        isCivicLiker={isCivicLiker}
-                        shareLink={shareLink}
-                      />
-                    </section>
-                  )
-                }}
+                {({ openDialog }) => (
+                  <section
+                    role="button"
+                    className={styles.badges}
+                    onClick={() => openDialog()}
+                  >
+                    <Badges
+                      hasNomadBadge={hasNomadBadge}
+                      nomadBadgeLevel={nomadBadgeLevel}
+                      hasGrandSlamBadge={hasGrandSlamBadge}
+                      hasTraveloggersBadge={hasTraveloggersBadge}
+                      hasSeedBadge={hasSeedBadge}
+                      hasGoldenMotorBadge={hasGoldenMotorBadge}
+                      hasArchitectBadge={hasArchitectBadge}
+                      isCivicLiker={isCivicLiker}
+                    />
+                  </section>
+                )}
               </BadgesDialog>
 
               {user?.info.ethAddress && (

@@ -708,9 +708,6 @@
   "AGDFGs": {
     "defaultMessage": "Discrimination, insult, or hatred"
   },
-  "ALzRKc": {
-    "defaultMessage": "還沒有人投稿，晚點再來瞧瞧吧！"
-  },
   "ANA7sk": {
     "defaultMessage": "Maintain",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -849,6 +846,9 @@
   "D9R/ol": {
     "defaultMessage": "Add articles to your circle"
   },
+  "D9tEst": {
+    "defaultMessage": "Matters Architect"
+  },
   "DP3yqI": {
     "defaultMessage": "Donation count"
   },
@@ -884,6 +884,9 @@
   "DqQvtL": {
     "defaultMessage": "Unblock",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "DqTwwn": {
+    "defaultMessage": "Free-writing Badge"
   },
   "DrBuEI": {
     "defaultMessage": "Unpin Broadcast",
@@ -939,6 +942,9 @@
   "EoeUjA": {
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
+  },
+  "EvJnpb": {
+    "defaultMessage": "Because you continue to write with all your heart, I give you the best honor"
   },
   "F3zk7E": {
     "defaultMessage": "(This action cannot be undone)",
@@ -1561,6 +1567,9 @@
     "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "QbjADp": {
+    "defaultMessage": "Seed User"
+  },
   "QfVedX": {
     "defaultMessage": "Insert divider"
   },
@@ -1724,6 +1733,9 @@
   "TX5UzL": {
     "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
+  "TZgskS": {
+    "defaultMessage": "No one has published yet, check back later!"
   },
   "TcTp+J": {
     "defaultMessage": "Image uploaded"
@@ -2466,6 +2478,9 @@
   "iEJeQH": {
     "defaultMessage": "Liker ID"
   },
+  "iNXSkV": {
+    "defaultMessage": "Seven Days Grand Slam"
+  },
   "iNZdM/": {
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -2638,6 +2653,9 @@
     "defaultMessage": "commented",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "lfiBVR": {
+    "defaultMessage": "CIVIC LIKER"
+  },
   "liBHHE": {
     "defaultMessage": "Any thoughts? Leave a kind comment~"
   },
@@ -2779,6 +2797,9 @@
   },
   "onDesU": {
     "defaultMessage": "Congratulations! Now you can browse all works within the circle for free and chat with everyone."
+  },
+  "orIq4X": {
+    "defaultMessage": "More than 100 supports"
   },
   "p5qZnJ": {
     "defaultMessage": "liked",

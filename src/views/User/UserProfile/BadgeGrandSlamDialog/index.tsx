@@ -1,6 +1,12 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
+import { OPEN_GRAND_SLAM_BADGE_DIALOG } from '~/common/enums'
+import {
+  Dialog,
+  SpinnerBlock,
+  useDialogSwitch,
+  useEventListener,
+} from '~/components'
 
 type BadgeGrandSlamProps = {}
 
@@ -28,8 +34,15 @@ export const BaseBadgeGrandSlamDialog: React.FC<BadgeGrandSlamDialogProps> = ({
   )
 }
 
-export const BadgeGrandSlamDialog = (props: BadgeGrandSlamDialogProps) => (
-  <Dialog.Lazy mounted={<BaseBadgeGrandSlamDialog {...props} />}>
-    {({ openDialog }) => <>{props.children({ openDialog })}</>}
-  </Dialog.Lazy>
-)
+export const BadgeGrandSlamDialog = (props: BadgeGrandSlamDialogProps) => {
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_GRAND_SLAM_BADGE_DIALOG, openDialog)
+    return <>{props.children && props.children({ openDialog })}</>
+  }
+
+  return (
+    <Dialog.Lazy mounted={<BaseBadgeGrandSlamDialog {...props} />}>
+      {({ openDialog }) => <Children openDialog={openDialog} />}
+    </Dialog.Lazy>
+  )
+}

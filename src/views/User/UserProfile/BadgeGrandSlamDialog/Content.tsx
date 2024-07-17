@@ -2,24 +2,35 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
 import { ReactComponent as GrandSlamBackground } from '@/public/static/images/badge-grand-slam-background.svg'
-import { Button, Dialog, Icon } from '~/components'
+import { URL_USER_PROFILE } from '~/common/enums'
+import { toPath } from '~/common/utils'
+import { Button, CopyToClipboard, Dialog, Icon, useRoute } from '~/components'
 
 import styles from './styles.module.css'
 
 type BadgeGrandSlamDialogContentProps = {
   closeDialog: () => void
-  isNested?: boolean
   goBack?: () => void
 }
 
 const BadgeGrandSlamDialogContent = ({
   closeDialog,
-  isNested,
   goBack,
 }: BadgeGrandSlamDialogContentProps) => {
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
+  const userProfilePath = toPath({
+    page: 'userProfile',
+    userName,
+  })
+  const shareLink =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_GRAND_SLAM_BADGE_DIALOG.key}=${URL_USER_PROFILE.OPEN_GRAND_SLAM_BADGE_DIALOG.value}`
+      : ''
+
   return (
     <>
-      {isNested && goBack && (
+      {goBack && (
         <Dialog.Header
           title={<span />}
           leftBtn={
@@ -58,19 +69,56 @@ const BadgeGrandSlamDialogContent = ({
       </Dialog.Content>
 
       <Dialog.Footer
+        btns={
+          <CopyToClipboard
+            text={shareLink}
+            successMessage={
+              <FormattedMessage
+                defaultMessage="Share link copied"
+                id="/faseS"
+              />
+            }
+          >
+            {({ copyToClipboard }) => (
+              <Dialog.RoundedButton
+                text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
+                color="greyDarker"
+                onClick={copyToClipboard}
+              />
+            )}
+          </CopyToClipboard>
+        }
         smUpBtns={
           <>
             <Dialog.TextButton
               text={
-                isNested ? (
+                goBack ? (
                   <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                 ) : (
                   <FormattedMessage defaultMessage="Close" id="rbrahO" />
                 )
               }
               color="greyDarker"
-              onClick={isNested ? goBack : closeDialog}
+              onClick={goBack || closeDialog}
             />
+
+            <CopyToClipboard
+              text={shareLink}
+              successMessage={
+                <FormattedMessage
+                  defaultMessage="Share link copied"
+                  id="/faseS"
+                />
+              }
+            >
+              {({ copyToClipboard }) => (
+                <Dialog.TextButton
+                  text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
+                  color="green"
+                  onClick={copyToClipboard}
+                />
+              )}
+            </CopyToClipboard>
           </>
         }
       />

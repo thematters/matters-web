@@ -5,28 +5,37 @@ import { ReactComponent as Nomad1Background } from '@/public/static/images/badge
 import { ReactComponent as Nomad2Background } from '@/public/static/images/badge-nomad2-background.svg'
 import { ReactComponent as Nomad3Background } from '@/public/static/images/badge-nomad3-background.svg'
 import { ReactComponent as Nomad4Background } from '@/public/static/images/badge-nomad4-background.svg'
-import { Button, CopyToClipboard, Dialog, Icon } from '~/components'
+import { URL_USER_PROFILE } from '~/common/enums'
+import { toPath } from '~/common/utils'
+import { Button, CopyToClipboard, Dialog, Icon, useRoute } from '~/components'
 
 import styles from './styles.module.css'
 
 type BadgeNomadDialogContentProps = {
-  closeDialog: () => void
   nomadBadgeLevel: 1 | 2 | 3 | 4
-  shareLink: string
-  isNested?: boolean
+  closeDialog: () => void
   goBack?: () => void
 }
 
 const BadgeNomadDialogContent = ({
   closeDialog,
   nomadBadgeLevel,
-  shareLink,
-  isNested,
   goBack,
 }: BadgeNomadDialogContentProps) => {
+  const { getQuery } = useRoute()
+  const userName = getQuery('name')
+  const userProfilePath = toPath({
+    page: 'userProfile',
+    userName,
+  })
+  const shareLink =
+    typeof window !== 'undefined'
+      ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key}=${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value}`
+      : ''
+
   return (
     <>
-      {isNested && goBack && (
+      {goBack && (
         <Dialog.Header
           title={<span />}
           leftBtn={
@@ -125,14 +134,14 @@ const BadgeNomadDialogContent = ({
           <>
             <Dialog.TextButton
               text={
-                isNested ? (
+                goBack ? (
                   <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                 ) : (
                   <FormattedMessage defaultMessage="Close" id="rbrahO" />
                 )
               }
               color="greyDarker"
-              onClick={isNested ? goBack : closeDialog}
+              onClick={goBack || closeDialog}
             />
 
             <CopyToClipboard

@@ -115,8 +115,8 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
         icon={<Icon icon={IconRead} size={88} />}
         description={
           <FormattedMessage
-            defaultMessage="還沒有人投稿，晚點再來瞧瞧吧！"
-            id="ALzRKc"
+            defaultMessage="No one has published yet, check back later!"
+            id="TZgskS"
           />
         }
       />

@@ -708,9 +708,6 @@
   "AGDFGs": {
     "defaultMessage": "歧視、侮辱或仇恨"
   },
-  "ALzRKc": {
-    "defaultMessage": "還沒有人投稿，晚點再來瞧瞧吧！"
-  },
   "ANA7sk": {
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -849,6 +846,9 @@
   "D9R/ol": {
     "defaultMessage": "將作品加入圍爐，讓更多人一起參與討論"
   },
+  "D9tEst": {
+    "defaultMessage": "馬特市建築師"
+  },
   "DP3yqI": {
     "defaultMessage": "支持人數"
   },
@@ -884,6 +884,9 @@
   "DqQvtL": {
     "defaultMessage": "解除封鎖",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "DqTwwn": {
+    "defaultMessage": "自由寫計畫紀念徽章"
   },
   "DrBuEI": {
     "defaultMessage": "取消置頂",
@@ -939,6 +942,9 @@
   "EoeUjA": {
     "defaultMessage": "你無權限進行該操作",
     "description": "FORBIDDEN_BY_STATE"
+  },
+  "EvJnpb": {
+    "defaultMessage": "由於你持續用心地寫作，為你獻上最佳榮耀"
   },
   "F3zk7E": {
     "defaultMessage": " （草稿刪除後無法恢復）",
@@ -1561,6 +1567,9 @@
     "defaultMessage": "設置圍爐網址（創建後不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "QbjADp": {
+    "defaultMessage": "種子用戶"
+  },
   "QfVedX": {
     "defaultMessage": "插入分隔線"
   },
@@ -1724,6 +1733,9 @@
   "TX5UzL": {
     "defaultMessage": "付款將由 Stripe 處理，讓你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
+  "TZgskS": {
+    "defaultMessage": "還沒有人投稿，晚點再來瞧瞧吧！"
   },
   "TcTp+J": {
     "defaultMessage": "圖片上傳成功"
@@ -2466,6 +2478,9 @@
   "iEJeQH": {
     "defaultMessage": "設置 Liker ID"
   },
+  "iNXSkV": {
+    "defaultMessage": "七日書大滿貫"
+  },
   "iNZdM/": {
     "defaultMessage": "切換後即可支持創作者，採用 Optimism 網路{br}讓支持更方便且費用低廉",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -2638,6 +2653,9 @@
     "defaultMessage": "評論了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "lfiBVR": {
+    "defaultMessage": "讚賞公民"
+  },
   "liBHHE": {
     "defaultMessage": "什麼看法，都可以留個友善的評論～"
   },
@@ -2779,6 +2797,9 @@
   },
   "onDesU": {
     "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
+  },
+  "orIq4X": {
+    "defaultMessage": "支持超過 100 次"
   },
   "p5qZnJ": {
     "defaultMessage": "讚賞了",
