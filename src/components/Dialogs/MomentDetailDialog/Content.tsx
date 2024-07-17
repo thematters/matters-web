@@ -1,6 +1,7 @@
+import { useQuery } from '@apollo/react-hooks'
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import {
@@ -8,14 +9,12 @@ import {
   MomentCommentForm,
   MomentDigestDetail,
   QueryError,
-  usePublicQuery,
-  ViewerContext,
 } from '~/components'
 import Assets from '~/components/MomentDigest/Assets'
 import LikeButton from '~/components/MomentDigest/FooterActions/LikeButton'
-import { MomentDetailPublicQuery } from '~/gql/graphql'
+import { MomentDetailQuery } from '~/gql/graphql'
 
-import { MOMENT_DETAIL_PRIVATE, MOMENT_DETAIL_PUBLIC } from './gql'
+import { MOMENT_DETAIL } from './gql'
 import styles from './styles.module.css'
 
 interface MomentDetailDialogContentProps {
@@ -28,38 +27,17 @@ const MomentDetailDialogContent = ({
   closeDialog,
 }: MomentDetailDialogContentProps) => {
   const intl = useIntl()
-  const viewer = useContext(ViewerContext)
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
   /**
    * Data Fetching
    */
-  // public data
-  const { data, loading, error, client } =
-    usePublicQuery<MomentDetailPublicQuery>(MOMENT_DETAIL_PUBLIC, {
-      variables: {
-        id: momentId,
-      },
-      fetchPolicy: 'network-only',
-    })
-
-  // private data
-  const loadPrivate = async (publicData?: MomentDetailPublicQuery) => {
-    if (!viewer.isAuthed || !publicData) {
-      return
-    }
-
-    await client.query({
-      query: MOMENT_DETAIL_PRIVATE,
-      fetchPolicy: 'network-only',
-      variables: { id: momentId },
-    })
-  }
-
-  // fetch private data
-  useEffect(() => {
-    loadPrivate(data)
-  }, [loading, viewer.id])
+  const { data, loading, error } = useQuery<MomentDetailQuery>(MOMENT_DETAIL, {
+    variables: {
+      id: momentId,
+    },
+    fetchPolicy: 'network-only',
+  })
 
   useEffect(() => {
     if (editor && editing) {
@@ -71,7 +49,7 @@ const MomentDetailDialogContent = ({
    * Render
    */
   if (loading && !data) {
-    // return <Placeholder />
+    return null
   }
 
   if (error) {
