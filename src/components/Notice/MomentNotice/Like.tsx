@@ -3,6 +3,8 @@ import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
+import { stripHtml } from '~/common/utils'
+import { truncateTitle } from '~/common/utils/text/moment'
 import { LikeMomentNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -11,45 +13,17 @@ import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeMomentTitle from '../NoticeMomentTitle'
 
-function extractTextFromHTML(htmlString: string) {
-  const parser = new DOMParser()
-  const doc = parser.parseFromString(htmlString, 'text/html')
-  return doc.body.textContent || ''
-}
-
 const Like = ({ notice }: { notice: LikeMomentNoticeFragment }) => {
   const intl = useIntl()
-
-  const truncateTitle = (title: string, maxLength: number) => {
-    const regex = /@[\w]+/g
-    const taggedUsers: string[] = title.match(regex) || []
-    const taggedUsersLength = taggedUsers.reduce(
-      (totalLength, user) => totalLength + user.length,
-      0
-    )
-    const remainingLength = maxLength - taggedUsersLength
-
-    if (title.length <= remainingLength) {
-      return title
-    }
-
-    const truncatedTitle = title.slice(0, remainingLength) + '...'
-    const truncatedTaggedUsers = taggedUsers
-      .map((user) => user.slice(0, remainingLength))
-      .join('')
-
-    return truncatedTitle + truncatedTaggedUsers
-  }
-
   const title = truncateTitle(
-    extractTextFromHTML(notice.moment?.content || ''),
-    10
+    stripHtml(notice.moment?.content || ''),
+    10,
+    intl.locale
   )
-
   const images = notice.moment?.assets?.length
     ? intl
         .formatMessage({ defaultMessage: `[image]`, id: 'W3tqQO' })
-        .repeat(notice.moment.assets.length)
+        .repeat(Math.min(3, notice.moment.assets.length))
     : ''
 
   return (
@@ -59,7 +33,10 @@ const Like = ({ notice }: { notice: LikeMomentNoticeFragment }) => {
         <FormattedMessage defaultMessage="liked your moment" id="/5OvMK" />
       }
       title={
-        <NoticeMomentTitle title={`${title}${images}`} moment={notice.moment} />
+        <NoticeMomentTitle
+          title={`${title} ${images}`}
+          moment={notice.moment}
+        />
       }
       testId={TEST_ID.NOTICE_MOMENT_LIKED}
     />
