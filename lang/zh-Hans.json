@@ -67,6 +67,9 @@
     "defaultMessage": "尝试将内容写入 IPFS 网络中，需要一段时间，请耐心等候。若等候时间过久，可通过发布文章来加速。",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/5OvMK": {
+    "defaultMessage": "喜欢你的动态"
+  },
   "/5jk3i": {
     "defaultMessage": "订阅成功！🎉"
   },
@@ -1827,6 +1830,9 @@
   "W0sZaX": {
     "defaultMessage": "最近 3 个月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "W3tqQO": {
+    "defaultMessage": "[图]"
   },
   "W66Eyq": {
     "defaultMessage": "密码需至少 8 位，支持字母、数字及符号的组合。",
