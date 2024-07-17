@@ -1,4 +1,4 @@
-import { UserLanguage } from "~/gql/graphql"
+import { UserLanguage } from '~/gql/graphql'
 
 /**
  * Truncates a title to a specified maximum length, while preserving tagged users.
