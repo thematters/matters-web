@@ -1,7 +1,7 @@
 .assets {
   display: flex;
   gap: var(--sp4);
-  margin: var(--sp12) 0;
+  margin-top: var(--sp12);
 
   & .item {
     position: relative;

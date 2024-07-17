@@ -19,9 +19,10 @@ const fragments = {
 
 interface ReplyButtonProps {
   moment: MomentDigestFooterActionsReplyButtonMomentFragment
+  onClick?: () => void
 }
 
-const ReplyButton = ({ moment }: ReplyButtonProps) => {
+const ReplyButton = ({ moment, onClick }: ReplyButtonProps) => {
   const { commentCount } = moment
 
   return (
@@ -30,6 +31,7 @@ const ReplyButton = ({ moment }: ReplyButtonProps) => {
       textColor="black"
       textActiveColor="greyDarker"
       testId={TEST_ID.MOMENT_DIGEST_FOOTER_ACTIONS_REPLY_BUTTON}
+      onClick={onClick}
     >
       <TextIcon icon={<Icon icon={IconComment} size={18} />} size={15}>
         {commentCount > 0 ? numAbbr(commentCount) : undefined}

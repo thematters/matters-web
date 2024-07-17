@@ -26,6 +26,7 @@ export * from './TagListDialog'
 
 // Moment
 export * from './ClearMomentDialog'
+export * from './MomentDetailDialog'
 
 // Collection
 export * from './AddArticlesCollectionDialog'

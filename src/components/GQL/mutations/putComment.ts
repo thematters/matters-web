@@ -13,6 +13,15 @@ export const PUT_ARTICLE_COMMENT = gql`
   ${CommentThreadComment.fragments.comment.private}
 `
 
+export const PUT_MOMENT_COMMENT = gql`
+  mutation PutMomentComment($input: PutCommentInput!) {
+    putComment(input: $input) {
+      id
+      content
+    }
+  }
+`
+
 export const PUT_CIRCLE_COMMENT = gql`
   mutation PutCircleComment($input: PutCommentInput!) {
     putComment(input: $input) {

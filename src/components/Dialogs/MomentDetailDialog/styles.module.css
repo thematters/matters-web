@@ -1,0 +1,87 @@
+.container {
+  width: 40.5rem;
+}
+
+.header {
+  @mixin flex-start-space-between;
+
+  padding: var(--sp24) var(--sp24) var(--sp12);
+
+  & > section {
+    flex-grow: 1;
+  }
+}
+
+.scrollContainer {
+  /* TODO: Confirm height with producion team */
+
+  @mixin hide-scrollbar;
+
+  /* max-height: calc(var(--ivh) - 158px); */
+  max-height: calc(90vh - 158px);
+  overflow-y: auto;
+}
+
+.contentContainer {
+  margin-top: var(--sp12);
+}
+
+.mainContent {
+  @mixin border-bottom-grey;
+
+  padding: 0 var(--sp24) var(--sp24);
+  border-bottom-color: var(--color-grey-hover);
+
+  .content {
+    font-size: var(--text17);
+    line-height: 1.75;
+  }
+}
+
+.comments {
+  padding: var(--sp24);
+
+  & .title {
+    font-size: var(--text15);
+    line-height: 1.75;
+    color: var(--color-black);
+
+    & .count {
+      color: var(--color-grey-dark);
+    }
+  }
+}
+
+.footer {
+  @mixin border-top-grey-light;
+  @mixin flex-center-start;
+
+  /* color: var(--color-grey); */
+  gap: var(--sp9);
+  padding: var(--sp16) var(--sp24) var(--sp16) var(--sp13);
+
+  &.editing {
+    padding: var(--sp16) var(--sp24);
+  }
+
+  & .likeButton {
+    @mixin flex-center-all;
+
+    width: 2.75rem;
+
+    /* height: 2.75rem; */
+    padding: 0 var(--sp11);
+  }
+
+  & .editButton {
+    @mixin flex-center-start;
+
+    flex-grow: 1;
+    padding: var(--sp8) var(--sp12);
+    font-size: var(--text15);
+    line-height: 1.75;
+    color: var(--color-grey);
+    background: var(--color-grey-lighter);
+    border-radius: var(--sp8);
+  }
+}

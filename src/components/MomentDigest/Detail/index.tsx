@@ -11,11 +11,15 @@ import styles from './styles.module.css'
 
 export type MomentDigestDetailProps = {
   moment: MomentDigestDetailMomentPublicFragment
+  hasContent?: boolean
+  hasAssets?: boolean
   onClose: () => void
 }
 
 export const MomentDigestDetail = ({
   moment,
+  hasContent = true,
+  hasAssets = true,
   onClose,
 }: MomentDigestDetailProps) => {
   const { content, createdAt, assets, author } = moment
@@ -60,7 +64,7 @@ export const MomentDigestDetail = ({
           </Button>
         </section>
       </header>
-      {!!content && (
+      {hasContent && !!content && (
         <section
           className={styles.content}
           data-test-id={TEST_ID.MOMENT_DIGEST_CONTENT}
@@ -69,7 +73,7 @@ export const MomentDigestDetail = ({
           }}
         />
       )}
-      {!!assets && assets.length > 0 && <Assets moment={moment} />}
+      {hasAssets && !!assets && assets.length > 0 && <Assets moment={moment} />}
     </section>
   )
 }

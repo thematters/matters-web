@@ -8,6 +8,8 @@ import {
   Expandable,
   Icon,
   LinkWrapper,
+  Media,
+  MomentDetailDialog,
   UserDigest,
   useRoute,
 } from '~/components'
@@ -45,72 +47,91 @@ export const MomentDigestFeed = ({
     router.push(momentDetailPath.href)
   }
 
-  return (
-    <section className={styles.container}>
-      <header className={styles.header}>
-        {hasAuthor && (
+  const Container = ({
+    openMomentDetail,
+  }: {
+    openMomentDetail: () => void
+  }) => {
+    return (
+      <section className={styles.container}>
+        <header className={styles.header}>
+          {hasAuthor && (
+            <section
+              className={styles.author}
+              data-test-id={TEST_ID.MOMENT_DIGEST_AUTHOR}
+            >
+              <UserDigest.Mini
+                user={author}
+                avatarSize={20}
+                textSize={12}
+                hasAvatar
+                hasDisplayName
+              />
+              <Icon icon={IconDot} color="greyLight" size={20} />
+            </section>
+          )}
+          <LinkWrapper {...momentDetailPath}>
+            <DateTime date={createdAt} color="grey" />
+          </LinkWrapper>
+        </header>
+        {!!content && (
           <section
-            className={styles.author}
-            data-test-id={TEST_ID.MOMENT_DIGEST_AUTHOR}
+            className={styles.content}
+            onClick={() => {
+              openMomentDetail()
+            }}
+            data-test-id={TEST_ID.MOMENT_DIGEST_CONTENT}
           >
-            <UserDigest.Mini
-              user={author}
-              avatarSize={20}
-              textSize={12}
-              hasAvatar
-              hasDisplayName
-            />
-            <Icon icon={IconDot} color="greyLight" size={20} />
+            <Expandable
+              content={content}
+              limit={4}
+              isRichShow={true}
+              size={15}
+              collapseable={false}
+              isCommentOrMoment
+              expandButton={
+                <button
+                  onClick={() => {
+                    // TODO: open moment detail dialog or navigate to moment detail page
+                  }}
+                >
+                  <FormattedMessage
+                    defaultMessage="More"
+                    id="eoQN04"
+                    description="src/components/MomentDigest/index.tsx"
+                  />
+                </button>
+              }
+            >
+              <section
+                dangerouslySetInnerHTML={{
+                  __html: content || '',
+                }}
+              />
+            </Expandable>
           </section>
         )}
-        <LinkWrapper {...momentDetailPath}>
-          <DateTime date={createdAt} color="grey" />
-        </LinkWrapper>
-      </header>
-      {!!content && (
-        <section
-          className={styles.content}
-          onClick={() => {
-            // TODO: open moment detail dialog
-            goToMomentDetail()
-          }}
-          data-test-id={TEST_ID.MOMENT_DIGEST_CONTENT}
-        >
-          <Expandable
-            content={content}
-            limit={4}
-            isRichShow={true}
-            size={15}
-            collapseable={false}
-            isCommentOrMoment
-            expandButton={
-              <button
-                onClick={() => {
-                  // TODO: open moment detail dialog or navigate to moment detail page
-                }}
-              >
-                <FormattedMessage
-                  defaultMessage="More"
-                  id="eoQN04"
-                  description="src/components/MomentDigest/index.tsx"
-                />
-              </button>
-            }
-          >
-            <section
-              dangerouslySetInnerHTML={{
-                __html: content || '',
-              }}
-            />
-          </Expandable>
-        </section>
-      )}
-      {!!assets && assets.length > 0 && <Assets moment={moment} />}
-      <FooterActions
-        moment={moment}
-        hasCommentedFollowees={hasCommentedFollowees}
-      />
-    </section>
+        {!!assets && assets.length > 0 && <Assets moment={moment} />}
+        <FooterActions
+          moment={moment}
+          hasCommentedFollowees={hasCommentedFollowees}
+          onClickReply={openMomentDetail}
+        />
+      </section>
+    )
+  }
+
+  return (
+    <>
+      <Media at="sm">
+        <Container openMomentDetail={goToMomentDetail} />
+      </Media>
+      <Media greaterThan="sm">
+        <MomentDetailDialog momentId={moment.id}>
+          {({ openDialog }) => <Container openMomentDetail={openDialog} />}
+        </MomentDetailDialog>
+      </Media>
+    </>
   )
 }
 
