@@ -1,22 +1,21 @@
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
-import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
 import {
   EmptyComment,
-  Icon,
   MomentCommentForm,
   MomentDigestDetail,
   QueryError,
   usePublicQuery,
+  ViewerContext,
 } from '~/components'
 import Assets from '~/components/MomentDigest/Assets'
-import { MomentDetailQuery } from '~/gql/graphql'
+import LikeButton from '~/components/MomentDigest/FooterActions/LikeButton'
+import { MomentDetailPublicQuery } from '~/gql/graphql'
 
-import { MOMENT_DETAIL } from './gql'
+import { MOMENT_DETAIL_PRIVATE, MOMENT_DETAIL_PUBLIC } from './gql'
 import styles from './styles.module.css'
 
 interface MomentDetailDialogContentProps {
@@ -29,18 +28,38 @@ const MomentDetailDialogContent = ({
   closeDialog,
 }: MomentDetailDialogContentProps) => {
   const intl = useIntl()
+  const viewer = useContext(ViewerContext)
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
-  // Data Fetching
-  const { data, loading, error } = usePublicQuery<MomentDetailQuery>(
-    MOMENT_DETAIL,
-    {
+  /**
+   * Data Fetching
+   */
+  // public data
+  const { data, loading, error, client } =
+    usePublicQuery<MomentDetailPublicQuery>(MOMENT_DETAIL_PUBLIC, {
       variables: {
         id: momentId,
       },
       fetchPolicy: 'network-only',
+    })
+
+  // private data
+  const loadPrivate = async (publicData?: MomentDetailPublicQuery) => {
+    if (!viewer.isAuthed || !publicData) {
+      return
     }
-  )
+
+    await client.query({
+      query: MOMENT_DETAIL_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { id: momentId },
+    })
+  }
+
+  // fetch private data
+  useEffect(() => {
+    loadPrivate(data)
+  }, [loading, viewer.id])
 
   useEffect(() => {
     if (editor && editing) {
@@ -64,7 +83,7 @@ const MomentDetailDialogContent = ({
   }
 
   const moment = data.node
-  const { content, assets, liked, likeCount } = moment
+  const { content, assets } = moment
 
   const footerClassName = classNames({
     [styles.footer]: true,
@@ -107,17 +126,7 @@ const MomentDetailDialogContent = ({
         {!editing && (
           <>
             <div className={styles.likeButton}>
-              <button
-                onClick={() => {
-                  // toggleLike()
-                }}
-              >
-                {liked && (
-                  <Icon icon={IconLikeFill} size={22} color="redLight" />
-                )}
-                {!liked && <Icon icon={IconLike} size={22} />}
-              </button>
-              {likeCount > 0 && <span>&nbsp;{likeCount}</span>}
+              <LikeButton moment={moment} iconSize={22} />
             </div>
           </>
         )}

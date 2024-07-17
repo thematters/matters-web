@@ -56,7 +56,6 @@
   @mixin border-top-grey-light;
   @mixin flex-center-start;
 
-  /* color: var(--color-grey); */
   gap: var(--sp9);
   padding: var(--sp16) var(--sp24) var(--sp16) var(--sp13);
 
@@ -67,21 +66,6 @@
   & .likeButton {
     @mixin flex-center-all;
 
-    width: 2.75rem;
-
-    /* height: 2.75rem; */
     padding: 0 var(--sp11);
-  }
-
-  & .editButton {
-    @mixin flex-center-start;
-
-    flex-grow: 1;
-    padding: var(--sp8) var(--sp12);
-    font-size: var(--text15);
-    line-height: 1.75;
-    color: var(--color-grey);
-    background: var(--color-grey-lighter);
-    border-radius: var(--sp8);
   }
 }
