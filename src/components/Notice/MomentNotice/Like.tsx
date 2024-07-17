@@ -1,10 +1,12 @@
 // 1. Your moment was liked by {username}
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { stripHtml } from '~/common/utils'
 import { truncateTitle } from '~/common/utils/text/moment'
+import { LanguageContext } from '~/components/Context'
 import { LikeMomentNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -14,12 +16,9 @@ import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeMomentTitle from '../NoticeMomentTitle'
 
 const Like = ({ notice }: { notice: LikeMomentNoticeFragment }) => {
+  const { lang } = useContext(LanguageContext)
   const intl = useIntl()
-  const title = truncateTitle(
-    stripHtml(notice.moment?.content || ''),
-    10,
-    intl.locale
-  )
+  const title = truncateTitle(stripHtml(notice.moment?.content || ''), 10, lang)
   const images = notice.moment?.assets?.length
     ? intl
         .formatMessage({ defaultMessage: `[image]`, id: 'W3tqQO' })

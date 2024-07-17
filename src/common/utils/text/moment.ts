@@ -1,3 +1,5 @@
+import { UserLanguage } from "~/gql/graphql"
+
 /**
  * Truncates a title to a specified maximum length, while preserving tagged users.
  *
@@ -9,7 +11,7 @@
 export const truncateTitle = (
   title: string,
   maxLength: number = 10,
-  locale: string = 'en'
+  locale: UserLanguage = UserLanguage.En
 ) => {
   if (/^zh/.test(locale)) {
     return truncateTitleForCJK(title, maxLength)
@@ -63,7 +65,7 @@ const truncateTitleForEnglish = (title: string, maxLength: number) => {
  * @returns The truncated title with preserved tagged users.
  */
 const truncateTitleForCJK = (title: string, maxLength: number) => {
-  const pattern = /(@\w+|[\p{Script=Han}\p{P}]|\s)/gu
+  const pattern = /(@\w+|[^\x00-\x7F]|\s)/gu
   const phrases = title.match(pattern)?.filter((s) => s !== ' ') || []
   let hasTag = phrases.some((p) => p.startsWith('@'))
   let count = 0

@@ -1,18 +1,20 @@
 import { describe, expect, it } from 'vitest'
 
+import { UserLanguage } from '~/gql/graphql'
+
 import { truncateTitle } from './moment'
 
 describe('utils/text/moment/truncateTitle', () => {
   it('should not truncate if under 10 characters', () => {
-    expect(truncateTitle('這篇文章真的很厲害！', 10, 'zh-Hant')).toBe(
+    expect(truncateTitle('這篇文章真的很厲害！', 10, UserLanguage.ZhHans)).toBe(
       '這篇文章真的很厲害！'
     )
-    expect(truncateTitle('很厲害！', 10, 'zh-Hant')).toBe('很厲害！')
+    expect(truncateTitle('很厲害！', 10, UserLanguage.ZhHant)).toBe('很厲害！')
   })
 
   it('should truncate if over 10 characters', () => {
     expect(
-      truncateTitle('這篇文章真的很厲害，大家應該都來看一下！', 10, 'zh-Hant')
+      truncateTitle('這篇文章真的很厲害，大家應該都來看一下！', 10, UserLanguage.ZhHant)
     ).toBe('這篇文章真的很厲害，...')
   })
 
@@ -21,24 +23,24 @@ describe('utils/text/moment/truncateTitle', () => {
       truncateTitle(
         '這篇文章真的很厲害，大家應該都來看一下 @user1 @user2',
         10,
-        'zh-Hant'
+        UserLanguage.ZhHant
       )
     ).toBe('這篇文章真的很厲害，...@user1 @user2')
     expect(
       truncateTitle(
         '這篇文章真的很厲害，大家應該都來看一下！ @user1 @user2',
         10,
-        'zh-Hant'
+        UserLanguage.ZhHant
       )
     ).toBe('這篇文章真的很厲害，...@user1 @user2')
   })
 
   it('should truncate if over 10 characters with tagged users in the middle or the beginning', () => {
     expect(
-      truncateTitle('我和 @zhangsan 在台北一起去吃吃吃！', 10, 'zh-Hans')
+      truncateTitle('我和 @zhangsan 在台北一起去吃吃吃！', 10, UserLanguage.ZhHans)
     ).toBe('我和 @zhangsan 在台北一起去...')
     expect(
-      truncateTitle('@zhangsan 和我在台北一起去吃吃吃！', 10, 'zh-Hans')
+      truncateTitle('@zhangsan 和我在台北一起去吃吃吃！', 10, UserLanguage.ZhHans)
     ).toBe('@zhangsan 和我在台北一起去吃...')
   })
 
@@ -47,7 +49,7 @@ describe('utils/text/moment/truncateTitle', () => {
       truncateTitle(
         '我和 @zhangsan 還有 @yp 在台北一起去吃吃吃！',
         10,
-        'zh-Hans'
+        UserLanguage.ZhHans
       )
     ).toBe('我和 @zhangsan 還有 @yp 在台...')
   })
