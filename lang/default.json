@@ -2338,6 +2338,9 @@
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fkQOxQ": {
+    "defaultMessage": "mentioned you in moment"
+  },
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"
   },

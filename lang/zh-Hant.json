@@ -2338,6 +2338,9 @@
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fkQOxQ": {
+    "defaultMessage": "在動態中提及了你"
+  },
   "fnv5rD": {
     "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"
   },

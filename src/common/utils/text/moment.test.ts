@@ -14,7 +14,11 @@ describe('utils/text/moment/truncateTitle', () => {
 
   it('should truncate if over 10 characters', () => {
     expect(
-      truncateTitle('這篇文章真的很厲害，大家應該都來看一下！', 10, UserLanguage.ZhHant)
+      truncateTitle(
+        '這篇文章真的很厲害，大家應該都來看一下！',
+        10,
+        UserLanguage.ZhHant
+      )
     ).toBe('這篇文章真的很厲害，...')
   })
 
@@ -33,14 +37,29 @@ describe('utils/text/moment/truncateTitle', () => {
         UserLanguage.ZhHant
       )
     ).toBe('這篇文章真的很厲害，...@user1 @user2')
+    expect(
+      truncateTitle(
+        '這是一個時刻！！！！！！！@jj',
+        10,
+        UserLanguage.ZhHant
+      )
+    ).toBe('這是一個時刻！！！！...@jj')
   })
 
   it('should truncate if over 10 characters with tagged users in the middle or the beginning', () => {
     expect(
-      truncateTitle('我和 @zhangsan 在台北一起去吃吃吃！', 10, UserLanguage.ZhHans)
+      truncateTitle(
+        '我和 @zhangsan 在台北一起去吃吃吃！',
+        10,
+        UserLanguage.ZhHans
+      )
     ).toBe('我和 @zhangsan 在台北一起去...')
     expect(
-      truncateTitle('@zhangsan 和我在台北一起去吃吃吃！', 10, UserLanguage.ZhHans)
+      truncateTitle(
+        '@zhangsan 和我在台北一起去吃吃吃！',
+        10,
+        UserLanguage.ZhHans
+      )
     ).toBe('@zhangsan 和我在台北一起去吃...')
   })
 

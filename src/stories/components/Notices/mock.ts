@@ -228,6 +228,15 @@ export const MOCK_NOTICE_LIST = [
     momentNoticeType: 'MomentLiked',
     moment: MOCK_MOMENT_LIKE,
   },
+  {
+    __typename: 'MomentNotice',
+    id: 'MomentMentionedNotice',
+    unread: false,
+    createdAt: '2020-07-10T07:29:17.682Z',
+    actors: [MOCK_USER],
+    momentNoticeType: 'MomentMentionedYou',
+    moment: MOCK_MOMENT_LIKE,
+  },
   /**
    * Comment - Comment
    */
