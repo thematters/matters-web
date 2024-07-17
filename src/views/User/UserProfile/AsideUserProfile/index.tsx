@@ -23,13 +23,13 @@ import {
 } from '~/components'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
+import { BadgeGrandSlamDialog } from '../BadgeGrandSlamDialog'
+import { BadgeGrandSlamLabel, BadgeNomadLabel } from '../BadgeLabels'
 import { BadgeNomadDialog } from '../BadgeNomadDialog'
-import { BadgeNomadLabel } from '../BadgeNomadLabel'
 import {
   ArchitectBadge,
   CivicLikerBadge,
   GoldenMotorBadge,
-  // NomadBadge,
   SeedBadge,
   TraveloggersBadge,
 } from '../Badges'
@@ -118,6 +118,7 @@ export const AsideUserProfile = () => {
   const nomadBadgeLevel = (
     hasNomadBadge ? Number.parseInt(nomadBadgeType[0].type.charAt(5)) : 1
   ) as 1 | 2 | 3 | 4
+  const hasGrandSlamBadge = badges.some((b) => b.type === 'grand_slam')
 
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
@@ -270,6 +271,20 @@ export const AsideUserProfile = () => {
                   )
                 }}
               </BadgeNomadDialog>
+            )}
+            {hasGrandSlamBadge && (
+              <BadgeGrandSlamDialog>
+                {({ openDialog }) => {
+                  if (showBadges && !hasShowBadges) {
+                    setTimeout(() => {
+                      openDialog()
+                      // FIXED: infinite loop render
+                      setHasShowBadges(true)
+                    })
+                  }
+                  return <BadgeGrandSlamLabel hasTooltip onClick={openDialog} />
+                }}
+              </BadgeGrandSlamDialog>
             )}
             {hasTraveloggersBadge && <TraveloggersBadge hasTooltip />}
             {hasSeedBadge && <SeedBadge hasTooltip />}

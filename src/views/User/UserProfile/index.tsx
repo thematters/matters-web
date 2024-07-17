@@ -106,6 +106,7 @@ export const UserProfile = () => {
   const nomadBadgeLevel = (
     hasNomadBadge ? Number.parseInt(nomadBadgeType[0].type.charAt(5)) : 1
   ) as 1 | 2 | 3 | 4
+  const hasGrandSlamBadge = badges.some((b) => b.type === 'grand_slam')
 
   const profileCover = user.info.profileCover
   const userState = user.status?.state as string
@@ -201,6 +202,7 @@ export const UserProfile = () => {
                 isInDialog
                 hasNomadBadge={hasNomadBadge}
                 nomadBadgeLevel={nomadBadgeLevel}
+                hasGrandSlamBadge={hasGrandSlamBadge}
                 hasTraveloggersBadge={hasTraveloggersBadge}
                 hasSeedBadge={hasSeedBadge}
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
@@ -225,6 +227,7 @@ export const UserProfile = () => {
                       <Badges
                         hasNomadBadge={hasNomadBadge}
                         nomadBadgeLevel={nomadBadgeLevel}
+                        hasGrandSlamBadge={hasGrandSlamBadge}
                         hasTraveloggersBadge={hasTraveloggersBadge}
                         hasSeedBadge={hasSeedBadge}
                         hasGoldenMotorBadge={hasGoldenMotorBadge}

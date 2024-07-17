@@ -2,12 +2,15 @@ import { FormattedMessage } from 'react-intl'
 
 import { Tooltip } from '~/components'
 
-import { NomadBadge } from '../Badges'
+import { GrandSlamBadge, NomadBadge } from '../Badges'
 
-type BadgeNomadLabelProps = {
+type BaseBadgeLabelProps = {
   hasTooltip?: boolean
-  nomadBadgeLevel: 1 | 2 | 3 | 4
   onClick?: () => void
+}
+
+type BadgeNomadLabelProps = BaseBadgeLabelProps & {
+  nomadBadgeLevel: 1 | 2 | 3 | 4
 }
 
 export const BadgeNomadLabel: React.FC<BadgeNomadLabelProps> = ({
@@ -35,6 +38,37 @@ export const BadgeNomadLabel: React.FC<BadgeNomadLabelProps> = ({
             ) : (
               <FormattedMessage defaultMessage="Moonlight Dream" id="76yoL6" />
             )
+          }
+          placement="top"
+        >
+          {Content}
+        </Tooltip>
+      )}
+
+      {!hasTooltip && Content}
+    </>
+  )
+}
+
+export const BadgeGrandSlamLabel: React.FC<BaseBadgeLabelProps> = ({
+  hasTooltip,
+  onClick,
+}) => {
+  const Content = (
+    <button onClick={onClick}>
+      <GrandSlamBadge />
+    </button>
+  )
+
+  return (
+    <>
+      {hasTooltip && (
+        <Tooltip
+          content={
+            <FormattedMessage
+              defaultMessage="Seven Days Grand Slam"
+              id="iNXSkV"
+            />
           }
           placement="top"
         >

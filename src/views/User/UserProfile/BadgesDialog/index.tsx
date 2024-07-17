@@ -4,10 +4,11 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { Button, Dialog, Icon, useDialogSwitch } from '~/components'
 
+import BadgeGrandSlamContent from '../BadgeGrandSlamDialog/Content'
 import BadgeNomadDialogContent from '../BadgeNomadDialog/Content'
 import { Badges, BadgesOptions } from '../Badges'
 
-type Step = 'badges' | 'nomad'
+type Step = 'badges' | 'nomad' | 'grandSlam'
 interface BadgesDialogProps extends BadgesOptions {
   children: ({
     openDialog,
@@ -22,6 +23,7 @@ export const BaseBadgesDialog = ({
   hasNomadBadge,
   nomadBadgeLevel,
   hasTraveloggersBadge,
+  hasGrandSlamBadge,
   hasSeedBadge,
   hasGoldenMotorBadge,
   hasArchitectBadge,
@@ -33,6 +35,7 @@ export const BaseBadgesDialog = ({
   const [step, setStep] = useState<Step>(initStep)
   const isInBadgesStep = step === 'badges'
   const isInNomadStep = step === 'nomad'
+  const isInGrandSlamStep = step === 'grandSlam'
 
   const openStepDialog = (step?: Step) => {
     if (step) {
@@ -72,6 +75,7 @@ export const BaseBadgesDialog = ({
                 isInDialog
                 hasNomadBadge={hasNomadBadge}
                 nomadBadgeLevel={nomadBadgeLevel}
+                hasGrandSlamBadge={hasGrandSlamBadge}
                 hasTraveloggersBadge={hasTraveloggersBadge}
                 hasSeedBadge={hasSeedBadge}
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
@@ -79,6 +83,7 @@ export const BaseBadgesDialog = ({
                 isCivicLiker={isCivicLiker}
                 shareLink={shareLink}
                 gotoNomadBadge={() => setStep('nomad')}
+                gotoGrandSlamBadge={() => setStep('grandSlam')}
               />
             </Dialog.Content>
 
@@ -104,6 +109,13 @@ export const BaseBadgesDialog = ({
             isNested
             nomadBadgeLevel={nomadBadgeLevel}
             shareLink={shareLink}
+            goBack={() => setStep('badges')}
+          />
+        )}
+        {isInGrandSlamStep && (
+          <BadgeGrandSlamContent
+            closeDialog={closeDialog}
+            isNested
             goBack={() => setStep('badges')}
           />
         )}
