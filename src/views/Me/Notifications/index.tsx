@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { mergeConnections } from '~/common/utils'
+import { mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
   EmptyNotice,
   Head,
@@ -22,30 +22,16 @@ import {
   MeNotificationsQuery,
 } from '~/gql/graphql'
 
-type NoticeNode = {
-  __typename?: string
-  id?: string
-}
-
-function isSpecificNoticeType(
-  node: NoticeNode
-): node is NoticeNode & { id: string } {
-  const validTypes = new Set([
-    'ArticleArticleNotice',
-    'CircleNotice',
-    'ArticleNotice',
-    'CommentCommentNotice',
-    'CommentNotice',
-    'OfficialAnnouncementNotice',
-    'TransactionNotice',
-    'UserNotice',
-  ])
-  return (
-    node.__typename !== undefined &&
-    validTypes.has(node.__typename) &&
-    Boolean(node.id)
-  )
-}
+const renderableTypes = new Set([
+  'ArticleArticleNotice',
+  'CircleNotice',
+  'ArticleNotice',
+  'CommentCommentNotice',
+  'CommentNotice',
+  'OfficialAnnouncementNotice',
+  'TransactionNotice',
+  'UserNotice',
+])
 
 const ME_NOTIFICATIONS = gql`
   query MeNotifications($after: String) {
@@ -120,7 +106,7 @@ const BaseNotifications = () => {
       <List spacing={['xloose', 0]}>
         {edges.map(
           ({ node }) =>
-            isSpecificNoticeType(node) && (
+            shouldRenderNode(node, renderableTypes) && (
               <List.Item key={node.id}>
                 <Notice notice={node} />
               </List.Item>

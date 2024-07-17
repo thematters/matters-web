@@ -80,7 +80,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   }
 
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
-    if (event.code.toLowerCase() !== KEYVALUE.escape) {
+    if (event.code?.toLowerCase() !== KEYVALUE.escape) {
       return
     }
     closeDropdown()

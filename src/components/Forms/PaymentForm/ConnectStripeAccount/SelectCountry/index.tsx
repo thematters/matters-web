@@ -49,7 +49,7 @@ const SelectCountry = ({ country, onChange }: Props) => {
   const options = Object.keys(COUNTRY_TEXT) as PAYOUT_COUNTRY[]
 
   return (
-    <Form.Select
+    <Form.Select<string>
       name="select-country"
       label={
         <Translate

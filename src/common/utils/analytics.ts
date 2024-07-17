@@ -82,6 +82,7 @@ export interface ClickButtonProp {
     | 'edit_support_copy'
     | 'history_version'
     | 'ipfs'
+    | 'campaign'
     | 'edit'
     | 'edited'
     | 'appreciate'
@@ -299,6 +300,7 @@ type ArticleFeedType =
   | 'article_detail_author_sidebar_collection'
   | 'article_detail_author_sidebar_author'
   | 'article_detail_author_sidebar_recommendation'
+  | 'campaign_detail'
 
 type CollectionFeedType =
   | 'user_collection'
@@ -333,6 +335,7 @@ type UserFeedType =
   | 'tag_detail_selected'
   | 'tag_detail_community'
   | 'transaction'
+  | 'campaign_participant'
 
 type TagFeedType =
   | 'all_tags' // all tags page (hottest)

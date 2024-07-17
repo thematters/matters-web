@@ -3,21 +3,26 @@ import { FormattedMessage } from 'react-intl'
 
 import { Dialog, useDialogSwitch } from '~/components'
 
+import SelectCampaign, { SelectCampaignProps } from '../../SelectCampaign'
 import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
 import styles from './styles.module.css'
 
-type AccessDialogProps = {
+type MoreSettingsDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & ToggleAccessProps &
-  ToggleResponseProps
+  ToggleResponseProps &
+  Partial<SelectCampaignProps>
 
-const BaseAccessDialog = ({
+const BaseMoreSettingsDialog = ({
   children,
   canComment,
   toggleComment,
+  appliedCampaign,
+  selectedStage,
+  editCampaign,
   ...props
-}: AccessDialogProps) => {
+}: MoreSettingsDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const toggleResponseProps: ToggleResponseProps = {
@@ -37,7 +42,11 @@ const BaseAccessDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog isOpen={show} onDismiss={closeDialog}>
+      <Dialog
+        isOpen={show}
+        onDismiss={closeDialog}
+        dismissOnClickOutside={false}
+      >
         <Dialog.Header
           title={
             <FormattedMessage defaultMessage="Article Management" id="ZEMcZ6" />
@@ -47,12 +56,28 @@ const BaseAccessDialog = ({
         />
 
         <Dialog.Content noSpacing>
+          {appliedCampaign && editCampaign && (
+            <section className={styles.campaign}>
+              <h3 className={styles.title}>
+                <FormattedMessage
+                  defaultMessage="Add to FreeWrite"
+                  id="6pc948"
+                />
+              </h3>
+              <SelectCampaign
+                appliedCampaign={appliedCampaign}
+                selectedStage={selectedStage}
+                editCampaign={editCampaign}
+              />
+            </section>
+          )}
+
           <section className={styles.response}>
             <ToggleResponse {...toggleResponseProps} />
           </section>
 
           <section className={styles.access}>
-            <ToggleAccess {...props} compact />
+            <ToggleAccess {...props} theme="bottomBar" />
           </section>
         </Dialog.Content>
 
@@ -62,10 +87,10 @@ const BaseAccessDialog = ({
   )
 }
 
-const AccessDialog = (props: AccessDialogProps) => (
-  <Dialog.Lazy mounted={<BaseAccessDialog {...props} />}>
+const MoreSettingsDialog = (props: MoreSettingsDialogProps) => (
+  <Dialog.Lazy mounted={<BaseMoreSettingsDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 
-export default AccessDialog
+export default MoreSettingsDialog

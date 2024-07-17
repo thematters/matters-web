@@ -374,6 +374,9 @@
   "4l6vz1": {
     "defaultMessage": "複製"
   },
+  "4nHH2x": {
+    "defaultMessage": "報名成功"
+  },
   "4tqFCR": {
     "defaultMessage": "作者尚未啓用 USDT 錢包"
   },
@@ -510,6 +513,9 @@
   "6oOCCL": {
     "defaultMessage": "上傳檔案"
   },
+  "6pc948": {
+    "defaultMessage": "投稿七日書自由寫"
+  },
   "6q0G5e": {
     "defaultMessage": "加入成功",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -561,6 +567,9 @@
   "7jjWxF": {
     "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
+  },
+  "7m2h5x": {
+    "defaultMessage": "陪跑參與"
   },
   "7oytv9": {
     "defaultMessage": "（修改過）"
@@ -699,6 +708,9 @@
   "AGDFGs": {
     "defaultMessage": "歧視、侮辱或仇恨"
   },
+  "ALzRKc": {
+    "defaultMessage": "還沒有人投稿，晚點再來瞧瞧吧！"
+  },
   "ANA7sk": {
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -766,6 +778,9 @@
   },
   "Bkx6Gk": {
     "defaultMessage": "切換網路中…"
+  },
+  "Bmy3Ms": {
+    "defaultMessage": "活動時間："
   },
   "BnMru1": {
     "defaultMessage": "語言",
@@ -937,6 +952,9 @@
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
+  "FM+YIG": {
+    "defaultMessage": "陪跑參與活動"
+  },
   "FMIIAZ": {
     "defaultMessage": "此為歷史版本和 IPFS 入口查閱區，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -1069,6 +1087,10 @@
   },
   "HbEL82": {
     "defaultMessage": "評論已刪除"
+  },
+  "HgY+72": {
+    "defaultMessage": "報名參加",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "HkozYU": {
     "defaultMessage": "更換錢包",
@@ -1349,6 +1371,9 @@
     "defaultMessage": "精選過去 24 小時與你有關的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "MnTJ0Q": {
+    "defaultMessage": "報名期："
+  },
   "MoyOR+": {
     "defaultMessage": "設定 - 圍爐通知",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -1358,6 +1383,9 @@
   },
   "N2IrpM": {
     "defaultMessage": "確認"
+  },
+  "N3xGd5": {
+    "defaultMessage": "我們將盡快審核你的申請，敬請期待活動開跑！"
   },
   "N6PWfU": {
     "defaultMessage": "忘記密碼"
@@ -1621,6 +1649,10 @@
     "defaultMessage": "最新",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
+  "SX+8mP": {
+    "defaultMessage": "陪跑審核中",
+    "description": "type:participate"
+  },
   "SYfw+k": {
     "defaultMessage": "確認儲值",
     "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
@@ -1778,6 +1810,10 @@
   "VZsE96": {
     "defaultMessage": "選集名稱"
   },
+  "VaB2pS": {
+    "defaultMessage": "陪跑參與",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "VeEfHm": {
     "defaultMessage": "草稿",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -1792,6 +1828,9 @@
   "VqdOGQ": {
     "defaultMessage": "相關推薦",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
+  },
+  "VrK0Q0": {
+    "defaultMessage": "請選擇⋯"
   },
   "VrOoVf": {
     "defaultMessage": "Matters 不會透過任何渠道主動詢問你的錢包私鑰。",
@@ -2118,6 +2157,9 @@
   "beLe/F": {
     "defaultMessage": "廣播"
   },
+  "buf5vO": {
+    "defaultMessage": "活動公告"
+  },
   "c/z318": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2270,11 +2312,18 @@
   "f24jaP": {
     "defaultMessage": "信用卡支持需發送財務信息相關郵件，請您先驗證電子郵件地址。"
   },
+  "f5jWMJ": {
+    "defaultMessage": "確認參加",
+    "description": "src/views/CampaignDetail/Apply/Dialog/index.tsx"
+  },
   "fBzH+2": {
     "defaultMessage": "不允許讀者評論本文（可通過編輯打開評論功能）"
   },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者刪除"
+  },
+  "fH6B/f": {
+    "defaultMessage": "錯過了正式報名期，仍然可以在報名成功後投稿作品，但無法獲得大滿貫徽章。下次記得早點報名，就有機會獲得徽章了！"
   },
   "fJB38x": {
     "defaultMessage": "剩餘 {remainDays} 天"
@@ -2386,6 +2435,10 @@
     "defaultMessage": "人追蹤",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hfRsLB": {
+    "defaultMessage": "寫作者 {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "追蹤了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2457,6 +2510,10 @@
   "jBx/nm": {
     "defaultMessage": "電子郵件註冊",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
+  "jLkKbI": {
+    "defaultMessage": "報名審核中",
+    "description": "type:apply"
   },
   "jiB0Z2": {
     "defaultMessage": "無法綁定錢包",
@@ -2706,6 +2763,9 @@
   "oGiO//": {
     "defaultMessage": "插入音訊"
   },
+  "oLOus+": {
+    "defaultMessage": "報名申請已遞交 🎉"
+  },
   "ob+HDS": {
     "defaultMessage": "馬上逛逛"
   },
@@ -2899,6 +2959,10 @@
   },
   "sy+pv5": {
     "defaultMessage": "電子郵件"
+  },
+  "syBMnY": {
+    "defaultMessage": "位寫作者",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
   },
   "syEQFE": {
     "defaultMessage": "發布"
@@ -3166,6 +3230,10 @@
   },
   "xkr+zo": {
     "defaultMessage": "協議"
+  },
+  "xl95XN": {
+    "defaultMessage": "寫作者",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "xmcVZ0": {
     "defaultMessage": "搜尋"

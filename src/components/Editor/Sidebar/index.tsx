@@ -1,3 +1,4 @@
+import SidebarCampaign from './Campaign'
 import Collection from './Collection'
 import Cover from './Cover'
 import Management from './Management'
@@ -10,6 +11,7 @@ const Sidebar = {
   Collection,
   Management,
   Response: SidebarArticleResponse,
+  Campaign: SidebarCampaign,
 }
 
 export default Sidebar

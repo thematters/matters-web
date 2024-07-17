@@ -93,6 +93,11 @@ const EditModeHeader = ({
   const isCanCommentRevised = restProps.canComment !== article.canComment
   const isSensitiveRevised =
     restProps.contentSensitive !== article.sensitiveByAuthor
+  const isCampaignRevised =
+    restProps.selectedStage !== article.campaigns[0]?.stage.id
+  const isResetCampaign =
+    isCampaignRevised &&
+    (!restProps.appliedCampaign?.id || !restProps.selectedStage)
 
   const needRepublish =
     isTitleRevised ||
@@ -111,6 +116,7 @@ const EditModeHeader = ({
     isLicenseRevised ||
     isCanCommentRevised ||
     isSensitiveRevised ||
+    isCampaignRevised ||
     restProps.iscnPublish
 
   const contentLength = stripHtml(revision.content || '').length
@@ -148,6 +154,19 @@ const EditModeHeader = ({
           ...(isSensitiveRevised
             ? { sensitive: restProps.contentSensitive }
             : {}),
+          ...(isCampaignRevised
+            ? {
+                campaigns: isResetCampaign
+                  ? []
+                  : [
+                      {
+                        campaign: restProps.appliedCampaign?.id,
+                        stage: restProps.selectedStage,
+                      },
+                    ],
+              }
+            : {}),
+          isResetCampaign,
         },
       })
       if (needRepublish) {
