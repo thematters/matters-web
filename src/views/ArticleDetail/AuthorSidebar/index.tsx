@@ -44,7 +44,10 @@ export const AuthorSidebar = ({ article }: AuthorSidebarProps) => {
       <Author article={article} />
       {!!tab && (
         <>
-          <Tabs article={article} tab={tab} setTab={setTab} />
+          <section className={styles.tabs}>
+            <Tabs article={article} tab={tab} setTab={setTab} />
+          </section>
+
           <section className={styles.list}>
             {!!collectionId && tab === 'Collection' && (
               <DynamicCollection

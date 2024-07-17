@@ -1,0 +1,89 @@
+.participants {
+  @mixin flex-center-start;
+
+  margin-top: var(--sp8);
+  font-size: var(--text14);
+  line-height: 1.375rem;
+  color: var(--color-grey);
+
+  @media (--sm-up) {
+    display: none;
+  }
+
+  & .count {
+    color: var(--color-black);
+  }
+
+  & .avatars {
+    @mixin flex-center-start;
+
+    margin-left: var(--sp6);
+
+    & > * {
+      position: relative;
+      margin-left: calc(var(--sp4) * -1);
+      box-shadow: 0 0 0 2px var(--color-white);
+
+      &:first-child {
+        z-index: 15;
+        margin-left: 0;
+      }
+
+      &:nth-child(2) {
+        z-index: 14;
+      }
+
+      &:nth-child(3) {
+        z-index: 13;
+      }
+
+      &:nth-child(4) {
+        z-index: 12;
+      }
+
+      &:nth-child(5) {
+        z-index: 11;
+      }
+
+      &:nth-child(6) {
+        z-index: 10;
+      }
+
+      &:nth-child(7) {
+        z-index: 9;
+      }
+
+      &:nth-child(8) {
+        z-index: 8;
+      }
+
+      &:nth-child(9) {
+        z-index: 7;
+      }
+
+      &:nth-child(10) {
+        z-index: 6;
+      }
+
+      &:nth-child(11) {
+        z-index: 5;
+      }
+
+      &:nth-child(12) {
+        z-index: 4;
+      }
+
+      &:nth-child(13) {
+        z-index: 3;
+      }
+
+      &:nth-child(14) {
+        z-index: 2;
+      }
+
+      &:nth-child(15) {
+        z-index: 1;
+      }
+    }
+  }
+}

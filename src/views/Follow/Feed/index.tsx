@@ -4,7 +4,7 @@ import _flatten from 'lodash/flatten'
 import _get from 'lodash/get'
 import { useIntl } from 'react-intl'
 
-import { analytics, mergeConnections } from '~/common/utils'
+import { analytics, mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
   EmptyWarning,
   Head,
@@ -18,12 +18,20 @@ import { FollowingFeedQuery } from '~/gql/graphql'
 
 import { FOLLOWING_FEED } from './gql'
 import RecommendArticleActivity from './RecommendArticleActivity'
-import RecommendCircleActivity from './RecommendCircleActivity'
 import RecommendUserActivity from './RecommendUserActivity'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
 import UserCreateCircleActivity from './UserCreateCircleActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
+
+const renderableTypes = new Set([
+  'UserPublishArticleActivity',
+  'UserBroadcastCircleActivity',
+  'UserCreateCircleActivity',
+  'UserAddArticleTagActivity',
+  'ArticleRecommendationActivity',
+  'UserRecommendationActivity',
+])
 
 const FollowingFeed = () => {
   const intl = useIntl()
@@ -92,38 +100,34 @@ const FollowingFeed = () => {
         eof
       >
         <List>
-          {edges.map(({ node }, i) => (
-            <List.Item key={`${node.__typename}:${i}`}>
-              {node.__typename === 'UserPublishArticleActivity' && (
-                <UserPublishArticleActivity location={i} {...node} />
-              )}
-              {node.__typename === 'UserBroadcastCircleActivity' && (
-                <UserBroadcastCircleActivity {...node} />
-              )}
-              {node.__typename === 'UserCreateCircleActivity' && (
-                <UserCreateCircleActivity location={i} {...node} />
-              )}
-              {node.__typename === 'UserAddArticleTagActivity' && (
-                <UserAddArticleTagActivity location={i} {...node} />
-              )}
-              {node.__typename === 'ArticleRecommendationActivity' && (
-                <RecommendArticleActivity
-                  location={i}
-                  articles={node.recommendArticles}
-                  source={node.source}
-                />
-              )}
-              {node.__typename === 'CircleRecommendationActivity' && (
-                <RecommendCircleActivity
-                  location={i}
-                  circles={node.recommendCircles}
-                />
-              )}
-              {node.__typename === 'UserRecommendationActivity' && (
-                <RecommendUserActivity users={node.recommendUsers} />
-              )}
-            </List.Item>
-          ))}
+          {edges.map(({ node }, i) => {
+            return shouldRenderNode(node, renderableTypes) ? (
+              <List.Item key={`${node.__typename}:${i}`}>
+                {node.__typename === 'UserPublishArticleActivity' && (
+                  <UserPublishArticleActivity location={i} {...node} />
+                )}
+                {node.__typename === 'UserBroadcastCircleActivity' && (
+                  <UserBroadcastCircleActivity {...node} />
+                )}
+                {node.__typename === 'UserCreateCircleActivity' && (
+                  <UserCreateCircleActivity location={i} {...node} />
+                )}
+                {node.__typename === 'UserAddArticleTagActivity' && (
+                  <UserAddArticleTagActivity location={i} {...node} />
+                )}
+                {node.__typename === 'ArticleRecommendationActivity' && (
+                  <RecommendArticleActivity
+                    location={i}
+                    articles={node.recommendArticles}
+                    source={node.source}
+                  />
+                )}
+                {node.__typename === 'UserRecommendationActivity' && (
+                  <RecommendUserActivity users={node.recommendUsers} />
+                )}
+              </List.Item>
+            ) : null
+          })}
         </List>
       </InfiniteScroll>
     </>

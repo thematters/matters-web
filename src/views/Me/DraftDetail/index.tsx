@@ -34,15 +34,15 @@ import {
   ArticleLicenseType,
   DirectImageUploadDoneMutation,
   DirectImageUploadMutation,
-  DraftDetailCirclesQueryQuery,
   DraftDetailQueryQuery,
+  DraftDetailViewerQueryQuery,
   PublishState as PublishStateType,
   SetDraftContentMutation,
   SingleFileUploadMutation,
 } from '~/gql/graphql'
 
 import BottomBar from './BottomBar'
-import { DRAFT_DETAIL, DRAFT_DETAIL_CIRCLES, SET_CONTENT } from './gql'
+import { DRAFT_DETAIL, DRAFT_DETAIL_VIEWER, SET_CONTENT } from './gql'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
@@ -60,6 +60,7 @@ const Editor = dynamic(
 const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
   id: '',
   title: '',
+  createdAt: new Date().toISOString(),
   publishState: PublishStateType.Unpublished,
   content: '',
   summary: '',
@@ -84,6 +85,7 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
   sensitiveByAuthor: false,
   iscnPublish: null,
   canComment: true,
+  campaigns: [],
 }
 
 const BaseDraftDetail = () => {
@@ -119,19 +121,22 @@ const BaseDraftDetail = () => {
       skip: isNewDraft(),
     }
   )
-  const { data: circleData, loading: circleLoading } =
-    useQuery<DraftDetailCirclesQueryQuery>(DRAFT_DETAIL_CIRCLES, {
+  const { data: viewerData, loading: viewerLoading } =
+    useQuery<DraftDetailViewerQueryQuery>(DRAFT_DETAIL_VIEWER, {
       fetchPolicy: 'network-only',
     })
 
   const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
-  const ownCircles = circleData?.viewer?.ownCircles || undefined
+  const ownCircles = viewerData?.viewer?.ownCircles || undefined
+  const appliedCampaigns = viewerData?.viewer?.campaigns.edges?.map(
+    (e) => e.node
+  )
   const [contentLength, setContentLength] = useState(0)
   const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
 
   useUnloadConfirm({ block: saveStatus === 'saving' && !isNewDraft() })
 
-  if ((loading && !initNew) || circleLoading) {
+  if ((loading && !initNew) || viewerLoading) {
     return (
       <EmptyLayout>
         <SpinnerBlock />
@@ -292,7 +297,11 @@ const BaseDraftDetail = () => {
     <Layout.Main
       aside={
         <Media greaterThanOrEqual="lg">
-          <Sidebar draft={draft} ownCircles={ownCircles} />
+          <Sidebar
+            draft={draft}
+            campaigns={appliedCampaigns}
+            ownCircles={ownCircles}
+          />
         </Media>
       }
     >
@@ -311,6 +320,7 @@ const BaseDraftDetail = () => {
               {draft && (
                 <SettingsButton
                   draft={draft}
+                  campaigns={appliedCampaigns}
                   ownCircles={ownCircles}
                   publishable={!!publishable}
                 />
@@ -341,7 +351,11 @@ const BaseDraftDetail = () => {
       </Layout.Main.Spacing>
 
       <Media lessThan="lg">
-        <BottomBar draft={draft} ownCircles={ownCircles} />
+        <BottomBar
+          draft={draft}
+          ownCircles={ownCircles}
+          campaigns={appliedCampaigns}
+        />
       </Media>
     </Layout.Main>
   )

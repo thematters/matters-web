@@ -1,6 +1,6 @@
 {
   "+12veD": {
-    "defaultMessage": "开启回应"
+    "defaultMessage": "开启评论"
   },
   "+3ny7b": {
     "defaultMessage": "{totalCount} 人赞赏了作品"
@@ -242,7 +242,7 @@
     "defaultMessage": "众聊"
   },
   "20yT4t": {
-    "defaultMessage": "回应设置",
+    "defaultMessage": "评论设置",
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
   },
   "24jhEp": {
@@ -374,6 +374,9 @@
   "4l6vz1": {
     "defaultMessage": "复制"
   },
+  "4nHH2x": {
+    "defaultMessage": "报名申请已递交 🎉"
+  },
   "4tqFCR": {
     "defaultMessage": "作者尚未启用 USDT 钱包"
   },
@@ -454,7 +457,7 @@
     "defaultMessage": "开始创作"
   },
   "6B+QXo": {
-    "defaultMessage": "回应设置",
+    "defaultMessage": "评论设置",
     "description": "src/components/Editor/ToggleResponse/index.tsx"
   },
   "6BXcdo": {
@@ -510,6 +513,9 @@
   "6oOCCL": {
     "defaultMessage": "上传档案"
   },
+  "6pc948": {
+    "defaultMessage": "投稿七日书自由写"
+  },
   "6q0G5e": {
     "defaultMessage": "加入成功",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -561,6 +567,9 @@
   "7jjWxF": {
     "defaultMessage": "无结果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
+  },
+  "7m2h5x": {
+    "defaultMessage": "陪跑参与"
   },
   "7oytv9": {
     "defaultMessage": "（修改过）"
@@ -699,6 +708,9 @@
   "AGDFGs": {
     "defaultMessage": "歧视、侮辱或仇恨"
   },
+  "ALzRKc": {
+    "defaultMessage": "還沒有人投稿，晚點再來瞧瞧吧！"
+  },
   "ANA7sk": {
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -766,6 +778,9 @@
   },
   "Bkx6Gk": {
     "defaultMessage": "切换网络中…"
+  },
+  "Bmy3Ms": {
+    "defaultMessage": "活动时间："
   },
   "BnMru1": {
     "defaultMessage": "语言",
@@ -937,6 +952,9 @@
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
+  "FM+YIG": {
+    "defaultMessage": "陪跑参与活动"
+  },
   "FMIIAZ": {
     "defaultMessage": "此为历史版本和 IPFS 入口查阅区，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -1069,6 +1087,10 @@
   },
   "HbEL82": {
     "defaultMessage": "评论已刪除"
+  },
+  "HgY+72": {
+    "defaultMessage": "报名参加",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "HkozYU": {
     "defaultMessage": "更换钱包",
@@ -1349,6 +1371,9 @@
     "defaultMessage": "精选过去 24 小时与你有关的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "MnTJ0Q": {
+    "defaultMessage": "报名期："
+  },
   "MoyOR+": {
     "defaultMessage": "设置 - 围炉通知",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -1358,6 +1383,9 @@
   },
   "N2IrpM": {
     "defaultMessage": "确认"
+  },
+  "N3xGd5": {
+    "defaultMessage": "我们将尽快审核你的申请，敬请期待活动开跑！"
   },
   "N6PWfU": {
     "defaultMessage": "忘记密码"
@@ -1607,7 +1635,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "SFsQ1E": {
-    "defaultMessage": "查看回应"
+    "defaultMessage": "查看评论"
   },
   "SHWkv8": {
     "defaultMessage": "为什么先采用 Optimism ?",
@@ -1620,6 +1648,10 @@
   "SPTRiT": {
     "defaultMessage": "最新",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
+  },
+  "SX+8mP": {
+    "defaultMessage": "陪跑审核中",
+    "description": "type:participate"
   },
   "SYfw+k": {
     "defaultMessage": "确认储值",
@@ -1677,7 +1709,7 @@
     "defaultMessage": "临时密码已过期，请尝试重新发送"
   },
   "TInwt3": {
-    "defaultMessage": "关闭回应"
+    "defaultMessage": "关闭评论"
   },
   "TKsfIS": {
     "defaultMessage": "流星号"
@@ -1778,6 +1810,10 @@
   "VZsE96": {
     "defaultMessage": "选集名称"
   },
+  "VaB2pS": {
+    "defaultMessage": "陪跑参与",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "VeEfHm": {
     "defaultMessage": "草稿",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -1792,6 +1828,9 @@
   "VqdOGQ": {
     "defaultMessage": "相关推荐",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
+  },
+  "VrK0Q0": {
+    "defaultMessage": "请选择⋯"
   },
   "VrOoVf": {
     "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
@@ -2118,6 +2157,9 @@
   "beLe/F": {
     "defaultMessage": "广播"
   },
+  "buf5vO": {
+    "defaultMessage": "活动公告"
+  },
   "c/z318": {
     "defaultMessage": "邮箱或密码错误",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2233,7 +2275,7 @@
     "defaultMessage": "涉及未成年人的色情"
   },
   "eIlMHB": {
-    "defaultMessage": "允许读者回应本文（开启后无法关闭）"
+    "defaultMessage": "允许读者评论本文（开启后无法关闭）"
   },
   "eKVBm/": {
     "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考{link}。"
@@ -2270,11 +2312,18 @@
   "f24jaP": {
     "defaultMessage": "信用卡支持需发送财务信息相关邮件，请您先验证电子邮件地址。"
   },
+  "f5jWMJ": {
+    "defaultMessage": "确认参加",
+    "description": "src/views/CampaignDetail/Apply/Dialog/index.tsx"
+  },
   "fBzH+2": {
-    "defaultMessage": "不允许读者回应本文（可通过编辑打开回应功能）"
+    "defaultMessage": "不允许读者评论本文（可通过编辑打开评论功能）"
   },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者删除"
+  },
+  "fH6B/f": {
+    "defaultMessage": "错过了正式报名期，仍然可以在报名成功后投稿作品，但无法获得大满贯徽章。下次记得早点报名，就有机会获得徽章了！"
   },
   "fJB38x": {
     "defaultMessage": "剩余 {remainDays} 天"
@@ -2386,6 +2435,10 @@
     "defaultMessage": "人追踪",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hfRsLB": {
+    "defaultMessage": "写作者 {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "追踪了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2457,6 +2510,10 @@
   "jBx/nm": {
     "defaultMessage": "邮箱注册",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
+  "jLkKbI": {
+    "defaultMessage": "报名审核中",
+    "description": "type:apply"
   },
   "jiB0Z2": {
     "defaultMessage": "无法绑定钱包",
@@ -2706,6 +2763,9 @@
   "oGiO//": {
     "defaultMessage": "插入音频"
   },
+  "oLOus+": {
+    "defaultMessage": "报名申请已递交 🎉"
+  },
   "ob+HDS": {
     "defaultMessage": "马上逛逛"
   },
@@ -2899,6 +2959,10 @@
   },
   "sy+pv5": {
     "defaultMessage": "邮箱"
+  },
+  "syBMnY": {
+    "defaultMessage": "位写作者",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
   },
   "syEQFE": {
     "defaultMessage": "发布"
@@ -3166,6 +3230,10 @@
   },
   "xkr+zo": {
     "defaultMessage": "协议"
+  },
+  "xl95XN": {
+    "defaultMessage": "写作者",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "xmcVZ0": {
     "defaultMessage": "搜索"

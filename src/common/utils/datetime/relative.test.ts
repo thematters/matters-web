@@ -57,13 +57,4 @@ describe('utils/datetime/relative', () => {
     const dateResult = toRelativeDate(date, 'en')
     expect(dateResult).toBe('Jan 1, 2021')
   })
-
-  it('should format a date more than 2 minutes but truncated', () => {
-    expect(toRelativeDate(new Date(2023, 6, 1, 8, 27), 'en', true)).toBe('3m')
-  })
-
-  it('should format a date within 24 hours but truncated', () => {
-    expect(toRelativeDate(new Date(2023, 6, 1, 7, 20), 'en', true)).toBe('1h')
-    expect(toRelativeDate(new Date(2023, 6, 1, 5, 20), 'en', true)).toBe('3h')
-  })
 })

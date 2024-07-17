@@ -23,6 +23,7 @@ import {
 import {
   DRAFT_ASSETS,
   SET_ACCESS,
+  SET_CAMPAIGN,
   SET_CAN_COMMENT,
   SET_COLLECTION,
   SET_COVER,
@@ -59,6 +60,7 @@ export const useEditDraftCover = () => {
   }
 
   return {
+    // FIXME: TS any
     edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
     saving,
     refetch,
@@ -272,5 +274,40 @@ export const useEditDraftCanComment = () => {
   return {
     edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
     saving,
+  }
+}
+
+export const useEditDraftCampaign = () => {
+  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
+  const { createDraft } = useCreateDraft()
+  const [update, { loading: saving }] =
+    useMutation<SetDraftCanCommentMutation>(SET_CAMPAIGN)
+
+  const edit = (
+    selected?: { campaign: string; stage: string },
+    newId?: string
+  ) =>
+    update({
+      variables: {
+        id: newId || getDraftId(),
+        campaigns: selected ? [selected] : [],
+        isReset: !selected,
+      },
+    })
+
+  const createDraftAndEdit = async (selected: {
+    campaign: string
+    stage: string
+  }) => {
+    if (getDraftId()) return edit(selected)
+
+    return createDraft({
+      onCreate: (newDraftId) => edit(selected, newDraftId),
+    })
+  }
+
+  return {
+    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    saving: saving,
   }
 }

@@ -1,3 +1,7 @@
+.tabs {
+  margin-top: var(--sp32);
+}
+
 .list {
   margin-top: var(--sp20);
 }
