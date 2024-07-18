@@ -12,9 +12,9 @@ import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/24px
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
 import { ReactComponent as IconSeedBadge } from '@/public/static/icons/24px/seed-user.svg'
 import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/24px/traveloggers.svg'
+import { ReactComponent as IconGrandSlam48 } from '@/public/static/icons/48px/badge-grand-slam.svg'
 import { Icon, Tooltip, WrappedIcon } from '~/components'
 
-// import { BadgeNomadDialog } from '../BadgeNomadLabel'
 import styles from './styles.module.css'
 
 type BadgePros = {
@@ -110,6 +110,9 @@ export const NomadBadge = ({
       break
   }
 
+  // make height auto since the icon has a border outside
+  const overwriteStyle = { height: 'auto' }
+
   if (isInDialog) {
     return (
       <section
@@ -117,7 +120,7 @@ export const NomadBadge = ({
         onClick={gotoNomadBadge}
         role="button"
       >
-        <Icon icon={icon} size={48} />
+        <Icon icon={icon} size={48} style={overwriteStyle} />
         <section className={styles.info}>
           <section>
             {level === 4 ? (
@@ -163,7 +166,7 @@ export const NomadBadge = ({
           onClick={onClick}
           className={[styles.badge, styles.nomad].join(' ')}
         >
-          <Icon icon={icon} size={20} />
+          <Icon icon={icon} size={20} style={overwriteStyle} />
         </button>
       </Tooltip>
     )
@@ -171,7 +174,7 @@ export const NomadBadge = ({
 
   return (
     <span className={[styles.badge, styles.nomad].join(' ')}>
-      <Icon icon={icon} size={20} />
+      <Icon icon={icon} size={20} style={overwriteStyle} />
     </span>
   )
 }
@@ -189,7 +192,7 @@ export const GrandSlamBadge = ({
         onClick={gotoGrandSlamBadge}
         role="button"
       >
-        <Icon icon={IconGrandSlam} size={48} />
+        <Icon icon={IconGrandSlam48} size={48} />
         <section className={styles.info}>
           <section>
             <FormattedMessage
@@ -217,10 +220,7 @@ export const GrandSlamBadge = ({
         }
         placement="top"
       >
-        <button
-          onClick={onClick}
-          className={[styles.badge, styles.nomad].join(' ')}
-        >
+        <button onClick={onClick} className={styles.badge}>
           <Icon icon={IconGrandSlam} size={20} />
         </button>
       </Tooltip>
@@ -228,7 +228,7 @@ export const GrandSlamBadge = ({
   }
 
   return (
-    <span className={[styles.badge, styles.nomad].join(' ')}>
+    <span className={styles.badge}>
       <Icon icon={IconGrandSlam} size={20} />
     </span>
   )
