@@ -23,11 +23,7 @@ import {
 } from '~/components'
 import Assets from '~/components/MomentDigest/Assets'
 import LikeButton from '~/components/MomentDigest/FooterActions/LikeButton'
-import {
-  CommentFeedCommentPrivateFragment,
-  CommentFeedCommentPublicFragment,
-  MomentDetailQuery,
-} from '~/gql/graphql'
+import { MomentDetailQuery } from '~/gql/graphql'
 
 import { MOMENT_DETAIL } from './gql'
 import styles from './styles.module.css'
@@ -37,9 +33,6 @@ interface MomentDetailDialogContentProps {
   closeDialog: () => void
 }
 
-type Comment = CommentFeedCommentPublicFragment &
-  Partial<CommentFeedCommentPrivateFragment>
-
 const MomentDetailDialogContent = ({
   momentId,
   closeDialog,
@@ -48,7 +41,7 @@ const MomentDetailDialogContent = ({
   const viewer = useContext(ViewerContext)
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
-  const [newestComments, setNewestComments] = useState<Comment[]>([])
+  const [newestCommentIds, setNewestCommentIds] = useState<string[]>([])
   /**
    * Data Fetching
    */
@@ -91,17 +84,17 @@ const MomentDetailDialogContent = ({
     UPDATE_NEWEST_MOMENT_COMMENT,
     (payload: { [key: string]: any }) => {
       const comment = payload?.comment
-      setNewestComments([comment, ...(newestComments || [])])
+      setNewestCommentIds([comment.id, ...newestCommentIds])
     }
   )
 
   useEffect(() => {
-    if (newestComments.length > 0) {
+    if (newestCommentIds.length > 0) {
       const commentTitle = document.getElementById(MOMENT_COMMENTS_TITLE)
 
       commentTitle?.scrollIntoView({ behavior: 'smooth' })
     }
-  }, [newestComments.length])
+  }, [newestCommentIds.length])
 
   /**
    * Render
@@ -121,6 +114,9 @@ const MomentDetailDialogContent = ({
   const moment = data.node
   const { content, assets, comments } = moment
   const commentsEdges = comments.edges || []
+  const newestComments = commentsEdges
+    .filter(({ node }) => newestCommentIds.indexOf(node.id) > -1)
+    .reverse()
 
   const footerClassName = classNames({
     [styles.footer]: true,
@@ -184,14 +180,14 @@ const MomentDetailDialogContent = ({
               >
                 <List spacing={['loose', 0]} hasBorder={false}>
                   {newestComments &&
-                    newestComments.map((newestComment) => (
-                      <List.Item key={newestComment.id}>
-                        <CommentFeed comment={newestComment} hasReply />
+                    newestComments.map(({ node }) => (
+                      <List.Item key={node.id}>
+                        <CommentFeed comment={node} hasReply />
                       </List.Item>
                     ))}
                   {commentsEdges.map(
                     ({ node }) =>
-                      newestComments.findIndex((c) => c.id === node.id) ===
+                      newestCommentIds.findIndex((id) => id === node.id) ===
                         -1 &&
                       node.state !== 'archived' && (
                         <List.Item key={node.id}>
