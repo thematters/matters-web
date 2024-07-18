@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
 import { LinkWrapper, toast } from '~/components'
-import { ArticleCommentContent } from '~/components/ArticleComment/Content'
+import { CommentContent } from '~/components/Comment/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
 import NoticeContentDigest from './NoticeContentDigest'
@@ -36,11 +36,11 @@ const fragments = {
       comments(input: { first: 0 }) {
         totalCount
       }
-      ...ArticleCommentContentCommentPublic
-      ...ArticleCommentContentCommentPrivate
+      ...CommentContentCommentPublic
+      ...CommentContentCommentPrivate
     }
-    ${ArticleCommentContent.fragments.comment.public}
-    ${ArticleCommentContent.fragments.comment.private}
+    ${CommentContent.fragments.comment.public}
+    ${CommentContent.fragments.comment.private}
   `,
 }
 
