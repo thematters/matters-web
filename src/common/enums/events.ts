@@ -6,6 +6,9 @@ export const REFETCH_RESPONSES = 'refetchResponses'
 export const SYNC_APPRECIATE_BUTTON_COUNT = 'syncAppreciateButtonCount'
 export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
 
+// Moment
+export const ADD_MOMENT_COMMENT_MENTION = 'addMomentCommentMention'
+
 // Tag
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'
 

@@ -66,6 +66,7 @@ type ToPathArgs =
       comment: CommentArgs
       article?: ArticleArgs | null
       circle?: CircleArgs | null
+      moment?: MomentArgs | null
     }
   | { page: 'draftDetail'; id: string }
   | {
@@ -170,6 +171,13 @@ export const toPath = (
           href = toPath({
             page: 'articleDetail',
             article: args.article!,
+            fragment,
+          }).href
+          break
+        case 'moment':
+          href = toPath({
+            page: 'momentDetail',
+            moment: args.moment!,
             fragment,
           }).href
           break

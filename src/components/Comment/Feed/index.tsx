@@ -44,8 +44,11 @@ const BaseCommentFeed = ({
   ...actionControls
 }: CommentProps) => {
   const { id, author, parentComment } = comment
-  const article =
-    comment.node.__typename === 'Article' ? comment.node : undefined
+  const node =
+    comment.node.__typename === 'Article' ||
+    comment.node.__typename === 'Moment'
+      ? comment.node
+      : undefined
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
 
   const submitCallback = () => {
@@ -67,7 +70,8 @@ const BaseCommentFeed = ({
   const commentDetailPath = toPath({
     page: 'commentDetail',
     comment,
-    article,
+    article: node,
+    moment: node,
   })
 
   return (

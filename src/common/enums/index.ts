@@ -62,6 +62,7 @@ export const MAX_ARTICLE_COLLECT_LENGTH = 3
 
 export const MAX_MOMENT_CONTENT_LENGTH = 240
 export const MAX_MOMENT_COMMENT_LENGTH = 240
+export const MOMENT_COMMENTS_TITLE = 'moment-comments-title'
 
 export const MAX_TAG_CONTENT_LENGTH = 50
 export const MAX_TAG_DESCRIPTION_LENGTH = 200

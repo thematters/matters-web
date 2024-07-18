@@ -13,13 +13,14 @@ import {
   ViewerContext,
 } from '~/components'
 import CommentEditor from '~/components/Editor/Comment'
+import { updateMomentDetail } from '~/components/GQL'
 import { PUT_MOMENT_COMMENT } from '~/components/GQL/mutations/putComment'
 import { PutMomentCommentMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 export interface MomentCommentFormProps {
-  momentId?: string
+  momentId: string
 
   defaultContent?: string | null
   submitCallback?: () => void
@@ -94,7 +95,24 @@ export const MomentCommentForm: React.FC<MomentCommentFormProps> = ({
     setSubmitting(true)
 
     try {
-      await putComment({ variables: { input } })
+      await putComment({
+        variables: { input },
+        update: (cache, mutationResult) => {
+          const newComment = mutationResult.data?.putComment
+          if (!newComment) {
+            return
+          }
+
+          updateMomentDetail({
+            cache,
+            momentId,
+            comment: newComment,
+            type: 'addComment',
+          })
+
+          // TODO: update newest comment and scroll to title
+        },
+      })
 
       setSubmitting(false)
       submitCallback?.()

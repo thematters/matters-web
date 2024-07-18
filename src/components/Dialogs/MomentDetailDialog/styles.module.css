@@ -13,12 +13,9 @@
 }
 
 .scrollContainer {
-  /* TODO: Confirm height with producion team */
-
   @mixin hide-scrollbar;
 
-  /* max-height: calc(var(--ivh) - 158px); */
-  max-height: calc(90vh - 158px);
+  max-height: calc(80vh - 158px);
   overflow-y: auto;
 }
 
@@ -42,6 +39,7 @@
   padding: var(--sp24);
 
   & .title {
+    margin-bottom: var(--sp24);
     font-size: var(--text15);
     line-height: 1.75;
     color: var(--color-black);
@@ -49,6 +47,10 @@
     & .count {
       color: var(--color-grey-dark);
     }
+  }
+
+  & .commentNode {
+    margin: var(--sp24) 0;
   }
 }
 

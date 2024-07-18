@@ -1,14 +1,24 @@
 import { useQuery } from '@apollo/react-hooks'
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
-import { useIntl } from 'react-intl'
+import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  ADD_MOMENT_COMMENT_MENTION,
+  MOMENT_COMMENTS_TITLE,
+} from '~/common/enums'
+import { makeMentionElement } from '~/common/utils'
+import {
+  CommentFeed,
   EmptyComment,
+  InfiniteScroll,
+  List,
   MomentCommentForm,
   MomentDigestDetail,
   QueryError,
+  useEventListener,
+  ViewerContext,
 } from '~/components'
 import Assets from '~/components/MomentDigest/Assets'
 import LikeButton from '~/components/MomentDigest/FooterActions/LikeButton'
@@ -27,6 +37,7 @@ const MomentDetailDialogContent = ({
   closeDialog,
 }: MomentDetailDialogContentProps) => {
   const intl = useIntl()
+  const viewer = useContext(ViewerContext)
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
   /**
@@ -45,6 +56,28 @@ const MomentDetailDialogContent = ({
     }
   }, [editor, editing])
 
+  useEventListener(
+    ADD_MOMENT_COMMENT_MENTION,
+    (payload: { [key: string]: any }) => {
+      setEditing(true)
+      const author = payload?.author
+      if (author.id === viewer.id) {
+        editor && editor.commands.focus('end')
+        return
+      }
+      const mentionElement = makeMentionElement(
+        author.id,
+        author.userName,
+        author.displayName
+      )
+
+      if (editor) {
+        editor.commands.insertContent(mentionElement)
+        editor.commands.focus('end')
+      }
+    }
+  )
+
   /**
    * Render
    */
@@ -61,7 +94,8 @@ const MomentDetailDialogContent = ({
   }
 
   const moment = data.node
-  const { content, assets } = moment
+  const { content, assets, comments } = moment
+  const commentsEdges = comments.edges || []
 
   const footerClassName = classNames({
     [styles.footer]: true,
@@ -91,13 +125,51 @@ const MomentDetailDialogContent = ({
           {assets && assets.length > 0 && <Assets moment={moment} />}
         </section>
         <section className={styles.comments}>
-          <EmptyComment
-            description={intl.formatMessage({
-              defaultMessage: 'No comments',
-              description: 'src/components/Forms/MomentCommentForm/index.tsx',
-              id: '80bF0W',
-            })}
-          />
+          {commentsEdges.length === 0 && (
+            <EmptyComment
+              description={intl.formatMessage({
+                defaultMessage: 'No comments',
+                description: 'src/components/Forms/MomentCommentForm/index.tsx',
+                id: '80bF0W',
+              })}
+            />
+          )}
+          {commentsEdges.length > 0 && (
+            <>
+              <section className={styles.title} id={MOMENT_COMMENTS_TITLE}>
+                <span>
+                  <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
+                </span>
+                <span className={styles.count}>
+                  &nbsp;{commentsEdges.length}
+                </span>
+              </section>
+              <InfiniteScroll
+                hasNextPage={false}
+                loadMore={async () => {}}
+                loader={<></>}
+                eof={
+                  <FormattedMessage
+                    defaultMessage="No more comments"
+                    description="src/views/ArticleDetail/Comments/LatestComments/index.tsx"
+                    id="9SXN7s"
+                  />
+                }
+                eofSpacingTop="base"
+              >
+                <List spacing={['loose', 0]} hasBorder={false}>
+                  {commentsEdges.map(
+                    ({ cursor, node }) =>
+                      node.state !== 'archived' && (
+                        <List.Item key={node.id}>
+                          <CommentFeed comment={node} hasReply />
+                        </List.Item>
+                      )
+                  )}
+                </List>
+              </InfiniteScroll>
+            </>
+          )}
         </section>
       </section>
       <footer className={footerClassName}>

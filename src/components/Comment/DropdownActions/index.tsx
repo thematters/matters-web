@@ -82,6 +82,14 @@ const fragments = {
               id
             }
           }
+
+          ... on Moment {
+            id
+            shortHash
+            author {
+              id
+            }
+          }
         }
         ...CommentPinButtonComment
       }
@@ -98,6 +106,15 @@ const fragments = {
         node {
           ... on Article {
             id
+            author {
+              id
+              isBlocking
+            }
+          }
+
+          ... on Moment {
+            id
+            shortHash
             author {
               id
               isBlocking
@@ -168,9 +185,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
   const { isArchived, isFrozen } = viewer
 
-  const article =
-    comment.node.__typename === 'Article' ? comment.node : undefined
-  const targetAuthor = article?.author
+  const node =
+    comment.node.__typename === 'Article' ||
+    comment.node.__typename === 'Moment'
+      ? comment.node
+      : undefined
+  const targetAuthor = node?.author
 
   const isTargetAuthor = viewer.id === targetAuthor?.id
   const isCommentAuthor = viewer.id === comment.author.id
