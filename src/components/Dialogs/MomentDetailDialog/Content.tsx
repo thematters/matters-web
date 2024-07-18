@@ -7,6 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import {
   ADD_MOMENT_COMMENT_MENTION,
   MOMENT_COMMENTS_TITLE,
+  UPDATE_NEWEST_MOMENT_COMMENT,
 } from '~/common/enums'
 import { makeMentionElement } from '~/common/utils'
 import {
@@ -22,7 +23,11 @@ import {
 } from '~/components'
 import Assets from '~/components/MomentDigest/Assets'
 import LikeButton from '~/components/MomentDigest/FooterActions/LikeButton'
-import { MomentDetailQuery } from '~/gql/graphql'
+import {
+  CommentFeedCommentPrivateFragment,
+  CommentFeedCommentPublicFragment,
+  MomentDetailQuery,
+} from '~/gql/graphql'
 
 import { MOMENT_DETAIL } from './gql'
 import styles from './styles.module.css'
@@ -32,6 +37,9 @@ interface MomentDetailDialogContentProps {
   closeDialog: () => void
 }
 
+type Comment = CommentFeedCommentPublicFragment &
+  Partial<CommentFeedCommentPrivateFragment>
+
 const MomentDetailDialogContent = ({
   momentId,
   closeDialog,
@@ -40,6 +48,7 @@ const MomentDetailDialogContent = ({
   const viewer = useContext(ViewerContext)
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
+  const [newestComments, setNewestComments] = useState<Comment[]>([])
   /**
    * Data Fetching
    */
@@ -77,6 +86,22 @@ const MomentDetailDialogContent = ({
       }
     }
   )
+
+  useEventListener(
+    UPDATE_NEWEST_MOMENT_COMMENT,
+    (payload: { [key: string]: any }) => {
+      const comment = payload?.comment
+      setNewestComments([comment, ...(newestComments || [])])
+    }
+  )
+
+  useEffect(() => {
+    if (newestComments.length > 0) {
+      const commentTitle = document.getElementById(MOMENT_COMMENTS_TITLE)
+
+      commentTitle?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [newestComments.length])
 
   /**
    * Render
@@ -158,8 +183,16 @@ const MomentDetailDialogContent = ({
                 eofSpacingTop="base"
               >
                 <List spacing={['loose', 0]} hasBorder={false}>
+                  {newestComments &&
+                    newestComments.map((newestComment) => (
+                      <List.Item key={newestComment.id}>
+                        <CommentFeed comment={newestComment} hasReply />
+                      </List.Item>
+                    ))}
                   {commentsEdges.map(
-                    ({ cursor, node }) =>
+                    ({ node }) =>
+                      newestComments.findIndex((c) => c.id === node.id) ===
+                        -1 &&
                       node.state !== 'archived' && (
                         <List.Item key={node.id}>
                           <CommentFeed comment={node} hasReply />

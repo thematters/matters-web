@@ -3,7 +3,10 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { MAX_MOMENT_COMMENT_LENGTH } from '~/common/enums'
+import {
+  MAX_MOMENT_COMMENT_LENGTH,
+  UPDATE_NEWEST_MOMENT_COMMENT,
+} from '~/common/enums'
 import { formStorage, stripHtml, trimCommentContent } from '~/common/utils'
 import {
   Button,
@@ -110,7 +113,15 @@ export const MomentCommentForm: React.FC<MomentCommentFormProps> = ({
             type: 'addComment',
           })
 
-          // TODO: update newest comment and scroll to title
+          const detail = {
+            comment: newComment,
+          }
+
+          window.dispatchEvent(
+            new CustomEvent(UPDATE_NEWEST_MOMENT_COMMENT, {
+              detail,
+            })
+          )
         },
       })
 
