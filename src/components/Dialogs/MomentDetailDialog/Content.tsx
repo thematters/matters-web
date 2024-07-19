@@ -15,12 +15,12 @@ import {
   EmptyComment,
   InfiniteScroll,
   List,
-  MomentCommentForm,
   MomentDigestDetail,
   QueryError,
   useEventListener,
   ViewerContext,
 } from '~/components'
+import MomentCommentForm from '~/components/Forms/MomentCommentForm'
 import Assets from '~/components/MomentDigest/Assets'
 import LikeButton from '~/components/MomentDigest/FooterActions/LikeButton'
 import { MomentDetailQuery } from '~/gql/graphql'
@@ -112,9 +112,11 @@ const MomentDetailDialogContent = ({
   }
 
   const moment = data.moment
+
   const { content, assets, comments } = moment
-  const commentsEdges = comments.edges || []
-  const newestComments = commentsEdges
+  const activeCommentsEdges =
+    comments.edges?.filter(({ node }) => node.state === 'active') || []
+  const newestComments = activeCommentsEdges
     .filter(({ node }) => newestCommentIds.indexOf(node.id) > -1)
     .reverse()
 
@@ -146,7 +148,7 @@ const MomentDetailDialogContent = ({
           {assets && assets.length > 0 && <Assets moment={moment} />}
         </section>
         <section className={styles.comments}>
-          {commentsEdges.length === 0 && (
+          {activeCommentsEdges.length === 0 && (
             <EmptyComment
               description={intl.formatMessage({
                 defaultMessage: 'No comments',
@@ -155,14 +157,14 @@ const MomentDetailDialogContent = ({
               })}
             />
           )}
-          {commentsEdges.length > 0 && (
+          {activeCommentsEdges.length > 0 && (
             <>
               <section className={styles.title} id={MOMENT_COMMENTS_TITLE}>
                 <span>
                   <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
                 </span>
                 <span className={styles.count}>
-                  &nbsp;{commentsEdges.length}
+                  &nbsp;{activeCommentsEdges.length}
                 </span>
               </section>
               <InfiniteScroll
@@ -185,7 +187,7 @@ const MomentDetailDialogContent = ({
                         <CommentFeed comment={node} hasReply />
                       </List.Item>
                     ))}
-                  {commentsEdges.map(
+                  {activeCommentsEdges.map(
                     ({ node }) =>
                       newestCommentIds.findIndex((id) => id === node.id) ===
                         -1 &&
@@ -210,7 +212,7 @@ const MomentDetailDialogContent = ({
           </>
         )}
         <MomentCommentForm
-          momentId={moment.id}
+          moment={moment}
           setEditor={setEditor}
           editing={editing}
           setEditing={setEditing}

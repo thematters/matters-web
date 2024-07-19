@@ -1,5 +1,6 @@
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
+import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -18,12 +19,29 @@ import {
 import CommentEditor from '~/components/Editor/Comment'
 import { updateMomentDetail } from '~/components/GQL'
 import { PUT_MOMENT_COMMENT } from '~/components/GQL/mutations/putComment'
-import { PutMomentCommentMutation } from '~/gql/graphql'
+import {
+  MomentCommentFormMomentFragment,
+  PutMomentCommentMutation,
+} from '~/gql/graphql'
+import { USER_WRITINGS_PUBLIC } from '~/views/User/Writings/gql'
 
 import styles from './styles.module.css'
 
+const fragments = {
+  moment: gql`
+    fragment MomentCommentFormMoment on Moment {
+      id
+      shortHash
+      author {
+        id
+        userName
+      }
+    }
+  `,
+}
+
 export interface MomentCommentFormProps {
-  momentId: string
+  moment: MomentCommentFormMomentFragment
 
   defaultContent?: string | null
   submitCallback?: () => void
@@ -35,8 +53,8 @@ export interface MomentCommentFormProps {
   setEditing?: (editing: boolean) => void
 }
 
-export const MomentCommentForm: React.FC<MomentCommentFormProps> = ({
-  momentId,
+const MomentCommentForm = ({
+  moment,
   defaultContent,
   submitCallback,
   closeCallback,
@@ -45,7 +63,8 @@ export const MomentCommentForm: React.FC<MomentCommentFormProps> = ({
 
   editing,
   setEditing,
-}) => {
+}: MomentCommentFormProps) => {
+  const { id: momentId } = moment
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const [editor, localSetEditor] = useState<Editor | null>(null)
@@ -108,7 +127,7 @@ export const MomentCommentForm: React.FC<MomentCommentFormProps> = ({
 
           updateMomentDetail({
             cache,
-            momentId,
+            shortHash: moment.shortHash,
             comment: newComment,
             type: 'addComment',
           })
@@ -123,6 +142,12 @@ export const MomentCommentForm: React.FC<MomentCommentFormProps> = ({
             })
           )
         },
+        refetchQueries: [
+          {
+            query: USER_WRITINGS_PUBLIC,
+            variables: { userName: moment.author.userName },
+          },
+        ],
       })
 
       setSubmitting(false)
@@ -238,3 +263,7 @@ export const MomentCommentForm: React.FC<MomentCommentFormProps> = ({
     </form>
   )
 }
+
+MomentCommentForm.fragments = fragments
+
+export default MomentCommentForm

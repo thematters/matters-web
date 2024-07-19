@@ -80,6 +80,7 @@ const fragments = {
             shortHash
             author {
               id
+              userName
             }
           }
 
@@ -88,6 +89,7 @@ const fragments = {
             shortHash
             author {
               id
+              userName
             }
           }
         }
@@ -108,6 +110,7 @@ const fragments = {
             id
             author {
               id
+              userName
               isBlocking
             }
           }
@@ -117,6 +120,7 @@ const fragments = {
             shortHash
             author {
               id
+              userName
               isBlocking
             }
           }

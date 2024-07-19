@@ -10,12 +10,12 @@ type Comment = NonNullable<
 
 export const updateMomentDetail = ({
   cache,
-  momentId,
+  shortHash,
   comment,
   type,
 }: {
   cache: DataProxy
-  momentId: string
+  shortHash: string
   comment?: Comment
   type: 'addComment'
 }) => {
@@ -27,7 +27,7 @@ export const updateMomentDetail = ({
   try {
     const data = cache.readQuery<MomentDetailQuery>({
       query: MOMENT_DETAIL,
-      variables: { id: momentId },
+      variables: { shortHash },
     })
 
     if (!data || data?.moment?.__typename !== 'Moment') {
@@ -55,9 +55,9 @@ export const updateMomentDetail = ({
 
     cache.writeQuery({
       query: MOMENT_DETAIL,
-      variables: { id: momentId },
+      variables: { shortHash },
       data: {
-        node: {
+        moment: {
           ...data.moment,
           comments: {
             ...data.moment.comments,
