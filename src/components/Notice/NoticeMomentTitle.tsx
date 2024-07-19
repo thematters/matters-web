@@ -36,7 +36,7 @@ const NoticeMomentTitle = ({
 }
 
 NoticeMomentTitle.fragments = {
-  article: gql`
+  moment: gql`
     fragment NoticeMomentTitle on Moment {
       shortHash
     }

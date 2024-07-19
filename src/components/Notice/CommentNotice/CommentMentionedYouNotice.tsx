@@ -12,6 +12,7 @@ import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
+import NoticeMomentTitle from '../NoticeMomentTitle'
 
 const CommentMentionedYouNotice = ({
   notice,
@@ -27,7 +28,7 @@ const CommentMentionedYouNotice = ({
   const commentCircle =
     notice.comment?.node.__typename === 'Circle' ? notice.comment.node : null
   const commentMoment =
-    notice.comment?.type === 'moment' ? notice.comment.node : null
+    notice.comment?.node.__typename === 'Moment' ? notice.comment.node : null
 
   const commentCircleDiscussion =
     notice.comment?.type === 'circleDiscussion' ? notice.comment.type : null
@@ -54,15 +55,15 @@ const CommentMentionedYouNotice = ({
           notice={notice}
           action={
             <FormattedMessage
-              defaultMessage="mentioned you in a moment comment"
-              id="/kdFi6"
+              defaultMessage="mentioned you in a moment comment at {commentMoment}"
+              id="DV7771"
               description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
               values={{
+                // commentMoment: <NoticeMomentTitle moment={commentMoment} />,
                 commentArticle: <NoticeArticleTitle article={commentArticle} />,
               }}
             />
           }
-          // TODO: also added deleted comments
           content={<NoticeComment comment={notice.comment} />}
           testId={TEST_ID.NOTICE_COMMENT_MENTIONED_YOU}
         />
@@ -152,6 +153,7 @@ CommentMentionedYouNotice.fragments = {
     ${NoticeCircleName.fragments.circle}
     ${NoticeComment.fragments.comment}
     ${NoticeDate.fragments.notice}
+    ${NoticeMomentTitle.fragments.moment}
   `,
 }
 

@@ -67,6 +67,7 @@ Mention.fragments = {
     ${NoticeActorAvatar.fragments.user}
     ${NoticeHeadActors.fragments.user}
     ${NoticeDate.fragments.notice}
+    ${NoticeMomentTitle.fragments.moment}
   `,
 }
 

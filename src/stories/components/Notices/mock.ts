@@ -228,6 +228,7 @@ export const MOCK_NOTICE_LIST = [
     comment: {
       ...MOCK_COMMENT,
       type: 'moment',
+      state: 'archived'
     },
   },
   {
