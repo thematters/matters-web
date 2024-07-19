@@ -2,19 +2,10 @@ import { useQuery } from '@apollo/react-hooks'
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
 
-import {
-  ADD_MOMENT_COMMENT_MENTION,
-  MOMENT_COMMENTS_TITLE,
-  UPDATE_NEWEST_MOMENT_COMMENT,
-} from '~/common/enums'
+import { ADD_MOMENT_COMMENT_MENTION } from '~/common/enums'
 import { makeMentionElement } from '~/common/utils'
 import {
-  CommentFeed,
-  EmptyComment,
-  InfiniteScroll,
-  List,
   MomentDigestDetail,
   QueryError,
   useEventListener,
@@ -25,6 +16,7 @@ import Assets from '~/components/MomentDigest/Assets'
 import LikeButton from '~/components/MomentDigest/FooterActions/LikeButton'
 import { MomentDetailQuery } from '~/gql/graphql'
 
+import Comments from './Comments'
 import { MOMENT_DETAIL } from './gql'
 import styles from './styles.module.css'
 
@@ -37,11 +29,9 @@ const MomentDetailDialogContent = ({
   shortHash,
   closeDialog,
 }: MomentDetailDialogContentProps) => {
-  const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
-  const [newestCommentIds, setNewestCommentIds] = useState<string[]>([])
   /**
    * Data Fetching
    */
@@ -80,22 +70,6 @@ const MomentDetailDialogContent = ({
     }
   )
 
-  useEventListener(
-    UPDATE_NEWEST_MOMENT_COMMENT,
-    (payload: { [key: string]: any }) => {
-      const comment = payload?.comment
-      setNewestCommentIds([comment.id, ...newestCommentIds])
-    }
-  )
-
-  useEffect(() => {
-    if (newestCommentIds.length > 0) {
-      const commentTitle = document.getElementById(MOMENT_COMMENTS_TITLE)
-
-      commentTitle?.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [newestCommentIds.length])
-
   /**
    * Render
    */
@@ -113,12 +87,7 @@ const MomentDetailDialogContent = ({
 
   const moment = data.moment
 
-  const { content, assets, comments } = moment
-  const activeCommentsEdges =
-    comments.edges?.filter(({ node }) => node.state === 'active') || []
-  const newestComments = activeCommentsEdges
-    .filter(({ node }) => newestCommentIds.indexOf(node.id) > -1)
-    .reverse()
+  const { content, assets } = moment
 
   const footerClassName = classNames({
     [styles.footer]: true,
@@ -147,61 +116,7 @@ const MomentDetailDialogContent = ({
           )}
           {assets && assets.length > 0 && <Assets moment={moment} />}
         </section>
-        <section className={styles.comments}>
-          {activeCommentsEdges.length === 0 && (
-            <EmptyComment
-              description={intl.formatMessage({
-                defaultMessage: 'No comments',
-                description: 'src/components/Forms/MomentCommentForm/index.tsx',
-                id: '80bF0W',
-              })}
-            />
-          )}
-          {activeCommentsEdges.length > 0 && (
-            <>
-              <section className={styles.title} id={MOMENT_COMMENTS_TITLE}>
-                <span>
-                  <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
-                </span>
-                <span className={styles.count}>
-                  &nbsp;{activeCommentsEdges.length}
-                </span>
-              </section>
-              <InfiniteScroll
-                hasNextPage={false}
-                loadMore={async () => {}}
-                loader={<></>}
-                eof={
-                  <FormattedMessage
-                    defaultMessage="No more comments"
-                    description="src/views/ArticleDetail/Comments/LatestComments/index.tsx"
-                    id="9SXN7s"
-                  />
-                }
-                eofSpacingTop="base"
-              >
-                <List spacing={['loose', 0]} hasBorder={false}>
-                  {newestComments &&
-                    newestComments.map(({ node }) => (
-                      <List.Item key={node.id}>
-                        <CommentFeed comment={node} hasReply />
-                      </List.Item>
-                    ))}
-                  {activeCommentsEdges.map(
-                    ({ node }) =>
-                      newestCommentIds.findIndex((id) => id === node.id) ===
-                        -1 &&
-                      node.state !== 'archived' && (
-                        <List.Item key={node.id}>
-                          <CommentFeed comment={node} hasReply />
-                        </List.Item>
-                      )
-                  )}
-                </List>
-              </InfiniteScroll>
-            </>
-          )}
-        </section>
+        <Comments moment={moment} />
       </section>
       <footer className={footerClassName}>
         {!editing && (
