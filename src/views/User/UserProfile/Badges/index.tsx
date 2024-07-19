@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconGrandSlam } from '@/public/static/icons/24px/badge-grand-slam.svg'
 import { ReactComponent as IconNomad1Badge } from '@/public/static/icons/24px/badge-nomad1-moon.svg'
 import { ReactComponent as IconNomad2Badge } from '@/public/static/icons/24px/badge-nomad2-star.svg'
 import { ReactComponent as IconNomad3Badge } from '@/public/static/icons/24px/badge-nomad3-light.svg'
@@ -11,210 +12,115 @@ import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/24px
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
 import { ReactComponent as IconSeedBadge } from '@/public/static/icons/24px/seed-user.svg'
 import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/24px/traveloggers.svg'
-import { Icon, Tooltip, Translate, withIcon } from '~/components'
+import { ReactComponent as IconGrandSlam48 } from '@/public/static/icons/48px/badge-grand-slam.svg'
+import { Icon, Tooltip, WrappedIcon } from '~/components'
 
-// import { BadgeNomadDialog } from '../BadgeNomadLabel'
 import styles from './styles.module.css'
 
-type badgePros = {
+type BadgePros = {
   isInDialog?: boolean
   hasTooltip?: boolean
+  onClick?: () => void
 }
 
-export const SeedBadge = ({ isInDialog, hasTooltip }: badgePros) => {
-  const copy = (
-    <Translate zh_hant="種子用戶" zh_hans="种子用户" en="Seed User" />
-  )
-  if (isInDialog) {
+const withBadge = ({
+  icon,
+  name,
+}: {
+  icon: WrappedIcon
+  name: string | React.ReactNode
+}) => {
+  const Badge = ({ isInDialog, hasTooltip }: BadgePros) => {
+    if (isInDialog) {
+      return (
+        <section className={styles.item}>
+          <Icon icon={icon} size={48} />
+          <section>{name}</section>
+        </section>
+      )
+    }
+
+    if (hasTooltip) {
+      return (
+        <Tooltip content={name} placement="top">
+          <span className={styles.badge}>
+            <Icon icon={icon} size={20} />
+          </span>
+        </Tooltip>
+      )
+    }
+
     return (
-      <section className={styles.item}>
-        <>{withIcon(IconSeedBadge)({ size: 48 })}</>
-        <section>{copy}</section>
-      </section>
+      <span className={styles.badge}>
+        <Icon icon={icon} size={20} />
+      </span>
     )
   }
 
-  if (hasTooltip) {
-    return (
-      <Tooltip content={copy} placement="top">
-        <span className={styles.badge}>
-          {withIcon(IconSeedBadge)({ size: 20 })}
-        </span>
-      </Tooltip>
-    )
-  }
-
-  return (
-    <span className={styles.badge}>
-      {withIcon(IconSeedBadge)({ size: 20 })}
-    </span>
-  )
+  return Badge
 }
 
-export const GoldenMotorBadge = ({ isInDialog, hasTooltip }: badgePros) => {
-  const copy = (
-    <Translate
-      zh_hant="支持超過 100 次"
-      zh_hans="支持超过 100 次"
-      en="More than 100 supports"
-    />
-  )
-  if (isInDialog) {
-    return (
-      <section className={styles.item}>
-        <>{withIcon(IconGoldenMotorBadge)({ size: 48 })}</>
-        <section>{copy}</section>
-      </section>
-    )
-  }
+export const SeedBadge = withBadge({
+  icon: IconSeedBadge,
+  name: <FormattedMessage defaultMessage="Seed User" id="QbjADp" />,
+})
 
-  if (hasTooltip) {
-    return (
-      <Tooltip content={copy} placement="top">
-        <span className={styles.badge}>
-          {withIcon(IconGoldenMotorBadge)({ size: 20 })}
-        </span>
-      </Tooltip>
-    )
-  }
+export const GoldenMotorBadge = withBadge({
+  icon: IconGoldenMotorBadge,
+  name: (
+    <FormattedMessage defaultMessage="More than 100 supports" id="orIq4X" />
+  ),
+})
 
-  return (
-    <span className={styles.badge}>
-      {withIcon(IconGoldenMotorBadge)({ size: 20 })}
-    </span>
-  )
-}
+export const ArchitectBadge = withBadge({
+  icon: IconArchitectBadge,
+  name: <FormattedMessage defaultMessage="Matters Architect" id="D9tEst" />,
+})
 
-export const ArchitectBadge = ({ isInDialog, hasTooltip }: badgePros) => {
-  const copy = (
-    <Translate
-      zh_hant="馬特市建築師"
-      zh_hans="马特市建筑师"
-      en="Matters Architect"
-    />
-  )
-  if (isInDialog) {
-    return (
-      <section className={styles.item}>
-        <>{withIcon(IconArchitectBadge)({ size: 48 })}</>
-        <section>{copy}</section>
-      </section>
-    )
-  }
+export const CivicLikerBadge = withBadge({
+  icon: IconCivicLikerBadge,
+  name: <FormattedMessage defaultMessage="CIVIC LIKER" id="lfiBVR" />,
+})
 
-  if (hasTooltip) {
-    return (
-      <Tooltip content={copy} placement="top">
-        <span className={styles.badge}>
-          {withIcon(IconArchitectBadge)({ size: 20 })}
-        </span>
-      </Tooltip>
-    )
-  }
-
-  return (
-    <span className={styles.badge}>
-      {withIcon(IconArchitectBadge)({ size: 20 })}
-    </span>
-  )
-}
-
-export const CivicLikerBadge = ({ isInDialog, hasTooltip }: badgePros) => {
-  const copy = (
-    <Translate zh_hant="讚賞公民" zh_hans="赞赏公民" en="CIVIC LIKER" />
-  )
-  if (isInDialog) {
-    return (
-      <section className={styles.item}>
-        <>{withIcon(IconCivicLikerBadge)({ size: 48 })}</>
-        <section>{copy}</section>
-      </section>
-    )
-  }
-
-  if (hasTooltip) {
-    return (
-      <Tooltip content={copy} placement="top">
-        <span className={styles.badge}>
-          {withIcon(IconCivicLikerBadge)({ size: 20 })}
-        </span>
-      </Tooltip>
-    )
-  }
-
-  return (
-    <span className={styles.badge}>
-      {withIcon(IconCivicLikerBadge)({ size: 20 })}
-    </span>
-  )
-}
-
-export const TraveloggersBadge = ({ isInDialog, hasTooltip }: badgePros) => {
-  const copy = (
-    <Translate
-      zh_hant="Traveloggers"
-      zh_hans="Traveloggers"
-      en="Traveloggers"
-    />
-  )
-  if (isInDialog) {
-    return (
-      <section className={styles.item}>
-        <>{withIcon(IconTraveloggersBadge)({ size: 48 })}</>
-        <section>{copy}</section>
-      </section>
-    )
-  }
-  if (hasTooltip) {
-    return (
-      <Tooltip content={copy} placement="top">
-        <span className={styles.badge}>
-          {withIcon(IconTraveloggersBadge)({ size: 20 })}
-        </span>
-      </Tooltip>
-    )
-  }
-
-  return (
-    <span className={styles.badge}>
-      {withIcon(IconTraveloggersBadge)({ size: 20 })}
-    </span>
-  )
-}
+export const TraveloggersBadge = withBadge({
+  icon: IconTraveloggersBadge,
+  name: 'Traveloggers',
+})
 
 export const NomadBadge = ({
   isInDialog,
   hasTooltip,
+  onClick,
   level,
   gotoNomadBadge,
-}: badgePros & {
+}: BadgePros & {
   level: 1 | 2 | 3 | 4
   gotoNomadBadge?: () => void
 }) => {
-  const copy = (
-    <Translate zh_hant="數字游民" zh_hans="数字游民" en="Nomad Matters" />
-  )
-
-  let withIconComp = withIcon(IconNomad1Badge)
+  let icon = IconNomad1Badge
   switch (level) {
     case 2:
-      withIconComp = withIcon(IconNomad2Badge)
+      icon = IconNomad2Badge
       break
     case 3:
-      withIconComp = withIcon(IconNomad3Badge)
+      icon = IconNomad3Badge
       break
     case 4:
-      withIconComp = withIcon(IconNomad4Badge)
+      icon = IconNomad4Badge
       break
   }
+
+  // make height auto since the icon has a border outside
+  const overwriteStyle = { height: 'auto' }
 
   if (isInDialog) {
     return (
       <section
         className={classNames([styles.item, styles.itemNomad])}
         onClick={gotoNomadBadge}
+        role="button"
       >
-        <>{withIconComp({ size: 48 })}</>
+        <Icon icon={icon} size={48} style={overwriteStyle} />
         <section className={styles.info}>
           <section>
             {level === 4 ? (
@@ -242,45 +148,121 @@ export const NomadBadge = ({
 
   if (hasTooltip) {
     return (
-      <Tooltip content={copy} placement="top">
-        <span className={[styles.badge, styles.nomad].join(' ')}>
-          {withIconComp({ size: 20 })}
-        </span>
+      <Tooltip
+        content={
+          level === 4 ? (
+            <FormattedMessage defaultMessage="Firebolt" id="Rc4Oij" />
+          ) : level === 3 ? (
+            <FormattedMessage defaultMessage="Nimbus Ferry" id="8MeJ4b" />
+          ) : level === 2 ? (
+            <FormattedMessage defaultMessage="Meteor Canoe" id="TKsfIS" />
+          ) : (
+            <FormattedMessage defaultMessage="Moonlight Dream" id="76yoL6" />
+          )
+        }
+        placement="top"
+      >
+        <button
+          onClick={onClick}
+          className={[styles.badge, styles.nomad].join(' ')}
+        >
+          <Icon icon={icon} size={20} style={overwriteStyle} />
+        </button>
       </Tooltip>
     )
   }
 
   return (
     <span className={[styles.badge, styles.nomad].join(' ')}>
-      {withIconComp({ size: 20 })}
+      <Icon icon={icon} size={20} style={overwriteStyle} />
+    </span>
+  )
+}
+
+export const GrandSlamBadge = ({
+  isInDialog,
+  hasTooltip,
+  onClick,
+  gotoGrandSlamBadge,
+}: BadgePros & { gotoGrandSlamBadge?: () => void }) => {
+  if (isInDialog) {
+    return (
+      <section
+        className={classNames([styles.item, styles.itemNomad])}
+        onClick={gotoGrandSlamBadge}
+        role="button"
+      >
+        <Icon icon={IconGrandSlam48} size={48} />
+        <section className={styles.info}>
+          <section>
+            <FormattedMessage
+              defaultMessage="Seven Days Grand Slam"
+              id="iNXSkV"
+            />
+          </section>
+          <section className={styles.subtitle}>
+            <FormattedMessage defaultMessage="Free-writing Badge" id="DqTwwn" />
+          </section>
+        </section>
+        <Icon icon={IconRight} size={24} color="greyDarker" />
+      </section>
+    )
+  }
+
+  if (hasTooltip) {
+    return (
+      <Tooltip
+        content={
+          <FormattedMessage
+            defaultMessage="Seven Days Grand Slam"
+            id="iNXSkV"
+          />
+        }
+        placement="top"
+      >
+        <button onClick={onClick} className={styles.badge}>
+          <Icon icon={IconGrandSlam} size={20} />
+        </button>
+      </Tooltip>
+    )
+  }
+
+  return (
+    <span className={styles.badge}>
+      <Icon icon={IconGrandSlam} size={20} />
     </span>
   )
 }
 
 export interface BadgesOptions {
+  isInDialog?: boolean
+
   hasNomadBadge?: boolean
   nomadBadgeLevel?: 1 | 2 | 3 | 4
+  gotoNomadBadge?: () => void
+
+  hasGrandSlamBadge?: boolean
+  gotoGrandSlamBadge?: () => void
+
   hasTraveloggersBadge?: boolean
   hasSeedBadge?: boolean
   hasGoldenMotorBadge?: boolean
   hasArchitectBadge?: boolean
   isCivicLiker?: boolean
-  gotoNomadBadge?: () => void
-
-  isInDialog?: boolean
-  shareLink: string
 }
 
 export const Badges = ({
   isInDialog,
   hasNomadBadge,
   nomadBadgeLevel,
+  gotoNomadBadge,
+  hasGrandSlamBadge,
+  gotoGrandSlamBadge,
   hasTraveloggersBadge,
   hasSeedBadge,
   hasGoldenMotorBadge,
   hasArchitectBadge,
   isCivicLiker,
-  gotoNomadBadge,
 }: BadgesOptions) =>
   isInDialog ? (
     <span className={styles.badgesInDialog}>
@@ -291,6 +273,11 @@ export const Badges = ({
             level={nomadBadgeLevel!}
             gotoNomadBadge={gotoNomadBadge}
           />
+        </section>
+      )}
+      {hasGrandSlamBadge && (
+        <section className={styles.badgesGroup}>
+          <GrandSlamBadge isInDialog gotoGrandSlamBadge={gotoGrandSlamBadge} />
         </section>
       )}
       {(hasTraveloggersBadge ||
@@ -310,6 +297,7 @@ export const Badges = ({
   ) : (
     <span className={styles.badgesInPage}>
       {hasNomadBadge && <NomadBadge level={nomadBadgeLevel!} />}
+      {hasGrandSlamBadge && <GrandSlamBadge />}
       {hasTraveloggersBadge && <TraveloggersBadge />}
       {hasSeedBadge && <SeedBadge />}
       {hasGoldenMotorBadge && <GoldenMotorBadge />}
