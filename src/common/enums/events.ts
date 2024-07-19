@@ -63,6 +63,7 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   sideNav = 'sideNav',
   support = 'support',
   visitorWall = 'visitorWall',
+  momentComment = 'momentComment',
 }
 
 /**

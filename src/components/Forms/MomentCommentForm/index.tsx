@@ -6,6 +6,8 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   MAX_MOMENT_COMMENT_LENGTH,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
   UPDATE_NEWEST_MOMENT_COMMENT,
 } from '~/common/enums'
 import { formStorage, stripHtml, trimCommentContent } from '~/common/utils'
@@ -196,8 +198,18 @@ const MomentCommentForm = ({
         defaultMessage: 'Comment',
         id: 'LgbKvU',
       })}
-      onClick={() => setEditing?.(true)}
-      // onFocus={() => setEditing?.(true)}
+      onClick={(event) => {
+        if (!viewer.isAuthed) {
+          event.preventDefault()
+          window.dispatchEvent(
+            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+              detail: { trigger: UNIVERSAL_AUTH_TRIGGER.momentComment },
+            })
+          )
+          return
+        }
+        setEditing?.(true)
+      }}
     >
       <section className={contentClasses}>
         <CommentEditor
