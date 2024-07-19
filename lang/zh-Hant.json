@@ -110,10 +110,6 @@
     "defaultMessage": "取消置頂",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
-  "/kdFi6": {
-    "defaultMessage": "在動態留言中提及了你",
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
   "/pnYHM": {
     "defaultMessage": "圍爐不存在",
     "description": "CIRCLE_NOT_FOUND"
@@ -856,6 +852,10 @@
   },
   "DUvMii": {
     "defaultMessage": "可自訂號召支持的內容，以及收到支持後的感謝文字"
+  },
+  "DV7771": {
+    "defaultMessage": "mentioned you in a moment comment at {commentMoment}",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "DX0YH3": {
     "defaultMessage": "已成功綁定錢包",
