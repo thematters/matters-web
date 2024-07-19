@@ -708,9 +708,6 @@
   "AGDFGs": {
     "defaultMessage": "歧视、侮辱或仇恨"
   },
-  "ALzRKc": {
-    "defaultMessage": "還沒有人投稿，晚點再來瞧瞧吧！"
-  },
   "ANA7sk": {
     "defaultMessage": "主理",
     "description": "src/views/TagDetail/Owner/index.tsx"
@@ -849,6 +846,9 @@
   "D9R/ol": {
     "defaultMessage": "将作品加入围炉，让更多人一起参与讨论"
   },
+  "D9tEst": {
+    "defaultMessage": "马特市建筑师"
+  },
   "DP3yqI": {
     "defaultMessage": "支持人数"
   },
@@ -884,6 +884,9 @@
   "DqQvtL": {
     "defaultMessage": "解除屏蔽",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
+  },
+  "DqTwwn": {
+    "defaultMessage": "自由写计画纪念徽章"
   },
   "DrBuEI": {
     "defaultMessage": "取消置顶",
@@ -939,6 +942,9 @@
   "EoeUjA": {
     "defaultMessage": "你无权限进行该操作",
     "description": "FORBIDDEN_BY_STATE"
+  },
+  "EvJnpb": {
+    "defaultMessage": "由于你持续用心地写作，为你献上最佳荣耀"
   },
   "F3zk7E": {
     "defaultMessage": "（草稿删除后无法恢复）",
@@ -1561,6 +1567,9 @@
     "defaultMessage": "设置围炉网址（创建后不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
   },
+  "QbjADp": {
+    "defaultMessage": "种子用户"
+  },
   "QfVedX": {
     "defaultMessage": "插入分隔线"
   },
@@ -1724,6 +1733,9 @@
   "TX5UzL": {
     "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
+  "TZgskS": {
+    "defaultMessage": "还没有人投稿，晚点再来瞧瞧吧！"
   },
   "TcTp+J": {
     "defaultMessage": "图片上传成功"
@@ -2466,6 +2478,9 @@
   "iEJeQH": {
     "defaultMessage": "设置 Liker ID"
   },
+  "iNXSkV": {
+    "defaultMessage": "七日书大满贯"
+  },
   "iNZdM/": {
     "defaultMessage": "切换后即可支持创作者，采用 Optimism 网络{br}让支持更方便且费用低廉",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -2638,6 +2653,9 @@
     "defaultMessage": "评论了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "lfiBVR": {
+    "defaultMessage": "赞赏公民"
+  },
   "liBHHE": {
     "defaultMessage": "什么看法，都可以留个友善的评论～"
   },
@@ -2779,6 +2797,9 @@
   },
   "onDesU": {
     "defaultMessage": "恭喜成为围炉一员。现在你可以免费浏览围炉内作品，还可以去围炉与大家谈天说地。"
+  },
+  "orIq4X": {
+    "defaultMessage": "支持超过 100 次"
   },
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
