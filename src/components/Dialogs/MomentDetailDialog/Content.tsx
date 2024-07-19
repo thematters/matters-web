@@ -29,12 +29,12 @@ import { MOMENT_DETAIL } from './gql'
 import styles from './styles.module.css'
 
 interface MomentDetailDialogContentProps {
-  momentId: string
+  shortHash: string
   closeDialog: () => void
 }
 
 const MomentDetailDialogContent = ({
-  momentId,
+  shortHash,
   closeDialog,
 }: MomentDetailDialogContentProps) => {
   const intl = useIntl()
@@ -47,7 +47,7 @@ const MomentDetailDialogContent = ({
    */
   const { data, loading, error } = useQuery<MomentDetailQuery>(MOMENT_DETAIL, {
     variables: {
-      id: momentId,
+      shortHash,
     },
     fetchPolicy: 'network-only',
   })
@@ -107,11 +107,11 @@ const MomentDetailDialogContent = ({
     return <QueryError error={error} />
   }
 
-  if (data?.node?.__typename !== 'Moment') {
+  if (data?.moment?.__typename !== 'Moment') {
     return null
   }
 
-  const moment = data.node
+  const moment = data.moment
   const { content, assets, comments } = moment
   const commentsEdges = comments.edges || []
   const newestComments = commentsEdges
@@ -210,7 +210,7 @@ const MomentDetailDialogContent = ({
           </>
         )}
         <MomentCommentForm
-          momentId={momentId}
+          momentId={moment.id}
           setEditor={setEditor}
           editing={editing}
           setEditing={setEditing}

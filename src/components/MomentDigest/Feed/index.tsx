@@ -127,7 +127,7 @@ export const MomentDigestFeed = ({
         <Container openMomentDetail={goToMomentDetail} />
       </Media>
       <Media greaterThan="sm">
-        <MomentDetailDialog momentId={moment.id}>
+        <MomentDetailDialog shortHash={moment.shortHash}>
           {({ openDialog }) => <Container openMomentDetail={openDialog} />}
         </MomentDetailDialog>
       </Media>

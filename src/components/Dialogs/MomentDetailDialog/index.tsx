@@ -4,7 +4,7 @@ import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 
 interface MomentDetailDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-  momentId: string
+  shortHash: string
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
@@ -13,7 +13,7 @@ const DynamicContent = dynamic(() => import('./Content'), {
 
 const BaseMomentDetailDialog = ({
   children,
-  momentId,
+  shortHash,
 }: MomentDetailDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
@@ -22,7 +22,7 @@ const BaseMomentDetailDialog = ({
       {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog} fixedWidth={false}>
-        <DynamicContent momentId={momentId} closeDialog={closeDialog} />
+        <DynamicContent shortHash={shortHash} closeDialog={closeDialog} />
       </Dialog>
     </>
   )

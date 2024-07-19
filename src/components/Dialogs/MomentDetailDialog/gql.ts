@@ -5,20 +5,18 @@ import { MomentDigestDetail } from '~/components/MomentDigest'
 import LikeButton from '~/components/MomentDigest/FooterActions/LikeButton'
 
 export const MOMENT_DETAIL = gql`
-  query MomentDetail($id: ID!) {
-    node(input: { id: $id }) {
-      ... on Moment {
-        id
-        ...MomentDigestDetailMomentPublic
-        ...MomentDigestFooterActionsLikeButtonMomentPublic
-        ...MomentDigestFooterActionsLikeButtonMomentPrivate
-        comments(input: { sort: oldest, first: null }) {
-          edges {
-            cursor
-            node {
-              ...CommentFeedCommentPublic
-              ...CommentFeedCommentPrivate
-            }
+  query MomentDetail($shortHash: String!) {
+    moment(input: { shortHash: $shortHash }) {
+      id
+      ...MomentDigestDetailMomentPublic
+      ...MomentDigestFooterActionsLikeButtonMomentPublic
+      ...MomentDigestFooterActionsLikeButtonMomentPrivate
+      comments(input: { sort: oldest, first: null }) {
+        edges {
+          cursor
+          node {
+            ...CommentFeedCommentPublic
+            ...CommentFeedCommentPrivate
           }
         }
       }

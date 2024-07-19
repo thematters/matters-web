@@ -4,7 +4,7 @@ import { MomentDetailQuery } from '~/gql/graphql'
 
 type Comment = NonNullable<
   NonNullable<
-    MomentDetailQuery['node'] & { __typename: 'Moment' }
+    MomentDetailQuery['moment'] & { __typename: 'Moment' }
   >['comments']['edges']
 >[0]['node']
 
@@ -30,15 +30,15 @@ export const updateMomentDetail = ({
       variables: { id: momentId },
     })
 
-    if (!data || data?.node?.__typename !== 'Moment') {
+    if (!data || data?.moment?.__typename !== 'Moment') {
       return
     }
 
-    if (!data?.node?.comments.edges) {
+    if (!data?.moment?.comments.edges) {
       return
     }
 
-    let edges = data.node.comments.edges
+    let edges = data.moment.comments.edges
 
     switch (type) {
       case 'addComment':
@@ -58,9 +58,9 @@ export const updateMomentDetail = ({
       variables: { id: momentId },
       data: {
         node: {
-          ...data.node,
+          ...data.moment,
           comments: {
-            ...data.node.comments,
+            ...data.moment.comments,
             edges,
           },
         },
