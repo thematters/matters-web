@@ -1,4 +1,3 @@
-import Link from 'next/link'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -72,20 +71,22 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                 <DotDivider />
               </section>
 
-              <Link href={campaign.link} legacyBehavior>
-                <a className={styles.viewMore}>
-                  <TextIcon
-                    icon={<Icon icon={IconRight} size={14} />}
-                    spacing={4}
-                    placement="left"
-                  >
-                    <FormattedMessage
-                      defaultMessage="Event Information"
-                      id="buf5vO"
-                    />
-                  </TextIcon>
-                </a>
-              </Link>
+              <a
+                className={styles.viewMore}
+                href={campaign.link}
+                target="_blank"
+              >
+                <TextIcon
+                  icon={<Icon icon={IconRight} size={14} />}
+                  spacing={4}
+                  placement="left"
+                >
+                  <FormattedMessage
+                    defaultMessage="Event Information"
+                    id="buf5vO"
+                  />
+                </TextIcon>
+              </a>
             </section>
 
             <section className={styles.right}>
