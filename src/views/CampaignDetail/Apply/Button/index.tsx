@@ -108,6 +108,7 @@ const ApplyCampaignButton = ({
   if (size === 'lg') {
     return (
       <Button
+        onClick={onClick}
         size={['100%', '3rem']}
         disabled={isPending}
         borderWidth="sm"
