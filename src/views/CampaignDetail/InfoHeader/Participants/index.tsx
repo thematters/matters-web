@@ -36,9 +36,9 @@ const Participants = ({
           onClick={openDialog}
         >
           <span className={styles.count}>
-            {' '}
             {campaign.participants.totalCount}
-          </span>{' '}
+            &nbsp;
+          </span>
           <FormattedMessage
             defaultMessage="writers"
             id="syBMnY"

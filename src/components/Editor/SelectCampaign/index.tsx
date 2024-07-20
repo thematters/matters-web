@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { datetimeFormat } from '~/common/utils'
-import { Form } from '~/components'
+import { Form, LanguageContext } from '~/components'
 import {
   ArticleCampaignInput,
   EditorSelectCampaignFragment,
@@ -46,6 +47,7 @@ const SelectCampaign = ({
   selectedStage,
   editCampaign,
 }: SelectCampaignProps) => {
+  const { lang } = useContext(LanguageContext)
   const RESET_OPTION = {
     name: <FormattedMessage defaultMessage="Please select..." id="VrK0Q0" />,
     value: undefined,
@@ -75,7 +77,11 @@ const SelectCampaign = ({
         ...availableStages.reverse().map((s) => {
           return {
             name: s.period?.start
-              ? `${s.name} - ${datetimeFormat.absolute(s.period?.start)}`
+              ? `${s.name} - ${datetimeFormat.absolute(
+                  s.period?.start,
+                  lang,
+                  true
+                )}`
               : s.name,
             value: s.id,
             selected: s.id === selectedStage,

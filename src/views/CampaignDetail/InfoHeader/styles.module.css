@@ -56,7 +56,7 @@
   & .right {
     display: none;
 
-    @media (--sm-up) {
+    @media (--md-up) {
       display: block;
     }
   }
@@ -65,7 +65,7 @@
 .mobileApply {
   margin-top: var(--sp24);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     display: none;
   }
 }

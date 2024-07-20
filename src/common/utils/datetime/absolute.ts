@@ -17,12 +17,16 @@ const FORMATS = {
   },
 } as const
 
-const absolute = (date: Date | string | number, lang: Language = 'zh_hant') => {
+const absolute = (
+  date: Date | string | number,
+  lang: Language = 'zh_hant',
+  includeYear = false
+) => {
   if (typeof date === 'string') {
     date = parseISO(date)
   }
 
-  if (isThisYear(date)) {
+  if (!includeYear && isThisYear(date)) {
     return format(date, FORMATS[lang].absoluteThisYear)
   }
 
