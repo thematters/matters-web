@@ -29,7 +29,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   const { lang } = useContext(LanguageContext)
   const now = new Date()
   const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
-  const { start: writingStart } = campaign.writingPeriod || {}
+  const { start: writingStart, end: writingEnd } = campaign.writingPeriod || {}
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
 
   return (
@@ -52,8 +52,21 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                     defaultMessage="Application period: "
                     id="MnTJ0Q"
                   />
-                  {datetimeFormat.absolute(appStart, lang)} -{' '}
-                  {datetimeFormat.absolute(appEnd, lang)}
+                  {appStart
+                    ? datetimeFormat.absolute({
+                        date: appStart,
+                        lang,
+                        utc8: true,
+                      })
+                    : ''}{' '}
+                  -{' '}
+                  {appEnd
+                    ? datetimeFormat.absolute({
+                        date: appEnd,
+                        lang,
+                        utc8: true,
+                      })
+                    : ''}
                 </span>
               )}
               {!isInApplicationPeriod && (
@@ -62,8 +75,21 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                     defaultMessage="Event period: "
                     id="Bmy3Ms"
                   />
-                  {datetimeFormat.absolute(writingStart, lang)} -{' '}
-                  {datetimeFormat.absolute(writingStart, lang)}
+                  {writingStart
+                    ? datetimeFormat.absolute({
+                        date: writingStart,
+                        lang,
+                        utc8: true,
+                      })
+                    : ''}{' '}
+                  -{' '}
+                  {writingEnd
+                    ? datetimeFormat.absolute({
+                        date: writingEnd,
+                        lang,
+                        utc8: true,
+                      })
+                    : ''}
                 </span>
               )}
 

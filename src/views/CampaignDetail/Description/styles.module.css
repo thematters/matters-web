@@ -7,4 +7,9 @@
   & p + p {
     margin: var(--sp12) 0 0;
   }
+
+  @media (--md-up) {
+    padding-top: var(--sp24);
+    border-top: 1px dotted var(--color-grey-light);
+  }
 }
