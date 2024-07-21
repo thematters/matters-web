@@ -77,11 +77,12 @@ const SelectCampaign = ({
         ...availableStages.reverse().map((s) => {
           return {
             name: s.period?.start
-              ? `${s.name} - ${datetimeFormat.absolute(
-                  s.period?.start,
+              ? `${s.name} - ${datetimeFormat.absolute({
+                  date: s.period.start,
                   lang,
-                  true
-                )}`
+                  optionalYear: false,
+                  utc8: true,
+                })}`
               : s.name,
             value: s.id,
             selected: s.id === selectedStage,
