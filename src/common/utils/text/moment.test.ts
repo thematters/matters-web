@@ -38,11 +38,7 @@ describe('utils/text/moment/truncateTitle', () => {
       )
     ).toBe('這篇文章真的很厲害，...@user1 @user2')
     expect(
-      truncateTitle(
-        '這是一個時刻！！！！！！！@jj',
-        10,
-        UserLanguage.ZhHant
-      )
+      truncateTitle('這是一個時刻！！！！！！！@jj', 10, UserLanguage.ZhHant)
     ).toBe('這是一個時刻！！！！...@jj')
   })
 
