@@ -853,10 +853,6 @@
   "DUvMii": {
     "defaultMessage": "可自订号召支持的内容，以及收到支持后的感谢文字"
   },
-  "DV7771": {
-    "defaultMessage": "mentioned you in a moment comment at {commentMoment}",
-    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
   "DX0YH3": {
     "defaultMessage": "已成功绑定钱包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -1939,6 +1935,9 @@
   },
   "Xi40U9": {
     "defaultMessage": "操作无法撤销，确认删除选集吗？"
+  },
+  "XiiSGl": {
+    "defaultMessage": "在动态留言中提及了你"
   },
   "Xj0yv9": {
     "defaultMessage": "写文章"

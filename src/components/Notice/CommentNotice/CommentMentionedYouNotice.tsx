@@ -55,9 +55,8 @@ const CommentMentionedYouNotice = ({
           notice={notice}
           action={
             <FormattedMessage
-              defaultMessage="mentioned you in a moment comment at {commentMoment}"
-              id="DV7771"
-              description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+              defaultMessage="mentioned you in a moment comment at"
+              id="XiiSGl"
               values={{
                 // commentMoment: <NoticeMomentTitle moment={commentMoment} />,
                 commentArticle: <NoticeArticleTitle article={commentArticle} />,
