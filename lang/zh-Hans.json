@@ -776,9 +776,6 @@
   "Bkx6Gk": {
     "defaultMessage": "切换网络中…"
   },
-  "Bmy3Ms": {
-    "defaultMessage": "活动时间："
-  },
   "BnMru1": {
     "defaultMessage": "语言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
@@ -972,6 +969,9 @@
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 网络，立即切换？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "FYeEw1": {
+    "defaultMessage": "报名期{tz}："
   },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
@@ -1376,9 +1376,6 @@
   "Mn7GEf": {
     "defaultMessage": "精选过去 24 小时与你有关的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
-  },
-  "MnTJ0Q": {
-    "defaultMessage": "报名期："
   },
   "MoyOR+": {
     "defaultMessage": "设置 - 围炉通知",
@@ -2592,6 +2589,9 @@
   "kkZioy": {
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "krvjo9": {
+    "defaultMessage": "活动时间{tz}："
   },
   "ksIL/T": {
     "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"
