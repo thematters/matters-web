@@ -1,8 +1,11 @@
 import gql from 'graphql-tag'
-import { FormattedMessage } from 'react-intl'
+import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { stripHtml, toPath } from '~/common/utils'
+import { truncateTitle } from '~/common/utils/text/moment'
+import { LanguageContext } from '~/components/Context'
 import { CommentMentionedYouNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -19,6 +22,9 @@ const CommentMentionedYouNotice = ({
 }: {
   notice: CommentMentionedYouNoticeFragment
 }) => {
+  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
+
   if (!notice.actors) {
     return null
   }
@@ -58,8 +64,25 @@ const CommentMentionedYouNotice = ({
               defaultMessage="mentioned you in a moment comment at"
               id="XiiSGl"
               values={{
-                // commentMoment: <NoticeMomentTitle moment={commentMoment} />,
-                commentArticle: <NoticeArticleTitle article={commentArticle} />,
+                commentMoment: (
+                  <NoticeMomentTitle
+                    moment={commentMoment}
+                    title={`${truncateTitle(
+                      stripHtml(commentMoment.content || ''),
+                      10,
+                      lang
+                    )} ${
+                      commentMoment.assets?.length
+                        ? intl
+                            .formatMessage({
+                              defaultMessage: `[image]`,
+                              id: 'W3tqQO',
+                            })
+                            .repeat(Math.min(3, commentMoment.assets.length))
+                        : ''
+                    }`}
+                  />
+                ),
               }}
             />
           }
@@ -142,6 +165,9 @@ CommentMentionedYouNotice.fragments = {
           }
           ... on Circle {
             ...NoticeCircleName
+          }
+          ... on Moment {
+            ...NoticeMomentTitle
           }
         }
       }

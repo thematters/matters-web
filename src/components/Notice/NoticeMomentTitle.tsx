@@ -38,7 +38,11 @@ const NoticeMomentTitle = ({
 NoticeMomentTitle.fragments = {
   moment: gql`
     fragment NoticeMomentTitle on Moment {
+      content
       shortHash
+      assets {
+        id
+      }
     }
   `,
 }
