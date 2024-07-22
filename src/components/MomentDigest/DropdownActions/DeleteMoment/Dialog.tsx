@@ -2,7 +2,10 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { Dialog, useDialogSwitch, useMutation } from '~/components'
-import { DeleteMomentMutation } from '~/gql/graphql'
+import {
+  DeleteMomentMutation,
+  MomentDigestDropdownActionsMomentFragment,
+} from '~/gql/graphql'
 
 const DELETE_MOMENT = gql`
   mutation DeleteMoment($id: ID!) {
@@ -14,19 +17,30 @@ const DELETE_MOMENT = gql`
 `
 
 export interface DeleteMomentDialogProps {
-  momentId: string
+  moment: MomentDigestDropdownActionsMomentFragment
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
-const DeleteMomentDialog = ({
-  momentId,
-  children,
-}: DeleteMomentDialogProps) => {
+const DeleteMomentDialog = ({ moment, children }: DeleteMomentDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
-
+  const { id } = moment
+  const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
   const [deleteMoment] = useMutation<DeleteMomentMutation>(DELETE_MOMENT, {
-    variables: { id: momentId },
-    // TODO: update writings count
+    variables: { id },
+    update: (cache) => {
+      // FIXME: Why not update user profile tab writing count?
+      // const result = updateUserProfile({
+      //   cache,
+      //   userName: moment.author.userName!,
+      //   type: 'decreaseMoment',
+      // })
+    },
+    refetchQueries: [
+      {
+        query: USER_PROFILE_PUBLIC,
+        variables: { userName: moment.author.userName },
+      },
+    ],
   })
 
   const onDelete = async () => {

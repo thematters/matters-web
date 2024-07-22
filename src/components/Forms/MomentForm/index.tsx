@@ -85,6 +85,7 @@ const MomentForm = () => {
     event.preventDefault()
     try {
       setSubmitting(true)
+      const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
       const { data } = await putMoment({
         variables: {
           input: {
@@ -92,7 +93,6 @@ const MomentForm = () => {
             assets: assets.map(({ assetId }) => assetId),
           },
         },
-        // FIXME: Update cache
         update: (cache, mutationResult) => {
           updateUserWritings({
             cache,
@@ -101,6 +101,12 @@ const MomentForm = () => {
             momentDigest: mutationResult.data?.putMoment,
           })
         },
+        refetchQueries: [
+          {
+            query: USER_PROFILE_PUBLIC,
+            variables: { userName: viewer.userName },
+          },
+        ],
       })
 
       const { putMoment: moment } = data || {}
