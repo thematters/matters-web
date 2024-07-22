@@ -776,9 +776,6 @@
   "Bkx6Gk": {
     "defaultMessage": "Switching the network…"
   },
-  "Bmy3Ms": {
-    "defaultMessage": "Event period: "
-  },
   "BnMru1": {
     "defaultMessage": "Language",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
@@ -972,6 +969,9 @@
   "FWCa4O": {
     "defaultMessage": "Switch to Optimism network now?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "FYeEw1": {
+    "defaultMessage": "Application period{tz}:"
   },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
@@ -1376,9 +1376,6 @@
   "Mn7GEf": {
     "defaultMessage": "Selected activities related to you in the past 24 hours",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
-  },
-  "MnTJ0Q": {
-    "defaultMessage": "Application period: "
   },
   "MoyOR+": {
     "defaultMessage": "Settings - Circle notifications",
@@ -2592,6 +2589,9 @@
   "kkZioy": {
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "krvjo9": {
+    "defaultMessage": "Event period{tz}:"
   },
   "ksIL/T": {
     "defaultMessage": "Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"

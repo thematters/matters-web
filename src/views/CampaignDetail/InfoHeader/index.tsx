@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
-import { datetimeFormat } from '~/common/utils'
+import { datetimeFormat, isUTC8 } from '~/common/utils'
 import {
   DotDivider,
   Icon,
@@ -24,6 +24,18 @@ type InfoHeaderProps = {
   campaign: InfoHeaderCampaignPublicFragment &
     Partial<InfoHeaderCampaignPrivateFragment>
 }
+
+const ViewMore = ({ link }: { link: string }) => (
+  <a className={styles.viewMore} href={link} target="_blank">
+    <TextIcon
+      icon={<Icon icon={IconRight} size={14} />}
+      spacing={4}
+      placement="left"
+    >
+      <FormattedMessage defaultMessage="Event Information" id="buf5vO" />
+    </TextIcon>
+  </a>
+)
 
 const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   const { lang } = useContext(LanguageContext)
@@ -49,47 +61,54 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
               {isInApplicationPeriod && (
                 <span>
                   <FormattedMessage
-                    defaultMessage="Application period: "
-                    id="MnTJ0Q"
+                    defaultMessage="Application period{tz}: "
+                    id="FYeEw1"
+                    values={{ ...(isUTC8() ? {} : { tz: ' (UTC+8) ' }) }}
                   />
-                  {appStart
-                    ? datetimeFormat.absolute({
-                        date: appStart,
-                        lang,
-                        utc8: true,
-                      })
-                    : ''}{' '}
-                  -{' '}
-                  {appEnd
-                    ? datetimeFormat.absolute({
-                        date: appEnd,
-                        lang,
-                        utc8: true,
-                      })
-                    : ''}
+
+                  <span className={styles.period}>
+                    {appStart
+                      ? datetimeFormat.absolute({
+                          date: appStart,
+                          lang,
+                          utc8: true,
+                        })
+                      : ''}{' '}
+                    -{' '}
+                    {appEnd
+                      ? datetimeFormat.absolute({
+                          date: appEnd,
+                          lang,
+                          utc8: true,
+                        })
+                      : ''}
+                  </span>
                 </span>
               )}
               {!isInApplicationPeriod && (
                 <span>
                   <FormattedMessage
-                    defaultMessage="Event period: "
-                    id="Bmy3Ms"
+                    defaultMessage="Event period{tz}: "
+                    id="krvjo9"
+                    values={{ ...(isUTC8() ? {} : { tz: ' (UTC+8) ' }) }}
                   />
-                  {writingStart
-                    ? datetimeFormat.absolute({
-                        date: writingStart,
-                        lang,
-                        utc8: true,
-                      })
-                    : ''}{' '}
-                  -{' '}
-                  {writingEnd
-                    ? datetimeFormat.absolute({
-                        date: writingEnd,
-                        lang,
-                        utc8: true,
-                      })
-                    : ''}
+                  <span className={styles.period}>
+                    {writingStart
+                      ? datetimeFormat.absolute({
+                          date: writingStart,
+                          lang,
+                          utc8: true,
+                        })
+                      : ''}{' '}
+                    -{' '}
+                    {writingEnd
+                      ? datetimeFormat.absolute({
+                          date: writingEnd,
+                          lang,
+                          utc8: true,
+                        })
+                      : ''}
+                  </span>
                 </span>
               )}
 
@@ -97,22 +116,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                 <DotDivider />
               </section>
 
-              <a
-                className={styles.viewMore}
-                href={campaign.link}
-                target="_blank"
-              >
-                <TextIcon
-                  icon={<Icon icon={IconRight} size={14} />}
-                  spacing={4}
-                  placement="left"
-                >
-                  <FormattedMessage
-                    defaultMessage="Event Information"
-                    id="buf5vO"
-                  />
-                </TextIcon>
-              </a>
+              <ViewMore link={campaign.link} />
             </section>
 
             <section className={styles.right}>
@@ -124,7 +128,15 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
             </section>
           </section>
 
-          <Participants campaign={campaign} />
+          <section className={styles.extra}>
+            <Participants campaign={campaign} />
+
+            <section className={styles.dot}>
+              <DotDivider />
+            </section>
+
+            <ViewMore link={campaign.link} />
+          </section>
 
           <section className={styles.mobileApply}>
             <Apply.Button campaign={campaign} size="lg" onClick={openDialog} />

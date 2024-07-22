@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Avatar } from '~/components'
+import { Avatar, ViewerContext } from '~/components'
 import { InfoHeaderParticipantsCampaignFragment } from '~/gql/graphql'
 
 import { ParticipantsDialog } from './Dialog'
@@ -10,7 +11,8 @@ import styles from './styles.module.css'
 const fragments = gql`
   fragment InfoHeaderParticipantsCampaign on WritingChallenge {
     id
-    participants(input: { first: 15 }) {
+    applicationState
+    participants(input: { first: 8 }) {
       totalCount
       edges {
         node {
@@ -27,6 +29,13 @@ const Participants = ({
 }: {
   campaign: InfoHeaderParticipantsCampaignFragment
 }) => {
+  const viewer = useContext(ViewerContext)
+  const isViewerApplySucceeded = campaign.applicationState === 'succeeded'
+  const edges = campaign.participants.edges?.slice(
+    0,
+    isViewerApplySucceeded ? 7 : 8
+  )
+
   return (
     <ParticipantsDialog campaign={campaign}>
       {({ openDialog }) => (
@@ -45,7 +54,8 @@ const Participants = ({
             description="src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
           />
           <section className={styles.avatars}>
-            {campaign.participants.edges?.map(({ node }, i) => (
+            {isViewerApplySucceeded && <Avatar user={viewer} size={20} />}
+            {edges?.map(({ node }, i) => (
               <Avatar key={i} user={node} size={20} />
             ))}
           </section>
