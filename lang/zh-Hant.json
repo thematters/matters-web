@@ -776,9 +776,6 @@
   "Bkx6Gk": {
     "defaultMessage": "切換網路中…"
   },
-  "Bmy3Ms": {
-    "defaultMessage": "活動時間："
-  },
   "BnMru1": {
     "defaultMessage": "語言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
@@ -972,6 +969,9 @@
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 網路，立即切換？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "FYeEw1": {
+    "defaultMessage": "報名期{tz}："
   },
   "FaTb0A": {
     "defaultMessage": "安裝 MetaMask",
@@ -1376,9 +1376,6 @@
   "Mn7GEf": {
     "defaultMessage": "精選過去 24 小時與你有關的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
-  },
-  "MnTJ0Q": {
-    "defaultMessage": "報名期："
   },
   "MoyOR+": {
     "defaultMessage": "設定 - 圍爐通知",
@@ -2592,6 +2589,9 @@
   "kkZioy": {
     "defaultMessage": "確認移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
+  },
+  "krvjo9": {
+    "defaultMessage": "活動時間{tz}："
   },
   "ksIL/T": {
     "defaultMessage": "貼心提醒：此錢包位址不同於您用於登入 Matters 的錢包位址"
