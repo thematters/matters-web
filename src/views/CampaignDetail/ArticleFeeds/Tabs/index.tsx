@@ -40,7 +40,7 @@ const ArticleFeedsTabs = ({
           <FormattedMessage defaultMessage="Latest" id="adThp5" />
         </SquareTabs.Tab>
 
-        {stages.map((stage) =>
+        {[...stages].reverse().map((stage) =>
           shouldShowTab(stage.period?.start) ? (
             <SquareTabs.Tab
               selected={stage.id === feedType}
