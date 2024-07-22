@@ -109,6 +109,10 @@
   color: var(--color-likecoin);
 }
 
+.freeWriteBlue {
+  color: var(--color-free-write-blue);
+}
+
 .yellowLighter {
   color: var(--color-yellow-lighter);
 }

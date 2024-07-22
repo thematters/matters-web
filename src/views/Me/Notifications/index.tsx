@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { mergeConnections } from '~/common/utils'
+import { mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
   EmptyNotice,
   Head,
@@ -21,6 +21,17 @@ import {
   MarkAllNoticesAsReadMutation,
   MeNotificationsQuery,
 } from '~/gql/graphql'
+
+const renderableTypes = new Set([
+  'ArticleArticleNotice',
+  'CircleNotice',
+  'ArticleNotice',
+  'CommentCommentNotice',
+  'CommentNotice',
+  'OfficialAnnouncementNotice',
+  'TransactionNotice',
+  'UserNotice',
+])
 
 const ME_NOTIFICATIONS = gql`
   query MeNotifications($after: String) {
@@ -93,11 +104,14 @@ const BaseNotifications = () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List spacing={['xloose', 0]}>
-        {edges.map(({ node, cursor }) => (
-          <List.Item key={node.id}>
-            <Notice notice={node} />
-          </List.Item>
-        ))}
+        {edges.map(
+          ({ node }) =>
+            shouldRenderNode(node, renderableTypes) && (
+              <List.Item key={node.id}>
+                <Notice notice={node} />
+              </List.Item>
+            )
+        )}
       </List>
     </InfiniteScroll>
   )

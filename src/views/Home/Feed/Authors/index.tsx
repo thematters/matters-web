@@ -36,7 +36,8 @@ const Authors = () => {
   /**
    * Data Fetching
    */
-  const perPage = 9
+  const perPage = 6
+  const perColumn = 3
   const randomMaxSize = 50
   const { data, loading, error, refetch } = usePublicQuery<FeedAuthorsQuery>(
     FEED_AUTHORS,
@@ -109,7 +110,7 @@ const Authors = () => {
         )}
 
         {!loading &&
-          _chunk(edges, 3).map((chunks, edgeIndex) => (
+          _chunk(edges, perColumn).map((chunks, edgeIndex) => (
             <Slides.Item size="md" key={edgeIndex}>
               <section>
                 {chunks.map(({ node, cursor }, nodeIndex) => (

@@ -286,7 +286,7 @@ const EditProfileDialogContent: React.FC<FormProps> = ({
   return (
     <>
       <Dialog.Header
-        title={<FormattedMessage defaultMessage="Edit profile" id="nYrKWp" />}
+        title={<FormattedMessage defaultMessage="Update profile" id="O7ozeo" />}
         closeDialog={closeDialog}
         rightBtn={SubmitButton}
         hasSmUpTitle={false}

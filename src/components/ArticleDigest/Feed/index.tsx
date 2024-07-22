@@ -36,6 +36,7 @@ export type ArticleDigestFeedProps = {
     Partial<ArticleDigestFeedArticlePrivateFragment>
   header?: React.ReactNode
   collectionId?: string
+  excludesTimeStamp?: boolean // this is only for timestamp next to the profile
 } & ArticleDigestFeedControls &
   FooterActionsProps
 
@@ -54,6 +55,8 @@ const BaseArticleDigestFeed = ({
 
   hasReadTime,
   hasDonationCount,
+  includesMetaData,
+  excludesTimeStamp,
   ...controls
 }: ArticleDigestFeedProps) => {
   const { author, summary } = article
@@ -75,6 +78,7 @@ const BaseArticleDigestFeed = ({
       hasDonationCount={hasDonationCount}
       hasCircle={hasCircle}
       inCard
+      includesMetaData={includesMetaData}
       {...controls}
     />
   )
@@ -89,21 +93,23 @@ const BaseArticleDigestFeed = ({
           {hasHeader && (
             <header className={styles.header}>
               {hasAuthor && (
-                <>
-                  <section className={styles.author}>
-                    <UserDigest.Mini
-                      user={author}
-                      avatarSize={20}
-                      textSize={12}
-                      hasAvatar
-                      hasDisplayName
-                      onClick={onClickAuthor}
-                    />
+                <section className={styles.author}>
+                  <UserDigest.Mini
+                    user={author}
+                    avatarSize={20}
+                    textSize={12}
+                    hasAvatar
+                    hasDisplayName
+                    onClick={onClickAuthor}
+                  />
+                  {!excludesTimeStamp && (
                     <Icon icon={IconDot} color="greyLight" size={20} />
-                  </section>
-                </>
+                  )}
+                </section>
               )}
-              <DateTime date={article.createdAt} color="grey" />
+              {!excludesTimeStamp && (
+                <DateTime date={article.createdAt} color="grey" />
+              )}
             </header>
           )}
           <section className={styles.head}>

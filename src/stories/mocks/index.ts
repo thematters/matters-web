@@ -4,7 +4,7 @@ export const MOCK_USER = {
   id: 'VXNlcjox', // User:1
   userName: 'matty',
   displayName: 'Matty',
-  avatar: 'https://source.unsplash.com/256x256?user',
+  avatar: 'https://placehold.co/256x256?user',
   liker: {
     __typename: 'Liker' as any,
     likerId: 'liker-id-0000',
@@ -76,8 +76,8 @@ export const MOCK_CIRCLE = {
   state: 'active',
   name: 'matters_class',
   displayName: 'Matters 自由課（第一季第二期）',
-  avatar: 'https://source.unsplash.com/256x256?circle',
-  cover: 'https://source.unsplash.com/512x512?circle',
+  avatar: 'https://placehold.co/256x256?circle',
+  cover: 'https://placehold.co/512x512?circle',
   createdAt: '2020-12-24T07:29:17.682Z',
   description:
     '《我們這個時代的自由課》是 Matters 自 2020 年起策劃的主題線上講座。從 8 月 9 日「自由課」第一場開始，至今已經完成 9 場。分別從最實用的角度，以「自由工具包」為題談自由的條件；從思想與歷史切入，以「自由讀書會」為題思考關於自由的經典。',
@@ -124,7 +124,7 @@ export const MOCK_ARTILCE = {
   articleState: 'active' as any,
   revisionCount: 3,
   state: 'active' as any,
-  cover: 'https://source.unsplash.com/256x256?article',
+  cover: 'https://placehold.co/256x256?article',
   summary:
     '其實已經開始兩週了XD,不過最近才想說應該來紀錄一下我在火箭隊的日常,順便練一下文筆,也可以讓大家了解一下火箭隊軟體培訓營裡面大概是在做些什麼事情,上課的模式及氣氛是怎樣等等...畢竟我當時得知有這個免費培訓營時,也是網路上各種爬文類似這種免費培訓工程師半年的心得及成',
   author: MOCK_USER,
@@ -211,7 +211,7 @@ export const MOCK_DRAFT = {
 export const MOCK_COLLECTON = {
   id: 'Q29sbGVjdGlvbjox', // Collection:1
   title: 'collection-title',
-  cover: 'https://source.unsplash.com/256x256?collection',
+  cover: 'https://placehold.co/256x256?collection',
   description: 'collection-description',
   author: MOCK_USER,
   articles: {
@@ -237,7 +237,7 @@ export const MOCK_TAG = {
   editors: [MOCK_USER],
   owner: MOCK_USER,
   content: '香港',
-  cover: 'https://source.unsplash.com/256x256?collection',
+  cover: 'https://placehold.co/256x256?collection',
   description:
     '香港（英語：Hong Kong；縮寫：HK／HKG），全稱香港特別行政區（英語：Hong Kong Special Administrative Region；縮寫：HKSAR），簡稱「港」，雅稱「香江」',
   articles: {
@@ -262,7 +262,7 @@ export const MOCK_COLLECTION = {
   author: MOCK_USER,
   updatedAt: '2020-12-24T07:29:17.682Z',
   pinned: false,
-  cover: 'https://source.unsplash.com/256x256?collection',
+  cover: 'https://placehold.co/256x256?collection',
   description:
     'Nostrud eu est proident sit fugiat aliqua pariatur tempor proident sint. Lorem deserunt labore incididunt quis voluptate sint sit aute proident adipisicing. Labore nostrud cupidatat deserunt. Culpa anim laboris deserunt proident.',
   articles: {
@@ -293,4 +293,140 @@ export const MOCK_CRYPTO_WALLET = {
       id: '1',
     },
   ],
+}
+
+// Campaign
+export const MOCK_CAMPAIGN = {
+  __typename: 'Campaign' as any,
+  id: 'campaign-0000',
+  shortHash: 'campaign-short-hash',
+  name: '自由寫「七日書」第三期',
+  description:
+    '<p>愛與關係有很多模樣：愛情、友情、親情，或這些字詞皆不能形容的、無法被歸類或定義的關係。在與親密關係對象相處時，牽動你許多感受、情緒、個人探索，這可以是主動的、也可以是被動的；有理解、被理解或不被理解；有平等的，也有不被看見的。正因為關係是微妙且無法定義的，當中有著許多探索與反思，今期想邀請你寫下你在親密關係中的自己與對方，跟我們分享這些故事吧。</p><p><br class="smart" /></p><p><br class="smart" /></p><p>每日題目（7月1日 - 7月7日）</p><p>・寫一段難以定義但對你意義重大的關係。</p><p>・在一段關係裡，你有沒有一個化被動為主動的時刻？無論是愛情、親情或友情。</p><p>・記一個在親密關係中感受到「被看見」的時刻。</p><p>・寫下一個讓你決定結束關係的瞬間。</p><p>・來到你記憶裡最模糊、最遙遠的一段關係，寫下一件你覺得莫名其妙但一直記得的小事。</p>',
+  link: 'https://example.com',
+  cover: 'https://placehold.co/1300x768?campaign',
+  state: 'active',
+  applicationPeriod: {
+    __typename: 'DatetimeRange' as any,
+    start: '2020-12-21T07:29:17.682Z',
+    end: '2020-12-24T07:29:17.682Z',
+  },
+  writingPeriod: {
+    __typename: 'DatetimeRange' as any,
+    start: '2020-12-24T07:29:17.682Z',
+    end: '2020-12-28T07:29:17.682Z',
+  },
+  stages: [
+    {
+      __typename: 'CampaignStage' as any,
+      name: '書後感',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-24T07:29:17.682Z',
+      },
+    },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第一天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-24T07:29:17.682Z',
+        end: '2020-12-25T07:29:17.682Z',
+      },
+    },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第二天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-25T07:29:17.682Z',
+        end: '2020-12-26T07:29:17.682Z',
+      },
+    },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第三天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-26T07:29:17.682Z',
+        end: '2020-12-27T07:29:17.682Z',
+      },
+    },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第四天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-27T07:29:17.682Z',
+        end: '2020-12-28T07:29:17.682Z',
+      },
+    },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第五天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-28T07:29:17.682Z',
+        end: '2020-12-29T07:29:17.682Z',
+      },
+    },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第六天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-29T07:29:17.682Z',
+        end: '2020-12-30T07:29:17.682Z',
+      },
+    },
+    {
+      __typename: 'CampaignStage' as any,
+      name: '第七天',
+      period: {
+        __typename: 'DatetimeRange' as any,
+        start: '2020-12-30T07:29:17.682Z',
+        end: '2021-01-01T07:29:17.682Z',
+      },
+    },
+  ],
+  participants: {
+    __typename: 'UserConnection' as any,
+    totalCount: 1,
+    edges: [
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+      { node: MOCK_USER },
+    ],
+  },
+  articles: {
+    __typename: 'ArticleConnection' as any,
+    totalCount: 1,
+    edges: [
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+      { node: MOCK_ARTILCE },
+    ],
+  },
+  applicationState: null,
+  // applicationState: 'succeeded',
+  // applicationState: 'pending',
+  // applicationState: 'rejected',
 }

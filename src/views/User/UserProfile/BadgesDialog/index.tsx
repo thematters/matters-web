@@ -2,12 +2,24 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { Button, Dialog, Icon, useDialogSwitch } from '~/components'
+import {
+  OPEN_GRAND_SLAM_BADGE_DIALOG,
+  OPEN_NOMAD_BADGE_DIALOG,
+} from '~/common/enums'
+import {
+  Button,
+  Dialog,
+  Icon,
+  useDialogSwitch,
+  useEventListener,
+} from '~/components'
 
+import BadgeGrandSlamContent from '../BadgeGrandSlamDialog/Content'
 import BadgeNomadDialogContent from '../BadgeNomadDialog/Content'
 import { Badges, BadgesOptions } from '../Badges'
 
-type Step = 'badges' | 'nomad'
+type Step = 'badges' | 'nomad' | 'grandSlam'
+
 interface BadgesDialogProps extends BadgesOptions {
   children: ({
     openDialog,
@@ -22,17 +34,18 @@ export const BaseBadgesDialog = ({
   hasNomadBadge,
   nomadBadgeLevel,
   hasTraveloggersBadge,
+  hasGrandSlamBadge,
   hasSeedBadge,
   hasGoldenMotorBadge,
   hasArchitectBadge,
   isCivicLiker,
-  shareLink,
   step: initStep = 'badges',
 }: BadgesDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const [step, setStep] = useState<Step>(initStep)
   const isInBadgesStep = step === 'badges'
   const isInNomadStep = step === 'nomad'
+  const isInGrandSlamStep = step === 'grandSlam'
 
   const openStepDialog = (step?: Step) => {
     if (step) {
@@ -72,13 +85,14 @@ export const BaseBadgesDialog = ({
                 isInDialog
                 hasNomadBadge={hasNomadBadge}
                 nomadBadgeLevel={nomadBadgeLevel}
+                hasGrandSlamBadge={hasGrandSlamBadge}
                 hasTraveloggersBadge={hasTraveloggersBadge}
                 hasSeedBadge={hasSeedBadge}
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
                 hasArchitectBadge={hasArchitectBadge}
                 isCivicLiker={isCivicLiker}
-                shareLink={shareLink}
                 gotoNomadBadge={() => setStep('nomad')}
+                gotoGrandSlamBadge={() => setStep('grandSlam')}
               />
             </Dialog.Content>
 
@@ -100,10 +114,14 @@ export const BaseBadgesDialog = ({
         )}
         {isInNomadStep && !!nomadBadgeLevel && (
           <BadgeNomadDialogContent
-            closeDialog={closeDialog}
-            isNested
             nomadBadgeLevel={nomadBadgeLevel}
-            shareLink={shareLink}
+            closeDialog={closeDialog}
+            goBack={() => setStep('badges')}
+          />
+        )}
+        {isInGrandSlamStep && (
+          <BadgeGrandSlamContent
+            closeDialog={closeDialog}
             goBack={() => setStep('badges')}
           />
         )}
@@ -113,10 +131,11 @@ export const BaseBadgesDialog = ({
 }
 
 export const BadgesDialog = (props: BadgesDialogProps) => {
-  const Children = ({ openDialog }: { openDialog: (step?: Step) => void }) => {
-    return <>{props?.children({ openDialog })}</>
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_NOMAD_BADGE_DIALOG, openDialog)
+    useEventListener(OPEN_GRAND_SLAM_BADGE_DIALOG, openDialog)
+    return <>{props.children && props.children({ openDialog })}</>
   }
-
   return (
     <Dialog.Lazy mounted={<BaseBadgesDialog {...props} />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}

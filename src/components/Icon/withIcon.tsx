@@ -30,13 +30,13 @@ export type IconColor =
   | 'gold'
   | 'red'
   | 'redLight'
+  | 'freeWriteBlue'
 
-export interface IconProps {
+export interface IconProps extends React.SVGAttributes<HTMLOrSVGElement> {
   /** Working Icon description */
   size?: IconSize
   /** Working Icon description */
   color?: IconColor
-  [key: string]: any
 }
 
 export type WrappedIcon = React.FunctionComponent<
@@ -46,13 +46,15 @@ export type WrappedIcon = React.FunctionComponent<
 export const withIcon = (WrappedIcon: WrappedIcon) => {
   const InnerIcon = (props: IconProps) => {
     const { size = '16', color = '', className, ...restProps } = props
-    const iconClasses = classNames({
-      [styles.icon]: true,
-      icon: true, // global selector
-      [styles[`size${size}`]]: !!size,
-      [styles[color]]: !!color,
-      [className]: !!className,
-    })
+    const iconClasses = classNames(
+      {
+        [styles.icon]: true,
+        icon: true, // global selector
+        [styles[`size${size}`]]: !!size,
+        [styles[color]]: !!color,
+      },
+      className
+    )
 
     return (
       <>
