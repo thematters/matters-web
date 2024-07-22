@@ -60,7 +60,7 @@ const ParticipantsDialogContent = () => {
     return null
   }
 
-  const isViewerApplySucceeded = campaign?.applicationState === 'succeeded'
+  const isViewerApplySucceeded = campaign?.application?.state === 'succeeded'
 
   return (
     <Dialog.Content noSpacing>

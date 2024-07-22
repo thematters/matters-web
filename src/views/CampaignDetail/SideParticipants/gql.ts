@@ -24,7 +24,9 @@ export const fragments = {
   private: gql`
     fragment SideParticipantsCampaignPrivate on WritingChallenge {
       id
-      applicationState
+      application {
+        state
+      }
     }
   `,
 }

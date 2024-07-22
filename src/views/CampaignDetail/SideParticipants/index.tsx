@@ -51,7 +51,7 @@ const Participant = ({
 const SideParticipants = ({ campaign }: SideParticipantsProps) => {
   const viewer = useContext(ViewerContext)
   const edges = campaign.sideParticipants.edges
-  const isViewerApplySucceeded = campaign.applicationState === 'succeeded'
+  const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
 
   if (edges && edges.length <= 0) {
     return null

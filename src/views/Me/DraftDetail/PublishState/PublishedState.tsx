@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -21,8 +20,6 @@ const BasePublishedState = ({
 }
 
 const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
-  const router = useRouter()
-
   // refetch /me/drafts on published
   const refetch = useImperativeQuery<MeDraftFeedQuery>(ME_DRAFTS_FEED, {
     variables: { id: draft.id },
@@ -70,7 +67,10 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
               description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
             />
           }
-          onClick={() => router.replace(path.href)}
+          // onClick={() => router.replace(path.href)}
+          onClick={() => {
+            window.location.href = path.href
+          }}
         />
       }
       smUpBtns={
@@ -82,7 +82,10 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
               description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
             />
           }
-          onClick={() => router.replace(path.href)}
+          // onClick={() => router.replace(path.href)}
+          onClick={() => {
+            window.location.href = path.href
+          }}
         />
       }
     >

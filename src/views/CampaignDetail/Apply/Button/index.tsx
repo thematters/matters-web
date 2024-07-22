@@ -27,11 +27,14 @@ const ApplyCampaignButton = ({
   const now = new Date()
   const { end: appEnd } = campaign.applicationPeriod || {}
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
-  const applicationState = campaign.applicationState
+  const applicationState = campaign.application?.state
+  const appliedAt = campaign.application?.createdAt
   const isSucceeded = applicationState === 'succeeded'
   const isPending = applicationState === 'pending'
   const isRejected = applicationState === 'rejected'
   const isNotApplied = !applicationState
+  const isAppliedDuringPeriod =
+    appliedAt && new Date(appliedAt) <= new Date(appEnd)
 
   /**
    * Rejected
@@ -47,9 +50,9 @@ const ApplyCampaignButton = ({
     return (
       <TextIcon
         icon={<Icon icon={IconCheck} size={16} />}
-        color={isInApplicationPeriod ? 'green' : 'black'}
+        color={isAppliedDuringPeriod ? 'green' : 'black'}
       >
-        {isInApplicationPeriod ? (
+        {isAppliedDuringPeriod ? (
           <FormattedMessage defaultMessage="Applied successfully" id="4nHH2x" />
         ) : (
           <FormattedMessage
@@ -66,7 +69,7 @@ const ApplyCampaignButton = ({
    */
   let text: React.ReactNode = ''
   if (isPending) {
-    text = isInApplicationPeriod ? (
+    text = isAppliedDuringPeriod ? (
       <FormattedMessage
         defaultMessage="Reviewing..."
         description="type:apply"

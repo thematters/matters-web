@@ -14,7 +14,10 @@ const APPLY_CAMPAIGN = gql`
     applyCampaign(input: { id: $id }) {
       id
       ... on WritingChallenge {
-        applicationState
+        application {
+          state
+          createdAt
+        }
       }
     }
   }
@@ -42,7 +45,10 @@ const ApplyCampaignDialog = ({
       optimisticResponse: {
         applyCampaign: {
           id: campaign.id,
-          applicationState: 'pending' as any,
+          application: {
+            state: 'pending' as any,
+            createdAt: new Date().toISOString,
+          },
           __typename: 'WritingChallenge',
         },
       },
