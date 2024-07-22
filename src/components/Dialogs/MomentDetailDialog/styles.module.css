@@ -52,6 +52,10 @@
   & .commentNode {
     margin: var(--sp24) 0;
   }
+
+  &.commentsPlaceholder {
+    height: 13rem;
+  }
 }
 
 .footer {

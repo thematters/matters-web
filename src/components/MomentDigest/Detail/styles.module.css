@@ -20,8 +20,21 @@
             line-height: 1.75;
           }
 
+          & .displayNamePlaceholder {
+            width: 7.5rem;
+            height: 1rem;
+            background-color: var(--color-grey-lighter);
+          }
+
           & time {
             line-height: 1.125rem;
+          }
+
+          & .createdAtPlaceholder {
+            width: 3.75rem;
+            height: 1rem;
+            margin-top: var(--sp4);
+            background-color: var(--color-grey-lighter);
           }
         }
       }
@@ -44,5 +57,19 @@
     font-size: var(--text17);
     line-height: 1.75;
     white-space: pre-wrap;
+
+    & .contentPlaceholder {
+      width: 100%;
+      height: 1rem;
+      background-color: var(--color-grey-lighter);
+
+      &:last-child {
+        width: 50%;
+      }
+
+      & + .contentPlaceholder {
+        margin-top: var(--sp8);
+      }
+    }
   }
 }

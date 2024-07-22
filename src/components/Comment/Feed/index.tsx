@@ -21,6 +21,7 @@ import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
 import RoleLabel from '../RoleLabel'
 import { fragments } from './gql'
+import { Placeholder } from './Placeholder'
 import styles from './styles.module.css'
 
 export type CommentControls = {
@@ -130,6 +131,7 @@ const BaseCommentFeed = ({
  */
 type MemoizedCommentFeed = React.MemoExoticComponent<React.FC<CommentProps>> & {
   fragments: typeof fragments
+  Placeholder: typeof Placeholder
 }
 
 export const CommentFeed = React.memo(
@@ -156,3 +158,4 @@ export const CommentFeed = React.memo(
 ) as MemoizedCommentFeed
 
 CommentFeed.fragments = fragments
+CommentFeed.Placeholder = Placeholder
