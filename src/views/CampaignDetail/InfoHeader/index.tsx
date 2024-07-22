@@ -63,7 +63,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                   <FormattedMessage
                     defaultMessage="Application period{tz}: "
                     id="FYeEw1"
-                    values={{ ...(isUTC8() ? {} : { tz: ' (UTC+8) ' }) }}
+                    values={{ tz: isUTC8() ? '' : ' (UTC+8) ' }}
                   />
 
                   <span className={styles.period}>
@@ -90,7 +90,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                   <FormattedMessage
                     defaultMessage="Event period{tz}: "
                     id="krvjo9"
-                    values={{ ...(isUTC8() ? {} : { tz: ' (UTC+8) ' }) }}
+                    values={{ tz: isUTC8() ? '' : ' (UTC+8) ' }}
                   />
                   <span className={styles.period}>
                     {writingStart
