@@ -2060,10 +2060,6 @@
     "defaultMessage": "Edit",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
-  "ZXh9vL": {
-    "defaultMessage": "Free Writers {count}",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
-  },
   "ZZ9zIR": {
     "defaultMessage": "Downvote"
   },
@@ -2457,6 +2453,10 @@
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hfRsLB": {
+    "defaultMessage": "Writers {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2694,10 +2694,6 @@
   "mCAIcg": {
     "defaultMessage": "Hottest",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
-  },
-  "mCCjL7": {
-    "defaultMessage": "Free Writers",
-    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "mJEqC/": {
     "defaultMessage": "Go to {href}"
@@ -3264,6 +3260,10 @@
   },
   "xkr+zo": {
     "defaultMessage": "Terms"
+  },
+  "xl95XN": {
+    "defaultMessage": "Writers",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "xmcVZ0": {
     "defaultMessage": "Search"

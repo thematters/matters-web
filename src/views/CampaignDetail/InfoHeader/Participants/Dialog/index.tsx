@@ -28,10 +28,10 @@ const BaseParticipantsDialog = ({
         <Dialog.Header
           title={intl.formatMessage(
             {
-              defaultMessage: 'Free Writers {count}',
+              defaultMessage: 'Writers {count}',
               description:
                 'src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx',
-              id: 'ZXh9vL',
+              id: 'hfRsLB',
             },
             { count: campaign.participants.totalCount }
           )}

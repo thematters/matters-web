@@ -2060,10 +2060,6 @@
     "defaultMessage": "修改",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
   },
-  "ZXh9vL": {
-    "defaultMessage": "七日書作者 {count}",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
-  },
   "ZZ9zIR": {
     "defaultMessage": "點踩"
   },
@@ -2457,6 +2453,10 @@
     "defaultMessage": "人追蹤",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hfRsLB": {
+    "defaultMessage": "作者 {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "追蹤了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2694,10 +2694,6 @@
   "mCAIcg": {
     "defaultMessage": "站內閱讀熱門排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
-  },
-  "mCCjL7": {
-    "defaultMessage": "七日書作者",
-    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "mJEqC/": {
     "defaultMessage": "跳轉至 {href}"
@@ -3264,6 +3260,10 @@
   },
   "xkr+zo": {
     "defaultMessage": "協議"
+  },
+  "xl95XN": {
+    "defaultMessage": "作者",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "xmcVZ0": {
     "defaultMessage": "搜尋"

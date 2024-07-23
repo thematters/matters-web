@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { SquareTabs } from '~/components'
+import { LanguageContext, SquareTabs } from '~/components'
 import { ArticleFeedsTabsCampaignFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -21,6 +22,7 @@ const ArticleFeedsTabs = ({
   setFeedType,
   campaign,
 }: ArticleFeedsTabsProps) => {
+  const { lang } = useContext(LanguageContext)
   const stages = campaign.stages || []
 
   const shouldShowTab = (startedAt?: string) => {
@@ -47,7 +49,15 @@ const ArticleFeedsTabs = ({
               onClick={() => setFeedType(stage.id)}
               key={stage.id}
             >
-              {stage.name}
+              {
+                stage[
+                  lang === 'zh_hans'
+                    ? 'nameZhHans'
+                    : lang === 'zh_hant'
+                    ? 'nameZhHant'
+                    : 'nameEn'
+                ]
+              }
             </SquareTabs.Tab>
           ) : null
         )}
@@ -61,7 +71,9 @@ ArticleFeedsTabs.fragments = gql`
     id
     stages {
       id
-      name
+      nameZhHant: name(input: { language: zh_hant })
+      nameZhHans: name(input: { language: zh_hans })
+      nameEn: name(input: { language: en })
       period {
         start
         end

@@ -54,7 +54,17 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
             </section>
           )}
 
-          <h1 className={styles.name}>{campaign.name}</h1>
+          <h1 className={styles.name}>
+            {
+              campaign[
+                lang === 'zh_hans'
+                  ? 'nameZhHans'
+                  : lang === 'zh_hant'
+                  ? 'nameZhHant'
+                  : 'nameEn'
+              ]
+            }
+          </h1>
 
           <section className={styles.meta}>
             <section className={styles.left}>
