@@ -1,11 +1,8 @@
 import gql from 'graphql-tag'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import {
-  MOMENT_COMMENTS_TITLE,
-  UPDATE_NEWEST_MOMENT_COMMENT,
-} from '~/common/enums'
+import { UPDATE_NEWEST_MOMENT_COMMENT } from '~/common/enums'
 import {
   EmptyComment,
   InfiniteScroll,
@@ -44,6 +41,7 @@ const Comments = ({ moment }: CommentsProps) => {
   const intl = useIntl()
   const { comments } = moment
   const [newestCommentIds, setNewestCommentIds] = useState<string[]>([])
+  const titleRef = useRef<HTMLDivElement>(null)
 
   useEventListener(
     UPDATE_NEWEST_MOMENT_COMMENT,
@@ -54,8 +52,8 @@ const Comments = ({ moment }: CommentsProps) => {
   )
 
   useEffect(() => {
-    if (newestCommentIds.length > 0) {
-      const commentTitle = document.getElementById(MOMENT_COMMENTS_TITLE)
+    if (newestCommentIds.length > 0 && titleRef.current) {
+      const commentTitle = titleRef.current
 
       commentTitle?.scrollIntoView({ behavior: 'smooth' })
     }
@@ -80,7 +78,7 @@ const Comments = ({ moment }: CommentsProps) => {
       )}
       {activeCommentsEdges.length > 0 && (
         <>
-          <section className={styles.title} id={MOMENT_COMMENTS_TITLE}>
+          <section className={styles.title} ref={titleRef}>
             <span>
               <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
             </span>
