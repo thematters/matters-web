@@ -11,14 +11,14 @@ export const MOMENT_DETAIL = gql`
     moment(input: { shortHash: $shortHash }) {
       id
       ...MomentCommentFormMoment
-      ...MomentDigestDetailMomentPublic
+      ...MomentDigestDetailMoment
       ...MomentDigestFooterActionsLikeButtonMomentPublic
       ...MomentDigestFooterActionsLikeButtonMomentPrivate
       ...MomentDigestDetailCommentsMoment
     }
   }
   ${MomentCommentForm.fragments.moment}
-  ${MomentDigestDetail.fragments.moment.public}
+  ${MomentDigestDetail.fragments.moment}
   ${LikeButton.fragments.moment.public}
   ${LikeButton.fragments.moment.private}
   ${Comments.fragments.moment}

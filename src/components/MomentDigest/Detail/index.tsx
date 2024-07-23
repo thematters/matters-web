@@ -3,7 +3,7 @@ import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Button, DateTime, Icon, LinkWrapper } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import { MomentDigestDetailMomentPublicFragment } from '~/gql/graphql'
+import { MomentDigestDetailMomentFragment } from '~/gql/graphql'
 
 import Assets from '../Assets'
 import { fragments } from './gql'
@@ -11,7 +11,7 @@ import { Placeholder } from './Placeholder'
 import styles from './styles.module.css'
 
 export type MomentDigestDetailProps = {
-  moment: MomentDigestDetailMomentPublicFragment
+  moment: MomentDigestDetailMomentFragment
   hasContent?: boolean
   hasAssets?: boolean
   onClose: () => void
