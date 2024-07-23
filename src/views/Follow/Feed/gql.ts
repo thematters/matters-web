@@ -10,11 +10,16 @@ import UserPostMomentActivity from './UserPostMomentActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
 
 export const FOLLOWING_FEED = gql`
-  query FollowingFeed($after: String) {
+  query FollowingFeed(
+    $after: String
+    $type: RecommendationFollowingFilterType
+  ) {
     viewer {
       id
       recommendation {
-        following(input: { first: 10, after: $after }) {
+        following(
+          input: { first: 10, after: $after, filter: { type: $type } }
+        ) {
           pageInfo {
             startCursor
             endCursor

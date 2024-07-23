@@ -724,6 +724,10 @@
     "defaultMessage": "Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "AeIRlL": {
+    "defaultMessage": "Articles",
+    "description": "src/views/Follow/Tabs/index.tsx"
+  },
   "AlHYvk": {
     "defaultMessage": "{type} edited"
   },

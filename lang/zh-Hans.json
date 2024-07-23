@@ -724,6 +724,10 @@
     "defaultMessage": "追踪",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "AeIRlL": {
+    "defaultMessage": "只看文章",
+    "description": "src/views/Follow/Tabs/index.tsx"
+  },
   "AlHYvk": {
     "defaultMessage": "{type}已编辑"
   },

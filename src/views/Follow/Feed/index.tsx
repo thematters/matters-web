@@ -14,8 +14,12 @@ import {
   SpinnerBlock,
   Translate,
 } from '~/components'
-import { FollowingFeedQuery } from '~/gql/graphql'
+import {
+  FollowingFeedQuery,
+  RecommendationFollowingFilterType,
+} from '~/gql/graphql'
 
+import { TABS } from '../Tabs'
 import { FOLLOWING_FEED } from './gql'
 import RecommendArticleActivity from './RecommendArticleActivity'
 import RecommendCircleActivity from './RecommendCircleActivity'
@@ -26,10 +30,21 @@ import UserCreateCircleActivity from './UserCreateCircleActivity'
 import UserPostMomentActivity from './UserPostMomentActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
 
-const FollowingFeed = () => {
+type FollowingFeedProps = {
+  tab: TABS
+}
+
+const FollowingFeed = ({ tab }: FollowingFeedProps) => {
   const intl = useIntl()
-  const { data, loading, error, fetchMore } =
-    useQuery<FollowingFeedQuery>(FOLLOWING_FEED)
+  const isArticleTab = tab === 'Article'
+  const { data, loading, error, fetchMore } = useQuery<FollowingFeedQuery>(
+    FOLLOWING_FEED,
+    {
+      variables: isArticleTab
+        ? { type: RecommendationFollowingFilterType.Article }
+        : {},
+    }
+  )
 
   if (loading) {
     return <SpinnerBlock />
