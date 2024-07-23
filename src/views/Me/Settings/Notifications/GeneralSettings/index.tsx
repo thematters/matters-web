@@ -21,8 +21,8 @@ const VIEWER_NOTIFICATIONS_GENERAL_SETTINGS = gql`
           email
           mention
           userNewFollower
-          articleNewComment
-          articleNewAppreciation
+          newComment
+          newLike
           articleNewSubscription
           articleNewCollected
         }
@@ -43,8 +43,8 @@ const UPDATE_VIEWER_NOTIFICATIONS_GENERAL = gql`
           email
           mention
           userNewFollower
-          articleNewComment
-          articleNewAppreciation
+          newComment
+          newLike
           articleNewSubscription
           articleNewCollected
         }
@@ -138,8 +138,8 @@ const NotificationsGeneralSettings = () => {
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
-              checked={settings.articleNewAppreciation}
-              onChange={() => toggle('articleNewAppreciation')}
+              checked={settings.newLike}
+              onChange={() => toggle('newLike')}
             />
           }
         />
@@ -163,8 +163,8 @@ const NotificationsGeneralSettings = () => {
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
-              checked={settings.articleNewComment}
-              onChange={() => toggle('articleNewComment')}
+              checked={settings.newComment}
+              onChange={() => toggle('newComment')}
             />
           }
         />
