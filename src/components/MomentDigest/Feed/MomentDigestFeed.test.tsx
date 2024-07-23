@@ -15,12 +15,12 @@ describe('src/components/MomentDigest/MomentDigestFeed.test.tsx', () => {
     expect($author).not.toBeInTheDocument()
 
     // content
-    const $content = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_CONTENT)
-    expect($content).toBeInTheDocument()
+    const $content = screen.queryAllByTestId(TEST_ID.MOMENT_DIGEST_CONTENT)
+    expect($content).length(2)
 
     // assets
-    const $assets = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_ASSETS)
-    expect($assets).toBeInTheDocument()
+    const $assets = screen.queryAllByTestId(TEST_ID.MOMENT_DIGEST_ASSETS)
+    expect($assets).length(2)
 
     // commented followees
     const $commentedFollowees = screen.queryByTestId(
@@ -33,18 +33,18 @@ describe('src/components/MomentDigest/MomentDigestFeed.test.tsx', () => {
     render(<MomentDigestFeed moment={MOCK_MOMENT} hasCommentedFollowees />)
 
     // commented followees
-    const $commentedFollowees = screen.queryByTestId(
+    const $commentedFollowees = screen.queryAllByTestId(
       TEST_ID.MOMENT_DIGEST_FOOTER_ACTIONS_COMMENTED_FOLLOWEES
     )
-    expect($commentedFollowees).toBeInTheDocument()
+    expect($commentedFollowees).length(2)
   })
 
   it('should render MomentDigestFeed with author', async () => {
     render(<MomentDigestFeed moment={MOCK_MOMENT} hasAuthor />)
 
     // author
-    const $author = screen.queryByTestId(TEST_ID.MOMENT_DIGEST_AUTHOR)
-    expect($author).toBeInTheDocument()
+    const $author = screen.queryAllByTestId(TEST_ID.MOMENT_DIGEST_AUTHOR)
+    expect($author).length(2)
   })
 
   it('should render MomentDigestFeed without assets', async () => {

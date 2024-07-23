@@ -49,8 +49,10 @@ export const MomentDigestFeed = ({
 
   const Container = ({
     openMomentDetail,
+    hasAuthor,
   }: {
     openMomentDetail: () => void
+    hasAuthor?: boolean
   }) => {
     return (
       <section className={styles.container}>
@@ -124,11 +126,13 @@ export const MomentDigestFeed = ({
   return (
     <>
       <Media at="sm">
-        <Container openMomentDetail={goToMomentDetail} />
+        <Container openMomentDetail={goToMomentDetail} hasAuthor={hasAuthor} />
       </Media>
       <Media greaterThan="sm">
         <MomentDetailDialog shortHash={moment.shortHash}>
-          {({ openDialog }) => <Container openMomentDetail={openDialog} />}
+          {({ openDialog }) => (
+            <Container openMomentDetail={openDialog} hasAuthor={hasAuthor} />
+          )}
         </MomentDetailDialog>
       </Media>
     </>
