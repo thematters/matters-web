@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import {
-  OPEN_GRAND_SLAM_BADGE_DIALOG,
+  OPEN_GRAND_BADGE_DIALOG,
   OPEN_NOMAD_BADGE_DIALOG,
   TEST_ID,
   URL_USER_PROFILE,
@@ -24,13 +24,13 @@ import {
 } from '~/components'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
-import { BadgeGrandSlamDialog } from '../BadgeGrandSlamDialog'
+import { BadgeGrandDialog } from '../BadgeGrandDialog'
 import { BadgeNomadDialog } from '../BadgeNomadDialog'
 import {
   ArchitectBadge,
   CivicLikerBadge,
   GoldenMotorBadge,
-  GrandSlamBadge,
+  GrandBadge,
   NomadBadge,
   SeedBadge,
   TraveloggersBadge,
@@ -91,12 +91,12 @@ export const AsideUserProfile = () => {
       window.dispatchEvent(new CustomEvent(OPEN_NOMAD_BADGE_DIALOG))
     }
 
-    const shouldOpenGrandSlamBadgeDialog =
-      getQuery(URL_USER_PROFILE.OPEN_GRAND_SLAM_BADGE_DIALOG.key) ===
-      URL_USER_PROFILE.OPEN_GRAND_SLAM_BADGE_DIALOG.value
+    const shouldOpenGrandBadgeDialog =
+      getQuery(URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.key) ===
+      URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.value
 
-    if (shouldOpenGrandSlamBadgeDialog) {
-      window.dispatchEvent(new CustomEvent(OPEN_GRAND_SLAM_BADGE_DIALOG))
+    if (shouldOpenGrandBadgeDialog) {
+      window.dispatchEvent(new CustomEvent(OPEN_GRAND_BADGE_DIALOG))
     }
   }, [])
 
@@ -124,7 +124,7 @@ export const AsideUserProfile = () => {
   const nomadBadgeLevel = (
     hasNomadBadge ? Number.parseInt(nomadBadgeType[0].type.charAt(5)) : 1
   ) as 1 | 2 | 3 | 4
-  const hasGrandSlamBadge = badges.some((b) => b.type === 'grand_slam')
+  const hasGrandBadge = badges.some((b) => b.type === 'grand_slam')
 
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
@@ -266,12 +266,12 @@ export const AsideUserProfile = () => {
                 )}
               </BadgeNomadDialog>
             )}
-            {hasGrandSlamBadge && (
-              <BadgeGrandSlamDialog>
+            {hasGrandBadge && (
+              <BadgeGrandDialog>
                 {({ openDialog }) => (
-                  <GrandSlamBadge hasTooltip onClick={openDialog} />
+                  <GrandBadge hasTooltip onClick={openDialog} />
                 )}
-              </BadgeGrandSlamDialog>
+              </BadgeGrandDialog>
             )}
             {hasTraveloggersBadge && <TraveloggersBadge hasTooltip />}
             {hasSeedBadge && <SeedBadge hasTooltip />}

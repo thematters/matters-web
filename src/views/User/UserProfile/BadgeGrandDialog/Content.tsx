@@ -1,22 +1,22 @@
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
-import { ReactComponent as GrandSlamBackground } from '@/public/static/images/badge-grand-slam-background.svg'
+import { ReactComponent as GrandBackground } from '@/public/static/images/badge-grand-background.svg'
 import { URL_USER_PROFILE } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Button, CopyToClipboard, Dialog, Icon, useRoute } from '~/components'
 
 import styles from './styles.module.css'
 
-type BadgeGrandSlamDialogContentProps = {
+type BadgeGrandDialogContentProps = {
   closeDialog: () => void
   goBack?: () => void
 }
 
-const BadgeGrandSlamDialogContent = ({
+const BadgeGrandDialogContent = ({
   closeDialog,
   goBack,
-}: BadgeGrandSlamDialogContentProps) => {
+}: BadgeGrandDialogContentProps) => {
   const { getQuery } = useRoute()
   const userName = getQuery('name')
   const userProfilePath = toPath({
@@ -25,8 +25,11 @@ const BadgeGrandSlamDialogContent = ({
   })
   const shareLink =
     typeof window !== 'undefined'
-      ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_GRAND_SLAM_BADGE_DIALOG.key}=${URL_USER_PROFILE.OPEN_GRAND_SLAM_BADGE_DIALOG.value}`
+      ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.key}=${URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.value}`
       : ''
+  const isCongrats =
+    getQuery(URL_USER_PROFILE.GRAND_BADGE_DIALOG_STEP.key) ===
+    URL_USER_PROFILE.GRAND_BADGE_DIALOG_STEP.value
 
   return (
     <>
@@ -48,21 +51,35 @@ const BadgeGrandSlamDialogContent = ({
       <Dialog.Content>
         <section className={styles.container}>
           <section className={styles.badgeIcon}>
-            <GrandSlamBackground />
+            <GrandBackground />
           </section>
 
           <Dialog.Content.Message align="center" smUpAlign="center">
             <h1 className={styles.title}>
-              <FormattedMessage
-                defaultMessage="Free Write in 7 days Grand Badge"
-                id="W3hNBA"
-              />
+              {isCongrats ? (
+                <FormattedMessage
+                  defaultMessage="Congratulations! You've got the Grand Badge!"
+                  id="Sfql0+"
+                />
+              ) : (
+                <FormattedMessage
+                  defaultMessage="Free Write in 7 days Grand Badge"
+                  id="W3hNBA"
+                />
+              )}
             </h1>
             <p>
-              <FormattedMessage
-                defaultMessage='The badge signifies your participation and completion in the "Free Write in 7 days".'
-                id="8+Z5E9"
-              />
+              {isCongrats ? (
+                <FormattedMessage
+                  defaultMessage="This badge represents your completion of Free Write in 7 days. Congratulations on finishing this meaningful writing journey!"
+                  id="LoQ3BF"
+                />
+              ) : (
+                <FormattedMessage
+                  defaultMessage='The badge signifies your participation and completion in the "Free Write in 7 days".'
+                  id="8+Z5E9"
+                />
+              )}
             </p>
           </Dialog.Content.Message>
         </section>
@@ -126,4 +143,4 @@ const BadgeGrandSlamDialogContent = ({
   )
 }
 
-export default BadgeGrandSlamDialogContent
+export default BadgeGrandDialogContent

@@ -1335,6 +1335,9 @@
   "LnesNr": {
     "defaultMessage": "Successfully removed collaborator"
   },
+  "LoQ3BF": {
+    "defaultMessage": "This badge represents your completion of Free Write in 7 days. Congratulations on finishing this meaningful writing journey!"
+  },
   "Lp6CiR": {
     "defaultMessage": "Settings - Misc",
     "description": "src/views/Me/Settings/Misc/index.tsx"
@@ -1686,6 +1689,9 @@
   "Sep44m": {
     "defaultMessage": "Payout",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "Sfql0+": {
+    "defaultMessage": "Congratulations! You've got the Grand Badge!"
   },
   "SuRTsQ": {
     "defaultMessage": "Register for ISCN"
