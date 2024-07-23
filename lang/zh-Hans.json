@@ -1335,6 +1335,9 @@
   "LnesNr": {
     "defaultMessage": "移除协作者成功"
   },
+  "LoQ3BF": {
+    "defaultMessage": "这枚徽章代表你完成了七天写作，恭喜走完这趟意义非凡的写作之旅！"
+  },
   "Lp6CiR": {
     "defaultMessage": "设置 - 其他",
     "description": "src/views/Me/Settings/Misc/index.tsx"
@@ -1686,6 +1689,9 @@
   "Sep44m": {
     "defaultMessage": "提现",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "Sfql0+": {
+    "defaultMessage": "恭喜获得七日书大满贯"
   },
   "SuRTsQ": {
     "defaultMessage": "注册 ISCN"
