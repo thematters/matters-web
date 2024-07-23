@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconGrandSlam } from '@/public/static/icons/24px/badge-grand-slam.svg'
+import { ReactComponent as IconGrand } from '@/public/static/icons/24px/badge-grand.svg'
 import { ReactComponent as IconNomad1Badge } from '@/public/static/icons/24px/badge-nomad1-moon.svg'
 import { ReactComponent as IconNomad2Badge } from '@/public/static/icons/24px/badge-nomad2-star.svg'
 import { ReactComponent as IconNomad3Badge } from '@/public/static/icons/24px/badge-nomad3-light.svg'
@@ -12,7 +12,7 @@ import { ReactComponent as IconArchitectBadge } from '@/public/static/icons/24px
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
 import { ReactComponent as IconSeedBadge } from '@/public/static/icons/24px/seed-user.svg'
 import { ReactComponent as IconTraveloggersBadge } from '@/public/static/icons/24px/traveloggers.svg'
-import { ReactComponent as IconGrandSlam48 } from '@/public/static/icons/48px/badge-grand-slam.svg'
+import { ReactComponent as IconGrand48 } from '@/public/static/icons/48px/badge-grand.svg'
 import { Icon, Tooltip, WrappedIcon } from '~/components'
 
 import styles from './styles.module.css'
@@ -179,20 +179,20 @@ export const NomadBadge = ({
   )
 }
 
-export const GrandSlamBadge = ({
+export const GrandBadge = ({
   isInDialog,
   hasTooltip,
   onClick,
-  gotoGrandSlamBadge,
-}: BadgePros & { gotoGrandSlamBadge?: () => void }) => {
+  gotoGrandBadge,
+}: BadgePros & { gotoGrandBadge?: () => void }) => {
   if (isInDialog) {
     return (
       <section
         className={classNames([styles.item, styles.itemNomad])}
-        onClick={gotoGrandSlamBadge}
+        onClick={gotoGrandBadge}
         role="button"
       >
-        <Icon icon={IconGrandSlam48} size={48} />
+        <Icon icon={IconGrand48} size={48} />
         <section className={styles.info}>
           <section>
             <FormattedMessage
@@ -221,7 +221,7 @@ export const GrandSlamBadge = ({
         placement="top"
       >
         <button onClick={onClick} className={styles.badge}>
-          <Icon icon={IconGrandSlam} size={20} />
+          <Icon icon={IconGrand} size={20} />
         </button>
       </Tooltip>
     )
@@ -229,7 +229,7 @@ export const GrandSlamBadge = ({
 
   return (
     <span className={styles.badge}>
-      <Icon icon={IconGrandSlam} size={20} />
+      <Icon icon={IconGrand} size={20} />
     </span>
   )
 }
@@ -241,8 +241,8 @@ export interface BadgesOptions {
   nomadBadgeLevel?: 1 | 2 | 3 | 4
   gotoNomadBadge?: () => void
 
-  hasGrandSlamBadge?: boolean
-  gotoGrandSlamBadge?: () => void
+  hasGrandBadge?: boolean
+  gotoGrandBadge?: () => void
 
   hasTraveloggersBadge?: boolean
   hasSeedBadge?: boolean
@@ -256,8 +256,8 @@ export const Badges = ({
   hasNomadBadge,
   nomadBadgeLevel,
   gotoNomadBadge,
-  hasGrandSlamBadge,
-  gotoGrandSlamBadge,
+  hasGrandBadge,
+  gotoGrandBadge,
   hasTraveloggersBadge,
   hasSeedBadge,
   hasGoldenMotorBadge,
@@ -275,9 +275,9 @@ export const Badges = ({
           />
         </section>
       )}
-      {hasGrandSlamBadge && (
+      {hasGrandBadge && (
         <section className={styles.badgesGroup}>
-          <GrandSlamBadge isInDialog gotoGrandSlamBadge={gotoGrandSlamBadge} />
+          <GrandBadge isInDialog gotoGrandBadge={gotoGrandBadge} />
         </section>
       )}
       {(hasTraveloggersBadge ||
@@ -297,7 +297,7 @@ export const Badges = ({
   ) : (
     <span className={styles.badgesInPage}>
       {hasNomadBadge && <NomadBadge level={nomadBadgeLevel!} />}
-      {hasGrandSlamBadge && <GrandSlamBadge />}
+      {hasGrandBadge && <GrandBadge />}
       {hasTraveloggersBadge && <TraveloggersBadge />}
       {hasSeedBadge && <SeedBadge />}
       {hasGoldenMotorBadge && <GoldenMotorBadge />}
