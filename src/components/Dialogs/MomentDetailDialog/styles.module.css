@@ -15,7 +15,8 @@
 .scrollContainer {
   @mixin hide-scrollbar;
 
-  max-height: calc(80vh - 158px);
+  /* the combined height of the header and footer (151px) */
+  max-height: calc(80vh - 151px);
   overflow-y: auto;
 }
 
