@@ -1,8 +1,11 @@
 import gql from 'graphql-tag'
-import { FormattedMessage } from 'react-intl'
+import { useContext } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { stripHtml, toPath } from '~/common/utils'
+import { truncateTitle } from '~/common/utils/text/moment'
+import { LanguageContext } from '~/components/Context'
 import { CommentMentionedYouNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -12,12 +15,16 @@ import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
+import NoticeMomentTitle from '../NoticeMomentTitle'
 
 const CommentMentionedYouNotice = ({
   notice,
 }: {
   notice: CommentMentionedYouNoticeFragment
 }) => {
+  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
+
   if (!notice.actors) {
     return null
   }
@@ -26,6 +33,8 @@ const CommentMentionedYouNotice = ({
     notice.comment?.node.__typename === 'Article' ? notice.comment.node : null
   const commentCircle =
     notice.comment?.node.__typename === 'Circle' ? notice.comment.node : null
+  const commentMoment =
+    notice.comment?.node.__typename === 'Moment' ? notice.comment.node : null
 
   const commentCircleDiscussion =
     notice.comment?.type === 'circleDiscussion' ? notice.comment.type : null
@@ -47,6 +56,40 @@ const CommentMentionedYouNotice = ({
 
   return (
     <>
+      {commentMoment && (
+        <NoticeDigest
+          notice={notice}
+          action={
+            <FormattedMessage
+              defaultMessage="mentioned you in a moment comment at"
+              id="XiiSGl"
+              values={{
+                commentMoment: (
+                  <NoticeMomentTitle
+                    moment={commentMoment}
+                    title={`${truncateTitle(
+                      stripHtml(commentMoment.content || ''),
+                      10,
+                      lang
+                    )} ${
+                      commentMoment.assets?.length
+                        ? intl
+                            .formatMessage({
+                              defaultMessage: `[image]`,
+                              id: 'W3tqQO',
+                            })
+                            .repeat(Math.min(3, commentMoment.assets.length))
+                        : ''
+                    }`}
+                  />
+                ),
+              }}
+            />
+          }
+          content={<NoticeComment comment={notice.comment} />}
+          testId={TEST_ID.NOTICE_COMMENT_MENTIONED_YOU}
+        />
+      )}
       {commentArticle && (
         <NoticeDigest
           notice={notice}
@@ -123,6 +166,9 @@ CommentMentionedYouNotice.fragments = {
           ... on Circle {
             ...NoticeCircleName
           }
+          ... on Moment {
+            ...NoticeMomentTitle
+          }
         }
       }
     }
@@ -132,6 +178,7 @@ CommentMentionedYouNotice.fragments = {
     ${NoticeCircleName.fragments.circle}
     ${NoticeComment.fragments.comment}
     ${NoticeDate.fragments.notice}
+    ${NoticeMomentTitle.fragments.moment}
   `,
 }
 
