@@ -1185,6 +1185,10 @@
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "JpAsUV": {
+    "defaultMessage": "More moments",
+    "description": "src/views/Follow/Feed/UserPostMomentActivity"
+  },
   "JpS59y": {
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"

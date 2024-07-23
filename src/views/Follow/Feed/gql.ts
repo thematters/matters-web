@@ -6,6 +6,7 @@ import RecommendUserActivity from './RecommendUserActivity'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
 import UserCreateCircleActivity from './UserCreateCircleActivity'
+import UserPostMomentActivity from './UserPostMomentActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
 
 export const FOLLOWING_FEED = gql`
@@ -25,6 +26,9 @@ export const FOLLOWING_FEED = gql`
               __typename
               ... on UserPublishArticleActivity {
                 ...UserPublishArticleActivity
+              }
+              ... on UserPostMomentActivity {
+                ...UserPostMomentActivity
               }
               ... on UserBroadcastCircleActivity {
                 ...UserBroadcastCircleActivity
@@ -53,6 +57,7 @@ export const FOLLOWING_FEED = gql`
   ${UserAddArticleTagActivity.fragments}
   ${UserBroadcastCircleActivity.fragments}
   ${UserCreateCircleActivity.fragments}
+  ${UserPostMomentActivity.fragments}
   ${UserPublishArticleActivity.fragments}
   ${RecommendArticleActivity.fragments}
   ${RecommendCircleActivity.fragments}

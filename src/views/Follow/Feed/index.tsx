@@ -23,6 +23,7 @@ import RecommendUserActivity from './RecommendUserActivity'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
 import UserCreateCircleActivity from './UserCreateCircleActivity'
+import UserPostMomentActivity from './UserPostMomentActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
 
 const FollowingFeed = () => {
@@ -96,6 +97,9 @@ const FollowingFeed = () => {
             <List.Item key={`${node.__typename}:${i}`}>
               {node.__typename === 'UserPublishArticleActivity' && (
                 <UserPublishArticleActivity location={i} {...node} />
+              )}
+              {node.__typename === 'UserPostMomentActivity' && (
+                <UserPostMomentActivity location={i} {...node} />
               )}
               {node.__typename === 'UserBroadcastCircleActivity' && (
                 <UserBroadcastCircleActivity {...node} />

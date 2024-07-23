@@ -1185,6 +1185,10 @@
     "defaultMessage": "被追蹤",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "JpAsUV": {
+    "defaultMessage": "更多動態",
+    "description": "src/views/Follow/Feed/UserPostMomentActivity"
+  },
   "JpS59y": {
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"

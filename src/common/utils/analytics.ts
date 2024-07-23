@@ -252,6 +252,7 @@ export type ActivityType =
   | 'UserFollowUserActivity'
   | 'UserDonateArticleActivity'
   | 'UserBookmarkArticleActivity'
+  | 'UserPostMomentActivity'
   | 'UserAddArticleTagActivity'
   | 'RecommendArticleActivity'
   | 'ArticleRecommendationActivity'
