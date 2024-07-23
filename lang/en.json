@@ -582,6 +582,9 @@
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
+  "8+Z5E9": {
+    "defaultMessage": "The badge signifies your participation and completion in the \"Free Write in 7 days\"."
+  },
   "84VOdX": {
     "defaultMessage": "Unpin from profile",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
@@ -772,6 +775,9 @@
   "Bc20la": {
     "defaultMessage": "days"
   },
+  "BhRxYr": {
+    "defaultMessage": "Free Write Badge"
+  },
   "Bjdw71": {
     "defaultMessage": "followers_empty",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -885,9 +891,6 @@
     "defaultMessage": "Unblock",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
-  "DqTwwn": {
-    "defaultMessage": "Free-writing Badge"
-  },
   "DrBuEI": {
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
@@ -945,9 +948,6 @@
   },
   "ErV/vT": {
     "defaultMessage": "Confirm to join"
-  },
-  "EvJnpb": {
-    "defaultMessage": "Because you continue to write with all your heart, I give you the best honor"
   },
   "F3zk7E": {
     "defaultMessage": "(This action cannot be undone)",
@@ -1858,6 +1858,9 @@
     "defaultMessage": "Last 3 months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "W3hNBA": {
+    "defaultMessage": "Free Write in 7 days Grand Badge"
+  },
   "W66Eyq": {
     "defaultMessage": "Password must be at least 8 characters long, support letter, numbers and symbols.",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
@@ -2056,6 +2059,10 @@
   "ZVoJan": {
     "defaultMessage": "Edit",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
+  },
+  "ZXh9vL": {
+    "defaultMessage": "Free Writers {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "ZZ9zIR": {
     "defaultMessage": "Downvote"
@@ -2477,9 +2484,6 @@
   "iEJeQH": {
     "defaultMessage": "Liker ID"
   },
-  "iNXSkV": {
-    "defaultMessage": "Seven Days Grand Slam"
-  },
   "iNZdM/": {
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -2674,6 +2678,9 @@
     "defaultMessage": "Circle Description",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
+  "m1wKuC": {
+    "defaultMessage": "Add to Free Write"
+  },
   "m4GG4b": {
     "defaultMessage": "Delete collection"
   },
@@ -2687,6 +2694,10 @@
   "mCAIcg": {
     "defaultMessage": "Hottest",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
+  },
+  "mCCjL7": {
+    "defaultMessage": "Free Writers",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "mJEqC/": {
     "defaultMessage": "Go to {href}"
@@ -3188,10 +3199,6 @@
   "wNJjR5": {
     "defaultMessage": "Support setting updated"
   },
-  "wNQVJC": {
-    "defaultMessage": "Free Writers Community",
-    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
-  },
   "wOZRKW": {
     "defaultMessage": "Delete comment"
   },
@@ -3315,10 +3322,6 @@
   "yZfKI4": {
     "defaultMessage": "discussion and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
-  "yb93V+": {
-    "defaultMessage": "Free Writers Community {count}",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "ydQPbv": {
     "defaultMessage": "Enter",

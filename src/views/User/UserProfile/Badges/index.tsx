@@ -196,12 +196,12 @@ export const GrandSlamBadge = ({
         <section className={styles.info}>
           <section>
             <FormattedMessage
-              defaultMessage="Seven Days Grand Slam"
-              id="iNXSkV"
+              defaultMessage="Free Write in 7 days Grand Badge"
+              id="W3hNBA"
             />
           </section>
           <section className={styles.subtitle}>
-            <FormattedMessage defaultMessage="Free-writing Badge" id="DqTwwn" />
+            <FormattedMessage defaultMessage="Free Write Badge" id="BhRxYr" />
           </section>
         </section>
         <Icon icon={IconRight} size={24} color="greyDarker" />
@@ -214,8 +214,8 @@ export const GrandSlamBadge = ({
       <Tooltip
         content={
           <FormattedMessage
-            defaultMessage="Seven Days Grand Slam"
-            id="iNXSkV"
+            defaultMessage="Free Write in 7 days Grand Badge"
+            id="W3hNBA"
           />
         }
         placement="top"

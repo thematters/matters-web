@@ -54,14 +54,14 @@ const BadgeGrandSlamDialogContent = ({
           <Dialog.Content.Message align="center" smUpAlign="center">
             <h1 className={styles.title}>
               <FormattedMessage
-                defaultMessage="Seven Days Grand Slam"
-                id="iNXSkV"
+                defaultMessage="Free Write in 7 days Grand Badge"
+                id="W3hNBA"
               />
             </h1>
             <p>
               <FormattedMessage
-                defaultMessage="Because you continue to write with all your heart, I give you the best honor"
-                id="EvJnpb"
+                defaultMessage='The badge signifies your participation and completion in the "Free Write in 7 days".'
+                id="8+Z5E9"
               />
             </p>
           </Dialog.Content.Message>

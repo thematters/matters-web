@@ -582,6 +582,9 @@
     "defaultMessage": "暂无评论",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
+  "8+Z5E9": {
+    "defaultMessage": "纪念你参与「七日书」并完成七天书写"
+  },
   "84VOdX": {
     "defaultMessage": "取消代表作",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
@@ -772,6 +775,9 @@
   "Bc20la": {
     "defaultMessage": "天"
   },
+  "BhRxYr": {
+    "defaultMessage": "自由写纪念徽章"
+  },
   "Bjdw71": {
     "defaultMessage": "目前总追踪人数",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -885,9 +891,6 @@
     "defaultMessage": "解除屏蔽",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
-  "DqTwwn": {
-    "defaultMessage": "自由写计画纪念徽章"
-  },
   "DrBuEI": {
     "defaultMessage": "取消置顶",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
@@ -945,9 +948,6 @@
   },
   "ErV/vT": {
     "defaultMessage": "晚鸟参与七日书"
-  },
-  "EvJnpb": {
-    "defaultMessage": "由于你持续用心地写作，为你献上最佳荣耀"
   },
   "F3zk7E": {
     "defaultMessage": "（草稿删除后无法恢复）",
@@ -1858,6 +1858,9 @@
     "defaultMessage": "最近 3 个月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "W3hNBA": {
+    "defaultMessage": "七日书大满贯"
+  },
   "W66Eyq": {
     "defaultMessage": "密码需至少 8 位，支持字母、数字及符号的组合。",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
@@ -2056,6 +2059,10 @@
   "ZVoJan": {
     "defaultMessage": "修改",
     "description": "src/components/ArticleDigest/DropdownActions/EditButton.tsx"
+  },
+  "ZXh9vL": {
+    "defaultMessage": "七日书作者 {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "ZZ9zIR": {
     "defaultMessage": "点踩"
@@ -2477,9 +2484,6 @@
   "iEJeQH": {
     "defaultMessage": "设置 Liker ID"
   },
-  "iNXSkV": {
-    "defaultMessage": "七日书大满贯"
-  },
   "iNZdM/": {
     "defaultMessage": "切换后即可支持创作者，采用 Optimism 网络{br}让支持更方便且费用低廉",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
@@ -2674,6 +2678,9 @@
     "defaultMessage": "围炉描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
+  "m1wKuC": {
+    "defaultMessage": "投稿七日书活动"
+  },
   "m4GG4b": {
     "defaultMessage": "删除选集"
   },
@@ -2687,6 +2694,10 @@
   "mCAIcg": {
     "defaultMessage": "站内阅读热门排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
+  },
+  "mCCjL7": {
+    "defaultMessage": "七日书作者",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "mJEqC/": {
     "defaultMessage": "跳转至 {href}"
@@ -3188,10 +3199,6 @@
   "wNJjR5": {
     "defaultMessage": "支持反馈设置成功"
   },
-  "wNQVJC": {
-    "defaultMessage": "七日书作者",
-    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
-  },
   "wOZRKW": {
     "defaultMessage": "刪除评论"
   },
@@ -3315,10 +3322,6 @@
   "yZfKI4": {
     "defaultMessage": " 眾聊提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
-  },
-  "yb93V+": {
-    "defaultMessage": "七日书作者 {count}",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "ydQPbv": {
     "defaultMessage": "进入围炉",

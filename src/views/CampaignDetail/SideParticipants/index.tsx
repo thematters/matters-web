@@ -61,8 +61,8 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
     <section className={styles.participants}>
       <h2>
         <FormattedMessage
-          defaultMessage="Free Writers Community"
-          id="wNQVJC"
+          defaultMessage="Free Writers"
+          id="mCCjL7"
           description="src/views/CampaignDetail/SideParticipants/index.tsx"
         />{' '}
         <span className={styles.count}>
