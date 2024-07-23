@@ -439,6 +439,9 @@
   "5sg7KC": {
     "defaultMessage": "Password"
   },
+  "5y5rID": {
+    "defaultMessage": "We will review your application shortly, stay tuned for the event!"
+  },
   "6+eeJ4": {
     "defaultMessage": "Lowercase letters, numbers and underscores",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -568,9 +571,6 @@
     "defaultMessage": "No results",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
-  "7m2h5x": {
-    "defaultMessage": "Participate successfully"
-  },
   "7oytv9": {
     "defaultMessage": " (edited) "
   },
@@ -652,6 +652,9 @@
   },
   "9J0iCw": {
     "defaultMessage": "Deleted user"
+  },
+  "9OPnTz": {
+    "defaultMessage": "System or connection abnormality, please refresh the page and click “Join” again."
   },
   "9SXN7s": {
     "defaultMessage": "No more comments",
@@ -940,6 +943,9 @@
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
   },
+  "ErV/vT": {
+    "defaultMessage": "Confirm to join"
+  },
   "EvJnpb": {
     "defaultMessage": "Because you continue to write with all your heart, I give you the best honor"
   },
@@ -954,9 +960,6 @@
   "FEkOVJ": {
     "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
-  },
-  "FM+YIG": {
-    "defaultMessage": "Confirm to participate"
   },
   "FMIIAZ": {
     "defaultMessage": "Revision history and IPFS entry,",
@@ -1065,6 +1068,9 @@
   },
   "HAlOn1": {
     "defaultMessage": "Name"
+  },
+  "HB2VOx": {
+    "defaultMessage": "System or connection abnormality, please refresh the page and click “Apply” again."
   },
   "HBxXD/": {
     "defaultMessage": "License"
@@ -1387,9 +1393,6 @@
   "N2IrpM": {
     "defaultMessage": "Confirm"
   },
-  "N3xGd5": {
-    "defaultMessage": "We will review your application as soon as possible, so stay tuned for the event!"
-  },
   "N6PWfU": {
     "defaultMessage": "Forget Password"
   },
@@ -1539,6 +1542,10 @@
   "Pp/0po": {
     "defaultMessage": "Shuffle"
   },
+  "Pq/7m5": {
+    "defaultMessage": "Reviewing...",
+    "description": "type:join"
+  },
   "PtV68+": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_EMAIL_NOT_FOUND"
@@ -1654,10 +1661,6 @@
   "SPTRiT": {
     "defaultMessage": "Latest",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
-  },
-  "SX+8mP": {
-    "defaultMessage": "Reviewing...",
-    "description": "type:participate"
   },
   "SYfw+k": {
     "defaultMessage": "Confirm",
@@ -1818,10 +1821,6 @@
   },
   "VZsE96": {
     "defaultMessage": "Collection Name"
-  },
-  "VaB2pS": {
-    "defaultMessage": "Participate",
-    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "VeEfHm": {
     "defaultMessage": "Drafts",
@@ -2099,6 +2098,9 @@
     "defaultMessage": "docs",
     "description": "src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
   },
+  "aKEiNd": {
+    "defaultMessage": "You missed the registration period, you can still join as a latecomer. Apply earlier next time for the chance to get the badge."
+  },
   "aKlTO2": {
     "defaultMessage": "You can add {count} more collaborators."
   },
@@ -2129,6 +2131,9 @@
   },
   "ai7kS4": {
     "defaultMessage": "My Works"
+  },
+  "al5/yQ": {
+    "defaultMessage": "Joined successfully"
   },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
@@ -2331,9 +2336,6 @@
   "fDdcbi": {
     "defaultMessage": "This {type} has been deleted by the author"
   },
-  "fH6B/f": {
-    "defaultMessage": "If you miss the official registration period, you can still submit works after successful registration, but you will not be able to obtain the Grand Slam badge. Remember to register early next time for a chance to get a badge!"
-  },
   "fJB38x": {
     "defaultMessage": "Trial ends in {remainDays} days"
   },
@@ -2375,6 +2377,10 @@
   },
   "g5pX+a": {
     "defaultMessage": "About"
+  },
+  "gCafm/": {
+    "defaultMessage": "Join",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "gK6OxL": {
     "defaultMessage": "Leave a comment?",
@@ -2443,10 +2449,6 @@
   "hYG5fb": {
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
-  },
-  "hfRsLB": {
-    "defaultMessage": "Writers {count}",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "hk2aiz": {
     "defaultMessage": "followed your circle",
@@ -3186,6 +3188,10 @@
   "wNJjR5": {
     "defaultMessage": "Support setting updated"
   },
+  "wNQVJC": {
+    "defaultMessage": "Free Writers Community",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
+  },
   "wOZRKW": {
     "defaultMessage": "Delete comment"
   },
@@ -3252,10 +3258,6 @@
   "xkr+zo": {
     "defaultMessage": "Terms"
   },
-  "xl95XN": {
-    "defaultMessage": "Writers",
-    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
-  },
   "xmcVZ0": {
     "defaultMessage": "Search"
   },
@@ -3313,6 +3315,10 @@
   "yZfKI4": {
     "defaultMessage": "discussion and mentioned you",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "yb93V+": {
+    "defaultMessage": "Free Writers Community {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "ydQPbv": {
     "defaultMessage": "Enter",

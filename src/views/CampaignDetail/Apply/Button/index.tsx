@@ -55,10 +55,7 @@ const ApplyCampaignButton = ({
         {isAppliedDuringPeriod ? (
           <FormattedMessage defaultMessage="Applied successfully" id="4nHH2x" />
         ) : (
-          <FormattedMessage
-            defaultMessage="Participate successfully"
-            id="7m2h5x"
-          />
+          <FormattedMessage defaultMessage="Joined successfully" id="al5/yQ" />
         )}
       </TextIcon>
     )
@@ -78,8 +75,8 @@ const ApplyCampaignButton = ({
     ) : (
       <FormattedMessage
         defaultMessage="Reviewing..."
-        description="type:participate"
-        id="SX+8mP"
+        description="type:join"
+        id="Pq/7m5"
       />
     )
   } else if (isNotApplied) {
@@ -91,9 +88,9 @@ const ApplyCampaignButton = ({
       />
     ) : (
       <FormattedMessage
-        defaultMessage="Participate"
+        defaultMessage="Join"
         description="src/views/CampaignDetail/Apply/Button/index.tsx"
-        id="VaB2pS"
+        id="gCafm/"
       />
     )
   }

@@ -439,6 +439,9 @@
   "5sg7KC": {
     "defaultMessage": "密碼"
   },
+  "5y5rID": {
+    "defaultMessage": "我們將盡快審核你的申請，敬請期待活動開跑！"
+  },
   "6+eeJ4": {
     "defaultMessage": "可使用小寫英文、數字及下劃線",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -568,9 +571,6 @@
     "defaultMessage": "無結果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
-  "7m2h5x": {
-    "defaultMessage": "陪跑參與"
-  },
   "7oytv9": {
     "defaultMessage": "（修改過）"
   },
@@ -652,6 +652,9 @@
   },
   "9J0iCw": {
     "defaultMessage": "已註銷用戶"
+  },
+  "9OPnTz": {
+    "defaultMessage": "系統或連線異常，請刷新頁面後重新點擊晚鳥參與"
   },
   "9SXN7s": {
     "defaultMessage": "沒有更多",
@@ -940,6 +943,9 @@
     "defaultMessage": "你無權限進行該操作",
     "description": "FORBIDDEN_BY_STATE"
   },
+  "ErV/vT": {
+    "defaultMessage": "晚鳥參與七日書"
+  },
   "EvJnpb": {
     "defaultMessage": "由於你持續用心地寫作，為你獻上最佳榮耀"
   },
@@ -954,9 +960,6 @@
   "FEkOVJ": {
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
-  },
-  "FM+YIG": {
-    "defaultMessage": "陪跑參與活動"
   },
   "FMIIAZ": {
     "defaultMessage": "此為歷史版本和 IPFS 入口查閱區，",
@@ -1065,6 +1068,9 @@
   },
   "HAlOn1": {
     "defaultMessage": "用戶名"
+  },
+  "HB2VOx": {
+    "defaultMessage": "系统或连线异常，请刷新页面后重新点击报名参加"
   },
   "HBxXD/": {
     "defaultMessage": "版權聲明"
@@ -1387,9 +1393,6 @@
   "N2IrpM": {
     "defaultMessage": "確認"
   },
-  "N3xGd5": {
-    "defaultMessage": "我們將盡快審核你的申請，敬請期待活動開跑！"
-  },
   "N6PWfU": {
     "defaultMessage": "忘記密碼"
   },
@@ -1539,6 +1542,10 @@
   "Pp/0po": {
     "defaultMessage": "換一批"
   },
+  "Pq/7m5": {
+    "defaultMessage": "晚鳥審核中",
+    "description": "type:join"
+  },
   "PtV68+": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_EMAIL_NOT_FOUND"
@@ -1654,10 +1661,6 @@
   "SPTRiT": {
     "defaultMessage": "最新",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
-  },
-  "SX+8mP": {
-    "defaultMessage": "陪跑審核中",
-    "description": "type:participate"
   },
   "SYfw+k": {
     "defaultMessage": "確認儲值",
@@ -1818,10 +1821,6 @@
   },
   "VZsE96": {
     "defaultMessage": "選集名稱"
-  },
-  "VaB2pS": {
-    "defaultMessage": "陪跑參與",
-    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "VeEfHm": {
     "defaultMessage": "草稿",
@@ -2099,6 +2098,9 @@
     "defaultMessage": "官方文檔",
     "description": "src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
   },
+  "aKEiNd": {
+    "defaultMessage": "錯過報名期沒關係，仍然可以用晚鳥身份參與，一起書寫人生故事。下次早點報名，就有機會獲得大滿貫徽章！"
+  },
   "aKlTO2": {
     "defaultMessage": "你還可以添加 {count} 名協作者"
   },
@@ -2129,6 +2131,9 @@
   },
   "ai7kS4": {
     "defaultMessage": "我的創作"
+  },
+  "al5/yQ": {
+    "defaultMessage": "晚鳥審核通過"
   },
   "aqX2Bt": {
     "defaultMessage": "前往首頁",
@@ -2331,9 +2336,6 @@
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者刪除"
   },
-  "fH6B/f": {
-    "defaultMessage": "錯過了正式報名期，仍然可以在報名成功後投稿作品，但無法獲得大滿貫徽章。下次記得早點報名，就有機會獲得徽章了！"
-  },
   "fJB38x": {
     "defaultMessage": "剩餘 {remainDays} 天"
   },
@@ -2375,6 +2377,10 @@
   },
   "g5pX+a": {
     "defaultMessage": "關於"
+  },
+  "gCafm/": {
+    "defaultMessage": "晚鳥參與",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "gK6OxL": {
     "defaultMessage": "留個友善的評論？",
@@ -2443,10 +2449,6 @@
   "hYG5fb": {
     "defaultMessage": "人追蹤",
     "description": "src/views/TagDetail/Followers/index.tsx"
-  },
-  "hfRsLB": {
-    "defaultMessage": "寫作者 {count}",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "hk2aiz": {
     "defaultMessage": "追蹤了你的圍爐",
@@ -3186,6 +3188,10 @@
   "wNJjR5": {
     "defaultMessage": "支持反饋設置成功"
   },
+  "wNQVJC": {
+    "defaultMessage": "七日書作者",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
+  },
   "wOZRKW": {
     "defaultMessage": "刪除評論"
   },
@@ -3252,10 +3258,6 @@
   "xkr+zo": {
     "defaultMessage": "協議"
   },
-  "xl95XN": {
-    "defaultMessage": "寫作者",
-    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
-  },
   "xmcVZ0": {
     "defaultMessage": "搜尋"
   },
@@ -3313,6 +3315,10 @@
   "yZfKI4": {
     "defaultMessage": " 众聊提及你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "yb93V+": {
+    "defaultMessage": "七日書作者 {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "ydQPbv": {
     "defaultMessage": "進入圍爐",
