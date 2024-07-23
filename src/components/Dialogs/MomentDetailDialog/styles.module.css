@@ -34,6 +34,10 @@
     font-size: var(--text17);
     line-height: 1.75;
   }
+
+  .assets {
+    margin-top: var(--sp12);
+  }
 }
 
 .comments {

@@ -74,7 +74,11 @@ export const MomentDigestDetail = ({
           }}
         />
       )}
-      {hasAssets && !!assets && assets.length > 0 && <Assets moment={moment} />}
+      {hasAssets && !!assets && assets.length > 0 && (
+        <section className={styles.assets}>
+          <Assets moment={moment} />
+        </section>
+      )}
     </section>
   )
 }

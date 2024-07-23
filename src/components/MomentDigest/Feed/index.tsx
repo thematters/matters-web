@@ -113,7 +113,11 @@ export const MomentDigestFeed = ({
             </Expandable>
           </section>
         )}
-        {!!assets && assets.length > 0 && <Assets moment={moment} />}
+        {!!assets && assets.length > 0 && (
+          <section className={styles.assets}>
+            <Assets moment={moment} />
+          </section>
+        )}
         <FooterActions
           moment={moment}
           hasCommentedFollowees={hasCommentedFollowees}
