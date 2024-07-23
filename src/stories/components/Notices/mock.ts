@@ -4,6 +4,7 @@ import {
   MOCK_CIRCLE_ARTICLE,
   MOCK_CIRCLE_COMMENT,
   MOCK_COMMENT,
+  MOCK_MOMENT_LIKE,
   MOCK_PARENT_COMMENT,
   MOCK_TAG,
   MOCK_TRANSACTION,
@@ -217,7 +218,37 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CircleNewDiscussion' as any,
     comment: MOCK_CIRCLE_COMMENT,
   },
-
+  {
+    __typename: 'CommentNotice',
+    id: 'MomentCommentMentionedYouNotice',
+    unread: false,
+    createdAt: '2024-06-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'CommentMentionedYou',
+    comment: {
+      ...MOCK_COMMENT,
+      type: 'moment',
+      state: 'archived',
+    },
+  },
+  {
+    __typename: 'MomentNotice',
+    id: 'MomentLikedNotice',
+    unread: false,
+    createdAt: '2020-07-10T07:29:17.682Z',
+    actors: [MOCK_USER],
+    momentNoticeType: 'MomentLiked',
+    moment: MOCK_MOMENT_LIKE,
+  },
+  {
+    __typename: 'MomentNotice',
+    id: 'MomentMentionedNotice',
+    unread: false,
+    createdAt: '2020-07-10T07:29:17.682Z',
+    actors: [MOCK_USER],
+    momentNoticeType: 'MomentMentionedYou',
+    moment: MOCK_MOMENT_LIKE,
+  },
   /**
    * Comment - Comment
    */

@@ -67,6 +67,9 @@
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/5OvMK": {
+    "defaultMessage": "liked your moment"
+  },
   "/5jk3i": {
     "defaultMessage": "Circle successfully subscribed."
   },
@@ -1828,6 +1831,9 @@
     "defaultMessage": "Last 3 months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "W3tqQO": {
+    "defaultMessage": "[image]"
+  },
   "W66Eyq": {
     "defaultMessage": "Password must be at least 8 characters long, support letter, numbers and symbols.",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
@@ -1925,6 +1931,9 @@
   },
   "Xi40U9": {
     "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
+  },
+  "XiiSGl": {
+    "defaultMessage": "mentioned you in a moment comment at"
   },
   "Xj0yv9": {
     "defaultMessage": "Write Articles"
@@ -2327,6 +2336,9 @@
   "fWDtpq": {
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "fkQOxQ": {
+    "defaultMessage": "mentioned you in moment"
   },
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"

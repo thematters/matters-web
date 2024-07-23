@@ -32,12 +32,6 @@
   }
 }
 
-.imagePlaceholder {
-  width: 6.625rem;
-  height: 6.625rem;
-  background: var(--color-grey-hover);
-}
-
 .assetsPlaceholder {
   position: absolute;
   top: -100%;

@@ -67,6 +67,9 @@
     "defaultMessage": "嘗試將內容寫入 IPFS 網絡中，需要一段時間，請耐心等候。若等候時間過久，可透過發佈文章來加速。",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "/5OvMK": {
+    "defaultMessage": "喜歡你的動態"
+  },
   "/5jk3i": {
     "defaultMessage": "訂閱成功！🎉"
   },
@@ -1828,6 +1831,9 @@
     "defaultMessage": "最近 3 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
+  "W3tqQO": {
+    "defaultMessage": "[圖]"
+  },
   "W66Eyq": {
     "defaultMessage": "密碼需至少 8 位，支持字母、數字及符號的組合。",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
@@ -1925,6 +1931,9 @@
   },
   "Xi40U9": {
     "defaultMessage": "操作無法撤銷，確認刪除選集嗎？"
+  },
+  "XiiSGl": {
+    "defaultMessage": "在動態留言中提及了你"
   },
   "Xj0yv9": {
     "defaultMessage": "寫文章"
@@ -2327,6 +2336,9 @@
   "fWDtpq": {
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "fkQOxQ": {
+    "defaultMessage": "在動態中提及了你"
   },
   "fnv5rD": {
     "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"
