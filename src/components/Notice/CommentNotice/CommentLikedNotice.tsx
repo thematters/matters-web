@@ -10,6 +10,7 @@ import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
+import NoticeMomentTitle from '../NoticeMomentTitle'
 
 const CommentLikedNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
   if (!notice.actors) {
@@ -43,6 +44,9 @@ CommentLikedNotice.fragments = {
           ... on Article {
             ...NoticeArticleTitle
           }
+          ... on Moment {
+            ...NoticeMomentTitle
+          }
         }
       }
     }
@@ -51,6 +55,7 @@ CommentLikedNotice.fragments = {
     ${NoticeComment.fragments.comment}
     ${NoticeArticleTitle.fragments.article}
     ${NoticeDate.fragments.notice}
+    ${NoticeMomentTitle.fragments.moment}
   `,
 }
 
