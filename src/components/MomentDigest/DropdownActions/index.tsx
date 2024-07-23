@@ -79,8 +79,8 @@ const BaseDropdownActions = ({
         <Button
           onClick={openDropdown}
           spacing={[8, 8]}
-          textColor="black"
-          textActiveColor="greyDarker"
+          textColor="greyDarker"
+          textActiveColor="black"
           aria-label={moreActionText}
           aria-haspopup="listbox"
           ref={ref}
