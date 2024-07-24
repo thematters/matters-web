@@ -142,7 +142,6 @@ const Init: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <ReCaptcha action="register" setToken={setTurnstileToken} />
       <Form.Input
         label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
         type="email"
@@ -163,6 +162,8 @@ const Init: React.FC<FormProps> = ({
         spacingBottom="base"
         autoFocus
       />
+
+      <ReCaptcha action="register" setToken={setTurnstileToken} />
     </Form>
   )
 

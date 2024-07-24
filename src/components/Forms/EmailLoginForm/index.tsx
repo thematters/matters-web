@@ -268,8 +268,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const InnerForm = (
     <>
-      <ReCaptcha action="email_login" setToken={setTurnstileToken} />
-
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
@@ -344,6 +342,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
               disabled={sendingCode}
             />
           )}
+
+        <ReCaptcha action="email_login" setToken={setTurnstileToken} />
       </Form>
     </>
   )
