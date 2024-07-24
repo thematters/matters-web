@@ -18,6 +18,7 @@ interface Props {
   update: (params: { content: string }) => void
   placeholder?: string
   setEditor?: (editor: Editor | null) => void
+  onFocused?: () => void
   isFallbackEditor?: boolean
   lockScroll?: boolean
 }
@@ -27,6 +28,7 @@ const CommentEditor: React.FC<Props> = ({
   update,
   placeholder,
   setEditor,
+  onFocused,
   isFallbackEditor,
   lockScroll = true,
 }) => {
@@ -76,6 +78,7 @@ const CommentEditor: React.FC<Props> = ({
           if (setActiveEditor) {
             setActiveEditor(editor)
           }
+          onFocused?.()
         }}
       />
     </div>

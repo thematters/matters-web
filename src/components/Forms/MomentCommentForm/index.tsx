@@ -189,6 +189,18 @@ const MomentCommentForm = ({
     [styles.focus]: editing,
   })
 
+  const hnadleFocus = () => {
+    if (!viewer.isAuthed) {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.momentComment },
+        })
+      )
+      return
+    }
+    setEditing?.(true)
+  }
+
   return (
     <form
       className={formClasses}
@@ -198,18 +210,7 @@ const MomentCommentForm = ({
         defaultMessage: 'Comment',
         id: 'LgbKvU',
       })}
-      onClick={(event) => {
-        if (!viewer.isAuthed) {
-          event.preventDefault()
-          window.dispatchEvent(
-            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-              detail: { trigger: UNIVERSAL_AUTH_TRIGGER.momentComment },
-            })
-          )
-          return
-        }
-        setEditing?.(true)
-      }}
+      onClick={hnadleFocus}
     >
       <section className={contentClasses}>
         <CommentEditor
@@ -222,6 +223,7 @@ const MomentCommentForm = ({
           setEditor={(editor) => {
             setEditor(editor)
           }}
+          onFocused={hnadleFocus}
           lockScroll={false}
         />
       </section>
