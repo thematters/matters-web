@@ -1,0 +1,9 @@
+.container {
+  @mixin flex-center-all;
+
+  margin-top: var(--sp12);
+
+  &:not(.interaction) {
+    display: none;
+  }
+}
