@@ -747,7 +747,7 @@
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "BMGZE2": {
-    "defaultMessage": "作品或评论提及我",
+    "defaultMessage": "提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "BNupBu": {
@@ -1466,7 +1466,7 @@
     "defaultMessage": "无序列表"
   },
   "Opaa0R": {
-    "defaultMessage": "作品被赞赏",
+    "defaultMessage": "拍手和喜欢",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "OpeFTV": {
