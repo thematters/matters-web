@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
-import { datetimeFormat, isUTC8 } from '~/common/utils'
+import { analytics, datetimeFormat, isUTC8 } from '~/common/utils'
 import {
   DotDivider,
   Icon,
@@ -26,7 +26,17 @@ type InfoHeaderProps = {
 }
 
 const ViewMore = ({ link }: { link: string }) => (
-  <a className={styles.viewMore} href={link} target="_blank">
+  <a
+    className={styles.viewMore}
+    href={link}
+    target="_blank"
+    onClick={() => {
+      analytics.trackEvent('click_button', {
+        type: 'campaign_detail_link',
+        pageType: 'campaign_detail',
+      })
+    }}
+  >
     <TextIcon
       icon={<Icon icon={IconRight} size={14} />}
       spacing={4}

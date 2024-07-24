@@ -82,7 +82,7 @@ export interface ClickButtonProp {
     | 'edit_support_copy'
     | 'history_version'
     | 'ipfs'
-    | 'campaign'
+    | 'campaign_detail_entrance'
     | 'edit'
     | 'edited'
     | 'appreciate'
@@ -100,6 +100,8 @@ export interface ClickButtonProp {
     | 'hottest'
     | 'icymi'
     | 'newest'
+    | 'campaign_detail_link'
+    | `campaign_detail_tab_${string}`
   pageType?: PageType
   pageComponent?: PageComponent
 }
@@ -300,7 +302,7 @@ type ArticleFeedType =
   | 'article_detail_author_sidebar_collection'
   | 'article_detail_author_sidebar_author'
   | 'article_detail_author_sidebar_recommendation'
-  | 'campaign_detail'
+  | `campaign_detail_${string}`
 
 type CollectionFeedType =
   | 'user_collection'
@@ -335,7 +337,6 @@ type UserFeedType =
   | 'tag_detail_selected'
   | 'tag_detail_community'
   | 'transaction'
-  | 'campaign_participant'
 
 type TagFeedType =
   | 'all_tags' // all tags page (hottest)
@@ -358,6 +359,7 @@ type PageType =
   | 'user_profile'
   | 'circle_detail'
   | 'edit_draft'
+  | 'campaign_detail'
 
 type PageComponent =
   | 'home_feed_tab'

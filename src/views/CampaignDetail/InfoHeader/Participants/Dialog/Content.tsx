@@ -81,16 +81,16 @@ const ParticipantsDialogContent = () => {
               <List.Item key={cursor}>
                 <UserDigest.Rich
                   user={node}
+                  spacing={[12, 16]}
+                  hasFollow={false}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
-                      type: 'campaign_participant',
+                      type: 'campaign_detail_participant',
                       contentType: 'user',
                       location: i,
                       id: node.id,
                     })
                   }
-                  spacing={[12, 16]}
-                  hasFollow={false}
                 />
               </List.Item>
             ))}
