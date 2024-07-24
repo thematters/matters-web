@@ -1163,10 +1163,6 @@
   "JBWS0c": {
     "defaultMessage": "Link"
   },
-  "JDaJoM": {
-    "defaultMessage": "Article has been bookmarked",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "JFv0yt": {
     "defaultMessage": "Unknown error. Please check wallet and retry."
   },
@@ -1637,6 +1633,10 @@
     "defaultMessage": "Why use Optimism network first?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
+  "SIgm0x": {
+    "defaultMessage": "Articles have been bookmarked",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "SNh1n0": {
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -2003,10 +2003,6 @@
   },
   "YoiwCD": {
     "defaultMessage": "Say something..."
-  },
-  "Yr2Czn": {
-    "defaultMessage": "Article has been collected",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "Z+nZlT": {
     "defaultMessage": "Content Feed"
@@ -2431,6 +2427,10 @@
   "hYG5fb": {
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "hgtWIO": {
+    "defaultMessage": "Articles have been collected",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "hk2aiz": {
     "defaultMessage": "followed your circle",

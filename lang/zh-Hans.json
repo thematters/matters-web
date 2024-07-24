@@ -1163,10 +1163,6 @@
   "JBWS0c": {
     "defaultMessage": "链接"
   },
-  "JDaJoM": {
-    "defaultMessage": "作品被收藏",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "JFv0yt": {
     "defaultMessage": "未知错误，请确认你的钱包并重新尝试"
   },
@@ -1637,6 +1633,10 @@
     "defaultMessage": "为什么先采用 Optimism ?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
+  "SIgm0x": {
+    "defaultMessage": "作品被收藏",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "SNh1n0": {
     "defaultMessage": "查看名单",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -2003,10 +2003,6 @@
   },
   "YoiwCD": {
     "defaultMessage": "说点什么..."
-  },
-  "Yr2Czn": {
-    "defaultMessage": "作品被关联",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "Z+nZlT": {
     "defaultMessage": "内容订阅"
@@ -2431,6 +2427,10 @@
   "hYG5fb": {
     "defaultMessage": "人追踪",
     "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "hgtWIO": {
+    "defaultMessage": "作品被关联",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "hk2aiz": {
     "defaultMessage": "追踪了你的围炉",

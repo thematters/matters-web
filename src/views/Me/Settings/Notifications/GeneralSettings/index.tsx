@@ -194,12 +194,12 @@ const NotificationsGeneralSettings = () => {
           }
         />
 
-        {/* Article has been bookmarked */}
+        {/* Articles has been bookmarked */}
         <TableView.Cell
           title={
             <FormattedMessage
-              defaultMessage="Article has been bookmarked"
-              id="JDaJoM"
+              defaultMessage="Articles have been bookmarked"
+              id="SIgm0x"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -208,8 +208,8 @@ const NotificationsGeneralSettings = () => {
               name="notification-articles-bookmarked"
               label={
                 <FormattedMessage
-                  defaultMessage="Article has been bookmarked"
-                  id="JDaJoM"
+                  defaultMessage="Articles have been bookmarked"
+                  id="SIgm0x"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
@@ -219,12 +219,12 @@ const NotificationsGeneralSettings = () => {
           }
         />
 
-        {/* Article has been collected */}
+        {/* Articles have been collected */}
         <TableView.Cell
           title={
             <FormattedMessage
-              defaultMessage="Article has been collected"
-              id="Yr2Czn"
+              defaultMessage="Articles have been collected"
+              id="hgtWIO"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -233,8 +233,8 @@ const NotificationsGeneralSettings = () => {
               name="notification-article-collected"
               label={
                 <FormattedMessage
-                  defaultMessage="Article has been collected"
-                  id="Yr2Czn"
+                  defaultMessage="Articles have been collected"
+                  id="hgtWIO"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
