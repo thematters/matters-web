@@ -1,8 +1,10 @@
-import { useContext, useRef } from 'react'
+import classNames from 'classnames'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toast, ViewerContext } from '~/components'
 
+import styles from './styles.module.css'
 import { Turnstile, TurnstileInstance } from './Turnstile'
 
 export * from './Turnstile/types'
@@ -22,6 +24,7 @@ export const ReCaptcha: React.FC<ReCaptchaProps> = ({
 }) => {
   const viewer = useContext(ViewerContext)
   const turnstileRef = useRef<TurnstileInstance>(null)
+  const [interaction, setInteraction] = useState(false)
 
   const onError = () => {
     if (silence) return
@@ -36,27 +39,39 @@ export const ReCaptcha: React.FC<ReCaptchaProps> = ({
     })
   }
 
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.interaction]: interaction,
+  })
+
   return (
-    <Turnstile
-      ref={turnstileRef}
-      siteKey={siteKey}
-      options={{
-        action,
-        cData: `user-group-${viewer.info.group}`,
-        size: 'invisible',
-      }}
-      scriptOptions={{
-        compat: 'recaptcha',
-        appendTo: 'body',
-      }}
-      onSuccess={(token) => {
-        if (setToken) {
-          setToken(token)
-        }
-      }}
-      onError={onError}
-      onUnsupported={onError}
-      onExpire={() => turnstileRef.current?.reset()}
-    />
+    <div className={containerClasses}>
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={siteKey}
+        options={{
+          action,
+          cData: `user-group-${viewer.info.group}`,
+          size: 'normal',
+          theme: 'light',
+          appearance: 'interaction-only',
+        }}
+        scriptOptions={{
+          compat: 'recaptcha',
+          appendTo: 'body',
+        }}
+        onBeforeInteractive={() => {
+          setInteraction(true)
+        }}
+        onSuccess={(token) => {
+          if (setToken) {
+            setToken(token)
+          }
+        }}
+        onError={onError}
+        onUnsupported={onError}
+        onExpire={() => turnstileRef.current?.reset()}
+      />
+    </div>
   )
 }
