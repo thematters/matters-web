@@ -67,8 +67,8 @@
   @mixin border-top-grey-light;
   @mixin flex-center-start;
 
-  gap: var(--sp9);
-  padding: var(--sp16) var(--sp24) var(--sp16) var(--sp13);
+  gap: var(--sp10);
+  padding: var(--sp16) var(--sp24) var(--sp16) var(--sp14);
 
   &.editing {
     padding: var(--sp16) var(--sp24);
@@ -77,6 +77,6 @@
   & .likeButton {
     @mixin flex-center-all;
 
-    padding: 0 var(--sp11);
+    padding: 0 var(--sp10);
   }
 }
