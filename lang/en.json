@@ -1633,6 +1633,10 @@
     "defaultMessage": "Why use Optimism network first?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
+  "SIgm0x": {
+    "defaultMessage": "Articles have been bookmarked",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "SNh1n0": {
     "defaultMessage": "View Members",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1861,10 +1865,6 @@
   "WSUAwk": {
     "defaultMessage": "Add to Featured",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
-  },
-  "Wg0ZvI": {
-    "defaultMessage": "Articles has been bookmarked",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "WiGHyF": {
     "defaultMessage": "Web Monetization standard"
@@ -2428,6 +2428,10 @@
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hgtWIO": {
+    "defaultMessage": "Articles have been collected",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2581,10 +2585,6 @@
   "l0/EvT": {
     "defaultMessage": "Last step: Set Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "l02bPO": {
-    "defaultMessage": "Articles has been collected",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "l2eEyp": {
     "defaultMessage": "Transaction Password successfully changed."

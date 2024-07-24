@@ -747,7 +747,7 @@
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
   "BMGZE2": {
-    "defaultMessage": "作品或評論提及我",
+    "defaultMessage": "提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "BNupBu": {
@@ -1466,7 +1466,7 @@
     "defaultMessage": "無序清單"
   },
   "Opaa0R": {
-    "defaultMessage": "作品被讚賞",
+    "defaultMessage": "拍手和喜歡",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "OpeFTV": {
@@ -1632,6 +1632,10 @@
   "SHWkv8": {
     "defaultMessage": "為什麼採用 Optimism？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "SIgm0x": {
+    "defaultMessage": "作品被收藏",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "SNh1n0": {
     "defaultMessage": "查看名單",
@@ -1861,10 +1865,6 @@
   "WSUAwk": {
     "defaultMessage": "添加到精選",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
-  },
-  "Wg0ZvI": {
-    "defaultMessage": "作品被收藏",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "WiGHyF": {
     "defaultMessage": "Web Monetization 標準"
@@ -2428,6 +2428,10 @@
     "defaultMessage": "人追蹤",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
+  "hgtWIO": {
+    "defaultMessage": "作品被關聯",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "追蹤了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2581,10 +2585,6 @@
   "l0/EvT": {
     "defaultMessage": "最後一步：設置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "l02bPO": {
-    "defaultMessage": "作品被關聯",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "l2eEyp": {
     "defaultMessage": "交易密碼重置成功"
