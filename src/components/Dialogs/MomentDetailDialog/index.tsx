@@ -21,12 +21,7 @@ const BaseMomentDetailDialog = ({
     <>
       {children({ openDialog })}
 
-      <Dialog
-        isOpen={show}
-        onDismiss={closeDialog}
-        fixedWidth={false}
-        dismissOnClickOutside={false}
-      >
+      <Dialog isOpen={show} onDismiss={closeDialog} fixedWidth={false}>
         <DynamicContent shortHash={shortHash} closeDialog={closeDialog} />
       </Dialog>
     </>
