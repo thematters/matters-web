@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { toast, ViewerContext } from '~/components'
 
+import styles from './styles.module.css'
 import { Turnstile, TurnstileInstance } from './Turnstile'
 
 export * from './Turnstile/types'
@@ -37,26 +38,30 @@ export const ReCaptcha: React.FC<ReCaptchaProps> = ({
   }
 
   return (
-    <Turnstile
-      ref={turnstileRef}
-      siteKey={siteKey}
-      options={{
-        action,
-        cData: `user-group-${viewer.info.group}`,
-        size: 'normal',
-      }}
-      scriptOptions={{
-        compat: 'recaptcha',
-        appendTo: 'body',
-      }}
-      onSuccess={(token) => {
-        if (setToken) {
-          setToken(token)
-        }
-      }}
-      onError={onError}
-      onUnsupported={onError}
-      onExpire={() => turnstileRef.current?.reset()}
-    />
+    <div className={styles.container}>
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={siteKey}
+        options={{
+          action,
+          cData: `user-group-${viewer.info.group}`,
+          size: 'normal',
+          theme: 'light',
+          appearance: 'interaction-only',
+        }}
+        scriptOptions={{
+          compat: 'recaptcha',
+          appendTo: 'body',
+        }}
+        onSuccess={(token) => {
+          if (setToken) {
+            setToken(token)
+          }
+        }}
+        onError={onError}
+        onUnsupported={onError}
+        onExpire={() => turnstileRef.current?.reset()}
+      />
+    </div>
   )
 }
