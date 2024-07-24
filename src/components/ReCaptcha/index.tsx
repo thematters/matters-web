@@ -43,7 +43,7 @@ export const ReCaptcha: React.FC<ReCaptchaProps> = ({
       options={{
         action,
         cData: `user-group-${viewer.info.group}`,
-        size: 'invisible',
+        size: 'normal',
       }}
       scriptOptions={{
         compat: 'recaptcha',
