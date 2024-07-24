@@ -1,4 +1,5 @@
-import { useContext, useRef } from 'react'
+import classNames from 'classnames'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toast, ViewerContext } from '~/components'
@@ -23,6 +24,7 @@ export const ReCaptcha: React.FC<ReCaptchaProps> = ({
 }) => {
   const viewer = useContext(ViewerContext)
   const turnstileRef = useRef<TurnstileInstance>(null)
+  const [interaction, setInteraction] = useState(false)
 
   const onError = () => {
     if (silence) return
@@ -37,8 +39,13 @@ export const ReCaptcha: React.FC<ReCaptchaProps> = ({
     })
   }
 
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.interaction]: interaction,
+  })
+
   return (
-    <div className={styles.container}>
+    <div className={containerClasses}>
       <Turnstile
         ref={turnstileRef}
         siteKey={siteKey}
@@ -52,6 +59,9 @@ export const ReCaptcha: React.FC<ReCaptchaProps> = ({
         scriptOptions={{
           compat: 'recaptcha',
           appendTo: 'body',
+        }}
+        onBeforeInteractive={() => {
+          setInteraction(true)
         }}
         onSuccess={(token) => {
           if (setToken) {
