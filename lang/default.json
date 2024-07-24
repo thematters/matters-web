@@ -1163,6 +1163,10 @@
   "JBWS0c": {
     "defaultMessage": "Link"
   },
+  "JDaJoM": {
+    "defaultMessage": "Article has been bookmarked",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "JFv0yt": {
     "defaultMessage": "Unknown error. Please check wallet and retry."
   },
@@ -1999,6 +2003,10 @@
   },
   "YoiwCD": {
     "defaultMessage": "Say something..."
+  },
+  "Yr2Czn": {
+    "defaultMessage": "Article has been collected",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "Z+nZlT": {
     "defaultMessage": "Content Feed"
@@ -3176,10 +3184,6 @@
     "defaultMessage": "Learn more",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
-  "wh5Xgf": {
-    "defaultMessage": "Content has been bookmarked",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "wicnP9": {
     "defaultMessage": "Visa / Mastercard / American Express payment",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
@@ -3311,10 +3315,6 @@
   },
   "zE51j6": {
     "defaultMessage": "Failed to publish, please try again."
-  },
-  "zHDrpp": {
-    "defaultMessage": "Content has been collected",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "zKOr2x": {
     "defaultMessage": "Conversion Rate of Followers",

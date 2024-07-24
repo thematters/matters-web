@@ -1163,6 +1163,10 @@
   "JBWS0c": {
     "defaultMessage": "链接"
   },
+  "JDaJoM": {
+    "defaultMessage": "作品被收藏",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "JFv0yt": {
     "defaultMessage": "未知错误，请确认你的钱包并重新尝试"
   },
@@ -1999,6 +2003,10 @@
   },
   "YoiwCD": {
     "defaultMessage": "说点什么..."
+  },
+  "Yr2Czn": {
+    "defaultMessage": "作品被关联",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "Z+nZlT": {
     "defaultMessage": "内容订阅"
@@ -3176,10 +3184,6 @@
     "defaultMessage": "了解更多",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
   },
-  "wh5Xgf": {
-    "defaultMessage": "作品被收藏",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "wicnP9": {
     "defaultMessage": "Visa / Mastercard / American Express 支付",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
@@ -3311,10 +3315,6 @@
   },
   "zE51j6": {
     "defaultMessage": "发布失败"
-  },
-  "zHDrpp": {
-    "defaultMessage": "作品被关联",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "zKOr2x": {
     "defaultMessage": "已追踪用户占总观看人数比例",

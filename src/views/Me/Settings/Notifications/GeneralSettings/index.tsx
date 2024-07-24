@@ -194,12 +194,12 @@ const NotificationsGeneralSettings = () => {
           }
         />
 
-        {/* Content has been bookmarked */}
+        {/* Article has been bookmarked */}
         <TableView.Cell
           title={
             <FormattedMessage
-              defaultMessage="Content has been bookmarked"
-              id="wh5Xgf"
+              defaultMessage="Article has been bookmarked"
+              id="JDaJoM"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -208,8 +208,8 @@ const NotificationsGeneralSettings = () => {
               name="notification-articles-bookmarked"
               label={
                 <FormattedMessage
-                  defaultMessage="Content has been bookmarked"
-                  id="wh5Xgf"
+                  defaultMessage="Article has been bookmarked"
+                  id="JDaJoM"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
@@ -219,12 +219,12 @@ const NotificationsGeneralSettings = () => {
           }
         />
 
-        {/* Content has been collected */}
+        {/* Article has been collected */}
         <TableView.Cell
           title={
             <FormattedMessage
-              defaultMessage="Content has been collected"
-              id="zHDrpp"
+              defaultMessage="Article has been collected"
+              id="Yr2Czn"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
@@ -233,8 +233,8 @@ const NotificationsGeneralSettings = () => {
               name="notification-article-collected"
               label={
                 <FormattedMessage
-                  defaultMessage="Content has been collected"
-                  id="zHDrpp"
+                  defaultMessage="Article has been collected"
+                  id="Yr2Czn"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
