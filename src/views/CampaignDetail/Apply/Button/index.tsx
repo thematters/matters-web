@@ -25,7 +25,7 @@ const ApplyCampaignButton = ({
 }: ApplyCampaignButtonProps) => {
   const viewer = useContext(ViewerContext)
   const now = new Date()
-  const { end: appEnd } = campaign.applicationPeriod || {}
+  const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
   const applicationState = campaign.application?.state
   const appliedAt = campaign.application?.createdAt
@@ -35,6 +35,7 @@ const ApplyCampaignButton = ({
   const isNotApplied = !applicationState
   const isAppliedDuringPeriod =
     appliedAt && new Date(appliedAt) <= new Date(appEnd)
+  const isApplicationStarted = now >= new Date(appStart)
 
   /**
    * Rejected
@@ -110,7 +111,7 @@ const ApplyCampaignButton = ({
       <Button
         onClick={onClick}
         size={['100%', '3rem']}
-        disabled={isPending}
+        disabled={isPending || !isApplicationStarted}
         borderWidth="sm"
         borderColor={isInApplicationPeriod ? 'green' : 'black'}
         bgColor={isInApplicationPeriod && isNotApplied ? 'green' : undefined}
@@ -135,7 +136,7 @@ const ApplyCampaignButton = ({
         size={[null, '1.875rem']}
         spacing={[0, 20]}
         borderWidth="sm"
-        disabled={isPending}
+        disabled={isPending || !isApplicationStarted}
         textColor={isInApplicationPeriod ? 'white' : 'black'}
         bgColor={isInApplicationPeriod ? 'green' : undefined}
         borderColor={isInApplicationPeriod ? undefined : 'greyLight'}
