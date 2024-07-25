@@ -440,7 +440,7 @@
     "defaultMessage": "密码"
   },
   "5y5rID": {
-    "defaultMessage": "我们将尽快审核你的申请，敬请期待活动开跑！"
+    "defaultMessage": "我们将尽快处理你的申请，敬请期待活动开跑！"
   },
   "6+eeJ4": {
     "defaultMessage": "可使用小写英文、数字及下划线",
@@ -1546,7 +1546,7 @@
     "defaultMessage": "换一批"
   },
   "Pq/7m5": {
-    "defaultMessage": "晚鸟审核中",
+    "defaultMessage": "晚鸟参与处理中",
     "description": "type:join"
   },
   "PtV68+": {
@@ -2142,7 +2142,7 @@
     "defaultMessage": "我的创作"
   },
   "al5/yQ": {
-    "defaultMessage": "晚鸟审核通过"
+    "defaultMessage": "晚鸟参与通过"
   },
   "aqX2Bt": {
     "defaultMessage": "前往首页",
@@ -2536,7 +2536,7 @@
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "jLkKbI": {
-    "defaultMessage": "报名审核中",
+    "defaultMessage": "报名处理中",
     "description": "type:apply"
   },
   "jiB0Z2": {
@@ -2685,7 +2685,7 @@
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m1wKuC": {
-    "defaultMessage": "投稿七日书活动"
+    "defaultMessage": "参与七日书活动"
   },
   "m4GG4b": {
     "defaultMessage": "删除选集"

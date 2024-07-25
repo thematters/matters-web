@@ -440,7 +440,7 @@
     "defaultMessage": "密碼"
   },
   "5y5rID": {
-    "defaultMessage": "我們將盡快審核你的申請，敬請期待活動開跑！"
+    "defaultMessage": "我們將盡快處理你的申請，敬請期待活動開跑！"
   },
   "6+eeJ4": {
     "defaultMessage": "可使用小寫英文、數字及下劃線",
@@ -1546,7 +1546,7 @@
     "defaultMessage": "換一批"
   },
   "Pq/7m5": {
-    "defaultMessage": "晚鳥審核中",
+    "defaultMessage": "晚鳥參與處理中",
     "description": "type:join"
   },
   "PtV68+": {
@@ -2142,7 +2142,7 @@
     "defaultMessage": "我的創作"
   },
   "al5/yQ": {
-    "defaultMessage": "晚鳥審核通過"
+    "defaultMessage": "晚鳥參與通過"
   },
   "aqX2Bt": {
     "defaultMessage": "前往首頁",
@@ -2536,7 +2536,7 @@
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "jLkKbI": {
-    "defaultMessage": "報名審核中",
+    "defaultMessage": "報名處理中",
     "description": "type:apply"
   },
   "jiB0Z2": {
@@ -2685,7 +2685,7 @@
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m1wKuC": {
-    "defaultMessage": "投稿七日書活動"
+    "defaultMessage": "參與七日書活動"
   },
   "m4GG4b": {
     "defaultMessage": "刪除選集"
