@@ -21,8 +21,8 @@ const VIEWER_NOTIFICATIONS_GENERAL_SETTINGS = gql`
           email
           mention
           userNewFollower
-          articleNewComment
-          articleNewAppreciation
+          newComment
+          newLike
           articleNewSubscription
           articleNewCollected
         }
@@ -43,8 +43,8 @@ const UPDATE_VIEWER_NOTIFICATIONS_GENERAL = gql`
           email
           mention
           userNewFollower
-          articleNewComment
-          articleNewAppreciation
+          newComment
+          newLike
           articleNewSubscription
           articleNewCollected
         }
@@ -105,7 +105,7 @@ const NotificationsGeneralSettings = () => {
           }
           right={
             <Switch
-              name="nofitication-new-followers"
+              name="notification-new-followers"
               label={
                 <FormattedMessage
                   defaultMessage="New followers"
@@ -130,7 +130,7 @@ const NotificationsGeneralSettings = () => {
           }
           right={
             <Switch
-              name="nofitication-new-likes"
+              name="notification-new-likes"
               label={
                 <FormattedMessage
                   defaultMessage="New likes"
@@ -138,8 +138,8 @@ const NotificationsGeneralSettings = () => {
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
-              checked={settings.articleNewAppreciation}
-              onChange={() => toggle('articleNewAppreciation')}
+              checked={settings.newLike}
+              onChange={() => toggle('newLike')}
             />
           }
         />
@@ -155,7 +155,7 @@ const NotificationsGeneralSettings = () => {
           }
           right={
             <Switch
-              name="nofitication-new-comments-and-replies"
+              name="notification-new-comments-and-replies"
               label={
                 <FormattedMessage
                   defaultMessage="Comments and replies"
@@ -163,8 +163,8 @@ const NotificationsGeneralSettings = () => {
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
-              checked={settings.articleNewComment}
-              onChange={() => toggle('articleNewComment')}
+              checked={settings.newComment}
+              onChange={() => toggle('newComment')}
             />
           }
         />
@@ -180,7 +180,7 @@ const NotificationsGeneralSettings = () => {
           }
           right={
             <Switch
-              name="nofitication-meniton-me"
+              name="notification-mention-me"
               label={
                 <FormattedMessage
                   defaultMessage="Mention me"
@@ -198,18 +198,18 @@ const NotificationsGeneralSettings = () => {
         <TableView.Cell
           title={
             <FormattedMessage
-              defaultMessage="Articles has been bookmarked"
-              id="Wg0ZvI"
+              defaultMessage="Articles have been bookmarked"
+              id="SIgm0x"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
           right={
             <Switch
-              name="nofitication-articles-bookmarked"
+              name="notification-articles-bookmarked"
               label={
                 <FormattedMessage
-                  defaultMessage="Articles has been bookmarked"
-                  id="Wg0ZvI"
+                  defaultMessage="Articles have been bookmarked"
+                  id="SIgm0x"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
@@ -219,22 +219,22 @@ const NotificationsGeneralSettings = () => {
           }
         />
 
-        {/* Articles has been collected */}
+        {/* Articles have been collected */}
         <TableView.Cell
           title={
             <FormattedMessage
-              defaultMessage="Articles has been collected"
-              id="l02bPO"
+              defaultMessage="Articles have been collected"
+              id="hgtWIO"
               description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
             />
           }
           right={
             <Switch
-              name="nofitication-article-collected"
+              name="notification-article-collected"
               label={
                 <FormattedMessage
-                  defaultMessage="Articles has been collected"
-                  id="l02bPO"
+                  defaultMessage="Articles have been collected"
+                  id="hgtWIO"
                   description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
                 />
               }
