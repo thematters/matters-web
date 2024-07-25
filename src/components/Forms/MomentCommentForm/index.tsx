@@ -189,7 +189,7 @@ const MomentCommentForm = ({
     [styles.focus]: editing,
   })
 
-  const hnadleFocus = () => {
+  const handleFocus = () => {
     if (!viewer.isAuthed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
@@ -210,7 +210,7 @@ const MomentCommentForm = ({
         defaultMessage: 'Comment',
         id: 'LgbKvU',
       })}
-      onClick={hnadleFocus}
+      onClick={handleFocus}
     >
       <section className={contentClasses}>
         <CommentEditor
@@ -223,7 +223,7 @@ const MomentCommentForm = ({
           setEditor={(editor) => {
             setEditor(editor)
           }}
-          onFocused={hnadleFocus}
+          onFocused={handleFocus}
           lockScroll={false}
         />
       </section>
