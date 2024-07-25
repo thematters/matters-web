@@ -53,10 +53,12 @@ const MomentNewCommentNotice = ({
         />
       }
       content={<NoticeComment comment={notice.comment} />}
-      title={<NoticeMomentTitle
-        title={`${title} ${images}`}
-        moment={commentMoment}
-      />}
+      title={
+        <NoticeMomentTitle
+          title={`${title} ${images}`}
+          moment={commentMoment}
+        />
+      }
       testId={TEST_ID.NOTICE_ARTICLE_NEW_COMMENT}
     />
   )
