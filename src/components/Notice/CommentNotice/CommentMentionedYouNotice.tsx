@@ -61,8 +61,8 @@ const CommentMentionedYouNotice = ({
           notice={notice}
           action={
             <FormattedMessage
-              defaultMessage="mentioned you in a moment comment at"
-              id="XiiSGl"
+              defaultMessage="mentioned you in a moment comment at {commentMoment}"
+              id="X9a1XW"
               values={{
                 commentMoment: (
                   <NoticeMomentTitle

@@ -1890,6 +1890,9 @@
   "WxhsrG": {
     "defaultMessage": "請先綁定電子郵件"
   },
+  "X9a1XW": {
+    "defaultMessage": "在 {commentMoment} 留言中提到了你"
+  },
   "XH1s8E": {
     "defaultMessage": "刪除{commentType}",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1939,9 +1942,6 @@
   },
   "Xi40U9": {
     "defaultMessage": "操作無法撤銷，確認刪除選集嗎？"
-  },
-  "XiiSGl": {
-    "defaultMessage": "在動態留言中提及了你"
   },
   "Xj0yv9": {
     "defaultMessage": "寫文章"

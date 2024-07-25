@@ -1890,6 +1890,9 @@
   "WxhsrG": {
     "defaultMessage": "Please connect email"
   },
+  "X9a1XW": {
+    "defaultMessage": "mentioned you in a moment comment at {commentMoment}"
+  },
   "XH1s8E": {
     "defaultMessage": "Delete {commentType}",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1939,9 +1942,6 @@
   },
   "Xi40U9": {
     "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
-  },
-  "XiiSGl": {
-    "defaultMessage": "mentioned you in a moment comment at"
   },
   "Xj0yv9": {
     "defaultMessage": "Write Articles"
