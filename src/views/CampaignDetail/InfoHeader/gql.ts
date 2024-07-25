@@ -8,8 +8,9 @@ export const fragments = {
     public: gql`
       fragment InfoHeaderCampaignPublic on WritingChallenge {
         id
-        name
-        description
+        nameZhHant: name(input: { language: zh_hant })
+        nameZhHans: name(input: { language: zh_hans })
+        nameEn: name(input: { language: en })
         cover
         link
         applicationPeriod {

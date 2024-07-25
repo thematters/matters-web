@@ -84,7 +84,7 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
     }
 
     analytics.trackEvent('load_more', {
-      type: 'campaign_detail',
+      type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
       location: edges?.length || 0,
     })
 
@@ -115,8 +115,8 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
         icon={<Icon icon={IconRead} size={88} />}
         description={
           <FormattedMessage
-            defaultMessage="還沒有人投稿，晚點再來瞧瞧吧！"
-            id="ALzRKc"
+            defaultMessage="No one has published yet, check back later!"
+            id="TZgskS"
           />
         }
       />
@@ -133,7 +133,7 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
                 article={node}
                 onClick={() => {
                   analytics.trackEvent('click_feed', {
-                    type: 'campaign_detail',
+                    type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
                     contentType: 'article',
                     location: i,
                     id: node.id,
@@ -141,7 +141,7 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
                 }}
                 onClickAuthor={() => {
                   analytics.trackEvent('click_feed', {
-                    type: 'campaign_detail',
+                    type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
                     contentType: 'user',
                     location: i,
                     id: node.author.id,

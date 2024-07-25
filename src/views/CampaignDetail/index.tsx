@@ -1,9 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
+import { useContext } from 'react'
 
 import { toPath } from '~/common/utils'
 import {
   EmptyLayout,
   Head,
+  LanguageContext,
   Layout,
   SpinnerBlock,
   Throw404,
@@ -19,6 +21,7 @@ import InfoHeader from './InfoHeader'
 import SideParticipants from './SideParticipants'
 
 const CampaignDetail = () => {
+  const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
 
@@ -61,9 +64,25 @@ const CampaignDetail = () => {
   return (
     <Layout.Main aside={<SideParticipants campaign={campaign} />}>
       <Head
-        title={campaign.name}
+        title={
+          campaign[
+            lang === 'zh_hans'
+              ? 'nameZhHans'
+              : lang === 'zh_hant'
+              ? 'nameZhHant'
+              : 'nameEn'
+          ]
+        }
         path={path.href}
-        description={campaign.description}
+        description={
+          campaign[
+            lang === 'zh_hans'
+              ? 'descriptionZhHans'
+              : lang === 'zh_hant'
+              ? 'descriptionZhHant'
+              : 'descriptionEn'
+          ]
+        }
         image={campaign.cover}
       />
 

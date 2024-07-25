@@ -4,6 +4,11 @@ export const URL_FRAGMENT = {
 
 export const URL_USER_PROFILE = {
   OPEN_NOMAD_BADGE_DIALOG: { key: 'dialog', value: 'nomad-badge' },
+  OPEN_GRAND_BADGE_DIALOG: { key: 'dialog', value: 'grand-badge' },
+  GRAND_BADGE_DIALOG_STEP: {
+    key: 'step',
+    value: 'congrats',
+  },
 }
 
 export const URL_ME_SETTINGS = {

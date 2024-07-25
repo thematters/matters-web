@@ -38,6 +38,10 @@
   line-height: 2.25rem;
 }
 
+.viewMore {
+  font-size: 0;
+}
+
 .meta {
   @mixin flex-center-space-between;
 
@@ -49,15 +53,37 @@
     @mixin flex-start-center;
   }
 
+  & .dot,
   & .viewMore {
-    font-size: 0;
+    display: none;
+
+    @media (--md-up) {
+      display: inline;
+    }
+  }
+
+  & .period {
+    display: inline-block;
   }
 
   & .right {
     display: none;
 
-    @media (--sm-up) {
+    @media (--md-up) {
       display: block;
+    }
+  }
+}
+
+.extra {
+  @mixin flex-center-start;
+
+  margin-top: var(--sp8);
+
+  @media (--sm-up) {
+    & .dot,
+    & .viewMore {
+      display: none;
     }
   }
 }
@@ -65,7 +91,7 @@
 .mobileApply {
   margin-top: var(--sp24);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     display: none;
   }
 }

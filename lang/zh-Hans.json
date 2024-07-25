@@ -439,6 +439,9 @@
   "5sg7KC": {
     "defaultMessage": "密码"
   },
+  "5y5rID": {
+    "defaultMessage": "我们将尽快处理你的申请，敬请期待活动开跑！"
+  },
   "6+eeJ4": {
     "defaultMessage": "可使用小写英文、数字及下划线",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -568,9 +571,6 @@
     "defaultMessage": "无结果",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
-  "7m2h5x": {
-    "defaultMessage": "陪跑参与"
-  },
   "7oytv9": {
     "defaultMessage": "（修改过）"
   },
@@ -581,6 +581,9 @@
   "7ykJ+l": {
     "defaultMessage": "暂无评论",
     "description": "src/components/Empty/EmptyComment.tsx"
+  },
+  "8+Z5E9": {
+    "defaultMessage": "纪念你参与「七日书」并完成七天书写"
   },
   "84VOdX": {
     "defaultMessage": "取消代表作",
@@ -653,6 +656,9 @@
   "9J0iCw": {
     "defaultMessage": "已注销用户"
   },
+  "9OPnTz": {
+    "defaultMessage": "系统或连线异常，请刷新页面后重新点击晚鸟参与"
+  },
   "9SXN7s": {
     "defaultMessage": "没有更多",
     "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
@@ -707,9 +713,6 @@
   },
   "AGDFGs": {
     "defaultMessage": "歧视、侮辱或仇恨"
-  },
-  "ALzRKc": {
-    "defaultMessage": "還沒有人投稿，晚點再來瞧瞧吧！"
   },
   "ANA7sk": {
     "defaultMessage": "主理",
@@ -772,15 +775,15 @@
   "Bc20la": {
     "defaultMessage": "天"
   },
+  "BhRxYr": {
+    "defaultMessage": "自由写纪念徽章"
+  },
   "Bjdw71": {
     "defaultMessage": "目前总追踪人数",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "Bkx6Gk": {
     "defaultMessage": "切换网络中…"
-  },
-  "Bmy3Ms": {
-    "defaultMessage": "活动时间："
   },
   "BnMru1": {
     "defaultMessage": "语言",
@@ -848,6 +851,9 @@
   },
   "D9R/ol": {
     "defaultMessage": "将作品加入围炉，让更多人一起参与讨论"
+  },
+  "D9tEst": {
+    "defaultMessage": "马特市建筑师"
   },
   "DP3yqI": {
     "defaultMessage": "支持人数"
@@ -940,6 +946,9 @@
     "defaultMessage": "你无权限进行该操作",
     "description": "FORBIDDEN_BY_STATE"
   },
+  "ErV/vT": {
+    "defaultMessage": "晚鸟参与七日书"
+  },
   "F3zk7E": {
     "defaultMessage": "（草稿删除后无法恢复）",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
@@ -952,9 +961,6 @@
     "defaultMessage": "取消收藏",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
-  "FM+YIG": {
-    "defaultMessage": "陪跑参与活动"
-  },
   "FMIIAZ": {
     "defaultMessage": "此为历史版本和 IPFS 入口查阅区，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -966,6 +972,9 @@
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 网络，立即切换？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "FYeEw1": {
+    "defaultMessage": "报名期{tz}："
   },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
@@ -1059,6 +1068,9 @@
   },
   "HAlOn1": {
     "defaultMessage": "用户名"
+  },
+  "HB2VOx": {
+    "defaultMessage": "系统或连线异常，请刷新页面后重新点击报名参加"
   },
   "HBxXD/": {
     "defaultMessage": "版权声明"
@@ -1323,6 +1335,9 @@
   "LnesNr": {
     "defaultMessage": "移除协作者成功"
   },
+  "LoQ3BF": {
+    "defaultMessage": "这枚徽章代表你完成了七天写作，恭喜走完这趟意义非凡的写作之旅！"
+  },
   "Lp6CiR": {
     "defaultMessage": "设置 - 其他",
     "description": "src/views/Me/Settings/Misc/index.tsx"
@@ -1371,9 +1386,6 @@
     "defaultMessage": "精选过去 24 小时与你有关的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
-  "MnTJ0Q": {
-    "defaultMessage": "报名期："
-  },
   "MoyOR+": {
     "defaultMessage": "设置 - 围炉通知",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
@@ -1383,9 +1395,6 @@
   },
   "N2IrpM": {
     "defaultMessage": "确认"
-  },
-  "N3xGd5": {
-    "defaultMessage": "我们将尽快审核你的申请，敬请期待活动开跑！"
   },
   "N6PWfU": {
     "defaultMessage": "忘记密码"
@@ -1536,6 +1545,10 @@
   "Pp/0po": {
     "defaultMessage": "换一批"
   },
+  "Pq/7m5": {
+    "defaultMessage": "晚鸟参与处理中",
+    "description": "type:join"
+  },
   "PtV68+": {
     "defaultMessage": "邮箱或密码错误",
     "description": "USER_EMAIL_NOT_FOUND"
@@ -1560,6 +1573,9 @@
   "QZXKhG": {
     "defaultMessage": "设置围炉网址（创建后不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "QbjADp": {
+    "defaultMessage": "种子用户"
   },
   "QfVedX": {
     "defaultMessage": "插入分隔线"
@@ -1649,10 +1665,6 @@
     "defaultMessage": "最新",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
-  "SX+8mP": {
-    "defaultMessage": "陪跑审核中",
-    "description": "type:participate"
-  },
   "SYfw+k": {
     "defaultMessage": "确认储值",
     "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
@@ -1677,6 +1689,9 @@
   "Sep44m": {
     "defaultMessage": "提现",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "Sfql0+": {
+    "defaultMessage": "恭喜获得七日书大满贯"
   },
   "SuRTsQ": {
     "defaultMessage": "注册 ISCN"
@@ -1724,6 +1739,9 @@
   "TX5UzL": {
     "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
+  "TZgskS": {
+    "defaultMessage": "还没有人投稿，晚点再来瞧瞧吧！"
   },
   "TcTp+J": {
     "defaultMessage": "图片上传成功"
@@ -1810,10 +1828,6 @@
   "VZsE96": {
     "defaultMessage": "选集名称"
   },
-  "VaB2pS": {
-    "defaultMessage": "陪跑参与",
-    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
-  },
   "VeEfHm": {
     "defaultMessage": "草稿",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -1849,6 +1863,9 @@
   "W0sZaX": {
     "defaultMessage": "最近 3 个月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "W3hNBA": {
+    "defaultMessage": "七日书大满贯"
   },
   "W66Eyq": {
     "defaultMessage": "密码需至少 8 位，支持字母、数字及符号的组合。",
@@ -2090,6 +2107,9 @@
     "defaultMessage": "官方文档",
     "description": "src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
   },
+  "aKEiNd": {
+    "defaultMessage": "错过报名期没关系，仍然可以用晚鸟身份参与，一起书写人生故事。下次早点报名，就有机会获得大满贯徽章！"
+  },
   "aKlTO2": {
     "defaultMessage": "你还可以添加 {count} 名协作者"
   },
@@ -2120,6 +2140,9 @@
   },
   "ai7kS4": {
     "defaultMessage": "我的创作"
+  },
+  "al5/yQ": {
+    "defaultMessage": "晚鸟参与通过"
   },
   "aqX2Bt": {
     "defaultMessage": "前往首页",
@@ -2322,9 +2345,6 @@
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者删除"
   },
-  "fH6B/f": {
-    "defaultMessage": "错过了正式报名期，仍然可以在报名成功后投稿作品，但无法获得大满贯徽章。下次记得早点报名，就有机会获得徽章了！"
-  },
   "fJB38x": {
     "defaultMessage": "剩余 {remainDays} 天"
   },
@@ -2366,6 +2386,10 @@
   },
   "g5pX+a": {
     "defaultMessage": "关于"
+  },
+  "gCafm/": {
+    "defaultMessage": "晚鸟参与",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "gK6OxL": {
     "defaultMessage": "留个友善的评论？",
@@ -2436,7 +2460,7 @@
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
   "hfRsLB": {
-    "defaultMessage": "写作者 {count}",
+    "defaultMessage": "作者 {count}",
     "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "hk2aiz": {
@@ -2512,7 +2536,7 @@
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "jLkKbI": {
-    "defaultMessage": "报名审核中",
+    "defaultMessage": "报名处理中",
     "description": "type:apply"
   },
   "jiB0Z2": {
@@ -2578,6 +2602,9 @@
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "krvjo9": {
+    "defaultMessage": "活动时间{tz}："
+  },
   "ksIL/T": {
     "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"
   },
@@ -2638,6 +2665,9 @@
     "defaultMessage": "评论了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "lfiBVR": {
+    "defaultMessage": "赞赏公民"
+  },
   "liBHHE": {
     "defaultMessage": "什么看法，都可以留个友善的评论～"
   },
@@ -2653,6 +2683,9 @@
   "m/Wg7b": {
     "defaultMessage": "围炉描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "m1wKuC": {
+    "defaultMessage": "参与七日书活动"
   },
   "m4GG4b": {
     "defaultMessage": "删除选集"
@@ -2779,6 +2812,9 @@
   },
   "onDesU": {
     "defaultMessage": "恭喜成为围炉一员。现在你可以免费浏览围炉内作品，还可以去围炉与大家谈天说地。"
+  },
+  "orIq4X": {
+    "defaultMessage": "支持超过 100 次"
   },
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
@@ -3232,7 +3268,7 @@
     "defaultMessage": "协议"
   },
   "xl95XN": {
-    "defaultMessage": "写作者",
+    "defaultMessage": "作者",
     "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "xmcVZ0": {

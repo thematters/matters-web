@@ -1,10 +1,12 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { datetimeFormat } from '~/common/utils'
-import { Form } from '~/components'
+import { Form, LanguageContext } from '~/components'
 import {
   ArticleCampaignInput,
+  CampaignState,
   EditorSelectCampaignFragment,
 } from '~/gql/graphql'
 
@@ -23,13 +25,13 @@ export const getSelectCampaign = ({
   attached: Array<{ campaign: { id: string }; stage: { id: string } }>
   createdAt: string // draft or article creation time
 }) => {
-  const { start, end } = applied?.writingPeriod || {}
+  const { start } = applied?.writingPeriod || {}
   const isCampaignStarted = !!start && new Date(createdAt) >= new Date(start)
-  const isCampaignEnded = !end || (!!end && new Date(createdAt) < new Date(end))
+  const isCampaignActive = applied?.state === CampaignState.Active
 
   // only show appliedCampaign if the article or draft is created during the writing period
   const appliedCampaign =
-    isCampaignStarted && isCampaignEnded ? applied : undefined
+    isCampaignStarted && isCampaignActive ? applied : undefined
   const selectedCampaign = attached.filter(
     (c) => c.campaign.id === applied?.id
   )[0]
@@ -46,6 +48,7 @@ const SelectCampaign = ({
   selectedStage,
   editCampaign,
 }: SelectCampaignProps) => {
+  const { lang } = useContext(LanguageContext)
   const RESET_OPTION = {
     name: <FormattedMessage defaultMessage="Please select..." id="VrK0Q0" />,
     value: undefined,
@@ -75,7 +78,12 @@ const SelectCampaign = ({
         ...availableStages.reverse().map((s) => {
           return {
             name: s.period?.start
-              ? `${s.name} - ${datetimeFormat.absolute(s.period?.start)}`
+              ? `${s.name} - ${datetimeFormat.absolute({
+                  date: s.period.start,
+                  lang,
+                  optionalYear: false,
+                  utc8: true,
+                })}`
               : s.name,
             value: s.id,
             selected: s.id === selectedStage,
@@ -91,6 +99,7 @@ const SelectCampaign = ({
 SelectCampaign.fragments = gql`
   fragment EditorSelectCampaign on WritingChallenge {
     id
+    state
     writingPeriod {
       start
       end

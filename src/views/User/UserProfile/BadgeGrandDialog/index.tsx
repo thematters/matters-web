@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { OPEN_NOMAD_BADGE_DIALOG } from '~/common/enums'
+import { OPEN_GRAND_BADGE_DIALOG } from '~/common/enums'
 import {
   Dialog,
   SpinnerBlock,
@@ -8,11 +8,9 @@ import {
   useEventListener,
 } from '~/components'
 
-type BadgeNomadLabelProps = {
-  nomadBadgeLevel: 1 | 2 | 3 | 4
-}
+type BadgeGrandProps = {}
 
-type BadgeNomadDialogProps = BadgeNomadLabelProps & {
+type BadgeGrandDialogProps = BadgeGrandProps & {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -20,9 +18,8 @@ const DynamicContent = dynamic(() => import('./Content'), {
   loading: () => <SpinnerBlock />,
 })
 
-export const BaseBadgeNomadDialog: React.FC<BadgeNomadDialogProps> = ({
+export const BaseBadgeGrandDialog: React.FC<BadgeGrandDialogProps> = ({
   children,
-  nomadBadgeLevel,
 }) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
@@ -31,23 +28,20 @@ export const BaseBadgeNomadDialog: React.FC<BadgeNomadDialogProps> = ({
       {children({ openDialog })}
 
       <Dialog scrollable isOpen={show} onDismiss={closeDialog}>
-        <DynamicContent
-          nomadBadgeLevel={nomadBadgeLevel}
-          closeDialog={closeDialog}
-        />
+        <DynamicContent closeDialog={closeDialog} />
       </Dialog>
     </>
   )
 }
 
-export const BadgeNomadDialog = (props: BadgeNomadDialogProps) => {
+export const BadgeGrandDialog = (props: BadgeGrandDialogProps) => {
   const Children = ({ openDialog }: { openDialog: () => void }) => {
-    useEventListener(OPEN_NOMAD_BADGE_DIALOG, openDialog)
+    useEventListener(OPEN_GRAND_BADGE_DIALOG, openDialog)
     return <>{props.children && props.children({ openDialog })}</>
   }
 
   return (
-    <Dialog.Lazy mounted={<BaseBadgeNomadDialog {...props} />}>
+    <Dialog.Lazy mounted={<BaseBadgeGrandDialog {...props} />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}
     </Dialog.Lazy>
   )

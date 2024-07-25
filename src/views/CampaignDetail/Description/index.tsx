@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
-import { Layout } from '~/components'
+import { LanguageContext, Layout } from '~/components'
 import { DescriptionCampaignFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -10,11 +11,22 @@ const Description = ({
 }: {
   campaign: DescriptionCampaignFragment
 }) => {
+  const { lang } = useContext(LanguageContext)
+
   return (
     <Layout.Main.Spacing hasVertical={false}>
       <section
         className={styles.description}
-        dangerouslySetInnerHTML={{ __html: campaign.description }}
+        dangerouslySetInnerHTML={{
+          __html:
+            campaign[
+              lang === 'zh_hans'
+                ? 'descriptionZhHans'
+                : lang === 'zh_hant'
+                ? 'descriptionZhHant'
+                : 'descriptionEn'
+            ],
+        }}
       />
     </Layout.Main.Spacing>
   )
@@ -23,7 +35,9 @@ const Description = ({
 Description.fragments = gql`
   fragment DescriptionCampaign on WritingChallenge {
     id
-    description
+    descriptionZhHant: description(input: { language: zh_hant })
+    descriptionZhHans: description(input: { language: zh_hans })
+    descriptionEn: description(input: { language: en })
   }
 `
 

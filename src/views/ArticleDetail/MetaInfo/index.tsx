@@ -69,7 +69,7 @@ const MetaInfo = ({
             href={toPath({ page: 'campaignDetail', campaign }).href}
             onClick={() => {
               analytics.trackEvent('click_button', {
-                type: 'campaign',
+                type: 'campaign_detail_entrance',
                 pageType: 'article_detail',
                 pageComponent: 'article_meta',
               })

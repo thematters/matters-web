@@ -425,8 +425,11 @@ export const MOCK_CAMPAIGN = {
       { node: MOCK_ARTILCE },
     ],
   },
-  applicationState: null,
-  // applicationState: 'succeeded',
-  // applicationState: 'pending',
-  // applicationState: 'rejected',
+  // application: null,
+  application: {
+    state: 'succeeded',
+    createdAt: '2020-12-24T07:29:17.682Z',
+  },
+  // application: {'pending',
+  // application: {'rejected',
 }

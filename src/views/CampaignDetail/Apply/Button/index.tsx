@@ -25,13 +25,17 @@ const ApplyCampaignButton = ({
 }: ApplyCampaignButtonProps) => {
   const viewer = useContext(ViewerContext)
   const now = new Date()
-  const { end: appEnd } = campaign.applicationPeriod || {}
+  const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
-  const applicationState = campaign.applicationState
+  const applicationState = campaign.application?.state
+  const appliedAt = campaign.application?.createdAt
   const isSucceeded = applicationState === 'succeeded'
   const isPending = applicationState === 'pending'
   const isRejected = applicationState === 'rejected'
   const isNotApplied = !applicationState
+  const isAppliedDuringPeriod =
+    appliedAt && new Date(appliedAt) <= new Date(appEnd)
+  const isApplicationStarted = now >= new Date(appStart)
 
   /**
    * Rejected
@@ -47,15 +51,12 @@ const ApplyCampaignButton = ({
     return (
       <TextIcon
         icon={<Icon icon={IconCheck} size={16} />}
-        color={isInApplicationPeriod ? 'green' : 'black'}
+        color={isAppliedDuringPeriod ? 'green' : 'black'}
       >
-        {isInApplicationPeriod ? (
+        {isAppliedDuringPeriod ? (
           <FormattedMessage defaultMessage="Applied successfully" id="4nHH2x" />
         ) : (
-          <FormattedMessage
-            defaultMessage="Participate successfully"
-            id="7m2h5x"
-          />
+          <FormattedMessage defaultMessage="Joined successfully" id="al5/yQ" />
         )}
       </TextIcon>
     )
@@ -66,7 +67,7 @@ const ApplyCampaignButton = ({
    */
   let text: React.ReactNode = ''
   if (isPending) {
-    text = isInApplicationPeriod ? (
+    text = isAppliedDuringPeriod ? (
       <FormattedMessage
         defaultMessage="Reviewing..."
         description="type:apply"
@@ -75,8 +76,8 @@ const ApplyCampaignButton = ({
     ) : (
       <FormattedMessage
         defaultMessage="Reviewing..."
-        description="type:participate"
-        id="SX+8mP"
+        description="type:join"
+        id="Pq/7m5"
       />
     )
   } else if (isNotApplied) {
@@ -88,9 +89,9 @@ const ApplyCampaignButton = ({
       />
     ) : (
       <FormattedMessage
-        defaultMessage="Participate"
+        defaultMessage="Join"
         description="src/views/CampaignDetail/Apply/Button/index.tsx"
-        id="VaB2pS"
+        id="gCafm/"
       />
     )
   }
@@ -108,8 +109,9 @@ const ApplyCampaignButton = ({
   if (size === 'lg') {
     return (
       <Button
+        onClick={onClick}
         size={['100%', '3rem']}
-        disabled={isPending}
+        disabled={isPending || !isApplicationStarted}
         borderWidth="sm"
         borderColor={isInApplicationPeriod ? 'green' : 'black'}
         bgColor={isInApplicationPeriod && isNotApplied ? 'green' : undefined}
@@ -134,7 +136,7 @@ const ApplyCampaignButton = ({
         size={[null, '1.875rem']}
         spacing={[0, 20]}
         borderWidth="sm"
-        disabled={isPending}
+        disabled={isPending || !isApplicationStarted}
         textColor={isInApplicationPeriod ? 'white' : 'black'}
         bgColor={isInApplicationPeriod ? 'green' : undefined}
         borderColor={isInApplicationPeriod ? undefined : 'greyLight'}

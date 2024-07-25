@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/react-hooks'
-import formatISO from 'date-fns/formatISO'
+import { formatISO } from 'date-fns'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'

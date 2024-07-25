@@ -1,8 +1,10 @@
-import differenceInHours from 'date-fns/differenceInHours'
-import differenceInMinutes from 'date-fns/differenceInMinutes'
-import isThisHour from 'date-fns/isThisHour'
-import isToday from 'date-fns/isToday'
-import parseISO from 'date-fns/parseISO'
+import {
+  differenceInHours,
+  differenceInMinutes,
+  isThisHour,
+  isToday,
+  parseISO,
+} from 'date-fns'
 
 import absolute from './absolute'
 
@@ -57,7 +59,7 @@ const relative = (
     return diffHrs + DIFFS[lang][diffHrs === 1 ? 'hourAgo' : 'hoursAgo']
   }
 
-  return absolute(date, lang)
+  return absolute({ date, lang })
 }
 
 export default relative

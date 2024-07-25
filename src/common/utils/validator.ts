@@ -62,7 +62,5 @@ type NoticeNode = {
 export const shouldRenderNode = (
   node: NoticeNode,
   renderableTypes: Set<string>
-): node is NoticeNode & { id: string } =>
-  node.__typename !== undefined &&
-  renderableTypes.has(node.__typename) &&
-  Boolean(node.id)
+): node is NoticeNode =>
+  node.__typename !== undefined && renderableTypes.has(node.__typename)

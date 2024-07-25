@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, useDialogSwitch, useMutation } from '~/components'
+import { Dialog, toast, useDialogSwitch, useMutation } from '~/components'
 import {
   ApplyCampaignMutation,
   ApplyCampaignPrivateFragment,
@@ -14,7 +14,10 @@ const APPLY_CAMPAIGN = gql`
     applyCampaign(input: { id: $id }) {
       id
       ... on WritingChallenge {
-        applicationState
+        application {
+          state
+          createdAt
+        }
       }
     }
   }
@@ -37,28 +40,46 @@ const ApplyCampaignDialog = ({
 
   const [applyCampaign, { loading }] = useMutation<ApplyCampaignMutation>(
     APPLY_CAMPAIGN,
-    {
-      variables: { id: campaign.id },
-      optimisticResponse: {
-        applyCampaign: {
-          id: campaign.id,
-          applicationState: 'pending' as any,
-          __typename: 'WritingChallenge',
-        },
-      },
-    }
+    { variables: { id: campaign.id } }
   )
 
   const onApplyAfterPeriod = async () => {
-    await applyCampaign()
-    closeDialog()
+    try {
+      await applyCampaign()
+      closeDialog()
+    } catch (error) {
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="System or connection abnormality, please refresh the page and click “Join” again."
+            id="9OPnTz"
+          />
+        ),
+      })
+    }
+  }
+
+  const onApplyDuringPeriod = async () => {
+    try {
+      await applyCampaign()
+    } catch (error) {
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="System or connection abnormality, please refresh the page and click “Apply” again."
+            id="HB2VOx"
+          />
+        ),
+      })
+      closeDialog()
+    }
   }
 
   // auto apply
   useEffect(() => {
     if (!isInApplicationPeriod) return
 
-    applyCampaign()
+    onApplyDuringPeriod()
   }, [isInApplicationPeriod])
 
   return (
@@ -74,10 +95,7 @@ const ApplyCampaignDialog = ({
                 id="oLOus+"
               />
             ) : (
-              <FormattedMessage
-                defaultMessage="Confirm to participate"
-                id="FM+YIG"
-              />
+              <FormattedMessage defaultMessage="Confirm to join" id="ErV/vT" />
             )
           }
         />
@@ -87,13 +105,13 @@ const ApplyCampaignDialog = ({
             <p>
               {isInApplicationPeriod ? (
                 <FormattedMessage
-                  defaultMessage="We will review your application as soon as possible, so stay tuned for the event!"
-                  id="N3xGd5"
+                  defaultMessage="We will review your application shortly, stay tuned for the event!"
+                  id="5y5rID"
                 />
               ) : (
                 <FormattedMessage
-                  defaultMessage="If you miss the official registration period, you can still submit works after successful registration, but you will not be able to obtain the Grand Slam badge. Remember to register early next time for a chance to get a badge!"
-                  id="fH6B/f"
+                  defaultMessage="You missed the registration period, you can still join as a latecomer. Apply earlier next time for the chance to get the badge."
+                  id="aKEiNd"
                 />
               )}
             </p>

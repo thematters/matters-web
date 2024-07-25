@@ -1,12 +1,11 @@
 .participants {
   @mixin flex-center-start;
 
-  margin-top: var(--sp8);
   font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-grey);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     display: none;
   }
 

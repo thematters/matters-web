@@ -1,7 +1,9 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { SquareTabs } from '~/components'
+import { analytics } from '~/common/utils'
+import { LanguageContext, SquareTabs } from '~/components'
 import { ArticleFeedsTabsCampaignFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -21,6 +23,7 @@ const ArticleFeedsTabs = ({
   setFeedType,
   campaign,
 }: ArticleFeedsTabsProps) => {
+  const { lang } = useContext(LanguageContext)
   const stages = campaign.stages || []
 
   const shouldShowTab = (startedAt?: string) => {
@@ -35,19 +38,41 @@ const ArticleFeedsTabs = ({
       <SquareTabs sticky>
         <SquareTabs.Tab
           selected={feedType === LATEST_FEED_TYPE}
-          onClick={() => setFeedType(LATEST_FEED_TYPE)}
+          onClick={() => {
+            setFeedType(LATEST_FEED_TYPE)
+
+            analytics.trackEvent('click_button', {
+              type: `campaign_detail_tab_${LATEST_FEED_TYPE}` as `campaign_detail_tab_${string}`,
+              pageType: 'campaign_detail',
+            })
+          }}
         >
           <FormattedMessage defaultMessage="Latest" id="adThp5" />
         </SquareTabs.Tab>
 
-        {stages.map((stage) =>
+        {[...stages].reverse().map((stage) =>
           shouldShowTab(stage.period?.start) ? (
             <SquareTabs.Tab
               selected={stage.id === feedType}
-              onClick={() => setFeedType(stage.id)}
+              onClick={() => {
+                setFeedType(stage.id)
+
+                analytics.trackEvent('click_button', {
+                  type: `campaign_detail_tab_${stage.id}` as `campaign_detail_tab_${string}`,
+                  pageType: 'campaign_detail',
+                })
+              }}
               key={stage.id}
             >
-              {stage.name}
+              {
+                stage[
+                  lang === 'zh_hans'
+                    ? 'nameZhHans'
+                    : lang === 'zh_hant'
+                    ? 'nameZhHant'
+                    : 'nameEn'
+                ]
+              }
             </SquareTabs.Tab>
           ) : null
         )}
@@ -61,7 +86,9 @@ ArticleFeedsTabs.fragments = gql`
     id
     stages {
       id
-      name
+      nameZhHant: name(input: { language: zh_hant })
+      nameZhHans: name(input: { language: zh_hans })
+      nameEn: name(input: { language: en })
       period {
         start
         end
