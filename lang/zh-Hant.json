@@ -2813,6 +2813,10 @@
   "qBOEDo": {
     "defaultMessage": "最大金額爲 HKD {max}"
   },
+  "qCotH5": {
+    "defaultMessage": "在動態中留言",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
+  },
   "qE8ew4": {
     "defaultMessage": "收藏成功",
     "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
