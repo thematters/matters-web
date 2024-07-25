@@ -724,6 +724,9 @@
     "defaultMessage": "Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "AeVndq": {
+    "defaultMessage": "mentioned you in a comment at {commentMoment}"
+  },
   "AlHYvk": {
     "defaultMessage": "{type} edited"
   },
@@ -1564,6 +1567,9 @@
     "defaultMessage": "Back",
     "description": "src/components/Forms/PaymentForm"
   },
+  "Qlzm0s": {
+    "defaultMessage": "mentioned you in a moment at"
+  },
   "QvPc1q": {
     "defaultMessage": "Upload Cover"
   },
@@ -1889,9 +1895,6 @@
   },
   "WxhsrG": {
     "defaultMessage": "Please connect email"
-  },
-  "X9a1XW": {
-    "defaultMessage": "mentioned you in a moment comment at {commentMoment}"
   },
   "XH1s8E": {
     "defaultMessage": "Delete {commentType}",
@@ -2347,9 +2350,6 @@
   "fWDtpq": {
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
-  },
-  "fkQOxQ": {
-    "defaultMessage": "mentioned you in moment"
   },
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"

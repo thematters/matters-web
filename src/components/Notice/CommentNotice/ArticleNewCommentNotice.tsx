@@ -24,6 +24,7 @@ const ArticleNewCommentNotice = ({
     notice.comment?.node.__typename === 'Article'
       ? notice.comment.node
       : undefined
+
   return (
     <NoticeDigest
       notice={notice}

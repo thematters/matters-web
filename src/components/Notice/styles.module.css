@@ -68,8 +68,9 @@
   height: 2rem;
 }
 
-/* NoticeArticleTitle */
-.noticeArticleTitle {
+/* NoticeArticleTitle, NoticeMomentTitle */
+.noticeArticleTitle,
+.noticeMomentTitle {
   color: var(--color-black);
 }
 

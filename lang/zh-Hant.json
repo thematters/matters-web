@@ -724,6 +724,9 @@
     "defaultMessage": "追蹤",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "AeVndq": {
+    "defaultMessage": "在動態留言中提及了你 {commentMoment}"
+  },
   "AlHYvk": {
     "defaultMessage": "{type}已編輯"
   },
@@ -1564,6 +1567,9 @@
     "defaultMessage": "上一步",
     "description": "src/components/Forms/PaymentForm"
   },
+  "Qlzm0s": {
+    "defaultMessage": "在動態中提及了你"
+  },
   "QvPc1q": {
     "defaultMessage": "上傳封面"
   },
@@ -1889,9 +1895,6 @@
   },
   "WxhsrG": {
     "defaultMessage": "請先綁定電子郵件"
-  },
-  "X9a1XW": {
-    "defaultMessage": "在 {commentMoment} 留言中提到了你"
   },
   "XH1s8E": {
     "defaultMessage": "刪除{commentType}",
@@ -2347,9 +2350,6 @@
   "fWDtpq": {
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
-  },
-  "fkQOxQ": {
-    "defaultMessage": "在動態中提及了你"
   },
   "fnv5rD": {
     "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"

@@ -4,6 +4,8 @@ import {
   MOCK_CIRCLE_ARTICLE,
   MOCK_CIRCLE_COMMENT,
   MOCK_COMMENT,
+  MOCK_MOMENT,
+  MOCK_MOMENT_COMMENT,
   MOCK_MOMENT_LIKE,
   MOCK_PARENT_COMMENT,
   MOCK_TAG,
@@ -188,15 +190,6 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'ArticleNewComment' as any,
     comment: MOCK_COMMENT,
   },
-  {
-    __typename: 'CommentNotice',
-    id: 'MomentNewCommentNotice',
-    unread: false,
-    createdAt: '2024-06-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    commentNoticeType: 'MomentNewComment',
-    comment: MOCK_COMMENT,
-  },
   // SubscribedArticleNewComment
   {
     __typename: 'CommentNotice' as any,
@@ -227,37 +220,7 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CircleNewDiscussion' as any,
     comment: MOCK_CIRCLE_COMMENT,
   },
-  {
-    __typename: 'CommentNotice',
-    id: 'MomentCommentMentionedYouNotice',
-    unread: false,
-    createdAt: '2024-06-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    commentNoticeType: 'CommentMentionedYou',
-    comment: {
-      ...MOCK_COMMENT,
-      type: 'moment',
-      state: 'archived',
-    },
-  },
-  {
-    __typename: 'MomentNotice',
-    id: 'MomentLikedNotice',
-    unread: false,
-    createdAt: '2020-07-10T07:29:17.682Z',
-    actors: [MOCK_USER],
-    momentNoticeType: 'MomentLiked',
-    moment: MOCK_MOMENT_LIKE,
-  },
-  {
-    __typename: 'MomentNotice',
-    id: 'MomentMentionedNotice',
-    unread: false,
-    createdAt: '2020-07-10T07:29:17.682Z',
-    actors: [MOCK_USER],
-    momentNoticeType: 'MomentMentionedYou',
-    moment: MOCK_MOMENT_LIKE,
-  },
+  // CommentLiked
   {
     __typename: 'CommentNotice',
     id: 'CommentLikedNotice',
@@ -291,6 +254,60 @@ export const MOCK_NOTICE_LIST = [
     commentCommentNoticeType: 'CommentNewReply' as any,
     comment: MOCK_PARENT_COMMENT,
     reply: MOCK_CIRCLE_COMMENT,
+  },
+
+  /**
+   * Moment
+   */
+  // MomentLiked
+  {
+    __typename: 'MomentNotice',
+    id: 'MomentLikedNotice',
+    unread: false,
+    createdAt: '2020-07-10T07:29:17.682Z',
+    actors: [MOCK_USER],
+    momentNoticeType: 'MomentLiked',
+    moment: MOCK_MOMENT_LIKE,
+  },
+  // CommentLiked:Moment
+  {
+    __typename: 'CommentNotice',
+    id: 'MomentCommentLikedNotice',
+    unread: false,
+    createdAt: '2024-06-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'CommentLiked',
+    comment: MOCK_MOMENT_COMMENT,
+  },
+  // MomentNewComment
+  {
+    __typename: 'CommentNotice',
+    id: 'MomentNewCommentNotice',
+    unread: false,
+    createdAt: '2024-06-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'MomentNewComment',
+    comment: MOCK_MOMENT_COMMENT,
+  },
+  // CommentMentionedYou:Circle
+  {
+    __typename: 'CommentNotice' as any,
+    id: 'CommentMentionedYou-03',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'CommentMentionedYou' as any,
+    comment: MOCK_MOMENT_COMMENT,
+  },
+  // MomentMentionedYou
+  {
+    __typename: 'MomentNotice',
+    id: 'MomentMentionedNotice',
+    unread: false,
+    createdAt: '2020-07-10T07:29:17.682Z',
+    actors: [MOCK_USER],
+    momentNoticeType: 'MomentMentionedYou',
+    moment: MOCK_MOMENT,
   },
 
   /**
@@ -399,7 +416,7 @@ export const MOCK_NOTICE_LIST = [
   },
 
   /**
-   * Circcle
+   * Circle
    */
   // CircleNewFollower: single actor
   {

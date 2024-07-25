@@ -1,11 +1,7 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { stripHtml } from '~/common/utils'
-import { truncateTitle } from '~/common/utils/text/moment'
-import { LanguageContext } from '~/components/Context'
 import { MomentNewCommentNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -20,27 +16,14 @@ const MomentNewCommentNotice = ({
 }: {
   notice: MomentNewCommentNoticeFragment
 }) => {
-  const { lang } = useContext(LanguageContext)
-  const intl = useIntl()
-
   if (!notice.actors) {
     return null
   }
 
   const commentMoment =
-    notice.comment?.node.__typename === 'Moment' ? notice.comment.node : null
-
-  // manual type guard
-  if (!commentMoment) {
-    return null
-  }
-
-  const title = truncateTitle(stripHtml(commentMoment?.content || ''), 10, lang)
-  const images = commentMoment?.assets?.length
-    ? intl
-        .formatMessage({ defaultMessage: `[image]`, id: 'W3tqQO' })
-        .repeat(Math.min(3, commentMoment.assets.length))
-    : ''
+    notice.comment?.node.__typename === 'Moment'
+      ? notice.comment.node
+      : undefined
 
   return (
     <NoticeDigest
@@ -52,14 +35,9 @@ const MomentNewCommentNotice = ({
           description="src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
         />
       }
+      title={commentMoment && <NoticeMomentTitle moment={commentMoment} />}
       content={<NoticeComment comment={notice.comment} />}
-      title={
-        <NoticeMomentTitle
-          title={`${title} ${images}`}
-          moment={commentMoment}
-        />
-      }
-      testId={TEST_ID.NOTICE_ARTICLE_NEW_COMMENT}
+      testId={TEST_ID.NOTICE_MOMENT_NEW_COMMENT}
     />
   )
 }

@@ -29,6 +29,10 @@ const fragments = {
           id
           name
         }
+        ... on Moment {
+          id
+          shortHash
+        }
       }
       parentComment {
         id
@@ -53,6 +57,8 @@ const NoticeComment = ({
     comment?.node.__typename === 'Article' ? comment.node : undefined
   const circle =
     comment?.node.__typename === 'Circle' ? comment.node : undefined
+  const moment =
+    comment?.node.__typename === 'Moment' ? comment.node : undefined
 
   if (!comment) {
     return null
@@ -104,16 +110,23 @@ const NoticeComment = ({
     )
   }
   const path =
-    comment.state === 'active' ||
-    comment.state === 'collapsed' ||
-    comment.state === 'banned'
+    article || circle
       ? toPath({
           page: 'commentDetail',
           comment,
           article,
           circle,
         })
-      : { href: '' }
+      : moment
+      ? toPath({
+          page: 'momentDetail',
+          moment,
+        })
+      : {
+          href: '',
+          as: '',
+        }
+
   return (
     <LinkWrapper {...path}>
       <section>
