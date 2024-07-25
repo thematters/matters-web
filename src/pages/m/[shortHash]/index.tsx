@@ -1,3 +1,3 @@
-export default function MomentDetail() {
-  return <div>MomentDetail</div>
-}
+import MomentDetail from '~/views/MomentDetail'
+
+export default MomentDetail

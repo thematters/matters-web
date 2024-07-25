@@ -4,11 +4,12 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
 import { ADD_MOMENT_COMMENT_MENTION } from '~/common/enums'
-import { makeMentionElement } from '~/common/utils'
+import { makeMentionElement, toPath } from '~/common/utils'
 import {
   MomentDigestDetail,
   QueryError,
   useEventListener,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import MomentCommentForm from '~/components/Forms/MomentCommentForm'
@@ -28,11 +29,13 @@ interface MomentDetailDialogContentProps {
 
 const MomentDetailDialogContent = ({
   shortHash,
-  closeDialog,
+  closeDialog: _closeDialog,
 }: MomentDetailDialogContentProps) => {
   const viewer = useContext(ViewerContext)
+  const { isInPath, router } = useRoute()
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
+  const isInMomentDetailPage = isInPath('MOMENT_DETAIL')
   /**
    * Data Fetching
    */
@@ -75,7 +78,7 @@ const MomentDetailDialogContent = ({
    * Render
    */
   if (loading && !data) {
-    return <Placeholder onClose={closeDialog} />
+    return <Placeholder onClose={_closeDialog} />
   }
 
   if (error) {
@@ -94,6 +97,17 @@ const MomentDetailDialogContent = ({
     [styles.footer]: true,
     [styles.editing]: editing,
   })
+
+  const closeDialog = () => {
+    if (isInMomentDetailPage) {
+      const userProfilePath = toPath({
+        page: 'userProfile',
+        userName: moment.author.userName || '',
+      })
+      router.push(userProfilePath.href)
+    }
+    _closeDialog()
+  }
 
   return (
     <section className={styles.container}>

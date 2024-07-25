@@ -7,6 +7,10 @@
   &.overlay {
     background: rgb(0 0 0 / 40%);
     will-change: opacity;
+
+    &.blurred {
+      backdrop-filter: blur(10px);
+    }
   }
 
   &.scrollable {
