@@ -1886,6 +1886,9 @@
   "WxhsrG": {
     "defaultMessage": "请先绑定邮箱"
   },
+  "X9a1XW": {
+    "defaultMessage": "在 {commentMoment} 評論提到了你"
+  },
   "XH1s8E": {
     "defaultMessage": "刪除{commentType}",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1935,9 +1938,6 @@
   },
   "Xi40U9": {
     "defaultMessage": "操作无法撤销，确认删除选集吗？"
-  },
-  "XiiSGl": {
-    "defaultMessage": "在动态留言中提及了你"
   },
   "Xj0yv9": {
     "defaultMessage": "写文章"
