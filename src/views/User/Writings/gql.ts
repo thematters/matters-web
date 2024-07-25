@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 import { ArticleDigestFeed } from '~/components/ArticleDigest/Feed'
-import { MomentDigest } from '~/components/MomentDigest'
+import { MomentDigestFeed } from '~/components/MomentDigest/Feed'
 
 import PinBoard from './PinBoard'
 
@@ -37,8 +37,8 @@ const fragments = gql`
           ... on Moment {
             id
             momentState: state
-            ...MomentDigestMomentPublic
-            ...MomentDigestMomentPrivate
+            ...MomentDigestFeedMomentPublic
+            ...MomentDigestFeedMomentPrivate
           }
         }
       }
@@ -50,8 +50,8 @@ const fragments = gql`
   }
   ${ArticleDigestFeed.fragments.article.public}
   ${ArticleDigestFeed.fragments.article.private}
-  ${MomentDigest.fragments.moment.public}
-  ${MomentDigest.fragments.moment.private}
+  ${MomentDigestFeed.fragments.moment.public}
+  ${MomentDigestFeed.fragments.moment.private}
   ${PinBoard.fragments.user}
 `
 
@@ -83,10 +83,10 @@ export const USER_WRITINGS_PRIVATE = gql`
         ...ArticleDigestFeedArticlePrivate
       }
       ... on Moment {
-        ...MomentDigestMomentPrivate
+        ...MomentDigestFeedMomentPrivate
       }
     }
   }
   ${ArticleDigestFeed.fragments.article.private}
-  ${MomentDigest.fragments.moment.private}
+  ${MomentDigestFeed.fragments.moment.private}
 `

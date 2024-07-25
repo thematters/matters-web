@@ -25,6 +25,7 @@ import styles from './styles.module.css'
 interface LikeButtonProps {
   moment: MomentDigestFooterActionsLikeButtonMomentPublicFragment &
     Partial<MomentDigestFooterActionsLikeButtonMomentPrivateFragment>
+  iconSize?: 20 | 22
 }
 
 const fragments = {
@@ -44,7 +45,7 @@ const fragments = {
   },
 }
 
-const LikeButton = ({ moment }: LikeButtonProps) => {
+const LikeButton = ({ moment, iconSize = 20 }: LikeButtonProps) => {
   const intl = useIntl()
   const { likeCount, liked } = moment
 
@@ -52,14 +53,30 @@ const LikeButton = ({ moment }: LikeButtonProps) => {
 
   const [likeMoment] = useMutation<LikeMomentMutation>(LIKE_MOMENT, {
     variables: { id: moment.id },
+    optimisticResponse: {
+      likeMoment: {
+        id: moment.id,
+        likeCount: moment.likeCount + 1,
+        liked: true,
+        __typename: 'Moment',
+      },
+    },
   })
 
   const [unlikeMoment] = useMutation<UnlikeMomentMutation>(UNLIKE_MOMENT, {
     variables: { id: moment.id },
+    optimisticResponse: {
+      unlikeMoment: {
+        id: moment.id,
+        likeCount: moment.likeCount - 1,
+        liked: false,
+        __typename: 'Moment',
+      },
+    },
   })
 
   const likeClassNames = classNames({
-    [styles.like]: true,
+    [styles[`size${iconSize}`]]: true,
     [styles.heartBeat]: playHeartBeat,
   })
 
@@ -79,11 +96,11 @@ const LikeButton = ({ moment }: LikeButtonProps) => {
         <TextIcon
           icon={
             <span className={likeClassNames}>
-              <Icon icon={IconLikeFill} color="redLight" size={18} />
+              <Icon icon={IconLikeFill} color="redLight" size={iconSize} />
             </span>
           }
           color="black"
-          size={15}
+          size={14}
         >
           {likeCount > 0 ? numAbbr(likeCount) : undefined}
         </TextIcon>
@@ -105,7 +122,7 @@ const LikeButton = ({ moment }: LikeButtonProps) => {
         id: 'mBkZcw',
       })}
     >
-      <TextIcon icon={<Icon icon={IconLike} size={18} />} size={15}>
+      <TextIcon icon={<Icon icon={IconLike} size={iconSize} />} size={14}>
         {likeCount > 0 ? numAbbr(likeCount) : undefined}
       </TextIcon>
     </Button>

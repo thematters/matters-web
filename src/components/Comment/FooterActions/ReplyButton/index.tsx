@@ -36,6 +36,13 @@ const fragments = {
             id
           }
         }
+
+        ... on Moment {
+          id
+          author {
+            id
+          }
+        }
       }
       parentComment {
         id

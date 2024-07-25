@@ -4,6 +4,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  ADD_MOMENT_COMMENT_MENTION,
   ERROR_CODES,
   ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -64,6 +65,14 @@ const fragments = {
               isBlocking
             }
           }
+
+          ... on Moment {
+            id
+            author {
+              id
+              isBlocking
+            }
+          }
         }
         ...CommentUpvoteCommentPrivate
       }
@@ -91,9 +100,15 @@ const BaseFooterActions = ({
   const [editor, setEditor] = useState<Editor | null>(null)
   const { setActiveEditor, activeEditor } = useCommentEditorContext()
 
-  const { state, node } = comment
-  const article = node.__typename === 'Article' ? node : undefined
-  const targetAuthor = article?.author
+  const { state } = comment
+  const node =
+    comment.node.__typename === 'Article' ||
+    comment.node.__typename === 'Moment'
+      ? comment.node
+      : undefined
+  const targetAuthor = node?.author
+  const isArticle = comment.node.__typename === 'Article'
+  const isMoment = comment.node.__typename === 'Moment'
 
   const isActive = state === 'active'
   const isCollapsed = state === 'collapsed'
@@ -188,39 +203,62 @@ const BaseFooterActions = ({
           {hasUpvote && <UpvoteButton {...buttonProps} />}
           {hasReply && (
             <>
-              <Media at="sm">
-                <ArticleCommentFormDialog
-                  articleId={article?.id!}
-                  replyToId={comment.id}
-                  parentId={comment.parentComment?.id || comment.id}
-                  submitCallback={submitCallback}
-                  // closeCallback={() => setShowForm(false)}
-                  isInCommentDetail={isInCommentDetail}
-                  defaultContent={defaultContent}
-                >
-                  {({ openDialog }) => (
+              {isArticle && (
+                <>
+                  <Media at="sm">
+                    <ArticleCommentFormDialog
+                      articleId={node?.id!}
+                      replyToId={comment.id}
+                      parentId={comment.parentComment?.id || comment.id}
+                      submitCallback={submitCallback}
+                      // closeCallback={() => setShowForm(false)}
+                      isInCommentDetail={isInCommentDetail}
+                      defaultContent={defaultContent}
+                    >
+                      {({ openDialog }) => (
+                        <ReplyButton
+                          {...buttonProps}
+                          {...replyButtonProps}
+                          {...replyCustomButtonProps}
+                          onClick={openDialog}
+                        />
+                      )}
+                    </ArticleCommentFormDialog>
+                  </Media>
+                  <Media greaterThan="sm">
                     <ReplyButton
                       {...buttonProps}
                       {...replyButtonProps}
                       {...replyCustomButtonProps}
-                      onClick={openDialog}
+                      onClick={() => {
+                        if (editor === activeEditor) {
+                          setActiveEditor(null)
+                        }
+                        toggleShowForm()
+                      }}
                     />
-                  )}
-                </ArticleCommentFormDialog>
-              </Media>
-              <Media greaterThan="sm">
-                <ReplyButton
-                  {...buttonProps}
-                  {...replyButtonProps}
-                  {...replyCustomButtonProps}
-                  onClick={() => {
-                    if (editor === activeEditor) {
-                      setActiveEditor(null)
-                    }
-                    toggleShowForm()
-                  }}
-                />
-              </Media>
+                  </Media>
+                </>
+              )}
+              {isMoment && (
+                <>
+                  <ReplyButton
+                    {...buttonProps}
+                    {...replyButtonProps}
+                    {...replyCustomButtonProps}
+                    onClick={() => {
+                      const detail = {
+                        author: comment.author,
+                      }
+                      window.dispatchEvent(
+                        new CustomEvent(ADD_MOMENT_COMMENT_MENTION, {
+                          detail,
+                        })
+                      )
+                    }}
+                  />
+                </>
+              )}
             </>
           )}
         </section>
@@ -230,7 +268,7 @@ const BaseFooterActions = ({
           <>
             <Spacer size="base" />
             <ArticleCommentForm
-              articleId={article?.id!}
+              articleId={node?.id!}
               setEditor={setEditor}
               replyToId={comment.id}
               parentId={comment.parentComment?.id || comment.id}

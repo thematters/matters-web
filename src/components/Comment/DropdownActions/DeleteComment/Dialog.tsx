@@ -14,6 +14,7 @@ import {
   CommentDropdownActionsCommentPublicFragment,
   DeleteCommentMutation,
 } from '~/gql/graphql'
+import { USER_WRITINGS_PUBLIC } from '~/views/User/Writings/gql'
 
 const DELETE_COMMENT = gql`
   mutation DeleteComment($id: ID!) {
@@ -36,8 +37,13 @@ const DeleteCommentDialog = ({
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const { routerLang } = useRoute()
   const commentId = comment.id
-  const article =
-    comment.node.__typename === 'Article' ? comment.node : undefined
+  const node =
+    comment.node.__typename === 'Article' ||
+    comment.node.__typename === 'Moment'
+      ? comment.node
+      : undefined
+  const isArticle = comment.node.__typename === 'Article'
+  const isMoment = comment.node.__typename === 'Moment'
 
   const [deleteComment] = useMutation<DeleteCommentMutation>(DELETE_COMMENT, {
     variables: { id: commentId },
@@ -49,33 +55,43 @@ const DeleteCommentDialog = ({
       },
     },
     update: (cache) => {
-      if (!article) {
+      if (!node) {
         return
       }
 
-      updateArticleComments({
-        cache,
-        commentId: comment.id,
-        articleId: article.id,
-        type: 'delete',
-      })
+      if (isArticle) {
+        updateArticleComments({
+          cache,
+          commentId: comment.id,
+          articleId: node.id,
+          type: 'delete',
+        })
 
-      if (comment.parentComment) {
-        updateArticlePublic({
-          cache,
-          shortHash: article.shortHash,
-          routerLang,
-          type: 'deleteSecondaryComment',
-        })
-      } else {
-        updateArticlePublic({
-          cache,
-          shortHash: article.shortHash,
-          routerLang,
-          type: 'deleteComment',
-        })
+        if (comment.parentComment) {
+          updateArticlePublic({
+            cache,
+            shortHash: node.shortHash,
+            routerLang,
+            type: 'deleteSecondaryComment',
+          })
+        } else {
+          updateArticlePublic({
+            cache,
+            shortHash: node.shortHash,
+            routerLang,
+            type: 'deleteComment',
+          })
+        }
       }
     },
+    refetchQueries: isMoment
+      ? [
+          {
+            query: USER_WRITINGS_PUBLIC,
+            variables: { userName: node?.author.userName },
+          },
+        ]
+      : [],
   })
 
   const onDelete = async () => {

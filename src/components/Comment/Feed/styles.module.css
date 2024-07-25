@@ -25,8 +25,21 @@
           line-height: 1.75;
         }
 
+        & .displayNamePlaceholder {
+          width: 7.5rem;
+          height: 1rem;
+          background-color: var(--color-grey-lighter);
+        }
+
         & time {
           line-height: 1.125rem;
+        }
+
+        & .createdAtPlaceholder {
+          width: 3.75rem;
+          height: 1rem;
+          margin-top: var(--sp4);
+          background-color: var(--color-grey-lighter);
         }
       }
     }
@@ -49,5 +62,20 @@
 
   &.descendant {
     width:;
+  }
+
+  & .contentPlaceholder {
+    width: calc(100% - 48px);
+    height: 1rem;
+    margin-left: var(--sp48);
+    background-color: var(--color-grey-lighter);
+
+    & + .contentPlaceholder {
+      margin-top: var(--sp8);
+    }
+
+    &:last-child {
+      width: 50%;
+    }
   }
 }

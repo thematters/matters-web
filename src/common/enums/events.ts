@@ -6,6 +6,10 @@ export const REFETCH_RESPONSES = 'refetchResponses'
 export const SYNC_APPRECIATE_BUTTON_COUNT = 'syncAppreciateButtonCount'
 export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
 
+// Moment
+export const ADD_MOMENT_COMMENT_MENTION = 'addMomentCommentMention'
+export const UPDATE_NEWEST_MOMENT_COMMENT = 'updateNewestMomentComment'
+
 // Tag
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'
 
@@ -59,6 +63,7 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   sideNav = 'sideNav',
   support = 'support',
   visitorWall = 'visitorWall',
+  momentComment = 'momentComment',
 }
 
 /**

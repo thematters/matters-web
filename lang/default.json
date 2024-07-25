@@ -582,6 +582,10 @@
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
+  "80bF0W": {
+    "defaultMessage": "No comments",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
+  },
   "84VOdX": {
     "defaultMessage": "Unpin from profile",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"

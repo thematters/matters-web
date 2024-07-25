@@ -29,6 +29,7 @@ const fragments = {
       state
       author {
         id
+        userName
       }
     }
   `,
@@ -125,18 +126,13 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   const WithDeleteMoment = withDialog<
     Omit<DeleteMomentDialogProps, 'children'>
-  >(
-    WithReport,
-    DeleteMoment.Dialog,
-    { momentId: moment.id },
-    ({ openDialog }) => {
-      return {
-        ...props,
-        ...controls,
-        openDeleteMomentDialog: isFrozen ? forbid : openDialog,
-      }
+  >(WithReport, DeleteMoment.Dialog, { moment }, ({ openDialog }) => {
+    return {
+      ...props,
+      ...controls,
+      openDeleteMomentDialog: isFrozen ? forbid : openDialog,
     }
-  )
+  })
 
   return <WithDeleteMoment />
 }
