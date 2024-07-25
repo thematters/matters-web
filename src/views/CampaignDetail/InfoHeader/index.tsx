@@ -53,7 +53,6 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
   const { start: writingStart, end: writingEnd } = campaign.writingPeriod || {}
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
-  const isApplicationStarted = now >= new Date(appStart)
 
   return (
     <Apply.Dialog campaign={campaign}>
@@ -141,13 +140,11 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
             </section>
 
             <section className={styles.right}>
-              {isApplicationStarted && (
-                <Apply.Button
-                  campaign={campaign}
-                  size="sm"
-                  onClick={openDialog}
-                />
-              )}
+              <Apply.Button
+                campaign={campaign}
+                size="sm"
+                onClick={openDialog}
+              />
             </section>
           </section>
 
@@ -161,15 +158,9 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
             <ViewMore link={campaign.link} />
           </section>
 
-          {isApplicationStarted && (
-            <section className={styles.mobileApply}>
-              <Apply.Button
-                campaign={campaign}
-                size="lg"
-                onClick={openDialog}
-              />
-            </section>
-          )}
+          <section className={styles.mobileApply}>
+            <Apply.Button campaign={campaign} size="lg" onClick={openDialog} />
+          </section>
         </header>
       )}
     </Apply.Dialog>
