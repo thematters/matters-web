@@ -599,6 +599,9 @@
     "defaultMessage": "Collect Article",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
   },
+  "8YgVvt": {
+    "defaultMessage": "Like collection"
+  },
   "8cv9D4": {
     "defaultMessage": "Next Step"
   },
@@ -671,6 +674,9 @@
   },
   "9WRlF4": {
     "defaultMessage": "Send"
+  },
+  "9aorag": {
+    "defaultMessage": "Unlike collection"
   },
   "9mfw9c": {
     "defaultMessage": "Wallet address",

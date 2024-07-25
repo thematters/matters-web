@@ -599,6 +599,9 @@
     "defaultMessage": "關聯作品",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
   },
+  "8YgVvt": {
+    "defaultMessage": "喜歡選集"
+  },
   "8cv9D4": {
     "defaultMessage": "下一步"
   },
@@ -671,6 +674,9 @@
   },
   "9WRlF4": {
     "defaultMessage": "送出"
+  },
+  "9aorag": {
+    "defaultMessage": "取消喜歡選集"
   },
   "9mfw9c": {
     "defaultMessage": "錢包地址",

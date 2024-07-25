@@ -15,6 +15,7 @@ import EditCollection from '~/components/CollectionDigest/DropdownActions/EditCo
 import { CollectionProfileCollectionFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
+import LikeButton from './LikeButton'
 import styles from './styles.module.css'
 
 interface CollectionProfileProps {
@@ -114,7 +115,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                 {!!description && (
                   <p className={styles.description}>{description}</p>
                 )}
-                <p>❤️</p>
+                <LikeButton collection={collection} />
                 {!description && isViewer && (
                   <p className={styles.addDescription}>
                     <Button
