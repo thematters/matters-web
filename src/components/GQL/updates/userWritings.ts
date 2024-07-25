@@ -1,8 +1,8 @@
 import { DataProxy } from 'apollo-cache'
 
 import {
-  MomentDigestMomentPrivateFragment,
-  MomentDigestMomentPublicFragment,
+  MomentDigestFeedMomentPrivateFragment,
+  MomentDigestFeedMomentPublicFragment,
   MomentState,
   UserCollectionsQuery,
   UserWritingsPublicQuery,
@@ -18,8 +18,8 @@ export const updateUserWritings = ({
   cache: DataProxy
   targetId?: string
   userName: string
-  momentDigest?: MomentDigestMomentPublicFragment &
-    MomentDigestMomentPrivateFragment
+  momentDigest?: MomentDigestFeedMomentPublicFragment &
+    MomentDigestFeedMomentPrivateFragment
   type: 'pin' | 'unpin' | 'archive' | 'addMoment'
 }) => {
   // FIXME: circular dependencies

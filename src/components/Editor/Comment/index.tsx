@@ -18,7 +18,9 @@ interface Props {
   update: (params: { content: string }) => void
   placeholder?: string
   setEditor?: (editor: Editor | null) => void
+  onFocused?: () => void
   isFallbackEditor?: boolean
+  lockScroll?: boolean
 }
 
 const CommentEditor: React.FC<Props> = ({
@@ -26,7 +28,9 @@ const CommentEditor: React.FC<Props> = ({
   update,
   placeholder,
   setEditor,
+  onFocused,
   isFallbackEditor,
+  lockScroll = true,
 }) => {
   const client = useApolloClient()
   const intl = useIntl()
@@ -48,10 +52,10 @@ const CommentEditor: React.FC<Props> = ({
     // can be removed if editor is only used in single page
     // instead of being used in dialog
     onFocus: () => {
-      window.dispatchEvent(new CustomEvent(BYPASS_SCROLL_LOCK))
+      lockScroll && window.dispatchEvent(new CustomEvent(BYPASS_SCROLL_LOCK))
     },
     onDestroy: () => {
-      window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
+      lockScroll && window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
   })
@@ -74,6 +78,7 @@ const CommentEditor: React.FC<Props> = ({
           if (setActiveEditor) {
             setActiveEditor(editor)
           }
+          onFocused?.()
         }}
       />
     </div>

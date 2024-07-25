@@ -77,8 +77,9 @@ describe('<Dialog>', () => {
     expect(screen.getAllByText('Header')).toHaveLength(2)
     expect(screen.getByText('Content')).toBeInTheDocument()
 
+    const dialog = screen.getByRole('dialog')
     // click outside
-    fireEvent.mouseDown(document.body)
+    fireEvent.mouseDown(dialog.parentNode as Element)
     await waitFor(() => {
       expect(screen.queryByText('Content')).not.toBeInTheDocument()
     })

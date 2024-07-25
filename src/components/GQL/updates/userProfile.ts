@@ -12,6 +12,8 @@ export const updateUserProfile = ({
   type:
     | 'increaseArticle'
     | 'decreaseArticle'
+    | 'increaseMoment'
+    | 'decreaseMoment'
     | 'increaseCollection'
     | 'decreaseCollection'
 }) => {
@@ -39,6 +41,12 @@ export const updateUserProfile = ({
     case 'decreaseArticle':
       profileData.user.status.articleCount -= 1
       break
+    case 'increaseMoment':
+      profileData.user.status.momentCount += 1
+      break
+    case 'decreaseMoment':
+      profileData.user.status.momentCount -= 1
+      break
     case 'increaseCollection':
       profileData.user.userCollections.totalCount += 1
       break
@@ -57,6 +65,7 @@ export const updateUserProfile = ({
 
   return {
     articleCount: profileData.user.status.articleCount,
+    momentCount: profileData.user.status.momentCount,
     collectionCount: profileData.user.userCollections.totalCount,
   }
 }

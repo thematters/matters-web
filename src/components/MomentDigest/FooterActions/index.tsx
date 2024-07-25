@@ -14,17 +14,19 @@ export type FooterActionsProps = {
   moment: MomentDigestFooterActionsMomentPublicFragment &
     Partial<MomentDigestFooterActionsMomentPrivateFragment>
   hasCommentedFollowees?: boolean
+  onClickReply?: () => void
 }
 
 const FooterActions = ({
   moment,
+  onClickReply,
   hasCommentedFollowees,
 }: FooterActionsProps) => {
   return (
     <footer className={styles.footer}>
       <section className={styles.left}>
         <LikeButton moment={moment} />
-        <ReplyButton moment={moment} />
+        <ReplyButton moment={moment} onClick={onClickReply} />
         {hasCommentedFollowees && <CommentedFollowees moment={moment} />}
       </section>
       <section>

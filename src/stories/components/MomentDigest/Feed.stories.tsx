@@ -2,18 +2,18 @@ import { MockedProvider } from '@apollo/react-testing'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
-import { MomentDigest } from '~/components'
+import { MomentDigestFeed } from '~/components'
 
 import { MOCK_MOMENT } from '../../mocks'
 
 export default {
-  title: 'Components/MomentDigest',
-  component: MomentDigest,
-} as ComponentMeta<typeof MomentDigest>
+  title: 'Components/MomentDigest/Feed',
+  component: MomentDigestFeed,
+} as ComponentMeta<typeof MomentDigestFeed>
 
-const Template: ComponentStory<typeof MomentDigest> = (args) => (
+const Template: ComponentStory<typeof MomentDigestFeed> = (args) => (
   <MockedProvider>
-    <MomentDigest {...args} />
+    <MomentDigestFeed {...args} />
   </MockedProvider>
 )
 

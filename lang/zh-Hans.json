@@ -582,6 +582,10 @@
     "defaultMessage": "暂无评论",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
+  "80bF0W": {
+    "defaultMessage": "暂无留言",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
+  },
   "84VOdX": {
     "defaultMessage": "取消代表作",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
@@ -1886,6 +1890,9 @@
   "WxhsrG": {
     "defaultMessage": "请先绑定邮箱"
   },
+  "X9a1XW": {
+    "defaultMessage": "在 {commentMoment} 留言中提到了你"
+  },
   "XH1s8E": {
     "defaultMessage": "刪除{commentType}",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1935,9 +1942,6 @@
   },
   "Xi40U9": {
     "defaultMessage": "操作无法撤销，确认删除选集吗？"
-  },
-  "XiiSGl": {
-    "defaultMessage": "在动态留言中提及了你"
   },
   "Xj0yv9": {
     "defaultMessage": "写文章"
@@ -2811,6 +2815,10 @@
   },
   "qBOEDo": {
     "defaultMessage": "最大金额为 HKD {max}"
+  },
+  "qCotH5": {
+    "defaultMessage": "在动态中留言",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "qE8ew4": {
     "defaultMessage": "收藏成功",

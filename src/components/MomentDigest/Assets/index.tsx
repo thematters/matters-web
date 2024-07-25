@@ -14,6 +14,7 @@ import {
 import { ResponsiveImage } from '~/components'
 import { MomentDigestAssetsMomentFragment } from '~/gql/graphql'
 
+import { Placeholder } from './Placeholder'
 import styles from './styles.module.css'
 
 const fragments = {
@@ -125,5 +126,6 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
 }
 
 Assets.fragments = fragments
+Assets.Placeholder = Placeholder
 
 export default Assets

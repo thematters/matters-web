@@ -14,6 +14,9 @@ const fragments = {
         ... on Article {
           id
         }
+        ... on Moment {
+          id
+        }
       }
     }
   `,

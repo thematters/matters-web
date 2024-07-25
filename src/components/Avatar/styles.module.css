@@ -245,3 +245,8 @@
     background-image: var(--avatar-ring-civic-architect);
   }
 }
+
+.placeholder {
+  background-color: var(--color-grey-lighter);
+  border-radius: 50%;
+}

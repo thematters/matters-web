@@ -80,8 +80,13 @@ const Inner: React.FC<
     }
   })
 
-  const handleClickOutside = () => {
+  const handleClickOutside = (event: MouseEvent) => {
     if (!dismissOnClickOutside) {
+      return
+    }
+    const target = event.target as HTMLElement
+    const isOutside = target.hasAttribute('data-reach-dialog-overlay')
+    if (!isOutside) {
       return
     }
     closeTopDialog()

@@ -2,13 +2,13 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components/UserDigest'
 
-import Assets from './Assets'
-import FooterActions from './FooterActions'
+import Assets from '../Assets'
+import FooterActions from '../FooterActions'
 
 export const fragments = {
   moment: {
     public: gql`
-      fragment MomentDigestMomentPublic on Moment {
+      fragment MomentDigestFeedMomentPublic on Moment {
         id
         createdAt
         shortHash
@@ -28,7 +28,7 @@ export const fragments = {
       ${FooterActions.fragments.moment.public}
     `,
     private: gql`
-      fragment MomentDigestMomentPrivate on Moment {
+      fragment MomentDigestFeedMomentPrivate on Moment {
         id
         ...MomentDigestFooterActionsMomentPrivate
       }

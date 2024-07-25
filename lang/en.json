@@ -582,6 +582,10 @@
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
+  "80bF0W": {
+    "defaultMessage": "No comments",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
+  },
   "84VOdX": {
     "defaultMessage": "Unpin from profile",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
@@ -1886,6 +1890,9 @@
   "WxhsrG": {
     "defaultMessage": "Please connect email"
   },
+  "X9a1XW": {
+    "defaultMessage": "mentioned you in a moment comment at {commentMoment}"
+  },
   "XH1s8E": {
     "defaultMessage": "Delete {commentType}",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1935,9 +1942,6 @@
   },
   "Xi40U9": {
     "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
-  },
-  "XiiSGl": {
-    "defaultMessage": "mentioned you in a moment comment at"
   },
   "Xj0yv9": {
     "defaultMessage": "Write Articles"
@@ -2811,6 +2815,10 @@
   },
   "qBOEDo": {
     "defaultMessage": "Maximum amount is HKD {max}"
+  },
+  "qCotH5": {
+    "defaultMessage": "commented in your moment",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "qE8ew4": {
     "defaultMessage": "Bookmarked",

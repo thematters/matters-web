@@ -19,6 +19,11 @@ const fragments = {
             id
           }
         }
+        ... on Moment {
+          author {
+            id
+          }
+        }
       }
     }
   `,
@@ -26,7 +31,8 @@ const fragments = {
 
 const RoleLabel = ({ comment }: { comment: RoleLabelCommentFragment }) => {
   if (
-    comment.node.__typename === 'Article' &&
+    (comment.node.__typename === 'Article' ||
+      comment.node.__typename === 'Moment') &&
     comment.author.id === comment.node.author.id
   ) {
     return (
