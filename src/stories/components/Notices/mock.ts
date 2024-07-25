@@ -8,7 +8,6 @@ import {
   MOCK_MOMENT_COMMENT,
   MOCK_MOMENT_LIKE,
   MOCK_PARENT_COMMENT,
-  MOCK_TAG,
   MOCK_TRANSACTION,
   MOCK_USER,
 } from '~/stories/mocks'
@@ -190,16 +189,6 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'ArticleNewComment' as any,
     comment: MOCK_COMMENT,
   },
-  // SubscribedArticleNewComment
-  {
-    __typename: 'CommentNotice' as any,
-    id: 'SubscribedArticleNewComment',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    commentNoticeType: 'SubscribedArticleNewComment' as any,
-    comment: MOCK_COMMENT,
-  },
   // CircleNewBroadcast
   {
     __typename: 'CommentNotice' as any,
@@ -311,87 +300,6 @@ export const MOCK_NOTICE_LIST = [
   },
 
   /**
-   * Article - Tag
-   */
-  // ArticleTagAdded
-  {
-    __typename: 'ArticleTagNotice' as any,
-    id: 'ArticleTagAdded',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    articleTagNoticeType: 'ArticleTagAdded' as any,
-    target: MOCK_ARTILCE,
-    tag: MOCK_TAG,
-  },
-  // ArticleTagRemoved
-  {
-    __typename: 'ArticleTagNotice' as any,
-    id: 'ArticleTagRemoved',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    articleTagNoticeType: 'ArticleTagRemoved' as any,
-    target: MOCK_ARTILCE,
-    tag: MOCK_TAG,
-  },
-  // ArticleTagUnselected
-  {
-    __typename: 'ArticleTagNotice' as any,
-    id: 'ArticleTagUnselected',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    articleTagNoticeType: 'ArticleTagUnselected' as any,
-    target: MOCK_ARTILCE,
-    tag: MOCK_TAG,
-  },
-
-  /**
-   *  Tag
-   */
-  // TagAdoption
-  {
-    __typename: 'TagNotice' as any,
-    id: 'TagAdoption',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    tagNoticeType: 'TagAdoption' as any,
-    tag: MOCK_TAG,
-  },
-  // TagLeave
-  {
-    __typename: 'TagNotice' as any,
-    id: 'TagLeave',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    tagNoticeType: 'TagLeave' as any,
-    tag: MOCK_TAG,
-  },
-  // TagAddEditor
-  {
-    __typename: 'TagNotice' as any,
-    id: 'TagAddEditor',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    tagNoticeType: 'TagAddEditor' as any,
-    tag: MOCK_TAG,
-  },
-  // TagLeaveEditor
-  {
-    __typename: 'TagNotice' as any,
-    id: 'TagLeaveEditor',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    tagNoticeType: 'TagLeaveEditor' as any,
-    tag: MOCK_TAG,
-  },
-
-  /**
    * Transaction
    */
   // PaymentReceivedDonation
@@ -402,16 +310,6 @@ export const MOCK_NOTICE_LIST = [
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
     txNoticeType: 'PaymentReceivedDonation' as any,
-    tx: MOCK_TRANSACTION,
-  },
-  // PaymentPayout
-  {
-    __typename: 'TransactionNotice' as any,
-    id: 'PaymentPayout',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    txNoticeType: 'PaymentPayout' as any,
     tx: MOCK_TRANSACTION,
   },
 
