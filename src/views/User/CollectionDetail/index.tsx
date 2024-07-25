@@ -7,7 +7,7 @@ import { CollectionDetailQuery } from '~/gql/graphql'
 
 import AsideUserProfile from '../UserProfile/AsideUserProfile'
 import CollectionArticles from './CollectionArticles'
-import CollectinoArticlesPlaceholder from './CollectionArticles/Placeholder'
+import CollectionArticlesPlaceholder from './CollectionArticles/Placeholder'
 import CollectionProfile from './CollectionProfile'
 import CollectionProfilePlaceholder from './CollectionProfile/Placeholder'
 import { COLLECTION_DETAIL } from './gql'
@@ -40,7 +40,7 @@ const BaseCollectionDetail = () => {
     return (
       <>
         <CollectionProfilePlaceholder />
-        <CollectinoArticlesPlaceholder />
+        <CollectionArticlesPlaceholder />
       </>
     )
   }

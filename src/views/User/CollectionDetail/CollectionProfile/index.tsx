@@ -31,7 +31,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
 
   return (
     <EditCollection.Dialog collection={collection}>
-      {({ openDialog: openEditeCollection }) => (
+      {({ openDialog: openEditCollection }) => (
         <section>
           <Media lessThan="lg">
             <section>
@@ -40,7 +40,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                   <Book.Collection title={title} cover={cover} />
                 )}
                 {!cover && isViewer && (
-                  <button onClick={openEditeCollection}>
+                  <button onClick={openEditCollection}>
                     <Book.Collection title={title} hasMask />
                   </button>
                 )}
@@ -85,7 +85,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                     <Button
                       textColor="greyDarker"
                       textActiveColor="green"
-                      onClick={openEditeCollection}
+                      onClick={openEditCollection}
                     >
                       <FormattedMessage
                         defaultMessage="Add description"
@@ -105,7 +105,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                 <Book.Collection title={title} cover={cover} />
               )}
               {!cover && isViewer && (
-                <button onClick={openEditeCollection}>
+                <button onClick={openEditCollection}>
                   <Book.Collection title={title} hasMask />
                 </button>
               )}
@@ -120,7 +120,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                     <Button
                       textColor="greyDarker"
                       textActiveColor="green"
-                      onClick={openEditeCollection}
+                      onClick={openEditCollection}
                     >
                       <FormattedMessage
                         defaultMessage="Add description"
