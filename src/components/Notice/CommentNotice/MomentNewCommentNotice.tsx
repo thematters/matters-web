@@ -30,6 +30,18 @@ const MomentNewCommentNotice = ({
   const commentMoment =
     notice.comment?.node.__typename === 'Moment' ? notice.comment.node : null
 
+  // manual type guard
+  if (!commentMoment) {
+    return null
+  }
+
+  const title = truncateTitle(stripHtml(commentMoment?.content || ''), 10, lang)
+  const images = commentMoment?.assets?.length
+    ? intl
+        .formatMessage({ defaultMessage: `[image]`, id: 'W3tqQO' })
+        .repeat(Math.min(3, commentMoment.assets.length))
+    : ''
+
   return (
     <NoticeDigest
       notice={notice}
@@ -38,31 +50,13 @@ const MomentNewCommentNotice = ({
           defaultMessage="commented in your moment"
           id="qCotH5"
           description="src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
-          values={{
-            commentMoment: (
-              <NoticeMomentTitle
-                moment={commentMoment}
-                title={`${truncateTitle(
-                  stripHtml(commentMoment?.content || ''),
-                  10,
-                  lang
-                )} ${
-                  commentMoment?.assets?.length
-                    ? intl
-                        .formatMessage({
-                          defaultMessage: `[image]`,
-                          id: 'W3tqQO',
-                        })
-                        .repeat(Math.min(3, commentMoment.assets.length))
-                    : ''
-                }`}
-              />
-            ),
-          }}
         />
       }
       content={<NoticeComment comment={notice.comment} />}
-      title={notice.comment?.content || 'FIXME title'}
+      title={<NoticeMomentTitle
+        title={`${title} ${images}`}
+        moment={commentMoment}
+      />}
       testId={TEST_ID.NOTICE_ARTICLE_NEW_COMMENT}
     />
   )
