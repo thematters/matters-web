@@ -2576,6 +2576,9 @@
   "kCp8A9": {
     "defaultMessage": "After resignation, you will not be able to manage tags."
   },
+  "kEDrXh": {
+    "defaultMessage": "liked your collection"
+  },
   "kHMa3H": {
     "defaultMessage": "The new password and confirmation password do not match."
   },
@@ -2778,10 +2781,6 @@
   },
   "nWhqw9": {
     "defaultMessage": "Publish Now"
-  },
-  "nYUnyl": {
-    "defaultMessage": "liked your collection",
-    "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
   "nhkx3t": {
     "defaultMessage": "IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"

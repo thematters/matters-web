@@ -2576,6 +2576,9 @@
   "kCp8A9": {
     "defaultMessage": "如果辭去權限，你將無法繼續管理標籤。"
   },
+  "kEDrXh": {
+    "defaultMessage": "喜歡你的選集"
+  },
   "kHMa3H": {
     "defaultMessage": "密碼不一致"
   },
@@ -2778,10 +2781,6 @@
   },
   "nWhqw9": {
     "defaultMessage": "立即發布"
-  },
-  "nYUnyl": {
-    "defaultMessage": "liked your collection",
-    "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
   "nhkx3t": {
     "defaultMessage": "IPFS 是一種分散式儲存技術，具有去中心、易存續、不易被審查等優點。 每一篇在 Matters 發佈的文章都會上傳到 IPFS。 IPFS 會產生一定儲存費用，目前暫時由 Matters 承擔。 （到 IPFS 官網 ipfs.com 可以了解更多）"

@@ -18,11 +18,7 @@ const CollectionNewLikeNotice = ({
     <NoticeDigest
       notice={notice}
       action={
-        <FormattedMessage
-          defaultMessage="liked your collection"
-          id="nYUnyl"
-          description="src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
-        />
+        <FormattedMessage defaultMessage="liked your collection" id="kEDrXh" />
       }
       testId={TEST_ID.NOTICE_USER_NEW_FOLLOWER}
     />
@@ -31,7 +27,7 @@ const CollectionNewLikeNotice = ({
 
 CollectionNewLikeNotice.fragments = {
   notice: gql`
-    fragment UserNewFollowerNotice on UserNotice {
+    fragment CollectionNewLikeNotice on CollectionNotice {
       id
       ...NoticeDate
       actors {

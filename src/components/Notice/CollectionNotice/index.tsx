@@ -2,12 +2,12 @@ import gql from 'graphql-tag'
 
 import { CollectionNoticeFragment } from '~/gql/graphql'
 
-import CollectionLikeNotice from './CollectionLikeNotice'
+import CollectionNewLikeNotice from './CollectionLikeNotice'
 
 const CollectionNotice = ({ notice }: { notice: CollectionNoticeFragment }) => {
   switch (notice.__typename) {
     case 'CollectionNotice':
-      return <CollectionLikeNotice notice={notice} />
+      return <CollectionNewLikeNotice notice={notice} /> // so far just one type of notice
     default:
       return null
   }
@@ -18,12 +18,13 @@ CollectionNotice.fragments = {
     fragment CollectionNotice on CollectionNotice {
       id
       unread
-      __typename
+      type: __typename
       target {
         id
       }
+      ...CollectionNewLikeNotice
     }
-    ${CollectionLikeNotice.fragments.notice}
+    ${CollectionNewLikeNotice.fragments.notice}
   `,
 }
 
