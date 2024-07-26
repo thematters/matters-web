@@ -50,8 +50,8 @@ export const Tabs = ({ article, tab, setTab }: TabsProps) => {
           selected={tab === 'Recommendation'}
           onClick={() => setTab('Recommendation')}
           title={intl.formatMessage({
-            defaultMessage: 'Recommendation',
-            id: 't2HCuA',
+            defaultMessage: 'More',
+            id: 'VqdOGQ',
             description: 'src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx',
           })}
         />
