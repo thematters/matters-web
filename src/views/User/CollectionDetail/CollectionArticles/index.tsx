@@ -100,6 +100,16 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
       <section className={styles.midMenu}>
         <section className={styles.updatedDate}>
           <FormattedMessage
+            defaultMessage="{articleCount} articles"
+            id="RnKPVm"
+            values={{
+              articleCount: articles.totalCount,
+            }}
+          />
+        </section>
+
+        <section className={styles.updatedDate}>
+          <FormattedMessage
             defaultMessage="Updated {date}"
             id="h+punE"
             description="src/views/User/CollectionDetail/Content.tsx"
@@ -141,7 +151,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
       <Layout.Main.Spacing hasVertical={false}>
         <List>
           {articleEdges &&
-            articleEdges.map(({ node, cursor }, i) => (
+            articleEdges.map(({ node }, i) => (
               <List.Item key={node.id}>
                 <ArticleDigestFeed
                   article={node}

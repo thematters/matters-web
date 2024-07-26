@@ -1,0 +1,25 @@
+.size20 {
+  height: 1.25rem;
+}
+
+.size22 {
+  height: 1.375rem;
+}
+
+.heartBeat {
+  animation: heart-beat 1s;
+}
+
+@keyframes heart-beat {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.2);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
