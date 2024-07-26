@@ -591,12 +591,12 @@
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
+  "8+Z5E9": {
+    "defaultMessage": "The badge signifies your participation and completion in the \"Free Write in 7 days\"."
+  },
   "80bF0W": {
     "defaultMessage": "No comments",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
-  },
-  "8+Z5E9": {
-    "defaultMessage": "The badge signifies your participation and completion in the \"Free Write in 7 days\"."
   },
   "84VOdX": {
     "defaultMessage": "Unpin from profile",
@@ -1892,11 +1892,11 @@
     "defaultMessage": "Last 3 months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
-  "W3tqQO": {
-    "defaultMessage": "[image]"
-  },
   "W3hNBA": {
     "defaultMessage": "Free Write in 7 days Grand Badge"
+  },
+  "W3tqQO": {
+    "defaultMessage": "[image]"
   },
   "W66Eyq": {
     "defaultMessage": "Password must be at least 8 characters long, support letter, numbers and symbols.",
@@ -2508,13 +2508,13 @@
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
-  "hgtWIO": {
-    "defaultMessage": "Articles have been collected",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "hfRsLB": {
     "defaultMessage": "Writers {count}",
     "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
+  },
+  "hgtWIO": {
+    "defaultMessage": "Articles have been collected",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "hk2aiz": {
     "defaultMessage": "followed your circle",

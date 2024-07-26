@@ -591,12 +591,12 @@
     "defaultMessage": "暂无评论",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
+  "8+Z5E9": {
+    "defaultMessage": "纪念你参与「七日书」并完成七天书写"
+  },
   "80bF0W": {
     "defaultMessage": "暂无留言",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
-  },
-  "8+Z5E9": {
-    "defaultMessage": "纪念你参与「七日书」并完成七天书写"
   },
   "84VOdX": {
     "defaultMessage": "取消代表作",
@@ -1892,11 +1892,11 @@
     "defaultMessage": "最近 3 个月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
   },
-  "W3tqQO": {
-    "defaultMessage": "[图]"
-  },
   "W3hNBA": {
     "defaultMessage": "七日书大满贯"
+  },
+  "W3tqQO": {
+    "defaultMessage": "[图]"
   },
   "W66Eyq": {
     "defaultMessage": "密码需至少 8 位，支持字母、数字及符号的组合。",
@@ -2508,13 +2508,13 @@
     "defaultMessage": "人追踪",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
-  "hgtWIO": {
-    "defaultMessage": "作品被关联",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "hfRsLB": {
     "defaultMessage": "作者 {count}",
     "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
+  },
+  "hgtWIO": {
+    "defaultMessage": "作品被关联",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "hk2aiz": {
     "defaultMessage": "追踪了你的围炉",
