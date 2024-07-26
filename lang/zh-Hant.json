@@ -2007,9 +2007,6 @@
   "Xi40U9": {
     "defaultMessage": "操作無法撤銷，確認刪除選集嗎？"
   },
-  "Xj0yv9": {
-    "defaultMessage": "寫文章"
-  },
   "XlfiKR": {
     "defaultMessage": "2-20 個字元，僅支持英文小寫字母、數字或下劃線"
   },
@@ -3068,9 +3065,6 @@
   "stTITI": {
     "defaultMessage": "社區公告",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
-  },
-  "subQNF": {
-    "defaultMessage": "發動態"
   },
   "sy+pv5": {
     "defaultMessage": "電子郵件"
