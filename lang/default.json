@@ -3037,9 +3037,6 @@
   "ruZqtT": {
     "defaultMessage": "Must be between {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} characters long."
   },
-  "sDQSFv": {
-    "defaultMessage": "Articles Only"
-  },
   "sFJ/Is": {
     "defaultMessage": "Are you sure you want to clear the current content?"
   },
