@@ -7,7 +7,11 @@ import LikeButton from '.'
 
 describe('src/components/User/CollectionDetail/CollectionProfile/LikeButton', () => {
   it('should render like button', async () => {
-    render(<LikeButton collection={{ ...MOCK_COLLECTION, liked: false }} />)
+    render(
+      <LikeButton
+        collection={{ ...MOCK_COLLECTION, liked: false, likeCount: 1 }}
+      />
+    )
 
     expect(
       screen.getByRole('button', { name: 'Like moment' })
@@ -15,7 +19,11 @@ describe('src/components/User/CollectionDetail/CollectionProfile/LikeButton', ()
   })
 
   it('should render liked button', async () => {
-    render(<LikeButton collection={{ ...MOCK_COLLECTION, liked: true }} />)
+    render(
+      <LikeButton
+        collection={{ ...MOCK_COLLECTION, liked: true, likeCount: 1 }}
+      />
+    )
 
     expect(
       screen.getByRole('button', { name: 'Unlike moment' })

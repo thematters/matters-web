@@ -24,6 +24,11 @@
   }
 }
 
+.updatedDate {
+  display: flex;
+  gap: var(--sp4);
+}
+
 .addArticles {
   @mixin flex-center-all;
   @mixin transition;
