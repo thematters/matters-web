@@ -14,7 +14,7 @@ describe('src/components/User/CollectionDetail/CollectionProfile/LikeButton', ()
     )
 
     expect(
-      screen.getByRole('button', { name: 'Like moment' })
+      screen.getByRole('button', { name: 'Like collection' })
     ).toBeInTheDocument()
   })
 
@@ -26,7 +26,7 @@ describe('src/components/User/CollectionDetail/CollectionProfile/LikeButton', ()
     )
 
     expect(
-      screen.getByRole('button', { name: 'Unlike moment' })
+      screen.getByRole('button', { name: 'Unlike collection' })
     ).toBeInTheDocument()
   })
 })

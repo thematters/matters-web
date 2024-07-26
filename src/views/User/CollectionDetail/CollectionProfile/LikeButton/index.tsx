@@ -51,29 +51,35 @@ const LikeButton = ({ collection, iconSize = 20 }: LikeButtonProps) => {
 
   const [playHeartBeat, setPlayHeartBeat] = useState(false)
 
-  const [likeCollection] = useMutation<LikeCollectionMutation>(LIKE_COLLECTION, {
-    variables: { id: collection.id },
-    optimisticResponse: {
-      likeCollection: {
-        id: collection.id,
-        likeCount: collection.likeCount + 1,
-        liked: true,
-        __typename: 'Collection',
+  const [likeCollection] = useMutation<LikeCollectionMutation>(
+    LIKE_COLLECTION,
+    {
+      variables: { id: collection.id },
+      optimisticResponse: {
+        likeCollection: {
+          id: collection.id,
+          likeCount: collection.likeCount + 1,
+          liked: true,
+          __typename: 'Collection',
+        },
       },
-    },
-  })
+    }
+  )
 
-  const [unlikeCollection] = useMutation<UnlikeCollectionMutation>(UNLIKE_COLLECTION, {
-    variables: { id: collection.id },
-    optimisticResponse: {
-      unlikeCollection: {
-        id: collection.id,
-        likeCount: collection.likeCount - 1,
-        liked: false,
-        __typename: 'Collection',
+  const [unlikeCollection] = useMutation<UnlikeCollectionMutation>(
+    UNLIKE_COLLECTION,
+    {
+      variables: { id: collection.id },
+      optimisticResponse: {
+        unlikeCollection: {
+          id: collection.id,
+          likeCount: collection.likeCount - 1,
+          liked: false,
+          __typename: 'Collection',
+        },
       },
-    },
-  })
+    }
+  )
 
   const likeClassNames = classNames({
     [styles[`size${iconSize}`]]: true,
