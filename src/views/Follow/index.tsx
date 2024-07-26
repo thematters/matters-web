@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -15,6 +15,7 @@ import { updateViewerUnreadFollowing } from '~/components/GQL'
 import { MeFollowQuery, ReadFollowingFeedMutation } from '~/gql/graphql'
 
 import Feed from './Feed'
+import { TABS, Tabs } from './Tabs'
 
 const READ_FOLLOWING = gql`
   mutation ReadFollowingFeed {
@@ -35,7 +36,11 @@ const ME_FOLLOW = gql`
   }
 `
 
-const BaseFollow = () => {
+type BaseFollowProps = {
+  tab: TABS
+}
+
+const BaseFollow = ({ tab }: BaseFollowProps) => {
   const viewer = useContext(ViewerContext)
   const [readFollowing] = useMutation<ReadFollowingFeedMutation>(
     READ_FOLLOWING,
@@ -59,10 +64,11 @@ const BaseFollow = () => {
     return null
   }
 
-  return <Feed />
+  return <Feed tab={tab} />
 }
 
 const Follow = () => {
+  const [tab, setTab] = useState<TABS>('All')
   return (
     <Layout.Main>
       <Media at="sm">
@@ -79,7 +85,9 @@ const Follow = () => {
       </Media>
 
       <Layout.Main.Spacing hasVertical={false}>
-        <BaseFollow />
+        <Tabs tab={tab} setTab={setTab} />
+        <Spacer size="xtight" />
+        <BaseFollow tab={tab} />
       </Layout.Main.Spacing>
     </Layout.Main>
   )

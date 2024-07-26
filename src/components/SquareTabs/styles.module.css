@@ -3,7 +3,6 @@
 
   display: flex;
   gap: var(--sp16);
-  margin-bottom: var(--sp8);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 
@@ -13,14 +12,41 @@
     z-index: var(--z-index-sticky-tabs);
     background: var(--color-white);
   }
-}
 
-.tabItem {
-  flex-shrink: 0;
-  font-size: var(--text14);
-  line-height: 1.375rem;
+  & .tabItem {
+    @mixin transition;
 
-  &.selected {
-    font-weight: var(--font-semibold);
+    flex-shrink: 0;
+    padding: var(--sp5) var(--sp10);
+    font-size: var(--text14);
+    line-height: 1.375rem;
+    color: var(--color-grey-darker);
+    cursor: pointer;
+    background: var(--color-grey-lighter);
+    border-radius: 0.5rem;
+    transition-property: background-color, color;
+
+    /* FIX: change the font-weight of a font, the text will typically cause a bit of a layout shift
+    ref: https://stackoverflow.com/a/32570813
+    */
+    &::after {
+      display: block;
+      height: 0;
+      overflow: hidden;
+      font-weight: var(--font-semibold);
+      color: transparent;
+      visibility: hidden;
+      content: attr(data-title);
+    }
+
+    &:hover {
+      background: var(--color-grey-light);
+    }
+
+    &.selected {
+      font-weight: var(--font-semibold);
+      color: var(--color-white);
+      background: var(--color-black);
+    }
   }
 }

@@ -1,0 +1,5 @@
+.showMoreButton {
+  height: 1.375rem;
+  margin-top: calc(var(--sp8) * -1);
+  margin-bottom: var(--sp20);
+}

@@ -739,6 +739,10 @@
     "defaultMessage": "追踪",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "AeIRlL": {
+    "defaultMessage": "只看文章",
+    "description": "src/views/Follow/Tabs/index.tsx"
+  },
   "AlHYvk": {
     "defaultMessage": "{type}已编辑"
   },
@@ -1218,6 +1222,10 @@
   "JkWLg6": {
     "defaultMessage": "被追踪",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "JpAsUV": {
+    "defaultMessage": "更多动态",
+    "description": "src/views/Follow/Feed/UserPostMomentActivity"
   },
   "JpS59y": {
     "defaultMessage": "已接受",

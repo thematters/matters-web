@@ -739,6 +739,10 @@
     "defaultMessage": "Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "AeIRlL": {
+    "defaultMessage": "Articles",
+    "description": "src/views/Follow/Tabs/index.tsx"
+  },
   "AlHYvk": {
     "defaultMessage": "{type} edited"
   },
@@ -1218,6 +1222,10 @@
   "JkWLg6": {
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
+  "JpAsUV": {
+    "defaultMessage": "More moments",
+    "description": "src/views/Follow/Feed/UserPostMomentActivity"
   },
   "JpS59y": {
     "defaultMessage": "Accepted",

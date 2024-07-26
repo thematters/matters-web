@@ -1,6 +1,10 @@
 .container {
   padding: var(--sp20) 0;
 
+  @media (--sm-up) {
+    max-width: 33.375rem; /* 534px */
+  }
+
   & .header {
     display: flex;
     align-items: center;

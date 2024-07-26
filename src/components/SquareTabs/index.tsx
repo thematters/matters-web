@@ -1,41 +1,26 @@
 import classNames from 'classnames'
 
-import { Button, ButtonProps } from '~/components'
-
 import styles from './styles.module.css'
 
 type TabProps = {
+  title: string
   selected?: boolean
-} & ButtonProps
+  onClick: () => void
+}
 
-const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
-  selected,
-  children,
-  ...buttonProps
-}) => {
-  const itemClasses = classNames({
+const Tab = ({ title, selected, onClick }: TabProps) => {
+  const liClasses = classNames({
     [styles.tabItem]: true,
     [styles.selected]: selected,
   })
-
   return (
     <li
-      className={itemClasses}
-      role="tab"
-      aria-disabled={buttonProps.disabled}
-      aria-selected={selected}
+      className={liClasses}
+      role="button"
+      onClick={onClick}
+      data-title={title}
     >
-      <Button
-        size={[null, '1.875rem']}
-        spacing={[0, 10]}
-        borderRadius="0.5rem"
-        textColor={selected ? 'white' : 'greyDarker'}
-        bgColor={selected ? 'black' : 'greyLighter'}
-        bgActiveColor={selected ? undefined : 'greyLight'}
-        {...buttonProps}
-      >
-        <span>{children}</span>
-      </Button>
+      {title}
     </li>
   )
 }
@@ -46,7 +31,7 @@ interface SquareTabsProps {
 
 export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
   Tab: typeof Tab
-} = ({ sticky, children }) => {
+} = ({ children, sticky }) => {
   const navClasses = classNames({
     [styles.tabList]: true,
     [styles.sticky]: sticky,
