@@ -1,6 +1,12 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Book,
@@ -8,6 +14,7 @@ import {
   Expandable,
   LinkWrapper,
   Media,
+  toast,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -27,8 +34,28 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
   const { getQuery } = useRoute()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
-
   const { title, cover, description, articles, author } = collection
+  const forbid = () => {
+    toast.error({
+      message: (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
+    })
+  }
+
+  let onClick: () => void | undefined
+
+  if (!viewer.isAuthed) {
+    onClick = () => {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
+        })
+      )
+    }
+  } else if (viewer.isArchived || viewer.isFrozen) {
+    onClick = forbid
+  }
 
   return (
     <EditCollection.Dialog collection={collection}>
@@ -115,7 +142,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                 {!!description && (
                   <p className={styles.description}>{description}</p>
                 )}
-                <LikeButton collection={collection} />
+                <LikeButton collection={collection} onClick={onClick} />
                 {!description && isViewer && (
                   <p className={styles.addDescription}>
                     <Button

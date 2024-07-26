@@ -26,6 +26,7 @@ interface LikeButtonProps {
   collection: CollectionLikeButtonPublicFragment &
     Partial<CollectionLikeButtonPrivateFragment>
   iconSize?: 20 | 22
+  onClick?: () => void
 }
 
 const fragments = {
@@ -45,7 +46,11 @@ const fragments = {
   },
 }
 
-const LikeButton = ({ collection, iconSize = 20 }: LikeButtonProps) => {
+const LikeButton = ({
+  collection,
+  onClick,
+  iconSize = 20,
+}: LikeButtonProps) => {
   const intl = useIntl()
   const { likeCount, liked } = collection
 
@@ -81,6 +86,17 @@ const LikeButton = ({ collection, iconSize = 20 }: LikeButtonProps) => {
     }
   )
 
+  const [handleLike, handleUnlike] = [
+    () => {
+      likeCollection()
+      setPlayHeartBeat(true)
+    },
+    () => {
+      unlikeCollection()
+      setPlayHeartBeat(false)
+    },
+  ]
+
   const likeClassNames = classNames({
     [styles[`size${iconSize}`]]: true,
     [styles.heartBeat]: playHeartBeat,
@@ -90,10 +106,7 @@ const LikeButton = ({ collection, iconSize = 20 }: LikeButtonProps) => {
     return (
       <Button
         spacing={[8, 8]}
-        onClick={() => {
-          unlikeCollection()
-          setPlayHeartBeat(false)
-        }}
+        onClick={onClick || handleUnlike}
         aria-label={intl.formatMessage({
           defaultMessage: 'Unlike collection',
           id: '9aorag',
@@ -119,10 +132,7 @@ const LikeButton = ({ collection, iconSize = 20 }: LikeButtonProps) => {
       spacing={[8, 8]}
       textColor="black"
       textActiveColor="greyDarker"
-      onClick={() => {
-        likeCollection()
-        setPlayHeartBeat(true)
-      }}
+      onClick={onClick || handleLike}
       aria-label={intl.formatMessage({
         defaultMessage: 'Like collection',
         id: '8YgVvt',
