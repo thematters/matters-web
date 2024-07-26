@@ -66,6 +66,7 @@ export interface ClickButtonProp {
     | 'top_up'
     | 'translation' // translation button
     | 'write'
+    | 'write_moment'
     | 'write_collection'
     | 'google_search'
     | 'subscribe_circle_banner'

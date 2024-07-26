@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
-import { MAX_MOMENT_CONTENT_LENGTH } from '~/common/enums'
+import { MAX_MOMENT_CONTENT_LENGTH, OPEN_MOMENT_FORM } from '~/common/enums'
 import { formStorage, parseFormSubmitErrors, stripHtml } from '~/common/utils'
 import {
   Button,
@@ -12,6 +12,7 @@ import {
   SpinnerBlock,
   TextIcon,
   toast,
+  useEventListener,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -36,6 +37,14 @@ const MomentForm = () => {
   })
 
   const [isEditing, setEditing] = useState(false)
+
+  useEventListener(OPEN_MOMENT_FORM, () => {
+    setEditing(true)
+
+    if (editor) {
+      editor.commands.focus('end')
+    }
+  })
 
   const formRef = useRef<HTMLFormElement | null>(null)
   const formId = 'moment-form'
