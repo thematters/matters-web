@@ -2185,6 +2185,9 @@
   "adThp5": {
     "defaultMessage": "Latest"
   },
+  "afLdf2": {
+    "defaultMessage": "Moment"
+  },
   "ai7kS4": {
     "defaultMessage": "My Works"
   },
@@ -2610,6 +2613,9 @@
   },
   "jtdQHR": {
     "defaultMessage": "Gateways"
+  },
+  "jx7Hn3": {
+    "defaultMessage": "Article"
   },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",

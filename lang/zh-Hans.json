@@ -2185,6 +2185,9 @@
   "adThp5": {
     "defaultMessage": "最新"
   },
+  "afLdf2": {
+    "defaultMessage": "发动态"
+  },
   "ai7kS4": {
     "defaultMessage": "我的创作"
   },
@@ -2610,6 +2613,9 @@
   },
   "jtdQHR": {
     "defaultMessage": "公共节点"
+  },
+  "jx7Hn3": {
+    "defaultMessage": "写文章"
   },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 发布广播",
