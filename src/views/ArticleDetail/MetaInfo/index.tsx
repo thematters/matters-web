@@ -49,9 +49,10 @@ const MetaInfo = ({
   const editPath = toPath({ page: 'articleEdit', article })
   const isExceedRevision = article.revisionCount >= MAX_ARTICLE_REVISION_COUNT
 
+  const campaign = article.campaigns[0]?.campaign
+
   const { router, isInPath } = useRoute()
   const { shortHash, ...qs } = router.query
-
   const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
   const path = toPath({
@@ -62,6 +63,28 @@ const MetaInfo = ({
 
   return (
     <section className={styles.info}>
+      {campaign && (
+        <>
+          <Button
+            href={toPath({ page: 'campaignDetail', campaign }).href}
+            onClick={() => {
+              analytics.trackEvent('click_button', {
+                type: 'campaign_detail_entrance',
+                pageType: 'article_detail',
+                pageComponent: 'article_meta',
+              })
+            }}
+          >
+            <TextIcon size={12} color="freeWriteBlue">
+              {campaign.name}
+            </TextIcon>
+          </Button>
+          <section className={styles.dot}>
+            <DotDivider />
+          </section>
+        </>
+      )}
+
       <section className={styles.author}>
         <UserDigest.Plain user={article.author} />
         <section className={styles.dot}>

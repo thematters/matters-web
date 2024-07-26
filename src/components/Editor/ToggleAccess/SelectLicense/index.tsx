@@ -112,10 +112,9 @@ const SelectLicense = ({ isInCircle, license, onChange }: Props) => {
   const cc4link = 'https://creativecommons.org/licenses/by-nc-nd/4.0/'
 
   return (
-    <Form.Select
+    <Form.Select<ArticleLicenseType>
       name="select-license"
       label={<FormattedMessage defaultMessage="License" id="HBxXD/" />}
-      title={<FormattedMessage defaultMessage="License" id="HBxXD/" />}
       onChange={(option) => onChange(option.value)}
       options={options.map((value) => {
         const extraDesc = LICENSE_TEXT[isInCircle ? 1 : 0][value].extra[lang]

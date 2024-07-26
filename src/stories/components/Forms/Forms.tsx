@@ -77,7 +77,7 @@ const Forms = () => (
 
       {/* Form.Select */}
       <li>
-        <Form.Select
+        <Form.Select<number>
           name="select-period"
           onChange={() => null}
           label={

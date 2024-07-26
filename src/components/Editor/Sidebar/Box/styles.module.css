@@ -12,6 +12,10 @@
   }
 }
 
+.freeWriteBlue {
+  border-color: var(--color-free-write-blue-border);
+}
+
 .footerSpacing {
   padding-bottom: var(--sp16);
 }

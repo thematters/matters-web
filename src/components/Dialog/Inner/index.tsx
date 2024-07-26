@@ -101,7 +101,7 @@ const Inner: React.FC<
       className={innerClasses}
       style={style}
       onKeyDown={(event) => {
-        if (event.code.toLowerCase() !== KEYVALUE.escape) {
+        if (event.code?.toLowerCase() !== KEYVALUE.escape) {
           return
         }
         if (!dismissOnESC) {

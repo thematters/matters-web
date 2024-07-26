@@ -1,10 +1,9 @@
 import classNames from 'classnames'
-import format from 'date-fns/format'
 import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 import Sticky from 'react-stickynode'
 
-import { analytics, toPath } from '~/common/utils'
+import { analytics, datetimeFormat, toPath } from '~/common/utils'
 import { Label, useRoute } from '~/components'
 import { VersionsArticleFragment } from '~/gql/graphql'
 
@@ -57,7 +56,9 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
                 <a className={styles.link}>
                   <span className={styles.date}>
                     <span>
-                      {format(new Date(version.createdAt), 'yyyy-MM-dd')}
+                      {datetimeFormat.absolute.dateISO(
+                        new Date(version.createdAt)
+                      )}
                     </span>
 
                     {index === 0 && (
@@ -67,7 +68,9 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
                     )}
                   </span>
                   <span className={styles.time}>
-                    {format(new Date(version.createdAt), 'HH:mm')}
+                    {datetimeFormat.absolute.timeISO(
+                      new Date(version.createdAt)
+                    )}
                   </span>
                 </a>
               </Link>
