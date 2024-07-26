@@ -1,0 +1,19 @@
+.container {
+  padding: var(--sp16) 0 0;
+
+  @media (--sm-up) {
+    padding: var(--sp32) 0 var(--sp40);
+  }
+}
+
+.badgeIcon {
+  text-align: center;
+
+  & svg {
+    height: 215px;
+  }
+}
+
+.title {
+  margin: var(--sp16) 0;
+}

@@ -1,0 +1,17 @@
+.participants {
+  & h2 {
+    font-size: var(--text20);
+    font-weight: var(--font-medium);
+  }
+
+  & .count {
+    color: var(--color-grey);
+  }
+}
+
+.avatars {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp14);
+  margin-top: var(--sp16);
+}

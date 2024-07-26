@@ -120,6 +120,7 @@ export const RoundedButton: React.FC<
     return (
       <Button
         size={['100%', '3rem']}
+        borderWidth="sm"
         disabled={disabled || loading}
         ref={ref}
         {...buttonProps}

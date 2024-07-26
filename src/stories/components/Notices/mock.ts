@@ -188,6 +188,15 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'ArticleNewComment' as any,
     comment: MOCK_COMMENT,
   },
+  {
+    __typename: 'CommentNotice',
+    id: 'MomentNewCommentNotice',
+    unread: false,
+    createdAt: '2024-06-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'MomentNewComment',
+    comment: MOCK_COMMENT,
+  },
   // SubscribedArticleNewComment
   {
     __typename: 'CommentNotice' as any,
@@ -248,6 +257,15 @@ export const MOCK_NOTICE_LIST = [
     actors: [MOCK_USER],
     momentNoticeType: 'MomentMentionedYou',
     moment: MOCK_MOMENT_LIKE,
+  },
+  {
+    __typename: 'CommentNotice',
+    id: 'CommentLikedNotice',
+    unread: false,
+    createdAt: '2024-06-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    commentNoticeType: 'CommentLiked',
+    comment: MOCK_CIRCLE_COMMENT,
   },
   /**
    * Comment - Comment

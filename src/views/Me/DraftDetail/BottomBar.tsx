@@ -8,14 +8,20 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
+import {
+  getSelectCampaign,
+  SelectCampaignProps,
+} from '~/components/Editor/SelectCampaign'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import {
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
+  EditorSelectCampaignFragment,
 } from '~/gql/graphql'
 
 import {
   useEditDraftAccess,
+  useEditDraftCampaign,
   useEditDraftCanComment,
   useEditDraftCollection,
   useEditDraftCover,
@@ -28,9 +34,14 @@ import {
 interface BottomBarProps {
   draft: EditMetaDraftFragment
   ownCircles?: DigestRichCirclePublicFragment[]
+  campaigns?: EditorSelectCampaignFragment[]
 }
 
-const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
+const EditDraftBottomBar = ({
+  draft,
+  ownCircles,
+  campaigns,
+}: BottomBarProps) => {
   const { edit: editCollection, saving: collectionSaving } =
     useEditDraftCollection()
   const { edit: editCover, saving: coverSaving, refetch } = useEditDraftCover()
@@ -50,8 +61,16 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
 
   const { edit: editSupport, saving: supportSaving } = useEditSupportSetting()
 
+  const { edit: editCampaign, saving: campaignSaving } = useEditDraftCampaign()
+
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
+
+  const { appliedCampaign, selectedStage } = getSelectCampaign({
+    applied: campaigns && campaigns[0],
+    attached: draft.campaigns,
+    createdAt: draft.createdAt,
+  })
 
   const coverProps: SetCoverProps = {
     cover: draft.cover,
@@ -72,7 +91,9 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
     editCollection,
     collectionSaving,
   }
-  const accessProps: ToggleAccessProps & SetResponseProps = {
+  const accessProps: ToggleAccessProps &
+    SetResponseProps &
+    Partial<SelectCampaignProps> = {
     circle: draft?.access.circle,
     accessType: draft.access.type,
     license: draft.license,
@@ -92,6 +113,10 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
 
     canComment,
     toggleComment,
+
+    appliedCampaign,
+    selectedStage,
+    editCampaign,
   }
 
   return (
@@ -108,7 +133,8 @@ const EditDraftBottomBar = ({ draft, ownCircles }: BottomBarProps) => {
             coverSaving ||
             tagsSaving ||
             accessSaving ||
-            toggleCommentSaving
+            toggleCommentSaving ||
+            campaignSaving
           }
           {...coverProps}
           {...tagsProps}

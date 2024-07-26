@@ -1,6 +1,6 @@
-import { useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
-import { FilledTabs, useRoute } from '~/components'
+import { SquareTabs, useRoute } from '~/components'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 export type TABS = 'Collection' | 'Author' | 'Recommendation' | undefined
@@ -12,7 +12,6 @@ type TabsProps = {
 }
 
 export const Tabs = ({ article, tab, setTab }: TabsProps) => {
-  const intl = useIntl()
   const { getQuery } = useRoute()
   const cid = getQuery('collection')
   const latestWorks = article.author?.latestWorks.filter((work) => {
@@ -22,40 +21,43 @@ export const Tabs = ({ article, tab, setTab }: TabsProps) => {
   const hasRecommendation = article.relatedArticles?.totalCount > 0
 
   return (
-    <FilledTabs>
+    <SquareTabs>
       {!!cid && (
-        <FilledTabs.Tab
+        <SquareTabs.Tab
           selected={tab === 'Collection'}
           onClick={() => setTab('Collection')}
-          title={intl.formatMessage({
-            defaultMessage: 'Collection',
-            id: 'Hpmiif',
-            description: 'src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx',
-          })}
-        />
+        >
+          <FormattedMessage
+            defaultMessage="Collection"
+            id="Hpmiif"
+            description="src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
+          />
+        </SquareTabs.Tab>
       )}
       {hasFromAuthor && (
-        <FilledTabs.Tab
+        <SquareTabs.Tab
           selected={tab === 'Author'}
           onClick={() => setTab('Author')}
-          title={intl.formatMessage({
-            defaultMessage: 'Author',
-            id: 'RM17b4',
-            description: 'src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx',
-          })}
-        />
+        >
+          <FormattedMessage
+            defaultMessage="Author"
+            id="RM17b4"
+            description="src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
+          />
+        </SquareTabs.Tab>
       )}
       {hasRecommendation && (
-        <FilledTabs.Tab
+        <SquareTabs.Tab
           selected={tab === 'Recommendation'}
           onClick={() => setTab('Recommendation')}
-          title={intl.formatMessage({
-            defaultMessage: 'More',
-            id: 'VqdOGQ',
-            description: 'src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx',
-          })}
-        />
+        >
+          <FormattedMessage
+            defaultMessage="More"
+            id="VqdOGQ"
+            description="src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
+          />
+        </SquareTabs.Tab>
       )}
-    </FilledTabs>
+    </SquareTabs>
   )
 }

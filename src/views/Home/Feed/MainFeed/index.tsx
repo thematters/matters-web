@@ -87,7 +87,7 @@ const horizontalFeeds: FeedLocation = {
 const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
   const isHottestFeed = sortBy === 'hottest'
-
+  const isIcymiFeed = sortBy === 'icymi'
   /**
    * Data Fetching
    */
@@ -229,7 +229,8 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                   article={edge.node}
                   hasReadTime={true}
                   hasDonationCount={true}
-                  includesMetaData={sortBy !== 'icymi'}
+                  includesMetaData={!isIcymiFeed} // only include metadata for non-icymi feeds
+                  excludesTimeStamp={isIcymiFeed} // only exclude timestamp for icymi feed
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: sortBy,

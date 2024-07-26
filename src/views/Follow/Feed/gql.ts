@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
 import RecommendArticleActivity from './RecommendArticleActivity'
-import RecommendCircleActivity from './RecommendCircleActivity'
 import RecommendUserActivity from './RecommendUserActivity'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
@@ -47,9 +46,6 @@ export const FOLLOWING_FEED = gql`
               ... on ArticleRecommendationActivity {
                 ...RecommendArticleActivity
               }
-              ... on CircleRecommendationActivity {
-                ...RecommendCircleActivity
-              }
               ... on UserRecommendationActivity {
                 ...RecommendUserActivity
               }
@@ -65,6 +61,5 @@ export const FOLLOWING_FEED = gql`
   ${UserPostMomentActivity.fragments}
   ${UserPublishArticleActivity.fragments}
   ${RecommendArticleActivity.fragments}
-  ${RecommendCircleActivity.fragments}
   ${RecommendUserActivity.fragments}
 `

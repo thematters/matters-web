@@ -1,10 +1,11 @@
 import dynamic from 'next/dynamic'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import {
-  OPEN_SHOW_NOMAD_BADGE_DIALOG,
+  OPEN_GRAND_BADGE_DIALOG,
+  OPEN_NOMAD_BADGE_DIALOG,
   TEST_ID,
   URL_USER_PROFILE,
 } from '~/common/enums'
@@ -23,13 +24,14 @@ import {
 } from '~/components'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
+import { BadgeGrandDialog } from '../BadgeGrandDialog'
 import { BadgeNomadDialog } from '../BadgeNomadDialog'
-import { BadgeNomadLabel } from '../BadgeNomadLabel'
 import {
   ArchitectBadge,
   CivicLikerBadge,
   GoldenMotorBadge,
-  // NomadBadge,
+  GrandBadge,
+  NomadBadge,
   SeedBadge,
   TraveloggersBadge,
 } from '../Badges'
@@ -51,10 +53,6 @@ export const AsideUserProfile = () => {
 
   // public user data
   const userName = getQuery('name')
-  const showBadges =
-    getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
-    URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
-  const [hasShowBadges, setHasShowBadges] = useState(false)
   const isInUserPage = isInPath('USER_ARTICLES') || isInPath('USER_COLLECTIONS')
   const isMe = !userName || viewer.userName === userName
 
@@ -62,10 +60,6 @@ export const AsideUserProfile = () => {
     page: 'userProfile',
     userName,
   })
-  const shareLink =
-    typeof window !== 'undefined'
-      ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key}=${URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value}`
-      : ''
 
   const { data, loading, client } = usePublicQuery<UserProfileUserPublicQuery>(
     USER_PROFILE_PUBLIC,
@@ -89,10 +83,22 @@ export const AsideUserProfile = () => {
   }, [user?.id, viewer.id])
 
   useEffect(() => {
-    if (showBadges) {
-      window.dispatchEvent(new CustomEvent(OPEN_SHOW_NOMAD_BADGE_DIALOG))
+    const shouldOpenNomadBadgeDialog =
+      getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
+      URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
+
+    if (shouldOpenNomadBadgeDialog) {
+      window.dispatchEvent(new CustomEvent(OPEN_NOMAD_BADGE_DIALOG))
     }
-  }, [showBadges])
+
+    const shouldOpenGrandBadgeDialog =
+      getQuery(URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.key) ===
+      URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.value
+
+    if (shouldOpenGrandBadgeDialog) {
+      window.dispatchEvent(new CustomEvent(OPEN_GRAND_BADGE_DIALOG))
+    }
+  }, [])
 
   /**
    * Render
@@ -118,6 +124,7 @@ export const AsideUserProfile = () => {
   const nomadBadgeLevel = (
     hasNomadBadge ? Number.parseInt(nomadBadgeType[0].type.charAt(5)) : 1
   ) as 1 | 2 | 3 | 4
+  const hasGrandBadge = badges.some((b) => b.type === 'grand_slam')
 
   const userState = user.status?.state as string
   const isCivicLiker = user.liker.civicLiker
@@ -249,27 +256,22 @@ export const AsideUserProfile = () => {
           user?.info.ethAddress) && (
           <section className={styles.badges}>
             {hasNomadBadge && (
-              <BadgeNomadDialog
-                nomadBadgeLevel={nomadBadgeLevel}
-                shareLink={shareLink}
-              >
-                {({ openDialog }) => {
-                  if (showBadges && !hasShowBadges) {
-                    setTimeout(() => {
-                      openDialog()
-                      // FIXED: infinite loop render of BadgeNomadDialog
-                      setHasShowBadges(true)
-                    })
-                  }
-                  return (
-                    <BadgeNomadLabel
-                      hasTooltip
-                      nomadBadgeLevel={nomadBadgeLevel}
-                      onClick={openDialog}
-                    />
-                  )
-                }}
+              <BadgeNomadDialog nomadBadgeLevel={nomadBadgeLevel}>
+                {({ openDialog }) => (
+                  <NomadBadge
+                    level={nomadBadgeLevel}
+                    hasTooltip
+                    onClick={openDialog}
+                  />
+                )}
               </BadgeNomadDialog>
+            )}
+            {hasGrandBadge && (
+              <BadgeGrandDialog>
+                {({ openDialog }) => (
+                  <GrandBadge hasTooltip onClick={openDialog} />
+                )}
+              </BadgeGrandDialog>
             )}
             {hasTraveloggersBadge && <TraveloggersBadge hasTooltip />}
             {hasSeedBadge && <SeedBadge hasTooltip />}

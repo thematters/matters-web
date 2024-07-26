@@ -115,4 +115,8 @@
   &.redLight {
     color: var(--color-heart-red);
   }
+
+  &.freeWriteBlue {
+    color: var(--color-free-write-blue);
+  }
 }

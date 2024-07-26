@@ -1,0 +1,7 @@
+.tabs {
+  padding-left: var(--sp16);
+
+  @media (--sm-up) {
+    padding-left: 0;
+  }
+}

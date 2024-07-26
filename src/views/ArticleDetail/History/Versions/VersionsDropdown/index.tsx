@@ -1,10 +1,9 @@
 import classNames from 'classnames'
-import format from 'date-fns/format'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
-import { analytics, toPath } from '~/common/utils'
+import { analytics, datetimeFormat, toPath } from '~/common/utils'
 import { Dropdown, Icon, Label, Menu, useRoute } from '~/components'
 import { VersionsArticleFragment } from '~/gql/graphql'
 
@@ -32,14 +31,16 @@ const Version = ({
           [versionStyles.date]: true,
         })}
       >
-        <span>{format(new Date(version.createdAt), 'yyyy-MM-dd')}</span>
+        <span>
+          {datetimeFormat.absolute.dateISO(new Date(version.createdAt))}
+        </span>
       </span>
       <span
         className={classNames({
           [versionStyles.time]: true,
         })}
       >
-        {format(new Date(version.createdAt), 'HH:mm')}
+        {datetimeFormat.absolute.timeISO(new Date(version.createdAt))}
       </span>
 
       {latest && (

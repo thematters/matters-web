@@ -396,6 +396,15 @@ span.container {
   }
 }
 
+.bgActiveGreyLight {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      background: var(--color-grey-light);
+    }
+  }
+}
+
 .bgActiveGreyLighterActive {
   &:hover,
   &:focus {

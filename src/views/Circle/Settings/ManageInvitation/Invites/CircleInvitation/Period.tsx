@@ -1,6 +1,5 @@
 import classNames from 'classnames'
-import differenceInDays from 'date-fns/differenceInDays'
-import parseISO from 'date-fns/parseISO'
+import { differenceInDays, parseISO } from 'date-fns'
 import { FormattedMessage } from 'react-intl'
 
 import { CircleInvitationFragment } from '~/gql/graphql'

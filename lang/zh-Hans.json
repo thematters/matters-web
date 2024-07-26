@@ -1,6 +1,6 @@
 {
   "+12veD": {
-    "defaultMessage": "开启回应"
+    "defaultMessage": "开启评论"
   },
   "+3ny7b": {
     "defaultMessage": "{totalCount} 人赞赏了作品"
@@ -251,7 +251,7 @@
     "defaultMessage": "众聊"
   },
   "20yT4t": {
-    "defaultMessage": "回应设置",
+    "defaultMessage": "评论设置",
     "description": "src/components/Editor/Sidebar/Response/index.tsx"
   },
   "24jhEp": {
@@ -383,6 +383,9 @@
   "4l6vz1": {
     "defaultMessage": "复制"
   },
+  "4nHH2x": {
+    "defaultMessage": "报名申请已递交 🎉"
+  },
   "4tqFCR": {
     "defaultMessage": "作者尚未启用 USDT 钱包"
   },
@@ -445,6 +448,9 @@
   "5sg7KC": {
     "defaultMessage": "密码"
   },
+  "5y5rID": {
+    "defaultMessage": "我们将尽快处理你的申请，敬请期待活动开跑！"
+  },
   "6+eeJ4": {
     "defaultMessage": "可使用小写英文、数字及下划线",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -463,7 +469,7 @@
     "defaultMessage": "开始创作"
   },
   "6B+QXo": {
-    "defaultMessage": "回应设置",
+    "defaultMessage": "评论设置",
     "description": "src/components/Editor/ToggleResponse/index.tsx"
   },
   "6BXcdo": {
@@ -518,6 +524,9 @@
   },
   "6oOCCL": {
     "defaultMessage": "上传档案"
+  },
+  "6pc948": {
+    "defaultMessage": "投稿七日书自由写"
   },
   "6q0G5e": {
     "defaultMessage": "加入成功",
@@ -581,6 +590,9 @@
   "7ykJ+l": {
     "defaultMessage": "暂无评论",
     "description": "src/components/Empty/EmptyComment.tsx"
+  },
+  "8+Z5E9": {
+    "defaultMessage": "纪念你参与「七日书」并完成七天书写"
   },
   "80bF0W": {
     "defaultMessage": "暂无留言",
@@ -656,6 +668,9 @@
   },
   "9J0iCw": {
     "defaultMessage": "已注销用户"
+  },
+  "9OPnTz": {
+    "defaultMessage": "系统或连线异常，请刷新页面后重新点击晚鸟参与"
   },
   "9SXN7s": {
     "defaultMessage": "没有更多",
@@ -777,6 +792,9 @@
   "Bc20la": {
     "defaultMessage": "天"
   },
+  "BhRxYr": {
+    "defaultMessage": "自由写纪念徽章"
+  },
   "Bjdw71": {
     "defaultMessage": "目前总追踪人数",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -850,6 +868,9 @@
   },
   "D9R/ol": {
     "defaultMessage": "将作品加入围炉，让更多人一起参与讨论"
+  },
+  "D9tEst": {
+    "defaultMessage": "马特市建筑师"
   },
   "DP3yqI": {
     "defaultMessage": "支持人数"
@@ -946,6 +967,9 @@
     "defaultMessage": "你无权限进行该操作",
     "description": "FORBIDDEN_BY_STATE"
   },
+  "ErV/vT": {
+    "defaultMessage": "晚鸟参与七日书"
+  },
   "F3zk7E": {
     "defaultMessage": "（草稿删除后无法恢复）",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
@@ -969,6 +993,9 @@
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 网络，立即切换？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "FYeEw1": {
+    "defaultMessage": "报名期{tz}："
   },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
@@ -1063,6 +1090,9 @@
   "HAlOn1": {
     "defaultMessage": "用户名"
   },
+  "HB2VOx": {
+    "defaultMessage": "系统或连线异常，请刷新页面后重新点击报名参加"
+  },
   "HBxXD/": {
     "defaultMessage": "版权声明"
   },
@@ -1090,6 +1120,10 @@
   },
   "HbEL82": {
     "defaultMessage": "评论已刪除"
+  },
+  "HgY+72": {
+    "defaultMessage": "报名参加",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "HkozYU": {
     "defaultMessage": "更换钱包",
@@ -1329,6 +1363,9 @@
   "LnesNr": {
     "defaultMessage": "移除协作者成功"
   },
+  "LoQ3BF": {
+    "defaultMessage": "这枚徽章代表你完成了七天写作，恭喜走完这趟意义非凡的写作之旅！"
+  },
   "Lp6CiR": {
     "defaultMessage": "设置 - 其他",
     "description": "src/views/Me/Settings/Misc/index.tsx"
@@ -1540,6 +1577,10 @@
   "Pp/0po": {
     "defaultMessage": "换一批"
   },
+  "Pq/7m5": {
+    "defaultMessage": "晚鸟参与处理中",
+    "description": "type:join"
+  },
   "PtV68+": {
     "defaultMessage": "邮箱或密码错误",
     "description": "USER_EMAIL_NOT_FOUND"
@@ -1564,6 +1605,9 @@
   "QZXKhG": {
     "defaultMessage": "设置围炉网址（创建后不可修改）",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "QbjADp": {
+    "defaultMessage": "种子用户"
   },
   "QfVedX": {
     "defaultMessage": "插入分隔线"
@@ -1639,7 +1683,7 @@
     "description": "src/components/ArticleDigest/DropdownActions/PinButton.tsx"
   },
   "SFsQ1E": {
-    "defaultMessage": "查看回应"
+    "defaultMessage": "查看评论"
   },
   "SHWkv8": {
     "defaultMessage": "为什么先采用 Optimism ?",
@@ -1682,6 +1726,9 @@
     "defaultMessage": "提现",
     "description": "src/components/Transaction/index.tsx"
   },
+  "Sfql0+": {
+    "defaultMessage": "恭喜获得七日书大满贯"
+  },
   "SuRTsQ": {
     "defaultMessage": "注册 ISCN"
   },
@@ -1713,7 +1760,7 @@
     "defaultMessage": "临时密码已过期，请尝试重新发送"
   },
   "TInwt3": {
-    "defaultMessage": "关闭回应"
+    "defaultMessage": "关闭评论"
   },
   "TKsfIS": {
     "defaultMessage": "流星号"
@@ -1728,6 +1775,9 @@
   "TX5UzL": {
     "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
+  "TZgskS": {
+    "defaultMessage": "还没有人投稿，晚点再来瞧瞧吧！"
   },
   "TcTp+J": {
     "defaultMessage": "图片上传成功"
@@ -1829,6 +1879,9 @@
     "defaultMessage": "相关推荐",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
+  "VrK0Q0": {
+    "defaultMessage": "请选择⋯"
+  },
   "VrOoVf": {
     "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -1846,6 +1899,9 @@
   "W0sZaX": {
     "defaultMessage": "最近 3 个月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "W3hNBA": {
+    "defaultMessage": "七日书大满贯"
   },
   "W3tqQO": {
     "defaultMessage": "[图]"
@@ -1898,6 +1954,9 @@
   "WxhsrG": {
     "defaultMessage": "请先绑定邮箱"
   },
+  "X9a1XW": {
+    "defaultMessage": "在 {commentMoment} 留言中提到了你"
+  },
   "XH1s8E": {
     "defaultMessage": "刪除{commentType}",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1947,9 +2006,6 @@
   },
   "Xi40U9": {
     "defaultMessage": "操作无法撤销，确认删除选集吗？"
-  },
-  "XiiSGl": {
-    "defaultMessage": "在动态留言中提及了你"
   },
   "Xj0yv9": {
     "defaultMessage": "写文章"
@@ -2040,6 +2096,9 @@
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
   },
+  "ZNK0I9": {
+    "defaultMessage": "喜欢你的评论"
+  },
   "ZOW313": {
     "defaultMessage": "首次发布作品后有四次正文编辑机会，你也可以封存原文重新发布作品。"
   },
@@ -2095,6 +2154,9 @@
     "defaultMessage": "官方文档",
     "description": "src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
   },
+  "aKEiNd": {
+    "defaultMessage": "错过报名期没关系，仍然可以用晚鸟身份参与，一起书写人生故事。下次早点报名，就有机会获得大满贯徽章！"
+  },
   "aKlTO2": {
     "defaultMessage": "你还可以添加 {count} 名协作者"
   },
@@ -2125,6 +2187,9 @@
   },
   "ai7kS4": {
     "defaultMessage": "我的创作"
+  },
+  "al5/yQ": {
+    "defaultMessage": "晚鸟参与通过"
   },
   "aqX2Bt": {
     "defaultMessage": "前往首页",
@@ -2161,6 +2226,9 @@
   },
   "beLe/F": {
     "defaultMessage": "广播"
+  },
+  "buf5vO": {
+    "defaultMessage": "活动公告"
   },
   "c/z318": {
     "defaultMessage": "邮箱或密码错误",
@@ -2277,7 +2345,7 @@
     "defaultMessage": "涉及未成年人的色情"
   },
   "eIlMHB": {
-    "defaultMessage": "允许读者回应本文（开启后无法关闭）"
+    "defaultMessage": "允许读者评论本文（开启后无法关闭）"
   },
   "eKVBm/": {
     "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考{link}。"
@@ -2321,8 +2389,12 @@
   "f24jaP": {
     "defaultMessage": "信用卡支持需发送财务信息相关邮件，请您先验证电子邮件地址。"
   },
+  "f5jWMJ": {
+    "defaultMessage": "确认参加",
+    "description": "src/views/CampaignDetail/Apply/Dialog/index.tsx"
+  },
   "fBzH+2": {
-    "defaultMessage": "不允许读者回应本文（可通过编辑打开回应功能）"
+    "defaultMessage": "不允许读者评论本文（可通过编辑打开评论功能）"
   },
   "fDdcbi": {
     "defaultMessage": "{type}已被原作者删除"
@@ -2371,6 +2443,10 @@
   },
   "g5pX+a": {
     "defaultMessage": "关于"
+  },
+  "gCafm/": {
+    "defaultMessage": "晚鸟参与",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "gK6OxL": {
     "defaultMessage": "留个友善的评论？",
@@ -2439,6 +2515,10 @@
   "hYG5fb": {
     "defaultMessage": "人追踪",
     "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "hfRsLB": {
+    "defaultMessage": "作者 {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "hgtWIO": {
     "defaultMessage": "作品被关联",
@@ -2516,6 +2596,10 @@
     "defaultMessage": "邮箱注册",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
+  "jLkKbI": {
+    "defaultMessage": "报名处理中",
+    "description": "type:apply"
+  },
   "jiB0Z2": {
     "defaultMessage": "无法绑定钱包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2579,6 +2663,9 @@
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "krvjo9": {
+    "defaultMessage": "活动时间{tz}："
+  },
   "ksIL/T": {
     "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"
   },
@@ -2635,6 +2722,9 @@
     "defaultMessage": "评论了",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "lfiBVR": {
+    "defaultMessage": "赞赏公民"
+  },
   "liBHHE": {
     "defaultMessage": "什么看法，都可以留个友善的评论～"
   },
@@ -2650,6 +2740,9 @@
   "m/Wg7b": {
     "defaultMessage": "围炉描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "m1wKuC": {
+    "defaultMessage": "参与七日书活动"
   },
   "m4GG4b": {
     "defaultMessage": "删除选集"
@@ -2763,6 +2856,9 @@
   "oGiO//": {
     "defaultMessage": "插入音频"
   },
+  "oLOus+": {
+    "defaultMessage": "报名申请已递交 🎉"
+  },
   "ob+HDS": {
     "defaultMessage": "马上逛逛"
   },
@@ -2776,6 +2872,9 @@
   },
   "onDesU": {
     "defaultMessage": "恭喜成为围炉一员。现在你可以免费浏览围炉内作品，还可以去围炉与大家谈天说地。"
+  },
+  "orIq4X": {
+    "defaultMessage": "支持超过 100 次"
   },
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
@@ -2820,6 +2919,10 @@
   },
   "qBOEDo": {
     "defaultMessage": "最大金额为 HKD {max}"
+  },
+  "qCotH5": {
+    "defaultMessage": "在动态中留言",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "qE8ew4": {
     "defaultMessage": "收藏成功",
@@ -2968,6 +3071,10 @@
   },
   "sy+pv5": {
     "defaultMessage": "邮箱"
+  },
+  "syBMnY": {
+    "defaultMessage": "位写作者",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
   },
   "syEQFE": {
     "defaultMessage": "发布"
@@ -3241,6 +3348,10 @@
   },
   "xkr+zo": {
     "defaultMessage": "协议"
+  },
+  "xl95XN": {
+    "defaultMessage": "作者",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "xmcVZ0": {
     "defaultMessage": "搜索"

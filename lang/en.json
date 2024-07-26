@@ -383,6 +383,9 @@
   "4l6vz1": {
     "defaultMessage": "Copy"
   },
+  "4nHH2x": {
+    "defaultMessage": "Applied successfully"
+  },
   "4tqFCR": {
     "defaultMessage": "The author has not bound the USDT wallet yet"
   },
@@ -444,6 +447,9 @@
   },
   "5sg7KC": {
     "defaultMessage": "Password"
+  },
+  "5y5rID": {
+    "defaultMessage": "We will review your application shortly, stay tuned for the event!"
   },
   "6+eeJ4": {
     "defaultMessage": "Lowercase letters, numbers and underscores",
@@ -519,6 +525,9 @@
   "6oOCCL": {
     "defaultMessage": "Upload file"
   },
+  "6pc948": {
+    "defaultMessage": "Add to FreeWrite"
+  },
   "6q0G5e": {
     "defaultMessage": "Successfully added",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -581,6 +590,9 @@
   "7ykJ+l": {
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
+  },
+  "8+Z5E9": {
+    "defaultMessage": "The badge signifies your participation and completion in the \"Free Write in 7 days\"."
   },
   "80bF0W": {
     "defaultMessage": "No comments",
@@ -656,6 +668,9 @@
   },
   "9J0iCw": {
     "defaultMessage": "Deleted user"
+  },
+  "9OPnTz": {
+    "defaultMessage": "System or connection abnormality, please refresh the page and click “Join” again."
   },
   "9SXN7s": {
     "defaultMessage": "No more comments",
@@ -777,6 +792,9 @@
   "Bc20la": {
     "defaultMessage": "days"
   },
+  "BhRxYr": {
+    "defaultMessage": "Free Write Badge"
+  },
   "Bjdw71": {
     "defaultMessage": "followers_empty",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -850,6 +868,9 @@
   },
   "D9R/ol": {
     "defaultMessage": "Add articles to your circle"
+  },
+  "D9tEst": {
+    "defaultMessage": "Matters Architect"
   },
   "DP3yqI": {
     "defaultMessage": "Donation count"
@@ -946,6 +967,9 @@
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
   },
+  "ErV/vT": {
+    "defaultMessage": "Confirm to join"
+  },
   "F3zk7E": {
     "defaultMessage": "(This action cannot be undone)",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
@@ -969,6 +993,9 @@
   "FWCa4O": {
     "defaultMessage": "Switch to Optimism network now?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "FYeEw1": {
+    "defaultMessage": "Application period{tz}:"
   },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
@@ -1063,6 +1090,9 @@
   "HAlOn1": {
     "defaultMessage": "Name"
   },
+  "HB2VOx": {
+    "defaultMessage": "System or connection abnormality, please refresh the page and click “Apply” again."
+  },
   "HBxXD/": {
     "defaultMessage": "License"
   },
@@ -1090,6 +1120,10 @@
   },
   "HbEL82": {
     "defaultMessage": "Comment has been deleted"
+  },
+  "HgY+72": {
+    "defaultMessage": "Apply",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "HkozYU": {
     "defaultMessage": "Switch wallet",
@@ -1329,6 +1363,9 @@
   "LnesNr": {
     "defaultMessage": "Successfully removed collaborator"
   },
+  "LoQ3BF": {
+    "defaultMessage": "This badge represents your completion of Free Write in 7 days. Congratulations on finishing this meaningful writing journey!"
+  },
   "Lp6CiR": {
     "defaultMessage": "Settings - Misc",
     "description": "src/views/Me/Settings/Misc/index.tsx"
@@ -1540,6 +1577,10 @@
   "Pp/0po": {
     "defaultMessage": "Shuffle"
   },
+  "Pq/7m5": {
+    "defaultMessage": "Reviewing...",
+    "description": "type:join"
+  },
   "PtV68+": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_EMAIL_NOT_FOUND"
@@ -1564,6 +1605,9 @@
   "QZXKhG": {
     "defaultMessage": "Set the Circle URL (cannot be modified after creation)",
     "description": "src/components/Forms/CreateCircleForm/Init.tsx"
+  },
+  "QbjADp": {
+    "defaultMessage": "Seed User"
   },
   "QfVedX": {
     "defaultMessage": "Insert divider"
@@ -1682,6 +1726,9 @@
     "defaultMessage": "Payout",
     "description": "src/components/Transaction/index.tsx"
   },
+  "Sfql0+": {
+    "defaultMessage": "Congratulations! You've got the Grand Badge!"
+  },
   "SuRTsQ": {
     "defaultMessage": "Register for ISCN"
   },
@@ -1728,6 +1775,9 @@
   "TX5UzL": {
     "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
+  },
+  "TZgskS": {
+    "defaultMessage": "No one has published yet, check back later!"
   },
   "TcTp+J": {
     "defaultMessage": "Image uploaded"
@@ -1829,6 +1879,9 @@
     "defaultMessage": "More",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
+  "VrK0Q0": {
+    "defaultMessage": "Please select..."
+  },
   "VrOoVf": {
     "defaultMessage": "Matters will never ask your wallet key through any channel.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -1846,6 +1899,9 @@
   "W0sZaX": {
     "defaultMessage": "Last 3 months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "W3hNBA": {
+    "defaultMessage": "Free Write in 7 days Grand Badge"
   },
   "W3tqQO": {
     "defaultMessage": "[image]"
@@ -1898,6 +1954,9 @@
   "WxhsrG": {
     "defaultMessage": "Please connect email"
   },
+  "X9a1XW": {
+    "defaultMessage": "mentioned you in a moment comment at {commentMoment}"
+  },
   "XH1s8E": {
     "defaultMessage": "Delete {commentType}",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
@@ -1947,9 +2006,6 @@
   },
   "Xi40U9": {
     "defaultMessage": "This action cannot be undone. Are you sure you want to delete this collection?"
-  },
-  "XiiSGl": {
-    "defaultMessage": "mentioned you in a moment comment at"
   },
   "Xj0yv9": {
     "defaultMessage": "Write Articles"
@@ -2040,6 +2096,9 @@
   "ZEMcZ6": {
     "defaultMessage": "Article Management"
   },
+  "ZNK0I9": {
+    "defaultMessage": "liked your comment"
+  },
   "ZOW313": {
     "defaultMessage": "You can edit the article four times after publishing it. You can also archive the original and republish.."
   },
@@ -2095,6 +2154,9 @@
     "defaultMessage": "docs",
     "description": "src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
   },
+  "aKEiNd": {
+    "defaultMessage": "You missed the registration period, you can still join as a latecomer. Apply earlier next time for the chance to get the badge."
+  },
   "aKlTO2": {
     "defaultMessage": "You can add {count} more collaborators."
   },
@@ -2125,6 +2187,9 @@
   },
   "ai7kS4": {
     "defaultMessage": "My Works"
+  },
+  "al5/yQ": {
+    "defaultMessage": "Joined successfully"
   },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
@@ -2161,6 +2226,9 @@
   },
   "beLe/F": {
     "defaultMessage": "Broadcast"
+  },
+  "buf5vO": {
+    "defaultMessage": "Event Information"
   },
   "c/z318": {
     "defaultMessage": "Incorrect email or password",
@@ -2321,6 +2389,10 @@
   "f24jaP": {
     "defaultMessage": "Credit card support requires emails related to financial information, please verify your email address first."
   },
+  "f5jWMJ": {
+    "defaultMessage": "Confirm",
+    "description": "src/views/CampaignDetail/Apply/Dialog/index.tsx"
+  },
   "fBzH+2": {
     "defaultMessage": "Disallow readers to respond to this article (you can enable responses later by editing this article)"
   },
@@ -2371,6 +2443,10 @@
   },
   "g5pX+a": {
     "defaultMessage": "About"
+  },
+  "gCafm/": {
+    "defaultMessage": "Join",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "gK6OxL": {
     "defaultMessage": "Leave a comment?",
@@ -2439,6 +2515,10 @@
   "hYG5fb": {
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
+  },
+  "hfRsLB": {
+    "defaultMessage": "Writers {count}",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "hgtWIO": {
     "defaultMessage": "Articles have been collected",
@@ -2516,6 +2596,10 @@
     "defaultMessage": "Sign up with email",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
+  "jLkKbI": {
+    "defaultMessage": "Reviewing...",
+    "description": "type:apply"
+  },
   "jiB0Z2": {
     "defaultMessage": "Unable to bind wallet",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2579,6 +2663,9 @@
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "krvjo9": {
+    "defaultMessage": "Event period{tz}:"
+  },
   "ksIL/T": {
     "defaultMessage": "Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
   },
@@ -2635,6 +2722,9 @@
     "defaultMessage": "commented",
     "description": "src/components/Notice/CommentNotice/ArticleNewCommentNotice.tsx"
   },
+  "lfiBVR": {
+    "defaultMessage": "CIVIC LIKER"
+  },
   "liBHHE": {
     "defaultMessage": "Any thoughts? Leave a kind comment~"
   },
@@ -2650,6 +2740,9 @@
   "m/Wg7b": {
     "defaultMessage": "Circle Description",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "m1wKuC": {
+    "defaultMessage": "Add to Free Write"
   },
   "m4GG4b": {
     "defaultMessage": "Delete collection"
@@ -2763,6 +2856,9 @@
   "oGiO//": {
     "defaultMessage": "Insert audio"
   },
+  "oLOus+": {
+    "defaultMessage": "Application has been submitted 🎉"
+  },
   "ob+HDS": {
     "defaultMessage": "View Circle"
   },
@@ -2776,6 +2872,9 @@
   },
   "onDesU": {
     "defaultMessage": "Congratulations! Now you can browse all works within the circle for free and chat with everyone."
+  },
+  "orIq4X": {
+    "defaultMessage": "More than 100 supports"
   },
   "p5qZnJ": {
     "defaultMessage": "liked",
@@ -2820,6 +2919,10 @@
   },
   "qBOEDo": {
     "defaultMessage": "Maximum amount is HKD {max}"
+  },
+  "qCotH5": {
+    "defaultMessage": "commented in your moment",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "qE8ew4": {
     "defaultMessage": "Bookmarked",
@@ -2968,6 +3071,10 @@
   },
   "sy+pv5": {
     "defaultMessage": "Email"
+  },
+  "syBMnY": {
+    "defaultMessage": "writers",
+    "description": "src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
   },
   "syEQFE": {
     "defaultMessage": "Publish"
@@ -3241,6 +3348,10 @@
   },
   "xkr+zo": {
     "defaultMessage": "Terms"
+  },
+  "xl95XN": {
+    "defaultMessage": "Writers",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
   },
   "xmcVZ0": {
     "defaultMessage": "Search"
