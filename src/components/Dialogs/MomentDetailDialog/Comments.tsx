@@ -8,6 +8,7 @@ import {
   InfiniteScroll,
   List,
   useEventListener,
+  useJumpToComment,
 } from '~/components'
 import { CommentFeed } from '~/components/Comment/Feed'
 import { MomentDigestDetailCommentsMomentFragment } from '~/gql/graphql'
@@ -42,6 +43,13 @@ const Comments = ({ moment }: CommentsProps) => {
   const { comments } = moment
   const [newestCommentIds, setNewestCommentIds] = useState<string[]>([])
   const titleRef = useRef<HTMLDivElement>(null)
+  const { ref, setReadyJump } = useJumpToComment({
+    fullSpacing: true,
+  })
+
+  useEffect(() => {
+    setReadyJump(true)
+  }, [])
 
   useEventListener(
     UPDATE_NEWEST_MOMENT_COMMENT,
@@ -66,7 +74,7 @@ const Comments = ({ moment }: CommentsProps) => {
     .reverse()
 
   return (
-    <section className={styles.comments}>
+    <section className={styles.comments} ref={ref}>
       {activeCommentsEdges.length === 0 && (
         <EmptyComment
           description={intl.formatMessage({
