@@ -53,3 +53,14 @@ export const isValidPaymentPointer = (paymentPointer: string): boolean =>
   paymentPointer.startsWith('$')
 
 export const hasUpperCase = (str: string) => str.toLowerCase() !== str
+
+type NoticeNode = {
+  __typename?: string
+  id?: string
+}
+
+export const shouldRenderNode = (
+  node: NoticeNode,
+  renderableTypes: Set<string>
+): node is NoticeNode =>
+  node.__typename !== undefined && renderableTypes.has(node.__typename)

@@ -9,7 +9,12 @@ import { capitalizeFirstLetter } from '~/common/utils'
 
 import styles from './styles.module.css'
 
-export type CardBgColor = 'greyLighter' | 'white' | 'transparent' | 'none'
+export type CardBgColor =
+  | 'greyLighter'
+  | 'white'
+  | 'transparent'
+  | 'none'
+  | 'freeWriteBlue'
 export type CardBgHoverColor = 'greyLighter' | 'transparent' | 'none'
 export type CardSpacing = 0 | 8 | 10 | 12 | 16 | 20 | 24
 export type CardBorderColor = 'greyLighter' | 'lineGreyLight' | 'green'

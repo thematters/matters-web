@@ -1,14 +1,17 @@
 import { ENTITY_TYPE } from '~/common/enums'
 import { toDigestTagPlaceholder } from '~/components'
+import { getSelectCampaign } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import {
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
+  EditorSelectCampaignFragment,
 } from '~/gql/graphql'
 
 import {
   useEditDraftAccess,
+  useEditDraftCampaign,
   useEditDraftCanComment,
   useEditDraftCollection,
   useEditDraftCover,
@@ -21,6 +24,7 @@ import styles from './styles.module.css'
 
 interface BaseSidebarProps {
   draft: EditMetaDraftFragment
+  campaigns?: EditorSelectCampaignFragment[]
   ownCircles?: DigestRichCirclePublicFragment[]
 }
 
@@ -123,6 +127,24 @@ const EditDraftResponse = ({ draft }: SidebarProps) => {
   )
 }
 
+const EditDraftCampaign = ({ draft, campaigns }: SidebarProps) => {
+  const { edit } = useEditDraftCampaign()
+
+  const { appliedCampaign, selectedStage } = getSelectCampaign({
+    applied: campaigns && campaigns[0],
+    attached: draft.campaigns,
+    createdAt: draft.createdAt,
+  })
+
+  return (
+    <Sidebar.Campaign
+      appliedCampaign={appliedCampaign}
+      selectedStage={selectedStage}
+      editCampaign={edit}
+    />
+  )
+}
+
 const EditDraftSidebar = (props: BaseSidebarProps) => {
   const isPending = props.draft.publishState === 'pending'
   const isPublished = props.draft.publishState === 'published'
@@ -130,6 +152,7 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
 
   return (
     <section className={styles.sidebar}>
+      <EditDraftCampaign {...props} disabled={disabled} />
       <EditDraftTags {...props} disabled={disabled} />
       <EditDraftCover {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />

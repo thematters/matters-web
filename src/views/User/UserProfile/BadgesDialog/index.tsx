@@ -2,19 +2,32 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { Button, Dialog, Icon, useDialogSwitch } from '~/components'
+import {
+  OPEN_GRAND_BADGE_DIALOG,
+  OPEN_NOMAD_BADGE_DIALOG,
+  URL_USER_PROFILE,
+} from '~/common/enums'
+import {
+  Button,
+  Dialog,
+  Icon,
+  useDialogSwitch,
+  useEventListener,
+  useRoute,
+} from '~/components'
 
+import BadgeGrandContent from '../BadgeGrandDialog/Content'
 import BadgeNomadDialogContent from '../BadgeNomadDialog/Content'
 import { Badges, BadgesOptions } from '../Badges'
 
-type Step = 'badges' | 'nomad'
+type Step = 'badges' | 'nomad' | 'grand'
+
 interface BadgesDialogProps extends BadgesOptions {
   children: ({
     openDialog,
   }: {
     openDialog: (step?: Step) => void
   }) => React.ReactNode
-  step?: Step
 }
 
 export const BaseBadgesDialog = ({
@@ -22,28 +35,31 @@ export const BaseBadgesDialog = ({
   hasNomadBadge,
   nomadBadgeLevel,
   hasTraveloggersBadge,
+  hasGrandBadge,
   hasSeedBadge,
   hasGoldenMotorBadge,
   hasArchitectBadge,
   isCivicLiker,
-  shareLink,
-  step: initStep = 'badges',
 }: BadgesDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { getQuery } = useRoute()
+
+  const initNomad =
+    getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
+    URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
+  const initGrand =
+    getQuery(URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.key) ===
+    URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.value
+  const initStep = initGrand ? 'grand' : initNomad ? 'nomad' : 'badges'
   const [step, setStep] = useState<Step>(initStep)
+
   const isInBadgesStep = step === 'badges'
   const isInNomadStep = step === 'nomad'
-
-  const openStepDialog = (step?: Step) => {
-    if (step) {
-      setStep(step)
-    }
-    openDialog()
-  }
+  const isInGrandStep = step === 'grand'
 
   return (
     <>
-      {children({ openDialog: openStepDialog })}
+      {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         {isInBadgesStep && (
@@ -72,13 +88,14 @@ export const BaseBadgesDialog = ({
                 isInDialog
                 hasNomadBadge={hasNomadBadge}
                 nomadBadgeLevel={nomadBadgeLevel}
+                hasGrandBadge={hasGrandBadge}
                 hasTraveloggersBadge={hasTraveloggersBadge}
                 hasSeedBadge={hasSeedBadge}
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
                 hasArchitectBadge={hasArchitectBadge}
                 isCivicLiker={isCivicLiker}
-                shareLink={shareLink}
                 gotoNomadBadge={() => setStep('nomad')}
+                gotoGrandBadge={() => setStep('grand')}
               />
             </Dialog.Content>
 
@@ -100,10 +117,14 @@ export const BaseBadgesDialog = ({
         )}
         {isInNomadStep && !!nomadBadgeLevel && (
           <BadgeNomadDialogContent
-            closeDialog={closeDialog}
-            isNested
             nomadBadgeLevel={nomadBadgeLevel}
-            shareLink={shareLink}
+            closeDialog={closeDialog}
+            goBack={() => setStep('badges')}
+          />
+        )}
+        {isInGrandStep && (
+          <BadgeGrandContent
+            closeDialog={closeDialog}
             goBack={() => setStep('badges')}
           />
         )}
@@ -113,10 +134,11 @@ export const BaseBadgesDialog = ({
 }
 
 export const BadgesDialog = (props: BadgesDialogProps) => {
-  const Children = ({ openDialog }: { openDialog: (step?: Step) => void }) => {
-    return <>{props?.children({ openDialog })}</>
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_NOMAD_BADGE_DIALOG, openDialog)
+    useEventListener(OPEN_GRAND_BADGE_DIALOG, openDialog)
+    return <>{props.children && props.children({ openDialog })}</>
   }
-
   return (
     <Dialog.Lazy mounted={<BaseBadgesDialog {...props} />}>
       {({ openDialog }) => <Children openDialog={openDialog} />}

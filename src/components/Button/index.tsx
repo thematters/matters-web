@@ -101,6 +101,7 @@ export type ButtonBgColor = Extract<
 type ButtonBgActiveColor = Extract<
   ButtonColor,
   | 'greyLighter'
+  | 'greyLight'
   | 'greenLighter'
   | 'greyLighterActive'
   | 'green'
@@ -268,8 +269,7 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
         ...(testId ? { ['data-test-id']: testId } : {}),
       }
 
-      // content
-      const contentStyle = {
+      const sizeStyle = {
         width: (!isTransparent && width) || undefined,
         height: (!isTransparent && height) || undefined,
       }
@@ -284,8 +284,8 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       // span
       if (is === 'span') {
         return (
-          <span {...containerProps}>
-            <div className={styles.content} style={contentStyle}>
+          <span {...containerProps} style={sizeStyle}>
+            <div className={styles.content} style={sizeStyle}>
               <div className={styles.hotarea} style={hotAreaStyle} />
               {children}
             </div>
@@ -296,8 +296,13 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       // anchor
       if (htmlHref) {
         return (
-          <a href={htmlHref} target={htmlTarget} {...containerProps}>
-            <div className={styles.content} style={contentStyle}>
+          <a
+            href={htmlHref}
+            target={htmlTarget}
+            {...containerProps}
+            style={sizeStyle}
+          >
+            <div className={styles.content} style={sizeStyle}>
               <div className={styles.hotarea} style={hotAreaStyle} />
               {children}
             </div>
@@ -309,8 +314,8 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
       if (href) {
         return (
           <Link href={href} replace={replace} legacyBehavior>
-            <a {...containerProps}>
-              <div className={styles.content} style={contentStyle}>
+            <a {...containerProps} style={sizeStyle}>
+              <div className={styles.content} style={sizeStyle}>
                 <div className={styles.hotarea} style={hotAreaStyle} />
                 {children}
               </div>
@@ -321,8 +326,8 @@ export const Button: React.FC<React.PropsWithChildren<ButtonProps>> =
 
       // button
       return (
-        <button {...containerProps} type={type}>
-          <div className={styles.content} style={contentStyle}>
+        <button {...containerProps} type={type} style={sizeStyle}>
+          <div className={styles.content} style={sizeStyle}>
             <div className={styles.hotarea} style={hotAreaStyle} />
             {children}
           </div>
