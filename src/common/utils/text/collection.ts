@@ -1,4 +1,4 @@
-import { UserLanguage } from "~/gql/graphql"
+import { UserLanguage } from '~/gql/graphql'
 
 /**
  * Truncates a title to a specified maximum length, while preserving tagged users.
@@ -11,7 +11,7 @@ import { UserLanguage } from "~/gql/graphql"
 export const truncateTitle = (
   title: string,
   locale: UserLanguage = UserLanguage.En,
-  maxLength: number = 10,
+  maxLength: number = 10
 ) => {
   if (/^zh/.test(locale)) {
     return truncateTitleForChinese(title, maxLength)
@@ -27,13 +27,16 @@ export const truncateTitle = (
  * @param maxWords - The maximum number of words in the truncated title. Defaults to 10.
  * @returns The truncated title.
  */
-export function truncateTitleForChinese(text: string, maxWords: number = 10): string {
-  const chineseRegex = /[\u4e00-\u9fa5]/g; // to double check
-  const chineseWords = text.match(chineseRegex);
+export function truncateTitleForChinese(
+  text: string,
+  maxWords: number = 10
+): string {
+  const chineseRegex = /[\u4e00-\u9fa5]/g // to double check
+  const chineseWords = text.match(chineseRegex)
   if (chineseWords && chineseWords.length > maxWords) {
-    return chineseWords.slice(0, maxWords).join('') + '...';
+    return chineseWords.slice(0, maxWords).join('') + '...'
   }
-  return text;
+  return text
 }
 
 /**
@@ -43,20 +46,23 @@ export function truncateTitleForChinese(text: string, maxWords: number = 10): st
  * @param maxLength - The maximum length of the truncated title. Defaults to 50.
  * @returns The truncated title.
  */
-export function truncateTitleForEnglish(text: string, maxLength: number = 50): string {
+export function truncateTitleForEnglish(
+  text: string,
+  maxLength: number = 50
+): string {
   if (text.length > maxLength) {
-    const words = text.split(' ');
-    let truncatedText = '';
-    let count = 0;
+    const words = text.split(' ')
+    let truncatedText = ''
+    let count = 0
     for (const word of words) {
       if (count + word.length <= maxLength) {
-        truncatedText += word + ' ';
-        count += word.length + 1;
+        truncatedText += word + ' '
+        count += word.length + 1
       } else {
-        break;
+        break
       }
     }
-    return truncatedText.trim() + '...';
+    return truncatedText.trim() + '...'
   }
-  return text;
+  return text
 }

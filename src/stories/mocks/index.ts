@@ -271,7 +271,7 @@ export const MOCK_COLLECTION = {
     edges: [{ node: MOCK_ARTILCE }],
   },
   liked: false,
-  likeCount: 12
+  likeCount: 12,
 }
 
 // Transaction

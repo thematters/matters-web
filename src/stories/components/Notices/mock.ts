@@ -255,7 +255,7 @@ export const MOCK_NOTICE_LIST = [
   },
 
   /**
-   * Collection 
+   * Collection
    */
   {
     __typename: 'CollectionNotice' as any,
@@ -263,7 +263,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2024-07-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    target: MOCK_COLLECTION
+    target: MOCK_COLLECTION,
   },
   /**
    * Article - Tag

@@ -22,14 +22,14 @@ describe.concurrent('utils/text/collection/truncateTitle', () => {
       // Assert
       expect(result).toEqual(title)
     })
-    
+
     it('should return the title for the default length of 10 words', () => {
       const title = '这是一个标题这是一个标题这是一个标题'
       const expected = '这是一个标题这是一个...'
       const result = truncateTitle(title, UserLanguage.ZhHans)
       // Assert
       expect(result).toEqual(expected)
-    });
+    })
   })
 
   describe('for English', () => {
@@ -49,5 +49,5 @@ describe.concurrent('utils/text/collection/truncateTitle', () => {
       // Assert
       expect(result).toEqual(expected)
     })
-  });
+  })
 })
