@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
@@ -17,7 +18,7 @@ const BadgeGrandDialogContent = ({
   closeDialog,
   goBack,
 }: BadgeGrandDialogContentProps) => {
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const userName = getQuery('name')
   const userProfilePath = toPath({
     page: 'userProfile',
@@ -27,9 +28,15 @@ const BadgeGrandDialogContent = ({
     typeof window !== 'undefined'
       ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.key}=${URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.value}`
       : ''
-  const isCongrats =
+  const initialCongrats =
     getQuery(URL_USER_PROFILE.GRAND_BADGE_DIALOG_STEP.key) ===
     URL_USER_PROFILE.GRAND_BADGE_DIALOG_STEP.value
+  const [isCongrats] = useState(initialCongrats)
+
+  // remove `dialog` and `step` query params
+  useEffect(() => {
+    router.replace(userProfilePath.href, undefined, { shallow: true })
+  }, [])
 
   return (
     <>

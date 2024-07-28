@@ -5,6 +5,7 @@ import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.sv
 import {
   OPEN_GRAND_BADGE_DIALOG,
   OPEN_NOMAD_BADGE_DIALOG,
+  URL_USER_PROFILE,
 } from '~/common/enums'
 import {
   Button,
@@ -12,6 +13,7 @@ import {
   Icon,
   useDialogSwitch,
   useEventListener,
+  useRoute,
 } from '~/components'
 
 import BadgeGrandContent from '../BadgeGrandDialog/Content'
@@ -26,7 +28,6 @@ interface BadgesDialogProps extends BadgesOptions {
   }: {
     openDialog: (step?: Step) => void
   }) => React.ReactNode
-  step?: Step
 }
 
 export const BaseBadgesDialog = ({
@@ -39,24 +40,26 @@ export const BaseBadgesDialog = ({
   hasGoldenMotorBadge,
   hasArchitectBadge,
   isCivicLiker,
-  step: initStep = 'badges',
 }: BadgesDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { getQuery } = useRoute()
+
+  const initNomad =
+    getQuery(URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.key) ===
+    URL_USER_PROFILE.OPEN_NOMAD_BADGE_DIALOG.value
+  const initGrand =
+    getQuery(URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.key) ===
+    URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.value
+  const initStep = initGrand ? 'grand' : initNomad ? 'nomad' : 'badges'
   const [step, setStep] = useState<Step>(initStep)
+
   const isInBadgesStep = step === 'badges'
   const isInNomadStep = step === 'nomad'
   const isInGrandStep = step === 'grand'
 
-  const openStepDialog = (step?: Step) => {
-    if (step) {
-      setStep(step)
-    }
-    openDialog()
-  }
-
   return (
     <>
-      {children({ openDialog: openStepDialog })}
+      {children({ openDialog })}
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         {isInBadgesStep && (
