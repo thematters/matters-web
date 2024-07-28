@@ -5,11 +5,9 @@ import { CollectionNoticeFragment } from '~/gql/graphql'
 import CollectionNewLikeNotice from './CollectionLikeNotice'
 
 const CollectionNotice = ({ notice }: { notice: CollectionNoticeFragment }) => {
-  switch (notice.__typename) {
-    case 'CollectionNotice':
-      return <CollectionNewLikeNotice notice={notice} /> // so far just one type of notice
+  switch (notice.type) {
     default:
-      return null
+      return <CollectionNewLikeNotice notice={notice} /> // so far just one type of notice
   }
 }
 
@@ -21,6 +19,10 @@ CollectionNotice.fragments = {
       type: __typename
       target {
         id
+        title
+        author {
+          userName
+        }
       }
       ...CollectionNewLikeNotice
     }

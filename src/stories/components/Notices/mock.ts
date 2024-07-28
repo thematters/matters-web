@@ -3,6 +3,7 @@ import {
   MOCK_CIRCLE,
   MOCK_CIRCLE_ARTICLE,
   MOCK_CIRCLE_COMMENT,
+  MOCK_COLLECTION,
   MOCK_COMMENT,
   MOCK_PARENT_COMMENT,
   MOCK_TAG,
@@ -253,6 +254,17 @@ export const MOCK_NOTICE_LIST = [
     reply: MOCK_CIRCLE_COMMENT,
   },
 
+  /**
+   * Collection 
+   */
+  {
+    __typename: 'CollectionNotice' as any,
+    id: 'CollectionNewLike',
+    unread: false,
+    createdAt: '2024-07-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    target: MOCK_COLLECTION
+  },
   /**
    * Article - Tag
    */
