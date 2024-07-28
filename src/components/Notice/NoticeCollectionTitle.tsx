@@ -32,7 +32,7 @@ const NoticeCollectionTitle = ({
     <Link {...path}>
       <a
         className={styles.noticeArticleTitle}
-        data-test-id={TEST_ID.NOTICE_ARTICLE_TITLE}
+        data-test-id={TEST_ID.NOTICE_COLLECTION_TITLE}
       >
         {truncateTitle(notice.target.title, lang)}
       </a>
