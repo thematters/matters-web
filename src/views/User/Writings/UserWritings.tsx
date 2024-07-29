@@ -7,7 +7,7 @@ import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   ArticleDigestFeed,
   Empty,
-  EmptyArticle,
+  EmptyWork,
   Head,
   InfiniteScroll,
   Layout,
@@ -172,7 +172,7 @@ const UserWritings = () => {
     return (
       <>
         <CustomHead />
-        <EmptyArticle isMe={isViewer} />
+        <EmptyWork isMe={isViewer} />
       </>
     )
   }

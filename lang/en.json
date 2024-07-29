@@ -570,6 +570,10 @@
     "defaultMessage": "Are you sure you want to delete draft?",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
+  "7XWzvD": {
+    "defaultMessage": "No works here yet",
+    "description": "src/components/Empty/EmptyWork.tsx"
+  },
   "7Y9hwb": {
     "defaultMessage": "Oops! Setup failed."
   },

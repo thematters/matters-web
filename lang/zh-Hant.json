@@ -570,6 +570,10 @@
     "defaultMessage": "確認要刪除草稿嗎？",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
+  "7XWzvD": {
+    "defaultMessage": "這裡還沒有任何作品",
+    "description": "src/components/Empty/EmptyWork.tsx"
+  },
   "7Y9hwb": {
     "defaultMessage": "哎呀，設置失敗了。"
   },
