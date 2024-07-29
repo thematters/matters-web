@@ -839,6 +839,9 @@
   "CPvyYN": {
     "defaultMessage": "密碼錯誤"
   },
+  "CjKqYk": {
+    "defaultMessage": "分享今天開心或難過的小故事吧"
+  },
   "CnPG8j": {
     "defaultMessage": "精選"
   },
@@ -1861,6 +1864,9 @@
   "VBve8d": {
     "defaultMessage": "搬家到 Matters"
   },
+  "VKxanK": {
+    "defaultMessage": "短動態上線囉！"
+  },
   "VZsE96": {
     "defaultMessage": "選集名稱"
   },
@@ -2006,9 +2012,6 @@
   },
   "Xi40U9": {
     "defaultMessage": "操作無法撤銷，確認刪除選集嗎？"
-  },
-  "Xj0yv9": {
-    "defaultMessage": "寫文章"
   },
   "XlfiKR": {
     "defaultMessage": "2-20 個字元，僅支持英文小寫字母、數字或下劃線"
@@ -2184,6 +2187,9 @@
   },
   "adThp5": {
     "defaultMessage": "最新"
+  },
+  "afLdf2": {
+    "defaultMessage": "發動態"
   },
   "ai7kS4": {
     "defaultMessage": "我的創作"
@@ -2611,6 +2617,9 @@
   "jtdQHR": {
     "defaultMessage": "公共節點"
   },
+  "jx7Hn3": {
+    "defaultMessage": "寫文章"
+  },
   "jy3tx0": {
     "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -3037,9 +3046,6 @@
   "ruZqtT": {
     "defaultMessage": "僅供輸入 {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} 個字元"
   },
-  "sDQSFv": {
-    "defaultMessage": "只看文章"
-  },
   "sFJ/Is": {
     "defaultMessage": "確認清空當前編輯的内容嗎？"
   },
@@ -3065,9 +3071,6 @@
   "stTITI": {
     "defaultMessage": "社區公告",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
-  },
-  "subQNF": {
-    "defaultMessage": "發動態"
   },
   "sy+pv5": {
     "defaultMessage": "電子郵件"

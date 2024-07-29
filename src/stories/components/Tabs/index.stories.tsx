@@ -4,8 +4,6 @@ import React from 'react'
 
 import { Tabs } from '~/components'
 
-import JournalTabs from './JournalTabsGroup'
-
 export default {
   title: 'Components/Tabs',
   component: Tabs,
@@ -21,11 +19,5 @@ export const TabsGroup = () => (
         選集
       </Tabs.Tab>
     </Tabs>
-  </MockedProvider>
-)
-
-export const JournalTabsGroup = () => (
-  <MockedProvider>
-    <JournalTabs />
   </MockedProvider>
 )

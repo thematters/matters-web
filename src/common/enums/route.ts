@@ -22,6 +22,7 @@ type ROUTE_KEY =
   | 'ARTICLE_DETAIL_EDIT'
   | 'ARTICLE_DETAIL_HISTORY'
   // Moment
+  | 'MOMENT_DETAIL_EDIT'
   | 'MOMENT_DETAIL'
   // User
   | 'USER_ARTICLES'
@@ -107,6 +108,7 @@ export const ROUTES: {
   { key: 'ARTICLE_DETAIL_HISTORY', pathname: '/a/[shortHash]/history' },
 
   // Moment
+  { key: 'MOMENT_DETAIL_EDIT', pathname: '/m/edit' },
   { key: 'MOMENT_DETAIL', pathname: '/m/[shortHash]' },
 
   // Circle

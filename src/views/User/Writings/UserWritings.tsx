@@ -12,10 +12,8 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  Media,
   MomentDigestFeed,
   QueryError,
-  SpinnerBlock,
   Translate,
   usePublicQuery,
   useRoute,
@@ -23,19 +21,10 @@ import {
 } from '~/components'
 import { UserWritingsPublicQuery } from '~/gql/graphql'
 
-const DynamicMomentForm = dynamic(
-  () => import('~/components/Forms/MomentForm'),
-  {
-    loading: () => <SpinnerBlock />,
-  }
-)
-
-import dynamic from 'next/dynamic'
-
+import MomentForm from '../MomentForm'
 import { USER_WRITINGS_PRIVATE, USER_WRITINGS_PUBLIC } from './gql'
 import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
-import styles from './styles.module.css'
 
 const UserWritings = () => {
   const viewer = useContext(ViewerContext)
@@ -192,13 +181,7 @@ const UserWritings = () => {
 
       <PinBoard user={user} />
 
-      {isViewer && (
-        <Media greaterThan="sm">
-          <section className={styles.momentForm}>
-            <DynamicMomentForm />
-          </section>
-        </Media>
-      )}
+      <MomentForm />
 
       <Layout.Main.Spacing hasVertical={false}>
         <InfiniteScroll

@@ -9,6 +9,7 @@ export const URL_USER_PROFILE = {
     key: 'step',
     value: 'congrats',
   },
+  OPEN_POST_MOMENT_FORM: { key: 'form', value: 'write-moment' },
 }
 
 export const URL_ME_SETTINGS = {

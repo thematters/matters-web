@@ -51,6 +51,7 @@ type ToPathArgs =
     }
   | { page: 'articleEdit'; article: ArticleArgs }
   | { page: 'articleHistory'; article: ArticleArgs }
+  | { page: 'momentDetailEdit' }
   | {
       page: 'momentDetail'
       moment: MomentArgs
@@ -135,6 +136,10 @@ export const toPath = (
 
       href = `/a/${shortHash}/history`
 
+      break
+    }
+    case 'momentDetailEdit': {
+      href = `/m/edit`
       break
     }
     case 'momentDetail': {

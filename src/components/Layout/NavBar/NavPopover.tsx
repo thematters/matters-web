@@ -13,7 +13,7 @@ const NavPopover: React.FC = () => {
   return (
     <section className={styles.popOver}>
       <ul className={styles.list}>
-        <li key="new-journal">
+        <li key="write-moment">
           <Card
             spacing={[12, 24]}
             textColor="black"
@@ -21,6 +21,7 @@ const NavPopover: React.FC = () => {
             bgColor="transparent"
             borderRadius="base"
             role="menuitem"
+            href={PATHS.MOMENT_DETAIL_EDIT}
           >
             <TextIcon
               icon={<Icon icon={IconComment} size={32} />}
@@ -29,7 +30,7 @@ const NavPopover: React.FC = () => {
               weight="normal"
               placement="bottom"
             >
-              <FormattedMessage defaultMessage="New Journal" id="subQNF" />
+              <FormattedMessage defaultMessage="Moment" id="afLdf2" />
             </TextIcon>
           </Card>
         </li>
@@ -50,7 +51,7 @@ const NavPopover: React.FC = () => {
               weight="normal"
               placement="bottom"
             >
-              <FormattedMessage defaultMessage="Write Articles" id="Xj0yv9" />
+              <FormattedMessage defaultMessage="Articles" id="3KNMbJ" />
             </TextIcon>
           </Card>
         </li>
