@@ -158,7 +158,17 @@ const UserWritings = () => {
     )
   }
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
+  const writingEdges =
+    edges &&
+    edges.filter(({ node }) => {
+      const isActiveArticle =
+        node.__typename === 'Article' && node.articleState === 'active'
+      const isActiveMoment =
+        node.__typename === 'Moment' && node.momentState === 'active'
+      return isActiveArticle || isActiveMoment
+    })
+
+  if (!writingEdges || writingEdges.length <= 0 || !pageInfo) {
     return (
       <>
         <CustomHead />
@@ -166,14 +176,6 @@ const UserWritings = () => {
       </>
     )
   }
-
-  const writingEdges = edges.filter(({ node }) => {
-    const isActiveArticle =
-      node.__typename === 'Article' && node.articleState === 'active'
-    const isActiveMoment =
-      node.__typename === 'Moment' && node.momentState === 'active'
-    return isActiveArticle || isActiveMoment
-  })
 
   return (
     <>

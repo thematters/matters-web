@@ -10,6 +10,7 @@ export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
 export const ADD_MOMENT_COMMENT_MENTION = 'addMomentCommentMention'
 export const UPDATE_NEWEST_MOMENT_COMMENT = 'updateNewestMomentComment'
 export const OPEN_MOMENT_FORM = 'openMomentForm'
+export const CLEAR_MOMENT_FORM = 'clearMomentForm'
 
 // Tag
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'

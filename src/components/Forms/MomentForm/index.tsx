@@ -3,7 +3,11 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
-import { MAX_MOMENT_CONTENT_LENGTH, OPEN_MOMENT_FORM } from '~/common/enums'
+import {
+  CLEAR_MOMENT_FORM,
+  MAX_MOMENT_CONTENT_LENGTH,
+  OPEN_MOMENT_FORM,
+} from '~/common/enums'
 import { formStorage, parseFormSubmitErrors, stripHtml } from '~/common/utils'
 import {
   Button,
@@ -127,6 +131,9 @@ const MomentForm = () => {
       setSubmitting(false)
       onClear()
       setEditing(false)
+
+      // Clear other rendered moment forms
+      window.dispatchEvent(new CustomEvent(CLEAR_MOMENT_FORM))
     } catch (error) {
       setSubmitting(false)
       const [, codes] = parseFormSubmitErrors(error as any)
@@ -163,11 +170,15 @@ const MomentForm = () => {
     setContent(newContent)
   }
 
+  useEventListener(CLEAR_MOMENT_FORM, () => {
+    onClear()
+  })
+
   useEffect(() => {
     if (editor && isEditing) {
       editor.commands.focus('end')
     }
-  }, [editor, isEditing])
+  }, [editor, isEditing, content])
 
   if (!isEditing) {
     return (
