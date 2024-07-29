@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import MATTY from '@/public/static/images/matty.png'
 
@@ -8,8 +9,14 @@ const NavBanner: React.FC = () => {
   return (
     <div className={styles.banner}>
       <div className={styles.notificationText}>
-        短動態上線囉！
-        <div className={styles.subText}>分享今天開心或難過的小故事吧</div>
+        <FormattedMessage id="VKxanK" defaultMessage="Moment Feature is Live" />
+        <div className={styles.subText}>
+          <FormattedMessage
+            id="CjKqYk"
+            defaultMessage="Share a story from your life"
+          />
+          分
+        </div>
       </div>
       <img src={MATTY.src} alt="Matty" className={styles.profileIcon} />
     </div>
