@@ -17,12 +17,18 @@ const CommentLikedNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
     return null
   }
 
+  const commentMoment =
+    notice.comment.node.__typename === 'Moment'
+      ? notice.comment.node
+      : undefined
+
   return (
     <NoticeDigest
       notice={notice}
       action={
         <FormattedMessage defaultMessage="liked your comment" id="ZNK0I9" />
       }
+      title={commentMoment && <NoticeMomentTitle moment={commentMoment} />}
       content={<NoticeComment comment={notice.comment} />}
       testId={TEST_ID.NOTICE_COMMENT_LIKED}
     />

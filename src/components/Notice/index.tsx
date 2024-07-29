@@ -53,10 +53,10 @@ const fragments = {
     ${ArticleNotice.fragments.notice}
     ${CommentCommentNotice.fragments.notice}
     ${CommentNotice.fragments.notice}
-    ${MomentNotice.fragments.notice}
     ${TransactionNotice.fragments.notice}
     ${CircleNotice.fragments.notice}
     ${OfficialAnnouncementNotice.fragments.notice}
+    ${MomentNotice.fragments.notice}
   `,
 }
 

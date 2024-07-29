@@ -1,4 +1,5 @@
 export * from './article'
+export * from './moment'
 export * from './tag'
 export * from './user'
 

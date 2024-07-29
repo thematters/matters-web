@@ -8,7 +8,7 @@ import { UserLanguage } from '~/gql/graphql'
  * @param locale - The locale to determine the truncation rules. Defaults to 'en'.
  * @returns The truncated title with preserved tagged users.
  */
-export const truncateTitle = (
+export const truncateMomentTitle = (
   title: string,
   maxLength: number = 10,
   locale: UserLanguage = UserLanguage.En

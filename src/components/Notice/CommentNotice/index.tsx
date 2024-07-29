@@ -17,12 +17,12 @@ const CommentNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
       return <CommentPinnedNotice notice={notice} />
     case 'ArticleNewComment':
       return <ArticleNewCommentNotice notice={notice} />
-    case 'MomentNewComment':
-      return <MomentNewCommentNotice notice={notice} />
     case 'CircleNewBroadcast':
       return <CircleNewBroadcastNotice notice={notice} />
     case 'CommentLiked':
       return <CommentLikedNotice notice={notice} />
+    case 'MomentNewComment':
+      return <MomentNewCommentNotice notice={notice} />
     default:
       return null
   }
@@ -45,9 +45,9 @@ CommentNotice.fragments = {
     ${CommentMentionedYouNotice.fragments.notice}
     ${CommentPinnedNotice.fragments.notice}
     ${ArticleNewCommentNotice.fragments.notice}
-    ${MomentNewCommentNotice.fragments.notice}
     ${CircleNewBroadcastNotice.fragments.notice}
     ${CommentLikedNotice.fragments.notice}
+    ${MomentNewCommentNotice.fragments.notice}
   `,
 }
 

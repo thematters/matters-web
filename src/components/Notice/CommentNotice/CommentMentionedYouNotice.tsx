@@ -1,11 +1,8 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { stripHtml, toPath } from '~/common/utils'
-import { truncateTitle } from '~/common/utils/text/moment'
-import { LanguageContext } from '~/components/Context'
+import { toPath } from '~/common/utils'
 import { CommentMentionedYouNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -22,9 +19,6 @@ const CommentMentionedYouNotice = ({
 }: {
   notice: CommentMentionedYouNoticeFragment
 }) => {
-  const { lang } = useContext(LanguageContext)
-  const intl = useIntl()
-
   if (!notice.actors) {
     return null
   }
@@ -47,13 +41,6 @@ const CommentMentionedYouNotice = ({
     return null
   }
 
-  const circleCommentPath = toPath({
-    page: 'commentDetail',
-    comment: latestComment,
-    article: commentArticle,
-    circle: commentCircle,
-  })
-
   return (
     <>
       {commentMoment && (
@@ -61,28 +48,10 @@ const CommentMentionedYouNotice = ({
           notice={notice}
           action={
             <FormattedMessage
-              defaultMessage="mentioned you in a moment comment at {commentMoment}"
-              id="X9a1XW"
+              defaultMessage="mentioned you in a comment at {commentMoment}"
+              id="AeVndq"
               values={{
-                commentMoment: (
-                  <NoticeMomentTitle
-                    moment={commentMoment}
-                    title={`${truncateTitle(
-                      stripHtml(commentMoment.content || ''),
-                      10,
-                      lang
-                    )} ${
-                      commentMoment.assets?.length
-                        ? intl
-                            .formatMessage({
-                              defaultMessage: `[image]`,
-                              id: 'W3tqQO',
-                            })
-                            .repeat(Math.min(3, commentMoment.assets.length))
-                        : ''
-                    }`}
-                  />
-                ),
+                commentMoment: <NoticeMomentTitle moment={commentMoment} />,
               }}
             />
           }
@@ -119,7 +88,12 @@ const CommentMentionedYouNotice = ({
                 commentCircle: (
                   <NoticeCircleName
                     circle={commentCircle}
-                    path={circleCommentPath}
+                    path={toPath({
+                      page: 'commentDetail',
+                      comment: latestComment,
+                      article: commentArticle,
+                      circle: commentCircle,
+                    })}
                   />
                 ),
               }}

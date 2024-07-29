@@ -168,67 +168,6 @@ export const MOCK_ARTILCE = {
   ],
 }
 
-export const MOCK_MOMENT = {
-  __typename: 'Moment' as any,
-  id: 'TW9tZW50OjE',
-  shortHash: 'r5ade0on7x1g',
-  content: '<p>這是一個時刻</p>',
-  assets: [
-    {
-      __typename: 'Asset' as any,
-      id: 'QXNzZXQ6MQ',
-      type: 'embed' as any,
-      path: 'https://images.unsplash.com/photo-1719209618812-a11aea8d1a32',
-    },
-    {
-      __typename: 'Asset' as any,
-      id: 'QXNzZXQ6Mg',
-      type: 'embed' as any,
-      path: 'https://images.unsplash.com/photo-1719210146204-17dc9c95b34d',
-    },
-    {
-      __typename: 'Asset' as any,
-      id: 'QXNzZXQ6Mw',
-      type: 'embed' as any,
-      path: 'https://images.unsplash.com/photo-1719212328828-5ad8dd12be00',
-    },
-  ],
-  author: MOCK_USER,
-  state: 'active' as any,
-  commentCount: 10,
-  likeCount: 100,
-  liked: false,
-  createdAt: '2020-12-24T07:29:17.682Z',
-  commentedFollowees: [
-    {
-      ...MOCK_USER,
-      id: 'VXNlcjox',
-      userName: 'matty2020',
-      displayName: 'Matty2020',
-      avatar: 'https://images.unsplash.com/photo-1720072480766-7a584e2ea03c',
-    },
-    {
-      ...MOCK_USER,
-      id: 'VXNlcsdf',
-      userName: 'matty2021',
-      displayName: 'Matty2021',
-      avatar: 'https://images.unsplash.com/photo-1662850886700-4ec19bd30d11',
-    },
-    {
-      ...MOCK_USER,
-      id: 'VXNlcddx',
-      userName: 'matty2022',
-      displayName: 'Matty2022',
-      avatar: 'https://images.unsplash.com/photo-1716403006232-5891fa7f2a24',
-    },
-  ],
-}
-
-export const MOCK_MOMENT_LIKE = {
-  ...MOCK_MOMENT,
-  content: '<p>這是一個時刻!!!!!!!!!!!!!!!! @jj</p>',
-}
-
 export const MOCK_CIRCLE_ARTICLE = {
   ...MOCK_ARTILCE,
   circle: MOCK_CIRCLE,
@@ -355,6 +294,74 @@ export const MOCK_CRYPTO_WALLET = {
       id: '1',
     },
   ],
+}
+
+// Moment
+export const MOCK_MOMENT = {
+  __typename: 'Moment' as any,
+  id: 'TW9tZW50OjE',
+  shortHash: 'r5ade0on7x1g',
+  content: '<p>這是一個時刻</p>',
+  assets: [
+    {
+      __typename: 'Asset' as any,
+      id: 'QXNzZXQ6MQ',
+      type: 'embed' as any,
+      path: 'https://images.unsplash.com/photo-1719209618812-a11aea8d1a32',
+    },
+    {
+      __typename: 'Asset' as any,
+      id: 'QXNzZXQ6Mg',
+      type: 'embed' as any,
+      path: 'https://images.unsplash.com/photo-1719210146204-17dc9c95b34d',
+    },
+    {
+      __typename: 'Asset' as any,
+      id: 'QXNzZXQ6Mw',
+      type: 'embed' as any,
+      path: 'https://images.unsplash.com/photo-1719212328828-5ad8dd12be00',
+    },
+  ],
+  author: MOCK_USER,
+  state: 'active' as any,
+  commentCount: 10,
+  likeCount: 100,
+  liked: false,
+  createdAt: '2020-12-24T07:29:17.682Z',
+  commentedFollowees: [
+    {
+      ...MOCK_USER,
+      id: 'VXNlcjox',
+      userName: 'matty2020',
+      displayName: 'Matty2020',
+      avatar: 'https://images.unsplash.com/photo-1720072480766-7a584e2ea03c',
+    },
+    {
+      ...MOCK_USER,
+      id: 'VXNlcsdf',
+      userName: 'matty2021',
+      displayName: 'Matty2021',
+      avatar: 'https://images.unsplash.com/photo-1662850886700-4ec19bd30d11',
+    },
+    {
+      ...MOCK_USER,
+      id: 'VXNlcddx',
+      userName: 'matty2022',
+      displayName: 'Matty2022',
+      avatar: 'https://images.unsplash.com/photo-1716403006232-5891fa7f2a24',
+    },
+  ],
+}
+
+export const MOCK_MOMENT_LIKE = {
+  ...MOCK_MOMENT,
+  content: '<p>這是一個時刻!!!!!!!!!!!!!!!! @jj</p>',
+}
+
+export const MOCK_MOMENT_COMMENT = {
+  ...MOCK_COMMENT,
+  node: MOCK_MOMENT,
+  type: 'moment' as any,
 }
 
 // Campaign
