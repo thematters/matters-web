@@ -1,6 +1,5 @@
-import format from 'date-fns/format'
-import isThisYear from 'date-fns/isThisYear'
-import parseISO from 'date-fns/parseISO'
+import { format, isThisYear, parseISO } from 'date-fns'
+import { formatInTimeZone } from 'date-fns-tz'
 
 const FORMATS = {
   zh_hant: {
@@ -17,35 +16,47 @@ const FORMATS = {
   },
 } as const
 
-const TRUNC_FORMATS = {
-  absoluteTruncatedThisYear: 'MM-dd',
-  absoluteTruncatedFull: 'yyyy-MM-dd',
-} as const
-
-const absolute = (
-  date: Date | string | number,
-  lang: Language = 'zh_hant',
-  isTruncated: boolean = false
-) => {
+const absolute = ({
+  date,
+  lang = 'zh_hant',
+  optionalYear = true,
+  utc8,
+}: {
+  date: Date | string | number
+  lang: Language
+  optionalYear?: boolean
+  utc8?: boolean
+}) => {
   if (typeof date === 'string') {
     date = parseISO(date)
   }
 
-  if (isThisYear(date)) {
-    return format(
-      date,
-      isTruncated
-        ? TRUNC_FORMATS.absoluteTruncatedThisYear
-        : FORMATS[lang].absoluteThisYear
-    )
+  const pattern =
+    optionalYear && isThisYear(date)
+      ? FORMATS[lang].absoluteThisYear
+      : FORMATS[lang].absoluteFull
+
+  if (utc8) {
+    return formatInTimeZone(date, 'Asia/Hong_Kong', pattern)
   }
 
-  return format(
-    date,
-    isTruncated
-      ? TRUNC_FORMATS.absoluteTruncatedFull
-      : FORMATS[lang].absoluteFull
-  )
+  return format(date, pattern)
+}
+
+absolute.dateISO = (date: Date | string | number) => {
+  if (typeof date === 'string') {
+    date = parseISO(date)
+  }
+
+  return format(date, 'yyyy-MM-dd')
+}
+
+absolute.timeISO = (date: Date | string | number) => {
+  if (typeof date === 'string') {
+    date = parseISO(date)
+  }
+
+  return format(date, 'HH:mm')
 }
 
 export default absolute

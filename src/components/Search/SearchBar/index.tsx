@@ -120,7 +120,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   }
 
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
-    if (event.code.toLowerCase() === KEYVALUE.arrowUp) {
+    if (event.code?.toLowerCase() === KEYVALUE.arrowUp) {
       if (!showDropdown) return
 
       event.preventDefault()
@@ -130,7 +130,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setActiveItem(items[activeIndex - 1])
     }
 
-    if (event.code.toLowerCase() === KEYVALUE.arrowDown) {
+    if (event.code?.toLowerCase() === KEYVALUE.arrowDown) {
       if (!showDropdown) return
 
       event.preventDefault()
@@ -140,7 +140,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       setActiveItem(items[activeIndex + 1])
     }
 
-    if (event.code.toLowerCase() === KEYVALUE.escape) {
+    if (event.code?.toLowerCase() === KEYVALUE.escape) {
       if (!showDropdown) return
 
       setShowDropdown(false)

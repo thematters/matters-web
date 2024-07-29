@@ -78,6 +78,7 @@
 
 .badges {
   display: flex;
+  align-items: center;
 
   & > * + * {
     margin-left: var(--sp12);

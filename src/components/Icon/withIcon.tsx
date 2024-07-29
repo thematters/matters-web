@@ -30,6 +30,7 @@ export type IconColor =
   | 'gold'
   | 'red'
   | 'redLight'
+  | 'freeWriteBlue'
 
 export interface IconProps extends React.SVGAttributes<HTMLOrSVGElement> {
   /** Working Icon description */

@@ -1,19 +1,24 @@
 import gql from 'graphql-tag'
 
 import RecommendArticleActivity from './RecommendArticleActivity'
-import RecommendCircleActivity from './RecommendCircleActivity'
 import RecommendUserActivity from './RecommendUserActivity'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
 import UserCreateCircleActivity from './UserCreateCircleActivity'
+import UserPostMomentActivity from './UserPostMomentActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
 
 export const FOLLOWING_FEED = gql`
-  query FollowingFeed($after: String) {
+  query FollowingFeed(
+    $after: String
+    $type: RecommendationFollowingFilterType
+  ) {
     viewer {
       id
       recommendation {
-        following(input: { first: 10, after: $after }) {
+        following(
+          input: { first: 10, after: $after, filter: { type: $type } }
+        ) {
           pageInfo {
             startCursor
             endCursor
@@ -25,6 +30,9 @@ export const FOLLOWING_FEED = gql`
               __typename
               ... on UserPublishArticleActivity {
                 ...UserPublishArticleActivity
+              }
+              ... on UserPostMomentActivity {
+                ...UserPostMomentActivity
               }
               ... on UserBroadcastCircleActivity {
                 ...UserBroadcastCircleActivity
@@ -38,9 +46,6 @@ export const FOLLOWING_FEED = gql`
               ... on ArticleRecommendationActivity {
                 ...RecommendArticleActivity
               }
-              ... on CircleRecommendationActivity {
-                ...RecommendCircleActivity
-              }
               ... on UserRecommendationActivity {
                 ...RecommendUserActivity
               }
@@ -53,8 +58,8 @@ export const FOLLOWING_FEED = gql`
   ${UserAddArticleTagActivity.fragments}
   ${UserBroadcastCircleActivity.fragments}
   ${UserCreateCircleActivity.fragments}
+  ${UserPostMomentActivity.fragments}
   ${UserPublishArticleActivity.fragments}
   ${RecommendArticleActivity.fragments}
-  ${RecommendCircleActivity.fragments}
   ${RecommendUserActivity.fragments}
 `

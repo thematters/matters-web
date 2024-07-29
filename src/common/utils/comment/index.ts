@@ -3,6 +3,8 @@ import _has from 'lodash/has'
 
 import { CommentState } from '~/gql/graphql'
 
+import styles from './styles.module.css'
+
 /**
  * Filter out comment that banned/archived and hasn't descendants
  *
@@ -84,4 +86,27 @@ export function trimCommentContent(content: string) {
     '</p>'
   )
   return trimContent
+}
+
+export const highlightComment = (
+  targetElement: HTMLElement,
+  isParentComment?: boolean,
+  fullSpacing?: boolean
+) => {
+  const activeParentCommentClass = fullSpacing
+    ? styles.activeParentCommentFullSpacing
+    : styles.activeParentComment
+  targetElement.classList.add(styles.activeBgColor)
+  if (isParentComment) {
+    targetElement.classList.add(activeParentCommentClass)
+  }
+
+  const removeHighlight = () => {
+    targetElement.classList.remove(styles.activeBgColor)
+    if (isParentComment) {
+      targetElement.classList.remove(activeParentCommentClass)
+    }
+  }
+
+  setTimeout(removeHighlight, 5000)
 }
