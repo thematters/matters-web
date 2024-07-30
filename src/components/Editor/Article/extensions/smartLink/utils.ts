@@ -38,7 +38,7 @@ export const makeSmartLinkOptions = ({
           : article.title
 
       replace(
-        `<a target="_blank" rel="noopener noreferrer nofollow" href="${link}">${title}</a>`
+        `<a target="_blank" rel="noopener noreferrer nofollow" href="${link}">${title}</a>&nbsp;`
       )
     },
   }
