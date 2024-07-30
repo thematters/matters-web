@@ -94,6 +94,9 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                       }}
                     />
                   </p>
+                  <div className={styles.like}>
+                    <LikeButton collection={collection} onClick={onClick} />
+                  </div>
                 </section>
               </section>
               <section className={styles.description}>
@@ -142,7 +145,6 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                 {!!description && (
                   <p className={styles.description}>{description}</p>
                 )}
-                <LikeButton collection={collection} onClick={onClick} />
                 {!description && isViewer && (
                   <p className={styles.addDescription}>
                     <Button
@@ -158,6 +160,9 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                     </Button>
                   </p>
                 )}
+                <div className={styles.like}>
+                  <LikeButton collection={collection} onClick={onClick} />
+                </div>
               </section>
             </section>
           </Media>
