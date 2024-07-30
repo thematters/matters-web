@@ -6,6 +6,7 @@ import { datetimeFormat } from '~/common/utils'
 import { Form, LanguageContext } from '~/components'
 import {
   ArticleCampaignInput,
+  CampaignState,
   EditorSelectCampaignFragment,
 } from '~/gql/graphql'
 
@@ -24,13 +25,13 @@ export const getSelectCampaign = ({
   attached: Array<{ campaign: { id: string }; stage: { id: string } }>
   createdAt: string // draft or article creation time
 }) => {
-  const { start, end } = applied?.writingPeriod || {}
+  const { start } = applied?.writingPeriod || {}
   const isCampaignStarted = !!start && new Date(createdAt) >= new Date(start)
-  const isCampaignEnded = !end || (!!end && new Date(createdAt) < new Date(end))
+  const isCampaignActive = applied?.state === CampaignState.Active
 
   // only show appliedCampaign if the article or draft is created during the writing period
   const appliedCampaign =
-    isCampaignStarted && isCampaignEnded ? applied : undefined
+    isCampaignStarted && isCampaignActive ? applied : undefined
   const selectedCampaign = attached.filter(
     (c) => c.campaign.id === applied?.id
   )[0]
@@ -98,6 +99,7 @@ const SelectCampaign = ({
 SelectCampaign.fragments = gql`
   fragment EditorSelectCampaign on WritingChallenge {
     id
+    state
     writingPeriod {
       start
       end

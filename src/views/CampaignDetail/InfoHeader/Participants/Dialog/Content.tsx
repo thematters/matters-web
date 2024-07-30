@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import { useContext } from 'react'
 
 import { analytics, mergeConnections } from '~/common/utils'
@@ -7,7 +8,6 @@ import {
   List,
   QueryError,
   SpinnerBlock,
-  usePublicQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -21,10 +21,10 @@ const ParticipantsDialogContent = () => {
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
 
-  const { data, loading, error, fetchMore } =
-    usePublicQuery<GetParticipantsQuery>(GET_PARTICIPANTS, {
-      variables: { shortHash },
-    })
+  const { data, loading, error, fetchMore } = useQuery<GetParticipantsQuery>(
+    GET_PARTICIPANTS,
+    { variables: { shortHash } }
+  )
 
   // pagination
   const campaign = data?.campaign
@@ -56,11 +56,11 @@ const ParticipantsDialogContent = () => {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0 || !pageInfo) {
+  if (!campaign || !edges || edges.length <= 0 || !pageInfo) {
     return null
   }
 
-  const isViewerApplySucceeded = campaign?.applicationState === 'succeeded'
+  const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
 
   return (
     <Dialog.Content noSpacing>
@@ -81,16 +81,16 @@ const ParticipantsDialogContent = () => {
               <List.Item key={cursor}>
                 <UserDigest.Rich
                   user={node}
+                  spacing={[12, 16]}
+                  hasFollow={false}
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
-                      type: 'campaign_participant',
+                      type: 'campaign_detail_participant',
                       contentType: 'user',
                       location: i,
                       id: node.id,
                     })
                   }
-                  spacing={[12, 16]}
-                  hasFollow={false}
                 />
               </List.Item>
             ))}

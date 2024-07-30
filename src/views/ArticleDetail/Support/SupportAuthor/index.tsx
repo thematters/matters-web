@@ -275,7 +275,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       )}
       {isWalletSelect && (
         <>
-          <Spacer size="xxloose" />
+          <Spacer size="sp40" />
           <AuthWalletFeed
             submitCallback={() => forward('networkSelect')}
             isInSupport
@@ -284,7 +284,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       )}
       {isNetworkSelect && (
         <>
-          <Spacer size="xxloose" />
+          <Spacer size="sp40" />
           <DynamicSwitchNetworkForm
             submitCallback={() => forward('setAmount')}
           />

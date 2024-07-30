@@ -4,7 +4,7 @@ import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
-  OPEN_GRAND_SLAM_BADGE_DIALOG,
+  OPEN_GRAND_BADGE_DIALOG,
   OPEN_NOMAD_BADGE_DIALOG,
   TEST_ID,
   URL_USER_PROFILE,
@@ -76,12 +76,12 @@ export const UserProfile = () => {
       window.dispatchEvent(new CustomEvent(OPEN_NOMAD_BADGE_DIALOG))
     }
 
-    const shouldOpenGrandSlamBadgeDialog =
-      getQuery(URL_USER_PROFILE.OPEN_GRAND_SLAM_BADGE_DIALOG.key) ===
-      URL_USER_PROFILE.OPEN_GRAND_SLAM_BADGE_DIALOG.value
+    const shouldOpenGrandBadgeDialog =
+      getQuery(URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.key) ===
+      URL_USER_PROFILE.OPEN_GRAND_BADGE_DIALOG.value
 
-    if (shouldOpenGrandSlamBadgeDialog) {
-      window.dispatchEvent(new CustomEvent(OPEN_GRAND_SLAM_BADGE_DIALOG))
+    if (shouldOpenGrandBadgeDialog) {
+      window.dispatchEvent(new CustomEvent(OPEN_GRAND_BADGE_DIALOG))
     }
   }, [])
 
@@ -114,7 +114,7 @@ export const UserProfile = () => {
   const nomadBadgeLevel = (
     hasNomadBadge ? Number.parseInt(nomadBadgeType[0].type.charAt(5)) : 1
   ) as 1 | 2 | 3 | 4
-  const hasGrandSlamBadge = badges.some((b) => b.type === 'grand_slam')
+  const hasGrandBadge = badges.some((b) => b.type === 'grand_slam')
 
   const profileCover = user.info.profileCover
   const userState = user.status?.state as string
@@ -209,7 +209,7 @@ export const UserProfile = () => {
               <BadgesDialog
                 hasNomadBadge={hasNomadBadge}
                 nomadBadgeLevel={nomadBadgeLevel}
-                hasGrandSlamBadge={hasGrandSlamBadge}
+                hasGrandBadge={hasGrandBadge}
                 hasTraveloggersBadge={hasTraveloggersBadge}
                 hasSeedBadge={hasSeedBadge}
                 hasGoldenMotorBadge={hasGoldenMotorBadge}
@@ -225,7 +225,7 @@ export const UserProfile = () => {
                     <Badges
                       hasNomadBadge={hasNomadBadge}
                       nomadBadgeLevel={nomadBadgeLevel}
-                      hasGrandSlamBadge={hasGrandSlamBadge}
+                      hasGrandBadge={hasGrandBadge}
                       hasTraveloggersBadge={hasTraveloggersBadge}
                       hasSeedBadge={hasSeedBadge}
                       hasGoldenMotorBadge={hasGoldenMotorBadge}

@@ -11,7 +11,10 @@ import styles from './styles.module.css'
 const fragments = gql`
   fragment InfoHeaderParticipantsCampaign on WritingChallenge {
     id
-    applicationState
+    application {
+      state
+      createdAt
+    }
     participants(input: { first: 8 }) {
       totalCount
       edges {
@@ -30,7 +33,7 @@ const Participants = ({
   campaign: InfoHeaderParticipantsCampaignFragment
 }) => {
   const viewer = useContext(ViewerContext)
-  const isViewerApplySucceeded = campaign.applicationState === 'succeeded'
+  const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
   const edges = campaign.participants.edges?.slice(
     0,
     isViewerApplySucceeded ? 7 : 8

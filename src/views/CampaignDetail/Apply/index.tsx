@@ -16,7 +16,10 @@ const fragments = {
   private: gql`
     fragment ApplyCampaignPrivate on WritingChallenge {
       id
-      applicationState
+      application {
+        state
+        createdAt
+      }
     }
   `,
 }

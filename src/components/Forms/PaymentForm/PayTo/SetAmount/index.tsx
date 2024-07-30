@@ -250,7 +250,7 @@ const SetAmount: React.FC<FormProps> = ({
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (
       <section>
-        <Spacer size="xxtight" />
+        <Spacer size="sp4" />
         <FormattedMessage
           defaultMessage="Payment will be processed by Stripe, allowing your support to be unrestricted by region."
           id="TX5UzL"
@@ -394,7 +394,7 @@ const SetAmount: React.FC<FormProps> = ({
     <section className={styles.container}>
       {InnerForm}
 
-      <Spacer size="loose" />
+      <Spacer size="sp24" />
       <SubmitButton mode="rounded" {...submitButtonProps} />
 
       {isUSDT && hasEthAddress && !isConnectedAddress && (

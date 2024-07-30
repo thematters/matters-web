@@ -44,7 +44,7 @@ const SettingsMisc = () => {
         </TableView>
       </section>
 
-      <Spacer size="xloose" />
+      <Spacer size="sp32" />
     </Layout.Main>
   )
 }

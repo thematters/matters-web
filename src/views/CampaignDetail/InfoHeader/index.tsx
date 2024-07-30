@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
-import { datetimeFormat, isUTC8 } from '~/common/utils'
+import { analytics, datetimeFormat, isUTC8 } from '~/common/utils'
 import {
   DotDivider,
   Icon,
@@ -26,7 +26,17 @@ type InfoHeaderProps = {
 }
 
 const ViewMore = ({ link }: { link: string }) => (
-  <a className={styles.viewMore} href={link} target="_blank">
+  <a
+    className={styles.viewMore}
+    href={link}
+    target="_blank"
+    onClick={() => {
+      analytics.trackEvent('click_button', {
+        type: 'campaign_detail_link',
+        pageType: 'campaign_detail',
+      })
+    }}
+  >
     <TextIcon
       icon={<Icon icon={IconRight} size={14} />}
       spacing={4}
@@ -54,7 +64,17 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
             </section>
           )}
 
-          <h1 className={styles.name}>{campaign.name}</h1>
+          <h1 className={styles.name}>
+            {
+              campaign[
+                lang === 'zh_hans'
+                  ? 'nameZhHans'
+                  : lang === 'zh_hant'
+                  ? 'nameZhHant'
+                  : 'nameEn'
+              ]
+            }
+          </h1>
 
           <section className={styles.meta}>
             <section className={styles.left}>
@@ -63,7 +83,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                   <FormattedMessage
                     defaultMessage="Application period{tz}: "
                     id="FYeEw1"
-                    values={{ ...(isUTC8() ? {} : { tz: ' (UTC+8) ' }) }}
+                    values={{ tz: isUTC8() ? '' : ' (UTC+8) ' }}
                   />
 
                   <span className={styles.period}>
@@ -90,7 +110,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                   <FormattedMessage
                     defaultMessage="Event period{tz}: "
                     id="krvjo9"
-                    values={{ ...(isUTC8() ? {} : { tz: ' (UTC+8) ' }) }}
+                    values={{ tz: isUTC8() ? '' : ' (UTC+8) ' }}
                   />
                   <span className={styles.period}>
                     {writingStart

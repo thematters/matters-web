@@ -15,7 +15,9 @@ const SidebarCampaign: React.FC<Partial<SelectCampaignProps>> = (props) => {
   return (
     <Box
       icon={<Icon icon={IconRead} size={24} />}
-      title={<FormattedMessage defaultMessage="Add to FreeWrite" id="6pc948" />}
+      title={
+        <FormattedMessage defaultMessage="Add to Free Write" id="m1wKuC" />
+      }
       borderColor="freeWriteBlue"
     >
       <section className={styles.container}>

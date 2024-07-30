@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import { Avatar, LinkWrapper, Tooltip, ViewerContext } from '~/components'
 import {
   AvatarUserFragment,
@@ -19,11 +19,13 @@ type SideParticipantsProps = {
 
 const Participant = ({
   user,
+  onClick,
 }: {
   user: AvatarUserFragment & {
     userName?: string | null
     displayName?: string | null
   }
+  onClick?: () => void
 }) => {
   const path = toPath({
     page: 'userProfile',
@@ -31,7 +33,7 @@ const Participant = ({
   })
   if (!user.displayName) {
     return (
-      <LinkWrapper {...path}>
+      <LinkWrapper {...path} onClick={onClick}>
         <Avatar user={user} size={32} />
       </LinkWrapper>
     )
@@ -51,7 +53,7 @@ const Participant = ({
 const SideParticipants = ({ campaign }: SideParticipantsProps) => {
   const viewer = useContext(ViewerContext)
   const edges = campaign.sideParticipants.edges
-  const isViewerApplySucceeded = campaign.applicationState === 'succeeded'
+  const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
 
   if (edges && edges.length <= 0) {
     return null
@@ -75,7 +77,20 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
 
         {edges
           ?.filter((u) => u.node.id !== viewer.id)
-          .map(({ node, cursor }) => <Participant key={cursor} user={node} />)}
+          .map(({ node, cursor }, i) => (
+            <Participant
+              key={cursor}
+              user={node}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'campaign_detail_participant',
+                  contentType: 'user',
+                  location: i,
+                  id: node.id,
+                })
+              }
+            />
+          ))}
       </section>
     </section>
   )

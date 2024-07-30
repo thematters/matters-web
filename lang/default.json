@@ -439,6 +439,9 @@
   "5sg7KC": {
     "defaultMessage": "Password"
   },
+  "5y5rID": {
+    "defaultMessage": "We will review your application shortly, stay tuned for the event!"
+  },
   "6+eeJ4": {
     "defaultMessage": "Lowercase letters, numbers and underscores",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -568,9 +571,6 @@
     "defaultMessage": "No results",
     "description": "src/components/Dialogs/AddArticlesCollectionDialog/SearchingDialogContent.tsx"
   },
-  "7m2h5x": {
-    "defaultMessage": "Participate successfully"
-  },
   "7oytv9": {
     "defaultMessage": "(edited)"
   },
@@ -581,6 +581,9 @@
   "7ykJ+l": {
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
+  },
+  "8+Z5E9": {
+    "defaultMessage": "The badge signifies your participation and completion in the \"Free Write in 7 days\"."
   },
   "84VOdX": {
     "defaultMessage": "Unpin from profile",
@@ -652,6 +655,9 @@
   },
   "9J0iCw": {
     "defaultMessage": "Deleted user"
+  },
+  "9OPnTz": {
+    "defaultMessage": "System or connection abnormality, please refresh the page and click “Join” again."
   },
   "9SXN7s": {
     "defaultMessage": "No more comments",
@@ -769,6 +775,9 @@
   "Bc20la": {
     "defaultMessage": "days"
   },
+  "BhRxYr": {
+    "defaultMessage": "Free Write Badge"
+  },
   "Bjdw71": {
     "defaultMessage": "followers_empty",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
@@ -882,9 +891,6 @@
     "defaultMessage": "Unblock",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
   },
-  "DqTwwn": {
-    "defaultMessage": "Free-writing Badge"
-  },
   "DrBuEI": {
     "defaultMessage": "Unpin Broadcast",
     "description": "src/components/CircleComment/DropdownActions/PinButton.tsx"
@@ -940,8 +946,8 @@
     "defaultMessage": "You do not have permission to perform this operation",
     "description": "FORBIDDEN_BY_STATE"
   },
-  "EvJnpb": {
-    "defaultMessage": "Because you continue to write with all your heart, I give you the best honor"
+  "ErV/vT": {
+    "defaultMessage": "Confirm to join"
   },
   "F3zk7E": {
     "defaultMessage": "(This action cannot be undone)",
@@ -954,9 +960,6 @@
   "FEkOVJ": {
     "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
-  },
-  "FM+YIG": {
-    "defaultMessage": "Confirm to participate"
   },
   "FMIIAZ": {
     "defaultMessage": "Revision history and IPFS entry,",
@@ -1065,6 +1068,9 @@
   },
   "HAlOn1": {
     "defaultMessage": "Name"
+  },
+  "HB2VOx": {
+    "defaultMessage": "System or connection abnormality, please refresh the page and click “Apply” again."
   },
   "HBxXD/": {
     "defaultMessage": "License"
@@ -1329,6 +1335,9 @@
   "LnesNr": {
     "defaultMessage": "Successfully removed collaborator"
   },
+  "LoQ3BF": {
+    "defaultMessage": "This badge represents your completion of Free Write in 7 days. Congratulations on finishing this meaningful writing journey!"
+  },
   "Lp6CiR": {
     "defaultMessage": "Settings - Misc",
     "description": "src/views/Me/Settings/Misc/index.tsx"
@@ -1386,9 +1395,6 @@
   },
   "N2IrpM": {
     "defaultMessage": "Confirm"
-  },
-  "N3xGd5": {
-    "defaultMessage": "We will review your application as soon as possible, so stay tuned for the event!"
   },
   "N6PWfU": {
     "defaultMessage": "Forget Password"
@@ -1539,6 +1545,10 @@
   "Pp/0po": {
     "defaultMessage": "Shuffle"
   },
+  "Pq/7m5": {
+    "defaultMessage": "Reviewing...",
+    "description": "type:join"
+  },
   "PtV68+": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_EMAIL_NOT_FOUND"
@@ -1655,10 +1665,6 @@
     "defaultMessage": "Latest",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
-  "SX+8mP": {
-    "defaultMessage": "Reviewing...",
-    "description": "type:participate"
-  },
   "SYfw+k": {
     "defaultMessage": "Confirm",
     "description": "src/components/Forms/PaymentForm/AddCredit/index.tsx"
@@ -1683,6 +1689,9 @@
   "Sep44m": {
     "defaultMessage": "Payout",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "Sfql0+": {
+    "defaultMessage": "Congratulations! You've got the Grand Badge!"
   },
   "SuRTsQ": {
     "defaultMessage": "Register for ISCN"
@@ -1819,10 +1828,6 @@
   "VZsE96": {
     "defaultMessage": "Collection Name"
   },
-  "VaB2pS": {
-    "defaultMessage": "Participate",
-    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
-  },
   "VeEfHm": {
     "defaultMessage": "Drafts",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -1858,6 +1863,9 @@
   "W0sZaX": {
     "defaultMessage": "Last 3 months",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
+  },
+  "W3hNBA": {
+    "defaultMessage": "Free Write in 7 days Grand Badge"
   },
   "W66Eyq": {
     "defaultMessage": "Password must be at least 8 characters long, support letter, numbers and symbols.",
@@ -2099,6 +2107,9 @@
     "defaultMessage": "docs",
     "description": "src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
   },
+  "aKEiNd": {
+    "defaultMessage": "You missed the registration period, you can still join as a latecomer. Apply earlier next time for the chance to get the badge."
+  },
   "aKlTO2": {
     "defaultMessage": "You can add {count} more collaborators."
   },
@@ -2129,6 +2140,9 @@
   },
   "ai7kS4": {
     "defaultMessage": "My Works"
+  },
+  "al5/yQ": {
+    "defaultMessage": "Joined successfully"
   },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
@@ -2331,9 +2345,6 @@
   "fDdcbi": {
     "defaultMessage": "This {type} has been deleted by the author"
   },
-  "fH6B/f": {
-    "defaultMessage": "If you miss the official registration period, you can still submit works after successful registration, but you will not be able to obtain the Grand Slam badge. Remember to register early next time for a chance to get a badge!"
-  },
   "fJB38x": {
     "defaultMessage": "Trial ends in {remainDays} days"
   },
@@ -2375,6 +2386,10 @@
   },
   "g5pX+a": {
     "defaultMessage": "About"
+  },
+  "gCafm/": {
+    "defaultMessage": "Join",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "gK6OxL": {
     "defaultMessage": "Leave a comment?",
@@ -2474,9 +2489,6 @@
   },
   "iEJeQH": {
     "defaultMessage": "Liker ID"
-  },
-  "iNXSkV": {
-    "defaultMessage": "Seven Days Grand Slam"
   },
   "iNZdM/": {
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
@@ -2671,6 +2683,9 @@
   "m/Wg7b": {
     "defaultMessage": "Circle Description",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
+  },
+  "m1wKuC": {
+    "defaultMessage": "Add to Free Write"
   },
   "m4GG4b": {
     "defaultMessage": "Delete collection"

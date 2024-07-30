@@ -7,7 +7,9 @@ export const GET_PARTICIPANTS = gql`
     campaign(input: { shortHash: $shortHash }) {
       id
       ... on WritingChallenge {
-        applicationState
+        application {
+          state
+        }
         participants(input: { first: 20, after: $after }) {
           pageInfo {
             startCursor
