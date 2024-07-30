@@ -102,7 +102,7 @@ const Collection: React.FC<{
                 })
               }
             />
-            <Spacer size="xtight" />
+            <Spacer size="sp8" />
             <UserDigest.Mini
               user={node.author}
               avatarSize={16}

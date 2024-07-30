@@ -85,7 +85,7 @@ const ArchiveUserDialog = ({
 
           {!isPreConfirm && (
             <>
-              <Spacer size="xtight" />
+              <Spacer size="sp8" />
               <Form.Input
                 type="password"
                 name="password"

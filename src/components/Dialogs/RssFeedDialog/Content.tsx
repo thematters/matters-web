@@ -90,7 +90,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                     />
                   </p>
                 </section>
-                <Spacer size="loose" />
+                <Spacer size="sp24" />
               </>
             ) : null}
 
@@ -139,7 +139,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
                 </section>
               ) : (
                 <>
-                  <Spacer size="base" />
+                  <Spacer size="sp16" />
                   <section className={styles.warningInput}>
                     <TextIcon
                       icon={<Icon icon={IconInfo} size={24} />}
@@ -157,9 +157,9 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
               )}
             </section>
 
-            <Spacer size="base" />
+            <Spacer size="sp16" />
             <hr />
-            <Spacer size="base" />
+            <Spacer size="sp16" />
 
             {/* gateways */}
             <section className={styles.gateways}>
