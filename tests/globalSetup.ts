@@ -16,7 +16,9 @@ const prepareUserStorageState = async (baseURL: string, user: User) => {
     baseURL,
     userAgent: USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)],
   })
-  page.addInitScript("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
+  page.addInitScript(
+    "Object.defineProperty(navigator, 'webdriver', {get: () => undefined})"
+  )
 
   // login to user
   await login({

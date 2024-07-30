@@ -10,20 +10,23 @@ export const waitForAPIResponse = async ({
   path: string
   isOK?: (data: any) => boolean
 }) => {
-  await page.waitForResponse(async (res: Response) => {
-    try {
-      const body = (await res.body()).toString()
-      console.log(`Response body: ${body}`)
-      const parsedBody = JSON.parse(body)
-      const data = _get(parsedBody, path)
+  await page.waitForResponse(
+    async (res: Response) => {
+      try {
+        const body = (await res.body()).toString()
+        console.log(`Response body: ${body}`)
+        const parsedBody = JSON.parse(body)
+        const data = _get(parsedBody, path)
 
-      if (isOK(data)) {
-        return true
+        if (isOK(data)) {
+          return true
+        }
+      } catch (error) {
+        console.error(`Response was not waited on ${path} for error: ${error}`)
       }
-    } catch (error) {
-      console.error(`Response was not waited on ${path} for error: ${error}`)
-    }
 
-    return false
-  }, { timeout: 15000 })
+      return false
+    },
+    { timeout: 15000 }
+  )
 }
