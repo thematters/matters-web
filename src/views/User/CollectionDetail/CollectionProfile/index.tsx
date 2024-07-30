@@ -1,6 +1,12 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Book,
@@ -8,6 +14,7 @@ import {
   Expandable,
   LinkWrapper,
   Media,
+  toast,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -15,6 +22,7 @@ import EditCollection from '~/components/CollectionDigest/DropdownActions/EditCo
 import { CollectionProfileCollectionFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
+import LikeButton from './LikeButton'
 import styles from './styles.module.css'
 
 interface CollectionProfileProps {
@@ -26,12 +34,32 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
   const { getQuery } = useRoute()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
+  const { title, cover, description, author } = collection
+  const forbid = () => {
+    toast.error({
+      message: (
+        <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]} />
+      ),
+    })
+  }
 
-  const { title, cover, description, articles, author } = collection
+  let onClick: () => void | undefined
+
+  if (!viewer.isAuthed) {
+    onClick = () => {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
+        })
+      )
+    }
+  } else if (viewer.isArchived || viewer.isFrozen) {
+    onClick = forbid
+  }
 
   return (
     <EditCollection.Dialog collection={collection}>
-      {({ openDialog: openEditeCollection }) => (
+      {({ openDialog: openEditCollection }) => (
         <section>
           <Media lessThan="lg">
             <section>
@@ -40,7 +68,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                   <Book.Collection title={title} cover={cover} />
                 )}
                 {!cover && isViewer && (
-                  <button onClick={openEditeCollection}>
+                  <button onClick={openEditCollection}>
                     <Book.Collection title={title} hasMask />
                   </button>
                 )}
@@ -56,16 +84,9 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                       {author.displayName}
                     </LinkWrapper>
                   </p>
-                  <p className={styles.articleCount}>
-                    <FormattedMessage
-                      defaultMessage="{articleCount} Articles"
-                      id="LQxY1o"
-                      description="src/views/User/CollectionDetail/CollectionProfile/index.tsx"
-                      values={{
-                        articleCount: articles.totalCount,
-                      }}
-                    />
-                  </p>
+                  <div className={styles.like}>
+                    <LikeButton collection={collection} onClick={onClick} />
+                  </div>
                 </section>
               </section>
               <section className={styles.description}>
@@ -85,7 +106,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                     <Button
                       textColor="greyDarker"
                       textActiveColor="green"
-                      onClick={openEditeCollection}
+                      onClick={openEditCollection}
                     >
                       <FormattedMessage
                         defaultMessage="Add description"
@@ -105,7 +126,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                 <Book.Collection title={title} cover={cover} />
               )}
               {!cover && isViewer && (
-                <button onClick={openEditeCollection}>
+                <button onClick={openEditCollection}>
                   <Book.Collection title={title} hasMask />
                 </button>
               )}
@@ -119,7 +140,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                     <Button
                       textColor="greyDarker"
                       textActiveColor="green"
-                      onClick={openEditeCollection}
+                      onClick={openEditCollection}
                     >
                       <FormattedMessage
                         defaultMessage="Add description"
@@ -129,6 +150,9 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                     </Button>
                   </p>
                 )}
+                <div className={styles.like}>
+                  <LikeButton collection={collection} onClick={onClick} />
+                </div>
               </section>
             </section>
           </Media>
