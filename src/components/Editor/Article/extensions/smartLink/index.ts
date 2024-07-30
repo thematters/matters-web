@@ -25,7 +25,7 @@ export interface SmartLinkOptions {
   }: {
     key: string
     replace: (text: string) => void
-  }) => void
+  }) => Promise<void>
 }
 
 type Result = { text?: string } & Range
@@ -78,7 +78,8 @@ const findAndReplace = ({
         const to = pos + m.index + m[0].length
 
         // replace
-        editor.view.dispatch(editor.state.tr.insertText(replace, from, to))
+        editor.commands.insertContentAt({ from, to }, replace)
+        // editor.view.dispatch(editor.state.tr.insertText(replace, from, to))
         break
       }
     }

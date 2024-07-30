@@ -4,7 +4,8 @@ import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
-import { EditorDraftFragment } from '~/gql/graphql'
+import { GET_ARTICLE_BY_SHORT_HASH } from '~/components/GQL/queries/getArticle'
+import { EditorDraftFragment, GetArticleByShortHashQuery } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
 import {
@@ -81,8 +82,21 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           key: string
           replace: (text: string) => void
         }) => {
-          // TODO
-          console.log('search', key)
+          const { data } = await client.query<GetArticleByShortHashQuery>({
+            query: GET_ARTICLE_BY_SHORT_HASH,
+            variables: { shortHash: key },
+          })
+          const article = data.article
+
+          if (!article) {
+            return
+          }
+
+          const link = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/${article.shortHash}`
+
+          replace(
+            `<a target="_blank" rel="noopener noreferrer nofollow" href="${link}">${article.title}</a>`
+          )
         },
       }),
     ],
