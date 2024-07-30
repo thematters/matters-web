@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { stripHtml, toPath, truncateMomentTitle } from '~/common/utils'
+import { stripHtml, toPath, truncateNoticeTitle } from '~/common/utils'
 import { LanguageContext } from '~/components'
 import { NoticeMomentTitleFragment } from '~/gql/graphql'
 
@@ -23,7 +23,10 @@ const NoticeMomentTitle = ({
     moment,
   })
 
-  const title = truncateMomentTitle(stripHtml(moment.content || ''), 10, lang)
+  const title = truncateNoticeTitle(stripHtml(moment.content || ''), {
+    maxLength: 10,
+    locale: lang,
+  })
   const images = moment.assets.length
     ? intl
         .formatMessage({ defaultMessage: `[image]`, id: 'W3tqQO' })

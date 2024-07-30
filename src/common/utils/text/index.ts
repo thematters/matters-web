@@ -1,5 +1,5 @@
 export * from './article'
-export * from './moment'
+export * from './notice'
 export * from './tag'
 export * from './user'
 
