@@ -25,7 +25,7 @@ type ROUTE_KEY =
   | 'MOMENT_DETAIL_EDIT'
   | 'MOMENT_DETAIL'
   // User
-  | 'USER_ARTICLES'
+  | 'USER_WORKS'
   | 'USER_COLLECTIONS'
   | 'USER_COLLECTION_DETAIL'
   // Circle
@@ -95,7 +95,7 @@ export const ROUTES: {
   { key: 'TAG_DETAIL', pathname: '/tags/[tagId]' },
 
   // User
-  { key: 'USER_ARTICLES', pathname: '/[name]' },
+  { key: 'USER_WORKS', pathname: '/[name]' },
   { key: 'USER_COLLECTIONS', pathname: '/[name]/collections' },
   {
     key: 'USER_COLLECTION_DETAIL',
