@@ -270,6 +270,8 @@ export const MOCK_COLLECTION = {
     totalCount: 1,
     edges: [{ node: MOCK_ARTILCE }],
   },
+  liked: false,
+  likeCount: 12,
 }
 
 // Transaction
