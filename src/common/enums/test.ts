@@ -138,7 +138,6 @@ export enum TEST_ID {
   NOTICE_OFFICIAL_ANNOUNCEMENT = 'notice/official-announcement',
   NOTICE_MOMENT_MENTIONED = 'notice/moment-mentioned',
   NOTICE_MOMENT_LIKED = 'notice/moment-liked',
-  NOTICE_COLLECTION_TITLE = 'notice/collection/title',
   // me
   ME_WALLET_TRANSACTIONS_ITEM = 'me/wallet/transactions/item',
   ME_WALLET_TRANSACTIONS_ITEM_AMOUNT = 'me/wallet/transactions/item/amount',

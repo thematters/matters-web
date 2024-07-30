@@ -3,7 +3,6 @@ import {
   MOCK_CIRCLE,
   MOCK_CIRCLE_ARTICLE,
   MOCK_CIRCLE_COMMENT,
-  MOCK_COLLECTION,
   MOCK_COMMENT,
   MOCK_MOMENT,
   MOCK_MOMENT_COMMENT,
@@ -245,17 +244,7 @@ export const MOCK_NOTICE_LIST = [
     comment: MOCK_PARENT_COMMENT,
     reply: MOCK_CIRCLE_COMMENT,
   },
-  /**
-   * Collection
-   */
-  {
-    __typename: 'CollectionNotice' as any,
-    id: 'CollectionNewLike',
-    unread: false,
-    createdAt: '2024-07-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    target: MOCK_COLLECTION,
-  },
+
   /**
    * Moment
    */

@@ -6,7 +6,6 @@ import { DigestNoticeFragment } from '~/gql/graphql'
 import ArticleArticleNotice from './ArticleArticleNotice'
 import ArticleNotice from './ArticleNotice'
 import CircleNotice from './CircleNotice'
-import CollectionNotice from './CollectionNotice'
 import CommentCommentNotice from './CommentCommentNotice'
 import CommentNotice from './CommentNotice'
 import MomentNotice from './MomentNotice'
@@ -48,9 +47,6 @@ const fragments = {
       ... on MomentNotice {
         ...MomentNotice
       }
-      ... on CollectionNotice {
-        ...CollectionNotice
-      }
     }
     ${UserNotice.fragments.notice}
     ${ArticleArticleNotice.fragments.notice}
@@ -61,7 +57,6 @@ const fragments = {
     ${CircleNotice.fragments.notice}
     ${OfficialAnnouncementNotice.fragments.notice}
     ${MomentNotice.fragments.notice}
-    ${CollectionNotice.fragments.notice}
   `,
 }
 
@@ -87,8 +82,6 @@ export const Notice: React.FC<NoticeProps> & {
       return <OfficialAnnouncementNotice notice={notice} />
     case 'MomentNotice':
       return <MomentNotice notice={notice} />
-    case 'CollectionNotice':
-      return <CollectionNotice notice={notice} />
     default:
       return null
   }
