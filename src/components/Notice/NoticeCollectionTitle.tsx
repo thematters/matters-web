@@ -4,7 +4,7 @@ import { useContext } from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { truncateTitle } from '~/common/utils/text/collection'
+import { truncateNoticeTitle } from '~/common/utils/text/notice'
 import { CollectionNoticeFragment } from '~/gql/graphql'
 
 import { LanguageContext } from '../Context'
@@ -34,7 +34,7 @@ const NoticeCollectionTitle = ({
         className={styles.noticeArticleTitle}
         data-test-id={TEST_ID.NOTICE_COLLECTION_TITLE}
       >
-        {truncateTitle(notice.target.title, lang)}
+        {truncateNoticeTitle(notice.target.title, { locale: lang })}
       </a>
     </Link>
   )
