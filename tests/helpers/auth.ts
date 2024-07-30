@@ -46,6 +46,15 @@ export const login = async ({
     console.log(`Redirect to target: /login?target=${target}`)
     await page.goto(`/login?target=${target}`, { waitUntil: 'networkidle' })
   }
+
+  // Login with email & password
+  await page.getByRole('button', { name: 'Email', exact: true }).click()
+
+  // Fill the form
+  await page.getByPlaceholder('Email').fill(email)
+  await page.getByPlaceholder('Password').fill(password)
+
+  console.log('Filled email and password')
   const bodyHTML = await page.evaluate(() => {
     const newDocument = document.implementation.createHTMLDocument()
     Array.from(document.body.childNodes).forEach((node) =>
@@ -55,12 +64,8 @@ export const login = async ({
   })
 
   console.log(bodyHTML)
-  // Login with email & password
-  await page.getByRole('button', { name: 'Email', exact: true }).click()
-
-  // Fill the form
-  await page.getByPlaceholder('Email').fill(email)
-  await page.getByPlaceholder('Password').fill(password)
+  await page.getByRole('button', { name: 'Sign in' }).click()
+  console.log('Clicked sign in button')
 
   // Submit and redirect to target
   await Promise.all([
@@ -68,7 +73,6 @@ export const login = async ({
       page,
       path: 'data.emailLogin.token',
     }),
-    page.getByRole('button', { name: 'Sign in' }).click(),
     waitForNavigation ? page.waitForNavigation() : undefined,
   ])
 }

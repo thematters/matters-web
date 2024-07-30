@@ -13,6 +13,7 @@ export const waitForAPIResponse = async ({
   await page.waitForResponse(async (res: Response) => {
     try {
       const body = (await res.body()).toString()
+      console.log(`Response body: ${body}`)
       const parsedBody = JSON.parse(body)
       const data = _get(parsedBody, path)
 
@@ -20,9 +21,9 @@ export const waitForAPIResponse = async ({
         return true
       }
     } catch (error) {
-      // console.error(error)
+      console.error(`Response was not waited on ${path} for error: ${error}`)
     }
 
     return false
-  })
+  }, { timeout: 15000 })
 }

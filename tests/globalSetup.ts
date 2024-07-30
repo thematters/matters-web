@@ -3,9 +3,20 @@ import { chromium, FullConfig } from '@playwright/test'
 
 import { login, User, users } from './helpers'
 
+const USER_AGENTS = [
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.2227.0 Safari/537.36',
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.3497.92 Safari/537.36',
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36',
+]
+
 const prepareUserStorageState = async (baseURL: string, user: User) => {
   const browser = await chromium.launch()
-  const page = await browser.newPage({ baseURL })
+  const page = await browser.newPage({
+    baseURL,
+    userAgent: USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)],
+  })
+  page.addInitScript("Object.defineProperty(navigator, 'webdriver', {get: () => undefined})")
 
   // login to user
   await login({
@@ -27,6 +38,7 @@ const setupEnglish = async (baseURL: string, user: User) => {
 
   const context = await browser.newContext({
     storageState: `test-storage-state/storageState-${user.email}.json`,
+    userAgent: USER_AGENTS[Math.floor(Math.random() * USER_AGENTS.length)],
   })
   const request = context.request
   await request.post(process.env.PLAYWRIGHT_TEST_API_URL as string, {
