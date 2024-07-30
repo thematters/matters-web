@@ -13,7 +13,7 @@ const FollowingDialogContent = () => {
   return (
     <Dialog.Content noSpacing>
       <FeedType type={feedType} setFeedType={setFeedType} />
-      <Spacer size="xtight" />
+      <Spacer size="sp8" />
       {feedType === 'circle' && <CirclesFeed />}
       {feedType === 'tag' && <TagsFeed />}
       {feedType === 'user' && <UsersFeed />}

@@ -11,7 +11,7 @@ const Placeholder = () => {
         <div className={styles.line}></div>
         <div className={styles.line}></div>
       </section>
-      <Spacer size="base" />
+      <Spacer size="sp16" />
       <section className={styles.image}></section>
       <section className={styles.text}>
         <div className={styles.line}></div>

@@ -137,7 +137,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
           ))}
         </List>
 
-        <Spacer size="base" />
+        <Spacer size="sp16" />
 
         <Dialog.Content>
           <Dialog.Content.Message smUpAlign="center">
@@ -176,7 +176,7 @@ const TagEditorList = ({ id, closeDialog, toAddStep, toRemoveStep }: Props) => {
           </Dialog.Content.Message>
         </Dialog.Content>
 
-        <Spacer size="base" />
+        <Spacer size="sp16" />
       </Dialog.Content>
 
       {isAllowAdd && (

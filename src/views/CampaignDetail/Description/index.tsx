@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { LanguageContext, Layout } from '~/components'
+import { LanguageContext, Layout, Spacer } from '~/components'
 import { DescriptionCampaignFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -28,6 +28,8 @@ const Description = ({
             ],
         }}
       />
+
+      <Spacer size="sp40" />
     </Layout.Main.Spacing>
   )
 }
