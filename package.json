@@ -88,7 +88,7 @@
     "express": "^4.17.1",
     "file-type": "^16.5.4",
     "fingerprintjs2": "^2.1.4",
-    "firebase": "^9.22.0",
+    "firebase": "^10.12.4",
     "formik": "^2.4.2",
     "graphql": "^14.7.0",
     "graphql-tag": "^2.12.6",
