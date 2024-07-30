@@ -4,8 +4,7 @@ import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
-import { GET_ARTICLE_BY_SHORT_HASH } from '~/components/GQL/queries/getArticle'
-import { EditorDraftFragment, GetArticleByShortHashQuery } from '~/gql/graphql'
+import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
 import {
@@ -15,6 +14,7 @@ import {
   makeMentionSuggestion,
   SmartLink,
 } from './extensions'
+import { makeSmartLinkOptions } from './extensions/smartLink/utils'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.module.css'
 import EditorSummary from './Summary'
@@ -70,35 +70,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       CaptionLimit.configure({
         maxCaptionLength: 100,
       }),
-      SmartLink.configure({
-        findRule: new RegExp(
-          `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/(?<key>[a-zA-Z0-9]+)`,
-          'g'
-        ),
-        search: async ({
-          key,
-          replace,
-        }: {
-          key: string
-          replace: (text: string) => void
-        }) => {
-          const { data } = await client.query<GetArticleByShortHashQuery>({
-            query: GET_ARTICLE_BY_SHORT_HASH,
-            variables: { shortHash: key },
-          })
-          const article = data.article
-
-          if (!article) {
-            return
-          }
-
-          const link = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/${article.shortHash}`
-
-          replace(
-            `<a target="_blank" rel="noopener noreferrer nofollow" href="${link}">${article.title}</a>`
-          )
-        },
-      }),
+      SmartLink.configure(makeSmartLinkOptions({ client })),
     ],
   })
 

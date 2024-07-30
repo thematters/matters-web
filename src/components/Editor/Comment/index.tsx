@@ -9,10 +9,9 @@ import { useIntl } from 'react-intl'
 
 import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
 import { useCommentEditorContext } from '~/components/Context'
-import { GET_ARTICLE_BY_SHORT_HASH } from '~/components/GQL/queries/getArticle'
-import { GetArticleByShortHashQuery } from '~/gql/graphql'
 
 import { makeMentionSuggestion, SmartLink } from '../Article/extensions'
+import { makeSmartLinkOptions } from '../Article/extensions/smartLink/utils'
 import styles from './styles.module.css'
 
 interface Props {
@@ -58,37 +57,7 @@ const CommentEditor: React.FC<Props> = ({
       window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
-    extensions: [
-      SmartLink.configure({
-        findRule: new RegExp(
-          `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/(?<key>[a-zA-Z0-9]+)`,
-          'g'
-        ),
-        search: async ({
-          key,
-          replace,
-        }: {
-          key: string
-          replace: (text: string) => void
-        }) => {
-          const { data } = await client.query<GetArticleByShortHashQuery>({
-            query: GET_ARTICLE_BY_SHORT_HASH,
-            variables: { shortHash: key },
-          })
-          const article = data.article
-
-          if (!article) {
-            return
-          }
-
-          const link = `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/${article.shortHash}`
-
-          replace(
-            `<a target="_blank" rel="noopener noreferrer nofollow" href="${link}">${article.title}</a>`
-          )
-        },
-      }),
-    ],
+    extensions: [SmartLink.configure(makeSmartLinkOptions({ client }))],
   })
 
   useEffect(() => {
