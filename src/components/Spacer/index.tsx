@@ -1,17 +1,9 @@
 import styles from './styles.module.css'
 
 interface SpacerProps {
-  size?:
-    | 'xxtight'
-    | 'xtight'
-    | 'base'
-    | 'baseLoose'
-    | 'loose'
-    | 'xloose'
-    | 'xxloose'
-    | 'xxxloose'
+  size?: 'sp4' | 'sp8' | 'sp16' | 'sp20' | 'sp24' | 'sp32' | 'sp40' | 'sp64'
 }
 
-export const Spacer: React.FC<SpacerProps> = ({ size = 'loose' }) => (
+export const Spacer: React.FC<SpacerProps> = ({ size = 'sp24' }) => (
   <div className={styles[size]} aria-hidden></div>
 )

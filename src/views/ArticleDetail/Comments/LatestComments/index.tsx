@@ -141,7 +141,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
           isFallbackEditor
           showClear
         />
-        <Spacer size="base" />
+        <Spacer size="sp16" />
       </Media>
       {!comments || (comments.length <= 0 && <EmptyComment />)}
       {!!comments && comments.length > 0 && (
@@ -151,7 +151,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
           loader={
             <>
               <Placeholder />
-              <Spacer size="loose" />
+              <Spacer size="sp24" />
             </>
           }
           eof={

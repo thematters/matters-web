@@ -283,7 +283,7 @@ const Confirm: React.FC<FormProps> = ({
               </TextIcon>
             }
           />
-          <Spacer size="base" />
+          <Spacer size="sp16" />
         </>
       )}
 
