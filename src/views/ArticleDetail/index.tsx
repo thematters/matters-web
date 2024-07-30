@@ -417,7 +417,7 @@ const BaseArticleDetail = ({
       </section>
 
       <Media at="sm">
-        <Spacer size="xxxloose" />
+        <Spacer size="sp64" />
         <CommentsDialog
           id={article.id}
           articleDetails={article}

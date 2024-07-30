@@ -132,10 +132,10 @@ const Notifications = () => {
             </Layout.Header.Title>
           }
         />
-        <Spacer size="base" />
+        <Spacer size="sp16" />
       </Media>
       <Media greaterThan="sm">
-        <Spacer size="xloose" />
+        <Spacer size="sp32" />
       </Media>
 
       <Head

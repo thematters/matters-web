@@ -272,7 +272,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         <ConfirmTable.Row type="balance">
           <Balance currency={currency} amount={balance} showTopUp={false} />
         </ConfirmTable.Row>
-        <Spacer size="xtight" />
+        <Spacer size="sp8" />
       </ConfirmTable>
       {InnerForm}
       <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
@@ -283,7 +283,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
     return (
       <section className={styles.container}>
         {Content}
-        <Spacer size="loose" />
+        <Spacer size="sp24" />
         <Dialog.RoundedButton
           text={
             <FormattedMessage
@@ -302,7 +302,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
           }
           loading={isSubmitting || waiting}
         />
-        <Spacer size="base" />
+        <Spacer size="sp16" />
         <Dialog.RoundedButton
           color="black"
           onClick={switchToSetAmount}
