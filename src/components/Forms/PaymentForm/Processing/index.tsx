@@ -179,7 +179,7 @@ const OthersProcessingForm: React.FC<Props> = ({
 
       {error && (
         <>
-          <Spacer size="loose" />
+          <Spacer size="sp24" />
           <Dialog.RoundedButton
             color="black"
             onClick={prevStep}
@@ -362,7 +362,7 @@ const USDTProcessingForm: React.FC<Props> = ({
         </PaymentInfo>
         {isError && (
           <>
-            <Spacer size="loose" />
+            <Spacer size="sp24" />
             <Dialog.RoundedButton
               color="black"
               onClick={switchToConfirm}

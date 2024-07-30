@@ -1,0 +1,26 @@
+.tabList {
+  @mixin hide-scrollbar;
+
+  display: flex;
+  gap: var(--sp16);
+  margin-bottom: var(--sp8);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &.sticky {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-sticky-tabs);
+    background: var(--color-white);
+  }
+}
+
+.tabItem {
+  flex-shrink: 0;
+  font-size: var(--text14);
+  line-height: 1.375rem;
+
+  &.selected {
+    font-weight: var(--font-semibold);
+  }
+}

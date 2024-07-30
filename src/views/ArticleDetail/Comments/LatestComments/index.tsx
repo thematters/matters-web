@@ -10,14 +10,14 @@ import {
   parseCommentHash,
 } from '~/common/utils'
 import {
-  CommentFormBeta,
+  ArticleCommentForm,
+  ArticleThreadComment,
   EmptyComment,
   InfiniteScroll,
   List,
   Media,
   QueryError,
   Spacer,
-  ThreadCommentBeta,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -136,13 +136,12 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   return (
     <section id="latest-comments">
       <Media greaterThan="sm">
-        <CommentFormBeta
+        <ArticleCommentForm
           articleId={article?.id}
-          type={'article'}
           isFallbackEditor
           showClear
         />
-        <Spacer size="base" />
+        <Spacer size="sp16" />
       </Media>
       {!comments || (comments.length <= 0 && <EmptyComment />)}
       {!!comments && comments.length > 0 && (
@@ -152,7 +151,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
           loader={
             <>
               <Placeholder />
-              <Spacer size="loose" />
+              <Spacer size="sp24" />
             </>
           }
           eof={
@@ -167,9 +166,8 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
           <List spacing={[0, 0]} hasBorder={false}>
             {!!pinnedComment && (
               <List.Item key={pinnedComment.id}>
-                <ThreadCommentBeta
+                <ArticleThreadComment
                   comment={pinnedComment}
-                  type="article"
                   defaultExpand={
                     pinnedComment.id === parentId && !!descendantId
                   }
@@ -183,10 +181,9 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
                 !comment.pinned &&
                 comment.state !== 'archived' && (
                   <List.Item key={comment.id}>
-                    <ThreadCommentBeta
+                    <ArticleThreadComment
                       comment={comment}
                       pinnedComment={pinnedComment}
-                      type="article"
                       defaultExpand={comment.id === parentId && !!descendantId}
                       hasLink
                       disabled={lock}

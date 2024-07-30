@@ -32,13 +32,15 @@ const CommentEditor: React.FC<Props> = ({
   const intl = useIntl()
   const { setActiveEditor, setFallbackEditor } = useCommentEditorContext()
 
+  placeholder =
+    placeholder ||
+    intl.formatMessage({
+      id: 'liBHHE',
+      defaultMessage: 'Any thoughts? Leave a kind comment~',
+    })
+
   const editor = useCommentEditor({
-    placeholder:
-      placeholder ||
-      intl.formatMessage({
-        id: 'liBHHE',
-        defaultMessage: 'Any thoughts? Leave a kind comment~',
-      }),
+    placeholder,
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
       const content = editor.getHTML()
@@ -63,6 +65,16 @@ const CommentEditor: React.FC<Props> = ({
     }
   }, [editor])
 
+  useEffect(() => {
+    if (!editor) return
+
+    editor.extensionManager.extensions.filter(
+      (extension) => extension.name === 'placeholder'
+    )[0].options['placeholder'] = placeholder
+
+    editor.view.dispatch(editor.state.tr)
+  }, [editor, placeholder])
+
   return (
     <div
       className={styles.commentEditor}
@@ -71,7 +83,9 @@ const CommentEditor: React.FC<Props> = ({
       <EditorContent
         editor={editor}
         onFocus={() => {
-          setActiveEditor(editor)
+          if (setActiveEditor) {
+            setActiveEditor(editor)
+          }
         }}
       />
     </div>

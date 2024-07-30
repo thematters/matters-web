@@ -4,9 +4,19 @@
   padding: var(--sp16);
 }
 
+.freeWriteBlue {
+  color: var(--color-free-write-blue);
+
+  & .name {
+    font-weight: var(--font-medium);
+    color: var(--color-free-write-blue);
+  }
+}
+
 .name {
   font-weight: var(--font-normal);
   line-height: 1rem;
+  color: var(--color-grey-darker);
 
   &.text14 {
     font-size: var(--text14);
@@ -19,6 +29,7 @@
 
 [aria-selected='true'] .name {
   font-weight: var(--font-medium);
+  color: var(--color-black);
 }
 
 [aria-selected='false'] .name {

@@ -17,6 +17,13 @@ export const fragments = {
         id
         userName
       }
+      campaigns {
+        campaign {
+          id
+          name
+          shortHash
+        }
+      }
     }
   `,
   articleVersion: gql`

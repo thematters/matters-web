@@ -6,6 +6,7 @@ import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/2
 import { CHART_COLOR } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
+  type Datum,
   QueryError,
   SpinnerBlock,
   StackedAreaChart,
@@ -119,8 +120,10 @@ const Content = () => {
                 />
                 <StackedAreaChart.Tooltip
                   {...props}
-                  formatter={(datum: any) =>
-                    `<span>${formatAmount(datum.value, 0)} HKD</span>`
+                  formatter={(datum: Datum) =>
+                    typeof datum.value === 'number'
+                      ? `<span>${formatAmount(datum.value, 0)} HKD</span>`
+                      : ''
                   }
                 />
               </>

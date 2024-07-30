@@ -65,7 +65,7 @@ const Request: React.FC<Props> = ({ back, nextStep, closeDialog }) => {
 
       <Dialog.Content>
         <SelectCountry country={country} onChange={setCountry} />
-        <Spacer size="xxloose" />
+        <Spacer size="sp40" />
       </Dialog.Content>
 
       <Dialog.Footer

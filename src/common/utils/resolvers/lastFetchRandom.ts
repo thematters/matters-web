@@ -1,4 +1,4 @@
-const lastFetchRandomResolver = (_: any) => {
+const lastFetchRandomResolver = (_: unknown) => {
   // time-based random for better homepage UX on SSR
   const minutes = new Date().getMinutes()
   const max = 10

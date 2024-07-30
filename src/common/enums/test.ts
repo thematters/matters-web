@@ -79,6 +79,8 @@ export enum TEST_ID {
   ARTICLE_TOOLBAR = 'article/toolbar',
   ARTICLE_BOOKMARK = 'article/bookmark',
   ARTICLE_COMMENT_FEED = 'article/comment/feed',
+  // circle
+  CIRCLE_COMMENT_FEED = 'circle/comment/feed',
   // payto
   PAY_TO_CURRENCY_CHOICE = 'payto/currency-choice',
   // comment
@@ -107,6 +109,7 @@ export enum TEST_ID {
   NOTICE_COMMENT_MENTIONED_YOU = 'notice/comment-mentioned-you',
   NOTICE_COMMENT_PINNED = 'notice/comment-pinned',
   NOTICE_ARTICLE_NEW_COMMENT = 'notice/article-new-comment',
+  NOTICE_COMMENT_LIKED = 'notice/comment-liked',
   NOTICE_SUBSCRIBED_ARTICLE_NEW_COMMENT = 'notice/subscribed-article-new-comment',
   NOTICE_CIRCLE_NEW_BROADCAST = 'notice/circle-new-broadcast',
   NOTICE_TAG_ADOPTION = 'notice/tag-adoption',
@@ -124,6 +127,7 @@ export enum TEST_ID {
   NOTICE_CRYPTO_WALLET_AIRDROP = 'notice/crypto-wallet-airdrop',
   NOTICE_CRYPTO_WALLET_CONNECTED = 'notice/crypto-wallet-connected',
   NOTICE_OFFICIAL_ANNOUNCEMENT = 'notice/official-announcement',
+  NOTICE_COLLECTION_TITLE = 'notice/collection/title',
   // me
   ME_WALLET_TRANSACTIONS_ITEM = 'me/wallet/transactions/item',
   ME_WALLET_TRANSACTIONS_ITEM_AMOUNT = 'me/wallet/transactions/item/amount',

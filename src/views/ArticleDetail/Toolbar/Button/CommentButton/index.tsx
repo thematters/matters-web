@@ -12,10 +12,10 @@ import {
 } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import {
+  ArticleCommentFormDialog,
   Button,
   ButtonProps,
   CardProps,
-  CommentFormDialog,
   Icon,
   TextIcon,
   toast,
@@ -208,9 +208,8 @@ const CommentButton = ({
   }
 
   return (
-    <CommentFormDialog
+    <ArticleCommentFormDialog
       articleId={article.id}
-      type="article"
       submitCallback={refetchResponses}
     >
       {({ openDialog }) => (
@@ -224,7 +223,7 @@ const CommentButton = ({
           {...buttonProps}
         />
       )}
-    </CommentFormDialog>
+    </ArticleCommentFormDialog>
   )
 }
 

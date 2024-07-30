@@ -1,5 +1,3 @@
-import { distance } from 'fastest-levenshtein'
-
 import { toSizedImageURL } from '../url'
 
 /**
@@ -39,7 +37,8 @@ export const stripHtml = (
 export const makeSummary = (html: string, length = 140, buffer = 20) => {
   // split on sentence breaks
   const sections = stripHtml(html, '', ' ')
-    .replace(/([?!。？！]|(\.\s))\s*/g, '$1|')
+    .replace(/&[^;]+;/g, ' ') // remove html entities
+    .replace(/([?!。？！]|(\.\s))\s*/g, '$1|') // split on sentence breaks
     .split('|')
 
   // grow summary within buffer
@@ -128,7 +127,10 @@ export const optimizeEmbed = (content: string) => {
 }
 
 /**
- * Get distances of two context diffs.
+ * Match figure tag in HTML content.
  */
-export const measureDiffs = (source: string, target: string) =>
-  distance(source, target)
+const REGEXP_FIGURE_TAG = new RegExp('<figure[^>]*>(.*?)</figure>')
+
+export const containsFigureTag = (content: string) => {
+  return REGEXP_FIGURE_TAG.test(content)
+}

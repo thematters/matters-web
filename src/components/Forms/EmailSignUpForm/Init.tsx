@@ -81,7 +81,8 @@ const Init: React.FC<FormProps> = ({
   const { getQuery } = useRoute()
   const referralCode =
     getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
-    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+    storage.get<{ referralCode: string }>(REFERRAL_STORAGE_REFERRAL_CODE)
+      ?.referralCode ||
     undefined
 
   const {
@@ -141,7 +142,6 @@ const Init: React.FC<FormProps> = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <ReCaptcha action="register" setToken={setTurnstileToken} />
       <Form.Input
         label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
         type="email"
@@ -162,6 +162,8 @@ const Init: React.FC<FormProps> = ({
         spacingBottom="base"
         autoFocus
       />
+
+      <ReCaptcha action="register" setToken={setTurnstileToken} />
     </Form>
   )
 

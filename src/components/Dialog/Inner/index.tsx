@@ -19,6 +19,7 @@ export type DialogInnerProps = {
 
   dismissOnClickOutside?: boolean
   dismissOnHandle?: boolean
+  dismissOnESC?: boolean
 
   testId?: string
 }
@@ -36,8 +37,9 @@ const Inner: React.FC<
   smBgColor,
   smUpBgColor,
 
-  dismissOnClickOutside = false,
+  dismissOnClickOutside = true,
   dismissOnHandle = true,
+  dismissOnESC = true,
 
   style,
   initialFocusRef,
@@ -82,7 +84,6 @@ const Inner: React.FC<
     if (!dismissOnClickOutside) {
       return
     }
-
     closeTopDialog()
   }
 
@@ -95,10 +96,10 @@ const Inner: React.FC<
       className={innerClasses}
       style={style}
       onKeyDown={(event) => {
-        if (event.code.toLowerCase() !== KEYVALUE.escape) {
+        if (event.code?.toLowerCase() !== KEYVALUE.escape) {
           return
         }
-        if (!dismissOnHandle) {
+        if (!dismissOnESC) {
           return
         }
         closeTopDialog()

@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from 'react'
 import { COMMENT_FEED_ID_PREFIX } from '~/common/enums'
 import { parseCommentHash } from '~/common/utils'
 import {
+  ArticleThreadComment,
+  ArticleThreadCommentType,
   QueryError,
-  ThreadCommentBeta,
-  ThreadCommentType,
   usePublicQuery,
 } from '~/components'
 import { CommentDetailQuery } from '~/gql/graphql'
@@ -46,6 +46,7 @@ const CommentDetail = () => {
       variables: {
         id: parentId,
       },
+      fetchPolicy: 'network-only',
     }
   )
 
@@ -93,13 +94,12 @@ const CommentDetail = () => {
     return null
   }
 
-  const comment = data.node as ThreadCommentType
+  const comment = data.node as ArticleThreadCommentType
 
   return (
     <section ref={ref}>
-      <ThreadCommentBeta
+      <ArticleThreadComment
         comment={comment}
-        type="article"
         hasLink
         firstRenderCallback={() => setReadyJump(true)}
         isInCommentDetail

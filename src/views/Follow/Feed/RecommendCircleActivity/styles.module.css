@@ -1,9 +1,0 @@
-.container {
-  padding-bottom: var(--sp8);
-}
-
-.item {
-  @mixin border-grey;
-
-  border-radius: var(--sp8);
-}

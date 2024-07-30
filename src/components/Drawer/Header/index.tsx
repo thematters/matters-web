@@ -20,7 +20,7 @@ const Header: React.FC<HeaderProps> = ({
   leftBtn,
   rightBtn,
   closeDrawer,
-  fixedWidth = true,
+  fixedWidth = false,
 }) => {
   const intl = useIntl()
 

@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { ReactComponent as IconAnalyticsFollower24 } from '@/public/static/icons/24px/analytics-follower.svg'
 import { CHART_COLOR } from '~/common/enums'
 import {
+  type Datum,
   QueryError,
   SpinnerBlock,
   StackedAreaChart,
@@ -127,7 +128,7 @@ const Content = () => {
                 />
                 <StackedAreaChart.Tooltip
                   {...props}
-                  formatter={(datum: any) =>
+                  formatter={(datum: Datum) =>
                     `<span>&nbsp;${datum.value}${intl.formatMessage({
                       defaultMessage: 'followers',
                       id: 'MDNaxs',

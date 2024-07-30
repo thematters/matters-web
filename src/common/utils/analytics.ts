@@ -82,6 +82,7 @@ export interface ClickButtonProp {
     | 'edit_support_copy'
     | 'history_version'
     | 'ipfs'
+    | 'campaign_detail_entrance'
     | 'edit'
     | 'edited'
     | 'appreciate'
@@ -96,6 +97,11 @@ export interface ClickButtonProp {
     | 'supporter_list'
     | 'user_avatar'
     | 'user_name'
+    | 'hottest'
+    | 'icymi'
+    | 'newest'
+    | 'campaign_detail_link'
+    | `campaign_detail_tab_${string}`
   pageType?: PageType
   pageComponent?: PageComponent
 }
@@ -296,6 +302,7 @@ type ArticleFeedType =
   | 'article_detail_author_sidebar_collection'
   | 'article_detail_author_sidebar_author'
   | 'article_detail_author_sidebar_recommendation'
+  | `campaign_detail_${string}`
 
 type CollectionFeedType =
   | 'user_collection'
@@ -346,13 +353,16 @@ type TagFeedType =
 type CircleFeedType = 'user_circle' | 'circle_follower' | 'circle_member'
 
 type PageType =
+  | 'home'
   | 'article_detail'
   | 'article_history'
   | 'user_profile'
   | 'circle_detail'
   | 'edit_draft'
+  | 'campaign_detail'
 
 type PageComponent =
+  | 'home_feed_tab'
   | 'article_meta'
   | 'article_end'
   | 'article_end_toolbar'
