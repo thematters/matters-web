@@ -1303,10 +1303,6 @@
     "defaultMessage": "Paywalled",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
-  "LQxY1o": {
-    "defaultMessage": "{articleCount} Articles",
-    "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
-  },
   "LUWKnn": {
     "defaultMessage": "Wings have sprouted on the badge, and the halo of dreams is beginning to spin. The Nimbus Ferry badge signifies your participation in the Nomad Matters.",
     "description": "src/views/User/UserProfile/BadgeNomadLabel/index.tsx"

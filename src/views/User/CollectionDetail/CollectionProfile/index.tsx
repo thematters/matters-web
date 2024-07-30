@@ -34,7 +34,7 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
   const { getQuery } = useRoute()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
-  const { title, cover, description, articles, author } = collection
+  const { title, cover, description, author } = collection
   const forbid = () => {
     toast.error({
       message: (
@@ -83,16 +83,6 @@ const CollectionProfile = ({ collection }: CollectionProfileProps) => {
                     >
                       {author.displayName}
                     </LinkWrapper>
-                  </p>
-                  <p className={styles.articleCount}>
-                    <FormattedMessage
-                      defaultMessage="{articleCount} Articles"
-                      id="LQxY1o"
-                      description="src/views/User/CollectionDetail/CollectionProfile/index.tsx"
-                      values={{
-                        articleCount: articles.totalCount,
-                      }}
-                    />
                   </p>
                   <div className={styles.like}>
                     <LikeButton collection={collection} onClick={onClick} />
