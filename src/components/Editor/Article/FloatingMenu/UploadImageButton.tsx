@@ -46,6 +46,7 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
     const hasInvalidImage = await Promise.all(
       Array.from(files).map((file) => validateImage(file))
     ).then((results) => results.some((result) => !result))
+
     if (hasInvalidImage) {
       event.target.value = ''
       return
@@ -57,7 +58,9 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
       for (const file of files) {
         const mime = (await getFileType(file))!.mime
         const { path } = await upload({ file, type: ASSET_TYPE.embed, mime })
+
         editor.chain().focus().setFigureImage({ src: path }).run()
+
         toast.success({
           message: (
             <FormattedMessage defaultMessage="Image uploaded" id="TcTp+J" />

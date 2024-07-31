@@ -3,15 +3,17 @@ import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { INPUT_DEBOUNCE } from '~/common/enums'
+import { ACCEPTED_UPLOAD_IMAGE_TYPES, INPUT_DEBOUNCE } from '~/common/enums'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
 import {
   CaptionLimit,
   FigureEmbedLinkInput,
+  FigureImageUploader,
   FigurePlaceholder,
   makeMentionSuggestion,
+  PasteDropFile,
   SmartLink,
 } from './extensions'
 import { makeSmartLinkOptions } from './extensions/smartLink/utils'
@@ -71,6 +73,38 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         maxCaptionLength: 100,
       }),
       SmartLink.configure(makeSmartLinkOptions({ client })),
+      // FileUploadIndicator,
+      FigureImageUploader,
+      PasteDropFile.configure({
+        onDrop: async (editor, files, pos) => {
+          let chain = editor.chain()
+
+          Array.from(files).forEach((file) => {
+            chain.addFigureImageUploader({
+              upload,
+              previewSrc: URL.createObjectURL(file),
+              file,
+              pos,
+            })
+          })
+
+          chain.run()
+        },
+        onPaste: async (editor, files) => {
+          let chain = editor.chain()
+
+          Array.from(files).forEach((file) => {
+            chain.addFigureImageUploader({
+              upload,
+              previewSrc: URL.createObjectURL(file),
+              file,
+            })
+          })
+
+          chain.run()
+        },
+        mimeTypes: ACCEPTED_UPLOAD_IMAGE_TYPES,
+      }),
     ],
   })
 

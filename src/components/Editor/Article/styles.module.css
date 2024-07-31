@@ -27,6 +27,11 @@
       outline: none;
     }
 
+    /* disable interactive elements */
+    & a {
+      pointer-events: none;
+    }
+
     /* horizontal rule */
     & :global(hr.ProseMirror-selectednode) {
       &::before {
@@ -69,11 +74,7 @@
       content: attr(data-figure-placeholder);
     }
 
-    /* disable interactive */
-    & a {
-      pointer-events: none;
-    }
-
+    /* link input */
     & :global(.figure-embed-link-input) {
       & input {
         display: block;
@@ -86,6 +87,12 @@
           opacity: 1; /* Firefox */
         }
       }
+    }
+
+    /* image uploader */
+    & :global(.figure-image-uploader) {
+      position: relative;
+      margin: var(--ar17-200) 0;
     }
   }
 

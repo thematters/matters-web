@@ -21,9 +21,7 @@ const Input: React.FC<NodeViewProps> = (props) => {
     // restore paragraph node
     if (isRestoreParagraph) {
       props.editor.commands.insertContentAt(props.editor.state.selection.to, [
-        {
-          type: 'paragraph',
-        },
+        { type: 'paragraph' },
       ])
     }
 

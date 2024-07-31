@@ -25,7 +25,7 @@ export const CaptionLimit = Node.create<CaptionLimitOptions>({
   addProseMirrorPlugins() {
     return [
       new Plugin({
-        key: new PluginKey('captionLimit'),
+        key: new PluginKey(pluginName),
         filterTransaction: (transaction, state) => {
           // Nothing has changed, ignore it.
           if (!transaction.docChanged || !this.options.maxCaptionLength) {

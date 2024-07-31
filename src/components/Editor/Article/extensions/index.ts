@@ -1,5 +1,7 @@
 export * from './captionLimit'
 export * from './figureEmbedLinkInput'
+export * from './figureImageUploader'
 export * from './figurePlaceholder'
 export * from './mention'
+export * from './pasteDropFile'
 export * from './smartLink'
