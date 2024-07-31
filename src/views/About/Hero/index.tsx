@@ -13,14 +13,7 @@ import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/hero-illustration
 import IMAGE_WAVE_1 from '@/public/static/images/about/wave-hero-1.svg'
 import IMAGE_WAVE_2 from '@/public/static/images/about/wave-hero-2.svg'
 import { PATHS } from '~/common/enums'
-import {
-  Button,
-  Icon,
-  Media,
-  TextIcon,
-  Translate,
-  withIcon,
-} from '~/components'
+import { Button, Icon, Media, TextIcon, Translate } from '~/components'
 
 import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
@@ -125,9 +118,11 @@ const Hero = () => {
         <section className={styles.container}>
           <section className={`${styles.scrollButton} ${styles.scrollLeft}`}>
             <Button onClick={scrollPrev} disabled={!prevBtnEnabled}>
-              <Media at="sm">{withIcon(IconButtonLeft)({ size: 24 })}</Media>
+              <Media at="sm">
+                <Icon icon={IconButtonLeft} size={24} />
+              </Media>
               <Media greaterThan="sm">
-                {withIcon(IconButtonLeft)({ size: 32 })}
+                <Icon icon={IconButtonLeft} size={32} />
               </Media>
             </Button>
           </section>
@@ -313,9 +308,11 @@ const Hero = () => {
           </section>
           <section className={`${styles.scrollButton} ${styles.scrollRight}`}>
             <Button onClick={scrollNext} disabled={!nextBtnEnabled}>
-              <Media at="sm">{withIcon(IconButtonRight)({ size: 24 })}</Media>
+              <Media at="sm">
+                <Icon icon={IconButtonRight} size={24} />
+              </Media>
               <Media greaterThan="sm">
-                {withIcon(IconButtonRight)({ size: 32 })}
+                <Icon icon={IconButtonRight} size={32} />
               </Media>
             </Button>
           </section>

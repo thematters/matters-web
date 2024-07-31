@@ -4,12 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { ReactComponent as IconLink } from '@/public/static/icons/24px/link.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import {
-  CopyToClipboard,
-  TextIcon,
-  ViewerContext,
-  withIcon,
-} from '~/components'
+import { CopyToClipboard, Icon, TextIcon, ViewerContext } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -43,7 +38,7 @@ const Copy = ({ link }: { link: string }) => {
             }}
           >
             <TextIcon
-              icon={withIcon(IconLink)({ size: 24 })}
+              icon={<Icon icon={IconLink} size={24} />}
               spacing={16}
               size={16}
               color="black"
