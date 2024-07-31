@@ -7,7 +7,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { ReactComponent as IconEditorImage } from '@/public/static/icons/editor-image.svg'
 import { ACCEPTED_UPLOAD_IMAGE_TYPES, ASSET_TYPE } from '~/common/enums'
 import { getFileType, validateImage } from '~/common/utils'
-import { Spinner, toast, withIcon } from '~/components'
+import { Icon, toast } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -93,8 +93,7 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
         id: 'Pv2PlK',
       })}
     >
-      {!uploading && withIcon(IconEditorImage)({ size: 32 })}
-      {uploading && <Spinner size={32} color="greyLight" />}
+      <Icon icon={IconEditorImage} size={32} />
 
       <VisuallyHidden>
         <input

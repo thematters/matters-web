@@ -7,11 +7,11 @@ import { ReactComponent as IconFooterTwitter } from '@/public/static/icons/24px/
 import { EXTERNAL_LINKS } from '~/common/enums'
 import {
   Button,
+  Icon,
   LanguageSwitch,
   Media,
   TextIcon,
   Translate,
-  withIcon,
 } from '~/components'
 
 import layoutStyles from '../layout.module.css'
@@ -105,10 +105,13 @@ const Footer = () => {
                       rel="noreferrer"
                     >
                       <TextIcon
-                        icon={withIcon(IconFooterTwitter)({
-                          size: 24,
-                          color: 'white',
-                        })}
+                        icon={
+                          <Icon
+                            icon={IconFooterTwitter}
+                            size={24}
+                            color="white"
+                          />
+                        }
                         color="grey"
                         size={16}
                         spacing={8}
@@ -124,10 +127,13 @@ const Footer = () => {
                       rel="noreferrer"
                     >
                       <TextIcon
-                        icon={withIcon(IconFooterTwitter)({
-                          size: 24,
-                          color: 'white',
-                        })}
+                        icon={
+                          <Icon
+                            icon={IconFooterTwitter}
+                            size={24}
+                            color="white"
+                          />
+                        }
                         color="grey"
                         size={16}
                         spacing={8}
@@ -144,10 +150,13 @@ const Footer = () => {
                       rel="noreferrer"
                     >
                       <TextIcon
-                        icon={withIcon(IconFooterDiscord)({
-                          size: 24,
-                          color: 'white',
-                        })}
+                        icon={
+                          <Icon
+                            icon={IconFooterDiscord}
+                            size={24}
+                            color="white"
+                          />
+                        }
                         color="grey"
                         size={16}
                         spacing={8}
@@ -163,10 +172,13 @@ const Footer = () => {
                       rel="noreferrer"
                     >
                       <TextIcon
-                        icon={withIcon(IconFooterFacebook)({
-                          size: 24,
-                          color: 'white',
-                        })}
+                        icon={
+                          <Icon
+                            icon={IconFooterFacebook}
+                            size={24}
+                            color="white"
+                          />
+                        }
                         color="grey"
                         size={16}
                         spacing={8}
@@ -185,10 +197,9 @@ const Footer = () => {
                       rel="noreferrer"
                     >
                       <TextIcon
-                        icon={withIcon(IconFooterBlog)({
-                          size: 24,
-                          color: 'white',
-                        })}
+                        icon={
+                          <Icon icon={IconFooterBlog} size={24} color="white" />
+                        }
                         color="grey"
                         size={16}
                         spacing={8}
@@ -205,10 +216,13 @@ const Footer = () => {
                       rel="noreferrer"
                     >
                       <TextIcon
-                        icon={withIcon(IconFooterLinkedin)({
-                          size: 24,
-                          color: 'white',
-                        })}
+                        icon={
+                          <Icon
+                            icon={IconFooterLinkedin}
+                            size={24}
+                            color="white"
+                          />
+                        }
                         color="grey"
                         size={16}
                         spacing={8}
@@ -224,10 +238,13 @@ const Footer = () => {
                       rel="noreferrer"
                     >
                       <TextIcon
-                        icon={withIcon(IconFooterInstagram)({
-                          size: 24,
-                          color: 'white',
-                        })}
+                        icon={
+                          <Icon
+                            icon={IconFooterInstagram}
+                            size={24}
+                            color="white"
+                          />
+                        }
                         color="grey"
                         size={16}
                         spacing={8}
