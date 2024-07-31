@@ -482,6 +482,9 @@
   "6CQaLH": {
     "defaultMessage": "请选择或输入金额"
   },
+  "6D7u/C": {
+    "defaultMessage": "作品"
+  },
   "6E7VKR": {
     "defaultMessage": "我的交易记录"
   },
@@ -569,6 +572,10 @@
   "7WXDhH": {
     "defaultMessage": "确认要删除草稿吗？",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
+  },
+  "7XWzvD": {
+    "defaultMessage": "这里还没有任何作品",
+    "description": "src/components/Empty/EmptyWork.tsx"
   },
   "7Y9hwb": {
     "defaultMessage": "哎呀，设置失败了。"

@@ -42,10 +42,10 @@ const UserTabs = ({
     <Tabs>
       <Tabs.Tab
         {...userArticlesPath}
-        selected={isInPath('USER_ARTICLES')}
+        selected={isInPath('USER_WORKS')}
         count={writingCount > 0 ? writingCount : undefined}
       >
-        <FormattedMessage defaultMessage="Articles" id="3KNMbJ" />
+        <FormattedMessage defaultMessage="Works" id="6D7u/C" />
       </Tabs.Tab>
 
       {showCollectionTab && (

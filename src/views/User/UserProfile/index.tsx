@@ -25,6 +25,7 @@ import {
 } from '~/components'
 import { UserProfileUserPublicQuery } from '~/gql/graphql'
 
+import MomentForm from '../MomentForm'
 import UserTabs from '../UserTabs'
 import { Badges } from './Badges'
 import { BadgesDialog } from './BadgesDialog'
@@ -146,6 +147,10 @@ export const UserProfile = () => {
     [styles.right]: true,
     [styles.spaceTop]: !!profileCover,
   })
+
+  const articleCount = user?.status?.articleCount || 0
+  const momentCount = user?.status?.momentCount || 0
+  const writingCount = articleCount + momentCount
 
   return (
     <>
@@ -310,6 +315,7 @@ export const UserProfile = () => {
         </Media>
       </section>
 
+      {isMe && writingCount === 0 && <MomentForm />}
       <UserTabs user={user} />
     </>
   )

@@ -482,6 +482,9 @@
   "6CQaLH": {
     "defaultMessage": "Please select or enter amount"
   },
+  "6D7u/C": {
+    "defaultMessage": "Works"
+  },
   "6E7VKR": {
     "defaultMessage": "My transaction history"
   },
@@ -569,6 +572,10 @@
   "7WXDhH": {
     "defaultMessage": "Are you sure you want to delete draft?",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
+  },
+  "7XWzvD": {
+    "defaultMessage": "No works here yet",
+    "description": "src/components/Empty/EmptyWork.tsx"
   },
   "7Y9hwb": {
     "defaultMessage": "Oops! Setup failed."
