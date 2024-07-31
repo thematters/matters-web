@@ -12,7 +12,9 @@ import {
   FigureEmbedLinkInput,
   FigurePlaceholder,
   makeMentionSuggestion,
+  SmartLink,
 } from './extensions'
+import { makeSmartLinkOptions } from './extensions/smartLink/utils'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.module.css'
 import EditorSummary from './Summary'
@@ -68,6 +70,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       CaptionLimit.configure({
         maxCaptionLength: 100,
       }),
+      SmartLink.configure(makeSmartLinkOptions({ client })),
     ],
   })
 

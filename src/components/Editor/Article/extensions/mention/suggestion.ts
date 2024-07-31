@@ -14,23 +14,15 @@ type MakeMentionSuggestionProps = {
   client: ApolloClient<{}>
 }
 
-type SearchUsersSearchEdgesNodeUser = NonNullable<
-  NonNullable<SearchUsersQuery['search']['edges']>[0]['node'] & {
-    __typename: 'User'
-  }
->
-
 export const makeMentionSuggestion = ({
   client,
 }: MakeMentionSuggestionProps) => ({
   items: async ({ query }: { query: string }) => {
-    const { data } = await client.query({
+    const { data } = await client.query<SearchUsersQuery>({
       query: SEARCH_USERS,
       variables: { search: `@${query}`, exclude: 'blocked' },
     })
-    const mentionUsers = (data?.search.edges || []).map(
-      ({ node }: any) => node
-    ) as SearchUsersSearchEdgesNodeUser[]
+    const mentionUsers = (data?.search.edges || []).map(({ node }: any) => node)
 
     return mentionUsers
   },

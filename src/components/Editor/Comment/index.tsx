@@ -10,7 +10,8 @@ import { useIntl } from 'react-intl'
 import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
 import { useCommentEditorContext } from '~/components/Context'
 
-import { makeMentionSuggestion } from '../Article/extensions'
+import { makeMentionSuggestion, SmartLink } from '../Article/extensions'
+import { makeSmartLinkOptions } from '../Article/extensions/smartLink/utils'
 import styles from './styles.module.css'
 
 interface Props {
@@ -56,6 +57,7 @@ const CommentEditor: React.FC<Props> = ({
       window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
     },
     mentionSuggestion: makeMentionSuggestion({ client }),
+    extensions: [SmartLink.configure(makeSmartLinkOptions({ client }))],
   })
 
   useEffect(() => {
