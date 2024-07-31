@@ -2,15 +2,15 @@ import gql from 'graphql-tag'
 
 import { MomentNoticeFragment } from '~/gql/graphql'
 
-import Like from './Like'
-import Mention from './Mention'
+import MomentLiked from './MomentLiked'
+import MomentMentionedYou from './MomentMentionedYou'
 
 const MomentNotice = ({ notice }: { notice: MomentNoticeFragment }) => {
   switch (notice.momentNoticeType) {
     case 'MomentLiked':
-      return <Like notice={notice} />
+      return <MomentLiked notice={notice} />
     case 'MomentMentionedYou':
-      return <Mention notice={notice} />
+      return <MomentMentionedYou notice={notice} />
     default:
       return null
   }
@@ -23,11 +23,11 @@ MomentNotice.fragments = {
       unread
       __typename
       momentNoticeType: type
-      ...LikeMomentNotice
-      ...MentionMomentNotice
+      ...MomentLikedNotice
+      ...MomentMentionedYouNotice
     }
-    ${Like.fragments.notice}
-    ${Mention.fragments.notice}
+    ${MomentLiked.fragments.notice}
+    ${MomentMentionedYou.fragments.notice}
   `,
 }
 

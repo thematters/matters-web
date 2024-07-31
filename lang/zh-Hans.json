@@ -754,6 +754,9 @@
     "defaultMessage": "只看文章",
     "description": "src/views/Follow/Tabs/index.tsx"
   },
+  "AeVndq": {
+    "defaultMessage": "在动态留言中提及了你 {commentMoment}"
+  },
   "AlHYvk": {
     "defaultMessage": "{type}已编辑"
   },
@@ -1634,6 +1637,9 @@
     "defaultMessage": "上一步",
     "description": "src/components/Forms/PaymentForm"
   },
+  "Qlzm0s": {
+    "defaultMessage": "在动态中提及了你"
+  },
   "QvPc1q": {
     "defaultMessage": "上传封面"
   },
@@ -1974,9 +1980,6 @@
   },
   "WxhsrG": {
     "defaultMessage": "请先绑定邮箱"
-  },
-  "X9a1XW": {
-    "defaultMessage": "在 {commentMoment} 留言中提到了你"
   },
   "XH1s8E": {
     "defaultMessage": "刪除{commentType}",
@@ -2446,9 +2449,6 @@
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "fkQOxQ": {
-    "defaultMessage": "在动态中提及了你"
-  },
   "fnv5rD": {
     "defaultMessage": "赞赏作品（当前 {total} 次赞赏）"
   },
@@ -2660,6 +2660,9 @@
   },
   "kCp8A9": {
     "defaultMessage": "如果辞去权限，你将无法继续管理标签。"
+  },
+  "kEDrXh": {
+    "defaultMessage": "喜欢你的选集"
   },
   "kHMa3H": {
     "defaultMessage": "密码不一致"
