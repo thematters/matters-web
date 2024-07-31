@@ -1,0 +1,60 @@
+.header {
+  @mixin flex-center-space-between;
+
+  padding: var(--sp16);
+
+  & .left {
+    @mixin flex-center-start;
+
+    gap: var(--sp12);
+
+    & .title {
+      font-size: var(--text17);
+      font-weight: var(--font-medium);
+      line-height: 1.75;
+      color: var(--color-black);
+    }
+  }
+
+  & .right {
+    gap: var(--sp4);
+
+    & .publishButton {
+      font-size: var(--text14);
+      line-height: 1.375rem;
+    }
+  }
+}
+
+.form {
+  position: relative;
+}
+
+.content {
+  @mixin hide-scrollbar;
+
+  padding: 0 var(--sp16);
+  overflow: scroll;
+
+  & :global(.ProseMirror),
+  & :global(.tiptap) {
+    min-height: 6.5rem; /* Height of 4 lines of text */
+  }
+}
+
+.footer {
+  @mixin flex-end-space-between;
+
+  gap: var(--sp4);
+  padding: var(--sp12) var(--sp16);
+
+  & .count {
+    font-size: var(--text14);
+    line-height: 1.375rem;
+    color: var(--color-grey-light);
+
+    &.over {
+      color: var(--color-negative-red);
+    }
+  }
+}

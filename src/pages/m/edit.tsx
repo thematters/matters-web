@@ -1,7 +1,10 @@
 import { Protected } from '~/components'
+import MomentDetailEdit from '~/views/MomentDetail/Edit'
 
 const ProtectedMomentDetailEdit = () => (
-  <Protected>Moment Detail Edit Page</Protected>
+  <Protected>
+    <MomentDetailEdit />
+  </Protected>
 )
 
 export default ProtectedMomentDetailEdit
