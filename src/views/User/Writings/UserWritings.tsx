@@ -1,8 +1,9 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
 import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
+import { USER_PROFILE_WRITINGS_DIGEST_FEED_PREFIX } from '~/common/enums'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   ArticleDigestFeed,
@@ -31,6 +32,7 @@ const UserWritings = () => {
   const { getQuery } = useRoute()
   const userName = getQuery('name')
   const isViewer = viewer.userName === userName
+  const listRef = useRef<HTMLDivElement | null>(null)
 
   /**
    * Data Fetching
@@ -86,6 +88,22 @@ const UserWritings = () => {
 
     loadPrivate(newData)
   }
+
+  useEffect(() => {
+    if (!listRef.current) {
+      return
+    }
+    const shortHash = window.location.hash.replace('#', '')
+    if (!shortHash) {
+      return
+    }
+    const selector = `#${USER_PROFILE_WRITINGS_DIGEST_FEED_PREFIX}${shortHash}`
+
+    const element = listRef.current.querySelector(selector)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'nearest' })
+    }
+  }, [])
 
   /**
    * Render
@@ -192,33 +210,38 @@ const UserWritings = () => {
           loader={<Placeholder />}
           eof
         >
-          <List>
-            {writingEdges.map(({ node }, i) => (
-              <List.Item key={node.id}>
-                {node.__typename === 'Article' && (
-                  <ArticleDigestFeed
-                    article={node}
-                    inUserArticles
-                    hasAuthor={false}
-                    hasEdit={true}
-                    hasAddCollection={true}
-                    hasArchive={true}
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'user_article',
-                        contentType: 'article',
-                        location: i,
-                        id: node.id,
-                      })
-                    }
-                  />
-                )}
-                {node.__typename === 'Moment' && (
-                  <MomentDigestFeed moment={node} />
-                )}
-              </List.Item>
-            ))}
-          </List>
+          <section ref={listRef}>
+            <List>
+              {writingEdges.map(({ node }, i) => (
+                <List.Item
+                  key={node.id}
+                  id={`${USER_PROFILE_WRITINGS_DIGEST_FEED_PREFIX}${node.shortHash}`}
+                >
+                  {node.__typename === 'Article' && (
+                    <ArticleDigestFeed
+                      article={node}
+                      inUserArticles
+                      hasAuthor={false}
+                      hasEdit={true}
+                      hasAddCollection={true}
+                      hasArchive={true}
+                      onClick={() =>
+                        analytics.trackEvent('click_feed', {
+                          type: 'user_article',
+                          contentType: 'article',
+                          location: i,
+                          id: node.id,
+                        })
+                      }
+                    />
+                  )}
+                  {node.__typename === 'Moment' && (
+                    <MomentDigestFeed moment={node} />
+                  )}
+                </List.Item>
+              ))}
+            </List>
+          </section>
         </InfiniteScroll>
       </Layout.Main.Spacing>
     </>
