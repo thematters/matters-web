@@ -40,11 +40,14 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
     }
 
     Array.from(files).forEach((file) => {
-      editor.commands.addFigureImageUploader({
-        previewSrc: URL.createObjectURL(file),
-        file,
-        upload,
-      })
+      editor
+        .chain()
+        .insertFigureImageUploader({
+          previewSrc: URL.createObjectURL(file),
+          file,
+          upload,
+        })
+        .run()
     })
 
     event.target.value = ''

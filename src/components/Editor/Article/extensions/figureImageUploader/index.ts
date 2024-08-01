@@ -10,7 +10,7 @@ import Uploader, { UploaderProps } from './Uploader'
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     figureImageUploader: {
-      addFigureImageUploader: (
+      insertFigureImageUploader: (
         options: UploaderProps & { pos?: number }
       ) => ReturnType
     }
@@ -54,7 +54,7 @@ export const FigureImageUploader = Node.create({
 
   addCommands() {
     return {
-      addFigureImageUploader:
+      insertFigureImageUploader:
         (attrs) =>
         ({ chain }) => {
           const content = [{ type: this.name, attrs, content: [] }]

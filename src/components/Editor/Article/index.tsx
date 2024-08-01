@@ -91,7 +91,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           let chain = editor.chain()
 
           Array.from(files).forEach((file) => {
-            chain.addFigureImageUploader({
+            chain.insertFigureImageUploader({
               upload,
               previewSrc: URL.createObjectURL(file),
               file,
@@ -103,11 +103,14 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         },
         onPaste: async (editor, files) => {
           Array.from(files).forEach((file) => {
-            editor.commands.addFigureImageUploader({
-              upload,
-              previewSrc: URL.createObjectURL(file),
-              file,
-            })
+            editor
+              .chain()
+              .insertFigureImageUploader({
+                upload,
+                previewSrc: URL.createObjectURL(file),
+                file,
+              })
+              .run()
           })
         },
         mimeTypes: ACCEPTED_UPLOAD_IMAGE_TYPES,

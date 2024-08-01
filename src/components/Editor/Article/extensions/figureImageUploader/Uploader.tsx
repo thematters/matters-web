@@ -52,18 +52,20 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
         }
       }
 
+      // position to insert
       const pos = getPos()
-      if (!getPos()) {
-        return
-      }
 
-      return editor
+      // delete node view
+      deleteNode()
+
+      // insert figure image
+      editor
         .chain()
-        .insertContentAt({ from: pos, to: pos + 1 }, [
-          { type: 'figureImage', attrs: { src: path } },
-        ])
+        .insertContentAt(pos, [{ type: 'figureImage', attrs: { src: path } }])
         .run()
     } catch (e) {
+      deleteNode()
+
       toast.error({
         message: (
           <FormattedMessage
@@ -72,8 +74,6 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
           />
         ),
       })
-
-      deleteNode()
     }
   }
 
