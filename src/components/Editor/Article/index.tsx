@@ -88,29 +88,16 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       Dropcursor.configure(),
       PasteDropFile.configure({
         onDrop: async (editor, files, pos) => {
-          let chain = editor.chain()
-
-          Array.from(files).forEach((file) => {
-            chain.insertFigureImageUploader({
-              upload,
-              previewSrc: URL.createObjectURL(file),
-              file,
-              pos,
-            })
+          editor.commands.insertFigureImageUploaders({
+            upload,
+            files,
+            pos,
           })
-
-          chain.run()
         },
         onPaste: async (editor, files) => {
-          Array.from(files).forEach((file) => {
-            editor
-              .chain()
-              .insertFigureImageUploader({
-                upload,
-                previewSrc: URL.createObjectURL(file),
-                file,
-              })
-              .run()
+          editor.commands.insertFigureImageUploaders({
+            upload,
+            files,
           })
         },
         mimeTypes: ACCEPTED_UPLOAD_IMAGE_TYPES,

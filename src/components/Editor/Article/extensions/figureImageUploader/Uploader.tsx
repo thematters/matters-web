@@ -9,7 +9,6 @@ import { toast } from '~/components'
 import styles from './styles.module.css'
 
 export type UploaderProps = {
-  previewSrc: string
   file: File
   upload: (input: {
     file?: File
@@ -24,7 +23,8 @@ export type UploaderProps = {
 
 const Uploader: React.FC<NodeViewProps> = (props) => {
   const { editor, node, deleteNode, getPos } = props
-  const { previewSrc, file, upload } = node.attrs as UploaderProps
+  const { file, upload } = node.attrs as UploaderProps
+  const [previewSrc] = useState(URL.createObjectURL(file))
   const [progress, setProgress] = useState(0)
   const duration = 3000 // 3 seconds
   const intervalTime = 100 // Update every 100ms
@@ -46,6 +46,7 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
       // upload and update cache
       if (!path) {
         path = (await upload({ file, type: ASSET_TYPE.embed, mime })).path
+
         editor.storage.figureImageUploader.assets = {
           ...assets,
           [previewSrc]: path,

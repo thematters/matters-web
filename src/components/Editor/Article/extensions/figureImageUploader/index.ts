@@ -10,8 +10,8 @@ import Uploader, { UploaderProps } from './Uploader'
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     figureImageUploader: {
-      insertFigureImageUploader: (
-        options: UploaderProps & { pos?: number }
+      insertFigureImageUploaders: (
+        options: Pick<UploaderProps, 'upload'> & { files: File[]; pos?: number }
       ) => ReturnType
     }
   }
@@ -26,10 +26,9 @@ export const FigureImageUploader = Node.create({
 
   addAttributes() {
     return {
-      previewSrc: { default: null },
       file: { default: null },
       upload: { default: null },
-    }
+    } as { [key in keyof UploaderProps]: { default: null } }
   },
 
   addStorage() {
@@ -54,16 +53,23 @@ export const FigureImageUploader = Node.create({
 
   addCommands() {
     return {
-      insertFigureImageUploader:
-        (attrs) =>
+      insertFigureImageUploaders:
+        ({ files, pos, ...restAttrs }) =>
         ({ chain }) => {
-          const content = [{ type: this.name, attrs, content: [] }]
+          const content = files.map((file) => ({
+            type: this.name,
+            attrs: {
+              ...restAttrs,
+              file,
+            },
+            content: [],
+          }))
 
-          if (!attrs.pos) {
+          if (!pos) {
             return chain().insertContent(content).run()
           }
 
-          return chain().insertContentAt(attrs.pos, content).run()
+          return chain().insertContentAt(pos, content).run()
         },
     }
   },

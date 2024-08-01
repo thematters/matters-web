@@ -35,19 +35,13 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({
 
     const files = event.target?.files
 
-    if (!upload || !files) {
+    if (!upload || !files || files.length <= 0) {
       return
     }
 
-    Array.from(files).forEach((file) => {
-      editor
-        .chain()
-        .insertFigureImageUploader({
-          previewSrc: URL.createObjectURL(file),
-          file,
-          upload,
-        })
-        .run()
+    editor.commands.insertFigureImageUploaders({
+      files: Array.from(files),
+      upload,
     })
 
     event.target.value = ''
