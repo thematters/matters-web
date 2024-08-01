@@ -74,7 +74,7 @@ const BaseMeBookmarks = () => {
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={node.id}>
-            <ArticleDigestFeed article={node} />
+            <ArticleDigestFeed article={node} disabledArchived />
           </List.Item>
         ))}
       </List>

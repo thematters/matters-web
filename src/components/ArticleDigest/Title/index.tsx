@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
-import { LinkWrapper, LinkWrapperProps } from '~/components'
+import { LinkWrapper, LinkWrapperProps, toast } from '~/components'
 import { ArticleDigestTitleArticleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -21,6 +21,7 @@ type ArticleDigestTitleProps = {
   textWeight?: ArticleDigestTitleTextWeight
   lineClamp?: boolean | 1 | 2 | 3
   is?: ArticleDigestTitleIs
+  disabledArchived?: boolean
 
   disabled?: boolean
   onClick?: () => void
@@ -52,6 +53,7 @@ export const ArticleDigestTitle = ({
   is = 'h2',
 
   disabled,
+  disabledArchived,
   onClick,
 
   ...restProps
@@ -63,6 +65,7 @@ export const ArticleDigestTitle = ({
     collectionId,
   })
   const isBanned = state === 'banned'
+  const isArchived = state === 'archived'
   const title = isBanned ? (
     <FormattedMessage
       defaultMessage="The article has been archived due to violation of terms"
@@ -77,8 +80,39 @@ export const ArticleDigestTitle = ({
     [styles[`font${capitalizeFirstLetter(textWeight)}`]]: !!textWeight,
     [styles.lineClamp]: !!lineClamp,
     [styles[`lineClampLine${lineClamp}`]]: lineClamp === 1 || lineClamp === 3,
+    [styles.archived]: isArchived && disabledArchived,
   })
   const isClickable = !disabled && !isBanned
+
+  const Title = () => (
+    <>
+      {is === 'h2' ? (
+        <h2 className={titleClasses}>{title}</h2>
+      ) : is === 'h3' ? (
+        <h3 className={titleClasses}>{title}</h3>
+      ) : is === 'h4' ? (
+        <h4 className={titleClasses}>{title}</h4>
+      ) : (
+        <h5 className={titleClasses}>{title}</h5>
+      )}
+    </>
+  )
+
+  if (isArchived && disabledArchived) {
+    return (
+      <section
+        onClick={() => {
+          toast.success({
+            message: (
+              <FormattedMessage defaultMessage="Archived Work" id="Jmg5do" />
+            ),
+          })
+        }}
+      >
+        <Title />
+      </section>
+    )
+  }
 
   return (
     <LinkWrapper
@@ -89,17 +123,7 @@ export const ArticleDigestTitle = ({
       testId={TEST_ID.DIGEST_ARTICLE_TITLE}
       {...restProps}
     >
-      <>
-        {is === 'h2' ? (
-          <h2 className={titleClasses}>{title}</h2>
-        ) : is === 'h3' ? (
-          <h3 className={titleClasses}>{title}</h3>
-        ) : is === 'h4' ? (
-          <h4 className={titleClasses}>{title}</h4>
-        ) : (
-          <h5 className={titleClasses}>{title}</h5>
-        )}
-      </>
+      <Title />
     </LinkWrapper>
   )
 }

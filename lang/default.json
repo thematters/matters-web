@@ -1205,6 +1205,9 @@
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "Jmg5do": {
+    "defaultMessage": "Archived Work"
+  },
   "JpS59y": {
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
