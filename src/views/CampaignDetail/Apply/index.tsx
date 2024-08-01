@@ -7,6 +7,7 @@ const fragments = {
   public: gql`
     fragment ApplyCampaignPublic on WritingChallenge {
       id
+      state
       applicationPeriod {
         start
         end
