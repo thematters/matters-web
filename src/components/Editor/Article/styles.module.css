@@ -90,9 +90,17 @@
     }
 
     /* image uploader */
-    & :global(.figure-image-uploader) {
+    & :global(.figure-image-uploader),
+    & :global(figure),
+    /* gapcursor will sit between two figure */
+    & :global(.ProseMirror-gapcursor) {
       position: relative;
       margin: var(--ar17-200) 0;
+
+      & + :global(.figure-image-uploader),
+      & + :global(figure) {
+        margin-top: calc(var(--ar17-200) * 2);
+      }
     }
   }
 

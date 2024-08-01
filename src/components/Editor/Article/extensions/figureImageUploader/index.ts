@@ -32,6 +32,12 @@ export const FigureImageUploader = Node.create({
     }
   },
 
+  addStorage() {
+    return {
+      assets: {},
+    }
+  },
+
   parseHTML() {
     return [{ tag: 'figure-image-uploader' }]
   },
@@ -41,7 +47,9 @@ export const FigureImageUploader = Node.create({
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(Uploader)
+    return ReactNodeViewRenderer(Uploader, {
+      className: 'figure-image-uploader',
+    })
   },
 
   addCommands() {

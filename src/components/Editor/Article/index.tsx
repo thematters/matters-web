@@ -102,17 +102,13 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           chain.run()
         },
         onPaste: async (editor, files) => {
-          let chain = editor.chain()
-
           Array.from(files).forEach((file) => {
-            chain.addFigureImageUploader({
+            editor.commands.addFigureImageUploader({
               upload,
               previewSrc: URL.createObjectURL(file),
               file,
             })
           })
-
-          chain.run()
         },
         mimeTypes: ACCEPTED_UPLOAD_IMAGE_TYPES,
       }),
