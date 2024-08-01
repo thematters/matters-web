@@ -92,7 +92,7 @@
     /* image uploader */
     & :global(.figure-image-uploader),
     & :global(figure),
-    /* gapcursor will sit between two figure */
+    /* gapcursor can sit between two figures */
     & :global(.ProseMirror-gapcursor) {
       position: relative;
       margin: var(--ar17-200) 0;
