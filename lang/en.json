@@ -316,6 +316,10 @@
   "33oNeg": {
     "defaultMessage": "[Draft] {draftTitle}"
   },
+  "34OLoD": {
+    "defaultMessage": "Moment",
+    "description": "src/views/MomentDetail/Edit/index.tsx"
+  },
   "39AHJm": {
     "defaultMessage": "Sign Up"
   },
@@ -759,6 +763,10 @@
   "At8Qd2": {
     "defaultMessage": "Account",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
+  },
+  "AtjJEA": {
+    "defaultMessage": "Post",
+    "description": "src/views/MomentDetail/Edit/index.tsx"
   },
   "Avukw5": {
     "defaultMessage": "The payment amount is too small, please re-enter.",

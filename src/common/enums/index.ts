@@ -50,6 +50,9 @@ export const VERIFICATION_CODE_TYPES = {
   payment_password_reset: 'payment_password_reset',
 }
 
+export const USER_PROFILE_WRITINGS_DIGEST_FEED_PREFIX =
+  'user-profile-writings-digest-feed-'
+
 export const MAX_ARTICE_TITLE_LENGTH = 100
 export const MAX_ARTICE_SUMMARY_LENGTH = 200
 export const MAX_ARTICLE_CONTENT_LENGTH = 50e3

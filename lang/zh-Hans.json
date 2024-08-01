@@ -316,6 +316,10 @@
   "33oNeg": {
     "defaultMessage": "[草稿] {draftTitle}"
   },
+  "34OLoD": {
+    "defaultMessage": "发动态",
+    "description": "src/views/MomentDetail/Edit/index.tsx"
+  },
   "39AHJm": {
     "defaultMessage": "注册"
   },
@@ -759,6 +763,10 @@
   "At8Qd2": {
     "defaultMessage": "账号",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
+  },
+  "AtjJEA": {
+    "defaultMessage": "发布",
+    "description": "src/views/MomentDetail/Edit/index.tsx"
   },
   "Avukw5": {
     "defaultMessage": "支付金额太少，请重新输入",
