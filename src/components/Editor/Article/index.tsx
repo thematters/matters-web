@@ -1,5 +1,13 @@
 import { useApolloClient } from '@apollo/react-hooks'
-import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
+import {
+  articleEditorExtensions,
+  Dropcursor,
+  EditorContent,
+  Mention,
+  PasteDropFile,
+  Placeholder,
+  useEditor,
+} from '@matters/matters-editor'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -13,7 +21,6 @@ import {
   FigureImageUploader,
   FigurePlaceholder,
   makeMentionSuggestion,
-  PasteDropFile,
   SmartLink,
 } from './extensions'
 import { makeSmartLinkOptions } from './extensions/smartLink/utils'
@@ -49,19 +56,23 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     update(c)
   }, INPUT_DEBOUNCE)
 
-  const editor = useArticleEdtor({
+  const editor = useEditor({
     editable: !isReadOnly,
-    placeholder: intl.formatMessage({
-      defaultMessage: 'Enter content…',
-      id: 'yCTXXb',
-    }),
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
       const content = editor.getHTML()
       debouncedUpdate({ content })
     },
-    mentionSuggestion: makeMentionSuggestion({ client }),
     extensions: [
+      Placeholder.configure({
+        placeholder: intl.formatMessage({
+          defaultMessage: 'Enter content…',
+          id: 'yCTXXb',
+        }),
+      }),
+      Mention.configure({
+        suggestion: makeMentionSuggestion({ client }),
+      }),
       FigureEmbedLinkInput,
       FigurePlaceholder.configure({
         placeholder: intl.formatMessage({
@@ -73,8 +84,8 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         maxCaptionLength: 100,
       }),
       SmartLink.configure(makeSmartLinkOptions({ client })),
-      // FileUploadIndicator,
       FigureImageUploader,
+      Dropcursor.configure(),
       PasteDropFile.configure({
         onDrop: async (editor, files, pos) => {
           let chain = editor.chain()
@@ -105,6 +116,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         },
         mimeTypes: ACCEPTED_UPLOAD_IMAGE_TYPES,
       }),
+      ...articleEditorExtensions,
     ],
   })
 
