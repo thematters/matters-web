@@ -106,7 +106,6 @@ const Edit = () => {
       setSubmitting(false)
       onClear()
 
-      // TODO: goToUserProfile page
       goToUserProfile(moment.shortHash)
 
       // Clear other rendered moment forms
