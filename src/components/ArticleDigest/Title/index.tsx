@@ -101,6 +101,7 @@ export const ArticleDigestTitle = ({
   if (isArchived && disabledArchived) {
     return (
       <section
+        role="button"
         onClick={() => {
           toast.success({
             message: (
