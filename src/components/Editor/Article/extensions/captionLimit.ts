@@ -41,6 +41,8 @@ export const CaptionLimit = Node.create<CaptionLimitOptions>({
             }
 
             // limit figcaption length
+            if (anchorParent.content.size <= 0) return true
+
             const figcaptionText = anchorParent.content.child(0).text || ''
             if (figcaptionText.length > this.options.maxCaptionLength) {
               return false
