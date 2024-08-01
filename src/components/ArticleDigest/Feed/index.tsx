@@ -131,7 +131,7 @@ const BaseArticleDigestFeed = ({
             </section>
           </section>
 
-          {(!isArchived || !disabledArchived) && (
+          {!(isArchived && disabledArchived) && (
             <LinkWrapper {...path} onClick={onClick}>
               <p className={styles.description}>{cleanedSummary}</p>
             </LinkWrapper>
