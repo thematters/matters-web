@@ -85,7 +85,10 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       }),
       SmartLink.configure(makeSmartLinkOptions({ client })),
       FigureImageUploader,
-      Dropcursor.configure(),
+      Dropcursor.configure({
+        color: 'var(--color-matters-green)',
+        width: 2,
+      }),
       PasteDropFile.configure({
         onDrop: async (editor, files, pos) => {
           editor.commands.insertFigureImageUploaders({
