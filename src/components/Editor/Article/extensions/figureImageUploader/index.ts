@@ -56,17 +56,23 @@ export const FigureImageUploader = Node.create({
       insertFigureImageUploaders:
         ({ files, pos, ...restAttrs }) =>
         ({ chain }) => {
-          const content = files.map((file) => ({
-            type: this.name,
-            attrs: { ...restAttrs, file },
-            content: [],
-          }))
+          const content = [
+            ...files.map((file) => ({
+              type: this.name,
+              attrs: { ...restAttrs, file },
+              content: [],
+            })),
+            {
+              type: 'paragraph',
+              content: [],
+            },
+          ]
 
           if (!pos) {
-            return chain().insertContent(content).run()
+            return chain().insertContent(content).focus().run()
           }
 
-          return chain().insertContentAt(pos, content).run()
+          return chain().insertContentAt(pos, content).focus().run()
         },
     }
   },
