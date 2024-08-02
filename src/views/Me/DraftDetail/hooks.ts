@@ -7,6 +7,7 @@ import {
   ArticleAccessType,
   ArticleDigestDropdownArticleFragment,
   ArticleLicenseType,
+  AssetFragment,
   DigestRichCirclePublicFragment,
   DigestTagFragment,
   DraftAssetsQuery,
@@ -46,12 +47,12 @@ export const useEditDraftCover = () => {
   const [update, { loading: saving }] =
     useMutation<SetDraftCoverMutation>(SET_COVER)
 
-  const edit = (asset?: any, newId?: string) =>
+  const edit = (asset?: AssetFragment, newId?: string) =>
     update({
       variables: { id: newId || getDraftId(), cover: asset ? asset.id : null },
     })
 
-  const createDraftAndEdit = async (asset?: any) => {
+  const createDraftAndEdit = async (asset?: AssetFragment) => {
     if (getDraftId()) return edit(asset)
 
     return createDraft({
@@ -60,8 +61,8 @@ export const useEditDraftCover = () => {
   }
 
   return {
-    // FIXME: TS any
-    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    edit: async (assets?: AssetFragment) =>
+      addRequest(() => createDraftAndEdit(assets)),
     saving,
     refetch,
   }
@@ -89,7 +90,8 @@ export const useEditDraftTags = () => {
   }
 
   return {
-    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    edit: async (newTags: DigestTagFragment[]) =>
+      addRequest(() => createDraftAndEdit(newTags)),
     saving,
   }
 }
@@ -122,7 +124,8 @@ export const useEditDraftCollection = () => {
   }
 
   return {
-    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    edit: async (newArticles: ArticleDigestDropdownArticleFragment[]) =>
+      addRequest(() => createDraftAndEdit(newArticles)),
     saving,
   }
 }
@@ -164,8 +167,11 @@ export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
   }
 
   return {
-    edit: async (p1: any, p2: any, p3: any) =>
-      addRequest(() => createDraftAndEdit(p1, p2, p3)),
+    edit: async (
+      addToCircle: boolean,
+      paywalled: boolean,
+      license: ArticleLicenseType
+    ) => addRequest(() => createDraftAndEdit(addToCircle, paywalled, license)),
     saving,
   }
 }
@@ -202,8 +208,11 @@ export const useEditSupportSetting = () => {
   }
 
   return {
-    edit: async (p1: any, p2: any) =>
-      addRequest(() => createDraftAndEdit(p1, p2)),
+    edit: async (
+      requestForDonation: string | null,
+      replyToDonator: string | null
+    ) =>
+      addRequest(() => createDraftAndEdit(requestForDonation, replyToDonator)),
     saving,
   }
 }
@@ -226,7 +235,8 @@ export const useEditDraftSensitiveByAuthor = () => {
   }
 
   return {
-    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    edit: async (sensitiveByAuthor: boolean) =>
+      addRequest(() => createDraftAndEdit(sensitiveByAuthor)),
     saving,
   }
 }
@@ -249,7 +259,8 @@ export const useEditDraftPublishISCN = () => {
   }
 
   return {
-    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    edit: async (iscnPublish: boolean) =>
+      addRequest(() => createDraftAndEdit(iscnPublish)),
     saving,
   }
 }
@@ -272,7 +283,8 @@ export const useEditDraftCanComment = () => {
   }
 
   return {
-    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    edit: async (canComment: boolean) =>
+      addRequest(() => createDraftAndEdit(canComment)),
     saving,
   }
 }
@@ -295,7 +307,7 @@ export const useEditDraftCampaign = () => {
       },
     })
 
-  const createDraftAndEdit = async (selected: {
+  const createDraftAndEdit = async (selected?: {
     campaign: string
     stage: string
   }) => {
@@ -307,7 +319,8 @@ export const useEditDraftCampaign = () => {
   }
 
   return {
-    edit: async (props: any) => addRequest(() => createDraftAndEdit(props)),
+    edit: async (selected?: { campaign: string; stage: string }) =>
+      addRequest(() => createDraftAndEdit(selected)),
     saving: saving,
   }
 }
