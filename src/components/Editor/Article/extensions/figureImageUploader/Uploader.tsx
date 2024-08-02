@@ -1,3 +1,4 @@
+import { Editor } from '@tiptap/core'
 import { NodeViewProps, NodeViewWrapper } from '@tiptap/react'
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
@@ -7,6 +8,28 @@ import { validateImage } from '~/common/utils'
 import { toast } from '~/components'
 
 import styles from './styles.module.css'
+
+/**
+ * Restore image URL from `previewPath` to `path`
+ */
+export const restoreImages = (editor: Editor, content: string): string => {
+  const assets = editor.storage.figureImageUploader.assets as {
+    [key: string]: string
+  }
+  const regex = /src="blob:([^"]+)"/g
+  const matches = content.match(regex) || []
+
+  for (const match of matches) {
+    const previewSrc = match.replace('src="', '').replace('"', '')
+    const path = assets[previewSrc]
+
+    if (path) {
+      content = content.replace(previewSrc, path)
+    }
+  }
+
+  return content
+}
 
 export type UploaderProps = {
   file: File
@@ -54,6 +77,7 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
       }
 
       // position to insert
+      const currentPos = editor.state.selection.$from.pos
       const pos = getPos()
 
       // delete node view
@@ -62,7 +86,18 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
       // insert figure image
       editor
         .chain()
-        .insertContentAt(pos, [{ type: 'figureImage', attrs: { src: path } }])
+        .insertContentAt(pos, [
+          {
+            type: 'figureImage',
+            attrs: {
+              // use `previewSrc` to avoid loading image,
+              // replaced by `path` before send to server
+              // @see {restoreImages}
+              src: previewSrc,
+            },
+          },
+        ])
+        .setTextSelection(currentPos)
         .run()
     } catch (e) {
       deleteNode()

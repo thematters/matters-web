@@ -23,6 +23,7 @@ import {
   makeMentionSuggestion,
   SmartLink,
 } from './extensions'
+import { restoreImages } from './extensions/figureImageUploader/Uploader'
 import { makeSmartLinkOptions } from './extensions/smartLink/utils'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.module.css'
@@ -60,7 +61,10 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     editable: !isReadOnly,
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
-      const content = editor.getHTML()
+      let content = editor.getHTML()
+
+      content = restoreImages(editor, content)
+
       debouncedUpdate({ content })
     },
     extensions: [
