@@ -36,11 +36,12 @@ const ApplyCampaignButton = ({
   const isAppliedDuringPeriod =
     appliedAt && new Date(appliedAt) <= new Date(appEnd)
   const isApplicationStarted = now >= new Date(appStart)
+  const isActiveCampaign = campaign.state === 'active'
 
   /**
-   * Rejected
+   * Rejected or inactive
    */
-  if (isRejected) {
+  if (isRejected || !isActiveCampaign) {
     return null
   }
 
