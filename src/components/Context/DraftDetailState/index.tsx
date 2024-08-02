@@ -1,6 +1,12 @@
+import { useMutation } from '@apollo/react-hooks'
 import { createContext, useRef } from 'react'
 
 import { randomString } from '~/common/utils'
+import { useRoute } from '~/components'
+import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
+import { CreateDraftMutation } from '~/gql/graphql'
+import { ME_DRAFTS_FEED } from '~/views/Me/Drafts/gql'
+import { ME_WORKS_TABS } from '~/views/Me/Works/WorksTabs/gql'
 
 type Job = {
   id: string
@@ -14,6 +20,7 @@ export const DraftDetailStateContext = createContext(
     addRequest: (fn: () => Promise<any>) => void
     getDraftId: () => string | undefined
     isNewDraft: () => boolean
+    createDraft: (props: { onCreate: (draftId: string) => any }) => any
   }
 )
 
@@ -22,6 +29,9 @@ export const DraftDetailStateProvider = ({
 }: {
   children: React.ReactNode
 }) => {
+  /**
+   * Request job queue
+   */
   // Run request jobs in sequence
   const jobsRef = useRef<Job[]>()
   const runningRef = useRef<string>()
@@ -66,6 +76,33 @@ export const DraftDetailStateProvider = ({
     runFirstJob()
   }
 
+  /**
+   * Draft getter and setter
+   */
+  const { router } = useRoute()
+  const [create] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
+    // refetch /me/drafts once a new draft has been created
+    refetchQueries: [{ query: ME_DRAFTS_FEED }, { query: ME_WORKS_TABS }],
+  })
+
+  // create draft and shallow replace URL
+  const createDraft = async ({
+    onCreate,
+  }: {
+    onCreate: (draftId: string) => any
+  }) => {
+    const result = await create()
+    const { id } = result?.data?.putDraft || {}
+
+    if (!id) return
+
+    await onCreate(id)
+
+    await router.replace({ query: { draftId: id } }, undefined, {
+      shallow: true,
+    })
+  }
+
   // get draft id from URL instead of `useRouter.getQuery`
   const getDraftId = () => {
     if (typeof window === 'undefined') {
@@ -84,7 +121,7 @@ export const DraftDetailStateProvider = ({
 
   return (
     <DraftDetailStateContext.Provider
-      value={{ addRequest, getDraftId, isNewDraft }}
+      value={{ addRequest, createDraft, getDraftId, isNewDraft }}
     >
       {children}
     </DraftDetailStateContext.Provider>

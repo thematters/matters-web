@@ -19,7 +19,6 @@ import {
   Media,
   SpinnerBlock,
   Throw404,
-  useCreateDraft,
   useDirectImageUpload,
   useUnloadConfirm,
 } from '~/components'
@@ -91,11 +90,10 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
 const BaseDraftDetail = () => {
   const intl = useIntl()
 
-  const { addRequest, getDraftId, isNewDraft } = useContext(
+  const { addRequest, createDraft, getDraftId, isNewDraft } = useContext(
     DraftDetailStateContext
   )
   const [initNew] = useState(isNewDraft())
-  const { createDraft } = useCreateDraft()
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
   const [singleFileUpload] =
     useMutation<SingleFileUploadMutation>(SINGLE_FILE_UPLOAD)

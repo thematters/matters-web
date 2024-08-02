@@ -1,7 +1,7 @@
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
 
-import { DraftDetailStateContext, useCreateDraft } from '~/components'
+import { DraftDetailStateContext } from '~/components'
 import { useImperativeQuery, useMutation } from '~/components/GQL'
 import {
   ArticleAccessType,
@@ -38,8 +38,9 @@ import {
  * Hooks for editing draft cover, tags and collection
  */
 export const useEditDraftCover = () => {
-  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
-  const { createDraft } = useCreateDraft()
+  const { addRequest, getDraftId, createDraft } = useContext(
+    DraftDetailStateContext
+  )
   const refetch = useImperativeQuery<DraftAssetsQuery>(DRAFT_ASSETS, {
     variables: { id: getDraftId() },
     fetchPolicy: 'network-only',
@@ -69,8 +70,9 @@ export const useEditDraftCover = () => {
 }
 
 export const useEditDraftTags = () => {
-  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
-  const { createDraft } = useCreateDraft()
+  const { addRequest, createDraft, getDraftId } = useContext(
+    DraftDetailStateContext
+  )
   const [updateTags, { loading: saving }] =
     useMutation<SetDraftTagsMutation>(SET_TAGS)
   const edit = (newTags: DigestTagFragment[], newId?: string) =>
@@ -97,8 +99,9 @@ export const useEditDraftTags = () => {
 }
 
 export const useEditDraftCollection = () => {
-  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
-  const { createDraft } = useCreateDraft()
+  const { addRequest, createDraft, getDraftId } = useContext(
+    DraftDetailStateContext
+  )
   const [setCollection, { loading: saving }] =
     useMutation<SetDraftCollectionMutation>(SET_COLLECTION)
 
@@ -131,8 +134,9 @@ export const useEditDraftCollection = () => {
 }
 
 export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
-  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
-  const { createDraft } = useCreateDraft()
+  const { addRequest, createDraft, getDraftId } = useContext(
+    DraftDetailStateContext
+  )
   const [setAccess, { loading: saving }] =
     useMutation<SetDraftAccessMutation>(SET_ACCESS)
 
@@ -177,8 +181,9 @@ export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
 }
 
 export const useEditSupportSetting = () => {
-  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
-  const { createDraft } = useCreateDraft()
+  const { addRequest, createDraft, getDraftId } = useContext(
+    DraftDetailStateContext
+  )
   const [update, { loading: saving }] =
     useMutation<SetSupportRequestReplyMutation>(SET_SUPPORT_REQUEST_REPLY)
 
@@ -218,8 +223,9 @@ export const useEditSupportSetting = () => {
 }
 
 export const useEditDraftSensitiveByAuthor = () => {
-  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
-  const { createDraft } = useCreateDraft()
+  const { addRequest, createDraft, getDraftId } = useContext(
+    DraftDetailStateContext
+  )
   const [update, { loading: saving }] =
     useMutation<SetDraftSensitiveByAuthorMutation>(SET_SENSITIVE_BY_AUTHOR)
 
@@ -242,8 +248,9 @@ export const useEditDraftSensitiveByAuthor = () => {
 }
 
 export const useEditDraftPublishISCN = () => {
-  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
-  const { createDraft } = useCreateDraft()
+  const { addRequest, createDraft, getDraftId } = useContext(
+    DraftDetailStateContext
+  )
   const [update, { loading: saving }] =
     useMutation<SetDraftPublishIscnMutation>(SET_PUBLISH_ISCN)
 
@@ -266,8 +273,9 @@ export const useEditDraftPublishISCN = () => {
 }
 
 export const useEditDraftCanComment = () => {
-  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
-  const { createDraft } = useCreateDraft()
+  const { addRequest, createDraft, getDraftId } = useContext(
+    DraftDetailStateContext
+  )
   const [update, { loading: saving }] =
     useMutation<SetDraftCanCommentMutation>(SET_CAN_COMMENT)
 
@@ -290,8 +298,9 @@ export const useEditDraftCanComment = () => {
 }
 
 export const useEditDraftCampaign = () => {
-  const { addRequest, getDraftId } = useContext(DraftDetailStateContext)
-  const { createDraft } = useCreateDraft()
+  const { addRequest, createDraft, getDraftId } = useContext(
+    DraftDetailStateContext
+  )
   const [update, { loading: saving }] =
     useMutation<SetDraftCanCommentMutation>(SET_CAMPAIGN)
 
