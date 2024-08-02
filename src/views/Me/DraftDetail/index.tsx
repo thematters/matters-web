@@ -196,8 +196,20 @@ const BaseDraftDetail = () => {
       },
     }
 
-    // upload via directImageUpload
-    if (isImage) {
+    const trySingleUpload = async () => {
+      const result = await singleFileUpload({
+        variables: _omit(variables, ['input.mime']),
+      })
+      const { id: assetId, path } = result?.data?.singleFileUpload || {}
+
+      if (assetId && path) {
+        return { id: assetId, path }
+      } else {
+        throw new Error('upload not successful')
+      }
+    }
+
+    const tryDirectUpload = async () => {
       const result = await directImageUpload({
         variables: _omit(variables, ['input.file']),
       })
@@ -229,16 +241,18 @@ const BaseDraftDetail = () => {
         throw new Error('upload not successful')
       }
     }
+
+    // upload via directImageUpload
+    if (isImage) {
+      try {
+        return await tryDirectUpload()
+      } catch {
+        return await trySingleUpload()
+      }
+    }
     // upload via singleFileUpload
     else {
-      const result = await singleFileUpload({ variables })
-      const { id: assetId, path } = result?.data?.singleFileUpload || {}
-
-      if (assetId && path) {
-        return { id: assetId, path }
-      } else {
-        throw new Error('upload not successful')
-      }
+      return await trySingleUpload()
     }
   }
 
