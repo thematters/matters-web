@@ -80,7 +80,7 @@ const Comments = ({ moment }: CommentsProps) => {
         {newestComments &&
           newestComments.map(({ node }) => (
             <List.Item key={node.id}>
-              <CommentFeed comment={node} hasReply />
+              <CommentFeed comment={node} hasReply spacingLeft />
             </List.Item>
           ))}
         {activeCommentsEdges.map(
@@ -88,7 +88,7 @@ const Comments = ({ moment }: CommentsProps) => {
             newestCommentIds.findIndex((id) => id === node.id) === -1 &&
             node.state !== 'archived' && (
               <List.Item key={node.id}>
-                <CommentFeed comment={node} hasReply />
+                <CommentFeed comment={node} hasReply spacingLeft />
               </List.Item>
             )
         )}

@@ -60,6 +60,10 @@
 .contentContainer {
   margin-top: var(--sp12);
 
+  &.spacingLeft {
+    margin-left: var(--sp48);
+  }
+
   &.descendant {
     width:;
   }

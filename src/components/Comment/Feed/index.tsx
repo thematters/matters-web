@@ -27,6 +27,7 @@ import styles from './styles.module.css'
 export type CommentControls = {
   avatarSize?: AvatarSize
   hasUserName?: boolean
+  spacingLeft?: boolean
 } & FooterActionsControls &
   DropdownActionsControls
 
@@ -41,6 +42,7 @@ const BaseCommentFeed = ({
   pinnedComment,
   avatarSize = 32,
   hasUserName,
+  spacingLeft,
   replySubmitCallback,
   ...actionControls
 }: CommentProps) => {
@@ -60,6 +62,7 @@ const BaseCommentFeed = ({
 
   const contentClasses = classNames({
     [styles.contentContainer]: true,
+    [styles.spacingLeft]: !!spacingLeft,
     [styles.descendant]: !!parentComment,
   })
 
