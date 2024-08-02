@@ -102,6 +102,12 @@
         margin-top: calc(var(--ar17-200) * 2);
       }
     }
+
+    /* figure selected */
+    & :global(figure.ProseMirror-selectednode),
+    & :global(.figure-image-uploader.ProseMirror-selectednode) {
+      outline: 2px solid var(--color-matters-green);
+    }
   }
 
   &.revisedMode {

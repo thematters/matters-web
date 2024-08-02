@@ -4,6 +4,7 @@ import {
   isTextSelection,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
+import { Node } from 'prosemirror-model'
 import { useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -87,10 +88,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         const hasEditorFocus = view.hasFocus()
         //  || isChildOfMenu
 
-        // figureImage, figureAudio, figureEmbed contain `<figcaption>`
-        const isFigure = $anchor.parent.type.name.includes('figure')
+        const isFigure =
+          ('node' in selection &&
+            (selection.node as Node).type.name.includes('figure')) ||
+          $anchor.parent.type.name.includes('figure')
         const isHr = $anchor.nodeAfter?.type.name === 'horizontalRule'
-
         const $grandParent = $anchor.node($anchor.depth - 1)
         const isInBlockquote = $grandParent?.type.name === 'blockquote'
 
