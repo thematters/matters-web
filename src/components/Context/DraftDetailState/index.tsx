@@ -11,13 +11,15 @@ import { ME_WORKS_TABS } from '~/views/Me/Works/WorksTabs/gql'
 type Job = {
   id: string
   fn: () => Promise<any>
+  resolve: (value: any) => void
+  reject: (reason?: any) => void
 }
 
 const NEW_DRAFT_ID = 'new'
 
 export const DraftDetailStateContext = createContext(
   {} as {
-    addRequest: (fn: () => Promise<any>) => void
+    addRequest: (fn: () => Promise<any>) => Promise<any>
     getDraftId: () => string | undefined
     isNewDraft: () => boolean
     createDraft: (props: { onCreate: (draftId: string) => any }) => any
@@ -33,19 +35,21 @@ export const DraftDetailStateProvider = ({
    * Request job queue
    */
   // Run request jobs in sequence
-  const jobsRef = useRef<Job[]>()
+  const jobsRef = useRef<Job[]>([])
   const runningRef = useRef<string>()
 
   // push request job
-  const addRequest = (fn: () => Promise<any>) => {
-    const id = randomString()
-    const jobs = jobsRef.current || []
-    const newJobs = [...jobs, { id, fn }]
-    jobsRef.current = newJobs
+  const addRequest = (fn: () => Promise<any>): Promise<any> => {
+    return new Promise((resolve, reject) => {
+      const id = randomString()
+      const jobs = jobsRef.current
+      const newJob = { id, fn, resolve, reject }
+      jobsRef.current = [...jobs, newJob]
 
-    if (!runningRef.current) {
-      runFirstJob()
-    }
+      if (!runningRef.current) {
+        runFirstJob()
+      }
+    })
   }
 
   const getJobs = () => {
@@ -63,17 +67,23 @@ export const DraftDetailStateProvider = ({
       return
     }
 
-    // run first job
+    // Run first job
     runningRef.current = firstJob.id
-    await firstJob.fn()
-    runningRef.current = ''
+    try {
+      const result = await firstJob.fn()
+      firstJob.resolve(result) // Resolve the promise with the job result
+    } catch (error) {
+      firstJob.reject(error) // Reject the promise if there's an error
+    } finally {
+      runningRef.current = ''
 
-    // set to rest jobs
-    const { restJobs } = getJobs()
-    jobsRef.current = restJobs
+      // Set to rest jobs
+      const { restJobs } = getJobs()
+      jobsRef.current = restJobs
 
-    // run next job
-    runFirstJob()
+      // Run next job
+      runFirstJob()
+    }
   }
 
   /**
