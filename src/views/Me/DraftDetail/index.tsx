@@ -109,7 +109,6 @@ const BaseDraftDetail = () => {
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
   >()
-  const [hasValidSummary, setHasValidSummary] = useState<boolean>(true)
 
   const { data, loading, error } = useQuery<DraftDetailQueryQuery>(
     DRAFT_DETAIL,
@@ -168,7 +167,6 @@ const BaseDraftDetail = () => {
     isUnpublished &&
     hasContent &&
     hasTitle &&
-    hasValidSummary &&
     !isOverLength
   )
 
@@ -178,7 +176,7 @@ const BaseDraftDetail = () => {
     const isImage = input.type !== ASSET_TYPE.embedaudio
 
     // create draft first if not exist
-    let draftId = draft?.id
+    let draftId = getDraftId()
     if (!draftId) {
       await createDraft({
         onCreate: (newDraftId) => {
@@ -267,41 +265,34 @@ const BaseDraftDetail = () => {
       return
     }
 
+    if (draft?.publishState === 'published') {
+      return
+    }
+
+    // check content length
+    const len = stripHtml(newDraft.content || '').length
+    setContentLength(len)
+    if (len > MAX_ARTICLE_CONTENT_LENGTH) {
+      return
+    }
+
     try {
-      if (draft?.publishState === 'published') {
-        return
-      }
-
-      // check content length
-      const len = stripHtml(newDraft.content || '').length
-      setContentLength(len)
-      if (len > MAX_ARTICLE_CONTENT_LENGTH) {
-        return
-      }
-
       setSaveStatus('saving')
 
-      if (!isNewDraft()) {
-        await setContent({ variables: { id: getDraftId(), ...newDraft } })
-      } else {
+      let draftId = getDraftId()
+      if (!draftId) {
         await createDraft({
-          onCreate: async (draftId: string) => {
-            await setContent({ variables: { id: draftId, ...newDraft } })
+          onCreate: (newDraftId) => {
+            draftId = newDraftId
           },
         })
       }
 
-      setSaveStatus('saved')
+      await setContent({ variables: { id: draftId, ...newDraft } })
 
-      if (newDraft.summary && !hasValidSummary) {
-        setHasValidSummary(true)
-      }
+      setSaveStatus('saved')
     } catch (error) {
       setSaveStatus('saveFailed')
-
-      if (newDraft.summary && hasValidSummary) {
-        setHasValidSummary(false)
-      }
     }
   }
 

@@ -58,10 +58,7 @@ export const FigureImageUploader = Node.create({
         ({ chain }) => {
           const content = files.map((file) => ({
             type: this.name,
-            attrs: {
-              ...restAttrs,
-              file,
-            },
+            attrs: { ...restAttrs, file },
             content: [],
           }))
 
