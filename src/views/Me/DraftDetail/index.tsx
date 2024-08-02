@@ -358,7 +358,7 @@ const BaseDraftDetail = () => {
         <Editor
           draft={draft}
           update={async (props) => addRequest(() => update(props))}
-          upload={upload}
+          upload={async (props) => addRequest(() => upload(props))}
         />
       </Layout.Main.Spacing>
 
