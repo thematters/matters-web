@@ -58,6 +58,10 @@ export const FigureImageUploader = Node.create({
       insertFigureImageUploaders:
         ({ files, pos, ...restAttrs }) =>
         ({ chain }) => {
+          if (!files.length) {
+            return true
+          }
+
           const content = [
             ...files.map((file) => ({
               type: this.name,

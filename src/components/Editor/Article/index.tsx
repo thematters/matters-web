@@ -13,6 +13,7 @@ import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { ACCEPTED_UPLOAD_IMAGE_TYPES, INPUT_DEBOUNCE } from '~/common/enums'
+import { validateImage } from '~/common/utils'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
@@ -56,6 +57,17 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     update(c)
   }, INPUT_DEBOUNCE)
 
+  const getValidFiles = async (files: File[]) => {
+    const _files = await Promise.all(
+      files.map(async (file) => {
+        const mime = await validateImage(file)
+        return mime ? file : null
+      })
+    )
+
+    return _files.filter((f) => f !== null) as File[]
+  }
+
   const editor = useEditor({
     editable: !isReadOnly,
     content: content || '',
@@ -92,16 +104,19 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       }),
       PasteDropFile.configure({
         onDrop: async (editor, files, pos) => {
+          const validFiles = await getValidFiles(files)
+
           editor.commands.insertFigureImageUploaders({
             upload,
-            files,
+            files: validFiles,
             pos,
           })
         },
         onPaste: async (editor, files) => {
+          const validFiles = await getValidFiles(files)
           editor.commands.insertFigureImageUploaders({
             upload,
-            files,
+            files: validFiles,
           })
         },
         mimeTypes: ACCEPTED_UPLOAD_IMAGE_TYPES,
