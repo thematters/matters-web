@@ -640,6 +640,9 @@
     "defaultMessage": "Edit",
     "description": "src/components/CircleComment/DropdownActions/index.tsx"
   },
+  "91AzwP": {
+    "defaultMessage": "Only JPEG, PNG, and GIF and WebP images are supported."
+  },
   "91IQdk": {
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"

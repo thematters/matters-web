@@ -12,7 +12,7 @@ import {
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { ACCEPTED_UPLOAD_IMAGE_TYPES, INPUT_DEBOUNCE } from '~/common/enums'
+import { INPUT_DEBOUNCE } from '~/common/enums'
 import { validateImage } from '~/common/utils'
 import { EditorDraftFragment } from '~/gql/graphql'
 
@@ -119,7 +119,6 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
             files: validFiles,
           })
         },
-        mimeTypes: ACCEPTED_UPLOAD_IMAGE_TYPES,
       }),
       ...articleEditorExtensions,
     ],

@@ -68,10 +68,10 @@ export const FigureImageUploader = Node.create({
               attrs: { ...restAttrs, file },
               content: [],
             })),
-            {
-              type: 'paragraph',
-              content: [],
-            },
+            // {
+            //   type: 'paragraph',
+            //   content: [],
+            // },
           ]
 
           if (!pos) {
