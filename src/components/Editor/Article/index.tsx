@@ -14,6 +14,7 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import { validateImage } from '~/common/utils'
+import { useNativeEventListener } from '~/components/Hook'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
@@ -114,6 +115,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         },
         onPaste: async (editor, files) => {
           const validFiles = await getValidFiles(files)
+
           editor.commands.insertFigureImageUploaders({
             upload,
             files: validFiles,
@@ -122,6 +124,31 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       }),
       ...articleEditorExtensions,
     ],
+  })
+
+  // fallback drop handler for non-editor area
+  useNativeEventListener<DragEvent>('drop', async (event) => {
+    const target = event.target
+    const files = Array.from(event.dataTransfer?.files || [])
+
+    if (!editor || !files) return
+
+    // skip if it's inside editor area
+    if (editor.view.dom.contains(target as Node)) {
+      return
+    }
+
+    event.preventDefault()
+
+    const validFiles = await getValidFiles(files)
+    editor.commands.insertFigureImageUploaders({
+      upload,
+      files: validFiles,
+    })
+  })
+
+  useNativeEventListener<DragEvent>('dragover', (e) => {
+    e.preventDefault()
   })
 
   return (
