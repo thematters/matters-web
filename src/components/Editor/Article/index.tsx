@@ -3,6 +3,7 @@ import {
   articleEditorExtensions,
   Dropcursor,
   EditorContent,
+  FigcaptionKit,
   Mention,
   PasteDropFile,
   Placeholder,
@@ -16,14 +17,12 @@ import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
 import {
-  CaptionLimit,
   FigureEmbedLinkInput,
   FigureImageUploader,
-  FigurePlaceholder,
   makeMentionSuggestion,
+  restoreImages,
   SmartLink,
 } from './extensions'
-import { restoreImages } from './extensions/figureImageUploader/Uploader'
 import { makeSmartLinkOptions } from './extensions/smartLink/utils'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.module.css'
@@ -78,14 +77,12 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         suggestion: makeMentionSuggestion({ client }),
       }),
       FigureEmbedLinkInput,
-      FigurePlaceholder.configure({
+      FigcaptionKit.configure({
+        maxCaptionLength: 100,
         placeholder: intl.formatMessage({
           defaultMessage: 'Add caption…',
           id: 'Uq6tfM',
         }),
-      }),
-      CaptionLimit.configure({
-        maxCaptionLength: 100,
       }),
       SmartLink.configure(makeSmartLinkOptions({ client })),
       FigureImageUploader,

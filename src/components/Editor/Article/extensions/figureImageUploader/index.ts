@@ -3,6 +3,8 @@ import { Node } from '@tiptap/core'
 
 import Uploader, { UploaderProps } from './Uploader'
 
+export { restoreImages } from './Uploader'
+
 /**
  * FigureImageUploader is a extension to upload image and replace with FigureImage node after upload.
  */
