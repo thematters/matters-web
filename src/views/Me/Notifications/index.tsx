@@ -47,6 +47,7 @@ const ME_NOTIFICATIONS = gql`
         edges {
           cursor
           node {
+            id
             ...DigestNotice
           }
         }
