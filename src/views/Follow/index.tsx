@@ -86,7 +86,7 @@ const Follow = () => {
 
       <Layout.Main.Spacing hasVertical={false}>
         <Tabs tab={tab} setTab={setTab} />
-        <Spacer size="xtight" />
+        <Spacer size="sp8" />
         <BaseFollow tab={tab} />
       </Layout.Main.Spacing>
     </Layout.Main>
