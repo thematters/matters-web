@@ -43,7 +43,9 @@ const NoticeCollectionTitle = ({
 NoticeCollectionTitle.fragments = {
   collection: gql`
     fragment NoticeCollectionTitle on Collection {
+      id
       author {
+        id
         userName
       }
     }
