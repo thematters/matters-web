@@ -26,6 +26,7 @@ const renderableTypes = new Set([
   'ArticleArticleNotice',
   'CircleNotice',
   'ArticleNotice',
+  'CollectionNotice',
   'CommentCommentNotice',
   'CommentNotice',
   'OfficialAnnouncementNotice',
