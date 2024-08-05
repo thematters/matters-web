@@ -1253,12 +1253,12 @@
     "defaultMessage": "被追蹤",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "Jmg5do": {
+    "defaultMessage": "作品已封存"
+  },
   "JpAsUV": {
     "defaultMessage": "更多動態",
     "description": "src/views/Follow/Feed/UserPostMomentActivity"
-  },
-  "Jmg5do": {
-    "defaultMessage": "作品已封存"
   },
   "JpS59y": {
     "defaultMessage": "已接受",

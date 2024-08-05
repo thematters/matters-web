@@ -1253,12 +1253,12 @@
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "Jmg5do": {
+    "defaultMessage": "Archived Work"
+  },
   "JpAsUV": {
     "defaultMessage": "More moments",
     "description": "src/views/Follow/Feed/UserPostMomentActivity"
-  },
-  "Jmg5do": {
-    "defaultMessage": "Archived Work"
   },
   "JpS59y": {
     "defaultMessage": "Accepted",
