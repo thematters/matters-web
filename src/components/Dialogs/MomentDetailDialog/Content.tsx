@@ -99,12 +99,16 @@ const MomentDetailDialogContent = ({
   })
 
   const closeDialog = () => {
-    if (isInMomentDetailPage) {
+    const isFirstPageVisit = window.history.length <= 1
+    if (isInMomentDetailPage && isFirstPageVisit) {
       const userProfilePath = toPath({
         page: 'userProfile',
         userName: moment.author.userName || '',
       })
       router.push(userProfilePath.href)
+    }
+    if (isInMomentDetailPage && !isFirstPageVisit) {
+      window.history.back()
     }
     _closeDialog()
   }

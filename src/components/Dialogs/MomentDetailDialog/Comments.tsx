@@ -7,6 +7,7 @@ import {
   EmptyComment,
   InfiniteScroll,
   List,
+  Media,
   useEventListener,
   useJumpToComment,
 } from '~/components'
@@ -73,6 +74,28 @@ const Comments = ({ moment }: CommentsProps) => {
     .filter(({ node }) => newestCommentIds.indexOf(node.id) > -1)
     .reverse()
 
+  const CommentsList = () => {
+    return (
+      <>
+        {newestComments &&
+          newestComments.map(({ node }) => (
+            <List.Item key={node.id}>
+              <CommentFeed comment={node} hasReply spacingLeft />
+            </List.Item>
+          ))}
+        {activeCommentsEdges.map(
+          ({ node }) =>
+            newestCommentIds.findIndex((id) => id === node.id) === -1 &&
+            node.state !== 'archived' && (
+              <List.Item key={node.id}>
+                <CommentFeed comment={node} hasReply spacingLeft />
+              </List.Item>
+            )
+        )}
+      </>
+    )
+  }
+
   return (
     <section className={styles.comments} ref={ref}>
       {activeCommentsEdges.length === 0 && (
@@ -107,23 +130,16 @@ const Comments = ({ moment }: CommentsProps) => {
             }
             eofSpacingTop="base"
           >
-            <List spacing={['loose', 0]} hasBorder={false}>
-              {newestComments &&
-                newestComments.map(({ node }) => (
-                  <List.Item key={node.id}>
-                    <CommentFeed comment={node} hasReply />
-                  </List.Item>
-                ))}
-              {activeCommentsEdges.map(
-                ({ node }) =>
-                  newestCommentIds.findIndex((id) => id === node.id) === -1 &&
-                  node.state !== 'archived' && (
-                    <List.Item key={node.id}>
-                      <CommentFeed comment={node} hasReply />
-                    </List.Item>
-                  )
-              )}
-            </List>
+            <Media at="sm">
+              <List spacing={['base', 0]} hasBorder={false}>
+                <CommentsList />
+              </List>
+            </Media>
+            <Media greaterThan="sm">
+              <List spacing={['loose', 0]} hasBorder={false}>
+                <CommentsList />
+              </List>
+            </Media>
           </InfiniteScroll>
         </>
       )}

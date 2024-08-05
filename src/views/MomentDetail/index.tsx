@@ -8,7 +8,9 @@ const MomentDetail = () => {
 
   return (
     <>
-      <Media at="sm">mobile moment detail page</Media>
+      <Media at="sm">
+        <Content shortHash={shortHash} closeDialog={onClose} />
+      </Media>
       <Media greaterThan="sm">
         <Dialog
           isOpen={true}
