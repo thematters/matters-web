@@ -1,5 +1,12 @@
 import { useApolloClient } from '@apollo/react-hooks'
-import { Editor, EditorContent, useEditor } from '@matters/matters-editor'
+import {
+  commentEditorExtensions,
+  Editor,
+  EditorContent,
+  Mention,
+  Placeholder,
+  useEditor,
+} from '@matters/matters-editor'
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 

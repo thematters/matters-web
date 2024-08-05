@@ -1,5 +1,12 @@
 import { useApolloClient } from '@apollo/react-hooks'
-import { Editor, EditorContent, useMomentEditor } from '@matters/matters-editor'
+import {
+  Editor,
+  EditorContent,
+  Mention,
+  momentEditorExtensions,
+  Placeholder,
+  useEditor,
+} from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
@@ -23,21 +30,29 @@ const MomentEditor: React.FC<Props> = ({
 }) => {
   const client = useApolloClient()
   const intl = useIntl()
+  placeholder =
+    placeholder ||
+    intl.formatMessage({
+      id: 'YoiwCD',
+      defaultMessage: 'Say something...',
+    })
 
-  const editor = useMomentEditor({
+  const editor = useEditor({
     // autofocus: true,
-    placeholder:
-      placeholder ||
-      intl.formatMessage({
-        id: 'YoiwCD',
-        defaultMessage: 'Say something...',
-      }),
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
       const content = editor.getHTML()
       update({ content })
     },
-    mentionSuggestion: makeMentionSuggestion({ client }),
+    extensions: [
+      Placeholder.configure({
+        placeholder,
+      }),
+      Mention.configure({
+        suggestion: makeMentionSuggestion({ client }),
+      }),
+      ...momentEditorExtensions,
+    ],
   })
 
   useEffect(() => {
