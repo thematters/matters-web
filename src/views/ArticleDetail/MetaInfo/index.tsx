@@ -9,6 +9,7 @@ import {
   DateTime,
   DotDivider,
   Icon,
+  LanguageContext,
   TextIcon,
   UserDigest,
   useRoute,
@@ -43,6 +44,7 @@ const MetaInfo = ({
   editable,
 }: MetaInfoProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const authorId = article.author.id
   const isAuthor = viewer.id === authorId
   const originalLanguage = article?.language ? article.language : ''
@@ -76,7 +78,15 @@ const MetaInfo = ({
             }}
           >
             <TextIcon size={12} color="freeWriteBlue">
-              {campaign.name}
+              {
+                campaign[
+                  lang === 'zh_hans'
+                    ? 'nameZhHans'
+                    : lang === 'zh_hant'
+                    ? 'nameZhHant'
+                    : 'nameEn'
+                ]
+              }
             </TextIcon>
           </Button>
           <section className={styles.dot}>
