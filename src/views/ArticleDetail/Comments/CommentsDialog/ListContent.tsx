@@ -34,7 +34,7 @@ const CommentsDialogListContent = ({
     <>
       <Dialog.Content fixedHeight>
         <LatestComments id={id} lock={lock} />
-        <Spacer size="baseLoose" />
+        <Spacer size="sp20" />
         <section className={styles.fixedToolbar}>
           <FixedToolbar
             articleDetails={articleDetails}

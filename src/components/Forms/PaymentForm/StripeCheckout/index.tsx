@@ -67,7 +67,7 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
         </Form.Field.Content>
 
         <Form.Field.Footer fieldMsgId={fieldMsgId} error={error} />
-        <Spacer size="base" />
+        <Spacer size="sp16" />
         <Form.Field.Footer
           fieldMsgId={fieldMsgId}
           hint={

@@ -1,18 +1,31 @@
 import { useApolloClient } from '@apollo/react-hooks'
-import { EditorContent, useArticleEdtor } from '@matters/matters-editor'
+import {
+  articleEditorExtensions,
+  Dropcursor,
+  EditorContent,
+  FigcaptionKit,
+  Mention,
+  PasteDropFile,
+  Placeholder,
+  useEditor,
+} from '@matters/matters-editor'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { INPUT_DEBOUNCE } from '~/common/enums'
+import { validateImage } from '~/common/utils'
+import { useNativeEventListener } from '~/components/Hook'
 import { EditorDraftFragment } from '~/gql/graphql'
 
 import { BubbleMenu } from './BubbleMenu'
 import {
-  CaptionLimit,
   FigureEmbedLinkInput,
-  FigurePlaceholder,
+  FigureImageUploader,
   makeMentionSuggestion,
+  restoreImages,
+  SmartLink,
 } from './extensions'
+import { makeSmartLinkOptions } from './extensions/smartLink/utils'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.module.css'
 import EditorSummary from './Summary'
@@ -45,30 +58,97 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     update(c)
   }, INPUT_DEBOUNCE)
 
-  const editor = useArticleEdtor({
+  const getValidFiles = async (files: File[]) => {
+    const _files = await Promise.all(
+      files.map(async (file) => {
+        const mime = await validateImage(file)
+        return mime ? file : null
+      })
+    )
+
+    return _files.filter((f) => f !== null) as File[]
+  }
+
+  const editor = useEditor({
     editable: !isReadOnly,
-    placeholder: intl.formatMessage({
-      defaultMessage: 'Enter content…',
-      id: 'yCTXXb',
-    }),
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
-      const content = editor.getHTML()
+      let content = editor.getHTML()
+
+      content = restoreImages(editor, content)
+
       debouncedUpdate({ content })
     },
-    mentionSuggestion: makeMentionSuggestion({ client }),
     extensions: [
+      Placeholder.configure({
+        placeholder: intl.formatMessage({
+          defaultMessage: 'Enter content…',
+          id: 'yCTXXb',
+        }),
+      }),
+      Mention.configure({
+        suggestion: makeMentionSuggestion({ client }),
+      }),
       FigureEmbedLinkInput,
-      FigurePlaceholder.configure({
+      FigcaptionKit.configure({
+        maxCaptionLength: 100,
         placeholder: intl.formatMessage({
           defaultMessage: 'Add caption…',
           id: 'Uq6tfM',
         }),
       }),
-      CaptionLimit.configure({
-        maxCaptionLength: 100,
+      SmartLink.configure(makeSmartLinkOptions({ client })),
+      FigureImageUploader,
+      Dropcursor.configure({
+        color: 'var(--color-matters-green)',
+        width: 2,
       }),
+      PasteDropFile.configure({
+        onDrop: async (editor, files, pos) => {
+          const validFiles = await getValidFiles(files)
+
+          editor.commands.insertFigureImageUploaders({
+            upload,
+            files: validFiles,
+            pos,
+          })
+        },
+        onPaste: async (editor, files) => {
+          const validFiles = await getValidFiles(files)
+
+          editor.commands.insertFigureImageUploaders({
+            upload,
+            files: validFiles,
+          })
+        },
+      }),
+      ...articleEditorExtensions,
     ],
+  })
+
+  // fallback drop handler for non-editor area
+  useNativeEventListener<DragEvent>('drop', async (event) => {
+    const target = event.target
+    const files = Array.from(event.dataTransfer?.files || [])
+
+    if (!editor || !files) return
+
+    // skip if it's inside editor area
+    if (editor.view.dom.contains(target as Node)) {
+      return
+    }
+
+    event.preventDefault()
+
+    const validFiles = await getValidFiles(files)
+    editor.commands.insertFigureImageUploaders({
+      upload,
+      files: validFiles,
+    })
+  })
+
+  useNativeEventListener<DragEvent>('dragover', (e) => {
+    e.preventDefault()
   })
 
   return (

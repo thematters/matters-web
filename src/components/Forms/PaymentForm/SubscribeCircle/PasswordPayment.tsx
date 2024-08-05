@@ -9,11 +9,11 @@ import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {
   Dialog,
   Form,
+  Icon,
   SpinnerBlock,
   TextIcon,
   Translate,
   useMutation,
-  withIcon,
 } from '~/components'
 import {
   DigestRichCirclePrivateFragment,
@@ -140,7 +140,7 @@ const Confirm: React.FC<FormProps> = ({
 
         <section className={styles.currentCard}>
           <TextIcon
-            icon={withIcon(IconStripeCard)({ size: 24 })}
+            icon={<Icon icon={IconStripeCard} size={24} />}
             color="grey"
             size={12}
             spacing={12}

@@ -623,6 +623,9 @@
     "defaultMessage": "關聯作品",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
   },
+  "8YgVvt": {
+    "defaultMessage": "喜歡選集"
+  },
   "8cv9D4": {
     "defaultMessage": "下一步"
   },
@@ -661,6 +664,9 @@
     "defaultMessage": "編輯",
     "description": "src/components/CircleComment/DropdownActions/index.tsx"
   },
+  "91AzwP": {
+    "defaultMessage": "僅支持 JPEG、PNG、GIF 和 WebP 圖片"
+  },
   "91IQdk": {
     "defaultMessage": "已追蹤",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
@@ -695,6 +701,9 @@
   },
   "9WRlF4": {
     "defaultMessage": "送出"
+  },
+  "9aorag": {
+    "defaultMessage": "取消喜歡選集"
   },
   "9mfw9c": {
     "defaultMessage": "錢包地址",
@@ -1248,6 +1257,9 @@
     "defaultMessage": "更多動態",
     "description": "src/views/Follow/Feed/UserPostMomentActivity"
   },
+  "Jmg5do": {
+    "defaultMessage": "作品已封存"
+  },
   "JpS59y": {
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1345,10 +1357,6 @@
   "LOefol": {
     "defaultMessage": "上鎖",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
-  },
-  "LQxY1o": {
-    "defaultMessage": "{articleCount} 篇文章",
-    "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
   },
   "LUWKnn": {
     "defaultMessage": "徽章長出了羽翼，夢想的光輪正開始轉動。光輪號徽章紀念你曾參與「遊牧者計畫」。",
@@ -1685,7 +1693,7 @@
     "defaultMessage": "火閃電"
   },
   "RnKPVm": {
-    "defaultMessage": "{articleCount} 篇作品"
+    "defaultMessage": "{articleCount} 篇文章"
   },
   "Ro0CuW": {
     "defaultMessage": "你尚無權限進行該操作",

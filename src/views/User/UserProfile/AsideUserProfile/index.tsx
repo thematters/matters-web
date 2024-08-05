@@ -252,6 +252,7 @@ export const AsideUserProfile = () => {
           hasSeedBadge ||
           hasGoldenMotorBadge ||
           hasArchitectBadge ||
+          hasGrandBadge ||
           isCivicLiker ||
           user?.info.ethAddress) && (
           <section className={styles.badges}>

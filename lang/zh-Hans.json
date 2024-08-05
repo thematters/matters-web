@@ -388,7 +388,7 @@
     "defaultMessage": "复制"
   },
   "4nHH2x": {
-    "defaultMessage": "报名申请已递交 🎉"
+    "defaultMessage": "报名成功"
   },
   "4tqFCR": {
     "defaultMessage": "作者尚未启用 USDT 钱包"
@@ -623,6 +623,9 @@
     "defaultMessage": "关联作品",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
   },
+  "8YgVvt": {
+    "defaultMessage": "喜欢选集"
+  },
   "8cv9D4": {
     "defaultMessage": "下一步"
   },
@@ -661,6 +664,9 @@
     "defaultMessage": "编辑评论",
     "description": "src/components/CircleComment/DropdownActions/index.tsx"
   },
+  "91AzwP": {
+    "defaultMessage": "仅支持 JPEG、PNG、GIF 和 WebP 图片"
+  },
   "91IQdk": {
     "defaultMessage": "已追踪",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
@@ -695,6 +701,9 @@
   },
   "9WRlF4": {
     "defaultMessage": "送出"
+  },
+  "9aorag": {
+    "defaultMessage": "取消喜欢选集"
   },
   "9mfw9c": {
     "defaultMessage": "钱包地址",
@@ -1248,6 +1257,9 @@
     "defaultMessage": "更多动态",
     "description": "src/views/Follow/Feed/UserPostMomentActivity"
   },
+  "Jmg5do": {
+    "defaultMessage": "作品已归档"
+  },
   "JpS59y": {
     "defaultMessage": "已接受",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1345,10 +1357,6 @@
   "LOefol": {
     "defaultMessage": "上锁",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
-  },
-  "LQxY1o": {
-    "defaultMessage": "{articleCount} 篇文章",
-    "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
   },
   "LUWKnn": {
     "defaultMessage": "徽章长出了羽翼，梦想的光轮正开始转动。光轮号徽章纪念你曾参与「游牧者计划」。",
@@ -1685,7 +1693,7 @@
     "defaultMessage": "火闪电"
   },
   "RnKPVm": {
-    "defaultMessage": "{articleCount} 篇作品"
+    "defaultMessage": "{articleCount} 篇文章"
   },
   "Ro0CuW": {
     "defaultMessage": "你尚无权限进行该操作",

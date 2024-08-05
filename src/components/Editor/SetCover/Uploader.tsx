@@ -1,6 +1,7 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
+import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
@@ -11,11 +12,11 @@ import {
 } from '~/common/enums'
 import { sleep, validateImage } from '~/common/utils'
 import {
+  DraftDetailStateContext,
   Icon,
   Spinner,
   TextIcon,
   toast,
-  useCreateDraft,
   useDirectImageUpload,
   useMutation,
   useRoute,
@@ -79,7 +80,7 @@ const Uploader: React.FC<UploaderProps> = ({
   const { upload: uploadImage, uploading } = useDirectImageUpload()
 
   const { isInPath } = useRoute()
-  const { createDraft } = useCreateDraft()
+  const { createDraft } = useContext(DraftDetailStateContext)
 
   const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'editor-cover-upload-form'

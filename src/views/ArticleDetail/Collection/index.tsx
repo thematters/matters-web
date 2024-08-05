@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import _uniq from 'lodash/uniq'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
@@ -102,7 +101,7 @@ const Collection: React.FC<{
                 })
               }
             />
-            <Spacer size="xtight" />
+            <Spacer size="sp8" />
             <UserDigest.Mini
               user={node.author}
               avatarSize={16}

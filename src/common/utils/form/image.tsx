@@ -2,6 +2,7 @@ import FileType from 'file-type/browser'
 import { FormattedMessage } from 'react-intl'
 
 import {
+  ACCEPTED_UPLOAD_IMAGE_TYPES,
   UPLOAD_GIF_AVATAR_SIZE_LIMIT,
   UPLOAD_IMAGE_AREA_LIMIT,
   UPLOAD_IMAGE_DIMENSION_LIMIT,
@@ -16,11 +17,25 @@ export const getFileType = (
 // return meme type or null if not valid
 export const validateImage = (image: File, isAvatar: boolean = false) =>
   new Promise<string | null>((resolve, reject) => {
-    // size limits
     getFileType(image).then((fileType) => {
+      // mime type
       if (!fileType) {
         return resolve(null)
       }
+      const isAcceptedType = ACCEPTED_UPLOAD_IMAGE_TYPES.includes(image.type)
+      if (!isAcceptedType) {
+        toast.error({
+          message: (
+            <FormattedMessage
+              defaultMessage="Only JPEG, PNG, and GIF and WebP images are supported."
+              id="91AzwP"
+            />
+          ),
+        })
+        return resolve(null)
+      }
+
+      // size limits
       const isGIF = fileType.mime === 'image/gif'
       const sizeLimit =
         isAvatar && isGIF

@@ -266,7 +266,7 @@ const BaseFooterActions = ({
       <section ref={formWrapperRef}>
         {showForm && (
           <>
-            <Spacer size="base" />
+            <Spacer size="sp16" />
             <ArticleCommentForm
               articleId={node?.id!}
               setEditor={setEditor}

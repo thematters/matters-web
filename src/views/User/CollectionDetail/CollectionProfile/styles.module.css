@@ -9,7 +9,10 @@
   }
 
   & .info {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
+    justify-items: end;
     padding: var(--sp8) 0;
     margin-left: var(--sp32);
 
@@ -33,6 +36,10 @@
     & .articleCount {
       font-size: var(--text12);
       color: var(--color-grey);
+    }
+
+    & .like {
+      margin-top: auto;
     }
   }
 }
