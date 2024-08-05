@@ -37,7 +37,7 @@ export const FigureEmbedLinkInput = Node.create({
     return {
       placeholder: {
         default: null,
-        parseHTML: (element) => element.getAttribute('data-placeholder'),
+        // parseHTML: (element) => element.getAttribute('data-placeholder'),
       },
     }
   },

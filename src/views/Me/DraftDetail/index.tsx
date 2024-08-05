@@ -19,7 +19,6 @@ import {
   Media,
   SpinnerBlock,
   Throw404,
-  useCreateDraft,
   useDirectImageUpload,
   useUnloadConfirm,
 } from '~/components'
@@ -91,11 +90,10 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
 const BaseDraftDetail = () => {
   const intl = useIntl()
 
-  const { addRequest, getDraftId, isNewDraft } = useContext(
+  const { addRequest, createDraft, getDraftId, isNewDraft } = useContext(
     DraftDetailStateContext
   )
   const [initNew] = useState(isNewDraft())
-  const { createDraft } = useCreateDraft()
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
   const [singleFileUpload] =
     useMutation<SingleFileUploadMutation>(SINGLE_FILE_UPLOAD)
@@ -111,7 +109,6 @@ const BaseDraftDetail = () => {
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
   >()
-  const [hasValidSummary, setHasValidSummary] = useState<boolean>(true)
 
   const { data, loading, error } = useQuery<DraftDetailQueryQuery>(
     DRAFT_DETAIL,
@@ -170,7 +167,6 @@ const BaseDraftDetail = () => {
     isUnpublished &&
     hasContent &&
     hasTitle &&
-    hasValidSummary &&
     !isOverLength
   )
 
@@ -180,7 +176,7 @@ const BaseDraftDetail = () => {
     const isImage = input.type !== ASSET_TYPE.embedaudio
 
     // create draft first if not exist
-    let draftId = draft?.id
+    let draftId = getDraftId()
     if (!draftId) {
       await createDraft({
         onCreate: (newDraftId) => {
@@ -198,8 +194,20 @@ const BaseDraftDetail = () => {
       },
     }
 
-    // upload via directImageUpload
-    if (isImage) {
+    const trySingleUpload = async () => {
+      const result = await singleFileUpload({
+        variables: _omit(variables, ['input.mime']),
+      })
+      const { id: assetId, path } = result?.data?.singleFileUpload || {}
+
+      if (assetId && path) {
+        return { id: assetId, path }
+      } else {
+        throw new Error('upload not successful')
+      }
+    }
+
+    const tryDirectUpload = async () => {
       const result = await directImageUpload({
         variables: _omit(variables, ['input.file']),
       })
@@ -231,16 +239,18 @@ const BaseDraftDetail = () => {
         throw new Error('upload not successful')
       }
     }
+
+    // upload via directImageUpload
+    if (isImage) {
+      try {
+        return await tryDirectUpload()
+      } catch {
+        return await trySingleUpload()
+      }
+    }
     // upload via singleFileUpload
     else {
-      const result = await singleFileUpload({ variables })
-      const { id: assetId, path } = result?.data?.singleFileUpload || {}
-
-      if (assetId && path) {
-        return { id: assetId, path }
-      } else {
-        throw new Error('upload not successful')
-      }
+      return await trySingleUpload()
     }
   }
 
@@ -255,41 +265,34 @@ const BaseDraftDetail = () => {
       return
     }
 
+    if (draft?.publishState === 'published') {
+      return
+    }
+
+    // check content length
+    const len = stripHtml(newDraft.content || '').length
+    setContentLength(len)
+    if (len > MAX_ARTICLE_CONTENT_LENGTH) {
+      return
+    }
+
     try {
-      if (draft?.publishState === 'published') {
-        return
-      }
-
-      // check content length
-      const len = stripHtml(newDraft.content || '').length
-      setContentLength(len)
-      if (len > MAX_ARTICLE_CONTENT_LENGTH) {
-        return
-      }
-
       setSaveStatus('saving')
 
-      if (!isNewDraft()) {
-        await setContent({ variables: { id: getDraftId(), ...newDraft } })
-      } else {
+      let draftId = getDraftId()
+      if (!draftId) {
         await createDraft({
-          onCreate: async (draftId: string) => {
-            await setContent({ variables: { id: draftId, ...newDraft } })
+          onCreate: (newDraftId) => {
+            draftId = newDraftId
           },
         })
       }
 
-      setSaveStatus('saved')
+      await setContent({ variables: { id: draftId, ...newDraft } })
 
-      if (newDraft.summary && !hasValidSummary) {
-        setHasValidSummary(true)
-      }
+      setSaveStatus('saved')
     } catch (error) {
       setSaveStatus('saveFailed')
-
-      if (newDraft.summary && hasValidSummary) {
-        setHasValidSummary(false)
-      }
     }
   }
 
@@ -346,7 +349,7 @@ const BaseDraftDetail = () => {
         <Editor
           draft={draft}
           update={async (props) => addRequest(() => update(props))}
-          upload={upload}
+          upload={async (props) => addRequest(() => upload(props))}
         />
       </Layout.Main.Spacing>
 

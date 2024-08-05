@@ -640,6 +640,9 @@
     "defaultMessage": "编辑评论",
     "description": "src/components/CircleComment/DropdownActions/index.tsx"
   },
+  "91AzwP": {
+    "defaultMessage": "仅支持 JPEG、PNG、GIF 和 WebP 图片"
+  },
   "91IQdk": {
     "defaultMessage": "已追踪",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"

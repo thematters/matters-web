@@ -123,12 +123,6 @@ const findAndSearch = _debounce(
 export const SmartLink = Extension.create<SmartLinkOptions>({
   name: 'smartLink',
 
-  addStorage() {
-    return {
-      results: [],
-    }
-  },
-
   onUpdate() {
     // regexp must contains a named group `key`
     if (this.options.findRule.toString().indexOf('?<key>') === -1) {
