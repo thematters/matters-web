@@ -17,6 +17,7 @@ import {
   useMutation,
 } from '~/components'
 import { updateViewerUnreadNoticeCount } from '~/components/GQL'
+import CollectionNotice from '~/components/Notice/CollectionNotice'
 import {
   MarkAllNoticesAsReadMutation,
   MeNotificationsQuery,
@@ -26,6 +27,7 @@ const renderableTypes = new Set([
   'ArticleArticleNotice',
   'CircleNotice',
   'ArticleNotice',
+  'CollectionNotice',
   'CommentCommentNotice',
   'CommentNotice',
   'OfficialAnnouncementNotice',
@@ -46,14 +48,19 @@ const ME_NOTIFICATIONS = gql`
         edges {
           cursor
           node {
+            id
+            createdAt
             ...DigestNotice
+            ...CollectionNotice
           }
         }
       }
     }
   }
   ${Notice.fragments.notice}
+  ${CollectionNotice.fragments.notice}
 `
+// FIXME: remove CollectionNotice fragment from ME_NOTIFICATIONS
 
 const MARK_ALL_NOTICES_AS_READ = gql`
   mutation MarkAllNoticesAsRead {

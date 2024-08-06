@@ -20,8 +20,12 @@ export const fragments = {
       campaigns {
         campaign {
           id
-          name
           shortHash
+          ... on WritingChallenge {
+            nameZhHant: name(input: { language: zh_hant })
+            nameZhHans: name(input: { language: zh_hans })
+            nameEn: name(input: { language: en })
+          }
         }
       }
     }
