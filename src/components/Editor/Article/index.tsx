@@ -12,7 +12,7 @@ import {
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { INPUT_DEBOUNCE } from '~/common/enums'
+import { INPUT_DEBOUNCE, MAX_FIGURE_CAPTION_LENGTH } from '~/common/enums'
 import { validateImage } from '~/common/utils'
 import { useNativeEventListener } from '~/components/Hook'
 import { EditorDraftFragment } from '~/gql/graphql'
@@ -72,7 +72,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   const editor = useEditor({
     editable: !isReadOnly,
     content: content || '',
-    onUpdate: async ({ editor, transaction }) => {
+    onUpdate: async ({ editor }) => {
       let content = editor.getHTML()
 
       content = restoreImages(editor, content)
@@ -91,14 +91,21 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       }),
       FigureEmbedLinkInput,
       FigcaptionKit.configure({
-        maxCaptionLength: 100,
+        maxCaptionLength: MAX_FIGURE_CAPTION_LENGTH,
         placeholder: intl.formatMessage({
           defaultMessage: 'Add caption…',
           id: 'Uq6tfM',
         }),
       }),
       SmartLink.configure(makeSmartLinkOptions({ client })),
-      FigureImageUploader,
+      FigureImageUploader.configure({
+        upload,
+        update,
+        placeholder: intl.formatMessage({
+          defaultMessage: 'Enter content…',
+          id: 'yCTXXb',
+        }),
+      }),
       Dropcursor.configure({
         color: 'var(--color-matters-green)',
         width: 2,
@@ -106,20 +113,11 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       PasteDropFile.configure({
         onDrop: async (editor, files, pos) => {
           const validFiles = await getValidFiles(files)
-
-          editor.commands.insertFigureImageUploaders({
-            upload,
-            files: validFiles,
-            pos,
-          })
+          editor.commands.insertFigureImageUploaders({ files: validFiles, pos })
         },
         onPaste: async (editor, files) => {
           const validFiles = await getValidFiles(files)
-
-          editor.commands.insertFigureImageUploaders({
-            upload,
-            files: validFiles,
-          })
+          editor.commands.insertFigureImageUploaders({ files: validFiles })
         },
       }),
       ...articleEditorExtensions,
@@ -141,10 +139,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     event.preventDefault()
 
     const validFiles = await getValidFiles(files)
-    editor.commands.insertFigureImageUploaders({
-      upload,
-      files: validFiles,
-    })
+    editor.commands.insertFigureImageUploaders({ files: validFiles })
   })
 
   useNativeEventListener<DragEvent>('dragover', (e) => {
