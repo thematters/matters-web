@@ -31,6 +31,7 @@ const fragments = {
         }
         ... on Moment {
           id
+          state
           shortHash
         }
       }
@@ -124,6 +125,14 @@ const NoticeComment = ({
           <NoticeContentDigest content={comment.content || ''} />
         </section>
       </button>
+    )
+  }
+
+  if (comment.state === 'active' && moment && moment.state === 'archived') {
+    return (
+      <section>
+        <NoticeContentDigest content={comment.content || ''} />
+      </section>
     )
   }
   const path =

@@ -1488,6 +1488,10 @@
   "NSyuEP": {
     "defaultMessage": "Enter verification code"
   },
+  "NUEvfQ": {
+    "defaultMessage": "mentioned you in a deleted moment",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "NYTGIb": {
     "defaultMessage": "Got it"
   },
