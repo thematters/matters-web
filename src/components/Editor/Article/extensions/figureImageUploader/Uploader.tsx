@@ -93,12 +93,9 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
   const debouncedSetCaption = useDebouncedCallback((value) => {
     // update cache
     const assets = editor.storage.figureImageUploader.assets as StorageAsset
-    editor.storage.figureImageUploader.assets = {
-      ...assets,
-      [fileId]: {
-        ...assets[fileId],
-        caption,
-      },
+    editor.storage.figureImageUploader.assets[fileId] = {
+      ...assets[fileId],
+      caption,
     }
 
     // trigger update
@@ -125,13 +122,10 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
         const path = (await upload({ file, type: ASSET_TYPE.embed, mime })).path
 
         // update cache
-        editor.storage.figureImageUploader.assets = {
-          ...assets,
-          [fileId]: {
-            ...asset,
-            preview,
-            path,
-          },
+        editor.storage.figureImageUploader.assets[fileId] = {
+          ...asset,
+          preview,
+          path,
         }
 
         // trigger update
