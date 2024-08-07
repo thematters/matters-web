@@ -30,7 +30,9 @@ export const restoreImages = (editor: Editor, content: string): string => {
   for (const match of matches) {
     const previewSrc = match.replace('src="', '').replace('"', '')
     const assetMap = Object.entries(assets)
-    const asset = assetMap.find(([_previewSrc]) => _previewSrc === previewSrc)
+    const asset = assetMap.find(
+      ([, { previewSrc: _previewSrc }]) => _previewSrc === previewSrc
+    )
 
     if (asset && asset[1].path) {
       content = content.replace(previewSrc, asset[1].path)
