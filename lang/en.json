@@ -1880,6 +1880,10 @@
   "Up5U7K": {
     "defaultMessage": "Block"
   },
+  "Upe8I6": {
+    "defaultMessage": "mentioned you in a deleted moment",
+    "description": "src/components/Notice/MomentNotice/MomentMentionedYou.tsx"
+  },
   "Uq6tfM": {
     "defaultMessage": "Add caption…"
   },

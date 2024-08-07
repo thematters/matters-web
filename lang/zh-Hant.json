@@ -1880,6 +1880,10 @@
   "Up5U7K": {
     "defaultMessage": "封鎖"
   },
+  "Upe8I6": {
+    "defaultMessage": "在已刪除動態中提及了你",
+    "description": "src/components/Notice/MomentNotice/MomentMentionedYou.tsx"
+  },
   "Uq6tfM": {
     "defaultMessage": "添加說明文字…"
   },
