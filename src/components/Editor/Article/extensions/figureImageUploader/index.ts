@@ -1,7 +1,7 @@
 import { mergeAttributes, ReactNodeViewRenderer } from '@matters/matters-editor'
 import { Node } from '@tiptap/core'
 
-import Uploader, { UploaderProps } from './Uploader'
+import Uploader, { getFileId, StorageAsset, UploaderProps } from './Uploader'
 
 export { restoreImages } from './Uploader'
 
@@ -62,12 +62,29 @@ export const FigureImageUploader = Node.create({
             return true
           }
 
+          const assets = this.editor.storage[pluginName].assets as StorageAsset
+
           const content = [
-            ...files.map((file) => ({
-              type: this.name,
-              attrs: { ...restAttrs, file },
-              content: [],
-            })),
+            ...files.map((file) => {
+              const fileId = getFileId(files[0])
+              const asset = assets[fileId]
+
+              // If asset is already uploaded, insert FigureImage
+              if (asset?.path) {
+                return {
+                  type: 'figureImage',
+                  attrs: { src: asset.previewSrc },
+                  content: [],
+                }
+              }
+
+              // Otherwise, insert FigureImageUploader
+              return {
+                type: this.name,
+                attrs: { ...restAttrs, file },
+                content: [],
+              }
+            }),
             // {
             //   type: 'paragraph',
             //   content: [],

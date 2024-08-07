@@ -9,22 +9,31 @@ import { toast } from '~/components'
 
 import styles from './styles.module.css'
 
+export type StorageAsset = {
+  [fileId: string]: {
+    previewSrc?: string
+    path?: string
+  }
+}
+
+export const getFileId = (file: File) =>
+  `${file.name}-${file.size}-${file.type}-${file.lastModified}`
+
 /**
  * Restore image URL from `previewPath` to `path`
  */
 export const restoreImages = (editor: Editor, content: string): string => {
-  const assets = editor.storage.figureImageUploader.assets as {
-    [key: string]: string
-  }
+  const assets = editor.storage.figureImageUploader.assets as StorageAsset
   const regex = /src="blob:([^"]+)"/g
   const matches = content.match(regex) || []
 
   for (const match of matches) {
     const previewSrc = match.replace('src="', '').replace('"', '')
-    const path = assets[previewSrc]
+    const assetMap = Object.entries(assets)
+    const asset = assetMap.find(([_previewSrc]) => _previewSrc === previewSrc)
 
-    if (path) {
-      content = content.replace(previewSrc, path)
+    if (asset && asset[1].path) {
+      content = content.replace(previewSrc, asset[1].path)
     }
   }
 
@@ -47,7 +56,14 @@ export type UploaderProps = {
 const Uploader: React.FC<NodeViewProps> = (props) => {
   const { editor, node, deleteNode, getPos } = props
   const { file, upload } = node.attrs as UploaderProps
-  const [previewSrc] = useState(URL.createObjectURL(file))
+
+  const fileId = getFileId(file)
+  const assets = editor.storage.figureImageUploader.assets as StorageAsset
+  const asset = assets[fileId]
+  const [previewSrc] = useState(
+    asset ? asset.previewSrc : URL.createObjectURL(file)
+  )
+
   const [progress, setProgress] = useState(0)
   const duration = 3000 // 3 seconds
   const intervalTime = 100 // Update every 100ms
@@ -59,16 +75,19 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
     if (!mime) return
 
     try {
-      // upload and update cache
-      const path = (await upload({ file, type: ASSET_TYPE.embed, mime })).path
+      if (!asset?.path) {
+        // upload and update cache
+        const path = (await upload({ file, type: ASSET_TYPE.embed, mime })).path
 
-      // update cache
-      const assets = editor.storage.figureImageUploader.assets as {
-        [key: string]: string
-      }
-      editor.storage.figureImageUploader.assets = {
-        ...assets,
-        [previewSrc]: path,
+        // update cache
+        const assets = editor.storage.figureImageUploader.assets as StorageAsset
+        editor.storage.figureImageUploader.assets = {
+          ...assets,
+          [fileId]: {
+            previewSrc,
+            path,
+          },
+        }
       }
 
       // position to insert
@@ -95,6 +114,7 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
         .setTextSelection(currentPos + 1)
         .run()
     } catch (e) {
+      console.error(e)
       deleteNode()
 
       toast.error({
