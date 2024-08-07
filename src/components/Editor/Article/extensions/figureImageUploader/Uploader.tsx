@@ -59,21 +59,16 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
     if (!mime) return
 
     try {
-      // read from storage cache to prevent duplicate upload
-      // when redo and undo
+      // upload and update cache
+      const path = (await upload({ file, type: ASSET_TYPE.embed, mime })).path
+
+      // update cache
       const assets = editor.storage.figureImageUploader.assets as {
         [key: string]: string
       }
-      let path = assets[previewSrc]
-
-      // upload and update cache
-      if (!path) {
-        path = (await upload({ file, type: ASSET_TYPE.embed, mime })).path
-
-        editor.storage.figureImageUploader.assets = {
-          ...assets,
-          [previewSrc]: path,
-        }
+      editor.storage.figureImageUploader.assets = {
+        ...assets,
+        [previewSrc]: path,
       }
 
       // position to insert
@@ -97,7 +92,7 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
             },
           },
         ])
-        .setTextSelection(currentPos)
+        .setTextSelection(currentPos + 1)
         .run()
     } catch (e) {
       deleteNode()
@@ -138,6 +133,9 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
   return (
     <NodeViewWrapper>
       <img src={previewSrc} alt="Uploading..." />
+      <figcaption>
+        <br />
+      </figcaption>
       <span className={styles.progressIndicator}>{progress}%</span>
     </NodeViewWrapper>
   )
