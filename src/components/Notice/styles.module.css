@@ -85,8 +85,13 @@
 }
 
 /* NoticeActorName */
+.archivedDisplayname {
+  font-size: var(--text16);
+  color: var(--color-grey);
+}
+
 .displayName {
-  font-size: var(--font-size-base);
+  font-size: var(--text16);
   color: var(--color-black);
 }
 
