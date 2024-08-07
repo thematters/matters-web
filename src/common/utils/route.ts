@@ -57,6 +57,11 @@ type ToPathArgs =
       moment: MomentArgs
     }
   | {
+      page: 'momentComment'
+      moment: MomentArgs
+      comment: CommentArgs
+  }
+  | {
       page:
         | 'circleDetail'
         | 'circleDiscussion'
@@ -146,6 +151,13 @@ export const toPath = (
       const { shortHash } = args.moment
 
       href = `/m/${shortHash}`
+
+      break
+    }
+    case 'momentComment': {
+      const { shortHash } = args.moment
+      const { id } = args.comment
+      href = `/m/${shortHash}#${id}`
 
       break
     }

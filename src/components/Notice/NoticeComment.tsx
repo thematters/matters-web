@@ -145,8 +145,9 @@ const NoticeComment = ({
         })
       : moment
       ? toPath({
-          page: 'momentDetail',
+          page: 'momentComment',
           moment,
+          comment,
         })
       : {
           href: '',
