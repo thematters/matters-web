@@ -121,6 +121,10 @@
   "/usqHn": {
     "defaultMessage": "{displayName}'s creative space"
   },
+  "/vyhs5": {
+    "defaultMessage": "Comment deleted",
+    "description": "src/components/Notice/NoticeComment.tsx"
+  },
   "/wKyxw": {
     "defaultMessage": "Failed to republish"
   },

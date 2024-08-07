@@ -107,4 +107,12 @@
   border-left-style: dashed;
   border-left-width: 3px;
   -webkit-line-clamp: 3;
+
+  &.noticeContentDigestBlack {
+    color: var(--color-black);
+  }
+
+  &.noticeContentDigestGrey {
+    color: var(--color-grey);
+  }
 }

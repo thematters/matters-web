@@ -121,6 +121,10 @@
   "/usqHn": {
     "defaultMessage": "{displayName} 的創作空間站"
   },
+  "/vyhs5": {
+    "defaultMessage": "留言已刪除",
+    "description": "src/components/Notice/NoticeComment.tsx"
+  },
   "/wKyxw": {
     "defaultMessage": "發布失敗"
   },
