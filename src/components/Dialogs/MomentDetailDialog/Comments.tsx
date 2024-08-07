@@ -74,27 +74,25 @@ const Comments = ({ moment }: CommentsProps) => {
     .filter(({ node }) => newestCommentIds.indexOf(node.id) > -1)
     .reverse()
 
-  const CommentsList = () => {
-    return (
-      <>
-        {newestComments &&
-          newestComments.map(({ node }) => (
+  const CommentsList = (
+    <>
+      {newestComments &&
+        newestComments.map(({ node }) => (
+          <List.Item key={node.id}>
+            <CommentFeed comment={node} hasReply spacingLeft />
+          </List.Item>
+        ))}
+      {activeCommentsEdges.map(
+        ({ node }) =>
+          newestCommentIds.findIndex((id) => id === node.id) === -1 &&
+          node.state !== 'archived' && (
             <List.Item key={node.id}>
               <CommentFeed comment={node} hasReply spacingLeft />
             </List.Item>
-          ))}
-        {activeCommentsEdges.map(
-          ({ node }) =>
-            newestCommentIds.findIndex((id) => id === node.id) === -1 &&
-            node.state !== 'archived' && (
-              <List.Item key={node.id}>
-                <CommentFeed comment={node} hasReply spacingLeft />
-              </List.Item>
-            )
-        )}
-      </>
-    )
-  }
+          )
+      )}
+    </>
+  )
 
   return (
     <section className={styles.comments} ref={ref}>
@@ -132,12 +130,12 @@ const Comments = ({ moment }: CommentsProps) => {
           >
             <Media at="sm">
               <List spacing={['base', 0]} hasBorder={false}>
-                <CommentsList />
+                {CommentsList}
               </List>
             </Media>
             <Media greaterThan="sm">
               <List spacing={['loose', 0]} hasBorder={false}>
-                <CommentsList />
+                {CommentsList}
               </List>
             </Media>
           </InfiniteScroll>

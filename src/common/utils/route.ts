@@ -60,7 +60,7 @@ type ToPathArgs =
       page: 'momentComment'
       moment: MomentArgs
       comment: CommentArgs
-  }
+    }
   | {
       page:
         | 'circleDetail'
