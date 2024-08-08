@@ -91,7 +91,7 @@ export const FigureImageUploader = Node.create<FigcaptionImageUploaderOptions>({
 
           const content = [
             ...files.map((file) => {
-              const fileId = getFileId(files[0])
+              const fileId = getFileId(file)
               const asset = assets[fileId]
 
               // If asset is already uploaded, insert FigureImage

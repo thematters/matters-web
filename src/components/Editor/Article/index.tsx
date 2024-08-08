@@ -102,8 +102,8 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         upload,
         update,
         placeholder: intl.formatMessage({
-          defaultMessage: 'Enter content…',
-          id: 'yCTXXb',
+          defaultMessage: 'Add caption…',
+          id: 'Uq6tfM',
         }),
       }),
       Dropcursor.configure({
