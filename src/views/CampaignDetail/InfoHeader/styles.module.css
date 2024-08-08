@@ -57,7 +57,7 @@
   & .viewMore {
     display: none;
 
-    @media (--md-up) {
+    @media (--sm-up) {
       display: inline;
     }
   }
