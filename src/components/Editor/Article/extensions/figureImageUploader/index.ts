@@ -1,27 +1,44 @@
 import { mergeAttributes, ReactNodeViewRenderer } from '@matters/matters-editor'
 import { Node } from '@tiptap/core'
 
+import { ASSET_TYPE } from '~/common/enums'
+
 import Uploader, { getFileId, StorageAsset, UploaderProps } from './Uploader'
 
 export { restoreImages } from './Uploader'
 
 /**
- * FigureImageUploader is a extension to upload image and replace with FigureImage node after upload.
+ * FigureImageUploader is a extension to upload image.
  */
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     figureImageUploader: {
-      insertFigureImageUploaders: (
-        options: Pick<UploaderProps, 'upload'> & { files: File[]; pos?: number }
-      ) => ReturnType
+      insertFigureImageUploaders: (options: {
+        files: File[]
+        pos?: number
+      }) => ReturnType
     }
   }
 }
 
+export type FigcaptionImageUploaderOptions = {
+  upload?: (input: {
+    file?: File
+    url?: string
+    type?: ASSET_TYPE.embed
+    mime?: string
+  }) => Promise<{
+    id: string
+    path: string
+  }>
+  update?: (params: { content: string }) => void
+  placeholder?: string
+}
+
 const pluginName = 'figureImageUploader'
 
-export const FigureImageUploader = Node.create({
+export const FigureImageUploader = Node.create<FigcaptionImageUploaderOptions>({
   name: pluginName,
   group: 'block',
   atom: true,
@@ -29,8 +46,16 @@ export const FigureImageUploader = Node.create({
   addAttributes() {
     return {
       file: { default: null },
-      upload: { default: null },
+      preview: { default: null },
     } as { [key in keyof UploaderProps]: { default: null } }
+  },
+
+  addOptions() {
+    return {
+      upload: undefined,
+      update: undefined,
+      placeholder: 'Write something …',
+    }
   },
 
   addStorage() {
@@ -70,25 +95,22 @@ export const FigureImageUploader = Node.create({
               const asset = assets[fileId]
 
               // If asset is already uploaded, insert FigureImage
-              if (asset?.path) {
+              if (asset && asset.path && asset.preview) {
                 return {
                   type: 'figureImage',
-                  attrs: { src: asset.previewSrc },
+                  attrs: { src: asset.preview },
                   content: [],
                 }
               }
 
               // Otherwise, insert FigureImageUploader
+              const preview = URL.createObjectURL(file)
               return {
                 type: this.name,
-                attrs: { ...restAttrs, file },
+                attrs: { file, preview },
                 content: [],
               }
             }),
-            // {
-            //   type: 'paragraph',
-            //   content: [],
-            // },
           ]
 
           if (!pos) {
