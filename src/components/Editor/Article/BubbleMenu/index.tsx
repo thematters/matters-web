@@ -4,6 +4,7 @@ import {
   isTextSelection,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
+import { Node } from 'prosemirror-model'
 import { useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -18,7 +19,7 @@ import { ReactComponent as IconEditorStrike } from '@/public/static/icons/24px/e
 import { ReactComponent as IconEditorUl } from '@/public/static/icons/24px/editor-ul.svg'
 import { KEYVALUE } from '~/common/enums'
 import { isUrl } from '~/common/utils'
-import { withIcon } from '~/components'
+import { Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -87,10 +88,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         const hasEditorFocus = view.hasFocus()
         //  || isChildOfMenu
 
-        // figureImage, figureAudio, figureEmbed contain `<figcaption>`
-        const isFigure = $anchor.parent.type.name.includes('figure')
+        const isFigure =
+          ('node' in selection &&
+            (selection.node as Node).type.name.includes('figure')) ||
+          $anchor.parent.type.name.includes('figure')
         const isHr = $anchor.nodeAfter?.type.name === 'horizontalRule'
-
         const $grandParent = $anchor.node($anchor.depth - 1)
         const isInBlockquote = $grandParent?.type.name === 'blockquote'
 
@@ -137,7 +139,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'Zqekct',
                 })}
               >
-                {withIcon(IconEditorH2)({ size: 24 })}
+                {<Icon icon={IconEditorH2} size={24} />}
               </button>
             )}
 
@@ -161,7 +163,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'BDbgCL',
                 })}
               >
-                {withIcon(IconEditorH3)({ size: 24 })}
+                {<Icon icon={IconEditorH3} size={24} />}
               </button>
             )}
 
@@ -181,7 +183,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'Dkkmwm',
                 })}
               >
-                {withIcon(IconEditorBold)({ size: 24 })}
+                {<Icon icon={IconEditorBold} size={24} />}
               </button>
             )}
 
@@ -203,7 +205,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'lH8y+X',
                 })}
               >
-                {withIcon(IconEditorStrike)({ size: 24 })}
+                {<Icon icon={IconEditorStrike} size={24} />}
               </button>
             )}
 
@@ -225,7 +227,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'fJFvPm',
                 })}
               >
-                {withIcon(IconEditorCode)({ size: 24 })}
+                {<Icon icon={IconEditorCode} size={24} />}
               </button>
             )}
 
@@ -242,7 +244,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 id: 'atzUcB',
               })}
             >
-              {withIcon(IconEditorQuote)({ size: 24 })}
+              {<Icon icon={IconEditorQuote} size={24} />}
             </button>
 
             {/* Unordered list */}
@@ -261,7 +263,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'Onjs6P',
                 })}
               >
-                {withIcon(IconEditorUl)({ size: 24 })}
+                {<Icon icon={IconEditorUl} size={24} />}
               </button>
             )}
 
@@ -281,7 +283,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: '5j/gIz',
                 })}
               >
-                {withIcon(IconEditorOl)({ size: 24 })}
+                {<Icon icon={IconEditorOl} size={24} />}
               </button>
             )}
 
@@ -310,7 +312,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 id: 'JBWS0c',
               })}
             >
-              {withIcon(IconEditorLink)({ size: 24 })}
+              {<Icon icon={IconEditorLink} size={24} />}
             </button>
           </>
         )}

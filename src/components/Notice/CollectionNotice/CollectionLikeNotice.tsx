@@ -36,7 +36,8 @@ CollectionNewLikeNotice.fragments = {
         ...NoticeActorAvatarUser
         ...NoticeHeadActorsUser
       }
-      target {
+      collection: target {
+        id
         ...NoticeCollectionTitle
       }
     }

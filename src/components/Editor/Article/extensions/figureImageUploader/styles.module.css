@@ -1,0 +1,13 @@
+.progressIndicator {
+  position: absolute;
+  right: var(--sp12);
+  bottom: calc(var(--sp12) + 1.375rem); /* height of figcaption */
+  padding: var(--sp2) var(--sp12);
+  font-size: var(--text12);
+  font-weight: var(--font-normal);
+  line-height: 1.125rem;
+  color: var(--color-white);
+  content: attr(data-upload-progress);
+  background: rgb(0 0 0 / 40%);
+  border-radius: 4px;
+}

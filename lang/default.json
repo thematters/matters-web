@@ -599,6 +599,9 @@
     "defaultMessage": "Collect Article",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
   },
+  "8YgVvt": {
+    "defaultMessage": "Like collection"
+  },
   "8cv9D4": {
     "defaultMessage": "Next Step"
   },
@@ -637,6 +640,9 @@
     "defaultMessage": "Edit",
     "description": "src/components/CircleComment/DropdownActions/index.tsx"
   },
+  "91AzwP": {
+    "defaultMessage": "Only JPEG, PNG, and GIF and WebP images are supported."
+  },
   "91IQdk": {
     "defaultMessage": "Followed",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
@@ -671,6 +677,9 @@
   },
   "9WRlF4": {
     "defaultMessage": "Send"
+  },
+  "9aorag": {
+    "defaultMessage": "Unlike collection"
   },
   "9mfw9c": {
     "defaultMessage": "Wallet address",
@@ -1199,6 +1208,9 @@
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "Jmg5do": {
+    "defaultMessage": "Archived Work"
+  },
   "JpS59y": {
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
@@ -1296,10 +1308,6 @@
   "LOefol": {
     "defaultMessage": "Paywalled",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
-  },
-  "LQxY1o": {
-    "defaultMessage": "{articleCount} Articles",
-    "description": "src/views/User/CollectionDetail/CollectionProfile/index.tsx"
   },
   "LUWKnn": {
     "defaultMessage": "Wings have sprouted on the badge, and the halo of dreams is beginning to spin. The Nimbus Ferry badge signifies your participation in the Nomad Matters.",

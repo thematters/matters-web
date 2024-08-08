@@ -1,8 +1,11 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import {
+  commentEditorExtensions,
   Editor,
   EditorContent,
-  useCommentEditor,
+  Mention,
+  Placeholder,
+  useEditor,
 } from '@matters/matters-editor'
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
@@ -10,7 +13,8 @@ import { useIntl } from 'react-intl'
 import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
 import { useCommentEditorContext } from '~/components/Context'
 
-import { makeMentionSuggestion } from '../Article/extensions'
+import { makeMentionSuggestion, SmartLink } from '../Article/extensions'
+import { makeSmartLinkOptions } from '../Article/extensions/smartLink/utils'
 import styles from './styles.module.css'
 
 interface Props {
@@ -39,8 +43,7 @@ const CommentEditor: React.FC<Props> = ({
       defaultMessage: 'Any thoughts? Leave a kind comment~',
     })
 
-  const editor = useCommentEditor({
-    placeholder,
+  const editor = useEditor({
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
       const content = editor.getHTML()
@@ -55,7 +58,16 @@ const CommentEditor: React.FC<Props> = ({
     onDestroy: () => {
       window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
     },
-    mentionSuggestion: makeMentionSuggestion({ client }),
+    extensions: [
+      Placeholder.configure({
+        placeholder,
+      }),
+      Mention.configure({
+        suggestion: makeMentionSuggestion({ client }),
+      }),
+      SmartLink.configure(makeSmartLinkOptions({ client })),
+      ...commentEditorExtensions,
+    ],
   })
 
   useEffect(() => {

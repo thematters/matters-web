@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
+import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { URL_COLLECTION_DETAIL } from '~/common/enums'
 import { analytics, parseSorter, stringifySorter } from '~/common/utils'
 import {
@@ -98,16 +99,33 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
   return (
     <>
       <section className={styles.midMenu}>
-        <section className={styles.updatedDate}>
-          <FormattedMessage
-            defaultMessage="Updated {date}"
-            id="h+punE"
-            description="src/views/User/CollectionDetail/Content.tsx"
-            values={{
-              date: <DateTime date={updatedAt} color="grey" size="sm" />,
-            }}
-          />
-        </section>
+        <div className={styles.updatedDate}>
+          <section>
+            <FormattedMessage
+              defaultMessage="{articleCount} articles"
+              id="RnKPVm"
+              values={{
+                articleCount: articles.totalCount,
+              }}
+            />
+          </section>
+          <TextIcon
+            icon={<Icon icon={IconDot} color="grey" size={14} />}
+            placement="right"
+            spacing={4}
+          >
+            <section>
+              <FormattedMessage
+                defaultMessage="Updated {date}"
+                id="h+punE"
+                description="src/views/User/CollectionDetail/Content.tsx"
+                values={{
+                  date: <DateTime date={updatedAt} color="grey" size="sm" />,
+                }}
+              />
+            </section>
+          </TextIcon>
+        </div>
 
         <button
           onClick={() => {
@@ -141,7 +159,7 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
       <Layout.Main.Spacing hasVertical={false}>
         <List>
           {articleEdges &&
-            articleEdges.map(({ node, cursor }, i) => (
+            articleEdges.map(({ node }, i) => (
               <List.Item key={node.id}>
                 <ArticleDigestFeed
                   article={node}

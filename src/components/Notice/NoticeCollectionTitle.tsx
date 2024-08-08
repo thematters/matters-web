@@ -15,17 +15,17 @@ const NoticeCollectionTitle = ({
 }: {
   notice: CollectionNoticeFragment | null
 }) => {
-  const userId = notice?.target?.author.userName
+  const userName = notice?.collection?.author.userName
   const { lang } = useContext(LanguageContext)
 
-  if (!notice || !userId) {
+  if (!notice || !userName) {
     return null
   }
 
   const path = toPath({
     page: 'collectionDetail',
-    collection: notice.target,
-    userName: userId,
+    collection: notice.collection,
+    userName,
   })
 
   return (
@@ -34,7 +34,7 @@ const NoticeCollectionTitle = ({
         className={styles.noticeArticleTitle}
         data-test-id={TEST_ID.NOTICE_COLLECTION_TITLE}
       >
-        {truncateNoticeTitle(notice.target.title, { locale: lang })}
+        {truncateNoticeTitle(notice.collection.title, { locale: lang })}
       </a>
     </Link>
   )
@@ -43,7 +43,10 @@ const NoticeCollectionTitle = ({
 NoticeCollectionTitle.fragments = {
   collection: gql`
     fragment NoticeCollectionTitle on Collection {
+      id
+      title
       author {
+        id
         userName
       }
     }

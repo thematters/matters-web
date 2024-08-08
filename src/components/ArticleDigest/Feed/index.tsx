@@ -29,6 +29,7 @@ export type ArticleDigestFeedControls = {
   hasCircle?: boolean
   hasAuthor?: boolean
   isFirstFold?: boolean
+  disabledArchived?: boolean
 }
 
 export type ArticleDigestFeedProps = {
@@ -52,6 +53,7 @@ const BaseArticleDigestFeed = ({
   onClickAuthor,
 
   isFirstFold = false,
+  disabledArchived = false,
 
   hasReadTime,
   hasDonationCount,
@@ -61,8 +63,9 @@ const BaseArticleDigestFeed = ({
 }: ArticleDigestFeedProps) => {
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
-  const cover = !isBanned ? article.cover : null
-  const cleanedSummary = isBanned ? '' : makeSummary(summary)
+  const isArchived = article.articleState === 'archived'
+  const cover = !isBanned && !isArchived ? article.cover : null
+  const cleanedSummary = isBanned && !isArchived ? '' : makeSummary(summary)
 
   const path = toPath({
     page: 'articleDetail',
@@ -98,6 +101,9 @@ const BaseArticleDigestFeed = ({
                     user={author}
                     avatarSize={20}
                     textSize={12}
+                    nameColor={
+                      author.status?.state === 'archived' ? 'grey' : undefined
+                    }
                     hasAvatar
                     hasDisplayName
                     onClick={onClickAuthor}
@@ -120,13 +126,16 @@ const BaseArticleDigestFeed = ({
                 textSize={16}
                 lineClamp={2}
                 onClick={onClick}
+                disabledArchived={disabledArchived}
               />
             </section>
           </section>
 
-          <LinkWrapper {...path} onClick={onClick}>
-            <p className={styles.description}>{cleanedSummary}</p>
-          </LinkWrapper>
+          {!(isArchived && disabledArchived) && (
+            <LinkWrapper {...path} onClick={onClick}>
+              <p className={styles.description}>{cleanedSummary}</p>
+            </LinkWrapper>
+          )}
 
           <Media greaterThan="sm">{footerActions}</Media>
         </section>
