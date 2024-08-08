@@ -1,4 +1,5 @@
 import { Editor } from '@matters/matters-editor'
+import classNames from 'classnames'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -73,6 +74,8 @@ const MomentForm = () => {
     ((contentCount > 0 && contentCount <= MAX_MOMENT_CONTENT_LENGTH) ||
       assets.length > 0) &&
     assets.every(({ uploaded }) => uploaded)
+
+  const showClearButton = contentCount > 0 || assets.length > 0
 
   useEffect(() => {
     const clickOutside = (event: MouseEvent) => {
@@ -193,6 +196,11 @@ const MomentForm = () => {
     )
   }
 
+  const countClasses = classNames({
+    [styles.count]: true,
+    [styles.over]: contentCount > MAX_MOMENT_CONTENT_LENGTH,
+  })
+
   return (
     <form
       ref={formRef}
@@ -220,11 +228,11 @@ const MomentForm = () => {
           <MomentAssetsUploader assets={assets} updateAssets={updateAssets} />
         </section>
         <section className={styles.right}>
-          <span className={styles.count}>
+          <span className={countClasses}>
             {contentCount}/{MAX_MOMENT_CONTENT_LENGTH}
           </span>
           <div className={styles.line} />
-          {isValid && (
+          {showClearButton && (
             <ClearMomentDialog onConfirm={onClear}>
               {({ openDialog }) => (
                 <Button

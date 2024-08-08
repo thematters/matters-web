@@ -93,7 +93,7 @@ const CommentEditor: React.FC<Props> = ({
 
   return (
     <div
-      className={styles.editor}
+      className={styles.commentEditor}
       id="editor" // anchor for mention plugin
     >
       <EditorContent
