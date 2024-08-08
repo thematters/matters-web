@@ -1,12 +1,26 @@
+import classNames from 'classnames'
+
 import { TEST_ID } from '~/common/enums'
-import { stripHtml } from '~/common/utils'
+import { capitalizeFirstLetter, stripHtml } from '~/common/utils'
 
 import styles from './styles.module.css'
 
-const NoticeContentDigest = ({ content }: { content: string }) => {
+type NoticeContentDigestProps = {
+  content: string
+  color?: 'black' | 'grey'
+}
+
+const NoticeContentDigest = ({
+  content,
+  color = 'black',
+}: NoticeContentDigestProps) => {
+  const noticeContentClasses = classNames({
+    [styles.noticeContentDigest]: true,
+    [styles[`noticeContentDigest${capitalizeFirstLetter(color)}`]]: !!color,
+  })
   return (
     <section
-      className={styles.noticeContentDigest}
+      className={noticeContentClasses}
       data-test-id={TEST_ID.NOTICE_COMMENT_CONTENT}
       dangerouslySetInnerHTML={{ __html: stripHtml(content) }}
     />

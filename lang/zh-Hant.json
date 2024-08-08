@@ -121,6 +121,10 @@
   "/usqHn": {
     "defaultMessage": "{displayName} 的創作空間站"
   },
+  "/vyhs5": {
+    "defaultMessage": "留言已刪除",
+    "description": "src/components/Notice/NoticeComment.tsx"
+  },
   "/wKyxw": {
     "defaultMessage": "發布失敗"
   },
@@ -1484,6 +1488,10 @@
   "NSyuEP": {
     "defaultMessage": "請輸入驗證碼"
   },
+  "NUEvfQ": {
+    "defaultMessage": "在已删除動態的留言中提及了你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "NYTGIb": {
     "defaultMessage": "知道了"
   },
@@ -1871,6 +1879,10 @@
   },
   "Up5U7K": {
     "defaultMessage": "封鎖"
+  },
+  "Upe8I6": {
+    "defaultMessage": "在已刪除動態中提及了你",
+    "description": "src/components/Notice/MomentNotice/MomentMentionedYou.tsx"
   },
   "Uq6tfM": {
     "defaultMessage": "添加說明文字…"

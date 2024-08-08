@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { CommentMentionedYouNoticeFragment } from '~/gql/graphql'
+import { CommentMentionedYouNoticeFragment, MomentState } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeArticleTitle from '../NoticeArticleTitle'
@@ -47,13 +47,21 @@ const CommentMentionedYouNotice = ({
         <NoticeDigest
           notice={notice}
           action={
-            <FormattedMessage
-              defaultMessage="mentioned you in a comment at {commentMoment}"
-              id="AeVndq"
-              values={{
-                commentMoment: <NoticeMomentTitle moment={commentMoment} />,
-              }}
-            />
+            commentMoment.state === MomentState.Active ? (
+              <FormattedMessage
+                defaultMessage="mentioned you in a comment at {commentMoment}"
+                id="AeVndq"
+                values={{
+                  commentMoment: <NoticeMomentTitle moment={commentMoment} />,
+                }}
+              />
+            ) : (
+              <FormattedMessage
+                defaultMessage="mentioned you in a deleted moment"
+                id="NUEvfQ"
+                description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+              />
+            )
           }
           content={<NoticeComment comment={notice.comment} />}
           testId={TEST_ID.NOTICE_COMMENT_MENTIONED_YOU}
@@ -141,6 +149,7 @@ CommentMentionedYouNotice.fragments = {
             ...NoticeCircleName
           }
           ... on Moment {
+            state
             ...NoticeMomentTitle
           }
         }

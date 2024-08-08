@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { toPath } from '~/common/utils'
 import { LinkWrapper, toast } from '~/components'
@@ -31,6 +31,7 @@ const fragments = {
         }
         ... on Moment {
           id
+          state
           shortHash
         }
       }
@@ -53,6 +54,8 @@ const NoticeComment = ({
 }: {
   comment: NoticeCommentFragment | null
 }) => {
+  const intl = useIntl()
+
   const article =
     comment?.node.__typename === 'Article' ? comment.node : undefined
   const circle =
@@ -89,6 +92,21 @@ const NoticeComment = ({
     )
   }
 
+  if (comment.state === 'archived' && moment) {
+    return (
+      <section>
+        <NoticeContentDigest
+          content={intl.formatMessage({
+            defaultMessage: 'Comment deleted',
+            description: 'src/components/Notice/NoticeComment.tsx',
+            id: '/vyhs5',
+          })}
+          color="grey"
+        />
+      </section>
+    )
+  }
+
   if (comment.state === 'archived') {
     return (
       <button
@@ -109,6 +127,14 @@ const NoticeComment = ({
       </button>
     )
   }
+
+  if (comment.state === 'active' && moment && moment.state === 'archived') {
+    return (
+      <section>
+        <NoticeContentDigest content={comment.content || ''} />
+      </section>
+    )
+  }
   const path =
     article || circle
       ? toPath({
@@ -119,8 +145,9 @@ const NoticeComment = ({
         })
       : moment
       ? toPath({
-          page: 'momentDetail',
+          page: 'momentComment',
           moment,
+          comment,
         })
       : {
           href: '',

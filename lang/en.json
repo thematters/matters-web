@@ -121,6 +121,10 @@
   "/usqHn": {
     "defaultMessage": "{displayName}'s creative space"
   },
+  "/vyhs5": {
+    "defaultMessage": "Comment deleted",
+    "description": "src/components/Notice/NoticeComment.tsx"
+  },
   "/wKyxw": {
     "defaultMessage": "Failed to republish"
   },
@@ -1484,6 +1488,10 @@
   "NSyuEP": {
     "defaultMessage": "Enter verification code"
   },
+  "NUEvfQ": {
+    "defaultMessage": "mentioned you in a deleted moment",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "NYTGIb": {
     "defaultMessage": "Got it"
   },
@@ -1871,6 +1879,10 @@
   },
   "Up5U7K": {
     "defaultMessage": "Block"
+  },
+  "Upe8I6": {
+    "defaultMessage": "mentioned you in a deleted moment",
+    "description": "src/components/Notice/MomentNotice/MomentMentionedYou.tsx"
   },
   "Uq6tfM": {
     "defaultMessage": "Add caption…"

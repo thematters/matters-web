@@ -121,6 +121,10 @@
   "/usqHn": {
     "defaultMessage": "{displayName} 的创作空间站"
   },
+  "/vyhs5": {
+    "defaultMessage": "留言已删除",
+    "description": "src/components/Notice/NoticeComment.tsx"
+  },
   "/wKyxw": {
     "defaultMessage": "发布失败"
   },
@@ -1484,6 +1488,10 @@
   "NSyuEP": {
     "defaultMessage": "请输入验证码"
   },
+  "NUEvfQ": {
+    "defaultMessage": "在已删除动态的留言中提及了你",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "NYTGIb": {
     "defaultMessage": "知道了"
   },
@@ -1871,6 +1879,10 @@
   },
   "Up5U7K": {
     "defaultMessage": "屏蔽"
+  },
+  "Upe8I6": {
+    "defaultMessage": "在已删除动态中提及了你",
+    "description": "src/components/Notice/MomentNotice/MomentMentionedYou.tsx"
   },
   "Uq6tfM": {
     "defaultMessage": "添加说明文字…"
