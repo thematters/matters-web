@@ -147,3 +147,14 @@ export const checkImagesLoaded = async (
 
   await Promise.all(imagePromises)
 }
+
+export const getValidFiles = async (files: File[]) => {
+  const _files = await Promise.all(
+    files.map(async (file) => {
+      const mime = await validateImage(file)
+      return mime ? file : null
+    })
+  )
+
+  return _files.filter((f) => f !== null) as File[]
+}

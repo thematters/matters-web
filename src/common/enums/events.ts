@@ -8,6 +8,7 @@ export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
 
 // Moment
 export const ADD_MOMENT_COMMENT_MENTION = 'addMomentCommentMention'
+export const ADD_MOMENT_ASSETS = 'addMomentAssets'
 export const UPDATE_NEWEST_MOMENT_COMMENT = 'updateNewestMomentComment'
 export const OPEN_MOMENT_FORM = 'openMomentForm'
 export const CLEAR_MOMENT_FORM = 'clearMomentForm'
