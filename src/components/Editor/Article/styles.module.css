@@ -120,7 +120,22 @@
     /* figure selected */
     & :global(figure.ProseMirror-selectednode),
     & :global(.figure-image-uploader.ProseMirror-selectednode) {
-      outline: 2px solid var(--color-matters-green);
+      position: relative;
+
+      &::before {
+        position: absolute;
+        inset: 0;
+        content: '';
+        border: 2px solid var(--color-matters-green);
+      }
+
+      @media (--md-up) {
+        outline: 2px solid var(--color-matters-green);
+
+        &::before {
+          display: none;
+        }
+      }
     }
   }
 
