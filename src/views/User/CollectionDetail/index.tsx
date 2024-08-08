@@ -1,8 +1,9 @@
+import { useQuery } from '@apollo/react-hooks'
 import { useIntl } from 'react-intl'
 
 import { toPath } from '~/common/utils'
 import { Head, Layout } from '~/components'
-import { QueryError, Throw404, usePublicQuery, useRoute } from '~/components'
+import { QueryError, Throw404, useRoute } from '~/components'
 import { CollectionDetailQuery } from '~/gql/graphql'
 
 import AsideUserProfile from '../UserProfile/AsideUserProfile'
@@ -25,7 +26,7 @@ const BaseCollectionDetail = () => {
   /**
    * Data Fetching
    */
-  const { data, loading, error } = usePublicQuery<CollectionDetailQuery>(
+  const { data, loading, error } = useQuery<CollectionDetailQuery>(
     COLLECTION_DETAIL,
     {
       variables: { id: collectionId },
