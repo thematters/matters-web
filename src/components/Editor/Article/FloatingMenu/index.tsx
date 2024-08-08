@@ -14,12 +14,12 @@ import { ReactComponent as IconEditorVideo } from '@/public/static/icons/editor-
 import { Icon } from '~/components'
 
 import styles from './styles.module.css'
-import UploadAudioButton from './UploadAudioButton'
-import UploadImageButton, { UploadImageButtonProps } from './UploadImageButton'
+import UploadAudioButton, { UploadAudioButtonProps } from './UploadAudioButton'
+import UploadImageButton from './UploadImageButton'
 
 export type FloatingMenuProps = {
   editor: Editor
-} & Pick<UploadImageButtonProps, 'upload'>
+} & Pick<UploadAudioButtonProps, 'upload'>
 
 export const FloatingMenu: React.FC<FloatingMenuProps> = ({
   editor,
@@ -93,7 +93,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
 
         {expand && (
           <div className={styles.menuItems}>
-            <UploadImageButton editor={editor} upload={upload} />
+            <UploadImageButton editor={editor} />
 
             <button
               onClick={() => {
