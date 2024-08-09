@@ -19,7 +19,7 @@ import { MomentDetailQuery } from '~/gql/graphql'
 
 import Comments from './Comments'
 import { MOMENT_DETAIL } from './gql'
-import { Placeholder } from './Placeholder'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 interface MomentDetailDialogContentProps {

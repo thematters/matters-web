@@ -1,7 +1,7 @@
 import { Avatar } from '~/components/Avatar'
 
 import styles from './styles.module.css'
-export const Placeholder = () => {
+const Placeholder = () => {
   return (
     <article className={styles.comment}>
       <header className={styles.header}>
@@ -26,3 +26,5 @@ export const Placeholder = () => {
     </article>
   )
 }
+
+export default Placeholder

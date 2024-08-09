@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 
 import { Dialog, useDialogSwitch } from '~/components'
 
-import { Placeholder } from './Placeholder'
+import Placeholder from './Placeholder'
 
 interface MomentDetailDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode

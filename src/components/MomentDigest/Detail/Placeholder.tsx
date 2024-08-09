@@ -8,9 +8,7 @@ interface MomentDigestDetailPlaceholderProps {
   onClose: () => void
 }
 
-export const Placeholder = ({
-  onClose,
-}: MomentDigestDetailPlaceholderProps) => {
+const Placeholder = ({ onClose }: MomentDigestDetailPlaceholderProps) => {
   return (
     <section className={styles.container}>
       <header className={styles.header}>
@@ -40,3 +38,5 @@ export const Placeholder = ({
     </section>
   )
 }
+
+export default Placeholder
