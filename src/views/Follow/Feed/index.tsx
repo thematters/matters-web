@@ -14,18 +14,28 @@ import {
   SpinnerBlock,
   Translate,
 } from '~/components'
-import { FollowingFeedQuery } from '~/gql/graphql'
+import {
+  FollowingFeedQuery,
+  RecommendationFollowingFilterType,
+} from '~/gql/graphql'
 
+import { TABS } from '../Tabs'
 import { FOLLOWING_FEED } from './gql'
 import RecommendArticleActivity from './RecommendArticleActivity'
 import RecommendUserActivity from './RecommendUserActivity'
 import UserAddArticleTagActivity from './UserAddArticleTagActivity'
 import UserBroadcastCircleActivity from './UserBroadcastCircleActivity'
 import UserCreateCircleActivity from './UserCreateCircleActivity'
+import UserPostMomentActivity from './UserPostMomentActivity'
 import UserPublishArticleActivity from './UserPublishArticleActivity'
+
+type FollowingFeedProps = {
+  tab: TABS
+}
 
 const renderableTypes = new Set([
   'UserPublishArticleActivity',
+  'UserPostMomentActivity',
   'UserBroadcastCircleActivity',
   'UserCreateCircleActivity',
   'UserAddArticleTagActivity',
@@ -33,10 +43,17 @@ const renderableTypes = new Set([
   'UserRecommendationActivity',
 ])
 
-const FollowingFeed = () => {
+const FollowingFeed = ({ tab }: FollowingFeedProps) => {
   const intl = useIntl()
-  const { data, loading, error, fetchMore } =
-    useQuery<FollowingFeedQuery>(FOLLOWING_FEED)
+  const isArticleTab = tab === 'Article'
+  const { data, loading, error, fetchMore } = useQuery<FollowingFeedQuery>(
+    FOLLOWING_FEED,
+    {
+      variables: isArticleTab
+        ? { type: RecommendationFollowingFilterType.Article }
+        : {},
+    }
+  )
 
   if (loading) {
     return <SpinnerBlock />
@@ -105,6 +122,9 @@ const FollowingFeed = () => {
               <List.Item key={`${node.__typename}:${i}`}>
                 {node.__typename === 'UserPublishArticleActivity' && (
                   <UserPublishArticleActivity location={i} {...node} />
+                )}
+                {node.__typename === 'UserPostMomentActivity' && (
+                  <UserPostMomentActivity location={i} {...node} />
                 )}
                 {node.__typename === 'UserBroadcastCircleActivity' && (
                   <UserBroadcastCircleActivity {...node} />

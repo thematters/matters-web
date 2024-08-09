@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleThreadComment } from '~/components'
+import { CommentThreadComment } from '~/components'
 
 export const LATEST_COMMENTS_PUBLIC = gql`
   query LatestCommentsPublic(
@@ -18,8 +18,8 @@ export const LATEST_COMMENTS_PUBLIC = gql`
         id
         pinnedComments {
           ... on Comment {
-            ...ArticleThreadCommentCommentPublic
-            ...ArticleThreadCommentCommentPrivate
+            ...CommentThreadCommentCommentPublic
+            ...CommentThreadCommentCommentPrivate
           }
         }
         comments(
@@ -42,8 +42,8 @@ export const LATEST_COMMENTS_PUBLIC = gql`
           edges {
             node {
               ... on Comment {
-                ...ArticleThreadCommentCommentPublic
-                ...ArticleThreadCommentCommentPrivate
+                ...CommentThreadCommentCommentPublic
+                ...CommentThreadCommentCommentPrivate
               }
             }
           }
@@ -51,8 +51,8 @@ export const LATEST_COMMENTS_PUBLIC = gql`
       }
     }
   }
-  ${ArticleThreadComment.fragments.comment.public}
-  ${ArticleThreadComment.fragments.comment.private}
+  ${CommentThreadComment.fragments.comment.public}
+  ${CommentThreadComment.fragments.comment.private}
 `
 
 export const LATEST_COMMENTS_PRIVATE = gql`
@@ -60,9 +60,9 @@ export const LATEST_COMMENTS_PRIVATE = gql`
     nodes(input: { ids: $ids }) {
       id
       ... on Comment {
-        ...ArticleThreadCommentCommentPrivate
+        ...CommentThreadCommentCommentPrivate
       }
     }
   }
-  ${ArticleThreadComment.fragments.comment.private}
+  ${CommentThreadComment.fragments.comment.private}
 `

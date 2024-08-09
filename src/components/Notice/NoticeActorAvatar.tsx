@@ -1,12 +1,8 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import gql from 'graphql-tag'
-import Link from 'next/link'
 
-import { toPath } from '~/common/utils'
-import { Avatar, AvatarSize } from '~/components/Avatar'
+import { AvatarSize } from '~/components/Avatar'
+import { UserDigest } from '~/components/UserDigest'
 import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
-
-import styles from './styles.module.css'
 
 export const NoticeActorAvatar = ({
   user,
@@ -19,21 +15,7 @@ export const NoticeActorAvatar = ({
     return null
   }
 
-  const path = toPath({
-    page: 'userProfile',
-    userName: user.userName || '',
-  })
-
-  return (
-    <Link {...path}>
-      <a className={styles.noticeActorAvatar}>
-        <VisuallyHidden>
-          <span>{user.displayName}</span>
-        </VisuallyHidden>
-        <Avatar user={user} size={size} title={user.displayName || ''} />
-      </a>
-    </Link>
-  )
+  return <UserDigest.Mini user={user} avatarSize={32} hasAvatar />
 }
 
 NoticeActorAvatar.fragments = {
@@ -42,9 +24,9 @@ NoticeActorAvatar.fragments = {
       id
       userName
       displayName
-      ...AvatarUser
+      ...UserDigestMiniUser
     }
-    ${Avatar.fragments.user}
+    ${UserDigest.Mini.fragments.user}
   `,
 }
 

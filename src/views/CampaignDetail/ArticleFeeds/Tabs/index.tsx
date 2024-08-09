@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { analytics } from '~/common/utils'
 import { LanguageContext, SquareTabs } from '~/components'
@@ -24,6 +24,7 @@ const ArticleFeedsTabs = ({
   campaign,
 }: ArticleFeedsTabsProps) => {
   const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const stages = campaign.stages || []
 
   const shouldShowTab = (startedAt?: string) => {
@@ -46,9 +47,11 @@ const ArticleFeedsTabs = ({
               pageType: 'campaign_detail',
             })
           }}
-        >
-          <FormattedMessage defaultMessage="Latest" id="adThp5" />
-        </SquareTabs.Tab>
+          title={intl.formatMessage({
+            defaultMessage: 'Latest',
+            id: 'adThp5',
+          })}
+        />
 
         {[...stages].reverse().map((stage) =>
           shouldShowTab(stage.period?.start) ? (
@@ -62,9 +65,7 @@ const ArticleFeedsTabs = ({
                   pageType: 'campaign_detail',
                 })
               }}
-              key={stage.id}
-            >
-              {
+              title={
                 stage[
                   lang === 'zh_hans'
                     ? 'nameZhHans'
@@ -73,7 +74,8 @@ const ArticleFeedsTabs = ({
                     : 'nameEn'
                 ]
               }
-            </SquareTabs.Tab>
+              key={stage.id}
+            />
           ) : null
         )}
       </SquareTabs>

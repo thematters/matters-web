@@ -11,7 +11,7 @@ import {
 } from '~/common/utils'
 import {
   ArticleCommentForm,
-  ArticleThreadComment,
+  CommentThreadComment,
   EmptyComment,
   InfiniteScroll,
   List,
@@ -166,7 +166,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
           <List spacing={[0, 0]} hasBorder={false}>
             {!!pinnedComment && (
               <List.Item key={pinnedComment.id}>
-                <ArticleThreadComment
+                <CommentThreadComment
                   comment={pinnedComment}
                   defaultExpand={
                     pinnedComment.id === parentId && !!descendantId
@@ -181,7 +181,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
                 !comment.pinned &&
                 comment.state !== 'archived' && (
                   <List.Item key={comment.id}>
-                    <ArticleThreadComment
+                    <CommentThreadComment
                       comment={comment}
                       pinnedComment={pinnedComment}
                       defaultExpand={comment.id === parentId && !!descendantId}

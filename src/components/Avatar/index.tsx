@@ -11,6 +11,7 @@ import { TEST_ID } from '~/common/enums'
 import { Icon, ResponsiveImage, Tooltip } from '~/components'
 import { AvatarUserFragment, AvatarUserLogbookFragment } from '~/gql/graphql'
 
+import { Placeholder } from './Placeholder'
 import styles from './styles.module.css'
 
 export type AvatarSize =
@@ -143,3 +144,4 @@ export const Avatar = (props: AvatarProps) => {
 }
 
 Avatar.fragments = fragments
+Avatar.Placeholder = Placeholder

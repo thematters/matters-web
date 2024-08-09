@@ -29,21 +29,23 @@ const UserTabs = ({
   })
 
   const articleCount = user?.status?.articleCount || 0
+  const momentCount = user?.status?.momentCount || 0
+  const writingCount = articleCount + momentCount
   const collectionCount = user?.userCollections.totalCount || 0
 
   const isAuthor = viewer.userName === userName
   const showCollectionTab =
     loading ||
-    (isAuthor ? articleCount > 0 || collectionCount > 0 : collectionCount > 0)
+    (isAuthor ? writingCount > 0 || collectionCount > 0 : collectionCount > 0)
 
   return (
     <Tabs>
       <Tabs.Tab
         {...userArticlesPath}
-        selected={isInPath('USER_ARTICLES')}
-        count={articleCount > 0 ? articleCount : undefined}
+        selected={isInPath('USER_WORKS')}
+        count={writingCount > 0 ? writingCount : undefined}
       >
-        <FormattedMessage defaultMessage="Articles" id="3KNMbJ" />
+        <FormattedMessage defaultMessage="Works" id="6D7u/C" />
       </Tabs.Tab>
 
       {showCollectionTab && (

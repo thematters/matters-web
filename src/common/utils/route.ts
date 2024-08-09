@@ -11,6 +11,10 @@ interface ArticleArgs {
   shortHash: string
 }
 
+interface MomentArgs {
+  shortHash: string
+}
+
 interface CircleArgs {
   name: string
 }
@@ -47,6 +51,16 @@ type ToPathArgs =
     }
   | { page: 'articleEdit'; article: ArticleArgs }
   | { page: 'articleHistory'; article: ArticleArgs }
+  | { page: 'momentDetailEdit' }
+  | {
+      page: 'momentDetail'
+      moment: MomentArgs
+    }
+  | {
+      page: 'momentComment'
+      moment: MomentArgs
+      comment: CommentArgs
+    }
   | {
       page:
         | 'circleDetail'
@@ -63,6 +77,7 @@ type ToPathArgs =
       comment: CommentArgs
       article?: ArticleArgs | null
       circle?: CircleArgs | null
+      moment?: MomentArgs | null
     }
   | { page: 'draftDetail'; id: string }
   | {
@@ -128,6 +143,24 @@ export const toPath = (
 
       break
     }
+    case 'momentDetailEdit': {
+      href = `/m/edit`
+      break
+    }
+    case 'momentDetail': {
+      const { shortHash } = args.moment
+
+      href = `/m/${shortHash}`
+
+      break
+    }
+    case 'momentComment': {
+      const { shortHash } = args.moment
+      const { id } = args.comment
+      href = `/m/${shortHash}#${id}`
+
+      break
+    }
     case 'circleDetail': {
       href = `/~${args.circle.name}`
       break
@@ -164,6 +197,13 @@ export const toPath = (
           href = toPath({
             page: 'articleDetail',
             article: args.article!,
+            fragment,
+          }).href
+          break
+        case 'moment':
+          href = toPath({
+            page: 'momentDetail',
+            moment: args.moment!,
             fragment,
           }).href
           break

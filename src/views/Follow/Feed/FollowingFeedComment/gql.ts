@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleCommentContent } from '~/components'
+import { CommentContent } from '~/components'
 
 export const fragments = {
   comment: {
@@ -8,16 +8,16 @@ export const fragments = {
       fragment FollowingFeedCommentPublic on Comment {
         id
         createdAt
-        ...ArticleCommentContentCommentPublic
+        ...CommentContentCommentPublic
       }
-      ${ArticleCommentContent.fragments.comment.public}
+      ${CommentContent.fragments.comment.public}
     `,
     private: gql`
       fragment FollowingFeedCommentPrivate on Comment {
         id
-        ...ArticleCommentContentCommentPrivate
+        ...CommentContentCommentPrivate
       }
-      ${ArticleCommentContent.fragments.comment.private}
+      ${CommentContent.fragments.comment.private}
     `,
   },
 }

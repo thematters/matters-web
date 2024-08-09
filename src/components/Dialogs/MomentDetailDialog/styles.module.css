@@ -1,0 +1,125 @@
+.container {
+  @media (--sm-up) {
+    width: 40.5rem;
+  }
+}
+
+.header {
+  @mixin flex-start-space-between;
+
+  padding: var(--sp16) var(--sp16) var(--sp12);
+
+  @media (--sm-up) {
+    padding: var(--sp24) var(--sp24) var(--sp12);
+  }
+
+  & > section {
+    flex-grow: 1;
+  }
+}
+
+.scrollContainer {
+  @mixin hide-scrollbar;
+
+  /* the combined height of the header and footer (143px) */
+  max-height: calc(var(--ivh) * 100 - 143px);
+
+  @media (--sm-up) {
+    /* the combined height of the header and footer (151px) */
+    max-height: calc(80vh - 151px);
+  }
+
+  overflow-y: auto;
+}
+
+.contentContainer {
+  margin-top: var(--sp12);
+}
+
+.mainContent {
+  @mixin border-bottom-grey;
+
+  padding: 0 var(--sp16) var(--sp16);
+  border-bottom-color: var(--color-grey-hover);
+
+  @media (--sm-up) {
+    padding: 0 var(--sp24) var(--sp24);
+  }
+
+  .content {
+    font-size: var(--text17);
+    line-height: 1.75;
+  }
+
+  .assets {
+    margin-top: var(--sp12);
+  }
+}
+
+.comments {
+  padding: var(--sp16);
+
+  @media (--sm-up) {
+    padding: var(--sp24);
+  }
+
+  & .title {
+    margin-bottom: var(--sp16);
+    font-size: var(--text15);
+    line-height: 1.75;
+    color: var(--color-black);
+
+    @media (--sm-up) {
+      margin-bottom: var(--sp24);
+    }
+
+    & .count {
+      color: var(--color-grey-dark);
+    }
+  }
+
+  & .commentNode {
+    margin: var(--sp16) 0;
+
+    @media (--sm-up) {
+      margin: var(--sp24) 0;
+    }
+  }
+
+  &.commentsPlaceholder {
+    height: 13rem;
+  }
+}
+
+.footer {
+  @mixin border-top-grey-light;
+  @mixin flex-center-start;
+
+  gap: var(--sp10);
+  padding: var(--sp16) var(--sp24) var(--sp16) var(--sp14);
+
+  @media (--sm-down) {
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    width: 100%;
+    padding: var(--sp16);
+    background: var(--color-white);
+  }
+
+  &.editing {
+    padding: var(--sp16);
+
+    @media (--sm-up) {
+      padding: var(--sp16) var(--sp24);
+    }
+  }
+
+  & .likeButton {
+    @mixin flex-center-all;
+
+    @media (--sm-up) {
+      padding: 0 var(--sp10);
+    }
+  }
+}

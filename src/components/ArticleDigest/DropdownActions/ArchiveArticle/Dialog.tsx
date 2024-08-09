@@ -8,14 +8,14 @@ import {
   useMutation,
   useStep,
 } from '~/components'
-import { updateUserArticles, updateUserProfile } from '~/components/GQL'
+import { updateUserProfile, updateUserWritings } from '~/components/GQL'
 import {
   ArchiveArticleArticleFragment,
   ArchiveArticleMutation,
 } from '~/gql/graphql'
 import { ME_WORKS_ARCHIVED_FEED } from '~/views/Me/Works/Archived/gql'
 import { ME_WORKS_TABS } from '~/views/Me/Works/WorksTabs/gql'
-import { USER_PINNED_WORKS } from '~/views/User/Articles/PinBoard/gql'
+import { USER_PINNED_WORKS } from '~/views/User/Writings/PinBoard/gql'
 
 const ARCHIVE_ARTICLE = gql`
   mutation ArchiveArticle($id: ID!) {
@@ -57,7 +57,7 @@ const ArchiveArticleDialog = ({
         },
       },
       update: (cache) => {
-        updateUserArticles({
+        updateUserWritings({
           cache,
           targetId: article.id,
           userName: article.author.userName!,
