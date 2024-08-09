@@ -42,6 +42,8 @@ export const login = async ({
     target = encodeURIComponent(
       `${process.env.PLAYWRIGHT_TEST_BASE_URL}${target}`
     )
+
+    console.log(`Redirect to target: /login?target=${target}`)
     await page.goto(`/login?target=${target}`, { waitUntil: 'networkidle' })
   }
 
@@ -52,13 +54,25 @@ export const login = async ({
   await page.getByPlaceholder('Email').fill(email)
   await page.getByPlaceholder('Password').fill(password)
 
+  console.log('Filled email and password')
+  const bodyHTML = await page.evaluate(() => {
+    const newDocument = document.implementation.createHTMLDocument()
+    Array.from(document.body.childNodes).forEach((node) =>
+      newDocument.body.appendChild(node.cloneNode(true))
+    )
+    return newDocument.documentElement.outerHTML
+  })
+
+  console.log(bodyHTML)
+  await page.getByRole('button', { name: 'Sign in' }).click()
+  console.log('Clicked sign in button')
+
   // Submit and redirect to target
   await Promise.all([
     waitForAPIResponse({
       page,
       path: 'data.emailLogin.token',
     }),
-    page.getByRole('button', { name: 'Sign in' }).click(),
     waitForNavigation ? page.waitForNavigation() : undefined,
   ])
 }
