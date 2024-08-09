@@ -1,6 +1,8 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
+import { Dialog, useDialogSwitch } from '~/components'
+
+import Placeholder from './Placeholder'
 
 interface MomentDetailDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
@@ -8,7 +10,7 @@ interface MomentDetailDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <SpinnerBlock />,
+  loading: () => <Placeholder onClose={() => {}} />,
 })
 
 const BaseMomentDetailDialog = ({
