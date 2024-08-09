@@ -2,23 +2,25 @@ interface MomentDigestDetailContentPlaceholderProps {
   onClose: () => void
 }
 
-import { CommentFeed } from '~/components/Comment/Feed'
-import { MomentDigestDetail } from '~/components/MomentDigest/Detail'
+import CommentFeedPlaceholder from '~/components/Comment/Feed/Placeholder'
+import MomentDigestDetailPlaceholder from '~/components/MomentDigest/Detail/Placeholder'
 
 import styles from './styles.module.css'
 
-export const Placeholder = ({
+const Placeholder = ({
   onClose,
 }: MomentDigestDetailContentPlaceholderProps) => {
   return (
     <section className={styles.container}>
       <header className={styles.header}>
-        <MomentDigestDetail.Placeholder onClose={onClose} />
+        <MomentDigestDetailPlaceholder onClose={onClose} />
       </header>
       <section className={styles.mainContent}></section>
       <section className={`${styles.comments} ${styles.commentsPlaceholder} `}>
-        <CommentFeed.Placeholder />
+        <CommentFeedPlaceholder />
       </section>
     </section>
   )
 }
+
+export default Placeholder

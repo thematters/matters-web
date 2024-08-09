@@ -21,7 +21,7 @@ import FooterActions, { FooterActionsControls } from '../FooterActions'
 import PinnedLabel from '../PinnedLabel'
 import RoleLabel from '../RoleLabel'
 import { fragments } from './gql'
-import { Placeholder } from './Placeholder'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 export type CommentControls = {

@@ -7,7 +7,7 @@ import { MomentDigestDetailMomentFragment } from '~/gql/graphql'
 
 import Assets from '../Assets'
 import { fragments } from './gql'
-import { Placeholder } from './Placeholder'
+import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 export type MomentDigestDetailProps = {
