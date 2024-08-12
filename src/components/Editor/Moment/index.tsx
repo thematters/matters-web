@@ -4,6 +4,7 @@ import {
   EditorContent,
   Mention,
   momentEditorExtensions,
+  PasteDropFile,
   Placeholder,
   useEditor,
 } from '@matters/matters-editor'
@@ -11,7 +12,11 @@ import classNames from 'classnames'
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
-import { makeMentionSuggestion } from '../Article/extensions'
+import { ADD_MOMENT_ASSETS } from '~/common/enums'
+import { getValidFiles } from '~/common/utils'
+
+import { makeMentionSuggestion, SmartLink } from '../Article/extensions'
+import { makeSmartLinkOptions } from '../Article/extensions/smartLink/utils'
 import commonStyles from '../styles.module.css'
 import styles from './styles.module.css'
 
@@ -50,6 +55,25 @@ const MomentEditor: React.FC<Props> = ({
       }),
       Mention.configure({
         suggestion: makeMentionSuggestion({ client }),
+      }),
+      SmartLink.configure(makeSmartLinkOptions({ client })),
+      PasteDropFile.configure({
+        onDrop: async (editor, files, pos) => {
+          const validFiles = await getValidFiles(files)
+          window.dispatchEvent(
+            new CustomEvent(ADD_MOMENT_ASSETS, {
+              detail: { files: validFiles },
+            })
+          )
+        },
+        onPaste: async (editor, files) => {
+          const validFiles = await getValidFiles(files)
+          window.dispatchEvent(
+            new CustomEvent(ADD_MOMENT_ASSETS, {
+              detail: { files: validFiles },
+            })
+          )
+        },
       }),
       ...momentEditorExtensions,
     ],

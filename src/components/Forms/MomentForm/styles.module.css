@@ -23,12 +23,15 @@
 }
 
 .form {
-  @mixin border-grey-light;
-
   position: relative;
   padding-bottom: var(--sp12);
   overflow: hidden;
   border-radius: var(--sp8);
+  outline: 1px solid var(--color-grey-light);
+
+  &.dragging {
+    outline: 3px dashed var(--color-matters-green);
+  }
 }
 
 .content {

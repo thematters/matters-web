@@ -7,10 +7,11 @@ import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/cir
 import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
 import {
   ACCEPTED_MOMENT_ASSETS_UPLOAD_IMAGE_TYPES,
+  ADD_MOMENT_ASSETS,
   UPLOAD_MOMENT_ASSET_COUNT_LIMIT,
 } from '~/common/enums'
-import { validateImage } from '~/common/utils'
-import { Icon, toast } from '~/components'
+import { getValidFiles } from '~/common/utils'
+import { Icon, toast, useEventListener } from '~/components'
 
 import { Item } from './Item'
 import styles from './styles.module.css'
@@ -28,17 +29,6 @@ type MomentAssetsUploaderProps = {
   updateAssets: (assets: MomentAsset[]) => void
   fieldId?: string
   isInPage?: boolean
-}
-
-const handleFileValidation = async (files: File[]): Promise<File[]> => {
-  const validFiles = []
-  for (const file of files) {
-    const isValid = await validateImage(file)
-    if (isValid) {
-      validFiles.push(file)
-    }
-  }
-  return validFiles
 }
 
 export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
@@ -98,40 +88,55 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
     [assets]
   )
 
+  const handleFileUpload = useCallback(
+    async (files: File[]) => {
+      const newFileCount = files.length
+      if (newFileCount + assets.length > UPLOAD_MOMENT_ASSET_COUNT_LIMIT) {
+        toast.success({
+          message: (
+            <FormattedMessage
+              defaultMessage="Up to 3 images can be uploaded"
+              id="p9gEZh"
+            />
+          ),
+        })
+      }
+
+      const validFiles = await getValidFiles(
+        Array.from(files).slice(
+          0,
+          UPLOAD_MOMENT_ASSET_COUNT_LIMIT - assets.length
+        )
+      )
+
+      addAssets(validFiles)
+    },
+    [assets.length, addAssets]
+  )
+
+  useEventListener(
+    ADD_MOMENT_ASSETS,
+    async (payload: { [key: string]: any }) => {
+      if (payload.files) {
+        handleFileUpload(payload.files as File[])
+      }
+    }
+  )
+
   const acceptTypes = ACCEPTED_MOMENT_ASSETS_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = _fieldId || 'moment-assets-uploader-form'
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault()
 
-    if (!event.target || !event.target.files) {
-      return
+    if (event.target.files) {
+      handleFileUpload(Array.from(event.target.files))
     }
-    const newFileCount = event.target.files.length
-    if (newFileCount + assets.length > UPLOAD_MOMENT_ASSET_COUNT_LIMIT) {
-      toast.success({
-        message: (
-          <FormattedMessage
-            defaultMessage="Up to 3 images can be uploaded"
-            id="p9gEZh"
-          />
-        ),
-      })
-    }
-
-    const newFiles = Array.from(event.target.files).slice(
-      0,
-      UPLOAD_MOMENT_ASSET_COUNT_LIMIT - assets.length
-    )
-
-    const validFiles = await handleFileValidation(newFiles)
-
-    addAssets(validFiles)
 
     event.target.value = ''
   }
 
-  const FileInput = () => (
+  const FileInput = (
     <VisuallyHidden>
       <input
         id={fieldId}
@@ -183,7 +188,7 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
             </div>
           )}
 
-          <FileInput />
+          {FileInput}
         </label>
       )}
     </section>
