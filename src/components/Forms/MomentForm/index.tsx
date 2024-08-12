@@ -123,6 +123,11 @@ const MomentForm = () => {
     }
   }
 
+  const handleDragOver = (event: React.DragEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+
   const handleDrop = (event: React.DragEvent<HTMLFormElement>) => {
     event.preventDefault()
     event.stopPropagation()
@@ -262,6 +267,7 @@ const MomentForm = () => {
         description: 'src/components/Forms/MomentForm/index.tsx',
       })}
       onDragEnter={handleDragEnter}
+      onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
