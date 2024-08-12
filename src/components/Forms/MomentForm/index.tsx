@@ -5,6 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
 import {
+  ADD_MOMENT_ASSETS,
   CLEAR_MOMENT_FORM,
   MAX_MOMENT_CONTENT_LENGTH,
   OPEN_MOMENT_FORM,
@@ -59,6 +60,7 @@ const MomentForm = () => {
   const [editor, setEditor] = useState<Editor | null>(null)
   const [content, setContent] = useState(formDraft?.content || '')
   const [assets, setAssets] = useState<MomentAsset[]>(formDraft?.assets || [])
+  const [isDragging, setIsDragging] = useState(false)
   const updateAssets = (assets: MomentAsset[]) => {
     formStorage.set<FormDraft>(
       formStorageKey,
@@ -97,6 +99,48 @@ const MomentForm = () => {
     }
   }, [isEditing, assets, content])
 
+  const handleDragEnter = (event: React.DragEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+    setIsDragging(true)
+  }
+
+  const handleDragLeave = (event: React.DragEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+    const rect = formRef.current?.getBoundingClientRect()
+    if (!rect) {
+      return
+    }
+    if (
+      event.clientY < rect.top ||
+      event.clientY >= rect.bottom ||
+      event.clientX < rect.left ||
+      event.clientX >= rect.right
+    ) {
+      //real leave
+      setIsDragging(false)
+    }
+  }
+
+  const handleDrop = (event: React.DragEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    event.stopPropagation()
+    setIsDragging(false)
+
+    const files = event.dataTransfer.files
+    if (files.length > 0) {
+      window.dispatchEvent(
+        new CustomEvent(ADD_MOMENT_ASSETS, {
+          detail: { files: files },
+        })
+      )
+    }
+  }
+
+  useEventListener(ADD_MOMENT_ASSETS, () => {
+    setIsDragging(false)
+  })
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     try {
@@ -201,10 +245,15 @@ const MomentForm = () => {
     [styles.over]: contentCount > MAX_MOMENT_CONTENT_LENGTH,
   })
 
+  const formClasses = classNames({
+    [styles.form]: true,
+    [styles.dragging]: isDragging,
+  })
+
   return (
     <form
       ref={formRef}
-      className={styles.form}
+      className={formClasses}
       id={formId}
       onSubmit={handleSubmit}
       aria-label={intl.formatMessage({
@@ -212,6 +261,9 @@ const MomentForm = () => {
         id: 'E3uFyt',
         description: 'src/components/Forms/MomentForm/index.tsx',
       })}
+      onDragEnter={handleDragEnter}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
     >
       <section className={styles.content}>
         <MomentEditor

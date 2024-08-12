@@ -58,15 +58,14 @@ const MomentEditor: React.FC<Props> = ({
       }),
       SmartLink.configure(makeSmartLinkOptions({ client })),
       PasteDropFile.configure({
-        // onDrop: async (editor, files, pos) => {
-        //   const validFiles = await getValidFiles(files)
-        //   console.log('onDrop', { validFiles })
-        //   window.dispatchEvent(
-        //     new CustomEvent(ADD_MOMENT_ASSETS, {
-        //       detail: { files: validFiles },
-        //     })
-        //   )
-        // },
+        onDrop: async (editor, files, pos) => {
+          const validFiles = await getValidFiles(files)
+          window.dispatchEvent(
+            new CustomEvent(ADD_MOMENT_ASSETS, {
+              detail: { files: validFiles },
+            })
+          )
+        },
         onPaste: async (editor, files) => {
           const validFiles = await getValidFiles(files)
           window.dispatchEvent(

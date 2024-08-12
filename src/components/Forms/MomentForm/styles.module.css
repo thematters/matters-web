@@ -29,6 +29,10 @@
   padding-bottom: var(--sp12);
   overflow: hidden;
   border-radius: var(--sp8);
+
+  &.dragging {
+    border: 3px dashed var(--color-matters-green);
+  }
 }
 
 .content {
