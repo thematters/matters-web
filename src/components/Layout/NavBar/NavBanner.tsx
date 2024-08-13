@@ -15,7 +15,6 @@ const NavBanner: React.FC = () => {
             id="CjKqYk"
             defaultMessage="Share a story from your life"
           />
-          分
         </div>
       </div>
       <img src={MATTY.src} alt="Matty" className={styles.profileIcon} />
