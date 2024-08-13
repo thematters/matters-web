@@ -331,7 +331,7 @@
     "defaultMessage": "贴上 JSFiddle 或 CodePen 链接后，Enter 进行新增"
   },
   "3KNMbJ": {
-    "defaultMessage": "作品"
+    "defaultMessage": "写文章"
   },
   "3Tg548": {
     "defaultMessage": "登录",
@@ -349,6 +349,10 @@
   "3phEFL": {
     "defaultMessage": "继续使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
+  "3raREe": {
+    "defaultMessage": "留言",
+    "description": "src/components/Dialogs/MomentDetailDialog/Comments.tsx"
   },
   "3w3CC8": {
     "defaultMessage": "关联 ENS"
@@ -869,6 +873,10 @@
   },
   "CPvyYN": {
     "defaultMessage": "密码错误"
+  },
+  "CTJk3m": {
+    "defaultMessage": "复制留言",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "CjKqYk": {
     "defaultMessage": "分享今天开心或难过的小故事吧"
@@ -1911,6 +1919,10 @@
   "VZsE96": {
     "defaultMessage": "选集名称"
   },
+  "VdxjkY": {
+    "defaultMessage": "确认删除后，留言会立即消失。",
+    "description": "Moment"
+  },
   "VeEfHm": {
     "defaultMessage": "草稿",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -2886,6 +2898,10 @@
   "nWhqw9": {
     "defaultMessage": "立即发布"
   },
+  "ng6TX/": {
+    "defaultMessage": "发表成功",
+    "description": "src/views/MomentDetail/Edit/index.tsx"
+  },
   "nhkx3t": {
     "defaultMessage": "IPFS 是一种分散式储存技术，具有去中心、易存续、不易被审查等优点。 每一篇在 Matters 发布的文章都会上传到 IPFS。 IPFS 会产生一定储存费用，目前暂时由 Matters 承担。 （到 IPFS 官网 ipfs.com 可以了解更多）"
   },
@@ -2960,6 +2976,10 @@
   "q+N5Wd": {
     "defaultMessage": "管理围炉",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "q192Fl": {
+    "defaultMessage": "删除留言",
+    "description": "Moment"
   },
   "q9oMKE": {
     "defaultMessage": "围炉名称"
