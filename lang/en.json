@@ -350,6 +350,10 @@
     "defaultMessage": "Continued use indicates your agreement to ",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
+  "3raREe": {
+    "defaultMessage": "Comment",
+    "description": "src/components/Dialogs/MomentDetailDialog/Comments.tsx"
+  },
   "3w3CC8": {
     "defaultMessage": "Link ENS"
   },
@@ -869,6 +873,10 @@
   },
   "CPvyYN": {
     "defaultMessage": "Incorrect password"
+  },
+  "CTJk3m": {
+    "defaultMessage": "Copy comment",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "CjKqYk": {
     "defaultMessage": "Share a story from your life"
@@ -1911,6 +1919,10 @@
   "VZsE96": {
     "defaultMessage": "Collection Name"
   },
+  "VdxjkY": {
+    "defaultMessage": "After deletion, the comment will be removed immediately",
+    "description": "Moment"
+  },
   "VeEfHm": {
     "defaultMessage": "Drafts",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -2886,6 +2898,10 @@
   "nWhqw9": {
     "defaultMessage": "Publish Now"
   },
+  "ng6TX/": {
+    "defaultMessage": "Published",
+    "description": "src/views/MomentDetail/Edit/index.tsx"
+  },
   "nhkx3t": {
     "defaultMessage": "IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"
   },
@@ -2960,6 +2976,10 @@
   "q+N5Wd": {
     "defaultMessage": "Manage Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "q192Fl": {
+    "defaultMessage": "Delete comment",
+    "description": "Moment"
   },
   "q9oMKE": {
     "defaultMessage": "Circle Name"
