@@ -197,7 +197,7 @@ const Edit = () => {
             <ClearMomentDialog onConfirm={onClear}>
               {({ openDialog }) => (
                 <Button
-                  size={[null, '2rem']}
+                  size={[null, '1.875rem']}
                   spacing={[0, 20]}
                   bgColor="white"
                   disabled={isSubmitting}
