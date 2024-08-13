@@ -106,7 +106,7 @@
   @media (--sm-down) {
     position: fixed;
     bottom: 0;
-    z-index: 999;
+    z-index: var(--z-index-bottom-bar);
     width: 100%;
     padding: var(--sp16);
     background: var(--color-white);
