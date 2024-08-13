@@ -350,6 +350,10 @@
     "defaultMessage": "继续使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
+  "3raREe": {
+    "defaultMessage": "留言",
+    "description": "src/components/Dialogs/MomentDetailDialog/Comments.tsx"
+  },
   "3w3CC8": {
     "defaultMessage": "关联 ENS"
   },
@@ -869,6 +873,10 @@
   },
   "CPvyYN": {
     "defaultMessage": "密码错误"
+  },
+  "CTJk3m": {
+    "defaultMessage": "复制留言",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "CjKqYk": {
     "defaultMessage": "分享今天开心或难过的小故事吧"
@@ -1910,6 +1918,10 @@
   },
   "VZsE96": {
     "defaultMessage": "选集名称"
+  },
+  "VdxjkY": {
+    "defaultMessage": "确认删除后，留言会立即消失。",
+    "description": "Moment"
   },
   "VeEfHm": {
     "defaultMessage": "草稿",
@@ -2960,6 +2972,10 @@
   "q+N5Wd": {
     "defaultMessage": "管理围炉",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "q192Fl": {
+    "defaultMessage": "删除留言",
+    "description": "Moment"
   },
   "q9oMKE": {
     "defaultMessage": "围炉名称"

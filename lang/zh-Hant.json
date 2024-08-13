@@ -350,6 +350,10 @@
     "defaultMessage": "繼續使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
+  "3raREe": {
+    "defaultMessage": "留言",
+    "description": "src/components/Dialogs/MomentDetailDialog/Comments.tsx"
+  },
   "3w3CC8": {
     "defaultMessage": "關聯 ENS"
   },
@@ -869,6 +873,10 @@
   },
   "CPvyYN": {
     "defaultMessage": "密碼錯誤"
+  },
+  "CTJk3m": {
+    "defaultMessage": "複製留言",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
   },
   "CjKqYk": {
     "defaultMessage": "分享今天開心或難過的小故事吧"
@@ -1910,6 +1918,10 @@
   },
   "VZsE96": {
     "defaultMessage": "選集名稱"
+  },
+  "VdxjkY": {
+    "defaultMessage": "確認刪除後，留言會立即消失。",
+    "description": "Moment"
   },
   "VeEfHm": {
     "defaultMessage": "草稿",
@@ -2960,6 +2972,10 @@
   "q+N5Wd": {
     "defaultMessage": "管理圍爐",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
+  },
+  "q192Fl": {
+    "defaultMessage": "刪除留言",
+    "description": "Moment"
   },
   "q9oMKE": {
     "defaultMessage": "圍爐名稱"
