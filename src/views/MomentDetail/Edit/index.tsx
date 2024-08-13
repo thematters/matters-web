@@ -108,6 +108,14 @@ const Edit = () => {
 
       goToUserProfile(moment.shortHash)
 
+      toast.success({
+        message: intl.formatMessage({
+          defaultMessage: 'Published',
+          description: 'src/views/MomentDetail/Edit/index.tsx',
+          id: 'ng6TX/',
+        }),
+      })
+
       // Clear other rendered moment forms
       window.dispatchEvent(new CustomEvent(CLEAR_MOMENT_FORM))
     } catch (error) {

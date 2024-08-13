@@ -2898,6 +2898,10 @@
   "nWhqw9": {
     "defaultMessage": "Publish Now"
   },
+  "ng6TX/": {
+    "defaultMessage": "Published",
+    "description": "src/views/MomentDetail/Edit/index.tsx"
+  },
   "nhkx3t": {
     "defaultMessage": "IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"
   },
