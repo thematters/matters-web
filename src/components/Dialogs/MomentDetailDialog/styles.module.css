@@ -101,6 +101,7 @@
 
   gap: var(--sp10);
   padding: var(--sp16) var(--sp24) var(--sp16) var(--sp14);
+  border-top-color: var(--color-grey-hover);
 
   @media (--sm-down) {
     position: fixed;
