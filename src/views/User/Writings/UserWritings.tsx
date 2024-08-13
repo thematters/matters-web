@@ -190,6 +190,7 @@ const UserWritings = () => {
     return (
       <>
         <CustomHead />
+        <MomentForm />
         <EmptyWork isMe={isViewer} />
       </>
     )

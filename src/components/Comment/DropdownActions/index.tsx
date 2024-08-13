@@ -146,10 +146,22 @@ const BaseDropdownActions = ({
     hasPin &&
     comment.node.__typename === 'Article' &&
     comment.author.id === comment.node.author.id
+  const isMoment = comment.node.__typename === 'Moment'
 
   const Content = () => (
     <Menu>
-      <CopyCommentButton content={comment.content || ''} />
+      <CopyCommentButton
+        content={comment.content || ''}
+        text={
+          isMoment ? (
+            <FormattedMessage
+              defaultMessage="Copy comment"
+              id="CTJk3m"
+              description="src/components/Comment/DropdownActions/index.tsx"
+            />
+          ) : null
+        }
+      />
       {_hasPin && <PinButton comment={comment} pinnedComment={pinnedComment} />}
       {hasReport && <SubmitReport.Button openDialog={openSubmitReportDialog} />}
       {(_hasPin || hasReport) && hasDelete && <Menu.Divider />}

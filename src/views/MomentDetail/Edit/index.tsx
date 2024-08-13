@@ -108,6 +108,14 @@ const Edit = () => {
 
       goToUserProfile(moment.shortHash)
 
+      toast.success({
+        message: intl.formatMessage({
+          defaultMessage: 'Published',
+          description: 'src/views/MomentDetail/Edit/index.tsx',
+          id: 'ng6TX/',
+        }),
+      })
+
       // Clear other rendered moment forms
       window.dispatchEvent(new CustomEvent(CLEAR_MOMENT_FORM))
     } catch (error) {
@@ -197,7 +205,7 @@ const Edit = () => {
             <ClearMomentDialog onConfirm={onClear}>
               {({ openDialog }) => (
                 <Button
-                  size={[null, '2rem']}
+                  size={[null, '1.875rem']}
                   spacing={[0, 20]}
                   bgColor="white"
                   disabled={isSubmitting}

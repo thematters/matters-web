@@ -1,7 +1,11 @@
 .header {
   @mixin flex-center-space-between;
 
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-global-header);
   padding: var(--sp16);
+  background: var(--color-white);
 
   & .left {
     @mixin flex-center-start;

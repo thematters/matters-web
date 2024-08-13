@@ -51,7 +51,7 @@ const NavPopover: React.FC = () => {
               weight="normal"
               placement="bottom"
             >
-              <FormattedMessage defaultMessage="Articles" id="3KNMbJ" />
+              <FormattedMessage defaultMessage="Article" id="jx7Hn3" />
             </TextIcon>
           </Card>
         </li>

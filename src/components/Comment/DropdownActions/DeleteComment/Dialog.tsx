@@ -118,17 +118,33 @@ const DeleteCommentDialog = ({
       >
         <Dialog.Header
           title={
-            <FormattedMessage defaultMessage="Delete comment" id="wOZRKW" />
+            isMoment ? (
+              <FormattedMessage
+                defaultMessage="Delete comment"
+                description="Moment"
+                id="q192Fl"
+              />
+            ) : (
+              <FormattedMessage defaultMessage="Delete comment" id="wOZRKW" />
+            )
           }
         />
 
         <Dialog.Content>
           <Dialog.Content.Message>
             <p>
-              <FormattedMessage
-                defaultMessage="After deletion, the comment will be removed immediately"
-                id="wLSBAX"
-              />
+              {isMoment ? (
+                <FormattedMessage
+                  defaultMessage="After deletion, the comment will be removed immediately"
+                  description="Moment"
+                  id="VdxjkY"
+                />
+              ) : (
+                <FormattedMessage
+                  defaultMessage="After deletion, the comment will be removed immediately"
+                  id="wLSBAX"
+                />
+              )}
             </p>
           </Dialog.Content.Message>
         </Dialog.Content>

@@ -230,7 +230,7 @@ const MomentForm = () => {
     if (editor && isEditing) {
       editor.commands.focus('end')
     }
-  }, [editor, isEditing, content])
+  }, [editor, isEditing])
 
   if (!isEditing) {
     return (

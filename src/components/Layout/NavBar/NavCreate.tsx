@@ -46,7 +46,6 @@ export const NavCreate = () => {
     <Dropdown
       arrow={true}
       onHidden={closeMomentBanner}
-      onClickOutside={closeMomentBanner}
       visible={showMomentBanner}
       content={<NavBanner />}
       placement="top"

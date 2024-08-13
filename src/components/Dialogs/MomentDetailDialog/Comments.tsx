@@ -109,7 +109,11 @@ const Comments = ({ moment }: CommentsProps) => {
         <>
           <section className={styles.title} ref={titleRef}>
             <span>
-              <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
+              <FormattedMessage
+                defaultMessage="Comment"
+                description="src/components/Dialogs/MomentDetailDialog/Comments.tsx"
+                id="3raREe"
+              />
             </span>
             <span className={styles.count}>
               &nbsp;{activeCommentsEdges.length}
