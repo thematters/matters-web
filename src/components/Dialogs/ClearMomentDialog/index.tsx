@@ -43,14 +43,14 @@ const BaseDialog = ({ onConfirm, children }: ClearMomentDialogProps) => {
           btns={
             <Dialog.RoundedButton
               text={<FormattedMessage defaultMessage="Clear" id="/GCoTA" />}
-              color={'green'}
+              color="red"
               onClick={onClick}
             />
           }
           smUpBtns={
             <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Clear" id="/GCoTA" />}
-              color={'green'}
+              color="red"
               onClick={onClick}
             />
           }
