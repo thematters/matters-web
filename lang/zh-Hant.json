@@ -3101,6 +3101,10 @@
     "defaultMessage": "請登入該帳戶解綁錢包後再試",
     "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
+  "rsdUz2": {
+    "defaultMessage": "喜歡你的留言",
+    "description": "MOMENT"
+  },
   "ruZqtT": {
     "defaultMessage": "僅供輸入 {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} 個字元"
   },
