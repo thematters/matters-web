@@ -10,6 +10,7 @@ export default gql`
     $password: String
     $chain: Chain
     $txHash: String
+    $id: ID
   ) {
     payTo(
       input: {
@@ -21,6 +22,7 @@ export default gql`
         password: $password
         chain: $chain
         txHash: $txHash
+        id: $id
       }
     ) {
       transaction {
