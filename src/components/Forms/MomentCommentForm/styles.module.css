@@ -22,10 +22,16 @@
   height: 1.375rem;
   overflow: scroll;
 
-  & :global(.ProseMirror),
-  & :global(.tiptap) {
-    min-height: 1.375rem;
-    max-height: 1.375rem;
+  &.default {
+    & :global(.ProseMirror),
+    & :global(.tiptap) {
+      min-height: 1.375rem;
+      max-height: 1.375rem;
+
+      & p {
+        line-height: 1.375rem;
+      }
+    }
   }
 
   &.focus {
