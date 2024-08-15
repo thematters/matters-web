@@ -22,6 +22,7 @@ interface ContentProps {
   limit?: number
   textIndent?: boolean
   isRichShow?: boolean
+  expandable?: boolean
 }
 
 const fragments = {
@@ -52,6 +53,7 @@ export const CommentContent = ({
   limit = 5,
   textIndent = false,
   isRichShow = true,
+  expandable = true,
 }: ContentProps) => {
   const { lang } = useContext(LanguageContext)
   const { content, state } = comment
@@ -92,16 +94,28 @@ export const CommentContent = ({
   if (state === 'active') {
     return (
       <>
-        <Expandable
-          content={content}
-          limit={limit}
-          isRichShow={isRichShow}
-          bgColor={bgColor}
-          textIndent={textIndent}
-          size={size}
-          collapseable={false}
-          isCommentOrMoment
-        >
+        {expandable && (
+          <Expandable
+            content={content}
+            limit={limit}
+            isRichShow={isRichShow}
+            bgColor={bgColor}
+            textIndent={textIndent}
+            size={size}
+            collapseable={false}
+            isCommentOrMoment
+          >
+            <section
+              className={`${contentClasses} u-content-comment`}
+              dangerouslySetInnerHTML={{
+                __html: content || '',
+              }}
+              onClick={captureClicks}
+              data-test-id={TEST_ID.COMMENT_CONETNT}
+            />
+          </Expandable>
+        )}
+        {!expandable && (
           <section
             className={`${contentClasses} u-content-comment`}
             dangerouslySetInnerHTML={{
@@ -110,7 +124,7 @@ export const CommentContent = ({
             onClick={captureClicks}
             data-test-id={TEST_ID.COMMENT_CONETNT}
           />
-        </Expandable>
+        )}
       </>
     )
   }

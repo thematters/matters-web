@@ -72,9 +72,11 @@ export const MomentDigestFeed = ({
               <Icon icon={IconDot} color="greyLight" size={20} />
             </section>
           )}
-          <LinkWrapper {...momentDetailPath}>
-            <DateTime date={createdAt} color="grey" />
-          </LinkWrapper>
+          <section>
+            <LinkWrapper {...momentDetailPath}>
+              <DateTime date={createdAt} color="grey" />
+            </LinkWrapper>
+          </section>
         </header>
         {!!content && (
           <section

@@ -187,6 +187,7 @@ const MomentCommentForm = ({
   const contentClasses = classNames({
     [styles.content]: true,
     [styles.focus]: editing,
+    [styles.default]: !editing,
   })
 
   const handleFocus = () => {

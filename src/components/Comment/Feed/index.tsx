@@ -52,6 +52,8 @@ const BaseCommentFeed = ({
     comment.node.__typename === 'Moment'
       ? comment.node
       : undefined
+
+  const isMoment = comment.node.__typename === 'Moment'
   const nodeId = parentComment ? `${parentComment.id}-${id}` : id
 
   const submitCallback = () => {
@@ -117,7 +119,12 @@ const BaseCommentFeed = ({
       </header>
 
       <section className={contentClasses}>
-        <CommentContent comment={comment} size={15} limit={5} />
+        <CommentContent
+          comment={comment}
+          size={15}
+          limit={5}
+          expandable={!isMoment}
+        />
 
         <FooterActions
           comment={comment}

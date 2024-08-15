@@ -58,7 +58,7 @@
 }
 
 .contentContainer {
-  margin-top: var(--sp12);
+  margin-top: var(--sp8);
 
   &.spacingLeft {
     margin-left: var(--sp48);

@@ -3101,6 +3101,10 @@
     "defaultMessage": "Sign in to that account to unlink it then try again",
     "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
+  "rsdUz2": {
+    "defaultMessage": "liked your comment",
+    "description": "MOMENT"
+  },
   "ruZqtT": {
     "defaultMessage": "Must be between {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} characters long."
   },
@@ -3184,6 +3188,10 @@
   },
   "u5aHb4": {
     "defaultMessage": "Copy Link"
+  },
+  "u9LYjQ": {
+    "defaultMessage": "Comment has been deleted",
+    "description": "Moment"
   },
   "uJkv2X": {
     "defaultMessage": "Edit Tag"
