@@ -15,6 +15,7 @@ import {
   Button,
   SpinnerBlock,
   TextIcon,
+  toast,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -137,6 +138,16 @@ const MomentCommentForm = ({
           const detail = {
             comment: newComment,
           }
+
+          toast.success({
+            message: (
+              <FormattedMessage
+                defaultMessage="Published"
+                description="src/components/Forms/MomentCommentForm/index.tsx"
+                id="PB/iK6"
+              />
+            ),
+          })
 
           window.dispatchEvent(
             new CustomEvent(UPDATE_NEWEST_MOMENT_COMMENT, {
