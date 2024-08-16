@@ -35,7 +35,11 @@ type FormDraft = {
   assets?: MomentAsset[]
 }
 
-const MomentForm = () => {
+type MomentFormProps = {
+  setFirstRendered?: (firstRendered: boolean) => void
+}
+
+const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const [putMoment] = useMutation<PutMomentMutation>(PUT_MOMENT, undefined, {
@@ -43,6 +47,12 @@ const MomentForm = () => {
   })
 
   const [isEditing, setEditing] = useState(false)
+
+  useEffect(() => {
+    if (setFirstRendered) {
+      setFirstRendered(true)
+    }
+  }, [])
 
   useEventListener(OPEN_MOMENT_FORM, () => {
     setEditing(true)
