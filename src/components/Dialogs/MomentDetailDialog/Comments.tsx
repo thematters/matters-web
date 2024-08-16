@@ -2,7 +2,11 @@ import gql from 'graphql-tag'
 import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { UPDATE_NEWEST_MOMENT_COMMENT } from '~/common/enums'
+import {
+  COMMENT_FEED_ID_PREFIX,
+  UPDATE_NEWEST_MOMENT_COMMENT,
+} from '~/common/enums'
+import { highlightComment } from '~/common/utils/comment'
 import {
   EmptyComment,
   InfiniteScroll,
@@ -42,7 +46,9 @@ interface CommentsProps {
 const Comments = ({ moment }: CommentsProps) => {
   const intl = useIntl()
   const { comments } = moment
-  const [newestCommentIds, setNewestCommentIds] = useState<string[]>([])
+  const [newestCommentId, setNewestCommentId] = useState<string | undefined>(
+    undefined
+  )
   const titleRef = useRef<HTMLDivElement>(null)
   const { ref, setReadyJump } = useJumpToComment({
     fullSpacing: true,
@@ -52,39 +58,44 @@ const Comments = ({ moment }: CommentsProps) => {
     setReadyJump(true)
   }, [])
 
+  useEffect(() => {
+    if (!newestCommentId) {
+      return
+    }
+
+    if (!ref.current) {
+      return
+    }
+
+    const selector = `#${COMMENT_FEED_ID_PREFIX}${newestCommentId}`
+    const targetElement = ref.current.querySelector(selector)
+    if (!targetElement) {
+      return
+    }
+
+    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+    setTimeout(
+      () => highlightComment(targetElement as HTMLElement, true, true),
+      100
+    )
+  }, [newestCommentId])
+
   useEventListener(
     UPDATE_NEWEST_MOMENT_COMMENT,
     (payload: { [key: string]: any }) => {
       const comment = payload?.comment
-      setNewestCommentIds([comment.id, ...newestCommentIds])
+      setNewestCommentId(comment.id)
     }
   )
 
-  useEffect(() => {
-    if (newestCommentIds.length > 0 && titleRef.current) {
-      const commentTitle = titleRef.current
-
-      commentTitle?.scrollIntoView({ behavior: 'smooth' })
-    }
-  }, [newestCommentIds.length])
-
   const activeCommentsEdges =
     comments.edges?.filter(({ node }) => node.state === 'active') || []
-  const newestComments = activeCommentsEdges
-    .filter(({ node }) => newestCommentIds.indexOf(node.id) > -1)
-    .reverse()
 
   const CommentsList = (
     <>
-      {newestComments &&
-        newestComments.map(({ node }) => (
-          <List.Item key={node.id}>
-            <CommentFeed comment={node} hasReply spacingLeft />
-          </List.Item>
-        ))}
       {activeCommentsEdges.map(
         ({ node }) =>
-          newestCommentIds.findIndex((id) => id === node.id) === -1 &&
           node.state !== 'archived' && (
             <List.Item key={node.id}>
               <CommentFeed comment={node} hasReply spacingLeft />
