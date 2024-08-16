@@ -30,8 +30,7 @@
 /* layout */
 .intro {
   & img {
-    align-self: center;
-    justify-self: center;
+    place-self: center center;
   }
 
   & .content,

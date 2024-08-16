@@ -246,8 +246,8 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         {...(role
           ? { ['role']: role }
           : !disabled
-          ? { ['role']: 'button' }
-          : {})}
+            ? { ['role']: 'button' }
+            : {})}
       >
         {children}
       </section>

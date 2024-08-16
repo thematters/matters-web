@@ -257,8 +257,8 @@ const TagDetailContainer = () => {
   const tagId = isRawGlobalId
     ? param
     : numberId
-    ? toGlobalId({ type: 'Tag', id: numberId })
-    : '' // undefined
+      ? toGlobalId({ type: 'Tag', id: numberId })
+      : '' // undefined
 
   /**
    * Data Fetching

@@ -1,4 +1,4 @@
-import contentHash from '@ensdomains/content-hash'
+import { encode as contentHashEncode } from '@ensdomains/content-hash'
 import { Fragment, useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { namehash } from 'viem/ens'
@@ -76,7 +76,7 @@ const LinkENS = ({
     functionName: 'setContenthash',
     args: [
       namehash(ensName || ''),
-      !!ipnsHash && '0x' + contentHash.encode('ipns-ns', ipnsHash),
+      !!ipnsHash && '0x' + contentHashEncode('ipns', ipnsHash),
     ] as [`0x${string}`, `0x${string}`],
   })
   const {

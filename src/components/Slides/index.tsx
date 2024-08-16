@@ -40,7 +40,6 @@ export const Slides: React.FC<React.PropsWithChildren<SlidesProps>> & {
 
   const [emblaRef, emblaApi] = useEmblaCarousel({
     dragFree: true,
-    draggable: true,
     loop: false,
     containScroll: 'trimSnaps',
   })
