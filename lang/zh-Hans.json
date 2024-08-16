@@ -1593,6 +1593,10 @@
     "defaultMessage": "前往签署",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
+  "PB/iK6": {
+    "defaultMessage": "留言已发布",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "登录密码",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"

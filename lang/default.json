@@ -1593,6 +1593,10 @@
     "defaultMessage": "Go to sign",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
+  "PB/iK6": {
+    "defaultMessage": "Published",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"

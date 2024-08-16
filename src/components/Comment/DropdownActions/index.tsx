@@ -206,6 +206,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
     comment.node.__typename === 'Moment'
       ? comment.node
       : undefined
+
+  const isMoment = comment.node.__typename === 'Moment'
   const targetAuthor = node?.author
 
   const isTargetAuthor = viewer.id === targetAuthor?.id
@@ -215,7 +217,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   const controls = {
     hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
-    hasDelete: !!(isCommentAuthor && isActive),
+    hasDelete: (isCommentAuthor || (isTargetAuthor && isMoment)) && isActive,
     hasReport: !isCommentAuthor,
   }
 
