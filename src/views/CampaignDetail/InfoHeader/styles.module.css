@@ -38,10 +38,6 @@
   line-height: 2.25rem;
 }
 
-.viewMore {
-  font-size: 0;
-}
-
 .meta {
   @mixin flex-center-space-between;
 
@@ -51,15 +47,6 @@
 
   & .left {
     @mixin flex-start-center;
-  }
-
-  & .dot,
-  & .viewMore {
-    display: none;
-
-    @media (--sm-up) {
-      display: inline;
-    }
   }
 
   & .period {
@@ -79,13 +66,6 @@
   @mixin flex-center-start;
 
   margin-top: var(--sp8);
-
-  @media (--sm-up) {
-    & .dot,
-    & .viewMore {
-      display: none;
-    }
-  }
 }
 
 .mobileApply {
