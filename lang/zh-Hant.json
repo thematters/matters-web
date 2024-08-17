@@ -1554,7 +1554,7 @@
     "defaultMessage": "換一批"
   },
   "Pq/7m5": {
-    "defaultMessage": "晚鳥參與處理中",
+    "defaultMessage": "晚鳥參與處理中⋯",
     "description": "type:join"
   },
   "PtV68+": {
@@ -1700,6 +1700,9 @@
   },
   "Sfql0+": {
     "defaultMessage": "恭喜獲得七日書大滿貫"
+  },
+  "Sj+TN8": {
+    "defaultMessage": "公告"
   },
   "SuRTsQ": {
     "defaultMessage": "註冊 ISCN"
@@ -2544,7 +2547,7 @@
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "jLkKbI": {
-    "defaultMessage": "報名處理中",
+    "defaultMessage": "報名處理中⋯",
     "description": "type:apply"
   },
   "jiB0Z2": {

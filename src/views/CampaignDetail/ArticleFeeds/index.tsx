@@ -6,7 +6,7 @@ import { ArticleFeedsTabsCampaignFragment } from '~/gql/graphql'
 
 import MainFeed from './MainFeed'
 import styles from './styles.module.css'
-import ArticleFeedsTabs, { CampaignFeedType, LATEST_FEED_TYPE } from './Tabs'
+import ArticleFeedsTabs, { CampaignFeedType, FEED_TYPE_ALL } from './Tabs'
 
 const ArticleFeeds = ({
   campaign,
@@ -17,11 +17,11 @@ const ArticleFeeds = ({
   const qsType = getQuery('type') as CampaignFeedType
 
   const [feedType, setFeedType] = useState<CampaignFeedType>(
-    qsType || LATEST_FEED_TYPE
+    qsType || FEED_TYPE_ALL
   )
 
   const changeFeed = (newType: CampaignFeedType) => {
-    setQuery('type', newType === LATEST_FEED_TYPE ? '' : newType)
+    setQuery('type', newType === FEED_TYPE_ALL ? '' : newType)
     setFeedType(newType)
   }
 

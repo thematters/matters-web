@@ -10,7 +10,8 @@ import styles from './styles.module.css'
 
 export type CampaignFeedType = string
 
-export const LATEST_FEED_TYPE = 'latest'
+export const FEED_TYPE_ALL = 'all'
+export const FEED_TYPE_ANNOUNCEMENT = 'announcement'
 
 interface ArticleFeedsTabsProps {
   feedType: CampaignFeedType
@@ -37,17 +38,17 @@ const ArticleFeedsTabs = ({
     <section className={styles.tabs}>
       <SquareTabs sticky>
         <SquareTabs.Tab
-          selected={feedType === LATEST_FEED_TYPE}
+          selected={feedType === FEED_TYPE_ALL}
           onClick={() => {
-            setFeedType(LATEST_FEED_TYPE)
+            setFeedType(FEED_TYPE_ALL)
 
             analytics.trackEvent('click_button', {
-              type: `campaign_detail_tab_${LATEST_FEED_TYPE}` as `campaign_detail_tab_${string}`,
+              type: `campaign_detail_tab_${FEED_TYPE_ALL}` as `campaign_detail_tab_${string}`,
               pageType: 'campaign_detail',
             })
           }}
         >
-          <FormattedMessage defaultMessage="Latest" id="adThp5" />
+          <FormattedMessage defaultMessage="All" id="zQvVDJ" />
         </SquareTabs.Tab>
 
         {[...stages].reverse().map((stage) =>
@@ -69,13 +70,36 @@ const ArticleFeedsTabs = ({
                   lang === 'zh_hans'
                     ? 'nameZhHans'
                     : lang === 'zh_hant'
-                    ? 'nameZhHant'
-                    : 'nameEn'
+                      ? 'nameZhHant'
+                      : 'nameEn'
                 ]
               }
             </SquareTabs.Tab>
           ) : null
         )}
+
+        <SquareTabs.Tab
+          selected={feedType === FEED_TYPE_ANNOUNCEMENT}
+          onClick={() => {
+            setFeedType(FEED_TYPE_ANNOUNCEMENT)
+
+            analytics.trackEvent('click_button', {
+              type: `campaign_detail_tab_${FEED_TYPE_ANNOUNCEMENT}` as `campaign_detail_tab_${string}`,
+              pageType: 'campaign_detail',
+            })
+          }}
+          textColor="goldPress"
+          bgColor={
+            feedType === FEED_TYPE_ANNOUNCEMENT ? 'warnYellow' : 'topUpYellow'
+          }
+          bgActiveColor={
+            feedType === FEED_TYPE_ANNOUNCEMENT
+              ? undefined
+              : 'topUpYellowDarker'
+          }
+        >
+          <FormattedMessage defaultMessage="Announcement" id="Sj+TN8" />
+        </SquareTabs.Tab>
       </SquareTabs>
     </section>
   )

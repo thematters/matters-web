@@ -9,6 +9,7 @@ import {
   Empty,
   Icon,
   InfiniteScroll,
+  LanguageContext,
   List,
   QueryError,
   SpinnerBlock,
@@ -18,25 +19,46 @@ import {
 } from '~/components'
 import { CampaignArticlesPublicQuery } from '~/gql/graphql'
 
-import { CampaignFeedType, LATEST_FEED_TYPE } from '../Tabs'
+import { CampaignFeedType, FEED_TYPE_ALL } from '../Tabs'
 import { CAMPAIGN_ARTICLES_PRIVATE, CAMPAIGN_ARTICLES_PUBLIC } from './gql'
 
 interface MainFeedProps {
   feedType: CampaignFeedType
 }
 
+export type CampaignArticlesPublicQueryArticle = NonNullable<
+  NonNullable<
+    NonNullable<CampaignArticlesPublicQuery['campaign']>['articles']
+  >['edges']
+>[number]['node']
+
+const getArticleStageName = (
+  article: CampaignArticlesPublicQueryArticle,
+  lang: string
+) => {
+  const stage = article.campaigns[0]?.stage
+
+  if (!stage) {
+    return ''
+  }
+
+  return stage[
+    `name${lang === 'en' ? 'En' : lang === 'zh-Hans' ? 'ZhHans' : 'ZhHant'}`
+  ]
+}
+
 const MainFeed = ({ feedType }: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
+  const isAll = feedType === FEED_TYPE_ALL
 
   const { data, loading, error, fetchMore, networkStatus, client } =
     usePublicQuery<CampaignArticlesPublicQuery>(CAMPAIGN_ARTICLES_PUBLIC, {
       variables: {
         shortHash,
-        ...(feedType !== LATEST_FEED_TYPE
-          ? { filter: { stage: feedType } }
-          : {}),
+        ...(!isAll ? { filter: { stage: feedType } } : {}),
       },
       notifyOnNetworkStatusChange: true,
     })
@@ -131,6 +153,7 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
             <List.Item>
               <ArticleDigestFeed
                 article={node}
+                label={isAll && <span>{getArticleStageName(node, lang)}</span>}
                 onClick={() => {
                   analytics.trackEvent('click_feed', {
                     type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
