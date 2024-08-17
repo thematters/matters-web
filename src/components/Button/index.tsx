@@ -59,10 +59,14 @@ type ButtonColor =
   | 'greenDark'
   | 'green'
   | 'gold'
+  | 'goldPress'
   | 'red'
   | 'redDark'
   | 'likecoinGreen'
   | 'yellowLighter'
+  | 'warnYellow'
+  | 'topUpYellow'
+  | 'topUpYellowDarker'
   | 'goldLinearGradient'
 
 type ButtonTextColor = Extract<
@@ -72,6 +76,7 @@ type ButtonTextColor = Extract<
   | 'black'
   | 'green'
   | 'gold'
+  | 'goldPress'
   | 'red'
   | 'grey'
   | 'greyDarker'
@@ -95,6 +100,8 @@ export type ButtonBgColor = Extract<
   | 'halfBlack'
   | 'black'
   | 'yellowLighter'
+  | 'warnYellow'
+  | 'topUpYellow'
   | 'goldLinearGradient'
 >
 
@@ -107,6 +114,7 @@ type ButtonBgActiveColor = Extract<
   | 'green'
   | 'gold'
   | 'red'
+  | 'topUpYellowDarker'
 >
 
 type ButtonBorderActiveColor = Extract<

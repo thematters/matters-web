@@ -32,6 +32,10 @@ span.container {
   color: var(--color-matters-gold);
 }
 
+.textGoldPress {
+  color: var(--color-matters-gold-press);
+}
+
 .textRed {
   color: var(--color-negative-red);
 }
@@ -380,6 +384,18 @@ span.container {
   }
 }
 
+.bgTopUpYellow {
+  & .hotarea {
+    background: var(--color-top-up-yellow);
+  }
+}
+
+.bgWarnYellow {
+  & .hotarea {
+    background: var(--color-warn-yellow);
+  }
+}
+
 .bgGoldLinearGradient {
   & .hotarea {
     background: linear-gradient(93.62deg, #cda555 2.8%, #b48527 93%);
@@ -448,6 +464,15 @@ span.container {
   &:focus {
     & .hotarea {
       background: var(--color-negative-red);
+    }
+  }
+}
+
+.bgActiveTopUpYellowDarker {
+  &:hover,
+  &:focus {
+    & .hotarea {
+      background: var(--color-top-up-yellow-darker);
     }
   }
 }
