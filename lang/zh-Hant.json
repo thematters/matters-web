@@ -439,9 +439,6 @@
   "5sg7KC": {
     "defaultMessage": "密碼"
   },
-  "5y5rID": {
-    "defaultMessage": "我們將盡快處理你的申請，敬請期待活動開跑！"
-  },
   "6+eeJ4": {
     "defaultMessage": "可使用小寫英文、數字及下劃線",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -753,6 +750,9 @@
   "B2As08": {
     "defaultMessage": "沒有更多",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
+  },
+  "B9IFMF": {
+    "defaultMessage": "好的，我報名"
   },
   "BDbgCL": {
     "defaultMessage": "標題 3"
@@ -1077,9 +1077,6 @@
   },
   "HAlOn1": {
     "defaultMessage": "用戶名"
-  },
-  "HB2VOx": {
-    "defaultMessage": "系统或连线异常，请刷新页面后重新点击报名参加"
   },
   "HBxXD/": {
     "defaultMessage": "版權聲明"
@@ -1964,6 +1961,9 @@
   "XZ8IJ3": {
     "defaultMessage": "完成修改後，新版會再次發佈到 IPFS，你可以從文章標題下的「IPFS」進入查看歷史版本。"
   },
+  "XbS4AZ": {
+    "defaultMessage": "公告"
+  },
   "Xd0J7Y": {
     "defaultMessage": "開放社區"
   },
@@ -2190,9 +2190,6 @@
   },
   "beLe/F": {
     "defaultMessage": "廣播"
-  },
-  "buf5vO": {
-    "defaultMessage": "活動公告"
   },
   "c/z318": {
     "defaultMessage": "郵件地址或密碼錯誤",
@@ -2672,6 +2669,9 @@
     "defaultMessage": "你還沒有邀請任何用戶喔！點擊新增邀請，添加站內或站外朋友加入圍爐贈與對方免費資格的固定時長",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
   },
+  "lO7wKc": {
+    "defaultMessage": "再想想"
+  },
   "lT6Dt8": {
     "defaultMessage": "確認辭去"
   },
@@ -2810,9 +2810,6 @@
   "oGiO//": {
     "defaultMessage": "插入音訊"
   },
-  "oLOus+": {
-    "defaultMessage": "報名申請已遞交 🎉"
-  },
   "ob+HDS": {
     "defaultMessage": "馬上逛逛"
   },
@@ -2824,8 +2821,14 @@
     "defaultMessage": "追蹤中",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "on+DYO": {
+    "defaultMessage": "確認報名"
+  },
   "onDesU": {
     "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
+  },
+  "opxnPe": {
+    "defaultMessage": "現在報名，寫作之旅將於數天後開始，活動細則可查看 {eventLink}。（報名確認通常需要幾分鐘審核時間，之後你的頭像將出現在作者之中）"
   },
   "orIq4X": {
     "defaultMessage": "支持超過 100 次"

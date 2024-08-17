@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Dialog, toast, useDialogSwitch, useMutation } from '~/components'
@@ -59,29 +58,6 @@ const ApplyCampaignDialog = ({
     }
   }
 
-  const onApplyDuringPeriod = async () => {
-    try {
-      await applyCampaign()
-    } catch (error) {
-      toast.error({
-        message: (
-          <FormattedMessage
-            defaultMessage="System or connection abnormality, please refresh the page and click “Apply” again."
-            id="HB2VOx"
-          />
-        ),
-      })
-      closeDialog()
-    }
-  }
-
-  // auto apply
-  useEffect(() => {
-    if (!isInApplicationPeriod) return
-
-    onApplyDuringPeriod()
-  }, [isInApplicationPeriod])
-
   return (
     <>
       {children({ openDialog })}
@@ -91,8 +67,8 @@ const ApplyCampaignDialog = ({
           title={
             isInApplicationPeriod ? (
               <FormattedMessage
-                defaultMessage="Application has been submitted 🎉"
-                id="oLOus+"
+                defaultMessage="Confirm application"
+                id="on+DYO"
               />
             ) : (
               <FormattedMessage defaultMessage="Confirm to join" id="ErV/vT" />
@@ -105,8 +81,22 @@ const ApplyCampaignDialog = ({
             <p>
               {isInApplicationPeriod ? (
                 <FormattedMessage
-                  defaultMessage="We will review your application shortly, stay tuned for the event!"
-                  id="5y5rID"
+                  defaultMessage="Apply now. The writing journey will begin in a few days. For event details, please check the {eventLink}. (Application confirmation usually takes a few minutes for review. Your avatar will then appear among the writers.)"
+                  id="opxnPe"
+                  values={{
+                    eventLink: (
+                      <a
+                        href={campaign.link}
+                        className="u-link-green"
+                        target="_blank"
+                      >
+                        <FormattedMessage
+                          defaultMessage="Event Infomation"
+                          id="XbS4AZ"
+                        />
+                      </a>
+                    ),
+                  }}
                 />
               ) : (
                 <FormattedMessage
@@ -121,22 +111,28 @@ const ApplyCampaignDialog = ({
         <Dialog.Footer
           btns={
             <>
-              {!isInApplicationPeriod && (
-                <Dialog.RoundedButton
-                  text={
+              <Dialog.RoundedButton
+                text={
+                  isInApplicationPeriod ? (
+                    <FormattedMessage defaultMessage="Yes, apply" id="B9IFMF" />
+                  ) : (
                     <FormattedMessage
                       defaultMessage="Confirm"
                       description="src/views/CampaignDetail/Apply/Dialog/index.tsx"
                       id="f5jWMJ"
                     />
-                  }
-                  loading={loading}
-                  onClick={() => onApplyAfterPeriod()}
-                />
-              )}
+                  )
+                }
+                loading={loading}
+                onClick={() => onApplyAfterPeriod()}
+              />
               <Dialog.RoundedButton
                 text={
-                  <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+                  isInApplicationPeriod ? (
+                    <FormattedMessage defaultMessage="Not yet" id="lO7wKc" />
+                  ) : (
+                    <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
+                  )
                 }
                 color="greyDarker"
                 onClick={closeDialog}
@@ -145,38 +141,33 @@ const ApplyCampaignDialog = ({
           }
           smUpBtns={
             <>
-              {isInApplicationPeriod && (
-                <Dialog.TextButton
-                  text={
-                    <FormattedMessage defaultMessage="Understood" id="GcvLBC" />
-                  }
-                  color="greyDarker"
-                  onClick={closeDialog}
-                />
-              )}
-              {!isInApplicationPeriod && (
-                <Dialog.TextButton
-                  text={
+              <Dialog.TextButton
+                text={
+                  isInApplicationPeriod ? (
+                    <FormattedMessage defaultMessage="Not yet" id="lO7wKc" />
+                  ) : (
                     <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
-                  }
-                  color="greyDarker"
-                  onClick={closeDialog}
-                />
-              )}
-              {!isInApplicationPeriod && (
-                <Dialog.TextButton
-                  text={
+                  )
+                }
+                color="greyDarker"
+                onClick={closeDialog}
+              />
+              <Dialog.TextButton
+                text={
+                  isInApplicationPeriod ? (
+                    <FormattedMessage defaultMessage="Yes, apply" id="B9IFMF" />
+                  ) : (
                     <FormattedMessage
                       defaultMessage="Confirm"
                       description="src/views/CampaignDetail/Apply/Dialog/index.tsx"
                       id="f5jWMJ"
                     />
-                  }
-                  loading={loading}
-                  color="green"
-                  onClick={() => onApplyAfterPeriod()}
-                />
-              )}
+                  )
+                }
+                loading={loading}
+                color="green"
+                onClick={() => onApplyAfterPeriod()}
+              />
             </>
           }
         />
