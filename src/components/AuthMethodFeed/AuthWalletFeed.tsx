@@ -8,7 +8,7 @@ import { ReactComponent as IconWalletConnect } from '@/public/static/icons/24px/
 import { EXTERNAL_LINKS, GUIDE_LINKS } from '~/common/enums'
 import { PATHS } from '~/common/enums'
 import { analytics, WalletType } from '~/common/utils'
-import { Icon, LanguageContext, Spinner, SpinnerBlock } from '~/components'
+import { Icon, LanguageContext, SpinnerBlock } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -30,8 +30,8 @@ export const AuthWalletFeed: React.FC<Props> = ({
   back,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const { connectors, connect, pendingConnector } = useConnect()
-  const { address: account, isConnecting } = useAccount()
+  const { connectors, connect } = useConnect()
+  const { address: account } = useAccount()
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
   const [showLoading, setShowLoading] = useState(true)
 
@@ -39,10 +39,11 @@ export const AuthWalletFeed: React.FC<Props> = ({
   const walletConnectConnector = connectors.find(
     (c) => c.id === 'walletConnect'
   )
-  const isMetaMaskLoading =
-    isConnecting && pendingConnector?.id === injectedConnector?.id
-  const isWalletConnectLoading =
-    isConnecting && pendingConnector?.id === walletConnectConnector?.id
+
+  // const isMetaMaskLoading =
+  //   isConnecting && pendingConnector?.id === injectedConnector?.id
+  // const isWalletConnectLoading =
+  //   isConnecting && pendingConnector?.id === walletConnectConnector?.id
 
   // auto switch to next step if account is connected
   useEffect(() => {
@@ -83,11 +84,11 @@ export const AuthWalletFeed: React.FC<Props> = ({
               <Icon icon={IconMetaMask} size={22} />
             </span>
             <span className={styles.name}>MetaMask</span>
-            {isMetaMaskLoading && (
+            {/* {isMetaMaskLoading && (
               <span className={styles.right}>
                 <Spinner color="grey" size={22} />
               </span>
-            )}
+            )} */}
           </li>
         ) : (
           <a href={EXTERNAL_LINKS.METAMASK} target="_blank">
@@ -99,27 +100,29 @@ export const AuthWalletFeed: React.FC<Props> = ({
             </li>
           </a>
         )}
-        <li
-          className={itemClasses}
-          onClick={() => {
-            analytics.trackEvent('click_button', {
-              type: 'connectorWalletConnect',
-            })
-            setWalletType('WalletConnect')
-            connect({ connector: walletConnectConnector })
-          }}
-          role="button"
-        >
-          <span className={styles.icon}>
-            <Icon icon={IconWalletConnect} size={22} />
-          </span>
-          <span className={styles.name}>WalletConnect</span>
-          {isWalletConnectLoading && (
+        {walletConnectConnector && (
+          <li
+            className={itemClasses}
+            onClick={() => {
+              analytics.trackEvent('click_button', {
+                type: 'connectorWalletConnect',
+              })
+              setWalletType('WalletConnect')
+              connect({ connector: walletConnectConnector })
+            }}
+            role="button"
+          >
+            <span className={styles.icon}>
+              <Icon icon={IconWalletConnect} size={22} />
+            </span>
+            <span className={styles.name}>WalletConnect</span>
+            {/* {isWalletConnectLoading && (
             <span className={styles.right}>
               <Spinner color="grey" size={22} />
             </span>
-          )}
-        </li>
+          )} */}
+          </li>
+        )}
       </ul>
       <section className={styles.info}>
         {hasWalletExist && (

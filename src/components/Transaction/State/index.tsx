@@ -30,7 +30,7 @@ const State = ({ state, message, blockchainTx }: StateProps) => {
   }
 
   if (state === TransactionState.Succeeded && !!blockchainTx) {
-    const explorerUrl = explorers[blockchainTx.chain].url
+    const explorerUrl = explorers[blockchainTx.chain]
 
     return (
       <Button

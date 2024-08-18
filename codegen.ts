@@ -9,6 +9,9 @@ const config: CodegenConfig = {
   generates: {
     'src/gql/graphql.ts': {
       plugins: ['typescript', 'typescript-operations'],
+      config: {
+        ignoreEnumValuesFromSchema: true,
+      },
     },
   },
 }

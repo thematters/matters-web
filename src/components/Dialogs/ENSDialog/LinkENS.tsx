@@ -1,16 +1,16 @@
-import contentHash from '@ensdomains/content-hash'
+import { encode as contentHashEncode } from '@ensdomains/content-hash'
+import { waitForTransactionReceipt } from '@wagmi/core'
 import { Fragment, useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { namehash } from 'viem/ens'
 import {
   useAccount,
-  useContractWrite,
   useDisconnect,
   useEnsName,
   useEnsResolver,
-  usePrepareContractWrite,
+  useSimulateContract,
+  useWriteContract,
 } from 'wagmi'
-import { waitForTransaction } from 'wagmi/actions'
 
 import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
 import {
@@ -18,6 +18,7 @@ import {
   featureSupportedChains,
   PublicResolverABI,
   truncate,
+  wagmiConfig,
 } from '~/common/utils'
 import {
   Button,
@@ -70,34 +71,34 @@ const LinkENS = ({
 
   const [txConfirming, setTxConfirming] = useState<boolean>(false)
   const ipnsHash = user?.info.ipnsKey
-  const { config, error } = usePrepareContractWrite({
+  const { data, error } = useSimulateContract({
     account: resolverAddress,
     abi: PublicResolverABI,
     functionName: 'setContenthash',
     args: [
       namehash(ensName || ''),
-      !!ipnsHash && '0x' + contentHash.encode('ipns-ns', ipnsHash),
+      !!ipnsHash && '0x' + contentHashEncode('ipns', ipnsHash),
     ] as [`0x${string}`, `0x${string}`],
   })
   const {
     isError,
-    isLoading,
-    writeAsync: setContenthash,
-  } = useContractWrite(config)
+    isPending,
+    writeContractAsync: setContenthash,
+  } = useWriteContract()
 
   const linkIPNStoENS = async () => {
-    if (setContenthash) {
-      const tx = await setContenthash()
-      setTxConfirming(true)
-      await waitForTransaction({ hash: tx.hash })
-      setTxConfirming(false)
-      switchToComplete(tx.hash)
-      analytics.trackEvent('click_button', {
-        type: 'bind_ens_successfully',
-        pageType: 'user_profile',
-      })
-    }
+    const tx = await setContenthash(data!.request)
+    setTxConfirming(true)
+    await waitForTransactionReceipt(wagmiConfig, { hash: tx })
+    setTxConfirming(false)
+    switchToComplete(tx)
+    analytics.trackEvent('click_button', {
+      type: 'bind_ens_successfully',
+      pageType: 'user_profile',
+    })
   }
+
+  const disabled = !Boolean(data?.request)
 
   // go back to previous step if wallet is locked
   useEffect(() => {
@@ -293,6 +294,7 @@ const LinkENS = ({
           <Dialog.RoundedButton
             text={<FormattedMessage defaultMessage="Link ENS" id="3w3CC8" />}
             onClick={linkIPNStoENS}
+            disabled={disabled}
           />
         }
         smUpBtns={
@@ -301,7 +303,8 @@ const LinkENS = ({
 
             <Dialog.TextButton
               text={<FormattedMessage defaultMessage="Link ENS" id="3w3CC8" />}
-              loading={isLoading || txConfirming}
+              loading={isPending || txConfirming}
+              disabled={disabled}
             />
           </>
         }

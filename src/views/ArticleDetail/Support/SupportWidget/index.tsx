@@ -245,7 +245,7 @@ const SupportWidget = ({
                     }
                     htmlHref={
                       tx && showTx
-                        ? `${explorers[tx.chain].url}/tx/${tx.txHash}`
+                        ? `${explorers[tx.chain]}/tx/${tx.txHash}`
                         : undefined
                     }
                     htmlTarget={tx && showTx ? '_blank' : undefined}

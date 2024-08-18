@@ -118,8 +118,8 @@ export const LanguageProvider = ({
           language === UserLanguage.En
             ? 'Failed to edit, please try again.'
             : language === UserLanguage.ZhHans
-            ? '修改失败，请稍候重试'
-            : '修改失敗，請稍候重試',
+              ? '修改失败，请稍候重试'
+              : '修改失敗，請稍候重試',
       })
     }
   }

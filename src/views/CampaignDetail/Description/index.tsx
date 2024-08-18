@@ -23,8 +23,8 @@ const Description = ({
               lang === 'zh_hans'
                 ? 'descriptionZhHans'
                 : lang === 'zh_hant'
-                ? 'descriptionZhHant'
-                : 'descriptionEn'
+                  ? 'descriptionZhHant'
+                  : 'descriptionEn'
             ],
         }}
       />

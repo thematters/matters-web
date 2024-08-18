@@ -1,11 +1,12 @@
 import { useContext } from 'react'
+import { erc20Abi } from 'viem'
 import {
-  erc20ABI,
   useAccount,
   useBalance,
-  useContractRead,
-  useContractWrite,
-  usePrepareContractWrite,
+  useReadContract,
+  useReadContracts,
+  useSimulateContract,
+  useWriteContract,
 } from 'wagmi'
 
 import { contract } from '~/common/enums'
@@ -15,9 +16,9 @@ import { ViewerContext } from '~/components'
 export const useAllowanceUSDT = () => {
   const { address } = useAccount()
 
-  return useContractRead({
+  return useReadContract({
     address: contract.Optimism.tokenAddress,
-    abi: erc20ABI,
+    abi: erc20Abi,
     functionName: 'allowance',
     args: [address as `0x${string}`, contract.Optimism.curationAddress],
   })
@@ -32,11 +33,20 @@ export const useBalanceUSDT = ({
   const viewerEthAddress = viewer.info.ethAddress
   const targetNetwork = featureSupportedChains.curation[0]
 
-  return useBalance({
-    address: (addr || viewerEthAddress) as `0x${string}`,
-    token: (contract.Optimism.tokenAddress || '') as `0x${string}`,
-    chainId: targetNetwork.id,
-    cacheTime: 5_000,
+  const account = (addr || viewerEthAddress) as `0x${string}`
+  const tokenAddress = (contract.Optimism.tokenAddress || '') as `0x${string}`
+
+  return useReadContracts({
+    allowFailure: false,
+    contracts: [
+      {
+        address: tokenAddress,
+        abi: erc20Abi,
+        functionName: 'balanceOf',
+        args: [account],
+        chainId: targetNetwork.id,
+      },
+    ],
   })
 }
 
@@ -52,17 +62,18 @@ export const useBalanceEther = ({
   return useBalance({
     address: (addr || viewerEthAddress) as `0x${string}`,
     chainId: targetNetwork.id,
-    cacheTime: 5_000,
   })
 }
 
 export const useApproveUSDT = () => {
-  const { config } = usePrepareContractWrite({
+  const { data } = useSimulateContract({
     address: contract.Optimism.tokenAddress,
-    abi: erc20ABI,
+    abi: erc20Abi,
     functionName: 'approve',
     args: [contract.Optimism.curationAddress, MaxApprovedUSDTAmount],
   })
+  const simulateRequest = data?.request
+  const result = useWriteContract()
 
-  return useContractWrite(config)
+  return { ...result, simulateRequest }
 }

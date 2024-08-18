@@ -1,5 +1,5 @@
 import { FormattedMessage, useIntl } from 'react-intl'
-import { useContractRead } from 'wagmi'
+import { useReadContract } from 'wagmi'
 
 import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
 import { analytics, BillboardABI, featureSupportedChains } from '~/common/utils'
@@ -24,16 +24,15 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
   const network = featureSupportedChains.billboard[0]
 
   const intl = useIntl()
-  const { data, isError, isLoading } = useContractRead({
+  const { data, isError, isPending } = useReadContract({
     address,
     abi: BillboardABI,
     functionName: 'getBoard',
     chainId: network.id,
     args: [BigInt(id)],
-    cacheTime: 60_000,
   })
 
-  if (!id || isError || isLoading || !data || !data.contentURI) {
+  if (!id || isError || isPending || !data || !data.contentURI) {
     return null
   }
 

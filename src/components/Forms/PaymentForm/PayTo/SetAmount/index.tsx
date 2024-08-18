@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
+import { waitForTransactionReceipt } from '@wagmi/core'
 import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
@@ -13,7 +14,6 @@ import {
 import { FormattedMessage, useIntl } from 'react-intl'
 import { parseUnits } from 'viem'
 import { useAccount } from 'wagmi'
-import { waitForTransaction } from 'wagmi/actions'
 
 import {
   contract,
@@ -27,6 +27,7 @@ import {
   truncate,
   validateCurrency,
   validateDonationAmount,
+  wagmiConfig,
 } from '~/common/utils'
 import {
   Button,
@@ -152,8 +153,9 @@ const SetAmount: React.FC<FormProps> = ({
   } = useAllowanceUSDT()
   const {
     data: approveData,
-    isLoading: approving,
-    write: approveWrite,
+    isPending: approving,
+    writeContract: approveWrite,
+    simulateRequest: approveSimulateRewquest,
     error: approveError,
   } = useApproveUSDT()
   const { data: balanceUSDTData, error: balanceUSDTError } = useBalanceUSDT({
@@ -161,7 +163,9 @@ const SetAmount: React.FC<FormProps> = ({
   })
 
   const allowanceUSDT = allowanceData || 0n
-  const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
+  const balanceUSDT = parseFloat(
+    balanceUSDTData ? balanceUSDTData[0].toString() : '0'
+  )
   const balanceHKD = data?.viewer?.wallet.balance.HKD || 0
   const balanceLike = data?.viewer?.liker.total || 0
   const balance = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
@@ -244,8 +248,8 @@ const SetAmount: React.FC<FormProps> = ({
         id: 'XMpFQE',
       })
     : hasUSDTNetworkError && !isUserRejectedError
-    ? WALLET_ERROR_MESSAGES[lang].unknown
-    : ''
+      ? WALLET_ERROR_MESSAGES[lang].unknown
+      : ''
 
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (
@@ -277,12 +281,12 @@ const SetAmount: React.FC<FormProps> = ({
   // USDT approval
   useEffect(() => {
     ;(async () => {
-      if (approveData) {
-        setApproveConfirming(true)
-        await waitForTransaction({ hash: approveData.hash })
-        refetchAllowanceData()
-        setApproveConfirming(false)
-      }
+      if (!approveData) return
+
+      setApproveConfirming(true)
+      await waitForTransactionReceipt(wagmiConfig, { hash: approveData })
+      refetchAllowanceData()
+      setApproveConfirming(false)
     })()
   }, [approveData])
 
@@ -376,7 +380,7 @@ const SetAmount: React.FC<FormProps> = ({
     currency,
     formId,
     recipient,
-    isValid,
+    isValid: isValid,
     isSubmitting,
     isExceededAllowance,
     isBalanceInsufficient,
@@ -384,7 +388,7 @@ const SetAmount: React.FC<FormProps> = ({
     approving,
     approveConfirming,
     allowanceLoading,
-    approveWrite,
+    approveWrite: () => approveWrite(approveSimulateRewquest!),
     walletBalanceError,
     walletBalanceLoading,
     refetchWalletBalance: () => refetchWalletBalance(),

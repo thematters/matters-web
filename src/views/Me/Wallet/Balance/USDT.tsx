@@ -26,7 +26,9 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   const viewer = useContext(ViewerContext)
   const address = viewer.info.ethAddress
   const { data: balanceUSDTData } = useBalanceUSDT({})
-  const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
+  const balanceUSDT = parseFloat(
+    balanceUSDTData ? balanceUSDTData[0].toString() : '0'
+  )
 
   const classes = classNames({
     [styles.assetsItem]: true,

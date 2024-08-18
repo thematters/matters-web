@@ -1,7 +1,7 @@
-import contentHash from '@ensdomains/content-hash'
+import { encode as contentHashEncode } from '@ensdomains/content-hash'
 import { FormattedMessage } from 'react-intl'
 import { namehash } from 'viem/ens'
-import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
+import { useEnsName, useEnsResolver, useReadContract } from 'wagmi'
 
 import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
 import {
@@ -47,7 +47,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
     name: ensName as string,
     chainId: targetNetork.id,
   })
-  const { data: contenthashData, isSuccess } = useContractRead({
+  const { data: contenthashData, isSuccess } = useReadContract({
     address: resolverAddress,
     abi: PublicResolverABI,
     functionName: 'contenthash',
@@ -55,8 +55,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
     chainId: targetNetork.id,
   })
   const hasLinkedIPNS =
-    !!ipnsHash &&
-    '0x' + contentHash.encode('ipns-ns', ipnsHash) === contenthashData
+    !!ipnsHash && '0x' + contentHashEncode('ipns', ipnsHash) === contenthashData
   const hasLinkEnsButton =
     ensName && ipnsHash && isMe && !hasLinkedIPNS && isSuccess
 

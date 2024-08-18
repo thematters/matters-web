@@ -46,7 +46,9 @@ const USDTChoice: React.FC<FormProps> = ({
 
   const { data: balanceUSDTData, isLoading: balanceUSDTLoading } =
     useBalanceUSDT({})
-  const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
+  const balanceUSDT = parseFloat(
+    balanceUSDTData ? balanceUSDTData[0].toString() : '0'
+  )
 
   const curatorAddress = viewer.info.ethAddress
   const creatorAddress = recipient.info.ethAddress

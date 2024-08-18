@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/react-hooks'
-import contentHash from '@ensdomains/content-hash'
+import { encode as contentHashEncode } from '@ensdomains/content-hash'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { namehash } from 'viem/ens'
-import { useContractRead, useEnsName, useEnsResolver } from 'wagmi'
+import { useEnsName, useEnsResolver, useReadContract } from 'wagmi'
 
 import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
 import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
@@ -59,7 +59,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
     name: ensName as string,
     chainId: targetNetork.id,
   })
-  const { data: readData } = useContractRead({
+  const { data: readData } = useReadContract({
     address: resolverAddress,
     abi: PublicResolverABI,
     functionName: 'contenthash',
@@ -67,7 +67,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
     chainId: targetNetork.id,
   })
   const hasLinkedIPNS =
-    !!ipnsKey && '0x' + contentHash.encode('ipns-ns', ipnsKey) === readData
+    !!ipnsKey && '0x' + contentHashEncode('ipns', ipnsKey) === readData
   const displayIPNS = hasLinkedIPNS ? ensName : user.info.ipnsKey
 
   const intl = useIntl()

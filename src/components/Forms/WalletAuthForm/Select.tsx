@@ -14,7 +14,6 @@ import {
   LanguageContext,
   Layout,
   Media,
-  Spinner,
   TableView,
   TextIcon,
   ViewerContext,
@@ -89,23 +88,18 @@ const Select: React.FC<FormProps> = ({
   const isConnect = type === 'connect'
 
   const { disconnect } = useDisconnect()
-  const {
-    connectors,
-    connect,
-    error: connectError,
-    pendingConnector,
-  } = useConnect()
-  const { address: account, isConnecting } = useAccount()
+  const { connectors, connect, error: connectError } = useConnect()
+  const { address: account } = useAccount()
   const errorMessage = connectError?.message
 
   const injectedConnector = connectors.find((c) => c.id === 'metaMask')
   const walletConnectConnector = connectors.find(
     (c) => c.id === 'walletConnect'
   )
-  const isMetaMaskLoading =
-    isConnecting && pendingConnector?.id === injectedConnector?.id
-  const isWalletConnectLoading =
-    isConnecting && pendingConnector?.id === walletConnectConnector?.id
+  // const isMetaMaskLoading =
+  //   isConnecting && pendingConnector?.id === injectedConnector?.id
+  // const isWalletConnectLoading =
+  //   isConnecting && pendingConnector?.id === walletConnectConnector?.id
 
   // auto switch to next step if account is connected
   useEffect(() => {
@@ -216,7 +210,7 @@ const Select: React.FC<FormProps> = ({
                 connect({ connector: injectedConnector })
               }}
               role="button"
-              right={isMetaMaskLoading ? <Spinner color="grey" /> : null}
+              // right={isMetaMaskLoading ? <Spinner color="grey" /> : null}
             />
           ) : (
             <TableView.Cell
@@ -243,26 +237,28 @@ const Select: React.FC<FormProps> = ({
               role="button"
             />
           )}
-          <TableView.Cell
-            title={
-              <TextIcon
-                color="black"
-                icon={<Icon icon={IconWalletConnect} size={24} />}
-                size={16}
-                spacing={8}
-              >
-                WalletConnect
-              </TextIcon>
-            }
-            onClick={() => {
-              analytics.trackEvent('click_button', {
-                type: 'connectorWalletConnect',
-              })
-              connect({ connector: walletConnectConnector })
-            }}
-            role="button"
-            right={isWalletConnectLoading ? <Spinner color="grey" /> : null}
-          />
+          {walletConnectConnector && (
+            <TableView.Cell
+              title={
+                <TextIcon
+                  color="black"
+                  icon={<Icon icon={IconWalletConnect} size={24} />}
+                  size={16}
+                  spacing={8}
+                >
+                  WalletConnect
+                </TextIcon>
+              }
+              onClick={() => {
+                analytics.trackEvent('click_button', {
+                  type: 'connectorWalletConnect',
+                })
+                connect({ connector: walletConnectConnector })
+              }}
+              role="button"
+              // right={isWalletConnectLoading ? <Spinner color="grey" /> : null}
+            />
+          )}
         </TableView>
 
         <section className={styles.container}>

@@ -1,11 +1,11 @@
 import { useQuery } from '@apollo/react-hooks'
+import { waitForTransactionReceipt } from '@wagmi/core'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { parseUnits } from 'viem'
-import { useAccount, useContractWrite } from 'wagmi'
-import { waitForTransaction } from 'wagmi/actions'
+import { useAccount, useWriteContract } from 'wagmi'
 
 import { ReactComponent as IconCircleTimes } from '@/public/static/icons/24px/circle-times.svg'
 import {
@@ -14,7 +14,7 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_USDT_VISITOR,
 } from '~/common/enums'
-import { CurationABI } from '~/common/utils'
+import { CurationABI, wagmiConfig } from '~/common/utils'
 import {
   Dialog,
   Icon,
@@ -217,25 +217,7 @@ const USDTProcessingForm: React.FC<Props> = ({
 
   const [draftTxId, setDraftTxId] = useState<string>()
 
-  const {
-    data,
-    error,
-    isError,
-    write: curate,
-  } = useContractWrite({
-    address: contract.Optimism.curationAddress,
-    abi: CurationABI,
-    functionName: 'curate',
-    args: [
-      recipient.info.ethAddress as `0x${string}`,
-      contract.Optimism.tokenAddress,
-      parseUnits(
-        amount.toString() as `${number}`,
-        contract.Optimism.tokenDecimals
-      ),
-      `ipfs://${article?.dataHash}`,
-    ],
-  })
+  const { data, error, isError, writeContract: curate } = useWriteContract()
 
   const payToData = {
     amount,
@@ -256,7 +238,20 @@ const USDTProcessingForm: React.FC<Props> = ({
     }
 
     // send on-chain transaction
-    curate()
+    curate({
+      address: contract.Optimism.curationAddress,
+      abi: CurationABI,
+      functionName: 'curate',
+      args: [
+        recipient.info.ethAddress as `0x${string}`,
+        contract.Optimism.tokenAddress,
+        parseUnits(
+          amount.toString() as `${number}`,
+          contract.Optimism.tokenDecimals
+        ),
+        `ipfs://${article?.dataHash}`,
+      ],
+    })
   }
 
   const sendPayTo = async () => {
@@ -268,7 +263,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     await payTo({
       variables: {
         ...payToData,
-        txHash: data.hash,
+        txHash: data,
         id: draftTxId,
       },
       update: (cache, result) => {
@@ -283,11 +278,11 @@ const USDTProcessingForm: React.FC<Props> = ({
       },
     })
 
-    await waitForTransaction({ hash: data.hash })
+    await waitForTransactionReceipt(wagmiConfig, { hash: data })
 
     window.dispatchEvent(
       new CustomEvent(SUPPORT_SUCCESS_USDT_VISITOR, {
-        detail: { chain: CHAIN.OPTIMISM, txHash: data.hash },
+        detail: { chain: CHAIN.OPTIMISM, txHash: data },
       })
     )
 
