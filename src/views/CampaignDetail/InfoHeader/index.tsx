@@ -35,17 +35,27 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
             </section>
           )}
 
-          <h1 className={styles.name}>
-            {
-              campaign[
-                lang === 'zh_hans'
-                  ? 'nameZhHans'
-                  : lang === 'zh_hant'
-                    ? 'nameZhHant'
-                    : 'nameEn'
-              ]
-            }
-          </h1>
+          <section className={styles.title}>
+            <h1 className={styles.name}>
+              {
+                campaign[
+                  lang === 'zh_hans'
+                    ? 'nameZhHans'
+                    : lang === 'zh_hant'
+                      ? 'nameZhHant'
+                      : 'nameEn'
+                ]
+              }
+            </h1>
+
+            <section className={styles.apply}>
+              <Apply.Button
+                campaign={campaign}
+                size="sm"
+                onClick={openDialog}
+              />
+            </section>
+          </section>
 
           <section className={styles.meta}>
             <section className={styles.left}>
@@ -102,14 +112,6 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                   </span>
                 </span>
               )}
-            </section>
-
-            <section className={styles.right}>
-              <Apply.Button
-                campaign={campaign}
-                size="sm"
-                onClick={openDialog}
-              />
             </section>
           </section>
 
