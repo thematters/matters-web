@@ -6,7 +6,7 @@ import { useRef } from 'react'
 
 import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
-import { Media, useOutsideClick } from '~/components'
+import { Media, useNativeEventListener, useOutsideClick } from '~/components'
 
 import Handle from '../Handle'
 import styles from './styles.module.css'
@@ -94,6 +94,26 @@ const Inner: React.FC<
 
   useOutsideClick(node, handleClickOutside)
 
+  useNativeEventListener('keyup', (event: KeyboardEvent) => {
+    if (event.code?.toLowerCase() !== KEYVALUE.escape) {
+      return
+    }
+    if (!dismissOnESC) {
+      return
+    }
+
+    const poppers = Array.prototype.slice.call(
+      dom.$$('[data-tippy-root]')
+    ) as Element[]
+
+    const gallery = Array.prototype.slice.call(
+      dom.$$('.pswp--open')
+    ) as Element[]
+    if (poppers.length > 0 || gallery.length > 0) {
+      return
+    }
+    closeTopDialog()
+  })
   return (
     <div
       {...(testId ? { 'data-test-id': testId } : {})}
