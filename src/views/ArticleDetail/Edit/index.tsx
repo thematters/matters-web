@@ -144,7 +144,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
   })
 
   const [campaign, setCampaign] = useState<ArticleCampaignInput | undefined>(
-    appliedCampaign?.id
+    appliedCampaign?.id && selectedStage
       ? {
           campaign: appliedCampaign.id,
           stage: selectedStage,
