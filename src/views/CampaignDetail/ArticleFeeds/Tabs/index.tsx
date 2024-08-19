@@ -124,6 +124,9 @@ ArticleFeedsTabs.fragments = gql`
         start
         end
       }
+      descriptionZhHant: description(input: { language: zh_hant })
+      descriptionZhHans: description(input: { language: zh_hans })
+      descriptionEn: description(input: { language: en })
     }
   }
 `
