@@ -20,8 +20,8 @@
       max-width: 33.375rem; /* 534px */
     }
 
-    & :global(.mention) {
-      color: var(--color-matters-green);
+    & a {
+      color: var(--color-grey-darker);
     }
   }
 

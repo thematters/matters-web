@@ -1,4 +1,10 @@
 .momentEditor :global(.ProseMirror),
 .momentEditor :global(.tiptap) {
   padding-top: var(--sp12);
+
+  & a {
+    padding-bottom: 0;
+    color: var(--color-matters-green);
+    border-bottom: 0;
+  }
 }
