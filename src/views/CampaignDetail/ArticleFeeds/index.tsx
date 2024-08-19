@@ -1,7 +1,12 @@
 import gql from 'graphql-tag'
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 
-import { ArticleDigestFeed, Layout, useRoute } from '~/components'
+import {
+  ArticleDigestFeed,
+  LanguageContext,
+  Layout,
+  useRoute,
+} from '~/components'
 import { ArticleFeedsCampaignFragment } from '~/gql/graphql'
 
 import MainFeed from './MainFeed'
@@ -15,6 +20,7 @@ const ArticleFeeds = ({
 }) => {
   const { getQuery, setQuery } = useRoute()
   const qsType = getQuery('type') as CampaignFeedType
+  const { lang } = useContext(LanguageContext)
 
   const [feedType, setFeedType] = useState<CampaignFeedType>(
     qsType || FEED_TYPE_ALL
@@ -25,6 +31,19 @@ const ArticleFeeds = ({
     setFeedType(newType)
   }
 
+  const selectedStage = campaign.stages.filter(
+    (stage) => stage.id === feedType
+  )[0]
+  const description =
+    selectedStage &&
+    selectedStage[
+      lang === 'zh_hans'
+        ? 'descriptionZhHans'
+        : lang === 'zh_hant'
+        ? 'descriptionZhHant'
+        : 'descriptionEn'
+    ]
+
   return (
     <section className={styles.feeds}>
       <ArticleFeedsTabs
@@ -34,6 +53,10 @@ const ArticleFeeds = ({
       />
 
       <Layout.Main.Spacing hasVertical={false}>
+        {description && (
+          <section className={styles.description}>{description}</section>
+        )}
+
         <MainFeed feedType={feedType} camapign={campaign} />
       </Layout.Main.Spacing>
     </section>
