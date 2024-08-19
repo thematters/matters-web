@@ -17,13 +17,21 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { CampaignArticlesPublicQuery } from '~/gql/graphql'
+import {
+  ArticleFeedsCampaignFragment,
+  CampaignArticlesPublicQuery,
+} from '~/gql/graphql'
 
-import { CampaignFeedType, FEED_TYPE_ALL } from '../Tabs'
+import {
+  CampaignFeedType,
+  FEED_TYPE_ALL,
+  FEED_TYPE_ANNOUNCEMENT,
+} from '../Tabs'
 import { CAMPAIGN_ARTICLES_PRIVATE, CAMPAIGN_ARTICLES_PUBLIC } from './gql'
 
 interface MainFeedProps {
   feedType: CampaignFeedType
+  camapign: ArticleFeedsCampaignFragment
 }
 
 export type CampaignArticlesPublicQueryArticle = NonNullable<
@@ -38,8 +46,9 @@ const getArticleStageName = (
 ) => {
   const stage = article.campaigns[0]?.stage
 
+  // announcement if nullish
   if (!stage) {
-    return ''
+    return <FormattedMessage defaultMessage="Announcement" id="Sj+TN8" />
   }
 
   return stage[
@@ -47,12 +56,14 @@ const getArticleStageName = (
   ]
 }
 
-const MainFeed = ({ feedType }: MainFeedProps) => {
+const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
   const isAll = feedType === FEED_TYPE_ALL
+  const isAnnouncement = feedType === FEED_TYPE_ANNOUNCEMENT
+  const announcement = camapign.announcements
 
   const { data, loading, error, fetchMore, networkStatus, client } =
     usePublicQuery<CampaignArticlesPublicQuery>(CAMPAIGN_ARTICLES_PUBLIC, {
@@ -61,6 +72,7 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
         ...(!isAll ? { filter: { stage: feedType } } : {}),
       },
       notifyOnNetworkStatusChange: true,
+      skip: isAnnouncement,
     })
 
   // pagination
@@ -123,6 +135,37 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
     loadPrivate(newData)
   }
 
+  if (isAnnouncement) {
+    return (
+      <List>
+        {announcement.map((article, i) => (
+          <List.Item key={`${feedType}:${i}`}>
+            <ArticleDigestFeed
+              article={article}
+              label={isAll && <span>{getArticleStageName(article, lang)}</span>}
+              onClick={() => {
+                analytics.trackEvent('click_feed', {
+                  type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
+                  contentType: 'article',
+                  location: i,
+                  id: article.id,
+                })
+              }}
+              onClickAuthor={() => {
+                analytics.trackEvent('click_feed', {
+                  type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
+                  contentType: 'user',
+                  location: i,
+                  id: article.author.id,
+                })
+              }}
+            />
+          </List.Item>
+        ))}
+      </List>
+    )
+  }
+
   if (loading && (!edges || isNewLoading)) {
     return <SpinnerBlock />
   }
@@ -149,30 +192,28 @@ const MainFeed = ({ feedType }: MainFeedProps) => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
         {edges.map(({ node }, i) => (
-          <React.Fragment key={`${feedType}:${i}`}>
-            <List.Item>
-              <ArticleDigestFeed
-                article={node}
-                label={isAll && <span>{getArticleStageName(node, lang)}</span>}
-                onClick={() => {
-                  analytics.trackEvent('click_feed', {
-                    type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
-                    contentType: 'article',
-                    location: i,
-                    id: node.id,
-                  })
-                }}
-                onClickAuthor={() => {
-                  analytics.trackEvent('click_feed', {
-                    type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
-                    contentType: 'user',
-                    location: i,
-                    id: node.author.id,
-                  })
-                }}
-              />
-            </List.Item>
-          </React.Fragment>
+          <List.Item key={`${feedType}:${i}`}>
+            <ArticleDigestFeed
+              article={node}
+              label={isAll && <span>{getArticleStageName(node, lang)}</span>}
+              onClick={() => {
+                analytics.trackEvent('click_feed', {
+                  type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
+                  contentType: 'article',
+                  location: i,
+                  id: node.id,
+                })
+              }}
+              onClickAuthor={() => {
+                analytics.trackEvent('click_feed', {
+                  type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
+                  contentType: 'user',
+                  location: i,
+                  id: node.author.id,
+                })
+              }}
+            />
+          </List.Item>
         ))}
       </List>
     </InfiniteScroll>

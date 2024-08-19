@@ -4,7 +4,10 @@ import { FormattedMessage } from 'react-intl'
 
 import { analytics } from '~/common/utils'
 import { LanguageContext, SquareTabs } from '~/components'
-import { ArticleFeedsTabsCampaignFragment } from '~/gql/graphql'
+import {
+  ArticleFeedsCampaignFragment,
+  ArticleFeedsTabsCampaignFragment,
+} from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -16,7 +19,7 @@ export const FEED_TYPE_ANNOUNCEMENT = 'announcement'
 interface ArticleFeedsTabsProps {
   feedType: CampaignFeedType
   setFeedType: (type: string) => void
-  campaign: ArticleFeedsTabsCampaignFragment
+  campaign: ArticleFeedsTabsCampaignFragment & ArticleFeedsCampaignFragment
 }
 
 const ArticleFeedsTabs = ({
@@ -33,6 +36,8 @@ const ArticleFeedsTabs = ({
     const now = new Date()
     return now >= new Date(startedAt)
   }
+
+  const shouldShowAnnouncementTab = campaign.announcements.length > 0
 
   return (
     <section className={styles.tabs}>
@@ -78,28 +83,30 @@ const ArticleFeedsTabs = ({
           ) : null
         )}
 
-        <SquareTabs.Tab
-          selected={feedType === FEED_TYPE_ANNOUNCEMENT}
-          onClick={() => {
-            setFeedType(FEED_TYPE_ANNOUNCEMENT)
+        {shouldShowAnnouncementTab && (
+          <SquareTabs.Tab
+            selected={feedType === FEED_TYPE_ANNOUNCEMENT}
+            onClick={() => {
+              setFeedType(FEED_TYPE_ANNOUNCEMENT)
 
-            analytics.trackEvent('click_button', {
-              type: `campaign_detail_tab_${FEED_TYPE_ANNOUNCEMENT}` as `campaign_detail_tab_${string}`,
-              pageType: 'campaign_detail',
-            })
-          }}
-          textColor="goldPress"
-          bgColor={
-            feedType === FEED_TYPE_ANNOUNCEMENT ? 'warnYellow' : 'topUpYellow'
-          }
-          bgActiveColor={
-            feedType === FEED_TYPE_ANNOUNCEMENT
-              ? undefined
-              : 'topUpYellowDarker'
-          }
-        >
-          <FormattedMessage defaultMessage="Announcement" id="Sj+TN8" />
-        </SquareTabs.Tab>
+              analytics.trackEvent('click_button', {
+                type: `campaign_detail_tab_${FEED_TYPE_ANNOUNCEMENT}` as `campaign_detail_tab_${string}`,
+                pageType: 'campaign_detail',
+              })
+            }}
+            textColor="goldPress"
+            bgColor={
+              feedType === FEED_TYPE_ANNOUNCEMENT ? 'warnYellow' : 'topUpYellow'
+            }
+            bgActiveColor={
+              feedType === FEED_TYPE_ANNOUNCEMENT
+                ? undefined
+                : 'topUpYellowDarker'
+            }
+          >
+            <FormattedMessage defaultMessage="Announcement" id="Sj+TN8" />
+          </SquareTabs.Tab>
+        )}
       </SquareTabs>
     </section>
   )

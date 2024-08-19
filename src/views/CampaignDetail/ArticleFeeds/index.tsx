@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import React, { useState } from 'react'
 
-import { Layout, useRoute } from '~/components'
-import { ArticleFeedsTabsCampaignFragment } from '~/gql/graphql'
+import { ArticleDigestFeed, Layout, useRoute } from '~/components'
+import { ArticleFeedsCampaignFragment } from '~/gql/graphql'
 
 import MainFeed from './MainFeed'
 import styles from './styles.module.css'
@@ -11,7 +11,7 @@ import ArticleFeedsTabs, { CampaignFeedType, FEED_TYPE_ALL } from './Tabs'
 const ArticleFeeds = ({
   campaign,
 }: {
-  campaign: ArticleFeedsTabsCampaignFragment
+  campaign: ArticleFeedsCampaignFragment
 }) => {
   const { getQuery, setQuery } = useRoute()
   const qsType = getQuery('type') as CampaignFeedType
@@ -34,7 +34,7 @@ const ArticleFeeds = ({
       />
 
       <Layout.Main.Spacing hasVertical={false}>
-        <MainFeed feedType={feedType} />
+        <MainFeed feedType={feedType} camapign={campaign} />
       </Layout.Main.Spacing>
     </section>
   )
@@ -43,9 +43,28 @@ const ArticleFeeds = ({
 ArticleFeeds.fragments = gql`
   fragment ArticleFeedsCampaign on WritingChallenge {
     id
+    announcements {
+      id
+      campaigns {
+        campaign {
+          id
+          shortHash
+        }
+        stage {
+          id
+          nameZhHant: name(input: { language: zh_hant })
+          nameZhHans: name(input: { language: zh_hans })
+          nameEn: name(input: { language: en })
+        }
+      }
+      ...ArticleDigestFeedArticlePublic
+      ...ArticleDigestFeedArticlePrivate
+    }
     ...ArticleFeedsTabsCampaign
   }
   ${ArticleFeedsTabs.fragments}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
 `
 
 export default ArticleFeeds
