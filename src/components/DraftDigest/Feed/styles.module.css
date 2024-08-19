@@ -1,17 +1,17 @@
 .container {
   @mixin flex-center-space-between;
 
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 
   @media (--sm-up) {
-    padding: var(--spacing-base) 0;
+    padding: var(--sp16) 0;
   }
 
   & .right {
     @mixin inline-flex-center-all;
 
     & > * + * {
-      padding-left: var(--spacing-loose);
+      padding-left: var(--sp24);
     }
   }
 
@@ -20,7 +20,7 @@
 
     flex-direction: column;
     flex-grow: 1;
-    gap: var(--spacing-x-tight);
+    gap: var(--sp8);
 
     & .content {
       width: 100%;
@@ -39,7 +39,7 @@
 
   &:hover,
   &:focus {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 
   & svg {

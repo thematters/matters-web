@@ -1,14 +1,14 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import ICON_CIRCLE_AVATAR_DEFAULT from '@/public/static/icons/72px/circle-avatar-default.svg'
+import ICON_CIRCLE_AVATAR_DEFAULT from '@/public/static/icons/circle-avatar-default.svg'
 import { TEST_ID } from '~/common/enums'
 import { ResponsiveImage } from '~/components'
 import { AvatarCircleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
-export type CircleAvatarSize = 'xl' | 'xxl' | 'xxxl'
+export type CircleAvatarSize = 48 | 56 | 72 // 'xl' | 'xxl' | 'xxxl'
 
 export interface CircleAvatarProps {
   circle?: AvatarCircleFragment

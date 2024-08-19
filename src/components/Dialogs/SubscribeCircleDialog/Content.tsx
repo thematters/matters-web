@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
+import { FormattedMessage } from 'react-intl'
 
-import { Spinner, Translate } from '~/components'
+import { SpinnerBlock } from '~/components'
 
 import Complete from './Complete'
 import { BaseSubscribeCircleDialogProps, Step } from './types'
@@ -15,15 +16,15 @@ type SubscribeCircleDialogContentProps = BaseSubscribeCircleDialogProps & {
 
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
-const DynamicPaymentSetPasswordForm = dynamic(
-  () => import('~/components/Forms/PaymentForm/SetPassword'),
-  { loading: () => <Spinner /> }
+const DynamicSetPaymentPasswordContent = dynamic(
+  () => import('~/components/Dialogs/SetPaymentPasswordDialog/Content'),
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicSubscribeCircleForm = dynamic(
   () => import('~/components/Forms/PaymentForm/SubscribeCircle'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const SubscribeCircleDialogContent = ({
@@ -42,7 +43,7 @@ const SubscribeCircleDialogContent = ({
   return (
     <>
       {isSetPaymentPassword && (
-        <DynamicPaymentSetPasswordForm
+        <DynamicSetPaymentPasswordContent
           submitCallback={() => forward('subscribeCircle')}
           closeDialog={closeDialog}
         />
@@ -60,7 +61,9 @@ const SubscribeCircleDialogContent = ({
       {isResetPassword && (
         <DynamicPaymentResetPasswordForm
           callback={() => forward('subscribeCircle')}
-          callbackText={<Translate zh_hant="回到訂閱" zh_hans="回到订阅" />}
+          callbackText={
+            <FormattedMessage defaultMessage="Back to subscribe" id="lqdpsm" />
+          }
           closeDialog={closeDialog}
           back={() => forward('subscribeCircle')}
         />

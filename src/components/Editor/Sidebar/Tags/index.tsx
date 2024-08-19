@@ -1,9 +1,10 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconHashtag } from '@/public/static/icons/24px/hashtag.svg'
 import { analytics } from '~/common/utils'
 import {
   EditorSearchSelectDialog,
-  IconHashTag24,
+  Icon,
   // SearchSelectNode,
   Tag,
 } from '~/components'
@@ -47,7 +48,7 @@ const SidebarTags = ({
     >
       {({ openDialog }) => (
         <Box
-          icon={<IconHashTag24 size="md" />}
+          icon={<Icon icon={IconHashtag} size={24} />}
           title={<FormattedMessage defaultMessage="Add Tag" id="GUW//c" />}
           subtitle={
             <FormattedMessage

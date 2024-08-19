@@ -7,7 +7,7 @@ import {
   List,
   QueryError,
   ShuffleButton,
-  Spinner,
+  SpinnerBlock,
   usePublicQuery,
   UserDigest,
   ViewerContext,
@@ -75,7 +75,7 @@ const Authors = () => {
         rightButton={<ShuffleButton onClick={shuffle} />}
       />
 
-      {loading && <Spinner />}
+      {loading && <SpinnerBlock />}
 
       {!loading && (
         <List hasBorder={false}>
@@ -83,7 +83,7 @@ const Authors = () => {
             <List.Item key={node.id}>
               <UserDigest.Rich
                 user={node}
-                spacing={['xtight', 'xtight']}
+                spacing={[8, 8]}
                 bgColor="none"
                 bgActiveColor="greyLighter"
                 borderRadius="xtight"

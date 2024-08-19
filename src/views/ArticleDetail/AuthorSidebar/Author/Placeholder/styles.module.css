@@ -1,0 +1,31 @@
+.container {
+  display: flex;
+  gap: var(--sp24);
+  margin-top: var(--sp32);
+
+  & .avatar {
+    width: 4rem;
+    height: 4rem;
+    background-color: var(--color-grey-lighter);
+    border-radius: 50%;
+  }
+
+  & .info {
+    @mixin flex-start-center;
+
+    flex-direction: column;
+    gap: var(--sp4);
+
+    & .displayName {
+      width: 3.75rem;
+      height: 1.375rem;
+      background-color: var(--color-grey-lighter);
+    }
+
+    & .bio {
+      width: 7rem;
+      height: 1.125rem;
+      background-color: var(--color-grey-lighter);
+    }
+  }
+}

@@ -2,8 +2,8 @@
   padding: 5rem 0;
 
   & h2 {
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-semibold);
+    font-size: var(--text24);
+    font-weight: var(--font-semibold);
     text-align: center;
   }
 
@@ -28,16 +28,16 @@
   position: relative;
   grid-column: 1 / -1;
   align-self: end;
-  margin-top: var(--spacing-xx-loose);
+  margin-top: var(--sp40);
   text-align: center;
 
   & h3 {
     position: relative;
-    font-size: var(--font-size-lg);
+    font-size: var(--text20);
     color: var(--color-matters-green);
 
     & span {
-      padding: 0 var(--spacing-base);
+      padding: 0 var(--sp16);
       background: var(--color-white);
     }
 
@@ -68,21 +68,21 @@
     & img {
       display: block;
       width: 8.75rem;
-      margin: 0 auto var(--spacing-loose);
+      margin: 0 auto var(--sp24);
     }
 
     & p,
     & h4 {
-      font-weight: var(--font-weight-normal);
+      font-weight: var(--font-normal);
       line-height: 1.5rem;
     }
 
     & p {
-      font-size: var(--font-size-xs);
+      font-size: var(--text12);
     }
 
     & h4 {
-      font-size: var(--font-size-md);
+      font-size: var(--text16);
     }
   }
 

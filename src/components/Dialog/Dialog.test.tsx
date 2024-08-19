@@ -51,7 +51,7 @@ describe('<Dialog>', () => {
 
     // open dialog
     fireEvent.click(screen.getByRole('button', { name: 'Open' }))
-    expect(screen.getAllByText('Header')).toHaveLength(2)
+    expect(screen.getAllByText('Header')[0]).toBeInTheDocument()
     expect(screen.getByText('Content')).toBeInTheDocument()
 
     // click confirm

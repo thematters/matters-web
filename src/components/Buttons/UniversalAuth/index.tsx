@@ -33,8 +33,8 @@ export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
 
   return (
     <>
-      <Button bgColor="green" spacing={['tight', 'base']} {...props}>
-        <TextIcon color="white" weight="md">
+      <Button bgColor="green" spacing={[12, 16]} {...props}>
+        <TextIcon color="white" weight="medium">
           <FormattedMessage
             defaultMessage="Enter"
             description="src/components/Buttons/UniversalAuth/index.tsx"

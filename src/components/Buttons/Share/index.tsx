@@ -1,52 +1,49 @@
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
-import { translate } from '~/common/utils'
+import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
 import {
   Button,
   ButtonProps,
+  Icon,
   IconColor,
-  IconShare16,
   IconSize,
-  LanguageContext,
   ShareDialog,
   ShareDialogProps,
 } from '~/components'
 
 type ShareButtonBaseProps = {
   hasIcon?: boolean
-  iconSize?: Extract<IconSize, 'mdS'>
+  iconSize?: Extract<IconSize, 20 | 24>
   iconColor?: Extract<IconColor, 'green' | 'grey' | 'black' | 'white'>
   inCard: boolean
+  clickEvent?: () => void
 } & Omit<ShareDialogProps, 'children'>
 
 type ShareButtonProps = ShareButtonBaseProps &
-  Pick<ButtonProps, 'bgColor' | 'size' | 'spacing'>
+  Pick<
+    ButtonProps,
+    'bgColor' | 'size' | 'spacing' | 'disabled' | 'textActiveColor'
+  >
 
 export const ShareButton: React.FC<
   React.PropsWithChildren<ShareButtonProps>
 > = ({
   children,
-
+  textActiveColor,
   bgColor,
   hasIcon = true,
   iconSize,
   iconColor = 'black',
+  disabled,
   inCard,
   size,
   spacing,
+  clickEvent,
   ...props
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
-  const isGreen = bgColor === 'green'
-  const isHalfBlack = bgColor === 'halfBlack'
-  const buttonBgActiveColor =
-    isGreen || isHalfBlack
-      ? undefined
-      : inCard
-      ? 'greyLighterActive'
-      : 'greyLighter'
-  const buttonSpacing = spacing || ['xtight', 'xtight']
+  const buttonSpacing = spacing || [8, 8]
 
   return (
     <ShareDialog {...props}>
@@ -54,13 +51,23 @@ export const ShareButton: React.FC<
         <Button
           bgColor={bgColor}
           size={size}
+          textColor={iconColor}
+          textActiveColor={textActiveColor}
           spacing={buttonSpacing}
-          bgActiveColor={buttonBgActiveColor}
-          aria-label={translate({ id: 'share', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Share',
+            id: 'OKhRC6',
+          })}
           aria-haspopup="dialog"
-          onClick={openDialog}
+          onClick={() => {
+            if (clickEvent) {
+              clickEvent()
+            }
+            openDialog()
+          }}
+          disabled={disabled}
         >
-          {hasIcon && <IconShare16 size={iconSize} color={iconColor} />}
+          {hasIcon && <Icon icon={IconShare} size={iconSize} />}
           {children}
         </Button>
       )}

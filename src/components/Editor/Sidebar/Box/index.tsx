@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 
-import { Button, IconEdit16, TextIcon } from '~/components'
+import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import { Button, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -31,7 +32,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
   return (
     <section className={boxClasses}>
       <header className={styles.header}>
-        <TextIcon icon={icon} size="md" weight="md" spacing="xtight">
+        <TextIcon icon={icon} size={16} weight="medium" spacing={8}>
           {title}
         </TextIcon>
 
@@ -39,11 +40,11 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
           <Button
             onClick={onClick}
             bgActiveColor="greyLighter"
-            spacing={['xtight', 'xtight']}
+            spacing={[8, 8]}
             aria-haspopup="dialog"
             aria-label={title}
           >
-            <IconEdit16 color="grey" />
+            <Icon icon={IconEdit} color="grey" />
           </Button>
         )}
       </header>

@@ -72,7 +72,7 @@ export const MOCK_USER = {
 // Circle
 export const MOCK_CIRCLE = {
   __typename: 'Circle' as any,
-  id: 'Q2lyY2xlOjE', // Cirlce:1
+  id: 'Q2lyY2xlOjE', // Circle:1
   state: 'active',
   name: 'matters_class',
   displayName: 'Matters 自由課（第一季第二期）',
@@ -118,13 +118,15 @@ export const MOCK_ARTILCE = {
   id: 'QXJ0aWNsZTox', // Article:1
   title: '中國四川：挑戰世界最危險的公路之一 川藏公路絕美風光',
   slug: 'slug',
+  shortHash: 'r5ade0on7x1g',
   mediaHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   dataHash: 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a',
   articleState: 'active' as any,
+  revisionCount: 3,
   state: 'active' as any,
   cover: 'https://source.unsplash.com/256x256?article',
   summary:
-    '其實已經開始兩週了XD,不過最近才想說應該來記錄一下我在火箭隊的日常,順便練一下文筆,也可以讓大家了解一下火箭隊軟體培訓營裡面大概是在做些什麼事情,上課的模式及氣氛是怎樣等等...畢竟我當時得知有這個免費培訓營時,也是網路上各種爬文類似這種免費培訓工程師半年的心得及成',
+    '其實已經開始兩週了XD,不過最近才想說應該來紀錄一下我在火箭隊的日常,順便練一下文筆,也可以讓大家了解一下火箭隊軟體培訓營裡面大概是在做些什麼事情,上課的模式及氣氛是怎樣等等...畢竟我當時得知有這個免費培訓營時,也是網路上各種爬文類似這種免費培訓工程師半年的心得及成',
   author: MOCK_USER,
   createdAt: '2020-12-24T07:29:17.682Z',
   revisedAt: null,
@@ -132,7 +134,7 @@ export const MOCK_ARTILCE = {
     __typename: 'AppreciationConnection' as any,
     totalCount: 0,
   },
-  iscnId: '',
+  iscnId: 'isz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZE',
   pinned: false,
   readTime: 1234.5,
   tags: [],
@@ -142,12 +144,12 @@ export const MOCK_ARTILCE = {
   appreciationsReceivedTotal: 1000,
   commentCount: 9999,
   donationCount: 234,
-  transactionsReceivedBy: {
-    __typename: 'AppreciationConnection' as any,
+  donations: {
+    __typename: 'ArticleDonationConnection' as any,
     totalCount: 190,
   },
   donationsDialog: {
-    __typename: 'AppreciationConnection' as any,
+    __typename: 'ArticleDonationConnection' as any,
     totalCount: 190,
   },
   subscribed: false,
@@ -155,6 +157,7 @@ export const MOCK_ARTILCE = {
     __typename: 'ArticleAccess' as any,
     type: 'paywall' as any,
     circle: MOCK_CIRCLE,
+    secret: '6NMhDB51cCvNWa1GMS7LUkZEP2a',
   },
   drafts: [
     {

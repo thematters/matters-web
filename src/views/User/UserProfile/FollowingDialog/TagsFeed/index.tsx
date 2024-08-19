@@ -6,7 +6,7 @@ import {
   InfiniteScroll,
   List,
   QueryError,
-  Spinner,
+  SpinnerBlock,
   TagDigest,
   Translate,
   usePublicQuery,
@@ -79,7 +79,7 @@ const TagsFeed = () => {
    * Render
    */
   if (loading) {
-    return <Spinner />
+    return <SpinnerBlock />
   }
 
   if (error) {
@@ -113,7 +113,7 @@ const TagsFeed = () => {
           <List.Item key={node.id}>
             <TagDigest.Rich
               tag={node}
-              spacing={['tight', 'base']}
+              spacing={[12, 16]}
               bgColor="none"
               bgActiveColor="greyLighter"
               hasDesc

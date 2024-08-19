@@ -8,6 +8,7 @@ type TabProps = {
   selected?: boolean
   count?: number
   onClick?: () => void
+  disabled?: boolean
 }
 
 const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
@@ -16,11 +17,22 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
   count,
   children,
   onClick,
+  disabled = false,
 }) => {
   const classes = classNames({
     [styles.item]: true,
-    [styles.selected]: selected,
+    [styles.selected]: !disabled && selected,
+    [styles.disabled]: disabled,
   })
+
+  if (disabled) {
+    return (
+      <li role="tab" aria-selected={selected} className={classes}>
+        {children}
+        {count && <span className={styles.count}>&nbsp;{count}</span>}
+      </li>
+    )
+  }
 
   if (href) {
     return (

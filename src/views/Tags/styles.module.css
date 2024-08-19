@@ -9,22 +9,22 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
-    /* margin-top: calc(var(--spacing-base) * -1); */
+    /* margin-top: calc(var(--sp16) * -1); */
   }
 
   & .listItem {
     position: relative;
-    padding: var(--spacing-x-tight) 0;
+    padding: var(--sp8) 0;
 
     @media (--lg-up) {
-      padding: var(--spacing-base) 0;
+      padding: var(--sp16) 0;
 
       &:nth-child(2n) {
-        margin-left: var(--spacing-xx-tight);
+        margin-left: var(--sp4);
       }
 
       &:nth-child(2n + 1) {
-        margin-right: var(--spacing-loose);
+        margin-right: var(--sp24);
       }
     }
   }

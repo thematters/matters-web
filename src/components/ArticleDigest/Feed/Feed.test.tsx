@@ -25,7 +25,7 @@ describe('<ArticleDigest.Feed>', () => {
     const $title = screen.getByRole('heading', { name: MOCK_ARTILCE.title })
     expect($title).toBeInTheDocument()
     $title.click()
-    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).toBeCalledTimes(1)
 
     mockRouter.back()
@@ -34,7 +34,7 @@ describe('<ArticleDigest.Feed>', () => {
     const $summary = screen.getByText(MOCK_ARTILCE.summary)
     expect($summary).toBeInTheDocument()
     $summary.click()
-    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.slug)
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).toBeCalledTimes(2)
 
     mockRouter.back()

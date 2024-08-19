@@ -1,13 +1,13 @@
 .info {
   display: flex;
   align-items: center;
-  padding-left: var(--spacing-base);
-  margin: var(--spacing-x-tight) 0;
+  padding-left: var(--sp16);
+  margin: var(--sp8) 0;
   color: var(--color-grey-dark);
   white-space: pre-wrap;
 
   & .num {
-    font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-semibold);
     color: var(--color-black);
   }
 }
@@ -15,14 +15,14 @@
 .createCollection {
   display: flex;
   justify-content: center;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-medium);
 }
 
 .addCollection {
   @mixin flex-center-all;
   @mixin transition;
 
-  padding: var(--spacing-base) 0;
+  padding: var(--sp16) 0;
   color: var(--color-matters-green);
   cursor: pointer;
   border-bottom: 1px dashed var(--color-grey-light);
@@ -30,6 +30,6 @@
 
   &:hover,
   &:focus {
-    color: var(--color-matters-green-dark);
+    color: var(--color-matters-green-hover);
   }
 }

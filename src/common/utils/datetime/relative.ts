@@ -1,9 +1,6 @@
-import differenceInDays from 'date-fns/differenceInDays'
 import differenceInHours from 'date-fns/differenceInHours'
 import differenceInMinutes from 'date-fns/differenceInMinutes'
 import isThisHour from 'date-fns/isThisHour'
-import isThisMinute from 'date-fns/isThisMinute'
-import isThisWeek from 'date-fns/isThisWeek'
 import isToday from 'date-fns/isToday'
 import parseISO from 'date-fns/parseISO'
 
@@ -12,58 +9,60 @@ import absolute from './absolute'
 const DIFFS = {
   zh_hant: {
     justNow: '剛剛',
-    minuteAgo: ' 分鐘前',
     minutesAgo: ' 分鐘前',
     hourAgo: ' 小時前',
     hoursAgo: ' 小時前',
-    dayAgo: ' 天前',
-    daysAgo: ' 天前',
   },
   zh_hans: {
     justNow: '刚刚',
-    minuteAgo: ' 分钟前',
     minutesAgo: ' 分钟前',
     hourAgo: ' 小时前',
     hoursAgo: ' 小时前',
-    dayAgo: ' 天前',
-    daysAgo: ' 天前',
   },
   en: {
-    justNow: 'just now',
-    minuteAgo: ' minute ago',
+    justNow: 'Now',
     minutesAgo: ' minutes ago',
     hourAgo: ' hour ago',
     hoursAgo: ' hours ago',
-    dayAgo: ' day ago',
-    daysAgo: ' days ago',
   },
-}
+} as const
 
-const relative = (date: Date | string | number, lang: Language = 'zh_hant') => {
+/**
+ * Platform-wise date time format
+ *
+ * @param {Date|string|number} date - input date
+ * @param {Language} lang - switch format based on language
+ * @param {boolean} isTruncated - `Feed needs truncated datetime
+ * @returns {string}
+ */
+const relative = (
+  date: Date | string | number,
+  lang: Language = 'zh_hant',
+  isTruncated: boolean = false
+): string => {
   if (typeof date === 'string') {
     date = parseISO(date)
   }
 
-  if (isThisMinute(date)) {
+  // if it is within 2 minutes
+  if (differenceInMinutes(new Date(), date) < 2) {
     return DIFFS[lang].justNow
   }
 
   if (isThisHour(date)) {
-    const diffMins = differenceInMinutes(new Date(), date) || 1
-    return diffMins + DIFFS[lang][diffMins === 1 ? 'minuteAgo' : 'minutesAgo']
+    const diffMins = differenceInMinutes(new Date(), date)
+    return diffMins + (isTruncated ? 'm' : DIFFS[lang]['minutesAgo'])
   }
 
   if (isToday(date)) {
     const diffHrs = differenceInHours(new Date(), date) || 1
-    return diffHrs + DIFFS[lang][diffHrs === 1 ? 'hourAgo' : 'hoursAgo']
+    return (
+      diffHrs +
+      (isTruncated ? 'h' : DIFFS[lang][diffHrs === 1 ? 'hourAgo' : 'hoursAgo'])
+    )
   }
 
-  if (isThisWeek(date)) {
-    const diffDays = differenceInDays(new Date(), date) || 1
-    return diffDays + DIFFS[lang][diffDays === 1 ? 'dayAgo' : 'daysAgo']
-  }
-
-  return absolute(date, lang)
+  return absolute(date, lang, isTruncated)
 }
 
 export default relative

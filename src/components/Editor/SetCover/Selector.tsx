@@ -1,8 +1,9 @@
-import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconCircleCheckFill2 } from '@/public/static/icons/24px/circle-check-fill-2.svg'
 import { ASSET_TYPE } from '~/common/enums'
-import { toSizedImageURL, translate } from '~/common/utils'
-import { IconChecked, LanguageContext, Translate } from '~/components'
+import { toSizedImageURL } from '~/common/utils'
+import { Icon, Translate } from '~/components'
 import { AssetFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -18,7 +19,7 @@ const Selector: React.FC<SelectorProps> = ({
   selected,
   setSelected,
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const imageAssets = assets.filter(
     (asset) =>
@@ -46,11 +47,9 @@ const Selector: React.FC<SelectorProps> = ({
               onClick={() =>
                 setSelected(asset.id === selected?.id ? undefined : asset)
               }
-              aria-label={translate({
-                zh_hant: `設置第 ${index + 1} 張圖片為封面`,
-                zh_hans: `设置第 ${index + 1} 张图片为封面`,
-                en: `Set as cover`,
-                lang,
+              aria-label={intl.formatMessage({
+                defaultMessage: `Set as cover`,
+                id: 'BNupBu',
               })}
             >
               <img
@@ -64,7 +63,7 @@ const Selector: React.FC<SelectorProps> = ({
               />
 
               {asset.path === selected?.path && (
-                <IconChecked size="md" color="green" />
+                <Icon icon={IconCircleCheckFill2} size={24} />
               )}
             </button>
           </li>

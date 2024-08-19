@@ -18,23 +18,20 @@ type TextIconColor =
   | 'yellowLighter'
 
 export interface TextIconProps {
+  // icon
   icon?: React.ReactNode
 
+  // icon & text
   color?: TextIconColor
-  size?: 'xs' | 'sm' | 'smS' | 'mdS' | 'md' | 'xm' | 'lg' | 'xl'
-  spacing?:
-    | 0
-    | 'xxxtight'
-    | 'xxtight'
-    | 'basexxtight'
-    | 'xtight'
-    | 'tight'
-    | 'base'
-  weight?: 'light' | 'normal' | 'md' | 'semibold' | 'bold'
-  allowUserSelect?: boolean
+  spacing?: 0 | 2 | 4 | 6 | 8 | 12 | 16
 
-  textPlacement?: 'bottom' | 'left' | 'right'
-  textDecoration?: 'underline'
+  // text
+  size?: 12 | 13 | 14 | 15 | 16 | 18 | 20 | 24 | 32
+  weight?: 'normal' | 'medium' | 'semibold' | 'bold'
+  placement?: 'bottom' | 'left' | 'right'
+  decoration?: 'underline'
+
+  allowUserSelect?: boolean
 }
 
 /**
@@ -56,34 +53,33 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
   icon,
 
   color,
-  size = 'sm',
-  spacing = 'xxtight',
-  weight,
-  allowUserSelect = false,
+  spacing = 4,
 
-  textPlacement = 'right',
-  textDecoration,
+  size = 14,
+  weight,
+  placement = 'right',
+  decoration,
+
+  allowUserSelect = false,
 
   children,
   ...restProps
 }) => {
   const textIconClasses = classNames({
-    [styles.textIcon]: true,
     textIcon: true, // global selector
-    [styles.noneSelect]: !allowUserSelect,
+    [styles.textIcon]: true,
     [color ? styles[color] : '']: !!color,
-    [styles[`text${capitalizeFirstLetter(textPlacement)}`]]: true,
-    [textDecoration
-      ? styles[`text${capitalizeFirstLetter(textDecoration)}`]
-      : '']: true,
-    [styles[`size${capitalizeFirstLetter(size)}`]]: true,
-    [spacing ? styles[`spacing${capitalizeFirstLetter(spacing)}`] : '']:
-      !!spacing,
+    [spacing ? styles[`spacing${spacing}`] : '']: !!spacing,
+    [styles[`text${size}`]]: true,
+    [styles[`text${capitalizeFirstLetter(placement)}`]]: true,
+    [decoration ? styles[`text${capitalizeFirstLetter(decoration)}`] : '']:
+      true,
     [weight ? styles[`weight${capitalizeFirstLetter(weight)}`] : '']: !!weight,
+    [styles.noneSelect]: !allowUserSelect,
     [styles.hasIcon]: !!icon,
   })
 
-  if (textPlacement === 'left') {
+  if (placement === 'left') {
     return (
       <span className={textIconClasses} {...restProps}>
         {children && <span className={styles.text}>{children}</span>}

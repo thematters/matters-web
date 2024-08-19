@@ -1,7 +1,8 @@
 import dynamic from 'next/dynamic'
+import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
-import { Spinner, Translate } from '~/components'
+import { SpinnerBlock } from '~/components'
 
 import { Step } from './types'
 
@@ -16,19 +17,19 @@ interface PayoutDialogContentProps {
 
 const DynamicPaymentResetPasswordForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ResetPassword'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPayoutFormComplete = dynamic(
   () => import('~/components/Forms/PaymentForm/Payout/Complete'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicPayoutFormConfirm = dynamic(
   () => import('~/components/Forms/PaymentForm/Payout/Confirm'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 const DynamicConnectStripeAccountForm = dynamic(
   () => import('~/components/Forms/PaymentForm/ConnectStripeAccount'),
-  { loading: () => <Spinner /> }
+  { loading: () => <SpinnerBlock /> }
 )
 
 const PayoutDialogContent = ({
@@ -69,7 +70,9 @@ const PayoutDialogContent = ({
       {isResetPassword && (
         <DynamicPaymentResetPasswordForm
           callback={() => forward('confirm')}
-          callbackText={<Translate zh_hant="繼續提現" zh_hans="继续提现" />}
+          callbackText={
+            <FormattedMessage defaultMessage="Continue payout" id="WsPbZT" />
+          }
           closeDialog={closeDialog}
           back={back}
         />

@@ -1,5 +1,5 @@
 .container {
-  padding: var(--spacing-base);
+  padding: var(--sp16);
 
   @media (--sm-up) {
     padding-right: 0;
@@ -8,7 +8,7 @@
 }
 
 .content {
-  font-size: var(--font-size-md-s);
+  font-size: var(--text15);
   line-height: 1.5rem;
   color: var(--color-grey-dark);
 }

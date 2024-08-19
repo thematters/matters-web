@@ -24,7 +24,7 @@ const fragments = {
         ... on Article {
           id
           slug
-          mediaHash
+          shortHash
           author {
             userName
           }

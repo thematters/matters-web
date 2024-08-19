@@ -1,6 +1,6 @@
 .container {
   position: absolute;
-  top: calc(2rem / 2 * -1);
+  top: calc(2rem / 2 * -1 - 1px); /* 2rem is icon size, 1px for offset */
   left: 0;
   display: flex;
   align-items: center;
@@ -14,7 +14,7 @@
   }
 
   @media (--md-up) {
-    left: calc((2rem + var(--spacing-base)) * - 1);
+    left: calc((2rem + var(--sp16)) * - 1);
   }
 }
 
@@ -22,17 +22,17 @@
   @mixin transition;
 
   display: none;
-  margin-left: var(--spacing-base);
+  margin-left: var(--sp16);
   opacity: 0;
   transition-property: opacity, transform;
 
   & > * + * {
-    margin-left: var(--spacing-base);
+    margin-left: var(--sp16);
     cursor: pointer;
   }
 
   @media (--md-up) {
-    margin-left: var(--spacing-x-loose);
+    margin-left: var(--sp32);
   }
 }
 

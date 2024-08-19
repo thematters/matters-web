@@ -1,0 +1,24 @@
+.label {
+  @mixin inline-flex-center-all;
+
+  padding: 0 var(--sp4);
+  font-size: var(--text12);
+  line-height: 1.125rem;
+  word-break: keep-all;
+  user-select: none;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+
+  &.gold {
+    color: var(--color-matters-gold);
+    background: var(--color-yellow-lighter);
+    border-color: var(--color-line-matters-gold-light);
+  }
+
+  &.green {
+    color: var(--color-matters-green);
+    background: var(--color-green-lighter);
+    border-color: var(--color-line-matters-green-light);
+  }
+}

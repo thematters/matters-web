@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { IconArrowTop20, Menu, useMutation } from '~/components'
+import { ReactComponent as IconArrowLTop } from '@/public/static/icons/24px/arrow-l-top.svg'
+import { Icon, Menu, useMutation } from '~/components'
 import { updateUserCollectionDetail } from '~/components/GQL'
 import { SetTopCollectionMutation } from '~/gql/graphql'
 
@@ -40,7 +41,7 @@ const SetTopCollectionButton = ({
           description="src/components/ArticleDigest/DropdownActions/SetTopCollectionButton.tsx"
         />
       }
-      icon={<IconArrowTop20 size="mdS" />}
+      icon={<Icon icon={IconArrowLTop} size={20} />}
       onClick={async () => {
         onClick()
         await update({

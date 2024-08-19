@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { KEYVALUE } from '~/common/enums'
@@ -10,14 +10,7 @@ import {
   parseFormSubmitErrors,
   validatePassword,
 } from '~/common/utils'
-import {
-  Dialog,
-  Form,
-  LanguageContext,
-  Spacer,
-  toast,
-  useMutation,
-} from '~/components'
+import { Dialog, Form, Spacer, toast, useMutation } from '~/components'
 import { SetPasswordMutation } from '~/gql/graphql'
 
 interface FormProps {
@@ -44,12 +37,9 @@ const SET_PASSWORD = gql`
 
 const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const intl = useIntl()
-
   const [set] = useMutation<SetPasswordMutation>(SET_PASSWORD, undefined, {
     showToast: false,
   })
-
-  const { lang } = useContext(LanguageContext)
 
   const formId = 'edit-password-form'
 
@@ -70,7 +60,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
     validateOnChange: false,
     validate: ({ password }) =>
       _pickBy({
-        email: validatePassword(password, lang),
+        email: validatePassword(password, intl),
       }),
     onSubmit: async ({ password }, { setSubmitting, setFieldError }) => {
       try {

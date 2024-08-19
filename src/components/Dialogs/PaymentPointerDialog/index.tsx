@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, Translate, useDialogSwitch } from '~/components'
+import { Dialog, useDialogSwitch } from '~/components'
 
 import SetPaymentPointerForm from './SetPaymentPointerForm'
 
@@ -22,7 +22,7 @@ const BasePaymentPointerDialog: React.FC<PaymentPointerProps> = ({
       type="submit"
       form={formId}
       disabled={isSubmitting || !isValid}
-      text={<Translate zh_hant="確認" zh_hans="确认" en="Submit" />}
+      text={<FormattedMessage defaultMessage="Submit" id="wSZR47" />}
       loading={isSubmitting}
     />
   )

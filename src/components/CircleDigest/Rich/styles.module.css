@@ -3,29 +3,29 @@
 }
 
 .header {
-  margin-left: var(--spacing-base);
+  margin-left: var(--sp16);
 }
 
 .title {
-  margin-bottom: var(--spacing-xx-tight);
-  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--sp4);
+  font-weight: var(--font-medium);
   line-height: 1.5rem;
 }
 
-.textSizeMdS {
-  font-size: var(--font-size-md-s);
+.text15 {
+  font-size: var(--text15);
 }
 
-.textSizeXm {
-  font-size: var(--font-size-xm);
+.text18 {
+  font-size: var(--text18);
 }
 
 .description {
   @mixin line-clamp;
 
   -webkit-line-clamp: 3;
-  margin-top: var(--spacing-base);
-  font-size: var(--font-size-md-s);
+  margin-top: var(--sp16);
+  font-size: var(--text15);
   line-height: 1.5rem;
   color: var(--color-grey-darker);
 }
@@ -33,5 +33,5 @@
 .footer {
   @mixin flex-center-space-between;
 
-  margin-top: var(--spacing-base);
+  margin-top: var(--sp16);
 }

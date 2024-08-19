@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { IconArrowBottom20, Menu, useMutation } from '~/components'
+import { ReactComponent as IconArrowLDown } from '@/public/static/icons/24px/arrow-l-down.svg'
+import { Icon, Menu, useMutation } from '~/components'
 import { updateUserCollectionDetail } from '~/components/GQL'
 import { SetBottomCollectionMutation } from '~/gql/graphql'
 
@@ -53,7 +54,7 @@ const SetBottomCollectionButton = ({
           description="src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
         />
       }
-      icon={<IconArrowBottom20 size="mdS" />}
+      icon={<Icon icon={IconArrowLDown} size={20} />}
       onClick={async () => {
         onClick()
         await update({

@@ -1,6 +1,6 @@
 .title {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--text16);
+  font-weight: var(--font-medium);
   line-height: 1rem;
 }
 
@@ -12,38 +12,42 @@
     }
 
     & .description {
-      margin-top: var(--spacing-xx-tight);
-      font-size: var(--font-size-sm-s);
+      margin-top: var(--sp4);
+      font-size: var(--text13);
       color: var(--color-grey-darker);
     }
   }
 
   & .switch + * {
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
   }
 }
 
 .license {
+  & .title {
+    margin-bottom: var(--sp16);
+  }
+
   & .select {
-    margin-top: var(--spacing-x-tight);
+    margin-top: var(--sp8);
   }
 }
 
 .circle + .license {
-  margin-top: var(--spacing-x-loose);
+  margin-top: var(--sp32);
 }
 
 .sensitive,
 .iscn {
-  margin-top: var(--spacing-loose);
+  margin-top: var(--sp24);
 
   & .header {
     @mixin flex-center-space-between;
   }
 
   & .hint {
-    margin-top: var(--spacing-xx-tight);
-    font-size: var(--font-size-xs);
+    margin-top: var(--sp4);
+    font-size: var(--text12);
     color: var(--color-grey);
 
     & a {
@@ -54,6 +58,8 @@
 }
 
 .supportSetting {
+  margin: var(--sp16) calc(var(--sp16) * -1) calc(var(--sp16) * -1);
+
   & button {
     width: 100%;
   }
@@ -63,11 +69,11 @@
 
     flex-direction: column;
     width: 100%;
-    margin-top: var(--spacing-loose);
+    margin-top: var(--sp24);
 
     & .hint {
-      margin-top: var(--spacing-x-tight);
-      font-size: var(--font-size-xs);
+      margin-top: var(--sp8);
+      font-size: var(--text12);
       color: var(--color-grey);
       text-align: left;
       white-space: break-spaces;
@@ -82,12 +88,26 @@
 }
 
 /* sidebar */
-.inSidebar {
-  & .title {
-    font-size: var(--font-size-sm);
-  }
+.container {
+  padding: var(--sp16);
 
-  & .circle + .license {
-    margin-top: var(--spacing-loose);
+  &.compact {
+    padding: 0;
+
+    & .title {
+      font-size: var(--text14);
+    }
+
+    & .circle + .license {
+      margin-top: var(--sp24);
+    }
+
+    & .license .title {
+      margin-bottom: 0;
+    }
+
+    & .supportSetting {
+      margin: 0;
+    }
   }
 }

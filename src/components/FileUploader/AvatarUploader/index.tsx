@@ -1,24 +1,24 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
-import { translate, validateImage } from '~/common/utils'
+import { validateImage } from '~/common/utils'
 import {
   Avatar,
   AvatarProps,
   CircleAvatar,
   CircleAvatarProps,
-  IconCamera24,
-  LanguageContext,
-  Spinner,
+  Icon,
+  SpinnerBlock,
   toast,
-  Translate,
   useDirectImageUpload,
   useMutation,
 } from '~/components'
@@ -54,7 +54,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   ...avatarProps
 }) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
     DIRECT_IMAGE_UPLOAD,
@@ -127,7 +127,14 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         throw new Error()
       }
     } catch (e) {
-      toast.error({ message: <Translate id="failureUploadImage" /> })
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="Failed to upload, please try again."
+            id="qfi4cg"
+          />
+        ),
+      })
     }
 
     if (onUploadEnd) {
@@ -144,14 +151,14 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   return (
     <label className={labelClasses} htmlFor={fieldId}>
-      {!isCircle && <Avatar size="xxxl" {...avatarProps} src={avatar} />}
-      {isCircle && <CircleAvatar size="xxxl" {...avatarProps} src={avatar} />}
+      {!isCircle && <Avatar size={72} {...avatarProps} src={avatar} />}
+      {isCircle && <CircleAvatar size={72} {...avatarProps} src={avatar} />}
 
       <div className={styles.mask}>
         {loading || uploading ? (
-          <Spinner />
+          <SpinnerBlock />
         ) : (
-          <IconCamera24 color="white" size="lg" />
+          <Icon icon={IconCamera} color="white" size={32} />
         )}
       </div>
 
@@ -160,11 +167,9 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
           id={fieldId}
           type="file"
           name="file"
-          aria-label={translate({
-            zh_hant: '上傳頭像',
-            zh_hans: '上传头像',
-            en: 'Upload avatar',
-            lang,
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Upload avatar',
+            id: 'mqa6CF',
           })}
           accept={acceptTypes}
           multiple={false}

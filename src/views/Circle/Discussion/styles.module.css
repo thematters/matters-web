@@ -3,19 +3,17 @@
 }
 
 .discussion {
-  padding: 0 var(--spacing-base);
-  margin-top: var(--spacing-x-tight);
+  padding: 0 var(--sp16);
+  margin-top: var(--sp8);
 
   & .header {
-    margin-bottom: var(--spacing-loose);
+    margin-bottom: var(--sp24);
   }
 }
 
 .wall {
-  margin-top: var(--spacing-base);
-  margin-bottom: calc(
-    calc(var(--spacing-xxx-loose) + var(--global-nav-height)) * -1
-  );
+  margin-top: var(--sp16);
+  margin-bottom: calc(calc(var(--sp64) + var(--global-nav-height)) * -1);
 
   & img {
     display: block;
@@ -23,16 +21,16 @@
   }
 
   & .brief {
-    height: calc(var(--spacing-xxx-loose) + var(--global-nav-height));
+    height: calc(var(--sp64) + var(--global-nav-height));
     margin-top: calc(-1px);
     text-align: center;
     background: var(--color-matters-green);
 
     & p {
       display: inline-block;
-      padding: var(--spacing-x-tight) var(--spacing-base);
-      margin-top: var(--spacing-base);
-      font-size: var(--font-size-md-s);
+      padding: var(--sp8) var(--sp16);
+      margin-top: var(--sp16);
+      font-size: var(--text15);
       color: var(--color-white);
       background: #095552;
       border-radius: 3rem;

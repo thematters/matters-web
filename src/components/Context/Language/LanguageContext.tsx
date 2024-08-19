@@ -9,13 +9,7 @@ import {
   toLocale,
   toUserLanguage,
 } from '~/common/utils'
-import {
-  toast,
-  Translate,
-  useMutation,
-  useRoute,
-  ViewerContext,
-} from '~/components'
+import { toast, useMutation, useRoute, ViewerContext } from '~/components'
 import { UpdateLanguageMutation, UserLanguage } from '~/gql/graphql'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
@@ -119,7 +113,13 @@ export const LanguageProvider = ({
       })
     } catch (e) {
       toast.error({
-        message: <Translate id="failureChange" />,
+        // FIXME: cannot use <FormattedMessage> here cuz it's outer of <TranslationProvider>
+        message:
+          language === UserLanguage.En
+            ? 'Failed to edit, please try again.'
+            : language === UserLanguage.ZhHans
+            ? '修改失败，请稍候重试'
+            : '修改失敗，請稍候重試',
       })
     }
   }

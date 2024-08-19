@@ -1,3 +1,4 @@
+import _omitBy from 'lodash/omitBy'
 import { useRouter } from 'next/router'
 
 import { PATHS } from '~/common/enums'
@@ -15,9 +16,10 @@ import { UserLanguage } from '~/gql/graphql'
  */
 type QueryKey =
   | 'name' // circle or user name
-  | 'mediaHash'
+  | 'shortHash'
   | 'draftId'
   | 'tagId'
+  | 'collection'
   | 'collectionId'
   | 'q'
   | 'type'
@@ -44,16 +46,13 @@ export const useRoute = () => {
       case 'name':
         query = query.replace(/[@~～]/g, '')
         break
-      case 'mediaHash':
-        query = query.split('-').slice(-1)[0]
-        break
     }
 
     return query || ''
   }
 
   const setQuery = (key: QueryKey, value: string) => {
-    const query = { ...router.query, [key]: value }
+    const query = _omitBy({ ...router.query, [key]: value }, (v) => !v)
     router.push({ query })
   }
 

@@ -1,13 +1,14 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 import { getAddress } from 'viem'
 
-import { maskAddress } from '~/common/utils'
+import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
+import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
+import { truncate } from '~/common/utils'
 import {
   Button,
   ButtonProps,
   CopyToClipboard,
-  IconCopy16,
-  IconExternalLink16,
+  Icon,
   TextIcon,
   TextIconProps,
 } from '~/components'
@@ -25,15 +26,15 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
 }) => {
   const intl = useIntl()
   const buttonProps: ButtonProps = {
-    spacing: ['xxtight', 'tight'],
+    spacing: [4, 12],
     bgColor: 'greenLighter',
     bgActiveColor: 'greyLighter',
   }
   const textIconProps: TextIconProps = {
-    spacing: 'xtight',
-    textPlacement: 'left',
+    spacing: 8,
+    placement: 'left',
     color: 'green',
-    size: 'md',
+    size: 16,
   }
 
   if (ensName && hasLinkedIPNS) {
@@ -43,7 +44,7 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
         htmlHref={`https://${ensName}.limo`}
         htmlTarget="_blank"
       >
-        <TextIcon {...textIconProps} icon={<IconExternalLink16 />}>
+        <TextIcon {...textIconProps} icon={<Icon icon={IconExternal} />}>
           {ensName}
         </TextIcon>
       </Button>
@@ -57,17 +58,23 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
         <FormattedMessage defaultMessage="Address copied" id="+aMAeT" />
       }
     >
-      <Button
-        {...buttonProps}
-        aria-label={intl.formatMessage({
-          defaultMessage: 'Copy',
-          id: '4l6vz1',
-        })}
-      >
-        <TextIcon {...textIconProps} icon={<IconCopy16 size="sm" />}>
-          {ensName || maskAddress(getAddress(address))}
-        </TextIcon>
-      </Button>
+      {({ copyToClipboard }) => (
+        <Button
+          {...buttonProps}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Copy',
+            id: '4l6vz1',
+          })}
+          onClick={copyToClipboard}
+        >
+          <TextIcon
+            {...textIconProps}
+            icon={<Icon icon={IconCopy} size={14} />}
+          >
+            {ensName || truncate(getAddress(address))}
+          </TextIcon>
+        </Button>
+      )}
     </CopyToClipboard>
   )
 }

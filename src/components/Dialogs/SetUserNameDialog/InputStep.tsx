@@ -10,7 +10,7 @@ import {
   MIN_USER_NAME_LENGTH,
 } from '~/common/enums'
 import { normalizeUserName, validateUserName } from '~/common/utils'
-import { Dialog, Form, LanguageContext, ViewerContext } from '~/components'
+import { Dialog, Form, ViewerContext } from '~/components'
 
 import Field from '../../Form/Field'
 import { QUERY_USER_NAME } from './gql'
@@ -26,7 +26,6 @@ interface FormValues {
 }
 
 const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
-  const { lang } = useContext(LanguageContext)
   const viewer = useContext(ViewerContext)
 
   const client = useApolloClient()
@@ -38,7 +37,10 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   )
 
   useEffect(() => {
-    setFieldValue('mattersID', userName)
+    setFieldValue(
+      'mattersID',
+      isLegacyUserConfirm ? userName.toLowerCase() : userName
+    )
   }, [userName])
 
   const intl = useIntl()
@@ -53,13 +55,13 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
     isSubmitting,
   } = useFormik<FormValues>({
     initialValues: {
-      mattersID: userName,
+      mattersID: isLegacyUserConfirm ? userName.toLowerCase() : userName,
     },
     validateOnBlur: false,
     validateOnChange: true,
     validate: ({ mattersID }) =>
       _pickBy({
-        mattersID: validateUserName(mattersID, lang),
+        mattersID: validateUserName(mattersID, intl),
       }),
     onSubmit: async ({ mattersID }, { setSubmitting, setFieldError }) => {
       if (isLegacyUserConfirm && viewer.userName === mattersID) {
@@ -75,7 +77,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         })
         setSubmitting(false)
 
-        if (!!data.user) {
+        if (!!data.user && data.user.id !== viewer.id) {
           setFieldError(
             'mattersID',
             intl.formatMessage({
@@ -121,10 +123,6 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
           if (e.key.toLocaleLowerCase() === KEYVALUE.enter) {
             e.stopPropagation()
           }
-        }}
-        onPaste={(e) => {
-          e.preventDefault()
-          return false
         }}
         onKeyUp={() => {
           const v = normalizeUserName(values.mattersID)

@@ -1,12 +1,8 @@
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import {
-  Avatar,
-  Spacer,
-  TextIcon,
-  Translate,
-  ViewerContext,
-} from '~/components'
+import { MAX_ARTICLE_SUPPORT_LENGTH } from '~/common/enums'
+import { Avatar, Spacer, TextIcon, ViewerContext } from '~/components'
 import DonationButton from '~/components/Buttons/DonationButton'
 
 import styles from './styles.module.css'
@@ -19,52 +15,57 @@ const SupportPreview = ({
   tabType: string
 }) => {
   const viewer = useContext(ViewerContext)
+
   return (
     <section className={styles.preview}>
       <section className={styles.content}>
         {!content &&
           (tabType === 'request' ? (
-            <Translate id="supportRequestDescription" />
+            <FormattedMessage
+              defaultMessage="Like my work? Don't forget to support and clap, let me know that you are with me on the road of creation. Keep this enthusiasm together!"
+              id="9EABqX"
+            />
           ) : (
             <>
               <p className={styles.tagline}>
-                <Translate
-                  zh_hans="🎉感谢支持"
-                  zh_hant="🎉 感謝支持！"
-                  en="🎉Thanks for your support!"
+                <FormattedMessage
+                  defaultMessage="🎉 Thank you for support!"
+                  id="Myrqtn"
                 />
               </p>
+              <Spacer size="xtight" />
               <p>
-                <Translate id="supportResponseDescription" />
+                <FormattedMessage
+                  defaultMessage="With your support, I will be able to accumulate more energy to create."
+                  id="E+dEI9"
+                />
               </p>
             </>
           ))}
 
         {content && tabType === 'reply' && (
           <>
-            <Avatar src={viewer?.avatar} size="xl" />
+            <Avatar src={viewer?.avatar} size={48} />
             <p className={styles.tagline}>
-              <TextIcon weight="md">{viewer?.displayName}</TextIcon>
+              <TextIcon weight="medium">{viewer?.displayName}&nbsp;</TextIcon>
               <TextIcon color="greyDarker">
-                <Translate
-                  zh_hant="&nbsp;想對你說："
-                  zh_hans="&nbsp;想对你說："
-                  en="&nbsp;wants to tell you: "
-                />
+                <FormattedMessage defaultMessage="says: " id="M05PcB" />
               </TextIcon>
             </p>
             <Spacer size="xtight" />
           </>
         )}
 
-        <p>
-          <Translate zh_hant={content} zh_hans={content} en={content} />
-        </p>
+        <p>{content.slice(0, MAX_ARTICLE_SUPPORT_LENGTH)}</p>
       </section>
 
       <section className={styles.button}>
-        {tabType === 'request' && <DonationButton supported={false} />}
-        {tabType === 'reply' && <DonationButton supported={true} />}
+        {tabType === 'request' && (
+          <DonationButton supported={false} width="100%" />
+        )}
+        {tabType === 'reply' && (
+          <DonationButton supported={true} width="100%" />
+        )}
       </section>
     </section>
   )

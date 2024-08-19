@@ -1,7 +1,7 @@
 .confirmTable {
   width: 100%;
-  margin-bottom: var(--spacing-base);
-  font-size: var(--font-size-sm);
+  margin-bottom: var(--sp16);
+  font-size: var(--text14);
   line-height: 1.5rem;
   color: var(--color-grey);
 }
@@ -10,7 +10,7 @@
   @mixin flex-center-space-between;
 
   & + .row {
-    margin-top: var(--spacing-base);
+    margin-top: var(--sp16);
   }
 
   & .col:last-child {
@@ -18,31 +18,31 @@
   }
 
   &.total {
-    font-weight: var(--font-weight-bold);
+    font-weight: var(--font-bold);
     color: var(--color-black);
 
     & .col:last-child {
-      font-size: var(--font-size-lg);
+      font-size: var(--text20);
     }
   }
 
   &.balance {
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-medium);
     color: var(--color-black);
   }
 
   &.insufficient {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 
   &.breaker {
-    margin: var(--spacing-base) 0;
+    margin: var(--sp16) 0;
     border-bottom: 0.5px solid rgb(0 0 0 / 15%);
   }
 }
 
 .col {
   &.insufficient {
-    color: var(--color-red);
+    color: var(--color-negative-red);
   }
 }

@@ -1,26 +1,25 @@
 import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import {
   ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
-import { translate, validateImage } from '~/common/utils'
+import { validateImage } from '~/common/utils'
 import {
   Book,
   Button,
   Cover,
   CoverProps,
-  IconCamera24,
-  IconCamera32,
-  IconClose2V32,
-  LanguageContext,
-  Spinner,
+  Icon,
+  SpinnerBlock,
   toast,
-  Translate,
   useDirectImageUpload,
   useMutation,
 } from '~/components'
@@ -88,7 +87,7 @@ export const CoverUploader = ({
   bookTitle,
   bookArticleCount,
 }: CoverUploaderProps) => {
-  const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
 
   const [cover, setCover] = useState<string | undefined | null>(initCover)
   const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
@@ -152,7 +151,14 @@ export const CoverUploader = ({
         throw new Error()
       }
     } catch (e) {
-      toast.error({ message: <Translate id="failureUploadImage" /> })
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="Failed to upload, please try again."
+            id="qfi4cg"
+          />
+        ),
+      })
     }
 
     if (onUploadEnd) {
@@ -169,9 +175,9 @@ export const CoverUploader = ({
   const Mask = () => (
     <div className={styles.mask}>
       {loading || uploading ? (
-        <Spinner />
+        <SpinnerBlock />
       ) : (
-        <IconCamera24 color="white" size="xl" />
+        <Icon icon={IconCamera} color="white" size={48} />
       )}
     </div>
   )
@@ -184,13 +190,13 @@ export const CoverUploader = ({
     return (
       <div className={maskClasses}>
         {loading || uploading ? (
-          <Spinner color={cover ? 'greyLight' : 'white'} />
+          <SpinnerBlock color={cover ? 'greyLight' : 'white'} />
         ) : (
           <section className={styles.userProfileCover}>
-            <IconCamera32 color="white" size="lg" />
+            <Icon icon={IconCamera} color="white" size={32} />
             {cover && (
               <Button onClick={removeCover}>
-                <IconClose2V32 color="white" size="lg" />
+                <Icon icon={IconTimes} color="white" size={32} />
               </Button>
             )}
           </section>
@@ -232,7 +238,10 @@ export const CoverUploader = ({
           id={fieldId}
           type="file"
           name="file"
-          aria-label={translate({ id: 'uploadCover', lang })}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Upload Cover',
+            id: 'QvPc1q',
+          })}
           accept={acceptTypes}
           multiple={false}
           onChange={handleChange}

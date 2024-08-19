@@ -3,6 +3,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
@@ -22,6 +23,7 @@ import {
   validateEmail,
   WalletType,
 } from '~/common/utils'
+import type { TurnstileInstance } from '~/components'
 import {
   AuthFeedType,
   AuthNormalFeed,
@@ -29,19 +31,17 @@ import {
   AuthWalletFeed,
   Dialog,
   Form,
-  IconLeft20,
+  Icon,
   LanguageContext,
   LanguageSwitch,
   Media,
-  ReCaptchaContext,
+  ReCaptcha,
+  ResendCodeButton,
   TextIcon,
-  Turnstile,
-  TurnstileInstance,
   useCountdown,
   // toast,
   useMutation,
   useRoute,
-  ViewerContext,
 } from '~/components'
 import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import SEND_CODE from '~/components/GQL/mutations/sendCode'
@@ -81,7 +81,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   setAuthFeedType,
   back,
 }) => {
-  const viewer = useContext(ViewerContext)
   const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
     showToast: false,
   })
@@ -98,7 +97,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
-  const { token: reCaptchaToken, refreshToken } = useContext(ReCaptchaContext)
   const turnstileRef = useRef<TurnstileInstance>(null)
   const [turnstileToken, setTurnstileToken] = useState<string>()
 
@@ -135,7 +133,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     validateOnChange: false,
     validate: ({ email, password }) =>
       _pickBy({
-        email: validateEmail(email, lang, { allowPlusSign: true }),
+        email: validateEmail(email, intl, { allowPlusSign: true }),
       }),
     onSubmit: async ({ email, password }, { setFieldError }) => {
       try {
@@ -219,7 +217,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   })
 
   const sendLoginCode = async () => {
-    const error = validateEmail(values.email, lang, { allowPlusSign: true })
+    const error = validateEmail(values.email, intl, { allowPlusSign: true })
     if (error) {
       setFieldError('email', error)
       return
@@ -233,9 +231,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           input: {
             email: values.email,
             type: 'email_otp',
-            token: turnstileToken
-              ? `${reCaptchaToken} ${turnstileToken}`
-              : reCaptchaToken,
+            token: turnstileToken,
             redirectUrl,
             language: lang,
           },
@@ -266,33 +262,20 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           )
         }
       })
-      refreshToken?.()
       turnstileRef.current?.reset()
     }
   }
 
   const fieldMsgId = `field-msg-sign-in`
 
-  const siteKey = process.env
-    .NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
   const InnerForm = (
     <>
-      <Turnstile
+      <ReCaptcha
         ref={turnstileRef}
-        siteKey={siteKey}
-        options={{
-          action: 'email_login',
-          cData: `user-group-${viewer.info.group}`,
-          size: 'invisible',
-        }}
-        scriptOptions={{
-          compat: 'recaptcha',
-          appendTo: 'body',
-        }}
-        onSuccess={(token) => {
-          setTurnstileToken(token)
-        }}
+        action="email_login"
+        setToken={setTurnstileToken}
       />
+
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
@@ -332,33 +315,17 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           hasFooter={false}
           rightButton={
             <>
-              {hasSendCode && countdown > 0 && (
-                <span className={styles.resendButton}>
-                  {countdown}&nbsp;
-                  <FormattedMessage
-                    defaultMessage="Resend"
-                    id="dzF4ci"
-                    description="src/components/Forms/EmailLoginForm/index.tsx"
-                  />
-                </span>
-              )}
-              {(hasSendCode || errorCode === ERROR_CODES.CODE_EXPIRED) &&
-                countdown === 0 && (
-                  <button
-                    className={styles.resendButton}
-                    onClick={(e) => {
-                      e.preventDefault()
-                      sendLoginCode()
-                    }}
-                    disabled={sendingCode}
-                  >
-                    <FormattedMessage
-                      defaultMessage="Resend"
-                      id="dzF4ci"
-                      description="src/components/Forms/EmailLoginForm/index.tsx"
-                    />
-                  </button>
-                )}
+              {
+                <ResendCodeButton
+                  showCountDown={hasSendCode}
+                  showResendButton={
+                    hasSendCode || errorCode === ERROR_CODES.CODE_EXPIRED
+                  }
+                  countdown={countdown}
+                  sendCode={sendLoginCode}
+                  disabled={sendingCode}
+                />
+              }
             </>
           }
         />
@@ -459,7 +426,10 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             <section className={styles.footerBtns}>
               <Dialog.TextButton
                 text={
-                  <TextIcon icon={<IconLeft20 size="mdS" />} spacing="xxxtight">
+                  <TextIcon
+                    icon={<Icon icon={IconLeft} size={20} />}
+                    spacing={2}
+                  >
                     <FormattedMessage defaultMessage="Back" id="cyR7Kh" />
                   </TextIcon>
                 }

@@ -1,0 +1,53 @@
+.header {
+  @mixin flex-start-space-between;
+
+  & .left {
+    & .author {
+      @mixin flex-center-start;
+
+      gap: var(--sp8);
+
+      & .info {
+        display: flex;
+        flex-direction: column;
+
+        & .top {
+          @mixin flex-center-start;
+
+          gap: var(--sp6);
+        }
+
+        & .displayName {
+          @mixin line-clamp;
+
+          font-size: var(--text15);
+          font-weight: var(--font-medium);
+          line-height: 1.75;
+        }
+
+        & time {
+          line-height: 1.125rem;
+        }
+      }
+    }
+  }
+
+  & .right {
+    display: inline-flex;
+    align-items: center;
+    height: 1.375rem;
+    margin-left: var(--sp16);
+
+    & > * + * {
+      margin-left: var(--sp12);
+    }
+  }
+}
+
+.contentContainer {
+  margin-top: var(--sp12);
+
+  &.descendant {
+    width:;
+  }
+}

@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, Spinner, useDialogSwitch } from '~/components'
+import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 import { EditProfileDialogUserPublicFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -11,7 +11,7 @@ interface EditProfileDialogProps {
 }
 
 const DynamicContent = dynamic(() => import('./Content'), {
-  loading: () => <Spinner />,
+  loading: () => <SpinnerBlock />,
 })
 
 const BaseEditProfileDialog = ({ user, children }: EditProfileDialogProps) => {

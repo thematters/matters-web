@@ -1,0 +1,12 @@
+.descendants {
+  @mixin border-left-grey-light;
+
+  padding-left: var(--sp16);
+  margin-left: var(--sp8);
+  border-left-style: dashed;
+
+  & .contentContainer {
+    padding-left: var(--sp32);
+    margin-top: var(--sp8);
+  }
+}

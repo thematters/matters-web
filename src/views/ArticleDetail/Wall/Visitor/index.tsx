@@ -2,15 +2,10 @@ import { useApolloClient } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
 import IMG_AD from '@/public/static/images/ad.svg'
 import { analytics } from '~/common/utils'
-import {
-  Button,
-  IconClear16,
-  Layout,
-  LoginButton,
-  Translate,
-} from '~/components'
+import { Button, Icon, Layout, LoginButton, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -76,7 +71,7 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
                 id: 'rbrahO',
               })}
             >
-              <IconClear16 color="grey" />
+              <Icon icon={IconCircleMinus} color="grey" />
             </Button>
           </div>
         </section>

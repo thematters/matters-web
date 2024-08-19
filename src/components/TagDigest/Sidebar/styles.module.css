@@ -10,7 +10,7 @@
   flex-shrink: 0;
   width: 2.625rem;
   height: 2.625rem;
-  margin-right: var(--spacing-x-tight);
+  margin-right: var(--sp8);
 
   & img {
     @mixin object-fit-cover;
@@ -33,13 +33,13 @@
 .nums {
   @mixin flex-start-start;
 
-  margin-top: var(--spacing-x-tight);
+  margin-top: var(--sp8);
 
   & > * {
     width: 4rem;
   }
 
   & > * + * {
-    margin-left: var(--spacing-tight);
+    margin-left: var(--sp12);
   }
 }

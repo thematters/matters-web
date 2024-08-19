@@ -43,9 +43,9 @@ const NavListItemButton = forwardRef(
         >
           <TextIcon
             icon={active ? activeIcon : icon}
-            size="lg"
+            size={32}
             weight="semibold"
-            spacing="tight"
+            spacing={12}
             color="black"
           />
         </Button>
