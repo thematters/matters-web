@@ -94,7 +94,9 @@ const ArticleFeedsTabs = ({
                 pageType: 'campaign_detail',
               })
             }}
-            textColor="goldPress"
+            textColor={
+              feedType === FEED_TYPE_ANNOUNCEMENT ? 'white' : 'goldPress'
+            }
             bgColor={
               feedType === FEED_TYPE_ANNOUNCEMENT ? 'warnYellow' : 'topUpYellow'
             }
