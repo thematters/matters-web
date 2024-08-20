@@ -63,7 +63,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   const shortHash = getQuery('shortHash')
   const isAll = feedType === FEED_TYPE_ALL
   const isAnnouncement = feedType === FEED_TYPE_ANNOUNCEMENT
-  const announcement = camapign.announcements
+  const announcements = camapign.announcements
 
   const { data, loading, error, fetchMore, networkStatus, client } =
     usePublicQuery<CampaignArticlesPublicQuery>(CAMPAIGN_ARTICLES_PUBLIC, {
@@ -138,7 +138,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   if (isAnnouncement) {
     return (
       <List>
-        {announcement.map((article, i) => (
+        {[...announcements].reverse().map((article, i) => (
           <List.Item key={`${feedType}:${i}`}>
             <ArticleDigestFeed
               article={article}
