@@ -53,6 +53,12 @@ const Edit = () => {
   const [content, setContent] = useState(formDraft?.content || '')
   const [assets, setAssets] = useState<MomentAsset[]>(formDraft?.assets || [])
 
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   const updateAssets = (assets: MomentAsset[]) => {
     formStorage.set<FormDraft>(
       formStorageKey,
@@ -180,6 +186,12 @@ const Edit = () => {
     [styles.count]: true,
     [styles.over]: contentCount > MAX_MOMENT_CONTENT_LENGTH,
   })
+
+  // FIXED: Text content does not match server-rendered HTML
+  // https://nextjs.org/docs/messages/react-hydration-error
+  if (!isClient) {
+    return null
+  }
 
   return (
     <>

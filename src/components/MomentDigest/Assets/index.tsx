@@ -1,6 +1,7 @@
 import 'photoswipe/dist/photoswipe.css'
 
 import gql from 'graphql-tag'
+import PhotoSwipe from 'photoswipe'
 import { useEffect, useRef, useState } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 
@@ -95,7 +96,22 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
       className={styles.assets}
       data-test-id={TEST_ID.MOMENT_DIGEST_ASSETS}
     >
-      <Gallery options={{}}>
+      <Gallery
+        options={{}}
+        onOpen={(photoswipe: PhotoSwipe) => {
+          const closePhotoswipeListener = () => {
+            document.addEventListener('keyup', (event) => {
+              if (event.key === 'Escape') {
+                photoswipe.close()
+              }
+            })
+          }
+          closePhotoswipeListener()
+          photoswipe.on('close', () => {
+            document.removeEventListener('keyup', closePhotoswipeListener)
+          })
+        }}
+      >
         {loadedAssets.map((asset) => (
           <Item
             key={asset.id}

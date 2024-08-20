@@ -39,7 +39,7 @@
 
   min-height: 3rem;
   max-height: calc(24px + 3.5 * 26.25px);
-  padding: var(--sp4) var(--sp12);
+  padding: 0 var(--sp12) var(--sp4);
   margin-bottom: var(--sp8);
   overflow: scroll;
 }
