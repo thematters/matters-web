@@ -1258,6 +1258,9 @@
     "defaultMessage": "标签",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
+  "KkHQZ+": {
+    "defaultMessage": "现在报名，写作之旅将于数天后开始，活动细则可查看公告。（报名确认通常需要几分钟审核时间，之后你的头像将出现在作者之中）"
+  },
   "KlJEP9": {
     "defaultMessage": "钱包已绑定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1960,9 +1963,6 @@
   },
   "XZ8IJ3": {
     "defaultMessage": "完成修改后，新版会再次发布到 IPFS，你可以从文章标题下的「IPFS」进入查看历史版本。"
-  },
-  "XbS4AZ": {
-    "defaultMessage": "公告"
   },
   "Xd0J7Y": {
     "defaultMessage": "开放社区"
@@ -2826,9 +2826,6 @@
   },
   "onDesU": {
     "defaultMessage": "恭喜成为围炉一员。现在你可以免费浏览围炉内作品，还可以去围炉与大家谈天说地。"
-  },
-  "opxnPe": {
-    "defaultMessage": "现在报名，写作之旅将于数天后开始，活动细则可查看 {eventLink}。（报名确认通常需要几分钟审核时间，之后你的头像将出现在作者之中）"
   },
   "orIq4X": {
     "defaultMessage": "支持超过 100 次"
