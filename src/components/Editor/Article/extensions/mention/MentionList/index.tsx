@@ -91,9 +91,8 @@ export const MentionList = forwardRef(
               onClick={() => {
                 onClick(user)
               }}
-              bgActiveColor="greyLighter"
+              bgActiveColor="greyHover"
               isActive={activeItem === user.id}
-              activeOutline="auto"
               key={user.id}
             >
               <UserDigest.Mini
