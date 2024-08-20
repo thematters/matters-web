@@ -460,9 +460,6 @@
   "5sg7KC": {
     "defaultMessage": "Password"
   },
-  "5y5rID": {
-    "defaultMessage": "We will review your application shortly, stay tuned for the event!"
-  },
   "6+eeJ4": {
     "defaultMessage": "Lowercase letters, numbers and underscores",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -796,6 +793,9 @@
   "B2As08": {
     "defaultMessage": "That's all",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
+  },
+  "B9IFMF": {
+    "defaultMessage": "Yes, apply"
   },
   "BDbgCL": {
     "defaultMessage": "Heading 3"
@@ -1131,9 +1131,6 @@
   },
   "HAlOn1": {
     "defaultMessage": "Name"
-  },
-  "HB2VOx": {
-    "defaultMessage": "System or connection abnormality, please refresh the page and click “Apply” again."
   },
   "HBxXD/": {
     "defaultMessage": "License"
@@ -1781,6 +1778,9 @@
   "Sfql0+": {
     "defaultMessage": "Congratulations! You've got the Grand Badge!"
   },
+  "Sj+TN8": {
+    "defaultMessage": "Announcement"
+  },
   "SuRTsQ": {
     "defaultMessage": "Register for ISCN"
   },
@@ -2051,6 +2051,9 @@
   "XZ8IJ3": {
     "defaultMessage": "After the modification is completed, the new version will be released to IPFS again. You can view the historical version from \"IPFS\" under the article title."
   },
+  "XbS4AZ": {
+    "defaultMessage": "Event Infomation"
+  },
   "Xd0J7Y": {
     "defaultMessage": "Open Source"
   },
@@ -2286,9 +2289,6 @@
   },
   "beLe/F": {
     "defaultMessage": "Broadcast"
-  },
-  "buf5vO": {
-    "defaultMessage": "Event Information"
   },
   "c/z318": {
     "defaultMessage": "Incorrect email or password",
@@ -2778,6 +2778,9 @@
     "defaultMessage": "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
   },
+  "lO7wKc": {
+    "defaultMessage": "Not yet"
+  },
   "lT6Dt8": {
     "defaultMessage": "Confirm Resignation"
   },
@@ -2923,9 +2926,6 @@
   "oGiO//": {
     "defaultMessage": "Insert audio"
   },
-  "oLOus+": {
-    "defaultMessage": "Application has been submitted 🎉"
-  },
   "ob+HDS": {
     "defaultMessage": "View Circle"
   },
@@ -2937,8 +2937,14 @@
     "defaultMessage": "Following",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "on+DYO": {
+    "defaultMessage": "Confirm application"
+  },
   "onDesU": {
     "defaultMessage": "Congratulations! Now you can browse all works within the circle for free and chat with everyone."
+  },
+  "opxnPe": {
+    "defaultMessage": "Apply now. The writing journey will begin in a few days. For event details, please check the {eventLink}. (Application confirmation usually takes a few minutes for review. Your avatar will then appear among the writers.)"
   },
   "orIq4X": {
     "defaultMessage": "More than 100 supports"

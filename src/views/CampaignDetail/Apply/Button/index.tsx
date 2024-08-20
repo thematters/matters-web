@@ -46,29 +46,11 @@ const ApplyCampaignButton = ({
   }
 
   /**
-   * Succeeded
-   */
-  if (isSucceeded) {
-    return (
-      <TextIcon
-        icon={<Icon icon={IconCheck} size={16} />}
-        color={isAppliedDuringPeriod ? 'green' : 'black'}
-      >
-        {isAppliedDuringPeriod ? (
-          <FormattedMessage defaultMessage="Applied successfully" id="4nHH2x" />
-        ) : (
-          <FormattedMessage defaultMessage="Joined successfully" id="al5/yQ" />
-        )}
-      </TextIcon>
-    )
-  }
-
-  /**
-   * Pending or not applied
+   * Pending, not applied or succeeded
    */
   let text: React.ReactNode = ''
   if (isPending) {
-    text = isAppliedDuringPeriod ? (
+    text = isInApplicationPeriod ? (
       <FormattedMessage
         defaultMessage="Reviewing..."
         description="type:apply"
@@ -95,6 +77,12 @@ const ApplyCampaignButton = ({
         id="gCafm/"
       />
     )
+  } else if (isSucceeded) {
+    text = isAppliedDuringPeriod ? (
+      <FormattedMessage defaultMessage="Applied successfully" id="4nHH2x" />
+    ) : (
+      <FormattedMessage defaultMessage="Joined successfully" id="al5/yQ" />
+    )
   }
 
   if (!viewer.isAuthed) {
@@ -107,22 +95,27 @@ const ApplyCampaignButton = ({
     }
   }
 
+  const primary =
+    isInApplicationPeriod || (isSucceeded && isAppliedDuringPeriod)
+  const isLateSucceeded = !isAppliedDuringPeriod && isSucceeded
+  const bgColor = primary ? 'green' : undefined
+  const borderColor = primary ? 'green' : isLateSucceeded ? 'grey' : 'green'
+  const textColor = primary ? 'white' : isLateSucceeded ? 'grey' : 'green'
+
   if (size === 'lg') {
     return (
       <Button
         onClick={onClick}
         size={['100%', '3rem']}
-        disabled={isPending || !isApplicationStarted}
+        disabled={isPending || !isApplicationStarted || isSucceeded}
         borderWidth="sm"
-        borderColor={isInApplicationPeriod ? 'green' : 'black'}
-        bgColor={isInApplicationPeriod && isNotApplied ? 'green' : undefined}
+        borderColor={borderColor}
+        bgColor={bgColor}
       >
         <TextIcon
-          icon={isPending ? <Icon icon={IconCheck} size={20} /> : null}
+          icon={isSucceeded ? <Icon icon={IconCheck} size={20} /> : null}
           size={16}
-          color={
-            isInApplicationPeriod ? (isNotApplied ? 'white' : 'green') : 'black'
-          }
+          color={textColor}
           weight="normal"
           placement="right"
         >
@@ -137,15 +130,15 @@ const ApplyCampaignButton = ({
         size={[null, '1.875rem']}
         spacing={[0, 20]}
         borderWidth="sm"
-        disabled={isPending || !isApplicationStarted}
-        textColor={isInApplicationPeriod ? 'white' : 'black'}
-        bgColor={isInApplicationPeriod ? 'green' : undefined}
-        borderColor={isInApplicationPeriod ? undefined : 'greyLight'}
+        disabled={isPending || !isApplicationStarted || isSucceeded}
+        bgColor={bgColor}
+        borderColor={borderColor}
       >
         <TextIcon
           spacing={4}
           size={14}
-          icon={isPending ? <Icon icon={IconCheck} size={16} /> : null}
+          icon={isSucceeded ? <Icon icon={IconCheck} size={16} /> : null}
+          color={textColor}
         >
           {text}
         </TextIcon>

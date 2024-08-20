@@ -20,6 +20,19 @@ export const CAMPAIGN_ARTICLES_PUBLIC = gql`
           edges {
             cursor
             node {
+              id
+              campaigns {
+                campaign {
+                  id
+                  shortHash
+                }
+                stage {
+                  id
+                  nameZhHant: name(input: { language: zh_hant })
+                  nameZhHans: name(input: { language: zh_hans })
+                  nameEn: name(input: { language: en })
+                }
+              }
               ...ArticleDigestFeedArticlePublic
               ...ArticleDigestFeedArticlePrivate
             }
