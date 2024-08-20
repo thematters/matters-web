@@ -1319,6 +1319,9 @@
     "defaultMessage": "標籤",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
+  "KkHQZ+": {
+    "defaultMessage": "現在報名，寫作之旅將於數天後開始，活動細則可查看公告。（報名確認通常需要幾分鐘審核時間，之後你的頭像將出現在作者之中）"
+  },
   "KlJEP9": {
     "defaultMessage": "錢包已綁定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -2050,9 +2053,6 @@
   },
   "XZ8IJ3": {
     "defaultMessage": "完成修改後，新版會再次發佈到 IPFS，你可以從文章標題下的「IPFS」進入查看歷史版本。"
-  },
-  "XbS4AZ": {
-    "defaultMessage": "公告"
   },
   "Xd0J7Y": {
     "defaultMessage": "開放社區"
@@ -2942,9 +2942,6 @@
   },
   "onDesU": {
     "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
-  },
-  "opxnPe": {
-    "defaultMessage": "現在報名，寫作之旅將於數天後開始，活動細則可查看 {eventLink}。（報名確認通常需要幾分鐘審核時間，之後你的頭像將出現在作者之中）"
   },
   "orIq4X": {
     "defaultMessage": "支持超過 100 次"
