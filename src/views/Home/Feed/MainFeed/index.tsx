@@ -20,6 +20,7 @@ import {
   NewestFeedPublicQuery,
 } from '~/gql/graphql'
 
+import Announcements from '../../Announcements'
 import Authors from '../Authors'
 import Billboard from '../Billboard'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
@@ -86,7 +87,7 @@ const horizontalFeeds: FeedLocation = {
 const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
   const isHottestFeed = sortBy === 'hottest'
-
+  const isIcymiFeed = sortBy === 'icymi'
   /**
    * Data Fetching
    */
@@ -214,6 +215,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
         eof
       >
         <List>
+          {isHottestFeed && <Announcements />}
           {mixFeed.map((edge, i) => {
             if (edge?.__typename === 'HorizontalFeed') {
               const { Feed } = edge
@@ -227,6 +229,8 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
                   article={edge.node}
                   hasReadTime={true}
                   hasDonationCount={true}
+                  includesMetaData={!isIcymiFeed} // only include metadata for non-icymi feeds
+                  excludesTimeStamp={isIcymiFeed} // only exclude timestamp for icymi feed
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: sortBy,

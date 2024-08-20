@@ -1,17 +1,13 @@
 import { ReactComponent as IconAboutArrowRight } from '@/public/static/images/about/arrow-right.svg'
 import IMAGE_WAVE from '@/public/static/images/about/wave-join-us.svg'
 import { captureClicks } from '~/common/utils'
-import { Translate, withIcon } from '~/components'
+import { Icon, Translate } from '~/components'
 
 import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const IconArrow = () => (
-  <>
-    {withIcon(IconAboutArrowRight)({
-      style: { height: 20 },
-    })}
-  </>
+  <Icon icon={IconAboutArrowRight} style={{ height: 20 }} />
 )
 
 const JoinUs = () => {

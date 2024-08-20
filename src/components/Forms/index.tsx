@@ -1,5 +1,5 @@
-export * from './CommentForm'
-export * from './CommentFormBeta'
+export * from './ArticleCommentForm'
+export * from './CircleCommentForm'
 export * from './CreateCircleForm'
 export * from './EmailLoginForm'
 export * from './EmailSignUpForm'

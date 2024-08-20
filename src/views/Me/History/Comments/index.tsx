@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/react-hooks'
 import _flatten from 'lodash/flatten'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
@@ -17,7 +18,6 @@ import {
   List,
   QueryError,
   SpinnerBlock,
-  usePublicQuery,
   ViewerContext,
 } from '~/components'
 import { MeCommentsQuery } from '~/gql/graphql'
@@ -48,12 +48,9 @@ const Comments = () => {
   /**
    * Data Fetching
    */
-  // public data
-  const { data, loading, error, fetchMore } = usePublicQuery<MeCommentsQuery>(
+  const { data, loading, error, fetchMore } = useQuery<MeCommentsQuery>(
     ME_COMMENTS,
-    {
-      variables: { id: viewer?.id },
-    }
+    { variables: { id: viewer?.id } }
   )
 
   // pagination
@@ -155,9 +152,12 @@ const Comments = () => {
                             article: node as CommentArticle,
                           })}
                         >
-                          <section className={styles.content}>
-                            {stripHtml(comment.content || '')}
-                          </section>
+                          <section
+                            className={styles.content}
+                            dangerouslySetInnerHTML={{
+                              __html: stripHtml(comment.content || ''),
+                            }}
+                          />
                         </LinkWrapper>
                       </section>
                     </List.Item>

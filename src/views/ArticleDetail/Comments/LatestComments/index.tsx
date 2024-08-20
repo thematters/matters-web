@@ -4,16 +4,20 @@ import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { COMMENTS_COUNT } from '~/common/enums'
-import { filterComments, mergeConnections } from '~/common/utils'
 import {
-  CommentFormBeta,
+  filterComments,
+  mergeConnections,
+  parseCommentHash,
+} from '~/common/utils'
+import {
+  ArticleCommentForm,
+  ArticleThreadComment,
   EmptyComment,
   InfiniteScroll,
   List,
   Media,
   QueryError,
   Spacer,
-  ThreadCommentBeta,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -44,21 +48,7 @@ type CommentArticle = NonNullable<
 const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   const viewer = useContext(ViewerContext)
 
-  /**
-   * Fragment Patterns
-   *
-   * 0. ``
-   * 1. `#parentCommentId`
-   * 2. `#parentComemntId-childCommentId`
-   */
-  let fragment = ''
-  let parentId = ''
-  let descendantId = ''
-  if (typeof window !== 'undefined') {
-    fragment = window.location.hash.replace('#', '')
-    parentId = fragment.split('-')[0]
-    descendantId = fragment.split('-')[1]
-  }
+  const { parentId, descendantId } = parseCommentHash()
 
   /**
    * Data Fetching
@@ -146,13 +136,12 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   return (
     <section id="latest-comments">
       <Media greaterThan="sm">
-        <CommentFormBeta
+        <ArticleCommentForm
           articleId={article?.id}
-          type={'article'}
-          syncQuote
+          isFallbackEditor
           showClear
         />
-        <Spacer size="base" />
+        <Spacer size="sp16" />
       </Media>
       {!comments || (comments.length <= 0 && <EmptyComment />)}
       {!!comments && comments.length > 0 && (
@@ -162,7 +151,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
           loader={
             <>
               <Placeholder />
-              <Spacer size="loose" />
+              <Spacer size="sp24" />
             </>
           }
           eof={
@@ -177,9 +166,8 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
           <List spacing={[0, 0]} hasBorder={false}>
             {!!pinnedComment && (
               <List.Item key={pinnedComment.id}>
-                <ThreadCommentBeta
+                <ArticleThreadComment
                   comment={pinnedComment}
-                  type="article"
                   defaultExpand={
                     pinnedComment.id === parentId && !!descendantId
                   }
@@ -193,10 +181,9 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
                 !comment.pinned &&
                 comment.state !== 'archived' && (
                   <List.Item key={comment.id}>
-                    <ThreadCommentBeta
+                    <ArticleThreadComment
                       comment={comment}
                       pinnedComment={pinnedComment}
-                      type="article"
                       defaultExpand={comment.id === parentId && !!descendantId}
                       hasLink
                       disabled={lock}

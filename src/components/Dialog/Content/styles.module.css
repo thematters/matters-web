@@ -29,16 +29,14 @@
 }
 
 /* FIXME: can be removed if editor is only used in single page instead of being used in dialog, use vvh to exclude visual keyboard */
-:global(body.editor-focused) {
-  & .content {
-    max-height: calc(var(--vvh) * 100 - 4.25rem);
+:global(.dialog-editor).content {
+  max-height: calc(var(--vvh) * 100 - 4.25rem);
 
-    &.fixedHeight {
-      height: calc(var(--vvh) * 100 - 4.25rem);
+  &.fixedHeight {
+    height: calc(var(--vvh) * 100 - 4.25rem);
 
-      /* inner height - visual keyboard height */
-      margin-bottom: calc(var(--ivh) * 100 - var(--vvh) * 100);
-    }
+    /* inner height - visual keyboard height */
+    margin-bottom: calc(var(--ivh) * 100 - var(--vvh) * 100);
   }
 }
 

@@ -2,22 +2,12 @@ import gql from 'graphql-tag'
 
 export default gql`
   extend type Query {
-    commentDraft(input: CommentDraftInput!): CommentDraft!
     clientPreference: ClientPreference!
     lastFetchRandom: LastFetchRandom!
   }
 
   extend type Official {
     gatewayUrls: [String!]
-  }
-
-  type CommentDraft {
-    id: ID!
-    content: String!
-  }
-
-  input CommentDraftInput {
-    id: ID!
   }
 
   type ClientPreference {

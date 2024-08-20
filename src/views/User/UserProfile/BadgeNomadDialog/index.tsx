@@ -1,10 +1,15 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
+import { OPEN_NOMAD_BADGE_DIALOG } from '~/common/enums'
+import {
+  Dialog,
+  SpinnerBlock,
+  useDialogSwitch,
+  useEventListener,
+} from '~/components'
 
 type BadgeNomadLabelProps = {
   nomadBadgeLevel: 1 | 2 | 3 | 4
-  shareLink: string
 }
 
 type BadgeNomadDialogProps = BadgeNomadLabelProps & {
@@ -18,7 +23,6 @@ const DynamicContent = dynamic(() => import('./Content'), {
 export const BaseBadgeNomadDialog: React.FC<BadgeNomadDialogProps> = ({
   children,
   nomadBadgeLevel,
-  shareLink,
 }) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
@@ -30,15 +34,21 @@ export const BaseBadgeNomadDialog: React.FC<BadgeNomadDialogProps> = ({
         <DynamicContent
           nomadBadgeLevel={nomadBadgeLevel}
           closeDialog={closeDialog}
-          shareLink={shareLink}
         />
       </Dialog>
     </>
   )
 }
 
-export const BadgeNomadDialog = (props: BadgeNomadDialogProps) => (
-  <Dialog.Lazy mounted={<BaseBadgeNomadDialog {...props} />}>
-    {({ openDialog }) => <>{props.children({ openDialog })}</>}
-  </Dialog.Lazy>
-)
+export const BadgeNomadDialog = (props: BadgeNomadDialogProps) => {
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_NOMAD_BADGE_DIALOG, openDialog)
+    return <>{props.children && props.children({ openDialog })}</>
+  }
+
+  return (
+    <Dialog.Lazy mounted={<BaseBadgeNomadDialog {...props} />}>
+      {({ openDialog }) => <Children openDialog={openDialog} />}
+    </Dialog.Lazy>
+  )
+}

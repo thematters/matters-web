@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/react-hooks'
-import formatISO from 'date-fns/formatISO'
+import { formatISO } from 'date-fns'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
@@ -8,13 +8,17 @@ import {
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
 } from '~/common/enums'
-import { analytics, normalizeTag, toPath } from '~/common/utils'
 import {
-  ActiveCommentEditorProvider,
-  ArticleAppreciationContext,
-  ArticleAppreciationProvider,
+  analytics,
+  normalizeTag,
+  parseCommentHash,
+  toPath,
+} from '~/common/utils'
+import {
   BackToHomeButton,
   BackToHomeMobileButton,
+  CommentEditorProvider,
+  DrawerProvider,
   EmptyLayout,
   Error,
   Head,
@@ -104,25 +108,10 @@ const BaseArticleDetail = ({
   article: NonNullable<ArticleDetailPublicQuery['article']>
   privateFetched: boolean
 }) => {
-  /**
-   * Fragment Patterns
-   *
-   * 0. ``
-   * 1. `#parentCommentId`
-   * 2. `#parentComemntId-childCommentId`
-   */
-  let fragment = ''
-  let parentId = ''
-  if (typeof window !== 'undefined') {
-    fragment = window.location.hash.replace('#', '')
-    parentId = fragment.split('-')[0]
-  }
+  const { parentId } = parseCommentHash()
 
   const { routerLang } = useRoute()
   const viewer = useContext(ViewerContext)
-  const { initArticleAppreciationContext } = useContext(
-    ArticleAppreciationContext
-  )
 
   const features = useFeatures()
 
@@ -131,26 +120,16 @@ const BaseArticleDetail = ({
   )
 
   // Float toolbar
-  const [showFloatToolbar, setShowFloatToolbar] = useState(true)
-  const {
-    isIntersecting: isIntersectingDesktopToolbar,
-    ref: desktopToolbarRef,
-  } = useIntersectionObserver()
-  useEffect(() => {
-    setShowFloatToolbar(!isIntersectingDesktopToolbar)
-  }, [isIntersectingDesktopToolbar])
+  const { isIntersecting: hideFloatToolbar, ref: desktopToolbarRef } =
+    useIntersectionObserver()
 
   // Comment toolbar
-  const [showCommentToolbar, setShowCommentToolbar] = useState(false)
-  const { isIntersecting: isIntersectingComments, ref: commentsRef } =
+  const { isIntersecting: showCommentToolbar, ref: commentsRef } =
     useIntersectionObserver()
-  useEffect(() => {
-    setShowCommentToolbar(isIntersectingComments)
-  }, [isIntersectingComments])
 
   // Comment
   const [commentDrawerStep, setCommentDrawerStep] = useState<CommentDrawerStep>(
-    parentId !== '' ? 'commentDetail' : 'commentList'
+    !!parentId ? 'commentDetail' : 'commentList'
   )
   const [isOpenComment, setIsOpenComment] = useState(false)
   const toggleCommentDrawer = () => {
@@ -240,13 +219,6 @@ const BaseArticleDetail = ({
     }
   }, [])
 
-  useEffect(() => {
-    initArticleAppreciationContext(
-      article.likesReceivedTotal,
-      article.appreciateLeft
-    )
-  }, [article.appreciateLeft, article.likesReceivedTotal])
-
   // set language cookie for anonymous if it doesn't exist
   useEffect(() => {
     if (cookieLang || viewer.isAuthed || !routerLang) {
@@ -258,12 +230,16 @@ const BaseArticleDetail = ({
 
   // show comment detail drawer/dialog if fragment exists
   useEffect(() => {
-    if (parentId === '') {
+    if (!parentId) {
       return
     }
     setTimeout(() => {
       setIsOpenComment(true)
-      window.dispatchEvent(new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG))
+      window.dispatchEvent(
+        new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG, {
+          detail: { parentId },
+        })
+      )
     }, 500)
   }, [parentId])
 
@@ -441,7 +417,7 @@ const BaseArticleDetail = ({
       </section>
 
       <Media at="sm">
-        <Spacer size="xxxloose" />
+        <Spacer size="sp64" />
         <CommentsDialog
           id={article.id}
           articleDetails={article}
@@ -450,52 +426,28 @@ const BaseArticleDetail = ({
           privateFetched={privateFetched}
           lock={lock}
           showCommentToolbar={showCommentToolbar}
-        >
-          {({ openDialog: openCommentsDialog }) => (
-            <FixedToolbar
-              articleDetails={article}
-              translated={translated}
-              translatedLanguage={translatedLanguage}
-              privateFetched={privateFetched}
-              lock={lock}
-              showCommentToolbar={showCommentToolbar && article.canComment}
-              openCommentsDialog={
-                article.commentCount > 0 ? openCommentsDialog : undefined
-              }
-            />
-          )}
-        </CommentsDialog>
-      </Media>
-
-      <Media at="md">
-        <Spacer size="xloose" />
-        <FloatToolbar
-          show={true}
+        />
+        <FixedToolbar
           articleDetails={article}
+          translated={translated}
+          translatedLanguage={translatedLanguage}
           privateFetched={privateFetched}
           lock={lock}
-          toggleCommentDrawer={() => {
-            analytics.trackEvent('click_button', {
-              type: isOpenComment ? 'comment_close' : 'comment_open',
-              pageType: 'article_detail',
-              pageComponent: 'article_float_toolbar',
-            })
-            toggleCommentDrawer()
-          }}
-          toggleDonationDrawer={() => {
-            analytics.trackEvent('click_button', {
-              type: isOpenDonationDrawer ? 'support_close' : 'support_open',
-              pageType: 'article_detail',
-              pageComponent: 'article_float_toolbar',
-            })
-            toggleDonationDrawer()
-          }}
+          showCommentToolbar={showCommentToolbar && article.canComment}
+          openCommentsDialog={
+            article.commentCount > 0
+              ? () =>
+                  window.dispatchEvent(
+                    new CustomEvent(OPEN_COMMENT_DETAIL_DIALOG)
+                  )
+              : undefined
+          }
         />
       </Media>
 
-      <Media greaterThanOrEqual="lg">
+      <Media greaterThan="sm">
         <FloatToolbar
-          show={showFloatToolbar}
+          show={!hideFloatToolbar}
           articleDetails={article}
           privateFetched={privateFetched}
           lock={lock}
@@ -652,11 +604,11 @@ const ArticleDetail = ({
    * Render:Article
    */
   return (
-    <ArticleAppreciationProvider>
-      <ActiveCommentEditorProvider>
+    <DrawerProvider>
+      <CommentEditorProvider>
         <BaseArticleDetail article={article} privateFetched={privateFetched} />
-      </ActiveCommentEditorProvider>
-    </ArticleAppreciationProvider>
+      </CommentEditorProvider>
+    </DrawerProvider>
   )
 }
 

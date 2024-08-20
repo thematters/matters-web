@@ -10,14 +10,14 @@ import {
   ASSET_TYPE,
   UPLOAD_AUDIO_SIZE_LIMIT,
 } from '~/common/enums'
-import { Spinner, toast, Translate, withIcon } from '~/components'
+import { Icon, Spinner, toast, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
 export type UploadAudioButtonProps = {
   editor: Editor
   upload: (input: {
-    file?: any
+    file?: File
     url?: string
     type?: ASSET_TYPE.embed | ASSET_TYPE.embedaudio
   }) => Promise<{
@@ -110,7 +110,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
         id: 'oGiO//',
       })}
     >
-      {!uploading && withIcon(IconEditorAudio)({ size: 32 })}
+      {!uploading && <Icon icon={IconEditorAudio} size={32} />}
       {uploading && <Spinner size={32} color="greyLight" />}
 
       <VisuallyHidden>

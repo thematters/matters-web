@@ -1,14 +1,15 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import throttle from 'lodash/throttle'
+import _throttle from 'lodash/throttle'
 import { useContext, useEffect, useRef, useState } from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { captureClicks, initAudioPlayers, optimizeEmbed } from '~/common/utils'
 import {
-  // Media,
-  // TextSelectionPopover,
+  Media,
+  TextSelectionPopover,
   useMutation,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import { ReadArticleMutation } from '~/gql/graphql'
@@ -39,6 +40,9 @@ const Content = ({
 
   const contentContainer = useRef<HTMLDivElement>(null)
 
+  const { isInPath } = useRoute()
+  const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
+
   // idle timer
   const [lastScroll, setScrollTime] = useState(0)
 
@@ -46,7 +50,7 @@ const Content = ({
   useEffect(() => {
     initAudioPlayers()
 
-    const handleScroll = throttle(() => setScrollTime(Date.now() / 1000), 3000)
+    const handleScroll = _throttle(() => setScrollTime(Date.now() / 1000), 3000)
     window.addEventListener('scroll', handleScroll)
 
     return () => {
@@ -126,13 +130,13 @@ const Content = ({
         ref={contentContainer}
         data-test-id={TEST_ID.ARTICLE_CONTENT}
       />
-      {/* <Media greaterThan="sm">
-        {contentContainer.current && (
+      <Media greaterThan="sm">
+        {!isInArticleDetailHistory && contentContainer.current && (
           <TextSelectionPopover
             targetElement={contentContainer.current as HTMLElement}
           />
         )}
-      </Media> */}
+      </Media>
     </>
   )
 }

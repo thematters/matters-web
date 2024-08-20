@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconIllustation } from '@/public/static/images/callback/Illustation.svg'
 import { ReactComponent as IconLogo } from '@/public/static/images/callback/logo.svg'
 import { PATHS } from '~/common/enums'
-import { withIcon } from '~/components'
+import { Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -16,7 +16,7 @@ const UI = ({ hasError }: Props) => {
     <section className={styles.callback}>
       {hasError && (
         <section className={styles.error}>
-          {withIcon(IconIllustation)({})}
+          <Icon icon={IconIllustation} />
           <section className={styles.hint}>
             <section className={styles.title}>
               <FormattedMessage
@@ -43,7 +43,9 @@ const UI = ({ hasError }: Props) => {
         </section>
       )}
       {!hasError && (
-        <section className={styles.logo}>{withIcon(IconLogo)({})}</section>
+        <section className={styles.logo}>
+          <Icon icon={IconLogo} />
+        </section>
       )}
     </section>
   )

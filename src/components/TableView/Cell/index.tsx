@@ -16,10 +16,10 @@ type CellProps = {
   rightTextColor?: 'green' | 'greyDarker' | 'grey' | 'black'
   rightIcon?: React.ReactNode
 
-  ref?: any
+  ref?: React.Ref<HTMLDivElement>
 } & CardProps
 
-const Cell: React.FC<CellProps> = forwardRef(
+const Cell: React.FC<CellProps> = forwardRef<HTMLDivElement, CellProps>(
   (
     {
       title,

@@ -1,31 +1,31 @@
-.xxtight {
+.sp4 {
   padding-bottom: var(--sp4);
 }
 
-.xtight {
+.sp8 {
   padding-bottom: var(--sp8);
 }
 
-.base {
+.sp16 {
   padding-bottom: var(--sp16);
 }
 
-.baseLoose {
+.sp20 {
   padding-bottom: var(--sp20);
 }
 
-.loose {
+.sp24 {
   padding-bottom: var(--sp24);
 }
 
-.xloose {
+.sp32 {
   padding-bottom: var(--sp32);
 }
 
-.xxloose {
+.sp40 {
   padding-bottom: var(--sp40);
 }
 
-.xxxloose {
+.sp64 {
   padding-bottom: var(--sp64);
 }

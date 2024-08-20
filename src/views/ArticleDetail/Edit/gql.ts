@@ -1,8 +1,10 @@
 import gql from 'graphql-tag'
 
-import { CircleDigest, Tag } from '~/components'
+import { CircleDigest } from '~/components'
+import SelectCampaign from '~/components/Editor/SelectCampaign'
 import articleFragments from '~/components/GQL/fragments/article'
 import assetFragment from '~/components/GQL/fragments/asset'
+import { ArticleTag } from '~/components/Tag'
 
 export const GET_EDIT_ARTICLE = gql`
   query QueryEditArticle(
@@ -21,6 +23,7 @@ export const GET_EDIT_ARTICLE = gql`
       }
       summary
       summaryCustomized
+      createdAt
       assets {
         ...Asset
       }
@@ -31,6 +34,14 @@ export const GET_EDIT_ARTICLE = gql`
         id
         ownCircles {
           ...DigestRichCirclePublic
+        }
+        campaigns(input: { first: 1 }) {
+          edges {
+            node {
+              id
+              ...EditorSelectCampaign
+            }
+          }
         }
         displayName
         avatar
@@ -56,13 +67,22 @@ export const GET_EDIT_ARTICLE = gql`
           }
         }
       }
+      campaigns {
+        campaign {
+          id
+        }
+        stage {
+          id
+        }
+      }
       ...ArticleCollection
     }
   }
   ${assetFragment}
-  ${Tag.fragments.tag}
+  ${ArticleTag.fragments.tag}
   ${articleFragments.articleCollection}
   ${CircleDigest.Rich.fragments.circle.public}
+  ${SelectCampaign.fragments}
 `
 
 export const GET_EDIT_ARTICLE_ASSETS = gql`

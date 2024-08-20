@@ -1,7 +1,36 @@
 import gql from 'graphql-tag'
 
-import { Tag } from '~/components'
 import articleFragments from '~/components/GQL/fragments/article'
+import { ArticleTag } from '~/components/Tag'
+
+const fragment = gql`
+  fragment ArticleDetailEditHeaderArticle on Article {
+    id
+    cover
+    tags {
+      ...DigestTag
+    }
+    access {
+      type
+    }
+    canComment
+    sensitiveByAuthor
+    license
+    requestForDonation
+    replyToDonator
+    campaigns {
+      campaign {
+        id
+      }
+      stage {
+        id
+      }
+    }
+    ...ArticleCollection
+  }
+  ${ArticleTag.fragments.tag}
+  ${articleFragments.articleCollection}
+`
 
 export const EDIT_ARTICLE = gql`
   mutation EditArticle(
@@ -23,6 +52,8 @@ export const EDIT_ARTICLE = gql`
     $replyToDonator: replyToDonator_String_maxLength_140
     $canComment: Boolean
     $sensitive: Boolean
+    $campaigns: [ArticleCampaignInput!]
+    $isResetCampaign: Boolean! = false
   ) {
     editArticle(
       input: {
@@ -42,24 +73,36 @@ export const EDIT_ARTICLE = gql`
         replyToDonator: $replyToDonator
         canComment: $canComment
         sensitive: $sensitive
+        campaigns: $campaigns
       }
-    ) {
+    ) @skip(if: $isResetCampaign) {
       id
-      cover
-      tags {
-        ...DigestTag
+      ...ArticleDetailEditHeaderArticle
+    }
+    editArticleResetCampaign: editArticle(
+      input: {
+        id: $id
+        description: $description
+        title: $title
+        summary: $summary
+        content: $content
+        cover: $cover
+        tags: $tags
+        collection: $collection
+        circle: $circle
+        accessType: $accessType
+        license: $license
+        iscnPublish: $iscnPublish
+        requestForDonation: $requestForDonation
+        replyToDonator: $replyToDonator
+        canComment: $canComment
+        sensitive: $sensitive
+        campaigns: []
       }
-      access {
-        type
-      }
-      canComment
-      sensitiveByAuthor
-      license
-      requestForDonation
-      replyToDonator
-      ...ArticleCollection
+    ) @include(if: $isResetCampaign) {
+      id
+      ...ArticleDetailEditHeaderArticle
     }
   }
-  ${Tag.fragments.tag}
-  ${articleFragments.articleCollection}
+  ${fragment}
 `

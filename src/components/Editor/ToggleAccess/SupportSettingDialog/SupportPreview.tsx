@@ -33,7 +33,7 @@ const SupportPreview = ({
                   id="Myrqtn"
                 />
               </p>
-              <Spacer size="xtight" />
+              <Spacer size="sp8" />
               <p>
                 <FormattedMessage
                   defaultMessage="With your support, I will be able to accumulate more energy to create."
@@ -52,7 +52,7 @@ const SupportPreview = ({
                 <FormattedMessage defaultMessage="says: " id="M05PcB" />
               </TextIcon>
             </p>
-            <Spacer size="xtight" />
+            <Spacer size="sp8" />
           </>
         )}
 

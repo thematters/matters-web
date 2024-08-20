@@ -11,15 +11,15 @@ import { ReactComponent as IconEditorCode } from '@/public/static/icons/editor-c
 import { ReactComponent as IconEditorDivider } from '@/public/static/icons/editor-divider.svg'
 import { ReactComponent as IconEditorQuote } from '@/public/static/icons/editor-quote.svg'
 import { ReactComponent as IconEditorVideo } from '@/public/static/icons/editor-video.svg'
-import { withIcon } from '~/components'
+import { Icon } from '~/components'
 
 import styles from './styles.module.css'
-import UploadAudioButton from './UploadAudioButton'
-import UploadImageButton, { UploadImageButtonProps } from './UploadImageButton'
+import UploadAudioButton, { UploadAudioButtonProps } from './UploadAudioButton'
+import UploadImageButton from './UploadImageButton'
 
 export type FloatingMenuProps = {
   editor: Editor
-} & Pick<UploadImageButtonProps, 'upload'>
+} & Pick<UploadAudioButtonProps, 'upload'>
 
 export const FloatingMenu: React.FC<FloatingMenuProps> = ({
   editor,
@@ -88,12 +88,12 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 })
           }
         >
-          {withIcon(IconEditorAdd)({ size: 32 })}
+          {<Icon icon={IconEditorAdd} size={32} />}
         </button>
 
         {expand && (
           <div className={styles.menuItems}>
-            <UploadImageButton editor={editor} upload={upload} />
+            <UploadImageButton editor={editor} />
 
             <button
               onClick={() => {
@@ -119,7 +119,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 id: 'Jr12wo',
               })}
             >
-              {withIcon(IconEditorVideo)({ size: 32 })}
+              {<Icon icon={IconEditorVideo} size={32} />}
             </button>
 
             <UploadAudioButton editor={editor} upload={upload} />
@@ -148,7 +148,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 id: '5Ga0iK',
               })}
             >
-              {withIcon(IconEditorCode)({ size: 32 })}
+              {<Icon icon={IconEditorCode} size={32} />}
             </button>
 
             <button
@@ -164,7 +164,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 id: 'mObpsB',
               })}
             >
-              {withIcon(IconEditorQuote)({ size: 32 })}
+              {<Icon icon={IconEditorQuote} size={32} />}
             </button>
 
             <button
@@ -183,7 +183,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 id: 'QfVedX',
               })}
             >
-              {withIcon(IconEditorDivider)({ size: 32 })}
+              {<Icon icon={IconEditorDivider} size={32} />}
             </button>
           </div>
         )}

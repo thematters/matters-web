@@ -39,6 +39,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
   const [selected, setSelected] = useState(assets.find(filter))
   const onSave = async () => {
     const result = await editCover(selected)
+
     // set selected cover if fallback cover specified by server
     if (cover && cover === result?.data?.putDraft?.cover && !selected) {
       setSelected(assets.find(filter))

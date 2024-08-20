@@ -1,4 +1,4 @@
-import { Tag, Translate } from '~/components'
+import { InlineTag, Translate } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { EditorRecommendedTagsQuery } from '~/gql/graphql'
 
@@ -23,13 +23,7 @@ const SelectedTags: React.FC<SelectedTagsProps> = ({ tags, onRemoveTag }) => {
       <ul className={styles.tagList}>
         {tags.map((tag) => (
           <li key={tag.id}>
-            <Tag
-              tag={tag}
-              type="inline"
-              active
-              is="span"
-              onRemoveTag={() => onRemoveTag(tag)}
-            />
+            <InlineTag tag={tag} active onRemoveTag={() => onRemoveTag(tag)} />
           </li>
         ))}
       </ul>

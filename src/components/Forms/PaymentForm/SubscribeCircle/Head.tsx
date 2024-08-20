@@ -2,7 +2,7 @@ import { ReactComponent as IconCircleFeatureConnection } from '@/public/static/i
 import { ReactComponent as IconCircleFeatureDiscussion } from '@/public/static/icons/circle-feature-discussion.svg'
 import { ReactComponent as IconCircleFeatureReading } from '@/public/static/icons/circle-feature-reading.svg'
 import { formatAmount } from '~/common/utils'
-import { CircleDigest, TextIcon, Translate, withIcon } from '~/components'
+import { CircleDigest, Icon, TextIcon, Translate } from '~/components'
 import {
   DigestRichCirclePrivateFragment,
   DigestRichCirclePublicFragment,
@@ -43,7 +43,7 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
       <ul className={styles.features}>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureReading)({ size: 20 })}
+            icon={<Icon icon={IconCircleFeatureReading} size={20} />}
             color="gold"
             size={15}
           >
@@ -52,7 +52,7 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
         </li>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureDiscussion)({ size: 20 })}
+            icon={<Icon icon={IconCircleFeatureDiscussion} size={20} />}
             color="gold"
             size={15}
           >
@@ -61,7 +61,7 @@ const Head: React.FC<HeadProps> = ({ circle }) => {
         </li>
         <li>
           <TextIcon
-            icon={withIcon(IconCircleFeatureConnection)({ size: 20 })}
+            icon={<Icon icon={IconCircleFeatureConnection} size={20} />}
             color="gold"
             size={15}
           >

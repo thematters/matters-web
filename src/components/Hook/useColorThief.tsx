@@ -34,8 +34,8 @@ export const useColorThief = () => {
             hsl[1] * 100 + ''
           ).toFixed(2)}%, 30%, 1)`
         )
-      } catch (error: any) {
-        if (error.name === 'SecurityError') {
+      } catch (error) {
+        if (isSecurityError(error)) {
           // Throws this error in Firefox
           setTimeout(() => {
             if (tryGetColorTime > 0) {
@@ -46,6 +46,10 @@ export const useColorThief = () => {
         }
       }
     })
+  }
+
+  function isSecurityError(error: unknown): error is DOMException {
+    return error instanceof DOMException && error.name === 'SecurityError'
   }
 
   const getColor = () => {

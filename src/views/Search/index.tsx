@@ -35,10 +35,10 @@ const Search = () => {
   }
 
   const addSearchHistory = (searchKey: string) => {
-    const nsh = _uniq([searchKey, ...(storage.get(storageKey) || [])]).slice(
-      0,
-      SEARCH_HISTORY_LENGTH
-    )
+    const nsh = _uniq([
+      searchKey,
+      ...(storage.get<string[]>(storageKey) || []),
+    ]).slice(0, SEARCH_HISTORY_LENGTH)
     updateSearchHistory(nsh)
   }
 
@@ -56,7 +56,11 @@ const Search = () => {
   useEffect(() => {
     if (!isHistory) return
 
-    setSearchHistory(storage.get(storageKey))
+    const history = storage.get<string[]>(storageKey)
+
+    if (history) {
+      setSearchHistory(history)
+    }
   }, [storageKey])
 
   useEffect(() => {

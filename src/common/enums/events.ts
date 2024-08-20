@@ -22,8 +22,11 @@ export const OPEN_UNIVERSAL_AUTH_DIALOG = 'openUniversalAuthDialog'
 export const CLOSE_ACTIVE_DIALOG = 'closeActiveDialog'
 export const OPEN_SUBSCRIBE_CIRCLE_DIALOG = 'openSubscribeCircleDialog'
 export const OPEN_SET_USER_NAME_DIALOG = 'openSetUserNameDialog'
-export const OPEN_SHOW_NOMAD_BADGE_DIALOG = 'openShowNomadBadgeDialog'
+export const OPEN_NOMAD_BADGE_DIALOG = 'openNomadBadgeDialog'
+export const OPEN_GRAND_BADGE_DIALOG = 'openGrandBadgeDialog'
 export const OPEN_COMMENT_DETAIL_DIALOG = 'openCommentDetailDialog'
+export const OPEN_SET_PAYMENT_PASSWORD_DIALOG = 'openSetPaymentPasswordDialog'
+export const CLOSE_SET_PAYMENT_PASSWORD_DIALOG = 'closeSetPaymentPasswordDialog'
 export const OPEN_COMMENT_LIST_DRAWER = 'openCommentListDrawer'
 export const CLOSE_OTHER_DRAWERS = 'closeOtherDrawers'
 export const BYPASS_SCROLL_LOCK = 'bypassScrollLock'
@@ -58,3 +61,8 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   support = 'support',
   visitorWall = 'visitorWall',
 }
+
+/**
+ * Broadcast channel
+ */
+export const CHANNEL_VERIFIED_EMAIL = 'channel-verified-email'

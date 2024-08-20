@@ -19,7 +19,7 @@ const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
       }
     >
       <section className={styles.container}>
-        <ToggleAccess {...props} compact />
+        <ToggleAccess {...props} theme="sidebar" />
       </section>
     </Box>
   )

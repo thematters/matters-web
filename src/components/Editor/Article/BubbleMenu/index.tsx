@@ -4,6 +4,7 @@ import {
   isTextSelection,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
+import { Node } from 'prosemirror-model'
 import { useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -18,7 +19,7 @@ import { ReactComponent as IconEditorStrike } from '@/public/static/icons/24px/e
 import { ReactComponent as IconEditorUl } from '@/public/static/icons/24px/editor-ul.svg'
 import { KEYVALUE } from '~/common/enums'
 import { isUrl } from '~/common/utils'
-import { withIcon } from '~/components'
+import { Icon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -64,7 +65,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
       tippyOptions={{
         theme: 'bubble-menu',
         duration: 200,
-        placement: 'auto-start',
+        placement: 'top',
         arrow: false,
         onHidden: () => setShowLinkInput(false),
       }}
@@ -87,11 +88,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         const hasEditorFocus = view.hasFocus()
         //  || isChildOfMenu
 
-        // figureImage, figureAudio, figureEmbed contain `<figcaption>`
-        const isFigure = $anchor.parent.type.name.includes('figure')
-
-        // hr
-        const isHr = $anchor.nodeAfter?.type.name.includes('horizontalRule')
+        const isFigure =
+          ('node' in selection &&
+            (selection.node as Node).type.name.includes('figure')) ||
+          $anchor.parent.type.name.includes('figure')
+        const isHr = $anchor.nodeAfter?.type.name === 'horizontalRule'
+        const $grandParent = $anchor.node($anchor.depth - 1)
+        const isInBlockquote = $grandParent?.type.name === 'blockquote'
 
         if (
           !hasEditorFocus ||
@@ -99,7 +102,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           isEmptyTextBlock ||
           !editor.isEditable ||
           isFigure ||
-          isHr
+          isHr ||
+          isInBlockquote
         ) {
           return false
         }
@@ -135,7 +139,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'Zqekct',
                 })}
               >
-                {withIcon(IconEditorH2)({ size: 24 })}
+                {<Icon icon={IconEditorH2} size={24} />}
               </button>
             )}
 
@@ -159,7 +163,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'BDbgCL',
                 })}
               >
-                {withIcon(IconEditorH3)({ size: 24 })}
+                {<Icon icon={IconEditorH3} size={24} />}
               </button>
             )}
 
@@ -179,7 +183,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'Dkkmwm',
                 })}
               >
-                {withIcon(IconEditorBold)({ size: 24 })}
+                {<Icon icon={IconEditorBold} size={24} />}
               </button>
             )}
 
@@ -201,7 +205,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'lH8y+X',
                 })}
               >
-                {withIcon(IconEditorStrike)({ size: 24 })}
+                {<Icon icon={IconEditorStrike} size={24} />}
               </button>
             )}
 
@@ -223,7 +227,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'fJFvPm',
                 })}
               >
-                {withIcon(IconEditorCode)({ size: 24 })}
+                {<Icon icon={IconEditorCode} size={24} />}
               </button>
             )}
 
@@ -232,19 +236,15 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               type="button"
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
-              disabled={
-                (!isCommentEditor &&
-                  // @ts-ignore
-                  !editor.can().chain().focus().toggleCodeBlock().run()) ||
-                editor.isActive('codeBlock')
-              }
+              // @ts-ignore
+              disabled={!editor.can().chain().focus().toggleBlockquote().run()}
               className={editor.isActive('blockquote') ? styles.active : ''}
               aria-label={intl.formatMessage({
                 defaultMessage: 'Quote',
                 id: 'atzUcB',
               })}
             >
-              {withIcon(IconEditorQuote)({ size: 24 })}
+              {<Icon icon={IconEditorQuote} size={24} />}
             </button>
 
             {/* Unordered list */}
@@ -263,7 +263,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'Onjs6P',
                 })}
               >
-                {withIcon(IconEditorUl)({ size: 24 })}
+                {<Icon icon={IconEditorUl} size={24} />}
               </button>
             )}
 
@@ -283,7 +283,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: '5j/gIz',
                 })}
               >
-                {withIcon(IconEditorOl)({ size: 24 })}
+                {<Icon icon={IconEditorOl} size={24} />}
               </button>
             )}
 
@@ -312,7 +312,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 id: 'JBWS0c',
               })}
             >
-              {withIcon(IconEditorLink)({ size: 24 })}
+              {<Icon icon={IconEditorLink} size={24} />}
             </button>
           </>
         )}

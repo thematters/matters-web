@@ -1,6 +1,12 @@
-import { forwardRef } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 
-import { Menu, SpinnerBlock, UserDigest } from '~/components'
+import { KEYVALUE } from '~/common/enums'
+import {
+  Menu,
+  SpinnerBlock,
+  useNativeEventListener,
+  UserDigest,
+} from '~/components'
 import { UserDigestMiniUserFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -11,13 +17,55 @@ export const MentionList = forwardRef(
       users,
       onClick,
       loading,
+      onHide,
     }: {
       users: UserDigestMiniUserFragment[]
       onClick: (user: UserDigestMiniUserFragment) => void
       loading?: boolean
+      onHide: () => void
     },
     ref
   ) => {
+    const [activeItem, setActiveItem] = useState('')
+    const resetActiveItem = () => setActiveItem('')
+    const items = users.map((user) => user.id)
+
+    useNativeEventListener('keydown', (event: KeyboardEvent) => {
+      const keyCode = event.code.toLowerCase()
+
+      if (keyCode === KEYVALUE.arrowUp) {
+        event.preventDefault()
+        const activeIndex = items.indexOf(activeItem)
+        if (activeIndex === 0) return
+
+        setActiveItem(items[activeIndex - 1])
+      }
+
+      if (keyCode === KEYVALUE.arrowDown) {
+        event.preventDefault()
+        const activeIndex = items.indexOf(activeItem)
+        if (activeIndex === items.length - 1) return
+
+        setActiveItem(items[activeIndex + 1])
+      }
+    })
+
+    const handleKeyDown = (event: React.KeyboardEvent) => {
+      const keyCode = event.code.toLowerCase()
+
+      if (keyCode === KEYVALUE.escape) {
+        onHide()
+      }
+
+      if (keyCode === KEYVALUE.enter) {
+        event.preventDefault()
+      }
+    }
+
+    useEffect(() => {
+      resetActiveItem()
+    }, [items.join(' ')])
+
     if (loading) {
       return (
         <section className={styles.mention}>
@@ -35,7 +83,7 @@ export const MentionList = forwardRef(
     }
 
     return (
-      <section className={styles.mention}>
+      <section className={styles.mention} onKeyDown={handleKeyDown}>
         <Menu width="md">
           {users.map((user) => (
             <Menu.Item
@@ -43,6 +91,8 @@ export const MentionList = forwardRef(
               onClick={() => {
                 onClick(user)
               }}
+              bgActiveColor="greyLighter"
+              isActive={activeItem === user.id}
               key={user.id}
             >
               <UserDigest.Mini

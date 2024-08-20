@@ -228,7 +228,7 @@ const ArticleDetailHistory = ({ latestVersion }: { latestVersion: string }) => {
     await client.query({
       query: ARTICLE_HISTORY_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: { id: article?.id, version: currVersion },
+      variables: { shortHash: article.shortHash, version: currVersion },
     })
   }
 
@@ -236,7 +236,7 @@ const ArticleDetailHistory = ({ latestVersion }: { latestVersion: string }) => {
     ;(async () => {
       await loadPrivate()
     })()
-  }, [article?.id, currVersion])
+  }, [article?.shortHash, currVersion])
 
   /**
    * Render:Loading

@@ -1,7 +1,7 @@
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconEmptyFile } from '@/public/static/icons/empty-file.svg'
-import { Empty, StartWriting, withIcon } from '~/components'
+import { Empty, Icon, StartWriting } from '~/components'
 
 export const EmptyDraft = () => {
   const intl = useIntl()
@@ -9,7 +9,7 @@ export const EmptyDraft = () => {
   return (
     <Empty
       spacingY="xxloose"
-      icon={withIcon(IconEmptyFile)({ size: 88 })}
+      icon={<Icon icon={IconEmptyFile} size={88} />}
       description={intl.formatMessage({
         defaultMessage: 'No drafts yet',
         id: 'PmLGMc',

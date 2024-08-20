@@ -1,7 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-// import Script from 'next/script'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
@@ -17,7 +16,6 @@ import {
   validateEmail,
 } from '~/common/utils'
 import { WalletType } from '~/common/utils'
-import type { TurnstileInstance } from '~/components'
 import {
   AuthFeedType,
   AuthTabs,
@@ -70,7 +68,6 @@ const Init: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
-  const turnstileRef = useRef<TurnstileInstance>(null)
   const [turnstileToken, setTurnstileToken] = useState<string>()
 
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
@@ -84,7 +81,8 @@ const Init: React.FC<FormProps> = ({
   const { getQuery } = useRoute()
   const referralCode =
     getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
-    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+    storage.get<{ referralCode: string }>(REFERRAL_STORAGE_REFERRAL_CODE)
+      ?.referralCode ||
     undefined
 
   const {
@@ -138,19 +136,12 @@ const Init: React.FC<FormProps> = ({
         } else {
           setFieldError('email', intl.formatMessage(messages[codes[0]]))
         }
-
-        turnstileRef.current?.reset()
       }
     },
   })
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      <ReCaptcha
-        ref={turnstileRef}
-        action="register"
-        setToken={setTurnstileToken}
-      />
       <Form.Input
         label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
         type="email"
@@ -171,6 +162,8 @@ const Init: React.FC<FormProps> = ({
         spacingBottom="base"
         autoFocus
       />
+
+      <ReCaptcha action="register" setToken={setTurnstileToken} />
     </Form>
   )
 

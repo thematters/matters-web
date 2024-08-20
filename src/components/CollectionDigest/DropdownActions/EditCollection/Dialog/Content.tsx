@@ -11,6 +11,7 @@ import {
   MAX_COLLECTION_DESCRIPTION_LENGTH,
   MAX_COLLECTION_TITLE_LENGTH,
 } from '~/common/enums'
+import { formStorage } from '~/common/utils'
 import {
   CoverUploader,
   Dialog,
@@ -35,6 +36,10 @@ interface FormValues {
   description: string
 }
 
+type FormDraft = FormValues & {
+  coverPath?: string | null
+}
+
 const PUT_COLLECTION = gql`
   mutation PutCollection($input: PutCollectionInput!) {
     putCollection(input: $input) {
@@ -56,7 +61,12 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
   collection,
   closeDialog,
 }) => {
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
+
+  const formId = 'edit-collection-form'
+  const formStorageKey = formStorage.genKey({ authorId: viewer.id, formId })
+  const formDraft = formStorage.get<FormDraft>(formStorageKey, 'session')
 
   const [update] = useMutation<PutCollectionMutation>(
     PUT_COLLECTION,
@@ -64,9 +74,6 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     { showToast: false }
   )
 
-  const formId = 'edit-collection-form'
-
-  const intl = useIntl()
   const validateTitle = (value: string) => {
     if (!value) {
       return intl.formatMessage({
@@ -87,9 +94,9 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
     setFieldValue,
   } = useFormik<FormValues>({
     initialValues: {
-      cover: UNCHANGED_FIELD,
-      title: collection.title || '',
-      description: collection.description || '',
+      cover: formDraft?.cover || UNCHANGED_FIELD,
+      title: formDraft?.title || collection.title || '',
+      description: formDraft?.description || collection.description || '',
     },
     validateOnBlur: false,
     validateOnChange: false,
@@ -118,6 +125,10 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
             },
           ],
         })
+
+        // clear draft
+        formStorage.remove(formStorageKey, 'session')
+
         setSubmitting(false)
         closeDialog()
       } catch (error) {
@@ -132,16 +143,30 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
       <CoverUploader
         assetType={ASSET_TYPE.collectionCover}
         entityId={collection.id}
-        cover={collection.cover}
+        cover={formDraft?.coverPath || collection.cover}
         fallbackCover={IMAGE_COVER.src}
         entityType={ENTITY_TYPE.collection}
         inEditor
-        onUploaded={(assetId) => setFieldValue('cover', assetId)}
+        onUploaded={(assetId, path) => {
+          setFieldValue('cover', assetId)
+          formStorage.set<FormDraft>(
+            formStorageKey,
+            { ...values, cover: assetId, coverPath: path },
+            'session'
+          )
+        }}
         onUploadStart={() => setCoverLoading(true)}
         onUploadEnd={() => setCoverLoading(false)}
+        onReset={() => {
+          setFieldValue('cover', null)
+          formStorage.set<FormDraft>(
+            formStorageKey,
+            { ...values, cover: null, coverPath: null },
+            'session'
+          )
+        }}
         type="collection"
         bookTitle={values.title}
-        bookArticleCount={collection.articles.totalCount}
       />
 
       <Form.Input
@@ -157,7 +182,14 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
         error={touched.title && errors.title}
         hintAlign={touched.title && errors.title ? 'left' : 'right'}
         onBlur={handleBlur}
-        onChange={handleChange}
+        onChange={(e) => {
+          handleChange(e)
+          formStorage.set<FormDraft>(
+            formStorageKey,
+            { ...values, title: e.target.value },
+            'session'
+          )
+        }}
         maxLength={MAX_COLLECTION_TITLE_LENGTH}
         spacingTop="loose"
         spacingBottom="base"
@@ -175,7 +207,14 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
         error={touched.description && errors.description}
         hintAlign={touched.description && errors.description ? 'left' : 'right'}
         onBlur={handleBlur}
-        onChange={handleChange}
+        onChange={(e) => {
+          handleChange(e)
+          formStorage.set<FormDraft>(
+            formStorageKey,
+            { ...values, description: e.target.value },
+            'session'
+          )
+        }}
       />
     </Form>
   )

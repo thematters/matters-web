@@ -28,9 +28,10 @@ import {
 } from '~/gql/graphql'
 
 import ArticleCustomStagingArea from '../ArticleCustomStagingArea'
+import { SelectCampaignProps } from '../SelectCampaign'
 import SetCover from '../SetCover'
 import TagCustomStagingArea from '../TagCustomStagingArea'
-import AccessDialog from './AccessDialog'
+import MoreSettingsDialog from './MoreSettingsDialog'
 import styles from './styles.module.css'
 
 export type BottomBarProps = {
@@ -40,7 +41,8 @@ export type BottomBarProps = {
   SetCollectionProps &
   SetTagsProps &
   SetResponseProps &
-  ToggleAccessProps
+  ToggleAccessProps &
+  Partial<SelectCampaignProps>
 
 /**
  * Editor toolbar that fixed on bottom to edit cover, tags and collection,
@@ -88,6 +90,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
   canComment,
   toggleComment,
 
+  appliedCampaign,
+  selectedStage,
+  editCampaign,
+
   saving,
   disabled,
 }) => {
@@ -107,7 +113,9 @@ const BottomBar: React.FC<BottomBarProps> = ({
     entityType,
     coverSaving,
   }
-  const accessProps: ToggleAccessProps & ToggleResponseProps = {
+  const settingsProps: ToggleAccessProps &
+    ToggleResponseProps &
+    Partial<SelectCampaignProps> = {
     circle,
     accessType,
     license,
@@ -132,6 +140,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
     canComment,
     toggleComment,
     disableChangeCanComment: article?.canComment,
+
+    appliedCampaign,
+    selectedStage,
+    editCampaign,
   }
 
   return (
@@ -176,6 +188,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
               saving={tagsSaving}
               createTag
               CustomStagingArea={TagCustomStagingArea}
+              dismissOnClickOutside={false}
+              dismissOnESC={false}
             >
               {({ openDialog }) => (
                 <button
@@ -218,6 +232,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
               nodes={collection}
               saving={collectionSaving}
               CustomStagingArea={ArticleCustomStagingArea}
+              dismissOnClickOutside={false}
+              dismissOnESC={false}
             >
               {({ openDialog }) => (
                 <button
@@ -237,8 +253,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
               )}
             </EditorSearchSelectDialog>
 
-            {/* Circle & License & Support Feedback & ISCN & canComment */}
-            <AccessDialog {...accessProps}>
+            {/* Campaign & Circle & License & Support Feedback & ISCN & canComment */}
+            <MoreSettingsDialog {...settingsProps}>
               {({ openDialog }) => (
                 <button
                   aria-label={intl.formatMessage({
@@ -258,7 +274,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   </TextIcon>
                 </button>
               )}
-            </AccessDialog>
+            </MoreSettingsDialog>
           </section>
         </section>
       </Layout.FixedMain>

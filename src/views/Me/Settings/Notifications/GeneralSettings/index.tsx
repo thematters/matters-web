@@ -24,7 +24,6 @@ const VIEWER_NOTIFICATIONS_GENERAL_SETTINGS = gql`
           articleNewComment
           articleNewAppreciation
           articleNewSubscription
-          articleCommentPinned
           articleNewCollected
         }
       }
@@ -47,7 +46,6 @@ const UPDATE_VIEWER_NOTIFICATIONS_GENERAL = gql`
           articleNewComment
           articleNewAppreciation
           articleNewSubscription
-          articleCommentPinned
           articleNewCollected
         }
       }
@@ -242,31 +240,6 @@ const NotificationsGeneralSettings = () => {
               }
               checked={settings.articleNewCollected}
               onChange={() => toggle('articleNewCollected')}
-            />
-          }
-        />
-
-        {/* Comments has been pinned */}
-        <TableView.Cell
-          title={
-            <FormattedMessage
-              defaultMessage="Comments has been pinned"
-              id="gW/KWu"
-              description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-            />
-          }
-          right={
-            <Switch
-              name="nofitication-comment-pinned"
-              label={
-                <FormattedMessage
-                  defaultMessage="Comments has been pinned"
-                  id="gW/KWu"
-                  description="src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-                />
-              }
-              checked={settings.articleCommentPinned}
-              onChange={() => toggle('articleCommentPinned')}
             />
           }
         />

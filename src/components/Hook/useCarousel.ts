@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-export const useCarousel = (action: any, delay: number) => {
+export const useCarousel = (action: () => void, delay: number) => {
   const [running, setRunning] = useState(false)
   const savedAction = useRef(action)
   const stop = useCallback(() => setRunning(false), [setRunning])
@@ -15,7 +15,7 @@ export const useCarousel = (action: any, delay: number) => {
       return
     }
 
-    let instance = 0
+    let instance: ReturnType<typeof setTimeout>
     const tick = () => {
       if (!running) {
         return clearTimeout(instance)
@@ -23,11 +23,9 @@ export const useCarousel = (action: any, delay: number) => {
 
       savedAction.current()
 
-      // @ts-ignore
       requestAnimationFrame(() => (instance = setTimeout(tick, delay)))
     }
 
-    // @ts-ignore
     requestAnimationFrame(() => (instance = setTimeout(tick, delay)))
 
     return () => {

@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { mergeConnections } from '~/common/utils'
+import { mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
   EmptyNotice,
   Head,
@@ -17,10 +17,23 @@ import {
   useMutation,
 } from '~/components'
 import { updateViewerUnreadNoticeCount } from '~/components/GQL'
+import CollectionNotice from '~/components/Notice/CollectionNotice'
 import {
   MarkAllNoticesAsReadMutation,
   MeNotificationsQuery,
 } from '~/gql/graphql'
+
+const renderableTypes = new Set([
+  'ArticleArticleNotice',
+  'CircleNotice',
+  'ArticleNotice',
+  'CollectionNotice',
+  'CommentCommentNotice',
+  'CommentNotice',
+  'OfficialAnnouncementNotice',
+  'TransactionNotice',
+  'UserNotice',
+])
 
 const ME_NOTIFICATIONS = gql`
   query MeNotifications($after: String) {
@@ -35,14 +48,19 @@ const ME_NOTIFICATIONS = gql`
         edges {
           cursor
           node {
+            id
+            createdAt
             ...DigestNotice
+            ...CollectionNotice
           }
         }
       }
     }
   }
   ${Notice.fragments.notice}
+  ${CollectionNotice.fragments.notice}
 `
+// FIXME: remove CollectionNotice fragment from ME_NOTIFICATIONS
 
 const MARK_ALL_NOTICES_AS_READ = gql`
   mutation MarkAllNoticesAsRead {
@@ -93,11 +111,14 @@ const BaseNotifications = () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List spacing={['xloose', 0]}>
-        {edges.map(({ node, cursor }) => (
-          <List.Item key={node.id}>
-            <Notice notice={node} />
-          </List.Item>
-        ))}
+        {edges.map(
+          ({ node }) =>
+            shouldRenderNode(node, renderableTypes) && (
+              <List.Item key={node.id}>
+                <Notice notice={node} />
+              </List.Item>
+            )
+        )}
       </List>
     </InfiniteScroll>
   )
@@ -118,10 +139,10 @@ const Notifications = () => {
             </Layout.Header.Title>
           }
         />
-        <Spacer size="base" />
+        <Spacer size="sp16" />
       </Media>
       <Media greaterThan="sm">
-        <Spacer size="xloose" />
+        <Spacer size="sp32" />
       </Media>
 
       <Head

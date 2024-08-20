@@ -5,8 +5,8 @@ import { analytics } from '~/common/utils'
 import {
   EditorSearchSelectDialog,
   Icon,
+  InlineTag,
   // SearchSelectNode,
-  Tag,
 } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
 import { DigestTagFragment } from '~/gql/graphql'
@@ -45,6 +45,8 @@ const SidebarTags = ({
       saving={saving}
       createTag
       CustomStagingArea={TagCustomStagingArea}
+      dismissOnClickOutside={false}
+      dismissOnESC={false}
     >
       {({ openDialog }) => (
         <Box
@@ -63,10 +65,8 @@ const SidebarTags = ({
             <ul className={styles.list}>
               {tags.map((tag) => (
                 <li key={tag.id}>
-                  <Tag
+                  <InlineTag
                     tag={tag}
-                    type="inline"
-                    is="span"
                     onRemoveTag={() => {
                       editTags(tags.filter((t) => t.content !== tag.content))
                       analytics.trackEvent('click_button', {

@@ -3,10 +3,11 @@
 import classNames from 'classnames'
 import { CSSProperties, useEffect, useRef } from 'react'
 
+import { useDrawerContext } from '../Context'
 import styles from './styles.module.css'
 
 type BaseDrawerProps = {
-  open: boolean
+  isOpen: boolean
   onClose?: () => void
   direction: 'left' | 'right' | 'top' | 'bottom'
   children?: React.ReactNode
@@ -65,7 +66,7 @@ const getDirectionStyle = (
 }
 
 export const BaseDrawer = ({
-  open,
+  isOpen,
   onClose,
   direction,
   children,
@@ -85,6 +86,8 @@ export const BaseDrawer = ({
 
   const ref = useRef<HTMLElement>(null)
 
+  const { setHasOpeningDrawer } = useDrawerContext()
+
   const idSuffix = Math.random().toString(36).substring(7)
 
   useEffect(() => {
@@ -99,14 +102,29 @@ export const BaseDrawer = ({
     const removeEventListener = () => {
       document.removeEventListener('click', handleClickOutside)
     }
-    if (open) {
+    if (isOpen) {
       document.addEventListener('click', handleClickOutside)
     } else {
       removeEventListener()
     }
 
     return removeEventListener
-  }, [open])
+  }, [isOpen])
+
+  useEffect(() => {
+    if (!ref.current) return
+    const handleTransformEnd = (event: TransitionEvent) => {
+      if (event.propertyName !== 'transform') return
+      if (!isOpen) {
+        setHasOpeningDrawer(false)
+      }
+    }
+    ref.current.addEventListener('transitionend', handleTransformEnd)
+
+    return () => {
+      ref.current?.removeEventListener('transitionend', handleTransformEnd)
+    }
+  }, [ref, isOpen])
 
   return (
     <div className={styles.baseDrawer}>
@@ -115,7 +133,7 @@ export const BaseDrawer = ({
         id={'Drawer__checkbox' + idSuffix}
         className={styles.baseDrawerCheckbox}
         onChange={onClose}
-        checked={open}
+        checked={isOpen}
       />
       <nav
         role="navigation"

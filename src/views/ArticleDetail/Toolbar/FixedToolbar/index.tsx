@@ -8,7 +8,11 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { analytics, toLocale, toPath } from '~/common/utils'
-import { ButtonProps, CommentFormBetaDialog, ViewerContext } from '~/components'
+import {
+  ArticleCommentFormDialog,
+  ButtonProps,
+  ViewerContext,
+} from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
 } from '~/components/ArticleDigest/DropdownActions'
@@ -74,8 +78,8 @@ const FixedToolbar = ({
       data-test-id={TEST_ID.ARTICLE_TOOLBAR}
       id={TOOLBAR_FIXEDTOOLBAR_ID}
     >
-      <CommentFormBetaDialog articleId={articleDetails.id} type="article">
-        {({ openDialog: openCommentFormBetaDialog }) => (
+      <ArticleCommentFormDialog articleId={articleDetails.id}>
+        {({ openDialog: openArticleCommentFormDialog }) => (
           <section className={styles.buttons}>
             {showCommentToolbar && (
               <button
@@ -98,7 +102,7 @@ const FixedToolbar = ({
                     return
                   }
 
-                  openCommentFormBetaDialog()
+                  openArticleCommentFormDialog()
                 }}
                 disabled={lock}
               >
@@ -155,7 +159,7 @@ const FixedToolbar = ({
                   if (openCommentsDialog) {
                     openCommentsDialog()
                   } else {
-                    openCommentFormBetaDialog()
+                    openArticleCommentFormDialog()
                   }
                 }}
                 {...buttonProps}
@@ -183,7 +187,7 @@ const FixedToolbar = ({
             />
           </section>
         )}
-      </CommentFormBetaDialog>
+      </ArticleCommentFormDialog>
     </section>
   )
 }

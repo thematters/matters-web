@@ -17,6 +17,17 @@ export const fragments = {
         id
         userName
       }
+      campaigns {
+        campaign {
+          id
+          shortHash
+          ... on WritingChallenge {
+            nameZhHant: name(input: { language: zh_hant })
+            nameZhHans: name(input: { language: zh_hans })
+            nameEn: name(input: { language: en })
+          }
+        }
+      }
     }
   `,
   articleVersion: gql`

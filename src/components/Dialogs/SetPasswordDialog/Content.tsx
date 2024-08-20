@@ -150,7 +150,7 @@ const SetPasswordDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
               description="src/components/Dialogs/SetPasswordDialog/Content.tsx"
             />
           </p>
-          <Spacer size="base" />
+          <Spacer size="sp16" />
         </Dialog.Content.Message>
         {InnerForm}
       </Dialog.Content>

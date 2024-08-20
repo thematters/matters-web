@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
 import _omit from 'lodash/omit'
-import _uniq from 'lodash/uniq'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 
@@ -30,6 +29,10 @@ import {
   ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
+import {
+  getSelectCampaign,
+  SelectCampaignProps,
+} from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
@@ -40,9 +43,11 @@ import {
 } from '~/components/GQL/mutations/uploadFile'
 import {
   ArticleAccessType,
+  ArticleCampaignInput,
   ArticleDigestDropdownArticleFragment,
   ArticleLicenseType,
   AssetFragment,
+  AssetType,
   DigestRichCirclePublicFragment,
   DigestTagFragment,
   DirectImageUploadDoneMutation,
@@ -79,7 +84,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const [content, setContent] = useState(article.contents.html)
 
   // cover
-  const assets = article.assets || []
+  const [assets, setAssets] = useState(article.assets || [])
   const [cover, setCover] = useState<AssetFragment | undefined>(
     assets.find((asset) => asset.path === article.cover)
   )
@@ -130,6 +135,23 @@ const BaseEdit = ({ article }: { article: Article }) => {
     setLicense(newLicense)
   }
 
+  // campaign
+  const appliedCampaigns = article.author.campaigns.edges?.map((e) => e.node)
+  const { appliedCampaign, selectedStage } = getSelectCampaign({
+    applied: appliedCampaigns && appliedCampaigns[0],
+    attached: article.campaigns,
+    createdAt: article.createdAt,
+  })
+
+  const [campaign, setCampaign] = useState<ArticleCampaignInput | undefined>(
+    appliedCampaign?.id
+      ? {
+          campaign: appliedCampaign.id,
+          stage: selectedStage,
+        }
+      : undefined
+  )
+
   const [requestForDonation, setRequestForDonation] = useState(
     article.requestForDonation
   )
@@ -173,10 +195,14 @@ const BaseEdit = ({ article }: { article: Article }) => {
       setCollection(c),
     nodeExclude: article.id,
   }
-
   const setCommentProps: SetResponseProps = {
     canComment,
     toggleComment: setCanComment,
+  }
+  const campaignProps: Partial<SelectCampaignProps> = {
+    appliedCampaign,
+    selectedStage: campaign?.stage,
+    editCampaign: setCampaign,
   }
 
   const accessProps: ToggleAccessProps = {
@@ -222,7 +248,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const { upload: uploadImage } = useDirectImageUpload()
 
   const upload = async (input: {
-    [key: string]: any
+    [key: string]: string | File
   }): Promise<{ id: string; path: string }> => {
     const isImage = input.type !== ASSET_TYPE.embedaudio
 
@@ -235,8 +261,20 @@ const BaseEdit = ({ article }: { article: Article }) => {
       },
     }
 
-    // upload via directImageUpload
-    if (isImage) {
+    const trySingleUpload = async () => {
+      const result = await singleFileUpload({
+        variables: _omit(variables, ['input.mime']),
+      })
+      const { id: assetId, path } = result?.data?.singleFileUpload || {}
+
+      if (assetId && path) {
+        return { id: assetId, path }
+      } else {
+        throw new Error('upload not successful')
+      }
+    }
+
+    const tryDirectUpload = async () => {
       const result = await directImageUpload({
         variables: _omit(variables, ['input.file']),
       })
@@ -246,7 +284,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
         uploadURL,
       } = result?.data?.directImageUpload || {}
 
-      if (assetId && path && uploadURL) {
+      if (assetId && path && uploadURL && input.file instanceof File) {
         try {
           await uploadImage({ uploadURL, file: input.file })
         } catch (error) {
@@ -263,21 +301,28 @@ const BaseEdit = ({ article }: { article: Article }) => {
           },
         }).catch(console.error)
 
+        setAssets((assets) => [
+          ...assets,
+          { id: assetId, path, type: AssetType.Embed },
+        ])
+
         return { id: assetId, path }
       } else {
         throw new Error('upload not successful')
       }
     }
+
+    // upload via directImageUpload
+    if (isImage) {
+      try {
+        return await tryDirectUpload()
+      } catch {
+        return await trySingleUpload()
+      }
+    }
     // upload via singleFileUpload
     else {
-      const result = await singleFileUpload({ variables })
-      const { id: assetId, path } = result?.data?.singleFileUpload || {}
-
-      if (assetId && path) {
-        return { id: assetId, path }
-      } else {
-        throw new Error('upload not successful')
-      }
+      return trySingleUpload()
     }
   }
 
@@ -286,6 +331,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
       <Layout.Main
         aside={
           <section className={styles.sidebar}>
+            <Sidebar.Campaign {...campaignProps} />
             <Sidebar.Tags {...tagsProps} />
             <Sidebar.Cover {...coverProps} />
             <Sidebar.Collection {...collectionProps} />
@@ -320,6 +366,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
               {...accessProps}
               {...setCommentProps}
               {...versionDescriptionProps}
+              {...campaignProps}
               article={article}
               revision={{
                 versionDescription,
@@ -392,6 +439,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                 {...collectionProps}
                 {...accessProps}
                 {...setCommentProps}
+                {...campaignProps}
                 onOpenSupportSetting={openSupportSettingDialog}
               />
             )}

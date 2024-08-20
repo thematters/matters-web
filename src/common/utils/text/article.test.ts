@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest'
 
 import {
+  containsFigureTag,
   countChars,
   makeSummary,
-  measureDiffs,
   normalizeArticleTitle,
   optimizeEmbed,
   stripHtml,
@@ -89,27 +89,6 @@ describe('utils/text/article/makeSummary', () => {
   })
 })
 
-describe('utils/text/article/measureDiffs', () => {
-  it('should measure diffs correctly', () => {
-    // no diff
-    expect(measureDiffs('Hello, world!', 'Hello, world!')).toBe(0)
-
-    // suffix
-    expect(measureDiffs('Hello, world!', 'Hello, world?')).toBe(1)
-    expect(measureDiffs('Hello, world!', 'Hello, world')).toBe(1)
-    expect(measureDiffs('Hello, world!', 'Hello, world!!!')).toBe(2)
-
-    // prefix
-    expect(measureDiffs('Hello, world!', '.Hello, world!')).toBe(1)
-    expect(measureDiffs('Hello, world!', 'ello, world!')).toBe(1)
-    expect(measureDiffs('Hello, world!', 'Aello, world!')).toBe(1)
-
-    // middle
-    expect(measureDiffs('Hello, world!', 'Hello,world!')).toBe(1)
-    expect(measureDiffs('Hello, world!', 'Hello, sorld!')).toBe(1)
-  })
-})
-
 describe('utils/text/article/normalizeArticleTitle', () => {
   it('should normalize article title correctly', () => {
     expect(normalizeArticleTitle('Hello, world!', 1)).toBe('…')
@@ -151,5 +130,23 @@ describe('utils/text/article/optimizeEmbed', () => {
       </picture>
       `
     expect(optimizeEmbed(input).trim()).toBe(expected.trim())
+  })
+})
+
+describe('utils/text/article/containsFigureTag', () => {
+  it('should return true if the content contains a figure tag', () => {
+    expect(containsFigureTag('<figure></figure>')).toBe(true)
+    expect(containsFigureTag('<figure>content</figure>')).toBe(true)
+    expect(
+      containsFigureTag(
+        '<figure class="embe" data-provider="youtube"><div class="iframe-container"><iframe src="https://www.youtube.com" loading="lazy" allowfullscreen frameborder="0"></iframe></div><figcaption></figcaption></figure>'
+      )
+    ).toBe(true)
+  })
+
+  it('should return false if the content does not contain a figure tag', () => {
+    expect(containsFigureTag('')).toBe(false)
+    expect(containsFigureTag('<p>content</p>')).toBe(false)
+    expect(containsFigureTag('<img src="image.jpg">')).toBe(false)
   })
 })

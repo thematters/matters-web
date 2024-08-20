@@ -29,6 +29,7 @@ export type ArticleDigestFeedControls = {
   hasCircle?: boolean
   hasAuthor?: boolean
   isFirstFold?: boolean
+  disabledArchived?: boolean
 }
 
 export type ArticleDigestFeedProps = {
@@ -36,6 +37,7 @@ export type ArticleDigestFeedProps = {
     Partial<ArticleDigestFeedArticlePrivateFragment>
   header?: React.ReactNode
   collectionId?: string
+  excludesTimeStamp?: boolean // this is only for timestamp next to the profile
 } & ArticleDigestFeedControls &
   FooterActionsProps
 
@@ -51,15 +53,19 @@ const BaseArticleDigestFeed = ({
   onClickAuthor,
 
   isFirstFold = false,
+  disabledArchived = false,
 
   hasReadTime,
   hasDonationCount,
+  includesMetaData,
+  excludesTimeStamp,
   ...controls
 }: ArticleDigestFeedProps) => {
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
-  const cover = !isBanned ? article.cover : null
-  const cleanedSummary = isBanned ? '' : makeSummary(summary)
+  const isArchived = article.articleState === 'archived'
+  const cover = !isBanned && !isArchived ? article.cover : null
+  const cleanedSummary = isBanned && !isArchived ? '' : makeSummary(summary)
 
   const path = toPath({
     page: 'articleDetail',
@@ -75,6 +81,7 @@ const BaseArticleDigestFeed = ({
       hasDonationCount={hasDonationCount}
       hasCircle={hasCircle}
       inCard
+      includesMetaData={includesMetaData}
       {...controls}
     />
   )
@@ -89,21 +96,26 @@ const BaseArticleDigestFeed = ({
           {hasHeader && (
             <header className={styles.header}>
               {hasAuthor && (
-                <>
-                  <section className={styles.author}>
-                    <UserDigest.Mini
-                      user={author}
-                      avatarSize={20}
-                      textSize={12}
-                      hasAvatar
-                      hasDisplayName
-                      onClick={onClickAuthor}
-                    />
+                <section className={styles.author}>
+                  <UserDigest.Mini
+                    user={author}
+                    avatarSize={20}
+                    textSize={12}
+                    nameColor={
+                      author.status?.state === 'archived' ? 'grey' : undefined
+                    }
+                    hasAvatar
+                    hasDisplayName
+                    onClick={onClickAuthor}
+                  />
+                  {!excludesTimeStamp && (
                     <Icon icon={IconDot} color="greyLight" size={20} />
-                  </section>
-                </>
+                  )}
+                </section>
               )}
-              <DateTime date={article.createdAt} color="grey" />
+              {!excludesTimeStamp && (
+                <DateTime date={article.createdAt} color="grey" />
+              )}
             </header>
           )}
           <section className={styles.head}>
@@ -114,13 +126,16 @@ const BaseArticleDigestFeed = ({
                 textSize={16}
                 lineClamp={2}
                 onClick={onClick}
+                disabledArchived={disabledArchived}
               />
             </section>
           </section>
 
-          <LinkWrapper {...path} onClick={onClick}>
-            <p className={styles.description}>{cleanedSummary}</p>
-          </LinkWrapper>
+          {!(isArchived && disabledArchived) && (
+            <LinkWrapper {...path} onClick={onClick}>
+              <p className={styles.description}>{cleanedSummary}</p>
+            </LinkWrapper>
+          )}
 
           <Media greaterThan="sm">{footerActions}</Media>
         </section>

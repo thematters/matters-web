@@ -5,15 +5,20 @@ import { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { URL_FRAGMENT } from '~/common/enums'
-import { dom, filterComments, mergeConnections } from '~/common/utils'
 import {
-  CommentForm,
+  dom,
+  filterComments,
+  mergeConnections,
+  parseCommentHash,
+} from '~/common/utils'
+import {
+  CircleCommentForm,
+  CircleThreadComment,
   EmptyComment,
   InfiniteScroll,
   List,
   QueryError,
   SpinnerBlock,
-  ThreadComment,
   Throw404,
   toast,
   usePublicQuery,
@@ -125,20 +130,7 @@ const CricleBroadcast = () => {
     loadPrivate(newData)
   }
 
-  /**
-   * Fragment Patterns
-   *
-   * 0. ``
-   * 1. `#parentCommentId`
-   * 2. `#parentComemntId-childCommentId`
-   */
-  let fragment = ''
-  let parentId = ''
-  let descendantId = ''
-  if (process.browser) {
-    fragment = window.location.hash.replace('#', '')
-    ;[parentId, descendantId] = fragment.split('-') // [0] ; = fragment.split('-')[1]
-  }
+  const { fragment, parentId, descendantId } = parseCommentHash()
 
   // jump to comment area
   useEffect(() => {
@@ -156,7 +148,7 @@ const CricleBroadcast = () => {
       const element = dom.$(`#${fragment}`)
 
       if (!element) {
-        loadMore({ before: parentId }).then(jumpToFragment)
+        loadMore({ before: parentId || '' }).then(jumpToFragment)
       } else {
         jumpToFragment()
       }
@@ -218,7 +210,7 @@ const CricleBroadcast = () => {
       <section className={styles.broadcast}>
         {isOwner && (
           <header className={styles.header}>
-            <CommentForm
+            <CircleCommentForm
               circleId={circle?.id}
               type="circleBroadcast"
               placeholder={intl.formatMessage({
@@ -251,7 +243,7 @@ const CricleBroadcast = () => {
           <List spacing={['xloose', 0]}>
             {comments.map((comment) => (
               <List.Item key={comment.id}>
-                <ThreadComment
+                <CircleThreadComment
                   comment={comment}
                   type="circleBroadcast"
                   defaultExpand={comment.id === parentId && !!descendantId}

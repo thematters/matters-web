@@ -95,7 +95,7 @@ const SupportWidget = ({
 
   useEventListener(
     SUPPORT_SUCCESS_ANIMATION,
-    async (payload: { [key: string]: any }) => {
+    async (payload: { [key: string]: CURRENCY }) => {
       if (!payload || Object.keys(payload).length === 0) {
         return
       }
@@ -172,7 +172,7 @@ const SupportWidget = ({
                           />
                         </TextIcon>
                       </p>
-                      <Spacer size="xtight" />
+                      <Spacer size="sp8" />
                       <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REPLY}>
                         {replyToDonator}
                       </p>
@@ -188,7 +188,7 @@ const SupportWidget = ({
                           />
                         </TextIcon>
                       </p>
-                      <Spacer size="xtight" />
+                      <Spacer size="sp8" />
                       <p data-test-id={TEST_ID.ARTICLE_SUPPORT_REPLY}>
                         <FormattedMessage
                           defaultMessage="With your support, I will be able to accumulate more energy to create."

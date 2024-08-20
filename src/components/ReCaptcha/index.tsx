@@ -1,8 +1,10 @@
-import { forwardRef, useContext } from 'react'
+import classNames from 'classnames'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toast, ViewerContext } from '~/components'
 
+import styles from './styles.module.css'
 import { Turnstile, TurnstileInstance } from './Turnstile'
 
 export * from './Turnstile/types'
@@ -13,13 +15,16 @@ type ReCaptchaProps = {
   silence?: boolean
 }
 
-const siteKey = process.env.NEXT_PUBLIC_CLOUDFLARE_TURNSTILE_SITE_KEY as string
+const siteKey = process.env.NEXT_PUBLIC_CF_TURNSTILE_SITE_KEY as string
 
-export const ReCaptcha = forwardRef<
-  TurnstileInstance | undefined,
-  ReCaptchaProps
->(({ action, setToken, silence }, ref) => {
+export const ReCaptcha: React.FC<ReCaptchaProps> = ({
+  action,
+  setToken,
+  silence,
+}) => {
   const viewer = useContext(ViewerContext)
+  const turnstileRef = useRef<TurnstileInstance>(null)
+  const [interaction, setInteraction] = useState(false)
 
   const onError = () => {
     if (silence) return
@@ -34,28 +39,39 @@ export const ReCaptcha = forwardRef<
     })
   }
 
-  return (
-    <Turnstile
-      ref={ref}
-      siteKey={siteKey}
-      options={{
-        action: action,
-        cData: `user-group-${viewer.info.group}`,
-        size: 'invisible',
-      }}
-      scriptOptions={{
-        compat: 'recaptcha',
-        appendTo: 'body',
-      }}
-      onSuccess={(token) => {
-        if (setToken) {
-          setToken(token)
-        }
-      }}
-      onError={onError}
-      onUnsupported={onError}
-    />
-  )
-})
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.interaction]: interaction,
+  })
 
-ReCaptcha.displayName = 'ReCaptcha'
+  return (
+    <div className={containerClasses}>
+      <Turnstile
+        ref={turnstileRef}
+        siteKey={siteKey}
+        options={{
+          action,
+          cData: `user-group-${viewer.info.group}`,
+          size: 'normal',
+          theme: 'light',
+          appearance: 'interaction-only',
+        }}
+        scriptOptions={{
+          compat: 'recaptcha',
+          appendTo: 'body',
+        }}
+        onBeforeInteractive={() => {
+          setInteraction(true)
+        }}
+        onSuccess={(token) => {
+          if (setToken) {
+            setToken(token)
+          }
+        }}
+        onError={onError}
+        onUnsupported={onError}
+        onExpire={() => turnstileRef.current?.reset()}
+      />
+    </div>
+  )
+}

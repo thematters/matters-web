@@ -23,7 +23,6 @@ import {
   validateEmail,
   WalletType,
 } from '~/common/utils'
-import type { TurnstileInstance } from '~/components'
 import {
   AuthFeedType,
   AuthNormalFeed,
@@ -89,7 +88,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   const { getQuery } = useRoute()
   const referralCode =
     getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
-    storage.get(REFERRAL_STORAGE_REFERRAL_CODE)?.referralCode ||
+    storage.get<{ referralCode: string }>(REFERRAL_STORAGE_REFERRAL_CODE)
+      ?.referralCode ||
     undefined
 
   const isInPage = purpose === 'page'
@@ -97,7 +97,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
-  const turnstileRef = useRef<TurnstileInstance>(null)
   const [turnstileToken, setTurnstileToken] = useState<string>()
 
   const [isSelectMethod, setIsSelectMethod] = useState(false)
@@ -262,7 +261,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           )
         }
       })
-      turnstileRef.current?.reset()
     }
   }
 
@@ -270,12 +268,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const InnerForm = (
     <>
-      <ReCaptcha
-        ref={turnstileRef}
-        action="email_login"
-        setToken={setTurnstileToken}
-      />
-
       <Form id={formId} onSubmit={handleSubmit}>
         <Form.Input
           label={<FormattedMessage defaultMessage="Email" id="sy+pv5" />}
@@ -350,6 +342,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
               disabled={sendingCode}
             />
           )}
+
+        <ReCaptcha action="email_login" setToken={setTurnstileToken} />
       </Form>
     </>
   )

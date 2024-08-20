@@ -1,9 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
+import { COMMENT_FEED_ID_PREFIX } from '~/common/enums'
+import { parseCommentHash } from '~/common/utils'
 import {
+  ArticleThreadComment,
+  ArticleThreadCommentType,
   QueryError,
-  ThreadCommentBeta,
-  ThreadCommentType,
   usePublicQuery,
 } from '~/components'
 import { CommentDetailQuery } from '~/gql/graphql'
@@ -12,22 +14,28 @@ import { Placeholder } from '../Placeholder'
 import { COMMENT_DETAIL } from './gql'
 import styles from './styles.module.css'
 
-const CommentDetail = () => {
-  /**
-   * Fragment Patterns
-   *
-   * 0. ``
-   * 1. `#parentCommentId`
-   * 2. `#parentComemntId-childCommentId`
-   */
-  let fragment = ''
-  let parentId = ''
-  let descendantId = ''
-  if (typeof window !== 'undefined') {
-    fragment = window.location.hash.replace('#', '')
-    parentId = fragment.split('-')[0]
-    descendantId = fragment.split('-')[1]
+const highlightComment = (
+  targetElement: HTMLElement,
+  isParentComment?: boolean
+) => {
+  targetElement.classList.add(styles.activeBgColor)
+  if (isParentComment) {
+    targetElement.classList.add(styles.activeParentComment)
   }
+
+  const removeHighlight = () => {
+    targetElement.classList.remove(styles.activeBgColor)
+    if (isParentComment) {
+      targetElement.classList.remove(styles.activeParentComment)
+    }
+  }
+
+  setTimeout(removeHighlight, 5000)
+}
+
+const CommentDetail = () => {
+  const ref = useRef<HTMLDivElement>(null)
+  const { parentId, descendantId } = parseCommentHash()
 
   const [readyJump, setReadyJump] = useState(false)
 
@@ -38,52 +46,37 @@ const CommentDetail = () => {
       variables: {
         id: parentId,
       },
+      fetchPolicy: 'network-only',
     }
   )
 
   // Jump to comment
   useEffect(() => {
-    if (readyJump) {
-      let selector = `${parentId}`
-      if (!!descendantId) {
-        selector = `${parentId}-${descendantId}`
-      }
-
-      const comment = document.getElementById(selector)
-
-      let targetElement = comment
-      if (!!descendantId && comment) {
-        targetElement = comment.parentElement
-      }
-
-      if (!targetElement) {
-        return
-      }
-
-      targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' })
-
-      setTimeout(() => {
-        if (!targetElement) {
-          return
-        }
-        targetElement.classList.add(styles.activeBgColor)
-        if (!descendantId) {
-          // parent comment
-          targetElement.classList.add(styles.activeParentComment)
-        }
-
-        setTimeout(() => {
-          if (!targetElement) {
-            return
-          }
-          targetElement.classList.remove(styles.activeBgColor)
-          if (!descendantId) {
-            // parent comment
-            targetElement.classList.remove(styles.activeParentComment)
-          }
-        }, 5000)
-      }, 500)
+    if (!readyJump || !ref.current) {
+      return
     }
+
+    const isParentComment = !descendantId
+
+    const selector = isParentComment
+      ? `#${COMMENT_FEED_ID_PREFIX}${parentId}`
+      : `#${COMMENT_FEED_ID_PREFIX}${parentId}-${descendantId}`
+
+    const comment = ref.current.querySelector(selector)
+    const targetElement = isParentComment
+      ? comment
+      : comment?.parentElement || null
+
+    if (!targetElement) {
+      return
+    }
+
+    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+    setTimeout(
+      () => highlightComment(targetElement as HTMLElement, isParentComment),
+      500
+    )
   }, [readyJump])
 
   /**
@@ -97,17 +90,16 @@ const CommentDetail = () => {
     return <QueryError error={error} />
   }
 
-  if (data && data.node && data.node.__typename !== 'Comment') {
+  if (data?.node?.__typename !== 'Comment') {
     return null
   }
 
-  const comment = data?.node as ThreadCommentType
+  const comment = data.node as ArticleThreadCommentType
 
   return (
-    <section>
-      <ThreadCommentBeta
+    <section ref={ref}>
+      <ArticleThreadComment
         comment={comment}
-        type="article"
         hasLink
         firstRenderCallback={() => setReadyJump(true)}
         isInCommentDetail
