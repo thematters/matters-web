@@ -460,9 +460,6 @@
   "5sg7KC": {
     "defaultMessage": "密码"
   },
-  "5y5rID": {
-    "defaultMessage": "我们将尽快处理你的申请，敬请期待活动开跑！"
-  },
   "6+eeJ4": {
     "defaultMessage": "可使用小写英文、数字及下划线",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -796,6 +793,9 @@
   "B2As08": {
     "defaultMessage": "没有更多",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
+  },
+  "B9IFMF": {
+    "defaultMessage": "好的，我报名"
   },
   "BDbgCL": {
     "defaultMessage": "标题 3"
@@ -1131,9 +1131,6 @@
   },
   "HAlOn1": {
     "defaultMessage": "用户名"
-  },
-  "HB2VOx": {
-    "defaultMessage": "系统或连线异常，请刷新页面后重新点击报名参加"
   },
   "HBxXD/": {
     "defaultMessage": "版权声明"
@@ -1627,7 +1624,7 @@
     "defaultMessage": "换一批"
   },
   "Pq/7m5": {
-    "defaultMessage": "晚鸟参与处理中",
+    "defaultMessage": "晚鸟参与处理中⋯",
     "description": "type:join"
   },
   "PtV68+": {
@@ -1780,6 +1777,9 @@
   },
   "Sfql0+": {
     "defaultMessage": "恭喜获得七日书大满贯"
+  },
+  "Sj+TN8": {
+    "defaultMessage": "公告"
   },
   "SuRTsQ": {
     "defaultMessage": "注册 ISCN"
@@ -2051,6 +2051,9 @@
   "XZ8IJ3": {
     "defaultMessage": "完成修改后，新版会再次发布到 IPFS，你可以从文章标题下的「IPFS」进入查看历史版本。"
   },
+  "XbS4AZ": {
+    "defaultMessage": "公告"
+  },
   "Xd0J7Y": {
     "defaultMessage": "开放社区"
   },
@@ -2286,9 +2289,6 @@
   },
   "beLe/F": {
     "defaultMessage": "广播"
-  },
-  "buf5vO": {
-    "defaultMessage": "活动公告"
   },
   "c/z318": {
     "defaultMessage": "邮箱或密码错误",
@@ -2654,7 +2654,7 @@
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "jLkKbI": {
-    "defaultMessage": "报名处理中",
+    "defaultMessage": "报名处理中⋯",
     "description": "type:apply"
   },
   "jiB0Z2": {
@@ -2777,6 +2777,9 @@
   "lNjDPr": {
     "defaultMessage": "你还没有邀请任何用户喔！点击新增邀请，添加站内或站外朋友加入围炉赠与对方免费资格的固定时长",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
+  "lO7wKc": {
+    "defaultMessage": "再想想"
   },
   "lT6Dt8": {
     "defaultMessage": "确认辞去"
@@ -2923,9 +2926,6 @@
   "oGiO//": {
     "defaultMessage": "插入音频"
   },
-  "oLOus+": {
-    "defaultMessage": "报名申请已递交 🎉"
-  },
   "ob+HDS": {
     "defaultMessage": "马上逛逛"
   },
@@ -2937,8 +2937,14 @@
     "defaultMessage": "追踪中",
     "description": "src/components/UserProfile/index.tsx"
   },
+  "on+DYO": {
+    "defaultMessage": "确认报名"
+  },
   "onDesU": {
     "defaultMessage": "恭喜成为围炉一员。现在你可以免费浏览围炉内作品，还可以去围炉与大家谈天说地。"
+  },
+  "opxnPe": {
+    "defaultMessage": "现在报名，写作之旅将于数天后开始，活动细则可查看 {eventLink}。（报名确认通常需要几分钟审核时间，之后你的头像将出现在作者之中）"
   },
   "orIq4X": {
     "defaultMessage": "支持超过 100 次"
