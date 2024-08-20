@@ -81,7 +81,20 @@ export const MomentDigestFeed = ({
         {!!content && (
           <section
             className={styles.content}
-            onClick={() => {
+            onClick={(event) => {
+              const target = event.target as HTMLElement
+              const targetTagName = target.tagName.toLocaleLowerCase()
+              if (
+                // link
+                targetTagName === 'a' ||
+                // mention
+                (targetTagName === 'span' &&
+                  target.parentElement?.tagName.toLocaleLowerCase() === 'a' &&
+                  target.innerText.includes('@'))
+              ) {
+                event.stopPropagation()
+                return
+              }
               openMomentDetail()
             }}
             data-test-id={TEST_ID.MOMENT_DIGEST_CONTENT}
