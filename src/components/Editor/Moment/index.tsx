@@ -17,7 +17,7 @@ import { getValidFiles } from '~/common/utils'
 
 import { makeMentionSuggestion, SmartLink } from '../Article/extensions'
 import { makeSmartLinkOptions } from '../Article/extensions/smartLink/utils'
-import commonStyles from '../styles.module.css'
+import commentStyles from '../Comment/styles.module.css'
 import styles from './styles.module.css'
 
 interface Props {
@@ -83,7 +83,10 @@ const MomentEditor: React.FC<Props> = ({
     setEditor?.(editor)
   }, [editor])
 
-  const editorClaaes = classNames(commonStyles.editor, styles.momentEditor)
+  const editorClaaes = classNames(
+    commentStyles.commentEditor,
+    styles.momentEditor
+  )
 
   return (
     <div

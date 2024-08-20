@@ -7,4 +7,8 @@
     color: var(--color-matters-green);
     border-bottom: 0;
   }
+
+  & > * + * {
+    margin: 0;
+  }
 }
