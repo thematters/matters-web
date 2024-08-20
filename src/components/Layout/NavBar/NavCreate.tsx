@@ -26,11 +26,11 @@ export const NavCreate = () => {
   const viewer = useContext(ViewerContext)
 
   const { show: showMomentBanner, closeDialog: _closeMomentBanner } =
-    useDialogSwitch(!storage.get(HAS_SHOW_MOMENT_BANNER))
+    useDialogSwitch(!storage.get(viewer.id + HAS_SHOW_MOMENT_BANNER))
 
   const closeMomentBanner = () => {
     _closeMomentBanner()
-    storage.set(HAS_SHOW_MOMENT_BANNER, true)
+    storage.set(viewer.id + HAS_SHOW_MOMENT_BANNER, true)
   }
 
   const {
