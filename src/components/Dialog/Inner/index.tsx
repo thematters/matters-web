@@ -2,7 +2,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { useDrag } from '@use-gesture/react'
 import classNames from 'classnames'
 import _get from 'lodash/get'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
 import { KEYVALUE } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
@@ -48,6 +48,7 @@ const Inner: React.FC<
   children,
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
+  const [compositioning, setCompositioning] = useState(false)
 
   const innerClasses = classNames({
     [styles.inner]: true,
@@ -94,11 +95,12 @@ const Inner: React.FC<
 
   useOutsideClick(node, handleClickOutside)
 
-  useNativeEventListener('keyup', (event: KeyboardEvent) => {
+  const handleKeyboardEvent = (event: KeyboardEvent) => {
     if (event.code?.toLowerCase() !== KEYVALUE.escape) {
       return
     }
-    if (!dismissOnESC) {
+
+    if (!dismissOnESC || compositioning) {
       return
     }
 
@@ -112,8 +114,31 @@ const Inner: React.FC<
     if (poppers.length > 0 || gallery.length > 0) {
       return
     }
+
     closeTopDialog()
+  }
+
+  useNativeEventListener('keyup', (event: KeyboardEvent) => {
+    const target = event.target as HTMLElement
+    if (
+      target.tagName === 'INPUT' ||
+      target.tagName === 'TEXTAREA' ||
+      target.contentEditable === 'true'
+    ) {
+      return
+    }
+
+    handleKeyboardEvent(event)
   })
+
+  useNativeEventListener('compositionstart', () => {
+    setCompositioning(true)
+  })
+
+  useNativeEventListener('compositionend', () => {
+    setCompositioning(false)
+  })
+
   return (
     <div
       {...(testId ? { 'data-test-id': testId } : {})}
@@ -121,13 +146,8 @@ const Inner: React.FC<
       className={innerClasses}
       style={style}
       onKeyDown={(event) => {
-        if (event.code?.toLowerCase() !== KEYVALUE.escape) {
-          return
-        }
-        if (!dismissOnESC) {
-          return
-        }
-        closeTopDialog()
+        const nativeEvent: KeyboardEvent = event.nativeEvent
+        handleKeyboardEvent(nativeEvent)
       }}
     >
       <VisuallyHidden>
