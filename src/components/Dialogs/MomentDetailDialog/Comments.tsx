@@ -73,8 +73,6 @@ const Comments = ({ moment }: CommentsProps) => {
       return
     }
 
-    targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
-
     setTimeout(
       () => highlightComment(targetElement as HTMLElement, true, true),
       100

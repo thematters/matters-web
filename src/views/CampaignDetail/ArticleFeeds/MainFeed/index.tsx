@@ -28,6 +28,7 @@ import {
   FEED_TYPE_ANNOUNCEMENT,
 } from '../Tabs'
 import { CAMPAIGN_ARTICLES_PRIVATE, CAMPAIGN_ARTICLES_PUBLIC } from './gql'
+import styles from './styles.module.css'
 
 interface MainFeedProps {
   feedType: CampaignFeedType
@@ -40,11 +41,16 @@ export type CampaignArticlesPublicQueryArticle = NonNullable<
   >['edges']
 >[number]['node']
 
+const getArticleStage = (article: CampaignArticlesPublicQueryArticle) => {
+  const stage = article.campaigns[0]?.stage
+  return stage
+}
+
 const getArticleStageName = (
   article: CampaignArticlesPublicQueryArticle,
   lang: string
 ) => {
-  const stage = article.campaigns[0]?.stage
+  const stage = getArticleStage(article)
 
   // announcement if nullish
   if (!stage) {
@@ -142,7 +148,6 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
           <List.Item key={`${feedType}:${i}`}>
             <ArticleDigestFeed
               article={article}
-              label={isAll && <span>{getArticleStageName(article, lang)}</span>}
               onClick={() => {
                 analytics.trackEvent('click_feed', {
                   type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,
@@ -195,7 +200,18 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
           <List.Item key={`${feedType}:${i}`}>
             <ArticleDigestFeed
               article={node}
-              label={isAll && <span>{getArticleStageName(node, lang)}</span>}
+              label={
+                isAll && (
+                  <span
+                    className={[
+                      styles.articleLabel,
+                      getArticleStage(node)?.id ? '' : styles.announcement,
+                    ].join(' ')}
+                  >
+                    {getArticleStageName(node, lang)}
+                  </span>
+                )
+              }
               onClick={() => {
                 analytics.trackEvent('click_feed', {
                   type: `campaign_detail_${feedType}` as `campaign_detail_${string}`,

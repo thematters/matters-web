@@ -218,7 +218,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const controls = {
     hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
     hasDelete: (isCommentAuthor || (isTargetAuthor && isMoment)) && isActive,
-    hasReport: !isCommentAuthor,
+    hasReport: !isCommentAuthor && !(isTargetAuthor && isMoment),
   }
 
   const forbid = () => {
