@@ -7,6 +7,7 @@ import { dom, formStorage, stripHtml, trimCommentContent } from '~/common/utils'
 import {
   Dialog,
   SpinnerBlock,
+  useEventListener,
   useMutation,
   useRoute,
   ViewerContext,
@@ -75,7 +76,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
   const contentCount = stripHtml(content).length
   const isValid = contentCount > 0 && contentCount <= MAX_ARTICLE_COMMENT_LENGTH
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
     const trimContent = trimCommentContent(content)
     const input = {
@@ -89,7 +90,7 @@ const CommentForm: React.FC<CommentFormProps> = ({
       },
     }
 
-    event.preventDefault()
+    event?.preventDefault()
     setSubmitting(true)
 
     try {
@@ -180,6 +181,9 @@ const CommentForm: React.FC<CommentFormProps> = ({
     }, 500)
   }, [])
 
+  // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
+  useEventListener(formStorageKey, handleSubmit)
+
   return (
     <>
       <Dialog.Header
@@ -231,7 +235,13 @@ const CommentForm: React.FC<CommentFormProps> = ({
           onSubmit={handleSubmit}
           ref={formRef}
         >
-          <CommentEditor content={content} update={onUpdate} />
+          <CommentEditor
+            content={content}
+            update={onUpdate}
+            onSubmit={() =>
+              window.dispatchEvent(new CustomEvent(formStorageKey))
+            }
+          />
         </form>
       </Dialog.Content>
     </>

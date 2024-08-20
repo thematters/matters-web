@@ -16,6 +16,7 @@ import {
   SpinnerBlock,
   TextIcon,
   toast,
+  useEventListener,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -106,7 +107,7 @@ const MomentCommentForm = ({
 
   const isValid = contentCount > 0 && contentCount <= MAX_MOMENT_COMMENT_LENGTH
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const trimContent = trimCommentContent(content)
     const input = {
       comment: {
@@ -116,7 +117,7 @@ const MomentCommentForm = ({
       },
     }
 
-    event.preventDefault()
+    event?.preventDefault()
     setSubmitting(true)
 
     try {
@@ -213,6 +214,9 @@ const MomentCommentForm = ({
     setEditing?.(true)
   }
 
+  // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
+  useEventListener(formStorageKey, handleSubmit)
+
   return (
     <form
       className={formClasses}
@@ -228,6 +232,7 @@ const MomentCommentForm = ({
         <CommentEditor
           content={content}
           update={onUpdate}
+          onSubmit={() => window.dispatchEvent(new CustomEvent(formStorageKey))}
           placeholder={intl.formatMessage({
             defaultMessage: 'Say something...',
             id: 'YoiwCD',
