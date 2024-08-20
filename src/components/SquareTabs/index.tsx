@@ -6,12 +6,14 @@ type TabProps = {
   title: string
   selected?: boolean
   onClick: () => void
+  theme?: 'black' | 'gold'
 }
 
-const Tab = ({ title, selected, onClick }: TabProps) => {
+const Tab = ({ title, selected, onClick, theme }: TabProps) => {
   const liClasses = classNames({
     [styles.tabItem]: true,
     [styles.selected]: selected,
+    [styles.gold]: theme === 'gold',
   })
   return (
     <li

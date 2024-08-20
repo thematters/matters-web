@@ -94,7 +94,7 @@ const EditModeHeader = ({
   const isSensitiveRevised =
     restProps.contentSensitive !== article.sensitiveByAuthor
   const isCampaignRevised =
-    restProps.selectedStage !== article.campaigns[0]?.stage.id
+    restProps.selectedStage !== article.campaigns[0]?.stage?.id
   const isResetCampaign =
     isCampaignRevised &&
     (!restProps.appliedCampaign?.id || !restProps.selectedStage)
