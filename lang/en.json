@@ -1319,6 +1319,9 @@
     "defaultMessage": "Topics",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
+  "KkHQZ+": {
+    "defaultMessage": "Apply now. The writing journey will begin in a few days. For event details, please check the Event Information. (Application confirmation usually takes a few minutes for review. Your avatar will then appear among the writers.)"
+  },
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -2050,9 +2053,6 @@
   },
   "XZ8IJ3": {
     "defaultMessage": "After the modification is completed, the new version will be released to IPFS again. You can view the historical version from \"IPFS\" under the article title."
-  },
-  "XbS4AZ": {
-    "defaultMessage": "Event Infomation"
   },
   "Xd0J7Y": {
     "defaultMessage": "Open Source"
@@ -2942,9 +2942,6 @@
   },
   "onDesU": {
     "defaultMessage": "Congratulations! Now you can browse all works within the circle for free and chat with everyone."
-  },
-  "opxnPe": {
-    "defaultMessage": "Apply now. The writing journey will begin in a few days. For event details, please check the {eventLink}. (Application confirmation usually takes a few minutes for review. Your avatar will then appear among the writers.)"
   },
   "orIq4X": {
     "defaultMessage": "More than 100 supports"
