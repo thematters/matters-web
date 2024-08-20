@@ -5,8 +5,10 @@ import {
   MOCK_CIRCLE_COMMENT,
   MOCK_COLLECTION,
   MOCK_COMMENT,
+  MOCK_MOMENT,
+  MOCK_MOMENT_COMMENT,
+  MOCK_MOMENT_LIKE,
   MOCK_PARENT_COMMENT,
-  MOCK_TAG,
   MOCK_TRANSACTION,
   MOCK_USER,
 } from '~/stories/mocks'
@@ -188,16 +190,6 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'ArticleNewComment' as any,
     comment: MOCK_COMMENT,
   },
-  // SubscribedArticleNewComment
-  {
-    __typename: 'CommentNotice' as any,
-    id: 'SubscribedArticleNewComment',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    commentNoticeType: 'SubscribedArticleNewComment' as any,
-    comment: MOCK_COMMENT,
-  },
   // CircleNewBroadcast
   {
     __typename: 'CommentNotice' as any,
@@ -218,6 +210,7 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CircleNewDiscussion' as any,
     comment: MOCK_CIRCLE_COMMENT,
   },
+  // CommentLiked
   {
     __typename: 'CommentNotice',
     id: 'CommentLikedNotice',
@@ -227,7 +220,6 @@ export const MOCK_NOTICE_LIST = [
     commentNoticeType: 'CommentLiked',
     comment: MOCK_CIRCLE_COMMENT,
   },
-
   /**
    * Comment - Comment
    */
@@ -253,7 +245,6 @@ export const MOCK_NOTICE_LIST = [
     comment: MOCK_PARENT_COMMENT,
     reply: MOCK_CIRCLE_COMMENT,
   },
-
   /**
    * Collection
    */
@@ -266,84 +257,57 @@ export const MOCK_NOTICE_LIST = [
     target: MOCK_COLLECTION,
   },
   /**
-   * Article - Tag
+   * Moment
    */
-  // ArticleTagAdded
+  // MomentLiked
   {
-    __typename: 'ArticleTagNotice' as any,
-    id: 'ArticleTagAdded',
+    __typename: 'MomentNotice',
+    id: 'MomentLikedNotice',
     unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
+    createdAt: '2020-07-10T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleTagNoticeType: 'ArticleTagAdded' as any,
-    target: MOCK_ARTILCE,
-    tag: MOCK_TAG,
+    momentNoticeType: 'MomentLiked',
+    moment: MOCK_MOMENT_LIKE,
   },
-  // ArticleTagRemoved
+  // CommentLiked:Moment
   {
-    __typename: 'ArticleTagNotice' as any,
-    id: 'ArticleTagRemoved',
+    __typename: 'CommentNotice',
+    id: 'MomentCommentLikedNotice',
     unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
+    createdAt: '2024-06-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleTagNoticeType: 'ArticleTagRemoved' as any,
-    target: MOCK_ARTILCE,
-    tag: MOCK_TAG,
+    commentNoticeType: 'CommentLiked',
+    comment: MOCK_MOMENT_COMMENT,
   },
-  // ArticleTagUnselected
+  // MomentNewComment
   {
-    __typename: 'ArticleTagNotice' as any,
-    id: 'ArticleTagUnselected',
+    __typename: 'CommentNotice',
+    id: 'MomentNewCommentNotice',
     unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
+    createdAt: '2024-06-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleTagNoticeType: 'ArticleTagUnselected' as any,
-    target: MOCK_ARTILCE,
-    tag: MOCK_TAG,
+    commentNoticeType: 'MomentNewComment',
+    comment: MOCK_MOMENT_COMMENT,
   },
-
-  /**
-   *  Tag
-   */
-  // TagAdoption
+  // CommentMentionedYou:Circle
   {
-    __typename: 'TagNotice' as any,
-    id: 'TagAdoption',
+    __typename: 'CommentNotice' as any,
+    id: 'CommentMentionedYou-03',
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    tagNoticeType: 'TagAdoption' as any,
-    tag: MOCK_TAG,
+    commentNoticeType: 'CommentMentionedYou' as any,
+    comment: MOCK_MOMENT_COMMENT,
   },
-  // TagLeave
+  // MomentMentionedYou
   {
-    __typename: 'TagNotice' as any,
-    id: 'TagLeave',
+    __typename: 'MomentNotice',
+    id: 'MomentMentionedNotice',
     unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
+    createdAt: '2020-07-10T07:29:17.682Z',
     actors: [MOCK_USER],
-    tagNoticeType: 'TagLeave' as any,
-    tag: MOCK_TAG,
-  },
-  // TagAddEditor
-  {
-    __typename: 'TagNotice' as any,
-    id: 'TagAddEditor',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    tagNoticeType: 'TagAddEditor' as any,
-    tag: MOCK_TAG,
-  },
-  // TagLeaveEditor
-  {
-    __typename: 'TagNotice' as any,
-    id: 'TagLeaveEditor',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    tagNoticeType: 'TagLeaveEditor' as any,
-    tag: MOCK_TAG,
+    momentNoticeType: 'MomentMentionedYou',
+    moment: MOCK_MOMENT,
   },
 
   /**
@@ -359,19 +323,9 @@ export const MOCK_NOTICE_LIST = [
     txNoticeType: 'PaymentReceivedDonation' as any,
     tx: MOCK_TRANSACTION,
   },
-  // PaymentPayout
-  {
-    __typename: 'TransactionNotice' as any,
-    id: 'PaymentPayout',
-    unread: false,
-    createdAt: '2020-12-24T07:29:17.682Z',
-    actors: [MOCK_USER],
-    txNoticeType: 'PaymentPayout' as any,
-    tx: MOCK_TRANSACTION,
-  },
 
   /**
-   * Circcle
+   * Circle
    */
   // CircleNewFollower: single actor
   {

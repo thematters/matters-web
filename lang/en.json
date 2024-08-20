@@ -46,6 +46,9 @@
     "defaultMessage": "Are you sure you want to remove ‘{article}’ from this collection?",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
   },
+  "+ixiPI": {
+    "defaultMessage": "Delete moment"
+  },
   "+o9W2T": {
     "defaultMessage": "File upload failed, please verify the file link is valid, or manually download and upload again.",
     "description": "UNABLE_TO_UPLOAD_FROM_URL"
@@ -63,6 +66,9 @@
   "/3kw6k": {
     "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
+  },
+  "/5OvMK": {
+    "defaultMessage": "liked your moment"
   },
   "/5jk3i": {
     "defaultMessage": "Circle successfully subscribed."
@@ -115,6 +121,10 @@
   "/usqHn": {
     "defaultMessage": "{displayName}'s creative space"
   },
+  "/vyhs5": {
+    "defaultMessage": "Comment deleted",
+    "description": "src/components/Notice/NoticeComment.tsx"
+  },
   "/wKyxw": {
     "defaultMessage": "Failed to republish"
   },
@@ -147,6 +157,9 @@
   "0ThOw1": {
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
+  },
+  "0bTlm4": {
+    "defaultMessage": "Are you sure you want to delete this moment?"
   },
   "0e1xjL": {
     "defaultMessage": "Email can be modified up to {count} times per day.",
@@ -307,6 +320,10 @@
   "33oNeg": {
     "defaultMessage": "[Draft] {draftTitle}"
   },
+  "34OLoD": {
+    "defaultMessage": "Moment",
+    "description": "src/views/MomentDetail/Edit/index.tsx"
+  },
   "39AHJm": {
     "defaultMessage": "Sign Up"
   },
@@ -332,6 +349,10 @@
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to ",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
+  },
+  "3raREe": {
+    "defaultMessage": "Comment",
+    "description": "src/components/Dialogs/MomentDetailDialog/Comments.tsx"
   },
   "3w3CC8": {
     "defaultMessage": "Link ENS"
@@ -470,6 +491,9 @@
   "6CQaLH": {
     "defaultMessage": "Please select or enter amount"
   },
+  "6D7u/C": {
+    "defaultMessage": "Works"
+  },
   "6E7VKR": {
     "defaultMessage": "My transaction history"
   },
@@ -558,6 +582,10 @@
     "defaultMessage": "Are you sure you want to delete draft?",
     "description": "src/components/DraftDigest/Feed/DeleteButton.tsx"
   },
+  "7XWzvD": {
+    "defaultMessage": "No works here yet",
+    "description": "src/components/Empty/EmptyWork.tsx"
+  },
   "7Y9hwb": {
     "defaultMessage": "Oops! Setup failed."
   },
@@ -581,6 +609,10 @@
   },
   "8+Z5E9": {
     "defaultMessage": "The badge signifies your participation and completion in the \"Free Write in 7 days\"."
+  },
+  "80bF0W": {
+    "defaultMessage": "No comments",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
   "84VOdX": {
     "defaultMessage": "Unpin from profile",
@@ -732,12 +764,23 @@
     "defaultMessage": "Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
+  "AeIRlL": {
+    "defaultMessage": "Articles",
+    "description": "src/views/Follow/Tabs/index.tsx"
+  },
+  "AeVndq": {
+    "defaultMessage": "mentioned you in a comment at {commentMoment}"
+  },
   "AlHYvk": {
     "defaultMessage": "{type} edited"
   },
   "At8Qd2": {
     "defaultMessage": "Account",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
+  },
+  "AtjJEA": {
+    "defaultMessage": "Post",
+    "description": "src/views/MomentDetail/Edit/index.tsx"
   },
   "Avukw5": {
     "defaultMessage": "The payment amount is too small, please re-enter.",
@@ -831,6 +874,13 @@
   "CPvyYN": {
     "defaultMessage": "Incorrect password"
   },
+  "CTJk3m": {
+    "defaultMessage": "Copy comment",
+    "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
+  "CjKqYk": {
+    "defaultMessage": "Share a story from your life"
+  },
   "CnPG8j": {
     "defaultMessage": "Featured"
   },
@@ -913,6 +963,10 @@
   },
   "E048/V": {
     "defaultMessage": "Save as Draft"
+  },
+  "E3uFyt": {
+    "defaultMessage": "Moment",
+    "description": "src/components/Forms/MomentForm/index.tsx"
   },
   "E7vGxB": {
     "defaultMessage": "Balance loading..."
@@ -1166,6 +1220,9 @@
   "IjNYll": {
     "defaultMessage": "Let me think about it"
   },
+  "IpMWC4": {
+    "defaultMessage": "You’ve posted several times in a short period. Please take a break."
+  },
   "Is5PqP": {
     "defaultMessage": "Interledger Protocol"
   },
@@ -1207,6 +1264,10 @@
   },
   "Jmg5do": {
     "defaultMessage": "Archived Work"
+  },
+  "JpAsUV": {
+    "defaultMessage": "More moments",
+    "description": "src/views/Follow/Feed/UserPostMomentActivity"
   },
   "JpS59y": {
     "defaultMessage": "Accepted",
@@ -1432,6 +1493,10 @@
   "NSyuEP": {
     "defaultMessage": "Enter verification code"
   },
+  "NUEvfQ": {
+    "defaultMessage": "mentioned you in a deleted moment",
+    "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
   "NYTGIb": {
     "defaultMessage": "Got it"
   },
@@ -1525,6 +1590,10 @@
     "defaultMessage": "Go to sign",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
+  "PB/iK6": {
+    "defaultMessage": "Published",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "Password",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1534,6 +1603,10 @@
   },
   "PesLat": {
     "defaultMessage": "Publishing..."
+  },
+  "PhzTJa": {
+    "defaultMessage": "commented",
+    "description": "src/components/MomentDigest/FooterActions/CommentedFollowees/index.tsx"
   },
   "PkUihI": {
     "defaultMessage": "Saved",
@@ -1588,6 +1661,9 @@
   "QfrKA6": {
     "defaultMessage": "Back",
     "description": "src/components/Forms/PaymentForm"
+  },
+  "Qlzm0s": {
+    "defaultMessage": "mentioned you in a moment at"
   },
   "QvPc1q": {
     "defaultMessage": "Upload Cover"
@@ -1661,6 +1737,10 @@
   "SHWkv8": {
     "defaultMessage": "Why use Optimism network first?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
+  },
+  "SIgm0x": {
+    "defaultMessage": "Articles have been bookmarked",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "SNh1n0": {
     "defaultMessage": "View Members",
@@ -1812,6 +1892,10 @@
   "Up5U7K": {
     "defaultMessage": "Block"
   },
+  "Upe8I6": {
+    "defaultMessage": "mentioned you in a deleted moment",
+    "description": "src/components/Notice/MomentNotice/MomentMentionedYou.tsx"
+  },
   "Uq6tfM": {
     "defaultMessage": "Add caption…"
   },
@@ -1833,8 +1917,15 @@
   "VBve8d": {
     "defaultMessage": "Settled in Matters"
   },
+  "VKxanK": {
+    "defaultMessage": "Moment Feature is Live"
+  },
   "VZsE96": {
     "defaultMessage": "Collection Name"
+  },
+  "VdxjkY": {
+    "defaultMessage": "After deletion, the comment will be removed immediately",
+    "description": "Moment"
   },
   "VeEfHm": {
     "defaultMessage": "Drafts",
@@ -1875,6 +1966,9 @@
   "W3hNBA": {
     "defaultMessage": "Free Write in 7 days Grand Badge"
   },
+  "W3tqQO": {
+    "defaultMessage": "[image]"
+  },
   "W66Eyq": {
     "defaultMessage": "Password must be at least 8 characters long, support letter, numbers and symbols.",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
@@ -1902,10 +1996,6 @@
   "WSUAwk": {
     "defaultMessage": "Add to Featured",
     "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
-  },
-  "Wg0ZvI": {
-    "defaultMessage": "Articles has been bookmarked",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "WiGHyF": {
     "defaultMessage": "Web Monetization standard"
@@ -1990,6 +2080,9 @@
   "XnEruT": {
     "defaultMessage": "Binding failed. Please retry later."
   },
+  "Xq7h6o": {
+    "defaultMessage": "Upload Moment Assets"
+  },
   "XuYhBC": {
     "defaultMessage": "Pinned to profile"
   },
@@ -2035,6 +2128,9 @@
   "YlPCRU": {
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
+  },
+  "YoiwCD": {
+    "defaultMessage": "Say something..."
   },
   "Z+nZlT": {
     "defaultMessage": "Content Feed"
@@ -2148,6 +2244,9 @@
   },
   "adThp5": {
     "defaultMessage": "Latest"
+  },
+  "afLdf2": {
+    "defaultMessage": "Moment"
   },
   "ai7kS4": {
     "defaultMessage": "My Works"
@@ -2314,6 +2413,9 @@
   "eTpiYa": {
     "defaultMessage": "No data yet."
   },
+  "eWXgsZ": {
+    "defaultMessage": "Clear Content"
+  },
   "eXDZGQ": {
     "defaultMessage": "Maintainer"
   },
@@ -2325,6 +2427,10 @@
   },
   "enMIYK": {
     "defaultMessage": "My Page"
+  },
+  "eoQN04": {
+    "defaultMessage": "More",
+    "description": "src/components/MomentDigest/index.tsx"
   },
   "eov+J2": {
     "defaultMessage": "Custom URL Name"
@@ -2471,6 +2577,10 @@
     "defaultMessage": "Writers {count}",
     "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
+  "hgtWIO": {
+    "defaultMessage": "Articles have been collected",
+    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
+  },
   "hk2aiz": {
     "defaultMessage": "followed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
@@ -2558,6 +2668,9 @@
   "jtdQHR": {
     "defaultMessage": "Gateways"
   },
+  "jx7Hn3": {
+    "defaultMessage": "Article"
+  },
   "jy3tx0": {
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
@@ -2635,10 +2748,6 @@
     "defaultMessage": "Last step: Set Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
-  "l02bPO": {
-    "defaultMessage": "Articles has been collected",
-    "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
   "l2eEyp": {
     "defaultMessage": "Transaction Password successfully changed."
   },
@@ -2710,6 +2819,9 @@
   },
   "m6qWCv": {
     "defaultMessage": "Subscribers can add ENS to reader such as Planet"
+  },
+  "mBkZcw": {
+    "defaultMessage": "Like moment"
   },
   "mCAIcg": {
     "defaultMessage": "Hottest",
@@ -2793,6 +2905,10 @@
   "nWhqw9": {
     "defaultMessage": "Publish Now"
   },
+  "ng6TX/": {
+    "defaultMessage": "Published",
+    "description": "src/views/MomentDetail/Edit/index.tsx"
+  },
   "nhkx3t": {
     "defaultMessage": "IPFS is a decentralized storage technology that has the advantages of being decentralized, easy to survive, and difficult to be censored. Every article published on Matters is uploaded to IPFS. IPFS will incur certain storage fees, which are currently borne by Matters. (Go to the IPFS official website ipfs.com to learn more)"
   },
@@ -2840,6 +2956,9 @@
   "p6D+Uc": {
     "defaultMessage": "Enter Payment Pointer"
   },
+  "p9gEZh": {
+    "defaultMessage": "Up to 3 images can be uploaded"
+  },
   "pAQR0S": {
     "defaultMessage": "Published",
     "description": "src/views/Me/Works/WorksTabs/index.tsx"
@@ -2868,11 +2987,19 @@
     "defaultMessage": "Manage Circle",
     "description": "src/views/Circle/Profile/DropdownActions/index.tsx"
   },
+  "q192Fl": {
+    "defaultMessage": "Delete comment",
+    "description": "Moment"
+  },
   "q9oMKE": {
     "defaultMessage": "Circle Name"
   },
   "qBOEDo": {
     "defaultMessage": "Maximum amount is HKD {max}"
+  },
+  "qCotH5": {
+    "defaultMessage": "commented in your moment",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "qE8ew4": {
     "defaultMessage": "Bookmarked",
@@ -2984,8 +3111,15 @@
     "defaultMessage": "Sign in to that account to unlink it then try again",
     "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
+  "rsdUz2": {
+    "defaultMessage": "liked your comment",
+    "description": "MOMENT"
+  },
   "ruZqtT": {
     "defaultMessage": "Must be between {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} characters long."
+  },
+  "sFJ/Is": {
+    "defaultMessage": "Are you sure you want to clear the current content?"
   },
   "sPgUkN": {
     "defaultMessage": "This Month",
@@ -3042,6 +3176,12 @@
     "defaultMessage": "Add up to 5 tags",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
+  "tQV8l8": {
+    "defaultMessage": "Unknown Error"
+  },
+  "tZKvnZ": {
+    "defaultMessage": "Unlike moment"
+  },
   "tqEGfa": {
     "defaultMessage": "Your work has been published. Share it on different platforms"
   },
@@ -3058,6 +3198,10 @@
   },
   "u5aHb4": {
     "defaultMessage": "Copy Link"
+  },
+  "u9LYjQ": {
+    "defaultMessage": "Comment has been deleted",
+    "description": "Moment"
   },
   "uJkv2X": {
     "defaultMessage": "Edit Tag"

@@ -93,6 +93,7 @@ export const MentionList = forwardRef(
               }}
               bgActiveColor="greyLighter"
               isActive={activeItem === user.id}
+              activeOutline="auto"
               key={user.id}
             >
               <UserDigest.Mini

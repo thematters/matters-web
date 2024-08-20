@@ -10,6 +10,8 @@ export const UPLOAD_MIGRATION_SIZE_LIMIT: number = 1 * 1024 * 1024
 
 export const UPLOAD_FILE_COUNT_LIMIT: number = 50
 
+export const UPLOAD_MOMENT_ASSET_COUNT_LIMIT: number = 3
+
 export const ACCEPTED_UPLOAD_IMAGE_TYPES: string[] = [
   'image/gif',
   'image/png',
@@ -18,6 +20,12 @@ export const ACCEPTED_UPLOAD_IMAGE_TYPES: string[] = [
 ]
 
 export const ACCEPTED_COVER_UPLOAD_IMAGE_TYPES: string[] = [
+  'image/png',
+  'image/jpeg',
+  'image/webp',
+]
+
+export const ACCEPTED_MOMENT_ASSETS_UPLOAD_IMAGE_TYPES: string[] = [
   'image/png',
   'image/jpeg',
   'image/webp',
@@ -34,6 +42,7 @@ export enum ENTITY_TYPE {
   user = 'user',
   circle = 'circle',
   collection = 'collection',
+  moment = 'moment',
 }
 
 export enum ASSET_TYPE {
@@ -46,4 +55,5 @@ export enum ASSET_TYPE {
   circleAvatar = 'circleAvatar',
   circleCover = 'circleCover',
   collectionCover = 'collectionCover',
+  moment = 'moment',
 }

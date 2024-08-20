@@ -24,6 +24,8 @@ export type DialogProps = {
   onDismiss: () => void
 
   scrollable?: boolean
+  blurred?: boolean
+  fixedWidth?: boolean
   testId?: string
 } & DialogInnerProps
 
@@ -35,8 +37,9 @@ export type BaseDialogProps = {
 
 const BaseAnimatedDilaog: React.ComponentType<
   React.PropsWithChildren<DialogProps & BaseDialogProps>
-> = (props) => {
-  const { isOpen, mounted, setMounted, scrollable, bypassScrollLock } = props
+> = ({ fixedWidth = true, ...props }) => {
+  const { blurred, isOpen, mounted, setMounted, scrollable, bypassScrollLock } =
+    props
   const initialFocusRef = useRef<any>(null)
 
   // Fade In/ Fade Out
@@ -66,6 +69,12 @@ const BaseAnimatedDilaog: React.ComponentType<
     [styles.dialog]: true,
     [styles.overlay]: !!mounted,
     [styles.scrollable]: !!scrollable,
+    [styles.blurred]: !!blurred,
+  })
+
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.fixedWidth]: fixedWidth,
   })
 
   const AnimatedDialogOverlay = animated(DialogOverlay)
@@ -79,7 +88,7 @@ const BaseAnimatedDilaog: React.ComponentType<
       dangerouslyBypassScrollLock={bypassScrollLock}
     >
       <DialogContent
-        className={styles.container}
+        className={containerClasses}
         aria-labelledby="dialog-title"
       >
         <AnimatedInner
@@ -95,7 +104,8 @@ const BaseAnimatedDilaog: React.ComponentType<
 const BaseSimpleDialog: React.ComponentType<
   React.PropsWithChildren<DialogProps & BaseDialogProps>
 > = (props) => {
-  const { isOpen, mounted, setMounted, bypassScrollLock, scrollable } = props
+  const { blurred, isOpen, mounted, setMounted, bypassScrollLock, scrollable } =
+    props
   const initialFocusRef = useRef<any>(null)
 
   useEffect(() => {
@@ -110,6 +120,7 @@ const BaseSimpleDialog: React.ComponentType<
     [styles.dialog]: true,
     [styles.overlay]: !!mounted,
     [styles.scrollable]: !!scrollable,
+    [styles.blurred]: !!blurred,
   })
 
   return (

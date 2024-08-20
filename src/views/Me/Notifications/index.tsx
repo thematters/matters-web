@@ -18,6 +18,7 @@ import {
 } from '~/components'
 import { updateViewerUnreadNoticeCount } from '~/components/GQL'
 import CollectionNotice from '~/components/Notice/CollectionNotice'
+import MomentNotice from '~/components/Notice/MomentNotice'
 import {
   MarkAllNoticesAsReadMutation,
   MeNotificationsQuery,
@@ -32,6 +33,7 @@ const renderableTypes = new Set([
   'CommentNotice',
   'OfficialAnnouncementNotice',
   'TransactionNotice',
+  'MomentNotice',
   'UserNotice',
 ])
 
@@ -51,7 +53,9 @@ const ME_NOTIFICATIONS = gql`
             id
             createdAt
             ...DigestNotice
+            # FIXME: why CollectionNotice and MomentNotice is not included in DigestNotice?
             ...CollectionNotice
+            ...MomentNotice
           }
         }
       }
@@ -59,6 +63,7 @@ const ME_NOTIFICATIONS = gql`
   }
   ${Notice.fragments.notice}
   ${CollectionNotice.fragments.notice}
+  ${MomentNotice.fragments.notice}
 `
 // FIXME: remove CollectionNotice fragment from ME_NOTIFICATIONS
 

@@ -9,6 +9,7 @@ import CircleNotice from './CircleNotice'
 import CollectionNotice from './CollectionNotice'
 import CommentCommentNotice from './CommentCommentNotice'
 import CommentNotice from './CommentNotice'
+import MomentNotice from './MomentNotice'
 import OfficialAnnouncementNotice from './OfficialAnnouncementNotice'
 import TransactionNotice from './TransactionNotice'
 import UserNotice from './UserNotice'
@@ -44,6 +45,9 @@ const fragments = {
       ... on OfficialAnnouncementNotice {
         ...OfficialAnnouncementNotice
       }
+      ... on MomentNotice {
+        ...MomentNotice
+      }
       ... on CollectionNotice {
         ...CollectionNotice
       }
@@ -56,6 +60,7 @@ const fragments = {
     ${TransactionNotice.fragments.notice}
     ${CircleNotice.fragments.notice}
     ${OfficialAnnouncementNotice.fragments.notice}
+    ${MomentNotice.fragments.notice}
     ${CollectionNotice.fragments.notice}
   `,
 }
@@ -80,6 +85,8 @@ export const Notice: React.FC<NoticeProps> & {
       return <CircleNotice notice={notice} />
     case 'OfficialAnnouncementNotice':
       return <OfficialAnnouncementNotice notice={notice} />
+    case 'MomentNotice':
+      return <MomentNotice notice={notice} />
     case 'CollectionNotice':
       return <CollectionNotice notice={notice} />
     default:

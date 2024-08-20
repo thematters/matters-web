@@ -211,11 +211,11 @@ const USDTProcessingForm: React.FC<Props> = ({
   const { routerLang } = useRoute()
 
   const { address } = useAccount()
-
   const isConnectedAddress =
     viewer.info.ethAddress?.toLowerCase() === address?.toLowerCase()
-
   const [isInSufficientError, setIsInSufficientError] = useState(false)
+
+  const [draftTxId, setDraftTxId] = useState<string>()
 
   const {
     data,
@@ -237,20 +237,39 @@ const USDTProcessingForm: React.FC<Props> = ({
     ],
   })
 
+  const payToData = {
+    amount,
+    currency,
+    purpose: 'donation',
+    recipientId: recipient.id,
+    targetId,
+    chain: CHAIN.OPTIMISM,
+  }
+
+  const sendOnChainTransaction = async () => {
+    // make draft transaction
+    const tx = await payTo({ variables: { ...payToData } })
+
+    const txId = tx.data?.payTo.transaction.id
+    if (txId) {
+      setDraftTxId(txId)
+    }
+
+    // send on-chain transaction
+    curate()
+  }
+
   const sendPayTo = async () => {
     if (!data) {
       return
     }
 
+    // settle draft transaction
     await payTo({
       variables: {
-        amount,
-        currency,
-        purpose: 'donation',
-        recipientId: recipient.id,
-        targetId,
-        chain: CHAIN.OPTIMISM,
+        ...payToData,
         txHash: data.hash,
+        id: draftTxId,
       },
       update: (cache, result) => {
         updateArticlePublic({
@@ -277,9 +296,9 @@ const USDTProcessingForm: React.FC<Props> = ({
 
   // trigger transaction
   useEffect(() => {
-    if (curate) {
-      curate()
-    }
+    if (!curate) return
+
+    sendOnChainTransaction()
   }, [])
 
   // trigger payTo mutation

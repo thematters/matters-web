@@ -6,6 +6,7 @@ export const fragments = {
       id
       status {
         articleCount
+        momentCount
       }
       userCollections: collections(input: { first: 0 }) {
         totalCount

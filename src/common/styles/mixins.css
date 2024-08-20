@@ -244,6 +244,7 @@
 
   /* Firefox */
   overflow: -moz-scrollbars-none;
+  scrollbar-width: none;
 
   /* Chrome & Safari */
   &::-webkit-scrollbar {
