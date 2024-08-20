@@ -76,6 +76,15 @@
   }
 }
 
+.bgActiveGreyHover {
+  &:not(.disabled) {
+    &:hover,
+    &:focus {
+      background: var(--color-grey-hover);
+    }
+  }
+}
+
 .bgActiveNone {
   &:not(.disabled) {
     &:hover,
