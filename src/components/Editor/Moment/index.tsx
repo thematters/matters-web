@@ -15,7 +15,11 @@ import { useIntl } from 'react-intl'
 import { ADD_MOMENT_ASSETS } from '~/common/enums'
 import { getValidFiles } from '~/common/utils'
 
-import { makeMentionSuggestion, SmartLink } from '../Article/extensions'
+import {
+  CustomShortcuts,
+  makeMentionSuggestion,
+  SmartLink,
+} from '../Article/extensions'
 import { makeSmartLinkOptions } from '../Article/extensions/smartLink/utils'
 import commentStyles from '../Comment/styles.module.css'
 import styles from './styles.module.css'
@@ -23,6 +27,7 @@ import styles from './styles.module.css'
 interface Props {
   content: string
   update: (params: { content: string }) => void
+  onSubmit: () => any
   placeholder?: string
   setEditor?: (editor: Editor | null) => void
 }
@@ -30,6 +35,7 @@ interface Props {
 const MomentEditor: React.FC<Props> = ({
   content,
   update,
+  onSubmit,
   placeholder,
   setEditor,
 }) => {
@@ -50,6 +56,9 @@ const MomentEditor: React.FC<Props> = ({
       update({ content })
     },
     extensions: [
+      CustomShortcuts.configure({
+        onModEnter: () => onSubmit(),
+      }),
       Placeholder.configure({
         placeholder,
       }),
