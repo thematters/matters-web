@@ -56,7 +56,7 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
   })
   const hasLinkedIPNS =
     !!ipnsHash &&
-    '0x' + contentHash.encode('ipns-ns', ipnsHash) === contenthashData
+    '0x' + contentHash.encode('ipns', ipnsHash) === contenthashData
   const hasLinkEnsButton =
     ensName && ipnsHash && isMe && !hasLinkedIPNS && isSuccess
 

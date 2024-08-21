@@ -67,7 +67,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
     chainId: targetNetork.id,
   })
   const hasLinkedIPNS =
-    !!ipnsKey && '0x' + contentHash.encode('ipns-ns', ipnsKey) === readData
+    !!ipnsKey && '0x' + contentHash.encode('ipns', ipnsKey) === readData
   const displayIPNS = hasLinkedIPNS ? ensName : user.info.ipnsKey
 
   const intl = useIntl()

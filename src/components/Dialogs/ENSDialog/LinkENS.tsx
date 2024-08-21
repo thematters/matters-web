@@ -76,7 +76,7 @@ const LinkENS = ({
     functionName: 'setContenthash',
     args: [
       namehash(ensName || ''),
-      !!ipnsHash && '0x' + contentHash.encode('ipns-ns', ipnsHash),
+      !!ipnsHash && '0x' + contentHash.encode('ipns', ipnsHash),
     ] as [`0x${string}`, `0x${string}`],
   })
   const {
