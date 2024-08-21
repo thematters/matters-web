@@ -43,6 +43,7 @@
 
     & :global(.ProseMirror),
     & :global(.tiptap) {
+      min-height: 4rem;
       max-height: 5.5rem;
     }
   }
