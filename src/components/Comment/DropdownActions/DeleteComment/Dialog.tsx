@@ -14,13 +14,18 @@ import {
   CommentDropdownActionsCommentPublicFragment,
   DeleteCommentMutation,
 } from '~/gql/graphql'
-import { USER_WRITINGS_PUBLIC } from '~/views/User/Writings/gql'
 
 const DELETE_COMMENT = gql`
   mutation DeleteComment($id: ID!) {
     deleteComment(input: { id: $id }) {
       id
       state
+      node {
+        ... on Moment {
+          id
+          commentCount
+        }
+      }
     }
   }
 `
@@ -84,14 +89,6 @@ const DeleteCommentDialog = ({
         }
       }
     },
-    refetchQueries: isMoment
-      ? [
-          {
-            query: USER_WRITINGS_PUBLIC,
-            variables: { userName: node?.author.userName },
-          },
-        ]
-      : [],
   })
 
   const onDelete = async () => {
