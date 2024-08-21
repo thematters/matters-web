@@ -15,6 +15,8 @@ import {
   Button,
   SpinnerBlock,
   TextIcon,
+  toast,
+  useEventListener,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -25,7 +27,6 @@ import {
   MomentCommentFormMomentFragment,
   PutMomentCommentMutation,
 } from '~/gql/graphql'
-import { USER_WRITINGS_PUBLIC } from '~/views/User/Writings/gql'
 
 import styles from './styles.module.css'
 
@@ -105,7 +106,7 @@ const MomentCommentForm = ({
 
   const isValid = contentCount > 0 && contentCount <= MAX_MOMENT_COMMENT_LENGTH
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const trimContent = trimCommentContent(content)
     const input = {
       comment: {
@@ -115,7 +116,7 @@ const MomentCommentForm = ({
       },
     }
 
-    event.preventDefault()
+    event?.preventDefault()
     setSubmitting(true)
 
     try {
@@ -138,18 +139,22 @@ const MomentCommentForm = ({
             comment: newComment,
           }
 
+          toast.success({
+            message: (
+              <FormattedMessage
+                defaultMessage="Published"
+                description="src/components/Forms/MomentCommentForm/index.tsx"
+                id="PB/iK6"
+              />
+            ),
+          })
+
           window.dispatchEvent(
             new CustomEvent(UPDATE_NEWEST_MOMENT_COMMENT, {
               detail,
             })
           )
         },
-        refetchQueries: [
-          {
-            query: USER_WRITINGS_PUBLIC,
-            variables: { userName: moment.author.userName },
-          },
-        ],
       })
 
       setSubmitting(false)
@@ -187,6 +192,7 @@ const MomentCommentForm = ({
   const contentClasses = classNames({
     [styles.content]: true,
     [styles.focus]: editing,
+    [styles.default]: !editing,
   })
 
   const handleFocus = () => {
@@ -200,6 +206,9 @@ const MomentCommentForm = ({
     }
     setEditing?.(true)
   }
+
+  // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
+  useEventListener(formStorageKey, handleSubmit)
 
   return (
     <form
@@ -216,6 +225,7 @@ const MomentCommentForm = ({
         <CommentEditor
           content={content}
           update={onUpdate}
+          onSubmit={() => window.dispatchEvent(new CustomEvent(formStorageKey))}
           placeholder={intl.formatMessage({
             defaultMessage: 'Say something...',
             id: 'YoiwCD',

@@ -14,13 +14,18 @@ import {
   CommentDropdownActionsCommentPublicFragment,
   DeleteCommentMutation,
 } from '~/gql/graphql'
-import { USER_WRITINGS_PUBLIC } from '~/views/User/Writings/gql'
 
 const DELETE_COMMENT = gql`
   mutation DeleteComment($id: ID!) {
     deleteComment(input: { id: $id }) {
       id
       state
+      node {
+        ... on Moment {
+          id
+          commentCount
+        }
+      }
     }
   }
 `
@@ -51,6 +56,14 @@ const DeleteCommentDialog = ({
       deleteComment: {
         id: commentId,
         state: 'archived' as any,
+        node:
+          isMoment && node?.__typename === 'Moment'
+            ? {
+                id: node?.id,
+                commentCount: node.commentCount - 1,
+                __typename: 'Moment',
+              }
+            : {},
         __typename: 'Comment',
       },
     },
@@ -84,21 +97,19 @@ const DeleteCommentDialog = ({
         }
       }
     },
-    refetchQueries: isMoment
-      ? [
-          {
-            query: USER_WRITINGS_PUBLIC,
-            variables: { userName: node?.author.userName },
-          },
-        ]
-      : [],
   })
 
   const onDelete = async () => {
     await deleteComment()
 
     toast.success({
-      message: (
+      message: isMoment ? (
+        <FormattedMessage
+          defaultMessage="Comment has been deleted"
+          description="Moment"
+          id="u9LYjQ"
+        />
+      ) : (
         <FormattedMessage
           defaultMessage="Comment has been deleted"
           id="HbEL82"

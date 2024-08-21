@@ -15,7 +15,11 @@ export type CardBgColor =
   | 'transparent'
   | 'none'
   | 'freeWriteBlue'
-export type CardBgHoverColor = 'greyLighter' | 'transparent' | 'none'
+export type CardBgHoverColor =
+  | 'greyHover'
+  | 'greyLighter'
+  | 'transparent'
+  | 'none'
 export type CardSpacing = 0 | 8 | 10 | 12 | 16 | 20 | 24
 export type CardBorderColor = 'greyLighter' | 'lineGreyLight' | 'green'
 export type CardBorderRadius = 'xtight' | 'xxtight' | 'base' | 'loose'

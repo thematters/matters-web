@@ -35,7 +35,11 @@ type FormDraft = {
   assets?: MomentAsset[]
 }
 
-const MomentForm = () => {
+type MomentFormProps = {
+  setFirstRendered?: (firstRendered: boolean) => void
+}
+
+const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const [putMoment] = useMutation<PutMomentMutation>(PUT_MOMENT, undefined, {
@@ -43,6 +47,12 @@ const MomentForm = () => {
   })
 
   const [isEditing, setEditing] = useState(false)
+
+  useEffect(() => {
+    if (setFirstRendered) {
+      setFirstRendered(true)
+    }
+  }, [])
 
   useEventListener(OPEN_MOMENT_FORM, () => {
     setEditing(true)
@@ -146,8 +156,9 @@ const MomentForm = () => {
   useEventListener(ADD_MOMENT_ASSETS, () => {
     setIsDragging(false)
   })
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault()
+
     try {
       setSubmitting(true)
       const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
@@ -232,6 +243,9 @@ const MomentForm = () => {
     }
   }, [editor, isEditing])
 
+  // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
+  useEventListener(formStorageKey, handleSubmit)
+
   if (!isEditing) {
     return (
       <section className={styles.defalut} onClick={() => setEditing(true)}>
@@ -275,6 +289,7 @@ const MomentForm = () => {
         <MomentEditor
           content={content}
           update={onUpdate}
+          onSubmit={() => window.dispatchEvent(new CustomEvent(formStorageKey))}
           setEditor={(editor) => {
             setEditor(editor)
           }}

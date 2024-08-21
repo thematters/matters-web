@@ -13,11 +13,11 @@ import {
 } from '~/components'
 import {
   CircleCommentDropdownActionsCommentPublicFragment,
-  DeleteCommentMutation,
+  DeleteCircleCommentMutation,
 } from '~/gql/graphql'
 
-const DELETE_COMMENT = gql`
-  mutation DeleteComment($id: ID!) {
+const DELETE_CIRCLE_COMMENT = gql`
+  mutation DeleteCircleComment($id: ID!) {
     deleteComment(input: { id: $id }) {
       id
       state
@@ -41,16 +41,19 @@ const DeleteCommentDialog = ({
 
   const { lang } = useContext(LanguageContext)
 
-  const [deleteComment] = useMutation<DeleteCommentMutation>(DELETE_COMMENT, {
-    variables: { id: commentId },
-    optimisticResponse: {
-      deleteComment: {
-        id: commentId,
-        state: 'archived' as any,
-        __typename: 'Comment',
+  const [deleteComment] = useMutation<DeleteCircleCommentMutation>(
+    DELETE_CIRCLE_COMMENT,
+    {
+      variables: { id: commentId },
+      optimisticResponse: {
+        deleteComment: {
+          id: commentId,
+          state: 'archived' as any,
+          __typename: 'Comment',
+        },
       },
-    },
-  })
+    }
+  )
 
   const onDelete = async () => {
     await deleteComment()

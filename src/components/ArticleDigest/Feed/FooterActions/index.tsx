@@ -14,6 +14,7 @@ export type FooterActionsControls = DropdownActionsControls
 
 export type FooterActionsProps = {
   article: FooterActionsArticlePublicFragment
+  label?: React.ReactNode
   hasReadTime?: boolean
   hasDonationCount?: boolean
   hasCircle?: boolean
@@ -23,6 +24,7 @@ export type FooterActionsProps = {
 
 const FooterActions = ({
   article,
+  label,
   hasReadTime,
   hasDonationCount,
   hasCircle,
@@ -40,6 +42,8 @@ const FooterActions = ({
       <section className={styles.left}>
         {includesMetaData && (
           <>
+            {label}
+
             {hasReadTime && <ReadTime article={article} />}
 
             {hasDonationCount && <DonationCount article={article} />}

@@ -6,7 +6,9 @@ import { animated, useSpring } from 'react-spring'
 
 import {
   BREAKPOINTS,
+  BYPASS_FOCUS_LOCK,
   BYPASS_SCROLL_LOCK,
+  ENBABLE_FOCUS_LOCK,
   ENBABLE_SCROLL_LOCK,
 } from '~/common/enums'
 import { useEventListener, useMediaQuery } from '~/components'
@@ -33,13 +35,21 @@ export type BaseDialogProps = {
   mounted: boolean
   setMounted: (val: boolean) => void
   bypassScrollLock: boolean
+  bypassFocusLock: boolean
 }
 
 const BaseAnimatedDilaog: React.ComponentType<
   React.PropsWithChildren<DialogProps & BaseDialogProps>
 > = ({ fixedWidth = true, ...props }) => {
-  const { blurred, isOpen, mounted, setMounted, scrollable, bypassScrollLock } =
-    props
+  const {
+    blurred,
+    isOpen,
+    mounted,
+    setMounted,
+    scrollable,
+    bypassScrollLock,
+    bypassFocusLock,
+  } = props
   const initialFocusRef = useRef<any>(null)
 
   // Fade In/ Fade Out
@@ -86,6 +96,7 @@ const BaseAnimatedDilaog: React.ComponentType<
       initialFocusRef={initialFocusRef}
       style={{ opacity: opacity as any }}
       dangerouslyBypassScrollLock={bypassScrollLock}
+      dangerouslyBypassFocusLock={bypassFocusLock}
     >
       <DialogContent
         className={containerClasses}
@@ -104,8 +115,15 @@ const BaseAnimatedDilaog: React.ComponentType<
 const BaseSimpleDialog: React.ComponentType<
   React.PropsWithChildren<DialogProps & BaseDialogProps>
 > = (props) => {
-  const { blurred, isOpen, mounted, setMounted, bypassScrollLock, scrollable } =
-    props
+  const {
+    blurred,
+    isOpen,
+    mounted,
+    setMounted,
+    bypassScrollLock,
+    bypassFocusLock,
+    scrollable,
+  } = props
   const initialFocusRef = useRef<any>(null)
 
   useEffect(() => {
@@ -128,6 +146,7 @@ const BaseSimpleDialog: React.ComponentType<
       className={dialogOverlayClasses}
       initialFocusRef={initialFocusRef}
       dangerouslyBypassScrollLock={bypassScrollLock}
+      dangerouslyBypassFocusLock={bypassFocusLock}
     >
       <DialogContent
         className={styles.container}
@@ -152,6 +171,7 @@ export const Dialog: React.ComponentType<
   const { isOpen } = props
   const [mounted, setMounted] = useState(isOpen)
   const [bypassScrollLock, setBypassScrollLock] = useState(false)
+  const [bypassFocusLock, setBypassFocusLock] = useState(false)
   const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   useEffect(() => {
@@ -166,12 +186,24 @@ export const Dialog: React.ComponentType<
   useEventListener(ENBABLE_SCROLL_LOCK, () => {
     setBypassScrollLock(false)
   })
+  useEventListener(BYPASS_FOCUS_LOCK, () => {
+    setBypassFocusLock(true)
+  })
+  useEventListener(ENBABLE_FOCUS_LOCK, () => {
+    setBypassFocusLock(false)
+  })
 
   if (!mounted) {
     return null
   }
 
-  const dialogProps = { ...props, mounted, setMounted, bypassScrollLock }
+  const dialogProps = {
+    ...props,
+    mounted,
+    setMounted,
+    bypassScrollLock,
+    bypassFocusLock,
+  }
 
   return isSmUp ? (
     <BaseAnimatedDilaog {...dialogProps} />

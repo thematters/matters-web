@@ -38,6 +38,8 @@ export const OPEN_COMMENT_LIST_DRAWER = 'openCommentListDrawer'
 export const CLOSE_OTHER_DRAWERS = 'closeOtherDrawers'
 export const BYPASS_SCROLL_LOCK = 'bypassScrollLock'
 export const ENBABLE_SCROLL_LOCK = 'enableScrollLock'
+export const BYPASS_FOCUS_LOCK = 'bypassFocusLock'
+export const ENBABLE_FOCUS_LOCK = 'enableFocusLock'
 
 // Toast
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'

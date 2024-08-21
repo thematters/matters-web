@@ -10,6 +10,7 @@ import {
   LanguageContext,
   SpinnerBlock,
   toast,
+  useEventListener,
   useMutation,
   ViewerContext,
 } from '~/components'
@@ -77,7 +78,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
   )
   const isValid = stripHtml(content).length > 0
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
     const input = {
       id: commentId,
@@ -91,7 +92,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
       },
     }
 
-    event.preventDefault()
+    event?.preventDefault()
     setSubmitting(true)
 
     try {
@@ -138,6 +139,9 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
     formStorage.set(formStorageKey, newContent, 'local')
   }
 
+  // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
+  useEventListener(formStorageKey, handleSubmit)
+
   return (
     <>
       <Dialog.Header
@@ -162,7 +166,13 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
           id={formStorageKey}
           onSubmit={handleSubmit}
         >
-          <CommentEditor content={content} update={onUpdate} />
+          <CommentEditor
+            content={content}
+            update={onUpdate}
+            onSubmit={() =>
+              window.dispatchEvent(new CustomEvent(formStorageKey))
+            }
+          />
         </form>
       </Dialog.Content>
 

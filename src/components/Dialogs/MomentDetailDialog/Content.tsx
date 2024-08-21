@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { ADD_MOMENT_COMMENT_MENTION } from '~/common/enums'
 import { makeMentionElement, toPath } from '~/common/utils'
@@ -10,7 +10,6 @@ import {
   QueryError,
   useEventListener,
   useRoute,
-  ViewerContext,
 } from '~/components'
 import MomentCommentForm from '~/components/Forms/MomentCommentForm'
 import Assets from '~/components/MomentDigest/Assets'
@@ -31,7 +30,6 @@ const MomentDetailDialogContent = ({
   shortHash,
   closeDialog: _closeDialog,
 }: MomentDetailDialogContentProps) => {
-  const viewer = useContext(ViewerContext)
   const { isInPath, router } = useRoute()
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
@@ -57,10 +55,6 @@ const MomentDetailDialogContent = ({
     (payload: { [key: string]: any }) => {
       setEditing(true)
       const author = payload?.author
-      if (author.id === viewer.id) {
-        editor && editor.commands.focus('end')
-        return
-      }
       const mentionElement = makeMentionElement(
         author.id,
         author.userName,

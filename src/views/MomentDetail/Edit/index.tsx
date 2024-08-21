@@ -53,6 +53,12 @@ const Edit = () => {
   const [content, setContent] = useState(formDraft?.content || '')
   const [assets, setAssets] = useState<MomentAsset[]>(formDraft?.assets || [])
 
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   const updateAssets = (assets: MomentAsset[]) => {
     formStorage.set<FormDraft>(
       formStorageKey,
@@ -69,8 +75,9 @@ const Edit = () => {
       assets.length > 0) &&
     assets.every(({ uploaded }) => uploaded)
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault()
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
+    event?.preventDefault()
+
     try {
       setSubmitting(true)
       const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
@@ -181,6 +188,15 @@ const Edit = () => {
     [styles.over]: contentCount > MAX_MOMENT_CONTENT_LENGTH,
   })
 
+  // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
+  useEventListener(formStorageKey, handleSubmit)
+
+  // FIXED: Text content does not match server-rendered HTML
+  // https://nextjs.org/docs/messages/react-hydration-error
+  if (!isClient) {
+    return null
+  }
+
   return (
     <>
       <header className={styles.header}>
@@ -259,6 +275,9 @@ const Edit = () => {
           <MomentEditor
             content={content}
             update={onUpdate}
+            onSubmit={() =>
+              window.dispatchEvent(new CustomEvent(formStorageKey))
+            }
             setEditor={(editor) => {
               setEditor(editor)
             }}

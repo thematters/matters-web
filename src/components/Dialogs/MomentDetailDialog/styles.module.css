@@ -50,8 +50,8 @@
     font-size: var(--text17);
     line-height: 1.75;
 
-    & :global(.mention) {
-      color: var(--color-matters-green);
+    & a {
+      color: var(--color-grey-darker);
     }
   }
 

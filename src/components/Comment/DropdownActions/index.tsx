@@ -82,6 +82,7 @@ const fragments = {
               id
               userName
             }
+            commentCount
           }
 
           ... on Moment {
@@ -91,6 +92,7 @@ const fragments = {
               id
               userName
             }
+            commentCount
           }
         }
         ...CommentPinButtonComment
@@ -206,6 +208,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
     comment.node.__typename === 'Moment'
       ? comment.node
       : undefined
+
+  const isMoment = comment.node.__typename === 'Moment'
   const targetAuthor = node?.author
 
   const isTargetAuthor = viewer.id === targetAuthor?.id
@@ -215,8 +219,8 @@ const DropdownActions = (props: DropdownActionsProps) => {
 
   const controls = {
     hasPin: hasPin && !!(isTargetAuthor && isActive && !isDescendantComment),
-    hasDelete: !!(isCommentAuthor && isActive),
-    hasReport: !isCommentAuthor,
+    hasDelete: (isCommentAuthor || (isTargetAuthor && isMoment)) && isActive,
+    hasReport: !isCommentAuthor && !(isTargetAuthor && isMoment),
   }
 
   const forbid = () => {

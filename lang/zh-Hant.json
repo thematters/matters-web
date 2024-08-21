@@ -460,9 +460,6 @@
   "5sg7KC": {
     "defaultMessage": "密碼"
   },
-  "5y5rID": {
-    "defaultMessage": "我們將盡快處理你的申請，敬請期待活動開跑！"
-  },
   "6+eeJ4": {
     "defaultMessage": "可使用小寫英文、數字及下劃線",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -796,6 +793,9 @@
   "B2As08": {
     "defaultMessage": "沒有更多",
     "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
+  },
+  "B9IFMF": {
+    "defaultMessage": "好的，我報名"
   },
   "BDbgCL": {
     "defaultMessage": "標題 3"
@@ -1132,9 +1132,6 @@
   "HAlOn1": {
     "defaultMessage": "用戶名"
   },
-  "HB2VOx": {
-    "defaultMessage": "系统或连线异常，请刷新页面后重新点击报名参加"
-  },
   "HBxXD/": {
     "defaultMessage": "版權聲明"
   },
@@ -1321,6 +1318,9 @@
   "KgVypx": {
     "defaultMessage": "標籤",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
+  },
+  "KkHQZ+": {
+    "defaultMessage": "現在報名，寫作之旅將於數天後開始，活動細則可查看公告。（報名確認通常需要幾分鐘審核時間，之後你的頭像將出現在作者之中）"
   },
   "KlJEP9": {
     "defaultMessage": "錢包已綁定",
@@ -1593,6 +1593,10 @@
     "defaultMessage": "前往簽署",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
+  "PB/iK6": {
+    "defaultMessage": "留言已發布",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
+  },
   "PLBmDT": {
     "defaultMessage": "登入密碼",
     "description": "src/views/Me/Settings/Settings/Password/index.tsx"
@@ -1623,7 +1627,7 @@
     "defaultMessage": "換一批"
   },
   "Pq/7m5": {
-    "defaultMessage": "晚鳥參與處理中",
+    "defaultMessage": "晚鳥參與處理中⋯",
     "description": "type:join"
   },
   "PtV68+": {
@@ -1776,6 +1780,9 @@
   },
   "Sfql0+": {
     "defaultMessage": "恭喜獲得七日書大滿貫"
+  },
+  "Sj+TN8": {
+    "defaultMessage": "公告"
   },
   "SuRTsQ": {
     "defaultMessage": "註冊 ISCN"
@@ -2283,9 +2290,6 @@
   "beLe/F": {
     "defaultMessage": "廣播"
   },
-  "buf5vO": {
-    "defaultMessage": "活動公告"
-  },
   "c/z318": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
@@ -2650,7 +2654,7 @@
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
   },
   "jLkKbI": {
-    "defaultMessage": "報名處理中",
+    "defaultMessage": "報名處理中⋯",
     "description": "type:apply"
   },
   "jiB0Z2": {
@@ -2773,6 +2777,9 @@
   "lNjDPr": {
     "defaultMessage": "你還沒有邀請任何用戶喔！點擊新增邀請，添加站內或站外朋友加入圍爐贈與對方免費資格的固定時長",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
+  },
+  "lO7wKc": {
+    "defaultMessage": "再想想"
   },
   "lT6Dt8": {
     "defaultMessage": "確認辭去"
@@ -2919,9 +2926,6 @@
   "oGiO//": {
     "defaultMessage": "插入音訊"
   },
-  "oLOus+": {
-    "defaultMessage": "報名申請已遞交 🎉"
-  },
   "ob+HDS": {
     "defaultMessage": "馬上逛逛"
   },
@@ -2932,6 +2936,9 @@
   "ohgTH4": {
     "defaultMessage": "追蹤中",
     "description": "src/components/UserProfile/index.tsx"
+  },
+  "on+DYO": {
+    "defaultMessage": "確認報名"
   },
   "onDesU": {
     "defaultMessage": "恭喜成為圍爐一員。現在你可以免費瀏覽圍爐內作品，還可以去圍爐與大家談天說地。"
@@ -3101,6 +3108,10 @@
     "defaultMessage": "請登入該帳戶解綁錢包後再試",
     "description": "src/components/AuthMethodFeed/AuthWalletFeed.tsx"
   },
+  "rsdUz2": {
+    "defaultMessage": "喜歡你的留言",
+    "description": "MOMENT"
+  },
   "ruZqtT": {
     "defaultMessage": "僅供輸入 {MIN_USER_DISPLAY_NAME_LENGTH}-{MAX_USER_DISPLAY_NAME_LENGTH} 個字元"
   },
@@ -3184,6 +3195,10 @@
   },
   "u5aHb4": {
     "defaultMessage": "複製連結"
+  },
+  "u9LYjQ": {
+    "defaultMessage": "留言已刪除",
+    "description": "Moment"
   },
   "uJkv2X": {
     "defaultMessage": "編輯標籤"
