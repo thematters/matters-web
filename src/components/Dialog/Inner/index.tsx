@@ -5,9 +5,9 @@ import _get from 'lodash/get'
 import { useRef, useState } from 'react'
 
 import {
-  CLOSE_DIALOG_EDIT_ELEMENT,
+  DISABLE_SUSPEND_DISMISS_ON_ESC,
+  ENABLE_SUSPEND_DISMISS_ON_ESC,
   KEYVALUE,
-  OPEN_DIALOG_EDIT_ELEMENT,
 } from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
 import {
@@ -57,15 +57,14 @@ const Inner: React.FC<
   children,
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
-  const [compositioning, setCompositioning] = useState(false)
-  const [editing, setEditing] = useState(false)
+  const [suspendDismissOnESC, setSuspendDismissOnESC] = useState(false)
 
-  useEventListener(OPEN_DIALOG_EDIT_ELEMENT, () => {
-    setEditing(true)
+  useEventListener(ENABLE_SUSPEND_DISMISS_ON_ESC, () => {
+    setSuspendDismissOnESC(true)
   })
 
-  useEventListener(CLOSE_DIALOG_EDIT_ELEMENT, () => {
-    setEditing(false)
+  useEventListener(DISABLE_SUSPEND_DISMISS_ON_ESC, () => {
+    setSuspendDismissOnESC(false)
   })
 
   const innerClasses = classNames({
@@ -118,7 +117,7 @@ const Inner: React.FC<
       return
     }
 
-    if (!dismissOnESC || compositioning || editing) {
+    if (!dismissOnESC || suspendDismissOnESC) {
       return
     }
 
@@ -147,14 +146,6 @@ const Inner: React.FC<
     }
 
     handleKeyboardEvent(event)
-  })
-
-  useNativeEventListener('compositionstart', () => {
-    setCompositioning(true)
-  })
-
-  useNativeEventListener('compositionend', () => {
-    setCompositioning(false)
   })
 
   return (

@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 
 import {
   ADD_MOMENT_COMMENT_MENTION,
-  CLOSE_DIALOG_EDIT_ELEMENT,
-  OPEN_DIALOG_EDIT_ELEMENT,
+  DISABLE_SUSPEND_DISMISS_ON_ESC,
+  ENABLE_SUSPEND_DISMISS_ON_ESC,
 } from '~/common/enums'
 import { makeMentionElement, toPath } from '~/common/utils'
 import {
@@ -54,9 +54,9 @@ const MomentDetailDialogContent = ({
     }
 
     if (editing) {
-      window.dispatchEvent(new CustomEvent(OPEN_DIALOG_EDIT_ELEMENT))
+      window.dispatchEvent(new CustomEvent(ENABLE_SUSPEND_DISMISS_ON_ESC))
     } else {
-      window.dispatchEvent(new CustomEvent(CLOSE_DIALOG_EDIT_ELEMENT))
+      window.dispatchEvent(new CustomEvent(DISABLE_SUSPEND_DISMISS_ON_ESC))
     }
   }, [editor, editing])
 
