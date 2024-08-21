@@ -1,6 +1,6 @@
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { captureClicks, toPath } from '~/common/utils'
 import { Button, DateTime, Icon, LinkWrapper } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { MomentDigestDetailMomentFragment } from '~/gql/graphql'
@@ -69,6 +69,7 @@ export const MomentDigestDetail = ({
         <section
           className={styles.content}
           data-test-id={TEST_ID.MOMENT_DIGEST_CONTENT}
+          onClick={captureClicks}
           dangerouslySetInnerHTML={{
             __html: content || '',
           }}
