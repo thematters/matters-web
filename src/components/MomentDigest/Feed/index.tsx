@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import { captureClicks, toPath } from '~/common/utils'
 import {
   DateTime,
   Expandable,
@@ -124,6 +124,7 @@ export const MomentDigestFeed = ({
                 dangerouslySetInnerHTML={{
                   __html: content || '',
                 }}
+                onClick={captureClicks}
               />
             </Expandable>
           </section>
