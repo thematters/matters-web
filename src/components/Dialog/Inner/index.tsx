@@ -4,9 +4,18 @@ import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useRef, useState } from 'react'
 
-import { KEYVALUE } from '~/common/enums'
+import {
+  DISABLE_SUSPEND_DISMISS_ON_ESC,
+  ENABLE_SUSPEND_DISMISS_ON_ESC,
+  KEYVALUE,
+} from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
-import { Media, useNativeEventListener, useOutsideClick } from '~/components'
+import {
+  Media,
+  useEventListener,
+  useNativeEventListener,
+  useOutsideClick,
+} from '~/components'
 
 import Handle from '../Handle'
 import styles from './styles.module.css'
@@ -48,7 +57,15 @@ const Inner: React.FC<
   children,
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
-  const [compositioning, setCompositioning] = useState(false)
+  const [suspendDismissOnESC, setSuspendDismissOnESC] = useState(false)
+
+  useEventListener(ENABLE_SUSPEND_DISMISS_ON_ESC, () => {
+    setSuspendDismissOnESC(true)
+  })
+
+  useEventListener(DISABLE_SUSPEND_DISMISS_ON_ESC, () => {
+    setSuspendDismissOnESC(false)
+  })
 
   const innerClasses = classNames({
     [styles.inner]: true,
@@ -100,7 +117,7 @@ const Inner: React.FC<
       return
     }
 
-    if (!dismissOnESC || compositioning) {
+    if (!dismissOnESC || suspendDismissOnESC) {
       return
     }
 
@@ -129,14 +146,6 @@ const Inner: React.FC<
     }
 
     handleKeyboardEvent(event)
-  })
-
-  useNativeEventListener('compositionstart', () => {
-    setCompositioning(true)
-  })
-
-  useNativeEventListener('compositionend', () => {
-    setCompositioning(false)
   })
 
   return (

@@ -3,7 +3,11 @@ import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 
-import { ADD_MOMENT_COMMENT_MENTION } from '~/common/enums'
+import {
+  ADD_MOMENT_COMMENT_MENTION,
+  DISABLE_SUSPEND_DISMISS_ON_ESC,
+  ENABLE_SUSPEND_DISMISS_ON_ESC,
+} from '~/common/enums'
 import { makeMentionElement, toPath } from '~/common/utils'
 import {
   MomentDigestDetail,
@@ -47,6 +51,12 @@ const MomentDetailDialogContent = ({
   useEffect(() => {
     if (editor && editing) {
       editor.commands.focus('end')
+    }
+
+    if (editing) {
+      window.dispatchEvent(new CustomEvent(ENABLE_SUSPEND_DISMISS_ON_ESC))
+    } else {
+      window.dispatchEvent(new CustomEvent(DISABLE_SUSPEND_DISMISS_ON_ESC))
     }
   }, [editor, editing])
 
