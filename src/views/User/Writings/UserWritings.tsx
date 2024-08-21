@@ -50,7 +50,7 @@ const UserWritings = () => {
 
   // private data
   const loadPrivate = (publicData?: UserWritingsPublicQuery) => {
-    if (!viewer.isAuthed || isViewer || !publicData || !user) {
+    if (!viewer.isAuthed || !publicData || !user) {
       return
     }
 
