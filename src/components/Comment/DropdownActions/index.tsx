@@ -82,6 +82,7 @@ const fragments = {
               id
               userName
             }
+            commentCount
           }
 
           ... on Moment {
@@ -91,6 +92,7 @@ const fragments = {
               id
               userName
             }
+            commentCount
           }
         }
         ...CommentPinButtonComment

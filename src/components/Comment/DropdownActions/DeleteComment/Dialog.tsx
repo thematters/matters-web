@@ -56,6 +56,14 @@ const DeleteCommentDialog = ({
       deleteComment: {
         id: commentId,
         state: 'archived' as any,
+        node:
+          isMoment && node?.__typename === 'Moment'
+            ? {
+                id: node?.id,
+                commentCount: node.commentCount - 1,
+                __typename: 'Moment',
+              }
+            : {},
         __typename: 'Comment',
       },
     },
