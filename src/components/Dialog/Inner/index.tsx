@@ -4,9 +4,18 @@ import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useRef, useState } from 'react'
 
-import { KEYVALUE } from '~/common/enums'
+import {
+  CLOSE_DIALOG_EDIT_ELEMENT,
+  KEYVALUE,
+  OPEN_DIALOG_EDIT_ELEMENT,
+} from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
-import { Media, useNativeEventListener, useOutsideClick } from '~/components'
+import {
+  Media,
+  useEventListener,
+  useNativeEventListener,
+  useOutsideClick,
+} from '~/components'
 
 import Handle from '../Handle'
 import styles from './styles.module.css'
@@ -49,6 +58,15 @@ const Inner: React.FC<
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
   const [compositioning, setCompositioning] = useState(false)
+  const [editing, setEditing] = useState(false)
+
+  useEventListener(OPEN_DIALOG_EDIT_ELEMENT, () => {
+    setEditing(true)
+  })
+
+  useEventListener(CLOSE_DIALOG_EDIT_ELEMENT, () => {
+    setEditing(false)
+  })
 
   const innerClasses = classNames({
     [styles.inner]: true,
@@ -100,7 +118,7 @@ const Inner: React.FC<
       return
     }
 
-    if (!dismissOnESC || compositioning) {
+    if (!dismissOnESC || compositioning || editing) {
       return
     }
 

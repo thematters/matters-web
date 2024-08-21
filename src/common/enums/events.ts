@@ -76,3 +76,5 @@ export enum UNIVERSAL_AUTH_TRIGGER {
  * Broadcast channel
  */
 export const CHANNEL_VERIFIED_EMAIL = 'channel-verified-email'
+export const OPEN_DIALOG_EDIT_ELEMENT = 'open-dialog-edit-element'
+export const CLOSE_DIALOG_EDIT_ELEMENT = 'close-dialog-edit-element'
