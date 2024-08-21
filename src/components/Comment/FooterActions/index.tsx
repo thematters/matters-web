@@ -72,6 +72,7 @@ const fragments = {
               id
               isBlocking
             }
+            commentCount
           }
         }
         ...CommentUpvoteCommentPrivate
