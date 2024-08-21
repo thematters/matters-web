@@ -4,7 +4,7 @@ import ApolloClient from 'apollo-client'
 import type { GetReferenceClientRect, Instance } from 'tippy.js'
 import tippy from 'tippy.js'
 
-import { KEYVALUE } from '~/common/enums'
+import { BYPASS_FOCUS_LOCK, ENBABLE_FOCUS_LOCK, KEYVALUE } from '~/common/enums'
 import SEARCH_USERS from '~/components/GQL/queries/searchUsers'
 import { SearchUsersQuery, UserDigestMiniUserFragment } from '~/gql/graphql'
 
@@ -32,6 +32,9 @@ export const makeMentionSuggestion = ({
     let popup: Instance[]
 
     const destroy = () => {
+      // FIXME: to re-enable focus lock on dialog
+      window.dispatchEvent(new CustomEvent(ENBABLE_FOCUS_LOCK))
+
       if (popup) {
         popup[0].destroy()
       }
@@ -81,6 +84,9 @@ export const makeMentionSuggestion = ({
             destroy()
           },
         })
+
+        // FIXME: to disable focus lock on dialog
+        window.dispatchEvent(new CustomEvent(BYPASS_FOCUS_LOCK))
       },
 
       onUpdate(props: any) {
