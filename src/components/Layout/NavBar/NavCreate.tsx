@@ -93,6 +93,7 @@ export const NavCreate = () => {
                 active={showWriteDropdown}
                 aria-haspopup="menu"
                 canScrollTop={false}
+                showTooltip={false}
                 ref={navRef}
               />
             </span>

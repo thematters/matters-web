@@ -27,7 +27,6 @@ import {
   MomentCommentFormMomentFragment,
   PutMomentCommentMutation,
 } from '~/gql/graphql'
-import { USER_WRITINGS_PUBLIC } from '~/views/User/Writings/gql'
 
 import styles from './styles.module.css'
 
@@ -156,12 +155,6 @@ const MomentCommentForm = ({
             })
           )
         },
-        refetchQueries: [
-          {
-            query: USER_WRITINGS_PUBLIC,
-            variables: { userName: moment.author.userName },
-          },
-        ],
       })
 
       setSubmitting(false)
