@@ -110,6 +110,10 @@
     "defaultMessage": "取消置顶",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
+  "/pglnt": {
+    "defaultMessage": "咒骂人生太短 唏嘘相见恨晚",
+    "description": "MOMENT_FORM"
+  },
   "/pnYHM": {
     "defaultMessage": "围炉不存在",
     "description": "CIRCLE_NOT_FOUND"
@@ -2129,9 +2133,6 @@
     "defaultMessage": "关联了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "YoiwCD": {
-    "defaultMessage": "说点什么..."
-  },
   "Z+nZlT": {
     "defaultMessage": "内容订阅"
   },
@@ -2267,6 +2268,10 @@
   },
   "az8n8W": {
     "defaultMessage": "添加站内或站外朋友加入围炉"
+  },
+  "b/mswY": {
+    "defaultMessage": "聊几句？",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
   "b8ogKp": {
     "defaultMessage": "新增邀请",
