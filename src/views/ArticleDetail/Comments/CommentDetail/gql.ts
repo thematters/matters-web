@@ -1,14 +1,14 @@
 import gql from 'graphql-tag'
 
-import { ArticleCommentFeed } from '~/components/ArticleComment/Feed'
+import { CommentFeed } from '~/components/Comment/Feed'
 
 export const COMMENT_DETAIL = gql`
   query CommentDetail($id: ID!) {
     node(input: { id: $id }) {
       ... on Comment {
         id
-        ...ArticleFeedCommentPublic
-        ...ArticleFeedCommentPrivate
+        ...CommentFeedCommentPublic
+        ...CommentFeedCommentPrivate
         comments(input: { sort: oldest, first: null }) {
           pageInfo {
             startCursor
@@ -18,14 +18,14 @@ export const COMMENT_DETAIL = gql`
           edges {
             cursor
             node {
-              ...ArticleFeedCommentPublic
-              ...ArticleFeedCommentPrivate
+              ...CommentFeedCommentPublic
+              ...CommentFeedCommentPrivate
             }
           }
         }
       }
     }
   }
-  ${ArticleCommentFeed.fragments.comment.public}
-  ${ArticleCommentFeed.fragments.comment.private}
+  ${CommentFeed.fragments.comment.public}
+  ${CommentFeed.fragments.comment.private}
 `

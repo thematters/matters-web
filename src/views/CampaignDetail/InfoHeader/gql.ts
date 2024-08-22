@@ -12,7 +12,6 @@ export const fragments = {
         nameZhHans: name(input: { language: zh_hans })
         nameEn: name(input: { language: en })
         cover
-        link
         applicationPeriod {
           start
           end

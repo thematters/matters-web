@@ -1,15 +1,8 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
-import { analytics, datetimeFormat, isUTC8 } from '~/common/utils'
-import {
-  DotDivider,
-  Icon,
-  LanguageContext,
-  ResponsiveImage,
-  TextIcon,
-} from '~/components'
+import { datetimeFormat, isUTC8 } from '~/common/utils'
+import { LanguageContext, ResponsiveImage } from '~/components'
 import {
   InfoHeaderCampaignPrivateFragment,
   InfoHeaderCampaignPublicFragment,
@@ -24,28 +17,6 @@ type InfoHeaderProps = {
   campaign: InfoHeaderCampaignPublicFragment &
     Partial<InfoHeaderCampaignPrivateFragment>
 }
-
-const ViewMore = ({ link }: { link: string }) => (
-  <a
-    className={styles.viewMore}
-    href={link}
-    target="_blank"
-    onClick={() => {
-      analytics.trackEvent('click_button', {
-        type: 'campaign_detail_link',
-        pageType: 'campaign_detail',
-      })
-    }}
-  >
-    <TextIcon
-      icon={<Icon icon={IconRight} size={14} />}
-      spacing={4}
-      placement="left"
-    >
-      <FormattedMessage defaultMessage="Event Information" id="buf5vO" />
-    </TextIcon>
-  </a>
-)
 
 const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   const { lang } = useContext(LanguageContext)
@@ -64,17 +35,27 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
             </section>
           )}
 
-          <h1 className={styles.name}>
-            {
-              campaign[
-                lang === 'zh_hans'
-                  ? 'nameZhHans'
-                  : lang === 'zh_hant'
-                  ? 'nameZhHant'
-                  : 'nameEn'
-              ]
-            }
-          </h1>
+          <section className={styles.title}>
+            <h1 className={styles.name}>
+              {
+                campaign[
+                  lang === 'zh_hans'
+                    ? 'nameZhHans'
+                    : lang === 'zh_hant'
+                    ? 'nameZhHant'
+                    : 'nameEn'
+                ]
+              }
+            </h1>
+
+            <section className={styles.apply}>
+              <Apply.Button
+                campaign={campaign}
+                size="sm"
+                onClick={openDialog}
+              />
+            </section>
+          </section>
 
           <section className={styles.meta}>
             <section className={styles.left}>
@@ -131,31 +112,11 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                   </span>
                 </span>
               )}
-
-              <section className={styles.dot}>
-                <DotDivider />
-              </section>
-
-              <ViewMore link={campaign.link} />
-            </section>
-
-            <section className={styles.right}>
-              <Apply.Button
-                campaign={campaign}
-                size="sm"
-                onClick={openDialog}
-              />
             </section>
           </section>
 
           <section className={styles.extra}>
             <Participants campaign={campaign} />
-
-            <section className={styles.dot}>
-              <DotDivider />
-            </section>
-
-            <ViewMore link={campaign.link} />
           </section>
 
           <section className={styles.mobileApply}>

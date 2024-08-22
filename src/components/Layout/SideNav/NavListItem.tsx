@@ -12,6 +12,7 @@ type NavListItemProps = {
   activeIcon: React.ReactNode
   active: boolean
   canScrollTop?: boolean
+  showTooltip?: boolean
 } & ButtonProps
 
 const NavListItemButton = forwardRef(
@@ -23,10 +24,30 @@ const NavListItemButton = forwardRef(
       active,
       onClick,
       canScrollTop,
+      showTooltip = true,
       ...props
     }: NavListItemProps,
     ref
   ) => {
+    if (!showTooltip) {
+      return (
+        <Button
+          bgActiveColor="greyLighter"
+          size={['2rem', '2rem']}
+          ref={ref}
+          {...props}
+          onClick={onClick}
+        >
+          <TextIcon
+            icon={active ? activeIcon : icon}
+            size={32}
+            weight="semibold"
+            spacing={12}
+            color="black"
+          />
+        </Button>
+      )
+    }
     return (
       <Tooltip
         content={name}

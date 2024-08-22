@@ -1,5 +1,11 @@
 import classNames from 'classnames'
-import React, { ReactElement, useEffect, useRef, useState } from 'react'
+import React, {
+  ReactElement,
+  ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
@@ -36,12 +42,13 @@ interface ExpandableProps {
   spacingTop?: 'tight' | 'base'
   textIndent?: boolean
   isRichShow?: boolean
-  isComment?: boolean
+  isCommentOrMoment?: boolean
   collapseable?: boolean
   bgColor?: 'greyLighter' | 'white'
+  expandButton?: ReactNode
 }
 
-const calculateCommentContentHeight = (element: HTMLElement): number => {
+const calculateNestedContentHeight = (element: HTMLElement): number => {
   let height = 0
   const contentNode = element.firstElementChild?.firstElementChild
   if (contentNode) {
@@ -58,10 +65,10 @@ const calculateCommentContentHeight = (element: HTMLElement): number => {
 const calculateContentHeight = (
   element: HTMLElement,
   isRichShow: boolean,
-  isComment: boolean
+  isCommentOrMoment: boolean
 ): number => {
-  if (isRichShow && isComment) {
-    return calculateCommentContentHeight(element)
+  if (isRichShow && isCommentOrMoment) {
+    return calculateNestedContentHeight(element)
   }
   return element.firstElementChild?.clientHeight || 0
 }
@@ -76,9 +83,10 @@ export const Expandable: React.FC<ExpandableProps> = ({
   spacingTop,
   textIndent = false,
   isRichShow: _isRichShow = false,
-  isComment = false,
+  isCommentOrMoment = false,
   collapseable = true,
   bgColor = 'white',
+  expandButton,
 }) => {
   const [isOverFlowing, setIsOverFlowing] = useState(false)
   const [isExpanded, setIsExpanded] = useState(true)
@@ -127,7 +135,11 @@ export const Expandable: React.FC<ExpandableProps> = ({
       return
     }
     const element = node.current
-    const height = calculateContentHeight(element, isRichShow, isComment)
+    const height = calculateContentHeight(
+      element,
+      isRichShow,
+      isCommentOrMoment
+    )
     const lineHeight = window
       .getComputedStyle(element, null)
       .getPropertyValue('line-height')
@@ -215,16 +227,20 @@ export const Expandable: React.FC<ExpandableProps> = ({
               >
                 {children}
               </section>
-              <button
-                className={richShowMoreButtonClasses}
-                onClick={toggleIsExpand}
-              >
-                <FormattedMessage
-                  defaultMessage="Expand"
-                  id="L79o74"
-                  description="src/components/Expandable/index.tsx"
-                />
-              </button>
+              {expandButton ? (
+                <div className={richShowMoreButtonClasses}>{expandButton}</div>
+              ) : (
+                <button
+                  className={richShowMoreButtonClasses}
+                  onClick={toggleIsExpand}
+                >
+                  <FormattedMessage
+                    defaultMessage="Expand"
+                    id="L79o74"
+                    description="src/components/Expandable/index.tsx"
+                  />
+                </button>
+              )}
             </>
           )}
         </p>

@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import { FormattedMessage } from 'react-intl'
 
 import { MAX_USER_DISPLAY_NAME_LENGTH, TEST_ID } from '~/common/enums'
 import { toPath, truncate } from '~/common/utils'
@@ -14,6 +15,16 @@ const NoticeActorName = ({
 }) => {
   if (!user) {
     return null
+  }
+
+  const isArchived = user?.status?.state === 'archived'
+
+  if (isArchived) {
+    return (
+      <span className={styles.archivedDisplayname}>
+        <FormattedMessage defaultMessage="Account Archived" id="YS8YSV" />
+      </span>
+    )
   }
 
   const path = toPath({
@@ -42,6 +53,9 @@ NoticeActorName.fragments = {
       id
       userName
       displayName
+      status {
+        state
+      }
     }
   `,
 }

@@ -2,11 +2,20 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { useDrag } from '@use-gesture/react'
 import classNames from 'classnames'
 import _get from 'lodash/get'
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 
-import { KEYVALUE } from '~/common/enums'
+import {
+  DISABLE_SUSPEND_DISMISS_ON_ESC,
+  ENABLE_SUSPEND_DISMISS_ON_ESC,
+  KEYVALUE,
+} from '~/common/enums'
 import { capitalizeFirstLetter, dom } from '~/common/utils'
-import { Media, useOutsideClick } from '~/components'
+import {
+  Media,
+  useEventListener,
+  useNativeEventListener,
+  useOutsideClick,
+} from '~/components'
 
 import Handle from '../Handle'
 import styles from './styles.module.css'
@@ -48,6 +57,15 @@ const Inner: React.FC<
   children,
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
+  const [suspendDismissOnESC, setSuspendDismissOnESC] = useState(false)
+
+  useEventListener(ENABLE_SUSPEND_DISMISS_ON_ESC, () => {
+    setSuspendDismissOnESC(true)
+  })
+
+  useEventListener(DISABLE_SUSPEND_DISMISS_ON_ESC, () => {
+    setSuspendDismissOnESC(false)
+  })
 
   const innerClasses = classNames({
     [styles.inner]: true,
@@ -94,6 +112,42 @@ const Inner: React.FC<
 
   useOutsideClick(node, handleClickOutside)
 
+  const handleKeyboardEvent = (event: KeyboardEvent) => {
+    if (event.code?.toLowerCase() !== KEYVALUE.escape) {
+      return
+    }
+
+    if (!dismissOnESC || suspendDismissOnESC) {
+      return
+    }
+
+    const poppers = Array.prototype.slice.call(
+      dom.$$('[data-tippy-root]')
+    ) as Element[]
+
+    const gallery = Array.prototype.slice.call(
+      dom.$$('.pswp--open')
+    ) as Element[]
+    if (poppers.length > 0 || gallery.length > 0) {
+      return
+    }
+
+    closeTopDialog()
+  }
+
+  useNativeEventListener('keyup', (event: KeyboardEvent) => {
+    const target = event.target as HTMLElement
+    if (
+      target.tagName === 'INPUT' ||
+      target.tagName === 'TEXTAREA' ||
+      target.contentEditable === 'true'
+    ) {
+      return
+    }
+
+    handleKeyboardEvent(event)
+  })
+
   return (
     <div
       {...(testId ? { 'data-test-id': testId } : {})}
@@ -101,13 +155,8 @@ const Inner: React.FC<
       className={innerClasses}
       style={style}
       onKeyDown={(event) => {
-        if (event.code?.toLowerCase() !== KEYVALUE.escape) {
-          return
-        }
-        if (!dismissOnESC) {
-          return
-        }
-        closeTopDialog()
+        const nativeEvent: KeyboardEvent = event.nativeEvent
+        handleKeyboardEvent(nativeEvent)
       }}
     >
       <VisuallyHidden>

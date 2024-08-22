@@ -110,7 +110,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
             node.__typename === 'User' && (
               <Fragment key={node.id}>
                 <Menu.Item
-                  bgActiveColor="greyLighter"
+                  bgActiveColor="greyHover"
                   isActive={`user${cursor}` === activeItem}
                   {...toPath({
                     page: 'userProfile',
@@ -149,7 +149,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
               <Fragment key={node.id}>
                 <Menu.Item
                   spacing={[16, 16]}
-                  bgActiveColor="greyLighter"
+                  bgActiveColor="greyHover"
                   isActive={`tag${cursor}` === activeItem}
                   {...toPath({
                     page: 'tagDetail',

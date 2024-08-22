@@ -1,7 +1,6 @@
 import gql from 'graphql-tag'
 
 import ArticleFeeds from './ArticleFeeds'
-import Description from './Description'
 import InfoHeader from './InfoHeader'
 import SideParticipants from './SideParticipants'
 
@@ -11,9 +10,11 @@ export const CAMPAIGN_DETAIL = gql`
       id
       shortHash
       ... on WritingChallenge {
+        descriptionZhHant: description(input: { language: zh_hant })
+        descriptionZhHans: description(input: { language: zh_hans })
+        descriptionEn: description(input: { language: en })
         ...InfoHeaderCampaignPublic
         ...InfoHeaderCampaignPrivate
-        ...DescriptionCampaign
         ...SideParticipantsCampaignPublic
         ...SideParticipantsCampaignPrivate
         ...ArticleFeedsCampaign
@@ -22,7 +23,6 @@ export const CAMPAIGN_DETAIL = gql`
   }
   ${InfoHeader.fragments.campaign.public}
   ${InfoHeader.fragments.campaign.private}
-  ${Description.fragments}
   ${SideParticipants.fragments.public}
   ${SideParticipants.fragments.private}
   ${ArticleFeeds.fragments}

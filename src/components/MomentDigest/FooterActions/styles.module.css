@@ -1,0 +1,11 @@
+.footer {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--sp12);
+}
+
+.left {
+  display: flex;
+  gap: var(--sp16);
+  align-items: center;
+}

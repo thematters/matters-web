@@ -79,6 +79,13 @@ export enum TEST_ID {
   ARTICLE_TOOLBAR = 'article/toolbar',
   ARTICLE_BOOKMARK = 'article/bookmark',
   ARTICLE_COMMENT_FEED = 'article/comment/feed',
+  // moment
+  MOMENT_DIGEST = 'moment-digest',
+  MOMENT_DIGEST_AUTHOR = 'moment-digest/author',
+  MOMENT_DIGEST_CONTENT = 'moment-digest/content',
+  MOMENT_DIGEST_ASSETS = 'moment-digest/assets',
+  MOMENT_DIGEST_FOOTER_ACTIONS_COMMENTED_FOLLOWEES = 'moment-digest/footer-actions/commented-followees',
+  MOMENT_DIGEST_FOOTER_ACTIONS_REPLY_BUTTON = 'moment-digest/footer-actions/reply-button',
   // circle
   CIRCLE_COMMENT_FEED = 'circle/comment/feed',
   // payto
@@ -90,6 +97,7 @@ export enum TEST_ID {
   // notification:components
   NOTICE_USER_DISPLAY_NAME = 'notice/user/display-name',
   NOTICE_ARTICLE_TITLE = 'notice/article/title',
+  NOTICE_MOMENT_TITLE = 'notice/moment/title',
   NOTICE_COMMENT_CONTENT = 'notice/comment/content',
   NOTICE_PAYMENT_RECEIVE_DONATION_AMOUNT = 'notice/payment-receive-donation/amount',
   // notification:types
@@ -109,6 +117,7 @@ export enum TEST_ID {
   NOTICE_COMMENT_MENTIONED_YOU = 'notice/comment-mentioned-you',
   NOTICE_COMMENT_PINNED = 'notice/comment-pinned',
   NOTICE_ARTICLE_NEW_COMMENT = 'notice/article-new-comment',
+  NOTICE_MOMENT_NEW_COMMENT = 'notice/moment-new-comment',
   NOTICE_COMMENT_LIKED = 'notice/comment-liked',
   NOTICE_SUBSCRIBED_ARTICLE_NEW_COMMENT = 'notice/subscribed-article-new-comment',
   NOTICE_CIRCLE_NEW_BROADCAST = 'notice/circle-new-broadcast',
@@ -127,6 +136,8 @@ export enum TEST_ID {
   NOTICE_CRYPTO_WALLET_AIRDROP = 'notice/crypto-wallet-airdrop',
   NOTICE_CRYPTO_WALLET_CONNECTED = 'notice/crypto-wallet-connected',
   NOTICE_OFFICIAL_ANNOUNCEMENT = 'notice/official-announcement',
+  NOTICE_MOMENT_MENTIONED = 'notice/moment-mentioned',
+  NOTICE_MOMENT_LIKED = 'notice/moment-liked',
   NOTICE_COLLECTION_TITLE = 'notice/collection/title',
   // me
   ME_WALLET_TRANSACTIONS_ITEM = 'me/wallet/transactions/item',

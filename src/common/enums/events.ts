@@ -6,6 +6,13 @@ export const REFETCH_RESPONSES = 'refetchResponses'
 export const SYNC_APPRECIATE_BUTTON_COUNT = 'syncAppreciateButtonCount'
 export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
 
+// Moment
+export const ADD_MOMENT_COMMENT_MENTION = 'addMomentCommentMention'
+export const ADD_MOMENT_ASSETS = 'addMomentAssets'
+export const UPDATE_NEWEST_MOMENT_COMMENT = 'updateNewestMomentComment'
+export const OPEN_MOMENT_FORM = 'openMomentForm'
+export const CLEAR_MOMENT_FORM = 'clearMomentForm'
+
 // Tag
 export const REFETCH_TAG_DETAIL_ARTICLES = 'refetchTagDetailArticles'
 
@@ -31,6 +38,8 @@ export const OPEN_COMMENT_LIST_DRAWER = 'openCommentListDrawer'
 export const CLOSE_OTHER_DRAWERS = 'closeOtherDrawers'
 export const BYPASS_SCROLL_LOCK = 'bypassScrollLock'
 export const ENBABLE_SCROLL_LOCK = 'enableScrollLock'
+export const BYPASS_FOCUS_LOCK = 'bypassFocusLock'
+export const ENBABLE_FOCUS_LOCK = 'enableFocusLock'
 
 // Toast
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
@@ -60,9 +69,12 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   sideNav = 'sideNav',
   support = 'support',
   visitorWall = 'visitorWall',
+  momentComment = 'momentComment',
 }
 
 /**
  * Broadcast channel
  */
 export const CHANNEL_VERIFIED_EMAIL = 'channel-verified-email'
+export const ENABLE_SUSPEND_DISMISS_ON_ESC = 'enableSuspendDismissOnESC'
+export const DISABLE_SUSPEND_DISMISS_ON_ESC = 'disableSuspendDismissOnESC'

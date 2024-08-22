@@ -1,0 +1,31 @@
+.container {
+  padding: var(--sp20) 0;
+
+  & .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--sp8);
+    line-height: 1;
+
+    & .author {
+      @mixin flex-center-start;
+    }
+  }
+
+  & .content {
+    margin: var(--sp8) 0 var(--sp12);
+    cursor: pointer;
+
+    @media (--sm-up) {
+      max-width: 33.375rem; /* 534px */
+    }
+
+    & a {
+      color: var(--color-grey-darker);
+    }
+  }
+
+  .assets {
+    margin-top: var(--sp12);
+  }
+}

@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { toPath } from '~/common/utils'
 import { LinkWrapper, toast } from '~/components'
-import { ArticleCommentContent } from '~/components/ArticleComment/Content'
+import { CommentContent } from '~/components/Comment/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
 import NoticeContentDigest from './NoticeContentDigest'
@@ -29,6 +29,11 @@ const fragments = {
           id
           name
         }
+        ... on Moment {
+          id
+          state
+          shortHash
+        }
       }
       parentComment {
         id
@@ -36,11 +41,11 @@ const fragments = {
       comments(input: { first: 0 }) {
         totalCount
       }
-      ...ArticleCommentContentCommentPublic
-      ...ArticleCommentContentCommentPrivate
+      ...CommentContentCommentPublic
+      ...CommentContentCommentPrivate
     }
-    ${ArticleCommentContent.fragments.comment.public}
-    ${ArticleCommentContent.fragments.comment.private}
+    ${CommentContent.fragments.comment.public}
+    ${CommentContent.fragments.comment.private}
   `,
 }
 
@@ -49,10 +54,14 @@ const NoticeComment = ({
 }: {
   comment: NoticeCommentFragment | null
 }) => {
+  const intl = useIntl()
+
   const article =
     comment?.node.__typename === 'Article' ? comment.node : undefined
   const circle =
     comment?.node.__typename === 'Circle' ? comment.node : undefined
+  const moment =
+    comment?.node.__typename === 'Moment' ? comment.node : undefined
 
   if (!comment) {
     return null
@@ -83,6 +92,21 @@ const NoticeComment = ({
     )
   }
 
+  if (comment.state === 'archived' && moment) {
+    return (
+      <section>
+        <NoticeContentDigest
+          content={intl.formatMessage({
+            defaultMessage: 'Comment deleted',
+            description: 'src/components/Notice/NoticeComment.tsx',
+            id: '/vyhs5',
+          })}
+          color="grey"
+        />
+      </section>
+    )
+  }
+
   if (comment.state === 'archived') {
     return (
       <button
@@ -103,17 +127,33 @@ const NoticeComment = ({
       </button>
     )
   }
+
+  if (comment.state === 'active' && moment && moment.state === 'archived') {
+    return (
+      <section>
+        <NoticeContentDigest content={comment.content || ''} />
+      </section>
+    )
+  }
   const path =
-    comment.state === 'active' ||
-    comment.state === 'collapsed' ||
-    comment.state === 'banned'
+    article || circle
       ? toPath({
           page: 'commentDetail',
           comment,
           article,
           circle,
         })
-      : { href: '' }
+      : moment
+      ? toPath({
+          page: 'momentComment',
+          moment,
+          comment,
+        })
+      : {
+          href: '',
+          as: '',
+        }
+
   return (
     <LinkWrapper {...path}>
       <section>

@@ -68,8 +68,9 @@
   height: 2rem;
 }
 
-/* NoticeArticleTitle */
-.noticeArticleTitle {
+/* NoticeArticleTitle, NoticeMomentTitle */
+.noticeArticleTitle,
+.noticeMomentTitle {
   color: var(--color-black);
 }
 
@@ -84,8 +85,13 @@
 }
 
 /* NoticeActorName */
+.archivedDisplayname {
+  font-size: var(--text16);
+  color: var(--color-grey);
+}
+
 .displayName {
-  font-size: var(--font-size-base);
+  font-size: var(--text16);
   color: var(--color-black);
 }
 
@@ -106,4 +112,12 @@
   border-left-style: dashed;
   border-left-width: 3px;
   -webkit-line-clamp: 3;
+
+  &.noticeContentDigestBlack {
+    color: var(--color-black);
+  }
+
+  &.noticeContentDigestGrey {
+    color: var(--color-grey);
+  }
 }

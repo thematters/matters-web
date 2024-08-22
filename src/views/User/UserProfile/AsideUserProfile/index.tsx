@@ -53,7 +53,7 @@ export const AsideUserProfile = () => {
 
   // public user data
   const userName = getQuery('name')
-  const isInUserPage = isInPath('USER_ARTICLES') || isInPath('USER_COLLECTIONS')
+  const isInUserPage = isInPath('USER_WORKS') || isInPath('USER_COLLECTIONS')
   const isMe = !userName || viewer.userName === userName
 
   const userProfilePath = toPath({

@@ -66,6 +66,7 @@ export interface ClickButtonProp {
     | 'top_up'
     | 'translation' // translation button
     | 'write'
+    | 'write_moment'
     | 'write_collection'
     | 'google_search'
     | 'subscribe_circle_banner'
@@ -255,6 +256,7 @@ export type ActivityType =
   | 'UserFollowUserActivity'
   | 'UserDonateArticleActivity'
   | 'UserBookmarkArticleActivity'
+  | 'UserPostMomentActivity'
   | 'UserAddArticleTagActivity'
   | 'RecommendArticleActivity'
   | 'ArticleRecommendationActivity'
@@ -296,6 +298,7 @@ type ArticleFeedType =
   | 'transaction' // transaction history
   | 'topics'
   | 'user_article'
+  | 'user_writing'
   | 'wallet'
   | 'related_donations'
   | 'circle_detail'

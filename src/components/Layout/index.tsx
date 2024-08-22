@@ -24,6 +24,8 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
+  const isInMomentDetail = isInPath('MOMENT_DETAIL')
+  const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
 
   return (
     <>
@@ -45,13 +47,17 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
         </main>
       </div>
 
-      {!isInDraftDetail && !isInArticleDetail && !isInArticleDetailHistory && (
-        <Media at="sm">
-          <footer>
-            <NavBar />
-          </footer>
-        </Media>
-      )}
+      {!isInDraftDetail &&
+        !isInArticleDetail &&
+        !isInArticleDetailHistory &&
+        !isInMomentDetail &&
+        !isInMomentDetailEdit && (
+          <Media at="sm">
+            <footer>
+              <NavBar />
+            </footer>
+          </Media>
+        )}
     </>
   )
 }

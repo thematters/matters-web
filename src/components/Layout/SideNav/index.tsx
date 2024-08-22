@@ -2,6 +2,7 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
 import { ReactComponent as IconNavUser } from '@/public/static/icons/24px/nav-user.svg'
 import { ReactComponent as IconNavUserActive } from '@/public/static/icons/24px/nav-user-active.svg'
 import { PATHS, TEST_ID, Z_INDEX } from '~/common/enums'
@@ -13,10 +14,10 @@ import {
   UniversalAuthButton,
   useRoute,
   ViewerContext,
-  WriteButton,
 } from '~/components'
 
 import UnreadIcon from '../UnreadIcon'
+import ActivityPopover from './Activity'
 import { NavListItemHome, NavListItemSearch } from './Items'
 import Logo from './Logo'
 import MeMenu from './MeMenu'
@@ -94,20 +95,40 @@ const SideNavMenu = () => {
             activeIcon={<Icon icon={IconNavUserActive} size={32} />}
             active={isInMe}
             canScrollTop={false}
-            aira-haspopup="menu"
+            aria-haspopup="menu"
             ref={ref}
             testId={TEST_ID.SIDE_NAV_MY_PAGE}
           />
         )}
       </Dropdown>
 
-      <li
-        role="menuitem"
-        className={styles.listItem}
-        data-test-id={TEST_ID.SIDE_NAY_WRITE_BUTTON}
+      <Dropdown
+        content={
+          <section>
+            <ActivityPopover
+              authed={viewer.isAuthed}
+              forbidden={viewer.isInactive}
+            />
+          </section>
+        }
+        placement="right-start"
+        offset={[-16, 16]}
       >
-        <WriteButton authed={viewer.isAuthed} forbidden={viewer.isInactive} />
-      </li>
+        {({ openDropdown, ref }) => (
+          <NavListItem
+            onClick={() => {
+              openDropdown()
+            }}
+            name={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
+            icon={<Icon icon={IconNavCreate} size={32} />}
+            activeIcon={<Icon icon={IconNavCreate} size={32} />}
+            active={false}
+            canScrollTop={false}
+            aria-haspopup="menu"
+            ref={ref}
+          />
+        )}
+      </Dropdown>
     </ul>
   )
 }
