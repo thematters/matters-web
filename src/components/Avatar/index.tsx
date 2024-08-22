@@ -104,6 +104,7 @@ export const Avatar = (props: AvatarProps) => {
         smUpWidth={240}
         smUpHeight={240}
         disabled={isFallback || inEditor}
+        enableAnimation
       />
 
       {isCivicLiker && !hasArchitectBadge && (

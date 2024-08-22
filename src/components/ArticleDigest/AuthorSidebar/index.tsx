@@ -108,12 +108,7 @@ export const ArticleDigestAuthorSidebar = ({
       {showCover && cover && (
         <LinkWrapper {...path} disabled={isBanned}>
           <aside className={styles.cover}>
-            <ResponsiveImage
-              url={cover}
-              width={imgSize}
-              height={imgSize}
-              disableAnimation={true}
-            />
+            <ResponsiveImage url={cover} width={imgSize} height={imgSize} />
           </aside>
         </LinkWrapper>
       )}

@@ -137,7 +137,7 @@ describe('utils/url/toSizedImageURL', () => {
         width: 72,
       })
     ).toBe(
-      'https://imagedelivery.net/abc/prod/image.jpeg/w=72,h=288,fit=scale-down'
+      'https://imagedelivery.net/abc/prod/image.jpeg/w=72,h=288,fit=scale-down,anim=false'
     )
 
     // width
@@ -147,7 +147,7 @@ describe('utils/url/toSizedImageURL', () => {
         width: 72,
       })
     ).toBe(
-      'https://imagedelivery.net/abc/prod/image.jpeg/w=72,h=288,fit=scale-down'
+      'https://imagedelivery.net/abc/prod/image.jpeg/w=72,h=288,fit=scale-down,anim=false'
     )
 
     // with width and height
@@ -157,7 +157,9 @@ describe('utils/url/toSizedImageURL', () => {
         width: 72,
         height: 72,
       })
-    ).toBe('https://imagedelivery.net/abc/prod/image.jpeg/w=72,h=72,fit=crop')
+    ).toBe(
+      'https://imagedelivery.net/abc/prod/image.jpeg/w=72,h=72,fit=crop,anim=false'
+    )
 
     // with width and height and ext
     expect(
@@ -167,15 +169,17 @@ describe('utils/url/toSizedImageURL', () => {
         height: 72,
         ext: 'webp',
       })
-    ).toBe('https://imagedelivery.net/abc/prod/image.webp/w=72,h=72,fit=crop')
+    ).toBe(
+      'https://imagedelivery.net/abc/prod/image.webp/w=72,h=72,fit=crop,anim=false'
+    )
 
-    // with width and height and disableAnimation
+    // with width and height and enableAnimation
     expect(
       toSizedImageURL({
         url: 'https://imagedelivery.net/abc/prod/image.gif',
         width: 72,
         height: 72,
-        disableAnimation: true,
+        enableAnimation: false,
       })
     ).toBe(
       'https://imagedelivery.net/abc/prod/image.gif/w=72,h=72,fit=crop,anim=false'
