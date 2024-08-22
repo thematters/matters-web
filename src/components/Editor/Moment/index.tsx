@@ -44,8 +44,9 @@ const MomentEditor: React.FC<Props> = ({
   placeholder =
     placeholder ||
     intl.formatMessage({
-      id: 'YoiwCD',
+      id: '/pglnt',
       defaultMessage: 'Say something...',
+      description: 'MOMENT_FORM',
     })
 
   const editor = useEditor({

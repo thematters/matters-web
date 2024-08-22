@@ -253,7 +253,11 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
           <Icon icon={IconImage} size={22} color="greyDarker" />
         </div>
         <button className={styles.activeButton}>
-          <FormattedMessage defaultMessage="Say something..." id="YoiwCD" />
+          <FormattedMessage
+            defaultMessage="Say something..."
+            id="/pglnt"
+            description="MOMENT_FORM"
+          />
         </button>
       </section>
     )
