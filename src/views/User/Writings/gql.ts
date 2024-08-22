@@ -98,7 +98,6 @@ export const USER_MOMENTS = gql`
       ... on Moment {
         likeCount
         commentCount
-        ...MomentDigestFeedMomentPrivate
       }
     }
   }
