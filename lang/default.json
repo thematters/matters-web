@@ -110,6 +110,10 @@
     "defaultMessage": "Unpin",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
+  "/pglnt": {
+    "defaultMessage": "Say something...",
+    "description": "MOMENT_FORM"
+  },
   "/pnYHM": {
     "defaultMessage": "Circle not found",
     "description": "CIRCLE_NOT_FOUND"
@@ -2129,9 +2133,6 @@
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "YoiwCD": {
-    "defaultMessage": "Say something..."
-  },
   "Z+nZlT": {
     "defaultMessage": "Content Feed"
   },
@@ -2267,6 +2268,10 @@
   },
   "az8n8W": {
     "defaultMessage": "Invite friends to join your circle"
+  },
+  "b/mswY": {
+    "defaultMessage": "Say something...",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
   "b8ogKp": {
     "defaultMessage": "Add Invitation",

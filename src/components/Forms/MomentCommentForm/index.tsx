@@ -228,7 +228,8 @@ const MomentCommentForm = ({
           onSubmit={() => window.dispatchEvent(new CustomEvent(formStorageKey))}
           placeholder={intl.formatMessage({
             defaultMessage: 'Say something...',
-            id: 'YoiwCD',
+            description: 'src/components/Forms/MomentCommentForm/index.tsx',
+            id: 'b/mswY',
           })}
           setEditor={(editor) => {
             setEditor(editor)
