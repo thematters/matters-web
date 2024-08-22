@@ -90,3 +90,17 @@ export const USER_WRITINGS_PRIVATE = gql`
   ${ArticleDigestFeed.fragments.article.private}
   ${MomentDigestFeed.fragments.moment.private}
 `
+
+export const USER_MOMENTS = gql`
+  query UserWritingsPrivate($ids: [ID!]!) {
+    nodes(input: { ids: $ids }) {
+      id
+      ... on Moment {
+        likeCount
+        commentCount
+        ...MomentDigestFeedMomentPrivate
+      }
+    }
+  }
+  ${MomentDigestFeed.fragments.moment.private}
+`

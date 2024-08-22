@@ -23,7 +23,11 @@ import {
 import { UserWritingsPublicQuery } from '~/gql/graphql'
 
 import MomentForm from '../MomentForm'
-import { USER_WRITINGS_PRIVATE, USER_WRITINGS_PUBLIC } from './gql'
+import {
+  USER_MOMENTS,
+  USER_WRITINGS_PRIVATE,
+  USER_WRITINGS_PUBLIC,
+} from './gql'
 import PinBoard from './PinBoard'
 import Placeholder from './Placeholder'
 
@@ -41,7 +45,6 @@ const UserWritings = () => {
   const { data, loading, error, fetchMore, client } =
     usePublicQuery<UserWritingsPublicQuery>(USER_WRITINGS_PUBLIC, {
       variables: { userName },
-      fetchPolicy: 'network-only',
     })
 
   // pagination
@@ -65,9 +68,29 @@ const UserWritings = () => {
     })
   }
 
-  // fetch private data for first page
+  // fetch the latest moment data
+  const loadMomentData = (publicData?: UserWritingsPublicQuery) => {
+    if (!publicData || !user) {
+      return
+    }
+
+    const publiceEdges = publicData.user?.writings?.edges || []
+    const momentEdges = publiceEdges.filter(
+      ({ node }) => node.__typename === 'Moment'
+    )
+    const publicIds = momentEdges.map(({ node }) => node.id)
+
+    client.query({
+      query: USER_MOMENTS,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  // fetch private and moment data for first page
   useEffect(() => {
     loadPrivate(data)
+    loadMomentData(data)
   }, [user?.id, viewer.id])
 
   // load next page
