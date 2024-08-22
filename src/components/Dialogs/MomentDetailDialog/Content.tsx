@@ -8,7 +8,8 @@ import {
   DISABLE_SUSPEND_DISMISS_ON_ESC,
   ENABLE_SUSPEND_DISMISS_ON_ESC,
 } from '~/common/enums'
-import { makeMentionElement, toPath } from '~/common/utils'
+import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
+import { makeMentionElement, sessionStorage, toPath } from '~/common/utils'
 import {
   MomentDigestDetail,
   QueryError,
@@ -103,16 +104,17 @@ const MomentDetailDialogContent = ({
   })
 
   const closeDialog = () => {
-    const isFirstPageVisit = window.history.length <= 1
-    if (isInMomentDetailPage && isFirstPageVisit) {
+    const momentDigestReferrer = sessionStorage.get(MOMENT_DIGEST_REFERRER)
+    if (isInMomentDetailPage && momentDigestReferrer) {
+      window.history.back()
+    }
+
+    if (isInMomentDetailPage && !momentDigestReferrer) {
       const userProfilePath = toPath({
         page: 'userProfile',
         userName: moment.author.userName || '',
       })
       router.push(userProfilePath.href)
-    }
-    if (isInMomentDetailPage && !isFirstPageVisit) {
-      window.history.back()
     }
     _closeDialog()
   }
