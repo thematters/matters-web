@@ -2,7 +2,8 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
-import { captureClicks, toPath } from '~/common/utils'
+import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
+import { captureClicks, sessionStorage, toPath } from '~/common/utils'
 import {
   DateTime,
   Expandable,
@@ -47,6 +48,10 @@ export const MomentDigestFeed = ({
     router.push(momentDetailPath.href)
   }
 
+  const handleClickDateTime = () => {
+    sessionStorage.set(MOMENT_DIGEST_REFERRER, true)
+  }
+
   const Container = ({
     openMomentDetail,
     hasAuthor,
@@ -73,7 +78,7 @@ export const MomentDigestFeed = ({
             </section>
           )}
           <section>
-            <LinkWrapper {...momentDetailPath}>
+            <LinkWrapper {...momentDetailPath} onClick={handleClickDateTime}>
               <DateTime date={createdAt} color="grey" />
             </LinkWrapper>
           </section>
