@@ -92,7 +92,7 @@ export const USER_WRITINGS_PRIVATE = gql`
 `
 
 export const USER_MOMENTS = gql`
-  query UserWritingsPrivate($ids: [ID!]!) {
+  query UserMoments($ids: [ID!]!) {
     nodes(input: { ids: $ids }) {
       id
       ... on Moment {
