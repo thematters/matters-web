@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { analytics } from '~/common/utils'
 import { LanguageContext, SquareTabs } from '~/components'
@@ -28,6 +28,7 @@ const ArticleFeedsTabs = ({
   campaign,
 }: ArticleFeedsTabsProps) => {
   const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const stages = campaign.stages || []
 
   const shouldShowTab = (startedAt?: string) => {
@@ -52,9 +53,11 @@ const ArticleFeedsTabs = ({
               pageType: 'campaign_detail',
             })
           }}
-        >
-          <FormattedMessage defaultMessage="All" id="zQvVDJ" />
-        </SquareTabs.Tab>
+          title={intl.formatMessage({
+            defaultMessage: 'All',
+            id: 'zQvVDJ',
+          })}
+        />
 
         {[...stages].reverse().map((stage) =>
           shouldShowTab(stage.period?.start) ? (
@@ -68,9 +71,7 @@ const ArticleFeedsTabs = ({
                   pageType: 'campaign_detail',
                 })
               }}
-              key={stage.id}
-            >
-              {
+              title={
                 stage[
                   lang === 'zh_hans'
                     ? 'nameZhHans'
@@ -79,7 +80,8 @@ const ArticleFeedsTabs = ({
                     : 'nameEn'
                 ]
               }
-            </SquareTabs.Tab>
+              key={stage.id}
+            />
           ) : null
         )}
 
@@ -94,20 +96,12 @@ const ArticleFeedsTabs = ({
                 pageType: 'campaign_detail',
               })
             }}
-            textColor={
-              feedType === FEED_TYPE_ANNOUNCEMENT ? 'white' : 'goldPress'
-            }
-            bgColor={
-              feedType === FEED_TYPE_ANNOUNCEMENT ? 'warnYellow' : 'topUpYellow'
-            }
-            bgActiveColor={
-              feedType === FEED_TYPE_ANNOUNCEMENT
-                ? undefined
-                : 'topUpYellowDarker'
-            }
-          >
-            <FormattedMessage defaultMessage="Announcement" id="Sj+TN8" />
-          </SquareTabs.Tab>
+            theme="gold"
+            title={intl.formatMessage({
+              defaultMessage: 'Announcement',
+              id: 'Sj+TN8',
+            })}
+          />
         )}
       </SquareTabs>
     </section>
