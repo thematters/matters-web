@@ -1,21 +1,25 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { analytics } from '~/common/utils'
 import { LanguageContext, SquareTabs } from '~/components'
-import { ArticleFeedsTabsCampaignFragment } from '~/gql/graphql'
+import {
+  ArticleFeedsCampaignFragment,
+  ArticleFeedsTabsCampaignFragment,
+} from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 export type CampaignFeedType = string
 
-export const LATEST_FEED_TYPE = 'latest'
+export const FEED_TYPE_ALL = 'all'
+export const FEED_TYPE_ANNOUNCEMENT = 'announcement'
 
 interface ArticleFeedsTabsProps {
   feedType: CampaignFeedType
   setFeedType: (type: string) => void
-  campaign: ArticleFeedsTabsCampaignFragment
+  campaign: ArticleFeedsTabsCampaignFragment & ArticleFeedsCampaignFragment
 }
 
 const ArticleFeedsTabs = ({
@@ -24,6 +28,7 @@ const ArticleFeedsTabs = ({
   campaign,
 }: ArticleFeedsTabsProps) => {
   const { lang } = useContext(LanguageContext)
+  const intl = useIntl()
   const stages = campaign.stages || []
 
   const shouldShowTab = (startedAt?: string) => {
@@ -33,22 +38,26 @@ const ArticleFeedsTabs = ({
     return now >= new Date(startedAt)
   }
 
+  const shouldShowAnnouncementTab = campaign.announcements.length > 0
+
   return (
     <section className={styles.tabs}>
       <SquareTabs sticky>
         <SquareTabs.Tab
-          selected={feedType === LATEST_FEED_TYPE}
+          selected={feedType === FEED_TYPE_ALL}
           onClick={() => {
-            setFeedType(LATEST_FEED_TYPE)
+            setFeedType(FEED_TYPE_ALL)
 
             analytics.trackEvent('click_button', {
-              type: `campaign_detail_tab_${LATEST_FEED_TYPE}` as `campaign_detail_tab_${string}`,
+              type: `campaign_detail_tab_${FEED_TYPE_ALL}` as `campaign_detail_tab_${string}`,
               pageType: 'campaign_detail',
             })
           }}
-        >
-          <FormattedMessage defaultMessage="Latest" id="adThp5" />
-        </SquareTabs.Tab>
+          title={intl.formatMessage({
+            defaultMessage: 'All',
+            id: 'zQvVDJ',
+          })}
+        />
 
         {[...stages].reverse().map((stage) =>
           shouldShowTab(stage.period?.start) ? (
@@ -62,9 +71,7 @@ const ArticleFeedsTabs = ({
                   pageType: 'campaign_detail',
                 })
               }}
-              key={stage.id}
-            >
-              {
+              title={
                 stage[
                   lang === 'zh_hans'
                     ? 'nameZhHans'
@@ -73,8 +80,28 @@ const ArticleFeedsTabs = ({
                     : 'nameEn'
                 ]
               }
-            </SquareTabs.Tab>
+              key={stage.id}
+            />
           ) : null
+        )}
+
+        {shouldShowAnnouncementTab && (
+          <SquareTabs.Tab
+            selected={feedType === FEED_TYPE_ANNOUNCEMENT}
+            onClick={() => {
+              setFeedType(FEED_TYPE_ANNOUNCEMENT)
+
+              analytics.trackEvent('click_button', {
+                type: `campaign_detail_tab_${FEED_TYPE_ANNOUNCEMENT}` as `campaign_detail_tab_${string}`,
+                pageType: 'campaign_detail',
+              })
+            }}
+            theme="gold"
+            title={intl.formatMessage({
+              defaultMessage: 'Announcement',
+              id: 'Sj+TN8',
+            })}
+          />
         )}
       </SquareTabs>
     </section>
@@ -93,6 +120,9 @@ ArticleFeedsTabs.fragments = gql`
         start
         end
       }
+      descriptionZhHant: description(input: { language: zh_hant })
+      descriptionZhHans: description(input: { language: zh_hans })
+      descriptionEn: description(input: { language: en })
     }
   }
 `

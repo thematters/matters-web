@@ -22,7 +22,10 @@ export const getSelectCampaign = ({
   createdAt,
 }: {
   applied?: EditorSelectCampaignFragment
-  attached: Array<{ campaign: { id: string }; stage: { id: string } }>
+  attached: Array<{
+    campaign: { id: string }
+    stage?: { id: string } | null
+  }>
   createdAt: string // draft or article creation time
 }) => {
   const { start } = applied?.writingPeriod || {}

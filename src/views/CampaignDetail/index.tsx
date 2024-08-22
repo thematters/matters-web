@@ -15,7 +15,6 @@ import { QueryError } from '~/components/GQL'
 import { CampaignDetailQuery } from '~/gql/graphql'
 
 import ArticleFeeds from './ArticleFeeds'
-import Description from './Description'
 import { CAMPAIGN_DETAIL } from './gql'
 import InfoHeader from './InfoHeader'
 import SideParticipants from './SideParticipants'
@@ -57,9 +56,6 @@ const CampaignDetail = () => {
   }
 
   const path = toPath({ page: 'campaignDetail', campaign })
-  const now = new Date()
-  const { end: appEnd } = campaign.applicationPeriod || {}
-  const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
 
   return (
     <Layout.Main aside={<SideParticipants campaign={campaign} />}>
@@ -88,9 +84,7 @@ const CampaignDetail = () => {
 
       <InfoHeader campaign={campaign} />
 
-      {isInApplicationPeriod && <Description campaign={campaign} />}
-
-      {!isInApplicationPeriod && <ArticleFeeds campaign={campaign} />}
+      <ArticleFeeds campaign={campaign} />
     </Layout.Main>
   )
 }

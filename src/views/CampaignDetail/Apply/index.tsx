@@ -8,6 +8,7 @@ const fragments = {
     fragment ApplyCampaignPublic on WritingChallenge {
       id
       state
+      link
       applicationPeriod {
         start
         end
