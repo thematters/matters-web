@@ -110,6 +110,10 @@
     "defaultMessage": "取消置頂",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
+  "/pglnt": {
+    "defaultMessage": "咒罵人生太短 唏噓相見恨晚",
+    "description": "MOMENT_FORM"
+  },
   "/pnYHM": {
     "defaultMessage": "圍爐不存在",
     "description": "CIRCLE_NOT_FOUND"
@@ -2129,9 +2133,6 @@
     "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "YoiwCD": {
-    "defaultMessage": "說點什麼..."
-  },
   "Z+nZlT": {
     "defaultMessage": "内容訂閱"
   },
@@ -2267,6 +2268,10 @@
   },
   "az8n8W": {
     "defaultMessage": "添加站內或站外朋友加入圍爐"
+  },
+  "b/mswY": {
+    "defaultMessage": "聊幾句？",
+    "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
   "b8ogKp": {
     "defaultMessage": "新增邀請",
