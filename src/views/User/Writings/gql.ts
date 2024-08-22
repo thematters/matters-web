@@ -101,5 +101,4 @@ export const USER_MOMENTS = gql`
       }
     }
   }
-  ${MomentDigestFeed.fragments.moment.private}
 `
