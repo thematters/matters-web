@@ -1,7 +1,7 @@
 import 'photoswipe/dist/photoswipe.css'
 
 import gql from 'graphql-tag'
-import PhotoSwipe from 'photoswipe'
+import type PhotoSwipe from 'photoswipe'
 import { useEffect, useRef, useState } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 
@@ -115,10 +115,13 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
         {loadedAssets.map((asset) => (
           <Item
             key={asset.id}
-            original={asset.path}
+            original={toSizedImageURL({
+              url: asset.path,
+              width: 1366,
+            })}
             thumbnail={toSizedImageURL({
               url: asset.path,
-              width: width,
+              width,
             })}
             width={asset.width}
             height={asset.height}
