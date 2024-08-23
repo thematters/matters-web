@@ -1,12 +1,16 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
+import {
+  OPEN_UNIVERSAL_AUTH_DIALOG,
+  UNIVERSAL_AUTH_TRIGGER,
+} from '~/common/enums'
 import { numAbbr } from '~/common/utils'
-import { Button, useMutation } from '~/components'
+import { Button, useMutation, ViewerContext } from '~/components'
 import {
   LIKE_MOMENT,
   UNLIKE_MOMENT,
@@ -47,6 +51,7 @@ const fragments = {
 
 const LikeButton = ({ moment, iconSize = 20 }: LikeButtonProps) => {
   const intl = useIntl()
+  const viewer = useContext(ViewerContext)
   const { likeCount, liked } = moment
 
   const [playHeartBeat, setPlayHeartBeat] = useState(false)
@@ -114,6 +119,14 @@ const LikeButton = ({ moment, iconSize = 20 }: LikeButtonProps) => {
       textColor="black"
       textActiveColor="greyDarker"
       onClick={() => {
+        if (!viewer.isAuthed) {
+          window.dispatchEvent(
+            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+              detail: { trigger: UNIVERSAL_AUTH_TRIGGER.momentLike },
+            })
+          )
+          return
+        }
         likeMoment()
         setPlayHeartBeat(true)
       }}
