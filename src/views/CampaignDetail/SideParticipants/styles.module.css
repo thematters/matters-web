@@ -8,6 +8,7 @@
     }
 
     & .count {
+      font-weight: var(--font-normal);
       color: var(--color-grey);
     }
   }

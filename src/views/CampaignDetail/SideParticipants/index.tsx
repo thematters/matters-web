@@ -177,6 +177,7 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
         isOpen={openDrawer}
         onClose={toggleDrawer}
         shortHash={campaign.shortHash}
+        totalParticipants={totalCount}
       />
     </DrawerProvider>
   )

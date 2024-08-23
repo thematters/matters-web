@@ -3,7 +3,6 @@ import { useContext } from 'react'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
-  Dialog,
   InfiniteScroll,
   List,
   QueryError,
@@ -15,7 +14,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { GetParticipantsQuery } from '~/gql/graphql'
 import { GET_PARTICIPANTS } from '~/views/CampaignDetail/gql'
 
-const ParticipantsDialogContent = () => {
+export const Content = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
@@ -62,41 +61,37 @@ const ParticipantsDialogContent = () => {
   const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
 
   return (
-    <Dialog.Content noSpacing>
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List hasBorder={false}>
-          {isViewerApplySucceeded && (
-            <List.Item>
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List hasBorder={false}>
+        {isViewerApplySucceeded && (
+          <List.Item>
+            <UserDigest.Rich
+              user={viewer}
+              spacing={[12, 0]}
+              hasFollow={false}
+            />
+          </List.Item>
+        )}
+        {edges
+          .filter((e) => e.node.id !== viewer.id)
+          .map(({ node, cursor }, i) => (
+            <List.Item key={cursor}>
               <UserDigest.Rich
-                user={viewer}
-                spacing={[12, 16]}
+                user={node}
+                spacing={[12, 0]}
                 hasFollow={false}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'campaign_detail_participant',
+                    contentType: 'user',
+                    location: i,
+                    id: node.id,
+                  })
+                }
               />
             </List.Item>
-          )}
-          {edges
-            .filter((e) => e.node.id !== viewer.id)
-            .map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
-                <UserDigest.Rich
-                  user={node}
-                  spacing={[12, 16]}
-                  hasFollow={false}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'campaign_detail_participant',
-                      contentType: 'user',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                />
-              </List.Item>
-            ))}
-        </List>
-      </InfiniteScroll>
-    </Dialog.Content>
+          ))}
+      </List>
+    </InfiniteScroll>
   )
 }
-
-export default ParticipantsDialogContent
