@@ -24,7 +24,7 @@ import { UserWritingsPublicQuery } from '~/gql/graphql'
 
 import MomentForm from '../MomentForm'
 import {
-  USER_MOMENTS,
+  USER_MOMENTS_REACTIVE_DATA,
   USER_WRITINGS_PRIVATE,
   USER_WRITINGS_PUBLIC,
 } from './gql'
@@ -69,7 +69,7 @@ const UserWritings = () => {
   }
 
   // fetch the latest moment data
-  const loadMomentData = (publicData?: UserWritingsPublicQuery) => {
+  const loadMomentReactiveData = (publicData?: UserWritingsPublicQuery) => {
     if (!publicData || !user) {
       return
     }
@@ -81,7 +81,7 @@ const UserWritings = () => {
     const publicIds = momentEdges.map(({ node }) => node.id)
 
     client.query({
-      query: USER_MOMENTS,
+      query: USER_MOMENTS_REACTIVE_DATA,
       fetchPolicy: 'network-only',
       variables: { ids: publicIds },
     })
@@ -90,7 +90,7 @@ const UserWritings = () => {
   // fetch private and moment data for first page
   useEffect(() => {
     loadPrivate(data)
-    loadMomentData(data)
+    loadMomentReactiveData(data)
   }, [user?.id, viewer.id])
 
   // load next page

@@ -91,8 +91,8 @@ export const USER_WRITINGS_PRIVATE = gql`
   ${MomentDigestFeed.fragments.moment.private}
 `
 
-export const USER_MOMENTS = gql`
-  query UserMoments($ids: [ID!]!) {
+export const USER_MOMENTS_REACTIVE_DATA = gql`
+  query UserMomentsReactiveData($ids: [ID!]!) {
     nodes(input: { ids: $ids }) {
       id
       ... on Moment {
