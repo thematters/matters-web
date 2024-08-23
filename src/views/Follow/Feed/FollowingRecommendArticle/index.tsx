@@ -57,12 +57,7 @@ const RecommendArticle = ({ article, ...cardProps }: Props) => {
 
           {cover && (
             <section className={styles.cover}>
-              <ResponsiveImage
-                url={cover}
-                width={144}
-                height={144}
-                disableAnimation={true}
-              />
+              <ResponsiveImage url={cover} width={144} height={144} />
             </section>
           )}
         </section>

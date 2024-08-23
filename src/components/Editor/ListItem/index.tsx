@@ -24,7 +24,6 @@ const CoverIndicator = ({ cover }: { cover?: string | null }) => (
           url: cover,
           width: 72,
           height: 72,
-          disableAnimation: true,
         })}
         alt="cover"
       />

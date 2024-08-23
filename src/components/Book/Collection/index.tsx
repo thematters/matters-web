@@ -54,7 +54,6 @@ const BookCollection: React.FC<BookCollectionProps> = ({
           width={240}
           height={200}
           anonymous
-          disableAnimation={true}
         />
         {hasMask && (
           <div className={styles.mask}>

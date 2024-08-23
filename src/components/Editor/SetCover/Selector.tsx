@@ -57,7 +57,6 @@ const Selector: React.FC<SelectorProps> = ({
                   url: asset.path,
                   width: 72,
                   height: 72,
-                  disableAnimation: true,
                 })}
                 alt="cover"
               />
