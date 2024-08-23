@@ -70,6 +70,7 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   support = 'support',
   visitorWall = 'visitorWall',
   momentComment = 'momentComment',
+  momentLike = 'momentLike',
 }
 
 /**
