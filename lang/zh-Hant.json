@@ -2582,10 +2582,6 @@
     "defaultMessage": "人追蹤",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
-  "hfRsLB": {
-    "defaultMessage": "作者 {count}",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
-  },
   "hgtWIO": {
     "defaultMessage": "作品被關聯",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"

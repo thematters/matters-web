@@ -2582,10 +2582,6 @@
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
-  "hfRsLB": {
-    "defaultMessage": "Writers {count}",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
-  },
   "hgtWIO": {
     "defaultMessage": "Articles have been collected",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"

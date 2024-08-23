@@ -24,7 +24,7 @@ import { fragments } from './gql'
 import styles from './styles.module.css'
 
 const DynamicParticipantsDrawer = dynamic(
-  () => import('./Drawer').then((mod) => mod.ParticipantsDrawer),
+  () => import('../Participants/Drawer').then((mod) => mod.ParticipantsDrawer),
   {
     ssr: false,
   }
@@ -176,7 +176,6 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
       <DynamicParticipantsDrawer
         isOpen={openDrawer}
         onClose={toggleDrawer}
-        shortHash={campaign.shortHash}
         totalParticipants={totalCount}
       />
     </DrawerProvider>

@@ -1,21 +1,23 @@
+import dynamic from 'next/dynamic'
 import { useIntl } from 'react-intl'
 
-import { Drawer } from '~/components'
+import { Drawer, SpinnerBlock } from '~/components'
 
-import { Content } from './Content'
 import styles from './styles.module.css'
+
+const DynamicContent = dynamic(() => import('./Content'), {
+  loading: () => <SpinnerBlock />,
+})
 
 type DrawerProps = {
   isOpen: boolean
   onClose: () => void
-  shortHash: string
   totalParticipants: number
 }
 
 export const ParticipantsDrawer: React.FC<DrawerProps> = ({
   isOpen,
   onClose,
-  shortHash,
   totalParticipants,
 }) => {
   const intl = useIntl()
@@ -39,7 +41,7 @@ export const ParticipantsDrawer: React.FC<DrawerProps> = ({
         fixedWidth
       />
       <Drawer.Content fixedWidth>
-        <Content />
+        <DynamicContent type="drawer" />
       </Drawer.Content>
     </Drawer>
   )

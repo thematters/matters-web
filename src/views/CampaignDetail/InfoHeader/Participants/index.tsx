@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import { Avatar, ViewerContext } from '~/components'
 import { InfoHeaderParticipantsCampaignFragment } from '~/gql/graphql'
 
-import { ParticipantsDialog } from './Dialog'
+import { ParticipantsDialog } from '../../Participants/Dialog'
 import styles from './styles.module.css'
 
 const fragments = gql`
@@ -40,7 +40,7 @@ const Participants = ({
   )
 
   return (
-    <ParticipantsDialog campaign={campaign}>
+    <ParticipantsDialog totalParticipants={campaign.participants.totalCount}>
       {({ openDialog }) => (
         <section
           className={styles.participants}
