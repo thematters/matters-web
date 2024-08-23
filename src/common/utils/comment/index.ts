@@ -75,19 +75,6 @@ export function filterResponses<T extends Response | Comment>(
   })
 }
 
-export function trimCommentContent(content: string) {
-  // clear empty p tag
-  let trimContent = content.replace(/^(<p>\s*<\/p>)+|(<p>\s*<\/p>)+$/g, '')
-  // clear empty line and space at the beginning
-  trimContent = trimContent.replace(/^(<p>(<br class="smart">|\s)+)/g, '<p>')
-  // clear empty line and space at the end
-  trimContent = trimContent.replace(
-    /((<br class="smart">|\s)+<\/p>)+$/g,
-    '</p>'
-  )
-  return trimContent
-}
-
 export const highlightComment = (
   targetElement: HTMLElement,
   isParentComment?: boolean,

@@ -10,7 +10,12 @@ import {
   MAX_MOMENT_CONTENT_LENGTH,
   OPEN_MOMENT_FORM,
 } from '~/common/enums'
-import { formStorage, parseFormSubmitErrors, stripHtml } from '~/common/utils'
+import {
+  formStorage,
+  parseFormSubmitErrors,
+  sanitizeContent,
+  stripHtml,
+} from '~/common/utils'
 import {
   Button,
   ClearMomentDialog,
@@ -165,7 +170,7 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
       const { data } = await putMoment({
         variables: {
           input: {
-            content,
+            content: sanitizeContent(content),
             assets: assets.map(({ assetId }) => assetId),
           },
         },

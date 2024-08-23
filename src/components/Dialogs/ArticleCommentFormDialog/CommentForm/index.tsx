@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
-import { dom, formStorage, stripHtml, trimCommentContent } from '~/common/utils'
+import { dom, formStorage, sanitizeContent, stripHtml } from '~/common/utils'
 import {
   Dialog,
   SpinnerBlock,
@@ -78,10 +78,10 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
-    const trimContent = trimCommentContent(content)
+    const sanitizedContent = sanitizeContent(content)
     const input = {
       comment: {
-        content: trimContent,
+        content: sanitizedContent,
         replyTo: replyToId,
         articleId,
         parentId,

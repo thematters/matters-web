@@ -7,7 +7,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { dom, formStorage, stripHtml, trimCommentContent } from '~/common/utils'
+import { dom, formStorage, sanitizeContent, stripHtml } from '~/common/utils'
 import {
   Button,
   SpinnerBlock,
@@ -93,11 +93,11 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
-    const trimContent = trimCommentContent(content)
+    const sanitizedContent = sanitizeContent(content)
     const input = {
       id: commentId,
       comment: {
-        content: trimContent,
+        content: sanitizedContent,
         replyTo: replyToId,
         articleId,
         parentId,
