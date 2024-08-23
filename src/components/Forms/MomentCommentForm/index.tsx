@@ -10,7 +10,7 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
   UPDATE_NEWEST_MOMENT_COMMENT,
 } from '~/common/enums'
-import { formStorage, stripHtml, trimCommentContent } from '~/common/utils'
+import { formStorage, sanitizeContent, stripHtml } from '~/common/utils'
 import {
   Button,
   SpinnerBlock,
@@ -107,10 +107,10 @@ const MomentCommentForm = ({
   const isValid = contentCount > 0 && contentCount <= MAX_MOMENT_COMMENT_LENGTH
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
-    const trimContent = trimCommentContent(content)
+    const sanitizedContent = sanitizeContent(content)
     const input = {
       comment: {
-        content: trimContent,
+        content: sanitizedContent,
         momentId,
         type: 'moment',
       },
