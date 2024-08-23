@@ -30,7 +30,6 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
                     url: cover,
                     width: 230,
                     height: 230,
-                    disableAnimation: true,
                   })}
                   alt="cover"
                 />

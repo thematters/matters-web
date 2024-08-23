@@ -153,7 +153,6 @@ const BaseArticleDigestFeed = ({
                 height={152}
                 smUpWidth={212}
                 smUpHeight={212}
-                disableAnimation={true}
                 loading={isFirstFold ? undefined : 'lazy'}
                 fetchPriority={isFirstFold ? 'high' : 'low'}
               />

@@ -39,7 +39,6 @@ const BookFlat: React.FC<BookFlatProps> = ({ title, cover, type }) => {
           width={100} // smaller size for color thief
           height={100}
           anonymous
-          disableAnimation={true}
         />
       </div>
 
