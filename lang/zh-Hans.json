@@ -158,6 +158,10 @@
   "0Om2Kl": {
     "defaultMessage": "移出选集"
   },
+  "0SQatS": {
+    "defaultMessage": "看全部",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
+  },
   "0ThOw1": {
     "defaultMessage": "新建选集",
     "description": "src/views/User/Collections/UserCollections.tsx"
