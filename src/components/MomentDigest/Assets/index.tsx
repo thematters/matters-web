@@ -97,7 +97,9 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
       data-test-id={TEST_ID.MOMENT_DIGEST_ASSETS}
     >
       <Gallery
-        options={{}}
+        options={{
+          loop: false,
+        }}
         onOpen={(photoswipe: PhotoSwipe) => {
           const closePhotoswipeListener = () => {
             document.addEventListener('keyup', (event) => {
