@@ -1,4 +1,4 @@
-import FileType from 'file-type/browser'
+import { fileTypeFromBlob, type FileTypeResult } from 'file-type'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -10,9 +10,8 @@ import {
 } from '~/common/enums'
 import { toast } from '~/components'
 
-export const getFileType = (
-  file: File
-): Promise<FileType.FileTypeResult | undefined> => FileType.fromBlob(file)
+export const getFileType = (file: File): Promise<FileTypeResult | undefined> =>
+  fileTypeFromBlob(file)
 
 // return meme type or null if not valid
 export const validateImage = (image: File, isAvatar: boolean = false) =>

@@ -106,7 +106,7 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
   const duration = 3000 // 3 seconds
   const intervalTime = 100 // Update every 100ms
   const maxProgress = 99
-  let intervalId: NodeJS.Timer
+  let intervalId: number
 
   const uploadImage = async (file: File) => {
     if (!upload) return
@@ -168,7 +168,7 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
     const increment = Math.round((maxProgress / duration) * intervalTime)
     let progress = 0
 
-    intervalId = setInterval(() => {
+    intervalId = window.setInterval(() => {
       const newProgress = progress + increment
       if (progressRef.current && newProgress <= maxProgress) {
         progress = newProgress

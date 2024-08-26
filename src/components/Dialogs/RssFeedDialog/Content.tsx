@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/react-hooks'
-import contentHash from '@ensdomains/content-hash'
+import { encode as contentHashEncode } from '@ensdomains/content-hash'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -67,7 +67,7 @@ const BaseRssFeedDialogContent: React.FC<RssFeedDialogContentProps> = ({
     chainId: targetNetork.id,
   })
   const hasLinkedIPNS =
-    !!ipnsKey && '0x' + contentHash.encode('ipns-ns', ipnsKey) === readData
+    !!ipnsKey && '0x' + contentHashEncode('ipns', ipnsKey) === readData
   const displayIPNS = hasLinkedIPNS ? ensName : user.info.ipnsKey
 
   const intl = useIntl()

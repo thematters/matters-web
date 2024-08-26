@@ -13,6 +13,7 @@ import {
 import {
   CommentFeedCommentPrivateFragment,
   CommentFeedCommentPublicFragment,
+  RoleLabelCommentFragment,
 } from '~/gql/graphql'
 
 import { CommentContent } from '../Content'
@@ -99,7 +100,7 @@ const BaseCommentFeed = ({
                     {author.displayName}
                   </section>
                 </LinkWrapper>
-                <RoleLabel comment={comment} />
+                <RoleLabel comment={comment as RoleLabelCommentFragment} />
               </section>
               <LinkWrapper {...commentDetailPath}>
                 <DateTime date={comment.createdAt} color="grey" />

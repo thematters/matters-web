@@ -34,6 +34,26 @@ const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
   return <Form.SquareCheckBox {...field} {...props} />
 }
 
+const Title = ({
+  title,
+  searchValue,
+}: {
+  title: string
+  searchValue: string
+}) => {
+  const index = title.toLowerCase().indexOf(searchValue.toLowerCase())
+
+  return (
+    <>
+      {title.slice(0, index)}
+      <span className="u-highlight">
+        {title.slice(index, index + searchValue.length)}
+      </span>
+      {title.slice(index + searchValue.length)}
+    </>
+  )
+}
+
 const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
   formik,
   user,
@@ -141,21 +161,9 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
                   disabled={disabled}
                   {...(formik.getFieldProps('checked') as FieldInputProps<any>)}
                   value={node.id}
-                  content={(() => {
-                    const index = node.title
-                      .toLowerCase()
-                      .indexOf(searchValue.toLowerCase())
-                    const content = (
-                      <>
-                        {node.title.slice(0, index)}
-                        <span className="u-highlight">
-                          {node.title.slice(index, index + searchValue.length)}
-                        </span>
-                        {node.title.slice(index + searchValue.length)}
-                      </>
-                    )
-                    return content
-                  })()}
+                  content={
+                    <Title title={node.title} searchValue={searchValue} />
+                  }
                 />
               </section>
             )

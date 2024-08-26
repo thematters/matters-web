@@ -21,7 +21,6 @@ import styles from './styles.module.css'
 const Hero = () => {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     dragFree: true,
-    draggable: true,
     loop: false,
     containScroll: 'trimSnaps',
   })

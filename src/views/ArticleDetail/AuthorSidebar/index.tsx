@@ -33,10 +33,10 @@ export const AuthorSidebar = ({ article }: AuthorSidebarProps) => {
     !!collectionId
       ? 'Collection'
       : hasFromAuthor
-      ? 'Author'
-      : hasRecommendation
-      ? 'Recommendation'
-      : undefined
+        ? 'Author'
+        : hasRecommendation
+          ? 'Recommendation'
+          : undefined
   )
 
   return (

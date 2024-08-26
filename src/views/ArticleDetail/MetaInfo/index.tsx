@@ -83,8 +83,8 @@ const MetaInfo = ({
                   lang === 'zh_hans'
                     ? 'nameZhHans'
                     : lang === 'zh_hant'
-                    ? 'nameZhHant'
-                    : 'nameEn'
+                      ? 'nameZhHant'
+                      : 'nameEn'
                 ]
               }
             </TextIcon>

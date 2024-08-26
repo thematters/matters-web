@@ -104,8 +104,8 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
   const trackingType = isHottest
     ? 'tag_detail_hottest'
     : isSelected
-    ? 'tag_detail_selected'
-    : 'tag_detail_latest'
+      ? 'tag_detail_selected'
+      : 'tag_detail_latest'
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: trackingType,

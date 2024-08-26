@@ -65,8 +65,8 @@ const CampaignDetail = () => {
             lang === 'zh_hans'
               ? 'nameZhHans'
               : lang === 'zh_hant'
-              ? 'nameZhHant'
-              : 'nameEn'
+                ? 'nameZhHant'
+                : 'nameEn'
           ]
         }
         path={path.href}
@@ -75,8 +75,8 @@ const CampaignDetail = () => {
             lang === 'zh_hans'
               ? 'descriptionZhHans'
               : lang === 'zh_hant'
-              ? 'descriptionZhHant'
-              : 'descriptionEn'
+                ? 'descriptionZhHant'
+                : 'descriptionEn'
           ]
         }
         image={campaign.cover}

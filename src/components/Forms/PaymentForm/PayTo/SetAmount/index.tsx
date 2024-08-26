@@ -244,8 +244,8 @@ const SetAmount: React.FC<FormProps> = ({
         id: 'XMpFQE',
       })
     : hasUSDTNetworkError && !isUserRejectedError
-    ? WALLET_ERROR_MESSAGES[lang].unknown
-    : ''
+      ? WALLET_ERROR_MESSAGES[lang].unknown
+      : ''
 
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (
