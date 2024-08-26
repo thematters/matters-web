@@ -1,3 +1,4 @@
+import _shuffle from 'lodash/shuffle'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
@@ -120,9 +121,34 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
           {isViewerApplySucceeded && <Participant user={viewer} />}
 
           {totalCount <= maxAvatarCount &&
-            edges
-              ?.filter((u) => u.node.id !== viewer.id)
-              .map(({ node, cursor }, i) => (
+            _shuffle(edges?.filter((u) => u.node.id !== viewer.id)).map(
+              ({ node, cursor }, i) => (
+                <Participant
+                  key={cursor}
+                  user={node}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'campaign_detail_participant',
+                      contentType: 'user',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
+              )
+            )}
+          {totalCount > maxAvatarCount && (
+            <>
+              {_shuffle(
+                edges
+                  ?.slice(
+                    0,
+                    isViewerApplySucceeded
+                      ? maxAvatarCount - 2
+                      : maxAvatarCount - 1
+                  )
+                  ?.filter((u) => u.node.id !== viewer.id)
+              ).map(({ node, cursor }, i) => (
                 <Participant
                   key={cursor}
                   user={node}
@@ -136,25 +162,6 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
                   }
                 />
               ))}
-          {totalCount > maxAvatarCount && (
-            <>
-              {edges
-                ?.slice(0, maxAvatarCount - 1)
-                ?.filter((u) => u.node.id !== viewer.id)
-                .map(({ node, cursor }, i) => (
-                  <Participant
-                    key={cursor}
-                    user={node}
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'campaign_detail_participant',
-                        contentType: 'user',
-                        location: i,
-                        id: node.id,
-                      })
-                    }
-                  />
-                ))}
               <Button
                 borderRadius="5rem"
                 size={['2.5rem', '2.5rem']}

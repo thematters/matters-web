@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import _shuffle from 'lodash/shuffle'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -50,9 +51,11 @@ const Participants = ({
         >
           <section className={styles.avatars}>
             {isViewerApplySucceeded && <Avatar user={viewer} size={24} />}
-            {edges
-              ?.filter((u) => u.node.id !== viewer.id)
-              .map(({ node }, i) => <Avatar key={i} user={node} size={24} />)}
+            {_shuffle(edges?.filter((u) => u.node.id !== viewer.id)).map(
+              ({ node }, i) => (
+                <Avatar key={i} user={node} size={24} />
+              )
+            )}
           </section>
           <span className={styles.count}>
             {campaign.participants.totalCount}
