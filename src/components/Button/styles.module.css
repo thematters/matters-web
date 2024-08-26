@@ -291,6 +291,12 @@ span.container {
   }
 }
 
+.bgGreyDarker {
+  & .hotarea {
+    background: var(--color-grey-darker);
+  }
+}
+
 .bgGrey {
   & .hotarea {
     background: var(--color-grey);

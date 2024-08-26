@@ -85,6 +85,7 @@ type ButtonTextActiveColor = Extract<
 export type ButtonBgColor = Extract<
   ButtonColor,
   | 'greyDarkest'
+  | 'greyDarker'
   | 'grey'
   | 'greyLighter'
   | 'greenLighter'

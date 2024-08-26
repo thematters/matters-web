@@ -1,11 +1,13 @@
 import gql from 'graphql-tag'
+import _shuffle from 'lodash/shuffle'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Avatar, ViewerContext } from '~/components'
+import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import { Avatar, Icon, TextIcon, ViewerContext } from '~/components'
 import { InfoHeaderParticipantsCampaignFragment } from '~/gql/graphql'
 
-import { ParticipantsDialog } from './Dialog'
+import { ParticipantsDialog } from '../../Participants/Dialog'
 import styles from './styles.module.css'
 
 const fragments = gql`
@@ -40,28 +42,36 @@ const Participants = ({
   )
 
   return (
-    <ParticipantsDialog campaign={campaign}>
+    <ParticipantsDialog totalParticipants={campaign.participants.totalCount}>
       {({ openDialog }) => (
         <section
           className={styles.participants}
           role="button"
           onClick={openDialog}
         >
+          <section className={styles.avatars}>
+            {isViewerApplySucceeded && <Avatar user={viewer} size={24} />}
+            {_shuffle(edges?.filter((u) => u.node.id !== viewer.id)).map(
+              ({ node }, i) => (
+                <Avatar key={i} user={node} size={24} />
+              )
+            )}
+          </section>
           <span className={styles.count}>
             {campaign.participants.totalCount}
             &nbsp;
           </span>
-          <FormattedMessage
-            defaultMessage="writers"
-            id="syBMnY"
-            description="src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
-          />
-          <section className={styles.avatars}>
-            {isViewerApplySucceeded && <Avatar user={viewer} size={20} />}
-            {edges
-              ?.filter((u) => u.node.id !== viewer.id)
-              .map(({ node }, i) => <Avatar key={i} user={node} size={20} />)}
-          </section>
+          <TextIcon
+            icon={<Icon icon={IconRight} size={14} />}
+            placement="left"
+            size={14}
+          >
+            <FormattedMessage
+              defaultMessage="writers"
+              id="syBMnY"
+              description="src/views/CampaignDetail/InfoHeader/Participants/index.tsx"
+            />
+          </TextIcon>
         </section>
       )}
     </ParticipantsDialog>
