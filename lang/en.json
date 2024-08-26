@@ -158,6 +158,10 @@
   "0Om2Kl": {
     "defaultMessage": "Remove from collection"
   },
+  "0SQatS": {
+    "defaultMessage": "View all",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
+  },
   "0ThOw1": {
     "defaultMessage": "Create collection",
     "description": "src/views/User/Collections/UserCollections.tsx"
@@ -2577,10 +2581,6 @@
   "hYG5fb": {
     "defaultMessage": "are following",
     "description": "src/views/TagDetail/Followers/index.tsx"
-  },
-  "hfRsLB": {
-    "defaultMessage": "Writers {count}",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "hgtWIO": {
     "defaultMessage": "Articles have been collected",

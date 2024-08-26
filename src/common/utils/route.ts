@@ -35,6 +35,10 @@ interface CampaignArgs {
   shortHash: string
 }
 
+interface CampaignStageArgs {
+  id: string
+}
+
 interface CommentArgs {
   id: string
   type: 'article' | 'circleDiscussion' | 'circleBroadcast' | 'moment' // comment type: article/discussion/broadcast
@@ -88,6 +92,7 @@ type ToPathArgs =
   | {
       page: 'campaignDetail'
       campaign: CampaignArgs
+      stage?: CampaignStageArgs
     }
   | {
       page: 'userProfile' | 'userCollections'
@@ -237,6 +242,11 @@ export const toPath = (
     }
     case 'campaignDetail': {
       href = `/e/${args.campaign.shortHash}`
+      if (args.stage) {
+        href = `${href}?type=${args.stage.id}`
+      } else {
+        href = `${href}?type=announcement`
+      }
       break
     }
     case 'userProfile': {
