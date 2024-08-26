@@ -58,9 +58,9 @@ const Participants = ({
           />
           <section className={styles.avatars}>
             {isViewerApplySucceeded && <Avatar user={viewer} size={20} />}
-            {edges?.map(({ node }, i) => (
-              <Avatar key={i} user={node} size={20} />
-            ))}
+            {edges
+              ?.filter((u) => u.node.id !== viewer.id)
+              .map(({ node }, i) => <Avatar key={i} user={node} size={20} />)}
           </section>
         </section>
       )}
