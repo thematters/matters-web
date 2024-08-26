@@ -21,20 +21,20 @@ import {
   ViewerContext,
 } from '~/components'
 import {
+  MoreSettingsProps,
   SetCollectionProps,
   SetCoverProps,
   SetResponseProps,
   SetTagsProps,
   SetVersionDescriptionProps,
-  ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
+import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
 import {
   getSelectCampaign,
   SelectCampaignProps,
 } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
-import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
 import {
   DIRECT_IMAGE_UPLOAD,
@@ -205,7 +205,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
     editCampaign: setCampaign,
   }
 
-  const accessProps: ToggleAccessProps = {
+  const accessProps: MoreSettingsProps = {
     circle,
     accessType,
     license,

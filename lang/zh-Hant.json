@@ -1189,6 +1189,9 @@
     "defaultMessage": "添加 IPFS 生成的 IPNS 指紋到閱讀器，如：",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "HwaiSE": {
+    "defaultMessage": "開啟後，正文將被暫時遮蔽，只顯示標題與摘要，並由讀者選擇是否繼續閱讀（例如含有色情、暴力、血腥等內容）"
+  },
   "HxcjQl": {
     "defaultMessage": "Matters 將提供更多創作與區塊鏈結合的服務，接入錢包後即可在未來第一時間體驗新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -1940,10 +1943,6 @@
   },
   "VmYzLr": {
     "defaultMessage": "{total} 個成員"
-  },
-  "Vn5KLr": {
-    "defaultMessage": "開啟後，正文將被暫時遮蔽，只顯示標題與摘要，並由讀者選擇是否繼續閱讀（例如含有色情、暴力、血腥等內容）",
-    "description": "src/components/Editor/ToggleAccess/index.tsx"
   },
   "VqdOGQ": {
     "defaultMessage": "相關推薦",
@@ -2756,6 +2755,10 @@
   "l2eEyp": {
     "defaultMessage": "交易密碼重置成功"
   },
+  "l31hCd": {
+    "defaultMessage": "效果預覽",
+    "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
+  },
   "l9LpDx": {
     "defaultMessage": "{q} - Matters 搜尋",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
@@ -3547,10 +3550,6 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "zn83cE": {
-    "defaultMessage": "效果預覽",
-    "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",

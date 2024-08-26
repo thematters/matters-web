@@ -3,14 +3,14 @@ import { FormattedMessage } from 'react-intl'
 
 import { Dialog, useDialogSwitch } from '~/components'
 
+import MoreSettings, { MoreSettingsProps } from '../../MoreSettings'
 import SelectCampaign, { SelectCampaignProps } from '../../SelectCampaign'
-import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
 import styles from './styles.module.css'
 
 type MoreSettingsDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-} & ToggleAccessProps &
+} & MoreSettingsProps &
   ToggleResponseProps &
   Partial<SelectCampaignProps>
 
@@ -77,7 +77,7 @@ const BaseMoreSettingsDialog = ({
           </section>
 
           <section className={styles.access}>
-            <ToggleAccess {...props} theme="bottomBar" />
+            <MoreSettings {...props} theme="bottomBar" />
           </section>
         </Dialog.Content>
 

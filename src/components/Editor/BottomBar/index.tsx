@@ -13,11 +13,11 @@ import {
   Translate,
 } from '~/components'
 import {
+  MoreSettingsProps,
   SetCollectionProps,
   SetCoverProps,
   SetResponseProps,
   SetTagsProps,
-  ToggleAccessProps,
   ToggleResponseProps,
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
@@ -41,7 +41,7 @@ export type BottomBarProps = {
   SetCollectionProps &
   SetTagsProps &
   SetResponseProps &
-  ToggleAccessProps &
+  MoreSettingsProps &
   Partial<SelectCampaignProps>
 
 /**
@@ -113,7 +113,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
     entityType,
     coverSaving,
   }
-  const settingsProps: ToggleAccessProps &
+  const settingsProps: MoreSettingsProps &
     ToggleResponseProps &
     Partial<SelectCampaignProps> = {
     circle,

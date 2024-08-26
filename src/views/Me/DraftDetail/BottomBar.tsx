@@ -1,18 +1,18 @@
 import { ENTITY_TYPE } from '~/common/enums'
 import { toDigestTagPlaceholder } from '~/components'
 import {
+  MoreSettingsProps,
   SetCollectionProps,
   SetCoverProps,
   SetResponseProps,
   SetTagsProps,
-  ToggleAccessProps,
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
+import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
 import {
   getSelectCampaign,
   SelectCampaignProps,
 } from '~/components/Editor/SelectCampaign'
-import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import {
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
@@ -91,7 +91,7 @@ const EditDraftBottomBar = ({
     editCollection,
     collectionSaving,
   }
-  const accessProps: ToggleAccessProps &
+  const accessProps: MoreSettingsProps &
     SetResponseProps &
     Partial<SelectCampaignProps> = {
     circle: draft?.access.circle,

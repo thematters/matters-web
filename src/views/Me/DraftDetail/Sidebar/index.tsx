@@ -1,8 +1,8 @@
 import { ENTITY_TYPE } from '~/common/enums'
 import { toDigestTagPlaceholder } from '~/components'
+import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
 import { getSelectCampaign } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
-import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import {
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
