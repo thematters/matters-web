@@ -16,7 +16,6 @@ import {
 } from '~/common/utils'
 import {
   BackToHomeButton,
-  BackToHomeMobileButton,
   CommentEditorProvider,
   DrawerProvider,
   EmptyLayout,
@@ -57,6 +56,7 @@ import {
   ARTICLE_DETAIL_PUBLIC,
   ARTICLE_TRANSLATION,
 } from './gql'
+import Header from './Header'
 import License from './License'
 import MetaInfo from './MetaInfo'
 import Placeholder from './Placeholder'
@@ -317,9 +317,7 @@ const BaseArticleDetail = ({
       </Media>
 
       <section className={styles.content}>
-        <Media at="sm" className={styles.mobileLogo}>
-          <BackToHomeMobileButton />
-        </Media>
+        <Header article={article} />
         <section className="u-article-title">
           <h1>{title}</h1>
 
