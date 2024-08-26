@@ -158,6 +158,10 @@
   "0Om2Kl": {
     "defaultMessage": "移出选集"
   },
+  "0SQatS": {
+    "defaultMessage": "看全部",
+    "description": "src/views/CampaignDetail/SideParticipants/index.tsx"
+  },
   "0ThOw1": {
     "defaultMessage": "新建选集",
     "description": "src/views/User/Collections/UserCollections.tsx"
@@ -2577,10 +2581,6 @@
   "hYG5fb": {
     "defaultMessage": "人追踪",
     "description": "src/views/TagDetail/Followers/index.tsx"
-  },
-  "hfRsLB": {
-    "defaultMessage": "作者 {count}",
-    "description": "src/views/CampaignDetail/InfoHeader/Participants/Dialog/index.tsx"
   },
   "hgtWIO": {
     "defaultMessage": "作品被关联",
