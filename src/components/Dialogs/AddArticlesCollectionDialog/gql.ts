@@ -72,7 +72,7 @@ export const USER_ARTICLES_SEARCH = gql`
 export const ADD_ARTICLES_COLLECTION = gql`
   mutation AddArticlesCollection(
     $input: AddCollectionsArticlesInput!
-    $first: Int
+    $first: first_Int_min_0
   ) {
     addCollectionsArticles(input: $input) {
       id
