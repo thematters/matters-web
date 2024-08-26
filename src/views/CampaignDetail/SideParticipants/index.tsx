@@ -120,63 +120,41 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
         <section className={styles.avatars}>
           {isViewerApplySucceeded && <Participant user={viewer} />}
 
-          {totalCount <= maxAvatarCount &&
-            _shuffle(edges?.filter((u) => u.node.id !== viewer.id)).map(
-              ({ node, cursor }, i) => (
-                <Participant
-                  key={cursor}
-                  user={node}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'campaign_detail_participant',
-                      contentType: 'user',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                />
+          {_shuffle(
+            edges
+              ?.slice(
+                0,
+                isViewerApplySucceeded ? maxAvatarCount - 2 : maxAvatarCount - 1
               )
-            )}
+              ?.filter((u) => u.node.id !== viewer.id)
+          ).map(({ node, cursor }, i) => (
+            <Participant
+              key={cursor}
+              user={node}
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'campaign_detail_participant',
+                  contentType: 'user',
+                  location: i,
+                  id: node.id,
+                })
+              }
+            />
+          ))}
           {totalCount > maxAvatarCount && (
-            <>
-              {_shuffle(
-                edges
-                  ?.slice(
-                    0,
-                    isViewerApplySucceeded
-                      ? maxAvatarCount - 2
-                      : maxAvatarCount - 1
-                  )
-                  ?.filter((u) => u.node.id !== viewer.id)
-              ).map(({ node, cursor }, i) => (
-                <Participant
-                  key={cursor}
-                  user={node}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'campaign_detail_participant',
-                      contentType: 'user',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                />
-              ))}
-              <Button
-                borderRadius="5rem"
-                size={['2.5rem', '2.5rem']}
-                bgColor="greyDarker"
-                textColor="white"
-                onClick={() => {
-                  // console.log('open drawer')
-                  toggleDrawer()
-                }}
-              >
-                <TextIcon size={14} weight="medium">
-                  +{totalCount - maxAvatarCount + 1}
-                </TextIcon>
-              </Button>
-            </>
+            <Button
+              borderRadius="5rem"
+              size={['2.5rem', '2.5rem']}
+              bgColor="greyDarker"
+              textColor="white"
+              onClick={() => {
+                toggleDrawer()
+              }}
+            >
+              <TextIcon size={14} weight="medium">
+                +{totalCount - maxAvatarCount + 1}
+              </TextIcon>
+            </Button>
           )}
         </section>
       </section>
