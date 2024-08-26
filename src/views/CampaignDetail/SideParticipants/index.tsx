@@ -73,7 +73,7 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
   const edges = campaign.sideParticipants.edges
   const totalCount = campaign.sideParticipants.totalCount
   const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
-  const maxAvatarCount = 120
+  const maxAvatarCount = 60
   const [openDrawer, setOpenDrawer] = useState(false)
   const toggleDrawer = () => {
     setOpenDrawer((prevState) => !prevState)
