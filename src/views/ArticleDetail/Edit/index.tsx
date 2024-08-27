@@ -35,6 +35,7 @@ import {
   SelectCampaignProps,
 } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
+import { SidebarIndentProps } from '~/components/Editor/Sidebar/Indent'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
 import {
   DIRECT_IMAGE_UPLOAD,
@@ -170,6 +171,8 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   const [canComment, setCanComment] = useState<boolean>(article.canComment)
 
+  const [indented, setIndented] = useState<boolean>(article.indentFirstLine)
+
   const revisionCountLeft =
     MAX_ARTICLE_REVISION_COUNT - (article?.revisionCount || 0)
   const isOverRevisionLimit = revisionCountLeft <= 0
@@ -199,10 +202,21 @@ const BaseEdit = ({ article }: { article: Article }) => {
     canComment,
     toggleComment: setCanComment,
   }
+  const setIndentProps: SidebarIndentProps = {
+    indented,
+    toggleIndent: setIndented,
+    indentSaving: false,
+  }
   const campaignProps: Partial<SelectCampaignProps> = {
     appliedCampaign,
     selectedStage: campaign?.stage,
     editCampaign: setCampaign,
+  }
+
+  const indentProps: SidebarIndentProps = {
+    indented,
+    toggleIndent: setIndented,
+    indentSaving: false,
   }
 
   const accessProps: MoreSettingsProps = {
@@ -332,6 +346,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
         aside={
           <section className={styles.sidebar}>
             <Sidebar.Campaign {...campaignProps} />
+            <Sidebar.Indent {...indentProps} />
             <Sidebar.Tags {...tagsProps} />
             <Sidebar.Cover {...coverProps} />
             <Sidebar.Collection {...collectionProps} />
@@ -365,6 +380,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
               {...collectionProps}
               {...accessProps}
               {...setCommentProps}
+              {...setIndentProps}
               {...versionDescriptionProps}
               {...campaignProps}
               article={article}
@@ -440,6 +456,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
                 {...accessProps}
                 {...setCommentProps}
                 {...campaignProps}
+                {...indentProps}
                 onOpenSupportSetting={openSupportSettingDialog}
               />
             )}

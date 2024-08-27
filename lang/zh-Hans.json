@@ -184,6 +184,9 @@
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
   },
+  "0r2yd+": {
+    "defaultMessage": "首行缩进"
+  },
   "0tHLRn": {
     "defaultMessage": "钱包余额不足"
   },

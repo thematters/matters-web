@@ -30,8 +30,9 @@ import {
 import ArticleCustomStagingArea from '../ArticleCustomStagingArea'
 import { SelectCampaignProps } from '../SelectCampaign'
 import SetCover from '../SetCover'
+import { SidebarIndentProps } from '../Sidebar/Indent'
 import TagCustomStagingArea from '../TagCustomStagingArea'
-import MoreSettingsDialog from './MoreSettingsDialog'
+import MobileSettingsDialog from './MobileSettingsDialog'
 import styles from './styles.module.css'
 
 export type BottomBarProps = {
@@ -42,7 +43,8 @@ export type BottomBarProps = {
   SetTagsProps &
   SetResponseProps &
   MoreSettingsProps &
-  Partial<SelectCampaignProps>
+  Partial<SelectCampaignProps> &
+  SidebarIndentProps
 
 /**
  * Editor toolbar that fixed on bottom to edit cover, tags and collection,
@@ -94,6 +96,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
   selectedStage,
   editCampaign,
 
+  indented,
+  toggleIndent,
+  indentSaving,
+
   saving,
   disabled,
 }) => {
@@ -115,6 +121,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
   }
   const settingsProps: MoreSettingsProps &
     ToggleResponseProps &
+    SidebarIndentProps &
     Partial<SelectCampaignProps> = {
     circle,
     accessType,
@@ -144,6 +151,10 @@ const BottomBar: React.FC<BottomBarProps> = ({
     appliedCampaign,
     selectedStage,
     editCampaign,
+
+    indented,
+    toggleIndent,
+    indentSaving,
   }
 
   return (
@@ -253,8 +264,8 @@ const BottomBar: React.FC<BottomBarProps> = ({
               )}
             </EditorSearchSelectDialog>
 
-            {/* Campaign & Circle & License & Support Feedback & ISCN & canComment */}
-            <MoreSettingsDialog {...settingsProps}>
+            {/* Campaign, Indent, Comment, Circle, License, Support Feedback, ISCN */}
+            <MobileSettingsDialog {...settingsProps}>
               {({ openDialog }) => (
                 <button
                   aria-label={intl.formatMessage({
@@ -274,7 +285,7 @@ const BottomBar: React.FC<BottomBarProps> = ({
                   </TextIcon>
                 </button>
               )}
-            </MoreSettingsDialog>
+            </MobileSettingsDialog>
           </section>
         </section>
       </Layout.FixedMain>

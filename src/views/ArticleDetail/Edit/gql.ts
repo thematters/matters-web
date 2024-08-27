@@ -55,6 +55,7 @@ export const GET_EDIT_ARTICLE = gql`
         }
       }
       canComment
+      indentFirstLine
       license
       sensitiveByAuthor
       requestForDonation

@@ -1,3 +1,9 @@
+.indented {
+  & > p {
+    text-indent: 2em;
+  }
+}
+
 .translating {
   opacity: 0.5;
 }

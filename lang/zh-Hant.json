@@ -184,6 +184,9 @@
     "defaultMessage": "圍爐訂閱",
     "description": "src/components/Transaction/index.tsx"
   },
+  "0r2yd+": {
+    "defaultMessage": "首行縮排"
+  },
   "0tHLRn": {
     "defaultMessage": "錢包餘額不足"
   },

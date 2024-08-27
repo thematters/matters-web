@@ -184,6 +184,9 @@
     "defaultMessage": "Circle Subscription",
     "description": "src/components/Transaction/index.tsx"
   },
+  "0r2yd+": {
+    "defaultMessage": "Paragraph indent"
+  },
   "0tHLRn": {
     "defaultMessage": "Insufficient Balance"
   },

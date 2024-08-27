@@ -1,28 +1,33 @@
 import _get from 'lodash/get'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { Dialog, useDialogSwitch } from '~/components'
+import { Dialog, Switch, useDialogSwitch } from '~/components'
 
 import MoreSettings, { MoreSettingsProps } from '../../MoreSettings'
 import SelectCampaign, { SelectCampaignProps } from '../../SelectCampaign'
+import { SidebarIndentProps } from '../../Sidebar/Indent'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
 import styles from './styles.module.css'
 
-type MoreSettingsDialogProps = {
+type MobileSettingsDialogProps = {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 } & MoreSettingsProps &
   ToggleResponseProps &
+  SidebarIndentProps &
   Partial<SelectCampaignProps>
 
-const BaseMoreSettingsDialog = ({
+const BaseMobileSettingsDialog = ({
   children,
   canComment,
   toggleComment,
   appliedCampaign,
   selectedStage,
   editCampaign,
+  indented,
+  toggleIndent,
   ...props
-}: MoreSettingsDialogProps) => {
+}: MobileSettingsDialogProps) => {
+  const intl = useIntl()
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   const toggleResponseProps: ToggleResponseProps = {
@@ -56,6 +61,7 @@ const BaseMoreSettingsDialog = ({
         />
 
         <Dialog.Content noSpacing>
+          {/* campaign */}
           {appliedCampaign && editCampaign && (
             <section className={styles.campaign}>
               <h3 className={styles.title}>
@@ -72,10 +78,29 @@ const BaseMoreSettingsDialog = ({
             </section>
           )}
 
+          {/* indent */}
+          <section className={styles.indent}>
+            <h3 className={styles.title}>
+              <FormattedMessage defaultMessage="Paragraph indent" id="0r2yd+" />
+            </h3>
+
+            <Switch
+              name="indent"
+              label={intl.formatMessage({
+                defaultMessage: 'Paragraph indent',
+                id: '0r2yd+',
+              })}
+              checked={!!indented}
+              onChange={() => toggleIndent(!indented)}
+            />
+          </section>
+
+          {/* response */}
           <section className={styles.response}>
             <ToggleResponse {...toggleResponseProps} />
           </section>
 
+          {/* more settings */}
           <section className={styles.access}>
             <MoreSettings {...props} theme="bottomBar" />
           </section>
@@ -87,10 +112,10 @@ const BaseMoreSettingsDialog = ({
   )
 }
 
-const MoreSettingsDialog = (props: MoreSettingsDialogProps) => (
-  <Dialog.Lazy mounted={<BaseMoreSettingsDialog {...props} />}>
+const MobileSettingsDialog = (props: MobileSettingsDialogProps) => (
+  <Dialog.Lazy mounted={<BaseMobileSettingsDialog {...props} />}>
     {({ openDialog }) => <>{props.children({ openDialog })}</>}
   </Dialog.Lazy>
 )
 
-export default MoreSettingsDialog
+export default MobileSettingsDialog

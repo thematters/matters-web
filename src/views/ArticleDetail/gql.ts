@@ -43,6 +43,7 @@ const articlePublicFragment = gql`
       }
     }
     canComment
+    indentFirstLine
     commentCount
     comments(input: { filter: { state: active, parentComment: null } }) {
       totalCount

@@ -13,6 +13,7 @@ import {
   getSelectCampaign,
   SelectCampaignProps,
 } from '~/components/Editor/SelectCampaign'
+import { SidebarIndentProps } from '~/components/Editor/Sidebar/Indent'
 import {
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
@@ -28,6 +29,7 @@ import {
   useEditDraftPublishISCN,
   useEditDraftSensitiveByAuthor,
   useEditDraftTags,
+  useEditIndent,
   useEditSupportSetting,
 } from './hooks'
 
@@ -54,6 +56,9 @@ const EditDraftBottomBar = ({
   const { edit: toggleComment, saving: toggleCommentSaving } =
     useEditDraftCanComment()
   const canComment = draft.canComment
+
+  const { edit: toggleIndent, saving: indentSaving } = useEditIndent()
+  const indented = draft.indentFirstLine
 
   const { edit: editAccess, saving: accessSaving } = useEditDraftAccess(
     ownCircles && ownCircles[0]
@@ -93,6 +98,7 @@ const EditDraftBottomBar = ({
   }
   const accessProps: MoreSettingsProps &
     SetResponseProps &
+    SidebarIndentProps &
     Partial<SelectCampaignProps> = {
     circle: draft?.access.circle,
     accessType: draft.access.type,
@@ -114,6 +120,10 @@ const EditDraftBottomBar = ({
     canComment,
     toggleComment,
 
+    indented,
+    toggleIndent,
+    indentSaving,
+
     appliedCampaign,
     selectedStage,
     editCampaign,
@@ -134,7 +144,8 @@ const EditDraftBottomBar = ({
             tagsSaving ||
             accessSaving ||
             toggleCommentSaving ||
-            campaignSaving
+            campaignSaving ||
+            indentSaving
           }
           {...coverProps}
           {...tagsProps}
