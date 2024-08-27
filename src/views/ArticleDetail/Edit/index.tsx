@@ -346,9 +346,9 @@ const BaseEdit = ({ article }: { article: Article }) => {
         aside={
           <section className={styles.sidebar}>
             <Sidebar.Campaign {...campaignProps} />
+            <Sidebar.Cover {...coverProps} />
             <Sidebar.Indent {...indentProps} />
             <Sidebar.Tags {...tagsProps} />
-            <Sidebar.Cover {...coverProps} />
             <Sidebar.Collection {...collectionProps} />
             <Sidebar.Response
               inSidebar
