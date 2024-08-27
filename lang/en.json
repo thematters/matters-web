@@ -110,10 +110,6 @@
     "defaultMessage": "Unpin",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
-  "/pglnt": {
-    "defaultMessage": "Say something...",
-    "description": "MOMENT_FORM"
-  },
   "/pnYHM": {
     "defaultMessage": "Circle not found",
     "description": "CIRCLE_NOT_FOUND"
@@ -3161,6 +3157,10 @@
   },
   "syEQFE": {
     "defaultMessage": "Publish"
+  },
+  "t1wXVG": {
+    "defaultMessage": "Say something? Someone might listen.",
+    "description": "MOMENT_FORM"
   },
   "t2EpN/": {
     "defaultMessage": "Request on {network} network will be confirmed and synced to Matters in a bit"
