@@ -110,10 +110,6 @@
     "defaultMessage": "取消置頂",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
-  "/pglnt": {
-    "defaultMessage": "咒罵人生太短，唏噓相見恨晚",
-    "description": "MOMENT_FORM"
-  },
   "/pnYHM": {
     "defaultMessage": "圍爐不存在",
     "description": "CIRCLE_NOT_FOUND"
@@ -3161,6 +3157,10 @@
   },
   "syEQFE": {
     "defaultMessage": "發布"
+  },
+  "t1wXVG": {
+    "defaultMessage": "說說看？也許有人聽",
+    "description": "MOMENT_FORM"
   },
   "t2EpN/": {
     "defaultMessage": "持續與 {network} 網絡同步，稍後更新至 Matters"
