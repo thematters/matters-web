@@ -9,6 +9,7 @@ import {
   Placeholder,
   useEditor,
 } from '@matters/matters-editor'
+import classNames from 'classnames'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -49,7 +50,14 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   const intl = useIntl()
   const client = useApolloClient()
 
-  const { content, publishState, summary, summaryCustomized, title } = draft
+  const {
+    content,
+    publishState,
+    summary,
+    summaryCustomized,
+    title,
+    indentFirstLine,
+  } = draft
   const isPending = publishState === 'pending'
   const isPublished = publishState === 'published'
   const isReadOnly = isPending || isPublished
@@ -135,9 +143,14 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     e.preventDefault()
   })
 
+  const editorClasses = classNames({
+    [styles.articleEditor]: true,
+    [styles.indented]: indentFirstLine,
+  })
+
   return (
     <div
-      className={styles.articleEditor}
+      className={editorClasses}
       id="editor" // anchor for mention plugin
     >
       <EditorTitle defaultValue={title || ''} update={update} />

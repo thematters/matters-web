@@ -346,9 +346,9 @@ const BaseEdit = ({ article }: { article: Article }) => {
         aside={
           <section className={styles.sidebar}>
             <Sidebar.Campaign {...campaignProps} />
+            <Sidebar.Cover {...coverProps} />
             <Sidebar.Indent {...indentProps} />
             <Sidebar.Tags {...tagsProps} />
-            <Sidebar.Cover {...coverProps} />
             <Sidebar.Collection {...collectionProps} />
             <Sidebar.Response
               inSidebar
@@ -421,6 +421,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
               content: article.contents.html,
               summary: article.summary,
               summaryCustomized: article.summaryCustomized,
+              indentFirstLine: indented,
             }}
             update={async (update) => {
               if (update.title !== undefined) {
