@@ -182,7 +182,13 @@ const CommentForm: React.FC<CommentFormProps> = ({
   }, [])
 
   // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
-  useEventListener(formStorageKey, handleSubmit)
+  useEventListener(formStorageKey, () => {
+    if (isSubmitting || !isValid) {
+      return
+    }
+
+    handleSubmit()
+  })
 
   return (
     <>
