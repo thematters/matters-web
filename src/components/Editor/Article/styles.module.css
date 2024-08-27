@@ -139,13 +139,11 @@
     }
   }
 
-  &.revisedMode {
-    & figure {
-      cursor: not-allowed;
-      opacity: 0.5;
-
-      & > * {
-        pointer-events: none;
+  &.indented {
+    & :global(.ProseMirror),
+    & :global(.tiptap) {
+      & > p {
+        text-indent: 2.25rem;
       }
     }
   }
