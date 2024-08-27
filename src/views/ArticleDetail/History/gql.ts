@@ -17,6 +17,7 @@ const articleHistoryPublicFragment = gql`
     author {
       id
     }
+    indentFirstLine
     access {
       type
       circle {

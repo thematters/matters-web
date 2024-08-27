@@ -110,10 +110,6 @@
     "defaultMessage": "取消置顶",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
-  "/pglnt": {
-    "defaultMessage": "咒骂人生太短，唏嘘相见恨晚",
-    "description": "MOMENT_FORM"
-  },
   "/pnYHM": {
     "defaultMessage": "围炉不存在",
     "description": "CIRCLE_NOT_FOUND"
@@ -187,6 +183,9 @@
   "0qagOO": {
     "defaultMessage": "围炉营收",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "0r2yd+": {
+    "defaultMessage": "首行缩进"
   },
   "0tHLRn": {
     "defaultMessage": "钱包余额不足"
@@ -1193,6 +1192,9 @@
     "defaultMessage": "添加 IPFS 生成的 IPNS 指纹到阅读器，如：",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "HwaiSE": {
+    "defaultMessage": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）"
+  },
   "HxcjQl": {
     "defaultMessage": "Matters 将提供更多创作与区块链结合的服务，接入钱包后即可在未来第一时间体验新功能。",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -1944,10 +1946,6 @@
   },
   "VmYzLr": {
     "defaultMessage": "{total} 個成員"
-  },
-  "Vn5KLr": {
-    "defaultMessage": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）",
-    "description": "src/components/Editor/ToggleAccess/index.tsx"
   },
   "VqdOGQ": {
     "defaultMessage": "相关推荐",
@@ -2756,6 +2754,10 @@
   "l2eEyp": {
     "defaultMessage": "交易密码重置成功"
   },
+  "l31hCd": {
+    "defaultMessage": "效果预览",
+    "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
+  },
   "l9LpDx": {
     "defaultMessage": "{q} - Matters 搜索",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
@@ -3156,6 +3158,10 @@
   "syEQFE": {
     "defaultMessage": "发布"
   },
+  "t1wXVG": {
+    "defaultMessage": "说说看？也许有人听",
+    "description": "MOMENT_FORM"
+  },
   "t2EpN/": {
     "defaultMessage": "持续与 {network} 网络同步，稍后更新至 Matters"
   },
@@ -3547,10 +3553,6 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "zn83cE": {
-    "defaultMessage": "效果预览",
-    "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",

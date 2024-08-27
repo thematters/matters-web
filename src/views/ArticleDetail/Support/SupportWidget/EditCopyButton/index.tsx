@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
 import { analytics } from '~/common/utils'
 import { Button, Icon, TextIcon } from '~/components'
-import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
+import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
 import { ArticleDetailPublicQuery } from '~/gql/graphql'
 
 import { useEditArticleDetailSupportSetting } from '../../../Hook'

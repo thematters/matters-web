@@ -47,6 +47,7 @@ export const editMetaFragment = gql`
     sensitiveByAuthor
     iscnPublish
     canComment
+    indentFirstLine
   }
   ${ArticleDigestDropdown.fragments.article}
   ${assetFragment}
@@ -215,6 +216,16 @@ export const SET_PUBLISH_ISCN = gql`
 export const SET_CAN_COMMENT = gql`
   mutation SetDraftCanComment($id: ID!, $canComment: Boolean) {
     putDraft(input: { id: $id, canComment: $canComment }) {
+      id
+      ...EditMetaDraft
+    }
+  }
+  ${editMetaFragment}
+`
+
+export const SET_INDENT = gql`
+  mutation SetDraftIndent($id: ID!, $indented: Boolean) {
+    putDraft(input: { id: $id, indentFirstLine: $indented }) {
       id
       ...EditMetaDraft
     }

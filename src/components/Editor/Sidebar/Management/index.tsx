@@ -4,11 +4,11 @@ import { ReactComponent as IconSettings } from '@/public/static/icons/24px/setti
 import { Icon } from '~/components'
 
 import { SetPublishISCNProps } from '../..'
-import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
+import MoreSettings, { MoreSettingsProps } from '../../MoreSettings'
 import Box from '../Box'
 import styles from './styles.module.css'
 
-export type SidebarManagementProps = ToggleAccessProps & SetPublishISCNProps
+export type SidebarManagementProps = MoreSettingsProps & SetPublishISCNProps
 
 const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
   return (
@@ -19,7 +19,7 @@ const SidebarManagement: React.FC<SidebarManagementProps> = (props) => {
       }
     >
       <section className={styles.container}>
-        <ToggleAccess {...props} theme="sidebar" />
+        <MoreSettings {...props} theme="sidebar" />
       </section>
     </Box>
   )

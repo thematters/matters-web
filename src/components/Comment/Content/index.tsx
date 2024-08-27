@@ -4,7 +4,6 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { COMMENT_TYPE_TEXT, TEST_ID } from '~/common/enums'
-import { captureClicks } from '~/common/utils'
 import { Expandable, LanguageContext } from '~/components'
 import {
   CommentContentCommentPrivateFragment,
@@ -110,7 +109,6 @@ export const CommentContent = ({
               dangerouslySetInnerHTML={{
                 __html: content || '',
               }}
-              onClick={captureClicks}
               data-test-id={TEST_ID.COMMENT_CONETNT}
             />
           </Expandable>
@@ -121,7 +119,6 @@ export const CommentContent = ({
             dangerouslySetInnerHTML={{
               __html: content || '',
             }}
-            onClick={captureClicks}
             data-test-id={TEST_ID.COMMENT_CONETNT}
           />
         )}

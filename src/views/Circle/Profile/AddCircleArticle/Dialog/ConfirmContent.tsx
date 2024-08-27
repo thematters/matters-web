@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Dialog } from '~/components'
-import SelectLicense from '~/components/Editor/ToggleAccess/SelectLicense'
+import SelectLicense from '~/components/Editor/MoreSettings/SelectLicense'
 import { ArticleLicenseType } from '~/gql/graphql'
 
 interface ContentProps {

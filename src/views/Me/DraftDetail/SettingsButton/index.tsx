@@ -3,11 +3,11 @@ import { FormattedMessage } from 'react-intl'
 import { ENTITY_TYPE } from '~/common/enums'
 import { Button, TextIcon, toDigestTagPlaceholder } from '~/components'
 import {
+  MoreSettingsProps,
   SetCollectionProps,
   SetCoverProps,
   SetResponseProps,
   SetTagsProps,
-  ToggleAccessProps,
 } from '~/components/Editor'
 import {
   getSelectCampaign,
@@ -111,7 +111,7 @@ const SettingsButton = ({
     editCollection,
     collectionSaving,
   }
-  const accessProps: ToggleAccessProps = {
+  const accessProps: MoreSettingsProps = {
     circle: draft?.access.circle,
     accessType: draft.access.type,
     license: draft.license,

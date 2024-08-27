@@ -110,10 +110,6 @@
     "defaultMessage": "Unpin",
     "description": "src/components/ArticleComment/DropdownActions/PinButton.tsx"
   },
-  "/pglnt": {
-    "defaultMessage": "Say something...",
-    "description": "MOMENT_FORM"
-  },
   "/pnYHM": {
     "defaultMessage": "Circle not found",
     "description": "CIRCLE_NOT_FOUND"
@@ -187,6 +183,9 @@
   "0qagOO": {
     "defaultMessage": "Circle Subscription",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "0r2yd+": {
+    "defaultMessage": "Paragraph indent"
   },
   "0tHLRn": {
     "defaultMessage": "Insufficient Balance"
@@ -1193,6 +1192,9 @@
     "defaultMessage": "Add hash from IPFS into compatible reader such as",
     "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
+  "HwaiSE": {
+    "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)"
+  },
   "HxcjQl": {
     "defaultMessage": "Matters continues to provide services that combine creativity with blockchain technology. You will be the first to experience them after completing connecting wallet.",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -1944,10 +1946,6 @@
   },
   "VmYzLr": {
     "defaultMessage": "{total} members"
-  },
-  "Vn5KLr": {
-    "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)",
-    "description": "src/components/Editor/ToggleAccess/index.tsx"
   },
   "VqdOGQ": {
     "defaultMessage": "More",
@@ -2756,6 +2754,10 @@
   "l2eEyp": {
     "defaultMessage": "Transaction Password successfully changed."
   },
+  "l31hCd": {
+    "defaultMessage": "Preview",
+    "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
+  },
   "l9LpDx": {
     "defaultMessage": "{q} - Matters Search",
     "description": "src/views/Search/AggregateResults/Articles.tsx"
@@ -3156,6 +3158,10 @@
   "syEQFE": {
     "defaultMessage": "Publish"
   },
+  "t1wXVG": {
+    "defaultMessage": "Say something? Someone might listen.",
+    "description": "MOMENT_FORM"
+  },
   "t2EpN/": {
     "defaultMessage": "Request on {network} network will be confirmed and synced to Matters in a bit"
   },
@@ -3547,10 +3553,6 @@
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
-  },
-  "zn83cE": {
-    "defaultMessage": "Preview",
-    "description": "src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

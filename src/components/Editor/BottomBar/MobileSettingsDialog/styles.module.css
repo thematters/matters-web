@@ -1,5 +1,6 @@
 .campaign,
-.response {
+.response,
+.indent {
   padding: var(--sp16);
 }
 
@@ -10,4 +11,12 @@
 
 .access {
   padding: var(--sp16);
+}
+
+.indent {
+  @mixin flex-center-space-between;
+
+  & .title {
+    padding-bottom: 0;
+  }
 }

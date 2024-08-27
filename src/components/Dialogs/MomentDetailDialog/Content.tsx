@@ -9,7 +9,12 @@ import {
   ENABLE_SUSPEND_DISMISS_ON_ESC,
 } from '~/common/enums'
 import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
-import { makeMentionElement, sessionStorage, toPath } from '~/common/utils'
+import {
+  captureClicks,
+  makeMentionElement,
+  sessionStorage,
+  toPath,
+} from '~/common/utils'
 import {
   MomentDigestDetail,
   QueryError,
@@ -137,6 +142,7 @@ const MomentDetailDialogContent = ({
               dangerouslySetInnerHTML={{
                 __html: content || '',
               }}
+              onClick={captureClicks}
             />
           )}
           {assets && assets.length > 0 && (

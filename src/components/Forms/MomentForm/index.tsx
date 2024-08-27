@@ -249,7 +249,13 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
   }, [editor, isEditing])
 
   // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
-  useEventListener(formStorageKey, handleSubmit)
+  useEventListener(formStorageKey, () => {
+    if (isSubmitting || !isValid) {
+      return
+    }
+
+    handleSubmit()
+  })
 
   if (!isEditing) {
     return (
@@ -259,8 +265,8 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
         </div>
         <button className={styles.activeButton}>
           <FormattedMessage
-            defaultMessage="Say something..."
-            id="/pglnt"
+            defaultMessage="Say something? Someone might listen."
+            id="t1wXVG"
             description="MOMENT_FORM"
           />
         </button>

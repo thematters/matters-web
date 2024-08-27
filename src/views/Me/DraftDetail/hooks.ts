@@ -15,6 +15,7 @@ import {
   SetDraftCanCommentMutation,
   SetDraftCollectionMutation,
   SetDraftCoverMutation,
+  SetDraftIndentMutation,
   SetDraftPublishIscnMutation,
   SetDraftSensitiveByAuthorMutation,
   SetDraftTagsMutation,
@@ -28,6 +29,7 @@ import {
   SET_CAN_COMMENT,
   SET_COLLECTION,
   SET_COVER,
+  SET_INDENT,
   SET_PUBLISH_ISCN,
   SET_SENSITIVE_BY_AUTHOR,
   SET_SUPPORT_REQUEST_REPLY,
@@ -293,6 +295,31 @@ export const useEditDraftCanComment = () => {
   return {
     edit: async (canComment: boolean) =>
       addRequest(() => createDraftAndEdit(canComment)),
+    saving,
+  }
+}
+
+export const useEditIndent = () => {
+  const { addRequest, createDraft, getDraftId } = useContext(
+    DraftDetailStateContext
+  )
+  const [update, { loading: saving }] =
+    useMutation<SetDraftIndentMutation>(SET_INDENT)
+
+  const edit = (indented: boolean, newId?: string) =>
+    update({ variables: { id: newId || getDraftId(), indented } })
+
+  const createDraftAndEdit = async (indented: boolean) => {
+    if (getDraftId()) return edit(indented)
+
+    return createDraft({
+      onCreate: (newDraftId) => edit(indented, newDraftId),
+    })
+  }
+
+  return {
+    edit: async (indented: boolean) =>
+      addRequest(() => createDraftAndEdit(indented)),
     saving,
   }
 }
