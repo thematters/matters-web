@@ -259,8 +259,8 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
         </div>
         <button className={styles.activeButton}>
           <FormattedMessage
-            defaultMessage="Say something..."
-            id="/pglnt"
+            defaultMessage="Say something? Someone might listen."
+            id="t1wXVG"
             description="MOMENT_FORM"
           />
         </button>
