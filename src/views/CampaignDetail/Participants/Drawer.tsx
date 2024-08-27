@@ -26,15 +26,17 @@ export const ParticipantsDrawer: React.FC<DrawerProps> = ({
       <Drawer.Header
         title={
           <>
-            {intl.formatMessage({
-              defaultMessage: 'Writers',
-              description:
-                'src/views/CampaignDetail/SideParticipants/index.tsx',
-              id: 'xl95XN',
-            })}{' '}
-            {totalParticipants > 0 && (
-              <span className={styles.count}>{totalParticipants}</span>
-            )}
+            <span className={styles.drawerTitle}>
+              {intl.formatMessage({
+                defaultMessage: 'Writers',
+                description:
+                  'src/views/CampaignDetail/SideParticipants/index.tsx',
+                id: 'xl95XN',
+              })}{' '}
+              {totalParticipants > 0 && (
+                <span className={styles.count}>{totalParticipants}</span>
+              )}
+            </span>
           </>
         }
         closeDrawer={onClose}
