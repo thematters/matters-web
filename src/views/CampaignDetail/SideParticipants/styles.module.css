@@ -1,17 +1,22 @@
 .participants {
-  & h2 {
-    font-size: var(--text20);
-    font-weight: var(--font-medium);
-  }
+  & .header {
+    @mixin flex-center-space-between;
 
-  & .count {
-    color: var(--color-grey);
+    & h2 {
+      font-size: var(--text20);
+      font-weight: var(--font-medium);
+    }
+
+    & .count {
+      font-weight: var(--font-normal);
+      color: var(--color-grey);
+    }
   }
 }
 
 .avatars {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp14);
+  gap: var(--sp16);
   margin-top: var(--sp16);
 }

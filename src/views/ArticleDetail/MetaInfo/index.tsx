@@ -9,7 +9,6 @@ import {
   DateTime,
   DotDivider,
   Icon,
-  LanguageContext,
   TextIcon,
   UserDigest,
   useRoute,
@@ -44,14 +43,11 @@ const MetaInfo = ({
   editable,
 }: MetaInfoProps) => {
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const authorId = article.author.id
   const isAuthor = viewer.id === authorId
   const originalLanguage = article?.language ? article.language : ''
   const editPath = toPath({ page: 'articleEdit', article })
   const isExceedRevision = article.revisionCount >= MAX_ARTICLE_REVISION_COUNT
-
-  const campaign = article.campaigns[0]?.campaign
 
   const { router, isInPath } = useRoute()
   const { shortHash, ...qs } = router.query
@@ -65,36 +61,6 @@ const MetaInfo = ({
 
   return (
     <section className={styles.info}>
-      {campaign && (
-        <>
-          <Button
-            href={toPath({ page: 'campaignDetail', campaign }).href}
-            onClick={() => {
-              analytics.trackEvent('click_button', {
-                type: 'campaign_detail_entrance',
-                pageType: 'article_detail',
-                pageComponent: 'article_meta',
-              })
-            }}
-          >
-            <TextIcon size={12} color="freeWriteBlue">
-              {
-                campaign[
-                  lang === 'zh_hans'
-                    ? 'nameZhHans'
-                    : lang === 'zh_hant'
-                    ? 'nameZhHant'
-                    : 'nameEn'
-                ]
-              }
-            </TextIcon>
-          </Button>
-          <section className={styles.dot}>
-            <DotDivider />
-          </section>
-        </>
-      )}
-
       <section className={styles.author}>
         <UserDigest.Plain user={article.author} />
         <section className={styles.dot}>

@@ -6,7 +6,8 @@ export const fragments = {
   public: gql`
     fragment SideParticipantsCampaignPublic on WritingChallenge {
       id
-      sideParticipants: participants(input: { first: null }) {
+      shortHash
+      sideParticipants: participants(input: { first: 60 }) {
         totalCount
         edges {
           cursor

@@ -13,10 +13,14 @@ import {
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { GetParticipantsQuery } from '~/gql/graphql'
+import { GET_PARTICIPANTS } from '~/views/CampaignDetail/gql'
 
-import { GET_PARTICIPANTS } from './gql'
+type Props = {
+  type: 'dialog' | 'drawer'
+}
 
-const ParticipantsDialogContent = () => {
+const ParticipantsContent = ({ type }: Props) => {
+  const isDrawer = type === 'drawer'
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
@@ -62,42 +66,46 @@ const ParticipantsDialogContent = () => {
 
   const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
 
-  return (
-    <Dialog.Content noSpacing>
-      <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
-        <List hasBorder={false}>
-          {isViewerApplySucceeded && (
-            <List.Item>
+  const children = (
+    <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
+      <List hasBorder={false}>
+        {isViewerApplySucceeded && (
+          <List.Item>
+            <UserDigest.Rich
+              user={viewer}
+              spacing={[12, isDrawer ? 0 : 16]}
+              hasFollow={false}
+            />
+          </List.Item>
+        )}
+        {edges
+          .filter((e) => e.node.id !== viewer.id)
+          .map(({ node, cursor }, i) => (
+            <List.Item key={cursor}>
               <UserDigest.Rich
-                user={viewer}
-                spacing={[12, 16]}
+                user={node}
+                spacing={[12, isDrawer ? 0 : 16]}
                 hasFollow={false}
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'campaign_detail_participant',
+                    contentType: 'user',
+                    location: i,
+                    id: node.id,
+                  })
+                }
               />
             </List.Item>
-          )}
-          {edges
-            .filter((e) => e.node.id !== viewer.id)
-            .map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
-                <UserDigest.Rich
-                  user={node}
-                  spacing={[12, 16]}
-                  hasFollow={false}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'campaign_detail_participant',
-                      contentType: 'user',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                />
-              </List.Item>
-            ))}
-        </List>
-      </InfiniteScroll>
-    </Dialog.Content>
+          ))}
+      </List>
+    </InfiniteScroll>
   )
+
+  if (isDrawer) {
+    return <>{children}</>
+  }
+
+  return <Dialog.Content noSpacing>{children}</Dialog.Content>
 }
 
-export default ParticipantsDialogContent
+export default ParticipantsContent
