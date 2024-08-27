@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { captureClicks } from '~/common/utils'
 import { Button, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
@@ -28,7 +27,6 @@ const Collapsed = ({
         dangerouslySetInnerHTML={{
           __html: content || '',
         }}
-        onClick={captureClicks}
         data-test-id={TEST_ID.COMMENT_CONETNT}
       />
     )
