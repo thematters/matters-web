@@ -17,7 +17,7 @@ import ListItem from '../ListItem'
 import SelectLicense from './SelectLicense'
 import styles from './styles.module.css'
 
-export type ToggleAccessProps = {
+export type MoreSettingsProps = {
   circle?: DigestRichCirclePublicFragment | null
   accessType: ArticleAccessType
   license: ArticleLicenseType
@@ -55,7 +55,7 @@ export type ToggleAccessProps = {
   theme?: 'sidebar' | 'bottomBar'
 }
 
-const ToggleAccess: React.FC<ToggleAccessProps> = ({
+const MoreSettings: React.FC<MoreSettingsProps> = ({
   circle,
   license,
 
@@ -231,8 +231,7 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
         <p className={styles.hint}>
           <FormattedMessage
             defaultMessage="Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)"
-            id="Vn5KLr"
-            description="src/components/Editor/ToggleAccess/index.tsx"
+            id="HwaiSE"
           />
         </p>
       </section>
@@ -284,4 +283,4 @@ const ToggleAccess: React.FC<ToggleAccessProps> = ({
   )
 }
 
-export default ToggleAccess
+export default MoreSettings

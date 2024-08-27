@@ -1,8 +1,9 @@
-import SidebarCampaign from './Campaign'
+import Campaign from './Campaign'
 import Collection from './Collection'
 import Cover from './Cover'
+import Indent from './Indent'
 import Management from './Management'
-import SidebarArticleResponse from './Response'
+import Response from './Response'
 import Tags from './Tags'
 
 const Sidebar = {
@@ -10,8 +11,9 @@ const Sidebar = {
   Tags,
   Collection,
   Management,
-  Response: SidebarArticleResponse,
-  Campaign: SidebarCampaign,
+  Response,
+  Campaign,
+  Indent,
 }
 
 export default Sidebar

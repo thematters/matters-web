@@ -216,8 +216,8 @@ const SupportSettingDialogContent: React.FC<FormProps> = ({
           <TextIcon size={16} weight="medium">
             <FormattedMessage
               defaultMessage="Preview"
-              id="zn83cE"
-              description="src/components/Editor/ToggleAccess/SupportSettingDialog/Content.tsx"
+              id="l31hCd"
+              description="src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
             />
           </TextIcon>
         </h3>

@@ -4,9 +4,9 @@ import { Dialog } from '~/components'
 import { SetPublishISCNProps } from '~/components/Editor'
 
 import ListItem from '../../ListItem'
+import MoreSettings, { MoreSettingsProps } from '../../MoreSettings'
 import SelectCampaign, { SelectCampaignProps } from '../../SelectCampaign'
 import { Step } from '../../SettingsDialog'
-import ToggleAccess, { ToggleAccessProps } from '../../ToggleAccess'
 import ToggleResponse, { ToggleResponseProps } from '../../ToggleResponse'
 import styles from './styles.module.css'
 
@@ -31,7 +31,7 @@ export type SettingsListDialogProps = {
   tagsCount: number
 } & SettingsListDialogButtons &
   ToggleResponseProps &
-  ToggleAccessProps &
+  MoreSettingsProps &
   SetPublishISCNProps &
   Partial<SelectCampaignProps>
 
@@ -172,7 +172,7 @@ const SettingsList = ({
             <ToggleResponse {...responseProps} />
           </section>
 
-          <ToggleAccess {...restProps} />
+          <MoreSettings {...restProps} />
         </ul>
       </Dialog.Content>
 

@@ -1,8 +1,8 @@
 import { ENTITY_TYPE } from '~/common/enums'
 import { toDigestTagPlaceholder } from '~/components'
+import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
 import { getSelectCampaign } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
-import SupportSettingDialog from '~/components/Editor/ToggleAccess/SupportSettingDialog'
 import {
   DigestRichCirclePublicFragment,
   EditMetaDraftFragment,
@@ -18,6 +18,7 @@ import {
   useEditDraftPublishISCN,
   useEditDraftSensitiveByAuthor,
   useEditDraftTags,
+  useEditIndent,
   useEditSupportSetting,
 } from '../hooks'
 import styles from './styles.module.css'
@@ -127,6 +128,19 @@ const EditDraftResponse = ({ draft }: SidebarProps) => {
   )
 }
 
+const EditDraftIndent = ({ draft }: SidebarProps) => {
+  const { edit: toggleIndent, saving: indentSaving } = useEditIndent()
+  const indented = draft.indentFirstLine
+
+  return (
+    <Sidebar.Indent
+      indented={indented}
+      toggleIndent={toggleIndent}
+      indentSaving={indentSaving}
+    />
+  )
+}
+
 const EditDraftCampaign = ({ draft, campaigns }: SidebarProps) => {
   const { edit } = useEditDraftCampaign()
 
@@ -153,6 +167,7 @@ const EditDraftSidebar = (props: BaseSidebarProps) => {
   return (
     <section className={styles.sidebar}>
       <EditDraftCampaign {...props} disabled={disabled} />
+      <EditDraftIndent {...props} disabled={disabled} />
       <EditDraftTags {...props} disabled={disabled} />
       <EditDraftCover {...props} disabled={disabled} />
       <EditDraftCollection {...props} disabled={disabled} />
