@@ -189,7 +189,13 @@ const Edit = () => {
   })
 
   // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
-  useEventListener(formStorageKey, handleSubmit)
+  useEventListener(formStorageKey, () => {
+    if (isSubmitting || !isValid) {
+      return
+    }
+
+    handleSubmit()
+  })
 
   // FIXED: Text content does not match server-rendered HTML
   // https://nextjs.org/docs/messages/react-hydration-error
