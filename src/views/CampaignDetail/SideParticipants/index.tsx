@@ -1,6 +1,6 @@
 import _shuffle from 'lodash/shuffle'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useContext, useMemo, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
@@ -80,12 +80,42 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
     setOpenDrawer((prevState) => !prevState)
   }
 
-  if (edges && edges.length <= 0) {
+  const getFilteredEdges = () => {
+    if (!edges) {
+      return []
+    }
+
+    const withAvatars = edges.filter(
+      ({ node }) => node.avatar && node.id !== viewer.id
+    )
+    const withoutAvatars = edges.filter(
+      ({ node }) => !node.avatar && node.id !== viewer.id
+    )
+
+    const shuffledAvatars = _shuffle(withAvatars).slice(
+      0,
+      isViewerApplySucceeded ? maxAvatarCount - 2 : maxAvatarCount - 1
+    )
+    const remainingSlots = isViewerApplySucceeded
+      ? maxAvatarCount - shuffledAvatars.length - 2
+      : maxAvatarCount - shuffledAvatars.length - 1
+
+    const additionalEdges = _shuffle(withoutAvatars).slice(0, remainingSlots)
+
+    return shuffledAvatars.concat(additionalEdges)
+  }
+
+  const filteredEdges = useMemo(getFilteredEdges, [
+    edges,
+    isViewerApplySucceeded,
+  ])
+
+  if (filteredEdges.length <= 0) {
     return null
   }
 
   return (
-    <DrawerProvider>
+    <>
       <section className={styles.participants}>
         <section className={styles.header}>
           <h2>
@@ -120,14 +150,7 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
         <section className={styles.avatars}>
           {isViewerApplySucceeded && <Participant user={viewer} />}
 
-          {_shuffle(
-            edges
-              ?.slice(
-                0,
-                isViewerApplySucceeded ? maxAvatarCount - 2 : maxAvatarCount - 1
-              )
-              ?.filter((u) => u.node.id !== viewer.id)
-          ).map(({ node, cursor }, i) => (
+          {filteredEdges.map(({ node, cursor }, i) => (
             <Participant
               key={cursor}
               user={node}
@@ -158,12 +181,14 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
           )}
         </section>
       </section>
-      <DynamicParticipantsDrawer
-        isOpen={openDrawer}
-        onClose={toggleDrawer}
-        totalParticipants={totalCount}
-      />
-    </DrawerProvider>
+      <DrawerProvider>
+        <DynamicParticipantsDrawer
+          isOpen={openDrawer}
+          onClose={toggleDrawer}
+          totalParticipants={totalCount}
+        />
+      </DrawerProvider>
+    </>
   )
 }
 
