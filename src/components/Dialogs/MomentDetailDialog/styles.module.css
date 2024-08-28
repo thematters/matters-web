@@ -22,7 +22,7 @@
   @mixin hide-scrollbar;
 
   /* the combined height of the header and footer (143px) */
-  max-height: calc(var(--ivh) * 100 - 143px);
+  max-height: calc(100vh - 143px);
 
   @media (--sm-up) {
     /* the combined height of the header and footer (151px) */
