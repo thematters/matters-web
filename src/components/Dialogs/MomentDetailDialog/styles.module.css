@@ -1,13 +1,21 @@
 .container {
+  position: relative;
+
   @media (--sm-up) {
     width: 40.5rem;
+    max-height: 80vh;
+    overflow-y: auto;
   }
 }
 
 .header {
   @mixin flex-start-space-between;
 
+  position: sticky;
+  top: 0;
+  z-index: 2;
   padding: var(--sp16) var(--sp16) var(--sp12);
+  background: var(--color-white);
 
   @media (--sm-up) {
     padding: var(--sp24) var(--sp24) var(--sp12);
@@ -16,20 +24,6 @@
   & > section {
     flex-grow: 1;
   }
-}
-
-.scrollContainer {
-  @mixin hide-scrollbar;
-
-  /* the combined height of the header and footer (143px) */
-  max-height: calc(100vh - 143px);
-
-  @media (--sm-up) {
-    /* the combined height of the header and footer (151px) */
-    max-height: calc(80vh - 151px);
-  }
-
-  overflow-y: auto;
 }
 
 .contentContainer {
@@ -99,8 +93,12 @@
   @mixin border-top-grey-light;
   @mixin flex-center-start;
 
+  position: sticky;
+  bottom: 0;
+  z-index: 2;
   gap: var(--sp10);
   padding: var(--sp16) var(--sp24) var(--sp16) var(--sp14);
+  background: var(--color-white);
   border-top-color: var(--color-grey-hover);
 
   @media (--sm-down) {
