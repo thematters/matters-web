@@ -1,7 +1,7 @@
 // https://testing-library.com/docs/react-testing-library/setup#custom-render
 // https://formatjs.io/docs/guides/testing/#react-testing-library
 
-import { ApolloProvider } from '@apollo/react-common'
+import { ApolloProvider } from '@apollo/client'
 import { render, RenderOptions } from '@testing-library/react'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import ApolloClient from 'apollo-client'

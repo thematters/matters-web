@@ -1,4 +1,4 @@
-import { OperationVariables, QueryResult } from '@apollo/react-common'
+import { OperationVariables, QueryResult } from '@apollo/client'
 import {
   LazyQueryHookOptions,
   MutationHookOptions,
