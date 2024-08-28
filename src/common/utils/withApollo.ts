@@ -1,8 +1,5 @@
 import { createUploadLink } from '@matters/apollo-upload-client'
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
+import { InMemoryCache } from '@apollo/client/cache'
 import { ApolloClient } from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
@@ -28,10 +25,6 @@ import { storage } from './storage'
 import typeDefs from './types'
 
 // import { setupPersistCache } from './cache'
-
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-})
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
@@ -201,7 +194,14 @@ const agentHashLink = setContext((_, { headers }) => {
 })
 
 const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
-  const cache = new InMemoryCache({ fragmentMatcher })
+  const possibleTypes = {}
+  introspectionQueryResultData.__schema.types.forEach(supertype => {
+    if (supertype.possibleTypes) {
+      possibleTypes[supertype.name] = supertype.possibleTypes.map(subtype => subtype.name)
+    }
+  })
+
+  const cache = new InMemoryCache({ possibleTypes })
   cache.restore(initialState || {})
 
   // setupPersistCache(cache)

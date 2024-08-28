@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
-import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
+import { InMemoryCache } from '@apollo/client/cache'
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
 import { WagmiConfig } from 'wagmi'

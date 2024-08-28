@@ -3,7 +3,7 @@
 
 import { ApolloProvider } from '@apollo/client'
 import { render, RenderOptions } from '@testing-library/react'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import { InMemoryCache } from '@apollo/client/cache'
 import ApolloClient from 'apollo-client'
 import { ApolloLink } from 'apollo-link'
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider'
