@@ -1,4 +1,6 @@
 .container {
+  @mixin hide-scrollbar;
+
   position: relative;
 
   @media (--sm-up) {
