@@ -131,7 +131,7 @@ const NoticeComment = ({
   if (comment.state === 'active' && moment && moment.state === 'archived') {
     return (
       <section>
-        <NoticeContentDigest content={comment.content || ''} />
+        <NoticeContentDigest content={comment.content || ''} color="grey" />
       </section>
     )
   }
