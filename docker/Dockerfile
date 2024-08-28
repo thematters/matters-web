@@ -9,6 +9,7 @@ RUN apt-get update && apt-get -y install \
 # install node dependencies
 WORKDIR /var/app
 COPY package*.json ./
+COPY .npmrc ./
 RUN npm i
 
 CMD ["npm", "run", "start"]
