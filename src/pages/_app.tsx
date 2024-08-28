@@ -20,7 +20,7 @@ import '~/common/styles/components/stripe.css'
 import '~/common/styles/components/subscriberAnalytics.css'
 
 import { ApolloProvider } from '@apollo/client'
-import { getDataFromTree } from '@apollo/react-ssr'
+import { getDataFromTree } from '@apollo/client/react/ssr'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloClient } from 'apollo-client'
 import { NextPageContext } from 'next'
