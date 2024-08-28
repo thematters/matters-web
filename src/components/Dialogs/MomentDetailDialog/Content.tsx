@@ -152,7 +152,7 @@ const MomentDetailDialogContent = ({
         )}
       </section>
 
-      <Comments moment={moment} />
+      <Comments moment={moment} editing={editing} />
 
       <footer className={footerClassName}>
         {!editing && (
