@@ -134,25 +134,26 @@ const MomentDetailDialogContent = ({
           hasAssets={false}
         />
       </header>
-      <section className={styles.scrollContainer}>
-        <section className={styles.mainContent}>
-          {!!content && (
-            <section
-              className={styles.content}
-              dangerouslySetInnerHTML={{
-                __html: content || '',
-              }}
-              onClick={captureClicks}
-            />
-          )}
-          {assets && assets.length > 0 && (
-            <section className={styles.assets}>
-              <Assets moment={moment} />
-            </section>
-          )}
-        </section>
-        <Comments moment={moment} editing={editing} />
+
+      <section className={styles.mainContent}>
+        {!!content && (
+          <section
+            className={styles.content}
+            dangerouslySetInnerHTML={{
+              __html: content || '',
+            }}
+            onClick={captureClicks}
+          />
+        )}
+        {assets && assets.length > 0 && (
+          <section className={styles.assets}>
+            <Assets moment={moment} />
+          </section>
+        )}
       </section>
+
+      <Comments moment={moment} editing={editing} />
+
       <footer className={footerClassName}>
         {!editing && (
           <>
