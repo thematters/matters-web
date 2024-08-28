@@ -1,14 +1,16 @@
-import { OperationVariables, QueryResult } from '@apollo/client'
 import {
   LazyQueryHookOptions,
   MutationHookOptions,
   MutationTuple,
+  NoInfer,
+  OperationVariables,
   QueryHookOptions,
+  QueryResult,
   QueryTuple,
   useLazyQuery as baseUseLazyQuery,
   useMutation as baseUseMutation,
   useQuery as baseUseQuery,
-} from '@apollo/react-hooks'
+} from '@apollo/client'
 import { DocumentNode } from 'graphql'
 
 import { GQL_CONTEXT_PUBLIC_QUERY_KEY } from '~/common/enums'
@@ -23,7 +25,7 @@ type CustomMutationProps = ToastMutationErrorsOptions
 
 export const useMutation = <TData = any, TVariables = OperationVariables>(
   mutation: DocumentNode,
-  options?: MutationHookOptions<TData, TVariables>,
+  options?: MutationHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
   customMutationProps?: CustomMutationProps
 ): MutationTuple<TData, TVariables> => {
   const [mutate, result] = baseUseMutation(mutation, {

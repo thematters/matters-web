@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'

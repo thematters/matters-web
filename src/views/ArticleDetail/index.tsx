@@ -1,4 +1,4 @@
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 import { formatISO } from 'date-fns'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'

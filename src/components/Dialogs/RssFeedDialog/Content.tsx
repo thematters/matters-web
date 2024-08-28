@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import contentHash from '@ensdomains/content-hash'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
