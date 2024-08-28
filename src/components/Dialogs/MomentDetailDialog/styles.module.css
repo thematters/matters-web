@@ -82,6 +82,24 @@
     }
   }
 
+  & .eof {
+    /* moment comment form height */
+    padding-bottom: 38px;
+
+    @media (--sm-up) {
+      padding-bottom: 0;
+    }
+  }
+
+  & .eofEditing {
+    /* moment comment form height */
+    padding-bottom: 138px;
+
+    @media (--sm-up) {
+      padding-bottom: 0;
+    }
+  }
+
   & .commentNode {
     margin: var(--sp16) 0;
 

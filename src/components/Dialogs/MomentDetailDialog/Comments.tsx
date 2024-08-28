@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -41,9 +42,10 @@ const fragments = {
 
 interface CommentsProps {
   moment: MomentDigestDetailCommentsMomentFragment
+  editing: boolean
 }
 
-const Comments = ({ moment }: CommentsProps) => {
+const Comments = ({ moment, editing }: CommentsProps) => {
   const intl = useIntl()
   const { comments } = moment
   const [newestCommentId, setNewestCommentId] = useState<string | undefined>(
@@ -103,6 +105,11 @@ const Comments = ({ moment }: CommentsProps) => {
     </>
   )
 
+  const eofClasses = classNames({
+    [styles.eof]: !editing,
+    [styles.eofEditing]: editing,
+  })
+
   return (
     <section className={styles.comments} ref={ref}>
       {activeCommentsEdges.length === 0 && (
@@ -133,11 +140,13 @@ const Comments = ({ moment }: CommentsProps) => {
             loadMore={async () => {}}
             loader={<></>}
             eof={
-              <FormattedMessage
-                defaultMessage="No more comments"
-                description="src/views/ArticleDetail/Comments/LatestComments/index.tsx"
-                id="9SXN7s"
-              />
+              <section className={eofClasses}>
+                <FormattedMessage
+                  defaultMessage="No more comments"
+                  description="src/views/ArticleDetail/Comments/LatestComments/index.tsx"
+                  id="9SXN7s"
+                />
+              </section>
             }
             eofSpacingTop="base"
           >
