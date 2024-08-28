@@ -4,6 +4,8 @@
   margin-top: var(--sp8);
 
   & .left {
+    color: var(--color-grey-darker);
+
     & .count {
       width: 2.375rem;
       word-break: keep-all;
