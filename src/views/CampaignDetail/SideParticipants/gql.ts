@@ -7,7 +7,7 @@ export const fragments = {
     fragment SideParticipantsCampaignPublic on WritingChallenge {
       id
       shortHash
-      sideParticipants: participants(input: { first: 60 }) {
+      sideParticipants: participants(input: { first: null }) {
         totalCount
         edges {
           cursor
