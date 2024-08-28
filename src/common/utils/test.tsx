@@ -1,10 +1,9 @@
 // https://testing-library.com/docs/react-testing-library/setup#custom-render
 // https://formatjs.io/docs/guides/testing/#react-testing-library
 
-import { ApolloClient, ApolloProvider } from '@apollo/client'
+import { ApolloClient, ApolloProvider, ApolloLink } from '@apollo/client'
 import { render, RenderOptions } from '@testing-library/react'
 import { InMemoryCache } from '@apollo/client/cache'
-import { ApolloLink } from 'apollo-link'
 import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider'
 import React, { ReactElement, useContext } from 'react'
 import { IntlProvider } from 'react-intl'

@@ -1,7 +1,6 @@
 import { createUploadLink } from '@matters/apollo-upload-client'
 import { InMemoryCache } from '@apollo/client/cache'
-import { ApolloClient } from '@apollo/client'
-import { ApolloLink } from 'apollo-link'
+import { ApolloClient, ApolloLink } from '@apollo/client'
 import { setContext } from 'apollo-link-context'
 import { onError } from 'apollo-link-error'
 import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
