@@ -27,7 +27,12 @@ export const ArticleDigestPublished = ({
         <DateTime date={article.createdAt} color="grey" />
       </header>
       <section className={styles.content}>
-        <ArticleDigestTitle article={article} textSize={16} lineClamp={1} />
+        <ArticleDigestTitle
+          article={article}
+          textSize={16}
+          lineClamp={1}
+          textWeight="normal"
+        />
       </section>
       <FooterActions
         article={article}
