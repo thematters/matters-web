@@ -1,4 +1,4 @@
-import { ApolloError } from 'apollo-client'
+import { ApolloError } from '@apollo/client'
 import { FormattedMessage } from 'react-intl'
 
 import {

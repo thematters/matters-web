@@ -1,4 +1,4 @@
-import { NetworkStatus } from 'apollo-client'
+import { NetworkStatus } from '@apollo/client'
 import _some from 'lodash/some'
 import React, { useContext, useEffect, useRef } from 'react'
 

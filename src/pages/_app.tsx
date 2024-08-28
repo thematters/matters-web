@@ -19,10 +19,9 @@ import '~/common/styles/components/ngprogress.css'
 import '~/common/styles/components/stripe.css'
 import '~/common/styles/components/subscriberAnalytics.css'
 
-import { ApolloProvider } from '@apollo/client'
+import { ApolloClient, ApolloProvider } from '@apollo/client'
 import { InMemoryCache } from '@apollo/client/cache'
 import { getDataFromTree } from '@apollo/client/react/ssr'
-import { ApolloClient } from 'apollo-client'
 import { NextPageContext } from 'next'
 import { AppProps } from 'next/app'
 

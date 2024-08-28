@@ -1,6 +1,6 @@
 import { createUploadLink } from '@matters/apollo-upload-client'
 import { InMemoryCache } from '@apollo/client/cache'
-import { ApolloClient } from 'apollo-client'
+import { ApolloClient } from '@apollo/client'
 import { ApolloLink } from 'apollo-link'
 import { setContext } from 'apollo-link-context'
 import { onError } from 'apollo-link-error'

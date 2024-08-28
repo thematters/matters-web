@@ -1,4 +1,4 @@
-import { NetworkStatus } from 'apollo-client'
+import { NetworkStatus } from '@apollo/client'
 import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
