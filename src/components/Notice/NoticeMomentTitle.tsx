@@ -49,6 +49,7 @@ NoticeMomentTitle.fragments = {
   moment: gql`
     fragment NoticeMomentTitle on Moment {
       id
+      state
       content
       shortHash
       assets {

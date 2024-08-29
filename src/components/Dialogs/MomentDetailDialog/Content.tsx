@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import {
   ADD_MOMENT_COMMENT_MENTION,
@@ -16,6 +17,8 @@ import {
   toPath,
 } from '~/common/utils'
 import {
+  BackToHomeButton,
+  Error,
   MomentDigestDetail,
   QueryError,
   useEventListener,
@@ -24,7 +27,7 @@ import {
 import MomentCommentForm from '~/components/Forms/MomentCommentForm'
 import Assets from '~/components/MomentDigest/Assets'
 import LikeButton from '~/components/MomentDigest/FooterActions/LikeButton'
-import { MomentDetailQuery } from '~/gql/graphql'
+import { MomentDetailQuery, MomentState } from '~/gql/graphql'
 
 import Comments from './Comments'
 import { MOMENT_DETAIL } from './gql'
@@ -97,6 +100,23 @@ const MomentDetailDialogContent = ({
 
   if (data?.moment?.__typename !== 'Moment') {
     return null
+  }
+
+  if (data.moment.state === MomentState.Archived) {
+    return (
+      <section className={styles.error}>
+        <Error
+          message={
+            <FormattedMessage
+              defaultMessage="Hmm... It seems the author has hidden this work. Go see something else"
+              id="qhVSGI"
+            />
+          }
+        >
+          <BackToHomeButton />
+        </Error>
+      </section>
+    )
   }
 
   const moment = data.moment

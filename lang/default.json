@@ -440,6 +440,10 @@
     "defaultMessage": "This tag is already taken",
     "description": "DUPLICATE_TAG"
   },
+  "5RPoaZ": {
+    "defaultMessage": "liked your deleted moment",
+    "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
+  },
   "5UglrB": {
     "defaultMessage": "Successfully delivered"
   },
@@ -970,6 +974,10 @@
   },
   "E048/V": {
     "defaultMessage": "Save as Draft"
+  },
+  "E0xjVb": {
+    "defaultMessage": "commented on a deleted moment",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "E3uFyt": {
     "defaultMessage": "Moment",
@@ -3058,6 +3066,10 @@
   },
   "quRPwZ": {
     "defaultMessage": "Payment request has been sent"
+  },
+  "qw7tLA": {
+    "defaultMessage": "liked your comment on a deleted moment",
+    "description": "src/components/Notice/CommentNotice/CommentLikedNotice.tsx"
   },
   "r5pj/5": {
     "defaultMessage": "Drag"
