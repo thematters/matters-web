@@ -440,6 +440,10 @@
     "defaultMessage": "标签名称已被使用",
     "description": "DUPLICATE_TAG"
   },
+  "5RPoaZ": {
+    "defaultMessage": "喜欢你已删除的动态",
+    "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
+  },
   "5UglrB": {
     "defaultMessage": "送出成功"
   },

@@ -440,6 +440,10 @@
     "defaultMessage": "This tag is already taken",
     "description": "DUPLICATE_TAG"
   },
+  "5RPoaZ": {
+    "defaultMessage": "liked your deleted moment",
+    "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
+  },
   "5UglrB": {
     "defaultMessage": "Successfully delivered"
   },
