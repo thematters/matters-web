@@ -3067,6 +3067,10 @@
   "quRPwZ": {
     "defaultMessage": "Payment request has been sent"
   },
+  "qw7tLA": {
+    "defaultMessage": "liked your comment on a deleted moment",
+    "description": "src/components/Notice/CommentNotice/CommentLikedNotice.tsx"
+  },
   "r5pj/5": {
     "defaultMessage": "Drag"
   },

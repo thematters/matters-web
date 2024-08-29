@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { CommentNoticeFragment } from '~/gql/graphql'
+import { CommentNoticeFragment, MomentState } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeArticleTitle from '../NoticeArticleTitle'
@@ -22,6 +22,23 @@ const CommentLikedNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
     notice.comment.node.__typename === 'Moment'
       ? notice.comment.node
       : undefined
+
+  if (isMoment && commentMoment?.state === MomentState.Archived) {
+    return (
+      <NoticeDigest
+        notice={notice}
+        action={
+          <FormattedMessage
+            defaultMessage="liked your comment on a deleted moment"
+            id="qw7tLA"
+            description="src/components/Notice/CommentNotice/CommentLikedNotice.tsx"
+          />
+        }
+        content={<NoticeComment comment={notice.comment} />}
+        testId={TEST_ID.NOTICE_COMMENT_LIKED}
+      />
+    )
+  }
 
   return (
     <NoticeDigest
@@ -60,6 +77,7 @@ CommentLikedNotice.fragments = {
             ...NoticeArticleTitle
           }
           ... on Moment {
+            state
             ...NoticeMomentTitle
           }
         }

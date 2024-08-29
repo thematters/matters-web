@@ -3067,6 +3067,10 @@
   "quRPwZ": {
     "defaultMessage": "支付請求已送出"
   },
+  "qw7tLA": {
+    "defaultMessage": "喜歡你在已刪除動態中的留言",
+    "description": "src/components/Notice/CommentNotice/CommentLikedNotice.tsx"
+  },
   "r5pj/5": {
     "defaultMessage": "拖拽"
   },
