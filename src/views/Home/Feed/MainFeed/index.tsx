@@ -67,7 +67,7 @@ interface MainFeedProps {
 }
 
 const horizontalFeeds: FeedLocation = {
-  5: () => (
+  3: () => (
     <Media lessThan="lg">
       <Billboard />
     </Media>
