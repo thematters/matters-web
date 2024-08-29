@@ -440,6 +440,10 @@
     "defaultMessage": "標籤名稱已被使用",
     "description": "DUPLICATE_TAG"
   },
+  "5RPoaZ": {
+    "defaultMessage": "喜歡你已刪除的動態",
+    "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
+  },
   "5UglrB": {
     "defaultMessage": "送出成功"
   },
@@ -970,6 +974,10 @@
   },
   "E048/V": {
     "defaultMessage": "存至草稿"
+  },
+  "E0xjVb": {
+    "defaultMessage": "在已刪除動態中留言",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
   "E3uFyt": {
     "defaultMessage": "動態",
@@ -3058,6 +3066,10 @@
   },
   "quRPwZ": {
     "defaultMessage": "支付請求已送出"
+  },
+  "qw7tLA": {
+    "defaultMessage": "喜歡你在已刪除動態中的留言",
+    "description": "src/components/Notice/CommentNotice/CommentLikedNotice.tsx"
   },
   "r5pj/5": {
     "defaultMessage": "拖拽"
