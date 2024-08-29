@@ -77,7 +77,6 @@ CommentLikedNotice.fragments = {
             ...NoticeArticleTitle
           }
           ... on Moment {
-            state
             ...NoticeMomentTitle
           }
         }

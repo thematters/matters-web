@@ -54,7 +54,6 @@ MomentLikedNotice.fragments = {
       }
       moment: target {
         id
-        state
         ...NoticeMomentTitle
       }
     }
