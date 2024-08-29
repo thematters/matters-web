@@ -146,3 +146,9 @@
     }
   }
 }
+
+.error {
+  @media (--sm-up) {
+    padding: var(--sp24);
+  }
+}
