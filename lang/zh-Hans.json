@@ -975,6 +975,10 @@
   "E048/V": {
     "defaultMessage": "存至草稿"
   },
+  "E0xjVb": {
+    "defaultMessage": "在已删除动态中留言",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
+  },
   "E3uFyt": {
     "defaultMessage": "动态",
     "description": "src/components/Forms/MomentForm/index.tsx"

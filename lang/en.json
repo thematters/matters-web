@@ -975,6 +975,10 @@
   "E048/V": {
     "defaultMessage": "Save as Draft"
   },
+  "E0xjVb": {
+    "defaultMessage": "commented on a deleted moment",
+    "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
+  },
   "E3uFyt": {
     "defaultMessage": "Moment",
     "description": "src/components/Forms/MomentForm/index.tsx"
