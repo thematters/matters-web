@@ -26,7 +26,7 @@ export const BillboardExposureTracker = ({
           delay_msecs: window?.performance.now() ?? -1,
         })
         setRecorded(true)
-      }, 250)
+      }, 100)
       setTimerId(timer)
     }
   }
