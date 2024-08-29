@@ -45,11 +45,16 @@ export const MomentDigestFeed = ({
   })
 
   const goToMomentDetail = () => {
+    setReferrer()
     router.push(momentDetailPath.href)
   }
 
-  const handleClickDateTime = () => {
+  const setReferrer = () => {
     sessionStorage.set(MOMENT_DIGEST_REFERRER, true)
+  }
+
+  const handleClickDateTime = () => {
+    setReferrer()
   }
 
   const Container = ({
