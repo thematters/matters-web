@@ -59,6 +59,7 @@
     "clipboard-polyfill": "^4.0.2",
     "colorthief": "^2.4.0",
     "cross-env": "^7.0.3",
+    "crypto-hash": "^3.1.0",
     "d3-array": "^2.12.1",
     "d3-axis": "^2.1.0",
     "d3-ease": "^2.0.0",

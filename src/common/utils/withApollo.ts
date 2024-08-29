@@ -3,7 +3,7 @@ import { InMemoryCache } from '@apollo/client/cache'
 import { ApolloClient, ApolloLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
-import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
+import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
 import http from 'http'
 import https from 'https'
 import _get from 'lodash/get'
@@ -22,6 +22,7 @@ import { getIsomorphicCookie } from './cookie'
 import { resolvers } from './resolvers'
 import { storage } from './storage'
 import typeDefs from './types'
+import { sha256 } from 'crypto-hash'
 
 // import { setupPersistCache } from './cache'
 
@@ -32,6 +33,7 @@ const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
  * Links
  */
 const persistedQueryLink = createPersistedQueryLink({
+  sha256,
   useGETForHashedQueries: true,
 })
 
