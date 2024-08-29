@@ -58,9 +58,9 @@ const Authors = () => {
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
     refetch({ random })
 
-    client.writeData({
-      id: 'LastFetchRandom:local',
-      data: { feedAuthors: random },
+    lastFetchRandom && client.cache.modify({
+      id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+      fields: { feedAuthors: () => random }
     })
   }
 

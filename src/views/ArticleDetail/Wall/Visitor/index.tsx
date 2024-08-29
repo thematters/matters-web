@@ -20,9 +20,9 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
   const outerClasses = classNames({ [styles.outer]: true, [styles.show]: show })
 
   const closeDialog = () => {
-    client?.writeData({
+    client.cache.modify({
       id: 'ClientPreference:local',
-      data: { wall: false },
+      fields: { wall: () => false }
     })
   }
 

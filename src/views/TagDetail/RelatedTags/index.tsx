@@ -91,9 +91,9 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
     const random = _random(0, 49)
     refetch({ random })
 
-    client.writeData({
-      id: 'LastFetchRandom:local',
-      data: { feedAuthors: random },
+    lastFetchRandom && client.cache.modify({
+      id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+      fields: { feedAuthors: () => random }
     })
   }
 
