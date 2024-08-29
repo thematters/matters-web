@@ -15,7 +15,7 @@ export const BillboardExposureTracker = ({
   const { isIntersecting, ref } = useIntersectionObserver()
 
   const onEnter = () => {
-    // start timing 500ms after scroll into view
+    // start timing 250ms after scroll into view
     // only start timer if it has not been setup
     if (!recorded) {
       const timer = window.setTimeout(() => {
@@ -26,7 +26,7 @@ export const BillboardExposureTracker = ({
           delay_msecs: window?.performance.now() ?? -1,
         })
         setRecorded(true)
-      }, 500)
+      }, 100)
       setTimerId(timer)
     }
   }

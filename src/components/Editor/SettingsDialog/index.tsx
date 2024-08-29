@@ -3,12 +3,12 @@ import { FormattedMessage } from 'react-intl'
 
 import { Dialog, SpinnerBlock, useDialogSwitch, useStep } from '~/components'
 import {
+  MoreSettingsProps,
   SetCollectionProps,
   SetCoverProps,
   SetPublishISCNProps,
   SetTagsProps,
   SetVersionDescriptionProps,
-  ToggleAccessProps,
   ToggleResponseProps,
 } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
@@ -47,7 +47,7 @@ export type EditorSettingsDialogProps = {
 } & SetCoverProps &
   SetCollectionProps &
   SetTagsProps &
-  ToggleAccessProps &
+  MoreSettingsProps &
   ToggleResponseProps &
   SetPublishISCNProps &
   SettingsListDialogButtons &
@@ -64,7 +64,7 @@ const DynamicSetCover = dynamic(() => import('../SetCover'), {
 })
 
 const DynamicSetSupportFeedback = dynamic(
-  () => import('~/components/Editor/ToggleAccess/SupportSettingDialog/Content'),
+  () => import('~/components/Editor/MoreSettings/SupportSettingDialog/Content'),
   { loading: () => <SpinnerBlock /> }
 )
 
@@ -160,7 +160,7 @@ const BaseEditorSettingsDialog = ({
     entityType,
     coverSaving,
   }
-  const accessProps: ToggleAccessProps = {
+  const accessProps: MoreSettingsProps = {
     circle,
     editAccess,
     accessSaving,

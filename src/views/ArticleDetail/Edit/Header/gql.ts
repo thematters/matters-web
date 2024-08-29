@@ -14,6 +14,7 @@ const fragment = gql`
       type
     }
     canComment
+    indentFirstLine
     sensitiveByAuthor
     license
     requestForDonation
@@ -51,6 +52,7 @@ export const EDIT_ARTICLE = gql`
     $requestForDonation: requestForDonation_String_maxLength_140
     $replyToDonator: replyToDonator_String_maxLength_140
     $canComment: Boolean
+    $indented: Boolean
     $sensitive: Boolean
     $campaigns: [ArticleCampaignInput!]
     $isResetCampaign: Boolean! = false
@@ -72,6 +74,7 @@ export const EDIT_ARTICLE = gql`
         requestForDonation: $requestForDonation
         replyToDonator: $replyToDonator
         canComment: $canComment
+        indentFirstLine: $indented
         sensitive: $sensitive
         campaigns: $campaigns
       }
@@ -96,6 +99,7 @@ export const EDIT_ARTICLE = gql`
         requestForDonation: $requestForDonation
         replyToDonator: $replyToDonator
         canComment: $canComment
+        indentFirstLine: $indented
         sensitive: $sensitive
         campaigns: []
       }

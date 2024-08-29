@@ -7,12 +7,13 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { dom, formStorage, stripHtml, trimCommentContent } from '~/common/utils'
+import { dom, formStorage, sanitizeContent, stripHtml } from '~/common/utils'
 import {
   Button,
   SpinnerBlock,
   TextIcon,
   useCommentEditorContext,
+  useEventListener,
   useMutation,
   useRoute,
   ViewerContext,
@@ -87,18 +88,16 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
       defaultContent ||
       ''
   )
-
   const contentCount = stripHtml(content).length
-
   const isValid = contentCount > 0 && contentCount <= MAX_ARTICLE_COMMENT_LENGTH
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
-    const trimContent = trimCommentContent(content)
+    const sanitizedContent = sanitizeContent(content)
     const input = {
       id: commentId,
       comment: {
-        content: trimContent,
+        content: sanitizedContent,
         replyTo: replyToId,
         articleId,
         parentId,
@@ -107,7 +106,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
       },
     }
 
-    event.preventDefault()
+    event?.preventDefault()
     setSubmitting(true)
 
     try {
@@ -177,6 +176,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
   }
 
   const onClear = () => {
+    console.log('clear', editor)
     setContent('')
     if (editor) {
       editor.commands.setContent('')
@@ -191,6 +191,15 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
     // save draft
     formStorage.set(formStorageKey, newContent, 'local')
   }
+
+  // use event listener to handle form submit since pass handleSubmit directly will cache the old content value in the closure
+  useEventListener(formStorageKey, () => {
+    if (isSubmitting || !isValid) {
+      return
+    }
+
+    handleSubmit()
+  })
 
   return (
     <form
@@ -207,6 +216,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
         <CommentEditor
           content={content}
           update={onUpdate}
+          onSubmit={() => window.dispatchEvent(new CustomEvent(formStorageKey))}
           placeholder={placeholder}
           isFallbackEditor={isFallbackEditor}
           setEditor={(editor) => {

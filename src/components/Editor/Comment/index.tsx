@@ -13,24 +13,34 @@ import { useIntl } from 'react-intl'
 import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
 import { useCommentEditorContext } from '~/components/Context'
 
-import { makeMentionSuggestion, SmartLink } from '../Article/extensions'
+import {
+  CustomShortcuts,
+  makeMentionSuggestion,
+  SmartLink,
+} from '../Article/extensions'
 import { makeSmartLinkOptions } from '../Article/extensions/smartLink/utils'
 import styles from './styles.module.css'
 
 interface Props {
   content: string
   update: (params: { content: string }) => void
+  onSubmit: () => any
   placeholder?: string
   setEditor?: (editor: Editor | null) => void
+  onFocused?: () => void
   isFallbackEditor?: boolean
+  lockScroll?: boolean
 }
 
 const CommentEditor: React.FC<Props> = ({
   content,
   update,
+  onSubmit,
   placeholder,
   setEditor,
+  onFocused,
   isFallbackEditor,
+  lockScroll = true,
 }) => {
   const client = useApolloClient()
   const intl = useIntl()
@@ -53,12 +63,15 @@ const CommentEditor: React.FC<Props> = ({
     // can be removed if editor is only used in single page
     // instead of being used in dialog
     onFocus: () => {
-      window.dispatchEvent(new CustomEvent(BYPASS_SCROLL_LOCK))
+      lockScroll && window.dispatchEvent(new CustomEvent(BYPASS_SCROLL_LOCK))
     },
     onDestroy: () => {
-      window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
+      lockScroll && window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
     },
     extensions: [
+      CustomShortcuts.configure({
+        onModEnter: () => onSubmit(),
+      }),
       Placeholder.configure({
         placeholder,
       }),
@@ -98,6 +111,7 @@ const CommentEditor: React.FC<Props> = ({
           if (setActiveEditor) {
             setActiveEditor(editor)
           }
+          onFocused?.()
         }}
       />
     </div>

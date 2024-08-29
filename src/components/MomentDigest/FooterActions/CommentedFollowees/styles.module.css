@@ -1,0 +1,38 @@
+.container {
+  @mixin flex-center-start;
+
+  gap: var(--sp6);
+
+  & .followees {
+    @mixin flex-center-start;
+
+    & .user {
+      width: 1.25rem;
+      margin-left: calc(var(--sp6) * -1);
+
+      & :global(.avatar) {
+        border: 1px solid var(--color-white);
+        border-radius: 50%;
+      }
+    }
+
+    & .user:nth-child(1) {
+      z-index: 3;
+      margin-left: 0;
+    }
+
+    & .user:nth-child(2) {
+      z-index: 2;
+    }
+
+    & .user:nth-child(3) {
+      z-index: 1;
+    }
+  }
+
+  & .text {
+    font-size: var(--text14);
+    line-height: 1.375rem;
+    color: var(--color-grey);
+  }
+}

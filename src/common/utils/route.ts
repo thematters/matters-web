@@ -11,6 +11,10 @@ interface ArticleArgs {
   shortHash: string
 }
 
+interface MomentArgs {
+  shortHash: string
+}
+
 interface CircleArgs {
   name: string
 }
@@ -31,6 +35,10 @@ interface CampaignArgs {
   shortHash: string
 }
 
+interface CampaignStageArgs {
+  id: string
+}
+
 interface CommentArgs {
   id: string
   type: 'article' | 'circleDiscussion' | 'circleBroadcast' | 'moment' // comment type: article/discussion/broadcast
@@ -47,6 +55,16 @@ type ToPathArgs =
     }
   | { page: 'articleEdit'; article: ArticleArgs }
   | { page: 'articleHistory'; article: ArticleArgs }
+  | { page: 'momentDetailEdit' }
+  | {
+      page: 'momentDetail'
+      moment: MomentArgs
+    }
+  | {
+      page: 'momentComment'
+      moment: MomentArgs
+      comment: CommentArgs
+    }
   | {
       page:
         | 'circleDetail'
@@ -63,6 +81,7 @@ type ToPathArgs =
       comment: CommentArgs
       article?: ArticleArgs | null
       circle?: CircleArgs | null
+      moment?: MomentArgs | null
     }
   | { page: 'draftDetail'; id: string }
   | {
@@ -73,6 +92,7 @@ type ToPathArgs =
   | {
       page: 'campaignDetail'
       campaign: CampaignArgs
+      stage?: CampaignStageArgs
     }
   | {
       page: 'userProfile' | 'userCollections'
@@ -128,6 +148,24 @@ export const toPath = (
 
       break
     }
+    case 'momentDetailEdit': {
+      href = `/m/edit`
+      break
+    }
+    case 'momentDetail': {
+      const { shortHash } = args.moment
+
+      href = `/m/${shortHash}`
+
+      break
+    }
+    case 'momentComment': {
+      const { shortHash } = args.moment
+      const { id } = args.comment
+      href = `/m/${shortHash}#${id}`
+
+      break
+    }
     case 'circleDetail': {
       href = `/~${args.circle.name}`
       break
@@ -167,6 +205,13 @@ export const toPath = (
             fragment,
           }).href
           break
+        case 'moment':
+          href = toPath({
+            page: 'momentDetail',
+            moment: args.moment!,
+            fragment,
+          }).href
+          break
         case 'circleDiscussion':
         case 'circleBroadcast':
           href = toPath({
@@ -197,6 +242,11 @@ export const toPath = (
     }
     case 'campaignDetail': {
       href = `/e/${args.campaign.shortHash}`
+      if (args.stage) {
+        href = `${href}?type=${args.stage.id}`
+      } else {
+        href = `${href}?type=announcement`
+      }
       break
     }
     case 'userProfile': {

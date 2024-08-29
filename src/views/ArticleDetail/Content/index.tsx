@@ -27,10 +27,12 @@ const READ_ARTICLE = gql`
 const Content = ({
   articleId,
   content,
+  indentFirstLine,
   translating,
 }: {
   articleId: string
   content: string
+  indentFirstLine: boolean
   translating?: boolean
 }) => {
   const viewer = useContext(ViewerContext)
@@ -121,6 +123,7 @@ const Content = ({
       <div
         className={classNames({
           'u-content': true,
+          [styles.indented]: indentFirstLine,
           [styles.translating]: translating,
         })}
         dangerouslySetInnerHTML={{

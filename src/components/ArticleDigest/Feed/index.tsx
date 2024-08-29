@@ -114,7 +114,9 @@ const BaseArticleDigestFeed = ({
                 </section>
               )}
               {!excludesTimeStamp && (
-                <DateTime date={article.createdAt} color="grey" />
+                <LinkWrapper {...path}>
+                  <DateTime date={article.createdAt} color="grey" />
+                </LinkWrapper>
               )}
             </header>
           )}
@@ -151,7 +153,6 @@ const BaseArticleDigestFeed = ({
                 height={152}
                 smUpWidth={212}
                 smUpHeight={212}
-                disableAnimation={true}
                 loading={isFirstFold ? undefined : 'lazy'}
                 fetchPriority={isFirstFold ? 'high' : 'low'}
               />

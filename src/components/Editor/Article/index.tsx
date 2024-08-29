@@ -9,11 +9,12 @@ import {
   Placeholder,
   useEditor,
 } from '@matters/matters-editor'
+import classNames from 'classnames'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
 import { INPUT_DEBOUNCE, MAX_FIGURE_CAPTION_LENGTH } from '~/common/enums'
-import { validateImage } from '~/common/utils'
+import { getValidFiles } from '~/common/utils'
 import { useNativeEventListener } from '~/components/Hook'
 import { EditorDraftFragment } from '~/gql/graphql'
 
@@ -49,7 +50,14 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   const intl = useIntl()
   const client = useApolloClient()
 
-  const { content, publishState, summary, summaryCustomized, title } = draft
+  const {
+    content,
+    publishState,
+    summary,
+    summaryCustomized,
+    title,
+    indentFirstLine,
+  } = draft
   const isPending = publishState === 'pending'
   const isPublished = publishState === 'published'
   const isReadOnly = isPending || isPublished
@@ -57,17 +65,6 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   const debouncedUpdate = useDebouncedCallback((c) => {
     update(c)
   }, INPUT_DEBOUNCE)
-
-  const getValidFiles = async (files: File[]) => {
-    const _files = await Promise.all(
-      files.map(async (file) => {
-        const mime = await validateImage(file)
-        return mime ? file : null
-      })
-    )
-
-    return _files.filter((f) => f !== null) as File[]
-  }
 
   const editor = useEditor({
     editable: !isReadOnly,
@@ -146,9 +143,14 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     e.preventDefault()
   })
 
+  const editorClasses = classNames({
+    [styles.articleEditor]: true,
+    [styles.indented]: indentFirstLine,
+  })
+
   return (
     <div
-      className={styles.articleEditor}
+      className={editorClasses}
       id="editor" // anchor for mention plugin
     >
       <EditorTitle defaultValue={title || ''} update={update} />

@@ -9,6 +9,7 @@ import {
   EditorSettingsDialog,
   EditorSettingsDialogProps,
 } from '~/components/Editor/SettingsDialog'
+import { SidebarIndentProps } from '~/components/Editor/Sidebar/Indent'
 import {
   AssetFragment,
   EditArticleMutation,
@@ -48,7 +49,8 @@ type EditModeHeaderProps = {
   | 'onConfirm'
   | 'ConfirmStepContent'
   | 'children'
->
+> &
+  SidebarIndentProps // no need to show indent setting on EditorSettingsDialog
 
 const EditModeHeader = ({
   article,
@@ -91,6 +93,7 @@ const EditModeHeader = ({
   const isAccessRevised = accessType !== article.access.type
   const isLicenseRevised = license !== article.license
   const isCanCommentRevised = restProps.canComment !== article.canComment
+  const isIndentRevised = restProps.indented !== article.indentFirstLine
   const isSensitiveRevised =
     restProps.contentSensitive !== article.sensitiveByAuthor
   const isCampaignRevised =
@@ -115,6 +118,7 @@ const EditModeHeader = ({
     isAccessRevised ||
     isLicenseRevised ||
     isCanCommentRevised ||
+    isIndentRevised ||
     isSensitiveRevised ||
     isCampaignRevised ||
     restProps.iscnPublish
@@ -151,6 +155,7 @@ const EditModeHeader = ({
             ? { iscnPublish: restProps.iscnPublish }
             : {}),
           ...(isCanCommentRevised ? { canComment: restProps.canComment } : {}),
+          ...(isIndentRevised ? { indented: restProps.indented } : {}),
           ...(isSensitiveRevised
             ? { sensitive: restProps.contentSensitive }
             : {}),

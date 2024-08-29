@@ -3,8 +3,8 @@ import {
   DigestTagFragment,
 } from '~/gql/graphql'
 
+export * from './MoreSettings'
 export * from './SetCover'
-export * from './ToggleAccess'
 export * from './ToggleResponse'
 
 export type SetCollectionProps = {

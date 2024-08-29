@@ -9,6 +9,7 @@ export const fragments = {
       content
       summary
       summaryCustomized
+      indentFirstLine
     }
   `,
 }

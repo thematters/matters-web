@@ -12,10 +12,10 @@ import {
   UniversalAuthButton,
   useRoute,
   ViewerContext,
-  WriteButton,
 } from '~/components'
 
 import UnreadIcon from '../UnreadIcon'
+import { NavCreate } from './NavCreate'
 import NavListItem from './NavListItem'
 import styles from './styles.module.css'
 
@@ -27,7 +27,6 @@ const NavBar = () => {
   const isInFollow = isInPath('FOLLOW')
   const isInNotification = isInPath('ME_NOTIFICATIONS')
   const isInSearch = isInPath('SEARCH')
-  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
 
   if (!viewer.isAuthed) {
     return (
@@ -85,15 +84,7 @@ const NavBar = () => {
           active={isInFollow}
           href={PATHS.FOLLOW}
         />
-
-        {!isInDraftDetail && (
-          <li className={styles.listItem}>
-            <WriteButton
-              authed={viewer.isAuthed}
-              forbidden={viewer.isInactive}
-            />
-          </li>
-        )}
+        <NavCreate />
 
         <NavListItem
           name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}

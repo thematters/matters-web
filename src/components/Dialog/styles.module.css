@@ -7,6 +7,10 @@
   &.overlay {
     background: rgb(0 0 0 / 40%);
     will-change: opacity;
+
+    &.blurred {
+      backdrop-filter: blur(10px);
+    }
   }
 
   &.scrollable {
@@ -30,9 +34,12 @@
     right: auto;
     bottom: auto;
     left: auto;
-    width: 23.4375rem; /* 375px */
     margin-top: auto;
     margin-bottom: auto;
     transform-origin: center bottom 0;
+
+    &.fixedWidth {
+      width: 23.4375rem; /* 375px */
+    }
   }
 }

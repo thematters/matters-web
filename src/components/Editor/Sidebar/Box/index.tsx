@@ -11,6 +11,7 @@ interface BoxProps {
   subtitle?: React.ReactNode
   onClick?: () => any
   disabled?: boolean
+  rightButton?: React.ReactNode
   footerSpacing?: boolean
   borderColor?: 'freeWriteBlue'
 }
@@ -21,6 +22,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
   subtitle,
   onClick,
   disabled,
+  rightButton,
   footerSpacing = true,
   borderColor,
   children,
@@ -39,7 +41,9 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
           {title}
         </TextIcon>
 
-        {onClick && (
+        {rightButton}
+
+        {!rightButton && onClick && (
           <Button
             onClick={onClick}
             bgActiveColor="greyLighter"

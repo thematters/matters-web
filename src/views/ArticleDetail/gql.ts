@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { UserDigest } from '~/components/UserDigest'
 
 import { AuthorSidebar } from './AuthorSidebar'
+import Header from './Header'
 import MetaInfo from './MetaInfo'
 import StickyTopBanner from './StickyTopBanner'
 import { fragments as supportWidgetFragments } from './Support/SupportWidget/gql'
@@ -43,6 +44,7 @@ const articlePublicFragment = gql`
       }
     }
     canComment
+    indentFirstLine
     commentCount
     comments(input: { filter: { state: active, parentComment: null } }) {
       totalCount
@@ -63,6 +65,8 @@ const articlePublicFragment = gql`
     contents {
       html
     }
+
+    ...HeaderArticle
     ...AuthorSidebarArticle
     ...MetaInfoArticle
     ...TagListArticle
@@ -72,6 +76,7 @@ const articlePublicFragment = gql`
     ...SupportWidgetArticlePublic
     ...SupportWidgetArticlePrivate
   }
+  ${Header.fragments.article}
   ${AuthorSidebar.fragments.article}
   ${MetaInfo.fragments.article}
   ${TagList.fragments.article}

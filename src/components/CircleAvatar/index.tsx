@@ -42,6 +42,7 @@ export const CircleAvatar = (props: CircleAvatarProps) => {
         width={144}
         height={144}
         disabled={isFallback || inEditor}
+        enableAnimation
       />
     </div>
   )

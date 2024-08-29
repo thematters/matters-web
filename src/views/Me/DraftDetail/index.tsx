@@ -85,6 +85,7 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
   iscnPublish: null,
   canComment: true,
   campaigns: [],
+  indentFirstLine: false,
 }
 
 const BaseDraftDetail = () => {

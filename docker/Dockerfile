@@ -1,4 +1,4 @@
-FROM node:12.16
+FROM node:18
 
 # install os level packages
 RUN apt-get update && apt-get -y install \
@@ -9,6 +9,7 @@ RUN apt-get update && apt-get -y install \
 # install node dependencies
 WORKDIR /var/app
 COPY package*.json ./
+COPY .npmrc ./
 RUN npm i
 
 CMD ["npm", "run", "start"]

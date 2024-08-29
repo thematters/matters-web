@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { CommentMentionedYouNoticeFragment } from '~/gql/graphql'
+import { CommentMentionedYouNoticeFragment, MomentState } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeArticleTitle from '../NoticeArticleTitle'
@@ -12,6 +12,7 @@ import NoticeComment from '../NoticeComment'
 import NoticeDate from '../NoticeDate'
 import NoticeDigest from '../NoticeDigest'
 import NoticeHeadActors from '../NoticeHeadActors'
+import NoticeMomentTitle from '../NoticeMomentTitle'
 
 const CommentMentionedYouNotice = ({
   notice,
@@ -26,6 +27,8 @@ const CommentMentionedYouNotice = ({
     notice.comment?.node.__typename === 'Article' ? notice.comment.node : null
   const commentCircle =
     notice.comment?.node.__typename === 'Circle' ? notice.comment.node : null
+  const commentMoment =
+    notice.comment?.node.__typename === 'Moment' ? notice.comment.node : null
 
   const commentCircleDiscussion =
     notice.comment?.type === 'circleDiscussion' ? notice.comment.type : null
@@ -38,15 +41,32 @@ const CommentMentionedYouNotice = ({
     return null
   }
 
-  const circleCommentPath = toPath({
-    page: 'commentDetail',
-    comment: latestComment,
-    article: commentArticle,
-    circle: commentCircle,
-  })
-
   return (
     <>
+      {commentMoment && (
+        <NoticeDigest
+          notice={notice}
+          action={
+            commentMoment.state === MomentState.Active ? (
+              <FormattedMessage
+                defaultMessage="mentioned you in a comment at {commentMoment}"
+                id="AeVndq"
+                values={{
+                  commentMoment: <NoticeMomentTitle moment={commentMoment} />,
+                }}
+              />
+            ) : (
+              <FormattedMessage
+                defaultMessage="mentioned you in a deleted moment"
+                id="NUEvfQ"
+                description="src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+              />
+            )
+          }
+          content={<NoticeComment comment={notice.comment} />}
+          testId={TEST_ID.NOTICE_COMMENT_MENTIONED_YOU}
+        />
+      )}
       {commentArticle && (
         <NoticeDigest
           notice={notice}
@@ -76,7 +96,12 @@ const CommentMentionedYouNotice = ({
                 commentCircle: (
                   <NoticeCircleName
                     circle={commentCircle}
-                    path={circleCommentPath}
+                    path={toPath({
+                      page: 'commentDetail',
+                      comment: latestComment,
+                      article: commentArticle,
+                      circle: commentCircle,
+                    })}
                   />
                 ),
               }}
@@ -123,6 +148,10 @@ CommentMentionedYouNotice.fragments = {
           ... on Circle {
             ...NoticeCircleName
           }
+          ... on Moment {
+            state
+            ...NoticeMomentTitle
+          }
         }
       }
     }
@@ -132,6 +161,7 @@ CommentMentionedYouNotice.fragments = {
     ${NoticeCircleName.fragments.circle}
     ${NoticeComment.fragments.comment}
     ${NoticeDate.fragments.notice}
+    ${NoticeMomentTitle.fragments.moment}
   `,
 }
 

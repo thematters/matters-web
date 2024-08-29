@@ -1,5 +1,5 @@
 import { MockedProvider } from '@apollo/react-testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import { Meta } from '@storybook/react'
 import React from 'react'
 
 import { Tabs } from '~/components'
@@ -7,9 +7,9 @@ import { Tabs } from '~/components'
 export default {
   title: 'Components/Tabs',
   component: Tabs,
-} as ComponentMeta<typeof Tabs>
+} satisfies Meta<typeof Tabs>
 
-const Template: ComponentStory<typeof Tabs> = () => (
+export const TabsGroup = () => (
   <MockedProvider>
     <Tabs>
       <Tabs.Tab selected count={5} href="#1">
@@ -21,5 +21,3 @@ const Template: ComponentStory<typeof Tabs> = () => (
     </Tabs>
   </MockedProvider>
 )
-
-export const Default = Template.bind({})

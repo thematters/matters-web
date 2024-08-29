@@ -1,4 +1,5 @@
 export * from './article'
+export * from './notice'
 export * from './tag'
 export * from './user'
 
@@ -58,4 +59,20 @@ export const truncate = (
   return `${str.substring(0, prefixLen)}...${str.substring(
     str.length - suffixLen
   )}`
+}
+
+export function sanitizeContent(content: string) {
+  // clear empty p tag
+  let sanitizedContent = content.replace(/^(<p>\s*<\/p>)+|(<p>\s*<\/p>)+$/g, '')
+  // clear empty line and space at the beginning
+  sanitizedContent = sanitizedContent.replace(
+    /^(<p>(<br class="smart">|\s)+)/g,
+    '<p>'
+  )
+  // clear empty line and space at the end
+  sanitizedContent = sanitizedContent.replace(
+    /((<br class="smart">|\s)+<\/p>)+$/g,
+    '</p>'
+  )
+  return sanitizedContent
 }

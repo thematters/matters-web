@@ -183,6 +183,7 @@ const BaseArticleDetailHistory = ({
               articleId={article.id}
               content={content}
               translating={translating}
+              indentFirstLine={article.indentFirstLine}
             />
 
             {circle && !canReadFullContent && (

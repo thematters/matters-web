@@ -16,7 +16,7 @@ interface ResponsiveImageProps {
   disabled?: boolean
   loading?: 'eager' | 'lazy'
   anonymous?: boolean
-  disableAnimation?: boolean
+  enableAnimation?: boolean
   fetchPriority?: 'high' | 'low' | 'auto'
 }
 
@@ -29,7 +29,7 @@ const BaseResponsiveImage = ({
   disabled,
   loading,
   anonymous,
-  disableAnimation,
+  enableAnimation,
   fetchPriority,
 }: ResponsiveImageProps) => {
   const [error, setError] = useState(false)
@@ -37,7 +37,7 @@ const BaseResponsiveImage = ({
 
   // eg: https://.../images/prod/avatar/b1bea2ab-112a-4cb9-8fa1-2703113751cc.gif/public
   const isGIF = /gif(\/|$)/i.test(url)
-  if (isGIF && !disableAnimation) {
+  if (isGIF && enableAnimation) {
     // override some fetch policy for animated GIF, work around some cloudflare images GIF re-sizing problems
     loading = 'lazy'
     fetchPriority = 'low'
@@ -62,7 +62,7 @@ const BaseResponsiveImage = ({
             url,
             width: smUpWidth,
             height: smUpHeight,
-            disableAnimation,
+            enableAnimation,
           })}
         />
       )}
@@ -72,7 +72,7 @@ const BaseResponsiveImage = ({
           url,
           width,
           height,
-          disableAnimation,
+          enableAnimation,
         })}
       />
 
@@ -82,15 +82,13 @@ const BaseResponsiveImage = ({
           url,
           width,
           height,
-          disableAnimation: !loaded || disableAnimation, // use true until loaded
+          enableAnimation: !loaded || !enableAnimation, // use true until loaded
         })}
         loading={loading}
         alt=""
         crossOrigin={anonymous ? 'anonymous' : undefined}
         fetchPriority={fetchPriority}
         onLoad={() => {
-          // console.log(`img onload:`)
-          // this.srcSet = toSizedImageURL({ url, width, height, disableAnimation })
           setLoaded(true)
         }}
       />
@@ -115,7 +113,7 @@ export const ResponsiveImage = React.memo(
       prevProps.smUpWidth === props.smUpWidth &&
       prevProps.smUpHeight === props.smUpHeight &&
       prevProps.disabled === props.disabled &&
-      prevProps.disableAnimation === props.disableAnimation &&
+      prevProps.enableAnimation === props.enableAnimation &&
       prevProps.fetchPriority === props.fetchPriority
     )
   }

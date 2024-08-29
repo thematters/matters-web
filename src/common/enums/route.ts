@@ -21,8 +21,11 @@ type ROUTE_KEY =
   | 'ARTICLE_DETAIL'
   | 'ARTICLE_DETAIL_EDIT'
   | 'ARTICLE_DETAIL_HISTORY'
+  // Moment
+  | 'MOMENT_DETAIL_EDIT'
+  | 'MOMENT_DETAIL'
   // User
-  | 'USER_ARTICLES'
+  | 'USER_WORKS'
   | 'USER_COLLECTIONS'
   | 'USER_COLLECTION_DETAIL'
   // Circle
@@ -92,7 +95,7 @@ export const ROUTES: {
   { key: 'TAG_DETAIL', pathname: '/tags/[tagId]' },
 
   // User
-  { key: 'USER_ARTICLES', pathname: '/[name]' },
+  { key: 'USER_WORKS', pathname: '/[name]' },
   { key: 'USER_COLLECTIONS', pathname: '/[name]/collections' },
   {
     key: 'USER_COLLECTION_DETAIL',
@@ -103,6 +106,10 @@ export const ROUTES: {
   { key: 'ARTICLE_DETAIL', pathname: '/a/[shortHash]' },
   { key: 'ARTICLE_DETAIL_EDIT', pathname: '/a/[shortHash]/edit' },
   { key: 'ARTICLE_DETAIL_HISTORY', pathname: '/a/[shortHash]/history' },
+
+  // Moment
+  { key: 'MOMENT_DETAIL_EDIT', pathname: '/m/edit' },
+  { key: 'MOMENT_DETAIL', pathname: '/m/[shortHash]' },
 
   // Circle
   { key: 'CIRCLE_DETAIL', pathname: '/[name]' },

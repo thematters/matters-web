@@ -75,7 +75,6 @@ export const ArticleDigestCurated = ({
             url={cover || IMAGE_DEFAULT_CURATED}
             width={404}
             height={404}
-            disableAnimation={true}
           />
         </LinkWrapper>
       </section>

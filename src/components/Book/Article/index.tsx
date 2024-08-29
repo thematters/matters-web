@@ -73,7 +73,6 @@ const BookArticle: React.FC<BookArticleProps> = ({
             width={240}
             height={200}
             anonymous
-            disableAnimation={true}
           />
         </div>
       )}
