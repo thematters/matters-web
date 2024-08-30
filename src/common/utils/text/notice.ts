@@ -1,3 +1,5 @@
+import { PUNCTUATION_ASCII, PUNCTUATION_CHINESE } from '../form'
+
 /**
  * Truncates a title to a specified maximum length, while preserving tagged users.
  *
@@ -32,7 +34,13 @@ function countUnits(word: string) {
 }
 
 function trimSpacesAndPunctuations(str: string) {
-  return str.replace(/^[\s\p{P}]+|[\s\p{P}]+$/gu, '')
+  return str.replace(
+    new RegExp(
+      `^[${PUNCTUATION_CHINESE}${PUNCTUATION_ASCII}]+|[${PUNCTUATION_CHINESE}${PUNCTUATION_ASCII}]+$`,
+      'g'
+    ),
+    ''
+  )
 }
 
 export const truncateNoticeTitle = (title: string, maxLength: number = 10) => {
