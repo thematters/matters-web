@@ -62,7 +62,8 @@ const Authors = () => {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0) {
+  // hide the author list if we don't get a result from the response
+  if (!loading && (!edges || edges.length === 0)) {
     return null
   }
 
@@ -73,11 +74,11 @@ const Authors = () => {
         rightButton={<ShuffleButton onClick={shuffle} />}
       />
 
-      {loading && <SpinnerBlock />}
-
-      {!loading && (
+      {loading ? (
+        <SpinnerBlock />
+      ) : (
         <List hasBorder={false}>
-          {edges.map(({ node, cursor }, i) => (
+          {edges && edges.map(({ node }, i) => (
             <List.Item key={node.id}>
               <UserDigest.Rich
                 user={node}

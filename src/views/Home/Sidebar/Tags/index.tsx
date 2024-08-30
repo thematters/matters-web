@@ -80,7 +80,8 @@ const Tags = () => {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0) {
+  // hide the tag list if we don't get a result from the response
+  if (!loading && (!edges || edges.length <= 0)) {
     return null
   }
 
@@ -91,11 +92,11 @@ const Tags = () => {
         rightButton={<ShuffleButton onClick={shuffle} />}
       />
 
-      {loading && <SpinnerBlock />}
-
-      {!loading && (
+      {loading ? (
+        <SpinnerBlock />
+      ) : (
         <List hasBorder={false}>
-          {edges.map(({ node, cursor }, i) => (
+          {edges && edges.map(({ node }, i) => (
             <List.Item key={node.id}>
               <TagDigest.Sidebar
                 tag={node}
