@@ -1,13 +1,14 @@
 import { useQuery } from '@apollo/react-hooks'
 import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   ASSET_TYPE,
   ENTITY_TYPE,
   MAX_ARTICLE_REVISION_COUNT,
 } from '~/common/enums'
+import { sleep } from '~/common/utils'
 import {
   EmptyLayout,
   Layout,
@@ -86,6 +87,17 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   // cover
   const [assets, setAssets] = useState(article.assets || [])
+
+  useEffect(() => {
+    const updateAssets = async () => {
+      // FIXME: newly uploaded images will return 404 in a short time
+      // https://community.cloudflare.com/t/new-uploaded-images-need-about-10-min-to-display-in-my-website/121568
+      await sleep(300)
+
+      setAssets(article.assets || [])
+    }
+    updateAssets()
+  }, [article.assets])
   const [cover, setCover] = useState<AssetFragment | undefined>(
     assets.find((asset) => asset.path === article.cover)
   )
