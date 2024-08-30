@@ -92,7 +92,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
 
     lastFetchRandom && client.cache.modify({
       id: client.cache.identify(lastFetchRandom.lastFetchRandom),
-      fields: { feedAuthors: () => random }
+      fields: { feedTags: () => random }
     })
   }
 
