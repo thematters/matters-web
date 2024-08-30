@@ -24,8 +24,6 @@ import { storage } from './storage'
 import typeDefs from './types'
 import { sha256 } from 'crypto-hash'
 
-// import { setupPersistCache } from './cache'
-
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
@@ -204,8 +202,6 @@ const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
 
   const cache = new InMemoryCache({ possibleTypes })
   cache.restore(initialState || {})
-
-  // setupPersistCache(cache)
 
   const host =
     ctx?.req?.headers.host ||
