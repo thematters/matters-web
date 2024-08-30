@@ -20,7 +20,9 @@ const NoticeMomentTitle = ({
     moment,
   })
 
-  const title = truncateNoticeTitle(stripHtml(moment.content || ''))
+  const title = truncateNoticeTitle(
+    stripHtml(moment.content || '', { ensureMentionTrailingSpace: true })
+  )
   const images = moment.assets.length
     ? intl
         .formatMessage({ defaultMessage: `[image]`, id: 'W3tqQO' })
