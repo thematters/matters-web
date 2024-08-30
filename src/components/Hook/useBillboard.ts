@@ -1,10 +1,15 @@
 import { readContract } from '@wagmi/core'
 import { useEffect, useState } from 'react'
 
-import { BillboardOperatorABI, BillboardRegistryABI } from '~/common/utils'
+import { STORAGE_KEY_BILLBOARD } from '~/common/enums'
+import {
+  BillboardOperatorABI,
+  BillboardRegistryABI,
+  storage,
+} from '~/common/utils'
 
 // custom hook level enums
-enum BillboardQueryStatus {
+enum QueryStatus {
   IDLE = 'idle',
   LOADING = 'loading',
   LOADED = 'loaded',
@@ -24,22 +29,35 @@ export const useBillboard = ({
   operatorAddress,
   registryAddress,
 }: Props) => {
-  const [status, setStatus] = useState<BillboardQueryStatus>(
-    BillboardQueryStatus.IDLE
-  )
-  const [data, setData] = useState<Record<string, any>>({})
+  const [status, setStatus] = useState<QueryStatus>(QueryStatus.IDLE)
 
-  const isLoading = status === BillboardQueryStatus.LOADING
-  const isError = status === BillboardQueryStatus.ERROR
+  const data = storage.get(STORAGE_KEY_BILLBOARD) as Record<string, any>
+  const ttl = 3 * 60 * 1000
 
+  const isLoading = status === QueryStatus.LOADING
+  const isError = status === QueryStatus.ERROR
+
+  const resetData = () => {
+    storage.set(STORAGE_KEY_BILLBOARD, {
+      contentURI: '',
+      redirectURI: '',
+      expired: Date.now() + ttl,
+    })
+  }
+
+  // fetch board cotent if data is expired
   useEffect(() => {
     if (isLoading) {
       return
     }
 
+    if (data?.expired >= Date.now()) {
+      return
+    }
+
     ;(async () => {
       try {
-        setStatus(BillboardQueryStatus.LOADING)
+        setStatus(QueryStatus.LOADING)
 
         const tokenId = BigInt(id)
         const currEpoch = await readContract({
@@ -71,15 +89,20 @@ export const useBillboard = ({
         })
 
         if (bid && bid.isWon) {
-          setData({
-            ...(bid.contentURI ? { contentURI: bid.contentURI } : {}),
-            ...(bid.redirectURI ? { redirectURI: bid.redirectURI } : {}),
+          storage.set(STORAGE_KEY_BILLBOARD, {
+            contentURI: bid.contentURI,
+            redirectURI: bid.redirectURI,
+            expired: Date.now() + ttl,
           })
+        } else {
+          // if no running ad or it hasn't been cleared yet
+          resetData()
         }
 
-        setStatus(BillboardQueryStatus.LOADED)
+        setStatus(QueryStatus.LOADED)
       } catch (error) {
-        setStatus(BillboardQueryStatus.ERROR)
+        resetData()
+        setStatus(QueryStatus.ERROR)
       }
     })()
   }, [])
