@@ -7,7 +7,7 @@ import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
 import http from 'http'
 import https from 'https'
 import _get from 'lodash/get'
-import withApollo from 'next-with-apollo'
+import type { IncomingHttpHeaders } from 'http'
 
 import {
   AGENT_HASH_PREFIX,
@@ -192,7 +192,7 @@ const agentHashLink = setContext((_, { headers }) => {
   }
 })
 
-const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
+const createApolloClient = ({ headers }: { headers: IncomingHttpHeaders }) => {
   const possibleTypes = {}
   introspectionQueryResultData.__schema.types.forEach(supertype => {
     if (supertype.possibleTypes) {
@@ -201,15 +201,15 @@ const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
   })
 
   const cache = new InMemoryCache({ possibleTypes })
-  cache.restore(initialState || {})
 
-  const host =
-    ctx?.req?.headers.host ||
+  const host = headers?.host ||
     (typeof window === 'undefined' ? '' : _get(window, 'location.host'))
-  const cookie =
-    headers?.cookie || (typeof window !== 'undefined' ? document.cookie : '')
+
+  const cookie = headers?.cookie ||
+    (typeof window !== 'undefined' ? document.cookie : '')
 
   const client = new ApolloClient({
+    ssrMode: typeof window === 'undefined',
     link: ApolloLink.from([
       persistedQueryLink,
       errorLink,
@@ -225,6 +225,6 @@ const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
   })
 
   return client
-})
+}
 
-export default customWithApollo
+export default createApolloClient

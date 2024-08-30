@@ -19,26 +19,22 @@ import '~/common/styles/components/ngprogress.css'
 import '~/common/styles/components/stripe.css'
 import '~/common/styles/components/subscriberAnalytics.css'
 
-import { ApolloClient, ApolloProvider } from '@apollo/client'
-import { InMemoryCache } from '@apollo/client/cache'
-import { getDataFromTree } from '@apollo/client/react/ssr'
-import { NextPageContext } from 'next'
-import { AppProps } from 'next/app'
+import { ApolloProvider } from '@apollo/client'
+import App, { AppContext, AppInitialProps, AppProps } from 'next/app'
+import type { IncomingHttpHeaders } from 'http'
 
-import withApollo from '~/common/utils/withApollo'
+import createApolloClient from '~/common/utils/apollo'
 import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import Root from '~/components/Root'
 
-const InnerApp = ({
-  Component,
-  pageProps,
-  apollo,
-  headers,
-}: AppProps & {
-  apollo: ApolloClient<InMemoryCache>
-  headers?: any
-}) => {
+type AppOwnProps = {
+  headers: IncomingHttpHeaders
+}
+
+function MattersApp({ Component, pageProps, headers }: AppOwnProps & AppProps) {
+  const apollo = createApolloClient({ headers })
+
   return (
     <ErrorBoundary>
       <ApolloProvider client={apollo}>
@@ -51,16 +47,15 @@ const InnerApp = ({
   )
 }
 
-InnerApp.getInitialProps = async ({ ctx }: { ctx: NextPageContext }) => {
-  if (!ctx) {
-    return { headers: {} }
-  }
+MattersApp.getInitialProps = async (
+  context: AppContext
+): Promise<AppOwnProps & AppInitialProps> => {
+  const ctx = await App.getInitialProps(context)
 
   return {
-    headers: ctx?.req?.headers,
+    ...ctx,
+    headers: context.ctx.req?.headers ?? {}
   }
 }
-
-const MattersApp = withApollo(InnerApp as any, { getDataFromTree })
 
 export default MattersApp
