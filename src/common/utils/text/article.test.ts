@@ -19,15 +19,26 @@ describe('utils/text/article/stripHtml', () => {
 
     expect(
       stripHtml(
+        '<p>Hello, <a class="mention" href="/@world" data-id="VXNlcjo0NDk1" data-user-name="world" data-display-name="world+16我" rel="noopener noreferrer nofollow"><span>@world+16我</span></a>好</p>',
+        {
+          ensureMentionTrailingSpace: true,
+        }
+      )
+    ).toBe('Hello, @world+16我 好')
+
+    expect(
+      stripHtml(
         '<p>Hello, <strong>world</strong>!</p><p>Hello, <strong>world</strong>!</p><blockquote>Hello, <br>world!</blockquote>'
       )
     ).toBe('Hello, world!\nHello, world!\nHello, \nworld!')
   })
 
   it('should remove HTML tags and custom replacement', () => {
-    expect(stripHtml('<p>Hello, <strong>world</strong>!</p>', ' ')).toBe(
-      'Hello,  world !'
-    )
+    expect(
+      stripHtml('<p>Hello, <strong>world</strong>!</p>', {
+        tagReplacement: ' ',
+      })
+    ).toBe('Hello,  world !')
   })
 })
 

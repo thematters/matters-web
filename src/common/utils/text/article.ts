@@ -8,26 +8,49 @@ import { toSizedImageURL } from '../url'
  *
  * @see {@url https://github.com/thematters/ipns-site-generator/blob/main/src/utils/index.ts}
  */
-export const stripHtml = (
-  html: string,
-  tagReplacement = '',
-  lineReplacement = '\n'
-) => {
+type StripHTMLOptions = {
+  tagReplacement?: string
+  lineReplacement?: string
+  ensureMentionTrailingSpace?: boolean
+}
+
+export const stripHtml = (html: string, options?: StripHTMLOptions) => {
+  options = {
+    tagReplacement: '',
+    lineReplacement: '\n',
+    ensureMentionTrailingSpace: false,
+    ...options,
+  }
+
+  const { tagReplacement, lineReplacement, ensureMentionTrailingSpace } =
+    options
+
   html = String(html) || ''
 
   html = html.replace(/\&nbsp\;/g, ' ')
 
   // Replace block-level elements with newlines
-  html = html.replace(/<(\/?p|\/?blockquote|br\/?)>/gi, lineReplacement)
+  html = html.replace(/<(\/?p|\/?blockquote|br\/?)>/gi, lineReplacement!)
+
+  // Handle @user mentions and appending a space
+  if (ensureMentionTrailingSpace) {
+    html = html.replace(
+      /<a\s+[^>]*class="mention"[^>]*>(.*?)<\/a>(.{1})/gi,
+      (_, p1, p2) => {
+        return `${p1}${p2 === ' ' ? ' ' : ` ${p2}`}`
+      }
+    )
+  }
 
   // Remove remaining HTML tags
-  let plainText = html.replace(/<\/?[^>]+(>|$)/g, tagReplacement)
+  let plainText = html.replace(/<\/?[^>]+(>|$)/g, tagReplacement!)
 
   // Normalize multiple newlines and trim the result
   plainText = plainText.replace(/\n\s*\n/g, '\n').trim()
 
   return plainText
 }
+
 /**
  * Return beginning of text in html as summary, split on sentence break within buffer range.
  * @param html - html string to extract summary
@@ -36,7 +59,9 @@ export const stripHtml = (
  */
 export const makeSummary = (html: string, length = 140, buffer = 20) => {
   // split on sentence breaks
-  const sections = stripHtml(html, '', ' ')
+  const sections = stripHtml(html, {
+    lineReplacement: ' ',
+  })
     .replace(/&[^;]+;/g, ' ') // remove html entities
     .replace(/([?!。？！]|(\.\s))\s*/g, '$1|') // split on sentence breaks
     .split('|')
