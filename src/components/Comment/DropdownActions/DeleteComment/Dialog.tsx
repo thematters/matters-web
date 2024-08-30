@@ -21,6 +21,7 @@ const DELETE_COMMENT = gql`
       id
       state
       node {
+        id
         ... on Moment {
           id
           commentCount
@@ -63,7 +64,10 @@ const DeleteCommentDialog = ({
                 commentCount: node.commentCount - 1,
                 __typename: 'Moment',
               }
-            : {},
+            : {
+                id: node?.id || '',
+                __typename: 'Article',
+              },
         __typename: 'Comment',
       },
     },
