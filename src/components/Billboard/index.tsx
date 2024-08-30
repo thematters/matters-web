@@ -54,7 +54,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
                 })
               }
             >
-              <img src={data.contentURI} alt="ad" />
+              <img src={data.contentURI} alt="ad" loading="lazy" />
             </a>
 
             <button
