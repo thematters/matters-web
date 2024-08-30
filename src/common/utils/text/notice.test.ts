@@ -6,13 +6,13 @@ const CHINESE_ONLY = '这是一个标题这是一个标题这是一个标题这�
 const CHINESE_WITH_NUMBERS_AND_PUNCTUATION =
   '看起來 10 拍，快樂喜歡如其實也是我於有我的部分'
 const ENGLISH_ONLY =
-  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  'Lorem gustaría dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 const ENGLISH_WITH_NUMBERS_AND_PUNCTUATION =
-  'Lorem ipsum 10 dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  'Lorem gustaría 10 dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 const MIXED =
-  '看起來 10 拍，consectetur Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  '看起來 10 拍，consectetur Lorem gustaría dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 const MENTIONS =
-  '看起來 10 拍 @用戶 @user @user+1 Lorem ipsum dolor，快樂喜歡如其實也是我於有我的部分'
+  '看起來 10 拍 @用戶 @user @user+1 Lorem gustaría dolor，快樂喜歡如其實也是我於有我的部分'
 
 describe.concurrent('utils/text/collection/truncateNoticeTitle', () => {
   it('should return the title for the default length of 10 words', () => {
@@ -21,16 +21,16 @@ describe.concurrent('utils/text/collection/truncateNoticeTitle', () => {
       '看起來 10 拍，快樂喜歡如...'
     )
     expect(truncateNoticeTitle(ENGLISH_ONLY)).toEqual(
-      'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do...'
+      'Lorem gustaría dolor sit amet, consectetur adipiscing elit, sed do...'
     )
     expect(truncateNoticeTitle(ENGLISH_WITH_NUMBERS_AND_PUNCTUATION)).toEqual(
-      'Lorem ipsum 10 dolor sit amet, consectetur adipiscing elit, sed...'
+      'Lorem gustaría 10 dolor sit amet, consectetur adipiscing elit, sed...'
     )
     expect(truncateNoticeTitle(MIXED)).toEqual(
-      '看起來 10 拍，consectetur Lorem ipsum dolor sit...'
+      '看起來 10 拍，consectetur Lorem gustaría dolor sit...'
     )
     expect(truncateNoticeTitle(MENTIONS)).toEqual(
-      '看起來 10 拍 @用戶 @user @user+1 Lorem ipsum...'
+      '看起來 10 拍 @用戶 @user @user+1 Lorem gustaría...'
     )
   })
 
@@ -47,11 +47,11 @@ describe.concurrent('utils/text/collection/truncateNoticeTitle', () => {
       truncateNoticeTitle(CHINESE_WITH_NUMBERS_AND_PUNCTUATION, maxLength)
     ).toEqual('看起來 10 拍，快...')
     expect(truncateNoticeTitle(ENGLISH_ONLY, maxLength)).toEqual(
-      'Lorem ipsum dolor sit amet, consectetur...'
+      'Lorem gustaría dolor sit amet, consectetur...'
     )
     expect(
       truncateNoticeTitle(ENGLISH_WITH_NUMBERS_AND_PUNCTUATION, maxLength)
-    ).toEqual('Lorem ipsum 10 dolor sit amet...')
+    ).toEqual('Lorem gustaría 10 dolor sit amet...')
     expect(truncateNoticeTitle(MIXED, maxLength)).toEqual(
       '看起來 10 拍，consectetur...'
     )
