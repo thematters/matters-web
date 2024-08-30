@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import { MomentNewCommentNoticeFragment } from '~/gql/graphql'
+import { MomentNewCommentNoticeFragment, MomentState } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeComment from '../NoticeComment'
@@ -24,6 +24,23 @@ const MomentNewCommentNotice = ({
     notice.comment?.node.__typename === 'Moment'
       ? notice.comment.node
       : undefined
+
+  if (commentMoment?.state === MomentState.Archived) {
+    return (
+      <NoticeDigest
+        notice={notice}
+        action={
+          <FormattedMessage
+            defaultMessage="commented on a deleted moment"
+            description="src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
+            id="E0xjVb"
+          />
+        }
+        content={<NoticeComment comment={notice.comment} />}
+        testId={TEST_ID.NOTICE_MOMENT_NEW_COMMENT}
+      />
+    )
+  }
 
   return (
     <NoticeDigest
