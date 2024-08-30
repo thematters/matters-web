@@ -62,7 +62,13 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
       aria-atomic="true"
     >
       <section className={styles.image}>
-        <Icon icon={IconIllustrationEmpty} size={240} />
+        <Icon
+          icon={IconIllustrationEmpty}
+          style={{
+            width: '15rem',
+            height: '15rem',
+          }}
+        />
       </section>
 
       <Alert type="assertive">
