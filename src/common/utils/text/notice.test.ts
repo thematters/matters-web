@@ -12,7 +12,7 @@ const ENGLISH_WITH_NUMBERS_AND_PUNCTUATION =
 const MIXED =
   '看起來 10 拍，consectetur Lorem ipsum dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
 const MENTIONS =
-  '看起來 10 拍 @用戶 @user Lorem ipsum dolor，快樂喜歡如其實也是我於有我的部分'
+  '看起來 10 拍 @用戶 @user @user+1 Lorem ipsum dolor，快樂喜歡如其實也是我於有我的部分'
 
 describe.concurrent('utils/text/collection/truncateNoticeTitle', () => {
   it('should return the title for the default length of 10 words', () => {
@@ -30,7 +30,7 @@ describe.concurrent('utils/text/collection/truncateNoticeTitle', () => {
       '看起來 10 拍，consectetur Lorem ipsum dolor sit...'
     )
     expect(truncateNoticeTitle(MENTIONS)).toEqual(
-      '看起來 10 拍 @用戶 @user Lorem ipsum dolor...'
+      '看起來 10 拍 @用戶 @user @user+1 Lorem ipsum...'
     )
   })
 
@@ -40,6 +40,9 @@ describe.concurrent('utils/text/collection/truncateNoticeTitle', () => {
     expect(truncateNoticeTitle(CHINESE_ONLY, maxLength)).toEqual(
       '这是一个标题...'
     )
+    expect(
+      truncateNoticeTitle(CHINESE_ONLY.slice(0, maxLength), maxLength)
+    ).toEqual('这是一个标题')
     expect(
       truncateNoticeTitle(CHINESE_WITH_NUMBERS_AND_PUNCTUATION, maxLength)
     ).toEqual('看起來 10 拍，快...')
