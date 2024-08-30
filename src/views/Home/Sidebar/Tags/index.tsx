@@ -54,11 +54,10 @@ const Tags = () => {
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags // last Random
   const perPage = 4
   const randomMaxSize = 50
-  const { data, loading, error, refetch } =
+  const { data, loading, error } =
     usePublicQuery<SidebarTagsPublicQuery>(
       SIDEBAR_TAGS,
       {
-        notifyOnNetworkStatusChange: true,
         variables: { random: lastRandom || 0, first: perPage },
       },
       { publicQuery: !viewer.isAuthed }
@@ -70,7 +69,6 @@ const Tags = () => {
       (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / perPage
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
-    refetch({ random })
 
     lastFetchRandom && client.cache.modify({
       id: client.cache.identify(lastFetchRandom.lastFetchRandom),

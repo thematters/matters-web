@@ -33,10 +33,9 @@ const Authors = () => {
    */
   const perPage = 4
   const randomMaxSize = 50
-  const { data, loading, error, refetch } = usePublicQuery<SidebarAuthorsQuery>(
+  const { data, loading, error } = usePublicQuery<SidebarAuthorsQuery>(
     SIDEBAR_AUTHORS,
     {
-      notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0, first: perPage },
     },
     { publicQuery: !viewer.isAuthed }
@@ -49,7 +48,6 @@ const Authors = () => {
         perPage
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
-    refetch({ random })
 
     lastFetchRandom && client.cache.modify({
       id: client.cache.identify(lastFetchRandom.lastFetchRandom),

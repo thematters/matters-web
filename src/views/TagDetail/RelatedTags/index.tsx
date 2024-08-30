@@ -65,7 +65,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
 
   const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
 
-  const { data, refetch } = usePublicQuery<TagDetailRecommendedQuery>(
+  const { data } = usePublicQuery<TagDetailRecommendedQuery>(
     RELATED_TAGS,
     {
       variables: { id: tagId, random: lastRandom || 0 },
@@ -89,7 +89,6 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
 
   const shuffle = () => {
     const random = _random(0, 49)
-    refetch({ random })
 
     lastFetchRandom && client.cache.modify({
       id: client.cache.identify(lastFetchRandom.lastFetchRandom),
