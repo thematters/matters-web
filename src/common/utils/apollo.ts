@@ -223,8 +223,14 @@ export const createApolloClient = (initialState?: {}, headers?: IncomingHttpHead
     }
   })
 
-  const cache = new InMemoryCache({ possibleTypes })
-    .restore(initialState || {})
+  const cache = new InMemoryCache({
+    possibleTypes,
+    typePolicies: {
+      Official: { merge: true },
+      Recommendation: { merge: true },
+      UserInfo: { merge: true }
+    }
+  }).restore(initialState || {})
 
   const host = headers?.host || (isClient ? _get(window, 'location.host') : '')
   const cookie = headers?.cookie || (isClient ? document.cookie : '')
