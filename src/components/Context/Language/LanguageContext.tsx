@@ -11,6 +11,7 @@ import {
 } from '~/common/utils'
 import { toast, useMutation, useRoute, ViewerContext } from '~/components'
 import { UpdateLanguageMutation, UserLanguage } from '~/gql/graphql'
+import type { IncomingHttpHeaders } from 'http'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
   mutation UpdateLanguage($input: UpdateUserInfoInput!) {
@@ -37,7 +38,7 @@ export const LanguageProvider = ({
   headers,
   children,
 }: {
-  headers?: any
+  headers?: IncomingHttpHeaders,
   children: React.ReactNode
 }) => {
   const [updateLanguage] = useMutation<UpdateLanguageMutation>(
@@ -52,7 +53,7 @@ export const LanguageProvider = ({
   const { routerLang } = useRoute()
 
   // read from cookie (both server-side and client-side)
-  let cookieLang = getIsomorphicCookie(headers?.cookie, COOKIE_LANGUAGE)
+  let cookieLang = getIsomorphicCookie(headers?.cookie || '', COOKIE_LANGUAGE)
   if (typeof window !== 'undefined') {
     const cookieLanguage = getCookie(COOKIE_LANGUAGE)
     if (cookieLanguage) {
@@ -65,7 +66,7 @@ export const LanguageProvider = ({
   if (typeof window !== 'undefined') {
     fallbackLang = toUserLanguage(navigator.language)
   } else {
-    const acceptLanguage = (headers['accept-language'] || '')
+    const acceptLanguage = (headers && headers['accept-language'] || '')
       .split(',')
       .map((l: string) => l.trim())[0]
     fallbackLang = toUserLanguage(acceptLanguage)

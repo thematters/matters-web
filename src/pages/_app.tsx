@@ -26,11 +26,12 @@ import { getApollo } from '~/common/utils/apollo'
 import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import Root from '~/components/Root'
+import type { IncomingHttpHeaders } from 'http'
 
 type AppOwnProps = {
   apolloClient?: ApolloClient<NormalizedCacheObject>,
   apolloState?: {},
-  headers?: {}
+  headers?: IncomingHttpHeaders
 }
 
 function MattersApp({

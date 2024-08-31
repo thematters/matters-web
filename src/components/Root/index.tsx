@@ -3,6 +3,7 @@ import { InMemoryCache } from '@apollo/client/cache'
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
 import { WagmiConfig } from 'wagmi'
+import type { IncomingHttpHeaders } from 'http'
 
 import {
   REFERRAL_QUERY_REFERRAL_KEY,
@@ -66,7 +67,7 @@ const Root = ({
   children,
 }: {
   client: ApolloClient<InMemoryCache>
-  headers?: any
+  headers?: IncomingHttpHeaders,
   children: React.ReactNode
 }) => {
   const { getQuery, isInPath } = useRoute()
