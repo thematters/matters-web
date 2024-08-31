@@ -12,6 +12,7 @@ import {
   PageHeader,
   ShuffleButton,
   Slides,
+  SpinnerBlock,
   TagDigest,
   usePublicQuery,
   ViewAllButton,
@@ -65,7 +66,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
 
   const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
 
-  const { data } = usePublicQuery<TagDetailRecommendedQuery>(
+  const { data, loading } = usePublicQuery<TagDetailRecommendedQuery>(
     RELATED_TAGS,
     {
       variables: { id: tagId, random: lastRandom || 0 },
@@ -83,7 +84,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
       id,
     })
 
-  if (!edges || edges.length <= 0) {
+  if (!loading && (!edges || edges.length === 0)) {
     return null
   }
 
@@ -143,16 +144,21 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   return (
     <section className={relatedTagsClasses}>
       <RelatedTagsHeader hasViewAll hasShuffle onShuffle={shuffle} />
-      <List hasBorder={false}>
-        {edges?.map(({ node, cursor }, i) => (
-          <List.Item key={node.id}>
-            <TagDigest.Sidebar
-              tag={node}
-              onClick={() => trackRelatedTags(i, node.id)}
-            />
-          </List.Item>
-        ))}
-      </List>
+
+      {loading ? (
+        <SpinnerBlock />
+      ) : (
+        <List hasBorder={false}>
+          {edges && edges.map(({ node }, i) => (
+            <List.Item key={node.id}>
+              <TagDigest.Sidebar
+                tag={node}
+                onClick={() => trackRelatedTags(i, node.id)}
+              />
+            </List.Item>
+          ))}
+        </List>
+      )}
     </section>
   )
 }
