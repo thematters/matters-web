@@ -20,7 +20,7 @@ export const makeMentionSuggestion = ({
   items: async ({ query }: { query: string }) => {
     const { data } = await client.query<SearchUsersQuery>({
       query: SEARCH_USERS,
-      variables: { search: `@${query}`, exclude: 'blocked' },
+      variables: { search: `@${query}`},
     })
     const mentionUsers = (data?.search.edges || []).map(({ node }: any) => node)
 
