@@ -19,21 +19,28 @@ import '~/common/styles/components/ngprogress.css'
 import '~/common/styles/components/stripe.css'
 import '~/common/styles/components/subscriberAnalytics.css'
 
-import { ApolloProvider } from '@apollo/client'
-import App, { AppContext, AppInitialProps, AppProps } from 'next/app'
-import type { IncomingHttpHeaders } from 'http'
+import { ApolloClient, ApolloProvider, NormalizedCacheObject } from '@apollo/client'
+import { AppContext, AppInitialProps, AppProps } from 'next/app'
 
-import createApolloClient from '~/common/utils/apollo'
+import { getApollo } from '~/common/utils/apollo'
 import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import Root from '~/components/Root'
 
 type AppOwnProps = {
-  headers: IncomingHttpHeaders
+  apolloClient?: ApolloClient<NormalizedCacheObject>,
+  apolloState?: {},
+  headers?: {}
 }
 
-function MattersApp({ Component, pageProps, headers }: AppOwnProps & AppProps) {
-  const apollo = createApolloClient({ headers })
+function MattersApp({
+  Component,
+  pageProps,
+  apolloClient,
+  apolloState,
+  headers
+}: AppOwnProps & AppProps) {
+  const apollo = apolloClient ?? getApollo(apolloState, headers)
 
   return (
     <ErrorBoundary>
@@ -50,11 +57,47 @@ function MattersApp({ Component, pageProps, headers }: AppOwnProps & AppProps) {
 MattersApp.getInitialProps = async (
   context: AppContext
 ): Promise<AppOwnProps & AppInitialProps> => {
-  const ctx = await App.getInitialProps(context)
+  const { AppTree, Component, ctx } = context
+  const headers = ctx.req?.headers || {}
+
+  const apolloClient = (ctx.apolloClient = getApollo({}, headers))
+
+  let pageProps = {}
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx)
+  }
+
+  if (typeof window === 'undefined') {
+    if (ctx.res && ctx.res.writableEnded) {
+      return { pageProps }
+    }
+
+    const { getDataFromTree } = await import('@apollo/client/react/ssr')
+
+    try {
+      await getDataFromTree(
+        <AppTree
+          Component={Component}
+          pageProps={pageProps}
+          apolloClient={apolloClient}
+        />,
+        apolloClient.cache.extract()
+      )
+    } catch (error) {
+      console.error('Error while runing `getDataFromTree`', error)
+    }
+  }
+
+  const apolloState = apolloClient.cache.extract()
+
+  // @ts-ignore
+  apolloClient.toJSON = () => null
 
   return {
-    ...ctx,
-    headers: context.ctx.req?.headers ?? {}
+    pageProps,
+    apolloClient,
+    apolloState,
+    headers
   }
 }
 

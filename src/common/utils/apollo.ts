@@ -1,4 +1,4 @@
-import { InMemoryCache } from '@apollo/client/cache'
+import { InMemoryCache, NormalizedCacheObject } from '@apollo/client/cache'
 import { ApolloClient, ApolloLink } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
@@ -195,7 +195,27 @@ const agentHashLink = setContext((_, { headers }) => {
   }
 })
 
-const createApolloClient = ({ headers }: { headers: IncomingHttpHeaders }) => {
+/**
+ * When the application runs on the client side, we need to make sure that
+ * the Apollo client is a singleton to prevent it from reinitializing
+ * between pages.
+ */
+let globalApolloClient: ApolloClient<NormalizedCacheObject>
+
+export const getApollo = (initialState?: {}, headers?: {}) => {
+  // Ensure you create a new client for each server-side request to prevent
+  // data sharing between connections.
+  if (isServer) {
+    return createApolloClient(initialState, headers)
+  }
+
+  if (!globalApolloClient) {
+    globalApolloClient = createApolloClient(initialState, headers)
+  }
+  return globalApolloClient
+}
+
+export const createApolloClient = (initialState?: {}, headers?: IncomingHttpHeaders) => {
   const possibleTypes = {}
   introspectionQueryResultData.__schema.types.forEach(supertype => {
     if (supertype.possibleTypes) {
@@ -204,6 +224,7 @@ const createApolloClient = ({ headers }: { headers: IncomingHttpHeaders }) => {
   })
 
   const cache = new InMemoryCache({ possibleTypes })
+    .restore(initialState || {})
 
   const host = headers?.host || (isClient ? _get(window, 'location.host') : '')
   const cookie = headers?.cookie || (isClient ? document.cookie : '')
@@ -226,5 +247,3 @@ const createApolloClient = ({ headers }: { headers: IncomingHttpHeaders }) => {
 
   return client
 }
-
-export default createApolloClient
