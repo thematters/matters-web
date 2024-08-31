@@ -27,6 +27,9 @@ import { sha256 } from 'crypto-hash'
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
+const isServer = typeof window === 'undefined'
+const isClient = !isServer
+
 /**
  * Links
  */
@@ -177,7 +180,7 @@ const sentryLink = setContext((_, { headers }) => {
 const agentHashLink = setContext((_, { headers }) => {
   let hash: string | null = null
 
-  if (typeof window !== 'undefined') {
+  if (isClient) {
     const stored = storage.get<string>(STORAGE_KEY_AGENT_HASH)
     if (stored && stored.startsWith(AGENT_HASH_PREFIX)) {
       hash = stored
@@ -202,14 +205,11 @@ const createApolloClient = ({ headers }: { headers: IncomingHttpHeaders }) => {
 
   const cache = new InMemoryCache({ possibleTypes })
 
-  const host = headers?.host ||
-    (typeof window === 'undefined' ? '' : _get(window, 'location.host'))
-
-  const cookie = headers?.cookie ||
-    (typeof window !== 'undefined' ? document.cookie : '')
+  const host = headers?.host || (isClient ? _get(window, 'location.host') : '')
+  const cookie = headers?.cookie || (isClient ? document.cookie : '')
 
   const client = new ApolloClient({
-    ssrMode: typeof window === 'undefined',
+    ssrMode: isServer,
     link: ApolloLink.from([
       persistedQueryLink,
       errorLink,
