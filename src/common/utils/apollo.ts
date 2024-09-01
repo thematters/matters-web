@@ -205,17 +205,8 @@ export const createApolloClient = (
   initialState?: {},
   headers?: IncomingHttpHeaders
 ) => {
-  const possibleTypes = {}
-  introspectionQueryResultData.__schema.types.forEach((supertype) => {
-    if (supertype.possibleTypes) {
-      possibleTypes[supertype.name] = supertype.possibleTypes.map(
-        (subtype) => subtype.name
-      )
-    }
-  })
-
   const cache = new InMemoryCache({
-    possibleTypes,
+    possibleTypes: introspectionQueryResultData,
     typePolicies: {
       Official: { merge: true },
       Recommendation: { merge: true },
