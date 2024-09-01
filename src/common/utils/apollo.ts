@@ -4,8 +4,6 @@ import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
-import http from 'http'
-import https from 'https'
 import _get from 'lodash/get'
 import type { IncomingHttpHeaders } from 'http'
 
@@ -25,7 +23,6 @@ import typeDefs from './types'
 import { sha256 } from 'crypto-hash'
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 const isServer = typeof window === 'undefined'
 const isClient = !isServer
@@ -66,23 +63,12 @@ const httpLink = ({ host, headers }: { host: string; headers: any }) => {
     console.log('updated hostname:', { apiUrl, hostname })
   }
 
-  // toggle http for local dev
-  const agent =
-    (apiUrl || '').split(':')[0] === 'http'
-      ? new http.Agent()
-      : new https.Agent({
-          rejectUnauthorized: isProd, // allow access to https:...matters... in localhost
-        })
-
   return createUploadLink({
     uri: apiUrl,
     headers: {
       ...headers,
       host: hostname,
       'Apollo-Require-Preflight': 'true',
-    },
-    fetchOptions: {
-      agent,
     },
   })
 }
