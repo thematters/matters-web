@@ -145,6 +145,7 @@
     "@types/react-dom": "^17.0.25",
     "@types/react-stickynode": "^4.0.0",
     "@types/validator": "^13.7.17",
+    "@types/webpack-env": "^1.18.5",
     "@vitejs/plugin-react": "^4.1.0",
     "@vitest/coverage-v8": "^0.34.6",
     "@vitest/ui": "^0.34.6",
