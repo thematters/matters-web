@@ -19,7 +19,11 @@ import '~/common/styles/components/ngprogress.css'
 import '~/common/styles/components/stripe.css'
 import '~/common/styles/components/subscriberAnalytics.css'
 
-import { ApolloClient, ApolloProvider, NormalizedCacheObject } from '@apollo/client'
+import {
+  ApolloClient,
+  ApolloProvider,
+  NormalizedCacheObject,
+} from '@apollo/client'
 import { AppContext, AppInitialProps, AppProps } from 'next/app'
 
 import { getApollo } from '~/common/utils/apollo'
@@ -29,8 +33,8 @@ import Root from '~/components/Root'
 import type { IncomingHttpHeaders } from 'http'
 
 type AppOwnProps = {
-  apolloClient?: ApolloClient<NormalizedCacheObject>,
-  apolloState?: {},
+  apolloClient?: ApolloClient<NormalizedCacheObject>
+  apolloState?: {}
   headers?: IncomingHttpHeaders
 }
 
@@ -39,7 +43,7 @@ function MattersApp({
   pageProps,
   apolloClient,
   apolloState,
-  headers
+  headers,
 }: AppOwnProps & AppProps) {
   const apollo = apolloClient ?? getApollo(apolloState, headers)
 
@@ -98,7 +102,7 @@ MattersApp.getInitialProps = async (
     pageProps,
     apolloClient,
     apolloState,
-    headers
+    headers,
   }
 }
 

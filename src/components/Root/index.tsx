@@ -67,7 +67,7 @@ const Root = ({
   children,
 }: {
   client: ApolloClient<InMemoryCache>
-  headers?: IncomingHttpHeaders,
+  headers?: IncomingHttpHeaders
   children: React.ReactNode
 }) => {
   const { getQuery, isInPath } = useRoute()

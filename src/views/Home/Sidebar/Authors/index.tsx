@@ -49,10 +49,11 @@ const Authors = () => {
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
 
-    lastFetchRandom && client.cache.modify({
-      id: client.cache.identify(lastFetchRandom.lastFetchRandom),
-      fields: { sidebarAuthors: () => random }
-    })
+    lastFetchRandom &&
+      client.cache.modify({
+        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+        fields: { sidebarAuthors: () => random },
+      })
   }
 
   /**
@@ -78,27 +79,28 @@ const Authors = () => {
         <SpinnerBlock />
       ) : (
         <List hasBorder={false}>
-          {edges && edges.map(({ node }, i) => (
-            <List.Item key={node.id}>
-              <UserDigest.Rich
-                user={node}
-                spacing={[8, 8]}
-                bgColor="none"
-                bgActiveColor="greyLighter"
-                borderRadius="xtight"
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'authors',
-                    contentType: 'user',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-                hasFollow={false}
-                hasState={false}
-              />
-            </List.Item>
-          ))}
+          {edges &&
+            edges.map(({ node }, i) => (
+              <List.Item key={node.id}>
+                <UserDigest.Rich
+                  user={node}
+                  spacing={[8, 8]}
+                  bgColor="none"
+                  bgActiveColor="greyLighter"
+                  borderRadius="xtight"
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'authors',
+                      contentType: 'user',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                  hasFollow={false}
+                  hasState={false}
+                />
+              </List.Item>
+            ))}
         </List>
       )}
     </section>

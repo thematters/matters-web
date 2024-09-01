@@ -215,11 +215,16 @@ export const getApollo = (initialState?: {}, headers?: {}) => {
   return globalApolloClient
 }
 
-export const createApolloClient = (initialState?: {}, headers?: IncomingHttpHeaders) => {
+export const createApolloClient = (
+  initialState?: {},
+  headers?: IncomingHttpHeaders
+) => {
   const possibleTypes = {}
-  introspectionQueryResultData.__schema.types.forEach(supertype => {
+  introspectionQueryResultData.__schema.types.forEach((supertype) => {
     if (supertype.possibleTypes) {
-      possibleTypes[supertype.name] = supertype.possibleTypes.map(subtype => subtype.name)
+      possibleTypes[supertype.name] = supertype.possibleTypes.map(
+        (subtype) => subtype.name
+      )
     }
   })
 
@@ -228,8 +233,8 @@ export const createApolloClient = (initialState?: {}, headers?: IncomingHttpHead
     typePolicies: {
       Official: { merge: true },
       Recommendation: { merge: true },
-      UserInfo: { merge: true }
-    }
+      UserInfo: { merge: true },
+    },
   }).restore(initialState || {})
 
   const host = headers?.host || (isClient ? _get(window, 'location.host') : '')

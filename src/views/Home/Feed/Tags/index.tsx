@@ -73,10 +73,11 @@ const TagsFeed = () => {
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
 
-    lastFetchRandom && client.cache.modify({
-      id: client.cache.identify(lastFetchRandom.lastFetchRandom),
-      fields: { feedTags: () => random }
-    })
+    lastFetchRandom &&
+      client.cache.modify({
+        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+        fields: { feedTags: () => random },
+      })
   }
 
   if (error) {

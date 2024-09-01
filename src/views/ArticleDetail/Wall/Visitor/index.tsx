@@ -22,7 +22,7 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
   const closeDialog = () => {
     client.cache.modify({
       id: 'ClientPreference:local',
-      fields: { wall: () => false }
+      fields: { wall: () => false },
     })
   }
 

@@ -54,14 +54,13 @@ const Tags = () => {
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags // last Random
   const perPage = 4
   const randomMaxSize = 50
-  const { data, loading, error } =
-    usePublicQuery<SidebarTagsPublicQuery>(
-      SIDEBAR_TAGS,
-      {
-        variables: { random: lastRandom || 0, first: perPage },
-      },
-      { publicQuery: !viewer.isAuthed }
-    )
+  const { data, loading, error } = usePublicQuery<SidebarTagsPublicQuery>(
+    SIDEBAR_TAGS,
+    {
+      variables: { random: lastRandom || 0, first: perPage },
+    },
+    { publicQuery: !viewer.isAuthed }
+  )
   const edges = data?.viewer?.recommendation.tags.edges
 
   const shuffle = () => {
@@ -70,10 +69,11 @@ const Tags = () => {
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
 
-    lastFetchRandom && client.cache.modify({
-      id: client.cache.identify(lastFetchRandom.lastFetchRandom),
-      fields: { sidebarTags: () => random }
-    })
+    lastFetchRandom &&
+      client.cache.modify({
+        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+        fields: { sidebarTags: () => random },
+      })
   }
 
   if (error) {
@@ -96,21 +96,22 @@ const Tags = () => {
         <SpinnerBlock />
       ) : (
         <List hasBorder={false}>
-          {edges && edges.map(({ node }, i) => (
-            <List.Item key={node.id}>
-              <TagDigest.Sidebar
-                tag={node}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'tags',
-                    contentType: 'tag',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-              />
-            </List.Item>
-          ))}
+          {edges &&
+            edges.map(({ node }, i) => (
+              <List.Item key={node.id}>
+                <TagDigest.Sidebar
+                  tag={node}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'tags',
+                      contentType: 'tag',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
+              </List.Item>
+            ))}
         </List>
       )}
     </section>

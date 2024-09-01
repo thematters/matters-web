@@ -38,7 +38,7 @@ export const LanguageProvider = ({
   headers,
   children,
 }: {
-  headers?: IncomingHttpHeaders,
+  headers?: IncomingHttpHeaders
   children: React.ReactNode
 }) => {
   const [updateLanguage] = useMutation<UpdateLanguageMutation>(
@@ -66,7 +66,7 @@ export const LanguageProvider = ({
   if (typeof window !== 'undefined') {
     fallbackLang = toUserLanguage(navigator.language)
   } else {
-    const acceptLanguage = (headers && headers['accept-language'] || '')
+    const acceptLanguage = ((headers && headers['accept-language']) || '')
       .split(',')
       .map((l: string) => l.trim())[0]
     fallbackLang = toUserLanguage(acceptLanguage)

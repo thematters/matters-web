@@ -91,10 +91,11 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   const shuffle = () => {
     const random = _random(0, 49)
 
-    lastFetchRandom && client.cache.modify({
-      id: client.cache.identify(lastFetchRandom.lastFetchRandom),
-      fields: { feedTags: () => random }
-    })
+    lastFetchRandom &&
+      client.cache.modify({
+        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+        fields: { feedTags: () => random },
+      })
   }
 
   const relatedTagsClasses = classNames({
@@ -149,14 +150,15 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
         <SpinnerBlock />
       ) : (
         <List hasBorder={false}>
-          {edges && edges.map(({ node }, i) => (
-            <List.Item key={node.id}>
-              <TagDigest.Sidebar
-                tag={node}
-                onClick={() => trackRelatedTags(i, node.id)}
-              />
-            </List.Item>
-          ))}
+          {edges &&
+            edges.map(({ node }, i) => (
+              <List.Item key={node.id}>
+                <TagDigest.Sidebar
+                  tag={node}
+                  onClick={() => trackRelatedTags(i, node.id)}
+                />
+              </List.Item>
+            ))}
         </List>
       )}
     </section>

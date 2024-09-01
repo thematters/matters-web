@@ -56,10 +56,11 @@ const Authors = () => {
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
 
-    lastFetchRandom && client.cache.modify({
-      id: client.cache.identify(lastFetchRandom.lastFetchRandom),
-      fields: { feedAuthors: () => random }
-    })
+    lastFetchRandom &&
+      client.cache.modify({
+        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+        fields: { feedAuthors: () => random },
+      })
   }
 
   useEffect(() => {
