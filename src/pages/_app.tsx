@@ -31,11 +31,20 @@ import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import Root from '~/components/Root'
 import type { IncomingHttpHeaders } from 'http'
+import { NextPageContext } from 'next'
 
 type AppOwnProps = {
   apolloClient?: ApolloClient<NormalizedCacheObject>
   apolloState?: {}
   headers?: IncomingHttpHeaders
+}
+
+export interface MattersPageContext extends NextPageContext {
+  apolloClient: ApolloClient<NormalizedCacheObject>
+}
+
+export interface MattersAppContext extends AppContext {
+  ctx: MattersPageContext
 }
 
 function MattersApp({
@@ -50,7 +59,7 @@ function MattersApp({
   return (
     <ErrorBoundary>
       <ApolloProvider client={apollo}>
-        <Root client={apollo} headers={headers}>
+        <Root headers={headers}>
           <Component {...pageProps} />
           <ClientUpdater />
         </Root>
@@ -60,7 +69,7 @@ function MattersApp({
 }
 
 MattersApp.getInitialProps = async (
-  context: AppContext
+  context: MattersAppContext
 ): Promise<AppOwnProps & AppInitialProps> => {
   const { AppTree, Component, ctx } = context
   const headers = ctx.req?.headers || {}

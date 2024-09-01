@@ -45,9 +45,9 @@ export const useMutation = <TData = any, TVariables = OperationVariables>(
 interface CustomQueryProps {
   publicQuery?: boolean
 }
-export const usePublicQuery = <TData = any, TVariables = OperationVariables>(
+export const usePublicQuery = <TData = any, TVariables extends OperationVariables = OperationVariables>(
   query: DocumentNode,
-  options?: QueryHookOptions<TData, TVariables>,
+  options?: QueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
   customQueryProps?: CustomQueryProps
 ): QueryResult<TData, TVariables> => {
   const publicQuery = customQueryProps?.publicQuery
@@ -65,10 +65,10 @@ export const usePublicQuery = <TData = any, TVariables = OperationVariables>(
 
 export const usePublicLazyQuery = <
   TData = any,
-  TVariables = OperationVariables,
+  TVariables extends OperationVariables = OperationVariables,
 >(
   query: DocumentNode,
-  options?: LazyQueryHookOptions<TData, TVariables>,
+  options?: LazyQueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
   customQueryProps?: CustomQueryProps
 ): QueryTuple<TData, TVariables> => {
   const publicQuery = customQueryProps?.publicQuery
@@ -97,7 +97,7 @@ export const usePublicLazyQuery = <
  */
 export const useImperativeQuery = <
   TData = any,
-  TVariables = OperationVariables,
+  TVariables extends OperationVariables = OperationVariables,
 >(
   query: DocumentNode,
   options: QueryHookOptions<TData, TVariables> = {}
@@ -107,7 +107,7 @@ export const useImperativeQuery = <
     skip: true,
   })
 
-  const imperativelyCallQuery = (queryVariables: TVariables) => {
+  const imperativelyCallQuery = (queryVariables?: Partial<TVariables>) => {
     return refetch(queryVariables)
   }
 

@@ -1,5 +1,4 @@
-import { ApolloClient, useQuery } from '@apollo/client'
-import { InMemoryCache } from '@apollo/client/cache'
+import { useQuery } from '@apollo/client'
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
 import { WagmiConfig } from 'wagmi'
@@ -62,11 +61,9 @@ import('@sentry/browser').then((Sentry) => {
 })
 
 const Root = ({
-  client,
   headers,
   children,
 }: {
-  client: ApolloClient<InMemoryCache>
   headers?: IncomingHttpHeaders
   children: React.ReactNode
 }) => {

@@ -141,7 +141,7 @@ const SearchingDialogContent: React.FC<SearchingDialogContentProps> = ({
                   disabled={disabled}
                   {...(formik.getFieldProps('checked') as FieldInputProps<any>)}
                   value={node.id}
-                  content={(() => {
+                  contents={(() => {
                     const index = node.title
                       .toLowerCase()
                       .indexOf(searchValue.toLowerCase())
