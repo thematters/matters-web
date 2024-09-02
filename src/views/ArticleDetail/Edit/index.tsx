@@ -8,7 +8,6 @@ import {
   ENTITY_TYPE,
   MAX_ARTICLE_REVISION_COUNT,
 } from '~/common/enums'
-import { sleep } from '~/common/utils'
 import {
   EmptyLayout,
   Layout,
@@ -89,14 +88,7 @@ const BaseEdit = ({ article }: { article: Article }) => {
   const [assets, setAssets] = useState(article.assets || [])
 
   useEffect(() => {
-    const updateAssets = async () => {
-      // FIXME: newly uploaded images will return 404 in a short time
-      // https://community.cloudflare.com/t/new-uploaded-images-need-about-10-min-to-display-in-my-website/121568
-      await sleep(300)
-
-      setAssets(article.assets || [])
-    }
-    updateAssets()
+    setAssets(article.assets || [])
   }, [article.assets])
   const [cover, setCover] = useState<AssetFragment | undefined>(
     assets.find((asset) => asset.path === article.cover)
