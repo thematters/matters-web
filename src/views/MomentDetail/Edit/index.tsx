@@ -8,6 +8,7 @@ import { CLEAR_MOMENT_FORM, MAX_MOMENT_CONTENT_LENGTH } from '~/common/enums'
 import {
   formStorage,
   parseFormSubmitErrors,
+  sanitizeContent,
   stripHtml,
   toPath,
 } from '~/common/utils'
@@ -84,7 +85,7 @@ const Edit = () => {
       const { data } = await putMoment({
         variables: {
           input: {
-            content,
+            content: sanitizeContent(content),
             assets: assets.map(({ assetId }) => assetId),
           },
         },
