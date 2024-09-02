@@ -13,11 +13,23 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, SidebarTagsPublicQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import styles from './styles.module.css'
+
+const FETCH_SIDEBAR_TAGS_QUERY = gql`
+  fragment SidebarTags on LastFetchRandom {
+    sidebarTags
+  }
+
+  query LastFetchSidebarTags {
+    lastFetchRandom @client {
+      id
+      ...SidebarTags
+    }
+  }
+`
 
 const SIDEBAR_TAGS = gql`
   query SidebarTagsPublic(
@@ -48,7 +60,7 @@ const Tags = () => {
   const viewer = useContext(ViewerContext)
 
   const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
-    FETCH_RECORD,
+    FETCH_SIDEBAR_TAGS_QUERY,
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags // last Random
