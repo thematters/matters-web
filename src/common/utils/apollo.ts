@@ -208,9 +208,11 @@ export const createApolloClient = (
   const cache = new InMemoryCache({
     possibleTypes: introspectionQueryResultData,
     typePolicies: {
+      Liker: { merge: true },
       Official: { merge: true },
       Recommendation: { merge: true },
       UserInfo: { merge: true },
+      UserStatus: { merge: true },
     },
   }).restore(initialState || {})
 
