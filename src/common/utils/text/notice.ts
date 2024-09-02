@@ -1,4 +1,4 @@
-import { PUNCTUATION_ASCII, PUNCTUATION_CHINESE } from '../form'
+import { PUNCTUATION_CHINESE } from '../form'
 
 /**
  * Truncates a title to a specified maximum length, while preserving tagged users.
@@ -13,19 +13,23 @@ import { PUNCTUATION_ASCII, PUNCTUATION_CHINESE } from '../form'
  * @returns The truncated title with preserved tagged users.
  */
 const REGEXP_CJK =
-  '[\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f]'
+  '\u3040-\u30ff\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff66-\uff9f'
+
+const REGEXP_LATIN = 'A-Za-zÀ-ÖØ-öø-ÿ0-9'
+
+const REGEXP_PUNCTUATION = `[${PUNCTUATION_CHINESE}\x00-\x2f\x3a-\x3f\x41\x5b-\x60\x7a-\x7f]` // without "@"
 
 function countUnits(word: string) {
-  // Latin word
-  if (/^@\w+/.test(word) || new RegExp(`^@${REGEXP_CJK}+`).test(word)) {
+  // Tagged user
+  if (/^@[^\s]+/.test(word)) {
     return 1
   }
   // CJK
-  else if (new RegExp(REGEXP_CJK, 'g').test(word)) {
+  else if (new RegExp(`[${REGEXP_CJK}]`, 'g').test(word)) {
     return 1
   }
   // Latin
-  else if (/^\w+/.test(word)) {
+  else if (new RegExp(`[${REGEXP_LATIN}]+`).test(word)) {
     return 1
   }
 
@@ -34,19 +38,18 @@ function countUnits(word: string) {
 }
 
 function trimSpacesAndPunctuations(str: string) {
-  return str.replace(
-    new RegExp(
-      `^[${PUNCTUATION_CHINESE}${PUNCTUATION_ASCII}]+|[${PUNCTUATION_CHINESE}${PUNCTUATION_ASCII}]+$`,
-      'g'
-    ),
-    ''
-  )
+  return str
+    .trim()
+    .replace(
+      new RegExp(`^${REGEXP_PUNCTUATION}+|${REGEXP_PUNCTUATION}+$`, 'g'),
+      ''
+    )
 }
 
 export const truncateNoticeTitle = (title: string, maxLength: number = 10) => {
   const components =
     title.match(
-      new RegExp(`(@\\w+|@${REGEXP_CJK}+|\\w+|${REGEXP_CJK}|[^\w\s])`, 'g')
+      new RegExp(`(@[^\\s]+|[${REGEXP_LATIN}]+|[^${REGEXP_LATIN}\s])`, 'g')
     ) || []
 
   let truncatedTitle = ''
@@ -56,8 +59,11 @@ export const truncateNoticeTitle = (title: string, maxLength: number = 10) => {
     const componentUnits = countUnits(component)
 
     if (currentLength + componentUnits > maxLength) {
-      if (index < components.length - 1) {
+      // if the current component is not the last one, add ellipsis
+      if (index <= components.length - 1) {
         truncatedTitle = trimSpacesAndPunctuations(truncatedTitle) + '...'
+      } else {
+        truncatedTitle = trimSpacesAndPunctuations(truncatedTitle)
       }
       break
     }
