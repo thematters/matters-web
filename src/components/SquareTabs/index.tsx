@@ -46,8 +46,6 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
   const [scrollLeft, setScrollLeft] = useState(0)
 
   const isTabsOverflowing = () => {
-    const $nav = navRef.current
-    const $container = containerRef.current
     if (!$nav || !$container) return false
     return $nav.scrollWidth > $container.clientWidth
   }

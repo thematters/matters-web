@@ -10,7 +10,7 @@ import {
   ASSET_TYPE,
   ENTITY_TYPE,
 } from '~/common/enums'
-import { sleep, validateImage } from '~/common/utils'
+import { validateImage } from '~/common/utils'
 import {
   DraftDetailStateContext,
   Icon,
@@ -55,13 +55,14 @@ const Uploader: React.FC<UploaderProps> = ({
 
   const [upload, { loading }] = useMutation<DirectImageUploadMutation>(
     DIRECT_IMAGE_UPLOAD,
+    undefined,
+    { showToast: false }
+  )
+  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
+    DIRECT_IMAGE_UPLOAD_DONE,
     {
       update: async (cache, { data }) => {
         if (data?.directImageUpload) {
-          // FIXME: newly uploaded images will return 404 in a short time
-          // https://community.cloudflare.com/t/new-uploaded-images-need-about-10-min-to-display-in-my-website/121568
-          await sleep(300)
-
           updateDraftAssets({
             cache,
             id: entityId,
@@ -70,11 +71,6 @@ const Uploader: React.FC<UploaderProps> = ({
         }
       },
     },
-    { showToast: false }
-  )
-  const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
-    DIRECT_IMAGE_UPLOAD_DONE,
-    undefined,
     { showToast: false }
   )
   const { upload: uploadImage, uploading } = useDirectImageUpload()
