@@ -1,8 +1,8 @@
 import { Alert } from '@reach/alert'
 import { useContext } from 'react'
 
-import IMAGE_ILLUSTRATION_EMPTY from '@/public/static/images/illustration-empty.svg'
-import { LanguageContext } from '~/components'
+import { ReactComponent as IconIllustrationEmpty } from '@/public/static/images/illustration-empty.svg'
+import { Icon, LanguageContext } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -62,7 +62,13 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
       aria-atomic="true"
     >
       <section className={styles.image}>
-        <img src={IMAGE_ILLUSTRATION_EMPTY} alt="illustration" />
+        <Icon
+          icon={IconIllustrationEmpty}
+          style={{
+            width: '15rem',
+            height: '15rem',
+          }}
+        />
       </section>
 
       <Alert type="assertive">

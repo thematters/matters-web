@@ -16,6 +16,7 @@ export type IconSize =
   | 48
   | 64
   | 88
+  | 240
 
 export type IconColor =
   | 'white'

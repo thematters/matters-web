@@ -2,7 +2,6 @@ import { useQuery } from '@apollo/react-hooks'
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import {
   ADD_MOMENT_COMMENT_MENTION,
@@ -95,24 +94,20 @@ const MomentDetailDialogContent = ({
   }
 
   if (error) {
-    return <QueryError error={error} />
-  }
-
-  if (data?.moment?.__typename !== 'Moment') {
-    return null
-  }
-
-  if (data.moment.state === MomentState.Archived) {
     return (
       <section className={styles.error}>
-        <Error
-          message={
-            <FormattedMessage
-              defaultMessage="Hmm... It seems the author has hidden this work. Go see something else"
-              id="qhVSGI"
-            />
-          }
-        >
+        <QueryError error={error} />
+      </section>
+    )
+  }
+
+  if (
+    data?.moment?.__typename !== 'Moment' ||
+    data.moment.state === MomentState.Archived
+  ) {
+    return (
+      <section className={styles.error}>
+        <Error type="not_found">
           <BackToHomeButton />
         </Error>
       </section>
