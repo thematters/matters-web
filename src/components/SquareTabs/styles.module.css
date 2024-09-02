@@ -1,3 +1,45 @@
+.container {
+  position: relative;
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: calc(var(--z-index-sticky-tabs) + 1);
+    width: 7.5rem;
+    pointer-events: none;
+    content: '';
+    opacity: 0; /* Initially hidden */
+    transition: opacity 0.3s;
+  }
+
+  &.showLeftGradient::before,
+  &.showRightGradient::after {
+    opacity: 1; /* Show when scrollable */
+  }
+
+  &::before {
+    left: 0;
+    background: linear-gradient(
+      -90deg,
+      rgb(255 255 255 / 0%) 0%,
+      rgb(255 255 255 / 30%) 20%,
+      #fff 100%
+    );
+  }
+
+  &::after {
+    right: 0;
+    background: linear-gradient(
+      90deg,
+      rgb(255 255 255 / 0%) 0%,
+      rgb(255 255 255 / 30%) 20%,
+      #fff 100%
+    );
+  }
+}
+
 .tabList {
   @mixin hide-scrollbar;
 
