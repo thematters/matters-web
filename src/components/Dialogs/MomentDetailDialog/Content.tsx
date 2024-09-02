@@ -16,6 +16,8 @@ import {
   toPath,
 } from '~/common/utils'
 import {
+  BackToHomeButton,
+  Error,
   MomentDigestDetail,
   QueryError,
   useEventListener,
@@ -24,7 +26,7 @@ import {
 import MomentCommentForm from '~/components/Forms/MomentCommentForm'
 import Assets from '~/components/MomentDigest/Assets'
 import LikeButton from '~/components/MomentDigest/FooterActions/LikeButton'
-import { MomentDetailQuery } from '~/gql/graphql'
+import { MomentDetailQuery, MomentState } from '~/gql/graphql'
 
 import Comments from './Comments'
 import { MOMENT_DETAIL } from './gql'
@@ -92,11 +94,24 @@ const MomentDetailDialogContent = ({
   }
 
   if (error) {
-    return <QueryError error={error} />
+    return (
+      <section className={styles.error}>
+        <QueryError error={error} />
+      </section>
+    )
   }
 
-  if (data?.moment?.__typename !== 'Moment') {
-    return null
+  if (
+    data?.moment?.__typename !== 'Moment' ||
+    data.moment.state === MomentState.Archived
+  ) {
+    return (
+      <section className={styles.error}>
+        <Error type="not_found">
+          <BackToHomeButton />
+        </Error>
+      </section>
+    )
   }
 
   const moment = data.moment

@@ -1,11 +1,9 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
-import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { stripHtml, toPath, truncateNoticeTitle } from '~/common/utils'
-import { LanguageContext } from '~/components'
 import { NoticeMomentTitleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -15,7 +13,6 @@ const NoticeMomentTitle = ({
 }: {
   moment: NoticeMomentTitleFragment
 }) => {
-  const { lang } = useContext(LanguageContext)
   const intl = useIntl()
 
   const path = toPath({
@@ -23,10 +20,9 @@ const NoticeMomentTitle = ({
     moment,
   })
 
-  const title = truncateNoticeTitle(stripHtml(moment.content || ''), {
-    maxLength: 10,
-    locale: lang,
-  })
+  const title = truncateNoticeTitle(
+    stripHtml(moment.content || '', { ensureMentionTrailingSpace: true })
+  )
   const images = moment.assets.length
     ? intl
         .formatMessage({ defaultMessage: `[image]`, id: 'W3tqQO' })
@@ -49,6 +45,7 @@ NoticeMomentTitle.fragments = {
   moment: gql`
     fragment NoticeMomentTitle on Moment {
       id
+      state
       content
       shortHash
       assets {

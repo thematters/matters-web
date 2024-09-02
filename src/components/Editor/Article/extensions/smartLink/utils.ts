@@ -10,7 +10,7 @@ export const makeSmartLinkOptions = ({
 }) => {
   return {
     findRule: new RegExp(
-      `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/(?<key>[a-zA-Z0-9]+)`,
+      `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/(?<key>[a-zA-Z0-9]+)(?:\\?.*|#.*)?`,
       'g'
     ),
     search: async ({
