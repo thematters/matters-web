@@ -86,13 +86,13 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
     calculateGradient()
 
     $nav.addEventListener('scroll', calculateGradient)
-    window.addEventListener('mousemove', handleMouseMove)
-    window.addEventListener('mouseup', handleMouseUp)
+    $nav.addEventListener('mousemove', handleMouseMove)
+    $nav.addEventListener('mouseup', handleMouseUp)
 
     return () => {
       $nav.removeEventListener('scroll', calculateGradient)
-      window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('mouseup', handleMouseUp)
+      $nav.removeEventListener('mousemove', handleMouseMove)
+      $nav.removeEventListener('mouseup', handleMouseUp)
     }
   }, [$nav, $container, isDragging])
 
