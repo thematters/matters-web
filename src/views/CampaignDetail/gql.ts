@@ -12,6 +12,7 @@ export const CAMPAIGN_DETAIL = gql`
       id
       shortHash
       ... on WritingChallenge {
+        id
         descriptionZhHant: description(input: { language: zh_hant })
         descriptionZhHans: description(input: { language: zh_hans })
         descriptionEn: description(input: { language: en })
@@ -35,6 +36,7 @@ export const GET_PARTICIPANTS = gql`
     campaign(input: { shortHash: $shortHash }) {
       id
       ... on WritingChallenge {
+        id
         application {
           state
         }
