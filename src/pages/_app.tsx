@@ -24,14 +24,14 @@ import {
   ApolloProvider,
   NormalizedCacheObject,
 } from '@apollo/client'
+import type { IncomingHttpHeaders } from 'http'
+import { NextPageContext } from 'next'
 import { AppContext, AppInitialProps, AppProps } from 'next/app'
 
 import { getApollo } from '~/common/utils/apollo'
 import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import Root from '~/components/Root'
-import type { IncomingHttpHeaders } from 'http'
-import { NextPageContext } from 'next'
 
 type AppOwnProps = {
   apolloClient?: ApolloClient<NormalizedCacheObject>

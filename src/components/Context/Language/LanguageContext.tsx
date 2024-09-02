@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import type { IncomingHttpHeaders } from 'http'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 import { COOKIE_LANGUAGE } from '~/common/enums'
@@ -11,7 +12,6 @@ import {
 } from '~/common/utils'
 import { toast, useMutation, useRoute, ViewerContext } from '~/components'
 import { UpdateLanguageMutation, UserLanguage } from '~/gql/graphql'
-import type { IncomingHttpHeaders } from 'http'
 
 const UPDATE_VIEWER_LANGUAGE = gql`
   mutation UpdateLanguage($input: UpdateUserInfoInput!) {

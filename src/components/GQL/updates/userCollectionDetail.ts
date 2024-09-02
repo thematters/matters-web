@@ -1,5 +1,5 @@
-import { DataProxy } from '@apollo/client/cache'
 import { FetchResult } from '@apollo/client'
+import { DataProxy } from '@apollo/client/cache'
 
 import {
   AddArticlesCollectionMutation,

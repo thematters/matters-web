@@ -1,11 +1,12 @@
-import { InMemoryCache, NormalizedCacheObject } from '@apollo/client/cache'
 import { ApolloClient, ApolloLink } from '@apollo/client'
+import { InMemoryCache, NormalizedCacheObject } from '@apollo/client/cache'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
-import _get from 'lodash/get'
+import { sha256 } from 'crypto-hash'
 import type { IncomingHttpHeaders } from 'http'
+import _get from 'lodash/get'
 
 import {
   AGENT_HASH_PREFIX,
@@ -20,7 +21,6 @@ import { getIsomorphicCookie } from './cookie'
 import { resolvers } from './resolvers'
 import { storage } from './storage'
 import typeDefs from './types'
-import { sha256 } from 'crypto-hash'
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 

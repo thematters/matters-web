@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client'
+import type { IncomingHttpHeaders } from 'http'
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
 import { WagmiConfig } from 'wagmi'
-import type { IncomingHttpHeaders } from 'http'
 
 import {
   REFERRAL_QUERY_REFERRAL_KEY,
