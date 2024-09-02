@@ -45,7 +45,10 @@ export const useMutation = <TData = any, TVariables = OperationVariables>(
 interface CustomQueryProps {
   publicQuery?: boolean
 }
-export const usePublicQuery = <TData = any, TVariables extends OperationVariables = OperationVariables>(
+export const usePublicQuery = <
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+>(
   query: DocumentNode,
   options?: QueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
   customQueryProps?: CustomQueryProps

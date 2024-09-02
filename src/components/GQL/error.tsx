@@ -14,7 +14,7 @@ import { Error, toast } from '~/components'
 export interface MattersGraphQLFormattedError extends GraphQLFormattedError {
   readonly extensions?: {
     code?: ERROR_CODES
-    [key: string]: unknown;
+    [key: string]: unknown
   }
 }
 
