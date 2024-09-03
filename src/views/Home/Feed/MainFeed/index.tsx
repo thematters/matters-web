@@ -1,4 +1,4 @@
-import { NetworkStatus } from 'apollo-client'
+import { NetworkStatus } from '@apollo/client'
 import { useContext, useEffect, useRef } from 'react'
 
 import { analytics, mergeConnections } from '~/common/utils'

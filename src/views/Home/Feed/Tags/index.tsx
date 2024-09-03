@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import _chunk from 'lodash/chunk'
 import { useContext } from 'react'
@@ -58,10 +58,9 @@ const TagsFeed = () => {
   const perPage = 6
   const perColumn = 3
   const randomMaxSize = 50
-  const { data, loading, error, refetch } = usePublicQuery<FeedTagsPublicQuery>(
+  const { data, loading, error } = usePublicQuery<FeedTagsPublicQuery>(
     FEED_TAGS,
     {
-      notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0, first: perPage },
     },
     { publicQuery: !viewer.isAuthed }
@@ -73,12 +72,12 @@ const TagsFeed = () => {
       (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / perPage
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
-    refetch({ random })
 
-    client.writeData({
-      id: 'LastFetchRandom:local',
-      data: { feedTags: random },
-    })
+    lastFetchRandom &&
+      client.cache.modify({
+        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+        fields: { feedTags: () => random },
+      })
   }
 
   if (error) {

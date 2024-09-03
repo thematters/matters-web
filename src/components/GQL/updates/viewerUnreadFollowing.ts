@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from '@apollo/client/cache'
 
 import UNREAD_FOLLOWING from '~/components/GQL/queries/unreadFollowing'
 import { UnreadFollowingQuery } from '~/gql/graphql'

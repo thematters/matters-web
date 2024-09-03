@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'

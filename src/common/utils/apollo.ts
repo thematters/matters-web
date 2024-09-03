@@ -1,17 +1,12 @@
-import { createUploadLink } from '@matters/apollo-upload-client'
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { setContext } from 'apollo-link-context'
-import { onError } from 'apollo-link-error'
-import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
-import http from 'http'
-import https from 'https'
+import { ApolloClient, ApolloLink } from '@apollo/client'
+import { InMemoryCache, NormalizedCacheObject } from '@apollo/client/cache'
+import { setContext } from '@apollo/client/link/context'
+import { onError } from '@apollo/client/link/error'
+import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
+import { sha256 } from 'crypto-hash'
+import type { IncomingHttpHeaders } from 'http'
 import _get from 'lodash/get'
-import withApollo from 'next-with-apollo'
 
 import {
   AGENT_HASH_PREFIX,
@@ -27,19 +22,16 @@ import { resolvers } from './resolvers'
 import { storage } from './storage'
 import typeDefs from './types'
 
-// import { setupPersistCache } from './cache'
-
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-})
-
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+
+const isServer = typeof window === 'undefined'
+const isClient = !isServer
 
 /**
  * Links
  */
 const persistedQueryLink = createPersistedQueryLink({
+  sha256,
   useGETForHashedQueries: true,
 })
 
@@ -71,23 +63,12 @@ const httpLink = ({ host, headers }: { host: string; headers: any }) => {
     console.log('updated hostname:', { apiUrl, hostname })
   }
 
-  // toggle http for local dev
-  const agent =
-    (apiUrl || '').split(':')[0] === 'http'
-      ? new http.Agent()
-      : new https.Agent({
-          rejectUnauthorized: isProd, // allow access to https:...matters... in localhost
-        })
-
   return createUploadLink({
     uri: apiUrl,
     headers: {
       ...headers,
       host: hostname,
       'Apollo-Require-Preflight': 'true',
-    },
-    fetchOptions: {
-      agent,
     },
   })
 }
@@ -185,7 +166,7 @@ const sentryLink = setContext((_, { headers }) => {
 const agentHashLink = setContext((_, { headers }) => {
   let hash: string | null = null
 
-  if (typeof window !== 'undefined') {
+  if (isClient) {
     const stored = storage.get<string>(STORAGE_KEY_AGENT_HASH)
     if (stored && stored.startsWith(AGENT_HASH_PREFIX)) {
       hash = stored
@@ -200,19 +181,46 @@ const agentHashLink = setContext((_, { headers }) => {
   }
 })
 
-const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
-  const cache = new InMemoryCache({ fragmentMatcher })
-  cache.restore(initialState || {})
+/**
+ * When the application runs on the client side, we need to make sure that
+ * the Apollo client is a singleton to prevent it from reinitializing
+ * between pages.
+ */
+let globalApolloClient: ApolloClient<NormalizedCacheObject>
 
-  // setupPersistCache(cache)
+export const getApollo = (initialState?: {}, headers?: {}) => {
+  // Ensure you create a new client for each server-side request to prevent
+  // data sharing between connections.
+  if (isServer) {
+    return createApolloClient(initialState, headers)
+  }
 
-  const host =
-    ctx?.req?.headers.host ||
-    (typeof window === 'undefined' ? '' : _get(window, 'location.host'))
-  const cookie =
-    headers?.cookie || (typeof window !== 'undefined' ? document.cookie : '')
+  if (!globalApolloClient) {
+    globalApolloClient = createApolloClient(initialState, headers)
+  }
+  return globalApolloClient
+}
+
+export const createApolloClient = (
+  initialState?: {},
+  headers?: IncomingHttpHeaders
+) => {
+  const cache = new InMemoryCache({
+    possibleTypes: introspectionQueryResultData,
+    typePolicies: {
+      Liker: { merge: true },
+      Official: { merge: true },
+      Recommendation: { merge: true },
+      UserInfo: { merge: true },
+      UserStatus: { merge: true },
+    },
+  }).restore(initialState || {})
+
+  const host = headers?.host || (isClient ? _get(window, 'location.host') : '')
+  const cookie = headers?.cookie || (isClient ? document.cookie : '')
 
   const client = new ApolloClient({
+    ssrMode: isServer,
     link: ApolloLink.from([
       persistedQueryLink,
       errorLink,
@@ -228,6 +236,4 @@ const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
   })
 
   return client
-})
-
-export default customWithApollo
+}

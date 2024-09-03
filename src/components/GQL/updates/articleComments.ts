@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from '@apollo/client/cache'
 
 import { COMMENTS_COUNT } from '~/common/enums'
 import {

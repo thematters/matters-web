@@ -1,4 +1,4 @@
-import { NetworkStatus } from 'apollo-client'
+import { NetworkStatus } from '@apollo/client'
 import React, { useContext, useEffect, useRef } from 'react'
 import { FormattedMessage } from 'react-intl'
 

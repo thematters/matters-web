@@ -38,10 +38,12 @@ export const PlainTag = ({
   }
 
   return (
-    <Link {...path} className={tagClasses}>
-      <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
-        <span className={styles.name}>{tagName}</span>
-      </TextIcon>
+    <Link {...path}>
+      <a className={tagClasses}>
+        <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
+          <span className={styles.name}>{tagName}</span>
+        </TextIcon>
+      </a>
     </Link>
   )
 }

@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
