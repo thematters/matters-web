@@ -19,6 +19,7 @@ const fragments = {
           id
           title
           slug
+          articleState: state
           shortHash
           author {
             id
@@ -31,7 +32,7 @@ const fragments = {
         }
         ... on Moment {
           id
-          state
+          momentState: state
           shortHash
         }
       }
@@ -66,8 +67,6 @@ const NoticeComment = ({
   if (!comment) {
     return null
   }
-
-  console.log({ comment })
 
   if (
     comment.state === 'banned' &&
@@ -124,7 +123,11 @@ const NoticeComment = ({
     )
   }
 
-  if (comment.state === 'active' && moment && moment.state === 'archived') {
+  if (
+    comment.state === 'active' &&
+    ((moment && moment.momentState === 'archived') ||
+      (article && article.articleState === 'archived'))
+  ) {
     return (
       <section>
         <NoticeContentDigest content={comment.content || ''} color="grey" />
