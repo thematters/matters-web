@@ -3532,6 +3532,10 @@
   "z3uIHQ": {
     "defaultMessage": "Undo upvote"
   },
+  "z91BKe": {
+    "defaultMessage": "Archived Work",
+    "description": "src/components/Notice/NoticeArticleTitle.tsx"
+  },
   "zAK5G+": {
     "defaultMessage": "The login link has been sent to {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"

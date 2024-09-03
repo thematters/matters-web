@@ -3532,6 +3532,10 @@
   "z3uIHQ": {
     "defaultMessage": "取消點讚"
   },
+  "z91BKe": {
+    "defaultMessage": "已封存作品",
+    "description": "src/components/Notice/NoticeArticleTitle.tsx"
+  },
   "zAK5G+": {
     "defaultMessage": "登入連結已發送至 {email}",
     "description": "src/components/Forms/Verification/LinkSent.tsx"
