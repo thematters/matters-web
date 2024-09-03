@@ -41,6 +41,9 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
   const $container = containerRef.current
   const [showLeftGradient, setShowLeftGradient] = useState(false)
   const [showRightGradient, setShowRightGradient] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const [startX, setStartX] = useState(0)
+  const [scrollLeft, setScrollLeft] = useState(0)
 
   const isTabsOverflowing = () => {
     if (!$nav || !$container) return false
@@ -57,6 +60,25 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
     setShowRightGradient(!isAtRightMost)
   }
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!$nav) return
+    setIsDragging(true)
+    setStartX(e.pageX - $nav.offsetLeft)
+    setScrollLeft($nav.scrollLeft)
+  }
+
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging || !$nav) return
+    const x = e.pageX - $nav.offsetLeft
+    const walk = (x - startX) * 2 // scroll-fast
+    $nav.scrollLeft = scrollLeft - walk
+    calculateGradient()
+  }
+
+  const handleMouseUp = () => {
+    setIsDragging(false)
+  }
+
   useEffect(() => {
     if (!isTabsOverflowing() || !$nav) return
 
@@ -64,13 +86,15 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
     calculateGradient()
 
     $nav.addEventListener('scroll', calculateGradient)
+    $nav.addEventListener('mousemove', handleMouseMove)
+    $nav.addEventListener('mouseup', handleMouseUp)
 
     return () => {
-      if (!$nav) return
-
       $nav.removeEventListener('scroll', calculateGradient)
+      $nav.removeEventListener('mousemove', handleMouseMove)
+      $nav.removeEventListener('mouseup', handleMouseUp)
     }
-  }, [$nav])
+  }, [$nav, $container, isDragging])
 
   const containerClasses = classNames({
     [styles.container]: true,
@@ -85,7 +109,12 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
 
   return (
     <section className={containerClasses} ref={containerRef}>
-      <ul role="tablist" className={navClasses} ref={navRef}>
+      <ul
+        role="tablist"
+        className={navClasses}
+        ref={navRef}
+        onMouseDown={handleMouseDown}
+      >
         {children}
       </ul>
     </section>
