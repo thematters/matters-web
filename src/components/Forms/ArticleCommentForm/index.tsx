@@ -211,6 +211,17 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
         id: 'bTNYGv',
         description: 'src/components/Forms/ArticleCommentForm/index.tsx',
       })}
+      onClick={(event) => {
+        if (!viewer.isAuthed) {
+          event.preventDefault()
+          window.dispatchEvent(
+            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+              detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
+            })
+          )
+          return
+        }
+      }}
     >
       <section className={styles.content}>
         <CommentEditor
