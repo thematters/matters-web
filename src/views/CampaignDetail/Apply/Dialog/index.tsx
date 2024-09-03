@@ -13,6 +13,7 @@ const APPLY_CAMPAIGN = gql`
     applyCampaign(input: { id: $id }) {
       id
       ... on WritingChallenge {
+        id
         application {
           state
           createdAt

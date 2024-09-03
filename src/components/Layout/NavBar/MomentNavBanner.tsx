@@ -5,9 +5,13 @@ import MATTY from '@/public/static/images/matty.png'
 
 import styles from './styles.module.css'
 
-const NavBanner: React.FC = () => {
+type MomentNavBannerProps = {
+  onClick: () => void
+}
+
+const MomentNavBanner: React.FC<MomentNavBannerProps> = ({ onClick }) => {
   return (
-    <div className={styles.banner}>
+    <div className={styles.banner} role="button" onClick={onClick}>
       <div className={styles.notificationText}>
         <FormattedMessage id="VKxanK" defaultMessage="Moment Feature is Live" />
         <div className={styles.subText}>
@@ -22,4 +26,4 @@ const NavBanner: React.FC = () => {
   )
 }
 
-export default NavBanner
+export default MomentNavBanner
