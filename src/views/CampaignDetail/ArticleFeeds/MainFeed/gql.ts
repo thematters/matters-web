@@ -11,6 +11,7 @@ export const CAMPAIGN_ARTICLES_PUBLIC = gql`
     campaign(input: { shortHash: $shortHash }) {
       id
       ... on WritingChallenge {
+        id
         articles(input: { first: 20, after: $after, filter: $filter }) {
           pageInfo {
             startCursor
