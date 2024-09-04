@@ -121,10 +121,6 @@
   "/usqHn": {
     "defaultMessage": "{displayName} 的创作空间站"
   },
-  "/vyhs5": {
-    "defaultMessage": "留言已删除",
-    "description": "src/components/Notice/NoticeComment.tsx"
-  },
   "/wKyxw": {
     "defaultMessage": "发布失败"
   },
@@ -618,6 +614,10 @@
     "defaultMessage": "暂无评论",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
+  "7zn5ig": {
+    "defaultMessage": "评论已删除",
+    "description": "src/components/Notice/NoticeComment.tsx/article"
+  },
   "8+Z5E9": {
     "defaultMessage": "纪念你参与「七日书」并完成七天书写"
   },
@@ -888,6 +888,10 @@
   "CTJk3m": {
     "defaultMessage": "复制留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
+  "Ci7dxf": {
+    "defaultMessage": "留言已删除",
+    "description": "src/components/Notice/NoticeComment.tsx/moment"
   },
   "CjKqYk": {
     "defaultMessage": "分享今天开心或难过的小故事吧"
@@ -1485,9 +1489,6 @@
   },
   "N6PWfU": {
     "defaultMessage": "忘记密码"
-  },
-  "N8ISx8": {
-    "defaultMessage": "Oops！该评论已被原作者删除"
   },
   "NACY16": {
     "defaultMessage": "为什么需要设定钱包 ?",
@@ -3530,6 +3531,10 @@
   },
   "z3uIHQ": {
     "defaultMessage": "取消点赞"
+  },
+  "z91BKe": {
+    "defaultMessage": "已归档作品",
+    "description": "src/components/Notice/NoticeArticleTitle.tsx"
   },
   "zAK5G+": {
     "defaultMessage": "登录链接已发送至 {email}",
