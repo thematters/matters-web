@@ -44,7 +44,6 @@
   @mixin hide-scrollbar;
 
   display: flex;
-  gap: var(--sp16);
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 
@@ -61,6 +60,7 @@
 
   flex-shrink: 0;
   padding: var(--sp5) var(--sp10);
+  margin-right: var(--sp16);
   font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-grey-darker);
