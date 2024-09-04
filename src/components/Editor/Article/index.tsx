@@ -3,6 +3,7 @@ import {
   articleEditorExtensions,
   Dropcursor,
   EditorContent,
+  Extension,
   FigcaptionKit,
   Mention,
   PasteDropFile,
@@ -110,15 +111,17 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       PasteDropFile.configure({
         onDrop: async (editor, files, pos) => {
           const validFiles = await getValidFiles(files)
+          // @ts-ignore
           editor.commands.insertFigureImageUploaders({ files: validFiles, pos })
         },
         onPaste: async (editor, files) => {
           const validFiles = await getValidFiles(files)
+          // @ts-ignore
           editor.commands.insertFigureImageUploaders({ files: validFiles })
         },
       }),
       ...articleEditorExtensions,
-    ],
+    ] as Extension[],
   })
 
   // fallback drop handler for non-editor area

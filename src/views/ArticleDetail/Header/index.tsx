@@ -53,8 +53,8 @@ const Header = ({ article }: HeaderProps) => {
                     lang === 'zh_hans'
                       ? 'nameZhHans'
                       : lang === 'zh_hant'
-                      ? 'nameZhHant'
-                      : 'nameEn'
+                        ? 'nameZhHant'
+                        : 'nameEn'
                   ]
                 }
               </span>
@@ -68,8 +68,8 @@ const Header = ({ article }: HeaderProps) => {
                       lang === 'zh_hans'
                         ? 'nameZhHans'
                         : lang === 'zh_hant'
-                        ? 'nameZhHant'
-                        : 'nameEn'
+                          ? 'nameZhHant'
+                          : 'nameEn'
                     ]
                   }
                 </>

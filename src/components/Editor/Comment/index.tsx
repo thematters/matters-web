@@ -3,6 +3,7 @@ import {
   commentEditorExtensions,
   Editor,
   EditorContent,
+  Extension,
   Mention,
   Placeholder,
   useEditor,
@@ -80,7 +81,7 @@ const CommentEditor: React.FC<Props> = ({
       }),
       SmartLink.configure(makeSmartLinkOptions({ client })),
       ...commentEditorExtensions,
-    ],
+    ] as Extension[],
   })
 
   useEffect(() => {

@@ -2,6 +2,7 @@ import { useApolloClient } from '@apollo/client'
 import {
   Editor,
   EditorContent,
+  Extension,
   Mention,
   momentEditorExtensions,
   PasteDropFile,
@@ -86,7 +87,7 @@ const MomentEditor: React.FC<Props> = ({
         },
       }),
       ...momentEditorExtensions,
-    ],
+    ] as Extension[],
   })
 
   useEffect(() => {

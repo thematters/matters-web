@@ -68,6 +68,7 @@ const Input: React.FC<NodeViewProps> = (props) => {
 
             // try to insert figureEmbed if url is not empty
             if (url && isUrl(url)) {
+              // @ts-ignore
               props.editor.commands.setFigureEmbed({
                 src: url,
                 position:
