@@ -121,10 +121,6 @@
   "/usqHn": {
     "defaultMessage": "{displayName}'s creative space"
   },
-  "/vyhs5": {
-    "defaultMessage": "Comment deleted",
-    "description": "src/components/Notice/NoticeComment.tsx"
-  },
   "/wKyxw": {
     "defaultMessage": "Failed to republish"
   },
@@ -618,6 +614,10 @@
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
   },
+  "7zn5ig": {
+    "defaultMessage": "Comment deleted",
+    "description": "src/components/Notice/NoticeComment.tsx/article"
+  },
   "8+Z5E9": {
     "defaultMessage": "The badge signifies your participation and completion in the \"Free Write in 7 days\"."
   },
@@ -888,6 +888,10 @@
   "CTJk3m": {
     "defaultMessage": "Copy comment",
     "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
+  "Ci7dxf": {
+    "defaultMessage": "Comment deleted",
+    "description": "src/components/Notice/NoticeComment.tsx/moment"
   },
   "CjKqYk": {
     "defaultMessage": "Share a story from your life"
@@ -1485,9 +1489,6 @@
   },
   "N6PWfU": {
     "defaultMessage": "Forget Password"
-  },
-  "N8ISx8": {
-    "defaultMessage": "Oops! This comment has been deleted by author"
   },
   "NACY16": {
     "defaultMessage": "Why need to set up a wallet?",
@@ -3530,6 +3531,10 @@
   },
   "z3uIHQ": {
     "defaultMessage": "Undo upvote"
+  },
+  "z91BKe": {
+    "defaultMessage": "Archived Work",
+    "description": "src/components/Notice/NoticeArticleTitle.tsx"
   },
   "zAK5G+": {
     "defaultMessage": "The login link has been sent to {email}",
