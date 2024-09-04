@@ -210,6 +210,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
           setEditor={(editor) => {
             setEditor(editor)
           }}
+          editable={viewer.isAuthed}
         />
       </section>
 
