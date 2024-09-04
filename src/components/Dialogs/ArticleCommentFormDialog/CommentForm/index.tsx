@@ -9,13 +9,11 @@ import {
   SpinnerBlock,
   useEventListener,
   useMutation,
-  useRoute,
   ViewerContext,
 } from '~/components'
 import { PUT_ARTICLE_COMMENT } from '~/components/GQL/mutations/putComment'
 import {
   updateArticleComments,
-  updateArticlePublic,
   updateCommentDetail,
 } from '~/components/GQL/updates'
 import { PutArticleCommentMutation } from '~/gql/graphql'
@@ -54,8 +52,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
 }) => {
   const viewer = useContext(ViewerContext)
   const formRef = useRef<HTMLFormElement>(null)
-  const { getQuery, routerLang } = useRoute()
-  const shortHash = getQuery('shortHash')
 
   const [putComment] =
     useMutation<PutArticleCommentMutation>(PUT_ARTICLE_COMMENT)
@@ -118,22 +114,6 @@ const CommentForm: React.FC<CommentFormProps> = ({
               articleId,
               type: 'add',
               comment: mutationResult.data?.putComment,
-            })
-          }
-
-          if (!!parentId) {
-            updateArticlePublic({
-              cache,
-              shortHash,
-              routerLang,
-              type: 'addSecondaryComment',
-            })
-          } else {
-            updateArticlePublic({
-              cache,
-              shortHash,
-              routerLang,
-              type: 'addComment',
             })
           }
         },

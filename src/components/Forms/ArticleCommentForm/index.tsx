@@ -15,15 +15,10 @@ import {
   useCommentEditorContext,
   useEventListener,
   useMutation,
-  useRoute,
   ViewerContext,
 } from '~/components'
 import CommentEditor from '~/components/Editor/Comment'
-import {
-  updateArticleComments,
-  updateArticlePublic,
-  updateCommentDetail,
-} from '~/components/GQL'
+import { updateArticleComments, updateCommentDetail } from '~/components/GQL'
 import { PUT_ARTICLE_COMMENT } from '~/components/GQL/mutations/putComment'
 import { PutArticleCommentMutation } from '~/gql/graphql'
 
@@ -63,14 +58,12 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
-  const { getQuery, routerLang } = useRoute()
   const { setActiveEditor } = useCommentEditorContext()
   const [editor, localSetEditor] = useState<Editor | null>(null)
   const setEditor = (editor: Editor | null) => {
     localSetEditor(editor)
     propsSetEditor?.(editor)
   }
-  const shortHash = getQuery('shortHash')
 
   const [putComment] =
     useMutation<PutArticleCommentMutation>(PUT_ARTICLE_COMMENT)
@@ -134,22 +127,6 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
               articleId: articleId || '',
               type: 'add',
               comment: mutationResult.data?.putComment,
-            })
-          }
-
-          if (!!parentId) {
-            updateArticlePublic({
-              cache,
-              shortHash,
-              routerLang,
-              type: 'addSecondaryComment',
-            })
-          } else {
-            updateArticlePublic({
-              cache,
-              shortHash,
-              routerLang,
-              type: 'addComment',
             })
           }
         },
