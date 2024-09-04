@@ -19,6 +19,7 @@ const fragments = {
           id
           title
           slug
+          articleState: state
           shortHash
           author {
             id
@@ -31,7 +32,7 @@ const fragments = {
         }
         ... on Moment {
           id
-          state
+          momentState: state
           shortHash
         }
       }
@@ -98,8 +99,8 @@ const NoticeComment = ({
         <NoticeContentDigest
           content={intl.formatMessage({
             defaultMessage: 'Comment deleted',
-            description: 'src/components/Notice/NoticeComment.tsx',
-            id: '/vyhs5',
+            description: 'src/components/Notice/NoticeComment.tsx/moment',
+            id: 'Ci7dxf',
           })}
           color="grey"
         />
@@ -107,28 +108,26 @@ const NoticeComment = ({
     )
   }
 
-  if (comment.state === 'archived') {
+  if (comment.state === 'archived' && article) {
     return (
-      <button
-        onClick={() => {
-          toast.success({
-            message: (
-              <FormattedMessage
-                defaultMessage="Oops! This comment has been deleted by author"
-                id="N8ISx8"
-              />
-            ),
-          })
-        }}
-      >
-        <section>
-          <NoticeContentDigest content={comment.content || ''} />
-        </section>
-      </button>
+      <section>
+        <NoticeContentDigest
+          content={intl.formatMessage({
+            defaultMessage: 'Comment deleted',
+            description: 'src/components/Notice/NoticeComment.tsx/article',
+            id: '7zn5ig',
+          })}
+          color="grey"
+        />
+      </section>
     )
   }
 
-  if (comment.state === 'active' && moment && moment.state === 'archived') {
+  if (
+    comment.state === 'active' &&
+    ((moment && moment.momentState === 'archived') ||
+      (article && article.articleState === 'archived'))
+  ) {
     return (
       <section>
         <NoticeContentDigest content={comment.content || ''} color="grey" />

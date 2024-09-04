@@ -15,15 +15,10 @@ import {
   useCommentEditorContext,
   useEventListener,
   useMutation,
-  useRoute,
   ViewerContext,
 } from '~/components'
 import CommentEditor from '~/components/Editor/Comment'
-import {
-  updateArticleComments,
-  updateArticlePublic,
-  updateCommentDetail,
-} from '~/components/GQL'
+import { updateArticleComments, updateCommentDetail } from '~/components/GQL'
 import { PUT_ARTICLE_COMMENT } from '~/components/GQL/mutations/putComment'
 import { PutArticleCommentMutation } from '~/gql/graphql'
 
@@ -63,14 +58,12 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
 }) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
-  const { getQuery, routerLang } = useRoute()
   const { setActiveEditor } = useCommentEditorContext()
   const [editor, localSetEditor] = useState<Editor | null>(null)
   const setEditor = (editor: Editor | null) => {
     localSetEditor(editor)
     propsSetEditor?.(editor)
   }
-  const shortHash = getQuery('shortHash')
 
   const [putComment] =
     useMutation<PutArticleCommentMutation>(PUT_ARTICLE_COMMENT)
@@ -136,22 +129,6 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
               comment: mutationResult.data?.putComment,
             })
           }
-
-          if (!!parentId) {
-            updateArticlePublic({
-              cache,
-              shortHash,
-              routerLang,
-              type: 'addSecondaryComment',
-            })
-          } else {
-            updateArticlePublic({
-              cache,
-              shortHash,
-              routerLang,
-              type: 'addComment',
-            })
-          }
         },
       })
 
@@ -211,6 +188,17 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
         id: 'bTNYGv',
         description: 'src/components/Forms/ArticleCommentForm/index.tsx',
       })}
+      onClick={(event) => {
+        if (!viewer.isAuthed) {
+          event.preventDefault()
+          window.dispatchEvent(
+            new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+              detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
+            })
+          )
+          return
+        }
+      }}
     >
       <section className={styles.content}>
         <CommentEditor
@@ -222,6 +210,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
           setEditor={(editor) => {
             setEditor(editor)
           }}
+          editable={viewer.isAuthed}
         />
       </section>
 

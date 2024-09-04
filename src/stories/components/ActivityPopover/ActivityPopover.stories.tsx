@@ -10,7 +10,7 @@ import {
   Icon,
   useDialogSwitch,
 } from '~/components'
-import NavBanner from '~/components/Layout/NavBar/NavBanner'
+import MomentNavBanner from '~/components/Layout/NavBar/MomentNavBanner'
 import NavPopover from '~/components/Layout/NavBar/NavPopover'
 import Activity from '~/components/Layout/SideNav/Activity'
 import NavListItem from '~/components/Layout/SideNav/NavListItem'
@@ -94,7 +94,7 @@ export const ActivityBanner: StoryFn = () => {
     <Dropdown
       content={
         <section>
-          <NavBanner />
+          <MomentNavBanner onClick={() => {}} />
         </section>
       }
       visible={show}

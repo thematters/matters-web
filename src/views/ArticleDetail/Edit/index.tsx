@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/react-hooks'
 import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import {
   ASSET_TYPE,
@@ -86,6 +86,10 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   // cover
   const [assets, setAssets] = useState(article.assets || [])
+
+  useEffect(() => {
+    setAssets(article.assets || [])
+  }, [article.assets])
   const [cover, setCover] = useState<AssetFragment | undefined>(
     assets.find((asset) => asset.path === article.cover)
   )
