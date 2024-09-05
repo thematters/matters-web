@@ -13,7 +13,6 @@ import {
   OAUTH_STORAGE_BIND_STATE_UNAVAILABLE,
 } from '~/common/enums'
 import {
-  facebookOauthUrl,
   googleOauthUrl,
   isSafari,
   sleep,
@@ -53,7 +52,6 @@ const Socials = () => {
   const [loadingState, setLoadingState] = useState('')
   const isGoogleLoading = loadingState === 'Google'
   const isTwitterLoading = loadingState === 'Twitter'
-  const isFacebookLoading = loadingState === 'Facebook'
 
   const oauthType = 'bind'
 
@@ -80,12 +78,6 @@ const Socials = () => {
       await sleep(3 * 1000)
       gotoTwitter()
     }
-  }
-
-  const gotoFacebook = async () => {
-    setLoadingState('Facebook')
-    const url = await facebookOauthUrl(oauthType)
-    router.push(url)
   }
 
   useEffect(() => {
@@ -254,46 +246,29 @@ const Socials = () => {
       </RemoveSocialLoginDialog>
 
       {/* Facebook */}
-      <RemoveSocialLoginDialog type={SocialAccountType.Facebook}>
-        {({ openDialog }) => {
-          return (
-            <TableView.Cell
-              title={
-                <TextIcon
-                  icon={<Icon icon={IconFacebook2} size={22} />}
-                  spacing={12}
-                >
-                  Facebook
-                </TextIcon>
-              }
-              rightText={facebookId ? `@${facebookId}` : undefined}
-              rightIcon={
-                facebookId ? (
+      {facebookId && (
+        <RemoveSocialLoginDialog type={SocialAccountType.Facebook}>
+          {({ openDialog }) => {
+            return (
+              <TableView.Cell
+                title={
+                  <TextIcon
+                    icon={<Icon icon={IconFacebook2} size={22} />}
+                    spacing={12}
+                  >
+                    Facebook
+                  </TextIcon>
+                }
+                rightText={`@${facebookId}`}
+                rightIcon={
                   <Icon icon={IconTimes} size={20} color="greyDarker" />
-                ) : undefined
-              }
-              onClick={facebookId ? () => openDialog() : undefined}
-              right={
-                facebookId ? undefined : (
-                  <>
-                    {!isFacebookLoading && (
-                      <SettingsButton onClick={gotoFacebook}>
-                        <FormattedMessage
-                          defaultMessage="Connect"
-                          id="+vVZ/G"
-                        />
-                      </SettingsButton>
-                    )}
-                    {isFacebookLoading && (
-                      <Spinner color="greyLight" size={20} />
-                    )}
-                  </>
-                )
-              }
-            />
-          )
-        }}
-      </RemoveSocialLoginDialog>
+                }
+                onClick={() => openDialog()}
+              />
+            )
+          }}
+        </RemoveSocialLoginDialog>
+      )}
     </>
   )
 }
