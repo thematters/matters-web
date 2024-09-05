@@ -193,7 +193,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
           event.preventDefault()
           window.dispatchEvent(
             new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-              detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
+              detail: { trigger: UNIVERSAL_AUTH_TRIGGER.comment },
             })
           )
           return
@@ -278,7 +278,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
             onClick={() => {
               window.dispatchEvent(
                 new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-                  detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
+                  detail: { trigger: UNIVERSAL_AUTH_TRIGGER.comment },
                 })
               )
             }}
