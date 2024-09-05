@@ -404,9 +404,11 @@ const BaseArticleDetail = ({
           </section>
         )}
 
-        <Media at="sm">
+        <Media lessThan="lg">
           <AuthorSidebar article={article} />
+        </Media>
 
+        <Media at="sm">
           {article.comments.totalCount > 0 && (
             <section className={styles.smUpCommentBlock} ref={commentsRef}>
               <DynamicComments id={article.id} lock={!canReadFullContent} />
@@ -580,18 +582,14 @@ const ArticleDetail = ({
       <EmptyLayout>
         <Error
           message={
-            article.state === 'archived' ? (
-              <FormattedMessage
-                defaultMessage="Hmm... It seems the author has hidden this work. Go see something else"
-                id="qhVSGI"
-              />
-            ) : article.state === 'banned' ? (
+            article.state === 'banned' ? (
               <FormattedMessage
                 defaultMessage="This work is archived due to violation of community guidelines."
                 id="/dKzfc"
               />
             ) : null
           }
+          type="not_found"
         >
           <BackToHomeButton />
         </Error>

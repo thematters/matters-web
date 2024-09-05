@@ -64,6 +64,7 @@ const fragments = {
               id
               isBlocking
             }
+            commentCount
           }
 
           ... on Moment {

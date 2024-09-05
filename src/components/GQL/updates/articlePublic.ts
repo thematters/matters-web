@@ -22,12 +22,7 @@ export const updateArticlePublic = ({
   routerLang: UserLanguage
   viewer?: Viewer
   txId?: string
-  type:
-    | 'deleteComment'
-    | 'addComment'
-    | 'addSecondaryComment'
-    | 'deleteSecondaryComment'
-    | 'updateDonation'
+  type: 'deleteComment' | 'deleteSecondaryComment' | 'updateDonation'
 }) => {
   // FIXME: circular dependencies
   const {
@@ -68,16 +63,9 @@ export const updateArticlePublic = ({
     let commentCount = data.article.commentCount
     let totalCount = data.article.comments.totalCount
     switch (type) {
-      case 'addComment':
-        totalCount += 1
-        commentCount += 1
-        break
       case 'deleteComment':
         totalCount -= 1
         commentCount -= 1
-        break
-      case 'addSecondaryComment':
-        commentCount += 1
         break
       case 'deleteSecondaryComment':
         commentCount -= 1
