@@ -98,7 +98,7 @@ const Select: React.FC<FormProps> = ({
   const { address: account, isConnecting } = useAccount()
   const errorMessage = connectError?.message
 
-  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
+  const injectedConnector = connectors.find((c) => c.id === 'injected')
   const walletConnectConnector = connectors.find(
     (c) => c.id === 'walletConnect'
   )
