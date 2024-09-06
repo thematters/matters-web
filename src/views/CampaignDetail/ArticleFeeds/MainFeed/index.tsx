@@ -77,7 +77,6 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
         shortHash,
         ...(!isAll ? { filter: { stage: feedType } } : {}),
       },
-      notifyOnNetworkStatusChange: true,
       skip: isAnnouncement,
     })
 

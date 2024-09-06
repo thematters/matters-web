@@ -50,10 +50,7 @@ const ManageButton = ({ id }: Props) => {
 const Maintainers = ({ id, isOwner }: Props) => {
   const { data, loading, error } = useQuery<TagMaintainersQuery>(
     TAG_MAINTAINERS,
-    {
-      variables: { id },
-      notifyOnNetworkStatusChange: true,
-    }
+    { variables: { id } }
   )
 
   if (loading) {

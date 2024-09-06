@@ -23,7 +23,6 @@ const Participants = ({ id }: Props) => {
   const { data, loading, error, fetchMore, networkStatus } =
     usePublicQuery<TagParticipantsQuery>(TAG_PARTICIPANTS, {
       variables: { id },
-      notifyOnNetworkStatusChange: true,
     })
 
   // pagination

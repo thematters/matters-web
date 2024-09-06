@@ -60,6 +60,7 @@ const CommentEditor: React.FC<Props> = ({
       const content = editor.getHTML()
       update({ content })
     },
+    immediatelyRender: false,
     // FIXME: toggle scroll lock when editor is focused
     // can be removed if editor is only used in single page
     // instead of being used in dialog

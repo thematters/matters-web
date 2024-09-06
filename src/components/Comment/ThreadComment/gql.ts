@@ -29,6 +29,11 @@ export const fragments = {
         id
         ...CommentFeedCommentPrivate
         comments(input: { sort: oldest, first: 3 }) {
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
           edges {
             cursor
             node {

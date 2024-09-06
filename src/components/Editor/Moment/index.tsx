@@ -52,6 +52,7 @@ const MomentEditor: React.FC<Props> = ({
 
   const editor = useEditor({
     // autofocus: true,
+    immediatelyRender: false,
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
       const content = editor.getHTML()
