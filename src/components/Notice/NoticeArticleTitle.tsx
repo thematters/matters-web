@@ -1,10 +1,11 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { ArticleDigestTitle } from '~/components/ArticleDigest'
-import { NoticeArticleTitleFragment } from '~/gql/graphql'
+import { ArticleState, NoticeArticleTitleFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -24,6 +25,8 @@ const NoticeArticleTitle = ({
     article,
   })
 
+  const isArchived = article.articleState === ArticleState.Archived
+
   if (!isBlock) {
     return (
       <Link {...path}>
@@ -31,7 +34,15 @@ const NoticeArticleTitle = ({
           className={styles.noticeArticleTitle}
           data-test-id={TEST_ID.NOTICE_ARTICLE_TITLE}
         >
-          {article.title}
+          {isArchived ? (
+            <FormattedMessage
+              defaultMessage="Archived Work"
+              id="z91BKe"
+              description="src/components/Notice/NoticeArticleTitle.tsx"
+            />
+          ) : (
+            article.title
+          )}
         </a>
       </Link>
     )

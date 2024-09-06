@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 
 import { toPath } from '~/common/utils'
@@ -17,7 +18,11 @@ import { CampaignDetailQuery } from '~/gql/graphql'
 import ArticleFeeds from './ArticleFeeds'
 import { CAMPAIGN_DETAIL } from './gql'
 import InfoHeader from './InfoHeader'
-import SideParticipants from './SideParticipants'
+
+const DynamicSideParticipants = dynamic(() => import('./SideParticipants'), {
+  loading: () => <SpinnerBlock />,
+  ssr: false,
+})
 
 const CampaignDetail = () => {
   const { lang } = useContext(LanguageContext)
@@ -58,7 +63,7 @@ const CampaignDetail = () => {
   const path = toPath({ page: 'campaignDetail', campaign })
 
   return (
-    <Layout.Main aside={<SideParticipants campaign={campaign} />}>
+    <Layout.Main aside={<DynamicSideParticipants campaign={campaign} />}>
       <Head
         title={
           campaign[

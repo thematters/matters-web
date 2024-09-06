@@ -71,6 +71,8 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   visitorWall = 'visitorWall',
   momentComment = 'momentComment',
   momentLike = 'momentLike',
+  applyCampaign = 'applyCampaign',
+  collectionLike = 'collectionLike',
 }
 
 /**

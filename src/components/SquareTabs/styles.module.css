@@ -43,9 +43,8 @@
 .tabList {
   @mixin hide-scrollbar;
 
-  display: flex;
-  gap: var(--sp16);
   overflow-x: auto;
+  white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 
   &.sticky {
@@ -59,8 +58,9 @@
 .tabItem {
   @mixin transition;
 
-  flex-shrink: 0;
+  display: inline-block;
   padding: var(--sp5) var(--sp10);
+  margin-right: var(--sp16);
   font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-grey-darker);

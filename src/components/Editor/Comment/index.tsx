@@ -31,6 +31,7 @@ interface Props {
   onFocused?: () => void
   isFallbackEditor?: boolean
   lockScroll?: boolean
+  editable?: boolean
 }
 
 const CommentEditor: React.FC<Props> = ({
@@ -42,6 +43,7 @@ const CommentEditor: React.FC<Props> = ({
   onFocused,
   isFallbackEditor,
   lockScroll = true,
+  editable = true,
 }) => {
   const client = useApolloClient()
   const intl = useIntl()
@@ -55,6 +57,7 @@ const CommentEditor: React.FC<Props> = ({
     })
 
   const editor = useEditor({
+    editable,
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
       const content = editor.getHTML()
