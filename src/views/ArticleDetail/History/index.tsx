@@ -234,9 +234,7 @@ const ArticleDetailHistory = ({ latestVersion }: { latestVersion: string }) => {
   }
 
   useEffect(() => {
-    ;(async () => {
-      await loadPrivate()
-    })()
+    loadPrivate()
   }, [article?.shortHash, currVersion])
 
   /**

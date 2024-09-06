@@ -497,10 +497,7 @@ const ArticleDetail = ({
     }
   )
 
-  const { data, client, refetch: refetchPublic } = resultByHash
-  const loading = resultByHash.loading
-  const error = resultByHash.error
-
+  const { data, client, loading, error } = resultByHash
   const article = data?.article
   const authorId = article?.author?.id
   const isAuthor = viewer.id === authorId
@@ -514,29 +511,18 @@ const ArticleDetail = ({
       return
     }
 
+    setPrivateFetched(false)
+
     await client.query({
       query: ARTICLE_DETAIL_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: {
-        id: article?.id,
-      },
+      variables: { shortHash },
     })
 
     setPrivateFetched(true)
   }
 
-  useEffect(() => {
-    // reset state to private fetchable when URL query is changed
-    setPrivateFetched(false)
-
-    // refetch data when URL query is changed
-    ;(async () => {
-      await refetchPublic()
-      await loadPrivate()
-    })()
-  }, [shortHash])
-
-  // fetch private data when shortHash of public data is changed
+  // fetch private data when shortHash is changed
   useEffect(() => {
     loadPrivate()
   }, [article?.shortHash, viewer.id])
