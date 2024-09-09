@@ -213,6 +213,7 @@ export const createApolloClient = (
       Recommendation: { merge: true },
       UserInfo: { merge: true },
       UserStatus: { merge: true },
+      CommentConnection: { merge: true },
     },
   }).restore(initialState || {})
 

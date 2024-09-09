@@ -36,7 +36,6 @@ const articlePublicFragment = gql`
       totalCount
     }
     access {
-      type
       circle {
         id
         ...CircleWallCirclePublic
