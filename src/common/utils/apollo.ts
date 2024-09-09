@@ -16,6 +16,7 @@ import {
 } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
+import { mergeables } from '~/gql/mergeables'
 
 import { getIsomorphicCookie } from './cookie'
 import { resolvers } from './resolvers'
@@ -206,14 +207,12 @@ export const createApolloClient = (
   headers?: IncomingHttpHeaders
 ) => {
   const cache = new InMemoryCache({
-    possibleTypes: introspectionQueryResultData,
+    possibleTypes: {
+      ...introspectionQueryResultData,
+      Mergeable: mergeables,
+    },
     typePolicies: {
-      Liker: { merge: true },
-      Official: { merge: true },
-      Recommendation: { merge: true },
-      UserInfo: { merge: true },
-      UserStatus: { merge: true },
-      CommentConnection: { merge: true },
+      Mergeable: { merge: true },
     },
   }).restore(initialState || {})
 
