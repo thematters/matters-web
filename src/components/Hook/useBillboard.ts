@@ -72,7 +72,7 @@ export const useBillboard = ({
           return
         }
 
-        const epoch = currEpoch - 2n
+        const epoch = currEpoch - 1n
         const bidder = await readContract({
           abi: BillboardRegistryABI,
           address: registryAddress,
