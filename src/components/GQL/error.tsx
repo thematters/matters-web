@@ -1,4 +1,5 @@
-import { ApolloError } from 'apollo-client'
+import { ApolloError } from '@apollo/client'
+import { GraphQLFormattedError } from 'graphql'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -10,6 +11,13 @@ import {
 } from '~/common/enums'
 import { Error, toast } from '~/components'
 
+export interface MattersGraphQLFormattedError extends GraphQLFormattedError {
+  readonly extensions?: {
+    code?: ERROR_CODES
+    [key: string]: unknown
+  }
+}
+
 export const getErrorCodes = (error?: ApolloError): ERROR_CODES[] => {
   const errorCodes: ERROR_CODES[] = []
 
@@ -17,7 +25,7 @@ export const getErrorCodes = (error?: ApolloError): ERROR_CODES[] => {
     return errorCodes
   }
 
-  error.graphQLErrors.forEach((e) => {
+  error.graphQLErrors.forEach((e: MattersGraphQLFormattedError) => {
     const code = e.extensions?.code
     if (code) {
       errorCodes.push(code)

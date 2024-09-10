@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { sum as d3Sum } from 'd3-array'
 import _get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'

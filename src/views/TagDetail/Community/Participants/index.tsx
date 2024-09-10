@@ -1,4 +1,4 @@
-import { NetworkStatus } from 'apollo-client'
+import { NetworkStatus } from '@apollo/client'
 import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
@@ -23,7 +23,6 @@ const Participants = ({ id }: Props) => {
   const { data, loading, error, fetchMore, networkStatus } =
     usePublicQuery<TagParticipantsQuery>(TAG_PARTICIPANTS, {
       variables: { id },
-      notifyOnNetworkStatusChange: true,
     })
 
   // pagination

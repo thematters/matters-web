@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
@@ -50,10 +50,7 @@ const ManageButton = ({ id }: Props) => {
 const Maintainers = ({ id, isOwner }: Props) => {
   const { data, loading, error } = useQuery<TagMaintainersQuery>(
     TAG_MAINTAINERS,
-    {
-      variables: { id },
-      notifyOnNetworkStatusChange: true,
-    }
+    { variables: { id } }
   )
 
   if (loading) {

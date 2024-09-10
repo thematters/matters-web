@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
@@ -13,11 +13,23 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
-import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, SidebarTagsPublicQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import styles from './styles.module.css'
+
+const FETCH_SIDEBAR_TAGS_QUERY = gql`
+  fragment SidebarTags on LastFetchRandom {
+    sidebarTags
+  }
+
+  query LastFetchSidebarTags {
+    lastFetchRandom @client {
+      id
+      ...SidebarTags
+    }
+  }
+`
 
 const SIDEBAR_TAGS = gql`
   query SidebarTagsPublic(
@@ -48,21 +60,19 @@ const Tags = () => {
   const viewer = useContext(ViewerContext)
 
   const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
-    FETCH_RECORD,
+    FETCH_SIDEBAR_TAGS_QUERY,
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags // last Random
   const perPage = 4
   const randomMaxSize = 50
-  const { data, loading, error, refetch } =
-    usePublicQuery<SidebarTagsPublicQuery>(
-      SIDEBAR_TAGS,
-      {
-        notifyOnNetworkStatusChange: true,
-        variables: { random: lastRandom || 0, first: perPage },
-      },
-      { publicQuery: !viewer.isAuthed }
-    )
+  const { data, loading, error } = usePublicQuery<SidebarTagsPublicQuery>(
+    SIDEBAR_TAGS,
+    {
+      variables: { random: lastRandom || 0, first: perPage },
+    },
+    { publicQuery: !viewer.isAuthed }
+  )
   const edges = data?.viewer?.recommendation.tags.edges
 
   const shuffle = () => {
@@ -70,19 +80,20 @@ const Tags = () => {
       (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / perPage
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
-    refetch({ random })
 
-    client.writeData({
-      id: 'LastFetchRandom:local',
-      data: { sidebarTags: random },
-    })
+    lastFetchRandom &&
+      client.cache.modify({
+        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+        fields: { sidebarTags: () => random },
+      })
   }
 
   if (error) {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0) {
+  // hide the tag list if we don't get a result from the response
+  if (!loading && (!edges || edges.length <= 0)) {
     return null
   }
 
@@ -93,25 +104,26 @@ const Tags = () => {
         rightButton={<ShuffleButton onClick={shuffle} />}
       />
 
-      {loading && <SpinnerBlock />}
-
-      {!loading && (
+      {loading ? (
+        <SpinnerBlock />
+      ) : (
         <List hasBorder={false}>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={node.id}>
-              <TagDigest.Sidebar
-                tag={node}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'tags',
-                    contentType: 'tag',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-              />
-            </List.Item>
-          ))}
+          {edges &&
+            edges.map(({ node }, i) => (
+              <List.Item key={node.id}>
+                <TagDigest.Sidebar
+                  tag={node}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'tags',
+                      contentType: 'tag',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
+              </List.Item>
+            ))}
         </List>
       )}
     </section>

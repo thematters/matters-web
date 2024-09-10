@@ -6,8 +6,7 @@
 
   height: calc(var(--ivh) * 100 - 3rem - 4rem - var(--sp16) * 2);
   height: calc(100dvh - 3rem - 4rem - var(--sp16) * 2);
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
 
   @media (--md-up) {
     height: auto;

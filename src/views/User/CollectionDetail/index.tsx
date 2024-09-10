@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useIntl } from 'react-intl'
 
 import { toPath } from '~/common/utils'

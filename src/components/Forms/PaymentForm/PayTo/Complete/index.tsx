@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import _random from 'lodash/random'
 import _range from 'lodash/range'
 import { useContext, useEffect } from 'react'

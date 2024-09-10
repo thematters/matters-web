@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
@@ -12,6 +12,7 @@ import {
   PageHeader,
   ShuffleButton,
   Slides,
+  SpinnerBlock,
   TagDigest,
   usePublicQuery,
   ViewAllButton,
@@ -65,7 +66,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
 
   const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
 
-  const { data, refetch } = usePublicQuery<TagDetailRecommendedQuery>(
+  const { data, loading } = usePublicQuery<TagDetailRecommendedQuery>(
     RELATED_TAGS,
     {
       variables: { id: tagId, random: lastRandom || 0 },
@@ -83,18 +84,18 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
       id,
     })
 
-  if (!edges || edges.length <= 0) {
+  if (!loading && (!edges || edges.length === 0)) {
     return null
   }
 
   const shuffle = () => {
     const random = _random(0, 49)
-    refetch({ random })
 
-    client.writeData({
-      id: 'LastFetchRandom:local',
-      data: { feedAuthors: random },
-    })
+    lastFetchRandom &&
+      client.cache.modify({
+        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+        fields: { feedTags: () => random },
+      })
   }
 
   const relatedTagsClasses = classNames({
@@ -144,16 +145,22 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   return (
     <section className={relatedTagsClasses}>
       <RelatedTagsHeader hasViewAll hasShuffle onShuffle={shuffle} />
-      <List hasBorder={false}>
-        {edges?.map(({ node, cursor }, i) => (
-          <List.Item key={node.id}>
-            <TagDigest.Sidebar
-              tag={node}
-              onClick={() => trackRelatedTags(i, node.id)}
-            />
-          </List.Item>
-        ))}
-      </List>
+
+      {loading ? (
+        <SpinnerBlock />
+      ) : (
+        <List hasBorder={false}>
+          {edges &&
+            edges.map(({ node }, i) => (
+              <List.Item key={node.id}>
+                <TagDigest.Sidebar
+                  tag={node}
+                  onClick={() => trackRelatedTags(i, node.id)}
+                />
+              </List.Item>
+            ))}
+        </List>
+      )}
     </section>
   )
 }

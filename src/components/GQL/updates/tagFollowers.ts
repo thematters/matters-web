@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from '@apollo/client/cache'
 
 import TAG_FOLLOWERS from '~/components/GQL/queries/tagFollowers'
 import { TagFollowersQuery } from '~/gql/graphql'

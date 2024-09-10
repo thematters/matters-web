@@ -46,8 +46,8 @@ export const Turnstile = forwardRef<
     options.execution === 'execute'
       ? CONTAINER_STYLE_SET.invisible
       : options.appearance === 'interaction-only'
-      ? CONTAINER_STYLE_SET.interactionOnly
-      : CONTAINER_STYLE_SET[widgetSize]
+        ? CONTAINER_STYLE_SET.interactionOnly
+        : CONTAINER_STYLE_SET[widgetSize]
   )
   const containerRef = useRef<HTMLElement | null>(null)
   const firstRendered = useRef(false)
@@ -104,97 +104,93 @@ export const Turnstile = forwardRef<
     [renderConfig]
   )
 
-  useImperativeHandle(
-    ref,
-    () => {
-      if (typeof window === 'undefined' || !scriptLoaded) {
-        return
-      }
+  useImperativeHandle(ref, () => {
+    if (typeof window === 'undefined' || !scriptLoaded) {
+      return
+    }
 
-      const { turnstile } = window
-      return {
-        getResponse() {
-          if (!turnstile?.getResponse || !widgetId) {
-            console.warn('Turnstile has not been loaded')
-            return
-          }
+    const { turnstile } = window
+    return {
+      getResponse() {
+        if (!turnstile?.getResponse || !widgetId) {
+          console.warn('Turnstile has not been loaded')
+          return
+        }
 
-          return turnstile.getResponse(widgetId)
-        },
+        return turnstile.getResponse(widgetId)
+      },
 
-        reset() {
-          if (!turnstile?.reset || !widgetId) {
-            console.warn('Turnstile has not been loaded')
-            return
-          }
+      reset() {
+        if (!turnstile?.reset || !widgetId) {
+          console.warn('Turnstile has not been loaded')
+          return
+        }
 
-          if (options.execution === 'execute') {
-            setContainerStyle(CONTAINER_STYLE_SET.invisible)
-          }
-
-          try {
-            turnstile.reset(widgetId)
-          } catch (error) {
-            console.warn(`Failed to reset Turnstile widget ${widgetId}`, error)
-          }
-        },
-
-        remove() {
-          if (!turnstile?.remove || !widgetId) {
-            console.warn('Turnstile has not been loaded')
-            return
-          }
-
-          setWidgetId('')
+        if (options.execution === 'execute') {
           setContainerStyle(CONTAINER_STYLE_SET.invisible)
-          turnstile.remove(widgetId)
-        },
+        }
 
-        render() {
-          if (!turnstile?.render || !containerRef.current || widgetId) {
-            console.warn(
-              'Turnstile has not been loaded or widget already rendered'
-            )
-            return
-          }
+        try {
+          turnstile.reset(widgetId)
+        } catch (error) {
+          console.warn(`Failed to reset Turnstile widget ${widgetId}`, error)
+        }
+      },
 
-          /* eslint-disable */
-          const id = turnstile.render(containerRef.current, renderConfig)
-          setWidgetId(id)
+      remove() {
+        if (!turnstile?.remove || !widgetId) {
+          console.warn('Turnstile has not been loaded')
+          return
+        }
 
-          if (options.execution !== 'execute') {
-            setContainerStyle(CONTAINER_STYLE_SET[widgetSize])
-          }
+        setWidgetId('')
+        setContainerStyle(CONTAINER_STYLE_SET.invisible)
+        turnstile.remove(widgetId)
+      },
 
-          return id
-        },
+      render() {
+        if (!turnstile?.render || !containerRef.current || widgetId) {
+          console.warn(
+            'Turnstile has not been loaded or widget already rendered'
+          )
+          return
+        }
 
-        execute() {
-          if (options.execution !== 'execute') {
-            return
-          }
+        /* eslint-disable */
+        const id = turnstile.render(containerRef.current, renderConfig)
+        setWidgetId(id)
 
-          if (!turnstile?.execute || !containerRef.current || !widgetId) {
-            console.warn(
-              'Turnstile has not been loaded or widget has not been rendered'
-            )
-            return
-          }
-
-          turnstile.execute(containerRef.current, renderConfig)
+        if (options.execution !== 'execute') {
           setContainerStyle(CONTAINER_STYLE_SET[widgetSize])
-        },
-      }
-    },
-    [
-      scriptLoaded,
-      widgetId,
-      options.execution,
-      widgetSize,
-      renderConfig,
-      containerRef,
-    ]
-  )
+        }
+
+        return id
+      },
+
+      execute() {
+        if (options.execution !== 'execute') {
+          return
+        }
+
+        if (!turnstile?.execute || !containerRef.current || !widgetId) {
+          console.warn(
+            'Turnstile has not been loaded or widget has not been rendered'
+          )
+          return
+        }
+
+        turnstile.execute(containerRef.current, renderConfig)
+        setContainerStyle(CONTAINER_STYLE_SET[widgetSize])
+      },
+    }
+  }, [
+    scriptLoaded,
+    widgetId,
+    options.execution,
+    widgetSize,
+    renderConfig,
+    containerRef,
+  ])
 
   useEffect(() => {
     // @ts-expect-error implicit any
@@ -284,8 +280,8 @@ export const Turnstile = forwardRef<
       options.execution === 'execute'
         ? CONTAINER_STYLE_SET.invisible
         : renderConfig.appearance === 'interaction-only'
-        ? CONTAINER_STYLE_SET.interactionOnly
-        : CONTAINER_STYLE_SET[widgetSize]
+          ? CONTAINER_STYLE_SET.interactionOnly
+          : CONTAINER_STYLE_SET[widgetSize]
     )
   }, [options.execution, widgetSize, renderConfig.appearance])
 

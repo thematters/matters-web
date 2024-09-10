@@ -162,14 +162,12 @@ export const Head: React.FC<HeadProps> = (props) => {
         href: IMAGE_FAVICON_32.src,
         sizes: '32x32',
         type: 'image/png',
-        keyOverride: 'favicon-32',
       },
       {
         rel: 'icon',
         href: IMAGE_FAVICON_64.src,
         sizes: '64x64',
         type: 'image/png',
-        keyOverride: 'favicon-64',
       },
       {
         // Note: With the attribute key, dapp can't get the shortcut icon.

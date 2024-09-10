@@ -17,6 +17,7 @@
       width: calc(100% - var(--sp16) * 2);
       content: '';
       border-top: 1px dashed var(--color-grey-light);
+
       @media (--sm-up) {
         width: 100%;
       }

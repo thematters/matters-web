@@ -1,94 +1,72 @@
 {
-  "__schema": {
-    "types": [
-      {
-        "kind": "UNION",
-        "name": "Invitee",
-        "possibleTypes": [{ "name": "Person" }, { "name": "User" }]
-      },
-      {
-        "kind": "INTERFACE",
-        "name": "Notice",
-        "possibleTypes": [
-          { "name": "UserNotice" },
-          { "name": "ArticleNotice" },
-          { "name": "ArticleArticleNotice" },
-          { "name": "CommentNotice" },
-          { "name": "CommentCommentNotice" },
-          { "name": "ArticleTagNotice" },
-          { "name": "TagNotice" },
-          { "name": "TransactionNotice" },
-          { "name": "CircleNotice" },
-          { "name": "OfficialAnnouncementNotice" }
-        ]
-      },
-      {
-        "kind": "INTERFACE",
-        "name": "Node",
-        "possibleTypes": [
-          { "name": "Article" },
-          { "name": "Chapter" },
-          { "name": "Topic" },
-          { "name": "Tag" },
-          { "name": "Circle" },
-          { "name": "Comment" },
-          { "name": "Draft" },
-          { "name": "User" }
-        ]
-      },
-      {
-        "kind": "INTERFACE",
-        "name": "Connection",
-        "possibleTypes": [
-          { "name": "ArticleConnection" },
-          { "name": "TopicConnection" },
-          { "name": "TagConnection" },
-          { "name": "CircleConnection" },
-          { "name": "MemberConnection" },
-          { "name": "InvitationConnection" },
-          { "name": "CommentConnection" },
-          { "name": "DraftConnection" },
-          { "name": "NoticeConnection" },
-          { "name": "SearchResultConnection" },
-          { "name": "SkippedListItemsConnection" },
-          { "name": "TopDonatorConnection" },
-          { "name": "UserConnection" },
-          { "name": "ReadHistoryConnection" },
-          { "name": "RecentSearchConnection" },
-          { "name": "AppreciationConnection" },
-          { "name": "FollowingActivityConnection" },
-          { "name": "ResponseConnection" },
-          { "name": "TransactionConnection" },
-          { "name": "OAuthClientConnection" }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "FollowingActivity",
-        "possibleTypes": [
-          { "name": "UserPublishArticleActivity" },
-          { "name": "UserAddArticleTagActivity" },
-          { "name": "UserBroadcastCircleActivity" },
-          { "name": "UserCreateCircleActivity" },
-          { "name": "UserRecommendationActivity" },
-          { "name": "ArticleRecommendationActivity" },
-          { "name": "CircleRecommendationActivity" }
-        ]
-      },
-      {
-        "kind": "UNION",
-        "name": "Response",
-        "possibleTypes": [{ "name": "Article" }, { "name": "Comment" }]
-      },
-      {
-        "kind": "UNION",
-        "name": "TransactionTarget",
-        "possibleTypes": [
-          { "name": "Article" },
-          { "name": "Circle" },
-          { "name": "Transaction" }
-        ]
-      }
-    ]
-  }
+  "Campaign": ["WritingChallenge"],
+  "Invitee": ["Person", "User"],
+  "Notice": [
+    "UserNotice",
+    "ArticleNotice",
+    "ArticleArticleNotice",
+    "MomentNotice",
+    "CommentNotice",
+    "CommentCommentNotice",
+    "TransactionNotice",
+    "CircleNotice",
+    "OfficialAnnouncementNotice",
+    "CollectionNotice"
+  ],
+  "Node": [
+    "Article",
+    "ArticleVersion",
+    "Tag",
+    "WritingChallenge",
+    "Circle",
+    "User",
+    "Comment",
+    "Draft",
+    "Report",
+    "IcymiTopic",
+    "Collection",
+    "Moment"
+  ],
+  "PinnableWork": ["Article", "Collection"],
+  "Connection": [
+    "ArticleVersionsConnection",
+    "ArticleConnection",
+    "TagConnection",
+    "CampaignParticipantConnection",
+    "CampaignConnection",
+    "CircleConnection",
+    "MemberConnection",
+    "InvitationConnection",
+    "CommentConnection",
+    "DraftConnection",
+    "NoticeConnection",
+    "SearchResultConnection",
+    "SkippedListItemsConnection",
+    "ReportConnection",
+    "IcymiTopicConnection",
+    "TopDonatorConnection",
+    "UserConnection",
+    "ReadHistoryConnection",
+    "RecentSearchConnection",
+    "AppreciationConnection",
+    "FollowingActivityConnection",
+    "WritingConnection",
+    "ResponseConnection",
+    "TransactionConnection",
+    "OAuthClientConnection",
+    "CollectionConnection"
+  ],
+  "FollowingActivity": [
+    "UserPublishArticleActivity",
+    "UserAddArticleTagActivity",
+    "UserPostMomentActivity",
+    "UserBroadcastCircleActivity",
+    "UserCreateCircleActivity",
+    "UserRecommendationActivity",
+    "ArticleRecommendationActivity",
+    "CircleRecommendationActivity"
+  ],
+  "Writing": ["Article", "Moment"],
+  "Response": ["Article", "Comment"],
+  "TransactionTarget": ["Article", "Circle", "Transaction"]
 }

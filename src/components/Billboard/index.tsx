@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useContractRead } from 'wagmi'
 
@@ -18,6 +19,15 @@ type BillboardProps = {
 }
 
 export const Billboard = ({ tokenId, type }: BillboardProps) => {
+  const [mount, setMount] = useState(false)
+
+  // The current version of wagmi does not support SSR, leading to dehydration
+  // warnings since the SSR and CSR are out-of-sync. The `useEffect` ensure
+  // that the initial render on the client matches the one on the server.
+  useEffect(() => {
+    setMount(true)
+  })
+
   // collect vars
   const id = !isNaN(Number(tokenId)) ? Number(tokenId) : 0
   const address = process.env.NEXT_PUBLIC_BILLBOARD_ADDRESS as `0x${string}`
@@ -32,6 +42,10 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
     args: [BigInt(id)],
     cacheTime: 60_000,
   })
+
+  if (!mount) {
+    return null
+  }
 
   if (!id || isError || isLoading || !data || !data.contentURI) {
     return null

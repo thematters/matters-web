@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from '@apollo/client/cache'
 import _remove from 'lodash/remove'
 
 import { toGlobalId } from '~/common/utils'

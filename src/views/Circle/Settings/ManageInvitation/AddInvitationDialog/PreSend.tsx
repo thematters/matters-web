@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 

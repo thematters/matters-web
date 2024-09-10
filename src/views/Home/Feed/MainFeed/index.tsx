@@ -1,4 +1,3 @@
-import { NetworkStatus } from 'apollo-client'
 import { useContext, useEffect, useRef } from 'react'
 
 import { analytics, mergeConnections } from '~/common/utils'
@@ -93,17 +92,14 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
    */
   // public data
   const query = FEED_ARTICLES_PUBLIC[sortBy]
-  const { data, error, loading, fetchMore, networkStatus, client } =
-    usePublicQuery<FeedArticlesPublic>(query, {
-      notifyOnNetworkStatusChange: true,
-    })
+  const { data, error, loading, fetchMore, client } =
+    usePublicQuery<FeedArticlesPublic>(query)
 
   // pagination
   const connectionPath = 'viewer.recommendation.feed'
   const recommendation = data?.viewer?.recommendation
   const result = recommendation?.feed
   const { edges, pageInfo } = result || {}
-  const isNewLoading = networkStatus === NetworkStatus.loading
 
   // private data
   const loadPrivate = (publicData?: FeedArticlesPublic) => {
@@ -135,7 +131,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
 
   // load next page
   const loadMore = async () => {
-    if (loading || isNewLoading) {
+    if (loading) {
       return
     }
 
@@ -163,7 +159,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   /**
    * Render
    */
-  if (loading && (!result || isNewLoading)) {
+  if (loading && !result) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()

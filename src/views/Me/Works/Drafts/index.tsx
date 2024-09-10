@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import router from 'next/router'
 import { FormattedMessage, useIntl } from 'react-intl'
 

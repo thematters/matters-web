@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { DataProxy } from '@apollo/client/cache'
 
 import CIRCLE_FOLLOWER_COUNT from '~/components/GQL/queries/circleFollowerCount'
 import { CircleFollowerCountQuery } from '~/gql/graphql'

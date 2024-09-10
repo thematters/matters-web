@@ -1,4 +1,4 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation } from '@apollo/client'
 import { createContext, useRef } from 'react'
 
 import { randomString } from '~/common/utils'

@@ -13,8 +13,8 @@ export const BackToHomeButton = () => {
     lang === UserLanguage.En
       ? 'Back to discovery'
       : lang === UserLanguage.ZhHans
-      ? '返回发现'
-      : '返回發現'
+        ? '返回发现'
+        : '返回發現'
 
   return (
     <Button size={['10.5rem', '2.25rem']} bgColor="green" href={PATHS.HOME}>

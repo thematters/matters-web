@@ -1,5 +1,6 @@
 .support {
   margin-top: var(--sp24);
+
   @mixin flex-center-space-between;
 
   & .hint {

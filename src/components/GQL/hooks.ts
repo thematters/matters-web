@@ -1,14 +1,16 @@
-import { OperationVariables, QueryResult } from '@apollo/react-common'
 import {
   LazyQueryHookOptions,
   MutationHookOptions,
   MutationTuple,
+  NoInfer,
+  OperationVariables,
   QueryHookOptions,
+  QueryResult,
   QueryTuple,
   useLazyQuery as baseUseLazyQuery,
   useMutation as baseUseMutation,
   useQuery as baseUseQuery,
-} from '@apollo/react-hooks'
+} from '@apollo/client'
 import { DocumentNode } from 'graphql'
 
 import { GQL_CONTEXT_PUBLIC_QUERY_KEY } from '~/common/enums'
@@ -23,7 +25,7 @@ type CustomMutationProps = ToastMutationErrorsOptions
 
 export const useMutation = <TData = any, TVariables = OperationVariables>(
   mutation: DocumentNode,
-  options?: MutationHookOptions<TData, TVariables>,
+  options?: MutationHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
   customMutationProps?: CustomMutationProps
 ): MutationTuple<TData, TVariables> => {
   const [mutate, result] = baseUseMutation(mutation, {
@@ -43,9 +45,12 @@ export const useMutation = <TData = any, TVariables = OperationVariables>(
 interface CustomQueryProps {
   publicQuery?: boolean
 }
-export const usePublicQuery = <TData = any, TVariables = OperationVariables>(
+export const usePublicQuery = <
+  TData = any,
+  TVariables extends OperationVariables = OperationVariables,
+>(
   query: DocumentNode,
-  options?: QueryHookOptions<TData, TVariables>,
+  options?: QueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
   customQueryProps?: CustomQueryProps
 ): QueryResult<TData, TVariables> => {
   const publicQuery = customQueryProps?.publicQuery
@@ -63,10 +68,10 @@ export const usePublicQuery = <TData = any, TVariables = OperationVariables>(
 
 export const usePublicLazyQuery = <
   TData = any,
-  TVariables = OperationVariables,
+  TVariables extends OperationVariables = OperationVariables,
 >(
   query: DocumentNode,
-  options?: LazyQueryHookOptions<TData, TVariables>,
+  options?: LazyQueryHookOptions<NoInfer<TData>, NoInfer<TVariables>>,
   customQueryProps?: CustomQueryProps
 ): QueryTuple<TData, TVariables> => {
   const publicQuery = customQueryProps?.publicQuery
@@ -95,7 +100,7 @@ export const usePublicLazyQuery = <
  */
 export const useImperativeQuery = <
   TData = any,
-  TVariables = OperationVariables,
+  TVariables extends OperationVariables = OperationVariables,
 >(
   query: DocumentNode,
   options: QueryHookOptions<TData, TVariables> = {}
@@ -105,7 +110,7 @@ export const useImperativeQuery = <
     skip: true,
   })
 
-  const imperativelyCallQuery = (queryVariables: TVariables) => {
+  const imperativelyCallQuery = (queryVariables?: Partial<TVariables>) => {
     return refetch(queryVariables)
   }
 

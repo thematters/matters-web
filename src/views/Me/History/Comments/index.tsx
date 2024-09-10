@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import _flatten from 'lodash/flatten'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'

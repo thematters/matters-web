@@ -1,6 +1,6 @@
+import { ApolloClient } from '@apollo/client'
 import { ReactRenderer } from '@tiptap/react'
 import type { SuggestionProps } from '@tiptap/suggestion'
-import ApolloClient from 'apollo-client'
 import type { GetReferenceClientRect, Instance } from 'tippy.js'
 import tippy from 'tippy.js'
 

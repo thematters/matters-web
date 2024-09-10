@@ -1,4 +1,4 @@
-import ApolloClient from 'apollo-client'
+import { ApolloClient } from '@apollo/client'
 
 import { GET_ARTICLE_BY_SHORT_HASH } from '~/components/GQL/queries/getArticle'
 import { GetArticleByShortHashQuery } from '~/gql/graphql'

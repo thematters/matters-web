@@ -37,10 +37,10 @@ const Amount = ({
     purpose === TransactionPurpose.Dispute && state === TransactionState.Pending
       ? 'black'
       : state !== TransactionState.Succeeded
-      ? 'grey'
-      : amount > 0
-      ? 'gold'
-      : 'black'
+        ? 'grey'
+        : amount > 0
+          ? 'gold'
+          : 'black'
 
   return (
     <TextIcon spacing={8} size={16} weight="medium" color={color}>

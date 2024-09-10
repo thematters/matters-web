@@ -12,7 +12,7 @@ import styles from './styles.module.css'
 export type SquareCheckBoxBoxProps = {
   name: string
   value: string
-  content?: React.ReactNode
+  contents?: React.ReactNode
 
   icon?: React.ReactNode
   left?: React.ReactNode
@@ -27,7 +27,7 @@ export type SquareCheckBoxBoxProps = {
   >
 
 const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
-  content,
+  contents,
   error,
   hint,
 
@@ -102,7 +102,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
               {sup}
               <span className={hintClasses}>
                 {left}
-                {content || hint}
+                {contents || hint}
               </span>
             </section>
           </TextIcon>
