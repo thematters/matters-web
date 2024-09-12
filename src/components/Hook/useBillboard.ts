@@ -101,6 +101,7 @@ export const useBillboard = ({
 
         setStatus(QueryStatus.LOADED)
       } catch (error) {
+        console.log(error)
         resetData()
         setStatus(QueryStatus.ERROR)
       }
