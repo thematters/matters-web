@@ -1,3 +1,4 @@
+export * from './useBillboard'
 export * from './useCarousel'
 export * from './useColorThief'
 export * from './useCountdown'
