@@ -68,7 +68,7 @@ export const useBillboard = ({
           args: [tokenId],
         })
 
-        if (currEpoch < 2n) {
+        if (currEpoch < 1n) {
           return
         }
 
