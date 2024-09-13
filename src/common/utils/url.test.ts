@@ -4,7 +4,6 @@ import {
   isUrl,
   parseCommentHash,
   parseSorter,
-  parseURL,
   stringifySorter,
   toSizedImageURL,
 } from './url'
@@ -46,48 +45,6 @@ describe('utils/url/isUrl', () => {
     expect(isUrl('https://example.com:port/#hash')).toBe(false)
     expect(isUrl('https://example.com:port/?query=param#hash')).toBe(false)
     expect(isUrl('http://example.com:port:8080')).toBe(false)
-  })
-})
-
-describe('utils/url/parseURL', () => {
-  it('should parse URL', () => {
-    expect(parseURL('https://example.com:8080/path?query=param#hash')).toEqual({
-      protocol: 'https:',
-      host: 'example.com:8080',
-      hostname: 'example.com',
-      port: '8080',
-      pathname: '/path',
-      search: '?query=param',
-      hash: '#hash',
-    })
-
-    expect(parseURL('http://example.com')).toEqual({
-      protocol: 'http:',
-      host: 'example.com',
-      hostname: 'example.com',
-      port: '',
-      pathname: '/',
-      search: '',
-      hash: '',
-    })
-
-    expect(
-      parseURL(
-        'https://example.com/@userName/10010-%E4%BA%94-bafybeidlgjmkj6tgtmeyeor'
-      )
-    ).toEqual({
-      protocol: 'https:',
-      host: 'example.com',
-      hostname: 'example.com',
-      port: '',
-      pathname: '/@userName/10010-%E4%BA%94-bafybeidlgjmkj6tgtmeyeor',
-      search: '',
-      hash: '',
-    })
-
-    // uncommon URLs
-    expect(parseURL('example.com').hostname).not.toBe('example.com')
-    expect(parseURL('').hostname).not.toBe('example.com')
   })
 })
 

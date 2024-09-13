@@ -6,22 +6,6 @@ type Sorter = {
   [key: string]: string
 }
 
-export const parseURL = (url: string) => {
-  const parser = document.createElement('a')
-
-  parser.href = url
-
-  return {
-    protocol: parser.protocol,
-    host: parser.host,
-    hostname: parser.hostname,
-    port: parser.port,
-    pathname: parser.pathname,
-    search: parser.search,
-    hash: parser.hash,
-  }
-}
-
 /**
  * Responsive Image
  */

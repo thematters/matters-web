@@ -9,7 +9,6 @@ import {
   isValidEmail,
   mergeConnections,
   normalizeTag,
-  parseURL,
 } from '~/common/utils'
 import {
   EmptySearch,
@@ -178,8 +177,10 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
       `^https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/a/[a-zA-Z0-9]+`
     )
     if (searchType === 'Article' && isUrl(key) && regex.test(key)) {
-      const urlObj = parseURL(key)
-      const shortHash = urlObj.pathname.split('/a/')[1].split('?')[0]
+      const urlObi = new window.URI(key)
+      const shortHash = urlObi.path().split('/a/')[1]?.split('?')[0]
+      // const urlObj = parseURL(key)
+      // const shortHash = urlObj.pathname.split('/a/')[1].split('?')[0]
       setMode('article_url')
       lazyArticleUrlQuery({ variables: { shortHash } })
     } else {

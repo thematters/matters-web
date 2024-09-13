@@ -5,7 +5,6 @@ import { PATHS, ROUTES } from '~/common/enums'
 
 import { fromGlobalId } from './globalId'
 import { slugifyTag } from './text'
-import { parseURL } from './url'
 
 interface ArticleArgs {
   shortHash: string
@@ -404,11 +403,16 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     return
   }
 
-  const url = parseURL(el.href)
-  const windowURL = parseURL(window.location.href)
+  const url = new window.URI(el.href)
+  const windowURL = new window.URI(window.location.href)
+  // const url = parseURL(el.href)
+  // const windowURL = parseURL(window.location.href)
 
   // Ignore links that don't share a protocol and host with ours.
-  if (url.protocol !== windowURL.protocol || url.host !== windowURL.host) {
+  if (
+    url.protocol() !== windowURL.protocol() ||
+    url.host() !== windowURL.host()
+  ) {
     return
   }
 
@@ -424,10 +428,10 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     const keys: Key[] = []
     const path = pathname.replace(/\]/g, '').replace(/\[/g, ':')
     const regexp = pathToRegexp(path, keys)
-    const result = regexp.exec(url.pathname)
+    const result = regexp.exec(url.path())
 
     if (result) {
-      const searchQuery = new URLSearchParams(url.search) || {}
+      const searchQuery = new URLSearchParams(url.search()) || {}
       const matchedQuery: { [key: string]: string } = {}
       keys.forEach((k, i) => (matchedQuery[k.name] = result[i + 1]))
 
