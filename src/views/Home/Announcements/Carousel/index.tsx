@@ -134,9 +134,9 @@ const Carousel = ({ items }: CarouselProps) => {
             )
 
             // const hasTranslaton = translatedItem != null
-            const title = (translatedItem?.title ?? item.title) || ''
-            const itemLink = (translatedItem?.link ?? item.link) || ''
-            const itemContent = translatedItem?.content ?? item.content
+            const title = translatedItem?.title || item.title || ''
+            const itemLink = translatedItem?.link || item.link || ''
+            const itemContent = translatedItem?.content || item.content || ''
             const isFirstFold = i === 0
 
             return (
