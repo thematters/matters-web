@@ -54,9 +54,6 @@
 
   & .content {
     margin: var(--sp8) 0 var(--sp12);
-    font-size: var(--text17);
-    line-height: 1.75;
-    white-space: pre-wrap;
 
     & .contentPlaceholder {
       width: 100%;

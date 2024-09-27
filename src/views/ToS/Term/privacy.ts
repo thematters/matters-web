@@ -1,6 +1,6 @@
 const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
   zh_hant: /* html */ `
-<details class="u-content u-details">
+<details class="u-content-article u-details">
 <summary>
   <h3>隱私政策</h3>
 </summary>
@@ -107,7 +107,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 <p>11.5 MATTERS和服務的網站可能包含其他網站或應用程序的鏈接。用戶理解並承認，MATTERS和服務的網站上包含其他網站、應用程序或廣告的鏈接，並不代表MATTERS認可或授權此類第三方收集用戶個人信息，也不代表MATTERS與此類第三方之間有任何業務關係。用戶理解並承認，一旦用戶點擊與訪問此類網站、應用程序或廣告的鏈接，這些網站、應用程序和廣告有可能會收集他們的個人信息。用戶理解並承認，這些第三方網站、應用程序和廣告在收集、使用、處理或公開用戶提交的個人信息時，遵循的是不同於本隱私政策的其他規則。因此，用戶理解並承認，MATTERS不會對任何第三方進行的用戶個人信息的收集、使用、處理或公開的行為負責。</p>
   `,
   zh_hans: /* html */ `
-<details class="u-content u-details">
+<details class="u-content-article u-details">
 <summary>
   <h3>隐私政策</h3>
 </summary>
@@ -214,7 +214,7 @@ const Privacy: { zh_hant: string; zh_hans: string; en: string } = {
 </details>
   `,
   en: /* html */ `
-<details class="u-content u-details">
+<details class="u-content-article u-details">
 <summary>
   <h3>Privacy Policy </h3>
 </summary>

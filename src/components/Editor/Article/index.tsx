@@ -144,6 +144,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   })
 
   const editorClasses = classNames({
+    'u-content-article': true,
     [styles.articleEditor]: true,
     [styles.indented]: indentFirstLine,
   })

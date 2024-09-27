@@ -40,8 +40,7 @@
   padding: 0 var(--sp16);
   overflow: scroll;
 
-  & :global(.ProseMirror),
-  & :global(.tiptap) {
+  & :global(.tiptap.ProseMirror) {
     min-height: 6.5rem; /* Height of 4 lines of text */
   }
 }

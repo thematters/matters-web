@@ -67,7 +67,7 @@ export const MomentDigestDetail = ({
       </header>
       {hasContent && !!content && (
         <section
-          className={styles.content}
+          className={`${styles.content} u-content-moment size17`}
           data-test-id={TEST_ID.MOMENT_DIGEST_CONTENT}
           onClick={captureClicks}
           dangerouslySetInnerHTML={{
