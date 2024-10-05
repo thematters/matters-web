@@ -23,7 +23,7 @@ const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
           title={
-            <Translate zh_hant="追蹤內容" zh_hans="追踪内容" en={`Following`} />
+            <Translate zh_hant="關注內容" zh_hans="关注内容" en={`Following`} />
           }
           closeDialog={closeDialog}
           closeText={<FormattedMessage defaultMessage="Close" id="rbrahO" />}
