@@ -13,7 +13,12 @@ import classNames from 'classnames'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { INPUT_DEBOUNCE, MAX_FIGURE_CAPTION_LENGTH } from '~/common/enums'
+import {
+  FOCUS_EDITOR_SUMMARY,
+  INPUT_DEBOUNCE,
+  KEYVALUE,
+  MAX_FIGURE_CAPTION_LENGTH,
+} from '~/common/enums'
 import { getValidFiles } from '~/common/utils'
 import { useNativeEventListener } from '~/components/Hook'
 import { EditorDraftFragment } from '~/gql/graphql'
@@ -75,6 +80,16 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       content = restoreImages(editor, content)
 
       debouncedUpdate({ content })
+    },
+    editorProps: {
+      handleKeyDown: (view, event) => {
+        if (
+          event.key.toLowerCase() === KEYVALUE.backSpace &&
+          view.state.selection.from <= 1
+        ) {
+          window.dispatchEvent(new CustomEvent(FOCUS_EDITOR_SUMMARY))
+        }
+      },
     },
     extensions: [
       Placeholder.configure({
@@ -159,6 +174,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         defaultValue={summaryCustomized && summary ? summary : ''}
         update={update}
         enable
+        editor={editor}
       />
 
       {editor && <BubbleMenu editor={editor} />}
