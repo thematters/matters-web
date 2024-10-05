@@ -317,7 +317,7 @@
     "defaultMessage": "已封鎖。該用戶無法評論你的作品和圍爐，他的評論對你闔上。"
   },
   "32bml8": {
-    "defaultMessage": "追蹤",
+    "defaultMessage": "關注",
     "description": "src/components/Layout/SideNav/index.tsx"
   },
   "33oNeg": {
@@ -684,7 +684,7 @@
     "defaultMessage": "僅支持 JPEG、PNG、GIF 和 WebP 圖片"
   },
   "91IQdk": {
-    "defaultMessage": "已追蹤",
+    "defaultMessage": "已關注",
     "description": "src/components/Buttons/FollowUser/Unfollow.tsx"
   },
   "99OtWT": {
@@ -772,7 +772,7 @@
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "AYTnjk": {
-    "defaultMessage": "追蹤",
+    "defaultMessage": "關注",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "AeIRlL": {
@@ -842,7 +842,7 @@
     "defaultMessage": "自由寫紀念徽章"
   },
   "Bjdw71": {
-    "defaultMessage": "目前總追蹤人數",
+    "defaultMessage": "目前總關注人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "Bkx6Gk": {
@@ -1136,7 +1136,7 @@
     "description": "src/views/Me/Settings/Settings/Wallet/index.tsx"
   },
   "GugBCe": {
-    "defaultMessage": "本月新增追蹤人數",
+    "defaultMessage": "本月新增關注人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "H0JBH6": {
@@ -1281,7 +1281,7 @@
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
   },
   "JkWLg6": {
-    "defaultMessage": "被追蹤",
+    "defaultMessage": "被關注",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "Jmg5do": {
@@ -1386,7 +1386,7 @@
     "description": "src/views/User/CollectionDetail/CollectionArticles/ViewerArticles.tsx"
   },
   "LGox1K": {
-    "defaultMessage": "已追蹤"
+    "defaultMessage": "已關注"
   },
   "LOefol": {
     "defaultMessage": "上鎖",
@@ -2029,7 +2029,7 @@
     "defaultMessage": "繼續提現"
   },
   "WuvE8X": {
-    "defaultMessage": "{circleName} 的追蹤者",
+    "defaultMessage": "{circleName} 的關注者",
     "description": "src/views/Circle/Profile/FollowersDialog/index.tsx"
   },
   "WxhsrG": {
@@ -2060,7 +2060,7 @@
     "defaultMessage": "精挑細選作品，幫助讀者更容易發現優質內容"
   },
   "XVYrS/": {
-    "defaultMessage": "還沒有追蹤者"
+    "defaultMessage": "還沒有關注者"
   },
   "XYUhx0": {
     "defaultMessage": "解綁 {type}",
@@ -2189,7 +2189,7 @@
     "defaultMessage": "點踩"
   },
   "Zakh0i": {
-    "defaultMessage": "還沒有追蹤任何標籤"
+    "defaultMessage": "還沒有關注任何標籤"
   },
   "ZjDH42": {
     "defaultMessage": "關於我們"
@@ -2321,7 +2321,7 @@
     "defaultMessage": "發現"
   },
   "cPIKU2": {
-    "defaultMessage": "追蹤中"
+    "defaultMessage": "關注中"
   },
   "cPSexq": {
     "defaultMessage": "去看看其他圍爐吧，希望你早日找到下一個心之所屬。"
@@ -2363,7 +2363,7 @@
     "defaultMessage": "返回"
   },
   "d1mBsg": {
-    "defaultMessage": "追蹤的圍爐",
+    "defaultMessage": "關注的圍爐",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "d4waan": {
@@ -2452,7 +2452,7 @@
     "defaultMessage": "自定義網址名稱"
   },
   "erE5/4": {
-    "defaultMessage": "互相追蹤",
+    "defaultMessage": "互相關注",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
   "exb/12": {
@@ -2557,7 +2557,7 @@
     "defaultMessage": "支持失敗"
   },
   "h7sMQs": {
-    "defaultMessage": "新追蹤者",
+    "defaultMessage": "新關注者",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "h9A6AT": {
@@ -2586,7 +2586,7 @@
     "description": "src/components/Balance/index.tsx"
   },
   "hYG5fb": {
-    "defaultMessage": "人追蹤",
+    "defaultMessage": "人關注",
     "description": "src/views/TagDetail/Followers/index.tsx"
   },
   "hgtWIO": {
@@ -2594,7 +2594,7 @@
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
   "hk2aiz": {
-    "defaultMessage": " 追蹤了你的圍爐",
+    "defaultMessage": "關注了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
   },
   "hl9bd4": {
@@ -2635,11 +2635,11 @@
     "defaultMessage": "不好意思，什麼都沒搜到"
   },
   "icdrwy": {
-    "defaultMessage": "追蹤了你",
+    "defaultMessage": "關注了你",
     "description": "src/components/Buttons/FollowUser/FollowState.tsx"
   },
   "ieGrWo": {
-    "defaultMessage": "追蹤"
+    "defaultMessage": "關注"
   },
   "imXsmo": {
     "defaultMessage": "回到作品頁",
@@ -2656,7 +2656,7 @@
     "defaultMessage": "全部作者"
   },
   "izWS4J": {
-    "defaultMessage": "取消追蹤"
+    "defaultMessage": "取消關注"
   },
   "j8oldW": {
     "defaultMessage": "已超過 {maxLength} 字，目前 {current} 字"
@@ -2694,7 +2694,7 @@
     "defaultMessage": "創作"
   },
   "k5NnNF": {
-    "defaultMessage": "追蹤了你",
+    "defaultMessage": "關注了你",
     "description": "src/components/Notice/UserNotice/UserNewFollowerNotice.tsx"
   },
   "k6pcz/": {
@@ -2950,7 +2950,7 @@
     "description": "src/views/Me/Settings/Settings/index.tsx"
   },
   "ohgTH4": {
-    "defaultMessage": "追蹤中",
+    "defaultMessage": "關注中",
     "description": "src/components/UserProfile/index.tsx"
   },
   "on+DYO": {
@@ -2994,7 +2994,7 @@
     "defaultMessage": "支持號召"
   },
   "pzTOmv": {
-    "defaultMessage": "追蹤者"
+    "defaultMessage": "關注者"
   },
   "q+N5Wd": {
     "defaultMessage": "管理圍爐",
@@ -3097,7 +3097,7 @@
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
   "rJSVni": {
-    "defaultMessage": "追蹤",
+    "defaultMessage": "關注",
     "description": "src/components/Buttons/FollowUser/Follow.tsx"
   },
   "rJqgwV": {
@@ -3544,7 +3544,7 @@
     "defaultMessage": "發布失敗"
   },
   "zKOr2x": {
-    "defaultMessage": "已追蹤用戶佔總觀看人數比例",
+    "defaultMessage": "已關注用戶佔總觀看人數比例",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
   "zOXvqB": {
