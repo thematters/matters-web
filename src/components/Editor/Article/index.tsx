@@ -10,10 +10,16 @@ import {
   useEditor,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
+import { useCallback, useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
-import { INPUT_DEBOUNCE, MAX_FIGURE_CAPTION_LENGTH } from '~/common/enums'
+import {
+  FOCUS_EDITOR_SUMMARY,
+  INPUT_DEBOUNCE,
+  KEYVALUE,
+  MAX_FIGURE_CAPTION_LENGTH,
+} from '~/common/enums'
 import { getValidFiles } from '~/common/utils'
 import { useNativeEventListener } from '~/components/Hook'
 import { EditorDraftFragment } from '~/gql/graphql'
@@ -76,6 +82,16 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
 
       debouncedUpdate({ content })
     },
+    editorProps: {
+      handleKeyDown: (view, event) => {
+        if (
+          event.key.toLowerCase() === KEYVALUE.backSpace &&
+          view.state.selection.from <= 1
+        ) {
+          window.dispatchEvent(new CustomEvent(FOCUS_EDITOR_SUMMARY))
+        }
+      },
+    },
     extensions: [
       Placeholder.configure({
         placeholder: intl.formatMessage({
@@ -121,6 +137,28 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     ],
   })
 
+  const editorRef = useRef<HTMLDivElement>(null)
+  const handleEditorClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement>) => {
+      const $editor = editorRef.current
+
+      if (!$editor || !editor) return
+
+      const { clientHeight } = $editor
+      const paddingBottom = parseInt(
+        window.getComputedStyle($editor).paddingBottom,
+        10
+      )
+      const clickY = event.nativeEvent.offsetY
+
+      if (clickY > clientHeight - paddingBottom && clickY <= clientHeight) {
+        editor.commands.focus('end')
+        editor.commands.insertContent([{ type: 'paragraph' }])
+      }
+    },
+    [editor]
+  )
+
   // fallback drop handler for non-editor area
   useNativeEventListener<DragEvent>('drop', async (event) => {
     const target = event.target
@@ -152,7 +190,9 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   return (
     <div
       className={editorClasses}
-      id="editor" // anchor for mention plugin
+      id="editor"
+      ref={editorRef}
+      onClick={handleEditorClick}
     >
       <EditorTitle defaultValue={title || ''} update={update} />
 
@@ -160,6 +200,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         defaultValue={summaryCustomized && summary ? summary : ''}
         update={update}
         enable
+        editor={editor}
       />
 
       {editor && <BubbleMenu editor={editor} />}

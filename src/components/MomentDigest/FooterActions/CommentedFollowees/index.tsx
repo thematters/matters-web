@@ -39,7 +39,13 @@ const CommentedFollowees = ({ moment }: CommentedFolloweesProps) => {
       <section className={styles.followees}>
         {commentedFollowees.slice(0, 3).map((user) => (
           <section className={styles.user} key={user.id}>
-            <UserDigest.Mini user={user} avatarSize={20} hasAvatar disabled />
+            <UserDigest.Mini
+              user={user}
+              avatarSize={20}
+              hasAvatar
+              disabled
+              showLogbook={false}
+            />
           </section>
         ))}
       </section>

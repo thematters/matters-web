@@ -99,8 +99,8 @@ const FollowersDialogContent = () => {
       <EmptyWarning
         description={
           <Translate
-            zh_hant="還沒有追蹤者"
-            zh_hans="还没有追踪者"
+            zh_hant="還沒有關注者"
+            zh_hans="还没有关注者"
             en="No followers yet"
           />
         }

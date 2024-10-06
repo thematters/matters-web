@@ -66,8 +66,8 @@ const UnfollowCircleActionButton = ({
     <Menu.Item
       text={
         <Translate
-          zh_hant={`取消追蹤 ${circle.displayName}`}
-          zh_hans={`取消追踪 ${circle.displayName}`}
+          zh_hant={`取消關注 ${circle.displayName}`}
+          zh_hans={`取消关注 ${circle.displayName}`}
         />
       }
       icon={<Icon icon={IconCircleMinus} size={20} />}
@@ -77,8 +77,8 @@ const UnfollowCircleActionButton = ({
         toast.success({
           message: (
             <Translate
-              zh_hant={`已取消追蹤 ${circle.displayName}`}
-              zh_hans={`已取消追踪 ${circle.displayName}`}
+              zh_hant={`已取消關注 ${circle.displayName}`}
+              zh_hans={`已取消关注 ${circle.displayName}`}
             />
           ),
         })
