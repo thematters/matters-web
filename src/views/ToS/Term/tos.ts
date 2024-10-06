@@ -1,6 +1,6 @@
 const ToS: { zh_hant: string; zh_hans: string; en: string } = {
   zh_hant: /* html */ `
-<details class="u-content u-details">
+<details class="u-content-article u-details">
 <summary>
   <h3>用戶協議</h3>
 </summary>
@@ -252,7 +252,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 </details>
   `,
   zh_hans: /* html */ `
-<details class="u-content u-details">
+<details class="u-content-article u-details">
 <summary>
   <h3>用户协议</h3>
 </summary>
@@ -500,7 +500,7 @@ const ToS: { zh_hant: string; zh_hans: string; en: string } = {
 </details>
 `,
   en: /* html */ `
-<details class="u-content u-details">
+<details class="u-content-article u-details">
 <summary>
   <h3>Terms and Conditions for MATTERS</h3>
 </summary>

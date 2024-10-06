@@ -42,15 +42,6 @@
     padding: 0 var(--sp24) var(--sp24);
   }
 
-  .content {
-    font-size: var(--text17);
-    line-height: 1.75;
-
-    & a {
-      color: var(--color-grey-darker);
-    }
-  }
-
   .assets {
     margin-top: var(--sp12);
   }

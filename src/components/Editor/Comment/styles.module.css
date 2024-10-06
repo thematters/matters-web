@@ -1,27 +1,10 @@
-.commentEditor :global(.ProseMirror),
-.commentEditor :global(.tiptap) {
+.commentEditor :global(.tiptap.ProseMirror) {
   min-height: 4.125rem;
-
-  & > *:first-child {
-    margin: 0;
-  }
-
-  & > * + * {
-    margin: var(--sp8) 0;
-  }
 
   & p {
     padding: 0;
     font-size: var(--text15);
     line-height: 1.75;
-  }
-
-  & blockquote {
-    padding-left: var(--sp16);
-
-    & * + * {
-      margin-top: var(--sp8);
-    }
   }
 
   /* outline */

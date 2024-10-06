@@ -1,4 +1,8 @@
-.u-content-comment {
+/****
+ * Comment content & shared with editor
+ */
+.u-content-comment,
+.u-content-comment .tiptap.ProseMirror {
   line-height: 1.75;
 
   & > * {
