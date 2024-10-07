@@ -7,7 +7,7 @@ type TabProps = {
   title: string
   selected?: boolean
   onClick: () => void
-  theme?: 'black' | 'gold'
+  theme?: 'black' | 'gold' | 'green'
 }
 
 const Tab = ({ title, selected, onClick, theme }: TabProps) => {

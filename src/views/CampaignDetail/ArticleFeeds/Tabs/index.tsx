@@ -14,6 +14,7 @@ import styles from './styles.module.css'
 export type CampaignFeedType = string
 
 export const FEED_TYPE_ALL = 'all'
+export const FEED_TYPE_FEATURED = 'featured'
 export const FEED_TYPE_ANNOUNCEMENT = 'announcement'
 
 interface ArticleFeedsTabsProps {
@@ -56,6 +57,22 @@ const ArticleFeedsTabs = ({
           title={intl.formatMessage({
             defaultMessage: 'All',
             id: 'zQvVDJ',
+          })}
+        />
+
+        <SquareTabs.Tab
+          selected={feedType === FEED_TYPE_FEATURED}
+          onClick={() => {
+            setFeedType(FEED_TYPE_FEATURED)
+
+            analytics.trackEvent('click_button', {
+              type: `campaign_detail_tab_${FEED_TYPE_FEATURED}` as `campaign_detail_tab_${string}`,
+              pageType: 'campaign_detail',
+            })
+          }}
+          title={intl.formatMessage({
+            defaultMessage: 'Featured',
+            id: 'CnPG8j',
           })}
         />
 
