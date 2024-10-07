@@ -37,6 +37,9 @@ const SCRIPT_SRC = [
 
   // Stripe
   'js.stripe.com',
+
+  // JSDelivr
+  'cdn.jsdelivr.net',
 ]
 
 const STYLE_SRC = [

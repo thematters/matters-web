@@ -57,6 +57,13 @@ class MattersDocument extends Document<MattersDocumentProps> {
             strategy="lazyOnload"
             crossOrigin="anonymous"
           />
+
+          <Script
+            async
+            src="https://cdn.jsdelivr.net/npm/uricli@latest/index.js"
+            strategy="lazyOnload"
+            crossOrigin="anonymous"
+          />
         </body>
       </Html>
     )
