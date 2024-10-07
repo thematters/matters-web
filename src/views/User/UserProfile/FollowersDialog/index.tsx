@@ -24,7 +24,7 @@ const BaseFollowersDialog = ({ user, children }: FollowersDialogProps) => {
         <Dialog.Header
           title={
             <Translate
-              zh_hant={`${user.displayName} 的關注者`}
+              zh_hant={`${user.displayName} 的追蹤者`}
               zh_hans={`${user.displayName} 的关注者`}
               en={`Followers of ${user.displayName}`}
             />
