@@ -90,8 +90,8 @@ const Footer = () => {
             <section className={styles.followUs}>
               <h2>
                 <Translate
-                  zh_hant="關注我們"
-                  zh_hans="關注我們"
+                  zh_hant="追蹤我們"
+                  zh_hans="追蹤我們"
                   en="Follow Us"
                 />
               </h2>

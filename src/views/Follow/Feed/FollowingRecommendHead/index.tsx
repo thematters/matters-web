@@ -8,21 +8,21 @@ const RecommendHead = ({ type }: Props) => {
   const titleMap = {
     article: (
       <Translate
-        zh_hant="你關注的人支持了"
+        zh_hant="你追蹤的人支持了"
         zh_hans="你关注的人支持了"
         en="People you follow also support"
       />
     ),
     circle: (
       <Translate
-        zh_hant="你關注的人加入了"
+        zh_hant="你追蹤的人加入了"
         zh_hans="你关注的人加入了"
         en="People you follow also subscribe to"
       />
     ),
     user: (
       <Translate
-        zh_hant="你關注的人關注了"
+        zh_hant="你追蹤的人追蹤了"
         zh_hans="你关注的人关注了"
         en="People you follow also follow"
       />

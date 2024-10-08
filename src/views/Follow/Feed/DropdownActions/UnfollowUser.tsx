@@ -57,7 +57,7 @@ const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
     <Menu.Item
       text={
         <Translate
-          zh_hant={`取消關注 ${user.displayName}`}
+          zh_hant={`取消追蹤 ${user.displayName}`}
           zh_hans={`取消关注 ${user.displayName}`}
         />
       }
@@ -68,7 +68,7 @@ const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
         toast.success({
           message: (
             <Translate
-              zh_hant={`已取消關注 ${user.displayName}`}
+              zh_hant={`已取消追蹤 ${user.displayName}`}
               zh_hans={`已取消关注 ${user.displayName}`}
             />
           ),

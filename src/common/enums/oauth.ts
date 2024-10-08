@@ -21,7 +21,7 @@ export const OAUTH_SCOPE_TREE = {
       },
       recommendation: {
         _t: {
-          zh_hant: '作品、標籤、作者等關注列表',
+          zh_hant: '作品、標籤、作者等追蹤列表',
           zh_hans: '作品、标签、作者等关注列表',
         },
       },
@@ -84,7 +84,7 @@ export const OAUTH_SCOPE_TREE = {
   mutation: {
     level1: {
       _t: {
-        zh_hant: '管理個人資料、標籤、評論、封鎖、關注等',
+        zh_hant: '管理個人資料、標籤、評論、封鎖、追蹤等',
         zh_hans: '管理个人资料、标签、评论、封锁、关注等',
       },
       toggleSubscribeArticle: {
@@ -95,7 +95,7 @@ export const OAUTH_SCOPE_TREE = {
       },
       toggleFollowTag: {
         _t: {
-          zh_hant: '關注標籤',
+          zh_hant: '追蹤標籤',
           zh_hans: '关注标签',
         },
       },
@@ -173,7 +173,7 @@ export const OAUTH_SCOPE_TREE = {
       },
       toggleFollowUser: {
         _t: {
-          zh_hant: '關注作者',
+          zh_hant: '追蹤作者',
           zh_hans: '关注作者',
         },
       },

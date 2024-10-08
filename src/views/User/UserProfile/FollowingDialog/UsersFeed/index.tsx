@@ -100,7 +100,7 @@ const UsersFeed = () => {
       <EmptyWarning
         description={
           <Translate
-            zh_hant="還沒有關注任何人"
+            zh_hant="還沒有追蹤任何人"
             zh_hans="还没有关注任何人"
             en="Not following anyone"
           />
