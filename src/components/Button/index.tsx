@@ -74,6 +74,7 @@ type ButtonTextColor = Extract<
   | 'gold'
   | 'red'
   | 'grey'
+  | 'greyDark'
   | 'greyDarker'
 >
 

@@ -40,6 +40,10 @@ span.container {
   color: var(--color-grey);
 }
 
+.textGreyDark {
+  color: var(--color-grey-dark);
+}
+
 .textGreyDarker {
   color: var(--color-grey-darker);
 }
