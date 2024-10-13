@@ -152,8 +152,11 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       const clickY = event.nativeEvent.offsetY
 
       if (clickY > clientHeight - paddingBottom && clickY <= clientHeight) {
-        editor.commands.focus('end')
-        editor.commands.insertContent([{ type: 'paragraph' }])
+        editor
+          .chain()
+          .focus('end')
+          .insertContentAt(editor.state.selection.to, [{ type: 'paragraph' }])
+          .run()
       }
     },
     [editor]
