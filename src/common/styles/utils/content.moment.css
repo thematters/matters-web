@@ -22,6 +22,12 @@
     margin-bottom: 0;
   }
 
+  & br.smart {
+    display: block;
+    margin: var(--sp12) 0;
+    content: '';
+  }
+
   & p {
     /* FIXME: Firefox eats trailing spaces
      *
