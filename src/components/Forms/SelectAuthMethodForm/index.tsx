@@ -41,7 +41,7 @@ export const SelectAuthMethodForm: React.FC<FormProps> = ({
   const isWallet = authFeedType === 'wallet'
 
   const { connectors } = useConnect()
-  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
+  const injectedConnector = connectors.find((c) => c.id === 'injected')
 
   useEffect(() => {
     if (injectedConnector?.ready && checkWallet) {

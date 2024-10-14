@@ -42,7 +42,7 @@ const BaseUniversalAuthDialog = () => {
   const [firstRender, setFirstRender] = useState(true)
 
   const { connectors } = useConnect()
-  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
+  const injectedConnector = connectors.find((c) => c.id === 'injected')
   const [authFeedType, setAuthFeedType] = useState<AuthFeedType>('normal')
 
   useEffect(() => {
