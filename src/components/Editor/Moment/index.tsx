@@ -58,6 +58,9 @@ const MomentEditor: React.FC<Props> = ({
     extensions: [
       CustomShortcuts.configure({
         onModEnter: () => onSubmit(),
+        onShiftEnter: ({ editor }) => {
+          editor.commands.enter()
+        },
       }),
       Placeholder.configure({
         placeholder,
