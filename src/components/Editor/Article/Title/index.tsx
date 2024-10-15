@@ -39,7 +39,10 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const target = event.target as HTMLTextAreaElement
 
-    if (event.key.toLowerCase() === KEYVALUE.enter) {
+    if (
+      event.key.toLowerCase() === KEYVALUE.enter &&
+      !event.nativeEvent.isComposing
+    ) {
       event.preventDefault()
 
       if (target.selectionStart === target.value.length) {
