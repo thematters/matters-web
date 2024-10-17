@@ -76,7 +76,7 @@ const calculateContentHeight = (
 export const Expandable: React.FC<ExpandableProps> = ({
   children,
   content,
-  limit: _limit = 3,
+  limit = 3,
   buffer = 0,
   color,
   size,
@@ -91,7 +91,6 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const [isOverFlowing, setIsOverFlowing] = useState(false)
   const [isExpanded, setIsExpanded] = useState(true)
   const [isRichShow, setIsRichShow] = useState(_isRichShow)
-  const [limit, setLimit] = useState(_limit)
   const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
   const collapsedContent = stripHtml(content || '')
 
@@ -146,18 +145,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
       .getPropertyValue('line-height')
     const lines = Math.max(Math.ceil(height / parseFloat(lineHeight)), 0)
 
-    // Check if the last paragraph is empty
-    const paragraphs = element.querySelectorAll('p')
-    const lastParagraph = paragraphs[Math.min(paragraphs.length - 1, limit - 1)]
-    const isLastParagraphEmpty =
-      lastParagraph && lastParagraph.textContent?.trim() === ''
-
-    // Adjust the limit if the last paragraph is empty
-    const adjustedLimit = isLastParagraphEmpty ? limit - 1 : limit
-
-    setLimit(adjustedLimit)
-
-    if (lines > adjustedLimit + buffer) {
+    if (lines > limit + buffer) {
       setIsOverFlowing(true)
       setIsExpanded(false)
     }
