@@ -5,6 +5,8 @@ export const ANALYTICS = 'analytics'
 export const REFETCH_RESPONSES = 'refetchResponses'
 export const SYNC_APPRECIATE_BUTTON_COUNT = 'syncAppreciateButtonCount'
 export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
+export const FOCUS_EDITOR_TITLE = 'focusEditorTitle'
+export const FOCUS_EDITOR_SUMMARY = 'focusEditorSummary'
 
 // Moment
 export const ADD_MOMENT_COMMENT_MENTION = 'addMomentCommentMention'
@@ -71,6 +73,8 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   visitorWall = 'visitorWall',
   momentComment = 'momentComment',
   momentLike = 'momentLike',
+  applyCampaign = 'applyCampaign',
+  collectionLike = 'collectionLike',
 }
 
 /**

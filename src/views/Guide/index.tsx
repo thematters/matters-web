@@ -37,7 +37,7 @@ const Guide = () => {
       />
 
       <Layout.Main.Spacing>
-        <section className="u-content" onClick={captureClicks}>
+        <section className="u-content-article" onClick={captureClicks}>
           <ReactMarkdown>{content[toLocale(lang) || 'en']}</ReactMarkdown>
         </section>
       </Layout.Main.Spacing>

@@ -1,0 +1,74 @@
+/****
+ * Moment content & shared with editor
+ */
+.u-content-moment,
+.u-content-moment .tiptap.ProseMirror {
+  font-size: var(--text15);
+  line-height: 1.75;
+
+  &.detail {
+    font-size: var(--text17);
+
+    & a {
+      color: var(--color-matters-green);
+    }
+  }
+
+  & > * {
+    margin: 0;
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
+
+  & p + p:has(br.smart:first-child:last-child) {
+    margin: var(--sp8) 0;
+    line-height: 0;
+  }
+
+  & p {
+    /* FIXME: Firefox eats trailing spaces
+     *
+     * @see {@url https://github.com/quilljs/quill/issues/1760}
+     */
+    white-space: pre-wrap;
+  }
+
+  /* Blockquote
+   ========================================================================== */
+  & blockquote {
+    position: relative;
+    padding: 0 var(--sp16);
+    color: var(--color-grey-darker);
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      content: '';
+      background: var(--color-grey-light);
+    }
+  }
+
+  /* Link
+   ========================================================================== */
+  & a {
+    color: var(--color-grey-darker);
+
+    &:hover,
+    &:active,
+    &:focus {
+      color: var(--color-grey-darker);
+    }
+  }
+
+  /* fix frequent misuse of links */
+  & u > a,
+  ins > a {
+    padding-bottom: 0;
+    border-bottom: 0;
+  }
+}

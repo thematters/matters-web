@@ -21,7 +21,6 @@ import {
   SmartLink,
 } from '../Article/extensions'
 import { makeSmartLinkOptions } from '../Article/extensions/smartLink/utils'
-import commentStyles from '../Comment/styles.module.css'
 import styles from './styles.module.css'
 
 interface Props {
@@ -59,6 +58,9 @@ const MomentEditor: React.FC<Props> = ({
     extensions: [
       CustomShortcuts.configure({
         onModEnter: () => onSubmit(),
+        onShiftEnter: ({ editor }) => {
+          editor.commands.enter()
+        },
       }),
       Placeholder.configure({
         placeholder,
@@ -93,14 +95,9 @@ const MomentEditor: React.FC<Props> = ({
     setEditor?.(editor)
   }, [editor])
 
-  const editorClaaes = classNames(
-    commentStyles.commentEditor,
-    styles.momentEditor
-  )
-
   return (
     <div
-      className={editorClaaes}
+      className={classNames('u-content-moment', styles.momentEditor)}
       id="editor" // anchor for mention plugin
     >
       <EditorContent editor={editor} />

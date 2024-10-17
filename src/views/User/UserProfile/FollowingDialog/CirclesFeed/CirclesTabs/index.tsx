@@ -21,7 +21,7 @@ const CirclesTabs = ({ type, setFeedType }: CirclesFeedTypeProps) => {
             onClick={() => setFeedType('following')}
             selected={isFollowing}
           >
-            <Translate zh_hant="追蹤" zh_hans="追踪" en="Followed" />
+            <Translate zh_hant="追蹤" zh_hans="关注" en="Followed" />
           </SegmentedTabs.Tab>
 
           <SegmentedTabs.Tab

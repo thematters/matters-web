@@ -1,13 +1,16 @@
 import autosize from 'autosize'
-import React, { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
 import {
+  FOCUS_EDITOR_SUMMARY,
+  FOCUS_EDITOR_TITLE,
   INPUT_DEBOUNCE,
   KEYVALUE,
   MAX_ARTICE_TITLE_LENGTH,
 } from '~/common/enums'
+import { useEventListener } from '~/components'
 
 interface Props {
   defaultValue?: string
@@ -16,7 +19,7 @@ interface Props {
 
 const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
   const intl = useIntl()
-  const instance: React.RefObject<any> | null = useRef(null)
+  const inputRef = useRef<HTMLTextAreaElement>(null)
   const [value, setValue] = useState(defaultValue)
   const debouncedUpdate = useDebouncedCallback(() => {
     update({ title: value })
@@ -34,28 +37,47 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
     update({ title: value })
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key.toLowerCase() === KEYVALUE.enter) {
+    const target = event.target as HTMLTextAreaElement
+
+    if (
+      event.key.toLowerCase() === KEYVALUE.enter &&
+      !event.nativeEvent.isComposing
+    ) {
       event.preventDefault()
+
+      if (target.selectionStart === target.value.length) {
+        window.dispatchEvent(new CustomEvent(FOCUS_EDITOR_SUMMARY))
+      }
     }
   }
 
   const handlePaste = () => {
     // FIXME: triggers the height adjustment on paste
     setTimeout(() => {
-      autosize.update(instance.current)
+      autosize.update(inputRef.current!)
     })
   }
 
-  React.useEffect(() => {
-    if (instance) {
-      autosize(instance.current)
+  useEffect(() => {
+    if (inputRef.current) {
+      autosize(inputRef.current)
     }
   }, [])
+
+  useEventListener(FOCUS_EDITOR_TITLE, () => {
+    if (!inputRef.current) return
+
+    inputRef.current.focus()
+
+    // Set cursor to the end of the text
+    const pos = inputRef.current.value.length
+    inputRef.current.setSelectionRange(pos, pos)
+  })
 
   return (
     <header className="editor-title">
       <textarea
-        ref={instance}
+        ref={inputRef}
         rows={1}
         aria-label={intl.formatMessage({
           defaultMessage: 'Enter title ...',

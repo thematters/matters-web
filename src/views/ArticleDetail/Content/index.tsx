@@ -122,7 +122,7 @@ const Content = ({
     <>
       <div
         className={classNames({
-          'u-content': true,
+          'u-content-article': true,
           [styles.indented]: indentFirstLine,
           [styles.translating]: translating,
         })}

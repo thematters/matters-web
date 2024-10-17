@@ -89,7 +89,7 @@ const ApplyCampaignButton = ({
     onClick = () => {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.replyComment },
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.applyCampaign },
         })
       )
     }

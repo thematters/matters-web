@@ -7,7 +7,7 @@ import {
   polygon,
   polygonMumbai,
 } from 'wagmi/chains'
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 
@@ -43,12 +43,12 @@ export const { publicClient, chains } = configureChains(defaultChains, [
 export const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: [
-    new MetaMaskConnector({
+    new InjectedConnector({
       chains,
       options: {
         // For disconnecting from metamask
         shimDisconnect: true,
-        UNSTABLE_shimOnConnectSelectAccount: true,
+        // UNSTABLE_shimOnConnectSelectAccount: true,
       },
     }),
     ...(isTest

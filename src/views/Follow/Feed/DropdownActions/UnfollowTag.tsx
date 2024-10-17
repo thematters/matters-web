@@ -61,7 +61,7 @@ const UnfollowTagActionButton = ({ tag }: UnfollowTagActionButtonProps) => {
       text={
         <Translate
           zh_hant={`取消追蹤 #${tag.content}`}
-          zh_hans={`取消追踪 #${tag.content}`}
+          zh_hans={`取消关注 #${tag.content}`}
         />
       }
       icon={<Icon icon={IconCircleMinus} size={20} />}
@@ -72,7 +72,7 @@ const UnfollowTagActionButton = ({ tag }: UnfollowTagActionButtonProps) => {
           message: (
             <Translate
               zh_hant={`已取消追蹤 #${tag.content}`}
-              zh_hans={`已取消追踪 #${tag.content}`}
+              zh_hans={`已取消关注 #${tag.content}`}
             />
           ),
         })
