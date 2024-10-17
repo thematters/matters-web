@@ -6,8 +6,12 @@
   font-size: var(--text15);
   line-height: 1.75;
 
-  &.size17 {
+  &.detail {
     font-size: var(--text17);
+
+    & a {
+      color: var(--color-matters-green);
+    }
   }
 
   & > * {
