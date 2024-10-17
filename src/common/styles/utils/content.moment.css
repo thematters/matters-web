@@ -14,18 +14,13 @@
     margin: 0;
   }
 
-  & > * + * {
-    margin: var(--sp12) 0;
-  }
-
   & > *:last-child {
     margin-bottom: 0;
   }
 
-  & br.smart {
-    display: block;
-    margin: var(--sp12) 0;
-    content: '';
+  & p + p:has(br.smart:first-child:last-child) {
+    margin: var(--sp8) 0;
+    line-height: 0;
   }
 
   & p {
