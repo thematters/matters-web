@@ -9,11 +9,11 @@
     'Microsoft JhengHei', 'WenQuanYi Micro Hei', sans-serif, 'Apple Color Emoji',
     'Segoe UI Emoji';
   --font-serif-tc: 'Songti TC', 'Songti SC', 'NSimSun', 'SimSun', serif,
-    'Apple Color Emoji', 'Segoe UI Emoji';
+    var(--font-sans-sc), 'Apple Color Emoji', 'Segoe UI Emoji';
   --font-serif-sc: 'Songti SC', 'Songti TC', 'NSimSun', 'SimSun', serif,
-    'Apple Color Emoji', 'Segoe UI Emoji';
+    var(--font-sans-sc), 'Apple Color Emoji', 'Segoe UI Emoji';
   --font-mono: menlo, 'SFMono-Regular', consolas, monaco, monospace,
-    'Apple Color Emoji', 'Segoe UI Emoji';
+    var(--font-sans-sc), 'Apple Color Emoji', 'Segoe UI Emoji';
 
   /* Type Scale */
   --text12: 0.75rem; /* 12px */
