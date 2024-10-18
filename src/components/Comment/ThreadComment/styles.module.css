@@ -15,3 +15,7 @@
     transition-property: background-color;
   }
 }
+
+.lastDescendant {
+  margin-bottom: var(--sp16);
+}

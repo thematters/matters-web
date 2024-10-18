@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import _uniqBy from 'lodash/uniqBy'
 import { useContext, useEffect } from 'react'
 
@@ -20,6 +21,7 @@ import {
   DESCENDANT_COMMENTS_COMMENT_PRIVATE,
   DESCENDANT_COMMENTS_COMMENT_PUBLIC,
 } from '../gql'
+import styles from './styles.module.css'
 
 type DescendantCommentPublic = NonNullable<
   NonNullable<
@@ -152,8 +154,13 @@ export const DescendantComments = ({
 
   return (
     <>
-      {result.map((node) => (
-        <li key={node.id}>
+      {result.map((node, index) => (
+        <li
+          key={node.id}
+          className={classNames({
+            [styles.lastDescendant]: index === result.length - 1,
+          })}
+        >
           <CommentFeed
             comment={node}
             pinnedComment={pinnedComment}

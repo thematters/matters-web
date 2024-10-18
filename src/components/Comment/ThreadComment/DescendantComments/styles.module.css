@@ -10,3 +10,7 @@
     margin-top: var(--sp8);
   }
 }
+
+.lastDescendant {
+  margin-bottom: var(--sp16);
+}
