@@ -441,7 +441,7 @@
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
   "5SgH7l": {
-    "defaultMessage": "作品已添加至精选"
+    "defaultMessage": "作品已添加至自由写精选"
   },
   "5UglrB": {
     "defaultMessage": "送出成功"
@@ -2679,7 +2679,7 @@
     "description": "type:apply"
   },
   "jXDxa6": {
-    "defaultMessage": "The article has been removed from the Featured"
+    "defaultMessage": "作品已从自由写精选中移除"
   },
   "jiB0Z2": {
     "defaultMessage": "无法绑定钱包",
