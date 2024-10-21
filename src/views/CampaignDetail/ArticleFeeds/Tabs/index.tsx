@@ -60,7 +60,7 @@ const ArticleFeedsTabs = ({
           })}
         />
 
-        <SquareTabs.Tab
+        {/* <SquareTabs.Tab
           selected={feedType === FEED_TYPE_FEATURED}
           onClick={() => {
             setFeedType(FEED_TYPE_FEATURED)
@@ -74,7 +74,7 @@ const ArticleFeedsTabs = ({
             defaultMessage: 'Featured',
             id: 'CnPG8j',
           })}
-        />
+        /> */}
 
         {[...stages].reverse().map((stage) =>
           shouldShowTab(stage.period?.start) ? (

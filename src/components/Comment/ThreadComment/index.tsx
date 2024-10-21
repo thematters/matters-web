@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import { useEffect, useState } from 'react'
 
 import { filterComments } from '~/common/utils'
@@ -69,8 +70,13 @@ export const CommentThreadComment = ({
 
         {descendants.length > 0 && (
           <ul className={styles.descendants}>
-            {descendants.map((descendantComment) => (
-              <li key={descendantComment.id}>
+            {descendants.map((descendantComment, index) => (
+              <li
+                key={descendantComment.id}
+                className={classNames({
+                  [styles.lastDescendant]: index === descendants.length - 1,
+                })}
+              >
                 <CommentFeed
                   comment={descendantComment}
                   pinnedComment={pinnedComment}
