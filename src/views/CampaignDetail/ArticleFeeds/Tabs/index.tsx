@@ -39,6 +39,7 @@ const ArticleFeedsTabs = ({
     return now >= new Date(startedAt)
   }
 
+  const shouldShowFeaturedTab = campaign.featuredArticles.totalCount > 0
   const shouldShowAnnouncementTab = campaign.announcements.length > 0
 
   return (
@@ -60,21 +61,24 @@ const ArticleFeedsTabs = ({
           })}
         />
 
-        <SquareTabs.Tab
-          selected={feedType === FEED_TYPE_FEATURED}
-          onClick={() => {
-            setFeedType(FEED_TYPE_FEATURED)
+        {shouldShowFeaturedTab && (
+          <SquareTabs.Tab
+            selected={feedType === FEED_TYPE_FEATURED}
+            onClick={() => {
+              setFeedType(FEED_TYPE_FEATURED)
 
-            analytics.trackEvent('click_button', {
-              type: `campaign_detail_tab_${FEED_TYPE_FEATURED}` as `campaign_detail_tab_${string}`,
-              pageType: 'campaign_detail',
-            })
-          }}
-          title={intl.formatMessage({
-            defaultMessage: 'Featured',
-            id: 'CnPG8j',
-          })}
-        />
+              analytics.trackEvent('click_button', {
+                type: `campaign_detail_tab_${FEED_TYPE_FEATURED}` as `campaign_detail_tab_${string}`,
+                pageType: 'campaign_detail',
+              })
+            }}
+            title={intl.formatMessage({
+              defaultMessage: 'Featured',
+              id: 'CnPG8j',
+            })}
+            theme="green"
+          />
+        )}
 
         {[...stages].reverse().map((stage) =>
           shouldShowTab(stage.period?.start) ? (
@@ -128,6 +132,11 @@ const ArticleFeedsTabs = ({
 ArticleFeedsTabs.fragments = gql`
   fragment ArticleFeedsTabsCampaign on WritingChallenge {
     id
+    featuredArticles: articles(
+      input: { first: 0, filter: { featured: true } }
+    ) {
+      totalCount
+    }
     stages {
       id
       nameZhHant: name(input: { language: zh_hant })

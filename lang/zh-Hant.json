@@ -440,6 +440,9 @@
     "defaultMessage": "喜歡你已刪除的動態",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
+  "5SgH7l": {
+    "defaultMessage": "作品已添加至精選"
+  },
   "5UglrB": {
     "defaultMessage": "送出成功"
   },
@@ -1659,6 +1662,9 @@
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
+  "QFCfA7": {
+    "defaultMessage": "添加到自由写精选"
+  },
   "QQSdHP": {
     "defaultMessage": "查看更多"
   },
@@ -2168,6 +2174,9 @@
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
   },
+  "ZN1IzT": {
+    "defaultMessage": "从自由写精选中移除"
+  },
   "ZNK0I9": {
     "defaultMessage": "喜歡你的評論"
   },
@@ -2668,6 +2677,9 @@
   "jLkKbI": {
     "defaultMessage": "報名處理中⋯",
     "description": "type:apply"
+  },
+  "jXDxa6": {
+    "defaultMessage": "The article has been removed from the Featured"
   },
   "jiB0Z2": {
     "defaultMessage": "無法綁定錢包",

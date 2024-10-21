@@ -440,6 +440,9 @@
     "defaultMessage": "liked your deleted moment",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
+  "5SgH7l": {
+    "defaultMessage": "The article has been added to the Featured"
+  },
   "5UglrB": {
     "defaultMessage": "Successfully delivered"
   },
@@ -1659,6 +1662,9 @@
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
+  "QFCfA7": {
+    "defaultMessage": "Add featured on Free Write"
+  },
   "QQSdHP": {
     "defaultMessage": "View More"
   },
@@ -2168,6 +2174,9 @@
   "ZEMcZ6": {
     "defaultMessage": "Article Management"
   },
+  "ZN1IzT": {
+    "defaultMessage": "Remove featured from Free Write"
+  },
   "ZNK0I9": {
     "defaultMessage": "liked your comment"
   },
@@ -2668,6 +2677,9 @@
   "jLkKbI": {
     "defaultMessage": "Reviewing...",
     "description": "type:apply"
+  },
+  "jXDxa6": {
+    "defaultMessage": "The article has been removed from the Featured"
   },
   "jiB0Z2": {
     "defaultMessage": "Unable to bind wallet",

@@ -26,6 +26,7 @@ import {
   CampaignFeedType,
   FEED_TYPE_ALL,
   FEED_TYPE_ANNOUNCEMENT,
+  FEED_TYPE_FEATURED,
 } from '../Tabs'
 import { CAMPAIGN_ARTICLES_PRIVATE, CAMPAIGN_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.module.css'
@@ -69,13 +70,18 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   const shortHash = getQuery('shortHash')
   const isAll = feedType === FEED_TYPE_ALL
   const isAnnouncement = feedType === FEED_TYPE_ANNOUNCEMENT
+  const isFeatured = feedType === FEED_TYPE_FEATURED
   const announcements = camapign.announcements
 
   const { data, loading, error, fetchMore, networkStatus, client } =
     usePublicQuery<CampaignArticlesPublicQuery>(CAMPAIGN_ARTICLES_PUBLIC, {
       variables: {
         shortHash,
-        ...(!isAll ? { filter: { stage: feedType } } : {}),
+        ...(!isAll
+          ? {
+              filter: isFeatured ? { featured: true } : { stage: feedType },
+            }
+          : {}),
       },
       notifyOnNetworkStatusChange: true,
       skip: isAnnouncement,
@@ -164,6 +170,9 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                   id: article.author.id,
                 })
               }}
+              hasToggleCampaignFeatured
+              campaignId={camapign.id}
+              campaignFeatured={false}
             />
           </List.Item>
         ))}
@@ -228,6 +237,9 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                   id: node.author.id,
                 })
               }}
+              hasToggleCampaignFeatured
+              campaignId={camapign.id}
+              campaignFeatured={isFeatured}
             />
           </List.Item>
         ))}
