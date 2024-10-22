@@ -2825,6 +2825,10 @@
   "ll/ufR": {
     "defaultMessage": "熱門"
   },
+  "lo8eLY": {
+    "defaultMessage": "你的作品 {articleTitle} 已被列為七日書精選之作，快來看看更多精彩好文！",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
   "lqdpsm": {
     "defaultMessage": "回到訂閱"
   },

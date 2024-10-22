@@ -2825,6 +2825,10 @@
   "ll/ufR": {
     "defaultMessage": "Trending"
   },
+  "lo8eLY": {
+    "defaultMessage": "Your article {articleTitle} has been listed as a feature of Free Write in 7 days. Come and view more wonderful articles!",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
   "lqdpsm": {
     "defaultMessage": "Back to subscribe"
   },
