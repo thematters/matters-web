@@ -440,6 +440,9 @@
     "defaultMessage": "喜歡你已刪除的動態",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
+  "5SgH7l": {
+    "defaultMessage": "作品已添加至自由寫精選"
+  },
   "5UglrB": {
     "defaultMessage": "送出成功"
   },
@@ -1659,6 +1662,9 @@
   "Q8Qw5B": {
     "defaultMessage": "個人簡介"
   },
+  "QFCfA7": {
+    "defaultMessage": "添加到自由寫精選"
+  },
   "QQSdHP": {
     "defaultMessage": "查看更多"
   },
@@ -2168,6 +2174,9 @@
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
   },
+  "ZN1IzT": {
+    "defaultMessage": "从自由寫精選中移除"
+  },
   "ZNK0I9": {
     "defaultMessage": "喜歡你的評論"
   },
@@ -2669,6 +2678,9 @@
     "defaultMessage": "報名處理中⋯",
     "description": "type:apply"
   },
+  "jXDxa6": {
+    "defaultMessage": "作品已從自由寫精選中移除"
+  },
   "jiB0Z2": {
     "defaultMessage": "無法綁定錢包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2812,6 +2824,10 @@
   },
   "ll/ufR": {
     "defaultMessage": "熱門"
+  },
+  "lo8eLY": {
+    "defaultMessage": "你的作品 {articleTitle} 已被列為七日書精選之作，快來看看更多精彩好文！",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
   },
   "lqdpsm": {
     "defaultMessage": "回到訂閱"
