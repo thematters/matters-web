@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconRead } from '@/public/static/icons/24px/read.svg'
+import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
@@ -13,6 +14,7 @@ import {
   List,
   QueryError,
   SpinnerBlock,
+  TextIcon,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -205,20 +207,42 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
-        {edges.map(({ node }, i) => (
+        {edges.map(({ node, featured }, i) => (
           <List.Item key={`${feedType}:${i}`}>
             <ArticleDigestFeed
               article={node}
               label={
                 isAll && (
-                  <span
-                    className={[
-                      styles.articleLabel,
-                      getArticleStage(node)?.id ? '' : styles.announcement,
-                    ].join(' ')}
-                  >
-                    {getArticleStageName(node, lang)}
-                  </span>
+                  <>
+                    <span
+                      className={[
+                        styles.articleLabel,
+                        getArticleStage(node)?.id ? '' : styles.announcement,
+                      ].join(' ')}
+                    >
+                      {getArticleStageName(node, lang)}
+                    </span>
+
+                    {featured && (
+                      <TextIcon
+                        icon={
+                          <Icon
+                            icon={IconStar}
+                            size={12}
+                            style={{ opacity: 0.5 }}
+                          />
+                        }
+                        spacing={2}
+                        color="freeWriteGreenLabel"
+                        size={12}
+                      >
+                        <FormattedMessage
+                          defaultMessage="Featured"
+                          id="CnPG8j"
+                        />
+                      </TextIcon>
+                    )}
+                  </>
                 )
               }
               onClick={() => {
