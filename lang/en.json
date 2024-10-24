@@ -440,6 +440,9 @@
     "defaultMessage": "liked your deleted moment",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
+  "5SgH7l": {
+    "defaultMessage": "The article has been added to the Featured"
+  },
   "5UglrB": {
     "defaultMessage": "Successfully delivered"
   },
@@ -1659,6 +1662,9 @@
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
+  "QFCfA7": {
+    "defaultMessage": "Add featured on Free Write"
+  },
   "QQSdHP": {
     "defaultMessage": "View More"
   },
@@ -2168,6 +2174,9 @@
   "ZEMcZ6": {
     "defaultMessage": "Article Management"
   },
+  "ZN1IzT": {
+    "defaultMessage": "Remove featured from Free Write"
+  },
   "ZNK0I9": {
     "defaultMessage": "liked your comment"
   },
@@ -2669,6 +2678,9 @@
     "defaultMessage": "Reviewing...",
     "description": "type:apply"
   },
+  "jXDxa6": {
+    "defaultMessage": "The article has been removed from the Featured"
+  },
   "jiB0Z2": {
     "defaultMessage": "Unable to bind wallet",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2812,6 +2824,10 @@
   },
   "ll/ufR": {
     "defaultMessage": "Trending"
+  },
+  "lo8eLY": {
+    "defaultMessage": "Your article {articleTitle} has been listed as a feature of Free Write in 7 days. Come and view more wonderful articles!",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
   },
   "lqdpsm": {
     "defaultMessage": "Back to subscribe"

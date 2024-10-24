@@ -97,6 +97,12 @@ const DynamicArchiveUserDialog = dynamic(
     loading: () => <SpinnerBlock />,
   }
 )
+const DynamicToggleCampaignFeaturedButton = dynamic(
+  () => import('./ToggleCampaignFeatured'),
+  {
+    loading: () => <SpinnerBlock />,
+  }
+)
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode
@@ -123,6 +129,11 @@ export interface DropdownActionsControls {
   hasSetTagSelected?: boolean
   hasSetTagUnselected?: boolean
   hasRemoveTag?: boolean
+
+  // campaign
+  campaignId?: string
+  campaignFeatured?: boolean
+  hasToggleCampaignFeatured?: boolean
 
   hasArchive?: boolean
   hasEdit?: boolean
@@ -189,6 +200,9 @@ const BaseDropdownActions = ({
   collectionId,
   collectionArticleCount,
 
+  campaignId,
+  campaignFeatured,
+
   icon,
   size,
   color = 'greyDark',
@@ -204,6 +218,7 @@ const BaseDropdownActions = ({
   hasSetTagSelected,
   hasSetTagUnselected,
   hasRemoveTag,
+  hasToggleCampaignFeatured,
   hasEdit,
   hasBookmark,
   hasAddCollection,
@@ -313,6 +328,13 @@ const BaseDropdownActions = ({
       {isAdminView && viewer.isAdmin && (
         <>
           <Menu.Divider />
+          {hasToggleCampaignFeatured && campaignId && (
+            <DynamicToggleCampaignFeaturedButton
+              articleId={article.id}
+              campaignId={campaignId}
+              campaignFeatured={!!campaignFeatured}
+            />
+          )}
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="icymi"

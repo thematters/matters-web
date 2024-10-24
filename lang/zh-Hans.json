@@ -440,6 +440,9 @@
     "defaultMessage": "喜欢你已删除的动态",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
+  "5SgH7l": {
+    "defaultMessage": "作品已添加至自由写精选"
+  },
   "5UglrB": {
     "defaultMessage": "送出成功"
   },
@@ -1659,6 +1662,9 @@
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
+  "QFCfA7": {
+    "defaultMessage": "添加到自由写精选"
+  },
   "QQSdHP": {
     "defaultMessage": "查看更多"
   },
@@ -2168,6 +2174,9 @@
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
   },
+  "ZN1IzT": {
+    "defaultMessage": "从自由写精选中移除"
+  },
   "ZNK0I9": {
     "defaultMessage": "喜欢你的评论"
   },
@@ -2669,6 +2678,9 @@
     "defaultMessage": "报名处理中⋯",
     "description": "type:apply"
   },
+  "jXDxa6": {
+    "defaultMessage": "作品已从自由写精选中移除"
+  },
   "jiB0Z2": {
     "defaultMessage": "无法绑定钱包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2812,6 +2824,10 @@
   },
   "ll/ufR": {
     "defaultMessage": "热门"
+  },
+  "lo8eLY": {
+    "defaultMessage": "你的作品 {articleTitle} 已被列为七日书精选之作，快来看看更多精彩好文！",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
   },
   "lqdpsm": {
     "defaultMessage": "回到订阅"
