@@ -143,19 +143,10 @@ const CONNECT_SRC = [
   '*.alchemy.com',
 
   // IPFS Gateways
-  'gateway.ipfs.io/ipfs/',
+  'gw3.io/ipfs/',
   'cloudflare-ipfs.com/ipfs/',
   'ipfs.io/ipfs/',
-  '*.cf-ipfs.com',
-  'cf-ipfs.com/ipfs/',
   '4everland.io/ipfs/',
-  '*.4everland.io',
-  'storry.tv/ipfs/',
-  '*.storry.tv',
-  'ipfs.runfission.com/ipfs/',
-  'konubinix.eu/ipfs/',
-  'starbase.gw3.io/ipfs/',
-  '*.gw3.io',
 ]
 
 const FRAME_SRC = [
