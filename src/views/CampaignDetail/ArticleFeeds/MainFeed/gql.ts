@@ -20,6 +20,7 @@ export const CAMPAIGN_ARTICLES_PUBLIC = gql`
           }
           edges {
             cursor
+            featured
             node {
               id
               campaigns {

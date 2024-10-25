@@ -17,6 +17,7 @@ type TextIconColor =
   | 'likecoinGreen'
   | 'yellowLighter'
   | 'freeWriteBlue'
+  | 'freeWriteGreenLabel'
 
 export interface TextIconProps {
   // icon
