@@ -1737,6 +1737,10 @@
   "Rc4Oij": {
     "defaultMessage": "火闪电"
   },
+  "RkyEBL": {
+    "defaultMessage": "精华",
+    "description": "src/views/CampaignDetail/ArticleFeeds/Tabs/index.tsx"
+  },
   "RnKPVm": {
     "defaultMessage": "{articleCount} 篇文章"
   },
@@ -2175,7 +2179,7 @@
     "defaultMessage": "作品管理"
   },
   "ZN1IzT": {
-    "defaultMessage": "从自由写精选中移除"
+    "defaultMessage": "从自由写精华中移除"
   },
   "ZNK0I9": {
     "defaultMessage": "喜欢你的评论"
@@ -2679,7 +2683,7 @@
     "description": "type:apply"
   },
   "jXDxa6": {
-    "defaultMessage": "作品已从自由写精选中移除"
+    "defaultMessage": "作品已从自由写精华中移除"
   },
   "jiB0Z2": {
     "defaultMessage": "无法绑定钱包",

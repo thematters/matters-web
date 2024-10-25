@@ -441,7 +441,7 @@
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
   "5SgH7l": {
-    "defaultMessage": "作品已添加至自由寫精選"
+    "defaultMessage": "作品已添加至自由寫精華"
   },
   "5UglrB": {
     "defaultMessage": "送出成功"
@@ -1663,7 +1663,7 @@
     "defaultMessage": "描述"
   },
   "QFCfA7": {
-    "defaultMessage": "添加到自由寫精選"
+    "defaultMessage": "添加到自由寫精華"
   },
   "QQSdHP": {
     "defaultMessage": "查看更多"
@@ -1736,6 +1736,10 @@
   },
   "Rc4Oij": {
     "defaultMessage": "火閃電"
+  },
+  "RkyEBL": {
+    "defaultMessage": "精華",
+    "description": "src/views/CampaignDetail/ArticleFeeds/Tabs/index.tsx"
   },
   "RnKPVm": {
     "defaultMessage": "{articleCount} 篇文章"
@@ -2175,7 +2179,7 @@
     "defaultMessage": "作品管理"
   },
   "ZN1IzT": {
-    "defaultMessage": "从自由寫精選中移除"
+    "defaultMessage": "从自由寫精華中移除"
   },
   "ZNK0I9": {
     "defaultMessage": "喜歡你的評論"
@@ -2679,7 +2683,7 @@
     "description": "type:apply"
   },
   "jXDxa6": {
-    "defaultMessage": "作品已從自由寫精選中移除"
+    "defaultMessage": "作品已從自由寫精華中移除"
   },
   "jiB0Z2": {
     "defaultMessage": "無法綁定錢包",
