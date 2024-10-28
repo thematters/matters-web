@@ -212,7 +212,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
             <ArticleDigestFeed
               article={node}
               label={
-                isAll && (
+                (isAll || isFeatured) && (
                   <>
                     <span
                       className={[
@@ -223,7 +223,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                       {getArticleStageName(node, lang)}
                     </span>
 
-                    {featured && (
+                    {isAll && featured && (
                       <TextIcon
                         icon={
                           <Icon

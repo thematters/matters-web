@@ -74,7 +74,9 @@ const ArticleFeedsTabs = ({
             }}
             title={intl.formatMessage({
               defaultMessage: 'Featured',
-              id: 'CnPG8j',
+              id: 'RkyEBL',
+              description:
+                'src/views/CampaignDetail/ArticleFeeds/Tabs/index.tsx',
             })}
             theme="green"
           />

@@ -82,8 +82,8 @@ const ApplyCampaignDialog = ({
             <p>
               {isInApplicationPeriod ? (
                 <FormattedMessage
-                  defaultMessage="Apply now. The writing journey will begin in a few days. For event details, please check the Event Information. (Application confirmation usually takes a few minutes for review. Your avatar will then appear among the writers.)"
-                  id="KkHQZ+"
+                  defaultMessage="Apply now. The writing journey will begin in a few days. For event details, please check the Event Information. "
+                  id="l0tvVM"
                 />
               ) : (
                 <FormattedMessage
