@@ -1344,9 +1344,6 @@
     "defaultMessage": "标签",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
-  "KkHQZ+": {
-    "defaultMessage": "现在报名，写作之旅将于数天后开始，活动细则可查看公告。（报名确认通常需要几分钟审核时间，之后你的头像将出现在作者之中）"
-  },
   "KlJEP9": {
     "defaultMessage": "钱包已绑定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -2775,6 +2772,9 @@
   "l0/EvT": {
     "defaultMessage": "最后一步：设置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "l0tvVM": {
+    "defaultMessage": "现在报名，写作之旅将于数天后开始，活动细则可查看公告。"
   },
   "l2eEyp": {
     "defaultMessage": "交易密码重置成功"
