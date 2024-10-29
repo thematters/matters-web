@@ -440,6 +440,9 @@
     "defaultMessage": "liked your deleted moment",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
+  "5SgH7l": {
+    "defaultMessage": "The article has been added to the Featured"
+  },
   "5UglrB": {
     "defaultMessage": "Successfully delivered"
   },
@@ -1341,9 +1344,6 @@
     "defaultMessage": "Topics",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
-  "KkHQZ+": {
-    "defaultMessage": "Apply now. The writing journey will begin in a few days. For event details, please check the Event Information. (Application confirmation usually takes a few minutes for review. Your avatar will then appear among the writers.)"
-  },
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1659,6 +1659,9 @@
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
+  "QFCfA7": {
+    "defaultMessage": "Add featured on Free Write"
+  },
   "QQSdHP": {
     "defaultMessage": "View More"
   },
@@ -1730,6 +1733,10 @@
   },
   "Rc4Oij": {
     "defaultMessage": "Firebolt"
+  },
+  "RkyEBL": {
+    "defaultMessage": "Featured",
+    "description": "src/views/CampaignDetail/ArticleFeeds/Tabs/index.tsx"
   },
   "RnKPVm": {
     "defaultMessage": "{articleCount} articles"
@@ -2167,6 +2174,9 @@
   },
   "ZEMcZ6": {
     "defaultMessage": "Article Management"
+  },
+  "ZN1IzT": {
+    "defaultMessage": "Remove featured from Free Write"
   },
   "ZNK0I9": {
     "defaultMessage": "liked your comment"
@@ -2669,6 +2679,9 @@
     "defaultMessage": "Reviewing...",
     "description": "type:apply"
   },
+  "jXDxa6": {
+    "defaultMessage": "The article has been removed from the Featured"
+  },
   "jiB0Z2": {
     "defaultMessage": "Unable to bind wallet",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2760,6 +2773,9 @@
     "defaultMessage": "Last step: Set Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "l0tvVM": {
+    "defaultMessage": "Apply now. The writing journey will begin in a few days. For event details, please check the Event Information."
+  },
   "l2eEyp": {
     "defaultMessage": "Transaction Password successfully changed."
   },
@@ -2812,6 +2828,10 @@
   },
   "ll/ufR": {
     "defaultMessage": "Trending"
+  },
+  "lo8eLY": {
+    "defaultMessage": "Your article {articleTitle} has been listed as a feature of Free Write in 7 days. Come and view more wonderful articles!",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
   },
   "lqdpsm": {
     "defaultMessage": "Back to subscribe"

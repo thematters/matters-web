@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconRead } from '@/public/static/icons/24px/read.svg'
+import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
@@ -13,6 +14,7 @@ import {
   List,
   QueryError,
   SpinnerBlock,
+  TextIcon,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -26,6 +28,7 @@ import {
   CampaignFeedType,
   FEED_TYPE_ALL,
   FEED_TYPE_ANNOUNCEMENT,
+  FEED_TYPE_FEATURED,
 } from '../Tabs'
 import { CAMPAIGN_ARTICLES_PRIVATE, CAMPAIGN_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.module.css'
@@ -69,13 +72,18 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   const shortHash = getQuery('shortHash')
   const isAll = feedType === FEED_TYPE_ALL
   const isAnnouncement = feedType === FEED_TYPE_ANNOUNCEMENT
+  const isFeatured = feedType === FEED_TYPE_FEATURED
   const announcements = camapign.announcements
 
   const { data, loading, error, fetchMore, networkStatus, client } =
     usePublicQuery<CampaignArticlesPublicQuery>(CAMPAIGN_ARTICLES_PUBLIC, {
       variables: {
         shortHash,
-        ...(!isAll ? { filter: { stage: feedType } } : {}),
+        ...(!isAll
+          ? {
+              filter: isFeatured ? { featured: true } : { stage: feedType },
+            }
+          : {}),
       },
       notifyOnNetworkStatusChange: true,
       skip: isAnnouncement,
@@ -164,6 +172,9 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                   id: article.author.id,
                 })
               }}
+              hasToggleCampaignFeatured
+              campaignId={camapign.id}
+              campaignFeatured={false}
             />
           </List.Item>
         ))}
@@ -196,20 +207,43 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
-        {edges.map(({ node }, i) => (
+        {edges.map(({ node, featured }, i) => (
           <List.Item key={`${feedType}:${i}`}>
             <ArticleDigestFeed
               article={node}
               label={
-                isAll && (
-                  <span
-                    className={[
-                      styles.articleLabel,
-                      getArticleStage(node)?.id ? '' : styles.announcement,
-                    ].join(' ')}
-                  >
-                    {getArticleStageName(node, lang)}
-                  </span>
+                (isAll || isFeatured) && (
+                  <>
+                    <span
+                      className={[
+                        styles.articleLabel,
+                        getArticleStage(node)?.id ? '' : styles.announcement,
+                      ].join(' ')}
+                    >
+                      {getArticleStageName(node, lang)}
+                    </span>
+
+                    {isAll && featured && (
+                      <TextIcon
+                        icon={
+                          <Icon
+                            icon={IconStar}
+                            size={12}
+                            style={{ opacity: 0.5 }}
+                          />
+                        }
+                        spacing={2}
+                        color="freeWriteGreenLabel"
+                        size={12}
+                      >
+                        <FormattedMessage
+                          defaultMessage="Featured"
+                          id="RkyEBL"
+                          description="src/views/CampaignDetail/ArticleFeeds/Tabs/index.tsx"
+                        />
+                      </TextIcon>
+                    )}
+                  </>
                 )
               }
               onClick={() => {
@@ -228,6 +262,9 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                   id: node.author.id,
                 })
               }}
+              hasToggleCampaignFeatured
+              campaignId={camapign.id}
+              campaignFeatured={isFeatured}
             />
           </List.Item>
         ))}

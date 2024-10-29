@@ -53,13 +53,13 @@ const ToggleRecommendArticleDialog = ({
     useMutation<ToggleRecommendArticleMutation>(TOGGLE_RECOMMEND_ARTICLE)
 
   const title = {
-    icymi: ['選為精華', '撤銷精華'],
+    icymi: ['設為首頁精選', '撤銷首頁精選'],
     hottestAndNewest: ['撤銷移出', '移出熱門與最新'],
   }
   const description = {
     icymi: [
-      `確認要将「<span class="u-highlight">${article.title}</span>」選為精華嗎？`,
-      `確認要将「<span class="u-highlight">${article.title}</span>」撤銷精華嗎？`,
+      `確認要将「<span class="u-highlight">${article.title}</span>」設為首頁精選嗎？`,
+      `確認要将「<span class="u-highlight">${article.title}</span>」撤銷首頁精選嗎？`,
     ],
     hottestAndNewest: [
       `作品「<span class="u-highlight">${article.title}</span>」將可能出現在熱門和最新的文章列表中。`,

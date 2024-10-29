@@ -15,6 +15,7 @@ const Tab = ({ title, selected, onClick, theme }: TabProps) => {
     [styles.tabItem]: true,
     [styles.selected]: selected,
     [styles.gold]: theme === 'gold',
+    [styles.green]: theme === 'green',
   })
   return (
     <li

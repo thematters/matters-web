@@ -440,6 +440,9 @@
     "defaultMessage": "喜歡你已刪除的動態",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
+  "5SgH7l": {
+    "defaultMessage": "作品已添加至自由寫精華"
+  },
   "5UglrB": {
     "defaultMessage": "送出成功"
   },
@@ -1341,9 +1344,6 @@
     "defaultMessage": "標籤",
     "description": "src/components/Dialogs/TagListDialog/index.tsx"
   },
-  "KkHQZ+": {
-    "defaultMessage": "現在報名，寫作之旅將於數天後開始，活動細則可查看公告。（報名確認通常需要幾分鐘審核時間，之後你的頭像將出現在作者之中）"
-  },
   "KlJEP9": {
     "defaultMessage": "錢包已綁定",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
@@ -1659,6 +1659,9 @@
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
+  "QFCfA7": {
+    "defaultMessage": "添加到自由寫精華"
+  },
   "QQSdHP": {
     "defaultMessage": "查看更多"
   },
@@ -1730,6 +1733,10 @@
   },
   "Rc4Oij": {
     "defaultMessage": "火閃電"
+  },
+  "RkyEBL": {
+    "defaultMessage": "精華",
+    "description": "src/views/CampaignDetail/ArticleFeeds/Tabs/index.tsx"
   },
   "RnKPVm": {
     "defaultMessage": "{articleCount} 篇文章"
@@ -2167,6 +2174,9 @@
   },
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
+  },
+  "ZN1IzT": {
+    "defaultMessage": "从自由寫精華中移除"
   },
   "ZNK0I9": {
     "defaultMessage": "喜歡你的評論"
@@ -2669,6 +2679,9 @@
     "defaultMessage": "報名處理中⋯",
     "description": "type:apply"
   },
+  "jXDxa6": {
+    "defaultMessage": "作品已從自由寫精華中移除"
+  },
   "jiB0Z2": {
     "defaultMessage": "無法綁定錢包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2760,6 +2773,9 @@
     "defaultMessage": "最後一步：設置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "l0tvVM": {
+    "defaultMessage": "Apply now. The writing journey will begin in a few days. For event details, please check the Event Information."
+  },
   "l2eEyp": {
     "defaultMessage": "交易密碼重置成功"
   },
@@ -2812,6 +2828,10 @@
   },
   "ll/ufR": {
     "defaultMessage": "熱門"
+  },
+  "lo8eLY": {
+    "defaultMessage": "你的作品 {articleTitle} 已被列為七日書精選之作，快來看看更多精彩好文！",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
   },
   "lqdpsm": {
     "defaultMessage": "回到訂閱"
