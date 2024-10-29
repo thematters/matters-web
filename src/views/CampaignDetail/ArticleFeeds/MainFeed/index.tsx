@@ -238,7 +238,8 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                       >
                         <FormattedMessage
                           defaultMessage="Featured"
-                          id="CnPG8j"
+                          id="RkyEBL"
+                          description="src/views/CampaignDetail/ArticleFeeds/Tabs/index.tsx"
                         />
                       </TextIcon>
                     )}
