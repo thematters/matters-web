@@ -15,7 +15,7 @@ const DELETE_ARTICLES_TAGS = gql`
   mutation DeleteArticlesTags($id: ID!, $articles: [ID!]) {
     deleteArticlesTags(input: { id: $id, articles: $articles }) {
       id
-      articles(input: { first: 0, selected: true }) {
+      articles: articlesExcludeSpam(input: { first: 0, selected: true }) {
         totalCount
       }
     }

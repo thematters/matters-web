@@ -6,7 +6,7 @@ export default gql`
       input: { id: $id, articles: $articles, selected: $selected }
     ) {
       id
-      articles(input: { first: 0, selected: $selected }) {
+      articles: articlesExcludeSpam(input: { first: 0, selected: $selected }) {
         totalCount
       }
     }

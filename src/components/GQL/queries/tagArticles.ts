@@ -12,7 +12,7 @@ export const TAG_ARTICLES_PUBLIC = gql`
     node(input: { id: $id }) {
       ... on Tag {
         id
-        articles(
+        articles: articlesExcludeSpam(
           input: {
             first: 20
             after: $after

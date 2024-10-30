@@ -17,7 +17,7 @@ const SET_TAG_UNSELECTED = gql`
       input: { id: $id, articles: $articles, isSelected: false }
     ) {
       id
-      articles(input: { first: 0, selected: true }) {
+      articles: articlesExcludeSpam(input: { first: 0, selected: true }) {
         totalCount
       }
     }

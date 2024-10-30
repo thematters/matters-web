@@ -7,7 +7,7 @@ export const fragments = {
   article: gql`
     fragment AuthorSidebarArticle on Article {
       id
-      relatedArticles(input: { first: 0 }) {
+      relatedArticles: relatedArticlesExcludeSpam(input: { first: 0 }) {
         totalCount
       }
       ...AuthorSidebarAuthorArticle

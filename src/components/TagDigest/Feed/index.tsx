@@ -30,7 +30,7 @@ const fragments = {
       cover
       numArticles
       numAuthors
-      articles(input: { first: 3 }) {
+      articles: articlesExcludeSpam(input: { first: 3 }) {
         edges {
           cursor
           node {
