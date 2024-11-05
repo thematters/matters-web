@@ -103,6 +103,7 @@ export interface ClickButtonProp {
     | 'newest'
     | 'campaign_detail_link'
     | `campaign_detail_tab_${string}`
+    | `user_profile_tab_${string}`
   pageType?: PageType
   pageComponent?: PageComponent
 }
