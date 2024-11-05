@@ -1734,10 +1734,6 @@
   "Rc4Oij": {
     "defaultMessage": "Firebolt"
   },
-  "RkyEBL": {
-    "defaultMessage": "Featured",
-    "description": "src/views/CampaignDetail/ArticleFeeds/Tabs/index.tsx"
-  },
   "RnKPVm": {
     "defaultMessage": "{articleCount} articles"
   },
