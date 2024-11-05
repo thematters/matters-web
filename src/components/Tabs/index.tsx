@@ -36,7 +36,12 @@ const Tab: React.FC<React.PropsWithChildren<TabProps>> = ({
 
   if (href) {
     return (
-      <li role="tab" aria-selected={selected} className={classes}>
+      <li
+        role="tab"
+        aria-selected={selected}
+        className={classes}
+        onClick={onClick}
+      >
         <Link href={href || ''} legacyBehavior>
           <a>
             {children}
