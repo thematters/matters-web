@@ -1734,10 +1734,6 @@
   "Rc4Oij": {
     "defaultMessage": "火闪电"
   },
-  "RkyEBL": {
-    "defaultMessage": "精华",
-    "description": "src/views/CampaignDetail/ArticleFeeds/Tabs/index.tsx"
-  },
   "RnKPVm": {
     "defaultMessage": "{articleCount} 篇文章"
   },
