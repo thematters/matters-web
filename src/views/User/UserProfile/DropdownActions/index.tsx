@@ -4,10 +4,12 @@ import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { useEnsName } from 'wagmi'
 
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
 import { ReactComponent as IconRss } from '@/public/static/icons/24px/rss.svg'
 import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
+import { featureSupportedChains } from '~/common/utils'
 import {
   Button,
   Dropdown,
@@ -230,11 +232,17 @@ const BaseDropdownActions = ({
 
 const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
+  const targetNetwork = featureSupportedChains.ens[0]
+  const { data: ensName } = useEnsName({
+    address: user.info.ethAddress as `0x${string}`,
+    chainId: targetNetwork.id,
+  })
 
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !!viewer.id && !isMe,
-    hasRssFeed: user?.articles.totalCount > 0 && !!user?.info.ipnsKey,
+    hasRssFeed:
+      ensName && user?.articles.totalCount > 0 && !!user?.info.ipnsKey,
   }
 
   const WithShare = withDialog<Omit<ShareDialogProps, 'children'>>(
