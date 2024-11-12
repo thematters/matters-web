@@ -99,30 +99,6 @@ export const OAUTH_SCOPE_TREE = {
           zh_hans: '关注标签',
         },
       },
-      updateTagSetting: {
-        _t: {
-          zh_hant: '管理標籤',
-          zh_hans: '管理标签',
-        },
-      },
-      addArticlesTags: {
-        _t: {
-          zh_hant: '添加作品到標籤',
-          zh_hans: '添加作品到标签',
-        },
-      },
-      updateArticlesTags: {
-        _t: {
-          zh_hant: '管理標籤作品',
-          zh_hans: '管理标签作品',
-        },
-      },
-      deleteArticlesTags: {
-        _t: {
-          zh_hant: '移除標籤作品',
-          zh_hans: '移除标签作品',
-        },
-      },
       togglePinComment: {
         _t: {
           zh_hant: '精选評論',
@@ -277,12 +253,6 @@ export const OAUTH_SCOPE_TREE = {
         _t: {
           zh_hant: '文件（圖片、音頻等）上傳',
           zh_hans: '文件（图片、音频等）上传',
-        },
-      },
-      changeEmail: {
-        _t: {
-          zh_hant: '修改電子信箱',
-          zh_hans: '修改邮箱',
         },
       },
       clearReadHistory: {

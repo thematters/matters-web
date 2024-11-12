@@ -151,11 +151,13 @@ const EditDraftCampaign = ({ draft, campaigns }: SidebarProps) => {
   })
 
   return (
-    <Sidebar.Campaign
-      appliedCampaign={appliedCampaign}
-      selectedStage={selectedStage}
-      editCampaign={edit}
-    />
+    <>
+      <Sidebar.Campaign
+        appliedCampaign={appliedCampaign}
+        selectedStage={selectedStage}
+        editCampaign={edit}
+      />
+    </>
   )
 }
 
