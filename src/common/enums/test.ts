@@ -32,7 +32,7 @@ export enum TEST_ID {
   DIGEST_USER_VERBOSE = 'digest/user/verbose',
   DIGEST_TAG_CONCISE = 'digest/tag/concise',
   DIGEST_TAG_FEED = 'digest/tag/feed',
-  DIGEST_TAG_FEED_COVER = 'digest/tag/feed/cover',
+  DIGEST_TAG_FEED_NUM_ARTICLES = 'digest/tag/feed/num-articles',
   DIGEST_TAG_RICH = 'digest/tag/rich',
   DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
   DIGRET_CIRCLE_PLAIN = 'digest/circle/plain',
