@@ -4,14 +4,14 @@ import Link from 'next/link'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { abbr } from '~/common/utils/number/abbr'
-import { CardProps } from '~/components'
 import { TagDigestFeedTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 export type TagDigestFeedProps = {
   tag: TagDigestFeedTagFragment
-} & CardProps
+  onClick?: () => void
+}
 
 const fragments = {
   tag: gql`
@@ -24,7 +24,7 @@ const fragments = {
   `,
 }
 
-const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
+const Feed = ({ tag, onClick }: TagDigestFeedProps) => {
   const path = toPath({
     page: 'tagDetail',
     tag,
@@ -33,7 +33,7 @@ const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
   const numArticles = abbr(tag.numArticles, 2)
 
   return (
-    <Link {...path} legacyBehavior>
+    <Link {...path} legacyBehavior onClick={onClick}>
       <a className={styles.tag} data-test-id={TEST_ID.DIGEST_TAG_FEED}>
         <span className={styles.name}>{tag.content}</span>&nbsp;
         <span

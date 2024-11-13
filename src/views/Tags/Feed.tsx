@@ -1,6 +1,6 @@
 import _get from 'lodash/get'
 
-import { analytics, mergeConnections, toPath } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyTag,
   InfiniteScroll,
@@ -75,13 +75,6 @@ const Feed = ({ type }: Props) => {
             <li key={tag.id} className={styles.listItem}>
               <TagDigest.Feed
                 tag={tag}
-                spacing={[8, 0]}
-                href={
-                  toPath({
-                    page: 'tagDetail',
-                    tag, // : node,
-                  }).href
-                }
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: trackingType,
