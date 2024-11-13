@@ -7,7 +7,7 @@ export const ALL_TAGS_HOTTEST = gql`
     viewer @connection(key: "viewerAllTagsHottest") {
       id
       recommendation {
-        tags(input: { first: 20, after: $after }) {
+        tags(input: { first: 30, after: $after }) {
           totalCount
           pageInfo {
             startCursor
