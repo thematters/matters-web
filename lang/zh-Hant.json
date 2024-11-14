@@ -632,6 +632,10 @@
     "defaultMessage": "取消代表作",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
+  "8GXAUX": {
+    "defaultMessage": "有關",
+    "description": "src/views/Search/AggregateResults/index.tsx"
+  },
   "8KFsZN": {
     "defaultMessage": "閱讀次數"
   },
@@ -2121,6 +2125,9 @@
   "Y8zV4A": {
     "defaultMessage": "回覆評論"
   },
+  "YDMrKK": {
+    "defaultMessage": "用戶"
+  },
   "YPMn9n": {
     "defaultMessage": "請先登入再進行操作",
     "description": "UNAUTHENTICATED"
@@ -2346,6 +2353,10 @@
   },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {篇文章} other {篇文章}}"
+  },
+  "cd8EmU": {
+    "defaultMessage": "的檢索結果",
+    "description": "src/views/Search/AggregateResults/index.tsx"
   },
   "cg1VJ2": {
     "defaultMessage": "連接加密錢包"

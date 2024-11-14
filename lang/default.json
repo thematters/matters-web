@@ -632,6 +632,10 @@
     "defaultMessage": "Unpin from profile",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
+  "8GXAUX": {
+    "defaultMessage": "All results for",
+    "description": "src/views/Search/AggregateResults/index.tsx"
+  },
   "8KFsZN": {
     "defaultMessage": "Read Counts"
   },
@@ -2121,6 +2125,9 @@
   "Y8zV4A": {
     "defaultMessage": "Write a comment"
   },
+  "YDMrKK": {
+    "defaultMessage": "Users"
+  },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
     "description": "UNAUTHENTICATED"
@@ -2346,6 +2353,10 @@
   },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
+  },
+  "cd8EmU": {
+    "defaultMessage": "of search results",
+    "description": "src/views/Search/AggregateResults/index.tsx"
   },
   "cg1VJ2": {
     "defaultMessage": "Connect Wallet"
