@@ -45,3 +45,41 @@
 .result-item {
   padding: var(--sp16);
 }
+
+.tagList {
+  display: flex;
+  flex-wrap: wrap;
+
+  & .tagListItem {
+    @mixin border-bottom-grey-light;
+
+    position: relative;
+    flex: 0 0 50%;
+    padding-bottom: var(--sp20);
+    margin-bottom: var(--sp20);
+    border-style: dashed;
+
+    &:last-child {
+      flex-grow: 1;
+    }
+  }
+
+  @media (--sm-down) {
+    & .tagListItem {
+      &:nth-child(2n + 1) {
+        padding-right: var(--sp16);
+      }
+    }
+  }
+
+  @media (--sm-up) {
+    & .tagListItem {
+      flex: 0 0 33.3333%;
+
+      &:nth-child(3n + 1),
+      &:nth-child(3n + 2) {
+        padding-right: var(--sp16);
+      }
+    }
+  }
+}

@@ -60,13 +60,13 @@ export const SEARCH_AGGREGATE_TAGS_PUBLIC = gql`
         cursor
         node {
           ... on Tag {
-            ...TagDigestConciseTag
+            ...TagDigestFeedTag
           }
         }
       }
     }
   }
-  ${TagDigest.Concise.fragments.tag}
+  ${TagDigest.Feed.fragments.tag}
 `
 
 export const SEARCH_AGGREGATE_USERS_PUBLIC = gql`
