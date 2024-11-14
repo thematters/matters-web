@@ -18,6 +18,10 @@
     padding-bottom: var(--sp20);
     margin-bottom: var(--sp20);
     border-style: dashed;
+
+    &:last-child {
+      flex-grow: 1;
+    }
   }
 
   @media (--sm-down) {
