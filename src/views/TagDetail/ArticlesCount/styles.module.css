@@ -3,9 +3,5 @@
 
   font-size: var(--text14);
   line-height: 1;
-  color: var(--color-grey-darker);
-
-  & b {
-    color: var(--color-black);
-  }
+  color: var(--color-grey);
 }

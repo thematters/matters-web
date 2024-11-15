@@ -42,6 +42,11 @@
     height: 1.5rem;
   }
 
+  &.size28 {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
   &.size32 {
     width: 2rem;
     height: 2rem;

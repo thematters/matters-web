@@ -1,16 +1,16 @@
+.title {
+  @mixin flex-center-start;
+
+  height: 2.25rem; /* 36px; */
+  margin: var(--sp32) 0;
+}
+
 .info {
-  padding: 0 var(--sp16);
-  margin-bottom: var(--sp8);
+  @mixin border-top-grey-light;
+  @mixin border-bottom-grey-light;
+  @mixin flex-center-space-between;
 
-  @media (--sm-up) {
-    padding: 0;
-  }
-
-  & .top {
-    @mixin flex-center-space-between;
-
-    margin-top: var(--sp16);
-  }
+  padding: var(--sp16) 0;
 }
 
 .buttons {

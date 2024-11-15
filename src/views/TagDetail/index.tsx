@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { ERROR_CODES } from '~/common/enums'
 import {
@@ -14,13 +15,13 @@ import {
 import {
   EmptyLayout,
   EmptyTag,
-  Expandable,
   Head,
+  Icon,
   Layout,
   SegmentedTabs,
   SpinnerBlock,
+  TextIcon,
   Throw404,
-  useFeatures,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -35,15 +36,11 @@ import {
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
-import TagCover from './Cover'
-import DropdownActions from './DropdownActions'
-import Followers from './Followers'
 import {
   TAG_DETAIL_BY_SEARCH,
   TAG_DETAIL_PRIVATE,
   TAG_DETAIL_PUBLIC,
 } from './gql'
-import Owner from './Owner'
 import RelatedTags from './RelatedTags'
 import styles from './styles.module.css'
 
@@ -58,7 +55,6 @@ type TagFeedType = (typeof validTagFeedTypes)[number]
 const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
   const viewer = useContext(ViewerContext)
-  const features = useFeatures()
 
   // feed type
   const { getQuery, setQuery } = useRoute()
@@ -106,8 +102,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
 
   // define permission
   const isOwner = tag?.owner?.id === viewer.id
-  const isEditor = (tag?.editors || []).some((t) => t.id === viewer.id)
-  const isMaintainer = isOwner || isEditor || viewer.isAdmin // Matty
 
   const title = '#' + normalizeTag(tag.content)
   const keywords = tag.content.split(/\s+/).filter(Boolean).map(normalizeTag)
@@ -119,30 +113,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
    */
   return (
     <Layout.Main aside={<RelatedTags tagId={tag.id} inSidebar />}>
-      <Layout.Header
-        right={
-          <>
-            <span />
-            <section className={styles.buttons}>
-              <Layout.Header.ShareButton
-                title={title}
-                tags={title.endsWith(tag.content) ? undefined : keywords}
-              />
-              <DropdownActions
-                isOwner={isOwner}
-                isEditor={isEditor}
-                isMaintainer={isMaintainer}
-                tag={tag}
-              />
-            </section>
-          </>
-        }
-        mode="transparent"
-      />
-
       <Head
-        // title={`#${normalizeTag(tag.content)}`}
-        // description={tag.description}
         title={title}
         path={qsType ? `${path.href}?type=${qsType}` : path.href}
         description={description}
@@ -165,32 +136,26 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         }}
       />
 
-      <TagCover tag={tag} />
+      <section className={styles.title}>
+        <TextIcon
+          icon={<Icon icon={IconHashTag} size={28} />}
+          color="black"
+          size={24}
+          spacing={4}
+          weight="medium"
+        >
+          {tag.content}
+        </TextIcon>
+      </section>
 
       <section className={styles.info}>
-        {features.tag_adoption && <Owner tag={tag} />}
-
-        <section className={styles.top}>
-          <section className={styles.statistics}>
-            <Followers tag={tag} />
-            <ArticlesCount tag={tag} />
-          </section>
-
-          <section>
-            <TagDetailButtons.FollowButton tag={tag} />
-          </section>
+        <section className={styles.statistics}>
+          <ArticlesCount tag={tag} />
         </section>
 
-        {tag.description && (
-          <Expandable
-            content={tag.description}
-            color="greyDarker"
-            spacingTop="base"
-            size={15}
-          >
-            <p>{tag.description}</p>
-          </Expandable>
-        )}
+        <section>
+          <TagDetailButtons.FollowButton tag={tag} />
+        </section>
       </section>
 
       <SegmentedTabs sticky>
