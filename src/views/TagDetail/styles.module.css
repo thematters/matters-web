@@ -13,6 +13,11 @@
   padding: var(--sp16) 0;
 }
 
+.tabs {
+  margin-top: var(--sp32);
+  margin-bottom: var(--sp12);
+}
+
 .buttons {
   display: inline-flex;
   gap: var(--sp16);

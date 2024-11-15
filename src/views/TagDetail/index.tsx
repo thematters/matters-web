@@ -1,6 +1,5 @@
-import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
@@ -18,8 +17,8 @@ import {
   Head,
   Icon,
   Layout,
-  SegmentedTabs,
   SpinnerBlock,
+  SquareTabs,
   TextIcon,
   Throw404,
   usePublicQuery,
@@ -44,17 +43,12 @@ import {
 import RelatedTags from './RelatedTags'
 import styles from './styles.module.css'
 
-const DynamicCommunity = dynamic(() => import('./Community'), {
-  ssr: false,
-  loading: () => <SpinnerBlock />,
-})
-
 const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
 type TagFeedType = (typeof validTagFeedTypes)[number]
 
 const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
-  const viewer = useContext(ViewerContext)
+  const intl = useIntl()
 
   // feed type
   const { getQuery, setQuery } = useRoute()
@@ -81,7 +75,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
-  const isCreators = feedType === 'creators'
 
   useEffect(() => {
     // if selected feed is empty, switch to hottest feed
@@ -99,9 +92,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
       router.replace(newPath.href, undefined, { shallow: true })
     }
   }, [])
-
-  // define permission
-  const isOwner = tag?.owner?.id === viewer.id
 
   const title = '#' + normalizeTag(tag.content)
   const keywords = tag.content.split(/\s+/).filter(Boolean).map(normalizeTag)
@@ -158,43 +148,29 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         </section>
       </section>
 
-      <SegmentedTabs sticky>
-        <SegmentedTabs.Tab
-          selected={isHottest}
-          onClick={() => changeFeed('hottest')}
-        >
-          <FormattedMessage defaultMessage="Trending" id="ll/ufR" />
-        </SegmentedTabs.Tab>
+      <section className={styles.tabs}>
+        <SquareTabs>
+          <SquareTabs.Tab
+            selected={isLatest}
+            onClick={() => changeFeed('latest')}
+            title={intl.formatMessage({
+              defaultMessage: 'Latest',
+              id: 'adThp5',
+            })}
+          />
 
-        <SegmentedTabs.Tab
-          selected={isLatest}
-          onClick={() => changeFeed('latest')}
-        >
-          <FormattedMessage defaultMessage="Latest" id="adThp5" />
-        </SegmentedTabs.Tab>
+          <SquareTabs.Tab
+            selected={isHottest}
+            onClick={() => changeFeed('hottest')}
+            title={intl.formatMessage({
+              defaultMessage: 'Trending',
+              id: 'll/ufR',
+            })}
+          />
+        </SquareTabs>
+      </section>
 
-        {hasSelectedFeed && (
-          <SegmentedTabs.Tab
-            selected={isSelected}
-            onClick={() => changeFeed('selected')}
-          >
-            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
-          </SegmentedTabs.Tab>
-        )}
-
-        <SegmentedTabs.Tab
-          selected={isCreators}
-          onClick={() => changeFeed('creators')}
-        >
-          <FormattedMessage defaultMessage="Creators" id="TzhzIH" />
-        </SegmentedTabs.Tab>
-      </SegmentedTabs>
-
-      {(isHottest || isLatest || isSelected) && (
-        <TagDetailArticles tag={tag} feedType={feedType} />
-      )}
-
-      {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
+      <TagDetailArticles tag={tag} feedType={feedType} />
     </Layout.Main>
   )
 }
