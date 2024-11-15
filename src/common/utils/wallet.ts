@@ -1,11 +1,11 @@
 import { Chain, configureChains, createConfig } from 'wagmi'
 import {
-  goerli,
   mainnet,
   optimism,
   optimismSepolia,
   polygon,
   polygonMumbai,
+  sepolia,
 } from 'wagmi/chains'
 import { InjectedConnector } from 'wagmi/connectors/injected'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
@@ -20,7 +20,7 @@ const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
 export const featureSupportedChains = {
   billboard: isProd ? [optimism] : [optimismSepolia],
   curation: isProd ? [optimism] : [optimismSepolia],
-  ens: isProd ? [mainnet] : [goerli],
+  ens: isProd ? [mainnet] : [sepolia],
 }
 
 export const explorers = {
@@ -34,7 +34,7 @@ export const explorers = {
 
 const defaultChains: Chain[] = isProd
   ? [mainnet, optimism]
-  : [goerli, optimismSepolia]
+  : [sepolia, optimismSepolia]
 
 export const { publicClient, chains } = configureChains(defaultChains, [
   alchemyProvider({ apiKey: alchemyId }),

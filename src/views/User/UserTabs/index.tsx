@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { toPath } from '~/common/utils'
+import { analytics, toPath } from '~/common/utils'
 import { Tabs, useRoute, ViewerContext } from '~/components'
 import { TabsUserFragment } from '~/gql/graphql'
 
@@ -53,6 +53,12 @@ const UserTabs = ({
           {...userCollectionsPath}
           selected={isInPath('USER_COLLECTIONS')}
           count={collectionCount > 0 ? collectionCount : undefined}
+          onClick={() => {
+            analytics.trackEvent('click_button', {
+              type: `user_profile_tab_collection` as `user_profile_tab_${string}`,
+              pageType: 'user_profile',
+            })
+          }}
         >
           <FormattedMessage defaultMessage="Collections" id="ulh3kf" />
         </Tabs.Tab>
