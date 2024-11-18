@@ -62,17 +62,10 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
     )
   }, [qsType])
 
-  const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
-  const isCreators = feedType === 'creators'
 
   useEffect(() => {
-    // if selected feed is empty, switch to hottest feed
-    if (!hasSelectedFeed && isSelected) {
-      changeFeed('hottest')
-    }
-
     // backward compatible with `/tags/:globalId:`
     const newPath = toPath({
       page: 'tagDetail',
@@ -152,25 +145,9 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         >
           <FormattedMessage defaultMessage="Latest" id="adThp5" />
         </SegmentedTabs.Tab>
-
-        {hasSelectedFeed && (
-          <SegmentedTabs.Tab
-            selected={isSelected}
-            onClick={() => changeFeed('selected')}
-          >
-            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
-          </SegmentedTabs.Tab>
-        )}
-
-        <SegmentedTabs.Tab
-          selected={isCreators}
-          onClick={() => changeFeed('creators')}
-        >
-          <FormattedMessage defaultMessage="Creators" id="TzhzIH" />
-        </SegmentedTabs.Tab>
       </SegmentedTabs>
 
-      {(isHottest || isLatest || isSelected) && (
+      {(isHottest || isLatest) && (
         <TagDetailArticles tag={tag} feedType={feedType} />
       )}
     </Layout.Main>

@@ -34,7 +34,6 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
   const viewer = useContext(ViewerContext)
   const feed = useRef(feedType)
 
-  const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
 
   /**
@@ -101,11 +100,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
   }, [!!edges, loading, feedType, viewer.id])
 
   // load next page
-  const trackingType = isHottest
-    ? 'tag_detail_hottest'
-    : isSelected
-    ? 'tag_detail_selected'
-    : 'tag_detail_latest'
+  const trackingType = isHottest ? 'tag_detail_hottest' : 'tag_detail_latest'
   const loadMore = async () => {
     analytics.trackEvent('load_more', {
       type: trackingType,
