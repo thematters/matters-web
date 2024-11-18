@@ -22,7 +22,6 @@ const ARCHIVE_ARTICLE = gql`
     editArticle(input: { id: $id, state: archived }) {
       id
       articleState: state
-      sticky
     }
   }
 `
@@ -52,7 +51,6 @@ const ArchiveArticleDialog = ({
         editArticle: {
           id: article.id,
           articleState: 'archived' as any,
-          sticky: false,
           __typename: 'Article',
         },
       },

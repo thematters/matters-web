@@ -6,20 +6,12 @@ export const TAG_ARTICLES_PUBLIC = gql`
   query TagArticlesPublic(
     $id: ID!
     $after: String
-    $selected: Boolean
     $sortBy: TagArticlesSortBy
   ) {
     node(input: { id: $id }) {
       ... on Tag {
         id
-        articles(
-          input: {
-            first: 20
-            after: $after
-            selected: $selected
-            sortBy: $sortBy
-          }
-        ) {
+        articles(input: { first: 20, after: $after, sortBy: $sortBy }) {
           pageInfo {
             startCursor
             endCursor

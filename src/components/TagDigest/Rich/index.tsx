@@ -15,7 +15,6 @@ import styles from './styles.module.css'
 type Props = {
   tag: TagDigestRichTagPublicFragment & Partial<TagDigestRichTagPrivateFragment>
 
-  hasDesc?: boolean
   hasFollow?: boolean
 } & CardProps
 
@@ -25,7 +24,6 @@ const fragments = {
       fragment TagDigestRichTagPublic on Tag {
         id
         content
-        description
       }
     `,
     private: gql`
@@ -40,7 +38,6 @@ const fragments = {
 
 const Rich = ({
   tag,
-  hasDesc,
   hasFollow,
 
   ...cardProps
@@ -74,12 +71,6 @@ const Rich = ({
           </section>
         )}
       </section>
-
-      {hasDesc && (
-        <section className={styles.desc}>
-          <p>{tag.description}</p>
-        </section>
-      )}
     </Card>
   )
 }

@@ -32,8 +32,7 @@ const SIDEBAR_TAGS = gql`
           edges {
             cursor
             node {
-              cover
-              description
+              id
               ...DigestTag
             }
           }

@@ -1,26 +1,17 @@
-import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { ERROR_CODES } from '~/common/enums'
-import {
-  fromGlobalId,
-  normalizeTag,
-  stripSpaces,
-  toGlobalId,
-  toPath,
-} from '~/common/utils'
+import { fromGlobalId, normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   EmptyLayout,
   EmptyTag,
-  Expandable,
   Head,
   Layout,
   SegmentedTabs,
   SpinnerBlock,
   Throw404,
-  useFeatures,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -35,30 +26,19 @@ import {
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
-import TagCover from './Cover'
-import DropdownActions from './DropdownActions'
-import Followers from './Followers'
 import {
   TAG_DETAIL_BY_SEARCH,
   TAG_DETAIL_PRIVATE,
   TAG_DETAIL_PUBLIC,
 } from './gql'
-import Owner from './Owner'
 import RelatedTags from './RelatedTags'
 import styles from './styles.module.css'
-
-const DynamicCommunity = dynamic(() => import('./Community'), {
-  ssr: false,
-  loading: () => <SpinnerBlock />,
-})
 
 const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
 type TagFeedType = (typeof validTagFeedTypes)[number]
 
 const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
-  const viewer = useContext(ViewerContext)
-  const features = useFeatures()
 
   // feed type
   const { getQuery, setQuery } = useRoute()
@@ -82,17 +62,10 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
     )
   }, [qsType])
 
-  const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
-  const isCreators = feedType === 'creators'
 
   useEffect(() => {
-    // if selected feed is empty, switch to hottest feed
-    if (!hasSelectedFeed && isSelected) {
-      changeFeed('hottest')
-    }
-
     // backward compatible with `/tags/:globalId:`
     const newPath = toPath({
       page: 'tagDetail',
@@ -104,14 +77,8 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
     }
   }, [])
 
-  // define permission
-  const isOwner = tag?.owner?.id === viewer.id
-  const isEditor = (tag?.editors || []).some((t) => t.id === viewer.id)
-  const isMaintainer = isOwner || isEditor || viewer.isAdmin // Matty
-
   const title = '#' + normalizeTag(tag.content)
   const keywords = tag.content.split(/\s+/).filter(Boolean).map(normalizeTag)
-  const description = stripSpaces(tag.description)
   const path = toPath({ page: 'tagDetail', tag })
 
   /**
@@ -128,12 +95,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
                 title={title}
                 tags={title.endsWith(tag.content) ? undefined : keywords}
               />
-              <DropdownActions
-                isOwner={isOwner}
-                isEditor={isEditor}
-                isMaintainer={isMaintainer}
-                tag={tag}
-              />
             </section>
           </>
         }
@@ -145,52 +106,29 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         // description={tag.description}
         title={title}
         path={qsType ? `${path.href}?type=${qsType}` : path.href}
-        description={description}
         keywords={keywords} // add top10 most using author names?
-        image={
-          tag.cover ||
-          `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`
-        }
+        image={`//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'ItemList', // should follow with some recent articles under 'itemListElement'
           name: title,
-          description,
           keywords,
-          image:
-            tag.cover ||
-            `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`,
+          image: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`,
           url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${path.href}`,
           // itemListElement: [...],
         }}
       />
 
-      <TagCover tag={tag} />
-
       <section className={styles.info}>
-        {features.tag_adoption && <Owner tag={tag} />}
-
         <section className={styles.top}>
           <section className={styles.statistics}>
-            <Followers tag={tag} />
             <ArticlesCount tag={tag} />
           </section>
 
           <section>
-            <TagDetailButtons.FollowButton tag={tag} />
+            <TagDetailButtons.BookmarkButton tag={tag} />
           </section>
         </section>
-
-        {tag.description && (
-          <Expandable
-            content={tag.description}
-            color="greyDarker"
-            spacingTop="base"
-            size={15}
-          >
-            <p>{tag.description}</p>
-          </Expandable>
-        )}
       </section>
 
       <SegmentedTabs sticky>
@@ -207,29 +145,11 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         >
           <FormattedMessage defaultMessage="Latest" id="adThp5" />
         </SegmentedTabs.Tab>
-
-        {hasSelectedFeed && (
-          <SegmentedTabs.Tab
-            selected={isSelected}
-            onClick={() => changeFeed('selected')}
-          >
-            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
-          </SegmentedTabs.Tab>
-        )}
-
-        <SegmentedTabs.Tab
-          selected={isCreators}
-          onClick={() => changeFeed('creators')}
-        >
-          <FormattedMessage defaultMessage="Creators" id="TzhzIH" />
-        </SegmentedTabs.Tab>
       </SegmentedTabs>
 
-      {(isHottest || isLatest || isSelected) && (
+      {(isHottest || isLatest) && (
         <TagDetailArticles tag={tag} feedType={feedType} />
       )}
-
-      {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
     </Layout.Main>
   )
 }

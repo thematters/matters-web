@@ -14,7 +14,6 @@ export default gql`
       }
       liker {
         total
-        rateUSD
       }
     }
   }

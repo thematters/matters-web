@@ -8,7 +8,7 @@ import { MOCK_TAG } from '~/stories/mocks'
 
 describe('<TagDigest.Rich>', () => {
   it('should render a TagDigest.Rich', () => {
-    render(<TagDigest.Rich tag={MOCK_TAG} hasDesc hasFollow />)
+    render(<TagDigest.Rich tag={MOCK_TAG} hasFollow />)
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_TAG_RICH)
     expect($digest).toBeInTheDocument()
