@@ -5,15 +5,15 @@ import { FormattedMessage } from 'react-intl'
 import { Button, TextIcon, useMutation } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
-  FollowButtonTagPrivateFragment,
+  BookmarkButtonTagPrivateFragment,
   ToggleBookmarkTagMutation,
 } from '~/gql/graphql'
 
-interface UnfollowTagProps {
-  tag: FollowButtonTagPrivateFragment
+interface UnbookmarkTagProps {
+  tag: BookmarkButtonTagPrivateFragment
 }
 
-const Unfollow = ({ tag }: UnfollowTagProps) => {
+const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<ToggleBookmarkTagMutation>(
     TOGGLE_BOOKMARK_TAG,
@@ -53,4 +53,4 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
   )
 }
 
-export default Unfollow
+export default Unbookmark

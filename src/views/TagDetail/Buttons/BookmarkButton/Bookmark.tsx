@@ -16,15 +16,15 @@ import {
 } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
-  FollowButtonTagPrivateFragment,
+  BookmarkButtonTagPrivateFragment,
   ToggleBookmarkTagMutation,
 } from '~/gql/graphql'
 
-interface FollowProps {
-  tag: FollowButtonTagPrivateFragment
+interface BookmarkProps {
+  tag: BookmarkButtonTagPrivateFragment
 }
 
-const Follow = ({ tag }: FollowProps) => {
+const Bookmark = ({ tag }: BookmarkProps) => {
   const viewer = useContext(ViewerContext)
   const [follow] = useMutation<ToggleBookmarkTagMutation>(TOGGLE_BOOKMARK_TAG, {
     variables: { id: tag.id, enabled: true },
@@ -69,4 +69,4 @@ const Follow = ({ tag }: FollowProps) => {
   )
 }
 
-export default Follow
+export default Bookmark

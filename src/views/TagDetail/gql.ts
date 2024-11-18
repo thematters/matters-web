@@ -1,7 +1,5 @@
 import gql from 'graphql-tag'
 
-import { UserDigest } from '~/components/UserDigest'
-
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
 
@@ -15,7 +13,8 @@ const tagFragment = gql`
       totalCount
     }
     ...ArticleCountTag
-    recommended(input: {}) {
+    ...BookmarkButtonTagPrivate
+    recommended(input: { first: 10 }) {
       edges {
         cursor
         node {
@@ -27,9 +26,8 @@ const tagFragment = gql`
       }
     }
   }
-  ${UserDigest.Mini.fragments.user}
   ${ArticlesCount.fragments.tag}
-  ${TagDetailButtons.FollowButton.fragments.tag.private}
+  ${TagDetailButtons.BookmarkButton.fragments.tag.private}
 `
 
 export const TAG_DETAIL_PUBLIC = gql`
@@ -64,9 +62,9 @@ export const TAG_DETAIL_PRIVATE = gql`
     node(input: { id: $id }) {
       ... on Tag {
         id
-        ...FollowButtonTagPrivate
+        ...BookmarkButtonTagPrivate
       }
     }
   }
-  ${TagDetailButtons.FollowButton.fragments.tag.private}
+  ${TagDetailButtons.BookmarkButton.fragments.tag.private}
 `

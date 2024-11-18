@@ -133,7 +133,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
           </section>
 
           <section>
-            <TagDetailButtons.FollowButton tag={tag} />
+            <TagDetailButtons.BookmarkButton tag={tag} />
           </section>
         </section>
       </section>
