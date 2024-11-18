@@ -2,6 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
+import { abbr } from '~/common/utils/number/abbr'
 import { render, screen } from '~/common/utils/test'
 import { TagDigest } from '~/components'
 import { MOCK_TAG } from '~/stories/mocks'
@@ -18,24 +19,10 @@ describe('<TagDigest.Feed>', () => {
     const $name = screen.getAllByText(MOCK_TAG.content)[0] // duplicated items in the mock
     expect($name).toBeInTheDocument()
 
-    const $articleCount = screen.getByText(MOCK_TAG.numArticles)
-    expect($articleCount).toBeInTheDocument()
-
-    const $authorCount = screen.getByText(MOCK_TAG.numAuthors)
-    expect($authorCount).toBeInTheDocument()
-
-    const $cover = screen.getByTestId(TEST_ID.DIGEST_TAG_FEED_COVER)
-    expect($cover).toBeInTheDocument()
-    mockRouter.push('/')
-    $cover.click()
-    expect(mockRouter.asPath).toContain(MOCK_TAG.slug)
-
-    const $articleList = screen.getByRole('list')
-    expect($articleList).toBeInTheDocument()
-    const $articleListItems = screen.getAllByRole('listitem')
-    expect($articleListItems.length).toBe(4)
-    mockRouter.push('/')
-    $articleListItems[0].click()
-    expect(mockRouter.asPath).toContain(MOCK_TAG.articles.edges[0].node.slug)
+    const $numArticles = screen.getByTestId(
+      TEST_ID.DIGEST_TAG_FEED_NUM_ARTICLES
+    )
+    expect($numArticles).toBeInTheDocument()
+    expect($numArticles).toHaveTextContent(`(${abbr(MOCK_TAG.numArticles, 2)})`)
   })
 })

@@ -21,3 +21,12 @@ export const Default = Template.bind({})
 Default.args = {
   tag: MOCK_TAG as any,
 }
+
+export const LongName = Template.bind({})
+LongName.args = {
+  tag: {
+    ...MOCK_TAG,
+    content:
+      'Matters.Town 是立足去中心化生態建立的，一個代碼開源、創作者自治的寫作社區。',
+  } as any,
+}
