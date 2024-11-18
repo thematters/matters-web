@@ -166,13 +166,6 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
     return <EmptyTagArticles />
   }
 
-  const isEditor = _some(
-    tag?.editors || [],
-    (editor) => editor.id === viewer.id
-  )
-  const isCreator = tag?.creator?.id === viewer.id
-  const canEditTag = isEditor || isCreator || viewer.isAdmin
-
   return (
     <Layout.Main.Spacing hasVertical={false}>
       <InfiniteScroll
@@ -204,9 +197,6 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
                   }}
                   tagDetailId={tag.id}
                   hasEdit={true}
-                  hasSetTagSelected={canEditTag && !isSelected}
-                  hasSetTagUnselected={canEditTag && isSelected}
-                  hasRemoveTag={canEditTag}
                   hasArchive={true}
                 />
               </List.Item>

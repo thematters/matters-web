@@ -14,11 +14,10 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { updateTagFollowers } from '~/components/GQL'
-import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
+import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
   FollowButtonTagPrivateFragment,
-  ToggleFollowTagMutation,
+  ToggleBookmarkTagMutation,
 } from '~/gql/graphql'
 
 interface FollowProps {
@@ -27,26 +26,18 @@ interface FollowProps {
 
 const Follow = ({ tag }: FollowProps) => {
   const viewer = useContext(ViewerContext)
-  const [follow] = useMutation<ToggleFollowTagMutation>(TOGGLE_FOLLOW_TAG, {
+  const [follow] = useMutation<ToggleBookmarkTagMutation>(TOGGLE_BOOKMARK_TAG, {
     variables: { id: tag.id, enabled: true },
     optimisticResponse:
       !_isNil(tag.id) && !_isNil(tag.isFollower)
         ? {
-            toggleFollowTag: {
+            toggleBookmarkTag: {
               id: tag.id,
               isFollower: true,
               __typename: 'Tag',
             },
           }
         : undefined,
-    update: (cache) => {
-      updateTagFollowers({
-        cache,
-        id: tag.id,
-        type: 'follow',
-        viewer,
-      })
-    },
   })
 
   const onClick = () => {

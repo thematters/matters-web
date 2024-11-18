@@ -31,7 +31,6 @@ const VIEWER_LIKE_BALANCE = gql`
       id
       liker {
         total
-        rateUSD
       }
     }
   }

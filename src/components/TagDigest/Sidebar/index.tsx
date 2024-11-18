@@ -27,8 +27,6 @@ const fragments = {
     fragment TagDigestSidebarTag on Tag {
       id
       content
-      description
-      cover
       numArticles
       numAuthors
     }
@@ -59,7 +57,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
           <Link {...path} legacyBehavior>
             <a>
               <ResponsiveImage
-                url={tag.cover || IMAGE_TAG_COVER.src}
+                url={IMAGE_TAG_COVER.src}
                 width={144}
                 height={144}
               />

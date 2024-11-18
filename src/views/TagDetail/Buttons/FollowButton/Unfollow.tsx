@@ -1,13 +1,12 @@
 import _isNil from 'lodash/isNil'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
-import { updateTagFollowers } from '~/components/GQL'
-import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
+import { Button, TextIcon, useMutation } from '~/components'
+import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
   FollowButtonTagPrivateFragment,
-  ToggleFollowTagMutation,
+  ToggleBookmarkTagMutation,
 } from '~/gql/graphql'
 
 interface UnfollowTagProps {
@@ -15,29 +14,23 @@ interface UnfollowTagProps {
 }
 
 const Unfollow = ({ tag }: UnfollowTagProps) => {
-  const viewer = useContext(ViewerContext)
   const [hover, setHover] = useState(false)
-  const [unfollow] = useMutation<ToggleFollowTagMutation>(TOGGLE_FOLLOW_TAG, {
-    variables: { id: tag.id, enabled: false },
-    optimisticResponse:
-      !_isNil(tag.id) && !_isNil(tag.isFollower)
-        ? {
-            toggleFollowTag: {
-              id: tag.id,
-              isFollower: false,
-              __typename: 'Tag',
-            },
-          }
-        : undefined,
-    update: (cache) => {
-      updateTagFollowers({
-        cache,
-        type: 'unfollow',
-        id: tag.id,
-        viewer,
-      })
-    },
-  })
+  const [unfollow] = useMutation<ToggleBookmarkTagMutation>(
+    TOGGLE_BOOKMARK_TAG,
+    {
+      variables: { id: tag.id, enabled: false },
+      optimisticResponse:
+        !_isNil(tag.id) && !_isNil(tag.isFollower)
+          ? {
+              toggleBookmarkTag: {
+                id: tag.id,
+                isFollower: false,
+                __typename: 'Tag',
+              },
+            }
+          : undefined,
+    }
+  )
 
   return (
     <Button

@@ -35,13 +35,13 @@ LongTitleFeed.args = {
 
 export const InUserPageFeed = Template.bind({})
 InUserPageFeed.args = {
-  article: { ...MOCK_ARTILCE, pinned: true, subscribed: false },
+  article: { ...MOCK_ARTILCE, pinned: true, bookmarked: false },
   inUserArticles: true,
   hasAuthor: false,
 }
 
 export const Subscribed = Template.bind({})
 Subscribed.args = {
-  article: { ...MOCK_ARTILCE, pinned: true, subscribed: true },
+  article: { ...MOCK_ARTILCE, pinned: true, bookmarked: true },
   inUserArticles: true,
 }

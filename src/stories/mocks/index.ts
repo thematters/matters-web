@@ -153,7 +153,7 @@ export const MOCK_ARTILCE = {
     __typename: 'ArticleDonationConnection' as any,
     totalCount: 190,
   },
-  subscribed: false,
+  folllowed: false,
   access: {
     __typename: 'ArticleAccess' as any,
     type: 'paywall' as any,

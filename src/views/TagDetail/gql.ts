@@ -4,43 +4,23 @@ import { UserDigest } from '~/components/UserDigest'
 
 import ArticlesCount from './ArticlesCount'
 import { TagDetailButtons } from './Buttons'
-import Followers from './Followers'
 
 const tagFragment = gql`
   fragment TagFragment on Tag {
     id
     content
-    cover
-    description
     numArticles
     numAuthors
-    creator {
-      id
-      ...UserDigestMiniUser
-    }
-    editors {
-      id
-      ...UserDigestMiniUser
-    }
-    owner {
-      id
-      ...UserDigestMiniUser
-    }
-    selectedArticles: articles(input: { first: 0, selected: true }) {
+    selectedArticles: articles(input: { first: 0 }) {
       totalCount
     }
-    isOfficial
-    ...FollowersTag
     ...ArticleCountTag
-    ...FollowButtonTagPrivate
     recommended(input: {}) {
       edges {
         cursor
         node {
           id
           content
-          description
-          cover
           numArticles
           numAuthors
         }
@@ -48,7 +28,6 @@ const tagFragment = gql`
     }
   }
   ${UserDigest.Mini.fragments.user}
-  ${Followers.fragments.tag}
   ${ArticlesCount.fragments.tag}
   ${TagDetailButtons.FollowButton.fragments.tag.private}
 `
