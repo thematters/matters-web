@@ -34,7 +34,7 @@ const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
 
   return (
     <Button
-    spacing={[8, 8]}
+      spacing={[8, 8]}
       textColor="greyDarker"
       textActiveColor="black"
       aria-label={intl.formatMessage({
@@ -42,10 +42,10 @@ const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
         id: 'FEkOVJ',
         description: 'src/components/Buttons/Bookmark/Unsubscribe.tsx',
       })}
-      onClick={() => unfollow() }
+      onClick={() => unfollow()}
     >
       <Icon icon={IconSave2} size={22} />
-  </Button>
+    </Button>
   )
 }
 

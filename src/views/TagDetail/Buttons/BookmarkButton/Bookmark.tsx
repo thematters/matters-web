@@ -7,12 +7,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import {
-  Button,
-  Icon,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+import { Button, Icon, useMutation, ViewerContext } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
   BookmarkButtonTagPrivateFragment,
