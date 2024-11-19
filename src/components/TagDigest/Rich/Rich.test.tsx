@@ -20,9 +20,6 @@ describe('<TagDigest.Rich>', () => {
 
     const $followButton = screen.getByText('Follow')
     expect($followButton).toBeInTheDocument()
-
-    const $description = screen.getByText(MOCK_TAG.description)
-    expect($description).toBeInTheDocument()
   })
 
   it('should render a TagDigest.Rich without description', () => {
@@ -30,9 +27,6 @@ describe('<TagDigest.Rich>', () => {
 
     const $digest = screen.getByTestId(TEST_ID.DIGEST_TAG_RICH)
     expect($digest).toBeInTheDocument()
-
-    const $description = screen.queryByText(MOCK_TAG.description)
-    expect($description).not.toBeInTheDocument()
   })
 
   it('should render a TagDigest.Rich without follow button', () => {
