@@ -37,12 +37,6 @@ export * from './RemoveArticleCollectionDialog'
 // Editor
 export * from './EditorSearchSelectDialog'
 
-// Tag
-export * from './EditTagDialog'
-export * from './TagAdoptionDialog'
-export * from './TagEditorDialog'
-export * from './TagLeaveDialog'
-
 // Re-use
 export * from './SearchSelectDialog'
 

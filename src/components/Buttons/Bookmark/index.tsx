@@ -18,7 +18,7 @@ const fragments = {
     private: gql`
       fragment BookmarkArticlePrivate on Article {
         id
-        subscribed
+        bookmarked
       }
     `,
   },
@@ -32,7 +32,7 @@ export const BookmarkButton = ({
 }: BookmarkButtonProps) => {
   const viewer = useContext(ViewerContext)
 
-  if (article.subscribed) {
+  if (article.bookmarked) {
     return (
       <Unsubscribe
         articleId={article.id}

@@ -179,7 +179,7 @@ export const ArticleDigestFeed = React.memo(
   BaseArticleDigestFeed,
   ({ article: prevArticle, ...prevProps }, { article, ...props }) => {
     return (
-      prevArticle.subscribed === article.subscribed &&
+      prevArticle.bookmarked === article.bookmarked &&
       prevArticle.articleState === article.articleState &&
       prevArticle.pinned === article.pinned
     )

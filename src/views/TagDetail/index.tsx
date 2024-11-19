@@ -4,13 +4,7 @@ import { useIntl } from 'react-intl'
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { ERROR_CODES } from '~/common/enums'
-import {
-  fromGlobalId,
-  normalizeTag,
-  stripSpaces,
-  toGlobalId,
-  toPath,
-} from '~/common/utils'
+import { fromGlobalId, normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   EmptyLayout,
   EmptyTag,
@@ -72,16 +66,10 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
     )
   }, [qsType])
 
-  const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
 
   useEffect(() => {
-    // if selected feed is empty, switch to hottest feed
-    if (!hasSelectedFeed && isSelected) {
-      changeFeed('hottest')
-    }
-
     // backward compatible with `/tags/:globalId:`
     const newPath = toPath({
       page: 'tagDetail',
@@ -95,7 +83,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
 
   const title = '#' + normalizeTag(tag.content)
   const keywords = tag.content.split(/\s+/).filter(Boolean).map(normalizeTag)
-  const description = stripSpaces(tag.description)
   const path = toPath({ page: 'tagDetail', tag })
 
   /**
@@ -106,21 +93,14 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
       <Head
         title={title}
         path={qsType ? `${path.href}?type=${qsType}` : path.href}
-        description={description}
         keywords={keywords} // add top10 most using author names?
-        image={
-          tag.cover ||
-          `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`
-        }
+        image={`//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'ItemList', // should follow with some recent articles under 'itemListElement'
           name: title,
-          description,
           keywords,
-          image:
-            tag.cover ||
-            `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`,
+          image: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`,
           url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${path.href}`,
           // itemListElement: [...],
         }}
@@ -144,7 +124,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         </section>
 
         <section>
-          <TagDetailButtons.FollowButton tag={tag} />
+          <TagDetailButtons.BookmarkButton tag={tag} />
         </section>
       </section>
 

@@ -13,9 +13,9 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { ToggleSubscribeArticleMutation } from '~/gql/graphql'
+import { ToggleBookmarkArticleMutation } from '~/gql/graphql'
 
-import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
+import TOGGLE_BOOKMARK_ARTICLE from '../../GQL/mutations/toggleBookmarkArticle'
 
 export type UnsubscribeProps = {
   articleId?: string
@@ -34,8 +34,8 @@ const Unsubscribe = ({
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
 
-  const [unsubscribe] = useMutation<ToggleSubscribeArticleMutation>(
-    TOGGLE_SUBSCRIBE_ARTICLE,
+  const [unsubscribe] = useMutation<ToggleBookmarkArticleMutation>(
+    TOGGLE_BOOKMARK_ARTICLE,
     {
       variables: { id: articleId, enabled: false },
     }

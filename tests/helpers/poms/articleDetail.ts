@@ -177,7 +177,7 @@ export class ArticleDetailPage {
     await Promise.all([
       waitForAPIResponse({
         page: this.page,
-        path: 'data.toggleSubscribeArticle.subscribed',
+        path: 'data.toggleBookmarkArticle.followed',
       }),
       this.toolbarBookmarkButton.click(),
     ])

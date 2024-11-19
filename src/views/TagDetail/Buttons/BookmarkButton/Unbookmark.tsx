@@ -3,18 +3,17 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Button, TextIcon, useMutation } from '~/components'
-import { updateViewerFollowingTagCount } from '~/components/GQL'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
-  TagDigestFollowButtonPrivateFragment,
+  BookmarkButtonTagPrivateFragment,
   ToggleBookmarkTagMutation,
 } from '~/gql/graphql'
 
-interface UnfollowTagProps {
-  tag: Partial<TagDigestFollowButtonPrivateFragment>
+interface UnbookmarkTagProps {
+  tag: BookmarkButtonTagPrivateFragment
 }
 
-const Unfollow = ({ tag }: UnfollowTagProps) => {
+const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<ToggleBookmarkTagMutation>(
     TOGGLE_BOOKMARK_TAG,
@@ -30,16 +29,12 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
               },
             }
           : undefined,
-      update: (cache) => {
-        updateViewerFollowingTagCount({ cache, type: 'decrement' })
-      },
     }
   )
 
   return (
     <Button
-      size={[null, '1.5rem']}
-      spacing={[0, 12]}
+      spacing={[8, 12]}
       textColor="white"
       bgColor="green"
       bgActiveColor="red"
@@ -47,7 +42,7 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      <TextIcon weight="medium" size={12}>
+      <TextIcon weight="medium" size={15}>
         {hover ? (
           <FormattedMessage defaultMessage="Unfollow" id="izWS4J" />
         ) : (
@@ -58,4 +53,4 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
   )
 }
 
-export default Unfollow
+export default Unbookmark
