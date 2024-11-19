@@ -123,9 +123,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
           <ArticlesCount tag={tag} />
         </section>
 
-        <section>
-          <TagDetailButtons.BookmarkButton tag={tag} />
-        </section>
+        <TagDetailButtons.BookmarkButton tag={tag} />
       </section>
 
       <section className={styles.tabs}>

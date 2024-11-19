@@ -1,8 +1,8 @@
 import _isNil from 'lodash/isNil'
-import { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
-import { Button, TextIcon, useMutation } from '~/components'
+import { ReactComponent as IconSave2 } from '@/public/static/icons/24px/save2.svg'
+import { Button, Icon, useMutation } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
   BookmarkButtonTagPrivateFragment,
@@ -14,7 +14,7 @@ interface UnbookmarkTagProps {
 }
 
 const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
-  const [hover, setHover] = useState(false)
+  const intl = useIntl()
   const [unfollow] = useMutation<ToggleBookmarkTagMutation>(
     TOGGLE_BOOKMARK_TAG,
     {
@@ -34,22 +34,18 @@ const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
 
   return (
     <Button
-      spacing={[8, 12]}
-      textColor="white"
-      bgColor="green"
-      bgActiveColor="red"
-      onClick={() => unfollow()}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+    spacing={[8, 8]}
+      textColor="greyDarker"
+      textActiveColor="black"
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Remove bookmark',
+        id: 'FEkOVJ',
+        description: 'src/components/Buttons/Bookmark/Unsubscribe.tsx',
+      })}
+      onClick={() => unfollow() }
     >
-      <TextIcon weight="medium" size={15}>
-        {hover ? (
-          <FormattedMessage defaultMessage="Unfollow" id="izWS4J" />
-        ) : (
-          <FormattedMessage defaultMessage="Followed" id="LGox1K" />
-        )}
-      </TextIcon>
-    </Button>
+      <Icon icon={IconSave2} size={22} />
+  </Button>
   )
 }
 
