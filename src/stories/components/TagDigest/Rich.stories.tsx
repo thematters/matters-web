@@ -25,6 +25,5 @@ Default.args = {
 export const HasFollow = Template.bind({})
 HasFollow.args = {
   tag: MOCK_TAG as any,
-  hasDesc: true,
   hasFollow: true,
 }

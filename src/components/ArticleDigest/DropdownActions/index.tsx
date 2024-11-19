@@ -49,10 +49,7 @@ import { fragments } from './gql'
 import IPFSButton from './IPFSButton'
 import PinButton from './PinButton'
 import RemoveArticleCollectionButton from './RemoveArticleCollectionButton'
-import RemoveTagButton from './RemoveTagButton'
 import SetBottomCollectionButton from './SetBottomCollectionButton'
-import SetTagSelectedButton from './SetTagSelectedButton'
-import SetTagUnselectedButton from './SetTagUnselectedButton'
 import SetTopCollectionButton from './SetTopCollectionButton'
 import ShareButton from './ShareButton'
 import styles from './styles.module.css'
@@ -276,16 +273,6 @@ const BaseDropdownActions = ({
       {hasEdit && <EditButton article={article} />}
       {hasAddCollection && (
         <AddCollectionButton openDialog={openAddCollectionsArticleDialog} />
-      )}
-
-      {hasSetTagSelected && tagDetailId && (
-        <SetTagSelectedButton article={article} tagId={tagDetailId} />
-      )}
-      {hasSetTagUnselected && tagDetailId && (
-        <SetTagUnselectedButton article={article} tagId={tagDetailId} />
-      )}
-      {hasRemoveTag && tagDetailId && (
-        <RemoveTagButton article={article} tagId={tagDetailId} />
       )}
 
       {hasArchive && <Menu.Divider />}

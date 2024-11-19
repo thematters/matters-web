@@ -1,20 +1,11 @@
 import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
-import { useContext } from 'react'
 
 import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
+import { Icon, Menu, toast, Translate, useMutation } from '~/components'
+import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
-  Icon,
-  Menu,
-  toast,
-  Translate,
-  useMutation,
-  ViewerContext,
-} from '~/components'
-import { updateTagFollowers } from '~/components/GQL'
-import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
-import {
-  ToggleFollowTagMutation,
+  ToggleBookmarkTagMutation,
   UnfollowActionButtonTagPrivateFragment,
 } from '~/gql/graphql'
 
@@ -35,26 +26,19 @@ const fragments = {
 }
 
 const UnfollowTagActionButton = ({ tag }: UnfollowTagActionButtonProps) => {
-  const viewer = useContext(ViewerContext)
-
-  const [unfollow] = useMutation<ToggleFollowTagMutation>(TOGGLE_FOLLOW_TAG, {
-    variables: { id: tag.id, enabled: false },
-    optimisticResponse: {
-      toggleFollowTag: {
-        id: tag.id,
-        isFollower: false,
-        __typename: 'Tag',
+  const [unfollow] = useMutation<ToggleBookmarkTagMutation>(
+    TOGGLE_BOOKMARK_TAG,
+    {
+      variables: { id: tag.id, enabled: false },
+      optimisticResponse: {
+        toggleBookmarkTag: {
+          id: tag.id,
+          isFollower: false,
+          __typename: 'Tag',
+        },
       },
-    },
-    update: (cache) => {
-      updateTagFollowers({
-        cache,
-        type: 'unfollow',
-        id: tag.id,
-        viewer,
-      })
-    },
-  })
+    }
+  )
 
   return (
     <Menu.Item

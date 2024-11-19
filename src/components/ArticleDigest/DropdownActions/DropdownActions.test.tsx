@@ -190,47 +190,6 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($archiveButton).toBeInTheDocument()
   })
 
-  // hasSetTagSelected
-  // hasSetTagUnselected
-  // hasRemoveTag
-  it('should render tag buttons', async () => {
-    render(
-      <DropdownActions
-        article={MOCK_ARTILCE}
-        tagDetailId="1"
-        hasSetTagSelected
-        hasSetTagUnselected
-        hasRemoveTag
-      />
-    )
-
-    const $button = screen.getByLabelText('More Actions')
-    expect($button).toBeInTheDocument()
-
-    // open menu
-    $button.click()
-    const $menu = screen.getByRole('menu')
-    expect($menu).toBeInTheDocument()
-
-    // hasSetTagSelected
-    const $setTagSelectedBtn = screen.getByRole('menuitem', {
-      name: 'Add to Featured',
-    })
-    expect($setTagSelectedBtn).toBeInTheDocument()
-
-    // hasUnsetTagSelected
-    const $setTagUnselectedBtn = screen.getByRole('menuitem', {
-      name: 'Unpin from Trending',
-    })
-    expect($setTagUnselectedBtn).toBeInTheDocument()
-
-    // hasRemoveTag
-    const $removeTagBtn = screen.getByRole('menuitem', {
-      name: 'Remove Article',
-    })
-    expect($removeTagBtn).toBeInTheDocument()
-  })
-
   // hasSetTopCollection
   // hasSetBottomCollection
   // hasAddCollection

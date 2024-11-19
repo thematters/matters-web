@@ -115,7 +115,6 @@ const TagsFeed = () => {
               spacing={[12, 16]}
               bgColor="none"
               bgActiveColor="greyLighter"
-              hasDesc
               hasFollow
             />
           </List.Item>
