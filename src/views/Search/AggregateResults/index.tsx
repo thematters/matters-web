@@ -1,8 +1,9 @@
 import { useApolloClient } from '@apollo/react-hooks'
 import { useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { getSearchType } from '~/common/utils'
-import { Layout, SegmentedTabs, Translate, useRoute } from '~/components'
+import { Layout, useRoute } from '~/components'
 
 import Articles from './Articles'
 import {
@@ -11,6 +12,7 @@ import {
   SEARCH_AGGREGATE_USERS_PUBLIC,
 } from './gql'
 import styles from './styles.module.css'
+import { TABS, Tabs } from './Tabs'
 import Tags from './Tags'
 import Users from './Users'
 
@@ -60,37 +62,26 @@ const AggregateResults = () => {
     <>
       <section className={styles.title}>
         <span className={styles.titleLeft}>
-          <Translate zh_hans="有关" zh_hant="有關" en="All results for" />
+          <FormattedMessage
+            defaultMessage="All results for"
+            id="8GXAUX"
+            description="src/views/Search/AggregateResults/index.tsx"
+          />
         </span>
         <span>
           <span className={styles.titleMiddle}>&nbsp;{q}</span>
         </span>
         <span className={styles.titleRight}>
           &nbsp;
-          <Translate zh_hans="的搜索結果" zh_hant="的檢索結果" en="" />
+          <FormattedMessage
+            defaultMessage="of search results"
+            id="cd8EmU"
+            description="src/views/Search/AggregateResults/index.tsx"
+          />
         </span>
       </section>
 
-      <SegmentedTabs>
-        <SegmentedTabs.Tab
-          selected={isArticle}
-          onClick={() => updateType(Type.ARTICLE)}
-        >
-          <Translate zh_hans="作品" zh_hant="作品" en="Articles" />
-        </SegmentedTabs.Tab>
-        <SegmentedTabs.Tab
-          selected={isUser}
-          onClick={() => updateType(Type.USER)}
-        >
-          <Translate zh_hans="用户" zh_hant="用戶" en="Users" />
-        </SegmentedTabs.Tab>
-        <SegmentedTabs.Tab
-          selected={isTag}
-          onClick={() => updateType(Type.TAG)}
-        >
-          <Translate zh_hans="标签" zh_hant="標籤" en="Tags" />
-        </SegmentedTabs.Tab>
-      </SegmentedTabs>
+      <Tabs tab={type as TABS} setTab={updateType as (tab: TABS) => void} />
 
       <Layout.Main.Spacing hasVertical={false}>
         {isArticle && <Articles />}

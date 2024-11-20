@@ -127,14 +127,8 @@
   "0/gRer": {
     "defaultMessage": "I am migrating to Matters, and I invite you to come along"
   },
-  "0/iEw/": {
-    "defaultMessage": "Manage Communities"
-  },
   "06XHBC": {
     "defaultMessage": "Add to Circle"
-  },
-  "0Azlrb": {
-    "defaultMessage": "Manage"
   },
   "0CyECR": {
     "defaultMessage": "Matters ID has been set up. More account info can be found in Settings",
@@ -227,9 +221,6 @@
   "1Z1M77": {
     "defaultMessage": "No data yet",
     "description": "src/views/Me/History/index.tsx"
-  },
-  "1ZFwRz": {
-    "defaultMessage": "Confirm Removal"
   },
   "1exrSw": {
     "defaultMessage": "Welcome onboard!"
@@ -343,9 +334,6 @@
   "3YAasP": {
     "defaultMessage": "What is Liker ID?"
   },
-  "3fqQHv": {
-    "defaultMessage": "Add tag editor"
-  },
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
@@ -416,9 +404,6 @@
     "defaultMessage": "Do you want to disconnect from {type}?",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
-  "5FO4vn": {
-    "defaultMessage": "You do not have permission to perform this operation"
-  },
   "5Ga0iK": {
     "defaultMessage": "Insert code"
   },
@@ -479,10 +464,6 @@
   },
   "62nsdy": {
     "defaultMessage": "Retry"
-  },
-  "63HuBz": {
-    "defaultMessage": "This tag has no manager currently",
-    "description": "src/views/TagDetail/Owner/index.tsx"
   },
   "69+D96": {
     "defaultMessage": "Start Creating"
@@ -609,10 +590,6 @@
   "7oytv9": {
     "defaultMessage": "(edited)"
   },
-  "7xnrxG": {
-    "defaultMessage": "The article has been added to the Trending",
-    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
-  },
   "7ykJ+l": {
     "defaultMessage": "Still quiet here. {br}Be the first one to say hello!",
     "description": "src/components/Empty/EmptyComment.tsx"
@@ -631,6 +608,10 @@
   "84VOdX": {
     "defaultMessage": "Unpin from profile",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
+  },
+  "8GXAUX": {
+    "defaultMessage": "All results for",
+    "description": "src/views/Search/AggregateResults/index.tsx"
   },
   "8KFsZN": {
     "defaultMessage": "Read Counts"
@@ -765,10 +746,6 @@
   },
   "AGDFGs": {
     "defaultMessage": "Discrimination, insult, or hatred"
-  },
-  "ANA7sk": {
-    "defaultMessage": "Maintain",
-    "description": "src/views/TagDetail/Owner/index.tsx"
   },
   "AVpR3Q": {
     "defaultMessage": "Wallet linked",
@@ -1102,10 +1079,6 @@
   "GRrsEH": {
     "defaultMessage": "View published article"
   },
-  "GRtGnZ": {
-    "defaultMessage": "Resign From Maintainer",
-    "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
   "GU6vV0": {
     "defaultMessage": "No collection created yet",
     "description": "src/components/Empty/EmptyCollection.tsx"
@@ -1192,9 +1165,6 @@
   },
   "Hlwud7": {
     "defaultMessage": "More ENS information, check {node}."
-  },
-  "Hm2DAQ": {
-    "defaultMessage": "Confirm collaborator removal"
   },
   "HnxG15": {
     "defaultMessage": "Set"
@@ -1301,10 +1271,6 @@
   "Jr12wo": {
     "defaultMessage": "Insert video"
   },
-  "Js/Fij": {
-    "defaultMessage": "This article has been removed from Trending",
-    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
-  },
   "Jxr/TM": {
     "defaultMessage": "FULL",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
@@ -1330,10 +1296,6 @@
     "defaultMessage": "Circle successfully created",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
-  "KMcrz8": {
-    "defaultMessage": "Maintain Tag",
-    "description": "src/views/TagDetail/Owner/index.tsx"
-  },
   "KQi/UZ": {
     "defaultMessage": "Archive works"
   },
@@ -1347,9 +1309,6 @@
   "KlJEP9": {
     "defaultMessage": "Wallet connected",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
-  },
-  "KoR0wt": {
-    "defaultMessage": "Collaborator can manage selected feed with you."
   },
   "Kwv1n3": {
     "defaultMessage": "registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
@@ -1376,10 +1335,6 @@
   "L79o74": {
     "defaultMessage": "Expand",
     "description": "src/components/Expandable/index.tsx"
-  },
-  "L7Si5/": {
-    "defaultMessage": "Manage Community",
-    "description": "src/views/TagDetail/DropdownActions/index.tsx"
   },
   "LETb4b": {
     "defaultMessage": "Collections allow up to {count} articles currently",
@@ -1422,9 +1377,6 @@
   "LmiUWG": {
     "defaultMessage": "You do not have permissionn to perform this operation",
     "description": "FORBIDDEN_BY_TARGET_STATE"
-  },
-  "LnesNr": {
-    "defaultMessage": "Successfully removed collaborator"
   },
   "LoQ3BF": {
     "defaultMessage": "This badge represents your completion of Free Write in 7 days. Congratulations on finishing this meaningful writing journey!"
@@ -1602,12 +1554,6 @@
     "defaultMessage": "guide",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
-  "P1AKC5": {
-    "defaultMessage": "Collaborator"
-  },
-  "P2Btra": {
-    "defaultMessage": "Adopted"
-  },
   "P3y9Bo": {
     "defaultMessage": "Go to sign",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -1692,9 +1638,6 @@
   },
   "QvPc1q": {
     "defaultMessage": "Upload Cover"
-  },
-  "Qzdtxi": {
-    "defaultMessage": "Resign as tag maintainer"
   },
   "R410ei": {
     "defaultMessage": "Incorrect verification code",
@@ -1830,9 +1773,6 @@
   "T9oZC8": {
     "defaultMessage": "Are you sure you want to delete this collection ‘{collection}’?"
   },
-  "TAPLOf": {
-    "defaultMessage": "Every tag can have maximum {count} collaborators."
-  },
   "TF1OhT": {
     "defaultMessage": "This login code has expired, please try to resend"
   },
@@ -1863,15 +1803,9 @@
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {tutorial}.",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "ThSfXQ": {
-    "defaultMessage": "Successfully added collaborator"
-  },
   "TjWWxF": {
     "defaultMessage": "Broadcast sent",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
-  },
-  "TzhzIH": {
-    "defaultMessage": "Creators"
   },
   "U+qEBM": {
     "defaultMessage": "Switch Network",
@@ -1910,10 +1844,6 @@
     "defaultMessage": "Move to bottom",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
-  "UjKkhq": {
-    "defaultMessage": "Tags added",
-    "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
   "Up5U7K": {
     "defaultMessage": "Block"
   },
@@ -1923,9 +1853,6 @@
   },
   "Uq6tfM": {
     "defaultMessage": "Add caption…"
-  },
-  "Uv0hqn": {
-    "defaultMessage": "Adopt Tag"
   },
   "UxAA/V": {
     "defaultMessage": "Optimism is a Layer 2 scaling solution based on Ethereum that can provide faster and cheaper transactions, while ensuring security, making it easier for you to support creators.",
@@ -2013,10 +1940,6 @@
   },
   "WQT8ZA": {
     "defaultMessage": "Edit collection"
-  },
-  "WSUAwk": {
-    "defaultMessage": "Add to Featured",
-    "description": "src/components/ArticleDigest/DropdownActions/SetTagSelectedButton.tsx"
   },
   "WiGHyF": {
     "defaultMessage": "Web Monetization standard"
@@ -2121,6 +2044,9 @@
   "Y8zV4A": {
     "defaultMessage": "Write a comment"
   },
+  "YDMrKK": {
+    "defaultMessage": "Users"
+  },
   "YPMn9n": {
     "defaultMessage": "Please log in.",
     "description": "UNAUTHENTICATED"
@@ -2217,9 +2143,6 @@
     "defaultMessage": "Number of readers: unique registered users plus number of anonymous IP addresses visited the article (Data will be updated periodically and may be delayed)",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
   },
-  "a3j20X": {
-    "defaultMessage": "Maintain immediately"
-  },
   "aCTmEO": {
     "defaultMessage": "I don't have a wallet yet",
     "description": "src/components/Forms/SelectAuthMethodForm/WalletFeed.tsx"
@@ -2235,9 +2158,6 @@
   "aKEiNd": {
     "defaultMessage": "You missed the registration period, you can still join as a latecomer. Apply earlier next time for the chance to get the badge."
   },
-  "aKlTO2": {
-    "defaultMessage": "You can add {count} more collaborators."
-  },
   "aOFCqL": {
     "defaultMessage": "Most comments",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"
@@ -2247,10 +2167,6 @@
   },
   "aTmmkr": {
     "defaultMessage": "You have unsubscribed the circle."
-  },
-  "aa0nss": {
-    "defaultMessage": "Unpin from Trending",
-    "description": "src/components/ArticleDigest/DropdownActions/SetTagUnselectedButton.tsx"
   },
   "aaUBvF": {
     "defaultMessage": "comment_circle",
@@ -2347,6 +2263,10 @@
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
   },
+  "cd8EmU": {
+    "defaultMessage": "of search results",
+    "description": "src/views/Search/AggregateResults/index.tsx"
+  },
   "cg1VJ2": {
     "defaultMessage": "Connect Wallet"
   },
@@ -2409,9 +2329,6 @@
   "deEeEI": {
     "defaultMessage": "Register"
   },
-  "dg3JCQ": {
-    "defaultMessage": "collaborators"
-  },
   "djJp6c": {
     "defaultMessage": "History"
   },
@@ -2437,9 +2354,6 @@
   },
   "eWXgsZ": {
     "defaultMessage": "Clear Content"
-  },
-  "eXDZGQ": {
-    "defaultMessage": "Maintainer"
   },
   "eY3YIa": {
     "defaultMessage": "Copy comment"
@@ -2591,10 +2505,6 @@
     "defaultMessage": "Insufficient:",
     "description": "src/components/Balance/index.tsx"
   },
-  "hYG5fb": {
-    "defaultMessage": "are following",
-    "description": "src/views/TagDetail/Followers/index.tsx"
-  },
   "hgtWIO": {
     "defaultMessage": "Articles have been collected",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -2696,9 +2606,6 @@
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
-  "k0ooDW": {
-    "defaultMessage": "Tag Description"
-  },
   "k2veDA": {
     "defaultMessage": "Write"
   },
@@ -2714,9 +2621,6 @@
   },
   "kCPl0r": {
     "defaultMessage": "Collect"
-  },
-  "kCp8A9": {
-    "defaultMessage": "After resignation, you will not be able to manage tags."
   },
   "kEDrXh": {
     "defaultMessage": "liked your collection"
@@ -2796,9 +2700,6 @@
   "lIir/P": {
     "defaultMessage": "I see"
   },
-  "lMKb5N": {
-    "defaultMessage": "Resignation Success"
-  },
   "lNWFnL": {
     "defaultMessage": "Share this article in translated version"
   },
@@ -2808,9 +2709,6 @@
   },
   "lO7wKc": {
     "defaultMessage": "Not yet"
-  },
-  "lT6Dt8": {
-    "defaultMessage": "Confirm Resignation"
   },
   "lZukEr": {
     "defaultMessage": "commented",
@@ -2930,9 +2828,6 @@
   "nNB7KU": {
     "defaultMessage": "replied your comment in",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
-  },
-  "nNLkZ8": {
-    "defaultMessage": "Add collaborator"
   },
   "nWhqw9": {
     "defaultMessage": "Publish Now"
@@ -3074,10 +2969,6 @@
   "qhVSGI": {
     "defaultMessage": "Hmm... It seems the author has hidden this work. Go see something else"
   },
-  "qlki7w": {
-    "defaultMessage": "Remove Article",
-    "description": "src/components/ArticleDigest/DropdownActions/RemoveTagButton.tsx"
-  },
   "qlxeW+": {
     "defaultMessage": "Undo downvote"
   },
@@ -3119,9 +3010,6 @@
   "rJqgwV": {
     "defaultMessage": "Edit",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
-  },
-  "rLlTQ9": {
-    "defaultMessage": "Tag Name"
   },
   "rXnmeE": {
     "defaultMessage": "Confirm and Send"
@@ -3240,9 +3128,6 @@
     "defaultMessage": "Comment has been deleted",
     "description": "Moment"
   },
-  "uJkv2X": {
-    "defaultMessage": "Edit Tag"
-  },
   "uM5qZr": {
     "defaultMessage": "Likes Given"
   },
@@ -3335,9 +3220,6 @@
   "vLEnrs": {
     "defaultMessage": "supported",
     "description": "src/components/Notice/TransactionNotice/PaymentReceivedDonationNotice.tsx"
-  },
-  "vLcHiG": {
-    "defaultMessage": "After removal, {user} user will not be able to manage selected feed."
   },
   "vRCDr8": {
     "defaultMessage": "You can quickly log in to your account after binding.{br}Readers can also freely transfer money through other channels to support you!",
@@ -3508,10 +3390,6 @@
   "yOhatg": {
     "defaultMessage": "Other malicious behavior"
   },
-  "ySGgTo": {
-    "defaultMessage": "Add Articles into Featured",
-    "description": "src/views/TagDetail/DropdownActions/index.tsx"
-  },
   "ySSF/a": {
     "defaultMessage": "In order to ensure the identity security of the citizens of Matters City, we've upgraded some security settings. Please confirm your Matters ID (cannot be modified once confirmation).",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
@@ -3519,9 +3397,6 @@
   "yToCTn": {
     "defaultMessage": "Please refresh the page and try again.",
     "description": "NETWORK_ERROR"
-  },
-  "yXWwSW": {
-    "defaultMessage": "Are you sure 😭"
   },
   "yZfKI4": {
     "defaultMessage": "discussion and mentioned you",
