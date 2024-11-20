@@ -2,7 +2,7 @@ import _isNil from 'lodash/isNil'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconSave2 } from '@/public/static/icons/24px/save2.svg'
-import { Button, Icon, useMutation } from '~/components'
+import { Button, Icon, toast, useMutation } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
   BookmarkButtonTagPrivateFragment,
@@ -31,6 +31,15 @@ const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
           : undefined,
     }
   )
+  const onClick = async () => {
+    await unfollow()
+    toast.success({
+      message: intl.formatMessage({
+        defaultMessage: 'Bookmark removed',
+        id: '8ZyDQJ',
+      }),
+    })
+  }
 
   return (
     <Button
@@ -42,7 +51,7 @@ const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
         id: 'FEkOVJ',
         description: 'src/components/Buttons/Bookmark/Unsubscribe.tsx',
       })}
-      onClick={() => unfollow()}
+      onClick={onClick}
     >
       <Icon icon={IconSave2} size={22} />
     </Button>

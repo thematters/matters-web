@@ -7,7 +7,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { Button, Icon, useMutation, ViewerContext } from '~/components'
+import { Button, Icon, toast, useMutation, ViewerContext } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
   BookmarkButtonTagPrivateFragment,
@@ -35,7 +35,7 @@ const Bookmark = ({ tag }: BookmarkProps) => {
         : undefined,
   })
 
-  const onClick = () => {
+  const onClick = async () => {
     if (!viewer.isAuthed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
@@ -45,7 +45,14 @@ const Bookmark = ({ tag }: BookmarkProps) => {
       return
     }
 
-    follow()
+    await follow()
+
+    toast.success({
+      message: intl.formatMessage({
+        defaultMessage: 'Bookmarked',
+        id: 'k0fraU',
+      }),
+    })
   }
 
   return (
