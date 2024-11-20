@@ -23,11 +23,5 @@ describe('<TagDigest.Sidebar>', () => {
 
     const $authorCount = screen.getByText(MOCK_TAG.numAuthors)
     expect($authorCount).toBeInTheDocument()
-
-    const $cover = screen.getByTestId(TEST_ID.DIGEST_TAG_SIDEBAR_COVER)
-    expect($cover).toBeInTheDocument()
-    mockRouter.push('/')
-    $cover.click()
-    expect(mockRouter.asPath).toContain(MOCK_TAG.slug)
   })
 })

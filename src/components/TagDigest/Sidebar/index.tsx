@@ -50,10 +50,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
       testId={TEST_ID.DIGEST_TAG_SIDEBAR}
     >
       <section className={styles.container}>
-        <section
-          className={styles.cover}
-          data-test-id={TEST_ID.DIGEST_TAG_SIDEBAR_COVER}
-        >
+        <section className={styles.cover}>
           <Link {...path} legacyBehavior>
             <a>
               <ResponsiveImage
