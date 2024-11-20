@@ -1,15 +1,14 @@
-import { Fragment, useEffect } from 'react'
+import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
   MAX_SEARCH_RESULTS_LENGTH,
 } from '~/common/enums'
-import { analytics, mergeConnections, toPath } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptySearch,
   InfiniteScroll,
-  Menu,
   SpinnerBlock,
   TagDigest,
   Translate,
@@ -104,18 +103,13 @@ const AggregateTagResults = () => {
           <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
         }
       >
-        <Menu>
+        <ul className={styles.tagList}>
           {edges.map(
             ({ node, cursor }, i) =>
               node.__typename === 'Tag' && (
-                <Fragment key={cursor + node.id}>
-                  <Menu.Item
-                    spacing={[16, 0]}
-                    {...toPath({
-                      page: 'tagDetail',
-                      tag: node,
-                    })}
-                    bgActiveColor="none"
+                <li key={cursor} className={styles.tagListItem}>
+                  <TagDigest.Feed
+                    tag={node}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'search_tag',
@@ -125,13 +119,11 @@ const AggregateTagResults = () => {
                         searchKey: q,
                       })
                     }
-                  >
-                    <TagDigest.Concise tag={node} showArticlesNum />
-                  </Menu.Item>
-                </Fragment>
+                  />
+                </li>
               )
           )}
-        </Menu>
+        </ul>
       </InfiniteScroll>
     </section>
   )
