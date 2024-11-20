@@ -844,10 +844,6 @@
     "defaultMessage": "{date}更新",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
-  "IUS82d": {
-    "defaultMessage": "標籤活躍作者",
-    "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
-  },
   "C9jbHn": {
     "defaultMessage": "拍手數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
@@ -1209,6 +1205,10 @@
   },
   "ISly67": {
     "defaultMessage": "同意"
+  },
+  "IUS82d": {
+    "defaultMessage": "標籤活躍作者",
+    "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
   },
   "IXycMo": {
     "defaultMessage": "重新發送"
