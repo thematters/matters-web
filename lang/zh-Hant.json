@@ -626,6 +626,9 @@
   "8YgVvt": {
     "defaultMessage": "喜歡選集"
   },
+  "8ZyDQJ": {
+    "defaultMessage": "收藏已取消"
+  },
   "8cv9D4": {
     "defaultMessage": "下一步"
   },
@@ -2610,6 +2613,9 @@
     "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "k0fraU": {
+    "defaultMessage": "收藏成功"
+  },
   "k2veDA": {
     "defaultMessage": "創作"
   },
@@ -2643,10 +2649,6 @@
   "kS3vTS": {
     "defaultMessage": "Liker ID",
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
-  },
-  "kSt4il": {
-    "defaultMessage": "收藏已取消",
-    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "kc79d3": {
     "defaultMessage": "找你想看的"
@@ -2925,10 +2927,6 @@
   "qCotH5": {
     "defaultMessage": "在動態中留言",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
-  },
-  "qE8ew4": {
-    "defaultMessage": "收藏成功",
-    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
   },
   "qNuRmA": {
     "defaultMessage": "發送臨時密碼",

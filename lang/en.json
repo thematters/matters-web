@@ -626,6 +626,9 @@
   "8YgVvt": {
     "defaultMessage": "Like collection"
   },
+  "8ZyDQJ": {
+    "defaultMessage": "Bookmark removed"
+  },
   "8cv9D4": {
     "defaultMessage": "Next Step"
   },
@@ -2610,6 +2613,9 @@
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "k0fraU": {
+    "defaultMessage": "Bookmarked"
+  },
   "k2veDA": {
     "defaultMessage": "Write"
   },
@@ -2643,10 +2649,6 @@
   "kS3vTS": {
     "defaultMessage": "Liker ID",
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
-  },
-  "kSt4il": {
-    "defaultMessage": "Bookmark removed",
-    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "kc79d3": {
     "defaultMessage": "Topics"
@@ -2925,10 +2927,6 @@
   "qCotH5": {
     "defaultMessage": "commented in your moment",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
-  },
-  "qE8ew4": {
-    "defaultMessage": "Bookmarked",
-    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
   },
   "qNuRmA": {
     "defaultMessage": "Send login code",
