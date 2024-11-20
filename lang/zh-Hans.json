@@ -844,6 +844,10 @@
     "defaultMessage": "{date}更新",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
+  "IUS82d": {
+    "defaultMessage": "标签活跃作者",
+    "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
+  },
   "C9jbHn": {
     "defaultMessage": "拍手数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"

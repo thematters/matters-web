@@ -34,6 +34,7 @@ import {
   TAG_DETAIL_PRIVATE,
   TAG_DETAIL_PUBLIC,
 } from './gql'
+import RecommendedAuthors from './RecommendedAuthors'
 import RelatedTags from './RelatedTags'
 import styles from './styles.module.css'
 
@@ -89,7 +90,14 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
    * Render
    */
   return (
-    <Layout.Main aside={<RelatedTags tagId={tag.id} inSidebar />}>
+    <Layout.Main
+      aside={
+        <>
+          <RecommendedAuthors tagId={tag.id} inSidebar />
+          <RelatedTags tagId={tag.id} inSidebar />
+        </>
+      }
+    >
       <Head
         title={title}
         path={qsType ? `${path.href}?type=${qsType}` : path.href}

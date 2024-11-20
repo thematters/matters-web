@@ -1,0 +1,29 @@
+.recommendedAuthors {
+  padding-bottom: var(--sp24);
+  margin-top: var(--sp24);
+  border-bottom: 1px dashed var(--color-grey-light);
+}
+
+.inSidebar {
+  padding-bottom: 0;
+  margin-top: 0;
+  border-bottom: none;
+}
+
+.header {
+  margin-bottom: var(--sp18);
+  font-size: var(--text14);
+  font-weight: var(--font-medium);
+  line-height: 1.375rem;
+  color: var(--color-black);
+
+  @media (--sm-up) {
+    margin-bottom: var(--sp20);
+  }
+}
+
+.users {
+  & :global(.list-item + .list-item) {
+    margin-top: var(--sp20);
+  }
+}

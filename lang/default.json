@@ -844,6 +844,10 @@
     "defaultMessage": "upadted {date}",
     "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
+  "IUS82d": {
+    "defaultMessage": "Tag active authors",
+    "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
+  },
   "C9jbHn": {
     "defaultMessage": "Number of claps",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"

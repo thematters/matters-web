@@ -340,6 +340,7 @@ type UserFeedType =
   | 'tag_detail_latest'
   | 'tag_detail_selected'
   | 'tag_detail_community'
+  | 'tag_detail_recommended_authors'
   | 'transaction'
 
 type TagFeedType =
