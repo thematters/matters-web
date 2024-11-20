@@ -1807,9 +1807,6 @@
     "defaultMessage": "Broadcast sent",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
-  "TzhzIH": {
-    "defaultMessage": "Creators"
-  },
   "U+qEBM": {
     "defaultMessage": "Switch Network",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"

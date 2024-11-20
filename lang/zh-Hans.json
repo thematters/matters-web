@@ -1807,9 +1807,6 @@
     "defaultMessage": "广播已送出",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
-  "TzhzIH": {
-    "defaultMessage": "创作者"
-  },
   "U+qEBM": {
     "defaultMessage": "切换网络",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"

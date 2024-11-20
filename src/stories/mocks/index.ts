@@ -235,12 +235,7 @@ export const MOCK_TAG = {
   __typename: 'Tag' as any,
   id: 'VGFnOjE', // Tag:1
   slug: 'tag-slug',
-  editors: [MOCK_USER],
-  owner: MOCK_USER,
   content: '香港',
-  cover: 'https://placehold.co/256x256?collection',
-  description:
-    '香港（英語：Hong Kong；縮寫：HK／HKG），全稱香港特別行政區（英語：Hong Kong Special Administrative Region；縮寫：HKSAR），簡稱「港」，雅稱「香江」',
   articles: {
     __typename: 'ArticleConnection' as any,
     totalCount: 4,

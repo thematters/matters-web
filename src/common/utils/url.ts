@@ -48,7 +48,7 @@ const changeExt = ({ key, ext }: { key: string; ext?: 'webp' }) => {
 }
 
 export const toSizedImageURL = ({
-  url,
+  url = '',
   width,
   height,
   ext,
