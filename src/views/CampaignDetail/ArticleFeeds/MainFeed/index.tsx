@@ -65,6 +65,17 @@ const getArticleStageName = (
   ]
 }
 
+const FeaturedLabel = () => (
+  <TextIcon
+    icon={<Icon icon={IconStar} size={12} style={{ opacity: 0.5 }} />}
+    spacing={2}
+    color="freeWriteGreenLabel"
+    size={12}
+  >
+    <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+  </TextIcon>
+)
+
 const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
@@ -212,8 +223,8 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
             <ArticleDigestFeed
               article={node}
               label={
-                (isAll || isFeatured) && (
-                  <>
+                <>
+                  {(isAll || isFeatured) && (
                     <span
                       className={[
                         styles.articleLabel,
@@ -222,28 +233,9 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                     >
                       {getArticleStageName(node, lang)}
                     </span>
-
-                    {isAll && featured && (
-                      <TextIcon
-                        icon={
-                          <Icon
-                            icon={IconStar}
-                            size={12}
-                            style={{ opacity: 0.5 }}
-                          />
-                        }
-                        spacing={2}
-                        color="freeWriteGreenLabel"
-                        size={12}
-                      >
-                        <FormattedMessage
-                          defaultMessage="Featured"
-                          id="CnPG8j"
-                        />
-                      </TextIcon>
-                    )}
-                  </>
-                )
+                  )}
+                  {!isFeatured && featured && <FeaturedLabel />}
+                </>
               }
               onClick={() => {
                 analytics.trackEvent('click_feed', {
