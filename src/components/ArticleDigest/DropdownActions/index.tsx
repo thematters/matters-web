@@ -123,9 +123,6 @@ export interface DropdownActionsControls {
 
   // tag
   tagDetailId?: string
-  hasSetTagSelected?: boolean
-  hasSetTagUnselected?: boolean
-  hasRemoveTag?: boolean
 
   // campaign
   campaignId?: string
@@ -160,9 +157,6 @@ interface Controls {
   hasExtend: boolean
   hasReport: boolean
   hasSticky: boolean
-  hasSetTagSelected: boolean
-  hasSetTagUnselected: boolean
-  hasRemoveTag: boolean
 }
 
 interface DialogProps {
@@ -212,9 +206,6 @@ const BaseDropdownActions = ({
   hasReport,
   hasSticky,
   hasArchive,
-  hasSetTagSelected,
-  hasSetTagUnselected,
-  hasRemoveTag,
   hasToggleCampaignFeatured,
   hasEdit,
   hasBookmark,
@@ -399,10 +390,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
     inCard,
     inUserArticles,
 
-    hasSetTagSelected,
-    hasSetTagUnselected,
-    hasRemoveTag,
-
     hasEdit,
     hasArchive,
     hasBookmark = true,
@@ -439,9 +426,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
     ),
     hasArchive:
       !!hasArchive && isArticleAuthor && isActive && !viewer.isArchived,
-    hasSetTagSelected: !!hasSetTagSelected,
-    hasSetTagUnselected: !!hasSetTagUnselected,
-    hasRemoveTag: !!hasRemoveTag,
     hasEdit: !!hasEdit && isActive && isArticleAuthor,
     hasBookmark: !!hasBookmark,
     hasAddCollection: hasAddCollection && isActive && isArticleAuthor,

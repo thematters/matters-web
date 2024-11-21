@@ -1,8 +1,8 @@
 import _isNil from 'lodash/isNil'
-import { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
-import { Button, TextIcon, useMutation } from '~/components'
+import { ReactComponent as IconSave2 } from '@/public/static/icons/24px/save2.svg'
+import { Button, Icon, toast, useMutation } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
   BookmarkButtonTagPrivateFragment,
@@ -14,8 +14,8 @@ interface UnbookmarkTagProps {
 }
 
 const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
-  const [hover, setHover] = useState(false)
-  const [unfollow] = useMutation<ToggleBookmarkTagMutation>(
+  const intl = useIntl()
+  const [unbookmark] = useMutation<ToggleBookmarkTagMutation>(
     TOGGLE_BOOKMARK_TAG,
     {
       variables: { id: tag.id, enabled: false },
@@ -31,24 +31,29 @@ const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
           : undefined,
     }
   )
+  const onClick = async () => {
+    await unbookmark()
+    toast.success({
+      message: intl.formatMessage({
+        defaultMessage: 'Bookmark removed',
+        id: '8ZyDQJ',
+      }),
+    })
+  }
 
   return (
     <Button
-      spacing={[8, 12]}
-      textColor="white"
-      bgColor="green"
-      bgActiveColor="red"
-      onClick={() => unfollow()}
-      onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
+      spacing={[8, 8]}
+      textColor="greyDarker"
+      textActiveColor="black"
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Remove bookmark',
+        id: 'FEkOVJ',
+        description: 'src/components/Buttons/Bookmark/Unsubscribe.tsx',
+      })}
+      onClick={onClick}
     >
-      <TextIcon weight="medium" size={15}>
-        {hover ? (
-          <FormattedMessage defaultMessage="Unfollow" id="izWS4J" />
-        ) : (
-          <FormattedMessage defaultMessage="Followed" id="LGox1K" />
-        )}
-      </TextIcon>
+      <Icon icon={IconSave2} size={22} />
     </Button>
   )
 }

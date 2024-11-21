@@ -15,7 +15,7 @@ const ArticlesCount = ({ tag }: ArticlesCountProps) => {
 
   return (
     <section className={styles.container}>
-      <b>{numAbbr(totalCount)}</b>
+      <span>{numAbbr(totalCount)}</span>
       <span>
         &nbsp;
         <FormattedMessage

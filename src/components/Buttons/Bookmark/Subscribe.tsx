@@ -71,13 +71,7 @@ const Subscribe = ({
     await subscribe()
 
     toast.success({
-      message: (
-        <FormattedMessage
-          defaultMessage="Bookmarked"
-          id="qE8ew4"
-          description="src/components/Buttons/Bookmark/Subscribe.tsx"
-        />
-      ),
+      message: <FormattedMessage defaultMessage="Bookmarked" id="k0fraU" />,
     })
   }
 

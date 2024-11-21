@@ -57,11 +57,7 @@ const Unsubscribe = ({
 
     toast.success({
       message: (
-        <FormattedMessage
-          defaultMessage="Bookmark removed"
-          id="kSt4il"
-          description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
-        />
+        <FormattedMessage defaultMessage="Bookmark removed" id="8ZyDQJ" />
       ),
     })
   }

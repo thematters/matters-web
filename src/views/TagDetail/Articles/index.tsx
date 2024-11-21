@@ -23,6 +23,7 @@ import {
 } from '~/components/GQL/queries/tagArticles'
 import { TagArticlesPublicQuery, TagFragmentFragment } from '~/gql/graphql'
 
+import RecommendedAuthors from '../RecommendedAuthors'
 import RelatedTags from '../RelatedTags'
 
 interface TagArticlesProps {
@@ -196,7 +197,13 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
                 />
               </List.Item>
 
-              {edges.length >= 4 && i === 3 && (
+              {edges.length >= 2 && i === 0 && (
+                <Media lessThan="lg">
+                  <RecommendedAuthors tagId={tag.id} />
+                </Media>
+              )}
+
+              {edges.length >= 2 && i === 1 && (
                 <Media lessThan="lg">
                   <RelatedTags tagId={tag.id} />
                 </Media>
@@ -205,8 +212,9 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
           ))}
         </List>
 
-        {edges.length < 4 && (
+        {edges.length < 2 && (
           <Media lessThan="lg">
+            <RecommendedAuthors tagId={tag.id} />
             <RelatedTags tagId={tag.id} />
           </Media>
         )}

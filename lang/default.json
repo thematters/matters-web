@@ -626,6 +626,9 @@
   "8YgVvt": {
     "defaultMessage": "Like collection"
   },
+  "8ZyDQJ": {
+    "defaultMessage": "Bookmark removed"
+  },
   "8cv9D4": {
     "defaultMessage": "Next Step"
   },
@@ -1205,6 +1208,10 @@
   },
   "ISly67": {
     "defaultMessage": "Agree"
+  },
+  "IUS82d": {
+    "defaultMessage": "Tag active authors",
+    "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
   },
   "IXycMo": {
     "defaultMessage": "Resend"
@@ -2606,6 +2613,9 @@
     "defaultMessage": "broadcast in {circlename}",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "k0fraU": {
+    "defaultMessage": "Bookmarked"
+  },
   "k2veDA": {
     "defaultMessage": "Write"
   },
@@ -2639,10 +2649,6 @@
   "kS3vTS": {
     "defaultMessage": "Liker ID",
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
-  },
-  "kSt4il": {
-    "defaultMessage": "Bookmark removed",
-    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "kc79d3": {
     "defaultMessage": "Topics"
@@ -2847,9 +2853,6 @@
     "defaultMessage": "Invalid Email",
     "description": "USER_EMAIL_INVALID"
   },
-  "o2Na0B": {
-    "defaultMessage": "Back to All"
-  },
   "oGiO//": {
     "defaultMessage": "Insert audio"
   },
@@ -2924,10 +2927,6 @@
   "qCotH5": {
     "defaultMessage": "commented in your moment",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
-  },
-  "qE8ew4": {
-    "defaultMessage": "Bookmarked",
-    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
   },
   "qNuRmA": {
     "defaultMessage": "Send login code",

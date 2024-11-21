@@ -1,4 +1,4 @@
-.relatedTags {
+.recommendedAuthors {
   padding-bottom: var(--sp24);
   margin-top: var(--sp24);
   border-bottom: 1px dashed var(--color-grey-light);
@@ -18,16 +18,12 @@
   color: var(--color-black);
 
   @media (--sm-up) {
-    margin-bottom: var(--sp16);
+    margin-bottom: var(--sp20);
   }
 }
 
-.tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--sp8);
-
-  @media (--sm-up) {
-    gap: var(--sp16);
+.users {
+  & :global(.list-item + .list-item) {
+    margin-top: var(--sp20);
   }
 }

@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { ERROR_CODES } from '~/common/enums'
 import { fromGlobalId, normalizeTag, toGlobalId, toPath } from '~/common/utils'
@@ -8,9 +9,11 @@ import {
   EmptyLayout,
   EmptyTag,
   Head,
+  Icon,
   Layout,
-  SegmentedTabs,
   SpinnerBlock,
+  SquareTabs,
+  TextIcon,
   Throw404,
   usePublicQuery,
   useRoute,
@@ -31,23 +34,22 @@ import {
   TAG_DETAIL_PRIVATE,
   TAG_DETAIL_PUBLIC,
 } from './gql'
+import RecommendedAuthors from './RecommendedAuthors'
 import RelatedTags from './RelatedTags'
 import styles from './styles.module.css'
 
-const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
+const validTagFeedTypes = ['hottest', 'latest'] as const
 type TagFeedType = (typeof validTagFeedTypes)[number]
 
 const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
+  const intl = useIntl()
 
   // feed type
   const { getQuery, setQuery } = useRoute()
   const qsType = getQuery('type') as TagFeedType
-  const hasSelectedFeed = (tag?.selectedArticles.totalCount || 0) > 0
 
-  const [feedType, setFeedType] = useState<TagFeedType>(
-    hasSelectedFeed && qsType === 'selected' ? 'selected' : qsType || 'hottest'
-  )
+  const [feedType, setFeedType] = useState<TagFeedType>(qsType || 'latest')
 
   const changeFeed = (newType: TagFeedType) => {
     setQuery('type', newType)
@@ -55,15 +57,12 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   }
 
   useEffect(() => {
-    setFeedType(
-      hasSelectedFeed && qsType === 'selected'
-        ? 'selected'
-        : qsType || 'hottest'
-    )
+    setFeedType(qsType || 'latest')
   }, [qsType])
 
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
+  const hasArticles = tag.numArticles > 0
 
   useEffect(() => {
     // backward compatible with `/tags/:globalId:`
@@ -85,25 +84,15 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
    * Render
    */
   return (
-    <Layout.Main aside={<RelatedTags tagId={tag.id} inSidebar />}>
-      <Layout.Header
-        right={
-          <>
-            <span />
-            <section className={styles.buttons}>
-              <Layout.Header.ShareButton
-                title={title}
-                tags={title.endsWith(tag.content) ? undefined : keywords}
-              />
-            </section>
-          </>
-        }
-        mode="transparent"
-      />
-
+    <Layout.Main
+      aside={
+        <>
+          <RecommendedAuthors tagId={tag.id} inSidebar />
+          <RelatedTags tagId={tag.id} inSidebar />
+        </>
+      }
+    >
       <Head
-        // title={`#${normalizeTag(tag.content)}`}
-        // description={tag.description}
         title={title}
         path={qsType ? `${path.href}?type=${qsType}` : path.href}
         keywords={keywords} // add top10 most using author names?
@@ -119,37 +108,51 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         }}
       />
 
-      <section className={styles.info}>
-        <section className={styles.top}>
-          <section className={styles.statistics}>
-            <ArticlesCount tag={tag} />
-          </section>
-
-          <section>
-            <TagDetailButtons.BookmarkButton tag={tag} />
-          </section>
-        </section>
+      <section className={styles.title}>
+        <TextIcon
+          icon={<Icon icon={IconHashTag} size={28} />}
+          color="black"
+          size={24}
+          spacing={4}
+          weight="medium"
+        >
+          {tag.content}
+        </TextIcon>
       </section>
 
-      <SegmentedTabs sticky>
-        <SegmentedTabs.Tab
-          selected={isHottest}
-          onClick={() => changeFeed('hottest')}
-        >
-          <FormattedMessage defaultMessage="Trending" id="ll/ufR" />
-        </SegmentedTabs.Tab>
+      <section className={styles.info}>
+        <section className={styles.statistics}>
+          <ArticlesCount tag={tag} />
+        </section>
 
-        <SegmentedTabs.Tab
-          selected={isLatest}
-          onClick={() => changeFeed('latest')}
-        >
-          <FormattedMessage defaultMessage="Latest" id="adThp5" />
-        </SegmentedTabs.Tab>
-      </SegmentedTabs>
+        <TagDetailButtons.BookmarkButton tag={tag} />
+      </section>
 
-      {(isHottest || isLatest) && (
-        <TagDetailArticles tag={tag} feedType={feedType} />
+      {hasArticles && (
+        <section className={styles.tabs}>
+          <SquareTabs>
+            <SquareTabs.Tab
+              selected={isLatest}
+              onClick={() => changeFeed('latest')}
+              title={intl.formatMessage({
+                defaultMessage: 'Latest',
+                id: 'adThp5',
+              })}
+            />
+
+            <SquareTabs.Tab
+              selected={isHottest}
+              onClick={() => changeFeed('hottest')}
+              title={intl.formatMessage({
+                defaultMessage: 'Trending',
+                id: 'll/ufR',
+              })}
+            />
+          </SquareTabs>
+        </section>
       )}
+
+      <TagDetailArticles tag={tag} feedType={feedType} />
     </Layout.Main>
   )
 }

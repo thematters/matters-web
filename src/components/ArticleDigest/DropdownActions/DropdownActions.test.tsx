@@ -190,6 +190,18 @@ describe('<ArticleDigest/DropdownActions>', () => {
     expect($archiveButton).toBeInTheDocument()
   })
 
+  it('should render tag buttons', async () => {
+    render(<DropdownActions article={MOCK_ARTILCE} tagDetailId="1" />)
+
+    const $button = screen.getByLabelText('More Actions')
+    expect($button).toBeInTheDocument()
+
+    // open menu
+    $button.click()
+    const $menu = screen.getByRole('menu')
+    expect($menu).toBeInTheDocument()
+  })
+
   // hasSetTopCollection
   // hasSetBottomCollection
   // hasAddCollection
