@@ -62,6 +62,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
 
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
+  const hasArticles = tag.numArticles > 0
 
   useEffect(() => {
     // backward compatible with `/tags/:globalId:`
@@ -127,27 +128,29 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         <TagDetailButtons.BookmarkButton tag={tag} />
       </section>
 
-      <section className={styles.tabs}>
-        <SquareTabs>
-          <SquareTabs.Tab
-            selected={isLatest}
-            onClick={() => changeFeed('latest')}
-            title={intl.formatMessage({
-              defaultMessage: 'Latest',
-              id: 'adThp5',
-            })}
-          />
+      {hasArticles && (
+        <section className={styles.tabs}>
+          <SquareTabs>
+            <SquareTabs.Tab
+              selected={isLatest}
+              onClick={() => changeFeed('latest')}
+              title={intl.formatMessage({
+                defaultMessage: 'Latest',
+                id: 'adThp5',
+              })}
+            />
 
-          <SquareTabs.Tab
-            selected={isHottest}
-            onClick={() => changeFeed('hottest')}
-            title={intl.formatMessage({
-              defaultMessage: 'Trending',
-              id: 'll/ufR',
-            })}
-          />
-        </SquareTabs>
-      </section>
+            <SquareTabs.Tab
+              selected={isHottest}
+              onClick={() => changeFeed('hottest')}
+              title={intl.formatMessage({
+                defaultMessage: 'Trending',
+                id: 'll/ufR',
+              })}
+            />
+          </SquareTabs>
+        </section>
+      )}
 
       <TagDetailArticles tag={tag} feedType={feedType} />
     </Layout.Main>
