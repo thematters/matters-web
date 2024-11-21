@@ -843,10 +843,6 @@
     "defaultMessage": "{type} 已綁定",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
-  "C8GQaD": {
-    "defaultMessage": "{date}更新",
-    "description": "src/components/CollectionDigest/Feed/index.tsx"
-  },
   "C9jbHn": {
     "defaultMessage": "拍手數量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
@@ -1157,6 +1153,10 @@
   },
   "HbEL82": {
     "defaultMessage": "評論已刪除"
+  },
+  "HbwwAe": {
+    "defaultMessage": "{date}更新",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "HgY+72": {
     "defaultMessage": "報名參加",
