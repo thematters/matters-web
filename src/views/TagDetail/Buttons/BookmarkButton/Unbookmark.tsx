@@ -15,7 +15,7 @@ interface UnbookmarkTagProps {
 
 const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
   const intl = useIntl()
-  const [unfollow] = useMutation<ToggleBookmarkTagMutation>(
+  const [unbookmark] = useMutation<ToggleBookmarkTagMutation>(
     TOGGLE_BOOKMARK_TAG,
     {
       variables: { id: tag.id, enabled: false },
@@ -32,7 +32,7 @@ const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
     }
   )
   const onClick = async () => {
-    await unfollow()
+    await unbookmark()
     toast.success({
       message: intl.formatMessage({
         defaultMessage: 'Bookmark removed',

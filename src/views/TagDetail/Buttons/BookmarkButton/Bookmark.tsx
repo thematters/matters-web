@@ -21,31 +21,34 @@ interface BookmarkProps {
 const Bookmark = ({ tag }: BookmarkProps) => {
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
-  const [follow] = useMutation<ToggleBookmarkTagMutation>(TOGGLE_BOOKMARK_TAG, {
-    variables: { id: tag.id, enabled: true },
-    optimisticResponse:
-      !_isNil(tag.id) && !_isNil(tag.isFollower)
-        ? {
-            toggleBookmarkTag: {
-              id: tag.id,
-              isFollower: true,
-              __typename: 'Tag',
-            },
-          }
-        : undefined,
-  })
+  const [bookmark] = useMutation<ToggleBookmarkTagMutation>(
+    TOGGLE_BOOKMARK_TAG,
+    {
+      variables: { id: tag.id, enabled: true },
+      optimisticResponse:
+        !_isNil(tag.id) && !_isNil(tag.isFollower)
+          ? {
+              toggleBookmarkTag: {
+                id: tag.id,
+                isFollower: true,
+                __typename: 'Tag',
+              },
+            }
+          : undefined,
+    }
+  )
 
   const onClick = async () => {
     if (!viewer.isAuthed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.followTag },
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.bookmarkTag },
         })
       )
       return
     }
 
-    await follow()
+    await bookmark()
 
     toast.success({
       message: intl.formatMessage({

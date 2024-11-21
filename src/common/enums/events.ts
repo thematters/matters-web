@@ -55,6 +55,7 @@ export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'
 export enum UNIVERSAL_AUTH_TRIGGER {
   appreciation = 'appreciation',
   bookmark = 'bookmark',
+  bookmarkTag = 'bookmarkTag',
   circlePrice = 'circlePrice',
   circleSubscription = 'circleSubscription',
   collectArticle = 'collectArticle',
