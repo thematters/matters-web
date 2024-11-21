@@ -12,7 +12,6 @@ export const RECOMMENDED_AUTHORS = gql`
             cursor
             node {
               ...UserDigestRichUserPublic
-              ...UserDigestRichUserPrivate
             }
           }
         }
@@ -20,5 +19,4 @@ export const RECOMMENDED_AUTHORS = gql`
     }
   }
   ${UserDigest.Rich.fragments.user.public}
-  ${UserDigest.Rich.fragments.user.private}
 `
