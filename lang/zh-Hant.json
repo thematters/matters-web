@@ -626,6 +626,9 @@
   "8YgVvt": {
     "defaultMessage": "喜歡選集"
   },
+  "8ZyDQJ": {
+    "defaultMessage": "收藏已取消"
+  },
   "8cv9D4": {
     "defaultMessage": "下一步"
   },
@@ -1205,6 +1208,10 @@
   },
   "ISly67": {
     "defaultMessage": "同意"
+  },
+  "IUS82d": {
+    "defaultMessage": "標籤活躍作者",
+    "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
   },
   "IXycMo": {
     "defaultMessage": "重新發送"
@@ -2606,6 +2613,9 @@
     "defaultMessage": "在 {circlename} 發布廣播",
     "description": "src/components/Notice/CommentNotice/CircleNewBroadcastNotice.tsx"
   },
+  "k0fraU": {
+    "defaultMessage": "收藏成功"
+  },
   "k2veDA": {
     "defaultMessage": "創作"
   },
@@ -2639,10 +2649,6 @@
   "kS3vTS": {
     "defaultMessage": "Liker ID",
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
-  },
-  "kSt4il": {
-    "defaultMessage": "收藏已取消",
-    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "kc79d3": {
     "defaultMessage": "找你想看的"
@@ -2847,9 +2853,6 @@
     "defaultMessage": "電子信箱不正確",
     "description": "USER_EMAIL_INVALID"
   },
-  "o2Na0B": {
-    "defaultMessage": "返回全部"
-  },
   "oGiO//": {
     "defaultMessage": "插入音訊"
   },
@@ -2924,10 +2927,6 @@
   "qCotH5": {
     "defaultMessage": "在動態中留言",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
-  },
-  "qE8ew4": {
-    "defaultMessage": "收藏成功",
-    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
   },
   "qNuRmA": {
     "defaultMessage": "發送臨時密碼",
