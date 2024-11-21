@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import _chunk from 'lodash/chunk'
 import _get from 'lodash/get'
@@ -7,8 +6,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { analytics } from '~/common/utils'
 import { ArticleTag, usePublicQuery } from '~/components'
-import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
-import { LastFetchRandomQuery, TagDetailRecommendedQuery } from '~/gql/graphql'
+import { TagDetailRecommendedQuery } from '~/gql/graphql'
 
 import { RELATED_TAGS } from './gql'
 import styles from './styles.module.css'
@@ -31,15 +29,8 @@ const RelatedTagsHeader = () => {
 }
 
 const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
-  const { data: lastFetchRandom } = useQuery<LastFetchRandomQuery>(
-    FETCH_RECORD,
-    { variables: { id: 'local' } }
-  )
-
-  const lastRandom = lastFetchRandom?.lastFetchRandom.feedTags
-
   const { data } = usePublicQuery<TagDetailRecommendedQuery>(RELATED_TAGS, {
-    variables: { id: tagId, random: lastRandom || 0 },
+    variables: { id: tagId },
   })
 
   const { edges } =
