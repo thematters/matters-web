@@ -38,7 +38,7 @@ import RecommendedAuthors from './RecommendedAuthors'
 import RelatedTags from './RelatedTags'
 import styles from './styles.module.css'
 
-const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
+const validTagFeedTypes = ['hottest', 'latest'] as const
 type TagFeedType = (typeof validTagFeedTypes)[number]
 
 const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
@@ -48,11 +48,8 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   // feed type
   const { getQuery, setQuery } = useRoute()
   const qsType = getQuery('type') as TagFeedType
-  const hasSelectedFeed = (tag?.selectedArticles.totalCount || 0) > 0
 
-  const [feedType, setFeedType] = useState<TagFeedType>(
-    hasSelectedFeed && qsType === 'selected' ? 'selected' : qsType || 'hottest'
-  )
+  const [feedType, setFeedType] = useState<TagFeedType>(qsType || 'latest')
 
   const changeFeed = (newType: TagFeedType) => {
     setQuery('type', newType)
@@ -60,11 +57,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   }
 
   useEffect(() => {
-    setFeedType(
-      hasSelectedFeed && qsType === 'selected'
-        ? 'selected'
-        : qsType || 'hottest'
-    )
+    setFeedType(qsType || 'latest')
   }, [qsType])
 
   const isHottest = feedType === 'hottest'
