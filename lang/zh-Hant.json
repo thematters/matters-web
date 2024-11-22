@@ -765,6 +765,10 @@
   "AeVndq": {
     "defaultMessage": "在動態留言中提及了你 {commentMoment}"
   },
+  "Ajc5SE": {
+    "defaultMessage": "Articles",
+    "description": "src/views/Me/Bookmarks/Tabs.tsx"
+  },
   "AlHYvk": {
     "defaultMessage": "{type}已編輯"
   },

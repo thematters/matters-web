@@ -765,6 +765,10 @@
   "AeVndq": {
     "defaultMessage": "mentioned you in a comment at {commentMoment}"
   },
+  "Ajc5SE": {
+    "defaultMessage": "Articles",
+    "description": "src/views/Me/Bookmarks/Tabs.tsx"
+  },
   "AlHYvk": {
     "defaultMessage": "{type} edited"
   },
