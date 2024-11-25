@@ -1,0 +1,13 @@
+.container {
+  @mixin flex-center-space-between;
+
+  & .tag {
+    @mixin line-clamp;
+
+    line-height: 1.5rem;
+
+    &:hover {
+      color: var(--color-matters-green);
+    }
+  }
+}
