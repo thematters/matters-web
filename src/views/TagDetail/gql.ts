@@ -1,7 +1,8 @@
 import gql from 'graphql-tag'
 
+import { TagBookmarkButton } from '~/components'
+
 import ArticlesCount from './ArticlesCount'
-import { TagDetailButtons } from './Buttons'
 
 const tagFragment = gql`
   fragment TagFragment on Tag {
@@ -13,7 +14,7 @@ const tagFragment = gql`
       totalCount
     }
     ...ArticleCountTag
-    ...BookmarkButtonTagPrivate
+    ...TagBookmarkButtonTagPrivate
     recommended(input: { first: 10 }) {
       edges {
         cursor
@@ -27,7 +28,7 @@ const tagFragment = gql`
     }
   }
   ${ArticlesCount.fragments.tag}
-  ${TagDetailButtons.BookmarkButton.fragments.tag.private}
+  ${TagBookmarkButton.fragments.tag.private}
 `
 
 export const TAG_DETAIL_PUBLIC = gql`
@@ -62,9 +63,9 @@ export const TAG_DETAIL_PRIVATE = gql`
     node(input: { id: $id }) {
       ... on Tag {
         id
-        ...BookmarkButtonTagPrivate
+        ...TagBookmarkButtonTagPrivate
       }
     }
   }
-  ${TagDetailButtons.BookmarkButton.fragments.tag.private}
+  ${TagBookmarkButton.fragments.tag.private}
 `

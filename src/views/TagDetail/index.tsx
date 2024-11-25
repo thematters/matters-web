@@ -13,6 +13,7 @@ import {
   Layout,
   SpinnerBlock,
   SquareTabs,
+  TagBookmarkButton,
   TextIcon,
   Throw404,
   usePublicQuery,
@@ -28,7 +29,6 @@ import {
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
-import { TagDetailButtons } from './Buttons'
 import {
   TAG_DETAIL_BY_SEARCH,
   TAG_DETAIL_PRIVATE,
@@ -125,7 +125,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
           <ArticlesCount tag={tag} />
         </section>
 
-        <TagDetailButtons.BookmarkButton tag={tag} />
+        <TagBookmarkButton tag={tag} />
       </section>
 
       {hasArticles && (
