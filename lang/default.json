@@ -847,10 +847,6 @@
     "defaultMessage": "Connected to {type}",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
-  "C8GQaD": {
-    "defaultMessage": "upadted {date}",
-    "description": "src/components/CollectionDigest/Feed/index.tsx"
-  },
   "C9jbHn": {
     "defaultMessage": "Number of claps",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
@@ -1161,6 +1157,10 @@
   },
   "HbEL82": {
     "defaultMessage": "Comment has been deleted"
+  },
+  "HbwwAe": {
+    "defaultMessage": "Updated {date}",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "HgY+72": {
     "defaultMessage": "Apply",
@@ -2130,9 +2130,6 @@
   },
   "ZZ9zIR": {
     "defaultMessage": "Downvote"
-  },
-  "Zakh0i": {
-    "defaultMessage": "Not following any tag"
   },
   "ZjDH42": {
     "defaultMessage": "About Us"

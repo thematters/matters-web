@@ -847,10 +847,6 @@
     "defaultMessage": "{type} 已绑定",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
   },
-  "C8GQaD": {
-    "defaultMessage": "{date}更新",
-    "description": "src/components/CollectionDigest/Feed/index.tsx"
-  },
   "C9jbHn": {
     "defaultMessage": "拍手数量",
     "description": "src/components/ArticleDigest/Published/FooterActions/index.tsx"
@@ -1161,6 +1157,10 @@
   },
   "HbEL82": {
     "defaultMessage": "评论已刪除"
+  },
+  "HbwwAe": {
+    "defaultMessage": "{date}更新",
+    "description": "src/components/CollectionDigest/Feed/index.tsx"
   },
   "HgY+72": {
     "defaultMessage": "报名参加",
@@ -2130,9 +2130,6 @@
   },
   "ZZ9zIR": {
     "defaultMessage": "点踩"
-  },
-  "Zakh0i": {
-    "defaultMessage": "还没有关注任何标签"
   },
   "ZjDH42": {
     "defaultMessage": "关于我们"

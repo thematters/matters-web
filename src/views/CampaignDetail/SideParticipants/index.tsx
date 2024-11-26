@@ -86,7 +86,7 @@ const SideParticipants = ({ campaign }: SideParticipantsProps) => {
     }
 
     if (edges.length <= maxAvatarCount) {
-      return edges
+      return edges.filter(({ node }) => node.id !== viewer.id)
     }
 
     const withAvatars = edges.filter(
