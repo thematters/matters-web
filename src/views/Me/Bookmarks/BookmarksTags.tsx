@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
-  ArticleDigestFeed,
   EmptyBookmark,
   Head,
   InfiniteScroll,
@@ -12,6 +11,7 @@ import {
   List,
   QueryError,
   SpinnerBlock,
+  TagDigest,
 } from '~/components'
 import { MeBookmarkTagsFeedQuery } from '~/gql/graphql'
 
@@ -21,24 +21,24 @@ const ME_BOOKMARK_TAGS_FEED = gql`
   query MeBookmarkTagsFeed($after: String) {
     viewer {
       id
-      subscriptions(input: { first: 10, after: $after }) {
-        pageInfo {
-          startCursor
-          endCursor
-          hasNextPage
-        }
-        edges {
-          cursor
-          node {
-            ...ArticleDigestFeedArticlePublic
-            ...ArticleDigestFeedArticlePrivate
+      following {
+        tags(input: { first: 20, after: $after }) {
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            cursor
+            node {
+              ...TagDigestBookmarkTag
+            }
           }
         }
       }
     }
   }
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
+  ${TagDigest.Bookmark.fragments.tag}
 `
 
 const BaseMeBookmarksTags = () => {
@@ -54,8 +54,8 @@ const BaseMeBookmarksTags = () => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'viewer.subscriptions'
-  const { edges, pageInfo } = data?.viewer?.subscriptions || {}
+  const connectionPath = 'viewer.following.tags'
+  const { edges, pageInfo } = data?.viewer?.following?.tags || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyBookmark />
@@ -77,7 +77,7 @@ const BaseMeBookmarksTags = () => {
       <List>
         {edges.map(({ node, cursor }) => (
           <List.Item key={node.id}>
-            <ArticleDigestFeed article={node} disabledArchived />
+            <TagDigest.Bookmark tag={node} />
           </List.Item>
         ))}
       </List>
