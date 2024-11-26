@@ -76,9 +76,13 @@ const BaseMeBookmarksTags = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
         {edges.map(({ node, cursor }) => (
-          <List.Item key={node.id}>
-            <TagDigest.Bookmark tag={node} />
-          </List.Item>
+          <>
+            {node.isFollower && (
+              <List.Item key={node.id}>
+                <TagDigest.Bookmark tag={node} />
+              </List.Item>
+            )}
+          </>
         ))}
       </List>
     </InfiniteScroll>
