@@ -56,6 +56,14 @@
       &:nth-child(2n + 1) {
         padding-right: var(--sp16);
       }
+
+      &:last-child {
+        padding-right: 0;
+
+        & a {
+          max-width: calc(50% - var(--sp16));
+        }
+      }
     }
   }
 
@@ -66,6 +74,14 @@
       &:nth-child(3n + 1),
       &:nth-child(3n + 2) {
         padding-right: var(--sp16);
+      }
+
+      &:last-child {
+        padding-right: 0;
+
+        & a {
+          max-width: calc(33.3333% - var(--sp16));
+        }
       }
     }
   }
