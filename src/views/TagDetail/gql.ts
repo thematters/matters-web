@@ -15,6 +15,9 @@ const tagFragment = gql`
     }
     ...ArticleCountTag
     ...TagBookmarkButtonTagPrivate
+    hottestArticles: articles(input: { first: 10, sortBy: byHottestDesc }) {
+      totalCount
+    }
     recommended(input: { first: 10 }) {
       edges {
         cursor

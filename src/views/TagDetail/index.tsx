@@ -63,6 +63,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
   const hasArticles = tag.numArticles > 0
+  const hasHottestArticles = tag.hottestArticles.totalCount > 0
 
   useEffect(() => {
     // backward compatible with `/tags/:globalId:`
@@ -128,7 +129,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         <TagBookmarkButton tag={tag} />
       </section>
 
-      {hasArticles && (
+      {hasArticles && hasHottestArticles && (
         <section className={styles.tabs}>
           <SquareTabs>
             <SquareTabs.Tab
