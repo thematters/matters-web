@@ -160,7 +160,6 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
 const TagDetailContainer = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
-  const [, setPrivateDataLoaded] = useState(false)
 
   // backward compatible with:
   // - `/tags/:globalId:`
@@ -218,7 +217,6 @@ const TagDetailContainer = () => {
         fetchPolicy: 'network-only',
         variables: { id },
       })
-      setPrivateDataLoaded(true)
     } catch (error) {
       console.error('Error loading private data:', error)
     }
@@ -229,8 +227,10 @@ const TagDetailContainer = () => {
   useEffect(() => {
     const retryTagId = tagId || searchedTag?.id
     if (retryTagId) {
-      setPrivateDataLoaded(false)
-      loadPrivate(retryTagId)
+      // FIXME: Delayed loading of private data allows private data to guarantee writing to the final result
+      setTimeout(() => {
+        loadPrivate(retryTagId)
+      }, 100)
     }
   }, [tagId, resultBySearch?.data, viewer.id])
 
