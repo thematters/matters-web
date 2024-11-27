@@ -15,7 +15,7 @@ const tagFragment = gql`
     }
     ...ArticleCountTag
     ...TagBookmarkButtonTagPrivate
-    hottestArticles: articles(input: { first: 10, sortBy: byHottestDesc }) {
+    hottestArticles: articles(input: { first: 0, sortBy: byHottestDesc }) {
       totalCount
     }
     recommended(input: { first: 10 }) {
