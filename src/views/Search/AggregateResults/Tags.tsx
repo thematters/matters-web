@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
@@ -8,9 +7,8 @@ import {
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptySearch,
-  InfiniteScroll,
   SpinnerBlock,
-  TagDigest,
+  TagList,
   Translate,
   usePublicQuery,
   useRoute,
@@ -94,37 +92,14 @@ const AggregateTagResults = () => {
 
   return (
     <section className={styles.aggregateSection}>
-      <InfiniteScroll
-        hasNextPage={
-          pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
-        }
+      <TagList.Infinite
+        edges={edges}
+        pageInfo={pageInfo}
         loadMore={loadMore}
-        eof={
-          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
-        }
-      >
-        <ul className={styles.tagList}>
-          {edges.map(
-            ({ node, cursor }, i) =>
-              node.__typename === 'Tag' && (
-                <li key={cursor} className={styles.tagListItem}>
-                  <TagDigest.Feed
-                    tag={node}
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'search_tag',
-                        contentType: 'tag',
-                        location: i,
-                        id: node.id,
-                        searchKey: q,
-                      })
-                    }
-                  />
-                </li>
-              )
-          )}
-        </ul>
-      </InfiniteScroll>
+        trackingType="search_tag"
+        searchKey={q}
+        maxResults={MAX_SEARCH_RESULTS_LENGTH}
+      />
     </section>
   )
 }
