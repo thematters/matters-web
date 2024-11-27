@@ -10,12 +10,12 @@ import {
 import { Button, Icon, toast, useMutation, ViewerContext } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
-  BookmarkButtonTagPrivateFragment,
+  TagBookmarkButtonTagPrivateFragment,
   ToggleBookmarkTagMutation,
 } from '~/gql/graphql'
 
 interface BookmarkProps {
-  tag: BookmarkButtonTagPrivateFragment
+  tag: TagBookmarkButtonTagPrivateFragment
 }
 
 const Bookmark = ({ tag }: BookmarkProps) => {

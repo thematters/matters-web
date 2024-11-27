@@ -13,6 +13,7 @@ import {
   Layout,
   SpinnerBlock,
   SquareTabs,
+  TagBookmarkButton,
   TextIcon,
   Throw404,
   usePublicQuery,
@@ -28,7 +29,6 @@ import {
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
-import { TagDetailButtons } from './Buttons'
 import {
   TAG_DETAIL_BY_SEARCH,
   TAG_DETAIL_PRIVATE,
@@ -125,7 +125,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
           <ArticlesCount tag={tag} />
         </section>
 
-        <TagDetailButtons.BookmarkButton tag={tag} />
+        <TagBookmarkButton tag={tag} />
       </section>
 
       {hasArticles && (
@@ -160,6 +160,7 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
 const TagDetailContainer = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
+  const [, setPrivateDataLoaded] = useState(false)
 
   // backward compatible with:
   // - `/tags/:globalId:`
@@ -206,24 +207,29 @@ const TagDetailContainer = () => {
   )
 
   // private data
-  const loadPrivate = (id: string) => {
+  const loadPrivate = async (id: string) => {
     if (!viewer.isAuthed || !id) {
       return
     }
 
-    client.query({
-      query: TAG_DETAIL_PRIVATE,
-      fetchPolicy: 'network-only',
-      variables: { id },
-    })
+    try {
+      await client.query({
+        query: TAG_DETAIL_PRIVATE,
+        fetchPolicy: 'network-only',
+        variables: { id },
+      })
+      setPrivateDataLoaded(true)
+    } catch (error) {
+      console.error('Error loading private data:', error)
+    }
   }
   const searchedTag = resultBySearch?.data?.search.edges?.[0]
     .node as TagFragmentFragment
 
-  // fetch private data for first page
   useEffect(() => {
     const retryTagId = tagId || searchedTag?.id
     if (retryTagId) {
+      setPrivateDataLoaded(false)
       loadPrivate(retryTagId)
     }
   }, [tagId, resultBySearch?.data, viewer.id])

@@ -31,6 +31,7 @@ export enum TEST_ID {
   DIGEST_USER_RICH_DISPLAY_NAME = 'digest/user/rich/display-name',
   DIGEST_USER_VERBOSE = 'digest/user/verbose',
   DIGEST_TAG_CONCISE = 'digest/tag/concise',
+  DIGEST_TAG_BOOKMARK = 'digest/tag/bookmark',
   DIGEST_TAG_FEED = 'digest/tag/feed',
   DIGEST_TAG_FEED_NUM_ARTICLES = 'digest/tag/feed/num-articles',
   DIGEST_TAG_RICH = 'digest/tag/rich',

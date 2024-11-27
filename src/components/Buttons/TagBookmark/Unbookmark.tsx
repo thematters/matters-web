@@ -5,12 +5,12 @@ import { ReactComponent as IconSave2 } from '@/public/static/icons/24px/save2.sv
 import { Button, Icon, toast, useMutation } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
-  BookmarkButtonTagPrivateFragment,
+  TagBookmarkButtonTagPrivateFragment,
   ToggleBookmarkTagMutation,
 } from '~/gql/graphql'
 
 interface UnbookmarkTagProps {
-  tag: BookmarkButtonTagPrivateFragment
+  tag: TagBookmarkButtonTagPrivateFragment
 }
 
 const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
@@ -45,7 +45,7 @@ const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
     <Button
       spacing={[8, 8]}
       textColor="greyDarker"
-      textActiveColor="black"
+      textActiveColor="redDark"
       aria-label={intl.formatMessage({
         defaultMessage: 'Remove bookmark',
         id: 'FEkOVJ',

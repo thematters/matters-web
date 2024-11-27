@@ -61,7 +61,7 @@ const Top: React.FC = () => {
         {...menuItemProps}
         text={<FormattedMessage defaultMessage="Bookmarks" id="nGBrvw" />}
         icon={<Icon icon={IconSave} size={24} />}
-        href={PATHS.ME_BOOKMARKS}
+        href={PATHS.ME_BOOKMARKS_ARTICLES}
         is="link"
       />
 

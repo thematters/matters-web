@@ -1,18 +1,18 @@
 import gql from 'graphql-tag'
 
-import { BookmarkButtonTagPrivateFragment } from '~/gql/graphql'
+import { TagBookmarkButtonTagPrivateFragment } from '~/gql/graphql'
 
 import Bookmark from './Bookmark'
 import Unbookmark from './Unbookmark'
 
-interface FollowButtonProps {
-  tag: BookmarkButtonTagPrivateFragment
+interface TagBookmarkButtonProps {
+  tag: TagBookmarkButtonTagPrivateFragment
 }
 
 const fragments = {
   tag: {
     private: gql`
-      fragment BookmarkButtonTagPrivate on Tag {
+      fragment TagBookmarkButtonTagPrivate on Tag {
         id
         isFollower
       }
@@ -20,7 +20,7 @@ const fragments = {
   },
 }
 
-const FollowButton = ({ tag }: FollowButtonProps) => {
+export const TagBookmarkButton = ({ tag }: TagBookmarkButtonProps) => {
   if (tag.isFollower) {
     return <Unbookmark tag={tag} />
   } else {
@@ -28,6 +28,4 @@ const FollowButton = ({ tag }: FollowButtonProps) => {
   }
 }
 
-FollowButton.fragments = fragments
-
-export default FollowButton
+TagBookmarkButton.fragments = fragments

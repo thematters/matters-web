@@ -13,10 +13,12 @@ import {
   QueryError,
   SpinnerBlock,
 } from '~/components'
-import { MeBookmarkFeedQuery } from '~/gql/graphql'
+import { MeBookmarkArticlesFeedQuery } from '~/gql/graphql'
 
-const ME_BOOKMARK_FEED = gql`
-  query MeBookmarkFeed($after: String) {
+import BookmarksTabs from './BookmarksTabs'
+
+const ME_BOOKMARK_ARTICLES_FEED = gql`
+  query MeBookmarkArticlesFeed($after: String) {
     viewer {
       id
       subscriptions(input: { first: 10, after: $after }) {
@@ -39,9 +41,9 @@ const ME_BOOKMARK_FEED = gql`
   ${ArticleDigestFeed.fragments.article.private}
 `
 
-const BaseMeBookmarks = () => {
+const BaseMeBookmarksArticles = () => {
   const { data, loading, error, fetchMore } =
-    useQuery<MeBookmarkFeedQuery>(ME_BOOKMARK_FEED)
+    useQuery<MeBookmarkArticlesFeedQuery>(ME_BOOKMARK_ARTICLES_FEED)
 
   if (loading) {
     return <SpinnerBlock />
@@ -82,7 +84,7 @@ const BaseMeBookmarks = () => {
   )
 }
 
-const MeBookmarks = () => {
+const MeBookmarksArticles = () => {
   const intl = useIntl()
 
   return (
@@ -102,11 +104,13 @@ const MeBookmarks = () => {
         })}
       />
 
+      <BookmarksTabs />
+
       <Layout.Main.Spacing hasVertical={false}>
-        <BaseMeBookmarks />
+        <BaseMeBookmarksArticles />
       </Layout.Main.Spacing>
     </Layout.Main>
   )
 }
 
-export default MeBookmarks
+export default MeBookmarksArticles
