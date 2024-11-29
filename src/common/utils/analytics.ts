@@ -40,6 +40,7 @@ type EventArgs =
   | ['authenticate', AuthenticateProp]
   | ['billboard_exposure', BillboardExposureProp]
   | ['click_billboard', ClickBillboardProp]
+  | ['read_time', ReadTimeProp]
 
 /**
  * Event: Page View
@@ -237,6 +238,11 @@ interface ImageUploadProp {
 interface AuthenticateProp {
   step: string
   trigger?: string
+}
+
+interface ReadTimeProp {
+  articleId: string
+  time: number
 }
 
 // content type
