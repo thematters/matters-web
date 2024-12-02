@@ -17,7 +17,7 @@ import { MeBookmarkTagsFeedQuery } from '~/gql/graphql'
 
 import BookmarksTabs from './BookmarksTabs'
 
-const ME_BOOKMARK_TAGS_FEED = gql`
+export const ME_BOOKMARK_TAGS_FEED = gql`
   query MeBookmarkTagsFeed($after: String) {
     viewer {
       id
