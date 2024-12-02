@@ -12,7 +12,7 @@ interface SlidesProps {
 }
 
 interface SlideItemProps {
-  size?: 'sm' | 'md'
+  size?: 'xs' | 'sm' | 'md'
   onClick?: () => any
 }
 
