@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { Fragment } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
@@ -21,18 +22,16 @@ const ME_BOOKMARK_TAGS_FEED = gql`
   query MeBookmarkTagsFeed($after: String) {
     viewer {
       id
-      following {
-        tags(input: { first: 20, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              ...TagDigestBookmarkTag
-            }
+      bookmarkedTags(input: { first: 20, after: $after }) {
+        pageInfo {
+          startCursor
+          endCursor
+          hasNextPage
+        }
+        edges {
+          cursor
+          node {
+            ...TagDigestBookmarkTag
           }
         }
       }
@@ -54,8 +53,8 @@ const BaseMeBookmarksTags = () => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'viewer.following.tags'
-  const { edges, pageInfo } = data?.viewer?.following?.tags || {}
+  const connectionPath = 'viewer.bookmarkedTags'
+  const { edges, pageInfo } = data?.viewer?.bookmarkedTags || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyBookmark />
@@ -76,13 +75,13 @@ const BaseMeBookmarksTags = () => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
         {edges.map(({ node, cursor }) => (
-          <>
+          <Fragment key={node.id}>
             {node.isFollower && (
               <List.Item key={node.id}>
                 <TagDigest.Bookmark tag={node} />
               </List.Item>
             )}
-          </>
+          </Fragment>
         ))}
       </List>
     </InfiniteScroll>

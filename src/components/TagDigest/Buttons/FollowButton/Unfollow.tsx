@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Button, TextIcon, useMutation } from '~/components'
-import { updateViewerFollowingTagCount } from '~/components/GQL'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
   TagDigestFollowButtonPrivateFragment,
@@ -30,9 +29,6 @@ const Unfollow = ({ tag }: UnfollowTagProps) => {
               },
             }
           : undefined,
-      update: (cache) => {
-        updateViewerFollowingTagCount({ cache, type: 'decrement' })
-      },
     }
   )
 
