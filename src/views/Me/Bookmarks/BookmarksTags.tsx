@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
-  EmptyBookmark,
+  EmptyTagBookmark,
   Head,
   InfiniteScroll,
   Layout,
@@ -58,7 +58,7 @@ const BaseMeBookmarksTags = () => {
   const { edges, pageInfo } = data?.viewer?.following?.tags || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyBookmark />
+    return <EmptyTagBookmark />
   }
 
   const loadMore = () =>
