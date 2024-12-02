@@ -61,6 +61,14 @@ const BaseMeBookmarksTags = () => {
     return <EmptyTagBookmark />
   }
 
+  const hasFollowedTags = edges.some(
+    ({ node }) => node.__typename === 'Tag' && node.isFollower
+  )
+
+  if (!hasFollowedTags) {
+    return <EmptyTagBookmark />
+  }
+
   const loadMore = () =>
     fetchMore({
       variables: { after: pageInfo.endCursor },
