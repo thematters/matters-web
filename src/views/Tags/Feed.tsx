@@ -1,4 +1,5 @@
 import _get from 'lodash/get'
+import { useEffect } from 'react'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -11,7 +12,7 @@ import {
 } from '~/components'
 import { AllTagsHottestQuery } from '~/gql/graphql'
 
-import { ALL_TAGS_HOTTEST } from './gql'
+import { ALL_TAGS_HOTTEST, TAG_REACTIVE_DATA } from './gql'
 
 export type FeedType = 'recommended' | 'hottest'
 
@@ -26,7 +27,28 @@ const Feed = ({ type }: Props) => {
 
   const query = ALL_TAGS_HOTTEST
 
-  const { data, loading, error, fetchMore } = usePublicQuery<FeedQuery>(query)
+  const { data, loading, error, fetchMore, client } =
+    usePublicQuery<FeedQuery>(query)
+
+  // fetch the latest tag data
+  const loadTagReactiveData = (publicData?: FeedQuery) => {
+    const publicEdges = publicData?.viewer?.recommendation.tags.edges || []
+    const publicIds = publicEdges.map(({ node }) => node.id)
+
+    if (publicIds.length <= 0) {
+      return
+    }
+
+    client.query({
+      query: TAG_REACTIVE_DATA,
+      fetchPolicy: 'network-only',
+      variables: { ids: publicIds },
+    })
+  }
+
+  useEffect(() => {
+    loadTagReactiveData(data)
+  }, [data])
 
   if (loading) {
     return <SpinnerBlock />
