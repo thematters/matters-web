@@ -1214,7 +1214,7 @@
     "defaultMessage": "Agree"
   },
   "IUS82d": {
-    "defaultMessage": "Recommended Authors",
+    "defaultMessage": "Tag active authors",
     "description": "src/views/TagDetail/RecommendedAuthors/index.tsx"
   },
   "IXycMo": {
