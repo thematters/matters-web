@@ -25,7 +25,7 @@ const stripTagAllPunct = (content: string) => {
       return words[0]
     default:
       const [first, ...rest] = words
-      return `${first} ${rest.join('')}`
+      return `${first} ${rest.join(' ')}`
   }
 }
 

@@ -48,6 +48,10 @@
   background: var(--color-grey-lighter);
 }
 
+.sizeXs {
+  width: 15rem;
+}
+
 .sizeSm {
   width: 18rem;
 }

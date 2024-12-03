@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
-  EmptyBookmark,
+  EmptyTagBookmark,
   Head,
   InfiniteScroll,
   Layout,
@@ -18,7 +18,7 @@ import { MeBookmarkTagsFeedQuery } from '~/gql/graphql'
 
 import BookmarksTabs from './BookmarksTabs'
 
-const ME_BOOKMARK_TAGS_FEED = gql`
+export const ME_BOOKMARK_TAGS_FEED = gql`
   query MeBookmarkTagsFeed($after: String) {
     viewer {
       id
@@ -57,7 +57,15 @@ const BaseMeBookmarksTags = () => {
   const { edges, pageInfo } = data?.viewer?.bookmarkedTags || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyBookmark />
+    return <EmptyTagBookmark />
+  }
+
+  const hasFollowedTags = edges.some(
+    ({ node }) => node.__typename === 'Tag' && node.isFollower
+  )
+
+  if (!hasFollowedTags) {
+    return <EmptyTagBookmark />
   }
 
   const loadMore = () =>

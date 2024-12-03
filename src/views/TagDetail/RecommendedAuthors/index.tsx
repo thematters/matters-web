@@ -5,7 +5,7 @@ import _random from 'lodash/random'
 import { FormattedMessage } from 'react-intl'
 
 import { analytics } from '~/common/utils'
-import { List, usePublicQuery, UserDigest } from '~/components'
+import { List, Slides, usePublicQuery, UserDigest } from '~/components'
 import { TagDetailRecommendedAuthorsQuery } from '~/gql/graphql'
 
 import { RECOMMENDED_AUTHORS } from './gql'
@@ -32,6 +32,7 @@ const RecommendedAuthors: React.FC<RecommendedAuthorsProps> = ({
   tagId,
   inSidebar,
 }) => {
+  const perColumn = 3
   const { data } = usePublicQuery<TagDetailRecommendedAuthorsQuery>(
     RECOMMENDED_AUTHORS,
     {
@@ -59,25 +60,49 @@ const RecommendedAuthors: React.FC<RecommendedAuthorsProps> = ({
     [styles.inSidebar]: inSidebar,
   })
 
+  if (inSidebar) {
+    return (
+      <section className={recommendedAuthorsClasses}>
+        <RecommendedAuthorsHeader />
+        <section className={styles.users}>
+          <List hasBorder={false}>
+            {edges.map(({ node, cursor }, i) => (
+              <List.Item key={node.id}>
+                <UserDigest.Rich
+                  user={node}
+                  spacing={[0, 0]}
+                  bgColor="none"
+                  onClick={() => trackRecommendedAuthors(i, node.id)}
+                  hasFollow={false}
+                  hasState={false}
+                />
+              </List.Item>
+            ))}
+          </List>
+        </section>
+      </section>
+    )
+  }
+
   return (
     <section className={recommendedAuthorsClasses}>
-      <RecommendedAuthorsHeader />
-      <section className={styles.users}>
-        <List hasBorder={false}>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={node.id}>
+      <Slides header={<RecommendedAuthorsHeader />}>
+        {_chunk(edges, perColumn).map((chunks, i) => (
+          <Slides.Item size="xs" key={i}>
+            {chunks.map(({ node, cursor }) => (
               <UserDigest.Rich
+                key={node.id}
                 user={node}
-                spacing={[0, 0]}
+                spacing={[12, 0]}
                 bgColor="none"
                 onClick={() => trackRecommendedAuthors(i, node.id)}
                 hasFollow={false}
                 hasState={false}
               />
-            </List.Item>
-          ))}
-        </List>
-      </section>
+            ))}
+          </Slides.Item>
+        ))}
+      </Slides>
     </section>
   )
 }
