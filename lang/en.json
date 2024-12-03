@@ -2544,6 +2544,9 @@
   "iEJeQH": {
     "defaultMessage": "Liker ID"
   },
+  "iIitRg": {
+    "defaultMessage": "Tag not bookmarked yet"
+  },
   "iNZdM/": {
     "defaultMessage": "Switch to support creators with the Optimism network {br} Make support more convenient and affordable",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
