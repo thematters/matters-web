@@ -2544,6 +2544,9 @@
   "iEJeQH": {
     "defaultMessage": "设置 Liker ID"
   },
+  "iIitRg": {
+    "defaultMessage": "尚未收藏标签"
+  },
   "iNZdM/": {
     "defaultMessage": "切换后即可支持创作者，采用 Optimism 网络{br}让支持更方便且费用低廉",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
