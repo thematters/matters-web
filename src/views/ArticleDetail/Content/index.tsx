@@ -12,6 +12,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { useReadTimer } from '~/components/Hook'
 import { ReadArticleMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -117,6 +118,8 @@ const Content = ({
       clearInterval(timerId)
     }
   }, [lastScroll])
+
+  useReadTimer({ articleId, container: contentContainer })
 
   return (
     <>
