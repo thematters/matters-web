@@ -31,7 +31,7 @@ export const OAUTH_SCOPE_TREE = {
           zh_hans: '草稿',
         },
       },
-      subscriptions: {
+      bookmarkedArticles: {
         _t: {
           zh_hant: '收藏作品',
           zh_hans: '收藏作品',

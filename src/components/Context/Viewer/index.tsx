@@ -56,9 +56,6 @@ const ViewerFragments = {
           users(input: { first: 0 }) {
             totalCount
           }
-          tags(input: { first: 0 }) {
-            totalCount
-          }
         }
         followers(input: { first: 0 }) {
           totalCount

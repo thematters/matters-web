@@ -7,7 +7,6 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
-import { updateViewerFollowingTagCount } from '~/components/GQL'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
   TagDigestFollowButtonPrivateFragment,
@@ -33,9 +32,6 @@ const Follow = ({ tag }: Props) => {
             },
           }
         : undefined,
-    update: (cache) => {
-      updateViewerFollowingTagCount({ cache, type: 'increment' })
-    },
   })
 
   const onClick = () => {

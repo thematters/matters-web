@@ -21,7 +21,7 @@ const ME_BOOKMARK_ARTICLES_FEED = gql`
   query MeBookmarkArticlesFeed($after: String) {
     viewer {
       id
-      subscriptions(input: { first: 10, after: $after }) {
+      bookmarkedArticles(input: { first: 10, after: $after }) {
         pageInfo {
           startCursor
           endCursor
@@ -53,8 +53,8 @@ const BaseMeBookmarksArticles = () => {
     return <QueryError error={error} />
   }
 
-  const connectionPath = 'viewer.subscriptions'
-  const { edges, pageInfo } = data?.viewer?.subscriptions || {}
+  const connectionPath = 'viewer.bookmarkedArticles'
+  const { edges, pageInfo } = data?.viewer?.bookmarkedArticles || {}
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return <EmptyBookmark />
