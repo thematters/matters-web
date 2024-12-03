@@ -19,7 +19,6 @@ const fragments = {
       id
       content
       numArticles
-      numAuthors
     }
   `,
 }

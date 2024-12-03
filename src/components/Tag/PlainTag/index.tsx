@@ -52,7 +52,6 @@ PlainTag.fragments = {
       id
       content
       numArticles
-      numAuthors
     }
   `,
 }
