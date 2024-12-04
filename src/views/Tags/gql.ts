@@ -27,14 +27,3 @@ export const ALL_TAGS_HOTTEST = gql`
   }
   ${TagDigest.Feed.fragments.tag}
 `
-
-export const TAG_REACTIVE_DATA = gql`
-  query TagReactiveData($ids: [ID!]!) {
-    nodes(input: { ids: $ids }) {
-      id
-      ... on Tag {
-        numArticles
-      }
-    }
-  }
-`

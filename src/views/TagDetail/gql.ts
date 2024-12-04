@@ -2,18 +2,14 @@ import gql from 'graphql-tag'
 
 import { TagBookmarkButton } from '~/components'
 
-import ArticlesCount from './ArticlesCount'
-
 const tagFragment = gql`
   fragment TagFragment on Tag {
     id
     content
     numArticles
-    numAuthors
     selectedArticles: articles(input: { first: 0 }) {
       totalCount
     }
-    ...ArticleCountTag
     ...TagBookmarkButtonTagPrivate
     hottestArticles: articles(input: { first: 0, sortBy: byHottestDesc }) {
       totalCount
@@ -25,12 +21,10 @@ const tagFragment = gql`
           id
           content
           numArticles
-          numAuthors
         }
       }
     }
   }
-  ${ArticlesCount.fragments.tag}
   ${TagBookmarkButton.fragments.tag.private}
 `
 
