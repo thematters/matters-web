@@ -1,17 +1,14 @@
-import { Fragment, useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useEffect } from 'react'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
   MAX_SEARCH_RESULTS_LENGTH,
 } from '~/common/enums'
-import { analytics, mergeConnections, toPath } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptySearch,
-  InfiniteScroll,
-  Menu,
   SpinnerBlock,
-  TagDigest,
+  TagList,
   Translate,
   usePublicQuery,
   useRoute,
@@ -95,44 +92,14 @@ const AggregateTagResults = () => {
 
   return (
     <section className={styles.aggregateSection}>
-      <InfiniteScroll
-        hasNextPage={
-          pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
-        }
+      <TagList.Infinite
+        edges={edges}
+        pageInfo={pageInfo}
         loadMore={loadMore}
-        eof={
-          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
-        }
-      >
-        <Menu>
-          {edges.map(
-            ({ node, cursor }, i) =>
-              node.__typename === 'Tag' && (
-                <Fragment key={cursor + node.id}>
-                  <Menu.Item
-                    spacing={[16, 0]}
-                    {...toPath({
-                      page: 'tagDetail',
-                      tag: node,
-                    })}
-                    bgActiveColor="none"
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'search_tag',
-                        contentType: 'tag',
-                        location: i,
-                        id: node.id,
-                        searchKey: q,
-                      })
-                    }
-                  >
-                    <TagDigest.Concise tag={node} showArticlesNum />
-                  </Menu.Item>
-                </Fragment>
-              )
-          )}
-        </Menu>
-      </InfiniteScroll>
+        trackingType="search_tag"
+        searchKey={q}
+        maxResults={MAX_SEARCH_RESULTS_LENGTH}
+      />
     </section>
   )
 }

@@ -1,26 +1,21 @@
-import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
 import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { ERROR_CODES } from '~/common/enums'
-import {
-  fromGlobalId,
-  normalizeTag,
-  stripSpaces,
-  toGlobalId,
-  toPath,
-} from '~/common/utils'
+import { fromGlobalId, normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
   EmptyLayout,
   EmptyTag,
-  Expandable,
   Head,
+  Icon,
   Layout,
-  SegmentedTabs,
   SpinnerBlock,
+  SquareTabs,
+  TagBookmarkButton,
+  TextIcon,
   Throw404,
-  useFeatures,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -34,40 +29,27 @@ import {
 
 import TagDetailArticles from './Articles'
 import ArticlesCount from './ArticlesCount'
-import { TagDetailButtons } from './Buttons'
-import TagCover from './Cover'
-import DropdownActions from './DropdownActions'
-import Followers from './Followers'
 import {
   TAG_DETAIL_BY_SEARCH,
   TAG_DETAIL_PRIVATE,
   TAG_DETAIL_PUBLIC,
 } from './gql'
-import Owner from './Owner'
+import RecommendedAuthors from './RecommendedAuthors'
 import RelatedTags from './RelatedTags'
 import styles from './styles.module.css'
 
-const DynamicCommunity = dynamic(() => import('./Community'), {
-  ssr: false,
-  loading: () => <SpinnerBlock />,
-})
-
-const validTagFeedTypes = ['hottest', 'latest', 'selected', 'creators'] as const
+const validTagFeedTypes = ['hottest', 'latest'] as const
 type TagFeedType = (typeof validTagFeedTypes)[number]
 
 const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
-  const viewer = useContext(ViewerContext)
-  const features = useFeatures()
+  const intl = useIntl()
 
   // feed type
   const { getQuery, setQuery } = useRoute()
   const qsType = getQuery('type') as TagFeedType
-  const hasSelectedFeed = (tag?.selectedArticles.totalCount || 0) > 0
 
-  const [feedType, setFeedType] = useState<TagFeedType>(
-    hasSelectedFeed && qsType === 'selected' ? 'selected' : qsType || 'hottest'
-  )
+  const [feedType, setFeedType] = useState<TagFeedType>(qsType || 'latest')
 
   const changeFeed = (newType: TagFeedType) => {
     setQuery('type', newType)
@@ -75,24 +57,15 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   }
 
   useEffect(() => {
-    setFeedType(
-      hasSelectedFeed && qsType === 'selected'
-        ? 'selected'
-        : qsType || 'hottest'
-    )
+    setFeedType(qsType || 'latest')
   }, [qsType])
 
-  const isSelected = feedType === 'selected'
   const isHottest = feedType === 'hottest'
   const isLatest = feedType === 'latest'
-  const isCreators = feedType === 'creators'
+  const hasArticles = tag.numArticles > 0
+  const hasHottestArticles = tag.hottestArticles.totalCount > 0
 
   useEffect(() => {
-    // if selected feed is empty, switch to hottest feed
-    if (!hasSelectedFeed && isSelected) {
-      changeFeed('hottest')
-    }
-
     // backward compatible with `/tags/:globalId:`
     const newPath = toPath({
       page: 'tagDetail',
@@ -104,132 +77,83 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
     }
   }, [])
 
-  // define permission
-  const isOwner = tag?.owner?.id === viewer.id
-  const isEditor = (tag?.editors || []).some((t) => t.id === viewer.id)
-  const isMaintainer = isOwner || isEditor || viewer.isAdmin // Matty
-
   const title = '#' + normalizeTag(tag.content)
   const keywords = tag.content.split(/\s+/).filter(Boolean).map(normalizeTag)
-  const description = stripSpaces(tag.description)
   const path = toPath({ page: 'tagDetail', tag })
 
   /**
    * Render
    */
   return (
-    <Layout.Main aside={<RelatedTags tagId={tag.id} inSidebar />}>
-      <Layout.Header
-        right={
-          <>
-            <span />
-            <section className={styles.buttons}>
-              <Layout.Header.ShareButton
-                title={title}
-                tags={title.endsWith(tag.content) ? undefined : keywords}
-              />
-              <DropdownActions
-                isOwner={isOwner}
-                isEditor={isEditor}
-                isMaintainer={isMaintainer}
-                tag={tag}
-              />
-            </section>
-          </>
-        }
-        mode="transparent"
-      />
-
+    <Layout.Main
+      aside={
+        <>
+          <RecommendedAuthors tagId={tag.id} inSidebar />
+          <RelatedTags tagId={tag.id} inSidebar />
+        </>
+      }
+    >
       <Head
-        // title={`#${normalizeTag(tag.content)}`}
-        // description={tag.description}
         title={title}
         path={qsType ? `${path.href}?type=${qsType}` : path.href}
-        description={description}
         keywords={keywords} // add top10 most using author names?
-        image={
-          tag.cover ||
-          `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`
-        }
+        image={`//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'ItemList', // should follow with some recent articles under 'itemListElement'
           name: title,
-          description,
           keywords,
-          image:
-            tag.cover ||
-            `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`,
+          image: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`,
           url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${path.href}`,
           // itemListElement: [...],
         }}
       />
 
-      <TagCover tag={tag} />
-
-      <section className={styles.info}>
-        {features.tag_adoption && <Owner tag={tag} />}
-
-        <section className={styles.top}>
-          <section className={styles.statistics}>
-            <Followers tag={tag} />
-            <ArticlesCount tag={tag} />
-          </section>
-
-          <section>
-            <TagDetailButtons.FollowButton tag={tag} />
-          </section>
-        </section>
-
-        {tag.description && (
-          <Expandable
-            content={tag.description}
-            color="greyDarker"
-            spacingTop="base"
-            size={15}
-          >
-            <p>{tag.description}</p>
-          </Expandable>
-        )}
+      <section className={styles.title}>
+        <TextIcon
+          icon={<Icon icon={IconHashTag} size={28} />}
+          color="black"
+          size={24}
+          spacing={4}
+          weight="medium"
+        >
+          {tag.content}
+        </TextIcon>
       </section>
 
-      <SegmentedTabs sticky>
-        <SegmentedTabs.Tab
-          selected={isHottest}
-          onClick={() => changeFeed('hottest')}
-        >
-          <FormattedMessage defaultMessage="Trending" id="ll/ufR" />
-        </SegmentedTabs.Tab>
+      <section className={styles.info}>
+        <section className={styles.statistics}>
+          <ArticlesCount tag={tag} />
+        </section>
 
-        <SegmentedTabs.Tab
-          selected={isLatest}
-          onClick={() => changeFeed('latest')}
-        >
-          <FormattedMessage defaultMessage="Latest" id="adThp5" />
-        </SegmentedTabs.Tab>
+        <TagBookmarkButton tag={tag} />
+      </section>
 
-        {hasSelectedFeed && (
-          <SegmentedTabs.Tab
-            selected={isSelected}
-            onClick={() => changeFeed('selected')}
-          >
-            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
-          </SegmentedTabs.Tab>
-        )}
+      {hasArticles && hasHottestArticles && (
+        <section className={styles.tabs}>
+          <SquareTabs>
+            <SquareTabs.Tab
+              selected={isLatest}
+              onClick={() => changeFeed('latest')}
+              title={intl.formatMessage({
+                defaultMessage: 'Latest',
+                id: 'adThp5',
+              })}
+            />
 
-        <SegmentedTabs.Tab
-          selected={isCreators}
-          onClick={() => changeFeed('creators')}
-        >
-          <FormattedMessage defaultMessage="Creators" id="TzhzIH" />
-        </SegmentedTabs.Tab>
-      </SegmentedTabs>
-
-      {(isHottest || isLatest || isSelected) && (
-        <TagDetailArticles tag={tag} feedType={feedType} />
+            <SquareTabs.Tab
+              selected={isHottest}
+              onClick={() => changeFeed('hottest')}
+              title={intl.formatMessage({
+                defaultMessage: 'Trending',
+                id: 'll/ufR',
+              })}
+            />
+          </SquareTabs>
+        </section>
       )}
 
-      {isCreators && <DynamicCommunity id={tag.id} isOwner={isOwner} />}
+      <TagDetailArticles tag={tag} feedType={feedType} />
     </Layout.Main>
   )
 }
@@ -283,25 +207,31 @@ const TagDetailContainer = () => {
   )
 
   // private data
-  const loadPrivate = (id: string) => {
+  const loadPrivate = async (id: string) => {
     if (!viewer.isAuthed || !id) {
       return
     }
 
-    client.query({
-      query: TAG_DETAIL_PRIVATE,
-      fetchPolicy: 'network-only',
-      variables: { id },
-    })
+    try {
+      await client.query({
+        query: TAG_DETAIL_PRIVATE,
+        fetchPolicy: 'network-only',
+        variables: { id },
+      })
+    } catch (error) {
+      console.error('Error loading private data:', error)
+    }
   }
   const searchedTag = resultBySearch?.data?.search.edges?.[0]
     .node as TagFragmentFragment
 
-  // fetch private data for first page
   useEffect(() => {
     const retryTagId = tagId || searchedTag?.id
     if (retryTagId) {
-      loadPrivate(retryTagId)
+      // FIXME: Delayed loading of private data allows private data to guarantee writing to the final result
+      setTimeout(() => {
+        loadPrivate(retryTagId)
+      }, 100)
     }
   }, [tagId, resultBySearch?.data, viewer.id])
 

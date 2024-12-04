@@ -81,7 +81,6 @@ ListTag.fragments = {
       id
       content
       numArticles
-      numAuthors
     }
   `,
 }

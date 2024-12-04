@@ -19,9 +19,9 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { ToggleSubscribeArticleMutation } from '~/gql/graphql'
+import { ToggleBookmarkArticleMutation } from '~/gql/graphql'
 
-import TOGGLE_SUBSCRIBE_ARTICLE from '../../GQL/mutations/toggleSubscribeArticle'
+import TOGGLE_BOOKMARK_ARTICLE from '../../GQL/mutations/toggleBookmarkArticle'
 
 export type SubscribeProps = {
   articleId?: string
@@ -40,8 +40,8 @@ const Subscribe = ({
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
 
-  const [subscribe] = useMutation<ToggleSubscribeArticleMutation>(
-    TOGGLE_SUBSCRIBE_ARTICLE,
+  const [subscribe] = useMutation<ToggleBookmarkArticleMutation>(
+    TOGGLE_BOOKMARK_ARTICLE,
     {
       variables: { id: articleId, enabled: true },
     }
@@ -71,13 +71,7 @@ const Subscribe = ({
     await subscribe()
 
     toast.success({
-      message: (
-        <FormattedMessage
-          defaultMessage="Bookmarked"
-          id="qE8ew4"
-          description="src/components/Buttons/Bookmark/Subscribe.tsx"
-        />
-      ),
+      message: <FormattedMessage defaultMessage="Bookmarked" id="k0fraU" />,
     })
   }
 

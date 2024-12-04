@@ -40,6 +40,7 @@ type EventArgs =
   | ['authenticate', AuthenticateProp]
   | ['billboard_exposure', BillboardExposureProp]
   | ['click_billboard', ClickBillboardProp]
+  | ['read_time', ReadTimeProp]
 
 /**
  * Event: Page View
@@ -239,6 +240,11 @@ interface AuthenticateProp {
   trigger?: string
 }
 
+interface ReadTimeProp {
+  articleId: string
+  time: number
+}
+
 // content type
 export type ContentType =
   | 'article'
@@ -340,6 +346,7 @@ type UserFeedType =
   | 'tag_detail_latest'
   | 'tag_detail_selected'
   | 'tag_detail_community'
+  | 'tag_detail_recommended_authors'
   | 'transaction'
 
 type TagFeedType =

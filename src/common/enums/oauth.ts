@@ -31,7 +31,7 @@ export const OAUTH_SCOPE_TREE = {
           zh_hans: '草稿',
         },
       },
-      subscriptions: {
+      bookmarkedArticles: {
         _t: {
           zh_hant: '收藏作品',
           zh_hans: '收藏作品',
@@ -87,40 +87,16 @@ export const OAUTH_SCOPE_TREE = {
         zh_hant: '管理個人資料、標籤、評論、封鎖、追蹤等',
         zh_hans: '管理个人资料、标签、评论、封锁、关注等',
       },
-      toggleSubscribeArticle: {
+      toggleBookmarkArticle: {
         _t: {
           zh_hant: '收藏作品',
           zh_hans: '收藏作品',
         },
       },
-      toggleFollowTag: {
+      toggleBookmarkTag: {
         _t: {
           zh_hant: '追蹤標籤',
           zh_hans: '关注标签',
-        },
-      },
-      updateTagSetting: {
-        _t: {
-          zh_hant: '管理標籤',
-          zh_hans: '管理标签',
-        },
-      },
-      addArticlesTags: {
-        _t: {
-          zh_hant: '添加作品到標籤',
-          zh_hans: '添加作品到标签',
-        },
-      },
-      updateArticlesTags: {
-        _t: {
-          zh_hant: '管理標籤作品',
-          zh_hans: '管理标签作品',
-        },
-      },
-      deleteArticlesTags: {
-        _t: {
-          zh_hant: '移除標籤作品',
-          zh_hans: '移除标签作品',
         },
       },
       togglePinComment: {

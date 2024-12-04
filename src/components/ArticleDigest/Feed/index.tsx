@@ -179,12 +179,9 @@ export const ArticleDigestFeed = React.memo(
   BaseArticleDigestFeed,
   ({ article: prevArticle, ...prevProps }, { article, ...props }) => {
     return (
-      prevArticle.subscribed === article.subscribed &&
+      prevArticle.bookmarked === article.bookmarked &&
       prevArticle.articleState === article.articleState &&
-      prevArticle.pinned === article.pinned &&
-      prevProps.hasSetTagSelected === props.hasSetTagSelected &&
-      prevProps.hasSetTagUnselected === props.hasSetTagUnselected &&
-      prevProps.hasRemoveTag === props.hasRemoveTag
+      prevArticle.pinned === article.pinned
     )
   }
 ) as MemoizedArticleDigestFeed

@@ -10,9 +10,6 @@ import ArchiveArticle from './ArchiveArticle'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
 import PinButton from './PinButton'
-import RemoveTagButton from './RemoveTagButton'
-import SetTagSelectedButton from './SetTagSelectedButton'
-import SetTagUnselectedButton from './SetTagUnselectedButton'
 
 export const fragments = {
   article: gql`
@@ -23,19 +20,13 @@ export const fragments = {
       ...ArchiveArticleArticle
       ...PinButtonArticle
       ...ExtendButtonArticle
-      ...RemoveTagButtonArticle
       ...EditArticleButtonArticle
-      ...SetTagSelectedButtonArticle
-      ...SetTagUnselectedButtonArticle
     }
     ${AppreciatorsDialog.fragments.article}
     ${SupportersDialog.fragments.article}
     ${PinButton.fragments.article}
     ${ArchiveArticle.fragments.article}
     ${ExtendButton.fragments.article}
-    ${RemoveTagButton.fragments.article}
     ${EditButton.fragments.article}
-    ${SetTagSelectedButton.fragments.article}
-    ${SetTagUnselectedButton.fragments.article}
   `,
 }

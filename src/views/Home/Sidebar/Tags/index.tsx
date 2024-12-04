@@ -5,7 +5,6 @@ import { useContext } from 'react'
 import { analytics } from '~/common/utils'
 import {
   List,
-  ListTag,
   QueryError,
   ShuffleButton,
   SpinnerBlock,
@@ -32,16 +31,15 @@ const SIDEBAR_TAGS = gql`
           edges {
             cursor
             node {
-              cover
-              description
-              ...DigestTag
+              id
+              ...TagDigestSidebarTag
             }
           }
         }
       }
     }
   }
-  ${ListTag.fragments.tag}
+  ${TagDigest.Sidebar.fragments.tag}
 `
 
 const Tags = () => {

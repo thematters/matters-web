@@ -1,133 +1,48 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
-import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
-import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { TEST_ID } from '~/common/enums'
-import { captureClicks, numAbbr, toPath } from '~/common/utils'
-import {
-  Card,
-  CardProps,
-  Icon,
-  PlainTag,
-  ResponsiveImage,
-  TextIcon,
-} from '~/components'
+import { toPath } from '~/common/utils'
+import { abbr } from '~/common/utils/number/abbr'
 import { TagDigestFeedTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 export type TagDigestFeedProps = {
   tag: TagDigestFeedTagFragment
-} & CardProps
+  onClick?: () => void
+}
 
 const fragments = {
   tag: gql`
     fragment TagDigestFeedTag on Tag {
       id
       content
-      cover
       numArticles
-      numAuthors
-      articles(input: { first: 3 }) {
-        edges {
-          cursor
-          node {
-            id
-            title
-            slug
-            shortHash
-            author {
-              id
-              userName
-            }
-          }
-        }
-      }
     }
   `,
 }
 
-const Feed = ({ tag, ...cardProps }: TagDigestFeedProps) => {
+const Feed = ({ tag, onClick }: TagDigestFeedProps) => {
   const path = toPath({
     page: 'tagDetail',
     tag,
   })
 
-  const articles = tag.articles.edges
+  const numArticles = abbr(tag.numArticles, 2)
 
   return (
-    <Card
-      {...path}
-      spacing={[8, 8]}
-      bgColor="none"
-      bgActiveColor="none"
-      borderRadius="xtight"
-      testId={TEST_ID.DIGEST_TAG_FEED}
-      {...cardProps}
-    >
-      <section className={styles.container}>
-        <header className={styles.header}>
-          <PlainTag
-            tag={tag}
-            textIconProps={{ color: 'black', weight: 'medium', size: 14 }}
-          />
-
-          <section className={styles.nums}>
-            <TextIcon
-              icon={<Icon icon={IconUser} color="greyDark" size={12} />}
-              size={12}
-              spacing={4}
-              color="greyDark"
-            >
-              {numAbbr(tag.numAuthors)}
-            </TextIcon>
-
-            <TextIcon
-              icon={<Icon icon={IconDraft} color="greyDark" size={12} />}
-              size={12}
-              spacing={4}
-              color="greyDark"
-            >
-              {numAbbr(tag.numArticles)}
-            </TextIcon>
-          </section>
-        </header>
-
-        <section className={styles.content}>
-          <ul className={styles.articles}>
-            {articles?.map(({ node, cursor }) => (
-              <li key={node.id}>
-                <Link
-                  {...toPath({ page: 'articleDetail', article: node })}
-                  legacyBehavior
-                >
-                  <a className={styles.title} onClick={captureClicks}>
-                    {node.title}
-                  </a>
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <section
-            className={styles.cover}
-            data-test-id={TEST_ID.DIGEST_TAG_FEED_COVER}
-          >
-            <Link {...path} legacyBehavior>
-              <a>
-                <ResponsiveImage
-                  url={tag.cover || IMAGE_TAG_COVER.src}
-                  width={144}
-                  height={144}
-                />
-              </a>
-            </Link>
-          </section>
-        </section>
-      </section>
-    </Card>
+    <Link {...path} legacyBehavior onClick={onClick}>
+      <a className={styles.tag} data-test-id={TEST_ID.DIGEST_TAG_FEED}>
+        <span className={styles.name}>{tag.content}</span>&nbsp;
+        <span
+          className={styles.nums}
+          data-test-id={TEST_ID.DIGEST_TAG_FEED_NUM_ARTICLES}
+        >
+          ({numArticles})
+        </span>
+      </a>
+    </Link>
   )
 }
 
