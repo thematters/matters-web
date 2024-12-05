@@ -1,7 +1,9 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
+import { ViewerContext } from '~/components/Context'
 import { PaymentReceivedDonationNoticeFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
@@ -16,11 +18,14 @@ const PaymentReceivedDonationNotice = ({
 }: {
   notice: PaymentReceivedDonationNoticeFragment
 }) => {
+  const viewer = useContext(ViewerContext)
+
   if (!notice.actors) {
     return null
   }
 
   const tx = notice.tx
+  const hasEthAddress = !!viewer?.info?.ethAddress
 
   return (
     <NoticeDigest
@@ -43,6 +48,12 @@ const PaymentReceivedDonationNotice = ({
             >
               {tx.amount} {tx.currency}
             </span>
+            {!hasEthAddress && (
+              <FormattedMessage
+                defaultMessage=", connect your wallet to claim"
+                id="CgPGAu"
+              />
+            )}
           </>
         )) ||
         ''

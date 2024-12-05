@@ -1,8 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
-import { parseUnits } from 'viem'
 
-import { contract, TEST_ID } from '~/common/enums'
+import { TEST_ID } from '~/common/enums'
 import { explorers } from '~/common/utils/wallet'
 import { WithdrewLockedTokensNoticeFragment } from '~/gql/graphql'
 
