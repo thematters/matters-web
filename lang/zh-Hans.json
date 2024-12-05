@@ -1265,6 +1265,9 @@
     "defaultMessage": "被关注",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "JlpeDH": {
+    "defaultMessage": "交易合约已将金额 {amount} USDT 发送至绑定钱包，点此查看详情"
+  },
   "Jmg5do": {
     "defaultMessage": "作品已归档"
   },

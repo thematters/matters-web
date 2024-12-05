@@ -1265,6 +1265,9 @@
     "defaultMessage": "被追蹤",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "JlpeDH": {
+    "defaultMessage": "交易合約已將金額 {amount} USDT 發送至綁定錢包，點此查看詳情"
+  },
   "Jmg5do": {
     "defaultMessage": "作品已封存"
   },
