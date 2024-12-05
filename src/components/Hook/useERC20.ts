@@ -12,14 +12,19 @@ import { contract } from '~/common/enums'
 import { featureSupportedChains, MaxApprovedUSDTAmount } from '~/common/utils'
 import { ViewerContext } from '~/components'
 
-export const useAllowanceUSDT = () => {
+export const useAllowanceUSDT = (useCurationVault: boolean) => {
   const { address } = useAccount()
 
   return useContractRead({
     address: contract.Optimism.tokenAddress,
     abi: erc20ABI,
     functionName: 'allowance',
-    args: [address as `0x${string}`, contract.Optimism.curationAddress],
+    args: [
+      address as `0x${string}`,
+      useCurationVault
+        ? contract.Optimism.curationVaultAddress
+        : contract.Optimism.curationAddress,
+    ],
   })
 }
 
@@ -56,12 +61,17 @@ export const useBalanceEther = ({
   })
 }
 
-export const useApproveUSDT = () => {
+export const useApproveUSDT = (useCurationVault: boolean) => {
   const { config } = usePrepareContractWrite({
     address: contract.Optimism.tokenAddress,
     abi: erc20ABI,
     functionName: 'approve',
-    args: [contract.Optimism.curationAddress, MaxApprovedUSDTAmount],
+    args: [
+      useCurationVault
+        ? contract.Optimism.curationVaultAddress
+        : contract.Optimism.curationAddress,
+      MaxApprovedUSDTAmount,
+    ],
   })
 
   return useContractWrite(config)

@@ -205,7 +205,9 @@ const Confirm: React.FC<FormProps> = ({
         currency={currency}
         recipient={recipient}
         showLikerID={currency === CURRENCY.LIKE}
-        showEthAddress={currency === CURRENCY.USDT}
+        showEthAddress={
+          currency === CURRENCY.USDT && !!recipient.info.ethAddress
+        }
       />
 
       {isSubmitting && (

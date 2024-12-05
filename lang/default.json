@@ -389,9 +389,6 @@
   "4nHH2x": {
     "defaultMessage": "Applied successfully"
   },
-  "4tqFCR": {
-    "defaultMessage": "The author has not bound the USDT wallet yet"
-  },
   "4wOWfp": {
     "defaultMessage": "What's this?",
     "description": "src/components/Billboard/index.tsx"

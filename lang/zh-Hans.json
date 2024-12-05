@@ -87,7 +87,7 @@
     "defaultMessage": "支持排行榜"
   },
   "/NX9L+": {
-    "defaultMessage": "确认授权",
+    "defaultMessage": "去钱包确认",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "/TXBJR": {
@@ -95,7 +95,7 @@
     "description": "UNKNOWN_ERROR"
   },
   "/cyuh2": {
-    "defaultMessage": "前往授权"
+    "defaultMessage": "去钱包授权"
   },
   "/dKzfc": {
     "defaultMessage": "该作品因违反社区约章，已被站方强制封存。"
@@ -388,9 +388,6 @@
   },
   "4nHH2x": {
     "defaultMessage": "报名成功"
-  },
-  "4tqFCR": {
-    "defaultMessage": "作者尚未启用 USDT 钱包"
   },
   "4wOWfp": {
     "defaultMessage": "这是什么？",
