@@ -149,13 +149,13 @@ const SetAmount: React.FC<FormProps> = ({
     refetch: refetchAllowanceData,
     isLoading: allowanceLoading,
     error: allowanceError,
-  } = useAllowanceUSDT()
+  } = useAllowanceUSDT(!recipient.info.ethAddress)
   const {
     data: approveData,
     isLoading: approving,
     write: approveWrite,
     error: approveError,
-  } = useApproveUSDT()
+  } = useApproveUSDT(!recipient.info.ethAddress)
   const { data: balanceUSDTData, error: balanceUSDTError } = useBalanceUSDT({
     address,
   })
