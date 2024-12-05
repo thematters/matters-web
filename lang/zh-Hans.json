@@ -869,6 +869,9 @@
     "defaultMessage": "复制留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CgPGAu": {
+    "defaultMessage": "，绑定钱包后可领取"
+  },
   "Ci7dxf": {
     "defaultMessage": "留言已删除",
     "description": "src/components/Notice/NoticeComment.tsx/moment"

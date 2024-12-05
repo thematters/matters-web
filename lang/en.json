@@ -869,6 +869,9 @@
     "defaultMessage": "Copy comment",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CgPGAu": {
+    "defaultMessage": ", connect your wallet to claim"
+  },
   "Ci7dxf": {
     "defaultMessage": "Comment deleted",
     "description": "src/components/Notice/NoticeComment.tsx/moment"

@@ -869,6 +869,9 @@
     "defaultMessage": "複製留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CgPGAu": {
+    "defaultMessage": "，連接錢包領取"
+  },
   "Ci7dxf": {
     "defaultMessage": "留言已刪除",
     "description": "src/components/Notice/NoticeComment.tsx/moment"
