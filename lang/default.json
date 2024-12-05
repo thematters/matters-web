@@ -1268,6 +1268,9 @@
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
   },
+  "JlpeDH": {
+    "defaultMessage": "The vault contract has sent {amount} USDT to the linked wallet. Click here for details."
+  },
   "Jmg5do": {
     "defaultMessage": "Archived Work"
   },
