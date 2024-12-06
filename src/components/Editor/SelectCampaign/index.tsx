@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { datetimeFormat } from '~/common/utils'
@@ -60,33 +60,21 @@ const SelectCampaign = ({
   selectedStage,
   editCampaign,
 }: SelectCampaignProps) => {
-  const [selectedCampaignId, setSelectedCampaignId] = useState<
-    string | undefined
-  >(selectedCampaign?.id)
-  const [selectedStageId, setSelectedStageId] = useState<string | undefined>(
-    selectedStage
-  )
-
-  useEffect(() => {
-    setSelectedCampaignId(selectedCampaign?.id)
-    setSelectedStageId(selectedStage)
-  }, [selectedCampaign, selectedStage])
-
   const { lang } = useContext(LanguageContext)
   const RESET_CAMPAIGN_OPTION = {
     name: <FormattedMessage defaultMessage="Select Activity..." id="DpbBcd" />,
     value: undefined,
-    selected: !selectedCampaignId,
+    selected: !selectedCampaign?.id,
   }
   const RESET_STAGE_OPTION = {
     name: <FormattedMessage defaultMessage="Select Date..." id="d5bM8A" />,
     value: undefined,
-    selected: !selectedStageId,
+    selected: !selectedStage,
   }
   const now = new Date()
-  const availableStages = selectedCampaignId
+  const availableStages = selectedCampaign?.id
     ? campaigns
-        .find((c) => c.id === selectedCampaignId)
+        .find((c) => c.id === selectedCampaign.id)
         ?.stages.filter((s) => {
           const period = s.period
 
@@ -101,8 +89,6 @@ const SelectCampaign = ({
       <Form.Select<string | undefined>
         name="select-campaign"
         onChange={(option) => {
-          setSelectedCampaignId(option.value)
-          setSelectedStageId(undefined)
           editCampaign(
             option.value !== undefined ? { campaign: option.value } : undefined
           )
@@ -113,48 +99,49 @@ const SelectCampaign = ({
             return {
               name: c.name,
               value: c.id,
-              selected: c.id === selectedCampaignId,
+              selected: c.id === selectedCampaign?.id,
             }
           }),
         ]}
         size={14}
         color="freeWriteBlue"
       />
-      {selectedCampaignId && availableStages && availableStages.length > 0 && (
-        <>
-          <Spacer size="sp8" />
-          <Form.Select<string | undefined>
-            name="select-stage"
-            onChange={(option) => {
-              setSelectedStageId(option.value)
-              editCampaign(
-                option.value
-                  ? { campaign: selectedCampaignId, stage: option.value }
-                  : { campaign: selectedCampaignId }
-              )
-            }}
-            options={[
-              RESET_STAGE_OPTION,
-              ...availableStages.reverse().map((s) => {
-                return {
-                  name: s.period?.start
-                    ? `${s.name} - ${datetimeFormat.absolute({
-                        date: s.period.start,
-                        lang,
-                        optionalYear: false,
-                        utc8: true,
-                      })}`
-                    : s.name,
-                  value: s.id,
-                  selected: s.id === selectedStageId,
-                }
-              }),
-            ]}
-            size={14}
-            color="freeWriteBlue"
-          />
-        </>
-      )}
+      {selectedCampaign?.id &&
+        availableStages &&
+        availableStages.length > 0 && (
+          <>
+            <Spacer size="sp8" />
+            <Form.Select<string | undefined>
+              name="select-stage"
+              onChange={(option) => {
+                editCampaign(
+                  option.value
+                    ? { campaign: selectedCampaign.id, stage: option.value }
+                    : { campaign: selectedCampaign.id }
+                )
+              }}
+              options={[
+                RESET_STAGE_OPTION,
+                ...availableStages.reverse().map((s) => {
+                  return {
+                    name: s.period?.start
+                      ? `${s.name} - ${datetimeFormat.absolute({
+                          date: s.period.start,
+                          lang,
+                          optionalYear: false,
+                          utc8: true,
+                        })}`
+                      : s.name,
+                    value: s.id,
+                    selected: s.id === selectedStage,
+                  }
+                }),
+              ]}
+              size={14}
+              color="freeWriteBlue"
+            />
+          </>
+        )}
     </>
   )
 }
