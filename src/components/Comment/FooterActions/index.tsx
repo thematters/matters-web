@@ -189,6 +189,31 @@ const BaseFooterActions = ({
       )} `
     : ''
 
+  const [isHiding, setIsHiding] = useState(false)
+
+  const handleHideForm = () => {
+    // Start hide animation
+    setIsHiding(true)
+  }
+
+  const handleHideComplete = () => {
+    // End hide animation
+    setIsHiding(false)
+
+    if (editor === activeEditor) {
+      setActiveEditor(null)
+    }
+    setShowForm(false)
+  }
+
+  const handleReplyButtonClick = () => {
+    if (showForm) {
+      handleHideForm()
+    } else {
+      toggleShowForm()
+    }
+  }
+
   return (
     <>
       <footer
@@ -232,12 +257,7 @@ const BaseFooterActions = ({
                       {...buttonProps}
                       {...replyButtonProps}
                       {...replyCustomButtonProps}
-                      onClick={() => {
-                        if (editor === activeEditor) {
-                          setActiveEditor(null)
-                        }
-                        toggleShowForm()
-                      }}
+                      onClick={handleReplyButtonClick}
                     />
                   </Media>
                 </>
@@ -275,15 +295,12 @@ const BaseFooterActions = ({
               replyToId={comment.id}
               parentId={comment.parentComment?.id || comment.id}
               submitCallback={submitCallback}
-              closeCallback={() => {
-                if (editor === activeEditor) {
-                  setActiveEditor(null)
-                }
-                setShowForm(false)
-              }}
+              closeCallback={handleHideForm}
               isInCommentDetail={isInCommentDetail}
               defaultContent={defaultContent}
               playAnimation
+              isHiding={isHiding}
+              onHideComplete={handleHideComplete}
             />
           </>
         )}

@@ -42,6 +42,8 @@ export interface ArticleCommentFormProps {
   playAnimation?: boolean
   isFallbackEditor?: boolean
   setEditor?: (editor: Editor | null) => void
+  onHideComplete?: () => void
+  isHiding?: boolean
 }
 
 export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
@@ -57,6 +59,8 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
   placeholder,
   isFallbackEditor,
   playAnimation,
+  onHideComplete,
+  isHiding,
   setEditor: propsSetEditor,
 }) => {
   const intl = useIntl()
@@ -183,7 +187,8 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
 
   const formClasses = classNames({
     [styles.form]: true,
-    [styles.playAnimation]: playAnimation,
+    [styles.playAnimation]: playAnimation && !isHiding,
+    [styles.hideAnimation]: isHiding,
   })
 
   return (
@@ -205,6 +210,11 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
             })
           )
           return
+        }
+      }}
+      onAnimationEnd={() => {
+        if (isHiding && onHideComplete) {
+          onHideComplete()
         }
       }}
     >

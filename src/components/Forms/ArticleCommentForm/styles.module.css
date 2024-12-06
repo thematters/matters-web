@@ -8,7 +8,12 @@
 
 .playAnimation {
   overflow: hidden;
-  animation: slide-down-fade 1s;
+  animation: slide-down-fade 0.3s ease-out;
+}
+
+.hideAnimation {
+  overflow: hidden;
+  animation: slide-up-fade 0.3s ease-out forwards;
 }
 
 .content {
@@ -31,13 +36,25 @@
 }
 
 @keyframes slide-down-fade {
-  0% {
+  from {
     max-height: 0;
     opacity: 0;
   }
 
-  100% {
+  to {
     max-height: 500px;
     opacity: 1;
+  }
+}
+
+@keyframes slide-up-fade {
+  from {
+    max-height: 500px;
+    opacity: 1;
+  }
+
+  to {
+    max-height: 0;
+    opacity: 0;
   }
 }
