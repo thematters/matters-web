@@ -46,6 +46,7 @@ export * from './PayoutDialog'
 export * from './ResetPaymentPasswordDialog'
 export * from './SubscribeCircleDialog'
 export * from './UnsubscribeCircleDialog'
+export * from './WithdrawLockedTokensDialog'
 
 // Misc
 export * from './BillboardDialog'
