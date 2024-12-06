@@ -30,10 +30,7 @@ import {
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
 import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
-import {
-  getSelectCampaigns,
-  SelectCampaignProps,
-} from '~/components/Editor/SelectCampaign'
+import { SelectCampaignProps } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import { SidebarIndentProps } from '~/components/Editor/Sidebar/Indent'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
@@ -44,7 +41,6 @@ import {
 } from '~/components/GQL/mutations/uploadFile'
 import {
   ArticleAccessType,
-  ArticleCampaignInput,
   ArticleDigestDropdownArticleFragment,
   ArticleLicenseType,
   AssetFragment,
@@ -53,7 +49,6 @@ import {
   DigestTagFragment,
   DirectImageUploadDoneMutation,
   DirectImageUploadMutation,
-  EditorSelectCampaignFragment,
   QueryEditArticleAssetsQuery,
   QueryEditArticleQuery,
   SingleFileUploadMutation,
@@ -61,6 +56,7 @@ import {
 
 import { GET_EDIT_ARTICLE, GET_EDIT_ARTICLE_ASSETS } from './gql'
 import EditHeader from './Header'
+import { useCampaignState } from './Hooks/useCampaignState'
 import PublishState from './PublishState'
 import styles from './styles.module.css'
 
@@ -141,40 +137,8 @@ const BaseEdit = ({ article }: { article: Article }) => {
     setLicense(newLicense)
   }
 
-  // campaign
-  const appliedCampaigns = article.author.campaigns.edges?.map((e) => e.node)
-  const {
-    campaigns: selectableCampaigns,
-    selectedCampaign: _selectedCampaign,
-    selectedStage: _selectedStage,
-  } = getSelectCampaigns({
-    applied: appliedCampaigns,
-    attached: article.campaigns,
-    createdAt: article.createdAt,
-  })
-
-  const [campaign, setCampaign] = useState<ArticleCampaignInput | undefined>(
-    _selectedCampaign?.id && _selectedStage
-      ? {
-          campaign: _selectedCampaign.id,
-          stage: _selectedStage,
-        }
-      : undefined
-  )
-
-  const [selectedCampaign, setSelectedCampaign] = useState<
-    EditorSelectCampaignFragment | undefined
-  >(_selectedCampaign)
-  const [selectedStage, setSelectedStage] = useState<string | undefined>(
-    _selectedStage
-  )
-
-  useEffect(() => {
-    setSelectedCampaign(
-      selectableCampaigns?.find((c) => c.id === campaign?.campaign)
-    )
-    setSelectedStage(campaign?.stage || undefined)
-  }, [campaign])
+  const { setCampaign, selectedCampaign, selectedStage, selectableCampaigns } =
+    useCampaignState(article)
 
   const [requestForDonation, setRequestForDonation] = useState(
     article.requestForDonation
@@ -232,8 +196,8 @@ const BaseEdit = ({ article }: { article: Article }) => {
   }
   const campaignProps: Partial<SelectCampaignProps> = {
     campaigns: selectableCampaigns,
-    selectedCampaign: selectedCampaign,
-    selectedStage: selectedStage,
+    selectedCampaign,
+    selectedStage,
     editCampaign: setCampaign,
   }
 
