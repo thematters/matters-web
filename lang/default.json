@@ -944,6 +944,9 @@
     "defaultMessage": "Verification successful",
     "description": "src/components/GlobalToast/index.tsx"
   },
+  "DpbBcd": {
+    "defaultMessage": "Select Activity..."
+  },
   "DqQvtL": {
     "defaultMessage": "Unblock",
     "description": "src/views/Me/Settings/Blocked/ToggleBlockButton.tsx"
@@ -1565,6 +1568,9 @@
     "defaultMessage": "guide",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
+  "P/7t1k": {
+    "defaultMessage": "Please select a date of activity"
+  },
   "P3y9Bo": {
     "defaultMessage": "Go to sign",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -1900,9 +1906,6 @@
   "VqdOGQ": {
     "defaultMessage": "More",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
-  },
-  "VrK0Q0": {
-    "defaultMessage": "Please select..."
   },
   "VrOoVf": {
     "defaultMessage": "Matters will never ask your wallet key through any channel.",
@@ -2306,6 +2309,9 @@
   },
   "d5+b8r": {
     "defaultMessage": "Restricted content"
+  },
+  "d5bM8A": {
+    "defaultMessage": "Select Date..."
   },
   "dAPUJp": {
     "defaultMessage": "The dazzling light of a meteor shower is enough to illuminate the night sky. The Meteor Canoe badge signifies your participation in the Nomad Matters.",

@@ -10,7 +10,7 @@ import {
   SetTagsProps,
 } from '~/components/Editor'
 import {
-  getSelectCampaign,
+  getSelectCampaigns,
   SelectCampaignProps,
 } from '~/components/Editor/SelectCampaign'
 import { EditorSettingsDialog } from '~/components/Editor/SettingsDialog'
@@ -130,16 +130,21 @@ const SettingsButton = ({
     iscnPublishSaving,
   }
 
-  const { appliedCampaign, selectedStage } = getSelectCampaign({
-    applied: campaigns && campaigns[0],
+  const {
+    campaigns: selectableCampaigns,
+    selectedCampaign,
+    selectedStage,
+  } = getSelectCampaigns({
+    applied: campaigns,
     attached: draft.campaigns,
     createdAt: draft.createdAt,
   })
 
   const campaignProps: Partial<SelectCampaignProps> = {
-    appliedCampaign,
+    campaigns: selectableCampaigns,
+    selectedCampaign,
     selectedStage,
-    editCampaign,
+    editCampaign: (value) => editCampaign(value as any),
   }
 
   const responseProps: SetResponseProps = {
