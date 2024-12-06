@@ -526,7 +526,7 @@
     "defaultMessage": "上傳檔案"
   },
   "6pc948": {
-    "defaultMessage": "投稿七日書自由寫"
+    "defaultMessage": "參與活動"
   },
   "6q0G5e": {
     "defaultMessage": "加入成功",
@@ -947,6 +947,9 @@
   "Dom0EF": {
     "defaultMessage": "驗證成功",
     "description": "src/components/GlobalToast/index.tsx"
+  },
+  "DpbBcd": {
+    "defaultMessage": "選擇活動⋯"
   },
   "DqQvtL": {
     "defaultMessage": "解除封鎖",
@@ -1566,6 +1569,9 @@
     "defaultMessage": "教學指南",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
+  "P/7t1k": {
+    "defaultMessage": "請選定參與活動的投稿日程"
+  },
   "P3y9Bo": {
     "defaultMessage": "前往簽署",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -1901,9 +1907,6 @@
   "VqdOGQ": {
     "defaultMessage": "相關推薦",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
-  },
-  "VrK0Q0": {
-    "defaultMessage": "請選擇⋯"
   },
   "VrOoVf": {
     "defaultMessage": "Matters 不會透過任何渠道主動詢問你的錢包私鑰。",
@@ -2301,6 +2304,9 @@
   },
   "d5+b8r": {
     "defaultMessage": "限制級內容"
+  },
+  "d5bM8A": {
+    "defaultMessage": "投稿日程⋯"
   },
   "dAPUJp": {
     "defaultMessage": "流星雨的絢爛光芒足以點亮夜空。流星號徽章紀念你曾參與「遊牧者計畫」。",
