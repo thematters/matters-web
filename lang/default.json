@@ -500,6 +500,9 @@
     "defaultMessage": "subscribers_empty",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "6Sj2lN": {
+    "defaultMessage": "Claim"
+  },
   "6Vznnt": {
     "defaultMessage": "left a comment in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"

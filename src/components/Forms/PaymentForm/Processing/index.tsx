@@ -14,7 +14,12 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_USDT_VISITOR,
 } from '~/common/enums'
-import { CurationABI, CurationVaultABI } from '~/common/utils'
+import {
+  CurationABI,
+  CurationVaultABI,
+  fromGlobalId,
+  toCurationVaultUID,
+} from '~/common/utils'
 import {
   Dialog,
   Icon,
@@ -233,7 +238,12 @@ const USDTProcessingForm: React.FC<Props> = ({
     address: contract.Optimism.curationVaultAddress,
     abi: CurationVaultABI,
     functionName: 'curate',
-    args: [recipient.id, contract.Optimism.tokenAddress, normalizedAmount, uri],
+    args: [
+      toCurationVaultUID(fromGlobalId(recipient.id).id),
+      contract.Optimism.tokenAddress,
+      normalizedAmount,
+      uri,
+    ],
   })
 
   const {

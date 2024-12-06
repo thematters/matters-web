@@ -8,6 +8,7 @@ import {
   Icon,
   RemoveWalletLoginDialog,
   TableView,
+  useVaultBalanceUSDT,
   ViewerContext,
 } from '~/components'
 import { SocialAccountType } from '~/gql/graphql'
@@ -29,6 +30,9 @@ const Wallet = () => {
   )
   const canRemoveNonFacebookLogins =
     +canEmailLogin + +canWalletLogin + nonFacebookSocials.length > 1
+
+  const { data: vaultBalanceUSDT } = useVaultBalanceUSDT()
+  const hasVaultBalanceUSDT = vaultBalanceUSDT && vaultBalanceUSDT > 0
 
   return (
     <AddWalletLoginDialog>
@@ -61,10 +65,17 @@ const Wallet = () => {
                   right={
                     ethAddress ? undefined : (
                       <SettingsButton onClick={openAddWalletLoginDialog}>
-                        <FormattedMessage
-                          defaultMessage="Connect"
-                          id="+vVZ/G"
-                        />
+                        {hasVaultBalanceUSDT ? (
+                          <FormattedMessage
+                            defaultMessage="Claim"
+                            id="6Sj2lN"
+                          />
+                        ) : (
+                          <FormattedMessage
+                            defaultMessage="Connect"
+                            id="+vVZ/G"
+                          />
+                        )}
                       </SettingsButton>
                     )
                   }

@@ -9,7 +9,13 @@ import {
 } from 'wagmi'
 
 import { contract } from '~/common/enums'
-import { featureSupportedChains, MaxApprovedUSDTAmount } from '~/common/utils'
+import {
+  CurationVaultABI,
+  featureSupportedChains,
+  fromGlobalId,
+  MaxApprovedUSDTAmount,
+  toCurationVaultUID,
+} from '~/common/utils'
 import { ViewerContext } from '~/components'
 
 export const useAllowanceUSDT = (useCurationVault: boolean) => {
@@ -56,6 +62,22 @@ export const useBalanceEther = ({
 
   return useBalance({
     address: (addr || viewerEthAddress) as `0x${string}`,
+    chainId: targetNetwork.id,
+    cacheTime: 5_000,
+  })
+}
+
+export const useVaultBalanceUSDT = () => {
+  const viewer = useContext(ViewerContext)
+  const viewerId = viewer.id
+  const uid = toCurationVaultUID(fromGlobalId(viewerId).id)
+  const targetNetwork = featureSupportedChains.curation[0]
+
+  return useContractRead({
+    address: contract.Optimism.curationVaultAddress,
+    abi: CurationVaultABI,
+    functionName: 'erc20Balances',
+    args: [uid, contract.Optimism.tokenAddress],
     chainId: targetNetwork.id,
     cacheTime: 5_000,
   })

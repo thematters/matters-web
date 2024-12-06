@@ -500,6 +500,9 @@
     "defaultMessage": "目前總訂閱人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "6Sj2lN": {
+    "defaultMessage": "提領支持"
+  },
   "6Vznnt": {
     "defaultMessage": "在你的圍爐中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
