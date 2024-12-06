@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog } from '~/components'
+import { Dialog, toast } from '~/components'
 import { SetPublishISCNProps } from '~/components/Editor'
 
 import ListItem from '../../ListItem'
@@ -53,7 +53,8 @@ const SettingsList = ({
   collectionCount,
   tagsCount,
 
-  appliedCampaign,
+  campaigns,
+  selectedCampaign,
   selectedStage,
   editCampaign,
 
@@ -68,6 +69,29 @@ const SettingsList = ({
     toggleComment,
     disableChangeCanComment,
   }
+  const handleConfirm = () => {
+    if (
+      selectedCampaign &&
+      selectedCampaign.stages.length > 0 &&
+      !selectedStage
+    ) {
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="Please select a date of activity "
+            id="P/7t1k"
+          />
+        ),
+      })
+      return
+    }
+
+    if (onConfirm) {
+      onConfirm()
+    } else {
+      forward('confirm')
+    }
+  }
 
   return (
     <>
@@ -78,7 +102,7 @@ const SettingsList = ({
         rightBtn={
           <Dialog.TextButton
             text={confirmButtonText}
-            onClick={onConfirm ? onConfirm : () => forward('confirm')}
+            onClick={handleConfirm}
             loading={saving}
             disabled={disabled}
           />
@@ -108,7 +132,7 @@ const SettingsList = ({
             </ListItem>
           )}
 
-          {appliedCampaign && editCampaign && (
+          {campaigns && campaigns.length > 0 && editCampaign && (
             <section className={styles.campaign}>
               <h3 className={styles.title}>
                 <FormattedMessage
@@ -117,7 +141,8 @@ const SettingsList = ({
                 />
               </h3>
               <SelectCampaign
-                appliedCampaign={appliedCampaign}
+                campaigns={campaigns}
+                selectedCampaign={selectedCampaign}
                 selectedStage={selectedStage}
                 editCampaign={editCampaign}
               />
@@ -187,7 +212,7 @@ const SettingsList = ({
               />
               <Dialog.TextButton
                 text={confirmButtonText}
-                onClick={onConfirm ? onConfirm : () => forward('confirm')}
+                onClick={handleConfirm}
                 loading={saving}
                 disabled={disabled}
               />

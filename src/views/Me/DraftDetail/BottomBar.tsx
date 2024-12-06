@@ -10,7 +10,7 @@ import {
 import BottomBar from '~/components/Editor/BottomBar'
 import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
 import {
-  getSelectCampaign,
+  getSelectCampaigns,
   SelectCampaignProps,
 } from '~/components/Editor/SelectCampaign'
 import { SidebarIndentProps } from '~/components/Editor/Sidebar/Indent'
@@ -71,8 +71,12 @@ const EditDraftBottomBar = ({
   const hasOwnCircle = ownCircles && ownCircles.length >= 1
   const tags = (draft.tags || []).map(toDigestTagPlaceholder)
 
-  const { appliedCampaign, selectedStage } = getSelectCampaign({
-    applied: campaigns && campaigns[0],
+  const {
+    campaigns: selectableCampaigns,
+    selectedCampaign,
+    selectedStage,
+  } = getSelectCampaigns({
+    applied: campaigns,
     attached: draft.campaigns,
     createdAt: draft.createdAt,
   })
@@ -124,9 +128,10 @@ const EditDraftBottomBar = ({
     toggleIndent,
     indentSaving,
 
-    appliedCampaign,
+    campaigns: selectableCampaigns,
+    selectedCampaign,
     selectedStage,
-    editCampaign,
+    editCampaign: (value) => editCampaign(value as any),
   }
 
   return (
