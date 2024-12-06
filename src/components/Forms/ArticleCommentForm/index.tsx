@@ -1,4 +1,5 @@
 import { Editor } from '@matters/matters-editor'
+import classNames from 'classnames'
 import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -38,6 +39,7 @@ export interface ArticleCommentFormProps {
   showClear?: boolean
   placeholder?: string
 
+  playAnimation?: boolean
   isFallbackEditor?: boolean
   setEditor?: (editor: Editor | null) => void
 }
@@ -54,6 +56,7 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
   showClear,
   placeholder,
   isFallbackEditor,
+  playAnimation,
   setEditor: propsSetEditor,
 }) => {
   const intl = useIntl()
@@ -178,9 +181,14 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
     handleSubmit()
   })
 
+  const formClasses = classNames({
+    [styles.form]: true,
+    [styles.playAnimation]: playAnimation,
+  })
+
   return (
     <form
-      className={styles.form}
+      className={formClasses}
       id={formStorageKey}
       onSubmit={handleSubmit}
       aria-label={intl.formatMessage({

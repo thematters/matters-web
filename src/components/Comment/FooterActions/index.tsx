@@ -283,6 +283,7 @@ const BaseFooterActions = ({
               }}
               isInCommentDetail={isInCommentDetail}
               defaultContent={defaultContent}
+              playAnimation
             />
           </>
         )}
