@@ -29,7 +29,6 @@ interface HeadProps {
   path?: string
   image?: string | null
   noSuffix?: boolean
-  paymentPointer?: string | null
   jsonLdData?: Record<string, any> | null
   availableLanguages?: UserLanguage[]
 }
@@ -224,9 +223,7 @@ export const Head: React.FC<HeadProps> = (props) => {
             key="ld-json-data"
           />
         )}
-        {props.paymentPointer && (
-          <meta name="monetization" content={props.paymentPointer} />
-        )}
+
         {/* noindex for non-production enviroment */}
         {!isProdServingCanonical && (
           <meta name="robots" content="noindex, nofollow" key="robots" />

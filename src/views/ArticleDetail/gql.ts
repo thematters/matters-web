@@ -28,7 +28,6 @@ const articlePublicFragment = gql`
     language
     author {
       id
-      paymentPointer
       ...UserDigestRichUserPublic
       ...UserDigestRichUserPrivate
     }

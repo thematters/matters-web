@@ -5,6 +5,8 @@ interface Props {
   currency: string
   subValue?: number | string
   subCurrency?: string
+  subtitle?: React.ReactNode
+  weight?: 'normal' | 'medium'
 }
 
 export const CurrencyFormatter: React.FC<Props> = ({
@@ -12,15 +14,21 @@ export const CurrencyFormatter: React.FC<Props> = ({
   currency,
   subValue,
   subCurrency,
+  subtitle,
+  weight = 'medium',
 }) => {
   return (
     <span className={styles.currencyFormatter}>
-      <span className={[styles.currency, 'currency'].join(' ')}>
+      <span
+        className={[styles.currency, styles[`currency-${weight}`]].join(' ')}
+      >
         {currency}&nbsp;{value}
       </span>
 
+      {subtitle && <span className={styles.subtitle}>{subtitle}</span>}
+
       {subCurrency && (
-        <span className={[styles.subCurrency, 'subCurrency'].join(' ')}>
+        <span className={styles.subCurrency}>
           ≈&nbsp;{subCurrency}&nbsp;{subValue}
         </span>
       )}

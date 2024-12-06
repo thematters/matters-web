@@ -134,9 +134,6 @@
     "defaultMessage": "Matters ID 已设置，更多帐号相关设置可前往设置页修改",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
-  "0HdNPs": {
-    "defaultMessage": "{link1}：为增加创作者的收入来源，Matters 引入了 {link2} 与 {link3}，实现付款方与收款方即使使用不同的货币进行交易，也可以对交易进行自动币种转换。你可以通过 {link4}等服务配置 {link6}，获得来自 {link7} 平台的收入，在 Matters 网站与 IPFS 网络中均可使用。"
-  },
   "0JlaP1": {
     "defaultMessage": "Oops！链接已失效",
     "description": "src/views/Callback/UI.tsx"
@@ -702,6 +699,10 @@
   "9Vkz9W": {
     "defaultMessage": "图片面积不得超过 1 亿像素（如 10,000 x 10,000 像素）"
   },
+  "9WMs5q": {
+    "defaultMessage": "绑定钱包",
+    "description": "src/views/Me/Wallet/Balance"
+  },
   "9WRlF4": {
     "defaultMessage": "送出"
   },
@@ -1232,9 +1233,6 @@
   "IpMWC4": {
     "defaultMessage": "短时间内已发布多条动态，请先休息一会吧～"
   },
-  "Is5PqP": {
-    "defaultMessage": "跨账本协议"
-  },
   "ItUuuX": {
     "defaultMessage": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
@@ -1387,9 +1385,6 @@
   "Lhhi5l": {
     "defaultMessage": "作品已发布",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
-  "LklXfd": {
-    "defaultMessage": "跨链收款地址"
   },
   "LmiUWG": {
     "defaultMessage": "你无法对此对象进行该操作",
@@ -1958,15 +1953,9 @@
   "WQT8ZA": {
     "defaultMessage": "编辑选集"
   },
-  "WiGHyF": {
-    "defaultMessage": "Web Monetization 标准"
-  },
   "WpvsPu": {
     "defaultMessage": "订阅",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "WrQjnc": {
-    "defaultMessage": "收款地址已更新"
   },
   "WsPbZT": {
     "defaultMessage": "继续提现"
@@ -2321,6 +2310,9 @@
     "defaultMessage": "尚无屏蔽记录",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
+  "dK7Dnj": {
+    "defaultMessage": "🔥 免费提领"
+  },
   "dQhNbF": {
     "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
@@ -2543,9 +2535,6 @@
   },
   "i4OBEw": {
     "defaultMessage": "不能使用 “{name}”"
-  },
-  "i7cXnf": {
-    "defaultMessage": "钱包地址以“$”开头"
   },
   "iEJeQH": {
     "defaultMessage": "设置 Liker ID"
@@ -2889,9 +2878,6 @@
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
-  },
-  "p6D+Uc": {
-    "defaultMessage": "请输入地址"
   },
   "p9gEZh": {
     "defaultMessage": "动态最多支持 3 张图片"
@@ -3251,9 +3237,6 @@
   "vsD2wm": {
     "defaultMessage": "重置你的登录密码",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
-  },
-  "vyG38g": {
-    "defaultMessage": "钱包地址"
   },
   "w+6UiO": {
     "defaultMessage": "新增邀请"
