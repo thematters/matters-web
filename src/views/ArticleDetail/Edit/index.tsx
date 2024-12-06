@@ -31,7 +31,7 @@ import {
 import BottomBar from '~/components/Editor/BottomBar'
 import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
 import {
-  getSelectCampaign,
+  getSelectCampaigns,
   SelectCampaignProps,
 } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
@@ -53,6 +53,7 @@ import {
   DigestTagFragment,
   DirectImageUploadDoneMutation,
   DirectImageUploadMutation,
+  EditorSelectCampaignFragment,
   QueryEditArticleAssetsQuery,
   QueryEditArticleQuery,
   SingleFileUploadMutation,
@@ -63,7 +64,7 @@ import EditHeader from './Header'
 import PublishState from './PublishState'
 import styles from './styles.module.css'
 
-type Article = NonNullable<
+export type Article = NonNullable<
   QueryEditArticleQuery['article'] & {
     __typename: 'Article'
   }
@@ -142,20 +143,38 @@ const BaseEdit = ({ article }: { article: Article }) => {
 
   // campaign
   const appliedCampaigns = article.author.campaigns.edges?.map((e) => e.node)
-  const { appliedCampaign, selectedStage } = getSelectCampaign({
-    applied: appliedCampaigns && appliedCampaigns[0],
+  const {
+    campaigns: selectableCampaigns,
+    selectedCampaign: _selectedCampaign,
+    selectedStage: _selectedStage,
+  } = getSelectCampaigns({
+    applied: appliedCampaigns,
     attached: article.campaigns,
     createdAt: article.createdAt,
   })
 
   const [campaign, setCampaign] = useState<ArticleCampaignInput | undefined>(
-    appliedCampaign?.id && selectedStage
+    _selectedCampaign?.id && _selectedStage
       ? {
-          campaign: appliedCampaign.id,
-          stage: selectedStage,
+          campaign: _selectedCampaign.id,
+          stage: _selectedStage,
         }
       : undefined
   )
+
+  const [selectedCampaign, setSelectedCampaign] = useState<
+    EditorSelectCampaignFragment | undefined
+  >(_selectedCampaign)
+  const [selectedStage, setSelectedStage] = useState<string | undefined>(
+    _selectedStage
+  )
+
+  useEffect(() => {
+    setSelectedCampaign(
+      selectableCampaigns?.find((c) => c.id === campaign?.campaign)
+    )
+    setSelectedStage(campaign?.stage || undefined)
+  }, [campaign])
 
   const [requestForDonation, setRequestForDonation] = useState(
     article.requestForDonation
@@ -212,8 +231,9 @@ const BaseEdit = ({ article }: { article: Article }) => {
     indentSaving: false,
   }
   const campaignProps: Partial<SelectCampaignProps> = {
-    appliedCampaign,
-    selectedStage: campaign?.stage,
+    campaigns: selectableCampaigns,
+    selectedCampaign: selectedCampaign,
+    selectedStage: selectedStage,
     editCampaign: setCampaign,
   }
 
