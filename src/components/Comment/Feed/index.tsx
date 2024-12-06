@@ -1,8 +1,12 @@
 import classNames from 'classnames'
 import React from 'react'
 
-import { COMMENT_FEED_ID_PREFIX, TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
+import {
+  COMMENT_FEED_ID_PREFIX,
+  NEW_POST_COMMENT_MUTATION_RESULT,
+  TEST_ID,
+} from '~/common/enums'
+import { sessionStorage, toPath } from '~/common/utils'
 import {
   Avatar,
   AvatarSize,
@@ -80,11 +84,27 @@ const BaseCommentFeed = ({
     moment: node,
   })
 
+  const newPostCommentMutationResult = sessionStorage.get(
+    NEW_POST_COMMENT_MUTATION_RESULT
+  )
+
+  const isNewPostComment = newPostCommentMutationResult === id
+
+  const commentClasses = classNames({
+    [styles.comment]: true,
+    [styles.playSlideDownFade]: isNewPostComment,
+  })
+
   return (
     <article
-      className={styles.comment}
+      className={commentClasses}
       id={`${COMMENT_FEED_ID_PREFIX}${nodeId}`}
       data-test-id={TEST_ID.ARTICLE_COMMENT_FEED}
+      onAnimationEnd={() => {
+        if (isNewPostComment) {
+          sessionStorage.remove(NEW_POST_COMMENT_MUTATION_RESULT)
+        }
+      }}
     >
       <header className={styles.header}>
         <section className={styles.left}>

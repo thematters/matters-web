@@ -5,10 +5,17 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   MAX_ARTICLE_COMMENT_LENGTH,
+  NEW_POST_COMMENT_MUTATION_RESULT,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { dom, formStorage, sanitizeContent, stripHtml } from '~/common/utils'
+import {
+  dom,
+  formStorage,
+  sanitizeContent,
+  sessionStorage,
+  stripHtml,
+} from '~/common/utils'
 import {
   Button,
   SpinnerBlock,
@@ -113,6 +120,10 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
       await putComment({
         variables: { input },
         update: (cache, mutationResult) => {
+          sessionStorage.set(
+            NEW_POST_COMMENT_MUTATION_RESULT,
+            mutationResult.data?.putComment?.id || ''
+          )
           if (!!parentId && !isInCommentDetail) {
             updateArticleComments({
               cache,
