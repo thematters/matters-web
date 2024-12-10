@@ -132,6 +132,15 @@ const DeleteCommentDialog = ({
     const commentElements = document.querySelectorAll(
       `#${COMMENT_FEED_ID_PREFIX}${nodeId}`
     )
+
+    if (commentElements.length > 0) {
+      commentElements.forEach((commentElement) => {
+        commentElement.parentElement?.addEventListener('animationend', () => {
+          commentElement.parentElement?.classList.add(styles.hideComment)
+          onDelete()
+        })
+      })
+    }
     if (commentElements.length > 0 && !isDescendantComment) {
       commentElements.forEach((commentElement) => {
         commentElement.parentElement?.classList.add(styles.deletedComment)
@@ -143,14 +152,6 @@ const DeleteCommentDialog = ({
         )
       })
     }
-
-    await new Promise((resolve) => setTimeout(resolve, 1600))
-
-    commentElements.forEach((commentElement) => {
-      commentElement.parentElement?.classList.add(styles.hideComment)
-    })
-
-    await onDelete()
   }
 
   return (
