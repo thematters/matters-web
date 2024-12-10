@@ -180,6 +180,9 @@
   "0tRUjd": {
     "defaultMessage": "This comment has been hidden due to violation of community terms of services"
   },
+  "0zPaEM": {
+    "defaultMessage": "Matters will send {amount} USDT to your connected wallet via a contract transaction (Matters will temporarily cover the transaction fee)."
+  },
   "0zZd0T": {
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -843,6 +846,9 @@
   "BoN8lF": {
     "defaultMessage": "Provide support funds to",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
+  },
+  "C/4nS6": {
+    "defaultMessage": "Connect and claim"
   },
   "C3NKBg": {
     "defaultMessage": "Connected to {type}",
@@ -2770,6 +2776,9 @@
   },
   "mJEqC/": {
     "defaultMessage": "Go to {href}"
+  },
+  "mN1KwW": {
+    "defaultMessage": "Connect wallet and claim support"
   },
   "mObpsB": {
     "defaultMessage": "Insert Blockquote"

@@ -253,7 +253,13 @@ const Connect: React.FC<FormProps> = ({
             ),
           })
 
-          !!closeDialog && closeDialog()
+          if (submitCallback) {
+            submitCallback()
+          }
+
+          if (closeDialog) {
+            closeDialog()
+          }
         }
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any)

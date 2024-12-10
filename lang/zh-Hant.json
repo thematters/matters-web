@@ -180,6 +180,9 @@
   "0tRUjd": {
     "defaultMessage": "因違反社區約章，評論已被隱藏"
   },
+  "0zPaEM": {
+    "defaultMessage": "Matters 會通過合約交易將 {amount} USDT 發送至你綁定的錢包（Matters 將暫時承擔交易手續費）。"
+  },
   "0zZd0T": {
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -843,6 +846,9 @@
   "BoN8lF": {
     "defaultMessage": "遞出支持資金給",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
+  },
+  "C/4nS6": {
+    "defaultMessage": "綁定並提領"
   },
   "C3NKBg": {
     "defaultMessage": "{type} 已綁定",
@@ -2770,6 +2776,9 @@
   },
   "mJEqC/": {
     "defaultMessage": "跳轉至 {href}"
+  },
+  "mN1KwW": {
+    "defaultMessage": "綁定錢包並提領支持"
   },
   "mObpsB": {
     "defaultMessage": "插入引用"

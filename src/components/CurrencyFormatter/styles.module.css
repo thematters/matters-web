@@ -18,13 +18,13 @@
   }
 
   & .subCurrency {
-    padding-top: var(--sp8);
+    padding-top: var(--sp4);
     font-size: var(--text12);
     color: var(--color-grey);
   }
 
   & .subtitle {
-    padding-top: var(--sp8);
+    padding-top: var(--sp4);
     font-size: var(--text12);
   }
 }

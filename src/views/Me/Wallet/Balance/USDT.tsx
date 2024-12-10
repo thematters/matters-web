@@ -16,7 +16,7 @@ import {
   useBalanceUSDT,
   useVaultBalanceUSDT,
   ViewerContext,
-  WithdrawLockedTokensDialog,
+  WithdrawVaultUSDTDialog,
 } from '~/components'
 import { QuoteCurrency } from '~/gql/graphql'
 
@@ -78,7 +78,7 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   }
 
   return (
-    <WithdrawLockedTokensDialog>
+    <WithdrawVaultUSDTDialog amount={vaultBalanceUSDT}>
       {({ openDialog }) => (
         <section
           className={classes}
@@ -120,6 +120,6 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
           </TextIcon>
         </section>
       )}
-    </WithdrawLockedTokensDialog>
+    </WithdrawVaultUSDTDialog>
   )
 }
