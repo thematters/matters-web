@@ -1,15 +1,21 @@
+.momentComment {
+  padding: var(--sp8) 0;
+
+  @media (--sm-up) {
+    padding: var(--sp12) 0;
+  }
+}
+
 .playSlideDownFade {
   overflow: hidden;
-  animation: slide-down-fade 1.6s;
+  animation:
+    slide-down-fade 1.6s,
+    maintain-padding 1.6s;
 }
 
 @keyframes slide-down-fade {
   0% {
     max-height: 0;
-    padding-right: var(--sp16);
-    padding-left: var(--sp16);
-    margin-right: calc(-1 * var(--sp16));
-    margin-left: calc(-1 * var(--sp16));
     background: var(--color-green-lighter);
     opacity: 0;
   }
@@ -17,6 +23,21 @@
   /* 1s later */
   62.5% {
     background: var(--color-green-lighter);
+  }
+
+  100% {
+    max-height: 500px;
+    background: var(--color-white);
+    opacity: 1;
+  }
+}
+
+@keyframes maintain-padding {
+  0% {
+    padding-right: var(--sp16);
+    padding-left: var(--sp16);
+    margin-right: calc(-1 * var(--sp16));
+    margin-left: calc(-1 * var(--sp16));
   }
 
   /* keep the padding and margin not change */
@@ -28,13 +49,10 @@
   }
 
   100% {
-    max-height: 500px;
     padding-right: 0;
     padding-left: 0;
     margin-right: 0;
     margin-left: 0;
-    background: var(--color-white);
-    opacity: 1;
   }
 }
 

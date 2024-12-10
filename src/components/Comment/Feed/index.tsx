@@ -93,6 +93,7 @@ const BaseCommentFeed = ({
   const commentClasses = classNames({
     [styles.comment]: true,
     [styles.playSlideDownFade]: isNewPostComment,
+    [styles.momentComment]: isMoment,
   })
 
   return (
