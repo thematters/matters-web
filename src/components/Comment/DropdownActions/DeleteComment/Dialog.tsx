@@ -108,8 +108,31 @@ const DeleteCommentDialog = ({
     },
   })
 
-  const onDelete = async () => {
-    await deleteComment()
+  const playAnimationAndDelete = async () => {
+    // play animation
+    const commentElements = document.querySelectorAll(
+      `#${COMMENT_FEED_ID_PREFIX}${nodeId}`
+    )
+
+    if (commentElements.length > 0) {
+      commentElements.forEach((commentElement) => {
+        commentElement.parentElement?.addEventListener('animationend', () => {
+          commentElement.parentElement?.classList.add(styles.hideComment)
+          deleteComment()
+        })
+      })
+    }
+    if (commentElements.length > 0 && !isDescendantComment) {
+      commentElements.forEach((commentElement) => {
+        commentElement.parentElement?.classList.add(styles.deletedComment)
+      })
+    } else if (commentElements.length > 0 && isDescendantComment) {
+      commentElements.forEach((commentElement) => {
+        commentElement.parentElement?.classList.add(
+          styles.deletedDescendantComment
+        )
+      })
+    }
 
     toast.success({
       message: isMoment ? (
@@ -125,33 +148,6 @@ const DeleteCommentDialog = ({
         />
       ),
     })
-  }
-
-  const playAnimationAndDelete = async () => {
-    // play animation
-    const commentElements = document.querySelectorAll(
-      `#${COMMENT_FEED_ID_PREFIX}${nodeId}`
-    )
-
-    if (commentElements.length > 0) {
-      commentElements.forEach((commentElement) => {
-        commentElement.parentElement?.addEventListener('animationend', () => {
-          commentElement.parentElement?.classList.add(styles.hideComment)
-          onDelete()
-        })
-      })
-    }
-    if (commentElements.length > 0 && !isDescendantComment) {
-      commentElements.forEach((commentElement) => {
-        commentElement.parentElement?.classList.add(styles.deletedComment)
-      })
-    } else if (commentElements.length > 0 && isDescendantComment) {
-      commentElements.forEach((commentElement) => {
-        commentElement.parentElement?.classList.add(
-          styles.deletedDescendantComment
-        )
-      })
-    }
   }
 
   return (
