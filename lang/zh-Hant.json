@@ -134,9 +134,6 @@
     "defaultMessage": "Matters ID 已設置，更多帳號相關設置可前往設定頁修改",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
-  "0HdNPs": {
-    "defaultMessage": "{link1}：為增加創作者的收入來源，Matters 引入了 {link2} 與 {link3}，實現付款方與收款方即使使用不同的貨幣進行交易，也可以對交易進行自動幣種轉換。你可以通過 {link4}等服務配置 {link6}，獲得來自 {link7} 平臺的收入，在 Matters 網站與 IPFS 網絡中均可使用。"
-  },
   "0JlaP1": {
     "defaultMessage": "Oops！連結已失效",
     "description": "src/views/Callback/UI.tsx"
@@ -500,6 +497,9 @@
     "defaultMessage": "目前總訂閱人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "6Sj2lN": {
+    "defaultMessage": "提領支持"
+  },
   "6Vznnt": {
     "defaultMessage": "在你的圍爐中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
@@ -698,6 +698,10 @@
   },
   "9Vkz9W": {
     "defaultMessage": "圖片面積不得超過 1 億像素（如 10,000x10,000 像素）"
+  },
+  "9WMs5q": {
+    "defaultMessage": "綁定錢包",
+    "description": "src/views/Me/Wallet/Balance"
   },
   "9WRlF4": {
     "defaultMessage": "送出"
@@ -1232,9 +1236,6 @@
   "IpMWC4": {
     "defaultMessage": "短時間內已發布多條動態，請先休息一會吧～"
   },
-  "Is5PqP": {
-    "defaultMessage": "跨賬本協議"
-  },
   "ItUuuX": {
     "defaultMessage": "邀你加入圍爐 {circleName} ，你可以免費體驗 {freePeriod} 天",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
@@ -1387,9 +1388,6 @@
   "Lhhi5l": {
     "defaultMessage": "作品已發布",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
-  "LklXfd": {
-    "defaultMessage": "跨鏈收款地址"
   },
   "LmiUWG": {
     "defaultMessage": "你無法對此對象進行該操作",
@@ -1958,15 +1956,9 @@
   "WQT8ZA": {
     "defaultMessage": "編輯選集"
   },
-  "WiGHyF": {
-    "defaultMessage": "Web Monetization 標準"
-  },
   "WpvsPu": {
     "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "WrQjnc": {
-    "defaultMessage": "收款地址已更新"
   },
   "WsPbZT": {
     "defaultMessage": "繼續提現"
@@ -2324,6 +2316,9 @@
     "defaultMessage": "尚無封鎖紀錄",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
+  "dK7Dnj": {
+    "defaultMessage": "🔥 免費提領"
+  },
   "dQhNbF": {
     "defaultMessage": "付款將由 Stripe 處理，讓你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
@@ -2546,9 +2541,6 @@
   },
   "i4OBEw": {
     "defaultMessage": "不能使用「{name}」"
-  },
-  "i7cXnf": {
-    "defaultMessage": "錢包地址以「$」開頭"
   },
   "iEJeQH": {
     "defaultMessage": "設置 Liker ID"
@@ -2892,9 +2884,6 @@
   "p5qZnJ": {
     "defaultMessage": "讚賞了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
-  },
-  "p6D+Uc": {
-    "defaultMessage": "請輸入地址"
   },
   "p9gEZh": {
     "defaultMessage": "動態最多支持 3 張圖片"
@@ -3254,9 +3243,6 @@
   "vsD2wm": {
     "defaultMessage": "重置你的登入密碼",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
-  },
-  "vyG38g": {
-    "defaultMessage": "錢包地址"
   },
   "w+6UiO": {
     "defaultMessage": "新增邀請"

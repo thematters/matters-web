@@ -37,7 +37,6 @@ import {
   validateEmail,
   validatePassword,
   validatePaymentPassword,
-  validatePaymentPointer,
   validatePayoutAmount,
   validateTagName,
   validateUserName,
@@ -294,18 +293,6 @@ describe('utils/form/validate/validatePaymentPassword', () => {
     expect(validatePaymentPassword('你好世界🌍', intl)).toBe(error)
     expect(validatePaymentPassword('1234', intl)).toBe(error)
     expect(validatePaymentPassword('abcd', intl)).toBe(error)
-  })
-})
-
-describe('utils/form/validate/validatePaymentPointer', () => {
-  it('should validate payment pointer correctly', () => {
-    expect(validatePaymentPointer('', intl)).toBe('Required')
-    expect(validatePaymentPointer('$123456', intl)).toBeUndefined()
-
-    const error = 'The wallet address starts with "$".'
-    expect(validatePaymentPointer('你好世界🌍', intl)).toBe(error)
-    expect(validatePaymentPointer('1234', intl)).toBe(error)
-    expect(validatePaymentPointer('abcd', intl)).toBe(error)
   })
 })
 

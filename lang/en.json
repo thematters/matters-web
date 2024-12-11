@@ -134,9 +134,6 @@
     "defaultMessage": "Matters ID has been set up. More account info can be found in Settings",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
   },
-  "0HdNPs": {
-    "defaultMessage": "{link1}: In order to increase the sources of income for creators, Matters introduced {link2} and {link3}, enabling the payer and the payee to conduct transactions in different currencies. Through {link4}, and other services you can acqure a {link6}, and receive payments from {link7}, applicable on both Matters website and IPFS."
-  },
   "0JlaP1": {
     "defaultMessage": "Oops！This link has expired",
     "description": "src/views/Callback/UI.tsx"
@@ -500,6 +497,9 @@
     "defaultMessage": "subscribers_empty",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "6Sj2lN": {
+    "defaultMessage": "Claim"
+  },
   "6Vznnt": {
     "defaultMessage": "left a comment in your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
@@ -698,6 +698,10 @@
   },
   "9Vkz9W": {
     "defaultMessage": "Maximum image area is limited to 100 megapixels (for example, 10,000×10,000 pixels)."
+  },
+  "9WMs5q": {
+    "defaultMessage": "Connect",
+    "description": "src/views/Me/Wallet/Balance"
   },
   "9WRlF4": {
     "defaultMessage": "Send"
@@ -1232,9 +1236,6 @@
   "IpMWC4": {
     "defaultMessage": "You’ve posted several times in a short period. Please take a break."
   },
-  "Is5PqP": {
-    "defaultMessage": "Interledger Protocol"
-  },
   "ItUuuX": {
     "defaultMessage": "invites you to join the circle {circleName} , and you can experience it for {freePeriod} days for free",
     "description": "src/components/Notice/CircleNotice/CircleInvitationNotice.tsx"
@@ -1387,9 +1388,6 @@
   "Lhhi5l": {
     "defaultMessage": "Article published",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
-  "LklXfd": {
-    "defaultMessage": "Payment Pointer"
   },
   "LmiUWG": {
     "defaultMessage": "You do not have permissionn to perform this operation",
@@ -1958,15 +1956,9 @@
   "WQT8ZA": {
     "defaultMessage": "Edit collection"
   },
-  "WiGHyF": {
-    "defaultMessage": "Web Monetization standard"
-  },
   "WpvsPu": {
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "WrQjnc": {
-    "defaultMessage": "Payment pointer updated"
   },
   "WsPbZT": {
     "defaultMessage": "Continue payout"
@@ -2324,6 +2316,9 @@
     "defaultMessage": "No blocked users yet",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
+  "dK7Dnj": {
+    "defaultMessage": "🔥 Claim for free"
+  },
   "dQhNbF": {
     "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
@@ -2546,9 +2541,6 @@
   },
   "i4OBEw": {
     "defaultMessage": "\"{name}\" is invalid."
-  },
-  "i7cXnf": {
-    "defaultMessage": "The wallet address starts with \"$\"."
   },
   "iEJeQH": {
     "defaultMessage": "Liker ID"
@@ -2892,9 +2884,6 @@
   "p5qZnJ": {
     "defaultMessage": "liked",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
-  },
-  "p6D+Uc": {
-    "defaultMessage": "Enter Payment Pointer"
   },
   "p9gEZh": {
     "defaultMessage": "Up to 3 images can be uploaded"
@@ -3254,9 +3243,6 @@
   "vsD2wm": {
     "defaultMessage": "reset your login password",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
-  },
-  "vyG38g": {
-    "defaultMessage": "wallet address"
   },
   "w+6UiO": {
     "defaultMessage": "Add Invitation"

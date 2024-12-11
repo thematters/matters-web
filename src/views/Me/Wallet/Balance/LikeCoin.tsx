@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
 import { PATHS } from '~/common/enums'
@@ -115,6 +116,7 @@ export const LikeCoinBalance = ({
           currency="LIKE"
           subValue={formatAmount(total * exchangeRate, 2)}
           subCurrency={currency}
+          weight="normal"
         />
       </Wrapper>
     )
@@ -125,11 +127,15 @@ export const LikeCoinBalance = ({
       <Button
         spacing={[0, 12]}
         size={[null, '1.5rem']}
-        borderColor="black"
+        borderColor="green"
         href={PATHS.ME_SETTINGS_MISC}
       >
-        <TextIcon color="black" size={12}>
-          <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />
+        <TextIcon color="green" size={14}>
+          <FormattedMessage
+            defaultMessage="Connect"
+            description="src/views/Me/Wallet/Balance"
+            id="9WMs5q"
+          />
         </TextIcon>
       </Button>
     </Wrapper>
