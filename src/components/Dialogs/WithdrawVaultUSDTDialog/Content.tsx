@@ -6,6 +6,7 @@ import { Step } from './types'
 
 type WithdrawVaultUSDTDialogContentProps = {
   amount: number
+  type?: 'connectAndClaim' | 'claim'
   closeDialog: () => void
   forward: (step: Step) => void
   currStep: Step
@@ -23,7 +24,7 @@ const DynamicAddWalletLogin = dynamic(
 
 const WithdrawVaultUSDTDialogContent: React.FC<
   WithdrawVaultUSDTDialogContentProps
-> = ({ amount, closeDialog, forward, currStep }) => {
+> = ({ amount, type, closeDialog, forward, currStep }) => {
   const isIntro = currStep === 'intro'
   const isConnectWallet = currStep === 'connectWallet'
 
@@ -32,6 +33,7 @@ const WithdrawVaultUSDTDialogContent: React.FC<
       {isIntro && (
         <DynamicIntro
           amount={amount}
+          type={type}
           switchToConnectWallet={() => {
             forward('connectWallet')
           }}

@@ -2248,6 +2248,9 @@
     "defaultMessage": "Incorrect email or password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "c8n+rF": {
+    "defaultMessage": "Matters will send {amount} USDT to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
+  },
   "cAP9g5": {
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
@@ -2339,6 +2342,9 @@
   },
   "dTOtPO": {
     "defaultMessage": "Top Up"
+  },
+  "dUkC8R": {
+    "defaultMessage": "Claim USDT"
   },
   "dVbKzB": {
     "defaultMessage": "Comments and replies",
@@ -2442,6 +2448,9 @@
   "fWDtpq": {
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "fidQDr": {
+    "defaultMessage": "{amount} USDT pending claim"
   },
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"

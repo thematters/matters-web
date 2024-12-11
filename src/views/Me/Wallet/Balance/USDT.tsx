@@ -40,12 +40,12 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
     )
   )
   const balance = address ? balanceUSDT : vaultBalanceUSDT
-  const canWithdrawVaultBalance = !address && vaultBalanceUSDT > 0
+  const hasVaultBalance = vaultBalanceUSDT > 0
 
   const classes = classNames({
     [styles.assetsItem]: true,
     assetsItem: true, // global selector for overriding
-    [styles.clickable]: canWithdrawVaultBalance,
+    [styles.clickable]: hasVaultBalance,
   })
 
   if (!address && !vaultBalanceUSDT) {
@@ -78,12 +78,15 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   }
 
   return (
-    <WithdrawVaultUSDTDialog amount={vaultBalanceUSDT}>
+    <WithdrawVaultUSDTDialog
+      amount={vaultBalanceUSDT}
+      type={!!address ? 'claim' : 'connectAndClaim'}
+    >
       {({ openDialog }) => (
         <section
           className={classes}
-          onClick={canWithdrawVaultBalance ? openDialog : undefined}
-          role={canWithdrawVaultBalance ? 'button' : undefined}
+          onClick={hasVaultBalance ? openDialog : undefined}
+          role={hasVaultBalance ? 'button' : undefined}
         >
           <TextIcon
             icon={<Icon icon={IconTether} size={40} />}
@@ -94,26 +97,34 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
           </TextIcon>
 
           <TextIcon
-            icon={canWithdrawVaultBalance && <Icon icon={IconRight} />}
+            icon={hasVaultBalance && <Icon icon={IconRight} />}
             spacing={8}
             placement="left"
           >
             <CurrencyFormatter
               value={formatAmount(balance)}
               currency="USDT"
-              subCurrency={!canWithdrawVaultBalance ? currency : undefined}
+              subCurrency={!hasVaultBalance ? currency : undefined}
               subValue={
-                !canWithdrawVaultBalance
+                !hasVaultBalance
                   ? formatAmount(balance * exchangeRate, 2)
                   : undefined
               }
               subtitle={
-                canWithdrawVaultBalance && (
-                  <FormattedMessage
-                    defaultMessage="🔥 Claim for free"
-                    id="dK7Dnj"
-                  />
-                )
+                hasVaultBalance ? (
+                  !address ? (
+                    <FormattedMessage
+                      defaultMessage="🔥 Claim for free"
+                      id="dK7Dnj"
+                    />
+                  ) : (
+                    <FormattedMessage
+                      defaultMessage="{amount} USDT pending claim"
+                      id="fidQDr"
+                      values={{ amount: formatAmount(vaultBalanceUSDT) }}
+                    />
+                  )
+                ) : undefined
               }
               weight="normal"
             />

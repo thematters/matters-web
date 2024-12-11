@@ -2248,6 +2248,9 @@
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
+  "c8n+rF": {
+    "defaultMessage": "Matters 會通過合約交易將 {amount} USDT 發送至你綁定的錢包 {address}（Matters 將暫時承擔交易手續費）。如需幫助請聯繫 ask@matters.town"
+  },
   "cAP9g5": {
     "defaultMessage": "將你的評論在 {commentArticle} 中置頂",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
@@ -2339,6 +2342,9 @@
   },
   "dTOtPO": {
     "defaultMessage": "儲值"
+  },
+  "dUkC8R": {
+    "defaultMessage": "提領支持"
   },
   "dVbKzB": {
     "defaultMessage": "評論和回覆",
@@ -2442,6 +2448,9 @@
   "fWDtpq": {
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "fidQDr": {
+    "defaultMessage": "{amount} USDT 待提領"
   },
   "fnv5rD": {
     "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"

@@ -6,6 +6,7 @@ import { Step } from './types'
 
 interface WithdrawVaultUSDTDialogProps {
   amount: number
+  type?: 'connectAndClaim' | 'claim'
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
 }
 
@@ -15,6 +16,7 @@ const DynamicContent = dynamic(() => import('./Content'), {
 
 const BaseWithdrawVaultUSDTDialog = ({
   amount,
+  type,
   children,
 }: WithdrawVaultUSDTDialogProps) => {
   const {
@@ -35,6 +37,7 @@ const BaseWithdrawVaultUSDTDialog = ({
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <DynamicContent
           amount={amount}
+          type={type}
           closeDialog={closeDialog}
           forward={forward}
           currStep={currStep}
