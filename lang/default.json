@@ -184,9 +184,6 @@
   "0tRUjd": {
     "defaultMessage": "This comment has been hidden due to violation of community terms of services"
   },
-  "0zPaEM": {
-    "defaultMessage": "Matters will send {amount} USDT to your connected wallet via a contract transaction (Matters will temporarily cover the transaction fee)."
-  },
   "0zZd0T": {
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -400,6 +397,9 @@
   "50cquj": {
     "defaultMessage": "No discussion yet",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "55jJzY": {
+    "defaultMessage": "Claiming USDT"
   },
   "5CcjZy": {
     "defaultMessage": "Do you want to disconnect from {type}?",
@@ -1994,6 +1994,10 @@
   "XOEFDf": {
     "defaultMessage": "{total} articles"
   },
+  "XQ9bi3": {
+    "defaultMessage": "More",
+    "description": "src/components/Dialogs/WithdrawVaultUSDTDialog/Content.tsx"
+  },
   "XQTBu6": {
     "defaultMessage": "mentioned you in your circle broadcast comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -2247,9 +2251,6 @@
   "c/z318": {
     "defaultMessage": "Incorrect email or password",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
-  },
-  "c8n+rF": {
-    "defaultMessage": "Matters will send {amount} USDT to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
   },
   "cAP9g5": {
     "defaultMessage": "pinned your comment in {commentArticle}",
@@ -2528,6 +2529,9 @@
   },
   "hBLCwn": {
     "defaultMessage": "other amount"
+  },
+  "hDDFgp": {
+    "defaultMessage": "Matters will send {amount} to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
   },
   "hG2cBH": {
     "defaultMessage": "Subscribe Circle"
@@ -3015,6 +3019,9 @@
   "rADhX5": {
     "defaultMessage": "Unavailable",
     "description": "FORBIDDEN_BY_STATE"
+  },
+  "rAFb3E": {
+    "defaultMessage": "Matters will send {amount} to your connected wallet via a contract transaction (Matters will temporarily cover the transaction fee)."
   },
   "rDX3h6": {
     "defaultMessage": "Version Description"

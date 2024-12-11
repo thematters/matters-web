@@ -1,14 +1,17 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { formatAmount } from '~/common/utils'
+import { formatAmount, truncate } from '~/common/utils'
 import { Dialog, ViewerContext } from '~/components'
+
+import styles from './styles.module.css'
 
 type IntroProps = {
   type?: 'connectAndClaim' | 'claim'
   amount: number
   switchToConnectWallet: () => void
   closeDialog: () => void
+  onWithdraw: () => void
 }
 
 const Intro: React.FC<IntroProps> = ({
@@ -16,6 +19,7 @@ const Intro: React.FC<IntroProps> = ({
   amount,
   switchToConnectWallet,
   closeDialog,
+  onWithdraw,
 }) => {
   const viewer = useContext(ViewerContext)
   const address = viewer.info.ethAddress
@@ -42,18 +46,32 @@ const Intro: React.FC<IntroProps> = ({
           <p>
             {address ? (
               <FormattedMessage
-                defaultMessage="Matters will send {amount} USDT to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
-                id="c8n+rF"
+                defaultMessage="Matters will send {amount} to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
+                id="hDDFgp"
                 values={{
-                  amount: formatAmount(amount),
-                  address,
+                  amount: (
+                    <span className={styles.highlight}>
+                      {formatAmount(amount)} USDT
+                    </span>
+                  ),
+                  address: (
+                    <span className={styles.highlight}>
+                      {truncate(address)}
+                    </span>
+                  ),
                 }}
               />
             ) : (
               <FormattedMessage
-                defaultMessage="Matters will send {amount} USDT to your connected wallet via a contract transaction (Matters will temporarily cover the transaction fee)."
-                id="0zPaEM"
-                values={{ amount: formatAmount(amount) }}
+                defaultMessage="Matters will send {amount} to your connected wallet via a contract transaction (Matters will temporarily cover the transaction fee)."
+                id="rAFb3E"
+                values={{
+                  amount: (
+                    <span className={styles.highlight}>
+                      {formatAmount(amount)} USDT
+                    </span>
+                  ),
+                }}
               />
             )}
           </p>
@@ -79,7 +97,7 @@ const Intro: React.FC<IntroProps> = ({
                 />
               )
             }
-            onClick={switchToConnectWallet}
+            onClick={isClaimOnly ? onWithdraw : switchToConnectWallet}
           />
         }
       />

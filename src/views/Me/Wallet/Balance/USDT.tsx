@@ -11,6 +11,7 @@ import {
   Button,
   CurrencyFormatter,
   Icon,
+  Spinner,
   TextIcon,
   Translate,
   useBalanceUSDT,
@@ -30,8 +31,10 @@ interface USDTBalanceProps {
 export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   const viewer = useContext(ViewerContext)
   const address = viewer.info.ethAddress
-  const { data: balanceUSDTData } = useBalanceUSDT({})
-  const { data: vaultBalanceUSDTData } = useVaultBalanceUSDT()
+  const { data: balanceUSDTData, isLoading: balanceUSDTLoading } =
+    useBalanceUSDT({})
+  const { data: vaultBalanceUSDTData, isLoading: vaultBalanceUSDTLoading } =
+    useVaultBalanceUSDT()
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
   const vaultBalanceUSDT = parseFloat(
     formatUnits(
@@ -40,6 +43,7 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
     )
   )
   const balance = address ? balanceUSDT : vaultBalanceUSDT
+  const loading = balanceUSDTLoading || vaultBalanceUSDTLoading
   const hasVaultBalance = vaultBalanceUSDT > 0
 
   const classes = classNames({
@@ -96,39 +100,43 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
             <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
           </TextIcon>
 
-          <TextIcon
-            icon={hasVaultBalance && <Icon icon={IconRight} />}
-            spacing={8}
-            placement="left"
-          >
-            <CurrencyFormatter
-              value={formatAmount(balance)}
-              currency="USDT"
-              subCurrency={!hasVaultBalance ? currency : undefined}
-              subValue={
-                !hasVaultBalance
-                  ? formatAmount(balance * exchangeRate, 2)
-                  : undefined
-              }
-              subtitle={
-                hasVaultBalance ? (
-                  !address ? (
-                    <FormattedMessage
-                      defaultMessage="🔥 Claim for free"
-                      id="dK7Dnj"
-                    />
-                  ) : (
-                    <FormattedMessage
-                      defaultMessage="{amount} USDT pending claim"
-                      id="fidQDr"
-                      values={{ amount: formatAmount(vaultBalanceUSDT) }}
-                    />
-                  )
-                ) : undefined
-              }
-              weight="normal"
-            />
-          </TextIcon>
+          {loading ? (
+            <Spinner color="greyLight" size={14} />
+          ) : (
+            <TextIcon
+              icon={hasVaultBalance && <Icon icon={IconRight} />}
+              spacing={8}
+              placement="left"
+            >
+              <CurrencyFormatter
+                value={formatAmount(balance)}
+                currency="USDT"
+                subCurrency={!hasVaultBalance ? currency : undefined}
+                subValue={
+                  !hasVaultBalance
+                    ? formatAmount(balance * exchangeRate, 2)
+                    : undefined
+                }
+                subtitle={
+                  hasVaultBalance ? (
+                    !address ? (
+                      <FormattedMessage
+                        defaultMessage="🔥 Claim for free"
+                        id="dK7Dnj"
+                      />
+                    ) : (
+                      <FormattedMessage
+                        defaultMessage="{amount} USDT pending claim"
+                        id="fidQDr"
+                        values={{ amount: formatAmount(vaultBalanceUSDT) }}
+                      />
+                    )
+                  ) : undefined
+                }
+                weight="normal"
+              />
+            </TextIcon>
+          )}
         </section>
       )}
     </WithdrawVaultUSDTDialog>

@@ -184,9 +184,6 @@
   "0tRUjd": {
     "defaultMessage": "因违反社区规定，评论已被隐藏"
   },
-  "0zPaEM": {
-    "defaultMessage": "Matters 会通过合约交易将 {amount} USDT 发送到你绑定的钱包（Matters 将暂时承担交易手续费）。"
-  },
   "0zZd0T": {
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -400,6 +397,9 @@
   "50cquj": {
     "defaultMessage": "还没有众聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
+  },
+  "55jJzY": {
+    "defaultMessage": "正在提领支持金额"
   },
   "5CcjZy": {
     "defaultMessage": "确认要解绑 {type} 吗？",
@@ -1994,6 +1994,10 @@
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"
   },
+  "XQ9bi3": {
+    "defaultMessage": "详情",
+    "description": "src/components/Dialogs/WithdrawVaultUSDTDialog/Content.tsx"
+  },
   "XQTBu6": {
     "defaultMessage": "在你的围炉广播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -2247,9 +2251,6 @@
   "c/z318": {
     "defaultMessage": "邮箱或密码错误",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
-  },
-  "c8n+rF": {
-    "defaultMessage": "Matters 会通过合约交易将 {amount} USDT 发送至你绑定的钱包 {address}（Matters 将暂时承担交易手续费）。如需帮助请联系 ask@matters.town"
   },
   "cAP9g5": {
     "defaultMessage": "将你的评论在 {commentArticle} 中置顶",
@@ -2528,6 +2529,9 @@
   },
   "hBLCwn": {
     "defaultMessage": "其他金额"
+  },
+  "hDDFgp": {
+    "defaultMessage": "Matters 会通过合约交易将 {amount} 发送至你绑定的钱包 {address}（Matters 将暂时承担交易手续费）。如需帮助请联系 ask@matters.town"
   },
   "hG2cBH": {
     "defaultMessage": "订阅围炉"
@@ -3015,6 +3019,9 @@
   "rADhX5": {
     "defaultMessage": "不可用",
     "description": "FORBIDDEN_BY_STATE"
+  },
+  "rAFb3E": {
+    "defaultMessage": "Matters 会通过合约交易将 {amount} 发送到你绑定的钱包（Matters 将暂时承担交易手续费）。"
   },
   "rDX3h6": {
     "defaultMessage": "版本简述"
