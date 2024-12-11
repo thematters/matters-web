@@ -49,15 +49,19 @@ const getArticleStage = (article: CampaignArticlesPublicQueryArticle) => {
   return stage
 }
 
-const getArticleStageName = (
+const getLabel = (
   article: CampaignArticlesPublicQueryArticle,
-  lang: string
+  lang: string,
+  announcement: boolean
 ) => {
   const stage = getArticleStage(article)
 
-  // announcement if nullish
-  if (!stage) {
+  if (announcement) {
     return <FormattedMessage defaultMessage="Announcement" id="Sj+TN8" />
+  }
+
+  if (!stage) {
+    return ''
   }
 
   return stage[
@@ -218,20 +222,22 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
-        {edges.map(({ node, featured }, i) => (
+        {edges.map(({ node, featured, announcement }, i) => (
           <List.Item key={`${feedType}:${i}`}>
             <ArticleDigestFeed
               article={node}
               label={
                 <>
-                  {(isAll || isFeatured) && (
+                  {(isAll ||
+                    isFeatured ||
+                    getLabel(node, lang, announcement)) && (
                     <span
                       className={[
                         styles.articleLabel,
-                        getArticleStage(node)?.id ? '' : styles.announcement,
+                        announcement ? styles.announcement : '',
                       ].join(' ')}
                     >
-                      {getArticleStageName(node, lang)}
+                      {getLabel(node, lang, announcement)}
                     </span>
                   )}
                   {!isFeatured && featured && <FeaturedLabel />}
