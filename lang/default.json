@@ -49,6 +49,10 @@
   "+ixiPI": {
     "defaultMessage": "Delete moment"
   },
+  "+jt4rV": {
+    "defaultMessage": "Claim USDT support",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "+o9W2T": {
     "defaultMessage": "File upload failed, please verify the file link is valid, or manually download and upload again.",
     "description": "UNABLE_TO_UPLOAD_FROM_URL"
@@ -2777,9 +2781,6 @@
   "mJEqC/": {
     "defaultMessage": "Go to {href}"
   },
-  "mN1KwW": {
-    "defaultMessage": "Connect wallet and claim support"
-  },
   "mObpsB": {
     "defaultMessage": "Insert Blockquote"
   },
@@ -2806,6 +2807,9 @@
   },
   "ml3SZN": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
+  },
+  "mm2UAM": {
+    "defaultMessage": "Connect wallet and claim USDT"
   },
   "mp9SBo": {
     "defaultMessage": "Circle notifications",

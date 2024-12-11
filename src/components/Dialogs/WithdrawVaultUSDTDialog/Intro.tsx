@@ -20,8 +20,8 @@ const Intro: React.FC<IntroProps> = ({
         closeDialog={closeDialog}
         title={
           <FormattedMessage
-            defaultMessage="Connect wallet and claim support"
-            id="mN1KwW"
+            defaultMessage="Connect wallet and claim USDT"
+            id="mm2UAM"
           />
         }
       />

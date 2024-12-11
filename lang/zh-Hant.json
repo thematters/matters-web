@@ -49,6 +49,10 @@
   "+ixiPI": {
     "defaultMessage": "刪除動態"
   },
+  "+jt4rV": {
+    "defaultMessage": "提領支持",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "+o9W2T": {
     "defaultMessage": "檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳",
     "description": "UNABLE_TO_UPLOAD_FROM_URL"
@@ -2777,9 +2781,6 @@
   "mJEqC/": {
     "defaultMessage": "跳轉至 {href}"
   },
-  "mN1KwW": {
-    "defaultMessage": "綁定錢包並提領支持"
-  },
   "mObpsB": {
     "defaultMessage": "插入引用"
   },
@@ -2806,6 +2807,9 @@
   },
   "ml3SZN": {
     "defaultMessage": "至少 8 個字元，支持英文大小寫字母、數字和特殊符號"
+  },
+  "mm2UAM": {
+    "defaultMessage": "綁定錢包並提領支持"
   },
   "mp9SBo": {
     "defaultMessage": "圍爐通知",
