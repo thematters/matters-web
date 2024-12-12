@@ -275,6 +275,9 @@
     "defaultMessage": "解绑",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "2Sgvfr": {
+    "defaultMessage": "USDT {amount} 待提领"
+  },
   "2W0f9h": {
     "defaultMessage": "个人简介"
   },
@@ -2458,9 +2461,6 @@
   "fWDtpq": {
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
-  },
-  "fidQDr": {
-    "defaultMessage": "{amount} USDT 待提领"
   },
   "fko+MR": {
     "defaultMessage": "重试提领"

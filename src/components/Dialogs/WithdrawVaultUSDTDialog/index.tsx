@@ -16,8 +16,10 @@ const DynamicContent = dynamic(() => import('./Content'), {
 })
 
 const BaseWithdrawVaultUSDTDialog = () => {
-  const { show, closeDialog } = useDialogSwitch(true)
+  const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const { currStep, forward } = useStep<Step>('intro')
+
+  useEventListener(OPEN_WITHDRAW_VAULT_USDT_DIALOG, openDialog)
 
   return (
     <Dialog isOpen={show} onDismiss={closeDialog}>

@@ -128,8 +128,8 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
                   />
                 ) : (
                   <FormattedMessage
-                    defaultMessage="{amount} USDT pending claim"
-                    id="fidQDr"
+                    defaultMessage="USDT {amount} pending claim"
+                    id="2Sgvfr"
                     values={{ amount: formatAmount(vaultBalanceUSDT) }}
                   />
                 )
