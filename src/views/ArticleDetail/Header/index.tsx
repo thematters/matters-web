@@ -22,6 +22,9 @@ const Header = ({ article }: HeaderProps) => {
   const campaign = article.campaigns[0]?.campaign
   const campaignStage = article.campaigns[0]?.stage
   const { lang } = useContext(LanguageContext)
+  const isAnnouncement = article.campaigns[0]?.campaign?.announcements?.some(
+    (announcement: { id: string }) => announcement.id === article.id
+  )
 
   return (
     <section className={styles.header}>
@@ -36,6 +39,7 @@ const Header = ({ article }: HeaderProps) => {
                 page: 'campaignDetail',
                 campaign,
                 stage: campaignStage || undefined,
+                announcement: isAnnouncement,
               }).href
             }
             onClick={() => {
