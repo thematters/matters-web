@@ -31,6 +31,19 @@ jobs:
           node-version: '18'
           cache: 'npm'
 
+      - name: Setup rclone
+        if: github.base_ref == 'develop' || github.base_ref == 'master'
+        uses: AnimMouse/setup-rclone@v1
+        with:
+          rclone_config: |
+            [r2]
+            type = s3
+            provider = Cloudflare
+            access_key_id = ${{ secrets.RCLONE_CONFIG_R2_ACCESS_KEY_ID }}
+            secret_access_key = ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
+            endpoint = ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
+          disable_base64: true
+
       - name: Install Dependencies
         run: npm ci
 
@@ -81,18 +94,6 @@ jobs:
           rm -rf node_modules \
           && npm install --production \
           && zip -r --symlinks deploy.zip . -x .git/\*
-
-      - name: Setup rclone
-        if: github.base_ref == 'develop' || github.base_ref == 'master'
-        uses: AnimMouse/setup-rclone@v1
-        with:
-          rclone_config: |
-            [r2]
-            type = s3
-            provider = Cloudflare
-            access_key_id = ${{ secrets.RCLONE_CONFIG_R2_ACCESS_KEY_ID }}
-            secret_access_key = ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
-            endpoint = ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
 
       - name: Upload Assets (develop - R2)
         if: github.base_ref == 'develop'
