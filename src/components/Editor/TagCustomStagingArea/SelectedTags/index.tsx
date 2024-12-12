@@ -5,7 +5,7 @@ import { EditorRecommendedTagsQuery } from '~/gql/graphql'
 import styles from './styles.module.css'
 
 type EditorRecommendedTagsUserTagsEdgesNode = NonNullable<
-  NonNullable<EditorRecommendedTagsQuery['user']>['tags']['edges']
+  NonNullable<EditorRecommendedTagsQuery['viewer']>['tags']['edges']
 >[0]['node'] & { __typename: 'Tag' }
 
 type SelectedTagsProps = {

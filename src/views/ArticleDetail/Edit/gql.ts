@@ -35,7 +35,7 @@ export const GET_EDIT_ARTICLE = gql`
         ownCircles {
           ...DigestRichCirclePublic
         }
-        campaigns(input: { first: 1 }) {
+        campaigns(input: { first: null }) {
           edges {
             node {
               id

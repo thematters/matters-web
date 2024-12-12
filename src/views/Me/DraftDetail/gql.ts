@@ -61,7 +61,7 @@ export const DRAFT_DETAIL_VIEWER = gql`
   query DraftDetailViewerQuery {
     viewer {
       id
-      campaigns(input: { first: 1 }) {
+      campaigns(input: { first: null }) {
         edges {
           node {
             id

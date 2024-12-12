@@ -529,7 +529,7 @@
     "defaultMessage": "上传档案"
   },
   "6pc948": {
-    "defaultMessage": "投稿七日书自由写"
+    "defaultMessage": "参与活动"
   },
   "6q0G5e": {
     "defaultMessage": "加入成功",
@@ -943,6 +943,9 @@
   "Dom0EF": {
     "defaultMessage": "验证成功",
     "description": "src/components/GlobalToast/index.tsx"
+  },
+  "DpbBcd": {
+    "defaultMessage": "选择活动..."
   },
   "DqQvtL": {
     "defaultMessage": "解除屏蔽",
@@ -1565,6 +1568,9 @@
     "defaultMessage": "教学指南",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/SetAmountHeader/WhyOptimismDialog/index.tsx"
   },
+  "P/7t1k": {
+    "defaultMessage": "请选定参与活动的投稿日程"
+  },
   "P3y9Bo": {
     "defaultMessage": "前往签署",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -1900,9 +1906,6 @@
   "VqdOGQ": {
     "defaultMessage": "相关推荐",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
-  },
-  "VrK0Q0": {
-    "defaultMessage": "请选择⋯"
   },
   "VrOoVf": {
     "defaultMessage": "Matters 不会透过任何渠道主动询问你的钱包私钥。",
@@ -2306,6 +2309,9 @@
   },
   "d5+b8r": {
     "defaultMessage": "限制级内容"
+  },
+  "d5bM8A": {
+    "defaultMessage": "投稿日程⋯"
   },
   "dAPUJp": {
     "defaultMessage": "流星雨的绚烂光芒足以点亮夜空。流星号徽章纪念你曾参与「游牧者计划」。",
@@ -2748,7 +2754,7 @@
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
   },
   "m1wKuC": {
-    "defaultMessage": "参与七日书活动"
+    "defaultMessage": "参与活动"
   },
   "m4GG4b": {
     "defaultMessage": "删除选集"

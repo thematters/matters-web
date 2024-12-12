@@ -94,6 +94,7 @@ type ToPathArgs =
       campaign: CampaignArgs
       stage?: CampaignStageArgs
       featured?: boolean
+      announcement?: boolean
     }
   | {
       page: 'userProfile' | 'userCollections'
@@ -247,7 +248,7 @@ export const toPath = (
         href = `${href}?type=${args.stage.id}`
       } else if (args.featured) {
         href = `${href}?type=featured`
-      } else {
+      } else if (args.announcement) {
         href = `${href}?type=announcement`
       }
       break

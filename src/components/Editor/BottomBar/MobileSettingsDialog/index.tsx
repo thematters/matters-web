@@ -20,7 +20,8 @@ const BaseMobileSettingsDialog = ({
   children,
   canComment,
   toggleComment,
-  appliedCampaign,
+  campaigns,
+  selectedCampaign,
   selectedStage,
   editCampaign,
   indented,
@@ -62,7 +63,7 @@ const BaseMobileSettingsDialog = ({
 
         <Dialog.Content noSpacing>
           {/* campaign */}
-          {appliedCampaign && editCampaign && (
+          {campaigns && campaigns.length > 0 && editCampaign && (
             <section className={styles.campaign}>
               <h3 className={styles.title}>
                 <FormattedMessage
@@ -71,7 +72,8 @@ const BaseMobileSettingsDialog = ({
                 />
               </h3>
               <SelectCampaign
-                appliedCampaign={appliedCampaign}
+                campaigns={campaigns}
+                selectedCampaign={selectedCampaign}
                 selectedStage={selectedStage}
                 editCampaign={editCampaign}
               />
