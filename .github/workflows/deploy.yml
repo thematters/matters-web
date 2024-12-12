@@ -82,17 +82,21 @@ jobs:
           && npm install --production \
           && zip -r --symlinks deploy.zip . -x .git/\*
 
+      - name: Setup rclone
+        if: github.base_ref == 'develop' || github.base_ref == 'master'
+        uses: AnimMouse/setup-rclone@v1
+        with:
+          rclone_config: |
+            [r2]
+            type = s3
+            provider = Cloudflare
+            access_key_id = ${{ secrets.RCLONE_CONFIG_R2_ACCESS_KEY_ID }}
+            secret_access_key = ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
+            endpoint = ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
+
       - name: Upload Assets (develop - R2)
         if: github.base_ref == 'develop'
-        uses: andreiio/rclone-action@v1
-        env:
-          RCLONE_CONFIG_R2_TYPE: s3
-          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
-          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.RCLONE_CONFIG_R2_ACCESS_KEY_ID }}
-          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
-          RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
-        with:
-          args: sync .next/static r2:matters-assets-next-develop/_next/static -P
+        run: rclone sync .next/static r2:matters-assets-next-develop/_next/static -P
 
       - name: Deploy to EB (develop)
         if: github.base_ref == 'develop'
@@ -111,15 +115,7 @@ jobs:
 
       - name: Upload Assets (production - R2)
         if: github.base_ref == 'master'
-        uses: andreiio/rclone-action@v1
-        env:
-          RCLONE_CONFIG_R2_TYPE: s3
-          RCLONE_CONFIG_R2_PROVIDER: Cloudflare
-          RCLONE_CONFIG_R2_ACCESS_KEY_ID: ${{ secrets.RCLONE_CONFIG_R2_ACCESS_KEY_ID }}
-          RCLONE_CONFIG_R2_SECRET_ACCESS_KEY: ${{ secrets.RCLONE_CONFIG_R2_SECRET_ACCESS_KEY }}
-          RCLONE_CONFIG_R2_ENDPOINT: ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
-        with:
-          args: sync .next/static r2:matters-assets-next/_next/static -P
+        run: rclone sync .next/static r2:matters-assets-next/_next/static -P
 
       - name: Deploy to EB (production)
         if: github.base_ref == 'master'
