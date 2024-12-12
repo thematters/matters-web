@@ -79,8 +79,17 @@ const Intro: React.FC<IntroProps> = ({
       <Dialog.Footer
         btns={
           <Dialog.RoundedButton
-            text={<FormattedMessage defaultMessage="Cancel" id="47FYwb" />}
-            onClick={closeDialog}
+            text={
+              isClaimOnly ? (
+                <FormattedMessage defaultMessage="Claim" id="6Sj2lN" />
+              ) : (
+                <FormattedMessage
+                  defaultMessage="Connect and claim"
+                  id="C/4nS6"
+                />
+              )
+            }
+            onClick={isClaimOnly ? switchToConfirming : switchToConnectWallet}
           />
         }
         smUpBtns={

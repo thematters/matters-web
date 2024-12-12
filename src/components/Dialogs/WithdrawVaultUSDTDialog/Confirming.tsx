@@ -1,12 +1,16 @@
-import { useMutation } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { OPEN_WITHDRAW_VAULT_USDT_DIALOG, PATHS } from '~/common/enums'
 import { formatAmount, truncate } from '~/common/utils'
 import { Dialog, Spinner, toast, useRoute, ViewerContext } from '~/components'
-import { WithdrawVaultUsdtMutation } from '~/gql/graphql'
+import {
+  TransactionState,
+  WithdrawVaultUsdtMutation,
+  WithdrawVaultUsdtPollingQuery,
+} from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -20,6 +24,25 @@ const WITHDRAW_VAULT_USDT = gql`
     withdrawLockedTokens {
       transaction {
         id
+        state
+      }
+    }
+  }
+`
+
+const WITHDRAW_VAULT_USDT_POLLING = gql`
+  query WithdrawVaultUSDTPolling($id: ID!) {
+    viewer {
+      id
+      wallet {
+        transactions(input: { filter: { id: $id } }) {
+          edges {
+            node {
+              id
+              state
+            }
+          }
+        }
       }
     }
   }
@@ -31,54 +54,102 @@ const Confirming: React.FC<ConfirmingProps> = ({ amount, closeDialog }) => {
   const { router } = useRoute()
 
   const [withdraw] = useMutation<WithdrawVaultUsdtMutation>(WITHDRAW_VAULT_USDT)
+  const [txId, setTxId] = useState<string | null>(null)
+  const { startPolling, stopPolling } = useQuery<WithdrawVaultUsdtPollingQuery>(
+    WITHDRAW_VAULT_USDT_POLLING,
+    {
+      variables: { id: txId },
+      errorPolicy: 'none',
+      fetchPolicy: 'network-only',
+      skip: typeof window === 'undefined' || !txId,
+      notifyOnNetworkStatusChange: true,
+      onCompleted: (data) => {
+        const tx = data?.viewer?.wallet?.transactions?.edges?.[0]?.node
+
+        if (!tx) {
+          return
+        }
+
+        if (tx.state === TransactionState.Succeeded) {
+          stopPolling()
+          successToast()
+        } else if (
+          tx.state === TransactionState.Canceled ||
+          tx.state === TransactionState.Failed
+        ) {
+          stopPolling()
+          errorToast()
+        }
+      },
+    }
+  )
+
+  const successToast = () => {
+    toast.success({
+      message: (
+        <FormattedMessage defaultMessage="Claim successful" id="rG2xmp" />
+      ),
+      actions: [
+        {
+          content: (
+            <FormattedMessage
+              defaultMessage="More"
+              id="XQ9bi3"
+              description="src/components/Dialogs/WithdrawVaultUSDTDialog/Content.tsx"
+            />
+          ),
+          onClick: () => {
+            router.push(PATHS.ME_WALLET_TRANSACTIONS)
+          },
+        },
+      ],
+    })
+
+    closeDialog()
+  }
+
+  const errorToast = () => {
+    toast.error({
+      message: (
+        <FormattedMessage
+          defaultMessage="An issue occurred while claiming USDT. Please retry or contact ask@matters.town"
+          id="HJsl78"
+        />
+      ),
+      actions: [
+        {
+          content: (
+            <FormattedMessage defaultMessage="Retry claiming" id="fko+MR" />
+          ),
+          onClick: () => {
+            window.dispatchEvent(
+              new CustomEvent(OPEN_WITHDRAW_VAULT_USDT_DIALOG, {})
+            )
+          },
+        },
+      ],
+    })
+
+    closeDialog()
+  }
 
   const onWithdraw = async () => {
     try {
-      await withdraw()
+      const { data } = await withdraw()
+      const tx = data?.withdrawLockedTokens.transaction
 
-      toast.success({
-        message: (
-          <FormattedMessage defaultMessage="Claim successful" id="rG2xmp" />
-        ),
-        actions: [
-          {
-            content: (
-              <FormattedMessage
-                defaultMessage="More"
-                id="XQ9bi3"
-                description="src/components/Dialogs/WithdrawVaultUSDTDialog/Content.tsx"
-              />
-            ),
-            onClick: () => {
-              router.push(PATHS.ME_WALLET_TRANSACTIONS)
-            },
-          },
-        ],
-      })
+      // If there is a claming tx, start pooling instead
+      if (tx && tx.state === TransactionState.Pending) {
+        setTxId(tx.id)
+        startPolling(3000)
+      }
+      // Otherwise, claim is successful
+      else {
+        successToast()
+      }
     } catch (error) {
-      toast.error({
-        message: (
-          <FormattedMessage
-            defaultMessage="An issue occurred while claiming USDT. Please retry or contact ask@matters.town"
-            id="HJsl78"
-          />
-        ),
-        actions: [
-          {
-            content: (
-              <FormattedMessage defaultMessage="Retry claiming" id="fko+MR" />
-            ),
-            onClick: () => {
-              window.dispatchEvent(
-                new CustomEvent(OPEN_WITHDRAW_VAULT_USDT_DIALOG, {})
-              )
-            },
-          },
-        ],
-      })
+      errorToast()
     }
-
-    closeDialog()
   }
 
   useEffect(() => {
@@ -91,13 +162,6 @@ const Confirming: React.FC<ConfirmingProps> = ({ amount, closeDialog }) => {
         closeDialog={closeDialog}
         title={
           <FormattedMessage defaultMessage="Claiming in progress" id="HBdVkS" />
-        }
-        rightBtn={
-          <Dialog.TextButton
-            text={<FormattedMessage defaultMessage="Claiming..." id="ODncRd" />}
-            color="greyDarker"
-            disabled
-          />
         }
       />
 
@@ -123,6 +187,13 @@ const Confirming: React.FC<ConfirmingProps> = ({ amount, closeDialog }) => {
       </Dialog.Content>
 
       <Dialog.Footer
+        btns={
+          <Dialog.RoundedButton
+            color="greyDarker"
+            disabled
+            text={<FormattedMessage defaultMessage="Claiming..." id="ODncRd" />}
+          />
+        }
         smUpBtns={
           <Dialog.TextButton
             color="greyDarker"
