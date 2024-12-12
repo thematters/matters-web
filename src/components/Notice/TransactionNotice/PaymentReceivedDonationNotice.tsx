@@ -20,10 +20,6 @@ const PaymentReceivedDonationNotice = ({
 }) => {
   const viewer = useContext(ViewerContext)
 
-  if (!notice.actors) {
-    return null
-  }
-
   const tx = notice.tx
   const hasEthAddress = !!viewer?.info?.ethAddress
 

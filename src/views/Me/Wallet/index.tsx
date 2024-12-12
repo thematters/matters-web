@@ -17,6 +17,7 @@ import {
   TableView,
   TextIcon,
   ViewerContext,
+  WithdrawVaultUSDTDialog,
 } from '~/components'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -131,10 +132,14 @@ const Wallet = () => {
       <Layout.Main.Spacing>
         <TableView spacingX={0}>
           {hasPaymentPassword && <PaymentPassword />}
+
           <ViewStripeCustomerPortal />
+
           {hasStripeAccount && <ViewStripeAccount />}
         </TableView>
       </Layout.Main.Spacing>
+
+      <WithdrawVaultUSDTDialog />
     </Layout.Main>
   )
 }

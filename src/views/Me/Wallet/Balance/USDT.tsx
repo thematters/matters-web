@@ -5,7 +5,11 @@ import { formatUnits } from 'viem'
 
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
 import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
-import { contract, PATHS } from '~/common/enums'
+import {
+  contract,
+  OPEN_WITHDRAW_VAULT_USDT_DIALOG,
+  PATHS,
+} from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
   Button,
@@ -17,7 +21,6 @@ import {
   useBalanceUSDT,
   useVaultBalanceUSDT,
   ViewerContext,
-  WithdrawVaultUSDTDialog,
 } from '~/components'
 import { QuoteCurrency } from '~/gql/graphql'
 
@@ -52,6 +55,10 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
     [styles.clickable]: hasVaultBalance,
   })
 
+  const openWithdrawVaultUSDTDialog = () => {
+    window.dispatchEvent(new CustomEvent(OPEN_WITHDRAW_VAULT_USDT_DIALOG, {}))
+  }
+
   if (!address && !vaultBalanceUSDT) {
     return (
       <section className={classes}>
@@ -82,63 +89,56 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   }
 
   return (
-    <WithdrawVaultUSDTDialog
-      amount={vaultBalanceUSDT}
-      type={!!address ? 'claim' : 'connectAndClaim'}
+    <section
+      className={classes}
+      onClick={hasVaultBalance ? openWithdrawVaultUSDTDialog : undefined}
+      role={hasVaultBalance ? 'button' : undefined}
     >
-      {({ openDialog }) => (
-        <section
-          className={classes}
-          onClick={hasVaultBalance ? openDialog : undefined}
-          role={hasVaultBalance ? 'button' : undefined}
-        >
-          <TextIcon
-            icon={<Icon icon={IconTether} size={40} />}
-            size={16}
-            spacing={8}
-          >
-            <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
-          </TextIcon>
+      <TextIcon
+        icon={<Icon icon={IconTether} size={40} />}
+        size={16}
+        spacing={8}
+      >
+        <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
+      </TextIcon>
 
-          {loading ? (
-            <Spinner color="greyLight" size={14} />
-          ) : (
-            <TextIcon
-              icon={hasVaultBalance && <Icon icon={IconRight} />}
-              spacing={8}
-              placement="left"
-            >
-              <CurrencyFormatter
-                value={formatAmount(balance)}
-                currency="USDT"
-                subCurrency={!hasVaultBalance ? currency : undefined}
-                subValue={
-                  !hasVaultBalance
-                    ? formatAmount(balance * exchangeRate, 2)
-                    : undefined
-                }
-                subtitle={
-                  hasVaultBalance ? (
-                    !address ? (
-                      <FormattedMessage
-                        defaultMessage="🔥 Claim for free"
-                        id="dK7Dnj"
-                      />
-                    ) : (
-                      <FormattedMessage
-                        defaultMessage="{amount} USDT pending claim"
-                        id="fidQDr"
-                        values={{ amount: formatAmount(vaultBalanceUSDT) }}
-                      />
-                    )
-                  ) : undefined
-                }
-                weight="normal"
-              />
-            </TextIcon>
-          )}
-        </section>
+      {loading ? (
+        <Spinner color="greyLight" size={14} />
+      ) : (
+        <TextIcon
+          icon={hasVaultBalance && <Icon icon={IconRight} />}
+          spacing={8}
+          placement="left"
+        >
+          <CurrencyFormatter
+            value={formatAmount(balance)}
+            currency="USDT"
+            subCurrency={!hasVaultBalance ? currency : undefined}
+            subValue={
+              !hasVaultBalance
+                ? formatAmount(balance * exchangeRate, 2)
+                : undefined
+            }
+            subtitle={
+              hasVaultBalance ? (
+                !address ? (
+                  <FormattedMessage
+                    defaultMessage="🔥 Claim for free"
+                    id="dK7Dnj"
+                  />
+                ) : (
+                  <FormattedMessage
+                    defaultMessage="{amount} USDT pending claim"
+                    id="fidQDr"
+                    values={{ amount: formatAmount(vaultBalanceUSDT) }}
+                  />
+                )
+              ) : undefined
+            }
+            weight="normal"
+          />
+        </TextIcon>
       )}
-    </WithdrawVaultUSDTDialog>
+    </section>
   )
 }

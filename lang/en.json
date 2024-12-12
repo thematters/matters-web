@@ -398,9 +398,6 @@
     "defaultMessage": "No discussion yet",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
-  "55jJzY": {
-    "defaultMessage": "Claiming USDT"
-  },
   "5CcjZy": {
     "defaultMessage": "Do you want to disconnect from {type}?",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -883,6 +880,9 @@
     "defaultMessage": "Copy comment",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CcVXhc": {
+    "defaultMessage": "Matters is sending {amount} to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
+  },
   "CgPGAu": {
     "defaultMessage": ", connect your wallet to claim"
   },
@@ -1147,6 +1147,9 @@
   "HAlOn1": {
     "defaultMessage": "Name"
   },
+  "HBdVkS": {
+    "defaultMessage": "Claiming in progress"
+  },
   "HBxXD/": {
     "defaultMessage": "License"
   },
@@ -1156,6 +1159,9 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "Confirm Archiving"
+  },
+  "HJsl78": {
+    "defaultMessage": "An issue occurred while claiming USDT. Please retry or contact ask@matters.town"
   },
   "HPVOw/": {
     "defaultMessage": "Wallet",
@@ -1528,6 +1534,9 @@
   },
   "O7ozeo": {
     "defaultMessage": "Update profile"
+  },
+  "ODncRd": {
+    "defaultMessage": "Claiming..."
   },
   "OIj8pQ": {
     "defaultMessage": "Invitation Sent",
@@ -2453,6 +2462,9 @@
   "fidQDr": {
     "defaultMessage": "{amount} USDT pending claim"
   },
+  "fko+MR": {
+    "defaultMessage": "Retry claiming"
+  },
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"
   },
@@ -3028,6 +3040,9 @@
   },
   "rE7sE3": {
     "defaultMessage": "CC0 License"
+  },
+  "rG2xmp": {
+    "defaultMessage": "Claim successful"
   },
   "rHi+cL": {
     "defaultMessage": "Most readers",

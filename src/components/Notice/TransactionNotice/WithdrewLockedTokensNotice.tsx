@@ -18,7 +18,7 @@ const WithdrewLockedTokensNotice = ({
   const tx = notice.tx
   const blockchainTx = tx.blockchainTx
 
-  if (!notice.actors || !blockchainTx) {
+  if (!blockchainTx) {
     return null
   }
 

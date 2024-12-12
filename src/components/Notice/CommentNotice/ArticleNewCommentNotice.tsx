@@ -16,10 +16,6 @@ const ArticleNewCommentNotice = ({
 }: {
   notice: ArticleNewCommentNoticeFragment
 }) => {
-  if (!notice.actors) {
-    return null
-  }
-
   const commentArticle =
     notice.comment?.node.__typename === 'Article'
       ? notice.comment.node

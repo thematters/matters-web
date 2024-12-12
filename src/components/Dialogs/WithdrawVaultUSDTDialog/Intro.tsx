@@ -7,23 +7,21 @@ import { Dialog, ViewerContext } from '~/components'
 import styles from './styles.module.css'
 
 type IntroProps = {
-  type?: 'connectAndClaim' | 'claim'
   amount: number
   switchToConnectWallet: () => void
+  switchToConfirming: () => void
   closeDialog: () => void
-  onWithdraw: () => void
 }
 
 const Intro: React.FC<IntroProps> = ({
-  type = 'connectAndClaim',
   amount,
   switchToConnectWallet,
+  switchToConfirming,
   closeDialog,
-  onWithdraw,
 }) => {
   const viewer = useContext(ViewerContext)
   const address = viewer.info.ethAddress
-  const isClaimOnly = type === 'claim'
+  const isClaimOnly = !!address
 
   return (
     <>
@@ -97,7 +95,7 @@ const Intro: React.FC<IntroProps> = ({
                 />
               )
             }
-            onClick={isClaimOnly ? onWithdraw : switchToConnectWallet}
+            onClick={isClaimOnly ? switchToConfirming : switchToConnectWallet}
           />
         }
       />

@@ -398,9 +398,6 @@
     "defaultMessage": "还没有众聊",
     "description": "src/views/Circle/Discussion/Discussion.tsx"
   },
-  "55jJzY": {
-    "defaultMessage": "正在提领支持金额"
-  },
   "5CcjZy": {
     "defaultMessage": "确认要解绑 {type} 吗？",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -883,6 +880,9 @@
     "defaultMessage": "复制留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
   },
+  "CcVXhc": {
+    "defaultMessage": "Matters 正在通过合约交易将 {amount} 发送至你绑定的钱包 {address}（Matters 将暂时承担交易手续费）。如需帮助请联系 ask@matters.town"
+  },
   "CgPGAu": {
     "defaultMessage": "，绑定钱包后可领取"
   },
@@ -1147,6 +1147,9 @@
   "HAlOn1": {
     "defaultMessage": "用户名"
   },
+  "HBdVkS": {
+    "defaultMessage": "正在提领支持"
+  },
   "HBxXD/": {
     "defaultMessage": "版权声明"
   },
@@ -1156,6 +1159,9 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "确认归档"
+  },
+  "HJsl78": {
+    "defaultMessage": "提领支持金额时遇到问题，请重试或联系 ask@matters.town"
   },
   "HPVOw/": {
     "defaultMessage": "数字钱包",
@@ -1528,6 +1534,9 @@
   },
   "O7ozeo": {
     "defaultMessage": "修改个人资料"
+  },
+  "ODncRd": {
+    "defaultMessage": "提领中..."
   },
   "OIj8pQ": {
     "defaultMessage": "成功发送邀请",
@@ -2453,6 +2462,9 @@
   "fidQDr": {
     "defaultMessage": "{amount} USDT 待提领"
   },
+  "fko+MR": {
+    "defaultMessage": "重试提领"
+  },
   "fnv5rD": {
     "defaultMessage": "赞赏作品（当前 {total} 次赞赏）"
   },
@@ -3028,6 +3040,9 @@
   },
   "rE7sE3": {
     "defaultMessage": "CC0 公众领域贡献宣告"
+  },
+  "rG2xmp": {
+    "defaultMessage": "提领成功"
   },
   "rHi+cL": {
     "defaultMessage": "最多读者",

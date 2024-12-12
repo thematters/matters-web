@@ -1,1 +1,1 @@
-export type Step = 'intro' | 'connectWallet'
+export type Step = 'intro' | 'connectWallet' | 'confirming'

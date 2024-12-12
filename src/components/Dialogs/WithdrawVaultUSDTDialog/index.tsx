@@ -1,56 +1,44 @@
 import dynamic from 'next/dynamic'
 
-import { Dialog, SpinnerBlock, useDialogSwitch, useStep } from '~/components'
+import { OPEN_WITHDRAW_VAULT_USDT_DIALOG } from '~/common/enums'
+import {
+  Dialog,
+  SpinnerBlock,
+  useDialogSwitch,
+  useEventListener,
+  useStep,
+} from '~/components'
 
 import { Step } from './types'
-
-interface WithdrawVaultUSDTDialogProps {
-  amount: number
-  type?: 'connectAndClaim' | 'claim'
-  children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
-}
 
 const DynamicContent = dynamic(() => import('./Content'), {
   loading: () => <SpinnerBlock />,
 })
 
-const BaseWithdrawVaultUSDTDialog = ({
-  amount,
-  type,
-  children,
-}: WithdrawVaultUSDTDialogProps) => {
-  const {
-    show,
-    openDialog: baseOpenDialog,
-    closeDialog,
-  } = useDialogSwitch(true)
+const BaseWithdrawVaultUSDTDialog = () => {
+  const { show, closeDialog } = useDialogSwitch(true)
   const { currStep, forward } = useStep<Step>('intro')
 
-  const openDialog = () => {
-    baseOpenDialog()
-  }
-
   return (
-    <>
-      {children({ openDialog })}
-
-      <Dialog isOpen={show} onDismiss={closeDialog}>
-        <DynamicContent
-          amount={amount}
-          type={type}
-          closeDialog={closeDialog}
-          forward={forward}
-          currStep={currStep}
-        />
-      </Dialog>
-    </>
+    <Dialog isOpen={show} onDismiss={closeDialog}>
+      <DynamicContent
+        closeDialog={closeDialog}
+        forward={forward}
+        currStep={currStep}
+      />
+    </Dialog>
   )
 }
 
-export const WithdrawVaultUSDTDialog = (
-  props: WithdrawVaultUSDTDialogProps
-) => (
-  <Dialog.Lazy mounted={<BaseWithdrawVaultUSDTDialog {...props} />}>
-    {({ openDialog }) => <>{props.children({ openDialog })}</>}
-  </Dialog.Lazy>
-)
+export const WithdrawVaultUSDTDialog = () => {
+  const Children = ({ openDialog }: { openDialog: () => void }) => {
+    useEventListener(OPEN_WITHDRAW_VAULT_USDT_DIALOG, openDialog)
+    return <></>
+  }
+
+  return (
+    <Dialog.Lazy mounted={<BaseWithdrawVaultUSDTDialog />}>
+      {({ openDialog }) => <Children openDialog={openDialog} />}
+    </Dialog.Lazy>
+  )
+}
