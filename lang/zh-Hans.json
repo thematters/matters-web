@@ -480,6 +480,9 @@
   "6BbPcY": {
     "defaultMessage": "评论已被强制隐藏"
   },
+  "6Bxl4S": {
+    "defaultMessage": "提领支持金额（{amount} USDT）时遇到问题，点此重试或联系 ask@matters.town"
+  },
   "6CQaLH": {
     "defaultMessage": "请选择或输入金额"
   },
@@ -1290,9 +1293,6 @@
   "JkWLg6": {
     "defaultMessage": "被关注",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JlpeDH": {
-    "defaultMessage": "交易合约已将金额 {amount} USDT 发送至绑定钱包，点此查看详情"
   },
   "Jmg5do": {
     "defaultMessage": "作品已归档"
@@ -2866,6 +2866,9 @@
   "n2Sc6g": {
     "defaultMessage": "个人信息",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
+  },
+  "n3SsO1": {
+    "defaultMessage": "交易合约已将金额 {amount} 发送至绑定钱包，点此查看详情"
   },
   "n3shsQ": {
     "defaultMessage": "名称不正确",

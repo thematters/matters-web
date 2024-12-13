@@ -4,8 +4,6 @@ import { FormattedMessage } from 'react-intl'
 import { formatAmount, truncate } from '~/common/utils'
 import { Dialog, ViewerContext } from '~/components'
 
-import styles from './styles.module.css'
-
 type IntroProps = {
   amount: number
   switchToConnectWallet: () => void
@@ -48,14 +46,12 @@ const Intro: React.FC<IntroProps> = ({
                 id="hDDFgp"
                 values={{
                   amount: (
-                    <span className={styles.highlight}>
+                    <span className="u-highlight">
                       {formatAmount(amount)} USDT
                     </span>
                   ),
                   address: (
-                    <span className={styles.highlight}>
-                      {truncate(address)}
-                    </span>
+                    <span className="u-highlight">{truncate(address)}</span>
                   ),
                 }}
               />
@@ -65,7 +61,7 @@ const Intro: React.FC<IntroProps> = ({
                 id="rAFb3E"
                 values={{
                   amount: (
-                    <span className={styles.highlight}>
+                    <span className="u-highlight">
                       {formatAmount(amount)} USDT
                     </span>
                   ),

@@ -12,8 +12,6 @@ import {
   WithdrawVaultUsdtPollingQuery,
 } from '~/gql/graphql'
 
-import styles from './styles.module.css'
-
 type ConfirmingProps = {
   amount: number
   closeDialog: () => void
@@ -173,12 +171,12 @@ const Confirming: React.FC<ConfirmingProps> = ({ amount, closeDialog }) => {
               id="CcVXhc"
               values={{
                 amount: (
-                  <span className={styles.highlight}>
+                  <span className="u-highlight">
                     {formatAmount(amount)} USDT
                   </span>
                 ),
                 address: (
-                  <span className={styles.highlight}>{truncate(address)}</span>
+                  <span className="u-highlight">{truncate(address)}</span>
                 ),
               }}
             />

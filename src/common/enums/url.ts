@@ -16,6 +16,13 @@ export const URL_ME_SETTINGS = {
   OPEN_SET_EMAIL_DIALOG: { key: 'dialog', value: 'set-email' },
 }
 
+export const URL_ME_WALLET = {
+  OPEN_WITHDRAW_VAULT_USDT_DIALOG: {
+    key: 'dialog',
+    value: 'withdraw-vault-usdt',
+  },
+}
+
 export const URL_COLLECTION_DETAIL = {
   // ?sort=seq:asc,date:dsc
   SORTER_KEY: 'sort',

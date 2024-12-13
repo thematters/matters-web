@@ -480,6 +480,9 @@
   "6BbPcY": {
     "defaultMessage": "The comment has been forcibly hidden"
   },
+  "6Bxl4S": {
+    "defaultMessage": "Claim {amount} USDT failed. Click here to retry or contact ask@matters.town"
+  },
   "6CQaLH": {
     "defaultMessage": "Please select or enter amount"
   },
@@ -1290,9 +1293,6 @@
   "JkWLg6": {
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JlpeDH": {
-    "defaultMessage": "The vault contract has sent {amount} USDT to the linked wallet. Click here for details."
   },
   "Jmg5do": {
     "defaultMessage": "Archived Work"
@@ -2866,6 +2866,9 @@
   "n2Sc6g": {
     "defaultMessage": "My profile",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
+  },
+  "n3SsO1": {
+    "defaultMessage": "The contract has sent {amount} to the linked wallet. Click here for details."
   },
   "n3shsQ": {
     "defaultMessage": "Invalid name",

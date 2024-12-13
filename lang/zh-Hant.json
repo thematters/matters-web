@@ -480,6 +480,9 @@
   "6BbPcY": {
     "defaultMessage": "因違反社區約章，評論已被隱藏"
   },
+  "6Bxl4S": {
+    "defaultMessage": "提領支持金額（{amount} USDT）時遇到問題，點此重試或聯繫 ask@matters.town"
+  },
   "6CQaLH": {
     "defaultMessage": "請選擇或輸入金額"
   },
@@ -1290,9 +1293,6 @@
   "JkWLg6": {
     "defaultMessage": "被追蹤",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JlpeDH": {
-    "defaultMessage": "交易合約已將金額 {amount} USDT 發送至綁定錢包，點此查看詳情"
   },
   "Jmg5do": {
     "defaultMessage": "作品已封存"
@@ -2866,6 +2866,9 @@
   "n2Sc6g": {
     "defaultMessage": "個人資料",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
+  },
+  "n3SsO1": {
+    "defaultMessage": "交易合約已將金額 {amount} 發送至綁定錢包，點此查看詳情"
   },
   "n3shsQ": {
     "defaultMessage": "名稱不正確",

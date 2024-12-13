@@ -1,11 +1,13 @@
 import dynamic from 'next/dynamic'
+import { useEffect } from 'react'
 
-import { OPEN_WITHDRAW_VAULT_USDT_DIALOG } from '~/common/enums'
+import { OPEN_WITHDRAW_VAULT_USDT_DIALOG, URL_ME_WALLET } from '~/common/enums'
 import {
   Dialog,
   SpinnerBlock,
   useDialogSwitch,
   useEventListener,
+  useRoute,
   useStep,
 } from '~/components'
 
@@ -33,10 +35,22 @@ const BaseWithdrawVaultUSDTDialog = () => {
 }
 
 export const WithdrawVaultUSDTDialog = () => {
+  const { getQuery } = useRoute()
+
   const Children = ({ openDialog }: { openDialog: () => void }) => {
     useEventListener(OPEN_WITHDRAW_VAULT_USDT_DIALOG, openDialog)
     return <></>
   }
+
+  const shouldOpenDialog =
+    getQuery(URL_ME_WALLET.OPEN_WITHDRAW_VAULT_USDT_DIALOG.key) ===
+    URL_ME_WALLET.OPEN_WITHDRAW_VAULT_USDT_DIALOG.value
+
+  useEffect(() => {
+    if (shouldOpenDialog) {
+      window.dispatchEvent(new CustomEvent(OPEN_WITHDRAW_VAULT_USDT_DIALOG))
+    }
+  }, [shouldOpenDialog])
 
   return (
     <Dialog.Lazy mounted={<BaseWithdrawVaultUSDTDialog />}>
