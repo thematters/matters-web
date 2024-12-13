@@ -49,6 +49,10 @@
   "+ixiPI": {
     "defaultMessage": "刪除動態"
   },
+  "+jt4rV": {
+    "defaultMessage": "提領支持",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "+o9W2T": {
     "defaultMessage": "檔案上傳失敗，請確認檔案連結是否有效，或手動下載後再上傳",
     "description": "UNABLE_TO_UPLOAD_FROM_URL"
@@ -271,6 +275,9 @@
     "defaultMessage": "解綁",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "2Sgvfr": {
+    "defaultMessage": "USDT {amount} 待提領"
+  },
   "2W0f9h": {
     "defaultMessage": "個人簡介"
   },
@@ -472,6 +479,9 @@
   },
   "6BbPcY": {
     "defaultMessage": "因違反社區約章，評論已被隱藏"
+  },
+  "6Bxl4S": {
+    "defaultMessage": "提領支持金額（{amount} USDT）時遇到問題，點此重試或聯繫 ask@matters.town"
   },
   "6CQaLH": {
     "defaultMessage": "請選擇或輸入金額"
@@ -844,6 +854,9 @@
     "defaultMessage": "遞出支持資金給",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
   },
+  "C/4nS6": {
+    "defaultMessage": "綁定並提領"
+  },
   "C3NKBg": {
     "defaultMessage": "{type} 已綁定",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
@@ -872,6 +885,9 @@
   "CTJk3m": {
     "defaultMessage": "複製留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
+  "CcVXhc": {
+    "defaultMessage": "Matters 正在通過合約交易將 {amount} 發送至你綁定的錢包 {address}（Matters 將暫時承擔交易手續費）。如需幫助請聯繫 ask@matters.town"
   },
   "CgPGAu": {
     "defaultMessage": "，連接錢包領取"
@@ -1137,6 +1153,9 @@
   "HAlOn1": {
     "defaultMessage": "用戶名"
   },
+  "HBdVkS": {
+    "defaultMessage": "正在提領支持"
+  },
   "HBxXD/": {
     "defaultMessage": "版權聲明"
   },
@@ -1146,6 +1165,9 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "確認封存"
+  },
+  "HJsl78": {
+    "defaultMessage": "提領支持金額時遇到問題，請重試或聯繫 ask@matters.town"
   },
   "HPVOw/": {
     "defaultMessage": "數字錢包",
@@ -1271,9 +1293,6 @@
   "JkWLg6": {
     "defaultMessage": "被追蹤",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JlpeDH": {
-    "defaultMessage": "交易合約已將金額 {amount} USDT 發送至綁定錢包，點此查看詳情"
   },
   "Jmg5do": {
     "defaultMessage": "作品已封存"
@@ -1518,6 +1537,9 @@
   },
   "O7ozeo": {
     "defaultMessage": "修改個人資料"
+  },
+  "ODncRd": {
+    "defaultMessage": "提領中..."
   },
   "OIj8pQ": {
     "defaultMessage": "成功發送邀請",
@@ -1984,6 +2006,10 @@
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"
   },
+  "XQ9bi3": {
+    "defaultMessage": "詳情",
+    "description": "src/components/Dialogs/WithdrawVaultUSDTDialog/Content.tsx"
+  },
   "XQTBu6": {
     "defaultMessage": "在你的圍爐廣播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -2330,6 +2356,9 @@
   "dTOtPO": {
     "defaultMessage": "儲值"
   },
+  "dUkC8R": {
+    "defaultMessage": "提領支持"
+  },
   "dVbKzB": {
     "defaultMessage": "評論和回覆",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -2433,6 +2462,9 @@
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fko+MR": {
+    "defaultMessage": "重試提領"
+  },
   "fnv5rD": {
     "defaultMessage": "讚賞作品（當前 {total} 次讚賞）"
   },
@@ -2509,6 +2541,9 @@
   },
   "hBLCwn": {
     "defaultMessage": "其他金額"
+  },
+  "hDDFgp": {
+    "defaultMessage": "Matters 會通過合約交易將 {amount} 發送至你綁定的錢包 {address}（Matters 將暫時承擔交易手續費）。如需幫助請聯繫 ask@matters.town"
   },
   "hG2cBH": {
     "defaultMessage": "訂閱圍爐"
@@ -2764,6 +2799,10 @@
   "mBkZcw": {
     "defaultMessage": "喜歡動態"
   },
+  "mBmmr+": {
+    "defaultMessage": "訂閱",
+    "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
+  },
   "mCAIcg": {
     "defaultMessage": "站內閱讀熱門排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
@@ -2798,6 +2837,9 @@
   "ml3SZN": {
     "defaultMessage": "至少 8 個字元，支持英文大小寫字母、數字和特殊符號"
   },
+  "mm2UAM": {
+    "defaultMessage": "綁定錢包並提領支持"
+  },
   "mp9SBo": {
     "defaultMessage": "圍爐通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -2825,6 +2867,9 @@
     "defaultMessage": "個人資料",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
   },
+  "n3SsO1": {
+    "defaultMessage": "交易合約已將金額 {amount} 發送至綁定錢包，點此查看詳情"
+  },
   "n3shsQ": {
     "defaultMessage": "名稱不正確",
     "description": "NAME_INVALID"
@@ -2839,6 +2884,10 @@
   "nNB7KU": {
     "defaultMessage": "在",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "nVoVnb": {
+    "defaultMessage": "追蹤",
+    "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
   },
   "nWhqw9": {
     "defaultMessage": "立即發布"
@@ -2994,11 +3043,17 @@
     "defaultMessage": "不可用",
     "description": "FORBIDDEN_BY_STATE"
   },
+  "rAFb3E": {
+    "defaultMessage": "Matters 會通過合約交易將 {amount} 發送至你綁定的錢包（Matters 將暫時承擔交易手續費）。"
+  },
   "rDX3h6": {
     "defaultMessage": "版本簡述"
   },
   "rE7sE3": {
     "defaultMessage": "CC0 公眾領域貢獻宣告"
+  },
+  "rG2xmp": {
+    "defaultMessage": "提領成功"
   },
   "rHi+cL": {
     "defaultMessage": "最多讀者",

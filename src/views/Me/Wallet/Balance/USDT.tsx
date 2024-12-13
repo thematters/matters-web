@@ -5,18 +5,22 @@ import { formatUnits } from 'viem'
 
 import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
 import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
-import { contract, PATHS } from '~/common/enums'
+import {
+  contract,
+  OPEN_WITHDRAW_VAULT_USDT_DIALOG,
+  PATHS,
+} from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
   Button,
   CurrencyFormatter,
   Icon,
+  Spinner,
   TextIcon,
   Translate,
   useBalanceUSDT,
   useVaultBalanceUSDT,
   ViewerContext,
-  WithdrawLockedTokensDialog,
 } from '~/components'
 import { QuoteCurrency } from '~/gql/graphql'
 
@@ -30,8 +34,10 @@ interface USDTBalanceProps {
 export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   const viewer = useContext(ViewerContext)
   const address = viewer.info.ethAddress
-  const { data: balanceUSDTData } = useBalanceUSDT({})
-  const { data: vaultBalanceUSDTData } = useVaultBalanceUSDT()
+  const { data: balanceUSDTData, isLoading: balanceUSDTLoading } =
+    useBalanceUSDT({})
+  const { data: vaultBalanceUSDTData, isLoading: vaultBalanceUSDTLoading } =
+    useVaultBalanceUSDT()
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
   const vaultBalanceUSDT = parseFloat(
     formatUnits(
@@ -40,13 +46,18 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
     )
   )
   const balance = address ? balanceUSDT : vaultBalanceUSDT
-  const canWithdrawVaultBalance = !address && vaultBalanceUSDT > 0
+  const loading = balanceUSDTLoading || vaultBalanceUSDTLoading
+  const hasVaultBalance = vaultBalanceUSDT > 0
 
   const classes = classNames({
     [styles.assetsItem]: true,
     assetsItem: true, // global selector for overriding
-    [styles.clickable]: canWithdrawVaultBalance,
+    [styles.clickable]: hasVaultBalance,
   })
+
+  const openWithdrawVaultUSDTDialog = () => {
+    window.dispatchEvent(new CustomEvent(OPEN_WITHDRAW_VAULT_USDT_DIALOG, {}))
+  }
 
   if (!address && !vaultBalanceUSDT) {
     return (
@@ -78,48 +89,56 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   }
 
   return (
-    <WithdrawLockedTokensDialog>
-      {({ openDialog }) => (
-        <section
-          className={classes}
-          onClick={canWithdrawVaultBalance ? openDialog : undefined}
-          role={canWithdrawVaultBalance ? 'button' : undefined}
-        >
-          <TextIcon
-            icon={<Icon icon={IconTether} size={40} />}
-            size={16}
-            spacing={8}
-          >
-            <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
-          </TextIcon>
+    <section
+      className={classes}
+      onClick={hasVaultBalance ? openWithdrawVaultUSDTDialog : undefined}
+      role={hasVaultBalance ? 'button' : undefined}
+    >
+      <TextIcon
+        icon={<Icon icon={IconTether} size={40} />}
+        size={16}
+        spacing={8}
+      >
+        <Translate zh_hant="USDT" zh_hans="USDT" en="USDT" />
+      </TextIcon>
 
-          <TextIcon
-            icon={canWithdrawVaultBalance && <Icon icon={IconRight} />}
-            spacing={8}
-            placement="left"
-          >
-            <CurrencyFormatter
-              value={formatAmount(balance)}
-              currency="USDT"
-              subCurrency={!canWithdrawVaultBalance ? currency : undefined}
-              subValue={
-                !canWithdrawVaultBalance
-                  ? formatAmount(balance * exchangeRate, 2)
-                  : undefined
-              }
-              subtitle={
-                canWithdrawVaultBalance && (
+      {loading ? (
+        <Spinner color="greyLight" size={14} />
+      ) : (
+        <TextIcon
+          icon={hasVaultBalance && <Icon icon={IconRight} />}
+          spacing={8}
+          placement="left"
+        >
+          <CurrencyFormatter
+            value={formatAmount(balance)}
+            currency="USDT"
+            subCurrency={!hasVaultBalance ? currency : undefined}
+            subValue={
+              !hasVaultBalance
+                ? formatAmount(balance * exchangeRate, 2)
+                : undefined
+            }
+            subtitle={
+              hasVaultBalance ? (
+                !address ? (
                   <FormattedMessage
                     defaultMessage="🔥 Claim for free"
                     id="dK7Dnj"
                   />
+                ) : (
+                  <FormattedMessage
+                    defaultMessage="USDT {amount} pending claim"
+                    id="2Sgvfr"
+                    values={{ amount: formatAmount(vaultBalanceUSDT) }}
+                  />
                 )
-              }
-              weight="normal"
-            />
-          </TextIcon>
-        </section>
+              ) : undefined
+            }
+            weight="normal"
+          />
+        </TextIcon>
       )}
-    </WithdrawLockedTokensDialog>
+    </section>
   )
 }

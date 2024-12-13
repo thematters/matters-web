@@ -6,6 +6,10 @@
   padding: 0 var(--sp16);
   margin-top: var(--sp8);
 
+  @media (--sm-up) {
+    padding: 0;
+  }
+
   & .header {
     margin-bottom: var(--sp24);
   }

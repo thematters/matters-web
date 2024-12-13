@@ -1,12 +1,14 @@
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 
+import { capitalizeFirstLetter } from '~/common/utils'
+
 import styles from './styles.module.css'
 
 type TabProps = {
-  title: string
+  title: string | React.ReactNode
   selected?: boolean
-  onClick: () => void
+  onClick?: () => void
   theme?: 'black' | 'gold' | 'green'
 }
 
@@ -17,12 +19,13 @@ const Tab = ({ title, selected, onClick, theme }: TabProps) => {
     [styles.gold]: theme === 'gold',
     [styles.green]: theme === 'green',
   })
+
   return (
     <li
       className={liClasses}
       role="button"
       onClick={onClick}
-      data-title={title}
+      data-title={typeof title === 'string' ? title : ''}
     >
       {title}
     </li>
@@ -31,11 +34,13 @@ const Tab = ({ title, selected, onClick, theme }: TabProps) => {
 
 interface SquareTabsProps {
   sticky?: boolean
+  spacing?: 'sm' | 'md'
+  side?: React.ReactNode
 }
 
 export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
   Tab: typeof Tab
-} = ({ children, sticky }) => {
+} = ({ children, sticky, spacing, side }) => {
   const navRef = useRef<HTMLUListElement>(null)
   const containerRef = useRef<HTMLElement>(null)
   const $nav = navRef.current
@@ -97,27 +102,37 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
     }
   }, [$nav, $container, isDragging])
 
+  const wrapperClasses = classNames({
+    [styles.wrapper]: true,
+    [spacing ? styles[`spacing${capitalizeFirstLetter(spacing)}`] : '']:
+      !!spacing,
+    [styles.sticky]: sticky,
+  })
+
   const containerClasses = classNames({
     [styles.container]: true,
     [styles.showLeftGradient]: showLeftGradient,
     [styles.showRightGradient]: showRightGradient,
+    [styles.hasSide]: !!side,
   })
 
-  const navClasses = classNames({
+  const listClasses = classNames({
     [styles.tabList]: true,
-    [styles.sticky]: sticky,
   })
 
   return (
-    <section className={containerClasses} ref={containerRef}>
-      <ul
-        role="tablist"
-        className={navClasses}
-        ref={navRef}
-        onMouseDown={handleMouseDown}
-      >
-        {children}
-      </ul>
+    <section className={wrapperClasses}>
+      <section className={containerClasses} ref={containerRef}>
+        <ul
+          role="tablist"
+          className={listClasses}
+          ref={navRef}
+          onMouseDown={handleMouseDown}
+        >
+          {children}
+        </ul>
+        {side}
+      </section>
     </section>
   )
 }

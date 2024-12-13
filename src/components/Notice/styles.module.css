@@ -12,6 +12,7 @@
 
   & .header {
     display: flex;
+    align-items: flex-start;
 
     & > a {
       margin-right: var(--sp8);

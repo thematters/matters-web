@@ -49,6 +49,10 @@
   "+ixiPI": {
     "defaultMessage": "Delete moment"
   },
+  "+jt4rV": {
+    "defaultMessage": "Claim USDT support",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "+o9W2T": {
     "defaultMessage": "File upload failed, please verify the file link is valid, or manually download and upload again.",
     "description": "UNABLE_TO_UPLOAD_FROM_URL"
@@ -271,6 +275,9 @@
     "defaultMessage": "Disconnect",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "2Sgvfr": {
+    "defaultMessage": "USDT {amount} pending claim"
+  },
   "2W0f9h": {
     "defaultMessage": "Bio"
   },
@@ -472,6 +479,9 @@
   },
   "6BbPcY": {
     "defaultMessage": "The comment has been forcibly hidden"
+  },
+  "6Bxl4S": {
+    "defaultMessage": "Claim {amount} USDT failed. Click here to retry or contact ask@matters.town"
   },
   "6CQaLH": {
     "defaultMessage": "Please select or enter amount"
@@ -844,6 +854,9 @@
     "defaultMessage": "Provide support funds to",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
   },
+  "C/4nS6": {
+    "defaultMessage": "Connect and claim"
+  },
   "C3NKBg": {
     "defaultMessage": "Connected to {type}",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
@@ -872,6 +885,9 @@
   "CTJk3m": {
     "defaultMessage": "Copy comment",
     "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
+  "CcVXhc": {
+    "defaultMessage": "Matters is sending {amount} to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
   },
   "CgPGAu": {
     "defaultMessage": ", connect your wallet to claim"
@@ -1137,6 +1153,9 @@
   "HAlOn1": {
     "defaultMessage": "Name"
   },
+  "HBdVkS": {
+    "defaultMessage": "Claiming in progress"
+  },
   "HBxXD/": {
     "defaultMessage": "License"
   },
@@ -1146,6 +1165,9 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "Confirm Archiving"
+  },
+  "HJsl78": {
+    "defaultMessage": "An issue occurred while claiming USDT. Please retry or contact ask@matters.town"
   },
   "HPVOw/": {
     "defaultMessage": "Wallet",
@@ -1271,9 +1293,6 @@
   "JkWLg6": {
     "defaultMessage": "New followers",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
-  },
-  "JlpeDH": {
-    "defaultMessage": "The vault contract has sent {amount} USDT to the linked wallet. Click here for details."
   },
   "Jmg5do": {
     "defaultMessage": "Archived Work"
@@ -1518,6 +1537,9 @@
   },
   "O7ozeo": {
     "defaultMessage": "Update profile"
+  },
+  "ODncRd": {
+    "defaultMessage": "Claiming..."
   },
   "OIj8pQ": {
     "defaultMessage": "Invitation Sent",
@@ -1984,6 +2006,10 @@
   "XOEFDf": {
     "defaultMessage": "{total} articles"
   },
+  "XQ9bi3": {
+    "defaultMessage": "More",
+    "description": "src/components/Dialogs/WithdrawVaultUSDTDialog/Content.tsx"
+  },
   "XQTBu6": {
     "defaultMessage": "mentioned you in your circle broadcast comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
@@ -2330,6 +2356,9 @@
   "dTOtPO": {
     "defaultMessage": "Top Up"
   },
+  "dUkC8R": {
+    "defaultMessage": "Claim USDT"
+  },
   "dVbKzB": {
     "defaultMessage": "Comments and replies",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -2433,6 +2462,9 @@
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fko+MR": {
+    "defaultMessage": "Retry claiming"
+  },
   "fnv5rD": {
     "defaultMessage": "like article (current {total} likes)"
   },
@@ -2509,6 +2541,9 @@
   },
   "hBLCwn": {
     "defaultMessage": "other amount"
+  },
+  "hDDFgp": {
+    "defaultMessage": "Matters will send {amount} to your connected wallet {address} via a contract transaction (Matters will temporarily cover the transaction fee). For assistance, please contact ask@matters.town"
   },
   "hG2cBH": {
     "defaultMessage": "Subscribe Circle"
@@ -2764,6 +2799,10 @@
   "mBkZcw": {
     "defaultMessage": "Like moment"
   },
+  "mBmmr+": {
+    "defaultMessage": "Subscribed",
+    "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
+  },
   "mCAIcg": {
     "defaultMessage": "Hottest",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
@@ -2798,6 +2837,9 @@
   "ml3SZN": {
     "defaultMessage": "Minimum 8 characters. Uppercase/lowercase letters, numbers and symbols are allowed"
   },
+  "mm2UAM": {
+    "defaultMessage": "Connect wallet and claim USDT"
+  },
   "mp9SBo": {
     "defaultMessage": "Circle notifications",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -2825,6 +2867,9 @@
     "defaultMessage": "My profile",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
   },
+  "n3SsO1": {
+    "defaultMessage": "The contract has sent {amount} to the linked wallet. Click here for details."
+  },
   "n3shsQ": {
     "defaultMessage": "Invalid name",
     "description": "NAME_INVALID"
@@ -2839,6 +2884,10 @@
   "nNB7KU": {
     "defaultMessage": "replied your comment in",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "nVoVnb": {
+    "defaultMessage": "Followed",
+    "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
   },
   "nWhqw9": {
     "defaultMessage": "Publish Now"
@@ -2994,11 +3043,17 @@
     "defaultMessage": "Unavailable",
     "description": "FORBIDDEN_BY_STATE"
   },
+  "rAFb3E": {
+    "defaultMessage": "Matters will send {amount} to your connected wallet via a contract transaction (Matters will temporarily cover the transaction fee)."
+  },
   "rDX3h6": {
     "defaultMessage": "Version Description"
   },
   "rE7sE3": {
     "defaultMessage": "CC0 License"
+  },
+  "rG2xmp": {
+    "defaultMessage": "Claim successful"
   },
   "rHi+cL": {
     "defaultMessage": "Most readers",

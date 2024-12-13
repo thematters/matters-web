@@ -1,9 +1,12 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID } from '~/common/enums'
+import { PATHS, TEST_ID, URL_ME_WALLET } from '~/common/enums'
 import { explorers } from '~/common/utils/wallet'
-import { WithdrewLockedTokensNoticeFragment } from '~/gql/graphql'
+import {
+  TransactionState,
+  WithdrewLockedTokensNoticeFragment,
+} from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
@@ -17,12 +20,18 @@ const WithdrewLockedTokensNotice = ({
 }) => {
   const tx = notice.tx
   const blockchainTx = tx.blockchainTx
+  const isFailed =
+    tx.state === TransactionState.Failed ||
+    tx.state === TransactionState.Canceled
+  const link = isFailed
+    ? `${PATHS.ME_WALLET}?${URL_ME_WALLET.OPEN_WITHDRAW_VAULT_USDT_DIALOG.key}=${URL_ME_WALLET.OPEN_WITHDRAW_VAULT_USDT_DIALOG.value}`
+    : blockchainTx
+    ? `${explorers[blockchainTx.chain].url}/tx/${blockchainTx.txHash}`
+    : ''
 
-  if (!notice.actors || !blockchainTx) {
+  if (!isFailed && !blockchainTx) {
     return null
   }
-
-  const link = `${explorers[blockchainTx.chain].url}/tx/${blockchainTx.txHash}`
 
   return (
     <section
@@ -30,12 +39,24 @@ const WithdrewLockedTokensNotice = ({
       data-test-id={TEST_ID.NOTICE_WITHDREW_LOCKED_TOKENS}
     >
       <section className={styles.contentWrap}>
-        <a href={link} target="_blank">
-          <FormattedMessage
-            defaultMessage="The vault contract has sent {amount} USDT to the linked wallet. Click here for details."
-            id="JlpeDH"
-            values={{ amount: tx.amount }}
-          />
+        <a href={link}>
+          {isFailed ? (
+            <FormattedMessage
+              defaultMessage="Claim {amount} USDT failed. Click here to retry or contact ask@matters.town"
+              id="6Bxl4S"
+              values={{
+                amount: tx.amount,
+              }}
+            />
+          ) : (
+            <FormattedMessage
+              defaultMessage="The contract has sent {amount} to the linked wallet. Click here for details."
+              id="n3SsO1"
+              values={{
+                amount: <span className="u-highlight">{tx.amount} USDT</span>,
+              }}
+            />
+          )}
         </a>
       </section>
       <section className={styles.footer}>
@@ -58,6 +79,7 @@ WithdrewLockedTokensNotice.fragments = {
         id
         amount
         currency
+        state
         blockchainTx {
           chain
           txHash

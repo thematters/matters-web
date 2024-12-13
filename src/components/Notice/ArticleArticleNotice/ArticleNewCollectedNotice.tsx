@@ -16,10 +16,6 @@ const ArticleNewCollectedNotice = ({
 }: {
   notice: ArticleNewCollectedNoticeFragment
 }) => {
-  if (!notice.actors) {
-    return null
-  }
-
   return (
     <NoticeDigest
       notice={notice}
