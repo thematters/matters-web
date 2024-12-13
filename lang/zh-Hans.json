@@ -2321,7 +2321,7 @@
     "defaultMessage": "返回"
   },
   "d1mBsg": {
-    "defaultMessage": "新订阅者",
+    "defaultMessage": "关注的围炉",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "d4waan": {
@@ -2799,6 +2799,10 @@
   "mBkZcw": {
     "defaultMessage": "喜欢动态"
   },
+  "mBmmr+": {
+    "defaultMessage": "订阅",
+    "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
+  },
   "mCAIcg": {
     "defaultMessage": "站内阅读热门排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
@@ -2877,6 +2881,10 @@
   "nNB7KU": {
     "defaultMessage": "在 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "nVoVnb": {
+    "defaultMessage": "关注",
+    "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
   },
   "nWhqw9": {
     "defaultMessage": "立即发布"

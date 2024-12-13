@@ -2799,6 +2799,10 @@
   "mBkZcw": {
     "defaultMessage": "Like moment"
   },
+  "mBmmr+": {
+    "defaultMessage": "Subscribed",
+    "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
+  },
   "mCAIcg": {
     "defaultMessage": "Hottest",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
@@ -2877,6 +2881,10 @@
   "nNB7KU": {
     "defaultMessage": "replied your comment in",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "nVoVnb": {
+    "defaultMessage": "Followed",
+    "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
   },
   "nWhqw9": {
     "defaultMessage": "Publish Now"

@@ -1,6 +1,6 @@
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
-import { SegmentedTabs } from '~/components'
+import { SquareTabs } from '~/components'
 
 export type CircleContentAnalyticsType = 'public' | 'paywall'
 
@@ -10,30 +10,35 @@ interface Props {
 }
 
 const ContentTabs: React.FC<Props> = ({ type, setType }) => {
+  const intl = useIntl()
+
   const isPublic = type === 'public'
   const isPaywall = type === 'paywall'
 
   return (
-    <SegmentedTabs>
-      <SegmentedTabs.Tab
+    <SquareTabs spacing="md">
+      <SquareTabs.Tab
         onClick={() => setType('paywall')}
         selected={isPaywall}
-      >
-        <FormattedMessage
-          defaultMessage="Paywalled"
-          id="LOefol"
-          description="src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
-        />
-      </SegmentedTabs.Tab>
+        title={intl.formatMessage({
+          defaultMessage: 'Paywalled',
+          id: 'LOefol',
+          description:
+            'src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx',
+        })}
+      />
 
-      <SegmentedTabs.Tab onClick={() => setType('public')} selected={isPublic}>
-        <FormattedMessage
-          defaultMessage="Public"
-          id="/podGX"
-          description="src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
-        />
-      </SegmentedTabs.Tab>
-    </SegmentedTabs>
+      <SquareTabs.Tab
+        onClick={() => setType('public')}
+        selected={isPublic}
+        title={intl.formatMessage({
+          defaultMessage: 'Public',
+          id: '/podGX',
+          description:
+            'src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx',
+        })}
+      />
+    </SquareTabs>
   )
 }
 
