@@ -255,9 +255,7 @@ const Connect: React.FC<FormProps> = ({
 
           if (submitCallback) {
             submitCallback()
-          }
-
-          if (closeDialog) {
+          } else if (closeDialog) {
             closeDialog()
           }
         }
