@@ -24,10 +24,6 @@ const CircleNewDiscussionComments = ({
   const viewer = useContext(ViewerContext)
   const { comments, replies, mentions } = notice
 
-  if (!notice.actors) {
-    return null
-  }
-
   const isCircleOwner = notice.circle.owner.id === viewer.id
   const newDiscussionCount = comments?.length
   const replyCount = replies?.length

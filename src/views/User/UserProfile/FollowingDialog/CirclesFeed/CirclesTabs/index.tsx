@@ -1,4 +1,6 @@
-import { HorizontalRule, SegmentedTabs, Translate } from '~/components'
+import { useIntl } from 'react-intl'
+
+import { HorizontalRule, SquareTabs } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -10,30 +12,37 @@ interface CirclesFeedTypeProps {
 }
 
 const CirclesTabs = ({ type, setFeedType }: CirclesFeedTypeProps) => {
+  const intl = useIntl()
   const isFollowing = type === 'following'
   const isSubscribed = type === 'subscribed'
 
   return (
-    <>
-      <section className={styles.tabs}>
-        <SegmentedTabs>
-          <SegmentedTabs.Tab
-            onClick={() => setFeedType('following')}
-            selected={isFollowing}
-          >
-            <Translate zh_hant="追蹤" zh_hans="关注" en="Followed" />
-          </SegmentedTabs.Tab>
+    <section className={styles.tabs}>
+      <SquareTabs spacing="sm">
+        <SquareTabs.Tab
+          onClick={() => setFeedType('following')}
+          selected={isFollowing}
+          title={intl.formatMessage({
+            defaultMessage: 'Followed',
+            id: 'nVoVnb',
+            description:
+              'src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx',
+          })}
+        />
 
-          <SegmentedTabs.Tab
-            onClick={() => setFeedType('subscribed')}
-            selected={isSubscribed}
-          >
-            <Translate zh_hant="訂閱" zh_hans="订阅" en="Subscribed" />
-          </SegmentedTabs.Tab>
-        </SegmentedTabs>
-        <HorizontalRule />
-      </section>
-    </>
+        <SquareTabs.Tab
+          onClick={() => setFeedType('subscribed')}
+          selected={isSubscribed}
+          title={intl.formatMessage({
+            defaultMessage: 'Subscribed',
+            id: 'mBmmr+',
+            description:
+              'src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx',
+          })}
+        />
+      </SquareTabs>
+      <HorizontalRule />
+    </section>
   )
 }
 

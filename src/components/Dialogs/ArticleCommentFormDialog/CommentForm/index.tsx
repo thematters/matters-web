@@ -2,8 +2,17 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { MAX_ARTICLE_COMMENT_LENGTH } from '~/common/enums'
-import { dom, formStorage, sanitizeContent, stripHtml } from '~/common/utils'
+import {
+  MAX_ARTICLE_COMMENT_LENGTH,
+  NEW_POST_COMMENT_MUTATION_RESULT,
+} from '~/common/enums'
+import {
+  dom,
+  formStorage,
+  sanitizeContent,
+  sessionStorage,
+  stripHtml,
+} from '~/common/utils'
 import {
   Dialog,
   SpinnerBlock,
@@ -93,27 +102,35 @@ const CommentForm: React.FC<CommentFormProps> = ({
       await putComment({
         variables: { input },
         update: (cache, mutationResult) => {
+          const newComment = mutationResult.data?.putComment
+
+          if (!newComment) {
+            return
+          }
+
+          sessionStorage.set(NEW_POST_COMMENT_MUTATION_RESULT, newComment.id)
+
           if (!!parentId && !isInCommentDetail) {
             updateArticleComments({
               cache,
               articleId,
               commentId: parentId,
               type: 'addSecondaryComment',
-              comment: mutationResult.data?.putComment,
+              comment: newComment,
             })
           } else if (!!parentId && isInCommentDetail) {
             updateCommentDetail({
               cache,
               commentId: parentId || '',
               type: 'add',
-              comment: mutationResult.data?.putComment,
+              comment: newComment,
             })
           } else {
             updateArticleComments({
               cache,
               articleId,
               type: 'add',
-              comment: mutationResult.data?.putComment,
+              comment: newComment,
             })
           }
         },

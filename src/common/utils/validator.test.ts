@@ -4,7 +4,6 @@ import {
   isValidEmail,
   isValidPassword,
   isValidPaymentPassword,
-  isValidPaymentPointer,
 } from './validator'
 
 describe('utils/validator/isValidEmail', () => {
@@ -48,17 +47,5 @@ describe('utils/validator/isValidPaymentPassword', () => {
     expect(isValidPassword('1aEF%*')).toBe(false)
     expect(isValidPassword('      ')).toBe(false)
     expect(isValidPassword('你好世界你你')).toBe(false)
-  })
-})
-
-describe('utils/validator/isValidPaymentPointer', () => {
-  it('should return true for valid payment pointers', () => {
-    expect(isValidPaymentPointer('$example.com')).toBe(true)
-    expect(isValidPaymentPointer('$www.example.com')).toBe(true)
-  })
-
-  it('should return false for invalid payment pointers', () => {
-    expect(isValidPaymentPointer('example.com')).toBe(false)
-    expect(isValidPaymentPointer('www.example.com')).toBe(false)
   })
 })

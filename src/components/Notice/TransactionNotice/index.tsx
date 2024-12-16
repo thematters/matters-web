@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import { TransactionNoticeFragment } from '~/gql/graphql'
 
 import PaymentReceivedDonationNotice from './PaymentReceivedDonationNotice'
+import WithdrewLockedTokensNotice from './WithdrewLockedTokensNotice'
 
 const TransactionNotice = ({
   notice,
@@ -12,6 +13,8 @@ const TransactionNotice = ({
   switch (notice.txNoticeType) {
     case 'PaymentReceivedDonation':
       return <PaymentReceivedDonationNotice notice={notice} />
+    case 'WithdrewLockedTokens':
+      return <WithdrewLockedTokensNotice notice={notice} />
     default:
       return null
   }
@@ -25,8 +28,10 @@ TransactionNotice.fragments = {
       __typename
       txNoticeType: type
       ...PaymentReceivedDonationNotice
+      ...WithdrewLockedTokensNotice
     }
     ${PaymentReceivedDonationNotice.fragments.notice}
+    ${WithdrewLockedTokensNotice.fragments.notice}
   `,
 }
 

@@ -1,8 +1,5 @@
 .tabs {
-  padding: var(--sp8) 0;
-
   @media (--sm-up) {
-    padding: 0;
     margin: 0 var(--sp20);
   }
 }

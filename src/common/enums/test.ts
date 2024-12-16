@@ -127,6 +127,7 @@ export enum TEST_ID {
   NOTICE_TAG_LEAVE_EDITOR = 'notice/tag-leave-editor',
   NOTICE_PAYMENT_PAYOUT = 'notice/payment-payout',
   NOTICE_PAYMENT_RECEIVE_DONATION = 'notice/payment-receive-donation',
+  NOTICE_WITHDREW_LOCKED_TOKENS = 'notice/withdrew-locked-tokens',
   NOTICE_CIRCLE_NEW_FOLLOWER = 'notice/circle-new-follower',
   NOTICE_CIRCLE_NEW_SUBSCRIBER = 'notice/circle-new-subscriber',
   NOTICE_CIRCLE_NEW_UNSUBSCRIBER = 'notice/circle-new-unsubscriber',

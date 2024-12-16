@@ -13,10 +13,6 @@ import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeMomentTitle from '../NoticeMomentTitle'
 
 const CommentLikedNotice = ({ notice }: { notice: CommentNoticeFragment }) => {
-  if (!notice.actors) {
-    return null
-  }
-
   const isMoment = notice.comment.node.__typename === 'Moment'
   const commentMoment =
     notice.comment.node.__typename === 'Moment'

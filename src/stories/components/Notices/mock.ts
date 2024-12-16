@@ -1,5 +1,6 @@
 import {
   MOCK_ARTILCE,
+  MOCK_BLOCKCHAIN_TRANSACTION,
   MOCK_CIRCLE,
   MOCK_CIRCLE_ARTICLE,
   MOCK_CIRCLE_COMMENT,
@@ -322,6 +323,16 @@ export const MOCK_NOTICE_LIST = [
     actors: [MOCK_USER],
     txNoticeType: 'PaymentReceivedDonation' as any,
     tx: MOCK_TRANSACTION,
+  },
+  // WithdrewLockedTokens
+  {
+    __typename: 'TransactionNotice' as any,
+    id: 'WithdrewLockedTokens',
+    unread: false,
+    createdAt: '2020-12-24T07:29:17.682Z',
+    actors: [MOCK_USER],
+    txNoticeType: 'WithdrewLockedTokens' as any,
+    tx: { ...MOCK_TRANSACTION, blockchainTx: MOCK_BLOCKCHAIN_TRANSACTION },
   },
 
   /**
