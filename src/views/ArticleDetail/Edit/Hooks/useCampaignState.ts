@@ -22,7 +22,7 @@ export const useCampaignState = (article: Article) => {
   })
 
   const [campaign, setCampaign] = useState<ArticleCampaignInput | undefined>(
-    initialSelectedCampaign?.id && initialSelectedStage
+    initialSelectedCampaign?.id
       ? {
           campaign: initialSelectedCampaign.id,
           stage: initialSelectedStage,

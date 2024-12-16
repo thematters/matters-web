@@ -25,7 +25,7 @@ export const useReadTimer = ({ articleId, container }: Props) => {
     }, 3000)
 
     const storeReadTime = () => {
-      if (articleId && readTimer?.current)
+      if (articleId && readTimer)
         analytics.trackEvent('read_time', {
           articleId,
           time: readTimer.current,

@@ -63,7 +63,7 @@ const BaseMobileSettingsDialog = ({
 
         <Dialog.Content noSpacing>
           {/* campaign */}
-          {campaigns && selectedCampaign && editCampaign && (
+          {campaigns && campaigns.length > 0 && editCampaign && (
             <section className={styles.campaign}>
               <h3 className={styles.title}>
                 <FormattedMessage
