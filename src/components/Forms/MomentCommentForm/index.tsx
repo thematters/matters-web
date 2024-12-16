@@ -6,11 +6,17 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   MAX_MOMENT_COMMENT_LENGTH,
+  NEW_POST_COMMENT_MUTATION_RESULT,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
   UPDATE_NEWEST_MOMENT_COMMENT,
 } from '~/common/enums'
-import { formStorage, sanitizeContent, stripHtml } from '~/common/utils'
+import {
+  formStorage,
+  sanitizeContent,
+  sessionStorage,
+  stripHtml,
+} from '~/common/utils'
 import {
   Button,
   SpinnerBlock,
@@ -127,6 +133,8 @@ const MomentCommentForm = ({
           if (!newComment) {
             return
           }
+
+          sessionStorage.set(NEW_POST_COMMENT_MUTATION_RESULT, newComment.id)
 
           updateMomentDetail({
             cache,

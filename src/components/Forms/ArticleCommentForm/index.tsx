@@ -1,13 +1,21 @@
 import { Editor } from '@matters/matters-editor'
+import classNames from 'classnames'
 import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
   MAX_ARTICLE_COMMENT_LENGTH,
+  NEW_POST_COMMENT_MUTATION_RESULT,
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { dom, formStorage, sanitizeContent, stripHtml } from '~/common/utils'
+import {
+  dom,
+  formStorage,
+  sanitizeContent,
+  sessionStorage,
+  stripHtml,
+} from '~/common/utils'
 import {
   Button,
   SpinnerBlock,
@@ -38,8 +46,11 @@ export interface ArticleCommentFormProps {
   showClear?: boolean
   placeholder?: string
 
+  playAnimation?: boolean
   isFallbackEditor?: boolean
   setEditor?: (editor: Editor | null) => void
+  onHideComplete?: () => void
+  isHiding?: boolean
 }
 
 export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
@@ -54,6 +65,9 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
   showClear,
   placeholder,
   isFallbackEditor,
+  playAnimation,
+  onHideComplete,
+  isHiding,
   setEditor: propsSetEditor,
 }) => {
   const intl = useIntl()
@@ -106,6 +120,10 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
       await putComment({
         variables: { input },
         update: (cache, mutationResult) => {
+          sessionStorage.set(
+            NEW_POST_COMMENT_MUTATION_RESULT,
+            mutationResult.data?.putComment?.id || ''
+          )
           if (!!parentId && !isInCommentDetail) {
             updateArticleComments({
               cache,
@@ -178,9 +196,15 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
     handleSubmit()
   })
 
+  const formClasses = classNames({
+    [styles.form]: true,
+    [styles.playAnimation]: playAnimation && !isHiding,
+    [styles.hideAnimation]: isHiding,
+  })
+
   return (
     <form
-      className={styles.form}
+      className={formClasses}
       id={formStorageKey}
       onSubmit={handleSubmit}
       aria-label={intl.formatMessage({
@@ -197,6 +221,11 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
             })
           )
           return
+        }
+      }}
+      onAnimationEnd={() => {
+        if (isHiding && onHideComplete) {
+          onHideComplete()
         }
       }}
     >
