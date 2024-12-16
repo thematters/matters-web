@@ -1,10 +1,14 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID } from '~/common/enums'
+import { PATHS, TEST_ID, URL_ME_WALLET } from '~/common/enums'
 import { ViewerContext } from '~/components/Context'
-import { PaymentReceivedDonationNoticeFragment } from '~/gql/graphql'
+import {
+  PaymentReceivedDonationNoticeFragment,
+  TransactionCurrency,
+} from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorName from '../NoticeActorName'
@@ -22,6 +26,7 @@ const PaymentReceivedDonationNotice = ({
 
   const tx = notice.tx
   const hasEthAddress = !!viewer?.info?.ethAddress
+  const isUSDT = tx?.currency === TransactionCurrency.Usdt
 
   return (
     <NoticeDigest
@@ -44,11 +49,18 @@ const PaymentReceivedDonationNotice = ({
             >
               {tx.amount} {tx.currency}
             </span>
-            {!hasEthAddress && (
-              <FormattedMessage
-                defaultMessage=", connect your wallet to claim"
-                id="CgPGAu"
-              />
+            {isUSDT && !hasEthAddress && (
+              <Link
+                href={`${PATHS.ME_WALLET}?${URL_ME_WALLET.OPEN_WITHDRAW_VAULT_USDT_DIALOG.key}=${URL_ME_WALLET.OPEN_WITHDRAW_VAULT_USDT_DIALOG.value}`}
+                legacyBehavior
+              >
+                <a>
+                  <FormattedMessage
+                    defaultMessage=", connect your wallet to claim"
+                    id="CgPGAu"
+                  />
+                </a>
+              </Link>
             )}
           </>
         )) ||

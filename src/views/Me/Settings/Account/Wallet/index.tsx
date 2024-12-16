@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { OPEN_WITHDRAW_VAULT_USDT_DIALOG } from '~/common/enums'
 import { truncate } from '~/common/utils'
 import {
   AddWalletLoginDialog,
@@ -10,6 +11,7 @@ import {
   TableView,
   useVaultBalanceUSDT,
   ViewerContext,
+  WithdrawVaultUSDTDialog,
 } from '~/components'
 import { SocialAccountType } from '~/gql/graphql'
 
@@ -34,10 +36,14 @@ const Wallet = () => {
   const { data: vaultBalanceUSDT } = useVaultBalanceUSDT()
   const hasVaultBalanceUSDT = vaultBalanceUSDT && vaultBalanceUSDT > 0
 
+  const openWithdrawVaultUSDTDialog = () => {
+    window.dispatchEvent(new CustomEvent(OPEN_WITHDRAW_VAULT_USDT_DIALOG))
+  }
+
   return (
-    <AddWalletLoginDialog>
-      {({ openDialog: openAddWalletLoginDialog }) => {
-        return (
+    <>
+      <AddWalletLoginDialog>
+        {({ openDialog: openAddWalletLoginDialog }) => (
           <RemoveWalletLoginDialog>
             {({ openDialog: openRemoveWalletLoginDialog }) => {
               return (
@@ -64,18 +70,17 @@ const Wallet = () => {
                   }
                   right={
                     ethAddress ? undefined : (
-                      <SettingsButton onClick={openAddWalletLoginDialog}>
-                        {hasVaultBalanceUSDT ? (
-                          <FormattedMessage
-                            defaultMessage="Claim"
-                            id="6Sj2lN"
-                          />
-                        ) : (
-                          <FormattedMessage
-                            defaultMessage="Connect"
-                            id="+vVZ/G"
-                          />
-                        )}
+                      <SettingsButton
+                        onClick={
+                          hasVaultBalanceUSDT
+                            ? openWithdrawVaultUSDTDialog
+                            : openAddWalletLoginDialog
+                        }
+                      >
+                        <FormattedMessage
+                          defaultMessage="Connect"
+                          id="+vVZ/G"
+                        />
                       </SettingsButton>
                     )
                   }
@@ -83,9 +88,11 @@ const Wallet = () => {
               )
             }}
           </RemoveWalletLoginDialog>
-        )
-      }}
-    </AddWalletLoginDialog>
+        )}
+      </AddWalletLoginDialog>
+
+      <WithdrawVaultUSDTDialog />
+    </>
   )
 }
 
