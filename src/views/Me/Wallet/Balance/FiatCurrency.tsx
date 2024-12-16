@@ -177,6 +177,7 @@ export const FiatCurrencyBalance: React.FC<FiatCurrencyProps> = ({
                               balanceHKD * exchangeRate,
                               2
                             )}
+                            weight="normal"
                           />
                         </TextIcon>
                       </section>

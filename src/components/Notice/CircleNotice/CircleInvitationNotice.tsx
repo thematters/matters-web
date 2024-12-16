@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { TEST_ID } from '~/common/enums'
 import { CircleInvitationNoticeFragment } from '~/gql/graphql'
 
-import NoticeActorName from '../NoticeActorName'
+import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeCircleCard from '../NoticeCircleCard'
 import NoticeCircleName from '../NoticeCircleName'
 import NoticeDate from '../NoticeDate'
@@ -15,7 +15,7 @@ const CircleInvitationNotice = ({
 }: {
   notice: CircleInvitationNoticeFragment
 }) => {
-  if (!notice.actors || !notice.circle) {
+  if (!notice.circle) {
     return null
   }
 
@@ -46,7 +46,7 @@ CircleInvitationNotice.fragments = {
       id
       ...NoticeDate
       actors {
-        ...NoticeActorNameUser
+        ...NoticeActorAvatarUser
       }
       circle: target {
         id
@@ -57,7 +57,7 @@ CircleInvitationNotice.fragments = {
         ...NoticeCircleCard
       }
     }
-    ${NoticeActorName.fragments.user}
+    ${NoticeActorAvatar.fragments.user}
     ${NoticeCircleCard.fragments.circle}
     ${NoticeDate.fragments.notice}
   `,

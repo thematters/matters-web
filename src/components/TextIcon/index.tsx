@@ -4,7 +4,7 @@ import { capitalizeFirstLetter } from '~/common/utils'
 
 import styles from './styles.module.css'
 
-type TextIconColor =
+export type TextIconColor =
   | 'black'
   | 'green'
   | 'gold'

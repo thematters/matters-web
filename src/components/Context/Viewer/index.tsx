@@ -16,7 +16,6 @@ const ViewerFragments = {
         userName
         displayName
         avatar
-        paymentPointer
         liker {
           likerId
           civicLiker

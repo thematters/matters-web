@@ -279,6 +279,12 @@ export const MOCK_TRANSACTION = {
   target: MOCK_ARTILCE,
 }
 
+export const MOCK_BLOCKCHAIN_TRANSACTION = {
+  __typename: 'BlockchainTransaction' as any,
+  chain: 'Optimism' as any,
+  txHash: '0x1234567890abcdef',
+}
+
 // Crypto wallet
 export const MOCK_CRYPTO_WALLET = {
   __typename: 'CryptoWallet' as any,

@@ -6,11 +6,15 @@ import { AuthWalletFeed, Dialog, WalletAuthForm } from '~/components'
 
 interface Props {
   closeDialog: () => void
+  submitCallback?: () => void
 }
 
 type Step = 'select' | 'connect'
 
-const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
+const AddWalletLoginDialogContent: React.FC<Props> = ({
+  closeDialog,
+  submitCallback,
+}) => {
   const [step, setStep] = useState<Step>('select')
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
   const [hasWalletExist, setHasWalletExist] = useState(false)
@@ -63,6 +67,7 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
           />
         </>
       )}
+
       {isConnect && (
         <WalletAuthForm.Connect
           type="connect"
@@ -78,6 +83,7 @@ const AddWalletLoginDialogContent: React.FC<Props> = ({ closeDialog }) => {
             setHasUnavailable(true)
             setStep('select')
           }}
+          submitCallback={submitCallback}
         />
       )}
     </>

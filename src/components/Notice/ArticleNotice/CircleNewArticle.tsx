@@ -24,8 +24,7 @@ const CircleNewArticle = ({
 
   return (
     <NoticeDigest
-      notice={notice}
-      actors={actors}
+      notice={{ ...notice, actors }}
       action={
         <FormattedMessage
           description="src/components/Notice/ArticleNotice/CircleNewArticle.tsx"

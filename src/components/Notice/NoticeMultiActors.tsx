@@ -1,15 +1,15 @@
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
-import { AvatarSize, Button, Icon } from '~/components'
+import { Button, Icon } from '~/components'
+import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from './NoticeActorAvatar'
 import styles from './styles.module.css'
 
 type NoticeMultiActorsProps = {
-  actors: any[]
-  size: AvatarSize
+  actors: NoticeActorAvatarUserFragment[]
 }
 
-const NoticeMultiActors = ({ actors, size }: NoticeMultiActorsProps) => {
+const NoticeMultiActors = ({ actors }: NoticeMultiActorsProps) => {
   const actorsCount = actors.length
   const showAll = actorsCount <= 8
 
@@ -17,7 +17,7 @@ const NoticeMultiActors = ({ actors, size }: NoticeMultiActorsProps) => {
     return (
       <>
         {actors.map((actor, index) => (
-          <NoticeActorAvatar key={index} user={actor} size={size} />
+          <NoticeActorAvatar key={index} user={actor} />
         ))}
       </>
     )
@@ -26,7 +26,7 @@ const NoticeMultiActors = ({ actors, size }: NoticeMultiActorsProps) => {
   return (
     <>
       {actors.slice(0, 7).map((actor, index) => (
-        <NoticeActorAvatar key={index} user={actor} size={size} />
+        <NoticeActorAvatar key={index} user={actor} />
       ))}
       <span className={styles.moreActors}>
         <Button
