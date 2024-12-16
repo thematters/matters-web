@@ -16,7 +16,7 @@ export type ArticleDigestTitleIs = 'h2' | 'h3'
 type ArticleDigestTitleProps = {
   article: ArticleDigestTitleArticleFragment
   collectionId?: string
-
+  cursor?: string
   textSize?: ArticleDigestTitleTextSize
   textWeight?: ArticleDigestTitleTextWeight
   lineClamp?: boolean | 1 | 2 | 3
@@ -46,7 +46,7 @@ const fragments = {
 export const ArticleDigestTitle = ({
   article,
   collectionId,
-
+  cursor,
   textSize = 16,
   textWeight = 'medium',
   lineClamp = true,
@@ -63,6 +63,7 @@ export const ArticleDigestTitle = ({
     page: 'articleDetail',
     article,
     collectionId,
+    cursor,
   })
   const isBanned = state === 'banned'
   const isArchived = state === 'archived'

@@ -54,7 +54,7 @@ export const unshiftConnections = ({
   newData: any
   path: string
 }) => {
-  const { edges: oldEdges, pageInfo: oldPageInfo } = _get(oldData, path)
+  const { edges: oldEdges } = _get(oldData, path)
   const {
     edges: newEdges,
     pageInfo: newPageInfo,
@@ -65,9 +65,7 @@ export const unshiftConnections = ({
     ...rest,
     pageInfo: {
       ...newPageInfo,
-      endCursor: oldPageInfo.endCursor,
-      hasNextPage: oldPageInfo.hasNextPage,
     },
-    edges: _uniqBy([...oldEdges, ...newEdges], (edge) => edge.node.id),
+    edges: _uniqBy([...newEdges, ...oldEdges], (edge) => edge.node.id),
   })
 }

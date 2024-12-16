@@ -37,6 +37,7 @@ export type ArticleDigestFeedProps = {
     Partial<ArticleDigestFeedArticlePrivateFragment>
   header?: React.ReactNode
   collectionId?: string
+  cursor?: string
   excludesTimeStamp?: boolean // this is only for timestamp next to the profile
 } & ArticleDigestFeedControls &
   FooterActionsProps
@@ -45,7 +46,7 @@ const BaseArticleDigestFeed = ({
   article,
   header,
   collectionId,
-
+  cursor,
   hasHeader = true,
   hasCircle = true,
   hasAuthor = true,
@@ -125,6 +126,7 @@ const BaseArticleDigestFeed = ({
               <ArticleDigestTitle
                 article={article}
                 collectionId={collectionId}
+                cursor={cursor}
                 textSize={16}
                 lineClamp={2}
                 onClick={onClick}

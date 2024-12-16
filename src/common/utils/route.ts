@@ -117,7 +117,11 @@ type ToPathArgs =
  * (works on SSR & CSR)
  */
 export const toPath = (
-  args: ToPathArgs & { fragment?: string; search?: { [key: string]: string } }
+  args: ToPathArgs & {
+    cursor?: string
+    fragment?: string
+    search?: { [key: string]: string }
+  }
 ): {
   href: string
 } => {
@@ -132,6 +136,10 @@ export const toPath = (
 
       if (args.collectionId) {
         href = `${href}?collection=${args.collectionId}`
+
+        if (args.cursor) {
+          href = `${href}&cursor=${args.cursor}`
+        }
       }
 
       break

@@ -159,11 +159,12 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
       <Layout.Main.Spacing hasVertical={false}>
         <List>
           {articleEdges &&
-            articleEdges.map(({ node }, i) => (
+            articleEdges.map(({ node, cursor }, i) => (
               <List.Item key={node.id}>
                 <ArticleDigestFeed
                   article={node}
                   collectionId={collection.id}
+                  cursor={cursor}
                   hasHeader={false}
                   hasEdit={true}
                   hasCircle={false}
