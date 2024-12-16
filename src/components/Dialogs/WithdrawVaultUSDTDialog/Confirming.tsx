@@ -5,7 +5,14 @@ import { FormattedMessage } from 'react-intl'
 
 import { OPEN_WITHDRAW_VAULT_USDT_DIALOG, PATHS } from '~/common/enums'
 import { formatAmount, truncate } from '~/common/utils'
-import { Dialog, Spinner, toast, useRoute, ViewerContext } from '~/components'
+import {
+  Dialog,
+  Spinner,
+  toast,
+  useRoute,
+  useVaultBalanceUSDT,
+  ViewerContext,
+} from '~/components'
 import {
   TransactionState,
   WithdrawVaultUsdtMutation,
@@ -47,9 +54,10 @@ const WITHDRAW_VAULT_USDT_POLLING = gql`
 `
 
 const Confirming: React.FC<ConfirmingProps> = ({ amount, closeDialog }) => {
+  const { router } = useRoute()
   const viewer = useContext(ViewerContext)
   const address = viewer.info.ethAddress!
-  const { router } = useRoute()
+  const { refetch: refetchVaultBalanceUSDT } = useVaultBalanceUSDT()
 
   const [withdraw] = useMutation<WithdrawVaultUsdtMutation>(WITHDRAW_VAULT_USDT)
   const [txId, setTxId] = useState<string | null>(null)
@@ -102,6 +110,8 @@ const Confirming: React.FC<ConfirmingProps> = ({ amount, closeDialog }) => {
         },
       ],
     })
+
+    refetchVaultBalanceUSDT()
 
     closeDialog()
   }

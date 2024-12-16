@@ -39,7 +39,7 @@ const WithdrewLockedTokensNotice = ({
       data-test-id={TEST_ID.NOTICE_WITHDREW_LOCKED_TOKENS}
     >
       <section className={styles.contentWrap}>
-        <a href={link}>
+        <a href={link} target={isFailed ? undefined : '_blank'}>
           {isFailed ? (
             <FormattedMessage
               defaultMessage="Claim {amount} USDT failed. Click here to retry or contact ask@matters.town"
