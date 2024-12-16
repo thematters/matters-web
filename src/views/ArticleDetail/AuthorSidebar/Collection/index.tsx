@@ -10,7 +10,7 @@ import {
 } from '~/common/utils'
 import {
   ArticleDigestAuthorSidebar,
-  InfiniteScroll,
+  DualScroll,
   LinkWrapper,
   List,
   QueryError,
@@ -38,7 +38,6 @@ type CollectionProps = {
 const Collection = ({ article, collectionId }: CollectionProps) => {
   const { getQuery } = useRoute()
   const cursor = getQuery('cursor')
-  const [isPrevLoading, setIsPrevLoading] = useState(false)
   const [lastTopArticleId, setLastTopArticleId] = useState<string | null>(null)
 
   /**
@@ -128,7 +127,6 @@ const Collection = ({ article, collectionId }: CollectionProps) => {
           path: connectionPath,
         }),
     })
-    setIsPrevLoading(false)
 
     const lastTopArticleDigest = document.getElementById(
       `${ARTICLE_DIGEST_AUTHOR_SIDEBAR_ID_PREFIX}${lastTopArticleId}`
@@ -185,49 +183,37 @@ const Collection = ({ article, collectionId }: CollectionProps) => {
           </section>
         </LinkWrapper>
       )}
-      <section
+      <DualScroll
+        hasPreviousPage={prevPageInfo?.hasPreviousPage}
+        hasNextPage={afterPageInfo?.hasNextPage}
+        loadPrevious={loadPreviousMore}
+        loadMore={loadAfterMore}
+        loader={<ArticleDigestAuthorSidebarFeedPlaceholder />}
         className={styles.feed}
-        onScroll={(event) => {
-          const element = event.currentTarget
-          if (element.scrollTop === 0) {
-            if (!prevPageInfo?.hasPreviousPage) {
-              return
-            }
-            setIsPrevLoading(true)
-            loadPreviousMore()
-          }
-        }}
       >
-        {isPrevLoading && <ArticleDigestAuthorSidebarFeedPlaceholder />}
-        <InfiniteScroll
-          hasNextPage={afterPageInfo?.hasNextPage}
-          loadMore={loadAfterMore}
-          loader={<ArticleDigestAuthorSidebarFeedPlaceholder />}
-        >
-          <List borderPosition="top">
-            {edges?.map(({ node, cursor }, i) => (
-              <List.Item key={cursor}>
-                <ArticleDigestAuthorSidebar
-                  article={node}
-                  titleTextSize={14}
-                  collectionId={collectionId}
-                  cursor={cursor}
-                  titleColor={node.id === article?.id ? 'black' : 'greyDarker'}
-                  showCover={false}
-                  clickEvent={() => {
-                    analytics.trackEvent('click_feed', {
-                      type: 'article_detail_author_sidebar_collection',
-                      contentType: 'article',
-                      location: i,
-                      id: node.id,
-                    })
-                  }}
-                />
-              </List.Item>
-            ))}
-          </List>
-        </InfiniteScroll>
-      </section>
+        <List borderPosition="top">
+          {edges?.map(({ node, cursor }, i) => (
+            <List.Item key={cursor}>
+              <ArticleDigestAuthorSidebar
+                article={node}
+                titleTextSize={14}
+                collectionId={collectionId}
+                cursor={cursor}
+                titleColor={node.id === article?.id ? 'black' : 'greyDarker'}
+                showCover={false}
+                clickEvent={() => {
+                  analytics.trackEvent('click_feed', {
+                    type: 'article_detail_author_sidebar_collection',
+                    contentType: 'article',
+                    location: i,
+                    id: node.id,
+                  })
+                }}
+              />
+            </List.Item>
+          ))}
+        </List>
+      </DualScroll>
     </section>
   )
 }
