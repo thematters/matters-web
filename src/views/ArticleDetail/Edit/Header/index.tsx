@@ -99,9 +99,7 @@ const EditModeHeader = ({
   const isCampaignRevised =
     restProps.selectedCampaign?.id !== article.campaigns[0]?.campaign.id ||
     restProps.selectedStage !== article.campaigns[0]?.stage?.id
-  const isResetCampaign =
-    isCampaignRevised &&
-    (!restProps.selectedCampaign?.id || !restProps.selectedStage)
+  const isResetCampaign = isCampaignRevised && !restProps.selectedCampaign?.id
 
   const needRepublish =
     isTitleRevised ||
