@@ -15,7 +15,7 @@ const Tips = () => {
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { address } = useAccount()
-  const { data: balanceUSDTData } = useBalanceUSDT({})
+  const { data: balanceUSDTData } = useBalanceUSDT()
 
   const isZeroBalance = balanceUSDTData?.value && balanceUSDTData?.value < 0n
   const hasEthAddress = !!viewer.info.ethAddress

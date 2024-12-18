@@ -38,7 +38,7 @@ export const useBalanceUSDT = ({
   address: addr,
 }: {
   address?: string | null
-}) => {
+} = {}) => {
   const viewer = useContext(ViewerContext)
   const viewerEthAddress = viewer.info.ethAddress
   const targetNetwork = featureSupportedChains.curation[0]
