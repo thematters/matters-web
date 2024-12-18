@@ -1,3 +1,4 @@
+import { Base64 } from 'js-base64'
 import _get from 'lodash/get'
 import _set from 'lodash/set'
 import _uniqBy from 'lodash/uniqBy'
@@ -69,3 +70,12 @@ export const unshiftConnections = ({
     edges: _uniqBy([...newEdges, ...oldEdges], (edge) => edge.node.id),
   })
 }
+
+export type ConnectionCursor = string
+const PREFIX = 'arrayconnection'
+
+export const cursorToIndex = (cursor: ConnectionCursor | undefined): number =>
+  cursor ? parseInt(Base64.decode(cursor).split(':')[1], 10) : -1
+
+export const indexToCursor = (index: number | string): ConnectionCursor =>
+  Base64.encodeURI(`${PREFIX}:${index}`)

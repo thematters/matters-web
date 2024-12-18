@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl'
 import { ARTICLE_DIGEST_AUTHOR_SIDEBAR_ID_PREFIX } from '~/common/enums'
 import {
   analytics,
+  fromGlobalId,
+  indexToCursor,
   mergeConnections,
   toPath,
   unshiftConnections,
@@ -16,7 +18,6 @@ import {
   QueryError,
   Throw404,
   usePublicQuery,
-  useRoute,
 } from '~/components'
 import {
   ArticleDetailPublicQuery,
@@ -36,8 +37,7 @@ type CollectionProps = {
 }
 
 const Collection = ({ article, collectionId }: CollectionProps) => {
-  const { getQuery } = useRoute()
-  const cursor = getQuery('cursor')
+  const cursor = article ? indexToCursor(fromGlobalId(article.id).id) : null
   const [lastTopArticleId, setLastTopArticleId] = useState<string | null>(null)
 
   /**
