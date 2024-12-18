@@ -2,7 +2,6 @@ import { useQuery } from '@apollo/react-hooks'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
 import { PATHS } from '~/common/enums'
@@ -79,6 +78,10 @@ export const LikeCoinBalance = ({
   const liker = data?.viewer?.liker
   const total = liker?.total || 0
 
+  if (!likerId) {
+    return null
+  }
+
   if (loading) {
     return (
       <Wrapper>
@@ -108,36 +111,15 @@ export const LikeCoinBalance = ({
     )
   }
 
-  if (likerId) {
-    return (
-      <Wrapper>
-        <CurrencyFormatter
-          value={formatAmount(total, 0)}
-          currency="LIKE"
-          subValue={formatAmount(total * exchangeRate, 2)}
-          subCurrency={currency}
-          weight="normal"
-        />
-      </Wrapper>
-    )
-  }
-
   return (
     <Wrapper>
-      <Button
-        spacing={[0, 12]}
-        size={[null, '1.5rem']}
-        borderColor="green"
-        href={PATHS.ME_SETTINGS_MISC}
-      >
-        <TextIcon color="green" size={14}>
-          <FormattedMessage
-            defaultMessage="Connect"
-            description="src/views/Me/Wallet/Balance"
-            id="9WMs5q"
-          />
-        </TextIcon>
-      </Button>
+      <CurrencyFormatter
+        value={formatAmount(total, 0)}
+        currency="LIKE"
+        subValue={formatAmount(total * exchangeRate, 2)}
+        subCurrency={currency}
+        weight="normal"
+      />
     </Wrapper>
   )
 }
