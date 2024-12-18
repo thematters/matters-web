@@ -890,7 +890,7 @@
     "defaultMessage": "Matters 正在通過合約交易將 {amount} 發送至你綁定的錢包 {address}（Matters 將暫時承擔交易手續費）。如需幫助請聯繫 ask@matters.town"
   },
   "CgPGAu": {
-    "defaultMessage": "，連接錢包領取"
+    "defaultMessage": "，綁定錢包後可領取"
   },
   "Ci7dxf": {
     "defaultMessage": "留言已刪除",
