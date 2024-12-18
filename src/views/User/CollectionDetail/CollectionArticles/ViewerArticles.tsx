@@ -215,7 +215,6 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
                       hasSetTopCollection={true}
                       hasSetBottomCollection={true}
                       collectionId={id}
-                      cursor={cursor}
                       collectionArticleCount={articles.totalCount}
                       onSetTopCollection={() => setHasReset(true)}
                       onSetBottomCollection={() => setHasReset(true)}

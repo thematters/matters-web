@@ -198,7 +198,6 @@ const Collection = ({ article, collectionId }: CollectionProps) => {
                 article={node}
                 titleTextSize={14}
                 collectionId={collectionId}
-                cursor={cursor}
                 titleColor={node.id === article?.id ? 'black' : 'greyDarker'}
                 showCover={false}
                 clickEvent={() => {

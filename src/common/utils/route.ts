@@ -118,7 +118,6 @@ type ToPathArgs =
  */
 export const toPath = (
   args: ToPathArgs & {
-    cursor?: string
     fragment?: string
     search?: { [key: string]: string }
   }
@@ -136,10 +135,6 @@ export const toPath = (
 
       if (args.collectionId) {
         href = `${href}?collection=${args.collectionId}`
-
-        if (args.cursor) {
-          href = `${href}&cursor=${args.cursor}`
-        }
       }
 
       break

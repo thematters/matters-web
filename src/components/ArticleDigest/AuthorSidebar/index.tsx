@@ -17,7 +17,6 @@ import styles from './styles.module.css'
 export type ArticleDigestAuthorSidebarProps = {
   article: ArticleDigestAuthorSidebarArticleFragment
   collectionId?: string
-  cursor?: string
   titleTextSize?: ArticleDigestTitleTextSize
   titleColor?: 'greyDarker' | 'black'
   showCover?: boolean
@@ -50,7 +49,6 @@ const fragments = {
 export const ArticleDigestAuthorSidebar = ({
   article,
   collectionId,
-  cursor,
   titleTextSize = 15,
   titleColor = 'greyDarker',
   imageSize = 'sm',
@@ -70,7 +68,6 @@ export const ArticleDigestAuthorSidebar = ({
     page: 'articleDetail',
     article,
     collectionId,
-    cursor,
   })
 
   const headerClasses = classNames({
@@ -93,7 +90,6 @@ export const ArticleDigestAuthorSidebar = ({
             article={article}
             textSize={titleTextSize}
             collectionId={collectionId}
-            cursor={cursor}
             textWeight="normal"
             is="h3"
           />
