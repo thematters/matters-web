@@ -24,7 +24,11 @@ const BaseWithdrawVaultUSDTDialog = () => {
   useEventListener(OPEN_WITHDRAW_VAULT_USDT_DIALOG, openDialog)
 
   return (
-    <Dialog isOpen={show} onDismiss={closeDialog}>
+    <Dialog
+      isOpen={show}
+      onDismiss={closeDialog}
+      dismissOnClickOutside={currStep !== 'confirming'}
+    >
       <DynamicContent
         closeDialog={closeDialog}
         forward={forward}
