@@ -117,7 +117,10 @@ type ToPathArgs =
  * (works on SSR & CSR)
  */
 export const toPath = (
-  args: ToPathArgs & { fragment?: string; search?: { [key: string]: string } }
+  args: ToPathArgs & {
+    fragment?: string
+    search?: { [key: string]: string }
+  }
 ): {
   href: string
 } => {
