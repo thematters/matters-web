@@ -6,6 +6,16 @@
   border-radius: var(--sp8);
 }
 
+.playAnimation {
+  overflow: hidden;
+  animation: slide-down-fade 0.3s ease-out;
+}
+
+.hideAnimation {
+  overflow: hidden;
+  animation: slide-up-fade 0.3s ease-out forwards;
+}
+
 .content {
   padding: var(--sp4) var(--sp12);
   margin-bottom: var(--sp8);
@@ -22,5 +32,29 @@
     font-size: var(--text14);
     line-height: 1.375rem;
     color: var(--color-negative-red);
+  }
+}
+
+@keyframes slide-down-fade {
+  from {
+    max-height: 0;
+    opacity: 0;
+  }
+
+  to {
+    max-height: 500px;
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up-fade {
+  from {
+    max-height: 500px;
+    opacity: 1;
+  }
+
+  to {
+    max-height: 0;
+    opacity: 0;
   }
 }

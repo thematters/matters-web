@@ -1,20 +1,13 @@
 import gql from 'graphql-tag'
 
-import { AvatarSize } from '~/components/Avatar'
 import { UserDigest } from '~/components/UserDigest'
 import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
 
 export const NoticeActorAvatar = ({
   user,
-  size = 32,
 }: {
-  user: NoticeActorAvatarUserFragment | null
-  size?: AvatarSize
+  user?: NoticeActorAvatarUserFragment
 }) => {
-  if (!user) {
-    return null
-  }
-
   return <UserDigest.Mini user={user} avatarSize={32} hasAvatar />
 }
 

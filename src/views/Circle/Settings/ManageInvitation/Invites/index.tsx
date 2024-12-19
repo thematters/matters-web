@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
-import { SegmentedTabs } from '~/components'
+import { SquareTabs } from '~/components'
 
 import AcceptedInvites from './Accepted'
 import PendingInvites from './Pending'
@@ -9,6 +9,7 @@ import PendingInvites from './Pending'
 type InvitesType = 'accepted' | 'pending'
 
 const InvitesFeed: React.FC = () => {
+  const intl = useIntl()
   const [type, setType] = useState<InvitesType>('pending')
 
   const isPending = type === 'pending'
@@ -16,29 +17,29 @@ const InvitesFeed: React.FC = () => {
 
   return (
     <>
-      <SegmentedTabs sticky>
-        <SegmentedTabs.Tab
+      <SquareTabs sticky spacing="md">
+        <SquareTabs.Tab
           onClick={() => setType('pending')}
           selected={isPending}
-        >
-          <FormattedMessage
-            defaultMessage="Pending"
-            id="fWDtpq"
-            description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
-          />
-        </SegmentedTabs.Tab>
+          title={intl.formatMessage({
+            defaultMessage: 'Pending',
+            id: 'fWDtpq',
+            description:
+              'src/views/Circle/Settings/ManageInvitation/Invites/index.tsx',
+          })}
+        />
 
-        <SegmentedTabs.Tab
+        <SquareTabs.Tab
           onClick={() => setType('accepted')}
           selected={isAccepted}
-        >
-          <FormattedMessage
-            defaultMessage="Accepted"
-            id="JpS59y"
-            description="src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
-          />
-        </SegmentedTabs.Tab>
-      </SegmentedTabs>
+          title={intl.formatMessage({
+            defaultMessage: 'Accepted',
+            id: 'JpS59y',
+            description:
+              'src/views/Circle/Settings/ManageInvitation/Invites/index.tsx',
+          })}
+        />
+      </SquareTabs>
 
       {isPending && <PendingInvites />}
       {isAccepted && <AcceptedInvites />}

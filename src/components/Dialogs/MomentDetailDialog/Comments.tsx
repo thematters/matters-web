@@ -151,12 +151,12 @@ const Comments = ({ moment, editing }: CommentsProps) => {
             eofSpacingTop="base"
           >
             <Media at="sm">
-              <List spacing={['base', 0]} hasBorder={false}>
+              <List spacing={[0, 0]} hasBorder={false}>
                 {CommentsList}
               </List>
             </Media>
             <Media greaterThan="sm">
-              <List spacing={['loose', 0]} hasBorder={false}>
+              <List spacing={[0, 0]} hasBorder={false}>
                 {CommentsList}
               </List>
             </Media>

@@ -9,17 +9,28 @@ import {
 } from 'wagmi'
 
 import { contract } from '~/common/enums'
-import { featureSupportedChains, MaxApprovedUSDTAmount } from '~/common/utils'
+import {
+  CurationVaultABI,
+  featureSupportedChains,
+  fromGlobalId,
+  MaxApprovedUSDTAmount,
+  toCurationVaultUID,
+} from '~/common/utils'
 import { ViewerContext } from '~/components'
 
-export const useAllowanceUSDT = () => {
+export const useAllowanceUSDT = (useCurationVault: boolean) => {
   const { address } = useAccount()
 
   return useContractRead({
     address: contract.Optimism.tokenAddress,
     abi: erc20ABI,
     functionName: 'allowance',
-    args: [address as `0x${string}`, contract.Optimism.curationAddress],
+    args: [
+      address as `0x${string}`,
+      useCurationVault
+        ? contract.Optimism.curationVaultAddress
+        : contract.Optimism.curationAddress,
+    ],
   })
 }
 
@@ -27,7 +38,7 @@ export const useBalanceUSDT = ({
   address: addr,
 }: {
   address?: string | null
-}) => {
+} = {}) => {
   const viewer = useContext(ViewerContext)
   const viewerEthAddress = viewer.info.ethAddress
   const targetNetwork = featureSupportedChains.curation[0]
@@ -56,12 +67,33 @@ export const useBalanceEther = ({
   })
 }
 
-export const useApproveUSDT = () => {
+export const useVaultBalanceUSDT = () => {
+  const viewer = useContext(ViewerContext)
+  const viewerId = viewer.id
+  const uid = toCurationVaultUID(fromGlobalId(viewerId).id)
+  const targetNetwork = featureSupportedChains.curation[0]
+
+  return useContractRead({
+    address: contract.Optimism.curationVaultAddress,
+    abi: CurationVaultABI,
+    functionName: 'erc20Balances',
+    args: [uid, contract.Optimism.tokenAddress],
+    chainId: targetNetwork.id,
+    cacheTime: 5_000,
+  })
+}
+
+export const useApproveUSDT = (useCurationVault: boolean) => {
   const { config } = usePrepareContractWrite({
     address: contract.Optimism.tokenAddress,
     abi: erc20ABI,
     functionName: 'approve',
-    args: [contract.Optimism.curationAddress, MaxApprovedUSDTAmount],
+    args: [
+      useCurationVault
+        ? contract.Optimism.curationVaultAddress
+        : contract.Optimism.curationAddress,
+      MaxApprovedUSDTAmount,
+    ],
   })
 
   return useContractWrite(config)

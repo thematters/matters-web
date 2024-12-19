@@ -49,6 +49,10 @@
   "+ixiPI": {
     "defaultMessage": "删除动态"
   },
+  "+jt4rV": {
+    "defaultMessage": "提領支持",
+    "description": "src/components/Transaction/index.tsx"
+  },
   "+o9W2T": {
     "defaultMessage": "文件上传失败，请确认文件链接是否有效，或手动下载后再上传",
     "description": "UNABLE_TO_UPLOAD_FROM_URL"
@@ -87,7 +91,7 @@
     "defaultMessage": "支持排行榜"
   },
   "/NX9L+": {
-    "defaultMessage": "确认授权",
+    "defaultMessage": "去钱包确认",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "/TXBJR": {
@@ -95,7 +99,7 @@
     "description": "UNKNOWN_ERROR"
   },
   "/cyuh2": {
-    "defaultMessage": "前往授权"
+    "defaultMessage": "去钱包授权"
   },
   "/dKzfc": {
     "defaultMessage": "该作品因违反社区约章，已被站方强制封存。"
@@ -133,9 +137,6 @@
   "0CyECR": {
     "defaultMessage": "Matters ID 已设置，更多帐号相关设置可前往设置页修改",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
-  },
-  "0HdNPs": {
-    "defaultMessage": "{link1}：为增加创作者的收入来源，Matters 引入了 {link2} 与 {link3}，实现付款方与收款方即使使用不同的货币进行交易，也可以对交易进行自动币种转换。你可以通过 {link4}等服务配置 {link6}，获得来自 {link7} 平台的收入，在 Matters 网站与 IPFS 网络中均可使用。"
   },
   "0JlaP1": {
     "defaultMessage": "Oops！链接已失效",
@@ -274,6 +275,9 @@
     "defaultMessage": "解绑",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
+  "2Sgvfr": {
+    "defaultMessage": "USDT {amount} 待提领"
+  },
   "2W0f9h": {
     "defaultMessage": "个人简介"
   },
@@ -389,9 +393,6 @@
   "4nHH2x": {
     "defaultMessage": "报名成功"
   },
-  "4tqFCR": {
-    "defaultMessage": "作者尚未启用 USDT 钱包"
-  },
   "4wOWfp": {
     "defaultMessage": "这是什么？",
     "description": "src/components/Billboard/index.tsx"
@@ -479,6 +480,9 @@
   "6BbPcY": {
     "defaultMessage": "评论已被强制隐藏"
   },
+  "6Bxl4S": {
+    "defaultMessage": "提领支持金额（{amount} USDT）时遇到问题，点此重试或联系 ask@matters.town"
+  },
   "6CQaLH": {
     "defaultMessage": "请选择或输入金额"
   },
@@ -502,6 +506,9 @@
   "6OBAOi": {
     "defaultMessage": "目前总订阅人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "6Sj2lN": {
+    "defaultMessage": "提领支持"
   },
   "6Vznnt": {
     "defaultMessage": "在你的围炉中留言",
@@ -702,6 +709,10 @@
   "9Vkz9W": {
     "defaultMessage": "图片面积不得超过 1 亿像素（如 10,000 x 10,000 像素）"
   },
+  "9WMs5q": {
+    "defaultMessage": "绑定钱包",
+    "description": "src/views/Me/Wallet/Balance"
+  },
   "9WRlF4": {
     "defaultMessage": "送出"
   },
@@ -843,6 +854,9 @@
     "defaultMessage": "递出支持资金给",
     "description": "src/components/Forms/PaymentForm/PaymentInfo/index.tsx"
   },
+  "C/4nS6": {
+    "defaultMessage": "绑定并提领"
+  },
   "C3NKBg": {
     "defaultMessage": "{type} 已绑定",
     "description": "src/views/Me/Settings/Settings/Socials/index.tsx"
@@ -871,6 +885,12 @@
   "CTJk3m": {
     "defaultMessage": "复制留言",
     "description": "src/components/Comment/DropdownActions/index.tsx"
+  },
+  "CcVXhc": {
+    "defaultMessage": "Matters 正在通过合约交易将 {amount} 发送至你绑定的钱包 {address}（Matters 将暂时承担交易手续费）。如需帮助请联系 ask@matters.town"
+  },
+  "CgPGAu": {
+    "defaultMessage": "，绑定钱包后可领取"
   },
   "Ci7dxf": {
     "defaultMessage": "留言已删除",
@@ -1133,6 +1153,9 @@
   "HAlOn1": {
     "defaultMessage": "用户名"
   },
+  "HBdVkS": {
+    "defaultMessage": "正在提领支持"
+  },
   "HBxXD/": {
     "defaultMessage": "版权声明"
   },
@@ -1142,6 +1165,9 @@
   },
   "HJ0iZJ": {
     "defaultMessage": "确认归档"
+  },
+  "HJsl78": {
+    "defaultMessage": "提领支持金额时遇到问题，请重试或联系 ask@matters.town"
   },
   "HPVOw/": {
     "defaultMessage": "数字钱包",
@@ -1231,9 +1257,6 @@
   },
   "IpMWC4": {
     "defaultMessage": "短时间内已发布多条动态，请先休息一会吧～"
-  },
-  "Is5PqP": {
-    "defaultMessage": "跨账本协议"
   },
   "ItUuuX": {
     "defaultMessage": "邀你加入围炉 {circleName} ，你可以免费体验 {freePeriod} 天",
@@ -1388,9 +1411,6 @@
     "defaultMessage": "作品已发布",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "LklXfd": {
-    "defaultMessage": "跨链收款地址"
-  },
   "LmiUWG": {
     "defaultMessage": "你无法对此对象进行该操作",
     "description": "FORBIDDEN_BY_TARGET_STATE"
@@ -1520,6 +1540,9 @@
   },
   "O7ozeo": {
     "defaultMessage": "修改个人资料"
+  },
+  "ODncRd": {
+    "defaultMessage": "提领中..."
   },
   "OIj8pQ": {
     "defaultMessage": "成功发送邀请",
@@ -1958,15 +1981,9 @@
   "WQT8ZA": {
     "defaultMessage": "编辑选集"
   },
-  "WiGHyF": {
-    "defaultMessage": "Web Monetization 标准"
-  },
   "WpvsPu": {
     "defaultMessage": "订阅",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
-  },
-  "WrQjnc": {
-    "defaultMessage": "收款地址已更新"
   },
   "WsPbZT": {
     "defaultMessage": "继续提现"
@@ -1991,6 +2008,10 @@
   },
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"
+  },
+  "XQ9bi3": {
+    "defaultMessage": "详情",
+    "description": "src/components/Dialogs/WithdrawVaultUSDTDialog/Content.tsx"
   },
   "XQTBu6": {
     "defaultMessage": "在你的围炉广播中留言提及你",
@@ -2303,7 +2324,7 @@
     "defaultMessage": "返回"
   },
   "d1mBsg": {
-    "defaultMessage": "新订阅者",
+    "defaultMessage": "关注的围炉",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "d4waan": {
@@ -2324,6 +2345,9 @@
     "defaultMessage": "尚无屏蔽记录",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
+  "dK7Dnj": {
+    "defaultMessage": "🔥 免费提领"
+  },
   "dQhNbF": {
     "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/StripeCheckout/index.tsx"
@@ -2334,6 +2358,9 @@
   },
   "dTOtPO": {
     "defaultMessage": "储值"
+  },
+  "dUkC8R": {
+    "defaultMessage": "提领支持"
   },
   "dVbKzB": {
     "defaultMessage": "评论和回复",
@@ -2438,6 +2465,9 @@
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fko+MR": {
+    "defaultMessage": "重试提领"
+  },
   "fnv5rD": {
     "defaultMessage": "赞赏作品（当前 {total} 次赞赏）"
   },
@@ -2515,6 +2545,9 @@
   "hBLCwn": {
     "defaultMessage": "其他金额"
   },
+  "hDDFgp": {
+    "defaultMessage": "Matters 会通过合约交易将 {amount} 发送至你绑定的钱包 {address}（Matters 将暂时承担交易手续费）。如需帮助请联系 ask@matters.town"
+  },
   "hG2cBH": {
     "defaultMessage": "订阅围炉"
   },
@@ -2546,9 +2579,6 @@
   },
   "i4OBEw": {
     "defaultMessage": "不能使用 “{name}”"
-  },
-  "i7cXnf": {
-    "defaultMessage": "钱包地址以“$”开头"
   },
   "iEJeQH": {
     "defaultMessage": "设置 Liker ID"
@@ -2772,6 +2802,10 @@
   "mBkZcw": {
     "defaultMessage": "喜欢动态"
   },
+  "mBmmr+": {
+    "defaultMessage": "订阅",
+    "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
+  },
   "mCAIcg": {
     "defaultMessage": "站内阅读热门排行",
     "description": "src/views/Circle/Analytics/ContentAnalytics/index.tsx"
@@ -2806,6 +2840,9 @@
   "ml3SZN": {
     "defaultMessage": "至少 8 个字符，支持英文大小写字母、数字和特殊符号"
   },
+  "mm2UAM": {
+    "defaultMessage": "綁定錢包並提領支持"
+  },
   "mp9SBo": {
     "defaultMessage": "围炉通知",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -2833,6 +2870,9 @@
     "defaultMessage": "个人信息",
     "description": "src/views/Me/Settings/Settings/MyProfile/index.tsx"
   },
+  "n3SsO1": {
+    "defaultMessage": "交易合约已将金额 {amount} 发送至绑定钱包，点此查看详情"
+  },
   "n3shsQ": {
     "defaultMessage": "名称不正确",
     "description": "NAME_INVALID"
@@ -2847,6 +2887,10 @@
   "nNB7KU": {
     "defaultMessage": "在 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
+  },
+  "nVoVnb": {
+    "defaultMessage": "关注",
+    "description": "src/views/User/UserProfile/FollowingDialog/CirclesFeed/CirclesTabs/index.tsx"
   },
   "nWhqw9": {
     "defaultMessage": "立即发布"
@@ -2892,9 +2936,6 @@
   "p5qZnJ": {
     "defaultMessage": "赞赏了",
     "description": "src/components/Notice/ArticleNotice/ArticleNewAppreciationNotice.tsx"
-  },
-  "p6D+Uc": {
-    "defaultMessage": "请输入地址"
   },
   "p9gEZh": {
     "defaultMessage": "动态最多支持 3 张图片"
@@ -3005,11 +3046,17 @@
     "defaultMessage": "不可用",
     "description": "FORBIDDEN_BY_STATE"
   },
+  "rAFb3E": {
+    "defaultMessage": "Matters 会通过合约交易将 {amount} 发送到你绑定的钱包（Matters 将暂时承担交易手续费）。"
+  },
   "rDX3h6": {
     "defaultMessage": "版本简述"
   },
   "rE7sE3": {
     "defaultMessage": "CC0 公众领域贡献宣告"
+  },
+  "rG2xmp": {
+    "defaultMessage": "提领成功"
   },
   "rHi+cL": {
     "defaultMessage": "最多读者",
@@ -3254,9 +3301,6 @@
   "vsD2wm": {
     "defaultMessage": "重置你的登录密码",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
-  },
-  "vyG38g": {
-    "defaultMessage": "钱包地址"
   },
   "w+6UiO": {
     "defaultMessage": "新增邀请"

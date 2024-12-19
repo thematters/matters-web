@@ -14,7 +14,12 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_USDT_VISITOR,
 } from '~/common/enums'
-import { CurationABI } from '~/common/utils'
+import {
+  CurationABI,
+  CurationVaultABI,
+  fromGlobalId,
+  toCurationVaultUID,
+} from '~/common/utils'
 import {
   Dialog,
   Icon,
@@ -217,11 +222,35 @@ const USDTProcessingForm: React.FC<Props> = ({
 
   const [draftTxId, setDraftTxId] = useState<string>()
 
+  const useCurationVault = !recipient.info.ethAddress
+  const normalizedAmount = parseUnits(
+    amount.toString() as `${number}`,
+    contract.Optimism.tokenDecimals
+  )
+  const uri = `ipfs://${article?.dataHash}`
+
   const {
-    data,
-    error,
-    isError,
-    write: curate,
+    data: vaultData,
+    error: vaultError,
+    isError: isVaultError,
+    write: curateVault,
+  } = useContractWrite({
+    address: contract.Optimism.curationVaultAddress,
+    abi: CurationVaultABI,
+    functionName: 'curate',
+    args: [
+      toCurationVaultUID(fromGlobalId(recipient.id).id),
+      contract.Optimism.tokenAddress,
+      normalizedAmount,
+      uri,
+    ],
+  })
+
+  const {
+    data: curationData,
+    error: curationError,
+    isError: isCurationError,
+    write: curateDirect,
   } = useContractWrite({
     address: contract.Optimism.curationAddress,
     abi: CurationABI,
@@ -229,13 +258,15 @@ const USDTProcessingForm: React.FC<Props> = ({
     args: [
       recipient.info.ethAddress as `0x${string}`,
       contract.Optimism.tokenAddress,
-      parseUnits(
-        amount.toString() as `${number}`,
-        contract.Optimism.tokenDecimals
-      ),
-      `ipfs://${article?.dataHash}`,
+      normalizedAmount,
+      uri,
     ],
   })
+
+  const data = useCurationVault ? vaultData : curationData
+  const error = useCurationVault ? vaultError : curationError
+  const isError = useCurationVault ? isVaultError : isCurationError
+  const curate = useCurationVault ? curateVault : curateDirect
 
   const payToData = {
     amount,
@@ -327,7 +358,7 @@ const USDTProcessingForm: React.FC<Props> = ({
           amount={amount}
           currency={currency}
           recipient={recipient}
-          showEthAddress={true}
+          showEthAddress={!!recipient.info.ethAddress}
         >
           {!isError && (
             <>

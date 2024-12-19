@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { SegmentedTabs, useRoute } from '~/components'
+import { Button, SquareTabs, useRoute } from '~/components'
 
 const CircleDetailTabs = () => {
   const { isInPath, getQuery } = useRoute()
@@ -21,28 +21,35 @@ const CircleDetailTabs = () => {
   })
 
   return (
-    <SegmentedTabs sticky>
-      <SegmentedTabs.Tab
-        {...circleDetailPath}
+    <SquareTabs sticky spacing="sm">
+      <SquareTabs.Tab
         selected={isInPath('CIRCLE_DETAIL')}
-      >
-        <FormattedMessage defaultMessage="Articles" id="3KNMbJ" />
-      </SegmentedTabs.Tab>
+        title={
+          <Button {...circleDetailPath}>
+            <FormattedMessage defaultMessage="Articles" id="3KNMbJ" />
+          </Button>
+        }
+      />
 
-      <SegmentedTabs.Tab
+      <SquareTabs.Tab
         {...circleDiscussionPath}
         selected={isInPath('CIRCLE_DISCUSSION')}
-      >
-        <FormattedMessage defaultMessage="Discussion" id="20bImY" />
-      </SegmentedTabs.Tab>
+        title={
+          <Button {...circleDiscussionPath}>
+            <FormattedMessage defaultMessage="Discussion" id="20bImY" />
+          </Button>
+        }
+      />
 
-      <SegmentedTabs.Tab
-        {...circleBroadcastPath}
+      <SquareTabs.Tab
         selected={isInPath('CIRCLE_BROADCAST')}
-      >
-        <FormattedMessage defaultMessage="Broadcast" id="beLe/F" />
-      </SegmentedTabs.Tab>
-    </SegmentedTabs>
+        title={
+          <Button {...circleBroadcastPath}>
+            <FormattedMessage defaultMessage="Broadcast" id="beLe/F" />
+          </Button>
+        }
+      />
+    </SquareTabs>
   )
 }
 

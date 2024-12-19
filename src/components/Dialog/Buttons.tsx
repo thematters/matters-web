@@ -6,12 +6,14 @@ export type DialogTextButtonProps = {
   text: React.ReactNode
   color?: 'greyDarker' | 'green' | 'red' | 'black'
   loading?: boolean
+  icon?: React.ReactNode
 } & ButtonProps
 
 export const TextButton: React.FC<DialogTextButtonProps> = ({
   text,
   color = 'green',
   loading,
+  icon,
   ...restProps
 }) => {
   let buttonProps: ButtonProps = restProps
@@ -49,7 +51,11 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
 
   return (
     <Button {...buttonProps}>
-      <TextIcon size={16} weight="medium" icon={loading && <Spinner />}>
+      <TextIcon
+        size={16}
+        weight="medium"
+        icon={icon || (loading && <Spinner />)}
+      >
         {!loading ? text : null}
       </TextIcon>
     </Button>

@@ -22,7 +22,6 @@ interface SwitchNetworkProps {
 
 const SwitchNetwork: React.FC<SwitchNetworkProps> = ({ submitCallback }) => {
   const { lang } = useContext(LanguageContext)
-  // TODO: support multiple networks
   const targetNetork = featureSupportedChains.curation[0]
   const { isUnsupportedNetwork, switchToTargetNetwork, isSwitchingNetwork } =
     useTargetNetwork(targetNetork)

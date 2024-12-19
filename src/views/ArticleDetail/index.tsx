@@ -151,7 +151,6 @@ const BaseArticleDetail = ({
   }
 
   const authorId = article.author?.id
-  const paymentPointer = article.author?.paymentPointer
   const collectionCount = article.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
   const circle = article.access.circle
@@ -274,7 +273,6 @@ const BaseArticleDetail = ({
         description={summary}
         keywords={keywords}
         image={article.cover}
-        paymentPointer={paymentPointer}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'Article',

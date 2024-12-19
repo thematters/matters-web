@@ -20,7 +20,6 @@ export const DisableSupport = ({
   recipient,
   onClose,
 }: Props) => {
-  const isUSDT = currency === CURRENCY.USDT
   const isLikecoin = currency === CURRENCY.LIKE
 
   return (
@@ -33,12 +32,6 @@ export const DisableSupport = ({
       <section className={styles.container}>
         <section className={styles.content}>
           <section className={styles.info}>
-            {isUSDT && (
-              <FormattedMessage
-                defaultMessage="The author has not bound the USDT wallet yet"
-                id="4tqFCR"
-              />
-            )}
             {isLikecoin && (
               <FormattedMessage
                 defaultMessage="The author has not bound the LikeCoin wallet yet"

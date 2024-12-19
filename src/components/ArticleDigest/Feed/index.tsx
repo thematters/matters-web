@@ -45,7 +45,6 @@ const BaseArticleDigestFeed = ({
   article,
   header,
   collectionId,
-
   hasHeader = true,
   hasCircle = true,
   hasAuthor = true,
