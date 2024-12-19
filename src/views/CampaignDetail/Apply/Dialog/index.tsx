@@ -34,7 +34,7 @@ const ApplyCampaignDialog = ({
 }: ApplyCampaignDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   // TODO: remove this after annual questionnaire is over
-  const isAnnualQuestionnaire = campaign.id === 'QXJ0aWNsZTo4MjA3Mjc'
+  const isAnnualQuestionnaire = campaign.id === 'Q2FtcGFpZ246OQ'
 
   const now = new Date()
   const { end: appEnd } = campaign.applicationPeriod || {}
