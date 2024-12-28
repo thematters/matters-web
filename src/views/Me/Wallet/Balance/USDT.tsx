@@ -9,6 +9,7 @@ import {
   contract,
   OPEN_WITHDRAW_VAULT_USDT_DIALOG,
   PATHS,
+  REFETCH_BALANCE_USDT,
 } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {
@@ -19,6 +20,7 @@ import {
   TextIcon,
   Translate,
   useBalanceUSDT,
+  useEventListener,
   useVaultBalanceUSDT,
   ViewerContext,
 } from '~/components'
@@ -34,10 +36,16 @@ interface USDTBalanceProps {
 export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   const viewer = useContext(ViewerContext)
   const address = viewer.info.ethAddress
-  const { data: balanceUSDTData, isLoading: balanceUSDTLoading } =
-    useBalanceUSDT({})
-  const { data: vaultBalanceUSDTData, isLoading: vaultBalanceUSDTLoading } =
-    useVaultBalanceUSDT()
+  const {
+    data: balanceUSDTData,
+    refetch: refetchBalanceUSDT,
+    isLoading: balanceUSDTLoading,
+  } = useBalanceUSDT({})
+  const {
+    data: vaultBalanceUSDTData,
+    refetch: refetchVaultBalanceUSDT,
+    isLoading: vaultBalanceUSDTLoading,
+  } = useVaultBalanceUSDT()
   const balanceUSDT = parseFloat(balanceUSDTData?.formatted || '0')
   const vaultBalanceUSDT = parseFloat(
     formatUnits(
@@ -58,6 +66,11 @@ export const USDTBalance = ({ currency, exchangeRate }: USDTBalanceProps) => {
   const openWithdrawVaultUSDTDialog = () => {
     window.dispatchEvent(new CustomEvent(OPEN_WITHDRAW_VAULT_USDT_DIALOG, {}))
   }
+
+  useEventListener(REFETCH_BALANCE_USDT, () => {
+    refetchBalanceUSDT()
+    refetchVaultBalanceUSDT()
+  })
 
   if (!address && !vaultBalanceUSDT) {
     return (

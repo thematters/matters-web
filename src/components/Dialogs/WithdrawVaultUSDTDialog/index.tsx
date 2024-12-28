@@ -18,13 +18,29 @@ const DynamicContent = dynamic(() => import('./Content'), {
 })
 
 const BaseWithdrawVaultUSDTDialog = () => {
-  const { show, openDialog, closeDialog } = useDialogSwitch(true)
-  const { currStep, forward } = useStep<Step>('intro')
+  const defaultStep = 'intro'
+  const {
+    show,
+    openDialog: baseOpenDialog,
+    closeDialog,
+  } = useDialogSwitch(true)
+  const { currStep, forward, reset } = useStep<Step>(defaultStep)
+
+  const openDialog = () => {
+    if (currStep !== defaultStep) {
+      reset(defaultStep)
+    }
+    baseOpenDialog()
+  }
 
   useEventListener(OPEN_WITHDRAW_VAULT_USDT_DIALOG, openDialog)
 
   return (
-    <Dialog isOpen={show} onDismiss={closeDialog}>
+    <Dialog
+      isOpen={show}
+      onDismiss={closeDialog}
+      dismissOnClickOutside={currStep !== 'confirming'}
+    >
       <DynamicContent
         closeDialog={closeDialog}
         forward={forward}

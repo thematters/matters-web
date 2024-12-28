@@ -33,6 +33,8 @@ const ApplyCampaignDialog = ({
   children,
 }: ApplyCampaignDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  // TODO: remove this after annual questionnaire is over
+  const isAnnualQuestionnaire = campaign.id === 'Q2FtcGFpZ246OQ'
 
   const now = new Date()
   const { end: appEnd } = campaign.applicationPeriod || {}
@@ -80,7 +82,12 @@ const ApplyCampaignDialog = ({
         <Dialog.Content>
           <Dialog.Content.Message>
             <p>
-              {isInApplicationPeriod ? (
+              {isAnnualQuestionnaire && isInApplicationPeriod ? (
+                <FormattedMessage
+                  defaultMessage="Sign up now and start writing the annual questionnaire. Please check the announcement for event details."
+                  id="JCZFqh"
+                />
+              ) : isInApplicationPeriod ? (
                 <FormattedMessage
                   defaultMessage="Apply now. The writing journey will begin in a few days. For event details, please check the Event Information. "
                   id="l0tvVM"
