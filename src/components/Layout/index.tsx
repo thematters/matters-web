@@ -1,17 +1,18 @@
 import classNames from 'classnames'
 import Sticky from 'react-stickynode'
 
-import { Head, Media, SearchBar, useRoute } from '~/components'
+import { Head, Media, useRoute } from '~/components'
 
 import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
 import Header from './Header'
 import NavBar from './NavBar'
 import Notice from './Notice'
-import SideFooter from './SideFooter'
+// import SideFooter from './SideFooter'
 import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.module.css'
+import { TopNavBar } from './TopNavBar'
 
 export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
@@ -30,7 +31,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   return (
     <>
       <Head />
-
+      <TopNavBar />
       <div className={styles.container}>
         <main className={styles.main}>
           {!isInArticleDetailHistory && (
@@ -71,9 +72,9 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
   Spacing: typeof Spacing
 } = ({ aside, showAside = true, children }) => {
   const { isInPath } = useRoute()
-  const isInEditor =
-    isInPath('ARTICLE_DETAIL_EDIT') || isInPath('ME_DRAFT_DETAIL')
-  const isInSettings = isInPath('SETTINGS')
+  // const isInEditor =
+  //   isInPath('ARTICLE_DETAIL_EDIT') || isInPath('ME_DRAFT_DETAIL')
+  // const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
@@ -92,17 +93,17 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
       {showAside && (
         <aside className={styles.aside}>
           <Media greaterThanOrEqual="lg">
-            <Sticky enabled={enbableSticky} top={0} enableTransforms={false}>
+            <Sticky enabled={enbableSticky} top={73} enableTransforms={false}>
               <section className={styles.content}>
                 <section className={styles.top}>
-                  {!isInEditor && !isInArticleDetailHistory && <SearchBar />}
+                  {/* {!isInEditor && !isInArticleDetailHistory && <SearchBar />} */}
 
                   {aside}
                 </section>
 
-                {!isInEditor && !isInSettings && !isInArticleDetailHistory && (
+                {/* {!isInEditor && !isInSettings && !isInArticleDetailHistory && (
                   <SideFooter />
-                )}
+                )} */}
               </section>
             </Sticky>
           </Media>

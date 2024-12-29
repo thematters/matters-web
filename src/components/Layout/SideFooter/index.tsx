@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
 import { EXTERNAL_LINKS, PATHS, Z_INDEX } from '~/common/enums'
-import { Dropdown, LanguageSwitch, Menu } from '~/components'
+import { Dropdown, Menu } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -34,8 +34,6 @@ const CommunityMenu = () => {
 const SideFooter = () => {
   return (
     <footer className={styles.footer}>
-      <LanguageSwitch />
-
       <section className={styles.links}>
         <Link href={PATHS.ABOUT} legacyBehavior>
           <a>

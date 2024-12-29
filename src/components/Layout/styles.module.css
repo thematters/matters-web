@@ -47,7 +47,9 @@
 
   & .sideNavContent {
     position: sticky;
-    top: 0;
+
+    /* topNavbar height */
+    top: 73px;
   }
 }
 
@@ -81,7 +83,7 @@
 
   @media (--md-up) {
     & .content {
-      min-height: 100vh;
+      /* min-height: 100vh; */
 
       & .top {
         flex-grow: 1;

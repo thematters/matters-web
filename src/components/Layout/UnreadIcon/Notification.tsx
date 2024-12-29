@@ -4,7 +4,8 @@ import { useContext, useEffect } from 'react'
 
 import { ReactComponent as IconNavNotifications } from '@/public/static/icons/24px/nav-notifications.svg'
 import { ReactComponent as IconNavNotificationsActive } from '@/public/static/icons/24px/nav-notifications-active.svg'
-import { Icon, ViewerContext } from '~/components'
+import { BREAKPOINTS } from '~/common/enums'
+import { Icon, useMediaQuery, ViewerContext } from '~/components'
 import { UNREAD_NOTICE_COUNT } from '~/components/GQL/queries/notice'
 import { UnreadNoticeCountQuery } from '~/gql/graphql'
 
@@ -15,6 +16,7 @@ interface UnreadIconProps {
 }
 
 const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
   const viewer = useContext(ViewerContext)
   const { data, startPolling } = useQuery<UnreadNoticeCountQuery>(
     UNREAD_NOTICE_COUNT,
@@ -41,9 +43,9 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
   return (
     <span className={iconClasses}>
       {active ? (
-        <Icon icon={IconNavNotificationsActive} size={32} />
+        <Icon icon={IconNavNotificationsActive} size={isSmUp ? 28 : 24} />
       ) : (
-        <Icon icon={IconNavNotifications} size={32} />
+        <Icon icon={IconNavNotifications} size={isSmUp ? 28 : 24} />
       )}
     </span>
   )

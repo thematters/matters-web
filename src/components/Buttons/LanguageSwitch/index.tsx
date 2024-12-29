@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { ReactComponent as IconWorld } from '@/public/static/icons/24px/world.svg'
-import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
+import { BREAKPOINTS, LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 import {
   Button,
   Dropdown,
@@ -10,6 +10,7 @@ import {
   LanguageContext,
   Menu,
   TextIcon,
+  useMediaQuery,
 } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
@@ -50,16 +51,19 @@ export const LanguageSwitchContent = () => (
 type LanguageSwitchProps = {
   size?: 'sm' | 'lg'
   bgColor?: 'greyDarkest'
+  showText?: boolean
 }
 
 export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
   size = 'sm',
   bgColor,
+  showText = true,
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const iconColor = bgColor === 'greyDarkest' ? 'white' : 'grey'
+  // const iconColor = bgColor === 'greyDarkest' ? 'white' : 'grey'
   const textSize = size === 'sm' ? 12 : 16
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   return (
     <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG}>
@@ -73,11 +77,11 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
           ref={ref}
         >
           <TextIcon
-            icon={<Icon icon={IconWorld} />}
+            icon={<Icon icon={IconWorld} size={isSmUp ? 28 : 24} />}
             size={textSize}
-            color={iconColor}
+            color={'black'}
           >
-            {LANG_TEXT_MAP[lang]}
+            {showText && LANG_TEXT_MAP[lang]}
           </TextIcon>
         </Button>
       )}

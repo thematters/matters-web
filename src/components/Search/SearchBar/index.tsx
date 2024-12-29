@@ -205,7 +205,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             >
               <input
                 // FIMXME: FOUC on re-render
-                style={{ borderColor: 'var(--color-line-grey-light)' }}
+                style={{ borderColor: 'var(--color-grey-lighter)' }}
                 type="search"
                 name="q"
                 ref={searchTextInput}
@@ -272,7 +272,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               >
                 <input
                   // FIMXME: FOUC on re-render
-                  style={{ borderColor: 'var(--color-line-grey-light)' }}
+                  style={{ borderColor: 'var(--color-grey-lighter)' }}
                   type="search"
                   name="q"
                   ref={searchTextInput}

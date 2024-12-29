@@ -15,7 +15,7 @@ type NavListItemProps = {
   showTooltip?: boolean
 } & ButtonProps
 
-const NavListItemButton = forwardRef(
+export const NavListItemButton = forwardRef(
   (
     {
       name,
