@@ -53,7 +53,7 @@
 .wrapper {
   &.sticky {
     position: sticky;
-    top: 0;
+    top: 73px;
     z-index: var(--z-index-sticky-tabs);
     background: var(--color-white);
   }
