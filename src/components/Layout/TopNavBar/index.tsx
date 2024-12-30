@@ -41,7 +41,15 @@ export const TopNavBar = () => {
     <div className={styles.container}>
       <section className={styles.left}>
         <div className={styles.logo}>
-          <Icon icon={IconLogo} />
+          <Button
+            href={PATHS.HOME}
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Discover',
+              id: 'cE4Hfw',
+            })}
+          >
+            <Icon icon={IconLogo} />
+          </Button>
         </div>
         <Media greaterThan="sm">
           <div className={styles.search}>
