@@ -45,3 +45,13 @@
     }
   }
 }
+
+.notificationIcon {
+  & div {
+    height: 24px;
+
+    @media (--sm-up) {
+      height: 28px;
+    }
+  }
+}

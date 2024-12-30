@@ -6,7 +6,7 @@ import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-
 import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
 import { ReactComponent as IconNavSearchActive } from '@/public/static/icons/24px/nav-search-active.svg'
 import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
-import { BREAKPOINTS, PATHS, Z_INDEX } from '~/common/enums'
+import { PATHS, Z_INDEX } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Button,
@@ -15,7 +15,6 @@ import {
   LanguageSwitch,
   Media,
   UniversalAuthButton,
-  useMediaQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
@@ -37,7 +36,6 @@ export const TopNavBar = () => {
   const isInNotification = isInPath('ME_NOTIFICATIONS')
   const isInSearch = isInPath('SEARCH')
   const isAuthed = viewer.isAuthed
-  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   return (
     <div className={styles.container}>
@@ -92,35 +90,71 @@ export const TopNavBar = () => {
               // offset={[-16, 16]}
             >
               {({ openDropdown, ref }) => (
-                <NavListItemButton
-                  onClick={() => {
-                    openDropdown()
-                  }}
-                  name={
-                    <FormattedMessage defaultMessage="Create" id="VzzYJk" />
-                  }
-                  icon={<Icon icon={IconNavCreate} size={isSmUp ? 28 : 24} />}
-                  activeIcon={
-                    <Icon icon={IconNavCreate} size={isSmUp ? 28 : 24} />
-                  }
-                  active={false}
-                  canScrollTop={false}
-                  aria-haspopup="menu"
-                  ref={ref}
-                />
+                <>
+                  <Media at="sm">
+                    <NavListItemButton
+                      onClick={() => {
+                        openDropdown()
+                      }}
+                      name={
+                        <FormattedMessage defaultMessage="Create" id="VzzYJk" />
+                      }
+                      icon={<Icon icon={IconNavCreate} size={24} />}
+                      activeIcon={<Icon icon={IconNavCreate} size={24} />}
+                      active={false}
+                      canScrollTop={false}
+                      aria-haspopup="menu"
+                      ref={ref}
+                    />
+                  </Media>
+                  <Media greaterThan="sm">
+                    <NavListItemButton
+                      onClick={() => {
+                        openDropdown()
+                      }}
+                      name={
+                        <FormattedMessage defaultMessage="Create" id="VzzYJk" />
+                      }
+                      icon={<Icon icon={IconNavCreate} size={28} />}
+                      activeIcon={<Icon icon={IconNavCreate} size={28} />}
+                      active={false}
+                      canScrollTop={false}
+                      aria-haspopup="menu"
+                      ref={ref}
+                    />
+                  </Media>
+                </>
               )}
             </Dropdown>
 
+            {/* <Media at="sm"> */}
             <NavListItemButton
               name={
                 <FormattedMessage defaultMessage="Notifications" id="NAidKb" />
               }
-              icon={<UnreadIcon.Notification />}
-              activeIcon={<UnreadIcon.Notification active />}
+              icon={
+                <section className={styles.notificationIcon}>
+                  <Media at="sm">
+                    <UnreadIcon.Notification />
+                  </Media>
+                  <Media greaterThan="sm">
+                    <UnreadIcon.Notification iconSize={28} />
+                  </Media>
+                </section>
+              }
+              activeIcon={
+                <section className={styles.notificationIcon}>
+                  <Media at="sm">
+                    <UnreadIcon.Notification active />
+                  </Media>
+                  <Media greaterThan="sm">
+                    <UnreadIcon.Notification active iconSize={28} />
+                  </Media>
+                </section>
+              }
               active={isInNotification}
               href={PATHS.ME_NOTIFICATIONS}
             />
-
             <Dropdown
               content={
                 <section>
@@ -147,7 +181,12 @@ export const TopNavBar = () => {
                     id: 'enMIYK',
                   })}
                 >
-                  <MeAvatar user={viewer} size={isSmUp ? 30 : 24} />
+                  <Media at="sm">
+                    <MeAvatar user={viewer} size={24} />
+                  </Media>
+                  <Media greaterThan="sm">
+                    <MeAvatar user={viewer} size={30} />
+                  </Media>
                 </Button>
               )}
             </Dropdown>

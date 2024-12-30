@@ -1,16 +1,16 @@
 import { useContext } from 'react'
 
 import { ReactComponent as IconWorld } from '@/public/static/icons/24px/world.svg'
-import { BREAKPOINTS, LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
+import { LANG_TEXT_MAP, Z_INDEX } from '~/common/enums'
 import {
   Button,
   Dropdown,
   Icon,
   LanguageConsumer,
   LanguageContext,
+  Media,
   Menu,
   TextIcon,
-  useMediaQuery,
 } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
@@ -63,27 +63,48 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
 
   // const iconColor = bgColor === 'greyDarkest' ? 'white' : 'grey'
   const textSize = size === 'sm' ? 12 : 16
-  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
 
   return (
     <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG}>
       {({ openDropdown, ref }) => (
-        <Button
-          onClick={openDropdown}
-          size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
-          spacing={size === 'sm' ? [0, 0] : [0, 8]}
-          bgColor={bgColor}
-          aria-haspopup="listbox"
-          ref={ref}
-        >
-          <TextIcon
-            icon={<Icon icon={IconWorld} size={isSmUp ? 28 : 24} />}
-            size={textSize}
-            color={'black'}
-          >
-            {showText && LANG_TEXT_MAP[lang]}
-          </TextIcon>
-        </Button>
+        <>
+          <Media at="sm">
+            <Button
+              onClick={openDropdown}
+              size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
+              spacing={size === 'sm' ? [0, 0] : [0, 8]}
+              bgColor={bgColor}
+              aria-haspopup="listbox"
+              ref={ref}
+            >
+              <TextIcon
+                icon={<Icon icon={IconWorld} size={24} />}
+                size={textSize}
+                color={'black'}
+              >
+                {showText && LANG_TEXT_MAP[lang]}
+              </TextIcon>
+            </Button>
+          </Media>
+          <Media greaterThan="sm">
+            <Button
+              onClick={openDropdown}
+              size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
+              spacing={size === 'sm' ? [0, 0] : [0, 8]}
+              bgColor={bgColor}
+              aria-haspopup="listbox"
+              ref={ref}
+            >
+              <TextIcon
+                icon={<Icon icon={IconWorld} size={28} />}
+                size={textSize}
+                color={'black'}
+              >
+                {showText && LANG_TEXT_MAP[lang]}
+              </TextIcon>
+            </Button>
+          </Media>
+        </>
       )}
     </Dropdown>
   )
