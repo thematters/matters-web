@@ -241,7 +241,7 @@ interface AuthenticateProp {
 }
 
 interface ReadTimeProp {
-  articleId: string
+  shortHash: string
   time: number
 }
 
