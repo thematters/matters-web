@@ -21,6 +21,7 @@ import {
 } from '~/gql/graphql'
 
 import Announcements from '../../Announcements'
+import ChannelCarousel from '../../Channel/Page/Carousel'
 import Authors from '../Authors'
 import Billboard from '../Billboard'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
@@ -215,6 +216,9 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
         eof
       >
         <List>
+          <Media lessThan="lg">
+            <ChannelCarousel />
+          </Media>
           {isHottestFeed && <Announcements />}
           {mixFeed.map((edge, i) => {
             if (edge?.__typename === 'HorizontalFeed') {

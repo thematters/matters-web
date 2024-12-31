@@ -1,0 +1,74 @@
+.carousel {
+  position: relative;
+  width: 100%;
+  padding: var(--sp8) 0 0;
+  @media (--sm-up) {
+    padding: 0;
+  }
+}
+
+.footer {
+  @mixin flex-center-all;
+
+  z-index: 1;
+  margin: var(--sp16) 0 var(--sp20);
+
+  & .dots {
+    @mixin flex-center-start;
+
+    padding-left: var(--sp8);
+  }
+}
+
+.viewport {
+  width: 100%;
+  overflow: hidden;
+
+  & .container {
+    display: flex;
+    margin-left: calc(var(--sp8) * -1);
+  }
+
+  & .slide {
+    position: relative;
+    min-width: 100%;
+  }
+
+  & .content {
+    position: relative;
+    z-index: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--sp8) var(--sp16);
+    overflow: hidden;
+    border-radius: var(--sp16);
+
+    & a {
+      padding: var(--sp4) var(--sp10);
+      font-size: var(--text16);
+    }
+
+    & p {
+      display: none;
+    }
+  }
+}
+
+.dot {
+  @mixin transition;
+
+  box-sizing: content-box;
+  box-sizing: border-box;
+  width: 12px;
+  height: 3px;
+  margin-right: var(--sp8);
+  cursor: pointer;
+  background: var(--color-grey);
+  border: 2px solid rgb(255 255 255 / 0%);
+  border-radius: 100%;
+  transition-property: border-color, border-width, background-color;
+
+  &.selected {
+    border-color: var(--color-black);
+  }
+}
