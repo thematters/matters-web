@@ -93,6 +93,24 @@ export const SearchBar: React.FC<SearchBarProps> = ({
 
   const searchTextInput = useRef<HTMLInputElement>(null)
 
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === '/') {
+      if (document.activeElement === searchTextInput.current) {
+        return
+      }
+
+      event.preventDefault()
+      searchTextInput.current?.focus()
+      // set cursor to the end
+      searchTextInput.current?.setSelectionRange(
+        searchTextInput.current.value.length,
+        searchTextInput.current.value.length
+      )
+    }
+  }
+
+  useNativeEventListener('keydown', handleKeyDown)
+
   // dropdown
   const [showDropdown, setShowDropdown] = useState(false)
   const closeDropdown = () => setShowDropdown(false)
@@ -238,7 +256,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           <Dropdown
             focusLock={false}
             content={
-              !isInSearch &&
               debouncedSearch && (
                 <SearchQuickResult
                   searchKey={debouncedSearch}
