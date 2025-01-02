@@ -238,7 +238,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           <Dropdown
             focusLock={false}
             content={
-              !isInSearch &&
               debouncedSearch && (
                 <SearchQuickResult
                   searchKey={debouncedSearch}
