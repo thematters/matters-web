@@ -1,6 +1,6 @@
 import classnames from 'classnames'
 import useEmblaCarousel from 'embla-carousel-react'
-import { useEffect, useState } from 'react'
+import { type MouseEvent, useEffect, useRef, useState } from 'react'
 
 import Dot from './Dot'
 import styles from './styles.module.css'
@@ -47,8 +47,12 @@ const ChannelCarousel = () => {
   const [dot, setDot] = useState(0)
   const [carousel, carouselApi] = useEmblaCarousel({
     align: 'start',
-    dragFree: true,
+    skipSnaps: false,
   })
+
+  // state of carusel
+  const scrolling = useRef(false)
+  const settled = useRef(true)
 
   const [hash, setHash] = useState('')
 
@@ -79,6 +83,42 @@ const ChannelCarousel = () => {
     }
   }, [hash])
 
+  const onCaptureClick = (event: MouseEvent) => {
+    if (scrolling.current) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  }
+
+  const onSelect = () => {
+    if (carouselApi) {
+      setDot(carouselApi.selectedScrollSnap())
+    }
+  }
+
+  useEffect(() => {
+    if (!carouselApi) {
+      return
+    }
+
+    carouselApi.reInit()
+    carouselApi.scrollTo(0)
+
+    setDot(0)
+
+    carouselApi.on('select', onSelect)
+    carouselApi.on('scroll', () => {
+      if (!scrolling.current && settled.current) {
+        scrolling.current = true
+        settled.current = false
+      }
+    })
+    carouselApi.on('settle', () => {
+      scrolling.current = false
+      settled.current = true
+    })
+  }, [items, carouselApi])
+
   const scroll = (index: number) => {
     if (!carouselApi) {
       return
@@ -90,7 +130,11 @@ const ChannelCarousel = () => {
 
   return (
     <section className={styles.carousel}>
-      <section className={styles.viewport} ref={carousel}>
+      <section
+        className={styles.viewport}
+        ref={carousel}
+        onClickCapture={onCaptureClick}
+      >
         <div className={styles.container}>
           {items?.map((item, i) => {
             const title = item.title || ''
