@@ -1,6 +1,14 @@
 import classnames from 'classnames'
 import useEmblaCarousel from 'embla-carousel-react'
-import { type MouseEvent, useEffect, useRef, useState } from 'react'
+import {
+  type MouseEvent,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react'
+
+import { useCarousel } from '~/components/Hook/useCarousel'
 
 import Dot from './Dot'
 import styles from './styles.module.css'
@@ -55,6 +63,70 @@ const ChannelCarousel = () => {
   const scrolling = useRef(false)
   const settled = useRef(true)
 
+  const autoplay = useCallback(() => {
+    if (!carouselApi) {
+      return
+    }
+    if (carouselApi.canScrollNext()) {
+      setDot(carouselApi.selectedScrollSnap())
+      carouselApi.scrollNext()
+    } else {
+      setDot(0)
+      carouselApi.scrollTo(0)
+    }
+  }, [carouselApi])
+
+  const { play, stop } = useCarousel(autoplay, 5000)
+
+  const scroll = (index: number) => {
+    if (!carouselApi) {
+      return
+    }
+    setDot(index)
+    carouselApi.scrollTo(index)
+    stop()
+  }
+
+  const onSelect = () => {
+    if (carouselApi) {
+      setDot(carouselApi.selectedScrollSnap())
+    }
+  }
+
+  const onCaptureClick = (event: MouseEvent) => {
+    if (scrolling.current) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
+  }
+
+  useEffect(() => {
+    if (!carouselApi) {
+      return
+    }
+
+    carouselApi.reInit()
+    carouselApi.scrollTo(0)
+
+    setDot(0)
+    setSnaps(carouselApi.scrollSnapList())
+
+    carouselApi.on('pointerDown', stop)
+    carouselApi.on('select', onSelect)
+    carouselApi.on('scroll', () => {
+      if (!scrolling.current && settled.current) {
+        scrolling.current = true
+        settled.current = false
+      }
+    })
+    carouselApi.on('settle', () => {
+      scrolling.current = false
+      settled.current = true
+    })
+
+    play()
+  }, [carouselApi])
+
   const [hash, setHash] = useState('')
 
   useEffect(() => {
@@ -83,51 +155,6 @@ const ChannelCarousel = () => {
       setSelectedChannel(channel)
     }
   }, [hash])
-
-  const scroll = (index: number) => {
-    if (!carouselApi) {
-      return
-    }
-    setDot(index)
-    carouselApi.scrollTo(index)
-  }
-
-  const onSelect = () => {
-    if (carouselApi) {
-      setDot(carouselApi.selectedScrollSnap())
-    }
-  }
-
-  const onCaptureClick = (event: MouseEvent) => {
-    if (scrolling.current) {
-      event.preventDefault()
-      event.stopPropagation()
-    }
-  }
-
-  useEffect(() => {
-    if (!carouselApi) {
-      return
-    }
-
-    carouselApi.reInit()
-    carouselApi.scrollTo(0)
-
-    setDot(0)
-    setSnaps(carouselApi.scrollSnapList())
-
-    carouselApi.on('select', onSelect)
-    carouselApi.on('scroll', () => {
-      if (!scrolling.current && settled.current) {
-        scrolling.current = true
-        settled.current = false
-      }
-    })
-    carouselApi.on('settle', () => {
-      scrolling.current = false
-      settled.current = true
-    })
-  }, [items, carouselApi])
 
   return (
     <section className={styles.carousel}>
