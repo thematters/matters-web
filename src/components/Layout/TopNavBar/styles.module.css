@@ -1,6 +1,4 @@
 .container {
-  @mixin border-bottom-grey-light;
-
   position: sticky;
   top: 0;
   z-index: calc(var(--z-index-global-header) + 1);
@@ -9,10 +7,12 @@
   justify-content: space-between;
   padding: var(--sp20) var(--sp16);
   background-color: var(--color-white);
-  border-bottom-color: var(--color-grey-hover);
 
   @media (--sm-up) {
+    @mixin border-bottom-grey-light;
+
     padding: var(--sp20) var(--sp32);
+    border-bottom-color: var(--color-grey-hover);
   }
 
   & .left {
