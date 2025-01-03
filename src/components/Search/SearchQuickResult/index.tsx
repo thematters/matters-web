@@ -8,7 +8,6 @@ import {
 } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 import {
-  Media,
   Menu,
   // Spacer,
   SpinnerBlock,
@@ -18,7 +17,6 @@ import {
 import { QuickResultQuery } from '~/gql/graphql'
 
 import { QUICK_RESULT } from './gql'
-import TriggerFullSearchItem from './TriggerFullSearchItem'
 
 interface QuickSearchProps {
   searchKey: string
@@ -99,17 +97,13 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
 
   return (
     <Menu width={inPage ? undefined : 'md'}>
-      <Media lessThan="lg">
-        <TriggerFullSearchItem searchKey={searchKey} />
-        <Menu.Divider />
-      </Media>
-
       {hasUsers &&
         userEdges.map(
           ({ node, cursor }, i) =>
             node.__typename === 'User' && (
               <Fragment key={node.id}>
                 <Menu.Item
+                  spacing={[12, 16]}
                   bgActiveColor="greyHover"
                   isActive={`user${cursor}` === activeItem}
                   {...toPath({
@@ -141,7 +135,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
               </Fragment>
             )
         )}
-      {hasUsers && hasTags && <Menu.Divider />}
+      {hasUsers && hasTags && <Menu.Divider isInSearch={true} />}
       {hasTags &&
         tagEdges.map(
           ({ node, cursor }, i) =>
