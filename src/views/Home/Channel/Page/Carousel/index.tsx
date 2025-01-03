@@ -2,14 +2,13 @@ import classnames from 'classnames'
 import useEmblaCarousel from 'embla-carousel-react'
 import {
   type MouseEvent,
-  useCallback,
+  // useCallback,
   useEffect,
   useRef,
   useState,
 } from 'react'
 
-import { useCarousel } from '~/components/Hook/useCarousel'
-
+// import { useCarousel } from '~/components/Hook/useCarousel'
 import Dot from './Dot'
 import styles from './styles.module.css'
 
@@ -61,22 +60,22 @@ const ChannelCarousel = () => {
 
   // state of carusel
   const scrolling = useRef(false)
-  const settled = useRef(true)
+  // const settled = useRef(true)
 
-  const autoplay = useCallback(() => {
-    if (!carouselApi) {
-      return
-    }
-    if (carouselApi.canScrollNext()) {
-      setDot(carouselApi.selectedScrollSnap())
-      carouselApi.scrollNext()
-    } else {
-      setDot(0)
-      carouselApi.scrollTo(0)
-    }
-  }, [carouselApi])
+  // const autoplay = useCallback(() => {
+  //   if (!carouselApi) {
+  //     return
+  //   }
+  //   if (carouselApi.canScrollNext()) {
+  //     setDot(carouselApi.selectedScrollSnap())
+  //     carouselApi.scrollNext()
+  //   } else {
+  //     setDot(0)
+  //     carouselApi.scrollTo(0)
+  //   }
+  // }, [carouselApi])
 
-  const { play, stop } = useCarousel(autoplay, 5000)
+  // const { play, stop } = useCarousel(autoplay, 5000)
 
   const scroll = (index: number) => {
     if (!carouselApi) {
@@ -111,20 +110,20 @@ const ChannelCarousel = () => {
     setDot(0)
     setSnaps(carouselApi.scrollSnapList())
 
-    carouselApi.on('pointerDown', stop)
+    // carouselApi.on('pointerDown', stop)
     carouselApi.on('select', onSelect)
-    carouselApi.on('scroll', () => {
-      if (!scrolling.current && settled.current) {
-        scrolling.current = true
-        settled.current = false
-      }
-    })
-    carouselApi.on('settle', () => {
-      scrolling.current = false
-      settled.current = true
-    })
+    // carouselApi.on('scroll', () => {
+    //   if (!scrolling.current && settled.current) {
+    //     scrolling.current = true
+    //     settled.current = false
+    //   }
+    // })
+    // carouselApi.on('settle', () => {
+    //   scrolling.current = false
+    //   settled.current = true
+    // })
 
-    play()
+    // play()
   }, [carouselApi])
 
   const [hash, setHash] = useState('')
