@@ -8,6 +8,8 @@ import {
   useState,
 } from 'react'
 
+import { useNativeEventListener } from '~/components'
+
 // import { useCarousel } from '~/components/Hook/useCarousel'
 import Dot from './Dot'
 import styles from './styles.module.css'
@@ -167,7 +169,7 @@ const ChannelCarousel = () => {
 
   const [columnCount, setColumnCount] = useState<ColumnCount>('4')
 
-  useEffect(() => {
+  useNativeEventListener('resize', () => {
     if (typeof window !== 'undefined') {
       if (window.innerWidth >= 453) {
         setColumnCount('5')
@@ -179,7 +181,7 @@ const ChannelCarousel = () => {
         setColumnCount('7')
       }
     }
-  }, [])
+  })
 
   const pageCount = Math.ceil(items.length / (Number(columnCount) * 2))
   let slicedItems = []
