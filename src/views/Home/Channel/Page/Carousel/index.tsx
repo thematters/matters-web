@@ -6,7 +6,7 @@ import Dot from './Dot'
 import styles from './styles.module.css'
 
 const ChannelCarousel = () => {
-  const host = 'http://localhost:3000'
+  const host = typeof window !== 'undefined' ? window.location.origin : ''
   const items = [
     {
       id: '1',
