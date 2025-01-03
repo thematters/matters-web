@@ -110,6 +110,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
             node.__typename === 'User' && (
               <Fragment key={node.id}>
                 <Menu.Item
+                  spacing={[12, 16]}
                   bgActiveColor="greyHover"
                   isActive={`user${cursor}` === activeItem}
                   {...toPath({
@@ -141,7 +142,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
               </Fragment>
             )
         )}
-      {hasUsers && hasTags && <Menu.Divider />}
+      {hasUsers && hasTags && <Menu.Divider isInSearch={true} />}
       {hasTags &&
         tagEdges.map(
           ({ node, cursor }, i) =>
