@@ -171,6 +171,9 @@ const ChannelCarousel = () => {
 
   useNativeEventListener('resize', () => {
     if (typeof window !== 'undefined') {
+      if (window.innerWidth < 453) {
+        setColumnCount('4')
+      }
       if (window.innerWidth >= 453) {
         setColumnCount('5')
       }
@@ -183,16 +186,21 @@ const ChannelCarousel = () => {
     }
   })
 
-  const pageCount = Math.ceil(items.length / (Number(columnCount) * 2))
-  let slicedItems = []
-  for (let i = 0; i < pageCount; i++) {
-    slicedItems.push(
-      items.slice(
-        i * (Number(columnCount) * 2),
-        (i + 1) * (Number(columnCount) * 2)
+  const [slicedItems, setSlicedItems] = useState<any[]>([])
+
+  useEffect(() => {
+    const pageCount = Math.ceil(items.length / (Number(columnCount) * 2))
+    const _slicedItems: any[] = []
+    for (let i = 0; i < pageCount; i++) {
+      _slicedItems.push(
+        items.slice(
+          i * (Number(columnCount) * 2),
+          (i + 1) * (Number(columnCount) * 2)
+        )
       )
-    )
-  }
+    }
+    setSlicedItems(_slicedItems)
+  }, [columnCount])
 
   // state of carusel
   const scrolling = useRef(false)
@@ -253,7 +261,7 @@ const ChannelCarousel = () => {
     }
   }, [])
 
-  const [selectedChannel, setSelectedChannel] = useState(0)
+  const [selectedChannel, setSelectedChannel] = useState(1)
 
   useEffect(() => {
     if (hash) {
@@ -274,21 +282,26 @@ const ChannelCarousel = () => {
             return (
               <div key={i} className={styles.slide}>
                 <div className={styles.content}>
-                  {its?.map((item, i) => {
-                    const title = item.title || ''
-                    return (
-                      <a
-                        key={i}
-                        href={item.link}
-                        className={classnames({
-                          [styles.selectedChannel]:
-                            selectedChannel === parseInt(item.id, 10),
-                        })}
-                      >
-                        {title}
-                      </a>
-                    )
-                  })}
+                  {its?.map(
+                    (
+                      item: { title: string; id: string; link: string },
+                      index: number
+                    ) => {
+                      const title = item.title || ''
+                      return (
+                        <a
+                          key={index}
+                          href={item.link || '#'}
+                          className={classnames({
+                            [styles.selectedChannel]:
+                              selectedChannel === parseInt(item?.id || '1', 10),
+                          })}
+                        >
+                          {title}
+                        </a>
+                      )
+                    }
+                  )}
                 </div>
               </div>
             )
