@@ -38,15 +38,29 @@
     z-index: 0;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: var(--sp8) var(--sp16);
+    gap: var(--sp8) var(--sp12);
     padding-left: var(--sp10);
     border-radius: var(--sp16);
+
+    @media (width >= 453px) {
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    @media (width >= 561px) {
+      grid-template-columns: repeat(6, 1fr);
+    }
+
+    @media (width >= 669px) {
+      grid-template-columns: repeat(7, 1fr);
+    }
 
     & a {
       padding: var(--sp4) var(--sp10);
       font-size: var(--text14);
       line-height: 1.375rem;
       color: var(--color-grey-darker);
+      text-align: center;
+      white-space: nowrap;
 
       &.selectedChannel {
         font-weight: var(--font-semibold);
