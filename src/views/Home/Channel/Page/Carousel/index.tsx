@@ -45,8 +45,9 @@ const ChannelCarousel = () => {
     },
   ]
   const [dot, setDot] = useState(0)
+  const [, setSnaps] = useState<any[]>([])
   const [carousel, carouselApi] = useEmblaCarousel({
-    align: 'start',
+    loop: true,
     skipSnaps: false,
   })
 
@@ -83,16 +84,24 @@ const ChannelCarousel = () => {
     }
   }, [hash])
 
-  const onCaptureClick = (event: MouseEvent) => {
-    if (scrolling.current) {
-      event.preventDefault()
-      event.stopPropagation()
+  const scroll = (index: number) => {
+    if (!carouselApi) {
+      return
     }
+    setDot(index)
+    carouselApi.scrollTo(index)
   }
 
   const onSelect = () => {
     if (carouselApi) {
       setDot(carouselApi.selectedScrollSnap())
+    }
+  }
+
+  const onCaptureClick = (event: MouseEvent) => {
+    if (scrolling.current) {
+      event.preventDefault()
+      event.stopPropagation()
     }
   }
 
@@ -105,6 +114,7 @@ const ChannelCarousel = () => {
     carouselApi.scrollTo(0)
 
     setDot(0)
+    setSnaps(carouselApi.scrollSnapList())
 
     carouselApi.on('select', onSelect)
     carouselApi.on('scroll', () => {
@@ -118,15 +128,6 @@ const ChannelCarousel = () => {
       settled.current = true
     })
   }, [items, carouselApi])
-
-  const scroll = (index: number) => {
-    if (!carouselApi) {
-      return
-    }
-    setDot(index)
-    carouselApi.scrollTo(index)
-    stop()
-  }
 
   return (
     <section className={styles.carousel}>
