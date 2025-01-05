@@ -6,10 +6,10 @@ import { Head, Media, useRoute } from '~/components'
 import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
 import Header from './Header'
-import NavBar from './NavBar'
+// import NavBar from './NavBar'
 import Notice from './Notice'
 // import SideFooter from './SideFooter'
-import SideNav from './SideNav'
+// import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.module.css'
 import { TopNavBar } from './TopNavBar'
@@ -21,12 +21,12 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   AuthHeader: typeof AuthHeader
   Notice: typeof Notice
 } = ({ children }) => {
-  const { isInPath } = useRoute()
-  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
-  const isInArticleDetail = isInPath('ARTICLE_DETAIL')
-  const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
-  const isInMomentDetail = isInPath('MOMENT_DETAIL')
-  const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
+  // const { isInPath } = useRoute()
+  // const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  // const isInArticleDetail = isInPath('ARTICLE_DETAIL')
+  // const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
+  // const isInMomentDetail = isInPath('MOMENT_DETAIL')
+  // const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
 
   return (
     <>
@@ -34,21 +34,21 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
       <TopNavBar />
       <div className={styles.container}>
         <main className={styles.main}>
-          {!isInArticleDetailHistory && (
+          {/* {!isInArticleDetailHistory && (
             <nav role="navigation" className={styles.sidenav}>
               <section className={styles.sideNavContent}>
-                <Media greaterThan="sm">
+                <Media greaterThan="md">
                   <SideNav />
                 </Media>
               </section>
             </nav>
-          )}
+          )} */}
 
           {children}
         </main>
       </div>
 
-      {!isInDraftDetail &&
+      {/* {!isInDraftDetail &&
         !isInArticleDetail &&
         !isInArticleDetailHistory &&
         !isInMomentDetail &&
@@ -58,7 +58,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
               <NavBar />
             </footer>
           </Media>
-        )}
+        )} */}
     </>
   )
 }

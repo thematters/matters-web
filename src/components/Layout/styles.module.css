@@ -23,8 +23,8 @@
 
   @media (--sm-up) {
     display: grid;
-    grid-template-areas: 'left content';
-    grid-template-columns: 3rem minmax(0, 100%);
+    grid-template-areas: 'content';
+    grid-template-columns: minmax(0, 100%);
     grid-column-gap: 1.25rem;
   }
 
@@ -41,7 +41,7 @@
 }
 
 .sidenav {
-  @media (--sm-up) {
+  @media (--md-up) {
     grid-column: left;
   }
 
