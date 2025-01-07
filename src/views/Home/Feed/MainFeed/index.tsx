@@ -1,5 +1,5 @@
 import { NetworkStatus } from 'apollo-client'
-import { useContext, useEffect, useRef } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -11,6 +11,7 @@ import {
   Media,
   QueryError,
   SpinnerBlock,
+  useNativeEventListener,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -235,6 +236,17 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
       link: `${host}/#channel=28`,
     },
   ]
+
+  const [showSingleLine, setShowSingleLine] = useState(false)
+
+  useNativeEventListener('scroll', () => {
+    if (window.scrollY > 85) {
+      setShowSingleLine(true)
+    } else {
+      setShowSingleLine(false)
+    }
+  })
+
   /**
    * Data Fetching
    */
@@ -364,7 +376,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
         <List>
           <Media lessThan="lg">
             <ChannelCarousel items={items} />
-            <SingleLine items={items} />
+            {showSingleLine && <SingleLine items={items} />}
           </Media>
           {isHottestFeed && <Announcements />}
           {mixFeed.map((edge, i) => {

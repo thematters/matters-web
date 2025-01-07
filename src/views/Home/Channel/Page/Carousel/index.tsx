@@ -174,7 +174,9 @@ const ChannelCarousel = ({ items }: ChannelCarouselProps) => {
         </div>
       </section>
       <footer className={styles.footer}>
-        <section className={styles.dots}>
+        <section
+          className={classnames(['page-channel-carousel-dots', styles.dots])}
+        >
           {slicedItems?.map((_, index) => (
             <Dot
               key={index}
