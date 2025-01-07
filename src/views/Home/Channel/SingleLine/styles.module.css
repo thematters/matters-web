@@ -1,0 +1,32 @@
+/* 频道行样式 */
+.singleLine {
+  @mixin border-bottom-grey;
+
+  position: relative;
+  display: flex;
+  gap: var(--sp12);
+  align-items: center;
+  margin: 0 calc(var(--sp16) * -1);
+  overflow-x: auto; /* horizontal scroll */
+  white-space: nowrap;
+  border-bottom-color: var(--color-grey-hover);
+  scrollbar-width: none; /* Firefox hide scrollbar */
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  & .item {
+    flex-shrink: 0; /* prevent shrink */
+    padding: 8px 10px;
+    color: var(--color-grey-darker);
+    white-space: nowrap;
+    cursor: pointer;
+
+    &.selectedChannel {
+      font-weight: 600;
+      color: var(--color-black);
+      border-bottom: 1px solid var(--color-black);
+    }
+  }
+}

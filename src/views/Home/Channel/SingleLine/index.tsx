@@ -1,0 +1,78 @@
+import classnames from 'classnames'
+import { useState } from 'react'
+import { useEffect } from 'react'
+
+import styles from './styles.module.css'
+
+type SingleLineProps = {
+  items: {
+    id: string
+    title: string
+    link: string
+  }[]
+}
+
+const SingleLine = ({ items }: SingleLineProps) => {
+  const [hash, setHash] = useState('')
+
+  useEffect(() => {
+    // Function to update the hash state
+    const updateHash = () => {
+      setHash(window.location.hash)
+    }
+
+    // Set the initial hash
+    updateHash()
+
+    // Add an event listener to update the hash when it changes
+    window.addEventListener('hashchange', updateHash)
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('hashchange', updateHash)
+    }
+  }, [])
+
+  const [selectedChannel, setSelectedChannel] = useState(1)
+
+  useEffect(() => {
+    if (hash) {
+      const channel = parseInt(hash.split('=')[1], 10)
+      setSelectedChannel(channel)
+
+      // scroll to the selected channel
+      const selectedChannel = document.querySelector(
+        `.singleLine-item[data-channel-id="${channel}"]`
+      )
+      if (selectedChannel) {
+        selectedChannel.scrollIntoView({
+          behavior: 'smooth',
+          inline: 'center',
+          block: 'nearest',
+        })
+      }
+    }
+  }, [hash])
+
+  return (
+    <section className={styles.singleLine}>
+      {items.map((item) => (
+        <a
+          key={item.id}
+          href={item.link}
+          className={classnames({
+            ['singleLine-item']: true,
+            [styles.item]: true,
+            [styles.selectedChannel]:
+              selectedChannel === parseInt(item?.id || '1', 10),
+          })}
+          data-channel-id={item.id}
+        >
+          {item.title}
+        </a>
+      ))}
+    </section>
+  )
+}
+
+export default SingleLine
