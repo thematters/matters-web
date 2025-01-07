@@ -16,150 +16,15 @@ import styles from './styles.module.css'
 
 type ColumnCount = '4' | '5' | '6' | '7'
 
-const ChannelCarousel = () => {
-  const host = typeof window !== 'undefined' ? window.location.origin : ''
-  const items = [
-    {
-      id: '1',
-      title: 'Item 1',
-      link: `${host}/#channel=1`,
-    },
-    {
-      id: '2',
-      title: 'Item 2',
-      link: `${host}/#channel=2`,
-    },
-    {
-      id: '3',
-      title: 'Item 3',
-      link: `${host}/#channel=3`,
-    },
-    {
-      id: '4',
-      title: 'Item 4',
-      link: `${host}/#channel=4`,
-    },
-    {
-      id: '5',
-      title: 'Item 5',
-      link: `${host}/#channel=5`,
-    },
-    {
-      id: '6',
-      title: 'Item 6',
-      link: `${host}/#channel=6`,
-    },
-    {
-      id: '7',
-      title: 'Item 7',
-      link: `${host}/#channel=7`,
-    },
-    {
-      id: '8',
-      title: 'Item 8',
-      link: `${host}/#channel=8`,
-    },
-    {
-      id: '9',
-      title: 'Item 9',
-      link: `${host}/#channel=9`,
-    },
-    {
-      id: '10',
-      title: 'Item 10',
-      link: `${host}/#channel=10`,
-    },
-    {
-      id: '11',
-      title: 'Item 11',
-      link: `${host}/#channel=11`,
-    },
-    {
-      id: '12',
-      title: 'Item 12',
-      link: `${host}/#channel=12`,
-    },
-    {
-      id: '13',
-      title: 'Item 13',
-      link: `${host}/#channel=13`,
-    },
-    {
-      id: '14',
-      title: 'Item 14',
-      link: `${host}/#channel=14`,
-    },
-    {
-      id: '15',
-      title: 'Item 15',
-      link: `${host}/#channel=15`,
-    },
-    {
-      id: '16',
-      title: 'Item 16',
-      link: `${host}/#channel=16`,
-    },
-    {
-      id: '17',
-      title: 'Item 17',
-      link: `${host}/#channel=17`,
-    },
-    {
-      id: '18',
-      title: 'Item 18',
-      link: `${host}/#channel=18`,
-    },
-    {
-      id: '19',
-      title: 'Item 19',
-      link: `${host}/#channel=19`,
-    },
-    {
-      id: '20',
-      title: 'Item 20',
-      link: `${host}/#channel=20`,
-    },
-    {
-      id: '21',
-      title: 'Item 21',
-      link: `${host}/#channel=21`,
-    },
-    {
-      id: '22',
-      title: 'Item 22',
-      link: `${host}/#channel=22`,
-    },
-    {
-      id: '23',
-      title: 'Item 23',
-      link: `${host}/#channel=23`,
-    },
-    {
-      id: '24',
-      title: 'Item 24',
-      link: `${host}/#channel=24`,
-    },
-    {
-      id: '25',
-      title: 'Item 25',
-      link: `${host}/#channel=25`,
-    },
-    {
-      id: '26',
-      title: 'Item 26',
-      link: `${host}/#channel=26`,
-    },
-    {
-      id: '27',
-      title: 'Item 27',
-      link: `${host}/#channel=27`,
-    },
-    {
-      id: '28',
-      title: 'Item 28',
-      link: `${host}/#channel=28`,
-    },
-  ]
+type ChannelCarouselProps = {
+  items: {
+    id: string
+    title: string
+    link: string
+  }[]
+}
+
+const ChannelCarousel = ({ items }: ChannelCarouselProps) => {
   const [dot, setDot] = useState(0)
   const [, setSnaps] = useState<any[]>([])
   const [carousel, carouselApi] = useEmblaCarousel({

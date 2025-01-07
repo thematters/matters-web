@@ -363,7 +363,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
       >
         <List>
           <Media lessThan="lg">
-            <ChannelCarousel />
+            <ChannelCarousel items={items} />
             <SingleLine items={items} />
           </Media>
           {isHottestFeed && <Announcements />}
