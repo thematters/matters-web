@@ -96,11 +96,14 @@ const ChannelCarousel = ({ items }: ChannelCarouselProps) => {
     if (!carouselApi) {
       return
     }
-
+    const channel = parseInt(hash.split('=')[1], 10)
+    const pageIndex = slicedItems.findIndex((item) =>
+      item.find((i: any) => i.id === channel.toString())
+    )
     carouselApi.reInit()
-    carouselApi.scrollTo(0)
+    carouselApi.scrollTo(pageIndex)
+    setDot(pageIndex)
 
-    setDot(0)
     setSnaps(carouselApi.scrollSnapList())
 
     carouselApi.on('select', onSelect)
@@ -132,8 +135,13 @@ const ChannelCarousel = ({ items }: ChannelCarouselProps) => {
     if (hash) {
       const channel = parseInt(hash.split('=')[1], 10)
       setSelectedChannel(channel)
+      // const pageIndex = Math.floor(channel / (Number(columnCount) * 2))
+      const pageIndex = slicedItems.findIndex((item) =>
+        item.find((i: any) => i.id === channel.toString())
+      )
+      carouselApi?.scrollTo(pageIndex)
     }
-  }, [hash])
+  }, [slicedItems, hash])
 
   return (
     <section className={styles.carousel}>
