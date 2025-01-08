@@ -1,15 +1,26 @@
 /* 频道行样式 */
-.singleLine {
-  @mixin border-bottom-grey;
 
-  position: relative;
+.container {
+  position: fixed;
+  top: 65px;
+  z-index: var(--z-index-sticky-tabs);
+}
+
+.singleLine {
+  position: fixed;
+  top: 65px;
+  right: 0;
+  left: 0;
+  z-index: var(--z-index-sticky-tabs);
   display: flex;
   gap: var(--sp12);
   align-items: center;
-  margin: 0 calc(var(--sp16) * -1);
+
+  /* margin: 0 calc(var(--sp16) * -1); */
   overflow-x: auto; /* horizontal scroll */
   white-space: nowrap;
-  border-bottom-color: var(--color-grey-hover);
+  background-color: var(--color-white);
+  border-bottom: 2px solid var(--color-grey-hover);
   scrollbar-width: none; /* Firefox hide scrollbar */
 
   &::-webkit-scrollbar {

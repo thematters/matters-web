@@ -55,6 +55,7 @@ const SingleLine = ({ items }: SingleLineProps) => {
   }, [hash])
 
   return (
+    // <div className={styles.container}>
     <section className={styles.singleLine}>
       {items.map((item) => (
         <a
@@ -72,6 +73,7 @@ const SingleLine = ({ items }: SingleLineProps) => {
         </a>
       ))}
     </section>
+    // </div>
   )
 }
 
