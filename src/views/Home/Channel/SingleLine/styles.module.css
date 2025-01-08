@@ -20,7 +20,7 @@
   overflow-x: auto; /* horizontal scroll */
   white-space: nowrap;
   background-color: var(--color-white);
-  border-bottom: 2px solid var(--color-grey-hover);
+  border-bottom: 1px solid var(--color-grey-hover);
   scrollbar-width: none; /* Firefox hide scrollbar */
 
   &::-webkit-scrollbar {
