@@ -42,6 +42,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
   return (
     <Card
       {...path}
+      is="link"
       spacing={[8, 8]}
       bgColor="none"
       bgActiveColor="none"
