@@ -117,6 +117,7 @@ const Authors = () => {
                   <UserDigest.Rich
                     key={node.id}
                     user={node}
+                    is="link"
                     spacing={[12, 0]}
                     bgColor="none"
                     hasFollow={false}
