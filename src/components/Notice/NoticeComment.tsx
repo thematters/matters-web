@@ -1,8 +1,9 @@
 import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import { PATHS } from '~/common/enums'
 import { toPath } from '~/common/utils'
-import { LinkWrapper, toast } from '~/components'
+import { LinkWrapper, Media, MomentDetailDialog, toast } from '~/components'
 import { CommentContent } from '~/components/Comment/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
@@ -152,6 +153,43 @@ const NoticeComment = ({
           href: '',
           as: '',
         }
+
+  if (moment) {
+    return (
+      <>
+        <Media at="sm">
+          <LinkWrapper {...path}>
+            <section>
+              <NoticeContentDigest content={comment.content || ''} />
+            </section>
+          </LinkWrapper>
+        </Media>
+        <Media greaterThan="sm">
+          <MomentDetailDialog shortHash={moment.shortHash}>
+            {({ openDialog }) => (
+              <a
+                href={path.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  // add hash to the url
+                  window.history.replaceState(
+                    {},
+                    '',
+                    `${PATHS.ME_NOTIFICATIONS}#${comment.id}`
+                  )
+                  openDialog()
+                }}
+              >
+                <section>
+                  <NoticeContentDigest content={comment.content || ''} />
+                </section>
+              </a>
+            )}
+          </MomentDetailDialog>
+        </Media>
+      </>
+    )
+  }
 
   return (
     <LinkWrapper {...path}>
