@@ -64,7 +64,7 @@ const articlePublicFragment = gql`
     contents {
       html
     }
-
+    noindex
     ...HeaderArticle
     ...AuthorSidebarArticle
     ...MetaInfoArticle
