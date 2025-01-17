@@ -38,6 +38,7 @@
         padding: var(--sp4) var(--sp10);
         font-size: var(--font-size-14);
         color: var(--color-grey-darker);
+        white-space: nowrap;
         background-color: var(--color-grey-lighter);
         border-radius: var(--sp8);
 
