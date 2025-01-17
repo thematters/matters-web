@@ -38,6 +38,7 @@ export const useJumpToComment = ({ fullSpacing }: Props) => {
       () =>
         highlightComment(
           targetElement as HTMLElement,
+          16,
           isParentComment,
           fullSpacing
         ),

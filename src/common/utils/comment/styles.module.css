@@ -2,12 +2,36 @@
   animation: comment-background-fade-out 1.6s ease-out 0s;
 }
 
-.activeParentCommentFullSpacing {
+.activeParentCommentFullSpacing8 {
+  padding: var(--sp8) !important;
+  margin: calc(-1 * var(--sp8));
+}
+
+.activeParentCommentFullSpacing12 {
+  padding: var(--sp12) !important;
+  margin: calc(-1 * var(--sp12));
+}
+
+.activeParentCommentFullSpacing16 {
   padding: var(--sp16) !important;
   margin: calc(-1 * var(--sp16));
 }
 
-.activeParentComment {
+.activeParentComment8 {
+  padding-right: var(--sp8) !important;
+  padding-left: var(--sp8) !important;
+  margin-right: calc(-1 * var(--sp8));
+  margin-left: calc(-1 * var(--sp8));
+}
+
+.activeParentComment12 {
+  padding-right: var(--sp12) !important;
+  padding-left: var(--sp12) !important;
+  margin-right: calc(-1 * var(--sp12));
+  margin-left: calc(-1 * var(--sp12));
+}
+
+.activeParentComment16 {
   padding-right: var(--sp16) !important;
   padding-left: var(--sp16) !important;
   margin-right: calc(-1 * var(--sp16));
