@@ -2,8 +2,15 @@ import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { toPath } from '~/common/utils'
-import { LinkWrapper, Media, MomentDetailDialog, toast } from '~/components'
+import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
+import { sessionStorage, toPath } from '~/common/utils'
+import {
+  LinkWrapper,
+  Media,
+  MomentDetailDialog,
+  toast,
+  useRoute,
+} from '~/components'
 import { CommentContent } from '~/components/Comment/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
@@ -57,6 +64,7 @@ const NoticeComment = ({
   comment: NoticeCommentFragment | null
 }) => {
   const intl = useIntl()
+  const { router } = useRoute()
 
   const article =
     comment?.node.__typename === 'Article' ? comment.node : undefined
@@ -64,6 +72,15 @@ const NoticeComment = ({
     comment?.node.__typename === 'Circle' ? comment.node : undefined
   const moment =
     comment?.node.__typename === 'Moment' ? comment.node : undefined
+
+  const setReferrer = () => {
+    sessionStorage.set(MOMENT_DIGEST_REFERRER, true)
+  }
+
+  const goToMomentDetail = () => {
+    setReferrer()
+    router.push(path.href)
+  }
 
   if (!comment) {
     return null
@@ -158,11 +175,17 @@ const NoticeComment = ({
     return (
       <>
         <Media at="sm">
-          <LinkWrapper {...path}>
+          <a
+            href={path.href}
+            onClick={(e) => {
+              e.preventDefault()
+              goToMomentDetail()
+            }}
+          >
             <section>
               <NoticeContentDigest content={comment.content || ''} />
             </section>
-          </LinkWrapper>
+          </a>
         </Media>
         <Media greaterThan="sm">
           <MomentDetailDialog shortHash={moment.shortHash}>
