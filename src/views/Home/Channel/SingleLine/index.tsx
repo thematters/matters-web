@@ -2,6 +2,9 @@ import classnames from 'classnames'
 import { useState } from 'react'
 import { useEffect } from 'react'
 
+import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import { Icon } from '~/components'
+
 import styles from './styles.module.css'
 
 type SingleLineProps = {
@@ -10,9 +13,10 @@ type SingleLineProps = {
     title: string
     link: string
   }[]
+  toggleDropdown: () => void
 }
 
-const SingleLine = ({ items }: SingleLineProps) => {
+const SingleLine = ({ items, toggleDropdown }: SingleLineProps) => {
   const [hash, setHash] = useState('')
 
   useEffect(() => {
@@ -72,6 +76,9 @@ const SingleLine = ({ items }: SingleLineProps) => {
           {item.title}
         </a>
       ))}
+      <button className={styles.moreBtn} onClick={toggleDropdown}>
+        <Icon aria-label="More" icon={IconDown} size={16} />
+      </button>
     </section>
     // </div>
   )

@@ -41,3 +41,13 @@
     }
   }
 }
+
+.moreBtn {
+  position: sticky;
+  right: 0;
+  z-index: 1; /* ensure button stays on top */
+  padding: 8px 16px; /* expand button area */
+  color: var(--color-grey-darker);
+  cursor: pointer;
+  background: var(--color-white);
+}

@@ -22,6 +22,7 @@ import {
 } from '~/gql/graphql'
 
 import Announcements from '../../Announcements'
+import DropdownDialog from '../../Channel/DropdownDialog'
 import ChannelCarousel from '../../Channel/Page/Carousel'
 import SingleLine from '../../Channel/SingleLine'
 import Authors from '../Authors'
@@ -237,6 +238,12 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     },
   ]
 
+  const [showDropdown, setShowDropdown] = useState(false)
+
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown)
+  }
+
   const [showSingleLine, setShowSingleLine] = useState(false)
 
   useNativeEventListener('scroll', () => {
@@ -376,7 +383,12 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
         <List>
           <Media lessThan="lg">
             <ChannelCarousel items={items} />
-            {showSingleLine && <SingleLine items={items} />}
+            {showSingleLine && !showDropdown && (
+              <SingleLine items={items} toggleDropdown={toggleDropdown} />
+            )}
+            {showDropdown && (
+              <DropdownDialog items={items} toggleDropdown={toggleDropdown} />
+            )}
           </Media>
           {isHottestFeed && <Announcements />}
           {mixFeed.map((edge, i) => {
