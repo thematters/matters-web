@@ -1,8 +1,16 @@
 import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { toPath } from '~/common/utils'
-import { LinkWrapper, toast } from '~/components'
+import { PATHS } from '~/common/enums'
+import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
+import { sessionStorage, toPath } from '~/common/utils'
+import {
+  LinkWrapper,
+  Media,
+  MomentDetailDialog,
+  toast,
+  useRoute,
+} from '~/components'
 import { CommentContent } from '~/components/Comment/Content'
 import { NoticeCommentFragment } from '~/gql/graphql'
 
@@ -56,6 +64,7 @@ const NoticeComment = ({
   comment: NoticeCommentFragment | null
 }) => {
   const intl = useIntl()
+  const { router } = useRoute()
 
   const article =
     comment?.node.__typename === 'Article' ? comment.node : undefined
@@ -63,6 +72,15 @@ const NoticeComment = ({
     comment?.node.__typename === 'Circle' ? comment.node : undefined
   const moment =
     comment?.node.__typename === 'Moment' ? comment.node : undefined
+
+  const setReferrer = () => {
+    sessionStorage.set(MOMENT_DIGEST_REFERRER, true)
+  }
+
+  const goToMomentDetail = () => {
+    setReferrer()
+    router.push(path.href)
+  }
 
   if (!comment) {
     return null
@@ -152,6 +170,49 @@ const NoticeComment = ({
           href: '',
           as: '',
         }
+
+  if (moment) {
+    return (
+      <>
+        <Media at="sm">
+          <a
+            href={path.href}
+            onClick={(e) => {
+              e.preventDefault()
+              goToMomentDetail()
+            }}
+          >
+            <section>
+              <NoticeContentDigest content={comment.content || ''} />
+            </section>
+          </a>
+        </Media>
+        <Media greaterThan="sm">
+          <MomentDetailDialog shortHash={moment.shortHash}>
+            {({ openDialog }) => (
+              <a
+                href={path.href}
+                onClick={(e) => {
+                  e.preventDefault()
+                  // add hash to the url
+                  window.history.replaceState(
+                    {},
+                    '',
+                    `${PATHS.ME_NOTIFICATIONS}#${comment.id}`
+                  )
+                  openDialog()
+                }}
+              >
+                <section>
+                  <NoticeContentDigest content={comment.content || ''} />
+                </section>
+              </a>
+            )}
+          </MomentDetailDialog>
+        </Media>
+      </>
+    )
+  }
 
   return (
     <LinkWrapper {...path}>

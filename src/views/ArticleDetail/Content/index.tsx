@@ -119,7 +119,7 @@ const Content = ({
     }
   }, [lastScroll])
 
-  useReadTimer({ articleId, container: contentContainer })
+  useReadTimer({ container: contentContainer })
 
   return (
     <>
