@@ -383,7 +383,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
         <List>
           <Media lessThan="lg">
             <ChannelCarousel items={items} />
-            {showSingleLine && !showDropdown && (
+            {showSingleLine && (
               <SingleLine items={items} toggleDropdown={toggleDropdown} />
             )}
             {showDropdown && (
