@@ -36,7 +36,7 @@
 
   @media (--lg-up) {
     grid-template-areas: 'left content content content content content content content right right right';
-    grid-template-columns: repeat(11, [col-start] minmax(0, 1fr));
+    grid-template-columns: 6.125rem repeat(10, [col-start] minmax(0, 1fr));
   }
 }
 

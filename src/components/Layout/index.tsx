@@ -9,7 +9,7 @@ import Header from './Header'
 // import NavBar from './NavBar'
 import Notice from './Notice'
 // import SideFooter from './SideFooter'
-// import SideNav from './SideNav'
+import SideChannelNav from './SideChannelNav'
 import Spacing from './Spacing'
 import styles from './styles.module.css'
 import { TopNavBar } from './TopNavBar'
@@ -21,7 +21,8 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   AuthHeader: typeof AuthHeader
   Notice: typeof Notice
 } = ({ children }) => {
-  // const { isInPath } = useRoute()
+  const { isInPath } = useRoute()
+  const isHome = isInPath('HOME')
   // const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   // const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   // const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
@@ -34,15 +35,15 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
       <TopNavBar />
       <div className={styles.container}>
         <main className={styles.main}>
-          {/* {!isInArticleDetailHistory && (
+          {isHome && (
             <nav role="navigation" className={styles.sidenav}>
               <section className={styles.sideNavContent}>
                 <Media greaterThan="md">
-                  <SideNav />
+                  <SideChannelNav />
                 </Media>
               </section>
             </nav>
-          )} */}
+          )}
 
           {children}
         </main>
