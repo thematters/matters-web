@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import { useEffect, useState } from 'react'
+import Sticky from 'react-stickynode'
 
 import styles from './styles.module.css'
 
@@ -178,22 +179,26 @@ const SideChannelNav = () => {
   }, [hash])
 
   return (
-    <section className={styles.sideChannelNav}>
-      {items.map((item) => (
-        <a
-          key={item.id}
-          href={item.link}
-          className={classnames({
-            [styles.item]: true,
-            [styles.selectedChannel]:
-              selectedChannel === parseInt(item?.id || '1', 10),
-          })}
-          data-channel-id={item.id}
-        >
-          {item.title}
-        </a>
-      ))}
-    </section>
+    <Sticky enabled={true} top={73} enableTransforms={false}>
+      <section className={styles.content}>
+        <section className={styles.sideChannelNav}>
+          {items.map((item) => (
+            <a
+              key={item.id}
+              href={item.link}
+              className={classnames({
+                [styles.item]: true,
+                [styles.selectedChannel]:
+                  selectedChannel === parseInt(item?.id || '1', 10),
+              })}
+              data-channel-id={item.id}
+            >
+              {item.title}
+            </a>
+          ))}
+        </section>
+      </section>
+    </Sticky>
   )
 }
 
