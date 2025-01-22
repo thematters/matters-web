@@ -31,7 +31,7 @@
   @media (--md-up) {
     grid-template-areas: 'left content right';
     grid-template-columns: 6.125rem minmax(0, 100%) 17rem;
-    grid-column-gap: 2.5rem;
+    grid-column-gap: 3rem;
   }
 
   @media (--lg-up) {
