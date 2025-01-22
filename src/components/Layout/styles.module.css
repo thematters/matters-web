@@ -30,7 +30,7 @@
 
   @media (--md-up) {
     grid-template-areas: 'left content right';
-    grid-template-columns: 4rem minmax(0, 100%) 17rem;
+    grid-template-columns: 6.125rem minmax(0, 100%) 17rem;
     grid-column-gap: 2.5rem;
   }
 
