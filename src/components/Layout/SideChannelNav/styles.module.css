@@ -1,11 +1,14 @@
 .content {
-  display: flex;
-  flex-direction: column;
+  @mixin hide-scrollbar;
+
+  max-height: calc(100vh - 73px);
+  overflow-y: auto;
 
   & .sideChannelNav {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+
+    /* flex-grow: 1; */
     gap: var(--sp12);
     align-items: end;
     padding-top: var(--sp32);
