@@ -29,6 +29,9 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   // const isInMomentDetail = isInPath('MOMENT_DETAIL')
   // const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
 
+  // const twoColumnLayout = isInPath('ARTICLE_DETAIL') || isInPath('ME_DRAFT_DETAIL')
+  // const threeColumnLayout = isHome
+
   return (
     <>
       <Head />
