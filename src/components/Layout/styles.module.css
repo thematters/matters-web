@@ -46,11 +46,11 @@
   }
 
   & .sideNavContent {
-    /* position: sticky; */
+    position: sticky;
 
     /* topNavbar height */
 
-    /* top: 73px; */
+    top: 73px;
   }
 }
 
