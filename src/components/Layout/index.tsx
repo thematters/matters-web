@@ -21,22 +21,78 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   AuthHeader: typeof AuthHeader
   Notice: typeof Notice
 } = ({ children }) => {
-  const { isInPath } = useRoute()
+  const { isInPath, isPathStartWith } = useRoute()
   const isHome = isInPath('HOME')
   // const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   // const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   // const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
-  // const isInMomentDetail = isInPath('MOMENT_DETAIL')
-  // const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
+  const isInMomentDetail = isInPath('MOMENT_DETAIL')
+  const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
+  const isInCircleDetail =
+    isInPath('CIRCLE_DETAIL') && isPathStartWith('/~', true)
+  const isUserWorks = isInPath('USER_WORKS') && isPathStartWith('/@', true)
+  const isOneColumnLayout =
+    isInPath('FOLLOW') ||
+    isInPath('SEARCH') ||
+    isInPath('TAGS') ||
+    // Circle
+    isInCircleDetail ||
+    isInPath('CIRCLE_DISCUSSION') ||
+    isInPath('CIRCLE_BROADCAST') ||
+    isInPath('CIRCLE_SETTINGS') ||
+    isInPath('CIRCLE_SETTINGS_EDIT_PROFILE') ||
+    isInPath('CIRCLE_SETTINGS_MANAGE_INVITATION') ||
+    isInPath('CIRCLE_CREATION') ||
+    // Misc
+    isInPath('GUIDE') ||
+    isInPath('COMMUNITY') ||
+    isInPath('TOS') ||
+    // Me
+    isInPath('ME_DRAFTS') ||
+    isInPath('ME_PUBLISHED') ||
+    isInPath('ME_ARCHIVED') ||
+    isInPath('ME_BOOKMARKS_ARTICLES') ||
+    isInPath('ME_BOOKMARKS_TAGS') ||
+    isInPath('ME_HISTORY') ||
+    isInPath('ME_HISTORY_COMMENTS') ||
+    isInPath('ME_HISTORY_LIKES_SENT') ||
+    isInPath('ME_HISTORY_LIKES_RECEIVED') ||
+    isInPath('ME_NOTIFICATIONS') ||
+    isInPath('ME_WALLET') ||
+    isInPath('ME_WALLET_TRANSACTIONS') ||
+    isInPath('ME_ANALYTICS') ||
+    isInPath('ME_SETTINGS') ||
+    isInPath('ME_SETTINGS_NOTIFICATIONS') ||
+    isInPath('ME_SETTINGS_NOTIFICATIONS_CIRCLE') ||
+    isInPath('ME_SETTINGS_MISC') ||
+    isInPath('ME_SETTINGS_BLOCKED')
 
-  // const twoColumnLayout = isInPath('ARTICLE_DETAIL') || isInPath('ME_DRAFT_DETAIL')
-  // const threeColumnLayout = isHome
+  const isTwoColumnLayout =
+    // Tag
+    isInPath('TAG_DETAIL') ||
+    // User
+    isUserWorks ||
+    isInPath('USER_COLLECTIONS') ||
+    isInPath('USER_COLLECTION_DETAIL') ||
+    // Article
+    isInPath('ARTICLE_DETAIL') ||
+    isInPath('ARTICLE_DETAIL_EDIT') ||
+    isInPath('ARTICLE_DETAIL_HISTORY') ||
+    isInPath('ME_DRAFT_NEW') ||
+    isInPath('ME_DRAFT_DETAIL')
+  const isThreeColumnLayout = isHome
+
+  const layoutClasses = classNames({
+    [styles.oneColumnLayout]: isOneColumnLayout,
+    [styles.twoColumnLayout]: isTwoColumnLayout,
+    [styles.threeColumnLayout]: isThreeColumnLayout,
+  })
 
   return (
     <>
       <Head />
-      <TopNavBar />
-      <div className={styles.container}>
+      {!isInMomentDetail && !isInMomentDetailEdit && <TopNavBar />}
+      <div className={layoutClasses}>
         <main className={styles.main}>
           {isHome && (
             <nav role="navigation" className={styles.sidenav}>

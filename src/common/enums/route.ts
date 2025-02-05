@@ -86,7 +86,6 @@ export const ROUTES: {
    */
   { key: 'HOME', pathname: '/' },
   { key: 'FOLLOW', pathname: '/follow' },
-  { key: 'AUTHORS', pathname: '/authors' },
   { key: 'SEARCH', pathname: '/search' },
   // experient page for recommendation engine testing
   { key: 'RECOMMENDATION', pathname: '/recommendation' },
@@ -130,7 +129,6 @@ export const ROUTES: {
   // Auth
   { key: 'LOGIN', pathname: '/login' },
   { key: 'SIGNUP', pathname: '/signup' },
-  { key: 'FORGET', pathname: '/forget' },
   { key: 'CALLBACK_PROVIDER', pathname: '/callback/[provider]' },
 
   // Misc
