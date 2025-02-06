@@ -9,7 +9,7 @@ import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const SideChannelNav = () => {
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const shortHash = getQuery('shortHash')
 
   const { lang } = useContext(LanguageContext)
@@ -36,6 +36,11 @@ const SideChannelNav = () => {
             })}
             data-channel-id={c.id}
             title={c.name}
+            onClick={(e) => {
+              e.preventDefault()
+              e.stopPropagation()
+              router.push(`/c/${c.shortHash}`)
+            }}
           >
             {c.name}
           </a>
