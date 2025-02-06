@@ -10,6 +10,7 @@ import _get from 'lodash/get'
  */
 type ROUTE_KEY =
   | 'HOME'
+  | 'CHANNEL'
   | 'FOLLOW'
   | 'AUTHORS'
   | 'SEARCH'
@@ -85,6 +86,7 @@ export const ROUTES: {
    * Public
    */
   { key: 'HOME', pathname: '/' },
+  { key: 'CHANNEL', pathname: '/c/[shortHash]' },
   { key: 'FOLLOW', pathname: '/follow' },
   { key: 'SEARCH', pathname: '/search' },
   // experient page for recommendation engine testing

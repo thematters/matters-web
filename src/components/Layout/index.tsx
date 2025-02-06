@@ -80,7 +80,8 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
     isInPath('ARTICLE_DETAIL_HISTORY') ||
     isInPath('ME_DRAFT_NEW') ||
     isInPath('ME_DRAFT_DETAIL')
-  const isThreeColumnLayout = isHome
+  const isThreeColumnLayout = isHome || isInPath('CHANNEL')
+  const isShowSideChannelNav = isHome || isInPath('CHANNEL')
 
   const layoutClasses = classNames({
     [styles.oneColumnLayout]: isOneColumnLayout,
@@ -94,7 +95,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
       {!isInMomentDetail && !isInMomentDetailEdit && <TopNavBar />}
       <div className={layoutClasses}>
         <main className={styles.main}>
-          {isHome && (
+          {isShowSideChannelNav && (
             <nav role="navigation" className={styles.sidenav}>
               <section className={styles.sideNavContent}>
                 <Media greaterThan="md">
