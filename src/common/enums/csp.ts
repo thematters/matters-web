@@ -32,9 +32,6 @@ const SCRIPT_SRC = [
   '*.google-analytics.com',
   '*.analytics.google.com',
 
-  // AdSense
-  'pagead2.googlesyndication.com',
-
   // Stripe
   'js.stripe.com',
 ]
