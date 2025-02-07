@@ -68,7 +68,7 @@ const HomeFeed = () => {
         <Media lessThan="md">
           <CarouselPlaceHolder />
         </Media>
-        <MainFeedPlaceholder />
+        <MainFeedPlaceholder spacing />
       </>
     )
   }
