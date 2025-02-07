@@ -30,6 +30,7 @@
   & .item {
     flex-shrink: 0; /* prevent shrink */
     padding: 8px 10px;
+    font-size: var(--text14);
     color: var(--color-grey-darker);
     white-space: nowrap;
     cursor: pointer;

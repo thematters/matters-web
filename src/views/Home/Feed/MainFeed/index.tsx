@@ -102,6 +102,14 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     setShowDropdown(!showDropdown)
   }
 
+  useEffect(() => {
+    if (showDropdown) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'auto'
+    }
+  }, [showDropdown])
+
   const [showSingleLine, setShowSingleLine] = useState(false)
 
   useNativeEventListener('scroll', () => {
