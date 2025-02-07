@@ -7,34 +7,27 @@ import {
   CardExposureTracker,
   EmptyArticle,
   InfiniteScroll,
-  LanguageContext,
   List,
   Media,
   QueryError,
-  SpinnerBlock,
-  useNativeEventListener,
   usePublicQuery,
+  useRoute,
   ViewerContext,
 } from '~/components'
-import { CHANNELS } from '~/components/GQL/queries/channels'
 import {
-  ChannelsQuery,
   HottestFeedPublicQuery,
   IcymiFeedPublicQuery,
   NewestFeedPublicQuery,
 } from '~/gql/graphql'
 
 import Announcements from '../../Announcements'
-import DropdownDialog from '../../Channel/DropdownDialog'
-import ChannelCarousel from '../../Channel/Page/Carousel'
-import CarouselPlaceHolder from '../../Channel/Page/Carousel/PlaceHolder'
-import SingleLine from '../../Channel/SingleLine'
 import Authors from '../Authors'
 import Billboard from '../Billboard'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
+import Placeholder from './Placeholder'
 type FeedArticlesPublic =
   | HottestFeedPublicQuery
   | NewestFeedPublicQuery
@@ -96,29 +89,19 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   const isHottestFeed = sortBy === 'hottest'
   const isIcymiFeed = sortBy === 'icymi'
 
-  const [showDropdown, setShowDropdown] = useState(false)
+  const { getQuery } = useRoute()
+  const shortHash = getQuery('shortHash')
+  const [isLoading, setIsLoading] = useState(false)
 
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown)
-  }
-
+  // Mock loading state
   useEffect(() => {
-    if (showDropdown) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'auto'
+    if (shortHash) {
+      setIsLoading(true)
+      setTimeout(() => {
+        setIsLoading(false)
+      }, 1000)
     }
-  }, [showDropdown])
-
-  const [showSingleLine, setShowSingleLine] = useState(false)
-
-  useNativeEventListener('scroll', () => {
-    if (window.scrollY > 85) {
-      setShowSingleLine(true)
-    } else {
-      setShowSingleLine(false)
-    }
-  })
+  }, [shortHash])
 
   /**
    * Data Fetching
@@ -128,13 +111,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   const { data, error, loading, fetchMore, networkStatus, client } =
     usePublicQuery<FeedArticlesPublic>(query, {
       notifyOnNetworkStatusChange: true,
-    })
-
-  const { lang } = useContext(LanguageContext)
-
-  const { data: channelsData, loading: channelsLoading } =
-    usePublicQuery<ChannelsQuery>(CHANNELS, {
-      variables: { userLanguage: lang },
     })
 
   // pagination
@@ -202,15 +178,14 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   /**
    * Render
    */
-  if ((loading && (!result || isNewLoading)) || channelsLoading) {
+  if ((loading && (!result || isNewLoading)) || isLoading) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()
     }
     return (
       <>
-        <CarouselPlaceHolder />
-        <SpinnerBlock />
+        <Placeholder />
       </>
     )
   }
@@ -245,8 +220,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     })
   }
 
-  const channels = channelsData?.channels || []
-
   return (
     <>
       {recommendation &&
@@ -261,18 +234,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
         eof
       >
         <List>
-          <Media lessThan="lg">
-            <ChannelCarousel channels={channels} />
-            {showSingleLine && (
-              <SingleLine channels={channels} toggleDropdown={toggleDropdown} />
-            )}
-            {showDropdown && (
-              <DropdownDialog
-                channels={channels}
-                toggleDropdown={toggleDropdown}
-              />
-            )}
-          </Media>
           {isHottestFeed && <Announcements />}
           {mixFeed.map((edge, i) => {
             if (edge?.__typename === 'HorizontalFeed') {

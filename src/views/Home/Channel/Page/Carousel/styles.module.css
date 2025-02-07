@@ -104,6 +104,10 @@
   gap: var(--sp12);
   margin-top: var(--sp12);
 
+  @media (--sm-down) {
+    padding: 0 var(--sp16);
+  }
+
   & .placeholderBox {
     height: 1.875rem;
     background-color: var(--color-grey-lighter);
