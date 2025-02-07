@@ -1,52 +1,26 @@
 import classnames from 'classnames'
-import { useState } from 'react'
 import { useEffect } from 'react'
 
 import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
-import { Icon } from '~/components'
+import { Icon, useRoute } from '~/components'
+import { ChannelsQuery } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 type SingleLineProps = {
-  items: {
-    id: string
-    title: string
-    link: string
-  }[]
+  channels: ChannelsQuery['channels']
   toggleDropdown: () => void
 }
 
-const SingleLine = ({ items, toggleDropdown }: SingleLineProps) => {
-  const [hash, setHash] = useState('')
+const SingleLine = ({ channels, toggleDropdown }: SingleLineProps) => {
+  const { getQuery, router } = useRoute()
+  const shortHash = getQuery('shortHash')
 
   useEffect(() => {
-    // Function to update the hash state
-    const updateHash = () => {
-      setHash(window.location.hash)
-    }
-
-    // Set the initial hash
-    updateHash()
-
-    // Add an event listener to update the hash when it changes
-    window.addEventListener('hashchange', updateHash)
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('hashchange', updateHash)
-    }
-  }, [])
-
-  const [selectedChannel, setSelectedChannel] = useState(1)
-
-  useEffect(() => {
-    if (hash) {
-      const channel = parseInt(hash.split('=')[1], 10)
-      setSelectedChannel(channel)
-
+    if (shortHash) {
       // scroll to the selected channel
       const selectedChannel = document.querySelector(
-        `.singleLine-item[data-channel-id="${channel}"]`
+        `.singleLine-item[data-channel-short-hash="${shortHash}"]`
       )
       if (selectedChannel) {
         selectedChannel.scrollIntoView({
@@ -56,24 +30,31 @@ const SingleLine = ({ items, toggleDropdown }: SingleLineProps) => {
         })
       }
     }
-  }, [hash])
+  }, [shortHash])
 
   return (
     // <div className={styles.container}>
     <section className={styles.singleLine}>
-      {items.map((item) => (
+      {channels.map((channel, index) => (
         <a
-          key={item.id}
-          href={item.link}
+          key={channel.id}
+          href={`/c/${channel.shortHash}`}
           className={classnames({
             ['singleLine-item']: true,
             [styles.item]: true,
             [styles.selectedChannel]:
-              selectedChannel === parseInt(item?.id || '1', 10),
+              shortHash === channel.shortHash || (!shortHash && index === 0),
           })}
-          data-channel-id={item.id}
+          data-channel-short-hash={channel.shortHash}
+          onClick={(e) => {
+            e.preventDefault()
+            if (shortHash === channel.shortHash) {
+              return
+            }
+            router.push(`/c/${channel.shortHash}`)
+          }}
         >
-          {item.title}
+          {channel.name}
         </a>
       ))}
       <button className={styles.moreBtn} onClick={toggleDropdown}>
