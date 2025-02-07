@@ -8,7 +8,8 @@ import {
   useState,
 } from 'react'
 
-import { useNativeEventListener } from '~/components'
+import { useNativeEventListener, useRoute } from '~/components'
+import { ChannelsQuery } from '~/gql/graphql'
 
 // import { useCarousel } from '~/components/Hook/useCarousel'
 import Dot from './Dot'
@@ -17,20 +18,19 @@ import styles from './styles.module.css'
 type ColumnCount = '4' | '5' | '6' | '7'
 
 type ChannelCarouselProps = {
-  items: {
-    id: string
-    title: string
-    link: string
-  }[]
+  channels: ChannelsQuery['channels']
 }
 
-const ChannelCarousel = ({ items }: ChannelCarouselProps) => {
+const ChannelCarousel = ({ channels }: ChannelCarouselProps) => {
   const [dot, setDot] = useState(0)
   const [, setSnaps] = useState<any[]>([])
   const [carousel, carouselApi] = useEmblaCarousel({
     loop: true,
     skipSnaps: false,
   })
+
+  const { getQuery, router } = useRoute()
+  const shortHash = getQuery('shortHash')
 
   const [columnCount, setColumnCount] = useState<ColumnCount>('4')
 
@@ -54,11 +54,11 @@ const ChannelCarousel = ({ items }: ChannelCarouselProps) => {
   const [slicedItems, setSlicedItems] = useState<any[]>([])
 
   useEffect(() => {
-    const pageCount = Math.ceil(items.length / (Number(columnCount) * 2))
+    const pageCount = Math.ceil(channels.length / (Number(columnCount) * 2))
     const _slicedItems: any[] = []
     for (let i = 0; i < pageCount; i++) {
       _slicedItems.push(
-        items.slice(
+        channels.slice(
           i * (Number(columnCount) * 2),
           (i + 1) * (Number(columnCount) * 2)
         )
@@ -96,10 +96,12 @@ const ChannelCarousel = ({ items }: ChannelCarouselProps) => {
     if (!carouselApi) {
       return
     }
-    const channel = parseInt(hash.split('=')[1], 10)
-    const pageIndex = slicedItems.findIndex((item) =>
-      item.find((i: any) => i.id === channel.toString())
+    let pageIndex = slicedItems.findIndex((item) =>
+      item.find((i: any) => i.shortHash === shortHash)
     )
+    if (pageIndex === -1) {
+      pageIndex = 0
+    }
     carouselApi.reInit()
     carouselApi.scrollTo(pageIndex)
     setDot(pageIndex)
@@ -109,39 +111,16 @@ const ChannelCarousel = ({ items }: ChannelCarouselProps) => {
     carouselApi.on('select', onSelect)
   }, [carouselApi])
 
-  const [hash, setHash] = useState('')
-
   useEffect(() => {
-    // Function to update the hash state
-    const updateHash = () => {
-      setHash(window.location.hash)
-    }
-
-    // Set the initial hash
-    updateHash()
-
-    // Add an event listener to update the hash when it changes
-    window.addEventListener('hashchange', updateHash)
-
-    // Clean up the event listener on component unmount
-    return () => {
-      window.removeEventListener('hashchange', updateHash)
-    }
-  }, [])
-
-  const [selectedChannel, setSelectedChannel] = useState(1)
-
-  useEffect(() => {
-    if (hash) {
-      const channel = parseInt(hash.split('=')[1], 10)
-      setSelectedChannel(channel)
-      // const pageIndex = Math.floor(channel / (Number(columnCount) * 2))
+    if (shortHash) {
       const pageIndex = slicedItems.findIndex((item) =>
-        item.find((i: any) => i.id === channel.toString())
+        item.find((i: any) => i.shortHash === shortHash)
       )
       carouselApi?.scrollTo(pageIndex)
     }
-  }, [slicedItems, hash])
+  }, [slicedItems, shortHash])
+
+  const firstShortHash = slicedItems[0]?.[0]?.shortHash
 
   return (
     <section className={styles.carousel}>
@@ -157,18 +136,26 @@ const ChannelCarousel = ({ items }: ChannelCarouselProps) => {
                 <div className={styles.content}>
                   {its?.map(
                     (
-                      item: { title: string; id: string; link: string },
+                      item: ChannelsQuery['channels'][number],
                       index: number
                     ) => {
-                      const title = item.title || ''
+                      const title = item.name || ''
                       return (
                         <a
                           key={index}
-                          href={item.link || '#'}
+                          href={`/c/${item.shortHash}`}
                           className={classnames({
                             [styles.selectedChannel]:
-                              selectedChannel === parseInt(item?.id || '1', 10),
+                              shortHash === item.shortHash ||
+                              (!shortHash &&
+                                index === 0 &&
+                                item.shortHash === firstShortHash),
                           })}
+                          onClick={(e) => {
+                            e.preventDefault()
+                            e.stopPropagation()
+                            router.push(`/c/${item.shortHash}`)
+                          }}
                         >
                           {title}
                         </a>

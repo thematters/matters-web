@@ -7,6 +7,7 @@ import {
   CardExposureTracker,
   EmptyArticle,
   InfiniteScroll,
+  LanguageContext,
   List,
   Media,
   QueryError,
@@ -15,7 +16,9 @@ import {
   usePublicQuery,
   ViewerContext,
 } from '~/components'
+import { CHANNELS } from '~/components/GQL/queries/channels'
 import {
+  ChannelsQuery,
   HottestFeedPublicQuery,
   IcymiFeedPublicQuery,
   NewestFeedPublicQuery,
@@ -24,6 +27,7 @@ import {
 import Announcements from '../../Announcements'
 import DropdownDialog from '../../Channel/DropdownDialog'
 import ChannelCarousel from '../../Channel/Page/Carousel'
+import CarouselPlaceHolder from '../../Channel/Page/Carousel/PlaceHolder'
 import SingleLine from '../../Channel/SingleLine'
 import Authors from '../Authors'
 import Billboard from '../Billboard'
@@ -31,7 +35,6 @@ import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
-
 type FeedArticlesPublic =
   | HottestFeedPublicQuery
   | NewestFeedPublicQuery
@@ -264,6 +267,13 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
       notifyOnNetworkStatusChange: true,
     })
 
+  const { lang } = useContext(LanguageContext)
+
+  const { data: channelsData, loading: channelsLoading } =
+    usePublicQuery<ChannelsQuery>(CHANNELS, {
+      variables: { userLanguage: lang },
+    })
+
   // pagination
   const connectionPath = 'viewer.recommendation.feed'
   const recommendation = data?.viewer?.recommendation
@@ -329,12 +339,17 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   /**
    * Render
    */
-  if (loading && (!result || isNewLoading)) {
+  if ((loading && (!result || isNewLoading)) || channelsLoading) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()
     }
-    return <SpinnerBlock />
+    return (
+      <>
+        <CarouselPlaceHolder />
+        <SpinnerBlock />
+      </>
+    )
   }
 
   if (error) {
@@ -367,6 +382,8 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     })
   }
 
+  const channels = channelsData?.channels || []
+
   return (
     <>
       {recommendation &&
@@ -382,7 +399,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
       >
         <List>
           <Media lessThan="lg">
-            <ChannelCarousel items={items} />
+            <ChannelCarousel channels={channels} />
             {showSingleLine && (
               <SingleLine items={items} toggleDropdown={toggleDropdown} />
             )}

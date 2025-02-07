@@ -97,3 +97,16 @@
     border-color: var(--color-black);
   }
 }
+
+.placeholderContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  gap: var(--sp12);
+  margin-top: var(--sp12);
+
+  & .placeholderBox {
+    height: 1.875rem;
+    background-color: var(--color-grey-lighter);
+    border-radius: var(--sp8);
+  }
+}
