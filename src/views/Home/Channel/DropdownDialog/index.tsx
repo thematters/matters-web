@@ -1,4 +1,6 @@
 import classnames from 'classnames'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
 
 import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
 import { Icon, useRoute } from '~/components'
@@ -12,9 +14,9 @@ type DropdownDialogProps = {
 }
 
 const DropdownDialog = ({ channels, toggleDropdown }: DropdownDialogProps) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
-
+  const [isOpen, setIsOpen] = useState(false)
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     // click in container but not in content
     const target = event.target as HTMLElement
@@ -22,6 +24,15 @@ const DropdownDialog = ({ channels, toggleDropdown }: DropdownDialogProps) => {
       toggleDropdown()
     }
   }
+
+  useEffect(() => {
+    setIsOpen(true)
+  }, [])
+  useEffect(() => {
+    if (shortHash && isOpen) {
+      toggleDropdown()
+    }
+  }, [shortHash])
   return (
     <div className={styles.container} onClick={handleClick}>
       <div className={styles.content} id="channel-dropdown-dialog-content">
@@ -40,26 +51,22 @@ const DropdownDialog = ({ channels, toggleDropdown }: DropdownDialogProps) => {
           <div className={styles.body}>
             <div className={styles.grid}>
               {channels.map((channel, index) => (
-                <a
+                <Link
                   key={channel.id}
+                  scroll={false}
                   href={`/c/${channel.shortHash}`}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    if (shortHash === channel.shortHash) {
-                      return
-                    }
-                    toggleDropdown()
-                    router.push(`/c/${channel.shortHash}`)
-                  }}
-                  className={classnames(styles.gridItem, {
-                    [styles.selectedChannel]:
-                      shortHash === channel.shortHash ||
-                      (!shortHash && index === 0),
-                  })}
-                  data-channel-short-hash={channel.shortHash}
                 >
-                  {channel.name}
-                </a>
+                  <a
+                    className={classnames(styles.gridItem, {
+                      [styles.selectedChannel]:
+                        shortHash === channel.shortHash ||
+                        (!shortHash && index === 0),
+                    })}
+                    data-channel-short-hash={channel.shortHash}
+                  >
+                    {channel.name}
+                  </a>
+                </Link>
               ))}
             </div>
           </div>

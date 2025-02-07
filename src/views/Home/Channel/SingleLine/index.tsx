@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import Link from 'next/link'
 import { useEffect } from 'react'
 
 import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
@@ -13,7 +14,7 @@ type SingleLineProps = {
 }
 
 const SingleLine = ({ channels, toggleDropdown }: SingleLineProps) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
 
   useEffect(() => {
@@ -36,26 +37,19 @@ const SingleLine = ({ channels, toggleDropdown }: SingleLineProps) => {
     // <div className={styles.container}>
     <section className={styles.singleLine}>
       {channels.map((channel, index) => (
-        <a
-          key={channel.id}
-          href={`/c/${channel.shortHash}`}
-          className={classnames({
-            ['singleLine-item']: true,
-            [styles.item]: true,
-            [styles.selectedChannel]:
-              shortHash === channel.shortHash || (!shortHash && index === 0),
-          })}
-          data-channel-short-hash={channel.shortHash}
-          onClick={(e) => {
-            e.preventDefault()
-            if (shortHash === channel.shortHash) {
-              return
-            }
-            router.push(`/c/${channel.shortHash}`)
-          }}
-        >
-          {channel.name}
-        </a>
+        <Link key={channel.id} scroll={false} href={`/c/${channel.shortHash}`}>
+          <a
+            className={classnames({
+              ['singleLine-item']: true,
+              [styles.item]: true,
+              [styles.selectedChannel]:
+                shortHash === channel.shortHash || (!shortHash && index === 0),
+            })}
+            data-channel-short-hash={channel.shortHash}
+          >
+            {channel.name}
+          </a>
+        </Link>
       ))}
       <button className={styles.moreBtn} onClick={toggleDropdown}>
         <Icon aria-label="More" icon={IconDown} size={16} />

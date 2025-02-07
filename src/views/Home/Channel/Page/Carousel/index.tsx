@@ -1,5 +1,6 @@
 import classnames from 'classnames'
 import useEmblaCarousel from 'embla-carousel-react'
+import Link from 'next/link'
 import {
   type MouseEvent,
   // useCallback,
@@ -29,7 +30,7 @@ const ChannelCarousel = ({ channels }: ChannelCarouselProps) => {
     skipSnaps: false,
   })
 
-  const { getQuery, router } = useRoute()
+  const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
 
   const [columnCount, setColumnCount] = useState<ColumnCount>('4')
@@ -141,24 +142,23 @@ const ChannelCarousel = ({ channels }: ChannelCarouselProps) => {
                     ) => {
                       const title = item.name || ''
                       return (
-                        <a
+                        <Link
                           key={index}
+                          scroll={false}
                           href={`/c/${item.shortHash}`}
-                          className={classnames({
-                            [styles.selectedChannel]:
-                              shortHash === item.shortHash ||
-                              (!shortHash &&
-                                index === 0 &&
-                                item.shortHash === firstShortHash),
-                          })}
-                          onClick={(e) => {
-                            e.preventDefault()
-                            e.stopPropagation()
-                            router.push(`/c/${item.shortHash}`)
-                          }}
                         >
-                          {title}
-                        </a>
+                          <a
+                            className={classnames({
+                              [styles.selectedChannel]:
+                                shortHash === item.shortHash ||
+                                (!shortHash &&
+                                  index === 0 &&
+                                  item.shortHash === firstShortHash),
+                            })}
+                          >
+                            {title}
+                          </a>
+                        </Link>
                       )
                     }
                   )}
