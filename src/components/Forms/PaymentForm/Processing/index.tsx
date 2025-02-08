@@ -227,7 +227,9 @@ const USDTProcessingForm: React.FC<Props> = ({
     amount.toString() as `${number}`,
     contract.Optimism.tokenDecimals
   )
-  const uri = `ipfs://${article?.dataHash}`
+  const uri = article.dataHash
+    ? `ipfs://${article.dataHash}`
+    : window.location.href
 
   const {
     data: vaultData,
