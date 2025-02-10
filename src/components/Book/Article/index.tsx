@@ -72,7 +72,6 @@ const BookArticle: React.FC<BookArticleProps> = ({
             url={cover || BOOK_COVER.src}
             width={240}
             height={200}
-            anonymous
           />
         </div>
       )}
