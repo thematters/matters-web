@@ -53,7 +53,6 @@ const BookCollection: React.FC<BookCollectionProps> = ({
           url={cover || BOOK_COVER.src}
           width={240}
           height={200}
-          anonymous
         />
         {hasMask && (
           <div className={styles.mask}>
