@@ -26,7 +26,7 @@ const ChannelCarousel = ({ channels }: ChannelCarouselProps) => {
   const [dot, setDot] = useState(0)
   const [, setSnaps] = useState<any[]>([])
   const [carousel, carouselApi] = useEmblaCarousel({
-    loop: true,
+    loop: false,
     skipSnaps: false,
   })
 
