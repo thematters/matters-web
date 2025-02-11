@@ -46,3 +46,7 @@
     height: 100%;
   }
 }
+
+.searchQuickResult {
+  padding-top: var(--sp12);
+}

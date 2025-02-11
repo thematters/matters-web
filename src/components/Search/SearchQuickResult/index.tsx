@@ -25,10 +25,19 @@ interface QuickSearchProps {
   closeDropdown: () => void
 
   inPage?: boolean
+  setShowSearchQuickResult?: (show: boolean) => void
+  itemHorizontalSpacing?: 0 | 16
 }
 
-export const SearchQuickResult = (props: QuickSearchProps) => {
-  const { searchKey, inPage, activeItem, onUpdateData, closeDropdown } = props
+export const SearchQuickResult = ({
+  searchKey,
+  inPage,
+  activeItem,
+  onUpdateData,
+  closeDropdown,
+  setShowSearchQuickResult,
+  itemHorizontalSpacing = 16,
+}: QuickSearchProps) => {
   const client = useApolloClient()
   const [data, setData] = useState<QuickResultQuery>()
   const clearData = () => setData(undefined)
@@ -84,6 +93,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   }, [searchKey])
 
   if (loading) {
+    setShowSearchQuickResult?.(false)
     return (
       <Menu width={inPage ? undefined : 'md'}>
         <SpinnerBlock />
@@ -92,9 +102,11 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
   }
 
   if (!hasUsers && !hasTags) {
+    setShowSearchQuickResult?.(false)
     return null
   }
 
+  setShowSearchQuickResult?.(true)
   return (
     <Menu width={inPage ? undefined : 'md'}>
       {hasUsers &&
@@ -103,7 +115,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
             node.__typename === 'User' && (
               <Fragment key={node.id}>
                 <Menu.Item
-                  spacing={[12, 16]}
+                  spacing={[12, itemHorizontalSpacing]}
                   bgActiveColor="greyHover"
                   isActive={`user${cursor}` === activeItem}
                   {...toPath({
@@ -142,7 +154,7 @@ export const SearchQuickResult = (props: QuickSearchProps) => {
             node.__typename === 'Tag' && (
               <Fragment key={node.id}>
                 <Menu.Item
-                  spacing={[16, 16]}
+                  spacing={[16, itemHorizontalSpacing]}
                   bgActiveColor="greyHover"
                   isActive={`tag${cursor}` === activeItem}
                   {...toPath({
