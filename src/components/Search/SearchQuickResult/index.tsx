@@ -93,7 +93,7 @@ export const SearchQuickResult = ({
   }, [searchKey])
 
   if (loading) {
-    setShowSearchQuickResult?.(false)
+    setShowSearchQuickResult?.(true)
     return (
       <Menu width={inPage ? undefined : 'md'}>
         <SpinnerBlock />
