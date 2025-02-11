@@ -61,6 +61,7 @@ export const TopNavBar = () => {
         <Media at="sm">
           <NavListItemButton
             name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}
+            showTooltip={false}
             icon={<Icon icon={IconNavSearch} size={24} />}
             activeIcon={<Icon icon={IconNavSearchActive} size={24} />}
             active={isInSearch}

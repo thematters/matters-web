@@ -74,7 +74,7 @@ const ClearButton = ({ onClick }: ClearButtonProps) => {
 export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   hasDropdown = true,
-  setShowSearchQuickResult = () => {},
+  setShowSearchQuickResult,
 }) => {
   const { getQuery, router, isInPath } = useRoute()
   const isInSearch = isInPath('SEARCH')
