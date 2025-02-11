@@ -54,12 +54,15 @@ export const useColorThief = () => {
 
   const getColor = () => {
     const $img = nodeRef.current?.querySelector('img') as HTMLImageElement
-    if ($img?.complete) {
-      _getColor()
-    } else {
-      $img?.addEventListener('load', function () {
+    if ($img) {
+      $img.crossOrigin = 'anonymous'
+      if ($img.complete) {
         _getColor()
-      })
+      } else {
+        $img.addEventListener('load', function () {
+          _getColor()
+        })
+      }
     }
   }
 
