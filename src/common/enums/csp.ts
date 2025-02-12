@@ -34,6 +34,10 @@ const SCRIPT_SRC = [
 
   // Stripe
   'js.stripe.com',
+
+  // Geniee
+  'cpt.geniee.jp',
+  'securepubads.g.doubleclick.net',
 ]
 
 const STYLE_SRC = [
