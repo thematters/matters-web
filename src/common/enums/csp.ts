@@ -41,7 +41,6 @@ const SCRIPT_SRC = [
   'yads.c.yimg.jp',
 
   // Google Ads
-  '*.google.com',
   '*.adtrafficquality.google',
   '*.googlesyndication.com',
 ]
@@ -102,7 +101,6 @@ const IMG_SRC = [
   process.env.NEXT_PUBLIC_BILLBOARD_IMAGE_URL,
 
   // Google Ads
-  '*.google.com',
   '*.adtrafficquality.google',
   '*.googlesyndication.com',
 ]
