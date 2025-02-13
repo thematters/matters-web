@@ -302,7 +302,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             placement="bottom-start"
             onClickOutside={closeDropdown}
             visible={showDropdown}
-            zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+            zIndex={Z_INDEX.OVER_STICKY_TABS}
           >
             {({ ref }) => (
               <form
