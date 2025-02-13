@@ -47,7 +47,7 @@ const SearchButton = () => {
         id: 'xmcVZ0',
       })}
     >
-      <Icon icon={IconNavSearch} color="greyDark" size={22} />
+      <Icon icon={IconNavSearch} color="greyDark" size={16} />
     </Button>
   )
 }
@@ -66,7 +66,7 @@ const ClearButton = ({ onClick }: ClearButtonProps) => {
       aria-label={intl.formatMessage({ defaultMessage: 'Clear', id: '/GCoTA' })}
       onClick={onClick}
     >
-      <Icon icon={IconTimes} color="greyDark" />
+      <Icon icon={IconTimes} color="greyDark" size={14} />
     </Button>
   )
 }
@@ -333,6 +333,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 />
 
                 <SearchButton />
+
+                {search.length > 0 && (
+                  <ClearButton
+                    onClick={() => {
+                      setValues({ q: '' })
+                      setSearch('')
+                    }}
+                  />
+                )}
               </form>
             )}
           </Dropdown>
