@@ -95,7 +95,6 @@ export const TopNavBar = () => {
                   />
                 </section>
               }
-              placement="bottom-start"
               // offset={[-16, 16]}
             >
               {({ openDropdown, ref }) => (
@@ -163,6 +162,7 @@ export const TopNavBar = () => {
               }
               active={isInNotification}
               href={PATHS.ME_NOTIFICATIONS}
+              showTooltip={false}
             />
             <Dropdown
               content={
