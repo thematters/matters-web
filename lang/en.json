@@ -616,10 +616,6 @@
     "defaultMessage": "Unpin from profile",
     "description": "src/views/User/Articles/PinBoard/UnPinButton/index.tsx"
   },
-  "8GXAUX": {
-    "defaultMessage": "All results for",
-    "description": "src/views/Search/AggregateResults/index.tsx"
-  },
   "8KFsZN": {
     "defaultMessage": "Read Counts"
   },
@@ -2291,10 +2287,6 @@
   },
   "cd/II9": {
     "defaultMessage": "{totalCount, plural, =1 {article} other {articles}}"
-  },
-  "cd8EmU": {
-    "defaultMessage": "",
-    "description": "src/views/Search/AggregateResults/index.tsx"
   },
   "cg1VJ2": {
     "defaultMessage": "Connect Wallet"
