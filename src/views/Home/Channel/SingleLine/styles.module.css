@@ -15,6 +15,7 @@
   display: flex;
   gap: var(--sp12);
   align-items: center;
+  padding-left: var(--sp16);
 
   /* margin: 0 calc(var(--sp16) * -1); */
   overflow-x: auto; /* horizontal scroll */
