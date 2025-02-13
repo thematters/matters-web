@@ -1,3 +1,11 @@
 .result-item {
   padding: var(--sp16);
 }
+
+.tabs {
+  padding: var(--sp14) var(--sp16) 0;
+
+  @media (--sm-up) {
+    padding: var(--sp32) 0 var(--sp8) 0;
+  }
+}
