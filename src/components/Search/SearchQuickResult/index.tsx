@@ -142,6 +142,7 @@ export const SearchQuickResult = ({
                     hasState={false}
                     spacing={[0, 0]}
                     subtitle={`@${node.userName}`}
+                    isCard={false}
                   />
                 </Menu.Item>
               </Fragment>
