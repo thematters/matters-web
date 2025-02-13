@@ -52,7 +52,9 @@ const SingleLine = ({ channels, toggleDropdown }: SingleLineProps) => {
         </Link>
       ))}
       <button className={styles.moreBtn} onClick={toggleDropdown}>
-        <Icon aria-label="More" icon={IconDown} size={16} />
+        <span className={styles.moreBtnContent}>
+          <Icon aria-label="More" icon={IconDown} size={16} />
+        </span>
       </button>
     </section>
     // </div>

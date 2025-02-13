@@ -21,6 +21,13 @@
       font-size: var(--font-size-16);
       font-weight: var(--font-semibold);
     }
+
+    & .closeBtn {
+      display: inline-flex;
+      justify-content: end;
+      width: 5rem;
+      height: 1.5rem;
+    }
   }
 
   & .body {
