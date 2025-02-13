@@ -164,7 +164,6 @@ const CONNECT_SRC = [
   'yads.c.yimg.jp',
 
   // Google Ads
-  '*.google.com',
   '*.adtrafficquality.google',
   '*.googlesyndication.com',
 ]
