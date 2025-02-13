@@ -44,9 +44,47 @@ class MattersDocument extends Document<MattersDocumentProps> {
       <Html lang={this.props.lang}>
         <Head>
           <meta httpEquiv="Content-Security-Policy" content={CSP_POLICY} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.gnshbrequest = window.gnshbrequest || {cmd:[]};
+              window.gnshbrequest.cmd.push(function(){
+                window.gnshbrequest.forceInternalRequest();
+              });
+            `,
+            }}
+          />
+          <script
+            async
+            src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+            onLoad={() => {
+              console.log(
+                'https://securepubads.g.doubleclick.net/tag/js/gpt.js has loaded'
+              )
+            }}
+          />
+          <script
+            async
+            src="https://cpt.geniee.jp/hb/v1/222058/2731/wrapper.min.js"
+          />
         </Head>
 
         <body>
+          <div
+            data-cptid="1584662_matters.town_528x296_banner_responsive"
+            style={{ display: 'block' }}
+          ></div>
+          <script
+            id="geniee-banner"
+            dangerouslySetInnerHTML={{
+              __html: `
+                  window.gnshbrequest.cmd.push(function() {
+                    window.gnshbrequest.applyPassback("1584662_matters.town_528x296_banner_responsive", "[data-cptid='1584662_matters.town_528x296_banner_responsive']");
+                  });
+                `,
+            }}
+          />
+
           <Main />
           <NextScript />
         </body>

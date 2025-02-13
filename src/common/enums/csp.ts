@@ -34,6 +34,11 @@ const SCRIPT_SRC = [
 
   // Stripe
   'js.stripe.com',
+
+  // Geniee
+  'cpt.geniee.jp',
+  'securepubads.g.doubleclick.net',
+  'yads.c.yimg.jp',
 ]
 
 const STYLE_SRC = [
@@ -144,6 +149,11 @@ const CONNECT_SRC = [
   'cloudflare-ipfs.com/ipfs/',
   'ipfs.io/ipfs/',
   '4everland.io/ipfs/',
+
+  // Geniee
+  'cpt.geniee.jp',
+  'securepubads.g.doubleclick.net',
+  'yads.c.yimg.jp',
 ]
 
 const FRAME_SRC = [
@@ -173,6 +183,11 @@ const FRAME_SRC = [
   // WalletConnect
   '*.walletconnect.com',
   '*.walletconnect.org',
+
+  // Geniee
+  'cpt.geniee.jp',
+  'securepubads.g.doubleclick.net',
+  'yads.c.yimg.jp',
 ]
 
 export const CSP_POLICY = Object.entries({
