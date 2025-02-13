@@ -39,11 +39,6 @@ const SCRIPT_SRC = [
   'cpt.geniee.jp',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
-
-  // Google Ads
-  '*.google.com',
-  '*.adtrafficquality.google',
-  '*.googlesyndication.com',
 ]
 
 const STYLE_SRC = [
@@ -100,11 +95,6 @@ const IMG_SRC = [
 
   // Billboard
   process.env.NEXT_PUBLIC_BILLBOARD_IMAGE_URL,
-
-  // Google Ads
-  '*.google.com',
-  '*.adtrafficquality.google',
-  '*.googlesyndication.com',
 ]
 
 const MEDIA_SRC = IMG_SRC
@@ -164,11 +154,6 @@ const CONNECT_SRC = [
   'cpt.geniee.jp',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
-
-  // Google Ads
-  '*.google.com',
-  '*.adtrafficquality.google',
-  '*.googlesyndication.com',
 ]
 
 const FRAME_SRC = [
@@ -203,12 +188,6 @@ const FRAME_SRC = [
   'cpt.geniee.jp',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
-  'safeframe.googlesyndication.com',
-  'pagead2.googlesyndication.com',
-
-  // Google Ads
-  '*.googlesyndication.com',
-  '*.adtrafficquality.google',
 ]
 
 export const CSP_POLICY = Object.entries({
