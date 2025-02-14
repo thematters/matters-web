@@ -38,6 +38,7 @@ const SCRIPT_SRC = [
   // Geniee
   'cpt.geniee.jp',
   'js.geniee.jp',
+  'js.geniee.com',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
 
@@ -162,6 +163,7 @@ const CONNECT_SRC = [
   // Geniee
   'cpt.geniee.jp',
   'js.geniee.jp',
+  'js.geniee.com',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
 
@@ -201,6 +203,7 @@ const FRAME_SRC = [
   // Geniee
   'cpt.geniee.jp',
   'js.geniee.jp',
+  'js.geniee.com',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
   'safeframe.googlesyndication.com',
