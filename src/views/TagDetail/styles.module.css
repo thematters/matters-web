@@ -3,7 +3,7 @@
 
   height: 2.25rem; /* 36px; */
   padding: 0 var(--sp16);
-  margin: var(--sp32) 0;
+  margin: var(--sp20) 0;
 
   @media (--sm-up) {
     padding: 0;
