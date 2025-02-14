@@ -5,13 +5,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--sp20) var(--sp16);
+  padding: var(--sp16) var(--sp16);
   background-color: var(--color-white);
 
   @media (--sm-up) {
     @mixin border-bottom-grey-light;
 
-    padding: var(--sp20) var(--sp32);
+    padding: var(--sp16) var(--sp32);
     border-bottom-color: var(--color-grey-hover);
   }
 

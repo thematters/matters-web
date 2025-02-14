@@ -109,7 +109,7 @@
     position: sticky;
 
     /* topNavbar height */
-    top: 73px;
+    top: var(--lg-top-nav-height);
   }
 }
 

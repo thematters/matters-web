@@ -2,13 +2,13 @@
 
 .container {
   position: fixed;
-  top: 65px;
+  top: var(--sm-top-nav-height);
   z-index: var(--z-index-sticky-tabs);
 }
 
 .singleLine {
   position: fixed;
-  top: 65px;
+  top: var(--sm-top-nav-height);
   right: 0;
   left: 0;
   z-index: var(--z-index-sticky-tabs);
