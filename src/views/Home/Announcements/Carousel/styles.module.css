@@ -1,11 +1,6 @@
 .carousel {
   position: relative;
   width: 100%;
-  padding: var(--sp8) 0 0;
-
-  @media (--sm-up) {
-    padding: 0;
-  }
 }
 
 .header {

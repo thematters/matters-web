@@ -10,7 +10,7 @@
   @mixin flex-center-all;
 
   z-index: 1;
-  margin: var(--sp16) 0 var(--sp20);
+  margin: var(--sp8) 0 var(--sp16);
 
   & .dots {
     @mixin flex-center-start;
@@ -84,12 +84,12 @@
 
   box-sizing: content-box;
   box-sizing: border-box;
-  width: 12px;
-  height: 3px;
+  width: 8px;
+  height: 2px;
   margin-right: var(--sp8);
   cursor: pointer;
   background: var(--color-grey);
-  border: 2px solid rgb(255 255 255 / 0%);
+  border: 1px solid rgb(255 255 255 / 0%);
   border-radius: var(--sp8);
   transition-property: border-color, border-width, background-color;
 
