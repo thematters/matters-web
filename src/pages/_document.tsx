@@ -70,21 +70,6 @@ class MattersDocument extends Document<MattersDocumentProps> {
         </Head>
 
         <body>
-          <div
-            data-cptid="1584662_matters.town_528x296_banner_responsive"
-            style={{ display: 'block' }}
-          ></div>
-          <script
-            id="geniee-banner"
-            dangerouslySetInnerHTML={{
-              __html: `
-                  window.gnshbrequest.cmd.push(function() {
-                    window.gnshbrequest.applyPassback("1584662_matters.town_528x296_banner_responsive", "[data-cptid='1584662_matters.town_528x296_banner_responsive']");
-                  });
-                `,
-            }}
-          />
-
           <Main />
           <NextScript />
         </body>
