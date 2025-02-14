@@ -4,12 +4,12 @@
   padding: 0;
   margin: 0;
 }
-@media not all and (width >= 0) and (width <= 737.98px) {
+@media not all and (width >= 0) and (width <= 639.98px) {
   .fresnel-at-sm {
     display: none !important;
   }
 }
-@media not all and (width >= 738px) and (width <= 883.98px) {
+@media not all and (width >= 640px) and (width <= 883.98px) {
   .fresnel-at-md {
     display: none !important;
   }
@@ -24,7 +24,7 @@
     display: none !important;
   }
 }
-@media not all and (width <= 737.98px) {
+@media not all and (width <= 639.98px) {
   .fresnel-lessThan-md {
     display: none !important;
   }
@@ -39,7 +39,7 @@
     display: none !important;
   }
 }
-@media not all and (width >= 738px) {
+@media not all and (width >= 640px) {
   .fresnel-greaterThan-sm {
     display: none !important;
   }
@@ -59,7 +59,7 @@
     display: none !important;
   }
 }
-@media not all and (width >= 738px) {
+@media not all and (width >= 640px) {
   .fresnel-greaterThanOrEqual-md {
     display: none !important;
   }
@@ -74,7 +74,7 @@
     display: none !important;
   }
 }
-@media not all and (width >= 0) and (width <= 737.98px) {
+@media not all and (width >= 0) and (width <= 639.98px) {
   .fresnel-between-sm-md {
     display: none !important;
   }
@@ -89,12 +89,12 @@
     display: none !important;
   }
 }
-@media not all and (width >= 738px) and (width <= 883.98px) {
+@media not all and (width >= 640px) and (width <= 883.98px) {
   .fresnel-between-md-lg {
     display: none !important;
   }
 }
-@media not all and (width >= 738px) and (width <= 1121.98px) {
+@media not all and (width >= 640px) and (width <= 1121.98px) {
   .fresnel-between-md-xl {
     display: none !important;
   }
