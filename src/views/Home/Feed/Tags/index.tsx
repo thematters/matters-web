@@ -122,10 +122,11 @@ const TagsFeed = () => {
             <Slides.Item size="md" key={edgeIndex}>
               <section>
                 {chunks.map(({ node, cursor }, nodeIndex) => (
-                  <TagDigest.Sidebar
+                  <TagDigest.Concise
                     key={node.id}
                     tag={node}
-                    spacing={[12, 0]}
+                    iconSize={20}
+                    textSize={16}
                     onClick={() =>
                       analytics.trackEvent('click_feed', {
                         type: 'tags',

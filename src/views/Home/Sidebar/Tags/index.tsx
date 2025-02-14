@@ -50,7 +50,7 @@ const Tags = () => {
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags // last Random
-  const perPage = 4
+  const perPage = 6
   const randomMaxSize = 50
   const { data, loading, error, refetch } =
     usePublicQuery<SidebarTagsPublicQuery>(
@@ -97,8 +97,10 @@ const Tags = () => {
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={node.id}>
-              <TagDigest.Sidebar
+              <TagDigest.Concise
                 tag={node}
+                iconSize={20}
+                textSize={16}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'tags',
