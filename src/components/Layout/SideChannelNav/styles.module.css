@@ -27,7 +27,7 @@
     /* flex-grow: 1; */
     gap: var(--sp12);
     align-items: end;
-    padding-top: var(--sp32);
+    padding-top: var(--sp20);
     padding-bottom: var(--sp32);
 
     & .item {

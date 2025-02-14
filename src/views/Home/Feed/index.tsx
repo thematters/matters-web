@@ -81,7 +81,7 @@ const HomeFeed = () => {
 
       <Layout.Main.Spacing hasVertical={false}>
         <Media greaterThan="sm">
-          <Spacer size="sp32" />
+          <Spacer size="sp20" />
         </Media>
         <Media lessThan="lg">
           <ChannelCarousel channels={channels} />

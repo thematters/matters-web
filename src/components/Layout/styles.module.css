@@ -136,7 +136,7 @@
 
     & .top {
       & :global(> *) {
-        margin-top: var(--sp32);
+        margin-top: var(--sp20);
       }
     }
   }

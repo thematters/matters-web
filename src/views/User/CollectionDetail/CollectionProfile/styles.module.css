@@ -1,7 +1,7 @@
 .header {
   display: flex;
   padding: 0 var(--sp16);
-  margin-top: var(--sp32);
+  margin-top: var(--sp20);
   margin-bottom: var(--sp20);
 
   @media (--sm-up) {
