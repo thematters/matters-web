@@ -37,8 +37,8 @@ const SCRIPT_SRC = [
 
   // Geniee
   'cpt.geniee.jp',
-  'js.geniee.jp',
-  'js.geniee.com',
+  '*.geniee.jp',
+  '*.geniee.com',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
 
@@ -162,8 +162,8 @@ const CONNECT_SRC = [
 
   // Geniee
   'cpt.geniee.jp',
-  'js.geniee.jp',
-  'js.geniee.com',
+  '*.geniee.jp',
+  '*.geniee.com',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
 
@@ -174,7 +174,6 @@ const CONNECT_SRC = [
 
 const FRAME_SRC = [
   "'self'",
-
   // Embed
   'button.like.co',
   'www.youtube.com',
@@ -202,8 +201,8 @@ const FRAME_SRC = [
 
   // Geniee
   'cpt.geniee.jp',
-  'js.geniee.jp',
-  'js.geniee.com',
+  '*.geniee.jp',
+  '*.geniee.com',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
   'safeframe.googlesyndication.com',
