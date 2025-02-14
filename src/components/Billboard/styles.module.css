@@ -15,8 +15,13 @@
 
     @media (--sm-up) {
       & iframe {
-        width: 17.6rem;
+        width: 16.5rem;
         height: auto;
+
+        & img {
+          width: 100%;
+          height: 100%;
+        }
       }
     }
   }
