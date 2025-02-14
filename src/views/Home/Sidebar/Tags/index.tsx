@@ -94,13 +94,14 @@ const Tags = () => {
       {loading && <SpinnerBlock />}
 
       {!loading && (
-        <List hasBorder={false}>
+        <List hasBorder={false} className={styles.list}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={node.id}>
               <TagDigest.Concise
                 tag={node}
                 iconSize={20}
                 textSize={16}
+                textWeight="normal"
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'tags',

@@ -12,6 +12,7 @@ import styles from './styles.module.css'
 export type TagDigestConciseTagProps = {
   tag: TagDigestConciseTagFragment
   textSize?: 14 | 15 | 16
+  textWeight?: 'normal' | 'medium'
   iconSize?: 20
   showArticlesNum?: boolean
   onClick?: () => void
@@ -30,6 +31,7 @@ const fragments = {
 const Concise = ({
   tag,
   textSize = 15,
+  textWeight = 'medium',
   showArticlesNum,
   iconSize,
   onClick,
@@ -50,7 +52,7 @@ const Concise = ({
           color="black"
           size={textSize}
           spacing={4}
-          weight="medium"
+          weight={textWeight}
         >
           {tag.content}
         </TextIcon>
