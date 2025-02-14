@@ -37,6 +37,8 @@ type ROUTE_KEY =
   | 'CIRCLE_SETTINGS_EDIT_PROFILE'
   | 'CIRCLE_SETTINGS_MANAGE_INVITATION'
   | 'CIRCLE_CREATION'
+  // Campaign
+  | 'CAMPAIGN_DETAIL'
   // Me
   | 'ME_DRAFTS'
   | 'ME_PUBLISHED'
@@ -127,6 +129,9 @@ export const ROUTES: {
     pathname: '/[name]/settings/manage-invitation',
   },
   { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
+
+  // Campaign
+  { key: 'CAMPAIGN_DETAIL', pathname: '/e/[shortHash]' },
 
   // Auth
   { key: 'LOGIN', pathname: '/login' },

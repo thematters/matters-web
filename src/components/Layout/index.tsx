@@ -79,7 +79,9 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
     isInPath('ARTICLE_DETAIL_EDIT') ||
     isInPath('ARTICLE_DETAIL_HISTORY') ||
     isInPath('ME_DRAFT_NEW') ||
-    isInPath('ME_DRAFT_DETAIL')
+    isInPath('ME_DRAFT_DETAIL') ||
+    // Campaign
+    isInPath('CAMPAIGN_DETAIL')
   const isThreeColumnLayout = isHome || isInPath('CHANNEL')
   const isShowSideChannelNav = isHome || isInPath('CHANNEL')
 
