@@ -15,6 +15,7 @@ export type TagDigestConciseTagProps = {
   textWeight?: 'normal' | 'medium'
   iconSize?: 20
   showArticlesNum?: boolean
+  textLineClamp?: boolean
   onClick?: () => void
 }
 
@@ -34,6 +35,7 @@ const Concise = ({
   textWeight = 'medium',
   showArticlesNum,
   iconSize,
+  textLineClamp,
   onClick,
 }: TagDigestConciseTagProps) => {
   const path = toPath({
@@ -53,6 +55,7 @@ const Concise = ({
           size={textSize}
           spacing={4}
           weight={textWeight}
+          textLineClamp={textLineClamp}
         >
           {tag.content}
         </TextIcon>
