@@ -89,6 +89,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
     [styles.oneColumnLayout]: isOneColumnLayout,
     [styles.twoColumnLayout]: isTwoColumnLayout,
     [styles.threeColumnLayout]: isThreeColumnLayout,
+    [styles.sideNavLayout]: isHome || isInPath('CHANNEL'),
   })
 
   return (
@@ -100,7 +101,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
           {isShowSideChannelNav && (
             <nav role="navigation" className={styles.sidenav}>
               <section className={styles.sideNavContent}>
-                <Media greaterThan="md">
+                <Media greaterThan="sm">
                   <SideChannelNav />
                 </Media>
               </section>

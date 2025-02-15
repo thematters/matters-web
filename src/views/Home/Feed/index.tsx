@@ -83,7 +83,7 @@ const HomeFeed = () => {
         <Media greaterThan="sm">
           <Spacer size="sp20" />
         </Media>
-        <Media lessThan="lg">
+        <Media lessThan="md">
           <ChannelCarousel channels={channels} />
           {showSingleLine && (
             <SingleLine channels={channels} toggleDropdown={toggleDropdown} />
