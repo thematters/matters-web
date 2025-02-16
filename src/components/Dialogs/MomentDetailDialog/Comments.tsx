@@ -76,7 +76,7 @@ const Comments = ({ moment, editing }: CommentsProps) => {
     }
 
     setTimeout(
-      () => highlightComment(targetElement as HTMLElement, true, true),
+      () => highlightComment(targetElement as HTMLElement, 12, true, true),
       100
     )
   }, [newestCommentId])

@@ -77,12 +77,13 @@ export function filterResponses<T extends Response | Comment>(
 
 export const highlightComment = (
   targetElement: HTMLElement,
+  spacing: 8 | 12 | 16 = 16,
   isParentComment?: boolean,
   fullSpacing?: boolean
 ) => {
   const activeParentCommentClass = fullSpacing
-    ? styles.activeParentCommentFullSpacing
-    : styles.activeParentComment
+    ? styles[`activeParentComment${spacing}`]
+    : styles[`activeParentComment${spacing}`]
   targetElement.classList.add(styles.activeBgColor)
   if (isParentComment) {
     targetElement.classList.add(activeParentCommentClass)

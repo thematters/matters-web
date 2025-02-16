@@ -6,7 +6,6 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document'
-import Script from 'next/script'
 import React from 'react'
 
 import { CSP_POLICY } from '~/common/enums'
@@ -45,18 +44,34 @@ class MattersDocument extends Document<MattersDocumentProps> {
       <Html lang={this.props.lang}>
         <Head>
           <meta httpEquiv="Content-Security-Policy" content={CSP_POLICY} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.gnshbrequest = window.gnshbrequest || {cmd:[]};
+              window.gnshbrequest.cmd.push(function(){
+                window.gnshbrequest.forceInternalRequest();
+              });
+            `,
+            }}
+          />
+          <script
+            async
+            src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+            onLoad={() => {
+              console.log(
+                'https://securepubads.g.doubleclick.net/tag/js/gpt.js has loaded'
+              )
+            }}
+          />
+          <script
+            async
+            src="https://cpt.geniee.jp/hb/v1/222058/2731/wrapper.min.js"
+          />
         </Head>
 
         <body>
           <Main />
           <NextScript />
-
-          <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5129054622209245"
-            strategy="lazyOnload"
-            crossOrigin="anonymous"
-          />
         </body>
       </Html>
     )

@@ -6,7 +6,6 @@ import { analytics } from '~/common/utils'
 import {
   List,
   QueryError,
-  ShuffleButton,
   SpinnerBlock,
   TagDigest,
   usePublicQuery,
@@ -45,36 +44,21 @@ const SIDEBAR_TAGS = gql`
 const Tags = () => {
   const viewer = useContext(ViewerContext)
 
-  const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
+  const { data: lastFetchRandom } = useQuery<LastFetchRandomQuery>(
     FETCH_RECORD,
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarTags // last Random
-  const perPage = 4
-  const randomMaxSize = 50
-  const { data, loading, error, refetch } =
-    usePublicQuery<SidebarTagsPublicQuery>(
-      SIDEBAR_TAGS,
-      {
-        notifyOnNetworkStatusChange: true,
-        variables: { random: lastRandom || 0, first: perPage },
-      },
-      { publicQuery: !viewer.isAuthed }
-    )
+  const perPage = 6
+  const { data, loading, error } = usePublicQuery<SidebarTagsPublicQuery>(
+    SIDEBAR_TAGS,
+    {
+      notifyOnNetworkStatusChange: true,
+      variables: { random: lastRandom || 0, first: perPage },
+    },
+    { publicQuery: !viewer.isAuthed }
+  )
   const edges = data?.viewer?.recommendation.tags.edges
-
-  const shuffle = () => {
-    const size = Math.round(
-      (data?.viewer?.recommendation.tags.totalCount || randomMaxSize) / perPage
-    )
-    const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
-    refetch({ random })
-
-    client.writeData({
-      id: 'LastFetchRandom:local',
-      data: { sidebarTags: random },
-    })
-  }
 
   if (error) {
     return <QueryError error={error} />
@@ -86,19 +70,19 @@ const Tags = () => {
 
   return (
     <section className={styles.container}>
-      <SectionHeader
-        type="tags"
-        rightButton={<ShuffleButton onClick={shuffle} />}
-      />
+      <SectionHeader type="tags" viewAll={true} />
 
       {loading && <SpinnerBlock />}
 
       {!loading && (
-        <List hasBorder={false}>
+        <List hasBorder={false} className={styles.list}>
           {edges.map(({ node, cursor }, i) => (
             <List.Item key={node.id}>
-              <TagDigest.Sidebar
+              <TagDigest.Concise
                 tag={node}
+                iconSize={20}
+                textSize={16}
+                textWeight="normal"
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'tags',

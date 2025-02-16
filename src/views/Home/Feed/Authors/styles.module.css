@@ -1,7 +1,6 @@
 .authors {
   @mixin border-bottom-grey;
 
-  padding-bottom: var(--sp32);
   border-bottom-style: dashed;
 
   @media (--sm-up) {
