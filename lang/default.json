@@ -2844,10 +2844,6 @@
     "defaultMessage": "Pass and ask me next time",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
-  "mzCz0Z": {
-    "defaultMessage": "Tags",
-    "description": "src/views/Tags/index.tsx"
-  },
   "n/w6lW": {
     "defaultMessage": "Most Supporters",
     "description": "src/views/Me/Works/Published/SortTabs.tsx"

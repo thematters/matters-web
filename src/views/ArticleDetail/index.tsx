@@ -293,6 +293,7 @@ const BaseArticleDetail = ({
           },
         }}
         availableLanguages={article.availableTranslations || []}
+        noindex={article.noindex}
       />
 
       <StickyTopBanner type="inactive" article={article} />

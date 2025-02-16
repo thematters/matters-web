@@ -32,11 +32,19 @@ const SCRIPT_SRC = [
   '*.google-analytics.com',
   '*.analytics.google.com',
 
-  // AdSense
-  'pagead2.googlesyndication.com',
-
   // Stripe
   'js.stripe.com',
+
+  // Geniee
+  'cpt.geniee.jp',
+  'js.geniee.jp',
+  'js.geniee.com',
+  'securepubads.g.doubleclick.net',
+  'yads.c.yimg.jp',
+
+  // Google Ads
+  '*.adtrafficquality.google',
+  '*.googlesyndication.com',
 ]
 
 const STYLE_SRC = [
@@ -93,6 +101,10 @@ const IMG_SRC = [
 
   // Billboard
   process.env.NEXT_PUBLIC_BILLBOARD_IMAGE_URL,
+
+  // Google Ads
+  '*.adtrafficquality.google',
+  '*.googlesyndication.com',
 ]
 
 const MEDIA_SRC = IMG_SRC
@@ -147,6 +159,17 @@ const CONNECT_SRC = [
   'cloudflare-ipfs.com/ipfs/',
   'ipfs.io/ipfs/',
   '4everland.io/ipfs/',
+
+  // Geniee
+  'cpt.geniee.jp',
+  'js.geniee.jp',
+  'js.geniee.com',
+  'securepubads.g.doubleclick.net',
+  'yads.c.yimg.jp',
+
+  // Google Ads
+  '*.adtrafficquality.google',
+  '*.googlesyndication.com',
 ]
 
 const FRAME_SRC = [
@@ -176,6 +199,19 @@ const FRAME_SRC = [
   // WalletConnect
   '*.walletconnect.com',
   '*.walletconnect.org',
+
+  // Geniee
+  'cpt.geniee.jp',
+  'js.geniee.jp',
+  'js.geniee.com',
+  'securepubads.g.doubleclick.net',
+  'yads.c.yimg.jp',
+  'safeframe.googlesyndication.com',
+  'pagead2.googlesyndication.com',
+
+  // Google Ads
+  '*.googlesyndication.com',
+  '*.adtrafficquality.google',
 ]
 
 export const CSP_POLICY = Object.entries({

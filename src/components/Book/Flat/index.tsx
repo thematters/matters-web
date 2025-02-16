@@ -38,7 +38,6 @@ const BookFlat: React.FC<BookFlatProps> = ({ title, cover, type }) => {
           url={cover || BOOK_COVER.src}
           width={100} // smaller size for color thief
           height={100}
-          anonymous
         />
       </div>
 
