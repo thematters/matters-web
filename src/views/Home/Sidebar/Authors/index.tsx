@@ -73,6 +73,7 @@ const Authors = () => {
       <SectionHeader
         type="authors"
         rightButton={<ShuffleButton onClick={shuffle} />}
+        viewAll={false}
       />
 
       {loading && <SpinnerBlock />}
