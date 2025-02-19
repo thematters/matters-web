@@ -207,6 +207,7 @@ const FRAME_SRC = [
   'js.geniee.com',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
+  'ialaddin.genieesspv.jp',
   'safeframe.googlesyndication.com',
   'pagead2.googlesyndication.com',
 
