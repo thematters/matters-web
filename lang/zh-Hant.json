@@ -2694,7 +2694,7 @@
     "description": "src/views/Me/Settings/Misc/LikerID.tsx"
   },
   "kc79d3": {
-    "defaultMessage": "找你想看的"
+    "defaultMessage": "熱門標籤"
   },
   "kkZioy": {
     "defaultMessage": "確認移出",
@@ -2857,10 +2857,6 @@
   "myB890": {
     "defaultMessage": "先不要，下次再說",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
-  },
-  "mzCz0Z": {
-    "defaultMessage": "全部標籤",
-    "description": "src/views/Tags/index.tsx"
   },
   "n/w6lW": {
     "defaultMessage": "最多支持",
