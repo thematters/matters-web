@@ -42,6 +42,7 @@ const SCRIPT_SRC = [
   'js.genieessp.com',
   'ialaddin.genieesspv.jp',
   'criteo.com',
+  'gum.criteo.com',
   'gi-js.genieessp.com',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
