@@ -172,7 +172,11 @@
 
     & .top {
       & :global(> *) {
-        margin-top: var(--sp20);
+        margin-top: var(--sp32);
+
+        &:first-child {
+          margin-top: var(--sp20);
+        }
       }
     }
   }
