@@ -1,9 +1,5 @@
 .container {
-  padding: var(--sp24) 0 0;
-
-  @media (--sm-up) {
-    padding: var(--sp8) 0 0;
-  }
+  padding: var(--sp20) 0 0;
 }
 
 .description {

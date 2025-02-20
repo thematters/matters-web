@@ -32,7 +32,6 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
     isInPath('CIRCLE_DETAIL') && isPathStartWith('/~', true)
   const isUserWorks = isInPath('USER_WORKS') && isPathStartWith('/@', true)
   const isOneColumnLayout =
-    isInPath('FOLLOW') ||
     isInPath('SEARCH') ||
     isInPath('TAGS') ||
     // Circle
@@ -82,14 +81,16 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
     isInPath('ME_DRAFT_DETAIL') ||
     // Campaign
     isInPath('CAMPAIGN_DETAIL')
-  const isThreeColumnLayout = isHome || isInPath('CHANNEL')
-  const isShowSideChannelNav = isHome || isInPath('CHANNEL')
+  const isThreeColumnLayout =
+    isHome || isInPath('CHANNEL') || isInPath('FOLLOW')
+  const isShowSideChannelNav =
+    isHome || isInPath('CHANNEL') || isInPath('FOLLOW')
 
   const layoutClasses = classNames({
     [styles.oneColumnLayout]: isOneColumnLayout,
     [styles.twoColumnLayout]: isTwoColumnLayout,
     [styles.threeColumnLayout]: isThreeColumnLayout,
-    [styles.sideNavLayout]: isHome || isInPath('CHANNEL'),
+    [styles.sideNavLayout]: isShowSideChannelNav,
   })
 
   return (

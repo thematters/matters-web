@@ -24,7 +24,7 @@ const HomeFeed = () => {
   const { getQuery } = useRoute()
   const qsType = getQuery('type') as HomeFeedType
 
-  const [feedType] = useState<HomeFeedType>(qsType || 'hottest')
+  const [feedType] = useState<HomeFeedType>(qsType || 'icymi')
 
   // const changeFeed = (newType: HomeFeedType) => {
   //   setQuery('type', newType === 'hottest' ? '' : newType)

@@ -4,7 +4,7 @@ import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
 import { analytics } from '~/common/utils'
 import { SegmentedTabs } from '~/components'
 
-export type HomeFeedType = 'hottest' | 'newest' | 'icymi'
+export type HomeFeedType = 'hottest' | 'newest' | 'icymi' | 'channel'
 
 interface SortByProps {
   feedType: HomeFeedType

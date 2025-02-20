@@ -1,5 +1,5 @@
 import { NetworkStatus } from 'apollo-client'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -84,24 +84,18 @@ const horizontalFeeds: FeedLocation = {
   ),
 }
 
-const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
+const MainFeed = ({}: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
-  const isHottestFeed = sortBy === 'hottest'
-  const isIcymiFeed = sortBy === 'icymi'
-
-  const { getQuery } = useRoute()
+  const { getQuery, isInPath } = useRoute()
+  const type = getQuery('type')
+  const id = getQuery('id')
+  const isInHome = isInPath('HOME')
+  const isInChannel = isInPath('CHANNEL')
   const shortHash = getQuery('shortHash')
-  const [isLoading, setIsLoading] = useState(false)
-
-  // Mock loading state
-  useEffect(() => {
-    if (shortHash) {
-      setIsLoading(true)
-      setTimeout(() => {
-        setIsLoading(false)
-      }, 1000)
-    }
-  }, [shortHash])
+  const sortBy = isInChannel
+    ? 'channel'
+    : ((type === '' && isInHome ? 'icymi' : type) as HomeFeedType)
+  const isIcymiFeed = sortBy === 'icymi'
 
   /**
    * Data Fetching
@@ -111,6 +105,11 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   const { data, error, loading, fetchMore, networkStatus, client } =
     usePublicQuery<FeedArticlesPublic>(query, {
       notifyOnNetworkStatusChange: true,
+      variables: isInChannel
+        ? {
+            channelId: id,
+          }
+        : {},
     })
 
   // pagination
@@ -136,17 +135,19 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     })
   }
 
+  //FIXME: if the data has been updated, it will fetch the private data again
   // fetch private data for first page
-  const fetchedPrviateSortsRef = useRef<HomeFeedType[]>([])
+  const fetchedPrviateSortsRef = useRef<string[]>([])
   useEffect(() => {
-    const fetched = fetchedPrviateSortsRef.current.indexOf(sortBy) >= 0
+    const key = isInChannel ? `channel:${shortHash}` : sortBy
+    const fetched = fetchedPrviateSortsRef.current.indexOf(key) >= 0
     if (loading || !edges || fetched || !viewer.isAuthed) {
       return
     }
 
     loadPrivate(data)
-    fetchedPrviateSortsRef.current = [...fetchedPrviateSortsRef.current, sortBy]
-  }, [!!edges, loading, sortBy, viewer.id])
+    fetchedPrviateSortsRef.current = [...fetchedPrviateSortsRef.current, key]
+  }, [!!edges, loading, sortBy, viewer.id, shortHash])
 
   // load next page
   const loadMore = async () => {
@@ -178,7 +179,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   /**
    * Render
    */
-  if ((loading && (!result || isNewLoading)) || isLoading) {
+  if (loading && (!result || isNewLoading)) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()
@@ -201,7 +202,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   // insert other feeds
   let mixFeed: FeedEdge[] = edges
 
-  if (isHottestFeed) {
+  if (isIcymiFeed) {
     // get copy
     mixFeed = JSON.parse(JSON.stringify(edges))
 
@@ -222,6 +223,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
 
   return (
     <>
+      {isIcymiFeed && <Announcements />}
       {recommendation &&
         'icymiTopic' in recommendation &&
         recommendation.icymiTopic && (
@@ -234,7 +236,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
         eof
       >
         <List>
-          {isHottestFeed && <Announcements />}
           {mixFeed.map((edge, i) => {
             if (edge?.__typename === 'HorizontalFeed') {
               const { Feed } = edge
