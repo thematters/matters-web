@@ -88,7 +88,6 @@ const MainFeed = ({}: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
   const { getQuery, isInPath } = useRoute()
   const type = getQuery('type')
-  const id = getQuery('id')
   const isInHome = isInPath('HOME')
   const isInChannel = isInPath('CHANNEL')
   const shortHash = getQuery('shortHash')
@@ -107,7 +106,7 @@ const MainFeed = ({}: MainFeedProps) => {
       notifyOnNetworkStatusChange: true,
       variables: isInChannel
         ? {
-            channelId: id,
+            shortHash,
           }
         : {},
     })

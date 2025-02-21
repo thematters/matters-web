@@ -66,12 +66,12 @@ export const FEED_ARTICLES_PUBLIC = {
     ${IcymiCuratedFeed.fragments}
   `,
   channel: gql`
-    query ChannelFeedPublic($channelId: ID!, $after: String) {
-      viewer @connection(key: "viewerFeedChannel", keyArgs: ["$channelId"]) {
+    query ChannelFeedPublic($shortHash: String!, $after: String) {
+      viewer @connection(key: "viewerFeedChannel", keyArgs: ["$shortHash"]) {
         id
         recommendation {
           feed: channelArticles(
-            input: { channelId: $channelId, first: 20, after: $after }
+            input: { shortHash: $shortHash, first: 20, after: $after }
           ) {
             ...FeedArticleConnection
           }

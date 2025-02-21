@@ -69,7 +69,7 @@ const SideChannelNav = () => {
         {channels.map((c, index) => (
           <a
             key={c.id}
-            href={`/c/${c.shortHash}?id=${c.id}`}
+            href={`/c/${c.shortHash}`}
             className={classnames({
               [styles.item]: true,
               [styles.selectedChannel]: shortHash === c.shortHash,
@@ -79,7 +79,7 @@ const SideChannelNav = () => {
             onClick={(e) => {
               e.preventDefault()
               e.stopPropagation()
-              router.push(`/c/${c.shortHash}?id=${c.id}`)
+              router.push(`/c/${c.shortHash}`)
             }}
           >
             {c.name}
