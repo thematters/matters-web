@@ -1,5 +1,6 @@
 export const BREAKPOINTS = {
+  SM: 463,
   MD: 640,
-  LG: 884,
-  XL: 1122,
+  LG: 867,
+  XL: 1211,
 }
