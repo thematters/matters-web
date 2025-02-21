@@ -3,20 +3,20 @@
   overflow-y: auto;
 
   &::-webkit-scrollbar {
-    width: 15px;
+    width: 3px;
   }
 
   &:hover {
     &::-webkit-scrollbar-track {
-      border: solid 6px transparent;
-      box-shadow: inset 0 0 15px 15px transparent;
+      border: solid 1px transparent;
+      box-shadow: inset 0 0 1px 1px transparent;
     }
 
     &::-webkit-scrollbar-thumb {
       min-height: 68px;
-      border: solid 6px transparent;
+      border: solid 1px transparent;
       border-radius: 8px;
-      box-shadow: inset 0 0 15px 15px var(--color-grey-light);
+      box-shadow: inset 0 0 1px 1px var(--color-grey-light);
     }
   }
 
@@ -26,7 +26,7 @@
 
     /* flex-grow: 1; */
     gap: var(--sp12);
-    align-items: end;
+    align-items: flex-start;
     padding-top: var(--sp20);
     padding-bottom: var(--sp32);
 
@@ -34,6 +34,7 @@
       @mixin line-clamp;
       @mixin transition;
 
+      -webkit-line-clamp: 2;
       padding: var(--sp4) var(--sp10);
       font-size: var(--text14);
       line-height: 1.375rem;

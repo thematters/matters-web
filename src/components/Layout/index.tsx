@@ -102,9 +102,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
           {isShowSideChannelNav && (
             <nav role="navigation" className={styles.sidenav}>
               <section className={styles.sideNavContent}>
-                <Media greaterThan="sm">
-                  <SideChannelNav />
-                </Media>
+                <SideChannelNav />
               </section>
             </nav>
           )}

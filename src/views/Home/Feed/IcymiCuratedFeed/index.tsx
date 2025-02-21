@@ -71,7 +71,7 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
         <section className={styles.cards}>
           {cardArticles.map((article, i) => (
             <React.Fragment key={article.id}>
-              <Media at="sm">
+              <Media at="xs">
                 <ArticleDigestCurated
                   article={article}
                   titleLineClamp={3}
@@ -81,7 +81,7 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
                   }
                 />
               </Media>
-              <Media greaterThan="sm">
+              <Media greaterThan="xs">
                 <ArticleDigestCurated
                   article={article}
                   titleLineClamp={2}

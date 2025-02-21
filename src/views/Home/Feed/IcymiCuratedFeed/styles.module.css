@@ -23,16 +23,13 @@
 }
 
 .cards {
-  @mixin border-bottom-grey-light;
-
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--sp32) var(--sp16);
-  padding-bottom: var(--sp40);
-  border-bottom-style: dashed;
+  padding-bottom: var(--sp20);
 
-  @media (--sm-up) {
+  /* 540px is the breakpoint for 3 columns */
+  @media (width >= 540px) {
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp32) var(--sp40);
   }
 }

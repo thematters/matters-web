@@ -58,7 +58,7 @@ export const TopNavBar = () => {
         </Media>
       </section>
       <section className={styles.right}>
-        <Media at="sm">
+        <Media lessThan="md">
           <NavListItemButton
             name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}
             showTooltip={false}
@@ -99,7 +99,7 @@ export const TopNavBar = () => {
             >
               {({ openDropdown, ref }) => (
                 <>
-                  <Media at="sm">
+                  <Media lessThan="md">
                     <NavListItemButton
                       onClick={() => {
                         openDropdown()
@@ -142,7 +142,7 @@ export const TopNavBar = () => {
               }
               icon={
                 <section className={styles.notificationIcon}>
-                  <Media at="sm">
+                  <Media lessThan="md">
                     <UnreadIcon.Notification />
                   </Media>
                   <Media greaterThan="sm">
@@ -152,7 +152,7 @@ export const TopNavBar = () => {
               }
               activeIcon={
                 <section className={styles.notificationIcon}>
-                  <Media at="sm">
+                  <Media lessThan="md">
                     <UnreadIcon.Notification active />
                   </Media>
                   <Media greaterThan="sm">
@@ -190,7 +190,7 @@ export const TopNavBar = () => {
                     id: 'enMIYK',
                   })}
                 >
-                  <Media at="sm">
+                  <Media lessThan="md">
                     <MeAvatar user={viewer} size={24} />
                   </Media>
                   <Media greaterThan="sm">
