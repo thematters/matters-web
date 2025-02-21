@@ -75,15 +75,6 @@ const CampaignDetail = () => {
           ]
         }
         path={path.href}
-        description={
-          campaign[
-            lang === 'zh_hans'
-              ? 'descriptionZhHans'
-              : lang === 'zh_hant'
-              ? 'descriptionZhHant'
-              : 'descriptionEn'
-          ]
-        }
         image={campaign.cover}
       />
 
