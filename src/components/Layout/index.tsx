@@ -64,7 +64,10 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
     isInPath('ME_SETTINGS_NOTIFICATIONS') ||
     isInPath('ME_SETTINGS_NOTIFICATIONS_CIRCLE') ||
     isInPath('ME_SETTINGS_MISC') ||
-    isInPath('ME_SETTINGS_BLOCKED')
+    isInPath('ME_SETTINGS_BLOCKED') ||
+    // Moment
+    isInPath('MOMENT_DETAIL') ||
+    isInPath('MOMENT_DETAIL_EDIT')
 
   const isTwoColumnLayout =
     // Tag

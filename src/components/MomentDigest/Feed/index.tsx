@@ -156,7 +156,7 @@ export const MomentDigestFeed = ({
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <Container openMomentDetail={goToMomentDetail} hasAuthor={hasAuthor} />
       </Media>
       <Media greaterThan="sm">

@@ -1,11 +1,9 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import {
   Layout,
-  Media,
   Spacer,
   SpinnerBlock,
   useMutation,
@@ -71,24 +69,9 @@ const Follow = () => {
   const [tab, setTab] = useState<TABS>('All')
   return (
     <Layout.Main>
-      <Media at="sm">
-        <Layout.Header
-          left={
-            <Layout.Header.Title>
-              <FormattedMessage defaultMessage="Following" id="cPIKU2" />
-            </Layout.Header.Title>
-          }
-        />
-      </Media>
-      <Media greaterThan="sm">
-        <Spacer size="sp16" />
-      </Media>
-
-      <Layout.Main.Spacing hasVertical={false}>
-        <Tabs tab={tab} setTab={setTab} />
-        <Spacer size="sp8" />
-        <BaseFollow tab={tab} />
-      </Layout.Main.Spacing>
+      <Tabs tab={tab} setTab={setTab} />
+      <Spacer size="sp8" />
+      <BaseFollow tab={tab} />
     </Layout.Main>
   )
 }

@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
 import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
 import {
+  BREAKPOINTS,
   ERROR_CODES,
   ERROR_MESSAGES,
   OPEN_UNIVERSAL_AUTH_DIALOG,
@@ -12,7 +13,7 @@ import {
   URL_USER_PROFILE,
 } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
-import { toast, useRoute, ViewerContext } from '~/components'
+import { toast, useMediaQuery, useRoute, ViewerContext } from '~/components'
 import { Icon } from '~/components/Icon'
 import { Menu } from '~/components/Menu'
 
@@ -23,6 +24,7 @@ interface Props {
 
 const ActivityPopover = ({ authed, forbidden }: Props) => {
   const { isInPath } = useRoute()
+  const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const viewer = useContext(ViewerContext)
   const userProfilePath = toPath({
@@ -65,8 +67,20 @@ const ActivityPopover = ({ authed, forbidden }: Props) => {
         text={<FormattedMessage defaultMessage="Moment" id="afLdf2" />}
         icon={<Icon icon={IconComment} size={20} />}
         is="link"
-        href={authed && !forbidden ? openMomentFormPath : undefined}
-        htmlHref={authed && !forbidden ? openMomentFormPath : undefined}
+        href={
+          authed && !forbidden
+            ? isSmUp
+              ? openMomentFormPath
+              : PATHS.MOMENT_DETAIL_EDIT
+            : undefined
+        }
+        htmlHref={
+          authed && !forbidden
+            ? isSmUp
+              ? openMomentFormPath
+              : PATHS.MOMENT_DETAIL_EDIT
+            : undefined
+        }
         onClick={() => {
           onClick('moment')
         }}
