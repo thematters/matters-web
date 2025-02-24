@@ -407,7 +407,7 @@ const BaseArticleDetail = ({
           <AuthorSidebar article={article} />
         </Media>
 
-        <Media at="sm">
+        <Media lessThan="md">
           {article.comments.totalCount > 0 && (
             <section className={styles.smUpCommentBlock} ref={commentsRef}>
               <DynamicComments id={article.id} lock={!canReadFullContent} />
@@ -416,7 +416,7 @@ const BaseArticleDetail = ({
         </Media>
       </section>
 
-      <Media at="sm">
+      <Media lessThan="md">
         <Spacer size="sp64" />
         <CommentsDialog
           id={article.id}

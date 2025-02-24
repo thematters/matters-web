@@ -68,7 +68,7 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
     <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG}>
       {({ openDropdown, ref }) => (
         <>
-          <Media at="sm">
+          <Media lessThan="md">
             <Button
               onClick={openDropdown}
               size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}

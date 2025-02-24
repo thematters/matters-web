@@ -40,7 +40,7 @@ const Footer: React.FC<FooterProps> = ({
 
   return (
     <footer className={footerClasses} data-dialog-entity={!!hasBtns}>
-      <Media at="sm">
+      <Media lessThan="md">
         {hasBtns && (
           <section className={styles.content}>
             {btns}

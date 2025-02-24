@@ -119,7 +119,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
         !isInArticleDetailHistory &&
         !isInMomentDetail &&
         !isInMomentDetailEdit && (
-          <Media at="sm">
+          <Media lessThan="md">
             <footer>
               <NavBar />
             </footer>

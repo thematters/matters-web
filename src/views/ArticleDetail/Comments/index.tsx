@@ -44,7 +44,7 @@ const Comments = ({ id, lock }: { id: string; lock: boolean }) => {
 
   return (
     <section className={styles.responses}>
-      <Media at="sm">
+      <Media lessThan="md">
         <section className={styles.smTitle}>
           <FormattedMessage defaultMessage="Comment" id="LgbKvU" />
         </section>

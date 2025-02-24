@@ -118,7 +118,7 @@ const Hero = () => {
         <section className={styles.container}>
           <section className={`${styles.scrollButton} ${styles.scrollLeft}`}>
             <Button onClick={scrollPrev} disabled={!prevBtnEnabled}>
-              <Media at="sm">
+              <Media lessThan="md">
                 <Icon icon={IconButtonLeft} size={24} />
               </Media>
               <Media greaterThan="sm">
@@ -308,7 +308,7 @@ const Hero = () => {
           </section>
           <section className={`${styles.scrollButton} ${styles.scrollRight}`}>
             <Button onClick={scrollNext} disabled={!nextBtnEnabled}>
-              <Media at="sm">
+              <Media lessThan="md">
                 <Icon icon={IconButtonRight} size={24} />
               </Media>
               <Media greaterThan="sm">

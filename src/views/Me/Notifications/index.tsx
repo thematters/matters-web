@@ -138,7 +138,7 @@ const Notifications = () => {
 
   return (
     <Layout.Main>
-      <Media at="sm">
+      <Media lessThan="md">
         <Layout.Header
           // left={<Layout.Header.MeButton />}
           // right={<Layout.Header.Title id="notifications" />}

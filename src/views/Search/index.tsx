@@ -72,7 +72,7 @@ const Search = () => {
 
   return (
     <Layout.Main>
-      <Media at="sm">
+      <Media lessThan="md">
         <Layout.Header
           right={
             <section className={styles.layoutHeaderRight}>
@@ -90,7 +90,7 @@ const Search = () => {
       />
 
       {isHistory && !showSearchQuickResult && (
-        <Media at="sm">
+        <Media lessThan="md">
           <SearchHistory
             data={searchHistory?.slice(0, SEARCH_HISTORY_DISPLAY_LENGTH)}
             removeSearchHistoryItem={removeSearchHistory}

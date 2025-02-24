@@ -232,7 +232,7 @@ const BaseFooterActions = ({
             <>
               {isArticle && (
                 <>
-                  <Media at="sm">
+                  <Media lessThan="md">
                     <ArticleCommentFormDialog
                       articleId={node?.id!}
                       replyToId={comment.id}

@@ -135,7 +135,7 @@ export const TopNavBar = () => {
               )}
             </Dropdown>
 
-            {/* <Media at="sm"> */}
+            {/* <Media lessThan="md"> */}
             <NavListItemButton
               name={
                 <FormattedMessage defaultMessage="Notifications" id="NAidKb" />

@@ -174,7 +174,7 @@ const NoticeComment = ({
   if (moment) {
     return (
       <>
-        <Media at="sm">
+        <Media lessThan="md">
           <a
             href={path.href}
             onClick={(e) => {

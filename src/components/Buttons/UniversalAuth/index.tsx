@@ -33,7 +33,7 @@ export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <Button
           bgColor="black"
           size={[null, '1.625rem']}

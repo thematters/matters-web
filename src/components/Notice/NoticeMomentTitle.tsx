@@ -48,7 +48,7 @@ const NoticeMomentTitle = ({
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <a
           href={path.href}
           className={styles.noticeMomentTitle}

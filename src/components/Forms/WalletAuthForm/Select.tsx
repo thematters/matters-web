@@ -35,7 +35,7 @@ const Hint = () => {
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <p>
           <FormattedMessage
             defaultMessage="Have wallet questions on mobile device ? Click the "
