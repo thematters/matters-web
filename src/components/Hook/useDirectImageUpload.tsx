@@ -25,7 +25,16 @@ export const useDirectImageUpload = () => {
       ) {
         throw new Error('directUpload error: non json response')
       }
-      const resData = await res.json()
+
+      const resData = (await res.json()) as {
+        success: boolean
+        errors: { message: string }[]
+        result?: {
+          id?: string
+          filename?: string
+        }
+      }
+
       if (resData?.success !== true) {
         // errors: Uploaded image must have image/jpeg, image/png, image/webp, image/gif or image/svg+xml content-type
         throw new Error(
@@ -40,6 +49,10 @@ export const useDirectImageUpload = () => {
         // performance.now() = Date.now() - performance.timing.navigationStart
         delay_msecs: (window?.performance.now() ?? -1) - started,
       })
+
+      return {
+        id: resData?.result?.id,
+      }
     } finally {
       setUploading(false)
     }
