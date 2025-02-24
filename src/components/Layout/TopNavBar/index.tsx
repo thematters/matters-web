@@ -62,8 +62,8 @@ export const TopNavBar = () => {
           <NavListItemButton
             name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}
             showTooltip={false}
-            icon={<Icon icon={IconNavSearch} size={24} />}
-            activeIcon={<Icon icon={IconNavSearchActive} size={24} />}
+            icon={<Icon icon={IconNavSearch} size={26} />}
+            activeIcon={<Icon icon={IconNavSearchActive} size={26} />}
             active={isInSearch}
             onClick={() => {
               const path = toPath({
@@ -107,8 +107,8 @@ export const TopNavBar = () => {
                       name={
                         <FormattedMessage defaultMessage="Create" id="VzzYJk" />
                       }
-                      icon={<Icon icon={IconNavCreate} size={24} />}
-                      activeIcon={<Icon icon={IconNavCreate} size={24} />}
+                      icon={<Icon icon={IconNavCreate} size={26} />}
+                      activeIcon={<Icon icon={IconNavCreate} size={26} />}
                       active={false}
                       canScrollTop={false}
                       aria-haspopup="menu"
@@ -123,8 +123,8 @@ export const TopNavBar = () => {
                       name={
                         <FormattedMessage defaultMessage="Create" id="VzzYJk" />
                       }
-                      icon={<Icon icon={IconNavCreate} size={28} />}
-                      activeIcon={<Icon icon={IconNavCreate} size={28} />}
+                      icon={<Icon icon={IconNavCreate} size={30} />}
+                      activeIcon={<Icon icon={IconNavCreate} size={30} />}
                       active={false}
                       canScrollTop={false}
                       aria-haspopup="menu"
@@ -143,10 +143,10 @@ export const TopNavBar = () => {
               icon={
                 <section className={styles.notificationIcon}>
                   <Media lessThan="md">
-                    <UnreadIcon.Notification />
+                    <UnreadIcon.Notification iconSize={26} />
                   </Media>
                   <Media greaterThan="sm">
-                    <UnreadIcon.Notification iconSize={28} />
+                    <UnreadIcon.Notification iconSize={30} />
                   </Media>
                 </section>
               }
@@ -156,7 +156,7 @@ export const TopNavBar = () => {
                     <UnreadIcon.Notification active />
                   </Media>
                   <Media greaterThan="sm">
-                    <UnreadIcon.Notification active iconSize={28} />
+                    <UnreadIcon.Notification active iconSize={30} />
                   </Media>
                 </section>
               }
@@ -191,7 +191,7 @@ export const TopNavBar = () => {
                   })}
                 >
                   <Media lessThan="md">
-                    <MeAvatar user={viewer} size={24} />
+                    <MeAvatar user={viewer} size={26} />
                   </Media>
                   <Media greaterThan="sm">
                     <MeAvatar user={viewer} size={30} />

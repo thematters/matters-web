@@ -45,7 +45,7 @@
     gap: var(--sp24);
     align-items: center;
 
-    @media (--sm-up) {
+    @media (--xs-up) {
       gap: var(--sp32);
     }
 

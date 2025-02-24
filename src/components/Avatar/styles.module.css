@@ -105,6 +105,20 @@
   }
 }
 
+/* 26px */
+.size26 {
+  width: 1.625rem;
+  height: 1.625rem;
+
+  &.hasBadge {
+    & .badge {
+      & svg {
+        width: calc(1.625rem * 0.3);
+      }
+    }
+  }
+}
+
 /* 30px */
 .size30 {
   width: 1.875rem;

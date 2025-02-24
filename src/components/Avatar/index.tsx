@@ -19,6 +19,7 @@ export type AvatarSize =
   | 20
   | 22
   | 24
+  | 26
   | 30
   | 32
   | 40

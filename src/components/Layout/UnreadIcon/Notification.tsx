@@ -12,7 +12,7 @@ import styles from './styles.module.css'
 
 interface UnreadIconProps {
   active?: boolean
-  iconSize?: 24 | 28
+  iconSize?: 24 | 26 | 28 | 30
 }
 
 const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({
