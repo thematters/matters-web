@@ -1,11 +1,12 @@
 import { NetworkStatus } from 'apollo-client'
 import { useContext, useEffect, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   CardExposureTracker,
-  EmptyArticle,
+  EmptyWork,
   InfiniteScroll,
   List,
   Media,
@@ -195,7 +196,13 @@ const MainFeed = ({}: MainFeedProps) => {
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle />
+    return (
+      <EmptyWork
+        description={
+          <FormattedMessage defaultMessage="No articles" id="cHDJyK" />
+        }
+      />
+    )
   }
 
   // insert other feeds

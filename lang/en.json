@@ -23,6 +23,9 @@
   "+7SAix": {
     "defaultMessage": "Must be between 2-12 characters long."
   },
+  "+EHtpH": {
+    "defaultMessage": "No updates yet"
+  },
   "+GAaxB": {
     "defaultMessage": "The article has been archived due to violation of terms"
   },
@@ -2266,6 +2269,9 @@
   },
   "cE4Hfw": {
     "defaultMessage": "Discover"
+  },
+  "cHDJyK": {
+    "defaultMessage": "No articles"
   },
   "cPSexq": {
     "defaultMessage": "Let's go check out the other circles."
