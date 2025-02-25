@@ -22,11 +22,7 @@ export const ShuffleButton: React.FC<ShuffleButtonProps> = ({
     textActiveColor="black"
     {...props}
   >
-    <TextIcon
-      icon={<Icon icon={IconReset} size={20} />}
-      size={14}
-      weight="medium"
-    >
+    <TextIcon icon={<Icon icon={IconReset} size={20} />} size={14}>
       <FormattedMessage defaultMessage="Shuffle" id="Pp/0po" />
     </TextIcon>
   </Button>
