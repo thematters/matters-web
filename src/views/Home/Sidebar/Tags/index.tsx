@@ -83,6 +83,7 @@ const Tags = () => {
                 iconSize={20}
                 textSize={16}
                 textWeight="normal"
+                textLineClamp={true}
                 onClick={() =>
                   analytics.trackEvent('click_feed', {
                     type: 'tags',
