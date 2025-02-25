@@ -1,4 +1,6 @@
 .content {
+  word-break: break-all;
+
   & span + span {
     margin-left: 0.625rem;
   }
