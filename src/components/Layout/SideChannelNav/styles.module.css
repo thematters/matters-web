@@ -35,16 +35,20 @@
     }
 
     & .item {
-      @mixin line-clamp;
       @mixin transition;
 
-      -webkit-line-clamp: 2;
       padding: var(--sp4) var(--sp10);
       font-size: var(--text14);
       line-height: 1.375rem;
       color: var(--color-grey-darker);
       border-radius: 0.5rem;
       transition-property: color, background-color;
+
+      &.lineClampable {
+        @mixin line-clamp;
+
+        -webkit-line-clamp: 2;
+      }
 
       &.selectedChannel {
         font-weight: var(--font-semibold);

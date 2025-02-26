@@ -12,12 +12,12 @@ import {
 import { CHANNELS } from '~/components/GQL/queries/channels'
 import { ChannelsQuery } from '~/gql/graphql'
 
+import ChannelItem from './ChannelItem'
 import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const SideChannelNav = () => {
   const { getQuery, router, isInPath } = useRoute()
-  const shortHash = getQuery('shortHash')
   const viewer = useContext(ViewerContext)
   const isAuthed = viewer.isAuthed
 
@@ -67,23 +67,7 @@ const SideChannelNav = () => {
           <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
         </a>
         {channels.map((c, index) => (
-          <a
-            key={c.id}
-            href={`/c/${c.shortHash}`}
-            className={classnames({
-              [styles.item]: true,
-              [styles.selectedChannel]: shortHash === c.shortHash,
-            })}
-            data-channel-id={c.id}
-            title={c.name}
-            onClick={(e) => {
-              e.preventDefault()
-              e.stopPropagation()
-              router.push(`/c/${c.shortHash}`)
-            }}
-          >
-            {c.name}
-          </a>
+          <ChannelItem key={c.id} channel={c} />
         ))}
         <a
           href={`${PATHS.HOME}?type=newest`}
