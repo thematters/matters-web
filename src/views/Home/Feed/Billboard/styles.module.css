@@ -1,5 +1,5 @@
 .container {
-  & div {
+  & > div {
     @mixin border-bottom-grey;
 
     padding-top: var(--sp24);

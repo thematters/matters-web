@@ -67,10 +67,10 @@
   }
 
   &.spacingMd {
-    padding: var(--sp16);
+    padding: var(--sp24) var(--sp16) var(--sp4);
 
     @media (--sm-up) {
-      padding: var(--sp16) 0 var(--sp16);
+      padding: var(--sp32) 0 var(--sp12);
     }
   }
 }

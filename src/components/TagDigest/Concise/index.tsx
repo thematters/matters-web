@@ -11,8 +11,12 @@ import styles from './styles.module.css'
 
 export type TagDigestConciseTagProps = {
   tag: TagDigestConciseTagFragment
-  textSize?: 14 | 15
+  textSize?: 14 | 15 | 16
+  textWeight?: 'normal' | 'medium'
+  iconSize?: 20
   showArticlesNum?: boolean
+  textLineClamp?: boolean
+  onClick?: () => void
 }
 
 const fragments = {
@@ -28,21 +32,30 @@ const fragments = {
 const Concise = ({
   tag,
   textSize = 15,
+  textWeight = 'medium',
   showArticlesNum,
+  iconSize,
+  textLineClamp,
+  onClick,
 }: TagDigestConciseTagProps) => {
   const path = toPath({
     page: 'tagDetail',
     tag,
   })
   return (
-    <LinkWrapper {...path} testId={TEST_ID.DIGEST_TAG_CONCISE}>
+    <LinkWrapper
+      {...path}
+      testId={TEST_ID.DIGEST_TAG_CONCISE}
+      onClick={onClick}
+    >
       <section className={styles.content}>
         <TextIcon
-          icon={<Icon icon={IconHashTag} color="grey" />}
+          icon={<Icon icon={IconHashTag} color="grey" size={iconSize} />}
           color="black"
           size={textSize}
           spacing={4}
-          weight="medium"
+          weight={textWeight}
+          textLineClamp={textLineClamp}
         >
           {tag.content}
         </TextIcon>

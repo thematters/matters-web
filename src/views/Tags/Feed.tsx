@@ -67,6 +67,7 @@ const Feed = ({ type }: Props) => {
         edges={edges}
         pageInfo={pageInfo}
         loadMore={loadMore}
+        showEOFMessage={false}
         trackingType={isRecommended ? 'all_tags_recommended' : 'all_tags'}
       />
     </Layout.Main.Spacing>
