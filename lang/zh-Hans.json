@@ -2502,6 +2502,10 @@
   "gluNT8": {
     "defaultMessage": "输入链接地址"
   },
+  "gykfC8": {
+    "defaultMessage": "新发布",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
+  },
   "gzJEFb": {
     "defaultMessage": "跳转到 like.co 验证已有 Liker ID"
   },

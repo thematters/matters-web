@@ -2502,6 +2502,10 @@
   "gluNT8": {
     "defaultMessage": "Enter URL"
   },
+  "gykfC8": {
+    "defaultMessage": "Latest",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
+  },
   "gzJEFb": {
     "defaultMessage": "Verify your Liker ID through like.co"
   },

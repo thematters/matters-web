@@ -82,7 +82,11 @@ const SideChannelNav = () => {
             router.push(`${PATHS.HOME}?type=newest`)
           }}
         >
-          <FormattedMessage defaultMessage="Latest" id="adThp5" />
+          <FormattedMessage
+            defaultMessage="Latest"
+            id="gykfC8"
+            description="src/components/Layout/SideChannelNav/index.tsx"
+          />
         </a>
       </section>
     </section>
