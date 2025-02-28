@@ -42,6 +42,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
       zIndex={1000}
       placement="auto-start"
       delay={[1000, null]}
+      touch={['hold', 1000]}
       disabled={!lineClampable}
     >
       <a
