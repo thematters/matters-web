@@ -151,7 +151,11 @@
     position: sticky;
 
     /* topNavbar height */
-    top: var(--lg-top-nav-height);
+    top: var(--sm-top-nav-height);
+
+    @media (--sm-up) {
+      top: var(--lg-top-nav-height);
+    }
   }
 }
 
