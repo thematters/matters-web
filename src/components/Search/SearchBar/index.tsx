@@ -27,6 +27,7 @@ import styles from './styles.module.css'
 interface SearchBarProps {
   onChange?: (key: string) => void
   hasDropdown?: boolean
+  setShowSearchQuickResult?: (show: boolean) => void
 }
 
 const DynamicFormik = dynamic(
@@ -46,7 +47,7 @@ const SearchButton = () => {
         id: 'xmcVZ0',
       })}
     >
-      <Icon icon={IconNavSearch} color="greyDark" size={22} />
+      <Icon icon={IconNavSearch} color="greyDark" size={16} />
     </Button>
   )
 }
@@ -65,7 +66,7 @@ const ClearButton = ({ onClick }: ClearButtonProps) => {
       aria-label={intl.formatMessage({ defaultMessage: 'Clear', id: '/GCoTA' })}
       onClick={onClick}
     >
-      <Icon icon={IconTimes} color="greyDark" />
+      <Icon icon={IconTimes} color="greyDark" size={14} />
     </Button>
   )
 }
@@ -73,6 +74,7 @@ const ClearButton = ({ onClick }: ClearButtonProps) => {
 export const SearchBar: React.FC<SearchBarProps> = ({
   onChange,
   hasDropdown = true,
+  setShowSearchQuickResult,
 }) => {
   const { getQuery, router, isInPath } = useRoute()
   const isInSearch = isInPath('SEARCH')
@@ -92,6 +94,24 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   })
 
   const searchTextInput = useRef<HTMLInputElement>(null)
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === '/') {
+      if (document.activeElement === searchTextInput.current) {
+        return
+      }
+
+      event.preventDefault()
+      searchTextInput.current?.focus()
+      // set cursor to the end
+      searchTextInput.current?.setSelectionRange(
+        searchTextInput.current.value.length,
+        searchTextInput.current.value.length
+      )
+    }
+  }
+
+  useNativeEventListener('keydown', handleKeyDown)
 
   // dropdown
   const [showDropdown, setShowDropdown] = useState(false)
@@ -195,42 +215,65 @@ export const SearchBar: React.FC<SearchBarProps> = ({
       {({ values, setValues, handleSubmit, handleChange }) => {
         if (!hasDropdown) {
           return (
-            <form
-              className={styles.form}
-              onSubmit={handleSubmit}
-              aria-label={textPlaceholder}
-              role="search"
-              autoComplete="off"
-              action=""
-            >
-              <input
-                // FIMXME: FOUC on re-render
-                style={{ borderColor: 'var(--color-line-grey-light)' }}
-                type="search"
-                name="q"
-                ref={searchTextInput}
-                aria-label={textAriaLabel}
-                placeholder={textPlaceholder}
-                autoCorrect="off"
-                onChange={(e) => {
-                  handleChange(e)
-                  setSearch(e.target.value)
-                }}
-                value={values.q}
-                maxLength={MAX_SEARCH_KEY_LENGTH}
-              />
-
-              <SearchButton />
-
-              {search.length > 0 && (
-                <ClearButton
-                  onClick={() => {
-                    setValues({ q: '' })
-                    setSearch('')
+            <>
+              <form
+                className={styles.form}
+                onSubmit={handleSubmit}
+                aria-label={textPlaceholder}
+                role="search"
+                autoComplete="off"
+                action=""
+              >
+                <input
+                  // FIMXME: FOUC on re-render
+                  style={{ borderColor: 'var(--color-grey-lighter)' }}
+                  type="search"
+                  name="q"
+                  ref={searchTextInput}
+                  aria-label={textAriaLabel}
+                  placeholder={textPlaceholder}
+                  autoCorrect="off"
+                  onChange={(e) => {
+                    handleChange(e)
+                    setSearch(e.target.value)
                   }}
+                  value={values.q}
+                  maxLength={MAX_SEARCH_KEY_LENGTH}
                 />
+
+                <SearchButton />
+
+                {search.length > 0 && (
+                  <ClearButton
+                    onClick={() => {
+                      setValues({ q: '' })
+                      setSearch('')
+                    }}
+                  />
+                )}
+              </form>
+              {!q && (
+                <section className={styles.searchQuickResult}>
+                  <SearchQuickResult
+                    searchKey={debouncedSearch}
+                    onUpdateData={(newData: QuickResultQuery | undefined) => {
+                      setData(newData)
+                    }}
+                    closeDropdown={() => {
+                      closeDropdown()
+
+                      // clear input
+                      setValues({ q: '' })
+                      setSearch('')
+                    }}
+                    activeItem={activeItem}
+                    inPage={true}
+                    itemHorizontalSpacing={0}
+                    setShowSearchQuickResult={setShowSearchQuickResult}
+                  />
+                </section>
               )}
-            </form>
+            </>
           )
         }
 
@@ -238,7 +281,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
           <Dropdown
             focusLock={false}
             content={
-              !isInSearch &&
               debouncedSearch && (
                 <SearchQuickResult
                   searchKey={debouncedSearch}
@@ -260,7 +302,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
             placement="bottom-start"
             onClickOutside={closeDropdown}
             visible={showDropdown}
-            zIndex={Z_INDEX.OVER_GLOBAL_HEADER}
+            zIndex={Z_INDEX.OVER_STICKY_TABS}
           >
             {({ ref }) => (
               <form
@@ -272,7 +314,7 @@ export const SearchBar: React.FC<SearchBarProps> = ({
               >
                 <input
                   // FIMXME: FOUC on re-render
-                  style={{ borderColor: 'var(--color-line-grey-light)' }}
+                  style={{ borderColor: 'var(--color-grey-lighter)' }}
                   type="search"
                   name="q"
                   ref={searchTextInput}
@@ -291,6 +333,15 @@ export const SearchBar: React.FC<SearchBarProps> = ({
                 />
 
                 <SearchButton />
+
+                {search.length > 0 && (
+                  <ClearButton
+                    onClick={() => {
+                      setValues({ q: '' })
+                      setSearch('')
+                    }}
+                  />
+                )}
               </form>
             )}
           </Dropdown>

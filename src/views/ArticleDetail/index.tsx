@@ -151,7 +151,6 @@ const BaseArticleDetail = ({
   }
 
   const authorId = article.author?.id
-  const paymentPointer = article.author?.paymentPointer
   const collectionCount = article.collection?.totalCount || 0
   const isAuthor = viewer.id === authorId
   const circle = article.access.circle
@@ -274,7 +273,6 @@ const BaseArticleDetail = ({
         description={summary}
         keywords={keywords}
         image={article.cover}
-        paymentPointer={paymentPointer}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'Article',
@@ -295,6 +293,7 @@ const BaseArticleDetail = ({
           },
         }}
         availableLanguages={article.availableTranslations || []}
+        noindex={article.noindex}
       />
 
       <StickyTopBanner type="inactive" article={article} />
@@ -408,7 +407,7 @@ const BaseArticleDetail = ({
           <AuthorSidebar article={article} />
         </Media>
 
-        <Media at="sm">
+        <Media lessThan="md">
           {article.comments.totalCount > 0 && (
             <section className={styles.smUpCommentBlock} ref={commentsRef}>
               <DynamicComments id={article.id} lock={!canReadFullContent} />
@@ -417,7 +416,7 @@ const BaseArticleDetail = ({
         </Media>
       </section>
 
-      <Media at="sm">
+      <Media lessThan="md">
         <Spacer size="sp64" />
         <CommentsDialog
           id={article.id}

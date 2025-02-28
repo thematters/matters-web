@@ -1,0 +1,63 @@
+﻿#Geniee
+google.com, pub-7945044863874787, RESELLER, f08c47fec0942fa0
+google.com, pub-6582910611188121, RESELLER, f08c47fec0942fa0
+google.com, pub-5897179876377792, RESELLER, f08c47fec0942fa0
+google.com, pub-1237260803267758, DIRECT, f08c47fec0942fa0
+genieegroup.com, 23273379711, DIRECT
+genieesspv.jp, 222058, DIRECT
+
+
+#OB
+rubiconproject.com, 21582, RESELLER, 0bfd66d529a55807
+rubiconproject.com, 10724, RESELLER, 0bfd66d529a55807
+pubmatic.com, 160803, RESELLER, 5d62403b186f2ace
+pubmatic.com, 156490, RESELLER, 5d62403b186f2ace
+pubmatic.com, 156322, RESELLER, 5d62403b186f2ace
+pubmatic.com, 159421, RESELLER, 5d62403b186f2ace
+openx.com, 544088483, RESELLER, 6a698e2ec38604c6
+smartadserver.com, 3429-OB, RESELLER, 060d053dcf45cbf3
+smartadserver.com, 3429, RESELLER, 060d053dcf45cbf3
+pubmatic.com, 156439, RESELLER, 5d62403b186f2ace
+pubmatic.com, 154037, RESELLER, 5d62403b186f2ace
+rubiconproject.com, 16114, RESELLER, 0bfd66d529a55807
+openx.com, 537149888, RESELLER, 6a698e2ec38604c6
+appnexus.com, 3703, RESELLER, f5ab79cb980f11d1
+loopme.com, 5679, RESELLER, 6c8d5f95897a5a3b
+xad.com, 958, RESELLER, 81cbf0a75a5e0e9a
+video.unrulymedia.com, 2564526802, RESELLER, 6f752381ad5ec0e5
+smaato.com, 1100044045, RESELLER, 07bcf65f187117b4
+pubnative.net, 1006576, RESELLER, d641df8625486a7b
+pubnative.net, 1009099, RESELLER, d641df8625486a7b
+verve.com, 15503, RESELLER, 0c8f5958fc2d6270
+adyoulike.com, b4bf4fdd9b0b915f746f6747ff432bde, RESELLER, 4ad745ead2958bf7
+axonix.com, 57264, RESELLER, bc385f2b4a87b721
+admanmedia.com, 43, RESELLER
+sharethrough.com, OAW69Fon, RESELLER, d53b998a7bd4ecd2
+contextweb.com, 560288, RESELLER, 89ff185a4c4e857c
+rhebus.works, 5252004478, RESELLER
+contextweb.com, 563115, RESELLER, 89ff185a4c4e857c
+adcolony.com, 496220845654deec, RESELLER, 1ad675c9de6b5176 #Smaato
+appads.in, 107606, RESELLER #Loopme
+rubiconproject.com, 24600, RESELLER, 0bfd66d529a55807 #Smaato
+pubmatic.com, 156177, RESELLER, 5d62403b186f2ace #Smaato
+rubiconproject.com, 17328, RESELLER, 0bfd66d529a55807 #Verve (Pubnative)
+improvedigital.com, 2277, RESELLER
+openx.com, 541074008, RESELLER, 6a698e2ec38604c6
+openx.com, 537141605, RESELLER, 6a698e2ec38604c6
+adingo.jp, 30213, RESELLER
+onetag.com, 79840fa28d038f8, DIRECT 
+onetag.com, 79840fa28d038f8-OB, DIRECT
+appnexus.com, 13099, RESELLER
+yahoo.com, 58905, RESELLER, e1a5b5b6e3255540
+pubmatic.com, 161593, RESELLER, 5d62403b186f2ace
+rubiconproject.com, 11006, RESELLER, 0bfd66d529a55807
+smartadserver.com, 4111, RESELLER
+outbrain.com, 002d7f7ba0bd74452f2b155d0dfb5cd6c8, RESELLER
+vidoomy.com, 4930225, RESELLER
+sonobi.com, a85c5f6129, RESELLER, d1a215d9eb5aee9e
+axonix.com, 59089, RESELLER, bc385f2b4a87b721
+improvedigital.com, 2276, RESELLER
+rubiconproject.com, 17608, RESELLER, 0bfd66d529a55807
+lijit.com, 465542, RESELLER, fafdf38b16bf6b2b
+pubmatic.com, 163420, RESELLER, 5d62403b186f2ace
+smartadserver.com, 4140, RESELLER

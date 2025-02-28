@@ -1,5 +1,5 @@
 .sidebar {
-  padding-top: calc(var(--global-header-height) - var(--sp32));
+  padding-top: calc(var(--global-header-height) - var(--sp20));
   padding-bottom: var(--sp16);
 
   & > * + * {

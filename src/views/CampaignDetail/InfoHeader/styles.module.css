@@ -4,7 +4,6 @@
 
   @media (--sm-up) {
     padding: 0;
-    margin-top: var(--sp32);
   }
 }
 

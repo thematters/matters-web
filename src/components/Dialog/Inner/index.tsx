@@ -163,7 +163,7 @@ const Inner: React.FC<
         <button type="button" ref={initialFocusRef} aria-hidden="true" />
       </VisuallyHidden>
 
-      <Media at="sm">
+      <Media lessThan="md">
         {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}
       </Media>
 

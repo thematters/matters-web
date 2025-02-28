@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic'
-import { forwardRef } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import FocusLock from 'react-focus-lock'
 
 import { KEYVALUE, Z_INDEX } from '~/common/enums'
@@ -67,10 +67,14 @@ export const Dropdown: React.FC<DropdownProps> = ({
 }) => {
   const {
     show,
-    openDialog: openDropdown,
+    openDialog: openDropdownOriginal,
     closeDialog: closeDropdown,
   } = useDialogSwitch(false)
-  const toggle = () => (show ? closeDropdown() : openDropdown())
+
+  const [forceUpdateKey, setForceUpdateKey] = useState(0)
+
+  const toggle = () => (show ? closeDropdown() : openDropdownOriginal())
+
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
     if (target?.closest && target.closest('[data-clickable], a, button')) {
@@ -78,6 +82,23 @@ export const Dropdown: React.FC<DropdownProps> = ({
     }
     event.stopPropagation()
   }
+
+  // Listen for window resize events
+  useEffect(() => {
+    const handleResize = () => {
+      // THE KEY SOLUTION: Force complete re-rendering of the component after a short delay
+      // This 20ms delay is crucial - it gives the browser time to complete layout calculations
+      setTimeout(() => {
+        setForceUpdateKey((prev) => prev + 1)
+      }, 20)
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [show])
 
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
     if (event.code?.toLowerCase() !== KEYVALUE.escape) {
@@ -88,6 +109,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <DynamicLazyTippy
+      key={forceUpdateKey} // Use forceUpdateKey to force re-rendering
       arrow={false}
       trigger={undefined}
       onHidden={closeDropdown}
@@ -99,7 +121,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       animation="shift-away"
       theme="dropdown"
       zIndex={Z_INDEX.OVER_DIALOG}
-      appendTo={typeof window !== 'undefined' ? document.body : undefined}
+      appendTo={typeof window !== 'undefined' ? document.body : 'parent'}
       aria={{ content: 'describedby', expanded: true }}
       {...props}
       content={

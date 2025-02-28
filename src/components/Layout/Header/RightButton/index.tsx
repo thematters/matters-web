@@ -12,7 +12,7 @@ export const RightButton: React.FC<RightButtonProps> = ({
 }) => {
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <Button {...buttonProps}>
           <TextIcon
             color="green"

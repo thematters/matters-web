@@ -5,6 +5,7 @@ import { ReactComponent as IconFiatCurrency } from '@/public/static/icons/24px/f
 import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
 import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
 import { ReactComponent as IconTether } from '@/public/static/icons/24px/tether.svg'
+import { ReactComponent as IconLogoGraph } from '@/public/static/icons/logo-graph.svg'
 import { Icon, Tooltip, ViewerContext } from '~/components'
 import {
   DigestTransactionFragment,
@@ -19,10 +20,13 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
   const { purpose, currency, sender, recipient } = tx
   const isViewerSender = sender && viewer.id === sender.id
   const isViewerRecipient = recipient && viewer.id === recipient.id
+  const isVaultWithdrawal =
+    purpose === TransactionPurpose.CurationVaultWithdrawal
 
   return (
     <section className={styles.purpose}>
-      {currency === TransactionCurrency.Usdt && (
+      {isVaultWithdrawal && <Icon icon={IconLogoGraph} size={24} />}
+      {currency === TransactionCurrency.Usdt && !isVaultWithdrawal && (
         <Icon icon={IconTether} size={24} />
       )}
       {currency === TransactionCurrency.Hkd && (
@@ -33,6 +37,13 @@ const PurposeTitle = ({ tx }: { tx: DigestTransactionFragment }) => {
       )}
 
       <section className={styles.title}>
+        {isVaultWithdrawal && (
+          <FormattedMessage
+            defaultMessage="Claim USDT support"
+            id="+jt4rV"
+            description="src/components/Transaction/index.tsx"
+          />
+        )}
         {purpose === TransactionPurpose.SubscriptionSplit &&
           isViewerRecipient && (
             <FormattedMessage

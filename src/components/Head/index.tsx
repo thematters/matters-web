@@ -29,9 +29,9 @@ interface HeadProps {
   path?: string
   image?: string | null
   noSuffix?: boolean
-  paymentPointer?: string | null
   jsonLdData?: Record<string, any> | null
   availableLanguages?: UserLanguage[]
+  noindex?: boolean
 }
 
 // @see NextSeoProps[languageAlternatives], tho this is readonly so making it mutable
@@ -91,8 +91,8 @@ export const Head: React.FC<HeadProps> = (props) => {
     title: seoTitle,
     description: seoDescription,
     canonical: url?.split('#')[0].split('?')[0],
-    noindex: !isProdServingCanonical,
-    nofollow: !isProdServingCanonical,
+    noindex: props.noindex || !isProdServingCanonical,
+    nofollow: props.noindex || !isProdServingCanonical,
     facebook: { appId: process.env.NEXT_PUBLIC_FB_APP_ID || '' },
     themeColor: '#fff',
     // twitter uses og:* for twitter:* unless otherwise specified by next-seo docs
@@ -224,9 +224,7 @@ export const Head: React.FC<HeadProps> = (props) => {
             key="ld-json-data"
           />
         )}
-        {props.paymentPointer && (
-          <meta name="monetization" content={props.paymentPointer} />
-        )}
+
         {/* noindex for non-production enviroment */}
         {!isProdServingCanonical && (
           <meta name="robots" content="noindex, nofollow" key="robots" />

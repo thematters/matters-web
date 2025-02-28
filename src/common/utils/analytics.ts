@@ -102,6 +102,7 @@ export interface ClickButtonProp {
     | 'hottest'
     | 'icymi'
     | 'newest'
+    | 'channel'
     | 'campaign_detail_link'
     | `campaign_detail_tab_${string}`
     | `user_profile_tab_${string}`
@@ -241,7 +242,7 @@ interface AuthenticateProp {
 }
 
 interface ReadTimeProp {
-  articleId: string
+  shortHash: string
   time: number
 }
 
@@ -340,6 +341,7 @@ type UserFeedType =
   | 'hottest'
   | 'icymi'
   | 'newest'
+  | 'channel'
   | 'search'
   | 'search_user'
   | 'quick_search_user'

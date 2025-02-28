@@ -8,7 +8,7 @@ const MomentDetail = () => {
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <Content shortHash={shortHash} closeDialog={onClose} />
       </Media>
       <Media greaterThan="sm">

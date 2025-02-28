@@ -8,6 +8,7 @@ import {
   Icon,
   LanguageConsumer,
   LanguageContext,
+  Media,
   Menu,
   TextIcon,
 } from '~/components'
@@ -50,36 +51,60 @@ export const LanguageSwitchContent = () => (
 type LanguageSwitchProps = {
   size?: 'sm' | 'lg'
   bgColor?: 'greyDarkest'
+  showText?: boolean
 }
 
 export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
   size = 'sm',
   bgColor,
+  showText = true,
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  const iconColor = bgColor === 'greyDarkest' ? 'white' : 'grey'
+  // const iconColor = bgColor === 'greyDarkest' ? 'white' : 'grey'
   const textSize = size === 'sm' ? 12 : 16
 
   return (
     <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG}>
       {({ openDropdown, ref }) => (
-        <Button
-          onClick={openDropdown}
-          size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
-          spacing={size === 'sm' ? [0, 0] : [0, 8]}
-          bgColor={bgColor}
-          aria-haspopup="listbox"
-          ref={ref}
-        >
-          <TextIcon
-            icon={<Icon icon={IconWorld} />}
-            size={textSize}
-            color={iconColor}
-          >
-            {LANG_TEXT_MAP[lang]}
-          </TextIcon>
-        </Button>
+        <>
+          <Media lessThan="md">
+            <Button
+              onClick={openDropdown}
+              size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
+              spacing={size === 'sm' ? [0, 0] : [0, 8]}
+              bgColor={bgColor}
+              aria-haspopup="listbox"
+              ref={ref}
+            >
+              <TextIcon
+                icon={<Icon icon={IconWorld} size={24} />}
+                size={textSize}
+                color={'black'}
+              >
+                {showText && LANG_TEXT_MAP[lang]}
+              </TextIcon>
+            </Button>
+          </Media>
+          <Media greaterThan="sm">
+            <Button
+              onClick={openDropdown}
+              size={[null, size === 'sm' ? '1.25rem' : '1.75rem']}
+              spacing={size === 'sm' ? [0, 0] : [0, 8]}
+              bgColor={bgColor}
+              aria-haspopup="listbox"
+              ref={ref}
+            >
+              <TextIcon
+                icon={<Icon icon={IconWorld} size={28} />}
+                size={textSize}
+                color={'black'}
+              >
+                {showText && LANG_TEXT_MAP[lang]}
+              </TextIcon>
+            </Button>
+          </Media>
+        </>
       )}
     </Dropdown>
   )

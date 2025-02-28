@@ -2,7 +2,7 @@
   display: flex;
   gap: var(--sp24);
   align-items: center;
-  margin-top: var(--sp32);
+  margin-top: var(--sp20);
 
   & > a {
     align-self: center;

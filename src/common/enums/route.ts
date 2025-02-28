@@ -10,6 +10,7 @@ import _get from 'lodash/get'
  */
 type ROUTE_KEY =
   | 'HOME'
+  | 'CHANNEL'
   | 'FOLLOW'
   | 'AUTHORS'
   | 'SEARCH'
@@ -36,6 +37,8 @@ type ROUTE_KEY =
   | 'CIRCLE_SETTINGS_EDIT_PROFILE'
   | 'CIRCLE_SETTINGS_MANAGE_INVITATION'
   | 'CIRCLE_CREATION'
+  // Campaign
+  | 'CAMPAIGN_DETAIL'
   // Me
   | 'ME_DRAFTS'
   | 'ME_PUBLISHED'
@@ -85,8 +88,8 @@ export const ROUTES: {
    * Public
    */
   { key: 'HOME', pathname: '/' },
+  { key: 'CHANNEL', pathname: '/c/[shortHash]' },
   { key: 'FOLLOW', pathname: '/follow' },
-  { key: 'AUTHORS', pathname: '/authors' },
   { key: 'SEARCH', pathname: '/search' },
   // experient page for recommendation engine testing
   { key: 'RECOMMENDATION', pathname: '/recommendation' },
@@ -127,10 +130,12 @@ export const ROUTES: {
   },
   { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
 
+  // Campaign
+  { key: 'CAMPAIGN_DETAIL', pathname: '/e/[shortHash]' },
+
   // Auth
   { key: 'LOGIN', pathname: '/login' },
   { key: 'SIGNUP', pathname: '/signup' },
-  { key: 'FORGET', pathname: '/forget' },
   { key: 'CALLBACK_PROVIDER', pathname: '/callback/[provider]' },
 
   // Misc

@@ -2,17 +2,16 @@ import { useQuery } from '@apollo/react-hooks'
 import _chunk from 'lodash/chunk'
 import _flatten from 'lodash/flatten'
 import _get from 'lodash/get'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics, mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
-  EmptyWarning,
+  EmptyWork,
   Head,
   InfiniteScroll,
   List,
   QueryError,
   SpinnerBlock,
-  Translate,
 } from '~/components'
 import {
   FollowingFeedQuery,
@@ -73,13 +72,9 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
           title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
         />
 
-        <EmptyWarning
+        <EmptyWork
           description={
-            <Translate
-              zh_hant="還沒有動態"
-              zh_hans="还没有动态"
-              en="No activities."
-            />
+            <FormattedMessage defaultMessage="No updates yet" id="+EHtpH" />
           }
         />
       </>

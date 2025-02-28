@@ -225,3 +225,11 @@
 .textUnderline {
   text-decoration: underline;
 }
+
+.textLineClamp {
+  & .text {
+    @mixin line-clamp;
+
+    display: -webkit-inline-box;
+  }
+}

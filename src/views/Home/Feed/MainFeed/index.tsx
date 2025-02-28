@@ -1,17 +1,18 @@
 import { NetworkStatus } from 'apollo-client'
 import { useContext, useEffect, useRef } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
   CardExposureTracker,
-  EmptyArticle,
+  EmptyWork,
   InfiniteScroll,
   List,
   Media,
   QueryError,
-  SpinnerBlock,
   usePublicQuery,
+  useRoute,
   ViewerContext,
 } from '~/components'
 import {
@@ -27,7 +28,7 @@ import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
-
+import Placeholder from './Placeholder'
 type FeedArticlesPublic =
   | HottestFeedPublicQuery
   | NewestFeedPublicQuery
@@ -84,10 +85,18 @@ const horizontalFeeds: FeedLocation = {
   ),
 }
 
-const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
+const MainFeed = ({}: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
-  const isHottestFeed = sortBy === 'hottest'
+  const { getQuery, isInPath } = useRoute()
+  const type = getQuery('type')
+  const isInHome = isInPath('HOME')
+  const isInChannel = isInPath('CHANNEL')
+  const shortHash = getQuery('shortHash')
+  const sortBy = isInChannel
+    ? 'channel'
+    : ((type === '' && isInHome ? 'icymi' : type) as HomeFeedType)
   const isIcymiFeed = sortBy === 'icymi'
+
   /**
    * Data Fetching
    */
@@ -96,6 +105,11 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   const { data, error, loading, fetchMore, networkStatus, client } =
     usePublicQuery<FeedArticlesPublic>(query, {
       notifyOnNetworkStatusChange: true,
+      variables: isInChannel
+        ? {
+            shortHash,
+          }
+        : {},
     })
 
   // pagination
@@ -121,17 +135,19 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     })
   }
 
+  //FIXME: if the data has been updated, it will fetch the private data again
   // fetch private data for first page
-  const fetchedPrviateSortsRef = useRef<HomeFeedType[]>([])
+  const fetchedPrviateSortsRef = useRef<string[]>([])
   useEffect(() => {
-    const fetched = fetchedPrviateSortsRef.current.indexOf(sortBy) >= 0
+    const key = isInChannel ? `channel:${shortHash}` : sortBy
+    const fetched = fetchedPrviateSortsRef.current.indexOf(key) >= 0
     if (loading || !edges || fetched || !viewer.isAuthed) {
       return
     }
 
     loadPrivate(data)
-    fetchedPrviateSortsRef.current = [...fetchedPrviateSortsRef.current, sortBy]
-  }, [!!edges, loading, sortBy, viewer.id])
+    fetchedPrviateSortsRef.current = [...fetchedPrviateSortsRef.current, key]
+  }, [!!edges, loading, sortBy, viewer.id, shortHash])
 
   // load next page
   const loadMore = async () => {
@@ -168,7 +184,11 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
       window.scrollTo(0, 0)
       document.body.focus()
     }
-    return <SpinnerBlock />
+    return (
+      <>
+        <Placeholder />
+      </>
+    )
   }
 
   if (error) {
@@ -176,13 +196,19 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
   }
 
   if (!edges || edges.length <= 0 || !pageInfo) {
-    return <EmptyArticle />
+    return (
+      <EmptyWork
+        description={
+          <FormattedMessage defaultMessage="No articles" id="cHDJyK" />
+        }
+      />
+    )
   }
 
   // insert other feeds
   let mixFeed: FeedEdge[] = edges
 
-  if (isHottestFeed) {
+  if (isIcymiFeed) {
     // get copy
     mixFeed = JSON.parse(JSON.stringify(edges))
 
@@ -203,6 +229,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
 
   return (
     <>
+      {isIcymiFeed && <Announcements />}
       {recommendation &&
         'icymiTopic' in recommendation &&
         recommendation.icymiTopic && (
@@ -215,7 +242,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
         eof
       >
         <List>
-          {isHottestFeed && <Announcements />}
           {mixFeed.map((edge, i) => {
             if (edge?.__typename === 'HorizontalFeed') {
               const { Feed } = edge

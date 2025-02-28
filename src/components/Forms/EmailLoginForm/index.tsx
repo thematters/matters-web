@@ -388,7 +388,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
       )}
 
       <Dialog.Content noMaxHeight={isInPage}>
-        <Media at="sm">
+        <Media lessThan="md">
           {isSelectMethod && (
             <AuthTabs
               type={authFeedType}

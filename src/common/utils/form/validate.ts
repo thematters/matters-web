@@ -26,7 +26,7 @@ import {
   ValidEmailOptions,
 } from '~/common/utils'
 
-import { hasUpperCase, isValidPaymentPointer } from '../validator'
+import { hasUpperCase } from '../validator'
 
 export const PUNCTUATION_CHINESE =
   '\u3002\uff1f\uff01\uff0c\u3001\uff1b\uff1a\u201c\u201d\u2018\u2019\uff08\uff09\u300a\u300b\u3008\u3009\u3010\u3011\u300e\u300f\u300c\u300d\ufe43\ufe44\u3014\u3015\u2026\u2014\uff5e\ufe4f\uffe5'
@@ -128,20 +128,6 @@ export const validatePaymentPassword = (value: string, intl: IntlShape) => {
     return intl.formatMessage({
       defaultMessage: 'Enter a 6-digit payment password.',
       id: 'OpeFTV',
-    })
-  }
-}
-
-export const validatePaymentPointer = (value: string, intl: IntlShape) => {
-  if (!value) {
-    return intl.formatMessage({
-      defaultMessage: 'Required',
-      id: 'Seanpx',
-    })
-  } else if (!isValidPaymentPointer(value)) {
-    return intl.formatMessage({
-      defaultMessage: 'The wallet address starts with "$".',
-      id: 'i7cXnf',
     })
   }
 }

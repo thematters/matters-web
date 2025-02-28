@@ -202,7 +202,7 @@ const Init: React.FC<FormProps> = ({
       />
 
       <Dialog.Content>
-        <Media at="sm">{InnerForm}</Media>
+        <Media lessThan="md">{InnerForm}</Media>
         <Media greaterThan="sm">
           <AuthTabs
             purpose={purpose}

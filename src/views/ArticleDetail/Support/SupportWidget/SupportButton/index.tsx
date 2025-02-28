@@ -78,7 +78,7 @@ const SupportButton = ({
 
   return (
     <>
-      <Media at="sm">
+      <Media lessThan="md">
         <SupportDialog article={article}>
           {({ openDialog }) => (
             <Content

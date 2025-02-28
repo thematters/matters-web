@@ -1,7 +1,10 @@
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 
-import { TEST_ID } from '~/common/enums'
+import {
+  ARTICLE_DIGEST_AUTHOR_SIDEBAR_ID_PREFIX,
+  TEST_ID,
+} from '~/common/enums'
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
@@ -46,7 +49,6 @@ const fragments = {
 export const ArticleDigestAuthorSidebar = ({
   article,
   collectionId,
-
   titleTextSize = 15,
   titleColor = 'greyDarker',
   imageSize = 'sm',
@@ -79,6 +81,7 @@ export const ArticleDigestAuthorSidebar = ({
     <section
       className={containerClasses}
       data-test-id={TEST_ID.DIGEST_ARTICLE_AUTHOR_SIDEBAR}
+      id={`${ARTICLE_DIGEST_AUTHOR_SIDEBAR_ID_PREFIX}${article.id}`}
       onClick={clickEvent}
     >
       <section className={styles.left}>

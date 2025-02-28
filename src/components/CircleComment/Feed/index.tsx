@@ -93,7 +93,7 @@ const BaseCommentFeed = ({
       )}
 
       <section className={styles.contentContainer}>
-        <Media at="sm">
+        <Media lessThan="md">
           <CircleCommentContent
             comment={comment}
             type={type}

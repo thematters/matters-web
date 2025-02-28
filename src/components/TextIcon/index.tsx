@@ -4,7 +4,7 @@ import { capitalizeFirstLetter } from '~/common/utils'
 
 import styles from './styles.module.css'
 
-type TextIconColor =
+export type TextIconColor =
   | 'black'
   | 'green'
   | 'gold'
@@ -34,6 +34,8 @@ export interface TextIconProps {
   decoration?: 'underline'
 
   allowUserSelect?: boolean
+
+  textLineClamp?: boolean
 }
 
 /**
@@ -61,6 +63,7 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
   weight,
   placement = 'right',
   decoration,
+  textLineClamp,
 
   allowUserSelect = false,
 
@@ -76,6 +79,7 @@ export const TextIcon: React.FC<React.PropsWithChildren<TextIconProps>> = ({
     [styles[`text${capitalizeFirstLetter(placement)}`]]: true,
     [decoration ? styles[`text${capitalizeFirstLetter(decoration)}`] : '']:
       true,
+    [textLineClamp ? styles.textLineClamp : '']: textLineClamp,
     [weight ? styles[`weight${capitalizeFirstLetter(weight)}`] : '']: !!weight,
     [styles.noneSelect]: !allowUserSelect,
     [styles.hasIcon]: !!icon,

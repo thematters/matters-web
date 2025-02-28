@@ -27,7 +27,7 @@
   margin-top: var(--sp10);
 
   & .item {
-    @mixin flex-start-start;
+    @mixin flex-center-start;
 
     margin-top: var(--sp4);
     margin-right: var(--sp16);

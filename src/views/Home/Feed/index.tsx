@@ -1,28 +1,29 @@
 import { useState } from 'react'
 
-import { Layout, useRoute } from '~/components'
+import { Layout, Spacer, useRoute } from '~/components'
 
 import MainFeed from './MainFeed'
-import SortBy, { HomeFeedType } from './SortBy'
+import { HomeFeedType } from './SortBy'
 
 const HomeFeed = () => {
-  const { getQuery, setQuery } = useRoute()
+  const { getQuery } = useRoute()
   const qsType = getQuery('type') as HomeFeedType
 
-  const [feedType, setFeedType] = useState<HomeFeedType>(qsType || 'hottest')
+  const [feedType] = useState<HomeFeedType>(qsType || 'icymi')
 
-  const changeFeed = (newType: HomeFeedType) => {
-    setQuery('type', newType === 'hottest' ? '' : newType)
-    setFeedType(newType)
-  }
+  // const changeFeed = (newType: HomeFeedType) => {
+  //   setQuery('type', newType === 'hottest' ? '' : newType)
+  //   setFeedType(newType)
+  // }
 
   return (
     <>
-      <SortBy feedType={feedType} setFeedType={changeFeed} />
+      {/* <SortBy feedType={feedType} setFeedType={changeFeed} /> */}
 
-      <Layout.Main.Spacing hasVertical={false}>
+      <Layout.Main>
+        <Spacer size="sp20" />
         <MainFeed feedSortType={feedType} />
-      </Layout.Main.Spacing>
+      </Layout.Main>
     </>
   )
 }

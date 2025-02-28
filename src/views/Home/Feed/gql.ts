@@ -65,6 +65,21 @@ export const FEED_ARTICLES_PUBLIC = {
     ${feedFragment}
     ${IcymiCuratedFeed.fragments}
   `,
+  channel: gql`
+    query ChannelFeedPublic($shortHash: String!, $after: String) {
+      viewer @connection(key: "viewerFeedChannel", keyArgs: ["$shortHash"]) {
+        id
+        recommendation {
+          feed: channelArticles(
+            input: { shortHash: $shortHash, first: 20, after: $after }
+          ) {
+            ...FeedArticleConnection
+          }
+        }
+      }
+    }
+    ${feedFragment}
+  `,
 }
 
 export const FEED_ARTICLES_PRIVATE = gql`

@@ -24,12 +24,7 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
   const viewer = useContext(ViewerContext)
   const client = useApolloClient()
 
-  const {
-    id: rootId,
-    articles,
-    pinAmount,
-    note,
-  } = recommendation.icymiTopic || {}
+  const { id: rootId, articles, pinAmount } = recommendation.icymiTopic || {}
   const cardArticles = articles?.slice(0, pinAmount) || []
   const cardArticleNum = cardArticles.length
   const listArticles = articles?.slice(pinAmount) || []
@@ -73,18 +68,10 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
   return (
     <>
       <section className={styles.container}>
-        {note && (
-          <section className={styles.description}>
-            <span aria-hidden>/</span>
-            <p>{note}</p>
-            <span aria-hidden>/</span>
-          </section>
-        )}
-
         <section className={styles.cards}>
           {cardArticles.map((article, i) => (
             <React.Fragment key={article.id}>
-              <Media at="sm">
+              <Media at="xs">
                 <ArticleDigestCurated
                   article={article}
                   titleLineClamp={3}
@@ -94,7 +81,7 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
                   }
                 />
               </Media>
-              <Media greaterThan="sm">
+              <Media greaterThan="xs">
                 <ArticleDigestCurated
                   article={article}
                   titleLineClamp={2}

@@ -16,10 +16,6 @@ const MomentNewCommentNotice = ({
 }: {
   notice: MomentNewCommentNoticeFragment
 }) => {
-  if (!notice.actors) {
-    return null
-  }
-
   const commentMoment =
     notice.comment?.node.__typename === 'Moment'
       ? notice.comment.node

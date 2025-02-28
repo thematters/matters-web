@@ -5,11 +5,10 @@ import { useEffect, useRef } from 'react'
 import { analytics } from '~/common/utils'
 
 type Props = {
-  articleId: string
   container?: React.RefObject<HTMLDivElement>
 }
 
-export const useReadTimer = ({ articleId, container }: Props) => {
+export const useReadTimer = ({ container }: Props) => {
   const router = useRouter()
 
   //in ms
@@ -25,11 +24,14 @@ export const useReadTimer = ({ articleId, container }: Props) => {
     }, 3000)
 
     const storeReadTime = () => {
-      if (articleId && readTimer)
+      if (router?.query?.shortHash && readTimer) {
+        const value = router.query.shortHash
+        const shortHash = value instanceof Array ? value[0] : value || ''
         analytics.trackEvent('read_time', {
-          articleId,
+          shortHash,
           time: readTimer.current,
         })
+      }
     }
 
     window.addEventListener('scroll', handleScroll)

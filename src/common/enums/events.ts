@@ -42,6 +42,7 @@ export const BYPASS_SCROLL_LOCK = 'bypassScrollLock'
 export const ENBABLE_SCROLL_LOCK = 'enableScrollLock'
 export const BYPASS_FOCUS_LOCK = 'bypassFocusLock'
 export const ENBABLE_FOCUS_LOCK = 'enableFocusLock'
+export const OPEN_WITHDRAW_VAULT_USDT_DIALOG = 'openWithdrawVaultUsdtDialog'
 
 // Toast
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
@@ -50,6 +51,9 @@ export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
 export const SUPPORT_SUCCESS = 'supportSuccess'
 export const SUPPORT_SUCCESS_USDT_VISITOR = 'supportSuccessUSDTVisitor'
 export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'
+
+// Wallet
+export const REFETCH_BALANCE_USDT = 'refetchBalanceUSDT'
 
 // Universal auth
 export enum UNIVERSAL_AUTH_TRIGGER {

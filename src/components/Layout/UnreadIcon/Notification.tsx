@@ -12,9 +12,13 @@ import styles from './styles.module.css'
 
 interface UnreadIconProps {
   active?: boolean
+  iconSize?: 24 | 26 | 28 | 30
 }
 
-const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
+const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({
+  active,
+  iconSize = 24,
+}) => {
   const viewer = useContext(ViewerContext)
   const { data, startPolling } = useQuery<UnreadNoticeCountQuery>(
     UNREAD_NOTICE_COUNT,
@@ -39,13 +43,15 @@ const NotificationUnreadIcon: React.FC<UnreadIconProps> = ({ active }) => {
   })
 
   return (
-    <span className={iconClasses}>
-      {active ? (
-        <Icon icon={IconNavNotificationsActive} size={32} />
-      ) : (
-        <Icon icon={IconNavNotifications} size={32} />
-      )}
-    </span>
+    <>
+      <span className={iconClasses}>
+        {active ? (
+          <Icon icon={IconNavNotificationsActive} size={iconSize} />
+        ) : (
+          <Icon icon={IconNavNotifications} size={iconSize} />
+        )}
+      </span>
+    </>
   )
 }
 

@@ -49,8 +49,6 @@ export const isValidPaymentPassword = (password: string): boolean => {
 /**
  * Validate payment pointer.
  */
-export const isValidPaymentPointer = (paymentPointer: string): boolean =>
-  paymentPointer.startsWith('$')
 
 export const hasUpperCase = (str: string) => str.toLowerCase() !== str
 

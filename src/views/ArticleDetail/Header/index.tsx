@@ -28,7 +28,7 @@ const Header = ({ article }: HeaderProps) => {
 
   return (
     <section className={styles.header}>
-      <Media at="sm" className={styles.mobileLogo}>
+      <Media lessThan="md" className={styles.mobileLogo}>
         <BackToHomeMobileButton />
       </Media>
       {campaign && (

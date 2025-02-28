@@ -45,7 +45,6 @@ const BaseArticleDigestFeed = ({
   article,
   header,
   collectionId,
-
   hasHeader = true,
   hasCircle = true,
   hasAuthor = true,
@@ -160,7 +159,7 @@ const BaseArticleDigestFeed = ({
           </LinkWrapper>
         )}
       </section>
-      <Media at="sm">{footerActions}</Media>
+      <Media lessThan="md">{footerActions}</Media>
     </section>
   )
 }

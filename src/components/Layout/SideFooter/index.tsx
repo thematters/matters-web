@@ -1,41 +1,40 @@
 import Link from 'next/link'
 import { FormattedMessage } from 'react-intl'
 
-import { EXTERNAL_LINKS, PATHS, Z_INDEX } from '~/common/enums'
-import { Dropdown, LanguageSwitch, Menu } from '~/components'
+import { PATHS } from '~/common/enums'
 
+// import { EXTERNAL_LINKS, PATHS, Z_INDEX } from '~/common/enums'
+// import { Dropdown, Menu } from '~/components'
 import styles from './styles.module.css'
 
-const CommunityMenu = () => {
-  return (
-    <Menu>
-      <Menu.Item
-        text={
-          <FormattedMessage defaultMessage="Matters Community" id="FhWC22" />
-        }
-        href={PATHS.COMMUNITY}
-      />
+// const CommunityMenu = () => {
+//   return (
+//     <Menu>
+//       <Menu.Item
+//         text={
+//           <FormattedMessage defaultMessage="Matters Community" id="FhWC22" />
+//         }
+//         href={PATHS.COMMUNITY}
+//       />
 
-      <Menu.Item
-        text={<FormattedMessage defaultMessage="Open Source" id="Xd0J7Y" />}
-        htmlHref={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
-        htmlTarget="_blank"
-      />
+//       <Menu.Item
+//         text={<FormattedMessage defaultMessage="Open Source" id="Xd0J7Y" />}
+//         htmlHref={EXTERNAL_LINKS.DEVELOPER_RESOURCE}
+//         htmlTarget="_blank"
+//       />
 
-      <Menu.Item
-        text={<FormattedMessage defaultMessage="Bug Report" id="9Fpc9S" />}
-        htmlHref={EXTERNAL_LINKS.BUG_REPORT}
-        htmlTarget="_blank"
-      />
-    </Menu>
-  )
-}
+//       <Menu.Item
+//         text={<FormattedMessage defaultMessage="Bug Report" id="9Fpc9S" />}
+//         htmlHref={EXTERNAL_LINKS.BUG_REPORT}
+//         htmlTarget="_blank"
+//       />
+//     </Menu>
+//   )
+// }
 
 const SideFooter = () => {
   return (
     <footer className={styles.footer}>
-      <LanguageSwitch />
-
       <section className={styles.links}>
         <Link href={PATHS.ABOUT} legacyBehavior>
           <a>
@@ -55,13 +54,11 @@ const SideFooter = () => {
           </a>
         </Link>
 
-        <Dropdown content={<CommunityMenu />} zIndex={Z_INDEX.OVER_DIALOG}>
-          {({ openDropdown, ref }) => (
-            <button onClick={openDropdown} ref={ref}>
-              <FormattedMessage defaultMessage="Community" id="4CrCbD" />
-            </button>
-          )}
-        </Dropdown>
+        <Link href={PATHS.COMMUNITY} legacyBehavior>
+          <a>
+            <FormattedMessage defaultMessage="Community" id="4CrCbD" />
+          </a>
+        </Link>
       </section>
     </footer>
   )

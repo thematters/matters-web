@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl'
+// import { FormattedMessage } from 'react-intl'
 
 import { Layout } from '~/components'
 
@@ -16,9 +16,9 @@ const Home = () => {
         </>
       }
     >
-      <Layout.AuthHeader
+      {/* <Layout.AuthHeader
         title={<FormattedMessage defaultMessage="Discover" id="cE4Hfw" />}
-      />
+      /> */}
 
       <Feed />
     </Layout.Main>

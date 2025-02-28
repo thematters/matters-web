@@ -92,7 +92,7 @@ const InfoHeader = ({
           />
 
           <section className={styles.viewIpfs}>
-            <Media at="sm">
+            <Media lessThan="md">
               <button
                 type="button"
                 onClick={() =>
@@ -157,7 +157,9 @@ const InfoHeader = ({
                     spacing={4}
                     placement="left"
                   >
-                    <Media at="sm">{truncate(version.dataHash!, 10, 14)}</Media>
+                    <Media lessThan="md">
+                      {truncate(version.dataHash!, 10, 14)}
+                    </Media>
                     <Media greaterThan="sm">{version.dataHash}</Media>
                   </TextIcon>
                 </Button>

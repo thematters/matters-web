@@ -17,6 +17,7 @@ import {
   TableView,
   TextIcon,
   ViewerContext,
+  WithdrawVaultUSDTDialog,
 } from '~/components'
 import EXCHANGE_RATES from '~/components/GQL/queries/exchangeRates'
 import WALLET_BALANCE from '~/components/GQL/queries/walletBalance'
@@ -24,7 +25,6 @@ import { ExchangeRatesQuery, WalletBalanceQuery } from '~/gql/graphql'
 
 import { FiatCurrencyBalance, LikeCoinBalance, USDTBalance } from './Balance'
 import PaymentPassword from './PaymentPassword'
-import PaymentPointer from './PaymentPointer'
 import styles from './styles.module.css'
 import ViewStripeAccount from './ViewStripeAccount'
 import ViewStripeCustomerPortal from './ViewStripeCustomerPortal'
@@ -96,10 +96,10 @@ const Wallet = () => {
             <Button
               spacing={[0, 12]}
               size={[null, '2rem']}
-              bgColor="green"
+              borderColor="green"
               href={PATHS.ME_WALLET_TRANSACTIONS}
             >
-              <TextIcon color="white" weight="medium">
+              <TextIcon color="green" weight="medium">
                 <FormattedMessage defaultMessage="Transactions" id="/jJLYy" />
               </TextIcon>
             </Button>
@@ -119,24 +119,27 @@ const Wallet = () => {
           currency={currency}
           exchangeRate={exchangeRateHKD?.rate || 0}
         />
-        <LikeCoinBalance
-          currency={currency}
-          exchangeRate={exchangeRateLIKE?.rate || 0}
-        />
         <USDTBalance
           currency={currency}
           exchangeRate={exchangeRateUSDT?.rate || 0}
+        />
+        <LikeCoinBalance
+          currency={currency}
+          exchangeRate={exchangeRateLIKE?.rate || 0}
         />
       </section>
 
       <Layout.Main.Spacing>
         <TableView spacingX={0}>
           {hasPaymentPassword && <PaymentPassword />}
+
           <ViewStripeCustomerPortal />
+
           {hasStripeAccount && <ViewStripeAccount />}
-          <PaymentPointer />
         </TableView>
       </Layout.Main.Spacing>
+
+      <WithdrawVaultUSDTDialog />
     </Layout.Main>
   )
 }

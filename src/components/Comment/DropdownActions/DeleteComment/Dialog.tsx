@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { TEST_ID } from '~/common/enums'
+import { COMMENT_FEED_ID_PREFIX, TEST_ID } from '~/common/enums'
 import {
   Dialog,
   toast,
@@ -14,6 +14,8 @@ import {
   CommentDropdownActionsCommentPublicFragment,
   DeleteCommentMutation,
 } from '~/gql/graphql'
+
+import styles from './styles.module.css'
 
 const DELETE_COMMENT = gql`
   mutation DeleteComment($id: ID!) {
@@ -42,7 +44,7 @@ const DeleteCommentDialog = ({
 }: DeleteCommentDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const { routerLang } = useRoute()
-  const commentId = comment.id
+  const { id, parentComment } = comment
   const node =
     comment.node.__typename === 'Article' ||
     comment.node.__typename === 'Moment'
@@ -50,12 +52,15 @@ const DeleteCommentDialog = ({
       : undefined
   const isArticle = comment.node.__typename === 'Article'
   const isMoment = comment.node.__typename === 'Moment'
+  const isDescendantComment = parentComment !== null
+
+  const nodeId = parentComment ? `${parentComment.id}-${id}` : id
 
   const [deleteComment] = useMutation<DeleteCommentMutation>(DELETE_COMMENT, {
-    variables: { id: commentId },
+    variables: { id: id },
     optimisticResponse: {
       deleteComment: {
-        id: commentId,
+        id: id,
         state: 'archived' as any,
         node:
           isMoment && node?.__typename === 'Moment'
@@ -103,8 +108,31 @@ const DeleteCommentDialog = ({
     },
   })
 
-  const onDelete = async () => {
-    await deleteComment()
+  const playAnimationAndDelete = async () => {
+    // play animation
+    const commentElements = document.querySelectorAll(
+      `#${COMMENT_FEED_ID_PREFIX}${nodeId}`
+    )
+
+    if (commentElements.length > 0) {
+      commentElements.forEach((commentElement) => {
+        commentElement.parentElement?.addEventListener('animationend', () => {
+          commentElement.parentElement?.classList.add(styles.hideComment)
+          deleteComment()
+        })
+      })
+    }
+    if (commentElements.length > 0 && !isDescendantComment) {
+      commentElements.forEach((commentElement) => {
+        commentElement.parentElement?.classList.add(styles.deletedComment)
+      })
+    } else if (commentElements.length > 0 && isDescendantComment) {
+      commentElements.forEach((commentElement) => {
+        commentElement.parentElement?.classList.add(
+          styles.deletedDescendantComment
+        )
+      })
+    }
 
     toast.success({
       message: isMoment ? (
@@ -171,7 +199,7 @@ const DeleteCommentDialog = ({
               text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
               onClick={() => {
-                onDelete()
+                playAnimationAndDelete()
                 closeDialog()
               }}
             />
@@ -181,7 +209,7 @@ const DeleteCommentDialog = ({
               text={<FormattedMessage defaultMessage="Delete" id="K3r6DQ" />}
               color="red"
               onClick={() => {
-                onDelete()
+                playAnimationAndDelete()
                 closeDialog()
               }}
             />

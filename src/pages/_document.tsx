@@ -6,7 +6,6 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document'
-import Script from 'next/script'
 import React from 'react'
 
 import { CSP_POLICY } from '~/common/enums'
@@ -50,13 +49,6 @@ class MattersDocument extends Document<MattersDocumentProps> {
         <body>
           <Main />
           <NextScript />
-
-          <Script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5129054622209245"
-            strategy="lazyOnload"
-            crossOrigin="anonymous"
-          />
         </body>
       </Html>
     )
