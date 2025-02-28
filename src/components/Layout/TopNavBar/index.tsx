@@ -111,6 +111,7 @@ export const TopNavBar = () => {
                       activeIcon={<Icon icon={IconNavCreate} size={26} />}
                       active={false}
                       canScrollTop={false}
+                      showTooltip={false}
                       aria-haspopup="menu"
                       ref={ref}
                     />
@@ -127,6 +128,7 @@ export const TopNavBar = () => {
                       activeIcon={<Icon icon={IconNavCreate} size={30} />}
                       active={false}
                       canScrollTop={false}
+                      showTooltip={false}
                       aria-haspopup="menu"
                       ref={ref}
                     />
