@@ -55,6 +55,18 @@
         color: var(--color-white);
         background-color: var(--color-black);
       }
+
+      &.temporaryChannel {
+        background: var(--color-new-palette-linear-ocean);
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      &.selectedTemporaryChannel {
+        color: var(--color-white);
+        background: var(--color-new-palette-linear-ocean);
+        -webkit-text-fill-color: var(--color-white);
+      }
     }
   }
 }

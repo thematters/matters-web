@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import Sticky from 'react-stickynode'
 
+import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import { Head, Media, useRoute } from '~/components'
 
 import AuthHeader from './AuthHeader'
@@ -31,6 +32,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   const isInCircleDetail =
     isInPath('CIRCLE_DETAIL') && isPathStartWith('/~', true)
   const isUserWorks = isInPath('USER_WORKS') && isPathStartWith('/@', true)
+  const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
   const isOneColumnLayout =
     isInPath('SEARCH') ||
     isInPath('TAGS') ||
@@ -85,9 +87,9 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
     // Campaign
     isInPath('CAMPAIGN_DETAIL')
   const isThreeColumnLayout =
-    isHome || isInPath('CHANNEL') || isInPath('FOLLOW')
+    isHome || isInPath('CHANNEL') || isInPath('FOLLOW') || isInTemporaryChannel
   const isShowSideChannelNav =
-    isHome || isInPath('CHANNEL') || isInPath('FOLLOW')
+    isHome || isInPath('CHANNEL') || isInPath('FOLLOW') || isInTemporaryChannel
 
   const layoutClasses = classNames({
     [styles.oneColumnLayout]: isOneColumnLayout,

@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
+import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import {
   LanguageContext,
   usePublicQuery,
@@ -17,9 +17,10 @@ import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const SideChannelNav = () => {
-  const { getQuery, router, isInPath } = useRoute()
+  const { getQuery, router, isInPath, isPathStartWith } = useRoute()
   const viewer = useContext(ViewerContext)
   const isAuthed = viewer.isAuthed
+  const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
 
   const { lang } = useContext(LanguageContext)
 
@@ -65,6 +66,22 @@ const SideChannelNav = () => {
           onClick={(e) => navigateTo(e, `${PATHS.HOME}?type=icymi`)}
         >
           <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+        </a>
+        <a
+          href={TEMPORARY_CHANNEL_URL}
+          className={classnames({
+            [styles.item]: true,
+            [styles.selectedChannel]: isInTemporaryChannel,
+            [styles.temporaryChannel]: true,
+            [styles.selectedTemporaryChannel]: isInTemporaryChannel,
+          })}
+          onClick={(e) => navigateTo(e, TEMPORARY_CHANNEL_URL)}
+        >
+          <FormattedMessage
+            defaultMessage="FreeWrite"
+            id="eVq7Ji"
+            description="src/components/Layout/SideChannelNav/index.tsx"
+          />
         </a>
         {channels.map((c) => (
           <ChannelItem key={c.id} channel={c} />
