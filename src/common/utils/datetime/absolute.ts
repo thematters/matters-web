@@ -59,4 +59,16 @@ absolute.timeISO = (date: Date | string | number) => {
   return format(date, 'HH:mm')
 }
 
+absolute.monthDay = (dateString?: string, lang: Language = 'zh_hant') => {
+  if (!dateString) return null
+  const date =
+    typeof dateString === 'string' ? parseISO(dateString) : dateString
+
+  if (lang === 'en') {
+    return format(date, 'LLLL d')
+  } else {
+    return format(date, 'M 月 d 日')
+  }
+}
+
 export default absolute
