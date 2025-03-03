@@ -341,6 +341,9 @@
   "3kbIhS": {
     "defaultMessage": "未命名"
   },
+  "3n9nqJ": {
+    "defaultMessage": "活動於 {date}開始，細則可查看公告。"
+  },
   "3phEFL": {
     "defaultMessage": "繼續使用表示您同意",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -2721,9 +2724,6 @@
   "l0/EvT": {
     "defaultMessage": "最後一步：設置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "l0tvVM": {
-    "defaultMessage": "現在報名，寫作之旅將於數天後開始，活動細則可查看公告。"
   },
   "l2eEyp": {
     "defaultMessage": "交易密碼重置成功"

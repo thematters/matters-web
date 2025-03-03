@@ -341,6 +341,9 @@
   "3kbIhS": {
     "defaultMessage": "Untitled"
   },
+  "3n9nqJ": {
+    "defaultMessage": "The event starts on {date}, and details can be found in the announcement."
+  },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to ",
     "description": "src/components/Forms/SelectAuthMethodForm/NormalFeed.tsx"
@@ -2721,9 +2724,6 @@
   "l0/EvT": {
     "defaultMessage": "Last step: Set Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "l0tvVM": {
-    "defaultMessage": "Apply now. The writing journey will begin in a few days. For event details, please check the Event Information."
   },
   "l2eEyp": {
     "defaultMessage": "Transaction Password successfully changed."
