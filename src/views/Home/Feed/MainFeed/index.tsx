@@ -253,8 +253,8 @@ const MainFeed = ({}: MainFeedProps) => {
               <List.Item key={`${sortBy}:${edge.node.id}`}>
                 <ArticleDigestFeed
                   article={edge.node}
-                  hasReadTime={true}
-                  hasDonationCount={true}
+                  hasReadTime={false}
+                  hasDonationCount={false}
                   includesMetaData={!isIcymiFeed} // only include metadata for non-icymi feeds
                   excludesTimeStamp={isIcymiFeed} // only exclude timestamp for icymi feed
                   onClick={() =>
