@@ -1,9 +1,8 @@
 // const TEST_HASH = 'Qmaisz6NMhDB51cCvNWa1GMS7LU1pAxdF4Ld6Ft9kZEP2a'
 const PUBLIC_GATEWAYS: string[] = [
-  'https://gw3.io/ipfs/:hash',
   'https://cloudflare-ipfs.com/ipfs/:hash',
   'https://ipfs.io/ipfs/:hash',
-  'https://4everland.io/ipfs/:hash',
+  'https://ipfs-gateway.matters.town/ipfs/:hash',
 ]
 
 // check accessbility for a given hash and gateway
