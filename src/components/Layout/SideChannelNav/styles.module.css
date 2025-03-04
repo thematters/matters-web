@@ -1,5 +1,6 @@
 .content {
   max-height: calc(100vh - var(--lg-top-nav-height));
+  overflow-x: hidden;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
@@ -27,6 +28,7 @@
     /* flex-grow: 1; */
     gap: var(--sp12);
     align-items: flex-start;
+    min-width: 4.75rem;
     padding-top: var(--sp20);
     padding-bottom: var(--sp32);
 
