@@ -1,14 +1,7 @@
 import { useContext } from 'react'
 
 import { analytics, toPath } from '~/common/utils'
-import {
-  BackToHomeMobileButton,
-  Button,
-  DotDivider,
-  LanguageContext,
-  Media,
-  TextIcon,
-} from '~/components'
+import { Button, DotDivider, LanguageContext, TextIcon } from '~/components'
 import { HeaderArticleFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
@@ -28,9 +21,6 @@ const Header = ({ article }: HeaderProps) => {
 
   return (
     <section className={styles.header}>
-      <Media lessThan="md" className={styles.mobileLogo}>
-        <BackToHomeMobileButton />
-      </Media>
       {campaign && (
         <section className={styles.campaign}>
           <Button
