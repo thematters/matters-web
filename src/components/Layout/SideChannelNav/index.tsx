@@ -77,11 +77,13 @@ const SideChannelNav = () => {
           })}
           onClick={(e) => navigateTo(e, TEMPORARY_CHANNEL_URL)}
         >
-          <FormattedMessage
-            defaultMessage="FreeWrite"
-            id="eVq7Ji"
-            description="src/components/Layout/SideChannelNav/index.tsx"
-          />
+          <span>
+            <FormattedMessage
+              defaultMessage="FreeWrite"
+              id="eVq7Ji"
+              description="src/components/Layout/SideChannelNav/index.tsx"
+            />
+          </span>
         </a>
         {channels.map((c) => (
           <ChannelItem key={c.id} channel={c} />

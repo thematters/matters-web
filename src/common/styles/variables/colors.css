@@ -63,4 +63,10 @@
     #735bf3 0%,
     #028ccc 100%
   );
+  --color-new-palette-linear-ocean-deep: linear-gradient(
+    90deg,
+    #4b0ad6 0%,
+    #006fa3 100%
+  );
+  --color-new-palette-info-0: #edf9ff;
 }

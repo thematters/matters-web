@@ -61,7 +61,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
           router.push(`/c/${channel.shortHash}`)
         }}
       >
-        {channel.name}
+        <span>{channel.name}</span>
       </a>
     </Tooltip>
   )
