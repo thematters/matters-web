@@ -228,18 +228,17 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
               article={node}
               label={
                 <>
-                  {(isAll ||
-                    isFeatured ||
-                    getLabel(node, lang, announcement)) && (
-                    <span
-                      className={[
-                        styles.articleLabel,
-                        announcement ? styles.announcement : '',
-                      ].join(' ')}
-                    >
-                      {getLabel(node, lang, announcement)}
-                    </span>
-                  )}
+                  {(isAll || isFeatured) &&
+                    getLabel(node, lang, announcement) && (
+                      <span
+                        className={[
+                          styles.articleLabel,
+                          announcement ? styles.announcement : '',
+                        ].join(' ')}
+                      >
+                        {getLabel(node, lang, announcement)}
+                      </span>
+                    )}
                   {!isFeatured && featured && <FeaturedLabel />}
                 </>
               }
