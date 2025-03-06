@@ -52,7 +52,7 @@ const SideChannelNav = () => {
             })}
             onClick={(e) => navigateTo(e, PATHS.FOLLOW)}
           >
-            <FormattedMessage defaultMessage="Follow" id="ieGrWo" />
+            <FormattedMessage defaultMessage="My Page" id="enMIYK" />
           </a>
         )}
         <a
