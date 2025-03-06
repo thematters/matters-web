@@ -1,8 +1,10 @@
+import classNames from 'classnames'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import { datetimeFormat, isUTC8 } from '~/common/utils'
-import { LanguageContext, ResponsiveImage } from '~/components'
+import { LanguageContext, ResponsiveImage, useRoute } from '~/components'
 import {
   InfoHeaderCampaignPrivateFragment,
   InfoHeaderCampaignPublicFragment,
@@ -19,16 +21,23 @@ type InfoHeaderProps = {
 }
 
 const InfoHeader = ({ campaign }: InfoHeaderProps) => {
+  const { isPathStartWith } = useRoute()
   const { lang } = useContext(LanguageContext)
   const now = new Date()
   const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
   const { start: writingStart, end: writingEnd } = campaign.writingPeriod || {}
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
 
+  const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
+
+  const headerClasses = classNames(styles.header, {
+    [styles.horizontalSpacing]: !isInTemporaryChannel,
+  })
+
   return (
     <Apply.Dialog campaign={campaign}>
       {({ openDialog }) => (
-        <header className={styles.header}>
+        <header className={headerClasses}>
           {campaign.cover && (
             <section className={styles.cover}>
               <ResponsiveImage url={campaign.cover} width={1376} />

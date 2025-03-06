@@ -1,6 +1,9 @@
 .header {
-  padding: 0 var(--sp16);
   margin-top: var(--sp20);
+}
+
+.horizontalSpacing {
+  padding: 0 var(--sp16);
 
   @media (--sm-up) {
     padding: 0;

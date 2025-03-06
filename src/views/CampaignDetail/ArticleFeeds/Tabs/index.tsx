@@ -1,9 +1,11 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
+import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { LanguageContext, SquareTabs } from '~/components'
+import { LanguageContext, SquareTabs, useRoute } from '~/components'
 import {
   ArticleFeedsCampaignFragment,
   ArticleFeedsTabsCampaignFragment,
@@ -28,6 +30,7 @@ const ArticleFeedsTabs = ({
   setFeedType,
   campaign,
 }: ArticleFeedsTabsProps) => {
+  const { isPathStartWith } = useRoute()
   const { lang } = useContext(LanguageContext)
   const intl = useIntl()
   const stages = campaign.stages || []
@@ -39,12 +42,18 @@ const ArticleFeedsTabs = ({
     return now >= new Date(startedAt)
   }
 
+  const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
+
   const shouldShowFeaturedTab = campaign.featuredArticles.totalCount > 0
   const shouldShowAnnouncementTab = campaign.announcements.length > 0
 
+  const tabsClasses = classNames(styles.tabs, {
+    [styles.leftSpacing]: !isInTemporaryChannel,
+  })
+
   return (
-    <section className={styles.tabs}>
-      <SquareTabs sticky>
+    <section className={tabsClasses}>
+      <SquareTabs>
         <SquareTabs.Tab
           selected={feedType === FEED_TYPE_ALL}
           onClick={() => {

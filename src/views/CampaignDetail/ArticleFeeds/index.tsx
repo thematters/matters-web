@@ -1,6 +1,7 @@
 import gql from 'graphql-tag'
 import React, { useContext, useState } from 'react'
 
+import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import {
   ArticleDigestFeed,
   LanguageContext,
@@ -22,13 +23,15 @@ const ArticleFeeds = ({
 }: {
   campaign: ArticleFeedsCampaignFragment
 }) => {
-  const { getQuery, setQuery } = useRoute()
+  const { getQuery, setQuery, isPathStartWith } = useRoute()
   const qsType = getQuery('type') as CampaignFeedType
   const { lang } = useContext(LanguageContext)
 
   const [feedType, setFeedType] = useState<CampaignFeedType>(
     qsType || FEED_TYPE_ALL
   )
+
+  const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
 
   const changeFeed = (newType: CampaignFeedType) => {
     setQuery('type', newType === FEED_TYPE_ALL ? '' : newType)
@@ -68,13 +71,24 @@ const ArticleFeeds = ({
         campaign={campaign}
       />
 
-      <Layout.Main.Spacing hasVertical={false}>
-        {description && (
-          <section className={styles.description}>{description}</section>
-        )}
+      {!isInTemporaryChannel && (
+        <Layout.Main.Spacing hasVertical={false}>
+          {description && (
+            <section className={styles.description}>{description}</section>
+          )}
 
-        <MainFeed feedType={feedType} camapign={campaign} />
-      </Layout.Main.Spacing>
+          <MainFeed feedType={feedType} camapign={campaign} />
+        </Layout.Main.Spacing>
+      )}
+      {isInTemporaryChannel && (
+        <Layout.Main>
+          {description && (
+            <section className={styles.description}>{description}</section>
+          )}
+
+          <MainFeed feedType={feedType} camapign={campaign} />
+        </Layout.Main>
+      )}
     </section>
   )
 }
