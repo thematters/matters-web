@@ -105,6 +105,7 @@ export interface ClickButtonProp {
     | 'campaign_detail_link'
     | `campaign_detail_tab_${string}`
     | `user_profile_tab_${string}`
+    | `follow_tab_${string}`
   pageType?: PageType
   pageComponent?: PageComponent
 }
@@ -371,6 +372,7 @@ type PageType =
   | 'circle_detail'
   | 'edit_draft'
   | 'campaign_detail'
+  | 'follow'
 
 type PageComponent =
   | 'home_feed_tab'

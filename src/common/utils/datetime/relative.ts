@@ -1,10 +1,4 @@
-import {
-  differenceInHours,
-  differenceInMinutes,
-  isThisHour,
-  isToday,
-  parseISO,
-} from 'date-fns'
+import { differenceInHours, differenceInMinutes, parseISO } from 'date-fns'
 
 import absolute from './absolute'
 
@@ -44,18 +38,19 @@ const relative = (
     date = parseISO(date)
   }
 
+  const diffMins = differenceInMinutes(new Date(), date)
+
   // if it is within 2 minutes
-  if (differenceInMinutes(new Date(), date) < 2) {
+  if (diffMins < 2) {
     return DIFFS[lang].justNow
   }
 
-  if (isThisHour(date)) {
-    const diffMins = differenceInMinutes(new Date(), date)
+  if (diffMins < 60) {
     return diffMins + DIFFS[lang]['minutesAgo']
   }
 
-  if (isToday(date)) {
-    const diffHrs = differenceInHours(new Date(), date) || 1
+  const diffHrs = differenceInHours(new Date(), date)
+  if (diffHrs < 24) {
     return diffHrs + DIFFS[lang][diffHrs === 1 ? 'hourAgo' : 'hoursAgo']
   }
 

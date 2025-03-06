@@ -1,7 +1,15 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, toast, useDialogSwitch, useMutation } from '~/components'
+import { datetimeFormat } from '~/common/utils/datetime'
+import {
+  Dialog,
+  LanguageContext,
+  toast,
+  useDialogSwitch,
+  useMutation,
+} from '~/components'
 import {
   ApplyCampaignMutation,
   ApplyCampaignPrivateFragment,
@@ -33,11 +41,14 @@ const ApplyCampaignDialog = ({
   children,
 }: ApplyCampaignDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
+  const { lang } = useContext(LanguageContext)
+
   // TODO: remove this after annual questionnaire is over
   const isAnnualQuestionnaire = campaign.id === 'Q2FtcGFpZ246OQ'
 
   const now = new Date()
-  const { end: appEnd } = campaign.applicationPeriod || {}
+
+  const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
 
   const [applyCampaign, { loading }] = useMutation<ApplyCampaignMutation>(
@@ -60,6 +71,8 @@ const ApplyCampaignDialog = ({
       })
     }
   }
+
+  const formattedDate = datetimeFormat.absolute.monthDay(appStart, lang)
 
   return (
     <>
@@ -89,8 +102,11 @@ const ApplyCampaignDialog = ({
                 />
               ) : isInApplicationPeriod ? (
                 <FormattedMessage
-                  defaultMessage="Apply now. The writing journey will begin in a few days. For event details, please check the Event Information. "
-                  id="l0tvVM"
+                  defaultMessage="The event starts on {date}, and details can be found in the announcement."
+                  id="3n9nqJ"
+                  values={{
+                    date: formattedDate,
+                  }}
                 />
               ) : (
                 <FormattedMessage
