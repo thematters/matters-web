@@ -155,7 +155,7 @@ export const TopNavBar = () => {
               activeIcon={
                 <section className={styles.notificationIcon}>
                   <Media lessThan="md">
-                    <UnreadIcon.Notification active />
+                    <UnreadIcon.Notification iconSize={26} active />
                   </Media>
                   <Media greaterThan="sm">
                     <UnreadIcon.Notification active iconSize={30} />
