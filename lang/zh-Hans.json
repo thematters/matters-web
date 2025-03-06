@@ -338,6 +338,9 @@
     "defaultMessage": "登录",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3WUBfC": {
+    "defaultMessage": "只看文章"
+  },
   "3YAasP": {
     "defaultMessage": "什么是 Liker ID？"
   },
@@ -767,10 +770,6 @@
   "AYTnjk": {
     "defaultMessage": "关注",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
-  },
-  "AeIRlL": {
-    "defaultMessage": "只看文章",
-    "description": "src/views/Follow/Tabs/index.tsx"
   },
   "AeVndq": {
     "defaultMessage": "在动态留言中提及了你 {commentMoment}"

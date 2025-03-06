@@ -338,6 +338,9 @@
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3WUBfC": {
+    "defaultMessage": "Only articles"
+  },
   "3YAasP": {
     "defaultMessage": "What is Liker ID?"
   },
@@ -767,10 +770,6 @@
   "AYTnjk": {
     "defaultMessage": "Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
-  },
-  "AeIRlL": {
-    "defaultMessage": "Articles",
-    "description": "src/views/Follow/Tabs/index.tsx"
   },
   "AeVndq": {
     "defaultMessage": "mentioned you in a comment at {commentMoment}"
