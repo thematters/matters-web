@@ -21,8 +21,7 @@ export const Tabs = ({ tab, setTab }: TabsProps) => {
         name="article-filter"
         label={intl.formatMessage({
           defaultMessage: 'Only articles',
-          id: 'FuEfgA',
-          description: 'src/views/Follow/Tabs/index.tsx',
+          id: '3WUBfC',
         })}
         checked={tab === 'Article'}
         onChange={() => {
