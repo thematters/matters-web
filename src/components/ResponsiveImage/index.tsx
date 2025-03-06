@@ -89,7 +89,7 @@ const BaseResponsiveImage = ({
         })}
         loading={loading}
         alt=""
-        {...(fetchPriority ? { fetchPriority } : {})}
+        {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
         onLoad={() => {
           setLoaded(true)
         }}
