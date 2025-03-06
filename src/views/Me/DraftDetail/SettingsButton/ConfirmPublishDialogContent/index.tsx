@@ -3,6 +3,7 @@ import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
+import { analytics } from '~/common/utils'
 import { Dialog, useMutation, useRoute, ViewerContext } from '~/components'
 import { PublishArticleMutation, UserArticlesSort } from '~/gql/graphql'
 import { ME_WORKS_PUBLISHED_FEED } from '~/views/Me/Works/Published/gql'
@@ -56,7 +57,13 @@ const ConfirmPublishDialogContent: React.FC<
   const SubmitButton = (
     <Dialog.TextButton
       text={<FormattedMessage defaultMessage="Publish" id="syEQFE" />}
-      onClick={onPublish}
+      onClick={() => {
+        onPublish()
+        analytics.trackEvent('click_button', {
+          type: `publish`,
+          pageType: 'edit_draft',
+        })
+      }}
     />
   )
 
