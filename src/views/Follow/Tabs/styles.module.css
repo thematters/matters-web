@@ -2,7 +2,6 @@
   display: flex;
   gap: var(--sp8);
   align-items: center;
-  margin-top: var(--sp20);
 }
 
 .label {

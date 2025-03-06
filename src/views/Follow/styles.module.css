@@ -1,0 +1,12 @@
+.headers {
+  @mixin flex-center-space-between;
+
+  margin-top: var(--sp20);
+
+  & .title {
+    font-size: var(--text18);
+    font-weight: var(--font-medium);
+    line-height: 1.75rem;
+    color: var(--color-black);
+  }
+}

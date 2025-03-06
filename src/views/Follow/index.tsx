@@ -1,20 +1,15 @@
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
+import { FormattedMessage } from 'react-intl'
 
-import {
-  Layout,
-  Spacer,
-  SpinnerBlock,
-  useMutation,
-  ViewerContext,
-} from '~/components'
+import { Layout, SpinnerBlock, useMutation, ViewerContext } from '~/components'
 import { updateViewerUnreadFollowing } from '~/components/GQL'
 import { MeFollowQuery, ReadFollowingFeedMutation } from '~/gql/graphql'
 
 import Feed from './Feed'
+import styles from './styles.module.css'
 import { TABS, Tabs } from './Tabs'
-
 const READ_FOLLOWING = gql`
   mutation ReadFollowingFeed {
     logRecord(input: { type: ReadFollowingFeed })
@@ -69,8 +64,14 @@ const Follow = () => {
   const [tab, setTab] = useState<TABS>('All')
   return (
     <Layout.Main>
-      <Tabs tab={tab} setTab={setTab} />
-      <Spacer size="sp8" />
+      <section className={styles.headers}>
+        <section className={styles.title}>
+          <FormattedMessage defaultMessage="Following" id="cPIKU2" />
+        </section>
+        <section className={styles.tabs}>
+          <Tabs tab={tab} setTab={setTab} />
+        </section>
+      </section>
       <BaseFollow tab={tab} />
     </Layout.Main>
   )
