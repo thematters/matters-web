@@ -127,12 +127,10 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       PasteDropFile.configure({
         onDrop: async (editor, files, pos) => {
           const validFiles = await getValidFiles(files)
-          // @ts-ignore
           editor.commands.insertFigureImageUploaders({ files: validFiles, pos })
         },
         onPaste: async (editor, files) => {
           const validFiles = await getValidFiles(files)
-          // @ts-ignore
           editor.commands.insertFigureImageUploaders({ files: validFiles })
         },
       }),

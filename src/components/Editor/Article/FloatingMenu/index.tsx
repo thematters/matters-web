@@ -152,7 +152,6 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
             </button>
 
             <button
-              // @ts-ignore
               onClick={() => editor.chain().focus().setBlockquote().run()}
               type="button"
               title={intl.formatMessage({
@@ -169,7 +168,6 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
 
             <button
               onClick={(e) => {
-                // @ts-ignore
                 editor.chain().focus().setHorizontalRule().run()
                 setExpand(false)
               }}

@@ -11,7 +11,6 @@ export default {
 
 const Template: ComponentStory<typeof ShareDialog> = (args) => (
   <MockedProvider>
-    {/* @ts-ignore */}
     <ShareButton iconSize={20} inCard={false} {...args} />
   </MockedProvider>
 )

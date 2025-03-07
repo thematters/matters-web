@@ -31,9 +31,7 @@ const RelatedTagsHeader = () => {
 const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
   const { data, loading } = usePublicQuery<TagDetailRecommendedQuery>(
     RELATED_TAGS,
-    {
-      variables: { id: tagId },
-    }
+    { variables: { id: tagId } }
   )
 
   const { edges } =

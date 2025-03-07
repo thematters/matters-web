@@ -69,7 +69,6 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
       editor
         .chain()
         .focus()
-        // @ts-ignore
         .setFigureAudio({ src: path, title: fileName })
         .run()
 

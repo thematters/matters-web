@@ -1,4 +1,4 @@
-import { gql, useQuery } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import _random from 'lodash/random'
 import { useContext } from 'react'
 
@@ -12,30 +12,18 @@ import {
   UserDigest,
   ViewerContext,
 } from '~/components'
+import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, SidebarAuthorsQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import { SIDEBAR_AUTHORS } from './gql'
 import styles from './styles.module.css'
 
-const FETCH_SIDEBAR_AUTHORS_QUERY = gql`
-  fragment SidebarAuthors on LastFetchRandom {
-    sidebarAuthors
-  }
-
-  query LastFetchSidebarAuthors {
-    lastFetchRandom @client {
-      id
-      ...SidebarAuthors
-    }
-  }
-`
-
 const Authors = () => {
   const viewer = useContext(ViewerContext)
 
   const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
-    FETCH_SIDEBAR_AUTHORS_QUERY,
+    FETCH_RECORD,
     { variables: { id: 'local' } }
   )
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarAuthors

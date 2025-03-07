@@ -1,6 +1,4 @@
 import jump from 'jump.js'
-// import _differenceBy from 'lodash/differenceBy'
-// import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 

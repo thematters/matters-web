@@ -45,7 +45,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
       if (!url.match(/^https?:\/\//i)) {
         url = `https://${url}`
       }
-      // @ts-ignore
       editor.chain().focus().toggleLink({ href: url, target: '_blank' }).run()
     }
 
@@ -172,9 +171,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {!isCommentEditor && (
               <button
                 type="button"
-                // @ts-ignore
                 onClick={() => editor.chain().focus().toggleBold().run()}
-                // @ts-ignore
                 disabled={!editor.can().chain().focus().toggleBold().run()}
                 className={editor.isActive('bold') ? styles.active : ''}
                 title={intl.formatMessage({
@@ -296,7 +293,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               onClick={() => {
                 // unset
                 if (editor.isActive('link')) {
-                  // @ts-ignore
                   editor.chain().focus().unsetLink().run()
                   return
                 }

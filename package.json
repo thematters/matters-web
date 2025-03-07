@@ -39,7 +39,7 @@
     "i18n": "npm run i18n:extract && npm run i18n:generate && npm run i18n:compile"
   },
   "dependencies": {
-    "@apollo/client": "^3.11.4",
+    "@apollo/client": "^3.13.2",
     "@artsy/fresnel": "^6.1.0",
     "@ensdomains/content-hash": "^2.5.7",
     "@matters/matters-editor": "^0.3.1",
@@ -78,7 +78,7 @@
     "fingerprintjs2": "^2.1.4",
     "firebase": "^10.12.4",
     "formik": "^2.4.2",
-    "graphql": "^16.9.0",
+    "graphql": "^16.10.0",
     "graphql-tag": "^2.12.6",
     "husky": "^8.0.3",
     "js-base64": "^3.7.5",
