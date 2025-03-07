@@ -179,7 +179,7 @@ const MainFeed = ({}: MainFeedProps) => {
   /**
    * Render
    */
-  if (loading && (!result || isNewLoading)) {
+  if (loading || isNewLoading) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()
