@@ -82,6 +82,7 @@ export const BaseDrawer = ({
 
   const containerClasses = classNames({
     [styles.baseDrawerContainer]: true,
+    open: isOpen, // for read timer to identify the state
   })
 
   const ref = useRef<HTMLElement>(null)

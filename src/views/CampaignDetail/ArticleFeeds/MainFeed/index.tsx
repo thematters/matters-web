@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useRef } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconRead } from '@/public/static/icons/24px/read.svg'
+import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
@@ -13,6 +14,7 @@ import {
   List,
   QueryError,
   SpinnerBlock,
+  TextIcon,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -26,6 +28,7 @@ import {
   CampaignFeedType,
   FEED_TYPE_ALL,
   FEED_TYPE_ANNOUNCEMENT,
+  FEED_TYPE_FEATURED,
 } from '../Tabs'
 import { CAMPAIGN_ARTICLES_PRIVATE, CAMPAIGN_ARTICLES_PUBLIC } from './gql'
 import styles from './styles.module.css'
@@ -46,21 +49,36 @@ const getArticleStage = (article: CampaignArticlesPublicQueryArticle) => {
   return stage
 }
 
-const getArticleStageName = (
+const getLabel = (
   article: CampaignArticlesPublicQueryArticle,
-  lang: string
+  lang: string,
+  announcement: boolean
 ) => {
   const stage = getArticleStage(article)
 
-  // announcement if nullish
-  if (!stage) {
+  if (announcement) {
     return <FormattedMessage defaultMessage="Announcement" id="Sj+TN8" />
+  }
+
+  if (!stage) {
+    return ''
   }
 
   return stage[
     `name${lang === 'en' ? 'En' : lang === 'zh-Hans' ? 'ZhHans' : 'ZhHant'}`
   ]
 }
+
+const FeaturedLabel = () => (
+  <TextIcon
+    icon={<Icon icon={IconStar} size={12} style={{ opacity: 0.5 }} />}
+    spacing={2}
+    color="freeWriteGreenLabel"
+    size={12}
+  >
+    <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+  </TextIcon>
+)
 
 const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
@@ -69,13 +87,18 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   const shortHash = getQuery('shortHash')
   const isAll = feedType === FEED_TYPE_ALL
   const isAnnouncement = feedType === FEED_TYPE_ANNOUNCEMENT
+  const isFeatured = feedType === FEED_TYPE_FEATURED
   const announcements = camapign.announcements
 
   const { data, loading, error, fetchMore, networkStatus, client } =
     usePublicQuery<CampaignArticlesPublicQuery>(CAMPAIGN_ARTICLES_PUBLIC, {
       variables: {
         shortHash,
-        ...(!isAll ? { filter: { stage: feedType } } : {}),
+        ...(!isAll
+          ? {
+              filter: isFeatured ? { featured: true } : { stage: feedType },
+            }
+          : {}),
       },
       skip: isAnnouncement,
     })
@@ -163,6 +186,9 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                   id: article.author.id,
                 })
               }}
+              hasToggleCampaignFeatured
+              campaignId={camapign.id}
+              campaignFeatured={false}
             />
           </List.Item>
         ))}
@@ -195,21 +221,25 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
-        {edges.map(({ node }, i) => (
+        {edges.map(({ node, featured, announcement }, i) => (
           <List.Item key={`${feedType}:${i}`}>
             <ArticleDigestFeed
               article={node}
               label={
-                isAll && (
-                  <span
-                    className={[
-                      styles.articleLabel,
-                      getArticleStage(node)?.id ? '' : styles.announcement,
-                    ].join(' ')}
-                  >
-                    {getArticleStageName(node, lang)}
-                  </span>
-                )
+                <>
+                  {(isAll || isFeatured) &&
+                    getLabel(node, lang, announcement) && (
+                      <span
+                        className={[
+                          styles.articleLabel,
+                          announcement ? styles.announcement : '',
+                        ].join(' ')}
+                      >
+                        {getLabel(node, lang, announcement)}
+                      </span>
+                    )}
+                  {!isFeatured && featured && <FeaturedLabel />}
+                </>
               }
               onClick={() => {
                 analytics.trackEvent('click_feed', {
@@ -227,6 +257,9 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                   id: node.author.id,
                 })
               }}
+              hasToggleCampaignFeatured
+              campaignId={camapign.id}
+              campaignFeatured={isFeatured}
             />
           </List.Item>
         ))}

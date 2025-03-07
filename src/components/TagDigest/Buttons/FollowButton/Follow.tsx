@@ -7,11 +7,10 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
-import { updateViewerFollowingTagCount } from '~/components/GQL'
-import TOGGLE_FOLLOW_TAG from '~/components/GQL/mutations/toggleFollowTag'
+import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {
   TagDigestFollowButtonPrivateFragment,
-  ToggleFollowTagMutation,
+  ToggleBookmarkTagMutation,
 } from '~/gql/graphql'
 
 interface Props {
@@ -21,21 +20,18 @@ interface Props {
 const Follow = ({ tag }: Props) => {
   const viewer = useContext(ViewerContext)
 
-  const [follow] = useMutation<ToggleFollowTagMutation>(TOGGLE_FOLLOW_TAG, {
+  const [follow] = useMutation<ToggleBookmarkTagMutation>(TOGGLE_BOOKMARK_TAG, {
     variables: { id: tag.id, enabled: true },
     optimisticResponse:
       !_isNil(tag.id) && !_isNil(tag.isFollower)
         ? {
-            toggleFollowTag: {
+            toggleBookmarkTag: {
               id: tag.id,
               isFollower: true,
               __typename: 'Tag',
             },
           }
         : undefined,
-    update: (cache) => {
-      updateViewerFollowingTagCount({ cache, type: 'increment' })
-    },
   })
 
   const onClick = () => {

@@ -19,10 +19,6 @@ const CommentMentionedYouNotice = ({
 }: {
   notice: CommentMentionedYouNoticeFragment
 }) => {
-  if (!notice.actors) {
-    return null
-  }
-
   const commentArticle =
     notice.comment?.node.__typename === 'Article' ? notice.comment.node : null
   const commentCircle =

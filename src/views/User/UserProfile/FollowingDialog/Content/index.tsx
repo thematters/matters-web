@@ -4,7 +4,6 @@ import { Dialog, Spacer } from '~/components'
 
 import CirclesFeed from '../CirclesFeed'
 import FeedType, { FollowingFeedType } from '../FeedType'
-import TagsFeed from '../TagsFeed'
 import UsersFeed from '../UsersFeed'
 
 const FollowingDialogContent = () => {
@@ -15,7 +14,6 @@ const FollowingDialogContent = () => {
       <FeedType type={feedType} setFeedType={setFeedType} />
       <Spacer size="sp8" />
       {feedType === 'circle' && <CirclesFeed />}
-      {feedType === 'tag' && <TagsFeed />}
       {feedType === 'user' && <UsersFeed />}
     </Dialog.Content>
   )

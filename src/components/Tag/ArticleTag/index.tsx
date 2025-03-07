@@ -59,7 +59,6 @@ ArticleTag.fragments = {
       id
       content
       numArticles
-      numAuthors
     }
   `,
 }

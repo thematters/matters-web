@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl'
 
+import { analytics } from '~/common/utils'
 import { SquareTabs } from '~/components'
 
 import styles from './styles.module.css'
@@ -19,7 +20,13 @@ export const Tabs = ({ tab, setTab }: TabsProps) => {
       <SquareTabs>
         <SquareTabs.Tab
           selected={tab === 'All'}
-          onClick={() => setTab('All')}
+          onClick={() => {
+            setTab('All')
+            analytics.trackEvent('click_button', {
+              type: `follow_tab_all` as `follow_tab_${string}`,
+              pageType: 'follow',
+            })
+          }}
           title={intl.formatMessage({
             defaultMessage: 'All',
             id: 'zQvVDJ',
@@ -27,7 +34,13 @@ export const Tabs = ({ tab, setTab }: TabsProps) => {
         />
         <SquareTabs.Tab
           selected={tab === 'Article'}
-          onClick={() => setTab('Article')}
+          onClick={() => {
+            setTab('Article')
+            analytics.trackEvent('click_button', {
+              type: `follow_tab_article` as `follow_tab_${string}`,
+              pageType: 'follow',
+            })
+          }}
           title={intl.formatMessage({
             defaultMessage: 'Articles',
             id: 'AeIRlL',

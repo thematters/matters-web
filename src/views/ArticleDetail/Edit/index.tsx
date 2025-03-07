@@ -30,10 +30,7 @@ import {
 } from '~/components/Editor'
 import BottomBar from '~/components/Editor/BottomBar'
 import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
-import {
-  getSelectCampaign,
-  SelectCampaignProps,
-} from '~/components/Editor/SelectCampaign'
+import { SelectCampaignProps } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import { SidebarIndentProps } from '~/components/Editor/Sidebar/Indent'
 import { QueryError, useImperativeQuery } from '~/components/GQL'
@@ -44,7 +41,6 @@ import {
 } from '~/components/GQL/mutations/uploadFile'
 import {
   ArticleAccessType,
-  ArticleCampaignInput,
   ArticleDigestDropdownArticleFragment,
   ArticleLicenseType,
   AssetFragment,
@@ -60,10 +56,11 @@ import {
 
 import { GET_EDIT_ARTICLE, GET_EDIT_ARTICLE_ASSETS } from './gql'
 import EditHeader from './Header'
+import { useCampaignState } from './Hooks/useCampaignState'
 import PublishState from './PublishState'
 import styles from './styles.module.css'
 
-type Article = NonNullable<
+export type Article = NonNullable<
   QueryEditArticleQuery['article'] & {
     __typename: 'Article'
   }
@@ -140,22 +137,8 @@ const BaseEdit = ({ article }: { article: Article }) => {
     setLicense(newLicense)
   }
 
-  // campaign
-  const appliedCampaigns = article.author.campaigns.edges?.map((e) => e.node)
-  const { appliedCampaign, selectedStage } = getSelectCampaign({
-    applied: appliedCampaigns && appliedCampaigns[0],
-    attached: article.campaigns,
-    createdAt: article.createdAt,
-  })
-
-  const [campaign, setCampaign] = useState<ArticleCampaignInput | undefined>(
-    appliedCampaign?.id && selectedStage
-      ? {
-          campaign: appliedCampaign.id,
-          stage: selectedStage,
-        }
-      : undefined
-  )
+  const { setCampaign, selectedCampaign, selectedStage, selectableCampaigns } =
+    useCampaignState(article)
 
   const [requestForDonation, setRequestForDonation] = useState(
     article.requestForDonation
@@ -212,8 +195,9 @@ const BaseEdit = ({ article }: { article: Article }) => {
     indentSaving: false,
   }
   const campaignProps: Partial<SelectCampaignProps> = {
-    appliedCampaign,
-    selectedStage: campaign?.stage,
+    campaigns: selectableCampaigns,
+    selectedCampaign,
+    selectedStage,
     editCampaign: setCampaign,
   }
 

@@ -1,0 +1,56 @@
+.hideComment {
+  display: none;
+}
+
+.deletedComment {
+  overflow: hidden;
+  animation:
+    slide-up-fade 1.6s,
+    maintain-padding 1.6s;
+}
+
+.deletedDescendantComment {
+  overflow: hidden;
+  animation: slide-up-fade 1.6s;
+}
+
+@keyframes slide-up-fade {
+  0% {
+    max-height: 500px;
+    background: var(--color-insufficient-red);
+  }
+
+  /* 1s later */
+  62.5% {
+    background: var(--color-insufficient-red);
+  }
+
+  100% {
+    display: none;
+    max-height: 0;
+    background: var(--color-white);
+  }
+}
+
+@keyframes maintain-padding {
+  0% {
+    padding-right: var(--sp16);
+    padding-left: var(--sp16);
+    margin-right: calc(-1 * var(--sp16));
+    margin-left: calc(-1 * var(--sp16));
+  }
+
+  99% {
+    padding-right: var(--sp16);
+    padding-left: var(--sp16);
+    margin-right: calc(-1 * var(--sp16));
+    margin-left: calc(-1 * var(--sp16));
+  }
+
+  100% {
+    padding-right: 0;
+    padding-left: 0;
+    margin-right: 0;
+    margin-left: 0;
+  }
+}

@@ -37,12 +37,6 @@ export * from './RemoveArticleCollectionDialog'
 // Editor
 export * from './EditorSearchSelectDialog'
 
-// Tag
-export * from './EditTagDialog'
-export * from './TagAdoptionDialog'
-export * from './TagEditorDialog'
-export * from './TagLeaveDialog'
-
 // Re-use
 export * from './SearchSelectDialog'
 
@@ -52,7 +46,7 @@ export * from './PayoutDialog'
 export * from './ResetPaymentPasswordDialog'
 export * from './SubscribeCircleDialog'
 export * from './UnsubscribeCircleDialog'
+export * from './WithdrawVaultUSDTDialog'
 
 // Misc
 export * from './BillboardDialog'
-export * from './PaymentPointerDialog'

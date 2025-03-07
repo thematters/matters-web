@@ -40,6 +40,7 @@ type EventArgs =
   | ['authenticate', AuthenticateProp]
   | ['billboard_exposure', BillboardExposureProp]
   | ['click_billboard', ClickBillboardProp]
+  | ['read_time', ReadTimeProp]
 
 /**
  * Event: Page View
@@ -84,6 +85,7 @@ export interface ClickButtonProp {
     | 'history_version'
     | 'ipfs'
     | 'campaign_detail_entrance'
+    | 'publish'
     | 'edit'
     | 'edited'
     | 'appreciate'
@@ -103,6 +105,8 @@ export interface ClickButtonProp {
     | 'newest'
     | 'campaign_detail_link'
     | `campaign_detail_tab_${string}`
+    | `user_profile_tab_${string}`
+    | `follow_tab_${string}`
   pageType?: PageType
   pageComponent?: PageComponent
 }
@@ -238,6 +242,11 @@ interface AuthenticateProp {
   trigger?: string
 }
 
+interface ReadTimeProp {
+  shortHash: string
+  time: number
+}
+
 // content type
 export type ContentType =
   | 'article'
@@ -339,6 +348,7 @@ type UserFeedType =
   | 'tag_detail_latest'
   | 'tag_detail_selected'
   | 'tag_detail_community'
+  | 'tag_detail_recommended_authors'
   | 'transaction'
 
 type TagFeedType =
@@ -363,6 +373,7 @@ type PageType =
   | 'circle_detail'
   | 'edit_draft'
   | 'campaign_detail'
+  | 'follow'
 
 type PageComponent =
   | 'home_feed_tab'

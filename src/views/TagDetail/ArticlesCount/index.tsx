@@ -1,21 +1,19 @@
 import { FormattedMessage } from 'react-intl'
 
 import { numAbbr } from '~/common/utils'
-import tagFragments from '~/components/GQL/fragments/tag'
-import { ArticleCountTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 interface ArticlesCountProps {
-  tag: ArticleCountTagFragment
+  tag: { numArticles: number }
 }
 
 const ArticlesCount = ({ tag }: ArticlesCountProps) => {
-  const { totalCount } = tag.articles || { totalCount: 0 }
+  const totalCount = tag.numArticles
 
   return (
     <section className={styles.container}>
-      <b>{numAbbr(totalCount)}</b>
+      <span>{numAbbr(totalCount)}</span>
       <span>
         &nbsp;
         <FormattedMessage
@@ -28,10 +26,6 @@ const ArticlesCount = ({ tag }: ArticlesCountProps) => {
       </span>
     </section>
   )
-}
-
-ArticlesCount.fragments = {
-  tag: tagFragments.articleCount,
 }
 
 export default ArticlesCount

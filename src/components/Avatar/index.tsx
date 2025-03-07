@@ -37,6 +37,7 @@ export interface AvatarProps {
   src?: string | null
   inEditor?: boolean
   inProfile?: boolean
+  showLogbook?: boolean
   title?: string
 }
 
@@ -68,14 +69,22 @@ const fragments = {
 }
 
 export const Avatar = (props: AvatarProps) => {
-  const { user, size = 40, src, title, inEditor, inProfile } = props
+  const {
+    user,
+    size = 40,
+    src,
+    title,
+    inEditor,
+    inProfile,
+    showLogbook = true,
+  } = props
   const source = src || user?.avatar || ICON_AVATAR_DEFAULT
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
   const isCivicLiker = user?.liker.civicLiker
   const badges = user?.info?.badges || []
   const hasArchitectBadge = badges.some((b) => b.type === 'architect')
-  const hasLogbook = !!user?.info?.cryptoWallet?.hasNFTs
+  const hasLogbook = showLogbook && !!user?.info?.cryptoWallet?.hasNFTs
   const avatarClasses = classNames({
     [styles.avatar]: true,
     avatar: true, // global selector for overwirting

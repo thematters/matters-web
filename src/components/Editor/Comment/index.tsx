@@ -8,6 +8,7 @@ import {
   Placeholder,
   useEditor,
 } from '@matters/matters-editor'
+import classNames from 'classnames'
 import { useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
@@ -107,7 +108,7 @@ const CommentEditor: React.FC<Props> = ({
 
   return (
     <div
-      className={styles.commentEditor}
+      className={classNames('u-content-comment', styles.commentEditor)}
       id="editor" // anchor for mention plugin
     >
       <EditorContent

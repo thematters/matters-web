@@ -85,6 +85,7 @@ const Authors = () => {
       <SectionHeader
         type="authors"
         rightButton={<ShuffleButton onClick={shuffle} />}
+        viewAll={false}
       />
 
       {loading ? (
@@ -92,10 +93,11 @@ const Authors = () => {
       ) : (
         <List hasBorder={false}>
           {edges &&
-            edges.map(({ node }, i) => (
+            edges.map(({ node, cursor }, i) => (
               <List.Item key={node.id}>
                 <UserDigest.Rich
                   user={node}
+                  is="link"
                   spacing={[8, 8]}
                   bgColor="none"
                   bgActiveColor="greyLighter"

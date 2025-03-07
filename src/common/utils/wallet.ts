@@ -1,13 +1,13 @@
 import { Chain, configureChains, createConfig } from 'wagmi'
 import {
-  goerli,
   mainnet,
   optimism,
   optimismSepolia,
   polygon,
   polygonMumbai,
+  sepolia,
 } from 'wagmi/chains'
-import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
+import { InjectedConnector } from 'wagmi/connectors/injected'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { alchemyProvider } from 'wagmi/providers/alchemy'
 
@@ -20,7 +20,7 @@ const alchemyId = process.env.NEXT_PUBLIC_ALCHEMY_KEY!
 export const featureSupportedChains = {
   billboard: isProd ? [optimism] : [optimismSepolia],
   curation: isProd ? [optimism] : [optimismSepolia],
-  ens: isProd ? [mainnet] : [goerli],
+  ens: isProd ? [mainnet] : [sepolia],
 }
 
 export const explorers = {
@@ -34,7 +34,7 @@ export const explorers = {
 
 const defaultChains: Chain[] = isProd
   ? [mainnet, optimism]
-  : [goerli, optimismSepolia]
+  : [sepolia, optimismSepolia]
 
 export const { publicClient, chains } = configureChains(defaultChains, [
   alchemyProvider({ apiKey: alchemyId }),
@@ -43,12 +43,12 @@ export const { publicClient, chains } = configureChains(defaultChains, [
 export const wagmiConfig = createConfig({
   autoConnect: true,
   connectors: [
-    new MetaMaskConnector({
+    new InjectedConnector({
       chains,
       options: {
         // For disconnecting from metamask
         shimDisconnect: true,
-        UNSTABLE_shimOnConnectSelectAccount: true,
+        // UNSTABLE_shimOnConnectSelectAccount: true,
       },
     }),
     ...(isTest

@@ -16,7 +16,6 @@ const ViewerFragments = {
         userName
         displayName
         avatar
-        paymentPointer
         liker {
           likerId
           civicLiker
@@ -54,9 +53,6 @@ const ViewerFragments = {
         }
         following {
           users(input: { first: 0 }) {
-            totalCount
-          }
-          tags(input: { first: 0 }) {
             totalCount
           }
         }

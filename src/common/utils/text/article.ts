@@ -136,13 +136,21 @@ export const optimizeEmbed = (content: string) => {
         return /* html */ `
       <picture>
         <source
-          srcSet=${toSizedImageURL({ url: src, width: 1376 })}
+          srcSet=${toSizedImageURL({
+            url: src,
+            width: 1376,
+            enableAnimation: true,
+          })}
           onerror="this.srcset='${src}'"
         />
 
         <img
           src=${src}
-          srcSet=${toSizedImageURL({ url: src, width: 1376 })}
+          srcSet=${toSizedImageURL({
+            url: src,
+            width: 1376,
+            enableAnimation: true,
+          })}
           loading="lazy"
         />
       </picture>

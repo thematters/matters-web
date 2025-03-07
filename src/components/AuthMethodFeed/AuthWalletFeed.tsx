@@ -35,7 +35,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
   const [showLoading, setShowLoading] = useState(true)
 
-  const injectedConnector = connectors.find((c) => c.id === 'metaMask')
+  const injectedConnector = connectors.find((c) => c.id === 'injected')
   const walletConnectConnector = connectors.find(
     (c) => c.id === 'walletConnect'
   )

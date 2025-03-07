@@ -113,6 +113,10 @@
   color: var(--color-free-write-blue);
 }
 
+.freeWriteGreenLabel {
+  color: var(--color-free-write-green-label);
+}
+
 .yellowLighter {
   color: var(--color-yellow-lighter);
 }
@@ -220,4 +224,12 @@
 
 .textUnderline {
   text-decoration: underline;
+}
+
+.textLineClamp {
+  & .text {
+    @mixin line-clamp;
+
+    display: -webkit-inline-box;
+  }
 }

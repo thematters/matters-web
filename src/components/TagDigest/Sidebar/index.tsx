@@ -27,8 +27,6 @@ const fragments = {
     fragment TagDigestSidebarTag on Tag {
       id
       content
-      description
-      cover
       numArticles
       numAuthors
     }
@@ -44,6 +42,7 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
   return (
     <Card
       {...path}
+      is="link"
       spacing={[8, 8]}
       bgColor="none"
       bgActiveColor="none"
@@ -52,14 +51,11 @@ const Sidebar = ({ tag, ...cardProps }: TagDigestSidebarProps) => {
       testId={TEST_ID.DIGEST_TAG_SIDEBAR}
     >
       <section className={styles.container}>
-        <section
-          className={styles.cover}
-          data-test-id={TEST_ID.DIGEST_TAG_SIDEBAR_COVER}
-        >
+        <section className={styles.cover}>
           <Link {...path} legacyBehavior>
             <a>
               <ResponsiveImage
-                url={tag.cover || IMAGE_TAG_COVER.src}
+                url={IMAGE_TAG_COVER.src}
                 width={144}
                 height={144}
               />

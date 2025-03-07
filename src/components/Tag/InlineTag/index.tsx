@@ -75,7 +75,6 @@ InlineTag.fragments = {
       id
       content
       numArticles
-      numAuthors
     }
   `,
 }

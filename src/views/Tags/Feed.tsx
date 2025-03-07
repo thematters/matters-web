@@ -1,19 +1,17 @@
 import _get from 'lodash/get'
 
-import { analytics, mergeConnections, toPath } from '~/common/utils'
+import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyTag,
-  InfiniteScroll,
   Layout,
   QueryError,
   SpinnerBlock,
-  TagDigest,
+  TagList,
   usePublicQuery,
 } from '~/components'
 import { AllTagsHottestQuery } from '~/gql/graphql'
 
 import { ALL_TAGS_HOTTEST } from './gql'
-import styles from './styles.module.css'
 
 export type FeedType = 'recommended' | 'hottest'
 
@@ -65,36 +63,13 @@ const Feed = ({ type }: Props) => {
 
   return (
     <Layout.Main.Spacing hasVertical={false}>
-      <InfiniteScroll
-        hasNextPage={pageInfo.hasNextPage}
+      <TagList.Infinite
+        edges={edges}
+        pageInfo={pageInfo}
         loadMore={loadMore}
-        eof
-      >
-        <ul className={styles.list}>
-          {edges.map(({ node: tag }, i) => (
-            <li key={tag.id} className={styles.listItem}>
-              <TagDigest.Feed
-                tag={tag}
-                spacing={[8, 0]}
-                href={
-                  toPath({
-                    page: 'tagDetail',
-                    tag, // : node,
-                  }).href
-                }
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: trackingType,
-                    contentType: 'tag',
-                    location: i,
-                    id: tag.id,
-                  })
-                }
-              />
-            </li>
-          ))}
-        </ul>
-      </InfiniteScroll>
+        showEOFMessage={false}
+        trackingType={isRecommended ? 'all_tags_recommended' : 'all_tags'}
+      />
     </Layout.Main.Spacing>
   )
 }

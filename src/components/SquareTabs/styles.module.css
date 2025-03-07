@@ -38,6 +38,41 @@
       #fff 100%
     );
   }
+
+  &.hasSide {
+    @mixin flex-center-space-between;
+
+    & ul {
+      display: inline-flex;
+      flex-shrink: 0;
+      align-items: center;
+    }
+  }
+}
+
+.wrapper {
+  &.sticky {
+    position: sticky;
+    top: 0;
+    z-index: var(--z-index-sticky-tabs);
+    background: var(--color-white);
+  }
+
+  &.spacingSm {
+    padding: var(--sp16);
+
+    @media (--sm-up) {
+      padding: var(--sp16) 0 var(--sp16);
+    }
+  }
+
+  &.spacingMd {
+    padding: var(--sp24) var(--sp16) var(--sp4);
+
+    @media (--sm-up) {
+      padding: var(--sp32) 0 var(--sp12);
+    }
+  }
 }
 
 .tabList {
@@ -46,13 +81,6 @@
   overflow-x: auto;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
-
-  &.sticky {
-    position: sticky;
-    top: 0;
-    z-index: var(--z-index-sticky-tabs);
-    background: var(--color-white);
-  }
 }
 
 .tabItem {
@@ -104,6 +132,21 @@
     &.selected {
       color: var(--color-white);
       background: var(--color-warn-yellow);
+    }
+  }
+
+  &.green {
+    color: var(--color-positive-green);
+    background: var(--color-free-write-green-bg);
+
+    &:hover {
+      color: var(--color-free-write-green-text);
+      background: var(--color-free-write-green-bg-hover);
+    }
+
+    &.selected {
+      color: var(--color-white);
+      background: var(--color-positive-green);
     }
   }
 }

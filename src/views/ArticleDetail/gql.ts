@@ -28,7 +28,6 @@ const articlePublicFragment = gql`
     language
     author {
       id
-      paymentPointer
       ...UserDigestRichUserPublic
       ...UserDigestRichUserPrivate
     }
@@ -64,7 +63,7 @@ const articlePublicFragment = gql`
     contents {
       html
     }
-
+    noindex
     ...HeaderArticle
     ...AuthorSidebarArticle
     ...MetaInfoArticle

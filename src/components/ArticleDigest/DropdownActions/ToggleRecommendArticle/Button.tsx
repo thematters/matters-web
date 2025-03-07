@@ -65,7 +65,7 @@ const RecommendArticleButton: React.FC<RecommendArticleButtonProps> = ({
       : article.oss.inRecommendHottest && article.oss.inRecommendNewest
 
   const texts = {
-    icymi: ['選為精華', '撤銷精華'],
+    icymi: ['設為首頁精選', '撤銷首頁精選'],
     hottestAndNewest: ['撤銷移出', '移出熱門與最新'],
   }
   const icons = {

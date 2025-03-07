@@ -42,15 +42,6 @@
     padding: 0 var(--sp24) var(--sp24);
   }
 
-  .content {
-    font-size: var(--text17);
-    line-height: 1.75;
-
-    & a {
-      color: var(--color-grey-darker);
-    }
-  }
-
   .assets {
     margin-top: var(--sp12);
   }
@@ -64,13 +55,13 @@
   }
 
   & .title {
-    margin-bottom: var(--sp16);
+    margin-bottom: var(--sp8);
     font-size: var(--text15);
     line-height: 1.75;
     color: var(--color-black);
 
     @media (--sm-up) {
-      margin-bottom: var(--sp24);
+      margin-bottom: var(--sp12);
     }
 
     & .count {

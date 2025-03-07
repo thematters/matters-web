@@ -15,7 +15,6 @@ interface ResponsiveImageProps {
   smUpHeight?: ToSizedImageURLSize
   disabled?: boolean
   loading?: 'eager' | 'lazy'
-  anonymous?: boolean
   enableAnimation?: boolean
   fetchPriority?: 'high' | 'low' | 'auto'
 }
@@ -28,7 +27,6 @@ const BaseResponsiveImage = ({
   smUpHeight,
   disabled,
   loading,
-  anonymous,
   enableAnimation,
   fetchPriority,
 }: ResponsiveImageProps) => {
@@ -46,7 +44,12 @@ const BaseResponsiveImage = ({
   // Fallback to the raw `url` if manually disable or responsive image is failed to load
   if (disabled || error) {
     return (
-      <img src={url} loading={loading} fetchpriority={fetchPriority} alt="" />
+      <img
+        src={url}
+        loading={loading}
+        alt=""
+        {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
+      />
     )
   }
 
@@ -86,8 +89,7 @@ const BaseResponsiveImage = ({
         })}
         loading={loading}
         alt=""
-        crossOrigin={anonymous ? 'anonymous' : undefined}
-        fetchpriority={fetchPriority}
+        {...(fetchPriority ? { fetchpriority: fetchPriority } : {})}
         onLoad={() => {
           setLoaded(true)
         }}

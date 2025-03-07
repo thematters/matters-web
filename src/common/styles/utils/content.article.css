@@ -1,9 +1,8 @@
 /****
- * Article Detail & Editor
+ * Article content & shared with editor
  */
-.u-content,
-.ProseMirror,
-.tiptap {
+.u-content-article,
+.u-content-article .tiptap.ProseMirror {
   line-height: var(--line-height-article-base);
   outline: none;
 
@@ -423,11 +422,15 @@
   }
 }
 
-.editor-title textarea {
-  margin: 0 0 var(--sp16);
+.editor-title {
+  margin-top: 0 !important;
 
-  @media (--sm-up) {
-    margin: var(--sp16) 0;
+  & textarea {
+    margin: 0 0 var(--sp16);
+
+    @media (--sm-up) {
+      margin: var(--sp16) 0;
+    }
   }
 }
 

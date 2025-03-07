@@ -9,6 +9,23 @@
     max-width: 100%;
   }
 
+  & .genieeContainer {
+    display: flex;
+    justify-content: center;
+
+    @media (--sm-up) {
+      & iframe {
+        width: 16.5rem;
+        height: auto;
+
+        & img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+
   & a {
     @mixin flex-center-all;
 

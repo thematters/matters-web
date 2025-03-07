@@ -73,7 +73,7 @@ const MeMenu: React.FC = () => {
       <Menu.Item
         text={<FormattedMessage defaultMessage="Bookmarks" id="nGBrvw" />}
         icon={<Icon icon={IconSave} size={20} />}
-        href={PATHS.ME_BOOKMARKS}
+        href={PATHS.ME_BOOKMARKS_ARTICLES}
         is="link"
       />
 

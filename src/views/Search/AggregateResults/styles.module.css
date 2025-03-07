@@ -1,14 +1,13 @@
 .title {
   @mixin flex-center-start;
 
-  padding: var(--sp24) var(--sp16) var(--sp16);
+  padding: var(--sp24) var(--sp16) 0;
   font-size: var(--text14);
   font-weight: var(--font-medium);
   color: var(--color-grey);
 
-  @media (--lg-up) {
-    @mixin border-bottom-grey;
-
+  @media (--sm-up) {
+    padding-top: var(--sp32);
     padding-right: 0;
     padding-left: 0;
     font-size: var(--text18);
@@ -27,18 +26,6 @@
 
   & .titleRight {
     white-space: nowrap;
-  }
-
-  @media (--sm-up) {
-    padding-bottom: var(--sp8);
-  }
-}
-
-.aggregateSection {
-  padding: 0 var(--sp16);
-
-  @media (--lg-up) {
-    padding: 0;
   }
 }
 

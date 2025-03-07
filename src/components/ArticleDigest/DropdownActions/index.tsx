@@ -49,10 +49,7 @@ import { fragments } from './gql'
 import IPFSButton from './IPFSButton'
 import PinButton from './PinButton'
 import RemoveArticleCollectionButton from './RemoveArticleCollectionButton'
-import RemoveTagButton from './RemoveTagButton'
 import SetBottomCollectionButton from './SetBottomCollectionButton'
-import SetTagSelectedButton from './SetTagSelectedButton'
-import SetTagUnselectedButton from './SetTagUnselectedButton'
 import SetTopCollectionButton from './SetTopCollectionButton'
 import ShareButton from './ShareButton'
 import styles from './styles.module.css'
@@ -97,6 +94,12 @@ const DynamicArchiveUserDialog = dynamic(
     loading: () => <SpinnerBlock />,
   }
 )
+const DynamicToggleCampaignFeaturedButton = dynamic(
+  () => import('./ToggleCampaignFeatured'),
+  {
+    loading: () => <SpinnerBlock />,
+  }
+)
 
 export interface DropdownActionsControls {
   icon?: React.ReactNode
@@ -120,9 +123,11 @@ export interface DropdownActionsControls {
 
   // tag
   tagDetailId?: string
-  hasSetTagSelected?: boolean
-  hasSetTagUnselected?: boolean
-  hasRemoveTag?: boolean
+
+  // campaign
+  campaignId?: string
+  campaignFeatured?: boolean
+  hasToggleCampaignFeatured?: boolean
 
   hasArchive?: boolean
   hasEdit?: boolean
@@ -152,9 +157,6 @@ interface Controls {
   hasExtend: boolean
   hasReport: boolean
   hasSticky: boolean
-  hasSetTagSelected: boolean
-  hasSetTagUnselected: boolean
-  hasRemoveTag: boolean
 }
 
 interface DialogProps {
@@ -189,6 +191,9 @@ const BaseDropdownActions = ({
   collectionId,
   collectionArticleCount,
 
+  campaignId,
+  campaignFeatured,
+
   icon,
   size,
   color = 'greyDark',
@@ -201,9 +206,7 @@ const BaseDropdownActions = ({
   hasReport,
   hasSticky,
   hasArchive,
-  hasSetTagSelected,
-  hasSetTagUnselected,
-  hasRemoveTag,
+  hasToggleCampaignFeatured,
   hasEdit,
   hasBookmark,
   hasAddCollection,
@@ -263,16 +266,6 @@ const BaseDropdownActions = ({
         <AddCollectionButton openDialog={openAddCollectionsArticleDialog} />
       )}
 
-      {hasSetTagSelected && tagDetailId && (
-        <SetTagSelectedButton article={article} tagId={tagDetailId} />
-      )}
-      {hasSetTagUnselected && tagDetailId && (
-        <SetTagUnselectedButton article={article} tagId={tagDetailId} />
-      )}
-      {hasRemoveTag && tagDetailId && (
-        <RemoveTagButton article={article} tagId={tagDetailId} />
-      )}
-
       {hasArchive && <Menu.Divider />}
       {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
 
@@ -313,6 +306,13 @@ const BaseDropdownActions = ({
       {isAdminView && viewer.isAdmin && (
         <>
           <Menu.Divider />
+          {hasToggleCampaignFeatured && campaignId && (
+            <DynamicToggleCampaignFeaturedButton
+              articleId={article.id}
+              campaignId={campaignId}
+              campaignFeatured={!!campaignFeatured}
+            />
+          )}
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="icymi"
@@ -390,10 +390,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
     inCard,
     inUserArticles,
 
-    hasSetTagSelected,
-    hasSetTagUnselected,
-    hasRemoveTag,
-
     hasEdit,
     hasArchive,
     hasBookmark = true,
@@ -430,9 +426,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
     ),
     hasArchive:
       !!hasArchive && isArticleAuthor && isActive && !viewer.isArchived,
-    hasSetTagSelected: !!hasSetTagSelected,
-    hasSetTagUnselected: !!hasSetTagUnselected,
-    hasRemoveTag: !!hasRemoveTag,
     hasEdit: !!hasEdit && isActive && isArticleAuthor,
     hasBookmark: !!hasBookmark,
     hasAddCollection: hasAddCollection && isActive && isArticleAuthor,

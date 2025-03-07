@@ -97,10 +97,9 @@ const EditModeHeader = ({
   const isSensitiveRevised =
     restProps.contentSensitive !== article.sensitiveByAuthor
   const isCampaignRevised =
+    restProps.selectedCampaign?.id !== article.campaigns[0]?.campaign.id ||
     restProps.selectedStage !== article.campaigns[0]?.stage?.id
-  const isResetCampaign =
-    isCampaignRevised &&
-    (!restProps.appliedCampaign?.id || !restProps.selectedStage)
+  const isResetCampaign = isCampaignRevised && !restProps.selectedCampaign?.id
 
   const needRepublish =
     isTitleRevised ||
@@ -165,7 +164,7 @@ const EditModeHeader = ({
                   ? []
                   : [
                       {
-                        campaign: restProps.appliedCampaign?.id,
+                        campaign: restProps.selectedCampaign?.id,
                         stage: restProps.selectedStage,
                       },
                     ],

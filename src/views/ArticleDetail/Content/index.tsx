@@ -12,6 +12,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { useReadTimer } from '~/components/Hook'
 import { ReadArticleMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -118,11 +119,13 @@ const Content = ({
     }
   }, [lastScroll])
 
+  useReadTimer({ container: contentContainer })
+
   return (
     <>
       <div
         className={classNames({
-          'u-content': true,
+          'u-content-article': true,
           [styles.indented]: indentFirstLine,
           [styles.translating]: translating,
         })}

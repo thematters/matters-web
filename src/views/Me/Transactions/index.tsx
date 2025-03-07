@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -13,8 +13,8 @@ import {
   InfiniteScroll,
   Layout,
   List,
-  SegmentedTabs,
   SpinnerBlock,
+  SquareTabs,
   Transaction,
 } from '~/components'
 import { MeTransactionsQuery } from '~/gql/graphql'
@@ -163,8 +163,9 @@ const Transactions = () => {
 
       <Head title={title} />
 
-      <SegmentedTabs
+      <SquareTabs
         sticky
+        spacing="md"
         side={
           <section className={styles.currencySwitch}>
             <CurrencySwitch
@@ -174,39 +175,36 @@ const Transactions = () => {
           </section>
         }
       >
-        <SegmentedTabs.Tab
+        <SquareTabs.Tab
           selected={isALL}
           onClick={() => setPurpose(Purpose.ALL)}
-        >
-          <FormattedMessage
-            defaultMessage="All"
-            id="6aE6hr"
-            description="src/views/Me/Transactions/index.tsx"
-          />
-        </SegmentedTabs.Tab>
+          title={intl.formatMessage({
+            defaultMessage: 'All',
+            id: '6aE6hr',
+            description: 'src/views/Me/Transactions/index.tsx',
+          })}
+        />
 
-        <SegmentedTabs.Tab
+        <SquareTabs.Tab
           selected={isDonaion}
           onClick={() => setPurpose(Purpose.DONATION)}
-        >
-          <FormattedMessage
-            defaultMessage="Supports"
-            id="NCBtyI"
-            description="src/views/Me/Transactions/index.tsx"
-          />
-        </SegmentedTabs.Tab>
+          title={intl.formatMessage({
+            defaultMessage: 'Supports',
+            id: 'NCBtyI',
+            description: 'src/views/Me/Transactions/index.tsx',
+          })}
+        />
 
-        <SegmentedTabs.Tab
+        <SquareTabs.Tab
           selected={isSubscription}
           onClick={() => setPurpose(Purpose.SUBSCRIPTION)}
-        >
-          <FormattedMessage
-            defaultMessage="Subscriptions"
-            id="T73SwS"
-            description="src/views/Me/Transactions/index.tsx"
-          />
-        </SegmentedTabs.Tab>
-      </SegmentedTabs>
+          title={intl.formatMessage({
+            defaultMessage: 'Subscriptions',
+            id: 'T73SwS',
+            description: 'src/views/Me/Transactions/index.tsx',
+          })}
+        />
+      </SquareTabs>
 
       <Layout.Main.Spacing hasVertical={false}>
         <BaseTransactions currency={currency} purpose={purpose} />

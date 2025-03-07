@@ -5,6 +5,8 @@ export const ANALYTICS = 'analytics'
 export const REFETCH_RESPONSES = 'refetchResponses'
 export const SYNC_APPRECIATE_BUTTON_COUNT = 'syncAppreciateButtonCount'
 export const SYNC_QUOTE_COMMENT = 'syncQuoteComment'
+export const FOCUS_EDITOR_TITLE = 'focusEditorTitle'
+export const FOCUS_EDITOR_SUMMARY = 'focusEditorSummary'
 
 // Moment
 export const ADD_MOMENT_COMMENT_MENTION = 'addMomentCommentMention'
@@ -40,6 +42,7 @@ export const BYPASS_SCROLL_LOCK = 'bypassScrollLock'
 export const ENBABLE_SCROLL_LOCK = 'enableScrollLock'
 export const BYPASS_FOCUS_LOCK = 'bypassFocusLock'
 export const ENBABLE_FOCUS_LOCK = 'enableFocusLock'
+export const OPEN_WITHDRAW_VAULT_USDT_DIALOG = 'openWithdrawVaultUsdtDialog'
 
 // Toast
 export const TOAST_SEND_EMAIL_VERIFICATION = 'toastSendEmailVerification'
@@ -49,10 +52,14 @@ export const SUPPORT_SUCCESS = 'supportSuccess'
 export const SUPPORT_SUCCESS_USDT_VISITOR = 'supportSuccessUSDTVisitor'
 export const SUPPORT_SUCCESS_ANIMATION = 'supportSuccessAnimation'
 
+// Wallet
+export const REFETCH_BALANCE_USDT = 'refetchBalanceUSDT'
+
 // Universal auth
 export enum UNIVERSAL_AUTH_TRIGGER {
   appreciation = 'appreciation',
   bookmark = 'bookmark',
+  bookmarkTag = 'bookmarkTag',
   circlePrice = 'circlePrice',
   circleSubscription = 'circleSubscription',
   collectArticle = 'collectArticle',

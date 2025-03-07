@@ -83,7 +83,7 @@ const Complete: React.FC<Props> = ({
         currency={currency}
         recipient={recipient}
         showLikerID={isLikecoin}
-        showEthAddress={isUSDT}
+        showEthAddress={isUSDT && !!recipient.info.ethAddress}
       >
         <>
           <Icon icon={IconCircleCheckFill} size={40} color="green" />

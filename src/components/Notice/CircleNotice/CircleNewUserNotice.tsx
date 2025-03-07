@@ -16,10 +16,6 @@ type CircleNewUserNotice = {
 }
 
 const CircleNewUserNotice = ({ notice, userType }: CircleNewUserNotice) => {
-  if (!notice.actors) {
-    return null
-  }
-
   const isNewFollower = userType === 'follower'
   const isNewSubscriber = userType === 'subscriber'
 

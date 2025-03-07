@@ -1,7 +1,7 @@
 import { ENTITY_TYPE } from '~/common/enums'
 import { toDigestTagPlaceholder } from '~/components'
 import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'
-import { getSelectCampaign } from '~/components/Editor/SelectCampaign'
+import { getSelectCampaigns } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import {
   DigestRichCirclePublicFragment,
@@ -144,17 +144,22 @@ const EditDraftIndent = ({ draft }: SidebarProps) => {
 const EditDraftCampaign = ({ draft, campaigns }: SidebarProps) => {
   const { edit } = useEditDraftCampaign()
 
-  const { appliedCampaign, selectedStage } = getSelectCampaign({
-    applied: campaigns && campaigns[0],
+  const {
+    campaigns: selectableCampaigns,
+    selectedCampaign,
+    selectedStage,
+  } = getSelectCampaigns({
+    applied: campaigns,
     attached: draft.campaigns,
     createdAt: draft.createdAt,
   })
 
   return (
     <Sidebar.Campaign
-      appliedCampaign={appliedCampaign}
+      campaigns={selectableCampaigns}
+      selectedCampaign={selectedCampaign}
       selectedStage={selectedStage}
-      editCampaign={edit}
+      editCampaign={(value) => edit(value as any)}
     />
   )
 }

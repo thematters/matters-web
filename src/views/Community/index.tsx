@@ -32,7 +32,7 @@ const Community = () => {
           dangerouslySetInnerHTML={{
             __html: content[lang],
           }}
-          className="u-content"
+          className="u-content-article"
           onClick={captureClicks}
         />
       </Layout.Main.Spacing>

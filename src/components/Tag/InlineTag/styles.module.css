@@ -15,9 +15,8 @@
 
   & .name {
     @mixin line-clamp;
-    @mixin fix-cropped-letters;
 
-    line-height: inherit;
+    line-height: 1.01;
     color: var(--color-black);
   }
 

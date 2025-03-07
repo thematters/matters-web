@@ -6,20 +6,20 @@
 
   height: calc(var(--ivh) * 100 - 3rem - 4rem - var(--sp16) * 2);
   height: calc(100dvh - 3rem - 4rem - var(--sp16) * 2);
+  padding-bottom: 30vh;
   overflow: hidden auto;
+  cursor: text;
 
   @media (--md-up) {
     height: auto;
-    padding-bottom: 0;
     overflow-x: initial;
     overflow-y: initial;
   }
 
-  & :global(.ProseMirror),
-  & :global(.tiptap) {
-    min-height: 50vh;
+  & :global(.tiptap.ProseMirror) {
+    /* min-height: 50vh;
     min-height: calc(var(--ivh) * 50);
-    min-height: 50dvh;
+    min-height: 50dvh; */
 
     /* outline */
     &:focus {
@@ -139,8 +139,7 @@
   }
 
   &.indented {
-    & :global(.ProseMirror),
-    & :global(.tiptap) {
+    & :global(.tiptap.ProseMirror) {
       & > p {
         text-indent: 2.25rem;
       }

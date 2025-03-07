@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { useContractRead } from 'wagmi'
 
 import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
-import { analytics, BillboardABI, featureSupportedChains } from '~/common/utils'
+import { analytics, featureSupportedChains } from '~/common/utils'
 import {
   BillboardDialog,
   BillboardExposureTracker,
   Icon,
   TextIcon,
+  useBillboard,
 } from '~/components'
 
 import styles from './styles.module.css'
@@ -30,17 +30,18 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
 
   // collect vars
   const id = !isNaN(Number(tokenId)) ? Number(tokenId) : 0
-  const address = process.env.NEXT_PUBLIC_BILLBOARD_ADDRESS as `0x${string}`
+  const operatorAddress = process.env
+    .NEXT_PUBLIC_BILLBOARD_OPERATOR_ADDRESS as `0x${string}`
+  const registryAddress = process.env
+    .NEXT_PUBLIC_BILLBOARD_REGISTRY_ADDRESS as `0x${string}`
   const network = featureSupportedChains.billboard[0]
 
   const intl = useIntl()
-  const { data, isError, isLoading } = useContractRead({
-    address,
-    abi: BillboardABI,
-    functionName: 'getBoard',
+  const { data, isError, isLoading } = useBillboard({
+    id,
     chainId: network.id,
-    args: [BigInt(id)],
-    cacheTime: 60_000,
+    operatorAddress,
+    registryAddress,
   })
 
   if (!mount) {
@@ -67,7 +68,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
                 })
               }
             >
-              <img src={data.contentURI} alt="ad" />
+              <img src={data.contentURI} alt="ad" loading="lazy" />
             </a>
 
             <button

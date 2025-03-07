@@ -59,15 +59,17 @@ export const MomentDigestDetail = ({
             </section>
           </section>
         </section>
+
         <section className={styles.right}>
           <Button textColor="greyDarker" textActiveColor="black">
             <Icon icon={IconTimes} onClick={onClose} size={22} />
           </Button>
         </section>
       </header>
+
       {hasContent && !!content && (
         <section
-          className={styles.content}
+          className={`${styles.content} u-content-moment detail`}
           data-test-id={TEST_ID.MOMENT_DIGEST_CONTENT}
           onClick={captureClicks}
           dangerouslySetInnerHTML={{
@@ -75,6 +77,7 @@ export const MomentDigestDetail = ({
           }}
         />
       )}
+
       {hasAssets && !!assets && assets.length > 0 && (
         <section className={styles.assets}>
           <Assets moment={moment} />

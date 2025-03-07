@@ -131,6 +131,7 @@ export const MomentDigestFeed = ({
               }
             >
               <section
+                className="u-content-moment"
                 dangerouslySetInnerHTML={{
                   __html: content || '',
                 }}

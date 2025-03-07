@@ -31,7 +31,6 @@ const VIEWER_LIKE_BALANCE = gql`
       id
       liker {
         total
-        rateUSD
       }
     }
   }
@@ -79,6 +78,10 @@ export const LikeCoinBalance = ({
   const liker = data?.viewer?.liker
   const total = liker?.total || 0
 
+  if (!likerId) {
+    return null
+  }
+
   if (loading) {
     return (
       <Wrapper>
@@ -108,31 +111,15 @@ export const LikeCoinBalance = ({
     )
   }
 
-  if (likerId) {
-    return (
-      <Wrapper>
-        <CurrencyFormatter
-          value={formatAmount(total, 0)}
-          currency="LIKE"
-          subValue={formatAmount(total * exchangeRate, 2)}
-          subCurrency={currency}
-        />
-      </Wrapper>
-    )
-  }
-
   return (
     <Wrapper>
-      <Button
-        spacing={[0, 12]}
-        size={[null, '1.5rem']}
-        borderColor="black"
-        href={PATHS.ME_SETTINGS_MISC}
-      >
-        <TextIcon color="black" size={12}>
-          <Translate zh_hant="前往設置" zh_hans="前往设置" en="Setup" />
-        </TextIcon>
-      </Button>
+      <CurrencyFormatter
+        value={formatAmount(total, 0)}
+        currency="LIKE"
+        subValue={formatAmount(total * exchangeRate, 2)}
+        subCurrency={currency}
+        weight="normal"
+      />
     </Wrapper>
   )
 }

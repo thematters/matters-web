@@ -153,7 +153,7 @@ const MomentDetailDialogContent = ({
       <section className={styles.mainContent}>
         {!!content && (
           <section
-            className={styles.content}
+            className="u-content-moment detail"
             dangerouslySetInnerHTML={{
               __html: content || '',
             }}

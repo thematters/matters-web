@@ -1,55 +1,21 @@
-import gql from 'graphql-tag'
 import { ReactElement } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
-import {
-  ArticleNewAppreciationNoticeFragment,
-  ArticleNewCollectedNoticeFragment,
-  ArticleNewCommentNoticeFragment,
-  ArticleNewSubscriberNoticeFragment,
-  CircleInvitationNoticeFragment,
-  CircleNewBroadcastNoticeFragment,
-  CircleNewDiscussionCommentsFragment,
-  CircleNewUserNoticeFragment,
-  CollectionNewLikeNoticeFragment,
-  CommentMentionedYouNoticeFragment,
-  CommentNewReplyNoticeFragment,
-  MomentLikedNoticeFragment,
-  MomentMentionedYouNoticeFragment,
-  MomentNewCommentNoticeFragment,
-  NoticeActorAvatarUserFragment,
-  NoticeHeadActorsUserFragment,
-  PaymentReceivedDonationNoticeFragment,
-  UserNewFollowerNoticeFragment,
-} from '~/gql/graphql'
+import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
 
 import NoticeActorAvatar from '../NoticeActorAvatar'
 import NoticeActorsNameAndTitle from '../NoticeActorsNameAndTitle'
-import NoticeArticleCard from '../NoticeArticleCard'
 import NoticeDate from '../NoticeDate'
-import NoticeHeadActors from '../NoticeHeadActors'
 import NoticeMultiActors from '../NoticeMultiActors'
 import styles from '../styles.module.css'
 
 type NoticeDigestProps = {
-  notice:
-    | ArticleNewSubscriberNoticeFragment
-    | ArticleNewAppreciationNoticeFragment
-    | ArticleNewCollectedNoticeFragment
-    | ArticleNewCommentNoticeFragment
-    | CircleInvitationNoticeFragment
-    | CircleNewBroadcastNoticeFragment
-    | CircleNewDiscussionCommentsFragment
-    | CircleNewUserNoticeFragment
-    | CommentMentionedYouNoticeFragment
-    | CommentNewReplyNoticeFragment
-    | PaymentReceivedDonationNoticeFragment
-    | UserNewFollowerNoticeFragment
-    | MomentNewCommentNoticeFragment
-    | MomentLikedNoticeFragment
-    | MomentMentionedYouNoticeFragment
-    | CollectionNewLikeNoticeFragment
-  actors?: (NoticeActorAvatarUserFragment & NoticeHeadActorsUserFragment)[]
+  notice: {
+    id: string
+    actors?: NoticeActorAvatarUserFragment[] | null
+    createdAt: string
+  }
   action: string | ReactElement
   secondAction?: string | ReactElement
   title?: string | ReactElement
@@ -59,20 +25,16 @@ type NoticeDigestProps = {
 
 const NoticeDigest = ({
   notice,
-  actors: extendActors,
   action,
   secondAction,
   title,
   content,
   testId,
 }: NoticeDigestProps) => {
-  if (!notice.actors) {
-    return null
-  }
-
-  let actors = extendActors || notice.actors
+  const actors = notice.actors || []
 
   const actorsCount = actors.length
+  const isAnonymous = actorsCount <= 0
   const isMultiActors = actorsCount > 1
 
   return (
@@ -81,7 +43,20 @@ const NoticeDigest = ({
       {...(testId ? { ['data-test-id']: testId } : {})}
     >
       <section className={styles.header}>
-        <NoticeMultiActors actors={actors} size={32} />
+        <NoticeMultiActors actors={actors} />
+
+        {isAnonymous && (
+          <>
+            <NoticeActorAvatar />
+
+            <section className={styles.singleActorInfo}>
+              <span className={styles.noticeActorsNameAndTitleTitle}>
+                <FormattedMessage defaultMessage="Anonymous User" id="GclYG/" />
+              </span>
+            </section>
+          </>
+        )}
+
         {!isMultiActors && (
           <section className={styles.singleActorInfo}>
             <NoticeActorsNameAndTitle
@@ -112,38 +87,6 @@ const NoticeDigest = ({
       </section>
     </section>
   )
-}
-
-NoticeDigest.fragments = {
-  notice: gql`
-    fragment NoticeDigestArticle on ArticleNotice {
-      id
-      ...NoticeDate
-      actors {
-        ...NoticeActorAvatarUser
-        ...NoticeHeadActorsUser
-      }
-      article: target {
-        ...NoticeArticleCard
-      }
-    }
-    ${NoticeActorAvatar.fragments.user}
-    ${NoticeHeadActors.fragments.user}
-    ${NoticeArticleCard.fragments.article}
-    ${NoticeDate.fragments.notice}
-
-    fragment NoticeDigestUser on UserNotice {
-      id
-      ...NoticeDate
-      actors {
-        ...NoticeActorAvatarUser
-        ...NoticeHeadActorsUser
-      }
-    }
-    ${NoticeActorAvatar.fragments.user}
-    ${NoticeHeadActors.fragments.user}
-    ${NoticeDate.fragments.notice}
-  `,
 }
 
 export default NoticeDigest

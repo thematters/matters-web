@@ -75,12 +75,10 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const viewer = useContext(ViewerContext)
   const [windowRef, setWindowRef] = useState<Window | undefined>(undefined)
   const { currStep, forward: _forward } = useStep<SupportStep>('setAmount')
-  const hasAuthorAddress = recipient.info.ethAddress
   const hasAuthorLikeID = !!recipient.liker.likerId
   const supportCurrency = storage.get<CURRENCY>(SUPPORT_TAB_PREFERENCE_KEY)
 
   const { address } = useAccount()
-  // TODO: support multiple networks
   const targetNetork = featureSupportedChains.curation[0]
   const { isUnsupportedNetwork } = useTargetNetwork(targetNetork)
 
@@ -104,7 +102,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
     forward('setAmount')
   }
 
-  const isUSDT = currency === CURRENCY.USDT
   const isLikecoin = currency === CURRENCY.LIKE
 
   const [payToTx, setPayToTx] =
@@ -177,7 +174,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
 
   const showTabs = isSetAmount || isWalletSelect || isNetworkSelect
 
-  if ((!hasAuthorAddress && isUSDT) || (!hasAuthorLikeID && isLikecoin)) {
+  if (!hasAuthorLikeID && isLikecoin) {
     return (
       <DisableSupport
         currency={currency}

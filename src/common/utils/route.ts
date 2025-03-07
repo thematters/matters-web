@@ -93,6 +93,8 @@ type ToPathArgs =
       page: 'campaignDetail'
       campaign: CampaignArgs
       stage?: CampaignStageArgs
+      featured?: boolean
+      announcement?: boolean
     }
   | {
       page: 'userProfile' | 'userCollections'
@@ -115,7 +117,10 @@ type ToPathArgs =
  * (works on SSR & CSR)
  */
 export const toPath = (
-  args: ToPathArgs & { fragment?: string; search?: { [key: string]: string } }
+  args: ToPathArgs & {
+    fragment?: string
+    search?: { [key: string]: string }
+  }
 ): {
   href: string
 } => {
@@ -244,7 +249,9 @@ export const toPath = (
       href = `/e/${args.campaign.shortHash}`
       if (args.stage) {
         href = `${href}?type=${args.stage.id}`
-      } else {
+      } else if (args.featured) {
+        href = `${href}?type=featured`
+      } else if (args.announcement) {
         href = `${href}?type=announcement`
       }
       break

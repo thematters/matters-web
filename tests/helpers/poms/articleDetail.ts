@@ -104,7 +104,7 @@ export class ArticleDetailPage {
 
     // dialog
     this.dialog = this.page.getByRole('dialog')
-    this.dialogCommentInput = this.dialog.locator('.tiptap')
+    this.dialogCommentInput = this.dialog.locator('.tiptap.ProseMirror')
   }
 
   async getTitle() {
@@ -177,7 +177,7 @@ export class ArticleDetailPage {
     await Promise.all([
       waitForAPIResponse({
         page: this.page,
-        path: 'data.toggleSubscribeArticle.subscribed',
+        path: 'data.toggleBookmarkArticle.followed',
       }),
       this.toolbarBookmarkButton.click(),
     ])

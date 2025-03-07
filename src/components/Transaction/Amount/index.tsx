@@ -1,6 +1,6 @@
 import { TEST_ID } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
-import { TextIcon } from '~/components'
+import { TextIcon, TextIconColor } from '~/components'
 import {
   DigestTransactionFragment,
   TransactionPurpose,
@@ -33,14 +33,23 @@ const Amount = ({
   tx: { amount, purpose, currency, state },
   testId,
 }: AmountProps) => {
-  const color =
-    purpose === TransactionPurpose.Dispute && state === TransactionState.Pending
-      ? 'black'
-      : state !== TransactionState.Succeeded
-        ? 'grey'
-        : amount > 0
-          ? 'gold'
-          : 'black'
+  const isVaultWithdrawal =
+    purpose === TransactionPurpose.CurationVaultWithdrawal
+  const showSymbol = !isVaultWithdrawal
+
+  let color: TextIconColor = 'black'
+  if (state === TransactionState.Failed) {
+    color = 'red'
+  } else if (
+    (purpose === TransactionPurpose.Dispute &&
+      state === TransactionState.Pending) ||
+    isVaultWithdrawal
+  ) {
+    color = 'black'
+  } else if (state !== TransactionState.Succeeded) color = 'grey'
+  else if (amount > 0) {
+    color = 'gold'
+  }
 
   return (
     <TextIcon spacing={8} size={16} weight="medium" color={color}>
@@ -48,7 +57,7 @@ const Amount = ({
         className={styles.amount}
         {...(testId ? { ['data-test-id']: testId } : {})}
       >
-        {amount > 0 ? '+' : '-'}
+        {showSymbol && (amount > 0 ? '+' : '-')}
         &nbsp;
         {currency}
         &nbsp;

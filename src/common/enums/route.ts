@@ -40,7 +40,8 @@ type ROUTE_KEY =
   | 'ME_DRAFTS'
   | 'ME_PUBLISHED'
   | 'ME_ARCHIVED'
-  | 'ME_BOOKMARKS'
+  | 'ME_BOOKMARKS_ARTICLES'
+  | 'ME_BOOKMARKS_TAGS'
   | 'ME_HISTORY'
   | 'ME_HISTORY_COMMENTS'
   | 'ME_HISTORY_LIKES_SENT'
@@ -146,7 +147,8 @@ export const ROUTES: {
   { key: 'ME_DRAFTS', pathname: '/me/drafts' },
   { key: 'ME_PUBLISHED', pathname: '/me/published' },
   { key: 'ME_ARCHIVED', pathname: '/me/archived' },
-  { key: 'ME_BOOKMARKS', pathname: '/me/bookmarks' },
+  { key: 'ME_BOOKMARKS_ARTICLES', pathname: '/me/bookmarks/articles' },
+  { key: 'ME_BOOKMARKS_TAGS', pathname: '/me/bookmarks/tags' },
   { key: 'ME_HISTORY', pathname: '/me/history' },
   { key: 'ME_HISTORY_COMMENTS', pathname: '/me/history/comments' },
   { key: 'ME_HISTORY_LIKES_SENT', pathname: '/me/history/likes/sent' },

@@ -1,8 +1,8 @@
+import { useQuery } from '@apollo/client'
 import _uniqBy from 'lodash/uniqBy'
-import { useContext } from 'react'
 
 import { MAX_ARTICLE_TAG_LENGTH } from '~/common/enums'
-import { SpinnerBlock, usePublicQuery, ViewerContext } from '~/components'
+import { SpinnerBlock } from '~/components'
 import { SelectTag } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'
 import { EditorRecommendedTagsQuery } from '~/gql/graphql'
@@ -14,7 +14,7 @@ import styles from './styles.module.css'
 
 type EditorRecommendedTagsUserTagsEdgesNode = Required<
   NonNullable<
-    NonNullable<EditorRecommendedTagsQuery['user']>['tags']['edges']
+    NonNullable<EditorRecommendedTagsQuery['viewer']>['tags']['edges']
   >[0]['node']
 >
 
@@ -24,21 +24,16 @@ const TagCustomStagingArea = ({
   hint,
   toStagingArea,
 }: CustomStagingAreaProps) => {
-  const viewer = useContext(ViewerContext)
-
   /**
    * Data Fetching
    */
   // public data
-  const { data, loading } = usePublicQuery<EditorRecommendedTagsQuery>(
-    EDITOR_RECOMMENDED_TAGS,
-    {
-      variables: { userName: viewer.userName },
-    }
+  const { data, loading } = useQuery<EditorRecommendedTagsQuery>(
+    EDITOR_RECOMMENDED_TAGS
   )
 
   // recommended tags
-  const userTagsEdges = data?.user?.tags.edges || []
+  const userTagsEdges = data?.viewer?.tags.edges || []
 
   let recommendedTags = [...userTagsEdges]?.map((edge) => edge.node)
   // remove duplicated tags

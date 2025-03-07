@@ -17,6 +17,7 @@ import {
   useMutation,
 } from '~/components'
 import { updateViewerUnreadNoticeCount } from '~/components/GQL'
+import CampaignArticleNotice from '~/components/Notice/CampaignArticleNotice'
 import CollectionNotice from '~/components/Notice/CollectionNotice'
 import MomentNotice from '~/components/Notice/MomentNotice'
 import {
@@ -35,6 +36,7 @@ const renderableTypes = new Set([
   'TransactionNotice',
   'MomentNotice',
   'UserNotice',
+  'CampaignArticleNotice',
 ])
 
 const ME_NOTIFICATIONS = gql`
@@ -53,9 +55,10 @@ const ME_NOTIFICATIONS = gql`
             id
             createdAt
             ...DigestNotice
-            # FIXME: why CollectionNotice and MomentNotice is not included in DigestNotice?
+            # FIXME: why CollectionNotice, CampaignArticleNotice and MomentNotice is not included in DigestNotice?
             ...CollectionNotice
             ...MomentNotice
+            ...CampaignArticleNotice
           }
         }
       }
@@ -64,6 +67,7 @@ const ME_NOTIFICATIONS = gql`
   ${Notice.fragments.notice}
   ${CollectionNotice.fragments.notice}
   ${MomentNotice.fragments.notice}
+  ${CampaignArticleNotice.fragments.notice}
 `
 // FIXME: remove CollectionNotice fragment from ME_NOTIFICATIONS
 

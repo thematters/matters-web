@@ -101,14 +101,22 @@ export const TextSelectionPopover = ({
   const onSelectEnd = () => {
     const activeSelection = document.getSelection()
 
-    const text = activeSelection?.toString()
-
     if (!isValidSelection(activeSelection, targetElement, ref)) {
       setSelection(undefined)
       return
     }
 
-    setSelection(text)
+    // get html content or fallback to text content
+    const range = activeSelection?.getRangeAt(0)
+    const fragment = range?.cloneContents()
+    const tempDiv = document.createElement('div')
+
+    if (fragment) {
+      tempDiv.appendChild(fragment)
+      setSelection(tempDiv.innerHTML)
+    } else {
+      setSelection(activeSelection?.toString() || '')
+    }
 
     const rect = (activeSelection as Selection)
       .getRangeAt(0)
