@@ -8,6 +8,7 @@ import {
   CardExposureTracker,
   EmptyWork,
   InfiniteScroll,
+  LanguageContext,
   List,
   Media,
   QueryError,
@@ -15,7 +16,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { CHANNEL_BY_SHORT_HASH } from '~/components/GQL/queries/channels'
 import {
+  ChannelByShortHashQuery,
   HottestFeedPublicQuery,
   IcymiFeedPublicQuery,
   NewestFeedPublicQuery,
@@ -28,7 +31,9 @@ import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
+import { ChannelHeader } from './ChannelHeader'
 import Placeholder from './Placeholder'
+
 type FeedArticlesPublic =
   | HottestFeedPublicQuery
   | NewestFeedPublicQuery
@@ -87,6 +92,7 @@ const horizontalFeeds: FeedLocation = {
 
 const MainFeed = ({}: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const { getQuery, isInPath } = useRoute()
   const type = getQuery('type')
   const isInHome = isInPath('HOME')
@@ -118,6 +124,12 @@ const MainFeed = ({}: MainFeedProps) => {
   const result = recommendation?.feed
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
+
+  const { data: channelData, loading: channelLoading } =
+    usePublicQuery<ChannelByShortHashQuery>(CHANNEL_BY_SHORT_HASH, {
+      variables: { shortHash, userLanguage: lang },
+      skip: !shortHash || !isInChannel,
+    })
 
   // private data
   const loadPrivate = (publicData?: FeedArticlesPublic) => {
@@ -179,7 +191,7 @@ const MainFeed = ({}: MainFeedProps) => {
   /**
    * Render
    */
-  if (loading || isNewLoading) {
+  if (loading || isNewLoading || channelLoading) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()
@@ -197,11 +209,16 @@ const MainFeed = ({}: MainFeedProps) => {
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
-      <EmptyWork
-        description={
-          <FormattedMessage defaultMessage="No articles" id="cHDJyK" />
-        }
-      />
+      <>
+        {isInChannel && channelData && (
+          <ChannelHeader channel={channelData.channel} />
+        )}
+        <EmptyWork
+          description={
+            <FormattedMessage defaultMessage="No articles" id="cHDJyK" />
+          }
+        />
+      </>
     )
   }
 
@@ -235,6 +252,10 @@ const MainFeed = ({}: MainFeedProps) => {
         recommendation.icymiTopic && (
           <IcymiCuratedFeed recommendation={recommendation} />
         )}
+
+      {isInChannel && channelData && (
+        <ChannelHeader channel={channelData.channel} />
+      )}
 
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}

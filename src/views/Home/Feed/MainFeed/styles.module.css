@@ -1,3 +1,18 @@
+.channel {
+  padding-top: var(--sp20);
+
+  & h1 {
+    font-size: var(--text18);
+    line-height: 1.75rem;
+  }
+
+  & p {
+    font-size: var(--text14);
+    line-height: 1.375rem;
+    color: var(--color-grey-dark);
+  }
+}
+
 .spacing16 {
   @media (--sm-down) {
     padding: 0 var(--sp16);
