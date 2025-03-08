@@ -38,18 +38,23 @@ export const updateMomentDetail = ({
       return
     }
 
-    let edges = data.moment.comments.edges
+    // Create a new immutable array of edges
+    let updatedEdges = [...data.moment.comments.edges]
 
     switch (type) {
       case 'addComment':
-        if (!edges || !comment) {
+        if (!updatedEdges || !comment) {
           return
         }
-        edges.push({
-          cursor: comment.id,
-          node: comment,
-          __typename: 'CommentEdge',
-        })
+        // Add the new comment to the edges array
+        updatedEdges = [
+          ...updatedEdges,
+          {
+            cursor: comment.id,
+            node: comment,
+            __typename: 'CommentEdge' as const,
+          },
+        ]
         break
     }
 
@@ -57,11 +62,12 @@ export const updateMomentDetail = ({
       query: MOMENT_DETAIL,
       variables: { shortHash },
       data: {
+        ...data,
         moment: {
           ...data.moment,
           comments: {
             ...data.moment.comments,
-            edges,
+            edges: updatedEdges,
           },
         },
       },

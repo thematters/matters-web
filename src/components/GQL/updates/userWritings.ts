@@ -20,7 +20,7 @@ export const updateUserWritings = ({
   userName: string
   momentDigest?: MomentDigestFeedMomentPublicFragment &
     MomentDigestFeedMomentPrivateFragment
-  type: 'pin' | 'unpin' | 'archive' | 'addMoment'
+  type: 'pin' | 'unpin' | 'addMoment'
 }) => {
   // FIXME: circular dependencies
   const { USER_WRITINGS_PUBLIC } = require('~/views/User/Writings/gql')
@@ -46,13 +46,16 @@ export const updateUserWritings = ({
     //
   }
 
-  let writingEdges = writingsData?.user?.writings?.edges || []
+  const writingEdges = writingsData?.user?.writings?.edges || []
   const collectionEdges = collectionsData?.user?.collections?.edges || []
   const writings = writingEdges.map((e) => e.node)
   const articles = writings.filter((a) => a.__typename === 'Article')
   const collecetions = collectionEdges.map((e) => e.node)
 
-  let pinnedWorks = writingsData?.user?.pinnedWorks || []
+  const pinnedWorks = writingsData?.user?.pinnedWorks || []
+
+  let newPinnedWorks = [...pinnedWorks]
+  let newWritingEdges = [...writingEdges]
 
   switch (type) {
     case 'pin':
@@ -67,20 +70,16 @@ export const updateUserWritings = ({
       ) {
         return
       }
-      pinnedWorks = [...pinnedWorks, target]
+      newPinnedWorks = [...pinnedWorks, target]
       break
     case 'unpin':
-      pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
-      break
-    case 'archive':
-      // remove pinned article if it's archived
-      pinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
+      newPinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
       break
     case 'addMoment':
       if (!momentDigest) {
         return
       }
-      writingEdges = [
+      newWritingEdges = [
         {
           cursor: momentDigest.id,
           node: {
@@ -106,15 +105,16 @@ export const updateUserWritings = ({
           ...writingsData?.user,
           writings: {
             ...writingsData?.user?.writings,
-            edges: [...writingEdges],
+            edges: newWritingEdges,
           },
-          pinnedWorks,
+          pinnedWorks: newPinnedWorks,
         },
       },
     })
   }
 
-  if (collectionsData) {
+  // Only write to collections cache if there are actual changes to make
+  if (collectionsData && type === 'pin' && targetId) {
     cache.writeQuery({
       query: USER_COLLECTIONS,
       variables: { userName },

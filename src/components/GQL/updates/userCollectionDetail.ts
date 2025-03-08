@@ -48,52 +48,87 @@ export const updateUserCollectionDetail = ({
       case 'add':
         const addEdges =
           result?.data?.addCollectionsArticles[0].articles.edges || []
-        edges = [...addEdges, ...edges]
-        data.node.articleList.totalCount += addEdges.length
-        data.node.articles.totalCount += addEdges.length
-        break
+        const newEdges = [...addEdges, ...edges]
+
+        cache.writeQuery({
+          query: COLLECTION_DETAIL,
+          variables: { id: collectionId },
+          data: {
+            ...data,
+            node: {
+              ...data.node,
+              articleList: {
+                ...data.node.articleList,
+                edges: newEdges,
+                totalCount: data.node.articleList.totalCount + addEdges.length,
+              },
+              articles: {
+                ...data.node.articles,
+                totalCount: data.node.articles.totalCount + addEdges.length,
+              },
+            },
+          },
+        })
+        return
       case 'delete':
-        edges = edges.filter(({ node }) => node.id !== articleId)
-        data.node.articleList.totalCount -= 1
-        data.node.articles.totalCount -= 1
-        break
+        const filteredEdges = edges.filter(({ node }) => node.id !== articleId)
+
+        cache.writeQuery({
+          query: COLLECTION_DETAIL,
+          variables: { id: collectionId },
+          data: {
+            ...data,
+            node: {
+              ...data.node,
+              articleList: {
+                ...data.node.articleList,
+                edges: filteredEdges,
+                totalCount: data.node.articleList.totalCount - 1,
+              },
+              articles: {
+                ...data.node.articles,
+                totalCount: data.node.articles.totalCount - 1,
+              },
+            },
+          },
+        })
+        return
       case 'setTop':
       case 'setBottom':
         let targetEdge: (typeof edges)[0] | undefined = undefined
-        edges = edges.filter((edge) => {
+        const remainingEdges = edges.filter((edge) => {
           const node = edge.node
           if (node.id === articleId) {
             targetEdge = edge
           }
           return node.id !== articleId
         })
+
         if (!targetEdge) {
           return
         }
-        if (type === 'setTop') {
-          edges.unshift(targetEdge)
-        }
 
-        if (type === 'setBottom') {
-          edges.push(targetEdge)
-        }
-        break
-    }
+        const reorderedEdges =
+          type === 'setTop'
+            ? [targetEdge, ...remainingEdges]
+            : [...remainingEdges, targetEdge]
 
-    cache.writeQuery({
-      query: COLLECTION_DETAIL,
-      variables: { id: collectionId },
-      data: {
-        ...data,
-        node: {
-          ...data.node,
-          articleList: {
-            ...data.node.articleList,
-            edges,
+        cache.writeQuery({
+          query: COLLECTION_DETAIL,
+          variables: { id: collectionId },
+          data: {
+            ...data,
+            node: {
+              ...data.node,
+              articleList: {
+                ...data.node.articleList,
+                edges: reorderedEdges,
+              },
+            },
           },
-        },
-      },
-    })
+        })
+        return
+    }
   } catch (e) {
     console.error(e)
   }

@@ -1,12 +1,8 @@
 import _isNil from 'lodash/isNil'
-import { useContext, useState } from 'react'
+import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
-import {
-  updateCircleFollowerCount,
-  updateCircleFollowers,
-} from '~/components/GQL'
+import { Button, TextIcon, useMutation } from '~/components'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import {
   FollowButtonCirclePrivateFragment,
@@ -18,7 +14,6 @@ interface UnfollowCircleProps {
 }
 
 const Unfollow = ({ circle }: UnfollowCircleProps) => {
-  const viewer = useContext(ViewerContext)
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<ToggleFollowCircleMutation>(
     TOGGLE_FOLLOW_CIRCLE,
@@ -35,17 +30,10 @@ const Unfollow = ({ circle }: UnfollowCircleProps) => {
             }
           : undefined,
       update: (cache) => {
-        updateCircleFollowerCount({
-          cache,
-          type: 'decrement',
-          name: circle.name || '',
-        })
-        updateCircleFollowers({
-          cache,
-          type: 'unfollow',
-          name: circle.name || '',
-          viewer,
-        })
+        cache.evict({ id: cache.identify(circle), fieldName: 'followers' })
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
       },
     }
   )

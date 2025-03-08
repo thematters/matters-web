@@ -34,11 +34,16 @@ export const updateDraftAssets = ({
       return
     }
 
-    cacheData.node.assets.unshift(asset)
     cache.writeQuery({
       query: DRAFT_ASSETS,
       variables,
-      data: cacheData,
+      data: {
+        ...cacheData,
+        node: {
+          ...cacheData.node,
+          assets: [asset, ...cacheData.node.assets],
+        },
+      },
     })
   } catch (e) {
     console.error(e)

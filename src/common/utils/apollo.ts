@@ -8,6 +8,7 @@ import { sha256 } from 'crypto-hash'
 import type { IncomingHttpHeaders } from 'http'
 import _get from 'lodash/get'
 
+import packageJson from '@/package.json'
 import {
   AGENT_HASH_PREFIX,
   COOKIE_USER_GROUP,
@@ -220,6 +221,8 @@ export const createApolloClient = (
   const cookie = headers?.cookie || (isClient ? document.cookie : '')
 
   const client = new ApolloClient({
+    name: packageJson.name,
+    version: packageJson.version,
     ssrMode: isServer,
     link: ApolloLink.from([
       persistedQueryLink,

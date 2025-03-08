@@ -19,15 +19,26 @@ export const updateViewerWorksTabs = ({
       return
     }
 
+    let newTotalCount = cacheData.viewer.drafts.totalCount
+
     if (type === 'increaseDraft') {
-      cacheData.viewer.drafts.totalCount++
+      newTotalCount += 1
     } else if (type === 'decreaseDraft') {
-      cacheData.viewer.drafts.totalCount--
+      newTotalCount -= 1
     }
 
     cache.writeQuery({
       query: ME_WORKS_TABS,
-      data: cacheData,
+      data: {
+        ...cacheData,
+        viewer: {
+          ...cacheData.viewer,
+          drafts: {
+            ...cacheData.viewer.drafts,
+            totalCount: newTotalCount,
+          },
+        },
+      },
     })
   } catch (e) {
     console.error(e)

@@ -24,23 +24,14 @@ export interface DeleteMomentDialogProps {
 const DeleteMomentDialog = ({ moment, children }: DeleteMomentDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const { id } = moment
-  const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
   const [deleteMoment] = useMutation<DeleteMomentMutation>(DELETE_MOMENT, {
     variables: { id },
     update: (cache) => {
-      // FIXME: Why not update user profile tab writing count?
-      // const result = updateUserProfile({
-      //   cache,
-      //   userName: moment.author.userName!,
-      //   type: 'decreaseMoment',
-      // })
+      cache.evict({ id: cache.identify(moment.author), fieldName: 'writings' })
     },
-    refetchQueries: [
-      {
-        query: USER_PROFILE_PUBLIC,
-        variables: { userName: moment.author.userName },
-      },
-    ],
+    onQueryUpdated(observableQuery) {
+      return observableQuery.refetch()
+    },
   })
 
   const onDelete = async () => {

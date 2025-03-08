@@ -21,7 +21,6 @@ import {
   AddArticlesCollectionUserQuery,
   CollectionArticlesCollectionFragment,
 } from '~/gql/graphql'
-import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 
 import { ADD_ARTICLES_COLLECTION, ADD_ARTICLES_COLLECTION_USER } from './gql'
 import SearchingDialogContent from './SearchingDialogContent'
@@ -56,7 +55,11 @@ const BaseAddArticlesCollectionDialog = ({
       showToast: false,
     }
   )
-  const { show, openDialog, closeDialog: cd } = useDialogSwitch(true)
+  const {
+    show,
+    openDialog,
+    closeDialog: baseCloseDialog,
+  } = useDialogSwitch(true)
 
   const [area, setArea] = useState<Area>('selecting')
   const inSelectingArea = area === 'selecting'
@@ -111,17 +114,12 @@ const BaseAddArticlesCollectionDialog = ({
             collectionId: collection.id,
             result,
           })
+          cache.evict({ id: cache.identify(viewer), fieldName: 'collections' })
         },
-        refetchQueries: [
-          {
-            query: USER_COLLECTIONS,
-            variables: { userName: viewer.userName },
-          },
-        ],
       })
 
       setSubmitting(false)
-      cd()
+      baseCloseDialog()
       setArea('selecting')
       // clear data
       formik.setFieldValue('checked', [])
@@ -131,7 +129,7 @@ const BaseAddArticlesCollectionDialog = ({
   const closeDialog = () => {
     formik.setFieldValue('checked', [])
     setArea('selecting')
-    cd()
+    baseCloseDialog()
   }
 
   useEffect(() => {

@@ -11,10 +11,6 @@ import {
   TextIcon,
   useMutation,
 } from '~/components'
-import {
-  updateUserFollowerCount,
-  updateViewerFolloweeCount,
-} from '~/components/GQL'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import {
   FollowButtonUserPrivateFragment,
@@ -43,9 +39,10 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
           }
         : undefined,
     update: (cache) => {
-      const userName = _get(user, 'userName', null)
-      updateUserFollowerCount({ cache, type: 'decrement', userName })
-      updateViewerFolloweeCount({ cache, type: 'decrement' })
+      cache.evict({ id: cache.identify(user), fieldName: 'following' })
+    },
+    onQueryUpdated(observableQuery) {
+      return observableQuery.refetch()
     },
   })
 

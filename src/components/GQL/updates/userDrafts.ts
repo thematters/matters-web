@@ -21,27 +21,34 @@ export const updateUserDrafts = ({
     //
   }
 
-  let draftEdges = draftsData?.viewer?.drafts.edges || []
+  if (!draftsData) {
+    return
+  }
+
+  const originalDraftEdges = draftsData?.viewer?.drafts.edges || []
+
+  // Create a new immutable array of draft edges
+  let updatedDraftEdges = [...originalDraftEdges]
 
   switch (type) {
     case 'remove':
-      draftEdges = draftEdges.filter((edge) => edge.node.id !== targetId)
+      updatedDraftEdges = updatedDraftEdges.filter(
+        (edge) => edge.node.id !== targetId
+      )
       break
   }
 
-  if (draftsData) {
-    cache.writeQuery({
-      query: ME_DRAFTS_FEED,
-      data: {
-        ...draftsData,
-        viewer: {
-          ...draftsData?.viewer,
-          drafts: {
-            ...draftsData?.viewer?.drafts,
-            edges: draftEdges,
-          },
+  cache.writeQuery({
+    query: ME_DRAFTS_FEED,
+    data: {
+      ...draftsData,
+      viewer: {
+        ...draftsData?.viewer,
+        drafts: {
+          ...draftsData?.viewer?.drafts,
+          edges: updatedDraftEdges,
         },
       },
-    })
-  }
+    },
+  })
 }

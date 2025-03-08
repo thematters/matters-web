@@ -166,7 +166,6 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
 
     try {
       setSubmitting(true)
-      const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
       const { data } = await putMoment({
         variables: {
           input: {
@@ -182,12 +181,6 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
             momentDigest: mutationResult.data?.putMoment,
           })
         },
-        refetchQueries: [
-          {
-            query: USER_PROFILE_PUBLIC,
-            variables: { userName: viewer.userName },
-          },
-        ],
       })
 
       const { putMoment: moment } = data || {}

@@ -5,10 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
 import { analytics } from '~/common/utils'
 import { Dialog, useMutation, useRoute, ViewerContext } from '~/components'
-import { PublishArticleMutation, UserArticlesSort } from '~/gql/graphql'
-import { ME_WORKS_PUBLISHED_FEED } from '~/views/Me/Works/Published/gql'
-import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
-import { VIEWER_WRITINGS } from '~/views/User/Writings/gql'
+import { PublishArticleMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -33,20 +30,13 @@ const ConfirmPublishDialogContent: React.FC<
   const { getQuery } = useRoute()
   const draftId = getQuery('draftId')
   const [publish] = useMutation<PublishArticleMutation>(PUBLISH_ARTICLE, {
-    refetchQueries: [
-      {
-        query: USER_PROFILE_PUBLIC,
-        variables: { userName: viewer.userName },
-      },
-      {
-        query: VIEWER_WRITINGS,
-        variables: { userName: viewer.userName },
-      },
-      {
-        query: ME_WORKS_PUBLISHED_FEED,
-        variables: { sort: UserArticlesSort.Newest },
-      },
-    ],
+    update(cache) {
+      cache.evict({ id: cache.identify(viewer), fieldName: 'articles' })
+      cache.evict({ id: cache.identify(viewer), fieldName: 'writings' })
+    },
+    onQueryUpdated(observableQuery) {
+      return observableQuery.refetch()
+    },
   })
 
   const onPublish = async () => {

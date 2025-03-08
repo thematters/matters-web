@@ -1,5 +1,4 @@
 import { DataProxy } from '@apollo/client/cache'
-import _remove from 'lodash/remove'
 
 import { toGlobalId } from '~/common/utils'
 import { Viewer } from '~/components/Context'
@@ -60,38 +59,49 @@ export const updateArticlePublic = ({
     if (data?.article?.__typename !== 'Article') {
       return
     }
-    let commentCount = data.article.commentCount
-    let totalCount = data.article.comments.totalCount
+
+    // Create immutable copies of the data
+    let updatedCommentCount = data.article.commentCount
+    let updatedTotalCount = data.article.comments.totalCount
+    let updatedDonations = data.article?.donations
+      ? { ...data.article.donations }
+      : undefined
+
     switch (type) {
       case 'deleteComment':
-        totalCount -= 1
-        commentCount -= 1
+        updatedTotalCount -= 1
+        updatedCommentCount -= 1
         break
       case 'deleteSecondaryComment':
-        commentCount -= 1
+        updatedCommentCount -= 1
         break
       case 'updateDonation':
-        if (!txId) {
+        if (!txId || !updatedDonations) {
           return
         }
-        // unshift viewer into donations
-        const donations = data.article?.donations?.edges || []
+
+        // Create a new immutable array of donations
+        const currentDonations = [...(updatedDonations.edges || [])]
+
+        // Check if the viewer already has a donation
         let existed = false
-        _remove(donations, (d) => {
+        const filteredDonations = currentDonations.filter((d) => {
           if (!viewer?.id || d.node.sender?.id !== viewer.id) {
-            return false
+            return true
           }
           existed = true
-          return true
+          return false
         })
-        const donatorsCount = data.article?.donations?.totalCount || 0
 
-        data.article.donations.totalCount = existed
-          ? donatorsCount
-          : donatorsCount + 1
+        // Update the total count
+        const updatedDonatorsCount = existed
+          ? updatedDonations.totalCount
+          : (updatedDonations.totalCount || 0) + 1
 
-        donations.unshift({
-          cursor: window.btoa(`arrayconnection:${donations.length}`) || '',
+        // Create a new donation edge
+        const newDonationEdge = {
+          cursor:
+            window.btoa(`arrayconnection:${filteredDonations.length}`) || '',
           node: {
             id: toGlobalId({ type: 'Transaction', id: txId }),
             sender: viewer
@@ -102,20 +112,29 @@ export const updateArticlePublic = ({
                   userName: viewer.userName,
                   liker: {
                     civicLiker: viewer.liker.civicLiker,
-                    __typename: 'Liker',
+                    __typename: 'Liker' as const,
                   },
                   info: {
                     badges: viewer.info.badges,
-                    __typename: 'UserInfo',
+                    __typename: 'UserInfo' as const,
                   },
-                  __typename: 'User',
+                  __typename: 'User' as const,
                 }
               : null,
-            __typename: 'ArticleDonation',
+            __typename: 'ArticleDonation' as const,
           },
-          __typename: 'ArticleDonationEdge',
-        })
-        data.article.donations.edges = donations
+          __typename: 'ArticleDonationEdge' as const,
+        }
+
+        // Create a new immutable array with the new donation at the beginning
+        const updatedDonationEdges = [newDonationEdge, ...filteredDonations]
+
+        // Update the donations object
+        updatedDonations = {
+          ...updatedDonations,
+          totalCount: updatedDonatorsCount,
+          edges: updatedDonationEdges,
+        }
         break
     }
 
@@ -123,13 +142,15 @@ export const updateArticlePublic = ({
       query: ARTICLE_DETAIL_PUBLIC,
       variables: detailQueryVariables,
       data: {
+        ...data,
         article: {
           ...data.article,
-          commentCount: commentCount,
+          commentCount: updatedCommentCount,
           comments: {
             ...data.article.comments,
-            totalCount: totalCount,
+            totalCount: updatedTotalCount,
           },
+          ...(updatedDonations && { donations: updatedDonations }),
         },
       },
     })
