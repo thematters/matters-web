@@ -48,6 +48,7 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
         : undefined,
     update: (cache) => {
       cache.evict({ id: cache.identify(user), fieldName: 'following' })
+      cache.gc()
     },
     onQueryUpdated(observableQuery) {
       return observableQuery.refetch()

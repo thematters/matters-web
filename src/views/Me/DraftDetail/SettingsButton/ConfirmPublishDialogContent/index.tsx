@@ -33,6 +33,7 @@ const ConfirmPublishDialogContent: React.FC<
     update(cache) {
       cache.evict({ id: cache.identify(viewer), fieldName: 'articles' })
       cache.evict({ id: cache.identify(viewer), fieldName: 'writings' })
+      cache.gc()
     },
     onQueryUpdated(observableQuery) {
       return observableQuery.refetch()

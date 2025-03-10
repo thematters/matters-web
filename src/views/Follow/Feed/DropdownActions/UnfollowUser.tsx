@@ -52,6 +52,7 @@ const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
       }
 
       cache.evict({ id: cache.identify(viewer), fieldName: 'following' })
+      cache.gc()
     },
   })
 

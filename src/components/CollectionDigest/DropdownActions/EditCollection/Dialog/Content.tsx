@@ -75,6 +75,7 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
           id: cache.identify(viewer),
           fieldName: 'collections',
         })
+        cache.gc()
       },
       onQueryUpdated(observableQuery) {
         return observableQuery.refetch()

@@ -28,6 +28,8 @@ const DeleteMomentDialog = ({ moment, children }: DeleteMomentDialogProps) => {
     variables: { id },
     update: (cache) => {
       cache.evict({ id: cache.identify(moment.author), fieldName: 'writings' })
+      cache.evict({ id: cache.identify(moment.author), fieldName: 'status' })
+      cache.gc()
     },
     onQueryUpdated(observableQuery) {
       return observableQuery.refetch()

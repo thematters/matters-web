@@ -42,6 +42,7 @@ const UnfollowCircleActionButton = ({
       },
       update: (cache) => {
         cache.evict({ id: cache.identify(circle), fieldName: 'followers' })
+        cache.gc()
       },
       onQueryUpdated(observableQuery) {
         return observableQuery.refetch()

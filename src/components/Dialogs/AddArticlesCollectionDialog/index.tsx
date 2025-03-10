@@ -115,6 +115,7 @@ const BaseAddArticlesCollectionDialog = ({
             result,
           })
           cache.evict({ id: cache.identify(viewer), fieldName: 'collections' })
+          cache.gc()
         },
       })
 

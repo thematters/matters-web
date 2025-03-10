@@ -115,9 +115,8 @@ const TOGGLE_PIN = gql`
 // Update cache by evicting the old data and force to refetch the related queries
 const [updateArticle] = useMutation(UPDATE_ARTICLE_MUTATION, {
   update(cache, { data: { updateArticle } }) {
-    cache.evict({
-      id: cache.identify(article),
-    })
+    cache.evict({ id: cache.identify(article) })
+    cache.gc()
   },
   onQueryUpdated(observableQuery) {
     return observableQuery.refetch()
@@ -128,6 +127,7 @@ const [updateArticle] = useMutation(UPDATE_ARTICLE_MUTATION, {
 client.refetchQueries({
   updateCache: (cache) => {
     cache.evict({ id: cache.identify(article) })
+    cache.gc()
   },
   include: ['ArticleDetailPublic'], // Optional: specify queries to refetch
 })

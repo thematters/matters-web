@@ -90,6 +90,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
               id: cache.identify(viewer),
               fieldName: 'collections',
             })
+            cache.gc()
 
             if (onUpdate) {
               onUpdate(cache, result.data?.putCollection || ({} as Collection))

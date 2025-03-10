@@ -27,6 +27,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
     client.refetchQueries({
       updateCache: (cache) => {
         cache.evict({ id: cache.identify(viewer), fieldName: 'drafts' })
+        cache.gc()
       },
     })
   }, [])

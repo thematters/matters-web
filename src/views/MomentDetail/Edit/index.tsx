@@ -89,9 +89,7 @@ const Edit = () => {
         },
         update: (cache) => {
           cache.evict({ id: cache.identify(viewer), fieldName: 'writings' })
-        },
-        onQueryUpdated(observableQuery) {
-          return observableQuery.refetch()
+          cache.gc()
         },
       })
 

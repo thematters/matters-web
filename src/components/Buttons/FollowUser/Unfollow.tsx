@@ -40,6 +40,7 @@ const UnfollowUser = ({ user, size }: UnfollowProps) => {
         : undefined,
     update: (cache) => {
       cache.evict({ id: cache.identify(user), fieldName: 'following' })
+      cache.gc()
     },
     onQueryUpdated(observableQuery) {
       return observableQuery.refetch()

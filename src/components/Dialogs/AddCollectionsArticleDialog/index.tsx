@@ -81,6 +81,7 @@ const BaseAddCollectionsArticleDialog = ({
             fieldName: 'collections',
           })
           cache.evict({ id: checked[0] })
+          cache.gc()
         },
         onQueryUpdated(observableQuery) {
           return observableQuery.refetch()

@@ -41,6 +41,7 @@ const Bookmark = ({ tag }: BookmarkProps) => {
           id: cache.identify(viewer),
           fieldName: 'bookmarkedTags',
         })
+        cache.gc()
       },
     }
   )

@@ -78,7 +78,7 @@ const DeleteCollectionDialog = ({
           id: cache.identify(viewer),
           fieldName: 'pinnedWorks',
         })
-
+        cache.gc()
         onEmptyCollection()
       },
       onQueryUpdated(observableQuery) {

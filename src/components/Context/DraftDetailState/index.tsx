@@ -95,6 +95,7 @@ export const DraftDetailStateProvider = ({
         id: cache.identify(viewer),
         fieldName: 'drafts',
       })
+      cache.gc()
     },
   })
 

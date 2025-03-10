@@ -29,6 +29,7 @@ const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
     {
       update: (cache) => {
         cache.evict({ id: cache.identify(viewer), fieldName: 'userName' })
+        cache.gc()
       },
       onQueryUpdated(observableQuery) {
         return observableQuery.refetch()

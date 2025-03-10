@@ -55,6 +55,7 @@ const PinButton = ({
         }
 
         cache.evict({ id: circle.id, fieldName: 'broadcast' })
+        cache.gc()
       },
       onQueryUpdated(observableQuery) {
         return observableQuery.refetch()
@@ -79,6 +80,7 @@ const PinButton = ({
         }
 
         cache.evict({ id: circle.id, fieldName: 'broadcast' })
+        cache.gc()
       },
       onQueryUpdated(observableQuery) {
         return observableQuery.refetch()

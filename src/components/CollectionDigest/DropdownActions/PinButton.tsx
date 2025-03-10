@@ -54,6 +54,7 @@ const PinButton = ({
           id: cache.identify(collection.author),
           fieldName: 'pinnedWorks',
         })
+        cache.gc()
       },
       onQueryUpdated(observableQuery) {
         return observableQuery.refetch()

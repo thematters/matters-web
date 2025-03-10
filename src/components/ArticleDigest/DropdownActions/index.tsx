@@ -24,7 +24,7 @@ import {
   RemoveArticleCollectionDialogProps,
   ShareDialog,
   ShareDialogProps,
-  SpinnerBlock,
+  Spinner,
   SubmitReport,
   SupportersDialog,
   SupportersDialogProps,
@@ -62,42 +62,42 @@ const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
 
 const DynamicToggleRecommendArticleButton = dynamic(
   () => import('./ToggleRecommendArticle/Button'),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicToggleRecommendArticleDialog = dynamic(
   () => import('./ToggleRecommendArticle/Dialog'),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicToggleRestrictUserButton = dynamic(
   () =>
     import(
       '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Button'
     ),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicToggleRestrictUserDialog = dynamic(
   () =>
     import(
       '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
     ),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicArchiveUserButton = dynamic(
   () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Button'),
   {
-    loading: () => <SpinnerBlock />,
+    loading: () => <Spinner />,
   }
 )
 const DynamicArchiveUserDialog = dynamic(
   () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'),
   {
-    loading: () => <SpinnerBlock />,
+    loading: () => <Spinner />,
   }
 )
 const DynamicToggleCampaignFeaturedButton = dynamic(
   () => import('./ToggleCampaignFeatured'),
   {
-    loading: () => <SpinnerBlock />,
+    loading: () => <Spinner />,
   }
 )
 
