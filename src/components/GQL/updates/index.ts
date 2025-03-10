@@ -1,6 +1,5 @@
 export * from './articleComments'
 export * from './articlePublic'
 export * from './commentDetail'
-export * from './draftAssets'
 export * from './userCollectionDetail'
 export * from './userCollectionsArticles'
