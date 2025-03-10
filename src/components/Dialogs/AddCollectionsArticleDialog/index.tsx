@@ -80,7 +80,9 @@ const BaseAddCollectionsArticleDialog = ({
             id: cache.identify(viewer),
             fieldName: 'collections',
           })
-          cache.evict({ id: checked[0] })
+          cache.evict({
+            id: cache.identify({ __typename: 'Collection', id: checked[0] }),
+          })
           cache.gc()
         },
         onQueryUpdated(observableQuery) {
