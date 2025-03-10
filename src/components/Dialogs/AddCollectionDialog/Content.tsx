@@ -1,3 +1,4 @@
+import { ApolloCache } from '@apollo/client'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
@@ -20,7 +21,7 @@ import { CreateCollectionMutation } from '~/gql/graphql'
 type Collection = CreateCollectionMutation['putCollection']
 interface FormProps {
   closeDialog: () => void
-  onUpdate?: (cache: any, collection: Collection) => void
+  onUpdate?: (cache: ApolloCache<any>, collection: Collection) => void
   gotoDetailPage?: boolean
 }
 

@@ -53,7 +53,7 @@ const RecommendArticleButton: React.FC<RecommendArticleButtonProps> = ({
   )
 
   if (loading) {
-    return <Menu.Item icon={<Spinner size={20} />} text="正在加載中…" />
+    return <Menu.Item icon={<Spinner size={20} />} text="加載中…" />
   }
 
   if (data?.article?.__typename !== 'Article') return null

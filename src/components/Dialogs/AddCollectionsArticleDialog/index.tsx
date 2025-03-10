@@ -13,7 +13,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { updateUserCollectionsArticles } from '~/components/GQL'
 import { AddCollectionsArticlesMutation } from '~/gql/graphql'
 
 import { ADD_COLLECTIONS_ARTICLES } from './gql'
@@ -153,13 +152,30 @@ const BaseAddCollectionsArticleDialog = ({
               setArea('selecting')
             }}
             onUpdate={(cache, collection) => {
-              updateUserCollectionsArticles({
-                userName,
-                articleId: articleId,
-                cache,
-                type: 'addCollection',
-                collection,
+              cache.modify({
+                id: cache.identify(viewer),
+                fields: {
+                  collections: (existingCollections) => {
+                    const newEdge = {
+                      __typename: 'CollectionEdge',
+                      node: {
+                        ...collection,
+                        articles: {
+                          __typename: 'ArticleConnection',
+                          totalCount: 0,
+                          edges: [],
+                        },
+                        contains: false,
+                      },
+                    }
+                    return {
+                      ...existingCollections,
+                      edges: [newEdge, ...existingCollections.edges],
+                    }
+                  },
+                },
               })
+
               formik.setFieldValue('checked', [
                 collection.id,
                 ...formik.values.checked,

@@ -47,7 +47,7 @@ const ToggleRestrictUserButton: React.FC<ToggleRestrictUserButtonProps> = ({
   )
 
   if (loading) {
-    return <Menu.Item icon={<Spinner size={20} />} text="正在加載中…" />
+    return <Menu.Item icon={<Spinner size={20} />} text="加載中…" />
   }
 
   if (data?.user?.__typename !== 'User') return null
