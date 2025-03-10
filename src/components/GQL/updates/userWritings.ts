@@ -3,7 +3,6 @@ import { ApolloCache } from '@apollo/client/cache'
 import {
   MomentDigestFeedMomentPrivateFragment,
   MomentDigestFeedMomentPublicFragment,
-  MomentState,
   UserCollectionsQuery,
   UserWritingsPublicQuery,
 } from '~/gql/graphql'
@@ -20,7 +19,7 @@ export const updateUserWritings = ({
   userName: string
   momentDigest?: MomentDigestFeedMomentPublicFragment &
     MomentDigestFeedMomentPrivateFragment
-  type: 'pin' | 'unpin' | 'addMoment'
+  type: 'pin' | 'unpin'
 }) => {
   // FIXME: circular dependencies
   const { USER_WRITINGS_PUBLIC } = require('~/views/User/Writings/gql')
@@ -74,24 +73,6 @@ export const updateUserWritings = ({
       break
     case 'unpin':
       newPinnedWorks = pinnedWorks.filter((a) => a.id !== targetId)
-      break
-    case 'addMoment':
-      if (!momentDigest) {
-        return
-      }
-      newWritingEdges = [
-        {
-          cursor: momentDigest.id,
-          node: {
-            ...momentDigest,
-            momentState: MomentState.Active,
-            liked: false,
-            __typename: 'Moment',
-          },
-          __typename: 'WritingEdge',
-        },
-        ...writingEdges,
-      ]
       break
   }
 
