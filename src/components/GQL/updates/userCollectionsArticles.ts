@@ -1,4 +1,4 @@
-import { DataProxy } from '@apollo/client/cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import {
   AddCollectionsArticleUserPublicQuery,
@@ -12,7 +12,7 @@ export const updateUserCollectionsArticles = ({
   userName,
   type,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   articleId: string
   collection?: CreateCollectionMutation['putCollection']
   userName?: string | null

@@ -1,4 +1,4 @@
-import { DataProxy } from '@apollo/client/cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import { MeWorksTabsQuery } from '~/gql/graphql'
 
@@ -6,7 +6,7 @@ export const updateViewerWorksTabs = ({
   cache,
   type,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   type: 'increaseDraft' | 'decreaseDraft'
 }) => {
   const { ME_WORKS_TABS } = require('~/views/Me/Works/WorksTabs/gql.ts')

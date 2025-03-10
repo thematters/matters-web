@@ -1,4 +1,4 @@
-import { DataProxy } from '@apollo/client/cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import { COMMENTS_COUNT } from '~/common/enums'
 import {
@@ -25,7 +25,7 @@ export const updateArticleComments = ({
   comment,
   type,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   articleId: string
   commentId?: string
   comment?: Comment

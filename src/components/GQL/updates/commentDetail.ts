@@ -1,4 +1,4 @@
-import { DataProxy } from '@apollo/client/cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import { CommentDetailQuery } from '~/gql/graphql'
 
@@ -14,7 +14,7 @@ export const updateCommentDetail = ({
   comment,
   type,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   commentId: string
   comment?: Comment
   type: 'add'

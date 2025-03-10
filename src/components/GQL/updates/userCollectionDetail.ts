@@ -1,5 +1,5 @@
 import { FetchResult } from '@apollo/client'
-import { DataProxy } from '@apollo/client/cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import {
   AddArticlesCollectionMutation,
@@ -14,7 +14,7 @@ export const updateUserCollectionDetail = ({
 
   type,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   collectionId: string
   result?: FetchResult<AddArticlesCollectionMutation>
   articleId?: string

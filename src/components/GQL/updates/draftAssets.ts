@@ -1,4 +1,4 @@
-import { DataProxy } from '@apollo/client/cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import { DraftAssetsQuery } from '~/gql/graphql'
 
@@ -7,7 +7,7 @@ export const updateDraftAssets = ({
   id,
   asset,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   id: string
   asset: NonNullable<
     DraftAssetsQuery['node'] & { __typename: 'Draft' }

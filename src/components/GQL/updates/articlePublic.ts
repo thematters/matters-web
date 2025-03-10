@@ -1,4 +1,4 @@
-import { DataProxy } from '@apollo/client/cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import { toGlobalId } from '~/common/utils'
 import { Viewer } from '~/components/Context'
@@ -16,7 +16,7 @@ export const updateArticlePublic = ({
   viewer,
   txId,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   shortHash: string
   routerLang: UserLanguage
   viewer?: Viewer

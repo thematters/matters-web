@@ -1,4 +1,4 @@
-import { DataProxy } from '@apollo/client/cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import {
   MomentDigestFeedMomentPrivateFragment,
@@ -15,7 +15,7 @@ export const updateUserWritings = ({
   type,
   momentDigest,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   targetId?: string
   userName: string
   momentDigest?: MomentDigestFeedMomentPublicFragment &

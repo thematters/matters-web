@@ -1,4 +1,4 @@
-import { DataProxy } from '@apollo/client/cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import { MeDraftFeedQuery } from '~/gql/graphql'
 
@@ -7,7 +7,7 @@ export const updateUserDrafts = ({
   targetId,
   type,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   targetId?: string
   type: 'remove' | 'add'
 }) => {
