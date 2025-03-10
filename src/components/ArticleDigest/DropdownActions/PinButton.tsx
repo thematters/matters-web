@@ -5,7 +5,6 @@ import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
 import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { ERROR_CODES } from '~/common/enums'
 import { Icon, Menu, toast, useMutation } from '~/components'
-import { updateUserWritings } from '~/components/GQL'
 import { PinButtonArticleFragment, TogglePinMutation } from '~/gql/graphql'
 
 type PinButtonProps = { article: PinButtonArticleFragment }
@@ -45,11 +44,25 @@ const PinButton = ({ article }: PinButtonProps) => {
       //   },
       // },
       update: (cache) => {
-        updateUserWritings({
-          cache,
-          targetId: article.id,
-          userName: article.author.userName!,
-          type: article.pinned ? 'unpin' : 'pin',
+        cache.modify({
+          id: cache.identify({ __typename: 'User', id: article.author.id }),
+          fields: {
+            pinnedWorks(existingPinnedWorks, { readField }) {
+              if (article.pinned) {
+                // Unpin: remove from pinnedWorks
+                return existingPinnedWorks.filter(
+                  (work: any) => readField('id', work) !== article.id
+                )
+              } else {
+                // Pin: add to pinnedWorks
+                const articleRef = cache.writeFragment({
+                  data: article,
+                  fragment: fragments.article,
+                })
+                return [...existingPinnedWorks, articleRef]
+              }
+            },
+          },
         })
       },
       onCompleted: () => {
