@@ -8,7 +8,8 @@ describe('<UniversalAuthButton>', () => {
   it('should render an UniversalAuthButton', () => {
     render(<UniversalAuthButton />)
 
-    const $button = screen.getByText('Enter')
+    const $buttons = screen.getAllByText('Enter')
+    const $button = $buttons[0]
     expect($button).toBeDefined()
 
     $button.click()
