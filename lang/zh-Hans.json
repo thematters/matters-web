@@ -1119,10 +1119,6 @@
     "defaultMessage": "在 {circleName} 发布新作品",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
-  "GYAos5": {
-    "defaultMessage": "我的草稿",
-    "description": "src/views/Me/Drafts/index.tsx"
-  },
   "GZJpDf": {
     "defaultMessage": "数据后台"
   },

@@ -1119,10 +1119,6 @@
     "defaultMessage": "published in {circleName}",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
-  "GYAos5": {
-    "defaultMessage": "Drafts",
-    "description": "src/views/Me/Drafts/index.tsx"
-  },
   "GZJpDf": {
     "defaultMessage": "Analytics"
   },
