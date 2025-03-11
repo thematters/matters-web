@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
 import { analytics } from '~/common/utils'
-import { Slides, ViewerContext } from '~/components'
+import { Media, Slides, ViewerContext } from '~/components'
 import { RecommendUserActivityFragment } from '~/gql/graphql'
 
 import FollowingRecommendHead from '../FollowingRecommendHead'
@@ -21,28 +21,41 @@ const RecommendUserActivity = ({ users }: Props) => {
     return null
   }
 
+  const renderSlideItem = (
+    user: NonNullable<RecommendUserActivityFragment['recommendUsers']>[number],
+    index: number,
+    size: 'xxs' | 'md'
+  ) => (
+    <Slides.Item
+      size={size}
+      key={index}
+      onClick={() => {
+        analytics.trackEvent('click_feed', {
+          type: 'following',
+          contentType: 'UserRecommendationActivity',
+          location: `${location}.${index}`,
+          id: user.id,
+        })
+      }}
+    >
+      <section className={styles.item}>
+        <FollowingRecommendUser user={user} />
+      </section>
+    </Slides.Item>
+  )
+
   return (
     <section className={styles.container}>
-      <Slides header={<FollowingRecommendHead type="user" />}>
-        {users.map((user, index) => (
-          <Slides.Item
-            size="md"
-            key={index}
-            onClick={() => {
-              analytics.trackEvent('click_feed', {
-                type: 'following',
-                contentType: 'UserRecommendationActivity',
-                location: `${location}.${index}`,
-                id: user.id,
-              })
-            }}
-          >
-            <section className={styles.item}>
-              <FollowingRecommendUser user={user} />
-            </section>
-          </Slides.Item>
-        ))}
-      </Slides>
+      <Media lessThan="md">
+        <Slides header={<FollowingRecommendHead type="user" />}>
+          {users.map((user, index) => renderSlideItem(user, index, 'xxs'))}
+        </Slides>
+      </Media>
+      <Media greaterThanOrEqual="md">
+        <Slides header={<FollowingRecommendHead type="user" />}>
+          {users.map((user, index) => renderSlideItem(user, index, 'md'))}
+        </Slides>
+      </Media>
     </section>
   )
 }
