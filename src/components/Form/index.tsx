@@ -35,7 +35,6 @@ Form.Input = Input
 Form.Textarea = Textarea
 Form.CheckBox = CheckBox
 Form.SquareCheckBox = SquareCheckBox
-Form.SquareCheckBox = SquareCheckBox
 Form.PinInput = PinInput
 Form.AmountInput = AmountInput
 Form.Field = Field
