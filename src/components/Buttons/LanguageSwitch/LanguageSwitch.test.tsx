@@ -13,7 +13,6 @@ const LANG_TEXT_MAP_REVERSE = Object.fromEntries(
 describe('<LanguageSwitch>', () => {
   it('should render the language switch menu', () => {
     render(<LanguageSwitch />)
-    // 使用 getAllByRole 並選擇第一個按鈕
     const $langBtns = screen.getAllByRole('button')
     const $langBtn = $langBtns[0]
     expect($langBtn).toBeDefined()
