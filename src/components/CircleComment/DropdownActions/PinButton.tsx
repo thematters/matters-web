@@ -83,10 +83,7 @@ const PinButton = ({
         }
 
         cache.evict({
-          id: cache.identify({
-            __typename: 'Circle',
-            id: circle.id,
-          }),
+          id: cache.identify({ __typename: 'Circle', id: circle.id }),
           fieldName: 'broadcast',
         })
         cache.gc()
