@@ -42,7 +42,7 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const [deleteDraft] = useMutation<DeleteDraftMutation>(DELETE_DRAFT, {
     variables: { id: draft.id },
     update: (cache) => {
-      // Remove the draft from the viewer's drafts
+      // Remove the draft from the viewer's drafts and decrease the total count
       cache.modify({
         id: cache.identify(viewer),
         fields: {
@@ -53,22 +53,6 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
             return {
               ...existingDrafts,
               edges: filteredEdges,
-            }
-          },
-        },
-      })
-
-      // Decrease the total count of drafts
-      cache.modify({
-        id: cache.identify(viewer),
-        fields: {
-          drafts(existingDrafts) {
-            if (!existingDrafts) {
-              return existingDrafts
-            }
-
-            return {
-              ...existingDrafts,
               totalCount: Math.max(0, existingDrafts.totalCount - 1),
             }
           },

@@ -39,7 +39,7 @@
     "i18n": "npm run i18n:extract && npm run i18n:generate && npm run i18n:compile"
   },
   "dependencies": {
-    "@apollo/client": "^3.13.2",
+    "@apollo/client": "^3.13.4",
     "@artsy/fresnel": "^6.1.0",
     "@ensdomains/content-hash": "^2.5.7",
     "@matters/matters-editor": "^0.3.1",

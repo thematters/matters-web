@@ -34,11 +34,19 @@ const Follow = ({ circle }: FollowProps) => {
             }
           : undefined,
       update: (cache) => {
-        cache.evict({ id: cache.identify(circle), fieldName: 'followers' })
-        cache.gc()
-      },
-      onQueryUpdated(observableQuery) {
-        return observableQuery.refetch()
+        if (circle.id) {
+          cache.modify({
+            id: cache.identify(circle),
+            fields: {
+              followers: (existingFollowers) => {
+                return {
+                  ...existingFollowers,
+                  totalCount: existingFollowers.totalCount + 1,
+                }
+              },
+            },
+          })
+        }
       },
     }
   )

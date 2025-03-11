@@ -47,11 +47,35 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
           }
         : undefined,
     update: (cache) => {
-      cache.evict({ id: cache.identify(user), fieldName: 'following' })
-      cache.gc()
-    },
-    onQueryUpdated(observableQuery) {
-      return observableQuery.refetch()
+      // increment user's followers count
+      cache.modify({
+        id: cache.identify(user),
+        fields: {
+          followers: (existingFollowers) => ({
+            ...existingFollowers,
+            totalCount: existingFollowers.totalCount + 1,
+          }),
+        },
+      })
+
+      // increment viewer's following count
+      cache.modify({
+        id: cache.identify(viewer),
+        fields: {
+          following: (existingFollowing) => {
+            const usersFieldName = 'users({"input":{"first":0}})'
+            const usersData = existingFollowing[usersFieldName]
+
+            return {
+              ...existingFollowing,
+              [usersFieldName]: {
+                ...usersData,
+                totalCount: usersData.totalCount + 1,
+              },
+            }
+          },
+        },
+      })
     },
   })
 
