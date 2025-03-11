@@ -816,6 +816,10 @@
     "defaultMessage": " 在围炉 {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "BM0Xw3": {
+    "defaultMessage": "收藏",
+    "description": "src/components/Buttons/Bookmark/Bookmark.tsx"
+  },
   "BMGZE2": {
     "defaultMessage": "提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1047,10 +1051,6 @@
   "FEI5Fv": {
     "defaultMessage": "邮箱",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
-  },
-  "FEkOVJ": {
-    "defaultMessage": "取消收藏",
-    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "FMIIAZ": {
     "defaultMessage": "此为历史版本和 IPFS 入口查阅区，",
@@ -1649,6 +1649,10 @@
   },
   "QFCfA7": {
     "defaultMessage": "添加到自由写精选"
+  },
+  "QKJWqd": {
+    "defaultMessage": "收藏",
+    "description": "src/components/Buttons/TagBookmark/Bookmark.tsx"
   },
   "QQSdHP": {
     "defaultMessage": "查看更多"
@@ -2276,6 +2280,10 @@
   "cE4Hfw": {
     "defaultMessage": "发现"
   },
+  "cK3TLr": {
+    "defaultMessage": "取消收藏",
+    "description": "src/components/Buttons/Bookmark/Unbookmark.tsx"
+  },
   "cPIKU2": {
     "defaultMessage": "关注中"
   },
@@ -2680,10 +2688,6 @@
   "kHMa3H": {
     "defaultMessage": "密码不一致"
   },
-  "kLEWkV": {
-    "defaultMessage": "收藏",
-    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
-  },
   "kPylKK": {
     "defaultMessage": "围炉",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -2808,6 +2812,10 @@
   },
   "mJEqC/": {
     "defaultMessage": "跳转至 {href}"
+  },
+  "mKp9t/": {
+    "defaultMessage": "取消收藏",
+    "description": "src/components/Buttons/TagBookmark/Unbookmark.tsx"
   },
   "mObpsB": {
     "defaultMessage": "插入引用"

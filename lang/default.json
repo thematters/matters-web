@@ -816,6 +816,10 @@
     "defaultMessage": "commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "BM0Xw3": {
+    "defaultMessage": "Bookmark",
+    "description": "src/components/Buttons/Bookmark/Bookmark.tsx"
+  },
   "BMGZE2": {
     "defaultMessage": "Mention me",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1047,10 +1051,6 @@
   "FEI5Fv": {
     "defaultMessage": "Email address",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
-  },
-  "FEkOVJ": {
-    "defaultMessage": "Remove bookmark",
-    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
   },
   "FMIIAZ": {
     "defaultMessage": "Revision history and IPFS entry,",
@@ -1649,6 +1649,10 @@
   },
   "QFCfA7": {
     "defaultMessage": "Add featured on Free Write"
+  },
+  "QKJWqd": {
+    "defaultMessage": "Bookmark",
+    "description": "src/components/Buttons/TagBookmark/Bookmark.tsx"
   },
   "QQSdHP": {
     "defaultMessage": "View More"
@@ -2276,6 +2280,10 @@
   "cE4Hfw": {
     "defaultMessage": "Discover"
   },
+  "cK3TLr": {
+    "defaultMessage": "Remove bookmark",
+    "description": "src/components/Buttons/Bookmark/Unbookmark.tsx"
+  },
   "cPIKU2": {
     "defaultMessage": "Following"
   },
@@ -2680,10 +2688,6 @@
   "kHMa3H": {
     "defaultMessage": "The new password and confirmation password do not match."
   },
-  "kLEWkV": {
-    "defaultMessage": "Bookmark",
-    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
-  },
   "kPylKK": {
     "defaultMessage": "Circle",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -2808,6 +2812,10 @@
   },
   "mJEqC/": {
     "defaultMessage": "Go to {href}"
+  },
+  "mKp9t/": {
+    "defaultMessage": "Remove bookmark",
+    "description": "src/components/Buttons/TagBookmark/Unbookmark.tsx"
   },
   "mObpsB": {
     "defaultMessage": "Insert Blockquote"
