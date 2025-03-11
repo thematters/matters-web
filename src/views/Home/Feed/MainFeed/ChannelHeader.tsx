@@ -11,9 +11,13 @@ export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
   }
 
   return (
-    <div className={styles.channel}>
-      <h1>{channel.name}</h1>
-      <p>{channel.description?.replace(/\//g, ' / ')}</p>
-    </div>
+    <>
+      <div className={styles.channel}>
+        <h1>{channel.name}</h1>
+      </div>
+      <p className={styles.description}>
+        {channel.description?.replace(/\//g, ' / ')}
+      </p>
+    </>
   )
 }

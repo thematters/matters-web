@@ -1,16 +1,24 @@
 .channel {
+  position: sticky;
+  top: var(--sm-top-nav-height);
+  z-index: 1;
   padding-top: var(--sp20);
+  background-color: var(--color-white);
+
+  @media (--sm-up) {
+    top: var(--lg-top-nav-height);
+  }
 
   & h1 {
     font-size: var(--text18);
     line-height: 1.75rem;
   }
+}
 
-  & p {
-    font-size: var(--text14);
-    line-height: 1.375rem;
-    color: var(--color-grey-dark);
-  }
+.description {
+  font-size: var(--text14);
+  line-height: 1.375rem;
+  color: var(--color-grey-dark);
 }
 
 .spacing16 {
