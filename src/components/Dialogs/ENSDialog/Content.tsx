@@ -79,7 +79,9 @@ const ENSDialogContent: React.FC<ENSDialogContentProps> = ({
         />
       )}
 
-      {isComplete && txHash && <DynamicComplete txHash={txHash} />}
+      {isComplete && txHash && (
+        <DynamicComplete txHash={txHash} closeDialog={closeDialog} />
+      )}
     </>
   )
 }

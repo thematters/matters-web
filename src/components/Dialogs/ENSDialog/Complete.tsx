@@ -6,10 +6,11 @@ import { Dialog } from '~/components'
 import styles from './styles.module.css'
 
 type CompleteProps = {
+  closeDialog: () => void
   txHash: string
 }
 
-const Complete: React.FC<CompleteProps> = ({ txHash }) => {
+const Complete: React.FC<CompleteProps> = ({ txHash, closeDialog }) => {
   const targetNetwork = featureSupportedChains.ens[0]
   const { name: explorerName, url: explorerUrl } =
     targetNetwork.blockExplorers?.default!
@@ -44,9 +45,7 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
             text={
               <FormattedMessage defaultMessage="Back to profile" id="XQYDsg" />
             }
-            onClick={() => {
-              window.location.reload()
-            }}
+            onClick={closeDialog}
           />
         }
         smUpBtns={
@@ -54,9 +53,7 @@ const Complete: React.FC<CompleteProps> = ({ txHash }) => {
             text={
               <FormattedMessage defaultMessage="Back to profile" id="XQYDsg" />
             }
-            onClick={() => {
-              window.location.reload()
-            }}
+            onClick={closeDialog}
           />
         }
       />

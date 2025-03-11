@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -10,7 +11,12 @@ import { ReactComponent as IconProfile } from '@/public/static/icons/24px/profil
 import { ReactComponent as IconSave } from '@/public/static/icons/24px/save.svg'
 import { ReactComponent as IconSettings } from '@/public/static/icons/24px/settings.svg'
 import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
-import { COOKIE_TOKEN_NAME, COOKIE_USER_GROUP, PATHS } from '~/common/enums'
+import {
+  COOKIE_TOKEN_NAME,
+  COOKIE_USER_GROUP,
+  PATHS,
+  PROTECTED_ROUTES,
+} from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { removeCookies } from '~/common/utils'
 import { Icon, Menu, toast, useMutation, ViewerContext } from '~/components'
@@ -18,6 +24,7 @@ import USER_LOGOUT from '~/components/GQL/mutations/userLogout'
 import { UserLogoutMutation } from '~/gql/graphql'
 
 const MeMenu: React.FC = () => {
+  const router = useRouter()
   const viewer = useContext(ViewerContext)
   const viewerPath = toPath({
     page: 'userProfile',
@@ -32,12 +39,19 @@ const MeMenu: React.FC = () => {
       circle,
     })
 
-  const [logout] = useMutation<UserLogoutMutation>(
+  const [logout, { client }] = useMutation<UserLogoutMutation>(
     USER_LOGOUT,
     {
-      update: (cache) => {
-        cache.evict({ id: cache.identify(viewer) })
-        cache.gc()
+      onCompleted: () => {
+        // If the user is on a protected route, redirect to the homepage
+        const protectedRoute = PROTECTED_ROUTES.find(
+          (route) => route.pathname === router.pathname
+        )
+        if (protectedRoute) {
+          router.push('/')
+        }
+
+        client?.resetStore()
       },
     },
     { showToast: false }
