@@ -1,13 +1,18 @@
+import React from 'react'
+
 import ArticleDigestFeedPlaceholder from '~/components/ArticleDigest/Feed/Placeholder'
 
 import styles from './styles.module.css'
 
-type PlaceholderProps = {
+interface ArticleFeedPlaceholderProps {
   count?: number
   spacing?: boolean
 }
 
-export default function Placeholder({ count = 10, spacing }: PlaceholderProps) {
+export const ArticleFeedPlaceholder: React.FC<ArticleFeedPlaceholderProps> = ({
+  count = 10,
+  spacing = false,
+}) => {
   const className = spacing ? styles.spacing16 : ''
   return (
     <div className={className}>

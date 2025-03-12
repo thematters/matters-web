@@ -5,6 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
+  ArticleFeedPlaceholder,
   CardExposureTracker,
   EmptyWork,
   InfiniteScroll,
@@ -32,7 +33,6 @@ import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
 import { ChannelHeader } from './ChannelHeader'
-import Placeholder from './Placeholder'
 
 type FeedArticlesPublic =
   | HottestFeedPublicQuery
@@ -198,7 +198,7 @@ const MainFeed = ({}: MainFeedProps) => {
     }
     return (
       <>
-        <Placeholder />
+        <ArticleFeedPlaceholder />
       </>
     )
   }
@@ -260,7 +260,7 @@ const MainFeed = ({}: MainFeedProps) => {
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
-        loader={<Placeholder count={3} />}
+        loader={<ArticleFeedPlaceholder count={3} />}
         eof
       >
         <List>

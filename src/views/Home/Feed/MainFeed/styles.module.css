@@ -20,9 +20,3 @@
   line-height: 1.375rem;
   color: var(--color-grey-dark);
 }
-
-.spacing16 {
-  @media (--sm-down) {
-    padding: 0 var(--sp16);
-  }
-}

@@ -1,0 +1,5 @@
+.spacing16 {
+  @media (--sm-down) {
+    padding: 0 var(--sp16);
+  }
+}
