@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import DropdownActions from '../DropdownActions'
+import { fragments as dropdownFragments } from '../DropdownActions/gql'
 
 export const fragments = {
   collection: gql`
@@ -20,6 +20,6 @@ export const fragments = {
       }
       ...DropdownActionsCollection
     }
-    ${DropdownActions.fragments.collection}
+    ${dropdownFragments.collection}
   `,
 }
