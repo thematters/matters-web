@@ -1,22 +1,22 @@
-.channel {
+.headers {
+  @mixin flex-center-space-between;
+
   position: sticky;
   top: var(--sm-top-nav-height);
   z-index: 1;
   padding-top: var(--sp20);
+  padding-right: var(--sp16);
+  margin-right: calc(var(--sp16) * -1);
   background-color: var(--color-white);
 
   @media (--sm-up) {
     top: var(--lg-top-nav-height);
   }
 
-  & h1 {
+  & .title {
     font-size: var(--text18);
+    font-weight: var(--font-medium);
     line-height: 1.75rem;
+    color: var(--color-black);
   }
-}
-
-.description {
-  font-size: var(--text14);
-  line-height: 1.375rem;
-  color: var(--color-grey-dark);
 }

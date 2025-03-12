@@ -1,12 +1,18 @@
 .content {
   max-height: calc(100vh - var(--lg-top-nav-height));
+  overflow-x: hidden;
   overflow-y: auto;
 
   &::-webkit-scrollbar {
+    /* display: none; */
     width: 3px;
   }
 
   &:hover {
+    /* &::-webkit-scrollbar {
+      display: block;
+    } */
+
     &::-webkit-scrollbar-track {
       border: solid 1px transparent;
       box-shadow: inset 0 0 1px 1px transparent;
@@ -27,6 +33,7 @@
     /* flex-grow: 1; */
     gap: var(--sp12);
     align-items: flex-start;
+    min-width: 4.75rem;
     padding-top: var(--sp20);
     padding-bottom: var(--sp32);
 
@@ -37,12 +44,24 @@
     & .item {
       @mixin transition;
 
-      padding: var(--sp4) var(--sp10);
+      padding: var(--sp4) 0;
       font-size: var(--text14);
       line-height: 1.375rem;
       color: var(--color-grey-darker);
       border-radius: 0.5rem;
-      transition-property: color, background-color;
+      transition-property: color, background-color, background;
+
+      @media (--sm-up) {
+        padding: var(--sp4) var(--sp10);
+      }
+
+      &:hover {
+        color: var(--color-black);
+
+        @media (--sm-up) {
+          background-color: var(--color-grey-lighter);
+        }
+      }
 
       &.lineClampable {
         @mixin line-clamp;
@@ -52,8 +71,37 @@
 
       &.selectedChannel {
         font-weight: var(--font-semibold);
-        color: var(--color-white);
-        background-color: var(--color-black);
+        color: var(--color-black);
+      }
+
+      &.temporaryChannel {
+        & span {
+          display: inline-block;
+          background: var(--color-new-palette-linear-ocean);
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          transition: background 0.2s ease-in-out;
+        }
+
+        &:hover {
+          @media (--sm-up) {
+            background-color: var(--color-new-palette-info-0) !important;
+          }
+
+          & span {
+            background: var(--color-new-palette-linear-ocean-deep);
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+        }
+      }
+
+      &.selectedTemporaryChannel {
+        & span {
+          background: var(--color-new-palette-linear-ocean-deep);
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
       }
     }
   }

@@ -42,7 +42,9 @@ export const FEED_ARTICLES_PUBLIC = {
       viewer @connection(key: "viewerFeedNewest") {
         id
         recommendation {
-          feed: newest(input: { first: 20, after: $after }) {
+          feed: newest(
+            input: { first: 20, after: $after, excludeChannelArticles: true }
+          ) {
             ...FeedArticleConnection
           }
         }

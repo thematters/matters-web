@@ -338,11 +338,17 @@
     "defaultMessage": "Sign In",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3WUBfC": {
+    "defaultMessage": "Only articles"
+  },
   "3YAasP": {
     "defaultMessage": "What is Liker ID?"
   },
   "3kbIhS": {
     "defaultMessage": "Untitled"
+  },
+  "3n9nqJ": {
+    "defaultMessage": "The event starts on {date}, and details can be found in the announcement."
   },
   "3phEFL": {
     "defaultMessage": "Continued use indicates your agreement to",
@@ -764,10 +770,6 @@
   "AYTnjk": {
     "defaultMessage": "Followers",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
-  },
-  "AeIRlL": {
-    "defaultMessage": "Articles",
-    "description": "src/views/Follow/Tabs/index.tsx"
   },
   "AeVndq": {
     "defaultMessage": "mentioned you in a comment at {commentMoment}"
@@ -2273,6 +2275,9 @@
   "cHDJyK": {
     "defaultMessage": "No articles"
   },
+  "cPIKU2": {
+    "defaultMessage": "Following"
+  },
   "cPSexq": {
     "defaultMessage": "Let's go check out the other circles."
   },
@@ -2384,6 +2389,10 @@
   },
   "eTpiYa": {
     "defaultMessage": "No data yet."
+  },
+  "eVq7Ji": {
+    "defaultMessage": "FreeWrite",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "eWXgsZ": {
     "defaultMessage": "Clear Content"
@@ -2501,6 +2510,10 @@
   },
   "gluNT8": {
     "defaultMessage": "Enter URL"
+  },
+  "gykfC8": {
+    "defaultMessage": "Latest",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "gzJEFb": {
     "defaultMessage": "Verify your Liker ID through like.co"
@@ -2710,9 +2723,6 @@
   "l0/EvT": {
     "defaultMessage": "Last step: Set Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "l0tvVM": {
-    "defaultMessage": "Apply now. The writing journey will begin in a few days. For event details, please check the Event Information."
   },
   "l2eEyp": {
     "defaultMessage": "Transaction Password successfully changed."

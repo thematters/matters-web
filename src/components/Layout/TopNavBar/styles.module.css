@@ -29,8 +29,8 @@
       align-items: center;
 
       & a {
-        padding: var(--sp16);
-        margin: calc(-1 * var(--sp16));
+        padding: var(--sp12);
+        margin: calc(-1 * var(--sp12));
       }
 
       & svg {

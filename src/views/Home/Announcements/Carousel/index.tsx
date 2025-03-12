@@ -135,7 +135,25 @@ const Carousel = ({ items }: CarouselProps) => {
 
             // const hasTranslaton = translatedItem != null
             const title = translatedItem?.title || item.title || ''
-            const itemLink = translatedItem?.link || item.link || ''
+
+            const originalLink = translatedItem?.link || item.link || ''
+            let itemLink = originalLink
+
+            if (
+              typeof window !== 'undefined' &&
+              originalLink &&
+              process.env.NEXT_PUBLIC_RUNTIME_ENV !== 'local' &&
+              originalLink.startsWith('http')
+            ) {
+              try {
+                const url = new URL(originalLink)
+                url.hostname = window.location.hostname
+                itemLink = url.toString()
+              } catch (e) {
+                console.warn(`Unable to parse URL: ${originalLink}`)
+              }
+            }
+
             const itemContent = translatedItem?.content || item.content || ''
             const isFirstFold = i === 0
 

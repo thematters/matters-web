@@ -338,11 +338,17 @@
     "defaultMessage": "登录",
     "description": "src/components/Forms/SelectAuthMethodForm/AuthTabs.tsx"
   },
+  "3WUBfC": {
+    "defaultMessage": "只看文章"
+  },
   "3YAasP": {
     "defaultMessage": "什么是 Liker ID？"
   },
   "3kbIhS": {
     "defaultMessage": "未命名"
+  },
+  "3n9nqJ": {
+    "defaultMessage": "活动于 {date}开始，细则可查看公告。"
   },
   "3phEFL": {
     "defaultMessage": "继续使用表示您同意",
@@ -764,10 +770,6 @@
   "AYTnjk": {
     "defaultMessage": "关注",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
-  },
-  "AeIRlL": {
-    "defaultMessage": "只看文章",
-    "description": "src/views/Follow/Tabs/index.tsx"
   },
   "AeVndq": {
     "defaultMessage": "在动态留言中提及了你 {commentMoment}"
@@ -2273,6 +2275,9 @@
   "cHDJyK": {
     "defaultMessage": "尚无作品"
   },
+  "cPIKU2": {
+    "defaultMessage": "追踪"
+  },
   "cPSexq": {
     "defaultMessage": "去看看其他围炉吧，希望你早日找到下一个心之所属。"
   },
@@ -2384,6 +2389,10 @@
   },
   "eTpiYa": {
     "defaultMessage": "尚无支持数据"
+  },
+  "eVq7Ji": {
+    "defaultMessage": "自由写",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "eWXgsZ": {
     "defaultMessage": "清空内容"
@@ -2501,6 +2510,10 @@
   },
   "gluNT8": {
     "defaultMessage": "输入链接地址"
+  },
+  "gykfC8": {
+    "defaultMessage": "新发布",
+    "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "gzJEFb": {
     "defaultMessage": "跳转到 like.co 验证已有 Liker ID"
@@ -2710,9 +2723,6 @@
   "l0/EvT": {
     "defaultMessage": "最后一步：设置 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
-  },
-  "l0tvVM": {
-    "defaultMessage": "现在报名，写作之旅将于数天后开始，活动细则可查看公告。"
   },
   "l2eEyp": {
     "defaultMessage": "交易密码重置成功"

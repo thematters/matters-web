@@ -4,8 +4,12 @@
 
   &::after {
     display: block;
-    padding-bottom: 100%;
+    padding-bottom: 50%;
     content: '';
+
+    @media (--xs-up) {
+      padding-bottom: 100%;
+    }
   }
 
   & img {

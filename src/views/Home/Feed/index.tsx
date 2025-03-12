@@ -6,10 +6,12 @@ import MainFeed from './MainFeed'
 import { HomeFeedType } from './SortBy'
 
 const HomeFeed = () => {
-  const { getQuery } = useRoute()
+  const { getQuery, isInPath } = useRoute()
   const qsType = getQuery('type') as HomeFeedType
 
   const [feedType] = useState<HomeFeedType>(qsType || 'icymi')
+
+  const isInChannel = isInPath('CHANNEL')
 
   // const changeFeed = (newType: HomeFeedType) => {
   //   setQuery('type', newType === 'hottest' ? '' : newType)
@@ -21,7 +23,7 @@ const HomeFeed = () => {
       {/* <SortBy feedType={feedType} setFeedType={changeFeed} /> */}
 
       <Layout.Main>
-        <Spacer size="sp20" />
+        {!isInChannel && <Spacer size="sp20" />}
         <MainFeed feedSortType={feedType} />
       </Layout.Main>
     </>

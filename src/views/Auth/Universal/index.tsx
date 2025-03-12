@@ -8,7 +8,6 @@ import {
   EmailLoginForm,
   EmailSignUpForm,
   Head,
-  LanguageSwitch,
   SelectAuthMethodForm,
   useRoute,
   useStep,
@@ -97,9 +96,6 @@ const UniversalAuth = () => {
                 setAuthFeedType={setAuthFeedType}
                 checkWallet={firstRender}
               />
-              <section className={styles.footer}>
-                <LanguageSwitch />
-              </section>
             </>
           )}
 

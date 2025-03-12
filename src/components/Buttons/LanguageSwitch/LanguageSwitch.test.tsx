@@ -13,7 +13,8 @@ const LANG_TEXT_MAP_REVERSE = Object.fromEntries(
 describe('<LanguageSwitch>', () => {
   it('should render the language switch menu', () => {
     render(<LanguageSwitch />)
-    const $langBtn = screen.getByRole('button')
+    const $langBtns = screen.getAllByRole('button')
+    const $langBtn = $langBtns[0]
     expect($langBtn).toBeDefined()
     const lang = LANG_TEXT_MAP_REVERSE[$langBtn.textContent!]
 
@@ -32,7 +33,8 @@ describe('<LanguageSwitch>', () => {
     fireEvent.click($targetLangBtn)
 
     // get current language
-    const $newLangBtn = screen.getByRole('button')
+    const $newLangBtns = screen.getAllByRole('button')
+    const $newLangBtn = $newLangBtns[0]
     expect($newLangBtn.textContent).toBe(targetLangText)
   })
 })

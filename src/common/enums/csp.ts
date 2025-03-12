@@ -140,10 +140,9 @@ const CONNECT_SRC = [
   '*.alchemy.com',
 
   // IPFS Gateways
-  'gw3.io/ipfs/',
   'cloudflare-ipfs.com/ipfs/',
   'ipfs.io/ipfs/',
-  '4everland.io/ipfs/',
+  'ipfs-gateway.matters.town/ipfs/',
 ]
 
 const FRAME_SRC = [

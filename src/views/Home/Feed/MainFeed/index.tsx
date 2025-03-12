@@ -5,9 +5,11 @@ import { FormattedMessage } from 'react-intl'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,
+  ArticleFeedPlaceholder,
   CardExposureTracker,
   EmptyWork,
   InfiniteScroll,
+  LanguageContext,
   List,
   Media,
   QueryError,
@@ -15,7 +17,9 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
+import { CHANNEL_BY_SHORT_HASH } from '~/components/GQL/queries/channels'
 import {
+  ChannelByShortHashQuery,
   HottestFeedPublicQuery,
   IcymiFeedPublicQuery,
   NewestFeedPublicQuery,
@@ -28,7 +32,8 @@ import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
-import Placeholder from './Placeholder'
+import { ChannelHeader } from './ChannelHeader'
+
 type FeedArticlesPublic =
   | HottestFeedPublicQuery
   | NewestFeedPublicQuery
@@ -87,6 +92,7 @@ const horizontalFeeds: FeedLocation = {
 
 const MainFeed = ({}: MainFeedProps) => {
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
   const { getQuery, isInPath } = useRoute()
   const type = getQuery('type')
   const isInHome = isInPath('HOME')
@@ -118,6 +124,12 @@ const MainFeed = ({}: MainFeedProps) => {
   const result = recommendation?.feed
   const { edges, pageInfo } = result || {}
   const isNewLoading = networkStatus === NetworkStatus.loading
+
+  const { data: channelData, loading: channelLoading } =
+    usePublicQuery<ChannelByShortHashQuery>(CHANNEL_BY_SHORT_HASH, {
+      variables: { shortHash, userLanguage: lang },
+      skip: !shortHash || !isInChannel,
+    })
 
   // private data
   const loadPrivate = (publicData?: FeedArticlesPublic) => {
@@ -179,14 +191,14 @@ const MainFeed = ({}: MainFeedProps) => {
   /**
    * Render
    */
-  if (loading && (!result || isNewLoading)) {
+  if ((loading && (!edges || isNewLoading)) || channelLoading) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()
     }
     return (
       <>
-        <Placeholder />
+        <ArticleFeedPlaceholder />
       </>
     )
   }
@@ -197,11 +209,16 @@ const MainFeed = ({}: MainFeedProps) => {
 
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
-      <EmptyWork
-        description={
-          <FormattedMessage defaultMessage="No articles" id="cHDJyK" />
-        }
-      />
+      <>
+        {isInChannel && channelData && (
+          <ChannelHeader channel={channelData.channel} />
+        )}
+        <EmptyWork
+          description={
+            <FormattedMessage defaultMessage="No articles" id="cHDJyK" />
+          }
+        />
+      </>
     )
   }
 
@@ -236,9 +253,14 @@ const MainFeed = ({}: MainFeedProps) => {
           <IcymiCuratedFeed recommendation={recommendation} />
         )}
 
+      {isInChannel && channelData && (
+        <ChannelHeader channel={channelData.channel} />
+      )}
+
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
+        loader={<ArticleFeedPlaceholder count={3} />}
         eof
       >
         <List>
@@ -253,8 +275,8 @@ const MainFeed = ({}: MainFeedProps) => {
               <List.Item key={`${sortBy}:${edge.node.id}`}>
                 <ArticleDigestFeed
                   article={edge.node}
-                  hasReadTime={true}
-                  hasDonationCount={true}
+                  hasReadTime={false}
+                  hasDonationCount={false}
                   includesMetaData={!isIcymiFeed} // only include metadata for non-icymi feeds
                   excludesTimeStamp={isIcymiFeed} // only exclude timestamp for icymi feed
                   onClick={() =>

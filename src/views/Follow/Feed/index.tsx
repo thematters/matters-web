@@ -6,12 +6,12 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics, mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
+  ArticleFeedPlaceholder,
   EmptyWork,
   Head,
   InfiniteScroll,
   List,
   QueryError,
-  SpinnerBlock,
 } from '~/components'
 import {
   FollowingFeedQuery,
@@ -55,7 +55,7 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
   )
 
   if (loading) {
-    return <SpinnerBlock />
+    return <ArticleFeedPlaceholder />
   }
 
   if (error) {
@@ -109,6 +109,7 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
+        loader={<ArticleFeedPlaceholder count={3} />}
         eof
       >
         <List>

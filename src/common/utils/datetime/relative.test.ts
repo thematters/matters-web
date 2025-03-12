@@ -35,6 +35,38 @@ describe('utils/datetime/relative', () => {
     )
   })
 
+  it('should format a date less than 24 hours ago but on previous day correctly', () => {
+    expect(toRelativeDate(new Date(2023, 6, 0, 20, 30, 0), 'en')).toBe(
+      '12 hours ago'
+    )
+    expect(toRelativeDate(new Date(2023, 6, 0, 10, 30, 0), 'en')).toBe(
+      '22 hours ago'
+    )
+  })
+
+  it('should format a date after midnight correctly', () => {
+    vi.setSystemTime(new Date(2023, 6, 1, 0, 10, 0))
+    expect(toRelativeDate(new Date(2023, 5, 30, 23, 50, 0), 'en')).toBe(
+      '20 minutes ago'
+    )
+    expect(toRelativeDate(new Date(2023, 5, 30, 23, 15, 0), 'en')).toBe(
+      '55 minutes ago'
+    )
+  })
+
+  it('should format a date exactly 24 hours ago correctly', () => {
+    const date = new Date(2023, 5, 30, 8, 30, 0)
+    const result = toRelativeDate(date, 'en')
+    expect(result).toBe('Jun 30')
+  })
+
+  it('should handle different languages correctly', () => {
+    const date = new Date(2023, 6, 1, 7, 30, 0)
+    expect(toRelativeDate(date, 'en')).toBe('1 hour ago')
+    expect(toRelativeDate(date, 'zh_hant')).toBe('1 小時前')
+    expect(toRelativeDate(date, 'zh_hans')).toBe('1 小时前')
+  })
+
   it('should format a date within this year but not this week correctly', () => {
     const date = new Date('2021-01-01')
     const result = toRelativeDate(date, 'en')
