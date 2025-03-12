@@ -2,7 +2,7 @@ import { useContext } from 'react'
 
 import { Protected, useRoute, ViewerContext } from '~/components'
 import Follow from '~/views/Follow'
-import _Home from '~/views/Home'
+import HomeView from '~/views/Home'
 
 const Home = () => {
   const viewer = useContext(ViewerContext)
@@ -18,7 +18,7 @@ const Home = () => {
     )
   }
 
-  return <_Home />
+  return <HomeView />
 }
 
 export default Home
