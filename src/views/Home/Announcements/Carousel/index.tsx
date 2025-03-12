@@ -142,15 +142,12 @@ const Carousel = ({ items }: CarouselProps) => {
             if (
               typeof window !== 'undefined' &&
               originalLink &&
+              process.env.NEXT_PUBLIC_RUNTIME_ENV !== 'local' &&
               originalLink.startsWith('http')
             ) {
               try {
                 const url = new URL(originalLink)
                 url.hostname = window.location.hostname
-                if (url.hostname === 'localhost') {
-                  url.protocol = 'http'
-                  url.port = '3000'
-                }
                 itemLink = url.toString()
               } catch (e) {
                 console.warn(`Unable to parse URL: ${originalLink}`)
