@@ -191,7 +191,7 @@ const MainFeed = ({}: MainFeedProps) => {
   /**
    * Render
    */
-  if (loading || isNewLoading || channelLoading) {
+  if ((loading && (!edges || isNewLoading)) || channelLoading) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()
@@ -260,6 +260,7 @@ const MainFeed = ({}: MainFeedProps) => {
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
+        loader={<Placeholder count={3} />}
         eof
       >
         <List>

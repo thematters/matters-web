@@ -3,23 +3,17 @@ import ArticleDigestFeedPlaceholder from '~/components/ArticleDigest/Feed/Placeh
 import styles from './styles.module.css'
 
 type PlaceholderProps = {
+  count?: number
   spacing?: boolean
 }
 
-export default function Placeholder({ spacing }: PlaceholderProps) {
+export default function Placeholder({ count = 10, spacing }: PlaceholderProps) {
   const className = spacing ? styles.spacing16 : ''
   return (
     <div className={className}>
-      <ArticleDigestFeedPlaceholder />
-      <ArticleDigestFeedPlaceholder />
-      <ArticleDigestFeedPlaceholder />
-      <ArticleDigestFeedPlaceholder />
-      <ArticleDigestFeedPlaceholder />
-      <ArticleDigestFeedPlaceholder />
-      <ArticleDigestFeedPlaceholder />
-      <ArticleDigestFeedPlaceholder />
-      <ArticleDigestFeedPlaceholder />
-      <ArticleDigestFeedPlaceholder />
+      {Array.from({ length: count }).map((_, index) => (
+        <ArticleDigestFeedPlaceholder key={index} />
+      ))}
     </div>
   )
 }
