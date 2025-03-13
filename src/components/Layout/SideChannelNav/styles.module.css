@@ -1,7 +1,13 @@
 .content {
-  max-height: calc(100vh - var(--lg-top-nav-height));
+  max-height: calc(100vh - var(--sm-top-nav-height));
   overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+
+  @media (--md-up) {
+    max-height: calc(100vh - var(--lg-top-nav-height));
+  }
 
   &::-webkit-scrollbar {
     /* display: none; */
