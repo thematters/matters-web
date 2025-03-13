@@ -80,8 +80,8 @@ export const ArticleDigestCurated = ({
           <Media lessThan="sm">
             <ResponsiveImage
               url={cover || IMAGE_DEFAULT_CURATED}
-              width={247}
-              height={120}
+              width={334}
+              height={167}
             />
           </Media>
           <Media greaterThanOrEqual="sm">
