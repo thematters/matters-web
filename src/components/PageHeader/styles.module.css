@@ -1,6 +1,4 @@
 .header {
-  padding-bottom: var(--sp8);
-
   &.hasBorder {
     @mixin border-bottom-grey;
   }
@@ -10,4 +8,12 @@
   @mixin flex-center-space-between;
 
   flex-wrap: wrap;
+}
+
+.spacingBottom8 {
+  padding-bottom: var(--sp8);
+}
+
+.spacingBottom16 {
+  padding-bottom: var(--sp16);
 }
