@@ -9,6 +9,7 @@
 
   & h1 {
     font-size: var(--text18);
+    font-weight: var(--font-medium);
     line-height: 1.75rem;
   }
 }
