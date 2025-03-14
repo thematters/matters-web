@@ -263,6 +263,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                   id: node.author.id,
                 })
               }}
+              hasCircle={false}
               hasToggleCampaignFeatured
               campaignId={camapign.id}
               campaignFeatured={isFeatured}

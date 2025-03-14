@@ -1,9 +1,9 @@
 .recommendedAuthors {
-  padding-bottom: var(--sp20);
-  margin-top: var(--sp8);
+  padding: var(--sp20) 0 var(--sp8);
   border-bottom: 1px dashed var(--color-grey-light);
 
-  @media (--sm-up) {
+  @media (--md-up) {
+    padding-top: 0;
     padding-bottom: var(--sp24);
     margin-top: var(--sp24);
   }
@@ -16,13 +16,13 @@
 }
 
 .header {
-  margin-bottom: var(--sp6);
+  margin-bottom: var(--sp4);
   font-size: var(--text14);
   font-weight: var(--font-medium);
   line-height: 1.375rem;
   color: var(--color-black);
 
-  @media (--sm-up) {
+  @media (--md-up) {
     margin-bottom: var(--sp20);
   }
 }

@@ -1,5 +1,5 @@
 .slides {
-  padding: var(--sp24) 0 var(--sp8);
+  /* padding: var(--sp20) 0 var(--sp4); */
 
   & ul {
     @mixin hide-scrollbar;

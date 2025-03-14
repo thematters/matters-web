@@ -1,8 +1,8 @@
 .tags {
   @mixin border-bottom-grey;
 
-  padding-top: var(--sp24);
-  padding-bottom: var(--sp24);
+  padding-top: var(--sp20);
+  padding-bottom: var(--sp20);
   border-bottom-style: dashed;
 
   & > header {

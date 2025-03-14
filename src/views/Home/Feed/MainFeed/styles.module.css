@@ -1,6 +1,4 @@
 .channel {
-  position: sticky;
-  top: var(--sm-top-nav-height);
   z-index: 1;
   padding-top: var(--sp20);
   background-color: var(--color-white);
@@ -11,6 +9,7 @@
 
   & h1 {
     font-size: var(--text18);
+    font-weight: var(--font-medium);
     line-height: 1.75rem;
   }
 }

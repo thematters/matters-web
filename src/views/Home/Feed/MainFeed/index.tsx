@@ -276,6 +276,7 @@ const MainFeed = ({}: MainFeedProps) => {
                 <ArticleDigestFeed
                   article={edge.node}
                   hasReadTime={false}
+                  hasCircle={false}
                   hasDonationCount={false}
                   includesMetaData={!isIcymiFeed} // only include metadata for non-icymi feeds
                   excludesTimeStamp={isIcymiFeed} // only exclude timestamp for icymi feed
