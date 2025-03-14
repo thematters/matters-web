@@ -1,11 +1,8 @@
 .authors {
   @mixin border-bottom-grey;
 
+  padding: var(--sp20) 0 var(--sp4);
   border-bottom-style: dashed;
-
-  @media (--sm-up) {
-    padding-bottom: var(--sp8);
-  }
 
   & :global(.list-item > .card) {
     margin: 0 calc(var(--sp8) * -1);
