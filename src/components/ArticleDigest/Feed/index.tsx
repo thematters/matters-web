@@ -114,7 +114,7 @@ const BaseArticleDigestFeed = ({
               )}
               {!excludesTimeStamp && (
                 <LinkWrapper {...path}>
-                  <DateTime date={article.createdAt} color="grey" />
+                  <DateTime date={article.createdAt} color="grey" minimal />
                 </LinkWrapper>
               )}
             </header>

@@ -84,7 +84,7 @@ export const MomentDigestFeed = ({
           )}
           <section>
             <LinkWrapper {...momentDetailPath} onClick={handleClickDateTime}>
-              <DateTime date={createdAt} color="grey" />
+              <DateTime date={createdAt} color="grey" minimal />
             </LinkWrapper>
           </section>
         </header>
