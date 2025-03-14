@@ -10,9 +10,8 @@
   }
 
   & h1 {
-    padding-bottom: var(--sp8);
     font-size: var(--text18);
-    line-height: 1.25rem;
+    line-height: 1.75rem;
   }
 }
 
