@@ -42,7 +42,7 @@ export const TopNavBar = () => {
       <section className={styles.left}>
         <div className={styles.logo}>
           <Button
-            href={PATHS.HOME}
+            href={`${PATHS.HOME}?type=icymi`}
             aria-label={intl.formatMessage({
               defaultMessage: 'Discover',
               id: 'cE4Hfw',
