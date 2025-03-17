@@ -38,7 +38,7 @@ const Participants = ({
   const isViewerApplySucceeded = campaign.application?.state === 'succeeded'
   const edges = campaign.participants.edges?.slice(
     0,
-    isViewerApplySucceeded ? 7 : 8
+    isViewerApplySucceeded ? 4 : 5
   )
 
   return (
