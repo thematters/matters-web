@@ -4,8 +4,8 @@
   z-index: 1;
   padding-top: var(--sp20);
   padding-right: var(--sp16);
+  padding-bottom: var(--sp8);
   margin-right: calc(var(--sp16) * -1);
-  margin-bottom: var(--sp8);
   background-color: var(--color-white);
 
   @media (--sm-up) {
