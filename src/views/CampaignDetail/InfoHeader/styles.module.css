@@ -13,7 +13,7 @@
 .cover {
   position: relative;
   overflow: hidden;
-  border-radius: 1.25rem;
+  border-radius: 0.5rem;
 
   & img {
     @mixin object-fit-cover;
@@ -34,9 +34,14 @@
   margin-top: var(--sp24);
 
   & .name {
-    font-size: var(--text24);
+    font-size: var(--text18);
     font-weight: var(--font-medium);
-    line-height: 2.25rem;
+    line-height: 1.75rem;
+
+    @media (--md-up) {
+      font-size: var(--text24);
+      line-height: 2.25rem;
+    }
   }
 
   & .apply {

@@ -28,10 +28,10 @@
       display: flex;
       align-items: center;
 
-      & a {
+      /* & a {
         padding: var(--sp12);
         margin: calc(-1 * var(--sp12));
-      }
+      } */
 
       & svg {
         width: 98px;

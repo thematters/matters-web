@@ -191,7 +191,7 @@ const MainFeed = ({}: MainFeedProps) => {
   /**
    * Render
    */
-  if ((loading && (!edges || isNewLoading)) || channelLoading) {
+  if (loading || channelLoading) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()
