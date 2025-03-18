@@ -110,7 +110,8 @@ const MainFeed = ({}: MainFeedProps) => {
   const query = FEED_ARTICLES_PUBLIC[sortBy]
   const { data, error, loading, fetchMore, networkStatus, client } =
     usePublicQuery<FeedArticlesPublic>(query, {
-      notifyOnNetworkStatusChange: true,
+      // TODO: remove this once the issue is fixed
+      // notifyOnNetworkStatusChange: true,
       variables: isInChannel
         ? {
             shortHash,
@@ -159,7 +160,7 @@ const MainFeed = ({}: MainFeedProps) => {
 
     loadPrivate(data)
     fetchedPrviateSortsRef.current = [...fetchedPrviateSortsRef.current, key]
-  }, [!!edges, loading, sortBy, viewer.id, shortHash])
+  }, [!!edges, loading, sortBy, viewer.id, shortHash, type])
 
   // load next page
   const loadMore = async () => {
