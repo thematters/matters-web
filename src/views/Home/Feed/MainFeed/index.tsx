@@ -1,9 +1,10 @@
 import { NetworkStatus } from 'apollo-client'
-import { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
+  ArticleDigestCurated,
   ArticleDigestFeed,
   ArticleFeedPlaceholder,
   CardExposureTracker,
@@ -33,6 +34,7 @@ import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
 import { ChannelHeader } from './ChannelHeader'
+import styles from './styles.module.css'
 
 type FeedArticlesPublic =
   | HottestFeedPublicQuery
@@ -245,6 +247,8 @@ const MainFeed = ({}: MainFeedProps) => {
     })
   }
 
+  const numOfCards = isInChannel ? 3 : 0
+
   return (
     <>
       {isIcymiFeed && <Announcements />}
@@ -258,6 +262,33 @@ const MainFeed = ({}: MainFeedProps) => {
         <ChannelHeader channel={channelData.channel} />
       )}
 
+      {isInChannel && (
+        <section className={styles.cards}>
+          {mixFeed.slice(0, numOfCards).map((edge, i) => {
+            if (edge.__typename === 'HorizontalFeed' || !('node' in edge)) {
+              return null
+            }
+
+            return (
+              <React.Fragment key={edge.node.id}>
+                <Media at="xs">
+                  <ArticleDigestCurated
+                    article={edge.node}
+                    titleLineClamp={3}
+                  />
+                </Media>
+                <Media greaterThan="xs">
+                  <ArticleDigestCurated
+                    article={edge.node}
+                    titleLineClamp={2}
+                  />
+                </Media>
+              </React.Fragment>
+            )
+          })}
+        </section>
+      )}
+
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
@@ -265,7 +296,7 @@ const MainFeed = ({}: MainFeedProps) => {
         eof
       >
         <List>
-          {mixFeed.map((edge, i) => {
+          {mixFeed.slice(numOfCards).map((edge, i) => {
             if (edge?.__typename === 'HorizontalFeed') {
               const { Feed } = edge
               return <Feed key={edge.__typename + i} />
