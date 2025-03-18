@@ -53,7 +53,7 @@ const LikeCoinDialogContent: React.FC<Props> = ({
         />
       )}
 
-      {currStep === 'complete' && <Complete />}
+      {currStep === 'complete' && <Complete closeDialog={closeDialog} />}
     </>
   )
 }

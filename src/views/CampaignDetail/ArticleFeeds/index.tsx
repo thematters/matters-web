@@ -45,8 +45,8 @@ const ArticleFeeds = ({
       lang === 'zh_hans'
         ? 'featuredDescriptionZhHans'
         : lang === 'zh_hant'
-        ? 'featuredDescriptionZhHant'
-        : 'featuredDescriptionEn'
+          ? 'featuredDescriptionZhHant'
+          : 'featuredDescriptionEn'
     ]
 
   const stageDescription =
@@ -55,8 +55,8 @@ const ArticleFeeds = ({
       lang === 'zh_hans'
         ? 'descriptionZhHans'
         : lang === 'zh_hant'
-        ? 'descriptionZhHant'
-        : 'descriptionEn'
+          ? 'descriptionZhHant'
+          : 'descriptionEn'
     ]
   const description = isFeaturedFeed ? featuredDescription : stageDescription
 

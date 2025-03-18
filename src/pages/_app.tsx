@@ -20,31 +20,47 @@ import '~/common/styles/components/ngprogress.css'
 import '~/common/styles/components/stripe.css'
 import '~/common/styles/components/subscriberAnalytics.css'
 
-import { ApolloProvider } from '@apollo/react-hooks'
-import { getDataFromTree } from '@apollo/react-ssr'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
+import {
+  ApolloClient,
+  ApolloProvider,
+  NormalizedCacheObject,
+} from '@apollo/client'
+import type { IncomingHttpHeaders } from 'http'
 import { NextPageContext } from 'next'
-import { AppProps } from 'next/app'
+import { AppContext, AppInitialProps, AppProps } from 'next/app'
 
-import withApollo from '~/common/utils/withApollo'
+import { getApollo } from '~/common/utils/apollo'
 import { ErrorBoundary } from '~/components'
 import { ClientUpdater } from '~/components/ClientUpdater'
 import Root from '~/components/Root'
 
-const InnerApp = ({
+type AppOwnProps = {
+  apolloClient?: ApolloClient<NormalizedCacheObject>
+  apolloState?: {}
+  headers?: IncomingHttpHeaders
+}
+
+export interface MattersPageContext extends NextPageContext {
+  apolloClient: ApolloClient<NormalizedCacheObject>
+}
+
+export interface MattersAppContext extends AppContext {
+  ctx: MattersPageContext
+}
+
+function MattersApp({
   Component,
   pageProps,
-  apollo,
+  apolloClient,
+  apolloState,
   headers,
-}: AppProps & {
-  apollo: ApolloClient<InMemoryCache>
-  headers?: any
-}) => {
+}: AppOwnProps & AppProps) {
+  const apollo = apolloClient ?? getApollo(apolloState, headers)
+
   return (
     <ErrorBoundary>
       <ApolloProvider client={apollo}>
-        <Root client={apollo} headers={headers}>
+        <Root headers={headers}>
           <Component {...pageProps} />
           <ClientUpdater />
         </Root>
@@ -53,16 +69,51 @@ const InnerApp = ({
   )
 }
 
-InnerApp.getInitialProps = async ({ ctx }: { ctx: NextPageContext }) => {
-  if (!ctx) {
-    return { headers: {} }
+MattersApp.getInitialProps = async (
+  context: MattersAppContext
+): Promise<AppOwnProps & AppInitialProps> => {
+  const { AppTree, Component, ctx } = context
+  const headers = ctx.req?.headers || {}
+
+  const apolloClient = (ctx.apolloClient = getApollo({}, headers))
+
+  let pageProps = {}
+  if (Component.getInitialProps) {
+    pageProps = await Component.getInitialProps(ctx)
   }
+
+  if (typeof window === 'undefined') {
+    if (ctx.res && ctx.res.writableEnded) {
+      return { pageProps }
+    }
+
+    const { getDataFromTree } = await import('@apollo/client/react/ssr')
+
+    try {
+      await getDataFromTree(
+        <AppTree
+          Component={Component}
+          pageProps={pageProps}
+          apolloClient={apolloClient}
+        />,
+        apolloClient.cache.extract()
+      )
+    } catch (error) {
+      console.error('Error while runing `getDataFromTree`', error)
+    }
+  }
+
+  const apolloState = apolloClient.cache.extract()
+
+  // @ts-ignore
+  apolloClient.toJSON = () => null
 
   return {
-    headers: ctx?.req?.headers,
+    pageProps,
+    apolloClient,
+    apolloState,
+    headers,
   }
 }
-
-const MattersApp = withApollo(InnerApp as any, { getDataFromTree })
 
 export default MattersApp

@@ -21,9 +21,7 @@ interface BookmarkProps {
 const Bookmark = ({ tag }: BookmarkProps) => {
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
-  const {
-    ME_BOOKMARK_TAGS_FEED,
-  } = require('~/views/Me/Bookmarks/BookmarksTags')
+
   const [bookmark] = useMutation<ToggleBookmarkTagMutation>(
     TOGGLE_BOOKMARK_TAG,
     {
@@ -38,11 +36,13 @@ const Bookmark = ({ tag }: BookmarkProps) => {
               },
             }
           : undefined,
-      refetchQueries: [
-        {
-          query: ME_BOOKMARK_TAGS_FEED,
-        },
-      ],
+      update(cache) {
+        cache.evict({
+          id: cache.identify(viewer),
+          fieldName: 'bookmarkedTags',
+        })
+        cache.gc()
+      },
     }
   )
 
@@ -73,8 +73,8 @@ const Bookmark = ({ tag }: BookmarkProps) => {
       textActiveColor="black"
       aria-label={intl.formatMessage({
         defaultMessage: 'Bookmark',
-        id: 'kLEWkV',
-        description: 'src/components/Buttons/Bookmark/Subscribe.tsx',
+        id: 'QKJWqd',
+        description: 'src/components/Buttons/TagBookmark/Bookmark.tsx',
       })}
       onClick={onClick}
     >

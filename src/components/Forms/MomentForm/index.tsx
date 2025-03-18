@@ -29,9 +29,8 @@ import {
 } from '~/components'
 import MomentEditor from '~/components/Editor/Moment'
 import { MomentAsset, MomentAssetsUploader } from '~/components/FileUploader'
-import { updateUserWritings } from '~/components/GQL'
 import { PUT_MOMENT } from '~/components/GQL/mutations/putMoment'
-import { PutMomentMutation } from '~/gql/graphql'
+import { MomentState, PutMomentMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -166,7 +165,6 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
 
     try {
       setSubmitting(true)
-      const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
       const { data } = await putMoment({
         variables: {
           input: {
@@ -175,19 +173,44 @@ const MomentForm = ({ setFirstRendered }: MomentFormProps) => {
           },
         },
         update: (cache, mutationResult) => {
-          updateUserWritings({
-            cache,
-            type: 'addMoment',
-            userName: viewer.userName || '',
-            momentDigest: mutationResult.data?.putMoment,
+          // Add the new moment to the user's writings
+          cache.modify({
+            id: cache.identify(viewer),
+            fields: {
+              writings(existingWritingsRefs) {
+                return {
+                  ...existingWritingsRefs,
+                  edges: [
+                    {
+                      cursor: mutationResult.data?.putMoment.id,
+                      node: {
+                        ...mutationResult.data?.putMoment,
+                        momentState: MomentState.Active,
+                        liked: false,
+                        __typename: 'Moment',
+                      },
+                      __typename: 'WritingEdge',
+                    },
+                    ...existingWritingsRefs.edges,
+                  ],
+                }
+              },
+            },
+          })
+
+          // Increment the moment count in the viewer's status
+          cache.modify({
+            id: cache.identify(viewer),
+            fields: {
+              status(existing) {
+                return {
+                  ...existing,
+                  momentCount: existing.momentCount + 1,
+                }
+              },
+            },
           })
         },
-        refetchQueries: [
-          {
-            query: USER_PROFILE_PUBLIC,
-            variables: { userName: viewer.userName },
-          },
-        ],
       })
 
       const { putMoment: moment } = data || {}

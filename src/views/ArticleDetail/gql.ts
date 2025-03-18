@@ -35,7 +35,6 @@ const articlePublicFragment = gql`
       totalCount
     }
     access {
-      type
       circle {
         id
         ...CircleWallCirclePublic
@@ -113,26 +112,25 @@ export const ARTICLE_DETAIL_PUBLIC = gql`
 `
 
 export const ARTICLE_DETAIL_PRIVATE = gql`
-  query ArticleDetailPrivate($id: ID!) {
-    article: node(input: { id: $id }) {
-      ... on Article {
+  query ArticleDetailPrivate($shortHash: String!) {
+    article(input: { shortHash: $shortHash }) {
+      id
+      author {
         id
-        author {
-          id
-          ...UserDigestRichUserPrivate
-        }
-        access {
-          circle {
-            id
-            ...CircleWallCirclePrivate
-          }
-        }
-        contents {
-          html
-        }
-        ...ToolbarArticlePrivate
-        ...SupportWidgetArticlePrivate
+        ...UserDigestRichUserPrivate
       }
+      access {
+        type
+        circle {
+          id
+          ...CircleWallCirclePrivate
+        }
+      }
+      contents {
+        html
+      }
+      ...ToolbarArticlePrivate
+      ...SupportWidgetArticlePrivate
     }
   }
   ${UserDigest.Rich.fragments.user.private}

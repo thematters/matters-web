@@ -1,3 +1,4 @@
+import { ApolloCache } from '@apollo/client'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
@@ -16,13 +17,11 @@ import {
   ViewerContext,
 } from '~/components'
 import { CreateCollectionMutation } from '~/gql/graphql'
-import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
-import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
 
 type Collection = CreateCollectionMutation['putCollection']
 interface FormProps {
   closeDialog: () => void
-  onUpdate?: (cache: any, collection: Collection) => void
+  onUpdate?: (cache: ApolloCache<any>, collection: Collection) => void
   gotoDetailPage?: boolean
 }
 
@@ -88,26 +87,19 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
             },
           },
           update(cache, result) {
-            // FIXME: Why not update user profile tab collection count?
-            // updateUserProfile({
-            //   cache,
-            //   userName,
-            //   type: 'increaseCollection',
-            // })
+            cache.evict({
+              id: cache.identify(viewer),
+              fieldName: 'collections',
+            })
+            cache.gc()
+
             if (onUpdate) {
               onUpdate(cache, result.data?.putCollection || ({} as Collection))
             }
           },
-          refetchQueries: [
-            {
-              query: USER_COLLECTIONS,
-              variables: { userName: viewer.userName },
-            },
-            {
-              query: USER_PROFILE_PUBLIC,
-              variables: { userName: viewer.userName },
-            },
-          ],
+          onQueryUpdated(observableQuery) {
+            return observableQuery.refetch()
+          },
         })
         setSubmitting(false)
 

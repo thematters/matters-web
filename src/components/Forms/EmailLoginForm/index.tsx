@@ -80,9 +80,15 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   setAuthFeedType,
   back,
 }) => {
-  const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
-    showToast: false,
-  })
+  const [login, { client }] = useMutation<EmailLoginMutation>(
+    EMAIL_LOGIN,
+    {
+      onCompleted: () => {
+        client?.resetStore()
+      },
+    },
+    { showToast: false }
+  )
   const { lang } = useContext(LanguageContext)
 
   const { getQuery } = useRoute()
@@ -167,6 +173,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         redirectToTarget({
           fallback: !!isInPage ? 'homepage' : 'current',
         })
+
+        closeDialog?.()
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any)
         setErrorCode(codes[0])

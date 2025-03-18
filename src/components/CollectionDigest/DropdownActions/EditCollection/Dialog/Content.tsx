@@ -23,7 +23,6 @@ import {
   EditCollectionCollectionFragment,
   PutCollectionMutation,
 } from '~/gql/graphql'
-import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 
 interface FormProps {
   collection: EditCollectionCollectionFragment
@@ -70,7 +69,18 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
 
   const [update] = useMutation<PutCollectionMutation>(
     PUT_COLLECTION,
-    undefined,
+    {
+      update: (cache, result) => {
+        cache.evict({
+          id: cache.identify(viewer),
+          fieldName: 'collections',
+        })
+        cache.gc()
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
+      },
+    },
     { showToast: false }
   )
 
@@ -118,12 +128,6 @@ const EditCollectionDialogContent: React.FC<FormProps> = ({
               description,
             },
           },
-          refetchQueries: [
-            {
-              query: USER_COLLECTIONS,
-              variables: { userName: viewer.userName },
-            },
-          ],
         })
 
         // clear draft

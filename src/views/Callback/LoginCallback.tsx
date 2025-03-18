@@ -17,9 +17,17 @@ import UI from './UI'
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 const LoginCallback = () => {
-  const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
-    showToast: false,
-  })
+  const [login, { client }] = useMutation<EmailLoginMutation>(
+    EMAIL_LOGIN,
+    {
+      onCompleted: () => {
+        client?.resetStore()
+      },
+    },
+    {
+      showToast: false,
+    }
+  )
 
   const { lang } = useContext(LanguageContext)
   const [hasError, setHasError] = useState(false)

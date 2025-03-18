@@ -97,8 +97,8 @@ const ArticleFeedsTabs = ({
                   lang === 'zh_hans'
                     ? 'nameZhHans'
                     : lang === 'zh_hant'
-                    ? 'nameZhHant'
-                    : 'nameEn'
+                      ? 'nameZhHant'
+                      : 'nameEn'
                 ]
               }
               key={stage.id}

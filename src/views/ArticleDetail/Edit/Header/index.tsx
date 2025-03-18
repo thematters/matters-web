@@ -1,4 +1,5 @@
 import _isEqual from 'lodash/isEqual'
+import { useRouter } from 'next/router'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_CONTENT_LENGTH } from '~/common/enums'
@@ -61,6 +62,7 @@ const EditModeHeader = ({
 
   ...restProps
 }: EditModeHeaderProps) => {
+  const router = useRouter()
   const { tags, collection, circle, accessType, license } = restProps
   const [editArticle, { loading }] =
     useMutation<EditArticleMutation>(EDIT_ARTICLE)
@@ -186,7 +188,7 @@ const EditModeHeader = ({
           ),
         })
         const path = toPath({ page: 'articleDetail', article })
-        window.location.href = path.href
+        router.push(path.href)
       }
     } catch (e) {
       toast.error({
