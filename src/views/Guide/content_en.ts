@@ -25,10 +25,6 @@ Currently, ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME} support donation with fiat
 
 If you want to log in, bind wallets, or process USDT-Optimism payments on phone, please refer to our guide for cell phones, which will answer most of your questions.
 
-*   [Mobile Guide for Crypto Wallet and Payment](${GUIDE_LINKS.mobileWallet.en})
-
-${process.env.NEXT_PUBLIC_SITE_BRAND_NAME} is a writing community based on decentralized technologies with open-sourced codebase. We encourage you to subscribe to your favorite creators with RSS, JSON reader or IPNS compatible Planet reader.
-
-*   [Features Guidance for Content Feed Subscription](${GUIDE_LINKS.RSS.en})`
+*   [Mobile Guide for Crypto Wallet and Payment](${GUIDE_LINKS.mobileWallet.en})`
 
 export default en
