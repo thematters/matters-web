@@ -67,10 +67,6 @@
   "//QMqf": {
     "defaultMessage": "請輸入標題…"
   },
-  "/3kw6k": {
-    "defaultMessage": "嘗試將內容寫入 IPFS 網絡中，需要一段時間，請耐心等候。若等候時間過久，可透過發佈文章來加速。",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
-  },
   "/5OvMK": {
     "defaultMessage": "喜歡你的動態"
   },
@@ -352,9 +348,6 @@
     "defaultMessage": "留言",
     "description": "src/components/Dialogs/MomentDetailDialog/Comments.tsx"
   },
-  "3w3CC8": {
-    "defaultMessage": "關聯 ENS"
-  },
   "3yQyYm": {
     "defaultMessage": "最小金額爲 HKD {min}"
   },
@@ -494,9 +487,6 @@
   },
   "6E7VKR": {
     "defaultMessage": "我的交易紀錄"
-  },
-  "6ErzDk": {
-    "defaultMessage": "重新連接錢包"
   },
   "6KmKvZ": {
     "defaultMessage": "請再次輸入新交易密碼",
@@ -846,9 +836,6 @@
     "defaultMessage": "目前總追蹤人數",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
   },
-  "Bkx6Gk": {
-    "defaultMessage": "切換網路中…"
-  },
   "BnMru1": {
     "defaultMessage": "語言",
     "description": "src/views/Me/Settings/Misc/Language.tsx"
@@ -921,10 +908,6 @@
   },
   "D+uyeZ": {
     "defaultMessage": "選擇離開圍爐，你將馬上失去成員資格。下一個賬單日（每月 1 日）將不會扣除費用。"
-  },
-  "D2Sw/t": {
-    "defaultMessage": "添加以下任一網址到 RSS 閱讀器",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "D3idYv": {
     "defaultMessage": "設定"
@@ -1202,19 +1185,12 @@
     "defaultMessage": "更換錢包",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "Hlwud7": {
-    "defaultMessage": "更多 ENS 資訊請參考 {node}."
-  },
   "HnxG15": {
     "defaultMessage": "設定"
   },
   "Hpmiif": {
     "defaultMessage": "選集",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
-  },
-  "HqnUd1": {
-    "defaultMessage": "添加 IPFS 生成的 IPNS 指紋到閱讀器，如：",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "HwaiSE": {
     "defaultMessage": "開啟後，正文將被暫時遮蔽，只顯示標題與摘要，並由讀者選擇是否繼續閱讀（例如含有色情、暴力、血腥等內容）"
@@ -1281,9 +1257,6 @@
   },
   "JCZFqh": {
     "defaultMessage": "現在報名，即可開始書寫年度問卷，活動細則可查看公告"
-  },
-  "JFv0yt": {
-    "defaultMessage": "未知錯誤，請確認你的錢包並重新嘗試"
   },
   "JTWayV": {
     "defaultMessage": "添加描述",
@@ -1397,15 +1370,8 @@
   "LWE7oq": {
     "defaultMessage": "草稿保存中，確定要離開嗎？"
   },
-  "LaI+XV": {
-    "defaultMessage": "關聯 ENS 名後，可以："
-  },
   "Lb0JsC": {
     "defaultMessage": "你封鎖了該用戶"
-  },
-  "Lc/azT": {
-    "defaultMessage": "IPNS 訂閱",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "LgbKvU": {
     "defaultMessage": "評論"
@@ -1562,9 +1528,6 @@
   },
   "OKhRC6": {
     "defaultMessage": "分享"
-  },
-  "OQ/lbb": {
-    "defaultMessage": "已成功關聯，稍後完成。在 {explorerName} 查看紀錄"
   },
   "OjC4aZ": {
     "defaultMessage": "作者",
@@ -2020,9 +1983,6 @@
     "defaultMessage": "在你的圍爐廣播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "XQYDsg": {
-    "defaultMessage": "回到個人頁"
-  },
   "XTyKFR": {
     "defaultMessage": "精挑細選作品，幫助讀者更容易發現優質內容"
   },
@@ -2114,9 +2074,6 @@
     "defaultMessage": "關聯了",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "Z+nZlT": {
-    "defaultMessage": "内容訂閱"
-  },
   "Z2iL9Z": {
     "defaultMessage": "開始創作",
     "description": "src/components/Buttons/StartWriting/index.tsx"
@@ -2146,9 +2103,6 @@
   },
   "ZOW313": {
     "defaultMessage": "首次發布作品後有四次正文編輯機會，你也可以歸檔原文重新發布作品。"
-  },
-  "ZR1YpJ": {
-    "defaultMessage": "獲得個性化 IPNS 頁連結，如：ipfs.io/ipns/matty.eth"
   },
   "ZUPQzl": {
     "defaultMessage": "回覆了你",
@@ -2188,10 +2142,6 @@
   "aE5Qq+": {
     "defaultMessage": "重新發送",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
-  },
-  "aHTyGJ": {
-    "defaultMessage": "官方文檔",
-    "description": "src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
   },
   "aKEiNd": {
     "defaultMessage": "錯過報名期沒關係，仍然可以用晚鳥身份參與，一起書寫人生故事。下次早點報名，就有機會獲得大滿貫徽章！"
@@ -2495,10 +2445,6 @@
     "defaultMessage": "留個友善的評論？",
     "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
-  "gMZfHO": {
-    "defaultMessage": "RSS 訂閱",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
-  },
   "gN4jLB": {
     "defaultMessage": "你對 {articleTitle} 的修改已發佈到 IPFS",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
@@ -2644,10 +2590,6 @@
   "jiB0Z2": {
     "defaultMessage": "無法綁定錢包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
-  },
-  "jkrM1r": {
-    "defaultMessage": "打開 IPNS 頁面",
-    "description": "src/components/UserProfile/WalletLabel/index.tsx"
   },
   "jtdQHR": {
     "defaultMessage": "公共節點"
@@ -2796,9 +2738,6 @@
     "defaultMessage": "新訂閱者",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
-  "m6qWCv": {
-    "defaultMessage": "直接使用 ENS 名在閱讀器（如 Planet）中訂閱文章"
-  },
   "mBkZcw": {
     "defaultMessage": "喜歡動態"
   },
@@ -2944,9 +2883,6 @@
     "defaultMessage": "登入密碼已設定",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
-  "pKkpI9": {
-    "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
-  },
   "phAZoj": {
     "defaultMessage": "選集"
   },
@@ -2981,9 +2917,6 @@
   "qNuRmA": {
     "defaultMessage": "發送臨時密碼",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
-  },
-  "qPVFTS": {
-    "defaultMessage": "將 {ensName} 指向到你的 IPNS 頁面"
   },
   "qPqap+": {
     "defaultMessage": "已封存",
@@ -3172,9 +3105,6 @@
   "u+cgOo": {
     "defaultMessage": "我的圍爐",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
-  },
-  "u1cbFV": {
-    "defaultMessage": "切換到 {networkName}"
   },
   "u5aHb4": {
     "defaultMessage": "複製連結"
@@ -3517,10 +3447,6 @@
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",
     "description": "ACTION_LIMIT_EXCEEDED"
-  },
-  "zxlwbc": {
-    "defaultMessage": "等候寫入完成...",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "zxy15q": {
     "defaultMessage": "{subscriber, plural, =1 {人} other {人}}",
