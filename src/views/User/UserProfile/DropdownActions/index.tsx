@@ -4,20 +4,15 @@ import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { useEnsName } from 'wagmi'
 
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
-import { ReactComponent as IconRss } from '@/public/static/icons/24px/rss.svg'
 import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
-import { featureSupportedChains } from '~/common/utils'
 import {
   Button,
   Dropdown,
   EditProfileDialog,
   Icon,
   Menu,
-  RssFeedDialog,
-  RssFeedDialogProps,
   ShareDialog,
   ShareDialogProps,
   SpinnerBlock,
@@ -27,7 +22,6 @@ import {
 import { BlockUser } from '~/components/BlockUser'
 import { BlockUserDialogProps } from '~/components/BlockUser/Dialog'
 import {
-  AuthorRssFeedFragment,
   DropdownActionsUserPrivateFragment,
   DropdownActionsUserPublicFragment,
 } from '~/gql/graphql'
@@ -57,7 +51,6 @@ const DynamicArchiveUserDialog = dynamic(() => import('./ArchiveUser/Dialog'), {
 
 interface DropdownActionsProps {
   user: DropdownActionsUserPublicFragment &
-    AuthorRssFeedFragment &
     Partial<DropdownActionsUserPrivateFragment>
   isMe: boolean
   isInAside?: boolean
@@ -65,14 +58,12 @@ interface DropdownActionsProps {
 
 interface DialogProps {
   openBlockUserDialog: () => void
-  openRssFeedDialog: () => void
   openShareDialog: () => void
 }
 
 interface Controls {
   hasEditProfile: boolean
   hasBlockUser: boolean
-  hasRssFeed: boolean
 }
 
 interface AdminProps {
@@ -114,10 +105,8 @@ const BaseDropdownActions = ({
   isInAside = false,
 
   hasBlockUser,
-  hasRssFeed,
 
   openBlockUserDialog,
-  openRssFeedDialog,
   openShareDialog,
 
   // admin
@@ -138,17 +127,6 @@ const BaseDropdownActions = ({
         text={<FormattedMessage defaultMessage="Share" id="OKhRC6" />}
         icon={<Icon icon={IconShare} size={20} />}
       />
-      {hasRssFeed && (
-        <Menu.Item
-          onClick={openRssFeedDialog}
-          ariaHasPopup="dialog"
-          textColor="greyDarker"
-          textActiveColor="black"
-          spacing={[8, 16]}
-          text={<FormattedMessage defaultMessage="Subscribe" id="gczcC5" />}
-          icon={<Icon icon={IconRss} size={20} />}
-        />
-      )}
 
       {hasBlockUser && (
         <BlockUser.Button user={user} openDialog={openBlockUserDialog} />
@@ -232,17 +210,10 @@ const BaseDropdownActions = ({
 
 const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
   const viewer = useContext(ViewerContext)
-  const targetNetwork = featureSupportedChains.ens[0]
-  const { data: ensName } = useEnsName({
-    address: user.info.ethAddress as `0x${string}`,
-    chainId: targetNetwork.id,
-  })
 
   const controls = {
     hasEditProfile: isMe,
     hasBlockUser: !!viewer.id && !isMe,
-    hasRssFeed:
-      ensName && user?.articles.totalCount > 0 && !!user?.info.ipnsKey,
   }
 
   const WithShare = withDialog<Omit<ShareDialogProps, 'children'>>(
@@ -257,16 +228,8 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
       openShareDialog: openDialog,
     })
   )
-  const WithRssFeed = withDialog<Omit<RssFeedDialogProps, 'children'>>(
-    WithShare,
-    RssFeedDialog,
-    { user },
-    ({ openDialog }) => ({
-      openRssFeedDialog: openDialog,
-    })
-  )
   const WithBlockUser = withDialog<Omit<BlockUserDialogProps, 'children'>>(
-    WithRssFeed,
+    WithShare,
     BlockUser.Dialog,
     { user },
     ({ openDialog }) => ({ openBlockUserDialog: openDialog })
