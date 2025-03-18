@@ -806,6 +806,10 @@
     "defaultMessage": " 在圍爐 {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "BM0Xw3": {
+    "defaultMessage": "收藏",
+    "description": "src/components/Buttons/Bookmark/Bookmark.tsx"
+  },
   "BMGZE2": {
     "defaultMessage": "提及我",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1031,10 +1035,6 @@
     "defaultMessage": "郵件地址",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
-  "FEkOVJ": {
-    "defaultMessage": "取消收藏",
-    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
-  },
   "FMIIAZ": {
     "defaultMessage": "此為歷史版本和 IPFS 入口查閱區，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -1101,10 +1101,6 @@
   "GVes61": {
     "defaultMessage": "在 {circleName} 發布新作品",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
-  },
-  "GYAos5": {
-    "defaultMessage": "我的草稿",
-    "description": "src/views/Me/Drafts/index.tsx"
   },
   "GZJpDf": {
     "defaultMessage": "數據後台"
@@ -1616,6 +1612,10 @@
   },
   "QFCfA7": {
     "defaultMessage": "添加到自由寫精華"
+  },
+  "QKJWqd": {
+    "defaultMessage": "收藏",
+    "description": "src/components/Buttons/TagBookmark/Bookmark.tsx"
   },
   "QQSdHP": {
     "defaultMessage": "查看更多"
@@ -2230,6 +2230,10 @@
   "cE4Hfw": {
     "defaultMessage": "發現"
   },
+  "cK3TLr": {
+    "defaultMessage": "取消收藏",
+    "description": "src/components/Buttons/Bookmark/Unbookmark.tsx"
+  },
   "cPIKU2": {
     "defaultMessage": "關注中"
   },
@@ -2626,10 +2630,6 @@
   "kHMa3H": {
     "defaultMessage": "密碼不一致"
   },
-  "kLEWkV": {
-    "defaultMessage": "收藏",
-    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
-  },
   "kPylKK": {
     "defaultMessage": "圍爐",
     "description": "src/views/Me/Settings/Notifications/index.tsx"
@@ -2751,6 +2751,10 @@
   },
   "mJEqC/": {
     "defaultMessage": "跳轉至 {href}"
+  },
+  "mKp9t/": {
+    "defaultMessage": "取消收藏",
+    "description": "src/components/Buttons/TagBookmark/Unbookmark.tsx"
   },
   "mObpsB": {
     "defaultMessage": "插入引用"
