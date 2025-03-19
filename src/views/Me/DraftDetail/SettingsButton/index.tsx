@@ -186,8 +186,8 @@ const SettingsButton = ({
               toast.error({
                 message: (
                   <FormattedMessage
-                    defaultMessage="Article cannot be added to activity or circle at the same time"
-                    id="3ADqNr"
+                    defaultMessage="Article cannot be added to Free Write or circle at the same time"
+                    id="nLt9TU"
                   />
                 ),
               })

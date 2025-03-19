@@ -321,9 +321,6 @@
   "39AHJm": {
     "defaultMessage": "Sign Up"
   },
-  "3ADqNr": {
-    "defaultMessage": "Article cannot be added to activity or circle at the same time"
-  },
   "3EeDnu": {
     "defaultMessage": "Paste JSFiddle or CodePen link, and press enter"
   },
@@ -2825,6 +2822,9 @@
   },
   "nGBrvw": {
     "defaultMessage": "Bookmarks"
+  },
+  "nLt9TU": {
+    "defaultMessage": "Article cannot be added to Free Write or circle at the same time"
   },
   "nNB7KU": {
     "defaultMessage": "replied your comment in",
