@@ -1,10 +1,12 @@
 import { ApolloCache } from '@apollo/client/cache'
 
+import { COMMENTS_COUNT } from '~/common/enums'
 import { toGlobalId } from '~/common/utils'
 import { Viewer } from '~/components/Context'
 import {
   ArticleAvailableTranslationsQuery,
   ArticleDetailPublicQuery,
+  LatestCommentsPublicQuery,
   UserLanguage,
 } from '~/gql/graphql'
 
@@ -76,7 +78,7 @@ export const updateArticlePublic = ({
         updatedCommentCount -= 1
         break
       case 'updateDonation':
-        if (!txId || !updatedDonations) {
+        if (!txId || !updatedDonations || !viewer?.id) {
           return
         }
 
@@ -135,6 +137,48 @@ export const updateArticlePublic = ({
           totalCount: updatedDonatorsCount,
           edges: updatedDonationEdges,
         }
+
+        // Also update fromDonator flag for this user's comments
+        const {
+          LATEST_COMMENTS_PUBLIC,
+        } = require('~/views/ArticleDetail/Comments/LatestComments/gql.ts')
+
+        const latestCommentsResult = cache.readQuery<LatestCommentsPublicQuery>(
+          {
+            query: LATEST_COMMENTS_PUBLIC,
+            variables: { id: data.article.id, first: COMMENTS_COUNT },
+          }
+        )
+
+        const article = latestCommentsResult?.article
+
+        if (article?.__typename === 'Article' && article.comments?.edges) {
+          article.comments.edges.forEach((edge) => {
+            if (edge.node.author?.id === viewer.id) {
+              cache.modify({
+                id: cache.identify(edge.node),
+                fields: {
+                  fromDonator: () => true,
+                },
+              })
+            }
+          })
+        }
+
+        // Also update pinnedComments if they exist
+        if (article?.__typename === 'Article' && article.pinnedComments) {
+          article.pinnedComments.forEach((comment) => {
+            if (comment.author?.id === viewer.id) {
+              cache.modify({
+                id: cache.identify(comment),
+                fields: {
+                  fromDonator: () => true,
+                },
+              })
+            }
+          })
+        }
+
         break
     }
 
