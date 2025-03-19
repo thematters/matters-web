@@ -2823,6 +2823,9 @@
   "nGBrvw": {
     "defaultMessage": "我的收藏"
   },
+  "nLt9TU": {
+    "defaultMessage": "作品暫不可同時投稿活動及加入圍爐"
+  },
   "nNB7KU": {
     "defaultMessage": "在",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
