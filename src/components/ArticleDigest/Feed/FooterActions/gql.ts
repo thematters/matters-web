@@ -28,6 +28,16 @@ export const fragments = {
             ...DigestTitleCircle
           }
         }
+        campaigns {
+          campaign {
+            id
+            shortHash
+            name
+          }
+          stage {
+            id
+          }
+        }
         ...DropdownActionsArticle
         ...ActionsReadTimeArticle
         ...ActionsDonationCountArticle
