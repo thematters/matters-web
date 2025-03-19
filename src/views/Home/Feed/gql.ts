@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ArticleDigestFeed } from '~/components'
+import { ArticleDigestCurated, ArticleDigestFeed } from '~/components'
 
 import { IcymiCuratedFeed } from './IcymiCuratedFeed'
 
@@ -14,11 +14,13 @@ const feedFragment = gql`
     edges {
       cursor
       node {
+        ...ArticleDigestCuratedArticle
         ...ArticleDigestFeedArticlePublic
         ...ArticleDigestFeedArticlePrivate
       }
     }
   }
+  ${ArticleDigestCurated.fragments.article}
   ${ArticleDigestFeed.fragments.article.public}
   ${ArticleDigestFeed.fragments.article.private}
 `
