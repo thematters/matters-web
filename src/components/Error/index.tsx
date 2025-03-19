@@ -21,8 +21,8 @@ const ServerError = ({ lang }: { lang: UserLanguage }) => (
     {lang === UserLanguage.En
       ? 'Spaceship maintaining, please come back later'
       : lang === UserLanguage.ZhHans
-      ? '飞船正在检修中，请稍后看看'
-      : '飛船正在檢修中，請稍後看看'}
+        ? '飞船正在检修中，请稍后看看'
+        : '飛船正在檢修中，請稍後看看'}
   </>
 )
 
@@ -31,8 +31,8 @@ const NetworkError = ({ lang }: { lang: UserLanguage }) => (
     {lang === UserLanguage.En
       ? 'Connection error, please come back later'
       : lang === UserLanguage.ZhHans
-      ? '星球连线出现问题，请稍后看看'
-      : '星球連線出現問題，請稍後看看'}
+        ? '星球连线出现问题，请稍后看看'
+        : '星球連線出現問題，請稍後看看'}
   </>
 )
 
@@ -41,8 +41,8 @@ const NotFound = ({ lang }: { lang: UserLanguage }) => (
     {lang === UserLanguage.En
       ? "It seems you've come to an unknown space, please go back and retry"
       : lang === UserLanguage.ZhHans
-      ? '你似乎遨游到了一个未知空间，请返回重试'
-      : '你似乎遨遊到了一個未知空間，請返回重試'}
+        ? '你似乎遨游到了一个未知空间，请返回重试'
+        : '你似乎遨遊到了一個未知空間，請返回重試'}
   </>
 )
 

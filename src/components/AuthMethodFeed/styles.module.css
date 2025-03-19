@@ -75,6 +75,7 @@
       color: var(--color-matters-green);
       cursor: pointer;
       transition-property: color;
+
       @mixin transition;
 
       &:hover,

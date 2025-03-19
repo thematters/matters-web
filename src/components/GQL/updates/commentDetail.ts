@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import { CommentDetailQuery } from '~/gql/graphql'
 
@@ -14,7 +14,7 @@ export const updateCommentDetail = ({
   comment,
   type,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   commentId: string
   comment?: Comment
   type: 'add'
@@ -38,18 +38,21 @@ export const updateCommentDetail = ({
       return
     }
 
-    let edges = data.node.comments.edges
+    let newEdges = [...data.node.comments.edges]
 
     switch (type) {
       case 'add':
-        if (!edges || !comment) {
+        if (!comment) {
           return
         }
-        edges.push({
-          cursor: '',
-          node: comment,
-          __typename: 'CommentEdge',
-        })
+        newEdges = [
+          ...newEdges,
+          {
+            cursor: '',
+            node: comment,
+            __typename: 'CommentEdge',
+          },
+        ]
         break
     }
 
@@ -61,7 +64,7 @@ export const updateCommentDetail = ({
           ...data.node,
           comments: {
             ...data.node.comments,
-            edges,
+            edges: newEdges,
           },
         },
       },

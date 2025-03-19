@@ -67,10 +67,6 @@
   "//QMqf": {
     "defaultMessage": "Enter title ..."
   },
-  "/3kw6k": {
-    "defaultMessage": "Adding contents into IPFS network, and it usually takes some times, please wait. You can accelerate the process by publishing new article.",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
-  },
   "/5OvMK": {
     "defaultMessage": "liked your moment"
   },
@@ -355,9 +351,6 @@
     "defaultMessage": "Comment",
     "description": "src/components/Dialogs/MomentDetailDialog/Comments.tsx"
   },
-  "3w3CC8": {
-    "defaultMessage": "Link ENS"
-  },
   "3yQyYm": {
     "defaultMessage": "Minimum amount is HKD {min}"
   },
@@ -497,9 +490,6 @@
   },
   "6E7VKR": {
     "defaultMessage": "My transaction history"
-  },
-  "6ErzDk": {
-    "defaultMessage": "Reconnect Wallet"
   },
   "6KmKvZ": {
     "defaultMessage": "Please enter new transaction password again",
@@ -819,6 +809,10 @@
     "defaultMessage": " commented in {commentCircle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "BM0Xw3": {
+    "defaultMessage": "Bookmark",
+    "description": "src/components/Buttons/Bookmark/Bookmark.tsx"
+  },
   "BMGZE2": {
     "defaultMessage": "Mention me",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -848,9 +842,6 @@
   "Bjdw71": {
     "defaultMessage": "followers_empty",
     "description": "src/views/Circle/Analytics/FollowerAnalytics/index.tsx"
-  },
-  "Bkx6Gk": {
-    "defaultMessage": "Switching the network…"
   },
   "BnMru1": {
     "defaultMessage": "Language",
@@ -924,10 +915,6 @@
   },
   "D+uyeZ": {
     "defaultMessage": "Unsubscribe circle will immediately lose your membership, The next billing date (the 1st of each month) will not incur any charges."
-  },
-  "D2Sw/t": {
-    "defaultMessage": "Add any URL in the following list into RSS reader",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "D3idYv": {
     "defaultMessage": "Settings"
@@ -1051,10 +1038,6 @@
     "defaultMessage": "Email address",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
-  "FEkOVJ": {
-    "defaultMessage": "Remove bookmark",
-    "description": "src/components/Buttons/Bookmark/Unsubscribe.tsx"
-  },
   "FMIIAZ": {
     "defaultMessage": "Revision history and IPFS entry,",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -1121,10 +1104,6 @@
   "GVes61": {
     "defaultMessage": "published in {circleName}",
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
-  },
-  "GYAos5": {
-    "defaultMessage": "Drafts",
-    "description": "src/views/Me/Drafts/index.tsx"
   },
   "GZJpDf": {
     "defaultMessage": "Analytics"
@@ -1205,19 +1184,12 @@
     "defaultMessage": "Switch wallet",
     "description": "src/components/Forms/WalletAuthForm/Connect.tsx"
   },
-  "Hlwud7": {
-    "defaultMessage": "More ENS information, check {node}."
-  },
   "HnxG15": {
     "defaultMessage": "Set"
   },
   "Hpmiif": {
     "defaultMessage": "Collection",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
-  },
-  "HqnUd1": {
-    "defaultMessage": "Add hash from IPFS into compatible reader such as ",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "HwaiSE": {
     "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)"
@@ -1284,9 +1256,6 @@
   },
   "JCZFqh": {
     "defaultMessage": "Sign up now and start writing the annual questionnaire. Please check the announcement for event details."
-  },
-  "JFv0yt": {
-    "defaultMessage": "Unknown error. Please check wallet and retry."
   },
   "JTWayV": {
     "defaultMessage": "Add description",
@@ -1400,15 +1369,8 @@
   "LWE7oq": {
     "defaultMessage": "Saving draft, are you sure you want to leave?"
   },
-  "LaI+XV": {
-    "defaultMessage": "By connecting ENS, benefits are:"
-  },
   "Lb0JsC": {
     "defaultMessage": "You have blocked that user"
-  },
-  "Lc/azT": {
-    "defaultMessage": "IPNS Subscription",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "LgbKvU": {
     "defaultMessage": "Comment"
@@ -1566,9 +1528,6 @@
   "OKhRC6": {
     "defaultMessage": "Share"
   },
-  "OQ/lbb": {
-    "defaultMessage": "Successfully linked. It would take couple hours to resolve. View transaction on {explorerName} ."
-  },
   "OjC4aZ": {
     "defaultMessage": "Author",
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
@@ -1656,6 +1615,10 @@
   },
   "QFCfA7": {
     "defaultMessage": "Add featured on Free Write"
+  },
+  "QKJWqd": {
+    "defaultMessage": "Bookmark",
+    "description": "src/components/Buttons/TagBookmark/Bookmark.tsx"
   },
   "QQSdHP": {
     "defaultMessage": "View More"
@@ -2023,9 +1986,6 @@
     "defaultMessage": "mentioned you in your circle broadcast comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
-  "XQYDsg": {
-    "defaultMessage": "Back to profile"
-  },
   "XTyKFR": {
     "defaultMessage": "Adding articles to a collection helps readers find your articles."
   },
@@ -2117,9 +2077,6 @@
     "defaultMessage": "connected",
     "description": "src/components/Notice/ArticleArticleNotice/ArticleNewCollectedNotice.tsx"
   },
-  "Z+nZlT": {
-    "defaultMessage": "Content Feed"
-  },
   "Z2iL9Z": {
     "defaultMessage": "Start writing",
     "description": "src/components/Buttons/StartWriting/index.tsx"
@@ -2149,9 +2106,6 @@
   },
   "ZOW313": {
     "defaultMessage": "You can edit the article four times after publishing it. You can also archive the original and republish.."
-  },
-  "ZR1YpJ": {
-    "defaultMessage": "Customize IPNS page URL like ipfs.io/ipns/matty.eth"
   },
   "ZUPQzl": {
     "defaultMessage": " ",
@@ -2191,10 +2145,6 @@
   "aE5Qq+": {
     "defaultMessage": "Resend",
     "description": "src/components/Forms/Verification/ResendCodeButton/index.tsx"
-  },
-  "aHTyGJ": {
-    "defaultMessage": "docs",
-    "description": "src/components/Dialogs/ENSDialog/ENSDescription/index.tsx"
   },
   "aKEiNd": {
     "defaultMessage": "You missed the registration period, you can still join as a latecomer. Apply earlier next time for the chance to get the badge."
@@ -2282,6 +2232,10 @@
   },
   "cE4Hfw": {
     "defaultMessage": "Discover"
+  },
+  "cK3TLr": {
+    "defaultMessage": "Remove bookmark",
+    "description": "src/components/Buttons/Bookmark/Unbookmark.tsx"
   },
   "cPIKU2": {
     "defaultMessage": "Following"
@@ -2498,10 +2452,6 @@
     "defaultMessage": "Leave a comment?",
     "description": "src/views/ArticleDetail/Toolbar/FixedToolbar/index.tsx"
   },
-  "gMZfHO": {
-    "defaultMessage": "RSS Subscription",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
-  },
   "gN4jLB": {
     "defaultMessage": "Your work {articleTitle} has been republished to decentralized network",
     "description": "src/components/Notice/ArticleNotice/RevisedArticlePublishedNotice.tsx"
@@ -2648,10 +2598,6 @@
     "defaultMessage": "Unable to bind wallet",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
   },
-  "jkrM1r": {
-    "defaultMessage": "Open IPNS page",
-    "description": "src/components/UserProfile/WalletLabel/index.tsx"
-  },
   "jtdQHR": {
     "defaultMessage": "Gateways"
   },
@@ -2686,10 +2632,6 @@
   },
   "kHMa3H": {
     "defaultMessage": "The new password and confirmation password do not match."
-  },
-  "kLEWkV": {
-    "defaultMessage": "Bookmark",
-    "description": "src/components/Buttons/Bookmark/Subscribe.tsx"
   },
   "kPylKK": {
     "defaultMessage": "Circle",
@@ -2799,9 +2741,6 @@
     "defaultMessage": "New subscribers",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
-  "m6qWCv": {
-    "defaultMessage": "Subscribers can add ENS to reader such as Planet"
-  },
   "mBkZcw": {
     "defaultMessage": "Like moment"
   },
@@ -2815,6 +2754,10 @@
   },
   "mJEqC/": {
     "defaultMessage": "Go to {href}"
+  },
+  "mKp9t/": {
+    "defaultMessage": "Remove bookmark",
+    "description": "src/components/Buttons/TagBookmark/Unbookmark.tsx"
   },
   "mObpsB": {
     "defaultMessage": "Insert Blockquote"
@@ -2947,9 +2890,6 @@
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
-  "pKkpI9": {
-    "defaultMessage": "The wallet address is not the one you bound to account. Please switch it in the wallet or reconnect as:"
-  },
   "phAZoj": {
     "defaultMessage": "Collection"
   },
@@ -2984,9 +2924,6 @@
   "qNuRmA": {
     "defaultMessage": "Send login code",
     "description": "src/components/Forms/EmailLoginForm/Buttons.tsx"
-  },
-  "qPVFTS": {
-    "defaultMessage": "Link {ensName} to your IPNS page"
   },
   "qPqap+": {
     "defaultMessage": "Archived",
@@ -3175,9 +3112,6 @@
   "u+cgOo": {
     "defaultMessage": "My circle",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
-  },
-  "u1cbFV": {
-    "defaultMessage": "Switch to {networkName}"
   },
   "u5aHb4": {
     "defaultMessage": "Copy Link"
@@ -3520,10 +3454,6 @@
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",
     "description": "ACTION_LIMIT_EXCEEDED"
-  },
-  "zxlwbc": {
-    "defaultMessage": "Waiting ...",
-    "description": "src/components/Dialogs/RssFeedDialog/Content.tsx"
   },
   "zxy15q": {
     "defaultMessage": "{subscriber, plural, =1 {subscriber} other {subscribers}}",

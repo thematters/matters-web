@@ -1,4 +1,4 @@
-import { MockedProvider } from '@apollo/react-testing'
+import { MockedProvider } from '@apollo/client/testing'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
@@ -11,7 +11,6 @@ export default {
 
 const Template: ComponentStory<typeof ShareDialog> = (args) => (
   <MockedProvider>
-    {/* @ts-ignore */}
     <ShareButton iconSize={20} inCard={false} {...args} />
   </MockedProvider>
 )

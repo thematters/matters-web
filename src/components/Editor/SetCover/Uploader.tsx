@@ -22,7 +22,6 @@ import {
   useRoute,
   useUnloadConfirm,
 } from '~/components'
-import { updateDraftAssets } from '~/components/GQL'
 import {
   DIRECT_IMAGE_UPLOAD,
   DIRECT_IMAGE_UPLOAD_DONE,
@@ -60,17 +59,7 @@ const Uploader: React.FC<UploaderProps> = ({
   )
   const [directImageUploadDone] = useMutation<DirectImageUploadDoneMutation>(
     DIRECT_IMAGE_UPLOAD_DONE,
-    {
-      update: async (cache, { data }) => {
-        if (data?.directImageUpload) {
-          updateDraftAssets({
-            cache,
-            id: entityId,
-            asset: data.directImageUpload,
-          })
-        }
-      },
-    },
+    undefined,
     { showToast: false }
   )
   const { upload: uploadImage, uploading } = useDirectImageUpload()

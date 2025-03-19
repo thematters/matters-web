@@ -50,11 +50,6 @@ export const GUIDE_LINKS = {
     zh_hans: `https://matters.town/@hi176/387115?locale=zh-Hans`,
     en: `https://matters.town/@hi176/387115?locale=en`,
   },
-  RSS: {
-    zh_hant: `https://matters.town/@hi176/387116`,
-    zh_hans: `https://matters.town/@hi176/387116?locale=zh-Hans`,
-    en: `https://matters.town/@hi176/387116?locale=en`,
-  },
   wallet: {
     zh_hant: `https://matters.town/@hi176/589118`,
     zh_hans: `https://matters.town/@hi176/589118?locale=zh-Hans`,

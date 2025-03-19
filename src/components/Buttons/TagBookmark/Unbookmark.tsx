@@ -48,8 +48,8 @@ const Unbookmark = ({ tag }: UnbookmarkTagProps) => {
       textActiveColor="redDark"
       aria-label={intl.formatMessage({
         defaultMessage: 'Remove bookmark',
-        id: 'FEkOVJ',
-        description: 'src/components/Buttons/Bookmark/Unsubscribe.tsx',
+        id: 'mKp9t/',
+        description: 'src/components/Buttons/TagBookmark/Unbookmark.tsx',
       })}
       onClick={onClick}
     >

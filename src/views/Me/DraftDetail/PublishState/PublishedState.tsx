@@ -1,11 +1,10 @@
-import { useEffect } from 'react'
+import { useApolloClient } from '@apollo/client'
+import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { toPath } from '~/common/utils'
-import { Dialog, ShareDialog, useImperativeQuery } from '~/components'
-import { MeDraftFeedQuery, PublishStateDraftFragment } from '~/gql/graphql'
-
-import { ME_DRAFTS_FEED } from '../../Drafts/gql'
+import { Dialog, ShareDialog, useRoute, ViewerContext } from '~/components'
+import { PublishStateDraftFragment } from '~/gql/graphql'
 
 const BasePublishedState = ({
   openShareDialog,
@@ -20,12 +19,17 @@ const BasePublishedState = ({
 }
 
 const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
-  // refetch /me/drafts on published
-  const refetch = useImperativeQuery<MeDraftFeedQuery>(ME_DRAFTS_FEED, {
-    variables: { id: draft.id },
-  })
+  const viewer = useContext(ViewerContext)
+  const { router } = useRoute()
+  const client = useApolloClient()
+
   useEffect(() => {
-    refetch()
+    client.refetchQueries({
+      updateCache: (cache) => {
+        cache.evict({ id: cache.identify(viewer), fieldName: 'drafts' })
+        cache.gc()
+      },
+    })
   }, [])
 
   if (!draft.article) {
@@ -67,10 +71,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
               description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
             />
           }
-          // onClick={() => router.replace(path.href)}
-          onClick={() => {
-            window.location.href = path.href
-          }}
+          onClick={() => router.replace(path.href)}
         />
       }
       smUpBtns={
@@ -82,10 +83,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
               description="src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
             />
           }
-          // onClick={() => router.replace(path.href)}
-          onClick={() => {
-            window.location.href = path.href
-          }}
+          onClick={() => router.replace(path.href)}
         />
       }
     >
