@@ -112,8 +112,6 @@ const MainFeed = ({}: MainFeedProps) => {
   const query = FEED_ARTICLES_PUBLIC[sortBy]
   const { data, error, loading, fetchMore, networkStatus, client } =
     usePublicQuery<FeedArticlesPublic>(query, {
-      // TODO: remove this once the issue is fixed
-      // notifyOnNetworkStatusChange: true,
       variables: isInChannel
         ? {
             shortHash,
