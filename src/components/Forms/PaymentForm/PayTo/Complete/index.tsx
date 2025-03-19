@@ -44,7 +44,9 @@ const Complete: React.FC<Props> = ({
   const { data, loading } = useQuery<QueryUserByAddressQuery>(
     QUERY_USER_BY_ADDRESS,
     {
-      variables: { ethAddress: address },
+      variables: {
+        ethAddress: address || '0x0000000000000000000000000000000000000000',
+      },
     }
   )
 
