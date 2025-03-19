@@ -34,7 +34,7 @@ import {
   LanguageContext,
   LanguageSwitch,
   Media,
-  ReCaptcha,
+  // ReCaptcha,
   ResendCodeButton,
   TextIcon,
   useCountdown,
@@ -103,7 +103,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
-  const [turnstileToken, setTurnstileToken] = useState<string>()
+  // const [turnstileToken, setTurnstileToken] = useState<string>()
 
   const [isSelectMethod, setIsSelectMethod] = useState(false)
   const [errorCode, setErrorCode] = useState<ERROR_CODES | null>(null)
@@ -238,7 +238,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           input: {
             email: values.email,
             type: 'email_otp',
-            token: turnstileToken,
+            // token: turnstileToken,
             redirectUrl,
             language: lang,
           },
@@ -351,7 +351,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             />
           )}
 
-        <ReCaptcha action="email_login" setToken={setTurnstileToken} />
+        {/* <ReCaptcha action="email_login" setToken={setTurnstileToken} /> */}
       </Form>
     </>
   )
