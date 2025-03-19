@@ -149,8 +149,10 @@ const EditModeHeader = ({
           ...(isReplyToDonatorRevised
             ? { replyToDonator: revision.replyToDonator }
             : {}),
-          ...(isCircleRevised ? { circle: circle?.id || null } : {}),
-          ...(isAccessRevised ? { accessType } : {}),
+          ...(isCircleRevised
+            ? { circle: circle?.id || null, accessType: accessType }
+            : {}),
+          ...(!isCircleRevised && isAccessRevised ? { accessType } : {}),
           ...(isLicenseRevised ? { license } : {}),
           ...(restProps.iscnPublish
             ? { iscnPublish: restProps.iscnPublish }
