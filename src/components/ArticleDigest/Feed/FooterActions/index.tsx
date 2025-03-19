@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { useContext } from 'react'
 
 import { ReactComponent as IconPaywall } from '@/public/static/icons/24px/paywall.svg'
@@ -73,16 +74,18 @@ const FooterActions = ({
             )}
 
             {hasCampaign && article.campaigns.length > 0 && (
-              <a
+              <Link
                 {...toPath({
                   page: 'campaignDetail',
                   campaign: article.campaigns[0].campaign,
                   stage: article.campaigns[0].stage || undefined,
                 })}
-                className={styles.campaign}
+                legacyBehavior
               >
-                {article.campaigns[0].campaign.name}
-              </a>
+                <a className={styles.campaign}>
+                  {article.campaigns[0].campaign.name}
+                </a>
+              </Link>
             )}
           </>
         )}
