@@ -149,8 +149,10 @@ const EditModeHeader = ({
           ...(isReplyToDonatorRevised
             ? { replyToDonator: revision.replyToDonator }
             : {}),
-          ...(isCircleRevised ? { circle: circle?.id || null } : {}),
-          ...(isAccessRevised ? { accessType } : {}),
+          ...(isCircleRevised
+            ? { circle: circle?.id || null, accessType: accessType }
+            : {}),
+          ...(!isCircleRevised && isAccessRevised ? { accessType } : {}),
           ...(isLicenseRevised ? { license } : {}),
           ...(restProps.iscnPublish
             ? { iscnPublish: restProps.iscnPublish }
@@ -213,6 +215,24 @@ const EditModeHeader = ({
     !hasContent ||
     isOverLength
 
+  const validateArticleSettings = () => {
+    const hasCampaign = !!restProps.selectedCampaign
+    const hasCircle = !!restProps.circle
+
+    if (hasCampaign && hasCircle) {
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="Article cannot be added to Free Write or circle at the same time"
+            id="nLt9TU"
+          />
+        ),
+      })
+      return false
+    }
+    return true
+  }
+
   return (
     <section className={styles.header}>
       <span />
@@ -244,7 +264,15 @@ const EditModeHeader = ({
           cancelButtonText={
             <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
           }
-          onConfirm={needRepublish ? undefined : onSave}
+          onConfirm={
+            needRepublish
+              ? undefined
+              : () => {
+                  if (validateArticleSettings()) {
+                    onSave()
+                  }
+                }
+          }
           ConfirmStepContent={ConfirmStepContent}
         >
           {({ openDialog: openEditorSettingsDialog }) => (
@@ -252,7 +280,11 @@ const EditModeHeader = ({
               size={[null, '2rem']}
               spacing={[0, 16]}
               bgColor="green"
-              onClick={openEditorSettingsDialog}
+              onClick={() => {
+                if (validateArticleSettings()) {
+                  openEditorSettingsDialog()
+                }
+              }}
               aria-haspopup="dialog"
               disabled={disabled}
             >

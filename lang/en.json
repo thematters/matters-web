@@ -2823,6 +2823,9 @@
   "nGBrvw": {
     "defaultMessage": "Bookmarks"
   },
+  "nLt9TU": {
+    "defaultMessage": "Article cannot be added to Free Write or circle at the same time"
+  },
   "nNB7KU": {
     "defaultMessage": "replied your comment in",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"

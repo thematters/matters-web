@@ -1,6 +1,8 @@
+import Link from 'next/link'
 import { useContext } from 'react'
 
 import { ReactComponent as IconPaywall } from '@/public/static/icons/24px/paywall.svg'
+import { toPath } from '~/common/utils'
 import { CircleDigest, Icon, TextIcon, ViewerContext } from '~/components'
 import { FooterActionsArticlePublicFragment } from '~/gql/graphql'
 
@@ -18,6 +20,7 @@ export type FooterActionsProps = {
   hasReadTime?: boolean
   hasDonationCount?: boolean
   hasCircle?: boolean
+  hasCampaign?: boolean
   tag?: React.ReactNode
   includesMetaData?: boolean
 } & FooterActionsControls
@@ -28,6 +31,7 @@ const FooterActions = ({
   hasReadTime,
   hasDonationCount,
   hasCircle,
+  hasCampaign = true,
   tag,
   includesMetaData = true,
   ...controls
@@ -67,6 +71,21 @@ const FooterActions = ({
                   textWeight="normal"
                 />
               </TextIcon>
+            )}
+
+            {hasCampaign && article.campaigns.length > 0 && (
+              <Link
+                {...toPath({
+                  page: 'campaignDetail',
+                  campaign: article.campaigns[0].campaign,
+                  stage: article.campaigns[0].stage || undefined,
+                })}
+                legacyBehavior
+              >
+                <a className={styles.campaign}>
+                  {article.campaigns[0].campaign.name}
+                </a>
+              </Link>
             )}
           </>
         )}

@@ -186,6 +186,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                   id: article.author.id,
                 })
               }}
+              hasCampaign={false}
               hasToggleCampaignFeatured
               campaignId={camapign.id}
               campaignFeatured={false}
@@ -257,6 +258,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                   id: node.author.id,
                 })
               }}
+              hasCampaign={false}
               hasToggleCampaignFeatured
               campaignId={camapign.id}
               campaignFeatured={isFeatured}
