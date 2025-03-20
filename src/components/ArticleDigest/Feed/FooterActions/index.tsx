@@ -78,7 +78,6 @@ const FooterActions = ({
                 {...toPath({
                   page: 'campaignDetail',
                   campaign: article.campaigns[0].campaign,
-                  stage: article.campaigns[0].stage || undefined,
                 })}
                 legacyBehavior
               >
