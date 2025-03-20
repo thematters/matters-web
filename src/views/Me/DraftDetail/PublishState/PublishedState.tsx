@@ -26,7 +26,23 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   useEffect(() => {
     client.refetchQueries({
       updateCache: (cache) => {
+        // evict viewer.drafts
         cache.evict({ id: cache.identify(viewer), fieldName: 'drafts' })
+
+        // evict campaign if it exists
+        if (draft.campaigns[0].campaign) {
+          client.cache.evict({
+            id: client.cache.identify(draft.campaigns[0].campaign),
+          })
+        }
+
+        // evict circle if it exists
+        if (draft.access.circle) {
+          client.cache.evict({
+            id: client.cache.identify(draft.access.circle),
+          })
+        }
+
         cache.gc()
       },
     })
