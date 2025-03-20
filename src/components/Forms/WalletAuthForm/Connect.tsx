@@ -106,9 +106,13 @@ const Connect: React.FC<FormProps> = ({
     undefined,
     { showToast: false }
   )
-  const [walletLogin] = useMutation<WalletLoginMutation>(
+  const [walletLogin, { client }] = useMutation<WalletLoginMutation>(
     WALLET_LOGIN,
-    undefined,
+    {
+      onCompleted: () => {
+        client?.resetStore()
+      },
+    },
     {
       showToast: false,
     }
@@ -235,6 +239,8 @@ const Connect: React.FC<FormProps> = ({
             redirectToTarget({
               fallback: isInPage ? 'homepage' : 'current',
             })
+
+            closeDialog?.()
           } else if (submitCallback) {
             submitCallback(loginData?.walletLogin.type)
           }
