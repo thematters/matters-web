@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
+import baseToast from 'react-hot-toast'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
@@ -85,6 +86,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     {
       onCompleted: () => {
         client?.resetStore()
+
+        baseToast.dismiss()
       },
     },
     { showToast: false }
