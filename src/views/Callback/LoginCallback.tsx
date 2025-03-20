@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from 'react'
+import baseToast from 'react-hot-toast'
 
 import {
   COOKIE_LANGUAGE,
@@ -22,6 +23,7 @@ const LoginCallback = () => {
     {
       onCompleted: () => {
         client?.resetStore()
+        baseToast.dismiss()
       },
     },
     {

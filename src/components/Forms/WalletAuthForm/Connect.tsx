@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useState } from 'react'
+import baseToast from 'react-hot-toast'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
@@ -111,6 +112,7 @@ const Connect: React.FC<FormProps> = ({
     {
       onCompleted: () => {
         client?.resetStore()
+        baseToast.dismiss()
       },
     },
     {

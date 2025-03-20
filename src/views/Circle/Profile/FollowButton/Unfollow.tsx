@@ -1,8 +1,8 @@
 import _isNil from 'lodash/isNil'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Button, TextIcon, useMutation } from '~/components'
+import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import {
   FollowButtonCirclePrivateFragment,
@@ -14,6 +14,7 @@ interface UnfollowCircleProps {
 }
 
 const Unfollow = ({ circle }: UnfollowCircleProps) => {
+  const viewer = useContext(ViewerContext)
   const [hover, setHover] = useState(false)
   const [unfollow] = useMutation<ToggleFollowCircleMutation>(
     TOGGLE_FOLLOW_CIRCLE,
@@ -30,19 +31,28 @@ const Unfollow = ({ circle }: UnfollowCircleProps) => {
             }
           : undefined,
       update: (cache) => {
-        if (circle.id) {
-          cache.modify({
-            id: cache.identify(circle),
-            fields: {
-              followers: (existingFollowers) => {
-                return {
-                  ...existingFollowers,
-                  totalCount: existingFollowers.totalCount - 1,
-                }
-              },
-            },
-          })
+        if (!circle.id) {
+          return
         }
+
+        // decrement circle's followers count
+        cache.modify({
+          id: cache.identify(circle),
+          fields: {
+            followers: (existingFollowers) => {
+              return {
+                ...existingFollowers,
+                totalCount: existingFollowers.totalCount - 1,
+              }
+            },
+          },
+        })
+
+        // remove viewer's following circle
+        cache.evict({
+          id: cache.identify(viewer),
+          fieldName: 'following',
+        })
       },
     }
   )
