@@ -32,7 +32,12 @@ export const fragments = {
           campaign {
             id
             shortHash
-            name
+            ... on WritingChallenge {
+              id
+              nameZhHant: name(input: { language: zh_hant })
+              nameZhHans: name(input: { language: zh_hans })
+              nameEn: name(input: { language: en })
+            }
           }
           stage {
             id
