@@ -30,7 +30,7 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
         cache.evict({ id: cache.identify(viewer), fieldName: 'drafts' })
 
         // evict campaign if it exists
-        if (draft.campaigns[0].campaign) {
+        if (draft.campaigns[0] && draft.campaigns[0].campaign) {
           client.cache.evict({
             id: client.cache.identify(draft.campaigns[0].campaign),
           })

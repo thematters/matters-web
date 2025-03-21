@@ -69,7 +69,10 @@ const EditModeHeader = ({
     {
       update: (cache, { data }) => {
         // evict campaign if it exists
-        if (data?.editArticle?.campaigns[0].campaign) {
+        if (
+          data?.editArticle?.campaigns[0] &&
+          data.editArticle.campaigns[0].campaign
+        ) {
           cache.evict({
             id: cache.identify(data.editArticle.campaigns[0].campaign),
           })
