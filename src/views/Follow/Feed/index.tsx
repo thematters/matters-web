@@ -51,6 +51,7 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
       variables: isArticleTab
         ? { type: RecommendationFollowingFilterType.Article }
         : {},
+      fetchPolicy: 'cache-and-network',
     }
   )
 
