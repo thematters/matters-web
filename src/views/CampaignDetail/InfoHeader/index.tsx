@@ -27,6 +27,9 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
   const { start: writingStart, end: writingEnd } = campaign.writingPeriod || {}
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
+  const applicationState = campaign.application?.state
+  const isRejected = applicationState === 'rejected'
+  const isActiveCampaign = campaign.state === 'active'
 
   const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
 
@@ -128,9 +131,15 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
             <Participants campaign={campaign} />
           </section>
 
-          <section className={styles.mobileApply}>
-            <Apply.Button campaign={campaign} size="lg" onClick={openDialog} />
-          </section>
+          {!isRejected && isActiveCampaign && (
+            <section className={styles.mobileApply}>
+              <Apply.Button
+                campaign={campaign}
+                size="lg"
+                onClick={openDialog}
+              />
+            </section>
+          )}
         </header>
       )}
     </Apply.Dialog>
