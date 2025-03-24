@@ -1,6 +1,7 @@
 export * from './abis'
 export * from './analytics'
 export * from './audioPlayer'
+export * from './channels'
 export * from './comment'
 export * from './connections'
 export * from './contract'
