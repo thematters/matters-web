@@ -14,6 +14,7 @@ import {
   List,
   Media,
   QueryError,
+  Spacer,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -249,6 +250,14 @@ const MainFeed = ({}: MainFeedProps) => {
 
   return (
     <>
+      {isIcymiFeed && (
+        <section className={styles.header}>
+          <h1>
+            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+          </h1>
+          <Spacer size="sp20" />
+        </section>
+      )}
       {isIcymiFeed && <Announcements />}
       {recommendation &&
         'icymiTopic' in recommendation &&
