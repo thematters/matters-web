@@ -1,4 +1,3 @@
-import classNames from 'classnames'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
@@ -47,13 +46,9 @@ const ArticleFeedsTabs = ({
   const shouldShowFeaturedTab = campaign.featuredArticles.totalCount > 0
   const shouldShowAnnouncementTab = campaign.announcements.length > 0
 
-  const tabsClasses = classNames(styles.tabs, {
-    [styles.leftSpacing]: !isInTemporaryChannel,
-  })
-
   return (
-    <section className={tabsClasses}>
-      <SquareTabs>
+    <section className={styles.tabs}>
+      <SquareTabs spacing={!isInTemporaryChannel ? 'sm' : undefined}>
         <SquareTabs.Tab
           selected={feedType === FEED_TYPE_ALL}
           onClick={() => {

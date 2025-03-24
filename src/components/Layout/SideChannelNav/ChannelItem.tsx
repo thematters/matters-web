@@ -11,6 +11,14 @@ type ChannelItemProps = {
   channel: ChannelsQuery['channels'][number]
 }
 
+const displayChannelName = (name: string) => {
+  const parts = name.split('_')
+  if (parts.length > 1) {
+    return parts.slice(1).join('_')
+  }
+  return name
+}
+
 const ChannelItem = ({ channel }: ChannelItemProps) => {
   const { getQuery, router } = useRoute()
   const shortHash = getQuery('shortHash')
@@ -61,7 +69,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
           router.push(`/c/${channel.shortHash}`)
         }}
       >
-        <span>{channel.name}</span>
+        <span>{displayChannelName(channel.name)}</span>
       </a>
     </Tooltip>
   )

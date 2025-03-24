@@ -23,7 +23,10 @@ const HomeFeed = () => {
       {/* <SortBy feedType={feedType} setFeedType={changeFeed} /> */}
 
       <Layout.Main>
-        {!isInChannel && <Spacer size="sp20" />}
+        {!isInChannel &&
+          !(isInPath('HOME') && getQuery('type') === 'icymi') && (
+            <Spacer size="sp20" />
+          )}
         <MainFeed feedSortType={feedType} />
       </Layout.Main>
     </>
