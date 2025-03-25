@@ -32,12 +32,14 @@ const SideChannelNav = () => {
 
   const channels = data?.channels || []
 
-  const sortedChannels = [...channels].sort((a, b) => {
-    const prefixA = parseInt(a.name.split('_')[0], 10) || 0
-    const prefixB = parseInt(b.name.split('_')[0], 10) || 0
+  const sortedChannels = [...channels]
+    .filter((c) => c.enabled)
+    .sort((a, b) => {
+      const prefixA = parseInt(a.name.split('_')[0], 10) || 0
+      const prefixB = parseInt(b.name.split('_')[0], 10) || 0
 
-    return prefixA - prefixB
-  })
+      return prefixA - prefixB
+    })
 
   const navigateTo = (e: React.MouseEvent, path: string) => {
     e.preventDefault()

@@ -1,3 +1,4 @@
+import { displayChannelName } from '~/common/utils'
 import { ChannelByShortHashQuery } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -13,7 +14,7 @@ export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
   return (
     <>
       <div className={styles.header}>
-        <h1>{channel.name}</h1>
+        <h1>{displayChannelName(channel.name)}</h1>
       </div>
       <p className={styles.description}>{channel.description}</p>
     </>

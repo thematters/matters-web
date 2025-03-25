@@ -5,6 +5,7 @@ export const CHANNELS = gql`
     channels {
       id
       shortHash
+      enabled
       name(input: { language: $userLanguage })
     }
   }

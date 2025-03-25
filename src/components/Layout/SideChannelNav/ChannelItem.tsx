@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import { useLayoutEffect } from 'react'
 import { useRef, useState } from 'react'
 
+import { displayChannelName } from '~/common/utils'
 import { Tooltip } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
 import { ChannelsQuery } from '~/gql/graphql'
@@ -9,14 +10,6 @@ import { ChannelsQuery } from '~/gql/graphql'
 import styles from './styles.module.css'
 type ChannelItemProps = {
   channel: ChannelsQuery['channels'][number]
-}
-
-const displayChannelName = (name: string) => {
-  const parts = name.split('_')
-  if (parts.length > 1) {
-    return parts.slice(1).join('_')
-  }
-  return name
 }
 
 const ChannelItem = ({ channel }: ChannelItemProps) => {
