@@ -12,6 +12,7 @@ import {
   Media,
   QueryError,
   SpinnerBlock,
+  toast,
   usePublicQuery,
   ViewerContext,
 } from '~/components'
@@ -85,6 +86,83 @@ const horizontalFeeds: FeedLocation = {
       <Tags />
     </Media>
   ),
+}
+
+const PrefetchButton: React.FC<{ edges: FeedEdge[]; recommendation?: any }> = ({
+  edges,
+  recommendation,
+}) => {
+  const [prefetching, setPrefetching] = useState(false)
+  const client = useApolloClient()
+
+  const prefetchArticles = async () => {
+    setPrefetching(true)
+
+    // Collect all articles to prefetch
+    const feedArticles = edges.filter(
+      (edge): edge is Exclude<FeedEdge, HorizontalFeedEdge> =>
+        edge.__typename !== 'HorizontalFeed'
+    )
+
+    // Add icymiTopic articles if they exist
+    const icymiArticles = recommendation?.icymiTopic?.articles || []
+    const allArticles = [...feedArticles, ...icymiArticles]
+
+    for (let i = 0; i < allArticles.length; i++) {
+      const article = allArticles[i]
+      const title = 'node' in article ? article.node.title : article.title
+
+      try {
+        await client.query({
+          query: ARTICLE_DETAIL_PUBLIC,
+          variables: {
+            shortHash:
+              'node' in article
+                ? article.node.shortHash || ''
+                : article.shortHash || '',
+            language: UserLanguage.ZhHant,
+          },
+        })
+        toast.success({
+          message: `已緩存：${title}`,
+        })
+      } catch (error) {
+        toast.error({
+          message: `緩存失敗：${title}`,
+        })
+      }
+    }
+
+    setPrefetching(false)
+    toast.success({
+      message: 'All articles prefetched!',
+    })
+  }
+
+  const buttonStyle: CSSProperties = {
+    position: 'fixed',
+    right: '20px',
+    bottom: '20px',
+    padding: '4px 15px',
+    fontSize: '14px',
+    borderRadius: '4px',
+    border: 'none',
+    backgroundColor: '#1890ff',
+    color: 'white',
+    cursor: prefetching ? 'not-allowed' : 'pointer',
+    opacity: prefetching ? 0.5 : 1,
+    zIndex: 1000,
+  }
+
+  return (
+    <button
+      onClick={prefetchArticles}
+      disabled={prefetching}
+      style={buttonStyle}
+    >
+       緩存當前頁面文章
+    </button>
+  )
 }
 
 const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
@@ -201,96 +279,6 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
     })
   }
 
-  const PrefetchButton: React.FC<{ edges: FeedEdge[] }> = ({ edges }) => {
-    const [prefetching, setPrefetching] = useState(false)
-    const [progress, setProgress] = useState(0)
-    const client = useApolloClient()
-
-    const prefetchArticles = async () => {
-      setPrefetching(true)
-      setProgress(0)
-
-      const articles = edges.filter(
-        (edge): edge is Exclude<FeedEdge, HorizontalFeedEdge> =>
-          edge.__typename !== 'HorizontalFeed'
-      )
-      const total = articles.length
-
-      for (let i = 0; i < total; i++) {
-        const edge = articles[i]
-        if ('node' in edge) {
-          await client.query({
-            query: ARTICLE_DETAIL_PUBLIC,
-            variables: {
-              shortHash: edge.node.shortHash || '',
-              language: UserLanguage.ZhHant,
-            },
-          })
-        }
-        setProgress(Math.round(((i + 1) / total) * 100))
-        console.log('prefetching', i + 1, total, progress, edge.node)
-      }
-
-      setPrefetching(false)
-    }
-
-    const buttonStyle: CSSProperties = {
-      position: 'fixed',
-      right: '20px',
-      bottom: '20px',
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      gap: '10px',
-      background: 'white',
-      padding: '10px',
-      borderRadius: '8px',
-      boxShadow: '0 2px 8px rgba(0,0,0,0.15)',
-      zIndex: 1000,
-    }
-
-    const progressBarStyle: CSSProperties = {
-      width: '120px',
-      height: '4px',
-      backgroundColor: '#f0f0f0',
-      borderRadius: '2px',
-      overflow: 'hidden',
-    }
-
-    const progressStyle: CSSProperties = {
-      width: `${progress}%`,
-      height: '100%',
-      backgroundColor: '#1890ff',
-      transition: 'width 0.2s ease',
-    }
-
-    return (
-      <div style={buttonStyle}>
-        <button
-          onClick={prefetchArticles}
-          disabled={prefetching}
-          style={{
-            padding: '4px 15px',
-            fontSize: '14px',
-            borderRadius: '4px',
-            border: 'none',
-            backgroundColor: '#1890ff',
-            color: 'white',
-            cursor: prefetching ? 'not-allowed' : 'pointer',
-            opacity: prefetching ? 0.7 : 1,
-          }}
-        >
-          {prefetching ? 'Prefetching...' : 'Prefetch Articles'}
-        </button>
-        {prefetching && (
-          <div style={progressBarStyle}>
-            <div style={progressStyle} />
-          </div>
-        )}
-      </div>
-    )
-  }
-
   return (
     <>
       {recommendation &&
@@ -350,7 +338,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
           })}
         </List>
       </InfiniteScroll>
-      <PrefetchButton edges={mixFeed} />
+      <PrefetchButton edges={mixFeed} recommendation={recommendation} />
     </>
   )
 }
