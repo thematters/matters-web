@@ -71,10 +71,10 @@ const withPWA = require('next-pwa')({
   disable: isLocal,
   register: true,
   sw: 'service-worker.js',
-  runtimeCaching: [], // disable runtime caching
+  // runtimeCaching: [], // disable runtime caching
   publicExcludes: ['!static/**/*'],
   buildExcludes: [/.*\.svg/],
-  cacheStartUrl: false,
+  cacheStartUrl: true,
   dynamicStartUrl: true,
 })
 
