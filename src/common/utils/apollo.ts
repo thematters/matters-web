@@ -4,6 +4,7 @@ import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
+import { CachePersistor, LocalStorageWrapper } from 'apollo3-cache-persist'
 import { sha256 } from 'crypto-hash'
 import type { IncomingHttpHeaders } from 'http'
 import _get from 'lodash/get'
@@ -219,6 +220,35 @@ export const createApolloClient = (
 
   const host = headers?.host || (isClient ? _get(window, 'location.host') : '')
   const cookie = headers?.cookie || (isClient ? document.cookie : '')
+
+  // await before instantiating ApolloClient, else queries might run before the cache is persisted
+  if (isClient) {
+    // persistCacheSync({
+    //   cache,
+    //   storage: new LocalStorageWrapper(window.localStorage),
+    // })
+
+    const APP_VERSION_KEY = 'apollo-cacahe-version'
+
+    const persistor = new CachePersistor({
+      cache,
+      storage: new LocalStorageWrapper(window.localStorage),
+    })
+
+    // Read the current schema version from AsyncStorage.
+    const currentVersion = window.localStorage.getItem(APP_VERSION_KEY)
+
+    if (currentVersion === packageJson.version) {
+      // If the current version matches the latest version,
+      // we're good to go and can restore the cache.
+      persistor.restore()
+    } else {
+      // Otherwise, we'll want to purge the outdated persisted cache
+      // and mark ourselves as having updated to the latest version.
+      persistor.purge()
+      window.localStorage.setItem(APP_VERSION_KEY, packageJson.version)
+    }
+  }
 
   const client = new ApolloClient({
     name: packageJson.name,
