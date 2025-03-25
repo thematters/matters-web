@@ -13,9 +13,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { updateUserCollectionsArticles } from '~/components/GQL'
 import { AddCollectionsArticlesMutation } from '~/gql/graphql'
-import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 
 import { ADD_COLLECTIONS_ARTICLES } from './gql'
 import SelectDialogContent from './SelectDialogContent'
@@ -39,9 +37,6 @@ const BaseAddCollectionsArticleDialog = ({
   children,
   articleId,
 }: AddCollectionsArticleDialogProps) => {
-  // FIXME: circular dependencies
-  const { COLLECTION_DETAIL } = require('~/views/User/CollectionDetail/gql')
-
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
 
@@ -51,7 +46,11 @@ const BaseAddCollectionsArticleDialog = ({
     undefined,
     { showToast: false }
   )
-  const { show, openDialog, closeDialog: cd } = useDialogSwitch(true)
+  const {
+    show,
+    openDialog,
+    closeDialog: baseCloseDialog,
+  } = useDialogSwitch(true)
 
   const [area, setArea] = useState<Area>('selecting')
   const inSelectingArea = area === 'selecting'
@@ -75,16 +74,19 @@ const BaseAddCollectionsArticleDialog = ({
             articles: [articleId],
           },
         },
-        refetchQueries: [
-          {
-            query: USER_COLLECTIONS,
-            variables: { userName: viewer.userName },
-          },
-          {
-            query: COLLECTION_DETAIL,
-            variables: { id: checked[0] },
-          },
-        ],
+        update: (cache) => {
+          cache.evict({
+            id: cache.identify(viewer),
+            fieldName: 'collections',
+          })
+          cache.evict({
+            id: cache.identify({ __typename: 'Collection', id: checked[0] }),
+          })
+          cache.gc()
+        },
+        onQueryUpdated(observableQuery) {
+          return observableQuery.refetch()
+        },
       })
 
       const path = toPath({
@@ -119,13 +121,13 @@ const BaseAddCollectionsArticleDialog = ({
       setSubmitting(false)
       // clear data
       formik.setFieldValue('checked', [])
-      cd()
+      baseCloseDialog()
     },
   })
 
   const closeDialog = () => {
     formik.setFieldValue('checked', [])
-    cd()
+    baseCloseDialog()
   }
 
   return (
@@ -150,13 +152,30 @@ const BaseAddCollectionsArticleDialog = ({
               setArea('selecting')
             }}
             onUpdate={(cache, collection) => {
-              updateUserCollectionsArticles({
-                userName,
-                articleId: articleId,
-                cache,
-                type: 'addCollection',
-                collection,
+              cache.modify({
+                id: cache.identify(viewer),
+                fields: {
+                  collections: (existingCollections) => {
+                    const newEdge = {
+                      __typename: 'CollectionEdge',
+                      node: {
+                        ...collection,
+                        articles: {
+                          __typename: 'ArticleConnection',
+                          totalCount: 0,
+                          edges: [],
+                        },
+                        contains: false,
+                      },
+                    }
+                    return {
+                      ...existingCollections,
+                      edges: [newEdge, ...existingCollections.edges],
+                    }
+                  },
+                },
               })
+
               formik.setFieldValue('checked', [
                 collection.id,
                 ...formik.values.checked,

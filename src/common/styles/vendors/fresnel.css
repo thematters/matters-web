@@ -28,6 +28,7 @@
     display: none !important;
   }
 }
+
 @media not all and (width >= 1211px) {
   .fresnel-at-xl {
     display: none !important;
@@ -123,11 +124,13 @@
     display: none !important;
   }
 }
+
 @media not all and (width >= 0) and (width <= 866.98px) {
   .fresnel-between-xs-lg {
     display: none !important;
   }
 }
+
 @media not all and (width >= 0) and (width <= 1210.98px) {
   .fresnel-between-xs-xl {
     display: none !important;

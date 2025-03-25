@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import _chunk from 'lodash/chunk'
 import { useContext } from 'react'
@@ -53,7 +53,6 @@ const TagsFeed = () => {
   const { data, error } = usePublicQuery<FeedTagsPublicQuery>(
     FEED_TAGS,
     {
-      notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0, first: perPage },
     },
     { publicQuery: !viewer.isAuthed }

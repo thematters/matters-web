@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
@@ -244,8 +244,8 @@ const SetAmount: React.FC<FormProps> = ({
         id: 'XMpFQE',
       })
     : hasUSDTNetworkError && !isUserRejectedError
-    ? WALLET_ERROR_MESSAGES[lang].unknown
-    : ''
+      ? WALLET_ERROR_MESSAGES[lang].unknown
+      : ''
 
   const ComposedAmountInputHint = () => {
     const hkdHint = isHKD ? (

@@ -10,6 +10,7 @@
   margin-right: calc(var(--sp16) * -1);
   margin-bottom: calc(var(--sp8) * -1);
   background-color: var(--color-white);
+
   @media (--sm-up) {
     top: var(--lg-top-nav-height);
   }

@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'

@@ -54,8 +54,8 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                   lang === 'zh_hans'
                     ? 'nameZhHans'
                     : lang === 'zh_hant'
-                    ? 'nameZhHant'
-                    : 'nameEn'
+                      ? 'nameZhHant'
+                      : 'nameEn'
                 ]
               }
             </h1>

@@ -12,7 +12,6 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { updateUserCollections, updateUserWritings } from '~/components/GQL'
 import {
   DeleteCollectionCollectionFragment,
   DeleteCollectionMutation,
@@ -51,50 +50,40 @@ const DeleteCollectionDialog = ({
   children,
 }: DeleteCollectionDialogProps) => {
   const viewer = useContext(ViewerContext)
-  const { show, openDialog, closeDialog: cd } = useDialogSwitch(true)
+  const {
+    show,
+    openDialog,
+    closeDialog: baseCloseDialog,
+  } = useDialogSwitch(true)
   const { isInPath, router } = useRoute()
   const isInUserCollectionDetail = isInPath('USER_COLLECTION_DETAIL')
   const [step, setStep] = useState<Step>('delete')
   const isInDelete = step === 'delete'
   const isInConfirmDelete = step === 'confirmDelete'
   const closeDialog = () => {
-    cd()
+    baseCloseDialog()
     setTimeout(() => {
       setStep('delete')
     }, 1000)
   }
-  const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
   const [deleteCollection, { loading, client }] =
     useMutation<DeleteCollectionMutation>(DELETE_COLLECTION, {
       variables: { id: collection.id },
       update: (cache) => {
-        updateUserWritings({
-          cache,
-          targetId: collection.id,
-          userName: collection.author.userName!,
-          type: 'unpin',
+        cache.evict({
+          id: cache.identify(viewer),
+          fieldName: 'collections',
         })
-        updateUserCollections({
-          cache,
-          collectionIds: [collection.id],
-          userName: collection.author.userName!,
-          type: 'delete',
+        cache.evict({
+          id: cache.identify(viewer),
+          fieldName: 'pinnedWorks',
         })
-
-        // FIXME: Why not update user profile tab collection count?
-        // const result = updateUserProfile({
-        //   cache,
-        //   userName: collection.author.userName!,
-        //   type: 'decreaseCollection',
-        // })
+        cache.gc()
         onEmptyCollection()
       },
-      refetchQueries: [
-        {
-          query: USER_PROFILE_PUBLIC,
-          variables: { userName: collection.author.userName },
-        },
-      ],
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
+      },
     })
 
   const onEmptyCollection = async () => {

@@ -7,6 +7,7 @@
   justify-content: space-between;
   padding: var(--sp16) var(--sp16);
   background-color: var(--color-white);
+
   @mixin border-bottom-grey-light;
 
   border-bottom-color: var(--color-grey-hover);

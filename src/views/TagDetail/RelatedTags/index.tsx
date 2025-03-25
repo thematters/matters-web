@@ -29,9 +29,10 @@ const RelatedTagsHeader = () => {
 }
 
 const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
-  const { data } = usePublicQuery<TagDetailRecommendedQuery>(RELATED_TAGS, {
-    variables: { id: tagId },
-  })
+  const { data, loading } = usePublicQuery<TagDetailRecommendedQuery>(
+    RELATED_TAGS,
+    { variables: { id: tagId } }
+  )
 
   const { edges } =
     (data?.node?.__typename === 'Tag' && data.node.recommended) || {}
@@ -44,7 +45,7 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
       id,
     })
 
-  if (!edges || edges.length <= 0) {
+  if (!loading && (!edges || edges.length === 0)) {
     return null
   }
 
@@ -57,13 +58,14 @@ const RelatedTags: React.FC<RelatedTagsProps> = ({ tagId, inSidebar }) => {
     <section className={relatedTagsClasses}>
       <RelatedTagsHeader />
       <section className={styles.tags}>
-        {edges?.map(({ node, cursor }, i) => (
-          <ArticleTag
-            key={node.id}
-            tag={node}
-            onClick={() => trackRelatedTags(i, node.id)}
-          />
-        ))}
+        {edges &&
+          edges?.map(({ node, cursor }, i) => (
+            <ArticleTag
+              key={node.id}
+              tag={node}
+              onClick={() => trackRelatedTags(i, node.id)}
+            />
+          ))}
       </section>
     </section>
   )

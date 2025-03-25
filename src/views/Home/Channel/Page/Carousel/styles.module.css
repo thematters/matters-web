@@ -1,6 +1,7 @@
 .carousel {
   position: relative;
   width: 100%;
+
   @media (--sm-up) {
     padding: 0;
   }

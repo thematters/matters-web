@@ -1,12 +1,10 @@
-import { useMutation } from '@apollo/react-hooks'
-import { createContext, useRef } from 'react'
+import { useMutation } from '@apollo/client'
+import { createContext, useContext, useRef } from 'react'
 
 import { randomString } from '~/common/utils'
-import { useRoute } from '~/components'
+import { useRoute, ViewerContext } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
 import { CreateDraftMutation } from '~/gql/graphql'
-import { ME_DRAFTS_FEED } from '~/views/Me/Drafts/gql'
-import { ME_WORKS_TABS } from '~/views/Me/Works/WorksTabs/gql'
 
 type Job = {
   id: string
@@ -89,10 +87,16 @@ export const DraftDetailStateProvider = ({
   /**
    * Draft getter and setter
    */
+  const viewer = useContext(ViewerContext)
   const { router } = useRoute()
   const [create] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
-    // refetch /me/drafts once a new draft has been created
-    refetchQueries: [{ query: ME_DRAFTS_FEED }, { query: ME_WORKS_TABS }],
+    update: (cache) => {
+      cache.evict({
+        id: cache.identify(viewer),
+        fieldName: 'drafts',
+      })
+      cache.gc()
+    },
   })
 
   // create draft and shallow replace URL

@@ -132,6 +132,7 @@ type FormGenCircleCommentKeyProps = {
   type: string
   parentId?: string
   replyToId?: string
+  commentId?: string
 }
 
 export const formStorage = {
@@ -150,10 +151,11 @@ export const formStorage = {
     type,
     parentId,
     replyToId,
+    commentId,
   }: FormGenCircleCommentKeyProps): FormStorageKey =>
     `form-draft:${authorId}:${circleId}:${type}:${parentId || 0}:${
       replyToId || 0
-    }`,
+    }:${commentId || 0}`,
   get: <T>(key: FormStorageKey, type: FormStorageType): T | null => {
     return type === 'session' ? sessionStorage.get<T>(key) : storage.get<T>(key)
   },

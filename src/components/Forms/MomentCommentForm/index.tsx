@@ -27,7 +27,6 @@ import {
   ViewerContext,
 } from '~/components'
 import CommentEditor from '~/components/Editor/Comment'
-import { updateMomentDetail } from '~/components/GQL'
 import { PUT_MOMENT_COMMENT } from '~/components/GQL/mutations/putComment'
 import {
   MomentCommentFormMomentFragment,
@@ -136,16 +135,25 @@ const MomentCommentForm = ({
 
           sessionStorage.set(NEW_POST_COMMENT_MUTATION_RESULT, newComment.id)
 
-          updateMomentDetail({
-            cache,
-            shortHash: moment.shortHash,
-            comment: newComment,
-            type: 'addComment',
+          cache.modify({
+            id: cache.identify(moment),
+            fields: {
+              comments(existingComments) {
+                const newCommentRef = cache.writeFragment({
+                  data: newComment,
+                  fragment: gql`
+                    fragment NewComment on Comment {
+                      id
+                    }
+                  `,
+                })
+                return {
+                  ...existingComments,
+                  edges: [...existingComments.edges, newCommentRef],
+                }
+              },
+            },
           })
-
-          const detail = {
-            comment: newComment,
-          }
 
           toast.success({
             message: (
@@ -159,7 +167,7 @@ const MomentCommentForm = ({
 
           window.dispatchEvent(
             new CustomEvent(UPDATE_NEWEST_MOMENT_COMMENT, {
-              detail,
+              detail: { comment: newComment },
             })
           )
         },

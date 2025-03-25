@@ -106,7 +106,7 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
   const duration = 3000 // 3 seconds
   const intervalTime = 100 // Update every 100ms
   const maxProgress = 99
-  let intervalId: NodeJS.Timer
+  let intervalId: NodeJS.Timeout
 
   const uploadImage = async (file: File) => {
     if (!upload) return

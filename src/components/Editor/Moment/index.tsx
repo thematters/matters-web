@@ -1,7 +1,8 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import {
   Editor,
   EditorContent,
+  Extension,
   Mention,
   momentEditorExtensions,
   PasteDropFile,
@@ -50,6 +51,7 @@ const MomentEditor: React.FC<Props> = ({
 
   const editor = useEditor({
     // autofocus: true,
+    immediatelyRender: false,
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
       const content = editor.getHTML()
@@ -88,7 +90,7 @@ const MomentEditor: React.FC<Props> = ({
         },
       }),
       ...momentEditorExtensions,
-    ],
+    ] as Extension[],
   })
 
   useEffect(() => {

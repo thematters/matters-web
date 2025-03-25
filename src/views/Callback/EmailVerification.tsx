@@ -8,7 +8,7 @@ import {
   COOKIE_USER_GROUP,
   PATHS,
 } from '~/common/enums'
-import { redirectToTarget, setCookies } from '~/common/utils'
+import { setCookies } from '~/common/utils'
 import { toast, useMutation, useRoute, ViewerContext } from '~/components'
 import { VerifyEmailMutation } from '~/gql/graphql'
 
@@ -52,7 +52,7 @@ const EmailVerification = () => {
 
           // refresh page if user is not authed
           if (!viewer.isAuthed) {
-            redirectToTarget({ fallback: 'homepage' })
+            window.location.href = '/'
           }
           return
         }

@@ -1,9 +1,10 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
 import { analytics } from '~/common/utils'
 import {
+  ArticleTag,
   List,
   QueryError,
   SpinnerBlock,
@@ -53,7 +54,6 @@ const Tags = () => {
   const { data, loading, error } = usePublicQuery<SidebarTagsPublicQuery>(
     SIDEBAR_TAGS,
     {
-      notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0, first: perPage },
     },
     { publicQuery: !viewer.isAuthed }
@@ -64,7 +64,8 @@ const Tags = () => {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0) {
+  // hide the tag list if we don't get a result from the response
+  if (!loading && (!edges || edges.length <= 0)) {
     return null
   }
 
@@ -76,25 +77,23 @@ const Tags = () => {
 
       {!loading && (
         <List hasBorder={false} className={styles.list}>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={node.id}>
-              <TagDigest.Concise
-                tag={node}
-                iconSize={20}
-                textSize={16}
-                textWeight="normal"
-                textLineClamp={true}
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'tags',
-                    contentType: 'tag',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-              />
-            </List.Item>
-          ))}
+          {edges &&
+            edges.map(({ node, cursor }, i) => (
+              <List.Item key={node.id}>
+                <ArticleTag
+                  tag={node}
+                  canClamp
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'tags',
+                      contentType: 'tag',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
+              </List.Item>
+            ))}
         </List>
       )}
     </section>

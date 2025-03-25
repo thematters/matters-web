@@ -183,7 +183,8 @@ export const CommentFeed = React.memo(
       prevComment.pinned === comment.pinned &&
       prevComment.author.isBlocked === comment.author.isBlocked &&
       prevDisabled === disabled &&
-      prevPinnedComment?.id === pinnedComment?.id
+      prevPinnedComment?.id === pinnedComment?.id &&
+      prevComment.fromDonator === comment.fromDonator
     )
   }
 ) as MemoizedCommentFeed

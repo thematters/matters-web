@@ -22,6 +22,7 @@ import {
   RemoveArticleCollectionDialogProps,
   ShareDialog,
   ShareDialogProps,
+  Spinner,
   SpinnerBlock,
   SubmitReport,
   toast,
@@ -64,42 +65,42 @@ const DynamicSetArticleChannelsButton = dynamic(
 )
 const DynamicToggleRecommendArticleButton = dynamic(
   () => import('./ToggleRecommendArticle/Button'),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicToggleRecommendArticleDialog = dynamic(
   () => import('./ToggleRecommendArticle/Dialog'),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicToggleRestrictUserButton = dynamic(
   () =>
     import(
       '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Button'
     ),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicToggleRestrictUserDialog = dynamic(
   () =>
     import(
       '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
     ),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicArchiveUserButton = dynamic(
   () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Button'),
   {
-    loading: () => <SpinnerBlock />,
+    loading: () => <Spinner />,
   }
 )
 const DynamicArchiveUserDialog = dynamic(
   () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'),
   {
-    loading: () => <SpinnerBlock />,
+    loading: () => <Spinner />,
   }
 )
 const DynamicToggleCampaignFeaturedButton = dynamic(
   () => import('./ToggleCampaignFeatured'),
   {
-    loading: () => <SpinnerBlock />,
+    loading: () => <Spinner />,
   }
 )
 

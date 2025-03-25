@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 
@@ -70,8 +70,8 @@ const CampaignDetail = () => {
             lang === 'zh_hans'
               ? 'nameZhHans'
               : lang === 'zh_hant'
-              ? 'nameZhHant'
-              : 'nameEn'
+                ? 'nameZhHant'
+                : 'nameEn'
           ]
         }
         path={path.href}

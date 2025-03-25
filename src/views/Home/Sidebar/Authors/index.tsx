@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import _random from 'lodash/random'
 import { useContext } from 'react'
 
@@ -31,12 +31,11 @@ const Authors = () => {
   /**
    * Data Fetching
    */
-  const perPage = 4
+  const perPage = 6
   const randomMaxSize = 50
-  const { data, loading, error, refetch } = usePublicQuery<SidebarAuthorsQuery>(
+  const { data, loading, error } = usePublicQuery<SidebarAuthorsQuery>(
     SIDEBAR_AUTHORS,
     {
-      notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0, first: perPage },
     },
     { publicQuery: !viewer.isAuthed }
@@ -49,12 +48,12 @@ const Authors = () => {
         perPage
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
-    refetch({ random })
 
-    client.writeData({
-      id: 'LastFetchRandom:local',
-      data: { sidebarAuthors: random },
-    })
+    lastFetchRandom &&
+      client.cache.modify({
+        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+        fields: { sidebarAuthors: () => random },
+      })
   }
 
   /**
@@ -64,7 +63,8 @@ const Authors = () => {
     return <QueryError error={error} />
   }
 
-  if (!edges || edges.length <= 0) {
+  // hide the author list if we don't get a result from the response
+  if (!loading && (!edges || edges.length === 0)) {
     return null
   }
 
@@ -76,32 +76,33 @@ const Authors = () => {
         viewAll={false}
       />
 
-      {loading && <SpinnerBlock />}
-
-      {!loading && (
+      {loading ? (
+        <SpinnerBlock />
+      ) : (
         <List hasBorder={false}>
-          {edges.map(({ node, cursor }, i) => (
-            <List.Item key={node.id}>
-              <UserDigest.Rich
-                user={node}
-                is="link"
-                spacing={[8, 8]}
-                bgColor="none"
-                bgActiveColor="greyLighter"
-                borderRadius="xtight"
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'authors',
-                    contentType: 'user',
-                    location: i,
-                    id: node.id,
-                  })
-                }
-                hasFollow={false}
-                hasState={false}
-              />
-            </List.Item>
-          ))}
+          {edges &&
+            edges.map(({ node, cursor }, i) => (
+              <List.Item key={node.id}>
+                <UserDigest.Rich
+                  user={node}
+                  is="link"
+                  spacing={[8, 8]}
+                  bgColor="none"
+                  bgActiveColor="greyLighter"
+                  borderRadius="xtight"
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'authors',
+                      contentType: 'user',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                  hasFollow={false}
+                  hasState={false}
+                />
+              </List.Item>
+            ))}
         </List>
       )}
     </section>
