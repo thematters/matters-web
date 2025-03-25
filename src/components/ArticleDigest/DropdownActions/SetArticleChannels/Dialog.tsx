@@ -4,6 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { displayChannelName } from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -99,7 +100,7 @@ const BaseSetArticleChannelsDialog = ({
           <Form.SquareCheckBox
             name="channels"
             value={channel.id}
-            content={channel.name}
+            contents={displayChannelName(channel.name)}
             checked={values.channels.includes(channel.id)}
             onChange={() => handleToggleChannel(channel.id)}
           />
