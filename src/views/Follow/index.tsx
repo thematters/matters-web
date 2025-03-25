@@ -1,10 +1,9 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Layout, SpinnerBlock, useMutation, ViewerContext } from '~/components'
-import { updateViewerUnreadFollowing } from '~/components/GQL'
 import { MeFollowQuery, ReadFollowingFeedMutation } from '~/gql/graphql'
 
 import Feed from './Feed'
@@ -38,7 +37,17 @@ const BaseFollow = ({ tab }: BaseFollowProps) => {
   const [readFollowing] = useMutation<ReadFollowingFeedMutation>(
     READ_FOLLOWING,
     {
-      update: updateViewerUnreadFollowing,
+      update: (cache) => {
+        cache.modify({
+          id: cache.identify(viewer),
+          fields: {
+            status: (existingStatus) => ({
+              ...existingStatus,
+              unreadFollowing: false,
+            }),
+          },
+        })
+      },
     }
   )
   const { data, loading } = useQuery<MeFollowQuery>(ME_FOLLOW)

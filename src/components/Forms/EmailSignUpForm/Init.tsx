@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
@@ -25,7 +25,7 @@ import {
   Icon,
   LanguageContext,
   Media,
-  ReCaptcha,
+  // ReCaptcha,
   TextIcon,
   useMutation,
   useRoute,
@@ -68,7 +68,7 @@ const Init: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
-  const [turnstileToken, setTurnstileToken] = useState<string>()
+  // const [turnstileToken, setTurnstileToken] = useState<string>()
 
   const [sendCode] = useMutation<SendVerificationCodeMutation>(
     SEND_CODE,
@@ -111,7 +111,7 @@ const Init: React.FC<FormProps> = ({
             input: {
               email,
               type: 'register',
-              token: turnstileToken,
+              // token: turnstileToken,
               redirectUrl,
               language: lang,
             },
@@ -163,7 +163,7 @@ const Init: React.FC<FormProps> = ({
         autoFocus
       />
 
-      <ReCaptcha action="register" setToken={setTurnstileToken} />
+      {/* <ReCaptcha action="register" setToken={setTurnstileToken} /> */}
     </Form>
   )
 

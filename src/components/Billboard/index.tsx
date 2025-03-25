@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
@@ -18,6 +19,15 @@ type BillboardProps = {
 }
 
 export const Billboard = ({ tokenId, type }: BillboardProps) => {
+  const [mount, setMount] = useState(false)
+
+  // The current version of wagmi does not support SSR, leading to dehydration
+  // warnings since the SSR and CSR are out-of-sync. The `useEffect` ensure
+  // that the initial render on the client matches the one on the server.
+  useEffect(() => {
+    setMount(true)
+  })
+
   // collect vars
   const id = !isNaN(Number(tokenId)) ? Number(tokenId) : 0
   const operatorAddress = process.env
@@ -33,6 +43,10 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
     operatorAddress,
     registryAddress,
   })
+
+  if (!mount) {
+    return null
+  }
 
   if (!id || isError || isLoading || !data || !data.contentURI) {
     return null

@@ -44,17 +44,18 @@ const PinBoard = ({ user }: PinBoardProps) => {
                       collection: work,
                     }
               )}
-              onClick={() =>
-                analytics.trackEvent('click_feed', {
-                  type: 'user_pinned_work',
-                  contentType:
-                    work.__typename === 'Article' ? 'article' : 'collection',
-                  location: index,
-                  id: work.id,
-                })
-              }
             >
-              <a>
+              <a
+                onClick={() =>
+                  analytics.trackEvent('click_feed', {
+                    type: 'user_pinned_work',
+                    contentType:
+                      work.__typename === 'Article' ? 'article' : 'collection',
+                    location: index,
+                    id: work.id,
+                  })
+                }
+              >
                 <Media lessThan="lg">
                   <Book.Flat
                     {...work}

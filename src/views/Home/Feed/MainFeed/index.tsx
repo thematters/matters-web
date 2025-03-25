@@ -1,4 +1,3 @@
-import { NetworkStatus } from 'apollo-client'
 import React, { useContext, useEffect, useRef } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -111,7 +110,7 @@ const MainFeed = ({}: MainFeedProps) => {
    */
   // public data
   const query = FEED_ARTICLES_PUBLIC[sortBy]
-  const { data, error, loading, fetchMore, networkStatus, client } =
+  const { data, error, loading, fetchMore, client } =
     usePublicQuery<FeedArticlesPublic>(query, {
       variables: isInChannel
         ? {
@@ -125,7 +124,6 @@ const MainFeed = ({}: MainFeedProps) => {
   const recommendation = data?.viewer?.recommendation
   const result = recommendation?.feed
   const { edges, pageInfo } = result || {}
-  const isNewLoading = networkStatus === NetworkStatus.loading
 
   const { data: channelData, loading: channelLoading } =
     usePublicQuery<ChannelByShortHashQuery>(CHANNEL_BY_SHORT_HASH, {
@@ -165,7 +163,7 @@ const MainFeed = ({}: MainFeedProps) => {
 
   // load next page
   const loadMore = async () => {
-    if (loading || isNewLoading) {
+    if (loading) {
       return
     }
 

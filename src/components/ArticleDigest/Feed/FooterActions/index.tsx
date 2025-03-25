@@ -1,7 +1,15 @@
+import Link from 'next/link'
 import { useContext } from 'react'
 
 import { ReactComponent as IconPaywall } from '@/public/static/icons/24px/paywall.svg'
-import { CircleDigest, Icon, TextIcon, ViewerContext } from '~/components'
+import { toPath } from '~/common/utils'
+import {
+  CircleDigest,
+  Icon,
+  LanguageContext,
+  TextIcon,
+  ViewerContext,
+} from '~/components'
 import { FooterActionsArticlePublicFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
@@ -18,6 +26,7 @@ export type FooterActionsProps = {
   hasReadTime?: boolean
   hasDonationCount?: boolean
   hasCircle?: boolean
+  hasCampaign?: boolean
   tag?: React.ReactNode
   includesMetaData?: boolean
 } & FooterActionsControls
@@ -28,6 +37,7 @@ const FooterActions = ({
   hasReadTime,
   hasDonationCount,
   hasCircle,
+  hasCampaign = true,
   tag,
   includesMetaData = true,
   ...controls
@@ -36,6 +46,7 @@ const FooterActions = ({
     access: { circle },
   } = article
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
 
   return (
     <footer className={styles.footer}>
@@ -67,6 +78,28 @@ const FooterActions = ({
                   textWeight="normal"
                 />
               </TextIcon>
+            )}
+
+            {hasCampaign && article.campaigns.length > 0 && (
+              <Link
+                {...toPath({
+                  page: 'campaignDetail',
+                  campaign: article.campaigns[0].campaign,
+                })}
+                legacyBehavior
+              >
+                <a className={styles.campaign}>
+                  {
+                    article.campaigns[0].campaign[
+                      lang === 'zh_hans'
+                        ? 'nameZhHans'
+                        : lang === 'zh_hant'
+                          ? 'nameZhHant'
+                          : 'nameEn'
+                    ]
+                  }
+                </a>
+              </Link>
             )}
           </>
         )}

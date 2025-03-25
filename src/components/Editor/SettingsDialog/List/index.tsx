@@ -70,6 +70,18 @@ const SettingsList = ({
     disableChangeCanComment,
   }
   const handleConfirm = () => {
+    if (!!selectedCampaign && !!restProps.circle) {
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="Article cannot be added to Free Write or circle at the same time"
+            id="nLt9TU"
+          />
+        ),
+      })
+      return
+    }
+
     if (
       selectedCampaign &&
       selectedCampaign.stages.length > 0 &&

@@ -161,15 +161,15 @@ const NoticeComment = ({
           circle,
         })
       : moment
-      ? toPath({
-          page: 'momentComment',
-          moment,
-          comment,
-        })
-      : {
-          href: '',
-          as: '',
-        }
+        ? toPath({
+            page: 'momentComment',
+            moment,
+            comment,
+          })
+        : {
+            href: '',
+            as: '',
+          }
 
   if (moment) {
     return (

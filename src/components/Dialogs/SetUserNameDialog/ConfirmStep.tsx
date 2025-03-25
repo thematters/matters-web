@@ -1,11 +1,16 @@
 import _pickBy from 'lodash/pickBy'
-import React from 'react'
+import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { Dialog, toast, useMutation, useRoute } from '~/components'
+import {
+  Dialog,
+  toast,
+  useMutation,
+  useRoute,
+  ViewerContext,
+} from '~/components'
 import { SetUserNameMutation } from '~/gql/graphql'
-import { USER_PROFILE_PUBLIC } from '~/views/User/UserProfile/gql'
 
 import { SET_USER_NAME } from './gql'
 
@@ -17,26 +22,25 @@ interface Props {
 
 const ConfirmStep: React.FC<Props> = ({ userName, back, closeDialog }) => {
   const { router } = useRoute()
+  const viewer = useContext(ViewerContext)
 
   const [update, { loading }] = useMutation<SetUserNameMutation>(
     SET_USER_NAME,
-    undefined,
     {
-      showToast: true,
-    }
+      update: (cache) => {
+        cache.evict({ id: cache.identify(viewer), fieldName: 'userName' })
+        cache.gc()
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
+      },
+    },
+    { showToast: true }
   )
 
   const confirmUse = async () => {
     try {
-      await update({
-        variables: { userName },
-        refetchQueries: [
-          {
-            query: USER_PROFILE_PUBLIC,
-            variables: { userName },
-          },
-        ],
-      })
+      await update({ variables: { userName } })
 
       toast.success({
         duration: Infinity,

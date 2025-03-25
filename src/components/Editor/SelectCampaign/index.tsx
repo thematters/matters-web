@@ -35,8 +35,9 @@ export const getSelectCampaigns = ({
     const isCampaignEnded = !!end && new Date(createdAt) >= new Date(end)
     const isCampaignActive = campaign?.state === CampaignState.Active
 
-    // only show appliedCampaign if the article or draft is created during the writing period
-    return isCampaignStarted && !isCampaignEnded && isCampaignActive
+    // only show appliedCampaign if the article or draft
+    // is created during the writing period
+    return (isCampaignStarted && !isCampaignEnded) || isCampaignActive
   })
 
   const selectedCampaign = campaigns?.find((campaign) => {

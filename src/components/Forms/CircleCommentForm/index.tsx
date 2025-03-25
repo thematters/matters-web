@@ -1,3 +1,4 @@
+import { Editor } from '@matters/matters-editor'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -53,6 +54,11 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
 
+  const [editor, localSetEditor] = useState<Editor | null>(null)
+  const setEditor = (editor: Editor | null) => {
+    localSetEditor(editor)
+  }
+
   const [putComment] = useMutation<PutCircleCommentMutation>(PUT_CIRCLE_COMMENT)
   const [isSubmitting, setSubmitting] = useState(false)
 
@@ -60,9 +66,11 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
     authorId: viewer.id,
     circleId,
     type,
+    commentId,
     parentId,
     replyToId,
   })
+
   const formDraft = formStorage.get<string>(formStorageKey, 'local')
   const [content, setContent] = useState(
     (typeof formDraft === 'string' && formDraft.length > 0 && formDraft) ||
@@ -99,6 +107,11 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
 
       // clear content
       setContent('')
+
+      if (editor) {
+        editor.commands.setContent('')
+        editor.commands.blur()
+      }
 
       // clear draft
       formStorage.remove<string>(formStorageKey, 'local')
@@ -141,6 +154,9 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
           update={onUpdate}
           onSubmit={() => window.dispatchEvent(new CustomEvent(formStorageKey))}
           placeholder={placeholder}
+          setEditor={(editor) => {
+            setEditor(editor)
+          }}
         />
       </section>
 

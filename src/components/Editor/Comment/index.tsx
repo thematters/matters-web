@@ -1,8 +1,9 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import {
   commentEditorExtensions,
   Editor,
   EditorContent,
+  Extension,
   Mention,
   Placeholder,
   useEditor,
@@ -63,6 +64,7 @@ const CommentEditor: React.FC<Props> = ({
       const content = editor.getHTML()
       update({ content })
     },
+    immediatelyRender: false,
     // FIXME: toggle scroll lock when editor is focused
     // can be removed if editor is only used in single page
     // instead of being used in dialog
@@ -84,7 +86,7 @@ const CommentEditor: React.FC<Props> = ({
       }),
       SmartLink.configure(makeSmartLinkOptions({ client })),
       ...commentEditorExtensions,
-    ],
+    ] as Extension[],
   })
 
   useEffect(() => {

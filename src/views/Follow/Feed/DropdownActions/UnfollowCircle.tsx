@@ -1,17 +1,8 @@
 import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
-import { useContext } from 'react'
 
 import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
-import {
-  Icon,
-  Menu,
-  toast,
-  Translate,
-  useMutation,
-  ViewerContext,
-} from '~/components'
-import { updateCircleFollowers } from '~/components/GQL'
+import { Icon, Menu, toast, Translate, useMutation } from '~/components'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import {
   ToggleFollowCircleMutation,
@@ -38,8 +29,6 @@ const fragments = {
 const UnfollowCircleActionButton = ({
   circle,
 }: UnfollowCircleActionButtonProps) => {
-  const viewer = useContext(ViewerContext)
-
   const [unfollow] = useMutation<ToggleFollowCircleMutation>(
     TOGGLE_FOLLOW_CIRCLE,
     {
@@ -52,12 +41,11 @@ const UnfollowCircleActionButton = ({
         },
       },
       update: (cache) => {
-        updateCircleFollowers({
-          cache,
-          type: 'unfollow',
-          name: circle.name,
-          viewer,
-        })
+        cache.evict({ id: cache.identify(circle), fieldName: 'followers' })
+        cache.gc()
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
       },
     }
   )

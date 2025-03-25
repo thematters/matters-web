@@ -5,6 +5,16 @@ const fragments = {
     fragment PublishStateDraft on Draft {
       id
       publishState
+      campaigns {
+        campaign {
+          id
+        }
+      }
+      access {
+        circle {
+          id
+        }
+      }
       article {
         id
         title

@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import classNames from 'classnames'
 import gql from 'graphql-tag'
 import React, { useContext } from 'react'
