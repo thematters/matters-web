@@ -228,6 +228,7 @@ const MainFeed = ({ feedSortType: sortBy }: MainFeedProps) => {
           })
         }
         setProgress(Math.round(((i + 1) / total) * 100))
+        console.log('prefetching', i + 1, total, progress, edge.node)
       }
 
       setPrefetching(false)
