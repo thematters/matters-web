@@ -1,7 +1,6 @@
 .content {
   max-height: calc(100vh - var(--sm-top-nav-height));
-  overflow-x: hidden;
-  overflow-y: auto;
+  overflow: hidden auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 
