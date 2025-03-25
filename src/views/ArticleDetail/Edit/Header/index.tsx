@@ -64,8 +64,29 @@ const EditModeHeader = ({
 }: EditModeHeaderProps) => {
   const router = useRouter()
   const { tags, collection, circle, accessType, license } = restProps
-  const [editArticle, { loading }] =
-    useMutation<EditArticleMutation>(EDIT_ARTICLE)
+  const [editArticle, { loading }] = useMutation<EditArticleMutation>(
+    EDIT_ARTICLE,
+    {
+      update: (cache, { data }) => {
+        // evict campaign if it exists
+        if (
+          data?.editArticle?.campaigns[0] &&
+          data.editArticle.campaigns[0].campaign
+        ) {
+          cache.evict({
+            id: cache.identify(data.editArticle.campaigns[0].campaign),
+          })
+        }
+
+        // evict circle if it exists
+        if (data?.editArticle?.access.circle) {
+          cache.evict({
+            id: cache.identify(data.editArticle.access.circle),
+          })
+        }
+      },
+    }
+  )
 
   const hasTitle = revision.title && revision.title.trim().length > 0
   const hasContent =
@@ -177,6 +198,7 @@ const EditModeHeader = ({
           isResetCampaign,
         },
       })
+
       if (needRepublish) {
         onPublish()
       } else {

@@ -19,11 +19,11 @@ jobs:
         run: npm ci
 
       - name: Generate Types (Develop)
-        if: github.base_ref != 'master'
+        if: github.base_ref != 'master' && github.base_ref != 'main'
         run: npm run gen:type
 
       - name: Generate Types (production)
-        if: github.base_ref == 'master'
+        if: github.base_ref == 'master' || github.base_ref == 'main'
         run: npm run gen:type:prod
 
       - name: Lint

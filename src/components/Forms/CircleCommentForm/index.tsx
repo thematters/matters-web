@@ -66,9 +66,11 @@ export const CircleCommentForm: React.FC<CircleCommentFormProps> = ({
     authorId: viewer.id,
     circleId,
     type,
+    commentId,
     parentId,
     replyToId,
   })
+
   const formDraft = formStorage.get<string>(formStorageKey, 'local')
   const [content, setContent] = useState(
     (typeof formDraft === 'string' && formDraft.length > 0 && formDraft) ||

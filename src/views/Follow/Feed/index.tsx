@@ -43,6 +43,29 @@ const renderableTypes = new Set([
   'UserRecommendationActivity',
 ])
 
+const getNodeId = (node: any, cursor: string): string => {
+  if (!node) return cursor
+
+  switch (node.__typename) {
+    case 'UserPublishArticleActivity':
+      return node.nodeArticle?.id || cursor
+    case 'UserPostMomentActivity':
+      return node.nodeMoment?.id || cursor
+    case 'UserBroadcastCircleActivity':
+      return node.targetCircle?.id || cursor
+    case 'UserCreateCircleActivity':
+      return node.nodeCircle?.id || cursor
+    case 'UserAddArticleTagActivity':
+      return `${node.actor?.id || ''}:${node.targetTag?.id || ''}` || cursor
+    case 'ArticleRecommendationActivity':
+      return node.source || cursor
+    case 'UserRecommendationActivity':
+      return cursor
+    default:
+      return cursor
+  }
+}
+
 const FollowingFeed = ({ tab }: FollowingFeedProps) => {
   const intl = useIntl()
   const isArticleTab = tab === 'Article'
@@ -117,9 +140,11 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
         eof
       >
         <List>
-          {edges.map(({ node }, i) => {
+          {edges.map(({ node, cursor }, i) => {
+            const uniqueKey = `${node.__typename}:${getNodeId(node, cursor)}:${i}`
+
             return shouldRenderNode(node, renderableTypes) ? (
-              <List.Item key={`${node.__typename}:${i}`}>
+              <List.Item key={uniqueKey}>
                 {node.__typename === 'UserPublishArticleActivity' && (
                   <UserPublishArticleActivity location={i} {...node} />
                 )}

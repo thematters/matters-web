@@ -34,19 +34,28 @@ const Follow = ({ circle }: FollowProps) => {
             }
           : undefined,
       update: (cache) => {
-        if (circle.id) {
-          cache.modify({
-            id: cache.identify(circle),
-            fields: {
-              followers: (existingFollowers) => {
-                return {
-                  ...existingFollowers,
-                  totalCount: existingFollowers.totalCount + 1,
-                }
-              },
-            },
-          })
+        if (!circle.id) {
+          return
         }
+
+        // increment circle's followers count
+        cache.modify({
+          id: cache.identify(circle),
+          fields: {
+            followers: (existingFollowers) => {
+              return {
+                ...existingFollowers,
+                totalCount: existingFollowers.totalCount + 1,
+              }
+            },
+          },
+        })
+
+        // remove viewer's following circle
+        cache.evict({
+          id: cache.identify(viewer),
+          fieldName: 'following',
+        })
       },
     }
   )

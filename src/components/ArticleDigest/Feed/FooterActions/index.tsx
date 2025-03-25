@@ -3,7 +3,13 @@ import { useContext } from 'react'
 
 import { ReactComponent as IconPaywall } from '@/public/static/icons/24px/paywall.svg'
 import { toPath } from '~/common/utils'
-import { CircleDigest, Icon, TextIcon, ViewerContext } from '~/components'
+import {
+  CircleDigest,
+  Icon,
+  LanguageContext,
+  TextIcon,
+  ViewerContext,
+} from '~/components'
 import { FooterActionsArticlePublicFragment } from '~/gql/graphql'
 
 import DropdownActions, { DropdownActionsControls } from '../../DropdownActions'
@@ -40,6 +46,7 @@ const FooterActions = ({
     access: { circle },
   } = article
   const viewer = useContext(ViewerContext)
+  const { lang } = useContext(LanguageContext)
 
   return (
     <footer className={styles.footer}>
@@ -78,12 +85,19 @@ const FooterActions = ({
                 {...toPath({
                   page: 'campaignDetail',
                   campaign: article.campaigns[0].campaign,
-                  stage: article.campaigns[0].stage || undefined,
                 })}
                 legacyBehavior
               >
                 <a className={styles.campaign}>
-                  {article.campaigns[0].campaign.name}
+                  {
+                    article.campaigns[0].campaign[
+                      lang === 'zh_hans'
+                        ? 'nameZhHans'
+                        : lang === 'zh_hant'
+                          ? 'nameZhHant'
+                          : 'nameEn'
+                    ]
+                  }
                 </a>
               </Link>
             )}

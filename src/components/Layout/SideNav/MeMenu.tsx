@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
+import baseToast from 'react-hot-toast'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconCircle } from '@/public/static/icons/24px/circle.svg'
@@ -52,6 +53,8 @@ const MeMenu: React.FC = () => {
         }
 
         client?.resetStore()
+
+        baseToast.dismiss()
       },
     },
     { showToast: false }
