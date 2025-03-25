@@ -5,9 +5,9 @@
 
   & .list {
     display: flex;
-    flex-direction: column;
-    gap: var(--sp20);
-    margin-top: var(--sp16);
+    flex-wrap: wrap;
+    gap: var(--sp16);
+    margin-top: var(--sp8);
   }
 }
 
