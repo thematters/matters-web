@@ -1,6 +1,5 @@
-import { useQuery } from '@apollo/react-hooks'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
+import { useQuery } from '@apollo/client'
+import type { IncomingHttpHeaders } from 'http'
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
 import { WagmiConfig } from 'wagmi'
@@ -62,12 +61,10 @@ import('@sentry/browser').then((Sentry) => {
 })
 
 const Root = ({
-  client,
   headers,
   children,
 }: {
-  client: ApolloClient<InMemoryCache>
-  headers?: any
+  headers?: IncomingHttpHeaders
   children: React.ReactNode
 }) => {
   const { getQuery, isInPath } = useRoute()

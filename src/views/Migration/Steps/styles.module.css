@@ -9,6 +9,7 @@
     @media (--md-up) {
       grid-column: span 3;
     }
+
     @media (--lg-up) {
       grid-column: span 4;
       margin-top: var(--sp24);

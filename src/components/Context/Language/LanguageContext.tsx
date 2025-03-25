@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import type { IncomingHttpHeaders } from 'http'
 import { createContext, useContext, useEffect, useState } from 'react'
 
 import { COOKIE_LANGUAGE } from '~/common/enums'
@@ -37,7 +38,7 @@ export const LanguageProvider = ({
   headers,
   children,
 }: {
-  headers?: any
+  headers?: IncomingHttpHeaders
   children: React.ReactNode
 }) => {
   const [updateLanguage] = useMutation<UpdateLanguageMutation>(
@@ -52,7 +53,7 @@ export const LanguageProvider = ({
   const { routerLang } = useRoute()
 
   // read from cookie (both server-side and client-side)
-  let cookieLang = getIsomorphicCookie(headers?.cookie, COOKIE_LANGUAGE)
+  let cookieLang = getIsomorphicCookie(headers?.cookie || '', COOKIE_LANGUAGE)
   if (typeof window !== 'undefined') {
     const cookieLanguage = getCookie(COOKIE_LANGUAGE)
     if (cookieLanguage) {
@@ -65,7 +66,7 @@ export const LanguageProvider = ({
   if (typeof window !== 'undefined') {
     fallbackLang = toUserLanguage(navigator.language)
   } else {
-    const acceptLanguage = (headers['accept-language'] || '')
+    const acceptLanguage = ((headers && headers['accept-language']) || '')
       .split(',')
       .map((l: string) => l.trim())[0]
     fallbackLang = toUserLanguage(acceptLanguage)
@@ -118,8 +119,8 @@ export const LanguageProvider = ({
           language === UserLanguage.En
             ? 'Failed to edit, please try again.'
             : language === UserLanguage.ZhHans
-            ? '修改失败，请稍候重试'
-            : '修改失敗，請稍候重試',
+              ? '修改失败，请稍候重试'
+              : '修改失敗，請稍候重試',
       })
     }
   }

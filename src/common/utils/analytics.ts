@@ -85,6 +85,7 @@ export interface ClickButtonProp {
     | 'history_version'
     | 'ipfs'
     | 'campaign_detail_entrance'
+    | 'publish'
     | 'edit'
     | 'edited'
     | 'appreciate'

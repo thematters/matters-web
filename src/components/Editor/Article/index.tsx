@@ -1,8 +1,9 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import {
   articleEditorExtensions,
   Dropcursor,
   EditorContent,
+  Extension,
   FigcaptionKit,
   Mention,
   PasteDropFile,
@@ -134,7 +135,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         },
       }),
       ...articleEditorExtensions,
-    ],
+    ] as Extension[],
   })
 
   const editorRef = useRef<HTMLDivElement>(null)

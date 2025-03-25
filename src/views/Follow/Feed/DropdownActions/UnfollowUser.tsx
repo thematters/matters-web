@@ -1,11 +1,15 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
 import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
-import { Icon, Menu, toast, Translate, useMutation } from '~/components'
 import {
-  updateUserFollowerCount,
-  updateViewerFolloweeCount,
-} from '~/components/GQL'
+  Icon,
+  Menu,
+  toast,
+  Translate,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import {
   ToggleFollowUserMutation,
@@ -31,6 +35,7 @@ const fragments = {
 }
 
 const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
+  const viewer = useContext(ViewerContext)
   const [unfollow] = useMutation<ToggleFollowUserMutation>(TOGGLE_FOLLOW_USER, {
     variables: { id: user.id, enabled: false },
     optimisticResponse: {
@@ -43,13 +48,11 @@ const UnfollowUserActionButton = ({ user }: UnfollowUserActionButtonProps) => {
     },
     update: (cache) => {
       if (user.userName) {
-        updateUserFollowerCount({
-          cache,
-          type: 'decrement',
-          userName: user.userName,
-        })
+        cache.evict({ id: cache.identify(user), fieldName: 'followers' })
       }
-      updateViewerFolloweeCount({ cache, type: 'decrement' })
+
+      cache.evict({ id: cache.identify(viewer), fieldName: 'following' })
+      cache.gc()
     },
   })
 

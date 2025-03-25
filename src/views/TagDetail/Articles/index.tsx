@@ -1,4 +1,3 @@
-import { NetworkStatus } from 'apollo-client'
 import _some from 'lodash/some'
 import React, { useContext, useEffect, useRef } from 'react'
 
@@ -47,7 +46,6 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
     error,
     fetchMore,
     refetch: refetchPublic,
-    networkStatus,
     client,
   } = usePublicQuery<TagArticlesPublicQuery>(TAG_ARTICLES_PUBLIC, {
     variables: {
@@ -55,17 +53,12 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
       selected: feedType === 'selected',
       sortBy: feedType === 'hottest' ? 'byHottestDesc' : 'byCreatedAtDesc',
     },
-    notifyOnNetworkStatusChange: true,
   })
 
   // pagination
   const connectionPath = 'node.articles'
   const { edges, pageInfo } =
     (data?.node?.__typename === 'Tag' && data.node.articles) || {}
-  const isNewLoading =
-    [NetworkStatus.loading, NetworkStatus.setVariables].indexOf(
-      networkStatus
-    ) >= 0
 
   // private data
   const loadPrivate = (publicData?: TagArticlesPublicQuery) => {
@@ -150,7 +143,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
   /**
    * Render
    */
-  if (loading && (!edges || isNewLoading)) {
+  if (loading && !edges) {
     return <SpinnerBlock />
   }
 
@@ -171,7 +164,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
       >
         <List>
           {(edges || []).map(({ node, cursor }, i) => (
-            <React.Fragment key={`${feedType}:${cursor}`}>
+            <React.Fragment key={`${feedType}:${node.id}`}>
               <List.Item>
                 <ArticleDigestFeed
                   article={node}

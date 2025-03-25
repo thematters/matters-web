@@ -12,11 +12,10 @@ export const useCampaignState = (article: Article) => {
   const appliedCampaigns = article.author.campaigns.edges?.map((e) => e.node)
 
   // Check if the article is in any campaign's announcements
-  const isAnnouncement = article.campaigns.some(
-    (campaignItem) =>
-      campaignItem.campaign?.announcements?.some(
-        (announcement) => announcement.id === article.id
-      )
+  const isAnnouncement = article.campaigns.some((campaignItem) =>
+    campaignItem.campaign?.announcements?.some(
+      (announcement) => announcement.id === article.id
+    )
   )
 
   const {

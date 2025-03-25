@@ -12,8 +12,6 @@ import { capitalizeFirstLetter } from '~/common/utils'
 import {
   AddCollectionsArticleDialog,
   AddCollectionsArticleDialogProps,
-  AppreciatorsDialog,
-  AppreciatorsDialogProps,
   BookmarkButton,
   Button,
   Dropdown,
@@ -24,10 +22,9 @@ import {
   RemoveArticleCollectionDialogProps,
   ShareDialog,
   ShareDialogProps,
+  Spinner,
   SpinnerBlock,
   SubmitReport,
-  SupportersDialog,
-  SupportersDialogProps,
   toast,
   ViewerContext,
   withDialog,
@@ -49,6 +46,8 @@ import { fragments } from './gql'
 import IPFSButton from './IPFSButton'
 import PinButton from './PinButton'
 import RemoveArticleCollectionButton from './RemoveArticleCollectionButton'
+import SetArticleChannels from './SetArticleChannels'
+import { SetArticleChannelsDialogProps } from './SetArticleChannels/Dialog'
 import SetBottomCollectionButton from './SetBottomCollectionButton'
 import SetTopCollectionButton from './SetTopCollectionButton'
 import ShareButton from './ShareButton'
@@ -60,44 +59,48 @@ import type {
 
 const isAdminView = process.env.NEXT_PUBLIC_ADMIN_VIEW === 'true'
 
+const DynamicSetArticleChannelsButton = dynamic(
+  () => import('./SetArticleChannels/Button'),
+  { loading: () => <SpinnerBlock /> }
+)
 const DynamicToggleRecommendArticleButton = dynamic(
   () => import('./ToggleRecommendArticle/Button'),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicToggleRecommendArticleDialog = dynamic(
   () => import('./ToggleRecommendArticle/Dialog'),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicToggleRestrictUserButton = dynamic(
   () =>
     import(
       '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Button'
     ),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicToggleRestrictUserDialog = dynamic(
   () =>
     import(
       '~/views/User/UserProfile/DropdownActions/ToggleRestrictUser/Dialog'
     ),
-  { loading: () => <SpinnerBlock /> }
+  { loading: () => <Spinner /> }
 )
 const DynamicArchiveUserButton = dynamic(
   () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Button'),
   {
-    loading: () => <SpinnerBlock />,
+    loading: () => <Spinner />,
   }
 )
 const DynamicArchiveUserDialog = dynamic(
   () => import('~/views/User/UserProfile/DropdownActions/ArchiveUser/Dialog'),
   {
-    loading: () => <SpinnerBlock />,
+    loading: () => <Spinner />,
   }
 )
 const DynamicToggleCampaignFeaturedButton = dynamic(
   () => import('./ToggleCampaignFeatured'),
   {
-    loading: () => <SpinnerBlock />,
+    loading: () => <Spinner />,
   }
 )
 
@@ -162,11 +165,10 @@ interface Controls {
 interface DialogProps {
   openShareDialog: () => void
   openSubmitReportDialog: () => void
-  openAppreciatorsDialog: () => void
-  openSupportersDialog: () => void
   openArchiveDialog: () => void
   openAddCollectionsArticleDialog: () => void
   openRemoveArticleCollectionDialog: () => void
+  openSetArticleChannelsDialog: () => void
 }
 
 interface AdminProps {
@@ -187,7 +189,6 @@ type BaseDropdownActionsProps = DropdownActionsProps &
 const BaseDropdownActions = ({
   article,
 
-  tagDetailId,
   collectionId,
   collectionArticleCount,
 
@@ -216,8 +217,6 @@ const BaseDropdownActions = ({
 
   openShareDialog,
   openSubmitReportDialog,
-  openAppreciatorsDialog,
-  openSupportersDialog,
   openArchiveDialog,
   openAddCollectionsArticleDialog,
   openRemoveArticleCollectionDialog,
@@ -229,6 +228,7 @@ const BaseDropdownActions = ({
   openToggleRecommendArticleDialog,
   openToggleRestrictUserDialog,
   openArchiveUserDialog,
+  openSetArticleChannelsDialog,
 
   // tracker
   pageType,
@@ -313,6 +313,9 @@ const BaseDropdownActions = ({
               campaignFeatured={!!campaignFeatured}
             />
           )}
+          <DynamicSetArticleChannelsButton
+            openDialog={openSetArticleChannelsDialog}
+          />
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="icymi"
@@ -451,20 +454,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
     { id: article.id },
     ({ openDialog }) => ({ openSubmitReportDialog: openDialog })
   )
-  const WithAppreciators = withDialog<
-    Omit<AppreciatorsDialogProps, 'children'>
-  >(WithReport, AppreciatorsDialog, { article }, ({ openDialog }) => ({
-    openAppreciatorsDialog: openDialog,
-  }))
-  const WithSupporters = withDialog<Omit<SupportersDialogProps, 'children'>>(
-    WithAppreciators,
-    SupportersDialog,
-    { article },
-    ({ openDialog }) => ({ openSupportersDialog: openDialog })
-  )
   const WithArchiveArticle = withDialog<
     Omit<ArchiveArticleDialogProps, 'children'>
-  >(WithSupporters, ArchiveArticle.Dialog, { article }, ({ openDialog }) => ({
+  >(WithReport, ArchiveArticle.Dialog, { article }, ({ openDialog }) => ({
     openArchiveDialog: viewer.isFrozen ? forbid : openDialog,
   }))
   const WithAddCollectionsArticle = withDialog<
@@ -496,16 +488,28 @@ const DropdownActions = (props: DropdownActionsProps) => {
   /**
    * ADMIN ONLY
    */
+  const WithSetArticleChannels = withDialog<
+    Omit<SetArticleChannelsDialogProps, 'children'>
+  >(
+    WithRemoveArticleCollection,
+    SetArticleChannels.Dialog,
+    { article },
+    ({ openDialog }) => ({
+      openSetArticleChannelsDialog: openDialog,
+    })
+  )
+
   const WithToggleRecommendArticle = withDialog<
     Omit<ToggleRecommendArticleDialogProps, 'children'>
   >(
-    WithRemoveArticleCollection,
+    WithSetArticleChannels,
     DynamicToggleRecommendArticleDialog,
     { article },
     ({ openDialog }) => ({
       openToggleRecommendArticleDialog: openDialog,
     })
   )
+
   const WithToggleRetrictUser = withDialog<
     Omit<ToggleRestrictUserDialogProps, 'children'>
   >(
@@ -516,6 +520,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       openToggleRestrictUserDialog: openDialog,
     })
   )
+
   const WithArchiveUser = withDialog<Omit<ArchiveUserDialogProps, 'children'>>(
     WithToggleRetrictUser,
     DynamicArchiveUserDialog,

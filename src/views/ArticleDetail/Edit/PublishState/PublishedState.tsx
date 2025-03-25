@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -23,6 +24,7 @@ const BasePublishedState = ({
 }
 
 const PublishedState = ({ article }: PublishedStateProps) => {
+  const router = useRouter()
   const path = toPath({ page: 'articleDetail', article })
 
   return (
@@ -58,7 +60,7 @@ const PublishedState = ({ article }: PublishedStateProps) => {
             />
           }
           onClick={() => {
-            window.location.href = path.href
+            router.push(path.href)
           }}
         />
       }
@@ -71,7 +73,7 @@ const PublishedState = ({ article }: PublishedStateProps) => {
             />
           }
           onClick={() => {
-            window.location.href = path.href
+            router.push(path.href)
           }}
         />
       }

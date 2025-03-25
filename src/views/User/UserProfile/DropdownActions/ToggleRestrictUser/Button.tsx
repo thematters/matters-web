@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
 import { ReactComponent as IconNavEnter } from '@/public/static/icons/24px/nav-enter.svg'
@@ -47,7 +47,7 @@ const ToggleRestrictUserButton: React.FC<ToggleRestrictUserButtonProps> = ({
   )
 
   if (loading) {
-    return <Menu.Item icon={<Spinner size={20} />} text="正在加載中…" />
+    return <Menu.Item icon={<Spinner size={20} />} text="加載中…" />
   }
 
   if (data?.user?.__typename !== 'User') return null

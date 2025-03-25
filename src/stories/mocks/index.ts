@@ -160,6 +160,7 @@ export const MOCK_ARTILCE = {
     circle: MOCK_CIRCLE,
     secret: '6NMhDB51cCvNWa1GMS7LUkZEP2a',
   },
+  campaigns: [],
   drafts: [
     {
       __typename: 'Draft' as any,

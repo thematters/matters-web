@@ -56,12 +56,8 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   // public data
   const { data, loading, error, fetchMore, client } =
     usePublicQuery<LatestCommentsPublicQuery>(LATEST_COMMENTS_PUBLIC, {
-      variables: {
-        id,
-        first: COMMENTS_COUNT,
-      },
+      variables: { id, first: COMMENTS_COUNT },
       fetchPolicy: 'cache-and-network',
-      notifyOnNetworkStatusChange: true,
     })
 
   // pagination

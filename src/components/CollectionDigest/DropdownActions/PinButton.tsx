@@ -6,7 +6,6 @@ import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.sv
 import { ERROR_CODES } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Icon, Menu, toast, useMutation } from '~/components'
-import { updateUserWritings } from '~/components/GQL'
 import {
   PinButtonCollectionFragment,
   TogglePinWorkMutation,
@@ -51,12 +50,14 @@ const PinButton = ({
         },
       },
       update: (cache) => {
-        updateUserWritings({
-          cache,
-          targetId: collection.id,
-          userName: collection.author.userName!,
-          type: collection.pinned ? 'unpin' : 'pin',
+        cache.evict({
+          id: cache.identify(collection.author),
+          fieldName: 'pinnedWorks',
         })
+        cache.gc()
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
       },
       onCompleted: () => {
         toast.success({

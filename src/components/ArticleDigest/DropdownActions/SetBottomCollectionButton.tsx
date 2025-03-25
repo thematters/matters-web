@@ -42,6 +42,14 @@ const SetBottomCollectionButton = ({
         articleId,
         newPosition: collectionArticleCount - 1,
       },
+      update(cache) {
+        updateUserCollectionDetail({
+          cache,
+          collectionId,
+          articleId,
+          type: 'setBottom',
+        })
+      },
     }
   )
 
@@ -57,16 +65,7 @@ const SetBottomCollectionButton = ({
       icon={<Icon icon={IconArrowLDown} size={20} />}
       onClick={async () => {
         onClick()
-        await update({
-          update(cache) {
-            updateUserCollectionDetail({
-              cache,
-              collectionId,
-              articleId,
-              type: 'setBottom',
-            })
-          },
-        })
+        await update()
       }}
     />
   )

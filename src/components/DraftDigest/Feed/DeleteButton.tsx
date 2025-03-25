@@ -1,10 +1,17 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconDelete } from '@/public/static/icons/24px/delete.svg'
 import { TEST_ID } from '~/common/enums'
-import { Dialog, Icon, toast, useDialogSwitch, useMutation } from '~/components'
-import { updateUserDrafts, updateViewerWorksTabs } from '~/components/GQL'
+import {
+  Dialog,
+  Icon,
+  toast,
+  useDialogSwitch,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import { DeleteButtonDraftFragment, DeleteDraftMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -30,18 +37,26 @@ const fragments = {
 const DeleteButton = ({ draft }: DeleteButtonProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
   const intl = useIntl()
+  const viewer = useContext(ViewerContext)
 
   const [deleteDraft] = useMutation<DeleteDraftMutation>(DELETE_DRAFT, {
     variables: { id: draft.id },
     update: (cache) => {
-      updateUserDrafts({
-        cache,
-        targetId: draft.id,
-        type: 'remove',
-      })
-      updateViewerWorksTabs({
-        cache,
-        type: 'decreaseDraft',
+      // Remove the draft from the viewer's drafts and decrease the total count
+      cache.modify({
+        id: cache.identify(viewer),
+        fields: {
+          drafts(existingDrafts, { readField }) {
+            const filteredEdges = existingDrafts.edges.filter(
+              ({ node }: { node: any }) => readField('id', node) !== draft.id
+            )
+            return {
+              ...existingDrafts,
+              edges: filteredEdges,
+              totalCount: Math.max(0, existingDrafts.totalCount - 1),
+            }
+          },
+        },
       })
     },
   })

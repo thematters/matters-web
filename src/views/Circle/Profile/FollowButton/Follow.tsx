@@ -7,10 +7,6 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import { Button, TextIcon, useMutation, ViewerContext } from '~/components'
-import {
-  updateCircleFollowerCount,
-  updateCircleFollowers,
-} from '~/components/GQL'
 import TOGGLE_FOLLOW_CIRCLE from '~/components/GQL/mutations/toggleFollowCircle'
 import {
   FollowButtonCirclePrivateFragment,
@@ -38,16 +34,27 @@ const Follow = ({ circle }: FollowProps) => {
             }
           : undefined,
       update: (cache) => {
-        updateCircleFollowerCount({
-          cache,
-          name: circle.name || '',
-          type: 'increment',
+        if (!circle.id) {
+          return
+        }
+
+        // increment circle's followers count
+        cache.modify({
+          id: cache.identify(circle),
+          fields: {
+            followers: (existingFollowers) => {
+              return {
+                ...existingFollowers,
+                totalCount: existingFollowers.totalCount + 1,
+              }
+            },
+          },
         })
-        updateCircleFollowers({
-          cache,
-          name: circle.name || '',
-          type: 'follow',
-          viewer,
+
+        // remove viewer's following circle
+        cache.evict({
+          id: cache.identify(viewer),
+          fieldName: 'following',
         })
       },
     }

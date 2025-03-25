@@ -23,27 +23,40 @@ import { ToggleBookmarkArticleMutation } from '~/gql/graphql'
 
 import TOGGLE_BOOKMARK_ARTICLE from '../../GQL/mutations/toggleBookmarkArticle'
 
-export type SubscribeProps = {
-  articleId?: string
+export type BookmarkProps = {
+  articleId: string
   iconSize?: Extract<IconSize, 20 | 24>
   disabled?: boolean
   inCard?: boolean
 } & ButtonProps
 
-const Subscribe = ({
+const Bookmark = ({
   articleId,
   iconSize,
   disabled,
   inCard,
   ...buttonProps
-}: SubscribeProps) => {
+}: BookmarkProps) => {
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
 
-  const [subscribe] = useMutation<ToggleBookmarkArticleMutation>(
+  const [bookmark] = useMutation<ToggleBookmarkArticleMutation>(
     TOGGLE_BOOKMARK_ARTICLE,
     {
       variables: { id: articleId, enabled: true },
+      optimisticResponse: {
+        toggleBookmarkArticle: {
+          id: articleId,
+          bookmarked: true,
+        },
+      },
+      update: (cache) => {
+        cache.evict({
+          id: cache.identify(viewer),
+          fieldName: 'bookmarkedArticles',
+        })
+        cache.gc()
+      },
     }
   )
 
@@ -68,7 +81,7 @@ const Subscribe = ({
       return
     }
 
-    await subscribe()
+    await bookmark()
 
     toast.success({
       message: <FormattedMessage defaultMessage="Bookmarked" id="k0fraU" />,
@@ -81,8 +94,8 @@ const Subscribe = ({
         text={
           <FormattedMessage
             defaultMessage="Bookmark"
-            id="kLEWkV"
-            description="src/components/Buttons/Bookmark/Subscribe.tsx"
+            id="BM0Xw3"
+            description="src/components/Buttons/Bookmark/Bookmark.tsx"
           />
         }
         icon={<Icon icon={IconSave} size={20} />}
@@ -98,8 +111,8 @@ const Subscribe = ({
       bgActiveColor={'greyLighter'}
       aria-label={intl.formatMessage({
         defaultMessage: 'Bookmark',
-        id: 'kLEWkV',
-        description: 'src/components/Buttons/Bookmark/Subscribe.tsx',
+        id: 'BM0Xw3',
+        description: 'src/components/Buttons/Bookmark/Bookmark.tsx',
       })}
       onClick={onClick}
       disabled={disabled}
@@ -111,4 +124,4 @@ const Subscribe = ({
   )
 }
 
-export default Subscribe
+export default Bookmark

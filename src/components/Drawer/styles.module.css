@@ -20,8 +20,8 @@
     overscroll-behavior: contain;
     visibility: hidden;
     background: white;
-    box-shadow: -8px 0 56px 0 rgb(0 0 0 / 8%) !important;
     backdrop-filter: blur(12px);
+    box-shadow: -8px 0 56px 0 rgb(0 0 0 / 8%) !important;
     will-change: transform, visibility;
   }
 }
