@@ -25,7 +25,7 @@ const SideChannelNav = () => {
   const [showTopGradient, setShowTopGradient] = useState(false)
   const [showBottomGradient, setShowBottomGradient] = useState(false)
   const contentRef = useRef<HTMLElement>(null)
-
+  const sideChannelNavRef = useRef<HTMLElement>(null)
   const { lang } = useContext(LanguageContext)
 
   const { data, loading } = usePublicQuery<ChannelsQuery>(CHANNELS, {
@@ -43,6 +43,8 @@ const SideChannelNav = () => {
   }
 
   useEffect(() => {
+    console.log('useEffect')
+    console.log({ contentRef })
     const contentElement = contentRef.current
     console.log('contentElement', contentElement)
     if (contentElement) {
@@ -53,7 +55,7 @@ const SideChannelNav = () => {
         contentElement.removeEventListener('scroll', checkScroll)
       }
     }
-  }, [contentRef.current])
+  }, [contentRef.current, sideChannelNavRef.current])
 
   if (loading) return <Placeholder />
 
@@ -81,6 +83,7 @@ const SideChannelNav = () => {
           [styles.showTopGradient]: showTopGradient,
           [styles.showBottomGradient]: showBottomGradient,
         })}
+        ref={sideChannelNavRef}
       >
         {isAuthed && (
           <a
