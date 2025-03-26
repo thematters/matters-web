@@ -36,7 +36,7 @@
     flex-direction: column;
 
     /* flex-grow: 1; */
-    gap: var(--sp12);
+    gap: var(--sp8);
     align-items: flex-start;
     min-width: 4.75rem;
     padding-top: var(--sp20);
@@ -49,7 +49,7 @@
     & .item {
       @mixin transition;
 
-      padding: var(--sp4) 0;
+      padding: var(--sp8) 0;
       font-size: var(--text14);
       line-height: 1.375rem;
       color: var(--color-grey-darker);
@@ -57,7 +57,7 @@
       transition-property: color, background-color, background;
 
       @media (--sm-up) {
-        padding: var(--sp4) var(--sp10);
+        padding: var(--sp8) var(--sp10);
       }
 
       &:hover {
