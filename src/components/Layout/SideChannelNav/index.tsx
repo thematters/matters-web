@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
@@ -42,7 +42,7 @@ const SideChannelNav = () => {
     setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 10)
   }
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     console.log('useEffect')
     console.log({ contentRef })
     const contentElement = contentRef.current
@@ -55,7 +55,7 @@ const SideChannelNav = () => {
         contentElement.removeEventListener('scroll', checkScroll)
       }
     }
-  }, [contentRef.current, sideChannelNavRef.current])
+  }, [])
 
   if (loading) return <Placeholder />
 
