@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
@@ -32,32 +32,13 @@ const SideChannelNav = () => {
     variables: { userLanguage: lang },
   })
 
-  const checkScroll = () => {
-    console.log('checkScroll')
-    if (!contentRef.current) return
-    console.log('contentRef.current', contentRef.current)
+  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
+    const element = e.currentTarget
+    const { scrollTop, scrollHeight, clientHeight } = element
 
-    const { scrollTop, scrollHeight, clientHeight } = contentRef.current
     setShowTopGradient(scrollTop > 10)
     setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 10)
   }
-
-  useEffect(() => {
-    requestAnimationFrame(() => {
-      const contentElement = contentRef.current
-      if (contentElement) {
-        contentElement.addEventListener('scroll', checkScroll)
-        checkScroll()
-      }
-    })
-
-    return () => {
-      const contentElement = contentRef.current
-      if (contentElement) {
-        contentElement.removeEventListener('scroll', checkScroll)
-      }
-    }
-  }, [])
 
   if (loading) return <Placeholder />
 
@@ -79,7 +60,11 @@ const SideChannelNav = () => {
   }
 
   return (
-    <section className={styles.content} ref={contentRef}>
+    <section
+      className={styles.content}
+      ref={contentRef}
+      onScroll={handleScroll}
+    >
       <section
         className={classnames(styles.sideChannelNav, {
           [styles.showTopGradient]: showTopGradient,
