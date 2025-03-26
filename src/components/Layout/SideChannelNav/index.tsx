@@ -53,7 +53,7 @@ const SideChannelNav = () => {
         contentElement.removeEventListener('scroll', checkScroll)
       }
     }
-  }, [])
+  }, [contentRef])
 
   if (loading) return <Placeholder />
 
