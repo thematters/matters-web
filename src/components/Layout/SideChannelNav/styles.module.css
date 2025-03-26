@@ -1,4 +1,5 @@
 .content {
+  position: relative;
   max-height: calc(100vh - var(--sm-top-nav-height));
   overflow: hidden auto;
   overscroll-behavior: contain;
@@ -32,15 +33,67 @@
   }
 
   & .sideChannelNav {
+    position: relative;
     display: flex;
     flex-direction: column;
-
-    /* flex-grow: 1; */
-    gap: var(--sp12);
+    gap: var(--sp8);
     align-items: flex-start;
     min-width: 4.75rem;
     padding-top: var(--sp20);
     padding-bottom: var(--sp32);
+
+    /* Top gradient fade effect */
+    &::before {
+      position: fixed;
+      top: var(--sm-top-nav-height);
+      right: 0;
+      left: 0;
+      z-index: 1;
+      height: 60px;
+      pointer-events: none;
+      content: '';
+      background: linear-gradient(
+        to bottom,
+        rgb(255 255 255 / 100%) 0%,
+        rgb(255 255 255 / 80%) 40%,
+        rgb(255 255 255 / 0%) 100%
+      );
+      opacity: 0;
+      transition: opacity 0.2s ease;
+
+      @media (--md-up) {
+        top: var(--lg-top-nav-height);
+      }
+    }
+
+    /* Bottom gradient fade effect */
+    &::after {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+      height: 60px;
+      pointer-events: none;
+      content: '';
+      background: linear-gradient(
+        to top,
+        rgb(255 255 255 / 100%) 0%,
+        rgb(255 255 255 / 80%) 40%,
+        rgb(255 255 255 / 0%) 100%
+      );
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    /* Show gradients when scrolling */
+    &.showTopGradient::before {
+      opacity: 1;
+    }
+
+    &.showBottomGradient::after {
+      opacity: 1;
+    }
 
     @media (--sm-up) {
       align-items: flex-end;
@@ -49,7 +102,8 @@
     & .item {
       @mixin transition;
 
-      padding: var(--sp4) 0;
+      width: 100%;
+      padding: var(--sp8) 0;
       font-size: var(--text14);
       line-height: 1.375rem;
       color: var(--color-grey-darker);
@@ -57,7 +111,8 @@
       transition-property: color, background-color, background;
 
       @media (--sm-up) {
-        padding: var(--sp4) var(--sp10);
+        padding: var(--sp8) var(--sp10);
+        text-align: end;
       }
 
       &:hover {

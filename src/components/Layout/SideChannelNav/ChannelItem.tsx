@@ -39,7 +39,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
 
   return (
     <Tooltip
-      content={channel.name}
+      content={displayChannelName(channel.name)}
       zIndex={1000}
       placement="auto-start"
       delay={[1000, null]}

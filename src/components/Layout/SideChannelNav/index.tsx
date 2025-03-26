@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
@@ -22,11 +22,35 @@ const SideChannelNav = () => {
   const isAuthed = viewer.isAuthed
   const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
 
+  const [showTopGradient, setShowTopGradient] = useState(false)
+  const [showBottomGradient, setShowBottomGradient] = useState(false)
+  const contentRef = useRef<HTMLElement>(null)
+
   const { lang } = useContext(LanguageContext)
 
   const { data, loading } = usePublicQuery<ChannelsQuery>(CHANNELS, {
     variables: { userLanguage: lang },
   })
+
+  const checkScroll = () => {
+    if (!contentRef.current) return
+
+    const { scrollTop, scrollHeight, clientHeight } = contentRef.current
+    setShowTopGradient(scrollTop > 10)
+    setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 10)
+  }
+
+  useEffect(() => {
+    const contentElement = contentRef.current
+    if (contentElement) {
+      contentElement.addEventListener('scroll', checkScroll)
+      checkScroll()
+
+      return () => {
+        contentElement.removeEventListener('scroll', checkScroll)
+      }
+    }
+  }, [])
 
   if (loading) return <Placeholder />
 
@@ -48,8 +72,13 @@ const SideChannelNav = () => {
   }
 
   return (
-    <section className={styles.content}>
-      <section className={styles.sideChannelNav}>
+    <section className={styles.content} ref={contentRef}>
+      <section
+        className={classnames(styles.sideChannelNav, {
+          [styles.showTopGradient]: showTopGradient,
+          [styles.showBottomGradient]: showBottomGradient,
+        })}
+      >
         {isAuthed && (
           <a
             href={PATHS.FOLLOW}
