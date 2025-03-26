@@ -33,7 +33,9 @@ const SideChannelNav = () => {
   })
 
   const checkScroll = () => {
+    console.log('checkScroll')
     if (!contentRef.current) return
+    console.log('contentRef.current', contentRef.current)
 
     const { scrollTop, scrollHeight, clientHeight } = contentRef.current
     setShowTopGradient(scrollTop > 10)
@@ -42,6 +44,7 @@ const SideChannelNav = () => {
 
   useEffect(() => {
     const contentElement = contentRef.current
+    console.log('contentElement', contentElement)
     if (contentElement) {
       contentElement.addEventListener('scroll', checkScroll)
       checkScroll()
