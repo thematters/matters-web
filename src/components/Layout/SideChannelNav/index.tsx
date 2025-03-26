@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useContext, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useContext, useLayoutEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
