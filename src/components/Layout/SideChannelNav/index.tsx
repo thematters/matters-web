@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useContext, useLayoutEffect, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
@@ -42,16 +42,18 @@ const SideChannelNav = () => {
     setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 10)
   }
 
-  useLayoutEffect(() => {
-    console.log('useEffect')
-    console.log({ contentRef })
-    const contentElement = contentRef.current
-    console.log('contentElement', contentElement)
-    if (contentElement) {
-      contentElement.addEventListener('scroll', checkScroll)
-      checkScroll()
+  useEffect(() => {
+    requestAnimationFrame(() => {
+      const contentElement = contentRef.current
+      if (contentElement) {
+        contentElement.addEventListener('scroll', checkScroll)
+        checkScroll()
+      }
+    })
 
-      return () => {
+    return () => {
+      const contentElement = contentRef.current
+      if (contentElement) {
         contentElement.removeEventListener('scroll', checkScroll)
       }
     }
