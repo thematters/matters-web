@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import {
   LanguageContext,
-  RouteLink,
+  LinkWrapper,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -74,7 +74,7 @@ const SideChannelNav = () => {
         })}
       >
         {isAuthed && (
-          <RouteLink
+          <LinkWrapper
             href={PATHS.FOLLOW}
             className={classnames({
               [styles.item]: true,
@@ -84,9 +84,9 @@ const SideChannelNav = () => {
             })}
           >
             <FormattedMessage defaultMessage="My Page" id="enMIYK" />
-          </RouteLink>
+          </LinkWrapper>
         )}
-        <RouteLink
+        <LinkWrapper
           href={`${PATHS.HOME}?type=icymi`}
           className={classnames({
             [styles.item]: true,
@@ -96,8 +96,8 @@ const SideChannelNav = () => {
           })}
         >
           <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
-        </RouteLink>
-        <RouteLink
+        </LinkWrapper>
+        <LinkWrapper
           href={TEMPORARY_CHANNEL_URL}
           className={classnames({
             [styles.item]: true,
@@ -113,11 +113,11 @@ const SideChannelNav = () => {
               description="src/components/Layout/SideChannelNav/index.tsx"
             />
           </span>
-        </RouteLink>
+        </LinkWrapper>
         {sortedChannels.map((c) => (
           <ChannelItem key={c.id} channel={c} />
         ))}
-        <RouteLink
+        <LinkWrapper
           href={`${PATHS.HOME}?type=newest`}
           className={classnames({
             [styles.item]: true,
@@ -130,7 +130,7 @@ const SideChannelNav = () => {
             id="gykfC8"
             description="src/components/Layout/SideChannelNav/index.tsx"
           />
-        </RouteLink>
+        </LinkWrapper>
       </section>
     </section>
   )

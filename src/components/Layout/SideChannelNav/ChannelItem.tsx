@@ -3,7 +3,7 @@ import { useLayoutEffect } from 'react'
 import { useRef, useState } from 'react'
 
 import { displayChannelName } from '~/common/utils'
-import { RouteLink, Tooltip } from '~/components'
+import { LinkWrapper, Tooltip } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
 import { ChannelsQuery } from '~/gql/graphql'
 
@@ -47,7 +47,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
       touch={['hold', 1000]}
       disabled={!lineClampable}
     >
-      <RouteLink
+      <LinkWrapper
         href={`/c/${channel.shortHash}`}
         ref={node}
         className={classnames({
@@ -57,7 +57,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
         })}
       >
         <span>{displayChannelName(channel.name)}</span>
-      </RouteLink>
+      </LinkWrapper>
     </Tooltip>
   )
 }
