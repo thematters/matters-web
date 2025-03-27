@@ -1,11 +1,11 @@
 import classnames from 'classnames'
-import Link from 'next/link'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import {
   LanguageContext,
+  RouteLink,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -74,67 +74,63 @@ const SideChannelNav = () => {
         })}
       >
         {isAuthed && (
-          <Link href={PATHS.FOLLOW}>
-            <a
-              className={classnames({
-                [styles.item]: true,
-                [styles.selectedChannel]:
-                  (isAuthed && isInPath('HOME') && !getQuery('type')) ||
-                  isInPath('FOLLOW'),
-              })}
-            >
-              <FormattedMessage defaultMessage="My Page" id="enMIYK" />
-            </a>
-          </Link>
-        )}
-        <Link href={`${PATHS.HOME}?type=icymi`}>
-          <a
+          <RouteLink
+            href={PATHS.FOLLOW}
             className={classnames({
               [styles.item]: true,
               [styles.selectedChannel]:
-                getQuery('type') === 'icymi' ||
-                (!isAuthed && isInPath('HOME') && !getQuery('type')),
+                (isAuthed && isInPath('HOME') && !getQuery('type')) ||
+                isInPath('FOLLOW'),
             })}
           >
-            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
-          </a>
-        </Link>
-        <Link href={TEMPORARY_CHANNEL_URL}>
-          <a
-            className={classnames({
-              [styles.item]: true,
-              [styles.selectedChannel]: isInTemporaryChannel,
-              [styles.temporaryChannel]: true,
-              [styles.selectedTemporaryChannel]: isInTemporaryChannel,
-            })}
-          >
-            <span>
-              <FormattedMessage
-                defaultMessage="FreeWrite"
-                id="eVq7Ji"
-                description="src/components/Layout/SideChannelNav/index.tsx"
-              />
-            </span>
-          </a>
-        </Link>
+            <FormattedMessage defaultMessage="My Page" id="enMIYK" />
+          </RouteLink>
+        )}
+        <RouteLink
+          href={`${PATHS.HOME}?type=icymi`}
+          className={classnames({
+            [styles.item]: true,
+            [styles.selectedChannel]:
+              getQuery('type') === 'icymi' ||
+              (!isAuthed && isInPath('HOME') && !getQuery('type')),
+          })}
+        >
+          <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+        </RouteLink>
+        <RouteLink
+          href={TEMPORARY_CHANNEL_URL}
+          className={classnames({
+            [styles.item]: true,
+            [styles.selectedChannel]: isInTemporaryChannel,
+            [styles.temporaryChannel]: true,
+            [styles.selectedTemporaryChannel]: isInTemporaryChannel,
+          })}
+        >
+          <span>
+            <FormattedMessage
+              defaultMessage="FreeWrite"
+              id="eVq7Ji"
+              description="src/components/Layout/SideChannelNav/index.tsx"
+            />
+          </span>
+        </RouteLink>
         {sortedChannels.map((c) => (
           <ChannelItem key={c.id} channel={c} />
         ))}
-        <Link href={`${PATHS.HOME}?type=newest`}>
-          <a
-            className={classnames({
-              [styles.item]: true,
-              [styles.selectedChannel]:
-                isInPath('HOME') && getQuery('type') === 'newest',
-            })}
-          >
-            <FormattedMessage
-              defaultMessage="Latest"
-              id="gykfC8"
-              description="src/components/Layout/SideChannelNav/index.tsx"
-            />
-          </a>
-        </Link>
+        <RouteLink
+          href={`${PATHS.HOME}?type=newest`}
+          className={classnames({
+            [styles.item]: true,
+            [styles.selectedChannel]:
+              isInPath('HOME') && getQuery('type') === 'newest',
+          })}
+        >
+          <FormattedMessage
+            defaultMessage="Latest"
+            id="gykfC8"
+            description="src/components/Layout/SideChannelNav/index.tsx"
+          />
+        </RouteLink>
       </section>
     </section>
   )

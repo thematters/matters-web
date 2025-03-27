@@ -1,14 +1,14 @@
 import classnames from 'classnames'
-import Link from 'next/link'
 import { useLayoutEffect } from 'react'
 import { useRef, useState } from 'react'
 
 import { displayChannelName } from '~/common/utils'
-import { Tooltip } from '~/components'
+import { RouteLink, Tooltip } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
 import { ChannelsQuery } from '~/gql/graphql'
 
 import styles from './styles.module.css'
+
 type ChannelItemProps = {
   channel: ChannelsQuery['channels'][number]
 }
@@ -47,19 +47,18 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
       touch={['hold', 1000]}
       disabled={!lineClampable}
     >
-      <Link href={`/c/${channel.shortHash}`}>
-        <a
-          ref={node}
-          className={classnames({
-            [styles.item]: true,
-            [styles.selectedChannel]: shortHash === channel.shortHash,
-            [styles.lineClampable]: !firstRender,
-          })}
-          data-channel-id={channel.id}
-        >
-          <span>{displayChannelName(channel.name)}</span>
-        </a>
-      </Link>
+      <RouteLink
+        href={`/c/${channel.shortHash}`}
+        ref={node}
+        className={classnames({
+          [styles.item]: true,
+          [styles.selectedChannel]: shortHash === channel.shortHash,
+          [styles.lineClampable]: !firstRender,
+        })}
+        data-channel-id={channel.id}
+      >
+        <span>{displayChannelName(channel.name)}</span>
+      </RouteLink>
     </Tooltip>
   )
 }
