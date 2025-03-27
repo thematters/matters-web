@@ -40,21 +40,16 @@ const SideChannelNav = () => {
   }
 
   useEffect(() => {
-    setTimeout(() => {
-      const contentElement = contentRef.current
-      if (contentElement) {
-        checkScroll()
+    const contentElement = contentRef.current
+    if (contentElement) {
+      contentElement.addEventListener('scroll', checkScroll)
+      checkScroll()
+
+      return () => {
+        contentElement.removeEventListener('scroll', checkScroll)
       }
-    }, 1000)
-  }, [])
-
-  const handleScroll = (e: React.UIEvent<HTMLElement>) => {
-    const element = e.currentTarget
-    const { scrollTop, scrollHeight, clientHeight } = element
-
-    setShowTopGradient(scrollTop > 10)
-    setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 10)
-  }
+    }
+  }, [contentRef.current])
 
   if (loading) return <Placeholder />
 
@@ -76,11 +71,7 @@ const SideChannelNav = () => {
   }
 
   return (
-    <section
-      className={styles.content}
-      ref={contentRef}
-      onScroll={handleScroll}
-    >
+    <section className={styles.content} ref={contentRef}>
       <section
         className={classnames(styles.sideChannelNav, {
           [styles.showTopGradient]: showTopGradient,

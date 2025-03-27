@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import dynamic from 'next/dynamic'
 import Sticky from 'react-stickynode'
 
 import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
@@ -10,10 +11,13 @@ import Header from './Header'
 // import NavBar from './NavBar'
 import Notice from './Notice'
 // import SideFooter from './SideFooter'
-import SideChannelNav from './SideChannelNav'
 import Spacing from './Spacing'
 import styles from './styles.module.css'
 import { TopNavBar } from './TopNavBar'
+
+const SideChannelNav = dynamic(() => import('./SideChannelNav'), {
+  ssr: false,
+})
 
 export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
