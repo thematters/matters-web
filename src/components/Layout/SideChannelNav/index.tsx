@@ -25,7 +25,6 @@ const SideChannelNav = () => {
   const [showTopGradient, setShowTopGradient] = useState(false)
   const [showBottomGradient, setShowBottomGradient] = useState(false)
   const contentRef = useRef<HTMLElement>(null)
-
   const { lang } = useContext(LanguageContext)
 
   const { data, loading } = usePublicQuery<ChannelsQuery>(CHANNELS, {
@@ -34,7 +33,6 @@ const SideChannelNav = () => {
 
   const checkScroll = () => {
     if (!contentRef.current) return
-
     const { scrollTop, scrollHeight, clientHeight } = contentRef.current
     setShowTopGradient(scrollTop > 10)
     setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 10)
@@ -42,6 +40,7 @@ const SideChannelNav = () => {
 
   useEffect(() => {
     const contentElement = contentRef.current
+    if (loading) return
     if (contentElement) {
       contentElement.addEventListener('scroll', checkScroll)
       checkScroll()
@@ -50,7 +49,7 @@ const SideChannelNav = () => {
         contentElement.removeEventListener('scroll', checkScroll)
       }
     }
-  }, [])
+  }, [loading, contentRef])
 
   if (loading) return <Placeholder />
 

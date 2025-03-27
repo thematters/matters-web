@@ -9,12 +9,11 @@ import FixedMain from './FixedMain'
 import Header from './Header'
 // import NavBar from './NavBar'
 import Notice from './Notice'
-// import SideFooter from './SideFooter'
 import SideChannelNav from './SideChannelNav'
+// import SideFooter from './SideFooter'
 import Spacing from './Spacing'
 import styles from './styles.module.css'
 import { TopNavBar } from './TopNavBar'
-
 export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
   Header: typeof Header
