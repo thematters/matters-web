@@ -45,4 +45,55 @@ describe('<LinkWrapper>', () => {
     expect(mockRouter.asPath).not.toContain(link)
     expect(handleClick).not.toHaveBeenCalled()
   })
+
+  // 测试 textActiveColor 属性
+  it('should apply textActiveColor class', () => {
+    render(
+      <LinkWrapper href="/test" textActiveColor="green">
+        Green hover
+      </LinkWrapper>
+    )
+
+    const $link = screen.getByRole('link')
+    expect($link.className).toContain('textActiveGreen')
+  })
+
+  // 测试传递额外属性
+  it('should pass through additional props', () => {
+    render(
+      <LinkWrapper
+        href="/test"
+        className="custom-class"
+        title="Test Title"
+        aria-label="Test Link"
+        data-custom="custom-data"
+      >
+        With extra props
+      </LinkWrapper>
+    )
+
+    const $link = screen.getByRole('link')
+    expect($link.className).toContain('custom-class')
+    expect($link).toHaveAttribute('title', 'Test Title')
+    expect($link).toHaveAttribute('aria-label', 'Test Link')
+    expect($link).toHaveAttribute('data-custom', 'custom-data')
+  })
+
+  // 测试传播事件阻止
+  it('should stop event propagation when onClick is called', () => {
+    const handleClick = vi.fn()
+    const handleParentClick = vi.fn()
+
+    render(
+      <div onClick={handleParentClick}>
+        <LinkWrapper href="/test" onClick={handleClick}>
+          Click with propagation stop
+        </LinkWrapper>
+      </div>
+    )
+
+    screen.getByRole('link').click()
+    expect(handleClick).toHaveBeenCalled()
+    expect(handleParentClick).not.toHaveBeenCalled()
+  })
 })
