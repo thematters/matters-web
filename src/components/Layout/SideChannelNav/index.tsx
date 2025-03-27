@@ -25,7 +25,6 @@ const SideChannelNav = () => {
   const [showTopGradient, setShowTopGradient] = useState(false)
   const [showBottomGradient, setShowBottomGradient] = useState(false)
   const contentRef = useRef<HTMLElement>(null)
-  const sideChannelNavRef = useRef<HTMLElement>(null)
   const { lang } = useContext(LanguageContext)
 
   const { data, loading } = usePublicQuery<ChannelsQuery>(CHANNELS, {
@@ -78,7 +77,6 @@ const SideChannelNav = () => {
           [styles.showTopGradient]: showTopGradient,
           [styles.showBottomGradient]: showBottomGradient,
         })}
-        ref={sideChannelNavRef}
       >
         {isAuthed && (
           <a
