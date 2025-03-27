@@ -82,6 +82,9 @@ export enum UNIVERSAL_AUTH_TRIGGER {
   collectionLike = 'collectionLike',
 }
 
+// Editor
+export const EDITOR_IMAGE_UPLOAD_PROGRESS = 'editorImageUploadProgress'
+
 /**
  * Broadcast channel
  */
