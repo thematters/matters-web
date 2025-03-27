@@ -164,7 +164,13 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
     const handleProgress = ((event: CustomEvent) => {
       const { fileId: uploadFileId, progress: uploadProgress } = event.detail
 
-      if (uploadFileId === fileId && progressRef.current) {
+      if (!progressRef.current || uploadFileId !== fileId) {
+        return
+      }
+
+      if (Math.round(uploadProgress) >= 99) {
+        progressRef.current.innerText = '99%'
+      } else {
         progressRef.current.innerText = `${Math.round(uploadProgress)}%`
       }
     }) as EventListener
