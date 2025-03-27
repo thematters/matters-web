@@ -14,7 +14,7 @@ type ChannelItemProps = {
 }
 
 const ChannelItem = ({ channel }: ChannelItemProps) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
 
   const [lineClampable, setLineClampable] = useState(false)
@@ -50,7 +50,6 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
       <Link href={`/c/${channel.shortHash}`}>
         <a
           ref={node}
-          key={channel.id}
           className={classnames({
             [styles.item]: true,
             [styles.selectedChannel]: shortHash === channel.shortHash,
