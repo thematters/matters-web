@@ -41,6 +41,7 @@ const SideChannelNav = () => {
 
   useEffect(() => {
     const contentElement = contentRef.current
+    console.log('contentElement', contentElement)
     if (contentElement) {
       contentElement.addEventListener('scroll', checkScroll)
       checkScroll()
@@ -49,7 +50,7 @@ const SideChannelNav = () => {
         contentElement.removeEventListener('scroll', checkScroll)
       }
     }
-  }, [contentRef.current])
+  }, [])
 
   if (loading) return <Placeholder />
 
