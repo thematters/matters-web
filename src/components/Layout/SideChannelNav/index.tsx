@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
@@ -31,6 +31,22 @@ const SideChannelNav = () => {
   const { data, loading } = usePublicQuery<ChannelsQuery>(CHANNELS, {
     variables: { userLanguage: lang },
   })
+
+  const checkScroll = () => {
+    if (!contentRef.current) return
+    const { scrollTop, scrollHeight, clientHeight } = contentRef.current
+    setShowTopGradient(scrollTop > 10)
+    setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 10)
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      const contentElement = contentRef.current
+      if (contentElement) {
+        checkScroll()
+      }
+    }, 100)
+  }, [])
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
     const element = e.currentTarget
