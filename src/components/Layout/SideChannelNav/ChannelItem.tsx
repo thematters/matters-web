@@ -55,7 +55,6 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
           [styles.selectedChannel]: shortHash === channel.shortHash,
           [styles.lineClampable]: !firstRender,
         })}
-        data-channel-id={channel.id}
       >
         <span>{displayChannelName(channel.name)}</span>
       </RouteLink>
