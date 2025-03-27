@@ -115,6 +115,8 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
       if (!asset?.path) {
         const path = (await upload({ file, type: ASSET_TYPE.embed, mime })).path
 
+        progressRef?.current?.remove()
+
         // update cache
         editor.storage.figureImageUploader.assets[fileId] = {
           ...asset,
@@ -164,10 +166,6 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
 
       if (uploadFileId === fileId && progressRef.current) {
         progressRef.current.innerText = `${Math.round(uploadProgress)}%`
-
-        if (uploadProgress >= 100 && progressRef.current) {
-          progressRef.current.remove()
-        }
       }
     }) as EventListener
 
