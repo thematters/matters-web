@@ -8,7 +8,7 @@ type RouteLinkProps = {
 
 export const RouteLink = ({ href, children, ...restProps }: RouteLinkProps) => {
   return (
-    <Link href={href}>
+    <Link href={href} legacyBehavior>
       <a {...restProps}>{children}</a>
     </Link>
   )
