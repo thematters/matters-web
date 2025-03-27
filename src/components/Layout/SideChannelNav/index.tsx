@@ -45,7 +45,7 @@ const SideChannelNav = () => {
       if (contentElement) {
         checkScroll()
       }
-    }, 100)
+    }, 1000)
   }, [])
 
   const handleScroll = (e: React.UIEvent<HTMLElement>) => {
