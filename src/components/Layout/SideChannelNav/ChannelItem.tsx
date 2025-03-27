@@ -1,4 +1,5 @@
 import classnames from 'classnames'
+import Link from 'next/link'
 import { useLayoutEffect } from 'react'
 import { useRef, useState } from 'react'
 
@@ -46,24 +47,20 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
       touch={['hold', 1000]}
       disabled={!lineClampable}
     >
-      <a
-        ref={node}
-        key={channel.id}
-        href={`/c/${channel.shortHash}`}
-        className={classnames({
-          [styles.item]: true,
-          [styles.selectedChannel]: shortHash === channel.shortHash,
-          [styles.lineClampable]: !firstRender,
-        })}
-        data-channel-id={channel.id}
-        onClick={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          router.push(`/c/${channel.shortHash}`)
-        }}
-      >
-        <span>{displayChannelName(channel.name)}</span>
-      </a>
+      <Link href={`/c/${channel.shortHash}`}>
+        <a
+          ref={node}
+          key={channel.id}
+          className={classnames({
+            [styles.item]: true,
+            [styles.selectedChannel]: shortHash === channel.shortHash,
+            [styles.lineClampable]: !firstRender,
+          })}
+          data-channel-id={channel.id}
+        >
+          <span>{displayChannelName(channel.name)}</span>
+        </a>
+      </Link>
     </Tooltip>
   )
 }
