@@ -46,7 +46,6 @@ describe('<LinkWrapper>', () => {
     expect(handleClick).not.toHaveBeenCalled()
   })
 
-  // 测试 textActiveColor 属性
   it('should apply textActiveColor class', () => {
     render(
       <LinkWrapper href="/test" textActiveColor="green">
@@ -58,7 +57,6 @@ describe('<LinkWrapper>', () => {
     expect($link.className).toContain('textActiveGreen')
   })
 
-  // 测试传递额外属性
   it('should pass through additional props', () => {
     render(
       <LinkWrapper
@@ -79,7 +77,6 @@ describe('<LinkWrapper>', () => {
     expect($link).toHaveAttribute('data-custom', 'custom-data')
   })
 
-  // 测试传播事件阻止
   it('should stop event propagation when onClick is called', () => {
     const handleClick = vi.fn()
     const handleParentClick = vi.fn()
