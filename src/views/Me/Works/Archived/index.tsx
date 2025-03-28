@@ -65,7 +65,7 @@ export const BaseMeWorksArchived = () => {
 }
 
 const MeWorksArchived = () => {
-  const init = useIntl()
+  const intl = useIntl()
 
   return (
     <Layout.Main>
@@ -78,9 +78,9 @@ const MeWorksArchived = () => {
       />
 
       <Head
-        title={init.formatMessage({
+        title={intl.formatMessage({
           defaultMessage: 'My Works',
-          id: 'YgZOAm',
+          id: 'ai7kS4',
         })}
       />
 

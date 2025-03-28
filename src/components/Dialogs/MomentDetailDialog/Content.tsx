@@ -8,6 +8,7 @@ import {
   ADD_MOMENT_COMMENT_MENTION,
   DISABLE_SUSPEND_DISMISS_ON_ESC,
   ENABLE_SUSPEND_DISMISS_ON_ESC,
+  MAX_META_SUMMARY_LENGTH,
 } from '~/common/enums'
 import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
 import {
@@ -15,6 +16,7 @@ import {
   makeMentionElement,
   makeSummary,
   sessionStorage,
+  stripHtml,
   toPath,
 } from '~/common/utils'
 import {
@@ -147,8 +149,8 @@ const MomentDetailDialogContent = ({
     <>
       <Head
         title={`${
-          moment.content
-            ? makeSummary(moment.content)
+          moment.content && stripHtml(moment.content)
+            ? makeSummary(moment.content, MAX_META_SUMMARY_LENGTH)
             : intl.formatMessage({
                 defaultMessage: 'Moment',
                 description:

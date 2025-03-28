@@ -62,80 +62,77 @@ describe('utils/text/article/countChars', () => {
 })
 
 describe('utils/text/article/makeSummary', () => {
-  const maxUnits = 4
+  const CHINESE_ONLY =
+    '这是一个标题这是一个标题这是一个标题这是一个标题这是一个'
+  const CHINESE_WITH_NUMBERS_AND_PUNCTUATION =
+    '看起來 10 拍，快樂喜歡如其實也是我於有我的部分'
+  const ENGLISH_ONLY =
+    'Lorem gustaría dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  const ENGLISH_WITH_NUMBERS_AND_PUNCTUATION =
+    'Lorem gustaría 10 dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  const MIXED =
+    '看起來 10 拍，consectetur Lorem gustaría dolor sit amet, adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+  const MENTIONS =
+    '看起來 10 拍 <a href="/@user">@用戶</a> @user @user+1 Lorem gustaría dolor，快樂喜歡如其實也是我於有我的部分'
+  const MUTIPLE_SPACES = '看起來 10     拍快樂喜歡如其實也是我於有我的部分'
 
-  it('should make summary from HTML content with default max units', () => {
-    expect(
-      makeSummary(
-        '<p>Hello, <strong>world</strong>. This is a very long sentence.</p>'
-      )
-    ).toBe('Hello, world. This is a very long sentence.')
-  })
+  it('should return the title for the default length of 10 words', () => {
+    const maxUnits = 10
 
-  it('should handle empty string', () => {
-    expect(makeSummary('')).toBe('')
-  })
-
-  it('should truncate English text to specified length', () => {
-    expect(
-      makeSummary(
-        '<p>Hello, <strong>world</strong>. This is a very long sentence.</p>',
-        maxUnits
-      )
-    ).toBe('Hello, world. This is…')
-  })
-
-  it('should truncate Chinese text to specified length', () => {
-    expect(
-      makeSummary('<p>你好，世界！</p><p>你好，世界！</p>', maxUnits)
-    ).toBe('你好，世界！…')
-  })
-
-  it('should truncate mixed English and Chinese text', () => {
-    expect(makeSummary('<p>Hello, 你好，世界！</p>', maxUnits)).toBe(
-      'Hello, 你好，世…'
+    expect(makeSummary(CHINESE_ONLY, maxUnits)).toEqual('这是一个标题这是一个…')
+    expect(makeSummary(CHINESE_WITH_NUMBERS_AND_PUNCTUATION, maxUnits)).toEqual(
+      '看起來 10 拍，快樂喜歡如…'
+    )
+    expect(makeSummary(ENGLISH_ONLY, maxUnits)).toEqual(
+      'Lorem gustaría dolor sit amet, consectetur adipiscing elit, sed do…'
+    )
+    expect(makeSummary(ENGLISH_WITH_NUMBERS_AND_PUNCTUATION, maxUnits)).toEqual(
+      'Lorem gustaría 10 dolor sit amet, consectetur adipiscing elit, sed…'
+    )
+    expect(makeSummary(MIXED, maxUnits)).toEqual(
+      '看起來 10 拍，consectetur Lorem gustaría dolor sit…'
+    )
+    expect(makeSummary(MENTIONS, maxUnits)).toEqual(
+      '看起來 10 拍 @用戶 @user @user+1 Lorem gustaría…'
+    )
+    expect(makeSummary(MUTIPLE_SPACES, maxUnits)).toEqual(
+      '看起來 10 拍快樂喜歡如…'
     )
   })
 
-  it('should handle multiple spaces or new lines', () => {
-    expect(makeSummary('<p>Hello,        你好，世界！</p>', maxUnits)).toBe(
-      'Hello, 你好，世…'
+  it('should truncate the title to the specified maximum number of words', () => {
+    const maxLength = 6
+
+    expect(makeSummary(CHINESE_ONLY, maxLength)).toEqual('这是一个标题…')
+    expect(makeSummary(CHINESE_ONLY.slice(0, maxLength), maxLength)).toEqual(
+      '这是一个标题'
     )
-
     expect(
-      makeSummary(
-        '<p>Hello, \n\n\n你好，世界！</p><p>Hello, 你好，世界！</p>',
-        maxUnits
-      )
-    ).toBe('Hello, 你好，世…')
-
+      makeSummary(CHINESE_WITH_NUMBERS_AND_PUNCTUATION, maxLength)
+    ).toEqual('看起來 10 拍，快…')
+    expect(makeSummary(ENGLISH_ONLY, maxLength)).toEqual(
+      'Lorem gustaría dolor sit amet, consectetur…'
+    )
     expect(
-      makeSummary('<p>Hello<p>, <p>你好</p>，<p>世界！</p>', maxUnits)
-    ).toBe('Hello , 你好 ， 世…')
+      makeSummary(ENGLISH_WITH_NUMBERS_AND_PUNCTUATION, maxLength)
+    ).toEqual('Lorem gustaría 10 dolor sit amet…')
+    expect(makeSummary(MIXED, maxLength)).toEqual('看起來 10 拍，consectetur…')
+    expect(makeSummary(MENTIONS, maxLength)).toEqual('看起來 10 拍 @用戶…')
   })
 
-  it('should handle mentions', () => {
-    expect(
-      makeSummary('<p>Hello, <a href="/@world">@world</a>!</p>', maxUnits)
-    ).toBe('Hello, @world!')
+  it('should return the title as is if it has fewer words than the maximum', () => {
+    const maxLength = 100
 
+    expect(makeSummary(CHINESE_ONLY, maxLength)).toEqual(CHINESE_ONLY)
     expect(
-      makeSummary('<p>Hello, <a href="/@世界">@世界</a>!</p>', maxUnits)
-    ).toBe('Hello, @世界!')
-
+      makeSummary(CHINESE_WITH_NUMBERS_AND_PUNCTUATION, maxLength)
+    ).toEqual(CHINESE_WITH_NUMBERS_AND_PUNCTUATION)
+    expect(makeSummary(ENGLISH_ONLY, maxLength)).toEqual(ENGLISH_ONLY)
     expect(
-      makeSummary(
-        '<p>Hello, <a href="/@世界">@世界</a>!</p><p>Hello, <a href="/@world">@world</a>!</p>',
-        maxUnits
-      )
-    ).toBe('Hello, @世界! Hello, @world!')
-
-    expect(
-      makeSummary(
-        '<p>Hello, <a href="/@世界">@世界</a>!</p><p>Hello, <a href="/@world">@world</a>!</p><p>快樂喜歡如其實也是我於有我的部分</p>',
-        maxUnits
-      )
-    ).toBe('Hello, @世界! Hello, @world!…')
+      makeSummary(ENGLISH_WITH_NUMBERS_AND_PUNCTUATION, maxLength)
+    ).toEqual(ENGLISH_WITH_NUMBERS_AND_PUNCTUATION)
+    expect(makeSummary(MIXED, maxLength)).toEqual(MIXED)
+    expect(makeSummary(MENTIONS, maxLength)).toEqual(stripHtml(MENTIONS))
   })
 })
 

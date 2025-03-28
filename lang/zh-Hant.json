@@ -2043,10 +2043,6 @@
     "defaultMessage": "查看作品",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "YgZOAm": {
-    "defaultMessage": "我的創作 - 已封存",
-    "description": "src/views/Me/Works/Archived/index.tsx"
-  },
   "YjW2MT": {
     "defaultMessage": "評論已隱藏"
   },
@@ -3333,10 +3329,6 @@
   },
   "yAflVX": {
     "defaultMessage": "草稿已刪除"
-  },
-  "yBCdku": {
-    "defaultMessage": "我的創作 - 已發布",
-    "description": "src/views/Me/Works/Published/index.tsx"
   },
   "yBUiiy": {
     "defaultMessage": "操作無法撤銷，確認封存嗎？"

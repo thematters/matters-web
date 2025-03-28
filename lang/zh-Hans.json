@@ -2043,10 +2043,6 @@
     "defaultMessage": "查看作品",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "YgZOAm": {
-    "defaultMessage": "我的创作 - 已归档",
-    "description": "src/views/Me/Works/Archived/index.tsx"
-  },
   "YjW2MT": {
     "defaultMessage": "评论已隐藏"
   },
@@ -3333,10 +3329,6 @@
   },
   "yAflVX": {
     "defaultMessage": "草稿已刪除"
-  },
-  "yBCdku": {
-    "defaultMessage": "我的创作 - 已发布",
-    "description": "src/views/Me/Works/Published/index.tsx"
   },
   "yBUiiy": {
     "defaultMessage": "操作无法撤销，确认归档吗？"

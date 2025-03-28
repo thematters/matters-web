@@ -2043,9 +2043,6 @@
     "defaultMessage": "View article",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "YgZOAm": {
-    "defaultMessage": "My Works"
-  },
   "YjW2MT": {
     "defaultMessage": "Comment has been hidden"
   },
@@ -3332,9 +3329,6 @@
   },
   "yAflVX": {
     "defaultMessage": "Draft has been deleted"
-  },
-  "yBCdku": {
-    "defaultMessage": "My Works"
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"

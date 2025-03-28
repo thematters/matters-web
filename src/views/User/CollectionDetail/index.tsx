@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 
+import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
 import { Head, Layout } from '~/components'
 import { QueryError, Throw404, useRoute } from '~/components'
@@ -50,7 +51,7 @@ const BaseCollectionDetail = () => {
   return (
     <>
       <Head
-        title={`${makeSummary(collection.title)} - ${collection.author.displayName}`}
+        title={`${makeSummary(collection.title, MAX_META_SUMMARY_LENGTH)} - ${collection.author.displayName}`}
         path={
           toPath({
             page: 'collectionDetail',
@@ -58,7 +59,6 @@ const BaseCollectionDetail = () => {
             userName: collection.author.userName!,
           }).href
         }
-        noSuffix
         description={collection.description}
         image={collection.cover}
       />

@@ -1,3 +1,9 @@
+import {
+  REGEXP_CJK,
+  REGEXP_LATIN,
+  REGEXP_PUNCTUATION,
+} from '~/common/enums/text'
+
 import { toSizedImageURL } from '../url'
 
 /**
@@ -51,12 +57,6 @@ export const stripHtml = (html: string, options?: StripHTMLOptions) => {
   return plainText
 }
 
-const REGEXP_LATIN = 'A-Za-z\u00C0-\u00FF'
-const REGEXP_CJK =
-  '\u4E00-\u9FFF\u3400-\u4DBF\u20000-\u2A6DF\u2A700-\u2B73F\u2B740-\u2B81F\u2B820-\u2CEAF\uF900-\uFAFF\u2F800-\u2FA1F'
-const REGEXP_DIGIT = '0-9'
-const REGEXP_PUNCTUATION = '\\p{P}'
-
 const countUnits = (text: string): number => {
   // Count @mentions as 1 unit
   if (text.startsWith('@')) return 1
@@ -64,10 +64,10 @@ const countUnits = (text: string): number => {
   // Count Latin word as 1 unit
   if (new RegExp(`^[${REGEXP_LATIN}]+$`).test(text)) return 1
 
-  // Count each CJK character or digit as 1 unit
+  // Count each CJK character as 1 unit
   return Array.from(text).reduce((count, char) => {
     // If it's a CJK character or digit, count it as 1 unit
-    if (new RegExp(`[${REGEXP_CJK}]|[${REGEXP_DIGIT}]`).test(char)) {
+    if (new RegExp(`[${REGEXP_CJK}]`).test(char)) {
       return count + 1
     }
     // Otherwise (punctuation, whitespace, etc.), don't count
@@ -75,9 +75,16 @@ const countUnits = (text: string): number => {
   }, 0)
 }
 
-export const makeSummary = (html: string, maxUnits = 20) => {
+export const makeSummary = (
+  html: string,
+  maxUnits: number,
+  lineReplacement?: string
+) => {
   // Clean the HTML content first
-  const plainText = stripHtml(html, { lineReplacement: ' ' })
+  const plainText = stripHtml(html, {
+    lineReplacement: lineReplacement || ' ',
+    ensureMentionTrailingSpace: true,
+  })
     .replace(/&[^;]+;/g, ' ') // remove html entities
     .replace(/\s+/g, ' ') // normalize whitespace
     .trim()
@@ -85,16 +92,21 @@ export const makeSummary = (html: string, maxUnits = 20) => {
   // Split the content into matchable tokens
   const matches =
     plainText.match(
-      // Match @mentions, Latin words, CJK characters, digits, and other characters
-      new RegExp(
-        `(@\\S+|[${REGEXP_LATIN}]+|[${REGEXP_CJK}]|[${REGEXP_DIGIT}]|[^${REGEXP_LATIN}${REGEXP_CJK}${REGEXP_DIGIT}\\s]|\\s)`,
-        'gu'
-      )
+      new RegExp(`(@[^\\s]+|[${REGEXP_LATIN}]+|[^${REGEXP_LATIN}\s])`, 'g')
     ) || []
 
   let summary = ''
   let units = 0
   let hasMore = false
+
+  function trimSpacesAndPunctuations(str: string) {
+    return str
+      .trim()
+      .replace(
+        new RegExp(`^[${REGEXP_PUNCTUATION}]+|[${REGEXP_PUNCTUATION}]+$`, 'g'),
+        ''
+      )
+  }
 
   // Process each token
   for (const token of matches) {
@@ -118,16 +130,16 @@ export const makeSummary = (html: string, maxUnits = 20) => {
     }
 
     // Add the token and count its units
-    summary += token
+    summary += trimSpacesAndPunctuations(token)
     units += tokenUnits
   }
 
   // Add ellipsis if there's more content that wasn't included
   if (hasMore) {
-    summary = summary.trim() + '…'
+    summary = trimSpacesAndPunctuations(summary) + '…'
   }
 
-  return summary.trim()
+  return summary
 }
 
 /**

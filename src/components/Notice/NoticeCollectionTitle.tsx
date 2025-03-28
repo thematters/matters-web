@@ -1,9 +1,8 @@
 import gql from 'graphql-tag'
 import Link from 'next/link'
 
-import { TEST_ID } from '~/common/enums'
-import { toPath } from '~/common/utils'
-import { truncateNoticeTitle } from '~/common/utils/text/notice'
+import { MAX_NOTICE_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
+import { makeSummary, toPath } from '~/common/utils'
 import { CollectionNoticeFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -31,7 +30,7 @@ const NoticeCollectionTitle = ({
         className={styles.noticeArticleTitle}
         data-test-id={TEST_ID.NOTICE_COLLECTION_TITLE}
       >
-        {truncateNoticeTitle(notice.collection.title)}
+        {makeSummary(notice.collection.title, MAX_NOTICE_SUMMARY_LENGTH, '\n')}
       </a>
     </Link>
   )

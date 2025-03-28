@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
+  MAX_META_SUMMARY_LENGTH,
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
 } from '~/common/enums'
@@ -268,16 +269,15 @@ const BaseArticleDetail = ({
       showAside={article.state === 'active'}
     >
       <Head
-        title={`${makeSummary(title)} - ${article?.author.displayName}`}
+        title={`${makeSummary(title, MAX_META_SUMMARY_LENGTH)} - ${article?.author.displayName}`}
         path={toPath({ page: 'articleDetail', article }).href}
-        noSuffix
-        description={makeSummary(summary)}
+        description={makeSummary(summary, MAX_META_SUMMARY_LENGTH)}
         keywords={keywords}
         image={article.cover}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'Article',
-          headline: makeSummary(summary),
+          headline: makeSummary(summary, MAX_META_SUMMARY_LENGTH),
           /* wordCount: ... */
           keywords,
           datePublished: formatISO(

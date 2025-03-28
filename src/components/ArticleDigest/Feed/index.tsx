@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
-import { TEST_ID } from '~/common/enums'
+import { MAX_FEED_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
 import {
   DateTime,
@@ -64,7 +64,8 @@ const BaseArticleDigestFeed = ({
   const isBanned = article.articleState === 'banned'
   const isArchived = article.articleState === 'archived'
   const cover = !isBanned && !isArchived ? article.cover : null
-  const cleanedSummary = isBanned && !isArchived ? '' : makeSummary(summary)
+  const cleanedSummary =
+    isBanned && !isArchived ? '' : makeSummary(summary, MAX_FEED_SUMMARY_LENGTH)
 
   const path = toPath({
     page: 'articleDetail',

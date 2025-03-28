@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
@@ -131,7 +132,7 @@ const BaseArticleDetailHistory = ({
   return (
     <Layout.Main aside={<Versions.Sidebar article={article} />}>
       <Head
-        title={`${makeSummary(title)} - ${article?.author.displayName}`}
+        title={`${makeSummary(title, MAX_META_SUMMARY_LENGTH)} - ${article?.author.displayName}`}
         path={
           toPath({
             page: 'articleHistory',
@@ -139,8 +140,7 @@ const BaseArticleDetailHistory = ({
             search: { v: version.id },
           }).href
         }
-        noSuffix
-        description={makeSummary(summary)}
+        description={makeSummary(summary, MAX_META_SUMMARY_LENGTH)}
         image={article.cover}
         availableLanguages={article.availableTranslations || []}
       />
