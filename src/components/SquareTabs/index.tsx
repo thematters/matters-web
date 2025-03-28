@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { useEffect, useRef, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 
 import { capitalizeFirstLetter } from '~/common/utils'
 
@@ -12,25 +12,32 @@ type TabProps = {
   theme?: 'black' | 'gold' | 'green'
 }
 
-const Tab = ({ title, selected, onClick, theme }: TabProps) => {
-  const liClasses = classNames({
-    [styles.tabItem]: true,
-    [styles.selected]: selected,
-    [styles.gold]: theme === 'gold',
-    [styles.green]: theme === 'green',
-  })
+// 使用 forwardRef 包装 Tab 组件以支持引用转发
+const Tab = forwardRef<HTMLLIElement, TabProps>(
+  ({ title, selected, onClick, theme }, ref) => {
+    const liClasses = classNames({
+      [styles.tabItem]: true,
+      [styles.selected]: selected,
+      [styles.gold]: theme === 'gold',
+      [styles.green]: theme === 'green',
+    })
 
-  return (
-    <li
-      className={liClasses}
-      role="button"
-      onClick={onClick}
-      data-title={typeof title === 'string' ? title : ''}
-    >
-      {title}
-    </li>
-  )
-}
+    return (
+      <li
+        className={liClasses}
+        role="button"
+        onClick={onClick}
+        data-title={typeof title === 'string' ? title : ''}
+        ref={ref}
+      >
+        {title}
+      </li>
+    )
+  }
+)
+
+// 添加显示名称以便开发工具识别
+Tab.displayName = 'Tab'
 
 interface SquareTabsProps {
   sticky?: boolean
