@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { toPath } from '~/common/utils'
+import { makeSummary, toPath } from '~/common/utils'
 import {
   BackToHomeButton,
   EmptyLayout,
@@ -131,7 +131,7 @@ const BaseArticleDetailHistory = ({
   return (
     <Layout.Main aside={<Versions.Sidebar article={article} />}>
       <Head
-        title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
+        title={`${makeSummary(title)} - ${article?.author.displayName}`}
         path={
           toPath({
             page: 'articleHistory',
@@ -140,7 +140,7 @@ const BaseArticleDetailHistory = ({
           }).href
         }
         noSuffix
-        description={summary}
+        description={makeSummary(summary)}
         image={article.cover}
         availableLanguages={article.availableTranslations || []}
       />

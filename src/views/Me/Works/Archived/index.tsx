@@ -66,11 +66,6 @@ export const BaseMeWorksArchived = () => {
 
 const MeWorksArchived = () => {
   const init = useIntl()
-  const title = init.formatMessage({
-    defaultMessage: 'My Works - Archived',
-    description: 'src/views/Me/Works/Archived/index.tsx',
-    id: 'YgZOAm',
-  })
 
   return (
     <Layout.Main>
@@ -82,7 +77,12 @@ const MeWorksArchived = () => {
         }
       />
 
-      <Head title={title} />
+      <Head
+        title={init.formatMessage({
+          defaultMessage: 'My Works',
+          id: 'YgZOAm',
+        })}
+      />
 
       <WorksTabs />
 

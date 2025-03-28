@@ -10,6 +10,7 @@ import {
 } from '~/common/enums'
 import {
   analytics,
+  makeSummary,
   normalizeTag,
   parseCommentHash,
   toPath,
@@ -267,16 +268,16 @@ const BaseArticleDetail = ({
       showAside={article.state === 'active'}
     >
       <Head
-        title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
+        title={`${makeSummary(title)} - ${article?.author.displayName}`}
         path={toPath({ page: 'articleDetail', article }).href}
         noSuffix
-        description={summary}
+        description={makeSummary(summary)}
         keywords={keywords}
         image={article.cover}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'Article',
-          headline: summary,
+          headline: makeSummary(summary),
           /* wordCount: ... */
           keywords,
           datePublished: formatISO(

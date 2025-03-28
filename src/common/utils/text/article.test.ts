@@ -62,41 +62,80 @@ describe('utils/text/article/countChars', () => {
 })
 
 describe('utils/text/article/makeSummary', () => {
-  it('should make summary correctly', () => {
+  const maxUnits = 4
+
+  it('should make summary from HTML content with default max units', () => {
     expect(
       makeSummary(
         '<p>Hello, <strong>world</strong>. This is a very long sentence.</p>'
       )
     ).toBe('Hello, world. This is a very long sentence.')
+  })
+
+  it('should handle empty string', () => {
     expect(makeSummary('')).toBe('')
   })
 
-  it('should make summary correctly with custom lenth', () => {
+  it('should truncate English text to specified length', () => {
     expect(
       makeSummary(
         '<p>Hello, <strong>world</strong>. This is a very long sentence.</p>',
-        20,
-        0
+        maxUnits
       )
-    ).toBe('Hello, world. This i…')
+    ).toBe('Hello, world. This is…')
   })
 
-  it('should make summary correctly with custom buffer', () => {
+  it('should truncate Chinese text to specified length', () => {
     expect(
-      makeSummary(
-        '<p>Hello, <strong>world</strong>. This is a very long sentence.</p>',
-        20,
-        0
-      )
-    ).toBe('Hello, world. This i…')
+      makeSummary('<p>你好，世界！</p><p>你好，世界！</p>', maxUnits)
+    ).toBe('你好，世界！…')
+  })
+
+  it('should truncate mixed English and Chinese text', () => {
+    expect(makeSummary('<p>Hello, 你好，世界！</p>', maxUnits)).toBe(
+      'Hello, 你好，世…'
+    )
+  })
+
+  it('should handle multiple spaces or new lines', () => {
+    expect(makeSummary('<p>Hello,        你好，世界！</p>', maxUnits)).toBe(
+      'Hello, 你好，世…'
+    )
 
     expect(
       makeSummary(
-        '<p>Hello, <strong>world</strong>. This is a very long sentence.</p>',
-        5,
-        3
+        '<p>Hello, \n\n\n你好，世界！</p><p>Hello, 你好，世界！</p>',
+        maxUnits
       )
-    ).toBe('Hello…')
+    ).toBe('Hello, 你好，世…')
+
+    expect(
+      makeSummary('<p>Hello<p>, <p>你好</p>，<p>世界！</p>', maxUnits)
+    ).toBe('Hello , 你好 ， 世…')
+  })
+
+  it('should handle mentions', () => {
+    expect(
+      makeSummary('<p>Hello, <a href="/@world">@world</a>!</p>', maxUnits)
+    ).toBe('Hello, @world!')
+
+    expect(
+      makeSummary('<p>Hello, <a href="/@世界">@世界</a>!</p>', maxUnits)
+    ).toBe('Hello, @世界!')
+
+    expect(
+      makeSummary(
+        '<p>Hello, <a href="/@世界">@世界</a>!</p><p>Hello, <a href="/@world">@world</a>!</p>',
+        maxUnits
+      )
+    ).toBe('Hello, @世界! Hello, @world!')
+
+    expect(
+      makeSummary(
+        '<p>Hello, <a href="/@世界">@世界</a>!</p><p>Hello, <a href="/@world">@world</a>!</p><p>快樂喜歡如其實也是我於有我的部分</p>',
+        maxUnits
+      )
+    ).toBe('Hello, @世界! Hello, @world!…')
   })
 })
 

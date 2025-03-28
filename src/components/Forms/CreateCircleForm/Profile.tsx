@@ -244,7 +244,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
               {isCreate ? (
                 <FormattedMessage defaultMessage="Create Circle" id="ESn43O" />
               ) : (
-                <FormattedMessage defaultMessage="Profile" id="itPgxd" />
+                <FormattedMessage defaultMessage="Edit Circle" id="H8hiL/" />
               )}
             </Layout.Header.Title>
           }

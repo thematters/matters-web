@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client'
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useEffect, useState } from 'react'
+import { useIntl } from 'react-intl'
 
 import {
   ADD_MOMENT_COMMENT_MENTION,
@@ -12,12 +13,14 @@ import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
 import {
   captureClicks,
   makeMentionElement,
+  makeSummary,
   sessionStorage,
   toPath,
 } from '~/common/utils'
 import {
   BackToHomeButton,
   Error,
+  Head,
   MomentDigestDetail,
   QueryError,
   useEventListener,
@@ -42,6 +45,7 @@ const MomentDetailDialogContent = ({
   shortHash,
   closeDialog: _closeDialog,
 }: MomentDetailDialogContentProps) => {
+  const intl = useIntl()
   const { isInPath, router } = useRoute()
   const [editing, setEditing] = useState(false)
   const [editor, setEditor] = useState<Editor | null>(null)
@@ -140,57 +144,72 @@ const MomentDetailDialogContent = ({
   }
 
   return (
-    <section className={styles.container}>
-      <header className={styles.header}>
-        <MomentDigestDetail
-          moment={moment}
-          onClose={closeDialog}
-          hasContent={false}
-          hasAssets={false}
-        />
-      </header>
+    <>
+      <Head
+        title={`${
+          moment.content
+            ? makeSummary(moment.content)
+            : intl.formatMessage({
+                defaultMessage: 'Moment',
+                description:
+                  'src/components/Dialogs/MomentDetailDialog/Content.tsx',
+                id: 'g/IDCs',
+              })
+        } - ${moment.author.displayName}`}
+      />
 
-      <section className={styles.mainContent}>
-        {!!content && (
-          <section
-            className="u-content-moment detail"
-            dangerouslySetInnerHTML={{
-              __html: content || '',
-            }}
-            onClick={captureClicks}
+      <section className={styles.container}>
+        <header className={styles.header}>
+          <MomentDigestDetail
+            moment={moment}
+            onClose={closeDialog}
+            hasContent={false}
+            hasAssets={false}
           />
-        )}
-        {assets && assets.length > 0 && (
-          <section className={styles.assets}>
-            <Assets moment={moment} />
-          </section>
-        )}
+        </header>
+
+        <section className={styles.mainContent}>
+          {!!content && (
+            <section
+              className="u-content-moment detail"
+              dangerouslySetInnerHTML={{
+                __html: content || '',
+              }}
+              onClick={captureClicks}
+            />
+          )}
+          {assets && assets.length > 0 && (
+            <section className={styles.assets}>
+              <Assets moment={moment} />
+            </section>
+          )}
+        </section>
+
+        <Comments moment={moment} editing={editing} />
+
+        <footer className={footerClassName}>
+          {!editing && (
+            <>
+              <div className={styles.likeButton}>
+                <LikeButton moment={moment} iconSize={22} />
+              </div>
+            </>
+          )}
+          <MomentCommentForm
+            moment={moment}
+            setEditor={setEditor}
+            editing={editing}
+            setEditing={setEditing}
+            closeCallback={() => {
+              setEditing(false)
+            }}
+            submitCallback={() => {
+              setEditing(false)
+            }}
+          />
+        </footer>
       </section>
-
-      <Comments moment={moment} editing={editing} />
-
-      <footer className={footerClassName}>
-        {!editing && (
-          <>
-            <div className={styles.likeButton}>
-              <LikeButton moment={moment} iconSize={22} />
-            </div>
-          </>
-        )}
-        <MomentCommentForm
-          moment={moment}
-          setEditor={setEditor}
-          editing={editing}
-          setEditing={setEditing}
-          closeCallback={() => {
-            setEditing(false)
-          }}
-          submitCallback={() => {
-            setEditing(false)
-          }}
-        />
-      </footer>
-    </section>
+    </>
   )
 }
 

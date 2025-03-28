@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
-import IMAGE_TAG_COVER from '@/public/static/images/tag-cover.png'
 import { ERROR_CODES } from '~/common/enums'
 import { fromGlobalId, normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
@@ -97,13 +96,11 @@ const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
         title={title}
         path={qsType ? `${path.href}?type=${qsType}` : path.href}
         keywords={keywords} // add top10 most using author names?
-        image={`//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'ItemList', // should follow with some recent articles under 'itemListElement'
           name: title,
           keywords,
-          image: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${IMAGE_TAG_COVER.src}`,
           url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}/${path.href}`,
           // itemListElement: [...],
         }}

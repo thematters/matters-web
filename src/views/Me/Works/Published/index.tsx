@@ -94,11 +94,6 @@ export const BaseMeWorksPublished = () => {
 
 const MeWorksPublished = () => {
   const init = useIntl()
-  const title = init.formatMessage({
-    defaultMessage: 'My Works - Published',
-    description: 'src/views/Me/Works/Published/index.tsx',
-    id: 'yBCdku',
-  })
 
   return (
     <Layout.Main>
@@ -110,7 +105,12 @@ const MeWorksPublished = () => {
         }
       />
 
-      <Head title={title} />
+      <Head
+        title={init.formatMessage({
+          defaultMessage: 'My Works',
+          id: 'yBCdku',
+        })}
+      />
 
       <WorksTabs />
 

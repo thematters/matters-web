@@ -335,13 +335,10 @@ const BaseDraftDetail = () => {
       />
 
       <Head
-        title={intl.formatMessage(
-          {
-            defaultMessage: '[Draft] {draftTitle}',
-            id: '33oNeg',
-          },
-          { draftTitle: draft.title }
-        )}
+        title={intl.formatMessage({
+          defaultMessage: 'New Article',
+          id: '8PL7mC',
+        })}
       />
 
       <PublishState draft={draft} />

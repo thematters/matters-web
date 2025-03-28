@@ -1,3 +1,4 @@
+import _isNil from 'lodash/isNil'
 import NextHead from 'next/head'
 import type { NextSeoProps } from 'next-seo'
 import { NextSeo } from 'next-seo'
@@ -7,7 +8,6 @@ import IMAGE_APPLE_TOUCH_ICON from '@/public/static/apple-touch-icon.png'
 import IMAGE_FAVICON_32 from '@/public/static/favicon-32x32.png'
 import IMAGE_FAVICON_64 from '@/public/static/favicon-64x64.png'
 import IMAGE_FAVICON_128 from '@/public/static/favicon-128x128.png'
-import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import { toLocale, toOGLanguage } from '~/common/utils'
 import { LanguageContext, useRoute } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
@@ -23,7 +23,7 @@ const isProdServingCanonical =
   process.env.NEXT_PUBLIC_SITE_DOMAIN === siteDomainCanonical // is serving domain same as canonical domain?
 
 interface HeadProps {
-  title?: string
+  title?: string | null
   description?: string | null
   keywords?: string[]
   path?: string
@@ -101,9 +101,9 @@ export const Head: React.FC<HeadProps> = (props) => {
       siteName: 'Matters',
       url,
       type: 'website',
-      images: [{ url: props.image || IMAGE_INTRO.src }],
       description: seoDescription,
       locale: toOGLanguage(lang),
+      ...(props.image ? { images: [{ url: props.image }] } : {}),
     },
     twitter: {
       cardType: 'summary_large_image',

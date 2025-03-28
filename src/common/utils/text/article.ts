@@ -51,35 +51,83 @@ export const stripHtml = (html: string, options?: StripHTMLOptions) => {
   return plainText
 }
 
-/**
- * Return beginning of text in html as summary, split on sentence break within buffer range.
- * @param html - html string to extract summary
- * @param length - target length of summary
- * @param buffer - buffer range to search for sentence break
- */
-export const makeSummary = (html: string, length = 140, buffer = 20) => {
-  // split on sentence breaks
-  const sections = stripHtml(html, {
-    lineReplacement: ' ',
-  })
+const REGEXP_LATIN = 'A-Za-z\u00C0-\u00FF'
+const REGEXP_CJK =
+  '\u4E00-\u9FFF\u3400-\u4DBF\u20000-\u2A6DF\u2A700-\u2B73F\u2B740-\u2B81F\u2B820-\u2CEAF\uF900-\uFAFF\u2F800-\u2FA1F'
+const REGEXP_DIGIT = '0-9'
+const REGEXP_PUNCTUATION = '\\p{P}'
+
+const countUnits = (text: string): number => {
+  // Count @mentions as 1 unit
+  if (text.startsWith('@')) return 1
+
+  // Count Latin word as 1 unit
+  if (new RegExp(`^[${REGEXP_LATIN}]+$`).test(text)) return 1
+
+  // Count each CJK character or digit as 1 unit
+  return Array.from(text).reduce((count, char) => {
+    // If it's a CJK character or digit, count it as 1 unit
+    if (new RegExp(`[${REGEXP_CJK}]|[${REGEXP_DIGIT}]`).test(char)) {
+      return count + 1
+    }
+    // Otherwise (punctuation, whitespace, etc.), don't count
+    return count
+  }, 0)
+}
+
+export const makeSummary = (html: string, maxUnits = 20) => {
+  // Clean the HTML content first
+  const plainText = stripHtml(html, { lineReplacement: ' ' })
     .replace(/&[^;]+;/g, ' ') // remove html entities
-    .replace(/([?!。？！]|(\.\s))\s*/g, '$1|') // split on sentence breaks
-    .split('|')
+    .replace(/\s+/g, ' ') // normalize whitespace
+    .trim()
 
-  // grow summary within buffer
+  // Split the content into matchable tokens
+  const matches =
+    plainText.match(
+      // Match @mentions, Latin words, CJK characters, digits, and other characters
+      new RegExp(
+        `(@\\S+|[${REGEXP_LATIN}]+|[${REGEXP_CJK}]|[${REGEXP_DIGIT}]|[^${REGEXP_LATIN}${REGEXP_CJK}${REGEXP_DIGIT}\\s]|\\s)`,
+        'gu'
+      )
+    ) || []
+
   let summary = ''
-  while (summary.length < length - buffer && sections.length > 0) {
-    const el = sections.shift() || ''
+  let units = 0
+  let hasMore = false
 
-    const addition =
-      el.length + summary.length > length + buffer
-        ? `${el.substring(0, length - summary.length)}…`
-        : el
+  // Process each token
+  for (const token of matches) {
+    // If it's whitespace or punctuation, include it but don't count as a unit
+    if (
+      /^\s+$/.test(token) ||
+      new RegExp(`^[${REGEXP_PUNCTUATION}]+$`, 'u').test(token)
+    ) {
+      if (!hasMore) {
+        summary += token
+      }
+      continue
+    }
 
-    summary = summary.concat(addition)
+    const tokenUnits = countUnits(token)
+
+    // If this token would exceed the max units, mark there's more content
+    if (units + tokenUnits > maxUnits) {
+      hasMore = true
+      break
+    }
+
+    // Add the token and count its units
+    summary += token
+    units += tokenUnits
   }
 
-  return summary
+  // Add ellipsis if there's more content that wasn't included
+  if (hasMore) {
+    summary = summary.trim() + '…'
+  }
+
+  return summary.trim()
 }
 
 /**

@@ -1,5 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
+import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import { Head, Layout } from '~/components'
 
 import { Term } from './Term'
@@ -25,6 +26,7 @@ const ToS = () => {
           defaultMessage: 'Terms and Privacy Policy',
           id: 'LphWYP',
         })}
+        image={IMAGE_INTRO.src}
       />
 
       <Layout.Main.Spacing>
