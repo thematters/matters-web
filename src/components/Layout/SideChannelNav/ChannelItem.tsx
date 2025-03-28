@@ -3,17 +3,18 @@ import { useLayoutEffect } from 'react'
 import { useRef, useState } from 'react'
 
 import { displayChannelName } from '~/common/utils'
-import { Tooltip } from '~/components'
+import { LinkWrapper, Tooltip } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
 import { ChannelsQuery } from '~/gql/graphql'
 
 import styles from './styles.module.css'
+
 type ChannelItemProps = {
   channel: ChannelsQuery['channels'][number]
 }
 
 const ChannelItem = ({ channel }: ChannelItemProps) => {
-  const { getQuery, router } = useRoute()
+  const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
 
   const [lineClampable, setLineClampable] = useState(false)
@@ -46,24 +47,17 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
       touch={['hold', 1000]}
       disabled={!lineClampable}
     >
-      <a
-        ref={node}
-        key={channel.id}
+      <LinkWrapper
         href={`/c/${channel.shortHash}`}
+        ref={node}
         className={classnames({
           [styles.item]: true,
           [styles.selectedChannel]: shortHash === channel.shortHash,
           [styles.lineClampable]: !firstRender,
         })}
-        data-channel-id={channel.id}
-        onClick={(e) => {
-          e.preventDefault()
-          e.stopPropagation()
-          router.push(`/c/${channel.shortHash}`)
-        }}
       >
         <span>{displayChannelName(channel.name)}</span>
-      </a>
+      </LinkWrapper>
     </Tooltip>
   )
 }

@@ -15,8 +15,26 @@ export interface LinkWrapperProps {
   onClick?: () => void
 
   testId?: TEST_ID
+  [key: string]: any
 }
 
+/**
+ * LinkWrapper is a component for wrapping children with a link.
+ * It supports all the functionality of both the original LinkWrapper and RouteLink.
+ *
+ * Usage:
+ *
+ * <LinkWrapper href="/path">Link Content</LinkWrapper>
+ *
+ * // With additional props like className
+ * <LinkWrapper href="/path" className="custom-class">Link Content</LinkWrapper>
+ *
+ * // With onClick handler
+ * <LinkWrapper href="/path" onClick={() => console.log('clicked')}>Link Content</LinkWrapper>
+ *
+ * // Disabled link (renders children without link)
+ * <LinkWrapper href="/path" disabled>Link Content</LinkWrapper>
+ */
 export const LinkWrapper: React.FC<
   React.PropsWithChildren<LinkWrapperProps>
 > = ({
@@ -30,6 +48,8 @@ export const LinkWrapper: React.FC<
   testId,
 
   children,
+
+  ...restProps
 }) => {
   if (disabled) {
     return <>{children}</>
@@ -40,7 +60,11 @@ export const LinkWrapper: React.FC<
     [textActiveColor
       ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
       : '']: !!textActiveColor,
+    [restProps.className || '']: !!restProps.className,
   })
+
+  // Remove className from restProps as we've already applied it
+  const { className, ...otherProps } = restProps
 
   return (
     <Link href={href} legacyBehavior>
@@ -53,6 +77,7 @@ export const LinkWrapper: React.FC<
           }
         }}
         {...(testId ? { ['data-test-id']: testId } : {})}
+        {...otherProps}
       >
         {children}
       </a>

@@ -111,8 +111,8 @@
       transition-property: color, background-color, background;
 
       @media (--sm-up) {
+        justify-content: end;
         padding: var(--sp8) var(--sp10);
-        text-align: end;
       }
 
       &:hover {
