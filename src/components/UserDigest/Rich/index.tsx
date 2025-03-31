@@ -116,20 +116,6 @@ const Rich = ({
     userName: user.userName || '',
   })
 
-  const isCardAsLink = cardProps.is === 'link'
-
-  const AvatarContent = () => {
-    return (
-      <>
-        <VisuallyHidden>
-          <span>{user.displayName}</span>
-        </VisuallyHidden>
-        <Avatar size={size === 'sm' ? 32 : 48} user={user} />
-        {avatarBadge && <span className={styles.badge}>{avatarBadge}</span>}
-      </>
-    )
-  }
-
   return (
     <Card
       {...path}
@@ -140,35 +126,24 @@ const Rich = ({
     >
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
-          {isCardAsLink ? (
-            <span className={styles.avatar}>
-              <AvatarContent />
-            </span>
-          ) : (
-            <a className={styles.avatar}>
-              <AvatarContent />
-            </a>
-          )}
+          <a className={styles.avatar}>
+            <VisuallyHidden>
+              <span>{user.displayName}</span>
+            </VisuallyHidden>
+            <Avatar size={size === 'sm' ? 32 : 48} user={user} />
+            {avatarBadge && <span className={styles.badge}>{avatarBadge}</span>}
+          </a>
         </Link>
 
         <section className={contentClasses}>
           <header className={styles.header}>
             <Link {...path} legacyBehavior>
-              {isCardAsLink ? (
-                <span
-                  className={styles.name}
-                  data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
-                >
-                  {user.displayName}
-                </span>
-              ) : (
-                <a
-                  className={styles.name}
-                  data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
-                >
-                  {user.displayName}
-                </a>
-              )}
+              <a
+                className={styles.name}
+                data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
+              >
+                {user.displayName}
+              </a>
             </Link>
             {hasState && <FollowUserButton.State user={user} />}
           </header>
