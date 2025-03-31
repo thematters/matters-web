@@ -143,6 +143,7 @@ const CONNECT_SRC = [
   'cloudflare-ipfs.com/ipfs/',
   'ipfs.io/ipfs/',
   'ipfs-gateway.matters.town/ipfs/',
+  'ipfs.w3s.link',
 ]
 
 const FRAME_SRC = [
