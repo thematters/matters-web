@@ -85,7 +85,6 @@ const Authors = () => {
               <List.Item key={node.id}>
                 <UserDigest.Rich
                   user={node}
-                  is="link"
                   spacing={[8, 8]}
                   bgColor="none"
                   bgActiveColor="greyLighter"
