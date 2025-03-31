@@ -1,5 +1,5 @@
 import gql from 'graphql-tag'
-import { useContext } from 'react'
+import { useContext, useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
 import { analytics } from '~/common/utils'
@@ -32,6 +32,19 @@ const ArticleFeedsTabs = ({
   const intl = useIntl()
   const stages = campaign.stages || []
 
+  const tabsRef = useRef<{ [key: string]: HTMLLIElement | null }>({})
+
+  useEffect(() => {
+    const selectedTabRef = tabsRef.current[feedType]
+    if (selectedTabRef) {
+      selectedTabRef.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      })
+    }
+  }, [feedType])
+
   const shouldShowTab = (startedAt?: string) => {
     if (!startedAt) return true
 
@@ -46,6 +59,7 @@ const ArticleFeedsTabs = ({
     <section className={styles.tabs}>
       <SquareTabs sticky>
         <SquareTabs.Tab
+          ref={(el) => (tabsRef.current[FEED_TYPE_ALL] = el)}
           selected={feedType === FEED_TYPE_ALL}
           onClick={() => {
             setFeedType(FEED_TYPE_ALL)
@@ -63,6 +77,7 @@ const ArticleFeedsTabs = ({
 
         {shouldShowFeaturedTab && (
           <SquareTabs.Tab
+            ref={(el) => (tabsRef.current[FEED_TYPE_FEATURED] = el)}
             selected={feedType === FEED_TYPE_FEATURED}
             onClick={() => {
               setFeedType(FEED_TYPE_FEATURED)
@@ -83,6 +98,8 @@ const ArticleFeedsTabs = ({
         {[...stages].reverse().map((stage) =>
           shouldShowTab(stage.period?.start) ? (
             <SquareTabs.Tab
+              key={stage.id}
+              ref={(el) => (tabsRef.current[stage.id] = el)}
               selected={stage.id === feedType}
               onClick={() => {
                 setFeedType(stage.id)
@@ -101,13 +118,13 @@ const ArticleFeedsTabs = ({
                       : 'nameEn'
                 ]
               }
-              key={stage.id}
             />
           ) : null
         )}
 
         {shouldShowAnnouncementTab && (
           <SquareTabs.Tab
+            ref={(el) => (tabsRef.current[FEED_TYPE_ANNOUNCEMENT] = el)}
             selected={feedType === FEED_TYPE_ANNOUNCEMENT}
             onClick={() => {
               setFeedType(FEED_TYPE_ANNOUNCEMENT)
