@@ -12,7 +12,6 @@ type TabProps = {
   theme?: 'black' | 'gold' | 'green'
 }
 
-// 使用 forwardRef 包装 Tab 组件以支持引用转发
 const Tab = forwardRef<HTMLLIElement, TabProps>(
   ({ title, selected, onClick, theme }, ref) => {
     const liClasses = classNames({
@@ -36,7 +35,6 @@ const Tab = forwardRef<HTMLLIElement, TabProps>(
   }
 )
 
-// 添加显示名称以便开发工具识别
 Tab.displayName = 'Tab'
 
 interface SquareTabsProps {
