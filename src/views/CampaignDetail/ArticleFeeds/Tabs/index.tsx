@@ -39,7 +39,7 @@ const ArticleFeedsTabs = ({
     if (selectedTabRef) {
       selectedTabRef.scrollIntoView({
         behavior: 'smooth',
-        block: 'center',
+        block: 'nearest',
         inline: 'center',
       })
     }
