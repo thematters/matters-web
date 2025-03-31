@@ -1,6 +1,20 @@
 import { useState } from 'react'
 
-import { analytics } from '~/common/utils'
+import { EDITOR_IMAGE_UPLOAD_PROGRESS } from '~/common/enums'
+import { analytics, getFileId } from '~/common/utils'
+
+interface UploadResponse {
+  success: boolean
+  errors: { message: string }[]
+  result?: {
+    id?: string
+    filename?: string
+  }
+}
+
+interface UploadResult {
+  id: string | undefined
+}
 
 export const useDirectImageUpload = () => {
   const [uploading, setUploading] = useState(false)
@@ -11,52 +25,69 @@ export const useDirectImageUpload = () => {
   }: {
     uploadURL: string
     file: File
-  }) => {
+  }): Promise<UploadResult> => {
     setUploading(true)
 
-    try {
+    return new Promise<UploadResult>((resolve, reject) => {
       const started = window?.performance.now() ?? -1
       const formData = new FormData()
       formData.append('file', file)
-      const res = await fetch(uploadURL, { method: 'POST', body: formData })
-      if (
-        !res.ok ||
-        !res.headers.get('content-type')?.startsWith('application/json')
-      ) {
-        throw new Error('directUpload error: non json response')
-      }
 
-      const resData = (await res.json()) as {
-        success: boolean
-        errors: { message: string }[]
-        result?: {
-          id?: string
-          filename?: string
+      const xhr = new XMLHttpRequest()
+      xhr.open('POST', uploadURL, true)
+
+      xhr.upload.addEventListener('progress', (event) => {
+        if (event.lengthComputable) {
+          const percentComplete = (event.loaded / event.total) * 100
+
+          // emit progress event
+          window.dispatchEvent(
+            new CustomEvent(EDITOR_IMAGE_UPLOAD_PROGRESS, {
+              detail: { fileId: getFileId(file), progress: percentComplete },
+            })
+          )
+        }
+      })
+
+      xhr.onload = async () => {
+        if (xhr.status === 200) {
+          try {
+            const resData = JSON.parse(xhr.responseText) as UploadResponse
+
+            if (resData?.success !== true) {
+              throw new Error(
+                `directUpload error: ${resData?.errors?.[0]?.message || 'no success'}`
+              )
+            }
+
+            analytics.trackEvent('image_upload', {
+              uploadURL,
+              type: file.type,
+              size: file.size,
+              delay_msecs: (window?.performance.now() ?? -1) - started,
+            })
+
+            resolve({ id: resData?.result?.id })
+          } catch (error) {
+            reject(error)
+          }
+        } else {
+          reject(new Error('directUpload error: non 200 response'))
         }
       }
 
-      if (resData?.success !== true) {
-        // errors: Uploaded image must have image/jpeg, image/png, image/webp, image/gif or image/svg+xml content-type
-        throw new Error(
-          `directUpload error: ${resData?.errors?.[0]?.message || 'no success'}`
-        )
+      xhr.onerror = () => {
+        reject(new Error('directUpload error: network error'))
       }
 
-      analytics.trackEvent('image_upload', {
-        uploadURL,
-        type: file.type,
-        size: file.size,
-        // performance.now() = Date.now() - performance.timing.navigationStart
-        delay_msecs: (window?.performance.now() ?? -1) - started,
-      })
-
-      return {
-        id: resData?.result?.id,
-      }
-    } finally {
+      xhr.send(formData)
+    }).finally(() => {
       setUploading(false)
-    }
+    })
   }
 
-  return { upload, uploading }
+  return {
+    upload,
+    uploading,
+  }
 }
