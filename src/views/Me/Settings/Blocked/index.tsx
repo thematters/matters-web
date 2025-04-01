@@ -6,11 +6,6 @@ import BaseSettingsBlocked from './SettingsBlocked'
 
 const SettingsBlocked = () => {
   const intl = useIntl()
-  const title = intl.formatMessage({
-    defaultMessage: 'Settings - Blocked Users',
-    id: 'KxVlDj',
-    description: 'src/views/Me/Settings/Blocked/index.tsx',
-  })
 
   return (
     <Layout.Main>
@@ -26,7 +21,12 @@ const SettingsBlocked = () => {
         }
       />
 
-      <Head title={title} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Settings',
+          id: 'D3idYv',
+        })}
+      />
 
       <Layout.Main.Spacing hasVertical={false}>
         <BaseSettingsBlocked />

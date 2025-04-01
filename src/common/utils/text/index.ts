@@ -1,5 +1,4 @@
 export * from './article'
-export * from './notice'
 export * from './tag'
 export * from './user'
 

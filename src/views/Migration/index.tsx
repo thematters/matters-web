@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl'
 
+import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import { Head } from '~/components'
 
 import Footer from '../About/Footer'
@@ -25,6 +26,7 @@ const Migration = () => {
             'I am migrating to Matters, and I invite you to come along',
           id: '0/gRer',
         })}
+        image={IMAGE_INTRO.src}
       />
 
       <Hero />

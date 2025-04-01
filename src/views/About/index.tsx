@@ -1,5 +1,6 @@
 import { useIntl } from 'react-intl'
 
+import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import { Head } from '~/components'
 
 import Footer from './Footer'
@@ -16,6 +17,7 @@ const About = () => {
     <main>
       <Head
         title={intl.formatMessage({ defaultMessage: 'About Us', id: 'ZjDH42' })}
+        image={IMAGE_INTRO.src}
       />
 
       <Hero />

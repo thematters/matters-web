@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { useState } from 'react'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -150,18 +150,23 @@ const Transactions = () => {
   const isSubscription = purpose === Purpose.SUBSCRIPTION
 
   const intl = useIntl()
-  const title = intl.formatMessage({
-    defaultMessage: 'Transactions',
-    id: '/jJLYy',
-  })
 
   return (
     <Layout.Main>
       <Layout.Header
-        right={<Layout.Header.Title>{title}</Layout.Header.Title>}
+        right={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="Transactions" id="/jJLYy" />
+          </Layout.Header.Title>
+        }
       />
 
-      <Head title={title} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Wallet',
+          id: '3yk8fB',
+        })}
+      />
 
       <SquareTabs
         sticky

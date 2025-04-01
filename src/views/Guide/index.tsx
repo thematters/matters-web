@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import ReactMarkdown from 'react-markdown'
 
+import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import { captureClicks, toLocale } from '~/common/utils'
 import { Head, LanguageContext, Layout } from '~/components'
 
@@ -34,6 +35,7 @@ const Guide = () => {
           defaultMessage: 'Explore Matters',
           id: 'uVCg1l',
         })}
+        image={IMAGE_INTRO.src}
       />
 
       <Layout.Main.Spacing>

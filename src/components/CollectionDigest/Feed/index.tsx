@@ -2,7 +2,7 @@ import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
-import { TEST_ID } from '~/common/enums'
+import { MAX_FEED_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
 import { Book, DateTime, Icon, LinkWrapper, Media } from '~/components'
 import { CollectionDigestFeedCollectionFragment } from '~/gql/graphql'
@@ -25,7 +25,10 @@ const BaseCollectionDigestFeed = ({
   onClick,
 }: CollectionDigestFeedProps & { Placeholder: typeof Placeholder }) => {
   const { title, description, cover, author, updatedAt, articles } = collection
-  const cleanedDescription = makeSummary(description || '')
+  const cleanedDescription = makeSummary(
+    description || '',
+    MAX_FEED_SUMMARY_LENGTH
+  )
 
   const path = toPath({
     page: 'collectionDetail',
