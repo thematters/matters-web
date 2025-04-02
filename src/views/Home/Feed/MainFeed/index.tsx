@@ -244,7 +244,7 @@ const MainFeed = ({}: MainFeedProps) => {
     })
   }
 
-  const numOfCards = isInChannel ? 3 : 0
+  const numOfCards = isInChannel ? 6 : 0
 
   return (
     <>
