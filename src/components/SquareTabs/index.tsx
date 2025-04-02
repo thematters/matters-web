@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { forwardRef, useEffect, useRef, useState } from 'react'
+import { forwardRef, useCallback, useState } from 'react'
 
 import { capitalizeFirstLetter } from '~/common/utils'
 
@@ -46,66 +46,58 @@ interface SquareTabsProps {
 export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
   Tab: typeof Tab
 } = ({ children, sticky, spacing, side }) => {
-  const navRef = useRef<HTMLUListElement>(null)
-  const containerRef = useRef<HTMLElement>(null)
-  const $nav = navRef.current
-  const $container = containerRef.current
+  const [navElement, setNavElement] = useState<HTMLUListElement | null>(null)
+  const [containerElement, setContainerElement] = useState<HTMLElement | null>(
+    null
+  )
   const [showLeftGradient, setShowLeftGradient] = useState(false)
   const [showRightGradient, setShowRightGradient] = useState(false)
-  const [isDragging, setIsDragging] = useState(false)
-  const [startX, setStartX] = useState(0)
-  const [scrollLeft, setScrollLeft] = useState(0)
 
-  const isTabsOverflowing = () => {
-    if (!$nav || !$container) return false
-    return $nav.scrollWidth > $container.clientWidth
-  }
+  const navRef = useCallback(
+    (node: HTMLUListElement | null) => {
+      if (node) {
+        setNavElement(node)
 
-  const calculateGradient = () => {
-    if (!$nav || !$container) return
+        node.addEventListener('scroll', calculateGradient)
 
-    const isAtLeftMost = $nav.scrollLeft <= 0
-    const isAtRightMost = $nav.scrollLeft + $nav.clientWidth >= $nav.scrollWidth
+        if (
+          containerElement &&
+          node.scrollWidth > containerElement.clientWidth
+        ) {
+          calculateGradient()
+        }
+      }
+
+      if (navElement && navElement !== node) {
+        navElement.removeEventListener('scroll', calculateGradient)
+      }
+    },
+    [containerElement]
+  )
+
+  const containerRef = useCallback(
+    (node: HTMLElement | null) => {
+      if (node) {
+        setContainerElement(node)
+
+        if (navElement && navElement.scrollWidth > node.clientWidth) {
+          calculateGradient()
+        }
+      }
+    },
+    [navElement]
+  )
+
+  const calculateGradient = useCallback(() => {
+    if (!navElement || !containerElement) return
+
+    const isAtLeftMost = navElement.scrollLeft <= 0
+    const isAtRightMost =
+      navElement.scrollLeft + navElement.clientWidth >= navElement.scrollWidth
 
     setShowLeftGradient(!isAtLeftMost)
     setShowRightGradient(!isAtRightMost)
-  }
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (!$nav) return
-    setIsDragging(true)
-    setStartX(e.pageX - $nav.offsetLeft)
-    setScrollLeft($nav.scrollLeft)
-  }
-
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !$nav) return
-    const x = e.pageX - $nav.offsetLeft
-    const walk = (x - startX) * 2 // scroll-fast
-    $nav.scrollLeft = scrollLeft - walk
-    calculateGradient()
-  }
-
-  const handleMouseUp = () => {
-    setIsDragging(false)
-  }
-
-  useEffect(() => {
-    if (!isTabsOverflowing() || !$nav) return
-
-    // initial gradient
-    calculateGradient()
-
-    $nav.addEventListener('scroll', calculateGradient)
-    $nav.addEventListener('mousemove', handleMouseMove)
-    $nav.addEventListener('mouseup', handleMouseUp)
-
-    return () => {
-      $nav.removeEventListener('scroll', calculateGradient)
-      $nav.removeEventListener('mousemove', handleMouseMove)
-      $nav.removeEventListener('mouseup', handleMouseUp)
-    }
-  }, [$nav, $container, isDragging])
+  }, [navElement, containerElement])
 
   const wrapperClasses = classNames({
     [styles.wrapper]: true,
@@ -128,12 +120,7 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
   return (
     <section className={wrapperClasses}>
       <section className={containerClasses} ref={containerRef}>
-        <ul
-          role="tablist"
-          className={listClasses}
-          ref={navRef}
-          onMouseDown={handleMouseDown}
-        >
+        <ul role="tablist" className={listClasses} ref={navRef}>
           {children}
         </ul>
         {side}
