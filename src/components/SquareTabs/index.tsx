@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { forwardRef, useCallback, useState } from 'react'
+import { forwardRef, useCallback, useEffect, useState } from 'react'
 
 import { capitalizeFirstLetter } from '~/common/utils'
 
@@ -50,7 +50,7 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
   const [showLeftGradient, setShowLeftGradient] = useState(false)
   const [showRightGradient, setShowRightGradient] = useState(false)
 
-  const calculateGradient = useCallback(() => {
+  const checkGradients = useCallback(() => {
     if (!navElement) return
 
     const containerElement = navElement.parentElement
@@ -66,23 +66,28 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
     setShowRightGradient(isOverflowing && !isAtRightMost)
   }, [navElement])
 
+  useEffect(() => {
+    window.addEventListener('resize', checkGradients)
+    return () => {
+      window.removeEventListener('resize', checkGradients)
+    }
+  }, [checkGradients])
+
   const navRef = useCallback(
     (node: HTMLUListElement | null) => {
+      setNavElement(node)
+
       if (node) {
-        setNavElement(node)
+        node.addEventListener('scroll', checkGradients)
 
-        node.addEventListener('scroll', calculateGradient)
-
-        requestAnimationFrame(() => {
-          calculateGradient()
-        })
+        setTimeout(checkGradients, 0)
       }
 
       if (navElement && navElement !== node) {
-        navElement.removeEventListener('scroll', calculateGradient)
+        navElement.removeEventListener('scroll', checkGradients)
       }
     },
-    [calculateGradient]
+    [checkGradients, navElement]
   )
 
   const wrapperClasses = classNames({
@@ -106,7 +111,12 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
   return (
     <section className={wrapperClasses}>
       <section className={containerClasses}>
-        <ul role="tablist" className={listClasses} ref={navRef}>
+        <ul
+          role="tablist"
+          className={listClasses}
+          ref={navRef}
+          aria-orientation="horizontal"
+        >
           {children}
         </ul>
         {side}
