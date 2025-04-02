@@ -47,11 +47,24 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
   Tab: typeof Tab
 } = ({ children, sticky, spacing, side }) => {
   const [navElement, setNavElement] = useState<HTMLUListElement | null>(null)
-  const [containerElement, setContainerElement] = useState<HTMLElement | null>(
-    null
-  )
   const [showLeftGradient, setShowLeftGradient] = useState(false)
   const [showRightGradient, setShowRightGradient] = useState(false)
+
+  const calculateGradient = useCallback(() => {
+    if (!navElement) return
+
+    const containerElement = navElement.parentElement
+    if (!containerElement) return
+
+    const isAtLeftMost = navElement.scrollLeft <= 0
+    const isAtRightMost =
+      navElement.scrollLeft + navElement.clientWidth >= navElement.scrollWidth
+
+    const isOverflowing = navElement.scrollWidth > containerElement.clientWidth
+
+    setShowLeftGradient(isOverflowing && !isAtLeftMost)
+    setShowRightGradient(isOverflowing && !isAtRightMost)
+  }, [navElement])
 
   const navRef = useCallback(
     (node: HTMLUListElement | null) => {
@@ -60,44 +73,17 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
 
         node.addEventListener('scroll', calculateGradient)
 
-        if (
-          containerElement &&
-          node.scrollWidth > containerElement.clientWidth
-        ) {
+        requestAnimationFrame(() => {
           calculateGradient()
-        }
+        })
       }
 
       if (navElement && navElement !== node) {
         navElement.removeEventListener('scroll', calculateGradient)
       }
     },
-    [containerElement]
+    [calculateGradient]
   )
-
-  const containerRef = useCallback(
-    (node: HTMLElement | null) => {
-      if (node) {
-        setContainerElement(node)
-
-        if (navElement && navElement.scrollWidth > node.clientWidth) {
-          calculateGradient()
-        }
-      }
-    },
-    [navElement]
-  )
-
-  const calculateGradient = useCallback(() => {
-    if (!navElement || !containerElement) return
-
-    const isAtLeftMost = navElement.scrollLeft <= 0
-    const isAtRightMost =
-      navElement.scrollLeft + navElement.clientWidth >= navElement.scrollWidth
-
-    setShowLeftGradient(!isAtLeftMost)
-    setShowRightGradient(!isAtRightMost)
-  }, [navElement, containerElement])
 
   const wrapperClasses = classNames({
     [styles.wrapper]: true,
@@ -119,7 +105,7 @@ export const SquareTabs: React.FC<React.PropsWithChildren<SquareTabsProps>> & {
 
   return (
     <section className={wrapperClasses}>
-      <section className={containerClasses} ref={containerRef}>
+      <section className={containerClasses}>
         <ul role="tablist" className={listClasses} ref={navRef}>
           {children}
         </ul>
