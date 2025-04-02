@@ -158,6 +158,8 @@ const MomentDetailDialogContent = ({
                 id: 'g/IDCs',
               })
         } - ${moment.author.displayName}`}
+        description={''}
+        image={moment.assets?.[0]?.path}
       />
 
       <section className={styles.container}>

@@ -59,7 +59,7 @@ const BaseCollectionDetail = () => {
             userName: collection.author.userName!,
           }).href
         }
-        description={collection.description}
+        description={collection.description || ''}
         image={collection.cover}
       />
 
