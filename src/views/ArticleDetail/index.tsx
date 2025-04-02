@@ -271,7 +271,7 @@ const BaseArticleDetail = ({
       <Head
         title={`${makeSummary(title, MAX_META_SUMMARY_LENGTH)} - ${article?.author.displayName}`}
         path={toPath({ page: 'articleDetail', article }).href}
-        description={makeSummary(summary, MAX_META_SUMMARY_LENGTH)}
+        description={makeSummary(summary, MAX_META_SUMMARY_LENGTH) || ''}
         keywords={keywords}
         image={article.cover}
         jsonLdData={{

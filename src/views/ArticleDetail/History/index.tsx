@@ -140,7 +140,7 @@ const BaseArticleDetailHistory = ({
             search: { v: version.id },
           }).href
         }
-        description={makeSummary(summary, MAX_META_SUMMARY_LENGTH)}
+        description={makeSummary(summary, MAX_META_SUMMARY_LENGTH) || ''}
         image={article.cover}
         availableLanguages={article.availableTranslations || []}
       />

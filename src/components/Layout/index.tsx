@@ -29,7 +29,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
   return (
     <>
-      <Head />
+      <Head description={null} />
 
       <div className={styles.container}>
         <main className={styles.main}>

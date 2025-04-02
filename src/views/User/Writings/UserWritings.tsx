@@ -169,7 +169,7 @@ const UserWritings = () => {
     return (
       <Head
         title={user.displayName}
-        description={description}
+        description={description || ''}
         image={user.info.profileCover}
         jsonLdData={{
           '@context': 'https://schema.org',

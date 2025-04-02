@@ -53,8 +53,10 @@ export const Head: React.FC<HeadProps> = (props) => {
       : `${title} - Matters`
     : 'Matters'
   const seoDescription =
-    props.description ||
-    'Matters 致力搭建去中心化的寫作社群與內容生態。基於 IPFS 技術，令創作不受制於任何平台，獨立性得到保障；引入加密貨幣，以收入的形式回饋給作者；代碼開源，建立創作者自治社區。'
+    props.description === null || props.description === ''
+      ? undefined
+      : props.description ||
+        'Matters 致力搭建去中心化的寫作社群與內容生態。基於 IPFS 技術，令創作不受制於任何平台，獨立性得到保障；引入加密貨幣，以收入的形式回饋給作者；代碼開源，建立創作者自治社區。'
   const url = props.path
     ? `https://${siteDomain}${props.path}`
     : `https://${siteDomain}${router.asPath || '/'}`
