@@ -379,6 +379,9 @@
   "4nHH2x": {
     "defaultMessage": "Applied successfully"
   },
+  "4ptCtD": {
+    "defaultMessage": "Discard this version"
+  },
   "4wOWfp": {
     "defaultMessage": "What's this?",
     "description": "src/components/Billboard/index.tsx"
@@ -805,6 +808,9 @@
   },
   "BNupBu": {
     "defaultMessage": "Set as cover"
+  },
+  "BOr224": {
+    "defaultMessage": "Draft version is abnormal"
   },
   "BW89hS": {
     "defaultMessage": "{upvotes} upvotes"
@@ -1580,6 +1586,10 @@
     "defaultMessage": "Reviewing...",
     "description": "type:join"
   },
+  "PqPjpI": {
+    "defaultMessage": "Draft version conflict",
+    "description": "DRAFT_VERSION_CONFLICT"
+  },
   "PtV68+": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_EMAIL_NOT_FOUND"
@@ -1930,6 +1940,9 @@
   "WpvsPu": {
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "WrpdUp": {
+    "defaultMessage": "The draft is already open on another device or tab, continuing to edit may result in content being overwritten and lost. Do you want to continue?"
   },
   "WsPbZT": {
     "defaultMessage": "Continue payout"
@@ -2981,6 +2994,9 @@
   "rJqgwV": {
     "defaultMessage": "Edit",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
+  },
+  "rVbKiP": {
+    "defaultMessage": "Continue editing"
   },
   "rXnmeE": {
     "defaultMessage": "Confirm and Send"

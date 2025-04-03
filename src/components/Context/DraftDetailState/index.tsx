@@ -1,10 +1,10 @@
-import { useMutation } from '@apollo/client'
+import { gql, useApolloClient, useMutation } from '@apollo/client'
 import { createContext, useContext, useRef } from 'react'
 
 import { randomString } from '~/common/utils'
 import { useRoute, ViewerContext } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-import { CreateDraftMutation } from '~/gql/graphql'
+import { CreateDraftMutation, DraftUpdatedAtFragment } from '~/gql/graphql'
 
 type Job = {
   id: string
@@ -21,6 +21,7 @@ export const DraftDetailStateContext = createContext(
     getDraftId: () => string | undefined
     isNewDraft: () => boolean
     createDraft: (props: { onCreate: (draftId: string) => any }) => any
+    getDraftUpdatedAt: () => string | undefined
   }
 )
 
@@ -35,6 +36,7 @@ export const DraftDetailStateProvider = ({
   // Run request jobs in sequence
   const jobsRef = useRef<Job[]>([])
   const runningRef = useRef<string>()
+  const client = useApolloClient()
 
   // push request job
   const addRequest = (fn: () => Promise<any>): Promise<any> => {
@@ -133,9 +135,38 @@ export const DraftDetailStateProvider = ({
     return draftId === undefined
   }
 
+  // Read draft updatedAt from cache
+  const getDraftUpdatedAt = () => {
+    const draftId = getDraftId()
+    if (!draftId) return undefined
+
+    try {
+      // Try to read the draft's updatedAt from cache
+      const cacheData = client.readFragment<DraftUpdatedAtFragment>({
+        id: `Draft:${draftId}`,
+        fragment: gql`
+          fragment DraftUpdatedAt on Draft {
+            id
+            updatedAt
+          }
+        `,
+      })
+      return cacheData?.updatedAt
+    } catch (error) {
+      console.error('Error reading draft updatedAt from cache:', error)
+      return undefined
+    }
+  }
+
   return (
     <DraftDetailStateContext.Provider
-      value={{ addRequest, createDraft, getDraftId, isNewDraft }}
+      value={{
+        addRequest,
+        createDraft,
+        getDraftId,
+        isNewDraft,
+        getDraftUpdatedAt,
+      }}
     >
       {children}
     </DraftDetailStateContext.Provider>

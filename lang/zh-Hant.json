@@ -379,6 +379,9 @@
   "4nHH2x": {
     "defaultMessage": "報名成功"
   },
+  "4ptCtD": {
+    "defaultMessage": "放棄此版本"
+  },
   "4wOWfp": {
     "defaultMessage": "這是什麼？",
     "description": "src/components/Billboard/index.tsx"
@@ -805,6 +808,9 @@
   },
   "BNupBu": {
     "defaultMessage": "設置為封面"
+  },
+  "BOr224": {
+    "defaultMessage": "草稿版本異常"
   },
   "BW89hS": {
     "defaultMessage": "{upvotes} 點讚"
@@ -1580,6 +1586,10 @@
     "defaultMessage": "晚鳥參與處理中⋯",
     "description": "type:join"
   },
+  "PqPjpI": {
+    "defaultMessage": "草稿版本異常",
+    "description": "DRAFT_VERSION_CONFLICT"
+  },
   "PtV68+": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_EMAIL_NOT_FOUND"
@@ -1930,6 +1940,9 @@
   "WpvsPu": {
     "defaultMessage": "訂閱",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
+  },
+  "WrpdUp": {
+    "defaultMessage": "草稿已經在其他設備或標籤處於打開狀態，繼續編輯可能導致內容覆蓋丟失，是否繼續？"
   },
   "WsPbZT": {
     "defaultMessage": "繼續提現"
@@ -2981,6 +2994,9 @@
   "rJqgwV": {
     "defaultMessage": "開始修改",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
+  },
+  "rVbKiP": {
+    "defaultMessage": "繼續編輯"
   },
   "rXnmeE": {
     "defaultMessage": "確認發送"

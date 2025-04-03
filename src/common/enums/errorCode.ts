@@ -30,6 +30,7 @@ export enum ERROR_CODES {
   ARTICLE_NOT_FOUND = 'ARTICLE_NOT_FOUND',
   ASSET_NOT_FOUND = 'ASSET_NOT_FOUND',
   DRAFT_NOT_FOUND = 'DRAFT_NOT_FOUND',
+  DRAFT_VERSION_CONFLICT = 'DRAFT_VERSION_CONFLICT',
   TAG_NOT_FOUND = 'TAG_NOT_FOUND',
   NOTICE_NOT_FOUND = 'NOTICE_NOT_FOUND',
   CIRCLE_NOT_FOUND = 'CIRCLE_NOT_FOUND',
@@ -185,6 +186,11 @@ export const ERROR_MESSAGES: { [key in ERROR_CODES]: MessageDescriptor } = {
     defaultMessage: 'Draft not found',
     id: 'wDX7zn',
     description: 'DRAFT_NOT_FOUND',
+  }),
+  [ERROR_CODES.DRAFT_VERSION_CONFLICT]: defineMessage({
+    defaultMessage: 'Draft version conflict',
+    id: 'PqPjpI',
+    description: 'DRAFT_VERSION_CONFLICT',
   }),
   [ERROR_CODES.TAG_NOT_FOUND]: defineMessage({
     defaultMessage: 'Tag not found',

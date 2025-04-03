@@ -40,7 +40,7 @@ import {
  * Hooks for editing draft cover, tags and collection
  */
 export const useEditDraftCover = () => {
-  const { addRequest, getDraftId, createDraft } = useContext(
+  const { addRequest, getDraftId, createDraft, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
   const refetch = useImperativeQuery<DraftAssetsQuery>(DRAFT_ASSETS, {
@@ -50,13 +50,24 @@ export const useEditDraftCover = () => {
   const [update, { loading: saving }] =
     useMutation<SetDraftCoverMutation>(SET_COVER)
 
-  const edit = (asset?: AssetFragment, newId?: string) =>
-    update({
-      variables: { id: newId || getDraftId(), cover: asset ? asset.id : null },
+  const edit = async (
+    asset?: AssetFragment,
+    newId?: string,
+    lastUpdatedAt?: string
+  ) => {
+    return update({
+      variables: {
+        id: newId || getDraftId(),
+        cover: asset ? asset.id : null,
+        lastUpdatedAt,
+      },
     })
+  }
 
   const createDraftAndEdit = async (asset?: AssetFragment) => {
-    if (getDraftId()) return edit(asset)
+    if (getDraftId()) {
+      return edit(asset, undefined, getDraftUpdatedAt())
+    }
 
     return createDraft({
       onCreate: (newDraftId) => edit(asset, newDraftId),
@@ -72,21 +83,29 @@ export const useEditDraftCover = () => {
 }
 
 export const useEditDraftTags = () => {
-  const { addRequest, createDraft, getDraftId } = useContext(
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
   const [updateTags, { loading: saving }] =
     useMutation<SetDraftTagsMutation>(SET_TAGS)
-  const edit = (newTags: DigestTagFragment[], newId?: string) =>
+
+  const edit = async (
+    newTags: DigestTagFragment[],
+    newId?: string,
+    lastUpdatedAt?: string
+  ) =>
     updateTags({
       variables: {
         id: newId || getDraftId(),
         tags: _uniq(newTags.map(({ content }) => content)),
+        lastUpdatedAt,
       },
     })
 
   const createDraftAndEdit = async (newTags: DigestTagFragment[]) => {
-    if (getDraftId()) return edit(newTags)
+    if (getDraftId()) {
+      return edit(newTags, undefined, getDraftUpdatedAt())
+    }
 
     return createDraft({
       onCreate: (newDraftId) => edit(newTags, newDraftId),
@@ -101,27 +120,31 @@ export const useEditDraftTags = () => {
 }
 
 export const useEditDraftCollection = () => {
-  const { addRequest, createDraft, getDraftId } = useContext(
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
   const [setCollection, { loading: saving }] =
     useMutation<SetDraftCollectionMutation>(SET_COLLECTION)
 
-  const edit = (
+  const edit = async (
     newArticles: ArticleDigestDropdownArticleFragment[],
-    newId?: string
+    newId?: string,
+    lastUpdatedAt?: string
   ) =>
     setCollection({
       variables: {
         id: newId || getDraftId(),
         collection: _uniq(newArticles.map(({ id }) => id)),
+        lastUpdatedAt,
       },
     })
 
   const createDraftAndEdit = async (
     newArticles: ArticleDigestDropdownArticleFragment[]
   ) => {
-    if (getDraftId()) return edit(newArticles)
+    if (getDraftId()) {
+      return edit(newArticles, undefined, getDraftUpdatedAt())
+    }
 
     return createDraft({
       onCreate: (newDraftId) => edit(newArticles, newDraftId),
@@ -136,7 +159,7 @@ export const useEditDraftCollection = () => {
 }
 
 export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
-  const { addRequest, createDraft, getDraftId } = useContext(
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
   const [setAccess, { loading: saving }] =
@@ -146,7 +169,8 @@ export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
     addToCircle: boolean,
     paywalled: boolean,
     license: ArticleLicenseType,
-    newId?: string
+    newId?: string,
+    lastUpdatedAt?: string
   ) =>
     setAccess({
       variables: {
@@ -156,6 +180,7 @@ export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
         accessType: paywalled
           ? ArticleAccessType.Paywall
           : ArticleAccessType.Public,
+        lastUpdatedAt,
       },
     })
 
@@ -164,7 +189,15 @@ export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
     paywalled: boolean,
     license: ArticleLicenseType
   ) => {
-    if (getDraftId()) return edit(addToCircle, paywalled, license)
+    if (getDraftId()) {
+      return edit(
+        addToCircle,
+        paywalled,
+        license,
+        undefined,
+        getDraftUpdatedAt()
+      )
+    }
 
     return createDraft({
       onCreate: (newDraftId) =>
@@ -183,22 +216,24 @@ export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
 }
 
 export const useEditSupportSetting = () => {
-  const { addRequest, createDraft, getDraftId } = useContext(
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
   const [update, { loading: saving }] =
     useMutation<SetSupportRequestReplyMutation>(SET_SUPPORT_REQUEST_REPLY)
 
-  const edit = (
+  const edit = async (
     requestForDonation: string | null,
     replyToDonator: string | null,
-    newId?: string
+    newId?: string,
+    lastUpdatedAt?: string
   ) =>
     update({
       variables: {
         id: newId || getDraftId(),
         requestForDonation,
         replyToDonator,
+        lastUpdatedAt,
       },
     })
 
@@ -206,7 +241,14 @@ export const useEditSupportSetting = () => {
     requestForDonation: string | null,
     replyToDonator: string | null
   ) => {
-    if (getDraftId()) return edit(requestForDonation, replyToDonator)
+    if (getDraftId()) {
+      return edit(
+        requestForDonation,
+        replyToDonator,
+        undefined,
+        getDraftUpdatedAt()
+      )
+    }
 
     return createDraft({
       onCreate: (newDraftId) =>
@@ -225,17 +267,29 @@ export const useEditSupportSetting = () => {
 }
 
 export const useEditDraftSensitiveByAuthor = () => {
-  const { addRequest, createDraft, getDraftId } = useContext(
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
   const [update, { loading: saving }] =
     useMutation<SetDraftSensitiveByAuthorMutation>(SET_SENSITIVE_BY_AUTHOR)
 
-  const edit = (sensitiveByAuthor: boolean, newId?: string) =>
-    update({ variables: { id: newId || getDraftId(), sensitiveByAuthor } })
+  const edit = async (
+    sensitiveByAuthor: boolean,
+    newId?: string,
+    lastUpdatedAt?: string
+  ) =>
+    update({
+      variables: {
+        id: newId || getDraftId(),
+        sensitiveByAuthor,
+        lastUpdatedAt,
+      },
+    })
 
   const createDraftAndEdit = async (sensitiveByAuthor: boolean) => {
-    if (getDraftId()) return edit(sensitiveByAuthor)
+    if (getDraftId()) {
+      return edit(sensitiveByAuthor, undefined, getDraftUpdatedAt())
+    }
 
     return createDraft({
       onCreate: (newDraftId) => edit(sensitiveByAuthor, newDraftId),
@@ -250,17 +304,29 @@ export const useEditDraftSensitiveByAuthor = () => {
 }
 
 export const useEditDraftPublishISCN = () => {
-  const { addRequest, createDraft, getDraftId } = useContext(
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
   const [update, { loading: saving }] =
     useMutation<SetDraftPublishIscnMutation>(SET_PUBLISH_ISCN)
 
-  const edit = (iscnPublish: boolean, newId?: string) =>
-    update({ variables: { id: newId || getDraftId(), iscnPublish } })
+  const edit = async (
+    iscnPublish: boolean,
+    newId?: string,
+    lastUpdatedAt?: string
+  ) =>
+    update({
+      variables: {
+        id: newId || getDraftId(),
+        iscnPublish,
+        lastUpdatedAt,
+      },
+    })
 
   const createDraftAndEdit = async (iscnPublish: boolean) => {
-    if (getDraftId()) return edit(iscnPublish)
+    if (getDraftId()) {
+      return edit(iscnPublish, undefined, getDraftUpdatedAt())
+    }
 
     return createDraft({
       onCreate: (newDraftId) => edit(iscnPublish, newDraftId),
@@ -275,17 +341,29 @@ export const useEditDraftPublishISCN = () => {
 }
 
 export const useEditDraftCanComment = () => {
-  const { addRequest, createDraft, getDraftId } = useContext(
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
   const [update, { loading: saving }] =
     useMutation<SetDraftCanCommentMutation>(SET_CAN_COMMENT)
 
-  const edit = (canComment: boolean, newId?: string) =>
-    update({ variables: { id: newId || getDraftId(), canComment } })
+  const edit = async (
+    canComment: boolean,
+    newId?: string,
+    lastUpdatedAt?: string
+  ) =>
+    update({
+      variables: {
+        id: newId || getDraftId(),
+        canComment,
+        lastUpdatedAt,
+      },
+    })
 
   const createDraftAndEdit = async (canComment: boolean) => {
-    if (getDraftId()) return edit(canComment)
+    if (getDraftId()) {
+      return edit(canComment, undefined, getDraftUpdatedAt())
+    }
 
     return createDraft({
       onCreate: (newDraftId) => edit(canComment, newDraftId),
@@ -300,17 +378,29 @@ export const useEditDraftCanComment = () => {
 }
 
 export const useEditIndent = () => {
-  const { addRequest, createDraft, getDraftId } = useContext(
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
   const [update, { loading: saving }] =
     useMutation<SetDraftIndentMutation>(SET_INDENT)
 
-  const edit = (indented: boolean, newId?: string) =>
-    update({ variables: { id: newId || getDraftId(), indented } })
+  const edit = async (
+    indented: boolean,
+    newId?: string,
+    lastUpdatedAt?: string
+  ) =>
+    update({
+      variables: {
+        id: newId || getDraftId(),
+        indented,
+        lastUpdatedAt,
+      },
+    })
 
   const createDraftAndEdit = async (indented: boolean) => {
-    if (getDraftId()) return edit(indented)
+    if (getDraftId()) {
+      return edit(indented, undefined, getDraftUpdatedAt())
+    }
 
     return createDraft({
       onCreate: (newDraftId) => edit(indented, newDraftId),
@@ -325,21 +415,23 @@ export const useEditIndent = () => {
 }
 
 export const useEditDraftCampaign = () => {
-  const { addRequest, createDraft, getDraftId } = useContext(
+  const { addRequest, createDraft, getDraftId, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
   const [update, { loading: saving }] =
     useMutation<SetDraftCanCommentMutation>(SET_CAMPAIGN)
 
-  const edit = (
+  const edit = async (
     selected?: { campaign: string; stage: string },
-    newId?: string
+    newId?: string,
+    lastUpdatedAt?: string
   ) =>
     update({
       variables: {
         id: newId || getDraftId(),
         campaigns: selected ? [selected] : [],
         isReset: !selected,
+        lastUpdatedAt,
       },
     })
 
@@ -347,7 +439,9 @@ export const useEditDraftCampaign = () => {
     campaign: string
     stage: string
   }) => {
-    if (getDraftId()) return edit(selected)
+    if (getDraftId()) {
+      return edit(selected, undefined, getDraftUpdatedAt())
+    }
 
     return createDraft({
       onCreate: (newDraftId) => edit(selected, newDraftId),
