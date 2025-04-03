@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useRouter } from 'next/router'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconCheck } from '@/public/static/icons/24px/check.svg'
 import {
@@ -44,7 +44,6 @@ const SUBMIT_CAMPAIGN_ARTICLE = gql`
       }
     ) {
       id
-      slug
     }
   }
 `
@@ -54,15 +53,25 @@ const ApplyCampaignButton = ({
   size,
   onClick,
 }: ApplyCampaignButtonProps) => {
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
+  const router = useRouter()
+  const [submitCampaignArticle] = useMutation<SubmitCampaignArticleMutation>(
+    SUBMIT_CAMPAIGN_ARTICLE
+  )
+
   const qsType = getQuery('type') as CampaignFeedType
   const now = new Date()
   const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
-  const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
   const applicationState = campaign.application?.state
   const appliedAt = campaign.application?.createdAt
+
+  const isApplicationStarted = now >= new Date(appStart)
+  const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
+  const isWritingPeriodStarted =
+    campaign.writingPeriod && now >= new Date(campaign.writingPeriod.start)
   const isSucceeded = applicationState === 'succeeded'
   const isPending = applicationState === 'pending'
   const isRejected = applicationState === 'rejected'
@@ -70,23 +79,37 @@ const ApplyCampaignButton = ({
   const isAppliedDuringPeriod =
     (appliedAt && appEnd && new Date(appliedAt) <= new Date(appEnd)) ||
     (appliedAt && !appEnd)
-  const isApplicationStarted = now >= new Date(appStart)
   const isActiveCampaign = campaign.state === 'active'
   const isFinishedCampaign = campaign.state === 'finished'
-  const isWritingPeriodStarted =
-    campaign.writingPeriod && now >= new Date(campaign.writingPeriod.start)
+
   const selectedStage = campaign.stages.find((stage) => stage.id === qsType)
   const isSelectedStage = campaign.stages.some((stage) => stage.id === qsType)
-  // 今天是活動的第幾天
   const todayStage = campaign.stages.find(
     (stage) =>
       now.toDateString() === new Date(stage.period?.start).toDateString()
   )
 
-  const [submitCampaignArticle] = useMutation<SubmitCampaignArticleMutation>(
-    SUBMIT_CAMPAIGN_ARTICLE
-  )
-  const router = useRouter()
+  const getButtonAppearance = () => {
+    const primary =
+      isInApplicationPeriod || (isSucceeded && isAppliedDuringPeriod)
+    const isLateSucceeded = !isAppliedDuringPeriod && isSucceeded
+
+    return {
+      bgColor: primary ? 'green' : undefined,
+      borderColor: primary ? 'green' : isLateSucceeded ? 'grey' : 'green',
+      textColor: primary ? 'white' : isLateSucceeded ? 'grey' : 'green',
+      disabled:
+        isPending ||
+        !isApplicationStarted ||
+        (isSucceeded && !isWritingPeriodStarted),
+    }
+  }
+
+  const getStageName = (stage: any) => {
+    if (lang === 'zh_hans') return stage.nameZhHans
+    if (lang === 'zh_hant') return stage.nameZhHant
+    return stage.nameEn
+  }
 
   const submit = async (campaignId: string, stageId: string) => {
     if (!viewer.isAuthed) {
@@ -95,17 +118,13 @@ const ApplyCampaignButton = ({
           detail: { trigger: UNIVERSAL_AUTH_TRIGGER.collectArticle },
         })
       )
-
       return
     }
 
     if (viewer.isInactive) {
       toast.error({
-        message: (
-          <FormattedMessage {...ERROR_MESSAGES[ERROR_CODES.FORBIDDEN]} />
-        ),
+        message: intl.formatMessage(ERROR_MESSAGES[ERROR_CODES.FORBIDDEN]),
       })
-
       return
     }
 
@@ -114,271 +133,217 @@ const ApplyCampaignButton = ({
     })
 
     const { id } = data?.putDraft || {}
-
     if (id) {
       const path = toPath({ page: 'draftDetail', id })
       router.push(path.href)
     }
   }
 
-  /**
-   * Rejected or inactive
-   */
+  const handleAuthClick = () => {
+    if (!viewer.isAuthed) {
+      window.dispatchEvent(
+        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
+          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.applyCampaign },
+        })
+      )
+    } else {
+      onClick()
+    }
+  }
+
+  const renderButton = (text: React.ReactNode, props: any = {}) => {
+    const { bgColor, borderColor, textColor, disabled } = getButtonAppearance()
+    const showCheckIcon = isSucceeded && !props.customIcon
+    const buttonProps = {
+      onClick: props.customClick || handleAuthClick,
+      disabled: props.disabled !== undefined ? props.disabled : disabled,
+      borderWidth: 'sm' as 'sm' | 'md',
+      borderColor: props.borderColor || borderColor,
+      bgColor: props.bgColor || bgColor,
+    }
+
+    const iconProps = {
+      icon: showCheckIcon ? (
+        <Icon icon={IconCheck} size={size === 'lg' ? 20 : 16} />
+      ) : (
+        props.icon
+      ),
+      color: props.textColor || textColor,
+    }
+
+    if (size === 'lg') {
+      return (
+        <Button {...buttonProps} size={['100%', '3rem']}>
+          <TextIcon {...iconProps} size={16} weight="normal" placement="right">
+            {text}
+          </TextIcon>
+        </Button>
+      )
+    }
+
+    return (
+      <Button {...buttonProps} size={[null, '1.875rem']} spacing={[0, 20]}>
+        <TextIcon {...iconProps} spacing={4} size={14}>
+          {text}
+        </TextIcon>
+      </Button>
+    )
+  }
+
+  const renderEndedButton = () => {
+    return renderButton(
+      intl.formatMessage({
+        defaultMessage: 'Ended',
+        id: 'mbHf/6',
+        description: 'src/views/CampaignDetail/Apply/Button/index.tsx',
+      }),
+      {
+        disabled: true,
+        borderColor: 'green',
+        bgColor: 'green',
+        textColor: 'white',
+        icon: <Icon icon={IconCheck} size={size === 'lg' ? 20 : 16} />,
+        customIcon: true,
+      }
+    )
+  }
+
+  const renderDefaultSubmitButton = () => {
+    return renderButton(
+      intl.formatMessage({
+        defaultMessage: 'Submit',
+        id: 'dE4mlL',
+        description: 'src/views/CampaignDetail/Apply/Button/index.tsx',
+      }),
+      {
+        customClick: () => submit(campaign.id, todayStage?.id || ''),
+        borderColor: 'green',
+        bgColor: 'green',
+        textColor: 'white',
+        disabled: false,
+      }
+    )
+  }
+
+  const renderTodaySubmitButton = () => {
+    return renderButton(
+      intl.formatMessage({
+        defaultMessage: 'Submit',
+        id: 'dE4mlL',
+        description: 'src/views/CampaignDetail/Apply/Button/index.tsx',
+      }),
+      {
+        customClick: () => submit(campaign.id, selectedStage?.id || ''),
+        borderColor: 'green',
+        bgColor: 'green',
+        textColor: 'white',
+        disabled: false,
+      }
+    )
+  }
+
+  const renderStageSubmitButton = () => {
+    return renderButton(
+      intl.formatMessage(
+        {
+          defaultMessage: 'Submit to {dayName}',
+          id: 'UfvCjD',
+          description: 'src/views/CampaignDetail/Apply/Button/index.tsx',
+        },
+        {
+          dayName: getStageName(selectedStage),
+        }
+      ),
+      {
+        customClick: () => submit(campaign.id, selectedStage?.id || ''),
+        borderColor: 'green',
+        bgColor: 'green',
+        textColor: 'white',
+        disabled: false,
+      }
+    )
+  }
+
+  const renderApplicationStateButton = () => {
+    let buttonText = ''
+
+    if (isPending) {
+      buttonText = isInApplicationPeriod
+        ? intl.formatMessage({
+            defaultMessage: 'Reviewing...',
+            description: 'type:apply',
+            id: 'jLkKbI',
+          })
+        : intl.formatMessage({
+            defaultMessage: 'Reviewing...',
+            description: 'type:join',
+            id: 'Pq/7m5',
+          })
+    } else if (isNotApplied) {
+      buttonText = isInApplicationPeriod
+        ? intl.formatMessage({
+            defaultMessage: 'Apply',
+            description: 'src/views/CampaignDetail/Apply/Button/index.tsx',
+            id: 'HgY+72',
+          })
+        : intl.formatMessage({
+            defaultMessage: 'Join',
+            description: 'src/views/CampaignDetail/Apply/Button/index.tsx',
+            id: 'gCafm/',
+          })
+    } else if (isSucceeded) {
+      buttonText = isAppliedDuringPeriod
+        ? intl.formatMessage({
+            defaultMessage: 'Applied successfully',
+            id: '4nHH2x',
+          })
+        : intl.formatMessage({
+            defaultMessage: 'Joined successfully',
+            id: 'al5/yQ',
+          })
+    }
+
+    return renderButton(buttonText)
+  }
+
   if (isRejected) {
     return null
   }
 
-  // 活動已結束
   if (isFinishedCampaign) {
-    // 已報名者顯示「已結束」按鈕
-    if (isSucceeded) {
-      return (
-        <Button
-          size={size === 'lg' ? ['100%', '3rem'] : [null, '1.875rem']}
-          spacing={size === 'lg' ? undefined : [0, 20]}
-          disabled={true}
-          borderWidth="sm"
-          borderColor="green"
-          bgColor="green"
-        >
-          <TextIcon
-            icon={<Icon icon={IconCheck} size={size === 'lg' ? 20 : 16} />}
-            size={size === 'lg' ? 16 : 14}
-            spacing={size === 'lg' ? undefined : 4}
-            color="white"
-            weight="normal"
-            placement="right"
-          >
-            <FormattedMessage
-              defaultMessage="Ended"
-              id="mbHf/6"
-              description="src/views/CampaignDetail/Apply/Button/index.tsx"
-            />
-          </TextIcon>
-        </Button>
-      )
-    }
-
-    // 未報名者不顯示任何按鈕
-    return null
-  }
-
-  // 報名成功 活動進行中
-  if (isSucceeded && isActiveCampaign && isWritingPeriodStarted) {
-    if (!isSelectedStage) {
-      return (
-        <Button
-          size={size === 'lg' ? ['100%', '3rem'] : [null, '1.875rem']}
-          spacing={size === 'lg' ? undefined : [0, 20]}
-          borderWidth="sm"
-          borderColor="green"
-          bgColor="green"
-          onClick={() => {
-            submit(campaign.id, todayStage?.id || '')
-          }}
-        >
-          <TextIcon
-            size={size === 'lg' ? 16 : 14}
-            spacing={size === 'lg' ? undefined : 4}
-            color="white"
-            weight="normal"
-          >
-            <FormattedMessage
-              defaultMessage="Submit"
-              description="src/views/CampaignDetail/Apply/Button/index.tsx"
-              id="dE4mlL"
-            />
-          </TextIcon>
-        </Button>
-      )
-    }
-
-    // 檢測是否在當天內
-    const isInCurrentDay =
-      now.toDateString() ===
-      new Date(selectedStage?.period?.start).toDateString()
-    if (isInCurrentDay) {
-      return (
-        <Button
-          size={size === 'lg' ? ['100%', '3rem'] : [null, '1.875rem']}
-          spacing={size === 'lg' ? undefined : [0, 20]}
-          borderWidth="sm"
-          borderColor="green"
-          bgColor="green"
-          onClick={() => {
-            console.log('submit', '跳轉編輯器選中「當前」天 / 寫後感')
-            submit(campaign.id, selectedStage?.id || '')
-          }}
-        >
-          <TextIcon
-            size={size === 'lg' ? 16 : 14}
-            spacing={size === 'lg' ? undefined : 4}
-            color="white"
-            weight="normal"
-          >
-            <FormattedMessage
-              defaultMessage="Submit"
-              description="src/views/CampaignDetail/Apply/Button/index.tsx"
-              id="dE4mlL"
-            />
-          </TextIcon>
-        </Button>
-      )
-    } else {
-      return (
-        <Button
-          size={size === 'lg' ? ['100%', '3rem'] : [null, '1.875rem']}
-          spacing={size === 'lg' ? undefined : [0, 20]}
-          borderWidth="sm"
-          borderColor="green"
-          bgColor="green"
-          onClick={() => {
-            console.log(
-              'submit',
-              `跳轉編輯器投稿至 ${
-                selectedStage?.[
-                  lang === 'zh_hans'
-                    ? 'nameZhHans'
-                    : lang === 'zh_hant'
-                      ? 'nameZhHant'
-                      : 'nameEn'
-                ]
-              }`
-            )
-            submit(campaign.id, selectedStage?.id || '')
-          }}
-        >
-          <TextIcon
-            size={size === 'lg' ? 16 : 14}
-            spacing={size === 'lg' ? undefined : 4}
-            color="white"
-            weight="normal"
-          >
-            <FormattedMessage
-              defaultMessage="Submit to {dayName}"
-              description="src/views/CampaignDetail/Apply/Button/index.tsx"
-              id="UfvCjD"
-              values={{
-                dayName:
-                  selectedStage?.[
-                    lang === 'zh_hans'
-                      ? 'nameZhHans'
-                      : lang === 'zh_hant'
-                        ? 'nameZhHant'
-                        : 'nameEn'
-                  ],
-              }}
-            />
-          </TextIcon>
-        </Button>
-      )
-    }
+    return isSucceeded ? renderEndedButton() : null
   }
 
   if (!isActiveCampaign) {
     return null
   }
 
-  /**
-   * Pending, not applied or succeeded
-   */
-  let text: React.ReactNode = ''
-  if (isPending) {
-    text = isInApplicationPeriod ? (
-      <FormattedMessage
-        defaultMessage="Reviewing..."
-        description="type:apply"
-        id="jLkKbI"
-      />
-    ) : (
-      <FormattedMessage
-        defaultMessage="Reviewing..."
-        description="type:join"
-        id="Pq/7m5"
-      />
-    )
-  } else if (isNotApplied) {
-    text = isInApplicationPeriod ? (
-      <FormattedMessage
-        defaultMessage="Apply"
-        description="src/views/CampaignDetail/Apply/Button/index.tsx"
-        id="HgY+72"
-      />
-    ) : (
-      <FormattedMessage
-        defaultMessage="Join"
-        description="src/views/CampaignDetail/Apply/Button/index.tsx"
-        id="gCafm/"
-      />
-    )
-  } else if (isSucceeded) {
-    text = isAppliedDuringPeriod ? (
-      <FormattedMessage defaultMessage="Applied successfully" id="4nHH2x" />
-    ) : (
-      <FormattedMessage defaultMessage="Joined successfully" id="al5/yQ" />
-    )
+  if (isSucceeded && isWritingPeriodStarted && !isSelectedStage) {
+    return renderDefaultSubmitButton()
   }
 
-  if (!viewer.isAuthed) {
-    onClick = () => {
-      window.dispatchEvent(
-        new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
-          detail: { trigger: UNIVERSAL_AUTH_TRIGGER.applyCampaign },
-        })
-      )
-    }
+  const isSelectedStageToday =
+    now.toDateString() === new Date(selectedStage?.period?.start).toDateString()
+
+  if (
+    isSucceeded &&
+    isWritingPeriodStarted &&
+    isSelectedStage &&
+    isSelectedStageToday
+  ) {
+    return renderTodaySubmitButton()
   }
 
-  const primary =
-    isInApplicationPeriod || (isSucceeded && isAppliedDuringPeriod)
-  const isLateSucceeded = !isAppliedDuringPeriod && isSucceeded
-  const bgColor = primary ? 'green' : undefined
-  const borderColor = primary ? 'green' : isLateSucceeded ? 'grey' : 'green'
-  const textColor = primary ? 'white' : isLateSucceeded ? 'grey' : 'green'
-
-  if (size === 'lg') {
-    return (
-      <Button
-        onClick={onClick}
-        size={['100%', '3rem']}
-        disabled={isPending || !isApplicationStarted || isSucceeded}
-        borderWidth="sm"
-        borderColor={borderColor}
-        bgColor={bgColor}
-      >
-        <TextIcon
-          icon={isSucceeded ? <Icon icon={IconCheck} size={20} /> : null}
-          size={16}
-          color={textColor}
-          weight="normal"
-          placement="right"
-        >
-          {text}
-        </TextIcon>
-      </Button>
-    )
-  } else {
-    return (
-      <Button
-        onClick={onClick}
-        size={[null, '1.875rem']}
-        spacing={[0, 20]}
-        borderWidth="sm"
-        disabled={isPending || !isApplicationStarted || isSucceeded}
-        bgColor={bgColor}
-        borderColor={borderColor}
-      >
-        <TextIcon
-          spacing={4}
-          size={14}
-          icon={isSucceeded ? <Icon icon={IconCheck} size={16} /> : null}
-          color={textColor}
-        >
-          {text}
-        </TextIcon>
-      </Button>
-    )
+  if (
+    isSucceeded &&
+    isWritingPeriodStarted &&
+    isSelectedStage &&
+    !isSelectedStageToday
+  ) {
+    return renderStageSubmitButton()
   }
+
+  return renderApplicationStateButton()
 }
 
 export default ApplyCampaignButton
