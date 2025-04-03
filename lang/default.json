@@ -1586,10 +1586,6 @@
     "defaultMessage": "Reviewing...",
     "description": "type:join"
   },
-  "PqPjpI": {
-    "defaultMessage": "Draft version conflict",
-    "description": "DRAFT_VERSION_CONFLICT"
-  },
   "PtV68+": {
     "defaultMessage": "Incorrect email or password",
     "description": "USER_EMAIL_NOT_FOUND"

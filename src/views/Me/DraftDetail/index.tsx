@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import {
@@ -9,6 +9,7 @@ import {
   ENTITY_TYPE,
   ERROR_CODES,
   MAX_ARTICLE_CONTENT_LENGTH,
+  OPEN_DRAFT_VERSION_CONFLICT_DIALOG,
 } from '~/common/enums'
 import {
   containsFigureTag,
@@ -16,7 +17,6 @@ import {
   stripHtml,
 } from '~/common/utils'
 import {
-  Dialog,
   DraftDetailStateContext,
   DraftDetailStateProvider,
   EmptyLayout,
@@ -53,6 +53,7 @@ import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
 import Sidebar from './Sidebar'
 import styles from './styles.module.css'
+import { VersionConflictDialog } from './VersionConflictDialog'
 
 const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
@@ -116,15 +117,6 @@ const BaseDraftDetail = () => {
   const [saveStatus, setSaveStatus] = useState<
     'saved' | 'saving' | 'saveFailed'
   >()
-
-  // State for version conflict dialog
-  const [conflictDialogOpen, setConflictDialogOpen] = useState(false)
-  const pendingUpdateRef = useRef<{
-    title?: string | null
-    content?: string | null
-    cover?: string | null
-    summary?: string | null
-  } | null>(null)
 
   const { data, loading, error } = useQuery<DraftDetailQueryQuery>(
     DRAFT_DETAIL,
@@ -270,12 +262,15 @@ const BaseDraftDetail = () => {
     }
   }
 
-  const update = async (newDraft: {
-    title?: string | null
-    content?: string | null
-    cover?: string | null
-    summary?: string | null
-  }) => {
+  const update = async (
+    newDraft: {
+      title?: string | null
+      content?: string | null
+      cover?: string | null
+      summary?: string | null
+    },
+    forceUpdate?: boolean
+  ) => {
     const isEmpty = Object.values(newDraft).every((x) => x === '')
     if (isNewDraft() && isEmpty) {
       return
@@ -304,60 +299,29 @@ const BaseDraftDetail = () => {
         })
       }
 
-      // Include current updatedAt for version conflict detection
       await setContent({
         variables: {
           id: draftId,
           ...newDraft,
-          lastUpdatedAt: getDraftUpdatedAt(),
+          lastUpdatedAt: forceUpdate ? undefined : getDraftUpdatedAt(),
         },
       })
 
       setSaveStatus('saved')
     } catch (error: any) {
-      console.error('Error saving draft:', error)
       setSaveStatus('saveFailed')
 
       const [, codes] = parseFormSubmitErrors(error as any)
       codes.forEach((code) => {
         if (code.includes(ERROR_CODES.DRAFT_VERSION_CONFLICT)) {
-          pendingUpdateRef.current = newDraft
-          setConflictDialogOpen(true)
+          window.dispatchEvent(
+            new CustomEvent(OPEN_DRAFT_VERSION_CONFLICT_DIALOG, {
+              detail: { onContinueEdit: () => update(newDraft, true) },
+            })
+          )
         }
       })
     }
-  }
-
-  // Handle continuing with current edit (overwrite remote version)
-  const handleContinueEdit = async () => {
-    if (!pendingUpdateRef.current) return
-
-    try {
-      setSaveStatus('saving')
-      let draftId = getDraftId()
-
-      // Send update without lastUpdatedAt to force overwrite
-      await setContent({
-        variables: {
-          id: draftId,
-          ...pendingUpdateRef.current,
-        },
-      })
-
-      setSaveStatus('saved')
-      setConflictDialogOpen(false)
-      pendingUpdateRef.current = null
-    } catch (error) {
-      console.error('Error saving draft after conflict:', error)
-      setSaveStatus('saveFailed')
-    }
-  }
-
-  // Handle abandoning current edit (use remote version)
-  const handleAbandonEdit = async () => {
-    setConflictDialogOpen(false)
-    pendingUpdateRef.current = null
-    window.location.reload()
   }
 
   return (
@@ -421,69 +385,6 @@ const BaseDraftDetail = () => {
           campaigns={appliedCampaigns}
         />
       </Media>
-
-      {/* Version conflict dialog */}
-      <Dialog
-        isOpen={conflictDialogOpen}
-        onDismiss={() => setConflictDialogOpen(false)}
-      >
-        <Dialog.Header
-          title={intl.formatMessage({
-            defaultMessage: 'Draft version is abnormal',
-            id: 'BOr224',
-          })}
-        />
-        <Dialog.Content>
-          <p>
-            {intl.formatMessage({
-              defaultMessage:
-                'The draft is already open on another device or tab, continuing to edit may result in content being overwritten and lost. Do you want to continue?',
-              id: 'WrpdUp',
-            })}
-          </p>
-        </Dialog.Content>
-
-        <Dialog.Footer
-          btns={
-            <>
-              <Dialog.RoundedButton
-                text={intl.formatMessage({
-                  defaultMessage: 'Discard this version',
-                  id: '4ptCtD',
-                })}
-                color="red"
-                onClick={handleAbandonEdit}
-              />
-              <Dialog.RoundedButton
-                text={intl.formatMessage({
-                  defaultMessage: 'Continue editing',
-                  id: 'rVbKiP',
-                })}
-                onClick={handleContinueEdit}
-              />
-            </>
-          }
-          smUpBtns={
-            <>
-              <Dialog.TextButton
-                text={intl.formatMessage({
-                  defaultMessage: 'Discard this version',
-                  id: '4ptCtD',
-                })}
-                color="red"
-                onClick={handleAbandonEdit}
-              />
-              <Dialog.TextButton
-                text={intl.formatMessage({
-                  defaultMessage: 'Continue editing',
-                  id: 'rVbKiP',
-                })}
-                onClick={handleContinueEdit}
-              />
-            </>
-          }
-        />
-      </Dialog>
     </Layout.Main>
   )
 }
@@ -491,6 +392,8 @@ const BaseDraftDetail = () => {
 const DraftDetail = () => (
   <DraftDetailStateProvider>
     <BaseDraftDetail />
+
+    <VersionConflictDialog />
   </DraftDetailStateProvider>
 )
 

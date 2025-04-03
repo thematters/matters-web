@@ -1586,10 +1586,6 @@
     "defaultMessage": "晚鳥參與處理中⋯",
     "description": "type:join"
   },
-  "PqPjpI": {
-    "defaultMessage": "草稿版本異常",
-    "description": "DRAFT_VERSION_CONFLICT"
-  },
   "PtV68+": {
     "defaultMessage": "郵件地址或密碼錯誤",
     "description": "USER_EMAIL_NOT_FOUND"

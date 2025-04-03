@@ -80,7 +80,9 @@ export enum ERROR_CODES {
   PAYMENT_REACH_MAXIMUM_LIMIT = 'PAYMENT_REACH_MAXIMUM_LIMIT',
 }
 
-export const ERROR_MESSAGES: { [key in ERROR_CODES]: MessageDescriptor } = {
+export const ERROR_MESSAGES: Partial<{
+  [key in ERROR_CODES]: MessageDescriptor
+}> = {
   [ERROR_CODES.UNKNOWN_ERROR]: defineMessage({
     defaultMessage: 'Unknown error. Please try again later.',
     id: '/TXBJR',
@@ -186,11 +188,6 @@ export const ERROR_MESSAGES: { [key in ERROR_CODES]: MessageDescriptor } = {
     defaultMessage: 'Draft not found',
     id: 'wDX7zn',
     description: 'DRAFT_NOT_FOUND',
-  }),
-  [ERROR_CODES.DRAFT_VERSION_CONFLICT]: defineMessage({
-    defaultMessage: 'Draft version conflict',
-    id: 'PqPjpI',
-    description: 'DRAFT_VERSION_CONFLICT',
   }),
   [ERROR_CODES.TAG_NOT_FOUND]: defineMessage({
     defaultMessage: 'Tag not found',

@@ -141,7 +141,6 @@ export const DraftDetailStateProvider = ({
     if (!draftId) return undefined
 
     try {
-      // Try to read the draft's updatedAt from cache
       const cacheData = client.readFragment<DraftUpdatedAtFragment>({
         id: `Draft:${draftId}`,
         fragment: gql`

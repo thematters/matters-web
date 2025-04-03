@@ -1,6 +1,8 @@
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
 
+import { ERROR_CODES, OPEN_DRAFT_VERSION_CONFLICT_DIALOG } from '~/common/enums'
+import { parseFormSubmitErrors } from '~/common/utils'
 import { DraftDetailStateContext } from '~/components'
 import { useImperativeQuery, useMutation } from '~/components/GQL'
 import {
@@ -37,6 +39,30 @@ import {
 } from './gql'
 
 /**
+ * Handle version conflict errors
+ */
+const handleVersionConflictError = async <T>(
+  promise: Promise<T>,
+  retryFn?: () => Promise<T>
+): Promise<T> => {
+  try {
+    return await promise
+  } catch (error: any) {
+    const [, codes] = parseFormSubmitErrors(error)
+    codes.forEach((code) => {
+      if (code.includes(ERROR_CODES.DRAFT_VERSION_CONFLICT) && retryFn) {
+        window.dispatchEvent(
+          new CustomEvent(OPEN_DRAFT_VERSION_CONFLICT_DIALOG, {
+            detail: { onContinueEdit: retryFn },
+          })
+        )
+      }
+    })
+    throw error
+  }
+}
+
+/**
  * Hooks for editing draft cover, tags and collection
  */
 export const useEditDraftCover = () => {
@@ -55,13 +81,22 @@ export const useEditDraftCover = () => {
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return update({
-      variables: {
-        id: newId || getDraftId(),
-        cover: asset ? asset.id : null,
-        lastUpdatedAt,
-      },
-    })
+    return handleVersionConflictError(
+      update({
+        variables: {
+          id: newId || getDraftId(),
+          cover: asset ? asset.id : null,
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        update({
+          variables: {
+            id: newId || getDraftId(),
+            cover: asset ? asset.id : null,
+          },
+        })
+    )
   }
 
   const createDraftAndEdit = async (asset?: AssetFragment) => {
@@ -93,14 +128,24 @@ export const useEditDraftTags = () => {
     newTags: DigestTagFragment[],
     newId?: string,
     lastUpdatedAt?: string
-  ) =>
-    updateTags({
-      variables: {
-        id: newId || getDraftId(),
-        tags: _uniq(newTags.map(({ content }) => content)),
-        lastUpdatedAt,
-      },
-    })
+  ) => {
+    return handleVersionConflictError(
+      updateTags({
+        variables: {
+          id: newId || getDraftId(),
+          tags: _uniq(newTags.map(({ content }) => content)),
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        updateTags({
+          variables: {
+            id: newId || getDraftId(),
+            tags: _uniq(newTags.map(({ content }) => content)),
+          },
+        })
+    )
+  }
 
   const createDraftAndEdit = async (newTags: DigestTagFragment[]) => {
     if (getDraftId()) {
@@ -130,14 +175,24 @@ export const useEditDraftCollection = () => {
     newArticles: ArticleDigestDropdownArticleFragment[],
     newId?: string,
     lastUpdatedAt?: string
-  ) =>
-    setCollection({
-      variables: {
-        id: newId || getDraftId(),
-        collection: _uniq(newArticles.map(({ id }) => id)),
-        lastUpdatedAt,
-      },
-    })
+  ) => {
+    return handleVersionConflictError(
+      setCollection({
+        variables: {
+          id: newId || getDraftId(),
+          collection: _uniq(newArticles.map(({ id }) => id)),
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        setCollection({
+          variables: {
+            id: newId || getDraftId(),
+            collection: _uniq(newArticles.map(({ id }) => id)),
+          },
+        })
+    )
+  }
 
   const createDraftAndEdit = async (
     newArticles: ArticleDigestDropdownArticleFragment[]
@@ -171,18 +226,32 @@ export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
     license: ArticleLicenseType,
     newId?: string,
     lastUpdatedAt?: string
-  ) =>
-    setAccess({
-      variables: {
-        id: newId || getDraftId(),
-        circle: (addToCircle && circle?.id) || null,
-        license,
-        accessType: paywalled
-          ? ArticleAccessType.Paywall
-          : ArticleAccessType.Public,
-        lastUpdatedAt,
-      },
-    })
+  ) => {
+    return handleVersionConflictError(
+      setAccess({
+        variables: {
+          id: newId || getDraftId(),
+          circle: (addToCircle && circle?.id) || null,
+          license,
+          accessType: paywalled
+            ? ArticleAccessType.Paywall
+            : ArticleAccessType.Public,
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        setAccess({
+          variables: {
+            id: newId || getDraftId(),
+            circle: (addToCircle && circle?.id) || null,
+            license,
+            accessType: paywalled
+              ? ArticleAccessType.Paywall
+              : ArticleAccessType.Public,
+          },
+        })
+    )
+  }
 
   const createDraftAndEdit = async (
     addToCircle: boolean,
@@ -227,15 +296,26 @@ export const useEditSupportSetting = () => {
     replyToDonator: string | null,
     newId?: string,
     lastUpdatedAt?: string
-  ) =>
-    update({
-      variables: {
-        id: newId || getDraftId(),
-        requestForDonation,
-        replyToDonator,
-        lastUpdatedAt,
-      },
-    })
+  ) => {
+    return handleVersionConflictError(
+      update({
+        variables: {
+          id: newId || getDraftId(),
+          requestForDonation,
+          replyToDonator,
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        update({
+          variables: {
+            id: newId || getDraftId(),
+            requestForDonation,
+            replyToDonator,
+          },
+        })
+    )
+  }
 
   const createDraftAndEdit = async (
     requestForDonation: string | null,
@@ -277,14 +357,24 @@ export const useEditDraftSensitiveByAuthor = () => {
     sensitiveByAuthor: boolean,
     newId?: string,
     lastUpdatedAt?: string
-  ) =>
-    update({
-      variables: {
-        id: newId || getDraftId(),
-        sensitiveByAuthor,
-        lastUpdatedAt,
-      },
-    })
+  ) => {
+    return handleVersionConflictError(
+      update({
+        variables: {
+          id: newId || getDraftId(),
+          sensitiveByAuthor,
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        update({
+          variables: {
+            id: newId || getDraftId(),
+            sensitiveByAuthor,
+          },
+        })
+    )
+  }
 
   const createDraftAndEdit = async (sensitiveByAuthor: boolean) => {
     if (getDraftId()) {
@@ -314,14 +404,24 @@ export const useEditDraftPublishISCN = () => {
     iscnPublish: boolean,
     newId?: string,
     lastUpdatedAt?: string
-  ) =>
-    update({
-      variables: {
-        id: newId || getDraftId(),
-        iscnPublish,
-        lastUpdatedAt,
-      },
-    })
+  ) => {
+    return handleVersionConflictError(
+      update({
+        variables: {
+          id: newId || getDraftId(),
+          iscnPublish,
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        update({
+          variables: {
+            id: newId || getDraftId(),
+            iscnPublish,
+          },
+        })
+    )
+  }
 
   const createDraftAndEdit = async (iscnPublish: boolean) => {
     if (getDraftId()) {
@@ -351,14 +451,24 @@ export const useEditDraftCanComment = () => {
     canComment: boolean,
     newId?: string,
     lastUpdatedAt?: string
-  ) =>
-    update({
-      variables: {
-        id: newId || getDraftId(),
-        canComment,
-        lastUpdatedAt,
-      },
-    })
+  ) => {
+    return handleVersionConflictError(
+      update({
+        variables: {
+          id: newId || getDraftId(),
+          canComment,
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        update({
+          variables: {
+            id: newId || getDraftId(),
+            canComment,
+          },
+        })
+    )
+  }
 
   const createDraftAndEdit = async (canComment: boolean) => {
     if (getDraftId()) {
@@ -388,14 +498,24 @@ export const useEditIndent = () => {
     indented: boolean,
     newId?: string,
     lastUpdatedAt?: string
-  ) =>
-    update({
-      variables: {
-        id: newId || getDraftId(),
-        indented,
-        lastUpdatedAt,
-      },
-    })
+  ) => {
+    return handleVersionConflictError(
+      update({
+        variables: {
+          id: newId || getDraftId(),
+          indented,
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        update({
+          variables: {
+            id: newId || getDraftId(),
+            indented,
+          },
+        })
+    )
+  }
 
   const createDraftAndEdit = async (indented: boolean) => {
     if (getDraftId()) {
@@ -425,15 +545,26 @@ export const useEditDraftCampaign = () => {
     selected?: { campaign: string; stage: string },
     newId?: string,
     lastUpdatedAt?: string
-  ) =>
-    update({
-      variables: {
-        id: newId || getDraftId(),
-        campaigns: selected ? [selected] : [],
-        isReset: !selected,
-        lastUpdatedAt,
-      },
-    })
+  ) => {
+    return handleVersionConflictError(
+      update({
+        variables: {
+          id: newId || getDraftId(),
+          campaigns: selected ? [selected] : [],
+          isReset: !selected,
+          lastUpdatedAt,
+        },
+      }),
+      () =>
+        update({
+          variables: {
+            id: newId || getDraftId(),
+            campaigns: selected ? [selected] : [],
+            isReset: !selected,
+          },
+        })
+    )
+  }
 
   const createDraftAndEdit = async (selected?: {
     campaign: string
