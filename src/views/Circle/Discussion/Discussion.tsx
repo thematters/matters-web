@@ -253,13 +253,11 @@ const CricleDiscussion = () => {
         {!comments ||
           (comments.length <= 0 && (
             <EmptyComment
-              description={
-                <FormattedMessage
-                  defaultMessage="No discussion yet"
-                  id="50cquj"
-                  description="src/views/Circle/Discussion/Discussion.tsx"
-                />
-              }
+              description={intl.formatMessage({
+                defaultMessage: 'No discussion yet',
+                id: '50cquj',
+                description: 'src/views/Circle/Discussion/Discussion.tsx',
+              })}
             />
           ))}
 
