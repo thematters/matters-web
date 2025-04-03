@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import _chunk from 'lodash/chunk'
 import _flatten from 'lodash/flatten'
 import _get from 'lodash/get'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { FormattedMessage } from 'react-intl'
 
 import { analytics, mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
