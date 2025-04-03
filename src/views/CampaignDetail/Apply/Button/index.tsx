@@ -218,8 +218,9 @@ const ApplyCampaignButton = ({
       {
         customClick: () => submit(campaign.id, todayStage?.id || ''),
         borderColor: 'green',
-        bgColor: 'green',
-        textColor: 'white',
+        bgColor: 'white',
+        textColor: 'green',
+        customIcon: <></>,
         disabled: false,
       }
     )
@@ -235,8 +236,9 @@ const ApplyCampaignButton = ({
       {
         customClick: () => submit(campaign.id, selectedStage?.id || ''),
         borderColor: 'green',
-        bgColor: 'green',
-        textColor: 'white',
+        bgColor: 'white',
+        textColor: 'green',
+        customIcon: <></>,
         disabled: false,
       }
     )
@@ -257,8 +259,9 @@ const ApplyCampaignButton = ({
       {
         customClick: () => submit(campaign.id, selectedStage?.id || ''),
         borderColor: 'green',
-        bgColor: 'green',
-        textColor: 'white',
+        bgColor: 'white',
+        textColor: 'green',
+        customIcon: <></>,
         disabled: false,
       }
     )
