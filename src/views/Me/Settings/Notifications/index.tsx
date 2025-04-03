@@ -8,27 +8,23 @@ import GeneralSettings from './GeneralSettings'
 
 const NotificationSettings = () => {
   const intl = useIntl()
-  const title = intl.formatMessage({
-    defaultMessage: 'Settings - Notifications',
-    id: '2DkkhD',
-    description: 'src/views/Me/Settings/Notifications/index.tsx',
-  })
 
   return (
     <Layout.Main>
       <Layout.Header
         left={
           <Layout.Header.Title>
-            <FormattedMessage
-              defaultMessage="Settings"
-              id="z+a1SW"
-              description="src/views/Me/Settings/Notifications/index.tsx"
-            />
+            <FormattedMessage defaultMessage="Settings" id="D3idYv" />
           </Layout.Header.Title>
         }
       />
 
-      <Head title={title} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Settings',
+          id: 'D3idYv',
+        })}
+      />
 
       <SettingsTabs />
 

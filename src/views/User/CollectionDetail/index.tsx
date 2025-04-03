@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
-import { useIntl } from 'react-intl'
 
-import { toPath } from '~/common/utils'
+import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
+import { makeSummary, toPath } from '~/common/utils'
 import { Head, Layout } from '~/components'
 import { QueryError, Throw404, useRoute } from '~/components'
 import { CollectionDetailQuery } from '~/gql/graphql'
@@ -16,12 +16,6 @@ import { COLLECTION_DETAIL } from './gql'
 const BaseCollectionDetail = () => {
   const { getQuery } = useRoute()
   const collectionId = getQuery('collectionId')
-
-  const intl = useIntl()
-  const prefix = intl.formatMessage({
-    defaultMessage: 'Collection',
-    id: 'phAZoj',
-  })
 
   /**
    * Data Fetching
@@ -57,7 +51,7 @@ const BaseCollectionDetail = () => {
   return (
     <>
       <Head
-        title={`${prefix} - ${collection.title} - ${collection.author.displayName} (@${collection.author.userName})`}
+        title={`${makeSummary(collection.title, MAX_META_SUMMARY_LENGTH)} - ${collection.author.displayName}`}
         path={
           toPath({
             page: 'collectionDetail',
@@ -65,8 +59,7 @@ const BaseCollectionDetail = () => {
             userName: collection.author.userName!,
           }).href
         }
-        noSuffix
-        description={collection.description}
+        description={collection.description || ''}
         image={collection.cover}
       />
 

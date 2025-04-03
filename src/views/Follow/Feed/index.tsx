@@ -2,12 +2,10 @@ import { useQuery } from '@apollo/client'
 import _chunk from 'lodash/chunk'
 import _flatten from 'lodash/flatten'
 import _get from 'lodash/get'
-import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
   EmptyWarning,
-  Head,
   InfiniteScroll,
   List,
   QueryError,
@@ -67,7 +65,6 @@ const getNodeId = (node: any, cursor: string): string => {
 }
 
 const FollowingFeed = ({ tab }: FollowingFeedProps) => {
-  const intl = useIntl()
   const isArticleTab = tab === 'Article'
   const { data, loading, error, fetchMore } = useQuery<FollowingFeedQuery>(
     FOLLOWING_FEED,
@@ -92,10 +89,6 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
-        <Head
-          title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
-        />
-
         <EmptyWarning
           description={
             <Translate
@@ -131,9 +124,6 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
 
   return (
     <>
-      <Head
-        title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
-      />
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}

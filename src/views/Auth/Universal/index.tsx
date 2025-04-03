@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 
+import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import { PATHS } from '~/common/enums'
 import { analytics, redirectToTarget, WalletType } from '~/common/utils'
 import {
@@ -79,7 +80,7 @@ const UniversalAuth = () => {
 
   return (
     <>
-      <Head />
+      <Head image={IMAGE_INTRO.src} />
 
       <section className={styles.wrapper}>
         <section className={containerClasses}>

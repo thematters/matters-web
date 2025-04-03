@@ -4,6 +4,7 @@ import { useContext } from 'react'
 
 import { analytics } from '~/common/utils'
 import {
+  ArticleTag,
   List,
   QueryError,
   SpinnerBlock,
@@ -79,12 +80,9 @@ const Tags = () => {
           {edges &&
             edges.map(({ node, cursor }, i) => (
               <List.Item key={node.id}>
-                <TagDigest.Concise
+                <ArticleTag
                   tag={node}
-                  iconSize={20}
-                  textSize={16}
-                  textWeight="normal"
-                  textLineClamp={true}
+                  canClamp
                   onClick={() =>
                     analytics.trackEvent('click_feed', {
                       type: 'tags',

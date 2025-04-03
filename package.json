@@ -1,6 +1,6 @@
 {
   "name": "matters-web",
-  "version": "5.10.0",
+  "version": "5.10.1",
   "description": "codebase of Matters' website",
   "author": "Matters <hi@matters.town>",
   "engines": {
@@ -86,6 +86,7 @@
     "jump.js": "^1.0.2",
     "lodash": "^4.17.21",
     "lottie-react": "^2.4.0",
+    "multiformats": "^13.3.2",
     "next": "^12.3.2",
     "next-pwa": "^5.6.0",
     "next-seo": "^6.5.0",

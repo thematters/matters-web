@@ -139,37 +139,36 @@ const Rich = ({
       testId={TEST_ID.DIGEST_USER_RICH}
     >
       <section className={containerClasses}>
-        <Link {...path} legacyBehavior>
-          {isCardAsLink ? (
-            <span className={styles.avatar}>
-              <AvatarContent />
-            </span>
-          ) : (
+        {isCardAsLink ? (
+          <span className={styles.avatar}>
+            <AvatarContent />
+          </span>
+        ) : (
+          <Link {...path} legacyBehavior>
             <a className={styles.avatar}>
               <AvatarContent />
             </a>
-          )}
-        </Link>
-
+          </Link>
+        )}
         <section className={contentClasses}>
           <header className={styles.header}>
-            <Link {...path} legacyBehavior>
-              {isCardAsLink ? (
-                <span
-                  className={styles.name}
-                  data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
-                >
-                  {user.displayName}
-                </span>
-              ) : (
+            {isCardAsLink ? (
+              <span
+                className={styles.name}
+                data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
+              >
+                {user.displayName}
+              </span>
+            ) : (
+              <Link {...path} legacyBehavior>
                 <a
                   className={styles.name}
                   data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
                 >
                   {user.displayName}
                 </a>
-              )}
-            </Link>
+              </Link>
+            )}
             {hasState && <FollowUserButton.State user={user} />}
           </header>
 

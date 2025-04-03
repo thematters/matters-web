@@ -22,7 +22,7 @@ import {
 } from '~/gql/graphql'
 
 import { SUBSCRIBE_CIRCLE } from './gql'
-import Head from './Head'
+import ContentHead from './Head'
 import Hint from './Hint'
 import styles from './styles.module.css'
 
@@ -136,7 +136,7 @@ const Confirm: React.FC<FormProps> = ({
       />
 
       <Dialog.Content fixedHeight>
-        <Head circle={circle} />
+        <ContentHead circle={circle} />
 
         <section className={styles.currentCard}>
           <TextIcon

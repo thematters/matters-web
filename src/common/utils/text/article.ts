@@ -1,3 +1,9 @@
+import {
+  REGEXP_CJK,
+  REGEXP_LATIN,
+  REGEXP_PUNCTUATION,
+} from '~/common/enums/text'
+
 import { toSizedImageURL } from '../url'
 
 /**
@@ -51,32 +57,86 @@ export const stripHtml = (html: string, options?: StripHTMLOptions) => {
   return plainText
 }
 
-/**
- * Return beginning of text in html as summary, split on sentence break within buffer range.
- * @param html - html string to extract summary
- * @param length - target length of summary
- * @param buffer - buffer range to search for sentence break
- */
-export const makeSummary = (html: string, length = 140, buffer = 20) => {
-  // split on sentence breaks
-  const sections = stripHtml(html, {
-    lineReplacement: ' ',
+const countUnits = (text: string): number => {
+  // Count @mentions as 1 unit
+  if (text.startsWith('@')) return 1
+
+  // Count Latin word as 1 unit
+  if (new RegExp(`^[${REGEXP_LATIN}]+$`).test(text)) return 1
+
+  // Count each CJK character as 1 unit
+  return Array.from(text).reduce((count, char) => {
+    // If it's a CJK character or digit, count it as 1 unit
+    if (new RegExp(`[${REGEXP_CJK}]`).test(char)) {
+      return count + 1
+    }
+    // Otherwise (punctuation, whitespace, etc.), don't count
+    return count
+  }, 0)
+}
+
+export const makeSummary = (
+  html: string,
+  maxUnits: number,
+  lineReplacement?: string
+) => {
+  // Clean the HTML content first
+  const plainText = stripHtml(html, {
+    lineReplacement: lineReplacement || ' ',
+    ensureMentionTrailingSpace: true,
   })
     .replace(/&[^;]+;/g, ' ') // remove html entities
-    .replace(/([?!。？！]|(\.\s))\s*/g, '$1|') // split on sentence breaks
-    .split('|')
+    .replace(/\s+/g, ' ') // normalize whitespace
+    .trim()
 
-  // grow summary within buffer
+  // Split the content into matchable tokens
+  const matches =
+    plainText.match(
+      new RegExp(`(@[^\\s]+|[${REGEXP_LATIN}]+|[^${REGEXP_LATIN}\s])`, 'g')
+    ) || []
+
   let summary = ''
-  while (summary.length < length - buffer && sections.length > 0) {
-    const el = sections.shift() || ''
+  let units = 0
+  let hasMore = false
 
-    const addition =
-      el.length + summary.length > length + buffer
-        ? `${el.substring(0, length - summary.length)}…`
-        : el
+  function trimSpacesAndPunctuations(str: string) {
+    return str
+      .trim()
+      .replace(
+        new RegExp(`^[${REGEXP_PUNCTUATION}]+|[${REGEXP_PUNCTUATION}]+$`, 'g'),
+        ''
+      )
+  }
 
-    summary = summary.concat(addition)
+  // Process each token
+  for (const token of matches) {
+    // If it's whitespace or punctuation, include it but don't count as a unit
+    if (
+      /^\s+$/.test(token) ||
+      new RegExp(`^[${REGEXP_PUNCTUATION}]+$`, 'u').test(token)
+    ) {
+      if (!hasMore) {
+        summary += token
+      }
+      continue
+    }
+
+    const tokenUnits = countUnits(token)
+
+    // If this token would exceed the max units, mark there's more content
+    if (units + tokenUnits > maxUnits) {
+      hasMore = true
+      break
+    }
+
+    // Add the token and count its units
+    summary += trimSpacesAndPunctuations(token)
+    units += tokenUnits
+  }
+
+  // Add ellipsis if there's more content that wasn't included
+  if (hasMore) {
+    summary = trimSpacesAndPunctuations(summary) + '…'
   }
 
   return summary

@@ -1,8 +1,6 @@
 import { useContext, useEffect, useRef } from 'react'
-import { useIntl } from 'react-intl'
 
 import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg'
-import PROFILE_COVER_DEFAULT from '@/public/static/images/profile-cover.png'
 import { USER_PROFILE_WRITINGS_DIGEST_FEED_PREFIX } from '~/common/enums'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
@@ -168,24 +166,11 @@ const UserWritings = () => {
   const description = stripSpaces(user.info.description)
 
   const CustomHead = () => {
-    const intl = useIntl()
-
     return (
       <Head
-        title={intl.formatMessage(
-          {
-            defaultMessage: "{displayName}'s creative space",
-            id: '/usqHn',
-          },
-          { displayName: user.displayName }
-        )}
-        // title={`Matters - ${user.displayName} (@${user.userName})`}
-        description={description}
-        // keywords={...} // show user's top10 most used tags?
-        image={
-          user.info.profileCover ||
-          `//${process.env.NEXT_PUBLIC_SITE_DOMAIN}${PROFILE_COVER_DEFAULT.src}`
-        }
+        title={user.displayName}
+        description={description || ''}
+        image={user.info.profileCover}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'Person',
