@@ -1833,6 +1833,10 @@
     "defaultMessage": "Move to bottom",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
+  "UfvCjD": {
+    "defaultMessage": "Submit to {dayName}",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "Up5U7K": {
     "defaultMessage": "Block"
   },
@@ -2277,6 +2281,10 @@
   "dAvP6d": {
     "defaultMessage": "No blocked users yet",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
+  },
+  "dE4mlL": {
+    "defaultMessage": "Submit",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "dK7Dnj": {
     "defaultMessage": "🔥 Claim for free"
@@ -2752,6 +2760,10 @@
   "mWjpk9": {
     "defaultMessage": "No broadcast yet.",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "mbHf/6": {
+    "defaultMessage": "Ended",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "me1nR+": {
     "defaultMessage": "Copy Address"
