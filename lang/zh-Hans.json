@@ -1828,6 +1828,10 @@
     "defaultMessage": "移至底部",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
+  "UfvCjD": {
+    "defaultMessage": "投稿{dayName}",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "Up5U7K": {
     "defaultMessage": "屏蔽"
   },
@@ -2268,6 +2272,10 @@
   "dAvP6d": {
     "defaultMessage": "尚无屏蔽记录",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
+  },
+  "dE4mlL": {
+    "defaultMessage": "投稿",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "dK7Dnj": {
     "defaultMessage": "🔥 免费提领"
@@ -2751,6 +2759,10 @@
   "mWjpk9": {
     "defaultMessage": "还没有广播",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
+  },
+  "mbHf/6": {
+    "defaultMessage": "已结束",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "me1nR+": {
     "defaultMessage": "复制地址"

@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -22,6 +22,7 @@ const MembersDialogContent = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const name = getQuery('name')
+  const intl = useIntl()
 
   /**
    * Public data fetching
@@ -91,13 +92,11 @@ const MembersDialogContent = () => {
   if (!data || !circle || !edges || edges.length <= 0 || !pageInfo) {
     return (
       <EmptyWarning
-        description={
-          <FormattedMessage
-            defaultMessage="No members yet"
-            id="FOOymB"
-            description="src/views/Circle/Profile/MembersDialog/Content.tsx"
-          />
-        }
+        description={intl.formatMessage({
+          defaultMessage: 'No members yet',
+          id: 'FOOymB',
+          description: 'src/views/Circle/Profile/MembersDialog/Content.tsx',
+        })}
       />
     )
   }

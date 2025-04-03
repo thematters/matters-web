@@ -1,6 +1,6 @@
 import { NetworkStatus } from '@apollo/client'
 import React, { useContext, useEffect, useRef } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconRead } from '@/public/static/icons/24px/read.svg'
 import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
@@ -81,6 +81,7 @@ const FeaturedLabel = () => (
 )
 
 const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
@@ -209,12 +210,10 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     return (
       <Empty
         icon={<Icon icon={IconRead} size={88} />}
-        description={
-          <FormattedMessage
-            defaultMessage="No one has published yet, check back later!"
-            id="TZgskS"
-          />
-        }
+        description={intl.formatMessage({
+          defaultMessage: 'No one has published yet, check back later!',
+          id: 'TZgskS',
+        })}
       />
     )
   }
