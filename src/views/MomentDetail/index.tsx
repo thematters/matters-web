@@ -11,6 +11,7 @@ const MomentDetail = () => {
       <Media lessThan="md">
         <Content shortHash={shortHash} closeDialog={onClose} />
       </Media>
+
       <Media greaterThan="sm">
         <Dialog
           isOpen={true}

@@ -1,14 +1,9 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import { TEST_ID } from '~/common/enums'
+import { MAX_NOTICE_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
 import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
-import {
-  sessionStorage,
-  stripHtml,
-  toPath,
-  truncateNoticeTitle,
-} from '~/common/utils'
+import { makeSummary, sessionStorage, toPath } from '~/common/utils'
 import { useRoute } from '~/components'
 import { NoticeMomentTitleFragment } from '~/gql/graphql'
 
@@ -28,8 +23,10 @@ const NoticeMomentTitle = ({
     moment,
   })
 
-  const title = truncateNoticeTitle(
-    stripHtml(moment.content || '', { ensureMentionTrailingSpace: true })
+  const title = makeSummary(
+    moment.content || '',
+    MAX_NOTICE_SUMMARY_LENGTH,
+    '\n'
   )
   const images = moment.assets.length
     ? intl

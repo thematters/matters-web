@@ -99,7 +99,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
 
   return (
     <>
-      <Head />
+      <Head description={null} />
       {!isInMomentDetail && !isInMomentDetailEdit && <TopNavBar />}
       <div className={layoutClasses}>
         <main className={styles.main}>

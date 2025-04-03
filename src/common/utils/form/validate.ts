@@ -16,6 +16,7 @@ import {
   PAYMENT_MAXIMUM_CIRCLE_AMOUNT,
   PAYMENT_MINIMAL_ADD_CREDIT_AMOUNT,
   PAYMENT_MINIMAL_CIRCLE_AMOUNT,
+  REGEXP_ALL_PUNCTUATIONS,
   RESERVED_CIRCLE_NAMES,
   RESERVED_NAMES,
 } from '~/common/enums'
@@ -27,13 +28,6 @@ import {
 } from '~/common/utils'
 
 import { hasUpperCase } from '../validator'
-
-export const PUNCTUATION_CHINESE =
-  '\u3002\uff1f\uff01\uff0c\u3001\uff1b\uff1a\u201c\u201d\u2018\u2019\uff08\uff09\u300a\u300b\u3008\u3009\u3010\u3011\u300e\u300f\u300c\u300d\ufe43\ufe44\u3014\u3015\u2026\u2014\uff5e\ufe4f\uffe5'
-export const PUNCTUATION_ASCII = '\x00-\x2f\x3a-\x40\x5b-\x60\x7a-\x7f'
-export const REGEXP_ALL_PUNCTUATIONS = new RegExp(
-  `^[${PUNCTUATION_CHINESE}${PUNCTUATION_ASCII}]*$`
-)
 
 /**
  * Tag

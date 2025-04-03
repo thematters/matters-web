@@ -2,8 +2,9 @@ import { mergeAttributes, ReactNodeViewRenderer } from '@matters/matters-editor'
 import { Node } from '@tiptap/core'
 
 import { ASSET_TYPE } from '~/common/enums'
+import { getFileId } from '~/common/utils'
 
-import Uploader, { getFileId, StorageAsset, UploaderProps } from './Uploader'
+import Uploader, { StorageAsset, UploaderProps } from './Uploader'
 
 export { restoreImages } from './Uploader'
 

@@ -1,9 +1,15 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { Layout, SpinnerBlock, useMutation, ViewerContext } from '~/components'
+import {
+  Head,
+  Layout,
+  SpinnerBlock,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import { MeFollowQuery, ReadFollowingFeedMutation } from '~/gql/graphql'
 
 import Feed from './Feed'
@@ -70,9 +76,15 @@ const BaseFollow = ({ tab }: BaseFollowProps) => {
 }
 
 const Follow = () => {
+  const intl = useIntl()
   const [tab, setTab] = useState<TABS>('All')
+
   return (
     <Layout.Main>
+      <Head
+        title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
+      />
+
       <section className={styles.headers}>
         <section className={styles.title}>
           <FormattedMessage defaultMessage="Following" id="cPIKU2" />

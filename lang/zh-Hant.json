@@ -121,9 +121,6 @@
     "defaultMessage": "公開",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
-  "/usqHn": {
-    "defaultMessage": "{displayName} 的創作空間站"
-  },
   "/wKyxw": {
     "defaultMessage": "發布失敗"
   },
@@ -266,10 +263,6 @@
   "2D/X90": {
     "defaultMessage": "為什麼採用 Optimism？"
   },
-  "2DkkhD": {
-    "defaultMessage": "設定 - 通知",
-    "description": "src/views/Me/Settings/Notifications/index.tsx"
-  },
   "2P5JII": {
     "defaultMessage": "解綁",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -313,9 +306,6 @@
   "32bml8": {
     "defaultMessage": "追蹤",
     "description": "src/components/Layout/SideNav/index.tsx"
-  },
-  "33oNeg": {
-    "defaultMessage": "[草稿] {draftTitle}"
   },
   "34OLoD": {
     "defaultMessage": "發動態",
@@ -621,6 +611,9 @@
   "8MeJ4b": {
     "defaultMessage": "光輪號"
   },
+  "8PL7mC": {
+    "defaultMessage": "新文章"
+  },
   "8UWUW8": {
     "defaultMessage": "關聯作品",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
@@ -641,10 +634,6 @@
   "8iciCA": {
     "defaultMessage": "實體不存在",
     "description": "ENTITY_NOT_FOUND"
-  },
-  "8qGjpr": {
-    "defaultMessage": "設定",
-    "description": "src/views/Me/Settings/Misc/index.tsx"
   },
   "8rMZWb": {
     "defaultMessage": "回覆了你在圍爐 ",
@@ -1098,7 +1087,7 @@
     "description": "src/components/Notice/ArticleNotice/CircleNewArticle.tsx"
   },
   "GZJpDf": {
-    "defaultMessage": "數據後台"
+    "defaultMessage": "數據"
   },
   "GclYG/": {
     "defaultMessage": "匿名支持用戶"
@@ -1126,6 +1115,9 @@
   },
   "H8KGyc": {
     "defaultMessage": "進入"
+  },
+  "H8hiL/": {
+    "defaultMessage": "編輯圍爐"
   },
   "HAlOn1": {
     "defaultMessage": "用戶名"
@@ -1320,10 +1312,6 @@
   "Kwv1n3": {
     "defaultMessage": " 用以出版 Writing NFT，費用 ≈1 LIKE，推廣期由平台補助"
   },
-  "KxVlDj": {
-    "defaultMessage": "設定 - 已封鎖用戶",
-    "description": "src/views/Me/Settings/Blocked/index.tsx"
-  },
   "L0J61B": {
     "defaultMessage": "免費",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1378,10 +1366,6 @@
   "LoQ3BF": {
     "defaultMessage": "這枚徽章代表你完成了七天寫作，恭喜走完這趟意義非凡的寫作之旅！"
   },
-  "Lp6CiR": {
-    "defaultMessage": "設定 - 其他",
-    "description": "src/views/Me/Settings/Misc/index.tsx"
-  },
   "LphWYP": {
     "defaultMessage": "用戶協議與隱私政策"
   },
@@ -1425,10 +1409,6 @@
   "Mn7GEf": {
     "defaultMessage": "精選過去 24 小時與你有關的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
-  },
-  "MoyOR+": {
-    "defaultMessage": "設定 - 圍爐通知",
-    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "Myrqtn": {
     "defaultMessage": "🎉 感謝支持！"
@@ -2055,10 +2035,6 @@
     "defaultMessage": "查看作品",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "YgZOAm": {
-    "defaultMessage": "我的創作 - 已封存",
-    "description": "src/views/Me/Works/Archived/index.tsx"
-  },
   "YjW2MT": {
     "defaultMessage": "評論已隱藏"
   },
@@ -2433,6 +2409,10 @@
     "defaultMessage": "取消闔上",
     "description": "src/components/CircleComment/DropdownActions/UncollapseButton.tsx"
   },
+  "g/IDCs": {
+    "defaultMessage": "動態",
+    "description": "src/components/Dialogs/MomentDetailDialog/Content.tsx"
+  },
   "g5pX+a": {
     "defaultMessage": "關於"
   },
@@ -2672,10 +2652,6 @@
   "l31hCd": {
     "defaultMessage": "效果預覽",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
-  },
-  "l9LpDx": {
-    "defaultMessage": "{q} - Matters 搜尋",
-    "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
   "lH8y+X": {
     "defaultMessage": "刪除線"
@@ -3080,10 +3056,6 @@
     "defaultMessage": "登入",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
-  "tDqnVf": {
-    "defaultMessage": "我的創作 - 草稿",
-    "description": "src/views/Me/Works/Drafts/index.tsx"
-  },
   "tEeEJT": {
     "defaultMessage": "你的作品 {articleTitle} 已發布到 IPFS",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
@@ -3357,10 +3329,6 @@
   "yAflVX": {
     "defaultMessage": "草稿已刪除"
   },
-  "yBCdku": {
-    "defaultMessage": "我的創作 - 已發布",
-    "description": "src/views/Me/Works/Published/index.tsx"
-  },
   "yBUiiy": {
     "defaultMessage": "操作無法撤銷，確認封存嗎？"
   },
@@ -3400,10 +3368,6 @@
   },
   "yubNcI": {
     "defaultMessage": "不支持單獨使用標點符號"
-  },
-  "z+a1SW": {
-    "defaultMessage": "設定",
-    "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "z1ucgb": {
     "defaultMessage": "作品已添加至圍爐"

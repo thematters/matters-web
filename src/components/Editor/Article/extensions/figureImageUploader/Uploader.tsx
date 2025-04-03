@@ -6,10 +6,11 @@ import { useDebouncedCallback } from 'use-debounce'
 
 import {
   ASSET_TYPE,
+  EDITOR_IMAGE_UPLOAD_PROGRESS,
   INPUT_DEBOUNCE,
   MAX_FIGURE_CAPTION_LENGTH,
 } from '~/common/enums'
-import { validateImage } from '~/common/utils'
+import { getFileId, validateImage } from '~/common/utils'
 import { toast } from '~/components'
 
 import { type FigcaptionImageUploaderOptions } from '.'
@@ -27,9 +28,6 @@ export type UploaderProps = {
   file: File
   preview: string
 }
-
-export const getFileId = (file: File) =>
-  `${file.name}-${file.size}-${file.type}-${file.lastModified}`
 
 /**
  * Restore uploaded to figureImage
@@ -103,10 +101,6 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
   }, INPUT_DEBOUNCE)
 
   const progressRef = useRef<HTMLSpanElement>(null)
-  const duration = 3000 // 3 seconds
-  const intervalTime = 100 // Update every 100ms
-  const maxProgress = 99
-  let intervalId: NodeJS.Timeout
 
   const uploadImage = async (file: File) => {
     if (!upload) return
@@ -121,6 +115,8 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
       if (!asset?.path) {
         const path = (await upload({ file, type: ASSET_TYPE.embed, mime })).path
 
+        progressRef?.current?.remove()
+
         // update cache
         editor.storage.figureImageUploader.assets[fileId] = {
           ...asset,
@@ -130,11 +126,6 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
 
         // trigger update
         debounceUpdate()
-      }
-
-      if (progressRef.current) {
-        progressRef.current.remove()
-        clearInterval(intervalId)
       }
     } catch (e) {
       console.error(e)
@@ -163,24 +154,32 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
     debouncedSetCaption(caption)
   }
 
-  // Simulate upload progress
-  useEffect(() => {
-    const increment = Math.round((maxProgress / duration) * intervalTime)
-    let progress = 0
-
-    intervalId = setInterval(() => {
-      const newProgress = progress + increment
-      if (progressRef.current && newProgress <= maxProgress) {
-        progress = newProgress
-        progressRef.current.innerText = `${progress}%`
-      }
-    }, intervalTime)
-
-    return () => clearInterval(intervalId)
-  }, [])
-
   useEffect(() => {
     uploadImage(file)
+
+    if (progressRef.current) {
+      progressRef.current.innerText = '0%'
+    }
+
+    const handleProgress = ((event: CustomEvent) => {
+      const { fileId: uploadFileId, progress: uploadProgress } = event.detail
+
+      if (!progressRef.current || uploadFileId !== fileId) {
+        return
+      }
+
+      if (Math.round(uploadProgress) >= 99) {
+        progressRef.current.innerText = '99%'
+      } else {
+        progressRef.current.innerText = `${Math.round(uploadProgress)}%`
+      }
+    }) as EventListener
+
+    window.addEventListener(EDITOR_IMAGE_UPLOAD_PROGRESS, handleProgress)
+
+    return () => {
+      window.removeEventListener(EDITOR_IMAGE_UPLOAD_PROGRESS, handleProgress)
+    }
   }, [])
 
   return (

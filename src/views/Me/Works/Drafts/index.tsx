@@ -82,12 +82,7 @@ export const BaseMeWorksDrafts = () => {
 }
 
 const MeWorksDrafts = () => {
-  const init = useIntl()
-  const title = init.formatMessage({
-    defaultMessage: 'My Works - Drafts',
-    description: 'src/views/Me/Works/Drafts/index.tsx',
-    id: 'tDqnVf',
-  })
+  const intl = useIntl()
 
   return (
     <Layout.Main>
@@ -99,7 +94,12 @@ const MeWorksDrafts = () => {
         }
       />
 
-      <Head title={title} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'My Works',
+          id: 'ai7kS4',
+        })}
+      />
 
       <WorksTabs />
 

@@ -121,9 +121,6 @@
     "defaultMessage": "Public",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
-  "/usqHn": {
-    "defaultMessage": "{displayName}'s creative space"
-  },
   "/wKyxw": {
     "defaultMessage": "Failed to republish"
   },
@@ -266,10 +263,6 @@
   "2D/X90": {
     "defaultMessage": "Why Optimism?"
   },
-  "2DkkhD": {
-    "defaultMessage": "Settings - Notifications",
-    "description": "src/views/Me/Settings/Notifications/index.tsx"
-  },
   "2P5JII": {
     "defaultMessage": "Disconnect",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -313,9 +306,6 @@
   "32bml8": {
     "defaultMessage": "Following",
     "description": "src/components/Layout/SideNav/index.tsx"
-  },
-  "33oNeg": {
-    "defaultMessage": "[Draft] {draftTitle}"
   },
   "34OLoD": {
     "defaultMessage": "Moment",
@@ -621,6 +611,9 @@
   "8MeJ4b": {
     "defaultMessage": "Nimbus Ferry"
   },
+  "8PL7mC": {
+    "defaultMessage": "New Article"
+  },
   "8UWUW8": {
     "defaultMessage": "Collect Article",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
@@ -641,10 +634,6 @@
   "8iciCA": {
     "defaultMessage": "Entity not found",
     "description": "ENTITY_NOT_FOUND"
-  },
-  "8qGjpr": {
-    "defaultMessage": "Settings",
-    "description": "src/views/Me/Settings/Misc/index.tsx"
   },
   "8rMZWb": {
     "defaultMessage": "replied to your discussion on",
@@ -1127,6 +1116,9 @@
   "H8KGyc": {
     "defaultMessage": "Enter"
   },
+  "H8hiL/": {
+    "defaultMessage": "Edit Circle"
+  },
   "HAlOn1": {
     "defaultMessage": "Name"
   },
@@ -1320,10 +1312,6 @@
   "Kwv1n3": {
     "defaultMessage": " registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
   },
-  "KxVlDj": {
-    "defaultMessage": "Settings - Blocked Users",
-    "description": "src/views/Me/Settings/Blocked/index.tsx"
-  },
   "L0J61B": {
     "defaultMessage": "Free",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -1378,10 +1366,6 @@
   "LoQ3BF": {
     "defaultMessage": "This badge represents your completion of Free Write in 7 days. Congratulations on finishing this meaningful writing journey!"
   },
-  "Lp6CiR": {
-    "defaultMessage": "Settings - Misc",
-    "description": "src/views/Me/Settings/Misc/index.tsx"
-  },
   "LphWYP": {
     "defaultMessage": "Terms and Privacy Policy"
   },
@@ -1425,10 +1409,6 @@
   "Mn7GEf": {
     "defaultMessage": "Selected activities related to you in the past 24 hours",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
-  },
-  "MoyOR+": {
-    "defaultMessage": "Settings - Circle notifications",
-    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "Myrqtn": {
     "defaultMessage": "🎉 Thank you for support!"
@@ -2055,10 +2035,6 @@
     "defaultMessage": "View article",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "YgZOAm": {
-    "defaultMessage": "My Works - Archived",
-    "description": "src/views/Me/Works/Archived/index.tsx"
-  },
   "YjW2MT": {
     "defaultMessage": "Comment has been hidden"
   },
@@ -2433,6 +2409,10 @@
     "defaultMessage": "Uncollapse",
     "description": "src/components/CircleComment/DropdownActions/UncollapseButton.tsx"
   },
+  "g/IDCs": {
+    "defaultMessage": "Moment",
+    "description": "src/components/Dialogs/MomentDetailDialog/Content.tsx"
+  },
   "g5pX+a": {
     "defaultMessage": "About"
   },
@@ -2672,10 +2652,6 @@
   "l31hCd": {
     "defaultMessage": "Preview",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
-  },
-  "l9LpDx": {
-    "defaultMessage": "{q} - Matters Search",
-    "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
   "lH8y+X": {
     "defaultMessage": "Strikethrough"
@@ -3080,10 +3056,6 @@
     "defaultMessage": "Sign in",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
   },
-  "tDqnVf": {
-    "defaultMessage": "My Works - Drafts",
-    "description": "src/views/Me/Works/Drafts/index.tsx"
-  },
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
@@ -3357,10 +3329,6 @@
   "yAflVX": {
     "defaultMessage": "Draft has been deleted"
   },
-  "yBCdku": {
-    "defaultMessage": "My Works - Published",
-    "description": "src/views/Me/Works/Published/index.tsx"
-  },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
   },
@@ -3400,10 +3368,6 @@
   },
   "yubNcI": {
     "defaultMessage": "Not support using punctuation marks alone."
-  },
-  "z+a1SW": {
-    "defaultMessage": "Settings",
-    "description": "src/views/Me/Settings/Notifications/index.tsx"
   },
   "z1ucgb": {
     "defaultMessage": "Articles added"

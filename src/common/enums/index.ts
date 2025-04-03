@@ -96,3 +96,7 @@ export const MAX_USER_NAME_LENGTH = 15
 export const MIN_PASSWORD_LENGTH = 8
 
 export const MAX_CHANGE_EMAIL_TIME_DAILY = 3
+
+export const MAX_FEED_SUMMARY_LENGTH = 140
+export const MAX_META_SUMMARY_LENGTH = 20
+export const MAX_NOTICE_SUMMARY_LENGTH = 10
