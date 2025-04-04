@@ -37,7 +37,6 @@ export type UserDigestRichProps = {
   hasFollow?: boolean
   hasState?: boolean
   canClamp?: boolean
-  isCard?: boolean
 } & CardProps &
   Omit<AvatarProps, 'size'>
 
@@ -52,8 +51,6 @@ const Rich = ({
   hasFollow = true,
   hasState = true,
   canClamp = false,
-
-  isCard = true,
 
   ...cardProps
 }: UserDigestRichProps) => {
