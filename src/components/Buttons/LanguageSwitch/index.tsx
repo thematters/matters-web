@@ -61,7 +61,6 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
 }) => {
   const { lang } = useContext(LanguageContext)
 
-  // const iconColor = bgColor === 'greyDarkest' ? 'white' : 'grey'
   const textSize = size === 'sm' ? 12 : 16
 
   return (
