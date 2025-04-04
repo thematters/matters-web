@@ -122,6 +122,7 @@ export const SearchQuickResult = ({
                     page: 'userProfile',
                     userName: node.userName || '',
                   })}
+                  is="link"
                   onClick={() => {
                     closeDropdown()
                     analytics.trackEvent('click_feed', {
