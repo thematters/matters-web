@@ -88,22 +88,22 @@ describe('LanguageSwitch', () => {
         const initialLangText = currentLanguageButton.textContent || ''
 
         // Test cycling through all languages
-        for (const [langText] of Object.entries(LANG_TEXT_MAP)) {
+        for (const [, displayText] of Object.entries(LANG_TEXT_MAP)) {
           // Skip the currently selected language
-          if (langText === currentLanguageButton.textContent) continue
+          if (displayText === currentLanguageButton.textContent) continue
 
           // Click to expand the menu
           fireEvent.click(currentLanguageButton)
 
           // Find and click the target language
-          const menuItem = screen.getByRole('menuitem', { name: langText })
-          const langButton = within(menuItem).getByText(langText)
+          const menuItem = screen.getByRole('menuitem', { name: displayText })
+          const langButton = within(menuItem).getByText(displayText)
           fireEvent.click(langButton)
 
           // Verify the switch was successful
           languageButtons = screen.getAllByRole('button')
           currentLanguageButton = languageButtons[0]
-          expect(currentLanguageButton.textContent).toBe(langText)
+          expect(currentLanguageButton.textContent).toBe(displayText)
         }
 
         // Verify we can go back to the initial language
