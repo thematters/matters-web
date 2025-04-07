@@ -2,7 +2,7 @@
   @mixin flex-center-space-between;
 
   position: sticky;
-  top: var(--sm-top-nav-height);
+  top: var(--global-nav-height-mobile);
   z-index: var(--z-index-sticky-tabs);
   padding-top: var(--sp20);
   padding-right: var(--sp16);
@@ -12,7 +12,7 @@
   background-color: var(--color-white);
 
   @media (--sm-up) {
-    top: var(--lg-top-nav-height);
+    top: var(--global-nav-height);
   }
 
   & .title {

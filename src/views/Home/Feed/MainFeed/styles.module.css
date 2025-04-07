@@ -4,7 +4,7 @@
   background-color: var(--color-white);
 
   @media (--sm-up) {
-    top: var(--lg-top-nav-height);
+    top: var(--global-nav-height);
   }
 
   & h1 {

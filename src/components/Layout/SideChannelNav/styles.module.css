@@ -1,12 +1,12 @@
 .content {
   position: relative;
-  max-height: calc(100vh - var(--sm-top-nav-height));
+  max-height: calc(100vh - var(--global-nav-height-mobile));
   overflow: hidden auto;
   overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
 
   @media (--md-up) {
-    max-height: calc(100vh - var(--lg-top-nav-height));
+    max-height: calc(100vh - var(--global-nav-height));
   }
 
   &::-webkit-scrollbar {
@@ -40,7 +40,7 @@
     /* Top gradient fade effect */
     &::before {
       position: fixed;
-      top: var(--sm-top-nav-height);
+      top: var(--global-nav-height-mobile);
       right: 0;
       left: 0;
       z-index: 1;
@@ -57,7 +57,7 @@
       transition: opacity 0.2s ease;
 
       @media (--md-up) {
-        top: var(--lg-top-nav-height);
+        top: var(--global-nav-height);
       }
     }
 
