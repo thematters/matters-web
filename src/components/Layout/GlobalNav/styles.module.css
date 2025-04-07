@@ -29,11 +29,6 @@
       display: flex;
       align-items: center;
 
-      /* & a {
-        padding: var(--sp12);
-        margin: calc(-1 * var(--sp12));
-      } */
-
       & svg {
         width: 98px;
         height: 20px;
@@ -51,17 +46,17 @@
     }
 
     & button {
-      line-height: 18px;
+      line-height: 1.125rem;
     }
   }
 }
 
 .notificationIcon {
   & div {
-    height: 24px;
+    height: 1.5rem;
 
     @media (--sm-up) {
-      height: 28px;
+      height: 1.75rem;
     }
   }
 }
