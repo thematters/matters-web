@@ -29,7 +29,7 @@ import { NavListItemButton } from '../SideNav/NavListItem'
 import UnreadIcon from '../UnreadIcon'
 import styles from './styles.module.css'
 
-export const TopNavBar = () => {
+export const GlobalNav = () => {
   const { router, isInPath } = useRoute()
   const viewer = useContext(ViewerContext)
   const intl = useIntl()

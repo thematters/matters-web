@@ -6,6 +6,7 @@ import { Head, Media, useRoute } from '~/components'
 
 import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
+import { GlobalNav } from './GlobalNav'
 import Header from './Header'
 // import NavBar from './NavBar'
 import Notice from './Notice'
@@ -13,7 +14,6 @@ import SideChannelNav from './SideChannelNav'
 // import SideFooter from './SideFooter'
 import Spacing from './Spacing'
 import styles from './styles.module.css'
-import { TopNavBar } from './TopNavBar'
 export const Layout: React.FC<{ children?: React.ReactNode }> & {
   Main: typeof Main
   Header: typeof Header
@@ -100,7 +100,7 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   return (
     <>
       <Head description={null} />
-      {!isInMomentDetail && !isInMomentDetailEdit && <TopNavBar />}
+      {!isInMomentDetail && !isInMomentDetailEdit && <GlobalNav />}
       <div className={layoutClasses}>
         <main className={styles.main}>
           {isShowSideChannelNav && (
