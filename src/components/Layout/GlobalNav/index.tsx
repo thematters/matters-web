@@ -29,10 +29,208 @@ import { NavListItemButton } from '../SideNav/NavListItem'
 import UnreadIcon from '../UnreadIcon'
 import styles from './styles.module.css'
 
+const Logo = () => {
+  const intl = useIntl()
+
+  return (
+    <div className={styles.logo}>
+      <Button
+        href={`${PATHS.HOME}?type=icymi`}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Discover',
+          id: 'cE4Hfw',
+        })}
+      >
+        <Icon icon={IconLogo} />
+      </Button>
+    </div>
+  )
+}
+
+const UnauthenticatedNav = () => (
+  <>
+    <LanguageSwitch size="lg" showText={false} />
+    <UniversalAuthButton resideIn="sideNav" />
+  </>
+)
+interface CreateButtonProps {
+  openDropdown: () => void
+  buttonRef?: React.Ref<any>
+}
+
+const CreateButton = ({ openDropdown, buttonRef }: CreateButtonProps) => (
+  <>
+    <Media lessThan="md">
+      <NavListItemButton
+        onClick={openDropdown}
+        name={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
+        icon={<Icon icon={IconNavCreate} size={26} />}
+        activeIcon={<Icon icon={IconNavCreate} size={26} />}
+        active={false}
+        canScrollTop={false}
+        showTooltip={false}
+        aria-haspopup="menu"
+        ref={buttonRef}
+      />
+    </Media>
+    <Media greaterThan="sm">
+      <NavListItemButton
+        onClick={openDropdown}
+        name={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
+        icon={<Icon icon={IconNavCreate} size={30} />}
+        activeIcon={<Icon icon={IconNavCreate} size={30} />}
+        active={false}
+        canScrollTop={false}
+        showTooltip={false}
+        aria-haspopup="menu"
+        ref={buttonRef}
+      />
+    </Media>
+  </>
+)
+
+interface NotificationButtonProps {
+  isInNotification: boolean
+}
+
+const NotificationButton = ({ isInNotification }: NotificationButtonProps) => (
+  <NavListItemButton
+    name={<FormattedMessage defaultMessage="Notifications" id="NAidKb" />}
+    icon={
+      <section className={styles.notificationIcon}>
+        <Media lessThan="md">
+          <UnreadIcon.Notification iconSize={26} />
+        </Media>
+        <Media greaterThan="sm">
+          <UnreadIcon.Notification iconSize={30} />
+        </Media>
+      </section>
+    }
+    activeIcon={
+      <section className={styles.notificationIcon}>
+        <Media lessThan="md">
+          <UnreadIcon.Notification iconSize={26} active />
+        </Media>
+        <Media greaterThan="sm">
+          <UnreadIcon.Notification active iconSize={30} />
+        </Media>
+      </section>
+    }
+    active={isInNotification}
+    href={PATHS.ME_NOTIFICATIONS}
+    showTooltip={false}
+  />
+)
+
+interface UserMenuProps {
+  viewer: any
+}
+
+const UserMenu = ({ viewer }: UserMenuProps) => {
+  const intl = useIntl()
+
+  return (
+    <Dropdown
+      content={
+        <section>
+          <VisuallyHidden>
+            <button type="button">
+              <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+            </button>
+          </VisuallyHidden>
+          <MeMenu />
+          <SideFooter />
+        </section>
+      }
+      placement="bottom-start"
+      zIndex={Z_INDEX.OVER_BOTTOM_BAR}
+      onShown={hidePopperOnClick}
+    >
+      {({ openDropdown, ref }) => (
+        <Button
+          ref={ref}
+          onClick={openDropdown}
+          aria-label={intl.formatMessage({
+            defaultMessage: 'My Page',
+            id: 'enMIYK',
+          })}
+        >
+          <Media lessThan="md">
+            <MeAvatar user={viewer} size={26} />
+          </Media>
+          <Media greaterThan="sm">
+            <MeAvatar user={viewer} size={30} />
+          </Media>
+        </Button>
+      )}
+    </Dropdown>
+  )
+}
+
+interface MobileSearchButtonProps {
+  isInSearch: boolean
+  router: any
+}
+
+const MobileSearchButton = ({
+  isInSearch,
+  router,
+}: MobileSearchButtonProps) => (
+  <Media lessThan="md">
+    <NavListItemButton
+      name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}
+      showTooltip={false}
+      icon={<Icon icon={IconNavSearch} size={26} />}
+      activeIcon={<Icon icon={IconNavSearchActive} size={26} />}
+      active={isInSearch}
+      onClick={() => {
+        const path = toPath({
+          page: 'search',
+        })
+
+        if (isInSearch) {
+          router.replace(path.href)
+        } else {
+          router.push(path.href)
+        }
+      }}
+    />
+  </Media>
+)
+
+interface AuthenticatedNavProps {
+  viewer: any
+  isInNotification: boolean
+}
+
+const AuthenticatedNav = ({
+  viewer,
+  isInNotification,
+}: AuthenticatedNavProps) => (
+  <>
+    <Dropdown
+      content={
+        <section>
+          <ActivityPopover
+            authed={viewer.isAuthed}
+            forbidden={viewer.isInactive}
+          />
+        </section>
+      }
+    >
+      {({ openDropdown, ref }) => (
+        <CreateButton openDropdown={openDropdown} buttonRef={ref} />
+      )}
+    </Dropdown>
+
+    <NotificationButton isInNotification={isInNotification} />
+    <UserMenu viewer={viewer} />
+  </>
+)
+
 export const GlobalNav = () => {
   const { router, isInPath } = useRoute()
   const viewer = useContext(ViewerContext)
-  const intl = useIntl()
   const isInNotification = isInPath('ME_NOTIFICATIONS')
   const isInSearch = isInPath('SEARCH')
   const isAuthed = viewer.isAuthed
@@ -40,17 +238,7 @@ export const GlobalNav = () => {
   return (
     <div className={styles.container}>
       <section className={styles.left}>
-        <div className={styles.logo}>
-          <Button
-            href={`${PATHS.HOME}?type=icymi`}
-            aria-label={intl.formatMessage({
-              defaultMessage: 'Discover',
-              id: 'cE4Hfw',
-            })}
-          >
-            <Icon icon={IconLogo} />
-          </Button>
-        </div>
+        <Logo />
         <Media greaterThan="sm">
           <div className={styles.search}>
             <SearchBar />
@@ -58,150 +246,14 @@ export const GlobalNav = () => {
         </Media>
       </section>
       <section className={styles.right}>
-        <Media lessThan="md">
-          <NavListItemButton
-            name={<FormattedMessage defaultMessage="Search" id="xmcVZ0" />}
-            showTooltip={false}
-            icon={<Icon icon={IconNavSearch} size={26} />}
-            activeIcon={<Icon icon={IconNavSearchActive} size={26} />}
-            active={isInSearch}
-            onClick={() => {
-              const path = toPath({
-                page: 'search',
-              })
-
-              if (isInSearch) {
-                router.replace(path.href)
-              } else {
-                router.push(path.href)
-              }
-            }}
+        <MobileSearchButton isInSearch={isInSearch} router={router} />
+        {!isAuthed ? (
+          <UnauthenticatedNav />
+        ) : (
+          <AuthenticatedNav
+            viewer={viewer}
+            isInNotification={isInNotification}
           />
-        </Media>
-        {!isAuthed && (
-          <>
-            <LanguageSwitch size="lg" showText={false} />
-            <UniversalAuthButton resideIn="sideNav" />
-          </>
-        )}
-        {isAuthed && (
-          <>
-            <Dropdown
-              content={
-                <section>
-                  <ActivityPopover
-                    authed={viewer.isAuthed}
-                    forbidden={viewer.isInactive}
-                  />
-                </section>
-              }
-              // offset={[-16, 16]}
-            >
-              {({ openDropdown, ref }) => (
-                <>
-                  <Media lessThan="md">
-                    <NavListItemButton
-                      onClick={() => {
-                        openDropdown()
-                      }}
-                      name={
-                        <FormattedMessage defaultMessage="Create" id="VzzYJk" />
-                      }
-                      icon={<Icon icon={IconNavCreate} size={26} />}
-                      activeIcon={<Icon icon={IconNavCreate} size={26} />}
-                      active={false}
-                      canScrollTop={false}
-                      showTooltip={false}
-                      aria-haspopup="menu"
-                      ref={ref}
-                    />
-                  </Media>
-                  <Media greaterThan="sm">
-                    <NavListItemButton
-                      onClick={() => {
-                        openDropdown()
-                      }}
-                      name={
-                        <FormattedMessage defaultMessage="Create" id="VzzYJk" />
-                      }
-                      icon={<Icon icon={IconNavCreate} size={30} />}
-                      activeIcon={<Icon icon={IconNavCreate} size={30} />}
-                      active={false}
-                      canScrollTop={false}
-                      showTooltip={false}
-                      aria-haspopup="menu"
-                      ref={ref}
-                    />
-                  </Media>
-                </>
-              )}
-            </Dropdown>
-
-            {/* <Media lessThan="md"> */}
-            <NavListItemButton
-              name={
-                <FormattedMessage defaultMessage="Notifications" id="NAidKb" />
-              }
-              icon={
-                <section className={styles.notificationIcon}>
-                  <Media lessThan="md">
-                    <UnreadIcon.Notification iconSize={26} />
-                  </Media>
-                  <Media greaterThan="sm">
-                    <UnreadIcon.Notification iconSize={30} />
-                  </Media>
-                </section>
-              }
-              activeIcon={
-                <section className={styles.notificationIcon}>
-                  <Media lessThan="md">
-                    <UnreadIcon.Notification iconSize={26} active />
-                  </Media>
-                  <Media greaterThan="sm">
-                    <UnreadIcon.Notification active iconSize={30} />
-                  </Media>
-                </section>
-              }
-              active={isInNotification}
-              href={PATHS.ME_NOTIFICATIONS}
-              showTooltip={false}
-            />
-            <Dropdown
-              content={
-                <section>
-                  <VisuallyHidden>
-                    <button type="button">
-                      <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
-                    </button>
-                  </VisuallyHidden>
-                  <MeMenu />
-                  <SideFooter />
-                </section>
-              }
-              placement="bottom-start"
-              // offset={[-16, 16]}
-              zIndex={Z_INDEX.OVER_BOTTOM_BAR}
-              onShown={hidePopperOnClick}
-            >
-              {({ openDropdown, ref }) => (
-                <Button
-                  ref={ref}
-                  onClick={openDropdown}
-                  aria-label={intl.formatMessage({
-                    defaultMessage: 'My Page',
-                    id: 'enMIYK',
-                  })}
-                >
-                  <Media lessThan="md">
-                    <MeAvatar user={viewer} size={26} />
-                  </Media>
-                  <Media greaterThan="sm">
-                    <MeAvatar user={viewer} size={30} />
-                  </Media>
-                </Button>
-              )}
-            </Dropdown>
-          </>
         )}
       </section>
     </div>
