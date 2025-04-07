@@ -27,23 +27,6 @@
   }
 }
 
-@keyframes pulse-green {
-  0% {
-    box-shadow: 0 0 0 0 var(--color-new-palette-green);
-    transform: scale(0.85);
-  }
-
-  70% {
-    box-shadow: 0 0 0 12px rgb(255 82 82 / 0%);
-    transform: scale(0.9);
-  }
-
-  100% {
-    box-shadow: 0 0 0 0 rgb(255 82 82 / 0%);
-    transform: scale(0.85);
-  }
-}
-
 @keyframes ring {
   0% {
     transform: rotate(0);
