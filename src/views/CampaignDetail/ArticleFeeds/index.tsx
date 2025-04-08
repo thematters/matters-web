@@ -63,6 +63,15 @@ const ArticleFeeds = ({
     ]
   const description = isFeaturedFeed ? featuredDescription : stageDescription
 
+  const content = (
+    <>
+      {description && (
+        <section className={styles.description}>{description}</section>
+      )}
+      <MainFeed feedType={feedType} camapign={campaign} />
+    </>
+  )
+
   return (
     <section className={styles.feeds}>
       <ArticleFeedsTabs
@@ -71,23 +80,10 @@ const ArticleFeeds = ({
         campaign={campaign}
       />
 
-      {!isInTemporaryChannel && (
-        <Layout.Main.Spacing hasVertical={false}>
-          {description && (
-            <section className={styles.description}>{description}</section>
-          )}
-
-          <MainFeed feedType={feedType} camapign={campaign} />
-        </Layout.Main.Spacing>
-      )}
-      {isInTemporaryChannel && (
-        <Layout.Main>
-          {description && (
-            <section className={styles.description}>{description}</section>
-          )}
-
-          <MainFeed feedType={feedType} camapign={campaign} />
-        </Layout.Main>
+      {isInTemporaryChannel ? (
+        <Layout.Main>{content}</Layout.Main>
+      ) : (
+        <Layout.Main.Spacing hasVertical={false}>{content}</Layout.Main.Spacing>
       )}
     </section>
   )
