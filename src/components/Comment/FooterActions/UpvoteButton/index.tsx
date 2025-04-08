@@ -15,6 +15,7 @@ import {
   CommentUpvoteCommentPrivateFragment,
   CommentUpvoteCommentPublicFragment,
   UnvoteCommentMutation,
+  Vote,
   VoteCommentMutation,
 } from '~/gql/graphql'
 
@@ -54,6 +55,7 @@ const UpvoteButton = ({
   const intl = useIntl()
   const [playHeartBeat, setPlayHeartBeat] = useState(false)
 
+
   const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
@@ -73,7 +75,7 @@ const UpvoteButton = ({
         id: comment.id,
         upvotes: comment.upvotes + 1,
         downvotes: 0,
-        myVote: 'up' as any,
+        myVote: Vote.Up,
         __typename: 'Comment',
       },
     },
