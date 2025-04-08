@@ -71,18 +71,30 @@ export const FEED_ARTICLES_PUBLIC = {
   `,
   channel: gql`
     query ChannelFeedPublic($shortHash: String!, $after: String) {
-      viewer @connection(key: "viewerFeedChannel", keyArgs: ["$shortHash"]) {
+      channel(input: { shortHash: $shortHash }) {
         id
-        recommendation {
-          feed: channelArticles(
-            input: { shortHash: $shortHash, first: 20, after: $after }
-          ) {
-            ...FeedArticleConnection
+        ... on TopicChannel {
+          feed: articles(input: { first: 20, after: $after }) {
+            pageInfo {
+              startCursor
+              endCursor
+              hasNextPage
+            }
+            edges {
+              cursor
+              node {
+                ...ArticleDigestCuratedArticle
+                ...ArticleDigestFeedArticlePublic
+                ...ArticleDigestFeedArticlePrivate
+              }
+            }
           }
         }
       }
     }
-    ${feedFragment}
+    ${ArticleDigestCurated.fragments.article}
+    ${ArticleDigestFeed.fragments.article.public}
+    ${ArticleDigestFeed.fragments.article.private}
   `,
 }
 

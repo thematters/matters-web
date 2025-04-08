@@ -7,7 +7,7 @@ interface ChannelHeaderProps {
 }
 
 export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
-  if (!channel) {
+  if (!channel || channel.__typename !== 'TopicChannel') {
     return null
   }
 
@@ -16,7 +16,7 @@ export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
       <div className={styles.header}>
         <h1>{displayChannelName(channel.name)}</h1>
       </div>
-      <p className={styles.description}>{channel.description}</p>
+      <p className={styles.description}>{channel.note}</p>
     </>
   )
 }
