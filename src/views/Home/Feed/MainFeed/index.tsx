@@ -31,7 +31,6 @@ import Authors from '../Authors'
 import Billboard from '../Billboard'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
-import { HomeFeedType } from '../SortBy'
 import Tags from '../Tags'
 import { ChannelHeader } from './ChannelHeader'
 import styles from './styles.module.css'
@@ -40,6 +39,8 @@ type FeedArticlesPublic =
   | HottestFeedPublicQuery
   | NewestFeedPublicQuery
   | IcymiFeedPublicQuery
+
+export type MainFeedType = 'hottest' | 'newest' | 'icymi' | 'channel'
 
 type HorizontalFeed = React.FC<{ after?: string; first?: number }>
 
@@ -71,7 +72,7 @@ interface FeedLocation {
 }
 
 interface MainFeedProps {
-  feedSortType: HomeFeedType
+  feedSortType: MainFeedType
 }
 
 const horizontalFeeds: FeedLocation = {
@@ -102,7 +103,7 @@ const MainFeed = ({}: MainFeedProps) => {
   const shortHash = getQuery('shortHash')
   const sortBy = isInChannel
     ? 'channel'
-    : ((type === '' && isInHome ? 'icymi' : type) as HomeFeedType)
+    : ((type === '' && isInHome ? 'icymi' : type) as MainFeedType)
   const isIcymiFeed = sortBy === 'icymi'
 
   /**
