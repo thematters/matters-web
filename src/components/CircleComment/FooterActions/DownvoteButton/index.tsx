@@ -12,6 +12,7 @@ import {
   CircleCommentDownvoteCommentPrivateFragment,
   CircleCommentDownvoteCommentPublicFragment,
   UnvoteCommentMutation,
+  Vote,
   VoteCommentMutation,
 } from '~/gql/graphql'
 
@@ -69,7 +70,7 @@ const DownvoteButton = ({
         upvotes:
           comment.myVote === 'up' ? comment.upvotes - 1 : comment.upvotes,
         downvotes: 0,
-        myVote: 'down' as any,
+        myVote: Vote.Down,
         __typename: 'Comment',
       },
     },
