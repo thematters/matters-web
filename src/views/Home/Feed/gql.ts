@@ -5,6 +5,21 @@ import { ArticleDigestCurated, ArticleDigestFeed } from '~/components'
 import { ChannelHeader } from './ChannelFeed/ChannelHeader'
 import { IcymiCuratedFeed } from './IcymiCuratedFeed'
 
+const articleFragments = gql`
+  ${ArticleDigestCurated.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
+`
+
+const articleNodeFragment = gql`
+  fragment ArticleNodeFragment on Article {
+    ...ArticleDigestCuratedArticle
+    ...ArticleDigestFeedArticlePublic
+    ...ArticleDigestFeedArticlePrivate
+  }
+  ${articleFragments}
+`
+
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
     pageInfo {
@@ -15,15 +30,28 @@ const feedFragment = gql`
     edges {
       cursor
       node {
-        ...ArticleDigestCuratedArticle
-        ...ArticleDigestFeedArticlePublic
-        ...ArticleDigestFeedArticlePrivate
+        ...ArticleNodeFragment
       }
     }
   }
-  ${ArticleDigestCurated.fragments.article}
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
+  ${articleNodeFragment}
+`
+
+const channelArticleConnectionFragment = gql`
+  fragment ChannelArticleConnectionFragment on ChannelArticleConnection {
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+    }
+    edges {
+      cursor
+      node {
+        ...ArticleNodeFragment
+      }
+    }
+  }
+  ${articleNodeFragment}
 `
 
 export const FEED_ARTICLES_PUBLIC = {
@@ -79,27 +107,13 @@ export const FEED_ARTICLES_PUBLIC_CHANNEL = gql`
       ... on TopicChannel {
         ...ChannelHeader
         feed: articles(input: { first: 20, after: $after }) {
-          pageInfo {
-            startCursor
-            endCursor
-            hasNextPage
-          }
-          edges {
-            cursor
-            node {
-              ...ArticleDigestCuratedArticle
-              ...ArticleDigestFeedArticlePublic
-              ...ArticleDigestFeedArticlePrivate
-            }
-          }
+          ...ChannelArticleConnectionFragment
         }
       }
     }
   }
   ${ChannelHeader.fragments.channel}
-  ${ArticleDigestCurated.fragments.article}
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
+  ${channelArticleConnectionFragment}
 `
 
 export const FEED_ARTICLES_PRIVATE = gql`
