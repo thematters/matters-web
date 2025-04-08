@@ -29,7 +29,6 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
   const applicationState = campaign.application?.state
   const isRejected = applicationState === 'rejected'
-  const isActiveCampaign = campaign.state === 'active'
 
   const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
 
@@ -131,7 +130,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
             <Participants campaign={campaign} />
           </section>
 
-          {!isRejected && isActiveCampaign && (
+          {!isRejected && (
             <section className={styles.mobileApply}>
               <Apply.Button
                 campaign={campaign}
