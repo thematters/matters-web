@@ -189,7 +189,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     }
   }, [debouncedSearch])
 
-  // 處理表單提交邏輯
   const handleFormSubmit = (
     values: FormikValues,
     formikHelpers?: FormikHelpers<FormikValues>
@@ -213,7 +212,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     closeDropdown()
   }
 
-  // 處理搜索快速結果組件
   const renderSearchQuickResult = (inPage = false) => (
     <SearchQuickResult
       searchKey={debouncedSearch}
@@ -235,7 +233,6 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     />
   )
 
-  // 渲染表單內容
   let setValues: ((values: FormikValues) => void) | undefined
 
   const renderForm = (
