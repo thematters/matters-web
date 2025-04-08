@@ -2,6 +2,7 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestCurated, ArticleDigestFeed } from '~/components'
 
+import { ChannelHeader } from './ChannelFeed/ChannelHeader'
 import { IcymiCuratedFeed } from './IcymiCuratedFeed'
 
 const feedFragment = gql`
@@ -69,34 +70,37 @@ export const FEED_ARTICLES_PUBLIC = {
     ${feedFragment}
     ${IcymiCuratedFeed.fragments}
   `,
-  channel: gql`
-    query ChannelFeedPublic($shortHash: String!, $after: String) {
-      channel(input: { shortHash: $shortHash }) {
-        id
-        ... on TopicChannel {
-          feed: articles(input: { first: 20, after: $after }) {
-            pageInfo {
-              startCursor
-              endCursor
-              hasNextPage
-            }
-            edges {
-              cursor
-              node {
-                ...ArticleDigestCuratedArticle
-                ...ArticleDigestFeedArticlePublic
-                ...ArticleDigestFeedArticlePrivate
-              }
+}
+
+export const FEED_ARTICLES_PUBLIC_CHANNEL = gql`
+  query FeedArticlesPublicChannel($shortHash: String!, $after: String) {
+    channel(input: { shortHash: $shortHash }) {
+      id
+      ... on TopicChannel {
+        ...ChannelHeader
+        feed: articles(input: { first: 20, after: $after }) {
+          pageInfo {
+            startCursor
+            endCursor
+            hasNextPage
+          }
+          edges {
+            cursor
+            node {
+              ...ArticleDigestCuratedArticle
+              ...ArticleDigestFeedArticlePublic
+              ...ArticleDigestFeedArticlePrivate
             }
           }
         }
       }
     }
-    ${ArticleDigestCurated.fragments.article}
-    ${ArticleDigestFeed.fragments.article.public}
-    ${ArticleDigestFeed.fragments.article.private}
-  `,
-}
+  }
+  ${ChannelHeader.fragments.channel}
+  ${ArticleDigestCurated.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
+`
 
 export const FEED_ARTICLES_PRIVATE = gql`
   query FeedArticlesPrivate($ids: [ID!]!) {

@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 
 import { Layout, Spacer, useRoute, ViewerContext } from '~/components'
 
+import ChannelFeed from './ChannelFeed'
 import MainFeed, { MainFeedType } from './MainFeed'
 
 const HomeFeed = () => {
@@ -20,7 +21,7 @@ const HomeFeed = () => {
   return (
     <Layout.Main>
       {!isInChannel && !isInIcymi && <Spacer size="sp20" />}
-      <MainFeed feedSortType={feedType} />
+      {isInChannel ? <ChannelFeed /> : <MainFeed feedSortType={feedType} />}
     </Layout.Main>
   )
 }

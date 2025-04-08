@@ -3,13 +3,11 @@ import { FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
-  ArticleDigestCurated,
   ArticleDigestFeed,
   ArticleFeedPlaceholder,
   CardExposureTracker,
   EmptyWork,
   InfiniteScroll,
-  LanguageContext,
   List,
   Media,
   QueryError,
@@ -18,9 +16,7 @@ import {
   useRoute,
   ViewerContext,
 } from '~/components'
-import { CHANNEL_BY_SHORT_HASH } from '~/components/GQL/queries/channels'
 import {
-  ChannelByShortHashQuery,
   HottestFeedPublicQuery,
   IcymiFeedPublicQuery,
   NewestFeedPublicQuery,
@@ -31,16 +27,15 @@ import Authors from '../Authors'
 import Billboard from '../Billboard'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
+import styles from '../styles.module.css'
 import Tags from '../Tags'
-import { ChannelHeader } from './ChannelHeader'
-import styles from './styles.module.css'
 
 type FeedArticlesPublic =
   | HottestFeedPublicQuery
   | NewestFeedPublicQuery
   | IcymiFeedPublicQuery
 
-export type MainFeedType = 'hottest' | 'newest' | 'icymi' | 'channel'
+export type MainFeedType = 'hottest' | 'newest' | 'icymi'
 
 type HorizontalFeed = React.FC<{ after?: string; first?: number }>
 
@@ -96,15 +91,11 @@ const horizontalFeeds: FeedLocation = {
 const MainFeed = ({}: MainFeedProps) => {
   const intl = useIntl()
   const viewer = useContext(ViewerContext)
-  const { lang } = useContext(LanguageContext)
   const { getQuery, isInPath } = useRoute()
   const type = getQuery('type')
   const isInHome = isInPath('HOME')
-  const isInChannel = isInPath('CHANNEL')
   const shortHash = getQuery('shortHash')
-  const sortBy = isInChannel
-    ? 'channel'
-    : ((type === '' && isInHome ? 'icymi' : type) as MainFeedType)
+  const sortBy = (type === '' && isInHome ? 'icymi' : type) as MainFeedType
   const isIcymiFeed = sortBy === 'icymi'
 
   /**
@@ -114,11 +105,7 @@ const MainFeed = ({}: MainFeedProps) => {
   const query = FEED_ARTICLES_PUBLIC[sortBy]
   const { data, error, loading, fetchMore, client } =
     usePublicQuery<FeedArticlesPublic>(query, {
-      variables: isInChannel
-        ? {
-            shortHash,
-          }
-        : {},
+      variables: {},
     })
 
   // pagination
@@ -126,12 +113,6 @@ const MainFeed = ({}: MainFeedProps) => {
   const recommendation = data?.viewer?.recommendation
   const result = recommendation?.feed
   const { edges, pageInfo } = result || {}
-
-  const { data: channelData, loading: channelLoading } =
-    usePublicQuery<ChannelByShortHashQuery>(CHANNEL_BY_SHORT_HASH, {
-      variables: { shortHash, userLanguage: lang },
-      skip: !shortHash || !isInChannel,
-    })
 
   // private data
   const loadPrivate = (publicData?: FeedArticlesPublic) => {
@@ -153,7 +134,7 @@ const MainFeed = ({}: MainFeedProps) => {
   // fetch private data for first page
   const fetchedPrviateSortsRef = useRef<string[]>([])
   useEffect(() => {
-    const key = isInChannel ? `channel:${shortHash}` : sortBy
+    const key = sortBy
     const fetched = fetchedPrviateSortsRef.current.indexOf(key) >= 0
     if (loading || !edges || fetched || !viewer.isAuthed) {
       return
@@ -193,7 +174,7 @@ const MainFeed = ({}: MainFeedProps) => {
   /**
    * Render
    */
-  if (loading || channelLoading) {
+  if (loading) {
     if (typeof window !== 'undefined') {
       window.scrollTo(0, 0)
       document.body.focus()
@@ -212,9 +193,6 @@ const MainFeed = ({}: MainFeedProps) => {
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
-        {isInChannel && channelData && (
-          <ChannelHeader channel={channelData.channel} />
-        )}
         <EmptyWork
           description={intl.formatMessage({
             defaultMessage: 'No articles',
@@ -247,8 +225,6 @@ const MainFeed = ({}: MainFeedProps) => {
     })
   }
 
-  const numOfCards = isInChannel ? 6 : 0
-
   return (
     <>
       {isIcymiFeed && (
@@ -266,37 +242,6 @@ const MainFeed = ({}: MainFeedProps) => {
           <IcymiCuratedFeed recommendation={recommendation} />
         )}
 
-      {isInChannel && channelData && (
-        <ChannelHeader channel={channelData.channel} />
-      )}
-
-      {isInChannel && (
-        <section className={styles.cards}>
-          {mixFeed.slice(0, numOfCards).map((edge, i) => {
-            if (edge.__typename === 'HorizontalFeed' || !('node' in edge)) {
-              return null
-            }
-
-            return (
-              <React.Fragment key={edge.node.id}>
-                <Media at="xs">
-                  <ArticleDigestCurated
-                    article={edge.node}
-                    titleLineClamp={3}
-                  />
-                </Media>
-                <Media greaterThan="xs">
-                  <ArticleDigestCurated
-                    article={edge.node}
-                    titleLineClamp={2}
-                  />
-                </Media>
-              </React.Fragment>
-            )
-          })}
-        </section>
-      )}
-
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
@@ -304,7 +249,7 @@ const MainFeed = ({}: MainFeedProps) => {
         eof
       >
         <List>
-          {mixFeed.slice(numOfCards).map((edge, i) => {
+          {mixFeed.map((edge, i) => {
             if (edge?.__typename === 'HorizontalFeed') {
               const { Feed } = edge
               return <Feed key={edge.__typename + i} />
