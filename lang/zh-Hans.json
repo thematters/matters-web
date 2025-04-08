@@ -611,9 +611,6 @@
   "8MeJ4b": {
     "defaultMessage": "光轮号"
   },
-  "8PL7mC": {
-    "defaultMessage": "新文章"
-  },
   "8UWUW8": {
     "defaultMessage": "关联作品",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
@@ -2449,6 +2446,9 @@
   "gluNT8": {
     "defaultMessage": "输入链接地址"
   },
+  "gvTltk": {
+    "defaultMessage": "草稿 - {title}"
+  },
   "gykfC8": {
     "defaultMessage": "还有",
     "description": "src/components/Layout/SideChannelNav/index.tsx"
@@ -2934,6 +2934,9 @@
   "qYzBk8": {
     "defaultMessage": "退订了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qcAuPU": {
+    "defaultMessage": "草稿 - 未命名"
   },
   "qfi4cg": {
     "defaultMessage": "图片上传失败"
