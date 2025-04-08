@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 
-export const GET_ARTICLE_CHANNELS = gql`
-  query GetArticleChannels($shortHash: String!) {
+export const GET_ARTICLE_TOPIC_CHANNELS = gql`
+  query GetArticleTopicChannels($shortHash: String!) {
     article(input: { shortHash: $shortHash }) {
       id
       oss {
-        channels {
+        topicChannels {
           channel {
             id
           }
@@ -16,18 +16,20 @@ export const GET_ARTICLE_CHANNELS = gql`
     channels {
       id
       shortHash
-      name(input: { language: zh_hant })
-      enabled
+      ... on TopicChannel {
+        name(input: { language: zh_hant })
+        enabled
+      }
     }
   }
 `
 
-export const SET_ARTICLE_CHANNELS = gql`
-  mutation SetArticleChannels($id: ID!, $channels: [ID!]!) {
-    setArticleChannels(input: { id: $id, channels: $channels }) {
+export const SET_ARTICLE_TOPIC_CHANNELS = gql`
+  mutation SetArticleTopicChannels($id: ID!, $channels: [ID!]!) {
+    setArticleTopicChannels(input: { id: $id, channels: $channels }) {
       id
       oss {
-        channels {
+        topicChannels {
           channel {
             id
           }
