@@ -130,7 +130,7 @@ export const makeSummary = (
     }
 
     // Add the token and count its units
-    summary += trimSpacesAndPunctuations(token)
+    summary += token
     units += tokenUnits
   }
 
