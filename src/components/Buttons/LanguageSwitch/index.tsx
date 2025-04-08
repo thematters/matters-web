@@ -97,7 +97,7 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
           <Media lessThan="md">
             {createLanguageButton(24 as IconSize, ref, openDropdown)}
           </Media>
-          <Media greaterThan="sm">
+          <Media greaterThanOrEqual="md">
             {createLanguageButton(28 as IconSize, ref, openDropdown)}
           </Media>
         </>

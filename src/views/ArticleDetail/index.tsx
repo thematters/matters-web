@@ -299,7 +299,7 @@ const BaseArticleDetail = ({
 
       <StickyTopBanner type="inactive" article={article} />
 
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <DynamicCommentDrawer
           isOpen={isOpenComment}
           onClose={toggleCommentDrawer}
@@ -446,7 +446,7 @@ const BaseArticleDetail = ({
         />
       </Media>
 
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <FloatToolbar
           show={!hideFloatToolbar}
           articleDetails={article}

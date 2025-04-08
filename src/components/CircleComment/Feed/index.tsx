@@ -101,7 +101,7 @@ const BaseCommentFeed = ({
             limit={17}
           />
         </Media>
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <CircleCommentContent
             comment={comment}
             type={type}

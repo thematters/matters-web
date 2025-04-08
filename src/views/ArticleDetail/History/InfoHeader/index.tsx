@@ -110,7 +110,7 @@ const InfoHeader = ({
                 <IPFSTextIcon />
               </button>
             </Media>
-            <Media greaterThan="sm">
+            <Media greaterThanOrEqual="md">
               <Tooltip
                 content={
                   <FormattedMessage
@@ -161,7 +161,7 @@ const InfoHeader = ({
                     <Media lessThan="md">
                       {truncate(version.dataHash!, 10, 14)}
                     </Media>
-                    <Media greaterThan="sm">{version.dataHash}</Media>
+                    <Media greaterThanOrEqual="md">{version.dataHash}</Media>
                   </TextIcon>
                 </Button>
               )}

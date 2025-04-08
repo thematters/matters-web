@@ -252,7 +252,7 @@ const BaseFooterActions = ({
                       )}
                     </ArticleCommentFormDialog>
                   </Media>
-                  <Media greaterThan="sm">
+                  <Media greaterThanOrEqual="md">
                     <ReplyButton
                       {...buttonProps}
                       {...replyButtonProps}

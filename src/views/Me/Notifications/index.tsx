@@ -166,7 +166,7 @@ const Notifications = () => {
         />
         <Spacer size="sp16" />
       </Media>
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <Spacer size="sp32" />
       </Media>
 

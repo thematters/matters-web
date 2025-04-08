@@ -36,7 +36,7 @@ const MomentForm = () => {
   return (
     <>
       {isViewer && (
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <section className={styles.momentForm}>
             <DynamicMomentForm setFirstRendered={setFormRendered} />
           </section>

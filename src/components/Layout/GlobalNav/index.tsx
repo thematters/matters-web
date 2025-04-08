@@ -73,7 +73,7 @@ const CreateButton = ({ openDropdown, buttonRef }: CreateButtonProps) => (
         ref={buttonRef}
       />
     </Media>
-    <Media greaterThan="sm">
+    <Media greaterThanOrEqual="md">
       <NavListItemButton
         onClick={openDropdown}
         name={<FormattedMessage defaultMessage="Create" id="VzzYJk" />}
@@ -101,7 +101,7 @@ const NotificationButton = ({ isInNotification }: NotificationButtonProps) => (
         <Media lessThan="md">
           <UnreadIcon.Notification iconSize={26} />
         </Media>
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <UnreadIcon.Notification iconSize={30} />
         </Media>
       </section>
@@ -111,7 +111,7 @@ const NotificationButton = ({ isInNotification }: NotificationButtonProps) => (
         <Media lessThan="md">
           <UnreadIcon.Notification iconSize={26} active />
         </Media>
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <UnreadIcon.Notification active iconSize={30} />
         </Media>
       </section>
@@ -158,7 +158,7 @@ const UserMenu = ({ viewer }: UserMenuProps) => {
           <Media lessThan="md">
             <MeAvatar user={viewer} size={26} />
           </Media>
-          <Media greaterThan="sm">
+          <Media greaterThanOrEqual="md">
             <MeAvatar user={viewer} size={30} />
           </Media>
         </Button>
@@ -239,7 +239,7 @@ export const GlobalNav = () => {
     <div className={styles.container}>
       <section className={styles.left}>
         <Logo />
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <div className={styles.search}>
             <SearchBar />
           </div>

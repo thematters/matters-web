@@ -139,7 +139,7 @@ const BaseArticleDigestFeed = ({
             </LinkWrapper>
           )}
 
-          <Media greaterThan="sm">{footerActions}</Media>
+          <Media greaterThanOrEqual="md">{footerActions}</Media>
         </section>
         {cover && (
           <LinkWrapper {...path} onClick={onClick}>

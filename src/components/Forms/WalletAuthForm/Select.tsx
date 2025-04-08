@@ -52,7 +52,7 @@ const Hint = () => {
           </a>
         </p>
       </Media>
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <p>
           <FormattedMessage
             defaultMessage="Don't have a wallet yet? Check the "

@@ -121,7 +121,7 @@ const Hero = () => {
               <Media lessThan="md">
                 <Icon icon={IconButtonLeft} size={24} />
               </Media>
-              <Media greaterThan="sm">
+              <Media greaterThanOrEqual="md">
                 <Icon icon={IconButtonLeft} size={32} />
               </Media>
             </Button>
@@ -311,7 +311,7 @@ const Hero = () => {
               <Media lessThan="md">
                 <Icon icon={IconButtonRight} size={24} />
               </Media>
-              <Media greaterThan="sm">
+              <Media greaterThanOrEqual="md">
                 <Icon icon={IconButtonRight} size={32} />
               </Media>
             </Button>

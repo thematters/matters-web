@@ -55,7 +55,7 @@ const Footer: React.FC<FooterProps> = ({
         )}
       </Media>
       {hasSmUpBtns && (
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <section className={smUpContentClasses}>
             {closeDialog && (
               <TextButton

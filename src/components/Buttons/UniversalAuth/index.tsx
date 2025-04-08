@@ -65,7 +65,7 @@ export const UniversalAuthButton: React.FC<UniversalAuthButtonProps> = ({
           12
         )}
       </Media>
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         {renderButton(
           undefined,
           [8 as ButtonSpacingY, 20 as ButtonSpacingX],
