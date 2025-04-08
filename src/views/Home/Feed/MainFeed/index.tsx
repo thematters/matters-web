@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -94,6 +94,7 @@ const horizontalFeeds: FeedLocation = {
 }
 
 const MainFeed = ({}: MainFeedProps) => {
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { getQuery, isInPath } = useRoute()
@@ -215,9 +216,10 @@ const MainFeed = ({}: MainFeedProps) => {
           <ChannelHeader channel={channelData.channel} />
         )}
         <EmptyWork
-          description={
-            <FormattedMessage defaultMessage="No articles" id="cHDJyK" />
-          }
+          description={intl.formatMessage({
+            defaultMessage: 'No articles',
+            id: 'cHDJyK',
+          })}
         />
       </>
     )
