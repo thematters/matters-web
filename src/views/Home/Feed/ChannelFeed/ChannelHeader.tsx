@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { displayChannelName } from '~/common/utils'
 import { ChannelHeaderFragment } from '~/gql/graphql'
 
-import styles from './styles.module.css'
+import styles from '../styles.module.css'
 
 const fragments = {
   channel: gql`
