@@ -609,9 +609,6 @@
   "8MeJ4b": {
     "defaultMessage": "Nimbus Ferry"
   },
-  "8PL7mC": {
-    "defaultMessage": "New Article"
-  },
   "8UWUW8": {
     "defaultMessage": "Collect Article",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
@@ -2454,6 +2451,9 @@
   "gluNT8": {
     "defaultMessage": "Enter URL"
   },
+  "gvTltk": {
+    "defaultMessage": "Draft - {title}"
+  },
   "gzJEFb": {
     "defaultMessage": "Verify your Liker ID through like.co"
   },
@@ -2935,6 +2935,9 @@
   "qYzBk8": {
     "defaultMessage": " unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qcAuPU": {
+    "defaultMessage": "Draft - Untitled"
   },
   "qfi4cg": {
     "defaultMessage": "Failed to upload, please try again."
