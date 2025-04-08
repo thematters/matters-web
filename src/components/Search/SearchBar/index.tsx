@@ -1,3 +1,4 @@
+import { FormikHelpers, FormikValues } from 'formik'
 import dynamic from 'next/dynamic'
 import { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -188,89 +189,127 @@ export const SearchBar: React.FC<SearchBarProps> = ({
     }
   }, [debouncedSearch])
 
+  // 處理表單提交邏輯
+  const handleFormSubmit = (
+    values: FormikValues,
+    formikHelpers?: FormikHelpers<FormikValues>
+  ) => {
+    const path = toPath({
+      page: 'search',
+      q: (values.q as string).slice(0, MAX_SEARCH_KEY_LENGTH),
+      type,
+    })
+
+    if ((values.q as string).length <= 0) return
+
+    searchTextInput.current?.blur()
+
+    if (isInSearch) {
+      router.replace(path.href)
+    } else {
+      router.push(path.href)
+    }
+
+    closeDropdown()
+  }
+
+  // 處理搜索快速結果組件
+  const renderSearchQuickResult = (inPage = false) => (
+    <SearchQuickResult
+      searchKey={debouncedSearch}
+      onUpdateData={(newData: QuickResultQuery | undefined) => {
+        setData(newData)
+      }}
+      closeDropdown={() => {
+        closeDropdown()
+        // clear input
+        if (setValues) {
+          setValues({ q: '' })
+        }
+        setSearch('')
+      }}
+      activeItem={activeItem}
+      inPage={inPage}
+      itemHorizontalSpacing={inPage ? 0 : undefined}
+      setShowSearchQuickResult={setShowSearchQuickResult}
+    />
+  )
+
+  // 渲染表單內容
+  let setValues: ((values: FormikValues) => void) | undefined
+
+  const renderForm = (
+    formProps: {
+      values: FormikValues
+      handleSubmit: (e?: React.FormEvent<HTMLFormElement>) => void
+      handleChange: (e: React.ChangeEvent<any>) => void
+      setValues: (values: FormikValues) => void
+    },
+    ref?: React.Ref<HTMLFormElement>
+  ) => {
+    const { values, handleSubmit, handleChange } = formProps
+    setValues = formProps.setValues
+
+    return (
+      <form
+        className={styles.form}
+        onSubmit={handleSubmit}
+        aria-label={textPlaceholder}
+        role={!hasDropdown ? 'search' : undefined}
+        autoComplete="off"
+        action=""
+        ref={ref}
+      >
+        <input
+          style={{ borderColor: 'var(--color-grey-lighter)' }}
+          type="search"
+          name="q"
+          ref={searchTextInput}
+          aria-label={textAriaLabel}
+          placeholder={textPlaceholder}
+          autoCorrect="off"
+          onChange={(e) => {
+            handleChange(e)
+            setSearch(e.target.value)
+            if (hasDropdown) {
+              resetActiveItem()
+              openDropdown()
+            }
+          }}
+          onFocus={hasDropdown ? openDropdown : undefined}
+          onClick={hasDropdown ? openDropdown : undefined}
+          value={values.q as string}
+          maxLength={MAX_SEARCH_KEY_LENGTH}
+        />
+
+        <SearchButton />
+
+        {search.length > 0 && (
+          <ClearButton
+            onClick={() => {
+              formProps.setValues({ q: '' })
+              setSearch('')
+            }}
+          />
+        )}
+      </form>
+    )
+  }
+
   return (
     <DynamicFormik
       initialValues={{ q }}
       enableReinitialize
-      onSubmit={(values) => {
-        const path = toPath({
-          page: 'search',
-          q: values.q.slice(0, MAX_SEARCH_KEY_LENGTH),
-          type,
-        })
-
-        if (values.q.length <= 0) return
-
-        searchTextInput.current?.blur()
-
-        if (isInSearch) {
-          router.replace(path.href)
-        } else {
-          router.push(path.href)
-        }
-
-        closeDropdown()
-      }}
+      onSubmit={handleFormSubmit}
     >
-      {({ values, setValues, handleSubmit, handleChange }) => {
+      {(formProps) => {
         if (!hasDropdown) {
           return (
             <>
-              <form
-                className={styles.form}
-                onSubmit={handleSubmit}
-                aria-label={textPlaceholder}
-                role="search"
-                autoComplete="off"
-                action=""
-              >
-                <input
-                  // FIMXME: FOUC on re-render
-                  style={{ borderColor: 'var(--color-grey-lighter)' }}
-                  type="search"
-                  name="q"
-                  ref={searchTextInput}
-                  aria-label={textAriaLabel}
-                  placeholder={textPlaceholder}
-                  autoCorrect="off"
-                  onChange={(e) => {
-                    handleChange(e)
-                    setSearch(e.target.value)
-                  }}
-                  value={values.q}
-                  maxLength={MAX_SEARCH_KEY_LENGTH}
-                />
-
-                <SearchButton />
-
-                {search.length > 0 && (
-                  <ClearButton
-                    onClick={() => {
-                      setValues({ q: '' })
-                      setSearch('')
-                    }}
-                  />
-                )}
-              </form>
+              {renderForm(formProps)}
               {!q && (
                 <section className={styles.searchQuickResult}>
-                  <SearchQuickResult
-                    searchKey={debouncedSearch}
-                    onUpdateData={(newData: QuickResultQuery | undefined) => {
-                      setData(newData)
-                    }}
-                    closeDropdown={() => {
-                      closeDropdown()
-
-                      // clear input
-                      setValues({ q: '' })
-                      setSearch('')
-                    }}
-                    activeItem={activeItem}
-                    inPage={true}
-                    itemHorizontalSpacing={0}
-                    setShowSearchQuickResult={setShowSearchQuickResult}
-                  />
+                  {renderSearchQuickResult(true)}
                 </section>
               )}
             </>
@@ -280,70 +319,14 @@ export const SearchBar: React.FC<SearchBarProps> = ({
         return (
           <Dropdown
             focusLock={false}
-            content={
-              debouncedSearch && (
-                <SearchQuickResult
-                  searchKey={debouncedSearch}
-                  onUpdateData={(newData: QuickResultQuery | undefined) => {
-                    setData(newData)
-                  }}
-                  closeDropdown={() => {
-                    closeDropdown()
-
-                    // clear input
-                    setValues({ q: '' })
-                    setSearch('')
-                  }}
-                  activeItem={activeItem}
-                />
-              )
-            }
+            content={debouncedSearch && renderSearchQuickResult()}
             trigger={undefined}
             placement="bottom-start"
             onClickOutside={closeDropdown}
             visible={showDropdown}
             zIndex={Z_INDEX.OVER_STICKY_TABS}
           >
-            {({ ref }) => (
-              <form
-                className={styles.form}
-                onSubmit={handleSubmit}
-                autoComplete="off"
-                action=""
-                ref={ref}
-              >
-                <input
-                  // FIMXME: FOUC on re-render
-                  style={{ borderColor: 'var(--color-grey-lighter)' }}
-                  type="search"
-                  name="q"
-                  ref={searchTextInput}
-                  aria-label={textAriaLabel}
-                  placeholder={textPlaceholder}
-                  value={values.q}
-                  onChange={(e) => {
-                    handleChange(e)
-                    setSearch(e.target.value)
-                    resetActiveItem()
-                    openDropdown()
-                  }}
-                  onFocus={openDropdown}
-                  onClick={openDropdown}
-                  maxLength={MAX_SEARCH_KEY_LENGTH}
-                />
-
-                <SearchButton />
-
-                {search.length > 0 && (
-                  <ClearButton
-                    onClick={() => {
-                      setValues({ q: '' })
-                      setSearch('')
-                    }}
-                  />
-                )}
-              </form>
-            )}
+            {({ ref }) => renderForm(formProps, ref)}
           </Dropdown>
         )
       }}
