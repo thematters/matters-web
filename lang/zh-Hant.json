@@ -609,9 +609,6 @@
   "8MeJ4b": {
     "defaultMessage": "光輪號"
   },
-  "8PL7mC": {
-    "defaultMessage": "新文章"
-  },
   "8UWUW8": {
     "defaultMessage": "關聯作品",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
@@ -2454,6 +2451,9 @@
   "gluNT8": {
     "defaultMessage": "輸入連結地址"
   },
+  "gvTltk": {
+    "defaultMessage": "草稿 - {title}"
+  },
   "gzJEFb": {
     "defaultMessage": "跳轉到 like.co 驗證已有 Liker ID"
   },
@@ -2935,6 +2935,9 @@
   "qYzBk8": {
     "defaultMessage": "退訂了你的圍爐",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qcAuPU": {
+    "defaultMessage": "草稿 - 未命名"
   },
   "qfi4cg": {
     "defaultMessage": "圖片上傳失敗"
