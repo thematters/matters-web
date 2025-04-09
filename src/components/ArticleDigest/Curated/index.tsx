@@ -18,12 +18,14 @@ import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestCuratedArticleFragment, AssetType } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
+import FooterActions from './FooterActions'
 import styles from './styles.module.css'
-
 export type ArticleDigestCuratedProps = {
   article: ArticleDigestCuratedArticleFragment
 
   titleLineClamp?: 2 | 3
+
+  channelId?: string
   pinned?: boolean
 
   onClick?: () => any
@@ -50,9 +52,11 @@ const fragments = {
         ...UserDigestMiniUser
       }
       ...ArticleDigestTitleArticle
+      ...CuratedFooterActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
+    ${FooterActions.fragments.article}
   `,
 }
 
@@ -60,7 +64,7 @@ export const ArticleDigestCurated = ({
   article,
   pinned,
   titleLineClamp,
-
+  channelId,
   onClick,
   onClickAuthor,
 
@@ -141,6 +145,13 @@ export const ArticleDigestCurated = ({
           lineClamp={titleLineClamp}
         />
       </section>
+
+      <FooterActions
+        article={article}
+        channelId={channelId}
+        pinned={pinned}
+        hasTogglePinChannelArticles
+      />
     </Card>
   )
 }
