@@ -34,6 +34,11 @@ const fragments = {
       slug
       shortHash
       cover
+      assets {
+        id
+        type
+        path
+      }
       author {
         id
         userName
@@ -57,7 +62,9 @@ export const ArticleDigestCurated = ({
   ...cardProps
 }: ArticleDigestCuratedProps) => {
   const isBanned = article.articleState === 'banned'
-  const cover = !isBanned ? article.cover : null
+  const assets = article.assets || []
+  const embed = assets.find((asset) => asset.type === 'embed')
+  const cover = !isBanned ? article.cover || embed?.path : null
   const path = toPath({
     page: 'articleDetail',
     article,

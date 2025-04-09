@@ -63,7 +63,9 @@ const BaseArticleDigestFeed = ({
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const isArchived = article.articleState === 'archived'
-  const cover = !isBanned && !isArchived ? article.cover : null
+  const assets = article.assets || []
+  const embed = assets.find((asset) => asset.type === 'embed')
+  const cover = !isBanned && !isArchived ? (article.cover || embed?.path) : null
   const cleanedSummary =
     isBanned && !isArchived ? '' : makeSummary(summary, MAX_FEED_SUMMARY_LENGTH)
 

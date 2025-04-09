@@ -15,6 +15,11 @@ export const fragments = {
         shortHash
         articleState: state
         cover
+        assets {
+          id
+          type
+          path
+        }
         summary
         author {
           id
