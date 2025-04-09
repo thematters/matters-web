@@ -23,7 +23,7 @@ export const updateUserCollectionDetail = ({
 }) => {
   // FIXME: circular dependencies
   const {
-    COLLECTION_ARTICLES,
+    COLLECTION_ARTICLES_PUBLIC,
   } = require('~/views/User/CollectionDetail/CollectionArticles/gql')
 
   if (!collectionId) {
@@ -32,7 +32,7 @@ export const updateUserCollectionDetail = ({
 
   try {
     const data = cache.readQuery<CollectionArticlesPublicQuery>({
-      query: COLLECTION_ARTICLES,
+      query: COLLECTION_ARTICLES_PUBLIC,
       variables: {
         id: collectionId,
         first: MAX_COLLECTION_ARTICLES_COUNT,
@@ -57,7 +57,7 @@ export const updateUserCollectionDetail = ({
         const newEdges = [...addEdges, ...edges]
 
         cache.writeQuery({
-          query: COLLECTION_ARTICLES,
+          query: COLLECTION_ARTICLES_PUBLIC,
           variables: {
             id: collectionId,
             first: MAX_COLLECTION_ARTICLES_COUNT,
@@ -84,7 +84,7 @@ export const updateUserCollectionDetail = ({
         const filteredEdges = edges.filter(({ node }) => node.id !== articleId)
 
         cache.writeQuery({
-          query: COLLECTION_ARTICLES,
+          query: COLLECTION_ARTICLES_PUBLIC,
           variables: {
             id: collectionId,
             first: MAX_COLLECTION_ARTICLES_COUNT,
@@ -128,7 +128,7 @@ export const updateUserCollectionDetail = ({
             : [...remainingEdges, targetEdge]
 
         cache.writeQuery({
-          query: COLLECTION_ARTICLES,
+          query: COLLECTION_ARTICLES_PUBLIC,
           variables: {
             id: collectionId,
             first: MAX_COLLECTION_ARTICLES_COUNT,
