@@ -11,7 +11,7 @@ import {
   ResponsiveImage,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import { ArticleDigestCuratedArticleFragment } from '~/gql/graphql'
+import { ArticleDigestCuratedArticleFragment, AssetType } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
 import styles from './styles.module.css'
@@ -63,7 +63,7 @@ export const ArticleDigestCurated = ({
 }: ArticleDigestCuratedProps) => {
   const isBanned = article.articleState === 'banned'
   const assets = article.assets || []
-  const embed = assets.find((asset) => asset.type === 'embed')
+  const embed = assets.find((asset) => asset.type === AssetType.Embed)
   const cover = !isBanned ? article.cover || embed?.path : null
   const path = toPath({
     page: 'articleDetail',

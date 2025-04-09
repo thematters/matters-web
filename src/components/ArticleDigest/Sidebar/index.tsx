@@ -5,7 +5,7 @@ import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, CardProps, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import { ArticleDigestSidebarArticleFragment } from '~/gql/graphql'
+import { ArticleDigestSidebarArticleFragment, AssetType } from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
 import styles from './styles.module.css'
@@ -60,7 +60,7 @@ export const ArticleDigestSidebar = ({
   const { articleState: state } = article
   const isBanned = state === 'banned'
   const assets = article.assets || []
-  const embed = assets.find((asset) => asset.type === 'embed')
+  const embed = assets.find((asset) => asset.type === AssetType.Embed)
   const cover = !isBanned && hasCover ? article.cover || embed?.path : null
   const containerClasses = classNames({
     [styles.container]: true,

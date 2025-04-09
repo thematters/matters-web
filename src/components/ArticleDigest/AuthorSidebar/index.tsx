@@ -8,7 +8,10 @@ import {
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import { ArticleDigestAuthorSidebarArticleFragment } from '~/gql/graphql'
+import {
+  ArticleDigestAuthorSidebarArticleFragment,
+  AssetType,
+} from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
 import Placeholder from './Placeholder'
@@ -64,7 +67,7 @@ export const ArticleDigestAuthorSidebar = ({
   const { articleState: state, author } = article
   const isBanned = state === 'banned'
   const assets = article.assets || []
-  const embed = assets.find((asset) => asset.type === 'embed')
+  const embed = assets.find((asset) => asset.type === AssetType.Embed)
   const cover = !isBanned ? article.cover || embed?.path : null
   const containerClasses = classNames({
     [styles.container]: true,
