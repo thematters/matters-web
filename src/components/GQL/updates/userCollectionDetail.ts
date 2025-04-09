@@ -1,6 +1,7 @@
 import { FetchResult } from '@apollo/client'
 import { ApolloCache } from '@apollo/client/cache'
 
+import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import {
   AddArticlesCollectionMutation,
   CollectionDetailQuery,
@@ -31,7 +32,7 @@ export const updateUserCollectionDetail = ({
   try {
     const data = cache.readQuery<CollectionDetailQuery>({
       query: COLLECTION_DETAIL,
-      variables: { id: collectionId },
+      variables: { id: collectionId, first: MAX_COLLECTION_ARTICLES_COUNT },
     })
 
     if (data?.node?.__typename !== 'Collection') {
@@ -52,7 +53,7 @@ export const updateUserCollectionDetail = ({
 
         cache.writeQuery({
           query: COLLECTION_DETAIL,
-          variables: { id: collectionId },
+          variables: { id: collectionId, first: MAX_COLLECTION_ARTICLES_COUNT },
           data: {
             ...data,
             node: {
@@ -75,7 +76,7 @@ export const updateUserCollectionDetail = ({
 
         cache.writeQuery({
           query: COLLECTION_DETAIL,
-          variables: { id: collectionId },
+          variables: { id: collectionId, first: MAX_COLLECTION_ARTICLES_COUNT },
           data: {
             ...data,
             node: {
@@ -115,7 +116,7 @@ export const updateUserCollectionDetail = ({
 
         cache.writeQuery({
           query: COLLECTION_DETAIL,
-          variables: { id: collectionId },
+          variables: { id: collectionId, first: MAX_COLLECTION_ARTICLES_COUNT },
           data: {
             ...data,
             node: {

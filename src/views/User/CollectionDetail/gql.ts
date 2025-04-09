@@ -21,7 +21,7 @@ const fragments = {
 }
 
 export const COLLECTION_DETAIL = gql`
-  query CollectionDetail($id: ID!) {
+  query CollectionDetail($id: ID!, $first: first_Int_min_0!) {
     node(input: { id: $id }) {
       id
       ... on Collection {

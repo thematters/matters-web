@@ -32,6 +32,7 @@ const REORDER_COLLECTION_ARTICLES = gql`
     $collectionId: ID!
     $articleId: ID!
     $newPosition: Int!
+    $first: first_Int_min_0!
   ) {
     reorderCollectionArticles(
       input: {
@@ -40,7 +41,7 @@ const REORDER_COLLECTION_ARTICLES = gql`
       }
     ) {
       id
-      articles(input: { first: 200 }) {
+      articles(input: { first: $first }) {
         edges {
           cursor
           node {
@@ -189,6 +190,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
                   collectionId,
                   articleId,
                   newPosition: newIndex,
+                  first: MAX_COLLECTION_ARTICLES_COUNT,
                 },
               })
             }}

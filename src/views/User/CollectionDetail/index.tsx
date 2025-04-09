@@ -1,6 +1,9 @@
 import { useQuery } from '@apollo/client'
 
-import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
+import {
+  MAX_COLLECTION_ARTICLES_COUNT,
+  MAX_META_SUMMARY_LENGTH,
+} from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
 import { Head, Layout } from '~/components'
 import { QueryError, Throw404, useRoute } from '~/components'
@@ -23,7 +26,7 @@ const BaseCollectionDetail = () => {
   const { data, loading, error } = useQuery<CollectionDetailQuery>(
     COLLECTION_DETAIL,
     {
-      variables: { id: collectionId },
+      variables: { id: collectionId, first: MAX_COLLECTION_ARTICLES_COUNT },
     }
   )
   const collection = data?.node!
