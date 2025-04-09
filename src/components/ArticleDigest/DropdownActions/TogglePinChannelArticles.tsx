@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
 import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
@@ -49,11 +48,7 @@ const TogglePinChannelArticles = ({
         await update()
 
         toast.success({
-          message: pinned ? (
-            <FormattedMessage defaultMessage="已取消置頂" id="U/4Njq" />
-          ) : (
-            <FormattedMessage defaultMessage="已置頂" id="+5q6f0" />
-          ),
+          message: pinned ? '已取消置頂' : '已置頂',
         })
       }}
     />
