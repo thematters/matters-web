@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 
 import CollectionProfile from './CollectionProfile'
 
-export const COLLECTION_DETAIL = gql`
-  query CollectionDetail($id: ID!) {
+export const COLLECTION_DETAIL_PUBLIC = gql`
+  query CollectionDetailPublic($id: ID!) {
     node(input: { id: $id }) {
       id
       ... on Collection {
@@ -13,9 +13,22 @@ export const COLLECTION_DETAIL = gql`
           displayName
           userName
         }
-        ...CollectionProfileCollection
+        ...CollectionProfileCollectionPublic
+        ...CollectionProfileCollectionPrivate
       }
     }
   }
-  ${CollectionProfile.fragments.collection}
+  ${CollectionProfile.fragments.collection.public}
+  ${CollectionProfile.fragments.collection.private}
+`
+
+export const COLLECTION_DETAIL_PRIVATE = gql`
+  query CollectionDetailPrivate($id: ID!) {
+    node(input: { id: $id }) {
+      ... on Collection {
+        ...CollectionProfileCollectionPrivate
+      }
+    }
+  }
+  ${CollectionProfile.fragments.collection.private}
 `

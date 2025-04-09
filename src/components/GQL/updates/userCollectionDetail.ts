@@ -4,7 +4,7 @@ import { ApolloCache } from '@apollo/client/cache'
 import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import {
   AddArticlesCollectionMutation,
-  CollectionArticlesQuery,
+  CollectionArticlesPublicQuery,
 } from '~/gql/graphql'
 
 export const updateUserCollectionDetail = ({
@@ -31,7 +31,7 @@ export const updateUserCollectionDetail = ({
   }
 
   try {
-    const data = cache.readQuery<CollectionArticlesQuery>({
+    const data = cache.readQuery<CollectionArticlesPublicQuery>({
       query: COLLECTION_ARTICLES,
       variables: {
         id: collectionId,

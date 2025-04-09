@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/client'
+import _chunk from 'lodash/chunk'
 import dynamic from 'next/dynamic'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
@@ -27,12 +27,13 @@ import {
   SpinnerBlock,
   TextIcon,
   Throw404,
+  usePublicQuery,
   useRoute,
   ViewerContext,
 } from '~/components'
-import { ArticleState, CollectionArticlesQuery } from '~/gql/graphql'
+import { ArticleState, CollectionArticlesPublicQuery } from '~/gql/graphql'
 
-import { COLLECTION_ARTICLES } from './gql'
+import { COLLECTION_ARTICLES_PRIVATE, COLLECTION_ARTICLES_PUBLIC } from './gql'
 import CollectionArticlesPlaceholder from './Placeholder'
 import styles from './styles.module.css'
 
@@ -90,24 +91,56 @@ const CollectionArticles = () => {
   /**
    * Data Fetching
    */
-  const { data, loading, error, fetchMore } = useQuery<CollectionArticlesQuery>(
-    COLLECTION_ARTICLES,
-    {
+  const { data, loading, error, fetchMore, client } =
+    usePublicQuery<CollectionArticlesPublicQuery>(COLLECTION_ARTICLES_PUBLIC, {
       variables: {
         id: collectionId,
         first: isViewer ? MAX_COLLECTION_ARTICLES_COUNT : 20,
         reversed: isSequenceDsc,
       },
-    }
-  )
-  const collection = data?.node as CollectionArticlesQuery['node'] & {
+    })
+  const collection = data?.node as CollectionArticlesPublicQuery['node'] & {
     __typename: 'Collection'
   }
-  const pageInfo =
-    collection && 'articleList' in collection
-      ? collection.articleList.pageInfo
-      : null
+  const { articleList, updatedAt } = collection || {}
+  const pageInfo = articleList?.pageInfo
   const connectionPath = 'node.articleList'
+
+  // filter out inactive articles for local updating
+  // at ArchiveArticle/Dialog.tsx
+  const articleEdges = articleList?.edges?.filter(
+    ({ node }) => node.articleState === ArticleState.Active
+  )
+
+  // private data
+  const loadPrivate = (publicData?: CollectionArticlesPublicQuery) => {
+    if (!viewer.isAuthed || !publicData) {
+      return
+    }
+
+    const collection =
+      publicData?.node as CollectionArticlesPublicQuery['node'] & {
+        __typename: 'Collection'
+      }
+    const publiceEdges = collection.articleList.edges || []
+    const publicIds = publiceEdges.map(({ node }) => node.id)
+
+    // Chunk IDs into batches since API limit is 100
+    const chunks = _chunk(publicIds, 99)
+
+    chunks.forEach((ids) => {
+      client.query({
+        query: COLLECTION_ARTICLES_PRIVATE,
+        fetchPolicy: 'network-only',
+        variables: { ids },
+      })
+    })
+  }
+
+  // fetch private data for first page
+  useEffect(() => {
+    loadPrivate(data)
+  }, [!!articleEdges, viewer.id])
 
   /**
    * Render
@@ -124,14 +157,6 @@ const CollectionArticles = () => {
     return <Throw404 />
   }
 
-  const { articleList: articles, updatedAt } = collection
-
-  // filter out inactive articles for local updating
-  // at ArchiveArticle/Dialog.tsx
-  let articleEdges = articles.edges?.filter(
-    ({ node }) => node.articleState === ArticleState.Active
-  )
-
   // load next page
   const loadMore = async () => {
     if (loading) {
@@ -143,7 +168,7 @@ const CollectionArticles = () => {
       location: articleEdges?.length || 0,
     })
 
-    await fetchMore({
+    const { data: newData } = await fetchMore({
       variables: {
         after: pageInfo?.endCursor,
       },
@@ -155,6 +180,8 @@ const CollectionArticles = () => {
           dedupe: true,
         }),
     })
+
+    loadPrivate(newData)
   }
 
   if (isViewer) {
@@ -169,9 +196,7 @@ const CollectionArticles = () => {
             <FormattedMessage
               defaultMessage="{articleCount} articles"
               id="RnKPVm"
-              values={{
-                articleCount: articles.totalCount,
-              }}
+              values={{ articleCount: articleList.totalCount }}
             />
           </section>
           <TextIcon
@@ -228,28 +253,27 @@ const CollectionArticles = () => {
           eof
         >
           <List>
-            {articleEdges &&
-              articleEdges.map(({ node }, i) => (
-                <List.Item key={node.id}>
-                  <ArticleDigestFeed
-                    article={node}
-                    collectionId={collection.id}
-                    hasHeader={false}
-                    hasEdit={true}
-                    hasCircle={false}
-                    hasSetTopCollection={true}
-                    hasSetBottomCollection={true}
-                    onClick={() =>
-                      analytics.trackEvent('click_feed', {
-                        type: 'collection_article',
-                        contentType: 'article',
-                        location: i,
-                        id: node.id,
-                      })
-                    }
-                  />
-                </List.Item>
-              ))}
+            {articleEdges?.map(({ node }, i) => (
+              <List.Item key={node.id}>
+                <ArticleDigestFeed
+                  article={node}
+                  collectionId={collection.id}
+                  hasHeader={false}
+                  hasEdit={true}
+                  hasCircle={false}
+                  hasSetTopCollection={true}
+                  hasSetBottomCollection={true}
+                  onClick={() =>
+                    analytics.trackEvent('click_feed', {
+                      type: 'collection_article',
+                      contentType: 'article',
+                      location: i,
+                      id: node.id,
+                    })
+                  }
+                />
+              </List.Item>
+            ))}
           </List>
         </InfiniteScroll>
       </Layout.Main.Spacing>

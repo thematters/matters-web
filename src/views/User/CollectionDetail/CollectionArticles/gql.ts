@@ -34,8 +34,8 @@ export const fragments = {
   `,
 }
 
-export const COLLECTION_ARTICLES = gql`
-  query CollectionArticles(
+export const COLLECTION_ARTICLES_PUBLIC = gql`
+  query CollectionArticlesPublic(
     $id: ID!
     $first: first_Int_min_0!
     $after: String
@@ -48,4 +48,16 @@ export const COLLECTION_ARTICLES = gql`
     }
   }
   ${fragments.collection}
+`
+
+export const COLLECTION_ARTICLES_PRIVATE = gql`
+  query CollectionArticlesPrivate($ids: [ID!]!) {
+    nodes(input: { ids: $ids }) {
+      id
+      ... on Article {
+        ...ArticleDigestFeedArticlePrivate
+      }
+    }
+  }
+  ${ArticleDigestFeed.fragments.article.private}
 `
