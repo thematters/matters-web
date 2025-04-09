@@ -104,6 +104,7 @@ export interface ClickButtonProp {
     | 'icymi'
     | 'newest'
     | 'channel'
+    | 'channel_pinned'
     | 'campaign_detail_link'
     | `campaign_detail_tab_${string}`
     | `user_profile_tab_${string}`
@@ -188,6 +189,7 @@ interface ClickFeedProp {
   id?: string
   rootId?: string
   searchKey?: string
+  shortHash?: string
 }
 
 /**
@@ -297,6 +299,8 @@ type ArticleFeedType =
   | 'icymi'
   | 'icymi_curated'
   | 'newest'
+  | 'channel'
+  | 'channel_pinned'
   | 'read_history'
   | 'related_article'
   | 'search'

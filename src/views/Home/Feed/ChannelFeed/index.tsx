@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestCurated,
   EmptyWork,
@@ -52,16 +53,49 @@ const ChannelFeed = () => {
     keyPrefix: `channel:${shortHash}`,
   })
 
-  const renderCards = (cardEdges: any[], numOfCards: number) => {
+  const renderCards = (
+    cardEdges: any[],
+    numOfCards: number,
+    shortHash?: string
+  ) => {
+    const onClick = (
+      contentType: 'article' | 'user',
+      location: number,
+      id: string,
+      shortHash?: string
+    ) => {
+      analytics.trackEvent('click_feed', {
+        type: 'channel_pinned',
+        contentType,
+        location,
+        id,
+        shortHash,
+      })
+    }
+
     return (
       <section className={feedStyles.cards}>
         {cardEdges.slice(0, numOfCards).map((edge, i) => (
           <React.Fragment key={edge.node.id}>
             <Media at="xs">
-              <ArticleDigestCurated article={edge.node} titleLineClamp={3} />
+              <ArticleDigestCurated
+                article={edge.node}
+                titleLineClamp={3}
+                onClick={() => onClick('article', i, edge.node.id, shortHash)}
+                onClickAuthor={() =>
+                  onClick('user', i, edge.node.author.id, shortHash)
+                }
+              />
             </Media>
             <Media greaterThan="xs">
-              <ArticleDigestCurated article={edge.node} titleLineClamp={2} />
+              <ArticleDigestCurated
+                article={edge.node}
+                titleLineClamp={2}
+                onClick={() => onClick('article', i, edge.node.id, shortHash)}
+                onClickAuthor={() =>
+                  onClick('user', i, edge.node.author.id, shortHash)
+                }
+              />
             </Media>
           </React.Fragment>
         ))}
@@ -102,6 +136,7 @@ const ChannelFeed = () => {
       renderCards={renderCards}
       emptyCustomOption={emptyCustomOption}
       numOfCards={numOfCards}
+      shortHash={shortHash}
     />
   )
 }

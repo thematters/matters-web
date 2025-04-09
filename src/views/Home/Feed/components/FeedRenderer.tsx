@@ -22,10 +22,11 @@ interface FeedRendererProps {
   loadMore: () => Promise<any>
   feedType: FeedType
   renderHeader?: () => React.ReactNode
-  renderCards?: (edges: any[], numOfCards: number) => React.ReactNode
+  renderCards?: (edges: any[], numOfCards: number, shortHash?: string) => React.ReactNode
   emptyCustomOption?: React.ReactNode
   itemCustomProps?: Record<string, any>
   numOfCards?: number
+  shortHash?: string
 }
 
 const FeedRenderer: React.FC<FeedRendererProps> = ({
@@ -40,6 +41,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
   emptyCustomOption,
   itemCustomProps = {},
   numOfCards = 0,
+  shortHash,
 }) => {
   const intl = useIntl()
 
@@ -90,7 +92,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
   return (
     <>
       {renderHeader && renderHeader()}
-      {renderCards && renderCards(edges, numOfCards)}
+      {renderCards && renderCards(edges, numOfCards, shortHash)}
 
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
@@ -120,6 +122,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
                       contentType: 'article',
                       location: i,
                       id: edge.node.id,
+                      shortHash,
                     })
                   }
                   onClickAuthor={() => {
@@ -128,6 +131,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
                       contentType: 'user',
                       location: i,
                       id: edge.node.author.id,
+                      shortHash,
                     })
                   }}
                   isFirstFold={isFirstFold}
