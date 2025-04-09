@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
 import IMAGE_DEFAULT_CURATED from '@/public/static/images/default-curated.svg'
@@ -11,6 +12,7 @@ import {
   LinkWrapper,
   Media,
   ResponsiveImage,
+  Tooltip,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestCuratedArticleFragment } from '~/gql/graphql'
@@ -64,6 +66,7 @@ export const ArticleDigestCurated = ({
 
   ...cardProps
 }: ArticleDigestCuratedProps) => {
+  const intl = useIntl()
   const isBanned = article.articleState === 'banned'
   const assets = article.assets || []
   const embed = assets.find((asset) => asset.type === 'embed')
@@ -103,9 +106,18 @@ export const ArticleDigestCurated = ({
           </Media>
         </LinkWrapper>
         {pinned && (
-          <div className={styles.pinned}>
-            <Icon icon={IconStar} size={20} color="white" />
-          </div>
+          <Tooltip
+            content={intl.formatMessage({
+              id: 'xEJN39',
+              defaultMessage: 'Featured',
+              description: 'Channel feed featured article',
+            })}
+            placement="bottom"
+          >
+            <div className={styles.pinned}>
+              <Icon icon={IconStar} size={20} color="white" />
+            </div>
+          </Tooltip>
         )}
       </section>
 
