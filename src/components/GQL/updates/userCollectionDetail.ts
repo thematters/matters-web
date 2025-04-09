@@ -18,17 +18,13 @@ export const updateUserCollectionDetail = ({
   collectionId: string
   result?: FetchResult<AddArticlesCollectionMutation>
   articleId?: string
-
   type: 'add' | 'delete' | 'setTop' | 'setBottom'
 }) => {
-  // FIXME: circular dependencies
   const {
     COLLECTION_ARTICLES_PUBLIC,
   } = require('~/views/User/CollectionDetail/CollectionArticles/gql')
 
-  if (!collectionId) {
-    return
-  }
+  if (!collectionId) return
 
   try {
     const data = cache.readQuery<CollectionArticlesPublicQuery>({
@@ -40,112 +36,82 @@ export const updateUserCollectionDetail = ({
       },
     })
 
-    if (data?.node?.__typename !== 'Collection') {
+    if (
+      data?.node?.__typename !== 'Collection' ||
+      !data?.node?.articleList.edges
+    ) {
       return
     }
 
-    if (!data?.node?.articleList.edges) {
-      return
+    const edges = data.node.articleList.edges
+    const baseArticleList = {
+      ...data.node.articleList,
     }
 
-    let edges = data.node.articleList.edges
+    let updatedArticleList = null
 
     switch (type) {
-      case 'add':
+      case 'add': {
         const addEdges =
           result?.data?.addCollectionsArticles[0].articles.edges || []
         const newEdges = [...addEdges, ...edges]
+        const totalCount = data.node.articleList.totalCount + addEdges.length
 
-        cache.writeQuery({
-          query: COLLECTION_ARTICLES_PUBLIC,
-          variables: {
-            id: collectionId,
-            first: MAX_COLLECTION_ARTICLES_COUNT,
-            reversed: true,
-          },
-          data: {
-            ...data,
-            node: {
-              ...data.node,
-              articleList: {
-                ...data.node.articleList,
-                edges: newEdges,
-                totalCount: data.node.articleList.totalCount + addEdges.length,
-              },
-              articles: {
-                ...data.node.articles,
-                totalCount: data.node.articles.totalCount + addEdges.length,
-              },
-            },
-          },
-        })
-        return
-      case 'delete':
-        const filteredEdges = edges.filter(({ node }) => node.id !== articleId)
-
-        cache.writeQuery({
-          query: COLLECTION_ARTICLES_PUBLIC,
-          variables: {
-            id: collectionId,
-            first: MAX_COLLECTION_ARTICLES_COUNT,
-            reversed: true,
-          },
-          data: {
-            ...data,
-            node: {
-              ...data.node,
-              articleList: {
-                ...data.node.articleList,
-                edges: filteredEdges,
-                totalCount: data.node.articleList.totalCount - 1,
-              },
-              articles: {
-                ...data.node.articles,
-                totalCount: data.node.articles.totalCount - 1,
-              },
-            },
-          },
-        })
-        return
-      case 'setTop':
-      case 'setBottom':
-        let targetEdge: (typeof edges)[0] | undefined = undefined
-        const remainingEdges = edges.filter((edge) => {
-          const node = edge.node
-          if (node.id === articleId) {
-            targetEdge = edge
-          }
-          return node.id !== articleId
-        })
-
-        if (!targetEdge) {
-          return
+        updatedArticleList = {
+          ...baseArticleList,
+          edges: newEdges,
+          totalCount,
         }
+        break
+      }
 
+      case 'delete': {
+        const filteredEdges = edges.filter(({ node }) => node.id !== articleId)
+        const totalCount = data.node.articleList.totalCount - 1
+
+        updatedArticleList = {
+          ...baseArticleList,
+          edges: filteredEdges,
+          totalCount,
+        }
+        break
+      }
+
+      case 'setTop':
+      case 'setBottom': {
+        const targetEdge = edges.find(({ node }) => node.id === articleId)
+        if (!targetEdge) return
+
+        const remainingEdges = edges.filter(({ node }) => node.id !== articleId)
         const reorderedEdges =
           type === 'setTop'
             ? [targetEdge, ...remainingEdges]
             : [...remainingEdges, targetEdge]
 
-        cache.writeQuery({
-          query: COLLECTION_ARTICLES_PUBLIC,
-          variables: {
-            id: collectionId,
-            first: MAX_COLLECTION_ARTICLES_COUNT,
-            reversed: true,
+        updatedArticleList = {
+          ...baseArticleList,
+          edges: reorderedEdges,
+        }
+        break
+      }
+    }
+
+    if (updatedArticleList) {
+      cache.writeQuery({
+        query: COLLECTION_ARTICLES_PUBLIC,
+        variables: {
+          id: collectionId,
+          first: MAX_COLLECTION_ARTICLES_COUNT,
+          reversed: true,
+        },
+        data: {
+          ...data,
+          node: {
+            ...data.node,
+            articleList: updatedArticleList,
           },
-          data: {
-            ...data,
-            node: {
-              ...data.node,
-              articleList: {
-                ...data.node.articleList,
-                edges: reorderedEdges,
-              },
-            },
-          },
-        })
-        return
+        },
+      })
     }
   } catch (e) {
     console.error(e)
