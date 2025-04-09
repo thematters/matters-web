@@ -34,6 +34,11 @@ const fragments = {
       slug
       shortHash
       cover
+      assets {
+        id
+        type
+        path
+      }
       author {
         id
         userName
@@ -58,7 +63,9 @@ export const ArticleDigestAuthorSidebar = ({
 }: ArticleDigestAuthorSidebarProps) => {
   const { articleState: state, author } = article
   const isBanned = state === 'banned'
-  const cover = !isBanned ? article.cover : null
+  const assets = article.assets || []
+  const embed = assets.find((asset) => asset.type === 'embed')
+  const cover = !isBanned ? article.cover || embed?.path : null
   const containerClasses = classNames({
     [styles.container]: true,
     [styles.hasCover]: showCover && !!cover,
