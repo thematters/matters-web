@@ -11,7 +11,7 @@ import {
   ResponsiveImage,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import { ArticleDigestCuratedArticleFragment } from '~/gql/graphql'
+import { ArticleDigestCuratedArticleFragment, AssetType } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
 import styles from './styles.module.css'
@@ -34,6 +34,11 @@ const fragments = {
       slug
       shortHash
       cover
+      assets {
+        id
+        type
+        path
+      }
       author {
         id
         userName
@@ -57,7 +62,9 @@ export const ArticleDigestCurated = ({
   ...cardProps
 }: ArticleDigestCuratedProps) => {
   const isBanned = article.articleState === 'banned'
-  const cover = !isBanned ? article.cover : null
+  const assets = article.assets || []
+  const embed = assets.find((asset) => asset.type === AssetType.Embed)
+  const cover = !isBanned ? article.cover || embed?.path : null
   const path = toPath({
     page: 'articleDetail',
     article,
