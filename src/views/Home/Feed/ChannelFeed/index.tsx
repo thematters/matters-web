@@ -58,10 +58,18 @@ const ChannelFeed = () => {
         {cardEdges.slice(0, numOfCards).map((edge, i) => (
           <React.Fragment key={edge.node.id}>
             <Media at="xs">
-              <ArticleDigestCurated article={edge.node} titleLineClamp={3} />
+              <ArticleDigestCurated
+                article={edge.node}
+                titleLineClamp={3}
+                pinned={edge.pinned}
+              />
             </Media>
             <Media greaterThan="xs">
-              <ArticleDigestCurated article={edge.node} titleLineClamp={2} />
+              <ArticleDigestCurated
+                article={edge.node}
+                titleLineClamp={2}
+                pinned={edge.pinned}
+              />
             </Media>
           </React.Fragment>
         ))}

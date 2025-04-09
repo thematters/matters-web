@@ -1,11 +1,13 @@
 import gql from 'graphql-tag'
 
+import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
 import IMAGE_DEFAULT_CURATED from '@/public/static/images/default-curated.svg'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
+  Icon,
   LinkWrapper,
   Media,
   ResponsiveImage,
@@ -20,6 +22,7 @@ export type ArticleDigestCuratedProps = {
   article: ArticleDigestCuratedArticleFragment
 
   titleLineClamp?: 2 | 3
+  pinned?: boolean
 
   onClick?: () => any
   onClickAuthor?: () => void
@@ -53,7 +56,7 @@ const fragments = {
 
 export const ArticleDigestCurated = ({
   article,
-
+  pinned,
   titleLineClamp,
 
   onClick,
@@ -99,6 +102,11 @@ export const ArticleDigestCurated = ({
             />
           </Media>
         </LinkWrapper>
+        {pinned && (
+          <div className={styles.pinned}>
+            <Icon icon={IconStar} size={20} color="white" />
+          </div>
+        )}
       </section>
 
       <section className={styles.author}>
