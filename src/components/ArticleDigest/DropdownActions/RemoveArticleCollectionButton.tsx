@@ -5,12 +5,10 @@ import { Icon, Menu } from '~/components'
 
 interface RemoveArticleCollectionButtonProps {
   openDialog: () => void
-  onClick: () => void
 }
 
 const RemoveArticleCollectionButton = ({
   openDialog,
-  onClick,
 }: RemoveArticleCollectionButtonProps) => {
   return (
     <Menu.Item
@@ -18,10 +16,7 @@ const RemoveArticleCollectionButton = ({
         <FormattedMessage defaultMessage="Remove from collection" id="0Om2Kl" />
       }
       icon={<Icon icon={IconDelete} size={20} />}
-      onClick={() => {
-        onClick()
-        openDialog()
-      }}
+      onClick={openDialog}
       ariaHasPopup="dialog"
     />
   )

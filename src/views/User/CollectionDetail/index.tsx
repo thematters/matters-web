@@ -1,17 +1,17 @@
 import { useQuery } from '@apollo/client'
 
+import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
 import {
-  MAX_COLLECTION_ARTICLES_COUNT,
-  MAX_META_SUMMARY_LENGTH,
-} from '~/common/enums'
-import { makeSummary, toPath } from '~/common/utils'
+  // analytics,
+  makeSummary,
+  toPath,
+} from '~/common/utils'
 import { Head, Layout } from '~/components'
 import { QueryError, Throw404, useRoute } from '~/components'
 import { CollectionDetailQuery } from '~/gql/graphql'
 
 import AsideUserProfile from '../UserProfile/AsideUserProfile'
 import CollectionArticles from './CollectionArticles'
-import CollectionArticlesPlaceholder from './CollectionArticles/Placeholder'
 import CollectionProfile from './CollectionProfile'
 import CollectionProfilePlaceholder from './CollectionProfile/Placeholder'
 import { COLLECTION_DETAIL } from './gql'
@@ -25,9 +25,7 @@ const BaseCollectionDetail = () => {
    */
   const { data, loading, error } = useQuery<CollectionDetailQuery>(
     COLLECTION_DETAIL,
-    {
-      variables: { id: collectionId, first: MAX_COLLECTION_ARTICLES_COUNT },
-    }
+    { variables: { id: collectionId } }
   )
   const collection = data?.node!
 
@@ -35,12 +33,7 @@ const BaseCollectionDetail = () => {
    * Render
    */
   if (loading) {
-    return (
-      <>
-        <CollectionProfilePlaceholder />
-        <CollectionArticlesPlaceholder />
-      </>
-    )
+    return <CollectionProfilePlaceholder />
   }
 
   if (error) {
@@ -67,7 +60,7 @@ const BaseCollectionDetail = () => {
       />
 
       <CollectionProfile collection={collection} />
-      <CollectionArticles collection={collection} />
+      <CollectionArticles />
     </>
   )
 }

@@ -4,7 +4,7 @@ import { ApolloCache } from '@apollo/client/cache'
 import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import {
   AddArticlesCollectionMutation,
-  CollectionDetailQuery,
+  CollectionArticlesQuery,
 } from '~/gql/graphql'
 
 export const updateUserCollectionDetail = ({
@@ -12,7 +12,6 @@ export const updateUserCollectionDetail = ({
   collectionId,
   result,
   articleId,
-
   type,
 }: {
   cache: ApolloCache<any>
@@ -23,16 +22,22 @@ export const updateUserCollectionDetail = ({
   type: 'add' | 'delete' | 'setTop' | 'setBottom'
 }) => {
   // FIXME: circular dependencies
-  const { COLLECTION_DETAIL } = require('~/views/User/CollectionDetail/gql')
+  const {
+    COLLECTION_ARTICLES,
+  } = require('~/views/User/CollectionDetail/CollectionArticles/gql')
 
   if (!collectionId) {
     return
   }
 
   try {
-    const data = cache.readQuery<CollectionDetailQuery>({
-      query: COLLECTION_DETAIL,
-      variables: { id: collectionId, first: MAX_COLLECTION_ARTICLES_COUNT },
+    const data = cache.readQuery<CollectionArticlesQuery>({
+      query: COLLECTION_ARTICLES,
+      variables: {
+        id: collectionId,
+        first: MAX_COLLECTION_ARTICLES_COUNT,
+        reversed: true,
+      },
     })
 
     if (data?.node?.__typename !== 'Collection') {
@@ -52,8 +57,12 @@ export const updateUserCollectionDetail = ({
         const newEdges = [...addEdges, ...edges]
 
         cache.writeQuery({
-          query: COLLECTION_DETAIL,
-          variables: { id: collectionId, first: MAX_COLLECTION_ARTICLES_COUNT },
+          query: COLLECTION_ARTICLES,
+          variables: {
+            id: collectionId,
+            first: MAX_COLLECTION_ARTICLES_COUNT,
+            reversed: true,
+          },
           data: {
             ...data,
             node: {
@@ -75,8 +84,12 @@ export const updateUserCollectionDetail = ({
         const filteredEdges = edges.filter(({ node }) => node.id !== articleId)
 
         cache.writeQuery({
-          query: COLLECTION_DETAIL,
-          variables: { id: collectionId, first: MAX_COLLECTION_ARTICLES_COUNT },
+          query: COLLECTION_ARTICLES,
+          variables: {
+            id: collectionId,
+            first: MAX_COLLECTION_ARTICLES_COUNT,
+            reversed: true,
+          },
           data: {
             ...data,
             node: {
@@ -115,8 +128,12 @@ export const updateUserCollectionDetail = ({
             : [...remainingEdges, targetEdge]
 
         cache.writeQuery({
-          query: COLLECTION_DETAIL,
-          variables: { id: collectionId, first: MAX_COLLECTION_ARTICLES_COUNT },
+          query: COLLECTION_ARTICLES,
+          variables: {
+            id: collectionId,
+            first: MAX_COLLECTION_ARTICLES_COUNT,
+            reversed: true,
+          },
           data: {
             ...data,
             node: {

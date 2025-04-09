@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
@@ -5,50 +6,54 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
-import { URL_COLLECTION_DETAIL } from '~/common/enums'
-import { analytics, parseSorter, stringifySorter } from '~/common/utils'
+import {
+  MAX_COLLECTION_ARTICLES_COUNT,
+  URL_COLLECTION_DETAIL,
+} from '~/common/enums'
+import {
+  analytics,
+  mergeConnections,
+  parseSorter,
+  stringifySorter,
+} from '~/common/utils'
 import {
   ArticleDigestFeed,
   DateTime,
   Icon,
+  InfiniteScroll,
   Layout,
   List,
+  QueryError,
   SpinnerBlock,
   TextIcon,
+  Throw404,
   useRoute,
   ViewerContext,
 } from '~/components'
-import EndOfResults from '~/components/Interaction/InfiniteScroll/EndOfResults'
-import {
-  ArticleState,
-  CollectionArticlesCollectionFragment,
-} from '~/gql/graphql'
+import { ArticleState, CollectionArticlesQuery } from '~/gql/graphql'
 
-import { fragments } from './gql'
+import { COLLECTION_ARTICLES } from './gql'
+import CollectionArticlesPlaceholder from './Placeholder'
 import styles from './styles.module.css'
 
 const DynamicViewerArticles = dynamic(() => import('./ViewerArticles'), {
   loading: () => <SpinnerBlock />,
 })
 
-interface CollectionArticlesProps {
-  collection: CollectionArticlesCollectionFragment
-}
-
 type SorterSequenceType = 'asc' | 'dsc'
 
-const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
+const CollectionArticles = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery, router } = useRoute()
   const userName = getQuery('name')
+  const collectionId = getQuery('collectionId')
   const isViewer = viewer.userName === userName
 
+  // Sorting
   let sorter = parseSorter(getQuery(URL_COLLECTION_DETAIL.SORTER_KEY))
-
   let sorterSequence = sorter[
     URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key
   ] as SorterSequenceType
-
   if (
     sorterSequence !== URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.DSC &&
     sorterSequence !== URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.ASC
@@ -56,10 +61,12 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
     sorterSequence = URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value
       .DSC as SorterSequenceType
   }
+
   const [sequence, setSequence] = useState<SorterSequenceType>(sorterSequence)
-  const isSequenceNormal =
+
+  const isSequenceDsc =
     sequence === URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.DSC
-  const isSequenceReverse =
+  const isSequenceAsc =
     sequence === URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value.ASC
 
   const updateSorter = (key: string, value: string) => {
@@ -80,6 +87,43 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
     setSequence(newSequence)
   }
 
+  /**
+   * Data Fetching
+   */
+  const { data, loading, error, fetchMore } = useQuery<CollectionArticlesQuery>(
+    COLLECTION_ARTICLES,
+    {
+      variables: {
+        id: collectionId,
+        first: isViewer ? MAX_COLLECTION_ARTICLES_COUNT : 20,
+        reversed: isSequenceDsc,
+      },
+    }
+  )
+  const collection = data?.node as CollectionArticlesQuery['node'] & {
+    __typename: 'Collection'
+  }
+  const pageInfo =
+    collection && 'articleList' in collection
+      ? collection.articleList.pageInfo
+      : null
+  const connectionPath = 'node.articleList'
+
+  /**
+   * Render
+   */
+  if (loading) {
+    return <CollectionArticlesPlaceholder />
+  }
+
+  if (error) {
+    return <QueryError error={error} />
+  }
+
+  if (!collection || collection.__typename !== 'Collection') {
+    return <Throw404 />
+  }
+
   const { articleList: articles, updatedAt } = collection
 
   // filter out inactive articles for local updating
@@ -88,8 +132,29 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
     ({ node }) => node.articleState === ArticleState.Active
   )
 
-  if (isSequenceReverse) {
-    articleEdges = articleEdges?.reverse()
+  // load next page
+  const loadMore = async () => {
+    if (loading) {
+      return
+    }
+
+    analytics.trackEvent('load_more', {
+      type: isSequenceAsc ? 'collection_detail_asc' : 'collection_detail_dsc',
+      location: articleEdges?.length || 0,
+    })
+
+    await fetchMore({
+      variables: {
+        after: pageInfo?.endCursor,
+      },
+      updateQuery: (previousResult, { fetchMoreResult }) =>
+        mergeConnections({
+          oldData: previousResult,
+          newData: fetchMoreResult,
+          path: connectionPath,
+          dedupe: true,
+        }),
+    })
   }
 
   if (isViewer) {
@@ -129,12 +194,12 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
 
         <button
           onClick={() => {
-            if (isSequenceNormal) {
+            if (isSequenceDsc) {
               changeSequence(
                 URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value
                   .ASC as SorterSequenceType
               )
-            } else if (isSequenceReverse) {
+            } else if (isSequenceAsc) {
               changeSequence(
                 URL_COLLECTION_DETAIL.SORTER_SEQUENCE.value
                   .DSC as SorterSequenceType
@@ -143,12 +208,12 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
           }}
           className={styles.sortButton}
         >
-          {isSequenceNormal && (
+          {isSequenceDsc && (
             <TextIcon icon={<Icon icon={IconDown} size={20} />}>
               <FormattedMessage defaultMessage="Sort" id="25oM9Q" />
             </TextIcon>
           )}
-          {isSequenceReverse && (
+          {isSequenceAsc && (
             <TextIcon icon={<Icon icon={IconUp} size={20} />}>
               <FormattedMessage defaultMessage="Sort" id="25oM9Q" />
             </TextIcon>
@@ -157,36 +222,39 @@ const CollectionArticles = ({ collection }: CollectionArticlesProps) => {
       </section>
 
       <Layout.Main.Spacing hasVertical={false}>
-        <List>
-          {articleEdges &&
-            articleEdges.map(({ node }, i) => (
-              <List.Item key={node.id}>
-                <ArticleDigestFeed
-                  article={node}
-                  collectionId={collection.id}
-                  hasHeader={false}
-                  hasEdit={true}
-                  hasCircle={false}
-                  hasSetTopCollection={true}
-                  hasSetBottomCollection={true}
-                  onClick={() =>
-                    analytics.trackEvent('click_feed', {
-                      type: 'collection_article',
-                      contentType: 'article',
-                      location: i,
-                      id: node.id,
-                    })
-                  }
-                />
-              </List.Item>
-            ))}
-          <EndOfResults message={true} />
-        </List>
+        <InfiniteScroll
+          hasNextPage={pageInfo?.hasNextPage || false}
+          loadMore={loadMore}
+          eof
+        >
+          <List>
+            {articleEdges &&
+              articleEdges.map(({ node }, i) => (
+                <List.Item key={node.id}>
+                  <ArticleDigestFeed
+                    article={node}
+                    collectionId={collection.id}
+                    hasHeader={false}
+                    hasEdit={true}
+                    hasCircle={false}
+                    hasSetTopCollection={true}
+                    hasSetBottomCollection={true}
+                    onClick={() =>
+                      analytics.trackEvent('click_feed', {
+                        type: 'collection_article',
+                        contentType: 'article',
+                        location: i,
+                        id: node.id,
+                      })
+                    }
+                  />
+                </List.Item>
+              ))}
+          </List>
+        </InfiniteScroll>
       </Layout.Main.Spacing>
     </>
   )
 }
-
-CollectionArticles.fragments = fragments
 
 export default CollectionArticles
