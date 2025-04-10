@@ -1,5 +1,6 @@
 import classNames from 'classnames'
 import Link from 'next/link'
+import React from 'react'
 
 import { TEST_ID } from '~/common/enums'
 import { capitalizeFirstLetter } from '~/common/utils'
@@ -35,52 +36,56 @@ export interface LinkWrapperProps {
  * // Disabled link (renders children without link)
  * <LinkWrapper href="/path" disabled>Link Content</LinkWrapper>
  */
-export const LinkWrapper: React.FC<
+export const LinkWrapper = React.forwardRef<
+  HTMLAnchorElement,
   React.PropsWithChildren<LinkWrapperProps>
-> = ({
-  href,
+>(
+  (
+    {
+      href,
+      textActiveColor,
+      disabled,
+      onClick,
+      testId,
+      children,
+      ...restProps
+    },
+    ref
+  ) => {
+    if (disabled) {
+      return <>{children}</>
+    }
 
-  textActiveColor,
+    const linkClasses = classNames({
+      [styles.wrapper]: true,
+      [textActiveColor
+        ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
+        : '']: !!textActiveColor,
+      [restProps.className || '']: !!restProps.className,
+    })
 
-  disabled,
-  onClick,
+    // Remove className from restProps as we've already applied it
+    const { className, ...otherProps } = restProps
 
-  testId,
-
-  children,
-
-  ...restProps
-}) => {
-  if (disabled) {
-    return <>{children}</>
+    return (
+      <Link href={href} legacyBehavior>
+        <a
+          ref={ref}
+          className={linkClasses}
+          onClick={(e) => {
+            if (onClick) {
+              onClick()
+              e.stopPropagation()
+            }
+          }}
+          {...(testId ? { ['data-test-id']: testId } : {})}
+          {...otherProps}
+        >
+          {children}
+        </a>
+      </Link>
+    )
   }
+)
 
-  const linkClasses = classNames({
-    [styles.wrapper]: true,
-    [textActiveColor
-      ? styles[`textActive${capitalizeFirstLetter(textActiveColor)}`]
-      : '']: !!textActiveColor,
-    [restProps.className || '']: !!restProps.className,
-  })
-
-  // Remove className from restProps as we've already applied it
-  const { className, ...otherProps } = restProps
-
-  return (
-    <Link href={href} legacyBehavior>
-      <a
-        className={linkClasses}
-        onClick={(e) => {
-          if (onClick) {
-            onClick()
-            e.stopPropagation()
-          }
-        }}
-        {...(testId ? { ['data-test-id']: testId } : {})}
-        {...otherProps}
-      >
-        {children}
-      </a>
-    </Link>
-  )
-}
+LinkWrapper.displayName = 'LinkWrapper'
