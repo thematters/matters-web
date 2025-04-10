@@ -3296,6 +3296,10 @@
     "defaultMessage": "確認送出",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
+  "xEJN39": {
+    "defaultMessage": "編輯精選",
+    "description": "Channel feed featured article"
+  },
   "xMaFCO": {
     "defaultMessage": "閱讀",
     "description": "src/views/Me/History/HistoryTabs.tsx"

@@ -46,6 +46,7 @@ const channelArticleConnectionFragment = gql`
     }
     edges {
       cursor
+      pinned
       node {
         ...ArticleNodeFragment
       }

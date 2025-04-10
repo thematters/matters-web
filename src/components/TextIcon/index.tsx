@@ -18,7 +18,7 @@ export type TextIconColor =
   | 'yellowLighter'
   | 'freeWriteBlue'
   | 'freeWriteGreenLabel'
-
+  | 'attention700'
 export interface TextIconProps {
   // icon
   icon?: React.ReactNode

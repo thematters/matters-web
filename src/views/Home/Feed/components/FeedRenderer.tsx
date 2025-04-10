@@ -22,10 +22,15 @@ interface FeedRendererProps {
   loadMore: () => Promise<any>
   feedType: FeedType
   renderHeader?: () => React.ReactNode
-  renderCards?: (edges: any[], numOfCards: number) => React.ReactNode
+  renderCards?: (
+    edges: any[],
+    numOfCards: number,
+    channelId?: string
+  ) => React.ReactNode
   emptyCustomOption?: React.ReactNode
   itemCustomProps?: Record<string, any>
   numOfCards?: number
+  channelId?: string
 }
 
 const FeedRenderer: React.FC<FeedRendererProps> = ({
@@ -40,6 +45,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
   emptyCustomOption,
   itemCustomProps = {},
   numOfCards = 0,
+  channelId,
 }) => {
   const intl = useIntl()
 
@@ -90,7 +96,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
   return (
     <>
       {renderHeader && renderHeader()}
-      {renderCards && renderCards(edges, numOfCards)}
+      {renderCards && renderCards(edges, numOfCards, channelId)}
 
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
@@ -131,6 +137,9 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
                     })
                   }}
                   isFirstFold={isFirstFold}
+                  hasTogglePinChannelArticles={!!channelId}
+                  channelId={channelId}
+                  pinned={edge.pinned}
                   {...itemCustomProps}
                 />
                 <CardExposureTracker

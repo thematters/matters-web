@@ -1,25 +1,32 @@
 import gql from 'graphql-tag'
+import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
 import IMAGE_DEFAULT_CURATED from '@/public/static/images/default-curated.svg'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
+  Icon,
   LinkWrapper,
   Media,
   ResponsiveImage,
+  Tooltip,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestCuratedArticleFragment, AssetType } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
+import FooterActions from './FooterActions'
 import styles from './styles.module.css'
-
 export type ArticleDigestCuratedProps = {
   article: ArticleDigestCuratedArticleFragment
 
   titleLineClamp?: 2 | 3
+
+  channelId?: string
+  pinned?: boolean
 
   onClick?: () => any
   onClickAuthor?: () => void
@@ -45,22 +52,25 @@ const fragments = {
         ...UserDigestMiniUser
       }
       ...ArticleDigestTitleArticle
+      ...CuratedFooterActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
+    ${FooterActions.fragments.article}
   `,
 }
 
 export const ArticleDigestCurated = ({
   article,
-
+  pinned,
   titleLineClamp,
-
+  channelId,
   onClick,
   onClickAuthor,
 
   ...cardProps
 }: ArticleDigestCuratedProps) => {
+  const intl = useIntl()
   const isBanned = article.articleState === 'banned'
   const assets = article.assets || []
   const embed = assets.find((asset) => asset.type === AssetType.Embed)
@@ -99,6 +109,20 @@ export const ArticleDigestCurated = ({
             />
           </Media>
         </LinkWrapper>
+        {pinned && (
+          <Tooltip
+            content={intl.formatMessage({
+              id: 'xEJN39',
+              defaultMessage: 'Featured',
+              description: 'Channel feed featured article',
+            })}
+            placement="bottom"
+          >
+            <div className={styles.pinned}>
+              <Icon icon={IconStar} size={20} color="white" />
+            </div>
+          </Tooltip>
+        )}
       </section>
 
       <section className={styles.author}>
@@ -121,6 +145,13 @@ export const ArticleDigestCurated = ({
           lineClamp={titleLineClamp}
         />
       </section>
+
+      <FooterActions
+        article={article}
+        channelId={channelId}
+        pinned={pinned}
+        hasTogglePinChannelArticles
+      />
     </Card>
   )
 }

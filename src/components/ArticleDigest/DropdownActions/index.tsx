@@ -104,6 +104,13 @@ const DynamicToggleCampaignFeaturedButton = dynamic(
   }
 )
 
+const DynamicTogglePinChannelArticlesButton = dynamic(
+  () => import('./TogglePinChannelArticles'),
+  {
+    loading: () => <Spinner />,
+  }
+)
+
 export interface DropdownActionsControls {
   icon?: React.ReactNode
   size?: IconSize
@@ -131,6 +138,11 @@ export interface DropdownActionsControls {
   campaignId?: string
   campaignFeatured?: boolean
   hasToggleCampaignFeatured?: boolean
+
+  // channel
+  channelId?: string
+  pinned?: boolean
+  hasTogglePinChannelArticles?: boolean
 
   hasArchive?: boolean
   hasEdit?: boolean
@@ -191,6 +203,11 @@ const BaseDropdownActions = ({
 
   collectionId,
   collectionArticleCount,
+
+  // channel
+  channelId,
+  pinned,
+  hasTogglePinChannelArticles,
 
   campaignId,
   campaignFeatured,
@@ -316,6 +333,13 @@ const BaseDropdownActions = ({
           <DynamicSetArticleChannelsButton
             openDialog={openSetArticleChannelsDialog}
           />
+          {hasTogglePinChannelArticles && channelId && (
+            <DynamicTogglePinChannelArticlesButton
+              articleId={article.id}
+              channelId={channelId}
+              pinned={!!pinned}
+            />
+          )}
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="icymi"

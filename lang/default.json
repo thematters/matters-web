@@ -3296,6 +3296,10 @@
     "defaultMessage": "Confirm",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
+  "xEJN39": {
+    "defaultMessage": "Featured",
+    "description": "Channel feed featured article"
+  },
   "xMaFCO": {
     "defaultMessage": "Articles",
     "description": "src/views/Me/History/HistoryTabs.tsx"

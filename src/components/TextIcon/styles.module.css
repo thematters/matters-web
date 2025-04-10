@@ -121,6 +121,10 @@
   color: var(--color-yellow-lighter);
 }
 
+.attention700 {
+  color: var(--color-new-palette-attention-700);
+}
+
 /* spacing */
 .spacing2.hasIcon {
   &.textRight > .text {

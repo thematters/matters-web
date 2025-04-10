@@ -52,16 +52,30 @@ const ChannelFeed = () => {
     keyPrefix: `channel:${shortHash}`,
   })
 
-  const renderCards = (cardEdges: any[], numOfCards: number) => {
+  const renderCards = (
+    cardEdges: any[],
+    numOfCards: number,
+    channelId?: string
+  ) => {
     return (
       <section className={feedStyles.cards}>
         {cardEdges.slice(0, numOfCards).map((edge, i) => (
           <React.Fragment key={edge.node.id}>
             <Media at="xs">
-              <ArticleDigestCurated article={edge.node} titleLineClamp={3} />
+              <ArticleDigestCurated
+                article={edge.node}
+                titleLineClamp={3}
+                pinned={edge.pinned}
+                channelId={channelId}
+              />
             </Media>
             <Media greaterThan="xs">
-              <ArticleDigestCurated article={edge.node} titleLineClamp={2} />
+              <ArticleDigestCurated
+                article={edge.node}
+                titleLineClamp={2}
+                pinned={edge.pinned}
+                channelId={channelId}
+              />
             </Media>
           </React.Fragment>
         ))}
@@ -102,6 +116,7 @@ const ChannelFeed = () => {
       renderCards={renderCards}
       emptyCustomOption={emptyCustomOption}
       numOfCards={numOfCards}
+      channelId={data?.channel?.id}
     />
   )
 }
