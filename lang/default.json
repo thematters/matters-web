@@ -612,9 +612,6 @@
   "8MeJ4b": {
     "defaultMessage": "Nimbus Ferry"
   },
-  "8PL7mC": {
-    "defaultMessage": "New Article"
-  },
   "8UWUW8": {
     "defaultMessage": "Collect Article",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
@@ -1839,6 +1836,10 @@
     "defaultMessage": "Move to bottom",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
+  "UfvCjD": {
+    "defaultMessage": "Submit to {dayName}",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "Up5U7K": {
     "defaultMessage": "Block"
   },
@@ -2287,6 +2288,10 @@
     "defaultMessage": "No blocked users yet",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
+  "dE4mlL": {
+    "defaultMessage": "Submit",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "dK7Dnj": {
     "defaultMessage": "🔥 Claim for free"
   },
@@ -2454,6 +2459,9 @@
   },
   "gluNT8": {
     "defaultMessage": "Enter URL"
+  },
+  "gvTltk": {
+    "defaultMessage": "Draft - {title}"
   },
   "gzJEFb": {
     "defaultMessage": "Verify your Liker ID through like.co"
@@ -2762,6 +2770,10 @@
     "defaultMessage": "No broadcast yet.",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
+  "mbHf/6": {
+    "defaultMessage": "Ended",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "me1nR+": {
     "defaultMessage": "Copy Address"
   },
@@ -2932,6 +2944,9 @@
   "qYzBk8": {
     "defaultMessage": "unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qcAuPU": {
+    "defaultMessage": "Draft - Untitled"
   },
   "qfi4cg": {
     "defaultMessage": "Failed to upload, please try again."

@@ -1,10 +1,11 @@
+import { useQuery } from '@apollo/client'
+
 import { parseCommentHash } from '~/common/utils'
 import {
   CommentThreadComment,
   CommentThreadCommentType,
   QueryError,
   useJumpToComment,
-  usePublicQuery,
 } from '~/components'
 import { CommentDetailQuery } from '~/gql/graphql'
 
@@ -16,13 +17,11 @@ const CommentDetail = () => {
   const { parentId } = parseCommentHash()
 
   // Data Fetching
-  const { data, loading, error } = usePublicQuery<CommentDetailQuery>(
+  const { data, loading, error } = useQuery<CommentDetailQuery>(
     COMMENT_DETAIL,
     {
-      variables: {
-        id: parentId,
-      },
-      fetchPolicy: 'network-only',
+      variables: { id: parentId },
+      fetchPolicy: 'cache-and-network',
     }
   )
 

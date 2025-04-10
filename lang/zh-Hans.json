@@ -612,9 +612,6 @@
   "8MeJ4b": {
     "defaultMessage": "光轮号"
   },
-  "8PL7mC": {
-    "defaultMessage": "新文章"
-  },
   "8UWUW8": {
     "defaultMessage": "关联作品",
     "description": "src/components/ArticleDigest/DropdownActions/ExtendButton.tsx"
@@ -1839,6 +1836,10 @@
     "defaultMessage": "移至底部",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
+  "UfvCjD": {
+    "defaultMessage": "投稿{dayName}",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "Up5U7K": {
     "defaultMessage": "屏蔽"
   },
@@ -2287,6 +2288,10 @@
     "defaultMessage": "尚无屏蔽记录",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
   },
+  "dE4mlL": {
+    "defaultMessage": "投稿",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "dK7Dnj": {
     "defaultMessage": "🔥 免费提领"
   },
@@ -2454,6 +2459,9 @@
   },
   "gluNT8": {
     "defaultMessage": "输入链接地址"
+  },
+  "gvTltk": {
+    "defaultMessage": "草稿 - {title}"
   },
   "gzJEFb": {
     "defaultMessage": "跳转到 like.co 验证已有 Liker ID"
@@ -2762,6 +2770,10 @@
     "defaultMessage": "还没有广播",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
+  "mbHf/6": {
+    "defaultMessage": "已结束",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "me1nR+": {
     "defaultMessage": "复制地址"
   },
@@ -2932,6 +2944,9 @@
   "qYzBk8": {
     "defaultMessage": "退订了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qcAuPU": {
+    "defaultMessage": "草稿 - 未命名"
   },
   "qfi4cg": {
     "defaultMessage": "图片上传失败"

@@ -13,11 +13,11 @@ import {
   useMutation,
 } from '~/components'
 import {
-  GetArticleChannelsQuery,
-  SetArticleChannelsMutation,
+  GetArticleTopicChannelsQuery,
+  SetArticleTopicChannelsMutation,
 } from '~/gql/graphql'
 
-import { GET_ARTICLE_CHANNELS, SET_ARTICLE_CHANNELS } from './gql'
+import { GET_ARTICLE_TOPIC_CHANNELS, SET_ARTICLE_TOPIC_CHANNELS } from './gql'
 import styles from './styles.module.css'
 
 export type SetArticleChannelsDialogProps = {
@@ -34,16 +34,16 @@ const BaseSetArticleChannelsDialog = ({
   children,
 }: SetArticleChannelsDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
-  const { data, loading } = useQuery<GetArticleChannelsQuery>(
-    GET_ARTICLE_CHANNELS,
+  const { data, loading } = useQuery<GetArticleTopicChannelsQuery>(
+    GET_ARTICLE_TOPIC_CHANNELS,
     {
       variables: {
         shortHash: article.shortHash,
       },
     }
   )
-  const [setArticleChannels] = useMutation<SetArticleChannelsMutation>(
-    SET_ARTICLE_CHANNELS,
+  const [setArticleChannels] = useMutation<SetArticleTopicChannelsMutation>(
+    SET_ARTICLE_TOPIC_CHANNELS,
     undefined,
     { showToast: true }
   )
@@ -87,8 +87,10 @@ const BaseSetArticleChannelsDialog = ({
     setFieldValue('channels', currentChannels)
   }
 
-  const allChannels = data?.channels.filter((channel) => channel.enabled)
-  const articleChannels = data?.article?.oss.channels.filter(
+  const allChannels = data?.channels.filter(
+    (channel) => 'enabled' in channel && channel.enabled
+  )
+  const articleChannels = data?.article?.oss.topicChannels.filter(
     (channel) => channel.enabled
   )
 
@@ -99,7 +101,7 @@ const BaseSetArticleChannelsDialog = ({
           <Form.SquareCheckBox
             name="channels"
             value={channel.id}
-            content={channel.name}
+            contents={'name' in channel ? channel.name : channel.id}
             checked={values.channels.includes(channel.id)}
             onChange={() => handleToggleChannel(channel.id)}
           />

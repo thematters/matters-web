@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
@@ -31,6 +31,7 @@ const AcceptedInvites = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const name = getQuery('name')
+  const intl = useIntl()
 
   /**
    * Data Fetching
@@ -77,13 +78,12 @@ const AcceptedInvites = () => {
   if (!edges || edges.length <= 0) {
     return (
       <EmptyWarning
-        description={
-          <FormattedMessage
-            defaultMessage="friends have not accepted your invitations."
-            id="RxiHr/"
-            description="src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx"
-          />
-        }
+        description={intl.formatMessage({
+          defaultMessage: 'friends have not accepted your invitations.',
+          id: 'RxiHr/',
+          description:
+            'src/views/Circle/Settings/ManageInvitation/Invites/Accepted/index.tsx',
+        })}
       />
     )
   }
