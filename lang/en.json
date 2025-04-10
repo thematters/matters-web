@@ -2615,6 +2615,9 @@
   "kEDrXh": {
     "defaultMessage": "liked your collection"
   },
+  "kEfk9g": {
+    "defaultMessage": "The draft has been updated on another device or tab. Click OK to continue editing and overwrite this version."
+  },
   "kHMa3H": {
     "defaultMessage": "The new password and confirmation password do not match."
   },
