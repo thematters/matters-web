@@ -59,7 +59,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
         className={classnames({
           [styles.item]: true,
           [styles.selectedChannel]: shortHash === channel.shortHash,
-          [styles.lineClampable]: !firstRender,
+          [styles.lineClampable]: !firstRender && lineClampable,
         })}
       >
         <span>{displayChannelName(channelName)}</span>

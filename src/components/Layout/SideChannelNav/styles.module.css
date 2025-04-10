@@ -118,7 +118,7 @@
         }
       }
 
-      &.lineClampable {
+      &.lineClampable > span {
         @mixin line-clamp;
 
         -webkit-line-clamp: 2;
