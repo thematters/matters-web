@@ -1932,9 +1932,6 @@
     "defaultMessage": "Subscribe",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
-  "WrpdUp": {
-    "defaultMessage": "The draft is already open on another device or tab, continuing to edit may result in content being overwritten and lost. Do you want to continue?"
-  },
   "WsPbZT": {
     "defaultMessage": "Continue payout"
   },
@@ -2617,6 +2614,9 @@
   },
   "kEDrXh": {
     "defaultMessage": "liked your collection"
+  },
+  "kEfk9g": {
+    "defaultMessage": "The draft has been updated on another device or tab. Click OK to continue editing and overwrite this version."
   },
   "kHMa3H": {
     "defaultMessage": "The new password and confirmation password do not match."

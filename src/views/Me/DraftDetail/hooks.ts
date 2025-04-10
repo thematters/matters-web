@@ -56,8 +56,8 @@ export const useVersionConflictHandler = () => {
           const confirmResult = window.confirm(
             intl.formatMessage({
               defaultMessage:
-                'The draft is already open on another device or tab, continuing to edit may result in content being overwritten and lost. Do you want to continue?',
-              id: 'WrpdUp',
+                'The draft has been updated on another device or tab. Click OK to continue editing and overwrite this version.',
+              id: 'kEfk9g',
             })
           )
 
