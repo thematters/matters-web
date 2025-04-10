@@ -92,7 +92,7 @@ export const makeSummary = (
   // Split the content into matchable tokens
   const matches =
     plainText.match(
-      new RegExp(`(@[^\\s]+|[${REGEXP_LATIN}]+|[^${REGEXP_LATIN}\s])`, 'g')
+      new RegExp(`(@[^\\s]+|[${REGEXP_LATIN}]+|[^${REGEXP_LATIN}])`, 'g')
     ) || []
 
   let summary = ''
