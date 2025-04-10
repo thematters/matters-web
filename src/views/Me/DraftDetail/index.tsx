@@ -173,7 +173,8 @@ const BaseDraftDetail = () => {
     isUnpublished &&
     hasContent &&
     hasTitle &&
-    !isOverLength
+    !isOverLength &&
+    saveStatus === 'saved'
   )
 
   const upload = async (input: {
@@ -191,6 +192,8 @@ const BaseDraftDetail = () => {
       })
     }
 
+    setSaveStatus('saving')
+
     const variables = {
       input: {
         type: ASSET_TYPE.embed,
@@ -207,8 +210,10 @@ const BaseDraftDetail = () => {
       const { id: assetId, path } = result?.data?.singleFileUpload || {}
 
       if (assetId && path) {
+        setSaveStatus('saved')
         return { id: assetId, path }
       } else {
+        setSaveStatus('saveFailed')
         throw new Error('upload not successful')
       }
     }
@@ -240,8 +245,10 @@ const BaseDraftDetail = () => {
           },
         }).catch(console.error)
 
+        setSaveStatus('saved')
         return { id: assetId, path }
       } else {
+        setSaveStatus('saveFailed')
         throw new Error('upload not successful')
       }
     }
