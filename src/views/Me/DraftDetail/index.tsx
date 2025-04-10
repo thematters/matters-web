@@ -9,7 +9,6 @@ import {
   ENTITY_TYPE,
   ERROR_CODES,
   MAX_ARTICLE_CONTENT_LENGTH,
-  OPEN_DRAFT_VERSION_CONFLICT_DIALOG,
 } from '~/common/enums'
 import {
   containsFigureTag,
@@ -53,7 +52,6 @@ import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
 import Sidebar from './Sidebar'
 import styles from './styles.module.css'
-import { VersionConflictDialog } from './VersionConflictDialog'
 
 const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
@@ -314,11 +312,19 @@ const BaseDraftDetail = () => {
       const [, codes] = parseFormSubmitErrors(error as any)
       codes.forEach((code) => {
         if (code.includes(ERROR_CODES.DRAFT_VERSION_CONFLICT)) {
-          window.dispatchEvent(
-            new CustomEvent(OPEN_DRAFT_VERSION_CONFLICT_DIALOG, {
-              detail: { onContinueEdit: () => update(newDraft, true) },
+          const confirmResult = window.confirm(
+            intl.formatMessage({
+              defaultMessage:
+                'The draft is already open on another device or tab, continuing to edit may result in content being overwritten and lost. Do you want to continue?',
+              id: 'WrpdUp',
             })
           )
+
+          if (confirmResult) {
+            update(newDraft, true)
+          } else {
+            window.close()
+          }
         }
       })
     }
@@ -403,8 +409,6 @@ const BaseDraftDetail = () => {
 const DraftDetail = () => (
   <DraftDetailStateProvider>
     <BaseDraftDetail />
-
-    <VersionConflictDialog />
   </DraftDetailStateProvider>
 )
 

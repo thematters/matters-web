@@ -379,9 +379,6 @@
   "4nHH2x": {
     "defaultMessage": "Applied successfully"
   },
-  "4ptCtD": {
-    "defaultMessage": "Discard this version"
-  },
   "4wOWfp": {
     "defaultMessage": "What's this?",
     "description": "src/components/Billboard/index.tsx"
@@ -805,9 +802,6 @@
   },
   "BNupBu": {
     "defaultMessage": "Set as cover"
-  },
-  "BOr224": {
-    "defaultMessage": "Draft version is abnormal"
   },
   "BW89hS": {
     "defaultMessage": "{upvotes} upvotes"
@@ -3005,9 +2999,6 @@
   "rJqgwV": {
     "defaultMessage": "Edit",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
-  },
-  "rVbKiP": {
-    "defaultMessage": "Continue editing"
   },
   "rXnmeE": {
     "defaultMessage": "Confirm and Send"

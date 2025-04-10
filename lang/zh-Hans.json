@@ -379,9 +379,6 @@
   "4nHH2x": {
     "defaultMessage": "报名成功"
   },
-  "4ptCtD": {
-    "defaultMessage": "放弃此版本"
-  },
   "4wOWfp": {
     "defaultMessage": "这是什么？",
     "description": "src/components/Billboard/index.tsx"
@@ -805,9 +802,6 @@
   },
   "BNupBu": {
     "defaultMessage": "设置为封面"
-  },
-  "BOr224": {
-    "defaultMessage": "草稿版本异常"
   },
   "BW89hS": {
     "defaultMessage": "{upvotes} 点赞"
@@ -3005,9 +2999,6 @@
   "rJqgwV": {
     "defaultMessage": "开始修改",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
-  },
-  "rVbKiP": {
-    "defaultMessage": "继续编辑"
   },
   "rXnmeE": {
     "defaultMessage": "确认发送"

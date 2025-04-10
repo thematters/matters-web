@@ -379,9 +379,6 @@
   "4nHH2x": {
     "defaultMessage": "報名成功"
   },
-  "4ptCtD": {
-    "defaultMessage": "放棄此版本"
-  },
   "4wOWfp": {
     "defaultMessage": "這是什麼？",
     "description": "src/components/Billboard/index.tsx"
@@ -805,9 +802,6 @@
   },
   "BNupBu": {
     "defaultMessage": "設置為封面"
-  },
-  "BOr224": {
-    "defaultMessage": "草稿版本異常"
   },
   "BW89hS": {
     "defaultMessage": "{upvotes} 點讚"
@@ -3005,9 +2999,6 @@
   "rJqgwV": {
     "defaultMessage": "開始修改",
     "description": "src/components/Dialogs/ReviseArticleDialog/index.tsx"
-  },
-  "rVbKiP": {
-    "defaultMessage": "繼續編輯"
   },
   "rXnmeE": {
     "defaultMessage": "確認發送"

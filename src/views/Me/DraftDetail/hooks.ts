@@ -1,7 +1,8 @@
 import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
+import { useIntl } from 'react-intl'
 
-import { ERROR_CODES, OPEN_DRAFT_VERSION_CONFLICT_DIALOG } from '~/common/enums'
+import { ERROR_CODES } from '~/common/enums'
 import { parseFormSubmitErrors } from '~/common/utils'
 import { DraftDetailStateContext } from '~/components'
 import { useImperativeQuery, useMutation } from '~/components/GQL'
@@ -38,27 +39,37 @@ import {
   SET_TAGS,
 } from './gql'
 
-/**
- * Handle version conflict errors
- */
-const handleVersionConflictError = async <T>(
-  promise: Promise<T>,
-  retryFn?: () => Promise<T>
-): Promise<T> => {
-  try {
-    return await promise
-  } catch (error: any) {
-    const [, codes] = parseFormSubmitErrors(error)
-    codes.forEach((code) => {
-      if (code.includes(ERROR_CODES.DRAFT_VERSION_CONFLICT) && retryFn) {
-        window.dispatchEvent(
-          new CustomEvent(OPEN_DRAFT_VERSION_CONFLICT_DIALOG, {
-            detail: { onContinueEdit: retryFn },
-          })
-        )
+export const useVersionConflictHandler = () => {
+  const intl = useIntl()
+
+  return async <T>(
+    promise: Promise<T>,
+    retryFn?: () => Promise<T>
+  ): Promise<T> => {
+    try {
+      return await promise
+    } catch (error: any) {
+      const [, codes] = parseFormSubmitErrors(error)
+      for (const code of codes) {
+        if (code.includes(ERROR_CODES.DRAFT_VERSION_CONFLICT) && retryFn) {
+          // Show native confirm dialog instead of using the event
+          const confirmResult = window.confirm(
+            intl.formatMessage({
+              defaultMessage:
+                'The draft is already open on another device or tab, continuing to edit may result in content being overwritten and lost. Do you want to continue?',
+              id: 'WrpdUp',
+            })
+          )
+
+          if (confirmResult) {
+            return retryFn()
+          } else {
+            window.close()
+          }
+        }
       }
-    })
-    throw error
+      throw error
+    }
   }
 }
 
@@ -69,6 +80,7 @@ export const useEditDraftCover = () => {
   const { addRequest, getDraftId, createDraft, getDraftUpdatedAt } = useContext(
     DraftDetailStateContext
   )
+  const handleVersionConflict = useVersionConflictHandler()
   const refetch = useImperativeQuery<DraftAssetsQuery>(DRAFT_ASSETS, {
     variables: { id: getDraftId() },
     fetchPolicy: 'network-only',
@@ -81,7 +93,7 @@ export const useEditDraftCover = () => {
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return handleVersionConflictError(
+    return handleVersionConflict(
       update({
         variables: {
           id: newId || getDraftId(),
@@ -123,13 +135,14 @@ export const useEditDraftTags = () => {
   )
   const [updateTags, { loading: saving }] =
     useMutation<SetDraftTagsMutation>(SET_TAGS)
+  const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
     newTags: DigestTagFragment[],
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return handleVersionConflictError(
+    return handleVersionConflict(
       updateTags({
         variables: {
           id: newId || getDraftId(),
@@ -170,13 +183,14 @@ export const useEditDraftCollection = () => {
   )
   const [setCollection, { loading: saving }] =
     useMutation<SetDraftCollectionMutation>(SET_COLLECTION)
+  const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
     newArticles: ArticleDigestDropdownArticleFragment[],
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return handleVersionConflictError(
+    return handleVersionConflict(
       setCollection({
         variables: {
           id: newId || getDraftId(),
@@ -219,6 +233,7 @@ export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
   )
   const [setAccess, { loading: saving }] =
     useMutation<SetDraftAccessMutation>(SET_ACCESS)
+  const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
     addToCircle: boolean,
@@ -227,7 +242,7 @@ export const useEditDraftAccess = (circle?: DigestRichCirclePublicFragment) => {
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return handleVersionConflictError(
+    return handleVersionConflict(
       setAccess({
         variables: {
           id: newId || getDraftId(),
@@ -290,6 +305,7 @@ export const useEditSupportSetting = () => {
   )
   const [update, { loading: saving }] =
     useMutation<SetSupportRequestReplyMutation>(SET_SUPPORT_REQUEST_REPLY)
+  const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
     requestForDonation: string | null,
@@ -297,7 +313,7 @@ export const useEditSupportSetting = () => {
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return handleVersionConflictError(
+    return handleVersionConflict(
       update({
         variables: {
           id: newId || getDraftId(),
@@ -352,13 +368,14 @@ export const useEditDraftSensitiveByAuthor = () => {
   )
   const [update, { loading: saving }] =
     useMutation<SetDraftSensitiveByAuthorMutation>(SET_SENSITIVE_BY_AUTHOR)
+  const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
     sensitiveByAuthor: boolean,
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return handleVersionConflictError(
+    return handleVersionConflict(
       update({
         variables: {
           id: newId || getDraftId(),
@@ -399,13 +416,14 @@ export const useEditDraftPublishISCN = () => {
   )
   const [update, { loading: saving }] =
     useMutation<SetDraftPublishIscnMutation>(SET_PUBLISH_ISCN)
+  const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
     iscnPublish: boolean,
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return handleVersionConflictError(
+    return handleVersionConflict(
       update({
         variables: {
           id: newId || getDraftId(),
@@ -446,13 +464,14 @@ export const useEditDraftCanComment = () => {
   )
   const [update, { loading: saving }] =
     useMutation<SetDraftCanCommentMutation>(SET_CAN_COMMENT)
+  const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
     canComment: boolean,
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return handleVersionConflictError(
+    return handleVersionConflict(
       update({
         variables: {
           id: newId || getDraftId(),
@@ -493,13 +512,14 @@ export const useEditIndent = () => {
   )
   const [update, { loading: saving }] =
     useMutation<SetDraftIndentMutation>(SET_INDENT)
+  const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
     indented: boolean,
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return handleVersionConflictError(
+    return handleVersionConflict(
       update({
         variables: {
           id: newId || getDraftId(),
@@ -540,13 +560,14 @@ export const useEditDraftCampaign = () => {
   )
   const [update, { loading: saving }] =
     useMutation<SetDraftCanCommentMutation>(SET_CAMPAIGN)
+  const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
     selected?: { campaign: string; stage: string },
     newId?: string,
     lastUpdatedAt?: string
   ) => {
-    return handleVersionConflictError(
+    return handleVersionConflict(
       update({
         variables: {
           id: newId || getDraftId(),
