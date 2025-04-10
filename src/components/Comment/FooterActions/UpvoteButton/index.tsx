@@ -55,7 +55,6 @@ const UpvoteButton = ({
   const intl = useIntl()
   const [playHeartBeat, setPlayHeartBeat] = useState(false)
 
-
   const [unvote] = useMutation<UnvoteCommentMutation>(UNVOTE_COMMENT, {
     variables: { id: comment.id },
     optimisticResponse: {
