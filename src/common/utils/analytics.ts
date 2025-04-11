@@ -188,6 +188,7 @@ interface ClickFeedProp {
   id?: string
   rootId?: string
   searchKey?: string
+  note?: Record<string, any>
 }
 
 /**
@@ -297,6 +298,8 @@ type ArticleFeedType =
   | 'icymi'
   | 'icymi_curated'
   | 'newest'
+  | 'channel'
+  | 'channel_card'
   | 'read_history'
   | 'related_article'
   | 'search'
