@@ -171,7 +171,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     return (
       <List>
         {[...announcements].reverse().map((article, i) => (
-          <List.Item key={`${feedType}:${i}`}>
+          <List.Item key={`${feedType}:${article.id}`}>
             <ArticleDigestFeed
               article={article}
               onClick={() => {
@@ -226,7 +226,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
         {edges.map(({ node, featured, announcement }, i) => (
-          <List.Item key={`${feedType}:${i}`}>
+          <List.Item key={`${feedType}:${node.id}`}>
             <ArticleDigestFeed
               article={node}
               label={

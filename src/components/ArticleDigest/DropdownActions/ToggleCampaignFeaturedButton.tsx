@@ -37,6 +37,18 @@ const ToggleCampaignFeaturedButton = ({
         articles: [articleId],
         isFeatured: !campaignFeatured,
       },
+      update: (cache) => {
+        cache.evict({
+          id: cache.identify({
+            __typename: 'WritingChallenge',
+            id: campaignId,
+          }),
+        })
+        cache.gc()
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
+      },
     }
   )
 

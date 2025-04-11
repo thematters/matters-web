@@ -22,7 +22,21 @@ const BanCampaignArticleButton = ({
 }) => {
   const [update] = useMutation<BanCampaignArticleMutation>(
     BAN_CAMPAIGN_ARTICLE,
-    { variables: { campaign: campaignId, articles: [articleId] } }
+    {
+      variables: { campaign: campaignId, articles: [articleId] },
+      update: (cache) => {
+        cache.evict({
+          id: cache.identify({
+            __typename: 'WritingChallenge',
+            id: campaignId,
+          }),
+        })
+        cache.gc()
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
+      },
+    }
   )
 
   return (
