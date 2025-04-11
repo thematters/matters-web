@@ -245,8 +245,8 @@ const EditModeHeader = ({
       toast.error({
         message: (
           <FormattedMessage
-            defaultMessage="Article cannot be added to Free Write or circle at the same time"
-            id="nLt9TU"
+            defaultMessage="Article cannot be added to event or circle at the same time"
+            id="cPXsvZ"
           />
         ),
       })

@@ -73,7 +73,7 @@ const FeaturedLabel = () => (
   <TextIcon
     icon={<Icon icon={IconStar} size={12} style={{ opacity: 0.5 }} />}
     spacing={2}
-    color="freeWriteGreenLabel"
+    color="campaignGreenLabel"
     size={12}
   >
     <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
@@ -124,7 +124,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     client.query({
       query: CAMPAIGN_ARTICLES_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: { ids: publicIds },
+      variables: { shortHash, ids: publicIds },
     })
   }
 
@@ -164,6 +164,9 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     loadPrivate(newData)
   }
 
+  const isManager = data?.campaign?.isManager
+  const isAdmin = viewer.isAdmin
+
   if (isAnnouncement) {
     return (
       <List>
@@ -188,7 +191,8 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                 })
               }}
               hasCampaign={false}
-              hasToggleCampaignFeatured
+              hasToggleCampaignFeatured={isManager || isAdmin}
+              hasBanCampaignArticle={isManager || isAdmin}
               campaignId={camapign.id}
               campaignFeatured={false}
             />
@@ -258,7 +262,8 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                 })
               }}
               hasCampaign={false}
-              hasToggleCampaignFeatured
+              hasToggleCampaignFeatured={isManager || isAdmin}
+              hasBanCampaignArticle={isManager || isAdmin}
               campaignId={camapign.id}
               campaignFeatured={isFeatured}
             />
