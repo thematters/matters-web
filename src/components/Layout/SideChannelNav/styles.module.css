@@ -114,7 +114,14 @@
         color: var(--color-black);
 
         @media (--sm-up) {
-          background-color: var(--color-grey-lighter);
+          padding: 0;
+
+          & span {
+            display: inline-block;
+            padding: var(--sp8) var(--sp10);
+            background-color: var(--color-grey-lighter);
+            border-radius: 0.5rem;
+          }
         }
       }
 
@@ -124,39 +131,13 @@
         -webkit-line-clamp: 2;
       }
 
+      &.temporaryChannel {
+        color: var(--color-grey);
+      }
+
       &.selectedChannel {
         font-weight: var(--font-semibold);
         color: var(--color-black);
-      }
-
-      &.temporaryChannel {
-        & span {
-          display: inline-block;
-          background: var(--color-new-palette-linear-ocean);
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-          transition: background 0.2s ease-in-out;
-        }
-
-        &:hover {
-          @media (--sm-up) {
-            background-color: var(--color-new-palette-info-0) !important;
-          }
-
-          & span {
-            background: var(--color-new-palette-linear-ocean-deep);
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-          }
-        }
-      }
-
-      &.selectedTemporaryChannel {
-        & span {
-          background: var(--color-new-palette-linear-ocean-deep);
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
       }
     }
   }

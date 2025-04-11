@@ -94,7 +94,9 @@ const SideChannelNav = () => {
                 isInPath('FOLLOW'),
             })}
           >
-            <FormattedMessage defaultMessage="My Page" id="enMIYK" />
+            <span>
+              <FormattedMessage defaultMessage="My Page" id="enMIYK" />
+            </span>
           </LinkWrapper>
         )}
         <LinkWrapper
@@ -106,7 +108,9 @@ const SideChannelNav = () => {
               (!isAuthed && isInPath('HOME') && !getQuery('type')),
           })}
         >
-          <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+          <span>
+            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+          </span>
         </LinkWrapper>
         <LinkWrapper
           href={TEMPORARY_CHANNEL_URL}
@@ -114,7 +118,6 @@ const SideChannelNav = () => {
             [styles.item]: true,
             [styles.selectedChannel]: isInTemporaryChannel,
             [styles.temporaryChannel]: true,
-            [styles.selectedTemporaryChannel]: isInTemporaryChannel,
           })}
         >
           <span>
@@ -136,11 +139,13 @@ const SideChannelNav = () => {
               isInPath('HOME') && getQuery('type') === 'newest',
           })}
         >
-          <FormattedMessage
-            defaultMessage="Latest"
-            id="gykfC8"
-            description="src/components/Layout/SideChannelNav/index.tsx"
-          />
+          <span>
+            <FormattedMessage
+              defaultMessage="Latest"
+              id="gykfC8"
+              description="src/components/Layout/SideChannelNav/index.tsx"
+            />
+          </span>
         </LinkWrapper>
       </section>
     </section>
