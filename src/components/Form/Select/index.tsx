@@ -31,7 +31,7 @@ export type FormSelectProps<OptionValue> = {
   name: string
   options: FormSelectOption<OptionValue>[]
   size?: 14 | 16
-  color?: 'freeWriteBlue'
+  color?: 'campaignBlue'
   onChange: (option: FormSelectOption<OptionValue>) => void
 } & Omit<FieldProps, 'fieldMsgId'>
 

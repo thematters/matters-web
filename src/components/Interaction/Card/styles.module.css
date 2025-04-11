@@ -63,8 +63,8 @@
   }
 }
 
-.bgFreeWriteBlue {
-  background: var(--color-free-write-blue-bg);
+.bgcampaignBlue {
+  background: var(--color-campaign-blue-bg);
 }
 
 .bgActiveGreyLighter {
