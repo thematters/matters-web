@@ -79,9 +79,9 @@ const SelectCampaign = ({
         ?.stages.filter((s) => {
           const period = s.period
 
-          if (!period) return false
+          if (!period) return true
 
-          return now >= new Date(period.start)
+          return now >= new Date(period?.start)
         })
     : undefined
 
