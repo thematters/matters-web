@@ -126,6 +126,8 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
                       contentType: 'article',
                       location: i,
                       id: edge.node.id,
+                      rootId: channelId,
+                      note: { pinned: edge.pinned },
                     })
                   }
                   onClickAuthor={() => {
@@ -134,6 +136,8 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
                       contentType: 'user',
                       location: i,
                       id: edge.node.author.id,
+                      rootId: channelId,
+                      note: { pinned: edge.pinned },
                     })
                   }}
                   isFirstFold={isFirstFold}
