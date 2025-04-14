@@ -56,10 +56,7 @@ const MomentDetailDialogContent = ({
    * Data Fetching
    */
   const { data, loading, error } = useQuery<MomentDetailQuery>(MOMENT_DETAIL, {
-    variables: {
-      shortHash,
-    },
-    fetchPolicy: 'network-only',
+    variables: { shortHash },
   })
 
   useEffect(() => {
