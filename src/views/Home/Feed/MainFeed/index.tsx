@@ -100,15 +100,16 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType: propFeedType }) => {
 
   const renderHeader = () => {
     if (!isIcymiFeed) return null
-
+    const note = recommendation?.icymiTopic?.note || 'hello world'
     return (
       <>
         <section className={styles.header}>
           <h1>
             <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
           </h1>
-          <Spacer size="sp20" />
+          {note && <p className={styles.description}>{note}</p>}
         </section>
+        <Spacer size="sp20" />
         <Announcements />
         {recommendation &&
           'icymiTopic' in recommendation &&
