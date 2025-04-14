@@ -102,7 +102,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
         </section>
       </section>
 
-      {collection.articles.totalCount >= MAX_COLLECTION_ARTICLES_COUNT && (
+      {articles.totalCount >= MAX_COLLECTION_ARTICLES_COUNT && (
         <Tooltip
           content={
             <FormattedMessage
@@ -124,7 +124,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
         </Tooltip>
       )}
 
-      {collection.articles.totalCount < MAX_COLLECTION_ARTICLES_COUNT && (
+      {articles.totalCount < MAX_COLLECTION_ARTICLES_COUNT && (
         <AddArticlesCollectionDialog collection={collection}>
           {({ openDialog: openAddArticlesCollection }) => (
             <section

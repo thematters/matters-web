@@ -98,6 +98,7 @@ const CollectionArticles = () => {
         first: isViewer ? MAX_COLLECTION_ARTICLES_COUNT : 20,
         reversed: isSequenceDsc,
       },
+      ssr: !isViewer,
     })
   const collection = data?.node as CollectionArticlesPublicQuery['node'] & {
     __typename: 'Collection'
