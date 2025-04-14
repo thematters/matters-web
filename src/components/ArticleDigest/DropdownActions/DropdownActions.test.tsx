@@ -216,9 +216,6 @@ describe('<ArticleDigest/DropdownActions>', () => {
         hasSetBottomCollection
         hasAddCollection
         hasRemoveCollection
-        onSetTopCollection={() => {}}
-        onSetBottomCollection={() => {}}
-        onRemoveCollection={() => {}}
       />
     )
 

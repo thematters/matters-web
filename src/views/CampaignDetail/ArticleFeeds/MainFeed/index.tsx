@@ -73,7 +73,7 @@ const FeaturedLabel = () => (
   <TextIcon
     icon={<Icon icon={IconStar} size={12} style={{ opacity: 0.5 }} />}
     spacing={2}
-    color="freeWriteGreenLabel"
+    color="campaignGreenLabel"
     size={12}
   >
     <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
@@ -124,7 +124,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     client.query({
       query: CAMPAIGN_ARTICLES_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: { ids: publicIds },
+      variables: { shortHash, ids: publicIds },
     })
   }
 
@@ -164,11 +164,14 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     loadPrivate(newData)
   }
 
+  const isManager = data?.campaign?.isManager
+  const isAdmin = viewer.isAdmin
+
   if (isAnnouncement) {
     return (
       <List>
         {[...announcements].reverse().map((article, i) => (
-          <List.Item key={`${feedType}:${i}`}>
+          <List.Item key={`${feedType}:${article.id}`}>
             <ArticleDigestFeed
               article={article}
               onClick={() => {
@@ -188,7 +191,8 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                 })
               }}
               hasCampaign={false}
-              hasToggleCampaignFeatured
+              hasToggleCampaignFeatured={isManager || isAdmin}
+              hasBanCampaignArticle={isManager || isAdmin}
               campaignId={camapign.id}
               campaignFeatured={false}
             />
@@ -227,7 +231,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     >
       <List>
         {edges.map(({ node, featured, announcement }, i) => (
-          <List.Item key={`${feedType}:${i}`}>
+          <List.Item key={`${feedType}:${node.id}`}>
             <ArticleDigestFeed
               article={node}
               label={
@@ -264,7 +268,8 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
               }}
               hasCircle={false}
               hasCampaign={false}
-              hasToggleCampaignFeatured
+              hasToggleCampaignFeatured={isManager || isAdmin}
+              hasBanCampaignArticle={isManager || isAdmin}
               campaignId={camapign.id}
               campaignFeatured={isFeatured}
             />

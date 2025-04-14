@@ -13,7 +13,7 @@ interface BoxProps {
   disabled?: boolean
   rightButton?: React.ReactNode
   footerSpacing?: boolean
-  borderColor?: 'freeWriteBlue'
+  borderColor?: 'campaignBlue'
 }
 
 const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
@@ -30,7 +30,7 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
   const boxClasses = classNames({
     [styles.box]: true,
     [styles.footerSpacing]: !!footerSpacing,
-    [styles.freeWriteBlue]: borderColor === 'freeWriteBlue',
+    [styles.campaignBlue]: borderColor === 'campaignBlue',
     'u-area-disable': disabled,
   })
 

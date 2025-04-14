@@ -19,14 +19,14 @@ import {
   ViewerContext,
 } from '~/components'
 import EditCollection from '~/components/CollectionDigest/DropdownActions/EditCollection'
-import { CollectionProfileCollectionFragment } from '~/gql/graphql'
+import { CollectionProfileCollectionPublicFragment } from '~/gql/graphql'
 
 import { fragments } from './gql'
 import LikeButton from './LikeButton'
 import styles from './styles.module.css'
 
 interface CollectionProfileProps {
-  collection: CollectionProfileCollectionFragment
+  collection: CollectionProfileCollectionPublicFragment
 }
 
 const CollectionProfile = ({ collection }: CollectionProfileProps) => {

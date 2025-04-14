@@ -12,6 +12,7 @@ export const CAMPAIGN_ARTICLES_PUBLIC = gql`
       id
       ... on WritingChallenge {
         id
+        isManager
         articles(input: { first: 20, after: $after, filter: $filter }) {
           pageInfo {
             startCursor
@@ -49,11 +50,18 @@ export const CAMPAIGN_ARTICLES_PUBLIC = gql`
 `
 
 export const CAMPAIGN_ARTICLES_PRIVATE = gql`
-  query CampaignArticlesPrivate($ids: [ID!]!) {
+  query CampaignArticlesPrivate($shortHash: String!, $ids: [ID!]!) {
     nodes(input: { ids: $ids }) {
       id
       ... on Article {
         ...ArticleDigestFeedArticlePrivate
+      }
+    }
+    campaign(input: { shortHash: $shortHash }) {
+      id
+      ... on WritingChallenge {
+        id
+        isManager
       }
     }
   }

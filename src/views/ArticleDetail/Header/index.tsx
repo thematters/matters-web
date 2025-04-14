@@ -40,7 +40,7 @@ const Header = ({ article }: HeaderProps) => {
               })
             }}
           >
-            <TextIcon size={12} color="freeWriteBlue">
+            <TextIcon size={12} color="campaignBlue">
               <span>
                 {
                   campaign[
