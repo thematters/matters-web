@@ -26,6 +26,9 @@
   "+GAaxB": {
     "defaultMessage": "作品因違反社區約章被封存"
   },
+  "+IYfVH": {
+    "defaultMessage": "移除活動精選"
+  },
   "+OStJM": {
     "defaultMessage": "重置交易密碼"
   },
@@ -120,6 +123,9 @@
   },
   "/wKyxw": {
     "defaultMessage": "發布失敗"
+  },
+  "/wbyoV": {
+    "defaultMessage": "作品已從活動移除"
   },
   "0/gRer": {
     "defaultMessage": "我正在搬家到 Matters，邀請你一起來"
@@ -259,6 +265,9 @@
   },
   "2D/X90": {
     "defaultMessage": "為什麼採用 Optimism？"
+  },
+  "2J3mz4": {
+    "defaultMessage": "加到活動精選"
   },
   "2P5JII": {
     "defaultMessage": "解綁",
@@ -412,9 +421,6 @@
     "defaultMessage": "喜歡你已刪除的動態",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
-  "5SgH7l": {
-    "defaultMessage": "作品已添加至自由寫精華"
-  },
   "5UglrB": {
     "defaultMessage": "送出成功"
   },
@@ -517,9 +523,6 @@
   },
   "6oOCCL": {
     "defaultMessage": "上傳檔案"
-  },
-  "6pc948": {
-    "defaultMessage": "參與活動"
   },
   "6q0G5e": {
     "defaultMessage": "加入成功",
@@ -1152,6 +1155,9 @@
     "defaultMessage": "回到我的創作",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
+  "HUf/E+": {
+    "defaultMessage": "移出活動"
+  },
   "HYW0fI": {
     "defaultMessage": "上鏈後，作品不可刪除，去中心化保存"
   },
@@ -1587,9 +1593,6 @@
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
-  "QFCfA7": {
-    "defaultMessage": "添加到自由寫精華"
-  },
   "QKJWqd": {
     "defaultMessage": "收藏",
     "description": "src/components/Buttons/TagBookmark/Bookmark.tsx"
@@ -1964,6 +1967,9 @@
     "defaultMessage": "在你的圍爐廣播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "XTRqqT": {
+    "defaultMessage": "參與活動"
+  },
   "XTyKFR": {
     "defaultMessage": "精挑細選作品，幫助讀者更容易發現優質內容"
   },
@@ -2072,9 +2078,6 @@
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
   },
-  "ZN1IzT": {
-    "defaultMessage": "从自由寫精華中移除"
-  },
   "ZNK0I9": {
     "defaultMessage": "喜歡你的評論"
   },
@@ -2171,6 +2174,10 @@
     "defaultMessage": "聊幾句？",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
+  "b0RNGM": {
+    "defaultMessage": "你的作品 {articleTitle} 已被列為活動精選，快來看看更多精彩好文！",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
   "b8ogKp": {
     "defaultMessage": "新增邀請",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
@@ -2216,6 +2223,9 @@
   },
   "cPSexq": {
     "defaultMessage": "去看看其他圍爐吧，希望你早日找到下一個心之所屬。"
+  },
+  "cPXsvZ": {
+    "defaultMessage": "作品暫不可同時投稿活動及加入圍爐"
   },
   "cQ+Lyq": {
     "defaultMessage": "遊牧者計畫紀念徽章",
@@ -2576,9 +2586,6 @@
     "defaultMessage": "報名處理中⋯",
     "description": "type:apply"
   },
-  "jXDxa6": {
-    "defaultMessage": "作品已從自由寫精華中移除"
-  },
   "jiB0Z2": {
     "defaultMessage": "無法綁定錢包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2701,10 +2708,6 @@
   "ll/ufR": {
     "defaultMessage": "熱門"
   },
-  "lo8eLY": {
-    "defaultMessage": "你的作品 {articleTitle} 已被列為七日書精選之作，快來看看更多精彩好文！",
-    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
-  },
   "lqdpsm": {
     "defaultMessage": "回到訂閱"
   },
@@ -2714,9 +2717,6 @@
   "m/Wg7b": {
     "defaultMessage": "圍爐描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
-  "m1wKuC": {
-    "defaultMessage": "參與活動"
   },
   "m4GG4b": {
     "defaultMessage": "刪除選集"
@@ -2814,9 +2814,6 @@
   "nGBrvw": {
     "defaultMessage": "我的收藏"
   },
-  "nLt9TU": {
-    "defaultMessage": "作品暫不可同時投稿活動及加入圍爐"
-  },
   "nNB7KU": {
     "defaultMessage": "在",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -2880,6 +2877,9 @@
   "pHg5Ju": {
     "defaultMessage": "登入密碼已設定",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
+  "pZ1keA": {
+    "defaultMessage": "作品已從活動精選中移除"
   },
   "phAZoj": {
     "defaultMessage": "選集"
@@ -3387,6 +3387,9 @@
   },
   "yubNcI": {
     "defaultMessage": "不支持單獨使用標點符號"
+  },
+  "yxMEo/": {
+    "defaultMessage": "作品已添加至活動精選"
   },
   "z1ucgb": {
     "defaultMessage": "作品已添加至圍爐"

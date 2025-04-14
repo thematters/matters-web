@@ -4,12 +4,12 @@
   padding: var(--sp16);
 }
 
-.freeWriteBlue {
-  color: var(--color-free-write-blue);
+.campaignBlue {
+  color: var(--color-campaign-blue);
 
   & .name {
     font-weight: var(--font-medium);
-    color: var(--color-free-write-blue);
+    color: var(--color-campaign-blue);
   }
 }
 
