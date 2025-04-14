@@ -26,6 +26,9 @@
   "+GAaxB": {
     "defaultMessage": "作品因违反社区约章被封存"
   },
+  "+IYfVH": {
+    "defaultMessage": "移除活动精选"
+  },
   "+OStJM": {
     "defaultMessage": "重置交易密码"
   },
@@ -120,6 +123,9 @@
   },
   "/wKyxw": {
     "defaultMessage": "发布失败"
+  },
+  "/wbyoV": {
+    "defaultMessage": "作品已从活动移除"
   },
   "0/gRer": {
     "defaultMessage": "我正在搬家到 Matters，邀请你一起来"
@@ -259,6 +265,9 @@
   },
   "2D/X90": {
     "defaultMessage": "为什么采用 Optimism？"
+  },
+  "2J3mz4": {
+    "defaultMessage": "加到活动精选"
   },
   "2P5JII": {
     "defaultMessage": "解绑",
@@ -412,9 +421,6 @@
     "defaultMessage": "喜欢你已删除的动态",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
-  "5SgH7l": {
-    "defaultMessage": "作品已添加至自由写精选"
-  },
   "5UglrB": {
     "defaultMessage": "送出成功"
   },
@@ -517,9 +523,6 @@
   },
   "6oOCCL": {
     "defaultMessage": "上传档案"
-  },
-  "6pc948": {
-    "defaultMessage": "参与活动"
   },
   "6q0G5e": {
     "defaultMessage": "加入成功",
@@ -1152,6 +1155,9 @@
     "defaultMessage": "回到我的创作",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
+  "HUf/E+": {
+    "defaultMessage": "移出活动"
+  },
   "HYW0fI": {
     "defaultMessage": "上链后，作品不可删除，去中心化保存"
   },
@@ -1587,9 +1593,6 @@
   "Q8Qw5B": {
     "defaultMessage": "个人简介"
   },
-  "QFCfA7": {
-    "defaultMessage": "添加到自由写精选"
-  },
   "QKJWqd": {
     "defaultMessage": "收藏",
     "description": "src/components/Buttons/TagBookmark/Bookmark.tsx"
@@ -1964,6 +1967,9 @@
     "defaultMessage": "在你的围炉广播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "XTRqqT": {
+    "defaultMessage": "参与活动"
+  },
   "XTyKFR": {
     "defaultMessage": "精挑细选作品，帮助读者更容易发现优质内容"
   },
@@ -2072,9 +2078,6 @@
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
   },
-  "ZN1IzT": {
-    "defaultMessage": "从自由写精华中移除"
-  },
   "ZNK0I9": {
     "defaultMessage": "喜欢你的评论"
   },
@@ -2171,6 +2174,10 @@
     "defaultMessage": "聊几句？",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
+  "b0RNGM": {
+    "defaultMessage": "你的作品 {articleTitle} 已被列为活动精选之作，快来看看更多精彩好文！",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
   "b8ogKp": {
     "defaultMessage": "新增邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
@@ -2216,6 +2223,9 @@
   },
   "cPSexq": {
     "defaultMessage": "去看看其他围炉吧，希望你早日找到下一个心之所属。"
+  },
+  "cPXsvZ": {
+    "defaultMessage": "作品暂不可同时投稿活动及加入围炉"
   },
   "cQ+Lyq": {
     "defaultMessage": "游牧者计划纪念徽章",
@@ -2576,9 +2586,6 @@
     "defaultMessage": "报名处理中⋯",
     "description": "type:apply"
   },
-  "jXDxa6": {
-    "defaultMessage": "作品已从自由写精华中移除"
-  },
   "jiB0Z2": {
     "defaultMessage": "无法绑定钱包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2701,10 +2708,6 @@
   "ll/ufR": {
     "defaultMessage": "热门"
   },
-  "lo8eLY": {
-    "defaultMessage": "你的作品 {articleTitle} 已被列为七日书精选之作，快来看看更多精彩好文！",
-    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
-  },
   "lqdpsm": {
     "defaultMessage": "回到订阅"
   },
@@ -2714,9 +2717,6 @@
   "m/Wg7b": {
     "defaultMessage": "围炉描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
-  "m1wKuC": {
-    "defaultMessage": "参与活动"
   },
   "m4GG4b": {
     "defaultMessage": "删除选集"
@@ -2814,9 +2814,6 @@
   "nGBrvw": {
     "defaultMessage": "我的收藏"
   },
-  "nLt9TU": {
-    "defaultMessage": "作品暂不可同时投稿活动及加入围炉"
-  },
   "nNB7KU": {
     "defaultMessage": "在 ",
     "description": "src/components/Notice/CommentCommentNotice/CommentNewReplyNotice.tsx"
@@ -2880,6 +2877,9 @@
   "pHg5Ju": {
     "defaultMessage": "登录密码已设置",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
+  },
+  "pZ1keA": {
+    "defaultMessage": "作品已从活动精选中移除"
   },
   "phAZoj": {
     "defaultMessage": "选集"
@@ -3387,6 +3387,9 @@
   },
   "yubNcI": {
     "defaultMessage": "不支持单独使用标点符号"
+  },
+  "yxMEo/": {
+    "defaultMessage": "作品已添加至活动精选"
   },
   "z1ucgb": {
     "defaultMessage": "作品已添加至围炉"
