@@ -6,7 +6,7 @@ export const fragments = {
   user: gql`
     fragment UserArticlesUser on User {
       id
-      articles(input: { first: 200, after: $after }) {
+      articles(input: { first: 20, after: $after }) {
         totalCount
         pageInfo {
           startCursor

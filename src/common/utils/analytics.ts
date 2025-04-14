@@ -319,6 +319,8 @@ type ArticleFeedType =
 
 type CollectionFeedType =
   | 'user_collection'
+  | 'collection_detail_asc'
+  | 'collection_detail_dsc'
   | 'collection_article'
   | 'user-collection-articles'
   | 'user-collection-articles-search'

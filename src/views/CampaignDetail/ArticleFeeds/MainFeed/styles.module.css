@@ -1,5 +1,5 @@
 .articleLabel {
-  color: var(--color-free-write-blue-label);
+  color: var(--color-campaign-blue-label);
 
   &.announcement {
     color: var(--color-warn-yellow);

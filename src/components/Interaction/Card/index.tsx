@@ -14,7 +14,7 @@ export type CardBgColor =
   | 'white'
   | 'transparent'
   | 'none'
-  | 'freeWriteBlue'
+  | 'campaignBlue'
 export type CardBgHoverColor =
   | 'greyHover'
   | 'greyLighter'

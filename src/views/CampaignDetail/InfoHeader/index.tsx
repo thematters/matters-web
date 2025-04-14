@@ -4,7 +4,13 @@ import { FormattedMessage } from 'react-intl'
 
 import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import { datetimeFormat, isUTC8 } from '~/common/utils'
-import { LanguageContext, ResponsiveImage, useRoute } from '~/components'
+import {
+  Expandable,
+  LanguageContext,
+  Media,
+  ResponsiveImage,
+  useRoute,
+} from '~/components'
 import {
   InfoHeaderCampaignPrivateFragment,
   InfoHeaderCampaignPublicFragment,
@@ -36,6 +42,24 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
     [styles.horizontalSpacing]: !isInTemporaryChannel,
   })
 
+  const name =
+    campaign[
+      lang === 'zh_hans'
+        ? 'nameZhHans'
+        : lang === 'zh_hant'
+          ? 'nameZhHant'
+          : 'nameEn'
+    ]
+
+  const description =
+    campaign[
+      lang === 'zh_hans'
+        ? 'descriptionZhHans'
+        : lang === 'zh_hant'
+          ? 'descriptionZhHant'
+          : 'descriptionEn'
+    ]
+
   return (
     <Apply.Dialog campaign={campaign}>
       {({ openDialog }) => (
@@ -47,17 +71,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
           )}
 
           <section className={styles.title}>
-            <h1 className={styles.name}>
-              {
-                campaign[
-                  lang === 'zh_hans'
-                    ? 'nameZhHans'
-                    : lang === 'zh_hant'
-                      ? 'nameZhHant'
-                      : 'nameEn'
-                ]
-              }
-            </h1>
+            <h1 className={styles.name}>{name}</h1>
 
             <section className={styles.apply}>
               <Apply.Button
@@ -124,6 +138,29 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                 </span>
               )}
             </section>
+          </section>
+
+          <section className={styles.description}>
+            <Media at="sm">
+              <Expandable
+                content={description}
+                limit={3}
+                size={15}
+                collapseable={false}
+              >
+                <p dangerouslySetInnerHTML={{ __html: description || '' }} />
+              </Expandable>
+            </Media>
+            <Media greaterThan="sm">
+              <Expandable
+                content={description}
+                limit={2}
+                size={15}
+                collapseable={false}
+              >
+                <p dangerouslySetInnerHTML={{ __html: description || '' }} />
+              </Expandable>
+            </Media>
           </section>
 
           <section className={styles.extra}>

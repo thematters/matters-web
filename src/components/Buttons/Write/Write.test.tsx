@@ -33,7 +33,7 @@ describe('<WriteButton>', () => {
     const $toast = screen.getByRole('alert')
     expect($toast).toBeInTheDocument()
     expect($toast).toHaveTextContent(
-      ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE].defaultMessage as string
+      ERROR_MESSAGES[ERROR_CODES.FORBIDDEN_BY_STATE]?.defaultMessage as string
     )
   })
 })

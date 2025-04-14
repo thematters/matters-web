@@ -109,12 +109,12 @@
   color: var(--color-likecoin);
 }
 
-.freeWriteBlue {
-  color: var(--color-free-write-blue);
+.campaignBlue {
+  color: var(--color-campaign-blue);
 }
 
-.freeWriteGreenLabel {
-  color: var(--color-free-write-green-label);
+.campaignGreenLabel {
+  color: var(--color-campaign-green-label);
 }
 
 .yellowLighter {
