@@ -81,7 +81,7 @@ const SelectCampaign = ({
 
           if (!period) return true
 
-          return now >= new Date(period?.start)
+          return now >= new Date(period.start)
         })
     : undefined
 
