@@ -1282,6 +1282,9 @@
     "defaultMessage": "已滿",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
   },
+  "K+pFNS": {
+    "defaultMessage": "活動時間{tz}"
+  },
   "K2/mHF": {
     "defaultMessage": "暫時無法解綁 {type}，因為你沒有其他登入方式（電子郵件/數字錢包/社交帳號）。",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -2642,9 +2645,6 @@
   "kkZioy": {
     "defaultMessage": "確認移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
-  },
-  "krvjo9": {
-    "defaultMessage": "活動時間{tz}："
   },
   "ksIL/T": {
     "defaultMessage": "貼心提醒：此錢包位址不同於您用於登入 Matters 的錢包位址"
