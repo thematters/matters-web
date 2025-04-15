@@ -141,11 +141,11 @@
 
   &.green {
     color: var(--color-positive-green);
-    background: var(--color-free-write-green-bg);
+    background: var(--color-campaign-green-bg);
 
     &:hover {
-      color: var(--color-free-write-green-text);
-      background: var(--color-free-write-green-bg-hover);
+      color: var(--color-campaign-green-text);
+      background: var(--color-campaign-green-bg-hover);
     }
 
     &.selected {

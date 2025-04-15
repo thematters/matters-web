@@ -15,6 +15,7 @@ export const editMetaFragment = gql`
     id
     publishState
     createdAt
+    updatedAt
     cover
     assets {
       ...Asset
@@ -119,14 +120,22 @@ export const SET_CONTENT = gql`
     $title: String
     $content: String
     $summary: String
+    $lastUpdatedAt: DateTime
   ) {
     putDraft(
-      input: { id: $id, title: $title, content: $content, summary: $summary }
+      input: {
+        id: $id
+        title: $title
+        content: $content
+        summary: $summary
+        lastUpdatedAt: $lastUpdatedAt
+      }
     ) {
       id
       title
       content
       cover
+      updatedAt
       assets {
         ...Asset
       }
@@ -138,24 +147,24 @@ export const SET_CONTENT = gql`
 `
 
 export const SET_COLLECTION = gql`
-  mutation SetDraftCollection($id: ID!, $collection: [ID]) {
-    putDraft(input: { id: $id, collection: $collection }) {
+  mutation SetDraftCollection(
+    $id: ID!
+    $collection: [ID]
+    $lastUpdatedAt: DateTime
+  ) {
+    putDraft(
+      input: { id: $id, collection: $collection, lastUpdatedAt: $lastUpdatedAt }
+    ) {
       id
-      collection(input: { first: null }) {
-        edges {
-          node {
-            ...ArticleDigestDropdownArticle
-          }
-        }
-      }
+      ...EditMetaDraft
     }
   }
-  ${ArticleDigestDropdown.fragments.article}
+  ${editMetaFragment}
 `
 
 export const SET_COVER = gql`
-  mutation SetDraftCover($id: ID!, $cover: ID) {
-    putDraft(input: { id: $id, cover: $cover }) {
+  mutation SetDraftCover($id: ID!, $cover: ID, $lastUpdatedAt: DateTime) {
+    putDraft(input: { id: $id, cover: $cover, lastUpdatedAt: $lastUpdatedAt }) {
       id
       ...EditMetaDraft
     }
@@ -164,8 +173,8 @@ export const SET_COVER = gql`
 `
 
 export const SET_TAGS = gql`
-  mutation SetDraftTags($id: ID!, $tags: [String!]!) {
-    putDraft(input: { id: $id, tags: $tags }) {
+  mutation SetDraftTags($id: ID!, $tags: [String!]!, $lastUpdatedAt: DateTime) {
+    putDraft(input: { id: $id, tags: $tags, lastUpdatedAt: $lastUpdatedAt }) {
       id
       ...EditMetaDraft
     }
@@ -178,24 +187,36 @@ export const SET_SUPPORT_REQUEST_REPLY = gql`
     $id: ID!
     $requestForDonation: requestForDonation_String_maxLength_140
     $replyToDonator: replyToDonator_String_maxLength_140
+    $lastUpdatedAt: DateTime
   ) {
     putDraft(
       input: {
         id: $id
         requestForDonation: $requestForDonation
         replyToDonator: $replyToDonator
+        lastUpdatedAt: $lastUpdatedAt
       }
     ) {
       id
-      requestForDonation
-      replyToDonator
+      ...EditMetaDraft
     }
   }
+  ${editMetaFragment}
 `
 
 export const SET_SENSITIVE_BY_AUTHOR = gql`
-  mutation SetDraftSensitiveByAuthor($id: ID!, $sensitiveByAuthor: Boolean) {
-    putDraft(input: { id: $id, sensitive: $sensitiveByAuthor }) {
+  mutation SetDraftSensitiveByAuthor(
+    $id: ID!
+    $sensitiveByAuthor: Boolean
+    $lastUpdatedAt: DateTime
+  ) {
+    putDraft(
+      input: {
+        id: $id
+        sensitive: $sensitiveByAuthor
+        lastUpdatedAt: $lastUpdatedAt
+      }
+    ) {
       id
       ...EditMetaDraft
     }
@@ -204,8 +225,18 @@ export const SET_SENSITIVE_BY_AUTHOR = gql`
 `
 
 export const SET_PUBLISH_ISCN = gql`
-  mutation SetDraftPublishISCN($id: ID!, $iscnPublish: Boolean) {
-    putDraft(input: { id: $id, iscnPublish: $iscnPublish }) {
+  mutation SetDraftPublishISCN(
+    $id: ID!
+    $iscnPublish: Boolean
+    $lastUpdatedAt: DateTime
+  ) {
+    putDraft(
+      input: {
+        id: $id
+        iscnPublish: $iscnPublish
+        lastUpdatedAt: $lastUpdatedAt
+      }
+    ) {
       id
       ...EditMetaDraft
     }
@@ -214,8 +245,14 @@ export const SET_PUBLISH_ISCN = gql`
 `
 
 export const SET_CAN_COMMENT = gql`
-  mutation SetDraftCanComment($id: ID!, $canComment: Boolean) {
-    putDraft(input: { id: $id, canComment: $canComment }) {
+  mutation SetDraftCanComment(
+    $id: ID!
+    $canComment: Boolean
+    $lastUpdatedAt: DateTime
+  ) {
+    putDraft(
+      input: { id: $id, canComment: $canComment, lastUpdatedAt: $lastUpdatedAt }
+    ) {
       id
       ...EditMetaDraft
     }
@@ -224,8 +261,18 @@ export const SET_CAN_COMMENT = gql`
 `
 
 export const SET_INDENT = gql`
-  mutation SetDraftIndent($id: ID!, $indented: Boolean) {
-    putDraft(input: { id: $id, indentFirstLine: $indented }) {
+  mutation SetDraftIndent(
+    $id: ID!
+    $indented: Boolean
+    $lastUpdatedAt: DateTime
+  ) {
+    putDraft(
+      input: {
+        id: $id
+        indentFirstLine: $indented
+        lastUpdatedAt: $lastUpdatedAt
+      }
+    ) {
       id
       ...EditMetaDraft
     }
@@ -239,6 +286,7 @@ export const SET_ACCESS = gql`
     $circle: ID
     $accessType: ArticleAccessType
     $license: ArticleLicenseType
+    $lastUpdatedAt: DateTime
   ) {
     putDraft(
       input: {
@@ -246,19 +294,14 @@ export const SET_ACCESS = gql`
         circle: $circle
         accessType: $accessType
         license: $license
+        lastUpdatedAt: $lastUpdatedAt
       }
     ) {
       id
-      access {
-        type
-        circle {
-          ...DigestRichCirclePublic
-        }
-      }
-      license
+      ...EditMetaDraft
     }
   }
-  ${CircleDigest.Rich.fragments.circle.public}
+  ${editMetaFragment}
 `
 
 export const SET_CAMPAIGN = gql`
@@ -266,30 +309,20 @@ export const SET_CAMPAIGN = gql`
     $id: ID!
     $campaigns: [ArticleCampaignInput!]
     $isReset: Boolean!
+    $lastUpdatedAt: DateTime
   ) {
-    setDraftCampaign: putDraft(input: { id: $id, campaigns: $campaigns })
-      @skip(if: $isReset) {
+    setDraftCampaign: putDraft(
+      input: { id: $id, campaigns: $campaigns, lastUpdatedAt: $lastUpdatedAt }
+    ) @skip(if: $isReset) {
       id
-      campaigns {
-        campaign {
-          id
-        }
-        stage {
-          id
-        }
-      }
+      ...EditMetaDraft
     }
-    resetDraftCampaign: putDraft(input: { id: $id, campaigns: [] })
-      @include(if: $isReset) {
+    resetDraftCampaign: putDraft(
+      input: { id: $id, campaigns: [], lastUpdatedAt: $lastUpdatedAt }
+    ) @include(if: $isReset) {
       id
-      campaigns {
-        campaign {
-          id
-        }
-        stage {
-          id
-        }
-      }
+      ...EditMetaDraft
     }
   }
+  ${editMetaFragment}
 `

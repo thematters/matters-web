@@ -28,8 +28,8 @@ export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
     <>
       <div className={styles.header}>
         <h1>{displayChannelName(channel.name)}</h1>
+        {channel.note && <p className={styles.description}>{channel.note}</p>}
       </div>
-      {channel.note && <p className={styles.description}>{channel.note}</p>}
     </>
   )
 }

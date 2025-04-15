@@ -66,10 +66,7 @@ const BaseMobileSettingsDialog = ({
           {campaigns && campaigns.length > 0 && editCampaign && (
             <section className={styles.campaign}>
               <h3 className={styles.title}>
-                <FormattedMessage
-                  defaultMessage="Add to FreeWrite"
-                  id="6pc948"
-                />
+                <FormattedMessage defaultMessage="Add to event" id="XTRqqT" />
               </h3>
               <SelectCampaign
                 campaigns={campaigns}

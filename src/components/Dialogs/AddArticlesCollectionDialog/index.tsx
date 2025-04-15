@@ -36,13 +36,11 @@ interface FormValues {
 interface AddArticlesCollectionDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   collection: CollectionArticlesCollectionFragment
-  onUpdate: () => void
 }
 
 const BaseAddArticlesCollectionDialog = ({
   children,
   collection,
-  onUpdate,
 }: AddArticlesCollectionDialogProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -98,7 +96,6 @@ const BaseAddArticlesCollectionDialog = ({
         MAX_COLLECTION_ARTICLES_COUNT - collection.articles.totalCount
       )
 
-      onUpdate()
       await update({
         variables: {
           input: {

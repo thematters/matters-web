@@ -123,7 +123,7 @@ const ApplyCampaignButton = ({
 
     if (viewer.isInactive) {
       toast.error({
-        message: intl.formatMessage(ERROR_MESSAGES[ERROR_CODES.FORBIDDEN]),
+        message: intl.formatMessage(ERROR_MESSAGES[ERROR_CODES.FORBIDDEN]!),
       })
       return
     }

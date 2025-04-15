@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
+import { analytics } from '~/common/utils'
 import {
   ArticleDigestCurated,
   EmptyWork,
@@ -57,6 +58,23 @@ const ChannelFeed = () => {
     numOfCards: number,
     channelId?: string
   ) => {
+    const onClick = (
+      contentType: 'article' | 'user',
+      location: number,
+      id: string,
+      rootId?: string,
+      note?: Record<string, any>
+    ) => {
+      analytics.trackEvent('click_feed', {
+        type: 'channel_card',
+        contentType,
+        location,
+        id,
+        rootId,
+        note,
+      })
+    }
+
     return (
       <section className={feedStyles.cards}>
         {cardEdges.slice(0, numOfCards).map((edge, i) => (
@@ -67,6 +85,16 @@ const ChannelFeed = () => {
                 titleLineClamp={3}
                 pinned={edge.pinned}
                 channelId={channelId}
+                onClick={() =>
+                  onClick('article', i, edge.node.id, channelId, {
+                    pinned: edge.pinned,
+                  })
+                }
+                onClickAuthor={() =>
+                  onClick('user', i, edge.node.author.id, channelId, {
+                    pinned: edge.pinned,
+                  })
+                }
               />
             </Media>
             <Media greaterThan="xs">
@@ -75,6 +103,16 @@ const ChannelFeed = () => {
                 titleLineClamp={2}
                 pinned={edge.pinned}
                 channelId={channelId}
+                onClick={() =>
+                  onClick('article', i, edge.node.id, channelId, {
+                    pinned: edge.pinned,
+                  })
+                }
+                onClickAuthor={() =>
+                  onClick('user', i, edge.node.author.id, channelId, {
+                    pinned: edge.pinned,
+                  })
+                }
               />
             </Media>
           </React.Fragment>
