@@ -1282,6 +1282,9 @@
     "defaultMessage": "FULL",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
   },
+  "K+pFNS": {
+    "defaultMessage": "Event period{tz}"
+  },
   "K2/mHF": {
     "defaultMessage": "Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account).",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -2642,9 +2645,6 @@
   "kkZioy": {
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
-  },
-  "krvjo9": {
-    "defaultMessage": "Event period{tz}:"
   },
   "ksIL/T": {
     "defaultMessage": "Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
