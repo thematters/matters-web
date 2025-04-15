@@ -9,6 +9,7 @@ import {
   ENTITY_TYPE,
   ERROR_CODES,
   MAX_ARTICLE_CONTENT_LENGTH,
+  PATHS,
 } from '~/common/enums'
 import {
   containsFigureTag,
@@ -25,6 +26,7 @@ import {
   SpinnerBlock,
   Throw404,
   useDirectImageUpload,
+  useRoute,
   useUnloadConfirm,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
@@ -96,6 +98,7 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
 
 const BaseDraftDetail = () => {
   const intl = useIntl()
+  const { router } = useRoute()
 
   const { addRequest, createDraft, getDraftId, isNewDraft, getDraftUpdatedAt } =
     useContext(DraftDetailStateContext)
@@ -316,23 +319,25 @@ const BaseDraftDetail = () => {
     } catch (error: any) {
       setSaveStatus('saveFailed')
 
-      const [, codes] = parseFormSubmitErrors(error as any)
-      codes.forEach((code) => {
-        if (code.includes(ERROR_CODES.DRAFT_VERSION_CONFLICT)) {
-          const confirmResult = window.confirm(
-            intl.formatMessage({
-              defaultMessage:
-                'The draft has been updated on another device or tab. Click OK to continue editing and overwrite this version.',
-              id: 'kEfk9g',
-            })
-          )
+      setTimeout(() => {
+        const [, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code.includes(ERROR_CODES.DRAFT_VERSION_CONFLICT)) {
+            const confirmResult = window.confirm(
+              intl.formatMessage({
+                defaultMessage:
+                  'The draft has been updated on another device or tab. Click OK to continue editing and overwrite this version.',
+                id: 'kEfk9g',
+              })
+            )
 
-          if (confirmResult) {
-            update(newDraft, true)
-          } else {
-            window.close()
+            if (confirmResult) {
+              update(newDraft, true)
+            } else {
+              router.push(PATHS.ME_DRAFTS)
+            }
           }
-        }
+        })
       })
     }
   }
