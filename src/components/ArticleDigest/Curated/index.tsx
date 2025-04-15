@@ -1,4 +1,5 @@
 import gql from 'graphql-tag'
+import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
@@ -89,11 +90,11 @@ export const ArticleDigestCurated = ({
       testId={TEST_ID.DIGEST_ARTICLE_CURATED}
       {...cardProps}
     >
-      <section
-        className={styles.cover}
-        data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
-      >
-        <LinkWrapper {...path} onClick={onClick}>
+      <LinkWrapper {...path} onClick={onClick}>
+        <section
+          className={styles.cover}
+          data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
+        >
           <Media lessThan="sm">
             <ResponsiveImage
               url={cover || IMAGE_DEFAULT_CURATED}
@@ -108,35 +109,38 @@ export const ArticleDigestCurated = ({
               height={404}
             />
           </Media>
-        </LinkWrapper>
-        {pinned && (
-          <Tooltip
-            content={intl.formatMessage({
-              id: 'xEJN39',
-              defaultMessage: 'Featured',
-              description: 'Channel feed featured article',
-            })}
-            placement="bottom"
-          >
-            <div className={styles.pinned}>
-              <Icon icon={IconStar} size={20} color="white" />
-            </div>
-          </Tooltip>
-        )}
-      </section>
 
-      <section className={styles.author}>
-        <UserDigest.Mini
-          user={article.author}
-          avatarSize={20}
-          textSize={13}
-          nameColor="black"
-          spacing={4}
-          hasAvatar
-          hasDisplayName
-          onClick={onClickAuthor}
-        />
-      </section>
+          {pinned && (
+            <Tooltip
+              content={intl.formatMessage({
+                id: 'xEJN39',
+                defaultMessage: 'Featured',
+                description: 'Channel feed featured article',
+              })}
+              placement="bottom"
+            >
+              <div className={styles.pinned}>
+                <Icon icon={IconStar} size={20} color="white" />
+              </div>
+            </Tooltip>
+          )}
+        </section>
+      </LinkWrapper>
+
+      <Link href={path.href}>
+        <section className={styles.author}>
+          <UserDigest.Mini
+            user={article.author}
+            avatarSize={20}
+            textSize={13}
+            nameColor="black"
+            spacing={4}
+            hasAvatar
+            hasDisplayName
+            onClick={onClickAuthor}
+          />
+        </section>
+      </Link>
 
       <section className={styles.title}>
         <ArticleDigestTitle
