@@ -1,6 +1,7 @@
 .cover {
   position: relative;
   width: 100%;
+  margin-bottom: var(--sp16);
 
   &::after {
     display: block;
@@ -35,9 +36,11 @@
 }
 
 .author {
-  margin-top: var(--sp16);
+  display: flex;
 }
 
 .title {
-  margin-top: var(--sp8);
+  & > a {
+    padding-top: var(--sp8);
+  }
 }
