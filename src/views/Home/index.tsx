@@ -1,5 +1,5 @@
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
-import { Head, Layout } from '~/components'
+import { Announcements, Head, Layout, Spacer } from '~/components'
 
 import Feed from './Feed'
 import Sidebar from './Sidebar'
@@ -9,6 +9,8 @@ const Home = () => {
     <Layout.Main
       aside={
         <>
+          <Spacer size="sp16" />
+          <Announcements />
           <Sidebar.Authors />
           <Sidebar.Tags />
           <Sidebar.Billboard />

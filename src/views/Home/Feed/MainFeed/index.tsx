@@ -1,10 +1,9 @@
 import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Media, Spacer, ViewerContext } from '~/components'
+import { Announcements, Media, Spacer, ViewerContext } from '~/components'
 import { useRoute } from '~/components'
 
-import Announcements from '../../Announcements'
 import Authors from '../Authors'
 import Billboard from '../Billboard'
 import FeedRenderer from '../components/FeedRenderer'
@@ -103,14 +102,17 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType: propFeedType }) => {
     const note = recommendation?.icymiTopic?.note || 'hello world'
     return (
       <>
+        <Media lessThan="md">
+          <Spacer size="sp20" />
+          <Announcements />
+        </Media>
         <section className={styles.header}>
           <h1>
             <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
           </h1>
           {note && <p className={styles.description}>{note}</p>}
         </section>
-        <Spacer size="sp20" />
-        <Announcements />
+
         {recommendation &&
           'icymiTopic' in recommendation &&
           recommendation.icymiTopic && (
