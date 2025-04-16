@@ -1,9 +1,9 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
 import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
-import IMAGE_DEFAULT_CURATED from '@/public/static/images/default-curated.svg'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
@@ -19,6 +19,7 @@ import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestCuratedArticleFragment, AssetType } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
+import CoverIcon from './CoverIcon'
 import FooterActions from './FooterActions'
 import styles from './styles.module.css'
 export type ArticleDigestCuratedProps = {
@@ -81,6 +82,11 @@ export const ArticleDigestCurated = ({
     article,
   })
 
+  const hasCover = !!cover
+  const coverClasses = classNames(styles.cover, {
+    [styles.hasCover]: hasCover,
+  })
+
   return (
     <Card
       {...path}
@@ -92,22 +98,16 @@ export const ArticleDigestCurated = ({
     >
       <LinkWrapper {...path} onClick={onClick}>
         <section
-          className={styles.cover}
+          className={coverClasses}
           data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
         >
           <Media lessThan="sm">
-            <ResponsiveImage
-              url={cover || IMAGE_DEFAULT_CURATED}
-              width={334}
-              height={167}
-            />
+            {cover && <ResponsiveImage url={cover} width={334} height={167} />}
+            {!cover && <CoverIcon title={article.title} />}
           </Media>
           <Media greaterThanOrEqual="sm">
-            <ResponsiveImage
-              url={cover || IMAGE_DEFAULT_CURATED}
-              width={404}
-              height={404}
-            />
+            {cover && <ResponsiveImage url={cover} width={404} height={404} />}
+            {!cover && <CoverIcon title={article.title} />}
           </Media>
 
           {pinned && (
