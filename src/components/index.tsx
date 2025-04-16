@@ -53,6 +53,7 @@ export * from './Truncate'
  * Compositions
  */
 export * from './Analytics'
+export * from './Announcements'
 export * from './ArticleDigest'
 export * from './Buttons'
 export * from './Charts'
