@@ -94,7 +94,7 @@ const Follow = () => {
       <Head
         title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
       />
-      <Media lessThan="md">
+      <Media lessThan="lg">
         <Spacer size="sp20" />
         <Announcements />
       </Media>
