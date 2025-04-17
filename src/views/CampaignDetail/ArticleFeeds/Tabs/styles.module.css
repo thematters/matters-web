@@ -1,12 +1,12 @@
 .tabs {
   position: sticky;
-  top: var(--sm-top-nav-height);
-  z-index: 1;
+  top: var(--global-nav-height-mobile);
+  z-index: var(--z-index-sticky-tabs);
   padding-top: var(--sp20);
   padding-bottom: var(--sp8);
   background-color: var(--color-white);
 
   @media (--sm-up) {
-    top: var(--lg-top-nav-height);
+    top: var(--global-nav-height);
   }
 }

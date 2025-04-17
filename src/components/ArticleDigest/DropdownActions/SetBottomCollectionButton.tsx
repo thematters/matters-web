@@ -27,12 +27,10 @@ const SetBottomCollectionButton = ({
   collectionId,
   articleId,
   collectionArticleCount,
-  onClick,
 }: {
   articleId: string
   collectionId: string
   collectionArticleCount: number
-  onClick: () => void
 }) => {
   const [update] = useMutation<SetBottomCollectionMutation>(
     SET_BOTTOM_COLLECTION,
@@ -63,10 +61,7 @@ const SetBottomCollectionButton = ({
         />
       }
       icon={<Icon icon={IconArrowLDown} size={20} />}
-      onClick={async () => {
-        onClick()
-        await update()
-      }}
+      onClick={update}
     />
   )
 }

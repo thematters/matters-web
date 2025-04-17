@@ -11,7 +11,8 @@ const MomentDetail = () => {
       <Media lessThan="md">
         <Content shortHash={shortHash} closeDialog={onClose} />
       </Media>
-      <Media greaterThan="sm">
+
+      <Media greaterThanOrEqual="md">
         <Dialog
           isOpen={true}
           blurred

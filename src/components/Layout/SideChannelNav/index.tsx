@@ -1,5 +1,5 @@
 import classnames from 'classnames'
-import { useContext, useEffect, useRef, useState } from 'react'
+import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
@@ -32,12 +32,12 @@ const SideChannelNav = () => {
     variables: { userLanguage: lang },
   })
 
-  const checkScroll = () => {
+  const checkScroll = useCallback(() => {
     if (!contentRef.current) return
     const { scrollTop, scrollHeight, clientHeight } = contentRef.current
     setShowTopGradient(scrollTop > 10)
     setShowBottomGradient(scrollTop < scrollHeight - clientHeight - 10)
-  }
+  }, [contentRef])
 
   useEffect(() => {
     const contentElement = contentRef.current
@@ -50,14 +50,25 @@ const SideChannelNav = () => {
         contentElement.removeEventListener('scroll', checkScroll)
       }
     }
-  }, [loading, contentRef])
+  }, [loading, contentRef, checkScroll])
 
   if (loading) return <Placeholder />
 
   const channels = data?.channels || []
 
   const sortedChannels = [...channels]
-    .filter((c) => c.enabled)
+    .filter(
+      (
+        c
+      ): c is Extract<
+        typeof c,
+        { __typename?: 'TopicChannel'; enabled: boolean; name: string }
+      > =>
+        c.__typename === 'TopicChannel' &&
+        'enabled' in c &&
+        'name' in c &&
+        c.enabled
+    )
     .sort((a, b) => {
       const prefixA = parseInt(a.name.split('_')[0], 10) || 0
       const prefixB = parseInt(b.name.split('_')[0], 10) || 0
@@ -83,7 +94,9 @@ const SideChannelNav = () => {
                 isInPath('FOLLOW'),
             })}
           >
-            <FormattedMessage defaultMessage="My Page" id="enMIYK" />
+            <span>
+              <FormattedMessage defaultMessage="My Page" id="enMIYK" />
+            </span>
           </LinkWrapper>
         )}
         <LinkWrapper
@@ -95,7 +108,9 @@ const SideChannelNav = () => {
               (!isAuthed && isInPath('HOME') && !getQuery('type')),
           })}
         >
-          <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+          <span>
+            <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
+          </span>
         </LinkWrapper>
         <LinkWrapper
           href={TEMPORARY_CHANNEL_URL}
@@ -103,7 +118,6 @@ const SideChannelNav = () => {
             [styles.item]: true,
             [styles.selectedChannel]: isInTemporaryChannel,
             [styles.temporaryChannel]: true,
-            [styles.selectedTemporaryChannel]: isInTemporaryChannel,
           })}
         >
           <span>
@@ -125,11 +139,13 @@ const SideChannelNav = () => {
               isInPath('HOME') && getQuery('type') === 'newest',
           })}
         >
-          <FormattedMessage
-            defaultMessage="Latest"
-            id="gykfC8"
-            description="src/components/Layout/SideChannelNav/index.tsx"
-          />
+          <span>
+            <FormattedMessage
+              defaultMessage="Latest"
+              id="gykfC8"
+              description="src/components/Layout/SideChannelNav/index.tsx"
+            />
+          </span>
         </LinkWrapper>
       </section>
     </section>

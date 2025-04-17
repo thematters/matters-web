@@ -22,6 +22,8 @@ interface Props {
   forbidden?: boolean
 }
 
+type ItemType = 'article' | 'moment'
+
 const ActivityPopover = ({ authed, forbidden }: Props) => {
   const { isInPath } = useRoute()
   const isSmUp = useMediaQuery(`(min-width: ${BREAKPOINTS.MD}px)`)
@@ -36,7 +38,7 @@ const ActivityPopover = ({ authed, forbidden }: Props) => {
       ? `${window.location.origin}${userProfilePath.href}?${URL_USER_PROFILE.OPEN_POST_MOMENT_FORM.key}=${URL_USER_PROFILE.OPEN_POST_MOMENT_FORM.value}`
       : ''
 
-  const onClick = (type: 'article' | 'moment') => {
+  const onClick = (type: ItemType) => {
     if (!authed) {
       window.dispatchEvent(
         new CustomEvent(OPEN_UNIVERSAL_AUTH_DIALOG, {
@@ -61,49 +63,53 @@ const ActivityPopover = ({ authed, forbidden }: Props) => {
     })
     return
   }
-  return (
-    <Menu>
-      <Menu.Item
-        text={<FormattedMessage defaultMessage="Moment" id="afLdf2" />}
-        icon={<Icon icon={IconComment} size={20} />}
-        is="link"
-        href={
-          authed && !forbidden
-            ? isSmUp
-              ? openMomentFormPath
-              : PATHS.MOMENT_DETAIL_EDIT
-            : undefined
-        }
-        htmlHref={
-          authed && !forbidden
-            ? isSmUp
-              ? openMomentFormPath
-              : PATHS.MOMENT_DETAIL_EDIT
-            : undefined
-        }
-        onClick={() => {
-          onClick('moment')
-        }}
-      />
 
-      <Menu.Item
-        text={<FormattedMessage defaultMessage="Article" id="jx7Hn3" />}
-        icon={<Icon icon={IconEdit} size={20} />}
-        is="link"
-        href={
+  const getItemProps = (type: ItemType) => {
+    const config = {
+      moment: {
+        text: <FormattedMessage defaultMessage="Moment" id="afLdf2" />,
+        icon: <Icon icon={IconComment} size={20} />,
+        href:
+          authed && !forbidden
+            ? isSmUp
+              ? openMomentFormPath
+              : PATHS.MOMENT_DETAIL_EDIT
+            : undefined,
+        htmlHref:
+          authed && !forbidden
+            ? isSmUp
+              ? openMomentFormPath
+              : PATHS.MOMENT_DETAIL_EDIT
+            : undefined,
+      },
+      article: {
+        text: <FormattedMessage defaultMessage="Article" id="jx7Hn3" />,
+        icon: <Icon icon={IconEdit} size={20} />,
+        href:
           authed && !forbidden && !isInDraftDetail
             ? PATHS.ME_DRAFT_NEW
-            : undefined
-        }
-        htmlHref={
+            : undefined,
+        htmlHref:
           authed && !forbidden && isInDraftDetail
             ? PATHS.ME_DRAFT_NEW
-            : undefined
-        }
-        onClick={() => {
-          onClick('article')
-        }}
-      />
+            : undefined,
+      },
+    }
+
+    return {
+      text: config[type].text,
+      icon: config[type].icon,
+      is: 'link' as const,
+      href: config[type].href,
+      htmlHref: config[type].htmlHref,
+      onClick: () => onClick(type),
+    }
+  }
+
+  return (
+    <Menu>
+      <Menu.Item {...getItemProps('moment')} />
+      <Menu.Item {...getItemProps('article')} />
     </Menu>
   )
 }

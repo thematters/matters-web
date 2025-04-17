@@ -150,10 +150,14 @@ const Notifications = () => {
 
   return (
     <Layout.Main>
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Notifications',
+          id: 'NAidKb',
+        })}
+      />
       <Media lessThan="md">
         <Layout.Header
-          // left={<Layout.Header.MeButton />}
-          // right={<Layout.Header.Title id="notifications" />}
           left={
             <Layout.Header.Title>
               <FormattedMessage defaultMessage="Notifications" id="NAidKb" />
@@ -162,16 +166,9 @@ const Notifications = () => {
         />
         <Spacer size="sp16" />
       </Media>
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <Spacer size="sp32" />
       </Media>
-
-      <Head
-        title={intl.formatMessage({
-          defaultMessage: 'Notifications',
-          id: 'NAidKb',
-        })}
-      />
 
       <Layout.Main.Spacing hasVertical={false}>
         <BaseNotifications />

@@ -1,14 +1,17 @@
 .cover {
   position: relative;
   width: 100%;
+  margin-bottom: var(--sp16);
 
-  &::after {
-    display: block;
-    padding-bottom: 50%;
-    content: '';
+  &.hasCover {
+    &::after {
+      display: block;
+      padding-bottom: 50%;
+      content: '';
 
-    @media (--xs-up) {
-      padding-bottom: 100%;
+      @media (--xs-up) {
+        padding-bottom: 100%;
+      }
     }
   }
 
@@ -18,12 +21,39 @@
     overflow: hidden;
     border-radius: 0.5rem;
   }
+
+  & .pinned {
+    position: absolute;
+    top: 0;
+    right: -0.333px;
+    height: 2.25rem;
+    padding: 0.5rem;
+    background-color: var(--color-new-palette-attention-600);
+    border-radius: 0 8px;
+    box-shadow:
+      0 -2px 12px 0 rgb(0 0 0 / 5%),
+      0 1px 0 0 rgb(0 0 0 / 0%),
+      0 2px 4px 0 rgb(0 0 0 / 14%);
+  }
 }
 
 .author {
-  margin-top: var(--sp16);
+  display: flex;
 }
 
 .title {
-  margin-top: var(--sp8);
+  & > a {
+    padding-top: var(--sp8);
+  }
+}
+
+.coverIcon {
+  & svg {
+    width: 100%;
+    height: 50%;
+
+    @media (--xs-up) {
+      height: 100%;
+    }
+  }
 }

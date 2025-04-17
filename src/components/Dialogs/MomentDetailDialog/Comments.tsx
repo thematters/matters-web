@@ -155,7 +155,7 @@ const Comments = ({ moment, editing }: CommentsProps) => {
                 {CommentsList}
               </List>
             </Media>
-            <Media greaterThan="sm">
+            <Media greaterThanOrEqual="md">
               <List spacing={[0, 0]} hasBorder={false}>
                 {CommentsList}
               </List>

@@ -1,7 +1,9 @@
 import Link from 'next/link'
 import { useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconPaywall } from '@/public/static/icons/24px/paywall.svg'
+import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
 import { toPath } from '~/common/utils'
 import {
   CircleDigest,
@@ -47,6 +49,7 @@ const FooterActions = ({
   } = article
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
+  const { channelId, pinned, hasTogglePinChannelArticles } = controls
 
   return (
     <footer className={styles.footer}>
@@ -77,6 +80,16 @@ const FooterActions = ({
                   textSize={12}
                   textWeight="normal"
                 />
+              </TextIcon>
+            )}
+
+            {hasTogglePinChannelArticles && channelId && pinned && (
+              <TextIcon
+                icon={<Icon icon={IconStar} size={12} />}
+                size={12}
+                color="attention700"
+              >
+                <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
               </TextIcon>
             )}
 

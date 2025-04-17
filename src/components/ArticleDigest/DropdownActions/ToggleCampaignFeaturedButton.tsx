@@ -20,7 +20,7 @@ const TOGGLE_CAMPAIGN_FEATURED_ARTICLE = gql`
   }
 `
 
-const ToggleCampaignFeatured = ({
+const ToggleCampaignFeaturedButton = ({
   articleId,
   campaignId,
   campaignFeatured,
@@ -37,6 +37,18 @@ const ToggleCampaignFeatured = ({
         articles: [articleId],
         isFeatured: !campaignFeatured,
       },
+      update: (cache) => {
+        cache.evict({
+          id: cache.identify({
+            __typename: 'WritingChallenge',
+            id: campaignId,
+          }),
+        })
+        cache.gc()
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
+      },
     }
   )
 
@@ -45,13 +57,13 @@ const ToggleCampaignFeatured = ({
       text={
         campaignFeatured ? (
           <FormattedMessage
-            defaultMessage="Remove featured from Free Write"
-            id="ZN1IzT"
+            defaultMessage="Remove from event featured"
+            id="+IYfVH"
           />
         ) : (
           <FormattedMessage
-            defaultMessage="Add featured on Free Write"
-            id="QFCfA7"
+            defaultMessage="Add to event featured"
+            id="2J3mz4"
           />
         )
       }
@@ -67,13 +79,13 @@ const ToggleCampaignFeatured = ({
         toast.success({
           message: campaignFeatured ? (
             <FormattedMessage
-              defaultMessage="The article has been removed from the Featured"
-              id="jXDxa6"
+              defaultMessage="The article has been removed from the featured of the event"
+              id="pZ1keA"
             />
           ) : (
             <FormattedMessage
-              defaultMessage="The article has been added to the Featured"
-              id="5SgH7l"
+              defaultMessage="The article has been added to the featured of the event"
+              id="yxMEo/"
             />
           ),
         })
@@ -82,4 +94,4 @@ const ToggleCampaignFeatured = ({
   )
 }
 
-export default ToggleCampaignFeatured
+export default ToggleCampaignFeaturedButton

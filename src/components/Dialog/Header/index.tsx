@@ -62,7 +62,7 @@ const Header: React.FC<HeaderProps> = ({
         </header>
       </Media>
 
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         {hasSmUpTitle ? (
           <header className={styles.smUpheader}>
             <Title title={title} />

@@ -136,3 +136,5 @@ compiled-lang
 
 *__generated__*
 *.diff
+
+*.swp

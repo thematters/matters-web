@@ -1,49 +1,65 @@
-import { useQuery } from '@apollo/client'
-import { useIntl } from 'react-intl'
+import { useContext } from 'react'
+import { useEffect } from 'react'
 
-import { toPath } from '~/common/utils'
-import { Head, Layout } from '~/components'
+import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
+import {
+  // analytics,
+  makeSummary,
+  toPath,
+} from '~/common/utils'
+import { Head, Layout, usePublicQuery, ViewerContext } from '~/components'
 import { QueryError, Throw404, useRoute } from '~/components'
-import { CollectionDetailQuery } from '~/gql/graphql'
+import { CollectionDetailPublicQuery } from '~/gql/graphql'
 
 import AsideUserProfile from '../UserProfile/AsideUserProfile'
 import CollectionArticles from './CollectionArticles'
-import CollectionArticlesPlaceholder from './CollectionArticles/Placeholder'
 import CollectionProfile from './CollectionProfile'
 import CollectionProfilePlaceholder from './CollectionProfile/Placeholder'
-import { COLLECTION_DETAIL } from './gql'
+import { COLLECTION_DETAIL_PRIVATE, COLLECTION_DETAIL_PUBLIC } from './gql'
 
 const BaseCollectionDetail = () => {
+  const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const collectionId = getQuery('collectionId')
-
-  const intl = useIntl()
-  const prefix = intl.formatMessage({
-    defaultMessage: 'Collection',
-    id: 'phAZoj',
-  })
 
   /**
    * Data Fetching
    */
-  const { data, loading, error } = useQuery<CollectionDetailQuery>(
-    COLLECTION_DETAIL,
-    {
+  const { data, loading, error, client } =
+    usePublicQuery<CollectionDetailPublicQuery>(COLLECTION_DETAIL_PUBLIC, {
       variables: { id: collectionId },
+    })
+  const collection = data?.node
+
+  // private data
+  const loadPrivate = async () => {
+    if (!viewer.isAuthed) {
+      return
     }
-  )
-  const collection = data?.node!
+
+    await client.query({
+      query: COLLECTION_DETAIL_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { id: collectionId },
+    })
+  }
+
+  // fetch private data
+  useEffect(() => {
+    if (!collection?.id) {
+      return
+    }
+
+    if (viewer.isAuthed) {
+      loadPrivate()
+    }
+  }, [collection?.id])
 
   /**
    * Render
    */
   if (loading) {
-    return (
-      <>
-        <CollectionProfilePlaceholder />
-        <CollectionArticlesPlaceholder />
-      </>
-    )
+    return <CollectionProfilePlaceholder />
   }
 
   if (error) {
@@ -57,7 +73,7 @@ const BaseCollectionDetail = () => {
   return (
     <>
       <Head
-        title={`${prefix} - ${collection.title} - ${collection.author.displayName} (@${collection.author.userName})`}
+        title={`${makeSummary(collection.title, MAX_META_SUMMARY_LENGTH)} - ${collection.author.displayName}`}
         path={
           toPath({
             page: 'collectionDetail',
@@ -65,13 +81,12 @@ const BaseCollectionDetail = () => {
             userName: collection.author.userName!,
           }).href
         }
-        noSuffix
-        description={collection.description}
+        description={collection.description || ''}
         image={collection.cover}
       />
 
       <CollectionProfile collection={collection} />
-      <CollectionArticles collection={collection} />
+      <CollectionArticles />
     </>
   )
 }

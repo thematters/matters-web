@@ -40,15 +40,6 @@ const REORDER_COLLECTION_ARTICLES = gql`
       }
     ) {
       id
-      articles(input: { first: 200 }) {
-        edges {
-          cursor
-          node {
-            id
-            title
-          }
-        }
-      }
     }
   }
 `
@@ -58,11 +49,9 @@ interface ViewerArticlesProps {
 }
 
 const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
-  const [update] = useMutation<ReorderCollectionArticlesMutation>(
+  const [reorder] = useMutation<ReorderCollectionArticlesMutation>(
     REORDER_COLLECTION_ARTICLES
   )
-
-  const [hasReset, setHasReset] = useState(false)
 
   const { id, articleList: articles, updatedAt } = collection
 
@@ -74,10 +63,8 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
   const [items, setItems] = useState(articleEdges)
 
   useEffect(() => {
-    if (hasReset) {
-      setItems(articleEdges)
-    }
-  }, [articles.edges])
+    setItems(articleEdges)
+  }, [articles.edges?.map(({ node }) => node.id).join(',')])
 
   return (
     <>
@@ -114,7 +101,8 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           <DropdownActions collection={collection} />
         </section>
       </section>
-      {collection.articles.totalCount >= MAX_COLLECTION_ARTICLES_COUNT && (
+
+      {articles.totalCount >= MAX_COLLECTION_ARTICLES_COUNT && (
         <Tooltip
           content={
             <FormattedMessage
@@ -135,11 +123,9 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           </section>
         </Tooltip>
       )}
-      {collection.articles.totalCount < MAX_COLLECTION_ARTICLES_COUNT && (
-        <AddArticlesCollectionDialog
-          collection={collection}
-          onUpdate={() => setHasReset(true)}
-        >
+
+      {articles.totalCount < MAX_COLLECTION_ARTICLES_COUNT && (
+        <AddArticlesCollectionDialog collection={collection}>
           {({ openDialog: openAddArticlesCollection }) => (
             <section
               className={styles.addArticles}
@@ -152,6 +138,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
           )}
         </AddArticlesCollectionDialog>
       )}
+
       <section className={styles.feed}>
         {items && items.length === 1 && (
           <section className={styles.digestFeed}>
@@ -163,7 +150,6 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
               hasRemoveCollection={true}
               collectionId={id}
               collectionArticleCount={articles.totalCount}
-              onRemoveCollection={() => setHasReset(true)}
               onClick={() =>
                 analytics.trackEvent('click_feed', {
                   type: 'collection_article',
@@ -175,6 +161,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
             />
           </section>
         )}
+
         {items && items.length > 1 && (
           <DnDList
             values={items}
@@ -182,9 +169,8 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
             onChange={async ({ oldIndex, newIndex }) => {
               const collectionId = collection.id
               const articleId = items[oldIndex].node.id
-              setHasReset(false)
               setItems(arrayMove(items, oldIndex, newIndex))
-              await update({
+              await reorder({
                 variables: {
                   collectionId,
                   articleId,
@@ -216,9 +202,6 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
                       hasSetBottomCollection={true}
                       collectionId={id}
                       collectionArticleCount={articles.totalCount}
-                      onSetTopCollection={() => setHasReset(true)}
-                      onSetBottomCollection={() => setHasReset(true)}
-                      onRemoveCollection={() => setHasReset(true)}
                       onClick={() =>
                         analytics.trackEvent('click_feed', {
                           type: 'collection_article',
@@ -232,8 +215,9 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
                 </section>
               </section>
             )}
-          ></DnDList>
+          />
         )}
+
         {items && items.length > 0 && <EndOfResults message={true} />}
       </section>
     </>

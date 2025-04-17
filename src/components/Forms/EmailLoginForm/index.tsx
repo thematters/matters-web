@@ -408,7 +408,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             />
           )}
         </Media>
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <AuthTabs
             type={authFeedType}
             setType={setAuthFeedType}

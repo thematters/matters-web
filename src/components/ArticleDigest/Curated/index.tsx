@@ -1,25 +1,34 @@
+import classNames from 'classnames'
 import gql from 'graphql-tag'
+import Link from 'next/link'
+import { useIntl } from 'react-intl'
 
-import IMAGE_DEFAULT_CURATED from '@/public/static/images/default-curated.svg'
+import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import {
   Card,
   CardProps,
+  Icon,
   LinkWrapper,
   Media,
   ResponsiveImage,
+  Tooltip,
 } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import { ArticleDigestCuratedArticleFragment } from '~/gql/graphql'
+import { ArticleDigestCuratedArticleFragment, AssetType } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
+import CoverIcon from './CoverIcon'
+import FooterActions from './FooterActions'
 import styles from './styles.module.css'
-
 export type ArticleDigestCuratedProps = {
   article: ArticleDigestCuratedArticleFragment
 
   titleLineClamp?: 2 | 3
+
+  channelId?: string
+  pinned?: boolean
 
   onClick?: () => any
   onClickAuthor?: () => void
@@ -34,33 +43,48 @@ const fragments = {
       slug
       shortHash
       cover
+      assets {
+        id
+        type
+        path
+      }
       author {
         id
         userName
         ...UserDigestMiniUser
       }
       ...ArticleDigestTitleArticle
+      ...CuratedFooterActionsArticle
     }
     ${UserDigest.Mini.fragments.user}
     ${ArticleDigestTitle.fragments.article}
+    ${FooterActions.fragments.article}
   `,
 }
 
 export const ArticleDigestCurated = ({
   article,
-
+  pinned,
   titleLineClamp,
-
+  channelId,
   onClick,
   onClickAuthor,
 
   ...cardProps
 }: ArticleDigestCuratedProps) => {
+  const intl = useIntl()
   const isBanned = article.articleState === 'banned'
-  const cover = !isBanned ? article.cover : null
+  const assets = article.assets || []
+  const embed = assets.find((asset) => asset.type === AssetType.Embed)
+  const cover = !isBanned ? article.cover || embed?.path : null
   const path = toPath({
     page: 'articleDetail',
     article,
+  })
+
+  const hasCover = !!cover
+  const coverClasses = classNames(styles.cover, {
+    [styles.hasCover]: hasCover,
   })
 
   return (
@@ -72,40 +96,51 @@ export const ArticleDigestCurated = ({
       testId={TEST_ID.DIGEST_ARTICLE_CURATED}
       {...cardProps}
     >
-      <section
-        className={styles.cover}
-        data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
-      >
-        <LinkWrapper {...path} onClick={onClick}>
+      <LinkWrapper {...path} onClick={onClick}>
+        <section
+          className={coverClasses}
+          data-test-id={TEST_ID.DIGEST_ARTICLE_FEED_COVER}
+        >
           <Media lessThan="sm">
-            <ResponsiveImage
-              url={cover || IMAGE_DEFAULT_CURATED}
-              width={334}
-              height={167}
-            />
+            {cover && <ResponsiveImage url={cover} width={334} height={167} />}
+            {!cover && <CoverIcon title={article.title} size="sm" />}
           </Media>
           <Media greaterThanOrEqual="sm">
-            <ResponsiveImage
-              url={cover || IMAGE_DEFAULT_CURATED}
-              width={404}
-              height={404}
-            />
+            {cover && <ResponsiveImage url={cover} width={404} height={404} />}
+            {!cover && <CoverIcon title={article.title} size="lg" />}
           </Media>
-        </LinkWrapper>
-      </section>
 
-      <section className={styles.author}>
-        <UserDigest.Mini
-          user={article.author}
-          avatarSize={20}
-          textSize={13}
-          nameColor="black"
-          spacing={4}
-          hasAvatar
-          hasDisplayName
-          onClick={onClickAuthor}
-        />
-      </section>
+          {pinned && (
+            <Tooltip
+              content={intl.formatMessage({
+                id: 'xEJN39',
+                defaultMessage: 'Featured',
+                description: 'Channel feed featured article',
+              })}
+              placement="bottom"
+            >
+              <div className={styles.pinned}>
+                <Icon icon={IconStar} size={20} color="white" />
+              </div>
+            </Tooltip>
+          )}
+        </section>
+      </LinkWrapper>
+
+      <Link href={path.href}>
+        <section className={styles.author}>
+          <UserDigest.Mini
+            user={article.author}
+            avatarSize={20}
+            textSize={13}
+            nameColor="black"
+            spacing={4}
+            hasAvatar
+            hasDisplayName
+            onClick={onClickAuthor}
+          />
+        </section>
+      </Link>
 
       <section className={styles.title}>
         <ArticleDigestTitle
@@ -114,6 +149,13 @@ export const ArticleDigestCurated = ({
           lineClamp={titleLineClamp}
         />
       </section>
+
+      <FooterActions
+        article={article}
+        channelId={channelId}
+        pinned={pinned}
+        hasTogglePinChannelArticles
+      />
     </Card>
   )
 }

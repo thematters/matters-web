@@ -8,7 +8,10 @@ import {
 import { capitalizeFirstLetter, toPath } from '~/common/utils'
 import { LinkWrapper, ResponsiveImage } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
-import { ArticleDigestAuthorSidebarArticleFragment } from '~/gql/graphql'
+import {
+  ArticleDigestAuthorSidebarArticleFragment,
+  AssetType,
+} from '~/gql/graphql'
 
 import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
 import Placeholder from './Placeholder'
@@ -34,6 +37,11 @@ const fragments = {
       slug
       shortHash
       cover
+      assets {
+        id
+        type
+        path
+      }
       author {
         id
         userName
@@ -58,7 +66,9 @@ export const ArticleDigestAuthorSidebar = ({
 }: ArticleDigestAuthorSidebarProps) => {
   const { articleState: state, author } = article
   const isBanned = state === 'banned'
-  const cover = !isBanned ? article.cover : null
+  const assets = article.assets || []
+  const embed = assets.find((asset) => asset.type === AssetType.Embed)
+  const cover = !isBanned ? article.cover || embed?.path : null
   const containerClasses = classNames({
     [styles.container]: true,
     [styles.hasCover]: showCover && !!cover,

@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
-import { TEST_ID } from '~/common/enums'
+import { MAX_FEED_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
 import {
   DateTime,
@@ -14,6 +14,7 @@ import { UserDigest } from '~/components/UserDigest'
 import {
   ArticleDigestFeedArticlePrivateFragment,
   ArticleDigestFeedArticlePublicFragment,
+  AssetType,
 } from '~/gql/graphql'
 
 import { ArticleDigestTitle } from '../Title'
@@ -63,8 +64,11 @@ const BaseArticleDigestFeed = ({
   const { author, summary } = article
   const isBanned = article.articleState === 'banned'
   const isArchived = article.articleState === 'archived'
-  const cover = !isBanned && !isArchived ? article.cover : null
-  const cleanedSummary = isBanned && !isArchived ? '' : makeSummary(summary)
+  const assets = article.assets || []
+  const embed = assets.find((asset) => asset.type === AssetType.Embed)
+  const cover = !isBanned && !isArchived ? article.cover || embed?.path : null
+  const cleanedSummary =
+    isBanned && !isArchived ? '' : makeSummary(summary, MAX_FEED_SUMMARY_LENGTH)
 
   const path = toPath({
     page: 'articleDetail',
@@ -138,7 +142,7 @@ const BaseArticleDigestFeed = ({
             </LinkWrapper>
           )}
 
-          <Media greaterThan="sm">{footerActions}</Media>
+          <Media greaterThanOrEqual="md">{footerActions}</Media>
         </section>
         {cover && (
           <LinkWrapper {...path} onClick={onClick}>

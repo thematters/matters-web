@@ -94,7 +94,7 @@ const SupportButton = ({
           )}
         </SupportDialog>
       </Media>
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <Content onClick={toggleDonationDrawer} />
       </Media>
     </>

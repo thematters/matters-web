@@ -11,27 +11,23 @@ import LikerID from './LikerID'
 
 const SettingsMisc = () => {
   const intl = useIntl()
-  const title = intl.formatMessage({
-    defaultMessage: 'Settings - Misc',
-    id: 'Lp6CiR',
-    description: 'src/views/Me/Settings/Misc/index.tsx',
-  })
 
   return (
     <Layout.Main>
       <Layout.Header
         left={
           <Layout.Header.Title>
-            <FormattedMessage
-              defaultMessage="Settings"
-              id="8qGjpr"
-              description="src/views/Me/Settings/Misc/index.tsx"
-            />
+            <FormattedMessage defaultMessage="Settings" id="D3idYv" />
           </Layout.Header.Title>
         }
       />
 
-      <Head title={title} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Settings',
+          id: 'D3idYv',
+        })}
+      />
 
       <SettingsTabs />
 

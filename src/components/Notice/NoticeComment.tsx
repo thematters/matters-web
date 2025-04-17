@@ -187,7 +187,7 @@ const NoticeComment = ({
             </section>
           </a>
         </Media>
-        <Media greaterThan="sm">
+        <Media greaterThanOrEqual="md">
           <MomentDetailDialog shortHash={moment.shortHash}>
             {({ openDialog }) => (
               <a

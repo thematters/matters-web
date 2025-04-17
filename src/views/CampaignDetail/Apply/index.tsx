@@ -13,6 +13,20 @@ const fragments = {
         start
         end
       }
+      writingPeriod {
+        start
+        end
+      }
+      stages {
+        id
+        nameZhHant: name(input: { language: zh_hant })
+        nameZhHans: name(input: { language: zh_hans })
+        nameEn: name(input: { language: en })
+        period {
+          start
+          end
+        }
+      }
     }
   `,
   private: gql`

@@ -1,4 +1,4 @@
-.oneColumnLayout {
+.layoutbase {
   display: grid;
   grid-template-areas: 'spacingLeft main spacingRight';
   grid-template-columns: minmax(0, 1fr) minmax(0, 100%) minmax(0, 1fr);
@@ -13,8 +13,16 @@
   }
 
   @media (--lg-up) {
-    grid-template-columns: minmax(0, 1fr) 688px minmax(0, 1fr);
     margin: 0 auto;
+  }
+}
+
+.oneColumnLayout {
+  /* stylelint-disable-next-line property-no-unknown */
+  composes: layoutbase;
+
+  @media (--lg-up) {
+    grid-template-columns: minmax(0, 1fr) 688px minmax(0, 1fr);
   }
 
   & .main {
@@ -23,22 +31,11 @@
 }
 
 .twoColumnLayout {
-  display: grid;
-  grid-template-areas: 'spacingLeft main spacingRight';
-  grid-template-columns: minmax(0, 1fr) minmax(0, 100%) minmax(0, 1fr);
-  margin: 0;
-
-  @media (--sm-up) {
-    margin: 0 var(--sp16);
-  }
-
-  @media (--md-up) {
-    margin: 0 var(--sp24);
-  }
+  /* stylelint-disable-next-line property-no-unknown */
+  composes: layoutbase;
 
   @media (--lg-up) {
     grid-template-columns: minmax(0, 1fr) 1000px minmax(0, 1fr);
-    margin: 0 auto;
   }
 
   & .main {
@@ -59,22 +56,11 @@
 }
 
 .threeColumnLayout {
-  display: grid;
-  grid-template-areas: 'spacingLeft main spacingRight';
-  grid-template-columns: minmax(0, 1fr) minmax(0, 100%) minmax(0, 1fr);
-  margin: 0;
-
-  @media (--sm-up) {
-    margin: 0 var(--sp16);
-  }
-
-  @media (--md-up) {
-    margin: 0 var(--sp24);
-  }
+  /* stylelint-disable-next-line property-no-unknown */
+  composes: layoutbase;
 
   @media (--lg-up) {
     grid-template-columns: minmax(0, 1fr) 1146px minmax(0, 1fr);
-    margin: 0 auto;
   }
 
   & .main {
@@ -91,19 +77,12 @@
       grid-template-columns: 6.125rem minmax(0, 100%) 16.5rem;
       grid-column-gap: 3rem;
     }
-
-    @media (--lg-up) {
-      grid-template-areas: 'left content right';
-      grid-template-columns: 6.125rem minmax(0, 100%) 16.5rem;
-      grid-column-gap: 3rem;
-    }
   }
 }
 
 .sideNavLayout {
-  display: grid;
-  grid-template-areas: 'spacingLeft main spacingRight';
-  grid-template-columns: minmax(0, 1fr) minmax(0, 100%) minmax(0, 1fr);
+  /* stylelint-disable-next-line property-no-unknown */
+  composes: layoutbase;
   margin: 0 var(--sp16);
 
   @media (--xs-up) {
@@ -149,12 +128,10 @@
 
   & .sideNavContent {
     position: sticky;
-
-    /* topNavbar height */
-    top: var(--sm-top-nav-height);
+    top: var(--global-nav-height-mobile);
 
     @media (--sm-up) {
-      top: var(--lg-top-nav-height);
+      top: var(--global-nav-height);
     }
   }
 }
@@ -176,6 +153,10 @@
 }
 
 .aside {
+  @media (--md-up) {
+    grid-column: right;
+  }
+
   & .content {
     display: flex;
     flex-direction: column;
@@ -188,18 +169,10 @@
           margin-top: var(--sp20);
         }
       }
-    }
-  }
 
-  @media (--md-up) {
-    & .content {
-      /* min-height: 100vh; */
-
-      & .top {
+      @media (--md-up) {
         flex-grow: 1;
       }
     }
-
-    grid-column: right;
   }
 }

@@ -1,5 +1,6 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
+import { CID } from 'multiformats/cid'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
@@ -109,7 +110,7 @@ const InfoHeader = ({
                 <IPFSTextIcon />
               </button>
             </Media>
-            <Media greaterThan="sm">
+            <Media greaterThanOrEqual="md">
               <Tooltip
                 content={
                   <FormattedMessage
@@ -160,7 +161,7 @@ const InfoHeader = ({
                     <Media lessThan="md">
                       {truncate(version.dataHash!, 10, 14)}
                     </Media>
-                    <Media greaterThan="sm">{version.dataHash}</Media>
+                    <Media greaterThanOrEqual="md">{version.dataHash}</Media>
                   </TextIcon>
                 </Button>
               )}
@@ -240,9 +241,13 @@ const InfoHeader = ({
             </section>
             <section className={styles.content}>
               {gateways.slice(0, 3).map((url) => {
-                const gatewayUrl = url.replace(':hash', version.dataHash!)
+                const cid = CID.parse(version.dataHash!)
+                const cidv1 = cid.toV1().toString()
+                const gatewayUrl = url
+                  .replace(':hash', version.dataHash!)
+                  .replace(':cidv1', cidv1)
                 const hostname = url.replace(
-                  /(https:\/\/|\/ipfs\/|:hash.?)/g,
+                  /(https:\/\/|\/ipfs\/|:cidv[01]\.|:hash.?)/g,
                   ''
                 )
 

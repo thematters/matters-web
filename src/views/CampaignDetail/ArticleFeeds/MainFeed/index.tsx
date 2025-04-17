@@ -1,6 +1,6 @@
 import { NetworkStatus } from '@apollo/client'
 import React, { useContext, useEffect, useRef } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconRead } from '@/public/static/icons/24px/read.svg'
 import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
@@ -73,7 +73,7 @@ const FeaturedLabel = () => (
   <TextIcon
     icon={<Icon icon={IconStar} size={12} style={{ opacity: 0.5 }} />}
     spacing={2}
-    color="freeWriteGreenLabel"
+    color="campaignGreenLabel"
     size={12}
   >
     <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
@@ -81,6 +81,7 @@ const FeaturedLabel = () => (
 )
 
 const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
+  const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
@@ -123,7 +124,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     client.query({
       query: CAMPAIGN_ARTICLES_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: { ids: publicIds },
+      variables: { shortHash, ids: publicIds },
     })
   }
 
@@ -163,11 +164,14 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     loadPrivate(newData)
   }
 
+  const isManager = data?.campaign?.isManager
+  const isAdmin = viewer.isAdmin
+
   if (isAnnouncement) {
     return (
       <List>
         {[...announcements].reverse().map((article, i) => (
-          <List.Item key={`${feedType}:${i}`}>
+          <List.Item key={`${feedType}:${article.id}`}>
             <ArticleDigestFeed
               article={article}
               onClick={() => {
@@ -187,7 +191,8 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
                 })
               }}
               hasCampaign={false}
-              hasToggleCampaignFeatured
+              hasToggleCampaignFeatured={isManager || isAdmin}
+              hasBanCampaignArticle={isManager || isAdmin}
               campaignId={camapign.id}
               campaignFeatured={false}
             />
@@ -209,12 +214,10 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     return (
       <Empty
         icon={<Icon icon={IconRead} size={88} />}
-        description={
-          <FormattedMessage
-            defaultMessage="No one has published yet, check back later!"
-            id="TZgskS"
-          />
-        }
+        description={intl.formatMessage({
+          defaultMessage: 'No one has published yet, check back later!',
+          id: 'TZgskS',
+        })}
       />
     )
   }
@@ -228,7 +231,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
     >
       <List>
         {edges.map(({ node, featured, announcement }, i) => (
-          <List.Item key={`${feedType}:${i}`}>
+          <List.Item key={`${feedType}:${node.id}`}>
             <ArticleDigestFeed
               article={node}
               label={
@@ -265,7 +268,8 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
               }}
               hasCircle={false}
               hasCampaign={false}
-              hasToggleCampaignFeatured
+              hasToggleCampaignFeatured={isManager || isAdmin}
+              hasBanCampaignArticle={isManager || isAdmin}
               campaignId={camapign.id}
               campaignFeatured={isFeatured}
             />

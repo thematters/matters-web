@@ -38,9 +38,15 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
     setFirstRender(false)
   }, [])
 
+  if (!channel || channel.__typename !== 'TopicChannel') {
+    return null
+  }
+
+  const channelName = channel.name
+
   return (
     <Tooltip
-      content={displayChannelName(channel.name)}
+      content={displayChannelName(channelName)}
       zIndex={1000}
       placement="auto-start"
       delay={[1000, null]}
@@ -53,10 +59,10 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
         className={classnames({
           [styles.item]: true,
           [styles.selectedChannel]: shortHash === channel.shortHash,
-          [styles.lineClampable]: !firstRender,
+          [styles.lineClampable]: !firstRender && lineClampable,
         })}
       >
-        <span>{displayChannelName(channel.name)}</span>
+        <span>{displayChannelName(channelName)}</span>
       </LinkWrapper>
     </Tooltip>
   )

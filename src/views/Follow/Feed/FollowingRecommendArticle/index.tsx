@@ -1,5 +1,6 @@
 import React from 'react'
 
+import { MAX_FEED_SUMMARY_LENGTH } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
 import {
   Card,
@@ -26,7 +27,9 @@ const RecommendArticle = ({
   const { author, summary, title } = article
   const isBanned = article.recommendArticleState === 'banned'
   const cover = !isBanned ? article.cover : null
-  const cleanedSummary = isBanned ? '' : makeSummary(summary)
+  const cleanedSummary = isBanned
+    ? ''
+    : makeSummary(summary, MAX_FEED_SUMMARY_LENGTH)
   const path = toPath({
     page: 'articleDetail',
     article,

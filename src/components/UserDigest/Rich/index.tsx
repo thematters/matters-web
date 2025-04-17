@@ -37,7 +37,6 @@ export type UserDigestRichProps = {
   hasFollow?: boolean
   hasState?: boolean
   canClamp?: boolean
-  isCard?: boolean
 } & CardProps &
   Omit<AvatarProps, 'size'>
 
@@ -52,8 +51,6 @@ const Rich = ({
   hasFollow = true,
   hasState = true,
   canClamp = false,
-
-  isCard = true,
 
   ...cardProps
 }: UserDigestRichProps) => {
@@ -133,23 +130,28 @@ const Rich = ({
     )
   }
 
-  const Content = (
-    <section className={containerClasses}>
-      <Link {...path} legacyBehavior>
+  return (
+    <Card
+      {...path}
+      spacing={[12, 12]}
+      bgActiveColor="none"
+      {...cardProps}
+      testId={TEST_ID.DIGEST_USER_RICH}
+    >
+      <section className={containerClasses}>
         {isCardAsLink ? (
           <span className={styles.avatar}>
             <AvatarContent />
           </span>
         ) : (
-          <a className={styles.avatar}>
-            <AvatarContent />
-          </a>
-        )}
-      </Link>
-
-      <section className={contentClasses}>
-        <header className={styles.header}>
           <Link {...path} legacyBehavior>
+            <a className={styles.avatar}>
+              <AvatarContent />
+            </a>
+          </Link>
+        )}
+        <section className={contentClasses}>
+          <header className={styles.header}>
             {isCardAsLink ? (
               <span
                 className={styles.name}
@@ -158,45 +160,31 @@ const Rich = ({
                 {user.displayName}
               </span>
             ) : (
-              <a
-                className={styles.name}
-                data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
-              >
-                {user.displayName}
-              </a>
+              <Link {...path} legacyBehavior>
+                <a
+                  className={styles.name}
+                  data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
+                >
+                  {user.displayName}
+                </a>
+              </Link>
             )}
-          </Link>
-          {hasState && <FollowUserButton.State user={user} />}
-        </header>
+            {hasState && <FollowUserButton.State user={user} />}
+          </header>
 
-        {!subtitle && user.info.description && (
-          <p className={styles.subtitle}>{user.info.description}</p>
-        )}
-        {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-      </section>
+          {!subtitle && user.info.description && (
+            <p className={styles.subtitle}>{user.info.description}</p>
+          )}
+          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+        </section>
 
-      <section className={styles.extraButton}>
-        {hasFollow && <FollowUserButton user={user} />}
-        {extraButton}
+        <section className={styles.extraButton}>
+          {hasFollow && <FollowUserButton user={user} />}
+          {extraButton}
+        </section>
       </section>
-    </section>
+    </Card>
   )
-
-  if (isCard) {
-    return (
-      <Card
-        {...path}
-        spacing={[12, 12]}
-        bgActiveColor="none"
-        {...cardProps}
-        testId={TEST_ID.DIGEST_USER_RICH}
-      >
-        {Content}
-      </Card>
-    )
-  }
-
-  return Content
 }
 
 /**

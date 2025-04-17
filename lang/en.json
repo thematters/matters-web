@@ -29,6 +29,9 @@
   "+GAaxB": {
     "defaultMessage": "The article has been archived due to violation of terms"
   },
+  "+IYfVH": {
+    "defaultMessage": "Remove from event featured"
+  },
   "+OStJM": {
     "defaultMessage": "Reset Payment Password"
   },
@@ -121,11 +124,11 @@
     "defaultMessage": "Public",
     "description": "src/views/Circle/Analytics/ContentAnalytics/ContentTabs/index.tsx"
   },
-  "/usqHn": {
-    "defaultMessage": "{displayName}'s creative space"
-  },
   "/wKyxw": {
     "defaultMessage": "Failed to republish"
+  },
+  "/wbyoV": {
+    "defaultMessage": "The article has been removed from the event"
   },
   "0/gRer": {
     "defaultMessage": "I am migrating to Matters, and I invite you to come along"
@@ -266,9 +269,8 @@
   "2D/X90": {
     "defaultMessage": "Why Optimism?"
   },
-  "2DkkhD": {
-    "defaultMessage": "Settings - Notifications",
-    "description": "src/views/Me/Settings/Notifications/index.tsx"
+  "2J3mz4": {
+    "defaultMessage": "Add to event featured"
   },
   "2P5JII": {
     "defaultMessage": "Disconnect",
@@ -313,9 +315,6 @@
   "32bml8": {
     "defaultMessage": "Following",
     "description": "src/components/Layout/SideNav/index.tsx"
-  },
-  "33oNeg": {
-    "defaultMessage": "[Draft] {draftTitle}"
   },
   "34OLoD": {
     "defaultMessage": "Moment",
@@ -428,9 +427,6 @@
     "defaultMessage": "liked your deleted moment",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
-  "5SgH7l": {
-    "defaultMessage": "The article has been added to the Featured"
-  },
   "5UglrB": {
     "defaultMessage": "Successfully delivered"
   },
@@ -533,9 +529,6 @@
   },
   "6oOCCL": {
     "defaultMessage": "Upload file"
-  },
-  "6pc948": {
-    "defaultMessage": "Add to Free Write"
   },
   "6q0G5e": {
     "defaultMessage": "Successfully added",
@@ -641,10 +634,6 @@
   "8iciCA": {
     "defaultMessage": "Entity not found",
     "description": "ENTITY_NOT_FOUND"
-  },
-  "8qGjpr": {
-    "defaultMessage": "Settings",
-    "description": "src/views/Me/Settings/Misc/index.tsx"
   },
   "8rMZWb": {
     "defaultMessage": "replied to your discussion on",
@@ -1127,6 +1116,9 @@
   "H8KGyc": {
     "defaultMessage": "Enter"
   },
+  "H8hiL/": {
+    "defaultMessage": "Edit Circle"
+  },
   "HAlOn1": {
     "defaultMessage": "Name"
   },
@@ -1157,6 +1149,9 @@
   "HR599l": {
     "defaultMessage": "Back to my works",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
+  },
+  "HUf/E+": {
+    "defaultMessage": "Move out of the event"
   },
   "HYW0fI": {
     "defaultMessage": "After publication, your work cannot be deleted."
@@ -1282,6 +1277,9 @@
     "defaultMessage": "FULL",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
   },
+  "K+pFNS": {
+    "defaultMessage": "Event period{tz}"
+  },
   "K2/mHF": {
     "defaultMessage": "Unable to disconnect from {type} temporarily because you do not have any other log in methods (Email/Crypto wallet/Social account).",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -1319,10 +1317,6 @@
   },
   "Kwv1n3": {
     "defaultMessage": " registration is about 1 LIKE. During promotion period it is sponsored by Matters.News."
-  },
-  "KxVlDj": {
-    "defaultMessage": "Settings - Blocked Users",
-    "description": "src/views/Me/Settings/Blocked/index.tsx"
   },
   "L0J61B": {
     "defaultMessage": "Free",
@@ -1378,10 +1372,6 @@
   "LoQ3BF": {
     "defaultMessage": "This badge represents your completion of Free Write in 7 days. Congratulations on finishing this meaningful writing journey!"
   },
-  "Lp6CiR": {
-    "defaultMessage": "Settings - Misc",
-    "description": "src/views/Me/Settings/Misc/index.tsx"
-  },
   "LphWYP": {
     "defaultMessage": "Terms and Privacy Policy"
   },
@@ -1425,10 +1415,6 @@
   "Mn7GEf": {
     "defaultMessage": "Selected activities related to you in the past 24 hours",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
-  },
-  "MoyOR+": {
-    "defaultMessage": "Settings - Circle notifications",
-    "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
   "Myrqtn": {
     "defaultMessage": "🎉 Thank you for support!"
@@ -1604,9 +1590,6 @@
   },
   "Q8Qw5B": {
     "defaultMessage": "Description"
-  },
-  "QFCfA7": {
-    "defaultMessage": "Add featured on Free Write"
   },
   "QKJWqd": {
     "defaultMessage": "Bookmark",
@@ -1848,6 +1831,10 @@
     "defaultMessage": "Move to bottom",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
+  "UfvCjD": {
+    "defaultMessage": "Submit to {dayName}",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "Up5U7K": {
     "defaultMessage": "Block"
   },
@@ -1978,6 +1965,9 @@
     "defaultMessage": "mentioned you in your circle broadcast comment",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "XTRqqT": {
+    "defaultMessage": "Add to event"
+  },
   "XTyKFR": {
     "defaultMessage": "Adding articles to a collection helps readers find your articles."
   },
@@ -2055,10 +2045,6 @@
     "defaultMessage": "View article",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "YgZOAm": {
-    "defaultMessage": "My Works - Archived",
-    "description": "src/views/Me/Works/Archived/index.tsx"
-  },
   "YjW2MT": {
     "defaultMessage": "Comment has been hidden"
   },
@@ -2086,9 +2072,6 @@
   },
   "ZEMcZ6": {
     "defaultMessage": "Article Management"
-  },
-  "ZN1IzT": {
-    "defaultMessage": "Remove featured from Free Write"
   },
   "ZNK0I9": {
     "defaultMessage": "liked your comment"
@@ -2186,6 +2169,10 @@
     "defaultMessage": "Say something...",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
+  "b0RNGM": {
+    "defaultMessage": "Your article {articleTitle} has been listed as a feature of event in 7 days. Come and view more wonderful articles!",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
   "b8ogKp": {
     "defaultMessage": "Add Invitation",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
@@ -2234,6 +2221,9 @@
   },
   "cPSexq": {
     "defaultMessage": "Let's go check out the other circles."
+  },
+  "cPXsvZ": {
+    "defaultMessage": "Article cannot be added to event or circle at the same time"
   },
   "cQ+Lyq": {
     "defaultMessage": "Nomad Matters Badge",
@@ -2292,6 +2282,10 @@
   "dAvP6d": {
     "defaultMessage": "No blocked users yet",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
+  },
+  "dE4mlL": {
+    "defaultMessage": "Submit",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "dK7Dnj": {
     "defaultMessage": "🔥 Claim for free"
@@ -2433,6 +2427,10 @@
     "defaultMessage": "Uncollapse",
     "description": "src/components/CircleComment/DropdownActions/UncollapseButton.tsx"
   },
+  "g/IDCs": {
+    "defaultMessage": "Moment",
+    "description": "src/components/Dialogs/MomentDetailDialog/Content.tsx"
+  },
   "g5pX+a": {
     "defaultMessage": "About"
   },
@@ -2461,8 +2459,11 @@
   "gluNT8": {
     "defaultMessage": "Enter URL"
   },
+  "gvTltk": {
+    "defaultMessage": "Draft - {title}"
+  },
   "gykfC8": {
-    "defaultMessage": "還有",
+    "defaultMessage": "Latest",
     "description": "src/components/Layout/SideChannelNav/index.tsx"
   },
   "gzJEFb": {
@@ -2587,9 +2588,6 @@
     "defaultMessage": "Reviewing...",
     "description": "type:apply"
   },
-  "jXDxa6": {
-    "defaultMessage": "The article has been removed from the Featured"
-  },
   "jiB0Z2": {
     "defaultMessage": "Unable to bind wallet",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2626,6 +2624,9 @@
   "kEDrXh": {
     "defaultMessage": "liked your collection"
   },
+  "kEfk9g": {
+    "defaultMessage": "The draft has been updated on another device or tab. Click OK to continue editing and overwrite this version."
+  },
   "kHMa3H": {
     "defaultMessage": "The new password and confirmation password do not match."
   },
@@ -2643,9 +2644,6 @@
   "kkZioy": {
     "defaultMessage": "Remove",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
-  },
-  "krvjo9": {
-    "defaultMessage": "Event period{tz}:"
   },
   "ksIL/T": {
     "defaultMessage": "Kind reminder: This wallet address is different from the wallet address you use to log in to Matters"
@@ -2672,10 +2670,6 @@
   "l31hCd": {
     "defaultMessage": "Preview",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
-  },
-  "l9LpDx": {
-    "defaultMessage": "{q} - Matters Search",
-    "description": "src/views/Search/AggregateResults/Articles.tsx"
   },
   "lH8y+X": {
     "defaultMessage": "Strikethrough"
@@ -2713,10 +2707,6 @@
   "ll/ufR": {
     "defaultMessage": "Trending"
   },
-  "lo8eLY": {
-    "defaultMessage": "Your article {articleTitle} has been listed as a feature of Free Write in 7 days. Come and view more wonderful articles!",
-    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
-  },
   "lqdpsm": {
     "defaultMessage": "Back to subscribe"
   },
@@ -2726,9 +2716,6 @@
   "m/Wg7b": {
     "defaultMessage": "Circle Description",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
-  "m1wKuC": {
-    "defaultMessage": "Add to Free Write"
   },
   "m4GG4b": {
     "defaultMessage": "Delete collection"
@@ -2776,6 +2763,10 @@
     "defaultMessage": "No broadcast yet.",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
+  "mbHf/6": {
+    "defaultMessage": "Ended",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "me1nR+": {
     "defaultMessage": "Copy Address"
   },
@@ -2821,9 +2812,6 @@
   },
   "nGBrvw": {
     "defaultMessage": "Bookmarks"
-  },
-  "nLt9TU": {
-    "defaultMessage": "Article cannot be added to Free Write or circle at the same time"
   },
   "nNB7KU": {
     "defaultMessage": "replied your comment in",
@@ -2889,6 +2877,9 @@
     "defaultMessage": "Set password succeed",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
+  "pZ1keA": {
+    "defaultMessage": "The article has been removed from the featured of the event"
+  },
   "phAZoj": {
     "defaultMessage": "Collection"
   },
@@ -2946,6 +2937,9 @@
   "qYzBk8": {
     "defaultMessage": "unsubscribed your circle",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qcAuPU": {
+    "defaultMessage": "Draft - Untitled"
   },
   "qfi4cg": {
     "defaultMessage": "Failed to upload, please try again."
@@ -3079,10 +3073,6 @@
   "tBt9u0": {
     "defaultMessage": "Sign in",
     "description": "src/components/Forms/EmailLoginForm/index.tsx"
-  },
-  "tDqnVf": {
-    "defaultMessage": "My Works - Drafts",
-    "description": "src/views/Me/Works/Drafts/index.tsx"
   },
   "tEeEJT": {
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
@@ -3309,6 +3299,10 @@
     "defaultMessage": "Confirm",
     "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
+  "xEJN39": {
+    "defaultMessage": "Featured",
+    "description": "Channel feed featured article"
+  },
   "xMaFCO": {
     "defaultMessage": "Articles",
     "description": "src/views/Me/History/HistoryTabs.tsx"
@@ -3357,10 +3351,6 @@
   "yAflVX": {
     "defaultMessage": "Draft has been deleted"
   },
-  "yBCdku": {
-    "defaultMessage": "My Works - Published",
-    "description": "src/views/Me/Works/Published/index.tsx"
-  },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
   },
@@ -3401,9 +3391,8 @@
   "yubNcI": {
     "defaultMessage": "Not support using punctuation marks alone."
   },
-  "z+a1SW": {
-    "defaultMessage": "Settings",
-    "description": "src/views/Me/Settings/Notifications/index.tsx"
+  "yxMEo/": {
+    "defaultMessage": "The article has been added to the featured of the event"
   },
   "z1ucgb": {
     "defaultMessage": "Articles added"

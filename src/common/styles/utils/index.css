@@ -1,8 +1,3 @@
-:root {
-  --sm-top-nav-height: 59.37px;
-  --lg-top-nav-height: 65px;
-}
-
 /* motion */
 .u-motion-spin {
   animation: spinning 1.2s infinite linear;

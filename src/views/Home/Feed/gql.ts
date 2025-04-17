@@ -2,7 +2,23 @@ import gql from 'graphql-tag'
 
 import { ArticleDigestCurated, ArticleDigestFeed } from '~/components'
 
+import { ChannelHeader } from './ChannelFeed/ChannelHeader'
 import { IcymiCuratedFeed } from './IcymiCuratedFeed'
+
+const articleFragments = gql`
+  ${ArticleDigestCurated.fragments.article}
+  ${ArticleDigestFeed.fragments.article.public}
+  ${ArticleDigestFeed.fragments.article.private}
+`
+
+const articleNodeFragment = gql`
+  fragment ArticleNodeFragment on Article {
+    ...ArticleDigestCuratedArticle
+    ...ArticleDigestFeedArticlePublic
+    ...ArticleDigestFeedArticlePrivate
+  }
+  ${articleFragments}
+`
 
 const feedFragment = gql`
   fragment FeedArticleConnection on ArticleConnection {
@@ -14,15 +30,29 @@ const feedFragment = gql`
     edges {
       cursor
       node {
-        ...ArticleDigestCuratedArticle
-        ...ArticleDigestFeedArticlePublic
-        ...ArticleDigestFeedArticlePrivate
+        ...ArticleNodeFragment
       }
     }
   }
-  ${ArticleDigestCurated.fragments.article}
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
+  ${articleNodeFragment}
+`
+
+const channelArticleConnectionFragment = gql`
+  fragment ChannelArticleConnectionFragment on ChannelArticleConnection {
+    pageInfo {
+      startCursor
+      endCursor
+      hasNextPage
+    }
+    edges {
+      cursor
+      pinned
+      node {
+        ...ArticleNodeFragment
+      }
+    }
+  }
+  ${articleNodeFragment}
 `
 
 export const FEED_ARTICLES_PUBLIC = {
@@ -69,22 +99,23 @@ export const FEED_ARTICLES_PUBLIC = {
     ${feedFragment}
     ${IcymiCuratedFeed.fragments}
   `,
-  channel: gql`
-    query ChannelFeedPublic($shortHash: String!, $after: String) {
-      viewer @connection(key: "viewerFeedChannel", keyArgs: ["$shortHash"]) {
-        id
-        recommendation {
-          feed: channelArticles(
-            input: { shortHash: $shortHash, first: 20, after: $after }
-          ) {
-            ...FeedArticleConnection
-          }
+}
+
+export const FEED_ARTICLES_PUBLIC_CHANNEL = gql`
+  query FeedArticlesPublicChannel($shortHash: String!, $after: String) {
+    channel(input: { shortHash: $shortHash }) {
+      id
+      ... on TopicChannel {
+        ...ChannelHeader
+        feed: articles(input: { first: 20, after: $after }) {
+          ...ChannelArticleConnectionFragment
         }
       }
     }
-    ${feedFragment}
-  `,
-}
+  }
+  ${ChannelHeader.fragments.channel}
+  ${channelArticleConnectionFragment}
+`
 
 export const FEED_ARTICLES_PRIVATE = gql`
   query FeedArticlesPrivate($ids: [ID!]!) {

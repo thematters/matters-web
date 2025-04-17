@@ -40,6 +40,7 @@ import {
 import AddCollectionButton from './AddCollectionButton'
 import ArchiveArticle from './ArchiveArticle'
 import { ArchiveArticleDialogProps } from './ArchiveArticle/Dialog'
+import BanCampaignArticleButton from './BanCampaignArticleButton'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
 import { fragments } from './gql'
@@ -52,6 +53,7 @@ import SetBottomCollectionButton from './SetBottomCollectionButton'
 import SetTopCollectionButton from './SetTopCollectionButton'
 import ShareButton from './ShareButton'
 import styles from './styles.module.css'
+import ToggleCampaignFeaturedButton from './ToggleCampaignFeaturedButton'
 import type {
   OpenToggleRecommendArticleDialogWithProps,
   ToggleRecommendArticleDialogProps,
@@ -97,8 +99,9 @@ const DynamicArchiveUserDialog = dynamic(
     loading: () => <Spinner />,
   }
 )
-const DynamicToggleCampaignFeaturedButton = dynamic(
-  () => import('./ToggleCampaignFeatured'),
+
+const DynamicTogglePinChannelArticlesButton = dynamic(
+  () => import('./TogglePinChannelArticles'),
   {
     loading: () => <Spinner />,
   }
@@ -131,6 +134,12 @@ export interface DropdownActionsControls {
   campaignId?: string
   campaignFeatured?: boolean
   hasToggleCampaignFeatured?: boolean
+  hasBanCampaignArticle?: boolean
+
+  // channel
+  channelId?: string
+  pinned?: boolean
+  hasTogglePinChannelArticles?: boolean
 
   hasArchive?: boolean
   hasEdit?: boolean
@@ -142,9 +151,6 @@ export interface DropdownActionsControls {
   hasRemoveCollection?: boolean
   hasSetTopCollection?: boolean
   hasSetBottomCollection?: boolean
-  onSetTopCollection?: () => void
-  onSetBottomCollection?: () => void
-  onRemoveCollection?: () => void
 
   morePublicActions?: React.ReactNode
 }
@@ -192,6 +198,11 @@ const BaseDropdownActions = ({
   collectionId,
   collectionArticleCount,
 
+  // channel
+  channelId,
+  pinned,
+  hasTogglePinChannelArticles,
+
   campaignId,
   campaignFeatured,
 
@@ -208,6 +219,7 @@ const BaseDropdownActions = ({
   hasSticky,
   hasArchive,
   hasToggleCampaignFeatured,
+  hasBanCampaignArticle,
   hasEdit,
   hasBookmark,
   hasAddCollection,
@@ -220,9 +232,6 @@ const BaseDropdownActions = ({
   openArchiveDialog,
   openAddCollectionsArticleDialog,
   openRemoveArticleCollectionDialog,
-  onSetBottomCollection,
-  onSetTopCollection,
-  onRemoveCollection,
 
   // admin
   openToggleRecommendArticleDialog,
@@ -243,79 +252,111 @@ const BaseDropdownActions = ({
 
   const Content = () => (
     <Menu>
-      {/* public */}
+      {/**********
+       * Public
+       ************/}
+
+      {/* article detail */}
       {hasShare && (
         <ShareButton openDialog={openShareDialog} {...trackEventProps} />
       )}
       {hasExtend && <ExtendButton article={article} />}
 
+      {/* user articles */}
       {hasSticky && <PinButton article={article} />}
+
+      {/* all pages */}
       {hasBookmark && isAuth && (
         <BookmarkButton article={article} inCard={inCard} iconSize={20} />
       )}
+
+      {/* user articles */}
       {hasIPFS && <IPFSButton article={article} {...trackEventProps} />}
+
+      {/* article detail */}
       {hasReport && isAuth && !isAuthor && (
         <SubmitReport.Button
           openDialog={openSubmitReportDialog}
           {...{ type: 'report_article_open', ...trackEventProps }}
         />
       )}
-
       {hasEdit && <EditButton article={article} />}
+
+      {/* user articles */}
       {hasAddCollection && (
         <AddCollectionButton openDialog={openAddCollectionsArticleDialog} />
       )}
+      {hasArchive && (
+        <>
+          <Menu.Divider />
+          <ArchiveArticle.Button openDialog={openArchiveDialog} />
+        </>
+      )}
 
-      {hasArchive && <Menu.Divider />}
-      {hasArchive && <ArchiveArticle.Button openDialog={openArchiveDialog} />}
-
+      {/* collection detail */}
       {(hasSetTopCollection || hasSetBottomCollection) &&
         collectionId &&
         collectionArticleCount && (
           <>
             <Menu.Divider />
-            {hasSetTopCollection && onSetTopCollection && (
+            {hasSetTopCollection && (
               <SetTopCollectionButton
                 articleId={article.id}
                 collectionId={collectionId}
-                onClick={onSetTopCollection}
               />
             )}
-            {hasSetBottomCollection && onSetBottomCollection && (
+            {hasSetBottomCollection && (
               <SetBottomCollectionButton
                 articleId={article.id}
                 collectionId={collectionId}
                 collectionArticleCount={collectionArticleCount}
-                onClick={onSetBottomCollection}
               />
             )}
           </>
         )}
-
-      {hasRemoveCollection && onRemoveCollection && (
+      {hasRemoveCollection && (
         <>
           <Menu.Divider />
           <RemoveArticleCollectionButton
-            onClick={onRemoveCollection}
             openDialog={openRemoveArticleCollectionDialog}
           />
         </>
       )}
 
-      {/* admin */}
+      {/* campaign detail */}
+      {hasToggleCampaignFeatured && campaignId && (
+        <ToggleCampaignFeaturedButton
+          articleId={article.id}
+          campaignId={campaignId}
+          campaignFeatured={!!campaignFeatured}
+        />
+      )}
+      {hasBanCampaignArticle && campaignId && (
+        <>
+          <Menu.Divider />
+          <BanCampaignArticleButton
+            articleId={article.id}
+            campaignId={campaignId}
+          />
+        </>
+      )}
+
+      {/**********
+       * Admin
+       ************/}
       {isAdminView && viewer.isAdmin && (
         <>
           <Menu.Divider />
-          {hasToggleCampaignFeatured && campaignId && (
-            <DynamicToggleCampaignFeaturedButton
-              articleId={article.id}
-              campaignId={campaignId}
-              campaignFeatured={!!campaignFeatured}
-            />
-          )}
           <DynamicSetArticleChannelsButton
             openDialog={openSetArticleChannelsDialog}
           />
+          {hasTogglePinChannelArticles && channelId && (
+            <DynamicTogglePinChannelArticlesButton
+              articleId={article.id}
+              channelId={channelId}
+              pinned={!!pinned}
+            />
+          )}
           <DynamicToggleRecommendArticleButton
             id={article.id}
             type="icymi"

@@ -5,11 +5,13 @@ import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
+  MAX_META_SUMMARY_LENGTH,
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
 } from '~/common/enums'
 import {
   analytics,
+  makeSummary,
   normalizeTag,
   parseCommentHash,
   toPath,
@@ -267,16 +269,15 @@ const BaseArticleDetail = ({
       showAside={article.state === 'active'}
     >
       <Head
-        title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
+        title={`${makeSummary(title, MAX_META_SUMMARY_LENGTH)} - ${article?.author.displayName}`}
         path={toPath({ page: 'articleDetail', article }).href}
-        noSuffix
-        description={summary}
+        description={makeSummary(summary, MAX_META_SUMMARY_LENGTH) || ''}
         keywords={keywords}
         image={article.cover}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'Article',
-          headline: summary,
+          headline: makeSummary(summary, MAX_META_SUMMARY_LENGTH),
           /* wordCount: ... */
           keywords,
           datePublished: formatISO(
@@ -298,7 +299,7 @@ const BaseArticleDetail = ({
 
       <StickyTopBanner type="inactive" article={article} />
 
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <DynamicCommentDrawer
           isOpen={isOpenComment}
           onClose={toggleCommentDrawer}
@@ -445,7 +446,7 @@ const BaseArticleDetail = ({
         />
       </Media>
 
-      <Media greaterThan="sm">
+      <Media greaterThanOrEqual="md">
         <FloatToolbar
           show={!hideFloatToolbar}
           articleDetails={article}

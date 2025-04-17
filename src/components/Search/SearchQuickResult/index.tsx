@@ -122,6 +122,7 @@ export const SearchQuickResult = ({
                     page: 'userProfile',
                     userName: node.userName || '',
                   })}
+                  is="link"
                   onClick={() => {
                     closeDropdown()
                     analytics.trackEvent('click_feed', {
@@ -142,7 +143,6 @@ export const SearchQuickResult = ({
                     hasState={false}
                     spacing={[0, 0]}
                     subtitle={`@${node.userName}`}
-                    isCard={false}
                   />
                 </Menu.Item>
               </Fragment>
