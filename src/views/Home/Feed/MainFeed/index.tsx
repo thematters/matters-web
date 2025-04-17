@@ -102,7 +102,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType: propFeedType }) => {
     const note = recommendation?.icymiTopic?.note || 'hello world'
     return (
       <>
-        <Media lessThan="md">
+        <Media lessThan="lg">
           <Spacer size="sp20" />
           <Announcements />
         </Media>
