@@ -1277,6 +1277,9 @@
     "defaultMessage": "已满",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
   },
+  "K+pFNS": {
+    "defaultMessage": "活动时间{tz}"
+  },
   "K2/mHF": {
     "defaultMessage": "暂时无法解绑 {type}，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
@@ -2622,7 +2625,7 @@
     "defaultMessage": "喜欢你的选集"
   },
   "kEfk9g": {
-    "defaultMessage": "草稿於其他設備或頁籤已更新，點擊確認將繼續編輯並覆蓋該版本。"
+    "defaultMessage": "草稿于其他设备或页签已更新，点击确认将继续编辑并覆盖该版本。"
   },
   "kHMa3H": {
     "defaultMessage": "密码不一致"
@@ -2641,9 +2644,6 @@
   "kkZioy": {
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
-  },
-  "krvjo9": {
-    "defaultMessage": "活动时间{tz}："
   },
   "ksIL/T": {
     "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"

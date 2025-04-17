@@ -10,9 +10,6 @@ const fragments = {
       title
       description
       cover
-      articles(input: { first: 0 }) {
-        totalCount
-      }
     }
   `,
 }

@@ -74,6 +74,7 @@
   font-size: var(--text15);
   line-height: 1.733rem;
   color: var(--color-grey-dark);
+  white-space: pre-wrap;
 }
 
 .extra {

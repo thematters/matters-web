@@ -93,7 +93,7 @@ const BaseAddArticlesCollectionDialog = ({
 
       const addChecked = checked.slice(
         0,
-        MAX_COLLECTION_ARTICLES_COUNT - collection.articles.totalCount
+        MAX_COLLECTION_ARTICLES_COUNT - collection.articleList.totalCount
       )
 
       await update({
