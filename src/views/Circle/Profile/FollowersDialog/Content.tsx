@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -22,6 +22,7 @@ const FollowersDialogContent = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const name = getQuery('name')
+  const intl = useIntl()
 
   /**
    * Public data fetching
@@ -90,9 +91,10 @@ const FollowersDialogContent = () => {
   if (!data || !circle || !edges || edges.length <= 0 || !pageInfo) {
     return (
       <EmptyWarning
-        description={
-          <FormattedMessage defaultMessage="No followers yet" id="XVYrS/" />
-        }
+        description={intl.formatMessage({
+          defaultMessage: 'No followers yet',
+          id: 'XVYrS/',
+        })}
       />
     )
   }

@@ -7,9 +7,15 @@ import { useIntl } from 'react-intl'
 import {
   ASSET_TYPE,
   ENTITY_TYPE,
+  ERROR_CODES,
   MAX_ARTICLE_CONTENT_LENGTH,
+  PATHS,
 } from '~/common/enums'
-import { containsFigureTag, stripHtml } from '~/common/utils'
+import {
+  containsFigureTag,
+  parseFormSubmitErrors,
+  stripHtml,
+} from '~/common/utils'
 import {
   DraftDetailStateContext,
   DraftDetailStateProvider,
@@ -20,6 +26,7 @@ import {
   SpinnerBlock,
   Throw404,
   useDirectImageUpload,
+  useRoute,
   useUnloadConfirm,
 } from '~/components'
 import { QueryError, useMutation } from '~/components/GQL'
@@ -60,6 +67,7 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
   id: '',
   title: '',
   createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
   publishState: PublishStateType.Unpublished,
   content: '',
   summary: '',
@@ -90,10 +98,10 @@ const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
 
 const BaseDraftDetail = () => {
   const intl = useIntl()
+  const { router } = useRoute()
 
-  const { addRequest, createDraft, getDraftId, isNewDraft } = useContext(
-    DraftDetailStateContext
-  )
+  const { addRequest, createDraft, getDraftId, isNewDraft, getDraftUpdatedAt } =
+    useContext(DraftDetailStateContext)
   const [initNew] = useState(isNewDraft())
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
   const [singleFileUpload] =
@@ -168,7 +176,8 @@ const BaseDraftDetail = () => {
     isUnpublished &&
     hasContent &&
     hasTitle &&
-    !isOverLength
+    !isOverLength &&
+    saveStatus === 'saved'
   )
 
   const upload = async (input: {
@@ -186,6 +195,8 @@ const BaseDraftDetail = () => {
       })
     }
 
+    setSaveStatus('saving')
+
     const variables = {
       input: {
         type: ASSET_TYPE.embed,
@@ -202,8 +213,10 @@ const BaseDraftDetail = () => {
       const { id: assetId, path } = result?.data?.singleFileUpload || {}
 
       if (assetId && path) {
+        setSaveStatus('saved')
         return { id: assetId, path }
       } else {
+        setSaveStatus('saveFailed')
         throw new Error('upload not successful')
       }
     }
@@ -235,8 +248,10 @@ const BaseDraftDetail = () => {
           },
         }).catch(console.error)
 
+        setSaveStatus('saved')
         return { id: assetId, path }
       } else {
+        setSaveStatus('saveFailed')
         throw new Error('upload not successful')
       }
     }
@@ -255,12 +270,15 @@ const BaseDraftDetail = () => {
     }
   }
 
-  const update = async (newDraft: {
-    title?: string | null
-    content?: string | null
-    cover?: string | null
-    summary?: string | null
-  }) => {
+  const update = async (
+    newDraft: {
+      title?: string | null
+      content?: string | null
+      cover?: string | null
+      summary?: string | null
+    },
+    forceUpdate?: boolean
+  ) => {
     const isEmpty = Object.values(newDraft).every((x) => x === '')
     if (isNewDraft() && isEmpty) {
       return
@@ -289,11 +307,38 @@ const BaseDraftDetail = () => {
         })
       }
 
-      await setContent({ variables: { id: draftId, ...newDraft } })
+      await setContent({
+        variables: {
+          id: draftId,
+          ...newDraft,
+          lastUpdatedAt: forceUpdate ? undefined : getDraftUpdatedAt(),
+        },
+      })
 
       setSaveStatus('saved')
-    } catch (error) {
+    } catch (error: any) {
       setSaveStatus('saveFailed')
+
+      setTimeout(() => {
+        const [, codes] = parseFormSubmitErrors(error as any)
+        codes.forEach((code) => {
+          if (code.includes(ERROR_CODES.DRAFT_VERSION_CONFLICT)) {
+            const confirmResult = window.confirm(
+              intl.formatMessage({
+                defaultMessage:
+                  'The draft has been updated on another device or tab. Click OK to continue editing and overwrite this version.',
+                id: 'kEfk9g',
+              })
+            )
+
+            if (confirmResult) {
+              update(newDraft, true)
+            } else {
+              router.push(PATHS.ME_DRAFTS)
+            }
+          }
+        })
+      })
     }
   }
 
@@ -335,10 +380,21 @@ const BaseDraftDetail = () => {
       />
 
       <Head
-        title={intl.formatMessage({
-          defaultMessage: 'New Article',
-          id: '8PL7mC',
-        })}
+        noSuffix
+        title={
+          draft?.title
+            ? intl.formatMessage(
+                {
+                  defaultMessage: 'Draft - {title}',
+                  id: 'gvTltk',
+                },
+                { title: draft?.title }
+              )
+            : intl.formatMessage({
+                defaultMessage: 'Draft - Untitled',
+                id: 'qcAuPU',
+              })
+        }
       />
 
       <PublishState draft={draft} />

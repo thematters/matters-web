@@ -34,14 +34,14 @@
   --color-insufficient-red: #ffe8e8;
   --color-red-lighter: #fae7e3; /* FIXME: undocumented */
   --color-analytics-red: #c25050; /* FIXME: undocumented */
-  --color-free-write-blue-bg: #f0f9fe;
-  --color-free-write-blue: #1999d0;
-  --color-free-write-blue-label: #83bad1;
-  --color-free-write-blue-border: #d6ebf7;
-  --color-free-write-green-text: #398449;
-  --color-free-write-green-bg: #f1faf2;
-  --color-free-write-green-bg-hover: #e3f5e5;
-  --color-free-write-green-label: #94d09c;
+  --color-campaign-blue-bg: #f0f9fe;
+  --color-campaign-blue: #1999d0;
+  --color-campaign-blue-label: #83bad1;
+  --color-campaign-blue-border: #d6ebf7;
+  --color-campaign-green-text: #398449;
+  --color-campaign-green-bg: #f1faf2;
+  --color-campaign-green-bg-hover: #e3f5e5;
+  --color-campaign-green-label: #94d09c;
 
   /* others */
   --color-noir: #000;

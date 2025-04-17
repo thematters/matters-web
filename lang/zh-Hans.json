@@ -26,6 +26,9 @@
   "+GAaxB": {
     "defaultMessage": "作品因违反社区约章被封存"
   },
+  "+IYfVH": {
+    "defaultMessage": "移除活动精选"
+  },
   "+OStJM": {
     "defaultMessage": "重置交易密码"
   },
@@ -120,6 +123,9 @@
   },
   "/wKyxw": {
     "defaultMessage": "发布失败"
+  },
+  "/wbyoV": {
+    "defaultMessage": "作品已从活动移除"
   },
   "0/gRer": {
     "defaultMessage": "我正在搬家到 Matters，邀请你一起来"
@@ -259,6 +265,9 @@
   },
   "2D/X90": {
     "defaultMessage": "为什么采用 Optimism？"
+  },
+  "2J3mz4": {
+    "defaultMessage": "加到活动精选"
   },
   "2P5JII": {
     "defaultMessage": "解绑",
@@ -412,9 +421,6 @@
     "defaultMessage": "喜欢你已删除的动态",
     "description": "src/components/Notice/MomentNotice/MomentLiked.tsx"
   },
-  "5SgH7l": {
-    "defaultMessage": "作品已添加至自由写精选"
-  },
   "5UglrB": {
     "defaultMessage": "送出成功"
   },
@@ -518,9 +524,6 @@
   "6oOCCL": {
     "defaultMessage": "上传档案"
   },
-  "6pc948": {
-    "defaultMessage": "参与活动"
-  },
   "6q0G5e": {
     "defaultMessage": "加入成功",
     "description": "src/components/Dialogs/CollectionSelectDialog/index.tsx"
@@ -608,9 +611,6 @@
   },
   "8MeJ4b": {
     "defaultMessage": "光轮号"
-  },
-  "8PL7mC": {
-    "defaultMessage": "新文章"
   },
   "8UWUW8": {
     "defaultMessage": "关联作品",
@@ -1155,6 +1155,9 @@
     "defaultMessage": "回到我的创作",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
   },
+  "HUf/E+": {
+    "defaultMessage": "移出活动"
+  },
   "HYW0fI": {
     "defaultMessage": "上链后，作品不可删除，去中心化保存"
   },
@@ -1278,6 +1281,9 @@
   "Jxr/TM": {
     "defaultMessage": "已满",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
+  },
+  "K+pFNS": {
+    "defaultMessage": "活动时间{tz}"
   },
   "K2/mHF": {
     "defaultMessage": "暂时无法解绑 {type}，因为你没有其他可用于登录的身份（邮箱/数字钱包/社交帐号）。",
@@ -1590,9 +1596,6 @@
   "Q8Qw5B": {
     "defaultMessage": "描述"
   },
-  "QFCfA7": {
-    "defaultMessage": "添加到自由写精选"
-  },
   "QKJWqd": {
     "defaultMessage": "收藏",
     "description": "src/components/Buttons/TagBookmark/Bookmark.tsx"
@@ -1833,6 +1836,10 @@
     "defaultMessage": "移至底部",
     "description": "src/components/ArticleDigest/DropdownActions/SetBottomCollectionButton.tsx"
   },
+  "UfvCjD": {
+    "defaultMessage": "投稿{dayName}",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "Up5U7K": {
     "defaultMessage": "屏蔽"
   },
@@ -1963,6 +1970,9 @@
     "defaultMessage": "在你的围炉广播中留言提及你",
     "description": "src/components/Notice/CircleNotice/CircleNewBroadcastComments.tsx"
   },
+  "XTRqqT": {
+    "defaultMessage": "参与活动"
+  },
   "XTyKFR": {
     "defaultMessage": "精挑细选作品，帮助读者更容易发现优质内容"
   },
@@ -2071,9 +2081,6 @@
   "ZEMcZ6": {
     "defaultMessage": "作品管理"
   },
-  "ZN1IzT": {
-    "defaultMessage": "从自由写精华中移除"
-  },
   "ZNK0I9": {
     "defaultMessage": "喜欢你的评论"
   },
@@ -2170,6 +2177,10 @@
     "defaultMessage": "聊几句？",
     "description": "src/components/Forms/MomentCommentForm/index.tsx"
   },
+  "b0RNGM": {
+    "defaultMessage": "你的作品 {articleTitle} 已被列为活动精选之作，快来看看更多精彩好文！",
+    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
   "b8ogKp": {
     "defaultMessage": "新增邀请",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
@@ -2215,6 +2226,9 @@
   },
   "cPSexq": {
     "defaultMessage": "去看看其他围炉吧，希望你早日找到下一个心之所属。"
+  },
+  "cPXsvZ": {
+    "defaultMessage": "作品暂不可同时投稿活动及加入围炉"
   },
   "cQ+Lyq": {
     "defaultMessage": "游牧者计划纪念徽章",
@@ -2277,6 +2291,10 @@
   "dAvP6d": {
     "defaultMessage": "尚无屏蔽记录",
     "description": "src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
+  },
+  "dE4mlL": {
+    "defaultMessage": "投稿",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
   },
   "dK7Dnj": {
     "defaultMessage": "🔥 免费提领"
@@ -2446,6 +2464,9 @@
   "gluNT8": {
     "defaultMessage": "输入链接地址"
   },
+  "gvTltk": {
+    "defaultMessage": "草稿 - {title}"
+  },
   "gzJEFb": {
     "defaultMessage": "跳转到 like.co 验证已有 Liker ID"
   },
@@ -2568,9 +2589,6 @@
     "defaultMessage": "报名处理中⋯",
     "description": "type:apply"
   },
-  "jXDxa6": {
-    "defaultMessage": "作品已从自由写精华中移除"
-  },
   "jiB0Z2": {
     "defaultMessage": "无法绑定钱包",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2607,6 +2625,9 @@
   "kEDrXh": {
     "defaultMessage": "喜欢你的选集"
   },
+  "kEfk9g": {
+    "defaultMessage": "草稿于其他设备或页签已更新，点击确认将继续编辑并覆盖该版本。"
+  },
   "kHMa3H": {
     "defaultMessage": "密码不一致"
   },
@@ -2624,9 +2645,6 @@
   "kkZioy": {
     "defaultMessage": "确认移出",
     "description": "src/components/Dialogs/RemoveArticleCollectionDialog/index.tsx"
-  },
-  "krvjo9": {
-    "defaultMessage": "活动时间{tz}："
   },
   "ksIL/T": {
     "defaultMessage": "贴心提醒：此钱包地址不同于您用于登录 Matters 的钱包地址"
@@ -2690,10 +2708,6 @@
   "ll/ufR": {
     "defaultMessage": "热门"
   },
-  "lo8eLY": {
-    "defaultMessage": "你的作品 {articleTitle} 已被列为七日书精选之作，快来看看更多精彩好文！",
-    "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
-  },
   "lqdpsm": {
     "defaultMessage": "回到订阅"
   },
@@ -2703,9 +2717,6 @@
   "m/Wg7b": {
     "defaultMessage": "围炉描述",
     "description": "src/components/Forms/CreateCircleForm/Profile.tsx"
-  },
-  "m1wKuC": {
-    "defaultMessage": "参与活动"
   },
   "m4GG4b": {
     "defaultMessage": "删除选集"
@@ -2753,6 +2764,10 @@
     "defaultMessage": "还没有广播",
     "description": "src/views/Circle/Broadcast/Broadcast.tsx"
   },
+  "mbHf/6": {
+    "defaultMessage": "已结束",
+    "description": "src/views/CampaignDetail/Apply/Button/index.tsx"
+  },
   "me1nR+": {
     "defaultMessage": "复制地址"
   },
@@ -2798,9 +2813,6 @@
   },
   "nGBrvw": {
     "defaultMessage": "我的收藏"
-  },
-  "nLt9TU": {
-    "defaultMessage": "作品暂不可同时投稿活动及加入围炉"
   },
   "nNB7KU": {
     "defaultMessage": "在 ",
@@ -2866,6 +2878,9 @@
     "defaultMessage": "登录密码已设置",
     "description": "src/components/Dialogs/SetPasswordDialog/Content.tsx"
   },
+  "pZ1keA": {
+    "defaultMessage": "作品已从活动精选中移除"
+  },
   "phAZoj": {
     "defaultMessage": "选集"
   },
@@ -2923,6 +2938,9 @@
   "qYzBk8": {
     "defaultMessage": "退订了你的围炉",
     "description": "src/components/Notice/CircleNotice/CircleNewUserNotice.tsx"
+  },
+  "qcAuPU": {
+    "defaultMessage": "草稿 - 未命名"
   },
   "qfi4cg": {
     "defaultMessage": "图片上传失败"
@@ -3369,6 +3387,9 @@
   },
   "yubNcI": {
     "defaultMessage": "不支持单独使用标点符号"
+  },
+  "yxMEo/": {
+    "defaultMessage": "作品已添加至活动精选"
   },
   "z1ucgb": {
     "defaultMessage": "作品已添加至围炉"

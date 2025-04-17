@@ -13,7 +13,7 @@ export const parseFormSubmitErrors = (
   const messages: ErrorMessages = {} as any
 
   codes.forEach((code) => {
-    messages[code] = ERROR_MESSAGES[code]
+    messages[code] = ERROR_MESSAGES[code] as MessageDescriptor
   })
 
   return [messages, codes]

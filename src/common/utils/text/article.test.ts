@@ -133,6 +133,9 @@ describe('utils/text/article/makeSummary', () => {
     ).toEqual(ENGLISH_WITH_NUMBERS_AND_PUNCTUATION)
     expect(makeSummary(MIXED, maxLength)).toEqual(MIXED)
     expect(makeSummary(MENTIONS, maxLength)).toEqual(stripHtml(MENTIONS))
+    expect(
+      makeSummary('Sen no Kiseki II OST - Awakening Will', maxLength)
+    ).toEqual('Sen no Kiseki II OST - Awakening Will')
   })
 })
 

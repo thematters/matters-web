@@ -11,6 +11,9 @@ export const fragments = {
         nameZhHant: name(input: { language: zh_hant })
         nameZhHans: name(input: { language: zh_hans })
         nameEn: name(input: { language: en })
+        descriptionZhHant: description(input: { language: zh_hant })
+        descriptionZhHans: description(input: { language: zh_hans })
+        descriptionEn: description(input: { language: en })
         cover
         applicationPeriod {
           start

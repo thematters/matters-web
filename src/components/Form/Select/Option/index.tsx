@@ -16,7 +16,7 @@ type OptionProps = {
   expanded?: boolean
 
   size?: 14 | 16
-  color?: 'freeWriteBlue'
+  color?: 'campaignBlue'
 
   role?: 'button' | 'option'
 
