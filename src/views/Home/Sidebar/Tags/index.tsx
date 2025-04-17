@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
-import { useContext } from 'react'
 
 import { analytics } from '~/common/utils'
 import {
@@ -10,7 +9,6 @@ import {
   SpinnerBlock,
   TagDigest,
   usePublicQuery,
-  ViewerContext,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, SidebarTagsPublicQuery } from '~/gql/graphql'
@@ -43,8 +41,6 @@ const SIDEBAR_TAGS = gql`
 `
 
 const Tags = () => {
-  const viewer = useContext(ViewerContext)
-
   const { data: lastFetchRandom } = useQuery<LastFetchRandomQuery>(
     FETCH_RECORD,
     { variables: { id: 'local' } }
@@ -53,10 +49,7 @@ const Tags = () => {
   const perPage = 6
   const { data, loading, error } = usePublicQuery<SidebarTagsPublicQuery>(
     SIDEBAR_TAGS,
-    {
-      variables: { random: lastRandom || 0, first: perPage },
-    },
-    { publicQuery: !viewer.isAuthed }
+    { variables: { random: lastRandom || 0, first: perPage } }
   )
   const edges = data?.viewer?.recommendation.tags.edges
 
