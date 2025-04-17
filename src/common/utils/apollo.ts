@@ -68,9 +68,6 @@ const uploadLink = ({
 
   return createUploadLink({
     uri: apiUrl,
-    // fetchOptions: {
-    //   credentials: isPublicOperation ? 'omit' : 'include',
-    // },
     headers: {
       ...headers,
       cookie: isPublicOperation ? '' : headers.cookie,
@@ -134,6 +131,7 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
     fetchOptions: {
       credentials: isPublicOperation ? 'omit' : 'include',
     },
+    credentials: isPublicOperation ? 'omit' : 'include',
     headers: {
       ...headers,
     },
