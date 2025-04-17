@@ -1,6 +1,4 @@
-import { useQuery } from '@apollo/client'
 import _random from 'lodash/random'
-import { useContext } from 'react'
 
 import { analytics } from '~/common/utils'
 import {
@@ -10,7 +8,6 @@ import {
   SpinnerBlock,
   usePublicQuery,
   UserDigest,
-  ViewerContext,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, SidebarAuthorsQuery } from '~/gql/graphql'
@@ -20,12 +17,10 @@ import { SIDEBAR_AUTHORS } from './gql'
 import styles from './styles.module.css'
 
 const Authors = () => {
-  const viewer = useContext(ViewerContext)
-
-  const { data: lastFetchRandom, client } = useQuery<LastFetchRandomQuery>(
-    FETCH_RECORD,
-    { variables: { id: 'local' } }
-  )
+  const { data: lastFetchRandom, client } =
+    usePublicQuery<LastFetchRandomQuery>(FETCH_RECORD, {
+      variables: { id: 'local' },
+    })
   const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarAuthors
 
   /**
@@ -37,8 +32,7 @@ const Authors = () => {
     SIDEBAR_AUTHORS,
     {
       variables: { random: lastRandom || 0, first: perPage },
-    },
-    { publicQuery: !viewer.isAuthed }
+    }
   )
   const edges = data?.viewer?.recommendation.authors.edges
 
