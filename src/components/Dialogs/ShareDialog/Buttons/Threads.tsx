@@ -12,7 +12,7 @@ const Threads = ({
 }: {
   title: string
   link: string
-  tags: string[]
+  tags: string[] | undefined
 }) => {
   const viewer = useContext(ViewerContext)
 

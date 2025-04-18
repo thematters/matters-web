@@ -71,7 +71,11 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
           </section>
 
           <section className={styles.right}>
-            <ShareButtons.Threads title={shareTitle} link={shareLink} />
+            <ShareButtons.Threads
+              title={shareTitle}
+              link={shareLink}
+              tags={shareTags}
+            />
             <ShareButtons.Telegram title={shareTitle} link={shareLink} />
             <Copy link={shareLink} />
           </section>
