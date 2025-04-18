@@ -10,10 +10,10 @@ import {
   UserDigest,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
-import { LastFetchRandomQuery, SidebarAuthorsQuery } from '~/gql/graphql'
+import { LastFetchRandomQuery, SidebarAuthorsPublicQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
-import { SIDEBAR_AUTHORS } from './gql'
+import { SIDEBAR_AUTHORS_PUBLIC } from './gql'
 import styles from './styles.module.css'
 
 const Authors = () => {
@@ -28,8 +28,8 @@ const Authors = () => {
    */
   const perPage = 6
   const randomMaxSize = 50
-  const { data, loading, error } = usePublicQuery<SidebarAuthorsQuery>(
-    SIDEBAR_AUTHORS,
+  const { data, loading, error } = usePublicQuery<SidebarAuthorsPublicQuery>(
+    SIDEBAR_AUTHORS_PUBLIC,
     {
       variables: { random: lastRandom || 0, first: perPage },
     }
