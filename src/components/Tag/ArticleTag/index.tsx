@@ -22,16 +22,16 @@ export const ArticleTag = ({
   canClamp = false,
   onClick,
 }: ArticleTagProps) => {
-  const tagClasses = classNames({
-    [styles.article]: 'article',
-    [styles.clickable]: !!onClick,
-  })
-
   const tagName = canClamp ? clampTag(tag.content) : tag.content
-
+  const isClamped = tagName !== tag.content
   const path = toPath({
     page: 'tagDetail',
     tag,
+  })
+
+  const tagClasses = classNames({
+    [styles.article]: 'article',
+    [styles.clickable]: !!onClick,
   })
 
   const textIconProps: TextIconProps = {
@@ -42,7 +42,7 @@ export const ArticleTag = ({
     ...customTextIconProps,
   }
 
-  return (
+  return isClamped ? (
     <Tooltip content={tag.content} placement="top">
       <section>
         <Link {...path} legacyBehavior>
@@ -58,6 +58,14 @@ export const ArticleTag = ({
         </Link>
       </section>
     </Tooltip>
+  ) : (
+    <Link {...path} legacyBehavior>
+      <a className={tagClasses} onClick={onClick}>
+        <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
+          <span className={styles.name}>{tagName}</span>
+        </TextIcon>
+      </a>
+    </Link>
   )
 }
 
