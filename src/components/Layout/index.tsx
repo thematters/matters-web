@@ -78,10 +78,12 @@ const useLayoutType = () => {
     isInPath('CAMPAIGN_DETAIL')
 
   const isThreeColumnLayout =
-    isHome || isInPath('CHANNEL') || isInPath('FOLLOW') || isInTemporaryChannel
-
-  const isShowSideChannelNav =
-    isHome || isInPath('CHANNEL') || isInPath('FOLLOW') || isInTemporaryChannel
+    isHome ||
+    isInPath('FEATURED') ||
+    isInPath('NEWEST') ||
+    isInPath('CHANNEL') ||
+    isInPath('FOLLOW') ||
+    isInTemporaryChannel
 
   return {
     isInMomentDetail,
@@ -89,7 +91,6 @@ const useLayoutType = () => {
     isOneColumnLayout,
     isTwoColumnLayout,
     isThreeColumnLayout,
-    isShowSideChannelNav,
   }
 }
 
@@ -152,14 +153,13 @@ export const Layout: React.FC<LayoutProps> & {
     isOneColumnLayout,
     isTwoColumnLayout,
     isThreeColumnLayout,
-    isShowSideChannelNav,
   } = useLayoutType()
 
   const layoutClasses = classNames({
     [styles.oneColumnLayout]: isOneColumnLayout,
     [styles.twoColumnLayout]: isTwoColumnLayout,
     [styles.threeColumnLayout]: isThreeColumnLayout,
-    [styles.sideNavLayout]: isShowSideChannelNav,
+    [styles.sideNavLayout]: isThreeColumnLayout,
   })
 
   return (
@@ -168,7 +168,7 @@ export const Layout: React.FC<LayoutProps> & {
       {!isInMomentDetail && !isInMomentDetailEdit && <GlobalNav />}
       <div className={layoutClasses}>
         <main className={styles.main}>
-          {isShowSideChannelNav && (
+          {isThreeColumnLayout && (
             <nav role="navigation" className={styles.sidenav}>
               <section className={styles.sideNavContent}>
                 <SideChannelNav />
