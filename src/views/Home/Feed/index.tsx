@@ -8,21 +8,18 @@ import MainFeed from './MainFeed'
 export type FeedType = 'icymi' | 'newest' | 'hottest' | 'channel'
 
 const HomeFeed = () => {
-  const { getQuery, isInPath } = useRoute()
-  const qsType = getQuery('type') as FeedType
+  const { isInPath } = useRoute()
   const viewer = useContext(ViewerContext)
   const isAuthed = viewer.isAuthed
-
-  const [feedType] = useState<FeedType>(qsType || 'icymi')
-
+  const isInNewest = isInPath('NEWEST')
   const isInChannel = isInPath('CHANNEL')
-  const isInIcymi =
-    getQuery('type') === 'icymi' ||
-    (!isAuthed && isInPath('HOME') && !getQuery('type'))
+  const isInFeatured = isInPath('FEATURED') || (!isAuthed && isInPath('HOME'))
+
+  const [feedType] = useState<FeedType>(isInNewest ? 'newest' : 'icymi')
 
   return (
     <Layout.Main>
-      {!isInChannel && !isInIcymi && <Spacer size="sp20" />}
+      {!isInChannel && !isInFeatured && <Spacer size="sp20" />}
       {isInChannel ? <ChannelFeed /> : <MainFeed feedType={feedType} />}
     </Layout.Main>
   )

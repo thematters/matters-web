@@ -18,7 +18,7 @@ import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const SideChannelNav = () => {
-  const { getQuery, isInPath, isPathStartWith } = useRoute()
+  const { isInPath, isPathStartWith } = useRoute()
   const viewer = useContext(ViewerContext)
   const isAuthed = viewer.isAuthed
   const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
@@ -90,8 +90,7 @@ const SideChannelNav = () => {
             className={classnames({
               [styles.item]: true,
               [styles.selectedChannel]:
-                (isAuthed && isInPath('HOME') && !getQuery('type')) ||
-                isInPath('FOLLOW'),
+                (isAuthed && isInPath('HOME')) || isInPath('FOLLOW'),
             })}
           >
             <span>
@@ -100,12 +99,11 @@ const SideChannelNav = () => {
           </LinkWrapper>
         )}
         <LinkWrapper
-          href={`${PATHS.HOME}?type=icymi`}
+          href={`${PATHS.FEATURED}`}
           className={classnames({
             [styles.item]: true,
             [styles.selectedChannel]:
-              getQuery('type') === 'icymi' ||
-              (!isAuthed && isInPath('HOME') && !getQuery('type')),
+              isInPath('FEATURED') || (!isAuthed && isInPath('HOME')),
           })}
         >
           <span>
@@ -132,11 +130,10 @@ const SideChannelNav = () => {
           <ChannelItem key={c.id} channel={c} />
         ))}
         <LinkWrapper
-          href={`${PATHS.HOME}?type=newest`}
+          href={`${PATHS.NEWEST}`}
           className={classnames({
             [styles.item]: true,
-            [styles.selectedChannel]:
-              isInPath('HOME') && getQuery('type') === 'newest',
+            [styles.selectedChannel]: isInPath('NEWEST'),
           })}
         >
           <span>

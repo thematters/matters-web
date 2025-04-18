@@ -10,6 +10,8 @@ import _get from 'lodash/get'
  */
 type ROUTE_KEY =
   | 'HOME'
+  | 'FEATURED'
+  | 'NEWEST'
   | 'CHANNEL'
   | 'FOLLOW'
   | 'AUTHORS'
@@ -143,6 +145,8 @@ export const ROUTES: {
    * Public
    */
   { key: 'HOME', pathname: '/' },
+  { key: 'FEATURED', pathname: '/featured' },
+  { key: 'NEWEST', pathname: '/newest' },
   { key: 'CHANNEL', pathname: '/c/[shortHash]' },
   { key: 'FOLLOW', pathname: '/follow' },
   { key: 'SEARCH', pathname: '/search' },
