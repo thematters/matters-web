@@ -3,6 +3,7 @@ import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   LanguageContext,
   LinkWrapper,
@@ -56,6 +57,13 @@ const SideChannelNav = () => {
 
   const channels = data?.channels || []
 
+  const onTabClick = (type: string) => {
+    analytics.trackEvent('click_button', {
+      type: `channel_tab_${type}` as `channel_tab_${string}`,
+      pageType: 'home',
+    })
+  }
+
   return (
     <section className={styles.content} ref={contentRef}>
       <section
@@ -72,6 +80,7 @@ const SideChannelNav = () => {
               [styles.selectedChannel]:
                 (isAuthed && isInPath('HOME')) || isInPath('FOLLOW'),
             })}
+            onClick={() => onTabClick('follow')}
           >
             <span>
               <FormattedMessage defaultMessage="My Page" id="enMIYK" />
@@ -85,6 +94,7 @@ const SideChannelNav = () => {
             [styles.selectedChannel]:
               isInPath('FEATURED') || (!isAuthed && isInPath('HOME')),
           })}
+          onClick={() => onTabClick('featured')}
         >
           <span>
             <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
@@ -115,6 +125,7 @@ const SideChannelNav = () => {
             [styles.item]: true,
             [styles.selectedChannel]: isInPath('NEWEST'),
           })}
+          onClick={() => onTabClick('newest')}
         >
           <span>
             <FormattedMessage
