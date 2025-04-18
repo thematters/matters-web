@@ -2,7 +2,8 @@ import { useRouter } from 'next/router'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { toPath } from '~/common/utils'
+import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
+import { makeSummary, normalizeTag, toPath } from '~/common/utils'
 import { Dialog, ShareDialog } from '~/components'
 import { LatestVersionArticleQuery } from '~/gql/graphql'
 interface PublishedStateProps {
@@ -30,8 +31,17 @@ const PublishedState = ({ article }: PublishedStateProps) => {
   return (
     <ShareDialog
       disableNativeShare
-      title={article.title}
-      path={encodeURI(path.href)}
+      title={
+        article.author.displayName
+          ? `${makeSummary(article.title, MAX_META_SUMMARY_LENGTH)} - ${article.author.displayName} - Matters`
+          : `${makeSummary(article.title, MAX_META_SUMMARY_LENGTH)} - Matters`
+      }
+      path={path.href}
+      tags={article.tags
+        ?.map((tag) => tag.content)
+        .join(' ')
+        .split(/\s+/)
+        .map(normalizeTag)}
       description={
         <>
           <p>

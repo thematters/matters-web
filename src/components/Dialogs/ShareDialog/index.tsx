@@ -7,8 +7,8 @@ import { Dialog, SpinnerBlock, useDialogSwitch } from '~/components'
 import { ShareDialogContentProps } from './Content'
 
 export type ShareDialogProps = {
-  title?: string
-  path?: string
+  title?: string | null
+  path?: string | null
   tags?: string[]
 
   disableNativeShare?: boolean

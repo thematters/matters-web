@@ -1,23 +1,23 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconX } from '@/public/static/icons/24px/x.svg'
+import { ReactComponent as IconThreads } from '@/public/static/icons/24px/threads.svg'
 import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Icon, TextIcon, ViewerContext } from '~/components'
 
-const Twitter = ({
+const Threads = ({
   title,
   link,
   tags,
 }: {
   title: string
   link: string
-  tags?: string[]
+  tags: string[]
 }) => {
   const viewer = useContext(ViewerContext)
 
   // append utm_source to link
-  const utm_source = 'share_twitter'
+  const utm_source = 'share_threads'
   const url = new URL(link)
   url.searchParams.append('utm_source', utm_source)
   if (viewer.userName) {
@@ -39,35 +39,26 @@ const Twitter = ({
             .map((w) => `#${w.trim()}`)
             .join(' ')}`
         }
-        text += ' via @matterslab'
+        text += ' via @matters.lab'
 
-        const shareUrl = `https://twitter.com/intent/tweet?${new URLSearchParams(
-          {
-            text,
-            // u.searchParams.set('hashtags', tags.map((w) => w.trim()).join(','))
-            // u.searchParams.set('via', 'matterslab')
-            related: 'matterslab:MattersNews 中文,Mattersw3b:Matters Lab',
-            url: link,
-          }
-        ).toString()}`
+        const shareUrl = `https://threads.net/intent/post?text=${encodeURIComponent(`${text} ${link}`)}`
 
         analytics.trackEvent('share', {
-          type: 'twitter',
+          type: 'threads',
         })
-
-        return window.open(shareUrl, 'Share to X')
+        return window.open(shareUrl, 'Share to Threads')
       }}
     >
       <TextIcon
-        icon={<Icon icon={IconX} size={24} />}
+        icon={<Icon icon={IconThreads} size={24} />}
         spacing={16}
         size={16}
         color="black"
       >
-        X
+        Threads
       </TextIcon>
     </button>
   )
 }
 
-export default Twitter
+export default Threads

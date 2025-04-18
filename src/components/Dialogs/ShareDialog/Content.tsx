@@ -66,14 +66,14 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
               link={shareLink}
               tags={shareTags}
             />
+            <ShareButtons.Facebook title={shareTitle} link={shareLink} />
             <ShareButtons.LINE title={shareTitle} link={shareLink} />
-
-            <Copy link={shareLink} />
           </section>
 
           <section className={styles.right}>
-            <ShareButtons.Facebook title={shareTitle} link={shareLink} />
+            <ShareButtons.Threads title={shareTitle} link={shareLink} />
             <ShareButtons.Telegram title={shareTitle} link={shareLink} />
+            <Copy link={shareLink} />
           </section>
         </section>
       </Dialog.Content>

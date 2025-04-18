@@ -1,5 +1,11 @@
-import { TEST_ID } from '~/common/enums'
-import { analytics, normalizeTag, toLocale, toPath } from '~/common/utils'
+import { MAX_META_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
+import {
+  analytics,
+  makeSummary,
+  normalizeTag,
+  toLocale,
+  toPath,
+} from '~/common/utils'
 import { ButtonProps, ShareButton } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -86,17 +92,18 @@ const DesktopToolbar = ({
         <section className={styles.right}>
           <span>
             <ShareButton
-              iconSize={24}
-              inCard={false}
-              textActiveColor="greyDarker"
+              title={`${makeSummary(articleDetails.title, MAX_META_SUMMARY_LENGTH)} - ${articleDetails?.author.displayName} - Matters`}
               path={sharePath}
-              disabled={lock}
-              spacing={[10, 10]}
               tags={articleDetails.tags
                 ?.map(({ content }) => content)
                 .join(' ')
                 .split(/\s+/)
                 .map(normalizeTag)}
+              iconSize={24}
+              inCard={false}
+              textActiveColor="greyDarker"
+              disabled={lock}
+              spacing={[10, 10]}
               clickEvent={() => {
                 analytics.trackEvent('click_button', {
                   type: 'share_article_open',

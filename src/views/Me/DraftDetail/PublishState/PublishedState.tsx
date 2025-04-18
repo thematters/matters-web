@@ -2,7 +2,8 @@ import { useApolloClient } from '@apollo/client'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { toPath } from '~/common/utils'
+import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
+import { makeSummary, normalizeTag, toPath } from '~/common/utils'
 import { Dialog, ShareDialog, useRoute, ViewerContext } from '~/components'
 import { PublishStateDraftFragment } from '~/gql/graphql'
 
@@ -60,8 +61,17 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
   return (
     <ShareDialog
       disableNativeShare
-      title={draft.article.title}
-      path={encodeURI(path.href)}
+      title={
+        draft.article.author?.displayName
+          ? `${makeSummary(draft.article.title, MAX_META_SUMMARY_LENGTH)} - ${draft.article.author.displayName} - Matters`
+          : `${makeSummary(draft.article.title, MAX_META_SUMMARY_LENGTH)} - Matters`
+      }
+      path={path.href}
+      tags={draft.article.tags
+        ?.map((tag) => tag.content)
+        .join(' ')
+        .split(/\s+/)
+        .map(normalizeTag)}
       description={
         <p>
           <FormattedMessage

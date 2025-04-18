@@ -36,16 +36,16 @@ const Banner = () => {
           </p>
 
           <ShareButton
-            bgColor="green"
-            hasIcon={false}
-            size={['7rem', '2.5rem']}
-            spacing={[0, 0]}
-            inCard={false}
             title={intl.formatMessage({
               defaultMessage:
                 'I am migrating to Matters, and I invite you to come along',
               id: '0/gRer',
             })}
+            bgColor="green"
+            hasIcon={false}
+            size={['7rem', '2.5rem']}
+            spacing={[0, 0]}
+            inCard={false}
           >
             <TextIcon color="white" size={14} weight="medium">
               <Translate
