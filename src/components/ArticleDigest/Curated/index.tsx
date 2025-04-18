@@ -154,6 +154,7 @@ export const ArticleDigestCurated = ({
         article={article}
         channelId={channelId}
         pinned={pinned}
+        hasBookmark={false}
         hasTogglePinChannelArticles
       />
     </Card>

@@ -117,6 +117,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
               <List.Item key={`${feedType}:${edge.node.id}`}>
                 <ArticleDigestFeed
                   article={edge.node}
+                  hasBookmark={false}
                   hasReadTime={false}
                   hasCircle={false}
                   hasDonationCount={false}

@@ -102,6 +102,7 @@ export const IcymiCuratedFeed = ({ recommendation }: IcymiCuratedFeed) => {
             <List.Item key={article.id}>
               <ArticleDigestFeed
                 article={article}
+                hasBookmark={false}
                 includesMetaData={false}
                 excludesTimeStamp
                 onClick={() =>
