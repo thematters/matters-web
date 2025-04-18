@@ -104,6 +104,7 @@ export interface ClickButtonProp {
     | 'icymi'
     | 'newest'
     | 'channel'
+    | `channel_tab_${string}`
     | 'campaign_detail_link'
     | `campaign_detail_tab_${string}`
     | `user_profile_tab_${string}`

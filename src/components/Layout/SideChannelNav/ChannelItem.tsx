@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import { useLayoutEffect } from 'react'
 import { useRef, useState } from 'react'
 
+import { analytics } from '~/common/utils'
 import { LinkWrapper, Tooltip } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
 import { ChannelsQuery } from '~/gql/graphql'
@@ -60,6 +61,12 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
           [styles.selectedChannel]: shortHash === channel.shortHash,
           [styles.lineClampable]: !firstRender && lineClampable,
         })}
+        onClick={() => {
+          analytics.trackEvent('click_button', {
+            type: `channel_tab_${channel.id}` as `channel_tab_${string}`,
+            pageType: 'home',
+          })
+        }}
       >
         <span>{channelName}</span>
       </LinkWrapper>
