@@ -226,6 +226,28 @@ export const createApolloClient = (
     },
     typePolicies: {
       Mergeable: { merge: true },
+      // Define a fixed custom key for `Recommendation` and use cache redirects
+      // to make sure when `viewer` refer to `User:VISITOR_ID` or `User:LOGGED_IN_ID`
+      // it will always read `viewer.recommendation` from this cache key.
+      // @see https://www.apollographql.com/docs/react/caching/cache-configuration#customizing-cache-ids
+      // @see https://www.apollographql.com/docs/react/caching/advanced-topics#cache-redirects
+      Recommendation: {
+        keyFields: () => {
+          return `Recommendation:visitor`
+        },
+      },
+      User: {
+        fields: {
+          recommendation: {
+            read(_, { args, toReference }) {
+              return toReference({
+                __typename: 'Recommendation',
+                id: 'visitor',
+              })
+            },
+          },
+        },
+      },
     },
   }).restore(initialState || {})
 

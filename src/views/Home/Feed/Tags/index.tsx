@@ -16,12 +16,12 @@ import { FeedTagsPublicQuery, LastFetchRandomQuery } from '~/gql/graphql'
 import SectionHeader from '../../SectionHeader'
 import styles from './styles.module.css'
 
-const FEED_TAGS = gql`
+const FEED_TAGS_PUBLIC = gql`
   query FeedTagsPublic(
     $random: random_Int_min_0_max_49
     $first: first_Int_min_0
   ) {
-    viewer @connection(key: "viewerFeedTags") {
+    viewer {
       id
       recommendation {
         tags(input: { first: $first, filter: { random: $random } }) {
@@ -51,7 +51,7 @@ const TagsFeed = () => {
   const perPage = 6
   const perColumn = 2
   const { data, error } = usePublicQuery<FeedTagsPublicQuery>(
-    FEED_TAGS,
+    FEED_TAGS_PUBLIC,
     {
       variables: { random: lastRandom || 0, first: perPage },
     },
