@@ -217,6 +217,7 @@ const AuthenticatedNav = ({
           />
         </section>
       }
+      placement="bottom-start"
     >
       {({ openDropdown, ref }) => (
         <CreateButton openDropdown={openDropdown} buttonRef={ref} />

@@ -2,9 +2,9 @@ import _uniq from 'lodash/uniq'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ERROR_CODES } from '~/common/enums'
+import { ERROR_CODES, PATHS } from '~/common/enums'
 import { parseFormSubmitErrors } from '~/common/utils'
-import { DraftDetailStateContext } from '~/components'
+import { DraftDetailStateContext, useRoute } from '~/components'
 import { useImperativeQuery, useMutation } from '~/components/GQL'
 import {
   ArticleAccessType,
@@ -41,6 +41,7 @@ import {
 
 export const useVersionConflictHandler = () => {
   const intl = useIntl()
+  const { router } = useRoute()
 
   return async <T>(
     promise: Promise<T>,
@@ -64,7 +65,7 @@ export const useVersionConflictHandler = () => {
           if (confirmResult) {
             return retryFn()
           } else {
-            window.close()
+            router.push(PATHS.ME_DRAFTS)
           }
         }
       }

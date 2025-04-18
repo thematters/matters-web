@@ -14,6 +14,7 @@ const Home = () => {
           <Sidebar.Authors />
           <Sidebar.Tags />
           <Sidebar.Billboard />
+          <Spacer size="sp32" />
         </>
       }
     >

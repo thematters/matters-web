@@ -4,13 +4,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import { datetimeFormat, isUTC8 } from '~/common/utils'
-import {
-  Expandable,
-  LanguageContext,
-  Media,
-  ResponsiveImage,
-  useRoute,
-} from '~/components'
+import { LanguageContext, ResponsiveImage, useRoute } from '~/components'
 import {
   InfoHeaderCampaignPrivateFragment,
   InfoHeaderCampaignPublicFragment,
@@ -114,10 +108,11 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
               {!isInApplicationPeriod && (
                 <span>
                   <FormattedMessage
-                    defaultMessage="Event period{tz}: "
-                    id="krvjo9"
-                    values={{ tz: isUTC8() ? '' : ' (UTC+8) ' }}
+                    defaultMessage="Event period{tz}"
+                    id="K+pFNS"
+                    values={{ tz: isUTC8() ? '' : ' (UTC+8)' }}
                   />
+                  {lang === 'en' ? ': ' : '：'}
                   <span className={styles.period}>
                     {writingStart
                       ? datetimeFormat.absolute({
@@ -141,26 +136,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
           </section>
 
           <section className={styles.description}>
-            <Media at="sm">
-              <Expandable
-                content={description}
-                limit={3}
-                size={15}
-                collapseable={false}
-              >
-                <p dangerouslySetInnerHTML={{ __html: description || '' }} />
-              </Expandable>
-            </Media>
-            <Media greaterThan="sm">
-              <Expandable
-                content={description}
-                limit={2}
-                size={15}
-                collapseable={false}
-              >
-                <p dangerouslySetInnerHTML={{ __html: description || '' }} />
-              </Expandable>
-            </Media>
+            <p dangerouslySetInnerHTML={{ __html: description || '' }} />
           </section>
 
           <section className={styles.extra}>

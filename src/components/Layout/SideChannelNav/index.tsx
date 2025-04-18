@@ -19,7 +19,7 @@ import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const SideChannelNav = () => {
-  const { getQuery, isInPath, isPathStartWith } = useRoute()
+  const { isInPath, isPathStartWith } = useRoute()
   const viewer = useContext(ViewerContext)
   const isAuthed = viewer.isAuthed
   const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
@@ -57,26 +57,6 @@ const SideChannelNav = () => {
 
   const channels = data?.channels || []
 
-  const sortedChannels = [...channels]
-    .filter(
-      (
-        c
-      ): c is Extract<
-        typeof c,
-        { __typename?: 'TopicChannel'; enabled: boolean; name: string }
-      > =>
-        c.__typename === 'TopicChannel' &&
-        'enabled' in c &&
-        'name' in c &&
-        c.enabled
-    )
-    .sort((a, b) => {
-      const prefixA = parseInt(a.name.split('_')[0], 10) || 0
-      const prefixB = parseInt(b.name.split('_')[0], 10) || 0
-
-      return prefixA - prefixB
-    })
-
   const onTabClick = (type: string) => {
     analytics.trackEvent('click_button', {
       type: `channel_tab_${type}` as `channel_tab_${string}`,
@@ -98,8 +78,7 @@ const SideChannelNav = () => {
             className={classnames({
               [styles.item]: true,
               [styles.selectedChannel]:
-                (isAuthed && isInPath('HOME') && !getQuery('type')) ||
-                isInPath('FOLLOW'),
+                (isAuthed && isInPath('HOME')) || isInPath('FOLLOW'),
             })}
             onClick={() => onTabClick('follow')}
           >
@@ -109,12 +88,11 @@ const SideChannelNav = () => {
           </LinkWrapper>
         )}
         <LinkWrapper
-          href={`${PATHS.HOME}?type=icymi`}
+          href={`${PATHS.FEATURED}`}
           className={classnames({
             [styles.item]: true,
             [styles.selectedChannel]:
-              getQuery('type') === 'icymi' ||
-              (!isAuthed && isInPath('HOME') && !getQuery('type')),
+              isInPath('FEATURED') || (!isAuthed && isInPath('HOME')),
           })}
           onClick={() => onTabClick('featured')}
         >
@@ -138,15 +116,14 @@ const SideChannelNav = () => {
             />
           </span>
         </LinkWrapper>
-        {sortedChannels.map((c) => (
+        {channels.map((c) => (
           <ChannelItem key={c.id} channel={c} />
         ))}
         <LinkWrapper
-          href={`${PATHS.HOME}?type=newest`}
+          href={`${PATHS.NEWEST}`}
           className={classnames({
             [styles.item]: true,
-            [styles.selectedChannel]:
-              isInPath('HOME') && getQuery('type') === 'newest',
+            [styles.selectedChannel]: isInPath('NEWEST'),
           })}
           onClick={() => onTabClick('newest')}
         >

@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Announcements, Media, Spacer, ViewerContext } from '~/components'
-import { useRoute } from '~/components'
 
 import Authors from '../Authors'
 import Billboard from '../Billboard'
@@ -36,19 +35,13 @@ const horizontalFeeds: Record<
 }
 
 interface MainFeedProps {
-  feedType?: FeedType
+  feedType: FeedType
 }
 
-const MainFeed: React.FC<MainFeedProps> = ({ feedType: propFeedType }) => {
+const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
   const viewer = useContext(ViewerContext)
-  const { getQuery, isInPath } = useRoute()
-  const type = getQuery('type') as string
-  const isInHome = isInPath('HOME')
 
-  const sortBy =
-    propFeedType || ((type === '' && isInHome ? 'icymi' : type) as FeedType)
-
-  const isIcymiFeed = sortBy === 'icymi'
+  const isIcymiFeed = feedType === 'icymi'
 
   const loadPrivate = (publicData?: any) => {
     if (!viewer.isAuthed || !publicData) {
@@ -66,11 +59,11 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType: propFeedType }) => {
   }
 
   const { data, loading, error, edges, pageInfo, loadMore, client } = useFeed({
-    query: FEED_ARTICLES_PUBLIC[sortBy as keyof typeof FEED_ARTICLES_PUBLIC],
+    query: FEED_ARTICLES_PUBLIC[feedType as keyof typeof FEED_ARTICLES_PUBLIC],
     variables: {},
     connectionPath: 'viewer.recommendation.feed',
     privateQueryFn: loadPrivate,
-    keyPrefix: sortBy,
+    keyPrefix: feedType,
   })
 
   const recommendation = data?.viewer?.recommendation
@@ -99,10 +92,10 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType: propFeedType }) => {
 
   const renderHeader = () => {
     if (!isIcymiFeed) return null
-    const note = recommendation?.icymiTopic?.note || 'hello world'
+    const note = recommendation?.icymiTopic?.note
     return (
       <>
-        <Media lessThan="md">
+        <Media lessThan="lg">
           <Spacer size="sp20" />
           <Announcements />
         </Media>
@@ -129,7 +122,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType: propFeedType }) => {
       edges={mixFeed}
       pageInfo={pageInfo}
       loadMore={loadMore}
-      feedType={sortBy}
+      feedType={feedType}
       renderHeader={renderHeader}
       itemCustomProps={itemCustomProps}
     />
