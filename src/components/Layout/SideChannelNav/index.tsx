@@ -56,26 +56,6 @@ const SideChannelNav = () => {
 
   const channels = data?.channels || []
 
-  const sortedChannels = [...channels]
-    .filter(
-      (
-        c
-      ): c is Extract<
-        typeof c,
-        { __typename?: 'TopicChannel'; enabled: boolean; name: string }
-      > =>
-        c.__typename === 'TopicChannel' &&
-        'enabled' in c &&
-        'name' in c &&
-        c.enabled
-    )
-    .sort((a, b) => {
-      const prefixA = parseInt(a.name.split('_')[0], 10) || 0
-      const prefixB = parseInt(b.name.split('_')[0], 10) || 0
-
-      return prefixA - prefixB
-    })
-
   return (
     <section className={styles.content} ref={contentRef}>
       <section
@@ -126,7 +106,7 @@ const SideChannelNav = () => {
             />
           </span>
         </LinkWrapper>
-        {sortedChannels.map((c) => (
+        {channels.map((c) => (
           <ChannelItem key={c.id} channel={c} />
         ))}
         <LinkWrapper
