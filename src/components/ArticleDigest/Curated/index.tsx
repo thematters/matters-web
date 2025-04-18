@@ -103,11 +103,11 @@ export const ArticleDigestCurated = ({
         >
           <Media lessThan="sm">
             {cover && <ResponsiveImage url={cover} width={334} height={167} />}
-            {!cover && <CoverIcon title={article.title} size="sm" />}
+            {!cover && <CoverIcon shortHash={article.shortHash} size="sm" />}
           </Media>
           <Media greaterThanOrEqual="sm">
             {cover && <ResponsiveImage url={cover} width={404} height={404} />}
-            {!cover && <CoverIcon title={article.title} size="lg" />}
+            {!cover && <CoverIcon shortHash={article.shortHash} size="lg" />}
           </Media>
 
           {pinned && (

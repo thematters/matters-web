@@ -1,14 +1,16 @@
 import React from 'react'
 
+import { hashToProbability } from '~/common/utils/crypto'
+
 import styles from './styles.module.css'
 
 interface CoverIconProps {
-  title: string
+  shortHash: string
   size?: 'sm' | 'lg'
 }
 
-const getTitleHue = (titleLength: number): number => {
-  return Math.round((titleLength / 100) * 360)
+const getCoverHue = (shortHash: string): number => {
+  return Math.round(hashToProbability(shortHash) * 360)
 }
 
 const generateLayerColors = (hue: number) => {
@@ -97,9 +99,8 @@ const LargeCoverSVG = ({ colors }: { colors: Record<string, string> }) => (
   </svg>
 )
 
-const CoverIcon: React.FC<CoverIconProps> = ({ title, size = 'sm' }) => {
-  const titleLength = title.length
-  const hue = getTitleHue(titleLength)
+const CoverIcon: React.FC<CoverIconProps> = ({ shortHash, size = 'sm' }) => {
+  const hue = getCoverHue(shortHash)
   const colors = generateLayerColors(hue)
 
   return (
