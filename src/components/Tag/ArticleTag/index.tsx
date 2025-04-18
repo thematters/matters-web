@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
 import { clampTag, toPath } from '~/common/utils'
-import { Icon, TextIcon, TextIconProps } from '~/components'
+import { Icon, TextIcon, TextIconProps, Tooltip } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -43,13 +43,21 @@ export const ArticleTag = ({
   }
 
   return (
-    <Link {...path} legacyBehavior>
-      <a className={tagClasses} onClick={onClick}>
-        <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
-          <span className={styles.name}>{tagName}</span>
-        </TextIcon>
-      </a>
-    </Link>
+    <Tooltip content={tag.content} placement="top">
+      <section>
+        <Link {...path} legacyBehavior>
+          <a className={tagClasses} onClick={onClick}>
+            <TextIcon
+              {...textIconProps}
+              size={textIconProps.size}
+              allowUserSelect
+            >
+              <span className={styles.name}>{tagName}</span>
+            </TextIcon>
+          </a>
+        </Link>
+      </section>
+    </Tooltip>
   )
 }
 
