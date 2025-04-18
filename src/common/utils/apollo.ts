@@ -226,6 +226,23 @@ export const createApolloClient = (
     },
     typePolicies: {
       Mergeable: { merge: true },
+      Query: {
+        fields: {
+          viewer: {
+            read(_, { args, toReference }) {
+              return toReference({
+                __typename: 'User',
+                id: 'visitor',
+              })
+            },
+          },
+        },
+      },
+      User: {
+        keyFields: (obj, context) => {
+          return `User:${obj.id || 'visitor'}`
+        },
+      },
     },
   }).restore(initialState || {})
 
