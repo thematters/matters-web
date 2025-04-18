@@ -2,12 +2,12 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components'
 
-export const SIDEBAR_AUTHORS = gql`
-  query SidebarAuthors(
+export const SIDEBAR_AUTHORS_PUBLIC = gql`
+  query SidebarAuthorsPublic(
     $random: random_Int_min_0_max_49
     $first: first_Int_min_0
   ) {
-    viewer @connection(key: "viewerSidebarAuthors") {
+    viewer {
       id
       recommendation {
         authors(
