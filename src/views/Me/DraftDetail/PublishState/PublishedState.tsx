@@ -67,11 +67,9 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
           : `${makeSummary(draft.article.title, MAX_META_SUMMARY_LENGTH)} - Matters`
       }
       path={path.href}
-      tags={draft.article.tags
-        ?.map((tag) => tag.content)
-        .join(' ')
-        .split(/\s+/)
-        .map(normalizeTag)}
+      tags={draft.article.tags?.map((tag) =>
+        normalizeTag(tag.content).replace(/\s+/g, '')
+      )}
       description={
         <p>
           <FormattedMessage

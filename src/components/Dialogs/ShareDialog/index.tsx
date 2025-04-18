@@ -68,6 +68,7 @@ function tryDecodeUrl(url: string) {
 
 export const ShareDialog = (props: ShareDialogProps) => {
   const { title, path, tags } = props
+
   const shareLink = tryDecodeUrl(
     typeof window !== 'undefined'
       ? path

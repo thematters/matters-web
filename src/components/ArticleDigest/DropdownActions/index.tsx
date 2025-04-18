@@ -475,11 +475,9 @@ const DropdownActions = (props: DropdownActionsProps) => {
         ? `${makeSummary(article.title, MAX_META_SUMMARY_LENGTH)} - ${article.author.displayName} - Matters`
         : `${makeSummary(article.title, MAX_META_SUMMARY_LENGTH)} - Matters`,
       path: props.sharePath,
-      tags: article.tags
-        ?.map((tag) => tag.content)
-        .join(' ')
-        .split(/\s+/)
-        .map(normalizeTag),
+      tags: article.tags?.map((tag) =>
+        normalizeTag(tag.content).replace(/\s+/g, '')
+      ),
     },
     ({ openDialog }) => ({ ...props, ...controls, openShareDialog: openDialog })
   )

@@ -39,9 +39,9 @@ const PublishedState = ({ article }: PublishedStateProps) => {
       path={path.href}
       tags={article.tags
         ?.map((tag) => tag.content)
+        .map(normalizeTag)
         .join(' ')
-        .split(/\s+/)
-        .map(normalizeTag)}
+        .split(/\s+/)}
       description={
         <>
           <p>

@@ -94,11 +94,9 @@ const DesktopToolbar = ({
             <ShareButton
               title={`${makeSummary(articleDetails.title, MAX_META_SUMMARY_LENGTH)} - ${articleDetails?.author.displayName} - Matters`}
               path={sharePath}
-              tags={articleDetails.tags
-                ?.map(({ content }) => content)
-                .join(' ')
-                .split(/\s+/)
-                .map(normalizeTag)}
+              tags={articleDetails.tags?.map((tag) =>
+                normalizeTag(tag.content).replace(/\s+/g, '')
+              )}
               iconSize={24}
               inCard={false}
               textActiveColor="greyDarker"
