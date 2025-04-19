@@ -177,7 +177,7 @@ const BaseDraftDetail = () => {
     hasContent &&
     hasTitle &&
     !isOverLength &&
-    saveStatus === 'saved'
+    (!saveStatus || saveStatus === 'saved')
   )
 
   const upload = async (input: {
