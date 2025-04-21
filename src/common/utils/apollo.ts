@@ -3,6 +3,7 @@ import { InMemoryCache, NormalizedCacheObject } from '@apollo/client/cache'
 import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
+import { RetryLink } from '@apollo/client/link/retry'
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
 import { sha256 } from 'crypto-hash'
 import type { IncomingHttpHeaders } from 'http'
@@ -45,7 +46,15 @@ const site_domain_tld =
 /**
  * Dynamic API endpoint based on hostname
  */
-const httpLink = ({ host, headers }: { host: string; headers: any }) => {
+const uploadLink = ({
+  host,
+  headers,
+  isPublicOperation,
+}: {
+  host: string
+  headers: any
+  isPublicOperation: boolean
+}) => {
   let apiUrl = process.env.NEXT_PUBLIC_API_URL as string
 
   let hostname = new URL(apiUrl).hostname
@@ -53,27 +62,27 @@ const httpLink = ({ host, headers }: { host: string; headers: any }) => {
     // hostname.endsWith(site_domain_tld) &&
     host.endsWith(site_domain_tld_old) // configured new tld but running on old tld
   ) {
-    console.log('serving on different hostname:', {
-      apiUrl,
-      hostname,
-      host,
-      site_domain_tld,
-      site_domain_tld_old,
-    })
     apiUrl = apiUrl.replace(site_domain_tld, site_domain_tld_old)
     hostname = hostname.replace(site_domain_tld, site_domain_tld_old)
-    console.log('updated hostname:', { apiUrl, hostname })
   }
 
   return createUploadLink({
     uri: apiUrl,
     headers: {
       ...headers,
+      cookie: isPublicOperation ? '' : headers.cookie,
       host: hostname,
       'Apollo-Require-Preflight': 'true',
     },
   })
 }
+
+const directionalLink = ({ host, headers }: { host: string; headers: any }) =>
+  new RetryLink().split(
+    (operation) => operation.getContext()[GQL_CONTEXT_PUBLIC_QUERY_KEY],
+    uploadLink({ host, headers, isPublicOperation: true }),
+    uploadLink({ host, headers, isPublicOperation: false })
+  )
 
 /**
  * Logging error message
@@ -119,6 +128,9 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
   }
 
   return {
+    fetchOptions: {
+      credentials: isPublicOperation ? 'omit' : 'include',
+    },
     credentials: isPublicOperation ? 'omit' : 'include',
     headers: {
       ...headers,
@@ -214,6 +226,28 @@ export const createApolloClient = (
     },
     typePolicies: {
       Mergeable: { merge: true },
+      // Define a fixed custom key for `Recommendation` and use cache redirects
+      // to make sure when `viewer` refer to `User:VISITOR_ID` or `User:LOGGED_IN_ID`
+      // it will always read `viewer.recommendation` from this cache key.
+      // @see https://www.apollographql.com/docs/react/caching/cache-configuration#customizing-cache-ids
+      // @see https://www.apollographql.com/docs/react/caching/advanced-topics#cache-redirects
+      Recommendation: {
+        keyFields: () => {
+          return `Recommendation:visitor`
+        },
+      },
+      User: {
+        fields: {
+          recommendation: {
+            read(_, { args, toReference }) {
+              return toReference({
+                __typename: 'Recommendation',
+                id: 'visitor',
+              })
+            },
+          },
+        },
+      },
     },
   }).restore(initialState || {})
 
@@ -231,7 +265,7 @@ export const createApolloClient = (
       agentHashLink,
       authLink,
       userGroupLink({ cookie }),
-      httpLink({ host, headers }),
+      directionalLink({ host, headers }),
     ]),
     cache,
     resolvers,

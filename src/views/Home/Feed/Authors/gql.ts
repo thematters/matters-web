@@ -2,9 +2,12 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components'
 
-export const FEED_AUTHORS = gql`
-  query FeedAuthors($random: random_Int_min_0_max_49, $first: first_Int_min_0) {
-    viewer @connection(key: "viewerFeedAuthors") {
+export const FEED_AUTHORS_PUBLIC = gql`
+  query FeedAuthorsPublic(
+    $random: random_Int_min_0_max_49
+    $first: first_Int_min_0
+  ) {
+    viewer {
       id
       recommendation {
         authors(

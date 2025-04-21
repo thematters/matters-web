@@ -58,7 +58,7 @@ const fragments = gql`
 // without `Public` suffix, query as a logged-in user
 export const VIEWER_WRITINGS = gql`
   query ViewerWritings($userName: String!, $after: String) {
-    user(input: { userName: $userName }) @connection(key: "viewerWritings") {
+    user(input: { userName: $userName }) {
       ...WritingsUser
     }
   }
