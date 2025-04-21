@@ -22,45 +22,17 @@ export const getCoverHue = (shortHash: string): number => {
     return x - Math.floor(x)
   }
 
-  // Use completely distinct, evenly spaced hues to ensure maximum differentiation
-  // These are 24 distinct colors evenly spaced around the color wheel (15 degrees apart)
-  const distinctHues = [
-    0, // Red
-    15, // Red-Orange
-    30, // Orange-Red
-    45, // Orange
-    60, // Orange/Gold
-    75, // Yellow-Orange
-    90, // Yellow-Green
-    105, // Yellow-Green
-    120, // Green
-    135, // Green-Turquoise
-    150, // Turquoise
-    165, // Turquoise-Cyan
-    180, // Cyan
-    195, // Cyan-Sky
-    210, // Sky Blue
-    225, // Sky-Blue
-    240, // Blue
-    255, // Blue-Indigo
-    270, // Purple
-    285, // Purple-Magenta
-    300, // Magenta
-    315, // Magenta-Pink
-    330, // Pink
-    345, // Pink-Red
-  ]
+  // Quantize colors into 36 distinct values (every 10 degrees)
+  // This makes colors more distinct and avoids "almost similar" colors
+  // which can look odd when placed together
 
-  // First random value selects which distinct hue to use as a base
-  const hueIndex = Math.floor(seedRandom() * distinctHues.length)
-  const baseHue = distinctHues[hueIndex]
+  // Get a number between 0-35
+  const colorIndex = Math.floor(seedRandom() * 36)
 
-  // Second random value adds a small variation to make colors more unique
-  // But keeps them clearly in their base color family
-  const variation = Math.floor(seedRandom() * 11) - 5 // -5 to +5 degrees variation
+  // Convert to a hue value (0-350 in steps of 10 degrees)
+  const hue = colorIndex * 10
 
-  // Ensure we're within 0-360 range
-  return (baseHue + variation + 360) % 360
+  return hue
 }
 
 const getTitleHash = (title: string): string => {
