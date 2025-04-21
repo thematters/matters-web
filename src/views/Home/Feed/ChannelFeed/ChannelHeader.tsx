@@ -1,6 +1,5 @@
 import gql from 'graphql-tag'
 
-import { displayChannelName } from '~/common/utils'
 import { ChannelHeaderFragment } from '~/gql/graphql'
 
 import styles from '../styles.module.css'
@@ -27,7 +26,7 @@ export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
   return (
     <>
       <div className={styles.header}>
-        <h1>{displayChannelName(channel.name)}</h1>
+        <h1>{channel.name}</h1>
         {channel.note && <p className={styles.description}>{channel.note}</p>}
       </div>
     </>

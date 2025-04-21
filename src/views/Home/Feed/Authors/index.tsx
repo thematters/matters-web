@@ -15,10 +15,10 @@ import {
   ViewerContext,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
-import { FeedAuthorsQuery, LastFetchRandomQuery } from '~/gql/graphql'
+import { FeedAuthorsPublicQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
-import { FEED_AUTHORS } from './gql'
+import { FEED_AUTHORS_PUBLIC } from './gql'
 import styles from './styles.module.css'
 
 const Authors = () => {
@@ -36,8 +36,8 @@ const Authors = () => {
   const perPage = 6
   const perColumn = 3
   const randomMaxSize = 50
-  const { data, loading, error } = usePublicQuery<FeedAuthorsQuery>(
-    FEED_AUTHORS,
+  const { data, loading, error } = usePublicQuery<FeedAuthorsPublicQuery>(
+    FEED_AUTHORS_PUBLIC,
     {
       variables: { random: lastRandom || 0, first: perPage },
     },
