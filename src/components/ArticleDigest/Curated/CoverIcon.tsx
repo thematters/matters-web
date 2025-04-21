@@ -22,18 +22,55 @@ export const getCoverHue = (shortHash: string): number => {
     return x - Math.floor(x)
   }
 
-  // Generate a hue value between 0-360
-  return Math.floor(seedRandom() * 360)
+  // Use completely distinct, evenly spaced hues to ensure maximum differentiation
+  // These are 24 distinct colors evenly spaced around the color wheel (15 degrees apart)
+  const distinctHues = [
+    0, // Red
+    15, // Red-Orange
+    30, // Orange-Red
+    45, // Orange
+    60, // Orange/Gold
+    75, // Yellow-Orange
+    90, // Yellow-Green
+    105, // Yellow-Green
+    120, // Green
+    135, // Green-Turquoise
+    150, // Turquoise
+    165, // Turquoise-Cyan
+    180, // Cyan
+    195, // Cyan-Sky
+    210, // Sky Blue
+    225, // Sky-Blue
+    240, // Blue
+    255, // Blue-Indigo
+    270, // Purple
+    285, // Purple-Magenta
+    300, // Magenta
+    315, // Magenta-Pink
+    330, // Pink
+    345, // Pink-Red
+  ]
+
+  // First random value selects which distinct hue to use as a base
+  const hueIndex = Math.floor(seedRandom() * distinctHues.length)
+  const baseHue = distinctHues[hueIndex]
+
+  // Second random value adds a small variation to make colors more unique
+  // But keeps them clearly in their base color family
+  const variation = Math.floor(seedRandom() * 11) - 5 // -5 to +5 degrees variation
+
+  // Ensure we're within 0-360 range
+  return (baseHue + variation + 360) % 360
 }
 
 const getTitleHash = (title: string): string => {
   if (title.length === 0) return '0'
 
-  // Using multiple hash seeds and more mixing operations to increase randomness
-  let h1 = 0x811c9dc5 // FNV-1 offset basis
-  let h2 = 0x1b873593 // Prime 1
-  let h3 = 0x85ebca6b // Prime 2
-  let h4 = 0xc2b2ae35 // Prime 3
+  // Add title length as a factor to differentiate similar titles
+  let h1 = 0x811c9dc5 ^ title.length
+  let h2 = 0x1b873593
+  let h3 = 0x85ebca6b
+  let h4 = 0xc2b2ae35
 
   // Process string into a UTF-8 byte array
   const bytes = []
@@ -51,31 +88,48 @@ const getTitleHash = (title: string): string => {
     }
   }
 
-  // Main hash calculation (multiple rounds)
+  // Enhance position influence - characters at different positions have different impact
   for (let i = 0; i < bytes.length; i++) {
     const byte = bytes[i]
+    const position = i + 1 // 1-based position
 
-    // Round 1: FNV-1a variant
-    h1 ^= byte
+    // Position-weighted mixing (characters at same position have less influence)
+    h1 ^= byte * position
     h1 = (h1 * 0x01000193) | 0
 
-    // Round 2: Using rotation and XOR
-    h2 = ((h2 << 5) | (h2 >>> 27)) ^ byte
+    // Mix with a prime multiplier based on position
+    h2 = ((h2 << 5) | (h2 >>> 27)) ^ (byte + position)
 
-    // Round 3: Addition hash with prime multiplication
-    h3 = ((h3 + byte) * 0x85ebca6b) >>> 0
+    // Strengthen the influence of the end of the string
+    // This helps differentiate strings with the same prefix
+    if (i > bytes.length / 2) {
+      h3 = ((h3 + byte * 3) * 0x85ebca6b) >>> 0
+    } else {
+      h3 = ((h3 + byte) * 0x85ebca6b) >>> 0
+    }
 
-    // Round 4: Rotation and prime multiplication
-    h4 = ((byte ^ (h4 >>> 16)) * 0x85ebca6b) >>> 0
+    // Special treatment for numbers and punctuation
+    if ((byte >= 48 && byte <= 57) || (byte >= 33 && byte <= 47)) {
+      // 0-9, !"#$%&'()*+,-./
+      h4 = (((byte * 101) ^ (h4 >>> 14)) * 0x85ebca6b) >>> 0
+    } else {
+      h4 = ((byte ^ (h4 >>> 16)) * 0x85ebca6b) >>> 0
+    }
   }
 
-  // Mix all round results
-  h1 = ((h1 ^ h2) * h3) >>> 0
-  h1 = ((h1 ^ h4) * 0x9e3779b9) >>> 0 // Using golden ratio related prime
+  // Add reversed string influence to make similar strings more different
+  for (let i = bytes.length - 1; i >= 0; i--) {
+    const byte = bytes[i]
+    h1 = ((h1 ^ byte) * 0x01000193) | 0
+    h4 = ((h4 ^ byte) * 0x85ebca6b) >>> 0
+  }
 
-  // Final mixing (Murmur3 finalizer variant)
-  h1 ^= h1 >>> 16
-  h1 = (h1 * 0x85ebca6b) >>> 0
+  // Mix all round results with additional entropy
+  h1 = ((h1 ^ h2) * h3) >>> 0
+  h1 = ((h1 ^ h4) * 0x9e3779b9) >>> 0
+  h1 = ((h1 ^ (h1 >>> 16)) * 0x85ebca6b) >>> 0
+
+  // Final mixing with strong avalanche effect
   h1 ^= h1 >>> 13
   h1 = (h1 * 0xc2b2ae35) >>> 0
   h1 ^= h1 >>> 16
@@ -86,12 +140,12 @@ const getTitleHash = (title: string): string => {
 
 const generateLayerColors = (hue: number) => {
   return {
-    layer1: `hsl(${hue}, 50%, 90%)`,
-    layer2: `hsl(${hue}, 50%, 95%)`,
-    layer3: `hsl(${hue}, 50%, 90%)`,
-    layer4: `hsl(${hue}, 50%, 80%)`,
-    layer5: `hsl(${hue}, 50%, 85%)`,
-    layer6: `hsl(${hue}, 50%, 80%)`,
+    layer1: `hsl(${hue}, 70%, 90%)`,
+    layer2: `hsl(${hue}, 60%, 95%)`,
+    layer3: `hsl(${hue}, 65%, 90%)`,
+    layer4: `hsl(${hue}, 75%, 75%)`,
+    layer5: `hsl(${hue}, 70%, 85%)`,
+    layer6: `hsl(${hue}, 75%, 80%)`,
   }
 }
 
