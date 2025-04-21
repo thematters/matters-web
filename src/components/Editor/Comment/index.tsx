@@ -9,11 +9,11 @@ import {
   useEditor,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
-import { useCommentEditorContext } from '~/components/Context'
+import { LanguageContext, useCommentEditorContext } from '~/components/Context'
 
 import {
   CustomShortcuts,
@@ -47,6 +47,7 @@ const CommentEditor: React.FC<Props> = ({
   editable = true,
 }) => {
   const client = useApolloClient()
+  const { lang } = useContext(LanguageContext)
   const intl = useIntl()
   const { setActiveEditor, setFallbackEditor } = useCommentEditorContext()
 
@@ -84,7 +85,7 @@ const CommentEditor: React.FC<Props> = ({
       Mention.configure({
         suggestion: makeMentionSuggestion({ client }),
       }),
-      SmartLink.configure(makeSmartLinkOptions({ client })),
+      SmartLink.configure(makeSmartLinkOptions({ client, lang })),
       ...commentEditorExtensions,
     ] as Extension[],
   })

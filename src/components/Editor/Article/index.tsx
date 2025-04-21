@@ -11,7 +11,7 @@ import {
   useEditor,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useCallback, useRef } from 'react'
+import { useCallback, useContext, useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -22,6 +22,7 @@ import {
   MAX_FIGURE_CAPTION_LENGTH,
 } from '~/common/enums'
 import { getValidFiles } from '~/common/utils'
+import { LanguageContext } from '~/components/Context'
 import { useNativeEventListener } from '~/components/Hook'
 import { EditorDraftFragment } from '~/gql/graphql'
 
@@ -54,6 +55,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   update,
   upload,
 }) => {
+  const { lang } = useContext(LanguageContext)
   const intl = useIntl()
   const client = useApolloClient()
 
@@ -111,7 +113,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           id: 'Uq6tfM',
         }),
       }),
-      SmartLink.configure(makeSmartLinkOptions({ client })),
+      SmartLink.configure(makeSmartLinkOptions({ client, lang })),
       FigureImageUploader.configure({
         upload,
         update,
