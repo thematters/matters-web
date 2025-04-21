@@ -112,12 +112,12 @@ const getTitleHash = (title: string): string => {
 
 const generateLayerColors = (hue: number) => {
   return {
-    layer1: `hsl(${hue}, 70%, 90%)`,
-    layer2: `hsl(${hue}, 60%, 95%)`,
-    layer3: `hsl(${hue}, 65%, 90%)`,
-    layer4: `hsl(${hue}, 75%, 75%)`,
-    layer5: `hsl(${hue}, 70%, 85%)`,
-    layer6: `hsl(${hue}, 75%, 80%)`,
+    layer1: `hsl(${hue}, 50%, 90%)`,
+    layer2: `hsl(${hue}, 50%, 95%)`,
+    layer3: `hsl(${hue}, 50%, 90%)`,
+    layer4: `hsl(${hue}, 50%, 80%)`,
+    layer5: `hsl(${hue}, 50%, 85%)`,
+    layer6: `hsl(${hue}, 50%, 80%)`,
   }
 }
 
