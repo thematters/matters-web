@@ -32,7 +32,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "prepare": "husky install",
-    "vercel-build": "set -xe; if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then npm run gen:type:prod && cp -va .env.prod .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.town' | tee -a .env.local; else npm run gen:type && cp -va .env.dev .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.town' | tee -a .env.local ; fi && { echo 'NEXT_PUBLIC_NEXT_ASSET_DOMAIN='; echo 'NEXT_PUBLIC_ADMIN_VIEW=true'; } | tee -a .env.local && npm run build",
+    "vercel-build": "set -xe; if [[ \"$NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF\" =~ release/* ]] ; then npm run gen:type:prod && cp -va .env.prod .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-next.matters.town' | tee -a .env.local; else npm run gen:type && cp -va .env.dev .env.local ; echo 'NEXT_PUBLIC_SITE_DOMAIN=web-dev.matters.town' | tee -a .env.local ; echo 'NEXT_PUBLIC_API_URL=https://server-develop-matters.vercel.app/graphql' | tee -a .env.local ; fi && { echo 'NEXT_PUBLIC_NEXT_ASSET_DOMAIN='; echo 'NEXT_PUBLIC_ADMIN_VIEW=true'; } | tee -a .env.local && npm run build",
     "i18n:extract": "formatjs extract 'src/**/*.ts*' --ignore='**/*.d.ts' --id-interpolation-pattern '[sha512:contenthash:base64:6]' --out-file lang/default.json",
     "i18n:generate": "node bin/i18nGenerate.js",
     "i18n:compile": "formatjs compile-folder --ast lang compiled-lang",
