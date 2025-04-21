@@ -1,16 +1,87 @@
 import React from 'react'
 
-import { hashToProbability } from '~/common/utils/crypto'
-
 import styles from './styles.module.css'
 
 interface CoverIconProps {
-  shortHash: string
+  title: string
   size?: 'sm' | 'lg'
 }
 
-const getCoverHue = (shortHash: string): number => {
-  return Math.round(hashToProbability(shortHash) * 360)
+export const getCoverHue = (shortHash: string): number => {
+  // Generate a stable numerical value from the hash as a seed
+  let seed = 0
+  for (let i = 0; i < shortHash.length; i++) {
+    // Use a simple hash algorithm to convert characters to values and accumulate
+    seed = (seed << 5) - seed + shortHash.charCodeAt(i)
+    seed = seed & seed // Convert to 32-bit integer
+  }
+
+  // Use the seed to generate a pseudo-random number between 0-1
+  const seedRandom = () => {
+    const x = Math.sin(seed++) * 10000
+    return x - Math.floor(x)
+  }
+
+  // Generate a hue value between 0-360
+  return Math.floor(seedRandom() * 360)
+}
+
+const getTitleHash = (title: string): string => {
+  if (title.length === 0) return '0'
+
+  // Using multiple hash seeds and more mixing operations to increase randomness
+  let h1 = 0x811c9dc5 // FNV-1 offset basis
+  let h2 = 0x1b873593 // Prime 1
+  let h3 = 0x85ebca6b // Prime 2
+  let h4 = 0xc2b2ae35 // Prime 3
+
+  // Process string into a UTF-8 byte array
+  const bytes = []
+  for (let i = 0; i < title.length; i++) {
+    const char = title.charCodeAt(i)
+    if (char < 128) {
+      bytes.push(char)
+    } else if (char < 2048) {
+      bytes.push((char >> 6) | 192)
+      bytes.push((char & 63) | 128)
+    } else {
+      bytes.push((char >> 12) | 224)
+      bytes.push(((char >> 6) & 63) | 128)
+      bytes.push((char & 63) | 128)
+    }
+  }
+
+  // Main hash calculation (multiple rounds)
+  for (let i = 0; i < bytes.length; i++) {
+    const byte = bytes[i]
+
+    // Round 1: FNV-1a variant
+    h1 ^= byte
+    h1 = (h1 * 0x01000193) | 0
+
+    // Round 2: Using rotation and XOR
+    h2 = ((h2 << 5) | (h2 >>> 27)) ^ byte
+
+    // Round 3: Addition hash with prime multiplication
+    h3 = ((h3 + byte) * 0x85ebca6b) >>> 0
+
+    // Round 4: Rotation and prime multiplication
+    h4 = ((byte ^ (h4 >>> 16)) * 0x85ebca6b) >>> 0
+  }
+
+  // Mix all round results
+  h1 = ((h1 ^ h2) * h3) >>> 0
+  h1 = ((h1 ^ h4) * 0x9e3779b9) >>> 0 // Using golden ratio related prime
+
+  // Final mixing (Murmur3 finalizer variant)
+  h1 ^= h1 >>> 16
+  h1 = (h1 * 0x85ebca6b) >>> 0
+  h1 ^= h1 >>> 13
+  h1 = (h1 * 0xc2b2ae35) >>> 0
+  h1 ^= h1 >>> 16
+
+  // Convert to hexadecimal
+  return (h1 >>> 0).toString(16)
 }
 
 const generateLayerColors = (hue: number) => {
@@ -99,7 +170,8 @@ const LargeCoverSVG = ({ colors }: { colors: Record<string, string> }) => (
   </svg>
 )
 
-const CoverIcon: React.FC<CoverIconProps> = ({ shortHash, size = 'sm' }) => {
+const CoverIcon: React.FC<CoverIconProps> = ({ title, size = 'sm' }) => {
+  const shortHash = getTitleHash(title)
   const hue = getCoverHue(shortHash)
   const colors = generateLayerColors(hue)
 
