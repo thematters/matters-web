@@ -21,9 +21,11 @@ export interface SmartLinkOptions {
   // trigger to search and replace the link text by key
   search: ({
     key,
+    type,
     replace,
   }: {
     key: string
+    type: string
     replace: (text: string) => void
   }) => Promise<void>
 }
@@ -38,11 +40,14 @@ const findAndReplace = ({
   editor,
   findRule,
   key,
+  type,
   replace,
-}: { editor: Editor; key: string; replace: string } & Pick<
-  SmartLinkOptions,
-  'findRule'
->) => {
+}: {
+  editor: Editor
+  key: string
+  type: string
+  replace: string
+} & Pick<SmartLinkOptions, 'findRule'>) => {
   let textNodesWithPosition: TextNodesWithPosition[] = []
   let index = 0
 
@@ -93,7 +98,7 @@ const findAndSearch = _debounce(
     search,
   }: { editor: Editor } & Pick<SmartLinkOptions, 'findRule' | 'search'>) => {
     const html = editor.getHTML()
-    const keys: string[] = []
+    const uniqueLinks = new Map<string, { key: string; type: string }>()
 
     // find
     const matches = Array.from(html.matchAll(findRule)).filter(([matchText]) =>
@@ -102,17 +107,20 @@ const findAndSearch = _debounce(
 
     for (const m of matches) {
       const key = m.groups?.key
-      if (m.index !== undefined && key && keys.indexOf(key) < 0) {
-        keys.push(key)
+      const type = m.groups?.type
+      if (m.index !== undefined && key && type) {
+        const mapKey = `${type}:${key}`
+        uniqueLinks.set(mapKey, { key, type })
       }
     }
 
     // search
-    keys.forEach((key) => {
+    uniqueLinks.forEach(({ key, type }) => {
       search({
         key,
+        type,
         replace: (text) => {
-          findAndReplace({ editor, findRule, key, replace: text })
+          findAndReplace({ editor, findRule, key, type, replace: text })
         },
       })
     })
@@ -124,9 +132,14 @@ export const SmartLink = Extension.create<SmartLinkOptions>({
   name: 'smartLink',
 
   onUpdate() {
-    // regexp must contains a named group `key`
+    // regexp must contains a named group `key` and `type`
     if (this.options.findRule.toString().indexOf('?<key>') === -1) {
       console.error('RegExp must contains a named group `key`')
+      return
+    }
+
+    if (this.options.findRule.toString().indexOf('?<type>') === -1) {
+      console.error('RegExp must contains a named group `type`')
       return
     }
 
