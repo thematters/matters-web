@@ -17,6 +17,7 @@ const EndOfResults: React.FC<EndOfResultsProps> = ({
   const containerClasses = classNames({
     [styles.endOfResults]: true,
     [styles[`spacingTop${capitalizeFirstLetter(spacingTop)}`]]: true,
+    ['endOfResults']: true,
   })
   return (
     <section className={containerClasses}>

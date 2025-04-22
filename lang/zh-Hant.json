@@ -681,10 +681,6 @@
   "9OPnTz": {
     "defaultMessage": "系統或連線異常，請刷新頁面後重新點擊晚鳥參與"
   },
-  "9SXN7s": {
-    "defaultMessage": "No more comments",
-    "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
-  },
   "9UNFGm": {
     "defaultMessage": "設置交易密碼"
   },
@@ -3138,9 +3134,6 @@
   },
   "ucxFlV": {
     "defaultMessage": "提現流程已啟動"
-  },
-  "ui1+QC": {
-    "defaultMessage": "已顯示所有結果"
   },
   "ulh3kf": {
     "defaultMessage": "選集"
