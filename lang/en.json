@@ -3079,6 +3079,9 @@
     "defaultMessage": "Your work {articleTitle} has been published to decentralized network",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
+  "tFeVR6": {
+    "defaultMessage": "The summary text limit is {maxLength} characters"
+  },
   "tIDG14": {
     "defaultMessage": "Illegal advertising"
   },
