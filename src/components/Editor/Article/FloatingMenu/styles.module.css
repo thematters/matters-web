@@ -8,9 +8,18 @@
   & button,
   & .expandButton,
   & .uploadButton {
+    @mixin transition;
+
+    color: var(--color-black);
     cursor: pointer;
     background: var(--color-white);
     border-radius: 50%;
+    transition-property: color;
+
+    &:hover,
+    &:focus {
+      color: var(--color-grey-darker);
+    }
   }
 
   @media (--md-up) {
