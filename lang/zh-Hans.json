@@ -3079,6 +3079,9 @@
     "defaultMessage": "你的作品 {articleTitle} 已发布到 IPFS",
     "description": "src/components/Notice/ArticleNotice/ArticlePublishedNotice.tsx"
   },
+  "tFeVR6": {
+    "defaultMessage": "摘要文字上限为 {maxLength} 字"
+  },
   "tIDG14": {
     "defaultMessage": "非法广告"
   },
