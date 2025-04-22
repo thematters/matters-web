@@ -682,7 +682,7 @@
     "defaultMessage": "系统或连线异常，请刷新页面后重新点击晚鸟参与"
   },
   "9SXN7s": {
-    "defaultMessage": "没有更多",
+    "defaultMessage": "No more comments",
     "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
   },
   "9UNFGm": {
@@ -780,10 +780,6 @@
   "AwQHHA": {
     "defaultMessage": "请先设定交易密码",
     "description": "PAYMENT_PASSWORD_NOT_SET"
-  },
-  "B2As08": {
-    "defaultMessage": "没有更多",
-    "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
   },
   "B9IFMF": {
     "defaultMessage": "好的，我报名"
@@ -1814,6 +1810,10 @@
   },
   "U86B6w": {
     "defaultMessage": "数据"
+  },
+  "UMCQ4G": {
+    "defaultMessage": "刷完啦",
+    "description": "src/components/Interaction/"
   },
   "UOdEqi": {
     "defaultMessage": "原有透过电子信箱登录方式将为你保留。为维护你的帐户安全，加密钱包连接后无法重设。",

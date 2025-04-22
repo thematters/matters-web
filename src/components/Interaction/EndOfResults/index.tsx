@@ -20,15 +20,17 @@ const EndOfResults: React.FC<EndOfResultsProps> = ({
   })
   return (
     <section className={containerClasses}>
+      <span className={styles.endOfResultsIcon} />
       {typeof message === 'boolean' && message ? (
         <FormattedMessage
-          defaultMessage="That's all"
-          id="B2As08"
-          description="src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
+          defaultMessage="Done"
+          id="UMCQ4G"
+          description="src/components/Interaction/"
         />
       ) : (
         message
       )}
+      <span className={styles.endOfResultsIcon} />
     </section>
   )
 }
