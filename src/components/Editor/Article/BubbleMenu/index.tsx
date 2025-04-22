@@ -131,12 +131,14 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   editor.isActive('heading', { level: 2 }) ? styles.active : ''
                 }
                 title={intl.formatMessage({
-                  defaultMessage: 'Heading 2',
-                  id: 'Zqekct',
+                  defaultMessage: 'Title',
+                  id: 'QKo4ol',
+                  description: 'src/components/Editor',
                 })}
                 aria-label={intl.formatMessage({
-                  defaultMessage: 'Heading 2',
-                  id: 'Zqekct',
+                  defaultMessage: 'Title',
+                  id: 'QKo4ol',
+                  description: 'src/components/Editor',
                 })}
               >
                 {<Icon icon={IconEditorH2} size={24} />}
@@ -155,12 +157,14 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   editor.isActive('heading', { level: 3 }) ? styles.active : ''
                 }
                 title={intl.formatMessage({
-                  defaultMessage: 'Heading 3',
-                  id: 'BDbgCL',
+                  defaultMessage: 'Subtitle',
+                  id: 'yp0PiU',
+                  description: 'src/components/Editor',
                 })}
                 aria-label={intl.formatMessage({
-                  defaultMessage: 'Heading 3',
-                  id: 'BDbgCL',
+                  defaultMessage: 'Subtitle',
+                  id: 'yp0PiU',
+                  description: 'src/components/Editor',
                 })}
               >
                 {<Icon icon={IconEditorH3} size={24} />}
@@ -176,11 +180,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 className={editor.isActive('bold') ? styles.active : ''}
                 title={intl.formatMessage({
                   defaultMessage: 'Bold',
-                  id: 'Dkkmwm',
+                  id: '1lWarA',
+                  description: 'src/components/Editor',
                 })}
                 aria-label={intl.formatMessage({
                   defaultMessage: 'Bold',
-                  id: 'Dkkmwm',
+                  id: '1lWarA',
+                  description: 'src/components/Editor',
                 })}
               >
                 {<Icon icon={IconEditorBold} size={24} />}
@@ -198,11 +204,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 className={editor.isActive('strike') ? styles.active : ''}
                 title={intl.formatMessage({
                   defaultMessage: 'Strikethrough',
-                  id: 'lH8y+X',
+                  id: 'KG9vIx',
+                  description: 'src/components/Editor',
                 })}
                 aria-label={intl.formatMessage({
                   defaultMessage: 'Strikethrough',
-                  id: 'lH8y+X',
+                  id: 'KG9vIx',
+                  description: 'src/components/Editor',
                 })}
               >
                 {<Icon icon={IconEditorStrike} size={24} />}
@@ -220,11 +228,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 className={editor.isActive('codeBlock') ? styles.active : ''}
                 title={intl.formatMessage({
                   defaultMessage: 'Code Block',
-                  id: 'fJFvPm',
+                  id: 'wOYX42',
+                  description: 'src/components/Editor',
                 })}
                 aria-label={intl.formatMessage({
                   defaultMessage: 'Code Block',
-                  id: 'fJFvPm',
+                  id: 'wOYX42',
+                  description: 'src/components/Editor',
                 })}
               >
                 {<Icon icon={IconEditorCode} size={24} />}
@@ -240,8 +250,9 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               disabled={!editor.can().chain().focus().toggleBlockquote().run()}
               className={editor.isActive('blockquote') ? styles.active : ''}
               aria-label={intl.formatMessage({
-                defaultMessage: 'Quote',
-                id: 'atzUcB',
+                defaultMessage: 'Blockquote',
+                id: '2U8rTr',
+                description: 'src/components/Editor',
               })}
             >
               {<Icon icon={IconEditorQuote} size={24} />}
@@ -255,12 +266,14 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={editor.isActive('bulletList') ? styles.active : ''}
                 title={intl.formatMessage({
-                  defaultMessage: 'Unordered list',
-                  id: 'Onjs6P',
+                  defaultMessage: 'Unordered List',
+                  id: 'KAuIWb',
+                  description: 'src/components/Editor',
                 })}
                 aria-label={intl.formatMessage({
-                  defaultMessage: 'Unordered list',
-                  id: 'Onjs6P',
+                  defaultMessage: 'Unordered List',
+                  id: 'KAuIWb',
+                  description: 'src/components/Editor',
                 })}
               >
                 {<Icon icon={IconEditorUl} size={24} />}
@@ -275,12 +288,14 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={editor.isActive('orderedList') ? styles.active : ''}
                 title={intl.formatMessage({
-                  defaultMessage: 'Ordered list',
-                  id: '5j/gIz',
+                  defaultMessage: 'Ordered List',
+                  id: 'AQL1ME',
+                  description: 'src/components/Editor',
                 })}
                 aria-label={intl.formatMessage({
-                  defaultMessage: 'Ordered list',
-                  id: '5j/gIz',
+                  defaultMessage: 'Ordered List',
+                  id: 'AQL1ME',
+                  description: 'src/components/Editor',
                 })}
               >
                 {<Icon icon={IconEditorOl} size={24} />}
@@ -305,11 +320,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               className={editor.isActive('link') ? styles.active : ''}
               title={intl.formatMessage({
                 defaultMessage: 'Link',
-                id: 'JBWS0c',
+                id: 'vlEBHB',
+                description: 'src/components/Editor',
               })}
               aria-label={intl.formatMessage({
                 defaultMessage: 'Link',
-                id: 'JBWS0c',
+                id: 'vlEBHB',
+                description: 'src/components/Editor',
               })}
             >
               {<Icon icon={IconEditorLink} size={24} />}
@@ -325,11 +342,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               type="text"
               title={intl.formatMessage({
                 defaultMessage: 'Enter URL',
-                id: 'gluNT8',
+                id: 'hB/x9Q',
+                description: 'src/components/Editor',
               })}
               placeholder={intl.formatMessage({
                 defaultMessage: 'Enter URL',
-                id: 'gluNT8',
+                id: 'hB/x9Q',
+                description: 'src/components/Editor',
               })}
               autoFocus
               onKeyDown={onLinkInputKeyDown}

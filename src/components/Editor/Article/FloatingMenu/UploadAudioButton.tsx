@@ -10,7 +10,7 @@ import {
   ASSET_TYPE,
   UPLOAD_AUDIO_SIZE_LIMIT,
 } from '~/common/enums'
-import { Icon, Spinner, toast, Translate } from '~/components'
+import { Icon, Spinner, toast, Tooltip, Translate } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -102,33 +102,36 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
   })
 
   return (
-    <label
-      className={labelClasses}
-      htmlFor={fieldId}
-      title={intl.formatMessage({
-        defaultMessage: 'Insert audio',
-        id: 'oGiO//',
+    <Tooltip
+      content={intl.formatMessage({
+        defaultMessage: 'Audio',
+        id: '6mbNSp',
+        description: 'src/components/Editor',
       })}
+      placement="top"
     >
-      {!uploading && <Icon icon={IconEditorAudio} size={32} />}
-      {uploading && <Spinner size={32} color="greyLight" />}
+      <label className={labelClasses} htmlFor={fieldId}>
+        {!uploading && <Icon icon={IconEditorAudio} size={32} />}
+        {uploading && <Spinner size={32} color="greyLight" />}
 
-      <VisuallyHidden>
-        <input
-          id={fieldId}
-          type="file"
-          name="file"
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Insert audio',
-            id: 'oGiO//',
-          })}
-          disabled={uploading}
-          accept={acceptTypes}
-          multiple={false}
-          onChange={handleChange}
-        />
-      </VisuallyHidden>
-    </label>
+        <VisuallyHidden>
+          <input
+            id={fieldId}
+            type="file"
+            name="file"
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Audio',
+              id: '6mbNSp',
+              description: 'src/components/Editor',
+            })}
+            disabled={uploading}
+            accept={acceptTypes}
+            multiple={false}
+            onChange={handleChange}
+          />
+        </VisuallyHidden>
+      </label>
+    </Tooltip>
   )
 }
 

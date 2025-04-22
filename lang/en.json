@@ -97,6 +97,10 @@
     "defaultMessage": "Unknown error. Please try again later.",
     "description": "UNKNOWN_ERROR"
   },
+  "/ZmvO+": {
+    "defaultMessage": "Divider",
+    "description": "src/components/Editor"
+  },
   "/cyuh2": {
     "defaultMessage": "Go to Authorization"
   },
@@ -229,6 +233,10 @@
     "defaultMessage": "Confirm Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
   },
+  "1lWarA": {
+    "defaultMessage": "Bold",
+    "description": "src/components/Editor"
+  },
   "1qQzV0": {
     "defaultMessage": "Invitees",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
@@ -275,6 +283,10 @@
   },
   "2Sgvfr": {
     "defaultMessage": "USDT {amount} pending claim"
+  },
+  "2U8rTr": {
+    "defaultMessage": "Blockquote",
+    "description": "src/components/Editor"
   },
   "2W0f9h": {
     "defaultMessage": "Bio"
@@ -400,9 +412,6 @@
     "defaultMessage": "Do you want to disconnect from {type}?",
     "description": "src/components/Dialogs/RemoveSocialLoginDialog/Content.tsx"
   },
-  "5Ga0iK": {
-    "defaultMessage": "Insert code"
-  },
   "5IGdjy": {
     "defaultMessage": "Not using tags yet, add tags now to improve discoverability!"
   },
@@ -430,9 +439,6 @@
   "5iii3x": {
     "defaultMessage": "Circle：",
     "description": "src/components/CircleDigest/UserProfile/index.tsx"
-  },
-  "5j/gIz": {
-    "defaultMessage": "Ordered list"
   },
   "5jlQTx": {
     "defaultMessage": "Manage Invitation"
@@ -520,6 +526,10 @@
   "6lwWCu": {
     "defaultMessage": "Misc",
     "description": "src/views/Me/Settings/Settings/SettingsTabs/index.tsx"
+  },
+  "6mbNSp": {
+    "defaultMessage": "Audio",
+    "description": "src/components/Editor"
   },
   "6oOCCL": {
     "defaultMessage": "Upload file"
@@ -743,6 +753,10 @@
   "AGDFGs": {
     "defaultMessage": "Discrimination, insult, or hatred"
   },
+  "AQL1ME": {
+    "defaultMessage": "Ordered List",
+    "description": "src/components/Editor"
+  },
   "AVpR3Q": {
     "defaultMessage": "Wallet linked",
     "description": "src/components/UserProfile/WalletLabel/index.tsx"
@@ -787,9 +801,6 @@
   },
   "B9IFMF": {
     "defaultMessage": "Yes, apply"
-  },
-  "BDbgCL": {
-    "defaultMessage": "Heading 3"
   },
   "BHFHeY": {
     "defaultMessage": " commented in {commentCircle}",
@@ -936,9 +947,6 @@
   "DjIpR6": {
     "defaultMessage": "Set Cover"
   },
-  "Dkkmwm": {
-    "defaultMessage": "Bold"
-  },
   "Dom0EF": {
     "defaultMessage": "Verification successful",
     "description": "src/components/GlobalToast/index.tsx"
@@ -980,6 +988,10 @@
   },
   "EBEwaP": {
     "defaultMessage": "Please fill in a valid email address"
+  },
+  "EPx6uM": {
+    "defaultMessage": "Open Menu",
+    "description": "src/components/Editor"
   },
   "EQeKnO": {
     "defaultMessage": "Manage Invitation",
@@ -1072,6 +1084,10 @@
   },
   "G0pqnh": {
     "defaultMessage": "View original content"
+  },
+  "G4KR8j": {
+    "defaultMessage": "Image",
+    "description": "src/components/Editor"
   },
   "GHxtae": {
     "defaultMessage": "Wallet",
@@ -1243,11 +1259,12 @@
   "J7hiLV": {
     "defaultMessage": "The author has not bound the LikeCoin wallet yet"
   },
-  "JBWS0c": {
-    "defaultMessage": "Link"
-  },
   "JCZFqh": {
     "defaultMessage": "Sign up now and start writing the annual questionnaire. Please check the announcement for event details."
+  },
+  "JD0T8w": {
+    "defaultMessage": "Close Menu",
+    "description": "src/components/Editor"
   },
   "JTWayV": {
     "defaultMessage": "Add description",
@@ -1275,9 +1292,6 @@
     "defaultMessage": "Accepted",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
-  "Jr12wo": {
-    "defaultMessage": "Insert video"
-  },
   "Jxr/TM": {
     "defaultMessage": "FULL",
     "description": "src/components/Dialogs/AddCollectionsArticleDialog/SelectDialogContent.tsx"
@@ -1295,8 +1309,16 @@
   "K3r6DQ": {
     "defaultMessage": "Delete"
   },
+  "KAuIWb": {
+    "defaultMessage": "Unordered List",
+    "description": "src/components/Editor"
+  },
   "KBeSFM": {
     "defaultMessage": "Support author (current {donationCount} supports)"
+  },
+  "KG9vIx": {
+    "defaultMessage": "Strikethrough",
+    "description": "src/components/Editor"
   },
   "KIQUHo": {
     "defaultMessage": "Login password",
@@ -1515,9 +1537,6 @@
     "defaultMessage": "Author",
     "description": "src/components/ArticleComment/RoleLabel/index.tsx"
   },
-  "Onjs6P": {
-    "defaultMessage": "Unordered list"
-  },
   "Opaa0R": {
     "defaultMessage": "New likes",
     "description": "src/views/Me/Settings/Notifications/GeneralSettings/index.tsx"
@@ -1590,15 +1609,16 @@
     "defaultMessage": "Incorrect email or password",
     "description": "USER_EMAIL_NOT_FOUND"
   },
-  "Pv2PlK": {
-    "defaultMessage": "Insert image"
-  },
   "Q8Qw5B": {
     "defaultMessage": "Description"
   },
   "QKJWqd": {
     "defaultMessage": "Bookmark",
     "description": "src/components/Buttons/TagBookmark/Bookmark.tsx"
+  },
+  "QKo4ol": {
+    "defaultMessage": "Title",
+    "description": "src/components/Editor"
   },
   "QQSdHP": {
     "defaultMessage": "View More"
@@ -1617,9 +1637,6 @@
   },
   "QbjADp": {
     "defaultMessage": "Seed User"
-  },
-  "QfVedX": {
-    "defaultMessage": "Insert divider"
   },
   "QfrKA6": {
     "defaultMessage": "Back",
@@ -1808,6 +1825,10 @@
   },
   "U5/rZd": {
     "defaultMessage": "Civic Liker is a movement to reward good content and encourage openness. Like = reward. Liker ID is your account to become a civic liker, you have to log into Liker ID in order to turn your “Like” to LikeCoin reward to the creators. Creators also need to register for a Liker ID to get the reward. Note: Matters ID and Liker ID are different and independent IDs. Learn more {link}"
+  },
+  "U5FZL6": {
+    "defaultMessage": "Video",
+    "description": "src/components/Editor"
   },
   "U7o9Ba": {
     "defaultMessage": "Accumulated read time"
@@ -2101,9 +2122,6 @@
   "ZjDH42": {
     "defaultMessage": "About Us"
   },
-  "Zqekct": {
-    "defaultMessage": "Heading 2"
-  },
   "ZxgUKj": {
     "defaultMessage": "Likes Received"
   },
@@ -2162,9 +2180,6 @@
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/UI.tsx"
-  },
-  "atzUcB": {
-    "defaultMessage": "Quote"
   },
   "awW+lk": {
     "defaultMessage": "Processing",
@@ -2393,9 +2408,6 @@
   "fJB38x": {
     "defaultMessage": "Trial ends in {remainDays} days"
   },
-  "fJFvPm": {
-    "defaultMessage": "Code Block"
-  },
   "fJVe7H": {
     "defaultMessage": "IPFS",
     "description": "src/views/ArticleDetail/History/InfoHeader/index.tsx"
@@ -2461,9 +2473,6 @@
     "defaultMessage": "The payment amount is invalid, please re-enter.",
     "description": "PAYMENT_AMOUNT_INVALID"
   },
-  "gluNT8": {
-    "defaultMessage": "Enter URL"
-  },
   "gvTltk": {
     "defaultMessage": "Draft - {title}"
   },
@@ -2495,6 +2504,10 @@
   "hAyhzq": {
     "defaultMessage": "Top up",
     "description": "SUPPORT_HKD"
+  },
+  "hB/x9Q": {
+    "defaultMessage": "Enter URL",
+    "description": "src/components/Editor"
   },
   "hBLCwn": {
     "defaultMessage": "other amount"
@@ -2672,9 +2685,6 @@
     "defaultMessage": "Preview",
     "description": "src/components/Editor/MoreSettings/SupportSettingDialog/Content.tsx"
   },
-  "lH8y+X": {
-    "defaultMessage": "Strikethrough"
-  },
   "lI2l2/": {
     "defaultMessage": "Incorrect verification code. Please check your input, or try resend",
     "description": "CODE_INVALID"
@@ -2742,9 +2752,6 @@
   "mKp9t/": {
     "defaultMessage": "Remove bookmark",
     "description": "src/components/Buttons/TagBookmark/Unbookmark.tsx"
-  },
-  "mObpsB": {
-    "defaultMessage": "Insert Blockquote"
   },
   "mPe6DK": {
     "defaultMessage": "subscribed your circle",
@@ -2839,9 +2846,6 @@
   "nozN+j": {
     "defaultMessage": "Invalid Email",
     "description": "USER_EMAIL_INVALID"
-  },
-  "oGiO//": {
-    "defaultMessage": "Insert audio"
   },
   "ob+HDS": {
     "defaultMessage": "View Circle"
@@ -3217,6 +3221,10 @@
     "defaultMessage": "New broadcasts",
     "description": "src/views/Me/Settings/Notifications/Circle/index.tsx"
   },
+  "vlEBHB": {
+    "defaultMessage": "Link",
+    "description": "src/components/Editor"
+  },
   "vmx+TU": {
     "defaultMessage": "Credit card",
     "description": "src/views/ArticleDetail/SupportAuthor/Tabs/index.tsx"
@@ -3259,6 +3267,10 @@
   },
   "wNJjR5": {
     "defaultMessage": "Support setting updated"
+  },
+  "wOYX42": {
+    "defaultMessage": "Code Block",
+    "description": "src/components/Editor"
   },
   "wOZRKW": {
     "defaultMessage": "Delete comment"
@@ -3384,6 +3396,10 @@
   "yoRaUc": {
     "defaultMessage": "Refund",
     "description": "src/components/Transaction/index.tsx"
+  },
+  "yp0PiU": {
+    "defaultMessage": "Subtitle",
+    "description": "src/components/Editor"
   },
   "yubNcI": {
     "defaultMessage": "Not support using punctuation marks alone."

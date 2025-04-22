@@ -36,6 +36,15 @@
   }
 }
 
+.desktopMenuItems {
+  display: inline-flex;
+
+  & > * + * {
+    margin-left: var(--sp16);
+    cursor: pointer;
+  }
+}
+
 .expanded {
   & .menuItems {
     display: inline-flex;
