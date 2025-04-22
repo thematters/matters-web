@@ -479,7 +479,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
       hasSetBottomCollection && isActive && isArticleAuthor,
   }
 
-  if (_isEmpty(_pickBy(controls))) {
+  if (_isEmpty(_pickBy(controls)) && !viewer.isAdmin) {
     return null
   }
 
