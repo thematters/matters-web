@@ -313,16 +313,13 @@ const ChannelFeed = () => {
     }
 
     // 在开发环境下添加测试文章并打印调试信息
-    const allCardEdges =
-      process.env.NODE_ENV === 'development'
-        ? (() => {
-            const combined = [...testArticles]
-            console.log('Debug - Test Articles:', testArticles)
-            console.log('Debug - Card Edges:', cardEdges)
-            console.log('Debug - Combined Edges:', combined)
-            return combined
-          })()
-        : cardEdges
+    const allCardEdges = (() => {
+      const combined = [...testArticles]
+      console.log('Debug - Test Articles:', testArticles)
+      console.log('Debug - Card Edges:', cardEdges)
+      console.log('Debug - Combined Edges:', combined)
+      return combined
+    })()
 
     return (
       <section className={feedStyles.cards}>
