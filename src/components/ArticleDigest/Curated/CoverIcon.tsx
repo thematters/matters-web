@@ -4,110 +4,31 @@ import styles from './styles.module.css'
 
 interface CoverIconProps {
   title: string
+  shortHash: string
   size?: 'sm' | 'lg'
 }
 
+/**
+ * Convert string to hue value (0-360):
+ * 1. Sum up all ASCII values of the string
+ * 2. Get modulo 72 of the sum
+ * 3. Multiply by 5 (360/72) to get final hue value
+ *
+ * This creates 72 distinct colors with 5 degrees separation
+ */
 export const getCoverHue = (shortHash: string): number => {
-  // Generate a stable numerical value from the hash as a seed
-  let seed = 0
-  for (let i = 0; i < shortHash.length; i++) {
-    // Use a simple hash algorithm to convert characters to values and accumulate
-    seed = (seed << 5) - seed + shortHash.charCodeAt(i)
-    seed = seed & seed // Convert to 32-bit integer
+  if (!shortHash || typeof shortHash !== 'string') {
+    return 0
   }
 
-  // Use the seed to generate a pseudo-random number between 0-1
-  const seedRandom = () => {
-    const x = Math.sin(seed++) * 10000
-    return x - Math.floor(x)
-  }
+  // Sum up ASCII values and get modulo 72
+  const value =
+    shortHash.split('').reduce((sum, char) => sum + char.charCodeAt(0), 0) % 72
 
-  // Quantize colors into 36 distinct values (every 10 degrees)
-  // This makes colors more distinct and avoids "almost similar" colors
-  // which can look odd when placed together
-
-  // Get a number between 0-35
-  const colorIndex = Math.floor(seedRandom() * 36)
-
-  // Convert to a hue value (0-350 in steps of 10 degrees)
-  const hue = colorIndex * 10
+  // Convert to hue value (0-360) with 5 degree steps
+  const hue = Math.floor(value * (360 / 72)) // equivalent to value * 5
 
   return hue
-}
-
-const getTitleHash = (title: string): string => {
-  if (title.length === 0) return '0'
-
-  // Add title length as a factor to differentiate similar titles
-  let h1 = 0x811c9dc5 ^ title.length
-  let h2 = 0x1b873593
-  let h3 = 0x85ebca6b
-  let h4 = 0xc2b2ae35
-
-  // Process string into a UTF-8 byte array
-  const bytes = []
-  for (let i = 0; i < title.length; i++) {
-    const char = title.charCodeAt(i)
-    if (char < 128) {
-      bytes.push(char)
-    } else if (char < 2048) {
-      bytes.push((char >> 6) | 192)
-      bytes.push((char & 63) | 128)
-    } else {
-      bytes.push((char >> 12) | 224)
-      bytes.push(((char >> 6) & 63) | 128)
-      bytes.push((char & 63) | 128)
-    }
-  }
-
-  // Enhance position influence - characters at different positions have different impact
-  for (let i = 0; i < bytes.length; i++) {
-    const byte = bytes[i]
-    const position = i + 1 // 1-based position
-
-    // Position-weighted mixing (characters at same position have less influence)
-    h1 ^= byte * position
-    h1 = (h1 * 0x01000193) | 0
-
-    // Mix with a prime multiplier based on position
-    h2 = ((h2 << 5) | (h2 >>> 27)) ^ (byte + position)
-
-    // Strengthen the influence of the end of the string
-    // This helps differentiate strings with the same prefix
-    if (i > bytes.length / 2) {
-      h3 = ((h3 + byte * 3) * 0x85ebca6b) >>> 0
-    } else {
-      h3 = ((h3 + byte) * 0x85ebca6b) >>> 0
-    }
-
-    // Special treatment for numbers and punctuation
-    if ((byte >= 48 && byte <= 57) || (byte >= 33 && byte <= 47)) {
-      // 0-9, !"#$%&'()*+,-./
-      h4 = (((byte * 101) ^ (h4 >>> 14)) * 0x85ebca6b) >>> 0
-    } else {
-      h4 = ((byte ^ (h4 >>> 16)) * 0x85ebca6b) >>> 0
-    }
-  }
-
-  // Add reversed string influence to make similar strings more different
-  for (let i = bytes.length - 1; i >= 0; i--) {
-    const byte = bytes[i]
-    h1 = ((h1 ^ byte) * 0x01000193) | 0
-    h4 = ((h4 ^ byte) * 0x85ebca6b) >>> 0
-  }
-
-  // Mix all round results with additional entropy
-  h1 = ((h1 ^ h2) * h3) >>> 0
-  h1 = ((h1 ^ h4) * 0x9e3779b9) >>> 0
-  h1 = ((h1 ^ (h1 >>> 16)) * 0x85ebca6b) >>> 0
-
-  // Final mixing with strong avalanche effect
-  h1 ^= h1 >>> 13
-  h1 = (h1 * 0xc2b2ae35) >>> 0
-  h1 ^= h1 >>> 16
-
-  // Convert to hexadecimal
-  return (h1 >>> 0).toString(16)
 }
 
 const generateLayerColors = (hue: number) => {
@@ -196,8 +117,11 @@ const LargeCoverSVG = ({ colors }: { colors: Record<string, string> }) => (
   </svg>
 )
 
-const CoverIcon: React.FC<CoverIconProps> = ({ title, size = 'sm' }) => {
-  const shortHash = getTitleHash(title)
+const CoverIcon: React.FC<CoverIconProps> = ({
+  title,
+  shortHash,
+  size = 'sm',
+}) => {
   const hue = getCoverHue(shortHash)
   const colors = generateLayerColors(hue)
 
