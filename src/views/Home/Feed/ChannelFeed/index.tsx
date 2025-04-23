@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { analytics } from '~/common/utils'
@@ -59,6 +59,7 @@ const ChannelFeed = () => {
   const numOfCards = 360
   const chartRef = useRef<HTMLCanvasElement>(null)
   const circularChartRef = useRef<HTMLCanvasElement>(null)
+  const [showCharts, setShowCharts] = useState(true)
 
   // Generate test articles data
   const testArticles = Array.from({ length: numOfCards }, (_, i) => {
@@ -392,26 +393,62 @@ const ChannelFeed = () => {
 
   return (
     <>
-      <canvas
-        ref={chartRef}
-        width={600}
-        height={300}
-        style={{
-          border: '1px solid #ccc',
-          margin: '20px',
-          backgroundColor: '#fff',
-        }}
-      />
-      <canvas
-        ref={circularChartRef}
-        width={600}
-        height={600}
-        style={{
-          border: '1px solid #ccc',
-          margin: '20px',
-          backgroundColor: '#fff',
-        }}
-      />
+      <div style={{ textAlign: 'right', padding: '10px 20px' }}>
+        <button
+          onClick={() => setShowCharts(!showCharts)}
+          style={{
+            position: 'fixed',
+            top: '100px',
+            left: '10px',
+            padding: '8px 16px',
+            backgroundColor: showCharts ? '#666' : '#f0f0f0',
+            color: showCharts ? '#fff' : '#333',
+            border: '1px solid #ccc',
+            borderRadius: '4px',
+            cursor: 'pointer',
+            transition: 'all 0.3s ease',
+          }}
+        >
+          {showCharts ? '隱藏色相分析' : '顯示色相分析'}
+        </button>
+      </div>
+
+      {showCharts && (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '20px',
+            margin: '0 20px 20px',
+            padding: '20px',
+            backgroundColor: '#fff',
+            borderRadius: '8px',
+            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+          }}
+        >
+          <canvas
+            ref={chartRef}
+            width={600}
+            height={300}
+            style={{
+              border: '1px solid #eee',
+              borderRadius: '4px',
+              backgroundColor: '#fff',
+            }}
+          />
+          <canvas
+            ref={circularChartRef}
+            width={600}
+            height={600}
+            style={{
+              border: '1px solid #eee',
+              borderRadius: '4px',
+              backgroundColor: '#fff',
+            }}
+          />
+        </div>
+      )}
       <FeedRenderer
         loading={loading}
         error={error}
