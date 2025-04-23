@@ -3,18 +3,31 @@
   @mixin border-grey;
 
   position: relative;
-  width: 27.5rem; /* 9 * 24 + 8 * 24 + 16 * 2 */
+  width: 20.875rem; /* 9 * 22 + 8 * 14 + 12 * 2 */
   padding: var(--sp8) var(--sp12);
   background: var(--color-white);
   border-radius: var(--sp8);
   box-shadow: 0 4px 16px 0 rgb(0 0 0 / 12%);
 
   &.comment {
-    width: 6.5rem; /* 2 * 24 + 1 * 24 + 16 * 2 */
+    width: 5.125rem; /* 2 * 22 + 1 * 14 + 12 * 2 */
   }
 
-  & * + * {
-    margin-left: var(--sp24);
+  & > * + * {
+    margin-left: var(--sp14);
+    font-size: 0;
+  }
+
+  @media (--sm-up) {
+    width: 27rem; /* 9 * 24 + 8 * 24 + 16 * 2 */
+
+    & > * + * {
+      margin-left: var(--sp24);
+    }
+
+    &.comment {
+      width: 6rem; /* 2 * 24 + 1 * 24 + 12 * 2 */
+    }
   }
 
   & .active {
