@@ -173,64 +173,99 @@ const ChannelFeed = () => {
     const centerX = 300
     const centerY = 300
     const radius = 200
-    const barWidth = (2 * Math.PI) / hueGroups.length
+    const innerRadius = radius * 0.35  // 縮小內圈以留出更多空間顯示高度
+    const maxHeight = (radius - innerRadius) * 0.8  // 最大高度
 
-    // Draw bars
+    // 清空畫布
+    ctx.clearRect(0, 0, 600, 600)
+
+    // 先畫底部圓環（淺灰色）
+    ctx.beginPath()
+    ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI)
+    ctx.arc(centerX, centerY, innerRadius, 2 * Math.PI, 0, true)
+    ctx.fillStyle = '#f5f5f5'
+    ctx.fill()
+
+    // 計算並繪製每個色相區段
     hueGroups.forEach((count, index) => {
-      const height = (count / maxValue) * 150 // 最大高度150像素
-      const startAngle = index * barWidth
-      const endAngle = startAngle + barWidth - 0.02 // 留出一點間隔
-
-      // 使用實際色相值作為顏色
       const hue = index * 10
-      ctx.fillStyle = `hsl(${hue}, 70%, 50%)`
+      const startAngle = (hue - 90) * (Math.PI / 180)
+      const endAngle = ((hue + 10) - 90) * (Math.PI / 180)
+
+      // 計算高度（基於數值）
+      const height = count > 0 ? (count / maxValue) * maxHeight : 0
+      const currentRadius = innerRadius + height
 
       // 繪製扇形
       ctx.beginPath()
-      ctx.arc(centerX, centerY, radius, startAngle, endAngle)
-      ctx.arc(centerX, centerY, radius - height, endAngle, startAngle, true)
+      ctx.arc(centerX, centerY, currentRadius, startAngle, endAngle)
+      ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true)
       ctx.closePath()
+
+      // 使用實際的色相值，並調整透明度
+      ctx.fillStyle = `hsla(${hue}, 70%, 50%, 0.8)`
       ctx.fill()
 
-      // 每隔30度添加標籤
-      if (index % 3 === 0) {
-        const labelAngle = startAngle + barWidth / 2
-        const labelRadius = radius + 30
-        const x = centerX + Math.cos(labelAngle) * labelRadius
-        const y = centerY + Math.sin(labelAngle) * labelRadius
+      // 添加邊框以增強立體感
+      ctx.strokeStyle = `hsla(${hue}, 70%, 40%, 0.6)`
+      ctx.lineWidth = 1
+      ctx.stroke()
 
-        ctx.save()
-        ctx.translate(x, y)
-        ctx.rotate(labelAngle + Math.PI / 2)
-        ctx.fillStyle = '#000'
-        ctx.font = '12px Arial'
+      // 如果數值較大，添加數值標籤
+      if (count > maxValue * 0.1) {
+        const labelAngle = (startAngle + endAngle) / 2
+        const labelRadius = innerRadius + height / 2
+        const x = centerX + labelRadius * Math.cos(labelAngle)
+        const y = centerY + labelRadius * Math.sin(labelAngle)
+
+        ctx.fillStyle = '#fff'
+        ctx.font = 'bold 12px Arial'
         ctx.textAlign = 'center'
-        ctx.fillText(`${hue}°`, 0, 0)
-        ctx.restore()
-
-        // 添加數值標籤
-        const valueRadius = radius - height - 15
-        const valueX = centerX + Math.cos(labelAngle) * valueRadius
-        const valueY = centerY + Math.sin(labelAngle) * valueRadius
-
-        ctx.save()
-        ctx.translate(valueX, valueY)
-        ctx.rotate(labelAngle + Math.PI / 2)
-        ctx.fillStyle = '#000'
-        ctx.font = '10px Arial'
-        ctx.textAlign = 'center'
-        ctx.fillText(count.toString(), 0, 0)
-        ctx.restore()
+        ctx.textBaseline = 'middle'
+        ctx.fillText(count.toString(), x, y)
       }
     })
 
-    // 添加標題
-    ctx.fillStyle = '#000'
-    ctx.font = 'bold 14px Arial'
+    // 添加刻度標記
+    for (let i = 0; i < 360; i += 30) {
+      const angle = (i - 90) * (Math.PI / 180)
+      const cos = Math.cos(angle)
+      const sin = Math.sin(angle)
+
+      // 畫刻度線
+      ctx.beginPath()
+      ctx.moveTo(
+        centerX + innerRadius * cos,
+        centerY + innerRadius * sin
+      )
+      ctx.lineTo(
+        centerX + (radius + 10) * cos,
+        centerY + (radius + 10) * sin
+      )
+      ctx.strokeStyle = 'rgba(102, 102, 102, 0.5)'
+      ctx.lineWidth = 1
+      ctx.stroke()
+
+      // 添加角度標籤
+      const labelRadius = radius + 25
+      const x = centerX + labelRadius * cos
+      const y = centerY + labelRadius * sin
+
+      ctx.fillStyle = '#666'
+      ctx.font = '12px Arial'
+      ctx.textAlign = 'center'
+      ctx.textBaseline = 'middle'
+      ctx.fillText(`${i}°`, x, y)
+    }
+
+    // 添加中心文字
+    ctx.fillStyle = '#333'
+    ctx.font = 'bold 16px Arial'
     ctx.textAlign = 'center'
-    ctx.fillText('色相分布統計', centerX, 40)
-    ctx.font = '12px Arial'
-    ctx.fillText('純黑模型', centerX, 60)
+    ctx.textBaseline = 'middle'
+    ctx.fillText('色相分布統計', centerX, centerY - 10)
+    ctx.font = '14px Arial'
+    ctx.fillText(`共 ${testArticles.length} 篇文章`, centerX, centerY + 10)
 
   }, [testArticles])
 
