@@ -173,8 +173,8 @@ const ChannelFeed = () => {
     const centerX = 300
     const centerY = 300
     const radius = 200
-    const innerRadius = radius * 0.35  // 縮小內圈以留出更多空間顯示高度
-    const maxHeight = (radius - innerRadius) * 0.8  // 最大高度
+    const innerRadius = radius * 0.35 // 縮小內圈以留出更多空間顯示高度
+    const maxHeight = (radius - innerRadius) * 0.8 // 最大高度
 
     // 清空畫布
     ctx.clearRect(0, 0, 600, 600)
@@ -190,7 +190,7 @@ const ChannelFeed = () => {
     hueGroups.forEach((count, index) => {
       const hue = index * 10
       const startAngle = (hue - 90) * (Math.PI / 180)
-      const endAngle = ((hue + 10) - 90) * (Math.PI / 180)
+      const endAngle = (hue + 10 - 90) * (Math.PI / 180)
 
       // 計算高度（基於數值）
       const height = count > 0 ? (count / maxValue) * maxHeight : 0
@@ -234,14 +234,8 @@ const ChannelFeed = () => {
 
       // 畫刻度線
       ctx.beginPath()
-      ctx.moveTo(
-        centerX + innerRadius * cos,
-        centerY + innerRadius * sin
-      )
-      ctx.lineTo(
-        centerX + (radius + 10) * cos,
-        centerY + (radius + 10) * sin
-      )
+      ctx.moveTo(centerX + innerRadius * cos, centerY + innerRadius * sin)
+      ctx.lineTo(centerX + (radius + 10) * cos, centerY + (radius + 10) * sin)
       ctx.strokeStyle = 'rgba(102, 102, 102, 0.5)'
       ctx.lineWidth = 1
       ctx.stroke()
@@ -266,7 +260,6 @@ const ChannelFeed = () => {
     ctx.fillText('色相分布統計', centerX, centerY - 10)
     ctx.font = '14px Arial'
     ctx.fillText(`共 ${testArticles.length} 篇文章`, centerX, centerY + 10)
-
   }, [testArticles])
 
   const loadPrivate = (publicData?: FeedArticlesPublicChannelQuery) => {
