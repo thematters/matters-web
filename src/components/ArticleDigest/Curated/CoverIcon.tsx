@@ -6,6 +6,7 @@ interface CoverIconProps {
   title: string
   shortHash: string
   size?: 'sm' | 'lg'
+  hue?: number
 }
 
 /**
@@ -121,8 +122,9 @@ const CoverIcon: React.FC<CoverIconProps> = ({
   title,
   shortHash,
   size = 'sm',
+  hue: _hue,
 }) => {
-  const hue = getCoverHue(shortHash)
+  const hue = _hue || getCoverHue(shortHash)
   const colors = generateLayerColors(hue)
 
   return (

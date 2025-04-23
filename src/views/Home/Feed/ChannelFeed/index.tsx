@@ -22,7 +22,6 @@ import { useFeed } from '../hooks/useFeed'
 import feedStyles from '../styles.module.css'
 import { ChannelHeader } from './ChannelHeader'
 
-// 生成随机字符串
 function generateRandomString(length = 12) {
   const characters =
     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
@@ -55,6 +54,7 @@ const ChannelFeed = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
+  const isThinkChannel = shortHash === 'wfeuf91m01ay'
   const feedType = 'channel'
   const numOfCards = 360
   const chartRef = useRef<HTMLCanvasElement>(null)
@@ -236,6 +236,7 @@ const ChannelFeed = () => {
                     pinned: edge.pinned,
                   })
                 }
+                hue={isThinkChannel ? i + 1 : undefined}
               />
             </Media>
             <Media greaterThan="xs">
@@ -254,6 +255,7 @@ const ChannelFeed = () => {
                     pinned: edge.pinned,
                   })
                 }
+                hue={isThinkChannel ? i + 1 : undefined}
               />
             </Media>
           </React.Fragment>
