@@ -3,18 +3,18 @@
   @mixin border-grey;
 
   position: relative;
-  width: 21.5rem; /* 9 * 24 + 8 * 12 + 16 * 2 */
-  padding: var(--sp8) var(--sp16);
+  width: 27.5rem; /* 9 * 24 + 8 * 24 + 16 * 2 */
+  padding: var(--sp8) var(--sp12);
   background: var(--color-white);
-  border-radius: var(--sp4);
-  box-shadow: var(--shadow-dark);
+  border-radius: var(--sp8);
+  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 12%);
 
   &.comment {
-    width: 5.75rem; /* 2 * 24 + 1 * 12 + 16 * 2 */
+    width: 6.5rem; /* 2 * 24 + 1 * 24 + 16 * 2 */
   }
 
   & * + * {
-    margin-left: var(--sp12);
+    margin-left: var(--sp24);
   }
 
   & .active {
