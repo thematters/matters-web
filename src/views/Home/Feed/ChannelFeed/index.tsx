@@ -58,6 +58,7 @@ const ChannelFeed = () => {
   const feedType = 'channel'
   const numOfCards = 360
   const chartRef = useRef<HTMLCanvasElement>(null)
+  const circularChartRef = useRef<HTMLCanvasElement>(null)
 
   // Generate test articles data
   const testArticles = Array.from({ length: numOfCards }, (_, i) => {
@@ -152,6 +153,85 @@ const ChannelFeed = () => {
       600 / 2,
       margin.top / 2
     )
+  }, [testArticles])
+
+  useEffect(() => {
+    if (!circularChartRef.current) return
+
+    const ctx = circularChartRef.current.getContext('2d')
+    if (!ctx) return
+
+    const hueGroups = countHueDistribution(
+      testArticles.map((article) => article.shortHash)
+    )
+    const maxValue = Math.max(...hueGroups)
+
+    // Clear canvas
+    ctx.clearRect(0, 0, 600, 600)
+
+    // Set chart dimensions
+    const centerX = 300
+    const centerY = 300
+    const radius = 200
+    const barWidth = (2 * Math.PI) / hueGroups.length
+
+    // Draw bars
+    hueGroups.forEach((count, index) => {
+      const height = (count / maxValue) * 150 // 最大高度150像素
+      const startAngle = index * barWidth
+      const endAngle = startAngle + barWidth - 0.02 // 留出一點間隔
+
+      // 使用實際色相值作為顏色
+      const hue = index * 10
+      ctx.fillStyle = `hsl(${hue}, 70%, 50%)`
+
+      // 繪製扇形
+      ctx.beginPath()
+      ctx.arc(centerX, centerY, radius, startAngle, endAngle)
+      ctx.arc(centerX, centerY, radius - height, endAngle, startAngle, true)
+      ctx.closePath()
+      ctx.fill()
+
+      // 每隔30度添加標籤
+      if (index % 3 === 0) {
+        const labelAngle = startAngle + barWidth / 2
+        const labelRadius = radius + 30
+        const x = centerX + Math.cos(labelAngle) * labelRadius
+        const y = centerY + Math.sin(labelAngle) * labelRadius
+
+        ctx.save()
+        ctx.translate(x, y)
+        ctx.rotate(labelAngle + Math.PI / 2)
+        ctx.fillStyle = '#000'
+        ctx.font = '12px Arial'
+        ctx.textAlign = 'center'
+        ctx.fillText(`${hue}°`, 0, 0)
+        ctx.restore()
+
+        // 添加數值標籤
+        const valueRadius = radius - height - 15
+        const valueX = centerX + Math.cos(labelAngle) * valueRadius
+        const valueY = centerY + Math.sin(labelAngle) * valueRadius
+
+        ctx.save()
+        ctx.translate(valueX, valueY)
+        ctx.rotate(labelAngle + Math.PI / 2)
+        ctx.fillStyle = '#000'
+        ctx.font = '10px Arial'
+        ctx.textAlign = 'center'
+        ctx.fillText(count.toString(), 0, 0)
+        ctx.restore()
+      }
+    })
+
+    // 添加標題
+    ctx.fillStyle = '#000'
+    ctx.font = 'bold 14px Arial'
+    ctx.textAlign = 'center'
+    ctx.fillText('色相分布統計', centerX, 40)
+    ctx.font = '12px Arial'
+    ctx.fillText('純黑模型', centerX, 60)
+
   }, [testArticles])
 
   const loadPrivate = (publicData?: FeedArticlesPublicChannelQuery) => {
@@ -291,6 +371,16 @@ const ChannelFeed = () => {
         ref={chartRef}
         width={600}
         height={300}
+        style={{
+          border: '1px solid #ccc',
+          margin: '20px',
+          backgroundColor: '#fff',
+        }}
+      />
+      <canvas
+        ref={circularChartRef}
+        width={600}
+        height={600}
         style={{
           border: '1px solid #ccc',
           margin: '20px',
