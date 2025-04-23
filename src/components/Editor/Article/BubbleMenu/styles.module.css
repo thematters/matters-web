@@ -18,6 +18,13 @@
     font-size: 0;
   }
 
+  & button {
+    &:disabled {
+      color: var(--color-grey);
+      opacity: 1;
+    }
+  }
+
   @media (--sm-up) {
     width: 27rem; /* 9 * 24 + 8 * 24 + 16 * 2 */
 
