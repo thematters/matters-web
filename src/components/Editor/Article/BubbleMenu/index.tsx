@@ -123,10 +123,18 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {!isCommentEditor && (
               <button
                 type="button"
-                onClick={() =>
+                onClick={() => {
                   // @ts-ignore
                   editor.chain().focus().toggleHeading({ level: 2 }).run()
-                }
+
+                  // Manually unset bold, link if active
+                  if (editor.isActive('bold')) {
+                    editor.chain().focus().toggleBold().run()
+                  }
+                  if (editor.isActive('link')) {
+                    editor.chain().focus().unsetLink().run()
+                  }
+                }}
                 className={
                   editor.isActive('heading', { level: 2 }) ? styles.active : ''
                 }
@@ -149,10 +157,15 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {!isCommentEditor && (
               <button
                 type="button"
-                onClick={() =>
+                onClick={() => {
                   // @ts-ignore
                   editor.chain().focus().toggleHeading({ level: 3 }).run()
-                }
+
+                  // Manually unset bold if active
+                  if (editor.isActive('bold')) {
+                    editor.chain().focus().toggleBold().run()
+                  }
+                }}
                 className={
                   editor.isActive('heading', { level: 3 }) ? styles.active : ''
                 }
@@ -176,7 +189,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               <button
                 type="button"
                 onClick={() => editor.chain().focus().toggleBold().run()}
-                disabled={!editor.can().chain().focus().toggleBold().run()}
+                disabled={
+                  !editor.can().chain().focus().toggleBold().run() ||
+                  editor.isActive('heading', { level: 2 }) ||
+                  editor.isActive('heading', { level: 3 })
+                }
                 className={editor.isActive('bold') ? styles.active : ''}
                 title={intl.formatMessage({
                   defaultMessage: 'Bold',
@@ -247,7 +264,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               // @ts-ignore
               onClick={() => editor.chain().focus().toggleBlockquote().run()}
               // @ts-ignore
-              disabled={!editor.can().chain().focus().toggleBlockquote().run()}
+              disabled={
+                !editor.can().chain().focus().toggleBlockquote().run() ||
+                editor.isActive('heading', { level: 2 }) ||
+                editor.isActive('heading', { level: 3 })
+              }
               className={editor.isActive('blockquote') ? styles.active : ''}
               aria-label={intl.formatMessage({
                 defaultMessage: 'Blockquote',
@@ -315,8 +336,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 // show link input
                 setShowLinkInput(true)
               }}
-              // @ts-ignore
-              disabled={!editor.can().chain().focus().toggleLink().run()}
+              disabled={
+                // @ts-ignore - Need to ignore the type error for toggleLink
+                !editor.can().chain().focus().toggleLink({ href: '' }).run() ||
+                editor.isActive('heading', { level: 2 })
+              }
               className={editor.isActive('link') ? styles.active : ''}
               title={intl.formatMessage({
                 defaultMessage: 'Link',
