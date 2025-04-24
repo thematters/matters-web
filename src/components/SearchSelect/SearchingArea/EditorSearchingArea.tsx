@@ -1,4 +1,4 @@
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 import { useContext, useEffect, useState } from 'react'
 import { useDebouncedCallback } from 'use-debounce'
 

@@ -5,7 +5,6 @@ import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
 import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import { CircleCommentFormType, Icon, Menu, useMutation } from '~/components'
-import { updateCircleBroadcast } from '~/components/GQL'
 import { TOGGLE_CIRCLE_PIN_COMMENT } from '~/components/GQL/mutations/togglePinComment'
 import {
   CircleCommentPinButtonCommentFragment,
@@ -55,12 +54,14 @@ const PinButton = ({
           return
         }
 
-        updateCircleBroadcast({
-          cache,
-          commentId: comment.id,
-          name: circle.name,
-          type: 'unpin',
+        cache.evict({
+          id: cache.identify({ __typename: 'Circle', id: circle.id }),
+          fieldName: 'broadcast',
         })
+        cache.gc()
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
       },
     }
   )
@@ -81,12 +82,14 @@ const PinButton = ({
           return
         }
 
-        updateCircleBroadcast({
-          cache,
-          commentId: comment.id,
-          name: circle.name,
-          type: 'pin',
+        cache.evict({
+          id: cache.identify({ __typename: 'Circle', id: circle.id }),
+          fieldName: 'broadcast',
         })
+        cache.gc()
+      },
+      onQueryUpdated(observableQuery) {
+        return observableQuery.refetch()
       },
     }
   )

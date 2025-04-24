@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections, shouldRenderNode } from '~/common/utils'
@@ -15,8 +15,8 @@ import {
   Spacer,
   SpinnerBlock,
   useMutation,
+  ViewerContext,
 } from '~/components'
-import { updateViewerUnreadNoticeCount } from '~/components/GQL'
 import CampaignArticleNotice from '~/components/Notice/CampaignArticleNotice'
 import CollectionNotice from '~/components/Notice/CollectionNotice'
 import MomentNotice from '~/components/Notice/MomentNotice'
@@ -78,10 +78,22 @@ const MARK_ALL_NOTICES_AS_READ = gql`
 `
 
 const BaseNotifications = () => {
+  const viewer = useContext(ViewerContext)
+
   const [markAllNoticesAsRead] = useMutation<MarkAllNoticesAsReadMutation>(
     MARK_ALL_NOTICES_AS_READ,
     {
-      update: updateViewerUnreadNoticeCount,
+      update: (cache) => {
+        cache.modify({
+          id: cache.identify(viewer),
+          fields: {
+            status: (existingStatus) => ({
+              ...existingStatus,
+              unreadNoticeCount: 0,
+            }),
+          },
+        })
+      },
     }
   )
   const { data, loading, fetchMore } = useQuery<
@@ -138,10 +150,15 @@ const Notifications = () => {
 
   return (
     <Layout.Main>
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Notifications',
+          id: 'NAidKb',
+        })}
+      />
+
       <Media at="sm">
         <Layout.Header
-          // left={<Layout.Header.MeButton />}
-          // right={<Layout.Header.Title id="notifications" />}
           left={
             <Layout.Header.Title>
               <FormattedMessage defaultMessage="Notifications" id="NAidKb" />
@@ -153,13 +170,6 @@ const Notifications = () => {
       <Media greaterThan="sm">
         <Spacer size="sp32" />
       </Media>
-
-      <Head
-        title={intl.formatMessage({
-          defaultMessage: 'Notifications',
-          id: 'NAidKb',
-        })}
-      />
 
       <Layout.Main.Spacing hasVertical={false}>
         <BaseNotifications />

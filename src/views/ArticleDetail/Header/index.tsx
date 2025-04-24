@@ -50,15 +50,15 @@ const Header = ({ article }: HeaderProps) => {
               })
             }}
           >
-            <TextIcon size={12} color="freeWriteBlue">
+            <TextIcon size={12} color="campaignBlue">
               <span>
                 {
                   campaign[
                     lang === 'zh_hans'
                       ? 'nameZhHans'
                       : lang === 'zh_hant'
-                      ? 'nameZhHant'
-                      : 'nameEn'
+                        ? 'nameZhHant'
+                        : 'nameEn'
                   ]
                 }
               </span>
@@ -72,8 +72,8 @@ const Header = ({ article }: HeaderProps) => {
                       lang === 'zh_hans'
                         ? 'nameZhHans'
                         : lang === 'zh_hant'
-                        ? 'nameZhHant'
-                        : 'nameEn'
+                          ? 'nameZhHant'
+                          : 'nameEn'
                     ]
                   }
                 </>

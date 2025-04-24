@@ -1,18 +1,15 @@
-import { createUploadLink } from '@matters/apollo-upload-client'
-import {
-  InMemoryCache,
-  IntrospectionFragmentMatcher,
-} from 'apollo-cache-inmemory'
-import { ApolloClient } from 'apollo-client'
-import { ApolloLink } from 'apollo-link'
-import { setContext } from 'apollo-link-context'
-import { onError } from 'apollo-link-error'
-import { createPersistedQueryLink } from 'apollo-link-persisted-queries'
-import http from 'http'
-import https from 'https'
+import { ApolloClient, ApolloLink } from '@apollo/client'
+import { InMemoryCache, NormalizedCacheObject } from '@apollo/client/cache'
+import { setContext } from '@apollo/client/link/context'
+import { onError } from '@apollo/client/link/error'
+import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
+import { RetryLink } from '@apollo/client/link/retry'
+import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
+import { sha256 } from 'crypto-hash'
+import type { IncomingHttpHeaders } from 'http'
 import _get from 'lodash/get'
-import withApollo from 'next-with-apollo'
 
+import packageJson from '@/package.json'
 import {
   AGENT_HASH_PREFIX,
   COOKIE_USER_GROUP,
@@ -21,25 +18,23 @@ import {
 } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
 import { randomString } from '~/common/utils'
+import { mergeables } from '~/gql/mergeables'
 
 import { getIsomorphicCookie } from './cookie'
 import { resolvers } from './resolvers'
 import { storage } from './storage'
 import typeDefs from './types'
 
-// import { setupPersistCache } from './cache'
-
-const fragmentMatcher = new IntrospectionFragmentMatcher({
-  introspectionQueryResultData,
-})
-
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+
+const isServer = typeof window === 'undefined'
+const isClient = !isServer
 
 /**
  * Links
  */
 const persistedQueryLink = createPersistedQueryLink({
+  sha256,
   useGETForHashedQueries: true,
 })
 
@@ -51,7 +46,15 @@ const site_domain_tld =
 /**
  * Dynamic API endpoint based on hostname
  */
-const httpLink = ({ host, headers }: { host: string; headers: any }) => {
+const uploadLink = ({
+  host,
+  headers,
+  isPublicOperation,
+}: {
+  host: string
+  headers: any
+  isPublicOperation: boolean
+}) => {
   let apiUrl = process.env.NEXT_PUBLIC_API_URL as string
 
   let hostname = new URL(apiUrl).hostname
@@ -59,38 +62,27 @@ const httpLink = ({ host, headers }: { host: string; headers: any }) => {
     // hostname.endsWith(site_domain_tld) &&
     host.endsWith(site_domain_tld_old) // configured new tld but running on old tld
   ) {
-    console.log('serving on different hostname:', {
-      apiUrl,
-      hostname,
-      host,
-      site_domain_tld,
-      site_domain_tld_old,
-    })
     apiUrl = apiUrl.replace(site_domain_tld, site_domain_tld_old)
     hostname = hostname.replace(site_domain_tld, site_domain_tld_old)
-    console.log('updated hostname:', { apiUrl, hostname })
   }
-
-  // toggle http for local dev
-  const agent =
-    (apiUrl || '').split(':')[0] === 'http'
-      ? new http.Agent()
-      : new https.Agent({
-          rejectUnauthorized: isProd, // allow access to https:...matters... in localhost
-        })
 
   return createUploadLink({
     uri: apiUrl,
     headers: {
       ...headers,
+      cookie: isPublicOperation ? '' : headers.cookie,
       host: hostname,
       'Apollo-Require-Preflight': 'true',
     },
-    fetchOptions: {
-      agent,
-    },
   })
 }
+
+const directionalLink = ({ host, headers }: { host: string; headers: any }) =>
+  new RetryLink().split(
+    (operation) => operation.getContext()[GQL_CONTEXT_PUBLIC_QUERY_KEY],
+    uploadLink({ host, headers, isPublicOperation: true }),
+    uploadLink({ host, headers, isPublicOperation: false })
+  )
 
 /**
  * Logging error message
@@ -136,6 +128,9 @@ const authLink = setContext((operation, { headers, ...restCtx }) => {
   }
 
   return {
+    fetchOptions: {
+      credentials: isPublicOperation ? 'omit' : 'include',
+    },
     credentials: isPublicOperation ? 'omit' : 'include',
     headers: {
       ...headers,
@@ -185,7 +180,7 @@ const sentryLink = setContext((_, { headers }) => {
 const agentHashLink = setContext((_, { headers }) => {
   let hash: string | null = null
 
-  if (typeof window !== 'undefined') {
+  if (isClient) {
     const stored = storage.get<string>(STORAGE_KEY_AGENT_HASH)
     if (stored && stored.startsWith(AGENT_HASH_PREFIX)) {
       hash = stored
@@ -200,19 +195,69 @@ const agentHashLink = setContext((_, { headers }) => {
   }
 })
 
-const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
-  const cache = new InMemoryCache({ fragmentMatcher })
-  cache.restore(initialState || {})
+/**
+ * When the application runs on the client side, we need to make sure that
+ * the Apollo client is a singleton to prevent it from reinitializing
+ * between pages.
+ */
+let globalApolloClient: ApolloClient<NormalizedCacheObject>
 
-  // setupPersistCache(cache)
+export const getApollo = (initialState?: {}, headers?: {}) => {
+  // Ensure you create a new client for each server-side request to prevent
+  // data sharing between connections.
+  if (isServer) {
+    return createApolloClient(initialState, headers)
+  }
 
-  const host =
-    ctx?.req?.headers.host ||
-    (typeof window === 'undefined' ? '' : _get(window, 'location.host'))
-  const cookie =
-    headers?.cookie || (typeof window !== 'undefined' ? document.cookie : '')
+  if (!globalApolloClient) {
+    globalApolloClient = createApolloClient(initialState, headers)
+  }
+  return globalApolloClient
+}
+
+export const createApolloClient = (
+  initialState?: {},
+  headers?: IncomingHttpHeaders
+) => {
+  const cache = new InMemoryCache({
+    possibleTypes: {
+      ...introspectionQueryResultData,
+      Mergeable: mergeables,
+    },
+    typePolicies: {
+      Mergeable: { merge: true },
+      // Define a fixed custom key for `Recommendation` and use cache redirects
+      // to make sure when `viewer` refer to `User:VISITOR_ID` or `User:LOGGED_IN_ID`
+      // it will always read `viewer.recommendation` from this cache key.
+      // @see https://www.apollographql.com/docs/react/caching/cache-configuration#customizing-cache-ids
+      // @see https://www.apollographql.com/docs/react/caching/advanced-topics#cache-redirects
+      Recommendation: {
+        keyFields: () => {
+          return `Recommendation:visitor`
+        },
+      },
+      User: {
+        fields: {
+          recommendation: {
+            read(_, { args, toReference }) {
+              return toReference({
+                __typename: 'Recommendation',
+                id: 'visitor',
+              })
+            },
+          },
+        },
+      },
+    },
+  }).restore(initialState || {})
+
+  const host = headers?.host || (isClient ? _get(window, 'location.host') : '')
+  const cookie = headers?.cookie || (isClient ? document.cookie : '')
 
   const client = new ApolloClient({
+    name: packageJson.name,
+    version: packageJson.version,
+    ssrMode: isServer,
     link: ApolloLink.from([
       persistedQueryLink,
       errorLink,
@@ -220,7 +265,7 @@ const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
       agentHashLink,
       authLink,
       userGroupLink({ cookie }),
-      httpLink({ host, headers }),
+      directionalLink({ host, headers }),
     ]),
     cache,
     resolvers,
@@ -228,6 +273,4 @@ const customWithApollo = withApollo(({ ctx, headers, initialState }) => {
   })
 
   return client
-})
-
-export default customWithApollo
+}

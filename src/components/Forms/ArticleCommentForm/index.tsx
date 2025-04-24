@@ -171,7 +171,6 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
   }
 
   const onClear = () => {
-    console.log('clear', editor)
     setContent('')
     if (editor) {
       editor.commands.setContent('')

@@ -5,20 +5,27 @@ import EditCollection from '~/components/CollectionDigest/DropdownActions/EditCo
 import LikeButton from './LikeButton'
 
 export const fragments = {
-  collection: gql`
-    fragment CollectionProfileCollection on Collection {
-      id
-      author {
+  collection: {
+    public: gql`
+      fragment CollectionProfileCollectionPublic on Collection {
         id
-        userName
-        displayName
+        author {
+          id
+          userName
+          displayName
+        }
+        ...EditCollectionCollection
+        ...CollectionLikeButtonPublic
       }
-      ...EditCollectionCollection
-      ...CollectionLikeButtonPublic
-      ...CollectionLikeButtonPrivate
-    }
-    ${EditCollection.fragments.collection}
-    ${LikeButton.fragments.collection.public}
-    ${LikeButton.fragments.collection.private}
-  `,
+      ${EditCollection.fragments.collection}
+      ${LikeButton.fragments.collection.public}
+    `,
+    private: gql`
+      fragment CollectionProfileCollectionPrivate on Collection {
+        id
+        ...CollectionLikeButtonPrivate
+      }
+      ${LikeButton.fragments.collection.private}
+    `,
+  },
 }

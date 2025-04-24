@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useState } from 'react'
+import baseToast from 'react-hot-toast'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
@@ -106,9 +107,14 @@ const Connect: React.FC<FormProps> = ({
     undefined,
     { showToast: false }
   )
-  const [walletLogin] = useMutation<WalletLoginMutation>(
+  const [walletLogin, { client }] = useMutation<WalletLoginMutation>(
     WALLET_LOGIN,
-    undefined,
+    {
+      onCompleted: () => {
+        client?.resetStore()
+        baseToast.dismiss()
+      },
+    },
     {
       showToast: false,
     }
@@ -235,6 +241,8 @@ const Connect: React.FC<FormProps> = ({
             redirectToTarget({
               fallback: isInPage ? 'homepage' : 'current',
             })
+
+            closeDialog?.()
           } else if (submitCallback) {
             submitCallback(loginData?.walletLogin.type)
           }

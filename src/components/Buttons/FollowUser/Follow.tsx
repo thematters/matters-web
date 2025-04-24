@@ -17,10 +17,6 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import {
-  updateUserFollowerCount,
-  updateViewerFolloweeCount,
-} from '~/components/GQL'
 import TOGGLE_FOLLOW_USER from '~/components/GQL/mutations/toggleFollowUser'
 import {
   FollowButtonUserPrivateFragment,
@@ -51,9 +47,35 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
           }
         : undefined,
     update: (cache) => {
-      const userName = _get(user, 'userName', null)
-      updateUserFollowerCount({ cache, type: 'increment', userName })
-      updateViewerFolloweeCount({ cache, type: 'increment' })
+      // increment user's followers count
+      cache.modify({
+        id: cache.identify(user),
+        fields: {
+          followers: (existingFollowers) => ({
+            ...existingFollowers,
+            totalCount: existingFollowers.totalCount + 1,
+          }),
+        },
+      })
+
+      // increment viewer's following count
+      cache.modify({
+        id: cache.identify(viewer),
+        fields: {
+          following: (existingFollowing) => {
+            const usersFieldName = 'users({"input":{"first":0}})'
+            const usersData = existingFollowing[usersFieldName]
+
+            return {
+              ...existingFollowing,
+              [usersFieldName]: {
+                ...usersData,
+                totalCount: usersData.totalCount + 1,
+              },
+            }
+          },
+        },
+      })
     },
   })
 

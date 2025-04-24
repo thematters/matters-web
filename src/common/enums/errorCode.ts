@@ -30,6 +30,7 @@ export enum ERROR_CODES {
   ARTICLE_NOT_FOUND = 'ARTICLE_NOT_FOUND',
   ASSET_NOT_FOUND = 'ASSET_NOT_FOUND',
   DRAFT_NOT_FOUND = 'DRAFT_NOT_FOUND',
+  DRAFT_VERSION_CONFLICT = 'DRAFT_VERSION_CONFLICT',
   TAG_NOT_FOUND = 'TAG_NOT_FOUND',
   NOTICE_NOT_FOUND = 'NOTICE_NOT_FOUND',
   CIRCLE_NOT_FOUND = 'CIRCLE_NOT_FOUND',
@@ -79,7 +80,9 @@ export enum ERROR_CODES {
   PAYMENT_REACH_MAXIMUM_LIMIT = 'PAYMENT_REACH_MAXIMUM_LIMIT',
 }
 
-export const ERROR_MESSAGES: { [key in ERROR_CODES]: MessageDescriptor } = {
+export const ERROR_MESSAGES: Partial<{
+  [key in ERROR_CODES]: MessageDescriptor
+}> = {
   [ERROR_CODES.UNKNOWN_ERROR]: defineMessage({
     defaultMessage: 'Unknown error. Please try again later.',
     id: '/TXBJR',

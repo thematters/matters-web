@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { PageHeader, ViewAllButton } from '~/components'
+import { Button, ButtonProps, PageHeader, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -9,6 +9,18 @@ interface SidebarHeaderProps {
   type: 'authors' | 'tags'
   rightButton?: React.ReactNode
   viewAll?: boolean
+}
+
+type ViewAllButtonProps = ButtonProps
+
+const ViewAllButton: React.FC<ViewAllButtonProps> = ({ ...props }) => {
+  return (
+    <Button textColor="greyDarker" textActiveColor="black" {...props}>
+      <TextIcon size={14}>
+        <FormattedMessage defaultMessage="All" id="zQvVDJ" />
+      </TextIcon>
+    </Button>
+  )
 }
 
 const FeedHeader = ({

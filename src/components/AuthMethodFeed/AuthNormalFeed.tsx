@@ -1,4 +1,4 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -6,12 +6,7 @@ import { ReactComponent as IconGoogle2 } from '@/public/static/icons/24px/google
 import { ReactComponent as IconMail } from '@/public/static/icons/24px/mail.svg'
 import { ReactComponent as IconX2 } from '@/public/static/icons/24px/x2.svg'
 import { PATHS } from '~/common/enums'
-import {
-  // facebookOauthUrl,
-  googleOauthUrl,
-  sleep,
-  twitterOauthUrl,
-} from '~/common/utils'
+import { googleOauthUrl, sleep, twitterOauthUrl } from '~/common/utils'
 import { Icon, Spinner, useRoute } from '~/components'
 
 import { OAUTH_REQUEST_TOKEN } from '../GQL/queries/oauthRequestToken'
@@ -28,7 +23,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
   const [loadingState, setLoadingState] = useState('')
   const isGoogleLoading = loadingState === 'Google'
   const isTwitterLoading = loadingState === 'Twitter'
-  // const isFacebookLoading = loadingState === 'Facebook'
+
   useEffect(() => {
     return setLoadingState('')
   }, [])
@@ -59,12 +54,6 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
       gotoTwitter()
     }
   }
-
-  // const gotoFacebook = async () => {
-  //   setLoadingState('Facebook')
-  //   const url = await facebookOauthUrl(oauthType)
-  //   router.push(url)
-  // }
 
   return (
     <>
@@ -99,17 +88,6 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
             </span>
           )}
         </li>
-        {/* <li className={styles.item} role="button" onClick={gotoFacebook}>
-          <span className={styles.icon}>
-            <Icon icon={IconFacebook} size={22} />
-          </span>
-          <span className={styles.name}>Facebook</span>
-          {isFacebookLoading && (
-            <span className={styles.right}>
-              <Spinner color="grey" size={22} />
-            </span>
-          )}
-        </li> */}
       </ul>
       <section className={styles.info}>
         <section className={styles.title}>

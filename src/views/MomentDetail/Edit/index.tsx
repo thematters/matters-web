@@ -26,7 +26,6 @@ import {
 } from '~/components'
 import MomentEditor from '~/components/Editor/Moment'
 import { MomentAsset, MomentAssetsUploader } from '~/components/FileUploader'
-import { updateUserWritings } from '~/components/GQL'
 import { PUT_MOMENT } from '~/components/GQL/mutations/putMoment'
 import { PutMomentMutation } from '~/gql/graphql'
 
@@ -81,7 +80,6 @@ const Edit = () => {
 
     try {
       setSubmitting(true)
-      const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
       const { data } = await putMoment({
         variables: {
           input: {
@@ -89,20 +87,10 @@ const Edit = () => {
             assets: assets.map(({ assetId }) => assetId),
           },
         },
-        update: (cache, mutationResult) => {
-          updateUserWritings({
-            cache,
-            type: 'addMoment',
-            userName: viewer.userName || '',
-            momentDigest: mutationResult.data?.putMoment,
-          })
+        update: (cache) => {
+          cache.evict({ id: cache.identify(viewer), fieldName: 'writings' })
+          cache.gc()
         },
-        refetchQueries: [
-          {
-            query: USER_PROFILE_PUBLIC,
-            variables: { userName: viewer.userName },
-          },
-        ],
       })
 
       const { putMoment: moment } = data || {}

@@ -34,15 +34,6 @@ const BaseRemoveArticleCollectionDialog = ({
     REMOVE_ARTICLE_COLLECTION,
     {
       variables: { collection: collectionId, article: articleId },
-    }
-  )
-
-  if (!collectionId || !articleId || !articleTitle) {
-    return <></>
-  }
-
-  const onRemove = async () => {
-    await remove({
       update(cache) {
         updateUserCollectionDetail({
           cache,
@@ -51,7 +42,15 @@ const BaseRemoveArticleCollectionDialog = ({
           type: 'delete',
         })
       },
-    })
+    }
+  )
+
+  if (!collectionId || !articleId || !articleTitle) {
+    return <></>
+  }
+
+  const onRemove = async () => {
+    await remove()
 
     toast.success({
       message: (

@@ -1,4 +1,4 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import React, { useContext, useEffect } from 'react'
 
 import { analytics } from '~/common/utils'

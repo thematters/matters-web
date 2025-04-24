@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -412,11 +412,6 @@ const BaseNotificationSettings = () => {
 
 const NotificationsCircleSettings = () => {
   const intl = useIntl()
-  const title = intl.formatMessage({
-    defaultMessage: 'Settings - Circle notifications',
-    id: 'MoyOR+',
-    description: 'src/views/Me/Settings/Notifications/Circle/index.tsx',
-  })
 
   return (
     <Layout.Main>
@@ -432,7 +427,12 @@ const NotificationsCircleSettings = () => {
         }
       />
 
-      <Head title={title} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Settings',
+          id: 'D3idYv',
+        })}
+      />
 
       <section className={styles.container}>
         <BaseNotificationSettings />

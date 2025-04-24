@@ -67,10 +67,10 @@
   }
 
   &.spacingMd {
-    padding: var(--sp16);
+    padding: var(--sp24) var(--sp16) var(--sp4);
 
     @media (--sm-up) {
-      padding: var(--sp16) 0 var(--sp16);
+      padding: var(--sp32) 0 var(--sp12);
     }
   }
 }
@@ -137,11 +137,11 @@
 
   &.green {
     color: var(--color-positive-green);
-    background: var(--color-free-write-green-bg);
+    background: var(--color-campaign-green-bg);
 
     &:hover {
-      color: var(--color-free-write-green-text);
-      background: var(--color-free-write-green-bg-hover);
+      color: var(--color-campaign-green-text);
+      background: var(--color-campaign-green-bg-hover);
     }
 
     &.selected {

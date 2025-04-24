@@ -25,6 +25,24 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   const { start: writingStart, end: writingEnd } = campaign.writingPeriod || {}
   const isInApplicationPeriod = !appEnd || now < new Date(appEnd)
 
+  const name =
+    campaign[
+      lang === 'zh_hans'
+        ? 'nameZhHans'
+        : lang === 'zh_hant'
+          ? 'nameZhHant'
+          : 'nameEn'
+    ]
+
+  const description =
+    campaign[
+      lang === 'zh_hans'
+        ? 'descriptionZhHans'
+        : lang === 'zh_hant'
+          ? 'descriptionZhHant'
+          : 'descriptionEn'
+    ]
+
   return (
     <Apply.Dialog campaign={campaign}>
       {({ openDialog }) => (
@@ -36,17 +54,7 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
           )}
 
           <section className={styles.title}>
-            <h1 className={styles.name}>
-              {
-                campaign[
-                  lang === 'zh_hans'
-                    ? 'nameZhHans'
-                    : lang === 'zh_hant'
-                    ? 'nameZhHant'
-                    : 'nameEn'
-                ]
-              }
-            </h1>
+            <h1 className={styles.name}>{name}</h1>
 
             <section className={styles.apply}>
               <Apply.Button
@@ -89,10 +97,11 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
               {!isInApplicationPeriod && (
                 <span>
                   <FormattedMessage
-                    defaultMessage="Event period{tz}: "
-                    id="krvjo9"
-                    values={{ tz: isUTC8() ? '' : ' (UTC+8) ' }}
+                    defaultMessage="Event period{tz}"
+                    id="K+pFNS"
+                    values={{ tz: isUTC8() ? '' : ' (UTC+8)' }}
                   />
+                  {lang === 'en' ? ': ' : '：'}
                   <span className={styles.period}>
                     {writingStart
                       ? datetimeFormat.absolute({
@@ -113,6 +122,10 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
                 </span>
               )}
             </section>
+          </section>
+
+          <section className={styles.description}>
+            <p dangerouslySetInnerHTML={{ __html: description || '' }} />
           </section>
 
           <section className={styles.extra}>

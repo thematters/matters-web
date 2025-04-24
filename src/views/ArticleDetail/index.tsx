@@ -1,15 +1,17 @@
-import { useLazyQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/client'
 import { formatISO } from 'date-fns'
 import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
+  MAX_META_SUMMARY_LENGTH,
   OPEN_COMMENT_DETAIL_DIALOG,
   OPEN_COMMENT_LIST_DRAWER,
 } from '~/common/enums'
 import {
   analytics,
+  makeSummary,
   normalizeTag,
   parseCommentHash,
   toPath,
@@ -267,16 +269,15 @@ const BaseArticleDetail = ({
       showAside={article.state === 'active'}
     >
       <Head
-        title={`${title} - ${article?.author.displayName} (@${article.author.userName})`}
+        title={`${makeSummary(title, MAX_META_SUMMARY_LENGTH)} - ${article?.author.displayName}`}
         path={toPath({ page: 'articleDetail', article }).href}
-        noSuffix
-        description={summary}
+        description={makeSummary(summary, MAX_META_SUMMARY_LENGTH) || ''}
         keywords={keywords}
         image={article.cover}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'Article',
-          headline: summary,
+          headline: makeSummary(summary, MAX_META_SUMMARY_LENGTH),
           /* wordCount: ... */
           keywords,
           datePublished: formatISO(
@@ -496,10 +497,7 @@ const ArticleDetail = ({
     }
   )
 
-  const { data, client, refetch: refetchPublic } = resultByHash
-  const loading = resultByHash.loading
-  const error = resultByHash.error
-
+  const { data, client, loading, error } = resultByHash
   const article = data?.article
   const authorId = article?.author?.id
   const isAuthor = viewer.id === authorId
@@ -513,29 +511,18 @@ const ArticleDetail = ({
       return
     }
 
+    setPrivateFetched(false)
+
     await client.query({
       query: ARTICLE_DETAIL_PRIVATE,
       fetchPolicy: 'network-only',
-      variables: {
-        id: article?.id,
-      },
+      variables: { shortHash },
     })
 
     setPrivateFetched(true)
   }
 
-  useEffect(() => {
-    // reset state to private fetchable when URL query is changed
-    setPrivateFetched(false)
-
-    // refetch data when URL query is changed
-    ;(async () => {
-      await refetchPublic()
-      await loadPrivate()
-    })()
-  }, [shortHash])
-
-  // fetch private data when shortHash of public data is changed
+  // fetch private data when shortHash is changed
   useEffect(() => {
     loadPrivate()
   }, [article?.shortHash, viewer.id])

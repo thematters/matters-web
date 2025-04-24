@@ -2,7 +2,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { getAddress } from 'viem'
 
 import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
-import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
 import { truncate } from '~/common/utils'
 import {
   Button,
@@ -16,14 +15,9 @@ import {
 type WalletAddressProps = {
   address: string
   ensName?: string | null
-  hasLinkedIPNS: boolean
 }
 
-const WalletAddress: React.FC<WalletAddressProps> = ({
-  address,
-  ensName,
-  hasLinkedIPNS,
-}) => {
+const WalletAddress: React.FC<WalletAddressProps> = ({ address, ensName }) => {
   const intl = useIntl()
   const buttonProps: ButtonProps = {
     spacing: [4, 12],
@@ -35,20 +29,6 @@ const WalletAddress: React.FC<WalletAddressProps> = ({
     placement: 'left',
     color: 'green',
     size: 16,
-  }
-
-  if (ensName && hasLinkedIPNS) {
-    return (
-      <Button
-        {...buttonProps}
-        htmlHref={`https://${ensName}.limo`}
-        htmlTarget="_blank"
-      >
-        <TextIcon {...textIconProps} icon={<Icon icon={IconExternal} />}>
-          {ensName}
-        </TextIcon>
-      </Button>
-    )
   }
 
   return (

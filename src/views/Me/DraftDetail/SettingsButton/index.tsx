@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
 import { ENTITY_TYPE } from '~/common/enums'
-import { Button, TextIcon, toDigestTagPlaceholder } from '~/components'
+import { Button, TextIcon, toast, toDigestTagPlaceholder } from '~/components'
 import {
   MoreSettingsProps,
   SetCollectionProps,
@@ -178,7 +178,24 @@ const SettingsButton = ({
     >
       {({ openDialog: openEditorSettingsDialog }) => (
         <ConfirmButton
-          openDialog={openEditorSettingsDialog}
+          openDialog={() => {
+            const hasCampaign = !!selectedCampaign
+            const hasCircle = !!draft.access.circle
+
+            if (hasCampaign && hasCircle) {
+              toast.error({
+                message: (
+                  <FormattedMessage
+                    defaultMessage="Article cannot be added to event or circle at the same time"
+                    id="cPXsvZ"
+                  />
+                ),
+              })
+              return
+            }
+
+            openEditorSettingsDialog()
+          }}
           disabled={disabled}
         />
       )}

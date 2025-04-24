@@ -24,7 +24,6 @@ const fragments = {
           description
           profileCover
           ethAddress
-          ipnsKey
         }
         articles(input: { first: 0 }) {
           totalCount

@@ -9,7 +9,7 @@ describe('<Form.SquareCheckBox>', () => {
     const placeholder = 'placeholder-test'
     const hint = 'hint-test'
     const value = 'value-test'
-    const content = 'content-test'
+    const contents = 'content-test'
     const fieldId = `field-${value}`
     const fieldMsgId = `field-msg-${value}`
 
@@ -22,7 +22,7 @@ describe('<Form.SquareCheckBox>', () => {
       required: true,
       placeholder,
       hint,
-      content,
+      contents,
       onBlur: handleOnBlur,
       onChange: handleOnChange,
     }
@@ -43,8 +43,8 @@ describe('<Form.SquareCheckBox>', () => {
     expect($checkbox).toHaveAttribute('aria-describedby', fieldMsgId)
     expect(screen.getByPlaceholderText(placeholder)).toBeInTheDocument()
 
-    // content
-    expect(screen.getByText(content)).toBeInTheDocument()
+    // contents
+    expect(screen.getByText(contents)).toBeInTheDocument()
 
     // checked
     rerender(<Form.SquareCheckBox {...props} checked={true} />)

@@ -11,6 +11,9 @@ const fragment = gql`
       ...DigestTag
     }
     access {
+      circle {
+        id
+      }
       type
     }
     canComment

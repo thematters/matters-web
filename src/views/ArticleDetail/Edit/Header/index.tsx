@@ -1,4 +1,5 @@
 import _isEqual from 'lodash/isEqual'
+import { useRouter } from 'next/router'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_ARTICLE_CONTENT_LENGTH } from '~/common/enums'
@@ -61,9 +62,31 @@ const EditModeHeader = ({
 
   ...restProps
 }: EditModeHeaderProps) => {
+  const router = useRouter()
   const { tags, collection, circle, accessType, license } = restProps
-  const [editArticle, { loading }] =
-    useMutation<EditArticleMutation>(EDIT_ARTICLE)
+  const [editArticle, { loading }] = useMutation<EditArticleMutation>(
+    EDIT_ARTICLE,
+    {
+      update: (cache, { data }) => {
+        // evict campaign if it exists
+        if (
+          data?.editArticle?.campaigns[0] &&
+          data.editArticle.campaigns[0].campaign
+        ) {
+          cache.evict({
+            id: cache.identify(data.editArticle.campaigns[0].campaign),
+          })
+        }
+
+        // evict circle if it exists
+        if (data?.editArticle?.access.circle) {
+          cache.evict({
+            id: cache.identify(data.editArticle.access.circle),
+          })
+        }
+      },
+    }
+  )
 
   const hasTitle = revision.title && revision.title.trim().length > 0
   const hasContent =
@@ -147,8 +170,10 @@ const EditModeHeader = ({
           ...(isReplyToDonatorRevised
             ? { replyToDonator: revision.replyToDonator }
             : {}),
-          ...(isCircleRevised ? { circle: circle?.id || null } : {}),
-          ...(isAccessRevised ? { accessType } : {}),
+          ...(isCircleRevised
+            ? { circle: circle?.id || null, accessType: accessType }
+            : {}),
+          ...(!isCircleRevised && isAccessRevised ? { accessType } : {}),
           ...(isLicenseRevised ? { license } : {}),
           ...(restProps.iscnPublish
             ? { iscnPublish: restProps.iscnPublish }
@@ -173,6 +198,7 @@ const EditModeHeader = ({
           isResetCampaign,
         },
       })
+
       if (needRepublish) {
         onPublish()
       } else {
@@ -186,7 +212,7 @@ const EditModeHeader = ({
           ),
         })
         const path = toPath({ page: 'articleDetail', article })
-        window.location.href = path.href
+        router.push(path.href)
       }
     } catch (e) {
       toast.error({
@@ -210,6 +236,24 @@ const EditModeHeader = ({
     !hasTitle ||
     !hasContent ||
     isOverLength
+
+  const validateArticleSettings = () => {
+    const hasCampaign = !!restProps.selectedCampaign
+    const hasCircle = !!restProps.circle
+
+    if (hasCampaign && hasCircle) {
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="Article cannot be added to event or circle at the same time"
+            id="cPXsvZ"
+          />
+        ),
+      })
+      return false
+    }
+    return true
+  }
 
   return (
     <section className={styles.header}>
@@ -242,7 +286,15 @@ const EditModeHeader = ({
           cancelButtonText={
             <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
           }
-          onConfirm={needRepublish ? undefined : onSave}
+          onConfirm={
+            needRepublish
+              ? undefined
+              : () => {
+                  if (validateArticleSettings()) {
+                    onSave()
+                  }
+                }
+          }
           ConfirmStepContent={ConfirmStepContent}
         >
           {({ openDialog: openEditorSettingsDialog }) => (
@@ -250,7 +302,11 @@ const EditModeHeader = ({
               size={[null, '2rem']}
               spacing={[0, 16]}
               bgColor="green"
-              onClick={openEditorSettingsDialog}
+              onClick={() => {
+                if (validateArticleSettings()) {
+                  openEditorSettingsDialog()
+                }
+              }}
               aria-haspopup="dialog"
               disabled={disabled}
             >

@@ -1,9 +1,8 @@
 import { FormattedMessage } from 'react-intl'
 
-import { redirectToTarget } from '~/common/utils'
 import { Dialog } from '~/components'
 
-const Complete: React.FC = () => {
+const Complete: React.FC<{ closeDialog: () => void }> = ({ closeDialog }) => {
   return (
     <>
       <Dialog.Header
@@ -25,21 +24,13 @@ const Complete: React.FC = () => {
         btns={
           <Dialog.RoundedButton
             text={<FormattedMessage defaultMessage="Done" id="JXdbo8" />}
-            onClick={() => {
-              redirectToTarget({
-                fallback: 'current',
-              })
-            }}
+            onClick={closeDialog}
           />
         }
         smUpBtns={
           <Dialog.TextButton
             text={<FormattedMessage defaultMessage="Done" id="JXdbo8" />}
-            onClick={() => {
-              redirectToTarget({
-                fallback: 'current',
-              })
-            }}
+            onClick={closeDialog}
           />
         }
       />

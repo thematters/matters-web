@@ -4,101 +4,121 @@
   padding: 0;
   margin: 0;
 }
+
 @media not all and (width >= 0) and (width <= 474.98px) {
   .fresnel-at-sm {
     display: none !important;
   }
 }
+
 @media not all and (width >= 475px) and (width <= 929.98px) {
   .fresnel-at-md {
     display: none !important;
   }
 }
+
 @media not all and (width >= 930px) and (width <= 1183.98px) {
   .fresnel-at-lg {
     display: none !important;
   }
 }
+
 @media not all and (width >= 1184px) {
   .fresnel-at-xl {
     display: none !important;
   }
 }
+
 @media not all and (width <= 474.98px) {
   .fresnel-lessThan-md {
     display: none !important;
   }
 }
+
 @media not all and (width <= 929.98px) {
   .fresnel-lessThan-lg {
     display: none !important;
   }
 }
+
 @media not all and (width <= 1183.98px) {
   .fresnel-lessThan-xl {
     display: none !important;
   }
 }
+
 @media not all and (width >= 475px) {
   .fresnel-greaterThan-sm {
     display: none !important;
   }
 }
+
 @media not all and (width >= 930px) {
   .fresnel-greaterThan-md {
     display: none !important;
   }
 }
+
 @media not all and (width >= 1184px) {
   .fresnel-greaterThan-lg {
     display: none !important;
   }
 }
+
 @media not all and (width >= 0) {
   .fresnel-greaterThanOrEqual-sm {
     display: none !important;
   }
 }
+
 @media not all and (width >= 475px) {
   .fresnel-greaterThanOrEqual-md {
     display: none !important;
   }
 }
+
 @media not all and (width >= 930px) {
   .fresnel-greaterThanOrEqual-lg {
     display: none !important;
   }
 }
+
 @media not all and (width >= 1184px) {
   .fresnel-greaterThanOrEqual-xl {
     display: none !important;
   }
 }
+
 @media not all and (width >= 0) and (width <= 474.98px) {
   .fresnel-between-sm-md {
     display: none !important;
   }
 }
+
 @media not all and (width >= 0) and (width <= 929.98px) {
   .fresnel-between-sm-lg {
     display: none !important;
   }
 }
+
 @media not all and (width >= 0) and (width <= 1183.98px) {
   .fresnel-between-sm-xl {
     display: none !important;
   }
 }
+
 @media not all and (width >= 475px) and (width <= 929.98px) {
   .fresnel-between-md-lg {
     display: none !important;
   }
 }
+
 @media not all and (width >= 475px) and (width <= 1183.98px) {
   .fresnel-between-md-xl {
     display: none !important;
   }
 }
+
 @media not all and (width >= 930px) and (width <= 1183.98px) {
   .fresnel-between-lg-xl {
     display: none !important;

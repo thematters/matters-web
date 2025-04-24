@@ -21,7 +21,6 @@ import {
   AddArticlesCollectionUserQuery,
   CollectionArticlesCollectionFragment,
 } from '~/gql/graphql'
-import { USER_COLLECTIONS } from '~/views/User/Collections/gql'
 
 import { ADD_ARTICLES_COLLECTION, ADD_ARTICLES_COLLECTION_USER } from './gql'
 import SearchingDialogContent from './SearchingDialogContent'
@@ -37,13 +36,11 @@ interface FormValues {
 interface AddArticlesCollectionDialogProps {
   children: ({ openDialog }: { openDialog: () => void }) => React.ReactNode
   collection: CollectionArticlesCollectionFragment
-  onUpdate: () => void
 }
 
 const BaseAddArticlesCollectionDialog = ({
   children,
   collection,
-  onUpdate,
 }: AddArticlesCollectionDialogProps) => {
   const viewer = useContext(ViewerContext)
 
@@ -56,7 +53,11 @@ const BaseAddArticlesCollectionDialog = ({
       showToast: false,
     }
   )
-  const { show, openDialog, closeDialog: cd } = useDialogSwitch(true)
+  const {
+    show,
+    openDialog,
+    closeDialog: baseCloseDialog,
+  } = useDialogSwitch(true)
 
   const [area, setArea] = useState<Area>('selecting')
   const inSelectingArea = area === 'selecting'
@@ -92,10 +93,9 @@ const BaseAddArticlesCollectionDialog = ({
 
       const addChecked = checked.slice(
         0,
-        MAX_COLLECTION_ARTICLES_COUNT - collection.articles.totalCount
+        MAX_COLLECTION_ARTICLES_COUNT - collection.articleList.totalCount
       )
 
-      onUpdate()
       await update({
         variables: {
           input: {
@@ -111,17 +111,13 @@ const BaseAddArticlesCollectionDialog = ({
             collectionId: collection.id,
             result,
           })
+          cache.evict({ id: cache.identify(viewer), fieldName: 'collections' })
+          cache.gc()
         },
-        refetchQueries: [
-          {
-            query: USER_COLLECTIONS,
-            variables: { userName: viewer.userName },
-          },
-        ],
       })
 
       setSubmitting(false)
-      cd()
+      baseCloseDialog()
       setArea('selecting')
       // clear data
       formik.setFieldValue('checked', [])
@@ -131,7 +127,7 @@ const BaseAddArticlesCollectionDialog = ({
   const closeDialog = () => {
     formik.setFieldValue('checked', [])
     setArea('selecting')
-    cd()
+    baseCloseDialog()
   }
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import React, { useContext, useEffect } from 'react'

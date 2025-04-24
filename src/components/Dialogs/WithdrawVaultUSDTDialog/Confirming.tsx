@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useMutation, useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
@@ -64,7 +64,6 @@ const Confirming: React.FC<ConfirmingProps> = ({ amount, closeDialog }) => {
       errorPolicy: 'none',
       fetchPolicy: 'network-only',
       skip: typeof window === 'undefined' || !txId,
-      notifyOnNetworkStatusChange: true,
       onCompleted: (data) => {
         const tx = data?.viewer?.wallet?.transactions?.edges?.[0]?.node
 

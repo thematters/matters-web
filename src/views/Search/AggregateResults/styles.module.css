@@ -7,6 +7,7 @@
   color: var(--color-grey);
 
   @media (--sm-up) {
+    padding-top: var(--sp32);
     padding-right: 0;
     padding-left: 0;
     font-size: var(--text18);

@@ -71,6 +71,11 @@ export const GET_EDIT_ARTICLE = gql`
       campaigns {
         campaign {
           id
+          ... on WritingChallenge {
+            announcements {
+              id
+            }
+          }
         }
         stage {
           id

@@ -13,7 +13,6 @@ import {
   ViewerContext,
   WithdrawVaultUSDTDialog,
 } from '~/components'
-import { SocialAccountType } from '~/gql/graphql'
 
 import { SettingsButton } from '../../Button'
 
@@ -21,17 +20,6 @@ const Wallet = () => {
   const viewer = useContext(ViewerContext)
   const ethAddress = viewer.info.ethAddress
   const hasETHAddress = !!ethAddress
-
-  // FIXME: For canary release purpose,
-  // we don't allow user to remove facebook login
-  // unless the user has least two login methods
-  const canEmailLogin = !!viewer.info.email
-  const canWalletLogin = !!viewer.info.ethAddress
-  const nonFacebookSocials = viewer.info.socialAccounts.filter(
-    (s) => s.type !== SocialAccountType.Facebook
-  )
-  const canRemoveNonFacebookLogins =
-    +canEmailLogin + +canWalletLogin + nonFacebookSocials.length > 1
 
   const { data: vaultBalanceUSDT } = useVaultBalanceUSDT()
   const hasVaultBalanceUSDT = vaultBalanceUSDT && vaultBalanceUSDT > 0
@@ -59,14 +47,12 @@ const Wallet = () => {
                     hasETHAddress ? truncate(ethAddress, 6) : undefined
                   }
                   rightIcon={
-                    hasETHAddress && canRemoveNonFacebookLogins ? (
+                    hasETHAddress ? (
                       <Icon icon={IconTimes} size={20} color="greyDarker" />
                     ) : undefined
                   }
                   onClick={
-                    hasETHAddress && canRemoveNonFacebookLogins
-                      ? openRemoveWalletLoginDialog
-                      : undefined
+                    hasETHAddress ? openRemoveWalletLoginDialog : undefined
                   }
                   right={
                     ethAddress ? undefined : (

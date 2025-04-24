@@ -1,7 +1,6 @@
 import _uniq from 'lodash/uniq'
 import _without from 'lodash/without'
 import { useContext, useEffect, useState } from 'react'
-import { useIntl } from 'react-intl'
 
 import {
   SEARCH_HISTORY_DISPLAY_LENGTH,
@@ -10,7 +9,6 @@ import {
 } from '~/common/enums'
 import { storage } from '~/common/utils'
 import {
-  Head,
   Layout,
   Media,
   SearchBar,
@@ -23,7 +21,6 @@ import AggregateResults from './AggregateResults'
 import styles from './styles.module.css'
 
 const Search = () => {
-  const intl = useIntl()
   const viewer = useContext(ViewerContext)
   const storageKey = STORAGE_KEY_SEARCH_HISTORY + '_' + viewer.id
 
@@ -80,10 +77,6 @@ const Search = () => {
           }
         />
       </Media>
-
-      <Head
-        title={intl.formatMessage({ defaultMessage: 'Search', id: 'xmcVZ0' })}
-      />
 
       {isHistory && (
         <Media lessThan="lg">

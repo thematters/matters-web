@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { REFETCH_CIRCLE_PENDING_INVITES } from '~/common/enums'
 import { mergeConnections } from '~/common/utils'
@@ -33,6 +33,7 @@ const PendingInvites = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const name = getQuery('name')
+  const intl = useIntl()
 
   /**
    * Data Fetching
@@ -81,13 +82,13 @@ const PendingInvites = () => {
   if (!edges || edges.length <= 0) {
     return (
       <EmptyWarning
-        description={
-          <FormattedMessage
-            defaultMessage="You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'."
-            id="lNjDPr"
-            description="src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx"
-          />
-        }
+        description={intl.formatMessage({
+          defaultMessage:
+            "You have not invited anyone yet! Invite friends to join your circle by clicking 'invite friends'.",
+          id: 'lNjDPr',
+          description:
+            'src/views/Circle/Settings/ManageInvitation/Invites/Pending/index.tsx',
+        })}
       />
     )
   }

@@ -1,13 +1,11 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import _chunk from 'lodash/chunk'
 import _flatten from 'lodash/flatten'
 import _get from 'lodash/get'
-import { useIntl } from 'react-intl'
 
 import { analytics, mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
   EmptyWarning,
-  Head,
   InfiniteScroll,
   List,
   QueryError,
@@ -43,8 +41,30 @@ const renderableTypes = new Set([
   'UserRecommendationActivity',
 ])
 
+const getNodeId = (node: any, cursor: string): string => {
+  if (!node) return cursor
+
+  switch (node.__typename) {
+    case 'UserPublishArticleActivity':
+      return node.nodeArticle?.id || cursor
+    case 'UserPostMomentActivity':
+      return node.nodeMoment?.id || cursor
+    case 'UserBroadcastCircleActivity':
+      return node.targetCircle?.id || cursor
+    case 'UserCreateCircleActivity':
+      return node.nodeCircle?.id || cursor
+    case 'UserAddArticleTagActivity':
+      return `${node.actor?.id || ''}:${node.targetTag?.id || ''}` || cursor
+    case 'ArticleRecommendationActivity':
+      return node.source || cursor
+    case 'UserRecommendationActivity':
+      return cursor
+    default:
+      return cursor
+  }
+}
+
 const FollowingFeed = ({ tab }: FollowingFeedProps) => {
-  const intl = useIntl()
   const isArticleTab = tab === 'Article'
   const { data, loading, error, fetchMore } = useQuery<FollowingFeedQuery>(
     FOLLOWING_FEED,
@@ -69,10 +89,6 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
   if (!edges || edges.length <= 0 || !pageInfo) {
     return (
       <>
-        <Head
-          title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
-        />
-
         <EmptyWarning
           description={
             <Translate
@@ -108,18 +124,17 @@ const FollowingFeed = ({ tab }: FollowingFeedProps) => {
 
   return (
     <>
-      <Head
-        title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
-      />
       <InfiniteScroll
         hasNextPage={pageInfo.hasNextPage}
         loadMore={loadMore}
         eof
       >
         <List>
-          {edges.map(({ node }, i) => {
+          {edges.map(({ node, cursor }, i) => {
+            const uniqueKey = `${node.__typename}:${getNodeId(node, cursor)}:${i}`
+
             return shouldRenderNode(node, renderableTypes) ? (
-              <List.Item key={`${node.__typename}:${i}`}>
+              <List.Item key={uniqueKey}>
                 {node.__typename === 'UserPublishArticleActivity' && (
                   <UserPublishArticleActivity location={i} {...node} />
                 )}

@@ -67,6 +67,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
     authorId: viewer.id,
     circleId,
     type,
+    commentId,
     parentId,
     replyToId,
   })
@@ -80,6 +81,7 @@ const CommentForm: React.FC<CircleCommentFormProps> = ({
 
   const handleSubmit = async (event?: React.FormEvent<HTMLFormElement>) => {
     const mentions = dom.getAttributes('data-id', content)
+
     const input = {
       id: commentId,
       comment: {

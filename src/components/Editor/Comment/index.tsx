@@ -1,18 +1,19 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import {
   commentEditorExtensions,
   Editor,
   EditorContent,
+  Extension,
   Mention,
   Placeholder,
   useEditor,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { BYPASS_SCROLL_LOCK, ENBABLE_SCROLL_LOCK } from '~/common/enums'
-import { useCommentEditorContext } from '~/components/Context'
+import { LanguageContext, useCommentEditorContext } from '~/components/Context'
 
 import {
   CustomShortcuts,
@@ -46,6 +47,7 @@ const CommentEditor: React.FC<Props> = ({
   editable = true,
 }) => {
   const client = useApolloClient()
+  const { lang } = useContext(LanguageContext)
   const intl = useIntl()
   const { setActiveEditor, setFallbackEditor } = useCommentEditorContext()
 
@@ -63,6 +65,7 @@ const CommentEditor: React.FC<Props> = ({
       const content = editor.getHTML()
       update({ content })
     },
+    immediatelyRender: false,
     // FIXME: toggle scroll lock when editor is focused
     // can be removed if editor is only used in single page
     // instead of being used in dialog
@@ -82,9 +85,9 @@ const CommentEditor: React.FC<Props> = ({
       Mention.configure({
         suggestion: makeMentionSuggestion({ client }),
       }),
-      SmartLink.configure(makeSmartLinkOptions({ client })),
+      SmartLink.configure(makeSmartLinkOptions({ client, lang })),
       ...commentEditorExtensions,
-    ],
+    ] as Extension[],
   })
 
   useEffect(() => {

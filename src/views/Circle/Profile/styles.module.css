@@ -36,7 +36,6 @@
     @mixin flex-start-start;
 
     & .name {
-      margin-left: var(--sp16);
       font-size: var(--text20);
       font-weight: var(--font-semibold);
     }

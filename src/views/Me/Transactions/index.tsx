@@ -1,7 +1,7 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
-import { useState } from 'react'
-import { useIntl } from 'react-intl'
+import { useContext, useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -16,11 +16,36 @@ import {
   SpinnerBlock,
   SquareTabs,
   Transaction,
+  ViewerContext,
 } from '~/components'
-import { MeTransactionsQuery } from '~/gql/graphql'
+import {
+  MeSubscriptionTransactionsCountQuery,
+  MeTransactionsQuery,
+} from '~/gql/graphql'
 
 import { Currency, CurrencySwitch } from './CurrencySwitch'
 import styles from './styles.module.css'
+
+const ME_SUBSCRIPTION_TRANSACTIONS_COUNT = gql`
+  query MeSubscriptionTransactionsCount {
+    viewer {
+      id
+      wallet {
+        subscriptionTrannsactions: transactions(
+          input: {
+            first: 0
+            filter: {
+              states: [canceled, failed, pending, succeeded]
+              purpose: subscriptionSplit
+            }
+          }
+        ) {
+          totalCount
+        }
+      }
+    }
+  }
+`
 
 const ME_TRANSACTIONS = gql`
   query MeTransactions(
@@ -142,6 +167,8 @@ const BaseTransactions = ({ currency, purpose }: BaseTransactionsProps) => {
 }
 
 const Transactions = () => {
+  const intl = useIntl()
+  const viewer = useContext(ViewerContext)
   const [currency, setCurrency] = useState<Currency>(Currency.ALL)
   const [purpose, setPurpose] = useState<Purpose>(Purpose.ALL)
 
@@ -149,19 +176,30 @@ const Transactions = () => {
   const isDonaion = purpose === Purpose.DONATION
   const isSubscription = purpose === Purpose.SUBSCRIPTION
 
-  const intl = useIntl()
-  const title = intl.formatMessage({
-    defaultMessage: 'Transactions',
-    id: '/jJLYy',
-  })
+  const { data } = useQuery<MeSubscriptionTransactionsCountQuery>(
+    ME_SUBSCRIPTION_TRANSACTIONS_COUNT
+  )
+
+  const hasSubscriptionTransactions =
+    data?.viewer?.wallet.subscriptionTrannsactions.totalCount ?? 0 > 0
+  const hasCircle = viewer.ownCircles && viewer.ownCircles[0]
 
   return (
     <Layout.Main>
       <Layout.Header
-        right={<Layout.Header.Title>{title}</Layout.Header.Title>}
+        right={
+          <Layout.Header.Title>
+            <FormattedMessage defaultMessage="Transactions" id="/jJLYy" />
+          </Layout.Header.Title>
+        }
       />
 
-      <Head title={title} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'Wallet',
+          id: '3yk8fB',
+        })}
+      />
 
       <SquareTabs
         sticky
@@ -195,15 +233,17 @@ const Transactions = () => {
           })}
         />
 
-        <SquareTabs.Tab
-          selected={isSubscription}
-          onClick={() => setPurpose(Purpose.SUBSCRIPTION)}
-          title={intl.formatMessage({
-            defaultMessage: 'Subscriptions',
-            id: 'T73SwS',
-            description: 'src/views/Me/Transactions/index.tsx',
-          })}
-        />
+        {(hasSubscriptionTransactions || hasCircle) && (
+          <SquareTabs.Tab
+            selected={isSubscription}
+            onClick={() => setPurpose(Purpose.SUBSCRIPTION)}
+            title={intl.formatMessage({
+              defaultMessage: 'Subscriptions',
+              id: 'T73SwS',
+              description: 'src/views/Me/Transactions/index.tsx',
+            })}
+          />
+        )}
       </SquareTabs>
 
       <Layout.Main.Spacing hasVertical={false}>

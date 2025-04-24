@@ -4,8 +4,8 @@ import { useContext } from 'react'
 import { ButtonProps, IconSize, ViewerContext } from '~/components'
 import { BookmarkArticlePrivateFragment } from '~/gql/graphql'
 
-import Subscribe from './Subscribe'
-import Unsubscribe from './Unsubscribe'
+import Bookmark from './Bookmark'
+import Unbookmark from './Unbookmark'
 
 export type BookmarkButtonProps = {
   article: Partial<BookmarkArticlePrivateFragment>
@@ -32,9 +32,13 @@ export const BookmarkButton = ({
 }: BookmarkButtonProps) => {
   const viewer = useContext(ViewerContext)
 
+  if (!article.id) {
+    return null
+  }
+
   if (article.bookmarked) {
     return (
-      <Unsubscribe
+      <Unbookmark
         articleId={article.id}
         iconSize={iconSize}
         disabled={viewer.isArchived}
@@ -44,7 +48,7 @@ export const BookmarkButton = ({
     )
   } else {
     return (
-      <Subscribe
+      <Bookmark
         articleId={article.id}
         iconSize={iconSize}
         disabled={viewer.isArchived}

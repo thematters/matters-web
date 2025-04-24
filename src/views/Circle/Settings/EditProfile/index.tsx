@@ -50,7 +50,10 @@ const EditProfile = () => {
   return (
     <Layout.Main>
       <Head
-        title={intl.formatMessage({ defaultMessage: 'Profile', id: 'itPgxd' })}
+        title={intl.formatMessage({
+          defaultMessage: 'Edit Circle',
+          id: 'H8hiL/',
+        })}
       />
 
       <CreateCircleForm.Profile circle={circle} type="edit" purpose="page" />

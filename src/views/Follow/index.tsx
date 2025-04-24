@@ -1,9 +1,10 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 import { useContext, useEffect, useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
+  Head,
   Layout,
   Media,
   Spacer,
@@ -11,7 +12,6 @@ import {
   useMutation,
   ViewerContext,
 } from '~/components'
-import { updateViewerUnreadFollowing } from '~/components/GQL'
 import { MeFollowQuery, ReadFollowingFeedMutation } from '~/gql/graphql'
 
 import Feed from './Feed'
@@ -45,7 +45,17 @@ const BaseFollow = ({ tab }: BaseFollowProps) => {
   const [readFollowing] = useMutation<ReadFollowingFeedMutation>(
     READ_FOLLOWING,
     {
-      update: updateViewerUnreadFollowing,
+      update: (cache) => {
+        cache.modify({
+          id: cache.identify(viewer),
+          fields: {
+            status: (existingStatus) => ({
+              ...existingStatus,
+              unreadFollowing: false,
+            }),
+          },
+        })
+      },
     }
   )
   const { data, loading } = useQuery<MeFollowQuery>(ME_FOLLOW)
@@ -68,9 +78,15 @@ const BaseFollow = ({ tab }: BaseFollowProps) => {
 }
 
 const Follow = () => {
+  const intl = useIntl()
   const [tab, setTab] = useState<TABS>('All')
+
   return (
     <Layout.Main>
+      <Head
+        title={intl.formatMessage({ defaultMessage: 'Follow', id: 'ieGrWo' })}
+      />
+
       <Media at="sm">
         <Layout.Header
           left={

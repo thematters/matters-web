@@ -1,10 +1,8 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import _chunk from 'lodash/chunk'
 import _random from 'lodash/random'
 import { useContext, useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
 
-import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   Media,
@@ -15,13 +13,12 @@ import {
   usePublicQuery,
   UserDigest,
   ViewerContext,
-  ViewMoreCard,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
-import { FeedAuthorsQuery, LastFetchRandomQuery } from '~/gql/graphql'
+import { FeedAuthorsPublicQuery, LastFetchRandomQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
-import { FEED_AUTHORS } from './gql'
+import { FEED_AUTHORS_PUBLIC } from './gql'
 import styles from './styles.module.css'
 
 const Authors = () => {
@@ -39,10 +36,9 @@ const Authors = () => {
   const perPage = 6
   const perColumn = 3
   const randomMaxSize = 50
-  const { data, loading, error, refetch } = usePublicQuery<FeedAuthorsQuery>(
-    FEED_AUTHORS,
+  const { data, loading, error } = usePublicQuery<FeedAuthorsPublicQuery>(
+    FEED_AUTHORS_PUBLIC,
     {
-      notifyOnNetworkStatusChange: true,
       variables: { random: lastRandom || 0, first: perPage },
     },
     { publicQuery: !viewer.isAuthed }
@@ -56,12 +52,12 @@ const Authors = () => {
         perPage
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
-    refetch({ random })
 
-    client.writeData({
-      id: 'LastFetchRandom:local',
-      data: { feedAuthors: random },
-    })
+    lastFetchRandom &&
+      client.cache.modify({
+        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
+        fields: { feedAuthors: () => random },
+      })
   }
 
   useEffect(() => {
@@ -115,10 +111,10 @@ const Authors = () => {
               <section>
                 {chunks.map(({ node, cursor }, nodeIndex) => (
                   <UserDigest.Rich
+                    is="link"
                     key={node.id}
                     user={node}
-                    is="link"
-                    spacing={[12, 0]}
+                    spacing={[16, 0]}
                     bgColor="none"
                     hasFollow={false}
                     hasState={false}
@@ -136,23 +132,6 @@ const Authors = () => {
             </Slides.Item>
           ))}
       </Slides>
-
-      <Media lessThan="md">
-        <section className={styles.backToAll}>
-          <ViewMoreCard
-            spacing={[12, 12]}
-            href={PATHS.AUTHORS}
-            textIconProps={{
-              size: 16,
-              weight: 'semibold',
-              spacing: 4,
-            }}
-            textAlign="center"
-          >
-            <FormattedMessage defaultMessage="View All" id="wbcwKd" />
-          </ViewMoreCard>
-        </section>
-      </Media>
     </section>
   )
 }

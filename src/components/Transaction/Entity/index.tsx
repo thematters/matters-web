@@ -11,8 +11,8 @@ const Entity = ({ tx }: { tx: DigestTransactionFragment }) => {
   const path = article
     ? toPath({ page: 'articleDetail', article })
     : circle
-    ? toPath({ page: 'circleDetail', circle })
-    : null
+      ? toPath({ page: 'circleDetail', circle })
+      : null
 
   const isDonation = purpose === 'donation'
   const isSubscription = purpose === 'subscriptionSplit'

@@ -35,8 +35,9 @@ export const getSelectCampaigns = ({
     const isCampaignEnded = !!end && new Date(createdAt) >= new Date(end)
     const isCampaignActive = campaign?.state === CampaignState.Active
 
-    // only show appliedCampaign if the article or draft is created during the writing period
-    return isCampaignStarted && !isCampaignEnded && isCampaignActive
+    // only show appliedCampaign if the article or draft
+    // is created during the writing period
+    return (isCampaignStarted && !isCampaignEnded) || isCampaignActive
   })
 
   const selectedCampaign = campaigns?.find((campaign) => {
@@ -78,7 +79,7 @@ const SelectCampaign = ({
         ?.stages.filter((s) => {
           const period = s.period
 
-          if (!period) return false
+          if (!period) return true
 
           return now >= new Date(period.start)
         })
@@ -104,7 +105,7 @@ const SelectCampaign = ({
           }),
         ]}
         size={14}
-        color="freeWriteBlue"
+        color="campaignBlue"
       />
       {selectedCampaign?.id &&
         availableStages &&
@@ -138,7 +139,7 @@ const SelectCampaign = ({
                 }),
               ]}
               size={14}
-              color="freeWriteBlue"
+              color="campaignBlue"
             />
           </>
         )}

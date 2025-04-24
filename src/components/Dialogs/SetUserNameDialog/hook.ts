@@ -1,4 +1,4 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import { useContext, useEffect, useState } from 'react'
 
 import { MAX_USER_NAME_LENGTH, MIN_USER_NAME_LENGTH } from '~/common/enums'
@@ -23,15 +23,11 @@ export const useAvailableUserName = ({
   const googleId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Google
   )?.email
-  const facebookId = viewer.info.socialAccounts.find(
-    (s) => s.type === SocialAccountType.Facebook
-  )?.userName
   const twitterId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Twitter
   )?.userName
 
-  const presetUserName =
-    (viewer.info.email as string) || googleId || facebookId || twitterId
+  const presetUserName = (viewer.info.email as string) || googleId || twitterId
 
   const [loading, setLoading] = useState(enable && !!presetUserName)
   const [index, setIndex] = useState(0)

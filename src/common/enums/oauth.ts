@@ -302,7 +302,6 @@ export const CALLBACK_VERIFIER = {
 
 export const OAUTH_CALLBACK_PROVIDERS = {
   Google: 'google',
-  Facebook: 'facebook',
   Twitter: 'twitter',
 }
 

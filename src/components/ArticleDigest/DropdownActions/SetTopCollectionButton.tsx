@@ -22,14 +22,20 @@ const SET_TOP_COLLECTION = gql`
 const SetTopCollectionButton = ({
   collectionId,
   articleId,
-  onClick,
 }: {
   articleId: string
   collectionId: string
-  onClick: () => void
 }) => {
   const [update] = useMutation<SetTopCollectionMutation>(SET_TOP_COLLECTION, {
     variables: { collectionId, articleId },
+    update(cache) {
+      updateUserCollectionDetail({
+        cache,
+        collectionId,
+        articleId,
+        type: 'setTop',
+      })
+    },
   })
 
   return (
@@ -42,19 +48,7 @@ const SetTopCollectionButton = ({
         />
       }
       icon={<Icon icon={IconArrowLTop} size={20} />}
-      onClick={async () => {
-        onClick()
-        await update({
-          update(cache) {
-            updateUserCollectionDetail({
-              cache,
-              collectionId,
-              articleId,
-              type: 'setTop',
-            })
-          },
-        })
-      }}
+      onClick={update}
     />
   )
 }

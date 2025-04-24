@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
 import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
@@ -53,7 +53,7 @@ const RecommendArticleButton: React.FC<RecommendArticleButtonProps> = ({
   )
 
   if (loading) {
-    return <Menu.Item icon={<Spinner size={20} />} text="正在加載中…" />
+    return <Menu.Item icon={<Spinner size={20} />} text="加載中…" />
   }
 
   if (data?.article?.__typename !== 'Article') return null

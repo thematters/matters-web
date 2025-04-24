@@ -11,7 +11,11 @@ import { ArticleFeedsCampaignFragment } from '~/gql/graphql'
 
 import MainFeed from './MainFeed'
 import styles from './styles.module.css'
-import ArticleFeedsTabs, { CampaignFeedType, FEED_TYPE_ALL } from './Tabs'
+import ArticleFeedsTabs, {
+  CampaignFeedType,
+  FEED_TYPE_ALL,
+  FEED_TYPE_FEATURED,
+} from './Tabs'
 
 const ArticleFeeds = ({
   campaign,
@@ -31,18 +35,30 @@ const ArticleFeeds = ({
     setFeedType(newType)
   }
 
+  const isFeaturedFeed = feedType === FEED_TYPE_FEATURED
   const selectedStage = campaign.stages.filter(
     (stage) => stage.id === feedType
   )[0]
-  const description =
+
+  const featuredDescription =
+    campaign[
+      lang === 'zh_hans'
+        ? 'featuredDescriptionZhHans'
+        : lang === 'zh_hant'
+          ? 'featuredDescriptionZhHant'
+          : 'featuredDescriptionEn'
+    ]
+
+  const stageDescription =
     selectedStage &&
     selectedStage[
       lang === 'zh_hans'
         ? 'descriptionZhHans'
         : lang === 'zh_hant'
-        ? 'descriptionZhHant'
-        : 'descriptionEn'
+          ? 'descriptionZhHant'
+          : 'descriptionEn'
     ]
+  const description = isFeaturedFeed ? featuredDescription : stageDescription
 
   return (
     <section className={styles.feeds}>
@@ -66,6 +82,9 @@ const ArticleFeeds = ({
 ArticleFeeds.fragments = gql`
   fragment ArticleFeedsCampaign on WritingChallenge {
     id
+    featuredDescriptionZhHant: featuredDescription(input: { language: zh_hant })
+    featuredDescriptionZhHans: featuredDescription(input: { language: zh_hans })
+    featuredDescriptionEn: featuredDescription(input: { language: en })
     announcements {
       id
       campaigns {

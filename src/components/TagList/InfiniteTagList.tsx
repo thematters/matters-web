@@ -1,5 +1,3 @@
-import { FormattedMessage } from 'react-intl'
-
 import { analytics } from '~/common/utils'
 import { InfiniteScroll, TagDigest } from '~/components'
 
@@ -31,11 +29,7 @@ const InfiniteTagList = ({
     <InfiniteScroll
       hasNextPage={pageInfo.hasNextPage && edges.length < maxResults}
       loadMore={loadMore}
-      eof={
-        showEOFMessage && (
-          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
-        )
-      }
+      eof={showEOFMessage}
     >
       <ul className={styles.tagList}>
         {edges.map(({ node, cursor }, i) =>

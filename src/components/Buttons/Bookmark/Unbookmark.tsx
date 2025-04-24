@@ -17,27 +17,40 @@ import { ToggleBookmarkArticleMutation } from '~/gql/graphql'
 
 import TOGGLE_BOOKMARK_ARTICLE from '../../GQL/mutations/toggleBookmarkArticle'
 
-export type UnsubscribeProps = {
-  articleId?: string
+export type UnbookmarkProps = {
+  articleId: string
   iconSize?: Extract<IconSize, 20 | 24>
   disabled?: boolean
   inCard?: boolean
 } & ButtonProps
 
-const Unsubscribe = ({
+const Unbookmark = ({
   articleId,
   iconSize,
   disabled,
   inCard,
   ...buttonProps
-}: UnsubscribeProps) => {
+}: UnbookmarkProps) => {
   const viewer = useContext(ViewerContext)
   const intl = useIntl()
 
-  const [unsubscribe] = useMutation<ToggleBookmarkArticleMutation>(
+  const [unbookmark] = useMutation<ToggleBookmarkArticleMutation>(
     TOGGLE_BOOKMARK_ARTICLE,
     {
       variables: { id: articleId, enabled: false },
+      optimisticResponse: {
+        toggleBookmarkArticle: {
+          id: articleId,
+          bookmarked: false,
+        },
+      },
+      update: (cache) => {
+        cache.evict({
+          id: cache.identify(viewer),
+          fieldName: 'bookmarkedArticles',
+        })
+        cache.gc()
+      },
     }
   )
 
@@ -53,7 +66,7 @@ const Unsubscribe = ({
       return
     }
 
-    await unsubscribe()
+    await unbookmark()
 
     toast.success({
       message: (
@@ -68,8 +81,8 @@ const Unsubscribe = ({
         text={
           <FormattedMessage
             defaultMessage="Remove bookmark"
-            id="FEkOVJ"
-            description="src/components/Buttons/Bookmark/Unsubscribe.tsx"
+            id="cK3TLr"
+            description="src/components/Buttons/Bookmark/Unbookmark.tsx"
           />
         }
         icon={<Icon icon={IconSave2} size={iconSize} />}
@@ -85,8 +98,8 @@ const Unsubscribe = ({
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       aria-label={intl.formatMessage({
         defaultMessage: 'Remove bookmark',
-        id: 'FEkOVJ',
-        description: 'src/components/Buttons/Bookmark/Unsubscribe.tsx',
+        id: 'cK3TLr',
+        description: 'src/components/Buttons/Bookmark/Unbookmark.tsx',
       })}
       onClick={onClick}
       disabled={disabled}
@@ -98,4 +111,4 @@ const Unsubscribe = ({
   )
 }
 
-export default Unsubscribe
+export default Unbookmark

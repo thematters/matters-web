@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useEffect, useState } from 'react'
 
 import { LatestVersionArticleQuery } from '~/gql/graphql'
@@ -21,7 +21,7 @@ const PublishState = ({ articleId, currVersionId }: PublishStateProps) => {
   const isPending = publishState === 'pending'
   const isPublished = publishState === 'published'
 
-  const { data, startPolling, stopPolling, refetch } =
+  const { data, startPolling, stopPolling, refetch, client } =
     useQuery<LatestVersionArticleQuery>(LATEST_VERSION_ARTICLE, {
       variables: { id: articleId },
       errorPolicy: 'none',
@@ -50,6 +50,11 @@ const PublishState = ({ articleId, currVersionId }: PublishStateProps) => {
 
     stopPolling()
     setPublishState('published')
+
+    client.cache.evict({
+      id: client.cache.identify({ __typename: 'Article', id: articleId }),
+    })
+    client.cache.gc()
   }, [latestVersionId])
 
   return (

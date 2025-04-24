@@ -70,6 +70,18 @@ const SettingsList = ({
     disableChangeCanComment,
   }
   const handleConfirm = () => {
+    if (!!selectedCampaign && !!restProps.circle) {
+      toast.error({
+        message: (
+          <FormattedMessage
+            defaultMessage="Article cannot be added to event or circle at the same time"
+            id="cPXsvZ"
+          />
+        ),
+      })
+      return
+    }
+
     if (
       selectedCampaign &&
       selectedCampaign.stages.length > 0 &&
@@ -135,10 +147,7 @@ const SettingsList = ({
           {campaigns && campaigns.length > 0 && editCampaign && (
             <section className={styles.campaign}>
               <h3 className={styles.title}>
-                <FormattedMessage
-                  defaultMessage="Add to FreeWrite"
-                  id="6pc948"
-                />
+                <FormattedMessage defaultMessage="Add to event" id="XTRqqT" />
               </h3>
               <SelectCampaign
                 campaigns={campaigns}

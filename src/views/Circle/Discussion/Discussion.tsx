@@ -1,7 +1,4 @@
-// import { useLazyQuery } from '@apollo/react-hooks'
 import jump from 'jump.js'
-// import _differenceBy from 'lodash/differenceBy'
-// import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -256,13 +253,11 @@ const CricleDiscussion = () => {
         {!comments ||
           (comments.length <= 0 && (
             <EmptyComment
-              description={
-                <FormattedMessage
-                  defaultMessage="No discussion yet"
-                  id="50cquj"
-                  description="src/views/Circle/Discussion/Discussion.tsx"
-                />
-              }
+              description={intl.formatMessage({
+                defaultMessage: 'No discussion yet',
+                id: '50cquj',
+                description: 'src/views/Circle/Discussion/Discussion.tsx',
+              })}
             />
           ))}
 

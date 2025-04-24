@@ -1,12 +1,10 @@
-import { useMutation } from '@apollo/react-hooks'
-import { createContext, useRef } from 'react'
+import { gql, useApolloClient, useMutation } from '@apollo/client'
+import { createContext, useContext, useRef } from 'react'
 
 import { randomString } from '~/common/utils'
-import { useRoute } from '~/components'
+import { useRoute, ViewerContext } from '~/components'
 import CREATE_DRAFT from '~/components/GQL/mutations/createDraft'
-import { CreateDraftMutation } from '~/gql/graphql'
-import { ME_DRAFTS_FEED } from '~/views/Me/Drafts/gql'
-import { ME_WORKS_TABS } from '~/views/Me/Works/WorksTabs/gql'
+import { CreateDraftMutation, DraftUpdatedAtFragment } from '~/gql/graphql'
 
 type Job = {
   id: string
@@ -23,6 +21,7 @@ export const DraftDetailStateContext = createContext(
     getDraftId: () => string | undefined
     isNewDraft: () => boolean
     createDraft: (props: { onCreate: (draftId: string) => any }) => any
+    getDraftUpdatedAt: () => string | undefined
   }
 )
 
@@ -37,6 +36,7 @@ export const DraftDetailStateProvider = ({
   // Run request jobs in sequence
   const jobsRef = useRef<Job[]>([])
   const runningRef = useRef<string>()
+  const client = useApolloClient()
 
   // push request job
   const addRequest = (fn: () => Promise<any>): Promise<any> => {
@@ -89,10 +89,16 @@ export const DraftDetailStateProvider = ({
   /**
    * Draft getter and setter
    */
+  const viewer = useContext(ViewerContext)
   const { router } = useRoute()
   const [create] = useMutation<CreateDraftMutation>(CREATE_DRAFT, {
-    // refetch /me/drafts once a new draft has been created
-    refetchQueries: [{ query: ME_DRAFTS_FEED }, { query: ME_WORKS_TABS }],
+    update: (cache) => {
+      cache.evict({
+        id: cache.identify(viewer),
+        fieldName: 'drafts',
+      })
+      cache.gc()
+    },
   })
 
   // create draft and shallow replace URL
@@ -129,9 +135,37 @@ export const DraftDetailStateProvider = ({
     return draftId === undefined
   }
 
+  // Read draft updatedAt from cache
+  const getDraftUpdatedAt = () => {
+    const draftId = getDraftId()
+    if (!draftId) return undefined
+
+    try {
+      const cacheData = client.readFragment<DraftUpdatedAtFragment>({
+        id: `Draft:${draftId}`,
+        fragment: gql`
+          fragment DraftUpdatedAt on Draft {
+            id
+            updatedAt
+          }
+        `,
+      })
+      return cacheData?.updatedAt
+    } catch (error) {
+      console.error('Error reading draft updatedAt from cache:', error)
+      return undefined
+    }
+  }
+
   return (
     <DraftDetailStateContext.Provider
-      value={{ addRequest, createDraft, getDraftId, isNewDraft }}
+      value={{
+        addRequest,
+        createDraft,
+        getDraftId,
+        isNewDraft,
+        getDraftUpdatedAt,
+      }}
     >
       {children}
     </DraftDetailStateContext.Provider>

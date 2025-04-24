@@ -28,7 +28,7 @@ import {
 
 import StripeCheckout from '../StripeCheckout'
 import { SUBSCRIBE_CIRCLE } from './gql'
-import Head from './Head'
+import ContentHead from './Head'
 import Hint from './Hint'
 import Processing from './Processing'
 
@@ -93,7 +93,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
     setSubmitting(true)
     analytics.trackEvent('click_button', { type: 'subscribe_confirm' })
 
-    let data: SubscribeCircleMutation | undefined
+    let data: SubscribeCircleMutation | null | undefined
 
     try {
       const subscribeResult = await subscribeCircle({
@@ -167,7 +167,7 @@ const BaseCardPayment: React.FC<CardPaymentProps> = ({
       />
 
       <Dialog.Content fixedHeight>
-        <Head circle={circle} />
+        <ContentHead circle={circle} />
 
         <StripeCheckout error={checkoutError} onChange={onCheckoutChange} />
 

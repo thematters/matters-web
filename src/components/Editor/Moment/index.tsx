@@ -1,7 +1,8 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import {
   Editor,
   EditorContent,
+  Extension,
   Mention,
   momentEditorExtensions,
   PasteDropFile,
@@ -9,11 +10,12 @@ import {
   useEditor,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ADD_MOMENT_ASSETS } from '~/common/enums'
 import { getValidFiles } from '~/common/utils'
+import { LanguageContext } from '~/components/Context'
 
 import {
   CustomShortcuts,
@@ -39,6 +41,7 @@ const MomentEditor: React.FC<Props> = ({
   setEditor,
 }) => {
   const client = useApolloClient()
+  const { lang } = useContext(LanguageContext)
   const intl = useIntl()
   placeholder =
     placeholder ||
@@ -50,6 +53,7 @@ const MomentEditor: React.FC<Props> = ({
 
   const editor = useEditor({
     // autofocus: true,
+    immediatelyRender: false,
     content: content || '',
     onUpdate: async ({ editor, transaction }) => {
       const content = editor.getHTML()
@@ -68,7 +72,7 @@ const MomentEditor: React.FC<Props> = ({
       Mention.configure({
         suggestion: makeMentionSuggestion({ client }),
       }),
-      SmartLink.configure(makeSmartLinkOptions({ client })),
+      SmartLink.configure(makeSmartLinkOptions({ client, lang })),
       PasteDropFile.configure({
         onDrop: async (editor, files, pos) => {
           const validFiles = await getValidFiles(files)
@@ -88,7 +92,7 @@ const MomentEditor: React.FC<Props> = ({
         },
       }),
       ...momentEditorExtensions,
-    ],
+    ] as Extension[],
   })
 
   useEffect(() => {

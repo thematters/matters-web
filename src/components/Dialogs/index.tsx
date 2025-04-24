@@ -1,8 +1,6 @@
 // User
 export * from './EditProfileDialog'
-export * from './ENSDialog'
 export * from './LikeCoinDialog'
-export * from './RssFeedDialog'
 
 // Settings
 export * from './AddWalletLoginDialog'

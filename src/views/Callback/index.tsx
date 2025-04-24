@@ -18,9 +18,6 @@ const Callback = () => {
       {provider === CALLBACK_PROVIDERS.Twitter && (
         <SocialCallback type={SocialAccountType.Twitter} />
       )}
-      {provider === CALLBACK_PROVIDERS.Facebook && (
-        <SocialCallback type={SocialAccountType.Facebook} />
-      )}
       {provider === CALLBACK_PROVIDERS.EmailVerification && (
         <EmailVerification />
       )}

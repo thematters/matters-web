@@ -1,7 +1,13 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog, useDialogSwitch, useMutation } from '~/components'
+import {
+  Dialog,
+  useDialogSwitch,
+  useMutation,
+  ViewerContext,
+} from '~/components'
 import {
   DeleteMomentMutation,
   MomentDigestDropdownActionsMomentFragment,
@@ -22,25 +28,41 @@ export interface DeleteMomentDialogProps {
 }
 
 const DeleteMomentDialog = ({ moment, children }: DeleteMomentDialogProps) => {
+  const viewer = useContext(ViewerContext)
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
   const { id } = moment
-  const { USER_PROFILE_PUBLIC } = require('~/views/User/UserProfile/gql')
+
   const [deleteMoment] = useMutation<DeleteMomentMutation>(DELETE_MOMENT, {
     variables: { id },
     update: (cache) => {
-      // FIXME: Why not update user profile tab writing count?
-      // const result = updateUserProfile({
-      //   cache,
-      //   userName: moment.author.userName!,
-      //   type: 'decreaseMoment',
-      // })
+      // Remove the deleted moment from the user's writings
+      cache.modify({
+        id: cache.identify(viewer),
+        fields: {
+          writings(existingWritingsRefs, { readField }) {
+            return {
+              ...existingWritingsRefs,
+              edges: existingWritingsRefs.edges.filter(
+                ({ node }: { node: any }) => readField('id', node) !== id
+              ),
+            }
+          },
+        },
+      })
+
+      // Decrement the moment count in the viewer's status
+      cache.modify({
+        id: cache.identify(viewer),
+        fields: {
+          status(existing) {
+            return {
+              ...existing,
+              momentCount: existing.momentCount - 1,
+            }
+          },
+        },
+      })
     },
-    refetchQueries: [
-      {
-        query: USER_PROFILE_PUBLIC,
-        variables: { userName: moment.author.userName },
-      },
-    ],
   })
 
   const onDelete = async () => {

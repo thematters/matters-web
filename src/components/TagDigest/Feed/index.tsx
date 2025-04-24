@@ -29,7 +29,7 @@ const Feed = ({ tag, onClick }: TagDigestFeedProps) => {
     tag,
   })
 
-  const numArticles = abbr(tag.numArticles, 2)
+  const numArticles = abbr(tag.numArticles, 1)
 
   return (
     <Link {...path} legacyBehavior onClick={onClick}>

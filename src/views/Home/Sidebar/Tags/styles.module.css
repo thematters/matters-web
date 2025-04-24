@@ -2,6 +2,13 @@
   & :global(.list-item > .card) {
     margin: var(--sp8) calc(var(--sp8) * -1);
   }
+
+  & .list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp16);
+    margin-top: var(--sp8);
+  }
 }
 
 .content {

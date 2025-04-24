@@ -5,7 +5,6 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { TEST_ID, Z_INDEX } from '~/common/enums'
 import { Icon, Tooltip, useMutation, ViewerContext } from '~/components'
-import { updateUserWritings } from '~/components/GQL'
 import { UnpinArticleMutation, UnpinCollectionMutation } from '~/gql/graphql'
 
 import styles from './styles.module.css'
@@ -59,11 +58,15 @@ const UnPinButton = ({
             },
           },
       update: (cache) => {
-        updateUserWritings({
-          cache,
-          targetId: id,
-          userName,
-          type: 'unpin',
+        cache.modify({
+          id: cache.identify(viewer),
+          fields: {
+            pinnedWorks(existingPinnedWorks, { readField }) {
+              return existingPinnedWorks.filter(
+                (work: any) => readField('id', work) !== id
+              )
+            },
+          },
         })
       },
     }

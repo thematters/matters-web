@@ -19,7 +19,6 @@ export class UserProfilePage {
   userName: Locator
   bio: Locator
   // followButton: Locator
-  // rssButton: Locator
   // ethAddress: Locator
 
   // feeds

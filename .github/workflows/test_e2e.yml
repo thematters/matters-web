@@ -44,18 +44,18 @@ jobs:
         if: steps.playwright_cache.outputs.cache-hit != 'true'
 
       - name: Generate Types (Develop)
-        if: github.base_ref != 'master'
+        if: github.base_ref != 'master' && github.base_ref != 'main'
         run: npm run gen:type
 
       - name: Generate Types (production)
-        if: github.base_ref == 'master'
+        if: github.base_ref == 'master' || github.base_ref == 'main'
         run: npm run gen:type:prod
 
       - name: Run Playwright tests
         run: cp .env.dev .env.local && npm run test:e2e
 
       - name: Output Playwright tests
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: playwright-report

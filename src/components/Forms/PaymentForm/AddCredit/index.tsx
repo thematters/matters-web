@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import {
   CardElement,
   Elements,
@@ -151,7 +151,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
       /**
        * Create Transaction
        */
-      let data: AddCreditMutation | undefined
+      let data: AddCreditMutation | null | undefined
 
       try {
         const txResult = await addCredit({ variables: { input: { amount } } })

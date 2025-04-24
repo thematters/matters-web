@@ -50,8 +50,8 @@
   @mixin flex-center-space-between;
 
   margin-top: var(--sp8);
-  font-size: var(--text14);
-  line-height: 1.375rem;
+  font-size: var(--text15);
+  line-height: 1.733rem;
 
   & .left {
     @mixin flex-start-center;
@@ -60,6 +60,14 @@
   & .period {
     display: inline-block;
   }
+}
+
+.description {
+  margin-top: var(--sp8);
+  font-size: var(--text15);
+  line-height: 1.733rem;
+  color: var(--color-grey-dark);
+  white-space: pre-wrap;
 }
 
 .extra {

@@ -14,7 +14,7 @@ export type CardBgColor =
   | 'white'
   | 'transparent'
   | 'none'
-  | 'freeWriteBlue'
+  | 'campaignBlue'
 export type CardBgHoverColor =
   | 'greyHover'
   | 'greyLighter'
@@ -250,8 +250,8 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
         {...(role
           ? { ['role']: role }
           : !disabled
-          ? { ['role']: 'button' }
-          : {})}
+            ? { ['role']: 'button' }
+            : {})}
       >
         {children}
       </section>

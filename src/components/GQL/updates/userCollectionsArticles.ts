@@ -1,4 +1,4 @@
-import { DataProxy } from 'apollo-cache'
+import { ApolloCache } from '@apollo/client/cache'
 
 import {
   AddCollectionsArticleUserPublicQuery,
@@ -12,7 +12,7 @@ export const updateUserCollectionsArticles = ({
   userName,
   type,
 }: {
-  cache: DataProxy
+  cache: ApolloCache<any>
   articleId: string
   collection?: CreateCollectionMutation['putCollection']
   userName?: string | null
@@ -44,7 +44,8 @@ export const updateUserCollectionsArticles = ({
         if (!collection) {
           return
         }
-        edges.unshift({
+
+        const newEdge = {
           __typename: 'CollectionEdge',
           node: {
             ...collection,
@@ -55,24 +56,26 @@ export const updateUserCollectionsArticles = ({
             },
             contains: false,
           },
-        })
-        break
-    }
+        }
 
-    cache.writeQuery({
-      query: ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
-      variables: { userName, id: articleId },
-      data: {
-        ...data,
-        user: {
-          ...data.user,
-          collections: {
-            ...data.user.collections,
-            edges,
+        const newEdges = [newEdge, ...edges]
+
+        cache.writeQuery({
+          query: ADD_COLLECTIONS_ARTICLE_USER_PUBLIC,
+          variables: { userName, id: articleId },
+          data: {
+            ...data,
+            user: {
+              ...data.user,
+              collections: {
+                ...data.user.collections,
+                edges: newEdges,
+              },
+            },
           },
-        },
-      },
-    })
+        })
+        return
+    }
   } catch (e) {
     console.error(e)
   }

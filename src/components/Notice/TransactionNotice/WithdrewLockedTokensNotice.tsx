@@ -26,8 +26,8 @@ const WithdrewLockedTokensNotice = ({
   const link = isFailed
     ? `${PATHS.ME_WALLET}?${URL_ME_WALLET.OPEN_WITHDRAW_VAULT_USDT_DIALOG.key}=${URL_ME_WALLET.OPEN_WITHDRAW_VAULT_USDT_DIALOG.value}`
     : blockchainTx
-    ? `${explorers[blockchainTx.chain].url}/tx/${blockchainTx.txHash}`
-    : ''
+      ? `${explorers[blockchainTx.chain].url}/tx/${blockchainTx.txHash}`
+      : ''
 
   if (!isFailed && !blockchainTx) {
     return null

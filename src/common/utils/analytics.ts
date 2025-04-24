@@ -85,6 +85,7 @@ export interface ClickButtonProp {
     | 'history_version'
     | 'ipfs'
     | 'campaign_detail_entrance'
+    | 'publish'
     | 'edit'
     | 'edited'
     | 'appreciate'
@@ -105,6 +106,7 @@ export interface ClickButtonProp {
     | 'campaign_detail_link'
     | `campaign_detail_tab_${string}`
     | `user_profile_tab_${string}`
+    | `follow_tab_${string}`
   pageType?: PageType
   pageComponent?: PageComponent
 }
@@ -316,6 +318,8 @@ type ArticleFeedType =
 
 type CollectionFeedType =
   | 'user_collection'
+  | 'collection_detail_asc'
+  | 'collection_detail_dsc'
   | 'collection_article'
   | 'user-collection-articles'
   | 'user-collection-articles-search'
@@ -371,6 +375,7 @@ type PageType =
   | 'circle_detail'
   | 'edit_draft'
   | 'campaign_detail'
+  | 'follow'
 
 type PageComponent =
   | 'home_feed_tab'

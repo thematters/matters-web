@@ -1,8 +1,7 @@
 {
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-recess-order",
-    "stylelint-config-prettier"
+    "stylelint-config-recess-order"
   ],
   "plugins": ["stylelint-prettier"],
   "rules": {

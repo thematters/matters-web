@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
 import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'

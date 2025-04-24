@@ -225,13 +225,11 @@ const CricleBroadcast = () => {
         {!comments ||
           (comments.length <= 0 && (
             <EmptyComment
-              description={
-                <FormattedMessage
-                  defaultMessage="No broadcast yet."
-                  id="mWjpk9"
-                  description="src/views/Circle/Broadcast/Broadcast.tsx"
-                />
-              }
+              description={intl.formatMessage({
+                defaultMessage: 'No broadcast yet.',
+                id: 'mWjpk9',
+                description: 'src/views/Circle/Broadcast/Broadcast.tsx',
+              })}
             />
           ))}
 

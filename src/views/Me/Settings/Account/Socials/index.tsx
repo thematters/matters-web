@@ -1,8 +1,7 @@
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconFacebook2 } from '@/public/static/icons/24px/facebook2.svg'
 import { ReactComponent as IconGoogle2 } from '@/public/static/icons/24px/google2.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { ReactComponent as IconX2 } from '@/public/static/icons/24px/x2.svg'
@@ -41,9 +40,6 @@ const Socials = () => {
   const googleId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Google
   )?.email
-  const facebookId = viewer.info.socialAccounts.find(
-    (s) => s.type === SocialAccountType.Facebook
-  )?.userName
   const twitterId = viewer.info.socialAccounts.find(
     (s) => s.type === SocialAccountType.Twitter
   )?.userName
@@ -145,17 +141,6 @@ const Socials = () => {
     }
   }, [])
 
-  // FIXME: For canary release purpose,
-  // we don't allow user to remove facebook login
-  // unless the user has least two login methods
-  const canEmailLogin = !!viewer.info.email
-  const canWalletLogin = !!viewer.info.ethAddress
-  const nonFacebookSocials = viewer.info.socialAccounts.filter(
-    (s) => s.type !== SocialAccountType.Facebook
-  )
-  const canRemoveNonFacebookLogins =
-    +canEmailLogin + +canWalletLogin + nonFacebookSocials.length > 1
-
   return (
     <>
       {/* Google */}
@@ -173,15 +158,11 @@ const Socials = () => {
               }
               rightText={googleId}
               rightIcon={
-                googleId && canRemoveNonFacebookLogins ? (
+                googleId ? (
                   <Icon icon={IconTimes} size={20} color="greyDarker" />
                 ) : undefined
               }
-              onClick={
-                googleId && canRemoveNonFacebookLogins
-                  ? () => openDialog()
-                  : undefined
-              }
+              onClick={googleId ? () => openDialog() : undefined}
               right={
                 googleId ? undefined : (
                   <>
@@ -214,15 +195,11 @@ const Socials = () => {
               }
               rightText={twitterId ? `@${twitterId}` : undefined}
               rightIcon={
-                twitterId && canRemoveNonFacebookLogins ? (
+                twitterId ? (
                   <Icon icon={IconTimes} size={20} color="greyDarker" />
                 ) : undefined
               }
-              onClick={
-                twitterId && canRemoveNonFacebookLogins
-                  ? () => openDialog()
-                  : undefined
-              }
+              onClick={twitterId ? () => openDialog() : undefined}
               right={
                 twitterId ? undefined : (
                   <>
@@ -244,31 +221,6 @@ const Socials = () => {
           )
         }}
       </RemoveSocialLoginDialog>
-
-      {/* Facebook */}
-      {facebookId && (
-        <RemoveSocialLoginDialog type={SocialAccountType.Facebook}>
-          {({ openDialog }) => {
-            return (
-              <TableView.Cell
-                title={
-                  <TextIcon
-                    icon={<Icon icon={IconFacebook2} size={22} />}
-                    spacing={12}
-                  >
-                    Facebook
-                  </TextIcon>
-                }
-                rightText={`@${facebookId}`}
-                rightIcon={
-                  <Icon icon={IconTimes} size={20} color="greyDarker" />
-                }
-                onClick={() => openDialog()}
-              />
-            )
-          }}
-        </RemoveSocialLoginDialog>
-      )}
     </>
   )
 }

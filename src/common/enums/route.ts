@@ -76,6 +76,61 @@ type ROUTE_KEY =
   | 'TOS'
   | 'RECOMMENDATION'
 
+export const PROTECTED_ROUTES: {
+  key: ROUTE_KEY
+  pathname: string
+}[] = [
+  // Me
+  { key: 'ME_DRAFTS', pathname: '/me/drafts' },
+  { key: 'ME_PUBLISHED', pathname: '/me/published' },
+  { key: 'ME_ARCHIVED', pathname: '/me/archived' },
+  { key: 'ME_BOOKMARKS_ARTICLES', pathname: '/me/bookmarks/articles' },
+  { key: 'ME_BOOKMARKS_TAGS', pathname: '/me/bookmarks/tags' },
+  { key: 'ME_HISTORY', pathname: '/me/history' },
+  { key: 'ME_HISTORY_COMMENTS', pathname: '/me/history/comments' },
+  { key: 'ME_HISTORY_LIKES_SENT', pathname: '/me/history/likes/sent' },
+  { key: 'ME_HISTORY_LIKES_RECEIVED', pathname: '/me/history/likes/received' },
+  { key: 'ME_NOTIFICATIONS', pathname: '/me/notifications' },
+  { key: 'ME_WALLET', pathname: '/me/wallet' },
+  { key: 'ME_WALLET_TRANSACTIONS', pathname: '/me/wallet/transactions' },
+  { key: 'ME_ANALYTICS', pathname: '/me/analytics' },
+
+  // Settings
+  { key: 'ME_SETTINGS', pathname: '/me/settings' },
+  { key: 'ME_SETTINGS_NOTIFICATIONS', pathname: '/me/settings/notifications' },
+  {
+    key: 'ME_SETTINGS_NOTIFICATIONS_CIRCLE',
+    pathname: '/me/settings/notifications/circle',
+  },
+  {
+    key: 'ME_SETTINGS_MISC',
+    pathname: '/me/settings/misc',
+  },
+  { key: 'ME_SETTINGS_BLOCKED', pathname: '/me/settings/blocked' },
+
+  // Article
+  { key: 'ARTICLE_DETAIL_EDIT', pathname: '/a/[shortHash]/edit' },
+
+  // Draft
+  { key: 'ME_DRAFT_NEW', pathname: '/me/drafts/new' },
+  { key: 'ME_DRAFT_DETAIL', pathname: '/me/drafts/[draftId]' },
+
+  // Circle
+  { key: 'CIRCLE_SETTINGS', pathname: '/[name]/settings' },
+  {
+    key: 'CIRCLE_SETTINGS_EDIT_PROFILE',
+    pathname: '/[name]/settings/edit-profile',
+  },
+  {
+    key: 'CIRCLE_SETTINGS_MANAGE_INVITATION',
+    pathname: '/[name]/settings/manage-invitation',
+  },
+  { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
+
+  // OAuth
+  { key: 'OAUTH_AUTHORIZE', pathname: '/oauth/authorize' },
+]
+
 export const ROUTES: {
   key: ROUTE_KEY
   pathname: string
@@ -105,7 +160,6 @@ export const ROUTES: {
 
   // Article
   { key: 'ARTICLE_DETAIL', pathname: '/a/[shortHash]' },
-  { key: 'ARTICLE_DETAIL_EDIT', pathname: '/a/[shortHash]/edit' },
   { key: 'ARTICLE_DETAIL_HISTORY', pathname: '/a/[shortHash]/history' },
 
   // Moment
@@ -116,16 +170,6 @@ export const ROUTES: {
   { key: 'CIRCLE_DETAIL', pathname: '/[name]' },
   { key: 'CIRCLE_DISCUSSION', pathname: '/[name]/discussion' },
   { key: 'CIRCLE_BROADCAST', pathname: '/[name]/broadcast' },
-  { key: 'CIRCLE_SETTINGS', pathname: '/[name]/settings' },
-  {
-    key: 'CIRCLE_SETTINGS_EDIT_PROFILE',
-    pathname: '/[name]/settings/edit-profile',
-  },
-  {
-    key: 'CIRCLE_SETTINGS_MANAGE_INVITATION',
-    pathname: '/[name]/settings/manage-invitation',
-  },
-  { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
 
   // Auth
   { key: 'LOGIN', pathname: '/login' },
@@ -140,49 +184,18 @@ export const ROUTES: {
   { key: 'COMMUNITY', pathname: '/community' },
   { key: 'TOS', pathname: '/tos' },
 
-  /**
-   * Protected
-   */
-  // Me
-  { key: 'ME_DRAFTS', pathname: '/me/drafts' },
-  { key: 'ME_PUBLISHED', pathname: '/me/published' },
-  { key: 'ME_ARCHIVED', pathname: '/me/archived' },
-  { key: 'ME_BOOKMARKS_ARTICLES', pathname: '/me/bookmarks/articles' },
-  { key: 'ME_BOOKMARKS_TAGS', pathname: '/me/bookmarks/tags' },
-  { key: 'ME_HISTORY', pathname: '/me/history' },
-  { key: 'ME_HISTORY_COMMENTS', pathname: '/me/history/comments' },
-  { key: 'ME_HISTORY_LIKES_SENT', pathname: '/me/history/likes/sent' },
-  { key: 'ME_HISTORY_LIKES_RECEIVED', pathname: '/me/history/likes/received' },
-  { key: 'ME_NOTIFICATIONS', pathname: '/me/notifications' },
-  { key: 'ME_WALLET', pathname: '/me/wallet' },
-  { key: 'ME_WALLET_TRANSACTIONS', pathname: '/me/wallet/transactions' },
-  { key: 'ME_ANALYTICS', pathname: '/me/analytics' },
-
-  // Settings
-  { key: 'ME_SETTINGS', pathname: '/me/settings' },
-  { key: 'ME_SETTINGS_NOTIFICATIONS', pathname: '/me/settings/notifications' },
-  {
-    key: 'ME_SETTINGS_NOTIFICATIONS_CIRCLE',
-    pathname: '/me/settings/notifications/circle',
-  },
-  {
-    key: 'ME_SETTINGS_MISC',
-    pathname: '/me/settings/misc',
-  },
-  { key: 'ME_SETTINGS_BLOCKED', pathname: '/me/settings/blocked' },
-
-  // Draft
-  { key: 'ME_DRAFT_NEW', pathname: '/me/drafts/new' },
-  { key: 'ME_DRAFT_DETAIL', pathname: '/me/drafts/[draftId]' },
-
   // OAuth
-  { key: 'OAUTH_AUTHORIZE', pathname: '/oauth/authorize' },
   { key: 'OAUTH_CALLBACK_SUCCESS', pathname: '/oauth/[provider]/success' },
   { key: 'OAUTH_CALLBACK_FAILURE', pathname: '/oauth/[provider]/failure' },
 
   // Pay
   { key: 'PAY_CALLBACK_SUCCESS', pathname: '/pay/[provider]/success' },
   { key: 'PAY_CALLBACK_FAILURE', pathname: '/pay/[provider]/failure' },
+
+  /**
+   * Protected
+   */
+  ...PROTECTED_ROUTES,
 ]
 
 export const PATHS = {} as {

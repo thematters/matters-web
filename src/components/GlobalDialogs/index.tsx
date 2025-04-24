@@ -20,7 +20,12 @@ const GlobalDialogs = () => {
     ) {
       window.dispatchEvent(new CustomEvent(OPEN_SET_USER_NAME_DIALOG))
     }
-  }, [router.pathname])
+  }, [
+    router.pathname,
+    viewer.isAuthed,
+    viewer.userName,
+    viewer.info.userNameEditable,
+  ])
 
   return (
     <>

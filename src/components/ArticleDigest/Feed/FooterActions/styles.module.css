@@ -3,3 +3,7 @@
 
   margin-top: var(--sp8);
 }
+
+.campaign {
+  color: var(--color-campaign-blue-label);
+}

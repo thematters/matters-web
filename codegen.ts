@@ -10,6 +10,11 @@ const config: CodegenConfig = {
     'src/gql/graphql.ts': {
       plugins: ['typescript', 'typescript-operations'],
     },
+    'src/gql/mergeables.ts': {
+      plugins: [
+        './bin/generateMergeableTypes.js'
+      ],
+    },
   },
 }
 

@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import _uniqBy from 'lodash/uniqBy'
 
 import { MAX_ARTICLE_TAG_LENGTH } from '~/common/enums'

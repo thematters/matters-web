@@ -1,6 +1,6 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
-import { FormattedMessage } from 'react-intl'
+import { useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
 import {
@@ -49,6 +49,8 @@ const SettingsBlocked = () => {
     }
   )
 
+  const intl = useIntl()
+
   if (loading) {
     return <SpinnerBlock />
   }
@@ -64,13 +66,11 @@ const SettingsBlocked = () => {
     return (
       <Empty
         spacingY="xxloose"
-        description={
-          <FormattedMessage
-            defaultMessage="No blocked users yet"
-            id="dAvP6d"
-            description="src/views/Me/Settings/Blocked/SettingsBlocked.tsx"
-          />
-        }
+        description={intl.formatMessage({
+          defaultMessage: 'No blocked users yet',
+          id: 'dAvP6d',
+          description: 'src/views/Me/Settings/Blocked/SettingsBlocked.tsx',
+        })}
       />
     )
   }

@@ -1,6 +1,7 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useRef, useState } from 'react'
+import baseToast from 'react-hot-toast'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
@@ -34,7 +35,7 @@ import {
   LanguageContext,
   LanguageSwitch,
   Media,
-  ReCaptcha,
+  // ReCaptcha,
   ResendCodeButton,
   TextIcon,
   useCountdown,
@@ -80,9 +81,17 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   setAuthFeedType,
   back,
 }) => {
-  const [login] = useMutation<EmailLoginMutation>(EMAIL_LOGIN, undefined, {
-    showToast: false,
-  })
+  const [login, { client }] = useMutation<EmailLoginMutation>(
+    EMAIL_LOGIN,
+    {
+      onCompleted: () => {
+        client?.resetStore()
+
+        baseToast.dismiss()
+      },
+    },
+    { showToast: false }
+  )
   const { lang } = useContext(LanguageContext)
 
   const { getQuery } = useRoute()
@@ -97,7 +106,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'
-  const [turnstileToken, setTurnstileToken] = useState<string>()
+  // const [turnstileToken, setTurnstileToken] = useState<string>()
 
   const [isSelectMethod, setIsSelectMethod] = useState(false)
   const [errorCode, setErrorCode] = useState<ERROR_CODES | null>(null)
@@ -167,6 +176,8 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         redirectToTarget({
           fallback: !!isInPage ? 'homepage' : 'current',
         })
+
+        closeDialog?.()
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any)
         setErrorCode(codes[0])
@@ -230,7 +241,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           input: {
             email: values.email,
             type: 'email_otp',
-            token: turnstileToken,
+            // token: turnstileToken,
             redirectUrl,
             language: lang,
           },
@@ -343,7 +354,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
             />
           )}
 
-        <ReCaptcha action="email_login" setToken={setTurnstileToken} />
+        {/* <ReCaptcha action="email_login" setToken={setTurnstileToken} /> */}
       </Form>
     </>
   )

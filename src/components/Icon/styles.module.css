@@ -121,7 +121,7 @@
     color: var(--color-heart-red);
   }
 
-  &.freeWriteBlue {
-    color: var(--color-free-write-blue);
+  &.campaignBlue {
+    color: var(--color-campaign-blue);
   }
 }

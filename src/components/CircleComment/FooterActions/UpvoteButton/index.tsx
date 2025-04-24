@@ -13,6 +13,7 @@ import {
   CircleCommentUpvoteCommentPrivateFragment,
   CircleCommentUpvoteCommentPublicFragment,
   UnvoteCommentMutation,
+  Vote,
   VoteCommentMutation,
 } from '~/gql/graphql'
 
@@ -69,7 +70,7 @@ const UpvoteButton = ({
         id: comment.id,
         upvotes: comment.upvotes + 1,
         downvotes: 0,
-        myVote: 'up' as any,
+        myVote: Vote.Up,
         __typename: 'Comment',
       },
     },

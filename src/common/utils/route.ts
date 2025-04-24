@@ -327,18 +327,17 @@ export const redirectToTarget = ({
 }: {
   fallback?: 'homepage' | 'current'
 } = {}) => {
-  const fallbackTarget =
-    fallback === 'homepage'
-      ? `/` // FIXME: to purge cache
-      : window.location.href
+  const fallbackTarget = fallback === 'homepage' ? `/` : window.location.href
   let target = decodeURIComponent(getTarget())
 
-  const isValidTarget = /^((http|https):\/\/)/.test(target)
+  const isValidTarget = new RegExp(
+    `^https?://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
+  ).test(target)
   if (!isValidTarget) {
     target = fallbackTarget
   }
 
-  window.location.href = target || fallbackTarget
+  Router.push(target || fallbackTarget)
 }
 
 /**

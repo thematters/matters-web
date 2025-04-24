@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect } from 'react'

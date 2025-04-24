@@ -1,8 +1,13 @@
 .tags {
   @mixin border-bottom-grey;
 
-  padding-bottom: var(--sp32);
+  padding-top: var(--sp24);
+  padding-bottom: var(--sp24);
   border-bottom-style: dashed;
+
+  & > header {
+    padding-bottom: var(--sp24);
+  }
 
   @media (--sm-up) {
     padding-bottom: var(--sp8);
@@ -10,5 +15,25 @@
 
   & :global(.list-item > .card) {
     margin: 0 calc(var(--sp8) * -1);
+  }
+
+  & .tagSection {
+    @mixin border-bottom-grey;
+
+    display: flex;
+    gap: var(--sp16);
+    padding-bottom: var(--sp20);
+    margin-bottom: var(--sp20);
+    border-bottom-style: dashed;
+
+    &:last-child {
+      padding-bottom: 0;
+      margin-bottom: 0;
+      border-bottom-style: none;
+    }
+
+    & > a {
+      flex: 1;
+    }
   }
 }

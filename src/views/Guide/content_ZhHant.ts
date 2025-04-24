@@ -26,10 +26,5 @@ ${process.env.NEXT_PUBLIC_SITE_BRAND_NAME} 的經濟系統支援法幣（港幣�
 
 如果你想用手機進行登入、綁定錢包及進行 USDT-Optimism 支付，請參考我們的手機版專屬指南，可以為你解決絕大部分的疑惑。
 
-*   [Matters 加密錢包指南 - 手機版](${GUIDE_LINKS.mobileWallet.zh_hant})
-
-好文章不遺漏，我們也支援 RSS 、JSON 閱讀器或 IPNS 兼容的 Planet 閱讀器來訂閱作者。
-
-*   [Matters 內容訂閱使用指南](${GUIDE_LINKS.RSS.zh_hant})
-`
+*   [Matters 加密錢包指南 - 手機版](${GUIDE_LINKS.mobileWallet.zh_hant})`
 export default zh_hant

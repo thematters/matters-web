@@ -1,7 +1,6 @@
 import _differenceBy from 'lodash/differenceBy'
 import _get from 'lodash/get'
 import { useContext, useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import { COMMENTS_COUNT } from '~/common/enums'
 import {
@@ -56,12 +55,8 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
   // public data
   const { data, loading, error, fetchMore, client } =
     usePublicQuery<LatestCommentsPublicQuery>(LATEST_COMMENTS_PUBLIC, {
-      variables: {
-        id,
-        first: COMMENTS_COUNT,
-      },
+      variables: { id, first: COMMENTS_COUNT },
       fetchPolicy: 'cache-and-network',
-      notifyOnNetworkStatusChange: true,
     })
 
   // pagination
@@ -154,13 +149,7 @@ const LatestComments = ({ id, lock }: { id: string; lock: boolean }) => {
               <Spacer size="sp24" />
             </>
           }
-          eof={
-            <FormattedMessage
-              defaultMessage="No more comments"
-              description="src/views/ArticleDetail/Comments/LatestComments/index.tsx"
-              id="9SXN7s"
-            />
-          }
+          eof
           eofSpacingTop="base"
         >
           <List spacing={[0, 0]} hasBorder={false}>

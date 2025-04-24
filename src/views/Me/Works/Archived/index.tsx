@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { mergeConnections } from '~/common/utils'
@@ -65,12 +65,7 @@ export const BaseMeWorksArchived = () => {
 }
 
 const MeWorksArchived = () => {
-  const init = useIntl()
-  const title = init.formatMessage({
-    defaultMessage: 'My Works - Archived',
-    description: 'src/views/Me/Works/Archived/index.tsx',
-    id: 'YgZOAm',
-  })
+  const intl = useIntl()
 
   return (
     <Layout.Main>
@@ -82,7 +77,12 @@ const MeWorksArchived = () => {
         }
       />
 
-      <Head title={title} />
+      <Head
+        title={intl.formatMessage({
+          defaultMessage: 'My Works',
+          id: 'ai7kS4',
+        })}
+      />
 
       <WorksTabs />
 

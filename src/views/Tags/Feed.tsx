@@ -9,13 +9,13 @@ import {
   TagList,
   usePublicQuery,
 } from '~/components'
-import { AllTagsHottestQuery } from '~/gql/graphql'
+import { AllTagsHottestPublicQuery } from '~/gql/graphql'
 
-import { ALL_TAGS_HOTTEST } from './gql'
+import { ALL_TAGS_HOTTEST_PUBLIC } from './gql'
 
 export type FeedType = 'recommended' | 'hottest'
 
-export type FeedQuery = AllTagsHottestQuery
+export type FeedQuery = AllTagsHottestPublicQuery
 
 interface Props {
   type: FeedType
@@ -24,9 +24,9 @@ interface Props {
 const Feed = ({ type }: Props) => {
   const isRecommended = type === 'recommended'
 
-  const query = ALL_TAGS_HOTTEST
-
-  const { data, loading, error, fetchMore } = usePublicQuery<FeedQuery>(query)
+  const { data, loading, error, fetchMore } = usePublicQuery<FeedQuery>(
+    ALL_TAGS_HOTTEST_PUBLIC
+  )
 
   if (loading) {
     return <SpinnerBlock />
@@ -67,6 +67,7 @@ const Feed = ({ type }: Props) => {
         edges={edges}
         pageInfo={pageInfo}
         loadMore={loadMore}
+        showEOFMessage={false}
         trackingType={isRecommended ? 'all_tags_recommended' : 'all_tags'}
       />
     </Layout.Main.Spacing>

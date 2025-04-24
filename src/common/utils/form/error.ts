@@ -1,4 +1,4 @@
-import { ApolloError } from 'apollo-client'
+import { ApolloError } from '@apollo/client'
 import { MessageDescriptor } from 'react-intl'
 
 import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
@@ -13,7 +13,7 @@ export const parseFormSubmitErrors = (
   const messages: ErrorMessages = {} as any
 
   codes.forEach((code) => {
-    messages[code] = ERROR_MESSAGES[code]
+    messages[code] = ERROR_MESSAGES[code] as MessageDescriptor
   })
 
   return [messages, codes]

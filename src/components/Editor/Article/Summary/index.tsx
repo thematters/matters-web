@@ -12,7 +12,7 @@ import {
   KEYVALUE,
   MAX_ARTICE_SUMMARY_LENGTH,
 } from '~/common/enums'
-import { useEventListener } from '~/components'
+import { toast, useEventListener } from '~/components'
 
 /**
  * This is an optional component for user to add summary.
@@ -43,7 +43,21 @@ const EditorSummary: React.FC<Props> = ({
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const [value, setValue] = useState(defaultValue)
   const debouncedUpdate = useDebouncedCallback(() => {
-    update({ summary: value })
+    if (length <= MAX_ARTICE_SUMMARY_LENGTH) {
+      update({ summary: value })
+    } else {
+      toast.error({
+        message: intl.formatMessage(
+          {
+            defaultMessage: 'The summary text limit is {maxLength} characters',
+            id: 'tFeVR6',
+          },
+          {
+            maxLength: MAX_ARTICE_SUMMARY_LENGTH,
+          }
+        ),
+      })
+    }
   }, INPUT_DEBOUNCE)
 
   const length = (value && value.length) || 0
@@ -54,8 +68,11 @@ const EditorSummary: React.FC<Props> = ({
     debouncedUpdate()
   }
 
-  const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) =>
-    update({ summary: value })
+  const handleBlur = () => {
+    if (length <= MAX_ARTICE_SUMMARY_LENGTH) {
+      update({ summary: value })
+    }
+  }
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const target = event.target as HTMLTextAreaElement

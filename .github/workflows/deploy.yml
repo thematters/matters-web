@@ -4,6 +4,7 @@ on:
   pull_request:
     branches:
       - master
+      - main
       - develop
     types: [closed]
 
@@ -32,7 +33,7 @@ jobs:
           cache: 'npm'
 
       - name: Setup rclone
-        if: github.base_ref == 'develop' || github.base_ref == 'master'
+        if: github.base_ref == 'develop' || github.base_ref == 'master' || github.base_ref == 'main'
         uses: AnimMouse/setup-rclone@v1
         with:
           rclone_config: |
@@ -52,7 +53,7 @@ jobs:
         run: npm run gen:type
 
       - name: Generate Types (production)
-        if: github.base_ref == 'master'
+        if: github.base_ref == 'master' || github.base_ref == 'main'
         run: npm run gen:type:prod
 
       - name: Lint
@@ -77,26 +78,26 @@ jobs:
 
       # === `master` branch ===
       - name: Build (production)
-        if: github.base_ref == 'master'
+        if: github.base_ref == 'master' || github.base_ref == 'main'
         run: cp .env.prod .env.local && npm run build
 
       - name: Setup AWS
-        if: github.base_ref == 'develop' || github.base_ref == 'master'
+        if: github.base_ref == 'develop' || github.base_ref == 'master' || github.base_ref == 'main'
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ap-southeast-1
+          aws-region: ${{ github.base_ref == 'develop' && secrets.AWS_REGION_DEV || secrets.AWS_REGION_PROD }}
 
       - name: Generate deployment package
-        if: github.base_ref == 'develop' || github.base_ref == 'master'
+        if: github.base_ref == 'develop' || github.base_ref == 'master' || github.base_ref == 'main'
         run: |
           rm -rf node_modules \
           && npm install --production \
           && zip -r --symlinks deploy.zip . -x .git/\*
 
       - name: Upload Assets (develop - R2)
-        if: github.base_ref == 'develop'
+        if: github.base_ref == 'develop' || github.base_ref == 'main'
         run: rclone sync .next/static r2:matters-assets-next-develop/_next/static -P
 
       - name: Deploy to EB (develop)
@@ -106,29 +107,29 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: matters-stage
-          environment_name: matters-client-develop-node-v18
+          environment_name: ${{ secrets.AWS_EB_ENV_NAME_DEV }}
           version_label: matters-web-develop-${{ hashFiles('deploy.zip') }}
           version_description: ${{ github.SHA }}
-          region: ap-southeast-1
+          region: ${{ secrets.AWS_REGION_DEV }}
           deployment_package: deploy.zip
           use_existing_version_if_available: true
           wait_for_deployment: true
 
       - name: Upload Assets (production - R2)
-        if: github.base_ref == 'master'
+        if: github.base_ref == 'master' || github.base_ref == 'main'
         run: rclone sync .next/static r2:matters-assets-next/_next/static -P
 
       - name: Deploy to EB (production)
-        if: github.base_ref == 'master'
+        if: github.base_ref == 'master' || github.base_ref == 'main'
         uses: einaregilsson/beanstalk-deploy@v19
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           application_name: matters-prod
-          environment_name: matters-client-prod-node-v18
+          environment_name: ${{ secrets.AWS_EB_ENV_NAME_PROD }}
           version_label: matters-web-prod-${{ hashFiles('deploy.zip') }}
           version_description: ${{ github.SHA }}
-          region: ap-southeast-1
+          region: ${{ secrets.AWS_REGION_PROD }}
           deployment_package: deploy.zip
           use_existing_version_if_available: true
           wait_for_deployment: true

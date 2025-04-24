@@ -13,9 +13,6 @@ export const CAMPAIGN_DETAIL = gql`
       shortHash
       ... on WritingChallenge {
         id
-        descriptionZhHant: description(input: { language: zh_hant })
-        descriptionZhHans: description(input: { language: zh_hans })
-        descriptionEn: description(input: { language: en })
         ...InfoHeaderCampaignPublic
         ...InfoHeaderCampaignPrivate
         ...SideParticipantsCampaignPublic
