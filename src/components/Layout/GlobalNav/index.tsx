@@ -35,7 +35,7 @@ const Logo = () => {
   return (
     <div className={styles.logo}>
       <Button
-        href={`${PATHS.HOME}?type=icymi`}
+        href={`${PATHS.HOME}`}
         aria-label={intl.formatMessage({
           defaultMessage: 'Discover',
           id: 'cE4Hfw',
