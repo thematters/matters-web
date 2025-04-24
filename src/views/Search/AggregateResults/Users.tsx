@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { FormattedMessage } from 'react-intl'
 
 import {
   LATER_SEARCH_RESULTS_LENGTH,
@@ -100,9 +99,7 @@ const AggregateUserResults = () => {
           pageInfo.hasNextPage && edges.length < MAX_SEARCH_RESULTS_LENGTH
         }
         loadMore={loadMore}
-        eof={
-          <FormattedMessage defaultMessage="End of the results" id="ui1+QC" />
-        }
+        eof
       >
         <Menu>
           {edges.map(
