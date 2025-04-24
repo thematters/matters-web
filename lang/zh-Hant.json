@@ -681,10 +681,6 @@
   "9OPnTz": {
     "defaultMessage": "系統或連線異常，請刷新頁面後重新點擊晚鳥參與"
   },
-  "9SXN7s": {
-    "defaultMessage": "沒有更多",
-    "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
-  },
   "9UNFGm": {
     "defaultMessage": "設置交易密碼"
   },
@@ -780,10 +776,6 @@
   "AwQHHA": {
     "defaultMessage": "請先設定交易密碼",
     "description": "PAYMENT_PASSWORD_NOT_SET"
-  },
-  "B2As08": {
-    "defaultMessage": "沒有更多",
-    "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
   },
   "B9IFMF": {
     "defaultMessage": "好的，我報名"
@@ -1814,6 +1806,10 @@
   },
   "U86B6w": {
     "defaultMessage": "數據"
+  },
+  "UMCQ4G": {
+    "defaultMessage": "刷完啦",
+    "description": "src/components/Interaction/"
   },
   "UOdEqi": {
     "defaultMessage": "原有透過電子信箱登入方式將為你保留。為維護你的帳戶安全，加密錢包連接後無法重設。",
@@ -3141,9 +3137,6 @@
   },
   "ucxFlV": {
     "defaultMessage": "提現流程已啟動"
-  },
-  "ui1+QC": {
-    "defaultMessage": "已顯示所有結果"
   },
   "ulh3kf": {
     "defaultMessage": "選集"
