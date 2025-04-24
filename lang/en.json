@@ -681,10 +681,6 @@
   "9OPnTz": {
     "defaultMessage": "System or connection abnormality, please refresh the page and click “Join” again."
   },
-  "9SXN7s": {
-    "defaultMessage": "No more comments",
-    "description": "src/views/ArticleDetail/Comments/LatestComments/index.tsx"
-  },
   "9UNFGm": {
     "defaultMessage": "Transaction Password"
   },
@@ -780,10 +776,6 @@
   "AwQHHA": {
     "defaultMessage": "Please set your transcation password.",
     "description": "PAYMENT_PASSWORD_NOT_SET"
-  },
-  "B2As08": {
-    "defaultMessage": "That's all",
-    "description": "src/components/Interaction/InfiniteScroll/EndOfResults/index.tsx"
   },
   "B9IFMF": {
     "defaultMessage": "Yes, apply"
@@ -1814,6 +1806,10 @@
   },
   "U86B6w": {
     "defaultMessage": "Stats"
+  },
+  "UMCQ4G": {
+    "defaultMessage": "Done",
+    "description": "src/components/Interaction/"
   },
   "UOdEqi": {
     "defaultMessage": "The original login via email will be kept for you. Please note that your wallet cannot be reset once it is connected because of your account security.",
@@ -3141,9 +3137,6 @@
   },
   "ucxFlV": {
     "defaultMessage": "The withdrawal process has started."
-  },
-  "ui1+QC": {
-    "defaultMessage": "End of the results"
   },
   "ulh3kf": {
     "defaultMessage": "Collections"
