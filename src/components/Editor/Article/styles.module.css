@@ -26,9 +26,21 @@
       outline: none;
     }
 
+    /* text selection */
+    &::selection,
+    & :global(mark.highlight) {
+      background: var(--color-editor-selection);
+    }
+
+    & :global(mark.highlight) {
+      display: inline-block;
+    }
+
     /* disable interactive elements */
     & a {
-      pointer-events: none;
+      cursor: pointer;
+
+      /* pointer-events: none; */
     }
 
     /* horizontal rule */

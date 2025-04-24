@@ -5,11 +5,13 @@ import {
   EditorContent,
   Extension,
   FigcaptionKit,
+  Link,
   Mention,
   PasteDropFile,
   Placeholder,
   useEditor,
 } from '@matters/matters-editor'
+import { Highlight } from '@tiptap/extension-highlight'
 import classNames from 'classnames'
 import { useCallback, useRef } from 'react'
 import { useIntl } from 'react-intl'
@@ -33,6 +35,7 @@ import {
   restoreImages,
   SmartLink,
 } from './extensions'
+// import { Link } from './extensions/link'
 import { makeSmartLinkOptions } from './extensions/smartLink/utils'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.module.css'
@@ -134,7 +137,15 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           editor.commands.insertFigureImageUploaders({ files: validFiles })
         },
       }),
-      ...articleEditorExtensions,
+      Highlight.configure({
+        HTMLAttributes: {
+          class: 'highlight',
+        },
+      }),
+      Link.configure({ openOnClick: false }),
+      ...articleEditorExtensions.filter(
+        (ext) => !['link', 'figcaptionKit', 'placeholder'].includes(ext.name)
+      ),
     ] as Extension[],
   })
 

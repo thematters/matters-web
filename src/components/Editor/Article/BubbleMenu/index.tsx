@@ -7,7 +7,9 @@ import classNames from 'classnames'
 import { Node } from 'prosemirror-model'
 import { useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
+import { Instance } from 'tippy.js'
 
+import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
 import { ReactComponent as IconEditorBold } from '@/public/static/icons/24px/editor-bold.svg'
 import { ReactComponent as IconEditorCode } from '@/public/static/icons/24px/editor-code.svg'
 import { ReactComponent as IconEditorH2 } from '@/public/static/icons/24px/editor-h2.svg'
@@ -17,6 +19,8 @@ import { ReactComponent as IconEditorOl } from '@/public/static/icons/24px/edito
 import { ReactComponent as IconEditorQuote } from '@/public/static/icons/24px/editor-quote.svg'
 import { ReactComponent as IconEditorStrike } from '@/public/static/icons/24px/editor-strike.svg'
 import { ReactComponent as IconEditorUl } from '@/public/static/icons/24px/editor-ul.svg'
+import { ReactComponent as IconEditorUnlink } from '@/public/static/icons/24px/editor-unlink.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { KEYVALUE } from '~/common/enums'
 import { isUrl } from '~/common/utils'
 import { Icon, Media } from '~/components'
@@ -33,30 +37,53 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   isCommentEditor,
 }) => {
   const intl = useIntl()
-  const urlInput = useRef<HTMLInputElement>(null)
+  const linkInputRef = useRef<HTMLInputElement>(null)
 
+  const [instance, setInstance] = useState<Instance>()
+  const [linkValue, setLinkValue] = useState('')
   const [showLinkInput, setShowLinkInput] = useState(false)
+  const [editingLink, setEditingLink] = useState(false)
 
-  const onUrlInputSubmit = () => {
-    let url = urlInput?.current?.value
-
+  const onSubmitLink = () => {
+    let url = linkValue
     if (url && isUrl(url)) {
       // if not starts with http:// or https://
       if (!url.match(/^https?:\/\//i)) {
         url = `https://${url}`
       }
-      editor.chain().focus().toggleLink({ href: url, target: '_blank' }).run()
     }
 
-    setShowLinkInput(false)
+    if (url) {
+      editor.chain().focus().setLink({ href: url, target: '_blank' }).run()
+      setEditingLink(false)
+    }
   }
 
-  const onLinkInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+  const onInputKeyDownLink = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key.toLowerCase() !== KEYVALUE.enter) {
       return
     }
 
-    onUrlInputSubmit()
+    onSubmitLink()
+  }
+
+  const onClearLink = () => {
+    setLinkValue('')
+    linkInputRef.current?.focus()
+  }
+
+  const onEditLink = () => {
+    setEditingLink(true)
+
+    setTimeout(() => {
+      if (linkInputRef.current) {
+        linkInputRef.current.focus()
+
+        // Move cursor to the end of the text
+        const length = linkInputRef.current.value.length
+        linkInputRef.current.setSelectionRange(length, length)
+      }
+    })
   }
 
   return (
@@ -67,7 +94,26 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         duration: 200,
         placement: 'top',
         arrow: false,
-        onHidden: () => setShowLinkInput(false),
+        onHidden: () => {
+          setShowLinkInput(false)
+
+          // Clear the link value
+          setLinkValue('')
+        },
+        onShown: () => {
+          const { from, to } = editor.state.selection
+          if (from === to) {
+            editor.commands.extendMarkRange('link')
+          }
+        },
+        onShow: (instance) => {
+          setInstance(instance)
+
+          if (editor.isActive('link')) {
+            setShowLinkInput(true)
+            setEditingLink(false)
+          }
+        },
       }}
       shouldShow={({ view, state, from, to }) => {
         // https://github.com/ueberdosis/tiptap/blob/f387ad3dd4c2b30e/packages/extension-bubble-menu/src/bubble-menu-plugin.ts#L47
@@ -96,16 +142,24 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         const $grandParent = $anchor.node($anchor.depth - 1)
         const isInBlockquote = $grandParent?.type.name === 'blockquote'
 
+        // Check if a link is selected
+        const isLinkSelected = editor.isActive('link')
+
         if (
           !hasEditorFocus ||
-          empty ||
-          isEmptyTextBlock ||
+          (empty && !isLinkSelected) || // Allow empty selection if it's a link
+          (isEmptyTextBlock && !isLinkSelected) || // Allow empty text block if it's a link
           !editor.isEditable ||
           isFigure ||
           isHr ||
           isInBlockquote
         ) {
           return false
+        }
+
+        if (isLinkSelected) {
+          const linkValue = editor.getAttributes('link').href || ''
+          setLinkValue(linkValue)
         }
 
         return true
@@ -179,11 +233,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'yp0PiU',
                   description: 'src/components/Editor',
                 })}
-                aria-label={intl.formatMessage({
-                  defaultMessage: 'Subtitle',
-                  id: 'yp0PiU',
-                  description: 'src/components/Editor',
-                })}
               >
                 <Media at="sm">
                   <Icon icon={IconEditorH3} size={22} />
@@ -206,11 +255,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 }
                 className={editor.isActive('bold') ? styles.active : ''}
                 title={intl.formatMessage({
-                  defaultMessage: 'Bold',
-                  id: '1lWarA',
-                  description: 'src/components/Editor',
-                })}
-                aria-label={intl.formatMessage({
                   defaultMessage: 'Bold',
                   id: '1lWarA',
                   description: 'src/components/Editor',
@@ -239,11 +283,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'KG9vIx',
                   description: 'src/components/Editor',
                 })}
-                aria-label={intl.formatMessage({
-                  defaultMessage: 'Strikethrough',
-                  id: 'KG9vIx',
-                  description: 'src/components/Editor',
-                })}
               >
                 <Media at="sm">
                   <Icon icon={IconEditorStrike} size={22} />
@@ -264,11 +303,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
                 className={editor.isActive('codeBlock') ? styles.active : ''}
                 title={intl.formatMessage({
-                  defaultMessage: 'Code Block',
-                  id: 'wOYX42',
-                  description: 'src/components/Editor',
-                })}
-                aria-label={intl.formatMessage({
                   defaultMessage: 'Code Block',
                   id: 'wOYX42',
                   description: 'src/components/Editor',
@@ -295,11 +329,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 editor.isActive('heading', { level: 3 })
               }
               className={editor.isActive('blockquote') ? styles.active : ''}
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Blockquote',
-                id: '2U8rTr',
-                description: 'src/components/Editor',
-              })}
             >
               <Media at="sm">
                 <Icon icon={IconEditorQuote} size={22} />
@@ -317,11 +346,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={editor.isActive('bulletList') ? styles.active : ''}
                 title={intl.formatMessage({
-                  defaultMessage: 'Unordered List',
-                  id: 'KAuIWb',
-                  description: 'src/components/Editor',
-                })}
-                aria-label={intl.formatMessage({
                   defaultMessage: 'Unordered List',
                   id: 'KAuIWb',
                   description: 'src/components/Editor',
@@ -348,11 +372,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'AQL1ME',
                   description: 'src/components/Editor',
                 })}
-                aria-label={intl.formatMessage({
-                  defaultMessage: 'Ordered List',
-                  id: 'AQL1ME',
-                  description: 'src/components/Editor',
-                })}
               >
                 <Media at="sm">
                   <Icon icon={IconEditorOl} size={22} />
@@ -367,27 +386,15 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             <button
               type="button"
               onClick={() => {
-                // unset
-                if (editor.isActive('link')) {
-                  editor.chain().focus().unsetLink().run()
-                  return
-                }
-
-                // show link input
                 setShowLinkInput(true)
+                setEditingLink(true)
               }}
               disabled={
-                // @ts-ignore - Need to ignore the type error for toggleLink
                 !editor.can().chain().focus().toggleLink({ href: '' }).run() ||
                 editor.isActive('heading', { level: 2 })
               }
               className={editor.isActive('link') ? styles.active : ''}
               title={intl.formatMessage({
-                defaultMessage: 'Link',
-                id: 'vlEBHB',
-                description: 'src/components/Editor',
-              })}
-              aria-label={intl.formatMessage({
                 defaultMessage: 'Link',
                 id: 'vlEBHB',
                 description: 'src/components/Editor',
@@ -405,30 +412,83 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
         {showLinkInput && (
           <>
-            <input
-              className="urlInput"
-              ref={urlInput}
-              type="text"
-              title={intl.formatMessage({
-                defaultMessage: 'Enter URL',
-                id: 'hB/x9Q',
-                description: 'src/components/Editor',
-              })}
-              placeholder={intl.formatMessage({
-                defaultMessage: 'Enter URL',
-                id: 'hB/x9Q',
-                description: 'src/components/Editor',
-              })}
-              autoFocus
-              onKeyDown={onLinkInputKeyDown}
-            />
-            <button
-              className="urlSubmitButton"
-              type="button"
-              onClick={onUrlInputSubmit}
-            >
-              <FormattedMessage defaultMessage="Confirm" id="N2IrpM" />
-            </button>
+            {editingLink && (
+              <input
+                ref={linkInputRef}
+                className={styles.linkInput}
+                type="text"
+                value={linkValue}
+                onChange={(e) => setLinkValue(e.target.value)}
+                placeholder={intl.formatMessage({
+                  defaultMessage: 'Paste the URL and press Enter',
+                  id: 'HvgNHV',
+                  description: 'src/components/Editor',
+                })}
+                autoFocus
+                onKeyDown={onInputKeyDownLink}
+              />
+            )}
+            {!editingLink && linkValue && (
+              <span className={styles.linkInput}>
+                <a href={linkValue} target="_blank" rel="noopener noreferrer">
+                  {linkValue}
+                </a>
+              </span>
+            )}
+            {editingLink && linkValue && (
+              <button
+                className={styles.linkClearButton}
+                type="button"
+                onClick={onClearLink}
+                title={intl.formatMessage({
+                  defaultMessage: 'Clear',
+                  id: 'TWZ1AK',
+                  description: 'src/components/Editor',
+                })}
+              >
+                <Icon icon={IconTimes} size={14} />
+              </button>
+            )}
+            {editingLink && (
+              <button
+                className={styles.linkSubmitButton}
+                type="button"
+                onClick={onSubmitLink}
+              >
+                <FormattedMessage defaultMessage="Confirm" id="N2IrpM" />
+              </button>
+            )}
+            {!editingLink && (
+              <button
+                className={styles.linkEditButton}
+                type="button"
+                onClick={onEditLink}
+                title={intl.formatMessage({
+                  defaultMessage: 'Edit',
+                  id: 'XOtg99',
+                  description: 'src/components/Editor',
+                })}
+              >
+                <Icon icon={IconEdit} size={16} />
+              </button>
+            )}
+            {!editingLink && (
+              <button
+                className={styles.linkUnlinkButton}
+                type="button"
+                onClick={() => {
+                  editor.chain().focus().unsetLink().run()
+                  instance?.hide()
+                }}
+                title={intl.formatMessage({
+                  defaultMessage: 'Unlink',
+                  id: 'IJ9YcQ',
+                  description: 'src/components/Editor',
+                })}
+              >
+                <Icon icon={IconEditorUnlink} size={16} />
+              </button>
+            )}
           </>
         )}
       </section>
