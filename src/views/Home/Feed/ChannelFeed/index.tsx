@@ -143,21 +143,19 @@ const ChannelFeed = () => {
     ) : null
 
   return (
-    <>
-      <FeedRenderer
-        loading={loading}
-        error={error}
-        edges={edges}
-        pageInfo={pageInfo}
-        loadMore={loadMore}
-        feedType={feedType}
-        renderHeader={renderHeader}
-        renderCards={renderCards}
-        emptyCustomOption={emptyCustomOption}
-        numOfCards={numOfCards}
-        channelId={data?.channel?.id}
-      />
-    </>
+    <FeedRenderer
+      loading={loading}
+      error={error}
+      edges={edges}
+      pageInfo={pageInfo}
+      loadMore={loadMore}
+      feedType={feedType}
+      renderHeader={renderHeader}
+      renderCards={renderCards}
+      emptyCustomOption={emptyCustomOption}
+      numOfCards={numOfCards}
+      channelId={data?.channel?.id}
+    />
   )
 }
 
