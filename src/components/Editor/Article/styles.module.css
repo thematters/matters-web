@@ -120,6 +120,7 @@
         color: var(--color-grey);
         text-align: center;
         white-space: pre-wrap;
+        background: transparent;
 
         &::placeholder {
           color: var(--color-grey);
