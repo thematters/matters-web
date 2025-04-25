@@ -78,7 +78,7 @@ const ChannelFeed = () => {
     return (
       <section className={feedStyles.cards}>
         {cardEdges.slice(0, numOfCards).map((edge, i) => (
-          <React.Fragment key={edge.id}>
+          <React.Fragment key={edge.node.id}>
             <Media at="xs">
               <ArticleDigestCurated
                 article={edge.node}
@@ -86,12 +86,12 @@ const ChannelFeed = () => {
                 pinned={edge.pinned}
                 channelId={channelId}
                 onClick={() =>
-                  onClick('article', i, edge.id, channelId, {
+                  onClick('article', i, edge.node.id, channelId, {
                     pinned: edge.pinned,
                   })
                 }
                 onClickAuthor={() =>
-                  onClick('user', i, edge.author.id, channelId, {
+                  onClick('user', i, edge.node.author.id, channelId, {
                     pinned: edge.pinned,
                   })
                 }
@@ -104,12 +104,12 @@ const ChannelFeed = () => {
                 pinned={edge.pinned}
                 channelId={channelId}
                 onClick={() =>
-                  onClick('article', i, edge.id, channelId, {
+                  onClick('article', i, edge.node.id, channelId, {
                     pinned: edge.pinned,
                   })
                 }
                 onClickAuthor={() =>
-                  onClick('user', i, edge.author.id, channelId, {
+                  onClick('user', i, edge.node.author.id, channelId, {
                     pinned: edge.pinned,
                   })
                 }
