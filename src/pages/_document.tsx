@@ -8,7 +8,7 @@ import Document, {
 } from 'next/document'
 import React from 'react'
 
-import { CSP_POLICY } from '~/common/enums'
+// import { CSP_POLICY } from '~/common/enums'
 import { toLocale } from '~/common/utils'
 
 interface MattersDocumentProps {
