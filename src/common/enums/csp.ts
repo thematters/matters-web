@@ -45,6 +45,12 @@ const SCRIPT_SRC = [
   // Google Ads
   '*.adtrafficquality.google',
   '*.googlesyndication.com',
+  '*.google.com',
+  '*.googletagmanager.com',
+  '*.google-analytics.com',
+  '*.doubleclick.net',
+  '*.gstatic.com',
+  '*.googleadservices.com',
 ]
 
 const STYLE_SRC = [
