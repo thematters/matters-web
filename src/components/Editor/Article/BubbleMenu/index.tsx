@@ -39,8 +39,10 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   const linkInputRef = useRef<HTMLInputElement>(null)
 
   const [linkValue, setLinkValue] = useState('')
-  const [showLinkInput, setShowLinkInput] = useState(false)
-  const [editingLink, setEditingLink] = useState(false)
+  const [inputState, setInputState] = useState({
+    showInput: false,
+    isEditing: false,
+  })
 
   const onSubmitLink = () => {
     let url = linkValue
@@ -70,7 +72,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
     }
 
     // reset the editing link
-    setEditingLink(false)
+    setInputState((prev) => ({ ...prev, isEditing: false }))
   }
 
   const onInputKeyDownLink = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -87,7 +89,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   }
 
   const onEditLink = () => {
-    setEditingLink(true)
+    setInputState((prev) => ({ ...prev, isEditing: true }))
 
     setTimeout(() => {
       if (!linkInputRef.current) {
@@ -111,11 +113,12 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         placement: 'top',
         arrow: false,
         onHidden: () => {
-          // hide the link input
-          setShowLinkInput(false)
-
-          // reset the link value
+          // reset link state
           setLinkValue('')
+          setInputState({
+            showInput: false,
+            isEditing: false,
+          })
         },
       }}
       shouldShow={({ view, state, from, to }) => {
@@ -162,14 +165,14 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
         if (isLinkSelected) {
           // set the link value
-          const linkValue = editor.getAttributes('link').href || ''
-          setLinkValue(linkValue)
+          const linkUrl = editor.getAttributes('link').href || ''
+          setLinkValue(linkUrl)
 
           // show the link input
-          setShowLinkInput(true)
-
-          // reset the editing link
-          setEditingLink(false)
+          setInputState({
+            showInput: true,
+            isEditing: false,
+          })
         }
 
         return true
@@ -181,7 +184,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           [styles.comment]: isCommentEditor,
         })}
       >
-        {!showLinkInput && (
+        {!inputState.showInput && (
           <>
             {/* Heading 2 */}
             {!isCommentEditor && (
@@ -396,8 +399,10 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             <button
               type="button"
               onClick={() => {
-                setShowLinkInput(true)
-                setEditingLink(true)
+                setInputState({
+                  showInput: true,
+                  isEditing: true,
+                })
               }}
               disabled={
                 !editor.can().chain().focus().toggleLink({ href: '' }).run() ||
@@ -420,9 +425,9 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           </>
         )}
 
-        {showLinkInput && (
+        {inputState.showInput && (
           <>
-            {editingLink && (
+            {inputState.isEditing && (
               <input
                 ref={linkInputRef}
                 className={styles.linkInput}
@@ -438,14 +443,14 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 onKeyDown={onInputKeyDownLink}
               />
             )}
-            {!editingLink && linkValue && (
+            {!inputState.isEditing && linkValue && (
               <span className={styles.linkInput}>
                 <a href={linkValue} target="_blank" rel="noopener noreferrer">
                   {linkValue}
                 </a>
               </span>
             )}
-            {editingLink && linkValue && (
+            {inputState.isEditing && linkValue && (
               <button
                 className={styles.linkClearButton}
                 type="button"
@@ -459,7 +464,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 <Icon icon={IconTimes} size={14} />
               </button>
             )}
-            {editingLink && (
+            {inputState.isEditing && (
               <button
                 className={styles.linkSubmitButton}
                 type="button"
@@ -468,7 +473,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 <FormattedMessage defaultMessage="Confirm" id="N2IrpM" />
               </button>
             )}
-            {!editingLink && (
+            {!inputState.isEditing && (
               <button
                 className={styles.linkEditButton}
                 type="button"
@@ -482,7 +487,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 <Icon icon={IconEdit} size={16} />
               </button>
             )}
-            {!editingLink && (
+            {!inputState.isEditing && (
               <button
                 className={styles.linkUnlinkButton}
                 type="button"
