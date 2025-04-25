@@ -7,7 +7,6 @@ import classNames from 'classnames'
 import { Node } from 'prosemirror-model'
 import { useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { Instance } from 'tippy.js'
 
 import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
 import { ReactComponent as IconEditorBold } from '@/public/static/icons/24px/editor-bold.svg'
@@ -39,7 +38,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
   const intl = useIntl()
   const linkInputRef = useRef<HTMLInputElement>(null)
 
-  const [instance, setInstance] = useState<Instance>()
   const [linkValue, setLinkValue] = useState('')
   const [showLinkInput, setShowLinkInput] = useState(false)
   const [editingLink, setEditingLink] = useState(false)
@@ -53,10 +51,26 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
       }
     }
 
-    if (url) {
-      editor.chain().focus().setLink({ href: url, target: '_blank' }).run()
-      setEditingLink(false)
+    if (!url) {
+      return
     }
+
+    // set the link
+    const { from, to } = editor.state.selection
+    if (from === to) {
+      // extend the link range first
+      editor
+        .chain()
+        .focus()
+        .extendMarkRange('link')
+        .setLink({ href: url, target: '_blank' })
+        .run()
+    } else {
+      editor.chain().focus().setLink({ href: url, target: '_blank' }).run()
+    }
+
+    // reset the editing link
+    setEditingLink(false)
   }
 
   const onInputKeyDownLink = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -76,13 +90,15 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
     setEditingLink(true)
 
     setTimeout(() => {
-      if (linkInputRef.current) {
-        linkInputRef.current.focus()
-
-        // Move cursor to the end of the text
-        const length = linkInputRef.current.value.length
-        linkInputRef.current.setSelectionRange(length, length)
+      if (!linkInputRef.current) {
+        return
       }
+
+      linkInputRef.current.focus()
+
+      // Move cursor to the end of the text
+      const length = linkInputRef.current.value.length
+      linkInputRef.current.setSelectionRange(length, length)
     })
   }
 
@@ -95,24 +111,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         placement: 'top',
         arrow: false,
         onHidden: () => {
+          // hide the link input
           setShowLinkInput(false)
 
-          // Clear the link value
+          // reset the link value
           setLinkValue('')
-        },
-        onShown: () => {
-          const { from, to } = editor.state.selection
-          if (from === to) {
-            editor.commands.extendMarkRange('link')
-          }
-        },
-        onShow: (instance) => {
-          setInstance(instance)
-
-          if (editor.isActive('link')) {
-            setShowLinkInput(true)
-            setEditingLink(false)
-          }
         },
       }}
       shouldShow={({ view, state, from, to }) => {
@@ -158,8 +161,15 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         }
 
         if (isLinkSelected) {
+          // set the link value
           const linkValue = editor.getAttributes('link').href || ''
           setLinkValue(linkValue)
+
+          // show the link input
+          setShowLinkInput(true)
+
+          // reset the editing link
+          setEditingLink(false)
         }
 
         return true
@@ -478,7 +488,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 type="button"
                 onClick={() => {
                   editor.chain().focus().unsetLink().run()
-                  instance?.hide()
                 }}
                 title={intl.formatMessage({
                   defaultMessage: 'Unlink',
