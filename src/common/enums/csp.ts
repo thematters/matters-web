@@ -45,6 +45,7 @@ const SCRIPT_SRC = [
   // Google Ads
   '*.adtrafficquality.google',
   '*.googlesyndication.com',
+  '*',
 ]
 
 const STYLE_SRC = [
@@ -168,6 +169,7 @@ const CONNECT_SRC = [
   // Google Ads
   '*.adtrafficquality.google',
   '*.googlesyndication.com',
+  '*',
 ]
 
 const FRAME_SRC = [
@@ -209,6 +211,7 @@ const FRAME_SRC = [
   // Google Ads
   '*.googlesyndication.com',
   '*.adtrafficquality.google',
+  '*',
 ]
 
 export const CSP_POLICY = Object.entries({
