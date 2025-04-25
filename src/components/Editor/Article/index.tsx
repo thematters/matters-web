@@ -11,7 +11,6 @@ import {
   Placeholder,
   useEditor,
 } from '@matters/matters-editor'
-import { Highlight } from '@tiptap/extension-highlight'
 import classNames from 'classnames'
 import { useCallback, useRef } from 'react'
 import { useIntl } from 'react-intl'
@@ -135,11 +134,6 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
         onPaste: async (editor, files) => {
           const validFiles = await getValidFiles(files)
           editor.commands.insertFigureImageUploaders({ files: validFiles })
-        },
-      }),
-      Highlight.configure({
-        HTMLAttributes: {
-          class: 'highlight',
         },
       }),
       Link.configure({ openOnClick: false }),
