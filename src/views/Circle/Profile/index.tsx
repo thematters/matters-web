@@ -122,16 +122,7 @@ const CircleProfile = () => {
             <span />
             {circle && (
               <section className={styles.buttons}>
-                <Layout.Header.ShareButton
-                  tags={
-                    [
-                      circle.displayName,
-                      circle.name,
-                      circle.owner.displayName,
-                      // circle.owner.userName,
-                    ].filter(Boolean) as string[]
-                  }
-                />
+                <Layout.Header.ShareButton />
                 <DropdownActions circle={circle} />
               </section>
             )}

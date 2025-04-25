@@ -22,10 +22,7 @@ const LINE = ({ title, link }: { title: string; link: string }) => {
       type="button"
       onClick={() => {
         const shareUrl = `https://social-plugins.line.me/lineit/share?${new URLSearchParams(
-          {
-            url: link,
-            text: title,
-          }
+          { url: link, text: title }
         ).toString()}`
 
         analytics.trackEvent('share', {

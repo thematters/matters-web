@@ -269,7 +269,11 @@ const BaseArticleDetail = ({
       showAside={article.state === 'active'}
     >
       <Head
-        title={`${makeSummary(title, MAX_META_SUMMARY_LENGTH)} - ${article?.author.displayName}`}
+        title={
+          article?.author.displayName
+            ? `${makeSummary(title, MAX_META_SUMMARY_LENGTH)} - ${article?.author.displayName}`
+            : `${makeSummary(title, MAX_META_SUMMARY_LENGTH)}`
+        }
         path={toPath({ page: 'articleDetail', article }).href}
         description={makeSummary(summary, MAX_META_SUMMARY_LENGTH) || ''}
         keywords={keywords}
