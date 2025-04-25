@@ -32,7 +32,6 @@ export type ArticleDigestCuratedProps = {
 
   onClick?: () => any
   onClickAuthor?: () => void
-  hue?: number
 } & CardProps
 
 const fragments = {
@@ -70,7 +69,6 @@ export const ArticleDigestCurated = ({
   channelId,
   onClick,
   onClickAuthor,
-  hue,
   ...cardProps
 }: ArticleDigestCuratedProps) => {
   const intl = useIntl()
@@ -104,25 +102,11 @@ export const ArticleDigestCurated = ({
         >
           <Media lessThan="sm">
             {cover && <ResponsiveImage url={cover} width={334} height={167} />}
-            {!cover && (
-              <CoverIcon
-                title={article.title}
-                shortHash={article.shortHash}
-                size="sm"
-                hue={hue}
-              />
-            )}
+            {!cover && <CoverIcon shortHash={article.shortHash} size="sm" />}
           </Media>
           <Media greaterThanOrEqual="sm">
             {cover && <ResponsiveImage url={cover} width={404} height={404} />}
-            {!cover && (
-              <CoverIcon
-                title={article.title}
-                shortHash={article.shortHash}
-                size="lg"
-                hue={hue}
-              />
-            )}
+            {!cover && <CoverIcon shortHash={article.shortHash} size="lg" />}
           </Media>
 
           {pinned && (

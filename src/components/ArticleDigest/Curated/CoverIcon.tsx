@@ -3,10 +3,8 @@ import React from 'react'
 import styles from './styles.module.css'
 
 interface CoverIconProps {
-  title: string
   shortHash: string
   size?: 'sm' | 'lg'
-  hue?: number
 }
 
 /**
@@ -14,7 +12,7 @@ interface CoverIconProps {
  * 1. Sum up all ASCII values of the string
  * 2. Get modulo 36 of the sum to get final group index
  */
-export const getCoverHue = (shortHash: string): number => {
+export const getCoverGroupIndex = (shortHash: string): number => {
   if (!shortHash || typeof shortHash !== 'string') {
     return 0
   }
@@ -27,7 +25,6 @@ export const getCoverHue = (shortHash: string): number => {
 }
 
 const generateLayerColors = (groupIndex: number) => {
-  // 定义36组lab颜色
   const colorGroups = [
     {
       layer1: 'lab(94 -10 10)',
@@ -397,14 +394,9 @@ const LargeCoverSVG = ({ colors }: { colors: Record<string, string> }) => (
   </svg>
 )
 
-const CoverIcon: React.FC<CoverIconProps> = ({
-  title,
-  shortHash,
-  size = 'sm',
-  hue: _hue,
-}) => {
-  const hue = _hue || getCoverHue(shortHash)
-  const colors = generateLayerColors(hue)
+const CoverIcon: React.FC<CoverIconProps> = ({ shortHash, size = 'sm' }) => {
+  const groupIndex = getCoverGroupIndex(shortHash)
+  const colors = generateLayerColors(groupIndex)
 
   return (
     <div className={styles.coverIcon}>
