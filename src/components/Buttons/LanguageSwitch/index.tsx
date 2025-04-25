@@ -91,7 +91,7 @@ export const LanguageSwitch: React.FC<LanguageSwitchProps> = ({
   )
 
   return (
-    <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG}>
+    <Dropdown content={<LanguageSwitchContent />} zIndex={Z_INDEX.OVER_DIALOG} appendTo="parent">
       {({ openDropdown, ref }) => (
         <>
           <Media lessThan="md">
