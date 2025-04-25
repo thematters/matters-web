@@ -3,7 +3,7 @@ import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
-import { makeSummary, normalizeTag, toPath } from '~/common/utils'
+import { makeSummary, toPath } from '~/common/utils'
 import { Dialog, ShareDialog } from '~/components'
 import { LatestVersionArticleQuery } from '~/gql/graphql'
 interface PublishedStateProps {
@@ -37,11 +37,6 @@ const PublishedState = ({ article }: PublishedStateProps) => {
           : `${makeSummary(article.title, MAX_META_SUMMARY_LENGTH)} - Matters`
       }
       path={path.href}
-      tags={article.tags
-        ?.map((tag) => tag.content)
-        .map(normalizeTag)
-        .join(' ')
-        .split(/\s+/)}
       description={
         <>
           <p>

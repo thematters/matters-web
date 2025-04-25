@@ -1,11 +1,5 @@
 import { MAX_META_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
-import {
-  analytics,
-  makeSummary,
-  normalizeTag,
-  toLocale,
-  toPath,
-} from '~/common/utils'
+import { analytics, makeSummary, toLocale, toPath } from '~/common/utils'
 import { ButtonProps, ShareButton } from '~/components'
 import DropdownActions, {
   DropdownActionsControls,
@@ -94,9 +88,6 @@ const DesktopToolbar = ({
             <ShareButton
               title={`${makeSummary(articleDetails.title, MAX_META_SUMMARY_LENGTH)} - ${articleDetails?.author.displayName} - Matters`}
               path={sharePath}
-              tags={articleDetails.tags?.map((tag) =>
-                normalizeTag(tag.content).replace(/\s+/g, '')
-              )}
               iconSize={24}
               inCard={false}
               textActiveColor="greyDarker"

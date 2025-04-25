@@ -9,7 +9,6 @@ import { ShareDialogContentProps } from './Content'
 export type ShareDialogProps = {
   title?: string | null
   path?: string | null
-  tags?: string[]
 
   disableNativeShare?: boolean
 
@@ -23,7 +22,6 @@ type BaseShareDialogProps = {
   onShare: (fallbackShare: () => void) => void
   shareTitle: string
   shareLink: string
-  shareTags?: string[]
 } & Pick<
   ShareDialogProps,
   'children' | 'headerTitle' | 'description' | 'btns' | 'smUpBtns'
@@ -67,7 +65,7 @@ function tryDecodeUrl(url: string) {
 }
 
 export const ShareDialog = (props: ShareDialogProps) => {
-  const { title, path, tags } = props
+  const { title, path } = props
 
   const shareLink = tryDecodeUrl(
     typeof window !== 'undefined'
@@ -111,7 +109,6 @@ export const ShareDialog = (props: ShareDialogProps) => {
           onShare={onShare}
           shareTitle={shareTitle}
           shareLink={shareLink}
-          shareTags={Array.from(new Set(tags)).filter(Boolean)}
         />
       }
     >

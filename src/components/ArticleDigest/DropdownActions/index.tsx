@@ -12,11 +12,7 @@ import {
   MAX_META_SUMMARY_LENGTH,
 } from '~/common/enums'
 import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
-import {
-  capitalizeFirstLetter,
-  makeSummary,
-  normalizeTag,
-} from '~/common/utils'
+import { capitalizeFirstLetter, makeSummary } from '~/common/utils'
 import {
   AddCollectionsArticleDialog,
   AddCollectionsArticleDialogProps,
@@ -475,9 +471,6 @@ const DropdownActions = (props: DropdownActionsProps) => {
         ? `${makeSummary(article.title, MAX_META_SUMMARY_LENGTH)} - ${article.author.displayName} - Matters`
         : `${makeSummary(article.title, MAX_META_SUMMARY_LENGTH)} - Matters`,
       path: props.sharePath,
-      tags: article.tags?.map((tag) =>
-        normalizeTag(tag.content).replace(/\s+/g, '')
-      ),
     },
     ({ openDialog }) => ({ ...props, ...controls, openShareDialog: openDialog })
   )

@@ -5,15 +5,7 @@ import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Icon, TextIcon, ViewerContext } from '~/components'
 
-const Threads = ({
-  title,
-  link,
-  tags,
-}: {
-  title: string
-  link: string
-  tags: string[] | undefined
-}) => {
+const Threads = ({ title, link }: { title: string; link: string }) => {
   const viewer = useContext(ViewerContext)
 
   // append utm_source to link
@@ -29,19 +21,7 @@ const Threads = ({
     <button
       type="button"
       onClick={() => {
-        let text = title
-        if (Array.isArray(tags) && tags.length > 0) {
-          text += ` ${tags
-            .join(' ')
-            .trim()
-            .split(/\s+/)
-            .filter(Boolean)
-            .map((w) => `#${w.trim()}`)
-            .join(' ')}`
-        }
-        text += ' via @matters.lab'
-
-        const shareUrl = `https://threads.net/intent/post?text=${encodeURIComponent(`${text} ${link}`)}`
+        const shareUrl = `https://threads.net/intent/post?text=${encodeURIComponent(`${title} ${link}`)}`
 
         analytics.trackEvent('share', {
           type: 'threads',

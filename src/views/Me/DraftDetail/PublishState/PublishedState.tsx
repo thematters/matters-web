@@ -3,7 +3,7 @@ import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { MAX_META_SUMMARY_LENGTH } from '~/common/enums'
-import { makeSummary, normalizeTag, toPath } from '~/common/utils'
+import { makeSummary, toPath } from '~/common/utils'
 import { Dialog, ShareDialog, useRoute, ViewerContext } from '~/components'
 import { PublishStateDraftFragment } from '~/gql/graphql'
 
@@ -67,9 +67,6 @@ const PublishedState = ({ draft }: { draft: PublishStateDraftFragment }) => {
           : `${makeSummary(draft.article.title, MAX_META_SUMMARY_LENGTH)} - Matters`
       }
       path={path.href}
-      tags={draft.article.tags?.map((tag) =>
-        normalizeTag(tag.content).replace(/\s+/g, '')
-      )}
       description={
         <p>
           <FormattedMessage

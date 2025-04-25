@@ -5,15 +5,7 @@ import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Icon, TextIcon, ViewerContext } from '~/components'
 
-const Twitter = ({
-  title,
-  link,
-  tags,
-}: {
-  title: string
-  link: string
-  tags?: string[]
-}) => {
+const Twitter = ({ title, link }: { title: string; link: string }) => {
   const viewer = useContext(ViewerContext)
 
   // append utm_source to link
@@ -29,21 +21,9 @@ const Twitter = ({
     <button
       type="button"
       onClick={() => {
-        let text = title
-        if (Array.isArray(tags) && tags.length > 0) {
-          text += ` ${tags
-            .join(' ')
-            .trim()
-            .split(/\s+/)
-            .filter(Boolean)
-            .map((w) => `#${w.trim()}`)
-            .join(' ')}`
-        }
-        text += ' via @matterslab'
-
         const shareUrl = `https://twitter.com/intent/tweet?${new URLSearchParams(
           {
-            text,
+            text: title,
             // u.searchParams.set('hashtags', tags.map((w) => w.trim()).join(','))
             // u.searchParams.set('via', 'matterslab')
             related: 'matterslab:MattersNews 中文,Mattersw3b:Matters Lab',
