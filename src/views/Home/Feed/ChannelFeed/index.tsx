@@ -35,18 +35,17 @@ function generateRandomString(length = 12) {
   return result
 }
 
-// Count hue distribution for color analysis
-function countHueDistribution(shortHashes: string[]) {
-  // Divide 360 degrees into 36 groups, 10 degrees each
-  const hueGroups = Array(36).fill(0)
+// Count color group distribution
+function countColorDistribution(shortHashes: string[]) {
+  // Initialize array for 36 color groups
+  const colorGroups = Array(36).fill(0)
 
   shortHashes.forEach((hash) => {
-    const hue = getCoverHue(hash)
-    const groupIndex = Math.floor(hue / 10)
-    hueGroups[groupIndex]++
+    const groupIndex = getCoverHue(hash) // getCoverHue now returns group index directly
+    colorGroups[groupIndex]++
   })
 
-  return hueGroups
+  return colorGroups
 }
 
 const ChannelFeed = () => {
@@ -83,10 +82,10 @@ const ChannelFeed = () => {
     const ctx = chartRef.current.getContext('2d')
     if (!ctx) return
 
-    const hueGroups = countHueDistribution(
+    const colorGroups = countColorDistribution(
       testArticles.map((article) => article.shortHash)
     )
-    const maxValue = Math.max(...hueGroups)
+    const maxValue = Math.max(...colorGroups)
 
     // Clear canvas
     ctx.clearRect(0, 0, 600, 300)
@@ -105,55 +104,66 @@ const ChannelFeed = () => {
     // Calculate optimal bar width and spacing
     const spacing = 2
     const barWidth = Math.floor(
-      (availableWidth + spacing) / hueGroups.length - spacing
+      (availableWidth + spacing) / colorGroups.length - spacing
     )
 
     // Recalculate actual left margin to center the chart
-    const actualWidth = (barWidth + spacing) * hueGroups.length - spacing
+    const actualWidth = (barWidth + spacing) * colorGroups.length - spacing
     margin.left = Math.floor((600 - actualWidth) / 2)
 
     const chartHeight = 200
 
-    hueGroups.forEach((count, index) => {
+    // Draw grid lines
+    ctx.strokeStyle = '#e0e0e0'
+    ctx.beginPath()
+    for (let i = 0; i <= 10; i++) {
+      const y = margin.top + (chartHeight * i) / 10
+      ctx.moveTo(margin.left, y)
+      ctx.lineTo(margin.left + actualWidth, y)
+    }
+    ctx.stroke()
+
+    colorGroups.forEach((count, index) => {
       // Calculate bar height and position
       const height = (count / maxValue) * chartHeight
       const x = margin.left + (barWidth + spacing) * index
       const y = margin.top + (chartHeight - height)
 
-      // Use actual hue value for bar color
-      const hue = index * 10
-      ctx.fillStyle = `hsl(${hue}, 70%, 50%)`
+      // Use neutral color for bars
+      const baseColor = '#4a90e2'
+      ctx.fillStyle = baseColor
 
       // Draw bar
       ctx.fillRect(x, y, barWidth, height)
 
-      // Add value labels (every 3rd bar)
-      if (index % 3 === 0) {
-        ctx.fillStyle = '#000'
-        ctx.font = '10px Arial'
-        ctx.textAlign = 'center'
-        ctx.fillText(count.toString(), x + barWidth / 2, y - 5)
-      }
+      // Add value labels for all bars
+      ctx.fillStyle = '#333'
+      ctx.font = '10px Arial'
+      ctx.textAlign = 'center'
+      ctx.fillText(count.toString(), x + barWidth / 2, y - 5)
 
-      // Add hue labels (every 3rd bar)
-      if (index % 3 === 0) {
-        ctx.save()
-        ctx.translate(x + barWidth / 2, margin.top + chartHeight + 25)
-        ctx.rotate(Math.PI / 4)
-        ctx.fillText(`${hue}°`, 0, 0)
-        ctx.restore()
-      }
+      // Add group number labels
+      ctx.save()
+      ctx.translate(x + barWidth / 2, margin.top + chartHeight + 25)
+      ctx.rotate(Math.PI / 4)
+      ctx.fillText(`组 ${index}`, 0, 0)
+      ctx.restore()
     })
 
-    // Add title
-    ctx.fillStyle = '#000'
+    // Add title and axis labels
+    ctx.fillStyle = '#333'
     ctx.font = 'bold 14px Arial'
     ctx.textAlign = 'center'
-    ctx.fillText(
-      'Hue Value Distribution (10° per group)',
-      600 / 2,
-      margin.top / 2
-    )
+    ctx.fillText('颜色组使用频率统计', 600 / 2, margin.top / 2)
+
+    // Add y-axis labels
+    ctx.textAlign = 'right'
+    ctx.font = '10px Arial'
+    for (let i = 0; i <= 10; i++) {
+      const value = Math.round((maxValue * i) / 10)
+      const y = margin.top + chartHeight - (chartHeight * i) / 10
+      ctx.fillText(value.toString(), margin.left - 5, y + 3)
+    }
   }, [testArticles])
 
   useEffect(() => {
@@ -162,10 +172,10 @@ const ChannelFeed = () => {
     const ctx = circularChartRef.current.getContext('2d')
     if (!ctx) return
 
-    const hueGroups = countHueDistribution(
+    const colorGroups = countColorDistribution(
       testArticles.map((article) => article.shortHash)
     )
-    const maxValue = Math.max(...hueGroups)
+    const maxValue = Math.max(...colorGroups)
 
     // Clear canvas
     ctx.clearRect(0, 0, 600, 600)
@@ -174,93 +184,92 @@ const ChannelFeed = () => {
     const centerX = 300
     const centerY = 300
     const radius = 200
-    const innerRadius = radius * 0.35 // 縮小內圈以留出更多空間顯示高度
-    const maxHeight = (radius - innerRadius) * 0.8 // 最大高度
+    const innerRadius = radius * 0.35
+    const maxHeight = (radius - innerRadius) * 0.8
 
-    // 清空畫布
-    ctx.clearRect(0, 0, 600, 600)
-
-    // 先畫底部圓環（淺灰色）
+    // Draw base ring
     ctx.beginPath()
     ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI)
     ctx.arc(centerX, centerY, innerRadius, 2 * Math.PI, 0, true)
     ctx.fillStyle = '#f5f5f5'
     ctx.fill()
 
-    // 計算並繪製每個色相區段
-    hueGroups.forEach((count, index) => {
-      const hue = index * 10
-      const startAngle = (hue - 90) * (Math.PI / 180)
-      const endAngle = (hue + 10 - 90) * (Math.PI / 180)
+    // Draw each segment
+    colorGroups.forEach((count, index) => {
+      const angle = index * 10
+      const startAngle = (angle - 90) * (Math.PI / 180)
+      const endAngle = (angle + 10 - 90) * (Math.PI / 180)
 
-      // 計算高度（基於數值）
       const height = count > 0 ? (count / maxValue) * maxHeight : 0
       const currentRadius = innerRadius + height
 
-      // 繪製扇形
+      // Draw segment
       ctx.beginPath()
       ctx.arc(centerX, centerY, currentRadius, startAngle, endAngle)
       ctx.arc(centerX, centerY, innerRadius, endAngle, startAngle, true)
       ctx.closePath()
 
-      // 使用實際的色相值，並調整透明度
-      ctx.fillStyle = `hsla(${hue}, 70%, 50%, 0.8)`
+      // Use neutral color with varying opacity based on count
+      const opacity = 0.3 + (count / maxValue) * 0.7
+      ctx.fillStyle = `rgba(74, 144, 226, ${opacity})`
       ctx.fill()
 
-      // 添加邊框以增強立體感
-      ctx.strokeStyle = `hsla(${hue}, 70%, 40%, 0.6)`
+      // Add border
+      ctx.strokeStyle = 'rgba(74, 144, 226, 0.8)'
       ctx.lineWidth = 1
       ctx.stroke()
 
-      // 如果數值較大，添加數值標籤
-      if (count > maxValue * 0.1) {
+      // Add value and group labels
+      if (count > 0) {
         const labelAngle = (startAngle + endAngle) / 2
         const labelRadius = innerRadius + height / 2
         const x = centerX + labelRadius * Math.cos(labelAngle)
         const y = centerY + labelRadius * Math.sin(labelAngle)
 
-        ctx.fillStyle = '#fff'
+        // Draw count
+        ctx.fillStyle = '#333'
         ctx.font = 'bold 12px Arial'
         ctx.textAlign = 'center'
         ctx.textBaseline = 'middle'
         ctx.fillText(count.toString(), x, y)
+
+        // Draw group number
+        const groupLabelRadius = innerRadius - 15
+        const groupX = centerX + groupLabelRadius * Math.cos(labelAngle)
+        const groupY = centerY + groupLabelRadius * Math.sin(labelAngle)
+        ctx.font = '10px Arial'
+        ctx.fillText(`${index}`, groupX, groupY)
       }
     })
 
-    // 添加刻度標記
-    for (let i = 0; i < 360; i += 30) {
-      const angle = (i - 90) * (Math.PI / 180)
+    // Add scale marks
+    for (let i = 0; i < 36; i += 3) {
+      const angle = (i * 10 - 90) * (Math.PI / 180)
       const cos = Math.cos(angle)
       const sin = Math.sin(angle)
 
-      // 畫刻度線
+      // Draw scale line
       ctx.beginPath()
       ctx.moveTo(centerX + innerRadius * cos, centerY + innerRadius * sin)
       ctx.lineTo(centerX + (radius + 10) * cos, centerY + (radius + 10) * sin)
-      ctx.strokeStyle = 'rgba(102, 102, 102, 0.5)'
+      ctx.strokeStyle = 'rgba(102, 102, 102, 0.3)'
       ctx.lineWidth = 1
       ctx.stroke()
-
-      // 添加角度標籤
-      const labelRadius = radius + 25
-      const x = centerX + labelRadius * cos
-      const y = centerY + labelRadius * sin
-
-      ctx.fillStyle = '#666'
-      ctx.font = '12px Arial'
-      ctx.textAlign = 'center'
-      ctx.textBaseline = 'middle'
-      ctx.fillText(`${i}°`, x, y)
     }
 
-    // 添加中心文字
+    // Add center text
     ctx.fillStyle = '#333'
     ctx.font = 'bold 16px Arial'
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
-    ctx.fillText('色相分布統計', centerX, centerY - 10)
+    ctx.fillText('颜色组使用频率统计', centerX, centerY - 10)
     ctx.font = '14px Arial'
     ctx.fillText(`共 ${testArticles.length} 篇文章`, centerX, centerY + 10)
+
+    // Add legend
+    const legendY = centerY + radius + 40
+    ctx.font = '12px Arial'
+    ctx.fillText('数字表示颜色组编号（0-35）', centerX, legendY)
   }, [testArticles])
 
   const loadPrivate = (publicData?: FeedArticlesPublicChannelQuery) => {
