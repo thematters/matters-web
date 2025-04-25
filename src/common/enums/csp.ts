@@ -41,6 +41,8 @@ const SCRIPT_SRC = [
   '*.geniee.com',
   'securepubads.g.doubleclick.net',
   'yads.c.yimg.jp',
+  'sp-gn.com',
+  'ep1.adtrafficquality.google',
 
   // Google Ads
   '*.adtrafficquality.google',
@@ -51,6 +53,8 @@ const SCRIPT_SRC = [
   '*.doubleclick.net',
   '*.gstatic.com',
   '*.googleadservices.com',
+  'tpc.googlesyndication.com',
+
 ]
 
 const STYLE_SRC = [
