@@ -21,7 +21,7 @@ const Threads = ({ title, link }: { title: string; link: string }) => {
     <button
       type="button"
       onClick={() => {
-        const shareUrl = `https://threads.net/intent/post?text=${encodeURIComponent(`${title} ${link}`)}`
+        const shareUrl = `https://threads.com/intent/post?text=${encodeURIComponent(`${title} ${link}`)}`
 
         analytics.trackEvent('share', {
           type: 'threads',

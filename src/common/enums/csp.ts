@@ -54,7 +54,6 @@ const SCRIPT_SRC = [
   '*.gstatic.com',
   '*.googleadservices.com',
   'tpc.googlesyndication.com',
-
 ]
 
 const STYLE_SRC = [
