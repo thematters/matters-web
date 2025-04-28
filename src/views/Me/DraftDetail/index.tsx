@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
+import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import {
   ASSET_TYPE,
   ENTITY_TYPE,
@@ -17,13 +18,16 @@ import {
   stripHtml,
 } from '~/common/utils'
 import {
+  Button,
   DraftDetailStateContext,
   DraftDetailStateProvider,
+  DrawerProvider,
   EmptyLayout,
   Head,
+  Icon,
   Layout,
-  Media,
   SpinnerBlock,
+  TextIcon,
   Throw404,
   useDirectImageUpload,
   useRoute,
@@ -47,12 +51,10 @@ import {
   SingleFileUploadMutation,
 } from '~/gql/graphql'
 
-import BottomBar from './BottomBar'
 import { DRAFT_DETAIL, DRAFT_DETAIL_VIEWER, SET_CONTENT } from './gql'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
-import Sidebar from './Sidebar'
 import styles from './styles.module.css'
 
 const Editor = dynamic(
@@ -343,84 +345,89 @@ const BaseDraftDetail = () => {
   }
 
   return (
-    <Layout.Main
-      aside={
-        <Media greaterThanOrEqual="lg">
-          <Sidebar
-            draft={draft}
-            campaigns={appliedCampaigns}
-            ownCircles={ownCircles}
-          />
-        </Media>
-      }
-    >
-      <Layout.Header
-        mode="compact"
-        right={
-          <section className={styles.headerRight}>
-            <SaveStatus status={saveStatus} />
+    <>
+      <Layout
+        header={
+          <>
+            <section className={styles.header}>
+              <SaveStatus status={saveStatus} />
 
-            <section>
-              {isOverLength && (
-                <span className={styles.count}>
-                  {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
-                </span>
-              )}
-              {draft && (
-                <SettingsButton
-                  draft={draft}
-                  campaigns={appliedCampaigns}
-                  ownCircles={ownCircles}
-                  publishable={!!publishable}
-                />
-              )}
+              <section>
+                {isOverLength && (
+                  <span className={styles.count}>
+                    {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
+                  </span>
+                )}
+                {draft && (
+                  <section className={styles.publishButtons}>
+                    <SettingsButton
+                      draft={draft}
+                      campaigns={appliedCampaigns}
+                      ownCircles={ownCircles}
+                      publishable={!!publishable}
+                    />
+                    <span className={styles.divider} />
+                    <Button
+                      size={[null, '2.375rem']}
+                      spacing={[0, 14]}
+                      borderRadius={'0.75rem'}
+                      bgColor="black"
+                      onClick={() => {
+                        console.log('clicked')
+                      }}
+                    >
+                      <TextIcon
+                        color="white"
+                        icon={<Icon icon={IconDown} size={18} />}
+                        spacing={8}
+                      />
+                    </Button>
+                  </section>
+                )}
+              </section>
             </section>
-          </section>
+          </>
         }
-      />
-
-      <Head
-        noSuffix
-        title={
-          draft?.title
-            ? intl.formatMessage(
-                {
-                  defaultMessage: 'Draft - {title}',
-                  id: 'gvTltk',
-                },
-                { title: draft?.title }
-              )
-            : intl.formatMessage({
-                defaultMessage: 'Draft - Untitled',
-                id: 'qcAuPU',
-              })
-        }
-      />
-
-      <PublishState draft={draft} />
-
-      <Layout.Main.Spacing>
-        <Editor
-          draft={draft}
-          update={async (props) => addRequest(() => update(props))}
-          upload={async (props) => addRequest(() => upload(props))}
+      >
+        <Head
+          noSuffix
+          title={
+            draft?.title
+              ? intl.formatMessage(
+                  {
+                    defaultMessage: 'Draft - {title}',
+                    id: 'gvTltk',
+                  },
+                  { title: draft?.title }
+                )
+              : intl.formatMessage({
+                  defaultMessage: 'Draft - Untitled',
+                  id: 'qcAuPU',
+                })
+          }
         />
-      </Layout.Main.Spacing>
 
-      <Media lessThan="lg">
-        <BottomBar
-          draft={draft}
-          ownCircles={ownCircles}
-          campaigns={appliedCampaigns}
-        />
-      </Media>
-    </Layout.Main>
+        <PublishState draft={draft} />
+
+        <Layout.Main.Spacing>
+          <Editor
+            draft={draft}
+            update={async (props) => addRequest(() => update(props))}
+            upload={async (props) => addRequest(() => upload(props))}
+          />
+
+          <PublishState draft={draft} />
+        </Layout.Main.Spacing>
+      </Layout>
+    </>
   )
 }
 
 const DraftDetail = () => (
   <DraftDetailStateProvider>
-    <BaseDraftDetail />
+    <DrawerProvider>
+      <BaseDraftDetail />
+    </DrawerProvider>
   </DraftDetailStateProvider>
 )
 

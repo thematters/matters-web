@@ -1,5 +1,11 @@
-.headerRight {
+.header {
   @mixin flex-center-space-between;
+
+  position: sticky;
+  top: 0;
+  z-index: var(--z-index-global-header);
+  padding: var(--sp16) var(--sp32);
+  background-color: var(--color-white);
 }
 
 .count {
@@ -8,4 +14,18 @@
   font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-negative-red);
+}
+
+.publishButtons {
+  display: flex;
+  align-items: center;
+  background-color: var(--color-black);
+  border-radius: 0.75rem;
+}
+
+.divider {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background-color: var(--color-grey-scale-white-60);
 }

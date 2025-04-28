@@ -13,13 +13,16 @@ import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.module.css'
 
-export const Layout: React.FC<{ children?: React.ReactNode }> & {
+export const Layout: React.FC<{
+  header?: React.ReactNode
+  children?: React.ReactNode
+}> & {
   Main: typeof Main
   Header: typeof Header
   FixedMain: typeof FixedMain
   AuthHeader: typeof AuthHeader
   Notice: typeof Notice
-} = ({ children }) => {
+} = ({ header, children }) => {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
@@ -27,13 +30,22 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
   const isInMomentDetail = isInPath('MOMENT_DETAIL')
   const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
 
+  const isInOneColumnLayout = isInDraftDetail
+
+  const layoutClasses = classNames({
+    [styles.container]: !isInOneColumnLayout,
+    [styles.oneColumnLayout]: isInOneColumnLayout,
+  })
+
   return (
     <>
       <Head description={null} />
 
-      <div className={styles.container}>
+      {header}
+
+      <div className={layoutClasses}>
         <main className={styles.main}>
-          {!isInArticleDetailHistory && (
+          {!isInArticleDetailHistory && !isInDraftDetail && (
             <nav role="navigation" className={styles.sidenav}>
               <section className={styles.sideNavContent}>
                 <Media greaterThan="sm">

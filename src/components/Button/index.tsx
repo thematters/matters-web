@@ -34,14 +34,15 @@ export type ButtonHeight =
   | '1.875rem'
   | '2rem'
   | '2.25rem'
+  | '2.375rem'
   | '2.5rem'
   | '3rem'
   | undefined
   | null
 
-export type ButtonSpacingY = 0 | 4 | 8 | 10 | 12 | 16
+export type ButtonSpacingY = 0 | 4 | 8 | 10 | 12 | 14 | 16
 
-export type ButtonSpacingX = 0 | 4 | 8 | 10 | 12 | 16 | 20 | 24
+export type ButtonSpacingX = 0 | 4 | 8 | 10 | 12 | 14 | 16 | 20 | 24
 
 type ButtonColor =
   | 'white'
