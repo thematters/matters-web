@@ -1,3 +1,4 @@
+import _throttle from 'lodash/throttle'
 import dynamic from 'next/dynamic'
 import { forwardRef, useEffect, useState } from 'react'
 import FocusLock from 'react-focus-lock'
@@ -103,11 +104,13 @@ export const Dropdown: React.FC<DropdownProps> = ({
   }, [show])
 
   // Listen for scroll events on mobile only
-  useNativeEventListener('scroll', () => {
+  const handleScroll = _throttle(() => {
     if (show && isMobile) {
       closeDropdown()
     }
-  })
+  }, 300)
+
+  useNativeEventListener('scroll', handleScroll)
 
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
     if (event.code?.toLowerCase() !== KEYVALUE.escape) {
