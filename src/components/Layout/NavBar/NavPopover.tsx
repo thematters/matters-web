@@ -43,6 +43,7 @@ const NavPopover: React.FC = () => {
             borderRadius="base"
             role="menuitem"
             href={PATHS.ME_DRAFT_NEW}
+            htmlTarget="_blank"
           >
             <TextIcon
               icon={<Icon icon={IconEdit} size={32} />}
