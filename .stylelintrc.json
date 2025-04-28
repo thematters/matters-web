@@ -1,16 +1,14 @@
 {
-  "extends": [
-    "stylelint-config-standard",
-    "stylelint-config-recess-order"
-  ],
+  "extends": ["stylelint-config-standard", "stylelint-config-recess-order"],
   "plugins": ["stylelint-prettier"],
   "rules": {
     "number-max-precision": 7,
     "at-rule-no-unknown": null,
     "no-descending-specificity": null,
     "prettier/prettier": true,
+    "no-duplicate-selectors": null,
     "selector-class-pattern": null,
-    "function-no-unknown": [true, {"ignoreFunctions": ["constant", "shade"]}],
+    "function-no-unknown": [true, { "ignoreFunctions": ["constant", "shade"] }],
     "selector-pseudo-class-no-unknown": [
       true,
       {
