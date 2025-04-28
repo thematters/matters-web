@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconEditorImage } from '@/public/static/icons/editor-image.svg'
 import { ACCEPTED_UPLOAD_IMAGE_TYPES } from '~/common/enums'
-import { Icon } from '~/components'
+import { Icon, Tooltip } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -35,31 +35,34 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({ editor }) => {
   }
 
   return (
-    <label
-      className={styles.uploadButton}
-      htmlFor={fieldId}
-      title={intl.formatMessage({
-        defaultMessage: 'Insert image',
-        id: 'Pv2PlK',
+    <Tooltip
+      content={intl.formatMessage({
+        defaultMessage: 'Image',
+        id: 'G4KR8j',
+        description: 'src/components/Editor',
       })}
+      placement="top"
     >
-      <Icon icon={IconEditorImage} size={32} />
+      <label className={styles.uploadButton} htmlFor={fieldId}>
+        <Icon icon={IconEditorImage} size={32} />
 
-      <VisuallyHidden>
-        <input
-          id={fieldId}
-          type="file"
-          name="file"
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Insert image',
-            id: 'Pv2PlK',
-          })}
-          accept={acceptTypes}
-          multiple={true}
-          onChange={handleChange}
-        />
-      </VisuallyHidden>
-    </label>
+        <VisuallyHidden>
+          <input
+            id={fieldId}
+            type="file"
+            name="file"
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Image',
+              id: 'G4KR8j',
+              description: 'src/components/Editor',
+            })}
+            accept={acceptTypes}
+            multiple={true}
+            onChange={handleChange}
+          />
+        </VisuallyHidden>
+      </label>
+    </Tooltip>
   )
 }
 

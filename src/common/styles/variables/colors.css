@@ -24,6 +24,7 @@
   --color-white-light: #fff9; /* FIXME: undocumented */
 
   /* function */
+  --color-editor-selection: #d5f1e6;
   --color-positive-green: #5c9969;
   --color-top-up-yellow: #fff4dc;
   --color-top-up-yellow-darker: #ffe9b8;

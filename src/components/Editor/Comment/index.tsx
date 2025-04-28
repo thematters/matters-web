@@ -65,6 +65,11 @@ const CommentEditor: React.FC<Props> = ({
       const content = editor.getHTML()
       update({ content })
     },
+    editorProps: {
+      attributes: {
+        class: classNames('u-content-comment', styles.commentEditor),
+      },
+    },
     immediatelyRender: false,
     // FIXME: toggle scroll lock when editor is focused
     // can be removed if editor is only used in single page
@@ -109,7 +114,6 @@ const CommentEditor: React.FC<Props> = ({
 
   return (
     <div
-      className={classNames('u-content-comment', styles.commentEditor)}
       id="editor" // anchor for mention plugin
     >
       <EditorContent

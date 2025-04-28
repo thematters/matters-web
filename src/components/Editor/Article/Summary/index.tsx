@@ -90,7 +90,8 @@ const EditorSummary: React.FC<Props> = ({
 
     if (
       event.key.toLowerCase() === KEYVALUE.backSpace &&
-      target.selectionStart === 0
+      target.selectionStart === 0 &&
+      target.selectionStart === target.selectionEnd
     ) {
       event.preventDefault()
       window.dispatchEvent(new CustomEvent(FOCUS_EDITOR_TITLE))

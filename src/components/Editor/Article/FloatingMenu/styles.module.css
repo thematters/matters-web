@@ -8,9 +8,18 @@
   & button,
   & .expandButton,
   & .uploadButton {
+    @mixin transition;
+
+    color: var(--color-black);
     cursor: pointer;
     background: var(--color-white);
     border-radius: 50%;
+    transition-property: color;
+
+    &:hover,
+    &:focus {
+      color: var(--color-grey-darker);
+    }
   }
 
   @media (--md-up) {
@@ -33,6 +42,15 @@
 
   @media (--md-up) {
     margin-left: var(--sp32);
+  }
+}
+
+.desktopMenuItems {
+  display: inline-flex;
+
+  & > * + * {
+    margin-left: var(--sp16);
+    cursor: pointer;
   }
 }
 

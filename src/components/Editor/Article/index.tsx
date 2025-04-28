@@ -5,6 +5,7 @@ import {
   EditorContent,
   Extension,
   FigcaptionKit,
+  Link,
   Mention,
   PasteDropFile,
   Placeholder,
@@ -34,6 +35,7 @@ import {
   restoreImages,
   SmartLink,
 } from './extensions'
+// import { Link } from './extensions/link'
 import { makeSmartLinkOptions } from './extensions/smartLink/utils'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.module.css'
@@ -75,6 +77,12 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     update(c)
   }, INPUT_DEBOUNCE)
 
+  const editorContentClasses = classNames({
+    'u-content-article': true,
+    [styles.articleEditor]: true,
+    [styles.indented]: indentFirstLine,
+  })
+
   const editor = useEditor({
     editable: !isReadOnly,
     content: content || '',
@@ -86,6 +94,9 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       debouncedUpdate({ content })
     },
     editorProps: {
+      attributes: {
+        class: editorContentClasses,
+      },
       handleKeyDown: (view, event) => {
         if (
           event.key.toLowerCase() === KEYVALUE.backSpace &&
@@ -136,7 +147,10 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           editor.commands.insertFigureImageUploaders({ files: validFiles })
         },
       }),
-      ...articleEditorExtensions,
+      Link.configure({ openOnClick: false }),
+      ...articleEditorExtensions.filter(
+        (ext) => !['link', 'figcaptionKit', 'placeholder'].includes(ext.name)
+      ),
     ] as Extension[],
   })
 
@@ -155,11 +169,13 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       const clickY = event.nativeEvent.offsetY
 
       if (clickY > clientHeight - paddingBottom && clickY <= clientHeight) {
-        editor
-          .chain()
-          .focus('end')
-          .insertContentAt(editor.state.selection.to, [{ type: 'paragraph' }])
-          .run()
+        // move cursor to end
+        editor.commands.focus('end')
+
+        // insert paragraph
+        editor.commands.insertContentAt(editor.state.selection.to, [
+          { type: 'paragraph' },
+        ])
       }
     },
     [editor]
@@ -187,19 +203,8 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     e.preventDefault()
   })
 
-  const editorClasses = classNames({
-    'u-content-article': true,
-    [styles.articleEditor]: true,
-    [styles.indented]: indentFirstLine,
-  })
-
   return (
-    <div
-      className={editorClasses}
-      id="editor"
-      ref={editorRef}
-      onClick={handleEditorClick}
-    >
+    <div id="editor" ref={editorRef} onClick={handleEditorClick}>
       <EditorTitle defaultValue={title || ''} update={update} />
 
       <EditorSummary

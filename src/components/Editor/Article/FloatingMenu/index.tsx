@@ -9,9 +9,14 @@ import { useIntl } from 'react-intl'
 import { ReactComponent as IconEditorAdd } from '@/public/static/icons/editor-add.svg'
 import { ReactComponent as IconEditorCode } from '@/public/static/icons/editor-code.svg'
 import { ReactComponent as IconEditorDivider } from '@/public/static/icons/editor-divider.svg'
+import { ReactComponent as IconEditorH2 } from '@/public/static/icons/editor-h2.svg'
+import { ReactComponent as IconEditorH3 } from '@/public/static/icons/editor-h3.svg'
+import { ReactComponent as IconEditorOl } from '@/public/static/icons/editor-ol.svg'
 import { ReactComponent as IconEditorQuote } from '@/public/static/icons/editor-quote.svg'
+import { ReactComponent as IconEditorUl } from '@/public/static/icons/editor-ul.svg'
 import { ReactComponent as IconEditorVideo } from '@/public/static/icons/editor-video.svg'
-import { Icon } from '~/components'
+import { Icon, Tooltip } from '~/components'
+import { Media } from '~/components/Media'
 
 import styles from './styles.module.css'
 import UploadAudioButton, { UploadAudioButtonProps } from './UploadAudioButton'
@@ -72,117 +77,286 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
       }}
     >
       <section className={containerClasses}>
-        <button
-          className={styles.expandButton}
-          type="button"
-          onClick={() => setExpand(!expand)}
-          aria-label={
+        <Tooltip
+          content={
             expand
               ? intl.formatMessage({
-                  defaultMessage: 'Collapse',
-                  id: 'W/V6+Y',
+                  defaultMessage: 'Close Menu',
+                  id: 'JD0T8w',
+                  description: 'src/components/Editor',
                 })
               : intl.formatMessage({
-                  defaultMessage: 'Expand',
-                  id: '0oLj/t',
+                  defaultMessage: 'Open Menu',
+                  id: 'EPx6uM',
+                  description: 'src/components/Editor',
                 })
           }
+          placement="top"
         >
-          {<Icon icon={IconEditorAdd} size={32} />}
-        </button>
+          <button
+            className={styles.expandButton}
+            type="button"
+            onClick={() => setExpand(!expand)}
+            aria-label={
+              expand
+                ? intl.formatMessage({
+                    defaultMessage: 'Close Menu',
+                    id: 'JD0T8w',
+                    description: 'src/components/Editor',
+                  })
+                : intl.formatMessage({
+                    defaultMessage: 'Open Menu',
+                    id: 'EPx6uM',
+                    description: 'src/components/Editor',
+                  })
+            }
+          >
+            {<Icon icon={IconEditorAdd} size={32} />}
+          </button>
+        </Tooltip>
 
         {expand && (
           <div className={styles.menuItems}>
+            {/* Image */}
             <UploadImageButton editor={editor} />
 
-            <button
-              onClick={() => {
-                editor
-                  .chain()
-                  .focus()
-                  .addFigureEmbedLinkInput({
-                    placeholder: intl.formatMessage({
-                      defaultMessage:
-                        'Paste YouTube, Vimeo or bilibili link, and press enter',
-                      id: 'r9LhcI',
-                    }),
-                  })
-                  .run()
-              }}
-              type="button"
-              title={intl.formatMessage({
-                defaultMessage: 'Insert video',
-                id: 'Jr12wo',
+            {/* Video */}
+            <Tooltip
+              content={intl.formatMessage({
+                defaultMessage: 'Video',
+                id: 'U5FZL6',
+                description: 'src/components/Editor',
               })}
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Insert video',
-                id: 'Jr12wo',
-              })}
+              placement="top"
             >
-              {<Icon icon={IconEditorVideo} size={32} />}
-            </button>
+              <button
+                onClick={() => {
+                  editor
+                    .chain()
+                    .focus()
+                    .addFigureEmbedLinkInput({
+                      placeholder: intl.formatMessage({
+                        defaultMessage:
+                          'Paste YouTube, Vimeo or bilibili link, and press enter',
+                        id: 'r9LhcI',
+                      }),
+                    })
+                    .run()
+                }}
+                type="button"
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Video',
+                  id: 'U5FZL6',
+                  description: 'src/components/Editor',
+                })}
+              >
+                {<Icon icon={IconEditorVideo} size={32} />}
+              </button>
+            </Tooltip>
 
+            {/* Audio */}
             <UploadAudioButton editor={editor} upload={upload} />
 
-            <button
-              onClick={() => {
-                editor
-                  .chain()
-                  .focus()
-                  .addFigureEmbedLinkInput({
-                    placeholder: intl.formatMessage({
-                      defaultMessage:
-                        'Paste JSFiddle or CodePen link, and press enter',
-                      id: '3EeDnu',
-                    }),
-                  })
-                  .run()
-              }}
-              type="button"
-              title={intl.formatMessage({
-                defaultMessage: 'Insert code',
-                id: '5Ga0iK',
-              })}
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Insert code',
-                id: '5Ga0iK',
-              })}
-            >
-              {<Icon icon={IconEditorCode} size={32} />}
-            </button>
+            <Media greaterThan="md" className={styles.desktopMenuItems}>
+              {/* H2 */}
+              <Tooltip
+                content={intl.formatMessage({
+                  defaultMessage: 'Title',
+                  id: 'QKo4ol',
+                  description: 'src/components/Editor',
+                })}
+                placement="top"
+              >
+                <button
+                  onClick={() => {
+                    // @ts-ignore
+                    editor.chain().focus().toggleHeading({ level: 2 }).run()
+                    setExpand(false)
+                  }}
+                  type="button"
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Title',
+                    id: 'QKo4ol',
+                    description: 'src/components/Editor',
+                  })}
+                >
+                  {<Icon icon={IconEditorH2} size={32} />}
+                </button>
+              </Tooltip>
 
-            <button
-              onClick={() => editor.chain().focus().setBlockquote().run()}
-              type="button"
-              title={intl.formatMessage({
-                defaultMessage: 'Insert Blockquote',
-                id: 'mObpsB',
-              })}
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Insert Blockquote',
-                id: 'mObpsB',
-              })}
-            >
-              {<Icon icon={IconEditorQuote} size={32} />}
-            </button>
+              {/* H3 */}
+              <Tooltip
+                content={intl.formatMessage({
+                  defaultMessage: 'Subtitle',
+                  id: 'yp0PiU',
+                  description: 'src/components/Editor',
+                })}
+                placement="top"
+              >
+                <button
+                  onClick={() => {
+                    // @ts-ignore
+                    editor.chain().focus().toggleHeading({ level: 3 }).run()
+                    setExpand(false)
+                  }}
+                  type="button"
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Subtitle',
+                    id: 'yp0PiU',
+                    description: 'src/components/Editor',
+                  })}
+                >
+                  {<Icon icon={IconEditorH3} size={32} />}
+                </button>
+              </Tooltip>
 
-            <button
-              onClick={(e) => {
-                editor.chain().focus().setHorizontalRule().run()
-                setExpand(false)
-              }}
-              type="button"
-              title={intl.formatMessage({
-                defaultMessage: 'Insert divider',
-                id: 'QfVedX',
+              {/* Unordered List */}
+              <Tooltip
+                content={intl.formatMessage({
+                  defaultMessage: 'Unordered List',
+                  id: 'KAuIWb',
+                  description: 'src/components/Editor',
+                })}
+                placement="top"
+              >
+                <button
+                  onClick={() => {
+                    // @ts-ignore
+                    editor.chain().focus().toggleBulletList().run()
+                    setExpand(false)
+                  }}
+                  type="button"
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Unordered List',
+                    id: 'KAuIWb',
+                    description: 'src/components/Editor',
+                  })}
+                >
+                  {<Icon icon={IconEditorUl} size={32} />}
+                </button>
+              </Tooltip>
+
+              {/* Ordered List */}
+              <Tooltip
+                content={intl.formatMessage({
+                  defaultMessage: 'Ordered List',
+                  id: 'AQL1ME',
+                  description: 'src/components/Editor',
+                })}
+                placement="top"
+              >
+                <button
+                  onClick={() => {
+                    // @ts-ignore
+                    editor.chain().focus().toggleOrderedList().run()
+                    setExpand(false)
+                  }}
+                  type="button"
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Ordered List',
+                    id: 'AQL1ME',
+                    description: 'src/components/Editor',
+                  })}
+                >
+                  {<Icon icon={IconEditorOl} size={32} />}
+                </button>
+              </Tooltip>
+            </Media>
+
+            {/* Code */}
+            <Tooltip
+              content={intl.formatMessage({
+                defaultMessage: 'Code Block',
+                id: 'wOYX42',
+                description: 'src/components/Editor',
               })}
-              aria-label={intl.formatMessage({
-                defaultMessage: 'Insert divider',
-                id: 'QfVedX',
-              })}
+              placement="top"
             >
-              {<Icon icon={IconEditorDivider} size={32} />}
-            </button>
+              <button
+                onClick={() => {
+                  editor
+                    .chain()
+                    .focus()
+                    .addFigureEmbedLinkInput({
+                      placeholder: intl.formatMessage({
+                        defaultMessage:
+                          'Paste JSFiddle or CodePen link, and press enter',
+                        id: '3EeDnu',
+                      }),
+                    })
+                    .run()
+                  setExpand(false)
+                }}
+                type="button"
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Code Block',
+                  id: 'wOYX42',
+                  description: 'src/components/Editor',
+                })}
+              >
+                {<Icon icon={IconEditorCode} size={32} />}
+              </button>
+            </Tooltip>
+
+            {/* Blockquote */}
+            <Tooltip
+              content={intl.formatMessage({
+                defaultMessage: 'Blockquote',
+                id: '2U8rTr',
+                description: 'src/components/Editor',
+              })}
+              placement="top"
+            >
+              <button
+                onClick={() => {
+                  editor.chain().focus().setBlockquote().run()
+                  setExpand(false)
+                }}
+                type="button"
+                title={intl.formatMessage({
+                  defaultMessage: 'Blockquote',
+                  id: '2U8rTr',
+                  description: 'src/components/Editor',
+                })}
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Blockquote',
+                  id: '2U8rTr',
+                  description: 'src/components/Editor',
+                })}
+              >
+                {<Icon icon={IconEditorQuote} size={32} />}
+              </button>
+            </Tooltip>
+
+            {/* Divider */}
+            <Tooltip
+              content={intl.formatMessage({
+                defaultMessage: 'Divider',
+                id: '/ZmvO+',
+                description: 'src/components/Editor',
+              })}
+              placement="top"
+            >
+              <button
+                onClick={(e) => {
+                  editor.chain().focus().setHorizontalRule().run()
+                  setExpand(false)
+                }}
+                type="button"
+                title={intl.formatMessage({
+                  defaultMessage: 'Divider',
+                  id: '/ZmvO+',
+                  description: 'src/components/Editor',
+                })}
+                aria-label={intl.formatMessage({
+                  defaultMessage: 'Divider',
+                  id: '/ZmvO+',
+                  description: 'src/components/Editor',
+                })}
+              >
+                {<Icon icon={IconEditorDivider} size={32} />}
+              </button>
+            </Tooltip>
           </div>
         )}
       </section>

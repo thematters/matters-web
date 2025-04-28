@@ -3,47 +3,109 @@
   @mixin border-grey;
 
   position: relative;
-  width: 21.5rem; /* 9 * 24 + 8 * 12 + 16 * 2 */
-  padding: var(--sp8) var(--sp16);
+  width: 20.875rem; /* 9 * 22 + 8 * 14 + 12 * 2 */
+  padding: var(--sp8) var(--sp12);
   background: var(--color-white);
-  border-radius: var(--sp4);
-  box-shadow: var(--shadow-dark);
+  border-radius: var(--sp8);
+  box-shadow: 0 4px 16px 0 rgb(0 0 0 / 12%);
 
   &.comment {
-    width: 5.75rem; /* 2 * 24 + 1 * 12 + 16 * 2 */
+    width: 5.125rem; /* 2 * 22 + 1 * 14 + 12 * 2 */
   }
 
-  & * + * {
-    margin-left: var(--sp12);
+  & > * + * {
+    margin-left: var(--sp14);
+  }
+
+  & button {
+    @mixin transition;
+
+    font-size: 0;
+    color: var(--color-black);
+    transition-property: color;
+
+    &:disabled {
+      color: var(--color-grey);
+      opacity: 1;
+    }
+
+    &:hover,
+    &:focus {
+      color: var(--color-grey-darker);
+    }
+  }
+
+  @media (--sm-up) {
+    width: 27rem; /* 9 * 24 + 8 * 24 + 16 * 2 */
+
+    & > * + * {
+      margin-left: var(--sp24);
+    }
+
+    &.comment {
+      width: 6rem; /* 2 * 24 + 1 * 24 + 12 * 2 */
+    }
   }
 
   & .active {
     color: var(--color-matters-green);
   }
 
-  & input {
+  & .linkInput {
     width: 100%;
     height: 1.5rem;
     font-size: var(--text14);
     color: var(--color-black);
+    text-align: left;
     background: transparent;
     border: none;
     outline: none;
+
+    & a {
+      padding-bottom: 0 !important;
+      border-bottom: none !important;
+    }
   }
 
-  & .urlInput {
-    width: 100%;
+  & .linkSubmitButton,
+  & .linkEditButton,
+  & .linkUnlinkButton,
+  & .linkClearButton {
     height: 1.5rem;
+
+    &:hover,
+    &:focus {
+      color: var(--color-black);
+    }
+  }
+
+  & .linkClearButton {
+    margin-left: var(--sp8);
+    color: var(--color-grey);
+  }
+
+  & .linkSubmitButton {
+    margin-left: var(--sp12);
     font-size: var(--text14);
     color: var(--color-black);
-    background: transparent;
-    border: none;
-    outline: none;
+
+    &:disabled,
+    &:hover,
+    &:focus {
+      color: var(--color-grey-darker);
+    }
   }
 
-  & .urlSubmitButton {
-    height: 1.5rem;
-    font-size: var(--text13);
-    color: var(--color-matters-green);
+  & .linkEditButton,
+  & .linkUnlinkButton {
+    margin-left: var(--sp16);
+    color: var(--color-grey);
+  }
+
+  & .linkUnlinkButton {
+    &:hover,
+    &:focus {
+      color: var(--color-negative-red);
+    }
   }
 }
