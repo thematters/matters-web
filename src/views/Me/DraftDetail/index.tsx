@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
 import {
   ASSET_TYPE,
   ENTITY_TYPE,
@@ -18,16 +17,13 @@ import {
   stripHtml,
 } from '~/common/utils'
 import {
-  Button,
   DraftDetailStateContext,
   DraftDetailStateProvider,
   DrawerProvider,
   EmptyLayout,
   Head,
-  Icon,
   Layout,
   SpinnerBlock,
-  TextIcon,
   Throw404,
   useDirectImageUpload,
   useRoute,
@@ -52,12 +48,12 @@ import {
 } from '~/gql/graphql'
 
 import { DRAFT_DETAIL, DRAFT_DETAIL_VIEWER, SET_CONTENT } from './gql'
+import { MoreButton } from './MoreButton'
 import { OptionButton } from './OptionButton'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
 import styles from './styles.module.css'
-
 const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
   {
@@ -369,21 +365,7 @@ const BaseDraftDetail = () => {
                       publishable={!!publishable}
                     />
                     <span className={styles.divider} />
-                    <Button
-                      size={[null, '2.375rem']}
-                      spacing={[0, 14]}
-                      borderRadius={'0.75rem'}
-                      bgColor="black"
-                      onClick={() => {
-                        console.log('clicked')
-                      }}
-                    >
-                      <TextIcon
-                        color="white"
-                        icon={<Icon icon={IconDown} size={18} />}
-                        spacing={8}
-                      />
-                    </Button>
+                    <MoreButton draft={draft} publishable={!!publishable} />
                   </section>
                 )}
               </section>
