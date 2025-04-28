@@ -179,6 +179,18 @@ const BaseArticleDetail = ({
   const translate = () => {
     getTranslation({
       variables: { shortHash: article.shortHash, language: preferredLang },
+    }).then((result) => {
+      // toast error if cannot translate
+      if (!result.data?.article?.translation) {
+        toast.error({
+          message: (
+            <FormattedMessage
+              defaultMessage="Translation quota exhausted. Try later."
+              id="/2IsDH"
+            />
+          ),
+        })
+      }
     })
 
     toast.success({
