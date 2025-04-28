@@ -56,6 +56,7 @@ type ButtonColor =
   | 'greyLight'
   | 'greyLighter'
   | 'greyLighterActive'
+  | 'greyHover'
   | 'greenLighter'
   | 'greenDark'
   | 'green'

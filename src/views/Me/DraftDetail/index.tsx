@@ -52,6 +52,7 @@ import {
 } from '~/gql/graphql'
 
 import { DRAFT_DETAIL, DRAFT_DETAIL_VIEWER, SET_CONTENT } from './gql'
+import { OptionButton } from './OptionButton'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
@@ -358,6 +359,7 @@ const BaseDraftDetail = () => {
                     {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
                   </span>
                 )}
+                <OptionButton />
                 {draft && (
                   <section className={styles.publishButtons}>
                     <SettingsButton

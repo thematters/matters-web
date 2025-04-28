@@ -1463,6 +1463,9 @@
     "defaultMessage": "Supports",
     "description": "src/views/Me/Transactions/index.tsx"
   },
+  "NDV5Mq": {
+    "defaultMessage": "Options"
+  },
   "NEKHMm": {
     "defaultMessage": "Email",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"

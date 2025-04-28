@@ -529,6 +529,12 @@ span.container {
   }
 }
 
+.borderGreyHover {
+  & .hotarea {
+    border-color: var(--color-grey-hover);
+  }
+}
+
 .borderGreenLighter {
   & .hotarea {
     border-color: var(--color-green-lighter);

@@ -1463,6 +1463,9 @@
     "defaultMessage": "支持",
     "description": "src/views/Me/Transactions/index.tsx"
   },
+  "NDV5Mq": {
+    "defaultMessage": "選項"
+  },
   "NEKHMm": {
     "defaultMessage": "電子郵件",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
