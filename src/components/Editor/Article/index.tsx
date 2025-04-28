@@ -79,7 +79,6 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
 
   const editorContentClasses = classNames({
     'u-content-article': true,
-    [styles.articleEditor]: true,
     [styles.indented]: indentFirstLine,
   })
 
@@ -204,7 +203,12 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   })
 
   return (
-    <div id="editor" ref={editorRef} onClick={handleEditorClick}>
+    <div
+      id="editor"
+      className={styles.articleEditor}
+      ref={editorRef}
+      onClick={handleEditorClick}
+    >
       <EditorTitle defaultValue={title || ''} update={update} />
 
       <EditorSummary
