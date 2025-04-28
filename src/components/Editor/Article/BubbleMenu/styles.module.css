@@ -15,13 +15,23 @@
 
   & > * + * {
     margin-left: var(--sp14);
-    font-size: 0;
   }
 
   & button {
+    @mixin transition;
+
+    font-size: 0;
+    color: var(--color-black);
+    transition-property: color;
+
     &:disabled {
       color: var(--color-grey);
       opacity: 1;
+    }
+
+    &:hover,
+    &:focus {
+      color: var(--color-grey-darker);
     }
   }
 
@@ -41,29 +51,61 @@
     color: var(--color-matters-green);
   }
 
-  & input {
+  & .linkInput {
     width: 100%;
     height: 1.5rem;
     font-size: var(--text14);
     color: var(--color-black);
+    text-align: left;
     background: transparent;
     border: none;
     outline: none;
+
+    & a {
+      padding-bottom: 0 !important;
+      border-bottom: none !important;
+    }
   }
 
-  & .urlInput {
-    width: 100%;
+  & .linkSubmitButton,
+  & .linkEditButton,
+  & .linkUnlinkButton,
+  & .linkClearButton {
     height: 1.5rem;
+
+    &:hover,
+    &:focus {
+      color: var(--color-black);
+    }
+  }
+
+  & .linkClearButton {
+    margin-left: var(--sp8);
+    color: var(--color-grey);
+  }
+
+  & .linkSubmitButton {
+    margin-left: var(--sp12);
     font-size: var(--text14);
     color: var(--color-black);
-    background: transparent;
-    border: none;
-    outline: none;
+
+    &:disabled,
+    &:hover,
+    &:focus {
+      color: var(--color-grey-darker);
+    }
   }
 
-  & .urlSubmitButton {
-    height: 1.5rem;
-    font-size: var(--text13);
-    color: var(--color-matters-green);
+  & .linkEditButton,
+  & .linkUnlinkButton {
+    margin-left: var(--sp16);
+    color: var(--color-grey);
+  }
+
+  & .linkUnlinkButton {
+    &:hover,
+    &:focus {
+      color: var(--color-negative-red);
+    }
   }
 }

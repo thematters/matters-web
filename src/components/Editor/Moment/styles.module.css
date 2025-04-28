@@ -1,4 +1,4 @@
-.momentEditor :global(.tiptap.ProseMirror) {
+.momentEditor {
   min-height: 4.125rem;
   padding-top: var(--sp12);
 
