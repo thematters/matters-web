@@ -6,8 +6,8 @@ import ArticleFeeds from './ArticleFeeds'
 import InfoHeader from './InfoHeader'
 import SideParticipants from './SideParticipants'
 
-export const CAMPAIGN_DETAIL = gql`
-  query CampaignDetail($shortHash: String!) {
+export const CAMPAIGN_DETAIL_PUBLIC = gql`
+  query CampaignDetailPublic($shortHash: String!) {
     campaign(input: { shortHash: $shortHash }) {
       id
       shortHash
@@ -17,7 +17,7 @@ export const CAMPAIGN_DETAIL = gql`
         ...InfoHeaderCampaignPrivate
         ...SideParticipantsCampaignPublic
         ...SideParticipantsCampaignPrivate
-        ...ArticleFeedsCampaign
+        ...ArticleFeedsCampaignPublic
       }
     }
   }
@@ -25,7 +25,24 @@ export const CAMPAIGN_DETAIL = gql`
   ${InfoHeader.fragments.campaign.private}
   ${SideParticipants.fragments.public}
   ${SideParticipants.fragments.private}
-  ${ArticleFeeds.fragments}
+  ${ArticleFeeds.fragments.public}
+`
+
+export const CAMPAIGN_DETAIL_PRIVATE = gql`
+  query CampaignDetailPrivate($shortHash: String!) {
+    campaign(input: { shortHash: $shortHash }) {
+      id
+      ... on WritingChallenge {
+        id
+        ...InfoHeaderCampaignPrivate
+        ...SideParticipantsCampaignPrivate
+        ...ArticleFeedsCampaignPrivate
+      }
+    }
+  }
+  ${InfoHeader.fragments.campaign.private}
+  ${SideParticipants.fragments.private}
+  ${ArticleFeeds.fragments.private}
 `
 
 export const GET_PARTICIPANTS = gql`
