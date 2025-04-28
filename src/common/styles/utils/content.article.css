@@ -16,7 +16,6 @@
    *
    * Special Rules:
    * - If followed by hr, headings:
-   *   - Below paragraph, blockquote, lists: ar17-100%
    *   - Below figures: ar17-200%
    *   - Below summary: ar17-100%
    * - If followed by figures:
@@ -27,20 +26,13 @@
   & > * {
     margin-bottom: var(--ar17-200);
 
-    /* for paragraph, blockquote, lists */
-    &:has(+ hr, + h1, + h2, + h3, + h4, + h5, + h6) {
-      margin-bottom: var(--ar17-100);
-    }
-
     &:has(+ figure) {
       margin-bottom: var(--ar17-300);
     }
 
     /* for offsetting the summary */
     &:first-child {
-      margin-top: var(--ar17-100);
-
-      &:not(hr, h1, h2, h3, h4, h5, h6) {
+      &:not(hr) {
         margin-top: var(--ar17-200);
       }
 
