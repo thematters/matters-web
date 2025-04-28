@@ -20,7 +20,7 @@ import {
   ViewerContext,
 } from '~/components'
 import {
-  ArticleFeedsCampaignFragment,
+  ArticleFeedsCampaignPublicFragment,
   CampaignArticlesPublicQuery,
 } from '~/gql/graphql'
 
@@ -35,7 +35,7 @@ import styles from './styles.module.css'
 
 interface MainFeedProps {
   feedType: CampaignFeedType
-  camapign: ArticleFeedsCampaignFragment
+  camapign: ArticleFeedsCampaignPublicFragment
 }
 
 export type CampaignArticlesPublicQueryArticle = NonNullable<
@@ -92,17 +92,21 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
   const announcements = camapign.announcements
 
   const { data, loading, error, fetchMore, networkStatus, client } =
-    usePublicQuery<CampaignArticlesPublicQuery>(CAMPAIGN_ARTICLES_PUBLIC, {
-      variables: {
-        shortHash,
-        ...(!isAll
-          ? {
-              filter: isFeatured ? { featured: true } : { stage: feedType },
-            }
-          : {}),
+    usePublicQuery<CampaignArticlesPublicQuery>(
+      CAMPAIGN_ARTICLES_PUBLIC,
+      {
+        variables: {
+          shortHash,
+          ...(!isAll
+            ? {
+                filter: isFeatured ? { featured: true } : { stage: feedType },
+              }
+            : {}),
+        },
+        skip: isAnnouncement,
       },
-      skip: isAnnouncement,
-    })
+      { publicQuery: !viewer.isAuthed }
+    )
 
   // pagination
   const connectionPath = 'campaign.articles'

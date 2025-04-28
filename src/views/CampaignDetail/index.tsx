@@ -1,6 +1,5 @@
-import { useQuery } from '@apollo/client'
 import dynamic from 'next/dynamic'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 
 import { toPath } from '~/common/utils'
 import {
@@ -10,13 +9,15 @@ import {
   Layout,
   SpinnerBlock,
   Throw404,
+  usePublicQuery,
   useRoute,
+  ViewerContext,
 } from '~/components'
 import { QueryError } from '~/components/GQL'
-import { CampaignDetailQuery } from '~/gql/graphql'
+import { CampaignDetailPublicQuery } from '~/gql/graphql'
 
 import ArticleFeeds from './ArticleFeeds'
-import { CAMPAIGN_DETAIL } from './gql'
+import { CAMPAIGN_DETAIL_PRIVATE, CAMPAIGN_DETAIL_PUBLIC } from './gql'
 import InfoHeader from './InfoHeader'
 
 const DynamicSideParticipants = dynamic(() => import('./SideParticipants'), {
@@ -25,16 +26,35 @@ const DynamicSideParticipants = dynamic(() => import('./SideParticipants'), {
 })
 
 const CampaignDetail = () => {
+  const viewer = useContext(ViewerContext)
   const { lang } = useContext(LanguageContext)
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
 
-  const { data, loading, error } = useQuery<CampaignDetailQuery>(
-    CAMPAIGN_DETAIL,
-    { variables: { shortHash } }
-  )
+  const { data, loading, error, client } =
+    usePublicQuery<CampaignDetailPublicQuery>(
+      CAMPAIGN_DETAIL_PUBLIC,
+      { variables: { shortHash } },
+      { publicQuery: !viewer.isAuthed }
+    )
 
   const campaign = data?.campaign
+
+  const loadPrivate = async () => {
+    if (!viewer.isAuthed || !campaign) {
+      return
+    }
+
+    await client.query({
+      query: CAMPAIGN_DETAIL_PRIVATE,
+      fetchPolicy: 'network-only',
+      variables: { shortHash },
+    })
+  }
+
+  useEffect(() => {
+    loadPrivate()
+  }, [campaign?.shortHash, viewer.id])
 
   if (loading) {
     return (
