@@ -1,23 +1,92 @@
 /****
  * Article content & shared with editor
  */
-.u-content-article,
-.u-content-article .tiptap.ProseMirror {
+
+.u-content-article {
   line-height: var(--line-height-article-base);
   outline: none;
 
-  & > *:first-child {
-    margin-top: var(--ar17-200);
-  }
-
-  & > * + * {
-    margin: var(--ar17-200) 0;
-  }
-
-  & > *:last-child {
+  /* Spacing
+   *
+   * Base Rules:
+   * - Below summary: ar17-200%
+   * - Below hr, headings: ar17-100%
+   * - Below paragraph, blockquote, lists: ar17-200%
+   * - Below figures: ar17-400%
+   *
+   * Special Rules:
+   * - If followed by hr, headings:
+   *   - Below paragraph, blockquote, lists: ar17-100%
+   *   - Below figures: ar17-200%
+   *   - Below summary: ar17-100%
+   * - If followed by figures:
+   *   - Below paragraph, blockquote, lists: ar17-300%
+   *   - Below hr, headings: ar17-200%
+   *   - Below summary: ar17-300%
+   ========================================================================== */
+  & > * {
     margin-bottom: var(--ar17-200);
+
+    /* for paragraph, blockquote, lists */
+    &:has(+ hr, + h1, + h2, + h3, + h4, + h5, + h6) {
+      margin-bottom: var(--ar17-100);
+    }
+
+    &:has(+ figure) {
+      margin-bottom: var(--ar17-300);
+    }
+
+    /* for offsetting the summary */
+    &:first-child {
+      margin-top: var(--ar17-100);
+
+      &:not(hr, h1, h2, h3, h4, h5, h6) {
+        margin-top: var(--ar17-200);
+      }
+
+      &:is(figure) {
+        margin-top: var(--ar17-300);
+      }
+    }
   }
 
+  & h1,
+  & h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    margin-bottom: var(--ar17-100);
+
+    &:has(+ figure) {
+      margin-bottom: var(--ar17-200);
+    }
+  }
+
+  & hr {
+    margin: calc(var(--ar17-150) + var(--ar17-100)) 0;
+
+    &:has(+ figure) {
+      margin-bottom: var(--ar17-200);
+    }
+  }
+
+  & figure {
+    margin: 0 0 var(--ar17-400) 0;
+
+    &:has(+ hr, + h1, + h2, + h3, + h4, + h5, + h6) {
+      margin-bottom: var(--ar17-200);
+    }
+  }
+
+  & blockquote {
+    & * + * {
+      margin-top: var(--ar17-200);
+    }
+  }
+
+  /* Text
+   ========================================================================== */
   & p {
     font-size: var(--font-size-article-base);
     line-height: var(--line-height-article-base);
@@ -59,7 +128,6 @@
    ========================================================================== */
   & figure {
     position: relative;
-    margin: var(--ar17-200) 0;
     text-align: center;
 
     /* ad-hoc fix for nested figure */
@@ -75,10 +143,6 @@
       color: var(--color-grey);
       white-space: pre-wrap;
     }
-  }
-
-  & figure + figure {
-    margin-top: calc(var(--ar17-200) * 2);
   }
 
   /* Audio
@@ -212,16 +276,11 @@
   & blockquote {
     position: relative;
     padding-left: var(--sp32);
-    margin: var(--ar17-100) 0;
     color: var(--color-grey-darker);
 
     & p {
       padding: 0;
       color: inherit;
-    }
-
-    & * + * {
-      margin-top: calc(var(--ar17-100) * 2);
     }
 
     &::before {
@@ -274,7 +333,6 @@
 
   /* Heading
    ========================================================================== */
-
   & h1 {
     font-size: var(--text14-article-h1);
   }
@@ -357,7 +415,6 @@
     display: block;
     width: 100%;
     height: var(--sp8);
-    margin: calc(var(--ar17-150) + var(--ar17-100)) auto;
     border: none;
 
     &::before {
@@ -381,10 +438,6 @@
   /* FIXME: first line of code has some indent */
   & code {
     padding: 0;
-  }
-
-  & pre {
-    margin: var(--ar17-100) 0;
   }
 }
 
@@ -423,8 +476,6 @@
 }
 
 .editor-title {
-  margin-top: 0 !important;
-
   & textarea {
     margin: 0 0 var(--sp16);
 

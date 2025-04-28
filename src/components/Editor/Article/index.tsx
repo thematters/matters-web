@@ -75,6 +75,12 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     update(c)
   }, INPUT_DEBOUNCE)
 
+  const editorContentClasses = classNames({
+    'u-content-article': true,
+    [styles.articleEditor]: true,
+    [styles.indented]: indentFirstLine,
+  })
+
   const editor = useEditor({
     editable: !isReadOnly,
     content: content || '',
@@ -86,6 +92,9 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       debouncedUpdate({ content })
     },
     editorProps: {
+      attributes: {
+        class: editorContentClasses,
+      },
       handleKeyDown: (view, event) => {
         if (
           event.key.toLowerCase() === KEYVALUE.backSpace &&
@@ -192,19 +201,8 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     e.preventDefault()
   })
 
-  const editorClasses = classNames({
-    'u-content-article': true,
-    [styles.articleEditor]: true,
-    [styles.indented]: indentFirstLine,
-  })
-
   return (
-    <div
-      className={editorClasses}
-      id="editor"
-      ref={editorRef}
-      onClick={handleEditorClick}
-    >
+    <div id="editor" ref={editorRef} onClick={handleEditorClick}>
       <EditorTitle defaultValue={title || ''} update={update} />
 
       <EditorSummary
