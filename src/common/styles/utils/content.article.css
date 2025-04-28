@@ -72,7 +72,7 @@
   }
 
   & blockquote {
-    & * + * {
+    & > * + * {
       margin-top: var(--ar17-200);
     }
   }
