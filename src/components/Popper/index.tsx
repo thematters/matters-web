@@ -4,7 +4,7 @@ import FocusLock from 'react-focus-lock'
 
 import { BREAKPOINTS, KEYVALUE, Z_INDEX } from '~/common/enums'
 
-import { useDialogSwitch, useMediaQuery,useNativeEventListener } from '../Hook'
+import { useDialogSwitch, useMediaQuery, useNativeEventListener } from '../Hook'
 
 export type PopperInstance = any
 export type PopperProps = import('@tippyjs/react').TippyProps
@@ -63,6 +63,7 @@ type DropdownProps = Omit<PopperProps, 'children'> &
 export const Dropdown: React.FC<DropdownProps> = ({
   children,
   focusLock = true,
+  appendTo = 'parent',
   ...props
 }) => {
   const {
@@ -129,7 +130,6 @@ export const Dropdown: React.FC<DropdownProps> = ({
       animation="shift-away"
       theme="dropdown"
       zIndex={Z_INDEX.OVER_DIALOG}
-      appendTo={typeof window !== 'undefined' ? document.body : 'parent'}
       aria={{ content: 'describedby', expanded: true }}
       {...props}
       content={
