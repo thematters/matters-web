@@ -64,6 +64,7 @@ type DropdownProps = Omit<PopperProps, 'children'> &
 export const Dropdown: React.FC<DropdownProps> = ({
   children,
   focusLock = true,
+  appendTo = 'parent',
   ...props
 }) => {
   const {
@@ -127,6 +128,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
       onClickOutside={closeDropdown}
       visible={show}
       interactive
+      appendTo={appendTo}
       offset={[0, 4]}
       placement="bottom-end"
       animation="shift-away"
