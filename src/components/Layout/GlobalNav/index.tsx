@@ -145,7 +145,6 @@ const UserMenu = ({ viewer }: UserMenuProps) => {
       placement="bottom-start"
       zIndex={Z_INDEX.OVER_BOTTOM_BAR}
       onShown={hidePopperOnClick}
-      appendTo="parent"
     >
       {({ openDropdown, ref }) => (
         <Button
@@ -219,7 +218,6 @@ const AuthenticatedNav = ({
         </section>
       }
       placement="bottom-start"
-      appendTo="parent"
     >
       {({ openDropdown, ref }) => (
         <CreateButton openDropdown={openDropdown} buttonRef={ref} />
