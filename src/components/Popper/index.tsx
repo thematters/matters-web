@@ -64,7 +64,6 @@ type DropdownProps = Omit<PopperProps, 'children'> &
 export const Dropdown: React.FC<DropdownProps> = ({
   children,
   focusLock = true,
-  appendTo = 'parent',
   ...props
 }) => {
   const {
