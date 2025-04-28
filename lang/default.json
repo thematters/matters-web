@@ -67,9 +67,6 @@
   "+vVZ/G": {
     "defaultMessage": "Connect"
   },
-  "//QMqf": {
-    "defaultMessage": "Enter title ..."
-  },
   "/5OvMK": {
     "defaultMessage": "liked your moment"
   },
@@ -190,9 +187,6 @@
   "0zZd0T": {
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
-  "16zJ3o": {
-    "defaultMessage": "Enter summary…"
   },
   "17K30q": {
     "defaultMessage": "Translating by Google..."
@@ -457,6 +451,9 @@
   "6+eeJ4": {
     "defaultMessage": "Lowercase letters, numbers and underscores",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "6/eKGl": {
+    "defaultMessage": "Write your story..."
   },
   "6/kgzs": {
     "defaultMessage": "Unsubscribed"
@@ -2211,6 +2208,9 @@
     "defaultMessage": "Your article {articleTitle} has been listed as a feature of event in 7 days. Come and view more wonderful articles!",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
   },
+  "b6x6lm": {
+    "defaultMessage": "Enter a clear and concise title"
+  },
   "b8ogKp": {
     "defaultMessage": "Add Invitation",
     "description": "src/views/Circle/Settings/ManageInvitation/AddButton/index.tsx"
@@ -3299,6 +3299,9 @@
   "wbcwKd": {
     "defaultMessage": "View All"
   },
+  "wclk7z": {
+    "defaultMessage": "Summary to help readers quickly grasp the topic"
+  },
   "wdz6Pf": {
     "defaultMessage": "Learn more",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -3373,9 +3376,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
-  },
-  "yCTXXb": {
-    "defaultMessage": "Enter content…"
   },
   "yIlC0R": {
     "defaultMessage": "No published articles yet",

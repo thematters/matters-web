@@ -80,12 +80,12 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
         ref={inputRef}
         rows={1}
         aria-label={intl.formatMessage({
-          defaultMessage: 'Enter title ...',
-          id: '//QMqf',
+          defaultMessage: 'Enter a clear and concise title',
+          id: 'b6x6lm',
         })}
         placeholder={intl.formatMessage({
-          defaultMessage: 'Enter title ...',
-          id: '//QMqf',
+          defaultMessage: 'Enter a clear and concise title',
+          id: 'b6x6lm',
         })}
         value={value}
         onPaste={handlePaste}
