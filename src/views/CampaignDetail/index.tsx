@@ -35,7 +35,7 @@ const CampaignDetail = () => {
     usePublicQuery<CampaignDetailPublicQuery>(
       CAMPAIGN_DETAIL_PUBLIC,
       { variables: { shortHash } },
-      { publicQuery: !viewer.isAuthed }
+      { publicQuery: !viewer.isAdmin }
     )
 
   const campaign = data?.campaign

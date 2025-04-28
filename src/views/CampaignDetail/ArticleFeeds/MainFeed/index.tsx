@@ -105,7 +105,7 @@ const MainFeed = ({ feedType, camapign }: MainFeedProps) => {
         },
         skip: isAnnouncement,
       },
-      { publicQuery: !viewer.isAuthed }
+      { publicQuery: !viewer.isAdmin }
     )
 
   // pagination
