@@ -57,6 +57,11 @@ const MomentEditor: React.FC<Props> = ({
       const content = editor.getHTML()
       update({ content })
     },
+    editorProps: {
+      attributes: {
+        class: classNames('u-content-moment', styles.momentEditor),
+      },
+    },
     extensions: [
       CustomShortcuts.configure({
         onModEnter: () => onSubmit(),
@@ -99,7 +104,6 @@ const MomentEditor: React.FC<Props> = ({
 
   return (
     <div
-      className={classNames('u-content-moment', styles.momentEditor)}
       id="editor" // anchor for mention plugin
     >
       <EditorContent editor={editor} />
