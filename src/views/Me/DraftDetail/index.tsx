@@ -352,7 +352,7 @@ const BaseDraftDetail = () => {
             <section className={styles.header}>
               <SaveStatus status={saveStatus} />
 
-              <section>
+              <section className={styles.headerRight}>
                 {isOverLength && (
                   <span className={styles.count}>
                     {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
