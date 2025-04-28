@@ -1199,6 +1199,10 @@
     "defaultMessage": "Collection",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
+  "HvgNHV": {
+    "defaultMessage": "Paste the URL and press Enter",
+    "description": "src/components/Editor"
+  },
   "HwaiSE": {
     "defaultMessage": "Upon activation, the main text will be temporarily obscured, displaying only the title and summary. Readers can choose whether to continue reading. (Contains explicit content, violence, gore, etc.)"
   },
@@ -1216,6 +1220,10 @@
   },
   "HzB4Lk": {
     "defaultMessage": "Tell readers why you edited this time..."
+  },
+  "IJ9YcQ": {
+    "defaultMessage": "Unlink",
+    "description": "src/components/Editor"
   },
   "IKPYe9": {
     "defaultMessage": "View",
@@ -1798,6 +1806,10 @@
     "defaultMessage": "Subscribers",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "TWZ1AK": {
+    "defaultMessage": "Clear",
+    "description": "src/components/Editor"
+  },
   "TX5UzL": {
     "defaultMessage": "Payment will be processed by Stripe, allowing your support to be unrestricted by region.",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
@@ -1982,6 +1994,10 @@
   },
   "XOEFDf": {
     "defaultMessage": "{total} articles"
+  },
+  "XOtg99": {
+    "defaultMessage": "Edit",
+    "description": "src/components/Editor"
   },
   "XQ9bi3": {
     "defaultMessage": "More",
@@ -2504,10 +2520,6 @@
   "hAyhzq": {
     "defaultMessage": "Top up",
     "description": "SUPPORT_HKD"
-  },
-  "hB/x9Q": {
-    "defaultMessage": "Enter URL",
-    "description": "src/components/Editor"
   },
   "hBLCwn": {
     "defaultMessage": "other amount"

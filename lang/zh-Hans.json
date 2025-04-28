@@ -1199,6 +1199,10 @@
     "defaultMessage": "选集",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
+  "HvgNHV": {
+    "defaultMessage": "输入链接网址，按 Enter 完成",
+    "description": "src/components/Editor"
+  },
   "HwaiSE": {
     "defaultMessage": "开启后，正文将被暂时遮蔽，只显示标题与摘要，并由读者选择是否继续阅读（例如含有色情、暴力、血腥等内容）"
   },
@@ -1216,6 +1220,10 @@
   },
   "HzB4Lk": {
     "defaultMessage": "告知读者你此次编辑的更动有哪些⋯"
+  },
+  "IJ9YcQ": {
+    "defaultMessage": "取消链接",
+    "description": "src/components/Editor"
   },
   "IKPYe9": {
     "defaultMessage": "查看",
@@ -1798,6 +1806,10 @@
     "defaultMessage": "付费人数",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "TWZ1AK": {
+    "defaultMessage": "清空",
+    "description": "src/components/Editor"
+  },
   "TX5UzL": {
     "defaultMessage": "付款将由 Stripe 处理，让你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
@@ -1982,6 +1994,10 @@
   },
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"
+  },
+  "XOtg99": {
+    "defaultMessage": "编辑",
+    "description": "src/components/Editor"
   },
   "XQ9bi3": {
     "defaultMessage": "详情",
@@ -2504,10 +2520,6 @@
   "hAyhzq": {
     "defaultMessage": "去充值",
     "description": "SUPPORT_HKD"
-  },
-  "hB/x9Q": {
-    "defaultMessage": "输入链接地址",
-    "description": "src/components/Editor"
   },
   "hBLCwn": {
     "defaultMessage": "其他金额"

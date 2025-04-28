@@ -1199,6 +1199,10 @@
     "defaultMessage": "選集",
     "description": "src/views/ArticleDetail/AuthorSidebar/Tabs/index.tsx"
   },
+  "HvgNHV": {
+    "defaultMessage": "輸入連結網址，按 Enter 完成",
+    "description": "src/components/Editor"
+  },
   "HwaiSE": {
     "defaultMessage": "開啟後，正文將被暫時遮蔽，只顯示標題與摘要，並由讀者選擇是否繼續閱讀（例如含有色情、暴力、血腥等內容）"
   },
@@ -1216,6 +1220,10 @@
   },
   "HzB4Lk": {
     "defaultMessage": "告知讀者你此次編輯的更動有哪些⋯"
+  },
+  "IJ9YcQ": {
+    "defaultMessage": "取消連結",
+    "description": "src/components/Editor"
   },
   "IKPYe9": {
     "defaultMessage": "查看",
@@ -1798,6 +1806,10 @@
     "defaultMessage": "付費人數",
     "description": "src/views/Circle/Analytics/SubscriberAnalytics/index.tsx"
   },
+  "TWZ1AK": {
+    "defaultMessage": "清除",
+    "description": "src/components/Editor"
+  },
   "TX5UzL": {
     "defaultMessage": "付款將由 Stripe 處理，讓你的支持不受地域限制",
     "description": "src/components/Forms/PaymentForm/PayTo/SetAmount/index.tsx"
@@ -1982,6 +1994,10 @@
   },
   "XOEFDf": {
     "defaultMessage": "{total} 篇作品"
+  },
+  "XOtg99": {
+    "defaultMessage": "編輯",
+    "description": "src/components/Editor"
   },
   "XQ9bi3": {
     "defaultMessage": "詳情",
@@ -2504,10 +2520,6 @@
   "hAyhzq": {
     "defaultMessage": "去儲值",
     "description": "SUPPORT_HKD"
-  },
-  "hB/x9Q": {
-    "defaultMessage": "輸入連結地址",
-    "description": "src/components/Editor"
   },
   "hBLCwn": {
     "defaultMessage": "其他金額"
