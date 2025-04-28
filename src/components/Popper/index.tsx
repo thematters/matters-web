@@ -1,10 +1,11 @@
+import _throttle from 'lodash/throttle'
 import dynamic from 'next/dynamic'
 import { forwardRef, useEffect, useState } from 'react'
 import FocusLock from 'react-focus-lock'
 
-import { KEYVALUE, Z_INDEX } from '~/common/enums'
+import { BREAKPOINTS, KEYVALUE, Z_INDEX } from '~/common/enums'
 
-import { useDialogSwitch, useNativeEventListener } from '../Hook'
+import { useDialogSwitch, useMediaQuery, useNativeEventListener } from '../Hook'
 
 export type PopperInstance = any
 export type PopperProps = import('@tippyjs/react').TippyProps
@@ -63,6 +64,7 @@ type DropdownProps = Omit<PopperProps, 'children'> &
 export const Dropdown: React.FC<DropdownProps> = ({
   children,
   focusLock = true,
+  appendTo = 'parent',
   ...props
 }) => {
   const {
@@ -72,6 +74,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   } = useDialogSwitch(false)
 
   const [forceUpdateKey, setForceUpdateKey] = useState(0)
+  const isMobile = useMediaQuery(`(max-width: ${BREAKPOINTS.LG}px)`)
 
   const toggle = () => (show ? closeDropdown() : openDropdownOriginal())
 
@@ -100,6 +103,15 @@ export const Dropdown: React.FC<DropdownProps> = ({
     }
   }, [show])
 
+  // Listen for scroll events on mobile only
+  const handleScroll = _throttle(() => {
+    if (show && isMobile) {
+      closeDropdown()
+    }
+  }, 300)
+
+  useNativeEventListener('scroll', handleScroll)
+
   useNativeEventListener('keydown', (event: KeyboardEvent) => {
     if (event.code?.toLowerCase() !== KEYVALUE.escape) {
       return
@@ -116,12 +128,12 @@ export const Dropdown: React.FC<DropdownProps> = ({
       onClickOutside={closeDropdown}
       visible={show}
       interactive
+      appendTo={appendTo}
       offset={[0, 4]}
       placement="bottom-end"
       animation="shift-away"
       theme="dropdown"
       zIndex={Z_INDEX.OVER_DIALOG}
-      appendTo={typeof window !== 'undefined' ? document.body : 'parent'}
       aria={{ content: 'describedby', expanded: true }}
       {...props}
       content={
