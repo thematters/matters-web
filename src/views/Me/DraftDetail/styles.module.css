@@ -25,6 +25,10 @@
   align-items: center;
   background-color: var(--color-black);
   border-radius: 0.75rem;
+
+  &:hover {
+    opacity: 0.85;
+  }
 }
 
 .divider {
