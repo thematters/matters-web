@@ -306,7 +306,7 @@ export const toPath = (
   }
 }
 
-const getTarget = (url?: string) => {
+export const getTarget = (url?: string) => {
   const qs = new URL(url || window.location.href).searchParams
   const target = encodeURIComponent((qs.get('target') as string) || '')
 
@@ -333,6 +333,7 @@ export const redirectToTarget = ({
   const isValidTarget = new RegExp(
     `^https?://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
   ).test(target)
+
   if (!isValidTarget) {
     target = fallbackTarget
   }

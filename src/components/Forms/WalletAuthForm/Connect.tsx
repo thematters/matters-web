@@ -18,9 +18,7 @@ import {
   WALLET_ERROR_MESSAGES,
 } from '~/common/enums'
 import {
-  analytics,
   parseFormSubmitErrors,
-  redirectToTarget,
   setCookies,
   storage,
   truncate,
@@ -82,7 +80,6 @@ const Connect: React.FC<FormProps> = ({
   setHasWalletExist,
   setUnavailable,
 }) => {
-  const isInPage = purpose === 'page'
   const isInDialog = purpose === 'dialog'
 
   const intl = useIntl()
@@ -232,16 +229,10 @@ const Connect: React.FC<FormProps> = ({
             ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
           })
 
-          analytics.identifyUser()
-
           if (
             loginData?.walletLogin.type === AuthResultType.Login ||
             loginData?.walletLogin.type === AuthResultType.Signup
           ) {
-            redirectToTarget({
-              fallback: isInPage ? 'homepage' : 'current',
-            })
-
             closeDialog?.()
           } else if (submitCallback) {
             submitCallback(loginData?.walletLogin.type)
