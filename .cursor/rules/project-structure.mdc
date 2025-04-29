@@ -15,6 +15,7 @@ Matters Web is a Next.js application that serves as the frontend for Matters.tow
 - `src/common/`: Shared utilities, constants, styles, and helpers
 - `src/gql/`: TypeScript types for GraphQL queries and mutations that generated based on GraphQL schema by `gen:type` command
 - `src/definitions/`: TypeScript type definitions
+- `src/stories/`: Contains Storybook stories for component development and testing.
 - `public/`: Static assets including images, icons, and other resources
 
 ## Icons

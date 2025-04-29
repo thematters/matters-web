@@ -11,7 +11,7 @@ Matters Web uses CSS Modules and PostCSS for component and page styling.
 
 - Component styles are defined in a `styles.module.css` file within each component directory
 - Global styles are defined in the `src/common/styles` directory and imported in `src/pages/_app.tsx`
-- The project uses PostCSS for CSS processing with various plugins
+- The project uses PostCSS for CSS processing with various plugins, notably including `postcss-mixins` (for `@mixin`) and `postcss-preset-env` (for future CSS features and vendor prefixing).
 
 ## CSS Modules
 

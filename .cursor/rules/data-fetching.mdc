@@ -15,10 +15,13 @@ Matters Web uses Apollo Client for GraphQL data fetching and state management.
 
 ## Apollo Client
 
-The Apollo Client is configured in the app entry point (`src/common/utils/apollo.ts`) and provides:
-- Cached data management
-- Error handling
-- Authentication management
+The Apollo Client is configured in the app entry point (`src/common/utils/apollo.ts`). It utilizes a sophisticated setup involving multiple Apollo Links (e.g., for persisted queries, file uploads, retries, error handling, and context modification) to manage requests.
+
+Key features include:
+- **Link Composition:** Chains multiple links to handle concerns like authentication, fingerprinting, Sentry integration, and directing requests based on context (e.g., public vs. private queries).
+- **Cached Data Management:** Leverages `InMemoryCache` with custom `resolvers` and `typePolicies` (including `mergeables`) for fine-grained control over how data is stored and merged. Uses fragment matching (`introspectionQueryResultData`) for accurate caching of polymorphic types.
+- **Error Handling:** Uses `onError` link for centralized logging of GraphQL and network errors.
+- **Authentication Management:** Conditionally includes credentials based on operation context.
 
 ## Cache Management
 
@@ -131,10 +134,33 @@ const [deleteComment] = useMutation(DELETE_COMMENT, {
 - **Pagination**: Use field policies with `keyArgs` for paginated data
 - **Type Policies**: Configure how specific types are stored and merged
 
-For more details, see the [Mutations](https://www.apollographql.com/docs/react/data/mutations), [Refetching queries](https://www.apollographql.com/docs/react/data/refetching), and [Caching in Apollo Client](https://www.apollographql.com/docs/react/caching/overview).
+For more details, see the [Mutations](mdc:https:/www.apollographql.com/docs/react/data/mutations), [Refetching queries](mdc:https:/www.apollographql.com/docs/react/data/refetching), and [Caching in Apollo Client](mdc:https:/www.apollographql.com/docs/react/caching/overview).
 
+## Public/Private Query Splitting for Caching Optimization
 
-## Example Components
+To enhance caching efficiency, particularly for data viewed by both visitors and logged-in users, Matters Web employs a strategy of splitting GraphQL queries into "public" and "private" versions.
 
-- [src/components/GQL](mdc:src/components/GQL): Core GraphQL components
-- [src/components/ClientUpdater](mdc:src/components/ClientUpdater): Components for client-side cache updates
+### Public Queries
+
+- Fetch data visible to everyone (visitors and logged-in users).
+- Are executed *without* sending user authentication cookies. This is configured in the Apollo Client setup (`src/common/utils/apollo.ts`) using a directional link and context flags (`GQL_CONTEXT_PUBLIC_QUERY_KEY`).
+- Benefit: Allows backend systems to cache responses effectively, as the request is identical for all users without credentials.
+
+### Private Queries
+
+- Fetch data specific to the logged-in user (e.g. article bookmark status).
+- Are executed *with* user authentication cookies.
+- Benefit: Ensures user-specific data is fetched securely and correctly.
+
+### Implementation Pattern
+
+1.  Components define both `public` and `private` GraphQL fragments/queries (e.g., in `ComponentName/gql.ts`).
+2.  Pages or views typically fetch public data first using mechanisms like the `usePublicQuery` hook (`src/components/GQL/hooks.ts`), which sets the appropriate context for the Apollo Link.
+3.  If the user is logged in, subsequent private queries might be fetched conditionally to retrieve user-specific details, often merging this data into the Apollo cache.
+
+### Example
+
+The `src/views/ArticleDetail/index.tsx` view first fetches `ARTICLE_DETAIL_PUBLIC` (`src/views/ArticleDetail/gql.ts`) for general article content and then conditionally fetches `ARTICLE_DETAIL_PRIVATE` (`src/views/ArticleDetail/gql.ts`) if the user is authenticated. This ensures the main article content can be aggressively cached while user-specific states (like read status or circle membership) are fetched separately when needed.
+
+This separation optimizes load times for publicly accessible content by leveraging shared caches, while still providing personalized experiences for logged-in users.
+
