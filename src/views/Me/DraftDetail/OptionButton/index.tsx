@@ -10,6 +10,8 @@ export const OptionButton = () => (
     borderRadius={'0.75rem'}
     bgColor="white"
     borderColor="greyHover"
+    borderActiveColor="black"
+    borderWidth="sm"
     onClick={() => {}}
     aria-haspopup="dialog"
   >
