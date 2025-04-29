@@ -1,0 +1,51 @@
+---
+description:
+globs: src/components/**/*
+alwaysApply: false
+---
+# UI Components Convention
+
+Matters Web uses a standardized approach for UI components with consistent patterns for props, styling, and variations.
+
+Here we use `src/components/Button` as an example:
+
+## Type Definitions
+
+- Props are strongly typed with explicit, restricted values
+- Component variations use union types (e.g., `ButtonWidth`, `ButtonColor`)
+- Core props are exported for reuse while internal types remain private
+- Uses TypeScript's `Extract` to define subsets of broader types
+
+## Styling Approach
+
+- Uses CSS Modules with classNames utility for conditional styling
+- Follows a pattern of `{property}{Value}` for class names (e.g., `textGreen`, `borderRed`)
+- Handles dynamic styles through prop-based conditions
+- Provides active/hover states via separate props (e.g., `textActiveColor`)
+- Uses CSS variables from the global theme
+
+## Component Structure
+
+- Accepts standardized size and spacing parameters
+- Supports multiple rendering options (button, link, anchor, span)
+- Implements forwardRef for ref forwarding
+- Provides comprehensive documentation with usage examples
+- Uses a consistent structure for container and content
+
+## Best Practices
+
+- Centralize shared prop types in the component file
+- Use descriptive prop names that indicate purpose
+- Document component behavior using JSDoc comments
+- Include usage examples for complex components
+- Handle accessibility considerations (focus states, keyboard navigation)
+- Ensure all interactive elements have appropriate event handlers
+
+## When Creating UI Components
+
+1. Start by defining clear prop interfaces with TypeScript
+2. Create a dedicated styles.module.css with the same structure as the component
+3. Follow naming conventions established in existing components
+4. Use classNames for conditional class application
+5. Include comprehensive JSDoc documentation
+6. Ensure consistent behavior across rendering contexts

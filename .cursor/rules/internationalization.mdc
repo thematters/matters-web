@@ -1,0 +1,65 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Internationalization (i18n)
+
+Matters Web uses react-intl (FormatJS) for internationalization.
+
+## i18n Structure
+
+- `lang/`: Contains language files
+- `compiled-lang/`: Contains compiled language files used at runtime
+- Language strings are extracted from components and pages using formatjs
+
+## Translation Management
+
+- The application uses a set of scripts to manage translations:
+  - `npm run i18n:extract`: Extracts messages from the codebase to `lang/`
+  - `npm run i18n:generate`: Normalize language files to `lang/`
+  - `npm run i18n:compile`: Compiles language files to `compiled-lang/` for use in the application
+  - `npm run i18n`: Runs all i18n commands
+
+## Usage in Components
+
+Components use the `FormattedMessage` component or the `useIntl` hook to access translations:
+
+```tsx
+// Using FormattedMessage
+<FormattedMessage
+  defaultMessage="Archived"
+  id="a/YQ1Z"
+  description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+/>
+
+// Using useIntl
+const intl = useIntl()
+const message = intl.formatMessage({
+  defaultMessage: 'Archived'
+  id="a/YQ1Z"
+  description="src/components/ArticleDigest/DropdownActions/ArchiveArticle/Dialog.tsx"
+})
+```
+
+The `id` is an automatically generated hash that uniquely identifies each translatable message. The `description` field contains the relative path of the component file, which helps prevent ID collisions when the same `defaultMessage` appears in multiple components. This enables accurate message tracking and context-specific translations throughout the application.
+
+## Translation Workflow
+
+1. Add copy with `<FormattedMessage>` or `intl.formatMessage` in your component
+2. Run `npm run i18n` to generate language files
+3. Add corresponding translations to `lang/zh-Hans.json` and `lang/zh-Hant.json`
+4. Run `npm run i18n` to compile the language files
+
+## Language Files
+
+The main language files:
+- [lang/default.json](mdc:lang/default.json): Default language strings
+- [lang/en.json](mdc:lang/en.json): English translations
+- [lang/zh-Hant.json](mdc:lang/zh-Hant.json): Traditional Chinese translations
+- [lang/zh-Hans.json](mdc:lang/zh-Hans.json): Simplified Chinese translations
+
+## Translation Provider
+
+- [src/components/TranslationsProvider](mdc:src/components/TranslationsProvider): Provides translation context to the application
+

@@ -1,0 +1,34 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Component Architecture
+
+Matters Web follows a component-based architecture using React and Next.js.
+
+## Component Organization
+
+Reusable components are organized in the `src/components/` directory, each in its own folder with the following structure:
+
+```
+ComponentName/
+  ├── index.tsx              # Main component export
+  ├── styles.module.css      # Component styles
+  ├── gql.ts                 # GraphQL queries/mutations (if needed)
+  └── ComponentName.test.tsx # Component tests
+```
+
+## Component Types
+
+- **UI Components**: Pure presentational components
+- **Compositions Components**: Components that are built on top of other UI components and may include GraphQL fragments as part of their UI requirements
+
+## Key Component Directories
+
+- [src/components/Layout](mdc:src/components/Layout): Page layout components
+- [src/components/Form](mdc:src/components/Form): Form input components
+- [src/components/Button](mdc:src/components/Button): Button components
+- [src/components/Dialog](mdc:src/components/Dialog): Modal dialog components
+- [src/components/GlobalDialogs](mdc:src/components/GlobalDialogs): App-wide dialogs
+- [src/components/GlobalToasts](mdc:src/components/GlobalToasts): Toast notification system

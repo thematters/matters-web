@@ -1,0 +1,61 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Styling Conventions
+
+Matters Web uses CSS Modules and PostCSS for component and page styling.
+
+## CSS Structure
+
+- Component styles are defined in a `styles.module.css` file within each component directory
+- Global styles are defined in the `src/common/styles` directory and imported in `src/pages/_app.tsx`
+- The project uses PostCSS for CSS processing with various plugins
+
+## CSS Modules
+
+- CSS files are imported as modules
+- This provides local scoping of CSS classes
+- Class names are composed to avoid duplication
+- CSS variables are used for theming
+- Classes can be conditionally applied using the `classNames` utility
+
+Example:
+```tsx
+import classNames from 'classnames'
+import styles from './styles.module.css'
+
+const Component = () => {
+  const containerClasses = classNames({
+    [styles.container]: true,
+    [styles.hasCover]: !!cover,
+  })
+
+  return <div className={containerClasses}>Content</div>
+}
+```
+
+
+## Theme & Variables
+
+- Color variables and theme definitions are in global CSS files
+- Media queries are used for responsive design
+- The application supports light and dark modes
+
+## Key Style Files
+
+- `src/common/styles/variables`: CSS variables for colors, spacing, typography, etc.
+- `src/common/styles/mixin.css`: Reuseable mixins for layouts, borders, etc.
+- `src/common/styles/bases`: Global base styles and resets
+- `src/common/styles/components`: Shared component styles
+- `src/common/styles/vendors`: Thrid-party component styles
+
+## Naming Conventions
+
+- Use camelCase (`{property}{Value}`) for component classes, e.g. `textGreen`, `borderRed`, `spacingTop`, `fontMedium`
+- Use hyphens for variables and mixins, e.g. `--sp4`, `@mixin flex-center-start`
+
+## PostCSS Configuration
+
+- [postcss.config.json](mdc:postcss.config.json): PostCSS configuration
