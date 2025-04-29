@@ -15,7 +15,8 @@ import { ReactComponent as IconEditorOl } from '@/public/static/icons/editor-ol.
 import { ReactComponent as IconEditorQuote } from '@/public/static/icons/editor-quote.svg'
 import { ReactComponent as IconEditorUl } from '@/public/static/icons/editor-ul.svg'
 import { ReactComponent as IconEditorVideo } from '@/public/static/icons/editor-video.svg'
-import { Icon, Tooltip } from '~/components'
+import { BREAKPOINTS } from '~/common/enums'
+import { Icon, Tooltip, useMediaQuery } from '~/components'
 import { Media } from '~/components/Media'
 
 import styles from './styles.module.css'
@@ -32,6 +33,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
 }) => {
   const intl = useIntl()
   const [expand, setExpand] = useState(false)
+  const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.LG}px)`)
 
   const containerClasses = classNames({
     [styles.container]: true,
@@ -92,6 +94,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 })
           }
           placement="top"
+          disabled={!isMdUp}
         >
           <button
             className={styles.expandButton}
@@ -128,6 +131,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 description: 'src/components/Editor',
               })}
               placement="top"
+              disabled={!isMdUp}
             >
               <button
                 onClick={() => {
@@ -166,6 +170,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
                 placement="top"
+                disabled={!isMdUp}
               >
                 <button
                   onClick={() => {
@@ -192,6 +197,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
                 placement="top"
+                disabled={!isMdUp}
               >
                 <button
                   onClick={() => {
@@ -218,6 +224,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
                 placement="top"
+                disabled={!isMdUp}
               >
                 <button
                   onClick={() => {
@@ -244,6 +251,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
                 placement="top"
+                disabled={!isMdUp}
               >
                 <button
                   onClick={() => {
@@ -271,6 +279,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 description: 'src/components/Editor',
               })}
               placement="top"
+              disabled={!isMdUp}
             >
               <button
                 onClick={() => {
@@ -306,6 +315,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 description: 'src/components/Editor',
               })}
               placement="top"
+              disabled={!isMdUp}
             >
               <button
                 onClick={() => {
@@ -336,6 +346,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
                 description: 'src/components/Editor',
               })}
               placement="top"
+              disabled={!isMdUp}
             >
               <button
                 onClick={(e) => {

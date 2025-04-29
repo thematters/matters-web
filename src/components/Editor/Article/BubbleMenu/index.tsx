@@ -104,6 +104,27 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
     })
   }
 
+  const onClickQuote = () => {
+    // if heading is active, unset heading first
+    if (editor.isActive('heading', { level: 2 })) {
+      // @ts-ignore
+      editor.chain().focus().toggleHeading({ level: 2 }).run()
+    }
+    if (editor.isActive('heading', { level: 3 })) {
+      // @ts-ignore
+      editor.chain().focus().toggleHeading({ level: 3 }).run()
+    }
+
+    // if code block is active, unset code block first
+    if (editor.isActive('codeBlock')) {
+      // @ts-ignore
+      editor.chain().focus().toggleCodeBlock().run()
+    }
+
+    // then toggle blockquote
+    editor.chain().focus().toggleBlockquote().run()
+  }
+
   return (
     <TipTapBubbleMenu
       editor={editor}
@@ -145,8 +166,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             (selection.node as Node).type.name.includes('figure')) ||
           $anchor.parent.type.name.includes('figure')
         const isHr = $anchor.nodeAfter?.type.name === 'horizontalRule'
-        const $grandParent = $anchor.node($anchor.depth - 1)
-        const isInBlockquote = $grandParent?.type.name === 'blockquote'
+        // const $grandParent = $anchor.node($anchor.depth - 1)
+        // const isInBlockquote = $grandParent?.type.name === 'blockquote'
 
         // Check if a link is selected
         const isLinkSelected = editor.isActive('link')
@@ -157,8 +178,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           (isEmptyTextBlock && !isLinkSelected) || // Allow empty text block if it's a link
           !editor.isEditable ||
           isFigure ||
-          isHr ||
-          isInBlockquote
+          isHr
+          // || isInBlockquote
         ) {
           return false
         }
@@ -264,7 +285,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 disabled={
                   !editor.can().chain().focus().toggleBold().run() ||
                   editor.isActive('heading', { level: 2 }) ||
-                  editor.isActive('heading', { level: 3 })
+                  editor.isActive('heading', { level: 3 }) ||
+                  editor.isActive('blockquote')
                 }
                 className={editor.isActive('bold') ? styles.active : ''}
                 title={intl.formatMessage({
@@ -288,8 +310,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 type="button"
                 // @ts-ignore
                 onClick={() => editor.chain().focus().toggleStrike().run()}
-                // @ts-ignore
-                disabled={!editor.can().chain().focus().toggleStrike().run()}
+                disabled={
+                  // @ts-ignore
+                  !editor.can().chain().focus().toggleStrike().run() ||
+                  editor.isActive('blockquote')
+                }
                 className={editor.isActive('strike') ? styles.active : ''}
                 title={intl.formatMessage({
                   defaultMessage: 'Strikethrough',
@@ -312,8 +337,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 type="button"
                 // @ts-ignore
                 onClick={() => editor.chain().focus().toggleCodeBlock().run()}
-                // @ts-ignore
-                disabled={!editor.can().chain().focus().toggleCodeBlock().run()}
                 className={editor.isActive('codeBlock') ? styles.active : ''}
                 title={intl.formatMessage({
                   defaultMessage: 'Code Block',
@@ -334,13 +357,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             <button
               type="button"
               // @ts-ignore
-              onClick={() => editor.chain().focus().toggleBlockquote().run()}
-              // @ts-ignore
-              disabled={
-                !editor.can().chain().focus().toggleBlockquote().run() ||
-                editor.isActive('heading', { level: 2 }) ||
-                editor.isActive('heading', { level: 3 })
-              }
+              onClick={onClickQuote}
               className={editor.isActive('blockquote') ? styles.active : ''}
             >
               <Media at="sm">
@@ -406,7 +423,8 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               }}
               disabled={
                 !editor.can().chain().focus().toggleLink({ href: '' }).run() ||
-                editor.isActive('heading', { level: 2 })
+                editor.isActive('heading', { level: 2 }) ||
+                editor.isActive('blockquote')
               }
               className={editor.isActive('link') ? styles.active : ''}
               title={intl.formatMessage({

@@ -8,9 +8,17 @@ import { ReactComponent as IconEditorAudio } from '@/public/static/icons/editor-
 import {
   ACCEPTED_UPLOAD_AUDIO_TYPES,
   ASSET_TYPE,
+  BREAKPOINTS,
   UPLOAD_AUDIO_SIZE_LIMIT,
 } from '~/common/enums'
-import { Icon, Spinner, toast, Tooltip, Translate } from '~/components'
+import {
+  Icon,
+  Spinner,
+  toast,
+  Tooltip,
+  Translate,
+  useMediaQuery,
+} from '~/components'
 
 import styles from './styles.module.css'
 
@@ -31,6 +39,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
   upload,
 }) => {
   const intl = useIntl()
+  const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.LG}px)`)
   const [uploading, setUploading] = useState(false)
 
   const acceptTypes = ACCEPTED_UPLOAD_AUDIO_TYPES.join(',')
@@ -109,6 +118,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
         description: 'src/components/Editor',
       })}
       placement="top"
+      disabled={!isMdUp}
     >
       <label className={labelClasses} htmlFor={fieldId}>
         {!uploading && <Icon icon={IconEditorAudio} size={32} />}

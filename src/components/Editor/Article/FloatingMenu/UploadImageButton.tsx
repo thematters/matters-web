@@ -3,8 +3,8 @@ import { VisuallyHidden } from '@reach/visually-hidden'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconEditorImage } from '@/public/static/icons/editor-image.svg'
-import { ACCEPTED_UPLOAD_IMAGE_TYPES } from '~/common/enums'
-import { Icon, Tooltip } from '~/components'
+import { ACCEPTED_UPLOAD_IMAGE_TYPES, BREAKPOINTS } from '~/common/enums'
+import { Icon, Tooltip, useMediaQuery } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -14,6 +14,7 @@ export type UploadImageButtonProps = {
 
 const UploadImageButton: React.FC<UploadImageButtonProps> = ({ editor }) => {
   const intl = useIntl()
+  const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.LG}px)`)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = 'editor-image-upload-form'
@@ -42,6 +43,7 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({ editor }) => {
         description: 'src/components/Editor',
       })}
       placement="top"
+      disabled={!isMdUp}
     >
       <label className={styles.uploadButton} htmlFor={fieldId}>
         <Icon icon={IconEditorImage} size={32} />

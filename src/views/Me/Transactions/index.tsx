@@ -203,7 +203,7 @@ const Transactions = () => {
 
       <SquareTabs
         sticky
-        spacing="md"
+        spacing="sm"
         side={
           <section className={styles.currencySwitch}>
             <CurrencySwitch
