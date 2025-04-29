@@ -8,7 +8,13 @@ import {
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
 } from '~/common/enums'
-import { storage, wagmiConfig } from '~/common/utils'
+import {
+  analytics,
+  getTarget,
+  redirectToTarget,
+  storage,
+  wagmiConfig,
+} from '~/common/utils'
 import {
   Error,
   FeaturesProvider,
@@ -88,6 +94,24 @@ const Root = ({
       storage.set(REFERRAL_STORAGE_REFERRAL_CODE, { referralCode })
     }
   }, [])
+
+  useEffect(() => {
+    if (!viewer?.id) return
+
+    // identify user
+    analytics.identifyUser()
+
+    // redirect afterlogged-in
+    if (!getTarget()) {
+      return
+    }
+
+    if (isInAuth || isInAuthCallback) {
+      redirectToTarget({ fallback: 'homepage' })
+    } else {
+      redirectToTarget({ fallback: 'current' })
+    }
+  }, [viewer?.id])
 
   /**
    * Render
