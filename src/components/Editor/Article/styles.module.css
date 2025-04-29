@@ -130,10 +130,10 @@
       }
     }
   }
+}
 
-  &.indented {
-    & > p {
-      text-indent: 2.25rem;
-    }
+.indented {
+  & > p {
+    text-indent: 2.25rem;
   }
 }
