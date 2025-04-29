@@ -346,10 +346,10 @@ export const redirectToTarget = ({
  *
  * (works on CSR)
  */
-export const redirectToHomePage = () => {
+export const redirectToLogin = () => {
   const target = getTarget() || getEncodedCurrent()
 
-  return Router.push(`${PATHS.HOME}?target=${target}`)
+  return Router.push(`${PATHS.LOGIN}?target=${target}`)
 }
 
 /**
