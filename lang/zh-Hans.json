@@ -67,9 +67,6 @@
   "+vVZ/G": {
     "defaultMessage": "綁定"
   },
-  "//QMqf": {
-    "defaultMessage": "请输入标题…"
-  },
   "/5OvMK": {
     "defaultMessage": "喜欢你的动态"
   },
@@ -190,9 +187,6 @@
   "0zZd0T": {
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
-  "16zJ3o": {
-    "defaultMessage": "自定义摘要…"
   },
   "17K30q": {
     "defaultMessage": "正在通过 Google 翻译..."
@@ -457,6 +451,9 @@
   "6+eeJ4": {
     "defaultMessage": "可使用小写英文、数字及下划线",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "6/eKGl": {
+    "defaultMessage": "写下你的故事⋯"
   },
   "6/kgzs": {
     "defaultMessage": "退订成功"
@@ -1463,6 +1460,9 @@
     "defaultMessage": "支持",
     "description": "src/views/Me/Transactions/index.tsx"
   },
+  "NDV5Mq": {
+    "defaultMessage": "选项"
+  },
   "NEKHMm": {
     "defaultMessage": "邮件",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
@@ -2207,6 +2207,9 @@
   "b0RNGM": {
     "defaultMessage": "你的作品 {articleTitle} 已被列为活动精选之作，快来看看更多精彩好文！",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
+  "b6x6lm": {
+    "defaultMessage": "输入简单明了的标题"
   },
   "b8ogKp": {
     "defaultMessage": "新增邀请",
@@ -3296,6 +3299,9 @@
   "wbcwKd": {
     "defaultMessage": "查看全部"
   },
+  "wclk7z": {
+    "defaultMessage": "摘要，让读者快速掌握主题"
+  },
   "wdz6Pf": {
     "defaultMessage": "了解更多",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -3370,9 +3376,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "操作无法撤销，确认归档吗？"
-  },
-  "yCTXXb": {
-    "defaultMessage": "请输入正文…"
   },
   "yIlC0R": {
     "defaultMessage": "尚未发布作品",

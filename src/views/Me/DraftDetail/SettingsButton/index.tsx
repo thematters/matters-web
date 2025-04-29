@@ -1,7 +1,14 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconPublishFill } from '@/public/static/icons/24px/publish-fill.svg'
 import { ENTITY_TYPE } from '~/common/enums'
-import { Button, TextIcon, toast, toDigestTagPlaceholder } from '~/components'
+import {
+  Button,
+  Icon,
+  TextIcon,
+  toast,
+  toDigestTagPlaceholder,
+} from '~/components'
 import {
   MoreSettingsProps,
   SetCollectionProps,
@@ -48,14 +55,21 @@ const ConfirmButton = ({
   disabled?: boolean
 }) => (
   <Button
-    size={[null, '2rem']}
-    spacing={[0, 16]}
-    bgColor="green"
+    size={[null, '2.375rem']}
+    spacing={[0, 14]}
+    borderRadius={'0.75rem'}
+    bgColor="black"
     onClick={openDialog}
     disabled={disabled}
     aria-haspopup="dialog"
   >
-    <TextIcon color="white" size={16} weight="medium">
+    <TextIcon
+      color="white"
+      size={14}
+      weight="medium"
+      icon={<Icon icon={IconPublishFill} size={18} />}
+      spacing={8}
+    >
       <FormattedMessage defaultMessage="Publish" id="syEQFE" />
     </TextIcon>
   </Button>

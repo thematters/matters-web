@@ -67,9 +67,6 @@
   "+vVZ/G": {
     "defaultMessage": "綁定"
   },
-  "//QMqf": {
-    "defaultMessage": "請輸入標題…"
-  },
   "/5OvMK": {
     "defaultMessage": "喜歡你的動態"
   },
@@ -190,9 +187,6 @@
   "0zZd0T": {
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
-  "16zJ3o": {
-    "defaultMessage": "自定義摘要…"
   },
   "17K30q": {
     "defaultMessage": "正在透過 Google 翻譯..."
@@ -457,6 +451,9 @@
   "6+eeJ4": {
     "defaultMessage": "可使用小寫英文、數字及下劃線",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "6/eKGl": {
+    "defaultMessage": "寫下你的故事⋯"
   },
   "6/kgzs": {
     "defaultMessage": "退訂成功"
@@ -1463,6 +1460,9 @@
     "defaultMessage": "支持",
     "description": "src/views/Me/Transactions/index.tsx"
   },
+  "NDV5Mq": {
+    "defaultMessage": "選項"
+  },
   "NEKHMm": {
     "defaultMessage": "電子郵件",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
@@ -2207,6 +2207,9 @@
   "b0RNGM": {
     "defaultMessage": "你的作品 {articleTitle} 已被列為活動精選，快來看看更多精彩好文！",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
+  "b6x6lm": {
+    "defaultMessage": "輸入簡單明瞭的標題"
   },
   "b8ogKp": {
     "defaultMessage": "新增邀請",
@@ -3296,6 +3299,9 @@
   "wbcwKd": {
     "defaultMessage": "查看全部"
   },
+  "wclk7z": {
+    "defaultMessage": "摘要，讓讀者快速掌握主題"
+  },
   "wdz6Pf": {
     "defaultMessage": "瞭解更多",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -3370,9 +3376,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "操作無法撤銷，確認封存嗎？"
-  },
-  "yCTXXb": {
-    "defaultMessage": "請輸入正文…"
   },
   "yIlC0R": {
     "defaultMessage": "尚未發布作品",

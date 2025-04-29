@@ -186,6 +186,18 @@ span.container {
   }
 }
 
+.spacingY14 {
+  &:not(.isTransparent) {
+    padding-top: var(--sp14);
+    padding-bottom: var(--sp14);
+  }
+
+  & .hotarea {
+    margin-top: calc(var(--sp14) * -1);
+    margin-bottom: calc(var(--sp14) * -1);
+  }
+}
+
 .spacingY16 {
   &:not(.isTransparent) {
     padding-top: var(--sp16);
@@ -243,6 +255,18 @@ span.container {
   & .hotarea {
     margin-right: calc(var(--sp10) * -1);
     margin-left: calc(var(--sp10) * -1);
+  }
+}
+
+.spacingX14 {
+  &:not(.isTransparent) {
+    padding-right: var(--sp14);
+    padding-left: var(--sp14);
+  }
+
+  & .hotarea {
+    margin-right: calc(var(--sp14) * -1);
+    margin-left: calc(var(--sp14) * -1);
   }
 }
 
@@ -500,6 +524,12 @@ span.container {
 }
 
 .borderGreyLighterActive {
+  & .hotarea {
+    border-color: var(--color-grey-hover);
+  }
+}
+
+.borderGreyHover {
   & .hotarea {
     border-color: var(--color-grey-hover);
   }

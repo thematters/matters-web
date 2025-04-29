@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client'
-import router from 'next/router'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
@@ -55,7 +54,7 @@ export const BaseMeWorksDrafts = () => {
 
   const addDraft = () => {
     analytics.trackEvent('click_button', { type: 'write' })
-    router.push(PATHS.ME_DRAFT_NEW)
+    window.open(PATHS.ME_DRAFT_NEW, '_blank')
   }
 
   return (
