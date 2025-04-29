@@ -1,6 +1,6 @@
 ---
-description:
-globs: src/components/**/*
+description: Useful when you create or modify a component
+globs:
 alwaysApply: false
 ---
 # UI Components Convention

@@ -1,7 +1,7 @@
 ---
-description:
+description: Useful for internationalization (i18n) when you use `<FormattedMessage`> and `intl.formatMessage`
 globs:
-alwaysApply: true
+alwaysApply: false
 ---
 # Internationalization (i18n)
 
