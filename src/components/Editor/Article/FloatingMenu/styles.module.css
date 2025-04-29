@@ -61,14 +61,18 @@
   }
 
   & .expandButton {
-    transform: rotate(45deg);
+    & :global(.icon) {
+      transform: rotate(45deg);
+    }
   }
 }
 
 .expandButton {
-  @mixin transition;
+  & :global(.icon) {
+    @mixin transition;
 
-  transition-property: transform;
+    transition-property: transform;
+  }
 }
 
 .uploadButton {
