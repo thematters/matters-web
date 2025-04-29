@@ -1,7 +1,7 @@
 ---
-description:
+description: Useful when you add or modify data fetching or caching logic with Apollo GraphQL
 globs:
-alwaysApply: true
+alwaysApply: false
 ---
 # Data Fetching & State Management
 
