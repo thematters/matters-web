@@ -210,11 +210,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'QKo4ol',
                   description: 'src/components/Editor',
                 })}
-                aria-label={intl.formatMessage({
-                  defaultMessage: 'Title',
-                  id: 'QKo4ol',
-                  description: 'src/components/Editor',
-                })}
               >
                 <Media at="sm">
                   <Icon icon={IconEditorH2} size={22} />
@@ -344,6 +339,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               }
               disabled={editor.isActive('blockquote')}
               className={editor.isActive('blockquote') ? styles.active : ''}
+              title={intl.formatMessage({
+                defaultMessage: 'Blockquote',
+                id: '2U8rTr',
+                description: 'src/components/Editor',
+              })}
             >
               <Media at="sm">
                 <Icon icon={IconEditorQuote} size={22} />
