@@ -142,13 +142,14 @@ const CONNECT_SRC = [
   // IPFS Gateways
   'cloudflare-ipfs.com/ipfs/',
   'ipfs.io/ipfs/',
+  '4everland.io/ipfs/',
+
   'ipfs-gateway.matters.town/ipfs/',
   'ipfs.w3s.link',
 ]
 
 const FRAME_SRC = [
   "'self'",
-
   // Embed
   'button.like.co',
   'www.youtube.com',

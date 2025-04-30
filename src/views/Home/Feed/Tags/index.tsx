@@ -29,14 +29,14 @@ const FEED_TAGS_PUBLIC = gql`
           edges {
             cursor
             node {
-              ...TagDigestSidebarTag
+              ...TagDigestConciseTag
             }
           }
         }
       }
     }
   }
-  ${TagDigest.Sidebar.fragments.tag}
+  ${TagDigest.Concise.fragments.tag}
 `
 
 const TagsFeed = () => {

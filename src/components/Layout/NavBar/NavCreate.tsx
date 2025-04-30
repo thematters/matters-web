@@ -59,7 +59,6 @@ export const NavCreate = () => {
       onShown={hidePopperOnClick}
       offset={[0, 12]} // 16px - 4px (default tippy padding)
       theme="banner"
-      appendTo="parent"
     >
       {({ ref: bannerRef }) => (
         <Dropdown
@@ -72,7 +71,6 @@ export const NavCreate = () => {
           onShown={hidePopperOnClick}
           offset={[0, 12]} // 16px - 4px (default tippy padding)
           theme="mobile"
-          appendTo="parent"
         >
           {({ ref: navRef }) => (
             <span ref={bannerRef}>

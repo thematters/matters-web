@@ -142,9 +142,9 @@ const Comments = ({ moment, editing }: CommentsProps) => {
             eof={
               <section className={eofClasses}>
                 <FormattedMessage
-                  defaultMessage="No more comments"
-                  description="src/views/ArticleDetail/Comments/LatestComments/index.tsx"
-                  id="9SXN7s"
+                  defaultMessage="Done"
+                  id="UMCQ4G"
+                  description="src/components/Interaction/"
                 />
               </section>
             }

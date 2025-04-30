@@ -22,13 +22,15 @@ const Facebook = ({ title, link }: { title: string; link: string }) => {
       type="button"
       onClick={() => {
         const shareUrl = `https://www.facebook.com/sharer/sharer.php?${new URLSearchParams(
-          {
-            u: link,
-          }
+          { u: link }
         ).toString()}`
+
         analytics.trackEvent('share', {
           type: 'facebook',
         })
+
+        // Facebook doesn't support adding text in the sharer URL parameters
+        // Only the URL can be shared through this method
         return window.open(shareUrl, 'Share to Facebook')
       }}
     >

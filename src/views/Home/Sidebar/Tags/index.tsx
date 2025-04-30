@@ -7,7 +7,6 @@ import {
   List,
   QueryError,
   SpinnerBlock,
-  TagDigest,
   usePublicQuery,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
@@ -30,14 +29,14 @@ const SIDEBAR_TAGS_PUBLIC = gql`
             cursor
             node {
               id
-              ...TagDigestSidebarTag
+              ...DigestTag
             }
           }
         }
       }
     }
   }
-  ${TagDigest.Sidebar.fragments.tag}
+  ${ArticleTag.fragments.tag}
 `
 
 const Tags = () => {

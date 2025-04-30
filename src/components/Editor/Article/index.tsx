@@ -5,13 +5,14 @@ import {
   EditorContent,
   Extension,
   FigcaptionKit,
+  Link,
   Mention,
   PasteDropFile,
   Placeholder,
   useEditor,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useCallback, useRef } from 'react'
+import { useCallback, useContext, useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { useDebouncedCallback } from 'use-debounce'
 
@@ -22,6 +23,7 @@ import {
   MAX_FIGURE_CAPTION_LENGTH,
 } from '~/common/enums'
 import { getValidFiles } from '~/common/utils'
+import { LanguageContext } from '~/components/Context'
 import { useNativeEventListener } from '~/components/Hook'
 import { EditorDraftFragment } from '~/gql/graphql'
 
@@ -33,6 +35,7 @@ import {
   restoreImages,
   SmartLink,
 } from './extensions'
+// import { Link } from './extensions/link'
 import { makeSmartLinkOptions } from './extensions/smartLink/utils'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.module.css'
@@ -54,6 +57,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
   update,
   upload,
 }) => {
+  const { lang } = useContext(LanguageContext)
   const intl = useIntl()
   const client = useApolloClient()
 
@@ -73,6 +77,11 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     update(c)
   }, INPUT_DEBOUNCE)
 
+  const editorContentClasses = classNames({
+    'u-content-article': true,
+    [styles.indented]: indentFirstLine,
+  })
+
   const editor = useEditor({
     editable: !isReadOnly,
     content: content || '',
@@ -84,6 +93,9 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       debouncedUpdate({ content })
     },
     editorProps: {
+      attributes: {
+        class: editorContentClasses,
+      },
       handleKeyDown: (view, event) => {
         if (
           event.key.toLowerCase() === KEYVALUE.backSpace &&
@@ -111,7 +123,7 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           id: 'Uq6tfM',
         }),
       }),
-      SmartLink.configure(makeSmartLinkOptions({ client })),
+      SmartLink.configure(makeSmartLinkOptions({ client, lang })),
       FigureImageUploader.configure({
         upload,
         update,
@@ -134,7 +146,10 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
           editor.commands.insertFigureImageUploaders({ files: validFiles })
         },
       }),
-      ...articleEditorExtensions,
+      Link.configure({ openOnClick: false }),
+      ...articleEditorExtensions.filter(
+        (ext) => !['link', 'figcaptionKit', 'placeholder'].includes(ext.name)
+      ),
     ] as Extension[],
   })
 
@@ -153,11 +168,13 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
       const clickY = event.nativeEvent.offsetY
 
       if (clickY > clientHeight - paddingBottom && clickY <= clientHeight) {
-        editor
-          .chain()
-          .focus('end')
-          .insertContentAt(editor.state.selection.to, [{ type: 'paragraph' }])
-          .run()
+        // move cursor to end
+        editor.commands.focus('end')
+
+        // insert paragraph
+        editor.commands.insertContentAt(editor.state.selection.to, [
+          { type: 'paragraph' },
+        ])
       }
     },
     [editor]
@@ -185,16 +202,10 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     e.preventDefault()
   })
 
-  const editorClasses = classNames({
-    'u-content-article': true,
-    [styles.articleEditor]: true,
-    [styles.indented]: indentFirstLine,
-  })
-
   return (
     <div
-      className={editorClasses}
       id="editor"
+      className={styles.articleEditor}
       ref={editorRef}
       onClick={handleEditorClick}
     >

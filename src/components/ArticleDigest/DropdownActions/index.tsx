@@ -6,9 +6,13 @@ import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
-import { ERROR_CODES, ERROR_MESSAGES } from '~/common/enums'
+import {
+  ERROR_CODES,
+  ERROR_MESSAGES,
+  MAX_META_SUMMARY_LENGTH,
+} from '~/common/enums'
 import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
-import { capitalizeFirstLetter } from '~/common/utils'
+import { capitalizeFirstLetter, makeSummary } from '~/common/utils'
 import {
   AddCollectionsArticleDialog,
   AddCollectionsArticleDialogProps,
@@ -486,7 +490,12 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const WithShareDialog = withDialog<Omit<ShareDialogProps, 'children'>>(
     BaseDropdownActions,
     ShareDialog,
-    { path: props.sharePath },
+    {
+      title: article.author.displayName
+        ? `${makeSummary(article.title, MAX_META_SUMMARY_LENGTH)} - ${article.author.displayName} - Matters`
+        : `${makeSummary(article.title, MAX_META_SUMMARY_LENGTH)} - Matters`,
+      path: props.sharePath,
+    },
     ({ openDialog }) => ({ ...props, ...controls, openShareDialog: openDialog })
   )
   const WithReport = withDialog<Omit<SubmitReportDialogProps, 'children'>>(

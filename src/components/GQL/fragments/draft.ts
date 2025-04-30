@@ -23,6 +23,11 @@ const fragments = {
         author {
           id
           userName
+          displayName
+        }
+        tags {
+          id
+          content
         }
       }
     }

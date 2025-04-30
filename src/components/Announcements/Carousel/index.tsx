@@ -154,7 +154,6 @@ const Carousel = ({ items }: CarouselProps) => {
               }
             }
 
-            const itemContent = translatedItem?.content || item.content || ''
             const isFirstFold = i === 0
 
             return (
@@ -168,7 +167,6 @@ const Carousel = ({ items }: CarouselProps) => {
                       fetchPriority={isFirstFold ? 'high' : 'low'}
                     />
                     <h3>{title}</h3>
-                    <p>{itemContent}</p>
                   </div>
                   <BannerExposureTracker
                     id={item.id}

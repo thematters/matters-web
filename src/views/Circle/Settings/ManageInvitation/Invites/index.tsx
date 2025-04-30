@@ -17,7 +17,7 @@ const InvitesFeed: React.FC = () => {
 
   return (
     <>
-      <SquareTabs sticky spacing="md">
+      <SquareTabs sticky spacing="sm">
         <SquareTabs.Tab
           onClick={() => setType('pending')}
           selected={isPending}

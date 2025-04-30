@@ -93,7 +93,6 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
   }
   return (
     <Dropdown
-      appendTo="parent"
       content={<AnalyticsSelectContent dropdown />}
       zIndex={Z_INDEX.OVER_DIALOG}
     >
