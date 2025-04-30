@@ -12,7 +12,7 @@ import {
   URL_USER_PROFILE,
 } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
-import { toast, useRoute, ViewerContext } from '~/components'
+import { toast, ViewerContext } from '~/components'
 import { Icon } from '~/components/Icon'
 import { Menu } from '~/components/Menu'
 
@@ -22,8 +22,6 @@ interface Props {
 }
 
 const ActivityPopover = ({ authed, forbidden }: Props) => {
-  const { isInPath } = useRoute()
-  const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const viewer = useContext(ViewerContext)
   const userProfilePath = toPath({
     page: 'userProfile',
@@ -75,17 +73,9 @@ const ActivityPopover = ({ authed, forbidden }: Props) => {
       <Menu.Item
         text={<FormattedMessage defaultMessage="Article" id="jx7Hn3" />}
         icon={<Icon icon={IconEdit} size={20} />}
-        is="link"
-        href={
-          authed && !forbidden && !isInDraftDetail
-            ? PATHS.ME_DRAFT_NEW
-            : undefined
-        }
-        htmlHref={
-          authed && !forbidden && isInDraftDetail
-            ? PATHS.ME_DRAFT_NEW
-            : undefined
-        }
+        is="anchor"
+        htmlHref={authed && !forbidden ? PATHS.ME_DRAFT_NEW : undefined}
+        htmlTarget="_blank"
         onClick={() => {
           onClick('article')
         }}
