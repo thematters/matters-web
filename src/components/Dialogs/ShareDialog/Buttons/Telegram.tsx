@@ -22,12 +22,14 @@ const Telegram = ({ title, link }: { title: string; link: string }) => {
       type="button"
       onClick={() => {
         const shareUrl = `https://telegram.me/share?${new URLSearchParams({
-          url: link,
           text: title,
+          url: link,
         }).toString()}`
+
         analytics.trackEvent('share', {
           type: 'telegram',
         })
+
         return window.open(shareUrl, 'Share to Telegram')
       }}
     >

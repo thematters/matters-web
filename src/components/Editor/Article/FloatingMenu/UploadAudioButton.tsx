@@ -8,9 +8,17 @@ import { ReactComponent as IconEditorAudio } from '@/public/static/icons/editor-
 import {
   ACCEPTED_UPLOAD_AUDIO_TYPES,
   ASSET_TYPE,
+  BREAKPOINTS,
   UPLOAD_AUDIO_SIZE_LIMIT,
 } from '~/common/enums'
-import { Icon, Spinner, toast, Translate } from '~/components'
+import {
+  Icon,
+  Spinner,
+  toast,
+  Tooltip,
+  Translate,
+  useMediaQuery,
+} from '~/components'
 
 import styles from './styles.module.css'
 
@@ -31,6 +39,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
   upload,
 }) => {
   const intl = useIntl()
+  const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.LG}px)`)
   const [uploading, setUploading] = useState(false)
 
   const acceptTypes = ACCEPTED_UPLOAD_AUDIO_TYPES.join(',')
@@ -102,33 +111,37 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
   })
 
   return (
-    <label
-      className={labelClasses}
-      htmlFor={fieldId}
-      title={intl.formatMessage({
-        defaultMessage: 'Insert audio',
-        id: 'oGiO//',
+    <Tooltip
+      content={intl.formatMessage({
+        defaultMessage: 'Audio',
+        id: '6mbNSp',
+        description: 'src/components/Editor',
       })}
+      placement="top"
+      disabled={!isMdUp}
     >
-      {!uploading && <Icon icon={IconEditorAudio} size={32} />}
-      {uploading && <Spinner size={32} color="greyLight" />}
+      <label className={labelClasses} htmlFor={fieldId}>
+        {!uploading && <Icon icon={IconEditorAudio} size={32} />}
+        {uploading && <Spinner size={32} color="greyLight" />}
 
-      <VisuallyHidden>
-        <input
-          id={fieldId}
-          type="file"
-          name="file"
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Insert audio',
-            id: 'oGiO//',
-          })}
-          disabled={uploading}
-          accept={acceptTypes}
-          multiple={false}
-          onChange={handleChange}
-        />
-      </VisuallyHidden>
-    </label>
+        <VisuallyHidden>
+          <input
+            id={fieldId}
+            type="file"
+            name="file"
+            aria-label={intl.formatMessage({
+              defaultMessage: 'Audio',
+              id: '6mbNSp',
+              description: 'src/components/Editor',
+            })}
+            disabled={uploading}
+            accept={acceptTypes}
+            multiple={false}
+            onChange={handleChange}
+          />
+        </VisuallyHidden>
+      </label>
+    </Tooltip>
   )
 }
 

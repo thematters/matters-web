@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 
 import { SpinnerBlock, useIntersectionObserver } from '~/components'
 
-import EndOfResults from './EndOfResults'
+import EndOfResults from '../EndOfResults'
 
 /**
  *  Usage:

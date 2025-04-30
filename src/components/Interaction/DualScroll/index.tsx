@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { SpinnerBlock, useIntersectionObserver } from '~/components'
 
-import EndOfResults from './EndOfResults'
+import EndOfResults from '../EndOfResults'
 
 interface Props {
   hasNextPage: boolean

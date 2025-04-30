@@ -69,21 +69,23 @@
     }
   }
 
-  & .eof {
-    /* moment comment form height */
-    padding-bottom: 38px;
+  & :global(.endOfResults) {
+    &:has(> .eof) {
+      /* moment comment form height + 40px */
+      padding-bottom: calc(38px + var(--sp40));
 
-    @media (--sm-up) {
-      padding-bottom: 0;
+      @media (--sm-up) {
+        padding-bottom: 0;
+      }
     }
-  }
 
-  & .eofEditing {
-    /* moment comment form height */
-    padding-bottom: 138px;
+    &:has(> .eofEditing) {
+      /* moment comment form height + 40px */
+      padding-bottom: calc(138px + var(--sp40));
 
-    @media (--sm-up) {
-      padding-bottom: 0;
+      @media (--sm-up) {
+        padding-bottom: 0;
+      }
     }
   }
 

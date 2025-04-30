@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import { analytics } from '~/common/utils'
 import { LanguageContext, SquareTabs } from '~/components'
 import {
-  ArticleFeedsCampaignFragment,
+  ArticleFeedsCampaignPublicFragment,
   ArticleFeedsTabsCampaignFragment,
 } from '~/gql/graphql'
 
@@ -20,7 +20,8 @@ export const FEED_TYPE_ANNOUNCEMENT = 'announcement'
 interface ArticleFeedsTabsProps {
   feedType: CampaignFeedType
   setFeedType: (type: string) => void
-  campaign: ArticleFeedsTabsCampaignFragment & ArticleFeedsCampaignFragment
+  campaign: ArticleFeedsTabsCampaignFragment &
+    ArticleFeedsCampaignPublicFragment
 }
 
 const ArticleFeedsTabs = ({
