@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react'
 
-import { redirectToHomePage } from '~/common/utils'
+import { redirectToLogin } from '~/common/utils'
 import { Layout, SpinnerBlock, ViewerContext } from '~/components'
 
 export const Protected: React.FC<{ children?: React.ReactNode }> = ({
@@ -10,7 +10,7 @@ export const Protected: React.FC<{ children?: React.ReactNode }> = ({
 
   useEffect(() => {
     if (!viewer.isAuthed) {
-      redirectToHomePage()
+      redirectToLogin()
     }
   }, [])
 

@@ -22,13 +22,26 @@
   }
 
   /* text selection */
-  &::selection,
-  & :global(mark.highlight) {
-    background: var(--color-editor-selection);
-  }
-
-  & :global(mark.highlight) {
-    display: inline-block;
+  & :global(p),
+  & :global(h1),
+  & :global(h2),
+  & :global(h3),
+  & :global(h4),
+  & :global(h5),
+  & :global(h6),
+  & :global(ul),
+  & :global(ol),
+  & :global(code),
+  & :global(pre),
+  & :global(figcaption),
+  & :global(a),
+  & :global(strong),
+  & :global(b),
+  & :global(textarea),
+  & :global(input) {
+    &::selection {
+      background-color: var(--color-editor-selection);
+    }
   }
 
   /* horizontal rule */
@@ -59,7 +72,7 @@
     content: attr(data-placeholder);
   }
 
-  & :global(figure.is-figure-empty::before) {
+  & :global(figure.is-figure-empty::after) {
     position: absolute;
     right: 0;
     bottom: 0;
