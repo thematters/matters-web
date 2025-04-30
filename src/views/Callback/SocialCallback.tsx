@@ -21,7 +21,7 @@ import {
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
 } from '~/common/enums'
-import { analytics, sessionStorage, setCookies, storage } from '~/common/utils'
+import { sessionStorage, setCookies, storage } from '~/common/utils'
 import {
   getErrorCodes,
   LanguageContext,
@@ -139,8 +139,6 @@ const SocialCallback = ({ type }: Props) => {
             [COOKIE_USER_GROUP]: group,
             ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
           })
-
-          analytics.identifyUser()
 
           if (localPath) {
             window.location.href = localPath

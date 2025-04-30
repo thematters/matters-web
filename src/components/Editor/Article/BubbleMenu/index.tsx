@@ -104,27 +104,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
     })
   }
 
-  const onClickQuote = () => {
-    // if heading is active, unset heading first
-    if (editor.isActive('heading', { level: 2 })) {
-      // @ts-ignore
-      editor.chain().focus().toggleHeading({ level: 2 }).run()
-    }
-    if (editor.isActive('heading', { level: 3 })) {
-      // @ts-ignore
-      editor.chain().focus().toggleHeading({ level: 3 }).run()
-    }
-
-    // if code block is active, unset code block first
-    if (editor.isActive('codeBlock')) {
-      // @ts-ignore
-      editor.chain().focus().toggleCodeBlock().run()
-    }
-
-    // then toggle blockquote
-    editor.chain().focus().toggleBlockquote().run()
-  }
-
   return (
     <TipTapBubbleMenu
       editor={editor}
@@ -231,11 +210,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   id: 'QKo4ol',
                   description: 'src/components/Editor',
                 })}
-                aria-label={intl.formatMessage({
-                  defaultMessage: 'Title',
-                  id: 'QKo4ol',
-                  description: 'src/components/Editor',
-                })}
               >
                 <Media at="sm">
                   <Icon icon={IconEditorH2} size={22} />
@@ -335,8 +309,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {!isCommentEditor && (
               <button
                 type="button"
-                // @ts-ignore
-                onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+                onClick={() =>
+                  // @ts-ignore
+                  editor.chain().focus().clearNodes().toggleCodeBlock().run()
+                }
+                disabled={editor.isActive('codeBlock')}
                 className={editor.isActive('codeBlock') ? styles.active : ''}
                 title={intl.formatMessage({
                   defaultMessage: 'Code Block',
@@ -357,8 +334,16 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             <button
               type="button"
               // @ts-ignore
-              onClick={onClickQuote}
+              onClick={() =>
+                editor.chain().focus().clearNodes().toggleBlockquote().run()
+              }
+              disabled={editor.isActive('blockquote')}
               className={editor.isActive('blockquote') ? styles.active : ''}
+              title={intl.formatMessage({
+                defaultMessage: 'Blockquote',
+                id: '2U8rTr',
+                description: 'src/components/Editor',
+              })}
             >
               <Media at="sm">
                 <Icon icon={IconEditorQuote} size={22} />

@@ -4,6 +4,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import {
   MAX_META_SUMMARY_LENGTH,
   OPEN_COMMENT_DETAIL_DIALOG,
@@ -277,7 +278,7 @@ const BaseArticleDetail = ({
         path={toPath({ page: 'articleDetail', article }).href}
         description={makeSummary(summary, MAX_META_SUMMARY_LENGTH) || ''}
         keywords={keywords}
-        image={article.cover}
+        image={article.cover || IMAGE_INTRO.src}
         jsonLdData={{
           '@context': 'https://schema.org',
           '@type': 'Article',
