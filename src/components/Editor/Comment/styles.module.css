@@ -1,4 +1,4 @@
-.commentEditor :global(.tiptap.ProseMirror) {
+.commentEditor {
   min-height: 4.125rem;
 
   & p {

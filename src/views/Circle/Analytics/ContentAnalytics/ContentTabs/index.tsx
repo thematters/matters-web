@@ -16,7 +16,7 @@ const ContentTabs: React.FC<Props> = ({ type, setType }) => {
   const isPaywall = type === 'paywall'
 
   return (
-    <SquareTabs spacing="md">
+    <SquareTabs spacing="sm">
       <SquareTabs.Tab
         onClick={() => setType('paywall')}
         selected={isPaywall}

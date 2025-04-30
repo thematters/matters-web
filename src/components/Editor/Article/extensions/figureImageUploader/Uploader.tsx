@@ -184,16 +184,21 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
 
   return (
     <NodeViewWrapper>
-      <img src={preview} alt="Uploading..." />
-      <figcaption>
-        <input
-          type="text"
-          placeholder={placeholder}
-          value={caption}
-          onChange={handleCaptionChange}
-        />
-      </figcaption>
-      <span ref={progressRef} className={styles.progressIndicator} />
+      {/* To support drag and drop
+       * @see https://github.com/ueberdosis/tiptap/issues/2597#issuecomment-2640239537
+       */}
+      <div data-drag-handle draggable={true} contentEditable="false">
+        <img src={preview} alt="Uploading..." />
+        <figcaption>
+          <input
+            type="text"
+            placeholder={placeholder}
+            value={caption}
+            onChange={handleCaptionChange}
+          />
+        </figcaption>
+        <span ref={progressRef} className={styles.progressIndicator} />
+      </div>
     </NodeViewWrapper>
   )
 }

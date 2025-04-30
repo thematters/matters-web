@@ -10,11 +10,12 @@ import {
   useEditor,
 } from '@matters/matters-editor'
 import classNames from 'classnames'
-import { useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ADD_MOMENT_ASSETS } from '~/common/enums'
 import { getValidFiles } from '~/common/utils'
+import { LanguageContext } from '~/components/Context'
 
 import {
   CustomShortcuts,
@@ -40,6 +41,7 @@ const MomentEditor: React.FC<Props> = ({
   setEditor,
 }) => {
   const client = useApolloClient()
+  const { lang } = useContext(LanguageContext)
   const intl = useIntl()
   placeholder =
     placeholder ||
@@ -57,6 +59,11 @@ const MomentEditor: React.FC<Props> = ({
       const content = editor.getHTML()
       update({ content })
     },
+    editorProps: {
+      attributes: {
+        class: classNames('u-content-moment', styles.momentEditor),
+      },
+    },
     extensions: [
       CustomShortcuts.configure({
         onModEnter: () => onSubmit(),
@@ -70,7 +77,7 @@ const MomentEditor: React.FC<Props> = ({
       Mention.configure({
         suggestion: makeMentionSuggestion({ client }),
       }),
-      SmartLink.configure(makeSmartLinkOptions({ client })),
+      SmartLink.configure(makeSmartLinkOptions({ client, lang })),
       PasteDropFile.configure({
         onDrop: async (editor, files, pos) => {
           const validFiles = await getValidFiles(files)
@@ -99,7 +106,6 @@ const MomentEditor: React.FC<Props> = ({
 
   return (
     <div
-      className={classNames('u-content-moment', styles.momentEditor)}
       id="editor" // anchor for mention plugin
     >
       <EditorContent editor={editor} />

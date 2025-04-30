@@ -7,28 +7,6 @@
     padding-right: 0;
     padding-left: 0;
   }
-
-  &.editing {
-    cursor: not-allowed;
-    opacity: 0.3;
-  }
-
-  & .top {
-    @mixin flex-start-start;
-
-    & .campaign {
-      display: inline-flex;
-      align-items: center;
-      justify-content: flex-start;
-      height: 1.125rem;
-      margin-left: var(--sp16);
-
-      @media (--sm-up) {
-        margin-bottom: var(--ar17-100);
-        margin-left: 0;
-      }
-    }
-  }
 }
 
 .block {

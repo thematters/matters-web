@@ -15,6 +15,14 @@ export const fragments = {
   article: gql`
     fragment DropdownActionsArticle on Article {
       id
+      author {
+        id
+        displayName
+      }
+      tags {
+        id
+        content
+      }
       ...AppreciatorsDialogArticle
       ...SupportsDialogArticle
       ...ArchiveArticleArticle

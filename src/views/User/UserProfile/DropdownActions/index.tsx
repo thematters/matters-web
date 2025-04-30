@@ -219,7 +219,7 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
   const WithShare = withDialog<Omit<ShareDialogProps, 'children'>>(
     BaseDropdownActions,
     ShareDialog,
-    { tags: [user.displayName, user.userName].filter(Boolean) as string[] },
+    { title: user.displayName ? `${user.displayName} - Matters` : '' },
     ({ openDialog }) => ({
       user,
       isMe,

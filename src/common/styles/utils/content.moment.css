@@ -1,8 +1,7 @@
 /****
  * Moment content & shared with editor
  */
-.u-content-moment,
-.u-content-moment .tiptap.ProseMirror {
+.u-content-moment {
   font-size: var(--text15);
   line-height: 1.75;
 

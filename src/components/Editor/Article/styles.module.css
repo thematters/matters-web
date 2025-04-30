@@ -16,133 +16,137 @@
     overflow-y: initial;
   }
 
-  & :global(.tiptap.ProseMirror) {
-    /* min-height: 50vh;
-    min-height: calc(var(--ivh) * 50);
-    min-height: 50dvh; */
+  /* outline */
+  &:focus {
+    outline: none;
+  }
 
-    /* outline */
-    &:focus {
-      outline: none;
+  /* text selection */
+  & :global(p),
+  & :global(h1),
+  & :global(h2),
+  & :global(h3),
+  & :global(h4),
+  & :global(h5),
+  & :global(h6),
+  & :global(ul),
+  & :global(ol),
+  & :global(code),
+  & :global(pre),
+  & :global(figcaption),
+  & :global(a),
+  & :global(strong),
+  & :global(b),
+  & :global(textarea),
+  & :global(input) {
+    &::selection {
+      background-color: var(--color-editor-selection);
+    }
+  }
+
+  /* horizontal rule */
+  & :global(hr.ProseMirror-selectednode) {
+    &::before {
+      background-image: radial-gradient(
+        circle,
+        var(--color-black) 0.25rem,
+        transparent 0.25rem
+      );
     }
 
-    /* disable interactive elements */
-    & a {
-      pointer-events: none;
-    }
-
-    /* horizontal rule */
-    & :global(hr.ProseMirror-selectednode) {
-      &::before {
-        background-image: radial-gradient(
-          circle,
-          var(--color-black) 0.25rem,
-          transparent 0.25rem
-        );
-      }
-
-      &::after {
-        position: absolute;
-        inset: 0;
-        content: '';
-        border: 1px solid var(--color-line-grey-light);
-        border-radius: 0.5rem;
-      }
-    }
-
-    /* placeholder */
-    & :global(p.is-editor-empty:first-child::before) {
-      float: left;
-      height: 0;
-      color: var(--color-grey);
-      pointer-events: none;
-      content: attr(data-placeholder);
-    }
-
-    & :global(figure.is-figure-empty::before) {
+    &::after {
       position: absolute;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      z-index: -1;
-      font-size: var(--text13);
-      line-height: 1.5;
+      inset: 0;
+      content: '';
+      border: 1px solid var(--color-line-grey-light);
+      border-radius: 0.5rem;
+    }
+  }
+
+  /* placeholder */
+  & :global(p.is-editor-empty:first-child::before) {
+    float: left;
+    height: 0;
+    color: var(--color-grey);
+    pointer-events: none;
+    content: attr(data-placeholder);
+  }
+
+  & :global(figure.is-figure-empty::after) {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    font-size: var(--text13);
+    line-height: 1.5;
+    color: var(--color-grey);
+    white-space: pre-wrap;
+    cursor: text;
+    content: attr(data-figure-placeholder);
+  }
+
+  /* link input */
+  & :global(.figure-embed-link-input) {
+    & input {
+      display: block;
+      height: 1.875rem;
+      line-height: var(--line-height-article-base);
       color: var(--color-grey);
-      white-space: pre-wrap;
-      cursor: text;
-      content: attr(data-figure-placeholder);
-    }
 
-    /* link input */
-    & :global(.figure-embed-link-input) {
-      & input {
-        display: block;
-        height: 1.875rem;
-        line-height: var(--line-height-article-base);
+      &::placeholder {
         color: var(--color-grey);
-
-        &::placeholder {
-          color: var(--color-grey);
-          opacity: 1; /* Firefox */
-        }
-      }
-    }
-
-    /* image uploader */
-    & :global(.figure-image-uploader),
-    & :global(figure),
-    /* gapcursor can sit between two figures */
-    & :global(.ProseMirror-gapcursor) {
-      position: relative;
-      margin: var(--ar17-200) 0;
-
-      & + :global(.figure-image-uploader),
-      & + :global(figure) {
-        margin-top: calc(var(--ar17-200) * 2);
-      }
-
-      & :global(input) {
-        margin-top: var(--sp12);
-        font-size: var(--text14);
-        line-height: 1.375rem;
-        color: var(--color-grey);
-        text-align: center;
-        white-space: pre-wrap;
-
-        &::placeholder {
-          color: var(--color-grey);
-          opacity: 1; /* Firefox */
-        }
-      }
-    }
-
-    /* figure selected */
-    & :global(figure.ProseMirror-selectednode),
-    & :global(.figure-image-uploader.ProseMirror-selectednode) {
-      position: relative;
-
-      &::before {
-        position: absolute;
-        inset: 0;
-        content: '';
-        border: 2px solid var(--color-matters-green);
-      }
-
-      @media (--md-up) {
-        outline: 2px solid var(--color-matters-green);
-
-        &::before {
-          display: none;
-        }
+        opacity: 1; /* Firefox */
       }
     }
   }
 
-  &.indented {
-    & :global(.tiptap.ProseMirror) {
-      & > p {
-        text-indent: 2.25rem;
+  /* image uploader */
+  & :global(.figure-image-uploader),
+  & :global(figure) {
+    position: relative;
+    margin-bottom: var(--ar17-400);
+
+    & :global(input) {
+      margin-top: var(--sp12);
+      font-size: var(--text14);
+      line-height: 1.375rem;
+      color: var(--color-grey);
+      text-align: center;
+      white-space: pre-wrap;
+      background: transparent;
+
+      &::placeholder {
+        color: var(--color-grey);
+        opacity: 1; /* Firefox */
       }
     }
+  }
+
+  /* figure selected */
+  & :global(figure.ProseMirror-selectednode),
+  & :global(.figure-image-uploader.ProseMirror-selectednode) {
+    position: relative;
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      content: '';
+      border: 2px solid var(--color-matters-green);
+    }
+
+    @media (--md-up) {
+      outline: 2px solid var(--color-matters-green);
+
+      &::before {
+        display: none;
+      }
+    }
+  }
+}
+
+.indented {
+  & > p {
+    text-indent: 2.25rem;
   }
 }
