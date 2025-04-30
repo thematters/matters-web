@@ -100,7 +100,7 @@ const FollowersDialogContent = () => {
   }
 
   return (
-    <Dialog.Content>
+    <Dialog.Content noSpacing>
       <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
         <List hasBorder={false}>
           {edges.map(({ node, cursor }, i) => (

@@ -8,7 +8,7 @@ import {
   Layout,
   useRoute,
 } from '~/components'
-import { ArticleFeedsCampaignFragment } from '~/gql/graphql'
+import { ArticleFeedsCampaignPublicFragment } from '~/gql/graphql'
 
 import MainFeed from './MainFeed'
 import styles from './styles.module.css'
@@ -21,7 +21,7 @@ import ArticleFeedsTabs, {
 const ArticleFeeds = ({
   campaign,
 }: {
-  campaign: ArticleFeedsCampaignFragment
+  campaign: ArticleFeedsCampaignPublicFragment
 }) => {
   const { getQuery, setQuery, isPathStartWith } = useRoute()
   const qsType = getQuery('type') as CampaignFeedType
@@ -89,34 +89,50 @@ const ArticleFeeds = ({
   )
 }
 
-ArticleFeeds.fragments = gql`
-  fragment ArticleFeedsCampaign on WritingChallenge {
-    id
-    featuredDescriptionZhHant: featuredDescription(input: { language: zh_hant })
-    featuredDescriptionZhHans: featuredDescription(input: { language: zh_hans })
-    featuredDescriptionEn: featuredDescription(input: { language: en })
-    announcements {
+ArticleFeeds.fragments = {
+  public: gql`
+    fragment ArticleFeedsCampaignPublic on WritingChallenge {
       id
-      campaigns {
-        campaign {
-          id
-          shortHash
+      featuredDescriptionZhHant: featuredDescription(
+        input: { language: zh_hant }
+      )
+      featuredDescriptionZhHans: featuredDescription(
+        input: { language: zh_hans }
+      )
+      featuredDescriptionEn: featuredDescription(input: { language: en })
+      announcements {
+        id
+        campaigns {
+          campaign {
+            id
+            shortHash
+          }
+          stage {
+            id
+            nameZhHant: name(input: { language: zh_hant })
+            nameZhHans: name(input: { language: zh_hans })
+            nameEn: name(input: { language: en })
+          }
         }
-        stage {
-          id
-          nameZhHant: name(input: { language: zh_hant })
-          nameZhHans: name(input: { language: zh_hans })
-          nameEn: name(input: { language: en })
-        }
+        ...ArticleDigestFeedArticlePublic
+        ...ArticleDigestFeedArticlePrivate
       }
-      ...ArticleDigestFeedArticlePublic
-      ...ArticleDigestFeedArticlePrivate
+      ...ArticleFeedsTabsCampaign
     }
-    ...ArticleFeedsTabsCampaign
-  }
-  ${ArticleFeedsTabs.fragments}
-  ${ArticleDigestFeed.fragments.article.public}
-  ${ArticleDigestFeed.fragments.article.private}
-`
+    ${ArticleFeedsTabs.fragments}
+    ${ArticleDigestFeed.fragments.article.public}
+    ${ArticleDigestFeed.fragments.article.private}
+  `,
+  private: gql`
+    fragment ArticleFeedsCampaignPrivate on WritingChallenge {
+      id
+      announcements {
+        id
+        ...ArticleDigestFeedArticlePrivate
+      }
+    }
+    ${ArticleDigestFeed.fragments.article.private}
+  `,
+}
 
 export default ArticleFeeds

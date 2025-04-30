@@ -15,9 +15,7 @@ import {
   SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
 import {
-  analytics,
   parseFormSubmitErrors,
-  redirectToTarget,
   setCookies,
   signinCallbackUrl,
   storage,
@@ -170,12 +168,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         if (submitCallback) {
           submitCallback()
         }
-
-        analytics.identifyUser()
-
-        redirectToTarget({
-          fallback: !!isInPage ? 'homepage' : 'current',
-        })
 
         closeDialog?.()
       } catch (error) {

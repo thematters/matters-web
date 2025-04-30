@@ -1,6 +1,14 @@
+.endOfResultsIcon {
+  display: inline-block;
+  width: 1rem;
+  height: 1px;
+  background-color: var(--color-grey-light);
+}
+
 .endOfResults {
   @mixin flex-center-all;
 
+  gap: var(--sp8);
   padding-bottom: var(--sp40);
   font-size: var(--text14);
   color: var(--color-grey);

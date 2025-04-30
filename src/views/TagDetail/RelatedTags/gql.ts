@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { TagDigest } from '~/components'
+import { ArticleTag } from '~/components'
 
 export const RELATED_TAGS = gql`
   query TagDetailRecommended($id: ID!) {
@@ -11,12 +11,12 @@ export const RELATED_TAGS = gql`
           edges {
             cursor
             node {
-              ...TagDigestSidebarTag
+              ...DigestTag
             }
           }
         }
       }
     }
   }
-  ${TagDigest.Sidebar.fragments.tag}
+  ${ArticleTag.fragments.tag}
 `

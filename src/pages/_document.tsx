@@ -44,6 +44,29 @@ class MattersDocument extends Document<MattersDocumentProps> {
       <Html lang={this.props.lang}>
         <Head>
           <meta httpEquiv="Content-Security-Policy" content={CSP_POLICY} />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.gnshbrequest = window.gnshbrequest || {cmd:[]};
+              window.gnshbrequest.cmd.push(function(){
+                window.gnshbrequest.forceInternalRequest();
+              });
+            `,
+            }}
+          />
+          <script
+            async
+            src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
+            onLoad={() => {
+              console.log(
+                'https://securepubads.g.doubleclick.net/tag/js/gpt.js has loaded'
+              )
+            }}
+          />
+          <script
+            async
+            src="https://cpt.geniee.jp/hb/v1/222058/2731/wrapper.min.js"
+          />
         </Head>
 
         <body>

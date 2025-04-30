@@ -135,6 +135,7 @@ interface LoadMoreProp {
 interface ShareProp {
   type:
     | 'line'
+    | 'threads'
     | 'whatsapp'
     | 'telegram'
     | 'wechat'

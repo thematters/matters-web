@@ -8,7 +8,7 @@ import {
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
 } from '~/common/enums'
-import { redirectToTarget, setCookies, storage } from '~/common/utils'
+import { setCookies, storage } from '~/common/utils'
 import { LanguageContext, useMutation, useRoute } from '~/components'
 import { EMAIL_LOGIN } from '~/components/GQL/mutations/emailLogin'
 import { EmailLoginMutation } from '~/gql/graphql'
@@ -64,8 +64,6 @@ const LoginCallback = () => {
           [COOKIE_USER_GROUP]: group,
           ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
         })
-
-        redirectToTarget({ fallback: 'homepage' })
       } catch (error) {
         setHasError(true)
       }

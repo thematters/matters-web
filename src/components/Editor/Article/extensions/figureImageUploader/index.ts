@@ -43,6 +43,7 @@ export const FigureImageUploader = Node.create<FigcaptionImageUploaderOptions>({
   name: pluginName,
   group: 'block',
   atom: true,
+  draggable: true,
 
   addAttributes() {
     return {

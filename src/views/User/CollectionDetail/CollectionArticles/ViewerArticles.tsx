@@ -18,7 +18,7 @@ import {
   useMutation,
 } from '~/components'
 import DropdownActions from '~/components/CollectionDigest/DropdownActions'
-import EndOfResults from '~/components/Interaction/InfiniteScroll/EndOfResults'
+import EndOfResults from '~/components/Interaction/EndOfResults'
 import {
   ArticleState,
   CollectionArticlesCollectionFragment,
