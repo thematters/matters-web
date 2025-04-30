@@ -1686,6 +1686,10 @@
   "Rc4Oij": {
     "defaultMessage": "火闪电"
   },
+  "RghClT": {
+    "defaultMessage": "作品设置",
+    "description": "src/views/Me/DraftDetail/OptioinDrawer/index.tsx"
+  },
   "RnKPVm": {
     "defaultMessage": "{articleCount} 篇文章"
   },
@@ -2976,6 +2980,10 @@
   "qw7tLA": {
     "defaultMessage": "喜欢你在已删除动态中的留言",
     "description": "src/components/Notice/CommentNotice/CommentLikedNotice.tsx"
+  },
+  "r0dLPT": {
+    "defaultMessage": "内容与排版",
+    "description": "src/views/Me/DraftDetail/OptioinDrawer/index.tsx"
   },
   "r5pj/5": {
     "defaultMessage": "拖拽"

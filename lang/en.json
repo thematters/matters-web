@@ -1686,6 +1686,10 @@
   "Rc4Oij": {
     "defaultMessage": "Firebolt"
   },
+  "RghClT": {
+    "defaultMessage": "Settings",
+    "description": "src/views/Me/DraftDetail/OptioinDrawer/index.tsx"
+  },
   "RnKPVm": {
     "defaultMessage": "{articleCount} articles"
   },
@@ -2976,6 +2980,10 @@
   "qw7tLA": {
     "defaultMessage": "liked your comment on a deleted moment",
     "description": "src/components/Notice/CommentNotice/CommentLikedNotice.tsx"
+  },
+  "r0dLPT": {
+    "defaultMessage": "Content and Layout",
+    "description": "src/views/Me/DraftDetail/OptioinDrawer/index.tsx"
   },
   "r5pj/5": {
     "defaultMessage": "Drag"
