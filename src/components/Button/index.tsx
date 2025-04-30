@@ -33,6 +33,7 @@ export type ButtonHeight =
   | '1.75rem'
   | '1.875rem'
   | '2rem'
+  | '2.125rem'
   | '2.25rem'
   | '2.375rem'
   | '2.5rem'

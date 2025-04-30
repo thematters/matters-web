@@ -1,5 +1,5 @@
 import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
-import { Button, Icon, TextIcon } from '~/components'
+import { Button, Icon, Media, TextIcon } from '~/components'
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
 type OptionButtonProps = {
@@ -17,19 +17,39 @@ export const MoreButton = ({
   const isPublished = draft.publishState === 'published'
   const disabled = !publishable || isPending || isPublished
   return (
-    <Button
-      size={[null, '2.375rem']}
-      spacing={[0, 14]}
-      borderRadius={'0.75rem'}
-      bgColor="black"
-      onClick={onClick}
-      disabled={disabled}
-    >
-      <TextIcon
-        color="white"
-        icon={<Icon icon={IconDown} size={18} />}
-        spacing={8}
-      />
-    </Button>
+    <>
+      <Media at="sm">
+        <Button
+          size={[null, '2.125rem']}
+          spacing={[0, 14]}
+          borderRadius={'0.75rem'}
+          bgColor="black"
+          onClick={onClick}
+          disabled={disabled}
+        >
+          <TextIcon
+            color="white"
+            icon={<Icon icon={IconDown} size={18} />}
+            spacing={8}
+          />
+        </Button>
+      </Media>
+      <Media greaterThan="sm">
+        <Button
+          size={[null, '2.375rem']}
+          spacing={[0, 14]}
+          borderRadius={'0.75rem'}
+          bgColor="black"
+          onClick={onClick}
+          disabled={disabled}
+        >
+          <TextIcon
+            color="white"
+            icon={<Icon icon={IconDown} size={18} />}
+            spacing={8}
+          />
+        </Button>
+      </Media>
+    </>
   )
 }
