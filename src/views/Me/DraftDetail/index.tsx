@@ -23,6 +23,7 @@ import {
   EmptyLayout,
   Head,
   Layout,
+  Media,
   SpinnerBlock,
   Throw404,
   useDirectImageUpload,
@@ -59,6 +60,13 @@ const Editor = dynamic(
   {
     ssr: false,
     loading: () => <SpinnerBlock />,
+  }
+)
+
+const DynamicOptionDrawer = dynamic(
+  () => import('./OptionDrawer').then((mod) => mod.OptionDrawer),
+  {
+    ssr: false,
   }
 )
 
@@ -138,6 +146,11 @@ const BaseDraftDetail = () => {
   )
   const [contentLength, setContentLength] = useState(0)
   const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
+
+  const [isOpenOptionDrawer, setIsOpenOptionDrawer] = useState(false)
+  const toggleOptionDrawer = () => {
+    setIsOpenOptionDrawer((prevState) => !prevState)
+  }
 
   useUnloadConfirm({ block: saveStatus === 'saving' && !isNewDraft() })
 
@@ -342,81 +355,86 @@ const BaseDraftDetail = () => {
   }
 
   return (
-    <>
-      <Layout
-        header={
-          <>
-            <section className={styles.header}>
-              <SaveStatus status={saveStatus} />
+    <Layout
+      header={
+        <>
+          <section className={styles.header}>
+            <SaveStatus status={saveStatus} />
 
-              <section className={styles.headerRight}>
-                {isOverLength && (
-                  <span className={styles.count}>
-                    {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
-                  </span>
-                )}
-                <OptionButton />
-                {draft && (
-                  <section className={styles.publishButtons}>
-                    <SettingsButton
-                      draft={draft}
-                      campaigns={appliedCampaigns}
-                      ownCircles={ownCircles}
-                      publishable={!!publishable}
-                    />
-                    <span className={styles.divider} />
-                    <MoreButton
-                      draft={draft}
-                      publishable={!!publishable}
-                      onClick={() => console.log('click more button')}
-                    />
-                  </section>
-                )}
-              </section>
+            <section className={styles.headerRight}>
+              {isOverLength && (
+                <span className={styles.count}>
+                  {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
+                </span>
+              )}
+              <OptionButton onClick={toggleOptionDrawer} />
+              {draft && (
+                <section className={styles.publishButtons}>
+                  <SettingsButton
+                    draft={draft}
+                    campaigns={appliedCampaigns}
+                    ownCircles={ownCircles}
+                    publishable={!!publishable}
+                  />
+                  <span className={styles.divider} />
+                  <MoreButton
+                    draft={draft}
+                    publishable={!!publishable}
+                    onClick={() => console.log('click more button')}
+                  />
+                </section>
+              )}
             </section>
-          </>
+          </section>
+        </>
+      }
+    >
+      <Head
+        noSuffix
+        title={
+          draft?.title
+            ? intl.formatMessage(
+                {
+                  defaultMessage: 'Draft - {title}',
+                  id: 'gvTltk',
+                },
+                { title: draft?.title }
+              )
+            : intl.formatMessage({
+                defaultMessage: 'Draft - Untitled',
+                id: 'qcAuPU',
+              })
         }
-      >
-        <Head
-          noSuffix
-          title={
-            draft?.title
-              ? intl.formatMessage(
-                  {
-                    defaultMessage: 'Draft - {title}',
-                    id: 'gvTltk',
-                  },
-                  { title: draft?.title }
-                )
-              : intl.formatMessage({
-                  defaultMessage: 'Draft - Untitled',
-                  id: 'qcAuPU',
-                })
-          }
+      />
+
+      <PublishState draft={draft} />
+
+      <Layout.Main.Spacing>
+        <Editor
+          draft={draft}
+          update={async (props) => addRequest(() => update(props))}
+          upload={async (props) => addRequest(() => upload(props))}
         />
 
         <PublishState draft={draft} />
 
-        <Layout.Main.Spacing>
-          <Editor
-            draft={draft}
-            update={async (props) => addRequest(() => update(props))}
-            upload={async (props) => addRequest(() => upload(props))}
+        <Media greaterThan="sm">
+          <DynamicOptionDrawer
+            isOpen={isOpenOptionDrawer}
+            onClose={toggleOptionDrawer}
           />
-
-          <PublishState draft={draft} />
-        </Layout.Main.Spacing>
-      </Layout>
-    </>
+        </Media>
+      </Layout.Main.Spacing>
+    </Layout>
   )
 }
 
 const DraftDetail = () => (
-  <DraftDetailStateProvider>
-    <DrawerProvider>
+  <DrawerProvider>
+    <DraftDetailStateProvider>
       <BaseDraftDetail />
-    </DrawerProvider>
-  </DraftDetailStateProvider>
+    </DraftDetailStateProvider>
+  </DrawerProvider>
 )
 
 export default DraftDetail

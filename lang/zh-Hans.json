@@ -1440,6 +1440,10 @@
     "defaultMessage": "精选过去 24 小时与你有关的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "Mu2Jy8": {
+    "defaultMessage": "作品设置",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "Myrqtn": {
     "defaultMessage": "🎉 感谢支持！"
   },
@@ -2008,6 +2012,10 @@
   },
   "XTyKFR": {
     "defaultMessage": "精挑细选作品，帮助读者更容易发现优质内容"
+  },
+  "XU93/I": {
+    "defaultMessage": "内容与排版",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
   },
   "XVYrS/": {
     "defaultMessage": "还没有关注者"

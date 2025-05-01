@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconDrawer } from '@/public/static/icons/24px/drawer.svg'
 import { Button, Icon, TextIcon } from '~/components'
 
-export const OptionButton = () => (
+export const OptionButton = ({ onClick }: { onClick: () => void }) => (
   <Button
     size={[null, '2.375rem']}
     spacing={[0, 14]}
@@ -12,7 +12,7 @@ export const OptionButton = () => (
     borderColor="greyHover"
     borderActiveColor="black"
     borderWidth="sm"
-    onClick={() => {}}
+    onClick={onClick}
     aria-haspopup="dialog"
   >
     <TextIcon

@@ -1440,6 +1440,10 @@
     "defaultMessage": "Selected activities related to you in the past 24 hours",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "Mu2Jy8": {
+    "defaultMessage": "Settings",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "Myrqtn": {
     "defaultMessage": "🎉 Thank you for support!"
   },
@@ -2008,6 +2012,10 @@
   },
   "XTyKFR": {
     "defaultMessage": "Adding articles to a collection helps readers find your articles."
+  },
+  "XU93/I": {
+    "defaultMessage": "Content and Layout",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
   },
   "XVYrS/": {
     "defaultMessage": "No followers yet"
