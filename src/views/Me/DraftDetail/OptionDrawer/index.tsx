@@ -43,8 +43,8 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
             >
               <FormattedMessage
                 defaultMessage="Content and Layout"
-                id="r0dLPT"
-                description="src/views/Me/DraftDetail/OptioinDrawer/index.tsx"
+                id="XU93/I"
+                description="src/views/Me/DraftDetail/OptionDrawer/index.tsx"
               />
             </Tabs.Tab>
 
@@ -54,8 +54,8 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
             >
               <FormattedMessage
                 defaultMessage="Settings"
-                id="RghClT"
-                description="src/views/Me/DraftDetail/OptioinDrawer/index.tsx"
+                id="Mu2Jy8"
+                description="src/views/Me/DraftDetail/OptionDrawer/index.tsx"
               />
             </Tabs.Tab>
           </Tabs>
