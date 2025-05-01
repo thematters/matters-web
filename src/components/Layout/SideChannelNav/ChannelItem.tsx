@@ -38,9 +38,18 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
     setFirstRender(false)
   }, [])
 
-  if (!channel || channel.__typename !== 'TopicChannel') {
+  if (
+    !channel ||
+    (channel.__typename !== 'TopicChannel' &&
+      channel.__typename !== 'CurationChannel' &&
+      channel.__typename !== 'WritingChallenge')
+  ) {
     return null
   }
+
+  const isWritingChallenge = channel.__typename === 'WritingChallenge'
+
+  const subpath = isWritingChallenge ? 'e' : 'c'
 
   const channelName = channel.name
 
@@ -54,11 +63,12 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
       disabled={!lineClampable}
     >
       <LinkWrapper
-        href={`/c/${channel.shortHash}`}
+        href={`/${subpath}/${channel.shortHash}`}
         ref={node}
         className={classnames({
           [styles.item]: true,
           [styles.selectedChannel]: shortHash === channel.shortHash,
+          [styles.temporaryChannel]: isWritingChallenge,
           [styles.lineClampable]: !firstRender && lineClampable,
         })}
         onClick={() => {

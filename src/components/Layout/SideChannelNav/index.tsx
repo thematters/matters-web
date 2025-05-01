@@ -2,7 +2,7 @@ import classnames from 'classnames'
 import { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { PATHS, TEMPORARY_CHANNEL_URL } from '~/common/enums'
+import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
   LanguageContext,
@@ -19,10 +19,9 @@ import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const SideChannelNav = () => {
-  const { isInPath, isPathStartWith } = useRoute()
+  const { isInPath } = useRoute()
   const viewer = useContext(ViewerContext)
   const isAuthed = viewer.isAuthed
-  const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
 
   const [showTopGradient, setShowTopGradient] = useState(false)
   const [showBottomGradient, setShowBottomGradient] = useState(false)
@@ -56,6 +55,8 @@ const SideChannelNav = () => {
   if (loading) return <Placeholder />
 
   const channels = data?.channels || []
+
+  console.log({ channels })
 
   const onTabClick = (type: string) => {
     analytics.trackEvent('click_button', {
@@ -98,22 +99,6 @@ const SideChannelNav = () => {
         >
           <span>
             <FormattedMessage defaultMessage="Featured" id="CnPG8j" />
-          </span>
-        </LinkWrapper>
-        <LinkWrapper
-          href={TEMPORARY_CHANNEL_URL}
-          className={classnames({
-            [styles.item]: true,
-            [styles.selectedChannel]: isInTemporaryChannel,
-            [styles.temporaryChannel]: true,
-          })}
-        >
-          <span>
-            <FormattedMessage
-              defaultMessage="FreeWrite"
-              id="eVq7Ji"
-              description="src/components/Layout/SideChannelNav/index.tsx"
-            />
           </span>
         </LinkWrapper>
         {channels.map((c) => (
