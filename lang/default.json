@@ -1440,6 +1440,10 @@
     "defaultMessage": "Selected activities related to you in the past 24 hours",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "Mu2Jy8": {
+    "defaultMessage": "Settings",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "Myrqtn": {
     "defaultMessage": "🎉 Thank you for support!"
   },
@@ -1685,10 +1689,6 @@
   },
   "Rc4Oij": {
     "defaultMessage": "Firebolt"
-  },
-  "RghClT": {
-    "defaultMessage": "Settings",
-    "description": "src/views/Me/DraftDetail/OptioinDrawer/index.tsx"
   },
   "RnKPVm": {
     "defaultMessage": "{articleCount} articles"
@@ -2012,6 +2012,10 @@
   },
   "XTyKFR": {
     "defaultMessage": "Adding articles to a collection helps readers find your articles."
+  },
+  "XU93/I": {
+    "defaultMessage": "Content and Layout",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
   },
   "XVYrS/": {
     "defaultMessage": "No followers yet"
@@ -2980,10 +2984,6 @@
   "qw7tLA": {
     "defaultMessage": "liked your comment on a deleted moment",
     "description": "src/components/Notice/CommentNotice/CommentLikedNotice.tsx"
-  },
-  "r0dLPT": {
-    "defaultMessage": "Content and Layout",
-    "description": "src/views/Me/DraftDetail/OptioinDrawer/index.tsx"
   },
   "r5pj/5": {
     "defaultMessage": "Drag"

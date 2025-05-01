@@ -54,7 +54,6 @@ import { OptionButton } from './OptionButton'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
-import Sidebar from './Sidebar'
 import styles from './styles.module.css'
 const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
@@ -423,9 +422,7 @@ const BaseDraftDetail = () => {
           <DynamicOptionDrawer
             isOpen={isOpenOptionDrawer}
             onClose={toggleOptionDrawer}
-          >
-            <Sidebar draft={draft} />
-          </DynamicOptionDrawer>
+          />
         </Media>
       </Layout.Main.Spacing>
     </Layout>
