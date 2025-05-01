@@ -422,7 +422,7 @@ const BaseDraftDetail = () => {
           <DynamicOptionDrawer
             isOpen={isOpenOptionDrawer}
             onClose={toggleOptionDrawer}
-          ></DynamicOptionDrawer>
+          />
         </Media>
       </Layout.Main.Spacing>
     </Layout>
