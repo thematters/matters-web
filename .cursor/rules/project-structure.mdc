@@ -1,0 +1,35 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Project Structure
+
+Matters Web is a Next.js application that serves as the frontend for Matters.town, a decentralized content publishing platform.
+
+## Main Directories
+
+- `src/components/`: Reusable UI components organized by functionality
+- `src/pages/`: Contains Next.js pages that define application routes
+- `src/views/`: Page-level components used by the pages directory
+- `src/common/`: Shared utilities, constants, styles, and helpers
+- `src/gql/`: TypeScript types for GraphQL queries and mutations that generated based on GraphQL schema by `gen:type` command
+- `src/definitions/`: TypeScript type definitions
+- `src/stories/`: Contains Storybook stories for component development and testing.
+- `public/`: Static assets including images, icons, and other resources
+
+## Icons
+
+We use [SVGR](mdc:https:/react-svgr.com) to transform SVGs into React components. For reusability and bundle optimization:
+
+To add a new icon to the project:
+
+1. Export 24x24px icon from Figma to `public/static/icons/24px`
+2. If the icon color isn't static, replace the values of `fill` and `stroke` attributes with `currentColor`, and add `fill="none"` to `<svg>`
+
+## Key Files
+
+- [src/pages/_app.tsx](mdc:src/pages/_app.tsx): Main application entry point that wraps all pages
+- [src/pages/_document.tsx](mdc:src/pages/_document.tsx): Custom document for controlling the initial HTML
+- [next.config.js](mdc:next.config.js): Next.js configuration
+- [package.json](mdc:package.json): Project dependencies and scripts

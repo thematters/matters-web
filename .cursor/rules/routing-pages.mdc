@@ -1,0 +1,42 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Routing & Page Structure
+
+Matters Web uses Next.js file-based routing with a combination of pages and views, with routes centrally defined in `src/common/enums/route.ts`.
+
+## Route Configuration
+
+- `src/common/enums/route.ts`: Central definition of all routes and paths
+  - `PROTECTED_ROUTES`: Routes requiring authentication
+  - `ROUTES`: Complete list of application routes
+  - `PATHS`: Route key to pathname mapping
+
+## Routing Structure
+
+- `src/pages/`: Next.js pages define application routes
+- Dynamic routes use brackets in filenames (e.g., `[name].tsx`, `[shortHash]`)
+- Nested routes are organized in subdirectories
+
+## Page Structure
+
+Pages typically just export a view component from `src/views/`
+
+## Key Routes
+
+- `/`: Homepage
+- `/[name]`: User profile page
+- `/a/[shortHash]`: Article detail page
+- `/e/[shortHash]`: Event (campaign) detail page
+- `/~[name]`: Circle detail page
+- `/tags/[tagId]`: Tag detail page
+- `/me/*`: User private pages (e.g. drafts, bookmarks, settings)
+
+## Route Utilities
+
+- `src/components/Hook/useRoute.ts`: Hook for route management
+- `src/common/utils/route.ts`: Functions for path generation and navigation
+
+
