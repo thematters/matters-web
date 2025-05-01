@@ -1,10 +1,23 @@
 name: Test E2E
 
+# This workflow is triggered manually via workflow_dispatch.
+# The typical flow is:
+# 1. A Vercel preview deployment finishes.
+# 2. Vercel sends a webhook (https://vercel.com/matters/matters-web/settings/webhooks) to our proxy serverless function (https://github.com/thematters/vercel-webhook-proxy/blob/main/api/trigger-github-actions-e2e.ts).
+# 3. The proxy function triggers this GitHub Action workflow_dispatch event, passing the preview URL as an input.
 on:
   workflow_dispatch:
     inputs:
       vercel_preview_url:
         description: 'Vercel Preview for E2E Testing'
+        required: true
+        type: string
+      pr_number:
+        description: 'The ID of the pull request'
+        required: true
+        type: string
+      pr_sha:
+        description: 'The SHA of the pull request'
         required: true
         type: string
 
@@ -16,6 +29,9 @@ env:
   PLAYWRIGHT_AUTH_PWD_BOB: ${{ secrets.PLAYWRIGHT_AUTH_PWD_BOB }}
   PLAYWRIGHT_PAYMENT_PWD_ALICE: ${{ secrets.PLAYWRIGHT_PAYMENT_PWD_ALICE }}
   PLAYWRIGHT_PAYMENT_PWD_BOB: ${{ secrets.PLAYWRIGHT_PAYMENT_PWD_BOB }}
+
+permissions:
+  statuses: write
 
 jobs:
   e2e:
@@ -30,6 +46,16 @@ jobs:
         with:
           node-version: '18'
           cache: 'npm'
+
+      - name: Create check run for PR
+        uses: guibranco/github-status-action-v2@v1.1.13
+        with:
+          authToken: ${{ secrets.GITHUB_TOKEN }}
+          context: 'Test E2E / e2e'
+          state: 'pending'
+          description: 'E2E tests running'
+          sha: ${{ github.event.inputs.pr_sha }}
+          target_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
       - name: Install Dependencies
         run: npm ci
@@ -68,3 +94,14 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+      - name: Update check run status
+        uses: guibranco/github-status-action-v2@v1.1.13
+        if: always()
+        with:
+          authToken: ${{ secrets.GITHUB_TOKEN }}
+          context: 'Test E2E / e2e'
+          state: ${{ job.status == 'success' && 'success' || 'failure' }}
+          description: ${{ job.status == 'success' && 'E2E tests passed' || 'E2E tests failed' }}
+          sha: ${{ github.event.inputs.pr_sha }}
+          target_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
