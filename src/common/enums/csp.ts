@@ -34,6 +34,26 @@ const SCRIPT_SRC = [
 
   // Stripe
   'js.stripe.com',
+
+  // Geniee
+  'cpt.geniee.jp',
+  '*.geniee.jp',
+  '*.geniee.com',
+  'securepubads.g.doubleclick.net',
+  'yads.c.yimg.jp',
+  'sp-gn.com',
+  'ep1.adtrafficquality.google',
+
+  // Google Ads
+  '*.adtrafficquality.google',
+  '*.googlesyndication.com',
+  '*.google.com',
+  '*.googletagmanager.com',
+  '*.google-analytics.com',
+  '*.doubleclick.net',
+  '*.gstatic.com',
+  '*.googleadservices.com',
+  'tpc.googlesyndication.com',
 ]
 
 const STYLE_SRC = [
@@ -146,6 +166,17 @@ const CONNECT_SRC = [
 
   'ipfs-gateway.matters.town/ipfs/',
   'ipfs.w3s.link',
+
+  // Geniee
+  'cpt.geniee.jp',
+  '*.geniee.jp',
+  '*.geniee.com',
+  'securepubads.g.doubleclick.net',
+  'yads.c.yimg.jp',
+
+  // Google Ads
+  '*.adtrafficquality.google',
+  '*.googlesyndication.com',
 ]
 
 const FRAME_SRC = [
@@ -174,6 +205,19 @@ const FRAME_SRC = [
   // WalletConnect
   '*.walletconnect.com',
   '*.walletconnect.org',
+
+  // Geniee
+  'cpt.geniee.jp',
+  '*.geniee.jp',
+  '*.geniee.com',
+  'securepubads.g.doubleclick.net',
+  'yads.c.yimg.jp',
+  'safeframe.googlesyndication.com',
+  'pagead2.googlesyndication.com',
+
+  // Google Ads
+  '*.googlesyndication.com',
+  '*.adtrafficquality.google',
 ]
 
 export const CSP_POLICY = Object.entries({
