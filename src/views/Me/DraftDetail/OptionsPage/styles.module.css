@@ -1,0 +1,7 @@
+.container {
+  padding: var(--sp16) var(--sp16) var(--sp40);
+}
+
+.header {
+  @mixin flex-center-space-between;
+}
