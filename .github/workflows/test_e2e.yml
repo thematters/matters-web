@@ -1,8 +1,15 @@
 name: Test E2E
 
-on: push
+on:
+  workflow_dispatch:
+    inputs:
+      vercel_preview_url:
+        description: 'Vercel Preview for E2E Testing'
+        required: true
+        type: string
 
 env:
+  PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.inputs.vercel_preview_url }}
   PLAYWRIGHT_AUTH_EMAIL_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_ALICE }}
   PLAYWRIGHT_AUTH_PWD_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_PWD_ALICE }}
   PLAYWRIGHT_AUTH_EMAIL_BOB: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_BOB }}
