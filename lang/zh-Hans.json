@@ -2365,10 +2365,6 @@
   "eTpiYa": {
     "defaultMessage": "尚无支持数据"
   },
-  "eVq7Ji": {
-    "defaultMessage": "自由写",
-    "description": "src/components/Layout/SideChannelNav/index.tsx"
-  },
   "eWXgsZ": {
     "defaultMessage": "清空内容"
   },

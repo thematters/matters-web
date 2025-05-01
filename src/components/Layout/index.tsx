@@ -1,17 +1,9 @@
 import classNames from 'classnames'
-import { useContext } from 'react'
 import Sticky from 'react-stickynode'
 
-import {
-  Head,
-  LanguageContext,
-  Media,
-  usePublicQuery,
-  useRoute,
-} from '~/components'
-import { ChannelsQuery } from '~/gql/graphql'
+import { Head, Media, useRoute } from '~/components'
+import { useChannels } from '~/components/Context'
 
-import { CHANNELS } from '../GQL/queries/channels'
 import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
 import { GlobalNav } from './GlobalNav'
@@ -21,20 +13,16 @@ import SideChannelNav from './SideChannelNav'
 import Spacing from './Spacing'
 import styles from './styles.module.css'
 
-const useLayoutType = (channels: ChannelsQuery['channels']) => {
+const useLayoutType = () => {
   const { isInPath, isPathStartWith } = useRoute()
+  const { isInWritingChallengeChannel } = useChannels()
+
   const isHome = isInPath('HOME')
   const isInMomentDetail = isInPath('MOMENT_DETAIL')
   const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
   const isInCircleDetail =
     isInPath('CIRCLE_DETAIL') && isPathStartWith('/~', true)
   const isUserWorks = isInPath('USER_WORKS') && isPathStartWith('/@', true)
-  const writingChallenges = channels?.filter(
-    (channel) => channel.__typename === 'WritingChallenge'
-  )
-  const isInWritingChallenge = writingChallenges?.some((challenge) =>
-    isPathStartWith(`/e/${challenge.shortHash}`, true)
-  )
 
   const isOneColumnLayout =
     isInPath('SEARCH') ||
@@ -96,7 +84,7 @@ const useLayoutType = (channels: ChannelsQuery['channels']) => {
     isInPath('NEWEST') ||
     isInPath('CHANNEL') ||
     isInPath('FOLLOW') ||
-    isInWritingChallenge
+    isInWritingChallengeChannel
 
   return {
     isInMomentDetail,
@@ -160,21 +148,13 @@ export const Layout: React.FC<LayoutProps> & {
   AuthHeader: typeof AuthHeader
   Notice: typeof Notice
 } = ({ children }) => {
-  const { lang } = useContext(LanguageContext)
-
-  const { data } = usePublicQuery<ChannelsQuery>(CHANNELS, {
-    variables: { userLanguage: lang },
-  })
-
-  const channels = data?.channels || []
-
   const {
     isInMomentDetail,
     isInMomentDetailEdit,
     isOneColumnLayout,
     isTwoColumnLayout,
     isThreeColumnLayout,
-  } = useLayoutType(channels)
+  } = useLayoutType()
 
   const layoutClasses = classNames({
     [styles.oneColumnLayout]: isOneColumnLayout,

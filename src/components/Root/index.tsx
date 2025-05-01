@@ -26,6 +26,7 @@ import {
   useRoute,
   ViewerProvider,
 } from '~/components'
+import { ChannelsProvider } from '~/components/Context'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
@@ -135,14 +136,16 @@ const Root = ({
           <FeaturesProvider official={official}>
             <MediaContextProvider>
               <TranslationsProvider>
-                {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+                <ChannelsProvider>
+                  {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-                <DynamicToaster />
-                <DynamicAnalyticsInitilizer user={viewer || {}} />
-                <DynamicGlobalDialogs />
-                <DynamicGlobalToasts />
-                <DynamicProgressBar />
-                <DynamicFingerprint />
+                  <DynamicToaster />
+                  <DynamicAnalyticsInitilizer user={viewer || {}} />
+                  <DynamicGlobalDialogs />
+                  <DynamicGlobalToasts />
+                  <DynamicProgressBar />
+                  <DynamicFingerprint />
+                </ChannelsProvider>
               </TranslationsProvider>
             </MediaContextProvider>
           </FeaturesProvider>

@@ -4,15 +4,8 @@ import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import {
-  LanguageContext,
-  LinkWrapper,
-  usePublicQuery,
-  useRoute,
-  ViewerContext,
-} from '~/components'
-import { CHANNELS } from '~/components/GQL/queries/channels'
-import { ChannelsQuery } from '~/gql/graphql'
+import { LinkWrapper, useRoute, ViewerContext } from '~/components'
+import { useChannels } from '~/components/Context'
 
 import ChannelItem from './ChannelItem'
 import Placeholder from './Placeholder'
@@ -22,15 +15,11 @@ const SideChannelNav = () => {
   const { isInPath } = useRoute()
   const viewer = useContext(ViewerContext)
   const isAuthed = viewer.isAuthed
+  const { channels, loading } = useChannels()
 
   const [showTopGradient, setShowTopGradient] = useState(false)
   const [showBottomGradient, setShowBottomGradient] = useState(false)
   const contentRef = useRef<HTMLElement>(null)
-  const { lang } = useContext(LanguageContext)
-
-  const { data, loading } = usePublicQuery<ChannelsQuery>(CHANNELS, {
-    variables: { userLanguage: lang },
-  })
 
   const checkScroll = useCallback(() => {
     if (!contentRef.current) return
@@ -53,10 +42,6 @@ const SideChannelNav = () => {
   }, [loading, contentRef, checkScroll])
 
   if (loading) return <Placeholder />
-
-  const channels = data?.channels || []
-
-  console.log({ channels })
 
   const onTabClick = (type: string) => {
     analytics.trackEvent('click_button', {
