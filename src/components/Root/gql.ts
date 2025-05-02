@@ -3,12 +3,6 @@ import gql from 'graphql-tag'
 import { FeaturesProvider, ViewerProvider } from '~/components'
 import { fragments as analyticsUserFragment } from '~/components/Analytics/AnalyticsListener/gql'
 
-import {
-  CURATION_CHANNEL_NAMES,
-  TOPIC_CHANNEL_NAMES,
-  WRITING_CHALLENGE_NAMES,
-} from '../GQL/fragments/channel'
-
 const fragments = {
   user: {
     public: gql`
@@ -48,15 +42,26 @@ export const ROOT_QUERY_PRIVATE = gql`
     channels {
       id
       shortHash
-      ...TopicChannelNames
-      ...CurationChannelNames
-      ...WritingChallengeNames
+
+      ... on TopicChannel {
+        nameZhHans: name(input: { language: zh_hans })
+        nameZhHant: name(input: { language: zh_hant })
+        nameEn: name(input: { language: en })
+      }
+      ... on CurationChannel {
+        nameZhHans: name(input: { language: zh_hans })
+        nameZhHant: name(input: { language: zh_hant })
+        nameEn: name(input: { language: en })
+      }
+
+      ... on WritingChallenge {
+        nameZhHans: name(input: { language: zh_hans })
+        nameZhHant: name(input: { language: zh_hant })
+        nameEn: name(input: { language: en })
+      }
     }
   }
   ${fragments.user.public}
   ${fragments.user.private}
   ${fragments.official}
-  ${TOPIC_CHANNEL_NAMES}
-  ${CURATION_CHANNEL_NAMES}
-  ${WRITING_CHALLENGE_NAMES}
 `
