@@ -134,7 +134,7 @@ export class DraftDetailPage {
   async createDraft() {
     await pageGoto(this.page, PATHS.ME_DRAFT_NEW)
 
-    await this.page.waitForURL(`**${PATHS.ME_DRAFT_NEW}`)
+    await this.page.waitForURL(PATHS.ME_DRAFT_NEW)
     await expect(this.page).toHaveURL(PATHS.ME_DRAFT_NEW)
   }
 

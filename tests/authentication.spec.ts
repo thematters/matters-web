@@ -50,7 +50,7 @@ test.describe('Authentication', () => {
     await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
   })
 
-  test('Login with email and OTP', async ({ page }) => {
+  test('can login with email and OTP', async ({ page }) => {
     await pageGoto(page, '/login')
 
     // Login with email & password
@@ -109,8 +109,9 @@ test.describe('Authentication', () => {
     // login successfully
     await page.getByPlaceholder('Password').fill('12345678')
     await page.getByRole('button', { name: 'Sign in' }).click()
+
     // Expect homepage has "Notification" button on the left side
-    await page.waitForURL(`**${PATHS.HOME}`)
+    await page.waitForURL(PATHS.HOME)
     await expect(page.getByTestId(TEST_ID.SIDE_NAV_NOTIFICATIONS)).toBeVisible()
 
     // Confirm Matters ID
@@ -122,7 +123,7 @@ test.describe('Authentication', () => {
     await page.getByRole('button', { name: 'Confirm' }).click()
     await page.getByRole('button', { name: 'Confirm use' }).click()
     await page.getByRole('button', { name: 'Take a look' }).click()
-    await page.waitForURL(`**${PATHS.ME_SETTINGS}`)
+    await page.waitForURL(PATHS.ME_SETTINGS)
   })
 
   authedTest(

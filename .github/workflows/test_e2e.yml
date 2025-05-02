@@ -22,7 +22,9 @@ on:
         type: string
 
 env:
+  PLAYWRIGHT_RUNTIME_ENV: ci
   PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.inputs.vercel_preview_url }}
+  PLAYWRIGHT_TEST_API_URL: ${{ secrets.PLAYWRIGHT_TEST_API_URL }}
   PLAYWRIGHT_AUTH_EMAIL_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_ALICE }}
   PLAYWRIGHT_AUTH_PWD_ALICE: ${{ secrets.PLAYWRIGHT_AUTH_PWD_ALICE }}
   PLAYWRIGHT_AUTH_EMAIL_BOB: ${{ secrets.PLAYWRIGHT_AUTH_EMAIL_BOB }}
@@ -85,7 +87,7 @@ jobs:
         run: npm run gen:type:prod
 
       - name: Run Playwright tests
-        run: cp .env.dev .env.local && npm run test:e2e
+        run: npm run test:e2e
 
       - name: Output Playwright tests
         uses: actions/upload-artifact@v4

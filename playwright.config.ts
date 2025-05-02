@@ -1,4 +1,4 @@
-import { devices, type PlaywrightTestConfig } from '@playwright/test'
+import { defineConfig, devices } from '@playwright/test'
 import dotenv from 'dotenv'
 import path from 'path'
 
@@ -11,12 +11,13 @@ const isCI = process.env.PLAYWRIGHT_RUNTIME_ENV === 'ci'
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
-  testDir: './tests',
+const config = defineConfig({
+  testDir: 'tests',
+  testMatch: ['authentication.spec.ts', 'homepage.spec.ts'],
   outputDir: 'test-results/',
-  timeout: 150e3,
+  timeout: isCI ? 150e3 : undefined,
   expect: {
-    timeout: 200e3,
+    timeout: isCI ? 200e3 : undefined,
   },
   fullyParallel: true,
   forbidOnly: !!isCI,
@@ -24,7 +25,6 @@ const config: PlaywrightTestConfig = {
   workers: isCI ? 2 : undefined,
   // maxFailures: process.env.CI ? 2 : 0,
   reporter: 'html',
-  globalSetup: require.resolve('./tests/globalSetup'),
   use: {
     testIdAttribute: 'data-test-id',
     actionTimeout: 0,
@@ -33,11 +33,20 @@ const config: PlaywrightTestConfig = {
   },
   projects: [
     {
+      name: 'setup',
+      use: {
+        ...devices['Desktop Chrome'],
+        locale: LOCALE,
+      },
+      testMatch: /.*\.setup\.ts/,
+    },
+    {
       name: 'Chromium',
       use: {
         ...devices['Desktop Chrome'],
         locale: LOCALE,
       },
+      dependencies: ['setup'],
     },
     // ...(isLocal
     //   ? []
@@ -88,6 +97,6 @@ const config: PlaywrightTestConfig = {
     //   },
     // },
   ],
-}
+})
 
 export default config

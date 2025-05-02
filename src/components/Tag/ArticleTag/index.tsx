@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
+import { TEST_ID } from '~/common/enums'
 import { clampTag, toPath } from '~/common/utils'
 import { Icon, TextIcon, TextIconProps, Tooltip } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
@@ -46,7 +47,11 @@ export const ArticleTag = ({
     <Tooltip content={tag.content} placement="top">
       <section>
         <Link {...path} legacyBehavior>
-          <a className={tagClasses} onClick={onClick}>
+          <a
+            className={tagClasses}
+            onClick={onClick}
+            data-test-id={TEST_ID.DIGEST_TAG_ARTICLE}
+          >
             <TextIcon
               {...textIconProps}
               size={textIconProps.size}
@@ -60,7 +65,11 @@ export const ArticleTag = ({
     </Tooltip>
   ) : (
     <Link {...path} legacyBehavior>
-      <a className={tagClasses} onClick={onClick}>
+      <a
+        className={tagClasses}
+        onClick={onClick}
+        data-test-id={TEST_ID.DIGEST_TAG_ARTICLE}
+      >
         <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
           <span className={styles.name}>{tagName}</span>
         </TextIcon>
