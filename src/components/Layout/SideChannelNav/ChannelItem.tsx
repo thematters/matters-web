@@ -2,6 +2,7 @@ import classnames from 'classnames'
 import { useContext, useLayoutEffect } from 'react'
 import { useRef, useState } from 'react'
 
+import { CHANNEL_PATH_TYPES } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { LanguageContext, LinkWrapper, Tooltip } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
@@ -51,7 +52,9 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
 
   const isWritingChallenge = channel.__typename === 'WritingChallenge'
 
-  const pathType = isWritingChallenge ? 'e' : 'c'
+  const pathType = isWritingChallenge
+    ? CHANNEL_PATH_TYPES.WRITING_CHALLENGE
+    : CHANNEL_PATH_TYPES.REGULAR_CHANNEL
 
   const channelName =
     lang === 'zh_hans'
