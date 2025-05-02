@@ -37,7 +37,6 @@ export const CHANNEL_BY_SHORT_HASH = gql`
 
       ... on WritingChallenge {
         name(input: { language: $userLanguage })
-        note(input: { language: $userLanguage })
       }
     }
   }
