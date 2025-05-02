@@ -6,12 +6,12 @@ import { CHANNEL_PATH_TYPES } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { LanguageContext, LinkWrapper, Tooltip } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
-import { ChannelsQuery } from '~/gql/graphql'
+import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 type ChannelItemProps = {
-  channel: ChannelsQuery['channels'][number]
+  channel: RootQueryPrivateQuery['channels'][number]
 }
 
 const ChannelItem = ({ channel }: ChannelItemProps) => {

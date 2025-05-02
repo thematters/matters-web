@@ -1,10 +1,10 @@
 import { createContext, ReactNode, useContext } from 'react'
 
 import { useRoute } from '~/components'
-import { ChannelsQuery } from '~/gql/graphql'
+import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 interface ChannelsContextType {
-  channels: any[]
+  channels: RootQueryPrivateQuery['channels']
   isInWritingChallengeChannel: boolean
 }
 
@@ -17,7 +17,7 @@ export const ChannelsProvider = ({
   channels,
 }: {
   children: ReactNode
-  channels: ChannelsQuery['channels']
+  channels: RootQueryPrivateQuery['channels']
 }) => {
   const { isPathStartWith } = useRoute()
 
