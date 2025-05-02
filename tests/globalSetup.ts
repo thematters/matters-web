@@ -12,7 +12,6 @@ const prepareUserStorageState = async (baseURL: string, user: User) => {
     email: user.email,
     password: user.password,
     page,
-    target: '/login', // redirect to login page to save some API requests
   })
 
   // Save signed-in state to storageState

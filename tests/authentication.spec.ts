@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test'
+import { expect, Locator, test } from '@playwright/test'
 
 import { PATHS, TEST_ID } from '~/common/enums'
 
@@ -18,7 +18,7 @@ test.describe('Authentication', () => {
     await pageGoto(page, '/')
 
     // Expect homepage has "Enter" button
-    let enterButton
+    let enterButton: Locator
     if (isMobile) {
       enterButton = page.getByRole('link', { name: 'Enter' })
     } else {
@@ -35,7 +35,7 @@ test.describe('Authentication', () => {
       await expect(authDialog.first()).toBeVisible()
     }
 
-    await login({ page, fillMode: true, waitForNavigation: true })
+    await login({ page, fillMode: true })
     await expect(page).toHaveURL('/')
 
     // Expect homepage has "Notification" button on the left side
