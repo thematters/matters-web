@@ -51,6 +51,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
   }
 
   const isWritingChallenge = channel.__typename === 'WritingChallenge'
+  const isCurationChannel = channel.__typename === 'CurationChannel'
 
   const pathType = isWritingChallenge
     ? CHANNEL_PATH_TYPES.WRITING_CHALLENGE
@@ -78,7 +79,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
         className={classnames({
           [styles.item]: true,
           [styles.selectedChannel]: shortHash === channel.shortHash,
-          [styles.temporaryChannel]: isWritingChallenge,
+          [styles.temporaryChannel]: isWritingChallenge || isCurationChannel,
           [styles.lineClampable]: !firstRender && lineClampable,
         })}
         onClick={() => {
