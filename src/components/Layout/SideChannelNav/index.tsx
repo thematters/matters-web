@@ -8,14 +8,13 @@ import { LinkWrapper, useRoute, ViewerContext } from '~/components'
 import { useChannels } from '~/components/Context'
 
 import ChannelItem from './ChannelItem'
-import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 const SideChannelNav = () => {
   const { isInPath } = useRoute()
   const viewer = useContext(ViewerContext)
   const isAuthed = viewer.isAuthed
-  const { channels, loading } = useChannels()
+  const { channels } = useChannels()
 
   const [showTopGradient, setShowTopGradient] = useState(false)
   const [showBottomGradient, setShowBottomGradient] = useState(false)
@@ -30,7 +29,6 @@ const SideChannelNav = () => {
 
   useEffect(() => {
     const contentElement = contentRef.current
-    if (loading) return
     if (contentElement) {
       contentElement.addEventListener('scroll', checkScroll)
       checkScroll()
@@ -39,9 +37,7 @@ const SideChannelNav = () => {
         contentElement.removeEventListener('scroll', checkScroll)
       }
     }
-  }, [loading, contentRef, checkScroll])
-
-  if (loading) return <Placeholder />
+  }, [contentRef, checkScroll])
 
   const onTabClick = (type: string) => {
     analytics.trackEvent('click_button', {

@@ -1,9 +1,9 @@
 import classnames from 'classnames'
-import { useLayoutEffect } from 'react'
+import { useContext, useLayoutEffect } from 'react'
 import { useRef, useState } from 'react'
 
 import { analytics } from '~/common/utils'
-import { LinkWrapper, Tooltip } from '~/components'
+import { LanguageContext, LinkWrapper, Tooltip } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
 import { ChannelsQuery } from '~/gql/graphql'
 
@@ -15,6 +15,8 @@ type ChannelItemProps = {
 
 const ChannelItem = ({ channel }: ChannelItemProps) => {
   const { getQuery } = useRoute()
+  const { lang } = useContext(LanguageContext)
+
   const shortHash = getQuery('shortHash')
 
   const [lineClampable, setLineClampable] = useState(false)
@@ -51,7 +53,12 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
 
   const pathType = isWritingChallenge ? 'e' : 'c'
 
-  const channelName = channel.name
+  const channelName =
+    lang === 'zh_hans'
+      ? channel.nameZhHans
+      : lang === 'zh_hant'
+        ? channel.nameZhHant
+        : channel.nameEn
 
   return (
     <Tooltip

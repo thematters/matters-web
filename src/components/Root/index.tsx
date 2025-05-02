@@ -89,6 +89,7 @@ const Root = ({
     useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
   const viewer = data?.viewer
   const official = data?.official
+  const channels = data?.channels
 
   useEffect(() => {
     if (referralCode) {
@@ -136,7 +137,7 @@ const Root = ({
           <FeaturesProvider official={official}>
             <MediaContextProvider>
               <TranslationsProvider>
-                <ChannelsProvider>
+                <ChannelsProvider channels={channels || []}>
                   {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
                   <DynamicToaster />

@@ -1,28 +1,25 @@
 import { createContext, ReactNode, useContext } from 'react'
 
-import { LanguageContext, useRoute } from '~/components'
-import { usePublicQuery } from '~/components/GQL'
-import { CHANNELS } from '~/components/GQL/queries/channels'
+import { useRoute } from '~/components'
 import { ChannelsQuery } from '~/gql/graphql'
 
 interface ChannelsContextType {
   channels: any[]
   isInWritingChallengeChannel: boolean
-  loading: boolean
 }
 
 const ChannelsContext = createContext<ChannelsContextType | undefined>(
   undefined
 )
 
-export const ChannelsProvider = ({ children }: { children: ReactNode }) => {
+export const ChannelsProvider = ({
+  children,
+  channels,
+}: {
+  children: ReactNode
+  channels: ChannelsQuery['channels']
+}) => {
   const { isPathStartWith } = useRoute()
-  const { lang } = useContext(LanguageContext)
-  const { data, loading } = usePublicQuery<ChannelsQuery>(CHANNELS, {
-    variables: { userLanguage: lang },
-  })
-
-  const channels = data?.channels || []
 
   const writingChallenges = channels?.filter(
     (channel) => channel.__typename === 'WritingChallenge'
@@ -37,7 +34,6 @@ export const ChannelsProvider = ({ children }: { children: ReactNode }) => {
       value={{
         channels,
         isInWritingChallengeChannel,
-        loading,
       }}
     >
       {children}

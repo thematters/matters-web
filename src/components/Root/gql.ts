@@ -3,6 +3,12 @@ import gql from 'graphql-tag'
 import { FeaturesProvider, ViewerProvider } from '~/components'
 import { fragments as analyticsUserFragment } from '~/components/Analytics/AnalyticsListener/gql'
 
+import {
+  CURATION_CHANNEL_NAMES,
+  TOPIC_CHANNEL_NAMES,
+  WRITING_CHALLENGE_NAMES,
+} from '../GQL/fragments/channel'
+
 const fragments = {
   user: {
     public: gql`
@@ -39,8 +45,18 @@ export const ROOT_QUERY_PRIVATE = gql`
     official {
       ...Official
     }
+    channels {
+      id
+      shortHash
+      ...TopicChannelNames
+      ...CurationChannelNames
+      ...WritingChallengeNames
+    }
   }
   ${fragments.user.public}
   ${fragments.user.private}
   ${fragments.official}
+  ${TOPIC_CHANNEL_NAMES}
+  ${CURATION_CHANNEL_NAMES}
+  ${WRITING_CHALLENGE_NAMES}
 `
