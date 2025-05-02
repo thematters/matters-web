@@ -49,7 +49,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
 
   const isWritingChallenge = channel.__typename === 'WritingChallenge'
 
-  const subpath = isWritingChallenge ? 'e' : 'c'
+  const pathType = isWritingChallenge ? 'e' : 'c'
 
   const channelName = channel.name
 
@@ -63,7 +63,7 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
       disabled={!lineClampable}
     >
       <LinkWrapper
-        href={`/${subpath}/${channel.shortHash}`}
+        href={`/${pathType}/${channel.shortHash}`}
         ref={node}
         className={classnames({
           [styles.item]: true,
