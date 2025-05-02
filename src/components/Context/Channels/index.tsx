@@ -7,7 +7,6 @@ import { ChannelsQuery } from '~/gql/graphql'
 
 interface ChannelsContextType {
   channels: any[]
-  writingChallenges: any[]
   isInWritingChallengeChannel: boolean
   loading: boolean
 }
@@ -37,7 +36,6 @@ export const ChannelsProvider = ({ children }: { children: ReactNode }) => {
     <ChannelsContext.Provider
       value={{
         channels,
-        writingChallenges,
         isInWritingChallengeChannel,
         loading,
       }}
