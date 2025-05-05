@@ -13,7 +13,7 @@ const isCI = process.env.PLAYWRIGHT_RUNTIME_ENV === 'ci'
  */
 const config = defineConfig({
   testDir: 'tests',
-  testIgnore: ['mutateArticle.spec.spec.ts'],
+  testIgnore: ['mutateArticle.spec.ts'],
   outputDir: 'test-results/',
   timeout: isCI ? 150e3 : 60e3,
   expect: {
