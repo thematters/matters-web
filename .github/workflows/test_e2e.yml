@@ -59,7 +59,15 @@ jobs:
           sha: ${{ github.event.inputs.pr_sha }}
           target_url: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
 
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        id: node_modules_cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-v18-npm-v4-${{ hashFiles('package-lock.json') }}
+
       - name: Install Dependencies
+        if: steps.node_modules_cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Get installed Playwright version
@@ -67,7 +75,7 @@ jobs:
         run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package-lock.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
 
       - name: Cache playwright binaries
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         id: playwright_cache
         with:
           path: |
