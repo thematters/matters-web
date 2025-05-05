@@ -8,6 +8,7 @@ import {
   authedTest,
   NotificationsPage,
   pageGoto,
+  sleep,
   UserProfilePage,
 } from './helpers'
 
@@ -37,6 +38,7 @@ test.describe('Comment to article', () => {
       await expect(bobPage.getByText(commentContent).first()).toBeVisible()
 
       // [Alice] Go to notifications page
+      await sleep(10e3) // have a 10s delay to send notification from backend
       const aliceNotifications = new NotificationsPage(alicePage)
       await aliceNotifications.goto()
 
