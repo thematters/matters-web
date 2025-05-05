@@ -18,9 +18,10 @@ const config = defineConfig({
     'homepage.spec.ts',
     'switchBetweenUsers.spec.ts',
     'mutateUser.spec.ts',
+    'supportArticle.spec.ts',
   ],
   outputDir: 'test-results/',
-  timeout: isCI ? 150e3 : undefined,
+  timeout: isCI ? 150e3 : 60e3,
   expect: {
     timeout: isCI ? 200e3 : undefined,
   },
