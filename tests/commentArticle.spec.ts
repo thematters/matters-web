@@ -14,7 +14,7 @@ import {
 
 test.describe('Comment to article', () => {
   authedTest(
-    "Alice' article is commented by Bob, and received notification",
+    "Alice's article is commented by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)

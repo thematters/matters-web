@@ -17,7 +17,7 @@ import {
 
 test.describe('Mutate article', () => {
   authedTest(
-    "Alice' article is appreciation by Bob, and received notification",
+    "Alice's article is appreciation by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile, request }) => {
       // [Alice] create and publish new article
       await publishDraft({ page: alicePage, isMobile })
@@ -69,7 +69,7 @@ test.describe('Mutate article', () => {
   )
 
   authedTest(
-    "Alice' article is bookmarked by Bob",
+    "Alice's article is bookmarked by Bob",
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)
@@ -102,7 +102,7 @@ test.describe('Mutate article', () => {
   )
 
   authedTest(
-    "Alice' article is forked by Bob",
+    "Alice's article is forked by Bob",
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)
