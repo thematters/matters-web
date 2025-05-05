@@ -8,7 +8,6 @@ import {
   authedTest,
   NotificationsPage,
   pageGoto,
-  sleep,
   UserProfilePage,
 } from './helpers'
 
@@ -38,20 +37,46 @@ test.describe('Comment to article', () => {
       await expect(bobPage.getByText(commentContent).first()).toBeVisible()
 
       // [Alice] Go to notifications page
-      await sleep(10e3) // have a 10s delay to send notification from backend
       const aliceNotifications = new NotificationsPage(alicePage)
-      await aliceNotifications.goto()
 
-      // [Alice] Expect it has "article new comment" notice
-      const noticeArticleNewCommentContent = await alicePage
-        .getByTestId(TEST_ID.NOTICE_ARTICLE_NEW_COMMENT)
-        .first()
-        .getByTestId(TEST_ID.NOTICE_COMMENT_CONTENT)
-        .first()
-        .innerText({
-          // FIXME: notifications page is slow to fetch data since it's no-cache
-          timeout: 15e3,
-        })
+      // Poll and refresh until the comment notice with correct content is visible
+      let contentMatches = false
+      let noticeArticleNewCommentContent = ''
+
+      while (!contentMatches) {
+        // Go to notifications page
+        await aliceNotifications.goto()
+
+        // Try to find the comment notice
+        const noticeVisible = await alicePage
+          .getByTestId(TEST_ID.NOTICE_ARTICLE_NEW_COMMENT)
+          .first()
+          .isVisible({ timeout: 1000 })
+          .catch(() => false)
+
+        if (noticeVisible) {
+          // Check if the content matches
+          noticeArticleNewCommentContent = await alicePage
+            .getByTestId(TEST_ID.NOTICE_ARTICLE_NEW_COMMENT)
+            .first()
+            .getByTestId(TEST_ID.NOTICE_COMMENT_CONTENT)
+            .first()
+            .innerText()
+            .catch(() => '')
+
+          // Check if the content matches what we expect
+          contentMatches =
+            stripSpaces(noticeArticleNewCommentContent) ===
+            stripSpaces(commentContent)
+        }
+
+        // Wait before next attempt if not found or content doesn't match
+        if (!contentMatches) {
+          await alicePage.waitForTimeout(2000)
+        }
+      }
+
+      // Ensure the notification with correct content was found
       expect(stripSpaces(noticeArticleNewCommentContent)).toBe(
         stripSpaces(commentContent)
       )
