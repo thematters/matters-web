@@ -43,9 +43,9 @@ export class ArticleDetailPage {
   readonly toolbarCollectButton: Locator
   readonly toolbarEditButton: Locator
 
-  // dialog
-  readonly dialog: Locator
-  readonly dialogCommentInput: Locator
+  // drawer
+  readonly drawer: Locator
+  readonly drawerCommentInput: Locator
 
   constructor(page: Page, isMobile?: boolean) {
     this.page = page
@@ -75,18 +75,21 @@ export class ArticleDetailPage {
 
     // toolbar
     this.toolbar = this.page.getByTestId(TEST_ID.ARTICLE_TOOLBAR)
-    this.toolbarAppreciationButton = this.page.getByRole('button', {
+    this.toolbarAppreciationButton = this.toolbar.getByRole('button', {
       name: 'like article',
     })
-    this.toolbarSupportButton = this.page.getByRole('button', {
+    this.toolbarSupportButton = this.toolbar.getByRole('button', {
       name: 'support author',
     })
-
-    this.toolbarCommentButton = this.page.getByRole('button', {
+    this.toolbarCommentButton = this.toolbar.getByRole('button', {
       name: 'Comment…',
     })
-    this.toolbarBookmarkButton = this.page.getByTestId(TEST_ID.ARTICLE_BOOKMARK)
-    this.toolbarShareButton = this.page.getByRole('button', { name: 'Share' })
+    this.toolbarBookmarkButton = this.toolbar.getByTestId(
+      TEST_ID.ARTICLE_BOOKMARK
+    )
+    this.toolbarShareButton = this.toolbar.getByRole('button', {
+      name: 'Share',
+    })
     this.toolbarMoreButton = this.toolbar.getByRole('button', {
       name: 'More Action',
     })
@@ -102,9 +105,9 @@ export class ArticleDetailPage {
     })
     this.toolbarEditButton = this.page.getByRole('link', { name: 'Edit' })
 
-    // dialog
-    this.dialog = this.page.getByRole('dialog')
-    this.dialogCommentInput = this.dialog.locator('.tiptap.ProseMirror')
+    // drawer
+    this.drawer = this.page.getByTestId(TEST_ID.DRAWER)
+    this.drawerCommentInput = this.drawer.locator('.tiptap.ProseMirror')
   }
 
   async getTitle() {
@@ -157,10 +160,10 @@ export class ArticleDetailPage {
 
     // Fill with content
     const content = generateComment({})
-    await this.dialogCommentInput.fill(content)
+    await this.drawerCommentInput.fill(content)
 
     // Send
-    await this.dialog.getByRole('button', { name: 'Send' }).click()
+    await this.drawer.getByRole('button', { name: 'Publish' }).click()
     await waitForAPIResponse({
       page: this.page,
       path: 'data.putComment.id',
@@ -199,57 +202,57 @@ export class ArticleDetailPage {
     await this.page.waitForLoadState('networkidle')
 
     // select fiat currency
-    await this.dialog.getByRole('button', { name: 'Fiat Currency' }).click()
+    await this.drawer.getByRole('button', { name: 'Fiat Currency' }).click()
     await this.page.waitForLoadState('networkidle')
 
     // top-up
-    await this.dialog.getByRole('button', { name: 'Top Up' }).click()
+    await this.drawer.getByRole('button', { name: 'Top Up' }).click()
     await this.page.waitForLoadState('networkidle')
-    await this.dialog
+    await this.drawer
       .getByLabel('Enter amount')
       .fill(Math.max(20, amount).toString())
-    await this.dialog.locator('#field-checkout').click() // activate form to fillable
-    await this.dialog
+    await this.drawer.locator('#field-checkout').click() // activate form to fillable
+    await this.drawer
       .frameLocator('iframe')
       .first()
       .getByPlaceholder('Card number')
       .fill('4242424242424242')
     const YY = new Date(Date.now()).getFullYear() - 2000 + 1
-    await this.dialog
+    await this.drawer
       .frameLocator('iframe')
       .first()
       .getByPlaceholder('MM / YY')
       .fill(`12${YY}`)
-    await this.dialog
+    await this.drawer
       .frameLocator('iframe')
       .first()
       .getByPlaceholder('CVC')
       .fill('123')
-    await this.dialog.getByRole('button', { name: 'Confirm' }).click()
-    await this.dialog.getByRole('button', { name: 'Back to support' }).click()
+    await this.drawer.getByRole('button', { name: 'Confirm' }).click()
+    await this.drawer.getByRole('button', { name: 'Back to support' }).click()
 
     // fill amount hkd
-    await this.dialog
+    await this.drawer
       .getByPlaceholder('Enter a custom amount')
       .fill(amount.toString())
 
     // click next step
-    await this.dialog.getByRole('button', { name: 'Next Step' }).click()
+    await this.drawer.getByRole('button', { name: 'Next Step' }).click()
 
     // fill incorrect payment password
-    await this.dialog.locator('#field-password-0').fill(password[0])
-    await this.dialog.locator('#field-password-1').fill(password[0])
-    await this.dialog.locator('#field-password-2').fill(password[0])
-    await this.dialog.locator('#field-password-3').fill(password[0])
-    await this.dialog.locator('#field-password-4').fill(password[0])
-    await this.dialog.locator('#field-password-5').fill(password[0])
+    await this.drawer.locator('#field-password-0').fill(password[0])
+    await this.drawer.locator('#field-password-1').fill(password[0])
+    await this.drawer.locator('#field-password-2').fill(password[0])
+    await this.drawer.locator('#field-password-3').fill(password[0])
+    await this.drawer.locator('#field-password-4').fill(password[0])
+    await this.drawer.locator('#field-password-5').fill(password[0])
 
     // fill correct payment password
-    await this.dialog.locator('#field-password-0').fill(password[0])
-    await this.dialog.locator('#field-password-1').fill(password[1])
-    await this.dialog.locator('#field-password-2').fill(password[2])
-    await this.dialog.locator('#field-password-3').fill(password[3])
-    await this.dialog.locator('#field-password-4').fill(password[4])
-    await this.dialog.locator('#field-password-5').fill(password[5])
+    await this.drawer.locator('#field-password-0').fill(password[0])
+    await this.drawer.locator('#field-password-1').fill(password[1])
+    await this.drawer.locator('#field-password-2').fill(password[2])
+    await this.drawer.locator('#field-password-3').fill(password[3])
+    await this.drawer.locator('#field-password-4').fill(password[4])
+    await this.drawer.locator('#field-password-5').fill(password[5])
   }
 }

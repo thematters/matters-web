@@ -13,7 +13,11 @@ const isCI = process.env.PLAYWRIGHT_RUNTIME_ENV === 'ci'
  */
 const config = defineConfig({
   testDir: 'tests',
-  testMatch: ['authentication.spec.ts', 'homepage.spec.ts'],
+  testMatch: [
+    'authentication.spec.ts',
+    'homepage.spec.ts',
+    'switchBetweenUsers.spec.ts',
+  ],
   outputDir: 'test-results/',
   timeout: isCI ? 150e3 : undefined,
   expect: {
@@ -21,7 +25,7 @@ const config = defineConfig({
   },
   fullyParallel: true,
   forbidOnly: !!isCI,
-  retries: isCI ? 2 : 1,
+  retries: isCI ? 2 : 0,
   workers: isCI ? 2 : undefined,
   // maxFailures: process.env.CI ? 2 : 0,
   reporter: 'html',
@@ -29,7 +33,7 @@ const config = defineConfig({
     testIdAttribute: 'data-test-id',
     actionTimeout: 0,
     baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL,
-    trace: 'on-first-retry',
+    trace: isCI ? 'on-first-retry' : 'on',
   },
   projects: [
     {

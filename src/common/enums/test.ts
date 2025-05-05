@@ -63,6 +63,8 @@ export enum TEST_ID {
   DIALOG_DELETE_DRAFT = 'dialog/delete-draft',
   DIALOG_EDIT_COLLECTION = 'dialog/edit-collection',
   DIALOG_DELETE_COLLECTION = 'dialog/delete-collection',
+  // drawer
+  DRAWER = 'drawer',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts
@@ -81,6 +83,9 @@ export enum TEST_ID {
   ARTICLE_TOOLBAR = 'article/toolbar',
   ARTICLE_BOOKMARK = 'article/bookmark',
   ARTICLE_COMMENT_FEED = 'article/comment/feed',
+  ARTICLE_COMMENT_FEED_AUTHOR = 'article/comment/feed/author',
+  ARTICLE_COMMENT_FEED_AUTHOR_DISPLAY_NAME = 'article/comment/feed/author/display-name',
+
   // moment
   MOMENT_DIGEST = 'moment-digest',
   MOMENT_DIGEST_AUTHOR = 'moment-digest/author',

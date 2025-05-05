@@ -2,7 +2,6 @@ import { expect, test } from '@playwright/test'
 import _random from 'lodash/random'
 
 import { TEST_ID } from '~/common/enums'
-import { sleep } from '~/common/utils'
 import { stripSpaces } from '~/common/utils/text'
 
 import { publishDraft } from './common'
@@ -193,7 +192,6 @@ test.describe('Mutate article', () => {
         .getByRole('menuitem', { name: 'Pin to profile' })
         .isVisible())
     ) {
-      await sleep(1000)
       await firstArticle.getByRole('button', { name: 'More Actions' }).click()
     }
 
@@ -246,7 +244,6 @@ test.describe('Mutate article', () => {
 
     const draftDetail = new DraftDetailPage(alicePage, isMobile)
     await draftDetail.dialogEditButton.click()
-    await sleep(3 * 1000)
     const newContent = 'revise article ' + article.content
     await draftDetail.contentInput.fill(newContent)
     await draftDetail.rePublish()
@@ -254,7 +251,6 @@ test.describe('Mutate article', () => {
     // Goto republished article page
     await draftDetail.dialogViewRepublishedArticle.click()
     await alicePage.waitForLoadState('networkidle')
-    await sleep(3 * 1000)
     const articleContent = await aliceArticleDetail.content.innerText()
     expect(stripSpaces(articleContent)).toBe(stripSpaces(newContent))
   })
@@ -287,7 +283,6 @@ test.describe('Mutate article', () => {
       await aliceArticleDetail.editArticle()
       const draftDetail = new DraftDetailPage(alicePage, isMobile)
       await draftDetail.dialogEditButton.click()
-      await sleep(3 * 1000)
       const newContent = 'revise article ' + article.content
       await draftDetail.contentInput.fill(newContent)
       await draftDetail.checkResponse({ allow: true })
@@ -317,7 +312,6 @@ test.describe('Mutate article', () => {
       await aliceAlloResponseArticleDetail.editArticle()
       const allowResponseDraftDetail = new DraftDetailPage(alicePage, isMobile)
       await allowResponseDraftDetail.dialogEditButton.click()
-      await sleep(3 * 1000)
       if (isMobile) {
         await allowResponseDraftDetail.bottombarManage.click()
       }
