@@ -39,6 +39,27 @@ export const ROOT_QUERY_PRIVATE = gql`
     official {
       ...Official
     }
+    channels {
+      id
+      shortHash
+
+      ... on TopicChannel {
+        nameZhHans: name(input: { language: zh_hans })
+        nameZhHant: name(input: { language: zh_hant })
+        nameEn: name(input: { language: en })
+      }
+      ... on CurationChannel {
+        nameZhHans: name(input: { language: zh_hans })
+        nameZhHant: name(input: { language: zh_hant })
+        nameEn: name(input: { language: en })
+      }
+
+      ... on WritingChallenge {
+        nameZhHans: name(input: { language: zh_hans })
+        nameZhHant: name(input: { language: zh_hant })
+        nameEn: name(input: { language: en })
+      }
+    }
   }
   ${fragments.user.public}
   ${fragments.user.private}

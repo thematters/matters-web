@@ -1,11 +1,11 @@
 import gql from 'graphql-tag'
 import React, { useContext, useState } from 'react'
 
-import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import {
   ArticleDigestFeed,
   LanguageContext,
   Layout,
+  useChannels,
   useRoute,
 } from '~/components'
 import { ArticleFeedsCampaignPublicFragment } from '~/gql/graphql'
@@ -23,7 +23,7 @@ const ArticleFeeds = ({
 }: {
   campaign: ArticleFeedsCampaignPublicFragment
 }) => {
-  const { getQuery, setQuery, isPathStartWith } = useRoute()
+  const { getQuery, setQuery } = useRoute()
   const qsType = getQuery('type') as CampaignFeedType
   const { lang } = useContext(LanguageContext)
 
@@ -31,7 +31,7 @@ const ArticleFeeds = ({
     qsType || FEED_TYPE_ALL
   )
 
-  const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
+  const { isInWritingChallengeChannel } = useChannels()
 
   const changeFeed = (newType: CampaignFeedType) => {
     setQuery('type', newType === FEED_TYPE_ALL ? '' : newType)
@@ -80,7 +80,7 @@ const ArticleFeeds = ({
         campaign={campaign}
       />
 
-      {isInTemporaryChannel ? (
+      {isInWritingChallengeChannel ? (
         <Layout.Main>{content}</Layout.Main>
       ) : (
         <Layout.Main.Spacing hasVertical={false}>{content}</Layout.Main.Spacing>

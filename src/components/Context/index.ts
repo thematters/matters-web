@@ -1,3 +1,4 @@
+export * from './Channels'
 export * from './CommentEditor'
 export * from './DraftDetailState'
 export * from './Drawer'

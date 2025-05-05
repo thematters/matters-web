@@ -2,9 +2,8 @@ import classNames from 'classnames'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import { datetimeFormat, isUTC8 } from '~/common/utils'
-import { LanguageContext, ResponsiveImage, useRoute } from '~/components'
+import { LanguageContext, ResponsiveImage, useChannels } from '~/components'
 import {
   InfoHeaderCampaignPrivateFragment,
   InfoHeaderCampaignPublicFragment,
@@ -21,8 +20,8 @@ type InfoHeaderProps = {
 }
 
 const InfoHeader = ({ campaign }: InfoHeaderProps) => {
-  const { isPathStartWith } = useRoute()
   const { lang } = useContext(LanguageContext)
+  const { isInWritingChallengeChannel } = useChannels()
   const now = new Date()
   const { start: appStart, end: appEnd } = campaign.applicationPeriod || {}
   const { start: writingStart, end: writingEnd } = campaign.writingPeriod || {}
@@ -30,10 +29,8 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
   const applicationState = campaign.application?.state
   const isRejected = applicationState === 'rejected'
 
-  const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
-
   const headerClasses = classNames(styles.header, {
-    [styles.horizontalSpacing]: !isInTemporaryChannel,
+    [styles.horizontalSpacing]: !isInWritingChallengeChannel,
   })
 
   const name =

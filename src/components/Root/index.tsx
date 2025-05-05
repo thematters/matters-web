@@ -26,6 +26,7 @@ import {
   useRoute,
   ViewerProvider,
 } from '~/components'
+import { ChannelsProvider } from '~/components/Context'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
@@ -88,6 +89,7 @@ const Root = ({
     useQuery<RootQueryPrivateQuery>(ROOT_QUERY_PRIVATE)
   const viewer = data?.viewer
   const official = data?.official
+  const channels = data?.channels
 
   useEffect(() => {
     if (referralCode) {
@@ -135,14 +137,16 @@ const Root = ({
           <FeaturesProvider official={official}>
             <MediaContextProvider>
               <TranslationsProvider>
-                {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+                <ChannelsProvider channels={channels || []}>
+                  {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-                <DynamicToaster />
-                <DynamicAnalyticsInitilizer user={viewer || {}} />
-                <DynamicGlobalDialogs />
-                <DynamicGlobalToasts />
-                <DynamicProgressBar />
-                <DynamicFingerprint />
+                  <DynamicToaster />
+                  <DynamicAnalyticsInitilizer user={viewer || {}} />
+                  <DynamicGlobalDialogs />
+                  <DynamicGlobalToasts />
+                  <DynamicProgressBar />
+                  <DynamicFingerprint />
+                </ChannelsProvider>
               </TranslationsProvider>
             </MediaContextProvider>
           </FeaturesProvider>

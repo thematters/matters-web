@@ -1,8 +1,8 @@
 import classNames from 'classnames'
 import Sticky from 'react-stickynode'
 
-import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import { Head, Media, useRoute } from '~/components'
+import { useChannels } from '~/components/Context'
 
 import AuthHeader from './AuthHeader'
 import FixedMain from './FixedMain'
@@ -15,13 +15,14 @@ import styles from './styles.module.css'
 
 const useLayoutType = () => {
   const { isInPath, isPathStartWith } = useRoute()
+  const { isInWritingChallengeChannel } = useChannels()
+
   const isHome = isInPath('HOME')
   const isInMomentDetail = isInPath('MOMENT_DETAIL')
   const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
   const isInCircleDetail =
     isInPath('CIRCLE_DETAIL') && isPathStartWith('/~', true)
   const isUserWorks = isInPath('USER_WORKS') && isPathStartWith('/@', true)
-  const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
 
   const isOneColumnLayout =
     isInPath('SEARCH') ||
@@ -83,7 +84,7 @@ const useLayoutType = () => {
     isInPath('NEWEST') ||
     isInPath('CHANNEL') ||
     isInPath('FOLLOW') ||
-    isInTemporaryChannel
+    isInWritingChallengeChannel
 
   return {
     isInMomentDetail,
