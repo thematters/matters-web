@@ -22,7 +22,6 @@ on:
         type: string
 
 env:
-  NEXT_PUBLIC_RUNTIME_ENV: local
   PLAYWRIGHT_RUNTIME_ENV: ci
   PLAYWRIGHT_TEST_BASE_URL: ${{ github.event.inputs.vercel_preview_url }}
   PLAYWRIGHT_TEST_API_URL: ${{ secrets.PLAYWRIGHT_TEST_API_URL }}

@@ -7,7 +7,7 @@ import { fromGlobalId } from './globalId'
 import { slugifyTag } from './text'
 import { parseURL } from './url'
 
-const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 interface ArticleArgs {
   shortHash: string
@@ -332,7 +332,7 @@ export const redirectToTarget = ({
   const fallbackTarget = fallback === 'homepage' ? `/` : window.location.href
   let target = decodeURIComponent(getTarget())
 
-  if (!isLocal) {
+  if (isProd) {
     const isValidTarget = new RegExp(
       `^https?://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
     ).test(target)

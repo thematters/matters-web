@@ -201,10 +201,6 @@ export class ArticleDetailPage {
     await this.supportButton.click()
     await this.page.waitForLoadState('networkidle')
 
-    // select fiat currency
-    await this.drawer.getByRole('button', { name: 'Fiat Currency' }).click()
-    await this.page.waitForLoadState('networkidle')
-
     // top-up
     await this.drawer.getByRole('button', { name: 'Top Up' }).click()
     await this.page.waitForLoadState('networkidle')
@@ -229,15 +225,15 @@ export class ArticleDetailPage {
       .getByPlaceholder('CVC')
       .fill('123')
     await this.drawer.getByRole('button', { name: 'Confirm' }).click()
-    await this.drawer.getByRole('button', { name: 'Back to support' }).click()
+    await this.page.waitForLoadState('networkidle')
 
     // fill amount hkd
     await this.drawer
-      .getByPlaceholder('Enter a custom amount')
+      .getByPlaceholder('Enter the amount')
       .fill(amount.toString())
 
     // click next step
-    await this.drawer.getByRole('button', { name: 'Next Step' }).click()
+    await this.drawer.getByRole('button', { name: 'Next' }).click()
 
     // fill incorrect payment password
     await this.drawer.locator('#field-password-0').fill(password[0])
