@@ -124,6 +124,7 @@ test.describe('Mutate article', () => {
 
       // [Bob] create and publish article
       const draftDetail = new DraftDetailPage(bobPage, isMobile)
+
       // Required: Fill title and content
       const title = await draftDetail.fillTitle()
       const content = await draftDetail.fillContent(title)
@@ -160,7 +161,7 @@ test.describe('Mutate article', () => {
     if (
       await alicePage.getByTestId(TEST_ID.USER_PROFILE_PIN_BOARD).isVisible()
     ) {
-      const unpinButtons = await alicePage.getByTestId(
+      const unpinButtons = alicePage.getByTestId(
         TEST_ID.USER_PROFILE_PIN_BOARD_UNPIN_BUTTON
       )
       const count = await unpinButtons.count()
@@ -219,7 +220,7 @@ test.describe('Mutate article', () => {
     expect(stripSpaces(firstBookTitle)).toBe(stripSpaces(firstArticleTitle))
 
     // unpin
-    const unpinButton = await firstPinnedWork.getByTestId(
+    const unpinButton = firstPinnedWork.getByTestId(
       TEST_ID.USER_PROFILE_PIN_BOARD_UNPIN_BUTTON
     )
     await Promise.all([

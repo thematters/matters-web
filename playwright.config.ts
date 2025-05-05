@@ -17,6 +17,7 @@ const config = defineConfig({
     'authentication.spec.ts',
     'homepage.spec.ts',
     'switchBetweenUsers.spec.ts',
+    'mutateUser.spec.ts',
   ],
   outputDir: 'test-results/',
   timeout: isCI ? 150e3 : undefined,
