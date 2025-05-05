@@ -19,6 +19,7 @@ export const SIDEBAR_AUTHORS_PUBLIC = gql`
               followed: false
               channel: { shortHash: $shortHash }
             }
+            newAlgo: true
           }
         ) {
           edges {

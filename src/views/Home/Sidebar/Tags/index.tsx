@@ -29,6 +29,7 @@ const SIDEBAR_TAGS_PUBLIC = gql`
           input: {
             first: $first
             filter: { random: $random, channel: { shortHash: $shortHash } }
+            newAlgo: true
           }
         ) {
           totalCount
