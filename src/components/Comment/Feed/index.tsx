@@ -109,14 +109,22 @@ const BaseCommentFeed = ({
     >
       <header className={styles.header}>
         <section className={styles.left}>
-          <section className={styles.author}>
+          <section
+            className={styles.author}
+            data-test-id={TEST_ID.ARTICLE_COMMENT_FEED_AUTHOR}
+          >
             <LinkWrapper {...userProfilePath}>
               <Avatar user={author} />
             </LinkWrapper>
             <section className={styles.info}>
               <section className={styles.top}>
                 <LinkWrapper {...userProfilePath}>
-                  <section className={styles.displayName}>
+                  <section
+                    className={styles.displayName}
+                    data-test-id={
+                      TEST_ID.ARTICLE_COMMENT_FEED_AUTHOR_DISPLAY_NAME
+                    }
+                  >
                     {author.displayName}
                   </section>
                 </LinkWrapper>

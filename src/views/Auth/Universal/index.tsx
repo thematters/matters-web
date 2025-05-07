@@ -1,9 +1,9 @@
 import classNames from 'classnames'
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 
 import IMAGE_INTRO from '@/public/static/images/intro.jpg'
 import { PATHS } from '~/common/enums'
-import { analytics, WalletType } from '~/common/utils'
+import { analytics, redirectToTarget, WalletType } from '~/common/utils'
 import {
   AuthFeedType,
   EmailLoginForm,
@@ -14,6 +14,7 @@ import {
   useRoute,
   useStep,
   VerificationLinkSent,
+  ViewerContext,
   WalletAuthForm,
 } from '~/components'
 
@@ -29,6 +30,7 @@ type Step =
   | 'email-verification-sent'
 
 const UniversalAuth = () => {
+  const viewer = useContext(ViewerContext)
   const { router, isInPath } = useRoute()
 
   const isInSignup = isInPath('SIGNUP')
@@ -47,6 +49,12 @@ const UniversalAuth = () => {
   })
 
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
+
+  useEffect(() => {
+    if (!viewer.id) return
+
+    redirectToTarget({ fallback: 'homepage' })
+  }, [viewer.id])
 
   useEffect(() => {
     setFirstRender(false)

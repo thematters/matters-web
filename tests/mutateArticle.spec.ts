@@ -2,7 +2,6 @@ import { expect, test } from '@playwright/test'
 import _random from 'lodash/random'
 
 import { TEST_ID } from '~/common/enums'
-import { sleep } from '~/common/utils'
 import { stripSpaces } from '~/common/utils/text'
 
 import { publishDraft } from './common'
@@ -18,7 +17,7 @@ import {
 
 test.describe('Mutate article', () => {
   authedTest(
-    "Alice' article is appreciation by Bob, and received notification",
+    "Alice's article is appreciation by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile, request }) => {
       // [Alice] create and publish new article
       await publishDraft({ page: alicePage, isMobile })
@@ -70,7 +69,7 @@ test.describe('Mutate article', () => {
   )
 
   authedTest(
-    "Alice' article is bookmarked by Bob",
+    "Alice's article is bookmarked by Bob",
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)
@@ -103,7 +102,7 @@ test.describe('Mutate article', () => {
   )
 
   authedTest(
-    "Alice' article is forked by Bob",
+    "Alice's article is forked by Bob",
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)
@@ -125,6 +124,7 @@ test.describe('Mutate article', () => {
 
       // [Bob] create and publish article
       const draftDetail = new DraftDetailPage(bobPage, isMobile)
+
       // Required: Fill title and content
       const title = await draftDetail.fillTitle()
       const content = await draftDetail.fillContent(title)
@@ -161,7 +161,7 @@ test.describe('Mutate article', () => {
     if (
       await alicePage.getByTestId(TEST_ID.USER_PROFILE_PIN_BOARD).isVisible()
     ) {
-      const unpinButtons = await alicePage.getByTestId(
+      const unpinButtons = alicePage.getByTestId(
         TEST_ID.USER_PROFILE_PIN_BOARD_UNPIN_BUTTON
       )
       const count = await unpinButtons.count()
@@ -193,7 +193,6 @@ test.describe('Mutate article', () => {
         .getByRole('menuitem', { name: 'Pin to profile' })
         .isVisible())
     ) {
-      await sleep(1000)
       await firstArticle.getByRole('button', { name: 'More Actions' }).click()
     }
 
@@ -221,7 +220,7 @@ test.describe('Mutate article', () => {
     expect(stripSpaces(firstBookTitle)).toBe(stripSpaces(firstArticleTitle))
 
     // unpin
-    const unpinButton = await firstPinnedWork.getByTestId(
+    const unpinButton = firstPinnedWork.getByTestId(
       TEST_ID.USER_PROFILE_PIN_BOARD_UNPIN_BUTTON
     )
     await Promise.all([
@@ -246,7 +245,6 @@ test.describe('Mutate article', () => {
 
     const draftDetail = new DraftDetailPage(alicePage, isMobile)
     await draftDetail.dialogEditButton.click()
-    await sleep(3 * 1000)
     const newContent = 'revise article ' + article.content
     await draftDetail.contentInput.fill(newContent)
     await draftDetail.rePublish()
@@ -254,7 +252,6 @@ test.describe('Mutate article', () => {
     // Goto republished article page
     await draftDetail.dialogViewRepublishedArticle.click()
     await alicePage.waitForLoadState('networkidle')
-    await sleep(3 * 1000)
     const articleContent = await aliceArticleDetail.content.innerText()
     expect(stripSpaces(articleContent)).toBe(stripSpaces(newContent))
   })
@@ -287,7 +284,6 @@ test.describe('Mutate article', () => {
       await aliceArticleDetail.editArticle()
       const draftDetail = new DraftDetailPage(alicePage, isMobile)
       await draftDetail.dialogEditButton.click()
-      await sleep(3 * 1000)
       const newContent = 'revise article ' + article.content
       await draftDetail.contentInput.fill(newContent)
       await draftDetail.checkResponse({ allow: true })
@@ -317,7 +313,6 @@ test.describe('Mutate article', () => {
       await aliceAlloResponseArticleDetail.editArticle()
       const allowResponseDraftDetail = new DraftDetailPage(alicePage, isMobile)
       await allowResponseDraftDetail.dialogEditButton.click()
-      await sleep(3 * 1000)
       if (isMobile) {
         await allowResponseDraftDetail.bottombarManage.click()
       }

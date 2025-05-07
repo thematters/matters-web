@@ -7,6 +7,8 @@ import { fromGlobalId } from './globalId'
 import { slugifyTag } from './text'
 import { parseURL } from './url'
 
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+
 interface ArticleArgs {
   shortHash: string
 }
@@ -330,12 +332,14 @@ export const redirectToTarget = ({
   const fallbackTarget = fallback === 'homepage' ? `/` : window.location.href
   let target = decodeURIComponent(getTarget())
 
-  const isValidTarget = new RegExp(
-    `^https?://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
-  ).test(target)
+  if (isProd) {
+    const isValidTarget = new RegExp(
+      `^https?://${process.env.NEXT_PUBLIC_SITE_DOMAIN}`
+    ).test(target)
 
-  if (!isValidTarget) {
-    target = fallbackTarget
+    if (!isValidTarget) {
+      target = fallbackTarget
+    }
   }
 
   Router.push(target || fallbackTarget)

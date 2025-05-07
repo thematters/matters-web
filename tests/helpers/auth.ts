@@ -3,6 +3,7 @@ import { Page } from '@playwright/test'
 import { TEST_ID } from '~/common/enums'
 
 import { waitForAPIResponse } from './api'
+import { sleep } from './utils'
 
 export type User = {
   email: string
@@ -68,11 +69,12 @@ export const logout = async ({ page }: { page: Page }) => {
   await page.getByTestId(TEST_ID.SIDE_NAV_MY_PAGE).click()
 
   // Click "Log Out" button
-  // Promise.all prevents a race condition between clicking and waiting.
-  await Promise.all([
-    // Still need to wait for navigation if navigation happens to the same url
-    // https://github.com/microsoft/playwright/issues/20853
-    page.waitForNavigation(),
-    page.getByRole('menuitem', { name: 'Log Out' }).click(),
+  await page.getByRole('menuitem', { name: 'Log Out' }).click()
+
+  await Promise.race([
+    page.getByRole('link', { name: 'Enter' }).isVisible(),
+    page.getByRole('button', { name: 'Enter' }).isVisible(),
   ])
+
+  await sleep(3000)
 }

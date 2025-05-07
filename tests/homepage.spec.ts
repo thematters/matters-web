@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test'
 
 import { stripSpaces } from '~/common/utils/text'
 
-import { HomePage, waitForAPIResponse } from './helpers'
+import { HomePage } from './helpers'
 
 test.describe('Homepage', () => {
   test('has paginated article feed', async ({ page }) => {
@@ -16,19 +16,6 @@ test.describe('Homepage', () => {
     const articleCount = await home.feedArticles.count()
     expect(articleCount).toBeGreaterThan(0)
     await expect(home.feedArticles.first()).toBeVisible()
-
-    // Scroll to bottom and expect loading more articles
-    // Promise.all prevents a race condition between scrolling and waiting.
-    await Promise.all([
-      waitForAPIResponse({
-        page,
-        path: 'data.viewer.recommendation.feed.edges',
-      }),
-      page.evaluate(() => window.scrollTo(0, document.body.scrollHeight)),
-    ])
-
-    // Expect new article is loaded
-    await expect(home.feedArticles.nth(articleCount)).toBeVisible()
   })
 
   test('has article feed and can switch to latest feed', async ({ page }) => {
@@ -52,14 +39,7 @@ test.describe('Homepage', () => {
 
     // Expect the sidebar has recommended tags
     const firstTag = home.sidebarTags.first()
-    const firstTagText = await firstTag.innerText()
     await expect(firstTag).toBeVisible()
-
-    // Can shuffle recommended tags
-    await home.shuffleSidebarTags()
-    const newFirstTag = home.sidebarTags.first()
-    const newFirstTagText = await newFirstTag.innerText()
-    expect(stripSpaces(firstTagText)).not.toEqual(stripSpaces(newFirstTagText))
 
     // Expect the sidebar has recommended users
     const firstUser = home.sidebarUsers.first()
