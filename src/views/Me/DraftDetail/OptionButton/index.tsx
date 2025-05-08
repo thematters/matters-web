@@ -12,8 +12,6 @@ export const OptionButton = ({ onClick }: { onClick: () => void }) => {
     id: draftId,
   })
   const goToOptionsPage = () => {
-    // TODO: check if the draft is published
-    // 獲取當前的位置，會退時自動復原
     router.push(path.href)
   }
   return (
