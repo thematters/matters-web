@@ -89,7 +89,6 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
     isInPath('ARTICLE_DETAIL_EDIT') ||
     isInPath('ME_DRAFT_DETAIL') ||
     isInPath('ME_DRAFT_DETAIL_OPTIONS')
-  console.log({ isInEditor })
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
