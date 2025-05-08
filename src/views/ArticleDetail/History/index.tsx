@@ -16,7 +16,6 @@ import {
   QueryError,
   SpinnerBlock,
   Throw404,
-  toast,
   usePublicQuery,
   useRoute,
   ViewerContext,
@@ -96,15 +95,6 @@ const BaseArticleDetailHistory = ({
     getTranslation({
       variables: { version: version.id, language: preferredLang },
     })
-
-    toast.success({
-      message: (
-        <FormattedMessage
-          defaultMessage="Translating by Google..."
-          id="17K30q"
-        />
-      ),
-    })
   }
 
   const toggleTranslate = () => {
@@ -161,6 +151,7 @@ const BaseArticleDetailHistory = ({
             article={article}
             version={version}
             translated={translated}
+            translating={translating}
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
             canReadFullContent={canReadFullContent}
@@ -182,7 +173,6 @@ const BaseArticleDetailHistory = ({
             <Content
               articleId={article.id}
               content={content}
-              translating={translating}
               indentFirstLine={article.indentFirstLine}
             />
 

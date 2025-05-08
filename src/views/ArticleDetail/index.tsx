@@ -177,28 +177,20 @@ const BaseArticleDetail = ({
   const [getTranslation, { data: translationData, loading: translating }] =
     useLazyQuery<ArticleTranslationQuery>(ARTICLE_TRANSLATION)
 
-  const translate = () => {
-    getTranslation({
-      variables: { shortHash: article.shortHash, language: preferredLang },
-    })
-
-    toast.success({
-      message: (
-        <FormattedMessage
-          defaultMessage="Translating by Google..."
-          id="17K30q"
-        />
-      ),
-    })
-  }
-
   const toggleTranslate = () => {
     setTranslate(!translated)
 
     if (!translated) {
-      translate()
+      getTranslation({
+        variables: { shortHash: article.shortHash, language: preferredLang },
+      })
     }
   }
+
+  // reset to original language when preferred language is changed
+  useEffect(() => {
+    setTranslate(false)
+  }, [preferredLang])
 
   useEffect(() => {
     if (!!autoTranslation) {
@@ -329,6 +321,7 @@ const BaseArticleDetail = ({
           <MetaInfo
             article={article}
             translated={translated}
+            translating={translating}
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
             canReadFullContent={canReadFullContent}
@@ -351,7 +344,6 @@ const BaseArticleDetail = ({
               articleId={article.id}
               content={content}
               indentFirstLine={article.indentFirstLine}
-              translating={translating}
             />
 
             {circle && !canReadFullContent && (

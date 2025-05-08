@@ -194,9 +194,6 @@
   "16zJ3o": {
     "defaultMessage": "自定義摘要…"
   },
-  "17K30q": {
-    "defaultMessage": "正在透過 Google 翻譯..."
-  },
   "18HJlm": {
     "defaultMessage": "標籤"
   },
@@ -266,6 +263,9 @@
   },
   "25oM9Q": {
     "defaultMessage": "排序"
+  },
+  "2C42E7": {
+    "defaultMessage": "翻譯中..."
   },
   "2CqWQE": {
     "defaultMessage": "總數",
@@ -3204,6 +3204,9 @@
     "defaultMessage": "剛接觸加密錢包？參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "vEdCjn": {
+    "defaultMessage": "原文 {originalLang}"
+  },
   "vH8sCb": {
     "defaultMessage": "我的圍爐"
   },
@@ -3250,6 +3253,9 @@
   },
   "wCgTu5": {
     "defaultMessage": "評論"
+  },
+  "wCy/Tc": {
+    "defaultMessage": "翻譯"
   },
   "wDX7zn": {
     "defaultMessage": "草稿不存在",

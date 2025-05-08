@@ -1,29 +1,32 @@
-import { FC } from 'react'
+import { FC, useContext } from 'react'
+import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconTranslate } from '@/public/static/icons/24px/translate.svg'
 import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { Button, Icon, TextIcon, Translate } from '~/components'
+import { Button, Icon, LanguageContext, TextIcon } from '~/components'
 
 const TranslationButton: FC<{
   translated: boolean
+  translating: boolean
   toggleTranslate: () => void
   originalLanguage: string
-}> = ({ translated, toggleTranslate, originalLanguage }) => {
+}> = ({ translated, translating, toggleTranslate, originalLanguage }) => {
+  const { lang } = useContext(LanguageContext)
   const originalLang = {
-    zh_hant: '',
-    zh_hans: '',
-    en: '',
+    zh_hant:
+      originalLanguage in CONTENT_LANG_TEXT_MAP.zh_hant
+        ? `（${CONTENT_LANG_TEXT_MAP.zh_hant[originalLanguage as keyof typeof CONTENT_LANG_TEXT_MAP.zh_hant]}）`
+        : '',
+    zh_hans:
+      originalLanguage in CONTENT_LANG_TEXT_MAP.zh_hans
+        ? `（${CONTENT_LANG_TEXT_MAP.zh_hans[originalLanguage as keyof typeof CONTENT_LANG_TEXT_MAP.zh_hans]}）`
+        : '',
+    en:
+      originalLanguage in CONTENT_LANG_TEXT_MAP.en
+        ? `(${CONTENT_LANG_TEXT_MAP.en[originalLanguage as keyof typeof CONTENT_LANG_TEXT_MAP.en]})`
+        : '',
   }
-  Object.entries(CONTENT_LANG_TEXT_MAP.zh_hant).forEach(([k, v]) => {
-    if (k === originalLanguage) originalLang.zh_hant = `（${v}）`
-  })
-  Object.entries(CONTENT_LANG_TEXT_MAP.zh_hans).forEach(([k, v]) => {
-    if (k === originalLanguage) originalLang.zh_hans = `（${v}）`
-  })
-  Object.entries(CONTENT_LANG_TEXT_MAP.en).forEach(([k, v]) => {
-    if (k === originalLanguage) originalLang.en = ` (${v})`
-  })
 
   return (
     <Button
@@ -31,6 +34,7 @@ const TranslationButton: FC<{
         toggleTranslate()
         analytics.trackEvent('click_button', { type: 'translation' })
       }}
+      disabled={translating}
     >
       <TextIcon
         icon={<Icon icon={IconTranslate} color="black" />}
@@ -38,14 +42,23 @@ const TranslationButton: FC<{
         spacing={2}
         color="black"
       >
-        {translated ? (
-          <Translate
-            zh_hant={`原文${originalLang.zh_hant}`}
-            zh_hans={`原文${originalLang.zh_hans}`}
-            en={`Original${originalLang.en}`}
+        {translating ? (
+          <FormattedMessage defaultMessage="Translating..." id="2C42E7" />
+        ) : translated ? (
+          <FormattedMessage
+            defaultMessage={`Original {originalLang}`}
+            id="vEdCjn"
+            values={{
+              originalLang:
+                lang === 'zh_hant'
+                  ? originalLang.zh_hant
+                  : lang === 'zh_hans'
+                    ? originalLang.zh_hans
+                    : originalLang.en,
+            }}
           />
         ) : (
-          <Translate zh_hant="翻譯" zh_hans="翻译" en="Translate" />
+          <FormattedMessage defaultMessage="Translate" id="wCy/Tc" />
         )}
       </TextIcon>
     </Button>

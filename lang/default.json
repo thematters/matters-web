@@ -194,9 +194,6 @@
   "16zJ3o": {
     "defaultMessage": "Enter summary…"
   },
-  "17K30q": {
-    "defaultMessage": "Translating by Google..."
-  },
   "18HJlm": {
     "defaultMessage": "Tag"
   },
@@ -266,6 +263,9 @@
   },
   "25oM9Q": {
     "defaultMessage": "Sort"
+  },
+  "2C42E7": {
+    "defaultMessage": "Translating..."
   },
   "2CqWQE": {
     "defaultMessage": "Total",
@@ -3204,6 +3204,9 @@
     "defaultMessage": "Don't have a wallet yet? Check the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "vEdCjn": {
+    "defaultMessage": "Original {originalLang}"
+  },
   "vH8sCb": {
     "defaultMessage": "Circle"
   },
@@ -3250,6 +3253,9 @@
   },
   "wCgTu5": {
     "defaultMessage": "Comments"
+  },
+  "wCy/Tc": {
+    "defaultMessage": "Translate"
   },
   "wDX7zn": {
     "defaultMessage": "Draft not found",

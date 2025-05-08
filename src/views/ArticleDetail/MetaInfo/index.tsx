@@ -27,6 +27,7 @@ type MetaInfoProps = {
   article: MetaInfoArticleFragment
   version?: MetaInfoArticleVersionFragment
   translated: boolean
+  translating: boolean
   canTranslate: boolean
   toggleTranslate: () => any
   canReadFullContent: boolean
@@ -37,6 +38,7 @@ const MetaInfo = ({
   article,
   version,
   translated,
+  translating,
   canTranslate,
   toggleTranslate,
   canReadFullContent,
@@ -131,6 +133,7 @@ const MetaInfo = ({
 
               <TranslationButton
                 translated={translated}
+                translating={translating}
                 toggleTranslate={toggleTranslate}
                 originalLanguage={originalLanguage}
               />
