@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconDrawer } from '@/public/static/icons/24px/drawer.svg'
 import { toPath } from '~/common/utils'
 import { Button, Icon, Media, TextIcon, useRoute } from '~/components'
+import type { ButtonHeight } from '~/components/Button'
 
 export const OptionButton = ({ onClick }: { onClick: () => void }) => {
   const { getQuery, router } = useRoute()
@@ -17,45 +18,51 @@ export const OptionButton = ({ onClick }: { onClick: () => void }) => {
   return (
     <>
       <Media at="sm">
-        <Button
-          size={[null, '2.125rem']}
-          spacing={[0, 14]}
-          borderRadius={'0.75rem'}
-          bgColor="white"
-          borderColor="greyHover"
-          borderActiveColor="black"
-          borderWidth="sm"
+        <OptionButtonContent
+          size="2.125rem"
           onClick={goToOptionsPage}
-          aria-haspopup="dialog"
-        >
-          <TextIcon color="black" size={14} weight="medium" spacing={8}>
-            <FormattedMessage defaultMessage="Options" id="NDV5Mq" />
-          </TextIcon>
-        </Button>
+          showIcon={false}
+        />
       </Media>
       <Media greaterThan="sm">
-        <Button
-          size={[null, '2.375rem']}
-          spacing={[0, 14]}
-          borderRadius={'0.75rem'}
-          bgColor="white"
-          borderColor="greyHover"
-          borderActiveColor="black"
-          borderWidth="sm"
+        <OptionButtonContent
+          size="2.375rem"
           onClick={onClick}
-          aria-haspopup="dialog"
-        >
-          <TextIcon
-            color="black"
-            size={14}
-            weight="medium"
-            icon={<Icon icon={IconDrawer} size={18} />}
-            spacing={8}
-          >
-            <FormattedMessage defaultMessage="Options" id="NDV5Mq" />
-          </TextIcon>
-        </Button>
+          showIcon={true}
+        />
       </Media>
     </>
   )
 }
+
+const OptionButtonContent = ({
+  size,
+  onClick,
+  showIcon = true,
+}: {
+  size: ButtonHeight
+  onClick: () => void
+  showIcon?: boolean
+}) => (
+  <Button
+    size={[null, size]}
+    spacing={[0, 14]}
+    borderRadius={'0.75rem'}
+    bgColor="white"
+    borderColor="greyHover"
+    borderActiveColor="black"
+    borderWidth="sm"
+    onClick={onClick}
+    aria-haspopup="dialog"
+  >
+    <TextIcon
+      color="black"
+      size={14}
+      weight="medium"
+      icon={showIcon ? <Icon icon={IconDrawer} size={18} /> : undefined}
+      spacing={8}
+    >
+      <FormattedMessage defaultMessage="Options" id="NDV5Mq" />
+    </TextIcon>
+  </Button>
+)
