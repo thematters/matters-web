@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { Button, Icon } from '~/components'
 
+import { OptionContent } from '../OptionContent'
 import styles from './styles.module.css'
 
 const OptionsPage = () => {
@@ -27,6 +28,8 @@ const OptionsPage = () => {
           </Button>
         </section>
       </section>
+
+      <OptionContent />
     </section>
   )
 }

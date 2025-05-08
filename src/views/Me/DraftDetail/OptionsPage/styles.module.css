@@ -4,4 +4,6 @@
 
 .header {
   @mixin flex-center-space-between;
+
+  margin-bottom: var(--sp16);
 }
