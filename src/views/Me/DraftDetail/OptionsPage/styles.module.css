@@ -6,4 +6,6 @@
   @mixin flex-center-space-between;
 
   margin-bottom: var(--sp16);
+  font-size: var(--text20);
+  line-height: 1.5;
 }
