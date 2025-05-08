@@ -27,26 +27,19 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
         return (
           <div className={styles.billboard}>
             <div className={styles.genieeContainer}>
-              <iframe
-                sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
-                srcDoc={`
-                  <!DOCTYPE html>
-                  <html>
-                    <head>
-                      <script>
-                        window.gnshbrequest = window.gnshbrequest || {cmd:[]};
-                        window.gnshbrequest.cmd.push(function() {
-                          window.gnshbrequest.applyPassback("1584662_matters.town_528x296_banner_responsive", "[data-cptid='1584662_matters.town_528x296_banner_responsive']");
-                        });
-                      </script>
-                      <script async src="https://cpt.geniee.jp/hb/v1/222058/2731/wrapper.min.js"></script>
-                    </head>
-                    <body>
-                      <div data-cptid="1584662_matters.town_528x296_banner_responsive" style="display: inline-block"></div>
-                    </body>
-                  </html>
-                `}
-                style={{ width: '16.5rem', height: 'auto', border: 'none' }}
+              <div
+                data-cptid="1584662_matters.town_528x296_banner_responsive"
+                style={{ display: 'inline-block' }}
+              ></div>
+              <script
+                id="geniee-banner"
+                dangerouslySetInnerHTML={{
+                  __html: `
+                  window.gnshbrequest.cmd.push(function() {
+                    window.gnshbrequest.applyPassback("1584662_matters.town_528x296_banner_responsive", "[data-cptid='1584662_matters.town_528x296_banner_responsive']");
+                  });
+                `,
+                }}
               />
             </div>
 
