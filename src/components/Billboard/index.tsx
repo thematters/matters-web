@@ -28,6 +28,7 @@ export const Billboard = ({ tokenId, type }: BillboardProps) => {
           <div className={styles.billboard}>
             <div className={styles.genieeContainer}>
               <iframe
+                sandbox="allow-scripts"
                 srcDoc={`
                   <!DOCTYPE html>
                   <html>
