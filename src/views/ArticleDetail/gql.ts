@@ -52,7 +52,7 @@ const articlePublicFragment = gql`
     sensitiveByAdmin
     requestForDonation
     replyToDonator
-    translation(input: { language: $language })
+    translation(input: { language: $language, model: openai_gpt_4o_mini })
       @include(if: $includeTranslation) {
       content
       title
@@ -143,7 +143,7 @@ export const ARTICLE_TRANSLATION = gql`
   query ArticleTranslation($shortHash: String!, $language: UserLanguage!) {
     article(input: { shortHash: $shortHash }) {
       id
-      translation(input: { language: $language }) {
+      translation(input: { language: $language, model: openai_gpt_4o_mini }) {
         content
         title
         summary
