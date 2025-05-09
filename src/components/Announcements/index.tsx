@@ -8,12 +8,19 @@ import Carousel from './Carousel'
 import { VISIBLE_ANNOUNCEMENTS } from './gql'
 
 export const Announcements = () => {
-  const { getQuery } = useRoute()
+  const { isInPath, getQuery } = useRoute()
+  const isInChannel = isInPath('CHANNEL')
   const shortHash = getQuery('shortHash')
 
   const { data, error, loading } = useQuery<VisibleAnnouncementsQuery>(
     VISIBLE_ANNOUNCEMENTS,
-    { variables: { input: { visible: true, channel: { shortHash } } } }
+    {
+      variables: {
+        input: isInChannel
+          ? { visible: true, channel: { shortHash } }
+          : { visible: true },
+      },
+    }
   )
 
   if (loading || error) {
