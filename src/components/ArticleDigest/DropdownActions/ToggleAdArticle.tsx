@@ -1,9 +1,13 @@
+import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
 import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
 import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
-import { Icon, Menu, toast, useMutation } from '~/components'
-import { ToggleAdArticleMutation } from '~/gql/graphql'
+import { Icon, Menu, Spinner, toast, useMutation } from '~/components'
+import {
+  FetchArticleAdStatusQuery,
+  ToggleAdArticleMutation,
+} from '~/gql/graphql'
 
 const fragments = {
   article: gql`
@@ -28,19 +32,38 @@ const TOGGLE_AD_ARTICLE = gql`
   ${fragments.article}
 `
 
-const ToggleAdArticle = ({
-  articleId,
-  isAd,
-}: {
-  articleId: string
-  isAd: boolean
-}) => {
+const FETCH_ARTICLE_AD_STATUS = gql`
+  query fetchArticleAdStatus($shortHash: String!) {
+    article(input: { shortHash: $shortHash }) {
+      ...ToggleAdArticleArticle
+    }
+  }
+  ${fragments.article}
+`
+
+const ToggleAdArticle = ({ shortHash }: { shortHash: string }) => {
+  const { data, loading } = useQuery<FetchArticleAdStatusQuery>(
+    FETCH_ARTICLE_AD_STATUS,
+    {
+      variables: {
+        shortHash,
+      },
+    }
+  )
+
+  const isAd = data?.article?.oss.adStatus.isAd
+  const articleId = data?.article?.id
+
   const [update] = useMutation<ToggleAdArticleMutation>(TOGGLE_AD_ARTICLE, {
     variables: {
       articleId,
       isAd: !isAd,
     },
   })
+
+  if (loading) {
+    return <Spinner />
+  }
 
   return (
     <Menu.Item

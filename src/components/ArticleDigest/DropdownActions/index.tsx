@@ -377,10 +377,7 @@ const BaseDropdownActions = ({
             type="hottestAndNewest"
             openDialog={openToggleRecommendArticleDialog}
           />
-          <DynamicToggleAdArticleButton
-            articleId={article.id}
-            isAd={!!article.oss.adStatus.isAd}
-          />
+          <DynamicToggleAdArticleButton shortHash={article.shortHash} />
           <DynamicToggleRestrictUserButton
             id={article.author.id}
             openDialog={openToggleRestrictUserDialog}
