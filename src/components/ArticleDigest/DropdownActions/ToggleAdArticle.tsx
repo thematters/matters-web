@@ -23,7 +23,7 @@ const fragments = {
 }
 
 const TOGGLE_AD_ARTICLE = gql`
-  mutation toggleAdArticle($articleId: ID!, $isAd: Boolean!) {
+  mutation ToggleAdArticle($articleId: ID!, $isAd: Boolean!) {
     setAdStatus(input: { id: $articleId, isAd: $isAd }) {
       id
       ...ToggleAdArticleArticle
@@ -33,7 +33,7 @@ const TOGGLE_AD_ARTICLE = gql`
 `
 
 const FETCH_ARTICLE_AD_STATUS = gql`
-  query fetchArticleAdStatus($shortHash: String!) {
+  query FetchArticleAdStatus($shortHash: String!) {
     article(input: { shortHash: $shortHash }) {
       ...ToggleAdArticleArticle
     }
