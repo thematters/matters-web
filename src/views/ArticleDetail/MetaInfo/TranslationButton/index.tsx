@@ -37,7 +37,7 @@ const TranslationButton: FC<{
 
   return (
     <>
-      {translated ? (
+      {!translating && translated ? (
         <span className={styles.translated}>
           <FormattedMessage
             defaultMessage="Translated into {targetLang}, show"

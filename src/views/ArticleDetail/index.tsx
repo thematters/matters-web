@@ -179,7 +179,7 @@ const BaseArticleDetail = ({
   const toggleTranslate = async () => {
     setTranslate(!translated)
 
-    if (!translated) {
+    if (!translated && !translating) {
       const { error } = await getTranslation({
         variables: { shortHash: article.shortHash, language: preferredLang },
       })
