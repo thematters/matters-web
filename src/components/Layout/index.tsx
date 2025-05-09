@@ -25,6 +25,7 @@ export const Layout: React.FC<{
 } = ({ header, children }) => {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  const isInDraftDetailOptions = isInPath('ME_DRAFT_DETAIL_OPTIONS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
   const isInMomentDetail = isInPath('MOMENT_DETAIL')
@@ -63,7 +64,8 @@ export const Layout: React.FC<{
         !isInArticleDetail &&
         !isInArticleDetailHistory &&
         !isInMomentDetail &&
-        !isInMomentDetailEdit && (
+        !isInMomentDetailEdit &&
+        !isInDraftDetailOptions && (
           <Media at="sm">
             <footer>
               <NavBar />
@@ -84,7 +86,9 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
 } = ({ aside, showAside = true, children }) => {
   const { isInPath } = useRoute()
   const isInEditor =
-    isInPath('ARTICLE_DETAIL_EDIT') || isInPath('ME_DRAFT_DETAIL')
+    isInPath('ARTICLE_DETAIL_EDIT') ||
+    isInPath('ME_DRAFT_DETAIL') ||
+    isInPath('ME_DRAFT_DETAIL_OPTIONS')
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')

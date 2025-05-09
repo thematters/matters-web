@@ -5,6 +5,7 @@ import { ENTITY_TYPE } from '~/common/enums'
 import {
   Button,
   Icon,
+  Media,
   TextIcon,
   toast,
   toDigestTagPlaceholder,
@@ -54,25 +55,44 @@ const ConfirmButton = ({
   openDialog: () => void
   disabled?: boolean
 }) => (
-  <Button
-    size={[null, '2.375rem']}
-    spacing={[0, 14]}
-    borderRadius={'0.75rem'}
-    bgColor="black"
-    onClick={openDialog}
-    disabled={disabled}
-    aria-haspopup="dialog"
-  >
-    <TextIcon
-      color="white"
-      size={14}
-      weight="medium"
-      icon={<Icon icon={IconPublishFill} size={18} />}
-      spacing={8}
-    >
-      <FormattedMessage defaultMessage="Publish" id="syEQFE" />
-    </TextIcon>
-  </Button>
+  <>
+    <Media at="sm">
+      <Button
+        size={[null, '2.125rem']}
+        spacing={[0, 14]}
+        borderRadius={'0.75rem'}
+        bgColor="black"
+        onClick={openDialog}
+        disabled={disabled}
+        aria-haspopup="dialog"
+      >
+        <TextIcon color="white" size={14} weight="medium" spacing={8}>
+          <FormattedMessage defaultMessage="Publish" id="syEQFE" />
+        </TextIcon>
+      </Button>
+    </Media>
+    <Media greaterThan="sm">
+      <Button
+        size={[null, '2.375rem']}
+        spacing={[0, 14]}
+        borderRadius={'0.75rem'}
+        bgColor="black"
+        onClick={openDialog}
+        disabled={disabled}
+        aria-haspopup="dialog"
+      >
+        <TextIcon
+          color="white"
+          size={14}
+          weight="medium"
+          icon={<Icon icon={IconPublishFill} size={18} />}
+          spacing={8}
+        >
+          <FormattedMessage defaultMessage="Publish" id="syEQFE" />
+        </TextIcon>
+      </Button>
+    </Media>
+  </>
 )
 
 const SettingsButton = ({

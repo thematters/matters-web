@@ -1,9 +1,8 @@
-import { useState } from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
+import { useIntl } from 'react-intl'
 
-import { Drawer, Tabs } from '~/components'
+import { Drawer } from '~/components'
 
-import styles from './styles.module.css'
+import { OptionContent } from '../OptionContent'
 
 type OptionDrawerProps = {
   isOpen: boolean
@@ -25,8 +24,6 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
     id: 'NDV5Mq',
   })
 
-  const [type, setType] = useState<'typography' | 'settings'>('typography')
-
   return (
     <Drawer isOpen={isOpen} onClose={onClose}>
       <Drawer.Header
@@ -35,31 +32,7 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
         fixedWidth
       />
       <Drawer.Content fixedWidth>
-        <section className={styles.header}>
-          <Tabs noSpacing fill>
-            <Tabs.Tab
-              selected={type === 'typography'}
-              onClick={() => setType('typography')}
-            >
-              <FormattedMessage
-                defaultMessage="Content and Layout"
-                id="XU93/I"
-                description="src/views/Me/DraftDetail/OptionDrawer/index.tsx"
-              />
-            </Tabs.Tab>
-
-            <Tabs.Tab
-              selected={type === 'settings'}
-              onClick={() => setType('settings')}
-            >
-              <FormattedMessage
-                defaultMessage="Settings"
-                id="Mu2Jy8"
-                description="src/views/Me/DraftDetail/OptionDrawer/index.tsx"
-              />
-            </Tabs.Tab>
-          </Tabs>
-        </section>
+        <OptionContent />
         {children}
       </Drawer.Content>
     </Drawer>

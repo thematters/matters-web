@@ -56,6 +56,7 @@ type ROUTE_KEY =
   | 'ME_SETTINGS_BLOCKED'
   | 'ME_DRAFT_NEW'
   | 'ME_DRAFT_DETAIL'
+  | 'ME_DRAFT_DETAIL_OPTIONS'
   | 'ME_SETTINGS_NOTIFICATIONS_CIRCLE'
   // Form
   | 'LOGIN'
@@ -114,6 +115,10 @@ export const PROTECTED_ROUTES: {
   // Draft
   { key: 'ME_DRAFT_NEW', pathname: '/me/drafts/new' },
   { key: 'ME_DRAFT_DETAIL', pathname: '/me/drafts/[draftId]' },
+  {
+    key: 'ME_DRAFT_DETAIL_OPTIONS',
+    pathname: '/me/drafts/[draftId]/options',
+  },
 
   // Circle
   { key: 'CIRCLE_SETTINGS', pathname: '/[name]/settings' },
