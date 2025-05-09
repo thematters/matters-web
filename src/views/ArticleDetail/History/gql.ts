@@ -118,7 +118,9 @@ export const ARTICLE_HISTORY_TRANSLATION = gql`
     version: node(input: { id: $version }) {
       ... on ArticleVersion {
         id
-        translation(input: { language: $language }) {
+        translation(
+          input: { language: $language, model: openai_gpt_4_1_nano }
+        ) {
           content
           title
           summary
