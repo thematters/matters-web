@@ -968,6 +968,9 @@
     "defaultMessage": "commented on a deleted moment",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
+  "E1M4vK": {
+    "defaultMessage": "Translation error. Please try again."
+  },
   "E3uFyt": {
     "defaultMessage": "Moment",
     "description": "src/components/Forms/MomentForm/index.tsx"
@@ -1073,9 +1076,6 @@
   },
   "G/yZLu": {
     "defaultMessage": "Remove"
-  },
-  "G0pqnh": {
-    "defaultMessage": "View original content"
   },
   "G4KR8j": {
     "defaultMessage": "Image",
@@ -3465,6 +3465,9 @@
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zlug1R": {
+    "defaultMessage": "Translated into {targetLang}, show"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

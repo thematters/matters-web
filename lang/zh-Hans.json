@@ -968,6 +968,9 @@
     "defaultMessage": "在已删除动态中留言",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
+  "E1M4vK": {
+    "defaultMessage": "翻译失败，请稍后再试"
+  },
   "E3uFyt": {
     "defaultMessage": "动态",
     "description": "src/components/Forms/MomentForm/index.tsx"
@@ -1073,9 +1076,6 @@
   },
   "G/yZLu": {
     "defaultMessage": "移除"
-  },
-  "G0pqnh": {
-    "defaultMessage": "阅读原文"
   },
   "G4KR8j": {
     "defaultMessage": "图片",
@@ -3465,6 +3465,9 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zlug1R": {
+    "defaultMessage": "已翻译成{targetLang}，显示"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",

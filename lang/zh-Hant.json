@@ -968,6 +968,9 @@
     "defaultMessage": "在已刪除動態中留言",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
+  "E1M4vK": {
+    "defaultMessage": "翻譯失敗，請稍後再試"
+  },
   "E3uFyt": {
     "defaultMessage": "動態",
     "description": "src/components/Forms/MomentForm/index.tsx"
@@ -1073,9 +1076,6 @@
   },
   "G/yZLu": {
     "defaultMessage": "移除"
-  },
-  "G0pqnh": {
-    "defaultMessage": "閱讀原文"
   },
   "G4KR8j": {
     "defaultMessage": "影像",
@@ -3465,6 +3465,9 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zlug1R": {
+    "defaultMessage": "已翻譯成{targetLang}，顯示"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",

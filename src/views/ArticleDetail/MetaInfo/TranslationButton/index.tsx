@@ -6,6 +6,8 @@ import { CONTENT_LANG_TEXT_MAP } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Button, Icon, LanguageContext, TextIcon } from '~/components'
 
+import styles from '../styles.module.css'
+
 const TranslationButton: FC<{
   translated: boolean
   translating: boolean
@@ -27,41 +29,51 @@ const TranslationButton: FC<{
         ? `(${CONTENT_LANG_TEXT_MAP.en[originalLanguage as keyof typeof CONTENT_LANG_TEXT_MAP.en]})`
         : '',
   }
+  const targetLang = {
+    zh_hant: CONTENT_LANG_TEXT_MAP[lang].zh_hant,
+    zh_hans: CONTENT_LANG_TEXT_MAP[lang].zh_hans,
+    en: CONTENT_LANG_TEXT_MAP[lang].en,
+  }
 
   return (
-    <Button
-      onClick={() => {
-        toggleTranslate()
-        analytics.trackEvent('click_button', { type: 'translation' })
-      }}
-      disabled={translating}
-    >
-      <TextIcon
-        icon={<Icon icon={IconTranslate} color="black" />}
-        size={12}
-        spacing={2}
-        color="black"
-      >
-        {translating ? (
-          <FormattedMessage defaultMessage="Translating..." id="2C42E7" />
-        ) : translated ? (
+    <>
+      {translated ? (
+        <span className={styles.translated}>
           <FormattedMessage
-            defaultMessage={`Original {originalLang}`}
-            id="vEdCjn"
-            values={{
-              originalLang:
-                lang === 'zh_hant'
-                  ? originalLang.zh_hant
-                  : lang === 'zh_hans'
-                    ? originalLang.zh_hans
-                    : originalLang.en,
-            }}
+            defaultMessage="Translated into {targetLang}, show"
+            id="zlug1R"
+            values={{ targetLang: targetLang[lang] }}
           />
-        ) : (
-          <FormattedMessage defaultMessage="Translate" id="wCy/Tc" />
-        )}
-      </TextIcon>
-    </Button>
+          &nbsp;
+        </span>
+      ) : null}
+      <Button
+        onClick={() => {
+          toggleTranslate()
+          analytics.trackEvent('click_button', { type: 'translation' })
+        }}
+        disabled={translating}
+      >
+        <TextIcon
+          icon={<Icon icon={IconTranslate} color="black" />}
+          size={12}
+          spacing={2}
+          color="black"
+        >
+          {translating ? (
+            <FormattedMessage defaultMessage="Translating..." id="2C42E7" />
+          ) : translated ? (
+            <FormattedMessage
+              defaultMessage={`Original {originalLang}`}
+              id="vEdCjn"
+              values={{ originalLang: lang === 'en' ? '' : originalLang[lang] }}
+            />
+          ) : (
+            <FormattedMessage defaultMessage="Translate" id="wCy/Tc" />
+          )}
+        </TextIcon>
+      </Button>
+    </>
   )
 }
 
