@@ -104,6 +104,12 @@ const DynamicArchiveUserDialog = dynamic(
   }
 )
 
+const DynamicToggleAdArticleButton = dynamic(
+  () => import('./ToggleAdArticle'),
+  {
+    loading: () => <Spinner />,
+  }
+)
 const DynamicTogglePinChannelArticlesButton = dynamic(
   () => import('./TogglePinChannelArticles'),
   {
@@ -370,6 +376,10 @@ const BaseDropdownActions = ({
             id={article.id}
             type="hottestAndNewest"
             openDialog={openToggleRecommendArticleDialog}
+          />
+          <DynamicToggleAdArticleButton
+            articleId={article.id}
+            isAd={!!article.oss.adStatus.isAd}
           />
           <DynamicToggleRestrictUserButton
             id={article.author.id}

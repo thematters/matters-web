@@ -134,6 +134,16 @@ export const MOCK_ARTILCE = {
       path: 'https://placehold.co/256x256?article',
     },
   ],
+  oss: {
+    __typename: 'ArticleOSS' as any,
+    inRecommendHottest: false,
+    inRecommendIcymi: false,
+    inRecommendNewest: false,
+    adStatus: {
+      __typename: 'AdStatus' as any,
+      isAd: false,
+    },
+  },
   summary:
     '其實已經開始兩週了XD,不過最近才想說應該來紀錄一下我在火箭隊的日常,順便練一下文筆,也可以讓大家了解一下火箭隊軟體培訓營裡面大概是在做些什麼事情,上課的模式及氣氛是怎樣等等...畢竟我當時得知有這個免費培訓營時,也是網路上各種爬文類似這種免費培訓工程師半年的心得及成',
   author: MOCK_USER,

@@ -10,7 +10,8 @@ import ArchiveArticle from './ArchiveArticle'
 import EditButton from './EditButton'
 import ExtendButton from './ExtendButton'
 import PinButton from './PinButton'
-
+import ToggleAdArticle from './ToggleAdArticle'
+import ToggleRecommendArticle from './ToggleRecommendArticle'
 export const fragments = {
   article: gql`
     fragment DropdownActionsArticle on Article {
@@ -29,6 +30,8 @@ export const fragments = {
       ...PinButtonArticle
       ...ExtendButtonArticle
       ...EditArticleButtonArticle
+      ...ToggleAdArticleArticle
+      ...ToggleRecommendArticleArticle
     }
     ${AppreciatorsDialog.fragments.article}
     ${SupportersDialog.fragments.article}
@@ -36,5 +39,7 @@ export const fragments = {
     ${ArchiveArticle.fragments.article}
     ${ExtendButton.fragments.article}
     ${EditButton.fragments.article}
+    ${ToggleAdArticle.fragments.article}
+    ${ToggleRecommendArticle.fragments.article}
   `,
 }
