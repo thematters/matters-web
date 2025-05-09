@@ -1,15 +1,19 @@
 import { useQuery } from '@apollo/client'
 import _get from 'lodash/get'
 
+import { useRoute } from '~/components'
 import { VisibleAnnouncementsQuery } from '~/gql/graphql'
 
 import Carousel from './Carousel'
 import { VISIBLE_ANNOUNCEMENTS } from './gql'
 
 export const Announcements = () => {
+  const { getQuery } = useRoute()
+  const shortHash = getQuery('shortHash')
+
   const { data, error, loading } = useQuery<VisibleAnnouncementsQuery>(
     VISIBLE_ANNOUNCEMENTS,
-    { variables: { input: { visible: true } } }
+    { variables: { input: { visible: true, channel: { shortHash } } } }
   )
 
   if (loading || error) {
