@@ -118,7 +118,9 @@ export const ARTICLE_HISTORY_TRANSLATION = gql`
     version: node(input: { id: $version }) {
       ... on ArticleVersion {
         id
-        translation(input: { language: $language }) {
+        translation(
+          input: { language: $language, model: google_gemini_2_5_flash_preview }
+        ) {
           content
           title
           summary
