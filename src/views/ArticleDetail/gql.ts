@@ -52,8 +52,9 @@ const articlePublicFragment = gql`
     sensitiveByAdmin
     requestForDonation
     replyToDonator
-    translation(input: { language: $language })
-      @include(if: $includeTranslation) {
+    translation(
+      input: { language: $language, model: google_gemini_2_0_flash_001 }
+    ) @include(if: $includeTranslation) {
       content
       title
       summary
@@ -143,7 +144,9 @@ export const ARTICLE_TRANSLATION = gql`
   query ArticleTranslation($shortHash: String!, $language: UserLanguage!) {
     article(input: { shortHash: $shortHash }) {
       id
-      translation(input: { language: $language }) {
+      translation(
+        input: { language: $language, model: google_gemini_2_0_flash_001 }
+      ) {
         content
         title
         summary
