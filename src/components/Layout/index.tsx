@@ -86,12 +86,18 @@ const useLayoutType = () => {
     isInPath('FOLLOW') ||
     isInWritingChallengeChannel
 
+  const isLeftLayout =
+    isUserWorks ||
+    isInPath('USER_COLLECTIONS') ||
+    isInPath('USER_COLLECTION_DETAIL')
+
   return {
     isInMomentDetail,
     isInMomentDetailEdit,
     isOneColumnLayout,
     isTwoColumnLayout,
     isThreeColumnLayout,
+    isLeftLayout,
   }
 }
 
@@ -101,6 +107,26 @@ interface MainProps {
   children?: React.ReactNode
 }
 
+const AsideSection = ({
+  aside,
+  asideClasses,
+  enableSticky,
+}: {
+  aside: React.ReactNode
+  asideClasses: string
+  enableSticky: boolean
+}) => (
+  <aside className={asideClasses}>
+    <Media greaterThanOrEqual="lg">
+      <Sticky enabled={enableSticky} top={65} enableTransforms={false}>
+        <section className={styles.content}>
+          <section className={styles.top}>{aside}</section>
+        </section>
+      </Sticky>
+    </Media>
+  </aside>
+)
+
 const Main: React.FC<MainProps> & {
   Spacing: typeof Spacing
 } = ({ aside, showAside = true, children }) => {
@@ -109,27 +135,38 @@ const Main: React.FC<MainProps> & {
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
   const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
 
+  const { isLeftLayout } = useLayoutType()
+
   const articleClasses = classNames({
     [styles.article]: true,
     [styles.hasNavBar]: !isInArticleDetail && !isInDraftDetail,
+  })
+
+  const asideClasses = classNames({
+    [styles.aside]: true,
+    [styles.leftLayout]: isLeftLayout,
   })
 
   const enableSticky = !isInArticleDetailHistory
 
   return (
     <>
+      {showAside && isLeftLayout && (
+        <AsideSection
+          aside={aside}
+          asideClasses={asideClasses}
+          enableSticky={enableSticky}
+        />
+      )}
+
       <article className={articleClasses}>{children}</article>
 
-      {showAside && (
-        <aside className={styles.aside}>
-          <Media greaterThanOrEqual="lg">
-            <Sticky enabled={enableSticky} top={65} enableTransforms={false}>
-              <section className={styles.content}>
-                <section className={styles.top}>{aside}</section>
-              </section>
-            </Sticky>
-          </Media>
-        </aside>
+      {showAside && !isLeftLayout && (
+        <AsideSection
+          aside={aside}
+          asideClasses={asideClasses}
+          enableSticky={enableSticky}
+        />
       )}
     </>
   )
@@ -154,6 +191,7 @@ export const Layout: React.FC<LayoutProps> & {
     isOneColumnLayout,
     isTwoColumnLayout,
     isThreeColumnLayout,
+    isLeftLayout,
   } = useLayoutType()
 
   const layoutClasses = classNames({
@@ -163,12 +201,17 @@ export const Layout: React.FC<LayoutProps> & {
     [styles.sideNavLayout]: isThreeColumnLayout,
   })
 
+  const mainClasses = classNames({
+    [styles.main]: true,
+    [styles.leftLayout]: isLeftLayout,
+  })
+
   return (
     <>
       <Head description={null} />
       {!isInMomentDetail && !isInMomentDetailEdit && <GlobalNav />}
       <div className={layoutClasses}>
-        <main className={styles.main}>
+        <main className={mainClasses}>
           {isThreeColumnLayout && (
             <nav role="navigation" className={styles.sidenav}>
               <section className={styles.sideNavContent}>

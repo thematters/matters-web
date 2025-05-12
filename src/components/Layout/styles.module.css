@@ -51,6 +51,11 @@
       grid-template-areas: 'content right';
       grid-template-columns: minmax(0, 100%) 16.5rem;
       grid-column-gap: 3rem;
+
+      &.leftLayout {
+        grid-template-areas: 'left content ';
+        grid-template-columns: 16.5rem minmax(0, 100%);
+      }
     }
   }
 }
@@ -155,6 +160,10 @@
 .aside {
   @media (--md-up) {
     grid-column: right;
+
+    &.leftLayout {
+      grid-column: left;
+    }
   }
 
   & .content {
