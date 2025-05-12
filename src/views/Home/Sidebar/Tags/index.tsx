@@ -6,7 +6,6 @@ import {
   ArticleTag,
   List,
   QueryError,
-  SpinnerBlock,
   usePublicQuery,
   useRoute,
 } from '~/components'
@@ -14,8 +13,8 @@ import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, SidebarTagsPublicQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
+import { TagsPlaceholder } from './Placeholders'
 import styles from './styles.module.css'
-
 const SIDEBAR_TAGS_PUBLIC = gql`
   query SidebarTagsPublic(
     $random: random_Int_min_0_max_49
@@ -81,7 +80,7 @@ const Tags = () => {
     <section className={styles.container}>
       <SectionHeader type="tags" viewAll={true} />
 
-      {loading && <SpinnerBlock />}
+      {loading && <TagsPlaceholder />}
 
       {!loading && (
         <List hasBorder={false} className={styles.list}>
