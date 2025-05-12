@@ -107,6 +107,26 @@ interface MainProps {
   children?: React.ReactNode
 }
 
+const AsideSection = ({
+  aside,
+  asideClasses,
+  enableSticky,
+}: {
+  aside: React.ReactNode
+  asideClasses: string
+  enableSticky: boolean
+}) => (
+  <aside className={asideClasses}>
+    <Media greaterThanOrEqual="lg">
+      <Sticky enabled={enableSticky} top={65} enableTransforms={false}>
+        <section className={styles.content}>
+          <section className={styles.top}>{aside}</section>
+        </section>
+      </Sticky>
+    </Media>
+  </aside>
+)
+
 const Main: React.FC<MainProps> & {
   Spacing: typeof Spacing
 } = ({ aside, showAside = true, children }) => {
@@ -132,29 +152,21 @@ const Main: React.FC<MainProps> & {
   return (
     <>
       {showAside && isLeftLayout && (
-        <aside className={asideClasses}>
-          <Media greaterThanOrEqual="lg">
-            <Sticky enabled={enableSticky} top={65} enableTransforms={false}>
-              <section className={styles.content}>
-                <section className={styles.top}>{aside}</section>
-              </section>
-            </Sticky>
-          </Media>
-        </aside>
+        <AsideSection
+          aside={aside}
+          asideClasses={asideClasses}
+          enableSticky={enableSticky}
+        />
       )}
 
       <article className={articleClasses}>{children}</article>
 
       {showAside && !isLeftLayout && (
-        <aside className={asideClasses}>
-          <Media greaterThanOrEqual="lg">
-            <Sticky enabled={enableSticky} top={65} enableTransforms={false}>
-              <section className={styles.content}>
-                <section className={styles.top}>{aside}</section>
-              </section>
-            </Sticky>
-          </Media>
-        </aside>
+        <AsideSection
+          aside={aside}
+          asideClasses={asideClasses}
+          enableSticky={enableSticky}
+        />
       )}
     </>
   )
