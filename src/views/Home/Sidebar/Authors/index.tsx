@@ -5,7 +5,6 @@ import {
   List,
   QueryError,
   ShuffleButton,
-  SpinnerBlock,
   usePublicQuery,
   UserDigest,
   useRoute,
@@ -15,8 +14,8 @@ import { LastFetchRandomQuery, SidebarAuthorsPublicQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import { SIDEBAR_AUTHORS_PUBLIC } from './gql'
+import { AuthorsPlaceholder } from './placeholder'
 import styles from './styles.module.css'
-
 const Authors = () => {
   const { getQuery } = useRoute()
   const shortHash = getQuery('shortHash')
@@ -78,7 +77,7 @@ const Authors = () => {
       />
 
       {loading ? (
-        <SpinnerBlock />
+        <AuthorsPlaceholder />
       ) : (
         <List hasBorder={false}>
           {edges &&
