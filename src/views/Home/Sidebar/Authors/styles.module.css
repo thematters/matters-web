@@ -3,3 +3,14 @@
     margin: var(--sp8) calc(var(--sp8) * -1);
   }
 }
+
+.placeholder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp8);
+  margin-top: var(--sp8);
+
+  & > * {
+    padding: var(--sp8) 0;
+  }
+}
