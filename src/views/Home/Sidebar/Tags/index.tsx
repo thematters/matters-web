@@ -8,6 +8,7 @@ import {
   QueryError,
   SpinnerBlock,
   usePublicQuery,
+  useRoute,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, SidebarTagsPublicQuery } from '~/gql/graphql'
@@ -19,11 +20,18 @@ const SIDEBAR_TAGS_PUBLIC = gql`
   query SidebarTagsPublic(
     $random: random_Int_min_0_max_49
     $first: first_Int_min_0
+    $shortHash: String
   ) {
     viewer {
       id
       recommendation {
-        tags(input: { first: $first, filter: { random: $random } }) {
+        tags(
+          input: {
+            first: $first
+            filter: { random: $random, channel: { shortHash: $shortHash } }
+            newAlgo: true
+          }
+        ) {
           totalCount
           edges {
             cursor
@@ -40,6 +48,8 @@ const SIDEBAR_TAGS_PUBLIC = gql`
 `
 
 const Tags = () => {
+  const { getQuery } = useRoute()
+  const shortHash = getQuery('shortHash')
   const { data: lastFetchRandom } = useQuery<LastFetchRandomQuery>(
     FETCH_RECORD,
     { variables: { id: 'local' } }
@@ -48,7 +58,13 @@ const Tags = () => {
   const perPage = 6
   const { data, loading, error } = usePublicQuery<SidebarTagsPublicQuery>(
     SIDEBAR_TAGS_PUBLIC,
-    { variables: { random: lastRandom || 0, first: perPage } }
+    {
+      variables: {
+        random: lastRandom || 0,
+        first: perPage,
+        shortHash: shortHash || null,
+      },
+    }
   )
   const edges = data?.viewer?.recommendation.tags.edges
 
