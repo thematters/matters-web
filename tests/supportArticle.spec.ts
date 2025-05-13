@@ -9,13 +9,14 @@ import {
   authedTest,
   NotificationsPage,
   pageGoto,
+  sleep,
   UserProfilePage,
 } from './helpers'
 import { users } from './helpers/auth'
 
 test.describe('Support article', () => {
   authedTest(
-    "Alice' article is supported with HKD by Bob, and received notification",
+    "Alice's article is supported with HKD by Bob, and received notification",
     async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] Go to profile page
       const aliceProfile = new UserProfilePage(alicePage, isMobile)
@@ -38,6 +39,7 @@ test.describe('Support article', () => {
       await aliceArticleDetail.supportHKD(users.bob.paymentPassword, amount)
 
       // [Bob] Expect support detail shows View transaction history
+      await sleep(5e3)
       await expect(
         bobPage.getByRole('link', { name: 'Transaction History' })
       ).toBeVisible()
@@ -54,24 +56,6 @@ test.describe('Support article', () => {
         stripSpaces(`- HKD ${parseFloat(amount.toString()).toFixed(2)}`)
       )
 
-      // [Alice] Go to notifications page
-      const aliceNotifications = new NotificationsPage(alicePage)
-      await aliceNotifications.goto()
-
-      // [Alice] Expect it has "article new donation" notice
-      const noticeReceiveDonationAmount = await alicePage
-        .getByTestId(TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION)
-        .first()
-        .getByTestId(TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION_AMOUNT)
-        .first()
-        .innerText({
-          // FIXME: notifications page is slow to fetch data since it's no-cache
-          timeout: 15e3,
-        })
-      expect(stripSpaces(noticeReceiveDonationAmount)).toBe(
-        stripSpaces(`${amount} HKD`)
-      )
-
       // [Alice] Check Transactions History
       await pageGoto(alicePage, '/me/wallet/transactions')
       const aliceTransactionItemAmount = await alicePage
@@ -82,6 +66,51 @@ test.describe('Support article', () => {
         .innerText()
       expect(stripSpaces(aliceTransactionItemAmount)).toBe(
         stripSpaces(`+ HKD ${parseFloat(amount.toString()).toFixed(2)}`)
+      )
+
+      // [Alice] Go to notifications page
+      const aliceNotifications = new NotificationsPage(alicePage)
+
+      // Poll and refresh until the donation notice with correct amount is visible
+      let amountMatches = false
+      let noticeReceiveDonationAmount = ''
+
+      while (!amountMatches) {
+        // Go to notifications page
+        await aliceNotifications.goto()
+
+        // Try to find the donation notice
+        const noticeVisible = await alicePage
+          .getByTestId(TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION)
+          .first()
+          .isVisible({ timeout: 1000 })
+          .catch(() => false)
+
+        if (noticeVisible) {
+          // Check if the amount matches
+          noticeReceiveDonationAmount = await alicePage
+            .getByTestId(TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION)
+            .first()
+            .getByTestId(TEST_ID.NOTICE_PAYMENT_RECEIVE_DONATION_AMOUNT)
+            .first()
+            .innerText()
+            .catch(() => '')
+
+          // Check if the amount matches what we expect
+          amountMatches =
+            stripSpaces(noticeReceiveDonationAmount) ===
+            stripSpaces(`${amount} HKD`)
+        }
+
+        // Wait before next attempt if not found or amount doesn't match
+        if (!amountMatches) {
+          await alicePage.waitForTimeout(2000)
+        }
+      }
+
+      // Ensure the notification with correct amount was found
+      expect(stripSpaces(noticeReceiveDonationAmount)).toBe(
+        stripSpaces(`${amount} HKD`)
       )
     }
   )

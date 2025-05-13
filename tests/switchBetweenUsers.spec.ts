@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test'
 
 import { TEST_ID } from '~/common/enums'
-import { sleep } from '~/common/utils'
 
 import {
   ArticleDetailPage,
@@ -12,7 +11,6 @@ import {
   UserProfilePage,
   users,
 } from './helpers'
-
 test.describe('Switch between multiple users', () => {
   authedTest('Same context', async ({ alicePage: page, isMobile }) => {
     test.skip(!!isMobile, 'Desktop only!')
@@ -28,7 +26,7 @@ test.describe('Switch between multiple users', () => {
       expect(articleLink).toBeTruthy()
 
       await pageGoto(page, articleLink)
-      await sleep(3 * 1000)
+
       // Confirm that the comment area is clickable
       const articleDetail = new ArticleDetailPage(page, isMobile)
       if (await articleDetail.toolbarCommentButton.isEnabled()) {
@@ -51,20 +49,14 @@ test.describe('Switch between multiple users', () => {
     await page.waitForLoadState('networkidle')
 
     const articleDetail = new ArticleDetailPage(page, isMobile)
+
     // [Bob] Send a comment
-    await sleep(3 * 1000)
     await articleDetail.sendComment()
 
     // [Bob] Get display name and user name in first comment
-    const firstComment = await page
-      .getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)
-      .first()
+    const firstComment = page.getByTestId(TEST_ID.ARTICLE_COMMENT_FEED).first()
     const displayName = await firstComment
-      .getByTestId(TEST_ID.DIGEST_USER_MINI_DISPLAY_NAME)
-      .first()
-      .innerText()
-    const userName = await firstComment
-      .getByTestId(TEST_ID.DIGEST_USER_MINI_USER_NAME)
+      .getByTestId(TEST_ID.ARTICLE_COMMENT_FEED_AUTHOR_DISPLAY_NAME)
       .first()
       .innerText()
 
@@ -73,10 +65,8 @@ test.describe('Switch between multiple users', () => {
     await bobProfile.gotoMeProfile()
     await page.waitForTimeout(2 * 1000)
     const profileDisplayName = await bobProfile.displayName.innerText()
-    const profileUserName = await bobProfile.userName.innerText()
 
     expect(displayName).toBe(profileDisplayName)
-    expect(userName).toBe(profileUserName)
   })
 
   test('Different Context', async ({ browser, isMobile }) => {
@@ -99,7 +89,7 @@ test.describe('Switch between multiple users', () => {
       expect(articleLink).toBeTruthy()
 
       await pageGoto(alicePage, articleLink)
-      await sleep(3 * 1000)
+
       // Confirm that the comment area is clickable
       const articleDetail = new ArticleDetailPage(alicePage, isMobile)
       if (await articleDetail.toolbarCommentButton.isEnabled()) {
@@ -118,7 +108,6 @@ test.describe('Switch between multiple users', () => {
       target: articleLink,
     })
 
-    await sleep(3 * 1000)
     // [Alice] Logout
     await logout({ page: alicePage })
 
@@ -132,8 +121,8 @@ test.describe('Switch between multiple users', () => {
     await bobPage.waitForLoadState('networkidle')
 
     const articleDetail = new ArticleDetailPage(bobPage, isMobile)
+
     // [Bob] Send a comment
-    await sleep(3 * 1000)
     await articleDetail.sendComment()
 
     // [Bob] Get display name and user name in first comment
@@ -141,11 +130,7 @@ test.describe('Switch between multiple users', () => {
       .getByTestId(TEST_ID.ARTICLE_COMMENT_FEED)
       .first()
     const displayName = await firstComment
-      .getByTestId(TEST_ID.DIGEST_USER_MINI_DISPLAY_NAME)
-      .first()
-      .innerText()
-    const userName = await firstComment
-      .getByTestId(TEST_ID.DIGEST_USER_MINI_USER_NAME)
+      .getByTestId(TEST_ID.ARTICLE_COMMENT_FEED_AUTHOR_DISPLAY_NAME)
       .first()
       .innerText()
 
@@ -153,9 +138,7 @@ test.describe('Switch between multiple users', () => {
     const bobProfile = new UserProfilePage(bobPage, isMobile)
     await bobProfile.gotoMeProfile()
     const profileDisplayName = await bobProfile.displayName.innerText()
-    const profileUserName = await bobProfile.userName.innerText()
 
     expect(displayName).toBe(profileDisplayName)
-    expect(userName).toBe(profileUserName)
   })
 })

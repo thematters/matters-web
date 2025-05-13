@@ -35,7 +35,6 @@ import {
   restoreImages,
   SmartLink,
 } from './extensions'
-// import { Link } from './extensions/link'
 import { makeSmartLinkOptions } from './extensions/smartLink/utils'
 import { FloatingMenu, FloatingMenuProps } from './FloatingMenu'
 import styles from './styles.module.css'

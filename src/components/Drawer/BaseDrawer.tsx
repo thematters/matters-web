@@ -3,6 +3,8 @@
 import classNames from 'classnames'
 import { CSSProperties, useEffect, useRef } from 'react'
 
+import { TEST_ID } from '~/common/enums'
+
 import { useDrawerContext } from '../Context'
 import styles from './styles.module.css'
 
@@ -138,6 +140,7 @@ export const BaseDrawer = ({
       />
       <nav
         role="navigation"
+        data-test-id={TEST_ID.DRAWER}
         style={drawerStyles}
         id={'Drawer__container' + idSuffix}
         className={`${containerClasses} ${className}`}

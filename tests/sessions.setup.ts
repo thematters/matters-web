@@ -1,7 +1,18 @@
 // global-setup.ts
-import { chromium, FullConfig } from '@playwright/test'
+import { chromium, test as setup } from '@playwright/test'
 
 import { login, User, users } from './helpers'
+
+setup('sessions', async ({ page }) => {
+  const baseURL = process.env.PLAYWRIGHT_TEST_BASE_URL
+
+  // prepare users storages
+  await prepareUserStorageState(baseURL as string, users.alice)
+  await prepareUserStorageState(baseURL as string, users.bob)
+
+  await setupEnglish(baseURL as string, users.alice)
+  await setupEnglish(baseURL as string, users.bob)
+})
 
 const prepareUserStorageState = async (baseURL: string, user: User) => {
   const browser = await chromium.launch()
@@ -12,7 +23,6 @@ const prepareUserStorageState = async (baseURL: string, user: User) => {
     email: user.email,
     password: user.password,
     page,
-    target: '/login', // redirect to login page to save some API requests
   })
 
   // Save signed-in state to storageState
@@ -42,18 +52,5 @@ const setupEnglish = async (baseURL: string, user: User) => {
       }`,
     },
   })
+  await browser.close()
 }
-
-async function globalSetup(config: FullConfig) {
-  // read `baseURL` from `playwright.config.ts`
-  const { baseURL } = config.projects[0].use
-
-  // prepare users storages
-  await prepareUserStorageState(baseURL as string, users.alice)
-  await prepareUserStorageState(baseURL as string, users.bob)
-
-  await setupEnglish(baseURL as string, users.alice)
-  await setupEnglish(baseURL as string, users.bob)
-}
-
-export default globalSetup

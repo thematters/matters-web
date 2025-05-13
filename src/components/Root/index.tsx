@@ -106,7 +106,7 @@ const Root = ({
     // identify user
     analytics.identifyUser()
 
-    // redirect afterlogged-in
+    // redirect after logged-in
     if (!getTarget()) {
       return
     }

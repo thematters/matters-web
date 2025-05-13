@@ -1,0 +1,70 @@
+---
+description:
+globs:
+alwaysApply: true
+---
+# Accessibility (A11Y)
+
+Matters Web follows these accessibility best practices to ensure the platform is usable by everyone.
+
+## Semantic HTML
+
+Use semantic HTML elements to provide meaning and structure:
+
+- `<header>`: Page header or section header
+- `<nav>`: Navigation menus
+- `<main>`: Main content area
+- `<section>`: Standalone section of content
+- `<article>`: Self-contained composition (e.g., blog post)
+- `<aside>`: Content tangentially related to the content around it
+- `<footer>`: Footer for page or section
+- `<figure>` and `<figcaption>`: Images with captions
+- `<button>`: For interactive elements that perform an action
+- `<a>`: Only for navigation to a new page or location within page
+
+Non-semantic elements like `<div>` and `<span>` should only be used when no semantic element is appropriate.
+
+## WAI-ARIA
+
+Use ARIA attributes when HTML semantics aren't sufficient:
+
+- `role`: Define the purpose of an element (e.g., `role="alert"`, `role="dialog"`)
+- `aria-label`: Provide an accessible name (e.g., `aria-label="Close dialog"`)
+- `aria-labelledby`: Reference another element as the label
+- `aria-describedby`: Reference descriptive text for an element
+- `aria-expanded`: Indicate if expandable element is open or closed
+- `aria-hidden`: Hide decorative elements from screen readers
+- `aria-live`: For dynamically updating content
+
+## Focus Management
+
+- Ensure all interactive elements are keyboard accessible
+- Maintain a logical tab order
+- Make focus visible with clear focus indicators
+- Trap focus inside modals with `<FocusLock>` component by `react-focus-lock`
+
+## Images
+
+- Always include `alt` text for images
+- Use empty `alt=""` for decorative images
+
+## Forms
+
+- Associate labels with form controls using `htmlFor`
+- Group related form elements with `<fieldset>` and `<legend>`
+- Provide clear error messages and validation
+- Use appropriate input types (e.g., `type="email"`)
+
+## Components
+
+Our accessible components include:
+
+- `<Button>`: Accessible button component
+- `<Dialog>`: Accessible modal dialog with focus management
+- `<Form>`: Accessible form controls with proper labeling
+
+## Resources
+
+- [WAI-ARIA Authoring Practices](mdc:https:/www.w3.org/TR/wai-aria-practices-1.1)
+- [MDN Web Docs - Accessibility](mdc:https:/developer.mozilla.org/en-US/docs/Web/Accessibility)
+- [WebAIM](mdc:https:/webaim.org)

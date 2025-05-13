@@ -1,0 +1,166 @@
+---
+description: Useful when you add or modify data fetching or caching logic with Apollo GraphQL
+globs:
+alwaysApply: false
+---
+# Data Fetching & State Management
+
+Matters Web uses Apollo Client for GraphQL data fetching and state management.
+
+## GraphQL Structure
+
+- `src/components/GQL/queries`: Contains reusable GraphQL queries
+- `src/components/GQL/mutations`: Contains reusable GraphQL mutations
+- Component-specific GraphQL operations are typically defined in a `gql.ts` file within each component directory
+
+## Apollo Client
+
+The Apollo Client is configured in the app entry point (`src/common/utils/apollo.ts`). It utilizes a sophisticated setup involving multiple Apollo Links (e.g., for persisted queries, file uploads, retries, error handling, and context modification) to manage requests.
+
+Key features include:
+- **Link Composition:** Chains multiple links to handle concerns like authentication, fingerprinting, Sentry integration, and directing requests based on context (e.g., public vs. private queries).
+- **Cached Data Management:** Leverages `InMemoryCache` with custom `resolvers` and `typePolicies` (including `mergeables`) for fine-grained control over how data is stored and merged. Uses fragment matching (`introspectionQueryResultData`) for accurate caching of polymorphic types.
+- **Error Handling:** Uses `onError` link for centralized logging of GraphQL and network errors.
+- **Authentication Management:** Conditionally includes credentials based on operation context.
+
+## Cache Management
+
+Apollo Client provides powerful caching capabilities that help optimize performance and user experience. There are 3 main approaches to update the cache:
+
+- **Automatic Updates**: Apollo automatically updates the cache for entities with matching IDs
+- **Refetching Queries**: Force refetch queries after mutations to ensure fresh data
+- **Manual Updates**: Directly modify the cache for complex scenarios
+
+### 1. Automatic Updates
+
+```tsx
+const TOGGLE_PIN = gql`
+  mutation TogglePin($id: ID!, $pinned: Boolean!) {
+    editArticle(input: { id: $id, pinned: $pinned }) {
+      id
+      pinned
+    }
+  }
+`
+```
+
+**When to use:** For simple mutations that modify a single entity's properties.
+
+**Key point:** Make sure your mutation returns the same fields that your queries request, including the `id` field.
+
+### 2. Refetching Queries
+
+```tsx
+// Update cache by evicting the old data and force to refetch the related queries
+const [updateArticle] = useMutation(UPDATE_ARTICLE_MUTATION, {
+  update(cache, { data: { updateArticle } }) {
+    cache.evict({ id: cache.identify(article) })
+    cache.gc()
+  },
+  onQueryUpdated(observableQuery) {
+    return observableQuery.refetch()
+  },
+})
+
+// Or without mutation
+client.refetchQueries({
+  updateCache: (cache) => {
+    cache.evict({ id: cache.identify(article) })
+    cache.gc()
+  },
+  include: ['ArticleDetailPublic'], // Optional: specify queries to refetch
+})
+
+// Update cache by refetching the given queries
+// Note: We prefer `update` & `onQueryUpdated` over `refetchQueries`
+// as we don't need to know which queries are affected by the mutation
+const [updateArticle] = useMutation(UPDATE_ARTICLE_MUTATION, {
+  refetchQueries: [
+    'ArticleDetailPublic', // By query name
+    { query: ARTICLE_DETAIL_PUBLIC, variables: { shortHash } }, // With variables
+  ],
+})
+```
+
+**When to use:** When mutations affect multiple entities or when you need to ensure the UI reflects the latest server state. Useful after complex operations like publishing content or when automatic updates aren't sufficient. This approach ensures all related pages and components are updated with the latest data.
+
+### 3. Manual Updates
+
+```tsx
+// use readQuery and writeQuery
+const [addComment] = useMutation(ADD_COMMENT, {
+  update(cache, { data: { addComment } }) {
+    const { article } = cache.readQuery({
+      query: GET_ARTICLE,
+      variables: { id: articleId },
+    })
+
+    cache.writeQuery({
+      query: GET_ARTICLE,
+      variables: { id: articleId },
+      data: {
+        article: {
+          ...article,
+          comments: [...article.comments, addComment],
+        },
+      },
+    })
+  },
+})
+
+// use cache.modify
+const [deleteComment] = useMutation(DELETE_COMMENT, {
+  update(cache, { data: { deleteComment } }) {
+    cache.modify({
+      id: cache.identify({ __typename: 'Article', id: articleId }),
+      fields: {
+        comments(existingComments = [], { readField }) {
+          return existingComments.filter(
+            (commentRef) => readField('id', commentRef) !== deleteComment.id
+          )
+        },
+      },
+    })
+  },
+})
+```
+
+**When to use:** For operations that modify relationships between entities, when invalidating stale data. This approach is useful for updating the current page's data without requiring a full refetch.
+
+### Common Patterns
+
+- **Optimistic Updates**: Immediately update UI before server responds
+- **Cache Normalization**: Apollo stores entities by ID to avoid duplication
+- **Pagination**: Use field policies with `keyArgs` for paginated data
+- **Type Policies**: Configure how specific types are stored and merged
+
+For more details, see the [Mutations](mdc:https:/www.apollographql.com/docs/react/data/mutations), [Refetching queries](mdc:https:/www.apollographql.com/docs/react/data/refetching), and [Caching in Apollo Client](mdc:https:/www.apollographql.com/docs/react/caching/overview).
+
+## Public/Private Query Splitting for Caching Optimization
+
+To enhance caching efficiency, particularly for data viewed by both visitors and logged-in users, Matters Web employs a strategy of splitting GraphQL queries into "public" and "private" versions.
+
+### Public Queries
+
+- Fetch data visible to everyone (visitors and logged-in users).
+- Are executed *without* sending user authentication cookies. This is configured in the Apollo Client setup (`src/common/utils/apollo.ts`) using a directional link and context flags (`GQL_CONTEXT_PUBLIC_QUERY_KEY`).
+- Benefit: Allows backend systems to cache responses effectively, as the request is identical for all users without credentials.
+
+### Private Queries
+
+- Fetch data specific to the logged-in user (e.g. article bookmark status).
+- Are executed *with* user authentication cookies.
+- Benefit: Ensures user-specific data is fetched securely and correctly.
+
+### Implementation Pattern
+
+1.  Components define both `public` and `private` GraphQL fragments/queries (e.g., in `ComponentName/gql.ts`).
+2.  Pages or views typically fetch public data first using mechanisms like the `usePublicQuery` hook (`src/components/GQL/hooks.ts`), which sets the appropriate context for the Apollo Link.
+3.  If the user is logged in, subsequent private queries might be fetched conditionally to retrieve user-specific details, often merging this data into the Apollo cache.
+
+### Example
+
+The `src/views/ArticleDetail/index.tsx` view first fetches `ARTICLE_DETAIL_PUBLIC` (`src/views/ArticleDetail/gql.ts`) for general article content and then conditionally fetches `ARTICLE_DETAIL_PRIVATE` (`src/views/ArticleDetail/gql.ts`) if the user is authenticated. This ensures the main article content can be aggressively cached while user-specific states (like read status or circle membership) are fetched separately when needed.
+
+This separation optimizes load times for publicly accessible content by leveraging shared caches, while still providing personalized experiences for logged-in users.
+
