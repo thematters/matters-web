@@ -23,7 +23,8 @@
   }
 }
 
-.time {
+.time,
+.translated {
   color: var(--color-grey-darker);
 }
 

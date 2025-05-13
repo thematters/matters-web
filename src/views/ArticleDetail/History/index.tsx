@@ -92,26 +92,26 @@ const BaseArticleDetailHistory = ({
   const [getTranslation, { data: translationData, loading: translating }] =
     useLazyQuery<ArticleHistoryTranslationQuery>(ARTICLE_HISTORY_TRANSLATION)
 
-  const translate = () => {
-    getTranslation({
-      variables: { version: version.id, language: preferredLang },
-    })
-
-    toast.success({
-      message: (
-        <FormattedMessage
-          defaultMessage="Translating by Google..."
-          id="17K30q"
-        />
-      ),
-    })
-  }
-
-  const toggleTranslate = () => {
+  const toggleTranslate = async () => {
     setTranslate(!translated)
 
-    if (!translated) {
-      translate()
+    if (!translated && !translating) {
+      const { error } = await getTranslation({
+        variables: { version: version.id, language: preferredLang },
+      })
+
+      if (error) {
+        setTranslate(false)
+
+        toast.error({
+          message: (
+            <FormattedMessage
+              defaultMessage="Translation error. Please try again."
+              id="E1M4vK"
+            />
+          ),
+        })
+      }
     }
   }
 
@@ -161,6 +161,7 @@ const BaseArticleDetailHistory = ({
             article={article}
             version={version}
             translated={translated}
+            translating={translating}
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
             canReadFullContent={canReadFullContent}
@@ -182,7 +183,6 @@ const BaseArticleDetailHistory = ({
             <Content
               articleId={article.id}
               content={content}
-              translating={translating}
               indentFirstLine={article.indentFirstLine}
             />
 
