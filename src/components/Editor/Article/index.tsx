@@ -107,8 +107,8 @@ export const ArticleEditor: React.FC<ArticleEditorProps> = ({
     extensions: [
       Placeholder.configure({
         placeholder: intl.formatMessage({
-          defaultMessage: 'Enter content…',
-          id: 'yCTXXb',
+          defaultMessage: 'Write your story...',
+          id: '6/eKGl',
         }),
       }),
       Mention.configure({

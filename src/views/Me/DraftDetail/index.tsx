@@ -19,6 +19,7 @@ import {
 import {
   DraftDetailStateContext,
   DraftDetailStateProvider,
+  DrawerProvider,
   EmptyLayout,
   Head,
   Layout,
@@ -47,19 +48,25 @@ import {
   SingleFileUploadMutation,
 } from '~/gql/graphql'
 
-import BottomBar from './BottomBar'
 import { DRAFT_DETAIL, DRAFT_DETAIL_VIEWER, SET_CONTENT } from './gql'
+import { MoreButton } from './MoreButton'
+import { OptionButton } from './OptionButton'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
-import Sidebar from './Sidebar'
 import styles from './styles.module.css'
-
 const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
   {
     ssr: false,
     loading: () => <SpinnerBlock />,
+  }
+)
+
+const DynamicOptionDrawer = dynamic(
+  () => import('./OptionDrawer').then((mod) => mod.OptionDrawer),
+  {
+    ssr: false,
   }
 )
 
@@ -139,6 +146,11 @@ const BaseDraftDetail = () => {
   )
   const [contentLength, setContentLength] = useState(0)
   const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
+
+  const [isOpenOptionDrawer, setIsOpenOptionDrawer] = useState(false)
+  const toggleOptionDrawer = () => {
+    setIsOpenOptionDrawer((prevState) => !prevState)
+  }
 
   useUnloadConfirm({ block: saveStatus === 'saving' && !isNewDraft() })
 
@@ -343,42 +355,40 @@ const BaseDraftDetail = () => {
   }
 
   return (
-    <Layout.Main
-      aside={
-        <Media greaterThanOrEqual="lg">
-          <Sidebar
-            draft={draft}
-            campaigns={appliedCampaigns}
-            ownCircles={ownCircles}
-          />
-        </Media>
-      }
-    >
-      <Layout.Header
-        mode="compact"
-        right={
-          <section className={styles.headerRight}>
+    <Layout
+      header={
+        <>
+          <section className={styles.header}>
             <SaveStatus status={saveStatus} />
 
-            <section>
+            <section className={styles.headerRight}>
               {isOverLength && (
                 <span className={styles.count}>
                   {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
                 </span>
               )}
+              <OptionButton onClick={toggleOptionDrawer} />
               {draft && (
-                <SettingsButton
-                  draft={draft}
-                  campaigns={appliedCampaigns}
-                  ownCircles={ownCircles}
-                  publishable={!!publishable}
-                />
+                <section className={styles.publishButtons}>
+                  <SettingsButton
+                    draft={draft}
+                    campaigns={appliedCampaigns}
+                    ownCircles={ownCircles}
+                    publishable={!!publishable}
+                  />
+                  <span className={styles.divider} />
+                  <MoreButton
+                    draft={draft}
+                    publishable={!!publishable}
+                    onClick={() => console.log('click more button')}
+                  />
+                </section>
               )}
             </section>
           </section>
-        }
-      />
-
+        </>
+      }
+    >
       <Head
         noSuffix
         title={
@@ -405,23 +415,26 @@ const BaseDraftDetail = () => {
           update={async (props) => addRequest(() => update(props))}
           upload={async (props) => addRequest(() => upload(props))}
         />
-      </Layout.Main.Spacing>
 
-      <Media lessThan="lg">
-        <BottomBar
-          draft={draft}
-          ownCircles={ownCircles}
-          campaigns={appliedCampaigns}
-        />
-      </Media>
-    </Layout.Main>
+        <PublishState draft={draft} />
+
+        <Media greaterThan="sm">
+          <DynamicOptionDrawer
+            isOpen={isOpenOptionDrawer}
+            onClose={toggleOptionDrawer}
+          />
+        </Media>
+      </Layout.Main.Spacing>
+    </Layout>
   )
 }
 
 const DraftDetail = () => (
-  <DraftDetailStateProvider>
-    <BaseDraftDetail />
-  </DraftDetailStateProvider>
+  <DrawerProvider>
+    <DraftDetailStateProvider>
+      <BaseDraftDetail />
+    </DraftDetailStateProvider>
+  </DrawerProvider>
 )
 
 export default DraftDetail
