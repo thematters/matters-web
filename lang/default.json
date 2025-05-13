@@ -188,12 +188,6 @@
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "17K30q": {
-    "defaultMessage": "Translating by Google..."
-  },
-  "16zJ3o": {
-    "defaultMessage": "Enter summary…"
-  },
   "18HJlm": {
     "defaultMessage": "Tag"
   },

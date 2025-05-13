@@ -188,12 +188,6 @@
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "17K30q": {
-    "defaultMessage": "正在透過 Google 翻譯..."
-  },
-  "16zJ3o": {
-    "defaultMessage": "自定義摘要…"
-  },
   "18HJlm": {
     "defaultMessage": "標籤"
   },
