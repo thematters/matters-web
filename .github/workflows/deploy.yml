@@ -45,7 +45,15 @@ jobs:
             endpoint = ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
           disable_base64: true
 
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        id: node_modules_cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-v18-npm-v4-${{ hashFiles('package-lock.json') }}
+
       - name: Install Dependencies
+        if: steps.node_modules_cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Generate Types (develop)
