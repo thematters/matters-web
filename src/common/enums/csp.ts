@@ -190,6 +190,7 @@ const FRAME_SRC = [
   'www.instagram.com',
   'jsfiddle.net',
   'codepen.io',
+  'web-ad.matters.town',
 
   // ReCaptcha
   'www.google.com/recaptcha/',
