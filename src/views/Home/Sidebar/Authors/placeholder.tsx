@@ -9,7 +9,6 @@ export const AuthorsPlaceholder = () => {
       <UserDigestRichPlaceholder />
       <UserDigestRichPlaceholder />
       <UserDigestRichPlaceholder />
-      <UserDigestRichPlaceholder />
     </section>
   )
 }
