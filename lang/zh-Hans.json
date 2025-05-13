@@ -188,9 +188,6 @@
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "17K30q": {
-    "defaultMessage": "正在通过 Google 翻译..."
-  },
   "18HJlm": {
     "defaultMessage": "标签"
   },
@@ -260,6 +257,9 @@
   },
   "25oM9Q": {
     "defaultMessage": "排序"
+  },
+  "2C42E7": {
+    "defaultMessage": "翻译中..."
   },
   "2CqWQE": {
     "defaultMessage": "总数",
@@ -965,6 +965,9 @@
     "defaultMessage": "在已删除动态中留言",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
+  "E1M4vK": {
+    "defaultMessage": "翻译失败，请稍后再试"
+  },
   "E3uFyt": {
     "defaultMessage": "动态",
     "description": "src/components/Forms/MomentForm/index.tsx"
@@ -1070,9 +1073,6 @@
   },
   "G/yZLu": {
     "defaultMessage": "移除"
-  },
-  "G0pqnh": {
-    "defaultMessage": "阅读原文"
   },
   "G4KR8j": {
     "defaultMessage": "图片",
@@ -3215,6 +3215,9 @@
     "defaultMessage": "刚接触加密钱包？参考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "vEdCjn": {
+    "defaultMessage": "原文{originalLang}"
+  },
   "vH8sCb": {
     "defaultMessage": "我的围炉"
   },
@@ -3261,6 +3264,9 @@
   },
   "wCgTu5": {
     "defaultMessage": "评论"
+  },
+  "wCy/Tc": {
+    "defaultMessage": "翻译"
   },
   "wDX7zn": {
     "defaultMessage": "草稿不存在",
@@ -3470,6 +3476,9 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zlug1R": {
+    "defaultMessage": "已翻译成{targetLang}，显示"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",

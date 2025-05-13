@@ -69,7 +69,6 @@ import TagList from './TagList'
 import DesktopToolbar from './Toolbar/DesktopToolbar'
 import FixedToolbar from './Toolbar/FixedToolbar'
 import FloatToolbar from './Toolbar/FloatToolbar'
-import TranslationToast from './TranslationToast'
 
 const DynamicSupportWidget = dynamic(() => import('./Support/SupportWidget'), {
   ssr: true, // enable for first screen
@@ -177,47 +176,37 @@ const BaseArticleDetail = ({
   const [getTranslation, { data: translationData, loading: translating }] =
     useLazyQuery<ArticleTranslationQuery>(ARTICLE_TRANSLATION)
 
-  const translate = () => {
-    getTranslation({
-      variables: { shortHash: article.shortHash, language: preferredLang },
-    })
-
-    toast.success({
-      message: (
-        <FormattedMessage
-          defaultMessage="Translating by Google..."
-          id="17K30q"
-        />
-      ),
-    })
-  }
-
-  const toggleTranslate = () => {
+  const toggleTranslate = async () => {
     setTranslate(!translated)
 
-    if (!translated) {
-      translate()
+    if (!translated && !translating) {
+      const { error } = await getTranslation({
+        variables: { shortHash: article.shortHash, language: preferredLang },
+      })
+
+      if (error) {
+        setTranslate(false)
+
+        toast.error({
+          message: (
+            <FormattedMessage
+              defaultMessage="Translation error. Please try again."
+              id="E1M4vK"
+            />
+          ),
+        })
+      }
     }
   }
 
+  // reset to original language when preferred language is changed
+  useEffect(() => {
+    setTranslate(false)
+  }, [preferredLang])
+
   useEffect(() => {
     if (!!autoTranslation) {
-      toast.success({
-        message: (
-          <TranslationToast.Content language={autoTranslation.language} />
-        ),
-        actions: [
-          {
-            content: (
-              <FormattedMessage
-                defaultMessage="View original content"
-                id="G0pqnh"
-              />
-            ),
-            onClick: toggleTranslate,
-          },
-        ],
-      })
+      setTranslate(true)
     }
   }, [])
 
@@ -329,6 +318,7 @@ const BaseArticleDetail = ({
           <MetaInfo
             article={article}
             translated={translated}
+            translating={translating}
             canTranslate={canTranslate}
             toggleTranslate={toggleTranslate}
             canReadFullContent={canReadFullContent}
@@ -351,7 +341,6 @@ const BaseArticleDetail = ({
               articleId={article.id}
               content={content}
               indentFirstLine={article.indentFirstLine}
-              translating={translating}
             />
 
             {circle && !canReadFullContent && (

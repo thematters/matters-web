@@ -188,9 +188,6 @@
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
   },
-  "17K30q": {
-    "defaultMessage": "Translating by Google..."
-  },
   "18HJlm": {
     "defaultMessage": "Tag"
   },
@@ -260,6 +257,9 @@
   },
   "25oM9Q": {
     "defaultMessage": "Sort"
+  },
+  "2C42E7": {
+    "defaultMessage": "Translating..."
   },
   "2CqWQE": {
     "defaultMessage": "Total",
@@ -965,6 +965,9 @@
     "defaultMessage": "commented on a deleted moment",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
+  "E1M4vK": {
+    "defaultMessage": "Translation error. Please try again."
+  },
   "E3uFyt": {
     "defaultMessage": "Moment",
     "description": "src/components/Forms/MomentForm/index.tsx"
@@ -1070,9 +1073,6 @@
   },
   "G/yZLu": {
     "defaultMessage": "Remove"
-  },
-  "G0pqnh": {
-    "defaultMessage": "View original content"
   },
   "G4KR8j": {
     "defaultMessage": "Image",
@@ -3215,6 +3215,9 @@
     "defaultMessage": "Don't have a wallet yet? Check the",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "vEdCjn": {
+    "defaultMessage": "Original {originalLang}"
+  },
   "vH8sCb": {
     "defaultMessage": "Circle"
   },
@@ -3261,6 +3264,9 @@
   },
   "wCgTu5": {
     "defaultMessage": "Comments"
+  },
+  "wCy/Tc": {
+    "defaultMessage": "Translate"
   },
   "wDX7zn": {
     "defaultMessage": "Draft not found",
@@ -3470,6 +3476,9 @@
   "zllCbU": {
     "defaultMessage": "left a comment in {circleName}",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zlug1R": {
+    "defaultMessage": "Translated into {targetLang}, show"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

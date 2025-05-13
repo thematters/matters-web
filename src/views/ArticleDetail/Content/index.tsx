@@ -29,12 +29,10 @@ const Content = ({
   articleId,
   content,
   indentFirstLine,
-  translating,
 }: {
   articleId: string
   content: string
   indentFirstLine: boolean
-  translating?: boolean
 }) => {
   const viewer = useContext(ViewerContext)
   const [read] = useMutation<ReadArticleMutation>(READ_ARTICLE, undefined, {
@@ -127,7 +125,6 @@ const Content = ({
         className={classNames({
           'u-content-article': true,
           [styles.indented]: indentFirstLine,
-          [styles.translating]: translating,
         })}
         dangerouslySetInnerHTML={{
           __html: optimizeEmbed(content),

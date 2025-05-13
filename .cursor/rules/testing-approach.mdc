@@ -1,0 +1,44 @@
+---
+description: Useful when you add or modify tests
+globs:
+alwaysApply: false
+---
+# Testing Approach
+
+Matters Web uses a combination of unit, component, and end-to-end (E2E) tests.
+
+## Testing Framework
+
+- Vitest and Testing Library for unit and component tests
+- Playwright for end-to-end (E2E) tests
+
+## Test Structure
+
+- Unit and component tests are typically located in a `ComponentName.test.tsx` file within each component
+- End-to-end tests are in the `tests/` directory
+
+## Running Tests
+
+- `npm run test`: Run all tests
+- `npm run test:unit`: Run unit and component tests
+- `npm run test:e2e`: Run end-to-end tests
+- `npm run test:unit:coverage`: Generate coverage report
+
+## Testing Utilities
+
+- Mock data and fixtures for testing
+- Utility functions for common test operations
+- Custom test renderers for components with specific requirements
+
+## Key Test Files
+
+- [vitest.config.ts](mdc:vitest.config.ts): Vitest configuration
+- [vitest.setup.ts](mdc:vitest.setup.ts): Vitest setup file
+- [playwright.config.ts](mdc:playwright.config.ts): Playwright configuration
+
+## Testing Best Practices
+
+- Make sure to create corresponding unit tests when adding a new component.
+- Tests should be independent and not rely on the state of other tests
+- Use testing-library queries that align with how users interact with the application
+- Mock API responses for component tests
