@@ -7,12 +7,12 @@ import { TogglePinChannelArticlesMutation } from '~/gql/graphql'
 
 const TOGGLE_PIN_CHANNEL_ARTICLES = gql`
   mutation togglePinChannelArticles(
-    $channel: ID!
+    $channels: [ID!]!
     $articles: [ID!]!
     $pinned: Boolean!
   ) {
     togglePinChannelArticles(
-      input: { channel: $channel, articles: $articles, pinned: $pinned }
+      input: { channels: $channels, articles: $articles, pinned: $pinned }
     ) {
       id
       shortHash
@@ -33,7 +33,7 @@ const TogglePinChannelArticles = ({
     TOGGLE_PIN_CHANNEL_ARTICLES,
     {
       variables: {
-        channel: channelId,
+        channels: [channelId],
         articles: [articleId],
         pinned: !pinned,
       },
