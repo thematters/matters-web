@@ -20,10 +20,7 @@
 .oneColumnLayout {
   /* stylelint-disable-next-line property-no-unknown */
   composes: layoutbase;
-
-  @media (--lg-up) {
-    grid-template-columns: minmax(0, 1fr) 688px minmax(0, 1fr);
-  }
+  grid-template-columns: minmax(0, 1fr) minmax(0, 688px) minmax(0, 1fr);
 
   & .main {
     grid-column: main;
@@ -44,12 +41,13 @@
     @media (--sm-up) {
       display: grid;
       grid-template-areas: 'content';
-      grid-template-columns: minmax(0, 100%);
+      grid-template-columns: minmax(0, 688px);
+      margin: 0 auto;
     }
 
     @media (--md-up) {
       grid-template-areas: 'content right';
-      grid-template-columns: minmax(0, 100%) 16.5rem;
+      grid-template-columns: minmax(0, 688px) 16.5rem;
       grid-column-gap: 3rem;
 
       &.leftLayout {

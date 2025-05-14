@@ -35,6 +35,7 @@ const useLayoutType = () => {
     isInPath('CIRCLE_SETTINGS_EDIT_PROFILE') ||
     isInPath('CIRCLE_SETTINGS_MANAGE_INVITATION') ||
     isInPath('CIRCLE_CREATION') ||
+    isInPath('CIRCLE_ANALYTICS') ||
     // Misc
     isInPath('GUIDE') ||
     isInPath('COMMUNITY') ||
@@ -76,7 +77,7 @@ const useLayoutType = () => {
     isInPath('ME_DRAFT_NEW') ||
     isInPath('ME_DRAFT_DETAIL') ||
     // Campaign
-    isInPath('CAMPAIGN_DETAIL')
+    (isInPath('CAMPAIGN_DETAIL') && !isInWritingChallengeChannel)
 
   const isThreeColumnLayout =
     isHome ||

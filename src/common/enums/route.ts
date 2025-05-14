@@ -39,6 +39,7 @@ type ROUTE_KEY =
   | 'CIRCLE_SETTINGS_EDIT_PROFILE'
   | 'CIRCLE_SETTINGS_MANAGE_INVITATION'
   | 'CIRCLE_CREATION'
+  | 'CIRCLE_ANALYTICS'
   // Campaign
   | 'CAMPAIGN_DETAIL'
   // Me
@@ -131,7 +132,7 @@ export const PROTECTED_ROUTES: {
     pathname: '/[name]/settings/manage-invitation',
   },
   { key: 'CIRCLE_CREATION', pathname: '/circles/create' },
-
+  { key: 'CIRCLE_ANALYTICS', pathname: '/[name]/analytics' },
   // OAuth
   { key: 'OAUTH_AUTHORIZE', pathname: '/oauth/authorize' },
 ]
