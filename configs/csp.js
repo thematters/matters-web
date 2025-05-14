@@ -149,8 +149,7 @@ const CONNECT_SRC = [
   'ipfs.w3s.link',
 
   // Sentry
-  'sentry.io',
-  '*.ingest.sentry.io',
+  '*.ingest.us.sentry.io',
 ]
 
 const FRAME_SRC = [

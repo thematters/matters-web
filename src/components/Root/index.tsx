@@ -65,8 +65,8 @@ const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
 // Sentry
 import('@sentry/browser').then((Sentry) => {
   Sentry.init({
-    enabled: !isLocal,
-    dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
+    enabled: !isLocal && typeof window !== 'undefined',
+    dsn: `https://${process.env.NEXT_PUBLIC_SENTRY_PUBLIC_KEY}@${process.env.NEXT_PUBLIC_SENTRY_DOMAIN}/${process.env.NEXT_PUBLIC_SENTRY_PROJECT_ID}`,
     debug: !isProd,
     environment: isProd ? 'production' : 'development',
     release: packageJson.version,
@@ -75,6 +75,7 @@ import('@sentry/browser').then((Sentry) => {
     tracesSampleRate: 0.1,
     beforeBreadcrumb: excludeGraphQLFetch,
     integrations: [Sentry.browserTracingIntegration()],
+    tracePropagationTargets: ['localhost', /graphql/],
   })
 })
 
