@@ -53,6 +53,7 @@
     "@stripe/stripe-js": "^1.54.1",
     "@tippyjs/react": "^4.2.6",
     "@use-gesture/react": "^10.3.1",
+    "apollo-link-sentry": "^4.3.0",
     "apollo-upload-client": "^18.0.1",
     "autosize": "^6.0.1",
     "classnames": "^2.3.2",

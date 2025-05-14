@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { excludeGraphQLFetch } from 'apollo-link-sentry'
 import type { IncomingHttpHeaders } from 'http'
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
@@ -63,6 +64,7 @@ import('@sentry/browser').then((Sentry) => {
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
     ignoreErrors: [/.*Timeout.*/, /.*Network.*/],
     sampleRate: 0.1,
+    beforeBreadcrumb: excludeGraphQLFetch,
   })
 })
 
