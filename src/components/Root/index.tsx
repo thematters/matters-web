@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
 import { WagmiConfig } from 'wagmi'
 
+import packageJson from '@/package.json'
 import {
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
@@ -28,6 +29,9 @@ import {
   ViewerProvider,
 } from '~/components'
 import { RootQueryPrivateQuery } from '~/gql/graphql'
+
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 import { ROOT_QUERY_PRIVATE } from './gql'
 
@@ -61,10 +65,16 @@ const DynamicFingerprint = dynamic(() => import('~/components/Fingerprint'), {
 // Sentry
 import('@sentry/browser').then((Sentry) => {
   Sentry.init({
+    enabled: !isLocal,
     dsn: process.env.NEXT_PUBLIC_SENTRY_DSN || '',
+    debug: !isProd,
+    environment: isProd ? 'production' : 'development',
+    release: packageJson.version,
     ignoreErrors: [/.*Timeout.*/, /.*Network.*/],
     sampleRate: 0.1,
+    tracesSampleRate: 0.1,
     beforeBreadcrumb: excludeGraphQLFetch,
+    integrations: [Sentry.browserTracingIntegration()],
   })
 })
 

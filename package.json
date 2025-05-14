@@ -47,7 +47,7 @@
     "@reach/alert": "^0.18.0",
     "@reach/dialog": "^0.18.0",
     "@reach/visually-hidden": "^0.18.0",
-    "@sentry/browser": "^7.57.0",
+    "@sentry/browser": "^9.18.0",
     "@storybook/addon-styling-webpack": "^0.0.5",
     "@stripe/react-stripe-js": "^2.1.1",
     "@stripe/stripe-js": "^1.54.1",
