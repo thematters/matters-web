@@ -215,6 +215,7 @@ const FRAME_SRC = [
   'yads.c.yimg.jp',
   'safeframe.googlesyndication.com',
   'pagead2.googlesyndication.com',
+  'vercel.live',
 
   // Google Ads
   '*.googlesyndication.com',
