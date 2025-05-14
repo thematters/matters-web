@@ -2,20 +2,23 @@ import { useIntl } from 'react-intl'
 
 import { Drawer } from '~/components'
 
-import { OptionContent } from '../OptionContent'
+import { OptionContent, OptionContentProps } from '../OptionContent'
 
 type OptionDrawerProps = {
   isOpen: boolean
   onClose: () => void
   title?: string
   children?: React.ReactNode
-}
+} & OptionContentProps
 
 export const OptionDrawer: React.FC<OptionDrawerProps> = ({
   isOpen,
   onClose,
   title,
   children,
+  draft,
+  campaigns,
+  ownCircles,
 }) => {
   const intl = useIntl()
 
@@ -32,7 +35,11 @@ export const OptionDrawer: React.FC<OptionDrawerProps> = ({
         fixedWidth
       />
       <Drawer.Content fixedWidth>
-        <OptionContent />
+        <OptionContent
+          draft={draft}
+          campaigns={campaigns}
+          ownCircles={ownCircles}
+        />
         {children}
       </Drawer.Content>
     </Drawer>

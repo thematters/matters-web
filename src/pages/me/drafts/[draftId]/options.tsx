@@ -1,9 +1,11 @@
-import { Protected } from '~/components'
+import { DraftDetailStateProvider, Protected } from '~/components'
 import MeDraftDetailOptionsPage from '~/views/Me/DraftDetail/OptionsPage'
 
 const ProtectedMeDraftDetailOptionsPage = () => (
   <Protected>
-    <MeDraftDetailOptionsPage />
+    <DraftDetailStateProvider>
+      <MeDraftDetailOptionsPage />
+    </DraftDetailStateProvider>
   </Protected>
 )
 

@@ -422,6 +422,9 @@ const BaseDraftDetail = () => {
           <DynamicOptionDrawer
             isOpen={isOpenOptionDrawer}
             onClose={toggleOptionDrawer}
+            draft={draft}
+            campaigns={appliedCampaigns}
+            ownCircles={ownCircles}
           />
         </Media>
       </Layout.Main.Spacing>
