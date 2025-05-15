@@ -45,11 +45,11 @@ const EditDraftCampaign = ({ draft, campaigns }: OptionItemProps) => {
 }
 
 export const OptionContent = (props: OptionContentProps) => {
-  const [type, setType] = useState<'contentAndTypography' | 'settings'>(
-    'contentAndTypography'
+  const [type, setType] = useState<'contentAndLayout' | 'settings'>(
+    'contentAndLayout'
   )
 
-  const isContentAndTypography = type === 'contentAndTypography'
+  const isContentAndLayout = type === 'contentAndLayout'
   const isSettings = type === 'settings'
 
   const isPending = props.draft.publishState === 'pending'
@@ -61,8 +61,8 @@ export const OptionContent = (props: OptionContentProps) => {
       <section className={styles.header}>
         <Tabs noSpacing fill>
           <Tabs.Tab
-            selected={isContentAndTypography}
-            onClick={() => setType('contentAndTypography')}
+            selected={isContentAndLayout}
+            onClick={() => setType('contentAndLayout')}
           >
             <FormattedMessage
               defaultMessage="Content and Layout"
@@ -82,7 +82,7 @@ export const OptionContent = (props: OptionContentProps) => {
       </section>
 
       <section className={styles.content}>
-        {isContentAndTypography && (
+        {isContentAndLayout && (
           <EditDraftCampaign {...props} disabled={disabled} />
         )}
       </section>
