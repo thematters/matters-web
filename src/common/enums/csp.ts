@@ -101,6 +101,7 @@ const IMG_SRC = [
   // Google AdSense
   'pagead2.googlesyndication.com',
   'googleads.g.doubleclick.net',
+  '*.adtrafficquality.google',
 ]
 
 const MEDIA_SRC = IMG_SRC
