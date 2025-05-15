@@ -26,7 +26,7 @@
     "lint:ts:fix": "next lint --fix",
     "lint:css": "stylelint 'src/**/*.css'",
     "analyze": "ANALYZE=true next build",
-    "gen:type": "GRAPHQL_SCHEMA_URL=https://matters.icu/graphql graphql-codegen --config codegen.ts",
+    "gen:type": "GRAPHQL_SCHEMA_URL=https://server.matters.icu/graphql graphql-codegen --config codegen.ts",
     "gen:type:prod": "GRAPHQL_SCHEMA_URL=https://server.matters.town/graphql graphql-codegen --config codegen.ts",
     "gen:fragmentTypes": "node bin/buildFragmentTypes.js",
     "storybook": "storybook dev -p 6006",
