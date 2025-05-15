@@ -2197,6 +2197,9 @@
   "al5/yQ": {
     "defaultMessage": "晚鳥參與通過"
   },
+  "ammOoM": {
+    "defaultMessage": "選擇或上傳正方形圖片"
+  },
   "aqX2Bt": {
     "defaultMessage": "前往首頁",
     "description": "src/views/Callback/UI.tsx"

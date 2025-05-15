@@ -17,8 +17,18 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
     <SetCover.Dialog cover={cover} {...restProps}>
       {({ openDialog: openSetCoverDialog }) => (
         <Box
-          icon={<Icon icon={IconImage} size={24} />}
+          rightButton={
+            <button onClick={openSetCoverDialog} className={styles.rightButton}>
+              <Icon icon={IconImage} size={24} color="greyDarker" />
+            </button>
+          }
           title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
+          subtitle={
+            <FormattedMessage
+              defaultMessage="Select or upload a square image"
+              id="ammOoM"
+            />
+          }
           onClick={openSetCoverDialog}
           disabled={disabled}
         >

@@ -2,6 +2,13 @@
   padding: var(--sp16) var(--sp16) 0;
 }
 
+.rightButton {
+  width: 4.5rem;
+  height: 4.5rem;
+  background-color: var(--color-grey-lighter);
+  border-radius: 0.5rem;
+}
+
 .cover {
   position: relative;
   width: 100%;

@@ -2197,6 +2197,9 @@
   "al5/yQ": {
     "defaultMessage": "晚鸟参与通过"
   },
+  "ammOoM": {
+    "defaultMessage": "选择或上传正方形图片"
+  },
   "aqX2Bt": {
     "defaultMessage": "前往首页",
     "description": "src/views/Callback/UI.tsx"

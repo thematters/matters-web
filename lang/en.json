@@ -2197,6 +2197,9 @@
   "al5/yQ": {
     "defaultMessage": "Joined successfully"
   },
+  "ammOoM": {
+    "defaultMessage": "Select or upload a square image"
+  },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/UI.tsx"

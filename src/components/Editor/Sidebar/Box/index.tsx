@@ -36,28 +36,33 @@ const Box: React.FC<React.PropsWithChildren<BoxProps>> = ({
 
   return (
     <section className={boxClasses}>
-      <header className={styles.header}>
-        <TextIcon icon={icon} size={16} weight="medium" spacing={8}>
-          {title}
-        </TextIcon>
+      <section className={styles.top}>
+        <section className={styles.left}>
+          <header className={styles.header}>
+            <TextIcon icon={icon} size={14} weight="medium" spacing={8}>
+              {title}
+            </TextIcon>
+          </header>
 
-        {rightButton}
+          {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+        </section>
 
-        {!rightButton && onClick && (
-          <Button
-            onClick={onClick}
-            bgActiveColor="greyLighter"
-            spacing={[8, 8]}
-            aria-haspopup="dialog"
-            aria-label={title}
-          >
-            <Icon icon={IconEdit} color="grey" />
-          </Button>
-        )}
-      </header>
+        <section className={styles.right}>
+          {rightButton}
 
-      {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
-
+          {!rightButton && onClick && (
+            <Button
+              onClick={onClick}
+              bgActiveColor="greyLighter"
+              spacing={[8, 8]}
+              aria-haspopup="dialog"
+              aria-label={title}
+            >
+              <Icon icon={IconEdit} color="grey" />
+            </Button>
+          )}
+        </section>
+      </section>
       {children}
     </section>
   )
