@@ -27,11 +27,6 @@ export class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: Error, info: any): void {
-    // Add info to Sentry
-    import('@sentry/browser').then((Sentry) => {
-      Sentry.captureException(error)
-    })
-
     const { onError } = this.props
 
     if (typeof onError === 'function') {
