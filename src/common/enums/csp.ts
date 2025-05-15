@@ -93,6 +93,10 @@ const IMG_SRC = [
 
   // Billboard
   process.env.NEXT_PUBLIC_BILLBOARD_IMAGE_URL,
+
+  // Google AdSense
+  'pagead2.googlesyndication.com',
+  'googleads.g.doubleclick.net',
 ]
 
 const MEDIA_SRC = IMG_SRC
@@ -149,6 +153,11 @@ const CONNECT_SRC = [
 
   'ipfs-gateway.matters.town/ipfs/',
   'ipfs.w3s.link',
+
+  // Google AdSense
+  '*.adtrafficquality.google',
+  'adservice.google.com',
+  '*.doubleclick.net',
 ]
 
 const FRAME_SRC = [
@@ -180,6 +189,8 @@ const FRAME_SRC = [
 
   // Google AdSense
   'pagead2.googlesyndication.com',
+  'googleads.g.doubleclick.net',
+  'tpc.googlesyndication.com',
 ]
 
 export const CSP_POLICY = Object.entries({
