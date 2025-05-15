@@ -197,9 +197,6 @@
   "16zJ3o": {
     "defaultMessage": "自定義摘要…"
   },
-  "17K30q": {
-    "defaultMessage": "正在透過 Google 翻譯..."
-  },
   "18HJlm": {
     "defaultMessage": "標籤"
   },
@@ -269,6 +266,9 @@
   },
   "25oM9Q": {
     "defaultMessage": "排序"
+  },
+  "2C42E7": {
+    "defaultMessage": "翻譯中..."
   },
   "2CqWQE": {
     "defaultMessage": "總數",
@@ -963,6 +963,9 @@
     "defaultMessage": "在已刪除動態中留言",
     "description": "src/components/Notice/CommentNotice/MomentNewCommentNotice.tsx"
   },
+  "E1M4vK": {
+    "defaultMessage": "翻譯失敗，請稍後再試"
+  },
   "E3uFyt": {
     "defaultMessage": "動態",
     "description": "src/components/Forms/MomentForm/index.tsx"
@@ -1068,9 +1071,6 @@
   },
   "G/yZLu": {
     "defaultMessage": "移除"
-  },
-  "G0pqnh": {
-    "defaultMessage": "閱讀原文"
   },
   "G4KR8j": {
     "defaultMessage": "影像",
@@ -2365,10 +2365,6 @@
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
   },
-  "eVq7Ji": {
-    "defaultMessage": "自由寫",
-    "description": "src/components/Layout/SideChannelNav/index.tsx"
-  },
   "eWXgsZ": {
     "defaultMessage": "清空内容"
   },
@@ -3203,6 +3199,9 @@
     "defaultMessage": "剛接觸加密錢包？參考 ",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
   },
+  "vEdCjn": {
+    "defaultMessage": "原文 {originalLang}"
+  },
   "vH8sCb": {
     "defaultMessage": "我的圍爐"
   },
@@ -3249,6 +3248,9 @@
   },
   "wCgTu5": {
     "defaultMessage": "評論"
+  },
+  "wCy/Tc": {
+    "defaultMessage": "翻譯"
   },
   "wDX7zn": {
     "defaultMessage": "草稿不存在",
@@ -3462,6 +3464,9 @@
   "zllCbU": {
     "defaultMessage": "在 {circleName} 中留言",
     "description": "src/components/Notice/CircleNotice/CircleNewDiscussionComments.tsx"
+  },
+  "zlug1R": {
+    "defaultMessage": "已翻譯成{targetLang}，顯示"
   },
   "zvNfwL": {
     "defaultMessage": "操作過於頻繁，請稍候重試",

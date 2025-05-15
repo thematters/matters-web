@@ -2,9 +2,8 @@ import gql from 'graphql-tag'
 import { useContext, useEffect, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
-import { TEMPORARY_CHANNEL_URL } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { LanguageContext, SquareTabs, useRoute } from '~/components'
+import { LanguageContext, SquareTabs, useChannels } from '~/components'
 import {
   ArticleFeedsCampaignPublicFragment,
   ArticleFeedsTabsCampaignFragment,
@@ -30,7 +29,6 @@ const ArticleFeedsTabs = ({
   setFeedType,
   campaign,
 }: ArticleFeedsTabsProps) => {
-  const { isPathStartWith } = useRoute()
   const { lang } = useContext(LanguageContext)
   const intl = useIntl()
   const stages = campaign.stages || []
@@ -55,14 +53,14 @@ const ArticleFeedsTabs = ({
     return now >= new Date(startedAt)
   }
 
-  const isInTemporaryChannel = isPathStartWith(TEMPORARY_CHANNEL_URL, true)
+  const { isInWritingChallengeChannel } = useChannels()
 
   const shouldShowFeaturedTab = campaign.featuredArticles.totalCount > 0
   const shouldShowAnnouncementTab = campaign.announcements.length > 0
 
   return (
     <section className={styles.tabs}>
-      <SquareTabs spacing={!isInTemporaryChannel ? 'sm' : undefined}>
+      <SquareTabs spacing={!isInWritingChallengeChannel ? 'sm' : undefined}>
         <SquareTabs.Tab
           ref={(el) => (tabsRef.current[FEED_TYPE_ALL] = el)}
           selected={feedType === FEED_TYPE_ALL}

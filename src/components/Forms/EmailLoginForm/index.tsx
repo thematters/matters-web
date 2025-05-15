@@ -10,11 +10,13 @@ import {
   COOKIE_TOKEN_NAME,
   COOKIE_USER_GROUP,
   ERROR_CODES,
+  PATHS,
   REFERRAL_QUERY_REFERRAL_KEY,
   REFERRAL_STORAGE_REFERRAL_CODE,
   SEND_CODE_COUNTDOWN,
 } from '~/common/enums'
 import {
+  getTarget,
   parseFormSubmitErrors,
   setCookies,
   signinCallbackUrl,
@@ -92,7 +94,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   )
   const { lang } = useContext(LanguageContext)
 
-  const { getQuery } = useRoute()
+  const { getQuery, router } = useRoute()
   const referralCode =
     getQuery(REFERRAL_QUERY_REFERRAL_KEY) ||
     storage.get<{ referralCode: string }>(REFERRAL_STORAGE_REFERRAL_CODE)
@@ -170,6 +172,11 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         }
 
         closeDialog?.()
+
+        // redirect to homepage if the user is in page and not `?target`
+        if (isInPage && !getTarget()) {
+          router.push(PATHS.HOME)
+        }
       } catch (error) {
         const [messages, codes] = parseFormSubmitErrors(error as any)
         setErrorCode(codes[0])

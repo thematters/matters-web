@@ -1,20 +1,23 @@
 import classnames from 'classnames'
-import { useLayoutEffect } from 'react'
+import { useContext, useLayoutEffect } from 'react'
 import { useRef, useState } from 'react'
 
+import { CHANNEL_PATH_TYPES } from '~/common/enums'
 import { analytics } from '~/common/utils'
-import { LinkWrapper, Tooltip } from '~/components'
+import { LanguageContext, LinkWrapper, Tooltip } from '~/components'
 import { useRoute } from '~/components/Hook/useRoute'
-import { ChannelsQuery } from '~/gql/graphql'
+import { RootQueryPrivateQuery } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 type ChannelItemProps = {
-  channel: ChannelsQuery['channels'][number]
+  channel: RootQueryPrivateQuery['channels'][number]
 }
 
 const ChannelItem = ({ channel }: ChannelItemProps) => {
   const { getQuery } = useRoute()
+  const { lang } = useContext(LanguageContext)
+
   const shortHash = getQuery('shortHash')
 
   const [lineClampable, setLineClampable] = useState(false)
@@ -38,11 +41,28 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
     setFirstRender(false)
   }, [])
 
-  if (!channel || channel.__typename !== 'TopicChannel') {
+  if (
+    !channel ||
+    (channel.__typename !== 'TopicChannel' &&
+      channel.__typename !== 'CurationChannel' &&
+      channel.__typename !== 'WritingChallenge')
+  ) {
     return null
   }
 
-  const channelName = channel.name
+  const isWritingChallenge = channel.__typename === 'WritingChallenge'
+  const isCurationChannel = channel.__typename === 'CurationChannel'
+
+  const pathType = isWritingChallenge
+    ? CHANNEL_PATH_TYPES.WRITING_CHALLENGE
+    : CHANNEL_PATH_TYPES.REGULAR_CHANNEL
+
+  const channelName =
+    lang === 'zh_hans'
+      ? channel.nameZhHans
+      : lang === 'zh_hant'
+        ? channel.nameZhHant
+        : channel.nameEn
 
   return (
     <Tooltip
@@ -54,11 +74,12 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
       disabled={!lineClampable}
     >
       <LinkWrapper
-        href={`/c/${channel.shortHash}`}
+        href={`/${pathType}/${channel.shortHash}`}
         ref={node}
         className={classnames({
           [styles.item]: true,
           [styles.selectedChannel]: shortHash === channel.shortHash,
+          [styles.temporaryChannel]: isWritingChallenge || isCurationChannel,
           [styles.lineClampable]: !firstRender && lineClampable,
         })}
         onClick={() => {

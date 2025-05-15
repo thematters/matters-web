@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconCircleTimes } from '@/public/static/icons/24px/circle-times-fill.svg'
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
+import { TEST_ID } from '~/common/enums'
 import { Icon, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
 
@@ -46,7 +47,11 @@ export const InlineTag = ({
   }
 
   return (
-    <span className={tagClasses} onClick={onClick}>
+    <span
+      className={tagClasses}
+      onClick={onClick}
+      data-test-id={TEST_ID.DIGEST_TAG_INLINE}
+    >
       <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
         <span className={styles.name}>{tagName}</span>
       </TextIcon>

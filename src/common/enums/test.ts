@@ -34,8 +34,10 @@ export enum TEST_ID {
   DIGEST_TAG_BOOKMARK = 'digest/tag/bookmark',
   DIGEST_TAG_FEED = 'digest/tag/feed',
   DIGEST_TAG_FEED_NUM_ARTICLES = 'digest/tag/feed/num-articles',
-  DIGEST_TAG_RICH = 'digest/tag/rich',
-  DIGEST_TAG_SIDEBAR = 'digest/tag/sidebar',
+  DIGEST_TAG_ARTICLE = 'digest/tag/article',
+  DIGEST_TAG_INLINE = 'digest/tag/inline',
+  DIGEST_TAG_LIST = 'digest/tag/list',
+  DIGEST_TAG_PLAIN = 'digest/tag/plain',
   DIGRET_CIRCLE_PLAIN = 'digest/circle/plain',
   DIGEST_CIRCLE_RICH = 'digest/circle/rich',
   DIGEST_CIRCLE_TITLE = 'digest/circle/title',
@@ -61,6 +63,8 @@ export enum TEST_ID {
   DIALOG_DELETE_DRAFT = 'dialog/delete-draft',
   DIALOG_EDIT_COLLECTION = 'dialog/edit-collection',
   DIALOG_DELETE_COLLECTION = 'dialog/delete-collection',
+  // drawer
+  DRAWER = 'drawer',
   // search
   SEARCH_RESULTS_ITEM = 'search/results/item',
   // drafts
@@ -79,6 +83,9 @@ export enum TEST_ID {
   ARTICLE_TOOLBAR = 'article/toolbar',
   ARTICLE_BOOKMARK = 'article/bookmark',
   ARTICLE_COMMENT_FEED = 'article/comment/feed',
+  ARTICLE_COMMENT_FEED_AUTHOR = 'article/comment/feed/author',
+  ARTICLE_COMMENT_FEED_AUTHOR_DISPLAY_NAME = 'article/comment/feed/author/display-name',
+
   // moment
   MOMENT_DIGEST = 'moment-digest',
   MOMENT_DIGEST_AUTHOR = 'moment-digest/author',

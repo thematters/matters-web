@@ -5,18 +5,20 @@ import {
   List,
   QueryError,
   ShuffleButton,
-  SpinnerBlock,
   usePublicQuery,
   UserDigest,
+  useRoute,
 } from '~/components'
 import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
 import { LastFetchRandomQuery, SidebarAuthorsPublicQuery } from '~/gql/graphql'
 
 import SectionHeader from '../../SectionHeader'
 import { SIDEBAR_AUTHORS_PUBLIC } from './gql'
+import { AuthorsPlaceholder } from './placeholder'
 import styles from './styles.module.css'
-
 const Authors = () => {
+  const { getQuery } = useRoute()
+  const shortHash = getQuery('shortHash')
   const { data: lastFetchRandom, client } =
     usePublicQuery<LastFetchRandomQuery>(FETCH_RECORD, {
       variables: { id: 'local' },
@@ -26,12 +28,16 @@ const Authors = () => {
   /**
    * Data Fetching
    */
-  const perPage = 6
+  const perPage = 4
   const randomMaxSize = 50
   const { data, loading, error } = usePublicQuery<SidebarAuthorsPublicQuery>(
     SIDEBAR_AUTHORS_PUBLIC,
     {
-      variables: { random: lastRandom || 0, first: perPage },
+      variables: {
+        random: lastRandom || 0,
+        first: perPage,
+        shortHash: shortHash || null,
+      },
     }
   )
   const edges = data?.viewer?.recommendation.authors.edges
@@ -71,7 +77,7 @@ const Authors = () => {
       />
 
       {loading ? (
-        <SpinnerBlock />
+        <AuthorsPlaceholder />
       ) : (
         <List hasBorder={false}>
           {edges &&
