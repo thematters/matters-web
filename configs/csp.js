@@ -4,6 +4,13 @@ const site_domain_tld =
   site_domain_tld_old =
     process.env.NEXT_PUBLIC_SITE_DOMAIN_TLD_OLD || 'matters.news'
 
+// Sentry CSP reporting config
+const SENTRY_REPORT_URI = `https://${process.env.NEXT_PUBLIC_SENTRY_DOMAIN}/api/${process.env.NEXT_PUBLIC_SENTRY_PROJECT_ID}/security/?sentry_key=${process.env.NEXT_PUBLIC_SENTRY_PUBLIC_KEY}`
+const SENTRY_CSP_REPORT_GROUP = 'csp-endpoint'
+
+// For WalletConnect
+// @see https://github.com/WalletConnect/walletconnect-docs/pull/1603/files
+
 const SCRIPT_SRC = [
   "'self'",
 
@@ -15,16 +22,8 @@ const SCRIPT_SRC = [
   "'unsafe-eval'",
   'www.googletagmanager.com',
 
-  // ReCaptcha
-  'www.google.com/recaptcha/',
-  'www.gstatic.com/recaptcha/',
-
   // Turnstile
   'challenges.cloudflare.com',
-
-  // Programmable Google Search
-  'cse.google.com',
-  'www.google.com/cse/',
 
   // GA
   'www.google-analytics.com',
@@ -34,6 +33,9 @@ const SCRIPT_SRC = [
 
   // Stripe
   'js.stripe.com',
+
+  // Cloudflare
+  '*.cloudflareinsights.com',
 
   // Google AdSense
   'pagead2.googlesyndication.com',
@@ -49,21 +51,22 @@ const SCRIPT_SRC = [
 const STYLE_SRC = [
   "'self'",
 
-  // Next.js Assets
-  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
-
   // style-jsx
   "'unsafe-inline'",
 
-  // Programmable Google Search
-  'www.google.com/cse/',
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
+
+  // WalletConnect
+  'fonts.googleapis.com',
 ]
 
 const IMG_SRC = [
   "'self'",
+  'data:',
+  'blob:',
 
   // Asssets
-  'data:',
   process.env.NEXT_PUBLIC_EMBED_ASSET_DOMAIN,
   process.env.NEXT_PUBLIC_LEGACY_ASSET_DOMAIN,
 
@@ -80,7 +83,6 @@ const IMG_SRC = [
 
   // For image validation
   // @see {@url src/common/utils/form/image.tsx}
-  'blob:',
   `*.${site_domain_tld}`,
   isProd ? undefined : 'localhost',
   isProd ? undefined : '127.0.0.1',
@@ -105,6 +107,13 @@ const IMG_SRC = [
   'pagead2.googlesyndication.com',
   'googleads.g.doubleclick.net',
   '*.adtrafficquality.google',
+]
+
+const FONT_SRC = [
+  "'self'",
+
+  // WalletConnect
+  'fonts.gstatic.com',
 ]
 
 const MEDIA_SRC = IMG_SRC
@@ -132,9 +141,6 @@ const CONNECT_SRC = [
   // Cloudflare Image Upload
   'upload.imagedelivery.net',
 
-  // Sentry
-  '*.ingest.sentry.io',
-
   // GA
   'www.google-analytics.com',
 
@@ -157,10 +163,11 @@ const CONNECT_SRC = [
   // IPFS Gateways
   'cloudflare-ipfs.com/ipfs/',
   'ipfs.io/ipfs/',
-  '4everland.io/ipfs/',
-
   'ipfs-gateway.matters.town/ipfs/',
   'ipfs.w3s.link',
+
+  // Sentry
+  '*.ingest.us.sentry.io',
 
   // Google AdSense
   '*.adtrafficquality.google',
@@ -170,6 +177,7 @@ const CONNECT_SRC = [
 
 const FRAME_SRC = [
   "'self'",
+
   // Embed
   'button.like.co',
   'www.youtube.com',
@@ -179,10 +187,6 @@ const FRAME_SRC = [
   'www.instagram.com',
   'jsfiddle.net',
   'codepen.io',
-
-  // ReCaptcha
-  'www.google.com/recaptcha/',
-  'recaptcha.google.com/recaptcha/',
 
   // Turnstile
   'challenges.cloudflare.com',
@@ -202,23 +206,27 @@ const FRAME_SRC = [
   '*.adtrafficquality.google',
 ]
 
-export const CSP_POLICY = Object.entries({
+const CSP_POLICY = Object.entries({
+  'default-src': ["'self'"],
   'script-src': SCRIPT_SRC,
   'style-src': STYLE_SRC,
   'img-src': IMG_SRC,
+  'font-src': FONT_SRC,
   'media-src': MEDIA_SRC,
   'connect-src': CONNECT_SRC,
   'frame-src': FRAME_SRC,
-  'default-src': ["'self'"],
+  'report-uri': SENTRY_REPORT_URI,
+  'report-to': SENTRY_CSP_REPORT_GROUP,
 })
-  .map(
-    ([k, v]) =>
-      `${k} ${(Array.isArray(v)
-        ? Array.from(new Set(v))
-            .map((s) => s?.trim())
-            .filter(Boolean)
-            .join(' ')
-        : v
-      ).trim()}`
-  )
+  .map(([k, v]) => {
+    const values = Array.isArray(v)
+      ? [...new Set(v)]
+          .filter(Boolean)
+          .map((s) => s?.trim())
+          .join(' ')
+      : v
+    return `${k} ${values.trim()}`
+  })
   .join('; ')
+
+module.exports = { CSP_POLICY, SENTRY_REPORT_URI, SENTRY_CSP_REPORT_GROUP }

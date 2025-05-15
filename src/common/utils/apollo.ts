@@ -4,6 +4,7 @@ import { setContext } from '@apollo/client/link/context'
 import { onError } from '@apollo/client/link/error'
 import { createPersistedQueryLink } from '@apollo/client/link/persisted-queries'
 import { RetryLink } from '@apollo/client/link/retry'
+import { SentryLink } from 'apollo-link-sentry'
 import createUploadLink from 'apollo-upload-client/createUploadLink.mjs'
 import { sha256 } from 'crypto-hash'
 import type { IncomingHttpHeaders } from 'http'
@@ -17,7 +18,6 @@ import {
   STORAGE_KEY_AGENT_HASH,
 } from '~/common/enums'
 import introspectionQueryResultData from '~/common/gql/fragmentTypes.json'
-import { randomString } from '~/common/utils'
 import { mergeables } from '~/gql/mergeables'
 
 import { getIsomorphicCookie } from './cookie'
@@ -26,6 +26,7 @@ import { storage } from './storage'
 import typeDefs from './types'
 
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
+const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 
 const isServer = typeof window === 'undefined'
 const isClient = !isServer
@@ -155,26 +156,6 @@ const userGroupLink = ({ cookie }: { cookie: string }) =>
   })
 
 /**
- * Inject Sentry action id to a custom header
- */
-const sentryLink = setContext((_, { headers }) => {
-  const actionId = randomString()
-
-  import('@sentry/browser').then((Sentry) => {
-    Sentry.configureScope((scope: any) => {
-      scope.setTag('action-id', actionId)
-    })
-  })
-
-  return {
-    headers: {
-      ...headers,
-      'x-sentry-action-id': actionId,
-    },
-  }
-})
-
-/**
  * Fingerprint only works on CSR
  */
 const agentHashLink = setContext((_, { headers }) => {
@@ -261,7 +242,36 @@ export const createApolloClient = (
     link: ApolloLink.from([
       persistedQueryLink,
       errorLink,
-      sentryLink,
+      new SentryLink({
+        uri: process.env.NEXT_PUBLIC_API_URL,
+        shouldHandleOperation: (operation) => {
+          const hasSensitiveOrLargeData = Object.keys(
+            operation.variables.input || operation.variables || {}
+          ).some((key) => /email|password|content|file/i.test(key))
+
+          if (hasSensitiveOrLargeData) {
+            return false
+          }
+
+          const isSensitiveOrLargeOperation =
+            /(password|email|login|code|upload)/i.test(operation.operationName)
+
+          if (isSensitiveOrLargeOperation) {
+            return false
+          }
+
+          return true
+        },
+        attachBreadcrumbs: isProd
+          ? {
+              includeQuery: true,
+              includeVariables: false,
+            }
+          : {
+              includeQuery: true,
+              includeVariables: true,
+            },
+      }),
       agentHashLink,
       authLink,
       userGroupLink({ cookie }),
