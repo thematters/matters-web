@@ -23,41 +23,27 @@
   }
 }
 
-.selector {
-  & h3 {
-    margin-bottom: var(--sp16);
-    font-size: var(--text13);
-    font-weight: var(--font-normal);
-    color: var(--color-grey);
-  }
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp16);
 
-  & ul {
-    margin-right: calc(var(--sp16) * -1);
+  & > div {
+    position: relative;
 
-    & li {
-      position: relative;
-      display: inline-block;
-      width: 4.5rem;
-      height: 4.5rem;
-      margin: 0 var(--sp16) var(--sp16) 0;
-
-      &.selected {
-        & img {
-          opacity: 0.5;
-        }
-      }
+    & button {
+      width: 6.3125rem;
+      height: 6.3125rem;
 
       & img {
-        @mixin object-fit-cover;
-
         background-color: var(--color-grey-lighter);
       }
 
       & :global(.icon) {
         position: absolute;
+        top: 0;
         right: 0;
-        bottom: 0;
-        margin: 0 var(--sp4) var(--sp4) 0;
+        margin: var(--sp4) var(--sp4) 0 0;
       }
     }
   }
