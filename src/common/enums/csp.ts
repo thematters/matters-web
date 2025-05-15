@@ -195,6 +195,7 @@ const FRAME_SRC = [
   'pagead2.googlesyndication.com',
   'googleads.g.doubleclick.net',
   'tpc.googlesyndication.com',
+  '*.adtrafficquality.google',
 ]
 
 export const CSP_POLICY = Object.entries({
