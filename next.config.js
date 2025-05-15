@@ -1,5 +1,5 @@
 const {
-  CSP_POLICY,
+  // CSP_POLICY,
   SENTRY_CSP_REPORT_GROUP,
   SENTRY_REPORT_URI,
 } = require('./configs/csp')
@@ -73,7 +73,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: CSP_POLICY,
+            value: '',
           },
           {
             key: 'Report-To',
