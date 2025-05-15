@@ -6,7 +6,7 @@ import { Button, Icon, TextIcon } from '~/components'
 import styles from './styles.module.css'
 
 interface BoxProps {
-  icon: React.ReactNode
+  icon?: React.ReactNode
   title: React.ReactNode
   subtitle?: React.ReactNode
   onClick?: () => any

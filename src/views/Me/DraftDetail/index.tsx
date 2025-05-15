@@ -1,4 +1,3 @@
-import { useQuery } from '@apollo/client'
 import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
@@ -20,41 +19,37 @@ import {
   DraftDetailStateContext,
   DraftDetailStateProvider,
   DrawerProvider,
-  EmptyLayout,
   Head,
   Layout,
   Media,
   SpinnerBlock,
-  Throw404,
   useDirectImageUpload,
   useRoute,
   useUnloadConfirm,
 } from '~/components'
-import { QueryError, useMutation } from '~/components/GQL'
+import { useMutation } from '~/components/GQL'
 import {
   DIRECT_IMAGE_UPLOAD,
   DIRECT_IMAGE_UPLOAD_DONE,
   SINGLE_FILE_UPLOAD,
 } from '~/components/GQL/mutations/uploadFile'
 import {
-  ArticleAccessType,
-  ArticleLicenseType,
   DirectImageUploadDoneMutation,
   DirectImageUploadMutation,
-  DraftDetailQueryQuery,
-  DraftDetailViewerQueryQuery,
-  PublishState as PublishStateType,
   SetDraftContentMutation,
   SingleFileUploadMutation,
 } from '~/gql/graphql'
 
-import { DRAFT_DETAIL, DRAFT_DETAIL_VIEWER, SET_CONTENT } from './gql'
+import { DraftLoadingStates } from './DraftLoadingStates'
+import { SET_CONTENT } from './gql'
+import { useDraftDetail } from './hooks'
 import { MoreButton } from './MoreButton'
 import { OptionButton } from './OptionButton'
 import PublishState from './PublishState'
 import SaveStatus from './SaveStatus'
 import SettingsButton from './SettingsButton'
 import styles from './styles.module.css'
+
 const Editor = dynamic(
   () => import('~/components/Editor/Article').then((mod) => mod.ArticleEditor),
   {
@@ -70,46 +65,16 @@ const DynamicOptionDrawer = dynamic(
   }
 )
 
-const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
-  id: '',
-  title: '',
-  createdAt: new Date().toISOString(),
-  updatedAt: new Date().toISOString(),
-  publishState: PublishStateType.Unpublished,
-  content: '',
-  summary: '',
-  summaryCustomized: false,
-  __typename: 'Draft',
-  article: null,
-  cover: null,
-  assets: [],
-  tags: null,
-  collection: {
-    edges: null,
-    __typename: 'ArticleConnection',
-  },
-  access: {
-    type: ArticleAccessType.Public,
-    circle: null,
-    __typename: 'DraftAccess',
-  },
-  license: ArticleLicenseType.Cc_0,
-  requestForDonation: null,
-  replyToDonator: null,
-  sensitiveByAuthor: false,
-  iscnPublish: null,
-  canComment: true,
-  campaigns: [],
-  indentFirstLine: false,
-}
-
 const BaseDraftDetail = () => {
   const intl = useIntl()
   const { router } = useRoute()
 
   const { addRequest, createDraft, getDraftId, isNewDraft, getDraftUpdatedAt } =
     useContext(DraftDetailStateContext)
-  const [initNew] = useState(isNewDraft())
+
+  const { draft, ownCircles, appliedCampaigns, loading, error } =
+    useDraftDetail()
+
   const [setContent] = useMutation<SetDraftContentMutation>(SET_CONTENT)
   const [singleFileUpload] =
     useMutation<SingleFileUploadMutation>(SINGLE_FILE_UPLOAD)
@@ -126,24 +91,6 @@ const BaseDraftDetail = () => {
     'saved' | 'saving' | 'saveFailed'
   >()
 
-  const { data, loading, error } = useQuery<DraftDetailQueryQuery>(
-    DRAFT_DETAIL,
-    {
-      variables: { id: getDraftId() },
-      fetchPolicy: 'network-only',
-      skip: isNewDraft(),
-    }
-  )
-  const { data: viewerData, loading: viewerLoading } =
-    useQuery<DraftDetailViewerQueryQuery>(DRAFT_DETAIL_VIEWER, {
-      fetchPolicy: 'network-only',
-    })
-
-  const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
-  const ownCircles = viewerData?.viewer?.ownCircles || undefined
-  const appliedCampaigns = viewerData?.viewer?.campaigns.edges?.map(
-    (e) => e.node
-  )
   const [contentLength, setContentLength] = useState(0)
   const isOverLength = contentLength > MAX_ARTICLE_CONTENT_LENGTH
 
@@ -153,30 +100,6 @@ const BaseDraftDetail = () => {
   }
 
   useUnloadConfirm({ block: saveStatus === 'saving' && !isNewDraft() })
-
-  if ((loading && !initNew) || viewerLoading) {
-    return (
-      <EmptyLayout>
-        <SpinnerBlock />
-      </EmptyLayout>
-    )
-  }
-
-  if (error) {
-    return (
-      <EmptyLayout>
-        <QueryError error={error} />
-      </EmptyLayout>
-    )
-  }
-
-  if (!draft && !isNewDraft()) {
-    return (
-      <EmptyLayout>
-        <Throw404 />
-      </EmptyLayout>
-    )
-  }
 
   const hasContent =
     draft?.content &&
@@ -355,77 +278,87 @@ const BaseDraftDetail = () => {
   }
 
   return (
-    <Layout
-      header={
-        <>
-          <section className={styles.header}>
-            <SaveStatus status={saveStatus} />
-
-            <section className={styles.headerRight}>
-              {isOverLength && (
-                <span className={styles.count}>
-                  {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
-                </span>
-              )}
-              <OptionButton onClick={toggleOptionDrawer} />
-              {draft && (
-                <section className={styles.publishButtons}>
-                  <SettingsButton
-                    draft={draft}
-                    campaigns={appliedCampaigns}
-                    ownCircles={ownCircles}
-                    publishable={!!publishable}
-                  />
-                  <span className={styles.divider} />
-                  <MoreButton
-                    draft={draft}
-                    publishable={!!publishable}
-                    onClick={() => console.log('click more button')}
-                  />
-                </section>
-              )}
-            </section>
-          </section>
-        </>
-      }
+    <DraftLoadingStates
+      loading={loading}
+      error={error}
+      draft={draft}
+      isNewDraft={isNewDraft}
     >
-      <Head
-        noSuffix
-        title={
-          draft?.title
-            ? intl.formatMessage(
-                {
-                  defaultMessage: 'Draft - {title}',
-                  id: 'gvTltk',
-                },
-                { title: draft?.title }
-              )
-            : intl.formatMessage({
-                defaultMessage: 'Draft - Untitled',
-                id: 'qcAuPU',
-              })
+      <Layout
+        header={
+          <>
+            <section className={styles.header}>
+              <SaveStatus status={saveStatus} />
+
+              <section className={styles.headerRight}>
+                {isOverLength && (
+                  <span className={styles.count}>
+                    {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
+                  </span>
+                )}
+                <OptionButton onClick={toggleOptionDrawer} />
+                {draft && (
+                  <section className={styles.publishButtons}>
+                    <SettingsButton
+                      draft={draft}
+                      campaigns={appliedCampaigns}
+                      ownCircles={ownCircles}
+                      publishable={!!publishable}
+                    />
+                    <span className={styles.divider} />
+                    <MoreButton
+                      draft={draft}
+                      publishable={!!publishable}
+                      onClick={() => console.log('click more button')}
+                    />
+                  </section>
+                )}
+              </section>
+            </section>
+          </>
         }
-      />
-
-      <PublishState draft={draft} />
-
-      <Layout.Main.Spacing>
-        <Editor
-          draft={draft}
-          update={async (props) => addRequest(() => update(props))}
-          upload={async (props) => addRequest(() => upload(props))}
+      >
+        <Head
+          noSuffix
+          title={
+            draft?.title
+              ? intl.formatMessage(
+                  {
+                    defaultMessage: 'Draft - {title}',
+                    id: 'gvTltk',
+                  },
+                  { title: draft?.title }
+                )
+              : intl.formatMessage({
+                  defaultMessage: 'Draft - Untitled',
+                  id: 'qcAuPU',
+                })
+          }
         />
 
         <PublishState draft={draft} />
 
-        <Media greaterThan="sm">
-          <DynamicOptionDrawer
-            isOpen={isOpenOptionDrawer}
-            onClose={toggleOptionDrawer}
+        <Layout.Main.Spacing>
+          <Editor
+            draft={draft}
+            update={async (props) => addRequest(() => update(props))}
+            upload={async (props) => addRequest(() => upload(props))}
           />
-        </Media>
-      </Layout.Main.Spacing>
-    </Layout>
+
+          <PublishState draft={draft} />
+
+          <Media greaterThan="sm">
+            <DynamicOptionDrawer
+              isOpen={isOpenOptionDrawer}
+              onClose={toggleOptionDrawer}
+              draft={draft}
+              campaigns={appliedCampaigns}
+              ownCircles={ownCircles}
+            />
+          </Media>
+        </Layout.Main.Spacing>
+      </Layout>
+    </DraftLoadingStates>
   )
 }
 
