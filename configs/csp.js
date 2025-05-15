@@ -46,6 +46,7 @@ const SCRIPT_SRC = [
 
   // Vercel
   '*.vercel.live',
+  'vercel.live',
 ]
 
 const STYLE_SRC = [
@@ -215,6 +216,7 @@ const CSP_POLICY = Object.entries({
   'media-src': MEDIA_SRC,
   'connect-src': CONNECT_SRC,
   'frame-src': FRAME_SRC,
+  'fenced-frame-src': FRAME_SRC,
   'report-uri': SENTRY_REPORT_URI,
   'report-to': SENTRY_CSP_REPORT_GROUP,
 })
