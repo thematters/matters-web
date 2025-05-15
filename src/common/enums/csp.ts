@@ -41,6 +41,9 @@ const SCRIPT_SRC = [
   '*.doubleclick.net',
   'tpc.googlesyndication.com',
   'adservice.google.com',
+
+  // Vercel
+  '*.vercel.live',
 ]
 
 const STYLE_SRC = [
