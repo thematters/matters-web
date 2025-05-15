@@ -34,6 +34,9 @@ const SCRIPT_SRC = [
 
   // Stripe
   'js.stripe.com',
+
+  // Google AdSense
+  'pagead2.googlesyndication.com',
 ]
 
 const STYLE_SRC = [
@@ -174,6 +177,9 @@ const FRAME_SRC = [
   // WalletConnect
   '*.walletconnect.com',
   '*.walletconnect.org',
+
+  // Google AdSense
+  'pagead2.googlesyndication.com',
 ]
 
 export const CSP_POLICY = Object.entries({
