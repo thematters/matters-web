@@ -4,7 +4,7 @@ import _omit from 'lodash/omit'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
+import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/circle-plus.svg'
 import {
   ACCEPTED_COVER_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,
@@ -14,8 +14,6 @@ import { validateImage } from '~/common/utils'
 import {
   DraftDetailStateContext,
   Icon,
-  Spinner,
-  TextIcon,
   toast,
   useDirectImageUpload,
   useMutation,
@@ -145,34 +143,15 @@ const Uploader: React.FC<UploaderProps> = ({
 
   const labelClasses = classNames({
     [styles.uploader]: true,
-    'u-area-disable': loading || uploading,
   })
 
   useUnloadConfirm({ block: loading || uploading })
 
   return (
     <label className={labelClasses} htmlFor={fieldId}>
-      <h3>
-        <TextIcon
-          icon={<Icon icon={IconCamera} />}
-          color="green"
-          size={14}
-          weight="medium"
-          spacing={8}
-        >
-          <FormattedMessage defaultMessage="Upload Cover" id="QvPc1q" />
-        </TextIcon>
-
-        {(loading || uploading) && <Spinner color="greyLight" />}
-      </h3>
-
-      <p>
-        <FormattedMessage
-          defaultMessage="Recommended square image."
-          id="CxYcYR"
-        />
-      </p>
-
+      <section className={styles.uploader}>
+        <Icon icon={IconCirclePlus} color="greyDarker" size={32} />
+      </section>
       <VisuallyHidden>
         <input
           id={fieldId}

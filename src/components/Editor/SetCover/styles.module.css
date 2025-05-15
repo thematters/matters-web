@@ -1,20 +1,25 @@
 .uploader {
-  display: block;
-  padding: var(--sp8) var(--sp16);
-  margin-bottom: var(--sp16);
-  border: 2px solid var(--color-grey-light);
-  border-style: dashed;
-  border-radius: var(--sp4);
+  @mixin flex-center-all;
 
-  & h3 {
-    @mixin flex-center-space-between;
+  width: 6.3125rem;
+  height: 6.3125rem;
+  background-color: var(--color-grey-lighter);
+  border-radius: 0.5rem;
+}
 
+.header {
+  margin: var(--sp20) 0 var(--sp16);
+
+  & .title {
     margin-bottom: var(--sp8);
+    font-size: var(--text20);
+    font-weight: var(--font-medium);
+    line-height: 1.875rem;
   }
 
-  & p {
-    font-size: var(--text13);
-    color: var(--color-grey);
+  & .text {
+    font-size: var(--text14);
+    color: var(--color-grey-darker);
   }
 }
 
