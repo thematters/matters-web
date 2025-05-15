@@ -1,3 +1,9 @@
+const {
+  CSP_POLICY,
+  SENTRY_CSP_REPORT_GROUP,
+  SENTRY_REPORT_URI,
+} = require('./configs/csp')
+
 const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
@@ -60,6 +66,27 @@ const nextConfig = {
   reactStrictMode: true,
   compress: false,
   poweredByHeader: false,
+  headers: async () => {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Content-Security-Policy',
+            value: CSP_POLICY,
+          },
+          {
+            key: 'Report-To',
+            value: `{"group":"${SENTRY_CSP_REPORT_GROUP}","max_age":10886400,"endpoints":[{"url":"${SENTRY_REPORT_URI}"}],"include_subdomains":true}`,
+          },
+          {
+            key: 'Reporting-Endpoints',
+            value: `${SENTRY_CSP_REPORT_GROUP}="${SENTRY_REPORT_URI}"`,
+          },
+        ],
+      },
+    ]
+  },
 }
 
 const withBundleAnalyzer = require('@next/bundle-analyzer')({

@@ -22,21 +22,12 @@ export class HomePage {
     this.tabLatest = page.getByRole('tab').filter({ hasText: 'Latest' })
 
     this.feedArticles = page.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED)
-    this.sidebarTags = page.getByTestId(TEST_ID.DIGEST_TAG_SIDEBAR)
+    this.sidebarTags = page.getByTestId(TEST_ID.DIGEST_TAG_ARTICLE)
     this.sidebarUsers = page.getByTestId(TEST_ID.DIGEST_USER_RICH)
   }
 
   async goto() {
     await pageGoto(this.page, '/')
-  }
-
-  async shuffleSidebarTags() {
-    await this.page.getByRole('button', { name: 'Shuffle' }).first().click()
-
-    await waitForAPIResponse({
-      page: this.page,
-      path: 'data.viewer.recommendation.tags',
-    })
   }
 
   async shuffleSidebarUsers() {

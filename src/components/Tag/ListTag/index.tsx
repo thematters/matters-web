@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Icon, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
@@ -64,12 +65,20 @@ export const ListTag = ({
   )
   return is !== 'span' ? (
     <Link {...path} legacyBehavior>
-      <a className={tagClasses} onClick={onClick}>
+      <a
+        className={tagClasses}
+        onClick={onClick}
+        data-test-id={TEST_ID.DIGEST_TAG_LIST}
+      >
         <Inner />
       </a>
     </Link>
   ) : (
-    <span className={tagClasses} onClick={onClick}>
+    <span
+      className={tagClasses}
+      onClick={onClick}
+      data-test-id={TEST_ID.DIGEST_TAG_LIST}
+    >
       <Inner />
     </span>
   )

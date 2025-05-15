@@ -109,6 +109,7 @@ export interface ClickButtonProp {
     | `follow_tab_${string}`
   pageType?: PageType
   pageComponent?: PageComponent
+  note?: Record<string, any>
 }
 
 /**

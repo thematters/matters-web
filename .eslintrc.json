@@ -3,7 +3,7 @@
     "next/core-web-vitals",
     "prettier",
     "plugin:storybook/recommended",
-    "plugin:testing-library/react"
+    "plugin:testing-library/react" // Base rules for testing-library
   ],
   "plugins": [
     "simple-import-sort",
@@ -24,14 +24,25 @@
         "idInterpolationPattern": "[sha512:contenthash:base64:6]"
       }
     ]
+    // testing-library rules applied globally via extends can be overridden below
   },
   "overrides": [
-    // Only uses Testing Library lint rules in test files
+    // Apply Testing Library rules specifically to React test files
     {
       "files": [
-        "**/*.test.{ts,tsx}"
+        "**/*.test.{ts,tsx}" // Assuming these are React component tests
       ],
       "extends": ["plugin:testing-library/react"]
+    },
+    // Disable prefer-screen-queries for Playwright tests in the tests/ folder
+    // as Playwright uses `page` object, not `screen`
+    {
+      "files": [
+        "tests/**/*.ts" // Target all .ts files within the tests directory
+      ],
+      "rules": {
+        "testing-library/prefer-screen-queries": "off"
+      }
     }
   ]
 }

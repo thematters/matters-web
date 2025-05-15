@@ -17,6 +17,7 @@ env:
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK }}
+  SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
 jobs:
   build_and_deploy:
@@ -45,7 +46,15 @@ jobs:
             endpoint = ${{ secrets.RCLONE_CONFIG_R2_ENDPOINT }}
           disable_base64: true
 
+      - name: Cache NPM dependencies
+        uses: actions/cache@v4
+        id: node_modules_cache
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-v18-npm-v4-${{ hashFiles('package-lock.json') }}
+
       - name: Install Dependencies
+        if: steps.node_modules_cache.outputs.cache-hit != 'true'
         run: npm ci
 
       - name: Generate Types (develop)

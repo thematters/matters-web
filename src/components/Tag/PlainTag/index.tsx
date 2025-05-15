@@ -3,6 +3,7 @@ import gql from 'graphql-tag'
 import Link from 'next/link'
 
 import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
+import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Icon, TextIcon, TextIconProps } from '~/components'
 import { DigestTagFragment } from '~/gql/graphql'
@@ -39,7 +40,7 @@ export const PlainTag = ({
 
   return (
     <Link {...path}>
-      <a className={tagClasses}>
+      <a className={tagClasses} data-test-id={TEST_ID.DIGEST_TAG_PLAIN}>
         <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
           <span className={styles.name}>{tagName}</span>
         </TextIcon>
