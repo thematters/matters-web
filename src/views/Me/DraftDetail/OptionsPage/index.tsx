@@ -16,42 +16,38 @@ const OptionsPage = () => {
     window.history.back()
   }
 
-  const loadingStates = (
+  return (
     <DraftLoadingStates
       loading={loading}
       error={error}
       draft={draft}
       isNewDraft={isNewDraft}
-    />
-  )
-
-  if (loadingStates) return loadingStates
-
-  return (
-    <section className={styles.container}>
-      <section className={styles.header}>
-        <section>
-          <h1>
-            <FormattedMessage defaultMessage="Options" id="NDV5Mq" />
-          </h1>
+    >
+      <section className={styles.container}>
+        <section className={styles.header}>
+          <section>
+            <h1>
+              <FormattedMessage defaultMessage="Options" id="NDV5Mq" />
+            </h1>
+          </section>
+          <section>
+            <Button
+              textColor="black"
+              textActiveColor="greyDarker"
+              onClick={goBack}
+            >
+              <Icon icon={IconTimes} size={24} />
+            </Button>
+          </section>
         </section>
-        <section>
-          <Button
-            textColor="black"
-            textActiveColor="greyDarker"
-            onClick={goBack}
-          >
-            <Icon icon={IconTimes} size={24} />
-          </Button>
-        </section>
+
+        <OptionContent
+          draft={draft}
+          campaigns={appliedCampaigns}
+          ownCircles={ownCircles}
+        />
       </section>
-
-      <OptionContent
-        draft={draft}
-        campaigns={appliedCampaigns}
-        ownCircles={ownCircles}
-      />
-    </section>
+    </DraftLoadingStates>
   )
 }
 

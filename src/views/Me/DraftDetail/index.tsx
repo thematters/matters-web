@@ -101,17 +101,6 @@ const BaseDraftDetail = () => {
 
   useUnloadConfirm({ block: saveStatus === 'saving' && !isNewDraft() })
 
-  const loadingStates = (
-    <DraftLoadingStates
-      loading={loading}
-      error={error}
-      draft={draft}
-      isNewDraft={isNewDraft}
-    />
-  )
-
-  if (loadingStates) return loadingStates
-
   const hasContent =
     draft?.content &&
     (stripHtml(draft.content).length > 0 || containsFigureTag(draft.content))
@@ -289,80 +278,87 @@ const BaseDraftDetail = () => {
   }
 
   return (
-    <Layout
-      header={
-        <>
-          <section className={styles.header}>
-            <SaveStatus status={saveStatus} />
-
-            <section className={styles.headerRight}>
-              {isOverLength && (
-                <span className={styles.count}>
-                  {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
-                </span>
-              )}
-              <OptionButton onClick={toggleOptionDrawer} />
-              {draft && (
-                <section className={styles.publishButtons}>
-                  <SettingsButton
-                    draft={draft}
-                    campaigns={appliedCampaigns}
-                    ownCircles={ownCircles}
-                    publishable={!!publishable}
-                  />
-                  <span className={styles.divider} />
-                  <MoreButton
-                    draft={draft}
-                    publishable={!!publishable}
-                    onClick={() => console.log('click more button')}
-                  />
-                </section>
-              )}
-            </section>
-          </section>
-        </>
-      }
+    <DraftLoadingStates
+      loading={loading}
+      error={error}
+      draft={draft}
+      isNewDraft={isNewDraft}
     >
-      <Head
-        noSuffix
-        title={
-          draft?.title
-            ? intl.formatMessage(
-                {
-                  defaultMessage: 'Draft - {title}',
-                  id: 'gvTltk',
-                },
-                { title: draft?.title }
-              )
-            : intl.formatMessage({
-                defaultMessage: 'Draft - Untitled',
-                id: 'qcAuPU',
-              })
+      <Layout
+        header={
+          <>
+            <section className={styles.header}>
+              <SaveStatus status={saveStatus} />
+
+              <section className={styles.headerRight}>
+                {isOverLength && (
+                  <span className={styles.count}>
+                    {contentLength} / {MAX_ARTICLE_CONTENT_LENGTH}
+                  </span>
+                )}
+                <OptionButton onClick={toggleOptionDrawer} />
+                {draft && (
+                  <section className={styles.publishButtons}>
+                    <SettingsButton
+                      draft={draft}
+                      campaigns={appliedCampaigns}
+                      ownCircles={ownCircles}
+                      publishable={!!publishable}
+                    />
+                    <span className={styles.divider} />
+                    <MoreButton
+                      draft={draft}
+                      publishable={!!publishable}
+                      onClick={() => console.log('click more button')}
+                    />
+                  </section>
+                )}
+              </section>
+            </section>
+          </>
         }
-      />
-
-      <PublishState draft={draft} />
-
-      <Layout.Main.Spacing>
-        <Editor
-          draft={draft}
-          update={async (props) => addRequest(() => update(props))}
-          upload={async (props) => addRequest(() => upload(props))}
+      >
+        <Head
+          noSuffix
+          title={
+            draft?.title
+              ? intl.formatMessage(
+                  {
+                    defaultMessage: 'Draft - {title}',
+                    id: 'gvTltk',
+                  },
+                  { title: draft?.title }
+                )
+              : intl.formatMessage({
+                  defaultMessage: 'Draft - Untitled',
+                  id: 'qcAuPU',
+                })
+          }
         />
 
         <PublishState draft={draft} />
 
-        <Media greaterThan="sm">
-          <DynamicOptionDrawer
-            isOpen={isOpenOptionDrawer}
-            onClose={toggleOptionDrawer}
+        <Layout.Main.Spacing>
+          <Editor
             draft={draft}
-            campaigns={appliedCampaigns}
-            ownCircles={ownCircles}
+            update={async (props) => addRequest(() => update(props))}
+            upload={async (props) => addRequest(() => upload(props))}
           />
-        </Media>
-      </Layout.Main.Spacing>
-    </Layout>
+
+          <PublishState draft={draft} />
+
+          <Media greaterThan="sm">
+            <DynamicOptionDrawer
+              isOpen={isOpenOptionDrawer}
+              onClose={toggleOptionDrawer}
+              draft={draft}
+              campaigns={appliedCampaigns}
+              ownCircles={ownCircles}
+            />
+          </Media>
+        </Layout.Main.Spacing>
+      </Layout>
+    </DraftLoadingStates>
   )
 }
 

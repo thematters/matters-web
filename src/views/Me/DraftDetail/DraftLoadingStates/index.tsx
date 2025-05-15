@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 
 import { EmptyLayout, SpinnerBlock, Throw404 } from '~/components'
 import { QueryError } from '~/components/GQL'
@@ -8,6 +8,7 @@ type DraftLoadingStatesProps = {
   error?: any
   draft?: any
   isNewDraft: () => boolean
+  children?: ReactNode
 }
 
 export const DraftLoadingStates: React.FC<DraftLoadingStatesProps> = ({
@@ -15,6 +16,7 @@ export const DraftLoadingStates: React.FC<DraftLoadingStatesProps> = ({
   error,
   draft,
   isNewDraft,
+  children,
 }) => {
   if (loading) {
     return (
@@ -38,6 +40,10 @@ export const DraftLoadingStates: React.FC<DraftLoadingStatesProps> = ({
         <Throw404 />
       </EmptyLayout>
     )
+  }
+
+  if (children) {
+    return <>{children}</>
   }
 
   return null
