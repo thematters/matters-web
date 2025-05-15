@@ -50,7 +50,14 @@ const TranslationButton: FC<{
       <Button
         onClick={() => {
           toggleTranslate()
-          analytics.trackEvent('click_button', { type: 'translation' })
+          const note = translated
+            ? { type: 'revert', from: lang, to: originalLanguage }
+            : { type: 'translate', from: originalLanguage, to: lang }
+          analytics.trackEvent('click_button', {
+            type: 'translation',
+            pageType: 'article_detail',
+            note,
+          })
         }}
         disabled={translating}
       >
