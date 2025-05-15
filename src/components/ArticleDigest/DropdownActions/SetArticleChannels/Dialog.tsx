@@ -138,7 +138,7 @@ const BaseSetArticleChannelsDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title="修正分類"
+          title="頻道管理"
           closeDialog={closeDialog}
           rightBtn={SubmitButton}
         />
