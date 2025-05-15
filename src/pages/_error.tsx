@@ -17,7 +17,13 @@ const ErrorPage: NextPage<ErrorProps> = ({ statusCode }) => {
   )
 }
 
-ErrorPage.getInitialProps = async ({ res, err }) => {
+ErrorPage.getInitialProps = async (contextData) => {
+  // await Sentry.captureUnderscoreErrorException(contextData)
+  import('@sentry/browser').then((Sentry) => {
+    Sentry.captureException(contextData)
+  })
+
+  const { res, err } = contextData
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404
   return { statusCode }
 }
