@@ -33,6 +33,9 @@ const SCRIPT_SRC = [
 
   // Stripe
   'js.stripe.com',
+
+  // Cloudflare
+  '*.cloudflareinsights.com',
 ]
 
 const STYLE_SRC = [
