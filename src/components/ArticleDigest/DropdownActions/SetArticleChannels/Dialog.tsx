@@ -12,9 +12,11 @@ import {
   useDialogSwitch,
   useMutation,
 } from '~/components'
+import { TOGGLE_PIN_CHANNEL_ARTICLES } from '~/components/GQL/mutations/togglePinChannelArticles'
 import {
   GetArticleTopicChannelsQuery,
   SetArticleTopicChannelsMutation,
+  TogglePinChannelArticlesMutation,
 } from '~/gql/graphql'
 
 import { GET_ARTICLE_TOPIC_CHANNELS, SET_ARTICLE_TOPIC_CHANNELS } from './gql'
@@ -27,6 +29,7 @@ export type SetArticleChannelsDialogProps = {
 
 interface FormValues {
   channels: string[]
+  pinnedChannels: string[]
 }
 
 const BaseSetArticleChannelsDialog = ({
@@ -40,6 +43,7 @@ const BaseSetArticleChannelsDialog = ({
       variables: {
         shortHash: article.shortHash,
       },
+      fetchPolicy: 'no-cache',
     }
   )
   const [setArticleChannels] = useMutation<SetArticleTopicChannelsMutation>(
@@ -48,17 +52,32 @@ const BaseSetArticleChannelsDialog = ({
     { showToast: true }
   )
 
+  const [togglePinChannelArticles] =
+    useMutation<TogglePinChannelArticlesMutation>(
+      TOGGLE_PIN_CHANNEL_ARTICLES,
+      undefined,
+      { showToast: true }
+    )
+
   const formId = 'set-article-channels-form'
 
   const { values, handleSubmit, isSubmitting, setFieldValue } =
     useFormik<FormValues>({
-      initialValues: { channels: [] },
+      initialValues: { channels: [], pinnedChannels: [] },
       validateOnBlur: false,
       validateOnChange: false,
-      onSubmit: async ({ channels }, { setSubmitting }) => {
+      onSubmit: async ({ channels, pinnedChannels }, { setSubmitting }) => {
         try {
           await setArticleChannels({
             variables: { id: article.id, channels },
+          })
+
+          await togglePinChannelArticles({
+            variables: {
+              channels: pinnedChannels,
+              articles: [article.id],
+              pinned: true,
+            },
           })
 
           toast.success({
@@ -87,6 +106,19 @@ const BaseSetArticleChannelsDialog = ({
     setFieldValue('channels', currentChannels)
   }
 
+  const handleTogglePinnedChannel = (channelId: string) => {
+    const currentPinnedChannels = [...values.pinnedChannels]
+    const index = currentPinnedChannels.indexOf(channelId)
+
+    if (index >= 0) {
+      currentPinnedChannels.splice(index, 1)
+    } else {
+      currentPinnedChannels.push(channelId)
+    }
+
+    setFieldValue('pinnedChannels', currentPinnedChannels)
+  }
+
   const allChannels = data?.channels.filter(
     (channel) => 'enabled' in channel && channel.enabled
   )
@@ -105,6 +137,16 @@ const BaseSetArticleChannelsDialog = ({
             checked={values.channels.includes(channel.id)}
             onChange={() => handleToggleChannel(channel.id)}
           />
+          <section className={styles.pinnedChannel}>
+            <Form.SquareCheckBox
+              name="pinnedChannels"
+              value={channel.id}
+              contents={'置頂'}
+              color="greyDarker"
+              checked={values.pinnedChannels.includes(channel.id)}
+              onChange={() => handleTogglePinnedChannel(channel.id)}
+            />
+          </section>
         </section>
       ))}
     </Form>
@@ -129,6 +171,11 @@ const BaseSetArticleChannelsDialog = ({
     setFieldValue(
       'channels',
       articleChannels.filter((c) => c.enabled).map((c) => c.channel.id)
+    )
+
+    setFieldValue(
+      'pinnedChannels',
+      articleChannels.filter((c) => c.pinned).map((c) => c.channel.id)
     )
   }, [articleChannels?.join(',')])
 
