@@ -51,7 +51,7 @@ import {
 
 import styles from './styles.module.css'
 
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 interface FormProps {
   type: 'login' | 'connect'
@@ -220,14 +220,17 @@ const Connect: React.FC<FormProps> = ({
             },
           })
 
-          const token = loginData?.walletLogin.token || ''
-          const language = loginData?.walletLogin.user?.settings.language || ''
-          const group = loginData?.walletLogin.user?.info.group || ''
-          setCookies({
-            [COOKIE_LANGUAGE]: language,
-            [COOKIE_USER_GROUP]: group,
-            ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
-          })
+          if (isLocal) {
+            const token = loginData?.walletLogin.token || ''
+            const language =
+              loginData?.walletLogin.user?.settings.language || ''
+            const group = loginData?.walletLogin.user?.info.group || ''
+            setCookies({
+              [COOKIE_LANGUAGE]: language,
+              [COOKIE_USER_GROUP]: group,
+              [COOKIE_TOKEN_NAME]: token,
+            })
+          }
 
           if (
             loginData?.walletLogin.type === AuthResultType.Login ||
