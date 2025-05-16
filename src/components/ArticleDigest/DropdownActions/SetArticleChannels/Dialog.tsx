@@ -96,28 +96,46 @@ const BaseSetArticleChannelsDialog = ({
 
   const handleToggleChannel = (channelId: string) => {
     const currentChannels = [...values.channels]
+    const currentPinnedChannels = [...values.pinnedChannels]
     const index = currentChannels.indexOf(channelId)
 
     if (index >= 0) {
       currentChannels.splice(index, 1)
+      // Remove from pinned channels if it exists
+      if (currentPinnedChannels.includes(channelId)) {
+        currentPinnedChannels.splice(
+          currentPinnedChannels.indexOf(channelId),
+          1
+        )
+      }
     } else {
       currentChannels.push(channelId)
     }
 
     setFieldValue('channels', currentChannels)
+    setFieldValue('pinnedChannels', currentPinnedChannels)
   }
 
   const handleTogglePinnedChannel = (channelId: string) => {
+    const currentChannels = [...values.channels]
     const currentPinnedChannels = [...values.pinnedChannels]
     const index = currentPinnedChannels.indexOf(channelId)
 
     if (index >= 0) {
       currentPinnedChannels.splice(index, 1)
+      // Add to channels if it doesn't exist
+      if (!currentChannels.includes(channelId)) {
+        currentChannels.push(channelId)
+      }
     } else {
       currentPinnedChannels.push(channelId)
+      if (!currentChannels.includes(channelId)) {
+        currentChannels.push(channelId)
+      }
     }
 
     setFieldValue('pinnedChannels', currentPinnedChannels)
+    setFieldValue('channels', currentChannels)
   }
 
   const allChannels = data?.channels.filter(
