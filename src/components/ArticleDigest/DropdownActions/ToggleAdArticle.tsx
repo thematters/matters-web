@@ -1,8 +1,8 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
-import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/circle-plus.svg'
+import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
+import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { Icon, Menu, Spinner, toast, useMutation } from '~/components'
 import {
   FetchArticleAdStatusQuery,
@@ -67,13 +67,13 @@ const ToggleAdArticle = ({ shortHash }: { shortHash: string }) => {
 
   return (
     <Menu.Item
-      text={isAd ? '取消標記 SPAM' : '標記 SPAM'}
-      icon={<Icon icon={isAd ? IconCircleMinus : IconCirclePlus} size={20} />}
+      text={isAd ? '取消廣告' : '標記為廣告'}
+      icon={<Icon icon={isAd ? IconUnpin : IconPin} size={20} />}
       onClick={async () => {
         await update()
 
         toast.success({
-          message: isAd ? '已取消標記 SPAM' : '已標記 SPAM',
+          message: isAd ? '已取消標記為廣告' : '已標記為廣告',
         })
       }}
     />
