@@ -106,14 +106,21 @@ export const FEED_ARTICLES_PUBLIC_CHANNEL = gql`
     channel(input: { shortHash: $shortHash }) {
       id
       ... on TopicChannel {
-        ...ChannelHeader
+        ...TopicChannelHeader
+        feed: articles(input: { first: 20, after: $after }) {
+          ...ChannelArticleConnectionFragment
+        }
+      }
+      ... on CurationChannel {
+        ...CurationChannelHeader
         feed: articles(input: { first: 20, after: $after }) {
           ...ChannelArticleConnectionFragment
         }
       }
     }
   }
-  ${ChannelHeader.fragments.channel}
+  ${ChannelHeader.fragments.topicChannel}
+  ${ChannelHeader.fragments.curationChannel}
   ${channelArticleConnectionFragment}
 `
 
