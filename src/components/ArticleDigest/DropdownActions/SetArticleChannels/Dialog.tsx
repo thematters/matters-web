@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl'
 import {
   Dialog,
   Form,
+  List,
   Spinner,
   toast,
   useDialogSwitch,
@@ -128,27 +129,31 @@ const BaseSetArticleChannelsDialog = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      {allChannels?.map((channel) => (
-        <section key={channel.id} className={styles.item}>
-          <Form.SquareCheckBox
-            name="channels"
-            value={channel.id}
-            contents={'name' in channel ? channel.name : channel.id}
-            checked={values.channels.includes(channel.id)}
-            onChange={() => handleToggleChannel(channel.id)}
-          />
-          <section className={styles.pinnedChannel}>
-            <Form.SquareCheckBox
-              name="pinnedChannels"
-              value={channel.id}
-              contents={'置頂'}
-              color="greyDarker"
-              checked={values.pinnedChannels.includes(channel.id)}
-              onChange={() => handleTogglePinnedChannel(channel.id)}
-            />
-          </section>
-        </section>
-      ))}
+      <List>
+        {allChannels?.map((channel) => (
+          <List.Item key={channel.id}>
+            <section className={styles.item}>
+              <Form.SquareCheckBox
+                name="channels"
+                value={channel.id}
+                contents={'name' in channel ? channel.name : channel.id}
+                checked={values.channels.includes(channel.id)}
+                onChange={() => handleToggleChannel(channel.id)}
+              />
+              <section className={styles.pinnedChannel}>
+                <Form.SquareCheckBox
+                  name="pinnedChannels"
+                  value={channel.id}
+                  contents={'置頂'}
+                  color="greyDarker"
+                  checked={values.pinnedChannels.includes(channel.id)}
+                  onChange={() => handleTogglePinnedChannel(channel.id)}
+                />
+              </section>
+            </section>
+          </List.Item>
+        ))}
+      </List>
     </Form>
   )
 
