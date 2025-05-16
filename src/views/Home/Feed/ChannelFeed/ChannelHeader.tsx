@@ -1,12 +1,22 @@
 import gql from 'graphql-tag'
 
-import { ChannelHeaderFragment } from '~/gql/graphql'
+import {
+  CurationChannelHeaderFragment,
+  TopicChannelHeaderFragment,
+} from '~/gql/graphql'
 
 import styles from '../styles.module.css'
 
 const fragments = {
-  channel: gql`
-    fragment ChannelHeader on TopicChannel {
+  topicChannel: gql`
+    fragment TopicChannelHeader on TopicChannel {
+      id
+      name
+      note
+    }
+  `,
+  curationChannel: gql`
+    fragment CurationChannelHeader on CurationChannel {
       id
       name
       note
@@ -15,7 +25,7 @@ const fragments = {
 }
 
 interface ChannelHeaderProps {
-  channel: ChannelHeaderFragment
+  channel: CurationChannelHeaderFragment | TopicChannelHeaderFragment
 }
 
 export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
