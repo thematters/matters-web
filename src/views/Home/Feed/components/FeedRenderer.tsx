@@ -142,7 +142,6 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
                     })
                   }}
                   isFirstFold={isFirstFold}
-                  hasTogglePinChannelArticles={!!channelId}
                   channelId={channelId}
                   pinned={edge.pinned}
                   {...itemCustomProps}
