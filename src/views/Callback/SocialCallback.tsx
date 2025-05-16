@@ -38,7 +38,7 @@ import {
 import { ADD_SOCIAL_LOGIN, SOCIAL_LOGIN } from './gql'
 import UI from './UI'
 
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 interface Props {
   type: SocialAccountType
@@ -131,14 +131,17 @@ const SocialCallback = ({ type }: Props) => {
             },
           })
 
-          const token = loginData?.socialLogin.token || ''
-          const language = loginData?.socialLogin.user?.settings.language || ''
-          const group = loginData?.socialLogin.user?.info.group || ''
-          setCookies({
-            [COOKIE_LANGUAGE]: language,
-            [COOKIE_USER_GROUP]: group,
-            ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
-          })
+          if (isLocal) {
+            const token = loginData?.socialLogin.token || ''
+            const language =
+              loginData?.socialLogin.user?.settings.language || ''
+            const group = loginData?.socialLogin.user?.info.group || ''
+            setCookies({
+              [COOKIE_LANGUAGE]: language,
+              [COOKIE_USER_GROUP]: group,
+              [COOKIE_TOKEN_NAME]: token,
+            })
+          }
 
           if (localPath) {
             window.location.href = localPath

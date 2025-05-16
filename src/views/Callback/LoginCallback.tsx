@@ -15,7 +15,7 @@ import { EmailLoginMutation } from '~/gql/graphql'
 
 import UI from './UI'
 
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 const LoginCallback = () => {
   const [login, { client }] = useMutation<EmailLoginMutation>(
@@ -56,14 +56,16 @@ const LoginCallback = () => {
           },
         })
 
-        const token = data?.emailLogin.token || ''
-        const language = data?.emailLogin.user?.settings.language || ''
-        const group = data?.emailLogin.user?.info.group || ''
-        setCookies({
-          [COOKIE_LANGUAGE]: language,
-          [COOKIE_USER_GROUP]: group,
-          ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
-        })
+        if (isLocal) {
+          const token = data?.emailLogin.token || ''
+          const language = data?.emailLogin.user?.settings.language || ''
+          const group = data?.emailLogin.user?.info.group || ''
+          setCookies({
+            [COOKIE_LANGUAGE]: language,
+            [COOKIE_USER_GROUP]: group,
+            [COOKIE_TOKEN_NAME]: token,
+          })
+        }
       } catch (error) {
         setHasError(true)
       }
