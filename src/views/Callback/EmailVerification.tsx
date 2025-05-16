@@ -15,7 +15,7 @@ import { VerifyEmailMutation } from '~/gql/graphql'
 import { VERIFY_EMAIL } from './gql'
 import UI from './UI'
 
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 const EmailVerification = () => {
   const viewer = useContext(ViewerContext)
@@ -41,14 +41,16 @@ const EmailVerification = () => {
 
         // Set cookies and redirect
         if (data?.verifyEmail.auth) {
-          const token = data?.verifyEmail.token || ''
-          const language = data?.verifyEmail.user?.settings.language || ''
-          const group = data?.verifyEmail.user?.info.group || ''
-          setCookies({
-            [COOKIE_LANGUAGE]: language,
-            [COOKIE_USER_GROUP]: group,
-            ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
-          })
+          if (isLocal) {
+            const token = data?.verifyEmail.token || ''
+            const language = data?.verifyEmail.user?.settings.language || ''
+            const group = data?.verifyEmail.user?.info.group || ''
+            setCookies({
+              [COOKIE_LANGUAGE]: language,
+              [COOKIE_USER_GROUP]: group,
+              [COOKIE_TOKEN_NAME]: token,
+            })
+          }
 
           // refresh page if user is not authed
           if (!viewer.isAuthed) {
