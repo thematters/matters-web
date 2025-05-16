@@ -187,14 +187,6 @@ export const Head: React.FC<HeadProps> = (props) => {
         rel: 'manifest',
         href: '/manifest.json',
       },
-      {
-        rel: 'dns-prefetch',
-        href: 'https://www.gstatic.com',
-      },
-      {
-        rel: 'dns-prefetch',
-        href: 'https://sentry.matters.one',
-      },
     ],
   }
 
