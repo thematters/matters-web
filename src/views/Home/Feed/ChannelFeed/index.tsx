@@ -122,7 +122,11 @@ const ChannelFeed = () => {
   }
 
   const renderHeader = () => {
-    if (!data?.channel || data.channel.__typename !== 'TopicChannel') {
+    if (
+      !data?.channel ||
+      (data.channel.__typename !== 'TopicChannel' &&
+        data.channel.__typename !== 'CurationChannel')
+    ) {
       return null
     }
 
@@ -130,7 +134,8 @@ const ChannelFeed = () => {
   }
 
   const emptyCustomOption =
-    data?.channel?.__typename === 'TopicChannel' ? (
+    data?.channel?.__typename === 'TopicChannel' ||
+    data?.channel?.__typename === 'CurationChannel' ? (
       <>
         <ChannelHeader channel={data.channel} />
         <EmptyWork
