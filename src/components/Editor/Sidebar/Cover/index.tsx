@@ -1,5 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
+import { ReactComponent as IconCircleTimesFill } from '@/public/static/icons/24px/circle-times-fill.svg'
 import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
 import { toSizedImageURL } from '~/common/utils'
 import { Icon } from '~/components'
@@ -18,9 +19,39 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
       {({ openDialog: openSetCoverDialog }) => (
         <Box
           rightButton={
-            <button onClick={openSetCoverDialog} className={styles.rightButton}>
-              <Icon icon={IconImage} size={24} color="greyDarker" />
-            </button>
+            <>
+              {cover ? (
+                <div className={styles.cover}>
+                  <div
+                    className={styles.action}
+                    onClick={() => {
+                      restProps.editCover(undefined)
+                    }}
+                  >
+                    <Icon
+                      icon={IconCircleTimesFill}
+                      color="greyDarker"
+                      size={24}
+                    />
+                  </div>
+                  <img
+                    src={toSizedImageURL({
+                      url: cover,
+                      width: 72 * 2,
+                      height: 72 * 2,
+                    })}
+                    alt="cover"
+                  />
+                </div>
+              ) : (
+                <button
+                  onClick={openSetCoverDialog}
+                  className={styles.rightButton}
+                >
+                  <Icon icon={IconImage} size={24} color="greyDarker" />{' '}
+                </button>
+              )}
+            </>
           }
           title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
           subtitle={
@@ -31,22 +62,7 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
           }
           onClick={openSetCoverDialog}
           disabled={disabled}
-        >
-          {cover && (
-            <section className={styles.container}>
-              <div className={styles.cover}>
-                <img
-                  src={toSizedImageURL({
-                    url: cover,
-                    width: 230,
-                    height: 230,
-                  })}
-                  alt="cover"
-                />
-              </div>
-            </section>
-          )}
-        </Box>
+        ></Box>
       )}
     </SetCover.Dialog>
   )
