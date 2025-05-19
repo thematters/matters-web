@@ -18,14 +18,12 @@ const TOGGLE_RECOMMEND_ARTICLE = gql`
       id
       oss {
         inRecommendHottest
-        inRecommendIcymi
-        inRecommendNewest
       }
     }
   }
 `
 
-type Type = 'icymi' | 'hottestAndNewest'
+type Type = 'icymi'
 
 export type OpenToggleRecommendArticleDialogWithProps = {
   type: Type
@@ -54,16 +52,11 @@ const ToggleRecommendArticleDialog = ({
 
   const title = {
     icymi: ['設為首頁精選', '移出首頁精選'],
-    hottestAndNewest: ['取消標記 SPAM', '標記 SPAM'],
   }
   const description = {
     icymi: [
       `確認要将「<span class="u-highlight">${article.title}</span>」設為首頁精選嗎？`,
       `確認要将「<span class="u-highlight">${article.title}</span>」撤銷首頁精選嗎？`,
-    ],
-    hottestAndNewest: [
-      `作品「<span class="u-highlight">${article.title}</span>」將可能出現在熱門和最新的文章列表中。`,
-      `作品「<span class="u-highlight">${article.title}</span>」將不會出現在熱門和最新的文章列表中。`,
     ],
   }
 
@@ -80,13 +73,6 @@ const ToggleRecommendArticleDialog = ({
     if (type === 'icymi') {
       await toggleRecommendArticle({
         variables: { id: article.id, enabled: !enabled, type: 'icymi' },
-      })
-    } else {
-      await toggleRecommendArticle({
-        variables: { id: article.id, enabled: !enabled, type: 'hottest' },
-      })
-      await toggleRecommendArticle({
-        variables: { id: article.id, enabled: !enabled, type: 'newest' },
       })
     }
 
