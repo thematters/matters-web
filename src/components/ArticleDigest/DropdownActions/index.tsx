@@ -110,6 +110,13 @@ const DynamicToggleAdArticleButton = dynamic(
     loading: () => <Spinner />,
   }
 )
+
+const DynamicToggleSpamArticleButton = dynamic(
+  () => import('./ToggleSpamArticle'),
+  {
+    loading: () => <Spinner />,
+  }
+)
 const DynamicTogglePinChannelArticlesButton = dynamic(
   () => import('./TogglePinChannelArticles'),
   {
@@ -372,11 +379,7 @@ const BaseDropdownActions = ({
             type="icymi"
             openDialog={openToggleRecommendArticleDialog}
           />
-          <DynamicToggleRecommendArticleButton
-            id={article.id}
-            type="hottestAndNewest"
-            openDialog={openToggleRecommendArticleDialog}
-          />
+          <DynamicToggleSpamArticleButton shortHash={article.shortHash} />
           <DynamicToggleAdArticleButton shortHash={article.shortHash} />
           <DynamicToggleRestrictUserButton
             id={article.author.id}
