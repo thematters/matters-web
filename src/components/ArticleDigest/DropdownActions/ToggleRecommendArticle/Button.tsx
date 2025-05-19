@@ -65,12 +65,12 @@ const RecommendArticleButton: React.FC<RecommendArticleButtonProps> = ({
       : article.oss.inRecommendHottest && article.oss.inRecommendNewest
 
   const texts = {
-    icymi: ['設為首頁精選', '撤銷首頁精選'],
-    hottestAndNewest: ['撤銷移出', '移出熱門與最新'],
+    icymi: ['設為首頁精選', '移出首頁精選'],
+    hottestAndNewest: ['取消標記 SPAM', '標記 SPAM'],
   }
   const icons = {
-    icymi: [IconNavCreate, IconCircleMinus],
-    hottestAndNewest: [IconReset, IconLTime],
+    hottestAndNewest: [IconNavCreate, IconCircleMinus],
+    icymi: [IconReset, IconLTime],
   }
 
   return (

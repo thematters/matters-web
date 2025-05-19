@@ -53,8 +53,8 @@ const ToggleRecommendArticleDialog = ({
     useMutation<ToggleRecommendArticleMutation>(TOGGLE_RECOMMEND_ARTICLE)
 
   const title = {
-    icymi: ['設為首頁精選', '撤銷首頁精選'],
-    hottestAndNewest: ['撤銷移出', '移出熱門與最新'],
+    icymi: ['設為首頁精選', '移出首頁精選'],
+    hottestAndNewest: ['取消標記 SPAM', '標記 SPAM'],
   }
   const description = {
     icymi: [
