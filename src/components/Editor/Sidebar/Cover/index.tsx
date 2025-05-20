@@ -2,8 +2,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconCircleTimesFill } from '@/public/static/icons/24px/circle-times-fill.svg'
 import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
-import { toSizedImageURL } from '~/common/utils'
-import { Icon } from '~/components'
+import { Icon, ResponsiveImage } from '~/components'
 
 import SetCover, { SetCoverProps } from '../../SetCover'
 import Box from '../Box'
@@ -34,14 +33,7 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
                       size={24}
                     />
                   </div>
-                  <img
-                    src={toSizedImageURL({
-                      url: cover,
-                      width: 72 * 2,
-                      height: 72 * 2,
-                    })}
-                    alt="cover"
-                  />
+                  <ResponsiveImage url={cover} width={72} height={72} />
                 </div>
               ) : (
                 <button
