@@ -36,6 +36,17 @@ const SCRIPT_SRC = [
 
   // Cloudflare
   '*.cloudflareinsights.com',
+
+  // Google AdSense
+  'pagead2.googlesyndication.com',
+  '*.adtrafficquality.google',
+  '*.doubleclick.net',
+  'tpc.googlesyndication.com',
+  'adservice.google.com',
+
+  // Vercel
+  '*.vercel.live',
+  'vercel.live',
 ]
 
 const STYLE_SRC = [
@@ -92,6 +103,11 @@ const IMG_SRC = [
 
   // Billboard
   process.env.NEXT_PUBLIC_BILLBOARD_IMAGE_URL,
+
+  // Google AdSense
+  'pagead2.googlesyndication.com',
+  'googleads.g.doubleclick.net',
+  '*.adtrafficquality.google',
 ]
 
 const FONT_SRC = [
@@ -153,6 +169,11 @@ const CONNECT_SRC = [
 
   // Sentry
   '*.ingest.us.sentry.io',
+
+  // Google AdSense
+  '*.adtrafficquality.google',
+  'adservice.google.com',
+  '*.doubleclick.net',
 ]
 
 const FRAME_SRC = [
@@ -178,6 +199,12 @@ const FRAME_SRC = [
   // WalletConnect
   '*.walletconnect.com',
   '*.walletconnect.org',
+
+  // Google AdSense
+  'pagead2.googlesyndication.com',
+  'googleads.g.doubleclick.net',
+  'tpc.googlesyndication.com',
+  '*.adtrafficquality.google',
 ]
 
 // Add prefetch-src directive
@@ -197,6 +224,7 @@ const CSP_POLICY = Object.entries({
   'media-src': MEDIA_SRC,
   'connect-src': CONNECT_SRC,
   'frame-src': FRAME_SRC,
+  'fenced-frame-src': FRAME_SRC,
   'prefetch-src': PREFETCH_SRC,
   'report-uri': SENTRY_REPORT_URI,
   'report-to': SENTRY_CSP_REPORT_GROUP,

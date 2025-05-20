@@ -44,6 +44,18 @@ class MattersDocument extends Document<MattersDocumentProps> {
         <Head />
 
         <body>
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4792129775270382"
+            crossOrigin="anonymous"
+          />
+          <ins
+            className="adsbygoogle"
+            style={{ display: 'inline-block', width: '264px', height: '150px' }}
+            data-ad-client="ca-pub-4792129775270382"
+            data-ad-slot="7854208749"
+          ></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
           <Main />
           <NextScript />
         </body>
