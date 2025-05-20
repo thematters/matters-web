@@ -117,13 +117,6 @@ const FONT_SRC = [
   'fonts.gstatic.com',
 ]
 
-const FONT_SRC = [
-  "'self'",
-
-  // WalletConnect
-  'fonts.gstatic.com',
-]
-
 const MEDIA_SRC = IMG_SRC
 
 const CONNECT_SRC = [
