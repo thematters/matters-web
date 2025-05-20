@@ -24,8 +24,8 @@
 }
 
 .content {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--sp16);
 }
 
@@ -34,6 +34,7 @@
   display: block;
   width: 6.3125rem;
   height: 6.3125rem;
+  overflow: hidden;
 
   & .loading {
     @mixin flex-center-all;
