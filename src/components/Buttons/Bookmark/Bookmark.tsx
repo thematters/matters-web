@@ -9,6 +9,7 @@ import {
   TEST_ID,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Button,
   ButtonProps,
@@ -80,6 +81,10 @@ const Bookmark = ({
       })
       return
     }
+
+    analytics.trackEvent('click_button', {
+      type: 'article_bookmark',
+    })
 
     await bookmark()
 

@@ -9,7 +9,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
-import { numAbbr } from '~/common/utils'
+import { analytics, numAbbr } from '~/common/utils'
 import { Button, useMutation, ViewerContext } from '~/components'
 import {
   LIKE_MOMENT,
@@ -127,6 +127,11 @@ const LikeButton = ({ moment, iconSize = 20 }: LikeButtonProps) => {
           )
           return
         }
+
+        analytics.trackEvent('click_button', {
+          type: 'moment_like',
+        })
+
         likeMoment()
         setPlayHeartBeat(true)
       }}
