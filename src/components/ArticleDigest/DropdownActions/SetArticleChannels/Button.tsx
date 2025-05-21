@@ -9,7 +9,7 @@ const SetArticleChannelsButton = ({
   openDialog,
 }: SetArticleChannelsButtonProps) => (
   <Menu.Item
-    text="修正分類"
+    text="頻道管理"
     icon={<Icon icon={IconSortUlAlt} size={24} />}
     onClick={openDialog}
   />

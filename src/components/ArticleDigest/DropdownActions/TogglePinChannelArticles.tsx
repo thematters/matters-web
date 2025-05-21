@@ -1,24 +1,8 @@
-import gql from 'graphql-tag'
-
 import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
 import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
 import { Icon, Menu, toast, useMutation } from '~/components'
+import { TOGGLE_PIN_CHANNEL_ARTICLES } from '~/components/GQL/mutations/togglePinChannelArticles'
 import { TogglePinChannelArticlesMutation } from '~/gql/graphql'
-
-const TOGGLE_PIN_CHANNEL_ARTICLES = gql`
-  mutation togglePinChannelArticles(
-    $channels: [ID!]!
-    $articles: [ID!]!
-    $pinned: Boolean!
-  ) {
-    togglePinChannelArticles(
-      input: { channels: $channels, articles: $articles, pinned: $pinned }
-    ) {
-      id
-      shortHash
-    }
-  }
-`
 
 const TogglePinChannelArticles = ({
   articleId,

@@ -67,13 +67,13 @@ const ToggleAdArticle = ({ shortHash }: { shortHash: string }) => {
 
   return (
     <Menu.Item
-      text={isAd ? '取消廣告' : '標記為廣告'}
+      text={isAd ? '取消廣告' : '標記廣告'}
       icon={<Icon icon={isAd ? IconUnpin : IconPin} size={20} />}
       onClick={async () => {
         await update()
 
         toast.success({
-          message: isAd ? '已取消標記為廣告' : '已標記為廣告',
+          message: isAd ? '已取消標記廣告' : '已標記廣告',
         })
       }}
     />
