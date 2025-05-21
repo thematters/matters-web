@@ -34,7 +34,7 @@ const Uploader: React.FC<UploaderProps> = ({ addAssets }) => {
     const file = event.target.files[0]
     event.target.value = ''
 
-    const mime = await validateImage(file)
+    const mime = await validateImage(file, false, true)
     if (!mime) {
       return
     }

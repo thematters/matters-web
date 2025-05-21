@@ -3185,6 +3185,9 @@
     "defaultMessage": "Verification code has been sent via email and is valid for 20 minutes.",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
   },
+  "uuLhHH": {
+    "defaultMessage": "Minimum image dimension is 120 pixels"
+  },
   "uw32VR": {
     "defaultMessage": "tutorial"
   },

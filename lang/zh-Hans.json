@@ -3185,6 +3185,9 @@
     "defaultMessage": "验证码已通过邮件发送，有效期为 20 分钟",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
   },
+  "uuLhHH": {
+    "defaultMessage": "图片边长不得小于 120 像素"
+  },
   "uw32VR": {
     "defaultMessage": "教学指南"
   },

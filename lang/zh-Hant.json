@@ -3185,6 +3185,9 @@
     "defaultMessage": "驗證碼已通過郵件發送，有效期為 20 分鐘",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
   },
+  "uuLhHH": {
+    "defaultMessage": "圖片邊長不得小於 120 像素"
+  },
   "uw32VR": {
     "defaultMessage": "教學指南"
   },

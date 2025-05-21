@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
+  UPLOAD_COVER_MIN_DIMENSION_LIMIT,
   UPLOAD_GIF_AVATAR_SIZE_LIMIT,
   UPLOAD_IMAGE_AREA_LIMIT,
   UPLOAD_IMAGE_DIMENSION_LIMIT,
@@ -15,7 +16,11 @@ export const getFileType = (
 ): Promise<FileType.FileTypeResult | undefined> => FileType.fromBlob(file)
 
 // return meme type or null if not valid
-export const validateImage = (image: File, isAvatar: boolean = false) =>
+export const validateImage = (
+  image: File,
+  isAvatar: boolean = false,
+  isCover: boolean = false
+) =>
   new Promise<string | null>((resolve, reject) => {
     getFileType(image).then((fileType) => {
       // mime type
@@ -67,6 +72,22 @@ export const validateImage = (image: File, isAvatar: boolean = false) =>
             width > UPLOAD_IMAGE_DIMENSION_LIMIT ||
             height > UPLOAD_IMAGE_DIMENSION_LIMIT
           const isExceedAreaLimit = width * height > UPLOAD_IMAGE_AREA_LIMIT
+
+          const isExceedMinDimensionLimit =
+            width < UPLOAD_COVER_MIN_DIMENSION_LIMIT ||
+            height < UPLOAD_COVER_MIN_DIMENSION_LIMIT
+
+          if (isCover && isExceedMinDimensionLimit) {
+            toast.error({
+              message: (
+                <FormattedMessage
+                  defaultMessage="Minimum image dimension is 120 pixels"
+                  id="uuLhHH"
+                />
+              ),
+            })
+            return resolve(null)
+          }
 
           if (isExceedDimensionLimit) {
             toast.error({
