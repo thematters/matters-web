@@ -27,11 +27,25 @@ export const ClientUpdater = () => {
     document.documentElement.style.setProperty('--ivh', vvh)
   }
 
+  const updatePixelAdjust = () => {
+    if (typeof window === 'undefined') {
+      return
+    }
+
+    const innerWidth = window.innerWidth
+    const isOdd = innerWidth % 2 === 1
+    document.documentElement.style.setProperty(
+      '--pixel-adjust',
+      isOdd ? '1px' : '0px'
+    )
+  }
+
   useEventListener(
     'resize',
     () => {
       upadteIVH()
       upadteVVH()
+      updatePixelAdjust()
     },
     visualViewport
   )
@@ -39,6 +53,7 @@ export const ClientUpdater = () => {
   useEffect(() => {
     upadteIVH()
     upadteVVH()
+    updatePixelAdjust()
   }, [])
 
   return null

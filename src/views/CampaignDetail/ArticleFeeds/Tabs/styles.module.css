@@ -8,5 +8,6 @@
 
   @media (--sm-up) {
     top: var(--global-nav-height);
+    margin-right: calc(var(--pixel-adjust) * -1);
   }
 }
