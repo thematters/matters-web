@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 
 import { ReactComponent as IconCircleCheckedFill } from '@/public/static/icons/24px/circle-check-fill.svg'
 import { ReactComponent as IconCircleEmpty } from '@/public/static/icons/24px/circle-empty.svg'
@@ -59,7 +59,7 @@ const RadioInput: React.FC<RadioInputProps> = ({
 }) => {
   const inputRef: React.RefObject<any> = useRef(null)
 
-  const fieldId = `field-${name}-${value}`
+  const fieldId = useId()
   const isActive = currentValue === value
 
   const itemClasses = classNames({

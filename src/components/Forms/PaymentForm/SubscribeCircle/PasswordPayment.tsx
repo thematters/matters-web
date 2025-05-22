@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useEffect } from 'react'
+import { useEffect, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
@@ -48,7 +48,7 @@ const Confirm: React.FC<FormProps> = ({
   closeDialog,
 }) => {
   const intl = useIntl()
-  const formId = 'subscirbe-circle-form'
+  const formId = useId()
 
   const [subscribeCircle] = useMutation<SubscribeCircleMutation>(
     SUBSCRIBE_CIRCLE,

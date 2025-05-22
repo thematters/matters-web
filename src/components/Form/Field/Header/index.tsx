@@ -1,4 +1,4 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 
 import styles from './styles.module.css'
 

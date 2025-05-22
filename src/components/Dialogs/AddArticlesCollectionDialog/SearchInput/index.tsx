@@ -1,5 +1,6 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Formik } from 'formik'
+import { useId } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
@@ -23,7 +24,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onBlur,
   autoFocus,
 }) => {
-  const fieldId = `search-input`
+  const fieldId = useId()
   const intl = useIntl()
   const searchCopy = intl.formatMessage({
     defaultMessage: 'Search',

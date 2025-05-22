@@ -72,9 +72,10 @@ export type DialogRoundedButtonProps = {
   loading?: boolean
 } & ButtonProps
 
-export const RoundedButton: React.FC<
+export const RoundedButton = forwardRef<
+  HTMLButtonElement,
   React.PropsWithChildren<DialogRoundedButtonProps>
-> = forwardRef(
+>(
   (
     {
       text,

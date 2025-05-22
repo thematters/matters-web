@@ -87,10 +87,12 @@ const BaseAnimatedDilaog: React.ComponentType<
     [styles.fixedWidth]: fixedWidth,
   })
 
+  // @ts-ignore - The type definition mismatch between react-spring and @reach/dialog
   const AnimatedDialogOverlay = animated(DialogOverlay)
   const AnimatedInner = animated(Inner)
 
   return (
+    // @ts-ignore - The type definition mismatch between react-spring and @reach/dialog
     <AnimatedDialogOverlay
       className={dialogOverlayClasses}
       initialFocusRef={initialFocusRef}
@@ -98,6 +100,7 @@ const BaseAnimatedDilaog: React.ComponentType<
       dangerouslyBypassScrollLock={bypassScrollLock}
       dangerouslyBypassFocusLock={bypassFocusLock}
     >
+      {/* @ts-ignore - The type definition for DialogContent is incorrect */}
       <DialogContent
         className={containerClasses}
         aria-labelledby="dialog-title"
@@ -142,12 +145,14 @@ const BaseSimpleDialog: React.ComponentType<
   })
 
   return (
+    // @ts-ignore - The type definition for DialogOverlay is incorrect
     <DialogOverlay
       className={dialogOverlayClasses}
       initialFocusRef={initialFocusRef}
       dangerouslyBypassScrollLock={bypassScrollLock}
       dangerouslyBypassFocusLock={bypassFocusLock}
     >
+      {/* @ts-ignore - The type definition for DialogContent is incorrect */}
       <DialogContent
         className={styles.container}
         aria-labelledby="dialog-title"

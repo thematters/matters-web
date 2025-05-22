@@ -132,9 +132,7 @@ const InfoHeader = ({
           <p className={styles.description}>{version.description}</p>
         )}
       </header>
-
       <hr className={styles.divider} />
-
       <footer className={styles.footer}>
         {/* dataHash */}
         <section className={[styles.item, styles.dataHash].join(' ')}>

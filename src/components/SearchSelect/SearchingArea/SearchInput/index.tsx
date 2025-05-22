@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Formik } from 'formik'
-import { useContext } from 'react'
+import { useContext, useId } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconMinus } from '@/public/static/icons/24px/minus.svg'
@@ -31,7 +31,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onBlur,
   autoFocus,
 }) => {
-  const fieldId = `search-input-${type}`.toLocaleLowerCase()
+  const fieldId = useId()
   const { lang } = useContext(LanguageContext)
   const intl = useIntl()
   const textAriaLabel = intl.formatMessage({

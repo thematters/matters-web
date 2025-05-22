@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import { forwardRef } from 'react'
+import { forwardRef, useId } from 'react'
 
 import Field, { FieldProps } from '../Field'
 import styles from './styles.module.css'
@@ -59,8 +59,8 @@ const Input = forwardRef(
     }: InputProps,
     ref
   ) => {
-    const fieldId = `field-${name}`
-    const fieldMsgId = `field-msg-${name}`
+    const fieldId = useId()
+    const fieldMsgId = `${fieldId}-msg`
     const inputClasses = classNames({
       [styles.input]: true,
       [styles.error]: error,

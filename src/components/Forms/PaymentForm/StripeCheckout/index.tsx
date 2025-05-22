@@ -1,6 +1,6 @@
 import { CardElement } from '@stripe/react-stripe-js'
 import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
-import React, { useContext } from 'react'
+import React, { useContext, useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Form, LanguageContext, Spacer } from '~/components'
@@ -42,8 +42,8 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
     },
     hidePostalCode: true,
   }
-  const fieldId = 'field-checkout'
-  const fieldMsgId = 'field-msg-checkout'
+  const fieldId = useId()
+  const fieldMsgId = `${fieldId}-msg-checkout`
 
   return (
     <>

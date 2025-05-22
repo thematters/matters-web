@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useRef } from 'react'
+import { useId, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -48,7 +48,7 @@ const Init: React.FC<FormProps> = ({
   const inputRef: React.RefObject<any> | null = useRef(null)
   // const isInDialog = purpose === 'dialog'
   const isInPage = purpose === 'page'
-  const formId = 'create-circle-init-form'
+  const formId = useId()
 
   const {
     values,

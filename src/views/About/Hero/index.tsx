@@ -1,4 +1,4 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'

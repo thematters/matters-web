@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext } from 'react'
+import { useContext, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
@@ -62,7 +62,7 @@ const Init: React.FC<FormProps> = ({
   back,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const formId = 'email-sign-up-init-form'
+  const formId = useId()
 
   const isInPage = purpose === 'page'
 

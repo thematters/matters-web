@@ -1,5 +1,5 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
-import { useContext } from 'react'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { useContext, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -107,7 +107,7 @@ const MigrationDialogUpload = ({
     }
   }
 
-  const fieldId = 'migration-uploader'
+  const fieldId = useId()
 
   return (
     <>

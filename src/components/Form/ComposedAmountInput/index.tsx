@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 import { useIntl } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
@@ -77,7 +77,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
 }) => {
   const inputRef: React.RefObject<any> = useRef(null)
 
-  const fieldId = `field-${name}-${amount}`
+  const fieldId = useId()
 
   const isActive = currentAmount === amount
 

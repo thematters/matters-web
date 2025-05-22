@@ -1,7 +1,7 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
-import { useContext } from 'react'
+import { useContext, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
@@ -68,7 +68,7 @@ const Uploader: React.FC<UploaderProps> = ({
   const { createDraft } = useContext(DraftDetailStateContext)
 
   const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = 'editor-cover-upload-form'
+  const fieldId = useId()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()

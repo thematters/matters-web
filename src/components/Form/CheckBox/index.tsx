@@ -1,4 +1,5 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { useId } from 'react'
 
 import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
 import { Icon, TextIcon } from '~/components'
@@ -26,8 +27,8 @@ const CheckBox: React.FC<CheckBoxProps> = ({
 
   ...inputProps
 }) => {
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = useId()
+  const fieldMsgId = `${fieldId}-msg-${name}`
 
   return (
     <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>

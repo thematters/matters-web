@@ -1,7 +1,7 @@
 import { useApolloClient } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -31,7 +31,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
   const client = useApolloClient()
 
   const maxUsername = MAX_USER_NAME_LENGTH
-  const formId = 'edit-user-name-input'
+  const formId = useId()
   const isLegacyUserConfirm = !!(
     viewer.userName && viewer.info.userNameEditable
   )

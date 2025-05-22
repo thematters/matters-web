@@ -1,4 +1,4 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useDrag } from '@use-gesture/react'
 import classNames from 'classnames'
 import _get from 'lodash/get'

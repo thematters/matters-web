@@ -1,5 +1,6 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
+import { useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { Dialog, Form, toast, useDialogSwitch, useMutation } from '~/components'
@@ -52,7 +53,7 @@ interface FormValues {
 
 const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
   const { show, openDialog, closeDialog: _closeDialog } = useDialogSwitch(true)
-  const formId = 'submit-report-dialog-form'
+  const formId = useId()
   const order = [
     ReportReason.Tort,
     ReportReason.DiscriminationInsultHatred,

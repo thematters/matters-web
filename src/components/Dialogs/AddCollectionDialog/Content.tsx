@@ -3,7 +3,7 @@ import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
-import React, { useContext } from 'react'
+import React, { useContext, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { KEYVALUE } from '~/common/enums'
@@ -58,7 +58,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
 
   const maxCollectionTitle = 40
 
-  const formId = 'edit-new-collection-form'
+  const formId = useId()
 
   const {
     values,

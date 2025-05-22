@@ -59,10 +59,8 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
           />
         )}
       </span>
-
       {lang === UserLanguage.En && <>&nbsp;</>}
-
-      <Link href={PATHS.ME_ARCHIVED}>
+      <Link href={PATHS.ME_ARCHIVED} legacyBehavior>
         <a>
           <TextIcon decoration="underline" size={16} weight="semibold">
             <FormattedMessage
@@ -73,7 +71,6 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
           </TextIcon>
         </a>
       </Link>
-
       <style global jsx>{`
         body {
           margin-top: 42px;
@@ -103,10 +100,8 @@ const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
           description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
         />
       </span>
-
       {lang === 'en' && <span>&nbsp;</span>}
-
-      <Link {...path}>
+      <Link {...path} legacyBehavior>
         <a>
           <TextIcon decoration="underline" size={16} weight="medium">
             <FormattedMessage
@@ -117,7 +112,6 @@ const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
           </TextIcon>
         </a>
       </Link>
-
       <style global jsx>{`
         body {
           margin-top: 42px;

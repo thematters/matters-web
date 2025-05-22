@@ -2,7 +2,7 @@ import { MockedProvider } from '@apollo/client/testing'
 import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 
-import { ShareButton, ShareDialog } from '~/components'
+import { ShareDialog } from '~/components'
 
 export default {
   title: 'Components/Dialogs/Share',
@@ -11,8 +11,16 @@ export default {
 
 const Template: ComponentStory<typeof ShareDialog> = (args) => (
   <MockedProvider>
-    <ShareButton iconSize={20} inCard={false} {...args} />
+    <ShareDialog {...args}>
+      {({ openDialog }) => (
+        <button onClick={openDialog}>Open Share Dialog</button>
+      )}
+    </ShareDialog>
   </MockedProvider>
 )
 
 export const Default = Template.bind({})
+Default.args = {
+  title: 'Example Title',
+  path: '/example-path',
+}

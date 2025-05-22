@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
-import { forwardRef } from 'react'
+import { forwardRef, useId } from 'react'
 
 import { Spinner } from '~/components'
 
@@ -17,7 +17,7 @@ export type SwitchProps = {
 
 export const Switch = forwardRef(
   ({ name, label, onChange, checked, loading, disabled }: SwitchProps, ref) => {
-    const fieldId = `switch-${name}`
+    const fieldId = useId()
 
     const switchClasses = classNames({
       [styles.switch]: true,

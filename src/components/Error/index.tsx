@@ -1,4 +1,3 @@
-import { Alert } from '@reach/alert'
 import { useContext } from 'react'
 
 import { ReactComponent as IconIllustrationEmpty } from '@/public/static/images/illustration-empty.svg'
@@ -71,19 +70,17 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
         />
       </section>
 
-      <Alert type="assertive">
-        <p className={styles.errorMessage}>
-          {message ? (
-            message
-          ) : type === 'not_found' ? (
-            <NotFound lang={lang} />
-          ) : type === 'network' ? (
-            <NetworkError lang={lang} />
-          ) : (
-            <ServerError lang={lang} />
-          )}
-        </p>
-      </Alert>
+      <p className={styles.errorMessage} role="alert" aria-live="assertive">
+        {message ? (
+          message
+        ) : type === 'not_found' ? (
+          <NotFound lang={lang} />
+        ) : type === 'network' ? (
+          <NetworkError lang={lang} />
+        ) : (
+          <ServerError lang={lang} />
+        )}
+      </p>
 
       {children && (
         <section className={styles.errorRedirect}>{children}</section>

@@ -1,5 +1,6 @@
 import { Editor } from '@matters/matters-editor'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { useId } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconEditorImage } from '@/public/static/icons/editor-image.svg'
@@ -17,7 +18,7 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({ editor }) => {
   const isMdUp = useMediaQuery(`(min-width: ${BREAKPOINTS.LG}px)`)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = 'editor-image-upload-form'
+  const fieldId = useId()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()

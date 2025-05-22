@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useEffect } from 'react'
+import { useEffect, useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import {
@@ -48,7 +48,7 @@ const BaseSetArticleChannelsDialog = ({
     { showToast: true }
   )
 
-  const formId = 'set-article-channels-form'
+  const formId = useId()
 
   const { values, handleSubmit, isSubmitting, setFieldValue } =
     useFormik<FormValues>({

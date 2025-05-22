@@ -1,7 +1,7 @@
 import { Editor } from '@matters/matters-editor'
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconEditorAudio } from '@/public/static/icons/editor-audio.svg'
@@ -43,7 +43,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
   const [uploading, setUploading] = useState(false)
 
   const acceptTypes = ACCEPTED_UPLOAD_AUDIO_TYPES.join(',')
-  const fieldId = 'editor-audio-upload-form'
+  const fieldId = useId()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()

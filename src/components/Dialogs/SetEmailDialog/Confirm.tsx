@@ -1,7 +1,7 @@
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
-import React, { useContext } from 'react'
+import React, { useContext, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -51,7 +51,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
   const intl = useIntl()
 
   const presetEmail = viewer.info.email
-  const formId = 'edit-email-form'
+  const formId = useId()
 
   const hasPassword = !!viewer.status?.hasEmailLoginPassword
   const editable = (viewer.status?.changeEmailTimesLeft as number) > 0

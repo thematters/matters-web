@@ -1,5 +1,5 @@
 import { useFormik } from 'formik'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useId, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
@@ -44,7 +44,7 @@ const BaseAddArticlesCollectionDialog = ({
 }: AddArticlesCollectionDialogProps) => {
   const viewer = useContext(ViewerContext)
 
-  const formId = 'add-articles-collection-form'
+  const formId = useId()
 
   const [update] = useMutation<AddArticlesCollectionMutation>(
     ADD_ARTICLES_COLLECTION,

@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useRef, useState } from 'react'
+import { useContext, useId, useRef, useState } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage, useIntl } from 'react-intl'
 
@@ -102,7 +102,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     undefined
 
   const isInPage = purpose === 'page'
-  const formId = 'email-login-form'
+  const formId = useId()
 
   const isNormal = authFeedType === 'normal'
   const isWallet = authFeedType === 'wallet'

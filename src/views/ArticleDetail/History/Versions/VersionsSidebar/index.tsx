@@ -52,27 +52,24 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
                     },
                   }).href
                 }
+                className={styles.link}
               >
-                <a className={styles.link}>
-                  <span className={styles.date}>
-                    <span>
-                      {datetimeFormat.absolute.dateISO(
-                        new Date(version.createdAt)
-                      )}
-                    </span>
-
-                    {index === 0 && (
-                      <Label color="green">
-                        <FormattedMessage defaultMessage="Latest" id="adThp5" />
-                      </Label>
-                    )}
-                  </span>
-                  <span className={styles.time}>
-                    {datetimeFormat.absolute.timeISO(
+                <span className={styles.date}>
+                  <span>
+                    {datetimeFormat.absolute.dateISO(
                       new Date(version.createdAt)
                     )}
                   </span>
-                </a>
+
+                  {index === 0 && (
+                    <Label color="green">
+                      <FormattedMessage defaultMessage="Latest" id="adThp5" />
+                    </Label>
+                  )}
+                </span>
+                <span className={styles.time}>
+                  {datetimeFormat.absolute.timeISO(new Date(version.createdAt))}
+                </span>
               </Link>
             </li>
           ))}

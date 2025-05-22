@@ -1,5 +1,5 @@
 import classNames from 'classnames'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
@@ -82,7 +82,7 @@ const Select: React.FC<FormProps> = ({
 }) => {
   const viewer = useContext(ViewerContext)
 
-  const formId = 'wallet-auth-select-form'
+  const formId = useId()
   const fieldMsgId = 'wall-auth-select-msg'
   const isInPage = purpose === 'page'
   const isInDialog = purpose === 'dialog'

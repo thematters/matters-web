@@ -7,6 +7,7 @@ import {
   SetStateAction,
   useContext,
   useEffect,
+  useId,
   useRef,
   useState,
 } from 'react'
@@ -105,7 +106,7 @@ const SetAmount: React.FC<FormProps> = ({
   setTx,
   targetId,
 }) => {
-  const formId = 'pay-to-set-amount-form'
+  const formId = useId()
   const customInputRef: React.RefObject<any> | null = useRef(null)
   const isUSDT = currency === CURRENCY.USDT
   const isHKD = currency === CURRENCY.HKD

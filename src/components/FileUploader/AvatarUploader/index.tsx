@@ -1,7 +1,7 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
+import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
-import { useEffect, useState } from 'react'
+import { useEffect, useId, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
@@ -75,7 +75,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
   const [localSrc, setLocalSrc] = useState<string | undefined>(undefined)
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = 'avatar-upload-form'
+  const fieldId = useId()
 
   useEffect(() => {
     return () => {

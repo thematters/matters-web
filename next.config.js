@@ -12,6 +12,10 @@ const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
  * @type {import('next').NextConfig}
  */
 const nextConfig = {
+  experimental: {
+    scrollRestoration: true,
+  },
+
   /**
    * Build time configs
    */

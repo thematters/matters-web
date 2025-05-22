@@ -1,5 +1,5 @@
 import { FieldInputProps, FormikProvider, useField } from 'formik'
-import { useContext } from 'react'
+import { useContext, useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
@@ -54,7 +54,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
   const user = data?.user
   const collections = user?.collections
 
-  const formId = 'add-collections-article-form'
+  const formId = useId()
   const hasCheckedEdges = collections?.edges?.filter(
     ({ node }) => !!node.contains
   )

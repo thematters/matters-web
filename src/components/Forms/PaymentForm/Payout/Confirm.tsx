@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useRef } from 'react'
+import { useId, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
@@ -58,7 +58,7 @@ const BaseConfirm: React.FC<FormProps> = ({
   back,
 }: FormProps) => {
   const intl = useIntl()
-  const formId = 'payout-confirm-form'
+  const formId = useId()
 
   const inputRef: React.RefObject<any> | null = useRef(null)
   const [payout] = useMutation<PayoutMutation>(PAYOUT, undefined, {

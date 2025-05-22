@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
@@ -76,7 +76,7 @@ const Confirm: React.FC<FormProps> = ({
   const isEmailVerified = !!viewer.info.emailVerified
   const { routerLang } = useRoute()
 
-  const formId = 'pay-to-confirm-form'
+  const formId = useId()
 
   const [payTo] = useMutation<PayToMutation>(PAY_TO, undefined, {
     showToast: false,

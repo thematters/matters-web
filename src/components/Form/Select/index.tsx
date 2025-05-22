@@ -1,4 +1,5 @@
 import classNames from 'classnames'
+import { useId } from 'react'
 
 import { Z_INDEX } from '~/common/enums'
 import { Dropdown } from '~/components'
@@ -49,7 +50,7 @@ const Select = <OptionValue,>({
   spacingTop,
   spacingBottom,
 }: FormSelectProps<OptionValue>) => {
-  const fieldId = `field-${name}`
+  const fieldId = useId()
   const selectedOptionId = `${fieldId}-selected`
 
   const selectedOption = options.find((o) => o.selected) || options[0]
