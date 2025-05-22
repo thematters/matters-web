@@ -6,3 +6,7 @@
     padding: var(--sp16) var(--sp16) 0 0;
   }
 }
+
+.content {
+  padding: var(--sp10) var(--sp16) 0;
+}

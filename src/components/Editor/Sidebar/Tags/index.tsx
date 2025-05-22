@@ -3,6 +3,7 @@ import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { ARTICLE_TAGS_MAX_COUNT } from '~/common/enums/article'
 import { analytics } from '~/common/utils'
 import {
   EditorSearchSelectDialog,
@@ -16,6 +17,7 @@ import { DigestTagFragment } from '~/gql/graphql'
 import TagCustomStagingArea from '../../TagCustomStagingArea'
 import Box from '../Box'
 import styles from './styles.module.css'
+import TagInput from './TagInput'
 
 export interface SidebarTagsProps {
   tags: DigestTagFragment[]
@@ -66,6 +68,7 @@ const SidebarTags = ({
                 <button
                   onClick={() => setIsEditing(true)}
                   className={styles.rightButton}
+                  disabled={tags.length >= ARTICLE_TAGS_MAX_COUNT}
                 >
                   <Icon icon={IconPlus} size={24} color="black" />
                 </button>
@@ -75,24 +78,27 @@ const SidebarTags = ({
           onClick={openDialog}
           disabled={disabled}
         >
-          {tags.length > 0 && (
-            <ul className={styles.list}>
-              {tags.map((tag) => (
-                <li key={tag.id}>
-                  <InlineTag
-                    tag={tag}
-                    onRemoveTag={() => {
-                      editTags(tags.filter((t) => t.content !== tag.content))
-                      analytics.trackEvent('click_button', {
-                        type: 'remove_tag',
-                        pageType: 'edit_draft',
-                      })
-                    }}
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
+          <div className={styles.content}>
+            {tags.length > 0 && (
+              <ul className={styles.list}>
+                {tags.map((tag) => (
+                  <li key={tag.id}>
+                    <InlineTag
+                      tag={tag}
+                      onRemoveTag={() => {
+                        editTags(tags.filter((t) => t.content !== tag.content))
+                        analytics.trackEvent('click_button', {
+                          type: 'remove_tag',
+                          pageType: 'edit_draft',
+                        })
+                      }}
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+            {isEditing && <TagInput />}
+          </div>
         </Box>
       )}
     </EditorSearchSelectDialog>

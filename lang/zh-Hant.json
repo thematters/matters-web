@@ -3375,6 +3375,9 @@
     "defaultMessage": "作品編輯次數超出上限",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
   },
+  "xk1AW6": {
+    "defaultMessage": "輸入標籤"
+  },
   "xkr+zo": {
     "defaultMessage": "協議"
   },
