@@ -73,6 +73,9 @@
   "/5jk3i": {
     "defaultMessage": "訂閱成功！🎉"
   },
+  "/5yq4w": {
+    "defaultMessage": "最多增加 3 個標籤"
+  },
   "/BQWEh": {
     "defaultMessage": "最近 1 個月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
