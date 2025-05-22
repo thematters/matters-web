@@ -7,6 +7,7 @@
   z-index: var(--z-index-sticky-tabs);
   padding: 0 var(--sp16);
   margin-top: var(--sp8);
+  margin-right: calc(var(--pixel-adjust) * -1);
   white-space: nowrap;
   background: var(--color-white);
 

@@ -4,6 +4,7 @@
   z-index: var(--z-index-sticky-tabs);
   padding-top: var(--sp20);
   padding-bottom: var(--sp8);
+  margin-right: calc(var(--pixel-adjust) * -1);
   background-color: var(--color-white);
 
   @media (--sm-up) {
