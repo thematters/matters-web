@@ -103,11 +103,11 @@
     */
   &::after {
     display: block;
+    visibility: hidden;
     height: 0;
     overflow: hidden;
     font-weight: var(--font-semibold);
     color: transparent;
-    visibility: hidden;
     content: attr(data-title);
   }
 

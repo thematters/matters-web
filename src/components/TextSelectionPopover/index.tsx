@@ -31,7 +31,7 @@ const isSelectionCrossingParagraphs = (selection: Selection): boolean => {
 const isValidSelection = (
   selection: Selection | null,
   targetElement: HTMLElement,
-  ref: React.RefObject<HTMLDivElement>
+  ref: React.RefObject<HTMLDivElement | null>
 ): boolean => {
   if (!selection || !selection.toString() || !ref.current) {
     return false

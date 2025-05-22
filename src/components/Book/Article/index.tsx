@@ -13,7 +13,7 @@ import styles from './styles.module.css'
 
 type BookArticleProps = {
   title: string
-  description: string
+  description?: string
   cover?: string | null
 }
 

@@ -12,9 +12,9 @@
 
   padding-left: var(--sp16);
   margin-top: var(--sp12);
-  color: var(--color-black);
   text-overflow: ellipsis;
+  -webkit-line-clamp: 3;
+  color: var(--color-black);
   border-left-style: dashed;
   border-left-width: 3px;
-  -webkit-line-clamp: 3;
 }

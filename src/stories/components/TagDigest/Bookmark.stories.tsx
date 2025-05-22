@@ -1,40 +1,47 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { TagDigest } from '~/components'
 
 import { MOCK_TAG } from '../../mocks'
 
-export default {
+const meta = {
   title: 'Components/TagDigest/Bookmark',
   component: TagDigest.Bookmark,
-} as ComponentMeta<typeof TagDigest.Bookmark>
+  decorators: [
+    (Story) => (
+      <MockedProvider>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
+} satisfies Meta<typeof TagDigest.Bookmark>
 
-const Template: ComponentStory<typeof TagDigest.Bookmark> = (args) => (
-  <MockedProvider>
-    <TagDigest.Bookmark {...args} />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default = Template.bind({})
-Default.args = {
-  tag: MOCK_TAG as any,
+export const Default: Story = {
+  args: {
+    tag: MOCK_TAG as any,
+  },
 }
 
-export const HasFollow = Template.bind({})
-HasFollow.args = {
-  tag: {
-    ...MOCK_TAG,
-    isFollower: true,
-  } as any,
+export const HasFollow: Story = {
+  args: {
+    tag: {
+      ...MOCK_TAG,
+      isFollower: true,
+    } as any,
+  },
 }
 
-export const LongTagName = Template.bind({})
-LongTagName.args = {
-  tag: {
-    ...MOCK_TAG,
-    content:
-      'LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName',
-  } as any,
+export const LongTagName: Story = {
+  args: {
+    tag: {
+      ...MOCK_TAG,
+      content:
+        'LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName',
+    } as any,
+  },
 }

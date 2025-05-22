@@ -6,7 +6,9 @@ module.exports = {
     name: '@storybook/nextjs',
     options: {},
   },
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
@@ -37,6 +39,7 @@ module.exports = {
         ],
       },
     },
+    '@chromatic-com/storybook',
   ],
 
   webpackFinal: async (config) => {
@@ -96,7 +99,9 @@ module.exports = {
     return config
   },
 
-  docs: {
-    autodocs: true,
+  docs: {},
+
+  typescript: {
+    reactDocgen: 'react-docgen-typescript',
   },
 }

@@ -10,9 +10,9 @@
   & title {
     @mixin line-clamp;
 
-    -webkit-line-clamp: 2;
     padding: 0 var(--sp16);
     margin-bottom: var(--sp8);
+    -webkit-line-clamp: 2;
     font-weight: var(--font-medium);
   }
 

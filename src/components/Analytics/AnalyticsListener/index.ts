@@ -46,7 +46,7 @@ const handleAnalytics = async ({
 }: {
   detail: CustomEvent['detail']
   user: AnalyticsUserFragment | {}
-  analytics?: Analytics
+  analytics?: Analytics | null
 }) => {
   let id
   if (user && 'id' in user) {
@@ -110,7 +110,7 @@ const handleAnalytics = async ({
 }
 
 export const AnalyticsListener = ({ user }: AnalyticsListenerProps) => {
-  const analyticsRef = useRef<Analytics>()
+  const analyticsRef = useRef<Analytics | null>(null)
 
   const initAnalytics = async () => {
     const app = initializeApp(FIREBASE_CONFIG)

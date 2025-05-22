@@ -1,27 +1,32 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { ArticleDigestDropdown } from '~/components'
 
 import { MOCK_ARTILCE } from '../../mocks'
 
-export default {
+const meta = {
   title: 'Components/ArticleDigest',
   component: ArticleDigestDropdown,
-} as ComponentMeta<typeof ArticleDigestDropdown>
+  decorators: [
+    (Story) => (
+      <MockedProvider>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
+} satisfies Meta<typeof ArticleDigestDropdown>
 
-const Template: ComponentStory<typeof ArticleDigestDropdown> = (args) => (
-  <MockedProvider>
-    <ArticleDigestDropdown {...args} />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Dropdown = Template.bind({})
-Dropdown.args = {
-  article: MOCK_ARTILCE,
-  titleTextSize: 14,
-  spacing: [16, 16],
-  bgColor: 'none',
-  bgActiveColor: 'greyLighter',
+export const Dropdown: Story = {
+  args: {
+    article: MOCK_ARTILCE,
+    titleTextSize: 14,
+    spacing: [16, 16],
+    bgColor: 'none',
+    bgActiveColor: 'greyLighter',
+  },
 }

@@ -2,8 +2,8 @@
   position: relative;
   z-index: 1;
   display: flex;
-  flex-direction: column;
   flex-shrink: 0;
+  flex-direction: column;
   width: 7.5rem;
   height: 10rem;
   overflow: hidden;
@@ -65,11 +65,11 @@
       padding-top: var(--sp8);
       padding-right: var(--sp8);
       padding-left: var(--sp14);
+      -webkit-line-clamp: 2;
       font-size: var(--text14);
       font-weight: var(--font-normal);
       line-height: 1.25rem;
       color: var(--color-white);
-      -webkit-line-clamp: 2;
     }
   }
 

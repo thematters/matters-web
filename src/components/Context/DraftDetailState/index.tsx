@@ -35,7 +35,7 @@ export const DraftDetailStateProvider = ({
    */
   // Run request jobs in sequence
   const jobsRef = useRef<Job[]>([])
-  const runningRef = useRef<string>()
+  const runningRef = useRef<string | null>(null)
   const client = useApolloClient()
 
   // push request job

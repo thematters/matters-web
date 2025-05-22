@@ -1,6 +1,7 @@
 {
   "extends": [
     "next/core-web-vitals",
+    // "next/typescript",
     "prettier",
     "plugin:storybook/recommended",
     "plugin:testing-library/react" // Base rules for testing-library

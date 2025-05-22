@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks'
+import { act, renderHook } from '@testing-library/react'
 import mockRouter from 'next-router-mock'
 import { beforeEach, describe, expect, it } from 'vitest'
 
