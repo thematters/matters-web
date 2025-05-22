@@ -117,7 +117,6 @@ const Item: React.FC<ItemProps> = ({
             url: path,
           },
         }).catch(console.error)
-        refetchAssets()
         updateAsset({
           draftId: asset.draftId,
           id: assetId,
@@ -126,6 +125,7 @@ const Item: React.FC<ItemProps> = ({
           draft: false,
           file: undefined,
         })
+        refetchAssets()
 
         if (data?.directImageUpload) {
           setSelected(data?.directImageUpload)
