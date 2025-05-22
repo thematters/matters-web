@@ -34,6 +34,10 @@ export const ClientUpdater = () => {
 
     const innerWidth = window.innerWidth
     const isOdd = innerWidth % 2 === 1
+
+    // When window width is odd, we need to add 1px adjustment to fix layout issues
+    // This is because some browsers may render half pixels on odd widths, causing misalignment
+    // Using --pixel-adjust CSS variable to globally adjust this issue and ensure correct alignment on odd widths
     document.documentElement.style.setProperty(
       '--pixel-adjust',
       isOdd ? '1px' : '0px'
