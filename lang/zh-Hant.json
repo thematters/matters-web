@@ -1004,6 +1004,9 @@
   "EcglP9": {
     "defaultMessage": "密鑰"
   },
+  "EiENui": {
+    "defaultMessage": "相關標籤"
+  },
   "El+nq2": {
     "defaultMessage": "輸入字數過短，僅供輸入 {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} 個字元"
   },
@@ -2229,6 +2232,9 @@
   "cAP9g5": {
     "defaultMessage": "將你的評論在 {commentArticle} 中置頂",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
+  "cCpbBu": {
+    "defaultMessage": "頻道熱門作者"
   },
   "cCsxxw": {
     "defaultMessage": "此 {type} 因違反用戶協定而被歸檔"

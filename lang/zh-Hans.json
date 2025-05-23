@@ -1004,6 +1004,9 @@
   "EcglP9": {
     "defaultMessage": "密钥"
   },
+  "EiENui": {
+    "defaultMessage": "相关标签"
+  },
   "El+nq2": {
     "defaultMessage": "输入字数过短，仅供输入 {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} 个字符"
   },
@@ -2229,6 +2232,9 @@
   "cAP9g5": {
     "defaultMessage": "将你的评论在 {commentArticle} 中置顶",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
+  "cCpbBu": {
+    "defaultMessage": "频道热门作者"
   },
   "cCsxxw": {
     "defaultMessage": "此 {type} 因违反用户协定而被封存"

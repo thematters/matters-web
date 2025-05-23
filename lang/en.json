@@ -1004,6 +1004,9 @@
   "EcglP9": {
     "defaultMessage": "Key"
   },
+  "EiENui": {
+    "defaultMessage": "Related Tags"
+  },
   "El+nq2": {
     "defaultMessage": "Must be between {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} characters long."
   },
@@ -2229,6 +2232,9 @@
   "cAP9g5": {
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
+  },
+  "cCpbBu": {
+    "defaultMessage": "Popular Channel Authors"
   },
   "cCsxxw": {
     "defaultMessage": "This {type} has been archived due to a violation of the user agreement"
