@@ -1,7 +1,13 @@
 import { FormattedMessage } from 'react-intl'
 
 import { PATHS } from '~/common/enums'
-import { Button, ButtonProps, PageHeader, TextIcon } from '~/components'
+import {
+  Button,
+  ButtonProps,
+  PageHeader,
+  TextIcon,
+  useRoute,
+} from '~/components'
 
 import styles from './styles.module.css'
 
@@ -32,9 +38,19 @@ const FeedHeader = ({
     authors: PATHS.AUTHORS,
     tags: PATHS.TAGS,
   }
+  const { isInPath } = useRoute()
+  const isInChannel = isInPath('CHANNEL')
   const titleMap = {
-    authors: <FormattedMessage defaultMessage="Authors" id="XgdZSb" />,
-    tags: <FormattedMessage defaultMessage="Topics" id="kc79d3" />,
+    authors: isInChannel ? (
+      <FormattedMessage defaultMessage="Popular Channel Authors" id="cCpbBu" />
+    ) : (
+      <FormattedMessage defaultMessage="Authors" id="XgdZSb" />
+    ),
+    tags: isInChannel ? (
+      <FormattedMessage defaultMessage="Related Tags" id="EiENui" />
+    ) : (
+      <FormattedMessage defaultMessage="Topics" id="kc79d3" />
+    ),
   }
   const path = pathMap[type]
 
