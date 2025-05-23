@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { ENTITY_TYPE } from '~/common/enums'
 import { Tabs } from '~/components'
 import { getSelectCampaigns } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
@@ -10,7 +11,7 @@ import {
 } from '~/gql/graphql'
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
-import { useEditDraftCampaign } from '../hooks'
+import { useEditDraftCampaign, useEditDraftCover } from '../hooks'
 import styles from './styles.module.css'
 
 export interface OptionContentProps {
@@ -40,6 +41,23 @@ const EditDraftCampaign = ({ draft, campaigns }: OptionItemProps) => {
       selectedCampaign={selectedCampaign}
       selectedStage={selectedStage}
       editCampaign={(value) => edit(value as any)}
+    />
+  )
+}
+
+const EditDraftCover = ({ draft, disabled }: OptionItemProps) => {
+  const { edit, refetch, saving } = useEditDraftCover()
+
+  return (
+    <Sidebar.Cover
+      cover={draft.cover}
+      assets={draft.assets}
+      entityId={draft.id}
+      entityType={ENTITY_TYPE.draft}
+      editCover={edit}
+      refetchAssets={refetch}
+      coverSaving={saving}
+      disabled={disabled}
     />
   )
 }
@@ -83,7 +101,10 @@ export const OptionContent = (props: OptionContentProps) => {
 
       <section className={styles.content}>
         {isContentAndLayout && (
-          <EditDraftCampaign {...props} disabled={disabled} />
+          <>
+            <EditDraftCampaign {...props} disabled={disabled} />
+            <EditDraftCover {...props} disabled={disabled} />
+          </>
         )}
       </section>
     </section>

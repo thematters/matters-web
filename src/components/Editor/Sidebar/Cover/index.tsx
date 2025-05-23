@@ -1,8 +1,8 @@
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
+import { ReactComponent as IconCircleTimesFill } from '@/public/static/icons/24px/circle-times-fill.svg'
 import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
-import { toSizedImageURL } from '~/common/utils'
-import { Icon } from '~/components'
+import { Icon, ResponsiveImage } from '~/components'
 
 import SetCover, { SetCoverProps } from '../../SetCover'
 import Box from '../Box'
@@ -13,30 +13,54 @@ export type SidebarCoverProps = {
 } & SetCoverProps
 
 const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
+  const intl = useIntl()
   return (
     <SetCover.Dialog cover={cover} {...restProps}>
       {({ openDialog: openSetCoverDialog }) => (
         <Box
-          icon={<Icon icon={IconImage} size={24} />}
+          rightButton={
+            <>
+              {cover ? (
+                <div className={styles.cover}>
+                  <div
+                    className={styles.action}
+                    onClick={() => {
+                      restProps.editCover(undefined)
+                    }}
+                    role="button"
+                    aria-label={intl.formatMessage({
+                      defaultMessage: 'Remove cover',
+                      id: 'SeyETM',
+                    })}
+                  >
+                    <Icon
+                      icon={IconCircleTimesFill}
+                      color="greyDarker"
+                      size={24}
+                    />
+                  </div>
+                  <ResponsiveImage url={cover} width={72} height={72} />
+                </div>
+              ) : (
+                <button
+                  onClick={openSetCoverDialog}
+                  className={styles.rightButton}
+                >
+                  <Icon icon={IconImage} size={24} color="greyDarker" />
+                </button>
+              )}
+            </>
+          }
           title={<FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />}
+          subtitle={
+            <FormattedMessage
+              defaultMessage="Select or upload a square image"
+              id="ammOoM"
+            />
+          }
           onClick={openSetCoverDialog}
           disabled={disabled}
-        >
-          {cover && (
-            <section className={styles.container}>
-              <div className={styles.cover}>
-                <img
-                  src={toSizedImageURL({
-                    url: cover,
-                    width: 230,
-                    height: 230,
-                  })}
-                  alt="cover"
-                />
-              </div>
-            </section>
-          )}
-        </Box>
+        ></Box>
       )}
     </SetCover.Dialog>
   )

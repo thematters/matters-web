@@ -1756,6 +1756,9 @@
     "defaultMessage": "Payout",
     "description": "src/components/Transaction/index.tsx"
   },
+  "SeyETM": {
+    "defaultMessage": "Remove cover"
+  },
   "Sfql0+": {
     "defaultMessage": "Congratulations! You've got the Grand Badge!"
   },
@@ -2139,6 +2142,9 @@
   "ZZ9zIR": {
     "defaultMessage": "Downvote"
   },
+  "ZgRE5H": {
+    "defaultMessage": "Select or upload a square image ( > 120×120px )"
+  },
   "ZjDH42": {
     "defaultMessage": "About Us"
   },
@@ -2196,6 +2202,9 @@
   },
   "al5/yQ": {
     "defaultMessage": "Joined successfully"
+  },
+  "ammOoM": {
+    "defaultMessage": "Select or upload a square image"
   },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
@@ -3178,6 +3187,9 @@
   "utMaM0": {
     "defaultMessage": "Verification code has been sent via email and is valid for 20 minutes.",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
+  "uuLhHH": {
+    "defaultMessage": "Minimum image dimension is 120 pixels"
   },
   "uw32VR": {
     "defaultMessage": "tutorial"

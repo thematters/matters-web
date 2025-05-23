@@ -1756,6 +1756,9 @@
     "defaultMessage": "提现",
     "description": "src/components/Transaction/index.tsx"
   },
+  "SeyETM": {
+    "defaultMessage": "移除封面"
+  },
   "Sfql0+": {
     "defaultMessage": "恭喜获得七日书大满贯"
   },
@@ -2139,6 +2142,9 @@
   "ZZ9zIR": {
     "defaultMessage": "点踩"
   },
+  "ZgRE5H": {
+    "defaultMessage": "选择或上传大于 120×120px 的正方形图片"
+  },
   "ZjDH42": {
     "defaultMessage": "关于我们"
   },
@@ -2196,6 +2202,9 @@
   },
   "al5/yQ": {
     "defaultMessage": "晚鸟参与通过"
+  },
+  "ammOoM": {
+    "defaultMessage": "选择或上传正方形图片"
   },
   "aqX2Bt": {
     "defaultMessage": "前往首页",
@@ -3178,6 +3187,9 @@
   "utMaM0": {
     "defaultMessage": "验证码已通过邮件发送，有效期为 20 分钟",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
+  "uuLhHH": {
+    "defaultMessage": "图片边长不得小于 120 像素"
   },
   "uw32VR": {
     "defaultMessage": "教学指南"

@@ -1756,6 +1756,9 @@
     "defaultMessage": "提現",
     "description": "src/components/Transaction/index.tsx"
   },
+  "SeyETM": {
+    "defaultMessage": "移除封面"
+  },
   "Sfql0+": {
     "defaultMessage": "恭喜獲得七日書大滿貫"
   },
@@ -2139,6 +2142,9 @@
   "ZZ9zIR": {
     "defaultMessage": "點踩"
   },
+  "ZgRE5H": {
+    "defaultMessage": "選擇或上傳大於 120×120px 正方形圖片"
+  },
   "ZjDH42": {
     "defaultMessage": "關於我們"
   },
@@ -2196,6 +2202,9 @@
   },
   "al5/yQ": {
     "defaultMessage": "晚鳥參與通過"
+  },
+  "ammOoM": {
+    "defaultMessage": "選擇或上傳正方形圖片"
   },
   "aqX2Bt": {
     "defaultMessage": "前往首頁",
@@ -3178,6 +3187,9 @@
   "utMaM0": {
     "defaultMessage": "驗證碼已通過郵件發送，有效期為 20 分鐘",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
+  },
+  "uuLhHH": {
+    "defaultMessage": "圖片邊長不得小於 120 像素"
   },
   "uw32VR": {
     "defaultMessage": "教學指南"

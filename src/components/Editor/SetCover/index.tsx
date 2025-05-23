@@ -1,12 +1,18 @@
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { Dialog } from '~/components'
+import { ASSET_TYPE } from '~/common/enums'
+import { Dialog, Media } from '~/components'
 import { AssetFragment } from '~/gql/graphql'
 
 import SetCoverDialog from './Dialog'
-import Selector from './Selector'
+import Item from './Item'
+import styles from './styles.module.css'
 import Uploader, { UploadEntity } from './Uploader'
+export type EditorAsset = {
+  file?: File
+  draftId?: string
+} & AssetFragment
 
 export type SetCoverProps = {
   back?: () => any
@@ -27,13 +33,38 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
   closeDialog,
 
   cover,
-  assets,
+  assets: _assets,
 
   editCover,
   coverSaving,
 
   ...uploadEntity
 }) => {
+  const [assets, setAssets] = useState<EditorAsset[]>(
+    _assets
+      .filter(
+        (asset) =>
+          [ASSET_TYPE.embed, ASSET_TYPE.cover].indexOf(asset.type as any) >= 0
+      )
+      .reverse()
+  )
+
+  const addAssets = (files: File[]) => {
+    const newAssets = files.map((file) => ({
+      file,
+      id: '',
+      draftId: crypto.randomUUID(),
+      type: ASSET_TYPE.cover as any,
+      path: URL.createObjectURL(file),
+      draft: true,
+    }))
+    setAssets([...newAssets, ...assets])
+  }
+
+  const updateAsset = (asset: EditorAsset) => {
+    setAssets(assets.map((a) => (a.draftId === asset.draftId ? asset : a)))
+  }
+
   // cover
   const filter = (ast: AssetFragment) => ast.path === cover
   const [selected, setSelected] = useState(assets.find(filter))
@@ -78,20 +109,38 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
           ) : undefined
         }
         rightBtn={SubmitButton}
+        hasSmUpTitle={false}
       />
 
       <Dialog.Content>
-        {/* Uploader */}
-        <Uploader setSelected={setSelected} {...uploadEntity} />
+        <Media greaterThan="sm">
+          <section className={styles.header}>
+            <section className={styles.title}>
+              <FormattedMessage defaultMessage="Set Cover" id="DjIpR6" />
+            </section>
+            <section className={styles.text}>
+              <FormattedMessage
+                defaultMessage="Select or upload a square image ( > 120×120px )"
+                id="ZgRE5H"
+              />
+            </section>
+          </section>
+        </Media>
 
-        {/* Selector */}
-        {assets.length > 0 && (
-          <Selector
-            assets={assets}
-            selected={selected}
-            setSelected={setSelected}
-          />
-        )}
+        <section className={styles.content}>
+          <Uploader addAssets={addAssets} />
+
+          {assets.map((asset, index) => (
+            <Item
+              key={asset.id || asset.draftId}
+              asset={asset}
+              selected={selected}
+              setSelected={setSelected}
+              updateAsset={updateAsset}
+              {...uploadEntity}
+            />
+          ))}
+        </section>
       </Dialog.Content>
 
       <Dialog.Footer
