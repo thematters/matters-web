@@ -1756,6 +1756,9 @@
     "defaultMessage": "Payout",
     "description": "src/components/Transaction/index.tsx"
   },
+  "SeyETM": {
+    "defaultMessage": "Remove cover"
+  },
   "Sfql0+": {
     "defaultMessage": "Congratulations! You've got the Grand Badge!"
   },

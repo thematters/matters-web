@@ -1756,6 +1756,9 @@
     "defaultMessage": "提現",
     "description": "src/components/Transaction/index.tsx"
   },
+  "SeyETM": {
+    "defaultMessage": "移除封面"
+  },
   "Sfql0+": {
     "defaultMessage": "恭喜獲得七日書大滿貫"
   },

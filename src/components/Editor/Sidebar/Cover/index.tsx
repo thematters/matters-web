@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCircleTimesFill } from '@/public/static/icons/24px/circle-times-fill.svg'
 import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
@@ -13,6 +13,7 @@ export type SidebarCoverProps = {
 } & SetCoverProps
 
 const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
+  const intl = useIntl()
   return (
     <SetCover.Dialog cover={cover} {...restProps}>
       {({ openDialog: openSetCoverDialog }) => (
@@ -26,6 +27,11 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
                     onClick={() => {
                       restProps.editCover(undefined)
                     }}
+                    role="button"
+                    aria-label={intl.formatMessage({
+                      defaultMessage: 'Remove cover',
+                      id: 'SeyETM',
+                    })}
                   >
                     <Icon
                       icon={IconCircleTimesFill}
@@ -40,7 +46,7 @@ const SidebarCover = ({ cover, disabled, ...restProps }: SidebarCoverProps) => {
                   onClick={openSetCoverDialog}
                   className={styles.rightButton}
                 >
-                  <Icon icon={IconImage} size={24} color="greyDarker" />{' '}
+                  <Icon icon={IconImage} size={24} color="greyDarker" />
                 </button>
               )}
             </>
