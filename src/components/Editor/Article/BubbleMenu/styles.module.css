@@ -62,7 +62,10 @@
     outline: none;
 
     & a {
+      @mixin line-clamp;
+
       padding-bottom: 0 !important;
+      line-height: 1.5rem;
       border-bottom: none !important;
     }
   }
