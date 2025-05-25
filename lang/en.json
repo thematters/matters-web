@@ -2440,6 +2440,9 @@
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fWZYP5": {
+    "defaultMessage": "Pinned"
+  },
   "fko+MR": {
     "defaultMessage": "Retry claiming"
   },

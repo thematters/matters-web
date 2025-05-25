@@ -2440,6 +2440,9 @@
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fWZYP5": {
+    "defaultMessage": "置頂"
+  },
   "fko+MR": {
     "defaultMessage": "重試提領"
   },
