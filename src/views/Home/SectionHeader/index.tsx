@@ -6,7 +6,7 @@ import {
   ButtonProps,
   PageHeader,
   TextIcon,
-  useRoute,
+  useChannels,
 } from '~/components'
 
 import styles from './styles.module.css'
@@ -38,15 +38,14 @@ const FeedHeader = ({
     authors: PATHS.AUTHORS,
     tags: PATHS.TAGS,
   }
-  const { isInPath } = useRoute()
-  const isInChannel = isInPath('CHANNEL')
+  const { isInTopicChannel } = useChannels()
   const titleMap = {
-    authors: isInChannel ? (
+    authors: isInTopicChannel ? (
       <FormattedMessage defaultMessage="Popular Channel Authors" id="cCpbBu" />
     ) : (
       <FormattedMessage defaultMessage="Authors" id="XgdZSb" />
     ),
-    tags: isInChannel ? (
+    tags: isInTopicChannel ? (
       <FormattedMessage defaultMessage="Related Tags" id="EiENui" />
     ) : (
       <FormattedMessage defaultMessage="Topics" id="kc79d3" />
