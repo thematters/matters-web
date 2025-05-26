@@ -7,12 +7,12 @@
   max-width: 100%;
   padding: var(--sp4) var(--sp10) var(--sp4) var(--sp8);
   font-size: var(--sp14);
-  line-height: 1.325rem;
   background: var(--color-grey-lighter);
   border-radius: var(--sp8);
 
   & input {
     max-width: calc(100vw - 102px);
+    line-height: 1.3725rem;
     background: transparent;
 
     @media (--sm-up) {

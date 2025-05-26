@@ -4,11 +4,12 @@ import { FormattedMessage } from 'react-intl'
 import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { ARTICLE_TAGS_MAX_COUNT } from '~/common/enums/article'
-import { analytics } from '~/common/utils'
+import { analytics, normalizeTag } from '~/common/utils'
 import {
   EditorSearchSelectDialog,
   Icon,
   InlineTag,
+  toDigestTagPlaceholder,
   // SearchSelectNode,
 } from '~/components'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
@@ -21,7 +22,7 @@ import TagInput from './TagInput'
 
 export interface SidebarTagsProps {
   tags: DigestTagFragment[]
-  editTags: (tag: DigestTagFragment[]) => any
+  editTags: (newTags: DigestTagFragment[]) => Promise<any>
   saving?: boolean
   disabled?: boolean
 }
@@ -33,6 +34,11 @@ const SidebarTags = ({
   disabled,
 }: SidebarTagsProps) => {
   const [isEditing, setIsEditing] = useState(false)
+
+  const onAddTag = async (tag: string) => {
+    await editTags([...tags, toDigestTagPlaceholder(normalizeTag(tag))])
+    setIsEditing(false)
+  }
 
   return (
     <EditorSearchSelectDialog
@@ -97,7 +103,7 @@ const SidebarTags = ({
                 ))}
               </ul>
             )}
-            {isEditing && <TagInput />}
+            {isEditing && <TagInput onAddTag={onAddTag} saving={saving} />}
           </div>
         </Box>
       )}
