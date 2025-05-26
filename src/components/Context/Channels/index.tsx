@@ -6,6 +6,8 @@ import { RootQueryPrivateQuery } from '~/gql/graphql'
 interface ChannelsContextType {
   channels: RootQueryPrivateQuery['channels']
   isInWritingChallengeChannel: boolean
+  isInCurationChannel: boolean
+  isInTopicChannel: boolean
 }
 
 const ChannelsContext = createContext<ChannelsContextType | undefined>(
@@ -29,11 +31,29 @@ export const ChannelsProvider = ({
     isPathStartWith(`/e/${challenge.shortHash}`, true)
   )
 
+  const curationChannels = channels?.filter(
+    (channel) => channel.__typename === 'CurationChannel'
+  )
+
+  const isInCurationChannel = curationChannels?.some((channel) =>
+    isPathStartWith(`/c/${channel.shortHash}`, true)
+  )
+
+  const topicChannels = channels?.filter(
+    (channel) => channel.__typename === 'TopicChannel'
+  )
+
+  const isInTopicChannel = topicChannels?.some((channel) =>
+    isPathStartWith(`/c/${channel.shortHash}`, true)
+  )
+
   return (
     <ChannelsContext.Provider
       value={{
         channels,
         isInWritingChallengeChannel,
+        isInCurationChannel,
+        isInTopicChannel,
       }}
     >
       {children}
