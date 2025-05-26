@@ -12,6 +12,7 @@ import {
   UPDATE_NEWEST_MOMENT_COMMENT,
 } from '~/common/enums'
 import {
+  analytics,
   formStorage,
   sanitizeContent,
   sessionStorage,
@@ -123,6 +124,10 @@ const MomentCommentForm = ({
 
     event?.preventDefault()
     setSubmitting(true)
+
+    analytics.trackEvent('click_button', {
+      type: 'moment_comment_publish',
+    })
 
     try {
       await putComment({

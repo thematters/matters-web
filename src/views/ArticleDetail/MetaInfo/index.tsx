@@ -64,7 +64,14 @@ const MetaInfo = ({
   return (
     <section className={styles.info}>
       <section className={styles.author}>
-        <UserDigest.Plain user={article.author} />
+        <UserDigest.Mini
+          user={article.author}
+          avatarSize={20}
+          textSize={12}
+          nameColor="greyDarker"
+          hasAvatar
+          hasDisplayName
+        />
         <section className={styles.dot}>
           <DotDivider />
         </section>

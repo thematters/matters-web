@@ -92,10 +92,6 @@
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
-  "/NX9L+": {
-    "defaultMessage": "去錢包確認",
-    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
-  },
   "/TXBJR": {
     "defaultMessage": "不知道哪裏出錯了，過幾分鐘看看",
     "description": "UNKNOWN_ERROR"
@@ -103,9 +99,6 @@
   "/ZmvO+": {
     "defaultMessage": "分隔線",
     "description": "src/components/Editor"
-  },
-  "/cyuh2": {
-    "defaultMessage": "去錢包授權"
   },
   "/dKzfc": {
     "defaultMessage": "該作品因違反社區約章，已被站方強制歸檔。"
@@ -150,6 +143,9 @@
   },
   "0Om2Kl": {
     "defaultMessage": "移出選集"
+  },
+  "0PpH2v": {
+    "defaultMessage": "去錢包授權"
   },
   "0SQatS": {
     "defaultMessage": "看全部",
@@ -777,6 +773,9 @@
   "AtjJEA": {
     "defaultMessage": "發布",
     "description": "src/views/MomentDetail/Edit/index.tsx"
+  },
+  "AvRTYR": {
+    "defaultMessage": "您授權 Matters 可使用的 USDT 額度不足，請重新設置"
   },
   "Avukw5": {
     "defaultMessage": "支付金額太少，請重新輸入",
@@ -1450,6 +1449,10 @@
   "N6PWfU": {
     "defaultMessage": "忘記密碼"
   },
+  "N6Yp+k": {
+    "defaultMessage": "去錢包確認",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "NACY16": {
     "defaultMessage": "為什麼需要設定錢包 ?",
     "description": "src/components/Forms/PaymentForm/BindWallet/index.tsx"
@@ -2043,6 +2046,10 @@
   "Xq7h6o": {
     "defaultMessage": "上傳動態圖片"
   },
+  "XqTMgg": {
+    "defaultMessage": "去錢包設置",
+    "description": "REAUTHORIZE"
+  },
   "XuYhBC": {
     "defaultMessage": "代表作已設置"
   },
@@ -2436,6 +2443,9 @@
   "fWDtpq": {
     "defaultMessage": "邀請中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "fWZYP5": {
+    "defaultMessage": "置頂"
   },
   "fko+MR": {
     "defaultMessage": "重試提領"
@@ -3101,6 +3111,9 @@
   "tQ3+Xo": {
     "defaultMessage": "標籤添加最多至 5 個",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
+  },
+  "tQCtdN": {
+    "defaultMessage": "需要先授權 Matters 為你進行 USDT 交易"
   },
   "tQV8l8": {
     "defaultMessage": "未知錯誤"
