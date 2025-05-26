@@ -105,7 +105,7 @@ const SidebarTags = ({
             )}
             {isEditing && (
               <div className={styles.tagInput}>
-                <TagInput onAddTag={onAddTag} saving={saving} />
+                <TagInput tags={tags} onAddTag={onAddTag} saving={saving} />
               </div>
             )}
           </div>
