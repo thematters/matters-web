@@ -1,12 +1,14 @@
 .list {
-  padding: 0 0 0 var(--sp16);
-
-  & li {
-    display: inline-block;
-    padding: var(--sp16) var(--sp16) 0 0;
-  }
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp10);
+  padding: var(--sp10) 0 0;
 }
 
 .content {
-  padding: var(--sp10) var(--sp16) 0;
+  padding: 0 var(--sp16);
+}
+
+.tagInput {
+  padding: var(--sp10) 0 0;
 }

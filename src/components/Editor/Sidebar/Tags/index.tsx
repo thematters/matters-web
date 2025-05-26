@@ -103,7 +103,11 @@ const SidebarTags = ({
                 ))}
               </ul>
             )}
-            {isEditing && <TagInput onAddTag={onAddTag} saving={saving} />}
+            {isEditing && (
+              <div className={styles.tagInput}>
+                <TagInput onAddTag={onAddTag} saving={saving} />
+              </div>
+            )}
           </div>
         </Box>
       )}
