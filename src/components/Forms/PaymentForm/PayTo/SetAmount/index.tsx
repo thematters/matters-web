@@ -232,7 +232,6 @@ const SetAmount: React.FC<FormProps> = ({
     isUSDT &&
     allowanceUSDT >= 0n &&
     parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
-  const needReauthorize = isExceededAllowance && allowanceUSDT > 0n
   const hasUSDTNetworkError =
     isUSDT && (allowanceError || balanceUSDTError || approveError) // TODO: better error handling
   const isUserRejectedError =
@@ -360,32 +359,7 @@ const SetAmount: React.FC<FormProps> = ({
             }
           },
           error: errors.amount,
-          hint: (
-            <>
-              <ComposedAmountInputHint />
-
-              <Spacer size="sp4" />
-              {isExceededAllowance && (
-                <section>
-                  {needReauthorize ? (
-                    <p>
-                      <FormattedMessage
-                        defaultMessage="Your authorized USDT limit for Matters is insufficient, please reauthorize it."
-                        id="AvRTYR"
-                      />
-                    </p>
-                  ) : (
-                    <p>
-                      <FormattedMessage
-                        defaultMessage="You need to authorize Matters to perform USDT transactions for you."
-                        id="tQCtdN"
-                      />
-                    </p>
-                  )}
-                </section>
-              )}
-            </>
-          ),
+          hint: <ComposedAmountInputHint />,
           ref: customInputRef,
         }}
         spacingTop="base"
@@ -405,7 +379,6 @@ const SetAmount: React.FC<FormProps> = ({
     isValid,
     isSubmitting,
     isExceededAllowance,
-    needReauthorize,
     isBalanceInsufficient,
     switchToAddCredit,
     approving,
