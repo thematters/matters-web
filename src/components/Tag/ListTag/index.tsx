@@ -58,7 +58,7 @@ export const ListTag = ({
     ...customTextIconProps,
   }
 
-  const Inner = () => (
+  const Inner = (
     <>
       <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
         <span className={styles.name}>{tagName}</span>
@@ -76,7 +76,7 @@ export const ListTag = ({
         onClick={onClick}
         data-test-id={TEST_ID.DIGEST_TAG_LIST}
       >
-        <Inner />
+        {Inner}
       </a>
     </Link>
   ) : (
@@ -85,7 +85,7 @@ export const ListTag = ({
       onClick={onClick}
       data-test-id={TEST_ID.DIGEST_TAG_LIST}
     >
-      <Inner />
+      {Inner}
     </span>
   )
 }
