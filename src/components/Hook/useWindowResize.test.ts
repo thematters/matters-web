@@ -33,7 +33,11 @@ describe('components/Hook/useWindowResize', () => {
       window.dispatchEvent(new Event('resize'))
     })
     // Debounce time needs to be waited out
-    vi.advanceTimersByTime(WINDOW_RESIZE_DEBOUNCE)
+
+    act(() => {
+      vi.advanceTimersByTime(WINDOW_RESIZE_DEBOUNCE)
+    })
+
     expect(result.current).toEqual([500, 500])
   })
 

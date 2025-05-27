@@ -53,7 +53,7 @@ describe('<Form.Select>', () => {
     fireEvent.click($select)
     const $list = screen.getByRole('listbox')
     expect($list).toBeInTheDocument()
-    expect($list).toHaveAttribute('aria-labelledby', `field-${name}`)
+    expect($list).toHaveAttribute('aria-labelledby', `__use_id__`)
 
     // options
     const $options = screen.getAllByRole('option')

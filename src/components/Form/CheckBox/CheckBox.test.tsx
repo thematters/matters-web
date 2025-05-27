@@ -9,7 +9,7 @@ const setup = () => {
   const placeholder = 'Username'
   const hint = 'This is a hint'
   const fieldId = `__use_id__`
-  const fieldMsgId = `__use_id__-msg`
+  const fieldMsgId = `__use_id__-msg-${name}`
 
   const handleOnChange = vi.fn()
   const handleOnBlur = vi.fn()

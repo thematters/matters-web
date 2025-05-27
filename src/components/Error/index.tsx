@@ -70,7 +70,7 @@ export const Error: React.FC<React.PropsWithChildren<ErrorProps>> = ({
         />
       </section>
 
-      <p className={styles.errorMessage} role="alert" aria-live="assertive">
+      <p className={styles.errorMessage}>
         {message ? (
           message
         ) : type === 'not_found' ? (
