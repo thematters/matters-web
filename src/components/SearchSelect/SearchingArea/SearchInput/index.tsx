@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Formik } from 'formik'
 import { useContext, useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconMinus } from '@/public/static/icons/24px/minus.svg'
@@ -34,6 +34,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const fieldId = useId()
   const { lang } = useContext(LanguageContext)
   const intl = useIntl()
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   const textAriaLabel = intl.formatMessage({
     defaultMessage: 'Search',
     id: 'xmcVZ0',
@@ -82,9 +84,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
             autoComplete="off"
             action=""
           >
-            <VisuallyHidden>
-              <label htmlFor={fieldId}>{textAriaLabel}</label>
-            </VisuallyHidden>
+            <label htmlFor={fieldId} {...visuallyHiddenProps}>
+              {textAriaLabel}
+            </label>
 
             <input
               id={fieldId}

@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import { forwardRef, useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 
 import { Spinner } from '~/components'
 
@@ -18,6 +18,7 @@ export type SwitchProps = {
 export const Switch = forwardRef(
   ({ name, label, onChange, checked, loading, disabled }: SwitchProps, ref) => {
     const fieldId = useId()
+    const { visuallyHiddenProps } = useVisuallyHidden()
 
     const switchClasses = classNames({
       [styles.switch]: true,
@@ -26,7 +27,7 @@ export const Switch = forwardRef(
 
     return (
       <label htmlFor={fieldId} className={switchClasses}>
-        <VisuallyHidden>{label}</VisuallyHidden>
+        <span {...visuallyHiddenProps}>{label}</span>
 
         <input
           type="checkbox"

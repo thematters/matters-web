@@ -1,8 +1,8 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useDrag } from '@use-gesture/react'
 import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useRef, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 
 import {
   DISABLE_SUSPEND_DISMISS_ON_ESC,
@@ -58,6 +58,8 @@ const Inner: React.FC<
 }) => {
   const node: React.RefObject<any> | null = useRef(null)
   const [suspendDismissOnESC, setSuspendDismissOnESC] = useState(false)
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   useEventListener(ENABLE_SUSPEND_DISMISS_ON_ESC, () => {
     setSuspendDismissOnESC(true)
@@ -159,9 +161,12 @@ const Inner: React.FC<
         handleKeyboardEvent(nativeEvent)
       }}
     >
-      <VisuallyHidden>
-        <button type="button" ref={initialFocusRef} aria-hidden="true" />
-      </VisuallyHidden>
+      <button
+        type="button"
+        ref={initialFocusRef}
+        aria-hidden="true"
+        {...visuallyHiddenProps}
+      />
 
       <Media at="sm">
         {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}

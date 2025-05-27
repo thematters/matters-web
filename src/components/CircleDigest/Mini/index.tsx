@@ -1,7 +1,7 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
+import { useVisuallyHidden } from 'react-aria'
 
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
@@ -27,6 +27,8 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
     [styles.container]: true,
   })
 
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   return (
     <Card
       {...path}
@@ -37,9 +39,7 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
       <section className={containerClasses}>
         <Link {...path} legacyBehavior>
           <a className={styles.avatar}>
-            <VisuallyHidden>
-              <span>{circle.displayName}</span>
-            </VisuallyHidden>
+            <span {...visuallyHiddenProps}>{circle.displayName}</span>
             <CircleAvatar circle={circle} size={48} />
           </a>
         </Link>

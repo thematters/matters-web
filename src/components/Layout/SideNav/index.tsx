@@ -1,5 +1,5 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useContext } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
@@ -27,6 +27,8 @@ import styles from './styles.module.css'
 const SideNavMenu = () => {
   const { isInPath, isPathStartWith, getQuery } = useRoute()
   const viewer = useContext(ViewerContext)
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   const name = getQuery('name')
   const viewerUserName = viewer.userName || ''
@@ -74,11 +76,9 @@ const SideNavMenu = () => {
       <Dropdown
         content={
           <section>
-            <VisuallyHidden>
-              <button type="button">
-                <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
-              </button>
-            </VisuallyHidden>
+            <button type="button" {...visuallyHiddenProps}>
+              <FormattedMessage defaultMessage="Cancel" id="47FYwb" />
+            </button>
             <MeMenu />
           </section>
         }

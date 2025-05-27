@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { Formik } from 'formik'
 import { useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
@@ -31,6 +31,8 @@ const SearchInput: React.FC<SearchInputProps> = ({
     id: 'xmcVZ0',
   })
 
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   return (
     <Formik initialValues={{ q: '' }} enableReinitialize onSubmit={() => {}}>
       {({ values, setValues, handleSubmit, handleChange }) => {
@@ -42,9 +44,9 @@ const SearchInput: React.FC<SearchInputProps> = ({
             autoComplete="off"
             action=""
           >
-            <VisuallyHidden>
-              <label htmlFor={fieldId}>{searchCopy}</label>
-            </VisuallyHidden>
+            <label htmlFor={fieldId} {...visuallyHiddenProps}>
+              {searchCopy}
+            </label>
 
             <input
               id={fieldId}

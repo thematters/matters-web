@@ -1,7 +1,7 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
 import { useEffect, useId, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
@@ -76,6 +76,8 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = useId()
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   useEffect(() => {
     return () => {
@@ -182,20 +184,19 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
         )}
       </div>
 
-      <VisuallyHidden>
-        <input
-          id={fieldId}
-          type="file"
-          name="file"
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Upload avatar',
-            id: 'mqa6CF',
-          })}
-          accept={acceptTypes}
-          multiple={false}
-          onChange={handleChange}
-        />
-      </VisuallyHidden>
+      <input
+        id={fieldId}
+        type="file"
+        name="file"
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Upload avatar',
+          id: 'mqa6CF',
+        })}
+        accept={acceptTypes}
+        multiple={false}
+        onChange={handleChange}
+        {...visuallyHiddenProps}
+      />
     </label>
   )
 }

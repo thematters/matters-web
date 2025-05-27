@@ -1,5 +1,5 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useContext, useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import {
@@ -52,6 +52,8 @@ const MigrationDialogUpload = ({
   const acceptTypes = ACCEPTED_UPLOAD_MIGRATION_TYPES.join(',')
   const [migration, { loading }] = useMutation<MigrationMutation>(MIGRATION)
   const language = lang === 'en' ? 'zh_hant' : lang
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -146,20 +148,19 @@ const MigrationDialogUpload = ({
           }
         />
 
-        <VisuallyHidden>
-          <input
-            id={fieldId}
-            type="file"
-            name="file"
-            aria-label={intl.formatMessage({
-              defaultMessage: 'Upload file',
-              id: '6oOCCL',
-            })}
-            accept={acceptTypes}
-            multiple
-            onChange={handleChange}
-          />
-        </VisuallyHidden>
+        <input
+          id={fieldId}
+          type="file"
+          name="file"
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Upload file',
+            id: '6oOCCL',
+          })}
+          accept={acceptTypes}
+          multiple
+          onChange={handleChange}
+          {...visuallyHiddenProps}
+        />
       </label>
     </>
   )

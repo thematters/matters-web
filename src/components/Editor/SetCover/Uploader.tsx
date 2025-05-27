@@ -1,7 +1,7 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import _omit from 'lodash/omit'
 import { useContext, useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
@@ -69,6 +69,8 @@ const Uploader: React.FC<UploaderProps> = ({
 
   const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = useId()
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -173,20 +175,19 @@ const Uploader: React.FC<UploaderProps> = ({
         />
       </p>
 
-      <VisuallyHidden>
-        <input
-          id={fieldId}
-          type="file"
-          name="file"
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Upload Cover',
-            id: 'QvPc1q',
-          })}
-          accept={acceptTypes}
-          multiple={false}
-          onChange={handleChange}
-        />
-      </VisuallyHidden>
+      <input
+        id={fieldId}
+        type="file"
+        name="file"
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Upload Cover',
+          id: 'QvPc1q',
+        })}
+        accept={acceptTypes}
+        multiple={false}
+        onChange={handleChange}
+        {...visuallyHiddenProps}
+      />
     </label>
   )
 }

@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import { useId, useLayoutEffect, useRef, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 
 import { ReactComponent as IconSquare } from '@/public/static/icons/24px/squire.svg'
 import { ReactComponent as IconSquareCheck } from '@/public/static/icons/24px/squire-check.svg'
@@ -47,6 +47,8 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   const [lineClampable, setLineClampable] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
   const node: React.RefObject<any> | null = useRef(null)
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   useLayoutEffect(() => {
     if (!node || !node.current) {
@@ -107,14 +109,13 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
             </section>
           </TextIcon>
 
-          <VisuallyHidden>
-            <input
-              {...inputProps}
-              id={fieldId}
-              type="checkbox"
-              aria-describedby={fieldMsgId}
-            />
-          </VisuallyHidden>
+          <input
+            {...inputProps}
+            id={fieldId}
+            type="checkbox"
+            aria-describedby={fieldMsgId}
+            {...visuallyHiddenProps}
+          />
         </label>
       </section>
     </Tooltip>

@@ -1,4 +1,3 @@
-import { DialogContent, DialogOverlay } from '@reach/dialog'
 import classNames from 'classnames'
 import _get from 'lodash/get'
 import { useEffect, useRef, useState } from 'react'
@@ -20,6 +19,7 @@ import Header from './Header'
 import Inner, { DialogInnerProps } from './Inner'
 import Lazy from './Lazy'
 import styles from './styles.module.css'
+import { DialogContent, DialogOverlay } from './vendors'
 
 export type DialogProps = {
   isOpen: boolean | undefined
@@ -87,12 +87,10 @@ const BaseAnimatedDilaog: React.ComponentType<
     [styles.fixedWidth]: fixedWidth,
   })
 
-  // @ts-ignore - The type definition mismatch between react-spring and @reach/dialog
   const AnimatedDialogOverlay = animated(DialogOverlay)
   const AnimatedInner = animated(Inner)
 
   return (
-    // @ts-ignore - The type definition mismatch between react-spring and @reach/dialog
     <AnimatedDialogOverlay
       className={dialogOverlayClasses}
       initialFocusRef={initialFocusRef}
@@ -100,7 +98,6 @@ const BaseAnimatedDilaog: React.ComponentType<
       dangerouslyBypassScrollLock={bypassScrollLock}
       dangerouslyBypassFocusLock={bypassFocusLock}
     >
-      {/* @ts-ignore - The type definition for DialogContent is incorrect */}
       <DialogContent
         className={containerClasses}
         aria-labelledby="dialog-title"

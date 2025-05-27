@@ -1,7 +1,8 @@
-import { DialogContent, DialogOverlay } from '@reach/dialog'
 import { useRef } from 'react'
 import { useIntl } from 'react-intl'
 import { animated, useTransition } from 'react-spring'
+
+import { DialogContent, DialogOverlay } from '~/components/Dialog/vendors'
 
 import DrawerContent from './DrawerContent'
 import Overlay from './Overlay'
@@ -30,7 +31,6 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
     config: { tension: 270, friction: 30 },
   })
 
-  // @ts-ignore - The type definition mismatch between react-spring and @reach/dialog
   const AnimatedDrawerOverlay = animated(DialogOverlay)
   const AnimatedDrawerContent = animated(DrawerContent)
   const AnimatedOverlay = animated(Overlay)
@@ -38,7 +38,6 @@ const SideDrawerNav: React.FC<SideDrawerNavProps> = ({ isOpen, onDismiss }) => {
   return (
     <>
       {transition(({ opacity, transform }) => (
-        // @ts-ignore - The type definition mismatch between react-spring and @reach/dialog
         <AnimatedDrawerOverlay
           className={styles.overlay}
           initialFocusRef={closeButtonRef}

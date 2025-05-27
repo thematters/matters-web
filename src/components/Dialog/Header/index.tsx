@@ -1,5 +1,5 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage } from 'react-intl'
 
 import { Media } from '~/components'
@@ -22,17 +22,22 @@ export interface HeaderProps {
 const Title = ({
   title,
   titleLeft,
-}: Pick<HeaderProps, 'title' | 'titleLeft'>) => (
-  <h1
-    id="dialog-title"
-    className={classNames({
-      [styles.titleCenter]: !titleLeft,
-      [styles.title]: true,
-    })}
-  >
-    {title}
-  </h1>
-)
+}: Pick<HeaderProps, 'title' | 'titleLeft'>) => {
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
+  return (
+    <h1
+      id="dialog-title"
+      className={classNames({
+        [styles.titleCenter]: !titleLeft,
+        [styles.title]: true,
+      })}
+      {...visuallyHiddenProps}
+    >
+      {title}
+    </h1>
+  )
+}
 
 const Header: React.FC<HeaderProps> = ({
   title,
@@ -68,9 +73,7 @@ const Header: React.FC<HeaderProps> = ({
             <Title title={title} />
           </header>
         ) : (
-          <VisuallyHidden>
-            <Title title={title} />
-          </VisuallyHidden>
+          <Title title={title} />
         )}
       </Media>
     </>

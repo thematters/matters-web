@@ -1,7 +1,7 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import useEmblaCarousel from 'embla-carousel-react'
 import Link from 'next/link'
 import { useCallback, useEffect, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage } from 'react-intl'
 
 import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
@@ -19,6 +19,8 @@ import layoutStyles from '../layout.module.css'
 import styles from './styles.module.css'
 
 const Hero = () => {
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   const [emblaRef, emblaApi] = useEmblaCarousel({
     dragFree: true,
     loop: false,
@@ -60,11 +62,9 @@ const Hero = () => {
           <div className={layoutStyles.content}>
             <Link href={PATHS.HOME} legacyBehavior>
               <a>
-                <VisuallyHidden>
-                  <span>
-                    <FormattedMessage defaultMessage="Discover" id="cE4Hfw" />
-                  </span>
-                </VisuallyHidden>
+                <span {...visuallyHiddenProps}>
+                  <FormattedMessage defaultMessage="Discover" id="cE4Hfw" />
+                </span>
                 <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
               </a>
             </Link>

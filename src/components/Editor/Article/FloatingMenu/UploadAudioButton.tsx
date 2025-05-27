@@ -1,7 +1,7 @@
 import { Editor } from '@matters/matters-editor'
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import { useId, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconEditorAudio } from '@/public/static/icons/editor-audio.svg'
@@ -44,6 +44,8 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
 
   const acceptTypes = ACCEPTED_UPLOAD_AUDIO_TYPES.join(',')
   const fieldId = useId()
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -124,22 +126,21 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
         {!uploading && <Icon icon={IconEditorAudio} size={32} />}
         {uploading && <Spinner size={32} color="greyLight" />}
 
-        <VisuallyHidden>
-          <input
-            id={fieldId}
-            type="file"
-            name="file"
-            aria-label={intl.formatMessage({
-              defaultMessage: 'Audio',
-              id: '6mbNSp',
-              description: 'src/components/Editor',
-            })}
-            disabled={uploading}
-            accept={acceptTypes}
-            multiple={false}
-            onChange={handleChange}
-          />
-        </VisuallyHidden>
+        <input
+          id={fieldId}
+          type="file"
+          name="file"
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Audio',
+            id: '6mbNSp',
+            description: 'src/components/Editor',
+          })}
+          disabled={uploading}
+          accept={acceptTypes}
+          multiple={false}
+          onChange={handleChange}
+          {...visuallyHiddenProps}
+        />
       </label>
     </Tooltip>
   )

@@ -1,7 +1,7 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import Link from 'next/link'
 import React from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage } from 'react-intl'
 
 import { TEST_ID } from '~/common/enums'
@@ -54,6 +54,8 @@ const Rich = ({
 
   ...cardProps
 }: UserDigestRichProps) => {
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   const isArchived = user?.status?.state === 'archived'
   const containerClasses = classNames({
     [styles.container]: true,
@@ -121,9 +123,7 @@ const Rich = ({
   const AvatarContent = () => {
     return (
       <>
-        <VisuallyHidden>
-          <span>{user.displayName}</span>
-        </VisuallyHidden>
+        <span {...visuallyHiddenProps}>{user.displayName}</span>
         <Avatar size={size === 'sm' ? 32 : 48} user={user} />
         {avatarBadge && <span className={styles.badge}>{avatarBadge}</span>}
       </>

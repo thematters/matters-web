@@ -1,5 +1,5 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 
 import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
 import { Icon, TextIcon } from '~/components'
@@ -30,6 +30,8 @@ const CheckBox: React.FC<CheckBoxProps> = ({
   const fieldId = useId()
   const fieldMsgId = `${fieldId}-msg-${name}`
 
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   return (
     <Field spacingTop={spacingTop} spacingBottom={spacingBottom}>
       <label className={styles.label} htmlFor={fieldId}>
@@ -47,15 +49,14 @@ const CheckBox: React.FC<CheckBoxProps> = ({
           <span>{hint}</span>
         </TextIcon>
 
-        <VisuallyHidden>
-          <input
-            {...inputProps}
-            id={fieldId}
-            type="checkbox"
-            aria-describedby={fieldMsgId}
-            name={name}
-          />
-        </VisuallyHidden>
+        <input
+          {...inputProps}
+          id={fieldId}
+          type="checkbox"
+          aria-describedby={fieldMsgId}
+          name={name}
+          {...visuallyHiddenProps}
+        />
       </label>
 
       <Field.Footer

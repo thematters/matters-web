@@ -1,4 +1,4 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
+import { useVisuallyHidden } from 'react-aria'
 
 import styles from './styles.module.css'
 
@@ -17,12 +17,14 @@ const Header: React.FC<HeaderProps> = ({
   hasLabel,
   extraButton,
 }) => {
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   if (!label && !extraButton) {
     return null
   }
 
   const Inner = () => (
-    <header className={styles.header}>
+    <header className={styles.header} {...visuallyHiddenProps}>
       <label htmlFor={htmlFor} {...(labelId ? { id: labelId } : {})}>
         {label}
       </label>
@@ -32,11 +34,7 @@ const Header: React.FC<HeaderProps> = ({
   )
 
   if (!hasLabel) {
-    return (
-      <VisuallyHidden>
-        <Inner />
-      </VisuallyHidden>
-    )
+    return <Inner />
   }
 
   return <Inner />

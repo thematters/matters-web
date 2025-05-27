@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import { useCallback, useEffect, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/circle-plus.svg'
@@ -38,6 +38,8 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
   isInPage,
 }) => {
   const intl = useIntl()
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   const [assets, setAssets] = useState<MomentAsset[]>(_assets)
 
@@ -137,21 +139,20 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
   }
 
   const FileInput = (
-    <VisuallyHidden>
-      <input
-        id={fieldId}
-        type="file"
-        name="file"
-        aria-label={intl.formatMessage({
-          defaultMessage: 'Upload Moment Assets',
-          id: 'Xq7h6o',
-        })}
-        accept={acceptTypes}
-        multiple={true}
-        onChange={handleChange}
-        // onClick={handleClick}
-      />
-    </VisuallyHidden>
+    <input
+      id={fieldId}
+      type="file"
+      name="file"
+      aria-label={intl.formatMessage({
+        defaultMessage: 'Upload Moment Assets',
+        id: 'Xq7h6o',
+      })}
+      accept={acceptTypes}
+      multiple={true}
+      onChange={handleChange}
+      // onClick={handleClick}
+      {...visuallyHiddenProps}
+    />
   )
 
   const imageButtonClasses = classNames(styles.imageButton, styles.editing)

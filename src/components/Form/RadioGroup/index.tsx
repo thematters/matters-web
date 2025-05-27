@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import classNames from 'classnames'
 import { useEffect, useId, useRef } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 
 import { ReactComponent as IconCircleCheckedFill } from '@/public/static/icons/24px/circle-check-fill.svg'
 import { ReactComponent as IconCircleEmpty } from '@/public/static/icons/24px/circle-empty.svg'
@@ -62,6 +62,8 @@ const RadioInput: React.FC<RadioInputProps> = ({
   const fieldId = useId()
   const isActive = currentValue === value
 
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
   const itemClasses = classNames({
     [styles.radioInputItem]: true,
     'u-area-disable': disabled,
@@ -91,18 +93,17 @@ const RadioInput: React.FC<RadioInputProps> = ({
           {label}
         </TextIcon>
 
-        <VisuallyHidden>
-          <input
-            {...inputProps}
-            id={fieldId}
-            value={value}
-            name={name} // share the same name for single selection
-            type="radio"
-            aria-describedby={fieldMsgId}
-            disabled={disabled}
-            ref={inputRef}
-          />
-        </VisuallyHidden>
+        <input
+          {...inputProps}
+          id={fieldId}
+          value={value}
+          name={name} // share the same name for single selection
+          type="radio"
+          aria-describedby={fieldMsgId}
+          disabled={disabled}
+          ref={inputRef}
+          {...visuallyHiddenProps}
+        />
       </label>
     </li>
   )

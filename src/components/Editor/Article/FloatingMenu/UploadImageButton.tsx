@@ -1,6 +1,6 @@
 import { Editor } from '@matters/matters-editor'
-import { VisuallyHidden } from '@radix-ui/react-visually-hidden'
 import { useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconEditorImage } from '@/public/static/icons/editor-image.svg'
@@ -19,6 +19,8 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({ editor }) => {
 
   const acceptTypes = ACCEPTED_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = useId()
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -49,21 +51,20 @@ const UploadImageButton: React.FC<UploadImageButtonProps> = ({ editor }) => {
       <label className={styles.uploadButton} htmlFor={fieldId}>
         <Icon icon={IconEditorImage} size={32} />
 
-        <VisuallyHidden>
-          <input
-            id={fieldId}
-            type="file"
-            name="file"
-            aria-label={intl.formatMessage({
-              defaultMessage: 'Image',
-              id: 'G4KR8j',
-              description: 'src/components/Editor',
-            })}
-            accept={acceptTypes}
-            multiple={true}
-            onChange={handleChange}
-          />
-        </VisuallyHidden>
+        <input
+          id={fieldId}
+          type="file"
+          name="file"
+          aria-label={intl.formatMessage({
+            defaultMessage: 'Image',
+            id: 'G4KR8j',
+            description: 'src/components/Editor',
+          })}
+          accept={acceptTypes}
+          multiple={true}
+          onChange={handleChange}
+          {...visuallyHiddenProps}
+        />
       </label>
     </Tooltip>
   )
