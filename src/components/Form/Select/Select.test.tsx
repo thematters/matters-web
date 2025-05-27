@@ -71,7 +71,7 @@ describe('<Form.Select>', () => {
 
     // select another option
     expect(handleOnChange).not.toBeCalled()
-    $unselectedOptions[0].click()
+    fireEvent.click($unselectedOptions[0])
     expect(handleOnChange).toBeCalled()
 
     const $selectedOption = screen.getByRole('option', {

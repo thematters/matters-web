@@ -1,7 +1,7 @@
-import { fireEvent } from '@testing-library/react'
 import { useRef } from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
+import { fireEvent } from '~/common/utils/test'
 import { render, screen } from '~/common/utils/test'
 
 import { useOutsideClick } from './useOutsideClick'

@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { CircleDigest } from '~/components'
 import { MOCK_CIRCLE } from '~/stories/mocks'
 
@@ -20,7 +20,7 @@ describe('<CircleDigest.Title>', () => {
     })
     expect($displayName).toBeInTheDocument()
 
-    $digest.click()
+    fireEvent.click($digest)
     expect(mockRouter.asPath).toContain(MOCK_CIRCLE.name)
     expect(handleClick).toBeCalledTimes(1)
   })
@@ -41,7 +41,7 @@ describe('<CircleDigest.Title>', () => {
     expect($displayName.tagName).toBe('SPAN')
     expect($displayName).toBeInTheDocument()
 
-    $displayName.click()
+    fireEvent.click($displayName)
     expect(mockRouter.asPath).not.toContain(MOCK_CIRCLE.name)
     expect(handleClick).not.toBeCalled()
   })

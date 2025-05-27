@@ -1,7 +1,7 @@
-import { act, renderHook } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 
 import { WINDOW_RESIZE_DEBOUNCE } from '~/common/enums'
+import { act, renderHook } from '~/common/utils/test'
 
 import { useWindowResize } from './useWindowResize'
 

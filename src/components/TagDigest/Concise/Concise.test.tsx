@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { TagDigest } from '~/components'
 import { MOCK_TAG } from '~/stories/mocks'
 
@@ -19,7 +19,7 @@ describe('<TagDigest.Concise>', () => {
     const $articleCount = screen.getByText(MOCK_TAG.numArticles)
     expect($articleCount).toBeInTheDocument()
 
-    $digest.click()
+    fireEvent.click($digest)
     expect(mockRouter.asPath).toContain(MOCK_TAG.slug)
   })
 

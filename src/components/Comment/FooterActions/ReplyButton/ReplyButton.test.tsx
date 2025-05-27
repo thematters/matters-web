@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { MOCK_COMMENT } from '~/stories/mocks'
 
 import ReplyButton from './'
@@ -14,7 +14,7 @@ describe('<Comment/FooterActions/ReplyButton>', () => {
     const $button = screen.getByRole('button', { name: 'Write a comment' })
     expect($button).toBeInTheDocument()
 
-    $button.click()
+    fireEvent.click($button)
     expect(onClick).toHaveBeenCalled()
   })
 
@@ -28,7 +28,7 @@ describe('<Comment/FooterActions/ReplyButton>', () => {
     const $button = screen.getByRole('button', { name: 'Write a comment' })
     expect($button).toBeInTheDocument()
 
-    $button.click()
+    fireEvent.click($button)
     expect(onClick).not.toHaveBeenCalled()
   })
 })

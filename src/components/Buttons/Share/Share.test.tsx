@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { PATHS, TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { ShareButton } from '~/components'
 
 describe('<ShareButton>', () => {
@@ -15,7 +15,7 @@ describe('<ShareButton>', () => {
     const $button = screen.getByRole('button', { name: 'Share' })
     expect($button).toBeInTheDocument()
 
-    $button.click()
+    fireEvent.click($button)
 
     expect(screen.getByTestId(TEST_ID.DIALOG_SHARE)).toBeInTheDocument()
   })

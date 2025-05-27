@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { Form } from '~/components'
 
 describe('<Form.SquareCheckBox>', () => {
@@ -68,7 +68,7 @@ describe('<Form.SquareCheckBox>', () => {
     expect(handleOnChange).toHaveBeenCalledTimes(0)
 
     // onChange has been called
-    $checkbox.click()
+    fireEvent.click($checkbox)
     expect($checkbox).toBeChecked()
     expect(handleOnChange).toHaveBeenCalledTimes(1)
   })

@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import gql from 'graphql-tag'
 
 import IMAGE_MATTERS_ARCHITECT_RING from '@/public/static/icons/architect-ring.svg?url'
-import ICON_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg?url'
+import IMAGE_AVATAR_DEFAULT from '@/public/static/icons/avatar-default.svg?url'
 import IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING from '@/public/static/icons/civic-liker-architect-ring.svg?url'
 import IMAGE_CIVIC_LIKER_RING from '@/public/static/icons/civic-liker-ring.svg?url'
 import IconLogbook from '@/public/static/icons/logbook.svg'
@@ -78,7 +78,7 @@ export const Avatar = (props: AvatarProps) => {
     inProfile,
     showLogbook = true,
   } = props
-  const source = src || user?.avatar || ICON_AVATAR_DEFAULT
+  const source = src || user?.avatar || IMAGE_AVATAR_DEFAULT
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
   const isCivicLiker = user?.liker.civicLiker

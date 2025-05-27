@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import IconEdit from '@/public/static/icons/24px/edit.svg?url'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
 import { MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Icon, Menu, toast } from '~/components'

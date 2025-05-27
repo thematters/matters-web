@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { ArticleDigestNotice } from '~/components'
 import { MOCK_ARTILCE } from '~/stories/mocks'
 
@@ -19,7 +19,7 @@ describe('<ArticleDigest.Notice>', () => {
     const $summary = screen.getByText(MOCK_ARTILCE.summary)
     expect($summary).toBeInTheDocument()
 
-    $digest.click()
+    fireEvent.click($digest)
     expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
   })
 })

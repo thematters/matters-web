@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { ArticleDigestArchived } from '~/components'
 import { MOCK_ARTILCE } from '~/stories/mocks'
 
@@ -16,7 +16,7 @@ describe('<ArticleDigest.Archived>', () => {
     const $title = screen.getByRole('heading', { name: MOCK_ARTILCE.title })
     expect($title).toBeInTheDocument()
 
-    $title.click()
+    fireEvent.click($title)
     expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
   })
 })

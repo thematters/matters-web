@@ -108,9 +108,9 @@ describe('<ComposedAmountInput>', () => {
     expect(screen.queryByText(customInputHint)).not.toBeInTheDocument()
 
     // check and switch
-    $radios[0].click()
+    fireEvent.click($radios[0])
     expect($radios[0]).toBeChecked()
-    $radios[1].click()
+    fireEvent.click($radios[1])
     expect($radios[1]).toBeChecked()
     expect($radios[0]).not.toBeChecked()
   })
