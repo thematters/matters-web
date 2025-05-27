@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/client'
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
-import { ReactComponent as IconLTime } from '@/public/static/icons/24px/l-time.svg'
-import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
-import { ReactComponent as IconReset } from '@/public/static/icons/24px/reset.svg'
+import IconCircleMinus from '@/public/static/icons/24px/circle-minus.svg'
+import IconLTime from '@/public/static/icons/24px/l-time.svg'
+import IconNavCreate from '@/public/static/icons/24px/nav-create.svg'
+import IconReset from '@/public/static/icons/24px/reset.svg'
 import { Icon, Menu, Spinner } from '~/components'
 import { ArticleRecommendAdminQuery } from '~/gql/graphql'
 

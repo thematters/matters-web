@@ -4,7 +4,7 @@ import { useContext, useId, useRef, useState } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
+import IconLeft from '@/public/static/icons/24px/left.svg'
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,

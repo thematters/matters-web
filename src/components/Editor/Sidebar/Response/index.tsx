@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
 import { Icon } from '~/components'
 
 import { SetResponseProps } from '../..'

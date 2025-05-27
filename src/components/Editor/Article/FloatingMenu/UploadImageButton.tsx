@@ -3,7 +3,7 @@ import { useId } from 'react'
 import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconEditorImage } from '@/public/static/icons/editor-image.svg'
+import IconEditorImage from '@/public/static/icons/editor-image.svg'
 import { ACCEPTED_UPLOAD_IMAGE_TYPES, BREAKPOINTS } from '~/common/enums'
 import { Icon, Tooltip, useMediaQuery } from '~/components'
 

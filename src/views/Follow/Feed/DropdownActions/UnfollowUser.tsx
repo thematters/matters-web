@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { useContext } from 'react'
 
-import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
+import IconCircleMinus from '@/public/static/icons/24px/circle-minus.svg'
 import {
   Icon,
   Menu,

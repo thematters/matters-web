@@ -1,10 +1,10 @@
 import jump from 'jump.js'
 
-import IMAGE_MIGRATION_LG from '@/public/static/images/migration-intro-lg.svg'
-import IMAGE_MIGRATION_MD from '@/public/static/images/migration-intro-md.svg'
-import IMAGE_MIGRATION_SM from '@/public/static/images/migration-intro-sm.svg'
-import IMAGE_MIGRATION_XL from '@/public/static/images/migration-intro-xl.svg'
-import IMAGE_MIGRATION_XS from '@/public/static/images/migration-intro-xs.svg'
+import IMAGE_MIGRATION_LG from '@/public/static/images/migration-intro-lg.svg?url'
+import IMAGE_MIGRATION_MD from '@/public/static/images/migration-intro-md.svg?url'
+import IMAGE_MIGRATION_SM from '@/public/static/images/migration-intro-sm.svg?url'
+import IMAGE_MIGRATION_XL from '@/public/static/images/migration-intro-xl.svg?url'
+import IMAGE_MIGRATION_XS from '@/public/static/images/migration-intro-xs.svg?url'
 import { Button, TextIcon, Translate } from '~/components'
 
 import layoutStyles from '../../About/layout.module.css'

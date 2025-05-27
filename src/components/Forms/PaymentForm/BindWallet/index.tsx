@@ -3,9 +3,9 @@ import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount, useSignMessage } from 'wagmi'
 
-import { ReactComponent as IconCircleCheck } from '@/public/static/icons/24px/circle-check.svg'
-import { ReactComponent as IconCircleTimes } from '@/public/static/icons/24px/circle-times.svg'
-import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
+import IconCircleCheck from '@/public/static/icons/24px/circle-check.svg'
+import IconCircleTimes from '@/public/static/icons/24px/circle-times.svg'
+import IconOpenWallet from '@/public/static/icons/24px/open-wallet.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS_ANIMATION,

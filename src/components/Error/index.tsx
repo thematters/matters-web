@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconIllustrationEmpty } from '@/public/static/images/illustration-empty.svg'
+import IconIllustrationEmpty from '@/public/static/images/illustration-empty.svg'
 import { Icon, LanguageContext } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 

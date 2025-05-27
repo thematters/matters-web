@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useEffect, useRef, useState } from 'react'
 
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
 import { OPEN_COMMENT_LIST_DRAWER } from '~/common/enums'
 import { isElementInViewport } from '~/common/utils'
 import { analytics } from '~/common/utils'

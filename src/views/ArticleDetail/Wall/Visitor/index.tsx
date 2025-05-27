@@ -2,8 +2,8 @@ import { useApolloClient } from '@apollo/client'
 import classNames from 'classnames'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
-import IMG_AD from '@/public/static/images/ad.svg'
+import IconCircleMinus from '@/public/static/icons/24px/circle-minus.svg'
+import IMG_AD from '@/public/static/images/ad.svg?url'
 import { analytics } from '~/common/utils'
 import { Button, Icon, Layout, LoginButton, Translate } from '~/components'
 

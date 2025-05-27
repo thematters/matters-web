@@ -3,7 +3,7 @@ import _pickBy from 'lodash/pickBy'
 import { useEffect, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconStripeCard } from '@/public/static/icons/stripe-card.svg'
+import IconStripeCard from '@/public/static/icons/stripe-card.svg'
 import { PAYMENT_PASSSWORD_LENGTH } from '~/common/enums'
 import { parseFormSubmitErrors, validatePaymentPassword } from '~/common/utils'
 import {

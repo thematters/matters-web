@@ -3,7 +3,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
+import IconLeft from '@/public/static/icons/24px/left.svg'
 import {
   ERROR_CODES,
   REFERRAL_QUERY_REFERRAL_KEY,

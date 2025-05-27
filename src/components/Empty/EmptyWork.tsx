@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconEmptyWork } from '@/public/static/icons/empty-work.svg'
+import IconEmptyWork from '@/public/static/icons/empty-work.svg'
 import { Empty, withIcon } from '~/components'
 
 export const EmptyWork = ({

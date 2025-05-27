@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import IconMore from '@/public/static/icons/24px/more.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,

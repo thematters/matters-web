@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 import { useEnsName } from 'wagmi'
 
-import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
+import IconWallet from '@/public/static/icons/24px/wallet.svg'
 import { featureSupportedChains, truncate } from '~/common/utils'
 import {
   CopyToClipboard,

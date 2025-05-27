@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { OPEN_WITHDRAW_VAULT_USDT_DIALOG } from '~/common/enums'
 import { truncate } from '~/common/utils'
 import {

@@ -1,4 +1,4 @@
-import IMAGE_EMPTY_SEARCH_HISTORY from '@/public/static/images/illustration-empty-search-history.svg'
+import IMAGE_EMPTY_SEARCH_HISTORY from '@/public/static/images/illustration-empty-search-history.svg?url'
 import { Translate } from '~/components'
 
 import styles from './styles.module.css'

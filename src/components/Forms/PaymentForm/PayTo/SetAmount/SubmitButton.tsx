@@ -2,7 +2,7 @@ import { ApolloError } from '@apollo/client'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
+import IconOpenWallet from '@/public/static/icons/24px/open-wallet.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import {
   Dialog,

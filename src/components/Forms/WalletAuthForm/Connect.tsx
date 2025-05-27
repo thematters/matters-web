@@ -5,9 +5,9 @@ import baseToast from 'react-hot-toast'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
-import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
-import { ReactComponent as IconMetaMask } from '@/public/static/icons/24px/metamask.svg'
-import { ReactComponent as IconWalletConnect } from '@/public/static/icons/24px/walletconnect.svg'
+import IconLeft from '@/public/static/icons/24px/left.svg'
+import IconMetaMask from '@/public/static/icons/24px/metamask.svg'
+import IconWalletConnect from '@/public/static/icons/24px/walletconnect.svg'
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,

@@ -1,10 +1,12 @@
 declare module '*.svg' {
-  import { FunctionComponent, SVGProps } from 'react'
+  import { FC, SVGProps } from 'react'
+  const content: FC<SVGProps<SVGElement>>
+  export default content
+}
 
-  const url: string
-
-  export const ReactComponent: FunctionComponent<SVGProps<HTMLOrSVGElement>>
-  export default url
+declare module '*.svg?url' {
+  const content: any
+  export default content
 }
 
 declare namespace React {

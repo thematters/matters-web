@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconUnpin } from '@/public/static/icons/24px/unpin.svg'
+import IconUnpin from '@/public/static/icons/24px/unpin.svg'
 import { TEST_ID, Z_INDEX } from '~/common/enums'
 import { Icon, Tooltip, useMutation, ViewerContext } from '~/components'
 import { UnpinArticleMutation, UnpinCollectionMutation } from '~/gql/graphql'

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconCheck } from '@/public/static/icons/24px/check.svg'
+import IconCheck from '@/public/static/icons/24px/check.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,

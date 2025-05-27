@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import _get from 'lodash/get'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconAnalyticsIncome24 } from '@/public/static/icons/24px/analytics-income.svg'
+import IconAnalyticsIncome24 from '@/public/static/icons/24px/analytics-income.svg'
 import { CHART_COLOR } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {

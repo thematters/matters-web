@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
+import IconOpenWallet from '@/public/static/icons/24px/open-wallet.svg'
 import { GUIDE_LINKS } from '~/common/enums'
 import { featureSupportedChains } from '~/common/utils'
 import {

@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import { useEffect, useId, useRef } from 'react'
 import { useVisuallyHidden } from 'react-aria'
 
-import { ReactComponent as IconCircleCheckedFill } from '@/public/static/icons/24px/circle-check-fill.svg'
-import { ReactComponent as IconCircleEmpty } from '@/public/static/icons/24px/circle-empty.svg'
+import IconCircleCheckedFill from '@/public/static/icons/24px/circle-check-fill.svg'
+import IconCircleEmpty from '@/public/static/icons/24px/circle-empty.svg'
 import { Icon } from '~/components/Icon'
 import { TextIcon } from '~/components/TextIcon'
 

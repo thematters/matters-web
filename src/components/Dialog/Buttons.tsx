@@ -40,13 +40,6 @@ export const TextButton: React.FC<DialogTextButtonProps> = ({
         textActiveColor: 'redDark',
       }
       break
-    case 'red':
-      buttonProps = {
-        ...buttonProps,
-        textColor: 'black',
-        textActiveColor: 'greyDarker',
-      }
-      break
   }
 
   return (

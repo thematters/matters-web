@@ -2,7 +2,7 @@ import { FieldInputProps, FormikProvider, useField } from 'formik'
 import { useContext, useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
 import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import {
   Dialog,

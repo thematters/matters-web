@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 
-import IMAGE_STEP_1 from '@/public/static/images/migration-step-1.svg'
-import IMAGE_STEP_2 from '@/public/static/images/migration-step-2.svg'
-import IMAGE_STEP_3 from '@/public/static/images/migration-step-3.svg'
+import IMAGE_STEP_1 from '@/public/static/images/migration-step-1.svg?url'
+import IMAGE_STEP_2 from '@/public/static/images/migration-step-2.svg?url'
+import IMAGE_STEP_3 from '@/public/static/images/migration-step-3.svg?url'
 import {
   Avatar,
   Button,

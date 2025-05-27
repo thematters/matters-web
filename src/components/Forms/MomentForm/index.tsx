@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useContext, useEffect, useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
+import IconImage from '@/public/static/icons/24px/image.svg'
 import {
   ADD_MOMENT_ASSETS,
   CLEAR_MOMENT_FORM,

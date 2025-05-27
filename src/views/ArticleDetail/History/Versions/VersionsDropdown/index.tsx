@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
 import { analytics, datetimeFormat, toPath } from '~/common/utils'
 import { Dropdown, Icon, Label, Menu, useRoute } from '~/components'

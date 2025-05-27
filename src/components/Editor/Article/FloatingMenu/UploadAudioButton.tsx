@@ -4,7 +4,7 @@ import { useId, useState } from 'react'
 import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconEditorAudio } from '@/public/static/icons/editor-audio.svg'
+import IconEditorAudio from '@/public/static/icons/editor-audio.svg'
 import {
   ACCEPTED_UPLOAD_AUDIO_TYPES,
   ASSET_TYPE,

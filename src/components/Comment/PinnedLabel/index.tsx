@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
+import IconPin from '@/public/static/icons/24px/pin.svg'
 import { TEST_ID } from '~/common/enums'
 import { Icon, TextIcon } from '~/components'
 import { PinnedLabelCommentFragment } from '~/gql/graphql'

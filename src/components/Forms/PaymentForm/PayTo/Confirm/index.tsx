@@ -4,7 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useId } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconOpenWallet } from '@/public/static/icons/24px/open-wallet.svg'
+import IconOpenWallet from '@/public/static/icons/24px/open-wallet.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_PASSSWORD_LENGTH,

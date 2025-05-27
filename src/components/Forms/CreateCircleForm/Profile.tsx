@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useId, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
+import IMAGE_CIRCLE_COVER from '@/public/static/images/circle-cover.svg?url'
 import {
   ASSET_TYPE,
   ENTITY_TYPE,
@@ -145,7 +145,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           type="circle"
           assetType={ASSET_TYPE.circleCover}
           cover={circle.cover}
-          fallbackCover={CIRCLE_COVER}
+          fallbackCover={IMAGE_CIRCLE_COVER}
           inEditor
           onUploaded={(assetId) => setFieldValue('cover', assetId)}
           onUploadStart={() => setCoverLoading(true)}

@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconPen } from '@/public/static/icons/pen.svg'
+import IconPen from '@/public/static/icons/pen.svg'
 import { Button, Icon, TextIcon } from '~/components'
 
 import AddCircleArticleDialog from './Dialog'

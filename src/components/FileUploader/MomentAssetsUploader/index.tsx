@@ -3,8 +3,8 @@ import { useCallback, useEffect, useState } from 'react'
 import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/circle-plus.svg'
-import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
+import IconCirclePlus from '@/public/static/icons/24px/circle-plus.svg'
+import IconImage from '@/public/static/icons/24px/image.svg'
 import {
   ACCEPTED_MOMENT_ASSETS_UPLOAD_IMAGE_TYPES,
   ADD_MOMENT_ASSETS,

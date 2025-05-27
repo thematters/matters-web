@@ -3,8 +3,8 @@ import { useId } from 'react'
 import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { Icon } from '~/components'
 
 import styles from './styles.module.css'

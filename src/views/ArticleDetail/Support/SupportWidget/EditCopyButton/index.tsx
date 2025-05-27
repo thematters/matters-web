@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
 import { analytics } from '~/common/utils'
 import { Button, Icon, TextIcon } from '~/components'
 import SupportSettingDialog from '~/components/Editor/MoreSettings/SupportSettingDialog'

@@ -4,7 +4,7 @@ import _matchesProperty from 'lodash/matchesProperty'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconFiatCurrency } from '@/public/static/icons/24px/fiat-currency.svg'
+import IconFiatCurrency from '@/public/static/icons/24px/fiat-currency.svg'
 import { PAYMENT_CURRENCY as CURRENCY, TEST_ID } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {

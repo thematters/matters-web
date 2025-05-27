@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
-import { ReactComponent as IconSquareChecked } from '@/public/static/icons/square-checked.svg'
+import IconRight from '@/public/static/icons/24px/right.svg'
+import IconSquareChecked from '@/public/static/icons/square-checked.svg'
 import { capitalizeFirstLetter } from '~/common/utils'
 import { CircleDigest, Icon, Switch, ViewerContext } from '~/components'
 import {

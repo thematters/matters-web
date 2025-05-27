@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/client'
 import router from 'next/router'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
 import { PATHS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import {

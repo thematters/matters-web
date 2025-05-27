@@ -1,4 +1,4 @@
-import { ReactComponent as IconEmptyLike } from '@/public/static/icons/empty-like.svg'
+import IconEmptyLike from '@/public/static/icons/empty-like.svg'
 import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyLike = () => (

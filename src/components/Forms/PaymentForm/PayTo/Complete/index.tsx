@@ -5,7 +5,7 @@ import { useContext, useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount } from 'wagmi'
 
-import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import IconCircleCheckFill from '@/public/static/icons/24px/circle-check-fill.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_SUCCESS,

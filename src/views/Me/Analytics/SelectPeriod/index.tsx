@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
 import { Button, Dropdown, Icon, Menu, TextIcon } from '~/components'
 

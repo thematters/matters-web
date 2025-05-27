@@ -4,7 +4,7 @@ import { useEffect, useId, useState } from 'react'
 import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCamera } from '@/public/static/icons/24px/camera.svg'
+import IconCamera from '@/public/static/icons/24px/camera.svg'
 import {
   ACCEPTED_UPLOAD_IMAGE_TYPES,
   ASSET_TYPE,

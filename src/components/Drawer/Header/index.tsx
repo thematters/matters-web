@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { Icon } from '~/components'
 
 import { TextButton } from '../Buttons'

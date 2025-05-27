@@ -1,7 +1,7 @@
 import { useId } from 'react'
 import { useVisuallyHidden } from 'react-aria'
 
-import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
+import IconCircleCheckFill from '@/public/static/icons/24px/circle-check-fill.svg'
 import { Icon, TextIcon } from '~/components'
 
 import Field, { FieldProps } from '../Field'

@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
-import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
+import IconDraft from '@/public/static/icons/24px/draft.svg'
+import IconHashTag from '@/public/static/icons/24px/hashtag.svg'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 import { Icon, LinkWrapper, TextIcon } from '~/components'

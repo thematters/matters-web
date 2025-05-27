@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconHashtag } from '@/public/static/icons/24px/hashtag.svg'
+import IconHashtag from '@/public/static/icons/24px/hashtag.svg'
 import { analytics } from '~/common/utils'
 import {
   EditorSearchSelectDialog,

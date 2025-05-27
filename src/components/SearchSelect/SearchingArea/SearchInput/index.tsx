@@ -3,8 +3,8 @@ import { useContext, useId } from 'react'
 import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconMinus } from '@/public/static/icons/24px/minus.svg'
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
+import IconMinus from '@/public/static/icons/24px/minus.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
 import { translate } from '~/common/utils'
 import { Icon, LanguageContext } from '~/components'
 

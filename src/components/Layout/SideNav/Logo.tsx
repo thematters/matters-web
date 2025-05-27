@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconLogoGraph } from '@/public/static/icons/logo-graph.svg'
+import IconLogoGraph from '@/public/static/icons/logo-graph.svg'
 import { PATHS } from '~/common/enums'
 import { Icon } from '~/components'
 

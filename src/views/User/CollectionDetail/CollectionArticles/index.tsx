@@ -3,9 +3,9 @@ import dynamic from 'next/dynamic'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
-import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
-import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
+import IconUp from '@/public/static/icons/24px/up.svg'
+import IconDot from '@/public/static/icons/dot.svg'
 import {
   MAX_COLLECTION_ARTICLES_COUNT,
   URL_COLLECTION_DETAIL,

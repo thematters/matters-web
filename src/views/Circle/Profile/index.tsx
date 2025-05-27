@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
+import IMAGE_CIRCLE_COVER from '@/public/static/images/circle-cover.svg?url'
 import { REFETCH_CIRCLE_DETAIL } from '~/common/enums'
 import { numAbbr, stripSpaces } from '~/common/utils'
 import {
@@ -156,7 +156,7 @@ const CircleProfile = () => {
       <LayoutHeader />
 
       <section className={styles.profile}>
-        <Cover cover={circle.cover} fallbackCover={CIRCLE_COVER} />
+        <Cover cover={circle.cover} fallbackCover={IMAGE_CIRCLE_COVER} />
 
         <header className={styles.header}>
           <section className={styles.info}>

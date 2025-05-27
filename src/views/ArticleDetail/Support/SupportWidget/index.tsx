@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconMoney } from '@/public/static/icons/24px/money.svg'
+import IconMoney from '@/public/static/icons/24px/money.svg'
 import {
   PATHS,
   PAYMENT_CURRENCY as CURRENCY,

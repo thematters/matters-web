@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-import IMAGE_BANNER from '@/public/static/images/migration-banner.svg'
+import IMAGE_BANNER from '@/public/static/images/migration-banner.svg?url'
 import { ShareButton, TextIcon, Translate } from '~/components'
 
 import layoutStyles from '../../About/layout.module.css'

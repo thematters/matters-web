@@ -8,7 +8,7 @@ import React, {
 } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
+import IconUp from '@/public/static/icons/24px/up.svg'
 import {
   capitalizeFirstLetter,
   checkIsSafariVersionLessThan17,

@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
+import IconImage from '@/public/static/icons/24px/image.svg'
 import { toSizedImageURL } from '~/common/utils'
 import { Icon } from '~/components'
 

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import IMAGE_DEFAULT_CURATED from '@/public/static/images/default-curated.svg'
+import IMAGE_DEFAULT_CURATED from '@/public/static/images/default-curated.svg?url'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, CardProps, LinkWrapper, ResponsiveImage } from '~/components'

@@ -7,7 +7,7 @@ import { parseUnits } from 'viem'
 import { useAccount, useContractWrite } from 'wagmi'
 import { waitForTransaction } from 'wagmi/actions'
 
-import { ReactComponent as IconCircleTimes } from '@/public/static/icons/24px/circle-times.svg'
+import IconCircleTimes from '@/public/static/icons/24px/circle-times.svg'
 import {
   CHAIN,
   contract,

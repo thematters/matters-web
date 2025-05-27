@@ -5,8 +5,8 @@ import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
-import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
+import IconMore from '@/public/static/icons/24px/more.svg'
+import IconShare from '@/public/static/icons/24px/share.svg'
 import {
   Button,
   Dropdown,

@@ -2,9 +2,9 @@ import { useContext } from 'react'
 import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
-import { ReactComponent as IconNavUser } from '@/public/static/icons/24px/nav-user.svg'
-import { ReactComponent as IconNavUserActive } from '@/public/static/icons/24px/nav-user-active.svg'
+import IconNavCreate from '@/public/static/icons/24px/nav-create.svg'
+import IconNavUser from '@/public/static/icons/24px/nav-user.svg'
+import IconNavUserActive from '@/public/static/icons/24px/nav-user-active.svg'
 import { PATHS, TEST_ID, Z_INDEX } from '~/common/enums'
 import {
   Dropdown,

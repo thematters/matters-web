@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
+import IconDot from '@/public/static/icons/dot.svg'
 import { MAX_FEED_SUMMARY_LENGTH, TEST_ID } from '~/common/enums'
 import { makeSummary, toPath } from '~/common/utils'
 import {

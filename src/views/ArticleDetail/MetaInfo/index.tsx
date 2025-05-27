@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
 import { MAX_ARTICLE_REVISION_COUNT } from '~/common/enums'
 import { analytics, toPath } from '~/common/utils'
 import {

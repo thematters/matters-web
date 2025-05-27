@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconExpand } from '@/public/static/icons/24px/expand.svg'
+import IconExpand from '@/public/static/icons/24px/expand.svg'
 import { Icon, Menu, useMutation } from '~/components'
 import { UncollapseCommentMutation } from '~/gql/graphql'
 

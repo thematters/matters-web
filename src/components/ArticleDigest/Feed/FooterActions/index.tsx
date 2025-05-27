@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useContext } from 'react'
 
-import { ReactComponent as IconPaywall } from '@/public/static/icons/24px/paywall.svg'
+import IconPaywall from '@/public/static/icons/24px/paywall.svg'
 import { toPath } from '~/common/utils'
 import {
   CircleDigest,

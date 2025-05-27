@@ -5,7 +5,7 @@ import type PhotoSwipe from 'photoswipe'
 import { useEffect, useRef, useState } from 'react'
 import { Gallery, Item } from 'react-photoswipe-gallery'
 
-import IMG_PLACEHOLDER from '@/public/static/images/placeholder.svg'
+import IMAGE_PLACEHOLDER from '@/public/static/images/placeholder.svg?url'
 import { TEST_ID } from '~/common/enums'
 import {
   calculateRenderedImageSize,
@@ -78,7 +78,7 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
       >
         {assets.map((asset) => (
           <div className={styles.item} key={asset.id}>
-            <ResponsiveImage url={IMG_PLACEHOLDER} width={width} />
+            <ResponsiveImage url={IMAGE_PLACEHOLDER} width={width} />
           </div>
         ))}
 

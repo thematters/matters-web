@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import IconMore from '@/public/static/icons/24px/more.svg'
 import { TEST_ID } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {

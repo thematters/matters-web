@@ -1,6 +1,6 @@
-import IMAGE_FEATURE_1 from '@/public/static/images/migration-feature-1.svg'
-import IMAGE_FEATURE_2 from '@/public/static/images/migration-feature-2.svg'
-import IMAGE_FEATURE_3 from '@/public/static/images/migration-feature-3.svg'
+import IMAGE_FEATURE_1 from '@/public/static/images/migration-feature-1.svg?url'
+import IMAGE_FEATURE_2 from '@/public/static/images/migration-feature-2.svg?url'
+import IMAGE_FEATURE_3 from '@/public/static/images/migration-feature-3.svg?url'
 import { Translate } from '~/components'
 
 import layoutStyles from '../../About/layout.module.css'

@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
 import { Button, ButtonProps, Icon, SpinnerBlock, TextIcon } from '~/components'
 
 import styles from './styles.module.css'

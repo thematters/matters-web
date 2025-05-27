@@ -1,4 +1,4 @@
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
 import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyResponse = ({

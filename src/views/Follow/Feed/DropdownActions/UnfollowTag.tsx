@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import _isNil from 'lodash/isNil'
 
-import { ReactComponent as IconCircleMinus } from '@/public/static/icons/24px/circle-minus.svg'
+import IconCircleMinus from '@/public/static/icons/24px/circle-minus.svg'
 import { Icon, Menu, toast, Translate, useMutation } from '~/components'
 import TOGGLE_BOOKMARK_TAG from '~/components/GQL/mutations/toggleBookmarkTag'
 import {

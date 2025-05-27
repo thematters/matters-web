@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
+import IconHashTag from '@/public/static/icons/24px/hashtag.svg'
 import { ERROR_CODES } from '~/common/enums'
 import { fromGlobalId, normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {

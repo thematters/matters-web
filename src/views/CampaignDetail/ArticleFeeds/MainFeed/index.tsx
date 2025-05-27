@@ -2,8 +2,8 @@ import { NetworkStatus } from '@apollo/client'
 import React, { useContext, useEffect, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconRead } from '@/public/static/icons/24px/read.svg'
-import { ReactComponent as IconStar } from '@/public/static/icons/24px/star.svg'
+import IconRead from '@/public/static/icons/24px/read.svg'
+import IconStar from '@/public/static/icons/24px/star.svg'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   ArticleDigestFeed,

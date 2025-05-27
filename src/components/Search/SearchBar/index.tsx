@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import {
   INPUT_DEBOUNCE,
   KEYVALUE,

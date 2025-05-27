@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconReadingTime } from '@/public/static/icons/24px/reading-time.svg'
+import IconReadingTime from '@/public/static/icons/24px/reading-time.svg'
 import { numAbbr, numRound } from '~/common/utils'
 import { Icon, TextIcon, Translate } from '~/components'
 import { ActionsReadTimeArticleFragment } from '~/gql/graphql'

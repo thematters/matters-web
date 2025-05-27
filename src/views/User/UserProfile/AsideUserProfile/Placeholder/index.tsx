@@ -1,4 +1,4 @@
-import IMG_PLACEHOLDER from '@/public/static/images/placeholder.svg'
+import IMAGE_PLACEHOLDER from '@/public/static/images/placeholder.svg?url'
 import { Avatar, useRoute } from '~/components'
 
 import styles from '../styles.module.css'
@@ -12,7 +12,7 @@ const Placeholder = () => {
     <section className={styles.userProfile} aria-busy="true" aria-live="polite">
       <header className={styles.header}>
         <section className={styles.avatar}>
-          <Avatar size={120} src={IMG_PLACEHOLDER} inProfile />
+          <Avatar size={120} src={IMAGE_PLACEHOLDER} inProfile />
         </section>
       </header>
 

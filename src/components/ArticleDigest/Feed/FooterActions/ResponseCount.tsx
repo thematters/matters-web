@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
 import { URL_FRAGMENT } from '~/common/enums'
 import { numAbbr, toPath } from '~/common/utils'
 import { Button, Icon, TextIcon } from '~/components'

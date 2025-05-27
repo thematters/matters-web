@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconReset } from '@/public/static/icons/24px/reset.svg'
+import IconReset from '@/public/static/icons/24px/reset.svg'
 import {
   Button,
   ButtonProps,

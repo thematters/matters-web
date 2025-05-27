@@ -3,8 +3,8 @@ import gql from 'graphql-tag'
 import { useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
-import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
+import IconLike from '@/public/static/icons/24px/like.svg'
+import IconLikeFill from '@/public/static/icons/24px/like-fill.svg'
 import { numAbbr } from '~/common/utils'
 import { Button, Icon, TextIcon, useMutation } from '~/components'
 import {

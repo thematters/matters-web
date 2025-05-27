@@ -1,6 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconIndent } from '@/public/static/icons/24px/indent.svg'
+import IconIndent from '@/public/static/icons/24px/indent.svg'
 import { Icon, Switch } from '~/components'
 
 import Box from '../Box'

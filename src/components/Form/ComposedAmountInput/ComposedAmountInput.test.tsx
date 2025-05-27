@@ -26,8 +26,8 @@ const setup = ({
   const max = 10000
   const step = 1
   const hint = 'This is a hint'
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = `__use_id__`
+  const fieldMsgId = `__use_id__-msg`
 
   const handleOnChange = vi.fn()
   const handleOnBlur = vi.fn()

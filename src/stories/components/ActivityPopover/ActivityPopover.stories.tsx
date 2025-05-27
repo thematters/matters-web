@@ -2,8 +2,8 @@ import { Meta, StoryFn } from '@storybook/react'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconCircleTimes } from '@/public/static/icons/24px/circle-times.svg'
-import { ReactComponent as IconNavCreate } from '@/public/static/icons/24px/nav-create.svg'
+import IconCircleTimes from '@/public/static/icons/24px/circle-times.svg'
+import IconNavCreate from '@/public/static/icons/24px/nav-create.svg'
 import {
   Dropdown,
   hidePopperOnClick,

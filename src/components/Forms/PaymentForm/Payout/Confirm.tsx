@@ -4,7 +4,7 @@ import _pickBy from 'lodash/pickBy'
 import { useId, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
+import IconHelp from '@/public/static/icons/24px/help.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,

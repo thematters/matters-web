@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconVoteUp } from '@/public/static/icons/24px/vote-up.svg'
-import { ReactComponent as IconVoteUpFill } from '@/public/static/icons/24px/vote-up-fill.svg'
+import IconVoteUp from '@/public/static/icons/24px/vote-up.svg'
+import IconVoteUpFill from '@/public/static/icons/24px/vote-up-fill.svg'
 import { numAbbr } from '~/common/utils'
 import { Button, Icon, TextIcon, useMutation } from '~/components'
 import {

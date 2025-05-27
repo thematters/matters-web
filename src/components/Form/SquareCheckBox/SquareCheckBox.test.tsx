@@ -10,8 +10,8 @@ describe('<Form.SquareCheckBox>', () => {
     const hint = 'hint-test'
     const value = 'value-test'
     const contents = 'content-test'
-    const fieldId = `field-${value}`
-    const fieldMsgId = `field-msg-${value}`
+    const fieldId = `__use_id__`
+    const fieldMsgId = `__use_id__-msg`
 
     const handleOnBlur = vi.fn()
     const handleOnChange = vi.fn()

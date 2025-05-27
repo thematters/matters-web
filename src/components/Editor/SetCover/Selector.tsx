@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconCircleCheckFill2 } from '@/public/static/icons/24px/circle-check-fill-2.svg'
+import IconCircleCheckFill2 from '@/public/static/icons/24px/circle-check-fill-2.svg'
 import { ASSET_TYPE } from '~/common/enums'
 import { toSizedImageURL } from '~/common/utils'
 import { Icon, Translate } from '~/components'

@@ -1,4 +1,4 @@
-import IMG_PLACEHOLDER from '@/public/static/images/placeholder.svg'
+import IMAGE_PLACEHOLDER from '@/public/static/images/placeholder.svg?url'
 import { Card } from '~/components'
 
 import styles from '../styles.module.css'
@@ -15,7 +15,7 @@ const Placeholder = () => {
         </section>
 
         <div className={styles.cover}>
-          <img src={IMG_PLACEHOLDER} alt="" />
+          <img src={IMAGE_PLACEHOLDER} alt="" />
         </div>
       </section>
     </Card>

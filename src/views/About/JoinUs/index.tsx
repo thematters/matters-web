@@ -1,5 +1,5 @@
-import { ReactComponent as IconAboutArrowRight } from '@/public/static/images/about/arrow-right.svg'
-import IMAGE_WAVE from '@/public/static/images/about/wave-join-us.svg'
+import IconAboutArrowRight from '@/public/static/images/about/arrow-right.svg'
+import IMAGE_WAVE from '@/public/static/images/about/wave-join-us.svg?url'
 import { captureClicks } from '~/common/utils'
 import { Icon, Translate } from '~/components'
 

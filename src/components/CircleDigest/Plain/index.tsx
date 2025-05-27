@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ReactComponent as IconCircle } from '@/public/static/icons/24px/circle.svg'
+import IconCircle from '@/public/static/icons/24px/circle.svg'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Icon, LinkWrapper, TextIcon } from '~/components'

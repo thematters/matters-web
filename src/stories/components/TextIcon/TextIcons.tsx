@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { ReactComponent as IconDonate } from '@/public/static/icons/24px/donate.svg'
-import { ReactComponent as IconExpand } from '@/public/static/icons/24px/expand.svg'
-import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
-import { ReactComponent as IconPin } from '@/public/static/icons/24px/pin.svg'
+import IconDonate from '@/public/static/icons/24px/donate.svg'
+import IconExpand from '@/public/static/icons/24px/expand.svg'
+import IconExternal from '@/public/static/icons/24px/external.svg'
+import IconPin from '@/public/static/icons/24px/pin.svg'
 import { Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'

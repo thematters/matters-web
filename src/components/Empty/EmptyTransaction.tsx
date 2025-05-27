@@ -1,4 +1,4 @@
-import { ReactComponent as IconWallet } from '@/public/static/icons/24px/wallet.svg'
+import IconWallet from '@/public/static/icons/24px/wallet.svg'
 import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyTransaction = () => (

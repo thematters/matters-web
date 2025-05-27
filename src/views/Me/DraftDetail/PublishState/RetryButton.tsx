@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import IconRight from '@/public/static/icons/24px/right.svg'
 import { Button, Icon, TextIcon, useMutation } from '~/components'
 import { RetryPublishMutation } from '~/gql/graphql'
 

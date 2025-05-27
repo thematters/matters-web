@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
 import { Button, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'

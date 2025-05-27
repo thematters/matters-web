@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import { useId, useLayoutEffect, useRef, useState } from 'react'
 import { useVisuallyHidden } from 'react-aria'
 
-import { ReactComponent as IconSquare } from '@/public/static/icons/24px/squire.svg'
-import { ReactComponent as IconSquareCheck } from '@/public/static/icons/24px/squire-check.svg'
+import IconSquare from '@/public/static/icons/24px/squire.svg'
+import IconSquareCheck from '@/public/static/icons/24px/squire-check.svg'
 import { Icon, TextIcon, Tooltip } from '~/components'
 
 import { FieldProps } from '../Field'

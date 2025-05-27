@@ -2,7 +2,7 @@ import gql from 'graphql-tag'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import PUBLISH_IMAGE from '@/public/static/images/publish-1.svg'
+import IMAGE_PUBLISH from '@/public/static/images/publish-1.svg?url'
 import { analytics } from '~/common/utils'
 import { Dialog, useMutation, useRoute, ViewerContext } from '~/components'
 import { PublishArticleMutation } from '~/gql/graphql'
@@ -82,7 +82,7 @@ const ConfirmPublishDialogContent: React.FC<
           <section className={styles.imageContainer}>
             <div
               className={styles.image}
-              style={{ backgroundImage: `url(${PUBLISH_IMAGE})` }}
+              style={{ backgroundImage: `url(${IMAGE_PUBLISH})` }}
             />
           </section>
 

@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { CLEAR_MOMENT_FORM, MAX_MOMENT_CONTENT_LENGTH } from '~/common/enums'
 import {
   formStorage,

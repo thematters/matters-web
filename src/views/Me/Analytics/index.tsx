@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as AnalyticsNoSupporter } from '@/public/static/images/analytics-no-supporter.svg'
+import IconAnalyticsNoSupporter from '@/public/static/images/analytics-no-supporter.svg'
 import { Head, Layout, List, QueryError, SpinnerBlock } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { MeAnalyticsQuery } from '~/gql/graphql'
@@ -129,7 +129,7 @@ const MyAnalytics = () => {
         {edges?.length === 0 && (
           <section className={styles.noSupporter}>
             <section className={styles.noSupporterImg}>
-              <AnalyticsNoSupporter />
+              <IconAnalyticsNoSupporter />
             </section>
             <p>
               <FormattedMessage defaultMessage="No data yet." id="eTpiYa" />

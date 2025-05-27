@@ -2,7 +2,7 @@ import { MockedProvider } from '@apollo/client/testing'
 import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
-import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
+import IMAGE_CIRCLE_COVER from '@/public/static/images/circle-cover.svg?url'
 import IMAGE_COVER from '@/public/static/images/profile-cover.png'
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import { CoverUploader } from '~/components'
@@ -56,7 +56,7 @@ export const Cover: Story = {
             onUploadStart={() => null}
             onUploadEnd={() => null}
             onReset={() => null}
-            fallbackCover={CIRCLE_COVER}
+            fallbackCover={IMAGE_CIRCLE_COVER}
           />
         </li>
         <li>
@@ -68,7 +68,7 @@ export const Cover: Story = {
             onUploadStart={() => null}
             onUploadEnd={() => null}
             onReset={() => null}
-            fallbackCover={CIRCLE_COVER}
+            fallbackCover={IMAGE_CIRCLE_COVER}
             cover="https://source.unsplash.com/512x512?circle-cover"
           />
         </li>

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useVisuallyHidden } from 'react-aria'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconLogo } from '@/public/static/icons/logo.svg'
+import IconLogo from '@/public/static/icons/logo.svg'
 import { PATHS } from '~/common/enums'
 import { Icon } from '~/components'
 
