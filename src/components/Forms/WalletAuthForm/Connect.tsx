@@ -220,7 +220,7 @@ const Connect: React.FC<FormProps> = ({
             },
           })
 
-          if (isLocal || process.env.VERCEL) {
+          if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
             const token = loginData?.walletLogin.token || ''
             const language =
               loginData?.walletLogin.user?.settings.language || ''
