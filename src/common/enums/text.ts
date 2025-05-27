@@ -22,7 +22,7 @@ const PUNCTUATION_ASCII = '\x00-\x2f\x3a-\x40\x5b-\x60\x7a-\x7f'
 export const REGEXP_ALL_PUNCTUATIONS = new RegExp(
   `^[${PUNCTUATION_CHINESE}${PUNCTUATION_ASCII}]*$`
 )
-export const REGEXP_PUNCTUATION = `${PUNCTUATION_CHINESE}\x00-\x2f\x3a-\x3f\x41\x5b-\x60\x7a-\x7f` // without "@"
+export const REGEXP_PUNCTUATION = `${PUNCTUATION_CHINESE}\u0000-\u002F\u003A-\u003F\u0041\u005B-\u0060\u007A-\u007F` // without "@"
 
 export const REGEXP_LATIN = '0-9A-Za-z\u00C0-\u00FF'
 export const REGEXP_CJK =
