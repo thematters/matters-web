@@ -160,7 +160,7 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
       try {
         const response = await client.query({
           query: QUICK_RESULT,
-          variables: { key: searchKey },
+          variables: { key: debouncedSearchKey },
           fetchPolicy: 'no-cache',
         })
         setSearchData(response.data)
@@ -172,7 +172,7 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
     if (searchKey) {
       searchTags()
     }
-  }, [searchKey, client])
+  }, [debouncedSearchKey, client])
 
   const processedRecentTags = (() => {
     const userTagsEdges = recentTagsData?.viewer?.tags.edges || []
