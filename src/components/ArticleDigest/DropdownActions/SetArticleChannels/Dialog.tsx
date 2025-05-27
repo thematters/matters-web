@@ -13,11 +13,11 @@ import {
   useDialogSwitch,
   useMutation,
 } from '~/components'
-import { TOGGLE_PIN_CHANNEL_ARTICLES } from '~/components/GQL/mutations/togglePinChannelArticles'
+import { BATCH_PIN_UNPIN_CHANNEL_ARTICLES } from '~/components/GQL/mutations/togglePinChannelArticles'
 import {
+  BatchPinUnpinChannelArticlesMutation,
   GetArticleTopicChannelsQuery,
   SetArticleTopicChannelsMutation,
-  TogglePinChannelArticlesMutation,
 } from '~/gql/graphql'
 
 import { GET_ARTICLE_TOPIC_CHANNELS, SET_ARTICLE_TOPIC_CHANNELS } from './gql'
@@ -53,9 +53,9 @@ const BaseSetArticleChannelsDialog = ({
     { showToast: true }
   )
 
-  const [togglePinChannelArticles] =
-    useMutation<TogglePinChannelArticlesMutation>(
-      TOGGLE_PIN_CHANNEL_ARTICLES,
+  const [batchPinUnpinChannelArticles] =
+    useMutation<BatchPinUnpinChannelArticlesMutation>(
+      BATCH_PIN_UNPIN_CHANNEL_ARTICLES,
       undefined,
       { showToast: true }
     )
@@ -73,11 +73,15 @@ const BaseSetArticleChannelsDialog = ({
             variables: { id: article.id, channels },
           })
 
-          await togglePinChannelArticles({
+          const unpinChannels = channels.filter(
+            (channel) => !pinnedChannels.includes(channel)
+          )
+
+          await batchPinUnpinChannelArticles({
             variables: {
-              channels: pinnedChannels,
+              pinChannels: pinnedChannels,
+              unpinChannels: unpinChannels,
               articles: [article.id],
-              pinned: true,
             },
           })
 
