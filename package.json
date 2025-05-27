@@ -158,7 +158,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "^15.3.2",
     "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-formatjs": "^5.3.1",
+    "eslint-plugin-formatjs": "^4.13.3",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-storybook": "^0.12.0",
     "eslint-plugin-testing-library": "^7.2.1",
