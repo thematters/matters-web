@@ -131,7 +131,7 @@ const SocialCallback = ({ type }: Props) => {
             },
           })
 
-          if (isLocal) {
+          if (isLocal || process.env.VERCEL) {
             const token = loginData?.socialLogin.token || ''
             const language =
               loginData?.socialLogin.user?.settings.language || ''
