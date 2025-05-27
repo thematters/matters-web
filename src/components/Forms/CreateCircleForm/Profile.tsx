@@ -145,7 +145,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           type="circle"
           assetType={ASSET_TYPE.circleCover}
           cover={circle.cover}
-          fallbackCover={IMAGE_CIRCLE_COVER}
+          fallbackCover={IMAGE_CIRCLE_COVER.src}
           inEditor
           onUploaded={(assetId) => setFieldValue('cover', assetId)}
           onUploadStart={() => setCoverLoading(true)}

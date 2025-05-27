@@ -6,7 +6,7 @@ const Placeholder = () => {
   return (
     <section className={placeholderStyles.book}>
       <div className={placeholderStyles.cover}>
-        <img src={IMAGE_PLACEHOLDER} alt="" />
+        <img src={IMAGE_PLACEHOLDER.src} alt="" />
       </div>
     </section>
   )

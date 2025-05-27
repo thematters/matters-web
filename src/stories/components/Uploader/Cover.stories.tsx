@@ -56,7 +56,7 @@ export const Cover: Story = {
             onUploadStart={() => null}
             onUploadEnd={() => null}
             onReset={() => null}
-            fallbackCover={IMAGE_CIRCLE_COVER}
+            fallbackCover={IMAGE_CIRCLE_COVER.src}
           />
         </li>
         <li>
@@ -68,7 +68,7 @@ export const Cover: Story = {
             onUploadStart={() => null}
             onUploadEnd={() => null}
             onReset={() => null}
-            fallbackCover={IMAGE_CIRCLE_COVER}
+            fallbackCover={IMAGE_CIRCLE_COVER.src}
             cover="https://source.unsplash.com/512x512?circle-cover"
           />
         </li>

@@ -12,11 +12,11 @@ import styles from './styles.module.css'
 
 const Intro = () => {
   const style = {
-    '--migration-intro-bg-xs': `url(${IMAGE_MIGRATION_XS})`,
-    '--migration-intro-bg-sm': `url(${IMAGE_MIGRATION_SM})`,
-    '--migration-intro-bg-md': `url(${IMAGE_MIGRATION_MD})`,
-    '--migration-intro-bg-lg': `url(${IMAGE_MIGRATION_LG})`,
-    '--migration-intro-bg-xl': `url(${IMAGE_MIGRATION_XL})`,
+    '--migration-intro-bg-xs': `url(${IMAGE_MIGRATION_XS.src})`,
+    '--migration-intro-bg-sm': `url(${IMAGE_MIGRATION_SM.src})`,
+    '--migration-intro-bg-md': `url(${IMAGE_MIGRATION_MD.src})`,
+    '--migration-intro-bg-lg': `url(${IMAGE_MIGRATION_LG.src})`,
+    '--migration-intro-bg-xl': `url(${IMAGE_MIGRATION_XL.src})`,
   } as React.CSSProperties
 
   return (

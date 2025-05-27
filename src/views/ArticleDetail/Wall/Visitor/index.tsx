@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import { useIntl } from 'react-intl'
 
 import IconCircleMinus from '@/public/static/icons/24px/circle-minus.svg'
-import IMG_AD from '@/public/static/images/ad.svg?url'
+import IMAGE_AD from '@/public/static/images/ad.svg?url'
 import { analytics } from '~/common/utils'
 import { Button, Icon, Layout, LoginButton, Translate } from '~/components'
 
@@ -27,7 +27,7 @@ const VisitorWall = ({ show }: VisitorWallProps) => {
   }
 
   const style = {
-    '--wall-visitor-bg': `url(${IMG_AD})`,
+    '--wall-visitor-bg': `url(${IMAGE_AD.src})`,
   } as React.CSSProperties
 
   return (

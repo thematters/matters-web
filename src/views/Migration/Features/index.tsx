@@ -113,7 +113,7 @@ const Features = () => {
               </p>
             </section>
 
-            <img src={IMAGE_FEATURE_1} alt="illustration 1" />
+            <img src={IMAGE_FEATURE_1.src} alt="illustration 1" />
           </div>
         </li>
 
@@ -150,7 +150,7 @@ const Features = () => {
               </p>
             </section>
 
-            <img src={IMAGE_FEATURE_2} alt="illustration 2" />
+            <img src={IMAGE_FEATURE_2.src} alt="illustration 2" />
           </div>
         </li>
 
@@ -187,7 +187,7 @@ const Features = () => {
               </p>
             </section>
 
-            <img src={IMAGE_FEATURE_3} alt="illustration 3" />
+            <img src={IMAGE_FEATURE_3.src} alt="illustration 3" />
           </div>
         </li>
       </ul>

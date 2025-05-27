@@ -8,13 +8,13 @@ export const Placeholder = () => {
   return (
     <section className={styles.assets}>
       <div className={styles.item}>
-        <ResponsiveImage url={IMAGE_PLACEHOLDER} width={width} />
+        <ResponsiveImage url={IMAGE_PLACEHOLDER.src} width={width} />
       </div>
       <div className={styles.item}>
-        <ResponsiveImage url={IMAGE_PLACEHOLDER} width={width} />
+        <ResponsiveImage url={IMAGE_PLACEHOLDER.src} width={width} />
       </div>
       <div className={styles.item}>
-        <ResponsiveImage url={IMAGE_PLACEHOLDER} width={width} />
+        <ResponsiveImage url={IMAGE_PLACEHOLDER.src} width={width} />
       </div>
     </section>
   )

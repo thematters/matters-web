@@ -78,7 +78,7 @@ const Assets = ({ moment }: { moment: MomentDigestAssetsMomentFragment }) => {
       >
         {assets.map((asset) => (
           <div className={styles.item} key={asset.id}>
-            <ResponsiveImage url={IMAGE_PLACEHOLDER} width={width} />
+            <ResponsiveImage url={IMAGE_PLACEHOLDER.src} width={width} />
           </div>
         ))}
 

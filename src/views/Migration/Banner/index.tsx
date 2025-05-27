@@ -10,7 +10,7 @@ const Banner = () => {
   const intl = useIntl()
 
   const style = {
-    '--migration-banner-bg': `url(${IMAGE_BANNER})`,
+    '--migration-banner-bg': `url(${IMAGE_BANNER.src})`,
   } as React.CSSProperties
 
   return (

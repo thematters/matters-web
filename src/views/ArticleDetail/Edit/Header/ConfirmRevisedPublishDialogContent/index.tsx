@@ -46,7 +46,7 @@ const ConfirmRevisedPublishDialogContent = ({
           <section className={styles.imageContainer}>
             <div
               className={styles.image}
-              style={{ backgroundImage: `url(${IMAGE_PUBLISH})` }}
+              style={{ backgroundImage: `url(${IMAGE_PUBLISH.src})` }}
             />
           </section>
 

@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl'
 import IconLogo from '@/public/static/icons/logo.svg'
 import IconButtonLeft from '@/public/static/images/about/button-left.svg'
 import IconButtonRight from '@/public/static/images/about/button-right.svg'
-import SLIDE_CURSOR from '@/public/static/images/about/cursor.svg'
+import IMAGE_SLIDE_CURSOR from '@/public/static/images/about/cursor.svg?url'
 import IMAGE_ILLUSTRATION_1 from '@/public/static/images/about/hero-illustration-1.png'
 import IMAGE_ILLUSTRATION_2 from '@/public/static/images/about/hero-illustration-2.png'
 import IMAGE_WAVE_1 from '@/public/static/images/about/wave-hero-1.svg?url'
@@ -128,7 +128,7 @@ const Hero = () => {
           <section
             className={styles.emblaViewport}
             ref={emblaRef}
-            style={{ cursor: `url(${SLIDE_CURSOR}), auto` }}
+            style={{ cursor: `url(${IMAGE_SLIDE_CURSOR.src}), auto` }}
           >
             <ul className={styles.emblaContainer}>
               <li>

@@ -72,7 +72,7 @@ export const ArticleDigestCurated = ({
       >
         <LinkWrapper {...path} onClick={onClick}>
           <ResponsiveImage
-            url={cover || IMAGE_DEFAULT_CURATED}
+            url={cover || IMAGE_DEFAULT_CURATED.src}
             width={404}
             height={404}
           />

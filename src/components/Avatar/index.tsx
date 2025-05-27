@@ -78,7 +78,8 @@ export const Avatar = (props: AvatarProps) => {
     inProfile,
     showLogbook = true,
   } = props
-  const source = src || user?.avatar || IMAGE_AVATAR_DEFAULT
+  const source = src || user?.avatar || IMAGE_AVATAR_DEFAULT.src
+
   const isFallback =
     (!src && !user?.avatar) || source.indexOf('data:image') >= 0
   const isCivicLiker = user?.liker.civicLiker
@@ -94,9 +95,9 @@ export const Avatar = (props: AvatarProps) => {
   })
 
   const style = {
-    '--avatar-ring-civic-liker': `url(${IMAGE_CIVIC_LIKER_RING})`,
-    '--avatar-ring-architect': `url(${IMAGE_MATTERS_ARCHITECT_RING})`,
-    '--avatar-ring-civic-architect': `url(${IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING})`,
+    '--avatar-ring-civic-liker': `url(${IMAGE_CIVIC_LIKER_RING.src})`,
+    '--avatar-ring-architect': `url(${IMAGE_MATTERS_ARCHITECT_RING.src})`,
+    '--avatar-ring-civic-architect': `url(${IMAGE_CIVIC_LIKER_MATTERS_ARCHITECT_RING.src})`,
   } as React.CSSProperties
 
   return (

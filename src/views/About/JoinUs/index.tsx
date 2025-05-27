@@ -12,7 +12,7 @@ const IconArrow = () => (
 
 const JoinUs = () => {
   const style = {
-    '--about-join-us-bg': `url(${IMAGE_WAVE})`,
+    '--about-join-us-bg': `url(${IMAGE_WAVE.src})`,
   } as React.CSSProperties
 
   return (

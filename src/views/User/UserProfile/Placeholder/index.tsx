@@ -17,12 +17,12 @@ const Placeholder = () => {
 
   return (
     <section className={styles.userProfile} aria-busy="true" aria-live="polite">
-      <Cover fallbackCover={IMAGE_PLACEHOLDER} />
+      <Cover fallbackCover={IMAGE_PLACEHOLDER.src} />
 
       <Media at="sm">
         <header className={styles.header}>
           <section className={styles.avatar}>
-            <Avatar size={76} src={IMAGE_PLACEHOLDER} />
+            <Avatar size={76} src={IMAGE_PLACEHOLDER.src} />
           </section>
 
           <section className={rightClasses}>

@@ -15,7 +15,7 @@ const Placeholder = () => {
         </section>
 
         <div className={styles.cover}>
-          <img src={IMAGE_PLACEHOLDER} alt="" />
+          <img src={IMAGE_PLACEHOLDER.src} alt="" />
         </div>
       </section>
     </Card>

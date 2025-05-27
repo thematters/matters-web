@@ -156,7 +156,7 @@ const CircleProfile = () => {
       <LayoutHeader />
 
       <section className={styles.profile}>
-        <Cover cover={circle.cover} fallbackCover={IMAGE_CIRCLE_COVER} />
+        <Cover cover={circle.cover} fallbackCover={IMAGE_CIRCLE_COVER.src} />
 
         <header className={styles.header}>
           <section className={styles.info}>

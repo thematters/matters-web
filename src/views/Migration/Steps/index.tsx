@@ -138,7 +138,7 @@ const Steps = () => {
 
       <div className={layoutStyles.container}>
         <div className={layoutStyles.content}>
-          <Step src={IMAGE_STEP_1} step={1}>
+          <Step src={IMAGE_STEP_1.src} step={1}>
             {viewer.isAuthed ? (
               <section className={styles.avatar}>
                 <Avatar
@@ -178,7 +178,7 @@ const Steps = () => {
             )}
           </Step>
 
-          <Step src={IMAGE_STEP_2} step={2}>
+          <Step src={IMAGE_STEP_2.src} step={2}>
             <Button
               aria-haspopup="false"
               borderColor="green"
@@ -197,7 +197,7 @@ const Steps = () => {
             </Button>
           </Step>
 
-          <Step src={IMAGE_STEP_3} step={3}>
+          <Step src={IMAGE_STEP_3.src} step={3}>
             <MigrationDialog>
               {({ openDialog }) => (
                 <Button
