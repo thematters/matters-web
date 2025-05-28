@@ -117,7 +117,7 @@
         @media (--sm-up) {
           padding: 0;
 
-          & span {
+          & > span {
             display: inline-block;
             padding: var(--sp8) var(--sp10);
             background-color: var(--color-grey-lighter);
@@ -127,9 +127,13 @@
       }
 
       &.lineClampable > span {
-        @mixin line-clamp;
+        overflow: hidden;
 
-        -webkit-line-clamp: 2;
+        & .channelName {
+          @mixin line-clamp;
+
+          -webkit-line-clamp: 2;
+        }
       }
 
       &.temporaryChannel {

@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
+import { useContext } from 'react'
 
+import { LanguageContext } from '~/components'
 import {
   CurationChannelHeaderFragment,
   TopicChannelHeaderFragment,
@@ -11,15 +13,23 @@ const fragments = {
   topicChannel: gql`
     fragment TopicChannelHeader on TopicChannel {
       id
-      name
-      note
+      nameZhHant: name(input: { language: zh_hant })
+      nameZhHans: name(input: { language: zh_hans })
+      nameEn: name(input: { language: en })
+      noteZhHant: note(input: { language: zh_hant })
+      noteZhHans: note(input: { language: zh_hans })
+      noteEn: note(input: { language: en })
     }
   `,
   curationChannel: gql`
     fragment CurationChannelHeader on CurationChannel {
       id
-      name
-      note
+      nameZhHant: name(input: { language: zh_hant })
+      nameZhHans: name(input: { language: zh_hans })
+      nameEn: name(input: { language: en })
+      noteZhHant: note(input: { language: zh_hant })
+      noteZhHans: note(input: { language: zh_hans })
+      noteEn: note(input: { language: en })
     }
   `,
 }
@@ -29,6 +39,20 @@ interface ChannelHeaderProps {
 }
 
 export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
+  const { lang } = useContext(LanguageContext)
+  const name =
+    lang === 'zh_hant'
+      ? channel.nameZhHant
+      : lang === 'zh_hans'
+        ? channel.nameZhHans
+        : channel.nameEn
+  const note =
+    lang === 'zh_hant'
+      ? channel.noteZhHant
+      : lang === 'zh_hans'
+        ? channel.noteZhHans
+        : channel.noteEn
+
   if (!channel) {
     return null
   }
@@ -36,8 +60,8 @@ export const ChannelHeader = ({ channel }: ChannelHeaderProps) => {
   return (
     <>
       <div className={styles.header}>
-        <h1>{channel.name}</h1>
-        {channel.note && <p className={styles.description}>{channel.note}</p>}
+        <h1>{name}</h1>
+        {note && <p className={styles.description}>{note}</p>}
       </div>
     </>
   )

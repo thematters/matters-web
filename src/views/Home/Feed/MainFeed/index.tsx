@@ -3,37 +3,13 @@ import { FormattedMessage } from 'react-intl'
 
 import { Announcements, Media, Spacer, ViewerContext } from '~/components'
 
-import Authors from '../Authors'
-import Billboard from '../Billboard'
+import { useMixedFeed } from '../../common/useMixedFeed'
 import FeedRenderer from '../components/FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC } from '../gql'
 import { useFeed } from '../hooks/useFeed'
 import { IcymiCuratedFeed } from '../IcymiCuratedFeed'
 import { FeedType } from '../index'
 import styles from '../styles.module.css'
-import Tags from '../Tags'
-
-const horizontalFeeds: Record<
-  number,
-  React.FC<{ after?: string; first?: number }>
-> = {
-  3: () => (
-    <Media lessThan="lg">
-      <Billboard />
-    </Media>
-  ),
-  11: () => (
-    <Media lessThan="lg">
-      <Authors />
-    </Media>
-  ),
-  17: () => (
-    <Media lessThan="lg">
-      <Tags />
-    </Media>
-  ),
-}
-
 interface MainFeedProps {
   feedType: FeedType
 }
@@ -67,23 +43,7 @@ const MainFeed: React.FC<MainFeedProps> = ({ feedType }) => {
   })
 
   const recommendation = data?.viewer?.recommendation
-  let mixFeed = edges ? [...edges] : []
-
-  if (mixFeed.length > 0 && isIcymiFeed) {
-    mixFeed = JSON.parse(JSON.stringify(edges))
-
-    const locs = Object.keys(horizontalFeeds).map((loc) => parseInt(loc, 10))
-    locs.sort((a, b) => a - b)
-
-    locs.forEach((loc) => {
-      if (mixFeed.length >= loc) {
-        mixFeed.splice(loc, 0, {
-          Feed: horizontalFeeds[loc],
-          __typename: 'HorizontalFeed',
-        })
-      }
-    })
-  }
+  const mixFeed = useMixedFeed(edges, isIcymiFeed)
 
   const itemCustomProps = {
     includesMetaData: !isIcymiFeed,
