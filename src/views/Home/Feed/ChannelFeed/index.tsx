@@ -11,11 +11,29 @@ import {
 import { useRoute } from '~/components'
 import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
+import Authors from '../Authors'
 import FeedRenderer from '../components/FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
 import { useFeed } from '../hooks/useFeed'
 import feedStyles from '../styles.module.css'
+import Tags from '../Tags'
 import { ChannelHeader } from './ChannelHeader'
+
+const horizontalFeeds: Record<
+  number,
+  React.FC<{ after?: string; first?: number }>
+> = {
+  11: () => (
+    <Media lessThan="lg">
+      <Authors />
+    </Media>
+  ),
+  17: () => (
+    <Media lessThan="lg">
+      <Tags />
+    </Media>
+  ),
+}
 
 const ChannelFeed = () => {
   const intl = useIntl()
@@ -52,6 +70,24 @@ const ChannelFeed = () => {
     privateQueryFn: loadPrivate,
     keyPrefix: `channel:${shortHash}`,
   })
+
+  let mixFeed = edges ? [...edges] : []
+
+  if (mixFeed.length > 0) {
+    mixFeed = JSON.parse(JSON.stringify(edges))
+
+    const locs = Object.keys(horizontalFeeds).map((loc) => parseInt(loc, 10))
+    locs.sort((a, b) => a - b)
+
+    locs.forEach((loc) => {
+      if (mixFeed.length >= loc) {
+        mixFeed.splice(loc, 0, {
+          Feed: horizontalFeeds[loc],
+          __typename: 'HorizontalFeed',
+        })
+      }
+    })
+  }
 
   const renderCards = (
     cardEdges: any[],
@@ -151,7 +187,7 @@ const ChannelFeed = () => {
     <FeedRenderer
       loading={loading}
       error={error}
-      edges={edges}
+      edges={mixFeed}
       pageInfo={pageInfo}
       loadMore={loadMore}
       feedType={feedType}

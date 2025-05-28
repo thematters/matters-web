@@ -2,8 +2,8 @@ import gql from 'graphql-tag'
 
 import { UserDigest } from '~/components'
 
-export const SIDEBAR_AUTHORS_PUBLIC = gql`
-  query SidebarAuthorsPublic(
+export const AUTHORS_RECOMMENDATION_PUBLIC = gql`
+  query AuthorsRecommendationPublic(
     $random: random_Int_min_0_max_49
     $first: first_Int_min_0
     $shortHash: String

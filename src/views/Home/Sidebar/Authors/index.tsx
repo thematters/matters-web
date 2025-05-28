@@ -1,69 +1,21 @@
-import _random from 'lodash/random'
-
 import { analytics } from '~/common/utils'
-import {
-  List,
-  QueryError,
-  ShuffleButton,
-  usePublicQuery,
-  UserDigest,
-  useRoute,
-} from '~/components'
-import FETCH_RECORD from '~/components/GQL/queries/lastFetchRandom'
-import { LastFetchRandomQuery, SidebarAuthorsPublicQuery } from '~/gql/graphql'
+import { List, QueryError, ShuffleButton, UserDigest } from '~/components'
 
+import { useAuthorsRecommendation } from '../../common/useAuthorsRecommendation'
 import SectionHeader from '../../SectionHeader'
-import { SIDEBAR_AUTHORS_PUBLIC } from './gql'
 import { AuthorsPlaceholder } from './placeholder'
 import styles from './styles.module.css'
+
 const Authors = () => {
-  const { getQuery } = useRoute()
-  const shortHash = getQuery('shortHash')
-  const { data: lastFetchRandom, client } =
-    usePublicQuery<LastFetchRandomQuery>(FETCH_RECORD, {
-      variables: { id: 'local' },
-    })
-  const lastRandom = lastFetchRandom?.lastFetchRandom.sidebarAuthors
+  const { loading, error, edges, shuffle } = useAuthorsRecommendation({
+    cacheField: 'sidebarAuthors',
+    publicQuery: false,
+  })
 
-  /**
-   * Data Fetching
-   */
-  const perPage = 4
-  const randomMaxSize = 50
-  const { data, loading, error } = usePublicQuery<SidebarAuthorsPublicQuery>(
-    SIDEBAR_AUTHORS_PUBLIC,
-    {
-      variables: {
-        random: lastRandom || 0,
-        first: perPage,
-        shortHash: shortHash || null,
-      },
-    }
-  )
-  const edges = data?.viewer?.recommendation.authors.edges
-
-  const shuffle = () => {
-    const size = Math.round(
-      (data?.viewer?.recommendation.authors.totalCount || randomMaxSize) /
-        perPage
-    )
-    const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
-
-    lastFetchRandom &&
-      client.cache.modify({
-        id: client.cache.identify(lastFetchRandom.lastFetchRandom),
-        fields: { sidebarAuthors: () => random },
-      })
-  }
-
-  /**
-   * Render
-   */
   if (error) {
     return <QueryError error={error} />
   }
 
-  // hide the author list if we don't get a result from the response
   if (!loading && (!edges || edges.length === 0)) {
     return null
   }
@@ -81,7 +33,7 @@ const Authors = () => {
       ) : (
         <List hasBorder={false}>
           {edges &&
-            edges.map(({ node, cursor }, i) => (
+            edges.map(({ node }, i) => (
               <List.Item key={node.id}>
                 <UserDigest.Rich
                   user={node}
