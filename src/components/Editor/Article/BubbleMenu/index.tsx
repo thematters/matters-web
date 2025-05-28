@@ -22,7 +22,7 @@ import { ReactComponent as IconEditorUnlink } from '@/public/static/icons/24px/e
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { KEYVALUE } from '~/common/enums'
 import { isUrl } from '~/common/utils'
-import { Icon, Media } from '~/components'
+import { Icon, Media, useNativeEventListener } from '~/components'
 
 import styles from './styles.module.css'
 
@@ -71,21 +71,11 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
       editor.chain().focus().setLink({ href: url, target: '_blank' }).run()
     }
 
-    // reset the editing link
-    setInputState((prev) => ({ ...prev, isEditing: false }))
-  }
+    // // reset the editing link
+    // setInputState((prev) => ({ ...prev, isEditing: false }))
 
-  const onInputKeyDownLink = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key.toLowerCase() !== KEYVALUE.enter) {
-      return
-    }
-
-    onSubmitLink()
-  }
-
-  const onClearLink = () => {
-    setLinkValue('')
-    linkInputRef.current?.focus()
+    // move the cursor to the end of the link text
+    editor.commands.setTextSelection(editor.state.selection.to)
   }
 
   const onEditLink = () => {
@@ -98,11 +88,39 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
 
       linkInputRef.current.focus()
 
-      // Move cursor to the end of the text
+      // Move cursor to the end of the input
       const length = linkInputRef.current.value.length
       linkInputRef.current.setSelectionRange(length, length)
     })
   }
+
+  const setAndShowLinkInput = () => {
+    // set the link value
+    const linkUrl = editor.getAttributes('link').href || ''
+    setLinkValue(linkUrl)
+
+    // show the link input
+    setInputState({
+      showInput: true,
+      isEditing: false,
+    })
+  }
+
+  useNativeEventListener('click', (event) => {
+    const target = event.target as HTMLElement
+    const isLink = target.tagName.toLowerCase() === 'a' || target.closest('a')
+
+    if (!isLink) {
+      return
+    }
+
+    setAndShowLinkInput()
+
+    // extend the selection
+    setTimeout(() => {
+      editor.chain().focus().extendMarkRange('link').run()
+    })
+  })
 
   return (
     <TipTapBubbleMenu
@@ -148,13 +166,10 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
         // const $grandParent = $anchor.node($anchor.depth - 1)
         // const isInBlockquote = $grandParent?.type.name === 'blockquote'
 
-        // Check if a link is selected
-        const isLinkSelected = editor.isActive('link')
-
         if (
           !hasEditorFocus ||
-          (empty && !isLinkSelected) || // Allow empty selection if it's a link
-          (isEmptyTextBlock && !isLinkSelected) || // Allow empty text block if it's a link
+          empty ||
+          isEmptyTextBlock ||
           !editor.isEditable ||
           isFigure ||
           isHr
@@ -163,16 +178,10 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
           return false
         }
 
+        // Check if a link is selected
+        const isLinkSelected = editor.isActive('link')
         if (isLinkSelected) {
-          // set the link value
-          const linkUrl = editor.getAttributes('link').href || ''
-          setLinkValue(linkUrl)
-
-          // show the link input
-          setInputState({
-            showInput: true,
-            isEditing: false,
-          })
+          setAndShowLinkInput()
         }
 
         return true
@@ -443,7 +452,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                   description: 'src/components/Editor',
                 })}
                 autoFocus
-                onKeyDown={onInputKeyDownLink}
+                onKeyDown={(event) => {
+                  if (event.key.toLowerCase() !== KEYVALUE.enter) {
+                    return
+                  }
+
+                  onSubmitLink()
+                }}
               />
             )}
             {!inputState.isEditing && linkValue && (
@@ -457,7 +472,10 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               <button
                 className={styles.linkClearButton}
                 type="button"
-                onClick={onClearLink}
+                onClick={() => {
+                  setLinkValue('')
+                  linkInputRef.current?.focus()
+                }}
                 title={intl.formatMessage({
                   defaultMessage: 'Clear',
                   id: 'TWZ1AK',
@@ -495,7 +513,13 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
                 className={styles.linkUnlinkButton}
                 type="button"
                 onClick={() => {
-                  editor.chain().focus().unsetLink().run()
+                  editor
+                    .chain()
+                    .focus()
+                    .unsetLink()
+                    // move to the end of the text
+                    .setTextSelection(editor.state.selection.to)
+                    .run()
                 }}
                 title={intl.formatMessage({
                   defaultMessage: 'Unlink',
