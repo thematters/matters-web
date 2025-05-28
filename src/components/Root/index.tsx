@@ -1,9 +1,10 @@
 import { useQuery } from '@apollo/client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { excludeGraphQLFetch } from 'apollo-link-sentry'
 import type { IncomingHttpHeaders } from 'http'
 import dynamic from 'next/dynamic'
 import React, { useEffect } from 'react'
-import { WagmiConfig } from 'wagmi'
+import { WagmiProvider } from 'wagmi'
 
 import packageJson from '@/package.json'
 import {
@@ -79,6 +80,8 @@ import('@sentry/browser').then((Sentry) => {
   })
 })
 
+const queryClient = new QueryClient()
+
 const Root = ({
   headers,
   children,
@@ -142,26 +145,28 @@ const Root = ({
   }
 
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <ViewerProvider viewer={viewer}>
-        <LanguageProvider headers={headers}>
-          <FeaturesProvider official={official}>
-            <MediaContextProvider>
-              <TranslationsProvider>
-                {shouldApplyLayout ? <Layout>{children}</Layout> : children}
+    <WagmiProvider config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        <ViewerProvider viewer={viewer}>
+          <LanguageProvider headers={headers}>
+            <FeaturesProvider official={official}>
+              <MediaContextProvider>
+                <TranslationsProvider>
+                  {shouldApplyLayout ? <Layout>{children}</Layout> : children}
 
-                <DynamicToaster />
-                <DynamicAnalyticsInitilizer user={viewer || {}} />
-                <DynamicGlobalDialogs />
-                <DynamicGlobalToasts />
-                <DynamicProgressBar />
-                <DynamicFingerprint />
-              </TranslationsProvider>
-            </MediaContextProvider>
-          </FeaturesProvider>
-        </LanguageProvider>
-      </ViewerProvider>
-    </WagmiConfig>
+                  <DynamicToaster />
+                  <DynamicAnalyticsInitilizer user={viewer || {}} />
+                  <DynamicGlobalDialogs />
+                  <DynamicGlobalToasts />
+                  <DynamicProgressBar />
+                  <DynamicFingerprint />
+                </TranslationsProvider>
+              </MediaContextProvider>
+            </FeaturesProvider>
+          </LanguageProvider>
+        </ViewerProvider>
+      </QueryClientProvider>
+    </WagmiProvider>
   )
 }
 

@@ -1,12 +1,12 @@
 import classNames from 'classnames'
-import React, { useContext, useEffect, useId } from 'react'
+import React, { useContext, useEffect, useId, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useAccount, useConnect, useDisconnect } from 'wagmi'
 
 import IconMetaMask from '@/public/static/icons/24px/metamask.svg'
 import IconWalletConnect from '@/public/static/icons/24px/walletconnect.svg'
 import { EXTERNAL_LINKS, GUIDE_LINKS } from '~/common/enums'
-import { analytics } from '~/common/utils'
+import { analytics, WalletType } from '~/common/utils'
 import {
   Dialog,
   Form,
@@ -88,13 +88,9 @@ const Select: React.FC<FormProps> = ({
   const isInDialog = purpose === 'dialog'
   const isConnect = type === 'connect'
 
+  const [walletType, setWalletType] = useState<WalletType>('MetaMask')
   const { disconnect } = useDisconnect()
-  const {
-    connectors,
-    connect,
-    error: connectError,
-    pendingConnector,
-  } = useConnect()
+  const { connectors, connect, error: connectError } = useConnect()
   const { address: account, isConnecting } = useAccount()
   const errorMessage = connectError?.message
 
@@ -102,10 +98,17 @@ const Select: React.FC<FormProps> = ({
   const walletConnectConnector = connectors.find(
     (c) => c.id === 'walletConnect'
   )
-  const isMetaMaskLoading =
-    isConnecting && pendingConnector?.id === injectedConnector?.id
-  const isWalletConnectLoading =
-    isConnecting && pendingConnector?.id === walletConnectConnector?.id
+  const isMetaMaskLoading = isConnecting && walletType === 'MetaMask'
+  const isWalletConnectLoading = isConnecting && walletType === 'WalletConnect'
+
+  const [injectedReady, setInjectedReady] = useState(false)
+
+  useEffect(() => {
+    ;(async () => {
+      const provider = await injectedConnector?.getProvider()
+      setInjectedReady(!!provider)
+    })()
+  }, [injectedConnector])
 
   // auto switch to next step if account is connected
   useEffect(() => {
@@ -197,7 +200,7 @@ const Select: React.FC<FormProps> = ({
           }
           spacingX={isInPage ? 0 : 'base'}
         >
-          {injectedConnector?.ready ? (
+          {injectedConnector && injectedReady ? (
             <TableView.Cell
               title={
                 <TextIcon
@@ -213,6 +216,7 @@ const Select: React.FC<FormProps> = ({
                 analytics.trackEvent('click_button', {
                   type: 'connectorMetaMask',
                 })
+                setWalletType('MetaMask')
                 connect({ connector: injectedConnector })
               }}
               role="button"
@@ -258,7 +262,8 @@ const Select: React.FC<FormProps> = ({
               analytics.trackEvent('click_button', {
                 type: 'connectorWalletConnect',
               })
-              connect({ connector: walletConnectConnector })
+              setWalletType('WalletConnect')
+              connect({ connector: walletConnectConnector! })
             }}
             role="button"
             right={isWalletConnectLoading ? <Spinner color="grey" /> : null}

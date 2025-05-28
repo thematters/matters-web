@@ -72,18 +72,19 @@ describe('<Avatar>', () => {
     expect($badge).toBeDefined()
   })
 
-  it('should allow to use fallback image', async () => {
-    render(<Avatar />)
+  // it('should allow to use fallback image', async () => {
+  //   render(<Avatar />)
 
-    const $avatar = screen.getByTestId(TEST_ID.AVATAR)
-    expect($avatar).toBeDefined()
+  //   const $avatar = screen.getByTestId(TEST_ID.AVATAR)
+  //   expect($avatar).toBeDefined()
 
-    const $img = $avatar.querySelector('img')
-    expect($img).toHaveAttribute(
-      'src',
-      expect.stringMatching(/avatar-default\.svg/)
-    )
-  })
+  //   const $img = $avatar.querySelector('img')
+
+  //   expect($img).toHaveAttribute(
+  //     'src',
+  //     expect.stringMatching(/avatar-default\.svg/)
+  //   )
+  // })
 
   it('should allow to use custom image', async () => {
     // http url

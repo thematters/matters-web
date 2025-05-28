@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { waitForTransactionReceipt } from '@wagmi/core'
 import { useFormik } from 'formik'
 import _get from 'lodash/get'
 import _pickBy from 'lodash/pickBy'
@@ -14,7 +15,6 @@ import {
 import { FormattedMessage, useIntl } from 'react-intl'
 import { parseUnits } from 'viem'
 import { useAccount } from 'wagmi'
-import { waitForTransaction } from 'wagmi/actions'
 
 import {
   contract,
@@ -28,6 +28,7 @@ import {
   truncate,
   validateCurrency,
   validateDonationAmount,
+  wagmiConfig,
 } from '~/common/utils'
 import {
   Button,
@@ -152,8 +153,8 @@ const SetAmount: React.FC<FormProps> = ({
     error: allowanceError,
   } = useAllowanceUSDT(!recipient.info.ethAddress)
   const {
-    data: approveData,
-    isLoading: approving,
+    data: approveHash,
+    isPending: approving,
     write: approveWrite,
     error: approveError,
   } = useApproveUSDT(!recipient.info.ethAddress)
@@ -234,9 +235,10 @@ const SetAmount: React.FC<FormProps> = ({
     allowanceUSDT >= 0n &&
     parseUnits(value + '', contract.Optimism.tokenDecimals) > allowanceUSDT
   const hasUSDTNetworkError =
-    isUSDT && (allowanceError || balanceUSDTError || approveError) // TODO: better error handling
+    isUSDT && (allowanceError || balanceUSDTError || approveError)
   const isUserRejectedError =
-    _get(hasUSDTNetworkError, 'cause.name') === 'UserRejectedRequestError'
+    hasUSDTNetworkError &&
+    hasUSDTNetworkError?.name === 'UserRejectedRequestError'
   const hasWalletBalanceError = walletBalanceError && !isUSDT
   const networkError = hasWalletBalanceError
     ? intl.formatMessage({
@@ -278,14 +280,14 @@ const SetAmount: React.FC<FormProps> = ({
   // USDT approval
   useEffect(() => {
     ;(async () => {
-      if (approveData) {
+      if (approveHash) {
         setApproveConfirming(true)
-        await waitForTransaction({ hash: approveData.hash })
+        await waitForTransactionReceipt(wagmiConfig, { hash: approveHash })
         refetchAllowanceData()
         setApproveConfirming(false)
       }
     })()
-  }, [approveData])
+  }, [approveHash])
 
   useEffect(() => {
     setFieldValue('amount', _amount, false)

@@ -47,6 +47,7 @@
     "@storybook/addon-styling-webpack": "^1.0.1",
     "@stripe/react-stripe-js": "^3.7.0",
     "@stripe/stripe-js": "^7.3.1",
+    "@tanstack/react-query": "^5.77.2",
     "@tippyjs/react": "^4.2.6",
     "@use-gesture/react": "^10.3.1",
     "apollo-link-sentry": "^4.3.0",
@@ -107,8 +108,8 @@
     "url-loader": "^4.1.1",
     "use-debounce": "^10.0.4",
     "validator": "^13.15.15",
-    "viem": "^1.21.4",
-    "wagmi": "^1.4.13"
+    "viem": "^2.30.1",
+    "wagmi": "^2.15.4"
   },
   "devDependencies": {
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",

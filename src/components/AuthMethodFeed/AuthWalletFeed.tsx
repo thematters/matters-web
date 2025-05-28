@@ -14,8 +14,6 @@ import styles from './styles.module.css'
 
 export interface Props {
   submitCallback: (type: WalletType) => void
-  closeDialog?: () => void
-  back?: () => void
   hasWalletExist?: boolean
   hasUnavailable?: boolean
   isInSupport?: boolean
@@ -25,12 +23,10 @@ export const AuthWalletFeed: React.FC<Props> = ({
   submitCallback,
   hasWalletExist,
   hasUnavailable,
-  closeDialog,
   isInSupport,
-  back,
 }) => {
   const { lang } = useContext(LanguageContext)
-  const { connectors, connect, pendingConnector } = useConnect()
+  const { connectors, connect } = useConnect()
   const { address: account, isConnecting } = useAccount()
   const [walletType, setWalletType] = useState<WalletType>('MetaMask')
   const [showLoading, setShowLoading] = useState(true)
@@ -39,10 +35,17 @@ export const AuthWalletFeed: React.FC<Props> = ({
   const walletConnectConnector = connectors.find(
     (c) => c.id === 'walletConnect'
   )
-  const isMetaMaskLoading =
-    isConnecting && pendingConnector?.id === injectedConnector?.id
-  const isWalletConnectLoading =
-    isConnecting && pendingConnector?.id === walletConnectConnector?.id
+  const isMetaMaskLoading = isConnecting && walletType === 'MetaMask'
+  const isWalletConnectLoading = isConnecting && walletType === 'WalletConnect'
+
+  const [injectedReady, setInjectedReady] = useState(false)
+
+  useEffect(() => {
+    ;(async () => {
+      const provider = await injectedConnector?.getProvider()
+      setInjectedReady(!!provider)
+    })()
+  }, [injectedConnector])
 
   // auto switch to next step if account is connected
   useEffect(() => {
@@ -67,7 +70,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
   return (
     <>
       <ul className={styles.feed}>
-        {injectedConnector?.ready ? (
+        {injectedConnector && injectedReady ? (
           <li
             className={itemClasses}
             onClick={() => {
@@ -106,7 +109,7 @@ export const AuthWalletFeed: React.FC<Props> = ({
               type: 'connectorWalletConnect',
             })
             setWalletType('WalletConnect')
-            connect({ connector: walletConnectConnector })
+            connect({ connector: walletConnectConnector! })
           }}
           role="button"
         >

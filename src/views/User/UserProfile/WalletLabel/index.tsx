@@ -26,12 +26,11 @@ const WalletLabel: React.FC<WalletLabelProps> = ({
   hasTooltip,
 }) => {
   const address = user?.info.ethAddress
-  const targetNetork = featureSupportedChains.ens[0]
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
 
   const { data: ensName } = useEnsName({
     address: address as `0x${string}`,
-    chainId: targetNetork.id,
+    chainId: featureSupportedChains.ens[0].id,
   })
 
   if (!address) {

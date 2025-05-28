@@ -45,8 +45,17 @@ const BaseUniversalAuthDialog = () => {
   const injectedConnector = connectors.find((c) => c.id === 'injected')
   const [authFeedType, setAuthFeedType] = useState<AuthFeedType>('normal')
 
+  const [injectedReady, setInjectedReady] = useState(false)
+
   useEffect(() => {
-    if (injectedConnector?.ready && firstRender) {
+    ;(async () => {
+      const provider = await injectedConnector?.getProvider()
+      setInjectedReady(!!provider)
+    })()
+  }, [injectedConnector])
+
+  useEffect(() => {
+    if (injectedConnector && injectedReady && firstRender) {
       setAuthFeedType('wallet')
     }
 
