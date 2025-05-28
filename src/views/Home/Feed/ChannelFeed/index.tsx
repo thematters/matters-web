@@ -11,6 +11,7 @@ import {
 import { useRoute } from '~/components'
 import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
+import { useMixedFeed } from '../../common/useMixedFeed'
 import Authors from '../Authors'
 import FeedRenderer from '../components/FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
@@ -19,7 +20,7 @@ import feedStyles from '../styles.module.css'
 import Tags from '../Tags'
 import { ChannelHeader } from './ChannelHeader'
 
-const horizontalFeeds: Record<
+const channelHorizontalFeeds: Record<
   number,
   React.FC<{ after?: string; first?: number }>
 > = {
@@ -71,23 +72,7 @@ const ChannelFeed = () => {
     keyPrefix: `channel:${shortHash}`,
   })
 
-  let mixFeed = edges ? [...edges] : []
-
-  if (mixFeed.length > 0) {
-    mixFeed = JSON.parse(JSON.stringify(edges))
-
-    const locs = Object.keys(horizontalFeeds).map((loc) => parseInt(loc, 10))
-    locs.sort((a, b) => a - b)
-
-    locs.forEach((loc) => {
-      if (mixFeed.length >= loc) {
-        mixFeed.splice(loc, 0, {
-          Feed: horizontalFeeds[loc],
-          __typename: 'HorizontalFeed',
-        })
-      }
-    })
-  }
+  const mixFeed = useMixedFeed(edges, true, channelHorizontalFeeds)
 
   const renderCards = (
     cardEdges: any[],
