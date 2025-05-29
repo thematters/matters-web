@@ -1,5 +1,7 @@
 import gql from 'graphql-tag'
 
+import { UserDigest } from '~/components'
+
 export const fragments = {
   article: gql`
     fragment MetaInfoArticle on Article {
@@ -15,9 +17,10 @@ export const fragments = {
       createdAt
       author {
         id
-        userName
+        ...UserDigestMiniUser
       }
     }
+    ${UserDigest.Mini.fragments.user}
   `,
   articleVersion: gql`
     fragment MetaInfoArticleVersion on ArticleVersion {

@@ -7,6 +7,7 @@ import {
   OPEN_UNIVERSAL_AUTH_DIALOG,
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
+import { analytics } from '~/common/utils'
 import {
   Button,
   ButtonHeight,
@@ -103,6 +104,10 @@ const FollowUser = ({ user, size }: FollowUserProps) => {
 
       return
     }
+
+    analytics.trackEvent('click_button', {
+      type: 'user_follow',
+    })
 
     follow()
   }

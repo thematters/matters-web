@@ -51,7 +51,7 @@ import Field from '../../Form/Field'
 import OtherOptions from './OtherOptions'
 import styles from './styles.module.css'
 
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 
 interface FormProps {
   purpose: 'dialog' | 'page'
@@ -158,14 +158,16 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           },
         })
 
-        const token = data?.emailLogin.token || ''
-        const language = data?.emailLogin.user?.settings.language || ''
-        const group = data?.emailLogin.user?.info.group || ''
-        setCookies({
-          [COOKIE_LANGUAGE]: language,
-          [COOKIE_USER_GROUP]: group,
-          ...(isProd ? {} : { [COOKIE_TOKEN_NAME]: token }),
-        })
+        if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
+          const token = data?.emailLogin.token || ''
+          const language = data?.emailLogin.user?.settings.language || ''
+          const group = data?.emailLogin.user?.info.group || ''
+          setCookies({
+            [COOKIE_LANGUAGE]: language,
+            [COOKIE_USER_GROUP]: group,
+            [COOKIE_TOKEN_NAME]: token,
+          })
+        }
 
         if (submitCallback) {
           submitCallback()

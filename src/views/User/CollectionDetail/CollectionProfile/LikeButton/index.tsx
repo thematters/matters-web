@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 
 import { ReactComponent as IconLike } from '@/public/static/icons/24px/like.svg'
 import { ReactComponent as IconLikeFill } from '@/public/static/icons/24px/like-fill.svg'
-import { numAbbr } from '~/common/utils'
+import { analytics, numAbbr } from '~/common/utils'
 import { Button, useMutation } from '~/components'
 import {
   LIKE_COLLECTION,
@@ -88,6 +88,9 @@ const LikeButton = ({
 
   const [handleLike, handleUnlike] = [
     () => {
+      analytics.trackEvent('click_button', {
+        type: 'collection_like',
+      })
       likeCollection()
       setPlayHeartBeat(true)
     },

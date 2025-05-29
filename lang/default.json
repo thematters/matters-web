@@ -1043,9 +1043,6 @@
     "defaultMessage": "Switch to Optimism network now?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "FYeEw1": {
-    "defaultMessage": "Application period{tz}:"
-  },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -2440,6 +2437,9 @@
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fWZYP5": {
+    "defaultMessage": "Pinned"
+  },
   "fko+MR": {
     "defaultMessage": "Retry claiming"
   },
@@ -3250,6 +3250,9 @@
   "wAccv4": {
     "defaultMessage": "{commentType} has been deleted",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "wC7v0l": {
+    "defaultMessage": "Application period{tz}: {period}"
   },
   "wCgTu5": {
     "defaultMessage": "Comments"

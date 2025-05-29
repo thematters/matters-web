@@ -11,6 +11,8 @@ const SENTRY_CSP_REPORT_GROUP = 'csp-endpoint'
 // For WalletConnect
 // @see https://github.com/WalletConnect/walletconnect-docs/pull/1603/files
 
+const DEFAULT_SRC = ["'self'", process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN]
+
 const SCRIPT_SRC = [
   "'self'",
 
@@ -26,8 +28,6 @@ const SCRIPT_SRC = [
   'challenges.cloudflare.com',
 
   // GA
-  'www.google-analytics.com',
-  'ssl.google-analytics.com',
   '*.google-analytics.com',
   '*.analytics.google.com',
 
@@ -36,6 +36,13 @@ const SCRIPT_SRC = [
 
   // Cloudflare
   '*.cloudflareinsights.com',
+
+  // Google AdSense
+  'pagead2.googlesyndication.com',
+  '*.adtrafficquality.google',
+  '*.doubleclick.net',
+  'tpc.googlesyndication.com',
+  'adservice.google.com',
 ]
 
 const STYLE_SRC = [
@@ -84,7 +91,7 @@ const IMG_SRC = [
   'matters-server-production.s3-ap-southeast-1.amazonaws.com',
 
   // GA
-  'www.google-analytics.com',
+  '*.google-analytics.com',
 
   // WalletConnect
   '*.walletconnect.com',
@@ -92,6 +99,11 @@ const IMG_SRC = [
 
   // Billboard
   process.env.NEXT_PUBLIC_BILLBOARD_IMAGE_URL,
+
+  // Google AdSense
+  'pagead2.googlesyndication.com',
+  'googleads.g.doubleclick.net',
+  '*.adtrafficquality.google',
 ]
 
 const FONT_SRC = [
@@ -127,7 +139,7 @@ const CONNECT_SRC = [
   'upload.imagedelivery.net',
 
   // GA
-  'www.google-analytics.com',
+  '*.google-analytics.com',
 
   // Firebase
   'firebase.googleapis.com',
@@ -153,6 +165,11 @@ const CONNECT_SRC = [
 
   // Sentry
   '*.ingest.us.sentry.io',
+
+  // Google AdSense
+  '*.adtrafficquality.google',
+  'adservice.google.com',
+  '*.doubleclick.net',
 ]
 
 const FRAME_SRC = [
@@ -178,10 +195,24 @@ const FRAME_SRC = [
   // WalletConnect
   '*.walletconnect.com',
   '*.walletconnect.org',
+
+  // Google AdSense
+  'pagead2.googlesyndication.com',
+  'googleads.g.doubleclick.net',
+  'tpc.googlesyndication.com',
+  '*.adtrafficquality.google',
+]
+
+// Add prefetch-src directive
+const PREFETCH_SRC = [
+  "'self'",
+
+  // Next.js Assets
+  process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN,
 ]
 
 const CSP_POLICY = Object.entries({
-  'default-src': ["'self'"],
+  'default-src': DEFAULT_SRC,
   'script-src': SCRIPT_SRC,
   'style-src': STYLE_SRC,
   'img-src': IMG_SRC,
@@ -189,6 +220,7 @@ const CSP_POLICY = Object.entries({
   'media-src': MEDIA_SRC,
   'connect-src': CONNECT_SRC,
   'frame-src': FRAME_SRC,
+  'prefetch-src': PREFETCH_SRC,
   'report-uri': SENTRY_REPORT_URI,
   'report-to': SENTRY_CSP_REPORT_GROUP,
 })
