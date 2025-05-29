@@ -78,28 +78,31 @@ const InfoHeader = ({ campaign }: InfoHeaderProps) => {
               {isInApplicationPeriod && (
                 <span>
                   <FormattedMessage
-                    defaultMessage="Application period{tz}: "
-                    id="FYeEw1"
-                    values={{ tz: isUTC8() ? '' : ' (UTC+8) ' }}
+                    defaultMessage="Application period{tz}: {period}"
+                    id="wC7v0l"
+                    values={{
+                      tz: isUTC8() ? '' : ' (UTC+8) ',
+                      period: (
+                        <span className={styles.period}>
+                          {appStart
+                            ? datetimeFormat.absolute({
+                                date: appStart,
+                                lang,
+                                utc8: true,
+                              })
+                            : ''}{' '}
+                          -{' '}
+                          {appEnd
+                            ? datetimeFormat.absolute({
+                                date: appEnd,
+                                lang,
+                                utc8: true,
+                              })
+                            : ''}
+                        </span>
+                      ),
+                    }}
                   />
-
-                  <span className={styles.period}>
-                    {appStart
-                      ? datetimeFormat.absolute({
-                          date: appStart,
-                          lang,
-                          utc8: true,
-                        })
-                      : ''}{' '}
-                    -{' '}
-                    {appEnd
-                      ? datetimeFormat.absolute({
-                          date: appEnd,
-                          lang,
-                          utc8: true,
-                        })
-                      : ''}
-                  </span>
                 </span>
               )}
               {!isInApplicationPeriod && (

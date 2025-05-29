@@ -7,6 +7,7 @@ import {
   NEW_POST_COMMENT_MUTATION_RESULT,
 } from '~/common/enums'
 import {
+  analytics,
   dom,
   formStorage,
   sanitizeContent,
@@ -97,6 +98,10 @@ const CommentForm: React.FC<CommentFormProps> = ({
 
     event?.preventDefault()
     setSubmitting(true)
+
+    analytics.trackEvent('click_button', {
+      type: 'article_comment_publish',
+    })
 
     try {
       await putComment({

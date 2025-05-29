@@ -93,6 +93,8 @@ export interface ClickButtonProp {
     | 'comment_open'
     | 'comment_close'
     | 'comment_placeholder'
+    | 'article_comment_publish'
+    | 'moment_comment_publish'
     | 'report_article_open'
     | 'share_article_open'
     | 'support_open'
@@ -100,6 +102,10 @@ export interface ClickButtonProp {
     | 'supporter_list'
     | 'user_avatar'
     | 'user_name'
+    | 'user_follow'
+    | 'article_bookmark'
+    | 'moment_like'
+    | 'collection_like'
     | 'hottest'
     | 'icymi'
     | 'newest'
@@ -111,6 +117,7 @@ export interface ClickButtonProp {
     | `follow_tab_${string}`
   pageType?: PageType
   pageComponent?: PageComponent
+  note?: string
 }
 
 /**

@@ -89,7 +89,9 @@ const ChannelItem = ({ channel }: ChannelItemProps) => {
           })
         }}
       >
-        <span>{channelName}</span>
+        <span>
+          <span className={styles.channelName}>{channelName}</span>
+        </span>
       </LinkWrapper>
     </Tooltip>
   )

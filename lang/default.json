@@ -1004,6 +1004,9 @@
   "EcglP9": {
     "defaultMessage": "Key"
   },
+  "EiENui": {
+    "defaultMessage": "Related Tags"
+  },
   "El+nq2": {
     "defaultMessage": "Must be between {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} characters long."
   },
@@ -1037,9 +1040,6 @@
   "FWCa4O": {
     "defaultMessage": "Switch to Optimism network now?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
-  },
-  "FYeEw1": {
-    "defaultMessage": "Application period{tz}:"
   },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
@@ -2230,6 +2230,9 @@
     "defaultMessage": "pinned your comment in {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
+  "cCpbBu": {
+    "defaultMessage": "Popular Channel Authors"
+  },
   "cCsxxw": {
     "defaultMessage": "This {type} has been archived due to a violation of the user agreement"
   },
@@ -2430,6 +2433,9 @@
   "fWDtpq": {
     "defaultMessage": "Pending",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "fWZYP5": {
+    "defaultMessage": "Pinned"
   },
   "fko+MR": {
     "defaultMessage": "Retry claiming"
@@ -3245,6 +3251,9 @@
   "wAccv4": {
     "defaultMessage": "{commentType} has been deleted",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "wC7v0l": {
+    "defaultMessage": "Application period{tz}: {period}"
   },
   "wCgTu5": {
     "defaultMessage": "Comments"

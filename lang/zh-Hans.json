@@ -1004,6 +1004,9 @@
   "EcglP9": {
     "defaultMessage": "密钥"
   },
+  "EiENui": {
+    "defaultMessage": "相关标签"
+  },
   "El+nq2": {
     "defaultMessage": "输入字数过短，仅供输入 {MIN_COLLECTION_TITLE_LENGTH}-{MAX_COLLECTION_TITLE_LENGTH} 个字符"
   },
@@ -1037,9 +1040,6 @@
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 网络，立即切换？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
-  },
-  "FYeEw1": {
-    "defaultMessage": "报名期{tz}："
   },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
@@ -2230,6 +2230,9 @@
     "defaultMessage": "将你的评论在 {commentArticle} 中置顶",
     "description": "src/components/Notice/CommentNotice/CommentPinnedNotice.tsx"
   },
+  "cCpbBu": {
+    "defaultMessage": "频道热门作者"
+  },
   "cCsxxw": {
     "defaultMessage": "此 {type} 因违反用户协定而被封存"
   },
@@ -2430,6 +2433,9 @@
   "fWDtpq": {
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
+  },
+  "fWZYP5": {
+    "defaultMessage": "置顶"
   },
   "fko+MR": {
     "defaultMessage": "重试提领"
@@ -3245,6 +3251,9 @@
   "wAccv4": {
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "wC7v0l": {
+    "defaultMessage": "报名期{tz}：{period}"
   },
   "wCgTu5": {
     "defaultMessage": "评论"

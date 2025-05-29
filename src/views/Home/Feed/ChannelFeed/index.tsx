@@ -11,11 +11,30 @@ import {
 import { useRoute } from '~/components'
 import { FeedArticlesPublicChannelQuery } from '~/gql/graphql'
 
+import { useMixedFeed } from '../../common/useMixedFeed'
+import Authors from '../Authors'
 import FeedRenderer from '../components/FeedRenderer'
 import { FEED_ARTICLES_PRIVATE, FEED_ARTICLES_PUBLIC_CHANNEL } from '../gql'
 import { useFeed } from '../hooks/useFeed'
 import feedStyles from '../styles.module.css'
+import Tags from '../Tags'
 import { ChannelHeader } from './ChannelHeader'
+
+const channelHorizontalFeeds: Record<
+  number,
+  React.FC<{ after?: string; first?: number }>
+> = {
+  11: () => (
+    <Media lessThan="lg">
+      <Authors />
+    </Media>
+  ),
+  17: () => (
+    <Media lessThan="lg">
+      <Tags />
+    </Media>
+  ),
+}
 
 const ChannelFeed = () => {
   const intl = useIntl()
@@ -52,6 +71,8 @@ const ChannelFeed = () => {
     privateQueryFn: loadPrivate,
     keyPrefix: `channel:${shortHash}`,
   })
+
+  const mixFeed = useMixedFeed(edges, true, channelHorizontalFeeds)
 
   const renderCards = (
     cardEdges: any[],
@@ -151,7 +172,7 @@ const ChannelFeed = () => {
     <FeedRenderer
       loading={loading}
       error={error}
-      edges={edges}
+      edges={mixFeed}
       pageInfo={pageInfo}
       loadMore={loadMore}
       feedType={feedType}

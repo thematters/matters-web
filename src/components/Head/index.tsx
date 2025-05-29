@@ -12,16 +12,6 @@ import { toLocale, toOGLanguage } from '~/common/utils'
 import { LanguageContext, useRoute } from '~/components'
 import { UserLanguage } from '~/gql/graphql'
 
-const siteDomainCanonical =
-  process.env.NEXT_PUBLIC_SITE_DOMAIN_CANONICAL || 'matters.town'
-const siteDomain =
-  siteDomainCanonical || // for web-next, set this different as serving domain; suggested canonical domain ('matters.') to robots
-  process.env.NEXT_PUBLIC_SITE_DOMAIN ||
-  'matters.town'
-const isProdServingCanonical =
-  process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production' &&
-  process.env.NEXT_PUBLIC_SITE_DOMAIN === siteDomainCanonical // is serving domain same as canonical domain?
-
 interface HeadProps {
   title?: string | null
   description?: string | null
@@ -46,6 +36,9 @@ export const Head: React.FC<HeadProps> = (props) => {
   const { lang } = useContext(LanguageContext)
   const title = props.title
 
+  const siteDomain = process.env.NEXT_PUBLIC_SITE_DOMAIN || 'matters.town'
+  const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
+
   // seo base metadata
   const seoTitle = title
     ? props.noSuffix
@@ -60,6 +53,8 @@ export const Head: React.FC<HeadProps> = (props) => {
   const url = props.path
     ? `https://${siteDomain}${props.path}`
     : `https://${siteDomain}${router.asPath || '/'}`
+
+  const noindex = props.noindex || !isProd
 
   const i18nUrl = (language: string) => {
     return props.path
@@ -93,8 +88,8 @@ export const Head: React.FC<HeadProps> = (props) => {
     title: seoTitle,
     description: seoDescription,
     canonical: url?.split('#')[0].split('?')[0],
-    noindex: props.noindex || !isProdServingCanonical,
-    nofollow: props.noindex || !isProdServingCanonical,
+    noindex,
+    nofollow: noindex,
     facebook: { appId: process.env.NEXT_PUBLIC_FB_APP_ID || '' },
     themeColor: '#fff',
     // twitter uses og:* for twitter:* unless otherwise specified by next-seo docs
@@ -187,14 +182,6 @@ export const Head: React.FC<HeadProps> = (props) => {
         rel: 'manifest',
         href: '/manifest.json',
       },
-      {
-        rel: 'dns-prefetch',
-        href: 'https://www.gstatic.com',
-      },
-      {
-        rel: 'dns-prefetch',
-        href: 'https://sentry.matters.one',
-      },
     ],
   }
 
@@ -226,10 +213,10 @@ export const Head: React.FC<HeadProps> = (props) => {
         )}
 
         {/* noindex for non-production enviroment */}
-        {!isProdServingCanonical && (
+        {noindex && (
           <meta name="robots" content="noindex, nofollow" key="robots" />
         )}
-        {!isProdServingCanonical && (
+        {noindex && (
           <meta name="googlebot" content="noindex, nofollow" key="googlebot" />
         )}
       </NextHead>

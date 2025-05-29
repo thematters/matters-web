@@ -7,12 +7,15 @@ import { FormattedMessage } from 'react-intl'
 import {
   Dialog,
   Form,
+  List,
   Spinner,
   toast,
   useDialogSwitch,
   useMutation,
 } from '~/components'
+import { BATCH_PIN_UNPIN_CHANNEL_ARTICLES } from '~/components/GQL/mutations/togglePinChannelArticles'
 import {
+  BatchPinUnpinChannelArticlesMutation,
   GetArticleTopicChannelsQuery,
   SetArticleTopicChannelsMutation,
 } from '~/gql/graphql'
@@ -27,6 +30,7 @@ export type SetArticleChannelsDialogProps = {
 
 interface FormValues {
   channels: string[]
+  pinnedChannels: string[]
 }
 
 const BaseSetArticleChannelsDialog = ({
@@ -40,6 +44,7 @@ const BaseSetArticleChannelsDialog = ({
       variables: {
         shortHash: article.shortHash,
       },
+      fetchPolicy: 'no-cache',
     }
   )
   const [setArticleChannels] = useMutation<SetArticleTopicChannelsMutation>(
@@ -48,17 +53,36 @@ const BaseSetArticleChannelsDialog = ({
     { showToast: true }
   )
 
+  const [batchPinUnpinChannelArticles] =
+    useMutation<BatchPinUnpinChannelArticlesMutation>(
+      BATCH_PIN_UNPIN_CHANNEL_ARTICLES,
+      undefined,
+      { showToast: true }
+    )
+
   const formId = 'set-article-channels-form'
 
   const { values, handleSubmit, isSubmitting, setFieldValue } =
     useFormik<FormValues>({
-      initialValues: { channels: [] },
+      initialValues: { channels: [], pinnedChannels: [] },
       validateOnBlur: false,
       validateOnChange: false,
-      onSubmit: async ({ channels }, { setSubmitting }) => {
+      onSubmit: async ({ channels, pinnedChannels }, { setSubmitting }) => {
         try {
           await setArticleChannels({
             variables: { id: article.id, channels },
+          })
+
+          const unpinChannels = channels.filter(
+            (channel) => !pinnedChannels.includes(channel)
+          )
+
+          await batchPinUnpinChannelArticles({
+            variables: {
+              pinChannels: pinnedChannels,
+              unpinChannels: unpinChannels,
+              articles: [article.id],
+            },
           })
 
           toast.success({
@@ -76,14 +100,45 @@ const BaseSetArticleChannelsDialog = ({
 
   const handleToggleChannel = (channelId: string) => {
     const currentChannels = [...values.channels]
+    const currentPinnedChannels = [...values.pinnedChannels]
     const index = currentChannels.indexOf(channelId)
 
     if (index >= 0) {
       currentChannels.splice(index, 1)
+      // Remove from pinned channels if it exists
+      if (currentPinnedChannels.includes(channelId)) {
+        currentPinnedChannels.splice(
+          currentPinnedChannels.indexOf(channelId),
+          1
+        )
+      }
     } else {
       currentChannels.push(channelId)
     }
 
+    setFieldValue('channels', currentChannels)
+    setFieldValue('pinnedChannels', currentPinnedChannels)
+  }
+
+  const handleTogglePinnedChannel = (channelId: string) => {
+    const currentChannels = [...values.channels]
+    const currentPinnedChannels = [...values.pinnedChannels]
+    const index = currentPinnedChannels.indexOf(channelId)
+
+    if (index >= 0) {
+      currentPinnedChannels.splice(index, 1)
+      // Add to channels if it doesn't exist
+      if (!currentChannels.includes(channelId)) {
+        currentChannels.push(channelId)
+      }
+    } else {
+      currentPinnedChannels.push(channelId)
+      if (!currentChannels.includes(channelId)) {
+        currentChannels.push(channelId)
+      }
+    }
+
+    setFieldValue('pinnedChannels', currentPinnedChannels)
     setFieldValue('channels', currentChannels)
   }
 
@@ -96,17 +151,31 @@ const BaseSetArticleChannelsDialog = ({
 
   const InnerForm = (
     <Form id={formId} onSubmit={handleSubmit}>
-      {allChannels?.map((channel) => (
-        <section key={channel.id} className={styles.item}>
-          <Form.SquareCheckBox
-            name="channels"
-            value={channel.id}
-            contents={'name' in channel ? channel.name : channel.id}
-            checked={values.channels.includes(channel.id)}
-            onChange={() => handleToggleChannel(channel.id)}
-          />
-        </section>
-      ))}
+      <List>
+        {allChannels?.map((channel) => (
+          <List.Item key={channel.id}>
+            <section className={styles.item}>
+              <Form.SquareCheckBox
+                name="channels"
+                value={channel.id}
+                contents={'name' in channel ? channel.name : channel.id}
+                checked={values.channels.includes(channel.id)}
+                onChange={() => handleToggleChannel(channel.id)}
+              />
+              <section className={styles.pinnedChannel}>
+                <Form.SquareCheckBox
+                  name="pinnedChannels"
+                  value={channel.id}
+                  contents={'置頂'}
+                  color="greyDarker"
+                  checked={values.pinnedChannels.includes(channel.id)}
+                  onChange={() => handleTogglePinnedChannel(channel.id)}
+                />
+              </section>
+            </section>
+          </List.Item>
+        ))}
+      </List>
     </Form>
   )
 
@@ -130,6 +199,11 @@ const BaseSetArticleChannelsDialog = ({
       'channels',
       articleChannels.filter((c) => c.enabled).map((c) => c.channel.id)
     )
+
+    setFieldValue(
+      'pinnedChannels',
+      articleChannels.filter((c) => c.pinned).map((c) => c.channel.id)
+    )
   }, [articleChannels?.join(',')])
 
   return (
@@ -138,7 +212,7 @@ const BaseSetArticleChannelsDialog = ({
 
       <Dialog isOpen={show} onDismiss={closeDialog}>
         <Dialog.Header
-          title="修正分類"
+          title="頻道管理"
           closeDialog={closeDialog}
           rightBtn={SubmitButton}
         />

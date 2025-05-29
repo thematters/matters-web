@@ -8,7 +8,6 @@ import Document, {
 } from 'next/document'
 import React from 'react'
 
-import { CSP_POLICY } from '~/common/enums'
 import { toLocale } from '~/common/utils'
 
 interface MattersDocumentProps {
@@ -42,9 +41,12 @@ class MattersDocument extends Document<MattersDocumentProps> {
   public render() {
     return (
       <Html lang={this.props.lang}>
-        <Head>
-          <meta httpEquiv="Content-Security-Policy" content={CSP_POLICY} />
-        </Head>
+        <Head />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4792129775270382"
+          crossOrigin="anonymous"
+        />
 
         <body>
           <Main />

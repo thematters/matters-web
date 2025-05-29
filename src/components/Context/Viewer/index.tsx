@@ -115,13 +115,12 @@ export const processViewer = (viewer: ViewerUser): Viewer => {
 
   // Add user info for Sentry
   import('@sentry/browser').then((Sentry) => {
-    Sentry.configureScope((scope: any) => {
-      scope.setUser({
+    Sentry.getCurrentScope()
+      .setUser({
         id: viewer.id,
         language: viewer.settings.language,
       })
-      scope.setTag('source', 'web')
-    })
+      .setTag('source', 'web')
   })
 
   return {
