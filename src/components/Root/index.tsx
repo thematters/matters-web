@@ -68,7 +68,7 @@ import('@sentry/browser').then((Sentry) => {
   Sentry.init({
     enabled: !isLocal && typeof window !== 'undefined',
     dsn: `https://${process.env.NEXT_PUBLIC_SENTRY_PUBLIC_KEY}@${process.env.NEXT_PUBLIC_SENTRY_DOMAIN}/${process.env.NEXT_PUBLIC_SENTRY_PROJECT_ID}`,
-    debug: !isProd,
+    debug: isLocal,
     environment: isProd ? 'production' : 'development',
     release: packageJson.version,
     ignoreErrors: [/.*Timeout.*/, /.*Network.*/],

@@ -152,6 +152,7 @@ const CONNECT_SRC = [
   // WalletConnect
   '*.walletconnect.org',
   '*.walletconnect.com',
+  '*.web3modal.org',
 
   // Alchemy
   '*.alchemyapi.io',
