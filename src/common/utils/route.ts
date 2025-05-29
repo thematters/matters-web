@@ -1,5 +1,5 @@
 import Router from 'next/router'
-import { Key, pathToRegexp } from 'path-to-regexp'
+import { pathToRegexp } from 'path-to-regexp'
 
 import { PATHS, ROUTES } from '~/common/enums'
 
@@ -432,9 +432,8 @@ export const captureClicks = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
    */
   let matched = {}
   ROUTES.some(({ pathname }) => {
-    const keys: Key[] = []
     const path = pathname.replace(/\]/g, '').replace(/\[/g, ':')
-    const regexp = pathToRegexp(path, keys)
+    const { regexp, keys } = pathToRegexp(path)
     const result = regexp.exec(url.pathname)
 
     if (result) {

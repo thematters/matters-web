@@ -90,7 +90,7 @@
     "next-seo": "^6.8.0",
     "nprogress": "^0.2.0",
     "number-precision": "^1.6.0",
-    "path-to-regexp": "^6.2.1",
+    "path-to-regexp": "^8.2.0",
     "photoswipe": "^5.4.4",
     "react": "^18.3.1",
     "react-aria-components": "^1.9.0",
@@ -183,11 +183,6 @@
     "vitest": "^3.1.4",
     "vitest-canvas-mock": "^0.3.3",
     "webpack-merge": "^6.0.1"
-  },
-  "overrides": {
-    "@synthetixio/synpress": {
-      "@adraffy/ens-normalize": "^1.9.1"
-    }
   },
   "prettier": {
     "singleQuote": true,
