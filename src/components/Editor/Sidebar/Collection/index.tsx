@@ -20,6 +20,7 @@ import {
 
 import ArticleCustomStagingArea from '../../ArticleCustomStagingArea'
 import Box from '../Box'
+import { CollectionInput } from './CollectionInput'
 import styles from './styles.module.css'
 
 export type SidebarCollectionProps = {
@@ -35,6 +36,11 @@ const SidebarCollection = ({
 }: SidebarCollectionProps) => {
   const intl = useIntl()
   const [isEditing, setIsEditing] = useState(false)
+
+  const onAddArticle = (article: ArticleDigestDropdownArticleFragment) => {
+    editCollection([...collection, article])
+  }
+
   return (
     <EditorSearchSelectDialog
       title={<FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />}
@@ -114,21 +120,32 @@ const SidebarCollection = ({
           }
           disabled={disabled}
         >
-          {collection.length > 0 && (
-            <ul className={styles.list}>
-              {collection.map((article) => (
-                <li key={article.id}>
-                  <ArticleDigestDropdown
-                    article={article}
-                    titleTextSize={14}
-                    spacing={[16, 16]}
-                    bgColor="none"
-                    bgActiveColor="greyLighter"
-                  />
-                </li>
-              ))}
-            </ul>
-          )}
+          <div className={styles.content}>
+            {collection.length > 0 && (
+              <ul className={styles.list}>
+                {collection.map((article) => (
+                  <li key={article.id}>
+                    <ArticleDigestDropdown
+                      article={article}
+                      titleTextSize={14}
+                      spacing={[16, 16]}
+                      bgColor="none"
+                      bgActiveColor="greyLighter"
+                    />
+                  </li>
+                ))}
+              </ul>
+            )}
+            {isEditing && (
+              <div className={styles.collectionInput}>
+                <CollectionInput
+                  collection={collection}
+                  onAddArticle={onAddArticle}
+                  saving={collectionSaving}
+                />
+              </div>
+            )}
+          </div>
         </Box>
       )}
     </EditorSearchSelectDialog>
