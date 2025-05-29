@@ -41,7 +41,7 @@ const EmailVerification = () => {
 
         // Set cookies and redirect
         if (data?.verifyEmail.auth) {
-          if (isLocal) {
+          if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
             const token = data?.verifyEmail.token || ''
             const language = data?.verifyEmail.user?.settings.language || ''
             const group = data?.verifyEmail.user?.info.group || ''

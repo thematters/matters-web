@@ -92,6 +92,10 @@
   "/IMR+8": {
     "defaultMessage": "支持排行榜"
   },
+  "/NX9L+": {
+    "defaultMessage": "去钱包确认",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "/TXBJR": {
     "defaultMessage": "不知道哪里出错了，过几分钟看看",
     "description": "UNKNOWN_ERROR"
@@ -99,6 +103,9 @@
   "/ZmvO+": {
     "defaultMessage": "分隔线",
     "description": "src/components/Editor"
+  },
+  "/cyuh2": {
+    "defaultMessage": "去钱包授权"
   },
   "/dKzfc": {
     "defaultMessage": "该作品因违反社区约章，已被站方强制封存。"
@@ -143,9 +150,6 @@
   },
   "0Om2Kl": {
     "defaultMessage": "移出选集"
-  },
-  "0PpH2v": {
-    "defaultMessage": "去钱包授权"
   },
   "0SQatS": {
     "defaultMessage": "看全部",
@@ -774,9 +778,6 @@
     "defaultMessage": "发布",
     "description": "src/views/MomentDetail/Edit/index.tsx"
   },
-  "AvRTYR": {
-    "defaultMessage": "您授权 Matters 可使用的 USDT 额度不足，请重新设置"
-  },
   "Avukw5": {
     "defaultMessage": "支付金额太少，请重新输入",
     "description": "PAYMENT_AMOUNT_TOO_SMALL"
@@ -1039,9 +1040,6 @@
   "FWCa4O": {
     "defaultMessage": "目前非 Optimism 网络，立即切换？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
-  },
-  "FYeEw1": {
-    "defaultMessage": "报名期{tz}："
   },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
@@ -1448,10 +1446,6 @@
   },
   "N6PWfU": {
     "defaultMessage": "忘记密码"
-  },
-  "N6Yp+k": {
-    "defaultMessage": "去钱包确认",
-    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "NACY16": {
     "defaultMessage": "为什么需要设定钱包 ?",
@@ -2045,10 +2039,6 @@
   },
   "Xq7h6o": {
     "defaultMessage": "上传动态图片"
-  },
-  "XqTMgg": {
-    "defaultMessage": "去钱包设置",
-    "description": "REAUTHORIZE"
   },
   "XuYhBC": {
     "defaultMessage": "代表作已设置"
@@ -3112,9 +3102,6 @@
     "defaultMessage": "标签添加最多至 5 个",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
-  "tQCtdN": {
-    "defaultMessage": "需要先授权 Matters 为你进行 USDT 交易"
-  },
   "tQV8l8": {
     "defaultMessage": "未知错误"
   },
@@ -3264,6 +3251,9 @@
   "wAccv4": {
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "wC7v0l": {
+    "defaultMessage": "报名期{tz}：{period}"
   },
   "wCgTu5": {
     "defaultMessage": "评论"

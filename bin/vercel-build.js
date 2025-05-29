@@ -47,6 +47,7 @@ if (gitCommitRef && gitCommitRef === 'release/next') {
     'NEXT_PUBLIC_SITE_DOMAIN',
     process.env.NEXT_PUBLIC_VERCEL_URL
   )
+  appendToEnvLocal('NEXT_PUBLIC_VERCEL', 'true')
 
   // set to reverse proxy
   // https://github.com/thematters/api-reverse-proxy
