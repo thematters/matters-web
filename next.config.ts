@@ -1,17 +1,15 @@
-const {
+import type { NextConfig } from 'next'
+
+import {
   CSP_POLICY,
   SENTRY_CSP_REPORT_GROUP,
   SENTRY_REPORT_URI,
-} = require('./configs/csp')
+} from './configs/csp'
 
-const isProd = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'production'
 const isLocal = process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local'
 const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
 
-/**
- * @type {import('next').NextConfig}
- */
-const nextConfig = {
+const nextConfig: NextConfig = {
   experimental: {
     scrollRestoration: true,
     optimizePackageImports: ['wagmi'],
@@ -25,7 +23,7 @@ const nextConfig = {
 
   webpack(config) {
     // Grab the existing rule that handles SVG imports
-    const fileLoaderRule = config.module.rules.find((rule) =>
+    const fileLoaderRule = config.module.rules.find((rule: any) =>
       rule.test?.test?.('.svg')
     )
 
@@ -119,4 +117,4 @@ const withPWA = require('next-pwa')({
   dynamicStartUrl: true,
 })
 
-module.exports = withPWA(withBundleAnalyzer(nextConfig))
+export default withPWA(withBundleAnalyzer(nextConfig))

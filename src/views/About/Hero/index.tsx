@@ -51,7 +51,7 @@ const Hero = () => {
   }, [emblaApi, onSelect])
 
   const style = {
-    '--about-hero-bg': `url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_1}), url(${IMAGE_WAVE_2})`,
+    '--about-hero-bg': `url(${IMAGE_ILLUSTRATION_1.src}), url(${IMAGE_WAVE_1.src}), url(${IMAGE_WAVE_2.src})`,
     '--about-city-bg': `url(${IMAGE_ILLUSTRATION_2.src})`,
   } as React.CSSProperties
 
