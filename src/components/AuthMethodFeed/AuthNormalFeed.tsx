@@ -49,7 +49,7 @@ export const AuthNormalFeed = ({ gotoEmailSignup, gotoEmailLogin }: Props) => {
       }
       const url = await twitterOauthUrl(oauthType, oauthRequestToken)
       router.push(url)
-    } catch (error) {
+    } catch {
       await sleep(3 * 1000)
       gotoTwitter()
     }

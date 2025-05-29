@@ -29,9 +29,9 @@ const PortalImpl: React.FC<PortalProps> = ({
   type = 'reach-portal',
   containerRef,
 }) => {
-  let mountNode = React.useRef<HTMLDivElement | null>(null)
-  let portalNode = React.useRef<HTMLElement | null>(null)
-  let forceUpdate = useForceUpdate()
+  const mountNode = React.useRef<HTMLDivElement | null>(null)
+  const portalNode = React.useRef<HTMLElement | null>(null)
+  const forceUpdate = useForceUpdate()
 
   if (process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local') {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -62,8 +62,8 @@ const PortalImpl: React.FC<PortalProps> = ({
     if (!mountNode.current) return
     // It's possible that the content of the portal has, itself, been portaled.
     // In that case, it's important to append to the correct document element.
-    let ownerDocument = mountNode.current!.ownerDocument
-    let body = containerRef?.current || ownerDocument.body
+    const ownerDocument = mountNode.current!.ownerDocument
+    const body = containerRef?.current || ownerDocument.body
     portalNode.current = ownerDocument?.createElement(type)!
     body.appendChild(portalNode.current)
     forceUpdate()
@@ -85,7 +85,7 @@ const Portal: React.FC<PortalProps> = ({
   unstable_skipInitialRender,
   ...props
 }) => {
-  let [hydrated, setHydrated] = React.useState(false)
+  const [hydrated, setHydrated] = React.useState(false)
   React.useEffect(() => {
     if (unstable_skipInitialRender) {
       setHydrated(true)

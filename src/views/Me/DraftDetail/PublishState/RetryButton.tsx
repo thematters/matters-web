@@ -3,7 +3,10 @@ import { FormattedMessage } from 'react-intl'
 
 import IconRight from '@/public/static/icons/24px/right.svg'
 import { Button, Icon, TextIcon, useMutation } from '~/components'
-import { RetryPublishMutation } from '~/gql/graphql'
+import {
+  PublishState as PublishStateType,
+  RetryPublishMutation,
+} from '~/gql/graphql'
 
 const RETRY_PUBLISH = gql`
   mutation RetryPublish($id: ID!) {
@@ -20,7 +23,7 @@ const RetryButton = ({ id }: { id: string }) => {
     optimisticResponse: {
       retryPublish: {
         id,
-        publishState: 'pending' as any,
+        publishState: PublishStateType.Pending,
         __typename: 'Draft',
       },
     },

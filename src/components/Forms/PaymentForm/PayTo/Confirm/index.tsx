@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { ApolloError, useQuery } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useId } from 'react'
@@ -140,7 +140,7 @@ const Confirm: React.FC<FormProps> = ({
         submitCallback()
       } catch (error) {
         setSubmitting(false)
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         if (codes[0] === 'USER_PASSWORD_INVALID') {
           setFieldError(
             'password',

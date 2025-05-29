@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _pickBy from 'lodash/pickBy'
@@ -105,7 +106,7 @@ const SetEmailDialogContent: React.FC<FormProps> = ({ closeDialog }) => {
         setSubmitting(false)
         closeDialog()
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         codes.forEach((code) => {
           if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
             setFieldError(

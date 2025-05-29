@@ -14,7 +14,7 @@ import { useEventListener } from '~/components'
 
 interface Props {
   defaultValue?: string
-  update: (params: { title: any }) => void
+  update: (params: { title: string }) => void
 }
 
 const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
@@ -33,8 +33,7 @@ const EditorTitle: React.FC<Props> = ({ defaultValue = '', update }) => {
     debouncedUpdate()
   }
 
-  const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) =>
-    update({ title: value })
+  const handleBlur = () => update({ title: value })
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
     const target = event.target as HTMLTextAreaElement

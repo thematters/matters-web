@@ -174,7 +174,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               >
                 <button
                   onClick={() => {
-                    // @ts-ignore
+                    // @ts-expect-error - The type definition for toggleHeading is incorrect
                     editor.chain().focus().toggleHeading({ level: 2 }).run()
                     setExpand(false)
                   }}
@@ -201,7 +201,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               >
                 <button
                   onClick={() => {
-                    // @ts-ignore
+                    // @ts-expect-error - The type definition for toggleHeading is incorrect
                     editor.chain().focus().toggleHeading({ level: 3 }).run()
                     setExpand(false)
                   }}
@@ -228,7 +228,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               >
                 <button
                   onClick={() => {
-                    // @ts-ignore
+                    // @ts-expect-error - The type definition for toggleBulletList is incorrect
                     editor.chain().focus().toggleBulletList().run()
                     setExpand(false)
                   }}
@@ -255,7 +255,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               >
                 <button
                   onClick={() => {
-                    // @ts-ignore
+                    // @ts-expect-error - The type definition for toggleOrderedList is incorrect
                     editor.chain().focus().toggleOrderedList().run()
                     setExpand(false)
                   }}
@@ -349,7 +349,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               disabled={!isMdUp}
             >
               <button
-                onClick={(e) => {
+                onClick={() => {
                   editor.chain().focus().setHorizontalRule().run()
                   setExpand(false)
                 }}

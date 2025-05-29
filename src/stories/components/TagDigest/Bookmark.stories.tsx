@@ -23,7 +23,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    tag: MOCK_TAG as any,
+    tag: MOCK_TAG,
   },
 }
 
@@ -32,7 +32,7 @@ export const HasFollow: Story = {
     tag: {
       ...MOCK_TAG,
       isFollower: true,
-    } as any,
+    },
   },
 }
 
@@ -42,6 +42,6 @@ export const LongTagName: Story = {
       ...MOCK_TAG,
       content:
         'LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName LongTagName',
-    } as any,
+    },
   },
 }

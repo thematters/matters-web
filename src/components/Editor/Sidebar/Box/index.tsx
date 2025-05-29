@@ -9,7 +9,7 @@ interface BoxProps {
   icon: React.ReactNode
   title: React.ReactNode
   subtitle?: React.ReactNode
-  onClick?: () => any
+  onClick?: () => void
   disabled?: boolean
   rightButton?: React.ReactNode
   footerSpacing?: boolean

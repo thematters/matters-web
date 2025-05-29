@@ -56,7 +56,6 @@ const SupportWidget = ({
   const viewer = useContext(ViewerContext)
   const [playLoading, setPlayLoading] = useState(false)
   const [showAnimation, setShowAnimation] = useState(false)
-  const [showAvatarAnimation, setShowAvatarAnimation] = useState(false)
   const [playSlideUp, setPlaySlideUp] = useState(false)
   const [tx, setTx] = useState<{ chain: Chain; txHash: string }>()
   const [showTx, setShowTx] = useState(false)
@@ -100,7 +99,6 @@ const SupportWidget = ({
         return
       }
       setCurrency(payload.currency)
-      setShowAvatarAnimation(true)
 
       const scrollToAnimation = () => {
         const scrollTo = (element: HTMLElement) => {
@@ -221,7 +219,6 @@ const SupportWidget = ({
               <section className={styles.donationButton}>
                 <SupportButton
                   recipient={article.author}
-                  targetId={article.id}
                   article={article}
                   supported={isViewerDonated}
                   toggleDonationDrawer={toggleDonationDrawer}
@@ -230,10 +227,7 @@ const SupportWidget = ({
 
               {article.donations.totalCount > 0 && (
                 <section className={styles.donators}>
-                  <Donators
-                    article={article}
-                    showAvatarAnimation={showAvatarAnimation}
-                  />
+                  <Donators article={article} />
                 </section>
               )}
 
@@ -289,11 +283,7 @@ const SupportWidget = ({
 
               {article.donations.totalCount > 0 && (
                 <section className={styles.donators}>
-                  <Donators
-                    article={article}
-                    showAvatarAnimation={showAvatarAnimation}
-                    isAuthor={isAuthor}
-                  />
+                  <Donators article={article} isAuthor={isAuthor} />
                 </section>
               )}
             </>

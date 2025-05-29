@@ -16,7 +16,7 @@ export interface HeaderProps {
   rightBtn?: React.ReactNode | string
 
   closeText?: React.ReactNode
-  closeDialog?: () => any
+  closeDialog?: () => void
 }
 
 const Title = ({

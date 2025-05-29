@@ -82,7 +82,11 @@ const UpvoteButton = ({
         spacing={[8, 8]}
         bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
         onClick={() => {
-          onClick ? onClick() : unvote()
+          if (onClick) {
+            onClick()
+          } else {
+            unvote()
+          }
         }}
         disabled={disabled}
         aria-label={intl.formatMessage({
@@ -106,7 +110,11 @@ const UpvoteButton = ({
       spacing={[8, 8]}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       onClick={() => {
-        onClick ? onClick() : upvote()
+        if (onClick) {
+          onClick()
+        } else {
+          upvote()
+        }
       }}
       disabled={disabled}
       aria-label={intl.formatMessage({

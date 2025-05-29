@@ -3,12 +3,13 @@ import { Fragment, ReactElement } from 'react'
 
 import { numAbbr } from '~/common/utils'
 import { Translate } from '~/components'
+import { NoticeHeadActorsUserFragment } from '~/gql/graphql'
 
 import NoticeActorName from './NoticeActorName'
 import styles from './styles.module.css'
 
 type NoticeActorsNameAndTitleProps = {
-  actors: any[]
+  actors: NoticeHeadActorsUserFragment[]
   action: string | ReactElement
   secondAction?: string | ReactElement
   title?: string | ReactElement

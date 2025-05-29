@@ -8,19 +8,20 @@ import { CreateDraftMutation, DraftUpdatedAtFragment } from '~/gql/graphql'
 
 type Job = {
   id: string
-  fn: () => Promise<any>
-  resolve: (value: any) => void
-  reject: (reason?: any) => void
+  fn: () => Promise<unknown>
+  resolve: (value: unknown) => void
+  reject: (reason?: unknown) => void
 }
 
 const NEW_DRAFT_ID = 'new'
 
 export const DraftDetailStateContext = createContext(
   {} as {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     addRequest: (fn: () => Promise<any>) => Promise<any>
     getDraftId: () => string | undefined
     isNewDraft: () => boolean
-    createDraft: (props: { onCreate: (draftId: string) => any }) => any
+    createDraft: (props: { onCreate: (draftId: string) => void }) => void
     getDraftUpdatedAt: () => string | undefined
   }
 )
@@ -39,7 +40,7 @@ export const DraftDetailStateProvider = ({
   const client = useApolloClient()
 
   // push request job
-  const addRequest = (fn: () => Promise<any>): Promise<any> => {
+  const addRequest = (fn: () => Promise<unknown>): Promise<unknown> => {
     return new Promise((resolve, reject) => {
       const id = randomString()
       const jobs = jobsRef.current
@@ -105,7 +106,7 @@ export const DraftDetailStateProvider = ({
   const createDraft = async ({
     onCreate,
   }: {
-    onCreate: (draftId: string) => any
+    onCreate: (draftId: string) => void
   }) => {
     const result = await create()
     const { id } = result?.data?.putDraft || {}

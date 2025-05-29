@@ -10,7 +10,6 @@ import { Icon } from '~/components'
 import styles from './styles.module.css'
 
 export interface SearchInputProps {
-  value: string
   onChange: (value: string) => void
   onFocus?: () => void
   onBlur?: () => void
@@ -18,7 +17,6 @@ export interface SearchInputProps {
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({
-  value,
   onChange,
   onFocus,
   onBlur,
@@ -62,10 +60,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
                 onChange(e.target.value)
               }}
               onFocus={() => {
-                onFocus && onFocus()
+                onFocus?.()
               }}
               onBlur={() => {
-                onBlur && onBlur()
+                onBlur?.()
               }}
             />
 

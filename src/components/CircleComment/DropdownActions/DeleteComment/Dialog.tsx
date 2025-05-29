@@ -13,6 +13,7 @@ import {
 } from '~/components'
 import {
   CircleCommentDropdownActionsCommentPublicFragment,
+  CommentState,
   DeleteCircleCommentMutation,
 } from '~/gql/graphql'
 
@@ -48,7 +49,7 @@ const DeleteCommentDialog = ({
       optimisticResponse: {
         deleteComment: {
           id: commentId,
-          state: 'archived' as any,
+          state: CommentState.Archived,
           __typename: 'Comment',
         },
       },

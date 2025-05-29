@@ -49,7 +49,7 @@ describe('<Tabs>', () => {
 
   it('should allow to be a link', async () => {
     render(<Tabs.Tab href="/about" />)
-    let $link = screen.getByRole('link')
+    const $link = screen.getByRole('link')
     expect($link).toHaveAttribute('href', '/about')
   })
 

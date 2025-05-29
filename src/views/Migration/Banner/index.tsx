@@ -45,7 +45,6 @@ const Banner = () => {
             hasIcon={false}
             size={['7rem', '2.5rem']}
             spacing={[0, 0]}
-            inCard={false}
           >
             <TextIcon color="white" size={14} weight="medium">
               <Translate

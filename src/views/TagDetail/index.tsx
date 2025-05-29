@@ -37,8 +37,7 @@ import RecommendedAuthors from './RecommendedAuthors'
 import RelatedTags from './RelatedTags'
 import styles from './styles.module.css'
 
-const validTagFeedTypes = ['hottest', 'latest'] as const
-type TagFeedType = (typeof validTagFeedTypes)[number]
+type TagFeedType = 'hottest' | 'latest'
 
 const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
@@ -170,7 +169,7 @@ const TagDetailContainer = () => {
     if (type === 'Tag' && id?.match(/^\d+$/)) {
       isRawGlobalId = true
     }
-  } catch (err) {
+  } catch {
     // ignore
   }
   const numberId = param?.match(/^(\d+)/)?.[1]

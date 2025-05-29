@@ -290,8 +290,10 @@ export const toPath = (
   }
 
   // query string
-  let searchParams: URLSearchParams = new URLSearchParams(
-    [...(Object.entries(search) as [string, string][])].filter(([k, v]) => !!v)
+  const searchParams: URLSearchParams = new URLSearchParams(
+    [...(Object.entries(search) as [string, string][])].filter(
+      (entry) => !!entry[1]
+    )
   )
   if (searchParams.toString()) {
     href = `${href}?${searchParams.toString()}`

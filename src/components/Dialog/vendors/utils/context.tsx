@@ -5,7 +5,7 @@ export function createNamedContext<ContextValueType>(
   name: string,
   defaultValue: ContextValueType
 ): React.Context<ContextValueType> {
-  let Ctx = React.createContext<ContextValueType>(defaultValue)
+  const Ctx = React.createContext<ContextValueType>(defaultValue)
   Ctx.displayName = name
   return Ctx
 }
@@ -21,11 +21,11 @@ export function createContext<ContextValueType extends object | null>(
   ContextProvider<ContextValueType>,
   (callerComponentName: string) => ContextValueType,
 ] {
-  let Ctx = React.createContext<ContextValueType | undefined>(defaultContext)
+  const Ctx = React.createContext<ContextValueType | undefined>(defaultContext)
 
   function Provider(props: React.PropsWithChildren<ContextValueType>) {
-    let { children, ...context } = props
-    let value = React.useMemo(
+    const { children, ...context } = props
+    const value = React.useMemo(
       () => context,
       // eslint-disable-next-line react-hooks/exhaustive-deps
       Object.values(context)
@@ -34,7 +34,7 @@ export function createContext<ContextValueType extends object | null>(
   }
 
   function useContext(callerComponentName: string) {
-    let context = React.useContext(Ctx)
+    const context = React.useContext(Ctx)
     if (context) {
       return context
     }

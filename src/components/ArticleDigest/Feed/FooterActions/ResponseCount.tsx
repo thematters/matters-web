@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _get from 'lodash/get'
 import { useIntl } from 'react-intl'
 
 import IconComment from '@/public/static/icons/24px/comment.svg'

@@ -36,7 +36,6 @@ import MobileSettingsDialog from './MobileSettingsDialog'
 import styles from './styles.module.css'
 
 export type BottomBarProps = {
-  saving: boolean
   disabled: boolean
 } & SetCoverProps &
   SetCollectionProps &
@@ -101,7 +100,6 @@ const BottomBar: React.FC<BottomBarProps> = ({
   toggleIndent,
   indentSaving,
 
-  saving,
   disabled,
 }) => {
   const intl = useIntl()

@@ -1,6 +1,4 @@
 import gql from 'graphql-tag'
-import _isEmpty from 'lodash/isEmpty'
-import _pickBy from 'lodash/pickBy'
 import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -217,7 +215,7 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
   }
 
   const WithShare = withDialog<Omit<ShareDialogProps, 'children'>>(
-    BaseDropdownActions,
+    BaseDropdownActions as React.ComponentType<object>,
     ShareDialog,
     { title: user.displayName ? `${user.displayName} - Matters` : '' },
     ({ openDialog }) => ({
@@ -247,7 +245,11 @@ const DropdownActions = ({ user, isMe, isInAside }: DropdownActionsProps) => {
     Omit<ToggleRestrictUserDialogProps, 'children'>
   >(
     WithBlockUser,
-    DynamicToggleRestrictUserDialog,
+    DynamicToggleRestrictUserDialog as React.ComponentType<
+      Omit<ToggleRestrictUserDialogProps, 'children'> & {
+        children: (props: { openDialog: () => void }) => React.ReactNode
+      }
+    >,
     { id: user.id, userName: user.userName! },
     ({ openDialog }) => ({ openToggleRestrictDialog: openDialog })
   )

@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client'
-import _get from 'lodash/get'
 import { FormattedMessage } from 'react-intl'
 
 import IconAnalyticsIncome24 from '@/public/static/icons/24px/analytics-income.svg'

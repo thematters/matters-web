@@ -88,7 +88,7 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
   })
 
   const [caption, setCaption] = useState<string>('')
-  const debouncedSetCaption = useDebouncedCallback((value) => {
+  const debouncedSetCaption = useDebouncedCallback(() => {
     // update cache
     const assets = editor.storage.figureImageUploader.assets as StorageAsset
     editor.storage.figureImageUploader.assets[fileId] = {
@@ -151,7 +151,7 @@ const Uploader: React.FC<NodeViewProps> = (props) => {
     }
 
     setCaption(caption)
-    debouncedSetCaption(caption)
+    debouncedSetCaption()
   }
 
   useEffect(() => {

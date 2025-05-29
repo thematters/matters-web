@@ -14,6 +14,7 @@ const IPFSButton: React.FC<IPFSButtonProps> = ({
   pageComponent,
 }) => {
   const { router } = useRoute()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { shortHash, v, ...qs } = router.query
 
   return (

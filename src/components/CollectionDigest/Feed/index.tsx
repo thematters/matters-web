@@ -13,7 +13,7 @@ import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 export type CollectionDigestFeedControls = {
-  onClick?: () => any
+  onClick?: () => void
 }
 
 export type CollectionDigestFeedProps = {

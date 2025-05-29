@@ -11,7 +11,7 @@ export interface HeaderProps {
   title: React.ReactNode
   leftBtn?: React.ReactNode
   rightBtn?: React.ReactNode
-  closeDrawer?: () => any
+  closeDrawer?: () => void
   fixedWidth?: boolean
 }
 

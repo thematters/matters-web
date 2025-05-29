@@ -16,7 +16,7 @@ export type SwitchProps = {
 }
 
 export const Switch = forwardRef(
-  ({ name, label, onChange, checked, loading, disabled }: SwitchProps, ref) => {
+  ({ label, onChange, checked, loading, disabled }: SwitchProps, ref) => {
     const fieldId = useId()
     const { visuallyHiddenProps } = useVisuallyHidden()
 
@@ -35,7 +35,7 @@ export const Switch = forwardRef(
           onChange={onChange}
           checked={checked}
           disabled={disabled}
-          ref={ref as React.RefObject<any>}
+          ref={ref as React.RefObject<HTMLInputElement>}
         />
 
         <span />

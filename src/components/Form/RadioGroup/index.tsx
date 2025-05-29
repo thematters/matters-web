@@ -57,7 +57,7 @@ const RadioInput: React.FC<RadioInputProps> = ({
   disabled,
   ...inputProps
 }) => {
-  const inputRef: React.RefObject<any> = useRef(null)
+  const inputRef: React.RefObject<HTMLInputElement> = useRef(null)
 
   const fieldId = useId()
   const isActive = currentValue === value
@@ -118,8 +118,6 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   hint,
   error,
   hintAlign,
-
-  lang,
 
   spacingTop,
   spacingBottom,

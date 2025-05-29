@@ -1,7 +1,7 @@
 {
   "extends": [
     "next/core-web-vitals",
-    // "next/typescript",
+    "next/typescript",
     "prettier",
     "plugin:storybook/recommended",
     "plugin:testing-library/react" // Base rules for testing-library
@@ -10,6 +10,10 @@
     "simple-import-sort",
     "formatjs",
     "testing-library"
+  ],
+  "ignorePatterns": [
+    "src/gql/graphql.ts",
+    "src/components/Dialog/vendors/**/*"
   ],
   "rules": {
     "simple-import-sort/imports": "error",
@@ -24,7 +28,8 @@
       {
         "idInterpolationPattern": "[sha512:contenthash:base64:6]"
       }
-    ]
+    ],
+    "@typescript-eslint/no-require-imports": "off"
     // testing-library rules applied globally via extends can be overridden below
   },
   "overrides": [

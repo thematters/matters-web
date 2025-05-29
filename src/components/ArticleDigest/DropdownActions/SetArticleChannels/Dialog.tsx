@@ -1,6 +1,5 @@
 import { useQuery } from '@apollo/client'
 import { useFormik } from 'formik'
-import _pickBy from 'lodash/pickBy'
 import { useEffect, useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -67,7 +66,7 @@ const BaseSetArticleChannelsDialog = ({
 
           setSubmitting(false)
           closeDialog()
-        } catch (error) {
+        } catch {
           toast.error({ message: '分類修正失敗' })
           setSubmitting(false)
         }

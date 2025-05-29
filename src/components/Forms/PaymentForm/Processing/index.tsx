@@ -85,7 +85,6 @@ const OthersProcessingForm: React.FC<Props> = ({
   txId,
   prevStep,
   nextStep,
-  closeDialog,
   windowRef,
 }) => {
   const { data, error, startPolling, stopPolling } =
@@ -208,9 +207,7 @@ const USDTProcessingForm: React.FC<Props> = ({
   targetId,
   article,
   nextStep,
-  closeDialog,
   switchToConfirm,
-  switchToCurrencyChoice,
 }) => {
   const [payTo] = useMutation<PayToMutation>(PAY_TO)
   const viewer = useContext(ViewerContext)

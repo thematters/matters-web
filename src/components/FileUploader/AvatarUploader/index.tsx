@@ -144,7 +144,7 @@ export const AvatarUploader: React.FC<AvatarUploaderProps> = ({
       } else {
         throw new Error()
       }
-    } catch (e) {
+    } catch {
       toast.error({
         message: (
           <FormattedMessage

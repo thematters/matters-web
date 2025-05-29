@@ -51,7 +51,8 @@ const PinButton = ({ article }: PinButtonProps) => {
               if (article.pinned) {
                 // Unpin: remove from pinnedWorks
                 return existingPinnedWorks.filter(
-                  (work: any) => readField('id', work) !== article.id
+                  (work: PinButtonArticleFragment) =>
+                    readField('id', work) !== article.id
                 )
               } else {
                 // Pin: add to pinnedWorks

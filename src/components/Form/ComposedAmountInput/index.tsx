@@ -65,7 +65,6 @@ type ComposedAmountInputProps = {
 const AmountOption: React.FC<AmountOptionProps> = ({
   amount,
   currency,
-  balance,
   name,
 
   fieldMsgId,
@@ -75,7 +74,7 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   disabled,
   ...inputProps
 }) => {
-  const inputRef: React.RefObject<any> = useRef(null)
+  const inputRef: React.RefObject<HTMLInputElement> = useRef(null)
 
   const fieldId = useId()
   const { visuallyHiddenProps } = useVisuallyHidden()
@@ -130,7 +129,6 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
   error,
   hintAlign,
 
-  lang,
   customAmount,
 
   spacingTop,

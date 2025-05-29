@@ -236,7 +236,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   const WithReport = withDialog<Omit<SubmitReportDialogProps, 'children'>>(
-    BaseDropdownActions,
+    BaseDropdownActions as React.ComponentType<object>,
     SubmitReport.Dialog,
     { id: comment.id },
     ({ openDialog }) => ({ openSubmitReportDialog: openDialog })

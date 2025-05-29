@@ -52,8 +52,6 @@ interface DialogProps {
 type BaseDropdownActionsProps = DropdownActionsProps & Controls & DialogProps
 
 const BaseDropdownActions = ({
-  moment,
-
   hasDelete,
   hasReport,
 
@@ -118,7 +116,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   const WithReport = withDialog<Omit<SubmitReportDialogProps, 'children'>>(
-    BaseDropdownActions,
+    BaseDropdownActions as React.ComponentType<object>,
     SubmitReport.Dialog,
     { id: moment.id },
     ({ openDialog }) => ({ openSubmitReportDialog: openDialog })

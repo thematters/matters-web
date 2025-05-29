@@ -219,10 +219,10 @@ const DropdownActions = (props: DropdownActionsProps) => {
   const WithEditComment = withDialog<
     Omit<CircleCommentFormDialogProps, 'children'>
   >(
-    BaseDropdownActions,
+    BaseDropdownActions as React.ComponentType<object>,
     CircleCommentFormDialog,
     {
-      circleId: circle?.id!,
+      circleId: circle?.id || '',
       type,
       commentId: comment.id,
       defaultContent: comment.content,

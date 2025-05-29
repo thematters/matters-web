@@ -5,7 +5,7 @@ import { REFERRAL_QUERY_REFERRAL_KEY } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import { Icon, TextIcon, ViewerContext } from '~/components'
 
-const Facebook = ({ title, link }: { title: string; link: string }) => {
+const Facebook = ({ link }: { link: string }) => {
   const viewer = useContext(ViewerContext)
 
   // append utm_source to link

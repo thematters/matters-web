@@ -11,9 +11,10 @@ import styles from './styles.module.css'
 
 const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
   const { router, getQuery } = useRoute()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { shortHash, v, ...qs } = router.query
 
-  const versions = article.versions.edges.map((edge) => edge?.node!)
+  const versions = article.versions.edges.map((edge) => edge?.node)
   const currVersion = getQuery('v') || versions[0]?.id
 
   if (versions.length < 1) {
@@ -27,10 +28,10 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
         <ul>
           {versions.map((version, index) => (
             <li
-              key={version.id}
+              key={version?.id}
               className={classNames({
                 [styles.item]: true,
-                [styles.active]: version.id === currVersion,
+                [styles.active]: version?.id === currVersion,
               })}
               onClick={() => {
                 analytics.trackEvent('click_button', {
@@ -48,7 +49,7 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
                       ...(qs as {
                         [key: string]: string
                       }), // forward qs to history page
-                      v: version.id,
+                      v: version?.id || '',
                     },
                   }).href
                 }
@@ -57,7 +58,7 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
                 <span className={styles.date}>
                   <span>
                     {datetimeFormat.absolute.dateISO(
-                      new Date(version.createdAt)
+                      new Date(version?.createdAt)
                     )}
                   </span>
 
@@ -68,7 +69,9 @@ const VersionsSidebar = ({ article }: { article: VersionsArticleFragment }) => {
                   )}
                 </span>
                 <span className={styles.time}>
-                  {datetimeFormat.absolute.timeISO(new Date(version.createdAt))}
+                  {datetimeFormat.absolute.timeISO(
+                    new Date(version?.createdAt)
+                  )}
                 </span>
               </Link>
             </li>

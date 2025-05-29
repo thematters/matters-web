@@ -28,7 +28,6 @@ export type SquareCheckBoxBoxProps = {
 
 const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   contents,
-  error,
   hint,
 
   icon,
@@ -46,7 +45,7 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
 
   const [lineClampable, setLineClampable] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
-  const node: React.RefObject<any> | null = useRef(null)
+  const node: React.RefObject<HTMLElement> | null = useRef(null)
 
   const { visuallyHiddenProps } = useVisuallyHidden()
 

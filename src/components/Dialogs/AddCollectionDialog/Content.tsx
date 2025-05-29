@@ -21,7 +21,7 @@ import { CreateCollectionMutation } from '~/gql/graphql'
 type Collection = CreateCollectionMutation['putCollection']
 interface FormProps {
   closeDialog: () => void
-  onUpdate?: (cache: ApolloCache<any>, collection: Collection) => void
+  onUpdate?: (cache: ApolloCache<object>, collection: Collection) => void
   gotoDetailPage?: boolean
 }
 
@@ -78,7 +78,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
       _pickBy({
         title: validateCollectionTitle(title, intl),
       }),
-    onSubmit: async ({ title }, { setSubmitting, setFieldError }) => {
+    onSubmit: async ({ title }, { setSubmitting }) => {
       try {
         const { data } = await create({
           variables: {
@@ -113,7 +113,7 @@ const AddCollectionDialogContent: React.FC<FormProps> = ({
         }
 
         closeDialog()
-      } catch (error) {
+      } catch {
         setSubmitting(false)
       }
     },

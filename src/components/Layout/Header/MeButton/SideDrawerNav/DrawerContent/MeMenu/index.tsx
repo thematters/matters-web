@@ -135,7 +135,7 @@ const Bottom = () => {
       await logout()
 
       removeCookies([COOKIE_TOKEN_NAME, COOKIE_USER_GROUP])
-    } catch (e) {
+    } catch {
       toast.error({
         message: (
           <FormattedMessage

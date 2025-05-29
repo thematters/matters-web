@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { TEST_ID } from '~/common/enums'
 import { render, screen } from '~/common/utils/test'
 import { Avatar } from '~/components'
+import { BadgeType } from '~/gql/graphql'
 
 describe('<Avatar>', () => {
   it('should be able to render with civic liker ring', async () => {
@@ -26,7 +27,7 @@ describe('<Avatar>', () => {
         civicLiker: false,
       },
       info: {
-        badges: [{ type: 'architect' as any }],
+        badges: [{ type: BadgeType.Architect }],
       },
     }
     render(<Avatar user={user} />)
@@ -42,7 +43,7 @@ describe('<Avatar>', () => {
         civicLiker: true,
       },
       info: {
-        badges: [{ type: 'architect' as any }],
+        badges: [{ type: BadgeType.Architect }],
       },
     }
     render(<Avatar user={user} />)
@@ -63,7 +64,7 @@ describe('<Avatar>', () => {
           address: '0x123',
           hasNFTs: true,
         },
-        badges: [{ type: 'architect' as any }],
+        badges: [{ type: BadgeType.Architect }],
       },
     }
     render(<Avatar user={user} />)

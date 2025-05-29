@@ -24,7 +24,7 @@ const BookArticle: React.FC<BookArticleProps> = ({
 }) => {
   const { getColor, dominantColor, nodeRef: bookRef } = useColorThief()
 
-  const descRef: React.RefObject<any> = useRef(null)
+  const descRef: React.RefObject<HTMLParagraphElement> = useRef(null)
   const [descLines, setDescLines] = useState(0)
 
   useIsomorphicLayoutEffect(() => {

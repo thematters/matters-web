@@ -281,7 +281,7 @@ export const AsideUserProfile = () => {
             {isCivicLiker && <CivicLikerBadge hasTooltip />}
 
             {user?.info.ethAddress && (
-              <DynamicWalletLabel user={user} isMe={isMe} hasTooltip />
+              <DynamicWalletLabel user={user} hasTooltip />
             )}
           </section>
         )}

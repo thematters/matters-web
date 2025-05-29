@@ -36,7 +36,7 @@ interface FormProps {
   recipient: UserDonationRecipientFragment
   switchToSetAmount: (c: CURRENCY) => void
   switchToWalletSelect: () => void
-  closeDialog: () => any
+  closeDialog: () => void
 }
 
 const CurrencyChoice: React.FC<FormProps> = ({

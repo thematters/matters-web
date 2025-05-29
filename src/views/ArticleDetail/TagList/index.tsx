@@ -44,7 +44,7 @@ const TagList = ({ article }: { article: TagListArticleFragment }) => {
               }}
               canClamp
             />
-            <TagExposureTracker location={i} id={tag.id} horizontal />
+            <TagExposureTracker location={i} id={tag.id} />
           </li>
         ))}
         {article.tags.length > 3 && (

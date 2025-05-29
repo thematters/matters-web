@@ -18,9 +18,7 @@ import { fragments } from './gql'
 import styles from './styles.module.css'
 
 const UserPostMomentActivity = ({
-  actor,
   nodeMoment: node,
-  createdAt,
   location,
   more,
   __typename,

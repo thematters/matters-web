@@ -5,7 +5,7 @@ const ExpandButton = ({
   onClick,
   restCount,
 }: {
-  onClick: () => any
+  onClick: () => void
   restCount: number
 }) => (
   <Button

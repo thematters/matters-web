@@ -57,7 +57,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
     },
   ]
 
-  const AnalyticsSelectContent = ({ dropdown }: { dropdown?: boolean }) => {
+  const AnalyticsSelectContent = () => {
     const isSevenDaysActive = period === options[0].value
     const isOneMonthActive = period === options[1].value
     const isThreeMonthsActive = period === options[2].value
@@ -94,7 +94,7 @@ const SelectPeriod: React.FC<SelectProps> = ({ period, onChange }) => {
   return (
     <Dropdown
       appendTo="parent"
-      content={<AnalyticsSelectContent dropdown />}
+      content={<AnalyticsSelectContent />}
       zIndex={Z_INDEX.OVER_DIALOG}
     >
       {({ openDropdown, ref }) => (

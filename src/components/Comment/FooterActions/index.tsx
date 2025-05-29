@@ -171,7 +171,7 @@ const BaseFooterActions = ({
 
         // focus on end of the comment editor
         // ref: https://stackoverflow.com/a/69727327
-        let sel = window.getSelection()
+        const sel = window.getSelection()
         sel?.selectAllChildren(editor)
         sel?.collapseToEnd()
       }
@@ -230,11 +230,11 @@ const BaseFooterActions = ({
           {hasUpvote && <UpvoteButton {...buttonProps} />}
           {hasReply && (
             <>
-              {isArticle && (
+              {isArticle && node?.id && (
                 <>
                   <Media at="sm">
                     <ArticleCommentFormDialog
-                      articleId={node?.id!}
+                      articleId={node.id}
                       replyToId={comment.id}
                       parentId={comment.parentComment?.id || comment.id}
                       submitCallback={submitCallback}
@@ -286,11 +286,11 @@ const BaseFooterActions = ({
         </section>
       </footer>
       <section ref={formWrapperRef}>
-        {showForm && (
+        {showForm && node?.id && (
           <>
             <Spacer size="sp16" />
             <ArticleCommentForm
-              articleId={node?.id!}
+              articleId={node?.id}
               setEditor={setEditor}
               replyToId={comment.id}
               parentId={comment.parentComment?.id || comment.id}

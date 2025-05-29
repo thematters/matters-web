@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
@@ -130,7 +131,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         setFieldError('description', intl.formatMessage(messages[codes[0]]))
       }
     },

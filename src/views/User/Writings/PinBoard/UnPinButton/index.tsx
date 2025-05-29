@@ -63,7 +63,7 @@ const UnPinButton = ({
           fields: {
             pinnedWorks(existingPinnedWorks, { readField }) {
               return existingPinnedWorks.filter(
-                (work: any) => readField('id', work) !== id
+                (work: { id: string }) => readField('id', work) !== id
               )
             },
           },

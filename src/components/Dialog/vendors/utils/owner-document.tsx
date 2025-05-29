@@ -18,6 +18,6 @@ export function getOwnerDocument<T extends Element>(
 export function getOwnerWindow<T extends Element>(
   element: T | null | undefined
 ) {
-  let ownerDocument = getOwnerDocument(element)
+  const ownerDocument = getOwnerDocument(element)
   return ownerDocument ? ownerDocument.defaultView || window : null
 }

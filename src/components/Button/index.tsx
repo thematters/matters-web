@@ -136,7 +136,13 @@ export type ButtonProps = {
 
   is?: 'span'
   className?: string
-  ref?: RefObject<any> | ((instance: any) => void) | null | undefined
+  ref?:
+    | RefObject<HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement>
+    | ((
+        instance: HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement
+      ) => void)
+    | null
+    | undefined
 
   // navtive props
   htmlHref?: string
@@ -147,9 +153,9 @@ export type ButtonProps = {
   rel?: string
   testId?: string
   tabIndex?: number
-  onClick?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
-  onMouseEnter?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
-  onMouseLeave?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => any
+  onClick?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => void
+  onMouseEnter?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => void
+  onMouseLeave?: (event?: React.MouseEvent<HTMLElement, MouseEvent>) => void
 }
 
 /**
@@ -217,7 +223,9 @@ export const Button = forwardRef<
     ref
   ) => {
     const fallbackRef = useRef(null)
-    const buttonRef = (ref || fallbackRef) as React.RefObject<any> | null
+    const buttonRef = (ref || fallbackRef) as React.RefObject<
+      HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement
+    > | null
 
     const isClickable = is !== 'span' && !restProps.disabled
     const isTransparent = !bgColor && !borderColor
@@ -267,7 +275,6 @@ export const Button = forwardRef<
     const containerProps = {
       ...restProps,
       onClick,
-      ref: buttonRef as React.RefObject<any>,
       className: containerClasses,
       ...(testId ? { ['data-test-id']: testId } : {}),
     }
@@ -287,7 +294,11 @@ export const Button = forwardRef<
     // span
     if (is === 'span') {
       return (
-        <span {...containerProps} style={sizeStyle}>
+        <span
+          {...containerProps}
+          ref={buttonRef as React.RefObject<HTMLSpanElement>}
+          style={sizeStyle}
+        >
           <div className={styles.content} style={sizeStyle}>
             <div className={styles.hotarea} style={hotAreaStyle} />
             {children}
@@ -303,6 +314,7 @@ export const Button = forwardRef<
           href={htmlHref}
           target={htmlTarget}
           {...containerProps}
+          ref={buttonRef as React.RefObject<HTMLAnchorElement>}
           style={sizeStyle}
         >
           <div className={styles.content} style={sizeStyle}>
@@ -320,6 +332,7 @@ export const Button = forwardRef<
           href={href}
           replace={replace}
           {...containerProps}
+          ref={buttonRef as React.RefObject<HTMLAnchorElement>}
           style={sizeStyle}
         >
           <div className={styles.content} style={sizeStyle}>
@@ -332,7 +345,12 @@ export const Button = forwardRef<
 
     // button
     return (
-      <button {...containerProps} type={type} style={sizeStyle}>
+      <button
+        {...containerProps}
+        ref={buttonRef as React.RefObject<HTMLButtonElement>}
+        type={type}
+        style={sizeStyle}
+      >
         <div className={styles.content} style={sizeStyle}>
           <div className={styles.hotarea} style={hotAreaStyle} />
           {children}

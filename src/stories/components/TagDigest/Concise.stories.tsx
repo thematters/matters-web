@@ -23,7 +23,7 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    tag: MOCK_TAG as any,
+    tag: MOCK_TAG,
     showArticlesNum: true,
   },
 }

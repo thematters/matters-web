@@ -9,9 +9,9 @@
 export function composeEventHandlers<
   EventType extends React.SyntheticEvent | Event,
 >(
-  theirHandler: ((event: EventType) => any) | undefined,
-  ourHandler: (event: EventType) => any
-): (event: EventType) => any {
+  theirHandler: ((event: EventType) => void) | undefined,
+  ourHandler: (event: EventType) => void
+): (event: EventType) => void {
   return (event) => {
     theirHandler && theirHandler(event)
     if (!event.defaultPrevented) {

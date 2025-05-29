@@ -464,7 +464,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   const WithShareDialog = withDialog<Omit<ShareDialogProps, 'children'>>(
-    BaseDropdownActions,
+    BaseDropdownActions as React.ComponentType<object>,
     ShareDialog,
     {
       title: article.author.displayName
@@ -529,7 +529,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
     Omit<ToggleRecommendArticleDialogProps, 'children'>
   >(
     WithSetArticleChannels,
-    DynamicToggleRecommendArticleDialog,
+    DynamicToggleRecommendArticleDialog as React.ComponentType<
+      Omit<ToggleRecommendArticleDialogProps, 'children'> & {
+        children: (props: { openDialog: () => void }) => React.ReactNode
+      }
+    >,
     { article },
     ({ openDialog }) => ({
       openToggleRecommendArticleDialog: openDialog,
@@ -540,7 +544,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
     Omit<ToggleRestrictUserDialogProps, 'children'>
   >(
     WithToggleRecommendArticle,
-    DynamicToggleRestrictUserDialog,
+    DynamicToggleRestrictUserDialog as React.ComponentType<
+      Omit<ToggleRestrictUserDialogProps, 'children'> & {
+        children: (props: { openDialog: () => void }) => React.ReactNode
+      }
+    >,
     { id: article.author.id, userName: article.author.userName! },
     ({ openDialog }) => ({
       openToggleRestrictUserDialog: openDialog,

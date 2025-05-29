@@ -20,7 +20,7 @@ type OptionProps = {
 
   role?: 'button' | 'option'
 
-  ref?: any
+  ref?: React.RefObject<HTMLLIElement>
 } & CardProps
 
 const Option: React.FC<OptionProps> = forwardRef(

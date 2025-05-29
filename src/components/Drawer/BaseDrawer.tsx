@@ -23,7 +23,7 @@ type BaseDrawerProps = {
 const getDirectionStyle = (
   dir: string,
   size?: number | string
-): {} | React.CSSProperties => {
+): object | React.CSSProperties => {
   switch (dir) {
     case 'left':
       return {
@@ -98,7 +98,7 @@ export const BaseDrawer = ({
 
     const handleClickOutside = (e: Event) => {
       if (ref.current && !e.composedPath().includes(ref.current)) {
-        onClose && onClose()
+        onClose?.()
       }
     }
 

@@ -172,7 +172,7 @@ export const CoverUploader = ({
       } else {
         throw new Error()
       }
-    } catch (e) {
+    } catch {
       toast.error({
         message: (
           <FormattedMessage
@@ -188,8 +188,8 @@ export const CoverUploader = ({
     }
   }
 
-  const removeCover = (event: any) => {
-    event.preventDefault()
+  const removeCover = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    event?.preventDefault()
     setCover(undefined)
     setLocalSrc(undefined)
 

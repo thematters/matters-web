@@ -88,7 +88,7 @@ const BaseUniversalAuthDialog = () => {
   useEventListener(CLOSE_ACTIVE_DIALOG, closeDialog)
   useEventListener(
     OPEN_UNIVERSAL_AUTH_DIALOG,
-    (payload: { [key: string]: any }) => {
+    (payload: { trigger?: string }) => {
       const trigger = payload?.trigger
       analytics.trackEvent('authenticate', {
         step: 'engage',
@@ -195,7 +195,7 @@ const UniversalAuthDialog = () => {
   const Children = ({ openDialog }: { openDialog: () => void }) => {
     useEventListener(
       OPEN_UNIVERSAL_AUTH_DIALOG,
-      (payload: { [key: string]: any }) => {
+      (payload: { trigger?: string }) => {
         const trigger = payload?.trigger
         analytics.trackEvent('authenticate', {
           step: 'engage',

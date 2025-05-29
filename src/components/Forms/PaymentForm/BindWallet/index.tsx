@@ -109,7 +109,7 @@ const BindWallet: React.FC<Props> = ({ currency, callback }) => {
       signature = await signMessageAsync({
         message: signingMessage.signingMessage,
       })
-    } catch (err) {
+    } catch {
       setSigning(false)
       setBindState('error')
       return

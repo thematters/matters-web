@@ -13,7 +13,7 @@ interface SlidesProps {
 
 interface SlideItemProps {
   size?: 'xs' | 'sm' | 'md'
-  onClick?: () => any
+  onClick?: () => void
 }
 
 const SlideItem: React.FC<React.PropsWithChildren<SlideItemProps>> = ({

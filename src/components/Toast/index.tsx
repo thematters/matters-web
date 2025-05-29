@@ -36,9 +36,9 @@ const ToastActions: React.FC<ToastActionsProps> = ({
         <Button
           textColor={type === 'error' ? 'white' : 'whiteLight'}
           onClick={() => {
-            onClick && onClick()
+            onClick?.()
             if (hasClose) {
-              onDismiss && onDismiss()
+              onDismiss?.()
             }
           }}
           {...props}

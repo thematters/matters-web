@@ -119,8 +119,8 @@ const DialogInner = React.forwardRef(function DialogInner(
   },
   forwardedRef
 ) {
-  let { isOpen } = useDialogContext('DialogInner')
-  let lockFocusAcrossFramesIsDefined =
+  const { isOpen } = useDialogContext('DialogInner')
+  const lockFocusAcrossFramesIsDefined =
     unstable_lockFocusAcrossFrames !== undefined
 
   if (process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local') {
@@ -300,7 +300,7 @@ const DialogContent = React.forwardRef(function DialogContent(
   { as: Comp = 'div', onClick, onKeyDown, ...props },
   forwardedRef
 ) {
-  let { isOpen } = useDialogContext('DialogContent')
+  const { isOpen } = useDialogContext('DialogContent')
   return (
     <Comp
       aria-modal="true"
@@ -435,9 +435,9 @@ Dialog.displayName = 'Dialog'
 ////////////////////////////////////////////////////////////////////////////////
 
 function createAriaHider(dialogNode: HTMLElement) {
-  let originalValues: any[] = []
-  let rootNodes: HTMLElement[] = []
-  let ownerDocument = getOwnerDocument(dialogNode)!
+  const originalValues: any[] = []
+  const rootNodes: HTMLElement[] = []
+  const ownerDocument = getOwnerDocument(dialogNode)!
 
   if (!dialogNode) {
     if (process.env.NEXT_PUBLIC_RUNTIME_ENV === 'local') {
@@ -455,8 +455,8 @@ function createAriaHider(dialogNode: HTMLElement) {
       if (node === portalNode) {
         return
       }
-      let attr = node.getAttribute('aria-hidden')
-      let alreadyHidden = attr !== null && attr !== 'false'
+      const attr = node.getAttribute('aria-hidden')
+      const alreadyHidden = attr !== null && attr !== 'false'
       if (alreadyHidden) {
         return
       }
@@ -468,7 +468,7 @@ function createAriaHider(dialogNode: HTMLElement) {
 
   return () => {
     rootNodes.forEach((node, index) => {
-      let originalValue = originalValues[index]
+      const originalValue = originalValues[index]
       if (originalValue === null) {
         node.removeAttribute('aria-hidden')
       } else {

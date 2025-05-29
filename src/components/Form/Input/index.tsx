@@ -69,7 +69,7 @@ const Input = forwardRef(
 
     const input = (
       <input
-        ref={ref as React.RefObject<any> | null}
+        ref={ref as React.RefObject<HTMLInputElement> | null}
         {...inputProps}
         id={fieldId}
         name={name}

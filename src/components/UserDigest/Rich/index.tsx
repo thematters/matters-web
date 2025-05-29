@@ -50,7 +50,6 @@ const Rich = ({
 
   hasFollow = true,
   hasState = true,
-  canClamp = false,
 
   ...cardProps
 }: UserDigestRichProps) => {

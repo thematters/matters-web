@@ -27,7 +27,7 @@ const SetAmountBalance: React.FC<SetAmountBalanceProps> = ({
   const isUSDT = currency === CURRENCY.USDT
   const isHKD = currency === CURRENCY.HKD
 
-  let amount = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
+  const amount = isUSDT ? balanceUSDT : isHKD ? balanceHKD : balanceLike
 
   return (
     <section className={styles.setAmountBalance}>

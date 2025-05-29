@@ -104,7 +104,7 @@ const MigrationDialogUpload = ({
       })
 
       nextStep()
-    } catch (error) {
+    } catch {
       // TODO: handle other exception
     }
   }

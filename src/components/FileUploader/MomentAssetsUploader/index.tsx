@@ -116,14 +116,11 @@ export const MomentAssetsUploader: React.FC<MomentAssetsUploaderProps> = ({
     [assets.length, addAssets]
   )
 
-  useEventListener(
-    ADD_MOMENT_ASSETS,
-    async (payload: { [key: string]: any }) => {
-      if (payload.files) {
-        handleFileUpload(payload.files as File[])
-      }
+  useEventListener(ADD_MOMENT_ASSETS, async (payload: { files: File[] }) => {
+    if (payload.files) {
+      handleFileUpload(payload.files as File[])
     }
-  )
+  })
 
   const acceptTypes = ACCEPTED_MOMENT_ASSETS_UPLOAD_IMAGE_TYPES.join(',')
   const fieldId = _fieldId || 'moment-assets-uploader-form'

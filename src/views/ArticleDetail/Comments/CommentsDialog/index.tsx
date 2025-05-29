@@ -118,8 +118,8 @@ const BaseCommentsDialogDialog = ({
         )}
         {isInCommentDetail && (
           <DynamicDetailContent
-            closeDialog={closeDialog}
-            backToCommentList={backToCommentList}
+          // closeDialog={closeDialog}
+          // backToCommentList={backToCommentList}
           />
         )}
       </Dialog>

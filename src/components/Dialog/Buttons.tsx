@@ -66,7 +66,7 @@ export type DialogRoundedButtonProps = {
 } & ButtonProps
 
 export const RoundedButton = forwardRef<
-  HTMLButtonElement,
+  HTMLButtonElement | HTMLSpanElement | HTMLAnchorElement,
   React.PropsWithChildren<DialogRoundedButtonProps>
 >(
   (

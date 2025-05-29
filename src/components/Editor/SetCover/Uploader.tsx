@@ -40,8 +40,8 @@ export interface UploadEntity {
 }
 
 type UploaderProps = {
-  setSelected: (asset: AssetFragment) => any
-  refetchAssets: () => any
+  setSelected: (asset: AssetFragment) => void
+  refetchAssets: () => void
 } & UploadEntity
 
 const Uploader: React.FC<UploaderProps> = ({
@@ -133,7 +133,7 @@ const Uploader: React.FC<UploaderProps> = ({
       } else {
         throw new Error()
       }
-    } catch (e) {
+    } catch {
       toast.error({
         message: (
           <FormattedMessage

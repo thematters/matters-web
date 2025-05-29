@@ -42,8 +42,7 @@ const CountrySelect = (props: Omit<FormSelectProps<string>, 'options'>) => {
 describe('<Form.Select>', () => {
   it('should render a Select', async () => {
     const handleOnChange = vi.fn()
-    const name = 'name-test'
-    render(<CountrySelect name={name} onChange={handleOnChange} />)
+    render(<CountrySelect onChange={handleOnChange} />)
 
     const $select = screen.getByRole('button')
     expect($select).toBeInTheDocument()

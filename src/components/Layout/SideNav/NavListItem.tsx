@@ -15,7 +15,10 @@ type NavListItemProps = {
   showTooltip?: boolean
 } & ButtonProps
 
-const NavListItemButton = forwardRef(
+const NavListItemButton = forwardRef<
+  HTMLButtonElement | HTMLAnchorElement | HTMLSpanElement,
+  NavListItemProps
+>(
   (
     {
       name,
@@ -23,7 +26,6 @@ const NavListItemButton = forwardRef(
       activeIcon,
       active,
       onClick,
-      canScrollTop,
       showTooltip = true,
       ...props
     }: NavListItemProps,
@@ -77,25 +79,27 @@ const NavListItemButton = forwardRef(
 
 NavListItemButton.displayName = 'NavListItemButton'
 
-const NavListItem = forwardRef((props: NavListItemProps, ref) => {
-  const { active, canScrollTop = true, onClick: baseOnClick } = props
-  const onClick = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    if (baseOnClick) {
-      baseOnClick()
+const NavListItem = forwardRef<HTMLLIElement, NavListItemProps>(
+  (props, ref) => {
+    const { active, canScrollTop = true, onClick: baseOnClick } = props
+    const onClick = (event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
+      if (baseOnClick) {
+        baseOnClick()
+      }
+
+      if (active && canScrollTop) {
+        event?.preventDefault()
+        jump(document.body)
+      }
     }
 
-    if (active && canScrollTop) {
-      event?.preventDefault()
-      jump(document.body)
-    }
+    return (
+      <li role="menuitem" className={styles.listItem}>
+        <NavListItemButton {...props} onClick={onClick} ref={ref} />
+      </li>
+    )
   }
-
-  return (
-    <li role="menuitem" className={styles.listItem}>
-      <NavListItemButton {...props} onClick={onClick} ref={ref} />
-    </li>
-  )
-})
+)
 
 NavListItem.displayName = 'NavListItem'
 

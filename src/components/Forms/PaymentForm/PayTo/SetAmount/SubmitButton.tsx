@@ -131,10 +131,8 @@ const HKDSubmitButton: React.FC<SubmitButtonProps> = ({
 const LIKESubmitButton: React.FC<SubmitButtonProps> = ({
   mode,
   formId,
-  recipient,
   isValid,
   isSubmitting,
-  isBalanceInsufficient,
   value,
 }) => {
   return (
@@ -162,7 +160,6 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
   isValid,
   isSubmitting,
   isExceededAllowance,
-  isBalanceInsufficient,
   approving,
   approveConfirming,
   allowanceLoading,

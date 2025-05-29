@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import { Editor } from '@matters/matters-editor'
 import classNames from 'classnames'
 import { useContext, useEffect, useState } from 'react'
@@ -116,7 +117,7 @@ const Edit = () => {
       window.dispatchEvent(new CustomEvent(CLEAR_MOMENT_FORM))
     } catch (error) {
       setSubmitting(false)
-      const [, codes] = parseFormSubmitErrors(error as any)
+      const [, codes] = parseFormSubmitErrors(error as ApolloError)
       codes.forEach((code) => {
         if (code === 'ACTION_LIMIT_EXCEEDED') {
           toast.success({

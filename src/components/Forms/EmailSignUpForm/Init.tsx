@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useId } from 'react'
@@ -123,7 +124,7 @@ const Init: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         if (codes[0].includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
           setFieldError(
             'email',

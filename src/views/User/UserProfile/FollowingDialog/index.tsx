@@ -13,7 +13,7 @@ const DynamicContent = dynamic(() => import('./Content'), {
   loading: () => <SpinnerBlock />,
 })
 
-const BaseFollowingDialog = ({ user, children }: FollowingDialogProps) => {
+const BaseFollowingDialog = ({ children }: FollowingDialogProps) => {
   const { show, openDialog, closeDialog } = useDialogSwitch(true)
 
   return (

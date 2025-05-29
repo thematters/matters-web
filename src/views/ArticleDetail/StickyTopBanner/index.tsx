@@ -81,6 +81,7 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
 const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
   const { lang } = useContext(LanguageContext)
   const { router } = useRoute()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { shortHash, v, ...qs } = router.query
 
   const path = toPath({

@@ -26,7 +26,6 @@ interface UpvoteButtonProps {
     Partial<CommentUpvoteCommentPrivateFragment>
   onClick?: () => void
   disabled?: boolean
-  inCard: boolean
 }
 
 const fragments = {
@@ -46,12 +45,7 @@ const fragments = {
   },
 }
 
-const UpvoteButton = ({
-  comment,
-  onClick,
-  disabled,
-  inCard,
-}: UpvoteButtonProps) => {
+const UpvoteButton = ({ comment, onClick, disabled }: UpvoteButtonProps) => {
   const intl = useIntl()
   const [playHeartBeat, setPlayHeartBeat] = useState(false)
 
@@ -90,7 +84,11 @@ const UpvoteButton = ({
       <Button
         spacing={[8, 8]}
         onClick={() => {
-          onClick ? onClick() : unvote()
+          if (onClick) {
+            onClick()
+          } else {
+            unvote()
+          }
           setPlayHeartBeat(false)
         }}
         disabled={disabled}
@@ -120,7 +118,11 @@ const UpvoteButton = ({
       textColor="greyDarker"
       textActiveColor="black"
       onClick={() => {
-        onClick ? onClick() : upvote()
+        if (onClick) {
+          onClick()
+        } else {
+          upvote()
+        }
         setPlayHeartBeat(true)
       }}
       disabled={disabled}

@@ -1,5 +1,4 @@
 import gql from 'graphql-tag'
-import _isNil from 'lodash/isNil'
 
 import IconCircleMinus from '@/public/static/icons/24px/circle-minus.svg'
 import { Icon, Menu, toast, Translate, useMutation } from '~/components'

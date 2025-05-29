@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
 
 import {
   CSP_POLICY,
@@ -6,7 +6,7 @@ import {
   SENTRY_REPORT_URI,
 } from '../configs/csp'
 
-export function middleware(request: NextRequest) {
+export function middleware() {
   const response = NextResponse.next()
 
   // Set CSP headers

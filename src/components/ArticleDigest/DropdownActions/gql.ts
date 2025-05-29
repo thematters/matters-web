@@ -1,7 +1,4 @@
 import gql from 'graphql-tag'
-import _find from 'lodash/find'
-import _isEmpty from 'lodash/isEmpty'
-import _pickBy from 'lodash/pickBy'
 
 import { AppreciatorsDialog } from '~/components/Dialogs/AppreciatorsDialog'
 import { SupportersDialog } from '~/components/Dialogs/SupportersDialog'

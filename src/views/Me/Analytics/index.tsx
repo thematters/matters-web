@@ -138,7 +138,7 @@ const MyAnalytics = () => {
         )}
 
         <List>
-          {edges?.map(({ node, cursor, donationCount }, i) => (
+          {edges?.map(({ node, donationCount }, i) => (
             <List.Item key={node.id}>
               <SupporterDigestFeed
                 user={node}

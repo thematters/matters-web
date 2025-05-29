@@ -1,5 +1,3 @@
-import _get from 'lodash/get'
-
 /**
  * Route paths for Next.js custom routing
  *

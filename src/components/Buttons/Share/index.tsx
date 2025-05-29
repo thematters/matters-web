@@ -15,7 +15,6 @@ type ShareButtonBaseProps = {
   hasIcon?: boolean
   iconSize?: Extract<IconSize, 20 | 24>
   iconColor?: Extract<IconColor, 'green' | 'grey' | 'black' | 'white'>
-  inCard: boolean
   clickEvent?: () => void
 } & Omit<ShareDialogProps, 'children'>
 
@@ -35,7 +34,6 @@ export const ShareButton: React.FC<
   iconSize,
   iconColor = 'black',
   disabled,
-  inCard,
   size,
   spacing,
   clickEvent,

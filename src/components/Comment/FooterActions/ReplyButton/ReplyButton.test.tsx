@@ -9,7 +9,7 @@ describe('<Comment/FooterActions/ReplyButton>', () => {
   it('should render a Comment/FooterActions/ReplyButton with custom onClick', () => {
     const onClick = vi.fn()
 
-    render(<ReplyButton comment={MOCK_COMMENT} onClick={onClick} inCard />)
+    render(<ReplyButton comment={MOCK_COMMENT} onClick={onClick} />)
 
     const $button = screen.getByRole('button', { name: 'Write a comment' })
     expect($button).toBeInTheDocument()
@@ -21,9 +21,7 @@ describe('<Comment/FooterActions/ReplyButton>', () => {
   it('should render a disabled Comment/FooterActions/ReplyButton ', () => {
     const onClick = vi.fn()
 
-    render(
-      <ReplyButton comment={MOCK_COMMENT} onClick={onClick} disabled inCard />
-    )
+    render(<ReplyButton comment={MOCK_COMMENT} onClick={onClick} disabled />)
 
     const $button = screen.getByRole('button', { name: 'Write a comment' })
     expect($button).toBeInTheDocument()

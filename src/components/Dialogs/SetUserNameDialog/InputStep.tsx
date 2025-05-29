@@ -90,7 +90,7 @@ const InputStep: React.FC<Props> = ({ userName, gotoConfirm }) => {
         } else {
           gotoConfirm(mattersID)
         }
-      } catch (error) {
+      } catch {
         setSubmitting(false)
       }
     },

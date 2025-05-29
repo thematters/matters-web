@@ -6,11 +6,7 @@ import { ShareButton } from '~/components'
 
 describe('<ShareButton>', () => {
   it('should render the share button', () => {
-    render(
-      <ShareButton path={PATHS.HOME} inCard>
-        Share
-      </ShareButton>
-    )
+    render(<ShareButton path={PATHS.HOME}>Share</ShareButton>)
 
     const $button = screen.getByRole('button', { name: 'Share' })
     expect($button).toBeInTheDocument()

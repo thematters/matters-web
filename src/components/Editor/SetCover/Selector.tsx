@@ -11,7 +11,7 @@ import styles from './styles.module.css'
 interface SelectorProps {
   assets: AssetFragment[]
   selected?: AssetFragment
-  setSelected: (asset?: AssetFragment) => any
+  setSelected: (asset?: AssetFragment) => void
 }
 
 const Selector: React.FC<SelectorProps> = ({
@@ -23,7 +23,9 @@ const Selector: React.FC<SelectorProps> = ({
 
   const imageAssets = assets.filter(
     (asset) =>
-      [ASSET_TYPE.embed, ASSET_TYPE.cover].indexOf(asset.type as any) >= 0
+      [ASSET_TYPE.embed, ASSET_TYPE.cover].indexOf(
+        asset.type as unknown as ASSET_TYPE
+      ) >= 0
   )
 
   return (
@@ -37,7 +39,7 @@ const Selector: React.FC<SelectorProps> = ({
       </h3>
 
       <ul>
-        {imageAssets.map((asset, index) => (
+        {imageAssets.map((asset) => (
           <li
             key={asset.id}
             className={asset.path === selected?.path ? 'selected' : undefined}

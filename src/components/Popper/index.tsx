@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import dynamic from 'next/dynamic'
 import { forwardRef } from 'react'
 import FocusLock from 'react-focus-lock'
@@ -149,7 +150,7 @@ export const hidePopperOnClick = (instance: PopperInstance) => {
     return
   }
 
-  box.addEventListener('click', (event: any) => {
+  box.addEventListener('click', (event: React.MouseEvent<HTMLElement>) => {
     const target = event.target as HTMLElement
 
     if (target?.closest && target.closest('[data-clickable], a, button')) {

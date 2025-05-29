@@ -109,12 +109,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const hasTags = tagEdges && tagEdges.length > 0
 
   if (hasUsers) {
-    userEdges.map(({ cursor }, i) => {
+    userEdges.map(({ cursor }) => {
       items.push(`user${cursor}`)
     })
   }
   if (hasTags) {
-    tagEdges.map(({ cursor }, i) => {
+    tagEdges.map(({ cursor }) => {
       items.push(`tag${cursor}`)
     })
   }

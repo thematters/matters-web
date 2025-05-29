@@ -102,10 +102,10 @@ const SearchInput: React.FC<SearchInputProps> = ({
                 onChange(e.target.value)
               }}
               onFocus={() => {
-                onFocus && onFocus()
+                onFocus?.()
               }}
               onBlur={() => {
-                onBlur && onBlur()
+                onBlur?.()
               }}
             />
 

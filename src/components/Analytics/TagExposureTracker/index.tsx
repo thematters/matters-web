@@ -6,11 +6,9 @@ import { useIntersectionObserver } from '~/components/Hook'
 export const TagExposureTracker = ({
   id,
   location,
-  horizontal = false,
 }: {
   location: number | string
   id: string
-  horizontal?: boolean
 }) => {
   const [timerId, setTimerId] = useState<number>()
   const [recorded, setRecorded] = useState(false)

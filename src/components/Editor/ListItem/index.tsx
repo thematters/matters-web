@@ -12,7 +12,7 @@ type ListItemProps = {
   title: string | React.ReactNode
   subTitle?: string | React.ReactNode
   hint?: boolean
-  onClick?: () => any
+  onClick?: () => void
 }
 
 const CoverIndicator = ({ cover }: { cover?: string | null }) => (

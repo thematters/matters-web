@@ -94,7 +94,7 @@ const SubmitReportDialog = ({ id, children }: SubmitReportDialogProps) => {
 
         setSubmitting(false)
         closeDialog()
-      } catch (error) {
+      } catch {
         setSubmitting(false)
       }
     },

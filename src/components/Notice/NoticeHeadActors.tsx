@@ -3,11 +3,12 @@ import { Fragment } from 'react'
 
 import { numAbbr } from '~/common/utils'
 import { Translate } from '~/components'
+import { NoticeHeadActorsUserFragment } from '~/gql/graphql'
 
 import NoticeActorName from './NoticeActorName'
 
 type NoticeHeadActorsProps = {
-  actors: any[]
+  actors: NoticeHeadActorsUserFragment[]
 }
 
 const NoticeHeadActors = ({ actors }: NoticeHeadActorsProps) => {

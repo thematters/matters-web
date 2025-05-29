@@ -211,7 +211,7 @@ const BaseAddArticlesCollectionDialog = ({
 
         <Dialog.Content fixedHeight>
           <SearchInput
-            value={debouncedSearchValue}
+            // value={debouncedSearchValue}
             onChange={(value) => setDebouncedSearchValue(value)}
           />
 

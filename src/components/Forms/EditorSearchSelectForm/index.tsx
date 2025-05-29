@@ -49,7 +49,7 @@ export type EditorSearchSelectFormProps = {
   submitCallback?: () => void
 
   nodes?: SelectNode[]
-  onSave: (nodes: SelectNode[]) => Promise<any>
+  onSave: (nodes: SelectNode[]) => Promise<unknown>
   saving?: boolean
 
   searchType: SearchType

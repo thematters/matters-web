@@ -21,13 +21,11 @@ interface CommentsDialogListContentProps {
 const CommentsDialogListContent = ({
   id,
   lock,
-  closeDialog,
 
   articleDetails,
   translated,
   translatedLanguage,
   privateFetched,
-  showCommentToolbar,
   openCommentsDialog,
 }: CommentsDialogListContentProps) => {
   return (

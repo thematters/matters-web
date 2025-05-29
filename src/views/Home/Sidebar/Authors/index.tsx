@@ -1,5 +1,3 @@
-import _random from 'lodash/random'
-
 import { analytics } from '~/common/utils'
 import {
   List,
@@ -43,11 +41,12 @@ const Authors = () => {
     )
     const random = Math.floor(Math.min(randomMaxSize, size) * Math.random()) // in range [0..50) not including 50
 
-    lastFetchRandom &&
+    if (lastFetchRandom) {
       client.cache.modify({
         id: client.cache.identify(lastFetchRandom.lastFetchRandom),
         fields: { sidebarAuthors: () => random },
       })
+    }
   }
 
   /**
@@ -75,7 +74,7 @@ const Authors = () => {
       ) : (
         <List hasBorder={false}>
           {edges &&
-            edges.map(({ node, cursor }, i) => (
+            edges.map(({ node }, i) => (
               <List.Item key={node.id}>
                 <UserDigest.Rich
                   user={node}

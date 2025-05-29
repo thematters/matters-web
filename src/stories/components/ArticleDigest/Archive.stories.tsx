@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { ArticleDigestArchived } from '~/components'
+import { ArticleState } from '~/gql/graphql'
 
 import { MOCK_ARTILCE } from '../../mocks'
 
@@ -23,6 +24,6 @@ type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    article: { ...MOCK_ARTILCE, articleState: 'archived' as any },
+    article: { ...MOCK_ARTILCE, articleState: ArticleState.Archived },
   },
 }

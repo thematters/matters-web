@@ -18,6 +18,12 @@ enum QueryStatus {
   ERROR = 'error',
 }
 
+type BillboardData = {
+  contentURI: string
+  redirectURI: string
+  expired: number
+}
+
 type Props = {
   id: number
   chainId:
@@ -37,7 +43,7 @@ export const useBillboard = ({
 }: Props) => {
   const [status, setStatus] = useState<QueryStatus>(QueryStatus.IDLE)
 
-  const data = storage.get(STORAGE_KEY_BILLBOARD) as Record<string, any>
+  const data = storage.get(STORAGE_KEY_BILLBOARD) as BillboardData | null
   const ttl = 3 * 60 * 1000
 
   const isLoading = status === QueryStatus.LOADING
@@ -57,7 +63,7 @@ export const useBillboard = ({
       return
     }
 
-    if (data?.expired >= Date.now()) {
+    if (data?.expired && data.expired >= Date.now()) {
       return
     }
 
@@ -106,7 +112,7 @@ export const useBillboard = ({
         }
 
         setStatus(QueryStatus.LOADED)
-      } catch (error) {
+      } catch {
         resetData()
         setStatus(QueryStatus.ERROR)
       }

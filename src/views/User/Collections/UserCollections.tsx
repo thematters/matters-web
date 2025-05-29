@@ -162,7 +162,7 @@ const UserCollections = () => {
           eof
         >
           <List>
-            {edges.map(({ node, cursor }, i) => (
+            {edges.map(({ node }, i) => (
               <List.Item key={node.id}>
                 <CollectionDigestFeed
                   collection={node}

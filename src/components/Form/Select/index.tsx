@@ -29,7 +29,6 @@ export type FormSelectOption<OptionValue> = {
 }
 
 export type FormSelectProps<OptionValue> = {
-  name: string
   options: FormSelectOption<OptionValue>[]
   size?: 14 | 16
   color?: 'campaignBlue'
@@ -37,7 +36,6 @@ export type FormSelectProps<OptionValue> = {
 } & Omit<FieldProps, 'fieldMsgId'>
 
 const Select = <OptionValue,>({
-  name,
   label,
   hasLabel,
 
@@ -100,7 +98,7 @@ const Select = <OptionValue,>({
             extra={selectedOption?.extra}
             size={size}
             color={color}
-            ref={ref}
+            ref={ref as React.RefObject<HTMLLIElement>}
           />
         </ul>
       )}

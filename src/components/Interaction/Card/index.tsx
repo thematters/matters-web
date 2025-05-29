@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -44,7 +45,7 @@ export interface CardProps {
   htmlHref?: string
   htmlTarget?: '_blank'
 
-  onClick?: () => any
+  onClick?: () => void
 
   ref?: any
 

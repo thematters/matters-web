@@ -48,7 +48,8 @@ const DeleteButton = ({ draft }: DeleteButtonProps) => {
         fields: {
           drafts(existingDrafts, { readField }) {
             const filteredEdges = existingDrafts.edges.filter(
-              ({ node }: { node: any }) => readField('id', node) !== draft.id
+              ({ node }: { node: DeleteButtonDraftFragment }) =>
+                readField('id', node) !== draft.id
             )
             return {
               ...existingDrafts,

@@ -51,7 +51,7 @@ const CollectionArticles = () => {
   const isViewer = viewer.userName === userName
 
   // Sorting
-  let sorter = parseSorter(getQuery(URL_COLLECTION_DETAIL.SORTER_KEY))
+  const sorter = parseSorter(getQuery(URL_COLLECTION_DETAIL.SORTER_KEY))
   let sorterSequence = sorter[
     URL_COLLECTION_DETAIL.SORTER_SEQUENCE.key
   ] as SorterSequenceType

@@ -50,7 +50,7 @@ const BaseAnimatedDilaog: React.ComponentType<
     bypassScrollLock,
     bypassFocusLock,
   } = props
-  const initialFocusRef = useRef<any>(null)
+  const initialFocusRef = useRef<HTMLButtonElement>(null)
 
   // Fade In/ Fade Out
   const [{ opacity }, setFade] = useSpring<{
@@ -58,7 +58,7 @@ const BaseAnimatedDilaog: React.ComponentType<
   }>(() => ({
     opacity: 0,
     config: { tension: 270 },
-    onRest: (val: any) => {
+    onRest: (val: { value: { opacity: number } }) => {
       const isFadedOut = _get(val, 'value.opacity') <= 0
 
       if (isFadedOut) {
@@ -94,7 +94,7 @@ const BaseAnimatedDilaog: React.ComponentType<
     <AnimatedDialogOverlay
       className={dialogOverlayClasses}
       initialFocusRef={initialFocusRef}
-      style={{ opacity: opacity as any }}
+      style={{ opacity: opacity }}
       dangerouslyBypassScrollLock={bypassScrollLock}
       dangerouslyBypassFocusLock={bypassFocusLock}
     >
@@ -103,7 +103,7 @@ const BaseAnimatedDilaog: React.ComponentType<
         aria-labelledby="dialog-title"
       >
         <AnimatedInner
-          style={{ opacity: opacity as any }}
+          style={{ opacity: opacity }}
           initialFocusRef={initialFocusRef}
           {...props}
         />
@@ -124,7 +124,7 @@ const BaseSimpleDialog: React.ComponentType<
     bypassFocusLock,
     scrollable,
   } = props
-  const initialFocusRef = useRef<any>(null)
+  const initialFocusRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     if (isOpen) {
@@ -142,14 +142,12 @@ const BaseSimpleDialog: React.ComponentType<
   })
 
   return (
-    // @ts-ignore - The type definition for DialogOverlay is incorrect
     <DialogOverlay
       className={dialogOverlayClasses}
       initialFocusRef={initialFocusRef}
       dangerouslyBypassScrollLock={bypassScrollLock}
       dangerouslyBypassFocusLock={bypassFocusLock}
     >
-      {/* @ts-ignore - The type definition for DialogContent is incorrect */}
       <DialogContent
         className={styles.container}
         aria-labelledby="dialog-title"

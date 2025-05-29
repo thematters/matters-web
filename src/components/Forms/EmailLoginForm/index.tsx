@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useContext, useId, useRef, useState } from 'react'
@@ -79,7 +80,6 @@ export const EmailLoginForm: React.FC<FormProps> = ({
   closeDialog,
   authFeedType,
   setAuthFeedType,
-  back,
 }) => {
   const [login, { client }] = useMutation<EmailLoginMutation>(
     EMAIL_LOGIN,
@@ -139,7 +139,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
     },
     validateOnBlur: false,
     validateOnChange: false,
-    validate: ({ email, password }) =>
+    validate: ({ email }) =>
       _pickBy({
         email: validateEmail(email, intl, { allowPlusSign: true }),
       }),
@@ -180,7 +180,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
           router.push(PATHS.HOME)
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         setErrorCode(codes[0])
         setFieldError('email', '')
 
@@ -260,7 +260,7 @@ export const EmailLoginForm: React.FC<FormProps> = ({
         passwordRef.current.focus()
       }
     } catch (error) {
-      const [, codes] = parseFormSubmitErrors(error as any)
+      const [, codes] = parseFormSubmitErrors(error as ApolloError)
       codes.forEach((code) => {
         if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
           setFieldError(

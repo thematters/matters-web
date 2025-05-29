@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { ApolloError, useQuery } from '@apollo/client'
 import {
   CardElement,
   Elements,
@@ -48,9 +48,9 @@ import styles from './styles.module.css'
 
 interface FormProps {
   defaultAmount?: number
-  callback?: () => any
+  callback?: () => void
   callbackText?: React.ReactNode
-  closeDialog?: () => any
+  closeDialog?: () => void
   isInDialog?: boolean
   switchToSetAmount?: () => void
 }
@@ -125,7 +125,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
 
   const formId = useId()
   const currency = PAYMENT_CURRENCY.HKD
-  const inputRef: React.RefObject<any> | null = useRef(null)
+  const inputRef: React.RefObject<HTMLInputElement> | null = useRef(null)
 
   const {
     values,
@@ -157,7 +157,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
         const txResult = await addCredit({ variables: { input: { amount } } })
         data = txResult.data
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         codes.forEach((code) => {
           setFieldError('amount', intl.formatMessage(messages[code]))
         })
@@ -256,7 +256,7 @@ const BaseAddCredit: React.FC<FormProps> = ({
 
           // remove extra left pad 0
           if (inputRef.current) {
-            inputRef.current.value = sanitizedAmount
+            inputRef.current.value = sanitizedAmount.toString()
           }
           setFieldValue('amount', sanitizedAmount)
         }}

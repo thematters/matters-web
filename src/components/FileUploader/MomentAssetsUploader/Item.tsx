@@ -40,7 +40,7 @@ export const Item = memo(function Item({
 }: ItemProps) {
   const viewer = useContext(ViewerContext)
   const [hoverAction, setHoverAction] = useState(false)
-  const [error, setError] = useState<any>(undefined)
+  const [error, setError] = useState<Error | undefined>(undefined)
   const [deleted, setDeleted] = useState(false)
 
   const [uploadedAsset, setUploadedAsset] = useState<UploadedAsset | undefined>(
@@ -122,7 +122,7 @@ export const Item = memo(function Item({
           throw new Error()
         }
       } catch (e) {
-        setError(e)
+        setError(e as Error)
       }
     }
 

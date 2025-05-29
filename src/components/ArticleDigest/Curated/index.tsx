@@ -15,7 +15,7 @@ export type ArticleDigestCuratedProps = {
 
   titleLineClamp?: 2 | 3
 
-  onClick?: () => any
+  onClick?: () => void
   onClickAuthor?: () => void
 } & CardProps
 

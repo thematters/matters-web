@@ -26,7 +26,7 @@ export type MoreSettingsProps = {
     addToCircle: boolean,
     paywalled: boolean,
     license: ArticleLicenseType
-  ) => any
+  ) => void
 
   accessSaving: boolean
   canToggleCircle: boolean
@@ -40,7 +40,7 @@ export type MoreSettingsProps = {
   editSupportSetting: (
     requestForDonation: string | null,
     replyToDonator: string | null
-  ) => any
+  ) => void
   supportSettingSaving: boolean
   onOpenSupportSetting: () => void
 

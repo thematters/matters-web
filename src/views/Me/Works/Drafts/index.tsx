@@ -71,7 +71,7 @@ export const BaseMeWorksDrafts = () => {
         </TextIcon>
       </section>
       <List>
-        {edges.map(({ node, cursor }) => (
+        {edges.map(({ node }) => (
           <List.Item key={node.id}>
             <DraftDigest.Feed draft={node} />
           </List.Item>

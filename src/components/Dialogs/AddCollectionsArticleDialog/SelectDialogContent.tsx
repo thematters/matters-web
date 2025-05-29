@@ -1,4 +1,4 @@
-import { FieldInputProps, FormikProvider, useField } from 'formik'
+import { FieldInputProps, FormikProps, FormikProvider, useField } from 'formik'
 import { useContext, useId } from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -21,7 +21,7 @@ import { ADD_COLLECTIONS_ARTICLE_USER_PUBLIC } from './gql'
 import styles from './styles.module.css'
 
 interface SelectDialogContentProps {
-  formik: any
+  formik: FormikProps<{ checked: string[] }>
   articleId: string
   checkingIds: string[]
   closeDialog: () => void
@@ -128,9 +128,9 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
                         node.articles.totalCount >=
                           MAX_COLLECTION_ARTICLES_COUNT
                       }
-                      {...(formik.getFieldProps(
-                        'checked'
-                      ) as FieldInputProps<any>)}
+                      {...(formik.getFieldProps('checked') as FieldInputProps<
+                        string[]
+                      >)}
                       value={node.id}
                     />
                   </section>

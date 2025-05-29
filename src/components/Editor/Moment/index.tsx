@@ -28,7 +28,7 @@ import styles from './styles.module.css'
 interface Props {
   content: string
   update: (params: { content: string }) => void
-  onSubmit: () => any
+  onSubmit: () => void
   placeholder?: string
   setEditor?: (editor: Editor | null) => void
 }
@@ -55,7 +55,7 @@ const MomentEditor: React.FC<Props> = ({
     // autofocus: true,
     immediatelyRender: false,
     content: content || '',
-    onUpdate: async ({ editor, transaction }) => {
+    onUpdate: async ({ editor }) => {
       const content = editor.getHTML()
       update({ content })
     },
@@ -79,7 +79,7 @@ const MomentEditor: React.FC<Props> = ({
       }),
       SmartLink.configure(makeSmartLinkOptions({ client, lang })),
       PasteDropFile.configure({
-        onDrop: async (editor, files, pos) => {
+        onDrop: async (editor, files) => {
           const validFiles = await getValidFiles(files)
           window.dispatchEvent(
             new CustomEvent(ADD_MOMENT_ASSETS, {

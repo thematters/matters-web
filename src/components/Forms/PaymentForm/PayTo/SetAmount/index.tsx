@@ -108,7 +108,7 @@ const SetAmount: React.FC<FormProps> = ({
   targetId,
 }) => {
   const formId = useId()
-  const customInputRef: React.RefObject<any> | null = useRef(null)
+  const customInputRef: React.RefObject<HTMLInputElement> | null = useRef(null)
   const isUSDT = currency === CURRENCY.USDT
   const isHKD = currency === CURRENCY.HKD
   // const isLike = currency === CURRENCY.LIKE
@@ -222,7 +222,7 @@ const SetAmount: React.FC<FormProps> = ({
         }
         setSubmitting(false)
         submitCallback({ amount: submitAmount, currency })
-      } catch (error) {
+      } catch {
         setSubmitting(false)
       }
     },
@@ -292,7 +292,7 @@ const SetAmount: React.FC<FormProps> = ({
   useEffect(() => {
     setFieldValue('amount', _amount, false)
     if (customInputRef.current) {
-      customInputRef.current.value = _amount <= 0 ? '' : _amount
+      customInputRef.current.value = _amount <= 0 ? '' : _amount.toString()
     }
   }, [currency])
 
@@ -328,7 +328,7 @@ const SetAmount: React.FC<FormProps> = ({
           e.target.blur()
 
           if (customInputRef.current) {
-            customInputRef.current.value = value
+            customInputRef.current.value = value.toString()
           }
         }}
         // custom input
@@ -355,7 +355,7 @@ const SetAmount: React.FC<FormProps> = ({
             const $el = customInputRef.current
             const rawValue = parseFloat(e.target.value)
             if ($el && rawValue !== value) {
-              $el.value = value <= 0 ? '' : value
+              $el.value = value <= 0 ? '' : value.toString()
               $el.type = 'text'
               $el.setSelectionRange($el.value.length, $el.value.length)
               $el.type = 'number'

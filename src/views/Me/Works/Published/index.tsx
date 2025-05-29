@@ -80,7 +80,7 @@ export const BaseMeWorksPublished = () => {
           eof
         >
           <List>
-            {articleEdges.map(({ node, cursor }) => (
+            {articleEdges.map(({ node }) => (
               <List.Item key={node.id}>
                 <ArticleDigestPublished article={node} />
               </List.Item>

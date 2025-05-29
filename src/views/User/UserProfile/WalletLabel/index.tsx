@@ -16,15 +16,10 @@ import styles from './styles.module.css'
 
 type WalletLabelProps = {
   user: NonNullable<UserProfileUserPublicQuery['user']>
-  isMe: boolean
   hasTooltip?: boolean
 }
 
-const WalletLabel: React.FC<WalletLabelProps> = ({
-  user,
-  isMe,
-  hasTooltip,
-}) => {
+const WalletLabel: React.FC<WalletLabelProps> = ({ user, hasTooltip }) => {
   const address = user?.info.ethAddress
   const { show, openDialog, closeDialog } = useDialogSwitch(false)
 

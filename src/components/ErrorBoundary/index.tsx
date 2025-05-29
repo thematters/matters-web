@@ -4,17 +4,17 @@ import { Error as ErrorComponent } from '~/components'
 
 export interface FallbackProps {
   error?: Error | null
-  info?: any | null
+  info?: unknown | null
 }
 
 interface Props {
   FallbackComponent?: React.ComponentType<FallbackProps>
-  onError?: (error: Error, info: any) => void
+  onError?: (error: Error, info: unknown) => void
 }
 
 interface State {
   error: Error | null
-  info: any | null
+  info: unknown | null
 }
 
 export class ErrorBoundary extends React.Component<
@@ -26,13 +26,13 @@ export class ErrorBoundary extends React.Component<
     info: null,
   }
 
-  componentDidCatch(error: Error, info: any): void {
+  componentDidCatch(error: Error, info: unknown): void {
     const { onError } = this.props
 
     if (typeof onError === 'function') {
       try {
         onError.call(this, error, info)
-      } catch (ignoredError) {
+      } catch {
         //
       }
     }

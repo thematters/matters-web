@@ -200,7 +200,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               <button
                 type="button"
                 onClick={() => {
-                  // @ts-ignore
+                  // @ts-expect-error - The type definition for toggleHeading is incorrect
                   editor.chain().focus().toggleHeading({ level: 2 }).run()
 
                   // Manually unset bold, link if active
@@ -234,7 +234,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               <button
                 type="button"
                 onClick={() => {
-                  // @ts-ignore
+                  // @ts-expect-error - The type definition for toggleHeading is incorrect
                   editor.chain().focus().toggleHeading({ level: 3 }).run()
 
                   // Manually unset bold if active
@@ -291,10 +291,10 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {!isCommentEditor && (
               <button
                 type="button"
-                // @ts-ignore
+                // @ts-expect-error - The type definition for toggleStrike is incorrect
                 onClick={() => editor.chain().focus().toggleStrike().run()}
                 disabled={
-                  // @ts-ignore
+                  // @ts-expect-error - The type definition for toggleStrike is incorrect
                   !editor.can().chain().focus().toggleStrike().run() ||
                   editor.isActive('blockquote')
                 }
@@ -319,7 +319,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               <button
                 type="button"
                 onClick={() =>
-                  // @ts-ignore
+                  // @ts-expect-error - The type definition for clearNodes is incorrect
                   editor.chain().focus().clearNodes().toggleCodeBlock().run()
                 }
                 disabled={editor.isActive('codeBlock')}
@@ -342,7 +342,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {/* Quote */}
             <button
               type="button"
-              // @ts-ignore
               onClick={() =>
                 editor.chain().focus().clearNodes().toggleBlockquote().run()
               }
@@ -366,7 +365,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {!isCommentEditor && (
               <button
                 type="button"
-                // @ts-ignore
+                // @ts-expect-error - The type definition for toggleBulletList is incorrect
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={editor.isActive('bulletList') ? styles.active : ''}
                 title={intl.formatMessage({
@@ -388,7 +387,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {!isCommentEditor && (
               <button
                 type="button"
-                // @ts-ignore
+                // @ts-expect-error - The type definition for toggleOrderedList is incorrect
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={editor.isActive('orderedList') ? styles.active : ''}
                 title={intl.formatMessage({

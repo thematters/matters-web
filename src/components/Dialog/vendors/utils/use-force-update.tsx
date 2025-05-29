@@ -4,7 +4,7 @@ import { useCallback, useState } from 'react'
  * Forces a re-render, similar to `forceUpdate` in class components.
  */
 export function useForceUpdate() {
-  let [, dispatch] = useState<{}>(Object.create(null))
+  const [, dispatch] = useState<{}>(Object.create(null))
   return useCallback(() => {
     dispatch(Object.create(null))
   }, [])

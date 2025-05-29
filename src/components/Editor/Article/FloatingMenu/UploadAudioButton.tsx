@@ -92,7 +92,7 @@ const UploadAudioButton: React.FC<UploadAudioButtonProps> = ({
           />
         ),
       })
-    } catch (e) {
+    } catch {
       toast.error({
         message: (
           <Translate

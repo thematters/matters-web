@@ -57,7 +57,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
 
   // filter out inactive articles for local updating
   // at ArchiveArticle/Dialog.tsx
-  let articleEdges = articles.edges?.filter(
+  const articleEdges = articles.edges?.filter(
     ({ node }) => node.articleState === ArticleState.Active
   )
   const [items, setItems] = useState(articleEdges)

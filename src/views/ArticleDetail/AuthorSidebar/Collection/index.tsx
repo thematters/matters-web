@@ -61,9 +61,9 @@ const Collection = ({ article, collectionId }: CollectionProps) => {
     variables: { id: collectionId, after: cursor },
   })
 
-  const collection = prevData?.node!
-  const prevCollection = prevData?.node!
-  const afterCollection = afterData?.node!
+  const collection = prevData?.node
+  const prevCollection = prevData?.node
+  const afterCollection = afterData?.node
 
   useEffect(() => {
     if (!article) return
