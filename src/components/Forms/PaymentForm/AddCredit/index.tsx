@@ -5,7 +5,8 @@ import {
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js'
-import { loadStripe, StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import type { StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 import { useFormik } from 'formik'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'

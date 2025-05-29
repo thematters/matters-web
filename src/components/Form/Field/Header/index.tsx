@@ -23,8 +23,8 @@ const Header: React.FC<HeaderProps> = ({
     return null
   }
 
-  const Inner = () => (
-    <header className={styles.header} {...visuallyHiddenProps}>
+  const Inner = ({ hide }: { hide?: boolean }) => (
+    <header className={styles.header} {...(hide ? visuallyHiddenProps : {})}>
       <label htmlFor={htmlFor} {...(labelId ? { id: labelId } : {})}>
         {label}
       </label>
@@ -34,7 +34,7 @@ const Header: React.FC<HeaderProps> = ({
   )
 
   if (!hasLabel) {
-    return <Inner />
+    return <Inner hide />
   }
 
   return <Inner />

@@ -18,7 +18,7 @@ import {
 test.describe('Mutate article', () => {
   authedTest(
     "Alice's article is appreciation by Bob, and received notification",
-    async ({ alicePage, bobPage, isMobile, request }) => {
+    async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] create and publish new article
       await publishDraft({ page: alicePage, isMobile })
 
@@ -28,7 +28,7 @@ test.describe('Mutate article', () => {
       // [Bob] Go to Alice's article page
       await pageGoto(bobPage, aliceArticleLink)
 
-      const bobArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+      const bobArticleDetail = new ArticleDetailPage(bobPage)
 
       const title = await bobArticleDetail.getTitle()
 
@@ -84,7 +84,7 @@ test.describe('Mutate article', () => {
 
       // [Bob] Go to Alice's article page
       await pageGoto(bobPage, aliceArticleLink)
-      const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+      const aliceArticleDetail = new ArticleDetailPage(bobPage)
 
       const firstLabel =
         await aliceArticleDetail.toolbarBookmarkButton.getAttribute(
@@ -117,7 +117,7 @@ test.describe('Mutate article', () => {
 
       // [Bob] Go to Alice's article page
       await pageGoto(bobPage, aliceArticleLink)
-      const aliceArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+      const aliceArticleDetail = new ArticleDetailPage(bobPage)
       const aliceTitle = await aliceArticleDetail.getTitle()
 
       await aliceArticleDetail.forkArticle()
@@ -137,7 +137,7 @@ test.describe('Mutate article', () => {
         draftDetail.dialogViewArticleButton.click(),
       ])
 
-      const bobArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+      const bobArticleDetail = new ArticleDetailPage(bobPage)
       const bobTitle = await bobArticleDetail.getTitle()
       expect(stripSpaces(bobTitle)).toBe(stripSpaces(title))
 
@@ -239,7 +239,7 @@ test.describe('Mutate article', () => {
     // [Alice] create and publish new article
     const article = await publishDraft({ page: alicePage, isMobile })
 
-    const aliceArticleDetail = new ArticleDetailPage(alicePage, isMobile)
+    const aliceArticleDetail = new ArticleDetailPage(alicePage)
     // revise article
     await aliceArticleDetail.editArticle()
 
@@ -258,7 +258,7 @@ test.describe('Mutate article', () => {
 
   authedTest(
     'Disable response and allow response article',
-    async ({ alicePage, bobPage, isMobile, request }) => {
+    async ({ alicePage, bobPage, isMobile }) => {
       // [Alice] create and publish new article with disable response
       const article = await publishDraft({
         page: alicePage,
@@ -272,14 +272,14 @@ test.describe('Mutate article', () => {
       // [Bob] Go to Alice's article page
       await pageGoto(bobPage, aliceArticleLink)
 
-      const bobArticleDetail = new ArticleDetailPage(bobPage, isMobile)
+      const bobArticleDetail = new ArticleDetailPage(bobPage)
 
       // Confirm that the comment area is not clickable
       await expect(bobArticleDetail.toolbarCommentButton).toBeDisabled()
 
       // [Alice] Allow respsonses on just published articles
       await pageGoto(alicePage, aliceArticleLink)
-      const aliceArticleDetail = new ArticleDetailPage(alicePage, isMobile)
+      const aliceArticleDetail = new ArticleDetailPage(alicePage)
       // revise article
       await aliceArticleDetail.editArticle()
       const draftDetail = new DraftDetailPage(alicePage, isMobile)
@@ -293,10 +293,7 @@ test.describe('Mutate article', () => {
       const allowResponseArticleLink = alicePage.url()
       // [Bob] Go to Alice's article page
       await pageGoto(bobPage, allowResponseArticleLink)
-      const allowResponseArticleDetail = new ArticleDetailPage(
-        bobPage,
-        isMobile
-      )
+      const allowResponseArticleDetail = new ArticleDetailPage(bobPage)
 
       // [Bob] Send a comment
       const commentContent = await allowResponseArticleDetail.sendComment()
@@ -306,10 +303,7 @@ test.describe('Mutate article', () => {
 
       // [Alice] Confirm that response setting area is unclickable
       await pageGoto(alicePage, aliceArticleLink)
-      const aliceAlloResponseArticleDetail = new ArticleDetailPage(
-        alicePage,
-        isMobile
-      )
+      const aliceAlloResponseArticleDetail = new ArticleDetailPage(alicePage)
       await aliceAlloResponseArticleDetail.editArticle()
       const allowResponseDraftDetail = new DraftDetailPage(alicePage, isMobile)
       await allowResponseDraftDetail.dialogEditButton.click()

@@ -5,7 +5,8 @@ import {
   useElements,
   useStripe,
 } from '@stripe/react-stripe-js'
-import { loadStripe, StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import type { StripeCardElementChangeEvent } from '@stripe/stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 import _get from 'lodash/get'
 import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'

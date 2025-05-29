@@ -1,8 +1,12 @@
 import { CardElement } from '@stripe/react-stripe-js'
-import { StripeCardElementChangeEvent } from '@stripe/stripe-js'
-import React, { useContext, useId } from 'react'
+import type {
+  StripeCardElementChangeEvent,
+  StripeCardElementOptions,
+} from '@stripe/stripe-js'
+import React, { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
+import { FIELD_ID_STRIPE_CHECKOUT } from '~/common/enums'
 import { Form, LanguageContext, Spacer } from '~/components'
 
 import styles from './styles.module.css'
@@ -14,14 +18,14 @@ interface StripeCheckoutProps {
 
 const FONT_FAMILY = {
   zh_hant:
-    '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, "PingFang TC", "Microsoft YaHei", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", sans-serif',
+    '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, "PingFang TC", "PingFang SC", "Microsoft JhengHei", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
   zh_hans:
-    '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, "PingFang TC", "Microsoft YaHei", "Source Han Sans TC", "Noto Sans CJK TC", "WenQuanYi Micro Hei", sans-serif',
+    '-apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, Arial, "PingFang SC", "PingFang TC", "Microsoft YaHei", "Microsoft JhengHei", "WenQuanYi Micro Hei", sans-serif, "Apple Color Emoji", "Segoe UI Emoji"',
 }
 
 const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
   const { lang } = useContext(LanguageContext)
-  const options = {
+  const options: StripeCardElementOptions = {
     style: {
       base: {
         color: '#333',
@@ -42,7 +46,7 @@ const StripeCheckout: React.FC<StripeCheckoutProps> = ({ error, onChange }) => {
     },
     hidePostalCode: true,
   }
-  const fieldId = useId()
+  const fieldId = FIELD_ID_STRIPE_CHECKOUT
   const fieldMsgId = `${fieldId}-msg-checkout`
 
   return (
