@@ -79,18 +79,26 @@ test.describe('User Mutation', () => {
       await aliceNotifications.goto()
 
       // [Alice] Expect it has "user new follower" notice
-      const noticeUserNewFollowerDisplayName = await alicePage
-        .getByTestId(TEST_ID.NOTICE_USER_NEW_FOLLOWER)
-        .first()
-        .getByTestId(TEST_ID.NOTICE_USER_DISPLAY_NAME)
-        .first()
-        .innerText({
-          // FIXME: notifications page is slow to fetch data since it's no-cache
-          timeout: 15e3,
-        })
-      expect(stripSpaces(noticeUserNewFollowerDisplayName)).toBe(
-        stripSpaces(bobDisplayName)
-      )
+      let noticeUserNewFollowerDisplayName = ''
+      let displayNameMatches = false
+      while (!displayNameMatches) {
+        try {
+          noticeUserNewFollowerDisplayName = await alicePage
+            .getByTestId(TEST_ID.NOTICE_USER_NEW_FOLLOWER)
+            .first()
+            .getByTestId(TEST_ID.NOTICE_USER_DISPLAY_NAME)
+            .first()
+            .innerText({
+              timeout: 3000,
+            })
+          displayNameMatches =
+            stripSpaces(noticeUserNewFollowerDisplayName) ===
+            stripSpaces(bobDisplayName)
+        } catch {
+          // Wait a bit before retrying
+          await alicePage.waitForTimeout(2000)
+        }
+      }
     }
   )
 

@@ -43,16 +43,25 @@ test.describe('Mutate article', () => {
       await aliceNotifications.goto()
 
       // [Alice] Expect it has "liked your article" notice
-      const noticeReceiveArtileTitle = await alicePage
-        .getByTestId(TEST_ID.NOTICE_ARTICLE_NEW_APPRECIATION)
-        .first()
-        .getByTestId(TEST_ID.NOTICE_ARTICLE_TITLE)
-        .first()
-        .innerText({
-          // FIXME: notifications page is slow to fetch data since it's no-cache
-          timeout: 15e3,
-        })
-      expect(stripSpaces(noticeReceiveArtileTitle)).toBe(stripSpaces(title))
+      let noticeReceiveArtileTitle = ''
+      let titleMatches = false
+      while (!titleMatches) {
+        try {
+          noticeReceiveArtileTitle = await alicePage
+            .getByTestId(TEST_ID.NOTICE_ARTICLE_NEW_APPRECIATION)
+            .first()
+            .getByTestId(TEST_ID.NOTICE_ARTICLE_TITLE)
+            .first()
+            .innerText({
+              timeout: 3000,
+            })
+          titleMatches =
+            stripSpaces(noticeReceiveArtileTitle) === stripSpaces(title)
+        } catch {
+          // Wait a bit before retrying
+          await alicePage.waitForTimeout(2000)
+        }
+      }
 
       // [Alice] Check Appreciation count
       await alicePage
