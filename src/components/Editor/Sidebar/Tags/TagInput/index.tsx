@@ -172,7 +172,7 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
     if (searchKey) {
       searchTags()
     }
-  }, [debouncedSearchKey, client])
+  }, [debouncedSearchKey])
 
   const processedRecentTags = (() => {
     const userTagsEdges = recentTagsData?.viewer?.tags.edges || []
