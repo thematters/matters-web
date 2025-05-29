@@ -1,10 +1,15 @@
-import { FormattedMessage } from 'react-intl'
+import { useState } from 'react'
+import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCollection } from '@/public/static/icons/24px/collection.svg'
+import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
+import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
+import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import { MAX_ARTICLE_COLLECT_LENGTH } from '~/common/enums'
 import {
   ArticleDigestDropdown,
   EditorSearchSelectDialog,
   Icon,
+  Tooltip,
 } from '~/components'
 import { SetCollectionProps } from '~/components/Editor'
 import { SearchSelectNode } from '~/components/Forms/SearchSelectForm'
@@ -28,6 +33,8 @@ const SidebarCollection = ({
   nodeExclude,
   disabled,
 }: SidebarCollectionProps) => {
+  const intl = useIntl()
+  const [isEditing, setIsEditing] = useState(false)
   return (
     <EditorSearchSelectDialog
       title={<FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />}
@@ -51,11 +58,60 @@ const SidebarCollection = ({
     >
       {({ openDialog }) => (
         <Box
-          icon={<Icon icon={IconCollection} size={24} />}
           title={
-            <FormattedMessage defaultMessage="Collect Article" id="vX2bDy" />
+            <div className={styles.title}>
+              <FormattedMessage defaultMessage="Curated Article" id="FLLX7c" />
+              <Tooltip
+                content={
+                  <FormattedMessage
+                    defaultMessage="Citations and links to related articles can extend curation or thematic reading features"
+                    id="uhiBn9"
+                  />
+                }
+                zIndex={1000}
+                placement="top"
+                touch={['hold', 1000]}
+              >
+                <span>
+                  <Icon icon={IconHelp} size={14} />
+                </span>
+              </Tooltip>
+            </div>
           }
-          onClick={openDialog}
+          subtitle={
+            <FormattedMessage
+              defaultMessage="Help readers discover articles more easily"
+              id="znN84l"
+            />
+          }
+          rightButton={
+            <>
+              {isEditing ? (
+                <button
+                  onClick={() => setIsEditing(false)}
+                  className={styles.rightButton}
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Close',
+                    id: 'rbrahO',
+                  })}
+                >
+                  <Icon icon={IconTimes} size={24} color="black" />
+                </button>
+              ) : (
+                <button
+                  onClick={() => setIsEditing(true)}
+                  className={styles.rightButton}
+                  aria-label={intl.formatMessage({
+                    defaultMessage: 'Add Tags',
+                    id: 'WNxQX0',
+                  })}
+                  disabled={collection.length >= MAX_ARTICLE_COLLECT_LENGTH}
+                >
+                  <Icon icon={IconPlus} size={24} color="black" />
+                </button>
+              )}
+            </>
+          }
           disabled={disabled}
         >
           {collection.length > 0 && (

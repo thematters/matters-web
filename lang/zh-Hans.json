@@ -1031,6 +1031,9 @@
     "defaultMessage": "邮箱",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "FLLX7c": {
+    "defaultMessage": "关联作品"
+  },
   "FMIIAZ": {
     "defaultMessage": "此为历史版本和 IPFS 入口查阅区，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -3177,6 +3180,9 @@
   "ucxFlV": {
     "defaultMessage": "提现流程已启动"
   },
+  "uhiBn9": {
+    "defaultMessage": "引用、链接相关作品，可延伸策展或主题式阅读功能"
+  },
   "ulh3kf": {
     "defaultMessage": "选集"
   },
@@ -3500,6 +3506,9 @@
   },
   "zlug1R": {
     "defaultMessage": "已翻译成{targetLang}，显示"
+  },
+  "znN84l": {
+    "defaultMessage": "帮助读者更容易发现优质内容"
   },
   "zvNfwL": {
     "defaultMessage": "操作过于频繁，请稍候重试",

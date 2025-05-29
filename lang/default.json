@@ -1031,6 +1031,9 @@
     "defaultMessage": "Email address",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
+  "FLLX7c": {
+    "defaultMessage": "Curated Article"
+  },
   "FMIIAZ": {
     "defaultMessage": "Revision history and IPFS entry,",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -3177,6 +3180,9 @@
   "ucxFlV": {
     "defaultMessage": "The withdrawal process has started."
   },
+  "uhiBn9": {
+    "defaultMessage": "Citations and links to related articles can extend curation or thematic reading features"
+  },
   "ulh3kf": {
     "defaultMessage": "Collections"
   },
@@ -3500,6 +3506,9 @@
   },
   "zlug1R": {
     "defaultMessage": "Translated into {targetLang}, show"
+  },
+  "znN84l": {
+    "defaultMessage": "Help readers discover articles more easily"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

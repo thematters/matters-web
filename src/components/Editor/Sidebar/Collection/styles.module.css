@@ -9,3 +9,8 @@
     }
   }
 }
+
+.title {
+  display: flex;
+  gap: var(--sp4);
+}
