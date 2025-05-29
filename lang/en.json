@@ -3052,6 +3052,9 @@
     "defaultMessage": "Email",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
   },
+  "reRn/s": {
+    "defaultMessage": "Paste the link of the article you want to curate"
+  },
   "rfz/fN": {
     "defaultMessage": "Recommended size: 1600px x 900px"
   },
