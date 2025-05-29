@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 
 import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
@@ -25,6 +25,7 @@ const SidebarTags = ({
   saving,
   disabled,
 }: SidebarTagsProps) => {
+  const intl = useIntl()
   const [isEditing, setIsEditing] = useState(false)
 
   const onAddTag = async (tag: string) => {
@@ -44,6 +45,10 @@ const SidebarTags = ({
             <button
               onClick={() => setIsEditing(false)}
               className={styles.rightButton}
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Close',
+                id: 'rbrahO',
+              })}
             >
               <Icon icon={IconTimes} size={24} color="black" />
             </button>
@@ -51,6 +56,10 @@ const SidebarTags = ({
             <button
               onClick={() => setIsEditing(true)}
               className={styles.rightButton}
+              aria-label={intl.formatMessage({
+                defaultMessage: 'Add Tags',
+                id: 'WNxQX0',
+              })}
               disabled={tags.length >= ARTICLE_TAGS_MAX_COUNT}
             >
               <Icon icon={IconPlus} size={24} color="black" />
