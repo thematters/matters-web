@@ -345,10 +345,9 @@ const USDTProcessingForm: React.FC<Props> = ({
 
   // error handling
   useEffect(() => {
-    const errorName = error?.name
     const reason = error?.message
 
-    if (errorName === 'ConnectorNotConnectedError') {
+    if (reason?.includes('User rejected the request')) {
       switchToConfirm()
       return
     }
