@@ -1,9 +1,16 @@
 import { useFormik } from 'formik'
+import { useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
+import { useDebounce } from 'use-debounce'
 
 import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
+import { INPUT_DEBOUNCE } from '~/common/enums'
+import { extractShortHashFromUrl } from '~/common/utils/url'
 import { Form, Icon } from '~/components'
-import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
+import {
+  ArticleDigestDropdownArticleFragment,
+  QuickResultQuery,
+} from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
@@ -20,12 +27,32 @@ export const CollectionInput = ({
 }: CollectionInputProps) => {
   const intl = useIntl()
 
+  const [searchKey, setSearchKey] = useState('')
+  const [debouncedSearchKey] = useDebounce(searchKey, INPUT_DEBOUNCE)
+  const [, setSearchData] = useState<QuickResultQuery>()
+  const [, setSearchLoading] = useState(false)
+
   const formik = useFormik<{ url: string }>({
     initialValues: { url: '' },
     onSubmit: (values) => {
-      console.log(values)
+      console.log({ values })
     },
   })
+
+  useEffect(() => {
+    const searchTags = async () => {
+      setSearchData(undefined)
+      setSearchLoading(true)
+      const shortHash = extractShortHashFromUrl(debouncedSearchKey)
+      if (!shortHash) {
+        return
+      }
+      console.log({ shortHash })
+    }
+    if (searchKey) {
+      searchTags()
+    }
+  }, [debouncedSearchKey])
 
   return (
     <Form
@@ -43,7 +70,10 @@ export const CollectionInput = ({
         })}
         autoFocus
         value={formik.values.url}
-        onChange={formik.handleChange}
+        onChange={(e) => {
+          setSearchKey(e.target.value)
+          formik.handleChange(e)
+        }}
         onBlur={formik.handleBlur}
       />
     </Form>

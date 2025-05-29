@@ -131,3 +131,41 @@ export const parseCommentHash = () => {
     descendantId: descendantId || undefined,
   }
 }
+
+export const extractShortHashFromUrl = (url: string) => {
+  if (!url) return null
+
+  const cleanUrl = url.trim()
+
+  // Remove query parameters and hash fragments
+  const urlWithoutParams = cleanUrl.split(/[?#]/)[0]
+
+  // Remove trailing slash
+  const normalizedUrl = urlWithoutParams.replace(/\/$/, '')
+
+  // Various matching patterns
+  const patterns = [
+    // Full URL format: https://matters.town/a/shortHash or https://matters.icu/a/shortHash
+    /^https?:\/\/[^/]*matters\.(town|icu)(?::\d+)?\/a\/([a-zA-Z0-9]+)$/,
+    // Domain format: matters.town/a/shortHash or matters.icu/a/shortHash
+    /^[^/]*matters\.(town|icu)(?::\d+)?\/a\/([a-zA-Z0-9]+)$/,
+    // Path format: /a/shortHash
+    /^\/a\/([a-zA-Z0-9]+)$/,
+    // Direct path format: /shortHash (8+ characters)
+    /^\/([a-zA-Z0-9]{8,})$/,
+    // Simplified format: a/shortHash
+    /^a\/([a-zA-Z0-9]+)$/,
+    // Pure shortHash format: shortHash (alphanumeric combination, 8+ chars)
+    /^([a-zA-Z0-9]{8,})$/,
+  ]
+
+  for (const pattern of patterns) {
+    const match = normalizedUrl.match(pattern)
+    if (match) {
+      // For patterns with domain, shortHash is in the third or second capture group
+      return match[2] || match[1]
+    }
+  }
+
+  return null
+}
