@@ -92,6 +92,10 @@
   "/IMR+8": {
     "defaultMessage": "Top Supporters"
   },
+  "/NX9L+": {
+    "defaultMessage": "Confirm authorization",
+    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
+  },
   "/TXBJR": {
     "defaultMessage": "Unknown error. Please try again later.",
     "description": "UNKNOWN_ERROR"
@@ -99,6 +103,9 @@
   "/ZmvO+": {
     "defaultMessage": "Divider",
     "description": "src/components/Editor"
+  },
+  "/cyuh2": {
+    "defaultMessage": "Go to Authorization"
   },
   "/dKzfc": {
     "defaultMessage": "This work is archived due to violation of community guidelines."
@@ -143,9 +150,6 @@
   },
   "0Om2Kl": {
     "defaultMessage": "Remove from collection"
-  },
-  "0PpH2v": {
-    "defaultMessage": "Authorize in Wallet"
   },
   "0SQatS": {
     "defaultMessage": "View all",
@@ -774,9 +778,6 @@
     "defaultMessage": "Post",
     "description": "src/views/MomentDetail/Edit/index.tsx"
   },
-  "AvRTYR": {
-    "defaultMessage": "Your authorized USDT limit for Matters is insufficient, please reauthorize it."
-  },
   "Avukw5": {
     "defaultMessage": "The payment amount is too small, please re-enter.",
     "description": "PAYMENT_AMOUNT_TOO_SMALL"
@@ -1039,9 +1040,6 @@
   "FWCa4O": {
     "defaultMessage": "Switch to Optimism network now?",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
-  },
-  "FYeEw1": {
-    "defaultMessage": "Application period{tz}:"
   },
   "FaTb0A": {
     "defaultMessage": "Install MetaMask",
@@ -1448,10 +1446,6 @@
   },
   "N6PWfU": {
     "defaultMessage": "Forget Password"
-  },
-  "N6Yp+k": {
-    "defaultMessage": "Confirm in Wallet",
-    "description": "src/components/Forms/PaymentForm/PayTo/Confirm/index.tsx"
   },
   "NACY16": {
     "defaultMessage": "Why need to set up a wallet?",
@@ -2045,10 +2039,6 @@
   },
   "Xq7h6o": {
     "defaultMessage": "Upload Moment Assets"
-  },
-  "XqTMgg": {
-    "defaultMessage": "Authorize in Wallet",
-    "description": "REAUTHORIZE"
   },
   "XuYhBC": {
     "defaultMessage": "Pinned to profile"
@@ -3112,9 +3102,6 @@
     "defaultMessage": "Add up to 5 tags",
     "description": "TOO_MANY_TAGS_FOR_ARTICLE"
   },
-  "tQCtdN": {
-    "defaultMessage": "You need to authorize Matters to perform USDT transactions for you."
-  },
   "tQV8l8": {
     "defaultMessage": "Unknown Error"
   },
@@ -3264,6 +3251,9 @@
   "wAccv4": {
     "defaultMessage": "{commentType} has been deleted",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "wC7v0l": {
+    "defaultMessage": "Application period{tz}: {period}"
   },
   "wCgTu5": {
     "defaultMessage": "Comments"
