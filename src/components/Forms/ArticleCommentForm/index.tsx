@@ -10,6 +10,7 @@ import {
   UNIVERSAL_AUTH_TRIGGER,
 } from '~/common/enums'
 import {
+  analytics,
   dom,
   formStorage,
   sanitizeContent,
@@ -115,6 +116,10 @@ export const ArticleCommentForm: React.FC<ArticleCommentFormProps> = ({
 
     event?.preventDefault()
     setSubmitting(true)
+
+    analytics.trackEvent('click_button', {
+      type: 'article_comment_publish',
+    })
 
     try {
       await putComment({

@@ -12,10 +12,6 @@
     display: flex;
     margin-right: 0;
     color: var(--color-grey-darker);
-
-    @media (--sm-up) {
-      display: none;
-    }
   }
 
   & :global(button) {

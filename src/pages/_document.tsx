@@ -42,6 +42,11 @@ class MattersDocument extends Document<MattersDocumentProps> {
     return (
       <Html lang={this.props.lang}>
         <Head />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4792129775270382"
+          crossOrigin="anonymous"
+        />
 
         <body>
           <Main />

@@ -56,7 +56,7 @@ const TranslationButton: FC<{
           analytics.trackEvent('click_button', {
             type: 'translation',
             pageType: 'article_detail',
-            note,
+            note: JSON.stringify(note),
           })
         }}
         disabled={translating}
