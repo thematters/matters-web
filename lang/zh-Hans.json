@@ -73,6 +73,9 @@
   "/5jk3i": {
     "defaultMessage": "订阅成功！🎉"
   },
+  "/5yq4w": {
+    "defaultMessage": "最多增加 3 个标签"
+  },
   "/BQWEh": {
     "defaultMessage": "最近 1 个月",
     "description": "src/views/Me/Analytics/SelectPeriod/index.tsx"
@@ -3377,6 +3380,9 @@
   "xjHiYx": {
     "defaultMessage": "作品编辑次数超出上限",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
+  },
+  "xk1AW6": {
+    "defaultMessage": "输入标签"
   },
   "xkr+zo": {
     "defaultMessage": "协议"

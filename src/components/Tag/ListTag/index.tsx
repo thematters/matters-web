@@ -17,6 +17,8 @@ interface ListTagProps {
   is?: 'a' | 'span'
   hasCount?: boolean
   onClick?: () => void
+  icon?: React.ReactNode
+  iconSize?: 20 | 16
 }
 
 export const ListTag = ({
@@ -26,6 +28,8 @@ export const ListTag = ({
   is,
   hasCount = true,
   onClick,
+  icon,
+  iconSize = 16,
 }: ListTagProps) => {
   const tagClasses = classNames({
     [styles.tag]: true,
@@ -47,12 +51,14 @@ export const ListTag = ({
     weight: 'normal',
     spacing: 4,
     color: 'black',
-    icon: <Icon icon={IconHashTag} color="black" />,
+    icon: icon || (
+      <Icon icon={IconHashTag} color="greyDarker" size={iconSize} />
+    ),
     placement: 'right',
     ...customTextIconProps,
   }
 
-  const Inner = () => (
+  const Inner = (
     <>
       <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
         <span className={styles.name}>{tagName}</span>
@@ -70,7 +76,7 @@ export const ListTag = ({
         onClick={onClick}
         data-test-id={TEST_ID.DIGEST_TAG_LIST}
       >
-        <Inner />
+        {Inner}
       </a>
     </Link>
   ) : (
@@ -79,7 +85,7 @@ export const ListTag = ({
       onClick={onClick}
       data-test-id={TEST_ID.DIGEST_TAG_LIST}
     >
-      <Inner />
+      {Inner}
     </span>
   )
 }

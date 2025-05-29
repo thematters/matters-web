@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ENTITY_TYPE } from '~/common/enums'
-import { Tabs } from '~/components'
+import { Tabs, toDigestTagPlaceholder } from '~/components'
 import { getSelectCampaigns } from '~/components/Editor/SelectCampaign'
 import Sidebar from '~/components/Editor/Sidebar'
 import {
@@ -11,7 +11,11 @@ import {
 } from '~/gql/graphql'
 import { EditMetaDraftFragment } from '~/gql/graphql'
 
-import { useEditDraftCampaign, useEditDraftCover } from '../hooks'
+import {
+  useEditDraftCampaign,
+  useEditDraftCover,
+  useEditDraftTags,
+} from '../hooks'
 import styles from './styles.module.css'
 
 export interface OptionContentProps {
@@ -62,6 +66,20 @@ const EditDraftCover = ({ draft, disabled }: OptionItemProps) => {
   )
 }
 
+const EditDraftTags = ({ draft, disabled }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftTags()
+  const tags = (draft.tags || []).map(toDigestTagPlaceholder)
+
+  return (
+    <Sidebar.Tags
+      tags={tags}
+      editTags={edit}
+      saving={saving}
+      disabled={disabled}
+    />
+  )
+}
+
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -104,6 +122,7 @@ export const OptionContent = (props: OptionContentProps) => {
           <>
             <EditDraftCampaign {...props} disabled={disabled} />
             <EditDraftCover {...props} disabled={disabled} />
+            <EditDraftTags {...props} disabled={disabled} />
           </>
         )}
       </section>
