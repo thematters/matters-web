@@ -1040,9 +1040,6 @@
     "defaultMessage": "目前非 Optimism 网络，立即切换？",
     "description": "src/components/Forms/PaymentForm/SwitchNetwork/index.tsx"
   },
-  "FYeEw1": {
-    "defaultMessage": "报名期{tz}："
-  },
   "FaTb0A": {
     "defaultMessage": "安装 MetaMask",
     "description": "src/components/Forms/WalletAuthForm/Select.tsx"
@@ -2460,6 +2457,9 @@
     "defaultMessage": "邀请中",
     "description": "src/views/Circle/Settings/ManageInvitation/Invites/index.tsx"
   },
+  "fWZYP5": {
+    "defaultMessage": "置顶"
+  },
   "fko+MR": {
     "defaultMessage": "重试提领"
   },
@@ -3273,6 +3273,9 @@
   "wAccv4": {
     "defaultMessage": "{commentType}已刪除",
     "description": "src/components/CircleComment/DropdownActions/DeleteComment/Dialog.tsx"
+  },
+  "wC7v0l": {
+    "defaultMessage": "报名期{tz}：{period}"
   },
   "wCgTu5": {
     "defaultMessage": "评论"

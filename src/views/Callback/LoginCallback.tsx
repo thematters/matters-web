@@ -56,7 +56,7 @@ const LoginCallback = () => {
           },
         })
 
-        if (isLocal) {
+        if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
           const token = data?.emailLogin.token || ''
           const language = data?.emailLogin.user?.settings.language || ''
           const group = data?.emailLogin.user?.info.group || ''

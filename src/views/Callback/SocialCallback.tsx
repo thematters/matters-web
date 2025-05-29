@@ -131,7 +131,7 @@ const SocialCallback = ({ type }: Props) => {
             },
           })
 
-          if (isLocal) {
+          if (isLocal || process.env.NEXT_PUBLIC_VERCEL) {
             const token = loginData?.socialLogin.token || ''
             const language =
               loginData?.socialLogin.user?.settings.language || ''
