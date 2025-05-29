@@ -86,19 +86,17 @@ const FooterActions = ({
                   page: 'campaignDetail',
                   campaign: article.campaigns[0].campaign,
                 })}
-                legacyBehavior
+                className={styles.campaign}
               >
-                <a className={styles.campaign}>
-                  {
-                    article.campaigns[0].campaign[
-                      lang === 'zh_hans'
-                        ? 'nameZhHans'
-                        : lang === 'zh_hant'
-                          ? 'nameZhHant'
-                          : 'nameEn'
-                    ]
-                  }
-                </a>
+                {
+                  article.campaigns[0].campaign[
+                    lang === 'zh_hans'
+                      ? 'nameZhHans'
+                      : lang === 'zh_hant'
+                        ? 'nameZhHant'
+                        : 'nameEn'
+                  ]
+                }
               </Link>
             )}
           </>

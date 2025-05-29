@@ -144,10 +144,8 @@ const Rich = ({
             <AvatarContent />
           </span>
         ) : (
-          <Link {...path} legacyBehavior>
-            <a className={styles.avatar}>
-              <AvatarContent />
-            </a>
+          <Link {...path} className={styles.avatar}>
+            <AvatarContent />
           </Link>
         )}
         <section className={contentClasses}>
@@ -160,13 +158,12 @@ const Rich = ({
                 {user.displayName}
               </span>
             ) : (
-              <Link {...path} legacyBehavior>
-                <a
-                  className={styles.name}
-                  data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
-                >
-                  {user.displayName}
-                </a>
+              <Link
+                {...path}
+                className={styles.name}
+                data-test-id={TEST_ID.DIGEST_USER_RICH_DISPLAY_NAME}
+              >
+                {user.displayName}
               </Link>
             )}
             {hasState && <FollowUserButton.State user={user} />}

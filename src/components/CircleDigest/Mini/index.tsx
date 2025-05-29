@@ -37,22 +37,19 @@ const Mini = ({ circle, ...cardProps }: CircleDigestMiniProps) => {
       testId={TEST_ID.DIGEST_CIRCLE_MINI}
     >
       <section className={containerClasses}>
-        <Link {...path} legacyBehavior>
-          <a className={styles.avatar}>
-            <span {...visuallyHiddenProps}>{circle.displayName}</span>
-            <CircleAvatar circle={circle} size={48} />
-          </a>
+        <Link {...path} className={styles.avatar}>
+          <span {...visuallyHiddenProps}>{circle.displayName}</span>
+          <CircleAvatar circle={circle} size={48} />
         </Link>
 
         <section className={styles.content}>
           <header className={styles.header}>
-            <Link {...path} legacyBehavior>
-              <a
-                className={styles.name}
-                data-test-id={TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME}
-              >
-                {displayName}
-              </a>
+            <Link
+              {...path}
+              className={styles.name}
+              data-test-id={TEST_ID.DIGEST_CIRCLE_DISPLAY_NAME}
+            >
+              {displayName}
             </Link>
 
             <section className={styles.info}>

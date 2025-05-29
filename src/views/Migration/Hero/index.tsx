@@ -16,13 +16,11 @@ const Hero = () => {
     <header className={[styles.hero, layoutStyles.container].join(' ')}>
       <div className={layoutStyles.content}>
         <div className={layoutStyles.columnFull}>
-          <Link href={PATHS.HOME} legacyBehavior>
-            <a className={styles.logo}>
-              <span {...visuallyHiddenProps}>
-                <FormattedMessage defaultMessage="Discover" id="cE4Hfw" />
-              </span>
-              <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
-            </a>
+          <Link href={PATHS.HOME} className={styles.logo}>
+            <span {...visuallyHiddenProps}>
+              <FormattedMessage defaultMessage="Discover" id="cE4Hfw" />
+            </span>
+            <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
           </Link>
         </div>
       </div>

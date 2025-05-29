@@ -217,8 +217,8 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
     if (is === 'link' && href) {
       return (
-        <Link href={href} legacyBehavior>
-          <a {...props}>{children}</a>
+        <Link href={href} {...props}>
+          {children}
         </Link>
       )
     }

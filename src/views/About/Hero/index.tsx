@@ -60,13 +60,11 @@ const Hero = () => {
       <header className={styles.logo}>
         <div className={layoutStyles.container}>
           <div className={layoutStyles.content}>
-            <Link href={PATHS.HOME} legacyBehavior>
-              <a>
-                <span {...visuallyHiddenProps}>
-                  <FormattedMessage defaultMessage="Discover" id="cE4Hfw" />
-                </span>
-                <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
-              </a>
+            <Link href={PATHS.HOME}>
+              <span {...visuallyHiddenProps}>
+                <FormattedMessage defaultMessage="Discover" id="cE4Hfw" />
+              </span>
+              <Icon icon={IconLogo} style={{ width: 120, height: 24.75 }} />
             </Link>
           </div>
         </div>

@@ -64,14 +64,13 @@ export const ListTag = ({
     </>
   )
   return is !== 'span' ? (
-    <Link {...path} legacyBehavior>
-      <a
-        className={tagClasses}
-        onClick={onClick}
-        data-test-id={TEST_ID.DIGEST_TAG_LIST}
-      >
-        <Inner />
-      </a>
+    <Link
+      {...path}
+      className={tagClasses}
+      onClick={onClick}
+      data-test-id={TEST_ID.DIGEST_TAG_LIST}
+    >
+      <Inner />
     </Link>
   ) : (
     <span

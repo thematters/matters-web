@@ -316,13 +316,16 @@ export const Button = forwardRef<
     // link
     if (href) {
       return (
-        <Link href={href} replace={replace} legacyBehavior>
-          <a {...containerProps} style={sizeStyle}>
-            <div className={styles.content} style={sizeStyle}>
-              <div className={styles.hotarea} style={hotAreaStyle} />
-              {children}
-            </div>
-          </a>
+        <Link
+          href={href}
+          replace={replace}
+          {...containerProps}
+          style={sizeStyle}
+        >
+          <div className={styles.content} style={sizeStyle}>
+            <div className={styles.hotarea} style={hotAreaStyle} />
+            {children}
+          </div>
         </Link>
       )
     }

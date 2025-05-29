@@ -46,34 +46,32 @@ export const ArticleTag = ({
   return isClamped ? (
     <Tooltip content={tag.content} placement="top">
       <section>
-        <Link {...path} legacyBehavior>
-          <a
-            className={tagClasses}
-            onClick={onClick}
-            data-test-id={TEST_ID.DIGEST_TAG_ARTICLE}
+        <Link
+          {...path}
+          className={tagClasses}
+          onClick={onClick}
+          data-test-id={TEST_ID.DIGEST_TAG_ARTICLE}
+        >
+          <TextIcon
+            {...textIconProps}
+            size={textIconProps.size}
+            allowUserSelect
           >
-            <TextIcon
-              {...textIconProps}
-              size={textIconProps.size}
-              allowUserSelect
-            >
-              <span className={styles.name}>{tagName}</span>
-            </TextIcon>
-          </a>
+            <span className={styles.name}>{tagName}</span>
+          </TextIcon>
         </Link>
       </section>
     </Tooltip>
   ) : (
-    <Link {...path} legacyBehavior>
-      <a
-        className={tagClasses}
-        onClick={onClick}
-        data-test-id={TEST_ID.DIGEST_TAG_ARTICLE}
-      >
-        <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
-          <span className={styles.name}>{tagName}</span>
-        </TextIcon>
-      </a>
+    <Link
+      {...path}
+      className={tagClasses}
+      onClick={onClick}
+      data-test-id={TEST_ID.DIGEST_TAG_ARTICLE}
+    >
+      <TextIcon {...textIconProps} size={textIconProps.size} allowUserSelect>
+        <span className={styles.name}>{tagName}</span>
+      </TextIcon>
     </Link>
   )
 }

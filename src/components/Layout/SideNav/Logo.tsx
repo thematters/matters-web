@@ -12,15 +12,14 @@ const Logo = () => {
 
   return (
     <section className={styles.logo}>
-      <Link href={PATHS.HOME} legacyBehavior>
-        <a
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Discover',
-            id: 'cE4Hfw',
-          })}
-        >
-          <Icon icon={IconLogoGraph} style={{ width: 48, height: 33 }} />
-        </a>
+      <Link
+        href={PATHS.HOME}
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Discover',
+          id: 'cE4Hfw',
+        })}
+      >
+        <Icon icon={IconLogoGraph} style={{ width: 48, height: 33 }} />
       </Link>
     </section>
   )

@@ -31,7 +31,15 @@ const PinBoard = ({ user }: PinBoardProps) => {
             data-test-id={TEST_ID.USER_PROFILE_PIN_BOARD_PINNED_WORK}
           >
             <Link
-              legacyBehavior
+              onClick={() =>
+                analytics.trackEvent('click_feed', {
+                  type: 'user_pinned_work',
+                  contentType:
+                    work.__typename === 'Article' ? 'article' : 'collection',
+                  location: index,
+                  id: work.id,
+                })
+              }
               {...toPath(
                 work.__typename === 'Article'
                   ? {
@@ -45,33 +53,21 @@ const PinBoard = ({ user }: PinBoardProps) => {
                     }
               )}
             >
-              <a
-                onClick={() =>
-                  analytics.trackEvent('click_feed', {
-                    type: 'user_pinned_work',
-                    contentType:
-                      work.__typename === 'Article' ? 'article' : 'collection',
-                    location: index,
-                    id: work.id,
-                  })
-                }
-              >
-                <Media lessThan="lg">
-                  <Book.Flat
-                    {...work}
-                    type={
-                      work.__typename === 'Article' ? 'article' : 'collection'
-                    }
-                  />
-                </Media>
-                <Media greaterThanOrEqual="lg">
-                  {work.__typename === 'Article' ? (
-                    <Book.Article {...work} description={work.summary} />
-                  ) : (
-                    <Book.Collection {...work} />
-                  )}
-                </Media>
-              </a>
+              <Media lessThan="lg">
+                <Book.Flat
+                  {...work}
+                  type={
+                    work.__typename === 'Article' ? 'article' : 'collection'
+                  }
+                />
+              </Media>
+              <Media greaterThanOrEqual="lg">
+                {work.__typename === 'Article' ? (
+                  <Book.Article {...work} description={work.summary} />
+                ) : (
+                  <Book.Collection {...work} />
+                )}
+              </Media>
             </Link>
 
             <section className={styles.unpinButton}>
