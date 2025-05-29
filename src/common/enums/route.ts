@@ -1,4 +1,3 @@
-import type { NextFunction, Request, Response } from 'express'
 import _get from 'lodash/get'
 
 /**
@@ -134,7 +133,6 @@ export const PROTECTED_ROUTES: {
 export const ROUTES: {
   key: ROUTE_KEY
   pathname: string
-  handler?: (req: Request, res: Response, next: NextFunction) => any
 }[] = [
   /**
    * Public
