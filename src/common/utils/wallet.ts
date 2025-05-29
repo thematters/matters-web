@@ -38,6 +38,7 @@ export const explorers = {
 }
 
 export const wagmiConfig = createConfig({
+  ssr: false,
   chains: isProd ? [mainnet, optimism] : [sepolia, optimismSepolia],
   transports: {
     [mainnet.id]: http(`https://eth-mainnet.g.alchemy.com/v2/${alchemyId}`),

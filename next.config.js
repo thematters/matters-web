@@ -14,6 +14,7 @@ const nextAssetDomain = process.env.NEXT_PUBLIC_NEXT_ASSET_DOMAIN || ''
 const nextConfig = {
   experimental: {
     scrollRestoration: true,
+    optimizePackageImports: ['wagmi'],
   },
 
   /**
