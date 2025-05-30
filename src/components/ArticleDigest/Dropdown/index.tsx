@@ -13,6 +13,7 @@ import styles from './styles.module.css'
 export type ArticleDigestDropdownProps = {
   article: ArticleDigestDropdownArticleFragment
 
+  related?: boolean
   titleTextSize?: ArticleDigestTitleTextSize
   disabled?: boolean
   extraButton?: React.ReactNode
@@ -30,6 +31,7 @@ const fragments = {
       articleState: state
       slug
       shortHash
+      state
       author {
         id
         userName
@@ -45,7 +47,7 @@ const fragments = {
 
 export const ArticleDigestDropdown = ({
   article,
-
+  related,
   titleTextSize,
   disabled,
   extraButton,
@@ -86,6 +88,7 @@ export const ArticleDigestDropdown = ({
           <section className={styles.extraButton}>
             {!isBanned && extraButton}
           </section>
+          {related && <section className={styles.related}>已关联</section>}
         </header>
 
         <footer className={styles.footer}>

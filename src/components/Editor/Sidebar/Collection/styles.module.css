@@ -1,24 +1,8 @@
-.list {
-  padding-top: var(--sp16);
-
-  & li {
-    @mixin border-top-grey;
-
-    &:last-child {
-      margin-bottom: calc(var(--sp16) * -1);
-    }
-  }
-}
-
 .title {
   display: flex;
   gap: var(--sp4);
 }
 
 .content {
-  padding: 0 var(--sp16);
-}
-
-.collectionInput {
-  padding: var(--sp10) 0 0;
+  padding: var(--sp10) var(--sp16) 0 var(--sp16);
 }

@@ -1,22 +1,31 @@
+import { useApolloClient } from '@apollo/client'
 import { useFormik } from 'formik'
 import { useEffect, useState } from 'react'
+import AutosizeInput from 'react-input-autosize'
 import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
 import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import { extractShortHashFromUrl } from '~/common/utils/url'
-import { Form, Icon } from '~/components'
+import {
+  ArticleDigestDropdown,
+  Dropdown,
+  Icon,
+  Menu,
+  SpinnerBlock,
+} from '~/components'
+import { ARTICLE_URL_QUERY } from '~/components/SearchSelect/SearchingArea/gql'
 import {
   ArticleDigestDropdownArticleFragment,
-  QuickResultQuery,
+  ArticleUrlQueryQuery,
 } from '~/gql/graphql'
 
 import styles from './styles.module.css'
 
 type CollectionInputProps = {
   collection: ArticleDigestDropdownArticleFragment[]
-  onAddArticle: (article: ArticleDigestDropdownArticleFragment) => void
+  onAddArticle: (article: ArticleDigestDropdownArticleFragment) => Promise<void>
   saving?: boolean
 }
 
@@ -26,56 +35,104 @@ export const CollectionInput = ({
   saving,
 }: CollectionInputProps) => {
   const intl = useIntl()
+  const client = useApolloClient()
 
   const [searchKey, setSearchKey] = useState('')
   const [debouncedSearchKey] = useDebounce(searchKey, INPUT_DEBOUNCE)
-  const [, setSearchData] = useState<QuickResultQuery>()
-  const [, setSearchLoading] = useState(false)
+  const [searchData, setSearchData] = useState<ArticleUrlQueryQuery>()
+  const [searchLoading, setSearchLoading] = useState(false)
 
   const formik = useFormik<{ url: string }>({
     initialValues: { url: '' },
-    onSubmit: (values) => {
-      console.log({ values })
+    onSubmit: async (values) => {
+      await onAddArticle(
+        searchData?.article as ArticleDigestDropdownArticleFragment
+      )
+      setSearchData(undefined)
     },
   })
 
   useEffect(() => {
-    const searchTags = async () => {
+    const searchArticle = async () => {
       setSearchData(undefined)
       setSearchLoading(true)
       const shortHash = extractShortHashFromUrl(debouncedSearchKey)
-      if (!shortHash) {
-        return
+      try {
+        const response = await client.query({
+          query: ARTICLE_URL_QUERY,
+          variables: { shortHash },
+          fetchPolicy: 'no-cache',
+        })
+        setSearchData(response.data)
+      } finally {
+        setSearchLoading(false)
       }
-      console.log({ shortHash })
     }
     if (searchKey) {
-      searchTags()
+      searchArticle()
     }
   }, [debouncedSearchKey])
 
+  const isDropdownVisible = !searchLoading && !!searchData?.article && !saving
+
   return (
-    <Form
-      className={styles.form}
-      onSubmit={formik.handleSubmit}
-      autoComplete="off"
+    <Dropdown
+      focusLock={false}
+      content={
+        <Menu>
+          <Menu.Item
+            spacing={[8, 16]}
+            bgActiveColor="greyHover"
+            onClick={() => {
+              formik.setFieldValue('url', searchData?.article?.title)
+              formik.handleSubmit()
+            }}
+          >
+            <ArticleDigestDropdown
+              article={
+                searchData?.article as ArticleDigestDropdownArticleFragment
+              }
+              related={collection.some((a) => a.id === searchData?.article?.id)}
+              titleTextSize={16}
+              spacing={[0, 0]}
+              bgColor="none"
+              disabled
+            />
+          </Menu.Item>
+        </Menu>
+      }
+      placement="bottom-start"
+      visible={isDropdownVisible}
     >
-      <Icon icon={IconDraft} color="greyDark" />
-      <input
-        type="text"
-        name="url"
-        placeholder={intl.formatMessage({
-          defaultMessage: 'Paste the link of the article you want to curate',
-          id: 'reRn/s',
-        })}
-        autoFocus
-        value={formik.values.url}
-        onChange={(e) => {
-          setSearchKey(e.target.value)
-          formik.handleChange(e)
-        }}
-        onBlur={formik.handleBlur}
-      />
-    </Form>
+      {({ ref }) => (
+        <form
+          className={styles.form}
+          onSubmit={formik.handleSubmit}
+          autoComplete="off"
+          ref={ref}
+        >
+          <Icon icon={IconDraft} color="greyDark" />
+          <AutosizeInput
+            type="text"
+            className={styles.input}
+            name="url"
+            placeholder={intl.formatMessage({
+              defaultMessage:
+                'Paste the link of the article you want to curate',
+              id: 'reRn/s',
+            })}
+            autoFocus
+            value={formik.values.url}
+            onChange={(e) => {
+              setSearchKey(e.target.value)
+              formik.handleChange(e)
+            }}
+            onBlur={formik.handleBlur}
+            disabled={saving}
+          />
+          {saving && <SpinnerBlock size={16} noSpacing />}
+        </form>
+      )}
+    </Dropdown>
   )
 }

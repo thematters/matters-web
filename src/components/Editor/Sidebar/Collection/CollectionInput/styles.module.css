@@ -8,8 +8,16 @@
   font-size: var(--sp14);
 
   & input {
+    max-width: calc(100vw - 102px);
+    line-height: 1.375rem;
+    background: transparent;
+
     &::placeholder {
       color: var(--color-grey);
+    }
+
+    @media (--sm-up) {
+      max-width: 276px;
     }
   }
 }
