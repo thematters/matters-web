@@ -7,7 +7,13 @@ import { Card, CardProps } from '~/components'
 import { UserDigest } from '~/components/UserDigest'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
-import { ArticleDigestTitle, ArticleDigestTitleTextSize } from '../Title'
+import {
+  ArticleDigestTitle,
+  ArticleDigestTitleColor,
+  ArticleDigestTitleIs,
+  ArticleDigestTitleTextSize,
+  ArticleDigestTitleTextWeight,
+} from '../Title'
 import styles from './styles.module.css'
 
 export type ArticleDigestDropdownProps = {
@@ -15,6 +21,9 @@ export type ArticleDigestDropdownProps = {
 
   related?: boolean
   titleTextSize?: ArticleDigestTitleTextSize
+  titleIs?: ArticleDigestTitleIs
+  titleTextWeight?: ArticleDigestTitleTextWeight
+  titleColor?: ArticleDigestTitleColor
   disabled?: boolean
   extraButton?: React.ReactNode
   lineClamp?: boolean
@@ -49,6 +58,9 @@ export const ArticleDigestDropdown = ({
   article,
   related,
   titleTextSize,
+  titleIs = 'h3',
+  titleTextWeight = 'medium',
+  titleColor = 'greyDarker',
   disabled,
   extraButton,
   lineClamp,
@@ -81,8 +93,10 @@ export const ArticleDigestDropdown = ({
             article={article}
             textSize={titleTextSize}
             disabled={cardDisabled}
-            is="h3"
+            is={titleIs}
+            textWeight={titleTextWeight}
             lineClamp={lineClamp}
+            textColor={titleColor}
           />
 
           <section className={styles.extraButton}>
@@ -96,6 +110,7 @@ export const ArticleDigestDropdown = ({
             user={article.author}
             avatarSize={16}
             textSize={13}
+            nameColor={related ? 'grey' : 'black'}
             hasAvatar
             hasUserName
             hasDisplayName

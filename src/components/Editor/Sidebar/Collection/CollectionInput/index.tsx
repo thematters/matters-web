@@ -41,6 +41,7 @@ const renderFoundArticle = (
   collection: ArticleDigestDropdownArticleFragment[],
   onSelectArticle: () => void
 ) => {
+  const isRelated = collection.some((a) => a.id === article.id)
   return (
     <Menu.Item
       spacing={[8, 16]}
@@ -49,8 +50,11 @@ const renderFoundArticle = (
     >
       <ArticleDigestDropdown
         article={article}
-        related={collection.some((a) => a.id === article.id)}
+        related={isRelated}
         titleTextSize={16}
+        titleIs="span"
+        titleTextWeight="normal"
+        titleColor={isRelated ? 'greyDark' : 'black'}
         spacing={[0, 0]}
         bgColor="none"
         disabled
