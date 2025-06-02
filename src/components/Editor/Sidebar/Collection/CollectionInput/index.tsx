@@ -101,6 +101,16 @@ export const CollectionInput = ({
         return
       }
 
+      if (searchData.article.author.isBlocking) {
+        toast.error({
+          message: intl.formatMessage({
+            defaultMessage: 'You do not have permission to perform this action',
+            id: '2/C36c',
+          }),
+        })
+        return
+      }
+
       await onAddArticle(
         searchData.article as ArticleDigestDropdownArticleFragment
       )

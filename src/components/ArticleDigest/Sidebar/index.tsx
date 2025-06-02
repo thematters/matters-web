@@ -33,6 +33,7 @@ const fragments = {
       author {
         id
         userName
+        isBlocking
         ...UserDigestMiniUser
       }
       ...ArticleDigestTitleArticle

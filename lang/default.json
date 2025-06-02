@@ -243,6 +243,9 @@
     "defaultMessage": "mentioned you in a comment at {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "2/C36c": {
+    "defaultMessage": "You do not have permission to perform this action"
+  },
   "202PEj": {
     "defaultMessage": "Confirm Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"

@@ -243,6 +243,9 @@
     "defaultMessage": "在 {commentArticle} 評論提到了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "2/C36c": {
+    "defaultMessage": "你無權進行此操作"
+  },
   "202PEj": {
     "defaultMessage": "確認 Matters ID",
     "description": "src/components/Dialogs/SetUserNameDialog/ConfirmStep.tsx"
