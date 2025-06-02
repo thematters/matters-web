@@ -40,7 +40,7 @@ type EditModeHeaderProps = {
 
   isOverRevisionLimit: boolean
 
-  onPublish: () => any
+  onPublish: () => void
 } & Omit<
   EditorSettingsDialogProps,
   | 'saving'
@@ -214,7 +214,7 @@ const EditModeHeader = ({
         const path = toPath({ page: 'articleDetail', article })
         router.push(path.href)
       }
-    } catch (e) {
+    } catch {
       toast.error({
         message: needRepublish ? (
           <FormattedMessage defaultMessage="Failed to republish" id="/wKyxw" />

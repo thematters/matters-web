@@ -11,8 +11,8 @@
 
 .wrap {
   display: flex;
-  flex-direction: column;
   flex-grow: 1;
+  flex-direction: column;
   margin-left: var(--sp16);
 
   & .name {
@@ -35,9 +35,9 @@
     flex-grow: 1;
     height: 2.75rem;
     margin-bottom: var(--sp12);
+    -webkit-line-clamp: 2;
     font-size: var(--text14);
     color: var(--color-grey-dark);
-    -webkit-line-clamp: 2;
   }
 }
 

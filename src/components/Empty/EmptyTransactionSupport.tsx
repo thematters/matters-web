@@ -1,4 +1,4 @@
-import { ReactComponent as IconDonate } from '@/public/static/icons/24px/donate.svg'
+import IconDonate from '@/public/static/icons/24px/donate.svg'
 import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyTransactionSupport = () => (

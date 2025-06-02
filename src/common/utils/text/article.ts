@@ -190,10 +190,8 @@ export const normalizeArticleTitle = (text: string, limit: number) => {
 export const optimizeEmbed = (content: string) => {
   return content
     .replace(/\<iframe /g, '<iframe loading="lazy" ')
-    .replace(
-      /<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/g,
-      (match, src, offset) => {
-        return /* html */ `
+    .replace(/<img\s[^>]*?src\s*=\s*['\"]([^'\"]*?)['\"][^>]*?>/g, (_, src) => {
+      return /* html */ `
       <picture>
         <source
           srcSet=${toSizedImageURL({
@@ -215,8 +213,7 @@ export const optimizeEmbed = (content: string) => {
         />
       </picture>
     `
-      }
-    )
+    })
 }
 
 /**

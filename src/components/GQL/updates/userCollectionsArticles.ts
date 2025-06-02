@@ -12,7 +12,7 @@ export const updateUserCollectionsArticles = ({
   userName,
   type,
 }: {
-  cache: ApolloCache<any>
+  cache: ApolloCache<object>
   articleId: string
   collection?: CreateCollectionMutation['putCollection']
   userName?: string | null
@@ -37,7 +37,7 @@ export const updateUserCollectionsArticles = ({
       return
     }
 
-    let edges = data.user.collections.edges
+    const edges = data.user.collections.edges
 
     switch (type) {
       case 'addCollection':

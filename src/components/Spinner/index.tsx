@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { ReactComponent as IconSpinner } from '@/public/static/icons/24px/spinner.svg'
+import IconSpinner from '@/public/static/icons/24px/spinner.svg'
 import { TEST_ID } from '~/common/enums'
 import { Icon, IconColor, IconSize } from '~/components'
 

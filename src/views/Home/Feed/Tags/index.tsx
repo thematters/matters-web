@@ -4,7 +4,7 @@ import { useContext } from 'react'
 import { analytics } from '~/common/utils'
 import { QueryError, TagDigest, ViewerContext } from '~/components'
 
-import { useTagsRecommendation } from '../../common/useTagsRecommendation'
+import { useTagsRecommendation } from '../../common'
 import SectionHeader from '../../SectionHeader'
 import styles from './styles.module.css'
 

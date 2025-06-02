@@ -14,7 +14,7 @@ export const updateUserCollectionDetail = ({
   articleId,
   type,
 }: {
-  cache: ApolloCache<any>
+  cache: ApolloCache<object>
   collectionId: string
   result?: FetchResult<AddArticlesCollectionMutation>
   articleId?: string

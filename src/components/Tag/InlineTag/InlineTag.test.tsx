@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { InlineTag } from '~/components'
 import { MOCK_TAG } from '~/stories/mocks'
 
@@ -12,7 +12,7 @@ describe('<InlineTag>', () => {
     const $name = screen.getByText(new RegExp(MOCK_TAG.content, 'i'))
     expect($name).toBeInTheDocument()
 
-    $name.click()
+    fireEvent.click($name)
     expect(handleClick).toBeCalledTimes(1)
   })
 
@@ -23,7 +23,7 @@ describe('<InlineTag>', () => {
     const $remove = screen.getByRole('button', { name: 'Remove' })
     expect($remove).toBeInTheDocument()
 
-    $remove.click()
+    fireEvent.click($remove)
     expect(onRemoveTag).toHaveBeenCalled()
   })
 })

@@ -1,4 +1,3 @@
-import _some from 'lodash/some'
 import React, { useContext, useEffect, useRef } from 'react'
 
 import { REFETCH_TAG_DETAIL_ARTICLES } from '~/common/enums'
@@ -163,7 +162,7 @@ const TagDetailArticles = ({ tag, feedType }: TagArticlesProps) => {
         eof
       >
         <List>
-          {(edges || []).map(({ node, cursor }, i) => (
+          {(edges || []).map(({ node }, i) => (
             <React.Fragment key={`${feedType}:${node.id}`}>
               <List.Item>
                 <ArticleDigestFeed

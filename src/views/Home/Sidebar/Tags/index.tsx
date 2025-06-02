@@ -1,7 +1,7 @@
 import { analytics } from '~/common/utils'
 import { ArticleTag, List, QueryError } from '~/components'
 
-import { useTagsRecommendation } from '../../common/useTagsRecommendation'
+import { useTagsRecommendation } from '../../common'
 import SectionHeader from '../../SectionHeader'
 import { TagsPlaceholder } from './Placeholders'
 import styles from './styles.module.css'

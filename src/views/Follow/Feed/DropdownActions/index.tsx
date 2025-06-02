@@ -2,7 +2,7 @@ import _isEmpty from 'lodash/isEmpty'
 import _pickBy from 'lodash/pickBy'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconUnfollow } from '@/public/static/icons/24px/unfollow.svg'
+import IconUnfollow from '@/public/static/icons/24px/unfollow.svg'
 import { Button, Dropdown, Icon, Menu } from '~/components'
 
 export interface DropdownActionsControls {

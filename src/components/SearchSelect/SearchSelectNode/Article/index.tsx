@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 
-import { ReactComponent as IconCircleCheckFill } from '@/public/static/icons/24px/circle-check-fill.svg'
-import { ReactComponent as IconCircleEmpty } from '@/public/static/icons/24px/circle-empty.svg'
+import IconCircleCheckFill from '@/public/static/icons/24px/circle-check-fill.svg'
+import IconCircleEmpty from '@/public/static/icons/24px/circle-empty.svg'
 import { TEST_ID } from '~/common/enums'
 import { ArticleDigestDropdown, Card, Icon } from '~/components'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'

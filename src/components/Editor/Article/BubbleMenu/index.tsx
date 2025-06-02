@@ -8,18 +8,18 @@ import { Node } from 'prosemirror-model'
 import { useRef, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
-import { ReactComponent as IconEditorBold } from '@/public/static/icons/24px/editor-bold.svg'
-import { ReactComponent as IconEditorCode } from '@/public/static/icons/24px/editor-code.svg'
-import { ReactComponent as IconEditorH2 } from '@/public/static/icons/24px/editor-h2.svg'
-import { ReactComponent as IconEditorH3 } from '@/public/static/icons/24px/editor-h3.svg'
-import { ReactComponent as IconEditorLink } from '@/public/static/icons/24px/editor-link.svg'
-import { ReactComponent as IconEditorOl } from '@/public/static/icons/24px/editor-ol.svg'
-import { ReactComponent as IconEditorQuote } from '@/public/static/icons/24px/editor-quote.svg'
-import { ReactComponent as IconEditorStrike } from '@/public/static/icons/24px/editor-strike.svg'
-import { ReactComponent as IconEditorUl } from '@/public/static/icons/24px/editor-ul.svg'
-import { ReactComponent as IconEditorUnlink } from '@/public/static/icons/24px/editor-unlink.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
+import IconEditorBold from '@/public/static/icons/24px/editor-bold.svg'
+import IconEditorCode from '@/public/static/icons/24px/editor-code.svg'
+import IconEditorH2 from '@/public/static/icons/24px/editor-h2.svg'
+import IconEditorH3 from '@/public/static/icons/24px/editor-h3.svg'
+import IconEditorLink from '@/public/static/icons/24px/editor-link.svg'
+import IconEditorOl from '@/public/static/icons/24px/editor-ol.svg'
+import IconEditorQuote from '@/public/static/icons/24px/editor-quote.svg'
+import IconEditorStrike from '@/public/static/icons/24px/editor-strike.svg'
+import IconEditorUl from '@/public/static/icons/24px/editor-ul.svg'
+import IconEditorUnlink from '@/public/static/icons/24px/editor-unlink.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { KEYVALUE } from '~/common/enums'
 import { isUrl } from '~/common/utils'
 import { Icon, Media, useNativeEventListener } from '~/components'
@@ -200,7 +200,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               <button
                 type="button"
                 onClick={() => {
-                  // @ts-ignore
+                  // @ts-expect-error - The type definition for toggleHeading is incorrect
                   editor.chain().focus().toggleHeading({ level: 2 }).run()
 
                   // Manually unset bold, link if active
@@ -234,7 +234,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               <button
                 type="button"
                 onClick={() => {
-                  // @ts-ignore
+                  // @ts-expect-error - The type definition for toggleHeading is incorrect
                   editor.chain().focus().toggleHeading({ level: 3 }).run()
 
                   // Manually unset bold if active
@@ -291,10 +291,10 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {!isCommentEditor && (
               <button
                 type="button"
-                // @ts-ignore
+                // @ts-expect-error - The type definition for toggleStrike is incorrect
                 onClick={() => editor.chain().focus().toggleStrike().run()}
                 disabled={
-                  // @ts-ignore
+                  // @ts-expect-error - The type definition for toggleStrike is incorrect
                   !editor.can().chain().focus().toggleStrike().run() ||
                   editor.isActive('blockquote')
                 }
@@ -319,7 +319,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
               <button
                 type="button"
                 onClick={() =>
-                  // @ts-ignore
+                  // @ts-expect-error - The type definition for clearNodes is incorrect
                   editor.chain().focus().clearNodes().toggleCodeBlock().run()
                 }
                 disabled={editor.isActive('codeBlock')}
@@ -342,7 +342,6 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {/* Quote */}
             <button
               type="button"
-              // @ts-ignore
               onClick={() =>
                 editor.chain().focus().clearNodes().toggleBlockquote().run()
               }
@@ -366,7 +365,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {!isCommentEditor && (
               <button
                 type="button"
-                // @ts-ignore
+                // @ts-expect-error - The type definition for toggleBulletList is incorrect
                 onClick={() => editor.chain().focus().toggleBulletList().run()}
                 className={editor.isActive('bulletList') ? styles.active : ''}
                 title={intl.formatMessage({
@@ -388,7 +387,7 @@ export const BubbleMenu: React.FC<BubbleMenuProps> = ({
             {!isCommentEditor && (
               <button
                 type="button"
-                // @ts-ignore
+                // @ts-expect-error - The type definition for toggleOrderedList is incorrect
                 onClick={() => editor.chain().focus().toggleOrderedList().run()}
                 className={editor.isActive('orderedList') ? styles.active : ''}
                 title={intl.formatMessage({

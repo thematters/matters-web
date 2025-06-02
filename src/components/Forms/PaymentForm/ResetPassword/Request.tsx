@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useState } from 'react'
@@ -28,8 +29,8 @@ import styles from './styles.module.css'
 
 interface FormProps {
   defaultEmail: string
-  submitCallback?: (params: any) => void
-  closeDialog?: () => any
+  submitCallback?: (params: { email: string; codeId: string }) => void
+  closeDialog?: () => void
   back?: () => void
 }
 
@@ -95,7 +96,7 @@ const Request: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         codes.forEach((code) => {
           if (code.includes('CODE_')) {
             let m = intl.formatMessage(messages[code])

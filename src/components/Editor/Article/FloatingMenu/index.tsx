@@ -6,15 +6,15 @@ import classNames from 'classnames'
 import { useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconEditorAdd } from '@/public/static/icons/editor-add.svg'
-import { ReactComponent as IconEditorCode } from '@/public/static/icons/editor-code.svg'
-import { ReactComponent as IconEditorDivider } from '@/public/static/icons/editor-divider.svg'
-import { ReactComponent as IconEditorH2 } from '@/public/static/icons/editor-h2.svg'
-import { ReactComponent as IconEditorH3 } from '@/public/static/icons/editor-h3.svg'
-import { ReactComponent as IconEditorOl } from '@/public/static/icons/editor-ol.svg'
-import { ReactComponent as IconEditorQuote } from '@/public/static/icons/editor-quote.svg'
-import { ReactComponent as IconEditorUl } from '@/public/static/icons/editor-ul.svg'
-import { ReactComponent as IconEditorVideo } from '@/public/static/icons/editor-video.svg'
+import IconEditorAdd from '@/public/static/icons/editor-add.svg'
+import IconEditorCode from '@/public/static/icons/editor-code.svg'
+import IconEditorDivider from '@/public/static/icons/editor-divider.svg'
+import IconEditorH2 from '@/public/static/icons/editor-h2.svg'
+import IconEditorH3 from '@/public/static/icons/editor-h3.svg'
+import IconEditorOl from '@/public/static/icons/editor-ol.svg'
+import IconEditorQuote from '@/public/static/icons/editor-quote.svg'
+import IconEditorUl from '@/public/static/icons/editor-ul.svg'
+import IconEditorVideo from '@/public/static/icons/editor-video.svg'
 import { BREAKPOINTS } from '~/common/enums'
 import { Icon, Tooltip, useMediaQuery } from '~/components'
 import { Media } from '~/components/Media'
@@ -174,7 +174,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               >
                 <button
                   onClick={() => {
-                    // @ts-ignore
+                    // @ts-expect-error - The type definition for toggleHeading is incorrect
                     editor.chain().focus().toggleHeading({ level: 2 }).run()
                     setExpand(false)
                   }}
@@ -201,7 +201,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               >
                 <button
                   onClick={() => {
-                    // @ts-ignore
+                    // @ts-expect-error - The type definition for toggleHeading is incorrect
                     editor.chain().focus().toggleHeading({ level: 3 }).run()
                     setExpand(false)
                   }}
@@ -228,7 +228,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               >
                 <button
                   onClick={() => {
-                    // @ts-ignore
+                    // @ts-expect-error - The type definition for toggleBulletList is incorrect
                     editor.chain().focus().toggleBulletList().run()
                     setExpand(false)
                   }}
@@ -255,7 +255,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               >
                 <button
                   onClick={() => {
-                    // @ts-ignore
+                    // @ts-expect-error - The type definition for toggleOrderedList is incorrect
                     editor.chain().focus().toggleOrderedList().run()
                     setExpand(false)
                   }}
@@ -349,7 +349,7 @@ export const FloatingMenu: React.FC<FloatingMenuProps> = ({
               disabled={!isMdUp}
             >
               <button
-                onClick={(e) => {
+                onClick={() => {
                   editor.chain().focus().setHorizontalRule().run()
                   setExpand(false)
                 }}

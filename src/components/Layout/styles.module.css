@@ -20,10 +20,9 @@
 .oneColumnLayout {
   /* stylelint-disable-next-line property-no-unknown */
   composes: layoutbase;
-  grid-template-columns: minmax(0, 1fr) minmax(0, var(--content-max-width)) minmax(
-      0,
-      1fr
-    );
+  grid-template-columns:
+    minmax(0, 1fr) minmax(0, var(--content-max-width))
+    minmax(0, 1fr);
 
   & .main {
     grid-column: main;
@@ -121,7 +120,9 @@
 
     @media (--md-up) {
       grid-template-areas: 'left content right';
-      grid-template-columns: 6.125rem minmax(0, var(--content-max-width)) 16.5rem;
+      grid-template-columns:
+        6.125rem minmax(0, var(--content-max-width))
+        16.5rem;
       grid-column-gap: 3rem;
     }
   }
@@ -172,7 +173,7 @@
     flex-direction: column;
 
     & .top {
-      & :global(> *) {
+      & > :global(*) {
         margin-top: var(--sp32);
 
         &:first-child {

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useContext } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconCheck } from '@/public/static/icons/24px/check.svg'
+import IconCheck from '@/public/static/icons/24px/check.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,
@@ -13,9 +13,11 @@ import {
 import { toPath } from '~/common/utils'
 import {
   Button,
+  ButtonBgColor,
   Icon,
   LanguageContext,
   TextIcon,
+  TextIconColor,
   toast,
   useMutation,
   useRoute,
@@ -95,9 +97,15 @@ const ApplyCampaignButton = ({
     const isLateSucceeded = !isAppliedDuringPeriod && isSucceeded
 
     return {
-      bgColor: primary ? 'green' : undefined,
-      borderColor: primary ? 'green' : isLateSucceeded ? 'grey' : 'green',
-      textColor: primary ? 'white' : isLateSucceeded ? 'grey' : 'green',
+      bgColor: (primary ? 'green' : undefined) as ButtonBgColor,
+      borderColor:
+        primary || isLateSucceeded
+          ? 'green'
+          : ((isLateSucceeded ? 'grey' : 'green') as ButtonBgColor),
+      textColor:
+        primary || isLateSucceeded
+          ? 'white'
+          : ((isLateSucceeded ? 'grey' : 'green') as TextIconColor),
       disabled:
         isPending ||
         !isApplicationStarted ||
@@ -105,7 +113,9 @@ const ApplyCampaignButton = ({
     }
   }
 
-  const getStageName = (stage: any) => {
+  const getStageName = (
+    stage: ApplyCampaignPublicFragment['stages'][number]
+  ) => {
     if (lang === 'zh_hans') return stage.nameZhHans
     if (lang === 'zh_hant') return stage.nameZhHant
     return stage.nameEn
@@ -151,7 +161,18 @@ const ApplyCampaignButton = ({
     }
   }
 
-  const renderButton = (text: React.ReactNode, props: any = {}) => {
+  const renderButton = (
+    text: React.ReactNode,
+    props: {
+      customClick?: () => void
+      customIcon?: React.ReactNode
+      disabled?: boolean
+      borderColor?: ButtonBgColor
+      bgColor?: ButtonBgColor
+      textColor?: TextIconColor
+      icon?: React.ReactNode
+    } = {}
+  ) => {
     const { bgColor, borderColor, textColor, disabled } = getButtonAppearance()
     const showCheckIcon = isSucceeded && !props.customIcon
     const buttonProps = {
@@ -253,7 +274,7 @@ const ApplyCampaignButton = ({
           description: 'src/views/CampaignDetail/Apply/Button/index.tsx',
         },
         {
-          dayName: getStageName(selectedStage),
+          dayName: getStageName(selectedStage!),
         }
       ),
       {

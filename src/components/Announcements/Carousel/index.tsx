@@ -27,7 +27,7 @@ type CarouselProps = {
 const Carousel = ({ items }: CarouselProps) => {
   const { lang } = useContext(LanguageContext)
   const [dot, setDot] = useState(0)
-  const [, setSnaps] = useState<any[]>([])
+  const [, setSnaps] = useState<number[]>([])
   const [carousel, carouselApi] = useEmblaCarousel({
     loop: true,
     skipSnaps: false,
@@ -149,7 +149,7 @@ const Carousel = ({ items }: CarouselProps) => {
                 const url = new URL(originalLink)
                 url.hostname = window.location.hostname
                 itemLink = url.toString()
-              } catch (e) {
+              } catch {
                 console.warn(`Unable to parse URL: ${originalLink}`)
               }
             }

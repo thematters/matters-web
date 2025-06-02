@@ -86,7 +86,6 @@ const SearchingArea: React.FC<SearchingAreaProps> = ({
 
   createTag,
   inviteEmail,
-  autoFocus,
 }) => {
   const viewer = useContext(ViewerContext)
 

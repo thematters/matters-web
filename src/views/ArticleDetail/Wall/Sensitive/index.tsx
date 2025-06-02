@@ -8,13 +8,11 @@ import styles from './styles.module.css'
 
 interface SensitiveWallProps {
   sensitiveByAuthor: boolean
-  sensitiveByAdmin: boolean
   expandAll: () => void
 }
 
 const SensitiveWall = ({
   sensitiveByAuthor,
-  sensitiveByAdmin,
   expandAll,
 }: SensitiveWallProps) => {
   const style = {

@@ -24,10 +24,10 @@
   & .title {
     @mixin line-clamp;
 
+    -webkit-line-clamp: 2;
     font-size: var(--font-size-base);
     font-weight: var(--font-medium);
     line-height: 1.5rem;
-    -webkit-line-clamp: 2;
   }
 }
 
@@ -44,10 +44,10 @@ p.articleCount,
 .description {
   @mixin line-clamp;
 
+  -webkit-line-clamp: 3;
   font-size: var(--text14);
   line-height: 1.375rem;
   color: var(--color-grey-dark);
-  -webkit-line-clamp: 3;
 }
 
 p.articleCount {

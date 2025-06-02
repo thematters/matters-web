@@ -36,7 +36,7 @@ import Root from '~/components/Root'
 
 type AppOwnProps = {
   apolloClient?: ApolloClient<NormalizedCacheObject>
-  apolloState?: {}
+  apolloState?: object
   headers?: IncomingHttpHeaders
 }
 
@@ -105,7 +105,7 @@ MattersApp.getInitialProps = async (
 
   const apolloState = apolloClient.cache.extract()
 
-  // @ts-ignore
+  // @ts-expect-error toJSON is not defined in the ApolloClient type
   apolloClient.toJSON = () => null
 
   return {

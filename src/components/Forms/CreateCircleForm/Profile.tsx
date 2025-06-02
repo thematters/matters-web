@@ -1,10 +1,11 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
 import { useRouter } from 'next/router'
-import { useState } from 'react'
+import { useId, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import CIRCLE_COVER from '@/public/static/images/circle-cover.svg'
+import IMAGE_CIRCLE_COVER from '@/public/static/images/circle-cover.svg?url'
 import {
   ASSET_TYPE,
   ENTITY_TYPE,
@@ -60,7 +61,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
   })
   const isInPage = purpose === 'page'
   const isCreate = type === 'create'
-  const formId = 'edit-circle-profile-form'
+  const formId = useId()
   const intl = useIntl()
 
   const {
@@ -130,7 +131,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         setFieldError('description', intl.formatMessage(messages[codes[0]]))
       }
     },
@@ -145,7 +146,7 @@ const Init: React.FC<FormProps> = ({ circle, type, purpose, closeDialog }) => {
           type="circle"
           assetType={ASSET_TYPE.circleCover}
           cover={circle.cover}
-          fallbackCover={CIRCLE_COVER}
+          fallbackCover={IMAGE_CIRCLE_COVER.src}
           inEditor
           onUploaded={(assetId) => setFieldValue('cover', assetId)}
           onUploadStart={() => setCoverLoading(true)}

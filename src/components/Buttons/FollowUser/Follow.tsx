@@ -1,4 +1,3 @@
-import _get from 'lodash/get'
 import _isNil from 'lodash/isNil'
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'

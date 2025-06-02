@@ -32,16 +32,19 @@ const Feed = ({ tag, onClick }: TagDigestFeedProps) => {
   const numArticles = abbr(tag.numArticles, 1)
 
   return (
-    <Link {...path} legacyBehavior onClick={onClick}>
-      <a className={styles.tag} data-test-id={TEST_ID.DIGEST_TAG_FEED}>
-        <span className={styles.name}>{tag.content}</span>&nbsp;
-        <span
-          className={styles.nums}
-          data-test-id={TEST_ID.DIGEST_TAG_FEED_NUM_ARTICLES}
-        >
-          ({numArticles})
-        </span>
-      </a>
+    <Link
+      {...path}
+      className={styles.tag}
+      data-test-id={TEST_ID.DIGEST_TAG_FEED}
+      onClick={onClick}
+    >
+      <span className={styles.name}>{tag.content}</span>&nbsp;
+      <span
+        className={styles.nums}
+        data-test-id={TEST_ID.DIGEST_TAG_FEED_NUM_ARTICLES}
+      >
+        ({numArticles})
+      </span>
     </Link>
   )
 }

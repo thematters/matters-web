@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
 import { analytics, mergeConnections, stripSpaces } from '~/common/utils'
 import {
   AddCollectionDialog,
@@ -162,7 +162,7 @@ const UserCollections = () => {
           eof
         >
           <List>
-            {edges.map(({ node, cursor }, i) => (
+            {edges.map(({ node }, i) => (
               <List.Item key={node.id}>
                 <CollectionDigestFeed
                   collection={node}

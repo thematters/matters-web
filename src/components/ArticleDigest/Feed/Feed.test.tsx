@@ -26,6 +26,12 @@ describe('ArticleDigest.Feed', () => {
       const author = screen.getByText(MOCK_ARTILCE.author.displayName)
       expect(author).toBeInTheDocument()
 
+      // click title to navigate to article detail page
+      const $title = screen.getByRole('heading', { name: MOCK_ARTILCE.title })
+      expect($title).toBeInTheDocument()
+      fireEvent.click($title)
+      expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
+
       const cover = screen.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED_COVER)
       expect(cover).toBeInTheDocument()
     })
@@ -45,6 +51,19 @@ describe('ArticleDigest.Feed', () => {
         screen.getByText(MOCK_ARTILCE.author.displayName)
       ).toHaveTextContent(MOCK_ARTILCE.author.displayName)
     })
+
+    // click summary to navigate to article detail page
+    const $summary = screen.getByText(MOCK_ARTILCE.summary)
+    expect($summary).toBeInTheDocument()
+    fireEvent.click($summary)
+    expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
+
+    mockRouter.back()
+
+    // click cover to navigate to article detail page
+    const $cover = screen.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED_COVER)
+    expect($cover).toBeInTheDocument()
+    fireEvent.click($cover)
   })
 
   describe('Component Variations', () => {

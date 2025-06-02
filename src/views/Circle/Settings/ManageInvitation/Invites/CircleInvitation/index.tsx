@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import { ReactComponent as IconInfo } from '@/public/static/icons/24px/information.svg'
+import IconInfo from '@/public/static/icons/24px/information.svg'
 import {
   Card,
   Icon,

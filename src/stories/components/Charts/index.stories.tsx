@@ -1,20 +1,24 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
-
-import { StackedAreaChart } from '~/components'
 
 import Charts from './Charts'
 
-export default {
+const meta = {
   title: 'Components/Charts',
-  component: StackedAreaChart,
-} as ComponentMeta<typeof StackedAreaChart>
+  component: Charts,
+  decorators: [
+    (Story) => (
+      <MockedProvider>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
+} satisfies Meta<typeof Charts>
 
-const Template: ComponentStory<typeof StackedAreaChart> = () => (
-  <MockedProvider>
-    <Charts />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const All = Template.bind({})
+export const All: Story = {
+  args: {},
+}

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconBook } from '@/public/static/icons/24px/book.svg'
+import IconBook from '@/public/static/icons/24px/book.svg'
 import {
   Dialog,
   Icon,

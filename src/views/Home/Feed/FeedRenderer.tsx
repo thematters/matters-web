@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import React from 'react'
 import { useIntl } from 'react-intl'
 
@@ -12,23 +13,29 @@ import {
   QueryError,
 } from '~/components'
 
-import { FeedType } from '../index'
+import type { MixedFeedArticleEdge } from '../common/useMixedFeed'
+import type { FeedType } from './'
 
 interface FeedRendererProps {
   loading: boolean
-  error: any
-  edges: any[] | undefined
-  pageInfo: any
-  loadMore: () => Promise<any>
-  feedType: FeedType
+  error?: ApolloError
+  edges: MixedFeedArticleEdge[]
+  pageInfo?: {
+    __typename?: 'PageInfo'
+    startCursor?: string | null
+    endCursor?: string | null
+    hasNextPage: boolean
+  }
+  loadMore?: () => Promise<{ count: number } | undefined>
+  feedType: FeedType | 'channel'
   renderHeader?: () => React.ReactNode
   renderCards?: (
-    edges: any[],
+    edges: MixedFeedArticleEdge[],
     numOfCards: number,
     channelId?: string
   ) => React.ReactNode
   emptyCustomOption?: React.ReactNode
-  itemCustomProps?: Record<string, any>
+  itemCustomProps?: Record<string, unknown>
   numOfCards?: number
   channelId?: string
 }
@@ -83,7 +90,7 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
   const handleLoadMore = async () => {
     if (loading) return
 
-    const result = await loadMore()
+    const result = await loadMore?.()
 
     if (result) {
       analytics.trackEvent('load_more', {
@@ -128,7 +135,9 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
                       location: i,
                       id: edge.node.id,
                       rootId: channelId,
-                      note: { pinned: edge.pinned },
+                      ...(edge.__typename === 'ChannelArticleEdge' && {
+                        note: { pinned: edge.pinned },
+                      }),
                     })
                   }
                   onClickAuthor={() => {
@@ -138,12 +147,18 @@ const FeedRenderer: React.FC<FeedRendererProps> = ({
                       location: i,
                       id: edge.node.author.id,
                       rootId: channelId,
-                      note: { pinned: edge.pinned },
+                      ...(edge.__typename === 'ChannelArticleEdge' && {
+                        note: { pinned: edge.pinned },
+                      }),
                     })
                   }}
                   isFirstFold={isFirstFold}
                   channelId={channelId}
-                  pinned={edge.pinned}
+                  pinned={
+                    edge.__typename === 'ChannelArticleEdge'
+                      ? edge.pinned
+                      : undefined
+                  }
                   {...itemCustomProps}
                 />
                 <CardExposureTracker

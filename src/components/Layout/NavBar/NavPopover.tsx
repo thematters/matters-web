@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
 import { PATHS } from '~/common/enums'
 import { Card } from '~/components'
 import { Icon } from '~/components/Icon'

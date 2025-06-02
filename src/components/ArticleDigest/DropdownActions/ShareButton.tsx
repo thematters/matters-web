@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconShare } from '@/public/static/icons/24px/share.svg'
+import IconShare from '@/public/static/icons/24px/share.svg'
 import type { ClickButtonProp as TrackEventProps } from '~/common/utils'
 import { analytics } from '~/common/utils'
 import { Icon, Menu } from '~/components'

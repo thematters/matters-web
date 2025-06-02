@@ -1,23 +1,29 @@
 import { MockedProvider } from '@apollo/client/testing'
-import { ComponentMeta, ComponentStory } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import { ArticleDigestArchived } from '~/components'
+import { ArticleState } from '~/gql/graphql'
 
 import { MOCK_ARTILCE } from '../../mocks'
 
-export default {
+const meta = {
   title: 'Components/ArticleDigest/Archive',
   component: ArticleDigestArchived,
-} as ComponentMeta<typeof ArticleDigestArchived>
+  decorators: [
+    (Story) => (
+      <MockedProvider>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
+} satisfies Meta<typeof ArticleDigestArchived>
 
-const Template: ComponentStory<typeof ArticleDigestArchived> = (args) => (
-  <MockedProvider>
-    <ArticleDigestArchived {...args} />
-  </MockedProvider>
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default = Template.bind({})
-Default.args = {
-  article: { ...MOCK_ARTILCE, articleState: 'archived' as any },
+export const Default: Story = {
+  args: {
+    article: { ...MOCK_ARTILCE, articleState: ArticleState.Archived },
+  },
 }

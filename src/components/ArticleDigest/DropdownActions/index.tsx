@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { useContext } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import IconMore from '@/public/static/icons/24px/more.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,
@@ -498,7 +498,7 @@ const DropdownActions = (props: DropdownActionsProps) => {
   }
 
   const WithShareDialog = withDialog<Omit<ShareDialogProps, 'children'>>(
-    BaseDropdownActions,
+    BaseDropdownActions as React.ComponentType<object>,
     ShareDialog,
     {
       title: article.author.displayName
@@ -563,7 +563,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
     Omit<ToggleRecommendArticleDialogProps, 'children'>
   >(
     WithSetArticleChannels,
-    DynamicToggleRecommendArticleDialog,
+    DynamicToggleRecommendArticleDialog as React.ComponentType<
+      Omit<ToggleRecommendArticleDialogProps, 'children'> & {
+        children: (props: { openDialog: () => void }) => React.ReactNode
+      }
+    >,
     { article },
     ({ openDialog }) => ({
       openToggleRecommendArticleDialog: openDialog,
@@ -574,7 +578,11 @@ const DropdownActions = (props: DropdownActionsProps) => {
     Omit<ToggleRestrictUserDialogProps, 'children'>
   >(
     WithToggleRecommendArticle,
-    DynamicToggleRestrictUserDialog,
+    DynamicToggleRestrictUserDialog as React.ComponentType<
+      Omit<ToggleRestrictUserDialogProps, 'children'> & {
+        children: (props: { openDialog: () => void }) => React.ReactNode
+      }
+    >,
     { id: article.author.id, userName: article.author.userName! },
     ({ openDialog }) => ({
       openToggleRestrictUserDialog: openDialog,

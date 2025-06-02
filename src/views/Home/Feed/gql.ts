@@ -56,19 +56,6 @@ const channelArticleConnectionFragment = gql`
 `
 
 export const FEED_ARTICLES_PUBLIC = {
-  hottest: gql`
-    query HottestFeedPublic($after: String) {
-      viewer {
-        id
-        recommendation {
-          feed: hottest(input: { first: 20, after: $after }) {
-            ...FeedArticleConnection
-          }
-        }
-      }
-    }
-    ${feedFragment}
-  `,
   newest: gql`
     query NewestFeedPublic($after: String) {
       viewer {
@@ -107,13 +94,13 @@ export const FEED_ARTICLES_PUBLIC_CHANNEL = gql`
       id
       ... on TopicChannel {
         ...TopicChannelHeader
-        feed: articles(input: { first: 20, after: $after }) {
+        articles(input: { first: 20, after: $after }) {
           ...ChannelArticleConnectionFragment
         }
       }
       ... on CurationChannel {
         ...CurationChannelHeader
-        feed: articles(input: { first: 20, after: $after }) {
+        articles(input: { first: 20, after: $after }) {
           ...ChannelArticleConnectionFragment
         }
       }

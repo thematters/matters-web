@@ -66,7 +66,7 @@ const LoginCallback = () => {
             [COOKIE_TOKEN_NAME]: token,
           })
         }
-      } catch (error) {
+      } catch {
         setHasError(true)
       }
     })()

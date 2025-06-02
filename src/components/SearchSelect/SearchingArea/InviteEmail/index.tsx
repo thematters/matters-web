@@ -1,4 +1,4 @@
-import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
 import { Card, Icon, TextIcon, Translate } from '~/components'
 import { UserDigestMiniUserFragment } from '~/gql/graphql'
 

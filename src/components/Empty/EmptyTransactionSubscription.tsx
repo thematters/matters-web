@@ -1,4 +1,4 @@
-import { ReactComponent as IconCircle } from '@/public/static/icons/24px/circle.svg'
+import IconCircle from '@/public/static/icons/24px/circle.svg'
 import { Empty, Icon, Translate } from '~/components'
 
 export const EmptyTransactionSubscription = () => (

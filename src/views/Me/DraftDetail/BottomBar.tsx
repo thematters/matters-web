@@ -131,7 +131,7 @@ const EditDraftBottomBar = ({
     campaigns: selectableCampaigns,
     selectedCampaign,
     selectedStage,
-    editCampaign: (value) => editCampaign(value as any),
+    editCampaign,
   }
 
   return (
@@ -142,7 +142,6 @@ const EditDraftBottomBar = ({
     >
       {({ openDialog }) => (
         <BottomBar
-          saving={false}
           disabled={
             collectionSaving ||
             coverSaving ||

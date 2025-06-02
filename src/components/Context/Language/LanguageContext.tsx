@@ -112,7 +112,7 @@ export const LanguageProvider = ({
           },
         },
       })
-    } catch (e) {
+    } catch {
       toast.error({
         // FIXME: cannot use <FormattedMessage> here cuz it's outer of <TranslationProvider>
         message:

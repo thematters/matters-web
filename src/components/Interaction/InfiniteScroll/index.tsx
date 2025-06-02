@@ -34,7 +34,7 @@ interface Props {
   /**
    * Callback to load more entities
    */
-  loadMore: () => Promise<any>
+  loadMore: () => Promise<unknown>
 
   /**
    * A React component to act as loader
@@ -43,7 +43,7 @@ interface Props {
 
   eof?: React.ReactNode
   eofSpacingTop?: 'base' | 'xLoose'
-  scrollableAncestor?: any
+  // scrollableAncestor?: any
 }
 
 export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
@@ -52,7 +52,7 @@ export const InfiniteScroll: React.FC<React.PropsWithChildren<Props>> = ({
   loadMore,
   eof,
   eofSpacingTop,
-  scrollableAncestor,
+  // scrollableAncestor,
   children,
 }) => {
   const { isIntersecting, ref } = useIntersectionObserver()

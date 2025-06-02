@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 
-import { ReactComponent as IconLikeCoin } from '@/public/static/icons/24px/likecoin.svg'
+import IconLikeCoin from '@/public/static/icons/24px/likecoin.svg'
 import { PATHS } from '~/common/enums'
 import { formatAmount } from '~/common/utils'
 import {

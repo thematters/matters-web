@@ -164,9 +164,7 @@ export const DescendantComments = ({
           <CommentFeed
             comment={node}
             pinnedComment={pinnedComment}
-            avatarSize={24}
             hasReply
-            hasUserName
             isInCommentDetail={isInCommentDetail}
             {...props}
           />

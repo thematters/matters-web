@@ -1,6 +1,6 @@
 .coverField {
   position: relative;
-  margin: calc(var(--sp16) * -1) calc(var(--sp16) * -1);
+  margin: calc(var(--sp16) * -1);
 
   @media (--sm-up) {
     margin: 0 calc(var(--sp20) * -1);

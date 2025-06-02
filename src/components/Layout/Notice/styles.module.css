@@ -1,9 +1,9 @@
 .notice {
   position: relative;
+  visibility: visible;
   padding: var(--sp8) var(--sp16);
   font-size: var(--text14);
   font-weight: var(--font-medium);
-  visibility: visible;
   border-radius: var(--sp8);
   box-shadow: var(--shadow-light);
 

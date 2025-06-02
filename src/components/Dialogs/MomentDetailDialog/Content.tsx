@@ -73,7 +73,9 @@ const MomentDetailDialogContent = ({
 
   useEventListener(
     ADD_MOMENT_COMMENT_MENTION,
-    (payload: { [key: string]: any }) => {
+    (payload: {
+      author: { id: string; userName: string; displayName: string }
+    }) => {
       setEditing(true)
       const author = payload?.author
       const mentionElement = makeMentionElement(

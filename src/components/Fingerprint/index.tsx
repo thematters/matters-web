@@ -16,7 +16,7 @@ const Fingerprint = () => {
           storage.set(STORAGE_KEY_AGENT_HASH, hash)
         })
       }
-    } catch (error) {
+    } catch {
       // catch silently
     }
   }, [])

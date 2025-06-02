@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen, waitFor } from '~/common/utils/test'
+import { fireEvent, render, screen, waitFor } from '~/common/utils/test'
 import { MOCK_COLLECTION } from '~/stories/mocks'
 
 import DropdownActions from './'
@@ -12,7 +12,7 @@ describe('<CollectionDigest/DropdownActions>', () => {
 
     const $moreButton = screen.getByLabelText('More Actions')
     expect($moreButton).toBeInTheDocument()
-    $moreButton.click()
+    fireEvent.click($moreButton)
 
     // delete button
     const $deleteButton = screen.getByRole('menuitem', {
@@ -29,10 +29,10 @@ describe('<CollectionDigest/DropdownActions>', () => {
       name: 'Edit collection',
     })
     expect($editButton).toBeInTheDocument()
-    $editButton.click()
+    fireEvent.click($editButton)
     const $editDialog = screen.getByTestId(TEST_ID.DIALOG_EDIT_COLLECTION)
     expect($editDialog).toBeInTheDocument()
-    screen.getByRole('button', { name: 'Close' }).click()
+    fireEvent.click(screen.getByRole('button', { name: 'Close' }))
     await waitFor(() => {
       expect(
         screen.queryByRole('button', { name: 'Close' })

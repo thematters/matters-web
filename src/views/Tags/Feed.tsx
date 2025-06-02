@@ -1,5 +1,3 @@
-import _get from 'lodash/get'
-
 import { analytics, mergeConnections } from '~/common/utils'
 import {
   EmptyTag,

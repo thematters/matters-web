@@ -1,13 +1,13 @@
 import { useQuery } from '@apollo/client'
+import { waitForTransactionReceipt } from '@wagmi/core'
 import gql from 'graphql-tag'
 import _get from 'lodash/get'
 import { useContext, useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { parseUnits } from 'viem'
-import { useAccount, useContractWrite } from 'wagmi'
-import { waitForTransaction } from 'wagmi/actions'
+import { useAccount, useWriteContract } from 'wagmi'
 
-import { ReactComponent as IconCircleTimes } from '@/public/static/icons/24px/circle-times.svg'
+import IconCircleTimes from '@/public/static/icons/24px/circle-times.svg'
 import {
   CHAIN,
   contract,
@@ -19,6 +19,7 @@ import {
   CurationVaultABI,
   fromGlobalId,
   toCurationVaultUID,
+  wagmiConfig,
 } from '~/common/utils'
 import {
   Dialog,
@@ -84,7 +85,6 @@ const OthersProcessingForm: React.FC<Props> = ({
   txId,
   prevStep,
   nextStep,
-  closeDialog,
   windowRef,
 }) => {
   const { data, error, startPolling, stopPolling } =
@@ -207,9 +207,7 @@ const USDTProcessingForm: React.FC<Props> = ({
   targetId,
   article,
   nextStep,
-  closeDialog,
   switchToConfirm,
-  switchToCurrencyChoice,
 }) => {
   const [payTo] = useMutation<PayToMutation>(PAY_TO)
   const viewer = useContext(ViewerContext)
@@ -232,43 +230,46 @@ const USDTProcessingForm: React.FC<Props> = ({
     : window.location.href
 
   const {
-    data: vaultData,
+    writeContract: curateVault,
+    data: txHashVault,
     error: vaultError,
     isError: isVaultError,
-    write: curateVault,
-  } = useContractWrite({
-    address: contract.Optimism.curationVaultAddress,
-    abi: CurationVaultABI,
-    functionName: 'curate',
-    args: [
-      toCurationVaultUID(fromGlobalId(recipient.id).id),
-      contract.Optimism.tokenAddress,
-      normalizedAmount,
-      uri,
-    ],
-  })
-
+  } = useWriteContract()
   const {
-    data: curationData,
+    writeContract: curateDirect,
+    data: txHashDirect,
     error: curationError,
     isError: isCurationError,
-    write: curateDirect,
-  } = useContractWrite({
-    address: contract.Optimism.curationAddress,
-    abi: CurationABI,
-    functionName: 'curate',
-    args: [
-      recipient.info.ethAddress as `0x${string}`,
-      contract.Optimism.tokenAddress,
-      normalizedAmount,
-      uri,
-    ],
-  })
+  } = useWriteContract()
 
-  const data = useCurationVault ? vaultData : curationData
   const error = useCurationVault ? vaultError : curationError
   const isError = useCurationVault ? isVaultError : isCurationError
-  const curate = useCurationVault ? curateVault : curateDirect
+  const curate = useCurationVault
+    ? () =>
+        curateVault({
+          address: contract.Optimism.curationVaultAddress,
+          abi: CurationVaultABI,
+          functionName: 'curate',
+          args: [
+            toCurationVaultUID(fromGlobalId(recipient.id).id),
+            contract.Optimism.tokenAddress,
+            normalizedAmount,
+            uri,
+          ],
+        })
+    : () =>
+        curateDirect({
+          address: contract.Optimism.curationAddress,
+          abi: CurationABI,
+          functionName: 'curate',
+          args: [
+            recipient.info.ethAddress as `0x${string}`,
+            contract.Optimism.tokenAddress,
+            normalizedAmount,
+            uri,
+          ],
+        })
+  const txHash = useCurationVault ? txHashVault : txHashDirect
 
   const payToData = {
     amount,
@@ -293,7 +294,7 @@ const USDTProcessingForm: React.FC<Props> = ({
   }
 
   const sendPayTo = async () => {
-    if (!data) {
+    if (!txHash) {
       return
     }
 
@@ -301,7 +302,7 @@ const USDTProcessingForm: React.FC<Props> = ({
     await payTo({
       variables: {
         ...payToData,
-        txHash: data.hash,
+        txHash,
         id: draftTxId,
       },
       update: (cache, result) => {
@@ -316,11 +317,11 @@ const USDTProcessingForm: React.FC<Props> = ({
       },
     })
 
-    await waitForTransaction({ hash: data.hash })
+    await waitForTransactionReceipt(wagmiConfig, { hash: txHash })
 
     window.dispatchEvent(
       new CustomEvent(SUPPORT_SUCCESS_USDT_VISITOR, {
-        detail: { chain: CHAIN.OPTIMISM, txHash: data.hash },
+        detail: { chain: CHAIN.OPTIMISM, txHash },
       })
     )
 
@@ -337,18 +338,18 @@ const USDTProcessingForm: React.FC<Props> = ({
   // trigger payTo mutation
   useEffect(() => {
     sendPayTo()
-  }, [data])
+  }, [txHash])
 
   // error handling
   useEffect(() => {
-    const errorName = _get(error, 'cause.name')
-    const reason = _get(error, 'cause.reason')
-    if (error && errorName === 'UserRejectedRequestError') {
+    const reason = error?.message
+
+    if (reason?.includes('User rejected the request')) {
       switchToConfirm()
       return
     }
 
-    if (error && reason === 'ERC20: transfer amount exceeds balance') {
+    if (reason === 'ERC20: transfer amount exceeds balance') {
       setIsInSufficientError(true)
     }
   }, [error])

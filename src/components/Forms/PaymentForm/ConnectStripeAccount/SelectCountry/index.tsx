@@ -50,7 +50,6 @@ const SelectCountry = ({ country, onChange }: Props) => {
 
   return (
     <Form.Select<string>
-      name="select-country"
       label={
         <Translate
           zh_hant="選擇你的提現帳號的國家地區"

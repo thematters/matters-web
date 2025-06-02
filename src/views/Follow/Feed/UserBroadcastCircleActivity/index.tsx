@@ -6,7 +6,6 @@ import FeedHead from '../FollowingFeedHead'
 import { fragments } from './gql'
 
 const UserBroadcastCircleActivity = ({
-  actor,
   nodeComment: node,
   targetCircle: target,
   createdAt,

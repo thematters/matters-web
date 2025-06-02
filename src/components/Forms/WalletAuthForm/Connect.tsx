@@ -1,13 +1,13 @@
+import { ApolloError } from '@apollo/client'
 import { useFormik } from 'formik'
-import _pickBy from 'lodash/pickBy'
 import { useContext, useEffect, useState } from 'react'
 import baseToast from 'react-hot-toast'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useAccount, useDisconnect, useSignMessage } from 'wagmi'
 
-import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
-import { ReactComponent as IconMetaMask } from '@/public/static/icons/24px/metamask.svg'
-import { ReactComponent as IconWalletConnect } from '@/public/static/icons/24px/walletconnect.svg'
+import IconLeft from '@/public/static/icons/24px/left.svg'
+import IconMetaMask from '@/public/static/icons/24px/metamask.svg'
+import IconWalletConnect from '@/public/static/icons/24px/walletconnect.svg'
 import {
   COOKIE_LANGUAGE,
   COOKIE_TOKEN_NAME,
@@ -188,7 +188,7 @@ const Connect: React.FC<FormProps> = ({
           signature = await signMessageAsync({
             message: signingMessage.signingMessage,
           })
-        } catch (err) {
+        } catch {
           setFieldError(
             'address',
             WALLET_ERROR_MESSAGES[lang].userRejectedSignMessage
@@ -262,16 +262,20 @@ const Connect: React.FC<FormProps> = ({
           }
         }
       } catch (error) {
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         codes.forEach((code) => {
           if (code.includes('CODE_')) {
             setFieldError('code', intl.formatMessage(messages[code]))
           } else if (code.includes(ERROR_CODES.CRYPTO_WALLET_EXISTS)) {
             disconnect()
-            !!setHasWalletExist && setHasWalletExist()
+            if (setHasWalletExist) {
+              setHasWalletExist()
+            }
           } else if (code.includes(ERROR_CODES.FORBIDDEN_BY_STATE)) {
             disconnect()
-            !!setUnavailable && setUnavailable()
+            if (setUnavailable) {
+              setUnavailable()
+            }
           } else {
             disconnect()
             setFieldError('address', intl.formatMessage(messages[code]))

@@ -3,9 +3,9 @@ import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { arrayMove, List as DnDList } from 'react-movable'
 
-import { ReactComponent as IconDrag } from '@/public/static/icons/24px/drag.svg'
-import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
-import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
+import IconDrag from '@/public/static/icons/24px/drag.svg'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
+import IconDot from '@/public/static/icons/dot.svg'
 import { MAX_COLLECTION_ARTICLES_COUNT } from '~/common/enums'
 import { analytics } from '~/common/utils'
 import {
@@ -57,7 +57,7 @@ const ViewerArticles = ({ collection }: ViewerArticlesProps) => {
 
   // filter out inactive articles for local updating
   // at ArchiveArticle/Dialog.tsx
-  let articleEdges = articles.edges?.filter(
+  const articleEdges = articles.edges?.filter(
     ({ node }) => node.articleState === ArticleState.Active
   )
   const [items, setItems] = useState(articleEdges)

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconVoteDown } from '@/public/static/icons/24px/vote-down.svg'
-import { ReactComponent as IconVoteDownFill } from '@/public/static/icons/24px/vote-down-fill.svg'
+import IconVoteDown from '@/public/static/icons/24px/vote-down.svg'
+import IconVoteDownFill from '@/public/static/icons/24px/vote-down-fill.svg'
 import { Button, Icon, TextIcon, useMutation } from '~/components'
 import {
   UNVOTE_COMMENT,
@@ -82,7 +82,11 @@ const DownvoteButton = ({
         spacing={[8, 8]}
         bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
         onClick={() => {
-          onClick ? onClick() : unvote()
+          if (onClick) {
+            onClick()
+          } else {
+            unvote()
+          }
         }}
         disabled={disabled}
         aria-label={intl.formatMessage({
@@ -106,7 +110,11 @@ const DownvoteButton = ({
       spacing={[8, 8]}
       bgActiveColor={inCard ? 'greyLighterActive' : 'greyLighter'}
       onClick={() => {
-        onClick ? onClick() : downvote()
+        if (onClick) {
+          onClick()
+        } else {
+          downvote()
+        }
       }}
       disabled={disabled}
       aria-label={intl.formatMessage({

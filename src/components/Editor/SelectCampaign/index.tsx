@@ -14,7 +14,7 @@ export interface SelectCampaignProps {
   campaigns: EditorSelectCampaignFragment[]
   selectedCampaign: EditorSelectCampaignFragment | undefined
   selectedStage: string | undefined
-  editCampaign: (value?: ArticleCampaignInput) => any
+  editCampaign: (value?: ArticleCampaignInput) => void
 }
 
 export const getSelectCampaigns = ({
@@ -88,7 +88,6 @@ const SelectCampaign = ({
   return (
     <>
       <Form.Select<string | undefined>
-        name="select-campaign"
         onChange={(option) => {
           editCampaign(
             option.value !== undefined ? { campaign: option.value } : undefined
@@ -113,7 +112,6 @@ const SelectCampaign = ({
           <>
             <Spacer size="sp8" />
             <Form.Select<string | undefined>
-              name="select-stage"
               onChange={(option) => {
                 editCampaign(
                   option.value

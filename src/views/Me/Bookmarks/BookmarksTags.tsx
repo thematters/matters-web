@@ -82,7 +82,7 @@ const BaseMeBookmarksTags = () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore} eof>
       <List>
-        {edges.map(({ node, cursor }) => (
+        {edges.map(({ node }) => (
           <Fragment key={node.id}>
             {node.isFollower && (
               <List.Item key={node.id}>

@@ -52,13 +52,12 @@ const NoticeArticleTitle = ({
     }
 
     return (
-      <Link {...path}>
-        <a
-          className={styles.noticeArticleTitle}
-          data-test-id={TEST_ID.NOTICE_ARTICLE_TITLE}
-        >
-          {title}
-        </a>
+      <Link
+        {...path}
+        className={styles.noticeArticleTitle}
+        data-test-id={TEST_ID.NOTICE_ARTICLE_TITLE}
+      >
+        {title}
       </Link>
     )
   }

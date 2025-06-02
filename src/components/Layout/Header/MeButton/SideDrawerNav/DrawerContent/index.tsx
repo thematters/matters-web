@@ -1,5 +1,5 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import { useRef } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
 import { KEYVALUE } from '~/common/enums'
@@ -19,7 +19,9 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
   ...props
 }) => {
   const intl = useIntl()
-  const node: React.RefObject<any> | null = useRef(null)
+  const { visuallyHiddenProps } = useVisuallyHidden()
+
+  const node: React.RefObject<HTMLElement> | null = useRef(null)
   const closeOnClick = (event: React.MouseEvent | React.KeyboardEvent) => {
     const target = event.target as HTMLElement
     if (target?.closest && target.closest('[data-clickable], a, button')) {
@@ -43,7 +45,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
       }}
       onClick={closeOnClick}
     >
-      <VisuallyHidden>
+      <span {...visuallyHiddenProps}>
         <Button
           onClick={onDismiss}
           aria-label={intl.formatMessage({
@@ -51,7 +53,7 @@ const DrawerContent: React.FC<DrawerContentProps> = ({
             id: 'rbrahO',
           })}
         />
-      </VisuallyHidden>
+      </span>
 
       <header className={styles.header}>
         <MeDigest />

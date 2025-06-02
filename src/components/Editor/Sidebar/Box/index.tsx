@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
 import { Button, Icon, TextIcon } from '~/components'
 
 import styles from './styles.module.css'
@@ -9,7 +9,7 @@ interface BoxProps {
   icon: React.ReactNode
   title: React.ReactNode
   subtitle?: React.ReactNode
-  onClick?: () => any
+  onClick?: () => void
   disabled?: boolean
   rightButton?: React.ReactNode
   footerSpacing?: boolean

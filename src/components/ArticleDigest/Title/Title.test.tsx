@@ -1,7 +1,7 @@
 import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { ArticleDigestTitle } from '~/components'
 import { MOCK_ARTILCE } from '~/stories/mocks'
 
@@ -18,7 +18,7 @@ describe('<ArticleDigest.Title>', () => {
     })
     expect($title).toBeInTheDocument()
 
-    $title.click()
+    fireEvent.click($title)
     expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).toHaveBeenCalled()
   })
@@ -55,7 +55,7 @@ describe('<ArticleDigest.Title>', () => {
       name: MOCK_ARTILCE.title,
     })
 
-    $title.click()
+    fireEvent.click($title)
     expect(mockRouter.asPath).not.toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).not.toHaveBeenCalled()
   })

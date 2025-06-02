@@ -197,7 +197,7 @@ interface ClickFeedProp {
   id?: string
   rootId?: string
   searchKey?: string
-  note?: Record<string, any>
+  note?: Record<string, unknown>
 }
 
 /**

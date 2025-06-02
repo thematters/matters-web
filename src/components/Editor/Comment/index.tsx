@@ -26,7 +26,7 @@ import styles from './styles.module.css'
 interface Props {
   content: string
   update: (params: { content: string }) => void
-  onSubmit: () => any
+  onSubmit: () => void
   placeholder?: string
   setEditor?: (editor: Editor | null) => void
   onFocused?: () => void
@@ -61,7 +61,7 @@ const CommentEditor: React.FC<Props> = ({
   const editor = useEditor({
     editable,
     content: content || '',
-    onUpdate: async ({ editor, transaction }) => {
+    onUpdate: async ({ editor }) => {
       const content = editor.getHTML()
       update({ content })
     },
@@ -75,10 +75,14 @@ const CommentEditor: React.FC<Props> = ({
     // can be removed if editor is only used in single page
     // instead of being used in dialog
     onFocus: () => {
-      lockScroll && window.dispatchEvent(new CustomEvent(BYPASS_SCROLL_LOCK))
+      if (lockScroll) {
+        window.dispatchEvent(new CustomEvent(BYPASS_SCROLL_LOCK))
+      }
     },
     onDestroy: () => {
-      lockScroll && window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
+      if (lockScroll) {
+        window.dispatchEvent(new CustomEvent(ENBABLE_SCROLL_LOCK))
+      }
     },
     extensions: [
       CustomShortcuts.configure({

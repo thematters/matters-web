@@ -1,6 +1,6 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
@@ -65,7 +65,6 @@ type ComposedAmountInputProps = {
 const AmountOption: React.FC<AmountOptionProps> = ({
   amount,
   currency,
-  balance,
   name,
 
   fieldMsgId,
@@ -75,9 +74,10 @@ const AmountOption: React.FC<AmountOptionProps> = ({
   disabled,
   ...inputProps
 }) => {
-  const inputRef: React.RefObject<any> = useRef(null)
+  const inputRef: React.RefObject<HTMLInputElement> = useRef(null)
 
-  const fieldId = `field-${name}-${amount}`
+  const fieldId = useId()
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   const isActive = currentAmount === amount
 
@@ -102,19 +102,18 @@ const AmountOption: React.FC<AmountOptionProps> = ({
         <span className={styles.currency}>{currency}</span>
         <span className={styles.amount}>{formatAmount(amount, decimals)}</span>
 
-        <VisuallyHidden>
-          <input
-            {...inputProps}
-            aria-describedby={fieldMsgId}
-            disabled={disabled}
-            id={fieldId}
-            name={name} // share the same name for single selection
-            value={amount}
-            defaultChecked={defaultAmount === amount}
-            type="radio"
-            ref={inputRef}
-          />
-        </VisuallyHidden>
+        <input
+          {...inputProps}
+          aria-describedby={fieldMsgId}
+          disabled={disabled}
+          id={fieldId}
+          name={name} // share the same name for single selection
+          value={amount}
+          defaultChecked={defaultAmount === amount}
+          type="radio"
+          ref={inputRef}
+          {...visuallyHiddenProps}
+        />
       </label>
     </li>
   )
@@ -130,7 +129,6 @@ const ComposedAmountInput: React.FC<ComposedAmountInputProps> = ({
   error,
   hintAlign,
 
-  lang,
   customAmount,
 
   spacingTop,

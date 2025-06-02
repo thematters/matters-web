@@ -33,7 +33,6 @@ const UserWritings = () => {
   const viewer = useContext(ViewerContext)
   const { getQuery } = useRoute()
   const userName = getQuery('name')
-  const isViewer = viewer.userName === userName
   const listRef = useRef<HTMLDivElement | null>(null)
 
   /**
@@ -200,7 +199,7 @@ const UserWritings = () => {
       <>
         <CustomHead />
         <MomentForm />
-        <EmptyWork isMe={isViewer} />
+        <EmptyWork />
       </>
     )
   }

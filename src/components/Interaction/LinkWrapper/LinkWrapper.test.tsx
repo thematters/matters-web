@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import React from 'react'
 import { describe, expect, it, vi } from 'vitest'
 
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { LinkWrapper } from '~/components'
 
 describe('<LinkWrapper>', () => {
@@ -22,7 +22,7 @@ describe('<LinkWrapper>', () => {
     expect($link.tagName).toBe('A')
     expect(screen.getByText('Click me')).toBeInTheDocument()
 
-    $link.click()
+    fireEvent.click($link)
     expect(mockRouter.asPath).toContain(link)
     expect(handleClick).toHaveBeenCalled()
   })
@@ -41,7 +41,7 @@ describe('<LinkWrapper>', () => {
 
     const $content = screen.getByText('Click me')
     expect($content).toBeInTheDocument()
-    $content.click()
+    fireEvent.click($content)
     expect(mockRouter.asPath).not.toContain(link)
     expect(handleClick).not.toHaveBeenCalled()
   })

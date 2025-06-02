@@ -2,8 +2,8 @@ import classNames from 'classnames'
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
-import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
+import IconUser from '@/public/static/icons/24px/user.svg'
 import { Button, Icon } from '~/components'
 import { UserArticlesSort } from '~/gql/graphql'
 

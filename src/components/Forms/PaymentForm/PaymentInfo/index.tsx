@@ -1,6 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
+import IconCopy from '@/public/static/icons/24px/copy.svg'
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { formatAmount, truncate } from '~/common/utils'
 import {
