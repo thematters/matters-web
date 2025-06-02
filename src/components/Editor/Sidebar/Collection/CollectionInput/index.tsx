@@ -30,6 +30,47 @@ type CollectionInputProps = {
   saving?: boolean
 }
 
+type DropdownMenuProps = {
+  article: ArticleDigestDropdownArticleFragment | null
+  collection: ArticleDigestDropdownArticleFragment[]
+  onSelectArticle: () => void
+}
+
+const renderFoundArticle = (
+  article: ArticleDigestDropdownArticleFragment,
+  collection: ArticleDigestDropdownArticleFragment[],
+  onSelectArticle: () => void
+) => {
+  return (
+    <Menu.Item
+      spacing={[8, 16]}
+      bgActiveColor="greyHover"
+      onClick={onSelectArticle}
+    >
+      <ArticleDigestDropdown
+        article={article}
+        related={collection.some((a) => a.id === article.id)}
+        titleTextSize={16}
+        spacing={[0, 0]}
+        bgColor="none"
+        disabled
+      />
+    </Menu.Item>
+  )
+}
+
+const DropdownMenu = ({
+  article,
+  collection,
+  onSelectArticle,
+}: DropdownMenuProps) => {
+  if (!article) {
+    return null
+  }
+
+  return <Menu>{renderFoundArticle(article, collection, onSelectArticle)}</Menu>
+}
+
 export const CollectionInput = ({
   collection,
   onAddArticle,
@@ -42,15 +83,26 @@ export const CollectionInput = ({
   const [debouncedSearchKey] = useDebounce(searchKey, INPUT_DEBOUNCE)
   const [searchData, setSearchData] = useState<ArticleUrlQueryQuery>()
   const [searchLoading, setSearchLoading] = useState(false)
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false)
 
   const formik = useFormik<{ url: string }>({
     initialValues: { url: '' },
-    onSubmit: async (values) => {
+    onSubmit: async () => {
+      if (!searchData?.article) {
+        toast.error({
+          message: intl.formatMessage({
+            defaultMessage: 'Article does not exist',
+            id: 'eKeBF9',
+          }),
+        })
+        return
+      }
+
       await onAddArticle(
-        searchData?.article as ArticleDigestDropdownArticleFragment
+        searchData.article as ArticleDigestDropdownArticleFragment
       )
       setSearchData(undefined)
+      formik.resetForm()
+      setSearchKey('')
     },
   })
 
@@ -59,12 +111,14 @@ export const CollectionInput = ({
       setSearchData(undefined)
       setSearchLoading(true)
       const shortHash = extractShortHashFromUrl(debouncedSearchKey)
+
       try {
         const response = await client.query({
           query: ARTICLE_URL_QUERY,
           variables: { shortHash },
           fetchPolicy: 'no-cache',
         })
+
         if (response.data.article) {
           setSearchData(response.data)
         } else {
@@ -81,47 +135,40 @@ export const CollectionInput = ({
         setSearchLoading(false)
       }
     }
-    if (searchKey) {
+
+    if (debouncedSearchKey) {
       searchArticle()
     }
   }, [debouncedSearchKey])
 
-  useEffect(() => {
-    if (!searchLoading && !!searchData?.article && !saving) {
-      setIsDropdownVisible(true)
+  const handleSelectArticle = () => {
+    if (searchData?.article) {
+      formik.setFieldValue('url', searchData.article.title)
+      formik.handleSubmit()
     }
-  }, [searchLoading, searchData?.article, saving])
+  }
+
+  const isDropdownVisible = !searchLoading && !!searchData?.article && !saving
+
+  const inputPlaceholder = intl.formatMessage({
+    defaultMessage: 'Paste the link of the article you want to curate',
+    id: 'reRn/s',
+  })
+
+  const dropdownContent = (
+    <DropdownMenu
+      article={
+        searchData?.article as ArticleDigestDropdownArticleFragment | null
+      }
+      collection={collection}
+      onSelectArticle={handleSelectArticle}
+    />
+  )
 
   return (
     <Dropdown
       focusLock={false}
-      content={
-        <Menu>
-          <Menu.Item
-            spacing={[8, 16]}
-            bgActiveColor="greyHover"
-            onClick={() => {
-              formik.setFieldValue('url', searchData?.article?.title)
-              formik.handleSubmit()
-            }}
-          >
-            {searchData?.article && (
-              <ArticleDigestDropdown
-                article={
-                  searchData?.article as ArticleDigestDropdownArticleFragment
-                }
-                related={collection.some(
-                  (a) => a.id === searchData?.article?.id
-                )}
-                titleTextSize={16}
-                spacing={[0, 0]}
-                bgColor="none"
-                disabled
-              />
-            )}
-          </Menu.Item>
-        </Menu>
-      }
+      content={dropdownContent}
       placement="bottom-start"
       visible={isDropdownVisible}
     >
@@ -137,15 +184,10 @@ export const CollectionInput = ({
             type="text"
             className={styles.input}
             name="url"
-            placeholder={intl.formatMessage({
-              defaultMessage:
-                'Paste the link of the article you want to curate',
-              id: 'reRn/s',
-            })}
+            placeholder={inputPlaceholder}
             autoFocus
             value={formik.values.url}
             onChange={(e) => {
-              setIsDropdownVisible(false)
               setSearchKey(e.target.value)
               formik.handleChange(e)
             }}
@@ -154,17 +196,7 @@ export const CollectionInput = ({
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
                 e.preventDefault()
-                if (searchData?.article) {
-                  formik.setFieldValue('url', searchData?.article?.title)
-                  formik.handleSubmit()
-                } else {
-                  toast.error({
-                    message: intl.formatMessage({
-                      defaultMessage: 'Article does not exist',
-                      id: 'eKeBF9',
-                    }),
-                  })
-                }
+                formik.handleSubmit()
               }
             }}
           />
