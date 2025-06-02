@@ -13,27 +13,40 @@ import SideNav from './SideNav'
 import Spacing from './Spacing'
 import styles from './styles.module.css'
 
-export const Layout: React.FC<{ children?: React.ReactNode }> & {
+export const Layout: React.FC<{
+  header?: React.ReactNode
+  children?: React.ReactNode
+}> & {
   Main: typeof Main
   Header: typeof Header
   FixedMain: typeof FixedMain
   AuthHeader: typeof AuthHeader
   Notice: typeof Notice
-} = ({ children }) => {
+} = ({ header, children }) => {
   const { isInPath } = useRoute()
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')
+  const isInDraftDetailOptions = isInPath('ME_DRAFT_DETAIL_OPTIONS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInArticleDetailHistory = isInPath('ARTICLE_DETAIL_HISTORY')
   const isInMomentDetail = isInPath('MOMENT_DETAIL')
   const isInMomentDetailEdit = isInPath('MOMENT_DETAIL_EDIT')
 
+  const isInOneColumnLayout = isInDraftDetail
+
+  const layoutClasses = classNames({
+    [styles.container]: !isInOneColumnLayout,
+    [styles.oneColumnLayout]: isInOneColumnLayout,
+  })
+
   return (
     <>
       <Head description={null} />
 
-      <div className={styles.container}>
+      {header}
+
+      <div className={layoutClasses}>
         <main className={styles.main}>
-          {!isInArticleDetailHistory && (
+          {!isInArticleDetailHistory && !isInDraftDetail && (
             <nav role="navigation" className={styles.sidenav}>
               <section className={styles.sideNavContent}>
                 <Media greaterThan="sm">
@@ -51,7 +64,8 @@ export const Layout: React.FC<{ children?: React.ReactNode }> & {
         !isInArticleDetail &&
         !isInArticleDetailHistory &&
         !isInMomentDetail &&
-        !isInMomentDetailEdit && (
+        !isInMomentDetailEdit &&
+        !isInDraftDetailOptions && (
           <Media at="sm">
             <footer>
               <NavBar />
@@ -72,7 +86,9 @@ const Main: React.FC<React.PropsWithChildren<MainProps>> & {
 } = ({ aside, showAside = true, children }) => {
   const { isInPath } = useRoute()
   const isInEditor =
-    isInPath('ARTICLE_DETAIL_EDIT') || isInPath('ME_DRAFT_DETAIL')
+    isInPath('ARTICLE_DETAIL_EDIT') ||
+    isInPath('ME_DRAFT_DETAIL') ||
+    isInPath('ME_DRAFT_DETAIL_OPTIONS')
   const isInSettings = isInPath('SETTINGS')
   const isInArticleDetail = isInPath('ARTICLE_DETAIL')
   const isInDraftDetail = isInPath('ME_DRAFT_DETAIL')

@@ -1,6 +1,6 @@
-import { ApolloError } from '@apollo/client'
+import { ApolloError, useQuery } from '@apollo/client'
 import _uniq from 'lodash/uniq'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
 
 import { ERROR_CODES, PATHS } from '~/common/enums'
@@ -15,6 +15,9 @@ import {
   DigestRichCirclePublicFragment,
   DigestTagFragment,
   DraftAssetsQuery,
+  DraftDetailQueryQuery,
+  DraftDetailViewerQueryQuery,
+  PublishState as PublishStateType,
   SetDraftAccessMutation,
   SetDraftCanCommentMutation,
   SetDraftCollectionMutation,
@@ -28,6 +31,8 @@ import {
 
 import {
   DRAFT_ASSETS,
+  DRAFT_DETAIL,
+  DRAFT_DETAIL_VIEWER,
   SET_ACCESS,
   SET_CAMPAIGN,
   SET_CAN_COMMENT,
@@ -606,5 +611,74 @@ export const useEditDraftCampaign = () => {
     edit: async (selected?: { campaign: string; stage?: string | null }) =>
       addRequest(() => createDraftAndEdit(selected)),
     saving: saving,
+  }
+}
+
+export const EMPTY_DRAFT: DraftDetailQueryQuery['node'] = {
+  id: '',
+  title: '',
+  createdAt: new Date().toISOString(),
+  updatedAt: new Date().toISOString(),
+  publishState: PublishStateType.Unpublished,
+  content: '',
+  summary: '',
+  summaryCustomized: false,
+  __typename: 'Draft',
+  article: null,
+  cover: null,
+  assets: [],
+  tags: null,
+  collection: {
+    edges: null,
+    __typename: 'ArticleConnection',
+  },
+  access: {
+    type: ArticleAccessType.Public,
+    circle: null,
+    __typename: 'DraftAccess',
+  },
+  license: ArticleLicenseType.Cc_0,
+  requestForDonation: null,
+  replyToDonator: null,
+  sensitiveByAuthor: false,
+  iscnPublish: null,
+  canComment: true,
+  campaigns: [],
+  indentFirstLine: false,
+}
+
+export const useDraftDetail = () => {
+  const { getDraftId, isNewDraft } = useContext(DraftDetailStateContext)
+  const [initNew] = useState(isNewDraft())
+
+  const { data, loading, error } = useQuery<DraftDetailQueryQuery>(
+    DRAFT_DETAIL,
+    {
+      variables: { id: getDraftId() },
+      fetchPolicy: 'network-only',
+      skip: isNewDraft(),
+    }
+  )
+
+  const { data: viewerData, loading: viewerLoading } =
+    useQuery<DraftDetailViewerQueryQuery>(DRAFT_DETAIL_VIEWER, {
+      fetchPolicy: 'network-only',
+    })
+
+  const draft = (data?.node?.__typename === 'Draft' && data.node) || EMPTY_DRAFT
+  const ownCircles = viewerData?.viewer?.ownCircles || undefined
+  const appliedCampaigns = viewerData?.viewer?.campaigns.edges?.map(
+    (e) => e.node
+  )
+
+  return {
+    draft,
+    ownCircles,
+    appliedCampaigns,
+    loading: (loading && !initNew) || viewerLoading,
+    error,
+    isNewDraft: isNewDraft,
+    getDraftId,
+    initNew,
   }
 }

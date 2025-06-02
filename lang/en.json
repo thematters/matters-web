@@ -67,14 +67,14 @@
   "+vVZ/G": {
     "defaultMessage": "Connect"
   },
-  "//QMqf": {
-    "defaultMessage": "Enter title ..."
-  },
   "/5OvMK": {
     "defaultMessage": "liked your moment"
   },
   "/5jk3i": {
     "defaultMessage": "Circle successfully subscribed."
+  },
+  "/5yq4w": {
+    "defaultMessage": "Add up to 3 tags"
   },
   "/BQWEh": {
     "defaultMessage": "Last 1 month",
@@ -190,9 +190,6 @@
   "0zZd0T": {
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
-  "16zJ3o": {
-    "defaultMessage": "Enter summary…"
   },
   "18HJlm": {
     "defaultMessage": "Tag"
@@ -457,6 +454,9 @@
   "6+eeJ4": {
     "defaultMessage": "Lowercase letters, numbers and underscores",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "6/eKGl": {
+    "defaultMessage": "Write your story..."
   },
   "6/kgzs": {
     "defaultMessage": "Unsubscribed"
@@ -1440,6 +1440,10 @@
     "defaultMessage": "Selected activities related to you in the past 24 hours",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "Mu2Jy8": {
+    "defaultMessage": "Settings",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "Myrqtn": {
     "defaultMessage": "🎉 Thank you for support!"
   },
@@ -1459,6 +1463,9 @@
   "NCBtyI": {
     "defaultMessage": "Supports",
     "description": "src/views/Me/Transactions/index.tsx"
+  },
+  "NDV5Mq": {
+    "defaultMessage": "Options"
   },
   "NEKHMm": {
     "defaultMessage": "Email",
@@ -1749,6 +1756,9 @@
     "defaultMessage": "Payout",
     "description": "src/components/Transaction/index.tsx"
   },
+  "SeyETM": {
+    "defaultMessage": "Remove cover"
+  },
   "Sfql0+": {
     "defaultMessage": "Congratulations! You've got the Grand Badge!"
   },
@@ -2006,6 +2016,10 @@
   "XTyKFR": {
     "defaultMessage": "Adding articles to a collection helps readers find your articles."
   },
+  "XU93/I": {
+    "defaultMessage": "Content and Layout",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "XVYrS/": {
     "defaultMessage": "No followers yet"
   },
@@ -2128,6 +2142,9 @@
   "ZZ9zIR": {
     "defaultMessage": "Downvote"
   },
+  "ZgRE5H": {
+    "defaultMessage": "Select or upload a square image ( > 120×120px )"
+  },
   "ZjDH42": {
     "defaultMessage": "About Us"
   },
@@ -2186,6 +2203,9 @@
   "al5/yQ": {
     "defaultMessage": "Joined successfully"
   },
+  "ammOoM": {
+    "defaultMessage": "Select or upload a square image"
+  },
   "aqX2Bt": {
     "defaultMessage": "go to the homepage",
     "description": "src/views/Callback/UI.tsx"
@@ -2204,6 +2224,9 @@
   "b0RNGM": {
     "defaultMessage": "Your article {articleTitle} has been listed as a feature of event in 7 days. Come and view more wonderful articles!",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
+  "b6x6lm": {
+    "defaultMessage": "Enter a clear and concise title"
   },
   "b8ogKp": {
     "defaultMessage": "Add Invitation",
@@ -3168,6 +3191,9 @@
     "defaultMessage": "Verification code has been sent via email and is valid for 20 minutes.",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
   },
+  "uuLhHH": {
+    "defaultMessage": "Minimum image dimension is 120 pixels"
+  },
   "uw32VR": {
     "defaultMessage": "tutorial"
   },
@@ -3305,6 +3331,9 @@
   "wbcwKd": {
     "defaultMessage": "View All"
   },
+  "wclk7z": {
+    "defaultMessage": "Summary to help readers quickly grasp the topic"
+  },
   "wdz6Pf": {
     "defaultMessage": "Learn more",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -3352,6 +3381,9 @@
     "defaultMessage": "Article revision count reach limit",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
   },
+  "xk1AW6": {
+    "defaultMessage": "Input tags"
+  },
   "xkr+zo": {
     "defaultMessage": "Terms"
   },
@@ -3379,9 +3411,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "This operation cannot be undone, confirm archiving?"
-  },
-  "yCTXXb": {
-    "defaultMessage": "Enter content…"
   },
   "yIlC0R": {
     "defaultMessage": "No published articles yet",

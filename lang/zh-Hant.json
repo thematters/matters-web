@@ -67,14 +67,14 @@
   "+vVZ/G": {
     "defaultMessage": "綁定"
   },
-  "//QMqf": {
-    "defaultMessage": "請輸入標題…"
-  },
   "/5OvMK": {
     "defaultMessage": "喜歡你的動態"
   },
   "/5jk3i": {
     "defaultMessage": "訂閱成功！🎉"
+  },
+  "/5yq4w": {
+    "defaultMessage": "最多增加 3 個標籤"
   },
   "/BQWEh": {
     "defaultMessage": "最近 1 個月",
@@ -190,9 +190,6 @@
   "0zZd0T": {
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
-  },
-  "16zJ3o": {
-    "defaultMessage": "自定義摘要…"
   },
   "18HJlm": {
     "defaultMessage": "標籤"
@@ -457,6 +454,9 @@
   "6+eeJ4": {
     "defaultMessage": "可使用小寫英文、數字及下劃線",
     "description": "src/components/Dialogs/SetUserNameDialog/Content.tsx"
+  },
+  "6/eKGl": {
+    "defaultMessage": "寫下你的故事⋯"
   },
   "6/kgzs": {
     "defaultMessage": "退訂成功"
@@ -1440,6 +1440,10 @@
     "defaultMessage": "精選過去 24 小時與你有關的消息",
     "description": "src/views/Me/Settings/Notifications/Email.tsx"
   },
+  "Mu2Jy8": {
+    "defaultMessage": "作品設定",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "Myrqtn": {
     "defaultMessage": "🎉 感謝支持！"
   },
@@ -1459,6 +1463,9 @@
   "NCBtyI": {
     "defaultMessage": "支持",
     "description": "src/views/Me/Transactions/index.tsx"
+  },
+  "NDV5Mq": {
+    "defaultMessage": "選項"
   },
   "NEKHMm": {
     "defaultMessage": "電子郵件",
@@ -1749,6 +1756,9 @@
     "defaultMessage": "提現",
     "description": "src/components/Transaction/index.tsx"
   },
+  "SeyETM": {
+    "defaultMessage": "移除封面"
+  },
   "Sfql0+": {
     "defaultMessage": "恭喜獲得七日書大滿貫"
   },
@@ -2006,6 +2016,10 @@
   "XTyKFR": {
     "defaultMessage": "精挑細選作品，幫助讀者更容易發現優質內容"
   },
+  "XU93/I": {
+    "defaultMessage": "內容與排版",
+    "description": "src/views/Me/DraftDetail/OptionDrawer/index.tsx"
+  },
   "XVYrS/": {
     "defaultMessage": "還沒有追蹤者"
   },
@@ -2128,6 +2142,9 @@
   "ZZ9zIR": {
     "defaultMessage": "點踩"
   },
+  "ZgRE5H": {
+    "defaultMessage": "選擇或上傳大於 120×120px 正方形圖片"
+  },
   "ZjDH42": {
     "defaultMessage": "關於我們"
   },
@@ -2186,6 +2203,9 @@
   "al5/yQ": {
     "defaultMessage": "晚鳥參與通過"
   },
+  "ammOoM": {
+    "defaultMessage": "選擇或上傳正方形圖片"
+  },
   "aqX2Bt": {
     "defaultMessage": "前往首頁",
     "description": "src/views/Callback/UI.tsx"
@@ -2204,6 +2224,9 @@
   "b0RNGM": {
     "defaultMessage": "你的作品 {articleTitle} 已被列為活動精選，快來看看更多精彩好文！",
     "description": "src/components/Notice/CampaignArticleNotice/CampaignArticleFeaturedNotice.tsx"
+  },
+  "b6x6lm": {
+    "defaultMessage": "輸入簡單明瞭的標題"
   },
   "b8ogKp": {
     "defaultMessage": "新增邀請",
@@ -3168,6 +3191,9 @@
     "defaultMessage": "驗證碼已通過郵件發送，有效期為 20 分鐘",
     "description": "src/components/Forms/Verification/SendCodeButton/index.tsx"
   },
+  "uuLhHH": {
+    "defaultMessage": "圖片邊長不得小於 120 像素"
+  },
   "uw32VR": {
     "defaultMessage": "教學指南"
   },
@@ -3305,6 +3331,9 @@
   "wbcwKd": {
     "defaultMessage": "查看全部"
   },
+  "wclk7z": {
+    "defaultMessage": "摘要，讓讀者快速掌握主題"
+  },
   "wdz6Pf": {
     "defaultMessage": "瞭解更多",
     "description": "src/components/Dialogs/BillboardDialog/Content.tsx"
@@ -3352,6 +3381,9 @@
     "defaultMessage": "作品編輯次數超出上限",
     "description": "ARTICLE_REVISION_REACH_LIMIT"
   },
+  "xk1AW6": {
+    "defaultMessage": "輸入標籤"
+  },
   "xkr+zo": {
     "defaultMessage": "協議"
   },
@@ -3379,9 +3411,6 @@
   },
   "yBUiiy": {
     "defaultMessage": "操作無法撤銷，確認封存嗎？"
-  },
-  "yCTXXb": {
-    "defaultMessage": "請輸入正文…"
   },
   "yIlC0R": {
     "defaultMessage": "尚未發布作品",
