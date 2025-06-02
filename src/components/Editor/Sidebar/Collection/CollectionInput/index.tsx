@@ -91,7 +91,7 @@ export const CollectionInput = ({
   const formik = useFormik<{ url: string }>({
     initialValues: { url: '' },
     onSubmit: async () => {
-      if (!searchData?.article) {
+      if (!searchData?.article || searchData.article.state === 'archived') {
         toast.error({
           message: intl.formatMessage({
             defaultMessage: 'Article does not exist',
