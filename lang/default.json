@@ -2394,6 +2394,9 @@
   "eKVBm/": {
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {link}."
   },
+  "eKeBF9": {
+    "defaultMessage": "Article does not exist"
+  },
   "eTpiYa": {
     "defaultMessage": "No data yet."
   },

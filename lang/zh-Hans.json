@@ -2394,6 +2394,9 @@
   "eKVBm/": {
     "defaultMessage": "Optimism 是独立运行的区块链，若你在其他链上已有 USDT 货币，需要将它们转移到 Optimism 网络才能使用，详情参考{link}。"
   },
+  "eKeBF9": {
+    "defaultMessage": "作品不存在"
+  },
   "eTpiYa": {
     "defaultMessage": "尚无支持数据"
   },

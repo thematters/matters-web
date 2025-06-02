@@ -14,6 +14,7 @@ import {
   Icon,
   Menu,
   SpinnerBlock,
+  toast,
 } from '~/components'
 import { ARTICLE_URL_QUERY } from '~/components/SearchSelect/SearchingArea/gql'
 import {
@@ -41,6 +42,7 @@ export const CollectionInput = ({
   const [debouncedSearchKey] = useDebounce(searchKey, INPUT_DEBOUNCE)
   const [searchData, setSearchData] = useState<ArticleUrlQueryQuery>()
   const [searchLoading, setSearchLoading] = useState(false)
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false)
 
   const formik = useFormik<{ url: string }>({
     initialValues: { url: '' },
@@ -63,7 +65,18 @@ export const CollectionInput = ({
           variables: { shortHash },
           fetchPolicy: 'no-cache',
         })
-        setSearchData(response.data)
+        if (response.data.article) {
+          setSearchData(response.data)
+        } else {
+          toast.error({
+            message: intl.formatMessage({
+              defaultMessage: 'Article does not exist',
+              id: 'eKeBF9',
+            }),
+          })
+        }
+      } catch (error) {
+        console.error(error)
       } finally {
         setSearchLoading(false)
       }
@@ -73,7 +86,11 @@ export const CollectionInput = ({
     }
   }, [debouncedSearchKey])
 
-  const isDropdownVisible = !searchLoading && !!searchData?.article && !saving
+  useEffect(() => {
+    if (!searchLoading && !!searchData?.article && !saving) {
+      setIsDropdownVisible(true)
+    }
+  }, [searchLoading, searchData?.article, saving])
 
   return (
     <Dropdown
@@ -88,16 +105,20 @@ export const CollectionInput = ({
               formik.handleSubmit()
             }}
           >
-            <ArticleDigestDropdown
-              article={
-                searchData?.article as ArticleDigestDropdownArticleFragment
-              }
-              related={collection.some((a) => a.id === searchData?.article?.id)}
-              titleTextSize={16}
-              spacing={[0, 0]}
-              bgColor="none"
-              disabled
-            />
+            {searchData?.article && (
+              <ArticleDigestDropdown
+                article={
+                  searchData?.article as ArticleDigestDropdownArticleFragment
+                }
+                related={collection.some(
+                  (a) => a.id === searchData?.article?.id
+                )}
+                titleTextSize={16}
+                spacing={[0, 0]}
+                bgColor="none"
+                disabled
+              />
+            )}
           </Menu.Item>
         </Menu>
       }
@@ -124,11 +145,28 @@ export const CollectionInput = ({
             autoFocus
             value={formik.values.url}
             onChange={(e) => {
+              setIsDropdownVisible(false)
               setSearchKey(e.target.value)
               formik.handleChange(e)
             }}
             onBlur={formik.handleBlur}
             disabled={saving}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                e.preventDefault()
+                if (searchData?.article) {
+                  formik.setFieldValue('url', searchData?.article?.title)
+                  formik.handleSubmit()
+                } else {
+                  toast.error({
+                    message: intl.formatMessage({
+                      defaultMessage: 'Article does not exist',
+                      id: 'eKeBF9',
+                    }),
+                  })
+                }
+              }
+            }}
           />
           {saving && <SpinnerBlock size={16} noSpacing />}
         </form>

@@ -2394,6 +2394,9 @@
   "eKVBm/": {
     "defaultMessage": "Optimism 是獨立運行的區塊鏈，若你在其他鏈上已有 USDT 貨幣，需要將它們轉移到 Optimism 網絡才能使用，詳情參考{link}。"
   },
+  "eKeBF9": {
+    "defaultMessage": "作品不存在"
+  },
   "eTpiYa": {
     "defaultMessage": "尚無支持數據"
   },
