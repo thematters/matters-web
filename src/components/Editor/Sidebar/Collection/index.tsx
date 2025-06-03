@@ -5,12 +5,13 @@ import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
 import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
 import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
 import { MAX_ARTICLE_COLLECT_LENGTH } from '~/common/enums'
-import { ArticleDigestDraftTitle, Icon, Tooltip } from '~/components'
+import { Icon, Tooltip } from '~/components'
 import { SetCollectionProps } from '~/components/Editor'
 import { ArticleDigestDropdownArticleFragment } from '~/gql/graphql'
 
 import Box from '../Box'
 import { CollectionInput } from './CollectionInput'
+import { ArticleDigestDraftTitle } from './DraftTitle'
 import styles from './styles.module.css'
 
 export type SidebarCollectionProps = {
