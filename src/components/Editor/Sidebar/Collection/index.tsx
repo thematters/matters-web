@@ -85,8 +85,8 @@ const SidebarCollection = ({
               onClick={() => setIsEditing(true)}
               className={styles.rightButton}
               aria-label={intl.formatMessage({
-                defaultMessage: 'Add Tags',
-                id: 'WNxQX0',
+                defaultMessage: 'Add',
+                id: '2/2yg+',
               })}
               disabled={collection.length >= MAX_ARTICLE_COLLECT_LENGTH}
             >

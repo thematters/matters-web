@@ -246,6 +246,9 @@
     "defaultMessage": "在 {commentArticle} 評論提到了你",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "2/2yg+": {
+    "defaultMessage": "添加"
+  },
   "2/C36c": {
     "defaultMessage": "你無權進行此操作"
   },

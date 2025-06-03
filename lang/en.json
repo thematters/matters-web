@@ -246,6 +246,9 @@
     "defaultMessage": "mentioned you in a comment at {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
   },
+  "2/2yg+": {
+    "defaultMessage": "Add"
+  },
   "2/C36c": {
     "defaultMessage": "You do not have permission to perform this action"
   },
