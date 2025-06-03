@@ -19,7 +19,8 @@ import styles from './styles.module.css'
 export type ArticleDigestDropdownProps = {
   article: ArticleDigestDropdownArticleFragment
 
-  related?: boolean
+  nameColor?: 'grey' | 'black'
+  relatedNode?: React.ReactNode
   titleTextSize?: ArticleDigestTitleTextSize
   titleIs?: ArticleDigestTitleIs
   titleTextWeight?: ArticleDigestTitleTextWeight
@@ -57,7 +58,8 @@ const fragments = {
 
 export const ArticleDigestDropdown = ({
   article,
-  related,
+  nameColor = 'black',
+  relatedNode,
   titleTextSize,
   titleIs = 'h3',
   titleTextWeight = 'medium',
@@ -103,7 +105,7 @@ export const ArticleDigestDropdown = ({
           <section className={styles.extraButton}>
             {!isBanned && extraButton}
           </section>
-          {related && <section className={styles.related}>已关联</section>}
+          {relatedNode}
         </header>
 
         <footer className={styles.footer}>
@@ -111,7 +113,7 @@ export const ArticleDigestDropdown = ({
             user={article.author}
             avatarSize={16}
             textSize={13}
-            nameColor={related ? 'grey' : 'black'}
+            nameColor={nameColor}
             hasAvatar
             hasUserName
             hasDisplayName

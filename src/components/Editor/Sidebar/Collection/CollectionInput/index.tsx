@@ -2,7 +2,7 @@ import { useApolloClient } from '@apollo/client'
 import { useFormik } from 'formik'
 import { useEffect, useState } from 'react'
 import AutosizeInput from 'react-input-autosize'
-import { useIntl } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
 import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
@@ -50,7 +50,14 @@ const renderFoundArticle = (
     >
       <ArticleDigestDropdown
         article={article}
-        related={isRelated}
+        relatedNode={
+          isRelated && (
+            <section className={styles.related}>
+              <FormattedMessage defaultMessage="Curated" id="0xVT+0" />
+            </section>
+          )
+        }
+        nameColor={isRelated ? 'grey' : 'black'}
         titleTextSize={16}
         titleIs="span"
         titleTextWeight="normal"

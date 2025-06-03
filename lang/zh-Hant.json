@@ -187,6 +187,9 @@
   "0tRUjd": {
     "defaultMessage": "因違反社區約章，評論已被隱藏"
   },
+  "0xVT+0": {
+    "defaultMessage": "已關聯"
+  },
   "0zZd0T": {
     "defaultMessage": "作品發布成功，快把作品分享到不同渠道，吸引更多人為你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"

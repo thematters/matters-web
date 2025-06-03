@@ -187,6 +187,9 @@
   "0tRUjd": {
     "defaultMessage": "因违反社区规定，评论已被隐藏"
   },
+  "0xVT+0": {
+    "defaultMessage": "已关联"
+  },
   "0zZd0T": {
     "defaultMessage": "作品发布成功，快把作品分享到不同渠道，吸引更多人为你拍手！",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"

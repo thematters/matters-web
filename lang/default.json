@@ -187,6 +187,9 @@
   "0tRUjd": {
     "defaultMessage": "This comment has been hidden due to violation of community terms of services"
   },
+  "0xVT+0": {
+    "defaultMessage": "Curated"
+  },
   "0zZd0T": {
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
