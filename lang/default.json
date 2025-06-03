@@ -1040,9 +1040,6 @@
     "defaultMessage": "Email address",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
-  "FLLX7c": {
-    "defaultMessage": "Curated Article"
-  },
   "FMIIAZ": {
     "defaultMessage": "Revision history and IPFS entry,",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -2339,6 +2336,9 @@
   },
   "d5+b8r": {
     "defaultMessage": "Restricted content"
+  },
+  "d5Y+dZ": {
+    "defaultMessage": "Curate Article"
   },
   "d5bM8A": {
     "defaultMessage": "Select Date..."

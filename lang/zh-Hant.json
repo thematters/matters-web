@@ -1040,9 +1040,6 @@
     "defaultMessage": "郵件地址",
     "description": "src/components/Dialogs/SetEmailDialog/Content.tsx"
   },
-  "FLLX7c": {
-    "defaultMessage": "關聯作品"
-  },
   "FMIIAZ": {
     "defaultMessage": "此為歷史版本和 IPFS 入口查閱區，",
     "description": "src/views/ArticleDetail/StickyTopBanner/index.tsx"
@@ -2339,6 +2336,9 @@
   },
   "d5+b8r": {
     "defaultMessage": "限制級內容"
+  },
+  "d5Y+dZ": {
+    "defaultMessage": "關聯作品"
   },
   "d5bM8A": {
     "defaultMessage": "投稿日程⋯"

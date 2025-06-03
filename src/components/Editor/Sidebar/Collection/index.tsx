@@ -43,7 +43,7 @@ const SidebarCollection = ({
     <Box
       title={
         <div className={styles.title}>
-          <FormattedMessage defaultMessage="Curated Article" id="FLLX7c" />
+          <FormattedMessage defaultMessage="Curate Article" id="d5Y+dZ" />
           <Tooltip
             content={
               <FormattedMessage
