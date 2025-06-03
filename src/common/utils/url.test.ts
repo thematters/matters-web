@@ -273,143 +273,76 @@ describe('utils/url/parseCommentHash', () => {
 })
 
 describe('utils/url/extractShortHashFromUrl', () => {
-  describe('Full URL format', () => {
-    it('should extract shortHash from matters.town URLs', () => {
-      expect(extractShortHashFromUrl('https://matters.town/a/abc123def')).toBe(
-        'abc123def'
-      )
-      expect(extractShortHashFromUrl('http://matters.town/a/xyz789uvw')).toBe(
-        'xyz789uvw'
-      )
-      expect(
-        extractShortHashFromUrl('https://www.matters.town/a/test12345')
-      ).toBe('test12345')
+  describe('Valid 12-character shortHash extraction', () => {
+    it('should extract 12-character shortHash from various URL formats', () => {
+      // Full URLs
+      expect(extractShortHashFromUrl('https://matters.town/a/abc123def456')).toBe('abc123def456')
+      expect(extractShortHashFromUrl('http://matters.icu/a/xyz789uvw123')).toBe('xyz789uvw123')
+
+      // Domain format
+      expect(extractShortHashFromUrl('matters.town/a/test12345678')).toBe('test12345678')
+      expect(extractShortHashFromUrl('www.matters.icu/a/demo67890abc')).toBe('demo67890abc')
+
+      // Path format
+      expect(extractShortHashFromUrl('/a/abc123def456')).toBe('abc123def456')
+      expect(extractShortHashFromUrl('/a/xyz789uvw123')).toBe('xyz789uvw123')
+
+      // Simplified format
+      expect(extractShortHashFromUrl('a/test12345678')).toBe('test12345678')
+
+      // Pure shortHash (12 characters)
+      expect(extractShortHashFromUrl('abc123def456')).toBe('abc123def456')
+      expect(extractShortHashFromUrl('6d1qmmmrloaf')).toBe('6d1qmmmrloaf')
+      expect(extractShortHashFromUrl('0123456789ab')).toBe('0123456789ab')
     })
 
-    it('should extract shortHash from matters.icu URLs', () => {
-      expect(extractShortHashFromUrl('https://matters.icu/a/abc123def')).toBe(
-        'abc123def'
-      )
-      expect(extractShortHashFromUrl('http://matters.icu/a/xyz789uvw')).toBe(
-        'xyz789uvw'
-      )
-      expect(
-        extractShortHashFromUrl('https://www.matters.icu/a/test12345')
-      ).toBe('test12345')
+    it('should handle URLs with query parameters and fragments', () => {
+      expect(extractShortHashFromUrl('https://matters.town/a/abc123def456?utm_source=test')).toBe('abc123def456')
+      expect(extractShortHashFromUrl('/a/xyz789uvw123#comment-123')).toBe('xyz789uvw123')
+      expect(extractShortHashFromUrl('a/test12345678?query=1#section')).toBe('test12345678')
     })
-  })
 
-  describe('Domain format', () => {
-    it('should extract shortHash from domain format URLs', () => {
-      expect(extractShortHashFromUrl('matters.town/a/abc123def')).toBe(
-        'abc123def'
-      )
-      expect(extractShortHashFromUrl('www.matters.town/a/xyz789uvw')).toBe(
-        'xyz789uvw'
-      )
-      expect(extractShortHashFromUrl('matters.icu/a/test12345')).toBe(
-        'test12345'
-      )
-      expect(extractShortHashFromUrl('www.matters.icu/a/demo6789')).toBe(
-        'demo6789'
-      )
+    it('should handle URLs with whitespace', () => {
+      expect(extractShortHashFromUrl('  https://matters.town/a/abc123def456  ')).toBe('abc123def456')
+      expect(extractShortHashFromUrl('\t/a/xyz789uvw123\n')).toBe('xyz789uvw123')
+    })
+
+    it('should extract first valid shortHash when multiple exist in URL', () => {
+      expect(extractShortHashFromUrl('https://matters.town/a/abc123def456/comments/xyz789uvw123')).toBe('abc123def456')
     })
   })
 
-  describe('Path format', () => {
-    it('should extract shortHash from path format URLs', () => {
-      expect(extractShortHashFromUrl('/a/abc123def')).toBe('abc123def')
-      expect(extractShortHashFromUrl('/a/xyz789uvw')).toBe('xyz789uvw')
-      expect(extractShortHashFromUrl('/a/test12345')).toBe('test12345')
+  describe('Backend nanoid format compliance', () => {
+    it('should only match lowercase alphanumeric characters', () => {
+      expect(extractShortHashFromUrl('abcdefghijk0')).toBe('abcdefghijk0')
+      expect(extractShortHashFromUrl('0123456789ab')).toBe('0123456789ab')
+      expect(extractShortHashFromUrl('zyxwvutsrqp9')).toBe('zyxwvutsrqp9')
+    })
+
+    it('should reject uppercase characters', () => {
+      expect(extractShortHashFromUrl('ABCdefghijk0')).toBe(null)
+      expect(extractShortHashFromUrl('abc123DEF456')).toBe(null)
+    })
+
+    it('should reject special characters', () => {
+      expect(extractShortHashFromUrl('abc123-def45')).toBe(null)
+      expect(extractShortHashFromUrl('abc123_def45')).toBe(null)
+      expect(extractShortHashFromUrl('abc123@def45')).toBe(null)
+      expect(extractShortHashFromUrl('abc123.def45')).toBe(null)
     })
   })
 
-  describe('Direct path format', () => {
-    it('should extract shortHash from direct path format URLs', () => {
-      expect(extractShortHashFromUrl('/6d1qmmmrloaf')).toBe('6d1qmmmrloaf')
-      expect(extractShortHashFromUrl('/abc123def456')).toBe('abc123def456')
-      expect(extractShortHashFromUrl('/xyz789uvw123')).toBe('xyz789uvw123')
-    })
-
-    it('should reject short paths (less than 8 characters)', () => {
-      expect(extractShortHashFromUrl('/abc123')).toBe(null)
-      expect(extractShortHashFromUrl('/short')).toBe(null)
-    })
-  })
-
-  describe('Simplified format', () => {
-    it('should extract shortHash from simplified format URLs', () => {
-      expect(extractShortHashFromUrl('a/abc123def')).toBe('abc123def')
-      expect(extractShortHashFromUrl('a/xyz789uvw')).toBe('xyz789uvw')
-      expect(extractShortHashFromUrl('a/test12345')).toBe('test12345')
-    })
-  })
-
-  describe('Pure shortHash format', () => {
-    it('should extract shortHash from pure shortHash format', () => {
-      expect(extractShortHashFromUrl('abc123def')).toBe('abc123def')
-      expect(extractShortHashFromUrl('xyz789uvw')).toBe('xyz789uvw')
-      expect(extractShortHashFromUrl('test12345')).toBe('test12345')
-      expect(extractShortHashFromUrl('longerShortHash123456')).toBe(
-        'longerShortHash123456'
-      )
-    })
-
-    it('should reject short strings (less than 8 characters)', () => {
-      expect(extractShortHashFromUrl('abc123')).toBe(null)
-      expect(extractShortHashFromUrl('1234567')).toBe(null)
+  describe('Invalid length handling', () => {
+    it('should reject strings shorter than 12 characters', () => {
+      expect(extractShortHashFromUrl('abc123def')).toBe(null)
+      expect(extractShortHashFromUrl('12345678901')).toBe(null)
       expect(extractShortHashFromUrl('short')).toBe(null)
-    })
-  })
-
-  describe('URL normalization', () => {
-    it('should handle URLs with query parameters', () => {
-      expect(
-        extractShortHashFromUrl(
-          'https://matters.town/a/abc123def?utm_source=test'
-        )
-      ).toBe('abc123def')
-      expect(
-        extractShortHashFromUrl('/a/xyz789uvw?param=value&other=test')
-      ).toBe('xyz789uvw')
-      expect(extractShortHashFromUrl('a/test12345?query=1')).toBe('test12345')
+      expect(extractShortHashFromUrl('')).toBe(null)
     })
 
-    it('should handle URLs with hash fragments', () => {
-      expect(
-        extractShortHashFromUrl('https://matters.town/a/abc123def#section')
-      ).toBe('abc123def')
-      expect(extractShortHashFromUrl('/a/xyz789uvw#comment-123')).toBe(
-        'xyz789uvw'
-      )
-      expect(extractShortHashFromUrl('a/test12345#top')).toBe('test12345')
-    })
-
-    it('should handle URLs with trailing slashes', () => {
-      expect(extractShortHashFromUrl('https://matters.town/a/abc123def/')).toBe(
-        'abc123def'
-      )
-      expect(extractShortHashFromUrl('/a/xyz789uvw/')).toBe('xyz789uvw')
-      expect(extractShortHashFromUrl('a/test12345/')).toBe('test12345')
-    })
-
-    it('should handle URLs with both query parameters and hash fragments', () => {
-      expect(
-        extractShortHashFromUrl(
-          'https://matters.town/a/abc123def?param=value#section'
-        )
-      ).toBe('abc123def')
-      expect(extractShortHashFromUrl('/a/xyz789uvw?query=1#comment')).toBe(
-        'xyz789uvw'
-      )
-    })
-
-    it('should handle URLs with leading/trailing whitespace', () => {
-      expect(
-        extractShortHashFromUrl('  https://matters.town/a/abc123def  ')
-      ).toBe('abc123def')
-      expect(extractShortHashFromUrl('\t/a/xyz789uvw\n')).toBe('xyz789uvw')
-      expect(extractShortHashFromUrl(' a/test12345 ')).toBe('test12345')
+    it('should reject strings longer than 12 characters (exact match required)', () => {
+      expect(extractShortHashFromUrl('abc123def4567')).toBe(null)
+      expect(extractShortHashFromUrl('verylongshorthash123456')).toBe(null)
     })
   })
 
@@ -420,68 +353,42 @@ describe('utils/url/extractShortHashFromUrl', () => {
       expect(extractShortHashFromUrl(undefined as any)).toBe(null)
     })
 
-    it('should return null for non-article URLs', () => {
-      expect(extractShortHashFromUrl('https://matters.town/user/profile')).toBe(
-        null
-      )
+    it('should return null for URLs without valid shortHash', () => {
+      expect(extractShortHashFromUrl('https://matters.town/user/profile')).toBe(null)
       expect(extractShortHashFromUrl('https://matters.town/home')).toBe(null)
-      expect(extractShortHashFromUrl('https://example.com/a/abc123def')).toBe(
-        null
-      )
-    })
-
-    it('should return null for invalid shortHash characters', () => {
-      expect(extractShortHashFromUrl('https://matters.town/a/abc-123')).toBe(
-        null
-      )
-      expect(extractShortHashFromUrl('https://matters.town/a/abc_123')).toBe(
-        null
-      )
-      expect(extractShortHashFromUrl('https://matters.town/a/abc@123')).toBe(
-        null
-      )
-    })
-
-    it('should return null for malformed URLs', () => {
-      expect(extractShortHashFromUrl('matters.town/b/abc123def')).toBe(null)
-      expect(extractShortHashFromUrl('/b/abc123def')).toBe(null)
-      expect(extractShortHashFromUrl('b/abc123def')).toBe(null)
-    })
-
-    it('should return null for paths that are not valid formats', () => {
-      expect(extractShortHashFromUrl('/6d1qmmmrloaf')).toBe('6d1qmmmrloaf')
+      expect(extractShortHashFromUrl('https://example.com/page')).toBe(null)
       expect(extractShortHashFromUrl('/user/profile')).toBe(null)
-      expect(extractShortHashFromUrl('/home')).toBe(null)
-      expect(extractShortHashFromUrl('/12345678')).toBe('12345678')
-      expect(extractShortHashFromUrl('/abc123def456')).toBe('abc123def456')
       expect(extractShortHashFromUrl('/path/with/slashes')).toBe(null)
     })
   })
 
-  describe('Edge cases', () => {
-    it('should handle URLs with ports', () => {
-      expect(
-        extractShortHashFromUrl('https://matters.town:443/a/abc123def')
-      ).toBe('abc123def')
-      expect(
-        extractShortHashFromUrl('http://matters.icu:8080/a/xyz789uvw')
-      ).toBe('xyz789uvw')
+  describe('Edge cases and real-world scenarios', () => {
+    it('should handle URLs with ports and subdomains', () => {
+      expect(extractShortHashFromUrl('https://api.matters.town:443/a/abc123def456')).toBe('abc123def456')
+      expect(extractShortHashFromUrl('http://test.matters.icu:8080/a/xyz789uvw123')).toBe('xyz789uvw123')
     })
 
-    it('should handle subdomains', () => {
-      expect(
-        extractShortHashFromUrl('https://api.matters.town/a/abc123def')
-      ).toBe('abc123def')
-      expect(
-        extractShortHashFromUrl('https://test.matters.icu/a/xyz789uvw')
-      ).toBe('xyz789uvw')
+    it('should work with trailing slashes', () => {
+      expect(extractShortHashFromUrl('https://matters.town/a/abc123def456/')).toBe('abc123def456')
+      expect(extractShortHashFromUrl('/a/xyz789uvw123/')).toBe('xyz789uvw123')
     })
 
-    it('should handle mixed case shortHash', () => {
-      expect(extractShortHashFromUrl('https://matters.town/a/AbC123DeF')).toBe(
-        'AbC123DeF'
-      )
-      expect(extractShortHashFromUrl('/a/XyZ789UvW')).toBe('XyZ789UvW')
+    it('should handle mixed content in URLs', () => {
+      // URL with article shortHash in path
+      expect(extractShortHashFromUrl('https://matters.town/article/abc123def456/edit')).toBe('abc123def456')
+      // URL with shortHash in query parameter
+      expect(extractShortHashFromUrl('https://matters.town/search?article=xyz789uvw123')).toBe('xyz789uvw123')
+    })
+  })
+
+  describe('Performance and reliability', () => {
+    it('should handle malformed URLs gracefully', () => {
+      expect(extractShortHashFromUrl('not_a_url_but_has_abc123def456_here')).toBe('abc123def456')
+      expect(extractShortHashFromUrl('//invalid//url//xyz789uvw123')).toBe('xyz789uvw123')
+    })
+
+    it('should work with URL-encoded content', () => {
+      expect(extractShortHashFromUrl('https://matters.town/a/abc123def456%20encoded')).toBe('abc123def456')
     })
   })
 })

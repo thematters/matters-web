@@ -137,35 +137,10 @@ export const extractShortHashFromUrl = (url: string) => {
 
   const cleanUrl = url.trim()
 
-  // Remove query parameters and hash fragments
-  const urlWithoutParams = cleanUrl.split(/[?#]/)[0]
+  // Match exactly 12-character lowercase alphanumeric string
+  // Use negative lookahead/lookbehind to ensure exactly 12 characters
+  const shortHashPattern = /(?<![a-z0-9])[a-z0-9]{12}(?![a-z0-9])/
+  const match = cleanUrl.match(shortHashPattern)
 
-  // Remove trailing slash
-  const normalizedUrl = urlWithoutParams.replace(/\/$/, '')
-
-  // Various matching patterns
-  const patterns = [
-    // Full URL format: https://matters.town/a/shortHash or https://matters.icu/a/shortHash
-    /^https?:\/\/[^/]*matters\.(town|icu)(?::\d+)?\/a\/([a-zA-Z0-9]+)$/,
-    // Domain format: matters.town/a/shortHash or matters.icu/a/shortHash
-    /^[^/]*matters\.(town|icu)(?::\d+)?\/a\/([a-zA-Z0-9]+)$/,
-    // Path format: /a/shortHash
-    /^\/a\/([a-zA-Z0-9]+)$/,
-    // Direct path format: /shortHash (8+ characters)
-    /^\/([a-zA-Z0-9]{8,})$/,
-    // Simplified format: a/shortHash
-    /^a\/([a-zA-Z0-9]+)$/,
-    // Pure shortHash format: shortHash (alphanumeric combination, 8+ chars)
-    /^([a-zA-Z0-9]{8,})$/,
-  ]
-
-  for (const pattern of patterns) {
-    const match = normalizedUrl.match(pattern)
-    if (match) {
-      // For patterns with domain, shortHash is in the third or second capture group
-      return match[2] || match[1]
-    }
-  }
-
-  return null
+  return match ? match[0] : null
 }
