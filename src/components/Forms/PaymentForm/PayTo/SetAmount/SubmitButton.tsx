@@ -24,6 +24,7 @@ type SubmitButtonProps = {
   isValid: boolean
   isSubmitting: boolean
   isExceededAllowance: boolean
+  needReauthorize: boolean
   isBalanceInsufficient: boolean
   switchToAddCredit: () => void
   approving: boolean
@@ -160,6 +161,7 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
   isValid,
   isSubmitting,
   isExceededAllowance,
+  needReauthorize,
   approving,
   approveConfirming,
   allowanceLoading,
@@ -171,10 +173,18 @@ const USDTSubmitButton: React.FC<SubmitButtonProps> = ({
         mode={mode}
         text={
           <TextIcon icon={<Icon icon={IconOpenWallet} size={20} />}>
-            <FormattedMessage
-              defaultMessage="Go to Authorization"
-              id="/cyuh2"
-            />
+            {needReauthorize ? (
+              <FormattedMessage
+                defaultMessage="Authorize in Wallet"
+                description="REAUTHORIZE"
+                id="XqTMgg"
+              />
+            ) : (
+              <FormattedMessage
+                defaultMessage="Authorize in Wallet"
+                id="0PpH2v"
+              />
+            )}
           </TextIcon>
         }
         loading={approving || approveConfirming || allowanceLoading}

@@ -5,6 +5,7 @@ html {
   font-size: var(--sizing-root);
   font-weight: var(--font-weight-base);
   line-height: var(--line-height-base);
+  word-break: break-all;
   overflow-wrap: break-word;
   background-color: var(--color-white);
   text-size-adjust: 100%;
