@@ -137,7 +137,6 @@ export const CollectionInput = ({
         const response = await client.query({
           query: ARTICLE_URL_QUERY,
           variables: { shortHash },
-          fetchPolicy: 'no-cache',
         })
 
         if (response.data.article) {
