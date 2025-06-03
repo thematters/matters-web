@@ -1,19 +1,18 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react'
-import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 
 import IconTable from './IconTable'
 
-export default {
+const meta = {
   title: 'Components/Icons',
   component: IconTable,
-} as ComponentMeta<typeof IconTable>
+} satisfies Meta<typeof IconTable>
 
-const Template: ComponentStory<typeof IconTable> = (args) => (
-  <IconTable {...args} />
-)
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const All = Template.bind({})
-All.args = {
-  size: 32,
-  color: 'black',
+export const All: Story = {
+  args: {
+    size: 32,
+    color: 'black',
+  },
 }

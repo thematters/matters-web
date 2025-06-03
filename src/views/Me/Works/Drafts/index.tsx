@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
 import { PATHS } from '~/common/enums'
 import { analytics, mergeConnections } from '~/common/utils'
 import {
@@ -70,7 +70,7 @@ export const BaseMeWorksDrafts = () => {
         </TextIcon>
       </section>
       <List>
-        {edges.map(({ node, cursor }) => (
+        {edges.map(({ node }) => (
           <List.Item key={node.id}>
             <DraftDigest.Feed draft={node} />
           </List.Item>

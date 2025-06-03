@@ -1,9 +1,9 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import { useLayoutEffect, useRef, useState } from 'react'
+import { useId, useLayoutEffect, useRef, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 
-import { ReactComponent as IconSquare } from '@/public/static/icons/24px/squire.svg'
-import { ReactComponent as IconSquareCheck } from '@/public/static/icons/24px/squire-check.svg'
+import IconSquare from '@/public/static/icons/24px/squire.svg'
+import IconSquareCheck from '@/public/static/icons/24px/squire-check.svg'
 import { Icon, TextIcon, Tooltip } from '~/components'
 
 import { FieldProps } from '../Field'
@@ -28,7 +28,6 @@ export type SquareCheckBoxBoxProps = {
 
 const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
   contents,
-  error,
   hint,
 
   icon,
@@ -40,13 +39,15 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
 
   ...inputProps
 }) => {
-  const { value, disabled, checked } = inputProps
-  const fieldId = `field-${value}`
-  const fieldMsgId = `field-msg-${value}`
+  const { disabled, checked } = inputProps
+  const fieldId = useId()
+  const fieldMsgId = `${fieldId}-msg`
 
   const [lineClampable, setLineClampable] = useState(false)
   const [firstRender, setFirstRender] = useState(true)
-  const node: React.RefObject<any> | null = useRef(null)
+  const node: React.RefObject<HTMLElement> | null = useRef(null)
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   useLayoutEffect(() => {
     if (!node || !node.current) {
@@ -107,14 +108,13 @@ const SquareCheckBox: React.FC<SquareCheckBoxBoxProps> = ({
             </section>
           </TextIcon>
 
-          <VisuallyHidden>
-            <input
-              {...inputProps}
-              id={fieldId}
-              type="checkbox"
-              aria-describedby={fieldMsgId}
-            />
-          </VisuallyHidden>
+          <input
+            {...inputProps}
+            id={fieldId}
+            type="checkbox"
+            aria-describedby={fieldMsgId}
+            {...visuallyHiddenProps}
+          />
         </label>
       </section>
     </Tooltip>

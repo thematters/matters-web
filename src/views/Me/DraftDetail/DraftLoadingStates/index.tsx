@@ -1,12 +1,14 @@
+import { ApolloError } from '@apollo/client'
 import React, { ReactNode } from 'react'
 
 import { EmptyLayout, SpinnerBlock, Throw404 } from '~/components'
 import { QueryError } from '~/components/GQL'
+import { DraftDetailQueryQuery } from '~/gql/graphql'
 
 type DraftLoadingStatesProps = {
   loading: boolean
-  error?: any
-  draft?: any
+  error?: ApolloError
+  draft?: DraftDetailQueryQuery['node']
   isNewDraft: () => boolean
   children?: ReactNode
 }

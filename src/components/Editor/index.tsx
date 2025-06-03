@@ -1,6 +1,10 @@
+import type { FetchResult } from '@apollo/client'
+
 import {
   ArticleDigestDropdownArticleFragment,
   DigestTagFragment,
+  SetDraftCollectionMutation,
+  SetDraftTagsMutation,
 } from '~/gql/graphql'
 
 export * from './MoreSettings'
@@ -11,14 +15,16 @@ export type SetCollectionProps = {
   collection: ArticleDigestDropdownArticleFragment[]
   editCollection: (
     articles: ArticleDigestDropdownArticleFragment[]
-  ) => Promise<any>
+  ) => Promise<FetchResult<SetDraftCollectionMutation> | void | unknown>
   collectionSaving?: boolean
   nodeExclude?: string
 }
 
 export type SetTagsProps = {
   tags: DigestTagFragment[]
-  editTags: (tag: DigestTagFragment[]) => Promise<any>
+  editTags: (
+    tag: DigestTagFragment[]
+  ) => Promise<FetchResult<SetDraftTagsMutation> | void | unknown>
   tagsSaving: boolean
 }
 
@@ -35,5 +41,5 @@ export type SetResponseProps = {
 
 export type SetVersionDescriptionProps = {
   versionDescription: string
-  editVersionDescription: (description: string) => any
+  editVersionDescription: (description: string) => void
 }

@@ -1,11 +1,10 @@
 import { useApolloClient } from '@apollo/client'
 import { useFormik } from 'formik'
 import { useEffect, useState } from 'react'
-import AutosizeInput from 'react-input-autosize'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
-import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
+import IconDraft from '@/public/static/icons/24px/draft.svg'
 import { INPUT_DEBOUNCE } from '~/common/enums'
 import { extractShortHashFromUrl } from '~/common/utils/url'
 import {
@@ -22,6 +21,7 @@ import {
   ArticleUrlQueryQuery,
 } from '~/gql/graphql'
 
+import InputAutosize from '../../InputAutosize'
 import styles from './styles.module.css'
 
 type CollectionInputProps = {
@@ -200,7 +200,7 @@ export const CollectionInput = ({
           ref={ref}
         >
           <Icon icon={IconDraft} color="greyDark" />
-          <AutosizeInput
+          <InputAutosize
             type="text"
             className={styles.input}
             name="url"

@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-import IMAGE_DEFAULT_CURATED from '@/public/static/images/default-curated.svg'
+import IMAGE_DEFAULT_CURATED from '@/public/static/images/default-curated.svg?url'
 import { TEST_ID } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Card, CardProps, LinkWrapper, ResponsiveImage } from '~/components'
@@ -15,7 +15,7 @@ export type ArticleDigestCuratedProps = {
 
   titleLineClamp?: 2 | 3
 
-  onClick?: () => any
+  onClick?: () => void
   onClickAuthor?: () => void
 } & CardProps
 
@@ -72,7 +72,7 @@ export const ArticleDigestCurated = ({
       >
         <LinkWrapper {...path} onClick={onClick}>
           <ResponsiveImage
-            url={cover || IMAGE_DEFAULT_CURATED}
+            url={cover || IMAGE_DEFAULT_CURATED.src}
             width={404}
             height={404}
           />

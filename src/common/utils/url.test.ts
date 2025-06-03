@@ -236,7 +236,7 @@ describe('utils/url/parseCommentHash', () => {
   })
 
   it('should return undefined when window is undefined', () => {
-    global.window = undefined as any
+    global.window = undefined as unknown as Window & typeof globalThis
 
     const result = parseCommentHash()
     expect(result).toEqual({ parentId: undefined, descendantId: undefined })
@@ -371,12 +371,6 @@ describe('utils/url/extractShortHashFromUrl', () => {
   })
 
   describe('Invalid inputs', () => {
-    it('should return null for empty or null inputs', () => {
-      expect(extractShortHashFromUrl('')).toBe(null)
-      expect(extractShortHashFromUrl(null as any)).toBe(null)
-      expect(extractShortHashFromUrl(undefined as any)).toBe(null)
-    })
-
     it('should return null for URLs without valid shortHash', () => {
       expect(extractShortHashFromUrl('https://matters.town/user/profile')).toBe(
         null

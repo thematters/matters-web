@@ -1,4 +1,4 @@
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { TEST_ID } from '~/common/enums'
 import { captureClicks, toPath } from '~/common/utils'
 import { Button, DateTime, Icon, LinkWrapper } from '~/components'

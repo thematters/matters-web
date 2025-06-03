@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDot } from '@/public/static/icons/dot.svg'
+import IconDot from '@/public/static/icons/dot.svg'
 import { TEST_ID } from '~/common/enums'
 import { MOMENT_DIGEST_REFERRER } from '~/common/enums/moment'
 import { captureClicks, sessionStorage, toPath } from '~/common/utils'

@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
+import IconHashTag from '@/public/static/icons/24px/hashtag.svg'
 import { ERROR_CODES } from '~/common/enums'
 import { fromGlobalId, normalizeTag, toGlobalId, toPath } from '~/common/utils'
 import {
@@ -37,8 +37,7 @@ import RecommendedAuthors from './RecommendedAuthors'
 import RelatedTags from './RelatedTags'
 import styles from './styles.module.css'
 
-const validTagFeedTypes = ['hottest', 'latest'] as const
-type TagFeedType = (typeof validTagFeedTypes)[number]
+type TagFeedType = 'hottest' | 'latest'
 
 const TagDetail = ({ tag }: { tag: TagFragmentFragment }) => {
   const { router } = useRoute()
@@ -170,7 +169,7 @@ const TagDetailContainer = () => {
     if (type === 'Tag' && id?.match(/^\d+$/)) {
       isRawGlobalId = true
     }
-  } catch (err) {
+  } catch {
     // ignore
   }
   const numberId = param?.match(/^(\d+)/)?.[1]

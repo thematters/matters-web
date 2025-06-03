@@ -1,10 +1,10 @@
-import { useQuery } from '@apollo/client'
+import { ApolloError, useQuery } from '@apollo/client'
 import { useFormik } from 'formik'
 import _pickBy from 'lodash/pickBy'
-import { useRef } from 'react'
+import { useId, useRef } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
+import IconHelp from '@/public/static/icons/24px/help.svg'
 import {
   PAYMENT_CURRENCY as CURRENCY,
   PAYMENT_MINIMAL_PAYOUT_AMOUNT,
@@ -58,9 +58,9 @@ const BaseConfirm: React.FC<FormProps> = ({
   back,
 }: FormProps) => {
   const intl = useIntl()
-  const formId = 'payout-confirm-form'
+  const formId = useId()
 
-  const inputRef: React.RefObject<any> | null = useRef(null)
+  const inputRef: React.RefObject<HTMLInputElement> | null = useRef(null)
   const [payout] = useMutation<PayoutMutation>(PAYOUT, undefined, {
     showToast: false,
   })
@@ -106,7 +106,7 @@ const BaseConfirm: React.FC<FormProps> = ({
       } catch (error) {
         setSubmitting(false)
 
-        const [messages, codes] = parseFormSubmitErrors(error as any)
+        const [messages, codes] = parseFormSubmitErrors(error as ApolloError)
         setFieldError('password', intl.formatMessage(messages[codes[0]]))
         setFieldValue('password', '', false)
       }
@@ -178,7 +178,7 @@ const BaseConfirm: React.FC<FormProps> = ({
 
               // remove extra left pad 0
               if (inputRef.current) {
-                inputRef.current.value = amount
+                inputRef.current.value = amount.toString()
               }
               setFieldValue('amount', amount)
             }}

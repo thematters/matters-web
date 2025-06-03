@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconPublishFill } from '@/public/static/icons/24px/publish-fill.svg'
+import IconPublishFill from '@/public/static/icons/24px/publish-fill.svg'
 import { ENTITY_TYPE } from '~/common/enums'
 import {
   Button,
@@ -178,7 +178,7 @@ const SettingsButton = ({
     campaigns: selectableCampaigns,
     selectedCampaign,
     selectedStage,
-    editCampaign: (value) => editCampaign(value as any),
+    editCampaign,
   }
 
   const responseProps: SetResponseProps = {

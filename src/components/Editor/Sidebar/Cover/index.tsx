@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCircleTimesFill } from '@/public/static/icons/24px/circle-times-fill.svg'
-import { ReactComponent as IconImage } from '@/public/static/icons/24px/image.svg'
+import IconCircleTimesFill from '@/public/static/icons/24px/circle-times-fill.svg'
+import IconImage from '@/public/static/icons/24px/image.svg'
 import { Icon, ResponsiveImage } from '~/components'
 
 import SetCover, { SetCoverProps } from '../../SetCover'

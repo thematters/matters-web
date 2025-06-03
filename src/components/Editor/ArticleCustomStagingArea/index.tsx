@@ -1,4 +1,4 @@
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { ArticleDigestDropdown, Button, Icon, Translate } from '~/components'
 import { SelectArticle } from '~/components/SearchSelect/SearchingArea'
 import { CustomStagingAreaProps } from '~/components/SearchSelect/StagingArea'

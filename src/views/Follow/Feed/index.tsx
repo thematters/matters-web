@@ -1,7 +1,4 @@
 import { useQuery } from '@apollo/client'
-import _chunk from 'lodash/chunk'
-import _flatten from 'lodash/flatten'
-import _get from 'lodash/get'
 
 import { analytics, mergeConnections, shouldRenderNode } from '~/common/utils'
 import {
@@ -41,7 +38,19 @@ const renderableTypes = new Set([
   'UserRecommendationActivity',
 ])
 
-const getNodeId = (node: any, cursor: string): string => {
+const getNodeId = (
+  node: {
+    __typename: string
+    nodeArticle?: { id: string } | null
+    nodeMoment?: { id: string } | null
+    targetCircle?: { id: string } | null
+    nodeCircle?: { id: string } | null
+    actor?: { id: string } | null
+    targetTag?: { id: string } | null
+    source?: string | null
+  },
+  cursor: string
+): string => {
   if (!node) return cursor
 
   switch (node.__typename) {

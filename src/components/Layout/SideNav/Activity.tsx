@@ -1,8 +1,8 @@
 import { useContext } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconComment } from '@/public/static/icons/24px/comment.svg'
-import { ReactComponent as IconEdit } from '@/public/static/icons/24px/edit.svg'
+import IconComment from '@/public/static/icons/24px/comment.svg'
+import IconEdit from '@/public/static/icons/24px/edit.svg'
 import {
   ERROR_CODES,
   ERROR_MESSAGES,

@@ -96,7 +96,7 @@ const PendingInvites = () => {
   return (
     <InfiniteScroll hasNextPage={pageInfo.hasNextPage} loadMore={loadMore}>
       <List hasBorder={false}>
-        {(edges || []).map(({ node, cursor }, i) => (
+        {(edges || []).map(({ node }) => (
           <List.Item key={node.id}>
             <CircleInvitation invitation={node} />
           </List.Item>

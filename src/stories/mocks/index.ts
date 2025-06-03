@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 // User
 export const MOCK_USER = {
   __typename: 'User' as any,

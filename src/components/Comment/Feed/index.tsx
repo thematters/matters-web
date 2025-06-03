@@ -9,7 +9,6 @@ import {
 import { sessionStorage, toPath } from '~/common/utils'
 import {
   Avatar,
-  AvatarSize,
   CommentThreadCommentType,
   DateTime,
   LinkWrapper,
@@ -29,8 +28,6 @@ import Placeholder from './Placeholder'
 import styles from './styles.module.css'
 
 export type CommentControls = {
-  avatarSize?: AvatarSize
-  hasUserName?: boolean
   spacingLeft?: boolean
 } & FooterActionsControls &
   DropdownActionsControls
@@ -44,8 +41,6 @@ export type CommentProps = {
 const BaseCommentFeed = ({
   comment,
   pinnedComment,
-  avatarSize = 32,
-  hasUserName,
   spacingLeft,
   replySubmitCallback,
   ...actionControls

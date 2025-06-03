@@ -3,9 +3,9 @@ import gql from 'graphql-tag'
 import { CID } from 'multiformats/cid'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCopy } from '@/public/static/icons/24px/copy.svg'
-import { ReactComponent as IconExternal } from '@/public/static/icons/24px/external.svg'
-import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
+import IconCopy from '@/public/static/icons/24px/copy.svg'
+import IconExternal from '@/public/static/icons/24px/external.svg'
+import IconHelp from '@/public/static/icons/24px/help.svg'
 import { truncate } from '~/common/utils'
 import {
   Button,
@@ -132,9 +132,7 @@ const InfoHeader = ({
           <p className={styles.description}>{version.description}</p>
         )}
       </header>
-
       <hr className={styles.divider} />
-
       <footer className={styles.footer}>
         {/* dataHash */}
         <section className={[styles.item, styles.dataHash].join(' ')}>

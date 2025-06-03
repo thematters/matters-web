@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
 import { Z_INDEX } from '~/common/enums'
 import { analytics, datetimeFormat, toPath } from '~/common/utils'
 import { Dropdown, Icon, Label, Menu, useRoute } from '~/components'
@@ -58,11 +58,12 @@ const VersionsDropdown = ({
   article: VersionsArticleFragment
 }) => {
   const { router, getQuery } = useRoute()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { shortHash, v, ...qs } = router.query
 
-  const versions = article.versions.edges.map((edge) => edge?.node!)
+  const versions = article.versions.edges.map((edge) => edge?.node)
   const currVersion = getQuery('v') || versions[0]?.id
-  const version = versions.find((v) => v.id === currVersion)
+  const version = versions.find((v) => v?.id === currVersion)
 
   if (versions.length < 1 || !version) {
     return null
@@ -75,19 +76,19 @@ const VersionsDropdown = ({
           <Menu.Item
             text={
               <Version
-                version={version}
-                active={version.id === currVersion}
+                version={version!}
+                active={version?.id === currVersion}
                 latest={index === 0}
               />
             }
-            key={version.id}
+            key={version?.id}
             href={
               toPath({
                 page: 'articleHistory',
                 article,
                 search: {
                   ...(qs as { [key: string]: string }), // forward qs to history page
-                  v: version.id,
+                  v: version?.id || '',
                 },
               }).href
             }
@@ -121,7 +122,7 @@ const VersionsDropdown = ({
             <Version
               version={version}
               active={version.id === currVersion}
-              latest={versions[0].id === version.id}
+              latest={versions[0]?.id === version.id}
             />
             <Icon icon={IconDown} size={20} />
           </button>

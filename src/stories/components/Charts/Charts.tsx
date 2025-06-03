@@ -1,5 +1,4 @@
 import { sum as d3Sum } from 'd3-array'
-import _random from 'lodash/random'
 
 import { CHART_COLOR } from '~/common/enums'
 import { StackedAreaChart } from '~/components'
@@ -79,6 +78,7 @@ const Charts = () => (
               <StackedAreaChart.Tooltip
                 {...props}
                 formatter={(datum) => {
+                  // eslint-disable-next-line @typescript-eslint/no-unused-vars
                   const { time, ...values } = datum
 
                   return [

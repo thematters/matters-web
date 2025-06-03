@@ -70,11 +70,11 @@
     & h3 {
       @mixin line-clamp;
 
+      -webkit-line-clamp: 2;
       font-size: var(--text16);
       font-weight: var(--font-semibold);
       line-height: 1.5rem;
       color: var(--color-white);
-      -webkit-line-clamp: 2;
     }
 
     & p {
@@ -83,18 +83,18 @@
 
     @media (--sm-up) {
       & h3 {
-        font-size: var(--text18);
         -webkit-line-clamp: 1;
+        font-size: var(--text18);
       }
 
       & p {
         @mixin line-clamp;
 
         margin-top: var(--sp4);
+        -webkit-line-clamp: 1;
         font-size: var(--text13);
         line-height: 1.25rem;
         color: rgb(255 255 255 / 80%);
-        -webkit-line-clamp: 1;
       }
     }
   }

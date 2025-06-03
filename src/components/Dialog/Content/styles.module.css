@@ -1,7 +1,7 @@
 .content {
   display: flex;
-  flex-direction: column;
   flex-shrink: 1;
+  flex-direction: column;
   max-height: calc(70vh - 4.25rem); /* 4.25rem is the height of header */
   max-height: calc(var(--ivh) * 90 - 4.25rem);
   max-height: calc(90dvh - 4.25rem);

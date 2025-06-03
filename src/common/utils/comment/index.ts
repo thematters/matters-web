@@ -53,7 +53,7 @@ const filterComment = (comment: Comment) => {
 }
 
 export function filterComments<T>(comments: Comment[]): T[] {
-  return comments.filter(filterComment) as any
+  return comments.filter(filterComment) as T[]
 }
 
 /**

@@ -5,10 +5,12 @@ export const toDigestTagPlaceholder = (content: string) =>
     __typename: 'Tag',
     id: content,
     content,
+
     articles: {
       __typename: 'ArticleConnection',
       totalCount: 0,
     },
+
     numArticles: 0,
     numAuthors: 0,
   }) as DigestTagFragment

@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconDraft from '@/public/static/icons/24px/draft.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { Icon, TextIcon } from '~/components'
 import { ArticleDigestDraftTitleArticleFragment } from '~/gql/graphql'
 

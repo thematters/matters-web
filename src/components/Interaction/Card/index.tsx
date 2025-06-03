@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import classNames from 'classnames'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -44,7 +45,7 @@ export interface CardProps {
   htmlHref?: string
   htmlTarget?: '_blank'
 
-  onClick?: () => any
+  onClick?: () => void
 
   ref?: any
 
@@ -217,8 +218,8 @@ export const Card: React.FC<React.PropsWithChildren<CardProps>> = forwardRef(
 
     if (is === 'link' && href) {
       return (
-        <Link href={href} legacyBehavior>
-          <a {...props}>{children}</a>
+        <Link href={href} {...props}>
+          {children}
         </Link>
       )
     }

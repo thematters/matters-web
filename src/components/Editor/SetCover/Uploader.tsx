@@ -1,9 +1,9 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import classNames from 'classnames'
-import _omit from 'lodash/omit'
+import { useId } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/circle-plus.svg'
+import IconCirclePlus from '@/public/static/icons/24px/circle-plus.svg'
 import { ACCEPTED_COVER_UPLOAD_IMAGE_TYPES, ENTITY_TYPE } from '~/common/enums'
 import { validateImage } from '~/common/utils'
 import { Icon } from '~/components'
@@ -16,13 +16,15 @@ export interface UploadEntity {
 }
 
 type UploaderProps = {
-  addAssets: (files: File[]) => any
+  addAssets: (files: File[]) => void
 }
 
 const Uploader: React.FC<UploaderProps> = ({ addAssets }) => {
   const intl = useIntl()
   const acceptTypes = ACCEPTED_COVER_UPLOAD_IMAGE_TYPES.join(',')
-  const fieldId = 'editor-cover-upload-form'
+  const fieldId = useId()
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   const handleChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     event.stopPropagation()
@@ -51,20 +53,19 @@ const Uploader: React.FC<UploaderProps> = ({ addAssets }) => {
       <section className={styles.uploader}>
         <Icon icon={IconCirclePlus} color="greyDarker" size={32} />
       </section>
-      <VisuallyHidden>
-        <input
-          id={fieldId}
-          type="file"
-          name="file"
-          aria-label={intl.formatMessage({
-            defaultMessage: 'Upload Cover',
-            id: 'QvPc1q',
-          })}
-          accept={acceptTypes}
-          multiple={false}
-          onChange={handleChange}
-        />
-      </VisuallyHidden>
+      <input
+        id={fieldId}
+        type="file"
+        name="file"
+        aria-label={intl.formatMessage({
+          defaultMessage: 'Upload Cover',
+          id: 'QvPc1q',
+        })}
+        accept={acceptTypes}
+        multiple={false}
+        onChange={handleChange}
+        {...visuallyHiddenProps}
+      />
     </label>
   )
 }

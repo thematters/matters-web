@@ -45,7 +45,7 @@ const EditDraftCampaign = ({ draft, campaigns }: OptionItemProps) => {
       campaigns={selectableCampaigns}
       selectedCampaign={selectedCampaign}
       selectedStage={selectedStage}
-      editCampaign={(value) => edit(value as any)}
+      editCampaign={edit}
     />
   )
 }

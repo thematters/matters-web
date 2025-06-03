@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 import { useIntl } from 'react-intl'
 
-import { ReactComponent as IconDraft } from '@/public/static/icons/24px/draft.svg'
-import { ReactComponent as IconUser } from '@/public/static/icons/24px/user.svg'
+import IconDraft from '@/public/static/icons/24px/draft.svg'
+import IconUser from '@/public/static/icons/24px/user.svg'
 import { TEST_ID } from '~/common/enums'
 import { numAbbr } from '~/common/utils'
 import { Icon, TextIcon } from '~/components'

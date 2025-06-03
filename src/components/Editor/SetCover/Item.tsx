@@ -3,7 +3,7 @@ import _omit from 'lodash/omit'
 import { useContext, useEffect } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconCircleCheckFill2 } from '@/public/static/icons/24px/circle-check-fill-2.svg'
+import IconCircleCheckFill2 from '@/public/static/icons/24px/circle-check-fill-2.svg'
 import { ASSET_TYPE, ENTITY_TYPE } from '~/common/enums'
 import { validateImage } from '~/common/utils'
 import {
@@ -22,6 +22,7 @@ import {
   DIRECT_IMAGE_UPLOAD_DONE,
 } from '~/components/GQL/mutations/uploadFile'
 import {
+  AssetType,
   DirectImageUploadDoneMutation,
   DirectImageUploadMutation,
 } from '~/gql/graphql'
@@ -37,9 +38,9 @@ export interface UploadEntity {
 type ItemProps = {
   asset: EditorAsset
   selected?: EditorAsset
-  setSelected: (asset: EditorAsset | undefined) => any
-  updateAsset: (asset: EditorAsset) => any
-  refetchAssets: () => any
+  setSelected: (asset: EditorAsset | undefined) => void
+  updateAsset: (asset: EditorAsset) => void
+  refetchAssets: () => void
 } & UploadEntity
 
 const Item: React.FC<ItemProps> = ({
@@ -121,7 +122,7 @@ const Item: React.FC<ItemProps> = ({
           draftId: asset.draftId,
           id: assetId,
           path: asset.path,
-          type: ASSET_TYPE.cover as any,
+          type: ASSET_TYPE.cover as unknown as AssetType,
           draft: false,
           file: undefined,
         })
@@ -133,7 +134,7 @@ const Item: React.FC<ItemProps> = ({
       } else {
         throw new Error()
       }
-    } catch (e) {
+    } catch {
       toast.error({
         message: (
           <FormattedMessage

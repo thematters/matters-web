@@ -1,9 +1,9 @@
 import gql from 'graphql-tag'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconExpand } from '@/public/static/icons/24px/expand.svg'
+import IconExpand from '@/public/static/icons/24px/expand.svg'
 import { Icon, Menu, useMutation } from '~/components'
-import { UncollapseCommentMutation } from '~/gql/graphql'
+import { CommentState, UncollapseCommentMutation } from '~/gql/graphql'
 
 const UNCOLLAPSE_COMMENT = gql`
   mutation UncollapseComment($id: ID!, $state: CommentState!) {
@@ -23,7 +23,7 @@ const UncollapseButton = ({ commentId }: { commentId: string }) => {
         updateCommentsState: [
           {
             id: commentId,
-            state: 'active' as any,
+            state: CommentState.Active,
             __typename: 'Comment',
           },
         ],

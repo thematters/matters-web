@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconArchive } from '@/public/static/icons/24px/archive.svg'
+import IconArchive from '@/public/static/icons/24px/archive.svg'
 import { Icon, Menu } from '~/components'
 
 const ArchiveArticleButton = ({ openDialog }: { openDialog: () => void }) => {

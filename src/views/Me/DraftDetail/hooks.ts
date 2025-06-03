@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/client'
+import { ApolloError, useQuery } from '@apollo/client'
 import _uniq from 'lodash/uniq'
 import { useContext, useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -55,8 +55,8 @@ export const useVersionConflictHandler = () => {
   ): Promise<T> => {
     try {
       return await promise
-    } catch (error: any) {
-      const [, codes] = parseFormSubmitErrors(error)
+    } catch (error) {
+      const [, codes] = parseFormSubmitErrors(error as ApolloError)
       for (const code of codes) {
         if (code.includes(ERROR_CODES.DRAFT_VERSION_CONFLICT) && retryFn) {
           // Show native confirm dialog instead of using the event
@@ -570,7 +570,7 @@ export const useEditDraftCampaign = () => {
   const handleVersionConflict = useVersionConflictHandler()
 
   const edit = async (
-    selected?: { campaign: string; stage: string },
+    selected?: { campaign: string; stage?: string | null },
     newId?: string,
     lastUpdatedAt?: string
   ) => {
@@ -596,7 +596,7 @@ export const useEditDraftCampaign = () => {
 
   const createDraftAndEdit = async (selected?: {
     campaign: string
-    stage: string
+    stage?: string | null
   }) => {
     if (getDraftId()) {
       return edit(selected, undefined, getDraftUpdatedAt())
@@ -608,7 +608,7 @@ export const useEditDraftCampaign = () => {
   }
 
   return {
-    edit: async (selected?: { campaign: string; stage: string }) =>
+    edit: async (selected?: { campaign: string; stage?: string | null }) =>
       addRequest(() => createDraftAndEdit(selected)),
     saving: saving,
   }

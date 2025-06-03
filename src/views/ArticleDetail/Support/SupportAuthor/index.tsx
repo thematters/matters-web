@@ -8,14 +8,14 @@ import {
   PAYMENT_CURRENCY as CURRENCY,
   SUPPORT_TAB_PREFERENCE_KEY,
 } from '~/common/enums'
-import { featureSupportedChains, storage } from '~/common/utils'
+import { storage } from '~/common/utils'
 import {
   AuthWalletFeed,
   SetPaymentPasswordDialog,
   Spacer,
   SpinnerBlock,
+  useCurationNetwork,
   useStep,
-  useTargetNetwork,
   ViewerContext,
 } from '~/components'
 import PaymentProcessingForm from '~/components/Forms/PaymentForm/Processing'
@@ -79,8 +79,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
   const supportCurrency = storage.get<CURRENCY>(SUPPORT_TAB_PREFERENCE_KEY)
 
   const { address } = useAccount()
-  const targetNetork = featureSupportedChains.curation[0]
-  const { isUnsupportedNetwork } = useTargetNetwork(targetNetork)
+  const { isUnsupportedNetwork } = useCurationNetwork()
 
   const forward = (step: SupportStep) => {
     _forward(step)
@@ -179,7 +178,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
       <DisableSupport
         currency={currency}
         setCurrency={switchCurrency}
-        recipient={props.recipient}
         onClose={onClose}
       />
     )
@@ -189,11 +187,7 @@ const SupportAuthor = (props: SupportAuthorProps) => {
     <>
       <SetPaymentPasswordDialog />
       {showTabs && (
-        <DonationTabs
-          currency={currency}
-          setCurrency={switchCurrency}
-          recipient={props.recipient}
-        />
+        <DonationTabs currency={currency} setCurrency={switchCurrency} />
       )}
       {isSetAmount && (
         <>
@@ -259,7 +253,6 @@ const SupportAuthor = (props: SupportAuthorProps) => {
           recipient={recipient}
           amount={amount}
           currency={currency}
-          targetId={targetId}
           switchToBindWallet={() => forward('bindWallet')}
         />
       )}

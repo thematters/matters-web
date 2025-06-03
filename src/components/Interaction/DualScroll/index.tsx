@@ -7,12 +7,12 @@ import EndOfResults from '../EndOfResults'
 interface Props {
   hasNextPage: boolean
   hasPreviousPage: boolean
-  loadMore: () => Promise<any>
-  loadPrevious: () => Promise<any>
+  loadMore: () => Promise<unknown>
+  loadPrevious: () => Promise<unknown>
   loader?: React.ReactNode
   eof?: React.ReactNode
   eofSpacingTop?: 'base' | 'xLoose'
-  scrollableAncestor?: any
+  scrollableAncestor?: HTMLElement
   className?: string
 }
 
@@ -24,7 +24,7 @@ export const DualScroll: React.FC<React.PropsWithChildren<Props>> = ({
   loadPrevious,
   eof,
   eofSpacingTop,
-  scrollableAncestor,
+  // scrollableAncestor,
   children,
   className,
 }) => {

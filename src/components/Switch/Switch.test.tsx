@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { describe, expect, it } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { Switch, SwitchProps } from '~/components'
 
 const AnySwitch = ({
@@ -32,7 +32,7 @@ describe('<Switch>', () => {
 
     // ACT
     const toggle = screen.getByRole('checkbox')
-    toggle.click()
+    fireEvent.click(toggle)
 
     // ASSERT
     expect(screen.getByRole('checkbox', { checked: true })).toBeDefined()

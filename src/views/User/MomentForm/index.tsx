@@ -3,7 +3,6 @@ import { useContext, useEffect, useState } from 'react'
 
 import { OPEN_MOMENT_FORM, URL_USER_PROFILE } from '~/common/enums'
 import { Media, SpinnerBlock, useRoute, ViewerContext } from '~/components'
-import _MomentForm from '~/components/Forms/MomentForm'
 
 const DynamicMomentForm = dynamic(
   () => import('~/components/Forms/MomentForm'),

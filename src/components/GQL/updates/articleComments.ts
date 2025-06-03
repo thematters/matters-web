@@ -25,7 +25,7 @@ export const updateArticleComments = ({
   comment,
   type,
 }: {
-  cache: ApolloCache<any>
+  cache: ApolloCache<object>
   articleId: string
   commentId?: string
   comment?: Comment

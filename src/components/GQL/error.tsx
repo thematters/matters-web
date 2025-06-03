@@ -48,12 +48,8 @@ export const toastMutationErrors = (
   error: ApolloError,
   options?: ToastMutationErrorsOptions
 ) => {
-  let {
-    showToast,
-    showLoginToast,
-    toastType = 'error',
-    customErrors,
-  } = options || {}
+  let { showToast, showLoginToast } = options || {}
+  const { toastType = 'error', customErrors } = options || {}
   showToast = typeof showToast === 'undefined' ? true : showToast
   showLoginToast = typeof showLoginToast === 'undefined' ? true : showLoginToast
 

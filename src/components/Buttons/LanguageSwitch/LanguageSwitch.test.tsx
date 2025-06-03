@@ -21,7 +21,7 @@ describe('<LanguageSwitch>', () => {
     fireEvent.click($langBtn)
     const targetLang =
       lang === UserLanguage.En ? UserLanguage.ZhHans : UserLanguage.En
-    const targetLangText = (LANG_TEXT_MAP as any)[targetLang]
+    const targetLangText = LANG_TEXT_MAP[targetLang]
     const $targetLangMenuItem = screen.getByRole('menuitem', {
       name: targetLangText,
     })

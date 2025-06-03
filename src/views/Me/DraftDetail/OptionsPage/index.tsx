@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { Button, Icon } from '~/components'
 
 import { DraftLoadingStates } from '../DraftLoadingStates'

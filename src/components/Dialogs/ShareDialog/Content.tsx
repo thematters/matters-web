@@ -60,7 +60,7 @@ const ShareDialogContent: React.FC<ShareDialogContentProps> = ({
         <section className={containerClasses}>
           <section className={styles.left}>
             <ShareButtons.Twitter title={shareTitle} link={shareLink} />
-            <ShareButtons.Facebook title={shareTitle} link={shareLink} />
+            <ShareButtons.Facebook link={shareLink} />
             <ShareButtons.LINE title={shareTitle} link={shareLink} />
           </section>
 

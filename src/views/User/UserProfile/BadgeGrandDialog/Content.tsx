@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconLeft } from '@/public/static/icons/24px/left.svg'
-import { ReactComponent as GrandBackground } from '@/public/static/images/badge-grand-background.svg'
+import IconLeft from '@/public/static/icons/24px/left.svg'
+import IconGrandBackground from '@/public/static/images/badge-grand-background.svg'
 import { URL_USER_PROFILE } from '~/common/enums'
 import { toPath } from '~/common/utils'
 import { Button, CopyToClipboard, Dialog, Icon, useRoute } from '~/components'
@@ -58,7 +58,7 @@ const BadgeGrandDialogContent = ({
       <Dialog.Content>
         <section className={styles.container}>
           <section className={styles.badgeIcon}>
-            <GrandBackground />
+            <IconGrandBackground />
           </section>
 
           <Dialog.Content.Message align="center" smUpAlign="center">

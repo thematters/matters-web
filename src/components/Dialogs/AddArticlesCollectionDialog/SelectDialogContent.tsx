@@ -1,4 +1,4 @@
-import { FieldInputProps, FormikProvider, useField } from 'formik'
+import { FieldInputProps, FormikProps, FormikProvider, useField } from 'formik'
 
 import { DateTime, Form, InfiniteScroll } from '~/components'
 import { SquareCheckBoxBoxProps } from '~/components/Form/SquareCheckBox'
@@ -10,13 +10,20 @@ import {
 import styles from './styles.module.css'
 
 interface SelectDialogContentProps {
-  formik: any
+  formik: FormikProps<{ checked: string[] }>
   user: UserArticlesUserFragment
   collection: CollectionArticlesCollectionFragment
   checkingIds: string[]
   formId: string
   loadMore: () => Promise<void>
-  pageInfo: any
+  pageInfo:
+    | {
+        __typename?: 'PageInfo'
+        startCursor?: string | null
+        endCursor?: string | null
+        hasNextPage: boolean
+      }
+    | undefined
 }
 
 const SquareCheckBoxField: React.FC<SquareCheckBoxBoxProps> = (props) => {
@@ -47,7 +54,7 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
     <FormikProvider value={formik}>
       <Form id={formId} onSubmit={formik.handleSubmit} className={styles.form}>
         <InfiniteScroll
-          hasNextPage={pageInfo.hasNextPage}
+          hasNextPage={pageInfo?.hasNextPage || false}
           loadMore={loadMore}
           eof
         >
@@ -73,7 +80,9 @@ const SelectDialogContent: React.FC<SelectDialogContentProps> = ({
                   supHeight={18}
                   hint={node.title}
                   disabled={disabled}
-                  {...(formik.getFieldProps('checked') as FieldInputProps<any>)}
+                  {...(formik.getFieldProps('checked') as FieldInputProps<
+                    string[]
+                  >)}
                   value={node.id}
                 />
               </section>

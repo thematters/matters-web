@@ -1,3 +1,4 @@
+import { ApolloError } from '@apollo/client'
 import _omit from 'lodash/omit'
 import dynamic from 'next/dynamic'
 import { useContext, useState } from 'react'
@@ -251,11 +252,11 @@ const BaseDraftDetail = () => {
       })
 
       setSaveStatus('saved')
-    } catch (error: any) {
+    } catch (error) {
       setSaveStatus('saveFailed')
 
       setTimeout(() => {
-        const [, codes] = parseFormSubmitErrors(error as any)
+        const [, codes] = parseFormSubmitErrors(error as ApolloError)
         codes.forEach((code) => {
           if (code.includes(ERROR_CODES.DRAFT_VERSION_CONFLICT)) {
             const confirmResult = window.confirm(

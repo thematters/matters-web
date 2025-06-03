@@ -19,13 +19,12 @@
   & p {
     flex-grow: 1;
     margin-right: var(--sp8);
+    -webkit-line-clamp: 3;
     font-size: var(--text13);
     line-height: 1.85;
     color: var(--color-grey);
 
     @mixin line-clamp;
-
-    -webkit-line-clamp: 3;
   }
 
   & .cover {

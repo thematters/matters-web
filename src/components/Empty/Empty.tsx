@@ -1,4 +1,3 @@
-import { Alert } from '@reach/alert'
 import classNames from 'classnames'
 
 import { capitalizeFirstLetter } from '~/common/utils'
@@ -27,9 +26,10 @@ export const Empty = ({
     <section className={emptyClasses}>
       {icon && <section>{icon}</section>}
 
-      <Alert type="polite">
-        <section className={styles.description}>{description}</section>
-      </Alert>
+      <section className={styles.description} role="alert" aria-live="polite">
+        {description}
+      </section>
+
       {footer && <footer>{footer}</footer>}
     </section>
   )

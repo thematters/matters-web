@@ -1,8 +1,7 @@
-import { VisuallyHidden } from '@reach/visually-hidden'
 import { useDrag } from '@use-gesture/react'
 import classNames from 'classnames'
-import _get from 'lodash/get'
 import { useRef, useState } from 'react'
+import { useVisuallyHidden } from 'react-aria'
 
 import {
   DISABLE_SUSPEND_DISMISS_ON_ESC,
@@ -37,7 +36,7 @@ const Inner: React.FC<
   React.PropsWithChildren<
     DialogInnerProps & {
       style?: React.CSSProperties
-      initialFocusRef: React.RefObject<any>
+      initialFocusRef: React.RefObject<HTMLButtonElement>
     }
   >
 > = ({
@@ -56,8 +55,10 @@ const Inner: React.FC<
 
   children,
 }) => {
-  const node: React.RefObject<any> | null = useRef(null)
+  const node: React.RefObject<HTMLDivElement> | null = useRef(null)
   const [suspendDismissOnESC, setSuspendDismissOnESC] = useState(false)
+
+  const { visuallyHiddenProps } = useVisuallyHidden()
 
   useEventListener(ENABLE_SUSPEND_DISMISS_ON_ESC, () => {
     setSuspendDismissOnESC(true)
@@ -94,7 +95,7 @@ const Inner: React.FC<
     if (!down && y > 30) {
       onDismiss()
     } else {
-      node.current.style.transform = `translateY(${Math.max(y, 0)}px)`
+      node.current!.style.transform = `translateY(${Math.max(y, 0)}px)`
     }
   })
 
@@ -159,9 +160,12 @@ const Inner: React.FC<
         handleKeyboardEvent(nativeEvent)
       }}
     >
-      <VisuallyHidden>
-        <button type="button" ref={initialFocusRef} aria-hidden="true" />
-      </VisuallyHidden>
+      <button
+        type="button"
+        ref={initialFocusRef}
+        aria-hidden="true"
+        {...visuallyHiddenProps}
+      />
 
       <Media at="sm">
         {dismissOnHandle && <Handle closeDialog={onDismiss} {...bind()} />}

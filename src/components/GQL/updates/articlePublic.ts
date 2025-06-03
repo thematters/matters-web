@@ -18,7 +18,7 @@ export const updateArticlePublic = ({
   viewer,
   txId,
 }: {
-  cache: ApolloCache<any>
+  cache: ApolloCache<object>
   shortHash: string
   routerLang: UserLanguage
   viewer?: Viewer

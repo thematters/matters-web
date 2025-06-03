@@ -1,4 +1,4 @@
-import { ReactComponent as IconMore } from '@/public/static/icons/24px/more.svg'
+import IconMore from '@/public/static/icons/24px/more.svg'
 import { Button, Icon } from '~/components'
 import { NoticeActorAvatarUserFragment } from '~/gql/graphql'
 

@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDrawer } from '@/public/static/icons/24px/drawer.svg'
+import IconDrawer from '@/public/static/icons/24px/drawer.svg'
 import { toPath } from '~/common/utils'
 import { Button, Icon, Media, TextIcon, useRoute } from '~/components'
 import type { ButtonHeight } from '~/components/Button'

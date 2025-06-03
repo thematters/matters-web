@@ -1,8 +1,7 @@
 import { useQuery } from '@apollo/client'
-import _get from 'lodash/get'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconAnalyticsFollower24 } from '@/public/static/icons/24px/analytics-follower.svg'
+import IconAnalyticsFollower24 from '@/public/static/icons/24px/analytics-follower.svg'
 import { CHART_COLOR } from '~/common/enums'
 import {
   type Datum,

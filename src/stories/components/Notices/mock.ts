@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import {
   MOCK_ARTILCE,
   MOCK_BLOCKCHAIN_TRANSACTION,
@@ -25,7 +27,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    userNoticeType: 'UserNewFollower' as any,
+    userNoticeType: 'UserNewFollower',
     user: MOCK_USER,
   },
   // UserNewFollower: multi actors
@@ -35,7 +37,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER, MOCK_USER, MOCK_USER],
-    userNoticeType: 'UserNewFollower' as any,
+    userNoticeType: 'UserNewFollower',
     user: MOCK_USER,
   },
 
@@ -49,7 +51,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleNoticeType: 'ArticlePublished' as any,
+    articleNoticeType: 'ArticlePublished',
     article: MOCK_ARTILCE,
   },
   // ArticleMentionedYou
@@ -59,7 +61,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleNoticeType: 'ArticleMentionedYou' as any,
+    articleNoticeType: 'ArticleMentionedYou',
     article: MOCK_ARTILCE,
   },
   // ArticleNewSubscriber
@@ -69,7 +71,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleNoticeType: 'ArticleNewSubscriber' as any,
+    articleNoticeType: 'ArticleNewSubscriber',
     article: MOCK_ARTILCE,
   },
   // ArticleNewSubscriber: multi actors
@@ -79,7 +81,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER, MOCK_USER],
-    articleNoticeType: 'ArticleNewSubscriber' as any,
+    articleNoticeType: 'ArticleNewSubscriber',
     article: MOCK_ARTILCE,
   },
   // ArticleNewAppreciation
@@ -89,7 +91,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleNoticeType: 'ArticleNewAppreciation' as any,
+    articleNoticeType: 'ArticleNewAppreciation',
     article: MOCK_ARTILCE,
   },
   // ArticleNewAppreciation: multi actors
@@ -99,7 +101,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER, MOCK_USER],
-    articleNoticeType: 'ArticleNewAppreciation' as any,
+    articleNoticeType: 'ArticleNewAppreciation',
     article: MOCK_ARTILCE,
   },
   // RevisedArticlePublished
@@ -109,7 +111,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleNoticeType: 'RevisedArticlePublished' as any,
+    articleNoticeType: 'RevisedArticlePublished',
     article: MOCK_ARTILCE,
   },
   // RevisedArticleNotPublished
@@ -119,7 +121,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleNoticeType: 'RevisedArticleNotPublished' as any,
+    articleNoticeType: 'RevisedArticleNotPublished',
     article: MOCK_ARTILCE,
   },
   // CircleNewArticle
@@ -129,7 +131,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleNoticeType: 'CircleNewArticle' as any,
+    articleNoticeType: 'CircleNewArticle',
     article: MOCK_CIRCLE_ARTICLE,
   },
 
@@ -143,7 +145,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    articleArticleNoticeType: 'ArticleNewCollected' as any,
+    articleArticleNoticeType: 'ArticleNewCollected',
     article: MOCK_CIRCLE_ARTICLE,
     collection: MOCK_CIRCLE_ARTICLE,
   },
@@ -158,7 +160,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    commentNoticeType: 'CommentPinned' as any,
+    commentNoticeType: 'CommentPinned',
     comment: MOCK_COMMENT,
   },
   // CommentMentionedYou:Article
@@ -168,7 +170,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    commentNoticeType: 'CommentMentionedYou' as any,
+    commentNoticeType: 'CommentMentionedYou',
     comment: MOCK_COMMENT,
   },
   // CommentMentionedYou:Circle
@@ -178,7 +180,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    commentNoticeType: 'CommentMentionedYou' as any,
+    commentNoticeType: 'CommentMentionedYou',
     comment: MOCK_CIRCLE_COMMENT,
   },
   // ArticleNewComment
@@ -188,7 +190,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    commentNoticeType: 'ArticleNewComment' as any,
+    commentNoticeType: 'ArticleNewComment',
     comment: MOCK_COMMENT,
   },
   // CircleNewBroadcast
@@ -198,7 +200,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    commentNoticeType: 'CircleNewBroadcast' as any,
+    commentNoticeType: 'CircleNewBroadcast',
     comment: MOCK_CIRCLE_COMMENT,
   },
   // CircleNewDiscussion
@@ -208,12 +210,12 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    commentNoticeType: 'CircleNewDiscussion' as any,
+    commentNoticeType: 'CircleNewDiscussion',
     comment: MOCK_CIRCLE_COMMENT,
   },
   // CommentLiked
   {
-    __typename: 'CommentNotice',
+    __typename: 'CommentNotice' as any,
     id: 'CommentLikedNotice',
     unread: false,
     createdAt: '2024-06-24T07:29:17.682Z',
@@ -262,7 +264,7 @@ export const MOCK_NOTICE_LIST = [
    */
   // MomentLiked
   {
-    __typename: 'MomentNotice',
+    __typename: 'MomentNotice' as any,
     id: 'MomentLikedNotice',
     unread: false,
     createdAt: '2020-07-10T07:29:17.682Z',
@@ -272,7 +274,7 @@ export const MOCK_NOTICE_LIST = [
   },
   // CommentLiked:Moment
   {
-    __typename: 'CommentNotice',
+    __typename: 'CommentNotice' as any,
     id: 'MomentCommentLikedNotice',
     unread: false,
     createdAt: '2024-06-24T07:29:17.682Z',
@@ -282,7 +284,7 @@ export const MOCK_NOTICE_LIST = [
   },
   // MomentNewComment
   {
-    __typename: 'CommentNotice',
+    __typename: 'CommentNotice' as any,
     id: 'MomentNewCommentNotice',
     unread: false,
     createdAt: '2024-06-24T07:29:17.682Z',
@@ -297,12 +299,12 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    commentNoticeType: 'CommentMentionedYou' as any,
+    commentNoticeType: 'CommentMentionedYou',
     comment: MOCK_MOMENT_COMMENT,
   },
   // MomentMentionedYou
   {
-    __typename: 'MomentNotice',
+    __typename: 'MomentNotice' as any,
     id: 'MomentMentionedNotice',
     unread: false,
     createdAt: '2020-07-10T07:29:17.682Z',
@@ -321,7 +323,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    txNoticeType: 'PaymentReceivedDonation' as any,
+    txNoticeType: 'PaymentReceivedDonation',
     tx: MOCK_TRANSACTION,
   },
   // WithdrewLockedTokens
@@ -331,7 +333,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    txNoticeType: 'WithdrewLockedTokens' as any,
+    txNoticeType: 'WithdrewLockedTokens',
     tx: { ...MOCK_TRANSACTION, blockchainTx: MOCK_BLOCKCHAIN_TRANSACTION },
   },
 
@@ -345,7 +347,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    circleNoticeType: 'CircleNewFollower' as any,
+    circleNoticeType: 'CircleNewFollower',
     tx: MOCK_CIRCLE,
   },
   // CircleNewFollower: multi actors
@@ -355,7 +357,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER, MOCK_USER, MOCK_USER],
-    circleNoticeType: 'CircleNewFollower' as any,
+    circleNoticeType: 'CircleNewFollower',
     tx: MOCK_CIRCLE,
   },
   // CircleNewSubscriber
@@ -365,7 +367,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    circleNoticeType: 'CircleNewSubscriber' as any,
+    circleNoticeType: 'CircleNewSubscriber',
     tx: MOCK_CIRCLE,
   },
   // CircleNewUnsubscriber
@@ -375,7 +377,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    circleNoticeType: 'CircleNewUnsubscriber' as any,
+    circleNoticeType: 'CircleNewUnsubscriber',
     tx: MOCK_CIRCLE,
   },
   // CircleInvitation
@@ -385,7 +387,7 @@ export const MOCK_NOTICE_LIST = [
     unread: false,
     createdAt: '2020-12-24T07:29:17.682Z',
     actors: [MOCK_USER],
-    circleNoticeType: 'CircleInvitation' as any,
+    circleNoticeType: 'CircleInvitation',
     circle: MOCK_CIRCLE,
   },
 

@@ -2,12 +2,11 @@ import { useApolloClient, useQuery } from '@apollo/client'
 import { useFormik } from 'formik'
 import _uniqBy from 'lodash/uniqBy'
 import { useEffect, useState } from 'react'
-import AutosizeInput from 'react-input-autosize'
 import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
-import { ReactComponent as IconCirclePlus } from '@/public/static/icons/24px/circle-plus.svg'
-import { ReactComponent as IconHashTag } from '@/public/static/icons/24px/hashtag.svg'
+import IconCirclePlus from '@/public/static/icons/24px/circle-plus.svg'
+import IconHashTag from '@/public/static/icons/24px/hashtag.svg'
 import { ARTICLE_TAGS_MAX_COUNT } from '~/common/enums/article'
 import { INPUT_DEBOUNCE } from '~/common/enums/time'
 import { normalizeTag, validateTagName } from '~/common/utils'
@@ -27,6 +26,7 @@ import {
   QuickResultQuery,
 } from '~/gql/graphql'
 
+import InputAutosize from '../../InputAutosize'
 import { EDITOR_RECENT_TAGS } from './gql'
 import styles from './styles.module.css'
 
@@ -227,7 +227,7 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
           autoComplete="off"
         >
           <Icon icon={IconHashTag} color="greyDark" />
-          <AutosizeInput
+          <InputAutosize
             type="text"
             name="tag"
             id="search-input-tag"
@@ -237,13 +237,14 @@ const TagInput = ({ tags, onAddTag, saving }: TagInputProps) => {
             disabled={saving}
             aria-label={inputAriaLabel}
             placeholder={inputAriaLabel}
+            size={8}
             className={styles.input}
             onBlur={formik.handleBlur}
-            onChange={(e) => {
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
               setSearchKey(e.target.value)
               formik.handleChange(e)
             }}
-            onKeyDown={(e) => {
+            onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
               if (e.key === 'Enter') {
                 e.preventDefault()
                 formik.handleSubmit()

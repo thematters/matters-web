@@ -153,7 +153,7 @@ export const checkImagesLoaded = async (
 ): Promise<void> => {
   const imagePromises: Promise<void>[] = []
 
-  for (let img of images) {
+  for (const img of images) {
     if (img.complete) {
       continue
     }

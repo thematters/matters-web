@@ -29,7 +29,7 @@ import { toast, useEventListener } from '~/components'
 interface Props {
   defaultValue?: string
   enable?: boolean
-  update: (params: { summary: any }) => void
+  update: (params: { summary: string }) => void
   editor?: Editor | null
 }
 

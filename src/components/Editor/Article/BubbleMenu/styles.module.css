@@ -57,9 +57,9 @@
     font-size: var(--text14);
     color: var(--color-black);
     text-align: left;
+    outline: none;
     background: transparent;
     border: none;
-    outline: none;
 
     & a {
       @mixin line-clamp;

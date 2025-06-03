@@ -1,4 +1,4 @@
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
 import { Button, Icon, Media, TextIcon } from '~/components'
 import type { ButtonHeight } from '~/components/Button'
 import { EditMetaDraftFragment } from '~/gql/graphql'

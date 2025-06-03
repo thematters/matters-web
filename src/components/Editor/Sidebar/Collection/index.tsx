@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconHelp } from '@/public/static/icons/24px/help.svg'
-import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconHelp from '@/public/static/icons/24px/help.svg'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { MAX_ARTICLE_COLLECT_LENGTH } from '~/common/enums'
 import { Icon, Tooltip } from '~/components'
 import { SetCollectionProps } from '~/components/Editor'
@@ -22,7 +22,6 @@ const SidebarCollection = ({
   collection,
   editCollection,
   collectionSaving,
-  nodeExclude,
   disabled,
 }: SidebarCollectionProps) => {
   const intl = useIntl()

@@ -16,7 +16,7 @@ export type ArticleDigestSidebarProps = {
   titleTextSize?: ArticleDigestTitleTextSize
   hasBackground?: boolean
   hasCover?: boolean
-  onClick?: () => any
+  onClick?: () => void
   onClickAuthor?: () => void
 } & CardProps
 

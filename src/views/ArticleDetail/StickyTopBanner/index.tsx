@@ -59,21 +59,16 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
           />
         )}
       </span>
-
       {lang === UserLanguage.En && <>&nbsp;</>}
-
       <Link href={PATHS.ME_ARCHIVED}>
-        <a>
-          <TextIcon decoration="underline" size={16} weight="semibold">
-            <FormattedMessage
-              defaultMessage="Back to my works"
-              id="HR599l"
-              description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
-            />
-          </TextIcon>
-        </a>
+        <TextIcon decoration="underline" size={16} weight="semibold">
+          <FormattedMessage
+            defaultMessage="Back to my works"
+            id="HR599l"
+            description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
+          />
+        </TextIcon>
       </Link>
-
       <style global jsx>{`
         body {
           margin-top: 42px;
@@ -86,6 +81,7 @@ const InactiveBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
 const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
   const { lang } = useContext(LanguageContext)
   const { router } = useRoute()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { shortHash, v, ...qs } = router.query
 
   const path = toPath({
@@ -103,21 +99,16 @@ const RevisionBanner = ({ article }: Omit<StickyTopBannerProps, 'type'>) => {
           description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
         />
       </span>
-
       {lang === 'en' && <span>&nbsp;</span>}
-
       <Link {...path}>
-        <a>
-          <TextIcon decoration="underline" size={16} weight="medium">
-            <FormattedMessage
-              defaultMessage="back to latest"
-              id="imXsmo"
-              description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
-            />
-          </TextIcon>
-        </a>
+        <TextIcon decoration="underline" size={16} weight="medium">
+          <FormattedMessage
+            defaultMessage="back to latest"
+            id="imXsmo"
+            description="src/views/ArticleDetail/StickyTopBanner/index.tsx"
+          />
+        </TextIcon>
       </Link>
-
       <style global jsx>{`
         body {
           margin-top: 42px;

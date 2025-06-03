@@ -2,7 +2,7 @@ import mockRouter from 'next-router-mock'
 import { describe, expect, it, vi } from 'vitest'
 
 import { TEST_ID } from '~/common/enums'
-import { render, screen } from '~/common/utils/test'
+import { fireEvent, render, screen } from '~/common/utils/test'
 import { ArticleDigestFeed } from '~/components'
 import { ArticleState } from '~/gql/graphql'
 import { MOCK_ARTILCE } from '~/stories/mocks'
@@ -24,7 +24,7 @@ describe('<ArticleDigest.Feed>', () => {
     // click title to navigate to article detail page
     const $title = screen.getByRole('heading', { name: MOCK_ARTILCE.title })
     expect($title).toBeInTheDocument()
-    $title.click()
+    fireEvent.click($title)
     expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).toBeCalledTimes(1)
 
@@ -33,7 +33,7 @@ describe('<ArticleDigest.Feed>', () => {
     // click summary to navigate to article detail page
     const $summary = screen.getByText(MOCK_ARTILCE.summary)
     expect($summary).toBeInTheDocument()
-    $summary.click()
+    fireEvent.click($summary)
     expect(mockRouter.asPath).toContain(MOCK_ARTILCE.shortHash)
     expect(handleClickDigest).toBeCalledTimes(2)
 
@@ -42,7 +42,7 @@ describe('<ArticleDigest.Feed>', () => {
     // click cover to navigate to article detail page
     const $cover = screen.getByTestId(TEST_ID.DIGEST_ARTICLE_FEED_COVER)
     expect($cover).toBeInTheDocument()
-    $cover.click()
+    fireEvent.click($cover)
     expect(handleClickDigest).toBeCalledTimes(3)
   })
 

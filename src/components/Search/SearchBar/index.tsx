@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from 'react'
 import { useIntl } from 'react-intl'
 import { useDebounce } from 'use-debounce'
 
-import { ReactComponent as IconNavSearch } from '@/public/static/icons/24px/nav-search.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconNavSearch from '@/public/static/icons/24px/nav-search.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import {
   INPUT_DEBOUNCE,
   KEYVALUE,
@@ -109,12 +109,12 @@ export const SearchBar: React.FC<SearchBarProps> = ({
   const hasTags = tagEdges && tagEdges.length > 0
 
   if (hasUsers) {
-    userEdges.map(({ cursor }, i) => {
+    userEdges.map(({ cursor }) => {
       items.push(`user${cursor}`)
     })
   }
   if (hasTags) {
-    tagEdges.map(({ cursor }, i) => {
+    tagEdges.map(({ cursor }) => {
       items.push(`tag${cursor}`)
     })
   }

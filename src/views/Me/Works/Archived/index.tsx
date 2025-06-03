@@ -54,7 +54,7 @@ export const BaseMeWorksArchived = () => {
       eof
     >
       <List>
-        {edges.map(({ node, cursor }) => (
+        {edges.map(({ node }) => (
           <List.Item key={node.id}>
             <ArticleDigestArchived article={node} />
           </List.Item>

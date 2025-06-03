@@ -43,19 +43,18 @@ export const LinkWrapper: React.FC<
   })
 
   return (
-    <Link href={href} legacyBehavior>
-      <a
-        className={linkClasses}
-        onClick={(e) => {
-          if (onClick) {
-            onClick()
-            e.stopPropagation()
-          }
-        }}
-        {...(testId ? { ['data-test-id']: testId } : {})}
-      >
-        {children}
-      </a>
+    <Link
+      href={href}
+      className={linkClasses}
+      onClick={(e) => {
+        if (onClick) {
+          onClick()
+          e.stopPropagation()
+        }
+      }}
+      {...(testId ? { ['data-test-id']: testId } : {})}
+    >
+      {children}
     </Link>
   )
 }

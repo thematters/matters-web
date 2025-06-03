@@ -16,7 +16,6 @@ import styles from './styles.module.css'
 const COLLAPSE_COUNT = 3
 
 interface CommentThreadCommentControls {
-  defaultExpand?: boolean
   hasPin?: boolean
   hasLink?: boolean
   hasUpvote?: boolean
@@ -39,7 +38,6 @@ type ThreadCommentProps = {
 export const CommentThreadComment = ({
   comment,
   pinnedComment,
-  defaultExpand,
   firstRenderCallback,
   isInCommentDetail,
   ...props
@@ -64,7 +62,6 @@ export const CommentThreadComment = ({
           isInCommentDetail={isInCommentDetail}
           pinnedComment={pinnedComment}
           hasReply
-          hasUserName
           {...props}
         />
 
@@ -80,9 +77,7 @@ export const CommentThreadComment = ({
                 <CommentFeed
                   comment={descendantComment}
                   pinnedComment={pinnedComment}
-                  avatarSize={24}
                   hasReply
-                  hasUserName
                   isInCommentDetail={isInCommentDetail}
                   {...props}
                 />
@@ -101,7 +96,6 @@ export const CommentThreadComment = ({
         comment={comment}
         pinnedComment={pinnedComment}
         hasReply
-        hasUserName
         {...props}
       />
 
@@ -111,9 +105,7 @@ export const CommentThreadComment = ({
             <CommentFeed
               comment={descendantComment}
               pinnedComment={pinnedComment}
-              avatarSize={24}
               hasReply
-              hasUserName
               isInCommentDetail={isInCommentDetail}
               {...props}
             />
@@ -126,9 +118,7 @@ export const CommentThreadComment = ({
                 <CommentFeed
                   comment={descendantComment}
                   pinnedComment={pinnedComment}
-                  avatarSize={24}
                   hasReply
-                  hasUserName
                   isInCommentDetail={isInCommentDetail}
                   {...props}
                 />

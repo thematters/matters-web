@@ -1,4 +1,3 @@
-import _pickBy from 'lodash/pickBy'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
@@ -13,7 +12,7 @@ import styles from './styles.module.css'
 
 interface FormProps {
   submitCallback?: () => void
-  closeDialog?: () => any
+  closeDialog?: () => void
 }
 
 const SetPaymentPasswordContent: React.FC<FormProps> = ({

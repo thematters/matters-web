@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { ReactComponent as IconRight } from '@/public/static/icons/24px/right.svg'
+import IconRight from '@/public/static/icons/24px/right.svg'
 import {
   Card,
   CardProps,

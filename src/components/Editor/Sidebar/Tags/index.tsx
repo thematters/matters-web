@@ -1,12 +1,13 @@
+import { FetchResult } from '@apollo/client'
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 
-import { ReactComponent as IconPlus } from '@/public/static/icons/24px/plus.svg'
-import { ReactComponent as IconTimes } from '@/public/static/icons/24px/times.svg'
+import IconPlus from '@/public/static/icons/24px/plus.svg'
+import IconTimes from '@/public/static/icons/24px/times.svg'
 import { ARTICLE_TAGS_MAX_COUNT } from '~/common/enums/article'
 import { analytics, normalizeTag } from '~/common/utils'
 import { Icon, InlineTag, toDigestTagPlaceholder } from '~/components'
-import { DigestTagFragment } from '~/gql/graphql'
+import { DigestTagFragment, SetDraftTagsMutation } from '~/gql/graphql'
 
 import Box from '../Box'
 import styles from './styles.module.css'
@@ -14,7 +15,9 @@ import TagInput from './TagInput'
 
 export interface SidebarTagsProps {
   tags: DigestTagFragment[]
-  editTags: (newTags: DigestTagFragment[]) => Promise<any>
+  editTags: (
+    tag: DigestTagFragment[]
+  ) => Promise<FetchResult<SetDraftTagsMutation> | void | unknown>
   saving?: boolean
   disabled?: boolean
 }

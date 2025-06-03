@@ -8,7 +8,7 @@ import React, {
 } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconUp } from '@/public/static/icons/24px/up.svg'
+import IconUp from '@/public/static/icons/24px/up.svg'
 import {
   capitalizeFirstLetter,
   checkIsSafariVersionLessThan17,
@@ -91,7 +91,7 @@ export const Expandable: React.FC<ExpandableProps> = ({
   const [isOverFlowing, setIsOverFlowing] = useState(false)
   const [isExpanded, setIsExpanded] = useState(true)
   const [isRichShow, setIsRichShow] = useState(_isRichShow)
-  const node: React.RefObject<HTMLParagraphElement> | null = useRef(null)
+  const node = useRef<HTMLParagraphElement>(null)
   const collapsedContent = stripHtml(content || '')
 
   const [isSafariVersionLessThan17, setIsSafariVersionLessThan17] =

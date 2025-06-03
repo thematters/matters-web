@@ -3,15 +3,13 @@ import { FormattedMessage } from 'react-intl'
 
 import { PAYMENT_CURRENCY as CURRENCY } from '~/common/enums'
 import { Tabs, ViewerContext } from '~/components'
-import { UserDonationRecipientFragment } from '~/gql/graphql'
 
 type Props = {
-  recipient: UserDonationRecipientFragment
   currency: CURRENCY
   setCurrency: (currency: CURRENCY) => void
 }
 
-const DonationTabs = ({ recipient, currency, setCurrency }: Props) => {
+const DonationTabs = ({ currency, setCurrency }: Props) => {
   const viewer = useContext(ViewerContext)
   const hasViewerLikeId = !!viewer.liker.likerId
 

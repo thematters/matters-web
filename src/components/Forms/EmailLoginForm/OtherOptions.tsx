@@ -33,7 +33,7 @@ const OtherOptions = ({
   disabled,
 }: {
   hasSendCode: boolean
-  sendLoginCode?: () => any
+  sendLoginCode?: () => void
   disabled?: boolean
 }) => {
   return (

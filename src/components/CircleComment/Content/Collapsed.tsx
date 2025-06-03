@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import { ReactComponent as IconDown } from '@/public/static/icons/24px/down.svg'
+import IconDown from '@/public/static/icons/24px/down.svg'
 import { TEST_ID } from '~/common/enums'
 import { captureClicks } from '~/common/utils'
 import { Button, Icon, TextIcon } from '~/components'

@@ -47,7 +47,7 @@ const Currency = () => {
           },
         },
       })
-    } catch (e) {
+    } catch {
       toast.error({
         message: (
           <FormattedMessage

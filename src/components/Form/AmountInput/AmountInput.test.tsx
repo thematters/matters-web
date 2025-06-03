@@ -10,8 +10,8 @@ const setup = () => {
   const hint = 'This is a hint'
   const min = 0
   const max = 100
-  const fieldId = `field-${name}`
-  const fieldMsgId = `field-msg-${name}`
+  const fieldId = `__use_id__`
+  const fieldMsgId = `__use_id__-msg`
 
   const handleOnChange = vi.fn()
   const handleOnBlur = vi.fn()

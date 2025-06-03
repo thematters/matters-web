@@ -50,7 +50,9 @@ export function useIntersectionObserver({
     entry: undefined,
   }))
 
-  const callbackRef = useRef<UseIntersectionObserverOptions['onChange']>()
+  const callbackRef = useRef<UseIntersectionObserverOptions['onChange'] | null>(
+    null
+  )
 
   callbackRef.current = onChange
 
@@ -99,11 +101,9 @@ export function useIntersectionObserver({
     return () => {
       observer.disconnect()
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     ref,
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
     JSON.stringify(threshold),
     root,
     rootMargin,

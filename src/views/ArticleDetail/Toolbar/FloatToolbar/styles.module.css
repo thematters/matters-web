@@ -13,8 +13,8 @@
   bottom: var(--sp20);
   z-index: var(--z-index-bottom-bar);
   opacity: 0;
-  transition-property: transform, opacity;
   transform: translateY(130%);
+  transition-property: transform, opacity;
 }
 
 .showContainer {
@@ -27,12 +27,12 @@
 
   padding: 0 var(--sp12);
   background: var(--color-white);
-  backdrop-filter: blur(12px);
   border-radius: 99px;
   box-shadow:
     0 2px 4px 0 rgb(0 0 0 / 14%),
     0 1px 0 0 rgb(0 0 0 / 0%),
     0 -2px 12px 0 rgb(0 0 0 / 5%);
+  backdrop-filter: blur(12px);
 
   & .divider {
     width: 1px;

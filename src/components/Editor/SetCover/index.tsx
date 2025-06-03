@@ -1,9 +1,10 @@
+import type { FetchResult } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import { ASSET_TYPE } from '~/common/enums'
 import { Dialog, Media } from '~/components'
-import { AssetFragment } from '~/gql/graphql'
+import { AssetFragment, AssetType, SetDraftCoverMutation } from '~/gql/graphql'
 
 import SetCoverDialog from './Dialog'
 import Item from './Item'
@@ -15,15 +16,17 @@ export type EditorAsset = {
 } & AssetFragment
 
 export type SetCoverProps = {
-  back?: () => any
-  submitCallback?: () => any
-  closeDialog?: () => any
+  back?: () => void
+  submitCallback?: () => void
+  closeDialog?: () => void
 
   cover?: string | null
   assets: AssetFragment[]
 
-  editCover: (asset?: AssetFragment) => any
-  refetchAssets: () => any
+  editCover: (
+    asset?: AssetFragment
+  ) => Promise<FetchResult<SetDraftCoverMutation> | void>
+  refetchAssets: () => void
   coverSaving?: boolean
 } & UploadEntity
 
@@ -44,7 +47,9 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
     _assets
       .filter(
         (asset) =>
-          [ASSET_TYPE.embed, ASSET_TYPE.cover].indexOf(asset.type as any) >= 0
+          [ASSET_TYPE.embed, ASSET_TYPE.cover].indexOf(
+            asset.type as unknown as ASSET_TYPE
+          ) >= 0
       )
       .reverse()
   )
@@ -54,7 +59,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
       file,
       id: '',
       draftId: crypto.randomUUID(),
-      type: ASSET_TYPE.cover as any,
+      type: ASSET_TYPE.cover as unknown as AssetType,
       path: URL.createObjectURL(file),
       draft: true,
     }))
@@ -130,7 +135,7 @@ const SetCover: React.FC<SetCoverProps> & { Dialog: typeof SetCoverDialog } = ({
         <section className={styles.content}>
           <Uploader addAssets={addAssets} />
 
-          {assets.map((asset, index) => (
+          {assets.map((asset) => (
             <Item
               key={asset.id || asset.draftId}
               asset={asset}

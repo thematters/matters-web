@@ -37,22 +37,16 @@ const SideFooter = () => {
       <LanguageSwitch />
 
       <section className={styles.links}>
-        <Link href={PATHS.ABOUT} legacyBehavior>
-          <a>
-            <FormattedMessage defaultMessage="About" id="g5pX+a" />
-          </a>
+        <Link href={PATHS.ABOUT}>
+          <FormattedMessage defaultMessage="About" id="g5pX+a" />
         </Link>
 
-        <Link href={PATHS.GUIDE} legacyBehavior>
-          <a>
-            <FormattedMessage defaultMessage="Explore" id="7JlauX" />
-          </a>
+        <Link href={PATHS.GUIDE}>
+          <FormattedMessage defaultMessage="Explore" id="7JlauX" />
         </Link>
 
-        <Link href={PATHS.TOS} legacyBehavior>
-          <a>
-            <FormattedMessage defaultMessage="Terms" id="xkr+zo" />
-          </a>
+        <Link href={PATHS.TOS}>
+          <FormattedMessage defaultMessage="Terms" id="xkr+zo" />
         </Link>
 
         <Dropdown content={<CommunityMenu />} zIndex={Z_INDEX.OVER_DIALOG}>
