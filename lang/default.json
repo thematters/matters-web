@@ -187,6 +187,9 @@
   "0tRUjd": {
     "defaultMessage": "This comment has been hidden due to violation of community terms of services"
   },
+  "0xVT+0": {
+    "defaultMessage": "Curated"
+  },
   "0zZd0T": {
     "defaultMessage": "Article successfully published. Share it on different platforms to receive more likes and donations!",
     "description": "src/views/Me/DraftDetail/PublishState/PublishedState.tsx"
@@ -242,6 +245,12 @@
   "1zVIWy": {
     "defaultMessage": "mentioned you in a comment at {commentArticle}",
     "description": "src/components/Notice/CommentNotice/CommentMentionedYouNotice.tsx"
+  },
+  "2/2yg+": {
+    "defaultMessage": "Add"
+  },
+  "2/C36c": {
+    "defaultMessage": "You do not have permission to perform this action"
   },
   "202PEj": {
     "defaultMessage": "Confirm Matters ID",
@@ -2328,6 +2337,9 @@
   "d5+b8r": {
     "defaultMessage": "Restricted content"
   },
+  "d5Y+dZ": {
+    "defaultMessage": "Curate Article"
+  },
   "d5bM8A": {
     "defaultMessage": "Select Date..."
   },
@@ -2390,6 +2402,9 @@
   },
   "eKVBm/": {
     "defaultMessage": "Optimism is a standalone blockchain. If you have USDT on other chains, you need to transfer them to Optimism. See details in the {link}."
+  },
+  "eKeBF9": {
+    "defaultMessage": "Article does not exist"
   },
   "eTpiYa": {
     "defaultMessage": "No data yet."
@@ -3049,6 +3064,9 @@
     "defaultMessage": "Email",
     "description": "src/components/Forms/PaymentForm/ResetPassword/Request.tsx"
   },
+  "reRn/s": {
+    "defaultMessage": "Paste the link of the article you want to curate"
+  },
   "rfz/fN": {
     "defaultMessage": "Recommended size: 1600px x 900px"
   },
@@ -3176,6 +3194,9 @@
   },
   "ucxFlV": {
     "defaultMessage": "The withdrawal process has started."
+  },
+  "uhiBn9": {
+    "defaultMessage": "Citations and links to related articles can extend curation or thematic reading features"
   },
   "ulh3kf": {
     "defaultMessage": "Collections"
@@ -3500,6 +3521,9 @@
   },
   "zlug1R": {
     "defaultMessage": "Translated into {targetLang}, show"
+  },
+  "znN84l": {
+    "defaultMessage": "Help readers discover articles more easily"
   },
   "zvNfwL": {
     "defaultMessage": "Operation too frequent, please try again later.",

@@ -11,13 +11,15 @@ import styles from './styles.module.css'
 
 export type ArticleDigestTitleTextSize = 12 | 13 | 14 | 15 | 16 | 18 | 24
 export type ArticleDigestTitleTextWeight = 'normal' | 'medium' | 'semibold'
-export type ArticleDigestTitleIs = 'h2' | 'h3'
+export type ArticleDigestTitleIs = 'h2' | 'h3' | 'h4' | 'h5' | 'span'
+export type ArticleDigestTitleColor = 'greyDark' | 'greyDarker' | 'black'
 
 type ArticleDigestTitleProps = {
   article: ArticleDigestTitleArticleFragment
   collectionId?: string
   textSize?: ArticleDigestTitleTextSize
   textWeight?: ArticleDigestTitleTextWeight
+  textColor?: ArticleDigestTitleColor
   lineClamp?: boolean | 1 | 2 | 3
   is?: ArticleDigestTitleIs
   disabledArchived?: boolean
@@ -49,7 +51,7 @@ export const ArticleDigestTitle = ({
   textWeight = 'medium',
   lineClamp = true,
   is = 'h2',
-
+  textColor = 'greyDarker',
   disabled,
   disabledArchived,
   onClick,
@@ -79,6 +81,7 @@ export const ArticleDigestTitle = ({
     [styles.lineClamp]: !!lineClamp,
     [styles[`lineClampLine${lineClamp}`]]: lineClamp === 1 || lineClamp === 3,
     [styles.archived]: isArchived && disabledArchived,
+    [styles[`textColor${capitalizeFirstLetter(textColor)}`]]: !!textColor,
   })
   const isClickable = !disabled && !isBanned
 
@@ -90,8 +93,10 @@ export const ArticleDigestTitle = ({
         <h3 className={titleClasses}>{title}</h3>
       ) : is === 'h4' ? (
         <h4 className={titleClasses}>{title}</h4>
-      ) : (
+      ) : is === 'h5' ? (
         <h5 className={titleClasses}>{title}</h5>
+      ) : (
+        <span className={titleClasses}>{title}</span>
       )}
     </>
   )

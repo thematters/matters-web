@@ -46,6 +46,7 @@ export const GET_EDIT_ARTICLE = gql`
         displayName
         avatar
         userName
+        isBlocking
       }
       access {
         type

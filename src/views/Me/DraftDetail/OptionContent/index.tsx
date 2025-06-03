@@ -13,6 +13,7 @@ import { EditMetaDraftFragment } from '~/gql/graphql'
 
 import {
   useEditDraftCampaign,
+  useEditDraftCollection,
   useEditDraftCover,
   useEditDraftTags,
 } from '../hooks'
@@ -80,6 +81,19 @@ const EditDraftTags = ({ draft, disabled }: OptionItemProps) => {
   )
 }
 
+const EditDraftCollection = ({ draft, disabled }: OptionItemProps) => {
+  const { edit, saving } = useEditDraftCollection()
+  const articles = draft?.collection?.edges?.map(({ node }) => node) || []
+
+  return (
+    <Sidebar.Collection
+      collection={articles}
+      editCollection={edit}
+      collectionSaving={saving}
+      disabled={disabled}
+    />
+  )
+}
 export const OptionContent = (props: OptionContentProps) => {
   const [type, setType] = useState<'contentAndLayout' | 'settings'>(
     'contentAndLayout'
@@ -123,6 +137,7 @@ export const OptionContent = (props: OptionContentProps) => {
             <EditDraftCampaign {...props} disabled={disabled} />
             <EditDraftCover {...props} disabled={disabled} />
             <EditDraftTags {...props} disabled={disabled} />
+            <EditDraftCollection {...props} disabled={disabled} />
           </>
         )}
       </section>
